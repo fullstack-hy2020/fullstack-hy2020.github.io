@@ -1,0 +1,11 @@
+@import '../common.scss';
+
+.sub-header {
+  color: $black;
+  font-family: $font-body;
+  padding-bottom: 1.357rem;
+
+  @include from($desktop) {
+    padding-bottom: 2.333rem;
+  }
+}

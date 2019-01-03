@@ -1,0 +1,51 @@
+@import '../common.scss';
+
+.accordion__container {
+  margin-bottom: 1rem;
+}
+
+.accordion__title {
+  font-weight: bold;
+}
+
+.accordion {
+  background-color: $white;
+  border: 3px solid $black;
+  border-radius: 5px;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: max-width 0.4s;
+}
+
+.active,
+.accordion:hover {
+  background-color: #ccc;
+}
+
+.accordion:after {
+  content: '\02795';
+  font-size: 1rem;
+  color: $black;
+  float: right;
+  margin-left: 5px;
+}
+
+.active {
+  border-color: $white;
+}
+
+.active:after {
+  content: '\2796';
+}
+
+.panel {
+  background-color: $white;
+  transition: height 0.3s;
+  transition-timing-function: ease-in-out;
+  overflow: hidden;
+}

@@ -1,0 +1,14 @@
+@import '../common.scss';
+
+.banner {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: $vertical-spacing * 2 0;
+  background-color: $main;
+
+  @include from($desktop) {
+    padding: 3.444rem;
+    padding-bottom: 4.444rem;
+  }
+}

@@ -1,0 +1,28 @@
+@import '../common.scss';
+
+.body-text:not(:last-of-type) {
+  margin-bottom: 2.5 * $vertical-spacing;
+}
+
+.body-text__title {
+  color: $black;
+  font-size: 1.44rem;
+  line-height: 1.25em;
+  font-weight: bold;
+  margin: 0;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.body-text__content:not(:last-of-type) {
+  padding-bottom: 2em;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.body-text--no-padding {
+  padding: 0 !important;
+}

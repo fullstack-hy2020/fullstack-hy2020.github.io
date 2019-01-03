@@ -1,0 +1,199 @@
+@import './common.scss';
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: $font-body;
+  font-weight: $font-weight-medium;
+  color: $black;
+  font-size: 14px;
+  line-height: 1.555rem;
+
+  @include from($desktop) {
+    font-size: 18px;
+  }
+}
+
+body {
+  padding-top: 120px;
+
+  @include from($desktop) {
+    padding-top: 90px;
+  }
+}
+
+p {
+  margin: 0;
+  text-align: left;
+  line-height: 1.5em;
+  color: $black;
+}
+
+a {
+  text-decoration: none;
+  color: $black;
+}
+
+.container {
+  position: relative;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 90%;
+  max-width: $large;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.centered {
+  text-align: center;
+}
+
+.spacing {
+  margin-top: $vertical-spacing * 2;
+
+  @include from($desktop) {
+    margin-top: $vertical-spacing * 5;
+  }
+}
+
+.spacing--small {
+  margin-top: $vertical-spacing;
+
+  @include from($desktop) {
+    margin-top: 3.444rem;
+  }
+}
+
+.spacing--large {
+  margin-top: $vertical-spacing * 4;
+
+  @include from($desktop) {
+    margin-top: $vertical-spacing * 10;
+  }
+}
+
+.spacing--extra-large {
+  margin-top: $vertical-spacing * 4;
+
+  @include from($desktop) {
+    margin-top: $vertical-spacing * 20;
+  }
+}
+
+.spacing--after {
+  margin-bottom: $vertical-spacing * 2;
+
+  @include from($desktop) {
+    margin-bottom: $vertical-spacing * 5;
+  }
+}
+
+.spacing--after-small {
+  margin-bottom: $vertical-spacing;
+
+  @include from($desktop) {
+    margin-bottom: $vertical-spacing * 2.5;
+  }
+}
+
+.spacing--after-large {
+  margin-bottom: $vertical-spacing * 4;
+
+  @include from($desktop) {
+    margin-bottom: $vertical-spacing * 10;
+  }
+}
+
+.spacing--mobile {
+  @include to($desktop) {
+    margin-top: $vertical-spacing * 2;
+  }
+}
+
+@for $i from 1 through 10 {
+  .col-#{$i} {
+    width: 100%;
+    @include from($desktop) {
+      width: #{$i * 10%};
+    }
+  }
+}
+
+@include from($desktop) {
+  @for $i from 1 through 5 {
+    .push-right-#{$i} {
+      margin-left: $i * 10%;
+    }
+  }
+
+  @for $i from 1 through 5 {
+    .push-left-#{$i} {
+      margin-right: $i * 10%;
+    }
+  }
+
+  .push-left {
+    margin-right: auto;
+  }
+
+  .push-right {
+    margin-left: auto;
+  }
+}
+
+@include to($desktop) {
+  .col-5--mobile {
+    width: 50%;
+  }
+  .col-10--mobile {
+    width: 100%;
+  }
+  @for $i from 0 through 5 {
+    .order-#{$i}--mobile {
+      order: $i;
+    }
+  }
+  .hidden--mobile {
+    display: none;
+  }
+}
+
+.centered-vertically {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.nav-item-hover {
+  font-size: 1.111rem;
+  font-weight: $font-weight-semi-bold;
+  text-decoration: none;
+  color: $black;
+  padding: 0.2em;
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: $white;
+    background-color: $black;
+  }
+
+  &:focus,
+  &:active {
+    outline: 2px solid $blue;
+  }
+}
+
+.flex-fix-aligning {
+  &::before,
+  &::after {
+    content: '';
+    width: 30%;
+    order: 2;
+  }
+}

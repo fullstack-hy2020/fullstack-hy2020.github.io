@@ -1,0 +1,22 @@
+{
+  "mainTitle": "Syväsukellus moderniin websovelluskehitykseen",
+  "intro": "Ota haltuusi React, Redux, Node.js ja MongoDB! Kurssilla tutustutaan JavaScriptilla tapahtuvaan moderniin websovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST-rajapinnoissa.",
+  "current": [
+    "Jos haluat kurssista suorituksen avoimen yliopiston kautta, tallenna opiskelijanumerosi palautussovelluksen näkymässä my submissions viimeistään tehtyäsi kurssin kokeen.",
+    "Kurssiin liittyvää keskustelua Telegramissa, tule mukaan!"
+  ],
+  "telegram": "Telegram on whatsappin/messengerin tyylinen keskustelufoorumisovellus, jota on mahdollista käyttää selaimella, mobiililaitteilla ja Windows/Linux/OSX-clienteillä.",
+  "notice": "Huom: kaikki epäasialliset, halventavat ja jotain ihmisryhmää syrjivät kommentit kanavalla ovat kiellettyjä ja tälläisten kommenttien esittäjät poistetaan kanavalta.",
+  "licence": [
+    "Kurssimateriaalin on tehnyt Matti Luukkainen. Lukuisat henkilöt ovat parantaneet materiaalin laatua kirjoitus- ja asiavirhekorjauksin. Voit osallistua  kurssimateriaalin parantamiseen myös itse.",
+    "Tämä materiaali on lisensoitu Creative Commons BY-NC-SA 3.0 -lisenssillä, joten voit käyttää ja levittää sitä vapaasti, kunhan alkuperäisten tekijöiden nimiä ei poisteta. Jos teet muutoksia materiaaliin ja haluat levittää muunneltua versiota, se täytyy lisensoida samalla lisenssillä. Materiaalien käyttö kaupalliseen tarkoitukseen on ilman erillistä lupaa kielletty."
+  ],
+  "university": "Helsingin yliopisto on Suomen vanhin ja suurin tiedekorkeakoulu, yhteensä 40 000 henkilön kansainvälinen tiedeyhteisö. Tieteen voimalla yliopisto on rakentanut yhteiskuntaa, sivistystä ja hyvinvointia jo vuodesta 1640.",
+  "houston": "Suomalainen Houston Inc. on vuonna 2004 perustettu ketterä softatalo. Suunnittelemme ja toteutamme asiakkaillemme räätälöityjä digitaalisia palveluita liiketoiminnan tarpeisiin.",
+  "contacts": [
+    "Full stack open 2018",
+    "mluukkai@cs.helsinki.fi",
+    "<div class='github-logo'>mluukkai</div>"
+  ],
+  "licenced": "Materiaali on lisensoitu Creative Commons BY-NC-SA 3.0 -lisenssillä."
+}

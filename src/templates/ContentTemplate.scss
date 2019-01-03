@@ -1,0 +1,69 @@
+@import '../components/common.scss';
+
+.course {
+  position: relative;
+
+  p,
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin-left: 3rem;
+    padding-bottom: 2rem;
+  }
+
+  pre {
+    margin: 2rem 0;
+    background-color: $black;
+    color: $white;
+  }
+
+  img {
+    border-width: 11px;
+    border-style: solid;
+    border-color: transparent;
+  }
+
+  a {
+    border: 0;
+    border-bottom-width: 2px;
+    border-color: transparent;
+    border-style: solid;
+    padding: 2px;
+  }
+
+  .container,
+  .banner {
+    position: static;
+  }
+
+  .letter {
+    width: 4rem;
+    height: 4rem;
+    border-width: 5px;
+    border-style: solid;
+    border-radius: 2.5rem;
+    text-align: center;
+    margin: 1rem;
+    line-height: 0.8em;
+
+    @include from($tablet) {
+      transform: translate(-3rem, 5rem);
+    }
+  }
+
+  .letter,
+  h1 {
+    font-size: 3.444rem;
+    font-weight: bold;
+  }
+
+  li {
+    list-style-type: none;
+
+    &::before {
+      content: '-';
+      margin-right: 1rem;
+    }
+  }
+}
