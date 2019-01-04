@@ -6,6 +6,7 @@ import Accordion from '../components/Accordion/Accordion';
 import Arrow from '../components/Arrow/Arrow';
 import { BodyText } from '../components/BodyText/BodyText';
 import Element from '../components/Element/Element';
+import Footer from '../components/Footer/Footer';
 import Layout from '../components/layout';
 import { PartBanner } from '../components/PartBanner/PartBanner';
 import SEO from '../components/seo';
@@ -72,6 +73,8 @@ const About = () => (
         </div>
       )}
     />
+
+    <Footer />
   </Layout>
 );
 

@@ -6,6 +6,7 @@ import Arrow from '../components/Arrow/Arrow';
 import { Banner } from '../components/Banner/Banner';
 import { BodyText } from '../components/BodyText/BodyText';
 import Element from '../components/Element/Element';
+import Footer from '../components/Footer/Footer';
 import Layout from '../components/layout';
 import PrevNext from '../components/PrevNext/PrevNext';
 import SEO from '../components/seo';
@@ -75,6 +76,8 @@ const Osa0 = () => (
     />
 
     <PrevNext next={1} />
+
+    <Footer />
   </Layout>
 );
 

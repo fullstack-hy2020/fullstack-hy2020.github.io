@@ -2,6 +2,7 @@ import { Link } from 'gatsby';
 import React from 'react';
 
 import Element from '../components/Element/Element';
+import Footer from '../components/Footer/Footer';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 
@@ -14,6 +15,8 @@ const FAQ = () => (
 
       <Link to="/">Go back to the homepage</Link>
     </Element>
+
+    <Footer />
   </Layout>
 );
 
