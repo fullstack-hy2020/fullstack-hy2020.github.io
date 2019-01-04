@@ -21,7 +21,7 @@ const Osa1 = () => (
     <StaticQuery
       query={graphql`
         query {
-          allOsa5Json {
+          allOsa1Json {
             edges {
               node {
                 arrowTitle
@@ -32,7 +32,7 @@ const Osa1 = () => (
         }
       `}
       render={data => {
-        const { arrowTitle, intro } = data.allOsa5Json.edges[0].node;
+        const { arrowTitle, intro } = data.allOsa1Json.edges[0].node;
 
         return (
           <Banner
