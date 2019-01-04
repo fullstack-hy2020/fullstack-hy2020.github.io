@@ -34,7 +34,6 @@ module.exports = {
         icon: 'src/images/favicon.png',
       },
     },
-    'gatsby-plugin-offline',
     'gatsby-plugin-sass',
     `gatsby-transformer-json`,
     {
