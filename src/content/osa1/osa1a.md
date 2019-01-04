@@ -1,7 +1,7 @@
 ---
 title: osa 1
 subTitle: React
-path: /osa1/react
+path: /osa1/reactin_alkeet
 mainImage: ../../images/osa1.png
 part: 1
 letter: a
@@ -12,9 +12,9 @@ partColor: green
 
 Alamme nyt tutustua kurssin ehkä tärkeimpään teemaan, [React](https://reactjs.org/)-kirjastoon. Tehdään heti yksinkertainen React-sovellus ja tutustutaan samalla Reactin peruskäsitteistöön.
 
-Ehdottomasti helpoin tapa päästä alkuun on [create-react-app](https://github.com/facebookincubator/create-react-app)-nimisen työkalun käyttö. _create-react-app_ on mahdollista asentaa, mutta asennukseen ei ole tarvetta jos Noden mukana asentunut _npm_-työkalu on versioltaan vähintään _5.3_. Tällöin npm:n mukana asentuu komento _npx_, joka mahdollistaa create-react-app:in käytön asentamatta sitä erikseen. Npm:n version saa selville komennolla _npm -v_.
+Ehdottomasti helpoin tapa päästä alkuun on [create-react-app](https://github.com/facebookincubator/create-react-app)-nimisen työkalun käyttö. _create-react-app_ on mahdollista asentaa omalle koneelle, mutta asennukseen ei ole tarvetta jos Noden mukana asentunut _npm_-työkalu on versioltaan vähintään _5.3_. Tällöin npm:n mukana asentuu komento _npx_, joka mahdollistaa create-react-app:in käytön asentamatta sitä erikseen. Npm:n version saa selville komennolla _npm -v_.
 
-Luodaan sovellus nimeltään _osa1_ ja käynnistetään se:
+Luodaan sovellus nimeltään _osa1_ ja mennään sovelluksen sisältämään hakemistoon:
 
 <pre>
 $ npx create-react-app osa1
@@ -22,11 +22,31 @@ $ cd osa1
 $ npm start
 </pre>
 
+Kaikki tässä (ja jatkossa) annettavat merkillä $ alkavat komennot on kirjoitettu terminaaliin eli komentoriville. Merkkiä $ tule kirjoittaa, sillä se edustaa komentokehoitetta.
+
+React on koko ajan aktiivisen kehityksen alla. Tämän vuoden ensimmäisen neljänneksen aikana Reactiin on tulossa erittäin merkittävä lisäys [hookit](https://reactjs.org/docs/hooks-intro.html) jotka tulevat vaikuttamaan merkittävästi siihen miten Reactia tullaan tulevaisuudessa käyttämään. Koska haluamme elää kehityksen eturintamassa käytämme kurssilla hookeja alusta asti. 
+
+Hookit eivät ole vielä Reactin uusimmassa virallisessa julkaisussa 0.16.7, mutta ne löytyvät hieman [erikoisesti numeroidusta](https://reactjs.org/blog/2018/12/19/react-v-16-7.html) julkaisusta 0.16.7-alpha.2
+
+Saamme hookit käyttöön antamalla seuraavan komenon sovelluksen sisältävässä hakemistossa:
+
+<pre>
+npm install -s react@16.7.0-alpha.2 react-dom@16.7.0-alpha.2
+</pre>
+
+Joudumme siis ainakin alkuvuoden ajan antamaan aina edellisen komennon kun aloitamme uuden React-projektin.
+
+Sovellus käynnistetään seuraavasti
+
+<pre>
+$ npm start
+</pre>
+
 Sovellus käynnistyy oletusarvoisesti localhostin porttiin 3000, eli osoitteeseen <http://localhost:3000>
 
 Chromen pitäisi aueta automaattisesti. Avaa konsoli **välittömästi**. Avaa myös tekstieditori siten, että näet koodin ja web-sivun samaan aikaan ruudulla:
 
-![](../images/1/26.png)
+![](../images/1/1a.png)
 
 Sovelluksen koodi on hakemistossa _src_. Yksinkertaistetaan valmiina olevaa koodia siten, että tiedoston _index.js_ sisällöksi tulee:
 
@@ -43,7 +63,7 @@ const App = () => (
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-Voit poistaa tiedostot _App.js_, _App.css_, _App.test.js_, _logo.svg_ ja _registerServiceWorker.js_
+Tiedostot _App.js_, _App.css_, _App.test.js_, _logo.svg_ ja _registerServiceWorker.js_ voi poistaa sillä niitä emme sovelluksessamme nyt tarvitse.
 
 ### Komponentti
 
@@ -170,7 +190,7 @@ Käytännössä JSX on melkein kuin HTML:ää sillä erotuksella, että mukaan v
 JSX on "XML:n kaltainen", eli jokainen tagi tulee sulkea. Esimerkiksi rivinvaihto on tyhjä elementti, joka kirjoitetaan HTML:ssä tyypillisesti
 
 ```html
-<br />
+<br>
 ```
 
 mutta JSX:ää kirjoittaessa tagi on pakko sulkea:
@@ -181,7 +201,7 @@ mutta JSX:ää kirjoittaessa tagi on pakko sulkea:
 
 ## Monta komponenttia
 
-Muutetaan sovellusta seuraavasti (yläreunan importit jätetään _esimerkeistä_ nyt ja jatkossa pois):
+Muutetaan sovellusta seuraavasti (yläreunan importit jätetään _esimerkeistä_ nyt ja jatkossa pois, niiden on kuitenkin oltava koodissa jotta ohjelma toimisi):
 
 ```react
 const Hello = () => {
@@ -269,6 +289,7 @@ const Hello = (props) => {
 const App = () => {
   const nimi = 'Pekka'
   const ika = 10
+
   return (
     <div>
       <h1>Greetings</h1>
@@ -281,13 +302,13 @@ const App = () => {
 
 Komponentti _App_ lähettää propseina muuttujan arvoja, summalausekkeen evaluoinnin tuloksen ja normaalin merkkijonon.
 
-### Muutama huomio
+### Huomoita ohjelmoijan workflowsta
 
 React on konfiguroitu antamaan varsin hyviä virheilmoituksia. Kannattaa kuitenkin edetä ainakin alussa **todella pienin askelin** ja varmistaa, että jokainen muutos toimii halutulla tavalla.
 
 **Konsolin tulee olla koko ajan auki**. Jos selain ilmoittaa virheestä, ei kannata kirjoittaa sokeasti lisää koodia ja toivoa ihmettä tapahtuvaksi, vaan tulee yrittää ymmärtää virheen syy ja esim. palata edelliseen toimivaan tilaan:
 
-![](../images/1/27.png)
+![](../images/1/2a.png)
 
 Kannattaa myös muistaa, että React-koodissakin on mahdollista ja kannattavaa lisätä koodin sekaan sopivia konsoliin tulostavia <code>console.log()</code>-komentoja. Tulemme hieman [myöhemmin](#react-sovellusten-debuggaus) tutustumaan muutamiin muihinkin tapoihin debugata Reactia.
 
@@ -331,9 +352,8 @@ const App = () => {
 
 seurauksena on virheilmoitus:
 
-![](../assets/1/27a.png)
 
-Reactin versiosta 0.16 asti juurielementin käyttö ei ole ollut enää ainoa toimiva vaihtoehto, myös _taulukollinen_ komponentteja on validi tapa:
+Juurielementin käyttö ei ole ollut enää ainoa toimiva vaihtoehto, myös _taulukollinen_ komponentteja on validi tapa:
 
 ```react
 const App = () => {
@@ -348,6 +368,26 @@ const App = () => {
 ```
 
 Määritellessä sovelluksen juurikomponenttia, tämä ei kuitenkaan ole järkevää ja näyttää koodissakin pahalta.
+
+Juurielementin pakollinen käytöstä on se seuraus, että sovelluksen DOM-puuhun tulee "ylimääräisiä" div-elementtejä. Tämä on mahdollista välttää käyttmällä [fragmentteja](https://reactjs.org/docs/fragments.html#short-syntax), eli ympäröimällä komponentin palauttamat elementit tyhjällä elementillä:
+
+```react
+const App = () => {
+  const nimi = 'Pekka'
+  const ika = 10
+
+  return (
+    <>
+      <h1>Greetings</h1>
+      <Hello name="Arto" age={26 + 10} />
+      <Hello name={nimi} age={ika} />
+      <Footer />
+    </>
+  )
+}
+```
+
+Nyt käännös menee läpi ja Reactin generoimaan DOM:iin ei tule ylimääräistä div-elementtiä.
 
 </div>
 

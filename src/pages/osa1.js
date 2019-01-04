@@ -62,8 +62,9 @@ const Osa1 = () => (
               <Arrow
                 stack
                 content={[
-                  { letter: 'a', text: 'React', path: '/osa1/react' },
+                  { letter: 'a', text: 'Reactin alkeet', path: '/osa1/reactin_alkeet' },
                   { letter: 'b', text: 'Javascript', path: '/osa1/javascript' },
+                  { letter: 'c', text: 'React-komponentin tila', path: '/osa1/komponentin_tila' },
                 ]}
               />
             </Element>
