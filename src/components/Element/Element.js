@@ -18,6 +18,7 @@ const Element = ({
   props,
 }) => {
   const classes = [];
+
   flex && classes.push('element--flex');
   autoBottomMargin && classes.push('element--auto-bottom-margin');
   dirColumn && classes.push('element--column');

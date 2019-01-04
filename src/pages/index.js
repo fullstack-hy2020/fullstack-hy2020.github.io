@@ -83,9 +83,10 @@ const IndexPage = () => (
                 />
 
                 <Arrow
-                  className="col-3"
+                  className="col-3 arrow__container--with-link"
                   bold
                   thickBorder
+                  link="/about"
                   content={[
                     { backgroundColor: colors['main'], text: 'Aloita kurssi' },
                   ]}
@@ -278,10 +279,14 @@ const IndexPage = () => (
                 <Element
                   flex
                   spaceAround
-                  className="spacing spacing--after col-10"
+                  className="spacing--small spacing--after col-10"
                 >
                   <div className="col-3">
-                    <BodyText noPadding text={contacts} />
+                    <BodyText
+                      noPadding
+                      style={{ paddingTop: '2.111rem' }}
+                      text={contacts}
+                    />
                   </div>
                   <div className="col-3">
                     <Image contain src={licenceIcon} alt="" />

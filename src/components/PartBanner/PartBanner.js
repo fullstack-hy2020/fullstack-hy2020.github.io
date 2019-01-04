@@ -88,7 +88,7 @@ export const PartBanner = () => {
         />
         {/*
         <ContentLiftup
-          image={{ src: part7, alt: '' }}
+          image={{ src: part8, alt: '' }}
           hoverImageSrc={part8_hover}
           name="Osa 8"
           summary="GraphQL"

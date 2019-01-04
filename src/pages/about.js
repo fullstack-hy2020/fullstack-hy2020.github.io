@@ -1,7 +1,6 @@
 import { StaticQuery, graphql } from 'gatsby';
 import React from 'react';
 
-import { Image } from './../components/Image/Image';
 import Accordion from '../components/Accordion/Accordion';
 import Arrow from '../components/Arrow/Arrow';
 import { BodyText } from '../components/BodyText/BodyText';
@@ -34,44 +33,57 @@ const About = () => (
           }
         }
       `}
-      render={data => (
-        <div>
-          <Element className="container">
-            <Arrow
-              className="spacing"
-              content={[
-                {
-                  backgroundColor: 'black',
-                  text: data.allAboutJson.edges[0].node.name,
-                },
-              ]}
-            />
+      render={data => {
+        const { name, intro, info } = data.allAboutJson.edges[0].node;
 
-            <div className="col-6 spacing--after">
-              <BodyText text={data.allAboutJson.edges[0].node.intro} />
-
-              <BodyText
-                heading={{ title: 'Oletetut esitiedot', level: 'h2' }}
-                text={[
-                  'Osallistujilta edellytetään vahvaa ohjelmointirutiinia, web-ohjelmoinnin ja tietokantojen perustuntemusta, git-versionhallintajärjestelmän peruskäytön hallintaa, kykyä pitkäjänteiseen työskentelyyn sekä valmiutta omatoimiseen tiedonhakuun ja ongelmanratkaisuun.',
-                  'Osallistuminen ei kuitenkaan edellytä kurssilla käsiteltävien tekniikoiden tai Javascript-kielen hallintaa.',
+        return (
+          <div>
+            <Element className="container">
+              <Arrow
+                className="spacing"
+                content={[
+                  {
+                    backgroundColor: 'black',
+                    text: name,
+                  },
                 ]}
               />
-            </div>
 
-            <Image
-              className="col-4 image--small image--contain"
-              src={LandingImage}
-            />
+              <Element flex spaceBetween>
+                <div className="col-6 spacing--after">
+                  <BodyText text={intro} />
 
-            {data.allAboutJson.edges[0].node.info.map(item => (
-              <Accordion key={item} title={item.title} content={item.content} />
-            ))}
-          </Element>
+                  <BodyText
+                    heading={{ title: 'Oletetut esitiedot', level: 'h2' }}
+                    text={[
+                      'Osallistujilta edellytetään vahvaa ohjelmointirutiinia, web-ohjelmoinnin ja tietokantojen perustuntemusta, git-versionhallintajärjestelmän peruskäytön hallintaa, kykyä pitkäjänteiseen työskentelyyn sekä valmiutta omatoimiseen tiedonhakuun ja ongelmanratkaisuun.',
+                      'Osallistuminen ei kuitenkaan edellytä kurssilla käsiteltävien tekniikoiden tai Javascript-kielen hallintaa.',
+                    ]}
+                  />
+                </div>
 
-          <PartBanner />
-        </div>
-      )}
+                <Element className="col-3">
+                  <img
+                    style={{ marginTop: 'auto' }}
+                    alt="Stacked cubes with React logo and JavaScript text"
+                    src={LandingImage}
+                  />
+                </Element>
+              </Element>
+
+              {info.map(item => (
+                <Accordion
+                  key={item}
+                  title={item.title}
+                  content={item.content}
+                />
+              ))}
+            </Element>
+
+            <PartBanner />
+          </div>
+        );
+      }}
     />
 
     <Footer />

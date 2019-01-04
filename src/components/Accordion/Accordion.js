@@ -35,7 +35,11 @@ class Accordion extends Component {
             transition: 'max-height 0.2s ease-out',
           }}
         >
-          <BodyText text={content} />
+          <BodyText
+            className="col-8 push-right-1"
+            style={{ padding: '3.333rem' }}
+            text={content}
+          />
         </div>
       </div>
     );

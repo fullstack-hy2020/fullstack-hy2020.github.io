@@ -197,3 +197,10 @@ a {
     order: 2;
   }
 }
+
+#footer {
+  .nav-item-hover {
+    font-size: 0.777rem;
+    font-weight: $font-weight-medium;
+  }
+}

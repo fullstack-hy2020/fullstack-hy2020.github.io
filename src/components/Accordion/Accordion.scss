@@ -5,7 +5,10 @@
 }
 
 .accordion__title {
-  font-weight: bold;
+  padding-left: 2.149rem !important;
+  padding-right: 2.149rem !important;
+  font-size: 1.111rem !important;
+  font-weight: $font-weight-semi-bold;
 }
 
 .accordion {

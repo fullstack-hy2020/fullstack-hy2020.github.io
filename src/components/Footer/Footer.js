@@ -7,6 +7,7 @@ import { Image } from './../Image/Image';
 
 const Footer = () => (
   <div
+    id="footer"
     className="container spacing--after"
     style={{ justifyContent: 'space-between' }}
   >
@@ -30,28 +31,16 @@ const Footer = () => (
         alignItems: 'center',
       }}
     >
-      <div>
-        <Link
-          to="/about"
-          className="nav-item-hover"
-          style={{
-            textDecoration: 'none',
-          }}
-        >
-          KURSSISTA
-        </Link>
-      </div>
-      <div>
-        <Link
-          to="/faq"
-          className="nav-item-hover"
-          style={{
-            textDecoration: 'none',
-          }}
-        >
-          FAQs
-        </Link>
-      </div>
+      <Link
+        to="/about"
+        className="nav-item-hover"
+        style={{ paddingLeft: '4.5rem' }}
+      >
+        KURSSISTA
+      </Link>
+      <Link to="/faq" className="nav-item-hover">
+        FAQs
+      </Link>
     </div>
   </div>
 );

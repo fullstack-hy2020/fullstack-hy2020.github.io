@@ -10,7 +10,7 @@ const Companies = () => (
   <Layout>
     <SEO title="Companies" />
 
-    <Element className="container spacing--after">
+    <Element className="container spacing spacing--after">
       <h1>Hi from the Companies page</h1>
 
       <Link to="/">Go back to the homepage</Link>
