@@ -12,7 +12,11 @@ const ReturnInfo = () => (
       style={{ padding: '1rem 0' }}
       className="col-2 centered spacing--small"
     >
-      <TripleBorder largeMargin childrenClassName="triple-border__return-tasks">
+      <TripleBorder
+        largeMargin
+        className="nav-item-hover"
+        childrenClassName="triple-border__return-tasks"
+      >
         Palauta tehtävät palautussovellukseen
       </TripleBorder>
     </a>
