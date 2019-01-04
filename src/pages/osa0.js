@@ -64,9 +64,14 @@ const Osa0 = () => (
                 content={[
                   {
                     letter: 'a',
+                    text: 'Yleistä',
+                    path: '/osa0/yleistä',
+                  },
+                  {
+                    letter: 'b',
                     text: 'Web-sovelluksen toimintaperiaatteita',
                     path: '/osa0/perusteet',
-                  },
+                  }, 
                 ]}
               />
             </Element>
