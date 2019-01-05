@@ -1,6 +1,6 @@
 ---
 title: osa 1
-subTitle: Javascript
+subTitle: Javascriptiä
 path: /osa1/javascript
 mainImage: ../../images/osa1.png
 part: 1

@@ -64,7 +64,8 @@ const Osa1 = () => (
                 content={[
                   { letter: 'a', text: 'Reactin alkeet', path: '/osa1/reactin_alkeet' },
                   { letter: 'b', text: 'Javascript', path: '/osa1/javascript' },
-                  { letter: 'c', text: 'React-komponentin tila', path: '/osa1/komponentin_tila' },
+                  { letter: 'c', text: 'Komonentin tila ja tapahtumankäsittely', path: '/osa1/komponentin_tila' },
+                  { letter: 'd', text: 'Monimutkaisempi tila, Reactin debuggaus', path: '/osa1/monimutkainen_tila' },
                 ]}
               />
             </Element>

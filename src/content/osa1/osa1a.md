@@ -1,6 +1,6 @@
 ---
 title: osa 1
-subTitle: React
+subTitle: Reactin alkeet
 path: /osa1/reactin_alkeet
 mainImage: ../../images/osa1.png
 part: 1
@@ -142,6 +142,7 @@ const App = () => {
   const now = new Date()
   const a = 10
   const b = 20
+  
   return (
     <div>
       <p>Hello world, it is {now.toString()}</p>
