@@ -377,9 +377,9 @@ Kun bugi selviää, voi komennon _debugger_ poistaa ja uudelleenladata sivun.
 
 Debuggerissa on mahdollista suorittaa koodia tarvittaessa rivi riviltä _Source_ välilehden oikealta laidalta.
 
-Debuggeriin pääsee myös ilman komentoa _debugger_ lisäämällä _Source_-välilehdellä sopiviin kohtiin koodia _breakpointeja_. Haluttujen muuttujien arvojen tarkkailu on mahdollista määrittelemällä ne _Watch_-osassa:
+Debuggeriin pääsee myös ilman komentoa _debugger_ lisäämällä _Source_-välilehdellä sopiviin kohtiin koodia _breakpointeja_. Komponentin muuttujien arvojen tarkkailu on mahdollista  _Scope_-osassa:
 
-![](../assets/1/34.png)
+![](../images/1/9a.png)
 
 Chromeen kannattaa ehdottomasti asentaa [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) -lisäosa, joka tuo konsoliin uuden tabin _React_:
 
@@ -438,37 +438,28 @@ const App = (props) => {
 
 ## Tapahtumankäsittely revisited
 
-Pajan ja telegrammin havaintojen perusteella tapahtumankäsittely on osoittautunut haastavaksi.
+Edellisen vuoden kurssin perusteella tapahtumankäsittely on osoittautunut monelle haastavaksi.
 
 Tarkastellaan asiaa vielä uudelleen.
 
 Oletetaan, että käytössä on äärimmäisen yksinkertainen sovellus:
 
 ```bash
-class App extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      value: 10
-    }
-  }
-  render(){
-    return (
-      <div>
-        {this.state.value}
-        <button>nollaa</button>
-      </div>
-    )
-  }
+const App = (props) => {
+  const [value, setValue] = useState(10)
+
+  return (
+    <div>
+      {value}
+      <button>nollaa</button>
+    </div>
+  )
 }
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-)
+ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-Haluamme, että napin avulla tilassa oleva _value_ saadaan nollattua.
+Haluamme, että napin avulla tilan talettava muuttuja _value_ saadaan nollattua.
 
 Jotta saamme napin reagoimaan, on sille lisättävä _tapahtumankäsittelijä_.
 
@@ -477,7 +468,7 @@ Tapahtumankäsittelijän tulee aina olla _funktio_. Jos tapahtumankäisttelijän
 Jos esim. antaisimme tapahtumankäsittelijäksi merkkijonon:
 
 ```bash
-<button onClick={"roskaa"}>nappi</button>
+<button onClick={'roskaa'}>nappi</button>
 ```
 
 React varoittaa asiasta konsolissa
@@ -492,10 +483,10 @@ index.js:2178 Warning: Expected `onClick` listener to be a function, instead got
 eli esim. seuraavanlainen yritys olisi tuhoon tuomittu
 
 ```bash
-<button onClick={this.state.value+1}>nappi</button>
+<button onClick={value + 1}>nappi</button>
 ```
 
-nyt tapahtumankäsittelijäksi on yritetty laittaa _this.state.value+1_ mikä tarkoittaa laskuoperaation tulosta. React varoittaa tästäkin konsolissa
+nyt tapahtumankäsittelijäksi on yritetty laittaa _value + 1_ mikä tarkoittaa laskuoperaation tulosta. React varoittaa tästäkin konsolissa
 
 ```bash
 index.js:2178 Warning: Expected `onClick` listener to be a function, instead got a value of `number` type.
@@ -504,10 +495,10 @@ index.js:2178 Warning: Expected `onClick` listener to be a function, instead got
 Myöskään seuraava ei toimi
 
 ```bash
-<button onClick={this.state.value = 0}>nappi</button>
+<button onClick={value = 0}>nappi</button>
 ```
 
-taaskaan tapahtumankäsittelijänä ei ole funktio vaan sijoitusoperaatio. Konsoliin tulee valitus. Tämä tapa on myös toisella tavalla väärin. Kuten on jo mainittu, reactin tilaa _ei saa muuttaa suoraan_, vaan ainoastaan funktion setState-avulla.
+taaskaan tapahtumankäsittelijänä ei ole funktio vaan sijoitusoperaatio. Konsoliin tulee valitus. Tämä tapa on myös toisella tavalla väärin. Tilan muuttaminen ei onnistu suoraan tilan arvon tallentavaa muuttujaa muuttamalla.
 
 Entä seuraava:
 
@@ -524,12 +515,12 @@ Funktiokutsu _console.log('nappia painettu')_ suoritetaan siinä vaiheessa kun k
 Myös seuraava yritys on virheellinen
 
 ```bash
-<button onClick={this.setState({value: 0})}>nappi</button>
+<button onClick={setValue(0)}>nappi</button>
 ```
 
-jälleen olemme yrittäneet laittaa tapahtumankäsittelijäksi funktiokutsun. Ei toimi. Tämä yritys aiheuttaa myös toisen ongelman. Kun komponenttia renderöidään, suoritetaan tapahtumankäsittelijänä oleva funktiokutsu _this.setState({value: 0})_ joka taas saa aikaan komponentin uudelleenrenderöinnin. Ja uudelleenrenderöinnin yhteydessä funktiota kutsutaan uudelleen käynnistäen jälleen uusi uudelleenrenderöinti, ja joudutaan päättymättömään rekursioon.
+jälleen olemme yrittäneet laittaa tapahtumankäsittelijäksi funktiokutsun. Ei toimi. Tämä yritys aiheuttaa myös toisen ongelman. Kun komponenttia renderöidään, suoritetaan tapahtumankäsittelijänä oleva funktiokutsu _setValue(0)_ joka taas saa aikaan komponentin uudelleenrenderöinnin. Ja uudelleenrenderöinnin yhteydessä funktiota kutsutaan uudelleen käynnistäen jälleen uusi uudelleenrenderöinti, ja joudutaan päättymättömään rekursioon.
 
-Jos haluamme tietyn funktiokutsun tapahtuvan nappia painettaessa, toimii seuraava
+Jos haluamme suorittaa tietyn funktiokutsun tapahtuvan nappia painettaessa, toimii seuraava
 
 ```bash
 <button onClick={() => console.log('nappia painettu')}>nappi</button>
@@ -540,78 +531,54 @@ Nyt tapahtumankäsittelijä on nuolisyntaksilla määritelty funktio _() => cons
 Saamme myös nollauksen toimimaan samalla tekniikalla
 
 ```bash
-<button onClick={() => this.setState({value: 0})}>nappi</button>
+<button onClick={() => setValue(0)}>nappi</button>
 ```
 
-eli nyt tapahtumankäsittelijä on funktio _() => this.setState({value: 0})_.
+eli nyt tapahtumankäsittelijä on funktio _() => setValue(0)_.
 
 Tapahtumakäsittelijäfunktioiden määrittely suoraan napin määrittelyn yhteydessä ei välttämättä ole paras mahdollinen idea.
 
-Usein tapahtumankäsittelijä määritelläänkin jossain muualla. Seuraavassa määritellään funktio metodin render alussa ja sijoitetaan se muuttujaan _handler_:
+Usein tapahtumankäsittelijä määritelläänkin jossain muualla. Seuraavassa määritellään funktio metodin render alussa ja sijoitetaan se muuttujaan _handleClick_:
 
 ```react
-render() {
-  const handler = () => console.log('nappia painettu')
+const App = (props) => {
+  const [value, setValue] = useState(10)
+
+  const handleClick = () => console.log('nappia painettu')
 
   return (
     <div>
-      {this.state.value}
-      <button onClick={handler}>nappi</button>
+      {value}
+      <button onClick={handleClick}>nappi</button>
     </div>
   )
 }
 ```
 
-Muuttujassa _handler_ on nyt talletettuna viite itse funktioon. Viite annetaan napin määrittelyn yhteydessä
+Muuttujassa _handleClick_ on nyt talletettuna viite itse funktioon. Viite annetaan napin määrittelyn yhteydessä
 
 ```bash
-<button onClick={handler}>nappi</button>
+<button onClick={handleClick}>nappi</button>
 ```
 
 Tapahtumankäsittelijäfunktio voi luonnollisesti koostua useista komennoista, tällöin käytetään nuolifunktion aaltosulullista muotoa:
 
 ```react
-render() {
-  const handler = () => {
+const App = (props) => {
+  const [value, setValue] = useState(10)
+
+  const handleClick = () => {
     console.log('nappia painettu')
-    this.setState({ value: 0 })
+    setValue(0)
   }
 
   return (
     <div>
-      {this.state.value}
-      <button onClick={handler}>nappi</button>
+      {value}
+      <button onClick={handleClick}>nappi</button>
     </div>
   )
 }
-```
-
-Joissain tilanteissa tapahtumankäsittelijät kannattaa määritellä komponentin metodeina:
-
-```react
-class App extends React.Component {
-  // ...
-
-  handler = () => {
-    console.log('nappia painettu')
-    this.setState({ value: 0 })
-  }
-
-  render() {
-    return (
-      <div>
-        {this.state.value}
-        <button onClick={this.handler}>nappi</button>
-      </div>
-    )
-  }
-}
-```
-
-Koska _handler_ on nyt komponentin metodi, päästään siihen käsiksi viitteen _this_ avulla:
-
-```bash
-<button onClick={this.handler}>nappi</button>
 ```
 
 Mennään lopuksi funktioita palauttavaan funktioon.
@@ -619,7 +586,9 @@ Mennään lopuksi funktioita palauttavaan funktioon.
 Muutetaan koodia seuraavasti
 
 ```react
-render() {
+const App = (props) => {
+  const [value, setValue] = useState(10)
+
   const hello = () => {
     const handler = () => console.log('hello world')
 
@@ -628,7 +597,7 @@ render() {
 
   return (
     <div>
-      {this.state.value}
+      {value}
       <button onClick={hello()}>nappi</button>
     </div>
   )
@@ -676,9 +645,11 @@ Mitä järkeä tässä konseptissa on?
 Muutetaan koodia hiukan:
 
 ```bash
-render() {
+const App = (props) => {
+  const [value, setValue] = useState(10)
+
   const hello = (who) => {
-    const handler = () => { 
+    const handler = () => {
       console.log('hello', who)
     }
 
@@ -687,7 +658,7 @@ render() {
 
   return (
     <div>
-      {this.state.value}
+      {value}
       <button onClick={hello('world')}>nappi</button>
       <button onClick={hello('react')}>nappi</button>
       <button onClick={hello('function')}>nappi</button>
@@ -759,7 +730,6 @@ const hello = (who) =>
   () => { 
     console.log('hello', who)
   }
-
 ```
 
 ja tuodaan vielä "kaikki nuolet" samalle riville
@@ -774,16 +744,16 @@ Voimme käyttää samaa kikkaa myös muodostamaan tapahtumankäsittelijöitä, j
 
 ```bash
 render() {
-  const setToValue = (newValue) => () => { 
-    this.setState({ value: newValue })
+  const setToValue = (newValue) => () => {
+    setValue(newValue) 
   }
 
   return (
     <div>
-      {this.state.value}
+      {value}
       <button onClick={setToValue(1000)}>tuhat</button>
       <button onClick={setToValue(0)}>nollaa</button>
-      <button onClick={setToValue(this.state.value+1)}>kasvata</button>
+      <button onClick={setToValue(value + 1)}>kasvata</button>
     </div>
   )
 }
@@ -798,32 +768,79 @@ Kun komponentti renderöidään, ja tehdään nappia tuhat
 tulee tapahtumankäsittelijäksi funktiokutsun _setToValue(1000)_ paluuarvo eli seuraava funktio
 
 ```bash
-() => { 
-  this.setState({ value: 1000 })
+() => {
+    setValue(1000) 
 }
 ```
 
 Kasvatusnapin generoima rivi on seuraava
 
-```bash
-<button onClick={setToValue(this.state.value+1)}>kasvata</button>
+```react
+<button onClick={setToValue(value + 1)}>kasvata</button>
 ```
 
-Tapahtumankäsittelijän muodostaa funktiokutsu _setToValue(this.state.value+1)_, joka saa parametrikseen tilan kentän _value_ nykyisen arvon kasvatettuna yhdellä. Jos _this.state.value_ olisi 10, tulisi tapahtumankäsittelijäksi funktio
+Tapahtumankäsittelijän muodostaa funktiokutsu _setToValue(value + 1)_, joka saa parametrikseen tilan tallettavan muuttujan _value_ nykyisen arvon kasvatettuna yhdellä. Jos _value_ olisi 10, tulisi tapahtumankäsittelijäksi funktio
 
-```bash
-() => { 
-  this.setState({ value: 11 })
+```js
+() => {
+    setValue(11) 
 }
 ```
 
+Funktioita palauttavia funktioita ei tässäkään tapauksessa olisi ollut pakko käyttää. Muutetaan tilan päivittämisestä huolehtiva funktio _setToValue_ normaaliksi funktioksi:
+
+```react
+const App = (props) => {
+  const [value, setValue] = useState(10)
+
+  const setToValue = (newValue) => {
+    setValue(newValue) 
+  }
+
+  return (
+    <div>
+      {value}
+      <button onClick={() => setToValue(1000)}>tuhat</button>
+      <button onClick={() => setToValue(0)}>nollaa</button>
+      <button onClick={() => setToValue(value + 1)}>kasvata</button>
+    </div>
+  )
+}
+```
+
+Voimme nyt määritellä tapahtumankäsittelijän funktioksi, joka kutsuu funktiota _setToValue_ sopivalla parametrilla, esim. nollaamisen tapahtumankäsittelijä:
+
+```js
+<button onClick={() => setToValue(0)}>nollaa</button>
+```
+
+On aikalailla makuasia käyttääkö tapahtumankäsittelijänä funktioita palauttavia funktioita vai nuolifunktioita. 
+
+### Tapahtumankäsittelijän vieminen alikomponenttiin
+
+Eriytetään vielä painike omaksi komponentikseen
+
+```react
+const Button = (props) => 
+  <button onClick={props.handleClick}>{props.text}</button>
+```
+
+Komponentti saa siis propsina _handleClick_ tapahtumankäsittelijän ja propsina _text_ merkkijonon jonka se renderöin painikkeen tekstiksi.
+
+Komponentin _Button_ käyttö on helppoa, on toki pidettävä huolta siitä että komponentille annettavat propsit on nimetty niin kuin komponentti olettaa:
+
+![](../images/1/12a.png)
+
+
 ### Hyödyllistä materiaalia
 
-Internetissä on todella paljon Reactiin liittyvää materiaalia, tässä muutamia linkkejä:
+Internetissä on todella paljon Reactiin liittyvää materiaalia. Tällä hetkellä ongelman muodostaa kuitenkin se, että käytämme kurssilla niin uutta Reactia, että suurin osa internetistä löytyvästä tavarasta on meidän kannaltamme vanhentunutta. 
 
-- Reactin [docs](https://reactjs.org/docs/hello-world.html) kannattaa ehdottomasti käydä läpi, ei välttämättä kaikkea nyt, osa on ajankohtaista vasta kurssin myöhemmissä osissa
+Seuraavassa muutamia linkkejä:
+
+- Reactin [docs](https://reactjs.org/docs/hello-world.html) kannattaa ehdottomasti käydä jossain vaiheessa läpi, ei välttämättä kaikkea nyt, osa on ajankohtaista vasta kurssin myöhemmissä osissa ja kaikki Class-komponentteihin liittyvä on kurssin kannalta epärelevanttia
 - Reactin sivuilla oleva [tutoriaali](https://reactjs.org/tutorial/tutorial.html) sen sijaan on aika huono
-- [Egghead.io](https://egghead.io):n kursseista [Start learning React](https://egghead.io/courses/start-learning-react) on laadukas, ja hieman uudempi [The Beginner's guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) on myös kohtuullisen hyvä; molemmat sisältävät myös asioita jotka tulevat tällä kurssilla vasta myöhemmissä osissa.
+- [Egghead.io](https://egghead.io):n kursseista [Start learning React](https://egghead.io/courses/start-learning-react) on laadukas, ja hieman uudempi [The Beginner's guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) on myös kohtuullisen hyvä; molemmat sisältävät myös asioita jotka tulevat tällä kurssilla vasta myöhemmissä osissa. Molemmissa toki se ongelma, että ne käyttävät Class-komponentteja
 
 </div>
 
