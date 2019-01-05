@@ -630,24 +630,21 @@ Javascript-väsymys tulee varmasti iskemään myös tällä kurssilla. Onneksi n
 </div>
 
 <div class="tasks"> 
-  <h3>Tehtävä 0.1</h3>
-  <h4>HTML</h4>
+  <h3>Tehtäviä</h3>
+  <h4>0.1: HTML</h4>
 
 Kertaa HTML:n perusteet lukemalla Mozillan tutoriaali [HTML:stä](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics) 
 
-  <h3>Tehtävä 0.2</h3>
-  <h4>CSS</h4>
+  <h4>0.2: CSS</h4>
 
 Kertaa CSS:n perusteet lukemalla Mozillan tutoriaali [CSS:stä](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).
 
 
-  <h3>Tehtävä 0.3</h3>
-  <h4>HTML:n lomakkeet</h4>
+  <h4>0.3: HTML:n lomakkeet</h4>
 
 Tutustu HTML:n lomakkeiden perusteisiin lukemalla Mozillan tutoriaali [Your first form](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form).
 
-  <h3>Tehtävät 0.4</h3>
-  <h4>uusi muistiinpano</h4>
+  <h4>0.4: uusi muistiinpano</h4>
 
 Luvussa [Javascriptia sisältävän sivun lataaminen - kertaus](Javascriptia sisältävän sivun lataaminen - kertaus ###) kuvataan [sekvenssikaavion](https://github.com/mluukkai/Ohjelmistotekniikka2018/blob/master/web/materiaali.md#sekvenssikaaviot) avulla sivun _fullstack-exampleapp.herokuapp.com/notes_ avaamisen aikaansaama tapahtumasarja.
 
@@ -683,8 +680,7 @@ Kaavion ei ole pakko olla sekvenssikaavio. Mikä tahansa järkevä kuvaustapa k�
 
 Kaikki oleellinen tämän ja seuraavien kolmen tehtävän tekemiseen liittyvä informaatio on selitettynä [tämän osan](../osa0) tekstissä. Näiden tehtävien ideana on, että luet tekstin vielä kerran ja mietit tarkkaan mitä missäkin tapahtuu. Ohjelman [koodin](https://github.com/mluukkai/example_app) lukemista ei näissä tehtävissä edellytetä, vaikka sekin on toki mahdollista.
 
-  <h3>Tehtävät 0.5</h3>
-  <h4>Single page app</h4>
+  <h4>0.5: Single page app</h4>
 
 Tee kaavio tilanteesta, missä käyttäjä menee selaimella osoitteeseen <https://fullstack-exampleapp.herokuapp.com/spa> eli muistiinpanojen [single page app](../osa0/#single-page-app)-versioon
 

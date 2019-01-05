@@ -302,7 +302,7 @@ const App = () => {
 
 Komponentti _App_ lähettää propseina muuttujan arvoja, summalausekkeen evaluoinnin tuloksen ja normaalin merkkijonon.
 
-### Huomoita ohjelmoijan workflowsta
+### Muutamia huomioita
 
 React on konfiguroitu antamaan varsin hyviä virheilmoituksia. Kannattaa kuitenkin edetä ainakin alussa **todella pienin askelin** ja varmistaa, että jokainen muutos toimii halutulla tavalla.
 
@@ -352,8 +352,9 @@ const App = () => {
 
 seurauksena on virheilmoitus:
 
+![](../images/1/3a.png)
 
-Juurielementin käyttö ei ole ollut enää ainoa toimiva vaihtoehto, myös _taulukollinen_ komponentteja on validi tapa:
+Juurielementin käyttö ei ole ainoa toimiva vaihtoehto, myös _taulukollinen_ komponentteja on validi tapa:
 
 ```react
 const App = () => {
@@ -373,7 +374,7 @@ Juurielementin pakollinen käytöstä on se seuraus, että sovelluksen DOM-puuhu
 
 ```react
 const App = () => {
-  const nimi = 'Pekka'
+  const name = 'Pekka'
   const ika = 10
 
   return (
@@ -392,9 +393,11 @@ Nyt käännös menee läpi ja Reactin generoimaan DOM:iin ei tule ylimääräist
 </div>
 
 <div class="tasks">
-  <h3>Tehtävät 1.1</h3>
+  <h3>Tehtäviä </h3>
 
-  <h4>jako komponenteiksi</h4>
+  <h4>1.1: jako komponenteiksi</h4>
+
+<em>Tässä tehtävässä aloitettavaa ohjelmaa kehitellään eteenpäin muutamassa seuraavassa tehtävässä. Tässä ja kurssin aikana muissakin vastaantulevissa tehtäväsarjoissa ohjelman lopullisen version palauttaminen  riittää, voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.</em>
 
 Luo create-react-app:illa uusi sovellus. Muuta <i>index.js</i> muotoon
 
@@ -403,21 +406,21 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 const App = () => {
-  const kurssi = 'Half Stack -sovelluskehitys'
-  const osa1 = 'Reactin perusteet'
-  const tehtavia1 = 10
-  const osa2 = 'Tiedonvälitys propseilla'
-  const tehtavia2 = 7
-  const osa3 = 'Komponenttien tila'
-  const tehtavia3 = 14
+  const course = 'Half Stack -sovelluskehitys'
+  const part1 = 'Reactin perusteet'
+  const exercises1 = 10
+  const part2 = 'Tiedonvälitys propseilla'
+  const exercises2 = 7
+  const part3 = 'Komponenttien tila'
+  const exercises3 = 14
 
   return (
     <div>
-      <h1>{kurssi}</h1>
-      <p>{osa1} {tehtavia1}</p>
-      <p>{osa2} {tehtavia2}</p>
-      <p>{osa3} {tehtavia3}</p>
-      <p>yhteensä {tehtavia1 + tehtavia2 + tehtavia3} tehtävää</p>
+      <h1>{course}</h1>
+      <p>{part1} {exercises1}</p>
+      <p>{part2} {exercises2}</p>
+      <p>{part3} {exercises3}</p>
+      <p>yhteensä {exercises1 + exercises2 + exercises3} tehtävää</p>
     </div>
   )
 }
@@ -430,7 +433,7 @@ ReactDOM.render(
 
 ja poista ylimääräiset tiedostot.
 
-Koko sovellus on nyt ikävästi yhdessä komponentissa. Refaktoroi sovelluksen koodi siten, että se koostuu kolmesta komponentista <i>Otsikko</i>, <i>Sisalto</i> ja <i>Yhteensa</i>. Kaikki data pidetään edelleen komponentissa <i>App</i>, joka välittää tarpeelliset tiedot kullekin komponentille <i>props:ien</i> avulla. <i>Otsikko</i> huolehtii kurssin nimen renderöimisestä, <i>Sisalto</i> osista ja niiden tehtävämääristä ja <i>Yhteensa</i> tehtävien yhteismäärästä.
+Koko sovellus on nyt ikävästi yhdessä komponentissa. Refaktoroi sovelluksen koodi siten, että se koostuu kolmesta komponentista <i>Header</i>, <i>Content</i> ja <i>Total</i>. Kaikki data pidetään edelleen komponentissa <i>App</i>, joka välittää tarpeelliset tiedot kullekin komponentille <i>props:ien</i> avulla. <i>Header</i> huolehtii kurssin nimen renderöimisestä, <i>COntent</i> osista ja niiden tehtävämääristä ja <i>Total</i> tehtävien yhteismäärästä.
 
 Komponentin <i>App</i> runko tulee olemaan suunnilleen seuraavanlainen:
 
@@ -440,27 +443,25 @@ const App = () => {
 
   return (
     <div>
-      <Otsikko kurssi={kurssi} />
-      <Sisalto ... />
-      <Yhteensa ... />
+      <Header course={course} />
+      <Content ... />
+      <Total ... />
     </div>
   )
 }
 ```
 
-<h3 class="spacing">Tehtävät 1.2</h3>
+<h4>1.2: lisää komponentteja</h4>
 
-<h4>lisää komponentteja</h4>
-
-Refaktoroi vielä komponentti <i>Sisalto</i> siten, että se ei itse renderöi yhdenkään osan nimeä eikä sen tehtävälukumäärää vaan ainoastaan kolme <i>Osa</i>-nimistä komponenttia, joista kukin siis renderöi yhden osan nimen ja tehtävämäärän.
+Refaktoroi vielä komponentti <i>Content</i> siten, että se ei itse renderöi yhdenkään osan nimeä eikä sen tehtävälukumäärää vaan ainoastaan kolme <i>Part</i>-nimistä komponenttia, joista kukin siis renderöi yhden osan nimen ja tehtävämäärän.
 
 ```react
-const Sisalto = ... {
+const Content = ... {
   return (
     <div>
-      <Osa .../>
-      <Osa .../>
-      <Osa .../>
+      <Part .../>
+      <Part .../>
+      <Part .../>
     </div>
   )
 }
