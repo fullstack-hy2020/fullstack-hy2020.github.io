@@ -684,8 +684,7 @@ Kaikki oleellinen tämän ja seuraavien kolmen tehtävän tekemiseen liittyvä i
 
 Tee kaavio tilanteesta, missä käyttäjä menee selaimella osoitteeseen <https://fullstack-exampleapp.herokuapp.com/spa> eli muistiinpanojen [single page app](../osa0/#single-page-app)-versioon
 
-  <h3>Tehtävät 0.6</h3>
-  <h4>Uusi muistiinpano</h4>
+  <h4>0.6: Uusi muistiinpano</h4>
 
 Tee kaavio tilanteesta, missä käyttäjä luo uuden muistiinpanon single page -versiossa.
 

@@ -54,17 +54,27 @@ const App = (props) => {
   const [clicks, setClicks] = useState({
     left: 0, right: 0
   })
+  
+  const handleLeftClick = () => {
+    const newClicks = { left: clicks.left + 1, right: clicks.right }
+    setClicks(newClicks)
+  }
+
+  const handleRightClick = () => {
+    const newClicks = { left: clicks.left, right: clicks.right + 1 }
+    setClicks(newClicks)
+  }
 
   return (
     <div>
       <div>
         {clicks.left}
-        <button onClick={() => setClicks({ left: clicks.left + 1, right: clicks.right })}>vasen</button>
-        <button onClick={() => setClicks({ left: clicks.left, right: clicks.right + 1 })}>oikea</button>
+        <button onClick={handleLeftClick}>vasen</button>
+        <button onClick={handleRightClick}>oikea</button>
         {clicks.right}
       </div>
     </div>
-  )
+  )    
 }
 ```
 
@@ -73,10 +83,10 @@ Nyt komponentilla on siis ainoastaan yksi tila. Näppäinten painallusten yhteyd
 Tapahtumankäsittelijä vaikuttaa hieman sotkuiselta. Kun vasenta nappia painetaan, suoritetaan seuraava funktio:
 
 ```js
-() => setClicks({ 
-  left: clicks.left + 1,
-  right: clicks.right
-})
+  const handleLeftClick = () => {
+    const newClicks = { left: clicks.left + 1, right: clicks.right }
+    setClicks(newClicks)
+  }
 ```
 
 uudeksi tilaksi siis aseteaan seuraava olio
@@ -90,7 +100,53 @@ uudeksi tilaksi siis aseteaan seuraava olio
 
 eli kentän _left_ arvo on sama kuin alkuperäisen tilan kentän _left + 1_ ja kentän _right_ arvo on sama kuin alkuperäisen tilan kenttä _right_.
 
+Uuden tilan määrittelevän olion modostaminen onnistuu hieman tyylikkäämmin hyödyntämällä kesällä 2018 kieleen tuotua [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) -syntaksia:
+
+```js
+const handleLeftClick = () => {
+  const newClicks = { ...clicks, left: clicks.left + 1 }
+  setClicks(newClicks)
+}
+
+const handleRightClick = () => {
+  const newClicks = { ...clicks, right: clicks.right + 1 }
+  setClicks(newClicks)
+}
+```
+
+Merkintä vaikuttaa hieman erikoiselta. Käytännössä <code>{ ...clicks }</code> luo olion, jolla on kenttinään kopiot olion _clicks_ kenttien arvoista. Kun aaltosulkeisiin lisätään asioita, esim. <code>{ ...clicks, right: 1 }</code>, tulee uuden olion kenttä _right_ saamaan arvon 1. 
+
+Esimerkissämme siis 
+```js
+{ ...clicks, right: clicks.right + 1 }
+```
+
+luo oliosta _clicks_ kopion, missä kentän _right_ arvoa kasvatetaan yhdellä.
+
+Apumuuttujat ovat oikeastaan turhat, ja tapahtumankäsittelijät voidaan määritellä seuraavasti:
+
+```js
+const handleLeftClick = () =>
+  setClicks({ ...clicks, left: clicks.left + 1 })
+
+const handleRightClick = () =>
+  setClicks({ ...clicks, right: clicks.right + 1 })
+```
+
+Lukijalle voi tässä vaiheessa herätä kysymys miksi emme hoitaneet tilan päivitystä seuraavalla tavalla
+
+```js
+const handleLeftClick = () => {
+  clicks.left++
+  setClicks(clicks)
+}
+```
+
+Sovellus näyttää toimivan. Reactissa ei kuitenkaan ole saa muuttaa tilaa suoraan, sillä voi olla arvaamattomat seuraukset. Tilan muutos tulee aina tehdä asettamalla uudeksi tilaksi vanhan perusteella tehty kopio!
+
 Kaikien tilan pitäminen yhdessä oliossa on tämän sovelluksen kannalta huono ratkaisu, etuja siinä ei juuri ole, mutta sovellus monimutkaisuu merkittävästi. Onkin ehdottomasti parempi ratkaisu tallettaa nappien klikkaukset erillisiin tilan paloihin. 
+
+On kuitenkin tilanteita, joissa jokin osa tilaa kannattaa pitää monimutkaisemman tietorakenteen sisällä  [Reactin dokumentaatiossa](https://reactjs.org/docs/hooks-faq.html#should-i-use-one-or-many-state-variables) on hieman ohjeistusta aiheeseen liityen.
 
 ### Taulukon käsittelyä
 
@@ -153,7 +209,7 @@ const handleLeftClick = () => {
 }
 ```
 
-Älä kuitenkaan tee näin. React-komponentin tilaa, eli muuttujaa eli esim muuttujaa _allClicks_ ei saa muuttaa, vaikka se näyttääkin toimivan joissaikin tilanteissa, voi seurauksena olla hankalasti havaittavia ongelmia.
+Älä kuitenkaan tee näin. Kuten jo mainitsimme, React-komponentin tilaa, eli esimerkiksi muuttujaa _allClicks_ ei saa muuttaa, vaikka se näyttääkin toimivan joissaikin tilanteissa, voi seurauksena olla hankalasti havaittavia ongelmia.
 
 Katsotaan vielä tarkemmin, miten kaikkien painallusten historia renderöidään ruudulle:
 
@@ -302,7 +358,7 @@ Onneksi React on debuggauksen suhteen jopa harvinaisen kehittäjäystävällinen
 Muistutetaan vielä tärkeimmästä web-sovelluskehitykseen liittyvästä asiasta:
 
 <div class="important">
-  <h3>Web-sovelluskehityksen sääntö numero yksi</h3>
+  <h4>Web-sovelluskehityksen sääntö numero yksi</h4>
   <div>Pidä selaimen developer-konsoli koko ajan auki.</div>
   <br />
   <div>Välilehdistä tulee olla auki nimenomaan <em>Console</em> jollei ole erityistä syytä käyttää jotain muuta välilehteä.
@@ -831,6 +887,64 @@ Komponentin _Button_ käyttö on helppoa, on toki pidettävä huolta siitä ett�
 
 ![](../images/1/12a.png)
 
+### Älä määrittele komponenttia komponentin sisällä
+
+Eriytetään vielä sovelluksestamme luvun näyttäminen omaan komponenttiin _Display_.
+
+Muutetaan ohjelmaa seuraavasti, eli määritelläänkin uusi komponentti _App_-komponentin sisällä:
+
+```js
+const Button = (props) => 
+  <button onClick={props.handleClick}>{props.text}</button>
+
+const App = (props) => {
+  const [value, setValue] = useState(10)
+
+  const setToValue = (newValue) => {
+    setValue(newValue) 
+  }
+
+  // älä määrittele komponenttia täällä!
+  const Display = (props) =>
+    <div>{props.value}</div>
+
+  return (
+    <div>
+      <Display value={value}/>
+      <Button handleClick={() => setToValue(1000)} text='tuhat' />
+      <Button handleClick={() => setToValue(0)} text='nollaa' />
+      <Button handleClick={() => setToValue(value +1 )} text='kasvata' />
+    </div>
+  )
+}
+```
+
+Kaikki näyttää toimivan. Mutta **älä tee koskaan näin!** Tapa on hyödytön ja johtaa useissa tilanteissa ikäviin ongelmiin. Siirretäänkin komponentin _Display_ määrittely oikeaan paikkaan, eli komponentin _App_ määrittelevän funktion ulkopuolelle:
+
+```js
+const Display = (props) =>
+  <div>{props.value}</div>
+
+const Button = (props) => 
+  <button onClick={props.handleClick}>{props.text}</button>
+
+const App = (props) => {
+  const [value, setValue] = useState(10)
+
+  const setToValue = (newValue) => {
+    setValue(newValue) 
+  }
+
+  return (
+    <div>
+      <Display value={value}/>
+      <Button handleClick={() => setToValue(1000)} text='tuhat' />
+      <Button handleClick={() => setToValue(0)} text='nollaa' />
+      <Button handleClick={() => setToValue(value +1 )} text='kasvata' />
+    </div>
+  )
+}
+```
 
 ### Hyödyllistä materiaalia
 
@@ -846,72 +960,106 @@ Seuraavassa muutamia linkkejä:
 
 <div class="tasks">
   <h3>Tehtäviä</h3>
+
+<em>Samaa ohjelmaa kehittelevissä tehtäväsarjoissa ohjelman lopullisen version palauttaminen riittää, voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.</em>
+
   <h4> 1.6: unicafe osa1</h4>
 
 Monien firmojen tapaan nykyään myös [Unicafe](https://www.unicafe.fi/#/9/4) kerää asiakaspalautetta. Tee Unicafelle verkossa toimiva palautesovellus. Vastausvaihtoehtoja olkoon vain kolme: <i>hyvä</i>, <i>neutraali</i> ja <i>huono</i>.
 
 Sovelluksen tulee näyttää jokaisen palautteen lukumäärä. Sovellus voi näyttää esim. seuraavalta:
 
-![](../images/teht/4c.png)
+![](../images/1/13a.png)
 
 Huomaa, että sovelluksen tarvitsee toimia vain yhden selaimen käyttökerran ajan, esim. kun selain refreshataan, tilastot saavat hävitä.
 
+Muista, että saadaksesi komponentin tilan luotua joudut asentamaan Reactin version _0.16.7.0-alpha.2_ antamalla seuraavan komennon projektin hakemistossa
+
+```bash
+npm install -s react@16.7.0-alpha.2 react-dom@16.7.0-alpha.2
+```
+
+Voit tehdä koko sovelluksen tiedostoon _index.js_. Tiedoston sisältö voi olla aluksi seuraava
+
+```react
+import React, { useState } from 'react'
+import ReactDOM from 'react-dom'
+
+const App = () => {
+  // jokaisen napin tila kannattanee tallettaa omaan muuttujaan
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+
+  return (
+    <div>
+      code here
+    </div>
+  )
+}
+
+ReactDOM.render(<App />, document.getElementById('root'))
+```
+
 <h4>1.7: unicafe osa2</h4>
 
-Laajenna sovellusta siten, että se näyttää palautteista statistiikkaa, keskiarvon (hyvän arvo 1, neutraalin 0, huonon -1) ja sen kuinka monta prosenttia palautteista on ollut positiivisia:
+Laajenna sovellusta siten, että se näyttää palautteista enemmän statistiikkaa: yhteenlasketun määrän, keskiarvon (hyvän arvo 1, neutraalin 0, huonon -1) ja sen kuinka monta prosenttia palautteista on ollut positiivisia:
 
-![](../images/teht/4d.png)
+![](../images/1/14a.png)
 
 
 <h4>1.8: unicafe osa3</h4>
 
-Refaktoroi sovelluksesi siten, että se koostuu monista komponenteista. Pidä tila kuitenkin sovelluksen _juurikomponentissa_.
+Refaktoroi sovelluksesi siten, että tilastojen näyttäminen on eriytetty oman komponentin _Statistics_ vastuulle. Sovelluksen tila säilyy edelleen juurikomponentissa _App_.
 
-Tee sovellukseen ainakin seuraavat komponentit:
+Muista, että komponentteja ei saa määritellä toisen komponentin sisällä: 
 
-- <i>Button</i> vastaa yksittäistä palautteenantonappia
-- <i>Statistics</i> huolehtii tilastojen näyttämisestä
-- <i>Statistic</i> huolehtii yksittäisen tilastorivin, esim. keskiarvon näyttämisestä
+```react
+// oikea paikka komponentin määrittelyyn
+const Statistics = (props) => {
+  // ...
+}
+
+const App = () => {
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
+
+// älä määrittele komponenttia toisen komponentin sisällä!
+const Statistis = (props) => {
+  // ...
+}
+
+  return (
+    // ...
+  )
+}
+```
 
 <h4>1.9: unicafe osa4</h4>
 
 Muuta sovellusta siten, että numeeriset tilastot näytetään ainoastaan jos palautteita on jo annettu:
 
-![](../images/teht/5.png)
+![](../images/1/15a.png)
 
-<h4>1.10*: unicafe osa5</h4>
+<h4>1.10: unicafe osa3</h4>
 
-Jos olet määritellyt jokaiselle napille oman tapahtumankäsittelijän, refaktoroi sovellustasi siten, että kaikki napit käyttävät samaa tapahtumankäsittelijäfunktiota samaan tapaan kuin materiaalin luvussa [funktio joka palauttaa funktion](/osa1/#funktio-joka-palauttaa-funktion).
+Jatketaan sovelluksen refaktorointia. Eriytä seuraavat komponentit
 
-Pari vihjettä. Ensinnäkin kannattaa muistaa, että olion kenttiin voi viitata pistenotaation lisäksi hakasulkeilla, eli:
+- <i>Button</i> vastaa yksittäistä palautteenantonappia
+- <i>Statistic</i> huolehtii yksittäisen tilastorivin, esim. keskiarvon näyttämisestä
 
-```js
-const olio = {
-  a: 1,
-  b: 2,
-};
+Sovelluksen tila säilytetään edelleen juurikomponentissa _App_.
 
-olio['c'] = 3;
-
-console.log(olio.a); // tulostuu 1
-
-console.log(olio['b']); // tulostuu 2
-
-const apu = 'c';
-console.log(olio[apu]); // tulostuu 3
-```
-
-Myös ns. [Computed property names](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer) voi olla tässä tehtävässä hyödyksi.
-
-<h4>1.11: unicafe osa6</h4>
+<h4>1.11*: unicafe osa6</h4>
 
 Toteuta tilastojen näyttäminen HTML:n [taulukkona](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Basics) siten, että saat sovelluksesi näyttämään suunnilleen seuraavanlaiselta:
 
-![](../images/teht/6a.png)
+![](../images/1/16a.png)
 
 Muista pitää konsoli koko ajan auki. Jos saat konsoliin seuraavan warningin:
 
-![](../assets/teht/7.png)
+![](../images/1/17a.png)
 
 tee tarvittavat toimenpiteet jotta saat warningin katoamaan. Googlaa tarvittaessa virheilmoituksella.
 
@@ -924,24 +1072,17 @@ Ohjelmistotuotannossa tunnetaan lukematon määrä [anekdootteja](http://www.com
 Laajenna seuraavaa sovellusta siten, että siihen tulee nappi, jota painamalla sovellus näyttää _satunnaisen_ ohjelmistotuotantoon liittyvän anekdootin:
 
 ```react
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
-class App extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      selected: 0
-    }
-  }
+const App = (props) => {
+  const [selected, setSelected] = useState(0)
 
-  render() {
-    return (
-      <div>
-        {this.props.anecdotes[this.state.selected]}
-      </div>
-    )
-  }
+  return (
+    <div>
+      {props.anecdotes[selected]}
+    </div>
+  )
 }
 
 const anecdotes = [
@@ -963,44 +1104,48 @@ Google kertoo, miten voit generoida Javascriptilla sopivia satunnaisia lukuja. M
 
 Sovellus voi näyttää esim. seuraavalta:
 
-![](../images/teht/2.png)
+![](../images/1/18a.png)
+
+Muista, että saadaksesi komponentin tilan luotua joudut asentamaan Reactin version _0.16.7.0-alpha.2_ antamalla seuraavan komennon projektin hakemistossa
+
+```bash
+npm install -s react@16.7.0-alpha.2 react-dom@16.7.0-alpha.2
+```
 
 <h4>1.13: anekdootit osa2</h4>
 
 Laajenna sovellusta siten, että näytettävää anekdoottia on mahdollista äänestää:
 
-![](../images/teht/3.png)
+![](../images/1/19a.png)
 
 **Huom:** jos päätät tallettaa kunkin anekdootin äänet komponentin tilassa olevan olion kenttiin tai taulukkoon, saatat tarvita päivittäessäsi tilaa oikeaoppisesti olion tai taulukon _kopioimista_.
 
 Olio voidaan kopioida esim. seuraavasti:
 
 ```js
-const pisteet = { 0: 1, 1: 3, 2: 4, 3: 2 };
+const pisteet = { 0: 1, 1: 3, 2: 4, 3: 2 }
 
-const kopio = { ...pisteet };
-kopio[2] += 1; // kasvatetaan olion kentän 2 arvoa yhdellä
+const kopio = { ...pisteet }
+kopio[2] += 1   // kasvatetaan olion kentän 2 arvoa yhdellä
 ```
 
 ja taulukko esim. seuraavasti:
 
 ```js
-const pisteet = [1, 4, 6, 3];
+const pisteet = [1, 4, 6, 3]
 
-const kopio = [...pisteet];
-kopio[2] += 1; // kasvatetaan taulukon paikan 2 arvoa yhdellä
+const kopio = [ ...pisteet ]
+kopio[2] += 1   // kasvatetaan taulukon paikan 2 arvoa yhdellä
 ```
+
+Yksinkertaisempi ratkaisu lienee nyt taulukon käyttö. Googlaamalla löydät paljon vihjeitä sille, miten kannattaa luoda halutun mittainen taulukko, joka on täytetty nollilla esim. [tämän](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-array-of-arbitrary-length/22209781).
 
 <h4>1.14*: anekdootit osa3</h4>
 
 Ja sitten vielä lopullinen versio, joka näyttää eniten ääniä saaneen anekdootin:
 
-![](../images/teht/3b.png)
+![](../images/1/20a.png)
 
 Jos suurimman äänimäärän saaneita anekdootteja on useita, riittää että niistä näytetään yksi.
-
-Tämä saattaa olla jo hieman haastavampi. Taulukolta löytyy monia hyviä metodeja, katso lisää [Mozillan dokumentaatiosta](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array).
-
-Youtubessa on kohtuullisen hyvä [johdatus funktionaaliseen javascript-ohjelmointiin](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84). Kolmen ensimmäisen osan katsominen riittää hyvin tässä vaiheessa.
 
 </div>
