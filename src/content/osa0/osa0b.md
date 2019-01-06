@@ -166,7 +166,7 @@ xhttp.onreadystatechange = function () {
     data.forEach(function(note) {
       var li = document.createElement('li')
 
-      ul.appendChild(li);
+      ul.appendChild(li)
       li.appendChild(document.createTextNode(note.content))
     })
 
@@ -215,7 +215,7 @@ ul.setAttribute('class', 'notes')
 data.forEach(function(note) {
   var li = document.createElement('li')
 
-  ul.appendChild(li);
+  ul.appendChild(li)
   li.appendChild(document.createTextNode(note.content))
 })
 
@@ -235,7 +235,7 @@ ja lisää ul:n sisään yhden [li](https://developer.mozilla.org/en-US/docs/Web
 data.forEach(function(note) {
   var li = document.createElement('li')
 
-  ul.appendChild(li);
+  ul.appendChild(li)
   li.appendChild(document.createTextNode(note.content))
 })
 ```
@@ -334,7 +334,7 @@ var ul = document.createElement('ul')
 data.forEach(function(note) {
   var li = document.createElement('li')
 
-  ul.appendChild(li);
+  ul.appendChild(li)
   li.appendChild(document.createTextNode(note.content))
 })
 ```
@@ -580,7 +580,7 @@ var sendToServer = function (note) {
 
   xhttpForPost.open('POST', '/new_note_spa', true)
   xhttpForPost.setRequestHeader('Content-type', 'application/json')
-  xhttpForPost.send(JSON.stringify(note));
+  xhttpForPost.send(JSON.stringify(note))
 }
 ```
 

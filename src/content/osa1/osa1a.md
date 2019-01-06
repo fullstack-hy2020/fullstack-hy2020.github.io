@@ -161,25 +161,25 @@ Näyttää siltä, että React-komponentti palauttaa HTML-koodia. Näin ei kuite
 Käännösvaiheen jälkeen ohjelmamme näyttää seuraavalta:
 
 ```js
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
 const App = () => {
-  const now = new Date();
-  const a = 10;
-  const b = 20;
+  const now = new Date()
+  const a = 10
+  const b = 20
   return React.createElement(
     'div',
     null,
     React.createElement('p', null, 'Hello world, it is ', now.toString()),
     React.createElement('p', null, a, ' plus ', b, ' is ', a + b)
-  );
-};
+  )
+}
 
 ReactDOM.render(
   React.createElement(App, null),
   document.getElementById('root')
-);
+)
 ```
 
 Käännöksen hoitaa [Babel](https://babeljs.io/repl/). Create-react-app:illa luoduissa projekteissa käännös on konfiguroitu tapahtumaan automaattisesti. Tulemme tutustumaan aiheeseen tarkemmin kurssin [osassa 7](/osa7).

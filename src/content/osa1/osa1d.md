@@ -402,13 +402,13 @@ näin selviää heti onko esim. joku propsia vastaava attribuutti nimetty väär
 **HUOM** kun käytät komentoa _console.log_ debuggaukseen, älä yhdistele asioita "javamaisesti" plussalla, eli sen sijaan että kirjoittaisit
 
 ```js
-console.log('propsin arvo on' + props);
+console.log('propsin arvo on' + props)
 ```
 
 erottele tulostettavat asiat pilkulla:
 
 ```js
-console.log('propsin arvo on', props);
+console.log('propsin arvo on', props)
 ```
 
 Jos yhdistät merkkijonoon olion, tuloksena on suhteellisen hyödytön tulostusmuoto
@@ -637,7 +637,7 @@ const App = (props) => {
 }
 ```
 
-Mennään lopuksi funktioita palauttavaan funktioon.
+Mennään lopuksi funktioita palauttavaan funktioon. Kuten aiemmin jo mainittiin, et tarvitse tämän osan tehtävissä funktiota palauttavia funktioita, joten voit melko huoletta hypätä seuraavan ohi jos asia tuntuu nyt hankalalta. 
 
 Muutetaan koodia seuraavasti
 

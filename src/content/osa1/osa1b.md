@@ -33,15 +33,15 @@ Tietyissä piireissä on myös ollut suosittua yrittää "simuloida" Javascripti
 Javascriptissä on muutama tapa määritellä muuttujia:
 
 ```js
-const x = 1;
-let y = 5;
+const x = 1
+let y = 5
 
-console.log(x, y); // tulostuu 1, 5
-y += 10;
-console.log(x, y); // tulostuu 1, 15
-y = 'teksti';
-console.log(x, y); // tulostuu 1, teksti
-x = 4; // aiheuttaa virheen
+console.log(x, y)   // tulostuu 1, 5
+y += 10
+console.log(x, y)   // tulostuu 1, 15
+y = 'teksti'
+console.log(x, y)   // tulostuu 1, teksti
+x = 4               // aiheuttaa virheen
 ```
 
 [const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) ei oikeastaan määrittele muuttujaa vaan _vakion_, jonka arvoa ei voi enää muuttaa. [let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let) taas määrittelee normaalin muuttujan.
@@ -202,7 +202,7 @@ Jos parameteja on vain yksi, voidaan sulut jättää määrittelystä pois:
 const nelio = p => {
   console.log(p)
   return p * p
-};
+}
 ```
 
 Jos funktio sisältää ainoastaan yhden lausekkeen, ei aaltosulkeita tarvita. Tällöin funktio palauttaa ainoan lausekkeensa arvon. Eli edellinen voitaisiin ilmaista lyhyemmin seuraavasti:
@@ -236,7 +236,7 @@ Toinen tapa on tehdä määrittely [funktiolausekkeena](https://developer.mozill
 ```js
 const keskiarvo = function(a, b) {
   return (a + b) / 2
-};
+}
 
 const vastaus = keskiarvo(2, 5)
 ```
@@ -388,7 +388,7 @@ const arto = {
   tervehdi: function() {
     console.log('hello, my name is', this.nimi)
   },
-};
+}
 
 arto.tervehdi()   // tulostuu hello, my name is Arto Hellas
 ```
@@ -403,14 +403,14 @@ const arto = {
   tervehdi: function() {
     console.log('hello, my name is', this.nimi)
   },
-};
+}
 
 arto.vanhene = function() {
   this.ika += 1
-};
+}
 
 console.log(arto.ika)   // tulostuu 35
-arto.vanhene();
+arto.vanhene()
 console.log(arto.ika)   // tulostuu 36
 ```
 
@@ -425,7 +425,7 @@ const arto = {
   laskeSumma: function(a, b) {
     console.log(a + b)
   },
-};
+}
 
 arto.laskeSumma(1, 4)   // tulostuu 5
 
@@ -444,14 +444,14 @@ const arto = {
     console.log('hello, my name is', this.nimi)
   },
   laskeSumma: function(a, b) {
-    console.log(a + b);
+    console.log(a + b)
   },
-};
+}
 
-arto.tervehdi(); // tulostuu hello, my name is Arto Hellas
+arto.tervehdi()       // tulostuu hello, my name is Arto Hellas
 
-const viiteTervehdykseen = arto.tervehdi;
-viiteTervehdykseen(); // tulostuu hello, my name is undefined
+const viiteTervehdykseen = arto.tervehdi
+viiteTervehdykseen()  // tulostuu hello, my name is undefined
 ```
 
 Kutsuttaessa metodia viitteen kautta, on metodi kadottanut tiedon siitä mikä oli alkuperäinen _this_. Toisin kuin melkein kaikissa muissa kielissä, Javascriptissa [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this):n arvo määrittyy sen mukaan _miten metodia on kutsuttu_. Kutsuttaessa metodia viitteen kautta, _this_:in arvoksi tulee ns. [globaali objekti](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) ja lopputulos ei ole yleensä ollenkaan se, mitä sovelluskehittäjä olettaa.
@@ -466,7 +466,7 @@ const arto = {
   tervehdi: function() {
     console.log('hello, my name is', this.nimi)
   },
-};
+}
 
 setTimeout(arto.tervehdi, 1000)
 ```
@@ -476,7 +476,7 @@ Javascriptissa this:in arvo siis määräytyy siitä miten metodia on kutsuttu. 
 On useita mekanismeja, joiden avulla alkuperäinen _this_ voidaan säilyttää, eräs näistä on metodin [bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) käyttö:
 
 ```js
-setTimeout(arto.tervehdi.bind(arto), 1000);
+setTimeout(arto.tervehdi.bind(arto), 1000)
 ```
 
 Komento <code>arto.tervehdi.bind(arto)</code> luo uuden funktion, missä se on sitonut _this_:in tarkoittamaan Artoa riippumatta siitä missä ja miten metodia kutsutaan.

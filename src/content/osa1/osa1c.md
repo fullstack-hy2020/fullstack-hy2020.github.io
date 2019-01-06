@@ -75,7 +75,7 @@ Koska _props_ on nyt olio
 props = {
   name: 'Arto Hellas',
   age: 35,
-};
+}
 ```
 
 voimme suoraviivaistaa komponenttia siten, että sijoitamme kenttien arvot muuttujiin _name_ ja _age_ jonka jälkeen niitä on mahdollista käyttää koodissa suoraan:
@@ -130,7 +130,7 @@ Eli koska
 props = {
   name: 'Arto Hellas',
   age: 35,
-};
+}
 ```
 
 saa <code> const { name, age } = props</code> aikaan sen, että muuttuja _name_ saa arvon 'Arto Hellas' ja muuttuja _age_ arvon 35.
@@ -442,7 +442,7 @@ const App = (props) => {
 }
 ```
 
-### Funktio joka palauttaa funktion
+### Tapahtumankäsittelijän on oltava funktio
 
 Metodit _increaseByOne_ ja _setToZero_ toimivat melkein samalla tavalla, ne asettavat uuden arvon laskurille. Tehdään koodiin yksittäinen funktio, joka sopii molempiin käyttötarkoituksiin:
 
@@ -609,6 +609,8 @@ Tässä näytetty tapa soveltaa funktioita palauttavia funktioita on oleellisest
 Jo muutamaan kertaan mainittu termi _funktionaalinen ohjelmointi_ ei ole välttämättä kaikille tässä vaiheessa tuttu. Asiaa avataan hiukan kurssin kuluessa, sillä React tukee ja osin edellyttää funktionaalisen tyylin käyttöä.
 
 **HUOM:** muutos, missä korvasimme metodit _increaseByOne_ ja _setToZero_ metodilla _setToValue_ ei välttämättä ole järkevä, sillä erikoistuneemmat metodit ovat paremmin nimettyjä. Teimme muutoksen oikeastaan ainoastaan demonstroidaksemme _currying_-tekniikan soveltamista.
+
+**HUOM2:** et todennäköisesti tarvitse tämän osan tehtävissä funktioita palauttavia funktioita, joten älä sekoita päätäsi asialla turhaan. 
 
 ### Tilan vieminen alikomponenttiin
 
