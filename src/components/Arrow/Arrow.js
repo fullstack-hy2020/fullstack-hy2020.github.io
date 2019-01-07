@@ -38,7 +38,15 @@ const Arrow = ({
               }`}
               style={arrowStyle}
             >
-              {upperCase ? arrow.text.toUpperCase() : arrow.text}
+              {arrow.link ? (
+                <Link to={arrow.link}>
+                  {upperCase ? arrow.text.toUpperCase() : arrow.text}
+                </Link>
+              ) : upperCase ? (
+                arrow.text.toUpperCase()
+              ) : (
+                arrow.text
+              )}
             </div>
             <div
               className={`arrow__point ${
