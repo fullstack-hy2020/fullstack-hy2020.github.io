@@ -6,7 +6,6 @@ import { graphql } from 'gatsby';
 import Parser from 'html-react-parser';
 import domToReact from 'html-react-parser/lib/dom-to-react';
 import React from 'react';
-import Highlight from 'react-highlight';
 
 import colors from '../colors';
 import Arrow from '../components/Arrow/Arrow';
@@ -32,22 +31,13 @@ export default function ContentTemplate({ data }) {
           <picture>
             <img
               style={{ borderColor: colorCode }}
-              alt="asd"
+              alt="fullstack content"
               src={children[0].attribs.src}
             />
           </picture>
         );
-      } else if (
-        type === 'tag' &&
-        name === 'pre' &&
-        children[0].attribs &&
-        children[0].attribs.class === 'language-js'
-      ) {
-        return (
-          <Highlight className="javascript" innerHTML={true}>
-            {domToReact(children[0], parserOptions)}
-          </Highlight>
-        );
+      } else if (type === 'tag' && name === 'pre') {
+        return <pre>{domToReact(children, parserOptions)}</pre>;
       } else if (type === 'tag' && attribs.class === 'content') {
         return (
           <div className="container">
@@ -67,7 +57,10 @@ export default function ContentTemplate({ data }) {
             className="spacing spacing--after"
           >
             <div className="container">
-              <div className="course-content col-7 push-right-3">
+              <div
+                className="course-content col-7 push-right-3"
+                style={{ borderColor: colorCode }}
+              >
                 {domToReact(children, parserOptions)}
               </div>
             </div>
@@ -117,10 +110,7 @@ export default function ContentTemplate({ data }) {
           </Banner>
           <div className="course">
             <div className="container">
-              <div
-                className="col-7 course-content push-right-3"
-                style={{ borderColor: colorCode }}
-              >
+              <div className="col-7 course-content push-right-3">
                 <p className="col-1 letter" style={{ borderColor: colorCode }}>
                   {letter}
                 </p>

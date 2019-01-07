@@ -18,18 +18,17 @@
     color: $white;
   }
 
+  em {
+    font-family: Courier;
+    font-style: normal;
+    background-color: $main;
+    padding: 0.1rem;
+  }
+
   img {
     border-width: 11px;
     border-style: solid;
     border-color: transparent;
-  }
-
-  a {
-    border: 0;
-    border-bottom-width: 2px;
-    border-color: transparent;
-    border-style: solid;
-    padding: 2px;
   }
 
   .container,
@@ -66,4 +65,22 @@
       margin-right: 1rem;
     }
   }
+}
+
+.course-content {
+  a {
+    border: 0;
+    border-bottom-width: 2px;
+    border-style: solid;
+    padding: 2px;
+  }
+}
+
+.gatsby-highlight-code-line {
+  background-color: rgba($main, 0.3);
+  display: block;
+  margin-right: -1em;
+  margin-left: -1em;
+  padding-right: 1em;
+  padding-left: 0.75em;
 }
