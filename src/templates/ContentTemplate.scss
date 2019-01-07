@@ -56,15 +56,6 @@
     font-size: 3.444rem;
     font-weight: bold;
   }
-
-  li {
-    list-style-type: none;
-
-    &::before {
-      content: '-';
-      margin-right: 1rem;
-    }
-  }
 }
 
 .course-content {

@@ -41,7 +41,12 @@ export default function ContentTemplate({ data }) {
       } else if (type === 'tag' && attribs.class === 'content') {
         return (
           <div className="container">
-            <ScrollNavigation className="col-3" />
+            <ScrollNavigation
+              part={part}
+              letter={letter}
+              currentPath={frontmatter.path}
+              className="col-3"
+            />
 
             <div className="course-content col-7">
               {domToReact(children, parserOptions)}
@@ -61,7 +66,11 @@ export default function ContentTemplate({ data }) {
                 className="course-content col-7 push-right-3"
                 style={{ borderColor: colorCode }}
               >
-                {domToReact(children, parserOptions)}
+                {children.name === 'pre' ? (
+                  <pre>domToReact(children, parserOptions)</pre>
+                ) : (
+                  domToReact(children, parserOptions)
+                )}
               </div>
             </div>
           </Banner>
