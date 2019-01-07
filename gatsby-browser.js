@@ -1,4 +1,5 @@
 import { anchorate } from 'anchorate';
+require('prismjs/themes/prism-dark.css');
 
 export const onRouteUpdate = () => {
   anchorate({
