@@ -1,0 +1,7 @@
+@import '../components/common.scss';
+
+.part-intro {
+  p:not(:last-of-type) {
+    padding-bottom: 2em;
+  }
+}

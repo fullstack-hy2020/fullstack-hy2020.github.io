@@ -4,6 +4,7 @@ exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions;
 
   const contentTemplate = path.resolve(`src/templates/ContentTemplate.js`);
+  const partIntroTemplate = path.resolve(`src/templates/PartIntroTemplate.js`);
 
   return graphql(`
     {
@@ -20,6 +21,9 @@ exports.createPages = ({ actions, graphql }) => {
               partColor
               part
               letter
+              prevPart
+              nextPart
+              navigation
             }
           }
         }
@@ -31,9 +35,11 @@ exports.createPages = ({ actions, graphql }) => {
     }
 
     result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+      const pathArr = node.frontmatter.path.split('/');
+
       createPage({
         path: node.frontmatter.path,
-        component: contentTemplate,
+        component: pathArr.length > 2 ? contentTemplate : partIntroTemplate,
         context: {},
       });
     });

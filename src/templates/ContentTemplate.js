@@ -6,6 +6,7 @@ import { graphql } from 'gatsby';
 import Parser from 'html-react-parser';
 import domToReact from 'html-react-parser/lib/dom-to-react';
 import React from 'react';
+import Highlight from 'react-highlight';
 
 import colors from '../colors';
 import Arrow from '../components/Arrow/Arrow';
@@ -16,11 +17,12 @@ import ReturnInfo from '../components/ReturnInfo/ReturnInfo';
 import ScrollNavigation from '../components/ScrollNavigation/ScrollNavigation';
 import { SubHeader } from '../components/SubHeader/SubHeader';
 
-export default function Template({ data }) {
+export default function ContentTemplate({ data }) {
   const { markdownRemark } = data;
   const { frontmatter, html } = markdownRemark;
+  const { mainImage, title, subTitle, letter, part, partColor } = frontmatter;
 
-  const colorCode = colors[frontmatter.partColor];
+  const colorCode = colors[partColor];
 
   const parserOptions = {
     replace: ({ type, name, attribs, children }) => {
@@ -33,6 +35,17 @@ export default function Template({ data }) {
               src={children[0].attribs.src}
             />
           </picture>
+        );
+      } else if (
+        type === 'tag' &&
+        name === 'pre' &&
+        children[0].attribs &&
+        children[0].attribs.class === 'language-js'
+      ) {
+        return (
+          <Highlight className="javascript" innerHTML={true}>
+            {domToReact(children[0], parserOptions)}
+          </Highlight>
         );
       } else if (type === 'tag' && attribs.class === 'content') {
         return (
@@ -72,9 +85,7 @@ export default function Template({ data }) {
             backgroundColor={colorCode}
             className="spacing--after"
             style={{
-              backgroundImage: `url(${path.resolve(
-                frontmatter.mainImage.publicURL
-              )})`,
+              backgroundImage: `url(${path.resolve(mainImage.publicURL)})`,
               backgroundPosition: 'center center',
               backgroundSize: '80%',
               backgroundRepeat: 'no-repeat',
@@ -88,11 +99,11 @@ export default function Template({ data }) {
                   { backgroundColor: colorCode, text: 'Yleistä' },
                   {
                     backgroundColor: colorCode,
-                    text: `${frontmatter.title} yleistä`,
+                    text: `${title} yleistä`,
                   },
                   {
                     backgroundColor: 'black',
-                    text: frontmatter.subTitle,
+                    text: subTitle,
                   },
                 ]}
               />
@@ -105,9 +116,9 @@ export default function Template({ data }) {
                 style={{ borderColor: colorCode }}
               >
                 <p className="col-1 letter" style={{ borderColor: colorCode }}>
-                  {frontmatter.letter}
+                  {letter}
                 </p>
-                <SubHeader headingLevel="h1" text={frontmatter.subTitle} />
+                <SubHeader headingLevel="h1" text={subTitle} />
               </div>
             </div>
             {Parser(html, parserOptions)}
@@ -116,8 +127,8 @@ export default function Template({ data }) {
           <ReturnInfo />
 
           <PrevNext
-            prev={frontmatter.part !== 0 ? frontmatter.part - 1 : undefined}
-            next={frontmatter.part !== 7 ? frontmatter.part + 1 : undefined}
+            prev={part !== 0 ? part - 1 : undefined}
+            next={part !== 7 ? part + 1 : undefined}
           />
         </div>
       </div>
@@ -125,7 +136,7 @@ export default function Template({ data }) {
   );
 }
 
-export const pageQuery = graphql`
+export const contentPageQuery = graphql`
   query($path: String!) {
     markdownRemark(frontmatter: { path: { eq: $path } }) {
       html
