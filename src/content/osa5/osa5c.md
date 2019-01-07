@@ -2,7 +2,7 @@
 title: osa 5
 subTitle: Redux
 path: /osa5/redux
-mainImage: ../../images/osa5.png
+mainImage: ../../images/part-5.svg
 part: 5
 letter: c
 partColor: pink

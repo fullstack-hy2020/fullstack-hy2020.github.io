@@ -1,10 +1,10 @@
 ---
-title: osa 1
-path: /osa1
-mainImage: ../../images/part-1.svg
-part: 1
-partColor: green
-navigation: a|/osa1/reactin_alkeet|Reactin alkeet@b|/osa1/javascript|Javascript@c|/osa1/komponentin_tila|Komponentin tila ja tapahtumankäsittely@d|/osa1/monimutkainen_tila|Monimutkaisempi tila, reactin debuggaus
+title: osa 0
+path: /osa0
+mainImage: ../../images/part-0.svg
+part: 0
+partColor: blue
+navigation: a|/osa0/yleistä|Yleistä@b|/osa0/perusteet|WEB-sovelluksen toimintaperiaatteita
 ---
 
 <div class="intro">

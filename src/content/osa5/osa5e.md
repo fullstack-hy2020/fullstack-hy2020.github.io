@@ -2,7 +2,7 @@
 title: Osa 5
 subTitle: Javascript
 path: /osa5/javascript
-mainImage: ../../images/osa5.png
+mainImage: ../../images/part-5.svg
 part: 5
 letter: e
 partColor: pink

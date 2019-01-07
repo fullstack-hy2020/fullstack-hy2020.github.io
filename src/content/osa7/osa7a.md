@@ -2,7 +2,7 @@
 title: osa 7
 subTitle: Webpack
 path: /osa7/webpack
-mainImage: ../../images/osa7.png
+mainImage: ../../images/part-7.svg
 part: 7
 letter: a
 partColor: light-blue

@@ -2,7 +2,7 @@
 title: osa 7
 subTitle: React
 path: /osa7/react
-mainImage: ../../images/osa5.png
+mainImage: ../../images/part-7.svg
 part: 7
 letter: d
 partColor: light-blue

@@ -2,7 +2,7 @@
 title: osa 1
 subTitle: Komonentin tila ja tapahtumankäsittely
 path: /osa1/komponentin_tila
-mainImage: ../../images/osa1.png
+mainImage: ../../images/part-1.svg
 part: 1
 letter: c
 partColor: green

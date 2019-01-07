@@ -1,10 +1,10 @@
 ---
-title: osa 1
-path: /osa1
-mainImage: ../../images/part-1.svg
-part: 1
-partColor: green
-navigation: a|/osa1/reactin_alkeet|Reactin alkeet@b|/osa1/javascript|Javascript@c|/osa1/komponentin_tila|Komponentin tila ja tapahtumankäsittely@d|/osa1/monimutkainen_tila|Monimutkaisempi tila, reactin debuggaus
+title: osa 4
+path: /osa4
+mainImage: ../../images/part-4.svg
+part: 4
+partColor: yellow
+navigation: a|/osa4/node-express|Node.js / Express@b|/osa4/node-testaus|Node.js -sovellusten testaus@c|/osa4/js|js@d|/osa4/mongoose|Mongoose@e|/osa4/web|web
 ---
 
 <div class="intro">

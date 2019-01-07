@@ -2,7 +2,7 @@
 title: osa 1
 subTitle: Javascriptiä
 path: /osa1/javascript
-mainImage: ../../images/osa1.png
+mainImage: ../../images/part-1.svg
 part: 1
 letter: b
 partColor: green

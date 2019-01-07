@@ -2,7 +2,7 @@
 title: osa 1
 subTitle: Monimutkaisempi tila ja Reactin debuggaus
 path: /osa1/monimutkainen_tila
-mainImage: ../../images/osa1.png
+mainImage: ../../images/part-1.svg
 part: 1
 letter: d
 partColor: green

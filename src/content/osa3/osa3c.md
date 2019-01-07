@@ -2,7 +2,7 @@
 title: osa 3
 subTitle: Mongo
 path: /osa3/mongo
-mainImage: ../../images/osa3.png
+mainImage: ../../images/part-3.svg
 part: 3
 letter: c
 partColor: light-orange

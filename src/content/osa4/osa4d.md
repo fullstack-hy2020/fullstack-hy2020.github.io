@@ -2,7 +2,7 @@
 title: osa 4
 subTitle: Mongoose
 path: /osa4/mongoose
-mainImage: ../../images/osa5.png
+mainImage: ../../images/part-4.svg
 part: 4
 letter: d
 partColor: yellow

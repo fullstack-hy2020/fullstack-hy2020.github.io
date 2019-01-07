@@ -2,7 +2,7 @@
 title: osa 0
 subTitle: Web-sovelluksen toimintaperiaatteita
 path: /osa0/yleistä
-mainImage: ../../images/osa0.png
+mainImage: ../../images/part-0.svg
 part: 0
 letter: a
 partColor: blue

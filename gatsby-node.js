@@ -21,8 +21,6 @@ exports.createPages = ({ actions, graphql }) => {
               partColor
               part
               letter
-              prevPart
-              nextPart
               navigation
             }
           }

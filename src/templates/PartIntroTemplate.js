@@ -1,5 +1,7 @@
 import './PartIntroTemplate.scss';
 
+import path from 'path';
+
 import { graphql } from 'gatsby';
 import Parser from 'html-react-parser';
 import domToReact from 'html-react-parser/lib/dom-to-react';
@@ -16,14 +18,7 @@ import PrevNext from '../components/PrevNext/PrevNext';
 export default function PartIntroTemplate({ data }) {
   const { markdownRemark } = data;
   const { frontmatter, html } = markdownRemark;
-  const {
-    mainImage,
-    title,
-    partColor,
-    prevPart,
-    nextPart,
-    navigation,
-  } = frontmatter;
+  const { mainImage, title, partColor, part, navigation } = frontmatter;
 
   const parserOptions = {
     replace: ({ type, attribs, children }) => {
@@ -42,7 +37,7 @@ export default function PartIntroTemplate({ data }) {
     <Layout>
       <Banner
         style={{
-          backgroundImage: `url(${mainImage})`,
+          backgroundImage: `url(${path.resolve(mainImage.publicURL)})`,
           backgroundPosition: 'center right',
           backgroundSize: '80%',
           backgroundRepeat: 'no-repeat',
@@ -80,9 +75,10 @@ export default function PartIntroTemplate({ data }) {
       </Banner>
 
       <PrevNext
-        prev={prevPart ? prevPart : undefined}
-        next={nextPart ? nextPart : undefined}
+        prev={part !== 0 ? part - 1 : undefined}
+        next={part !== 7 ? part + 1 : undefined}
       />
+
       <Footer />
     </Layout>
   );
@@ -101,8 +97,6 @@ export const partInfoQuery = graphql`
         partColor
         part
         letter
-        prevPart
-        nextPart
         navigation
       }
     }

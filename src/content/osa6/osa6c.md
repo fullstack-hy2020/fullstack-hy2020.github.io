@@ -2,7 +2,7 @@
 title: osa 6
 subTitle: React
 path: /osa6/react
-mainImage: ../../images/osa6.png
+mainImage: ../../images/part-6.svg
 part: 6
 letter: c
 partColor: violet

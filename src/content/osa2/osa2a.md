@@ -2,7 +2,7 @@
 title: osa 2
 subTitle: Web-sovellusten toiminnan perusteet
 path: /osa2/perusteet
-mainImage: ../../images/osa2.png
+mainImage: ../../images/part-2.svg
 part: 2
 letter: a
 partColor: dark-orange

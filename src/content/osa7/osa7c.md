@@ -2,7 +2,7 @@
 title: osa 7
 subTitle: Testaus
 path: /osa7/testaus
-mainImage: ../../images/osa5.png
+mainImage: ../../images/part-7.svg
 part: 7
 letter: c
 partColor: light-blue

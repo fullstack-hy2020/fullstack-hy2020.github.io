@@ -2,7 +2,7 @@
 title: osa 7
 subTitle: Tulevaisuuden trendejä
 path: /osa7/trendit
-mainImage: ../../images/osa5.png
+mainImage: ../../images/part-7.svg
 part: 7
 letter: g
 partColor: light-blue

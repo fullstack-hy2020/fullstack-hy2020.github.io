@@ -2,7 +2,7 @@
 title: osa5
 subTitle: React
 path: /osa5/react
-mainImage: ../../images/osa5.png
+mainImage: ../../images/part-5.svg
 part: 5
 letter: a
 partColor: pink

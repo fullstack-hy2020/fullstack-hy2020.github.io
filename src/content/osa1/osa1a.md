@@ -2,7 +2,7 @@
 title: osa 1
 subTitle: Reactin alkeet
 path: /osa1/reactin_alkeet
-mainImage: ../../images/osa1.png
+mainImage: ../../images/part-1.svg
 part: 1
 letter: a
 partColor: green

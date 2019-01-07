@@ -11,6 +11,7 @@ import Highlight from 'react-highlight';
 import colors from '../colors';
 import Arrow from '../components/Arrow/Arrow';
 import { Banner } from '../components/Banner/Banner';
+import Footer from '../components/Footer/Footer';
 import Layout from '../components/layout';
 import PrevNext from '../components/PrevNext/PrevNext';
 import ReturnInfo from '../components/ReturnInfo/ReturnInfo';
@@ -96,10 +97,15 @@ export default function ContentTemplate({ data }) {
               <Arrow
                 upperCase
                 content={[
-                  { backgroundColor: colorCode, text: 'Yleistä' },
                   {
                     backgroundColor: colorCode,
-                    text: `${title} yleistä`,
+                    text: 'Yleistä',
+                    link: '/about',
+                  },
+                  {
+                    backgroundColor: colorCode,
+                    text: title,
+                    link: `/osa${part}`,
                   },
                   {
                     backgroundColor: 'black',
@@ -132,6 +138,8 @@ export default function ContentTemplate({ data }) {
           />
         </div>
       </div>
+
+      <Footer />
     </Layout>
   );
 }
