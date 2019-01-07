@@ -22,9 +22,9 @@ $ cd osa1
 $ npm start
 </pre>
 
-Kaikki tässä (ja jatkossa) annettavat merkillä $ alkavat komennot on kirjoitettu terminaaliin eli komentoriville. Merkkiä $ tule kirjoittaa, sillä se edustaa komentokehoitetta.
+Kaikki tässä (ja jatkossa) annettavat merkillä $alkavat komennot on kirjoitettu terminaaliin eli komentoriville. Merkkiä$ tule kirjoittaa, sillä se edustaa komentokehoitetta.
 
-React on koko ajan aktiivisen kehityksen alla. Tämän vuoden ensimmäisen neljänneksen aikana Reactiin on tulossa erittäin merkittävä lisäys [hookit](https://reactjs.org/docs/hooks-intro.html) jotka tulevat vaikuttamaan merkittävästi siihen miten Reactia tullaan tulevaisuudessa käyttämään. Koska haluamme elää kehityksen eturintamassa käytämme kurssilla hookeja alusta asti. 
+React on koko ajan aktiivisen kehityksen alla. Tämän vuoden ensimmäisen neljänneksen aikana Reactiin on tulossa erittäin merkittävä lisäys [hookit](https://reactjs.org/docs/hooks-intro.html) jotka tulevat vaikuttamaan merkittävästi siihen miten Reactia tullaan tulevaisuudessa käyttämään. Koska haluamme elää kehityksen eturintamassa käytämme kurssilla hookeja alusta asti.
 
 Hookit eivät ole vielä Reactin uusimmassa virallisessa julkaisussa 0.16.7, mutta ne löytyvät hieman [erikoisesti numeroidusta](https://reactjs.org/blog/2018/12/19/react-v-16-7.html) julkaisusta 0.16.7-alpha.2
 
@@ -142,7 +142,7 @@ const App = () => {
   const now = new Date()
   const a = 10
   const b = 20
-  
+
   return (
     <div>
       <p>Hello world, it is {now.toString()}</p>
@@ -161,25 +161,25 @@ Näyttää siltä, että React-komponentti palauttaa HTML-koodia. Näin ei kuite
 Käännösvaiheen jälkeen ohjelmamme näyttää seuraavalta:
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 const App = () => {
-  const now = new Date()
-  const a = 10
-  const b = 20
+  const now = new Date();
+  const a = 10;
+  const b = 20;
   return React.createElement(
     'div',
     null,
     React.createElement('p', null, 'Hello world, it is ', now.toString()),
     React.createElement('p', null, a, ' plus ', b, ' is ', a + b)
-  )
-}
+  );
+};
 
 ReactDOM.render(
   React.createElement(App, null),
   document.getElementById('root')
-)
+);
 ```
 
 Käännöksen hoitaa [Babel](https://babeljs.io/repl/). Create-react-app:illa luoduissa projekteissa käännös on konfiguroitu tapahtumaan automaattisesti. Tulemme tutustumaan aiheeseen tarkemmin kurssin [osassa 7](/osa7).
@@ -191,7 +191,7 @@ Käytännössä JSX on melkein kuin HTML:ää sillä erotuksella, että mukaan v
 JSX on "XML:n kaltainen", eli jokainen tagi tulee sulkea. Esimerkiksi rivinvaihto on tyhjä elementti, joka kirjoitetaan HTML:ssä tyypillisesti
 
 ```html
-<br>
+<br />
 ```
 
 mutta JSX:ää kirjoittaessa tagi on pakko sulkea:
@@ -398,7 +398,7 @@ Nyt käännös menee läpi ja Reactin generoimaan DOM:iin ei tule ylimääräist
 
   <h4>1.1: jako komponenteiksi</h4>
 
-<em>Tässä tehtävässä aloitettavaa ohjelmaa kehitellään eteenpäin muutamassa seuraavassa tehtävässä. Tässä ja kurssin aikana muissakin vastaantulevissa tehtäväsarjoissa ohjelman lopullisen version palauttaminen  riittää, voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.</em>
+<em>Tässä tehtävässä aloitettavaa ohjelmaa kehitellään eteenpäin muutamassa seuraavassa tehtävässä. Tässä ja kurssin aikana muissakin vastaantulevissa tehtäväsarjoissa ohjelman lopullisen version palauttaminen riittää, voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.</em>
 
 Luo create-react-app:illa uusi sovellus. Muuta <i>index.js</i> muotoon
 

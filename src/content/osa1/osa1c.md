@@ -42,22 +42,24 @@ const App = () => {
 Laajennetaan komponenttia _Hello_ siten, että se antaa arvion tervehdittävän henkilön syntymävuodesta:
 
 ```js
-const Hello = (props) => {
+const Hello = props => {
   const bornYear = () => {
-    const yearNow = new Date().getFullYear()
-    return yearNow - props.age
-  }
+    const yearNow = new Date().getFullYear();
+    return yearNow - props.age;
+  };
 
   return (
     <div>
-      <p>Hello {props.name}, you are {props.age} years old</p>
+      <p>
+        Hello {props.name}, you are {props.age} years old
+      </p>
       <p>So you were probably born {bornYear()}</p>
     </div>
-  )
-}
+  );
+};
 ```
 
-Syntymävuoden arvauksen tekevä logiikka on erotettu omaksi funktiokseen, jota kutsutaan renderöinnin yhteydessä. 
+Syntymävuoden arvauksen tekevä logiikka on erotettu omaksi funktiokseen, jota kutsutaan renderöinnin yhteydessä.
 
 Tervehdittävän henkilön ikää ei metodille tarvitse välittää parametrina, sillä funktio näkee sen sisältävälle komponentille välitettävät propsit.
 
@@ -75,7 +77,7 @@ Koska _props_ on nyt olio
 props = {
   name: 'Arto Hellas',
   age: 35,
-}
+};
 ```
 
 voimme suoraviivaistaa komponenttia siten, että sijoitamme kenttien arvot muuttujiin _name_ ja _age_ jonka jälkeen niitä on mahdollista käyttää koodissa suoraan:
@@ -101,11 +103,11 @@ Huomaa, että olemme myös hyödyntäneet nuolifunktion kompaktimpaa kirjoitusta
 Seuraavat ovat siis vaihtoehtoiset tavat määritellä sama funktio:
 
 ```js
-const bornYear = () => new Date().getFullYear() - age
+const bornYear = () => new Date().getFullYear() - age;
 
 const bornYear = () => {
-  return new Date().getFullYear() - age
-}
+  return new Date().getFullYear() - age;
+};
 ```
 
 Destrukturointi tekee apumuuttujien määrittelyn vielä helpommaksi, sen avulla voimme "kerätä" olion oliomuuttujien arvot suoraan omiin yksittäisiin muuttujiin:
@@ -130,7 +132,7 @@ Eli koska
 props = {
   name: 'Arto Hellas',
   age: 35,
-}
+};
 ```
 
 saa <code> const { name, age } = props</code> aikaan sen, että muuttuja _name_ saa arvon 'Arto Hellas' ja muuttuja _age_ arvon 35.
@@ -139,18 +141,20 @@ Voimme viedä destrukturoinnin vielä askeleen verran pidemmälle
 
 ```js
 const Hello = ({ name, age }) => {
-  const bornYear = () => new Date().getFullYear() - age
+  const bornYear = () => new Date().getFullYear() - age;
 
   return (
     <div>
-      <p>Hello {name}, you are {age} years old</p>
+      <p>
+        Hello {name}, you are {age} years old
+      </p>
       <p>So you were probably born {bornYear()}</p>
     </div>
-  )
-}
+  );
+};
 ```
 
-Destrukturointi tehdään nyt suodaan sijoittamalla komponentin saamat propsit muuttujiin _name_ ja _age_. 
+Destrukturointi tehdään nyt suodaan sijoittamalla komponentin saamat propsit muuttujiin _name_ ja _age_.
 
 Eli sensijaan että props-olio otettaisiin vastaan muuttujaan _props_ ja sen kentät sijoitettaisiin tämän jälkeen muuttujiin _name_ ja _age_
 
@@ -221,16 +225,16 @@ Hieman mielenkiintoisempaan toiminnallisuuteen pääsemme tekemällä renderöin
 
 ```js
 setInterval(() => {
-  renderoi()
-  counter += 1
-}, 1000)
+  renderoi();
+  counter += 1;
+}, 1000);
 ```
 
 _ReactDOM.render_-metodin toistuva kutsuminen ei kuitenkaan ole suositeltu tapa päivittää komponentteja. Tutustutaan seuraavaksi järkevämpään tapaan.
 
 ### Tilallinen komponentti
 
-Tähänastiset komponenttimme ovat olleet siinä mielessä yksinkertaisia, että niillä ei ole ollut ollenkaan omaa tilaa, joka voisi muuttua komponentin elinaikana. 
+Tähänastiset komponenttimme ovat olleet siinä mielessä yksinkertaisia, että niillä ei ole ollut ollenkaan omaa tilaa, joka voisi muuttua komponentin elinaikana.
 
 Määritellään nyt sovelluksemme komonentille _App_ tila Reactin [state hookin](https://reactjs.org/docs/hooks-state.html) avulla.
 
@@ -351,7 +355,7 @@ Reactissa funktion rekisteröiminen tapahtumankäsittelijäksi tapahtumalle _cli
 const App = (props) => {
   const [ counter, setCounter ] = useState(0)
 
-  const handleClick = () => {  
+  const handleClick = () => {
     console.log('klicked')
   }
 
@@ -538,19 +542,19 @@ Jos et ole aiemmin törmännyt tekniikkaan, siihen totutteluun voi mennä tovi.
 Olemme siis määritelleet tapahtumankäsittelijäfunktion _setToValue_ seuraavasti:
 
 ```js
-const setToValue = (value) => {
+const setToValue = value => {
   return () => {
-    setCounter(value)
-  }
-}
+    setCounter(value);
+  };
+};
 ```
 
 Kun komponentissa määritellään tapahtumankäsittelijä kutsumalla <code>this.setToValue(0)</code> on lopputuloksena funktio
 
 ```js
 () => {
-  setCounter(0)
-}
+  setCounter(0);
+};
 ```
 
 eli juuri oikeanlainen tilan nollaamisen aiheuttava funktio!
@@ -559,41 +563,40 @@ Plus-napin tapahtumankäsittelijä määritellään kutsumalla <code>setCounter(
 
 ```js
 () => {
-  setCounter(1)
-}
+  setCounter(1);
+};
 ```
 
 Vastaavasti, kun laskurin tila on esim 41, tulee plus-napin tapahtumakuuntelijaksi
 
 ```js
 () => {
-  setCounter(42)
-}
+  setCounter(42);
+};
 ```
 
 Tarkastellaan vielä hieman metodia _asetaArvoon_:
 
 ```js
-const setToValue = (value) => {
+const setToValue = value => {
   return () => {
-    setCounter(value)
-  }
-}
+    setCounter(value);
+  };
+};
 ```
 
 Koska metodi itse sisältää ainoastaan yhden komennon, eli _returnin_, joka palauttaa funktion, voidaan hyödyntää nuolifunktion tiiviimpää muotoa:
 
 ```js
-const setToValue = (value) => 
-  () => {
-    setCounter(value)
-  }
+const setToValue = value => () => {
+  setCounter(value);
+};
 ```
 
 Usein tälläisissä tilanteissa kaikki kirjoitetaan samalle riville, jolloin tuloksena on "kaksi nuolta sisältävä funktio":
 
 ```js
-const setToValue = (value) => () => setCounter(value)
+const setToValue = value => () => setCounter(value);
 ```
 
 Kaksinuolisen funktion voi ajatella funktiona, jota lopullisen tuloksen saadakseen täytyy kutsua kaksi kertaa.
@@ -601,7 +604,7 @@ Kaksinuolisen funktion voi ajatella funktiona, jota lopullisen tuloksen saadakse
 Ensimmäisellä kutsulla "konfiguroidaan" varsinainen funktio, sijoittamalla osalle parametreista arvo. Eli kutsu <code>setToValue(5)</code> sitoo muuttujaan _value_ arvon 5 ja funktiosta "jää jäljelle" seuraava funktio:
 
 ```js
-() => setCounter(5)
+() => setCounter(5);
 ```
 
 Tässä näytetty tapa soveltaa funktioita palauttavia funktioita on oleellisesti sama asia mistä funktionaalisessa ohjelmoinnissa käytetään termiä [currying](http://www.datchley.name/currying-vs-partial-application/). Termi currying ei ole lähtöisin funktionaalisen ohjelmoinnin piiristä vaan sillä on juuret [syvällä matematiikassa](https://en.wikipedia.org/wiki/Currying).
@@ -610,7 +613,7 @@ Jo muutamaan kertaan mainittu termi _funktionaalinen ohjelmointi_ ei ole vältt�
 
 **HUOM:** muutos, missä korvasimme metodit _increaseByOne_ ja _setToZero_ metodilla _setToValue_ ei välttämättä ole järkevä, sillä erikoistuneemmat metodit ovat paremmin nimettyjä. Teimme muutoksen oikeastaan ainoastaan demonstroidaksemme _currying_-tekniikan soveltamista.
 
-**HUOM2:** et todennäköisesti tarvitse tämän osan tehtävissä funktioita palauttavia funktioita, joten älä sekoita päätäsi asialla turhaan. 
+**HUOM2:** et todennäköisesti tarvitse tämän osan tehtävissä funktioita palauttavia funktioita, joten älä sekoita päätäsi asialla turhaan.
 
 ### Tilan vieminen alikomponenttiin
 
@@ -707,11 +710,11 @@ const App = (props) => {
       <Button
         handleClick={setToValue(counter + 1)}
         text='plus'
-      /> 
+      />
       <Button
         handleClick={setToValue(0)}
         text='zero'
-      />     
+      />
     </div>
   )
 }

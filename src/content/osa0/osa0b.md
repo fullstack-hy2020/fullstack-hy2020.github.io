@@ -23,7 +23,7 @@ partColor: blue
   - single page app -periaate
   - Chrome developer konsolin peruskäyttö
 
-## Web-sovelluksen toimintaperiaatteita ##
+## Web-sovelluksen toimintaperiaatteita
 
 Ennen kuin aloitamme ohjelmoinnin, käymme läpi web-sovellusten toimintaperiaatteita tarkastelemalla osoitteessa <https://fullstack-exampleapp.herokuapp.com/> olevaa esimerkkisovellusta. Huom. sovelluksen toinen versio on osoitteessa <https://fullstack-example.now.sh>, voit käyttää kumpaa vaan.
 
@@ -42,7 +42,7 @@ Avataan selaimella [esimerkkisovellus](https://fullstack-exampleapp.herokuapp.co
 
 Konsoli avautuu macilla painamalla yhtä aikaa _alt_ _cmd_ ja _i_.
 
-Ennen kun jatkat eteenpäin, selvitä miten saat koneellasi konsolin auki (googlaa tarvittaessa) ja muista pitää se auki *aina* kun teet web-sovelluksia.
+Ennen kun jatkat eteenpäin, selvitä miten saat koneellasi konsolin auki (googlaa tarvittaessa) ja muista pitää se auki _aina_ kun teet web-sovelluksia.
 
 Konsoli näyttää seuraavalta:
 
@@ -57,6 +57,7 @@ Varmista, että välilehti _Network_ on avattuna ja aktivoi valinta _Disable cac
 Selain ja web-palvelin kommunikoivat keskenään [HTTP](https://developer.mozilla.org/fi/docs/Web/HTTP)-protokollaa käyttäen. Avoinna oleva konsolin Network-tabi kertoo miten selain ja palvelin kommunikoivat.
 
 Kun nyt reloadaat sivun (eli painat F5-näppäintä tai selaimessa olevaa symbolia &#8634;), kertoo konsoli, että tapahtuu kaksi asiaa
+
 - selain hakee web-palvelimelta sivun _fullstack-exampleapp.herokuapp.com/_ sisällön
 - ja lataa kuvan _kuva.png_
 
@@ -103,8 +104,8 @@ Palvelin on muodostanut dokumentin jollain tavalla. Dokumentti voi olla _staatti
 Etusivun muodostava koodi näyttää seuraavalta:
 
 ```js
-const getFrontPageHtml = (noteCount) => {
-  return (`
+const getFrontPageHtml = noteCount => {
+  return `
     <!DOCTYPE html>
     <html>
       <head>
@@ -118,13 +119,13 @@ const getFrontPageHtml = (noteCount) => {
         </div>
       </body>
     </html>
-  `)
-}
+  `;
+};
 
 app.get('/', (req, res) => {
-  const page = getFrontPageHtml(notes.length)
-  res.send(page)
-})
+  const page = getFrontPageHtml(notes.length);
+  res.send(page);
+});
 ```
 
 Koodia ei tarvitse vielä ymmärtää, mutta käytännössä HTML-sivun sisältö on talletettu ns. template stringinä, eli merkkijonona, jonka sekaan on mahdollisuus evaluoida esim. muuttujien arvoja. Etusivun dynaamisesti muuttuva osa, eli muistiinpanojen lukumäärä (koodissa _noteCount_) korvataan template stringissä sen hetkisellä konkreettisella lukuarvolla (koodissa _notes.length_).
@@ -153,29 +154,29 @@ HTML-koodin [head](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hea
 Ladattu Javascript-koodi näyttää seuraavalta:
 
 ```js
-var xhttp = new XMLHttpRequest()
+var xhttp = new XMLHttpRequest();
 
-xhttp.onreadystatechange = function () {
+xhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
-    const data = JSON.parse(this.responseText)
-    console.log(data)
+    const data = JSON.parse(this.responseText);
+    console.log(data);
 
-    var ul = document.createElement('ul')
-    ul.setAttribute('class', 'notes')
+    var ul = document.createElement('ul');
+    ul.setAttribute('class', 'notes');
 
     data.forEach(function(note) {
-      var li = document.createElement('li')
+      var li = document.createElement('li');
 
-      ul.appendChild(li)
-      li.appendChild(document.createTextNode(note.content))
-    })
+      ul.appendChild(li);
+      li.appendChild(document.createTextNode(note.content));
+    });
 
-    document.getElementById('notes').appendChild(ul)
+    document.getElementById('notes').appendChild(ul);
   }
-}
+};
 
-xhttp.open('GET', '/data.json', true)
-xhttp.send()
+xhttp.open('GET', '/data.json', true);
+xhttp.send();
 ```
 
 Koodin yksityiskohdat eivät ole tässä osassa oleellisia, koodia on kuitenkin liitetty mukaan tekstin ja kuvien mausteeksi. Pääsemme kunnolla koodin pariin vasta osassa 1. Tämän osan esimerkkisovelluksen koodi ei itseasiassa ole ollenkaan relevanttia kurssilla käytettävien ohjelmointitekniikoiden kannalta.
@@ -187,8 +188,8 @@ Heti ladattuaan _script_-tagin sisältämän Javascriptin selain suorittaa koodi
 Kaksi viimeistä riviä määrittelevät, että selain tekee GET-tyyppisen HTTP-pyynnön palvelimen osoitteeseen _/data.json_:
 
 ```js
-xhttp.open('GET', '/data.json', true)
-xhttp.send()
+xhttp.open('GET', '/data.json', true);
+xhttp.send();
 ```
 
 Kyseessä on alin Network-välilehden näyttämistä selaimen tekemistä pyynnöistä.
@@ -206,38 +207,38 @@ Ylläoleva muistiinpanojen sivun Javascript-koodi siis lataa muistiinpanot sisä
 Tämän saa aikaan seuraava koodi:
 
 ```js
-const data = JSON.parse(this.responseText)
-console.log(data)
+const data = JSON.parse(this.responseText);
+console.log(data);
 
-var ul = document.createElement('ul')
-ul.setAttribute('class', 'notes')
+var ul = document.createElement('ul');
+ul.setAttribute('class', 'notes');
 
 data.forEach(function(note) {
-  var li = document.createElement('li')
+  var li = document.createElement('li');
 
-  ul.appendChild(li)
-  li.appendChild(document.createTextNode(note.content))
-})
+  ul.appendChild(li);
+  li.appendChild(document.createTextNode(note.content));
+});
 
-document.getElementById('notes').appendChild(ul)
+document.getElementById('notes').appendChild(ul);
 ```
 
 Koodi muodostaa ensin järjestämätöntä listaa edustavan [ul](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul)-tagin:
 
 ```js
-var ul = document.createElement('ul')
-ul.setAttribute('class', 'notes')
+var ul = document.createElement('ul');
+ul.setAttribute('class', 'notes');
 ```
 
 ja lisää ul:n sisään yhden [li](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li)-elementin kutakin muistiinpanoa kohti. Ainoastaan muistiinpanon _content_-kenttä tulee li-elementin sisällöksi, raakadatassa olevia aikaleimoja ei käytetä mihinkään.
 
 ```js
 data.forEach(function(note) {
-  var li = document.createElement('li')
+  var li = document.createElement('li');
 
-  ul.appendChild(li)
-  li.appendChild(document.createTextNode(note.content))
-})
+  ul.appendChild(li);
+  li.appendChild(document.createTextNode(note.content));
+});
 ```
 
 Avaa nyt konsolin _Console_-välilehti:
@@ -251,33 +252,33 @@ Painamalla rivin alussa olevaa kolmiota saat laajennettua konsolissa olevan rivi
 Konsoliin ilmestynyt tulostus johtuu siitä, että koodiin oli lisätty komento _console.log_:
 
 ```js
-const data = JSON.parse(this.responseText)
-console.log(data)
+const data = JSON.parse(this.responseText);
+console.log(data);
 ```
 
 eli vastaanotettuaan datan palvelimelta, koodi tulostaa datan konsoliin.
 
 Konsolin välilehti _Console_ sekä komento _console.log_ tulevat varmasti erittäin tutuiksi kurssin kuluessa.
 
-
-### Tapahtumankäsittelijä ja takaisinkutsu ###
+### Tapahtumankäsittelijä ja takaisinkutsu
 
 Koodin rakenne on hieman erikoinen:
 
 ```js
-var xhttp = new XMLHttpRequest()
+var xhttp = new XMLHttpRequest();
 
-xhttp.onreadystatechange = function () {
+xhttp.onreadystatechange = function() {
   // koodi, joka käsittelee palvelimen vastauksen
-}
+};
 
-xhttp.open('GET', '/data.json', true)
-xhttp.send()
+xhttp.open('GET', '/data.json', true);
+xhttp.send();
 ```
 
 eli palvelimelle tehtävä pyyntö suoritetaan vasta viimeisellä rivillä. Palvelimen vastauksen käsittelyn määrittelevä koodi on kirjoitettu jo aiemmin. Mistä on kyse?
 
 Rivillä
+
 ```js
 xhttp.onreadystatechange = function () {
 ```
@@ -285,16 +286,16 @@ xhttp.onreadystatechange = function () {
 kyselyn tekevään <code>xhttp</code>-olioon määritellään _tapahtumankäsittelijä_ (event handler) tilanteelle _onreadystatechange_. Kun kyselyn tekevän olion tila muuttuu, kutsuu selain tapahtumankäsittelijänä olevaa funktiota. Funktion koodi tarkastaa, että [readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState):n arvo on 4 (joka kuvaa tilannetta _The operation is complete_) ja, että vastauksen HTTP-statuskoodi on onnistumisesta kertova 200.
 
 ```js
-xhttp.onreadystatechange = function () {
+xhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
     // koodi, joka käsittelee palvelimen vastauksen
   }
-}
+};
 ```
 
 Tapahtumankäsittelijöihin liittyvä mekanismi koodin suorittamiseen on Javascriptissä erittäin yleistä. Tapahtumankäsittelijöinä olevia Javascript-funktioita kutsutaan [callback](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function)- eli takaisinkutsufunktioiksi, sillä sovelluksen koodi ei kutsu niitä itse, vaan suoritusympäristö, eli web-selain suorittaa funktion kutsumisen sopivana ajankohtana, eli kyseisen _tapahtuman_ tapahduttua.
 
-### Document Object Model eli DOM ###
+### Document Object Model eli DOM
 
 Voimme ajatella, että HTML-sivut muodostavat implisiittisen puurakenteen
 
@@ -329,23 +330,23 @@ Edellisessä luvussa esittelemämme Javascript-koodi käytti nimenomaan DOM-apia
 Allaoleva koodi luo muuttujaan _ul_ DOM-apin avulla uuden "solmun" ja lisää sille joukon lapsisolmuja:
 
 ```js
-var ul = document.createElement('ul')
+var ul = document.createElement('ul');
 
 data.forEach(function(note) {
-  var li = document.createElement('li')
+  var li = document.createElement('li');
 
-  ul.appendChild(li)
-  li.appendChild(document.createTextNode(note.content))
-})
+  ul.appendChild(li);
+  li.appendChild(document.createTextNode(note.content));
+});
 ```
 
 lopulta muuttujassa _ul_ oleva puun palanen yhdistetään sopivaan paikkaan koko sovelluksen HTML-koodia edustavassa puussa:
 
 ```js
-document.getElementById('notes').appendChild(ul)
+document.getElementById('notes').appendChild(ul);
 ```
 
-### document-olio ja sivun manipulointi konsolista ###
+### document-olio ja sivun manipulointi konsolista
 
 HTML-dokumenttia esittävän DOM-puun ylimpänä solmuna on olio nimeltään _document_. Olioon pääsee käsiksi Console-välilehdeltä:
 
@@ -354,7 +355,7 @@ HTML-dokumenttia esittävän DOM-puun ylimpänä solmuna on olio nimeltään _do
 Tiedot saa esiin komennolla:
 
 ```js
-document
+document;
 ```
 
 Voimme suorittaa konsolista käsin DOM-apin avulla erilaisia operaatioita selaimessa näytettävälle web-sivulle hyödyntämällä _document_-olioa.
@@ -362,28 +363,29 @@ Voimme suorittaa konsolista käsin DOM-apin avulla erilaisia operaatioita selaim
 Lisätään nyt sivulle uusi muistiinpano suoraan konsolista.
 
 Haetaan ensin sivulta muistiinpanojen lista, eli sivun ul-elementeistä ensimmäinen:
+
 ```js
-lista = document.getElementsByTagName('ul')[0]
+lista = document.getElementsByTagName('ul')[0];
 ```
 
 luodaan uusi li-elementti ja lisätään sille sopiva tekstisisältö:
 
 ```js
-uusi = document.createElement('li')
-uusi.textContent = 'Sivun manipulointi konsolista on helppoa'
+uusi = document.createElement('li');
+uusi.textContent = 'Sivun manipulointi konsolista on helppoa';
 ```
 
 liitetään li-elementti listalle:
 
 ```js
-lista.appendChild(uusi)
+lista.appendChild(uusi);
 ```
 
 ![](../images/0/16.png)
 
 Vaikka selaimen näyttämä sivu päivittyy, ei muutos ole lopullinen. Jos sivu uudelleenladataan, katoaa uusi muistiinpano, sillä muutos ei mennyt palvelimelle asti. Selaimen lataama Javascript luo muistiinpanojen listan aina palvelimelta osoitteesta <https://fullstack-exampleapp.herokuapp.com/data.json> haettavan JSON-muotoisen raakadatan perusteella.
 
-### CSS ###
+### CSS
 
 Muistiinpanojen sivun HTML-koodin _head_-osio sisältää [link](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link)-tagin, joka määrittelee, että selaimen tulee ladata palvelimelta osoitteesta [main.css](https://fullstack-exampleapp.herokuapp.com/main.css) sivulla käytettävä [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)-tyylitiedosto.
 
@@ -426,7 +428,7 @@ Konsolin _Elements_-välilehdellä on mahdollista manipuloida elementtien tyylej
 
 Tehdyt muutokset eivät luonnollisestikaan jää voimaan kun selaimen sivu uudelleenladataan, eli jos muutokset halutaan pysyviksi, tulee ne konsolissa tehtävien kokeilujen jälkeen tallettaa palvelimella olevaan tyylitiedostoon.
 
-### Javascriptia sisältävän sivun lataaminen - kertaus ###
+### Javascriptia sisältävän sivun lataaminen - kertaus
 
 Kerrataan vielä mitä tapahtuu kun selaimessa avataan sivu _fullstack-exampleapp.herokuapp.com/notes_
 
@@ -438,7 +440,7 @@ Kerrataan vielä mitä tapahtuu kun selaimessa avataan sivu _fullstack-exampleap
 - selain alkaa suorittaa hakemaansa Javascript-koodia, joka tekee HTTP GET -pyynnön muistiinpanot json-muotoisena raakadatana palauttavaan osoitteeseen _fullstack-exampleapp.herokuapp.com/data.json_
 - datan saapuessa selain suorittaa _tapahtumankäsittelijän_, joka renderöin DOM-apia hyväksikäyttäen muistiinpanot ruudulle
 
-### Lomake ja HTTP POST ###
+### Lomake ja HTTP POST
 
 Tutkitaan seuraavaksi sitä, miten uusien muistiinpanojen luominen tapahtuu. Tätä varten muistiinpanojen sivu sisältää lomakkeen eli [form-elementin](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form).
 
@@ -452,7 +454,7 @@ Lomakkeen lähettäminen aiheuttaa yllättäen yhteensä _viisi_ HTTP-pyyntöä.
 
 ![](../images/0/22.png)
 
-Kyseessä on siis [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) -pyyntö ja se on tehty palvelimen osoitteeseen <em>new\_note</em>. Palvelin vastaa pyyntöön HTTP-statuskoodilla 302. Kyseessä on ns. [uudelleenohjauspyyntö](https://en.wikipedia.org/wiki/URL_redirection) eli redirectaus, minkä avulla palvelin kehottaa selainta tekemään automaattisesti uuden HTTP GET -pyynnön headerin _Location_ kertomaan paikkaan, eli osoitteeseen _notes_.
+Kyseessä on siis [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) -pyyntö ja se on tehty palvelimen osoitteeseen <em>new_note</em>. Palvelin vastaa pyyntöön HTTP-statuskoodilla 302. Kyseessä on ns. [uudelleenohjauspyyntö](https://en.wikipedia.org/wiki/URL_redirection) eli redirectaus, minkä avulla palvelin kehottaa selainta tekemään automaattisesti uuden HTTP GET -pyynnön headerin _Location_ kertomaan paikkaan, eli osoitteeseen _notes_.
 
 Selain siis lataa uudelleen muistiinpanojen sivun. Sivunlataus saa aikaan myös kolme muuta HTTP-pyyntöä: tyylitiedoston (main.css), Javascript-koodin (main.js) ja muistiinpanojen raakadatan (data.json) lataamisen.
 
@@ -470,11 +472,11 @@ POST-pyynnöstä huolehtiva palvelimen koodi on yksinkertainen (huom: tämä koo
 app.post('/new_note', (req, res) => {
   notes.push({
     content: req.body.note,
-    date: new Date()
-  })
+    date: new Date(),
+  });
 
-  return res.redirect('/notes')
-})
+  return res.redirect('/notes');
+});
 ```
 
 POST-pyyntöihin liitettävä data lähetetään pyynnön mukana "runkona" eli [bodynä](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST). Palvelin saa POST-pyynnön datan pyytämällä sitä pyyntöä vastaavan olion _req_ kentästä _req.body_.
@@ -486,8 +488,8 @@ Palvelin luo uutta muistiinpanoa vastaavan olion ja laittaa sen muistiinpanot si
 ```js
 notes.push({
   content: req.body.note,
-  date: new Date()
-})
+  date: new Date(),
+});
 ```
 
 Muistiinpano-olioilla on siis kaksi kenttää, varsinaisen sisällön kuvaava _content_ ja luomishetken kertova _date_.
@@ -498,7 +500,7 @@ Palvelin ei talleta muistiinpanoja tietokantaan, joten uudet muistiinpanot katoa
 
 Sovelluksen muistiinpanojen sivu noudattaa vuosituhannen alun tyyliä ja se "käyttää AJAX:ia", eli on silloisen kehityksen aallonharjalla.
 
-[AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) (Asynchronous Javascript and XML) on termi, joka lanseerattiin vuoden 2005 helmikuussa kuvaamaan selainten kehityksen mahdollistamaa vallankumouksellista tapaa, missä HTML-sivulle sisällytetyn Javascriptin avulla oli mahdollista ladata sivulle lisää sisältöä lataamatta itse sivua uudelleen.
+[AJAX](<https://en.wikipedia.org/wiki/Ajax_(programming)>) (Asynchronous Javascript and XML) on termi, joka lanseerattiin vuoden 2005 helmikuussa kuvaamaan selainten kehityksen mahdollistamaa vallankumouksellista tapaa, missä HTML-sivulle sisällytetyn Javascriptin avulla oli mahdollista ladata sivulle lisää sisältöä lataamatta itse sivua uudelleen.
 
 Ennen AJAX:in aikakautta jokainen sivu toimi aiemmassa luvussa olevan [perinteisen web-sovelluksen](/osa0#perinteinen-web-sovellus) tapaan, eli oleellisesti ottaen kaikki sivuilla näytettävä data tuli palvelimen generoimassa HTML-koodissa.
 
@@ -508,7 +510,7 @@ Sovelluksen urlit heijastavat vanhaa huoletonta aikaa. JSON-muotoinen data haeta
 
 AJAXiksi kutsuttu asia on arkipäiväistynyt, ja muuttunut itsestäänselvyydeksi. Koko termi on hiipunut unholaan ja nuori polvi ei ole sitä edes ikinä kuullut.
 
-## Single page app ##
+## Single page app
 
 Esimerkkisovelluksemme pääsivu toimii perinteisten web-sivujen tapaan: kaikki sovelluslogiikka on palvelimella ja selain ainoastaan renderöi palvelimen lähettämää HTML-koodia.
 
@@ -552,42 +554,42 @@ Palvelin vastaa kyselyyn statuskoodilla [201 created](https://httpstatuses.com/2
 Ohjelman single page app -versiossa lomakkeen tietoja ei lähetetä selaimen normaalin lomakkeiden lähetysmekanismin avulla, lähettämisen hoitaa selaimen lataamassa Javascript-tiedostossa määritelty koodi. Katsotaan hieman koodia vaikka yksityiskohdista ei tarvitse nytkään välittää liikaa.
 
 ```js
-var form = document.getElementById('notes_form')
-form.onsubmit = function (e) {
- e.preventDefault()
+var form = document.getElementById('notes_form');
+form.onsubmit = function(e) {
+  e.preventDefault();
 
   var note = {
     content: e.target.elements[0].value,
-    date: new Date()
-  }
+    date: new Date(),
+  };
 
-  notes.push(note)
-  e.target.elements[0].value = ''
-  redrawNotes()
-  sendToServer(note)
-}
+  notes.push(note);
+  e.target.elements[0].value = '';
+  redrawNotes();
+  sendToServer(note);
+};
 ```
 
-Komennolla <code>document.getElementById('notes_form')</code> koodi hakee sivulta lomake-elementin ja rekisteröi sille _tapahtumankäsittelijän_ hoitamaan tilanteen, missä lomake "submitoidaan", eli lähetetään. Tapahtumankäsittelijä kutsuu heti metodia <code>e.preventDefault()</code> jolla se estää lomakkeen lähetyksen oletusarvoisen toiminnan. Oletusarvoinen toiminta aiheuttaisi lomakkeen lähettämisen ja sivun uudelleen lataamisen, sitä emme single page -sovelluksissa halua tapahtuvan.
+Komennolla <code>document.getElementById('notes*form')</code> koodi hakee sivulta lomake-elementin ja rekisteröi sille \_tapahtumankäsittelijän* hoitamaan tilanteen, missä lomake "submitoidaan", eli lähetetään. Tapahtumankäsittelijä kutsuu heti metodia <code>e.preventDefault()</code> jolla se estää lomakkeen lähetyksen oletusarvoisen toiminnan. Oletusarvoinen toiminta aiheuttaisi lomakkeen lähettämisen ja sivun uudelleen lataamisen, sitä emme single page -sovelluksissa halua tapahtuvan.
 
 Tämän jälkeen se luo muistiinpanon, lisää sen muistiinpanojen listalle komennolla <code>notes.push(note)</code>, piirtää ruudun sisällön eli muistiinpanojen listan uudelleen ja lähettää uuden muistiinpanon palvelimelle.
 
 Palvelimelle muistiinpanon lähettävä koodi seuraavassa:
+
 ```js
-var sendToServer = function (note) {
-  var xhttpForPost = new XMLHttpRequest()
+var sendToServer = function(note) {
+  var xhttpForPost = new XMLHttpRequest();
   // ...
 
-  xhttpForPost.open('POST', '/new_note_spa', true)
-  xhttpForPost.setRequestHeader('Content-type', 'application/json')
-  xhttpForPost.send(JSON.stringify(note))
-}
+  xhttpForPost.open('POST', '/new_note_spa', true);
+  xhttpForPost.setRequestHeader('Content-type', 'application/json');
+  xhttpForPost.send(JSON.stringify(note));
+};
 ```
 
 Koodissa siis määritellään, että kyse on HTTP POST -pyynnöstä, määritellään headerin _Content-type_ avulla lähetettävän datan tyypiksi JSON, ja lähetetään data JSON-merkkijonona.
 
 Sovelluksen koodi on nähtävissä osoitteessa <https://github.com/mluukkai/example_app>. Kannattaa huomata, että sovellus on tarkoitettu ainoastaan kurssin käsitteistöä demonstroivaksi esimerkiksi, koodi on osin tyyliltään huonoa ja siitä ei tule ottaa mallia omia sovelluksia tehdessä. Sama koskee käytettyjä urleja, single page app -tyyliä noudattavan sivun käyttämä uusien muistiinpanojen kohdeosoite _new_note_spa_ ei noudata nykyisin suositeltavia käytäntöjä.
-
 
 ## Javascript-kirjastot
 
@@ -601,7 +603,7 @@ Single page app -tyylin noustua suosioon on ilmestynyt useita JQueryä "modernim
 
 Angularin suosio kuitenkin romahti siinä vaiheessa kun Angular-tiimi [ilmoitti](https://jaxenter.com/angular-2-0-announcement-backfires-112127.html) lokakuussa 2014, että version 1 tuki lopetetaan ja Angular 2 ei tule olemaan taaksepäin yhteensopiva ykkösversion kanssa. Angular 2 ja uudemmat versiot eivät ole saaneet kovin innostunutta vastaanottoa.
 
-Nykyisin suosituin tapa toteuttaa web-sovellusten selainpuolen logiikka on Facebookin kehittämä [React](https://reactjs.org/)-kirjasto. Tulemme tutustumaan kurssin aikana Reactiin ja sen kanssa yleisesti käytettyyn [Redux](https://github.com/reactjs/redux)-kirjastoon. 
+Nykyisin suosituin tapa toteuttaa web-sovellusten selainpuolen logiikka on Facebookin kehittämä [React](https://reactjs.org/)-kirjasto. Tulemme tutustumaan kurssin aikana Reactiin ja sen kanssa yleisesti käytettyyn [Redux](https://github.com/reactjs/redux)-kirjastoon.
 
 Reactin asema näyttää tällä hetkellä vahvalta, mutta Javascript-maailma ei lepää koskaan. Viime aikoina kiinnostusta on alkanut herättää mm. uudempi tulokas [VueJS](https://vuejs.org/).
 
@@ -633,12 +635,11 @@ Javascript-väsymys tulee varmasti iskemään myös tällä kurssilla. Onneksi n
   <h3>Tehtäviä</h3>
   <h4>0.1: HTML</h4>
 
-Kertaa HTML:n perusteet lukemalla Mozillan tutoriaali [HTML:stä](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics) 
+Kertaa HTML:n perusteet lukemalla Mozillan tutoriaali [HTML:stä](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics)
 
   <h4>0.2: CSS</h4>
 
 Kertaa CSS:n perusteet lukemalla Mozillan tutoriaali [CSS:stä](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).
-
 
   <h4>0.3: HTML:n lomakkeet</h4>
 

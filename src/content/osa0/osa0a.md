@@ -18,7 +18,7 @@ Kurssilla käsitellään myös sovellusten testaamista, konfigurointia ja suorit
 
 ## Oletetut esitiedot
 
-Osallistujilta edellytetään vahvaa ohjelmointirutiinia, web-ohjelmoinnin ja tietokantojen perustuntemusta, git-versionhallintajärjestelmän peruskäytön hallintaa, kykyä pitkäjänteiseen työskentelyyn sekä valmiutta omatoimiseen tiedonhakuun ja ongelmanratkaisuun. 
+Osallistujilta edellytetään vahvaa ohjelmointirutiinia, web-ohjelmoinnin ja tietokantojen perustuntemusta, git-versionhallintajärjestelmän peruskäytön hallintaa, kykyä pitkäjänteiseen työskentelyyn sekä valmiutta omatoimiseen tiedonhakuun ja ongelmanratkaisuun.
 
 Osallistuminen ei kuitenkaan edellytä kurssilla käsiteltävien tekniikoiden tai Javascript-kielen hallintaa.
 
@@ -32,23 +32,23 @@ Materiaali perustuu muutamien osasta osaan vaihtuvien esimerkkiohjelmien asteitt
 
 Kurssi koostuu kahdeksasta osasta, joista ensimmäinen on historiallisista syistä numero nolla. Osat voi tulkita löyhästi ajatellen viikoiksi. Osia kuitenkin ilmestyy nopeampaa tahtia, ja suoritusnopeuskin on melko vapaa.
 
-Materiaalissa osasta _n_ osaan _n+1_ eteneminen ei ole mielekästä ennen kuin riittävä osaaminen osan _n_ asioista on saavutettu. Kurssilla sovelletaankin pedagogisin termein _tavoiteoppimista_, [engl. mastery learning](https://en.wikipedia.org/wiki/Mastery_learning) ja on tarkoitus, että etenet seuraavaan osaan vasta, kun riittävä määrä edellisen osan tehtävistä on tehty. 
+Materiaalissa osasta _n_ osaan _n+1_ eteneminen ei ole mielekästä ennen kuin riittävä osaaminen osan _n_ asioista on saavutettu. Kurssilla sovelletaankin pedagogisin termein _tavoiteoppimista_, [engl. mastery learning](https://en.wikipedia.org/wiki/Mastery_learning) ja on tarkoitus, että etenet seuraavaan osaan vasta, kun riittävä määrä edellisen osan tehtävistä on tehty.
 
 Oletuksena on, että teet kunkin osan tehtävistä _ainakin ne_ jotka eivät ole merkattu tähdellä. Myös tähdellä merkatut tehtävät vaikuttavat arvosteluun, mutta niiden tekemättäjättäminen ei aiheuta liian suuria esteitä seuraavan osan (tähdellä merkkaamattomien) tehtävien tekemiseen.
 
-Estääksemme sen, että aloitat kurssin tekemisen vasta viimeisellä viikolla, on jokaisella osalla  myös hard deadline. Etenemiselle on siis jonkun verran joustoa, jotta ehdit tekemään kustakin osasta tarvittavan määrän tehtäviä.
+Estääksemme sen, että aloitat kurssin tekemisen vasta viimeisellä viikolla, on jokaisella osalla myös hard deadline. Etenemiselle on siis jonkun verran joustoa, jotta ehdit tekemään kustakin osasta tarvittavan määrän tehtäviä.
 
-Osien _hard deadlinet_  seuraavassa:
+Osien _hard deadlinet_ seuraavassa:
 
-| osa            | deadline&nbsp; &nbsp;      |
-| -------------- |:-----------------:       
-| osa 0 ja osa 1 | 30.1.                    
-| osa 2          | 5.2.                    
-| osa 3          | 12.2.                    
-| osa 4          | 25.2.                    
-| osa 5          | 4.3.                    
-| osa 6          | 11.3.                    
-| osa 7          | 11.3.                   
+| osa            | deadline&nbsp; &nbsp; |
+| -------------- | :-------------------: |
+| osa 0 ja osa 1 |         30.1.         |
+| osa 2          |         5.2.          |
+| osa 3          |         12.2.         |
+| osa 4          |         25.2.         |
+| osa 5          |         4.3.          |
+| osa 6          |         11.3.         |
+| osa 7          |         11.3.         |
 
 Tämän kurssin eri osiin jo tehtyjen palautusten ajankäyttöstatistiikan näet [tehtävien palautussivulta](https://studies.cs.helsinki.fi/courses/#fullstack2019).
 
@@ -101,6 +101,5 @@ Noden myötä koneelle asentuu myös Node package manager [npm](https://www.npmj
 Jos löydät kirjoitusvirheen tai joku asia on sanottu epäselvästi tai kielioppisääntöjen vastaisesti, tee _pull request_ repositoriossa <https://github.com/fullstackopen/fullstackopen.github.io> olevaan kurssimateriaaliin.
 
 Pull requestin tekeminen on helppoa. Esim. jos tällä sivulla on typo, mene sivun "lähdekoodiin" https://github.com/fullstackopen/fullstackopen.github.io/blob/master/osa0.md klikkaa kynän kuvaa oikealta, tee muutokset ja klikkaa muutama kerta "vihreää" [Ohtu-kurssin ohjeen mukaan](https://github.com/mluukkai/ohjelmistotuotanto2018/blob/master/laskarit/2.md#typokorjauksia).
-
 
 </div>

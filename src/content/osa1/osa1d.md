@@ -54,7 +54,7 @@ const App = (props) => {
   const [clicks, setClicks] = useState({
     left: 0, right: 0
   })
-  
+
   const handleLeftClick = () => {
     const newClicks = { left: clicks.left + 1, right: clicks.right }
     setClicks(newClicks)
@@ -74,25 +74,25 @@ const App = (props) => {
         {clicks.right}
       </div>
     </div>
-  )    
+  )
 }
 ```
 
-Nyt komponentilla on siis ainoastaan yksi tila. Näppäinten painallusten yhteydessä on nyt huolehdittava koko tilan muutoksesta. 
+Nyt komponentilla on siis ainoastaan yksi tila. Näppäinten painallusten yhteydessä on nyt huolehdittava koko tilan muutoksesta.
 
 Tapahtumankäsittelijä vaikuttaa hieman sotkuiselta. Kun vasenta nappia painetaan, suoritetaan seuraava funktio:
 
 ```js
-  const handleLeftClick = () => {
-    const newClicks = { left: clicks.left + 1, right: clicks.right }
-    setClicks(newClicks)
-  }
+const handleLeftClick = () => {
+  const newClicks = { left: clicks.left + 1, right: clicks.right };
+  setClicks(newClicks);
+};
 ```
 
 uudeksi tilaksi siis aseteaan seuraava olio
 
 ```js
-{ 
+{
   left: clicks.left + 1,
   right: clicks.right
 }
@@ -104,19 +104,20 @@ Uuden tilan määrittelevän olion modostaminen onnistuu hieman tyylikkäämmin 
 
 ```js
 const handleLeftClick = () => {
-  const newClicks = { ...clicks, left: clicks.left + 1 }
-  setClicks(newClicks)
-}
+  const newClicks = { ...clicks, left: clicks.left + 1 };
+  setClicks(newClicks);
+};
 
 const handleRightClick = () => {
-  const newClicks = { ...clicks, right: clicks.right + 1 }
-  setClicks(newClicks)
-}
+  const newClicks = { ...clicks, right: clicks.right + 1 };
+  setClicks(newClicks);
+};
 ```
 
-Merkintä vaikuttaa hieman erikoiselta. Käytännössä <code>{ ...clicks }</code> luo olion, jolla on kenttinään kopiot olion _clicks_ kenttien arvoista. Kun aaltosulkeisiin lisätään asioita, esim. <code>{ ...clicks, right: 1 }</code>, tulee uuden olion kenttä _right_ saamaan arvon 1. 
+Merkintä vaikuttaa hieman erikoiselta. Käytännössä <code>{ ...clicks }</code> luo olion, jolla on kenttinään kopiot olion _clicks_ kenttien arvoista. Kun aaltosulkeisiin lisätään asioita, esim. <code>{ ...clicks, right: 1 }</code>, tulee uuden olion kenttä _right_ saamaan arvon 1.
 
-Esimerkissämme siis 
+Esimerkissämme siis
+
 ```js
 { ...clicks, right: clicks.right + 1 }
 ```
@@ -126,27 +127,26 @@ luo oliosta _clicks_ kopion, missä kentän _right_ arvoa kasvatetaan yhdellä.
 Apumuuttujat ovat oikeastaan turhat, ja tapahtumankäsittelijät voidaan määritellä seuraavasti:
 
 ```js
-const handleLeftClick = () =>
-  setClicks({ ...clicks, left: clicks.left + 1 })
+const handleLeftClick = () => setClicks({ ...clicks, left: clicks.left + 1 });
 
 const handleRightClick = () =>
-  setClicks({ ...clicks, right: clicks.right + 1 })
+  setClicks({ ...clicks, right: clicks.right + 1 });
 ```
 
 Lukijalle voi tässä vaiheessa herätä kysymys miksi emme hoitaneet tilan päivitystä seuraavalla tavalla
 
 ```js
 const handleLeftClick = () => {
-  clicks.left++
-  setClicks(clicks)
-}
+  clicks.left++;
+  setClicks(clicks);
+};
 ```
 
 Sovellus näyttää toimivan. Reactissa ei kuitenkaan ole saa muuttaa tilaa suoraan, sillä voi olla arvaamattomat seuraukset. Tilan muutos tulee aina tehdä asettamalla uudeksi tilaksi vanhan perusteella tehty kopio!
 
-Kaikien tilan pitäminen yhdessä oliossa on tämän sovelluksen kannalta huono ratkaisu, etuja siinä ei juuri ole, mutta sovellus monimutkaisuu merkittävästi. Onkin ehdottomasti parempi ratkaisu tallettaa nappien klikkaukset erillisiin tilan paloihin. 
+Kaikien tilan pitäminen yhdessä oliossa on tämän sovelluksen kannalta huono ratkaisu, etuja siinä ei juuri ole, mutta sovellus monimutkaisuu merkittävästi. Onkin ehdottomasti parempi ratkaisu tallettaa nappien klikkaukset erillisiin tilan paloihin.
 
-On kuitenkin tilanteita, joissa jokin osa tilaa kannattaa pitää monimutkaisemman tietorakenteen sisällä  [Reactin dokumentaatiossa](https://reactjs.org/docs/hooks-faq.html#should-i-use-one-or-many-state-variables) on hieman ohjeistusta aiheeseen liityen.
+On kuitenkin tilanteita, joissa jokin osa tilaa kannattaa pitää monimutkaisemman tietorakenteen sisällä [Reactin dokumentaatiossa](https://reactjs.org/docs/hooks-faq.html#should-i-use-one-or-many-state-variables) on hieman ohjeistusta aiheeseen liityen.
 
 ### Taulukon käsittelyä
 
@@ -185,16 +185,16 @@ const App = (props) => {
 Kaikki klikkaukset siis talletetaan omaan tilan palaansa _allClicks_ joka alustetaan tyhjäksi taulukoksi
 
 ```js
-const [allClicks, setAll] = useState([])
+const [allClicks, setAll] = useState([]);
 ```
 
 Kun esim. nappia _vasen_ painetaan, lisätään tilan taulukkoon _kaikki_ kirjain _L_:
 
 ```js
 const handleLeftClick = () => {
-  setAll(allClicks.concat('L'))
-  setLeft(left + 1)
-}
+  setAll(allClicks.concat('L'));
+  setLeft(left + 1);
+};
 ```
 
 Tilan osa _allClicks_ saa nyt arvokseen entisen taulukon, mihin on liitetty _L_ metodilla [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka toimii siten, että se ei muuta olemassaolevaa taulukkoa vaan luo _uuden taulukon_, mihin uusi alkio on lisätty.
@@ -203,10 +203,10 @@ Kuten jo aiemmin mainittiin, Javascriptissa on myös mahdollista lisätä tauluk
 
 ```js
 const handleLeftClick = () => {
-  allClicks.push('L')
-  setAll(allClick)
-  setLeft(left + 1)
-}
+  allClicks.push('L');
+  setAll(allClick);
+  setLeft(left + 1);
+};
 ```
 
 Älä kuitenkaan tee näin. Kuten jo mainitsimme, React-komponentin tilaa, eli esimerkiksi muuttujaa _allClicks_ ei saa muuttaa, vaikka se näyttääkin toimivan joissaikin tilanteissa, voi seurauksena olla hankalasti havaittavia ongelmia.
@@ -343,7 +343,7 @@ const App = (props) => {
 
 ### Vanha React
 
-Tällä kurssilla käyttämämme tapa React-komponenttien tilan määrittelyyn, eli [state hook](https://reactjs.org/docs/hooks-state.html) on siis uutta Reactia ja käytettävissä tällä hetkellä ainoastaan versiossa [0.16.17.0-alpha.2](https://www.npmjs.com/package/react/v/16.7.0-alpha.2). Ennen hookeja Javascript-funktioina määriteltyihin React-komponentteihin ei ollut mahdollista saada tilaa ollenkaan, tilaa edellyttävät komponentit oli pakko määritellä [Class](https://reactjs.org/docs/react-component.html)-komponentteina Javascriptin luokkasyntaksia hyödyntäen. 
+Tällä kurssilla käyttämämme tapa React-komponenttien tilan määrittelyyn, eli [state hook](https://reactjs.org/docs/hooks-state.html) on siis uutta Reactia ja käytettävissä tällä hetkellä ainoastaan versiossa [0.16.17.0-alpha.2](https://www.npmjs.com/package/react/v/16.7.0-alpha.2). Ennen hookeja Javascript-funktioina määriteltyihin React-komponentteihin ei ollut mahdollista saada tilaa ollenkaan, tilaa edellyttävät komponentit oli pakko määritellä [Class](https://reactjs.org/docs/react-component.html)-komponentteina Javascriptin luokkasyntaksia hyödyntäen.
 
 Olemme tällä kurssilla tehneet hieman radikaalinkin ratkaisun käyttää pelkästääm hookeja ja näin ollen opetella heti alusta asti ohjelmoimaan "huomisen" Reactia. Luokkasyntaksin hallitseminen on kuitenkin sikäli tärkeää, että vaikka funktiona määriteltävät komponentit ovat Reactin tulevaisuus, on maailmassa miljardeja rivejä vanhaa Reactia jota kenties sinäkin joudut jonain päivänä ylläpitämään. Dokumentaation ja internetistä löytyvien esimerkkien suhteen tilanne on sama, törmäät class-komponentteihin välittömästi.
 
@@ -402,13 +402,13 @@ näin selviää heti onko esim. joku propsia vastaava attribuutti nimetty väär
 **HUOM** kun käytät komentoa _console.log_ debuggaukseen, älä yhdistele asioita "javamaisesti" plussalla, eli sen sijaan että kirjoittaisit
 
 ```js
-console.log('propsin arvo on' + props)
+console.log('propsin arvo on' + props);
 ```
 
 erottele tulostettavat asiat pilkulla:
 
 ```js
-console.log('propsin arvo on', props)
+console.log('propsin arvo on', props);
 ```
 
 Jos yhdistät merkkijonoon olion, tuloksena on suhteellisen hyödytön tulostusmuoto
@@ -433,7 +433,7 @@ Kun bugi selviää, voi komennon _debugger_ poistaa ja uudelleenladata sivun.
 
 Debuggerissa on mahdollista suorittaa koodia tarvittaessa rivi riviltä _Source_ välilehden oikealta laidalta.
 
-Debuggeriin pääsee myös ilman komentoa _debugger_ lisäämällä _Source_-välilehdellä sopiviin kohtiin koodia _breakpointeja_. Komponentin muuttujien arvojen tarkkailu on mahdollista  _Scope_-osassa:
+Debuggeriin pääsee myös ilman komentoa _debugger_ lisäämällä _Source_-välilehdellä sopiviin kohtiin koodia _breakpointeja_. Komponentin muuttujien arvojen tarkkailu on mahdollista _Scope_-osassa:
 
 ![](../images/1/9a.png)
 
@@ -441,7 +441,7 @@ Chromeen kannattaa ehdottomasti asentaa [React developer tools](https://chrome.g
 
 ![](../images/1/10a.png)
 
-Uuden konsolitabin avulla voidaan tarkkailla sovelluksen React-elementtejä ja niiden tilaa ja propseja. 
+Uuden konsolitabin avulla voidaan tarkkailla sovelluksen React-elementtejä ja niiden tilaa ja propseja.
 
 React developer tools ei osaa toistaiseksi näyttää hookeilla muodostettua tilaa parhaalla mahdollisella tavalla.
 
@@ -450,12 +450,12 @@ React developer tools ei osaa toistaiseksi näyttää hookeilla muodostettua til
 Komponentin tila määriteltiin seuraavasti:
 
 ```js
-const [left, setLeft] = useState(0)
-const [right, setRight] = useState(0)
-const [allClicks, setAll] = useState([])
+const [left, setLeft] = useState(0);
+const [right, setRight] = useState(0);
+const [allClicks, setAll] = useState([]);
 ```
 
-Konsolin ylimpänä oleva _baseState_ kertoo ensimmäisen _useState_-kutsun määrittelevän tilan, eli muuttujan _left_ arvon, seuraava _baseState_ kertoo muuttujan _right_ arvon ja taulukon _allClicks_ arvo on alimpana. 
+Konsolin ylimpänä oleva _baseState_ kertoo ensimmäisen _useState_-kutsun määrittelevän tilan, eli muuttujan _left_ arvon, seuraava _baseState_ kertoo muuttujan _right_ arvon ja taulukon _allClicks_ arvo on alimpana.
 
 ## Hookien säännöt
 
@@ -488,8 +488,8 @@ const App = (props) => {
 
   return (
     //...
-  ) 
-} 
+  )
+}
 ```
 
 ## Tapahtumankäsittely revisited
@@ -637,7 +637,7 @@ const App = (props) => {
 }
 ```
 
-Mennään lopuksi funktioita palauttavaan funktioon. Kuten aiemmin jo mainittiin, et tarvitse tämän osan tehtävissä funktiota palauttavia funktioita, joten voit melko huoletta hypätä seuraavan ohi jos asia tuntuu nyt hankalalta. 
+Mennään lopuksi funktioita palauttavaan funktioon. Kuten aiemmin jo mainittiin, et tarvitse tämän osan tehtävissä funktiota palauttavia funktioita, joten voit melko huoletta hypätä seuraavan ohi jos asia tuntuu nyt hankalalta.
 
 Muutetaan koodia seuraavasti
 
@@ -734,7 +734,7 @@ Ensimmäinen nappi määritellään seuraavasti
 Tapahtumankäsittelijä siis saadaan _suorittamalla_ funktiokutsu _hello('world')_. Funktiokutsu palauttaa funktion
 
 ```bash
-() => { 
+() => {
   console.log('hello', 'world')
 }
 ```
@@ -748,7 +748,7 @@ Toinen nappi määritellään seuraavasti
 Tapahtumankäsittelijän määrittelevä funktiokutsu _hello('react')_ palauttaa
 
 ```bash
-() => { 
+() => {
   console.log('hello', 'react')
 }
 ```
@@ -761,7 +761,7 @@ Käyttämämme määrittelytapa
 
 ```bash
 const hello = (who) => {
-  const handler = () => { 
+  const handler = () => {
     console.log('hello', who)
   }
 
@@ -773,7 +773,7 @@ on hieman verboosi. Eliminoidaan apumuuttuja, ja määritellään palautettava f
 
 ```bash
 const hello = (who) => {
-  return () => { 
+  return () => {
     console.log('hello', who)
   }
 }
@@ -783,7 +783,7 @@ ja koska funktio _hello_ sisältää ainoastaan yhden komennon, eli returnin, vo
 
 ```bash
 const hello = (who) =>
-  () => { 
+  () => {
     console.log('hello', who)
   }
 ```
@@ -791,7 +791,7 @@ const hello = (who) =>
 ja tuodaan vielä "kaikki nuolet" samalle riville
 
 ```bash
-const hello = (who) => () => { 
+const hello = (who) => () => {
   console.log('hello', who)
 }
 ```
@@ -801,7 +801,7 @@ Voimme käyttää samaa kikkaa myös muodostamaan tapahtumankäsittelijöitä, j
 ```bash
 render() {
   const setToValue = (newValue) => () => {
-    setValue(newValue) 
+    setValue(newValue)
   }
 
   return (
@@ -825,7 +825,7 @@ tulee tapahtumankäsittelijäksi funktiokutsun _setToValue(1000)_ paluuarvo eli 
 
 ```bash
 () => {
-    setValue(1000) 
+    setValue(1000)
 }
 ```
 
@@ -839,8 +839,8 @@ Tapahtumankäsittelijän muodostaa funktiokutsu _setToValue(value + 1)_, joka sa
 
 ```js
 () => {
-    setValue(11) 
-}
+  setValue(11);
+};
 ```
 
 Funktioita palauttavia funktioita ei tässäkään tapauksessa olisi ollut pakko käyttää. Muutetaan tilan päivittämisestä huolehtiva funktio _setToValue_ normaaliksi funktioksi:
@@ -850,7 +850,7 @@ const App = (props) => {
   const [value, setValue] = useState(10)
 
   const setToValue = (newValue) => {
-    setValue(newValue) 
+    setValue(newValue)
   }
 
   return (
@@ -870,14 +870,14 @@ Voimme nyt määritellä tapahtumankäsittelijän funktioksi, joka kutsuu funkti
 <button onClick={() => setToValue(0)}>nollaa</button>
 ```
 
-On aikalailla makuasia käyttääkö tapahtumankäsittelijänä funktioita palauttavia funktioita vai nuolifunktioita. 
+On aikalailla makuasia käyttääkö tapahtumankäsittelijänä funktioita palauttavia funktioita vai nuolifunktioita.
 
 ### Tapahtumankäsittelijän vieminen alikomponenttiin
 
 Eriytetään vielä painike omaksi komponentikseen
 
 ```react
-const Button = (props) => 
+const Button = (props) =>
   <button onClick={props.handleClick}>{props.text}</button>
 ```
 
@@ -894,61 +894,61 @@ Eriytetään vielä sovelluksestamme luvun näyttäminen omaan komponenttiin _Di
 Muutetaan ohjelmaa seuraavasti, eli määritelläänkin uusi komponentti _App_-komponentin sisällä:
 
 ```js
-const Button = (props) => 
+const Button = props => (
   <button onClick={props.handleClick}>{props.text}</button>
+);
 
-const App = (props) => {
-  const [value, setValue] = useState(10)
+const App = props => {
+  const [value, setValue] = useState(10);
 
-  const setToValue = (newValue) => {
-    setValue(newValue) 
-  }
+  const setToValue = newValue => {
+    setValue(newValue);
+  };
 
   // älä määrittele komponenttia täällä!
-  const Display = (props) =>
-    <div>{props.value}</div>
+  const Display = props => <div>{props.value}</div>;
 
   return (
     <div>
-      <Display value={value}/>
-      <Button handleClick={() => setToValue(1000)} text='tuhat' />
-      <Button handleClick={() => setToValue(0)} text='nollaa' />
-      <Button handleClick={() => setToValue(value +1 )} text='kasvata' />
+      <Display value={value} />
+      <Button handleClick={() => setToValue(1000)} text="tuhat" />
+      <Button handleClick={() => setToValue(0)} text="nollaa" />
+      <Button handleClick={() => setToValue(value + 1)} text="kasvata" />
     </div>
-  )
-}
+  );
+};
 ```
 
 Kaikki näyttää toimivan. Mutta **älä tee koskaan näin!** Tapa on hyödytön ja johtaa useissa tilanteissa ikäviin ongelmiin. Siirretäänkin komponentin _Display_ määrittely oikeaan paikkaan, eli komponentin _App_ määrittelevän funktion ulkopuolelle:
 
 ```js
-const Display = (props) =>
-  <div>{props.value}</div>
+const Display = props => <div>{props.value}</div>;
 
-const Button = (props) => 
+const Button = props => (
   <button onClick={props.handleClick}>{props.text}</button>
+);
 
-const App = (props) => {
-  const [value, setValue] = useState(10)
+const App = props => {
+  const [value, setValue] = useState(10);
 
-  const setToValue = (newValue) => {
-    setValue(newValue) 
-  }
+  const setToValue = newValue => {
+    setValue(newValue);
+  };
 
   return (
     <div>
-      <Display value={value}/>
-      <Button handleClick={() => setToValue(1000)} text='tuhat' />
-      <Button handleClick={() => setToValue(0)} text='nollaa' />
-      <Button handleClick={() => setToValue(value +1 )} text='kasvata' />
+      <Display value={value} />
+      <Button handleClick={() => setToValue(1000)} text="tuhat" />
+      <Button handleClick={() => setToValue(0)} text="nollaa" />
+      <Button handleClick={() => setToValue(value + 1)} text="kasvata" />
     </div>
-  )
-}
+  );
+};
 ```
 
 ### Hyödyllistä materiaalia
 
-Internetissä on todella paljon Reactiin liittyvää materiaalia. Tällä hetkellä ongelman muodostaa kuitenkin se, että käytämme kurssilla niin uutta Reactia, että suurin osa internetistä löytyvästä tavarasta on meidän kannaltamme vanhentunutta. 
+Internetissä on todella paljon Reactiin liittyvää materiaalia. Tällä hetkellä ongelman muodostaa kuitenkin se, että käytämme kurssilla niin uutta Reactia, että suurin osa internetistä löytyvästä tavarasta on meidän kannaltamme vanhentunutta.
 
 Seuraavassa muutamia linkkejä:
 
@@ -1007,12 +1007,11 @@ Laajenna sovellusta siten, että se näyttää palautteista enemmän statistiikk
 
 ![](../images/1/14a.png)
 
-
 <h4>1.8: unicafe osa3</h4>
 
 Refaktoroi sovelluksesi siten, että tilastojen näyttäminen on eriytetty oman komponentin _Statistics_ vastuulle. Sovelluksen tila säilyy edelleen juurikomponentissa _App_.
 
-Muista, että komponentteja ei saa määritellä toisen komponentin sisällä: 
+Muista, että komponentteja ei saa määritellä toisen komponentin sisällä:
 
 ```react
 // oikea paikka komponentin määrittelyyn
@@ -1123,19 +1122,19 @@ Laajenna sovellusta siten, että näytettävää anekdoottia on mahdollista ää
 Olio voidaan kopioida esim. seuraavasti:
 
 ```js
-const pisteet = { 0: 1, 1: 3, 2: 4, 3: 2 }
+const pisteet = { 0: 1, 1: 3, 2: 4, 3: 2 };
 
-const kopio = { ...pisteet }
-kopio[2] += 1   // kasvatetaan olion kentän 2 arvoa yhdellä
+const kopio = { ...pisteet };
+kopio[2] += 1; // kasvatetaan olion kentän 2 arvoa yhdellä
 ```
 
 ja taulukko esim. seuraavasti:
 
 ```js
-const pisteet = [1, 4, 6, 3]
+const pisteet = [1, 4, 6, 3];
 
-const kopio = [ ...pisteet ]
-kopio[2] += 1   // kasvatetaan taulukon paikan 2 arvoa yhdellä
+const kopio = [...pisteet];
+kopio[2] += 1; // kasvatetaan taulukon paikan 2 arvoa yhdellä
 ```
 
 Yksinkertaisempi ratkaisu lienee nyt taulukon käyttö. Googlaamalla löydät paljon vihjeitä sille, miten kannattaa luoda halutun mittainen taulukko, joka on täytetty nollilla esim. [tämän](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-array-of-arbitrary-length/22209781).
