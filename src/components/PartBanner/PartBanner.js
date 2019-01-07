@@ -1,21 +1,21 @@
 import React from 'react';
 
-import part0_hover from '../../images/thumbnails/part0_over.png';
-import part0 from '../../images/thumbnails/part0.png';
-import part1_hover from '../../images/thumbnails/part1_over.png';
-import part1 from '../../images/thumbnails/part1.png';
-import part2_hover from '../../images/thumbnails/part2_over.png';
-import part2 from '../../images/thumbnails/part2.png';
-import part3_hover from '../../images/thumbnails/part3_over.png';
-import part3 from '../../images/thumbnails/part3.png';
-import part4 from '../../images/thumbnails/part4_over.png';
-import part4_hover from '../../images/thumbnails/part4_over.png';
-import part5_hover from '../../images/thumbnails/part5_over.png';
-import part5 from '../../images/thumbnails/part5.png';
-import part6_hover from '../../images/thumbnails/part6_over.png';
-import part6 from '../../images/thumbnails/part6.png';
-import part7_hover from '../../images/thumbnails/part7_over.png';
-import part7 from '../../images/thumbnails/part7.png';
+import part0_hover from '../../images/thumbnails/part-0_ovr.svg';
+import part0 from '../../images/thumbnails/part-0.svg';
+import part1_hover from '../../images/thumbnails/part-1_ovr.svg';
+import part1 from '../../images/thumbnails/part-1.svg';
+import part2_hover from '../../images/thumbnails/part-2_ovr.svg';
+import part2 from '../../images/thumbnails/part-2.svg';
+import part3_hover from '../../images/thumbnails/part-3_ovr.svg';
+import part3 from '../../images/thumbnails/part-3.svg';
+import part4_hover from '../../images/thumbnails/part-4_ovr.svg';
+import part4 from '../../images/thumbnails/part-4.svg';
+import part5_hover from '../../images/thumbnails/part-5_ovr.svg';
+import part5 from '../../images/thumbnails/part-5.svg';
+import part6_hover from '../../images/thumbnails/part-6_ovr.svg';
+import part6 from '../../images/thumbnails/part-6.svg';
+import part7_hover from '../../images/thumbnails/part-7_ovr.svg';
+import part7 from '../../images/thumbnails/part-7.svg';
 import { Banner } from '../Banner/Banner';
 import { ContentLiftup } from '../ContentLiftup/ContentLiftup';
 
