@@ -31,7 +31,7 @@ export default function PartIntroTemplate({ data }) {
     },
   };
 
-  const navArray = navigation.split('@');
+  const navArray = navigation ? navigation.split('@') : [];
 
   return (
     <Layout>
