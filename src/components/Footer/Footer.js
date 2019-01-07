@@ -15,12 +15,21 @@ const Footer = () => (
       className="col-4"
       style={{ display: 'flex', justifyContent: 'space-between' }}
     >
-      <Image className="image--large image--contain" src={yliopisto} />
+      <a
+        href="https://www.helsinki.fi/"
+        className="image--large image--contain"
+        style={{ width: '100%' }}
+      >
+        <Image className="image--large image--contain" src={yliopisto} />
+      </a>
 
-      <Image
-        className="image--large push-right-2 image--contain"
-        src={houston}
-      />
+      <a
+        href="https://www.houston-inc.com/"
+        className="push-right-2"
+        style={{ width: '100%' }}
+      >
+        <Image className="image--large image--contain" src={houston} />
+      </a>
     </div>
 
     <div
@@ -34,7 +43,7 @@ const Footer = () => (
       <Link
         to="/about"
         className="nav-item-hover"
-        style={{ paddingLeft: '4.5rem' }}
+        style={{ marginLeft: '4.5rem' }}
       >
         KURSSISTA
       </Link>
