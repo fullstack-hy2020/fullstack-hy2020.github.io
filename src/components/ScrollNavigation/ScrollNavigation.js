@@ -1,5 +1,7 @@
 import './ScrollNavigation.scss';
 
+import { Link } from 'gatsby';
+import kebabCase from 'lodash/fp/kebabCase';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
@@ -15,18 +17,23 @@ class ScrollNavigation extends Component {
   }
 
   componentDidMount = () => {
-    const courseTop = document.querySelector('.course').offsetTop;
     const headingList = Array.from(document.querySelectorAll('h1, h3'));
-    const headings = headingList.map(i => ({
-      text: i.innerText,
-      top: i.offsetTop + courseTop,
-    }));
+    const headings = headingList.map(i => {
+      i.id = kebabCase(i.innerText);
+
+      return {
+        text: i.innerText,
+        id: i.id,
+        level: i.nodeName,
+      };
+    });
 
     this.setState({ headings: headings });
   };
 
   render() {
     const { headings } = this.state;
+    const { letter, currentPath } = this.props;
 
     return (
       <Element
@@ -35,14 +42,17 @@ class ScrollNavigation extends Component {
         dirColumn
         className={`scroll-navigation ${this.props.className}`}
       >
-        {headings.map(i => (
-          <li
-            onClick={() => window.scrollTo({ top: i.top, behavior: 'smooth' })}
-            key={i.text}
-          >
-            {i.text}
-          </li>
-        ))}
+        {headings.map(i =>
+          i.level === 'H1' ? (
+            <li key={i.text} className="level-h1">
+              {`${letter} ${i.text}`}
+            </li>
+          ) : (
+            <ul>
+              <Link to={`${currentPath}#${i.id}`}>{i.text}</Link>
+            </ul>
+          )
+        )}
       </Element>
     );
   }
