@@ -22,7 +22,7 @@ import { ContentLiftup } from '../ContentLiftup/ContentLiftup';
 export const PartBanner = () => {
   return (
     <Banner className="spacing spacing--after">
-      <div className="container spacing flex-fix-aligning">
+      <div id="course-contents" className="container spacing flex-fix-aligning">
         <ContentLiftup
           image={{ src: part0, alt: '' }}
           hoverImageSrc={part0_hover}

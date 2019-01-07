@@ -15,7 +15,7 @@ const Header = () => (
     </Link>
 
     <div
-      className="col-4 push-left-4"
+      className="col-6 push-left-2"
       style={{
         display: 'flex',
         justifyContent: 'space-between',
@@ -24,6 +24,10 @@ const Header = () => (
     >
       <Link to="/about" className="nav-item-hover">
         KURSSISTA
+      </Link>
+
+      <Link to="/#course-contents" className="nav-item-hover">
+        KURSSIN SISÄLTÖ
       </Link>
 
       <Link to="/faq" className="nav-item-hover">
