@@ -5,7 +5,7 @@ path: /osa0/perusteet
 mainImage: ../../images/part-0.svg
 part: 0
 letter: b
-partColor: blue
+partColor: light-violet
 ---
 
 <div class="content">

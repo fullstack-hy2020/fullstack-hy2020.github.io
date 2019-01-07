@@ -5,7 +5,7 @@ path: /osa0/yleistä
 mainImage: ../../images/part-0.svg
 part: 0
 letter: a
-partColor: blue
+partColor: light-violet
 ---
 
 <div class="content">

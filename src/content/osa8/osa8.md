@@ -3,9 +3,7 @@ title: osa 8
 path: /osa8
 mainImage: ../../images/part-8.svg
 part: 8
-partColor: light-blue
-prevPart: 7
-nextPart:
+partColor: turquoise
 navigation:
 ---
 

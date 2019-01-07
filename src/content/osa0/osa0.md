@@ -3,7 +3,7 @@ title: osa 0
 path: /osa0
 mainImage: ../../images/part-0.svg
 part: 0
-partColor: blue
+partColor: light-violet
 navigation: a|/osa0/yleistä|Yleistä@b|/osa0/perusteet|WEB-sovelluksen toimintaperiaatteita
 ---
 
