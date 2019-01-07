@@ -75,8 +75,8 @@ export default function PartIntroTemplate({ data }) {
       </Banner>
 
       <PrevNext
-        prev={part !== 0 ? part - 1 : undefined}
-        next={part !== 7 ? part + 1 : undefined}
+        prev={part > 0 ? part - 1 : undefined}
+        next={part < 8 ? part + 1 : undefined}
       />
 
       <Footer />

@@ -16,6 +16,8 @@ import part6_hover from '../../images/thumbnails/part-6_ovr.svg';
 import part6 from '../../images/thumbnails/part-6.svg';
 import part7_hover from '../../images/thumbnails/part-7_ovr.svg';
 import part7 from '../../images/thumbnails/part-7.svg';
+import part8_hover from '../../images/thumbnails/part-8_ovr.svg';
+import part8 from '../../images/thumbnails/part-8.svg';
 import { Banner } from '../Banner/Banner';
 import { ContentLiftup } from '../ContentLiftup/ContentLiftup';
 
@@ -86,15 +88,15 @@ export const PartBanner = () => {
           summary="Web-sovellusten toiminnan perusteet"
           path="/osa7"
         />
-        {/*
-        <ContentLiftup
-          image={{ src: part8, alt: '' }}
-          hoverImageSrc={part8_hover}
-          name="Osa 8"
-          summary="GraphQL"
-          path="/osa8"
-        />
-*/}
+        {
+          <ContentLiftup
+            image={{ src: part8, alt: '' }}
+            hoverImageSrc={part8_hover}
+            name="Osa 8"
+            summary="GraphQL"
+            path="/osa8"
+          />
+        }
       </div>
     </Banner>
   );
