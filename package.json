@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "author": "Houston Inc. Consulting Oy",
   "dependencies": {
+    "anchorate": "^1.2.3",
     "gatsby": "^2.0.53",
     "gatsby-image": "^2.0.20",
     "gatsby-plugin-i18n": "^0.4.2",
@@ -24,7 +25,8 @@
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
-    "react-helmet": "^5.2.0"
+    "react-helmet": "^5.2.0",
+    "react-highlight": "^0.12.0"
   },
   "keywords": [
     "gatsby"
