@@ -9,7 +9,7 @@ import { Image } from '../Image/Image';
 import { TripleBorder } from '../TripleBorder/TripleBorder';
 
 const setSrcToChildrenImage = (event, src) => {
-  event.currentTarget.firstElementChild.firstElementChild.firstElementChild.firstElementChild.firstElementChild.firstElementChild.src = src;
+  event.currentTarget.firstElementChild.firstElementChild.firstElementChild.src = src;
 
   return;
 };
@@ -29,17 +29,17 @@ export const ContentLiftup = ({
   small && classes.push('content-liftup--small');
 
   return path ? (
-    <div
-      onMouseOver={e => {
-        setSrcToChildrenImage(e, hoverImageSrc ? hoverImageSrc : image.src);
-      }}
-      onMouseOut={e => {
-        setSrcToChildrenImage(e, image.src);
-      }}
-      className={`content-liftup col-3 ${className} ${classes.join(' ')}`}
-    >
+    <div className={`content-liftup col-3 ${className} ${classes.join(' ')}`}>
       <TripleBorder largeMargin>
-        <Link to={path}>
+        <Link
+          to={path}
+          onMouseOver={e => {
+            setSrcToChildrenImage(e, hoverImageSrc ? hoverImageSrc : image.src);
+          }}
+          onMouseOut={e => {
+            setSrcToChildrenImage(e, image.src);
+          }}
+        >
           <Image
             {...image}
             className="content-liftup__image image--square-big"
