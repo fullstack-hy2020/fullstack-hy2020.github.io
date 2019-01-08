@@ -49,7 +49,11 @@ export default function PartIntroTemplate({ data }) {
           <Arrow
             upperCase
             content={[
-              { backgroundColor: colors[partColor], text: 'Fullstack' },
+              {
+                backgroundColor: colors[partColor],
+                text: 'Fullstack',
+                link: '/about',
+              },
               {
                 backgroundColor: 'black',
                 text: title,
@@ -57,7 +61,7 @@ export default function PartIntroTemplate({ data }) {
             ]}
           />
 
-          <div className="part-intro">{Parser(html, parserOptions)}</div>
+          <div className="part-intro col-7">{Parser(html, parserOptions)}</div>
           <Arrow
             className="spacing"
             stack
