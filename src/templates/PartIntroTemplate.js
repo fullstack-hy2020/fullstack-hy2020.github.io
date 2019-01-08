@@ -49,7 +49,7 @@ export default function PartIntroTemplate({ data }) {
           <Arrow
             upperCase
             content={[
-              { backgroundColor: colors[partColor], text: 'Yleistä' },
+              { backgroundColor: colors[partColor], text: 'Fullstack' },
               {
                 backgroundColor: 'black',
                 text: title,
