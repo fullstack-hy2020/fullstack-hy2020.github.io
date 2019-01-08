@@ -84,9 +84,9 @@ Tapahtumankäsittelijä vaikuttaa hieman sotkuiselta. Kun vasenta nappia paineta
 
 ```js
 const handleLeftClick = () => {
-  const newClicks = { left: clicks.left + 1, right: clicks.right };
-  setClicks(newClicks);
-};
+  const newClicks = { left: clicks.left + 1, right: clicks.right }
+  setClicks(newClicks)
+}
 ```
 
 uudeksi tilaksi siis aseteaan seuraava olio
@@ -104,14 +104,14 @@ Uuden tilan määrittelevän olion modostaminen onnistuu hieman tyylikkäämmin 
 
 ```js
 const handleLeftClick = () => {
-  const newClicks = { ...clicks, left: clicks.left + 1 };
-  setClicks(newClicks);
-};
+  const newClicks = { ...clicks, left: clicks.left + 1 }
+  setClicks(newClicks)
+}
 
 const handleRightClick = () => {
-  const newClicks = { ...clicks, right: clicks.right + 1 };
-  setClicks(newClicks);
-};
+  const newClicks = { ...clicks, right: clicks.right + 1 }
+  setClicks(newClicks)
+}
 ```
 
 Merkintä vaikuttaa hieman erikoiselta. Käytännössä <code>{ ...clicks }</code> luo olion, jolla on kenttinään kopiot olion _clicks_ kenttien arvoista. Kun aaltosulkeisiin lisätään asioita, esim. <code>{ ...clicks, right: 1 }</code>, tulee uuden olion kenttä _right_ saamaan arvon 1.
@@ -127,19 +127,19 @@ luo oliosta _clicks_ kopion, missä kentän _right_ arvoa kasvatetaan yhdellä.
 Apumuuttujat ovat oikeastaan turhat, ja tapahtumankäsittelijät voidaan määritellä seuraavasti:
 
 ```js
-const handleLeftClick = () => setClicks({ ...clicks, left: clicks.left + 1 });
+const handleLeftClick = () => setClicks({ ...clicks, left: clicks.left + 1 })
 
 const handleRightClick = () =>
-  setClicks({ ...clicks, right: clicks.right + 1 });
+  setClicks({ ...clicks, right: clicks.right + 1 })
 ```
 
 Lukijalle voi tässä vaiheessa herätä kysymys miksi emme hoitaneet tilan päivitystä seuraavalla tavalla
 
 ```js
 const handleLeftClick = () => {
-  clicks.left++;
-  setClicks(clicks);
-};
+  clicks.left++
+  setClicks(clicks)
+}
 ```
 
 Sovellus näyttää toimivan. Reactissa ei kuitenkaan ole saa muuttaa tilaa suoraan, sillä voi olla arvaamattomat seuraukset. Tilan muutos tulee aina tehdä asettamalla uudeksi tilaksi vanhan perusteella tehty kopio!
@@ -185,16 +185,16 @@ const App = (props) => {
 Kaikki klikkaukset siis talletetaan omaan tilan palaansa _allClicks_ joka alustetaan tyhjäksi taulukoksi
 
 ```js
-const [allClicks, setAll] = useState([]);
+const [allClicks, setAll] = useState([])
 ```
 
 Kun esim. nappia _vasen_ painetaan, lisätään tilan taulukkoon _kaikki_ kirjain _L_:
 
 ```js
 const handleLeftClick = () => {
-  setAll(allClicks.concat('L'));
-  setLeft(left + 1);
-};
+  setAll(allClicks.concat('L'))
+  setLeft(left + 1)
+}
 ```
 
 Tilan osa _allClicks_ saa nyt arvokseen entisen taulukon, mihin on liitetty _L_ metodilla [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka toimii siten, että se ei muuta olemassaolevaa taulukkoa vaan luo _uuden taulukon_, mihin uusi alkio on lisätty.
@@ -203,10 +203,10 @@ Kuten jo aiemmin mainittiin, Javascriptissa on myös mahdollista lisätä tauluk
 
 ```js
 const handleLeftClick = () => {
-  allClicks.push('L');
-  setAll(allClick);
-  setLeft(left + 1);
-};
+  allClicks.push('L')
+  setAll(allClick)
+  setLeft(left + 1)
+}
 ```
 
 Älä kuitenkaan tee näin. Kuten jo mainitsimme, React-komponentin tilaa, eli esimerkiksi muuttujaa _allClicks_ ei saa muuttaa, vaikka se näyttääkin toimivan joissaikin tilanteissa, voi seurauksena olla hankalasti havaittavia ongelmia.
@@ -402,13 +402,13 @@ näin selviää heti onko esim. joku propsia vastaava attribuutti nimetty väär
 **HUOM** kun käytät komentoa _console.log_ debuggaukseen, älä yhdistele asioita "javamaisesti" plussalla, eli sen sijaan että kirjoittaisit
 
 ```js
-console.log('propsin arvo on' + props);
+console.log('propsin arvo on' + props)
 ```
 
 erottele tulostettavat asiat pilkulla:
 
 ```js
-console.log('propsin arvo on', props);
+console.log('propsin arvo on', props)
 ```
 
 Jos yhdistät merkkijonoon olion, tuloksena on suhteellisen hyödytön tulostusmuoto
@@ -450,9 +450,9 @@ React developer tools ei osaa toistaiseksi näyttää hookeilla muodostettua til
 Komponentin tila määriteltiin seuraavasti:
 
 ```js
-const [left, setLeft] = useState(0);
-const [right, setRight] = useState(0);
-const [allClicks, setAll] = useState([]);
+const [left, setLeft] = useState(0)
+const [right, setRight] = useState(0)
+const [allClicks, setAll] = useState([])
 ```
 
 Konsolin ylimpänä oleva _baseState_ kertoo ensimmäisen _useState_-kutsun määrittelevän tilan, eli muuttujan _left_ arvon, seuraava _baseState_ kertoo muuttujan _right_ arvon ja taulukon _allClicks_ arvo on alimpana.
@@ -839,8 +839,8 @@ Tapahtumankäsittelijän muodostaa funktiokutsu _setToValue(value + 1)_, joka sa
 
 ```js
 () => {
-  setValue(11);
-};
+  setValue(11)
+}
 ```
 
 Funktioita palauttavia funktioita ei tässäkään tapauksessa olisi ollut pakko käyttää. Muutetaan tilan päivittämisestä huolehtiva funktio _setToValue_ normaaliksi funktioksi:
@@ -896,17 +896,17 @@ Muutetaan ohjelmaa seuraavasti, eli määritelläänkin uusi komponentti _App_-k
 ```js
 const Button = props => (
   <button onClick={props.handleClick}>{props.text}</button>
-);
+)
 
 const App = props => {
-  const [value, setValue] = useState(10);
+  const [value, setValue] = useState(10)
 
   const setToValue = newValue => {
-    setValue(newValue);
-  };
+    setValue(newValue)
+  }
 
   // älä määrittele komponenttia täällä!
-  const Display = props => <div>{props.value}</div>;
+  const Display = props => <div>{props.value}</div>
 
   return (
     <div>
@@ -915,25 +915,25 @@ const App = props => {
       <Button handleClick={() => setToValue(0)} text="nollaa" />
       <Button handleClick={() => setToValue(value + 1)} text="kasvata" />
     </div>
-  );
-};
+  )
+}
 ```
 
 Kaikki näyttää toimivan. Mutta **älä tee koskaan näin!** Tapa on hyödytön ja johtaa useissa tilanteissa ikäviin ongelmiin. Siirretäänkin komponentin _Display_ määrittely oikeaan paikkaan, eli komponentin _App_ määrittelevän funktion ulkopuolelle:
 
 ```js
-const Display = props => <div>{props.value}</div>;
+const Display = props => <div>{props.value}</div>
 
 const Button = props => (
   <button onClick={props.handleClick}>{props.text}</button>
-);
+)
 
 const App = props => {
-  const [value, setValue] = useState(10);
+  const [value, setValue] = useState(10)
 
   const setToValue = newValue => {
-    setValue(newValue);
-  };
+    setValue(newValue)
+  }
 
   return (
     <div>
@@ -942,8 +942,8 @@ const App = props => {
       <Button handleClick={() => setToValue(0)} text="nollaa" />
       <Button handleClick={() => setToValue(value + 1)} text="kasvata" />
     </div>
-  );
-};
+  )
+}
 ```
 
 ### Hyödyllistä materiaalia
@@ -1122,19 +1122,19 @@ Laajenna sovellusta siten, että näytettävää anekdoottia on mahdollista ää
 Olio voidaan kopioida esim. seuraavasti:
 
 ```js
-const pisteet = { 0: 1, 1: 3, 2: 4, 3: 2 };
+const pisteet = { 0: 1, 1: 3, 2: 4, 3: 2 }
 
-const kopio = { ...pisteet };
-kopio[2] += 1; // kasvatetaan olion kentän 2 arvoa yhdellä
+const kopio = { ...pisteet }
+kopio[2] += 1     // kasvatetaan olion kentän 2 arvoa yhdellä
 ```
 
 ja taulukko esim. seuraavasti:
 
 ```js
-const pisteet = [1, 4, 6, 3];
+const pisteet = [1, 4, 6, 3]
 
-const kopio = [...pisteet];
-kopio[2] += 1; // kasvatetaan taulukon paikan 2 arvoa yhdellä
+const kopio = [...pisteet]
+kopio[2] += 1     // kasvatetaan taulukon paikan 2 arvoa yhdellä
 ```
 
 Yksinkertaisempi ratkaisu lienee nyt taulukon käyttö. Googlaamalla löydät paljon vihjeitä sille, miten kannattaa luoda halutun mittainen taulukko, joka on täytetty nollilla esim. [tämän](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-array-of-arbitrary-length/22209781).

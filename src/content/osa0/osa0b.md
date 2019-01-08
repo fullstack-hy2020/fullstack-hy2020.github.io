@@ -112,13 +112,13 @@ const getFrontPageHtml = noteCount => {
         </div>
       </body>
     </html>
-  `;
-};
+  `
+}
 
 app.get('/', (req, res) => {
-  const page = getFrontPageHtml(notes.length);
-  res.send(page);
-});
+  const page = getFrontPageHtml(notes.length)
+  res.send(page)
+})
 ```
 
 Koodia ei tarvitse vielä ymmärtää, mutta käytännössä HTML-sivun sisältö on talletettu ns. template stringinä, eli merkkijonona, jonka sekaan on mahdollisuus evaluoida esim. muuttujien arvoja. Etusivun dynaamisesti muuttuva osa, eli muistiinpanojen lukumäärä (koodissa _noteCount_) korvataan template stringissä sen hetkisellä konkreettisella lukuarvolla (koodissa _notes.length_).
@@ -147,29 +147,29 @@ HTML-koodin [head](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/hea
 Ladattu Javascript-koodi näyttää seuraavalta:
 
 ```js
-var xhttp = new XMLHttpRequest();
+var xhttp = new XMLHttpRequest()
 
 xhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
-    const data = JSON.parse(this.responseText);
-    console.log(data);
+    const data = JSON.parse(this.responseText)
+    console.log(data)
 
-    var ul = document.createElement('ul');
-    ul.setAttribute('class', 'notes');
+    var ul = document.createElement('ul')
+    ul.setAttribute('class', 'notes')
 
     data.forEach(function(note) {
-      var li = document.createElement('li');
+      var li = document.createElement('li')
 
-      ul.appendChild(li);
-      li.appendChild(document.createTextNode(note.content));
-    });
+      ul.appendChild(li)
+      li.appendChild(document.createTextNode(note.content))
+    })
 
-    document.getElementById('notes').appendChild(ul);
+    document.getElementById('notes').appendChild(ul)
   }
-};
+)
 
-xhttp.open('GET', '/data.json', true);
-xhttp.send();
+xhttp.open('GET', '/data.json', true)
+xhttp.send()
 ```
 
 Koodin yksityiskohdat eivät ole tässä osassa oleellisia, koodia on kuitenkin liitetty mukaan tekstin ja kuvien mausteeksi. Pääsemme kunnolla koodin pariin vasta osassa 1. Tämän osan esimerkkisovelluksen koodi ei itseasiassa ole ollenkaan relevanttia kurssilla käytettävien ohjelmointitekniikoiden kannalta.
@@ -181,8 +181,8 @@ Heti ladattuaan _script_-tagin sisältämän Javascriptin selain suorittaa koodi
 Kaksi viimeistä riviä määrittelevät, että selain tekee GET-tyyppisen HTTP-pyynnön palvelimen osoitteeseen _/data.json_:
 
 ```js
-xhttp.open('GET', '/data.json', true);
-xhttp.send();
+xhttp.open('GET', '/data.json', true)
+xhttp.send()
 ```
 
 Kyseessä on alin Network-välilehden näyttämistä selaimen tekemistä pyynnöistä.
@@ -200,38 +200,38 @@ Ylläoleva muistiinpanojen sivun Javascript-koodi siis lataa muistiinpanot sisä
 Tämän saa aikaan seuraava koodi:
 
 ```js
-const data = JSON.parse(this.responseText);
-console.log(data);
+const data = JSON.parse(this.responseText)
+console.log(data)
 
-var ul = document.createElement('ul');
-ul.setAttribute('class', 'notes');
+var ul = document.createElement('ul')
+ul.setAttribute('class', 'notes')
 
 data.forEach(function(note) {
-  var li = document.createElement('li');
+  var li = document.createElement('li')
 
-  ul.appendChild(li);
-  li.appendChild(document.createTextNode(note.content));
-});
+  ul.appendChild(li)
+  li.appendChild(document.createTextNode(note.content))
+})
 
-document.getElementById('notes').appendChild(ul);
+document.getElementById('notes').appendChild(ul)
 ```
 
 Koodi muodostaa ensin järjestämätöntä listaa edustavan [ul](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul)-tagin:
 
 ```js
-var ul = document.createElement('ul');
-ul.setAttribute('class', 'notes');
+var ul = document.createElement('ul')
+ul.setAttribute('class', 'notes')
 ```
 
 ja lisää ul:n sisään yhden [li](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li)-elementin kutakin muistiinpanoa kohti. Ainoastaan muistiinpanon _content_-kenttä tulee li-elementin sisällöksi, raakadatassa olevia aikaleimoja ei käytetä mihinkään.
 
 ```js
 data.forEach(function(note) {
-  var li = document.createElement('li');
+  var li = document.createElement('li')
 
-  ul.appendChild(li);
-  li.appendChild(document.createTextNode(note.content));
-});
+  ul.appendChild(li)
+  li.appendChild(document.createTextNode(note.content))
+})
 ```
 
 Avaa nyt konsolin _Console_-välilehti:
@@ -245,8 +245,8 @@ Painamalla rivin alussa olevaa kolmiota saat laajennettua konsolissa olevan rivi
 Konsoliin ilmestynyt tulostus johtuu siitä, että koodiin oli lisätty komento _console.log_:
 
 ```js
-const data = JSON.parse(this.responseText);
-console.log(data);
+const data = JSON.parse(this.responseText)
+console.log(data)
 ```
 
 eli vastaanotettuaan datan palvelimelta, koodi tulostaa datan konsoliin.
@@ -258,14 +258,14 @@ Konsolin välilehti _Console_ sekä komento _console.log_ tulevat varmasti eritt
 Koodin rakenne on hieman erikoinen:
 
 ```js
-var xhttp = new XMLHttpRequest();
+var xhttp = new XMLHttpRequest()
 
 xhttp.onreadystatechange = function() {
   // koodi, joka käsittelee palvelimen vastauksen
-};
+}
 
-xhttp.open('GET', '/data.json', true);
-xhttp.send();
+xhttp.open('GET', '/data.json', true)
+xhttp.send()
 ```
 
 eli palvelimelle tehtävä pyyntö suoritetaan vasta viimeisellä rivillä. Palvelimen vastauksen käsittelyn määrittelevä koodi on kirjoitettu jo aiemmin. Mistä on kyse?
@@ -283,7 +283,7 @@ xhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
     // koodi, joka käsittelee palvelimen vastauksen
   }
-};
+)
 ```
 
 Tapahtumankäsittelijöihin liittyvä mekanismi koodin suorittamiseen on Javascriptissä erittäin yleistä. Tapahtumankäsittelijöinä olevia Javascript-funktioita kutsutaan [callback](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function)- eli takaisinkutsufunktioiksi, sillä sovelluksen koodi ei kutsu niitä itse, vaan suoritusympäristö, eli web-selain suorittaa funktion kutsumisen sopivana ajankohtana, eli kyseisen _tapahtuman_ tapahduttua.
@@ -323,20 +323,20 @@ Edellisessä luvussa esittelemämme Javascript-koodi käytti nimenomaan DOM-apia
 Allaoleva koodi luo muuttujaan _ul_ DOM-apin avulla uuden "solmun" ja lisää sille joukon lapsisolmuja:
 
 ```js
-var ul = document.createElement('ul');
+var ul = document.createElement('ul')
 
 data.forEach(function(note) {
-  var li = document.createElement('li');
+  var li = document.createElement('li')
 
-  ul.appendChild(li);
-  li.appendChild(document.createTextNode(note.content));
-});
+  ul.appendChild(li)
+  li.appendChild(document.createTextNode(note.content))
+})
 ```
 
 lopulta muuttujassa _ul_ oleva puun palanen yhdistetään sopivaan paikkaan koko sovelluksen HTML-koodia edustavassa puussa:
 
 ```js
-document.getElementById('notes').appendChild(ul);
+document.getElementById('notes').appendChild(ul)
 ```
 
 ### document-olio ja sivun manipulointi konsolista
@@ -348,7 +348,7 @@ HTML-dokumenttia esittävän DOM-puun ylimpänä solmuna on olio nimeltään _do
 Tiedot saa esiin komennolla:
 
 ```js
-document;
+document
 ```
 
 Voimme suorittaa konsolista käsin DOM-apin avulla erilaisia operaatioita selaimessa näytettävälle web-sivulle hyödyntämällä _document_-olioa.
@@ -358,20 +358,20 @@ Lisätään nyt sivulle uusi muistiinpano suoraan konsolista.
 Haetaan ensin sivulta muistiinpanojen lista, eli sivun ul-elementeistä ensimmäinen:
 
 ```js
-lista = document.getElementsByTagName('ul')[0];
+lista = document.getElementsByTagName('ul')[0]
 ```
 
 luodaan uusi li-elementti ja lisätään sille sopiva tekstisisältö:
 
 ```js
-uusi = document.createElement('li');
-uusi.textContent = 'Sivun manipulointi konsolista on helppoa';
+uusi = document.createElement('li')
+uusi.textContent = 'Sivun manipulointi konsolista on helppoa'
 ```
 
 liitetään li-elementti listalle:
 
 ```js
-lista.appendChild(uusi);
+lista.appendChild(uusi)
 ```
 
 ![](../images/0/16.png)
@@ -466,10 +466,10 @@ app.post('/new_note', (req, res) => {
   notes.push({
     content: req.body.note,
     date: new Date(),
-  });
+  })
 
-  return res.redirect('/notes');
-});
+  return res.redirect('/notes')
+})
 ```
 
 POST-pyyntöihin liitettävä data lähetetään pyynnön mukana "runkona" eli [bodynä](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST). Palvelin saa POST-pyynnön datan pyytämällä sitä pyyntöä vastaavan olion _req_ kentästä _req.body_.
@@ -482,7 +482,7 @@ Palvelin luo uutta muistiinpanoa vastaavan olion ja laittaa sen muistiinpanot si
 notes.push({
   content: req.body.note,
   date: new Date(),
-});
+})
 ```
 
 Muistiinpano-olioilla on siis kaksi kenttää, varsinaisen sisällön kuvaava _content_ ja luomishetken kertova _date_.
@@ -547,20 +547,20 @@ Palvelin vastaa kyselyyn statuskoodilla [201 created](https://httpstatuses.com/2
 Ohjelman single page app -versiossa lomakkeen tietoja ei lähetetä selaimen normaalin lomakkeiden lähetysmekanismin avulla, lähettämisen hoitaa selaimen lataamassa Javascript-tiedostossa määritelty koodi. Katsotaan hieman koodia vaikka yksityiskohdista ei tarvitse nytkään välittää liikaa.
 
 ```js
-var form = document.getElementById('notes_form');
+var form = document.getElementById('notes_form')
 form.onsubmit = function(e) {
-  e.preventDefault();
+  e.preventDefault()
 
   var note = {
     content: e.target.elements[0].value,
     date: new Date(),
-  };
+  )
 
-  notes.push(note);
-  e.target.elements[0].value = '';
-  redrawNotes();
-  sendToServer(note);
-};
+  notes.push(note)
+  e.target.elements[0].value = ''
+  redrawNotes()
+  sendToServer(note)
+)
 ```
 
 Komennolla <code>document.getElementById('notes*form')</code> koodi hakee sivulta lomake-elementin ja rekisteröi sille \_tapahtumankäsittelijän* hoitamaan tilanteen, missä lomake "submitoidaan", eli lähetetään. Tapahtumankäsittelijä kutsuu heti metodia <code>e.preventDefault()</code> jolla se estää lomakkeen lähetyksen oletusarvoisen toiminnan. Oletusarvoinen toiminta aiheuttaisi lomakkeen lähettämisen ja sivun uudelleen lataamisen, sitä emme single page -sovelluksissa halua tapahtuvan.
@@ -571,13 +571,13 @@ Palvelimelle muistiinpanon lähettävä koodi seuraavassa:
 
 ```js
 var sendToServer = function(note) {
-  var xhttpForPost = new XMLHttpRequest();
+  var xhttpForPost = new XMLHttpRequest()
   // ...
 
-  xhttpForPost.open('POST', '/new_note_spa', true);
-  xhttpForPost.setRequestHeader('Content-type', 'application/json');
-  xhttpForPost.send(JSON.stringify(note));
-};
+  xhttpForPost.open('POST', '/new_note_spa', true)
+  xhttpForPost.setRequestHeader('Content-type', 'application/json')
+  xhttpForPost.send(JSON.stringify(note))
+)
 ```
 
 Koodissa siis määritellään, että kyse on HTTP POST -pyynnöstä, määritellään headerin _Content-type_ avulla lähetettävän datan tyypiksi JSON, ja lähetetään data JSON-merkkijonona.

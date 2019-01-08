@@ -9,6 +9,6 @@ navigation: a|/osa0/yleistä|Yleistä@b|/osa0/perusteet|WEB-sovelluksen toiminta
 
 <div class="intro">
 
-Relpace this whit better text... Tässä osassa tutustumme ensin kurssin käytänteisiin ja suorittamistapaan ja sen jälkeen käymme katsauksen Websovelluskehityksen periatteisiin. 
+Tässä osassa tutustumme ensin kurssin käytänteisiin ja suorittamistapaan. Sen jälkeen käymme katsauksen websovelluskehityksen perusteisiin ja siihen mihin suuntaan websovelluskehitys on edennyt parin kymmenen viime vuoden aikana.
 
 </div>

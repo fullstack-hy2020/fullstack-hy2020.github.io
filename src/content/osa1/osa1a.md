@@ -51,16 +51,16 @@ Chromen pitäisi aueta automaattisesti. Avaa konsoli **välittömästi**. Avaa m
 Sovelluksen koodi on hakemistossa _src_. Yksinkertaistetaan valmiina olevaa koodia siten, että tiedoston _index.js_ sisällöksi tulee:
 
 ```js
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
 const App = () => (
   <div>
     <p>Hello world</p>
   </div>
-);
+)
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
 Tiedostot _App.js_, _App.css_, _App.test.js_, _logo.svg_ ja _registerServiceWorker.js_ voi poistaa sillä niitä emme sovelluksessamme nyt tarvitse.
@@ -70,7 +70,7 @@ Tiedostot _App.js_, _App.css_, _App.test.js_, _logo.svg_ ja _registerServiceWork
 Tiedosto _index.js_ määrittelee nyt React-[komponentin](https://reactjs.org/docs/components-and-props.html) nimeltään _App_ ja viimeisen rivin komento
 
 ```js
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
 renderöi komponentin sisällön tiedoston _public/index.html_ määrittelemään _div_-elementtiin, jonka _id:n_ arvona on 'root'
@@ -84,7 +84,7 @@ const App = () => (
   <div>
     <p>Hello world</p>
   </div>
-);
+)
 ```
 
 Kuten arvata saattaa, komponentti renderöityy _div_-tagina, jonka sisällä on _p_-tagin sisällä oleva teksti _Hello world_.
@@ -96,7 +96,7 @@ Teknisesti ottaen komponentti on määritelty Javascript-funktiona. Seuraava sii
   <div>
     <p>Hello world</p>
   </div>
-);
+)
 ```
 
 joka sijoitetaan vakioarvoiseen muuttujaan _App_
@@ -115,8 +115,8 @@ const App = () => {
     <div>
       <p>Hello world</p>
     </div>
-  );
-};
+  )
+)
 ```
 
 eli funktio palauttaa sisältämänsä lausekkeen arvon.
@@ -125,13 +125,13 @@ Komponentin määrittelevä funktio voi sisältää mitä tahansa Javascript-koo
 
 ```js
 const App = () => {
-  console.log('Hello from komponentti');
+  console.log('Hello from komponentti')
   return (
     <div>
       <p>Hello world</p>
     </div>
-  );
-};
+  )
+)
 ```
 
 Komponenttien sisällä on mahdollista renderöidä myös dynaamista sisältöä.
@@ -140,9 +140,9 @@ Muuta komponentti muotoon:
 
 ```js
 const App = () => {
-  const now = new Date();
-  const a = 10;
-  const b = 20;
+  const now = new Date()
+  const a = 10
+  const b = 20
 
   return (
     <div>
@@ -151,8 +151,8 @@ const App = () => {
         {a} plus {b} is {a + b}
       </p>
     </div>
-  );
-};
+  )
+)
 ```
 
 Aaltosulkeiden sisällä oleva Javascript-koodi evaluoidaan ja evaluoinnin tulos upotetaan määriteltyyn kohtaan komponentin tuottamaa HTML-koodia.
@@ -164,25 +164,25 @@ Näyttää siltä, että React-komponentti palauttaa HTML-koodia. Näin ei kuite
 Käännösvaiheen jälkeen ohjelmamme näyttää seuraavalta:
 
 ```js
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
 const App = () => {
-  const now = new Date();
-  const a = 10;
-  const b = 20;
+  const now = new Date()
+  const a = 10
+  const b = 20
   return React.createElement(
     'div',
     null,
     React.createElement('p', null, 'Hello world, it is ', now.toString()),
     React.createElement('p', null, a, ' plus ', b, ' is ', a + b)
-  );
-};
+  )
+)
 
 ReactDOM.render(
   React.createElement(App, null),
   document.getElementById('root')
-);
+)
 ```
 
 Käännöksen hoitaa [Babel](https://babeljs.io/repl/). Create-react-app:illa luoduissa projekteissa käännös on konfiguroitu tapahtumaan automaattisesti. Tulemme tutustumaan aiheeseen tarkemmin kurssin [osassa 7](/osa7).
@@ -213,8 +213,8 @@ const Hello = () => {
     <div>
       <p>Hello world</p>
     </div>
-  );
-};
+  )
+)
 
 const App = () => {
   return (
@@ -222,10 +222,10 @@ const App = () => {
       <h1>Greetings</h1>
       <Hello />
     </div>
-  );
-};
+  )
+)
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
 Olemme määritelleet uuden komponentin _Hello_, jota käytetään komponentista _App_. Komponenttia voidaan luonnollisesti käyttää monta kertaa:
@@ -241,8 +241,8 @@ const App = () => {
       <Hello />
       // highlight-end
     </div>
-  );
-};
+  )
+)
 ```
 
 Komponenttien tekeminen Reactissa on helppoa ja komponentteja yhdistelemällä monimutkaisempikin sovellus on mahdollista pitää kohtuullisesti ylläpidettävänä. Reactissa filosofiana onkin koostaa sovellus useista, pieneen asiaan keskittyvistä uudelleenkäytettävistä komponenteista.
@@ -259,8 +259,8 @@ const Hello = props => {
     <div>
       <p>Hello {props.name}</p>
     </div>
-  );
-};
+  )
+)
 ```
 
 komponentin määrittelevällä funktiolla on nyt parametri _props_. Parametri saa arvokseen olion, jonka kenttinä ovat kaikki eri "propsit", jotka komponentin käyttäjä määrittelee.
@@ -275,8 +275,8 @@ const App = () => {
       <Hello name="Arto" />
       <Hello name="Pekka" />
     </div>
-  );
-};
+  )
+)
 ```
 
 Propseja voi olla mielivaltainen määrä ja niiden arvot voivat olla "kovakoodattuja" merkkijonoja tai Javascript-lausekkeiden tuloksia. Jos propsin arvo muodostetaan Javascriptillä, tulee se olla aaltosulkeissa.
@@ -291,12 +291,12 @@ const Hello = props => {
         Hello {props.name}, you are {props.age} years old
       </p>
     </div>
-  );
-};
+  )
+)
 
 const App = () => {
-  const nimi = 'Pekka';
-  const ika = 10;
+  const nimi = 'Pekka'
+  const ika = 10
 
   return (
     <div>
@@ -304,8 +304,8 @@ const App = () => {
       <Hello name="Arto" age={26 + 10} />
       <Hello name={nimi} age={ika} />
     </div>
-  );
-};
+  )
+)
 ```
 
 Komponentti _App_ lähettää propseina muuttujan arvoja, summalausekkeen evaluoinnin tuloksen ja normaalin merkkijonon.
@@ -328,8 +328,8 @@ const footer = () => {
     <div>
       greeting app created by <a href="https://github.com/mluukkai">mluukkai</a>
     </div>
-  );
-};
+  )
+)
 ```
 
 ja ottaa se käyttöön
@@ -342,8 +342,8 @@ const App = () => {
       <Hello name="Arto" age={26 + 10} />
       <footer />
     </div>
-  );
-};
+  )
+)
 ```
 
 sivulle ei kuitenkaan ilmesty näkyviin Footer-komponentissa määriteltyä sisältöä, vaan React luo sivulle ainoastaan tyhjän _footer_-elementin. Jos muutat komponentin nimen alkamaan isolla kirjaimella, React luo sivulle _div_-elementin, joka määriteltiin Footer-komponentissa.
@@ -368,8 +368,8 @@ Juurielementin käyttö ei ole ainoa toimiva vaihtoehto, myös _taulukollinen_ k
 
 ```js
 const App = () => {
-  return [<h1>Greetings</h1>, <Hello name="Arto" age={26 + 10} />, <Footer />];
-};
+  return [<h1>Greetings</h1>, <Hello name="Arto" age={26 + 10} />, <Footer />]
+)
 ```
 
 Määritellessä sovelluksen juurikomponenttia, tämä ei kuitenkaan ole järkevää ja näyttää koodissakin pahalta.
@@ -378,8 +378,8 @@ Juurielementin pakollinen käytöstä on se seuraus, että sovelluksen DOM-puuhu
 
 ```js
 const App = () => {
-  const name = 'Pekka';
-  const ika = 10;
+  const name = 'Pekka'
+  const ika = 10
 
   return (
     <>
@@ -388,8 +388,8 @@ const App = () => {
       <Hello name={nimi} age={ika} />
       <Footer />
     </>
-  );
-};
+  )
+)
 ```
 
 Nyt käännös menee läpi ja Reactin generoimaan DOM:iin ei tule ylimääräistä div-elementtiä.
@@ -406,17 +406,17 @@ Nyt käännös menee läpi ja Reactin generoimaan DOM:iin ei tule ylimääräist
 Luo create-react-app:illa uusi sovellus. Muuta <i>index.js</i> muotoon
 
 ```js
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
 const App = () => {
-  const course = 'Half Stack -sovelluskehitys';
-  const part1 = 'Reactin perusteet';
-  const exercises1 = 10;
-  const part2 = 'Tiedonvälitys propseilla';
-  const exercises2 = 7;
-  const part3 = 'Komponenttien tila';
-  const exercises3 = 14;
+  const course = 'Half Stack -sovelluskehitys'
+  const part1 = 'Reactin perusteet'
+  const exercises1 = 10
+  const part2 = 'Tiedonvälitys propseilla'
+  const exercises2 = 7
+  const part3 = 'Komponenttien tila'
+  const exercises3 = 14
 
   return (
     <div>
@@ -432,10 +432,10 @@ const App = () => {
       </p>
       <p>yhteensä {exercises1 + exercises2 + exercises3} tehtävää</p>
     </div>
-  );
-};
+  )
+)
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
 ja poista ylimääräiset tiedostot.
