@@ -16,11 +16,7 @@ body {
 }
 
 body {
-  padding-top: 120px;
-
-  @include from($desktop) {
-    padding-top: 90px;
-  }
+  padding-top: 2.055rem;
 }
 
 p {
