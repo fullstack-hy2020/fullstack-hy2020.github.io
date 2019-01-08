@@ -9,25 +9,8 @@ navigation: a|/osa1/reactin_alkeet|Reactin alkeet@b|/osa1/javascript|Javascript@
 
 <div class="intro">
 
-Aloitame React-kirjastoon tutustumisen...
+Aloitame tässä osassa tutustumaan React-kirjastoon, jolla siis teemme sovelluksen selaimessa suoritettavan koodin. Käymme samalla myös nopean katsauksen Javascriptin Reactin kannalta oleellisimpiin ominaisuuksiin.
 
-Osan oppimistavoitteet
+**Tämän osan (ja osan numero nolla) tehtävien deadline on maanantaina 21.11. klo 23:59**
 
-- React
-  - komponenttien määrittely Javascript-funktiona
-  - JSX
-  - tietojen ja funktioiden välittäminen lapsikomponentteihin propseina
-  - komponentin tila
-  - tilan päivittämisen periaatteet
-  - tapahtumankäsittelyn perusteet
-  
-- Javascript
-  - muuttujien määrittely
-  - taulukko ja sen operaatiot (mm. concat, forEach, join ja map)
-  - literaalisyntaksilla määritellyt oliot
-  - funktioiden määrittely
-  - this:in käyttäytyminen
-  - funktioita palauttavat funktiot
-  - luokkasyntaksi
-  - class propertynä määritellyt metodit
 </div>

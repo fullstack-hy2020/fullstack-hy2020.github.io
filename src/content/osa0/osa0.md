@@ -11,4 +11,6 @@ navigation: a|/osa0/yleistä|Yleistä@b|/osa0/perusteet|WEB-sovelluksen toiminta
 
 Tässä osassa tutustumme ensin kurssin käytänteisiin ja suorittamistapaan. Sen jälkeen käymme katsauksen websovelluskehityksen perusteisiin ja siihen mihin suuntaan websovelluskehitys on edennyt parin kymmenen viime vuoden aikana.
 
+**Tämän ja ensimmäisen osan tehtävien deadline on maanantaina 21.1. klo 23:59**
+
 </div>
