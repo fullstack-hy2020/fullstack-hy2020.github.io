@@ -84,7 +84,7 @@ Tehdään nyt Reactilla [osan 0](/osa0) alussa käytettyä esimerkkisovelluksen 
 Aloitetaan seuraavasta:
 
 ```js
-import React, { useState } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 
 const notes = [
@@ -430,18 +430,16 @@ Koko React-sovellus on mahdollista määritellä samassa tiedostossa, mutta se e
 
 Koodissamme on käytetty koko ajan moduuleja. Tiedoston ensimmäiset rivit
 
-
-
 ```js
-import React from 'react'
+import Reactfrom 'react'
 import ReactDOM from 'react-dom'
 ```
 
-[importtaavat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) eli ottavat käyttöönsä kaksi moduulia. Moduuli _react_ sijoitetaan muuttujaan _React_ ja _react-dom_ muuttujaan _ReactDOM_.
+[importtaavat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) eli ottavat käyttöönsä kaksi moduulia. Moduuli _react_ sijoitetaan muuttujaan _React_ ja _react-dom_ muuttujaan _ReactDOM_. 
 
 Siirretään nyt komponentti _Note_ omaan moduuliinsa.
 
-Pienissä sovelluksissa komponentit sijoitetaan yleensä _src_-hakemiston alle sijoitettavaan hakemistoon _components_. Konventiona on nimetä tiedosto komponentin mukaan, eli tehdään hakemisto _components_ ja sinne tiedosto _Note.js_ jonka sisältö on seuraava:
+Pienissä sovelluksissa komponentit sijoitetaan yleensä _src_-hakemiston alle sijoitettavaan hakemistoon _components_. Konventiona on nimetä tiedosto komponentin mukaan. Tehdään nyt sovellukseen hakemisto _components_ ja sinne tiedosto _Note.js_ jonka sisältö on seuraava:
 
 ```js
 import React from 'react'
@@ -464,7 +462,11 @@ Nyt komponenttia käyttävä tiedosto _index.js_ voi [importata](https://develop
 ```js
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Note from './components/Note'
+import Note from './components/Note' // highlight-line
+
+const App = ({notes}) => {
+  // ...
+}
 ```
 
 Moduulin eksporttaama komponentti on nyt käytettävissä muuttujassa _Note_ täysin samalla tavalla kuin aiemmin.
@@ -484,17 +486,24 @@ import React from 'react'
 import Note from './components/Note'
 
 const App = ({ notes }) => {
+  const rows = () => notes.map(note =>
+    <Note
+      key={note.id}
+      note={note}
+    />
+  )
+
   return (
     <div>
       <h1>Muistiinpanot</h1>
       <ul>
-        {notes.map(note => <Note key={note.id} note={note} />)}
+        {rows()}
       </ul>
     </div>
   )
 }
 
-export default App
+export default App // highlight-line
 ```
 
 Tiedoston _index.js_ sisällöksi jää:
@@ -502,10 +511,10 @@ Tiedoston _index.js_ sisällöksi jää:
 ```js
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
+import App from './App'  // highlight-line
 
 const notes = [
-  ...
+  // ...
 ]
 
 ReactDOM.render(
@@ -516,45 +525,136 @@ ReactDOM.render(
 
 Moduuleilla on paljon muutakin käyttöä kuin mahdollistaa komponenttien määritteleminen omissa tiedostoissaan, palaamme moduuleihin tarkemmin myöhemmin kurssilla.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part2-notes/tree/part2-1)
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part2-notes/tree/part2-1)
 
-Huomaa, että repositorion master-haarassa on myöhemmän vaiheen koodi, tämän hetken koodi on tagissa [part2-1](https://github.com/FullStack-HY/part2-notes/tree/part2-1):
+Huomaa, että repositorion master-haarassa on myöhemmän vaiheen koodi, tämän hetken koodi on branchissa [part2-1](https://github.com/fullstack-hy2019/part2-notes/tree/part2-1):
 
-![](../images/2/1b.png)
+![](../images/2/2b.png)
 
 Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnistämistä eli komentoa _npm start_.
 
-### Tehtäviä kokoelmien renderöinnistä
+### Kun sovellus hajoaa...
+
+Kun aloitat ohjelmoijan uraasi (ja allekirjoittaneella yhä edelleen 30 vuoden ohjelmointikokemuksella) melko usein käy niin ett ohjelma hajoaa aivan totaalisesti. Erityisen usien näin käy dynaamisesti tyypitetyillä kielillä kuten Javascript, missä kääntäjä ei tarkasta minkä tyyppisiä arvoja esim. funktioden parametreina ja paluuarvoina liikkuu.
+
+Reactissa räjähdys näyttää esim. seuraavalta
+
+![](../images/2/3b.png)
+
+Tilanteista pelastaa yleensä parhaiten <code>console.log</code>. Pala räjähdyksen aiheuttavaa koodia seuraavassa
+
+```js
+const Course = ({ course }) => (
+  <div>
+   <Header course={course} />
+  </div>
+)
+
+const App = () => {
+  const course = {
+    // ...
+  }
+
+  return (
+    <div>
+      <Course course={course} />
+    </div>
+  )
+}
+```
+
+Syy toimimattomuuteen alkaa selvitä lisäilemällä <code>console.log</code>-komentoja. Koska ensimmäinen renderöitävä asia on komponentti _App_ voi jos sinne laittaa ensimmäisen tulostuksen. 
+
+```js
+const App = () => {
+  const course = {
+    // ...
+  }
+
+  console.log('App toimii...') // highlight-line
+
+  return (
+    // ..
+  )
+}
+```
+
+Konsoliin tulevan tulostuksen nähdäkseen on skrollattava pitkän punaisen virhematon yläpuolelle
+
+![](../images/2/4b.png)
+
+Kun joku asia havaitaan toimivaksi, on aika logata syvemmältä. Jos komponentti on määritelty yksilausekkeista, eli returnitonta funktiota, on konsoliin tulostus haastavampaa:
+
+```js
+const Course = ({ course }) => (
+  <div>
+   <Header course={course} />
+  </div>
+)
+```
+
+komponentti on syytä muuttaa pidemmän kaavan mukaan määritellyksi:
+
+```js
+const Course = ({ course }) => { 
+  console.log(course)
+  return (
+    <div>
+    <Header course={course} />
+    </div>
+  )
+}
+```
+
+Erittäin usein ongelma on siitä että propsien odotetaan olevan eri muodossa kuin ne todellisuudessa ovat ja destrukturointi epäonnistuu. Ongelma alkaa useimmiten ratketa kun poistetaan destrukturointi ja katsotaan mitä <code>props</code> oikeasti pitää sisällään:
+
+```js
+const Course = (props) => { // highlight-line
+  console.log(props)  // highlight-line
+  const { course } = props
+  return (
+    <div>
+    <Header course={course} />
+    </div>
+  )
+}
+```
+
+Ja jos ongelma ei vieläkään selviä, ei auta kuin jatkaa vianjäljitystä, eli kirjoittaa lisää console.logeja.
+
+Lisäsin tämän luvun materiaaliin kun seuraavan tehtävän mallivastauksen koodi räjähti ihan totaalisesti (syynä väärässä muodossa ollut propsi) ja jouduin jälleen kerran debuggaamaan console.logaamalla.
 
 </div>
 
 <div class="tasks">
 
-<h3>Tehtävät 2.1</h3>
-<h4>kurssien sisältö</h4>
+<h3>Tehtäviä</h3>
+<h4>2.1: kurssien sisältö</h4>
 
 Viimeistellään nyt tehtävien 1.1-1.5 kurssin sisältöjä renderöivän ohjelman koodi. Voit ottaa tarvittaessa pohjaksi mallivastauksen koodin.
 
-Muutetaan komponentti _App_ seuraavasti:
+**Huomaa, että jos kopioit projektin paikasta toiseen, saattaa olla tarpeen ensin tuhota hakemisto *node_modules* ja antaa sen jälkeen asentaa riippuvuudet uudelleen, eli komento _npm install_ ennen kuin saat kopioidun projektin käynnistettyä.** Lähtökohtaisesti toki kannattaa olla kokonaan kopioimatta tai laittamatta versionhallintaan hakemistoa *node_modules*.
+
+Muutetaan komponenttia _App_ seuraavasti:
 
 ```js
 const App = () => {
-  const kurssi = {
-    nimi: 'Half Stack -sovelluskehitys',
-    osat: [
+  const course = {
+    name: 'Half Stack -sovelluskehitys',
+    parts: [
       {
-        nimi: 'Reactin perusteet',
-        tehtavia: 10,
+        name: 'Reactin perusteet',
+        exercises: 10,
         id: 1
       },
       {
-        nimi: 'Tiedonvälitys propseilla',
-        tehtavia: 7,
+        name: 'Tiedonvälitys propseilla',
+        exercises: 7,
         id: 2
       },
       {
-        nimi: 'Komponenttien tila',
-        tehtavia: 14,
+        name: 'Komponenttien tila',
+        exercises: 14,
         id: 3
       }
     ]
@@ -562,27 +662,29 @@ const App = () => {
 
   return (
     <div>
-      <Kurssi kurssi={kurssi} />
+      <Course course={course} />
     </div>
   )
 }
 ```
 
-Määrittele sovellukseen yksittäisen kurssin muotoilusta huolehtiva komponentti _Kurssi_.
+Määrittele sovellukseen yksittäisen kurssin muotoilusta huolehtiva komponentti _Course_.
 
 Sovelluksen komponenttirakenne voi olla esim. seuraava:
 
 <pre>
 App
-  Kurssi
-    Otsikko
-    Sisalto
-      Osa
-      Osa
+  Course
+    Header
+    Content
+      Part
+      Part
       ...
 </pre>
 
-ja renderöityvä sivu voi näyttää esim. seuraavalta:
+Eli komponentti _Course_ sisältää edellisessä osassa määritellyt komponentit, joiden vastuulle tulee kurssin nimen ja osien renderöinti.
+
+Renderöityvä sivu voi näyttää esim. seuraavalta:
 
 ![](../images/teht/8.png)
 
@@ -592,59 +694,75 @@ Sovelluksen täytyy luonnollisesti toimia _riippumatta kurssissa olevien osien m
 
 Varmista, että konsolissa ei näy mitään virheilmoituksia!
 
-<h3>Tehtävät 2.2</h3>
-<h4>tehtävien määrä</h4>
+<h4>2.2: tehtävien määrä</h4>
 
 Ilmoita myös kurssin yhteenlaskettu tehtävien lukumäärä:
 
 ![](../images/teht/9.png)
 
-<h3>Tehtävät 2.3*</h3>
-<h4>reduce</h4>
+<h4>2.3*: reduce</h4>
 
 Jos et jo niin tehnyt, laske koodissasi tehtävien määrä taulukon metodilla [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce).
 
-<h3>Tehtävät 2.4</h3>
-<h4>monta kurssia</h4>
+**Pro tip:** Kun koodisi joka näyttää esimerkisi seuraavalta 
+
+```js
+const total = parts.reduce( (s, p) => someMagicHere )
+```
+
+ei toimi, kannattaa taas kerran turvautua komentoon _console.log_, joka jälleen vaatii sen, että nuolifunktio muutetaan pidempään muotoonsa
+
+```js
+const total = parts.reduce( (s, p) => {
+  console.log('what is happening', s, p)
+  return someMagicHere 
+})
+```
+
+**Pro tip2:** VS codeen on asennettavissa laajennus, ilmeisesti [tämä](https://marketplace.visualstudio.com/items?itemName=cmstead.jsrefactor), jonka avulla nuolifunktion lyhyen muodon voi muuttaa automaattisesti pidemmäksi muodoksi ja päinvastoin:
+
+![](../images/2/5b.png)
+
+<h4>2.4: monta kurssia</h4>
 
 Laajennetaan sovellusta siten, että kursseja voi olla _mielivaltainen määrä_:
 
 ```js
 const App = () => {
-  const kurssit = [
+  const courses = [
     {
-      nimi: 'Half Stack -sovelluskehitys',
+      name: 'Half Stack -sovelluskehitys',
       id: 1,
-      osat: [
+      parts: [
         {
-          nimi: 'Reactin perusteet',
-          tehtavia: 10,
+          name: 'Reactin perusteet',
+          exercises: 10,
           id: 1
         },
         {
-          nimi: 'Tiedonvälitys propseilla',
-          tehtavia: 7,
+          name: 'Tiedonvälitys propseilla',
+          exercises: 7,
           id: 2
         },
         {
-          nimi: 'Komponenttien tila',
-          tehtavia: 14,
+          name: 'Komponenttien tila',
+          exercises: 14,
           id: 3
         }
       ]
     },
     {
-      nimi: 'Node.js',
+      name: 'Node.js',
       id: 2,
-      osat: [
+      parts: [
         {
-          nimi: 'Routing',
-          tehtavia: 3,
+          name: 'Routing',
+          exercises: 2,
           id: 1
         },
         {
-          nimi: 'Middlewaret',
-          tehtavia: 7,
+          name: 'Middlewaret',
+          exercises: 7,
           id: 2
         }
       ]
@@ -663,17 +781,8 @@ Sovelluksen ulkoasu voi olla esim seuraava:
 
 ![](../images/teht/10.png)
 
-<h3>Tehtävät 2.5</h3>
-<h4>erillinen moduuli</h4>
+<h4>2.5: erillinen moduuli</h4>
 
-Määrittele komponentti _Kurssi_ omana moduulinaan, jonka komponentti _App_ importtaa. Voit sisällyttää kaikki kurssin alikomponentit samaan moduuliin.
-
-</div>
-
-<div class="content">
-
-
-
-
+Määrittele komponentti _Course_ omana moduulinaan, jonka komponentti _App_ importtaa. Voit sisällyttää kaikki kurssin alikomponentit samaan moduuliin.
 
 </div>
