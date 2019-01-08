@@ -10,7 +10,7 @@ partColor: light-violet
 
 <div class="content">
 
-## Osan 0 oppimistavoitteet
+Some thext here. Some thext here. Some thext here. Some thext here...
 
 - Web-sovellusten toiminnan perusteet
   - HTML:n perusteet
@@ -23,8 +23,6 @@ partColor: light-violet
   - single page app -periaate
   - Chrome developer konsolin peruskäyttö
 
-## Web-sovelluksen toimintaperiaatteita
-
 Ennen kuin aloitamme ohjelmoinnin, käymme läpi web-sovellusten toimintaperiaatteita tarkastelemalla osoitteessa <https://fullstack-exampleapp.herokuapp.com/> olevaa esimerkkisovellusta. Huom. sovelluksen toinen versio on osoitteessa <https://fullstack-example.now.sh>, voit käyttää kumpaa vaan.
 
 Sovelluksen olemassaolon tarkoitus on ainoastaan havainnollistaa kurssin peruskäsitteistöä. Sovellus ei ole missään tapauksessa esimerkki siitä, _miten_ web-sovelluksia kannattaisi kehittää. Päinvastoin se demonstroi eräitä historiallisia web-sovellusten toteutukseen käytettyjä tapoja ja tekniikoita, joiden katsotaan nykyään olevan jopa _huonoja käytänteitä_.
@@ -35,12 +33,7 @@ Käytä nyt ja _koko ajan_ tämän kurssin aikana Chrome-selainta.
 
 Avataan selaimella [esimerkkisovellus](https://fullstack-exampleapp.herokuapp.com/). Sivun ensimmäinen lataus kestää joskus hetken.
 
-<div class="important">
-  <h3>Web-sovelluskehityksen sääntö numero yksi</h3>
-  Pidä selaimen developer-konsoli koko ajan auki
-</div>
-
-Konsoli avautuu macilla painamalla yhtä aikaa _alt_ _cmd_ ja _i_.
+**Web-sovelluskehityksen sääntö numero yksi**: pidä selaimen developer-konsoli koko ajan auki. Konsoli avautuu macilla painamalla yhtä aikaa _alt_ _cmd_ ja _i_.
 
 Ennen kun jatkat eteenpäin, selvitä miten saat koneellasi konsolin auki (googlaa tarvittaessa) ja muista pitää se auki _aina_ kun teet web-sovelluksia.
 

@@ -235,9 +235,11 @@ const App = () => {
   return (
     <div>
       <h1>Greetings</h1>
+      // highlight-start
       <Hello />
       <Hello />
       <Hello />
+      // highlight-end
     </div>
   );
 };

@@ -9,8 +9,25 @@ navigation: a|/osa1/reactin_alkeet|Reactin alkeet@b|/osa1/javascript|Javascript@
 
 <div class="intro">
 
-Kurssilla tutustutaan Javascriptilla tapahtuvaan moderniin websovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST-rajapinnoissa.
+Aloitame React-kirjastoon tutustumisen...
 
-Kurssilla käsitellään myös sovellusten testaamista, konfigurointia ja suoritusympäristöjen hallintaa sekä NoSQL-tietokantoja.
+Osan oppimistavoitteet
 
+- React
+  - komponenttien määrittely Javascript-funktiona
+  - JSX
+  - tietojen ja funktioiden välittäminen lapsikomponentteihin propseina
+  - komponentin tila
+  - tilan päivittämisen periaatteet
+  - tapahtumankäsittelyn perusteet
+  
+- Javascript
+  - muuttujien määrittely
+  - taulukko ja sen operaatiot (mm. concat, forEach, join ja map)
+  - literaalisyntaksilla määritellyt oliot
+  - funktioiden määrittely
+  - this:in käyttäytyminen
+  - funktioita palauttavat funktiot
+  - luokkasyntaksi
+  - class propertynä määritellyt metodit
 </div>

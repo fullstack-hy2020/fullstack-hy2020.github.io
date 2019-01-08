@@ -18,7 +18,7 @@ Helpoin ja useimmiten paras tapa on luoda sovellukselle useita erillisiä tiloja
 
 Seuraavassa sovellukselle luodaan kaksi alkuarvon 0 saavaa tilaa _left_ ja _right_:
 
-```react
+```js
 const App = (props) => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
@@ -40,7 +40,7 @@ Komponentti saa käyttöönsä tilan alustuksen yhteydessä funktiot _setLeft_ j
 
 Komponentin tila tai yksittäinen tilan pala voi olla minkä tahansa muotoinen. Voisimme toteuttaa saman toiminnallisuuden tallentamalla näppäimenpainallukset yhteen olioon
 
-```react
+```js
 {
   left: 0,
   right: 0
@@ -49,7 +49,7 @@ Komponentin tila tai yksittäinen tilan pala voi olla minkä tahansa muotoinen. 
 
 sovellus muuttuisi seuraavasti:
 
-```react
+```js
 const App = (props) => {
   const [clicks, setClicks] = useState({
     left: 0, right: 0
@@ -152,7 +152,7 @@ On kuitenkin tilanteita, joissa jokin osa tilaa kannattaa pitää monimutkaisemm
 
 Tehdään sovellukseen vielä laajennus, lisätään sovelluken tilaan taulukko _allClicks_ joka muistaa kaikki näppäimenpainallukset.
 
-```react
+```js
 const App = (props) => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
@@ -213,7 +213,7 @@ const handleLeftClick = () => {
 
 Katsotaan vielä tarkemmin, miten kaikkien painallusten historia renderöidään ruudulle:
 
-```react
+```js
 const App = (props) => {
   // ...
 
@@ -237,7 +237,7 @@ Taulukolle _allClicks_ kutsutaan metodia [join](https://developer.mozilla.org/en
 
 Muutetaan sovellusta siten, että näppäilyhistorian renderöinnistä vastaa komponentti _History_:
 
-```react
+```js
 const History = (props) => {
   if (props.allClicks.length === 0) {
     return (
@@ -289,7 +289,7 @@ Reactissa on monia muitakin tapoja [ehdolliseen renderöintiin](https://reactjs.
 
 Muutetaan vielä sovellusta siten, että se käyttää aiemmin määrittelemäämme komponenttia _Button_ painikkeiden muodostamiseen:
 
-```react
+```js
 const History = (props) => {
   if (props.allClicks.length === 0) {
     return (
@@ -375,7 +375,7 @@ Jos ja kun koodi ei käänny, eli selaimessa alkaa näkyä punaista
 
 Vanha kunnon printtaukseen perustuva debuggaus kannattaa aina. Eli jos esim. komponentissa
 
-```react
+```js
 const Button = ({ handleClick, text }) => (
   <button onClick={handleClick}>
     {text}
@@ -385,7 +385,7 @@ const Button = ({ handleClick, text }) => (
 
 olisi jotain ongelmia, kannattaa komponentista alkaa printtailla konsoliin. Pystyäksemme printtaamaan, tulee funktio muuttaa pitempään muotoon ja propsit kannattaa kenties vastaanottaa ilman destrukturointia:
 
-```react
+```js
 const Button = (props) => {
   console.log(props)
   const { handleClick, text } = props
@@ -413,7 +413,7 @@ console.log('propsin arvo on', props);
 
 Jos yhdistät merkkijonoon olion, tuloksena on suhteellisen hyödytön tulostusmuoto
 
-```bash
+```js
 propsin arvo on [Object object]
 ```
 
@@ -465,7 +465,7 @@ Funktiota _useState_ (eikä seuraavassa osassa esiteltävää funktiota _useEffe
 
 Hookeja siis kuuluu kutsua ainoastaan React-komponentin määrittelevän funktion rungosta:
 
-```react
+```js
 const App = (props) => {
   // nämä ovat ok
   const [age, setAge] = useState(0)
@@ -500,7 +500,7 @@ Tarkastellaan asiaa vielä uudelleen.
 
 Oletetaan, että käytössä on äärimmäisen yksinkertainen sovellus:
 
-```bash
+```js
 const App = (props) => {
   const [value, setValue] = useState(10)
 
@@ -523,13 +523,13 @@ Tapahtumankäsittelijän tulee aina olla _funktio_. Jos tapahtumankäisttelijän
 
 Jos esim. antaisimme tapahtumankäsittelijäksi merkkijonon:
 
-```bash
+```js
 <button onClick={'roskaa'}>nappi</button>
 ```
 
 React varoittaa asiasta konsolissa
 
-```bash
+```js
 index.js:2178 Warning: Expected `onClick` listener to be a function, instead got a value of `string` type.
     in button (at index.js:20)
     in div (at index.js:18)
@@ -538,19 +538,19 @@ index.js:2178 Warning: Expected `onClick` listener to be a function, instead got
 
 eli esim. seuraavanlainen yritys olisi tuhoon tuomittu
 
-```bash
+```js
 <button onClick={value + 1}>nappi</button>
 ```
 
 nyt tapahtumankäsittelijäksi on yritetty laittaa _value + 1_ mikä tarkoittaa laskuoperaation tulosta. React varoittaa tästäkin konsolissa
 
-```bash
+```js
 index.js:2178 Warning: Expected `onClick` listener to be a function, instead got a value of `number` type.
 ```
 
 Myöskään seuraava ei toimi
 
-```bash
+```js
 <button onClick={value = 0}>nappi</button>
 ```
 
@@ -558,7 +558,7 @@ taaskaan tapahtumankäsittelijänä ei ole funktio vaan sijoitusoperaatio. Konso
 
 Entä seuraava:
 
-```bash
+```js
 <button onClick={console.log('nappia painettu')}>nappi</button>
 ```
 
@@ -570,7 +570,7 @@ Funktiokutsu _console.log('nappia painettu')_ suoritetaan siinä vaiheessa kun k
 
 Myös seuraava yritys on virheellinen
 
-```bash
+```js
 <button onClick={setValue(0)}>nappi</button>
 ```
 
@@ -578,7 +578,7 @@ jälleen olemme yrittäneet laittaa tapahtumankäsittelijäksi funktiokutsun. Ei
 
 Jos haluamme suorittaa tietyn funktiokutsun tapahtuvan nappia painettaessa, toimii seuraava
 
-```bash
+```js
 <button onClick={() => console.log('nappia painettu')}>nappi</button>
 ```
 
@@ -586,7 +586,7 @@ Nyt tapahtumankäsittelijä on nuolisyntaksilla määritelty funktio _() => cons
 
 Saamme myös nollauksen toimimaan samalla tekniikalla
 
-```bash
+```js
 <button onClick={() => setValue(0)}>nappi</button>
 ```
 
@@ -596,7 +596,7 @@ Tapahtumakäsittelijäfunktioiden määrittely suoraan napin määrittelyn yhtey
 
 Usein tapahtumankäsittelijä määritelläänkin jossain muualla. Seuraavassa määritellään funktio metodin render alussa ja sijoitetaan se muuttujaan _handleClick_:
 
-```react
+```js
 const App = (props) => {
   const [value, setValue] = useState(10)
 
@@ -613,13 +613,13 @@ const App = (props) => {
 
 Muuttujassa _handleClick_ on nyt talletettuna viite itse funktioon. Viite annetaan napin määrittelyn yhteydessä
 
-```bash
+```js
 <button onClick={handleClick}>nappi</button>
 ```
 
 Tapahtumankäsittelijäfunktio voi luonnollisesti koostua useista komennoista, tällöin käytetään nuolifunktion aaltosulullista muotoa:
 
-```react
+```js
 const App = (props) => {
   const [value, setValue] = useState(10)
 
@@ -641,7 +641,7 @@ Mennään lopuksi funktioita palauttavaan funktioon. Kuten aiemmin jo mainittiin
 
 Muutetaan koodia seuraavasti
 
-```react
+```js
 const App = (props) => {
   const [value, setValue] = useState(10)
 
@@ -664,7 +664,7 @@ Koodi näyttää hankalalta mutta se ihme kyllä toimii.
 
 Tapahtumankäsittelijäksi on nyt "rekisteröity" funktiokutsu:
 
-```bash
+```js
 <button onClick={hello()}>nappi</button>
 ```
 
@@ -672,7 +672,7 @@ Aiemmin varoteltiin, että tapahtumankäsittelijä ei saa olla funktiokutsu vaan
 
 Kun komponenttia renderöidään suoritetaan seuraava funktio:
 
-```react
+```js
 const hello = () => {
   const handler = () => console.log('hello world')
 
@@ -684,13 +684,13 @@ funktion _paluuarvona_ on nyt toinen, muuttujaan _handler_ määritelty funktio.
 
 eli kun react renderöi seuraavan rivin
 
-```bash
+```js
 <button onClick={hello()}>nappi</button>
 ```
 
 sijoittaa se onClick-käsittelijäksi funktiokutsun _hello()_ paluuarvon. Eli oleellisesti ottaen rivi "muuttuu" seuraavaksi
 
-```bash
+```js
 <button onClick={() => console.log('hello world')}>nappi</button>
 ```
 
@@ -700,7 +700,7 @@ Mitä järkeä tässä konseptissa on?
 
 Muutetaan koodia hiukan:
 
-```bash
+```js
 const App = (props) => {
   const [value, setValue] = useState(10)
 
@@ -727,13 +727,13 @@ Nyt meillä on kolme nappia joiden tapahtumankäsittelijät määritellään par
 
 Ensimmäinen nappi määritellään seuraavasti
 
-```bash
+```js
 <button onClick={hello('world')}>nappi</button>
 ```
 
 Tapahtumankäsittelijä siis saadaan _suorittamalla_ funktiokutsu _hello('world')_. Funktiokutsu palauttaa funktion
 
-```bash
+```js
 () => {
   console.log('hello', 'world')
 }
@@ -741,13 +741,13 @@ Tapahtumankäsittelijä siis saadaan _suorittamalla_ funktiokutsu _hello('world'
 
 Toinen nappi määritellään seuraavasti
 
-```bash
+```js
 <button onClick={hello('react')}>nappi</button>
 ```
 
 Tapahtumankäsittelijän määrittelevä funktiokutsu _hello('react')_ palauttaa
 
-```bash
+```js
 () => {
   console.log('hello', 'react')
 }
@@ -759,7 +759,7 @@ Funktioita palauttavia funktioita voikin hyödyntää määrittelemään geneeri
 
 Käyttämämme määrittelytapa
 
-```bash
+```js
 const hello = (who) => {
   const handler = () => {
     console.log('hello', who)
@@ -771,7 +771,7 @@ const hello = (who) => {
 
 on hieman verboosi. Eliminoidaan apumuuttuja, ja määritellään palautettava funktio suoraan returnin yhteydessä:
 
-```bash
+```js
 const hello = (who) => {
   return () => {
     console.log('hello', who)
@@ -781,7 +781,7 @@ const hello = (who) => {
 
 ja koska funktio _hello_ sisältää ainoastaan yhden komennon, eli returnin, voidaan käyttää aaltosulutonta muotoa
 
-```bash
+```js
 const hello = (who) =>
   () => {
     console.log('hello', who)
@@ -790,7 +790,7 @@ const hello = (who) =>
 
 ja tuodaan vielä "kaikki nuolet" samalle riville
 
-```bash
+```js
 const hello = (who) => () => {
   console.log('hello', who)
 }
@@ -798,7 +798,7 @@ const hello = (who) => () => {
 
 Voimme käyttää samaa kikkaa myös muodostamaan tapahtumankäsittelijöitä, jotka asettavat komponentin tilalle halutun arvon. Muutetaan koodi muotoon:
 
-```bash
+```js
 render() {
   const setToValue = (newValue) => () => {
     setValue(newValue)
@@ -817,13 +817,13 @@ render() {
 
 Kun komponentti renderöidään, ja tehdään nappia tuhat
 
-```bash
+```js
 <button onClick={setToValue(1000)}>tuhat</button>
 ```
 
 tulee tapahtumankäsittelijäksi funktiokutsun _setToValue(1000)_ paluuarvo eli seuraava funktio
 
-```bash
+```js
 () => {
     setValue(1000)
 }
@@ -831,7 +831,7 @@ tulee tapahtumankäsittelijäksi funktiokutsun _setToValue(1000)_ paluuarvo eli 
 
 Kasvatusnapin generoima rivi on seuraava
 
-```react
+```js
 <button onClick={setToValue(value + 1)}>kasvata</button>
 ```
 
@@ -845,7 +845,7 @@ Tapahtumankäsittelijän muodostaa funktiokutsu _setToValue(value + 1)_, joka sa
 
 Funktioita palauttavia funktioita ei tässäkään tapauksessa olisi ollut pakko käyttää. Muutetaan tilan päivittämisestä huolehtiva funktio _setToValue_ normaaliksi funktioksi:
 
-```react
+```js
 const App = (props) => {
   const [value, setValue] = useState(10)
 
@@ -876,7 +876,7 @@ On aikalailla makuasia käyttääkö tapahtumankäsittelijänä funktioita palau
 
 Eriytetään vielä painike omaksi komponentikseen
 
-```react
+```js
 const Button = (props) =>
   <button onClick={props.handleClick}>{props.text}</button>
 ```
@@ -975,13 +975,13 @@ Huomaa, että sovelluksen tarvitsee toimia vain yhden selaimen käyttökerran aj
 
 Muista, että saadaksesi komponentin tilan luotua joudut asentamaan Reactin version _0.16.7.0-alpha.2_ antamalla seuraavan komennon projektin hakemistossa
 
-```bash
+```js
 npm install -s react@16.7.0-alpha.2 react-dom@16.7.0-alpha.2
 ```
 
 Voit tehdä koko sovelluksen tiedostoon _index.js_. Tiedoston sisältö voi olla aluksi seuraava
 
-```react
+```js
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
@@ -1013,7 +1013,7 @@ Refaktoroi sovelluksesi siten, että tilastojen näyttäminen on eriytetty oman 
 
 Muista, että komponentteja ei saa määritellä toisen komponentin sisällä:
 
-```react
+```js
 // oikea paikka komponentin määrittelyyn
 const Statistics = (props) => {
   // ...
@@ -1070,7 +1070,7 @@ Ohjelmistotuotannossa tunnetaan lukematon määrä [anekdootteja](http://www.com
 
 Laajenna seuraavaa sovellusta siten, että siihen tulee nappi, jota painamalla sovellus näyttää _satunnaisen_ ohjelmistotuotantoon liittyvän anekdootin:
 
-```react
+```js
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
@@ -1107,7 +1107,7 @@ Sovellus voi näyttää esim. seuraavalta:
 
 Muista, että saadaksesi komponentin tilan luotua joudut asentamaan Reactin version _0.16.7.0-alpha.2_ antamalla seuraavan komennon projektin hakemistossa
 
-```bash
+```js
 npm install -s react@16.7.0-alpha.2 react-dom@16.7.0-alpha.2
 ```
 

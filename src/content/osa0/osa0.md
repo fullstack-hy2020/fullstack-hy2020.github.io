@@ -9,8 +9,6 @@ navigation: a|/osa0/yleistä|Yleistä@b|/osa0/perusteet|WEB-sovelluksen toiminta
 
 <div class="intro">
 
-Kurssilla tutustutaan Javascriptilla tapahtuvaan moderniin websovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST-rajapinnoissa.
-
-Kurssilla käsitellään myös sovellusten testaamista, konfigurointia ja suoritusympäristöjen hallintaa sekä NoSQL-tietokantoja.
+Relpace this whit better text... Tässä osassa tutustumme ensin kurssin käytänteisiin ja suorittamistapaan ja sen jälkeen käymme katsauksen Websovelluskehityksen periatteisiin. 
 
 </div>
