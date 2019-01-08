@@ -23,7 +23,7 @@ export default class ContentTemplate extends Component {
     const { frontmatter } = this.props.data.markdownRemark;
 
     links.map(i => {
-      i.style = `border-color: ${colors[frontmatter.partColor]}`;
+      return (i.style = `border-color: ${colors[frontmatter.partColor]}`);
     });
   }
 
@@ -53,6 +53,7 @@ export default class ContentTemplate extends Component {
               <ScrollNavigation
                 part={part}
                 letter={letter}
+                currentPartTitle={subTitle}
                 currentPath={frontmatter.path}
                 className="col-3"
               />
