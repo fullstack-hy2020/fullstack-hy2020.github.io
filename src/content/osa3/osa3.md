@@ -4,7 +4,7 @@ path: /osa3
 mainImage: ../../images/part-3.svg
 part: 3
 partColor: light-orange
-navigation: a|/osa3/perusteet|WEB-sovellusten toiminnan perusteet@b|/osa3/node-express|Node.js/Express@c|/osa3/mongo|Mongo@d|/osa3/konfiguraatiot|Konfiguraatiot
+#navigation: a|/osa3/perusteet|WEB-sovellusten toiminnan perusteet@b|/osa3/node-express|Node.js/Express@c|/osa3/mongo|Mongo@d|/osa3/konfiguraatiot|Konfiguraatiot
 ---
 
 <div class="intro">

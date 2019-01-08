@@ -10,7 +10,7 @@ partColor: dark-orange
 
 <div class="content">
 
-Ennen osan varsinaista agendaa nostetaan esiin muutama tärkeä huomio.
+Ennen kun menemme uuteen asiaan, nostetaan esiin muutama edellisen osan huomiota herättänyt seikka.
 
 ### console.log
 
@@ -34,7 +34,7 @@ console.log('propsin arvo on', props)
 
 Jos yhdistät merkkijonoon olion, tuloksena on suhteellisen hyödytön tulostusmuoto
 
-```bash
+```js
 propsin arvo on [Object object]
 ```
 
@@ -44,18 +44,32 @@ kun taas pilkulla erotellessa saat tulostettavat asiat developer-konsoliin olion
 
 Pajan ja telegrammin havaintojen perusteella tapahtumankäsittely on osoittautunut haastavaksi.
 
-Osassa 1 on nyt uusi luku [tapahtumankäsittely revisited](/osa1#tapahtumankäsittely-revisited) joka käy aihepiiriä läpi.
+Osasan loppussa oleva kertaava osa [tapahtumankäsittely revisited](/osa1#tapahtumankäsittely-revisited) kannattaa käydä läpi jos osaaminen on vielä häilyvällä pohjalla.
 
 ### Visual Studio Coden snippetit
 
-VS Codeen on helppo määritellä "snippettejä", eli Netbeansin "sout":in tapaisia oikoteitä yleisesti käytettyjen koodinpätkien generointiin. Ohje snippetien luomiseen [täällä](https://github.com/FullStack-HY/FullStack-Hy.github.io/blob/master/snippet_ohje.md)
+Visual studio codeen on helppo määritellä "snippettejä", eli Netbeansin "sout":in tapaisia oikoteitä yleisesti käytettyjen koodinpätkien generointiin. Ohje snippetien luomiseen [täällä](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets)
 
 VS Code -plugineina löytyy myös hyödyllisiä valmiiksi määriteltyjä snippettejä, esim.
 [tämä](https://marketplace.visualstudio.com/items?itemName=xabikos.ReactSnippets)
 
+Tärkein kaikista snippeteistä on komennon <code>console.log()</code> nopeasti ruudulle tekevä snippet, esim. <code>clog</code>, jonka voi määritellä seuraavasti:
+
+```js
+{
+  "console.log": {
+    "prefix": "clog",
+    "body": [
+      "console.log('$1')",
+    ],
+    "description": "Log output to console"
+  }
+}
+```
+
 ## Taulukkojen käyttö Javascriptissä
 
-Tästä osasta lähtien käytämme runsaasti Javascriptin [taulukkojen](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) funktionaalisia käsittelymetodeja, kuten _find_, _filter_ ja _map_. Periaate niissä on täysin sama kuin Java 8:sta tutuissa streameissa, joita on käytetty jo runsaan vuoden ajan laitoksen Ohjelmoinnin perusteissa ja jatkokurssilla.
+Tästä osasta lähtien käytämme runsaasti Javascriptin [taulukkojen](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) funktionaalisia käsittelymetodeja, kuten _find_, _filter_ ja _map_. Periaate niissä on täysin sama kuin Java 8:sta tutuissa streameissa, joita on käytetty jo parin vuoden ajan Tietojenkäsittelytieteen osaston Ohjelmoinnin perusteissa ja jatkokurssilla sekä Ohjelmoinnin MOOC:issa.
 
 Jos taulukon funktionaalinen käsittely tuntuu vielä vieraalta, kannattaa katsoa Youtubessa olevasta videosarjasta _Functional Programming in JavaScript_ ainakin kolme ensimmäistä osaa
 
@@ -65,37 +79,37 @@ Jos taulukon funktionaalinen käsittely tuntuu vielä vieraalta, kannattaa katso
 
 ## Kokoelmien renderöiminen
 
-Tehdään nyt Reactilla [ensimmäisen osan](/osa1) alussa käytettyä esimerkkisovelluksen [Single page app -versiota](https://fullstack-exampleapp.herokuapp.com/spa) vastaavan sovelluksen 'frontend' eli selainpuolen sovelluslogiikka.
+Tehdään nyt Reactilla [osan 0](/osa0) alussa käytettyä esimerkkisovelluksen [Single page app -versiota](https://fullstack-exampleapp.herokuapp.com/spa) vastaavan sovelluksen 'frontend' eli selainpuolen sovelluslogiikka.
 
 Aloitetaan seuraavasta:
 
-```react
-import React from 'react'
+```js
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 const notes = [
   {
     id: 1,
     content: 'HTML on helppoa',
-    date: '2017-12-10T17:30:31.098Z',
+    date: '2019-01-10T17:30:31.098Z',
     important: true
   },
   {
     id: 2,
     content: 'Selain pystyy suorittamaan vain javascriptiä',
-    date: '2017-12-10T18:39:34.091Z',
+    date: '2019-01-10T18:39:34.091Z',
     important: false
   },
   {
     id: 3,
     content: 'HTTP-protokollan tärkeimmät metodit ovat GET ja POST',
-    date: '2017-12-10T19:20:14.298Z',
+    date: '2019-01-10T19:20:14.298Z',
     important: true
   }
 ]
 
 const App = (props) => {
-  const { notes } = props;
+  const { notes } = props
 
   return (
     <div>
@@ -119,13 +133,13 @@ Jokaiseen muistiinpanoon on merkitty tekstuaalisen sisällön ja aikaleiman lis�
 
 Koodin toiminta perustuu siihen, että taulukossa on tasan kolme muistiinpanoa, yksittäiset muistiinpanot renderöidään 'kovakoodatusti' viittaamalla suoraan taulukossa oleviin olioihin:
 
-```html
+```js
 <li>{note[1].content}</li>
 ```
 
 Tämä ei tietenkään ole järkevää. Ratkaisu voidaan yleistää generoimalla taulukon perusteella joukko React-elementtejä käyttäen [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)-funktiota:
 
-```bash
+```js
 notes.map(note => <li>{note.content}</li>)
 ```
 
@@ -136,21 +150,23 @@ nyt tuloksena on taulukko, jonka sisältö on joukko _li_-elementtejä
   '<li>HTML on helppoa</li>',
   '<li>Selain pystyy suorittamaan vain javascriptiä</li>',
   '<li>HTTP-protokollan tärkeimmät metodit ovat GET ja POST</li>',
-];
+]
 ```
 
 jotka voidaan sijoittaa _ul_-tagien sisälle:
 
-```react
+```js
 const App = (props) => {
-  const { notes } = props;
+  const { notes } = props
 
   return (
     <div>
       <h1>Muistiinpanot</h1>
+// highlight-start
       <ul>
         {notes.map(note => <li>{note.content}</li>)}
       </ul>
+// highlight-end      
     </div>
   )
 }
@@ -160,40 +176,48 @@ Koska li-tagit generoiva koodi on Javascriptia, tulee se sijoittaa JSX-templates
 
 Usein vastaavissa tilanteissa dynaamisesti generoitava sisältö eristetään omaan metodiin, jota JSX-template kutsuu:
 
-```react
+```js
 const App = (props) => {
-  const { notes } = props;
-  const rivit = () => notes.map(note => <li>{note.content}</li>)
+  const { notes } = props
+
+// highlight-start
+  const rows = () =>
+    notes.map(note => <li>{note.content}</li>)
+// highlight-end
 
   return (
     <div>
       <h1>Muistiinpanot</h1>
       <ul>
-        {rivit()}
+        {rows()} // highlight-line
       </ul>
     </div>
   )
 }
 ```
 
+### Key-attribuutti
+
 Vaikka sovellus näyttää toimivan, tulee konsoliin ikävä varoitus
 
-![](../assets/2/1.png)
+![](../images/2/1a.png)
 
-Kuten virheilmoituksen linkittämä [sivu](https://reactjs.org/docs/lists-and-keys.html#keys) kertoo, tulee taulukossa olevilla, eli käytännössä _map_-metodilla muodostetuilla elementeillä olla uniikki avain, eli kenttä nimeltään _key_.
+Kuten virheilmoituksen linkittämä [sivu](https://reactjs.org/docs/lists-and-keys.html#keys) kertoo, tulee taulukossa olevilla, eli käytännössä _map_-metodilla muodostetuilla elementeillä olla uniikki avain, eli attribuutti nimeltään _key_.
 
 Lisätään avaimet:
 
-```react
+```js
 const App = (props) => {
-  const { notes } = props;
-  const rivit = () => notes.map(note => <li key={note.id}>{note.content}</li>)
+  const { notes } = props
+
+  const rows = () =>
+    notes.map(note => <li key={note.id}>{note.content}</li>) // highlight-line
 
   return (
     <div>
       <h1>Muistiinpanot</h1>
       <ul>
-        {rivit()}
+        {rows()}
       </ul>
     </div>
   )
@@ -230,7 +254,7 @@ const notes = [
     date: '2017-12-10T19:20:14.298Z',
     important: true,
   },
-];
+]
 ```
 
 Pysähdytään hetkeksi tarkastelemaan miten _map_ toimii.
@@ -238,8 +262,8 @@ Pysähdytään hetkeksi tarkastelemaan miten _map_ toimii.
 Jos esim. tiedoston loppuun lisätään seuraava koodi
 
 ```js
-const result = notes.map(note => note.id);
-console.log(result);
+const result = notes.map(note => note.id)
+console.log(result)
 ```
 
 tulostuu konsoliin _[1, 2, 3]_ eli _map_ muodostaa uuden taulukon, jonka jokainen alkio on saatu alkuperäisen taulukon _notes_ alkioista _mappaamalla_ komennon parametrina olevan funktion avulla.
@@ -247,15 +271,15 @@ tulostuu konsoliin _[1, 2, 3]_ eli _map_ muodostaa uuden taulukon, jonka jokaine
 Funktio on
 
 ```js
-note => note.id;
+note => note.id
 ```
 
 eli kompaktissa muodossa kirjoitettu nuolifunktio, joka on täydelliseltä kirjoitustavaltaan seuraava
 
 ```js
-note => {
-  return note.id;
-};
+(note) => {
+  return note.id
+}
 ```
 
 eli funktio saa parametrikseen muistiinpano-olion ja _palauttaa_ sen kentän _id_ arvon.
@@ -263,14 +287,14 @@ eli funktio saa parametrikseen muistiinpano-olion ja _palauttaa_ sen kentän _id
 Muuttamalla komento muotoon
 
 ```js
-const result = notes.map(note => note.content);
+const result = notes.map(note => note.content)
 ```
 
 tuloksena on taulukko, joka koostuu muistiinpanojen sisällöistä.
 
 Tämä on jo lähellä käyttämäämme React-koodia:
 
-```bash
+```js
 notes.map(note => <li key={note.id}>{note.content}</li>)
 ```
 
@@ -278,7 +302,7 @@ joka muodostaa jokaista muistiinpano-olioa vastaavan _li_-tagin, jonka sisään 
 
 Koska metodin _map_ parametrina olevan funktion
 
-```bash
+```js
 note => <li key={note.id}>{note.content}</li>
 ```
 
@@ -288,14 +312,14 @@ Aaltosulkeiden käyttö tulee varmaan aiheuttamaan alussa pientä päänvaivaa, 
 
 Tarkastellaan vielä erästä bugien lähdettä. Lisää koodiin seuraava
 
-```bash
+```js
 const result = notes.map(note => {note.content} )
 console.log(result)
 ```
 
 Tulostuu
 
-```bash
+```js
 [undefined, undefined, undefined]
 ```
 
@@ -303,22 +327,22 @@ Missä on vika? Koodihan on ihan sama kun äsken toiminut koodi. Paitsi ei ihan.
 
 ```js
 note => {
-  note.content;
-};
+  note.content
+}
 ```
 
 Koska funktio koostuu nyt _koodilohkosta_ on funktion paluuarvo määrittelemätön eli _undefined_. Nuolifunktiot siis palauttavat ainoan komentonsa arvon, ainoastaan jos nuolifunktio on määritelty kompaktissa muodossaan, ilman koodilohkoa:
 
 ```js
-note => note.content;
+note => note.content
 ```
 
 huomaa, että 'oneliner'-nuolifunktioissa kaikkea ei tarvitse eikä aina kannatakaan kirjoittaa samalle riville.
 
 Parempi muotoilu ohjelmamme muistiinpanorivit tuottavalle apufunktiolle saattaakin olla seuraava useille riveille jaoteltu versio:
 
-```bash
-const rivit = () => notes.map(note =>
+```js
+const rows = () => notes.map(note =>
   <li key={note.id}>
     {note.content}
   </li>
@@ -337,10 +361,14 @@ notes.map((note, i) => ...)
 
 näin kutsuttaessa _i_ saa arvokseen sen paikan indeksin taulukossa, missä _note_ sijaitsee.
 
-Eli virheetön tapa määritellä rivien generointi on
+Eli eräs virhettä aiheuttamaton tapa määritellä rivien generointi on
 
-```bash
-const rivit = () => notes.map((note, i) => <li key={i}>{note.content}</li>)
+```js
+const rows = () => notes.map((note, i) => 
+  <li key={i}>
+    {note.content}
+  </li>
+)
 ```
 
 Tämä **ei kuitenkaan ole suositeltavaa** ja voi näennäisestä toimimisestaan aiheuttaa joissakin tilanteissa pahoja ongelmia. Lue lisää esim. [täältä](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318).
@@ -349,15 +377,15 @@ Tämä **ei kuitenkaan ole suositeltavaa** ja voi näennäisestä toimimisestaan
 
 Siistitään koodia hiukan. Koska olemme kiinnostuneita ainoastaan propsien kentästä _notes_, otetaan se vastaan suoraan [destrukturointia](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) hyödyntäen:
 
-```react
-const App = ({ notes }) => {
+```js
+const App = ({ notes }) => { // highlight-line
   // ...
 
   return (
     <div>
       <h1>Muistiinpanot</h1>
       <ul>
-        {rivit()}
+        {rows()}
       </ul>
     </div>
   )
@@ -366,19 +394,30 @@ const App = ({ notes }) => {
 
 Erotetaan yksittäisen muistiinpanon esittäminen oman komponenttinsa _Note_ vastuulle:
 
-```react
+```js
+// highlight-start
 const Note = ({ note }) => {
   return (
     <li>{note.content}</li>
   )
 }
+// highlight-end
 
 const App = ({ notes }) => {
+  const rows = () => notes.map(note =>
+  // highlight-start
+    <Note 
+      key={note.id}
+      note={note}
+    />
+    // highlight-end
+  )
+
   return (
     <div>
       <h1>Muistiinpanot</h1>
       <ul>
-        {notes.map(note=><Note key={note.id} note={note}/>)}
+        {rows()}
       </ul>
     </div>
   )
@@ -391,9 +430,11 @@ Koko React-sovellus on mahdollista määritellä samassa tiedostossa, mutta se e
 
 Koodissamme on käytetty koko ajan moduuleja. Tiedoston ensimmäiset rivit
 
+
+
 ```js
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 ```
 
 [importtaavat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) eli ottavat käyttöönsä kaksi moduulia. Moduuli _react_ sijoitetaan muuttujaan _React_ ja _react-dom_ muuttujaan _ReactDOM_.
@@ -402,7 +443,7 @@ Siirretään nyt komponentti _Note_ omaan moduuliinsa.
 
 Pienissä sovelluksissa komponentit sijoitetaan yleensä _src_-hakemiston alle sijoitettavaan hakemistoon _components_. Konventiona on nimetä tiedosto komponentin mukaan, eli tehdään hakemisto _components_ ja sinne tiedosto _Note.js_ jonka sisältö on seuraava:
 
-```react
+```js
 import React from 'react'
 
 const Note = ({ note }) => {
@@ -420,7 +461,7 @@ Moduulin viimeisenä rivinä [eksportataan](https://developer.mozilla.org/en-US/
 
 Nyt komponenttia käyttävä tiedosto _index.js_ voi [importata](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) moduulin:
 
-```react
+```js
 import React from 'react'
 import ReactDOM from 'react-dom'
 import Note from './components/Note'
@@ -430,7 +471,7 @@ Moduulin eksporttaama komponentti on nyt käytettävissä muuttujassa _Note_ tä
 
 Huomaa, että itse määriteltyä komponenttia importatessa komponentin sijainti tulee ilmaista _suhteessa importtaavaan tiedostoon_:
 
-```react
+```js
 './components/Note'
 ```
 
@@ -438,7 +479,7 @@ Piste alussa viittaa nykyiseen hakemistoon, eli kyseessä on nykyisen hakemiston
 
 Koska myös _App_ on komponentti, eristetään sekin omaan moduuliinsa. Koska kyseessä on sovelluksen juurikomponentti, sijoitetaan se suoraan hakemistoon _src_. Tiedoston sisältö on seuraava:
 
-```react
+```js
 import React from 'react'
 import Note from './components/Note'
 
@@ -458,7 +499,7 @@ export default App
 
 Tiedoston _index.js_ sisällöksi jää:
 
-```react
+```js
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
@@ -496,7 +537,7 @@ Viimeistellään nyt tehtävien 1.1-1.5 kurssin sisältöjä renderöivän ohjel
 
 Muutetaan komponentti _App_ seuraavasti:
 
-```react
+```js
 const App = () => {
   const kurssi = {
     nimi: 'Half Stack -sovelluskehitys',
@@ -568,7 +609,7 @@ Jos et jo niin tehnyt, laske koodissasi tehtävien määrä taulukon metodilla [
 
 Laajennetaan sovellusta siten, että kursseja voi olla _mielivaltainen määrä_:
 
-```react
+```js
 const App = () => {
   const kurssit = [
     {

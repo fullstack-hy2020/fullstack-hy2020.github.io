@@ -4,7 +4,7 @@ path: /osa6
 mainImage: ../../images/part-6.svg
 part: 6
 partColor: violet
-navigation: a|/osa6/redux|Redux@b|/osa6/react-redux|React+Redux@c|/osa6/react|React
+#navigation: a|/osa6/redux|Redux@b|/osa6/react-redux|React+Redux@c|/osa6/react|React
 ---
 
 <div class="intro">
