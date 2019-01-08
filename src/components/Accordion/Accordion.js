@@ -1,5 +1,6 @@
 import './Accordion.scss';
 
+import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
@@ -13,12 +14,19 @@ class Accordion extends Component {
       isOpened: false,
     };
   }
+
+  componentDidMount() {
+    this.props.initiallyOpened && this.setState({ isOpened: true });
+  }
+
   render() {
-    const { title, content, className } = this.props;
+    const { title, content, className, containerClassName, list } = this.props;
     const { isOpened } = this.state;
 
     return (
-      <div className="accordion__container col-8 push-right-1">
+      <div
+        className={`accordion__container col-8 push-right-1 ${containerClassName}`}
+      >
         <button
           className={`accordion accordion__title ${
             isOpened ? 'active' : ''
@@ -35,11 +43,18 @@ class Accordion extends Component {
             transition: 'max-height 0.2s ease-out',
           }}
         >
-          <BodyText
-            className="col-8 push-right-1"
-            style={{ padding: '3.333rem' }}
-            text={content}
-          />
+          {content && (
+            <BodyText className="col-8 push-right-1" text={content} />
+          )}
+          {list && (
+            <ul>
+              {list.map(l => (
+                <li key={l.text}>
+                  <Link to={l.href}>{l.text}</Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     );
@@ -48,12 +63,17 @@ class Accordion extends Component {
 
 Accordion.propTypes = {
   title: PropTypes.string.isRequired,
-  content: PropTypes.oneOfType([PropTypes.string, PropTypes.array]).isRequired,
+  content: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  list: PropTypes.array,
   className: PropTypes.string,
+  containerClassName: PropTypes.string,
+  initiallyOpened: PropTypes.bool,
 };
 
 Accordion.defaultProps = {
   className: '',
+  containerClassName: '',
+  initiallyOpened: false,
 };
 
 export default Accordion;

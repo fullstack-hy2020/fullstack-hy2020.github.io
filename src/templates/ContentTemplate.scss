@@ -3,13 +3,24 @@
 .course {
   position: relative;
 
-  p,
+  p {
+    margin-left: 3rem;
+  }
+
+  p:not(:last-of-type) {
+    margin-bottom: $vertical-spacing;
+  }
+
   h1,
   h2,
   h3,
   h4 {
     margin-left: 3rem;
     padding-bottom: 2rem;
+  }
+
+  h2:not(:first-of-type) {
+    margin-top: 2rem;
   }
 
   pre {
@@ -22,7 +33,7 @@
     font-family: Courier;
     font-style: normal;
     background-color: $main;
-    padding: 0.1rem;
+    padding: 1px 5px 2px;
   }
 
   img {
@@ -56,15 +67,6 @@
     font-size: 3.444rem;
     font-weight: bold;
   }
-
-  li {
-    list-style-type: none;
-
-    &::before {
-      content: '-';
-      margin-right: 1rem;
-    }
-  }
 }
 
 .course-content {
@@ -83,4 +85,9 @@
   margin-left: -1em;
   padding-right: 1em;
   padding-left: 0.75em;
+}
+
+code[class*='language-'],
+pre[class*='language-'] {
+  text-shadow: none;
 }

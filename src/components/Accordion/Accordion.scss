@@ -17,7 +17,7 @@
   border-radius: 5px;
   color: #444;
   cursor: pointer;
-  padding: 18px;
+  padding: 1rem;
   width: 100%;
   text-align: left;
   outline: none;
@@ -51,4 +51,22 @@
   transition: height 0.3s;
   transition-timing-function: ease-in-out;
   overflow: hidden;
+}
+
+.accordion--side-navigation {
+  .accordion {
+    border: none;
+    padding: 0;
+  }
+
+  .active,
+  .accordion:hover {
+    background-color: $black;
+    color: $white;
+  }
+
+  .accordion:after,
+  .active:after {
+    content: '';
+  }
 }

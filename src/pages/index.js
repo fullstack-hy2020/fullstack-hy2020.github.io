@@ -77,7 +77,7 @@ const IndexPage = () => (
               <div className="col-7">
                 <SubHeader
                   className="col-10 spacing--large"
-                  style={{ fontSize: '3.444rem' }}
+                  style={{ fontSize: '3rem' }}
                   text={mainTitle}
                   headingLevel="h1"
                 />
@@ -92,10 +92,7 @@ const IndexPage = () => (
                   ]}
                 />
 
-                <BodyText
-                  className="col-7 spacing--after-small "
-                  text={intro}
-                />
+                <BodyText className="col-7" text={intro} />
               </div>
 
               <Element flex spaceAround className="col-3">
@@ -197,13 +194,6 @@ const IndexPage = () => (
             <PartBanner />
 
             <Element className="container spacing--after" flex>
-              <SubHeader
-                className="col-10 centered"
-                text="Company logos"
-                headingLevel="h2"
-                headingFontSize="3.444rem"
-              />
-
               <Element flex spaceBetween className="col-8 push-right-1">
                 <ContentLiftup
                   small

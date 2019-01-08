@@ -16,11 +16,11 @@ Ehdottomasti helpoin tapa päästä alkuun on [create-react-app](https://github.
 
 Luodaan sovellus nimeltään _osa1_ ja mennään sovelluksen sisältämään hakemistoon:
 
-<pre>
+```bash
 $ npx create-react-app osa1
 $ cd osa1
 $ npm start
-</pre>
+```
 
 Kaikki tässä (ja jatkossa) annettavat merkillä $alkavat komennot on kirjoitettu terminaaliin eli komentoriville. Merkkiä$ tule kirjoittaa, sillä se edustaa komentokehoitetta.
 
@@ -38,9 +38,9 @@ Joudumme siis ainakin alkuvuoden ajan antamaan aina edellisen komennon kun aloit
 
 Sovellus käynnistetään seuraavasti
 
-<pre>
+```bash
 $ npm start
-</pre>
+```
 
 Sovellus käynnistyy oletusarvoisesti localhostin porttiin 3000, eli osoitteeseen <http://localhost:3000>
 

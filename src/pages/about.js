@@ -55,6 +55,7 @@ const About = () => (
 
                   <BodyText
                     heading={{ title: 'Oletetut esitiedot', level: 'h2' }}
+                    style={{ marginTop: '4rem' }}
                     text={[
                       'Osallistujilta edellytetään vahvaa ohjelmointirutiinia, web-ohjelmoinnin ja tietokantojen perustuntemusta, git-versionhallintajärjestelmän peruskäytön hallintaa, kykyä pitkäjänteiseen työskentelyyn sekä valmiutta omatoimiseen tiedonhakuun ja ongelmanratkaisuun.',
                       'Osallistuminen ei kuitenkaan edellytä kurssilla käsiteltävien tekniikoiden tai Javascript-kielen hallintaa.',
