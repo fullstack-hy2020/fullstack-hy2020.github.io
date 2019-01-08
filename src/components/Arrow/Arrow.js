@@ -68,7 +68,7 @@ const Arrow = ({
     );
   } else if (!stack && link) {
     render = (
-      <div className="spacing spacing--after">
+      <div className="spacing--small spacing--after-small">
         <Link to={link} style={{ display: 'inline-block' }}>
           {arrowContent}
         </Link>
