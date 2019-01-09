@@ -453,7 +453,7 @@ const hook = () => {
 useEffect(hook, [])
 ```
 
-Nyt huomaamme selvemmin, että funktiolle [useEffec](https://reactjs.org/docs/hooks-reference.html#useeffect) annetaan kaksi parametria. Näistä ensimmäinen on funktio, eli itse <i>efekti</i>. Dokumentaation mukaan
+Nyt huomaamme selvemmin, että funktiolle [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect) annetaan kaksi parametria. Näistä ensimmäinen on funktio, eli itse <i>efekti</i>. Dokumentaation mukaan
 
 > By default, effects run after every completed render, but you can choose to fire it only when certain values have changed.
 
@@ -563,15 +563,15 @@ Sovelluksen käyttöliittymä on yksinkertainen. Näytettävä maa haetaan kirjo
 
 Jos ehdon täyttäviä maita on liikaa (yli 10), kehoitetaan tarkentamaan hakuehtoa:
 
-![](../assets/teht/13.png)
+![](../images/2/19b1.png)
 
 Jos maita on alle kymmenen, mutta yli 1 näytetään hakuehdon täyttävät maat:
 
-![](../assets/teht/14.png)
+![](../images/2/19b2.png)
 
-Kun ehdon täyttäviä maita on enää yksi, näytetään maan lippu sekä perustiedot:
+Kun ehdon täyttäviä maita on enää yksi, näytetään maan perustiedot, lippu sekä siellä puhutut kielet:
 
-![](../assets/teht/15.png)
+![](../images/2/19b3.png)
 
 **Huom:** riittää että sovelluksesi toimii suurimmalle osalle maista. Jotkut maat kuten _Sudan_ voivat tuottaa ongelmia, sillä maan nimi on toisen maan _South Sudan_ osa. Näistä corner caseista ei tarvitse välittää.
 
@@ -579,14 +579,10 @@ Kun ehdon täyttäviä maita on enää yksi, näytetään maan lippu sekä perus
 
 **Tässä osassa on vielä paljon tekemistä, joten älä juutu tähän tehtävään!**
 
-Paranna edellisen tehtävän maasovellusta siten, että kun sivulla näkyy useiden maiden nimiä, riittää maan nimen klikkaaminen tarkentamaan haun siten, että klikatun maan tarkemmat tiedot saadaan näkyviin.
+Paranna edellisen tehtävän maasovellusta siten, että kun sivulla näkyy useiden maiden nimiä, tulee maan nimen viereen nappi, mitä klikkaamalla pääsee suoraan maan näkymään:
 
-Huomaa, että saat "nimestä" klikattavan kiinnittämällä nimen sisältävään elementtiin, esim. diviin klikkaustenkuuntelijan:
+![](../images/2/19b3.png)
 
-```
-<div onClick={...}>
-  {country.name}
-</div>
-```
+Tässäkin tehtävässä riittää, että ohjelmasi toimii suurella osalla maita ja maat joiden nimi sisältyy johonkin muuhun maahan, kuten _Sudan_ voit unohtaa. 
 
 </div>
