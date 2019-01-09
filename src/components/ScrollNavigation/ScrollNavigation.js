@@ -1,63 +1,21 @@
 import './ScrollNavigation.scss';
 
+import { Link, StaticQuery, graphql } from 'gatsby';
 import kebabCase from 'lodash/fp/kebabCase';
+import snakeCase from 'lodash/fp/snakeCase';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import Accordion from '../Accordion/Accordion';
 import Element from '../Element/Element';
 
-const partMainTitles = {
-  0: ['Yleistä', 'Web-sovelluksen toimintaperiaatteita'],
-  1: [
-    'Reactin alkeet',
-    'Javascript',
-    'Komponentin tila ja tapahtumankäsittely',
-    'Monimutkaisempi tila, Reactin debuggaus',
-  ],
-  2: ['Web-sovellusten toiminnan perusteet', 'React', 'Javascript'],
-  3: [
-    'Web-sovellusten toiminnan perusteet',
-    'Node.js/Express',
-    'Mongo',
-    'Konfiguraatiot',
-  ],
-  4: [
-    'Node.js/Express',
-    'Node.js -sovellusten testaus',
-    'JS',
-    'Mongoose',
-    'Web',
-  ],
-  5: [
-    'React',
-    'Frontendin testauksen alkeet',
-    'Redux',
-    'React+Redux',
-    'Javascript',
-  ],
-  6: ['Redux', 'React+Redux', 'React'],
-  7: [
-    'Webpack',
-    'Tyylien lisääminen sovellukseen',
-    'Testaus',
-    'React',
-    'React/Node-sovellusten tietoturva',
-    'Tyypitys',
-    'Tulevaisuuden trendejä',
-  ],
-  8: ['GraphQL'],
-};
-
 class ScrollNavigation extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      top: 0,
       h1Top: 0,
       headings: [],
-      navigationClass: 'scroll-navigation',
     };
   }
 
@@ -76,50 +34,136 @@ class ScrollNavigation extends Component {
     });
 
     this.setState({ headings: headings, h1Top: h1.offsetTop });
-
-    window.addEventListener('scroll', this.handleScroll);
   };
 
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
-  }
+  loopThroughPartsNode = partsNode => {
+    const { headings } = this.state;
+    const {
+      part,
+      letter,
+      currentPath,
+      currentPartTitle,
+      colorCode,
+    } = this.props;
+    let arr = [];
 
-  handleScroll = () => {
-    let scroll = window.scrollY;
-
-    const { top, h1Top } = this.state;
-
-    this.setState({
-      top: scroll,
-      navigationClass: top > h1Top ? 'scroll-navigation--top' : '',
-    });
-  };
-
-  render() {
-    const { headings, navigationClass } = this.state;
-    const { part, letter, currentPath, currentPartTitle } = this.props;
-
-    return (
-      <Element
-        tag="ul"
-        flex
-        dirColumn
-        className={`scroll-navigation ${
-          this.props.className
-        } ${navigationClass}`}
-      >
-        {partMainTitles[part].map(t => (
+    for (let key in partsNode) {
+      if (currentPartTitle !== partsNode[key]) {
+        arr.push(
+          <Link
+            className="left-navigation-link"
+            style={{ borderColor: colorCode }}
+            to={`/osa${part}/${snakeCase(partsNode[key])}`}
+          >{`${key} ${partsNode[key]}`}</Link>
+        );
+      } else {
+        arr.push(
           <Accordion
             containerClassName="accordion--side-navigation"
-            initiallyOpened={currentPartTitle === t}
-            key={t}
-            title={`${letter} ${t}`}
+            style={{ color: colorCode }}
+            titleStyle={{
+              backgroundColor: colorCode,
+              borderColor: colorCode,
+            }}
+            initiallyOpened
+            key={key}
+            title={`${letter} ${partsNode[key]}`}
             list={headings.map(i => {
               return { href: `${currentPath}#${i.id}`, text: i.text };
             })}
           />
-        ))}
-      </Element>
+        );
+      }
+    }
+    return arr;
+  };
+
+  render() {
+    const { part } = this.props;
+
+    return (
+      <StaticQuery
+        query={graphql`
+          query navigationQuery {
+            allSidenavigationJson {
+              edges {
+                node {
+                  _0 {
+                    a
+                    b
+                  }
+                  _1 {
+                    a
+                    b
+                    c
+                    d
+                  }
+                  _2 {
+                    a
+                    b
+                    c
+                    d
+                    e
+                  }
+                  _3 {
+                    a
+                    b
+                    c
+                    d
+                  }
+                  _4 {
+                    a
+                    b
+                    c
+                    d
+                    e
+                  }
+                  _5 {
+                    a
+                    b
+                    c
+                    d
+                    e
+                  }
+                  _6 {
+                    a
+                    b
+                    c
+                  }
+                  _7 {
+                    a
+                    b
+                    c
+                    d
+                    e
+                    f
+                    g
+                  }
+                  _8 {
+                    a
+                  }
+                }
+              }
+            }
+          }
+        `}
+        render={data => {
+          const { node } = data.allSidenavigationJson.edges[0];
+
+          const partsNode = node[`_${part}`];
+
+          return (
+            <Element
+              tag="ul"
+              flex
+              dirColumn
+              className={`scroll-navigation ${this.props.className}`}
+            >
+              {this.loopThroughPartsNode(partsNode)}
+            </Element>
+          );
+        }}
+      />
     );
   }
 }
@@ -130,6 +174,7 @@ ScrollNavigation.defaultProps = {
 
 ScrollNavigation.propTypes = {
   className: PropTypes.string,
+  colorCode: PropTypes.string.isRequired,
 };
 
 export default ScrollNavigation;

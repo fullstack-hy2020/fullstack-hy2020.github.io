@@ -20,7 +20,14 @@ class Accordion extends Component {
   }
 
   render() {
-    const { title, content, className, containerClassName, list } = this.props;
+    const {
+      title,
+      content,
+      className,
+      containerClassName,
+      list,
+      titleStyle,
+    } = this.props;
     const { isOpened } = this.state;
 
     return (
@@ -31,6 +38,7 @@ class Accordion extends Component {
           className={`accordion accordion__title ${
             isOpened ? 'active' : ''
           } ${className}`}
+          style={titleStyle}
           onClick={() => this.setState({ isOpened: !isOpened })}
         >
           {title}
@@ -68,12 +76,14 @@ Accordion.propTypes = {
   className: PropTypes.string,
   containerClassName: PropTypes.string,
   initiallyOpened: PropTypes.bool,
+  titleStyle: PropTypes.object,
 };
 
 Accordion.defaultProps = {
   className: '',
   containerClassName: '',
   initiallyOpened: false,
+  titleStyle: {},
 };
 
 export default Accordion;
