@@ -10,12 +10,21 @@ export const TripleBorder = ({
   childrenClassName,
   backgroundColor,
   props,
+  hover,
 }) => (
   <div
     className={`triple-border ${className} ${
       largeMargin ? 'triple-border--large-margin' : ''
     }`}
-    style={{ padding: largeMargin ? '' : '0.2em' }}
+    style={
+      hover
+        ? {
+            backgroundColor: 'black',
+            color: 'white',
+            padding: largeMargin ? '' : '0.2em',
+          }
+        : { padding: largeMargin ? '' : '0.2em' }
+    }
     {...props}
   >
     <div
@@ -31,6 +40,7 @@ TripleBorder.defaultProps = {
   className: '',
   childrenClassName: '',
   largeMargin: false,
+  hover: false,
   backgroundColor: 'transparent',
 };
 
@@ -40,4 +50,5 @@ TripleBorder.propTypes = {
   childrenClassName: PropTypes.string,
   largeMargin: PropTypes.bool,
   backgroundColor: PropTypes.string,
+  hover: PropTypes.bool,
 };

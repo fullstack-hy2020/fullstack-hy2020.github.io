@@ -1,10 +1,55 @@
-.scroll-navigation {
-  padding-right: 1rem;
-}
+@import '../common.scss';
 
-.course {
+.scroll-navigation {
+  @include to($desktop) {
+    display: none;
+  }
+
+  padding-right: 0;
+  max-width: 20%;
+  margin-right: 0;
+  position: sticky;
+  align-self: flex-start;
+  left: 10%;
+  top: 148px;
+  z-index: 9999;
+  background-color: $white;
+
   li {
     list-style-type: none;
+
+    &:hover {
+      cursor: pointer;
+
+      a {
+        background-color: $black;
+        color: $white !important;
+      }
+    }
+
+    &::before {
+      content: '-';
+    }
+  }
+}
+
+.left-navigation-link {
+  &:hover {
+    background-color: $black !important;
+    color: $white !important;
+  }
+
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    border-width: 2px;
+    border-style: solid;
+    margin-right: 2rem;
+    background-color: inherit;
+    border-color: inherit;
   }
 }
 
@@ -17,18 +62,4 @@
 .level-h2 {
   padding-left: 1.6rem;
   text-indent: -1.6rem;
-}
-
-.level-h1,
-.level-h2 {
-  &:hover {
-    cursor: pointer;
-    background-color: black;
-    color: white;
-  }
-
-  &::before {
-    content: '-';
-    margin-right: 1rem;
-  }
 }
