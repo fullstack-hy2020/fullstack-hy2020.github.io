@@ -1,0 +1,155 @@
+@import '../common.scss';
+
+.navigation__wrapper {
+  @include from($desktop) {
+    margin-left: auto;
+  }
+}
+
+.navigation {
+  z-index: 2;
+  width: 100%;
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: $main;
+  position: fixed;
+  top: 0;
+  left: 100%;
+  right: 0;
+  transition: left 0.3s ease-in-out;
+  font-weight: 200;
+
+  @include from($desktop) {
+    font-weight: 400;
+    min-height: auto;
+    width: auto;
+    position: static;
+    background: none;
+    align-items: flex-end;
+    justify-content: left;
+    overflow: hidden;
+    flex-direction: row;
+  }
+}
+
+.navigation__toggle {
+  z-index: 3;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 40px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
+  border-radius: 4px;
+
+  @include from($desktop) {
+    display: none;
+  }
+}
+
+.navigation__mobile-logo {
+  display: none;
+}
+
+.navigation__toggle-icon {
+  top: 8px;
+  left: 10px;
+
+  &,
+  &:after,
+  &::before {
+    position: absolute;
+    width: 30px;
+    height: 3px;
+    transition: all 0.5s ease;
+    border-radius: 4px;
+    background-color: $black;
+  }
+
+  &:before,
+  &::after {
+    content: '';
+    display: block;
+  }
+
+  &::before {
+    top: 10px;
+  }
+  &::after {
+    top: 20px;
+  }
+}
+
+.is-open--navigation {
+  overflow: hidden;
+
+  .navigation {
+    left: 0;
+  }
+
+  .navigation__mobile-logo {
+    display: block;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 47px;
+    left: 5%;
+
+    @include from($desktop) {
+      display: none;
+    }
+  }
+
+  .navigation__toggle-icon {
+    transform: translate3d(0, 10px, 0) rotate(45deg);
+
+    &,
+    &::before,
+    &::after {
+      background: $white;
+    }
+
+    &::before {
+      transform: rotate(-45deg) translate3d(-5.71429px, -6px, 0);
+      opacity: 0;
+    }
+
+    &:after {
+      transform: translate3d(0, -19px, 0) rotate(-90deg);
+    }
+  }
+}
+
+.navigation__item {
+  margin: 22px 0;
+  &:first-of-type {
+    margin: 0 0 22px;
+  }
+
+  &:last-of-type {
+    margin: 22px 0 0;
+  }
+
+  @include from($desktop) {
+    margin: 0 30px;
+    padding: 2;
+    border: 3px solid $white;
+
+    &:first-of-type {
+      margin: 0 30px 0 0;
+    }
+
+    &:last-of-type {
+      margin: 0 0 0 30px;
+    }
+  }
+}

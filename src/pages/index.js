@@ -76,8 +76,7 @@ const IndexPage = () => (
             <div className="container spacing--after">
               <div className="col-7">
                 <SubHeader
-                  className="col-10 spacing--large"
-                  style={{ fontSize: '3rem' }}
+                  className="col-10 spacing--large index__main-title"
                   text={mainTitle}
                   headingLevel="h1"
                 />

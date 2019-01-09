@@ -16,7 +16,11 @@ body {
 }
 
 body {
-  padding-top: 2.055rem;
+  padding-top: 120px; // same as header height
+
+  @include from($desktop) {
+    padding-top: 2.055rem;
+  }
 }
 
 p {
@@ -198,5 +202,13 @@ a {
   .nav-item-hover {
     font-size: 0.777rem;
     font-weight: $font-weight-medium;
+  }
+}
+
+.index__main-title {
+  font-size: 1.571rem;
+
+  @include from($desktop) {
+    font-size: 3rem;
   }
 }
