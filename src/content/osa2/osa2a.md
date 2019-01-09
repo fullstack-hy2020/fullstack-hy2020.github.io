@@ -479,7 +479,7 @@ Huomaa, että itse määriteltyä komponenttia importatessa komponentin sijainti
 
 Piste alussa viittaa nykyiseen hakemistoon, eli kyseessä on nykyisen hakemiston alihakemisto _components_ ja sen sisällä tiedosto _Note.js_. Tiedoston päätteen voi jättää pois.
 
-Koska myös _App_ on komponentti, eristetään sekin omaan moduuliinsa. Koska kyseessä on sovelluksen juurikomponentti, sijoitetaan se suoraan hakemistoon _src_. Tiedoston sisältö on seuraava:
+Koska myös <code>App</code> on komponentti, eristetään sekin omaan moduuliinsa. Koska kyseessä on sovelluksen juurikomponentti, sijoitetaan se suoraan hakemistoon _src_. Tiedoston sisältö on seuraava:
 
 ```js
 import React from 'react'
@@ -563,7 +563,7 @@ const App = () => {
 }
 ```
 
-Syy toimimattomuuteen alkaa selvitä lisäilemällä <code>console.log</code>-komentoja. Koska ensimmäinen renderöitävä asia on komponentti _App_ voi jos sinne laittaa ensimmäisen tulostuksen. 
+Syy toimimattomuuteen alkaa selvitä lisäilemällä <code>console.log</code>-komentoja. Koska ensimmäinen renderöitävä asia on komponentti <code>App</code> voi jos sinne laittaa ensimmäisen tulostuksen. 
 
 ```js
 const App = () => {
@@ -635,7 +635,7 @@ Viimeistellään nyt tehtävien 1.1-1.5 kurssin sisältöjä renderöivän ohjel
 
 **Huomaa, että jos kopioit projektin paikasta toiseen, saattaa olla tarpeen ensin tuhota hakemisto *node_modules* ja antaa sen jälkeen asentaa riippuvuudet uudelleen, eli komento _npm install_ ennen kuin saat kopioidun projektin käynnistettyä.** Lähtökohtaisesti toki kannattaa olla kokonaan kopioimatta tai laittamatta versionhallintaan hakemistoa *node_modules*.
 
-Muutetaan komponenttia _App_ seuraavasti:
+Muutetaan komponenttia <code>App</code> seuraavasti:
 
 ```js
 const App = () => {
@@ -783,6 +783,6 @@ Sovelluksen ulkoasu voi olla esim seuraava:
 
 <h4>2.5: erillinen moduuli</h4>
 
-Määrittele komponentti _Course_ omana moduulinaan, jonka komponentti _App_ importtaa. Voit sisällyttää kaikki kurssin alikomponentit samaan moduuliin.
+Määrittele komponentti _Course_ omana moduulinaan, jonka komponentti <code>App</code> importtaa. Voit sisällyttää kaikki kurssin alikomponentit samaan moduuliin.
 
 </div>

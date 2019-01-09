@@ -248,7 +248,7 @@ Määrittelemme tällä kurssilla kaikki funktiot nuolisyntaksin avulla.
 <div class="tasks">
   <h3>Tehtäviä</h3>
 
-<em>Jatkamme edellisissä tehtävissä aloitetun ohjelman rakentamista, voit siis tehdä koodin samaan projektiin, palautuksessa ollaan kiinnostuneita ainoastaan ohjelman lopullisesta versiosta.</em>
+<i>Jatkamme edellisissä tehtävissä aloitetun ohjelman rakentamista, voit siis tehdä koodin samaan projektiin, palautuksessa ollaan kiinnostuneita ainoastaan ohjelman lopullisesta versiosta.</i>
 
 **Protip:** voit kohdata ohjelmoidessasi ongelmiasen suhteen missä muodossa kompnentin saamat _propsit_ ovat. Hyvä keino varmistua asiasta on tulostaa propsit konsoliin, esim. seuraavasti:
 
