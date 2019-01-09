@@ -1,0 +1,14 @@
+@import '../common.scss';
+
+.header {
+  position: fixed;
+  z-index: 200;
+  top: 0;
+  transition: top 0.2s ease-in-out;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: $white;
+  padding-top: 1.444rem;
+  padding-bottom: 1rem;
+  transition: all 0.2s ease-in-out;
+}
