@@ -61,7 +61,7 @@ export default class ContentTemplate extends Component {
               style={{
                 backgroundColor: colorCode,
               }}
-              className="spacing spacing--after"
+              className="spacing spacing--after tasks"
             >
               <div className="container">
                 <div

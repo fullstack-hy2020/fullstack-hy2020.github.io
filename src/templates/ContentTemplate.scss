@@ -69,12 +69,19 @@
   }
 }
 
-.course-content {
+.course-content,
+.tasks {
   a {
     border: 0;
     border-bottom-width: 2px;
     border-style: solid;
     padding: 2px;
+  }
+}
+
+.tasks {
+  a {
+    border-color: $black !important;
   }
 }
 
