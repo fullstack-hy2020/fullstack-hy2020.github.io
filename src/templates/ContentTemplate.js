@@ -16,6 +16,7 @@ import PrevNext from '../components/PrevNext/PrevNext';
 import ReturnInfo from '../components/ReturnInfo/ReturnInfo';
 import ScrollNavigation from '../components/ScrollNavigation/ScrollNavigation';
 import { SubHeader } from '../components/SubHeader/SubHeader';
+import ArrowToTop from '../images/left-arrow.svg';
 
 export default class ContentTemplate extends Component {
   componentDidMount() {
@@ -84,6 +85,19 @@ export default class ContentTemplate extends Component {
 
     return (
       <Layout>
+        <div
+          className="arrow-go-up"
+          onClick={() =>
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: 'smooth',
+            })
+          }
+        >
+          <img src={ArrowToTop} alt="arrow-up" />
+        </div>
+
         <div className="spacing--small spacing--after">
           <div className="course-container">
             <Banner
@@ -136,6 +150,7 @@ export default class ContentTemplate extends Component {
                   letter={letter}
                   currentPartTitle={subTitle}
                   currentPath={frontmatter.path}
+                  colorCode={colorCode}
                   className="col-2"
                 />
               </div>

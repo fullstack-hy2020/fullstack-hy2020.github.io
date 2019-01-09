@@ -98,3 +98,18 @@ code[class*='language-'],
 pre[class*='language-'] {
   text-shadow: none;
 }
+
+.arrow-go-up {
+  @include to($tablet) {
+    display: none !important;
+  }
+
+  width: 24px;
+  height: 24px;
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+  transform: rotate(90deg);
+  z-index: 99999;
+  cursor: pointer;
+}
