@@ -10,7 +10,7 @@ import Element from '../Element/Element';
 const partMainTitles = {
   0: ['Yleistä', 'Web-sovelluksen toimintaperiaatteita'],
   1: [
-    'Reactin alkeet,',
+    'Reactin alkeet',
     'Javascript',
     'Komponentin tila ja tapahtumankäsittely',
     'Monimutkaisempi tila, Reactin debuggaus',
@@ -54,12 +54,17 @@ class ScrollNavigation extends Component {
     super(props);
 
     this.state = {
+      top: 0,
+      h1Top: 0,
       headings: [],
+      navigationClass: 'scroll-navigation',
     };
   }
 
   componentDidMount = () => {
     const headingList = Array.from(document.querySelectorAll('h3'));
+    const h1 = document.querySelector('h1');
+
     const headings = headingList.map(i => {
       i.id = kebabCase(i.innerText);
 
@@ -70,11 +75,28 @@ class ScrollNavigation extends Component {
       };
     });
 
-    this.setState({ headings: headings });
+    this.setState({ headings: headings, h1Top: h1.offsetTop });
+
+    window.addEventListener('scroll', this.handleScroll);
+  };
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll = () => {
+    let scroll = window.scrollY;
+
+    const { top, h1Top } = this.state;
+
+    this.setState({
+      top: scroll,
+      navigationClass: top > h1Top ? 'scroll-navigation--top' : '',
+    });
   };
 
   render() {
-    const { headings } = this.state;
+    const { headings, navigationClass } = this.state;
     const { part, letter, currentPath, currentPartTitle } = this.props;
 
     return (
@@ -82,7 +104,9 @@ class ScrollNavigation extends Component {
         tag="ul"
         flex
         dirColumn
-        className={`scroll-navigation ${this.props.className}`}
+        className={`scroll-navigation ${
+          this.props.className
+        } ${navigationClass}`}
       >
         {partMainTitles[part].map(t => (
           <Accordion

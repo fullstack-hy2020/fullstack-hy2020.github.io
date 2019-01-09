@@ -50,15 +50,7 @@ export default class ContentTemplate extends Component {
         } else if (type === 'tag' && attribs.class === 'content') {
           return (
             <div className="container">
-              <ScrollNavigation
-                part={part}
-                letter={letter}
-                currentPartTitle={subTitle}
-                currentPath={frontmatter.path}
-                className="col-3"
-              />
-
-              <div className="course-content col-7">
+              <div className="course-content col-7 push-right-3">
                 {domToReact(children, parserOptions)}
               </div>
             </div>
@@ -138,6 +130,14 @@ export default class ContentTemplate extends Component {
                   </p>
                   <SubHeader headingLevel="h1" text={subTitle} />
                 </div>
+
+                <ScrollNavigation
+                  part={part}
+                  letter={letter}
+                  currentPartTitle={subTitle}
+                  currentPath={frontmatter.path}
+                  className="col-2"
+                />
               </div>
               {Parser(html, parserOptions)}
             </div>

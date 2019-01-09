@@ -1,5 +1,11 @@
 .scroll-navigation {
   padding-right: 1rem;
+  position: fixed;
+
+  &--top {
+    top: 40px;
+    transition: top 2s linear 1s;
+  }
 }
 
 .course {
