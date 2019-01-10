@@ -4,7 +4,7 @@ path: /osa0
 mainImage: ../../images/part-0.svg
 part: 0
 partColor: light-violet
-navigation: a|/osa0/yleistä|Yleistä@b|/osa0/perusteet|WEB-sovelluksen toimintaperiaatteita
+navigation: a|/osa0/yleistä|Yleistä@b|/osa0/web-sovelluksen_toimintaperiaatteita|WEB-sovelluksen toimintaperiaatteita
 ---
 
 <div class="intro">

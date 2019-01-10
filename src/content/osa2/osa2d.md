@@ -10,9 +10,7 @@ partColor: dark-orange
 
 <div class="content">
 
-Kun sovelluksella luodaan uusia muistiinpanoja, täytyy ne tallentaa palvelimelle.
-
-json-server mainitsee olevansa ns. REST tai RESTful API
+Kun sovelluksella luodaan uusia muistiinpanoja, täytyy ne luonnollisesti tallentaa palvelimelle. [json-server](https://github.com/typicode/json-server) mainitsee dokumentaatiossaan olevansa ns. REST- tai RESTful-API
 
 > Get a full fake REST API with zero coding in less than 30 seconds (seriously)
 
@@ -20,11 +18,13 @@ Ihan alkuperäisen [määritelmän](https://en.wikipedia.org/wiki/Representation
 
 Tutustumme REST:iin tarkemmin kurssin [seuraavassa osassa](/osa3), mutta jo nyt on tärkeä ymmärtää minkälaista [konventiota](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) json-server ja yleisemminkin REST API:t käyttävät [reittien](https://github.com/typicode/json-server#routes), eli URL:ien ja käytettävien HTTP-pyyntöjen tyyppien suhteen.
 
-REST:issä yksittäisiä asioita esim. meidän tapauksessamme muistiinpanoja kutsutaan _resursseiksi_. Jokaisella resurssilla on yksilöivä osoite eli URL. json-serverin noudattaman yleisen konvention mukaan yksittäistä muistiinpanoa kuvaavan resurssin URL on muotoa _notes/3_, missä 3 on resurssin tunniste. Osoite _notes_ taas vastaa kaikkien yksittäisten muistiinpanojen kokoelmaa.
+## REST
+
+REST:issä yksittäisiä asioita esim. meidän tapauksessamme muistiinpanoja kutsutaan <i>resursseiksi</i>. Jokaisella resurssilla on yksilöivä osoite eli URL. json-serverin noudattaman yleisen konvention mukaan yksittäistä muistiinpanoa kuvaavan resurssin URL on muotoa _notes/3_, missä 3 on resurssin tunniste. Osoite _notes_ taas vastaa kaikkien yksittäisten muistiinpanojen kokoelmaa.
 
 Resursseja haetaan palvelimelta HTTP GET -pyynnöillä. Esim. HTTP GET osoitteeseen _notes/3_ palauttaa muistiinpanon, jonka id-kentän arvo on 3. Kun taas HTTP GET -pyyntö osoitteeseen _notes_ palauttaa kaikki muistiinpanot.
 
-Uuden muistiinpanoa vastaavan resurssin luominen tapahtuu json-serverin noudattamassa REST-konventiossa tekemällä HTTP POST -pyyntö, joka kohdistuu myös samaan osoitteeseen _notes_. Pyynnön mukana sen runkona eli _bodynä_ lähetetään luotavan muistiinpanon tiedot.
+Uuden muistiinpanoa vastaavan resurssin luominen tapahtuu json-serverin noudattamassa REST-konventiossa tekemällä HTTP POST -pyyntö, joka kohdistuu myös samaan osoitteeseen _notes_. Pyynnön mukana sen runkona eli <i>bodynä</i> lähetetään luotavan muistiinpanon tiedot.
 
 json-server vaatii, että tiedot lähetetään JSON-muodossa, eli käytännössä sopivasti muotoiltuna merkkijonona ja asettamalla headerille _Content-Type_ arvo _application/json_.
 
@@ -39,27 +39,29 @@ addNote = event => {
     content: this.state.newNote,
     date: new Date(),
     important: Math.random() > 0.5,
-  };
+  }
 
+// highlight-start
   axios.post('http://localhost:3001/notes', noteObject).then(response => {
     console.log(response);
-  });
-};
+  })
+// highlight-end
+}
 ```
 
-eli luodaan muistiinpanoa vastaava olio, ei kuitenkaan lisätä sille kenttää _id_, parempi jättää id:n generointi palvelimen vastuulle!
+eli luodaan muistiinpanoa vastaava olio, ei kuitenkaan lisätä sille kenttää _id_, sillä on parempi jättää id:n generointi palvelimen vastuulle!
 
-Lähetetään sitten olio palvelimelle käyttämällä axiosin metodia _post_. Rekisteröidään tapahtumankäsittelijä, joka tulostaa konsoliin palvelimen vastauksen.
+Olio lähetetään palvelimelle käyttämällä axiosin metodia <code>post</code>. Rekisteröity tapahtumankäsittelijä tulostaa konsoliin palvelimen vastauksen.
 
 Kun nyt kokeillaan luoda uusi muistiinpano, konsoliin tulostus näyttää seuraavalta:
 
-![](../assets/2/11.png)
+![](../images/2/20b.png)
 
 Uusi muistiinpano on siis _response_-olion kentän _data_ arvona. Palvelin on lisännyt muistiinpanolle tunnisteen, eli _id_-kentän.
 
-Joskus on hyödyllistä tarkastella HTTP-pyyntöjä [osan 0 alussa](/osa0#http-get) paljon käytetyn konsolin _Network_-välilehden kautta:
+Joskus on hyödyllistä tarkastella HTTP-pyyntöjä [osan 0 alussa](/osa0#http-get) paljon käytetyn konsolin <i>Network</i>-välilehden kautta:
 
-![](../assets/2/12.png)
+![](../images/2/21b.png)
 
 Voimme esim. tarkastaa onko POST-pyynnön mukana menevä data juuri se mitä oletimme, onko headerit asetettu oikein ym.
 
@@ -74,24 +76,24 @@ addNote = event => {
     content: this.state.newNote,
     date: new Date(),
     important: Math.random() > 0.5,
-  };
+  }
 
   axios.post('http://localhost:3001/notes', noteObject).then(response => {
-    this.setState({
-      notes: this.state.notes.concat(response.data),
-      newNote: '',
-    });
-  });
-};
+    // highlight-start
+    setNotes(notes.concat(response.data))
+    setNewNote('')
+    // highlight-end
+  })
+}
 ```
 
-Palvelimen palauttama uusi muistiinpano siis lisätään tilassa olevien muiden muistiinpanojen joukkoon (kannattaa [muistaa tärkeä detalji](/osa1#taulukon-käsittelyä) siitä, että metodi _concat_ ei muuta komponentin alkuperäistä tilaa, vaan luo uuden taulukon) ja tyhjennetään lomakkeen teksti.
+Palvelimen palauttama uusi muistiinpano siis lisätään tuttuun tapaan funktiolla <code>setNotes</code> tilassa olevien muiden muistiinpanojen joukkoon (kannattaa [muistaa tärkeä detalji](/osa1#taulukon-käsittelyä) siitä, että metodi <code>concat</code> ei muuta komponentin alkuperäistä tilaa, vaan luo uuden taulukon) ja tyhjennetään lomakkeen teksti. 
 
-Kun palvelimella oleva data alkaa vaikuttaa web-sovelluksen toimintalogiikkaan, tulee sovelluskehitykseen heti iso joukko uusia haasteita, joita tuo mukanaan mm. kommunikoinnin asynkronisuus. Debuggaamiseenkin tarvitaan uusia strategiota, debug-printtaukset ym. muuttuvat vain tärkeämmäksi, myös Javascriptin runtimen periaatteita ja React-komponenttien elinkaarta on pakko tuntea riittävällä tasolla, arvaileminen ei riitä.
+Kun palvelimella oleva data alkaa vaikuttaa web-sovelluksen toimintalogiikkaan, tulee sovelluskehitykseen heti iso joukko uusia haasteita, joita tuo mukanaan mm. kommunikoinnin asynkronisuus. Debuggaamiseenkin tarvitaan uusia strategiota, debug-printtaukset ym. muuttuvat vain tärkeämmäksi, myös Javascriptin runtimen periaatteita ja React-komponenttien toimintaa on pakko tuntea riittävällä tasolla, arvaileminen ei riitä.
 
 Palvelimen tilaa kannattaa tarkastella myös suoraan, esim. selaimella:
 
-![](../assets/2/13.png)
+![](../images/2/22b.png)
 
 näin on mahdollista varmistua, mm. siirtyykö kaikki oletettu data palvelimelle.
 
@@ -99,54 +101,58 @@ Kurssin seuraavassa osassa alamme toteuttaa itse myös palvelimella olevan sovel
 
 > **HUOM:** sovelluksen nykyisessä versiossa selain lisää uudelle muistiinpanolle sen luomishetkeä kuvaavan kentän. Koska koneen oma kello voi näyttää periaatteessa mitä sattuu, on aikaleimojen generointi todellisuudessa viisaampaa hoitaa palvelimella ja tulemmekin tekemään tämän muutoksen kurssin seuraavassa osassa.
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part2-notes/tree/part2-5), tagissa _part2-5_.
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part2-notes/tree/part2-5), branchissa <i>part2-5</i>.
 
 ## Muistiinpanon tärkeyden muutos
 
 Lisätään muistiinpanojen yhteyteen painike, millä niiden tärkeyttä voi muuttaa.
 
-Muistiinpanon määrittelevän komponentin muutos on seuraava:
+Muistiinpanon määrittelevän komponentin muutos on seuraavat:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
   const label = note.important ? 'make not important' : 'make important';
+
   return (
-    <li>
-      {note.content} <button onClick={toggleImportance}>{label}</button>
-    </li>
-  );
-};
+    <li>{note.content} <button onClick={toggleImportance}>{label}</button></li>
+  )
+}
 ```
 
-Komponentissa on nappi, jolle on rekisteröity klikkaustapahtuman käsittelijäksi propsien avulla välitetty funktio _toggleImportance_.
+Komponentissa on nappi, jolle on rekisteröity klikkaustapahtuman käsittelijäksi propsien avulla välitetty funktio <code>toggleImportance</code>.
 
-Tapahtumankäsittelijän alustava versio on määritelty komponentissa _App_ seuraavasti:
+Komponentti <code>App</code> määrittelee tapahtumankäsittelijän <code>toggleImportanceOf</code> ja välittää sen jokaiselle <code>Note</code>-komponentille:
 
 ```js
-toggleImportanceOf = id => {
-  return () => {
-    console.log('importance of ' + id + ' needs to be toggled');
-  };
-};
-```
+const App = () => {
+  const [notes, setNotes] = useState([]) 
+  const [newNote, setNewNote] = useState('')
+  const [showAll, setShowAll] = useState(true)
 
-Kyseessä on jälleen funktio, joka palauttaa funktion. Palataan sen sisältöön kohta.
+  // ...
 
-Komponentin _App_ metodissa _render_ välitetään jokaiselle muistiinpanolle tapahtumankäsittelijäfunktio:
+  // highlight-start
+  const toggleImportanceOf = id => {
+    console.log('importance of ' + id + ' needs to be toggled')
+  }
+  // highlight-end
 
-```html
-<ul>
-  {notesToShow.map(note =>
+  const rows = () => notesToShow.map(note =>
     <Note
       key={note.id}
       note={note}
-      toggleImportance={this.toggleImportanceOf(note.id)}
+      toggleImportance={() => toggleImportanceOf(note.id)} // highlight-line
     />
-  )}
-</ul>
+  )
+
+  return (
+    // ...
+  )
+}
 ```
 
-Jokaisen muistiinpanon tapahtumankäsittelijä on nyt _yksilöllinen_, sillä se sisältää muistiinpanon _id:n_. Esim. jos _note.id_ on 3 tulee tapahtumankäsittelijäksi _this.toggleImportance(note.id)_ eli käytännössä:
+Huomaa, että jokaisen muistiinpanon tapahtumankäsittelijäksi tulee nyt _yksilöllinen_
+, sillä se sisältää muistiinpanon _id:n_. Esim. jos _note.id_ on 3 tulee tapahtumankäsittelijäksi _this.toggleImportance(note.id)_ eli käytännössä:
 
 ```js
 () => {
@@ -551,7 +557,7 @@ Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://git
 
 <div class="tasks">
 
-<h3>Tehtäviä/h3>
+<h3>Tehtäviä</h3>
 <h4>2.14: puhelinluettelo osa 7</h4>
 
 Palataan jälleen puhelinluettelon pariin.
