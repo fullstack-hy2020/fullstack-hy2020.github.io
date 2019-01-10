@@ -1,11 +1,5 @@
 @import '../common.scss';
 
-.navigation__wrapper {
-  @include from($desktop) {
-    margin-left: auto;
-  }
-}
-
 .navigation {
   z-index: 2;
   list-style: none;
@@ -27,13 +21,10 @@
     display: flex;
     opacity: 1;
     font-weight: 400;
-    min-height: auto;
-    width: auto;
     position: static;
     background: none;
-    align-items: flex-start;
-    justify-content: flex-start;
     overflow: hidden;
+    margin-left: 3em;
     flex-direction: row;
   }
 }
@@ -155,7 +146,7 @@
 
   @include from($desktop) {
     margin: 0 30px;
-    padding: 2;
+    padding: 0 0.5rem;
     border: 3px solid $white;
 
     &:first-of-type {

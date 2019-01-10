@@ -41,7 +41,10 @@ class Header extends Component {
 
     return (
       <div ref={this.header} className={`header ${headerClass}`}>
-        <div className="container" style={{ alignItems: 'center' }}>
+        <div
+          className="container"
+          style={{ alignItems: 'center', justifyContent: 'flex-start' }}
+        >
           <Link to="/" style={{ textDecoration: 'none' }}>
             {headerClass === '' ? (
               <TripleBorder
@@ -51,14 +54,14 @@ class Header extends Component {
                 {'{() => fs}'}
               </TripleBorder>
             ) : (
-                <TripleBorder
-                  hover
-                  className="nav-item-hover"
-                  childrenClassName="triple-border__logo"
-                >
-                  fs
+              <TripleBorder
+                hover
+                className="nav-item-hover"
+                childrenClassName="triple-border__logo"
+              >
+                fs
               </TripleBorder>
-              )}
+            )}
           </Link>
 
           {headerClass !== 'header-small' && <Navigation />}
