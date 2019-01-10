@@ -111,7 +111,7 @@ Muistiinpanon määrittelevän komponentin muutos on seuraavat:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
-  const label = note.important ? 'make not important' : 'make important';
+  const label = note.important ? 'make not important' : 'make important'
 
   return (
     <li>{note.content} <button onClick={toggleImportance}>{label}</button></li>
@@ -151,68 +151,59 @@ const App = () => {
 }
 ```
 
-Huomaa, että jokaisen muistiinpanon tapahtumankäsittelijäksi tulee nyt _yksilöllinen_
-, sillä se sisältää muistiinpanon _id:n_. Esim. jos _note.id_ on 3 tulee tapahtumankäsittelijäksi _this.toggleImportance(note.id)_ eli käytännössä:
+Huomaa, että jokaisen muistiinpanon tapahtumankäsittelijäksi tulee nyt <i>yksilöllinen</i> funktio, sillä kunkin muistiinpanin <code>id</code> on uniikki.
+
+Esim. jos <code>node.id</code> on 3, tulee tapahtumankäsittelijäksi _this.toggleImportance(note.id)_ eli käytännössä:
 
 ```js
-() => {
-  console.log('importance of 3 needs to be toggled');
-};
+() => { console.log('importance of 3 needs to be toggled') }
 ```
-
-Eli komponentin _App_ metodi _toggleImportanceOf_ ei itsessään ole tapahtumankäsittelijä, vaan _tehdas_, jonka avulla kullekin muistiinpanolle luodaan oma tapahtumankäsittelijä.
 
 Pieni huomio tähän väliin. Tapahtumankäsittelijän koodin tulostuksessa muodostetaan tulostettava merkkijono Javan tyyliin plussaamalla stringejä:
 
 ```js
-console.log('importance of ' + id + ' needs to be toggled');
+console.log('importance of ' + id + ' needs to be toggled')
 ```
 
 ES6:n [template string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) -ominaisuuden ansiosta Javascriptissa vastaavat merkkijonot voidaan kirjottaa hieman mukavammin:
 
 ```js
-console.log(`importance of ${id} needs to be toggled`);
+console.log(`importance of ${id} needs to be toggled`)
 ```
 
 Merkkijonon sisälle voi nyt määritellä "dollari-aaltosulku"-syntaksilla kohtia, minkä sisälle evaluoidaan javascript-lausekkeita, esim. muuttujan arvo. Huomaa, että template stringien hipsutyyppi poikkeaa Javascriptin normaaleista merkkijonojen käyttämistä hipsuista.
 
-Yksittäistä json-serverillä olevaa muistiinpanoa voi muuttaa kahdella tavalla, joko _korvaamalla_ sen tekemällä HTTP PUT -pyyntö muistiinpanon yksilöivään osoitteeseen tai muuttamalla ainoastaan joidenkin muistiinpanon kenttien arvoja HTTP PATCH -pyynnöllä.
+Yksittäistä json-serverillä olevaa muistiinpanoa voi muuttaa kahdella tavalla, joko <i>korvaamalla</i> sen tekemällä HTTP PUT -pyyntö muistiinpanon yksilöivään osoitteeseen tai muuttamalla ainoastaan joidenkin muistiinpanon kenttien arvoja HTTP PATCH -pyynnöllä.
 
 Korvaamme nyt muistiinpanon kokonaan, sillä samalla tulee esille muutama tärkeä React:iin ja Javascriptiin liittyvä seikka.
 
-Metodi on seuraavassa:
+Funktio on seuraavassa:
 
 ```js
-toggleImportanceOf = id => {
-  return () => {
-    const url = `http://localhost:3001/notes/${id}`;
-    const note = this.state.notes.find(n => n.id === id);
-    const changedNote = { ...note, important: !note.important };
+const toggleImportanceOf = id => {
+  const url = `http://localhost:3001/notes/${id}`
+  const note = notes.find(n => n.id === id)
+  const changedNote = { ...note, important: !note.important }
 
-    axios.put(url, changedNote).then(response => {
-      this.setState({
-        notes: this.state.notes.map(note =>
-          note.id !== id ? note : response.data
-        ),
-      });
-    });
-  };
-};
+  axios.put(url, changedNote).then(response => {
+    setNotes(notes.map(note => note.id !== id ? note : response.data))
+  })
+}
 ```
 
-Melkein joka riville sisältyy tärkeitä yksityiskohtia. Ensimmäinen rivi määrittelee jokaiselle muistiinpanolle id-kenttään perustuvan yksilöivän url:in.
+Melkein jokaiselle riville sisältyy tärkeitä yksityiskohtia. Ensimmäinen rivi määrittelee jokaiselle muistiinpanolle id-kenttään perustuvan yksilöivän url:in.
 
 Taulukon metodilla [find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) etsitään muutettava muistiinpano ja talletetaan muuttujaan _note_ viite siihen.
 
-Sen jälkeen luodaan _uusi olio_, jonka sisältö on sama kuin vanhan olion sisältö poislukien kenttä important. Luominen näyttää hieman erikoiselta:
+Sen jälkeen luodaan <i>uusi olio</i>, jonka sisältö on sama kuin vanhan olion sisältö poislukien kenttä important. Luominen näyttää hieman erikoiselta:
 
 ```js
-const changedNote = { ...note, important: !note.important };
+const changedNote = { ...note, important: !note.important }
 ```
 
 Kyseessä on vielä standardoimattoman [object spread](https://github.com/tc39/proposal-object-rest-spread) -operaation soveltaminen.
 
-Käytännössä <code>{...note}</code> luo olion, jolla on kenttinään kopiot olion _note_ kenttien arvoista. Kun aaltosulkeisiin lisätään asioita, esim. <code>{ ...note, important: true }</code>, tulee uuden olion kenttä _important_ saamaan arvon _true_. Eli esimerkissämme _important_ saa uudessa oliossa vanhan arvonsa käänteisarvon.
+Käytännössä <code>{ ... note}</code> luo olion, jolla on kenttinään kopiot olion _note_ kenttien arvoista. Kun aaltosulkeisiin lisätään asioita, esim. <code>{ ...note, important: true }</code>, tulee uuden olion kenttä _important_ saamaan arvon _true_. Eli esimerkissämme <code>important</code> saa uudessa oliossa vanhan arvonsa käänteisarvon.
 
 Uusi olio olisi voitu luoda myös vanhemmalla komennolla [Object.assign](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
 
@@ -225,212 +216,235 @@ Object spread -syntaksi on kuitenkin yleisesti käytössä Reactissa, joten meki
 Pari huomioita. Miksi teimme muutettavasta oliosta kopion vaikka myös seuraava koodi näyttää toimivan:
 
 ```js
-const note = this.state.notes.find(n => n.id === id)
+const note = notes.find(n => n.id === id)
 note.important = !note.important
 
 axios.put(url, note).then(response => {
 ```
 
-Näin ei ole suositetavaa tehdä, sillä muuttuja _note_ on viite komponentin tilassa, eli _this.state.notes_-taulukossa olevaan olioon, ja kuten muistamme tilaa ei Reactissa saa muuttaa suoraan!
+Näin ei ole suositetavaa tehdä, sillä muuttuja <code>note</code> on viite komponentin tilassa, eli <code>notes</code>-taulukossa olevaan olioon, ja kuten muistamme tilaa ei Reactissa saa muuttaa suoraan!
 
-Kannattaa myös huomata, että uusi olio _changedNote_ on ainoastaan ns [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy), eli uuden olion kenttien arvoina on vanhan olion kenttien arvot. Jos vanhan olion kentät olisivat itsessään olioita, viittaisivat uuden olion kentät samoihin olioihin.
+Kannattaa myös huomata, että uusi olio _changedNote_ on ainoastaan ns. [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy), eli uuden olion kenttien arvoina on vanhan olion kenttien arvot. Jos vanhan olion kentät olisivat itsessään olioita, viittaisivat uuden olion kentät samoihin olioihin.
 
 Uusi muistiinpano lähetetään sitten PUT-pyynnön mukana palvelimelle, jossa se korvaa aiemman muistiinpanon.
 
-Takaisinkutsufunktiossa asetetaan komponentin _App_ tilaan kaikki vanhat muistiinpanot paitsi muuttuneen, josta tilaan asetetaan palvelimen palauttama versio:
+Takaisinkutsufunktiossa asetetaan komponentin <code>App</code> tilaan <code>notes</code>  kaikki vanhat muistiinpanot paitsi muuttuneen, josta tilaan asetetaan palvelimen palauttama versio:
 
 ```js
 axios.put(url, changedNote).then(response => {
-  this.setState({
-    notes: this.state.notes.map(note =>
-      note.id !== id ? note : response.data
-    ),
-  });
-});
+  setNotes(notes.map(note => note.id !== id ? note : response.data))
+})
 ```
 
-Tämä saadaan aikaan metodilla _map_ joka siis luo uuden taulukon vanhan taulukon perusteella. Jokainen uuden taulukon alkio luodaan ehdollisesti siten, että jos ehto _note.id !== id_ on tosi, otetaan uuteen taulukkoon suoraan vanhan taulukon kyseinen alkio. Jos ehto on epätosi, eli kyseessä on muutettu muistiinpano, otetaan uuteen taulukkoon palvelimen palauttama olio.
+Tämä saadaan aikaan metodilla <code>map</code> joka siis luo uuden taulukon vanhan taulukon perusteella. Jokainen uuden taulukon alkio luodaan ehdollisesti siten, että jos ehto <code>note.id !== id</code> on tosi, otetaan uuteen taulukkoon suoraan vanhan taulukon kyseinen alkio. Jos ehto on epätosi, eli kyseessä on muutettu muistiinpano, otetaan uuteen taulukkoon palvelimen palauttama olio.
 
-Käytetty _map_-kikka saattaa olla aluksi hieman hämmentävä. Asiaa kannattaakin miettiä tovi. Tapaa tullaan käyttämään kurssilla vielä kymmeniä kertoja.
+Käytetty <code>map</code>-kikka saattaa olla aluksi hieman hämmentävä. Asiaa kannattaakin miettiä tovi. Tapaa tullaan käyttämään kurssilla vielä kymmeniä kertoja.
 
 ## Palvelimen kanssa tapahtuvan kommunikoinnin eristäminen omaan moduuliin
 
-_App_-komponentti alkaa kasvaa uhkaavasti kun myös palvelimen kanssa kommunikointi tapahtuu komponentissa. [Single responsibility](https://en.wikipedia.org/wiki/Single_responsibility_principle) -periaatteen hengessä kommunikointi onkin viisainta eristää omaan [moduuliinsa](#refaktorointia---moduulit).
+<code>App</code>-komponentti alkaa kasvaa uhkaavasti kun myös palvelimen kanssa kommunikointi tapahtuu komponentissa. [Single responsibility](https://en.wikipedia.org/wiki/Single_responsibility_principle) -periaatteen hengessä kommunikointi onkin viisainta eristää omaan [moduuliinsa](#refaktorointia---moduulit).
 
 Luodaan hakemisto _src/services_ ja sinne tiedosto _notes.js_:
 
 ```js
-import axios from 'axios';
-const baseUrl = 'http://localhost:3001/notes';
+import axios from 'axios'
+const baseUrl = 'http://localhost:3001/notes'
 
 const getAll = () => {
-  return axios.get(baseUrl);
-};
+  return axios.get(baseUrl)
+}
 
 const create = newObject => {
-  return axios.post(baseUrl, newObject);
-};
+  return axios.post(baseUrl, newObject)
+}
 
 const update = (id, newObject) => {
-  return axios.put(`${baseUrl}/${id}`, newObject);
-};
+  return axios.put(`${baseUrl}/${id}`, newObject)
+}
 
-export default { getAll, create, update };
+export default { 
+  getAll: getAll, 
+  create: create, 
+  update: update 
+}
 ```
 
-Moduuli palauttaa nyt olion, jonka kenttinä on kolme muistiinpanojen käsittelyä hoitavaa funktiota. Funktiot palauttavat suoraan axiosin metodien palauttaman promisen.
+Moduuli palauttaa nyt olion, jonka kenttinä (<code>getAll</code>, <code>create</code> ja <code>update</code>) on kolme muistiinpanojen käsittelyä hoitavaa funktiota. Funktiot palauttavat suoraan axiosin metodien palauttaman promisen.
 
-Komponentti _App_ saa moduulin käyttöön _import_-lauseella
+Komponentti <code>App</code> saa moduulin käyttöön <code>import</code>-lauseella
 
 ```js
-import noteService from './services/notes'
+import noteService from './services/notes' // highlight-line
 
-App extends React.Component {
+const App = () => {
 ```
 
 moduulin funktioita käytetään importatun muuttujan _noteService_ kautta seuraavasti:
 
 ```js
-componentDidMount() {
-  noteService
-    .getAll()
-    .then(response => {
-      this.setState({notes: response.data})
-    })
-}
-
-addNote = (event) => {
+const App = () => {
   // ...
-  noteService
-    .create(noteObject)
-    .then(response => {
-      this.setState({
-        notes: this.state.notes.concat(response.data),
-        newNote: ''
+
+  useEffect(() => {
+    // highlight-start
+    noteService
+      .getAll().then(response => {
+        setNotes(response.data)
       })
-    })
+    // highlight-end
+  }, [])
+
+  const toggleImportanceOf = id => {
+    const note = notes.find(n => n.id === id)
+    const changedNote = { ...note, important: !note.important }
+
+    // highlight-start
+    noteService
+      .update(changedNote).then(response => {
+        setNotes(notes.map(note => note.id !== id ? note : response.data))
+      })
+    // highlight-end
+  }
+
+  const addNote = (event) => {
+    event.preventDefault()
+    const noteObject = {
+      content: newNote,
+      date: new Date().toISOString(),
+      important: Math.random() > 0.5
+    }
+
+// highlight-start
+    noteService
+      .create(noteObject).then(response => {
+        setNotes(notes.concat(response.data))
+        setNewNote('')
+      })
+// highlight-end
+  }
+
+  // ...
 }
 
-toggleImportanceOf = (id) => {
-  return () => {
-    // ...
-    noteService
-      .update(id, changedNote)
-      .then(response => {
-        this.setState({
-          notes: this.state.notes.map(note => note.id !== id ? note : response.data)
-        })
-      })
-  }
-}
+export default App
 ```
 
 Voisimme viedä ratkaisua vielä askeleen pidemmälle, sillä käyttäessään moduulin funktioita komponentti _App_ saa olion, joka sisältää koko HTTP-pyynnön vastauksen:
 
 ```js
-noteService.getAll().then(response => {
-  this.setState({ notes: response.data });
-});
+noteService
+  .getAll().then(response => {
+    setNotes(response.data)
+  })
 ```
 
-Eli asia mistä _App_ on kiinnostunut on parametrin kentässä _response.data_.
+Eli asia mistä <code>App</code> on kiinnostunut on parametrin kentässä <code>response.data</code>.
 
 Moduulia olisi miellyttävämpi käyttää, jos se HTTP-pyynnön vastauksen sijaan palauttaisi suoraan muistiinpanot sisältävän taulukon. Tällöin moduulin käyttö näyttäisi seuraavalta
 
 ```js
-noteService.getAll().then(notes => {
-  this.setState({ notes: notes });
-});
+noteService
+  .getAll().then(initialNotes => {
+    setNotes(initialNotes)
+  })
 ```
-
-joka voitaisiin [ilmaista hieman tiiviimmin](#kehittyneempi-tapa-olioliteraalien-kirjoittamiseen) seuraavasti:
-
-```js
-noteService.getAll().then(notes => {
-  this.setState({ notes });
-});
-```
-
 Tämä onnistuu muuttamalla moduulin koodia seuraavasti (koodiin jää ikävästi copy-pastea, emme kuitenkaan nyt välitä siitä):
 
 ```js
-import axios from 'axios';
-const baseUrl = 'http://localhost:3001/notes';
+import axios from 'axios'
+const baseUrl = 'http://localhost:3001/notes'
 
 const getAll = () => {
-  const request = axios.get(baseUrl);
-  return request.then(response => response.data);
-};
+  const request = axios.get(baseUrl)
+  return request.then(response => response.data)
+}
 
 const create = newObject => {
-  const request = axios.post(baseUrl, newObject);
-  return request.then(response => response.data);
-};
+  const request = axios.post(baseUrl, newObject)
+  return request.then(response => response.data)
+}
 
 const update = (id, newObject) => {
-  const request = axios.put(`${baseUrl}/${id}`, newObject);
-  return request.then(response => response.data);
-};
+  const request = axios.put(`${baseUrl}/${id}`, newObject)
+  return request.then(response => response.data)
+}
 
-export default { getAll, create, update };
+export default { 
+  getAll: getAll, 
+  create: create, 
+  update: update 
+}
 ```
 
-eli enää ei palautetakaan suoraan axiosin palauttamaa promisea, vaan otetaan promise ensin muuttujaan _request_ ja kutsutaan sille metodia _then_:
+eli enää ei palautetakaan suoraan axiosin palauttamaa promisea, vaan otetaan promise ensin muuttujaan <code>request</code> ja kutsutaan sille metodia <code>then</code>:
 
 ```js
 const getAll = () => {
-  const request = axios.get(baseUrl);
-  return request.then(response => response.data);
-};
+  const request = axios.get(baseUrl)
+  return request.then(response => response.data)
+}
 ```
 
 Täydellisessä muodossa kirjoitettuna viimeinen rivi olisi:
 
 ```js
 const getAll = () => {
-  const request = axios.get(baseUrl);
+  const request = axios.get(baseUrl)
   return request.then(response => {
-    return response.data;
-  });
-};
+    return response.data
+  })
+}
 ```
 
-Myös nyt funktio _getAll_ palauttaa promisen, sillä promisen metodi _then_ [palauttaa promisen](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then).
+Myös nyt funktio <code>getAll</code>  palauttaa promisen, sillä promisen metodi <code>then</code> [palauttaa promisen](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then).
 
-Koska _then_:in parametri palauttaa suoraan arvon _response.data_, on funktion _getAll_ palauttama promise sellainen, että jos HTTP-kutsu onnistuu, antaa promise takaisinkutsulleen HTTP-pyynnön mukana olleen datan, eli se toimii juuri niin kuin haluamme.
+Koska <code>then</code>:in parametri palauttaa suoraan arvon <code>response.data</code>, on funktion <code>getAll</code> palauttama promise sellainen, että jos HTTP-kutsu onnistuu, antaa promise takaisinkutsulleen HTTP-pyynnön mukana olleen datan, eli se toimii juuri niin kuin haluamme.
 
-Moduulin muutoksen jälkeen täytyy komponentti _App_ muokata _noteService_:n metodien takaisinkutsujen osalta ottamaan huomioon, että ne palauttavat datan suoraan:
+Moduulin muutoksen jälkeen täytyy komponentti <code>App</code> muokata <code>noteService</code>:n metodien takaisinkutsujen osalta ottamaan huomioon, että ne palauttavat datan suoraan:
 
 ```js
-class App extends React.component {
-  componentDidMount() {
-    noteService.getAll().then(response => {
-      this.setState({ notes: response });
-    });
+const App = () => {
+  // ...
+
+  useEffect(() => {
+    noteService
+      // highlight-start
+      .getAll().then(initialNotes => {
+        setNotes(initialNotes)
+        // highlight-end
+      })
+  }, [])
+
+  const toggleImportanceOf = id => {
+    const note = notes.find(n => n.id === id)
+    const changedNote = { ...note, important: !note.important }
+
+    noteService
+      // highlight-start
+      .update(changedNote).then(returnedNote => {
+        setNotes(notes.map(note => note.id !== id ? note : returnedNote))
+      // highlight-end
+      })
   }
 
-  addNote = event => {
-    // ...
-    noteService.create(noteObject).then(newNote => {
-      this.setState({
-        notes: this.state.notes.concat(newNote),
-        newNote: '',
-      });
-    });
-  };
+  const addNote = (event) => {
+    event.preventDefault()
+    const noteObject = {
+      content: newNote,
+      date: new Date().toISOString(),
+      important: Math.random() > 0.5
+    }
 
-  toggleImportanceOf = id => {
-    return () => {
-      // ...
+    noteService
+    // highlight-start
+      .create(noteObject).then(returnedNote => {
+        setNotes(notes.concat(returnedNote))
+        // highlight-end
+        setNewNote('')
+      })
+  }
 
-      noteService.update(id, changedNote).then(changedNote => {
-        const notes = this.state.notes.filter(n => n.id !== id);
-        this.setState({
-          notes: notes.concat(changedNote),
-        });
-      });
-    };
-  };
+  // ...
 }
 ```
 
@@ -440,11 +454,115 @@ Tämä kaikki on hieman monimutkaista ja asian selittäminen varmaan vaan vaikeu
 
 Promisejen ymmärtäminen on erittäin keskeistä modernissa Javascript-sovelluskehityksessä, joten asiaan kannattaa uhrata kohtuullisessa määrin aikaa.
 
+## Kehittyneempi tapa olioliteraalien kirjoittamiseen
+
+Muistiinpanopalvelut määrittelevä moduuli siis eksporttaa olion, jonka kenttinä <code>getAll</code>, <code>create</code> ja <code>update</code> ovat muistiinpanojen käsittelyyn tarkoitetut funktiot. 
+
+Moduulin määrittelu tapahtui seuraavasti:
+
+```js
+import axios from 'axios'
+const baseUrl = 'http://localhost:3001/notes'
+
+const getAll = () => {
+  const request = axios.get(baseUrl)
+  return request.then(response => response.data)
+}
+
+const create = newObject => {
+  const request = axios.post(baseUrl, newObject)
+  return request.then(response => response.data)
+}
+
+const update = (id, newObject) => {
+  const request = axios.put(`${baseUrl}/${id}`, newObject)
+  return request.then(response => response.data)
+}
+
+export default { 
+  getAll: getAll, 
+  create: create, 
+  update: update 
+}
+```
+
+Exportattava asia on siis seuraava, hieman erikoiselta näyttävä olio:
+
+```js
+{ 
+  getAll: getAll, 
+  create: create, 
+  update: update 
+}
+```
+
+Olion määrittelyssä vasemmalla puolella kaksoispistettä olevat nimet tarkoittavat eksportoitavan olion kenttiä, kun taas oikealla puolella olevat nimet ovat moduulin sisällä määriteltyjä muuttujia. 
+
+Koska olion kenttien nimet ovat samat kuin niiden arvon määrittelevien muuttujien nimet, voidaan olion määrittely kirjoittaa tiivimmässä muodossa:
+
+```js
+{ 
+  getAll, 
+  create, 
+  update 
+}
+```
+
+Eli moduulin määrittely yksinkertaisuu seuraavaan muotoon 
+
+```js
+import axios from 'axios'
+const baseUrl = 'http://localhost:3001/notes'
+
+const getAll = () => {
+  const request = axios.get(baseUrl)
+  return request.then(response => response.data)
+}
+
+const create = newObject => {
+  const request = axios.post(baseUrl, newObject)
+  return request.then(response => response.data)
+}
+
+const update = (id, newObject) => {
+  const request = axios.put(`${baseUrl}/${id}`, newObject)
+  return request.then(response => response.data)
+}
+
+export default { getAll, create, update } // highlight-line
+```
+
+Tässä tiiviimmässä olioiden määrittelytavassa hyödynnetään ES6:n myötä Javascriptiin  tullutta [uusi ominaisuutta](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#Property_definitions), joka mahdollistaa hieman tiiviimmän tavan muuttujien avulla tapahtuvaan olioiden määrittelyyn.
+
+Havainnollistaaksemme asiaa tarkastellaan tilannetta, jossa meillä on muuttujissa arvoja
+
+```js 
+const name = 'Leevi'
+const age = 0
+```
+
+Vanhassa Javascriptissä olio täytyi määritellä seuraavaan tyyliin
+
+```js 
+const person = {
+  name: name,
+  age: age
+}
+```
+
+koska muuttujien ja luotavan olion kenttien nimi nyt on sama, riittää ES6:ssa kirjoittaa:
+
+```js 
+const person = { name, age }
+```
+
+lopputulos molemmissa on täsmälleen sama, eli ne luovat olion jonka kentän <code>name</code> arvo on <i>Leevi</i> ja kentän <code>age</code> arvo <i>0</i>.
+
 ## Promise ja virheet
 
 Jos sovelluksemme mahdollistaisi muistiinpanojen poistamisen, voisi syntyä tilanne, missä käyttäjä yrittää muuttaa sellaisen muistiinpanon tärkeyttä, joka on jo poistettu järjestelmästä.
 
-Simuloidaan tälläistä tilannetta "kovakoodaamalla" noteServiceen funktioon _getAll_ muistiinpano, jota ei ole todellisuudessa (eli palvelimella) olemassa:
+Simuloidaan tälläistä tilannetta "kovakoodaamalla" noteServiceen funktioon <code>getAll</code> muistiinpano, jota ei ole todellisuudessa (eli palvelimella) olemassa:
 
 ```js
 const getAll = () => {
