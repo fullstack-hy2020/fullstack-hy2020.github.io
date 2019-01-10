@@ -21,7 +21,7 @@ import houstonLogo from '../images/houston_logo.png';
 import announcement from '../images/ic_announcement_48px.svg';
 import starIcon from '../images/ic_stars_48px.svg';
 import timerIcon from '../images/ic_timer_48px.svg';
-import landingImage from '../images/Landing.png';
+import landingImage from '../images/landing.svg';
 import news from '../images/noun_news_1248039.svg';
 import telegramIcon from '../images/telegram-logo-png-open-2000.png';
 
@@ -74,7 +74,12 @@ const IndexPage = () => (
         return (
           <div>
             <div className="container spacing--after">
-              <Element flex spaceBetween className="col-10 spacing--large frontpage__hero" relative>
+              <Element
+                flex
+                spaceBetween
+                className="col-10 spacing--large frontpage__hero"
+                relative
+              >
                 <SubHeader
                   className="col-10 index__main-title"
                   text={mainTitle}
@@ -96,13 +101,13 @@ const IndexPage = () => (
                   text={intro}
                 />
 
-                <Image contain
+                <Image
+                  contain
                   className="col-4--mobile absolute-top-right--desktop"
                   style={{ margin: 0 }}
                   alt="Stacked cubes with React logo and JavaScript text"
                   src={landingImage}
                 />
-
               </Element>
             </div>
 
@@ -274,16 +279,26 @@ const IndexPage = () => (
                   className="col-10 col-8--mobile spacing--small"
                 >
                   <div className="col-3 col-10--mobile">
-                    <Image contain src={yliopistoLogo} alt="Helsingin Yliopisto logo" className="col-4--mobile" />
+                    <Image
+                      contain
+                      src={yliopistoLogo}
+                      alt="Helsingin Yliopisto logo"
+                      className="col-5 col-4--mobile"
+                    />
 
                     <BodyText text={university} />
                   </div>
 
-                  <div className="col-3 col-10--mobile">
-                    <Image contain src={houstonLogo} alt="Houston Inc. logo" className="col-4--mobile" />
+                  <Element flex spaceBetween className="col-3 col-10--mobile">
+                    <Image
+                      contain
+                      src={houstonLogo}
+                      alt="Houston Inc. logo"
+                      className="col-4--mobile"
+                    />
 
                     <BodyText text={houston} />
-                  </div>
+                  </Element>
                 </Element>
 
                 <Element
@@ -300,7 +315,12 @@ const IndexPage = () => (
                     />
                   </div>
                   <div className="col-3 col-10--mobile">
-                    <Image contain src={licenceIcon} alt="Creative Commons BY-NC-SA 3.0 -lisenssi" className="col-4--mobile" />
+                    <Image
+                      contain
+                      src={licenceIcon}
+                      alt="Creative Commons BY-NC-SA 3.0 -lisenssi"
+                      className="col-4--mobile"
+                    />
 
                     <BodyText text={licenced} />
                   </div>

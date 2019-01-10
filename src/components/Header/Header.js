@@ -40,7 +40,11 @@ class Header extends Component {
     const { headerClass } = this.state;
 
     return (
-      <div ref={this.header} className={`header ${headerClass}`}>
+      <div
+        ref={this.header}
+        className={`header ${headerClass}`}
+        style={headerClass === '' ? { backgroundColor: 'white' } : {}}
+      >
         <div
           className="container"
           style={{ alignItems: 'center', justifyContent: 'flex-start' }}

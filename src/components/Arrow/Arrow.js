@@ -4,6 +4,7 @@ import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import React from 'react';
 
+import colors from '../../colors';
 import Element from '../Element/Element';
 
 const Arrow = ({
@@ -23,7 +24,10 @@ const Arrow = ({
           backgroundColor: arrow.backgroundColor
             ? arrow.backgroundColor
             : 'transparent',
-          color: arrow.backgroundColor === 'black' ? 'white' : 'black',
+          color:
+            arrow.backgroundColor === colors['black']
+              ? 'white'
+              : colors['black'],
         };
 
         return (
@@ -63,9 +67,7 @@ const Arrow = ({
   let render;
 
   if (!stack && !link) {
-    render = (
-      <div className="col-10 spacing spacing--after">{arrowContent}</div>
-    );
+    render = <div className="col-10 spacing--after">{arrowContent}</div>;
   } else if (!stack && link) {
     render = (
       <div className="spacing--small spacing--after-small auto-bottom-margin">
@@ -86,7 +88,10 @@ const Arrow = ({
               backgroundColor: arrow.backgroundColor
                 ? arrow.backgroundColor
                 : 'transparent',
-              color: arrow.backgroundColor === 'black' ? 'white' : 'black',
+              color:
+                arrow.backgroundColor === colors['black']
+                  ? 'white'
+                  : colors['black'],
             };
 
             return (

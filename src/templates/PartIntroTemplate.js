@@ -47,7 +47,6 @@ export default function PartIntroTemplate({ data }) {
       >
         <Element className="container">
           <Arrow
-            upperCase
             content={[
               {
                 backgroundColor: colors[partColor],
@@ -55,7 +54,7 @@ export default function PartIntroTemplate({ data }) {
                 link: '/about',
               },
               {
-                backgroundColor: 'black',
+                backgroundColor: colors['black'],
                 text: title,
               },
             ]}
@@ -66,12 +65,12 @@ export default function PartIntroTemplate({ data }) {
           </div>
 
           <Arrow
-            className="spacing"
             stack
             content={navArray.map(n => {
               const arr = n.split('|');
 
               return {
+                backgroundColor: colors['white'],
                 letter: arr[0],
                 path: arr[1],
                 text: arr[2],

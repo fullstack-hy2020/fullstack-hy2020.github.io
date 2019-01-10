@@ -1,6 +1,7 @@
 import { StaticQuery, graphql } from 'gatsby';
 import React from 'react';
 
+import colors from '../colors';
 import Accordion from '../components/Accordion/Accordion';
 import Arrow from '../components/Arrow/Arrow';
 import { BodyText } from '../components/BodyText/BodyText';
@@ -9,7 +10,7 @@ import Footer from '../components/Footer/Footer';
 import Layout from '../components/layout';
 import { PartBanner } from '../components/PartBanner/PartBanner';
 import SEO from '../components/seo';
-import LandingImage from '../images/Landing.png';
+import LandingImage from '../images/landing.svg';
 
 const About = () => (
   <Layout>
@@ -37,13 +38,13 @@ const About = () => (
         const { name, intro, info } = data.allAboutJson.edges[0].node;
 
         return (
-          <div>
+          <>
             <Element className="container">
               <Arrow
-                className="spacing"
+                className="spacing--large"
                 content={[
                   {
-                    backgroundColor: 'black',
+                    backgroundColor: colors['black'],
                     text: name,
                   },
                 ]}
@@ -82,7 +83,7 @@ const About = () => (
             </Element>
 
             <PartBanner />
-          </div>
+          </>
         );
       }}
     />

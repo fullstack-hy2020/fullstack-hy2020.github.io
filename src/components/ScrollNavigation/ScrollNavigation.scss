@@ -1,16 +1,15 @@
 @import '../common.scss';
 
 .scroll-navigation {
+  font-size: 16px;
+  position: absolute;
+  top: 0;
+
   @include to($desktop) {
     display: none;
   }
 
   padding-right: 1rem;
-  max-width: 20%;
-  position: sticky;
-  align-self: flex-start;
-  left: 10%;
-  top: 148px;
   z-index: 9999;
 
   li {

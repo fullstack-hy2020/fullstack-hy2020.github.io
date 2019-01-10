@@ -59,6 +59,7 @@
   border-right: none;
   z-index: 2;
   overflow: hidden;
+  font-family: $font-heading;
 
   @include to($desktop) {
     font-size: 0.7rem;
@@ -113,6 +114,17 @@
       padding: 1.25rem;
     }
   }
+
+  &:hover {
+    .arrow__rectangle,
+    .arrow__point {
+      background-color: $black !important;
+    }
+    .arrow--stacked-title,
+    .arrow--stacked-letter {
+      color: $white;
+    }
+  }
 }
 
 .arrow--stacked-letter {
@@ -120,8 +132,8 @@
 }
 
 .arrow--stacked-title {
-  text-transform: uppercase;
   white-space: nowrap;
+  font-family: $font-body;
 }
 
 .arrow__container--with-link {

@@ -1,6 +1,8 @@
 @import '../components/common.scss';
 
 .part-intro {
+  font-family: $font-heading !important;
+
   p:not(:last-of-type) {
     padding-bottom: 2em;
   }
