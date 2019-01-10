@@ -112,10 +112,6 @@ pre[class*='language-'] {
 }
 
 .arrow-go-up {
-  @include to($tablet) {
-    display: none !important;
-  }
-
   width: 24px;
   height: 24px;
   position: fixed;
@@ -124,4 +120,9 @@ pre[class*='language-'] {
   transform: rotate(90deg);
   z-index: 99999;
   cursor: pointer;
+  background-color: $white;
+
+  @include to($tablet) {
+    right: 10%;
+  }
 }
