@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import colors from '../colors';
 import Arrow from '../components/Arrow/Arrow';
 import { Banner } from '../components/Banner/Banner';
+import EditLink from '../components/EditLink/EditLink';
 import Element from '../components/Element/Element';
 import Footer from '../components/Footer/Footer';
 import Layout from '../components/layout';
@@ -25,6 +26,7 @@ export default class ContentTemplate extends Component {
 
     this.state = {
       h1Top: 0,
+      top: 0,
     };
   }
 
@@ -41,7 +43,19 @@ export default class ContentTemplate extends Component {
     this.setState({
       h1Top: h1.offsetTop,
     });
+
+    window.addEventListener('scroll', this.handleScroll);
   }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll = () => {
+    this.setState({
+      top: window.scrollY,
+    });
+  };
 
   render() {
     const { markdownRemark } = this.props.data;
@@ -65,8 +79,8 @@ export default class ContentTemplate extends Component {
           return <pre>{domToReact(children, parserOptions)}</pre>;
         } else if (type === 'tag' && attribs.class === 'content') {
           return (
-            <div className="container">
-              <div className="course-content col-7 push-right-2">
+            <div className="container container--right">
+              <div className="course-content">
                 {domToReact(children, parserOptions)}
               </div>
             </div>
@@ -81,7 +95,7 @@ export default class ContentTemplate extends Component {
             >
               <div className="container">
                 <div
-                  className="course-content col-7 push-right-2"
+                  className="course-content col-6 push-right-4"
                   style={{ borderColor: colorCode }}
                 >
                   {children.name === 'pre' ? (
@@ -100,18 +114,20 @@ export default class ContentTemplate extends Component {
 
     return (
       <Layout>
-        <div
-          className="arrow-go-up"
-          onClick={() =>
-            window.scrollTo({
-              top: 0,
-              left: 0,
-              behavior: 'smooth',
-            })
-          }
-        >
-          <img src={ArrowToTop} alt="arrow-up" />
-        </div>
+        {this.state.top > 300 && (
+          <div
+            className="arrow-go-up"
+            onClick={() =>
+              window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth',
+              })
+            }
+          >
+            <img src={ArrowToTop} alt="arrow-up" />
+          </div>
+        )}
 
         <div className="course-container spacing--small spacing--after">
           <Banner
@@ -119,7 +135,7 @@ export default class ContentTemplate extends Component {
             className="spacing--after"
             style={{
               backgroundImage: `url(${path.resolve(mainImage.publicURL)})`,
-              backgroundPosition: 'center center',
+              backgroundPosition: 'center left',
               backgroundSize: '80%',
               backgroundRepeat: 'no-repeat',
               backgroundColor: colorCode,
@@ -148,7 +164,7 @@ export default class ContentTemplate extends Component {
             </div>
           </Banner>
 
-          <Element flex>
+          <Element flex className="course">
             <ScrollNavigation
               part={part}
               letter={letter}
@@ -158,29 +174,30 @@ export default class ContentTemplate extends Component {
               style={{ top: this.state.h1Top }}
             />
 
-            <div className="course">
-              <div className="container">
-                <div className="col-7 course-content push-right-2">
-                  <p
-                    className="col-1 letter"
-                    style={{ borderColor: colorCode }}
-                  >
-                    {letter}
-                  </p>
+            <div
+              className="container container--right"
+              style={{ marginTop: `-${this.state.h1Top}` }}
+            >
+              <Element className="course-content" autoBottomMargin>
+                <p className="col-1 letter" style={{ borderColor: colorCode }}>
+                  {letter}
+                </p>
 
-                  <SubHeader headingLevel="h1" text={subTitle} />
-                </div>
-              </div>
-              {Parser(html, parserOptions)}
+                <SubHeader
+                  headingLevel="h1"
+                  text={subTitle}
+                  style={{ fontSize: '3rem' }}
+                />
+              </Element>
             </div>
+            {Parser(html, parserOptions)}
           </Element>
 
           <ReturnInfo />
 
-          <PrevNext
-            prev={part > 0 ? part - 1 : undefined}
-            next={part < 8 ? part + 1 : undefined}
-          />
+          <EditLink part={part} letter={letter} />
+
+          <PrevNext prev={part - 1} next={part + 1} />
         </div>
 
         <Footer />

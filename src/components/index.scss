@@ -16,7 +16,11 @@ body {
 }
 
 body {
-  padding-top: 2.055rem;
+  padding-top: 80px;
+
+  @include from($desktop) {
+    padding-top: 2.055rem;
+  }
 }
 
 p {
@@ -41,12 +45,32 @@ a {
   max-width: $large;
 }
 
+.container--right {
+  @include from($desktop) {
+    margin-right: 5%;
+    width: 54%;
+    max-width: $large/1.6667;
+
+    @include from($large) {
+      margin-right: calc((100% - #{$large}) / 2);
+    }
+  }
+}
+
 .hidden {
   display: none !important;
 }
 
 .centered {
   text-align: center;
+}
+
+.centered--mobile {
+  @include to($tablet) {
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+  }
 }
 
 .spacing {
@@ -90,8 +114,6 @@ a {
 }
 
 .spacing--after-small {
-  margin-bottom: $vertical-spacing;
-
   @include from($desktop) {
     margin-bottom: $vertical-spacing * 2.5;
   }
@@ -143,12 +165,12 @@ a {
 }
 
 @include to($desktop) {
-  .col-5--mobile {
-    width: 50%;
+  @for $i from 1 through 10 {
+    .col-#{$i}--mobile {
+      width: #{$i * 10%};
+    }
   }
-  .col-10--mobile {
-    width: 100%;
-  }
+
   @for $i from 0 through 5 {
     .order-#{$i}--mobile {
       order: $i;
@@ -166,11 +188,15 @@ a {
 }
 
 .nav-item-hover {
-  font-size: 1.111rem;
-  font-weight: $font-weight-semi-bold;
   text-decoration: none;
   color: $black;
+  font-weight: 500;
   padding: 0.2em;
+
+  @include from($tablet) {
+    font-weight: $font-weight-semi-bold;
+    font-size: 1.111rem;
+  }
 
   &:hover,
   &:active,
@@ -198,5 +224,41 @@ a {
   .nav-item-hover {
     font-size: 0.777rem;
     font-weight: $font-weight-medium;
+  }
+}
+
+.index__main-title {
+  font-size: 1.571rem;
+
+  @include from($desktop) {
+    font-size: 3rem;
+  }
+}
+
+.auto-bottom-margin {
+  margin-bottom: auto;
+}
+
+.absolute-top-right--desktop {
+  @include from($desktop) {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+.frontpage__hero {
+  @include from($tablet) {
+    .image {
+      top: -2em;
+    }
+  }
+
+  @include from($desktop) {
+    flex-direction: column;
+
+    .image {
+      top: 4em;
+    }
   }
 }

@@ -2,9 +2,12 @@
 
 .course {
   position: relative;
+  width: 100%;
 
   p {
-    margin-left: 3rem;
+    @include from($tablet) {
+      margin-left: 3rem;
+    }
   }
 
   p:not(:last-of-type) {
@@ -15,7 +18,9 @@
   h2,
   h3,
   h4 {
-    margin-left: 3rem;
+    @include from($tablet) {
+      margin-left: 3rem;
+    }
     padding-bottom: 2rem;
   }
 
@@ -56,6 +61,7 @@
     text-align: center;
     margin: 1rem;
     line-height: 0.8em;
+    transform: translate(-1rem, 0);
 
     @include from($tablet) {
       transform: translate(-3rem, 5rem);
@@ -79,6 +85,10 @@
   }
 }
 
+.course-content {
+  width: 100%;
+}
+
 .tasks {
   a {
     border-color: $black !important;
@@ -100,10 +110,6 @@ pre[class*='language-'] {
 }
 
 .arrow-go-up {
-  @include to($tablet) {
-    display: none !important;
-  }
-
   width: 24px;
   height: 24px;
   position: fixed;
@@ -112,4 +118,9 @@ pre[class*='language-'] {
   transform: rotate(90deg);
   z-index: 99999;
   cursor: pointer;
+  background-color: $white;
+
+  @include to($tablet) {
+    right: 10%;
+  }
 }

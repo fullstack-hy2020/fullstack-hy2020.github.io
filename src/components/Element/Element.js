@@ -12,14 +12,19 @@ const Element = ({
   spaceAround,
   spaceBetween,
   centered,
+  autoMargin,
   autoBottomMargin,
   horizontalHalf,
   flexStart,
-  props,
+  noWrap,
+  centeredInDesktop,
+  relative,
+  ...props,
 }) => {
   const classes = [];
 
   flex && classes.push('element--flex');
+  autoMargin && classes.push('element--auto-margin');
   autoBottomMargin && classes.push('element--auto-bottom-margin');
   dirColumn && classes.push('element--column');
   spaceAround && classes.push('element--space-around');
@@ -27,6 +32,9 @@ const Element = ({
   centered && classes.push('element--centered');
   horizontalHalf && classes.push('element--horizontal-half');
   flexStart && classes.push('element--flex-start');
+  noWrap && classes.push('element--no-wrap');
+  centeredInDesktop && classes.push('element--centered-in-desktop');
+  relative && classes.push('element--relative');
 
   return (
     <Tag className={`${className} ${classes.join(' ')}`} {...props}>
@@ -50,8 +58,12 @@ Element.propTypes = {
   dirColumn: PropTypes.bool,
   centered: PropTypes.bool,
   horizontalHalf: PropTypes.bool,
+  autoMargin: PropTypes.bool,
   autoBottomMargin: PropTypes.bool,
   flexStart: PropTypes.bool,
+  noWrap: PropTypes.bool,
+  centeredInDesktop: PropTypes.bool,
+  relative: PropTypes.bool,
 };
 
 export default Element;

@@ -61,7 +61,10 @@ export default function PartIntroTemplate({ data }) {
             ]}
           />
 
-          <div className="part-intro col-7">{Parser(html, parserOptions)}</div>
+          <div className="part-intro col-7 spacing--after-small">
+            {Parser(html, parserOptions)}
+          </div>
+
           <Arrow
             className="spacing"
             stack

@@ -10,7 +10,7 @@ const FAQ = () => (
   <Layout>
     <SEO title="FAQ" />
 
-    <Element className="container spacing spacing--after">
+    <Element className="container spacing--large spacing--after">
       <h1>Hi from the FAQ page</h1>
 
       <Link to="/">Go back to the homepage</Link>

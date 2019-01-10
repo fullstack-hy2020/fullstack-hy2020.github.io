@@ -1,7 +1,7 @@
 ---
 title: osa 1
-subTitle: Komonentin tila ja tapahtumankäsittely
-path: /osa1/komonentin_tila_ja_tapahtumankäsittely
+subTitle: Komponentin tila ja tapahtumankäsittely
+path: /osa1/komponentin_tila_ja_tapahtumankasittely
 mainImage: ../../images/part-1.svg
 part: 1
 letter: c

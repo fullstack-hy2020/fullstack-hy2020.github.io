@@ -4,9 +4,10 @@ import React from 'react';
 import yliopisto from '../../images/hgin_yliopisto.png';
 import houston from '../../images/houston_logo.png';
 import { Image } from './../Image/Image';
+import Element from '../Element/Element';
 
 const Footer = () => (
-  <div
+  <Element
     id="footer"
     className="container spacing--after"
     style={{ justifyContent: 'space-between' }}
@@ -32,8 +33,9 @@ const Footer = () => (
       </a>
     </div>
 
-    <div
-      className="col-2"
+    <Element
+      flex
+      className="col-2 order-1--mobile"
       style={{
         display: 'flex',
         justifyContent: 'space-between',
@@ -50,8 +52,8 @@ const Footer = () => (
       <Link to="/faq" className="nav-item-hover">
         FAQs
       </Link>
-    </div>
-  </div>
+    </Element>
+  </Element>
 );
 
 export default Footer;

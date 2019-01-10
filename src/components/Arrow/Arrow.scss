@@ -60,6 +60,10 @@
   z-index: 2;
   overflow: hidden;
 
+  @include to($desktop) {
+    font-size: 0.7rem;
+  }
+
   .bold {
     font-weight: $font-weight-semi-bold;
   }
@@ -93,7 +97,21 @@
   margin: auto auto auto 0;
 
   &:nth-of-type(n + 2) {
-    margin-top: -2px;
+    margin-top: 1rem;
+
+    @include from($desktop) {
+      margin-top: -2px;
+    }
+  }
+
+  .arrow__point {
+    padding: 1.08rem;
+    margin-left: 2px;
+
+    @include from($desktop) {
+      margin-left: unset;
+      padding: 1.25rem;
+    }
   }
 }
 
