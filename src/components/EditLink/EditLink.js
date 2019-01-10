@@ -18,7 +18,7 @@ const EditLink = ({ part, letter }) => (
 );
 
 EditLink.propTypes = {
-  part: PropTypes.string.isRequired,
+  part: PropTypes.number.isRequired,
   letter: PropTypes.string.isRequired,
 };
 
