@@ -46,13 +46,14 @@ a {
 }
 
 .container--right {
-  margin-right: 5%;
-  //  margin-left: 10%;
-  width: 54%;
-  max-width: $large/1.6667;
+  @include from($desktop) {
+    margin-right: 5%;
+    width: 54%;
+    max-width: $large/1.6667;
 
-  @include from($large) {
-    margin-right: calc((100% - #{$large}) / 2);
+    @include from($large) {
+      margin-right: calc((100% - #{$large}) / 2);
+    }
   }
 }
 
@@ -248,7 +249,6 @@ a {
 
 .frontpage__hero {
   @include from($tablet) {
-
     .image {
       top: -2em;
     }
