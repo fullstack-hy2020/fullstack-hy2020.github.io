@@ -5,6 +5,8 @@
   width: 100%;
 
   p {
+    font-family: $font-heading;
+
     @include from($tablet) {
       margin-left: 3rem;
     }
@@ -110,15 +112,13 @@ pre[class*='language-'] {
 }
 
 .arrow-go-up {
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: 36px;
   position: fixed;
   bottom: 5%;
   right: 5%;
-  transform: rotate(90deg);
   z-index: 99999;
   cursor: pointer;
-  background-color: $white;
 
   @include to($tablet) {
     right: 10%;

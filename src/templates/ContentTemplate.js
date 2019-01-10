@@ -18,7 +18,7 @@ import PrevNext from '../components/PrevNext/PrevNext';
 import ReturnInfo from '../components/ReturnInfo/ReturnInfo';
 import ScrollNavigation from '../components/ScrollNavigation/ScrollNavigation';
 import { SubHeader } from '../components/SubHeader/SubHeader';
-import ArrowToTop from '../images/left-arrow.svg';
+import ArrowToTop from '../images/up-arrow.svg';
 
 export default class ContentTemplate extends Component {
   constructor(props) {
@@ -79,8 +79,8 @@ export default class ContentTemplate extends Component {
           return <pre>{domToReact(children, parserOptions)}</pre>;
         } else if (type === 'tag' && attribs.class === 'content') {
           return (
-            <div className="container container--right">
-              <div className="course-content">
+            <div className="container">
+              <div className="course-content col-6 push-right-3">
                 {domToReact(children, parserOptions)}
               </div>
             </div>
@@ -95,7 +95,7 @@ export default class ContentTemplate extends Component {
             >
               <div className="container">
                 <div
-                  className="course-content col-6 push-right-4"
+                  className="course-content col-6 push-right-3"
                   style={{ borderColor: colorCode }}
                 >
                   {children.name === 'pre' ? (
@@ -143,7 +143,6 @@ export default class ContentTemplate extends Component {
           >
             <div className="container">
               <Arrow
-                upperCase
                 content={[
                   {
                     backgroundColor: colorCode,
@@ -156,7 +155,7 @@ export default class ContentTemplate extends Component {
                     link: `/osa${part}`,
                   },
                   {
-                    backgroundColor: 'black',
+                    backgroundColor: colors['black'],
                     text: subTitle,
                   },
                 ]}
@@ -164,21 +163,22 @@ export default class ContentTemplate extends Component {
             </div>
           </Banner>
 
-          <Element flex className="course">
-            <ScrollNavigation
-              part={part}
-              letter={letter}
-              currentPartTitle={subTitle}
-              currentPath={frontmatter.path}
-              colorCode={colorCode}
-              style={{ top: this.state.h1Top }}
-            />
+          <Element className="course">
+            <Element flex className="container" relative>
+              <ScrollNavigation
+                part={part}
+                letter={letter}
+                currentPartTitle={subTitle}
+                currentPath={frontmatter.path}
+                colorCode={colorCode}
+                className="col-2 spacing"
+                style={{ top: this.state.h1Top }}
+              />
 
-            <div
-              className="container container--right"
-              style={{ marginTop: `-${this.state.h1Top}` }}
-            >
-              <Element className="course-content" autoBottomMargin>
+              <Element
+                className="course-content col-6 push-right-3"
+                autoBottomMargin
+              >
                 <p className="col-1 letter" style={{ borderColor: colorCode }}>
                   {letter}
                 </p>
@@ -189,7 +189,8 @@ export default class ContentTemplate extends Component {
                   style={{ fontSize: '3rem' }}
                 />
               </Element>
-            </div>
+            </Element>
+
             {Parser(html, parserOptions)}
           </Element>
 
