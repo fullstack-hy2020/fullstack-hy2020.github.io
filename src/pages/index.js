@@ -26,7 +26,7 @@ import news from '../images/noun_news_1248039.svg';
 import telegramIcon from '../images/telegram-logo-png-open-2000.png';
 
 const thingsToKnow = [
-  { icon: timerIcon, text: '5-20 tuntia / osaa' },
+  { icon: timerIcon, text: '5-20 tuntia / osa' },
   { icon: calendarIcon, text: 'Deadline 15.12.2018' },
   { icon: starIcon, text: 'Get started' },
 ];
