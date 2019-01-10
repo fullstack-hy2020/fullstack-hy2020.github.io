@@ -34,7 +34,7 @@ Muutetaan nyt uuden muistiinpanon lisäämisestä huolehtivaa tapahtumankäsitte
 
 ```js
 addNote = event => {
-  event.preventDefault();
+  event.preventDefault()
   const noteObject = {
     content: this.state.newNote,
     date: new Date(),
@@ -43,7 +43,7 @@ addNote = event => {
 
 // highlight-start
   axios.post('http://localhost:3001/notes', noteObject).then(response => {
-    console.log(response);
+    console.log(response)
   })
 // highlight-end
 }
@@ -71,7 +71,7 @@ Uusi muistiinpano ei vielä renderöidy ruudulle, sillä emme aseta komponentill
 
 ```js
 addNote = event => {
-  event.preventDefault();
+  event.preventDefault()
   const noteObject = {
     content: this.state.newNote,
     date: new Date(),
@@ -566,26 +566,26 @@ Simuloidaan tälläistä tilannetta "kovakoodaamalla" noteServiceen funktioon <c
 
 ```js
 const getAll = () => {
-  const request = axios.get(baseUrl);
+  const request = axios.get(baseUrl)
   const nonExisting = {
     id: 10000,
     content: 'Tätä muistiinpanoa ei ole palvelimelta',
     date: '2017-12-10T17:30:31.098Z',
     important: true,
-  };
-  return request.then(response => response.data.concat(nonExisting));
-};
+  }
+  return request.then(response => response.data.concat(nonExisting))
+}
 ```
 
 Kun valemuistiinpanon tärkeyttä yritetään muuttaa, konsoliin tulee virheilmoitus, joka kertoo palvelimen vastanneen urliin _/notes/10000_ tehtyyn HTTP PUT -pyyntöön statuskoodilla 404 _not found_:
 
-![](../assets/2/14.png)
+![](../images/2/23b.png)
 
 Sovelluksen tulisi pystyä käsittelemään tilanne hallitusti. Jos konsoli ei ole auki, ei käyttäjä huomaa mitään muuta kuin sen, että muistiinpanon tärkeys ei vaihdu napin painelusta huolimatta.
 
-Jo [aiemmin](#axios-ja-promiset) mainittiin, että promisella voi olla kolme tilaa. Kun HTTP-pyyntö epäonnistuu, menee pyyntöä vastaava promise tilaan _rejected_. Emme tällä hetkellä käsittele koodissamme promisen epäonnistumista mitenkään.
+Jo [aiemmin](#axios-ja-promiset) mainittiin, että promisella voi olla kolme tilaa. Kun HTTP-pyyntö epäonnistuu, menee pyyntöä vastaava promise tilaan <code>rejected</code>. Emme tällä hetkellä käsittele koodissamme promisen epäonnistumista mitenkään.
 
-Promisen epäonnistuminen [käsitellään](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) antamalla _then_ --metodille parametriksi myös toinen takaisinkutsufunktio, jota kutsutaan siinä tapauksessa jos promise epäonnistuu.
+Promisen epäonnistuminen [käsitellään](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) antamalla <code>then</code>-metodille parametriksi myös toinen takaisinkutsufunktio, jota kutsutaan siinä tapauksessa jos promise epäonnistuu.
 
 Ehkä yleisempi tapa kuin kahden tapahtumankäsittelijän käyttö on liittää promiseen epäonnistumistilanteen käsittelijä kutsumalla metodia [catch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch).
 
@@ -595,16 +595,16 @@ Käytännössä virhetilanteen käsittelijän rekisteröiminen tapahtuisi seuraa
 axios
   .get('http://example.com/probably_will_fail')
   .then(response => {
-    console.log('success!');
+    console.log('success!')
   })
   .catch(error => {
-    console.log('fail');
-  });
+    console.log('fail')
+  })
 ```
 
-Jos pyyntö epäonnistuu, kutsutaan _catch_-metodin avulla rekisteröityä käsittelijää.
+Jos pyyntö epäonnistuu, kutsutaan <code>catch</code>-metodin avulla rekisteröityä käsittelijää.
 
-Metodia _catch_ hyödynnetään usein siten, että se sijoitetaan syvemmälle promiseketjuun.
+Metodia <code>catch</code> hyödynnetään usein siten, että se sijoitetaan syvemmälle promiseketjuun.
 
 Kun sovelluksemme tekee HTTP-operaation syntyy oleellisesti ottaen [promiseketju](https://javascript.info/promise-chaining):
 
@@ -614,10 +614,10 @@ axios
   .then(response => response.data)
   .then(changedNote => {
     // ...
-  });
+  })
 ```
 
-Metodilla _catch_ voidaan määritellä ketjun lopussa käsittelijäfunktio, jota kutsutaan siinä vaiheessa jos mikä tahansa ketjun promisesta epäonnistuu, eli menee tilaan _rejected_:
+Metodilla <code>catch</code> voidaan määritellä ketjun lopussa käsittelijäfunktio, jota kutsutaan siinä vaiheessa jos mikä tahansa ketjun promisesta epäonnistuu, eli menee tilaan <code>rejected</code>:
 
 ```js
 axios
@@ -627,36 +627,30 @@ axios
     // ...
   })
   .catch(error => {
-    console.log('fail');
-  });
+    console.log('fail')
+  })
 ```
 
 Hyödynnetään tätä ominaisuutta, ja sijoitetaan virheenkäsittelijä komponenttiin _App_:
 
 ```js
-toggleImportanceOf = id => {
-  return () => {
-    const note = this.state.notes.find(n => n.id === id);
-    const changedNote = { ...note, important: !note.important };
+const toggleImportanceOf = id => {
+  const note = notes.find(n => n.id === id)
+  const changedNote = { ...note, important: !note.important }
 
-    noteService
-      .update(id, changedNote)
-      .then(changedNote => {
-        const notes = this.state.notes.filter(n => n.id !== id);
-        this.setState({
-          notes: notes.concat(changedNote),
-        });
-      })
-      .catch(error => {
-        alert(
-          `muistiinpano '${
-            note.content
-          }' on jo valitettavasti poistettu palvelimelta`
-        );
-        this.setState({ notes: this.state.notes.filter(n => n.id !== id) });
-      });
-  };
-};
+  noteService
+    .update(changedNote).then(returnedNote => {
+      setNotes(notes.map(note => note.id !== id ? note : returnedNote))
+    })
+    // highlight-start
+    .catch(error => {
+      alert(
+        `muistiinpano '${note.content}' on jo valitettavasti poistettu palvelimelta`
+      )
+      setNotes(notes.filter(n => n.id !== id))
+    })
+    // highlight-end
+}
 ```
 
 Virheilmoitus annetaan vanhan kunnon [alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert)-dialogin avulla ja palvelimelta poistettu muistiinpano poistetaan tilasta.
@@ -664,18 +658,19 @@ Virheilmoitus annetaan vanhan kunnon [alert](https://developer.mozilla.org/en-US
 Olemattoman muistiinpanon poistaminen siis tapahtuu metodilla [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter), joka muodostaa uuden taulukon, jonka sisällöksi tulee alkuperäisen taulukon sisällöstä ne alkiot, joille parametrina oleva funktio palauttaa arvon true:
 
 ```js
-this.state.notes.filter(n => n.id !== id) }
+notes.filter(n => n.id !== id)
 ```
 
-Alertia tuskin kannattaa käyttää todellisissa React-sovelluksissa. Opimme kohta kehittyneemmän menetelmän käyttäjille tarkoitettujen tiedotteiden antamiseen. Toisaalta on tilanteita, joissa simppeli battle tested -menetelmä kuten _alert_ riittää aluksi aivan hyvin. Hienomman tavan voi sitten tehdä myöhemmin jos aikaa ja intoa riittää.
+Alertia tuskin kannattaa käyttää todellisissa React-sovelluksissa. Opimme kohta kehittyneemmän menetelmän käyttäjille tarkoitettujen tiedotteiden antamiseen. Toisaalta on tilanteita, joissa simppeli battle tested -menetelmä kuten <code>alert_</code> riittää aluksi aivan hyvin. Hienomman tavan voi sitten tehdä myöhemmin jos aikaa ja intoa riittää.
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part2-notes/tree/part2-6), tagissa _part2-6_.
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part2-notes/tree/part2-6), branchissa _part2-6_.
 
 </div>
 
 <div class="tasks">
 
 <h3>Tehtäviä</h3>
+
 <h4>2.14: puhelinluettelo osa 7</h4>
 
 Palataan jälleen puhelinluettelon pariin.
@@ -690,11 +685,20 @@ Siirrä palvelimen kanssa kommunikoinnista vastaava toiminnallisuus omaan moduul
 
 Tee ohjelmaan mahdollisuus yhteystietojen poistamiseen. Poistaminen voi tapahtua esim. nimen yhteyteen liitetyllä napilla. Poiston suorittaminen voidaan varmistaa käyttäjältä [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm)-metodilla:
 
-![](../assets/teht/16.png)
+![](../images/2/24b.png)
 
-Palvelimelta tiettyä henkilöä vastaava resurssi tuhotaan tekemällä HTTP DELETE -pyyntö resurssia vastaavaan _URL_:iin, eli jos poistaisimme esim. käyttäjän, jonka _id_ on 2, tulisi tapauksessamme tehdä HTTP DELETE osoitteeseen _localhost:3001/persons/2_. Pyynnön mukana ei lähetetä mitään dataa.
+Palvelimelta tiettyä henkilöä vastaava resurssi tuhotaan tekemällä HTTP DELETE -pyyntö resurssia vastaavaan <i>URL</i>:iin, eli jos poistaisimme esim. käyttäjän, jonka _id_ on 2, tulisi tapauksessamme tehdä HTTP DELETE osoitteeseen _localhost:3001/persons/2_. Pyynnön mukana ei lähetetä mitään dataa.
 
 [Axios](https://github.com/axios/axios)-kirjaston avulla HTTP DELETE -pyyntö tehdään samaan tapaan kuin muutkin pyynnöt.
+
+**Huom:** et voi käyttää Javascriptissa muuttujan nimeä <code>delete</code> sillä kyseessä on kielen varattu sana, eli seuraava ei onnistu:
+
+```js
+// käytä jotain muuta muuttujan nimeä
+const delete = (id) => {
+  // ...
+}
+```
 
 <h4>2.17*: puhelinluettelo osa 10</h4>
 
