@@ -1,7 +1,7 @@
 ---
 title: osa 0
 subTitle: Web-sovelluksen toimintaperiaatteita
-path: /osa0/perusteet
+path: /osa0/web_sovellusten_toimintaperiaatteita
 mainImage: ../../images/part-0.svg
 part: 0
 letter: b
