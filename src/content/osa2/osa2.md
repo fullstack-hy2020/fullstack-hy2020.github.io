@@ -4,7 +4,7 @@ path: /osa2
 mainImage: ../../images/part-2.svg
 part: 2
 partColor: dark-orange
-navigation: a|/osa2/kokoelmat_ja_moduulit|Kokoelmien renderöinti ja moduulit@b|/osa2/lomakkeet|Lomakkeiden käsittely@c|/osa2/palvelimella_oleva_data|Palvelimella olevan datan hakeminen@d|/osa2/palvelimella_olevan_datan_muokkaus|Palvelimella olevan datan muokkaaminen@e|/osa2/css|Tyylien lisääminen React-sovellukseen
+navigation: a|/osa2/kokoelmien_renderointi_ja_moduulit|Kokoelmien renderöinti ja moduulit@b|/osa2/lomakkeiden_kasittely|Lomakkeiden käsittely@c|/osa2/palvelimella_olevan_datan_hakeminen|Palvelimella olevan datan hakeminen@d|/osa2/palvelimella_olevan_datan_muokkaaminen|Palvelimella olevan datan muokkaaminen@e|/osa2/css|Tyylien lisääminen React-sovellukseen
 ---
 
 <div class="intro">

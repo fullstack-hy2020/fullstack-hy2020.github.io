@@ -1,7 +1,7 @@
 ---
 title: osa 0
 subTitle: Web-sovelluksen toimintaperiaatteita
-path: /osa0/perusteet
+path: /osa0/web-sovelluksen_toimintaperiaatteita
 mainImage: ../../images/part-0.svg
 part: 0
 letter: b
@@ -9,19 +9,6 @@ partColor: light-violet
 ---
 
 <div class="content">
-
-Some thext here. Some thext here. Some thext here. Some thext here...
-
-- Web-sovellusten toiminnan perusteet
-  - HTML:n perusteet
-  - HTTP-protokolla: metodit GET ja POST, statuskoodit, headerit
-  - palvelimella suoritettavan koodin rooli
-  - selaimessa suoritettavan Javascriptin rooli
-  - JSON-muotoinen data
-  - DOM API
-  - sivujen ulkoasun muotoilu CSS:llä
-  - single page app -periaate
-  - Chrome developer konsolin peruskäyttö
 
 Ennen kuin aloitamme ohjelmoinnin, käymme läpi web-sovellusten toimintaperiaatteita tarkastelemalla osoitteessa <https://fullstack-exampleapp.herokuapp.com/> olevaa esimerkkisovellusta. Huom. sovelluksen toinen versio on osoitteessa <https://fullstack-example.now.sh>, voit käyttää kumpaa vaan.
 

@@ -1,17 +1,14 @@
 ---
 title: osa 2
 subTitle: Palvelimella olevan datan muokkaaminen
-path: /osa2/palvelimella_olevan_datan_muokkaus
+path: /osa2/palvelimella_olevan_datan_muokkaaminen
 mainImage: ../../images/part-2.svg
 part: 2
 letter: d
 partColor: dark-orange
 ---
 
-
 <div class="content">
-
-## REST API:n käyttö
 
 Kun sovelluksella luodaan uusia muistiinpanoja, täytyy ne tallentaa palvelimelle.
 
@@ -554,20 +551,18 @@ Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://git
 
 <div class="tasks">
 
-<h3>Tehtävät 2.14</h3>
-<h4>puhelinluettelo osa 7</h4>
+<h3>Tehtäviä/h3>
+<h4>2.14: puhelinluettelo osa 7</h4>
 
 Palataan jälleen puhelinluettelon pariin.
 
 Tällä hetkellä luetteloon lisättäviä uusia numeroita ei synkronoida palvelimelle. Korjaa tilanne.
 
-<h3>Tehtävät 2.15</h3>
-<h4>puhelinluettelo osa 8</h4>
+<h4>2.15: puhelinluettelo osa 8</h4>
 
 Siirrä palvelimen kanssa kommunikoinnista vastaava toiminnallisuus omaan moduuliin osan 2 [esimerkin](/osa2/#palvelimen-kanssa-tapahtuvan-kommunikoinnin-erist%C3%A4minen-omaan-moduuliin) tapaan.
 
-<h3>Tehtävät 2.16</h3>
-<h4>puhelinluettelo osa 9</h4>
+<h4>2.16: puhelinluettelo osa 9</h4>
 
 Tee ohjelmaan mahdollisuus yhteystietojen poistamiseen. Poistaminen voi tapahtua esim. nimen yhteyteen liitetyllä napilla. Poiston suorittaminen voidaan varmistaa käyttäjältä [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm)-metodilla:
 
@@ -577,8 +572,7 @@ Palvelimelta tiettyä henkilöä vastaava resurssi tuhotaan tekemällä HTTP DEL
 
 [Axios](https://github.com/axios/axios)-kirjaston avulla HTTP DELETE -pyyntö tehdään samaan tapaan kuin muutkin pyynnöt.
 
-<h3>Tehtävät 2.17*</h3>
-<h4>puhelinluettelo osa 10</h4>
+<h4>2.17*: puhelinluettelo osa 10</h4>
 
 Muuta toiminnallisuutta siten, että jos jo olemassaolevalle henkilölle lisätään numero, korvaa lisätty numero aiemman numeron. Korvaaminen kannattaa tehdä HTTP PUT -pyynnöllä.
 

@@ -1,7 +1,7 @@
 ---
 title: osa 1
 subTitle: Javascriptiä
-path: /osa1/javascript
+path: /osa1/javascriptia
 mainImage: ../../images/part-1.svg
 part: 1
 letter: b

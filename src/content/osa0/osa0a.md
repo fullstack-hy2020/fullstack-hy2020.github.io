@@ -1,6 +1,6 @@
 ---
 title: osa 0
-subTitle: Web-sovelluksen toimintaperiaatteita
+subTitle: Yleistä
 path: /osa0/yleistä
 mainImage: ../../images/part-0.svg
 part: 0
