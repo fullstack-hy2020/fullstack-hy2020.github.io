@@ -8,31 +8,31 @@
 
 .navigation {
   z-index: 2;
-  width: 100%;
   list-style: none;
-  display: flex;
+  opacity: 0;
+  display: none;
   margin: 0;
-  padding: 0;
+  padding: 5%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   background: $main;
   position: fixed;
-  top: 0;
-  left: 100%;
-  right: 0;
-  transition: left 0.3s ease-in-out;
+  top: 8%;
+  right: 5%;
+  transition: opacity 0.3s ease-in-out;
   font-weight: 200;
 
   @include from($desktop) {
+    display: flex;
+    opacity: 1;
     font-weight: 400;
     min-height: auto;
     width: auto;
     position: static;
     background: none;
-    align-items: flex-end;
-    justify-content: left;
+    align-items: flex-start;
+    justify-content: flex-start;
     overflow: hidden;
     flex-direction: row;
   }
@@ -70,7 +70,7 @@
     position: absolute;
     width: 30px;
     height: 3px;
-    transition: all 0.5s ease;
+    transition: all 0.3s ease;
     border-radius: 4px;
     background-color: $black;
   }
@@ -93,7 +93,19 @@
   overflow: hidden;
 
   .navigation {
-    left: 0;
+    opacity: 1;
+    display: unset;
+
+    &::before {
+      content: '';
+      background-color: $main;
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      top: -3px;
+      right: 13px;
+      transform: rotate(45deg);
+    }
   }
 
   .navigation__mobile-logo {
@@ -115,7 +127,7 @@
     &,
     &::before,
     &::after {
-      background: $white;
+      background: $black;
     }
 
     &::before {
@@ -131,6 +143,8 @@
 
 .navigation__item {
   margin: 22px 0;
+  white-space: nowrap;
+
   &:first-of-type {
     margin: 0 0 22px;
   }

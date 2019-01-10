@@ -51,17 +51,17 @@ class Header extends Component {
                 {'{() => fs}'}
               </TripleBorder>
             ) : (
-              <TripleBorder
-                hover
-                className="nav-item-hover"
-                childrenClassName="triple-border__logo"
-              >
-                fs
+                <TripleBorder
+                  hover
+                  className="nav-item-hover"
+                  childrenClassName="triple-border__logo"
+                >
+                  fs
               </TripleBorder>
-            )}
+              )}
           </Link>
 
-          <Navigation />
+          {headerClass !== 'header-small' && <Navigation />}
         </div>
       </div>
     );

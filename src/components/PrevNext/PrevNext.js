@@ -4,33 +4,38 @@ import React from 'react';
 
 import Element from '../Element/Element';
 
-const PrevNext = ({ prev, next }) => (
-  <Element className="container spacing spacing--after-large">
-    {prev !== undefined ? (
-      <Link to={`/osa${prev}`} className="push-right-1">
-        <Element flex dirColumn>
-          <p style={{ textAlign: 'right' }}>Osa {prev}</p>
+const PrevNext = ({ prev, next }) => {
+  const hasPrev = prev >= 0 ? true : false;
+  const hasNext = next <= 8 ? true : false;
 
-          <b>Edellinen osa</b>
-        </Element>
-      </Link>
-    ) : (
-      <Element className="push-right-1" />
-    )}
+  return (
+    <Element className="container spacing spacing--after-large">
+      {hasPrev ? (
+        <Link to={`/osa${prev}`} className="push-right-1">
+          <Element flex dirColumn>
+            <p style={{ textAlign: 'right' }}>Osa {prev}</p>
 
-    {next !== undefined ? (
-      <Link to={`/osa${next}`} className="push-left-1">
-        <Element flex dirColumn>
-          <p>Osa {next}</p>
+            <b>Edellinen osa</b>
+          </Element>
+        </Link>
+      ) : (
+        <Element className="push-right-1" />
+      )}
 
-          <b>Seuraava osa</b>
-        </Element>
-      </Link>
-    ) : (
-      <Element className="push-left-1" />
-    )}
-  </Element>
-);
+      {hasNext ? (
+        <Link to={`/osa${next}`} className="push-left-1">
+          <Element flex dirColumn>
+            <p>Osa {next}</p>
+
+            <b>Seuraava osa</b>
+          </Element>
+        </Link>
+      ) : (
+        <Element className="push-left-1" />
+      )}
+    </Element>
+  );
+};
 
 PrevNext.defaultProps = {
   prev: undefined,

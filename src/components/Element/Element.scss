@@ -1,3 +1,5 @@
+@import '../common.scss';
+
 .element--flex {
   display: flex;
   flex-wrap: wrap;
@@ -17,10 +19,24 @@
 
 .element--centered {
   align-items: center;
+  justify-content: center !important;
+}
+
+.element--centered-in-desktop {
+  @include from($desktop) {
+    align-items: center;
+    justify-content: center !important;
+  }
 }
 
 .element--horizontal-half {
-  width: 45%;
+  @include from($desktop) {
+    width: 45%;
+  }
+}
+
+.element--auto-margin {
+  margin: auto;
 }
 
 .element--auto-bottom-margin {
@@ -29,4 +45,12 @@
 
 .element--flex-start {
   align-content: flex-start;
+}
+
+.element--no-wrap {
+  flex-wrap: nowrap;
+}
+
+.element--relative {
+  position: relative;
 }

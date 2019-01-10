@@ -74,15 +74,15 @@ const IndexPage = () => (
         return (
           <div>
             <div className="container spacing--after">
-              <div className="col-7">
+              <Element flex spaceBetween className="col-10 spacing--large frontpage__hero" relative>
                 <SubHeader
-                  className="col-10 spacing--large index__main-title"
+                  className="col-10 index__main-title"
                   text={mainTitle}
                   headingLevel="h1"
                 />
 
                 <Arrow
-                  className="col-3 arrow__container--with-link"
+                  className="col-10 spacing--after-small col-3--mobile arrow__container--with-link"
                   bold
                   thickBorder
                   link="/about"
@@ -91,16 +91,18 @@ const IndexPage = () => (
                   ]}
                 />
 
-                <BodyText className="col-7" text={intro} />
-              </div>
+                <BodyText
+                  className="col-4 order-1--mobile col-8--mobile"
+                  text={intro}
+                />
 
-              <Element flex spaceAround className="col-3">
-                <img
-                  className="col-7"
-                  style={{ marginTop: 'auto', marginBottom: 0 }}
+                <Image contain
+                  className="col-4--mobile absolute-top-right--desktop"
+                  style={{ margin: 0 }}
                   alt="Stacked cubes with React logo and JavaScript text"
                   src={landingImage}
                 />
+
               </Element>
             </div>
 
@@ -112,15 +114,19 @@ const IndexPage = () => (
                   headingFontSize="1.777rem"
                 />
 
-                <Element className="col-8 push-right-1" flex spaceAround>
+                <Element
+                  className="col-8 push-right-1 col-10--mobile"
+                  flex
+                  spaceAround
+                >
                   {thingsToKnow.map(item => {
                     return (
                       <Element
                         key={item.text}
-                        centered
+                        centeredInDesktop
                         flex
                         dirColumn
-                        className="col-1"
+                        className="col-1 col-3--mobile"
                       >
                         <Image contain fullWidth src={item.icon} />
                         <BodyText
@@ -144,10 +150,10 @@ const IndexPage = () => (
                     autoBottomMargin
                     className="col-10"
                   >
-                    <Image contain small src={news} />
+                    <Image contain small src={news} className="col-1--mobile" />
 
                     <BodyText
-                      className="col-7"
+                      className="col-7 col-8--mobile"
                       heading={{ title: 'Ajankohtaista', level: 'h3' }}
                     />
                   </Element>
@@ -155,15 +161,25 @@ const IndexPage = () => (
                   <BodyText className="spacing--small" text={current} />
 
                   <Element flex spaceBetween className="col-10">
-                    <Image contain extraSmall src={telegramIcon} />
+                    <Image
+                      contain
+                      extraSmall
+                      src={telegramIcon}
+                      className="col-1--mobile"
+                    />
 
-                    <BodyText className="col-8" text={telegram} />
+                    <BodyText className="col-8 col-8--mobile" text={telegram} />
                   </Element>
 
                   <Element flex spaceBetween className="col-10 spacing--small">
-                    <Image contain extraSmall src={announcement} />
+                    <Image
+                      contain
+                      extraSmall
+                      src={announcement}
+                      className="col-1--mobile"
+                    />
 
-                    <BodyText className="col-8" text={notice} />
+                    <BodyText className="col-8 col-8--mobile" text={notice} />
                   </Element>
                 </Element>
 
@@ -172,12 +188,12 @@ const IndexPage = () => (
                     flex
                     spaceBetween
                     autoBottomMargin
-                    className="col-10"
+                    className="col-10 spacing--mobile"
                   >
-                    <Image contain small src={cc} />
+                    <Image contain small src={cc} className="col-1--mobile" />
 
                     <BodyText
-                      className="col-7"
+                      className="col-7 col-8--mobile"
                       heading={{
                         title: 'Kurssimateriaalin tekijä ja lisenssi',
                         level: 'h3',
@@ -200,13 +216,13 @@ const IndexPage = () => (
                     src: yliopistoLogo,
                     alt: 'Helsingin yliopisto logo',
                   }}
-                  className="col-2"
+                  className="col-2 col-4--mobile"
                 />
 
                 <ContentLiftup
                   small
                   image={{ src: houstonLogo, alt: 'Houston Inc. logo' }}
-                  className="col-2 push-right-2"
+                  className="col-2 push-right-2 col-4--mobile"
                 />
 
                 <ContentLiftup
@@ -215,13 +231,13 @@ const IndexPage = () => (
                     src: yliopistoLogo,
                     alt: 'Helsingin yliopisto logo',
                   }}
-                  className="col-2 push-right-2"
+                  className="col-2 push-right-2 col-4--mobile"
                 />
 
                 <ContentLiftup
                   small
                   image={{ src: houstonLogo, alt: 'Houston Inc. logo' }}
-                  className="col-2"
+                  className="col-2 col-4--mobile"
                 />
 
                 <ContentLiftup
@@ -230,13 +246,13 @@ const IndexPage = () => (
                     src: yliopistoLogo,
                     alt: 'Helsingin yliopisto logo',
                   }}
-                  className="col-2"
+                  className="col-2 col-4--mobile"
                 />
 
                 <ContentLiftup
                   small
                   image={{ src: houstonLogo, alt: 'Houston Inc. logo' }}
-                  className="col-2"
+                  className="col-2 col-4--mobile"
                 />
               </Element>
             </Element>
@@ -249,17 +265,22 @@ const IndexPage = () => (
               <TripleBorder
                 largeMargin
                 backgroundColor={colors['main']}
-                className="col-10"
+                className="col-10 centered--mobile"
               >
-                <Element flex spaceAround className="col-10 spacing--small">
-                  <div className="col-3">
-                    <Image contain src={yliopistoLogo} alt="" />
+                <Element
+                  flex
+                  spaceAround
+                  autoMargin
+                  className="col-10 col-8--mobile spacing--small"
+                >
+                  <div className="col-3 col-10--mobile">
+                    <Image contain src={yliopistoLogo} alt="Helsingin Yliopisto logo" className="col-4--mobile" />
 
                     <BodyText text={university} />
                   </div>
 
-                  <div className="col-3">
-                    <Image contain src={houstonLogo} alt="" />
+                  <div className="col-3 col-10--mobile">
+                    <Image contain src={houstonLogo} alt="Houston Inc. logo" className="col-4--mobile" />
 
                     <BodyText text={houston} />
                   </div>
@@ -268,17 +289,18 @@ const IndexPage = () => (
                 <Element
                   flex
                   spaceAround
-                  className="spacing--small spacing--after col-10"
+                  autoMargin
+                  className="spacing--small spacing--after col-10 col-8--mobile centered--mobile"
                 >
-                  <div className="col-3">
+                  <div className="col-3 col-10--mobile">
                     <BodyText
                       noPadding
                       style={{ paddingTop: '2.111rem' }}
                       text={contacts}
                     />
                   </div>
-                  <div className="col-3">
-                    <Image contain src={licenceIcon} alt="" />
+                  <div className="col-3 col-10--mobile">
+                    <Image contain src={licenceIcon} alt="Creative Commons BY-NC-SA 3.0 -lisenssi" className="col-4--mobile" />
 
                     <BodyText text={licenced} />
                   </div>

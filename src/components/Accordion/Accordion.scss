@@ -60,7 +60,7 @@
   .accordion {
     border: none;
     padding: 0 !important;
-    background-color: unset !important;
+    background-color: transparent !important;
     color: $black !important;
     border-radius: 0;
   }
@@ -74,22 +74,23 @@
       color: $white !important;
     }
 
-    &::before {
-      content: '';
-      display: inline-block;
-      width: 1.5rem;
-      height: 1.5rem;
-      border-radius: 50%;
-      border-width: 2px;
-      border-style: solid;
-      margin-right: 2rem;
-      background-color: currentColor;
-      border-color: inherit;
-    }
+    // &::before {
+    //   content: '';
+    //   display: inline-block;
+    //   width: 1.5rem;
+    //   height: 1.5rem;
+    //   border-radius: 50%;
+    //   border-width: 2px;
+    //   border-style: solid;
+    //   margin-right: 2rem;
+    //   background-color: currentColor;
+    //   border-color: inherit;
+    // }
   }
 
   .panel {
     padding: 1rem 0 0 !important;
+    background-color: transparent;
   }
 
   .active,
