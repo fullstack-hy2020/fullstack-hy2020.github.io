@@ -26,6 +26,7 @@ export default class ContentTemplate extends Component {
 
     this.state = {
       h1Top: 0,
+      top: 0,
     };
   }
 
@@ -42,7 +43,19 @@ export default class ContentTemplate extends Component {
     this.setState({
       h1Top: h1.offsetTop,
     });
+
+    window.addEventListener('scroll', this.handleScroll);
   }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll = () => {
+    this.setState({
+      top: window.scrollY,
+    });
+  };
 
   render() {
     const { markdownRemark } = this.props.data;
@@ -101,18 +114,20 @@ export default class ContentTemplate extends Component {
 
     return (
       <Layout>
-        <div
-          className="arrow-go-up"
-          onClick={() =>
-            window.scrollTo({
-              top: 0,
-              left: 0,
-              behavior: 'smooth',
-            })
-          }
-        >
-          <img src={ArrowToTop} alt="arrow-up" />
-        </div>
+        {this.state.top > 300 && (
+          <div
+            className="arrow-go-up"
+            onClick={() =>
+              window.scrollTo({
+                top: 0,
+                left: 0,
+                behavior: 'smooth',
+              })
+            }
+          >
+            <img src={ArrowToTop} alt="arrow-up" />
+          </div>
+        )}
 
         <div className="course-container spacing--small spacing--after">
           <Banner
@@ -163,7 +178,6 @@ export default class ContentTemplate extends Component {
               className="container container--right"
               style={{ marginTop: `-${this.state.h1Top}` }}
             >
-              {console.log(this.state.h1Top)}
               <Element className="course-content" autoBottomMargin>
                 <p className="col-1 letter" style={{ borderColor: colorCode }}>
                   {letter}
