@@ -213,15 +213,15 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 <div class="tasks">
 
-<h3>Tehtävät 2.18</h3>
-<h4>puhelinluettelo osa 11</h4>
+<h3>Tehtäviä</h3>
+
+<h4>2.19: puhelinluettelo osa 11</h4>
 
 Toteuta osan 2 esimerkin [parempi virheilmoitus](/osa2/#parempi-virheilmoitus) tyyliin ruudulla muutaman sekunnin näkyvä ilmoitus, joka kertoo onnistuneista operaatioista (henkilön lisäys ja poisto, sekä numeron muutos):
 
 ![](../assets/teht/17.png)
 
-<h3>Tehtävät 2.19*</h3>
-<h4>puhelinluettelo osa 12</h4>
+<h4>2.20*: puhelinluettelo osa 12</h4>
 
 Jos poistat jonkun henkilön toisesta selaimesta hieman ennen kun yrität _muuttaa henkilön numeroa_ toisesta selaimesta, tapahtuu virhetilanne:
 

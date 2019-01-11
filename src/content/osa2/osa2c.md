@@ -12,6 +12,10 @@ partColor: dark-orange
 
 Olemme nyt viipyneet tovin keskittyen pelkkään "frontendiin", eli selainpuolen toiminnallisuuteen. Rupeamme itse toteuttamaan "backendin", eli palvelinpuolen toiminnallisuutta vasta kurssin kolmannessa osassa, mutta otamme nyt jo askeleen sinne suuntaan tutustumalla siihen, miten selaimessa suoritettava koodi kommunikoi backendin kanssa.
 
+```js
+         10        20        30        40        50        60        70        80
+```
+
 Käytetään nyt palvelimena sovelluskehitykseen tarkoitettua [JSON Serveriä](https://github.com/typicode/json-server).
 
 Tehdään projektin juurihakemistoon tiedosto _db.json_, jolla on seuraava sisältö:
@@ -550,7 +554,7 @@ on portti 3001 jo jonkin muun sovelluksen, esim. jo käynnissä olevan json-serv
 
 Muuta sovellusta siten, että datan alkutila haetaan _axios_-kirjaston avulla palvelimelta. Hoida datan hakeminen [Effect hookilla](https://reactjs.org/docs/hooks-effect.html)).
 
-<h4>2.12* maiden tiedot</h4>
+<h4>2.12* maiden tiedot, osa 1</h4>
 
 Rajapinta [https://restcountries.eu](https://restcountries.eu) tarjoaa paljon eri maihin liittyvää tietoa koneluettavassa muodossa REST-apina.
 
@@ -572,14 +576,22 @@ Kun ehdon täyttäviä maita on enää yksi, näytetään maan perustiedot, lipp
 
 **Huom:** riittää että sovelluksesi toimii suurimmalle osalle maista. Jotkut maat kuten _Sudan_ voivat tuottaa ongelmia, sillä maan nimi on toisen maan _South Sudan_ osa. Näistä corner caseista ei tarvitse välittää.
 
-<h4>2.13*: puhelinluettelo osa 4</h4>
+<h4>2.13*: maiden tiedot, osa 2</h4>
 
 **Tässä osassa on vielä paljon tekemistä, joten älä juutu tähän tehtävään!**
 
 Paranna edellisen tehtävän maasovellusta siten, että kun sivulla näkyy useiden maiden nimiä, tulee maan nimen viereen nappi, mitä klikkaamalla pääsee suoraan maan näkymään:
 
-![](../images/2/19b3.png)
+![](../images/2/19b4.png)
 
 Tässäkin tehtävässä riittää, että ohjelmasi toimii suurella osalla maita ja maat joiden nimi sisältyy johonkin muuhun maahan, kuten _Sudan_ voit unohtaa. 
+
+<h4>2.14*: maiden tiedot, osa 3</h4>
+
+**Tässä osassa on vielä paljon tekemistä, joten älä juutu tähän tehtävään!**
+
+Lisää yksittäisen maan näkymään pääkaupungin säätiedotus. Säätiedoituksen tarjoavia palveluita on kymmeniä. Itse käytin <https://www.apixu.com>:ia. 
+
+![](../images/2/19b5.png)
 
 </div>
