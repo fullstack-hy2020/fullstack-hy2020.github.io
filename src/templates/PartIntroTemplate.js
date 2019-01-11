@@ -5,6 +5,7 @@ import path from 'path';
 import { graphql } from 'gatsby';
 import Parser from 'html-react-parser';
 import domToReact from 'html-react-parser/lib/dom-to-react';
+import isEmpty from 'lodash/fp/isEmpty';
 import snakeCase from 'lodash/fp/snakeCase';
 import React from 'react';
 
@@ -23,7 +24,9 @@ export default function PartIntroTemplate({ data }) {
   const { frontmatter, html } = markdownRemark;
   const { mainImage, part } = frontmatter;
 
-  const titles = Object.keys(navigation[part]);
+  const titles = !isEmpty(navigation[part])
+    ? Object.keys(navigation[part])
+    : [];
 
   const parserOptions = {
     replace: ({ type, attribs, children }) => {
