@@ -3,7 +3,9 @@
 .scroll-navigation {
   font-size: 16px;
   position: absolute;
-  top: 0;
+  width: 30%;
+  left: 0;
+  top: 198px;
 
   @include to($desktop) {
     display: none;
