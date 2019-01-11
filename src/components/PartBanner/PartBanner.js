@@ -14,6 +14,17 @@ export const PartBanner = () => {
         className="container spacing flex-fix-aligning col-7--mobile"
       >
         {parts.map(part => {
+          const partNames = [
+            "Web-sovellusten toiminnan perusteet",
+            "Reactin perusteet",
+            "Palvelimen kanssa tapahtuva kommunikointi",
+            "Palvelimen ohjelmointi NodeJS:n Express-kirjastolla",
+            "Express-sovellusten testaaminen",
+            "React-sovelluksen testaaminen",
+            "Sovelluksen tilan hallinta Redux-kirjastolla",
+            "Tulevaisuuden trendejä",
+          ]
+
           return (
             <ContentLiftup
               image={{
@@ -22,7 +33,7 @@ export const PartBanner = () => {
               }}
               hoverImageSrc={require(`../../images/thumbnails/part-${part}_ovr.svg`)}
               name={`Osa ${part}`}
-              summary="Web-sovellusten toiminnan perusteet"
+              summary={partNames[part]}
               path={`/osa${part}`}
             />
           );

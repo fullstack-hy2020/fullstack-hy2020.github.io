@@ -14,7 +14,7 @@ Ihan alkuperäisen [määritelmän](https://en.wikipedia.org/wiki/Representation
 
 Tutustumme REST:iin tarkemmin kurssin [seuraavassa osassa](/osa3), mutta jo nyt on tärkeä ymmärtää minkälaista [konventiota](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) json-server ja yleisemminkin REST API:t käyttävät [reittien](https://github.com/typicode/json-server#routes), eli URL:ien ja käytettävien HTTP-pyyntöjen tyyppien suhteen.
 
-## REST
+### REST
 
 REST:issä yksittäisiä asioita esim. meidän tapauksessamme muistiinpanoja kutsutaan <i>resursseiksi</i>. Jokaisella resurssilla on yksilöivä osoite eli URL. json-serverin noudattaman yleisen konvention mukaan yksittäistä muistiinpanoa kuvaavan resurssin URL on muotoa _notes/3_, missä 3 on resurssin tunniste. Osoite _notes_ taas vastaa kaikkien yksittäisten muistiinpanojen kokoelmaa.
 
@@ -24,7 +24,7 @@ Uuden muistiinpanoa vastaavan resurssin luominen tapahtuu json-serverin noudatta
 
 json-server vaatii, että tiedot lähetetään JSON-muodossa, eli käytännössä sopivasti muotoiltuna merkkijonona ja asettamalla headerille _Content-Type_ arvo _application/json_.
 
-## Datan lähetys palvelimelle
+### Datan lähetys palvelimelle
 
 Muutetaan nyt uuden muistiinpanon lisäämisestä huolehtivaa tapahtumankäsittelijää seuraavasti:
 
@@ -99,7 +99,7 @@ Kurssin seuraavassa osassa alamme toteuttaa itse myös palvelimella olevan sovel
 
 Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part2-notes/tree/part2-5), branchissa <i>part2-5</i>.
 
-## Muistiinpanon tärkeyden muutos
+### Muistiinpanon tärkeyden muutos
 
 Lisätään muistiinpanojen yhteyteen painike, millä niiden tärkeyttä voi muuttaa.
 
@@ -236,7 +236,7 @@ Tämä saadaan aikaan metodilla <code>map</code> joka siis luo uuden taulukon va
 
 Käytetty <code>map</code>-kikka saattaa olla aluksi hieman hämmentävä. Asiaa kannattaakin miettiä tovi. Tapaa tullaan käyttämään kurssilla vielä kymmeniä kertoja.
 
-## Palvelimen kanssa tapahtuvan kommunikoinnin eristäminen omaan moduuliin
+### Palvelimen kanssa tapahtuvan kommunikoinnin eristäminen omaan moduuliin
 
 <code>App</code>-komponentti alkaa kasvaa uhkaavasti kun myös palvelimen kanssa kommunikointi tapahtuu komponentissa. [Single responsibility](https://en.wikipedia.org/wiki/Single_responsibility_principle) -periaatteen hengessä kommunikointi onkin viisainta eristää omaan [moduuliinsa](#refaktorointia---moduulit).
 
@@ -450,7 +450,7 @@ Tämä kaikki on hieman monimutkaista ja asian selittäminen varmaan vaan vaikeu
 
 Promisejen ymmärtäminen on erittäin keskeistä modernissa Javascript-sovelluskehityksessä, joten asiaan kannattaa uhrata kohtuullisessa määrin aikaa.
 
-## Kehittyneempi tapa olioliteraalien kirjoittamiseen
+### Kehittyneempi tapa olioliteraalien kirjoittamiseen
 
 Muistiinpanopalvelut määrittelevä moduuli siis eksporttaa olion, jonka kenttinä <code>getAll</code>, <code>create</code> ja <code>update</code> ovat muistiinpanojen käsittelyyn tarkoitetut funktiot. 
 
@@ -554,7 +554,7 @@ const person = { name, age }
 
 lopputulos molemmissa on täsmälleen sama, eli ne luovat olion jonka kentän <code>name</code> arvo on <i>Leevi</i> ja kentän <code>age</code> arvo <i>0</i>.
 
-## Promise ja virheet
+### Promise ja virheet
 
 Jos sovelluksemme mahdollistaisi muistiinpanojen poistamisen, voisi syntyä tilanne, missä käyttäjä yrittää muuttaa sellaisen muistiinpanon tärkeyttä, joka on jo poistettu järjestelmästä.
 

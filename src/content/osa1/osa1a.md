@@ -199,7 +199,7 @@ mutta JSX:ää kirjoittaessa tagi on pakko sulkea:
 <br />
 ```
 
-## Monta komponenttia
+### Monta komponenttia
 
 Muutetaan sovellusta seuraavasti (yläreunan importit jätetään _esimerkeistä_ nyt ja jatkossa pois, niiden on kuitenkin oltava koodissa jotta ohjelma toimisi):
 
@@ -243,7 +243,7 @@ const App = () => {
 
 Komponenttien tekeminen Reactissa on helppoa ja komponentteja yhdistelemällä monimutkaisempikin sovellus on mahdollista pitää kohtuullisesti ylläpidettävänä. Reactissa filosofiana onkin koostaa sovellus useista, pieneen asiaan keskittyvistä uudelleenkäytettävistä komponenteista.
 
-## props: tiedonvälitys komponenttien välillä
+### props: tiedonvälitys komponenttien välillä
 
 Komponenteille on mahdollista välittää dataa [propsien](https://reactjs.org/docs/components-and-props.html) avulla.
 

@@ -55,11 +55,11 @@ const About = () => (
                   <BodyText text={intro} />
 
                   <BodyText
-                    heading={{ title: 'Oletetut esitiedot', level: 'h2' }}
-                    style={{ marginTop: '4rem' }}
                     text={[
                       'Osallistujilta edellytetään vahvaa ohjelmointirutiinia, web-ohjelmoinnin ja tietokantojen perustuntemusta, git-versionhallintajärjestelmän peruskäytön hallintaa, kykyä pitkäjänteiseen työskentelyyn sekä valmiutta omatoimiseen tiedonhakuun ja ongelmanratkaisuun.',
                       'Osallistuminen ei kuitenkaan edellytä kurssilla käsiteltävien tekniikoiden tai Javascript-kielen hallintaa.',
+                      'Kurssi sisältää yhden luennon, kohtuullisen määrään pajaohjausta ja hirveän määrän itsenäistä koodaamista. Varaudu käyttämään aikaa noin 10-15 tuntia viikossa koko periodin ajan.',
+                      'Kurssin sisällöstä ja suoritustavasta kerrotaan materiaalissa osassa 0, lue ne huolella.',
                     ]}
                   />
                 </div>
@@ -71,15 +71,17 @@ const About = () => (
                     src={LandingImage}
                   />
                 </Element>
+                
               </Element>
 
-              {info.map(item => (
+              {false&&info.map(item => (
                 <Accordion
                   key={item}
                   title={item.title}
                   content={item.content}
                 />
               ))}
+              
             </Element>
 
             <PartBanner />

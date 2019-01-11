@@ -63,7 +63,7 @@ Tärkein kaikista snippeteistä on komennon <code>console.log()</code> nopeasti 
 }
 ```
 
-## Taulukkojen käyttö Javascriptissä
+### Taulukkojen käyttö Javascriptissä
 
 Tästä osasta lähtien käytämme runsaasti Javascriptin [taulukkojen](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) funktionaalisia käsittelymetodeja, kuten _find_, _filter_ ja _map_. Periaate niissä on täysin sama kuin Java 8:sta tutuissa streameissa, joita on käytetty jo parin vuoden ajan Tietojenkäsittelytieteen osaston Ohjelmoinnin perusteissa ja jatkokurssilla sekä Ohjelmoinnin MOOC:issa.
 

@@ -111,7 +111,7 @@ const IndexPage = () => (
               </Element>
             </div>
 
-            <Banner>
+            {false&&<Banner>
               <Element flex spaceBetween className="container">
                 <BodyText
                   className="col-10 centered"
@@ -144,7 +144,7 @@ const IndexPage = () => (
                   })}
                 </Element>
               </Element>
-            </Banner>
+            </Banner>}
 
             <Element className="container spacing--large spacing--after">
               <Element className="push-right-1 push-left-1" spaceBetween flex>
@@ -165,7 +165,7 @@ const IndexPage = () => (
 
                   <BodyText className="spacing--small" text={current} />
 
-                  <Element flex spaceBetween className="col-10">
+                  {false&&<Element flex spaceBetween className="col-10">
                     <Image
                       contain
                       extraSmall
@@ -174,9 +174,9 @@ const IndexPage = () => (
                     />
 
                     <BodyText className="col-8 col-8--mobile" text={telegram} />
-                  </Element>
+                  </Element>}
 
-                  <Element flex spaceBetween className="col-10 spacing--small">
+                  {false&&<Element flex spaceBetween className="col-10 spacing--small">
                     <Image
                       contain
                       extraSmall
@@ -185,7 +185,7 @@ const IndexPage = () => (
                     />
 
                     <BodyText className="col-8 col-8--mobile" text={notice} />
-                  </Element>
+                  </Element>}
                 </Element>
 
                 <Element flex horizontalHalf flexStart>
@@ -200,7 +200,7 @@ const IndexPage = () => (
                     <BodyText
                       className="col-7 col-8--mobile"
                       heading={{
-                        title: 'Kurssimateriaalin tekijä ja lisenssi',
+                        title: 'Materiaalin tekijä ja lisenssi',
                         level: 'h3',
                       }}
                     />
@@ -213,7 +213,7 @@ const IndexPage = () => (
 
             <PartBanner />
 
-            <Element className="container spacing--after" flex>
+            {false&&<Element className="container spacing--after" flex>
               <Element flex spaceBetween className="col-8 push-right-1">
                 <ContentLiftup
                   small
@@ -260,7 +260,7 @@ const IndexPage = () => (
                   className="col-2 col-4--mobile"
                 />
               </Element>
-            </Element>
+            </Element>}
 
             <Element
               flex

@@ -342,7 +342,7 @@ Joissain tilanteissa tämäkin tapa voisi olla ok, mutta se on hieman ongelmalli
 
 Ei ole kuitenkaan ihan selvää, mihin kohtaan komponentin koodia komento <code>axios.get</code> olisi hyvä sijoittaa.
 
-### Effect hookit
+### Effect-hookit
 
 Olemme jo käyttäneet Reactin version [16.7.0-alpha.2](https://www.npmjs.com/package/react/v/16.7.0-alpha.2) mukanaan tuomia [state hookeja](https://reactjs.org/docs/hooks-state.html) tuomaan funktioina määriteltyihin React-komponentteihin tilan. Versio 16.7.0-alpha.2 tarjoaa myös
 [effect hookit](https://reactjs.org/docs/hooks-effect.html), dokumentaation sanoin

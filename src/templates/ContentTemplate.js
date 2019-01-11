@@ -202,7 +202,7 @@ export default class ContentTemplate extends Component {
             {Parser(html, parserOptions)}
           </Element>
 
-          <ReturnInfo />
+          {false&&<ReturnInfo />}
 
           <EditLink part={part} letter={letter} />
 

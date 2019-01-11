@@ -345,7 +345,7 @@ Olemme tällä kurssilla tehneet hieman radikaalinkin ratkaisun käyttää pelk�
 
 Tutustummekin riittävällä tasolla class-komponentteihin hieman myöhemmin kurssilla.
 
-## React-sovellusten debuggaus
+### React-sovellusten debuggaus
 
 Ohjelmistokehittäjän elämä koostuu pääosin debuggaamisesta (ja olemassaolevan koodin lukemisesta). Silloin tällöin syntyy toki muutama rivi uuttakin koodia, mutta suuri osa ajasta ihmetellään miksi joku on rikki tai miksi joku asia ylipäätään toimii. Hyvät debuggauskäytänteet ja työkalut ovatkin todella tärkeitä.
 
@@ -453,7 +453,7 @@ const [allClicks, setAll] = useState([])
 
 Konsolin ylimpänä oleva _baseState_ kertoo ensimmäisen _useState_-kutsun määrittelevän tilan, eli muuttujan _left_ arvon, seuraava _baseState_ kertoo muuttujan _right_ arvon ja taulukon _allClicks_ arvo on alimpana.
 
-## Hookien säännöt
+### Hookien säännöt
 
 Jotta hookeilla muodostettu sovelluksen tila toimisi oikein, on hookeja käytettävä tiettyjä [rajoituksia](https://reactjs.org/docs/hooks-rules.html) noudattaen.
 
@@ -488,7 +488,7 @@ const App = (props) => {
 }
 ```
 
-## Tapahtumankäsittely revisited
+### Tapahtumankäsittely revisited
 
 Edellisen vuoden kurssin perusteella tapahtumankäsittely on osoittautunut monelle haastavaksi.
 

@@ -486,7 +486,7 @@ Sovelluksen urlit heijastavat vanhaa huoletonta aikaa. JSON-muotoinen data haeta
 
 AJAXiksi kutsuttu asia on arkipäiväistynyt, ja muuttunut itsestäänselvyydeksi. Koko termi on hiipunut unholaan ja nuori polvi ei ole sitä edes ikinä kuullut.
 
-## Single page app
+### Single page app
 
 Esimerkkisovelluksemme pääsivu toimii perinteisten web-sivujen tapaan: kaikki sovelluslogiikka on palvelimella ja selain ainoastaan renderöi palvelimen lähettämää HTML-koodia.
 
@@ -567,7 +567,7 @@ Koodissa siis määritellään, että kyse on HTTP POST -pyynnöstä, määritel
 
 Sovelluksen koodi on nähtävissä osoitteessa <https://github.com/mluukkai/example_app>. Kannattaa huomata, että sovellus on tarkoitettu ainoastaan kurssin käsitteistöä demonstroivaksi esimerkiksi, koodi on osin tyyliltään huonoa ja siitä ei tule ottaa mallia omia sovelluksia tehdessä. Sama koskee käytettyjä urleja, single page app -tyyliä noudattavan sivun käyttämä uusien muistiinpanojen kohdeosoite _new_note_spa_ ei noudata nykyisin suositeltavia käytäntöjä.
 
-## Javascript-kirjastot
+### Javascript-kirjastot
 
 Kurssin esimerkkisovellus on tehty ns. [vanilla Javascriptillä](https://medium.freecodecamp.org/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34) eli käyttäen pelkkää DOM-apia ja Javascript-kieltä sivujen rakenteen manipulointiin.
 
@@ -583,7 +583,7 @@ Nykyisin suosituin tapa toteuttaa web-sovellusten selainpuolen logiikka on Faceb
 
 Reactin asema näyttää tällä hetkellä vahvalta, mutta Javascript-maailma ei lepää koskaan. Viime aikoina kiinnostusta on alkanut herättää mm. uudempi tulokas [VueJS](https://vuejs.org/).
 
-## Full stack -websovelluskehitys
+### Full stack -websovelluskehitys
 
 Mitä tarkoitetaan kurssin nimellä _Full stack -websovelluskehitys_? Full stack on hypenomainen termi; kaikki puhuvat siitä, mutta kukaan ei oikein tiedä, mitä se tarkoittaa tai ainakaan mitään yhteneväistä määritelmää termille ei ole.
 
@@ -597,7 +597,7 @@ Ohjelmoimme myös palvelinpuolta, eli backendia Javascriptilla, käyttäen [Node
 
 Aiemmin on ollut yleisempää, että sovelluskehittäjät ovat erikoistuneet tiettyyn sovelluksen osaan, esim. backendiin. Tekniikat backendissa ja frontendissa ovat saattaneet olla hyvin erilaisia. Full stack -trendin myötä on tullut tavanomaiseksi, että sovelluskehittäjä hallitsee riittävästi kaikkia sovelluksen tasoja ja tietokantaa. Usein full stack -kehittäjän on myös omattava riittävä määrä konfiguraatio- ja ylläpito-osaamista, jotta kehittäjä pystyy operoimaan sovellustaan esim. pilvipalveluissa.
 
-## Javascript fatigue
+### Javascript fatigue
 
 Full stack -sovelluskehitys on monella tapaa haastavaa. Asioita tapahtuu monessa paikassa ja mm. debuggaaminen on oleellisesti normaalia työpöytäsovellusta hankalampaa. Javascript ei toimi aina niin kuin sen olettaisi toimivan (verrattuna moniin muihin kieliin) ja sen suoritusympäristöjen asynkroninen toimintamalli aiheuttaa monenlaisia haasteita. Verkon yli tapahtuva kommunikointi edellyttää HTTP-protokollan tuntemusta. On tunnettava myös tietokantoja ja hallittava palvelinten konfigurointia ja ylläpitoa. Hyvä olisi myös hallita riittävästi CSS:ää, jotta sovellukset saataisiin edes siedettävän näköisiksi.
 
@@ -623,7 +623,7 @@ Tutustu HTML:n lomakkeiden perusteisiin lukemalla Mozillan tutoriaali [Your firs
 
   <h4>0.4: uusi muistiinpano</h4>
 
-Luvussa [Javascriptia sisältävän sivun lataaminen - kertaus](Javascriptia sisältävän sivun lataaminen - kertaus ###) kuvataan [sekvenssikaavion](https://github.com/mluukkai/Ohjelmistotekniikka2018/blob/master/web/materiaali.md#sekvenssikaaviot) avulla sivun _fullstack-exampleapp.herokuapp.com/notes_ avaamisen aikaansaama tapahtumasarja.
+Luvussa [Javascriptia sisältävän sivun lataaminen - kertaus](Javascriptia sisältävän sivun lataaminen - kertaus) kuvataan [sekvenssikaavion](https://github.com/mluukkai/Ohjelmistotekniikka2018/blob/master/web/materiaali.md#sekvenssikaaviot) avulla sivun _fullstack-exampleapp.herokuapp.com/notes_ avaamisen aikaansaama tapahtumasarja.
 
 Kaavio on luotu [websequencediagrams](https://www.websequencediagrams.com)-palvelussa, seuraavasti:
 

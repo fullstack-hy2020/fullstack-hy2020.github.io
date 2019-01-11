@@ -2,8 +2,9 @@
   "mainTitle": "Syväsukellus moderniin websovelluskehitykseen",
   "intro": "Ota haltuusi React, Redux, Node.js ja MongoDB! Kurssilla tutustutaan JavaScriptilla tapahtuvaan moderniin websovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST-rajapinnoissa.",
   "current": [
-    "Jos haluat kurssista suorituksen avoimen yliopiston kautta, tallenna opiskelijanumerosi palautussovelluksen näkymässä my submissions viimeistään tehtyäsi kurssin kokeen.",
-    "Kurssiin liittyvää keskustelua Telegramissa, tule mukaan!"
+    "Kurssin ainoa luento pidetään maanantaina 14.1. klo 16-18 salissa B123",
+    "Ohjausta tehtäviin pajassa BK107 <ul><li>ajat selviävät maanantaina</li><ul>",
+    "Kurssiin liittyvää keskustelua Telegramissa, kanavalla <a href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>, tule mukaan! <ul><li>Huom: kaikki epäasialliset, halventavat ja jotain ihmisryhmää syrjivät kommentit kanavalla ovat kiellettyjä ja tälläisten kommenttien esittäjät poistetaan kanavalta.</li></ul>"
   ],
   "telegram": "Telegram on whatsappin/messengerin tyylinen keskustelufoorumisovellus, jota on mahdollista käyttää selaimella, mobiililaitteilla ja Windows/Linux/OSX-clienteillä.",
   "notice": "Huom: kaikki epäasialliset, halventavat ja jotain ihmisryhmää syrjivät kommentit kanavalla ovat kiellettyjä ja tälläisten kommenttien esittäjät poistetaan kanavalta.",
@@ -14,7 +15,7 @@
   "university": "Helsingin yliopisto on Suomen vanhin ja suurin tiedekorkeakoulu, yhteensä 40 000 henkilön kansainvälinen tiedeyhteisö. Tieteen voimalla yliopisto on rakentanut yhteiskuntaa, sivistystä ja hyvinvointia jo vuodesta 1640.",
   "houston": "Suomalainen Houston Inc. on vuonna 2004 perustettu ketterä softatalo. Suunnittelemme ja toteutamme asiakkaillemme räätälöityjä digitaalisia palveluita liiketoiminnan tarpeisiin.",
   "contacts": [
-    "Full stack open 2018",
+    "Full stack -websovelluskehitys 2019",
     "mluukkai@cs.helsinki.fi",
     "<div class='github-logo'>mluukkai</div>"
   ],
