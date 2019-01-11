@@ -1,57 +1,59 @@
+import './Footer.scss';
+
 import { Link } from 'gatsby';
 import React from 'react';
 
 import yliopisto from '../../images/hgin_yliopisto.png';
 import houston from '../../images/houston_logo.png';
-import { Image } from './../Image/Image';
 import Element from '../Element/Element';
+import { Image } from '../Image/Image';
+import { navigation } from '../Navigation/Navigation';
+
+const images = [
+  {
+    src: yliopisto,
+    alt: 'Helsingin yliopiston logo',
+    href: 'https://www.helsinki.fi/',
+  },
+  {
+    src: houston,
+    alt: 'Houston inc. logo',
+    href: 'https://www.houston-inc.com/',
+  },
+];
 
 const Footer = () => (
-  <Element
-    id="footer"
-    className="container spacing--after"
-    style={{ justifyContent: 'space-between' }}
-  >
-    <div
-      className="col-4"
-      style={{ display: 'flex', justifyContent: 'space-between' }}
+  <Element id="footer" className="container spacing--after" flex>
+    <Element
+      className="col-5 col-10--mobile order-2--mobile footer__links"
+      flex
+      spaceBetween
     >
-      <a
-        href="https://www.helsinki.fi/"
-        className="image--large image--contain"
-        style={{ width: '100%' }}
-      >
-        <Image className="image--large image--contain" src={yliopisto} />
-      </a>
-
-      <a
-        href="https://www.houston-inc.com/"
-        className="push-right-2"
-        style={{ width: '100%' }}
-      >
-        <Image className="image--large image--contain" src={houston} />
-      </a>
-    </div>
+      {images.map(image => (
+        <a
+          key={image.alt}
+          href={image.href}
+          className="col-5 col-4--mobile spacing--mobile"
+        >
+          <Image contain src={image.src} alt={image.alt} className="col-6" />
+        </a>
+      ))}
+    </Element>
 
     <Element
       flex
-      className="col-2 order-1--mobile"
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-      }}
+      className="col-5 col-5--mobile order-1--mobile footer__navigation"
     >
-      <Link
-        to="/about"
-        className="nav-item-hover"
-        style={{ marginLeft: '4.5rem' }}
-      >
-        KURSSISTA
-      </Link>
-      <Link to="/faq" className="nav-item-hover">
-        FAQs
-      </Link>
+      {navigation.map(item => (
+        <Link
+          key={item.path}
+          to={item.path}
+          className="footer__navigation-link nav-item-hover col-10--mobile"
+          style={{ marginLeft: '4.5rem' }}
+        >
+          {item.text}
+        </Link>
+      ))}
     </Element>
   </Element>
 );

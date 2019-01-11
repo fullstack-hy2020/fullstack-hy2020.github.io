@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 
 import { NavigationItem } from './Item';
 
-const navigation = [
+export const navigation = [
   { text: 'KURSSISTA', path: '/about' },
   { text: 'KURSSIN SISÄLTÖ', path: '/#course-contents' },
   { text: 'FAQs', path: '/faq' },
