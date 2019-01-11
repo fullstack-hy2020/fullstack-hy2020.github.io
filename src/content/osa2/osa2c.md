@@ -134,7 +134,7 @@ Aiheesta löytyy paljon lisämateriaalia internetistä, eräs varsin havainnolli
 
 Nykyään selaimissa on mahdollisuus suorittaa myös rinnakkaista koodia ns. [web workerien](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) avulla. Yksittäisen selainikkunan koodin ns. event loopista huolehtii kuitenkin edelleen [vain yksi säie](https://medium.com/techtrument/multithreading-javascript-46156179cf9a).
 
-## npm
+### npm
 
 Palaamme jälleen asiaan, eli datan hakemiseen palvelimelta.
 

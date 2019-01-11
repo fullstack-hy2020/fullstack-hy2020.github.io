@@ -6,16 +6,14 @@ letter: e
 
 <div class="content">
 
-## Tyylien lisääminen
-
 Sovelluksemme ulkoasu on tällä hetkellä hyvin vaatimaton. Osaan 0 liittyvässä [tehtävässä 0.1](/tehtävät/#web-sovellusten-perusteet) oli tarkoitus tutustua Mozillan [CSS-tutoriaaliin](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).
 
-Katsotaan vielä tämän osan lopussa nopeasti erästä tapaa liittää tyylejä React-sovellukseen. Tapoja on useita ja tulemme tarkastelemaan muita myöhemmin. Liitämme nyt CSS:n sovellukseemme vanhan kansan tapaan yksittäisenä, käsin eli ilman [esiprosessorien](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) apua kirjoitettuna tiedostona (tämä ei itseasiassa ole täysin totta, kuten myöhemmin tulemme huomaamaan).
+Katsotaan vielä tämän osan lopussa nopeasti kahta tapaa liittää tyylejä React-sovellukseen. Tapoja on useita ja tulemme tarkastelemaan muita myöhemmin. Liitämme ensin CSS:n sovellukseemme vanhan kansan tapaan yksittäisenä, käsin eli ilman [esiprosessorien](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) apua kirjoitettuna tiedostona (tämä ei itseasiassa ole täysin totta, kuten myöhemmin tulemme huomaamaan).
 
 Tehdään sovelluksen hakemistoon _src_ tiedosto _index.css_ ja liitetään se sovellukseen lisäämällä tiedostoon _index.js_ seuraava import:
 
 ```js
-import './index.css';
+import './index.css'
 ```
 
 Lisätään seuraava sääntö tiedostoon _index.css_:
@@ -35,19 +33,25 @@ Sääntö voi sisältää mielivaltaisen määrän määrittelyjä. Muutetaan ed
 ```css
 h1 {
   color: green;
-  font-style: italic;
+  font-style: italic;  // highlight-line
 }
 ```
 
 Erilaisia selektoreja eli tapoja valita tyylien kohde on [lukuisia](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors).
 
-Jos haluamme kohdistaa tyylejä esim. jokaiseen muistiinpanoon, voisimme nyt käyttää selektoria _li_, sillä muistiinpanot ovat _li_-tagien sisällä:
+Jos haluamme kohdistaa tyylejä esim. jokaiseen muistiinpanoon, voisimme nyt käyttää selektoria <code>li</code>, sillä muistiinpanot ovat <code>li</code>-tagien sisällä:
 
-```react
-const Note = ({ note, toggleImportance}) => {
-  const label = note.important ? 'make not important' : 'make important'
+```js
+const Note = ({ note, toggleImportance }) => {
+  const label = note.important 
+    ? 'make not important' 
+    : 'make important';
+
   return (
-    <li>{note.content} <button onClick={toggleImportance}>{label}</button></li>
+    <li>
+      {note.content} 
+      <button onClick={toggleImportance}>{label}</button>
+    </li>
   )
 }
 ```
@@ -57,16 +61,16 @@ lisätään tyylitiedostoon seuraava (koska osaamiseni tyylikkäiden web-sivujen
 ```css
 li {
   color: grey;
-  padding-top: 5px;
+  padding-top: 3px;
   font-size: 15px;
 }
 ```
 
-Tyylien kohdistaminen elementtityypin sijaan on kuitenkin hieman ongelmallista, jos sovelluksessa olisi myös muita _li_-tageja, kaikki saisivat samat tyylit.
+Tyylien kohdistaminen elementtityypin sijaan on kuitenkin hieman ongelmallista, jos sovelluksessa olisi myös muita  <code>li</code>-tageja, kaikki saisivat samat tyylit.
 
 Jos haluamme kohdistaa tyylit nimenomaan muistiinpanoihin, on parempi käyttää [class selectoreja](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors).
 
-Normaalissa HTML:ssä luokat määritellään elementtien attribuutin _class_ arvona:
+Normaalissa HTML:ssä luokat määritellään elementtien attribuutin  <code>class</code> arvona:
 
 ```html
 <li class="note">tekstiä</li>
@@ -74,12 +78,16 @@ Normaalissa HTML:ssä luokat määritellään elementtien attribuutin _class_ ar
 
 Reactissa tulee kuitenkin classin sijaan käyttää attribuuttia [className](https://reactjs.org/docs/dom-elements.html#classname), eli muutetaan komponenttia _Note_ seuraavasti:
 
-```react
-const Note = ({ note, toggleImportance}) => {
-  const label = note.important ? 'make not important' : 'make important'
+```js
+const Note = ({ note, toggleImportance }) => {
+  const label = note.important 
+    ? 'make not important' 
+    : 'make important';
+
   return (
-    <li className="note">
-      {note.content} <button onClick={toggleImportance}>{label}</button>
+    <li className='note'> // highlight-line
+      {note.content} 
+      <button onClick={toggleImportance}>{label}</button>
     </li>
   )
 }
@@ -99,15 +107,16 @@ Jos nyt lisäät sovellukseen muita li-elementtejä, ne eivät saa muistiinpanoi
 
 ### Parempi virheilmoitus
 
-Toteutimme äsken olemassaolemattoman muistiinpanon tärkeyden muutokseen liittyvän virheilmoituksen _alert_-metodilla. Toteutetaan se nyt Reactilla omana komponenttinaan.
+Toteutimme äsken olemassaolemattoman muistiinpanon tärkeyden muutokseen liittyvän virheilmoituksen <code>alert</code>-metodilla. Toteutetaan se nyt Reactilla omana komponenttinaan.
 
 Komponentti on yksinkertainen:
 
-```react
+```js
 const Notification = ({ message }) => {
   if (message === null) {
     return null
   }
+
   return (
     <div className="error">
       {message}
@@ -116,48 +125,49 @@ const Notification = ({ message }) => {
 }
 ```
 
-Jos propsin _message_ arvo on _null_ ei renderöidä mitään, muussa tapauksessa renderöidään viesti div-elementtiin. Elementille on liitetty tyylien lisäämistä varten luokka _error_.
+Jos propsin <code>message</code> arvo on <code>null</code> ei renderöidä mitään, muussa tapauksessa renderöidään viesti div-elementtiin. Elementille on liitetty tyylien lisäämistä varten luokka <code>error</code>.
 
-Lisätään komponentin _App_ tilaan kenttä _error_ virheviestiä varten, laitetaan kentälle jotain sisältöä, jotta pääsemme heti testaamaan komponenttia:
+Lisätään komponentin <code>App</code> tilaan kenttä <code>error</code> virheviestiä varten, laitetaan kentälle heti jotain sisältöä, jotta pääsemme heti testaamaan komponenttia:
 
 ```js
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      notes: [],
-      newNote: '',
-      showAll: true,
-      error: 'something went wrong...',
-    };
-  }
+const App = () => {
+  const [notes, setNotes] = useState([]) 
+  const [newNote, setNewNote] = useState('')
+  const [showAll, setShowAll] = useState(true)
+  const [errorMessage, setErrorMessage] = useState(null) // highlight-line
+
   // ...
-}
-```
 
-Renderöidään uusi komponentti:
+  return (
+    <div>
+      <h1>Muistiinpanot</h1>
 
-```react
-class App extends React.Component {
-  render() {
-    //...
-
-    return (
+      <Notification message={errorMessage} /> // highlight-line
+      
       <div>
-        <h1>Muistiinpanot</h1>
-
-        <Notification message={this.state.error}/>
-
-        ...
+        <button onClick={() => setShowAll(!showAll)}>
+          näytä {showAll ? 'vain tärkeät' : 'kaikki'}
+        </button>
       </div>
-    )
-  }
+      <ul>
+        {rows()}
+      </ul>
+
+      <form onSubmit={addNote}>
+        <input
+          value={newNote}
+          onChange={handleNoteChange}
+        />
+        <button type="submit">tallenna</button>
+      </form>      
+    </div>
+  )
 }
 ```
 
 Lisätään sitten virheviestille sopiva tyyli:
 
-```error
+```css
 .error {
   color: red;
   background: lightgrey;
@@ -169,40 +179,107 @@ Lisätään sitten virheviestille sopiva tyyli:
 }
 ```
 
-Nyt olemme valmiina lisäämään virheviestin logiikan. Alustetaan virheviesti konstruktorissa arvoon _null_ ja muutetaan metodia _toggleImportanceOf_ seuraavasti:
+Nyt olemme valmiina lisäämään virheviestin logiikan. Mmuutetaan metodia <code>toggleImportanceOf</code> seuraavasti:
 
 ```js
-toggleImportanceOf = id => {
-  return () => {
-    //...
+  const toggleImportanceOf = id => {
+    const note = notes.find(n => n.id === id)
+    const changedNote = { ...note, important: !note.important }
 
     noteService
-      .update(id, changedNote)
-      .then(changedNote => {
-        // ...
+      .update(changedNote).then(returnedNote => {
+        setNotes(notes.map(note => note.id !== id ? note : returnedNote))
       })
       .catch(error => {
-        this.setState({
-          error: `muistiinpano '${
-            note.content
-          }' on jo valitettavasti poistettu palvelimelta`,
-          notes: this.state.notes.filter(n => n.id !== id),
-        });
+        // highlight-start
+        setErrorMessage(`muistiinpano '${note.content}' on jo valitettavasti poistettu palvelimelta`)
         setTimeout(() => {
-          this.setState({ error: null });
-        }, 5000);
-      });
-  };
-};
+          setErrorMessage(null)
+        }, 5000)
+        // highlight-end
+        setNotes(notes.filter(n => n.id !== id))
+      })
+  }
 ```
 
-Eli virheen yhteydessä asetetaan tilan kenttään _error_ sopiva virheviesti. Samalla käynnistetään ajastin, joka asettaa 5 sekunnin kuluttua tilan _error_-kentän arvoksi _null_.
+Eli virheen yhteydessä asetetaan tilaan <code>errorMessage</code> sopiva virheviesti. Samalla käynnistetään ajastin, joka asettaa 5 sekunnin kuluttua tilan <code>errorMessage</code>-kentän arvoksi <code>null</code>.
 
 Lopputulos näyttää seuraavalta
 
-![](../images/2/15b.png)
+![](../images/2/26b.png)
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part2-notes/tree/part2-7), tagissa _part2-7_.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part2-notes/tree/part2-7), branchissa _part2-7_.
+
+### Inline-tyylit
+
+React mahdollistaa myös tyylien kirjoittamisen suoraan komponenttien koodin joukkoon niin sanoittuina [inline-tyyleinä](https://react-cn.github.io/react/tips/inline-styles.html).
+
+Periaate inline-tyylien määrittelyssä on erittäin yksinkertainen. Mihin tahansa React-komponenttiin tai elementtiin voi liittää attribuutin [style](https://reactjs.org/docs/dom-elements.html#style), jolle annetaan arvoksi Javascript-oliona määritelty joukko CSS-sääntöjä.
+
+CSS-säännöt määritellään olioden avulla hieman eri tavalla kuin normaaleissa CSS-tiedostoissa. Jos haluamme esimerkisi asettaa jollekin elementille vihreän, kursivoidun ja 16 pikselin korkuisen fontin, eli CSS-syntaksilla ilmaistuna
+
+```css
+{
+  color: green;
+  font-style: italic;
+  font-size: 16px;
+}
+```
+
+tulee tämä muotilla Reactin inline-tyylin määrittelevänä oliona seuraavasti
+
+```js
+ {
+  color: 'green',
+  fontStyle: 'italic',
+  fontSize: 16
+}
+```
+
+Jokainen CSS-sääntö on olion kenttä, joten ne erotetaan Javascript-syntaksin mukaan pilkuilla. Pikseleinä ilmaistut numeroarvot voidaan määritellä kokonaislukuina. Merkittävin ero normaaliin CSS:ään on väliviivan sisältämien CSS-ominaisuuksien kirjoittaminen camelCase-muodossa.
+
+Voisimme nyt lisätä sovelluksemme "alapalkin", muodostavan komponentin <code>Footer</code>, ja määritellä sille inline-tyylit seuraavasti:
+
+```js
+const Footer = () => {
+  const footerStyle = {
+    color: 'green',
+    fontStyle: 'italic',
+    fontSize: 16
+  }
+
+  return (
+    <div style={footerStyle}>
+      <br />
+      <em>Note app, Department of Computer Science 2019</em>
+    </div> 
+  )
+}
+
+const App = () => {
+  // ...
+
+  return (
+    <div>
+      <h1>Muistiinpanot</h1>
+
+      <Notification message={errorMessage} />
+
+      // ...  
+
+      <Footer /> // highlight-line
+    </div>
+  )
+}
+```
+
+Inline-tyyleillä on tiettyjä rajoituksia, esim. ns. pseudo-selektoreja ei ole mahdollisuutta käyttää (ainakaan helposti).
+
+Inline-tyylit ja muutamat myöhemmin kurssilla katsomamme tavat lisätä tyylejä Reactiin ovat periaatteessa täysin vastoin vanhoja hyviä periaatteita, joiden mukaan Web-sovellusten ulkoasujen määrittely eli CSS tulee erottaa sisällön (HTML) ja toiminnallisuuden (Javascript) määrittelystä. Vanha koulukunta pyrkiikin siihen että sovelluksen CSS, HTML ja Javascript on kaikki kirjoitettu omiin tiedostoihinsa.
+
+Itseasiassa Reactin filosofia on täysin päinvastainen. Koska CSS:n, HTML:n ja Javascriptin erottelu eri tiedostoihin ei ole kuitenkaan osoittautunut erityisen skaalautuvaksi ratkaisuksi suurissa järjestelmissä, on Reactissa periaatteena tehdä erottelu (eli jakaa sovelluksen koodi eri tiedostoihin) noudattaen sovelluksen loogisia toiminnallisia kokonaisuuksia.
+
+Toiminnallisen kokonaisuuden strukturointiyksikkö on React-komponentti, joka määrittelee niin sisällön rakenteen kuvaavan HTML:n, toiminnan määrittelevät Javascript-funktiot kuin komponentin tyylinkin yhdessä paikassa, siten että komponenteista tulee mahdollisimman riippumattomia ja yleiskäyttöisiä.
 
 </div>
 

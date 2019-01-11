@@ -6,8 +6,6 @@ letter: b
 
 <div class="content">
 
-## Lomakkeet
-
 Jatketaan sovelluksen laajentamista siten, että se mahdollistaa uusien muistiinpanojen lisäämisen.
 
 Jotta saisimme sivun päivittymään uusien muistiinpanojen lisäyksen yhteydessä, on parasta sijoittaa muistiinpanot komponentin <code>App</code> tilaan. Eli importataan funktio [useState](https://reactjs.org/docs/hooks-state.html) ja määritellään sen avulla komponentille tila joka saa aluksi arvokseen propsina välitettävän muistiinpanot alustavan taulukon: 
@@ -246,7 +244,7 @@ setNewNote('')
 
 Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part2-notes/tree/part2-2), branchissä _part2-2_.
 
-## Näytettävien elementtien filtteröinti
+### Näytettävien elementtien filtteröinti
 
 Tehdään sovellukseen toiminto, joka mahdollistaa ainoastaan tärkeiden muistiinpanojen näyttämisen.
 
