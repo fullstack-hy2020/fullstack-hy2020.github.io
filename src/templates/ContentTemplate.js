@@ -18,7 +18,7 @@ import PrevNext from '../components/PrevNext/PrevNext';
 import ReturnInfo from '../components/ReturnInfo/ReturnInfo';
 import ScrollNavigation from '../components/ScrollNavigation/ScrollNavigation';
 import { SubHeader } from '../components/SubHeader/SubHeader';
-import titles from '../content/partnavigation/partnavigation';
+import navigation from '../content/partnavigation/partnavigation';
 import ArrowToTop from '../images/up-arrow.svg';
 import { partColors } from './partColors';
 
@@ -161,7 +161,7 @@ export default class ContentTemplate extends Component {
                   },
                   {
                     backgroundColor: colors['black'],
-                    text: titles[part][letter],
+                    text: navigation[part][letter],
                   },
                 ]}
               />
@@ -173,7 +173,7 @@ export default class ContentTemplate extends Component {
               <ScrollNavigation
                 part={part}
                 letter={letter}
-                currentPartTitle={titles[part][letter]}
+                currentPartTitle={navigation[part][letter]}
                 currentPath={frontmatter.path}
                 colorCode={colorCode}
                 className="col-2 spacing"
@@ -190,7 +190,7 @@ export default class ContentTemplate extends Component {
 
                 <SubHeader
                   headingLevel="h1"
-                  text={titles[part][letter]}
+                  text={navigation[part][letter]}
                   style={{ fontSize: '3rem' }}
                 />
               </Element>

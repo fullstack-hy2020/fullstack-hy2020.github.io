@@ -1,6 +1,6 @@
 const path = require('path');
-const titles = require('./src/content/partnavigation/partnavigation');
 const snakeCase = require('lodash/fp/snakeCase');
+const navigation = require('./src/content/partnavigation/partnavigation');
 
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions;
@@ -35,7 +35,7 @@ exports.createPages = ({ actions, graphql }) => {
 
       createPage({
         path: frontmatter.letter
-          ? `/osa${part}/${snakeCase(titles[part][frontmatter.letter])}`
+          ? `/osa${part}/${snakeCase(navigation[part][frontmatter.letter])}`
           : `/osa${part}`,
         component: frontmatter.letter ? contentTemplate : partIntroTemplate,
         context: {
