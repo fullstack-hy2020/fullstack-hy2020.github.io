@@ -1,4 +1,6 @@
 const path = require('path');
+const titles = require('./src/content/partnavigation/partnavigation');
+const snakeCase = require('lodash/fp/snakeCase');
 
 exports.createPages = ({ actions, graphql }) => {
   const { createPage } = actions;
@@ -12,16 +14,11 @@ exports.createPages = ({ actions, graphql }) => {
         edges {
           node {
             frontmatter {
-              title
-              subTitle
-              path
               mainImage {
                 publicURL
               }
-              partColor
               part
               letter
-              navigation
             }
           }
         }
@@ -33,12 +30,18 @@ exports.createPages = ({ actions, graphql }) => {
     }
 
     result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-      const pathArr = node.frontmatter.path.split('/');
+      const { frontmatter } = node;
+      const { part } = frontmatter;
 
       createPage({
-        path: node.frontmatter.path,
-        component: pathArr.length > 2 ? contentTemplate : partIntroTemplate,
-        context: {},
+        path: frontmatter.letter
+          ? `/osa${part}/${snakeCase(titles[part][frontmatter.letter])}`
+          : `/osa${part}`,
+        component: frontmatter.letter ? contentTemplate : partIntroTemplate,
+        context: {
+          part: part,
+          letter: frontmatter.letter,
+        },
       });
     });
   });

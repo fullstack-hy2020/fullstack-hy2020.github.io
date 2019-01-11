@@ -1,11 +1,7 @@
 ---
-title: osa 2
-subTitle: Palvelimella olevan datan muokkaaminen
-path: /osa2/palvelimella_olevan_datan_muokkaaminen
 mainImage: ../../images/part-2.svg
 part: 2
 letter: d
-partColor: dark-orange
 ---
 
 <div class="content">

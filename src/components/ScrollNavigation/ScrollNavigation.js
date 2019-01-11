@@ -85,7 +85,7 @@ class ScrollNavigation extends Component {
       <StaticQuery
         query={graphql`
           query navigationQuery {
-            allSidenavigationJson {
+            allPartnavigationJson {
               edges {
                 node {
                   _0 {
@@ -148,7 +148,7 @@ class ScrollNavigation extends Component {
           }
         `}
         render={data => {
-          const { node } = data.allSidenavigationJson.edges[0];
+          const { node } = data.allPartnavigationJson.edges[0];
 
           const partsNode = node[`_${part}`];
 

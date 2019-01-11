@@ -1,11 +1,7 @@
 ---
-title: osa 7
-subTitle: Testaus
-path: /osa7/testaus
 mainImage: ../../images/part-7.svg
 part: 7
 letter: c
-partColor: light-blue
 ---
 
 <div class="content">

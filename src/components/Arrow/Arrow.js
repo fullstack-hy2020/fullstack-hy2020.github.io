@@ -18,7 +18,7 @@ const Arrow = ({
   ...props
 }) => {
   const arrowContent = (
-    <div className="arrow__container arrows--horizontal">
+    <div className={`arrow__container arrows--horizontal ${className}`}>
       {content.map((arrow, i) => {
         const arrowStyle = {
           backgroundColor: arrow.backgroundColor
@@ -31,11 +31,7 @@ const Arrow = ({
         };
 
         return (
-          <div
-            key={`arrow${i}`}
-            className={`arrow__wrapper ${className}`}
-            {...props}
-          >
+          <div key={`arrow${i}`} className="arrow__wrapper" {...props}>
             <div
               className={`arrow__rectangle ${bold ? 'bold' : ''} ${
                 thickBorder ? 'arrow__rectangle--thick-border' : ''

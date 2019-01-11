@@ -1,11 +1,7 @@
 ---
-title: osa 5
-subTitle: Frontendin testauksen alkeet
-path: /osa5/frontend-testaus
 mainImage: ../../images/part-5.svg
 part: 5
 letter: b
-partColor: pink
 ---
 
 <div class="content">

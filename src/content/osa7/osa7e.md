@@ -1,11 +1,7 @@
 ---
-title: osa 7
-subTitle: React/Node-sovellusten tietoturva
-path: /osa7/tietoturva
 mainImage: ../../images/part-7.svg
 part: 7
 letter: e
-partColor: light-blue
 ---
 
 <div class="content">

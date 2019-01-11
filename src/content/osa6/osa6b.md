@@ -1,11 +1,7 @@
 ---
-title: osa 6
-subTitle: React+Redux
-path: /osa6/react-redux
 mainImage: ../../images/part-6.svg
 part: 6
 letter: b
-partColor: violet
 ---
 
 <div class="content">

@@ -1,11 +1,7 @@
 ---
-title: osa 4
-subTitle: Node.js / Express
-path: /osa4/node-express
 mainImage: ../../images/part-4.svg
 part: 4
 letter: a
-partColor: yellow
 ---
 
 <div class="content">

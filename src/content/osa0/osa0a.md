@@ -1,11 +1,7 @@
 ---
-title: osa 0
-subTitle: Yleistä
-path: /osa0/yleistä
 mainImage: ../../images/part-0.svg
 part: 0
 letter: a
-partColor: light-violet
 ---
 
 <div class="content">

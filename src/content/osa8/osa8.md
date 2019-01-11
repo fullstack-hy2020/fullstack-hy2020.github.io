@@ -1,10 +1,6 @@
 ---
-title: osa 8
-path: /osa8
 mainImage: ../../images/part-8.svg
 part: 8
-partColor: turquoise
-navigation:
 ---
 
 <div class="intro">

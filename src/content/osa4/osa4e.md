@@ -1,11 +1,7 @@
 ---
-title: osa 4
-subTitle: Web
-path: /osa4/web
 mainImage: ../../images/part-4.svg
 part: 4
 letter: e
-partColor: yellow
 ---
 
 <div class="content">

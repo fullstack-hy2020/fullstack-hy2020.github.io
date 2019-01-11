@@ -1,11 +1,7 @@
 ---
-title: osa 2
-subTitle: Lomakkeiden käsittely
-path: /osa2/lomakkeiden_kasittely
 mainImage: ../../images/part-2.svg
 part: 2
 letter: b
-partColor: dark-orange
 ---
 
 <div class="content">

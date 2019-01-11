@@ -1,0 +1,40 @@
+@import '../common.scss';
+
+#footer {
+  @include from($desktop) {
+    align-items: center;
+  }
+
+  .footer__navigation {
+    &-link {
+      font-size: 1rem;
+      line-height: 18px;
+      white-space: nowrap;
+      font-family: $font-heading;
+      margin-left: 0 !important;
+
+      &:nth-of-type(n + 2) {
+        margin-top: 2.142rem;
+      }
+    }
+
+    @include from($desktop) {
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: flex-end;
+
+      &-link {
+        margin-top: 0 !important;
+        margin-bottom: auto;
+
+        &:nth-of-type(n + 1) {
+          margin-right: 2.877rem;
+        }
+
+        &:last-of-type {
+          margin-right: 0 !important;
+        }
+      }
+    }
+  }
+}

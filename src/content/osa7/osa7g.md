@@ -1,11 +1,7 @@
 ---
-title: osa 7
-subTitle: Tulevaisuuden trendejä
-path: /osa7/trendit
 mainImage: ../../images/part-7.svg
 part: 7
 letter: g
-partColor: light-blue
 ---
 
 <div class="content">
