@@ -4,11 +4,14 @@ import { Link } from 'gatsby';
 import { PropTypes } from 'prop-types';
 import React from 'react';
 
+import navigation from '../../content/partnavigation/partnavigation';
 import Element from '../Element/Element';
 
+const navArray = Object.keys(navigation);
+
 const PrevNext = ({ prev, next }) => {
-  const hasPrev = prev >= 0 ? true : false;
-  const hasNext = next <= 8 ? true : false;
+  const hasPrev = navArray.includes(prev.toString());
+  const hasNext = navArray.includes(next.toString());
 
   return (
     <Element className="container spacing spacing--after-large prev-next__container">

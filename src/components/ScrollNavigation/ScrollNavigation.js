@@ -1,11 +1,12 @@
 import './ScrollNavigation.scss';
 
-import { Link, StaticQuery, graphql } from 'gatsby';
+import { Link } from 'gatsby';
 import kebabCase from 'lodash/fp/kebabCase';
 import snakeCase from 'lodash/fp/snakeCase';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
+import navigation from '../../content/partnavigation/partnavigation';
 import Accordion from '../Accordion/Accordion';
 import Element from '../Element/Element';
 
@@ -82,88 +83,14 @@ class ScrollNavigation extends Component {
     const { part } = this.props;
 
     return (
-      <StaticQuery
-        query={graphql`
-          query navigationQuery {
-            allPartnavigationJson {
-              edges {
-                node {
-                  _0 {
-                    a
-                    b
-                  }
-                  _1 {
-                    a
-                    b
-                    c
-                    d
-                  }
-                  _2 {
-                    a
-                    b
-                    c
-                    d
-                    e
-                  }
-                  _3 {
-                    a
-                    b
-                    c
-                    d
-                  }
-                  _4 {
-                    a
-                    b
-                    c
-                    d
-                    e
-                  }
-                  _5 {
-                    a
-                    b
-                    c
-                    d
-                    e
-                  }
-                  _6 {
-                    a
-                    b
-                    c
-                  }
-                  _7 {
-                    a
-                    b
-                    c
-                    d
-                    e
-                    f
-                    g
-                  }
-                  _8 {
-                    a
-                  }
-                }
-              }
-            }
-          }
-        `}
-        render={data => {
-          const { node } = data.allPartnavigationJson.edges[0];
-
-          const partsNode = node[`_${part}`];
-
-          return (
-            <Element
-              tag="ul"
-              flex
-              dirColumn
-              className={`scroll-navigation ${this.props.className}`}
-            >
-              {this.loopThroughPartsNode(partsNode)}
-            </Element>
-          );
-        }}
-      />
+      <Element
+        tag="ul"
+        flex
+        dirColumn
+        className={`scroll-navigation ${this.props.className}`}
+      >
+        {this.loopThroughPartsNode(navigation[part])}
+      </Element>
     );
   }
 }

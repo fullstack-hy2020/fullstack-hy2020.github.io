@@ -5,6 +5,7 @@ import path from 'path';
 import { graphql } from 'gatsby';
 import Parser from 'html-react-parser';
 import domToReact from 'html-react-parser/lib/dom-to-react';
+import snakeCase from 'lodash/fp/snakeCase';
 import React, { Component } from 'react';
 
 import colors from '../colors';
@@ -18,7 +19,7 @@ import PrevNext from '../components/PrevNext/PrevNext';
 import ReturnInfo from '../components/ReturnInfo/ReturnInfo';
 import ScrollNavigation from '../components/ScrollNavigation/ScrollNavigation';
 import { SubHeader } from '../components/SubHeader/SubHeader';
-import titles from '../content/partnavigation/partnavigation';
+import navigation from '../content/partnavigation/partnavigation';
 import ArrowToTop from '../images/up-arrow.svg';
 import { partColors } from './partColors';
 
@@ -161,7 +162,7 @@ export default class ContentTemplate extends Component {
                   },
                   {
                     backgroundColor: colors['black'],
-                    text: titles[part][letter],
+                    text: navigation[part][letter],
                   },
                 ]}
               />
@@ -173,8 +174,10 @@ export default class ContentTemplate extends Component {
               <ScrollNavigation
                 part={part}
                 letter={letter}
-                currentPartTitle={titles[part][letter]}
-                currentPath={frontmatter.path}
+                currentPartTitle={navigation[part][letter]}
+                currentPath={`/osa${part}/${snakeCase(
+                  navigation[part][letter]
+                )}`}
                 colorCode={colorCode}
                 className="col-2 spacing"
                 style={{ top: this.state.h1Top }}
@@ -190,7 +193,7 @@ export default class ContentTemplate extends Component {
 
                 <SubHeader
                   headingLevel="h1"
-                  text={titles[part][letter]}
+                  text={navigation[part][letter]}
                   style={{ fontSize: '3rem' }}
                 />
               </Element>

@@ -5,6 +5,7 @@ import path from 'path';
 import { graphql } from 'gatsby';
 import Parser from 'html-react-parser';
 import domToReact from 'html-react-parser/lib/dom-to-react';
+import isEmpty from 'lodash/fp/isEmpty';
 import snakeCase from 'lodash/fp/snakeCase';
 import React from 'react';
 
@@ -23,7 +24,9 @@ export default function PartIntroTemplate({ data }) {
   const { frontmatter, html } = markdownRemark;
   const { mainImage, part } = frontmatter;
 
-  const titles = Object.keys(navigation[part]);
+  const titles = !isEmpty(navigation[part])
+    ? Object.keys(navigation[part])
+    : [];
 
   const parserOptions = {
     replace: ({ type, attribs, children }) => {
@@ -68,25 +71,24 @@ export default function PartIntroTemplate({ data }) {
             {Parser(html, parserOptions)}
           </div>
 
-          <Arrow
-            className="spacing--mobile"
-            stack
-            content={titles.map(n => {
-              return {
-                backgroundColor: colors['white'],
-                letter: n,
-                path: `/osa${part}/${snakeCase(navigation[part][n])}`,
-                text: navigation[part][n],
-              };
-            })}
-          />
+          {titles && (
+            <Arrow
+              className="spacing--mobile"
+              stack
+              content={titles.map(n => {
+                return {
+                  backgroundColor: colors['white'],
+                  letter: n,
+                  path: `/osa${part}/${snakeCase(navigation[part][n])}`,
+                  text: navigation[part][n],
+                };
+              })}
+            />
+          )}
         </Element>
       </Banner>
 
-      <PrevNext
-        prev={part > 0 ? part - 1 : undefined}
-        next={part < 8 ? part + 1 : undefined}
-      />
+      <PrevNext prev={part - 1} next={part + 1} />
 
       <Footer />
     </Layout>
