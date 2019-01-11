@@ -1,0 +1,40 @@
+@import '../common.scss';
+
+.prev-next__container {
+  .separator {
+    display: none;
+
+    @include to($tablet) {
+      display: block;
+      background-color: $black;
+      width: 2px;
+    }
+  }
+
+  .prev {
+    p,
+    b {
+      text-align: right;
+    }
+
+    @include to($tablet) {
+      p {
+        &::before {
+          content: '<';
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
+
+  .next {
+    @include to($tablet) {
+      p {
+        &::after {
+          content: '>';
+          margin-left: 1rem;
+        }
+      }
+    }
+  }
+}
