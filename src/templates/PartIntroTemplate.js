@@ -47,6 +47,7 @@ export default function PartIntroTemplate({ data }) {
       >
         <Element className="container">
           <Arrow
+            className="breadcrumb"
             content={[
               {
                 backgroundColor: colors[partColor],
@@ -65,6 +66,7 @@ export default function PartIntroTemplate({ data }) {
           </div>
 
           <Arrow
+            className="spacing--mobile"
             stack
             content={navArray.map(n => {
               const arr = n.split('|');

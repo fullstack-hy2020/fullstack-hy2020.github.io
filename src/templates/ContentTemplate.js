@@ -143,6 +143,7 @@ export default class ContentTemplate extends Component {
           >
             <div className="container">
               <Arrow
+                className="breadcrumb"
                 content={[
                   {
                     backgroundColor: colorCode,

@@ -4,17 +4,22 @@
   position: relative;
 
   &:not():first-child {
-    border-left: none;
+    background: none;
+    background-color: none;
 
-    &::before {
-      content: '';
-      background: url('../../images/arrow.svg') no-repeat;
-      background-size: contain;
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
+    @include from($desktop) {
+      border-left: none;
+
+      &::before {
+        content: '';
+        background: url('../../images/arrow.svg') no-repeat;
+        background-size: contain;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+      }
     }
   }
 }
@@ -138,4 +143,36 @@
 
 .arrow__container--with-link {
   width: 100% !important;
+}
+
+.breadcrumb {
+  .arrow__wrapper {
+    @include to($desktop) {
+      padding: 0;
+
+      &:not(:last-of-type)::after {
+        content: '>';
+        font-size: 0.7rem;
+        font-weight: $font-weight-regular;
+        margin: 0 0.5rem;
+      }
+    }
+  }
+
+  .arrow__rectangle {
+    @include to($desktop) {
+      border: none;
+      padding: 0;
+      font-size: 0.7rem;
+      white-space: nowrap;
+      background-color: transparent !important;
+      color: $black;
+    }
+  }
+
+  .arrow__point {
+    @include to($desktop) {
+      display: none;
+    }
+  }
 }
