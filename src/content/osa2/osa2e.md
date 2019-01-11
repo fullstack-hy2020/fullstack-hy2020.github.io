@@ -291,14 +291,17 @@ Toiminnallisen kokonaisuuden strukturointiyksikkö on React-komponentti, joka m�
 
 Toteuta osan 2 esimerkin [parempi virheilmoitus](/osa2/#parempi-virheilmoitus) tyyliin ruudulla muutaman sekunnin näkyvä ilmoitus, joka kertoo onnistuneista operaatioista (henkilön lisäys ja poisto, sekä numeron muutos):
 
-![](../assets/teht/17.png)
+![](../images/2/27b.png)
 
 <h4>2.20*: puhelinluettelo osa 12</h4>
 
-Jos poistat jonkun henkilön toisesta selaimesta hieman ennen kun yrität _muuttaa henkilön numeroa_ toisesta selaimesta, tapahtuu virhetilanne:
+Jos poistat jonkun henkilön toisesta selaimesta hieman ennen kun yrität <em>muuttaa henkilön numeroa</em> toisesta selaimesta, tapahtuu virhetilanne:
 
-![](../assets/teht/18.png)
+![](../images/2/29b.png)
 
-Korjaa ongelma osan 2 esimerkin [promise ja virheet](/osa2/#promise-ja-virheet) tapaan. Loogisin korjaus lienee henkilön lisääminen uudelleen palvelimelle. Toinen vaihtoehto on ilmoittaa käyttäjälle, että muutettavaksi yritettävän henkilön tiedot on jo poistettu.
+Korjaa ongelma osan 2 esimerkin [promise ja virheet](/osa2/#promise-ja-virheet) hengessä, mutta siten että 
+ käyttäjälle ilmoitetaan operaation epäonnistumisesta. Onnistuneen ja epäonnistuneen operaation ilmoitusten tulee erota toisistaan: 
+
+![](../images/2/28a.png)
 
 </div>
