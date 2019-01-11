@@ -68,25 +68,24 @@ export default function PartIntroTemplate({ data }) {
             {Parser(html, parserOptions)}
           </div>
 
-          <Arrow
-            className="spacing--mobile"
-            stack
-            content={titles.map(n => {
-              return {
-                backgroundColor: colors['white'],
-                letter: n,
-                path: `/osa${part}/${snakeCase(navigation[part][n])}`,
-                text: navigation[part][n],
-              };
-            })}
-          />
+          {titles && (
+            <Arrow
+              className="spacing--mobile"
+              stack
+              content={titles.map(n => {
+                return {
+                  backgroundColor: colors['white'],
+                  letter: n,
+                  path: `/osa${part}/${snakeCase(navigation[part][n])}`,
+                  text: navigation[part][n],
+                };
+              })}
+            />
+          )}
         </Element>
       </Banner>
 
-      <PrevNext
-        prev={part > 0 ? part - 1 : undefined}
-        next={part < 8 ? part + 1 : undefined}
-      />
+      <PrevNext prev={part - 1} next={part + 1} />
 
       <Footer />
     </Layout>

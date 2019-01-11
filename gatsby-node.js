@@ -1,5 +1,6 @@
 const path = require('path');
 const snakeCase = require('lodash/fp/snakeCase');
+const isEmpty = require('lodash/fp/isEmpty');
 const navigation = require('./src/content/partnavigation/partnavigation');
 
 exports.createPages = ({ actions, graphql }) => {
@@ -33,16 +34,26 @@ exports.createPages = ({ actions, graphql }) => {
       const { frontmatter } = node;
       const { part } = frontmatter;
 
-      createPage({
-        path: frontmatter.letter
-          ? `/osa${part}/${snakeCase(navigation[part][frontmatter.letter])}`
-          : `/osa${part}`,
-        component: frontmatter.letter ? contentTemplate : partIntroTemplate,
-        context: {
-          part: part,
-          letter: frontmatter.letter,
-        },
-      });
+      if (!frontmatter.letter) {
+        createPage({
+          path: `/osa${part.toString()}`,
+          component: partIntroTemplate,
+          context: {
+            part: part,
+          },
+        });
+      } else if (!isEmpty(navigation[part]) && frontmatter.letter) {
+        createPage({
+          path: `/osa${part}/${snakeCase(
+            navigation[part][frontmatter.letter]
+          )}`,
+          component: contentTemplate,
+          context: {
+            part: part,
+            letter: frontmatter.letter,
+          },
+        });
+      } else return;
     });
   });
 };

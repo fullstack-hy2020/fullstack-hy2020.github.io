@@ -5,6 +5,7 @@ import path from 'path';
 import { graphql } from 'gatsby';
 import Parser from 'html-react-parser';
 import domToReact from 'html-react-parser/lib/dom-to-react';
+import snakeCase from 'lodash/fp/snakeCase';
 import React, { Component } from 'react';
 
 import colors from '../colors';
@@ -174,7 +175,9 @@ export default class ContentTemplate extends Component {
                 part={part}
                 letter={letter}
                 currentPartTitle={navigation[part][letter]}
-                currentPath={frontmatter.path}
+                currentPath={`/osa${part}/${snakeCase(
+                  navigation[part][letter]
+                )}`}
                 colorCode={colorCode}
                 className="col-2 spacing"
                 style={{ top: this.state.h1Top }}
