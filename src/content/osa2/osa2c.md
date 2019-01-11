@@ -1,11 +1,7 @@
 ---
-title: osa 2
-subTitle: Palvelimella olevan datan hakeminen
-path: /osa2/palvelimella_olevan_datan_hakeminen
 mainImage: ../../images/part-2.svg
 part: 2
 letter: c
-partColor: dark-orange
 ---
 
 <div class="content">

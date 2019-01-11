@@ -1,11 +1,7 @@
 ---
-title: osa 7
-subTitle: Tyylien lisääminen sovellukseen
-path: /osa7/tyylit
 mainImage: ../../images/part-7.svg
 part: 7
 letter: b
-partColor: light-blue
 ---
 
 <div class="content">

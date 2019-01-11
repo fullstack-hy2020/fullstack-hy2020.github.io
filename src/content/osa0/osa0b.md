@@ -1,11 +1,7 @@
 ---
-title: osa 0
-subTitle: Web-sovelluksen toimintaperiaatteita
-path: /osa0/web-sovelluksen_toimintaperiaatteita
 mainImage: ../../images/part-0.svg
 part: 0
 letter: b
-partColor: light-violet
 ---
 
 <div class="content">

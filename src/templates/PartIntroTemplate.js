@@ -5,6 +5,7 @@ import path from 'path';
 import { graphql } from 'gatsby';
 import Parser from 'html-react-parser';
 import domToReact from 'html-react-parser/lib/dom-to-react';
+import snakeCase from 'lodash/fp/snakeCase';
 import React from 'react';
 
 import colors from '../colors';
@@ -14,11 +15,15 @@ import Element from '../components/Element/Element';
 import Footer from '../components/Footer/Footer';
 import Layout from '../components/layout';
 import PrevNext from '../components/PrevNext/PrevNext';
+import navigation from '../content/partnavigation/partnavigation';
+import { partColors } from './partColors';
 
 export default function PartIntroTemplate({ data }) {
   const { markdownRemark } = data;
   const { frontmatter, html } = markdownRemark;
-  const { mainImage, title, partColor, part, navigation } = frontmatter;
+  const { mainImage, part } = frontmatter;
+
+  const titles = Object.keys(navigation[part]);
 
   const parserOptions = {
     replace: ({ type, attribs, children }) => {
@@ -31,8 +36,6 @@ export default function PartIntroTemplate({ data }) {
     },
   };
 
-  const navArray = navigation ? navigation.split('@') : [];
-
   return (
     <Layout>
       <Banner
@@ -41,7 +44,7 @@ export default function PartIntroTemplate({ data }) {
           backgroundPosition: 'center right',
           backgroundSize: '80%',
           backgroundRepeat: 'no-repeat',
-          backgroundColor: colors[partColor],
+          backgroundColor: colors[partColors[part]],
         }}
         className="spacing spacing--after"
       >
@@ -50,13 +53,13 @@ export default function PartIntroTemplate({ data }) {
             className="breadcrumb"
             content={[
               {
-                backgroundColor: colors[partColor],
+                backgroundColor: colors[partColors[part]],
                 text: 'Fullstack',
                 link: '/about',
               },
               {
                 backgroundColor: colors['black'],
-                text: title,
+                text: `osa ${part}`,
               },
             ]}
           />
@@ -68,14 +71,12 @@ export default function PartIntroTemplate({ data }) {
           <Arrow
             className="spacing--mobile"
             stack
-            content={navArray.map(n => {
-              const arr = n.split('|');
-
+            content={titles.map(n => {
               return {
                 backgroundColor: colors['white'],
-                letter: arr[0],
-                path: arr[1],
-                text: arr[2],
+                letter: n,
+                path: `/osa${part}/${snakeCase(navigation[part][n])}`,
+                text: navigation[part][n],
               };
             })}
           />
@@ -93,19 +94,14 @@ export default function PartIntroTemplate({ data }) {
 }
 
 export const partInfoQuery = graphql`
-  query($path: String!) {
-    markdownRemark(frontmatter: { path: { eq: $path } }) {
+  query($part: Int!) {
+    markdownRemark(frontmatter: { part: { eq: $part }, letter: { eq: null } }) {
       html
       frontmatter {
-        title
-        path
         mainImage {
           publicURL
         }
-        partColor
         part
-        letter
-        navigation
       }
     }
   }

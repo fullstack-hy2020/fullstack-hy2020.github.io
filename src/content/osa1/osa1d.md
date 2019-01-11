@@ -1,11 +1,7 @@
 ---
-title: osa 1
-subTitle: Monimutkaisempi tila ja Reactin debuggaus
-path: /osa1/monimutkaisempi_tila_ja_reactin_debuggaus
 mainImage: ../../images/part-1.svg
 part: 1
 letter: d
-partColor: green
 ---
 
 <div class="content">

@@ -1,11 +1,7 @@
 ---
-title: osa 3
-subTitle: Node.js / Express
-path: /osa3/node-express
 mainImage: ../../images/part-3.svg
 part: 3
 letter: b
-partColor: light-orange
 ---
 
 ## Node.js

@@ -1,11 +1,7 @@
 ---
-title: osa 2
-subTitle: Kokoelmien renderöinti ja moduulit
-path: /osa2/kokoelmien_renderointi_ja_moduulit
 mainImage: ../../images/part-2.svg
 part: 2
 letter: a
-partColor: dark-orange
 ---
 
 <div class="content">

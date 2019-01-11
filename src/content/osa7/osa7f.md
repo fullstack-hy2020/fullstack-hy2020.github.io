@@ -1,11 +1,7 @@
 ---
-title: osa 7
-subTitle: Tyypitys
-path: /osa7/tyypitys
 mainImage: ../../images/part-7.svg
 part: 7
 letter: f
-partColor: light-blue
 ---
 
 <div class="content">

@@ -1,13 +1,8 @@
 ---
-title: osa 2
-subTitle: Tyylien lisääminen React-sovellukseen
-path: /osa2/css
 mainImage: ../../images/part-2.svg
 part: 2
 letter: e
-partColor: dark-orange
 ---
-
 
 <div class="content">
 
@@ -230,4 +225,3 @@ Jos poistat jonkun henkilön toisesta selaimesta hieman ennen kun yrität _muutt
 Korjaa ongelma osan 2 esimerkin [promise ja virheet](/osa2/#promise-ja-virheet) tapaan. Loogisin korjaus lienee henkilön lisääminen uudelleen palvelimelle. Toinen vaihtoehto on ilmoittaa käyttäjälle, että muutettavaksi yritettävän henkilön tiedot on jo poistettu.
 
 </div>
-

@@ -1,10 +1,6 @@
 ---
-title: osa 4
-path: /osa4
 mainImage: ../../images/part-4.svg
 part: 4
-partColor: yellow
-#navigation: a|/osa4/node-express|Node.js / Express@b|/osa4/node-testaus|Node.js -sovellusten testaus@c|/osa4/js|js@d|/osa4/mongoose|Mongoose@e|/osa4/web|web
 ---
 
 <div class="intro">

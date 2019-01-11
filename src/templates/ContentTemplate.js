@@ -18,7 +18,9 @@ import PrevNext from '../components/PrevNext/PrevNext';
 import ReturnInfo from '../components/ReturnInfo/ReturnInfo';
 import ScrollNavigation from '../components/ScrollNavigation/ScrollNavigation';
 import { SubHeader } from '../components/SubHeader/SubHeader';
+import titles from '../content/partnavigation/partnavigation';
 import ArrowToTop from '../images/up-arrow.svg';
+import { partColors } from './partColors';
 
 export default class ContentTemplate extends Component {
   constructor(props) {
@@ -37,7 +39,9 @@ export default class ContentTemplate extends Component {
     const { frontmatter } = this.props.data.markdownRemark;
 
     links.map(i => {
-      return (i.style = `border-color: ${colors[frontmatter.partColor]}`);
+      return (i.style = `border-color: ${
+        colors[partColors[frontmatter.part]]
+      }`);
     });
 
     this.setState({
@@ -60,8 +64,8 @@ export default class ContentTemplate extends Component {
   render() {
     const { markdownRemark } = this.props.data;
     const { frontmatter, html } = markdownRemark;
-    const { mainImage, title, subTitle, letter, part, partColor } = frontmatter;
-    const colorCode = colors[partColor];
+    const { mainImage, letter, part } = frontmatter;
+    const colorCode = colors[partColors[part]];
 
     const parserOptions = {
       replace: ({ type, name, attribs, children }) => {
@@ -152,12 +156,12 @@ export default class ContentTemplate extends Component {
                   },
                   {
                     backgroundColor: colorCode,
-                    text: title,
+                    text: `osa ${part}`,
                     link: `/osa${part}`,
                   },
                   {
                     backgroundColor: colors['black'],
-                    text: subTitle,
+                    text: titles[part][letter],
                   },
                 ]}
               />
@@ -169,7 +173,7 @@ export default class ContentTemplate extends Component {
               <ScrollNavigation
                 part={part}
                 letter={letter}
-                currentPartTitle={subTitle}
+                currentPartTitle={titles[part][letter]}
                 currentPath={frontmatter.path}
                 colorCode={colorCode}
                 className="col-2 spacing"
@@ -186,7 +190,7 @@ export default class ContentTemplate extends Component {
 
                 <SubHeader
                   headingLevel="h1"
-                  text={subTitle}
+                  text={titles[part][letter]}
                   style={{ fontSize: '3rem' }}
                 />
               </Element>
@@ -209,17 +213,15 @@ export default class ContentTemplate extends Component {
 }
 
 export const contentPageQuery = graphql`
-  query($path: String!) {
-    markdownRemark(frontmatter: { path: { eq: $path } }) {
+  query($part: Int!, $letter: String!) {
+    markdownRemark(
+      frontmatter: { part: { eq: $part }, letter: { eq: $letter } }
+    ) {
       html
       frontmatter {
-        title
-        subTitle
-        path
         mainImage {
           publicURL
         }
-        partColor
         part
         letter
       }

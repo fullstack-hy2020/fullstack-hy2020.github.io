@@ -1,11 +1,7 @@
 ---
-title: osa 3
-subTitle: Konfiguraatiot
-path: /osa3/konfiguraatiot
 mainImage: ../../images/part-3.svg
 part: 3
 letter: d
-partColor: light-orange
 ---
 
 <div class="content">

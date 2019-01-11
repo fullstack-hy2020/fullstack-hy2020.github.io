@@ -1,11 +1,7 @@
 ---
-title: osa 3
-subTitle: Web-sovellustentoiminnan perusteet
-path: /osa3/perusteet
 mainImage: ../../images/part-3.svg
 part: 3
 letter: a
-partColor: light-orange
 ---
 
 ## Muutama huomio

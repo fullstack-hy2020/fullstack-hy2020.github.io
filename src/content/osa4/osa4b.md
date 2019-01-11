@@ -1,11 +1,7 @@
 ---
-title: osa 4
-subTitle: Node.js -sovellusten testaus
-path: /osa4/node-testaus
 mainImage: ../../images/part-4.svg
 part: 4
 letter: b
-partColor: yellow
 ---
 
 <div class="content">

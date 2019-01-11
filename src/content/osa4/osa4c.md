@@ -1,11 +1,7 @@
 ---
-title: osa 4
-subTitle: JS
-path: /osa4/js
 mainImage: ../../images/part-4.svg
 part: 4
 letter: c
-partColor: yellow
 ---
 
 <div class="content">
