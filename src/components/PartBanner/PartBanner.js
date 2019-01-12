@@ -27,6 +27,7 @@ export const PartBanner = () => {
 
           return (
             <ContentLiftup
+              key={partNames[part]}
               image={{
                 src: require(`../../images/thumbnails/part-${part}.svg`),
                 alt: partNames[part],
