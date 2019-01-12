@@ -11,7 +11,7 @@ const FAQ = () => (
     <SEO title="FAQ" />
 
     <Element className="container spacing--large spacing--after">
-      <h1>Hi from the FAQ page</h1>
+      <h1>Usein kysytyst kysymykset</h1>
 
       <Link to="/">Go back to the homepage</Link>
     </Element>

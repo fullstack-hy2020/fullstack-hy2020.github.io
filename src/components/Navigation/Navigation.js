@@ -8,7 +8,7 @@ import { NavigationItem } from './Item';
 export const navigation = [
   { text: 'KURSSISTA', path: '/about' },
   { text: 'KURSSIN SISÄLTÖ', path: '/#course-contents' },
-  { text: 'FAQs', path: '/faq' },
+  { text: 'FAQ', path: '/faq' },
   // { text: 'YRITYSESITTELYT', path: '/companies' },
 ];
 
