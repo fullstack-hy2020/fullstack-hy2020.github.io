@@ -15,21 +15,21 @@ export const PartBanner = () => {
       >
         {parts.map(part => {
           const partNames = [
-            "Web-sovellusten toiminnan perusteet",
-            "Reactin perusteet",
-            "Palvelimen kanssa tapahtuva kommunikointi",
-            "Palvelimen ohjelmointi NodeJS:n Express-kirjastolla",
-            "Express-sovellusten testaaminen",
-            "React-sovelluksen testaaminen",
-            "Sovelluksen tilan hallinta Redux-kirjastolla",
-            "Tulevaisuuden trendejä",
-          ]
+            'Web-sovellusten toiminnan perusteet',
+            'Reactin perusteet',
+            'Palvelimen kanssa tapahtuva kommunikointi',
+            'Palvelimen ohjelmointi NodeJS:n Express-kirjastolla',
+            'Express-sovellusten testaaminen',
+            'React-sovelluksen testaaminen',
+            'Sovelluksen tilan hallinta Redux-kirjastolla',
+            'Tulevaisuuden trendejä',
+          ];
 
           return (
             <ContentLiftup
               image={{
                 src: require(`../../images/thumbnails/part-${part}.svg`),
-                alt: '',
+                alt: partNames[part],
               }}
               hoverImageSrc={require(`../../images/thumbnails/part-${part}_ovr.svg`)}
               name={`Osa ${part}`}
