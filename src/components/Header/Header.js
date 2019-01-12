@@ -49,7 +49,7 @@ class Header extends Component {
           className="container"
           style={{ alignItems: 'center', justifyContent: 'flex-start' }}
         >
-          <Link to="/" style={{ textDecoration: 'none' }}>
+          <Link to="/" className="header__logo">
             {headerClass === '' ? (
               <TripleBorder
                 className="nav-item-hover"
