@@ -38,6 +38,8 @@
   }
 
   ul {
+    font-family: $font-heading;
+
     @include from($tablet) {
       margin-left: 2.2rem;
     }
