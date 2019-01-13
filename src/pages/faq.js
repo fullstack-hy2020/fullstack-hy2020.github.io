@@ -12,45 +12,47 @@ const FAQ = () => (
   <Layout>
     <SEO title="FAQ" />
 
-    <StaticQuery
-      query={graphql`
-        query {
-          allFaqJson {
-            edges {
-              node {
-                title
-                text
+    <Element className="container link spacing spacing--after-small">
+      <SubHeader
+        className="spacing--small spacing--after-small"
+        headingLevel="h1"
+        text="Usein kysytyt kysymykset"
+      />
+
+      <StaticQuery
+        query={graphql`
+          query {
+            allFaqJson {
+              edges {
+                node {
+                  title
+                  text
+                }
               }
             }
           }
-        }
-      `}
-      render={data => {
-        const { edges } = data.allFaqJson;
+        `}
+        render={data => {
+          const { edges } = data.allFaqJson;
 
-        return (
-          <Element className="container link spacing spacing--after-small">
-            <SubHeader
-              className="spacing--small spacing--after-small"
-              headingLevel="h1"
-              text="Usein kysytyst kysymykset"
-            />
+          return (
+            <>
+              {edges.map(edge => {
+                const { node } = edge;
 
-            {edges.map(edge => {
-              const { node } = edge;
-
-              return (
-                <Accordion
-                  key={node.title}
-                  title={node.title}
-                  content={node.text}
-                />
-              );
-            })}
-          </Element>
-        );
-      }}
-    />
+                return (
+                  <Accordion
+                    key={node.title}
+                    title={node.title}
+                    content={node.text}
+                  />
+                );
+              })}
+            </>
+          );
+        }}
+      />
+    </Element>
 
     <Footer />
   </Layout>
