@@ -14,9 +14,9 @@ Selaimet eivät vielä osaa kaikkia Javascriptin uusimpien versioiden ominaisuuk
 
 Tällä hetkellä johtava tapa tehdä transpilointi on [Babel](https://babeljs.io/). Create-react-app:in avulla luoduissa React-sovelluksissa on valmiiksi konfiguroitu automaattinen transpilaus. Katsomme kurssin [osassa 7](/osa7) tarkemmin miten transpiloinnin konfigurointi tapahtuu.
 
-[Node.js](https://nodejs.org/en/) on melkein missä vaan, mm. palvelimilla toimiva, Googlen [chrome V8](https://developers.google.com/v8/)-javascriptmoottoriin perustuva Javascript-suoritusympäristö. Harjoitellaan hieman Javascriptiä Nodella. Tässä oletetaan, että koneellasi on Node.js:stä vähintään versio _v8.10.0_. Noden tuoreet versiot osaavat suoraan Javascriptin uusia versioita, joten koodin transpilaus ei ole tarpeen.
+[Node.js](https://nodejs.org/en/) on melkein missä vaan, mm. palvelimilla toimiva, Googlen [chrome V8](https://developers.google.com/v8/)-javascriptmoottoriin perustuva Javascript-suoritusympäristö. Harjoitellaan hieman Javascriptiä Nodella. Tässä oletetaan, että koneellasi on Node.js:stä vähintään versio <i>v8.10.0</i>. Noden tuoreet versiot osaavat suoraan Javascriptin uusia versioita, joten koodin transpilaus ei ole tarpeen.
 
-Koodi kirjoitetaan <em>.js-</em>päätteiseen tiedostoon, ja suoritetaan komennolla <code>node tiedosto.js</code>
+Koodi kirjoitetaan <i>.js</i>-päätteiseen tiedostoon, ja suoritetaan komennolla <em>node tiedosto.js</em>
 
 Koodia on mahdollisuus kirjoittaa myös Node.js-konsoliin, joka aukeaa kun kirjoitat komentorivillä _node_ tai myös selaimen developer toolin konsoliin. Chromen uusimmat versiot osaavat suoraan transpiloimatta [melko hyvin](http://kangax.github.io/compat-table/es2016plus/) Javascriptin uusiakin piirteitä.
 
@@ -32,15 +32,15 @@ Javascriptissä on muutama tapa määritellä muuttujia:
 const x = 1
 let y = 5
 
-console.log(x, y) // tulostuu 1, 5
+console.log(x, y)   // tulostuu 1, 5
 y += 10
-console.log(x, y) // tulostuu 1, 15
+console.log(x, y)   // tulostuu 1, 15
 y = 'teksti'
-console.log(x, y) // tulostuu 1, teksti
-x = 4             // aiheuttaa virheen
+console.log(x, y)   // tulostuu 1, teksti
+x = 4               // aiheuttaa virheen
 ```
 
-[const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) ei oikeastaan määrittele muuttujaa vaan _vakion_, jonka arvoa ei voi enää muuttaa. [let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let) taas määrittelee normaalin muuttujan.
+[const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) ei oikeastaan määrittele muuttujaa vaan <i>vakion</i>, jonka arvoa ei voi enää muuttaa. [let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let) taas määrittelee normaalin muuttujan.
 
 Esimerkistä näemme myös, että muuttujan tallettaman tiedon tyyppi voi vaihtaa tyyppiä suorituksen aikana, _y_ tallettaa aluksi luvun ja lopulta merkkijonon.
 
@@ -58,16 +58,16 @@ const t = [1, -1, 3]
 t.push(5)
 
 console.log(t.length) // tulostuu 4
-console.log(t[1]) // tulostuu -1
+console.log(t[1])     // tulostuu -1
 
 t.forEach(luku => {
-  console.log(luku) // tulostuu 1, -1, 3 ja 5 omille riveilleen
-})
+  console.log(luku)   // tulostuu 1, -1, 3 ja 5 omille riveilleen
+})                    //   omille riveilleen
 ```
 
 Huomattavaa esimerkissä on se, että taulukon sisältöä voi muuttaa vaikka sen on määritelty _const_:ksi. Koska taulukko on olio, viittaa muuttuja koko ajan samaan olioon. Olion sisältö muuttuu sitä mukaa kuin taulukkoon lisätään uusia alkioita.
 
-Eräs tapa käydä taulukon alkiot läpi on esimerkissä käytetty _forEach_, joka saa parametrikseen nuolisyntaksilla määritellyn _funktion_
+Eräs tapa käydä taulukon alkiot läpi on esimerkissä käytetty _forEach_, joka saa parametrikseen nuolisyntaksilla määritellyn <i>funktion</i>
 
 ```js
 luku => {
@@ -75,20 +75,20 @@ luku => {
 }
 ```
 
-forEach kutsuu funktiota _jokaiselle taulukon alkiolle_ antaen taulukon alkion aina parametrina. forEachin parametrina oleva funktio voi saada myös [muita parametreja](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach).
+forEach kutsuu funktiota <i>jokaiselle taulukon alkiolle</i> antaen taulukon alkion aina parametrina. forEachin parametrina oleva funktio voi saada myös [muita parametreja](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach).
 
-Edellisessä esimerkissä taulukkoon lisättiin uusi alkio metodilla [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push). Reactin yhteydessä sovelletaan usein funktionaalisen ohjelmoinnin tekniikoita, jonka eräs piirre on käyttää muuttumattomia (immutable) tietorakenteita. React-koodissa kannattaakin mielummin käyttää metodia [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka ei lisää alkiota taulukkoon vaan luo uuden taulukon, jossa on "lisättävä" alkio sekä vanhan taulukon sisältö:
+Edellisessä esimerkissä taulukkoon lisättiin uusi alkio metodilla [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push). Reactin yhteydessä sovelletaan usein funktionaalisen ohjelmoinnin tekniikoita, jonka eräs piirre on käyttää <i>muuttumattomia</i> (engl. [immutable](https://en.wikipedia.org/wiki/Immutable_object)) tietorakenteita. React-koodissa kannattaakin mielummin käyttää metodia [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka ei lisää alkiota taulukkoon vaan luo uuden taulukon, jossa on lisättävä alkio sekä vanhan taulukon sisältö:
 
 ```js
 const t = [1, -1, 3]
 
 const t2 = t.concat(5)
 
-console.log(t) // tulostuu [1, -1, 3]
+console.log(t)  // tulostuu [1, -1, 3]
 console.log(t2) // tulostuu [1, -1, 3, 5]
 ```
 
-Metodi _t.concat(5)_ ei siis lisää uutta alkiota vanhaan taulukkoon, vaan palauttaa uuden taulukon joka sisältää vanhan taulukon alkioiden lisäksi uuden alkion.
+Metodikutsu _t.concat(5)_ ei siis lisää uutta alkiota vanhaan taulukkoon, vaan palauttaa uuden taulukon, joka sisältää vanhan taulukon alkioiden lisäksi uuden alkion.
 
 Taulukoille on määritelty runsaasti hyödyllisiä operaatioita. Katsotaan pieni esimerkki metodin [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) käytöstä.
 
@@ -96,16 +96,17 @@ Taulukoille on määritelty runsaasti hyödyllisiä operaatioita. Katsotaan pien
 const t = [1, 2, 3, 4]
 
 const m1 = t.map(luku => luku * 2)
-console.log(m1) // tulostuu [2, 4, 6, 8]
+console.log(m1)   // tulostuu [2, 4, 6, 8]
 ```
 
-Map siis muodostaa taulukon perusteella _uuden taulukon_, jonka jokainen alkio muodostetaan map:in parametrina olevan funktion avulla.
+Map muodostaa taulukon perusteella <i>uuden taulukon</i>, jonka jokainen alkio luodaan map:in parametrina olevan funktion avulla, esimerkin tapauksessa kertomalla alkuperäinen luku kahdella.
 
 Map voi muuttaa taulukon myös täysin erilaiseen muotoon:
 
 ```js
 const m2 = t.map(luku => '<li>' + luku + '</li>')
-console.log(m2) // tulostuu [ '<li>1</li>', '<li>2</li>', '<li>3</li>', '<li>4</li>' ]
+console.log(m2)  
+// tulostuu [ '<li>1</li>', '<li>2</li>', '<li>3</li>', '<li>4</li>' ]
 ```
 
 Eli lukuja sisältävästä taulukosta tehdään map-metodin avulla HTML-koodia sisältävä taulukko. Tulemmekin kurssin [osassa2](/osa2) näkemään että mapia käytetään Reactissa todella usein.
@@ -117,8 +118,8 @@ const t = [1, 2, 3, 4, 5]
 
 const [eka, toka, ...loput] = t
 
-console.log(eka, toka) // tulostuu 1, 2
-console.log(loput) // tulostuu [3, 4 ,5]
+console.log(eka, toka)  // tulostuu 1, 2
+console.log(loput)      // tulostuu [3, 4 ,5]
 ```
 
 Eli muuttujiin _eka_ ja _toka_ tulee sijoituksen ansiosta taulukon kaksi ensimmäistä lukua. Muuttujaan _loput_ "kerätään" sijoituksesta jäljellejääneet luvut omaksi taulukoksi.
@@ -155,9 +156,9 @@ Kenttien arvot voivat olla tyypiltään mitä vaan, lukuja, merkkijonoja, tauluk
 Olioiden kenttiin viitataan pistenotaatiolla, tai hakasulkeilla:
 
 ```js
-console.log(olio1.nimi) // tulostuu Arto Hellas
-const kentanNimi = 'ika'
-console.log(olio1[kentanNimi]) // tulostuu 35
+console.log(olio1.nimi)         // tulostuu Arto Hellas
+const kentanNimi = 'ika' 
+console.log(olio1[kentanNimi])  // tulostuu 35
 ```
 
 Olioille voidaan lisätä kenttiä myös lennossa joko pistenotaation tai hakasulkeiden avulla:
@@ -171,7 +172,7 @@ Jälkimmäinen lisäyksistä on pakko tehdä hakasulkeiden avulla, sillä pisten
 
 Javascriptissä olioilla voi luonnollisesti olla myös metodeja. Emme kuitenkaan tarvitse tällä kurssilla ollenkaan itse määriteltyjä metodillisia olioita, joten asiaa ei tällä kurssilla käsitellä kuin lyhyesti.
 
-Olioita on myös mahdollista määritellä ns. konstruktorifunktioiden avulla, jolloin saadaan aikaan hieman monien ohjelmointikielten, esim. Javan luokkia (class) muistuttava mekanismi. Javascriptissä ei kuitenkaan ole luokkia samassa mielessä kuin olio-ohjelmointikielissä. Kieleen on kuitenkin lisätty versiosta ES6 alkaen _luokkasyntaksi_, joka helpottaa tietyissä tilanteissa olio-ohjelmointikielimäisten luokkien esittämistä.
+Olioita on myös mahdollista määritellä ns. konstruktorifunktioiden avulla, jolloin saadaan aikaan hieman monien ohjelmointikielten, esim. Javan luokkia (class) muistuttava mekanismi. Javascriptissä ei kuitenkaan ole luokkia samassa mielessä kuin olio-ohjelmointikielissä. Kieleen on kuitenkin lisätty versiosta ES6 alkaen <i>luokkasyntaksi</i>, joka helpottaa tietyissä tilanteissa olio-ohjelmointikielimäisten luokkien esittämistä.
 
 ### Funktiot
 
@@ -217,7 +218,7 @@ const tnelio = t.map(p => p * p)
 
 Nuolifunktio on tullut Javascriptiin vasta muutama vuosi sitten version [ES6](http://es6-features.org/) myötä. Tätä ennen ja paikoin nykyäänkin funktioiden määrittely tapahtui avainsanan _function_ avulla.
 
-Määrittelytapoja on kaksi, funktiolle voidaan antaa [function declaration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function) -tyyppisessä määrittelyssä _nimi_ jonka avulla funktioon voidaan viitata:
+Määrittelytapoja on kaksi, funktiolle voidaan antaa [function declaration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function) -tyyppisessä määrittelyssä <i>nimi</i>, jonka avulla funktioon voidaan viitata:
 
 ```js
 function tulo(a, b) {
@@ -246,11 +247,11 @@ Määrittelemme tällä kurssilla kaikki funktiot nuolisyntaksin avulla.
 
 <i>Jatkamme edellisissä tehtävissä aloitetun ohjelman rakentamista, voit siis tehdä koodin samaan projektiin, palautuksessa ollaan kiinnostuneita ainoastaan ohjelman lopullisesta versiosta.</i>
 
-**Protip:** voit kohdata ohjelmoidessasi ongelmiasen suhteen missä muodossa kompnentin saamat _propsit_ ovat. Hyvä keino varmistua asiasta on tulostaa propsit konsoliin, esim. seuraavasti:
+**Protip:** voit kohdata ohjelmoidessasi ongelmiasen suhteen missä muodossa komponentin saamat _propsit_ ovat. Hyvä keino varmistua asiasta on tulostaa propsit konsoliin, esim. seuraavasti:
 
 ```js
-const Header = props => {
-  console.log(props)
+const Header = (props) => {
+  console.log(props) // highlight-line
   return <h1>{props.course}</h1>
 }
 ```
@@ -430,7 +431,7 @@ const viiteSummaan = arto.laskeSumma
 viiteSummaan(10, 15) // tulostuu 25
 ```
 
-Oliolla on nyt metodi _laskeSumma_, joka osaa laskea parametrina annettujen lukujen summan. Metodia voidaan kutsua normaaliin tapaan olion kautta <code>arto.laskeSumma(1, 4)</code> tai tallettamalla _metodiviite_ muuttujaan ja kutsumalla metodia muuttujan kautta <code>viiteSummaan(10, 15)</code>.
+Oliolla on nyt metodi _laskeSumma_, joka osaa laskea parametrina annettujen lukujen summan. Metodia voidaan kutsua normaaliin tapaan olion kautta <em>arto.laskeSumma(1, 4)</em> tai tallettamalla _metodiviite_ muuttujaan ja kutsumalla metodia muuttujan kautta <em>viiteSummaan(10, 15)</em>.
 
 Jos yritämme samaa metodille _tervehdi_, aiheutuu ongelmia:
 
@@ -476,7 +477,7 @@ On useita mekanismeja, joiden avulla alkuperäinen _this_ voidaan säilyttää, 
 setTimeout(arto.tervehdi.bind(arto), 1000)
 ```
 
-Komento <code>arto.tervehdi.bind(arto)</code> luo uuden funktion, missä se on sitonut _this_:in tarkoittamaan Artoa riippumatta siitä missä ja miten metodia kutsutaan.
+Komento <em>arto.tervehdi.bind(arto)</em> luo uuden funktion, missä se on sitonut _this_:in tarkoittamaan Artoa riippumatta siitä missä ja miten metodia kutsutaan.
 
 [Nuolifunktioiden](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) avulla on mahdollista ratkaista eräitä this:iin liittyviä ongelmia. Olioiden metodeina niitä ei kuitenkaan kannata käyttää, sillä silloin _this_ ei toimi ollenkaan. Palaamme nuolifunktioiden this:in käyttäytymiseen myöhemmin.
 
