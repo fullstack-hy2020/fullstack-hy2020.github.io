@@ -675,4 +675,6 @@ Tee kaavio tilanteesta, missä käyttäjä menee selaimella osoitteeseen <https:
 
 Tee kaavio tilanteesta, missä käyttäjä luo uuden muistiinpanon single page -versiossa.
 
+Tämä oli osan viimeinen tehtävä ja on aika pushata vastaukset githubiin merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/courses/#fullstack2019).
+
 </div>

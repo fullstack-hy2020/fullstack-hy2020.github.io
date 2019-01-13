@@ -544,9 +544,9 @@ ReactDOM.render(
 
 Haluamme, että napin avulla tilan talettava muuttuja _value_ saadaan nollattua.
 
-Jotta saamme napin reagoimaan, on sille lisättävä _tapahtumankäsittelijä_.
+Jotta saamme napin reagoimaan, on sille lisättävä <i>tapahtumankäsittelijä</i>.
 
-Tapahtumankäsittelijän tulee aina olla _funktio_. Jos tapahtumankäisttelijän paikalle yritetään laittaa jotain muuta, ei nappi toimi.
+Tapahtumankäsittelijän tulee aina olla <i>funktio</i> tai viite funktioon. Jos tapahtumankäisttelijän paikalle yritetään laittaa jotain muuta, ei nappi toimi.
 
 Jos esim. antaisimme tapahtumankäsittelijäksi merkkijonon:
 
@@ -563,7 +563,7 @@ index.js:2178 Warning: Expected `onClick` listener to be a function, instead got
     in App (at index.js:27)
 ```
 
-eli esim. seuraavanlainen yritys olisi tuhoon tuomittu
+myös seuraavanlainen yritys olisi tuhoon tuomittu
 
 ```js
 <button onClick={value + 1}>nappi</button>
@@ -586,12 +586,14 @@ taaskaan tapahtumankäsittelijänä ei ole funktio vaan sijoitusoperaatio. Konso
 Entä seuraava:
 
 ```js
-<button onClick={console.log('nappia painettu')}>nappi</button>
+<button onClick={console.log('nappia painettu')}>
+  nappi
+</button>
 ```
 
-konsoliin tulostuu kertaalleen _nappia painettu_, mutta nappia painellessa ei tapahdu mitään. Miksi tämä ei toimi vaikka tapahtumankäsittelijänä on nyt funktio _console.log_?
+konsoliin tulostuu kertaalleen <i>nappia painettu</i>, mutta nappia painellessa ei tapahdu mitään. Miksi tämä ei toimi vaikka tapahtumankäsittelijänä on nyt funktio _console.log_?
 
-Ongelma on nyt siinä, että tapahtumankäsittelijänä on funktion kutsu, eli varsinaiseksi tapahtumankäsittelijäksi tulee funktion kutsun paluuarvo, joka on tässä tapauksessa _undefined_.
+Ongelma on nyt siinä, että tapahtumankäsittelijänä on <i>funktion kutsu</i>, eli varsinaiseksi tapahtumankäsittelijäksi tulee funktion kutsun paluuarvo, joka on tässä tapauksessa määrittelemätön arvo <i>undefined</i>.
 
 Funktiokutsu _console.log('nappia painettu')_ suoritetaan siinä vaiheessa kun komponentti renderöidään, ja tämän takia konsoliin tulee tulostus kertalleen.
 
@@ -606,7 +608,9 @@ jälleen olemme yrittäneet laittaa tapahtumankäsittelijäksi funktiokutsun. Ei
 Jos haluamme suorittaa tietyn funktiokutsun tapahtuvan nappia painettaessa, toimii seuraava
 
 ```js
-<button onClick={() => console.log('nappia painettu')}>nappi</button>
+<button onClick={() => console.log('nappia painettu')}>
+  nappi
+</button>
 ```
 
 Nyt tapahtumankäsittelijä on nuolisyntaksilla määritelty funktio _() => console.log('nappia painettu')_. Kun komponentti renderöidään, ei suoriteta mitään, ainoastaan talletetaan funktioviite tapahtumankäsittelijäksi. Itse funktion suoritus tapahtuu vasta napin painallusten yhteydessä.
@@ -621,13 +625,14 @@ eli nyt tapahtumankäsittelijä on funktio _() => setValue(0)_.
 
 Tapahtumakäsittelijäfunktioiden määrittely suoraan napin määrittelyn yhteydessä ei välttämättä ole paras mahdollinen idea.
 
-Usein tapahtumankäsittelijä määritelläänkin jossain muualla. Seuraavassa määritellään funktio metodin render alussa ja sijoitetaan se muuttujaan _handleClick_:
+Usein tapahtumankäsittelijä määritelläänkin jossain muualla. Seuraavassa määritellään funktio ja sijoitetaan se muuttujaan _handleClick_ komponentin rungossa:
 
 ```js
 const App = (props) => {
   const [value, setValue] = useState(10)
 
-  const handleClick = () => console.log('nappia painettu')
+  const handleClick = () =>
+    console.log('nappia painettu')
 
   return (
     <div>
@@ -638,7 +643,7 @@ const App = (props) => {
 }
 ```
 
-Muuttujassa _handleClick_ on nyt talletettuna viite itse funktioon. Viite annetaan napin määrittelyn yhteydessä
+Muuttujassa _handleClick_ on nyt talletettuna viite itse funktioon. Viite annetaan napin määrittelyn yhteydessä attribuutin <i>onClick</i>:
 
 ```js
 <button onClick={handleClick}>nappi</button>
@@ -650,10 +655,12 @@ Tapahtumankäsittelijäfunktio voi luonnollisesti koostua useista komennoista, t
 const App = (props) => {
   const [value, setValue] = useState(10)
 
+  // highlight-start
   const handleClick = () => {
     console.log('nappia painettu')
     setValue(0)
   }
+   // highlight-end
 
   return (
     <div>
@@ -664,7 +671,7 @@ const App = (props) => {
 }
 ```
 
-Mennään lopuksi funktioita palauttavaan funktioon. Kuten aiemmin jo mainittiin, et tarvitse tämän osan tehtävissä funktiota palauttavia funktioita, joten voit melko huoletta hypätä seuraavan ohi jos asia tuntuu nyt hankalalta.
+Mennään lopuksi <i>funktion palauttavaan funktioon</i>. Kuten aiemmin jo mainittiin, et tarvitse ainakaan tämän osan, et kenties koko kurssin tehtävissä funktiota palauttavia funktioita, joten voit melko huoletta hypätä seuraavan ohi jos asia tuntuu nyt hankalalta.
 
 Muutetaan koodia seuraavasti
 
@@ -672,11 +679,13 @@ Muutetaan koodia seuraavasti
 const App = (props) => {
   const [value, setValue] = useState(10)
 
+  // highlight-start
   const hello = () => {
     const handler = () => console.log('hello world')
 
     return handler
   }
+  // highlight-end
 
   return (
     <div>
@@ -707,7 +716,7 @@ const hello = () => {
 }
 ```
 
-funktion _paluuarvona_ on nyt toinen, muuttujaan _handler_ määritelty funktio.
+funktion <i>paluuarvona</i> on nyt toinen, muuttujaan _handler_ määritelty funktio.
 
 eli kun react renderöi seuraavan rivin
 
@@ -718,7 +727,9 @@ eli kun react renderöi seuraavan rivin
 sijoittaa se onClick-käsittelijäksi funktiokutsun _hello()_ paluuarvon. Eli oleellisesti ottaen rivi "muuttuu" seuraavaksi
 
 ```js
-<button onClick={() => console.log('hello world')}>nappi</button>
+<button onClick={() => console.log('hello world')}>
+  nappi
+</button>
 ```
 
 koska funktio _hello_ palautti funktion, on tapahtumankäsittelijä nyt funktio.
@@ -731,6 +742,7 @@ Muutetaan koodia hiukan:
 const App = (props) => {
   const [value, setValue] = useState(10)
 
+  // highlight-start
   const hello = (who) => {
     const handler = () => {
       console.log('hello', who)
@@ -738,13 +750,16 @@ const App = (props) => {
 
     return handler
   }
+  // highlight-end  
 
   return (
     <div>
       {value}
+  // highlight-start      
       <button onClick={hello('world')}>nappi</button>
       <button onClick={hello('react')}>nappi</button>
       <button onClick={hello('function')}>nappi</button>
+  // highlight-end      
     </div>
   )
 }
@@ -758,7 +773,7 @@ Ensimmäinen nappi määritellään seuraavasti
 <button onClick={hello('world')}>nappi</button>
 ```
 
-Tapahtumankäsittelijä siis saadaan _suorittamalla_ funktiokutsu _hello('world')_. Funktiokutsu palauttaa funktion
+Tapahtumankäsittelijä siis saadaan <i>suorittamalla</i> funktiokutsu _hello('world')_. Funktiokutsu palauttaa funktion
 
 ```js
 () => {
@@ -780,7 +795,7 @@ Tapahtumankäsittelijän määrittelevä funktiokutsu _hello('react')_ palauttaa
 }
 ```
 
-eli nappi saa oman yksilöllisen tapahtumankäsittelijänsä.
+eli molemmat napit saavat oman, yksilöllisen tapahtumankäsittelijänsä.
 
 Funktioita palauttavia funktioita voikin hyödyntää määrittelemään geneeristä toiminnallisuutta, jota voi tarkentaa parametrien avulla. Tapahtumankäsittelijöitä luovan funktion _hello_ voikin ajatella olevan eräänlainen tehdas, jota voi pyytää valmistamaan sopivia tervehtimiseen tarkoitettuja tapahtumankäsittelijäfunktioita.
 
@@ -842,7 +857,7 @@ render() {
 }
 ```
 
-Kun komponentti renderöidään, ja tehdään nappia tuhat
+Kun komponentti renderöidään, ja tehdään nappia <i>tuhat</i>
 
 ```js
 <button onClick={setToValue(1000)}>tuhat</button>
@@ -883,9 +898,15 @@ const App = (props) => {
   return (
     <div>
       {value}
-      <button onClick={() => setToValue(1000)}>tuhat</button>
-      <button onClick={() => setToValue(0)}>nollaa</button>
-      <button onClick={() => setToValue(value + 1)}>kasvata</button>
+      <button onClick={() => setToValue(1000)}>
+        tuhat
+      </button>
+      <button onClick={() => setToValue(0)}>
+        nollaa
+      </button>
+      <button onClick={() => setToValue(value + 1)}>
+        kasvata
+      </button>
     </div>
   )
 }
@@ -904,25 +925,31 @@ On aikalailla makuasia käyttääkö tapahtumankäsittelijänä funktioita palau
 Eriytetään vielä painike omaksi komponentikseen
 
 ```js
-const Button = (props) =>
-  <button onClick={props.handleClick}>{props.text}</button>
+const Button = (props) => (
+  <button onClick={props.handleClick}>
+    {props.text}
+  </button>
+)
 ```
 
-Komponentti saa siis propsina _handleClick_ tapahtumankäsittelijän ja propsina _text_ merkkijonon jonka se renderöin painikkeen tekstiksi.
+Komponentti saa siis propsina _handleClick_ tapahtumankäsittelijän ja propsina _text_ merkkijonon, jonka se renderöin painikkeen tekstiksi.
 
-Komponentin _Button_ käyttö on helppoa, on toki pidettävä huolta siitä että komponentille annettavat propsit on nimetty niin kuin komponentti olettaa:
+Komponentin <i>Button</i> käyttö on helppoa, on toki pidettävä huolta siitä, että komponentille annettavat propsit on nimetty niin kuin komponentti olettaa:
 
 ![](../images/1/12a.png)
 
 ### Älä määrittele komponenttia komponentin sisällä
 
-Eriytetään vielä sovelluksestamme luvun näyttäminen omaan komponenttiin _Display_.
+Eriytetään vielä sovelluksestamme luvun näyttäminen omaan komponenttiin <i>Display</i>.
 
-Muutetaan ohjelmaa seuraavasti, eli määritelläänkin uusi komponentti _App_-komponentin sisällä:
+Muutetaan ohjelmaa seuraavasti, eli määritelläänkin uusi komponentti <i>App</i>-komponentin sisällä:
 
 ```js
-const Button = props => (
-  <button onClick={props.handleClick}>{props.text}</button>
+// tämä on oikea paikka määritellä komponentti!
+const Button = (props) => (
+  <button onClick={props.handleClick}>
+    {props.text}
+  </button>
 )
 
 const App = props => {
@@ -933,7 +960,7 @@ const App = props => {
   }
 
   // älä määrittele komponenttia täällä!
-  const Display = props => <div>{props.value}</div>
+  const Display = props => <div>{props.value}</div> // highlight-line
 
   return (
     <div>
@@ -946,13 +973,15 @@ const App = props => {
 }
 ```
 
-Kaikki näyttää toimivan. Mutta **älä tee koskaan näin!** Tapa on hyödytön ja johtaa useissa tilanteissa ikäviin ongelmiin. Siirretäänkin komponentin _Display_ määrittely oikeaan paikkaan, eli komponentin _App_ määrittelevän funktion ulkopuolelle:
+Kaikki näyttää toimivan. Mutta **älä tee koskaan näin!**, eli määrittele komponenttia toisen komponentin sisällä. Tapa on hyödytön ja johtaa useissa tilanteissa ikäviin ongelmiin. Siirretäänkin komponentin <i>Display</i> määrittely oikeaan paikkaan, eli komponentin <i>App</i> määrittelevän funktion ulkopuolelle:
 
 ```js
 const Display = props => <div>{props.value}</div>
 
-const Button = props => (
-  <button onClick={props.handleClick}>{props.text}</button>
+const Button = (props) => (
+  <button onClick={props.handleClick}>
+    {props.text}
+  </button>
 )
 
 const App = props => {
@@ -988,7 +1017,11 @@ Seuraavassa muutamia linkkejä:
 <div class="tasks">
   <h3>Tehtäviä</h3>
 
-<em>Samaa ohjelmaa kehittelevissä tehtäväsarjoissa ohjelman lopullisen version palauttaminen riittää, voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.</em>
+Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/courses/#fullstack2019).
+
+Tehtävät palautetaan **yksi osa kerrallaan**. Kun olet palauttanut osan tehtävät, et voi enää palauttaa saman osan tekemättä jättämiäsi tehtäviä.
+
+<i>Samaa ohjelmaa kehittelevissä tehtäväsarjoissa ohjelman lopullisen version palauttaminen riittää, voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.</i>
 
   <h4> 1.6: unicafe osa1</h4>
 
@@ -1000,20 +1033,20 @@ Sovelluksen tulee näyttää jokaisen palautteen lukumäärä. Sovellus voi näy
 
 Huomaa, että sovelluksen tarvitsee toimia vain yhden selaimen käyttökerran ajan, esim. kun selain refreshataan, tilastot saavat hävitä.
 
-Muista, että saadaksesi komponentin tilan luotua joudut asentamaan Reactin version _0.16.7.0-alpha.2_ antamalla seuraavan komennon projektin hakemistossa
+Muista, että saadaksesi komponentin tilan luotua, joudut asentamaan Reactin version <i>0.16.8.0-alpha.0</i> antamalla seuraavan komennon projektin hakemistossa <i>(huomaa että koko komento ei välttämättä mahdu ruudullesi, joten kopioi komento</i>)
 
 ```js
-npm install -s react@16.7.0-alpha.2 react-dom@16.7.0-alpha.2
+npm install -s react@16.8.0-alpha.0 react-dom@16.8.0-alpha.0
 ```
 
-Voit tehdä koko sovelluksen tiedostoon _index.js_. Tiedoston sisältö voi olla aluksi seuraava
+Voit tehdä koko sovelluksen tiedostoon <i>index.js</i>. Tiedoston sisältö voi olla aluksi seuraava
 
 ```js
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 const App = () => {
-  // jokaisen napin tila kannattanee tallettaa omaan muuttujaan
+  // tallenna napit omaan tilaansa
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
@@ -1025,7 +1058,9 @@ const App = () => {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(<App />, 
+  document.getElementById('root')
+)
 ```
 
 <h4>1.7: unicafe osa2</h4>
@@ -1036,7 +1071,7 @@ Laajenna sovellusta siten, että se näyttää palautteista enemmän statistiikk
 
 <h4>1.8: unicafe osa3</h4>
 
-Refaktoroi sovelluksesi siten, että tilastojen näyttäminen on eriytetty oman komponentin _Statistics_ vastuulle. Sovelluksen tila säilyy edelleen juurikomponentissa _App_.
+Refaktoroi sovelluksesi siten, että tilastojen näyttäminen on eriytetty oman komponentin <i>Statistics</i> vastuulle. Sovelluksen tila säilyy edelleen juurikomponentissa <i>App</i>.
 
 Muista, että komponentteja ei saa määritellä toisen komponentin sisällä:
 
@@ -1051,10 +1086,11 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
-// älä määrittele komponenttia toisen komponentin sisällä!
-const Statistis = (props) => {
-  // ...
-}
+  // EI NÄIN!!! eli älä määrittele komponenttia 
+  // toisen komponentin sisällä!
+  const Statistis = (props) => {
+    // ...
+  }
 
   return (
     // ...
@@ -1075,7 +1111,7 @@ Jatketaan sovelluksen refaktorointia. Eriytä seuraavat komponentit
 - <i>Button</i> vastaa yksittäistä palautteenantonappia
 - <i>Statistic</i> huolehtii yksittäisen tilastorivin, esim. keskiarvon näyttämisestä
 
-Sovelluksen tila säilytetään edelleen juurikomponentissa _App_.
+Sovelluksen tila säilytetään edelleen juurikomponentissa <i>App</i>.
 
 <h4>1.11*: unicafe osa6</h4>
 
@@ -1095,7 +1131,7 @@ tee tarvittavat toimenpiteet jotta saat warningin katoamaan. Googlaa tarvittaess
 
 Ohjelmistotuotannossa tunnetaan lukematon määrä [anekdootteja](http://www.comp.nus.edu.sg/~damithch/pages/SE-quotes.htm) eli pieniä "onelinereita", jotka kiteyttävät alan ikuisia totuuksia.
 
-Laajenna seuraavaa sovellusta siten, että siihen tulee nappi, jota painamalla sovellus näyttää _satunnaisen_ ohjelmistotuotantoon liittyvän anekdootin:
+Laajenna seuraavaa sovellusta siten, että siihen tulee nappi, jota painamalla sovellus näyttää <i>satunnaisen</i> ohjelmistotuotantoon liittyvän anekdootin:
 
 ```js
 import React, { useState } from 'react'
@@ -1132,36 +1168,38 @@ Sovellus voi näyttää esim. seuraavalta:
 
 ![](../images/1/18a.png)
 
-Muista, että saadaksesi komponentin tilan luotua joudut asentamaan Reactin version _0.16.7.0-alpha.2_ antamalla seuraavan komennon projektin hakemistossa
+Muista, että saadaksesi komponentin tilan luotua joudut asentamaan Reactin version _0.16.8.0-alpha.0_ antamalla seuraavan komennon projektin hakemistossa
 
 ```js
-npm install -s react@16.7.0-alpha.2 react-dom@16.7.0-alpha.2
+npm install -s react@16.8.0-alpha.0 react-dom@16.8.0-alpha.0
 ```
 
-<h4>1.13: anekdootit osa2</h4>
+<h4>1.13*: anekdootit osa2</h4>
 
 Laajenna sovellusta siten, että näytettävää anekdoottia on mahdollista äänestää:
 
 ![](../images/1/19a.png)
 
-**Huom:** jos päätät tallettaa kunkin anekdootin äänet komponentin tilassa olevan olion kenttiin tai taulukkoon, saatat tarvita päivittäessäsi tilaa oikeaoppisesti olion tai taulukon _kopioimista_.
+**Huom:** jos päätät tallettaa kunkin anekdootin äänet komponentin tilassa olevan olion kenttiin tai taulukkoon, saatat tarvita päivittäessäsi tilaa oikeaoppisesti olion tai taulukon <i>kopioimista</i>.
 
 Olio voidaan kopioida esim. seuraavasti:
 
 ```js
-const pisteet = { 0: 1, 1: 3, 2: 4, 3: 2 }
+const points = { 0: 1, 1: 3, 2: 4, 3: 2 }
 
-const kopio = { ...pisteet }
-kopio[2] += 1     // kasvatetaan olion kentän 2 arvoa yhdellä
+const copy = { ...points }
+// kasvatetaan olion kentän 2 arvoa yhdellä
+copy[2] += 1     
 ```
 
 ja taulukko esim. seuraavasti:
 
 ```js
-const pisteet = [1, 4, 6, 3]
+const points = [1, 4, 6, 3]
 
-const kopio = [...pisteet]
-kopio[2] += 1     // kasvatetaan taulukon paikan 2 arvoa yhdellä
+const copy = [...points]
+// kasvatetaan taulukon paikan 2 arvoa yhdellä
+copy[2] += 1     
 ```
 
 Yksinkertaisempi ratkaisu lienee nyt taulukon käyttö. Googlaamalla löydät paljon vihjeitä sille, miten kannattaa luoda halutun mittainen taulukko, joka on täytetty nollilla esim. [tämän](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-array-of-arbitrary-length/22209781).
@@ -1173,5 +1211,7 @@ Ja sitten vielä lopullinen versio, joka näyttää eniten ääniä saaneen anek
 ![](../images/1/20a.png)
 
 Jos suurimman äänimäärän saaneita anekdootteja on useita, riittää että niistä näytetään yksi.
+
+Tämä oli osan viimeinen tehtävä ja on aika pushata koodi githubiin merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/courses/#fullstack2019).
 
 </div>

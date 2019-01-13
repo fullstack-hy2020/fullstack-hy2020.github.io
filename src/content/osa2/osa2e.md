@@ -304,4 +304,6 @@ Korjaa ongelma osan 2 esimerkin [promise ja virheet](/osa2/#promise-ja-virheet) 
 
 ![](../images/2/28a.png)
 
+Tämä oli osan viimeinen tehtävä ja on aika pushata koodi githubiin merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/courses/#fullstack2019).
+
 </div>
