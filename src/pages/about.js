@@ -65,7 +65,7 @@ const About = () => (
                   />
                 </div>
 
-                <Element className="col-3">
+                <Element className="col-3 col-3--mobile">
                   <img
                     style={{ marginTop: 'auto' }}
                     alt="Stacked cubes with React logo and JavaScript text"
