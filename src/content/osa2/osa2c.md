@@ -488,7 +488,7 @@ Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://git
 
 Sovelluksemme kokonaisuuden konfiguraatiosta on pikkuhiljaa muodostunut melko kompleksinen. Käydään vielä läpi mitä tapahtuu missäkin. Seuraava diagrammi kuvaa asetelmaa
 
-![](../images/2/18b.png)
+![](../images/2/18c.png)
 
 React-sovelluksen muodostavaa Javascript-koodia siis suoritetaan selaimessa. Selain hakee Javascriptin, joka luonnollisesti sijaitsee koneen kiintolevyllä, <i>React dev serveriltä</i>, joka on se ohjelma, mikä käynnistyy kun suoritetaan komento <code>npm run</code>. Dev-serveri muokkaa tiedostossa olevan Javascriptin selainta varten sopivaan muotoon, se mm. yhdistellee eri tiedostoissa olevan Javascript-koodin yhdeksi tiedostoksi. Puhumme enemmän dev-serveristä kurssin osassa 7.
 

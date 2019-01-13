@@ -60,9 +60,9 @@ t.push(5)
 console.log(t.length) // tulostuu 4
 console.log(t[1])     // tulostuu -1
 
-t.forEach(luku => {
-  console.log(luku)   // tulostuu 1, -1, 3 ja 5 omille riveilleen
-})                    //   omille riveilleen
+t.forEach(value => {
+  console.log(value)  // tulostuu 1, -1, 3, 5 omille riveilleen
+})                    
 ```
 
 Huomattavaa esimerkissä on se, että taulukon sisältöä voi muuttaa vaikka sen on määritelty _const_:ksi. Koska taulukko on olio, viittaa muuttuja koko ajan samaan olioon. Olion sisältö muuttuu sitä mukaa kuin taulukkoon lisätään uusia alkioita.
@@ -70,12 +70,12 @@ Huomattavaa esimerkissä on se, että taulukon sisältöä voi muuttaa vaikka se
 Eräs tapa käydä taulukon alkiot läpi on esimerkissä käytetty _forEach_, joka saa parametrikseen nuolisyntaksilla määritellyn <i>funktion</i>
 
 ```js
-luku => {
-  console.log(luku)
+value => {
+  console.log(value)
 }
 ```
 
-forEach kutsuu funktiota <i>jokaiselle taulukon alkiolle</i> antaen taulukon alkion aina parametrina. forEachin parametrina oleva funktio voi saada myös [muita parametreja](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach).
+forEach kutsuu funktiota <i>jokaiselle taulukon alkiolle</i> antaen taulukon yksittäisen alkion aina parametrina. forEachin parametrina oleva funktio voi saada myös [muita parametreja](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach).
 
 Edellisessä esimerkissä taulukkoon lisättiin uusi alkio metodilla [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push). Reactin yhteydessä sovelletaan usein funktionaalisen ohjelmoinnin tekniikoita, jonka eräs piirre on käyttää <i>muuttumattomia</i> (engl. [immutable](https://en.wikipedia.org/wiki/Immutable_object)) tietorakenteita. React-koodissa kannattaakin mielummin käyttää metodia [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka ei lisää alkiota taulukkoon vaan luo uuden taulukon, jossa on lisättävä alkio sekä vanhan taulukon sisältö:
 
@@ -93,10 +93,10 @@ Metodikutsu _t.concat(5)_ ei siis lisää uutta alkiota vanhaan taulukkoon, vaan
 Taulukoille on määritelty runsaasti hyödyllisiä operaatioita. Katsotaan pieni esimerkki metodin [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) käytöstä.
 
 ```js
-const t = [1, 2, 3, 4]
+const t = [1, 2, 3]
 
-const m1 = t.map(luku => luku * 2)
-console.log(m1)   // tulostuu [2, 4, 6, 8]
+const m1 = t.map(value => value * 2)
+console.log(m1)   // tulostuu [2, 4, 6]
 ```
 
 Map muodostaa taulukon perusteella <i>uuden taulukon</i>, jonka jokainen alkio luodaan map:in parametrina olevan funktion avulla, esimerkin tapauksessa kertomalla alkuperäinen luku kahdella.
@@ -104,9 +104,9 @@ Map muodostaa taulukon perusteella <i>uuden taulukon</i>, jonka jokainen alkio l
 Map voi muuttaa taulukon myös täysin erilaiseen muotoon:
 
 ```js
-const m2 = t.map(luku => '<li>' + luku + '</li>')
+const m2 = t.map(value => '<li>' + value + '</li>')
 console.log(m2)  
-// tulostuu [ '<li>1</li>', '<li>2</li>', '<li>3</li>', '<li>4</li>' ]
+// tulostuu [ '<li>1</li>', '<li>2</li>', '<li>3</li>' ]
 ```
 
 Eli lukuja sisältävästä taulukosta tehdään map-metodin avulla HTML-koodia sisältävä taulukko. Tulemmekin kurssin [osassa2](/osa2) näkemään että mapia käytetään Reactissa todella usein.
@@ -116,59 +116,59 @@ Taulukon yksittäisiä alkioita on helppo sijoittaa muuttujiin [destrukturoivan]
 ```js
 const t = [1, 2, 3, 4, 5]
 
-const [eka, toka, ...loput] = t
+const [first, second, ...rest] = t
 
-console.log(eka, toka)  // tulostuu 1, 2
-console.log(loput)      // tulostuu [3, 4 ,5]
+console.log(first, second)  // tulostuu 1, 2
+console.log(rest)           // tulostuu [3, 4 ,5]
 ```
 
-Eli muuttujiin _eka_ ja _toka_ tulee sijoituksen ansiosta taulukon kaksi ensimmäistä lukua. Muuttujaan _loput_ "kerätään" sijoituksesta jäljellejääneet luvut omaksi taulukoksi.
+Eli muuttujiin _first_ ja _second_ tulee sijoituksen ansiosta taulukon kaksi ensimmäistä lukua. Muuttujaan _rest_ "kerätään" sijoituksesta jäljellejääneet luvut omaksi taulukoksi.
 
 ### Oliot
 
 Javasriptissa on muutama tapa määritellä olioita. Erittäin yleisesti käytetään [olioliteraaleja](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Object_literals), eli määritellään olio luettelemalla sen kentät (englanniksi property) aaltosulkeiden sisällä:
 
 ```js
-const olio1 = {
-  nimi: 'Arto Hellas',
-  ika: 35,
-  koulutus: 'Filosofian tohtori',
+const object1 = {
+  name: 'Arto Hellas',
+  age: 35,
+  education: 'Filosofian tohtori',
 }
 
-const olio2 = {
-  nimi: 'Full Stack -websovelluskehitys',
-  taso: 'aineopinto',
-  laajuus: 5,
+const object12 = {
+  name: 'Full Stack -websovelluskehitys',
+  level: 'aineopinto',
+  size: 5,
 }
 
-const olio3 = {
-  nimi: {
-    etunimi: 'Juha',
-    sukunimi: 'Tauriainen',
+const object3 = {
+  name: {
+    first: 'Juha',
+    last: 'Tauriainen',
   },
-  arvosanat: [2, 3, 5, 3],
-  laitos: 'TKTL',
+  grades: [2, 3, 5, 3],
+  department: 'TKTL',
 }
 ```
 
 Kenttien arvot voivat olla tyypiltään mitä vaan, lukuja, merkkijonoja, taulukoita, olioita...
 
-Olioiden kenttiin viitataan pistenotaatiolla, tai hakasulkeilla:
+Olioiden kenttiin viitataan pistenotaatioll, tai hakasulkeilla:
 
 ```js
-console.log(olio1.nimi)         // tulostuu Arto Hellas
-const kentanNimi = 'ika' 
-console.log(olio1[kentanNimi])  // tulostuu 35
+console.log(object1.name)         // tulostuu Arto Hellas
+const fieldName = 'age' 
+console.log(object1[fieldName])   // tulostuu 35
 ```
 
 Olioille voidaan lisätä kenttiä myös lennossa joko pistenotaation tai hakasulkeiden avulla:
 
 ```js
-olio1.osoite = 'Tapiola'
-olio1['salainen numero'] = 12341
+object1.address = 'Tapiola'
+object1['secred number'] = 12341
 ```
 
-Jälkimmäinen lisäyksistä on pakko tehdä hakasulkeiden avulla, sillä pistenotaatiota käytettäessä 'salainen numero' ei kelpaa kentän nimeksi.
+Jälkimmäinen lisäyksistä on pakko tehdä hakasulkeiden avulla, sillä pistenotaatiota käytettäessä <i>secred number</i> ei kelpaa kentän nimeksi.
 
 Javascriptissä olioilla voi luonnollisesti olla myös metodeja. Emme kuitenkaan tarvitse tällä kurssilla ollenkaan itse määriteltyjä metodillisia olioita, joten asiaa ei tällä kurssilla käsitellä kuin lyhyesti.
 
@@ -179,7 +179,7 @@ Olioita on myös mahdollista määritellä ns. konstruktorifunktioiden avulla, j
 Olemme jo tutustuneet ns. nuolifunktioiden määrittelyyn. Täydellinen eli "pitkän kaavan" mukaan menevä tapa nuolifunktion määrittelyyn on seuraava
 
 ```js
-const summa = (p1, p2) => {
+const sum = (p1, p2) => {
   console.log(p1)
   console.log(p2)
   return p1 + p2
@@ -189,53 +189,53 @@ const summa = (p1, p2) => {
 ja funktiota kutsutaan kuten olettaa saattaa
 
 ```js
-const vastaus = summa(1, 5)
-console.log(vastaus)
+const result = sum(1, 5)
+console.log(result)
 ```
 
 Jos parameteja on vain yksi, voidaan sulut jättää määrittelystä pois:
 
 ```js
-const nelio = p => {
+const square = p => {
   console.log(p)
   return p * p
 }
 ```
 
-Jos funktio sisältää ainoastaan yhden lausekkeen, ei aaltosulkeita tarvita. Tällöin funktio palauttaa ainoan lausekkeensa arvon. Eli edellinen voitaisiin ilmaista lyhyemmin seuraavasti:
+Jos funktio sisältää ainoastaan yhden lausekkeen, ei aaltosulkeita tarvita. Tällöin funktio palauttaa ainoan lausekkeensa arvon. Eli jos poistetaan konsoliin tulostus, voidaan edellinen sunktio ilmaista lyhyemmin seuraavasti:
 
 ```js
-const nelio = p => p * p
+const square = p => p * p
 ```
 
 Tämä muoto on erityisen kätevä käsiteltäessä taulukkoja esim. map-metodin avulla:
 
 ```js
 const t = [1, 2, 3]
-const tnelio = t.map(p => p * p)
-// tnelio on nyt [1, 4, 9]
+const tSquared = t.map(p => p * p)
+// tSquared on nyt [1, 4, 9]
 ```
 
-Nuolifunktio on tullut Javascriptiin vasta muutama vuosi sitten version [ES6](http://es6-features.org/) myötä. Tätä ennen ja paikoin nykyäänkin funktioiden määrittely tapahtui avainsanan _function_ avulla.
+Nuolifunktio on tullut Javascriptiin vasta muutama vuosi sitten version [ES6](http://es6-features.org/) myötä. Tätä ennen ainoa tapa funktioiden määrittelyyn oli avainsanan _function_ käyttö.
 
 Määrittelytapoja on kaksi, funktiolle voidaan antaa [function declaration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function) -tyyppisessä määrittelyssä <i>nimi</i>, jonka avulla funktioon voidaan viitata:
 
 ```js
-function tulo(a, b) {
+function product(a, b) {
   return a * b
 }
 
-const vastaus = tulo(2, 6)
+const vastaus = product(2, 6)
 ```
 
 Toinen tapa on tehdä määrittely [funktiolausekkeena](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function). Tällöin funktiolle ei tarvitse antaa nimeä ja määrittely voi sijaita muun koodin seassa:
 
 ```js
-const keskiarvo = function(a, b) {
+const average = function(a, b) {
   return (a + b) / 2
 }
 
-const vastaus = keskiarvo(2, 5)
+const vastaus = average(2, 5)
 ```
 
 Määrittelemme tällä kurssilla kaikki funktiot nuolisyntaksin avulla.
@@ -247,7 +247,7 @@ Määrittelemme tällä kurssilla kaikki funktiot nuolisyntaksin avulla.
 
 <i>Jatkamme edellisissä tehtävissä aloitetun ohjelman rakentamista, voit siis tehdä koodin samaan projektiin, palautuksessa ollaan kiinnostuneita ainoastaan ohjelman lopullisesta versiosta.</i>
 
-**Protip:** voit kohdata ohjelmoidessasi ongelmiasen suhteen missä muodossa komponentin saamat _propsit_ ovat. Hyvä keino varmistua asiasta on tulostaa propsit konsoliin, esim. seuraavasti:
+**Protip:** voit kohdata ohjelmoidessasi ongelmiasen suhteen missä muodossa komponentin saamat <i>propsit</i> ovat. Hyvä keino varmistua asiasta on tulostaa propsit konsoliin, esim. seuraavasti:
 
 ```js
 const Header = (props) => {
@@ -258,7 +258,7 @@ const Header = (props) => {
 
   <h4>1.3: tieto olioissa</h4>
 
-Siirrytään käyttämään sovelluksessamme oliota. Muuta _App_:in muuttujamäärittelyt seuraavaan muotoon ja muuta sovelluksen kaikkia osia niin, että se taas toimii:
+Siirrytään käyttämään sovelluksessamme oliota. Muuta komponentin <i>App</i> muuttujamäärittelyt seuraavaan muotoon ja muuta sovelluksen kaikkia osia niin, että se taas toimii:
 
 ```js
 const App = () => {
@@ -286,7 +286,7 @@ const App = () => {
 
   <h4>1.4: oliot taulukkoon</h4>
 
-Ja laitetaan oliot taulukkoon, eli muuta _App_:in muuttujamäärittelyt seuraavaan muotoon ja muuta sovelluksen kaikki osat vastaavasti:
+Ja laitetaan oliot taulukkoon, eli muuta  <i>App</i> :in muuttujamäärittelyt seuraavaan muotoon ja muuta sovelluksen kaikki osat vastaavasti:
 
 ```js
 const App = () => {
@@ -316,9 +316,9 @@ const App = () => {
 }
 ```
 
-**HUOM:** tässä vaiheessa _voit olettaa, että taulukossa on aina kolme alkiota_, eli taulukkoa ei ole pakko käydä läpi looppaamalla. Palataan taulukossa olevien olioiden perusteella tapahtuvaan komponenttien renderöintiin asiaan tarkemmin kurssin [seuraavassa osassa](../osa2).
+**HUOM:** tässä vaiheessa <i>voit olettaa, että taulukossa on aina kolme alkiota</i>, eli taulukkoa ei ole pakko käydä läpi looppaamalla. Palataan taulukossa olevien olioiden perusteella tapahtuvaan komponenttien renderöintiin asiaan tarkemmin kurssin [seuraavassa osassa](../osa2).
 
-Älä kuitenkaan välitä eri olioita komponentista _App_ sen sisältämiin komponentteihin _Content_ ja _Total_ erillisinä propsina, vaan suoraan taulukkona:
+Älä kuitenkaan välitä eri olioita komponentista <i>App</i> sen sisältämiin komponentteihin <i>Content</i> ja <i>Total</i> erillisinä propseina, vaan suoraan taulukkona:
 
 ```js
 const App = () => {
@@ -326,9 +326,9 @@ const App = () => {
 
   return (
     <div>
-      <Header kurssi={...} />
-      <Content osat={parts} />
-      <Total osat={parts} />
+      <Header course={...} />
+      <Content parts={parts} />
+      <Total parts={parts} />
     </div>
   )
 }
@@ -340,20 +340,20 @@ Viedään muutos vielä yhtä askelta pidemmälle, eli tehdään kurssista ja se
 
 ```js
 const App = () => {
-  const kurssi = {
-    nimi: 'Half Stack -sovelluskehitys',
-    osat: [
+  const course = {
+    name: 'Half Stack -sovelluskehitys',
+    parts: [
       {
-        nimi: 'Reactin perusteet',
-        tehtavia: 10
+        name: 'Reactin perusteet',
+        exercises: 10
       },
       {
-        nimi: 'Tiedonvälitys propseilla',
-        tehtavia: 7
+        name: 'Tiedonvälitys propseilla',
+        exercises: 7
       },
       {
-        nimi: 'Komponenttien tila',
-        tehtavia: 14
+        name: 'Komponenttien tila',
+        exercises: 14
       }
     ]
   }
@@ -380,93 +380,89 @@ Voimme liittää oliolle metodeja määrittelemällä niille kenttiä, jotka ova
 
 ```js
 const arto = {
-  nimi: 'Arto Hellas',
-  ika: 35,
-  koulutus: 'Filosofian tohtori',
-  tervehdi: function() {
-    console.log('hello, my name is', this.nimi)
+  name: 'Arto Hellas',
+  age: 35,
+  education: 'Filosofian tohtori',
+  greet: function() {
+    console.log('hello, my name is', this.name)
   },
 }
 
-arto.tervehdi()  // tulostuu hello, my name is Arto Hellas
+arto.greet()  // tulostuu hello, my name is Arto Hellas
 ```
 
 metodeja voidaan liittää olioille myös niiden luomisen jälkeen:
 
 ```js
 const arto = {
-  nimi: 'Arto Hellas',
-  ika: 35,
-  koulutus: 'Filosofian tohtori',
-  tervehdi: function() {
-    console.log('hello, my name is', this.nimi)
+  name: 'Arto Hellas',
+  age: 35,
+  education: 'Filosofian tohtori',
+  greet: function() {
+    console.log('hello, my name is', this.name)
   },
 }
 
-arto.vanhene = function() {
-  this.ika += 1
+// highlight-start
+arto.growOlder = function() {
+  this.age += 1
 }
+// highlight-end
 
-console.log(arto.ika)   // tulostuu 35
-arto.vanhene()
-console.log(arto.ika)   // tulostuu 36
+console.log(arto.age)   // tulostuu 35
+arto.growOlder()
+console.log(arto.age)   // tulostuu 36
 ```
 
-Muutetaan oliota hiukan
+Muutetaan olioa hiukan
 
 ```js
 const arto = {
-  nimi: 'Arto Hellas',
-  tervehdi: function() {
-    console.log('hello, my name is', this.nimi)
+  name: 'Arto Hellas',
+  age: 35,
+  education: 'Filosofian tohtori',
+  greet: function() {
+    console.log('hello, my name is', this.name)
   },
-  laskeSumma: function(a, b) {
+  // highlight-start
+  doAddition: function(a, b) {
     console.log(a + b)
   },
+  // highlight-end
 }
 
-arto.laskeSumma(1, 4) // tulostuu 5
+arto.doAddition(1, 4) // tulostuu 5
 
-const viiteSummaan = arto.laskeSumma
-viiteSummaan(10, 15) // tulostuu 25
+const referenceToAdditon = arto.doAddition
+referenceToAdditon(10, 15) // tulostuu 25
 ```
 
-Oliolla on nyt metodi _laskeSumma_, joka osaa laskea parametrina annettujen lukujen summan. Metodia voidaan kutsua normaaliin tapaan olion kautta <em>arto.laskeSumma(1, 4)</em> tai tallettamalla _metodiviite_ muuttujaan ja kutsumalla metodia muuttujan kautta <em>viiteSummaan(10, 15)</em>.
+Oliolla on nyt metodi _doAddition_, joka osaa laskea parametrina annettujen lukujen summan. Metodia voidaan kutsua normaaliin tapaan olion kautta <em>arto.doAddition(1, 4)</em> tai tallettamalla <i>metodiviite</i> muuttujaan ja kutsumalla metodia muuttujan kautta <em>referenceToAdditon(10, 15)</em>.
 
-Jos yritämme samaa metodille _tervehdi_, aiheutuu ongelmia:
+Jos yritämme samaa metodille _greet_, aiheutuu ongelmia:
+
+```js
+arto.greet()       // tulostuu hello, my name is Arto Hellas
+
+const referenceToGreet = arto.referenceToGreet
+referenceToGreet() // tulostuu hello, my name is undefined
+```
+
+Kutsuttaessa metodia viitteen kautta, on metodi kadottanut tiedon siitä mikä oli alkuperäinen _this_. Toisin kuin melkein kaikissa muissa kielissä, Javascriptissa [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this):n arvo määrittyy sen mukaan <i>miten metodia on kutsuttu</i>. Kutsuttaessa metodia viitteen kautta, _this_:in arvoksi tulee ns. [globaali objekti](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) ja lopputulos ei ole yleensä ollenkaan se, mitä sovelluskehittäjä olettaa.
+
+This:in kadottaminen aiheuttaa Javascriptillä ohjelmoidessa monia potentiaalisia ongelmia. Eteen tulee erittäin usein tilanteita, missä Reactin/Noden (oikeammin ilmaistuna selaimen Javascript-moottorin) tulee kutsua joitain ohjelmoijan määrittelemien olioiden metodeja. Tällä kurssilla kuitenkin säästymme näiltä ongelmilta, sillä käytämme ainoastaan "thissitöntä" Javascriptia.
+
+Eräs this:in katoamiseen johtava tilanne tulee esim. jos pyydetään Artoa tervehtimään sekunnin kuluttua metodia [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) hyväksikäyttäen.
 
 ```js
 const arto = {
-  nimi: 'Arto Hellas',
-  tervehdi: function() {
-    console.log('hello, my name is', this.nimi)
-  },
-  laskeSumma: function(a, b) {
-    console.log(a + b)
+  name: 'Arto Hellas',
+  greet: function() {
+    console.log('hello, my name is', this.name)
   },
 }
 
-arto.tervehdi() // tulostuu hello, my name is Arto Hellas
-
-const viiteTervehdykseen = arto.tervehdi
-viiteTervehdykseen() // tulostuu hello, my name is undefined
-```
-
-Kutsuttaessa metodia viitteen kautta, on metodi kadottanut tiedon siitä mikä oli alkuperäinen _this_. Toisin kuin melkein kaikissa muissa kielissä, Javascriptissa [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this):n arvo määrittyy sen mukaan _miten metodia on kutsuttu_. Kutsuttaessa metodia viitteen kautta, _this_:in arvoksi tulee ns. [globaali objekti](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) ja lopputulos ei ole yleensä ollenkaan se, mitä sovelluskehittäjä olettaa.
-
-This:in kadottaminen aiheuttaa Javascriptillä ohjelmoidessa monia potentiaalisia ongelmia. Eteen tulee erittäin usein tilanteita, missä Reactin/Noden (oikeammin ilmaistuna selaimen Javascript-moottorin) tulee kutsua joitain käyttäjän määrittelemien olioiden metodeja. Tällä kurssilla kuitenkin säästymme näiltä ongelmilta, sillä käytämme ainoastaan "thissitöntä" Javascriptia.
-
-Eräs thissin katoamiseen johtava tilanne tulee esim. jos pyydetään Artoa tervehtimään sekunnin kuluttua metodia [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) hyväksikäyttäen.
-
-```js
-const arto = {
-  nimi: 'Arto Hellas',
-  tervehdi: function() {
-    console.log('hello, my name is', this.nimi)
-  },
-}
-
-setTimeout(arto.tervehdi, 1000)
+setTimeout(arto.greet, 1000)  // highlight-line
 ```
 
 Javascriptissa this:in arvo siis määräytyy siitä miten metodia on kutsuttu. setTimeoutia käytettäessä metodia kutsuu Javascript-moottori ja this viittaa Timeout-olioon.
@@ -474,10 +470,10 @@ Javascriptissa this:in arvo siis määräytyy siitä miten metodia on kutsuttu. 
 On useita mekanismeja, joiden avulla alkuperäinen _this_ voidaan säilyttää, eräs näistä on metodin [bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) käyttö:
 
 ```js
-setTimeout(arto.tervehdi.bind(arto), 1000)
+setTimeout(arto.greet.bind(arto), 1000)
 ```
 
-Komento <em>arto.tervehdi.bind(arto)</em> luo uuden funktion, missä se on sitonut _this_:in tarkoittamaan Artoa riippumatta siitä missä ja miten metodia kutsutaan.
+Komento <em>arto.greet.bind(arto)</em> luo uuden funktion, missä se on sitonut _this_:in tarkoittamaan Artoa riippumatta siitä missä ja miten metodia kutsutaan.
 
 [Nuolifunktioiden](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) avulla on mahdollista ratkaista eräitä this:iin liittyviä ongelmia. Olioiden metodeina niitä ei kuitenkaan kannata käyttää, sillä silloin _this_ ei toimi ollenkaan. Palaamme nuolifunktioiden this:in käyttäytymiseen myöhemmin.
 
@@ -487,29 +483,29 @@ Jos haluat ymmärtää paremmin javascriptin _this_:in toimintaa, löytyy intern
 
 Kuten aiemmin mainittiin, Javascriptissä ei ole olemassa olio-ohjelmointikielten luokkamekanismia. Javascriptissa on kuitenkin ominaisuuksia, jotka mahdollistavat olio-ohjelmoinnin [luokkien](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) "simuloinnin". Emme mene nyt sen tarkemmin Javascriptin olioiden taustalla olevaan [prototyyppiperintämekanismiin](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain).
 
-Tutustumme kuitenkin pikaisesti ES6:n myötä Javascriptiin tulleeseen _luokkasyntaksiin_, joka helpottaa oleellisesti luokkien (tai luokan kaltaisten asioiden) määrittelyä Javascriptissa.
+Tutusttutaan nyt pikaisesti ES6:n myötä Javascriptiin tulleeseen <i>luokkasyntaksiin</i>, joka helpottaa oleellisesti luokkien (tai luokan kaltaisten asioiden) määrittelyä Javascriptissa.
 
-Seuraavassa on määritelty "luokka" Henkilö ja sille kaksi Henkilö-oliota:
+Seuraavassa on määritelty "luokka" Person ja sille kaksi Person-oliota:
 
 ```js
-class Henkilo {
-  constructor(nimi, ika) {
-    this.nimi = nimi
-    this.ika = ika
+class Person {
+  constructor(name, age) {
+    this.name = name
+    this.age = age
   }
-  tervehdi() {
-    console.log('hello, my name is', this.nimi)
+  greet() {
+    console.log('hello, my name is', this.name)
   }
 }
 
-const arto = new Henkilo('Arto Hellas', 35)
-arto.tervehdi()
+const arto = new Person('Arto Hellas', 35)
+arto.greet()
 
-const juhq = new Henkilo('Juha Tauriainen', 48)
-juhq.tervehdi()
+const juhq = new Person('Juha Tauriainen', 48)
+juhq.greet()
 ```
 
-Syntaksin osalta luokat ja niistä luodut oliot muistuttavat erittäin paljon esim. Javan olioita. Käyttäytymiseltäänkin ne ovat aika lähellä Javan olioita. Perimmiltään kyseessä on kuitenkin edelleen Javascriptin [prototyyppiperintään](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance) perustuvista olioista. Molempien olioiden todellinen tyyppi on _Object_ sillä Javascriptissä ei perimmiltään ole muita tyyppejä kuin [Boolean, Null, Undefined, Number, String, Symbol ja Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures)
+Syntaksin osalta luokat ja niistä luodut oliot muistuttavat erittäin paljon esim. Javan luokkia ja olioita. Käyttäytymiseltäänkin ne ovat aika lähellä Javan olioita. Perimmiltään kyseessä on kuitenkin edelleen Javascriptin [prototyyppiperintään](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance) perustuvista olioista. Molempien olioiden todellinen tyyppi on _Object_ sillä Javascriptissä ei perimmiltään ole muita tyyppejä kuin [Boolean, Null, Undefined, Number, String, Symbol ja Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures)
 
 Luokkasyntaksin tuominen Javascriptiin on osin kiistelty lisäys, ks. esim. [Not Awesome: ES6 Classes](https://github.com/joshburgess/not-awesome-es6-classes) tai [Is “Class” In ES6 The New “Bad” Part?](https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65)
 
@@ -521,7 +517,7 @@ Javascriptistä löytyy verkosta suuret määrät sekä hyvää että huonoa mat
 
 Mozillan sivuilta kannattaa lukea oikeastaan välittömästi [A re-introduction to JavaScript (JS tutorial)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript).
 
-Jos haluat tutustua todella syvällisesti Javascriptiin, löytyy internetistä ilmaiseksi mainio kirjasarja [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS)
+Jos haluat tutustua todella syvällisesti Javascriptiin, löytyy internetistä ilmaiseksi mainio kirjasarja [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS).
 
 [egghead.io](https://egghead.io):lla on tarjolla runsaasti laadukkaita screencasteja Javascriptista, Reactista ym. kiinnostavasta. Valitettavasti materiaali on osittain maksullista.
 
