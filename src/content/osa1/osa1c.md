@@ -389,7 +389,7 @@ const App = (props) => {
 
 Eli laitetaan buttonin <i>onClick</i>-attribuutin arvoksi aaltosulkeissa oleva viite koodissa määriteltyyn funktioon _handleClick_.
 
-Nyt jokainen napin _plus_ painallus saa aikaan sen että funktiota _handleClick_ kutsutaan, eli klikatessa konsoliin tulostuu _clicked_.
+Nyt jokainen napin <i>plus</i> painallus saa aikaan sen että funktiota _handleClick_ kutsutaan, eli klikatessa konsoliin tulostuu <i>clicked</i>.
 
 Tapahtumankäsittelijäfunktio voidaan määritellä myös suoraan onClick-määrittelyn yhteydessä:
 
@@ -400,7 +400,7 @@ const App = (props) => {
   return (
     <div>
       <div>{counter}</div>
-      <button onClick={() => console.log('klicked')}>
+      <button onClick={() => console.log('klicked')}> // highlight-line
         plus
       </button>
     </div>
@@ -416,7 +416,7 @@ Muuttamalla tapahtumankäsittelijä seuraavaan muotoon
 </button>
 ```
 
-saamme halutun toiminnallisuuden, eli tilan _counter_ arvo kasvaa yhdellä _ja_ komponentti renderöityy uudelleen.
+saamme halutun toiminnallisuuden, eli tilan _counter_ arvo kasvaa yhdellä <i>ja</i> komponentti renderöityy uudelleen.
 
 Lisätään sovellukseen myös nappi laskurin nollaamiseen:
 
@@ -430,9 +430,11 @@ const App = (props) => {
       <button onClick={() => setCounter(counter + 1)}>
         plus
       </button>
-      <button onClick={() => setCounter(0)}>
+      // highlight-start
+      <button onClick={() => setCounter(0)}> 
         zero
       </button>
+      // highlight-end
     </div>
   )
 }
@@ -446,16 +448,21 @@ Tapahtumankäsittelijöiden määrittely suoraan JSX-templatejen sisällä ei us
 const App = (props) => {
   const [ counter, setCounter ] = useState(0)
 
-  const increaseByOne = () => setCounter(counter + 1)
-  const setToZero = () => setCounter(0)
+// highlight-start
+  const increaseByOne = () =>
+    setCounter(counter + 1)
+  
+  const setToZero = () =>
+    setCounter(0)
+  // highlight-end
 
   return (
     <div>
       <div>{counter}</div>
-      <button onClick={increaseByOne}>
+      <button onClick={increaseByOne}> // highlight-line
         plus
       </button>
-      <button onClick={setToZero}>
+      <button onClick={setToZero}> // highlight-line
         zero
       </button>
     </div>
@@ -463,7 +470,7 @@ const App = (props) => {
 }
 ```
 
-### Tapahtumankäsittelijä funktio
+### Tapahtumankäsittelijä on funktio
 
 Metodit _increaseByOne_ ja _setToZero_ toimivat melkein samalla tavalla, ne asettavat uuden arvon laskurille. Tehdään koodiin yksittäinen funktio, joka sopii molempiin käyttötarkoituksiin:
 
@@ -471,15 +478,15 @@ Metodit _increaseByOne_ ja _setToZero_ toimivat melkein samalla tavalla, ne aset
 const App = (props) => {
   const [ counter, setCounter ] = useState(0)
 
-  const setToValue = (value) => setCounter(value)
+  const setToValue = (value) => setCounter(value) // highlight-line
 
   return (
     <div>
       <div>{counter}</div>
-      <button onClick={setToValue(counter + 1)}>
+      <button onClick={setToValue(counter + 1)}> // highlight-line
         plus
       </button>
-      <button onClick={setToValue(0)}>
+      <button onClick={setToValue(0)}> // highlight-line
         zero
       </button>
     </div>
@@ -492,13 +499,13 @@ Huomaamme kuitenkin että muutos hajottaa sovelluksemme täysin:
 
 ![](../images/1/5a.png)
 
-Mistä on kyse? Tapahtumankäsittelijäksi on tarkoitus määritellä viite _funktioon_. Kun koodissa on
+Mistä on kyse? Tapahtumankäsittelijäksi on tarkoitus määritellä <i>viite funktioon</i>. Kun koodissa on
 
 ```js
 <button onClick={setToValue(0)}>
 ```
 
-tapahtumankäsittelijäksi tulee määriteltyä _funktiokutsu_. Sekin on monissa tilanteissa ok, mutta ei nyt, nimittäin kun React srenderöi metodin, se suorittaa kutsun <em>setToValue(0)</em>. Kutsu aiheuttaa komponentin tilan päivittävän funktion _setCounter_ kutsumisen. Tämä taas aiheuttaa komponentin uudelleenrenderöitymisen. Ja sama toistuu uudelleen...
+tapahtumankäsittelijäksi tulee määriteltyä <i>funktiokutsu</i>. Sekin on monissa tilanteissa ok, mutta ei nyt, nimittäin kun React renderöi metodin, se suorittaa kutsun <em>setToValue(0)</em>. Kutsu aiheuttaa komponentin tilan päivittävän funktion _setCounter_ kutsumisen. Tämä taas aiheuttaa komponentin uudelleenrenderöitymisen. Ja sama toistuu uudelleen...
 
 Tilanteeseen on kaksi ratkaisua. Ratkaisuista yksinkertaisempi on muuttaa tapahtumankäsitteyä seuraavasti
 
@@ -511,10 +518,10 @@ const App = (props) => {
   return (
     <div>
       <div>{counter}</div>
-      <button onClick={() => setToValue(counter + 1)}>
+      <button onClick={() => setToValue(counter + 1)}> // highlight-line
         plus
       </button>
-      <button onClick={() => setToValue(0)}>
+      <button onClick={() => setToValue(0)}> // highlight-line
         zero
       </button>
     </div>
@@ -522,31 +529,35 @@ const App = (props) => {
 }
 ```
 
-eli tapahtumankäsittelijäki on määritelty _funktio_, joka kutsuu funktiota _setToValue_ sopivalla parametrilla:
+eli tapahtumankäsittelijäki on määritelty <i>funktio</i>, joka kutsuu funktiota _setToValue_ sopivalla parametrilla:
 
 ```js
 <button onClick={() => setToValue(counter + 1)}>
 ```
 
-Toinen vaihtoehto on käyttää yleistä Javascriptin ja yleisemminkin funktionaalisen ohjelmoinnin kikkaa, eli määritellä _funktio joka palauttaa funktion_:
+### Funktio joka palauttaa funktion
+
+Toinen vaihtoehto on käyttää yleistä Javascriptin ja yleisemminkin funktionaalisen ohjelmoinnin kikkaa, eli määritellä <i>funktio joka palauttaa funktion</i>:
 
 ```js
 const App = (props) => {
   const [ counter, setCounter ] = useState(0)
 
+// highlight-start
   const setToValue = (value) => {
     return () => {
       setCounter(value)
     }
   }
+// highlight-end  
 
   return (
     <div>
       <div>{counter}</div>
-      <button onClick={setToValue(counter + 1)}>
+      <button onClick={setToValue(counter + 1)}> // highlight-line
         plus
       </button>
-      <button onClick={setToValue(0)}>
+      <button onClick={setToValue(0)}> // highlight-line
         zero
       </button>
     </div>
@@ -559,7 +570,7 @@ Jos et ole aiemmin törmännyt tekniikkaan, siihen totutteluun voi mennä tovi.
 Olemme siis määritelleet tapahtumankäsittelijäfunktion _setToValue_ seuraavasti:
 
 ```js
-const setToValue = value => {
+const setToValue = (value) => {
   return () => {
     setCounter(value)
   }
@@ -592,20 +603,20 @@ Vastaavasti, kun laskurin tila on esim 41, tulee plus-napin tapahtumakuuntelijak
 }
 ```
 
-Tarkastellaan vielä hieman metodia _asetaArvoon_:
+Tarkastellaan vielä hieman funktiota _setToValue_:
 
 ```js
-const setToValue = value => {
+const setToValue = (value) => {
   return () => {
     setCounter(value)
   }
 }
 ```
 
-Koska metodi itse sisältää ainoastaan yhden komennon, eli _returnin_, joka palauttaa funktion, voidaan hyödyntää nuolifunktion tiiviimpää muotoa:
+Koska metodi itse sisältää ainoastaan yhden komennon, eli <i>returnin</i>, joka palauttaa funktion, voidaan hyödyntää nuolifunktion tiiviimpää muotoa:
 
 ```js
-const setToValue = value => () => {
+const setToValue = (value) => () => {
   setCounter(value)
 }
 ```
@@ -613,7 +624,7 @@ const setToValue = value => () => {
 Usein tälläisissä tilanteissa kaikki kirjoitetaan samalle riville, jolloin tuloksena on "kaksi nuolta sisältävä funktio":
 
 ```js
-const setToValue = value => () => setCounter(value)
+const setToValue = (value) => () => setCounter(value)
 ```
 
 Kaksinuolisen funktion voi ajatella funktiona, jota lopullisen tuloksen saadakseen täytyy kutsua kaksi kertaa.
@@ -626,11 +637,11 @@ Ensimmäisellä kutsulla "konfiguroidaan" varsinainen funktio, sijoittamalla osa
 
 Tässä näytetty tapa soveltaa funktioita palauttavia funktioita on oleellisesti sama asia mistä funktionaalisessa ohjelmoinnissa käytetään termiä [currying](http://www.datchley.name/currying-vs-partial-application/). Termi currying ei ole lähtöisin funktionaalisen ohjelmoinnin piiristä vaan sillä on juuret [syvällä matematiikassa](https://en.wikipedia.org/wiki/Currying).
 
-Jo muutamaan kertaan mainittu termi _funktionaalinen ohjelmointi_ ei ole välttämättä kaikille tässä vaiheessa tuttu. Asiaa avataan hiukan kurssin kuluessa, sillä React tukee ja osin edellyttää funktionaalisen tyylin käyttöä.
+Jo muutamaan kertaan mainittu termi <i>funktionaalinen ohjelmointi</i> ei ole välttämättä kaikille tässä vaiheessa tuttu. Asiaa avataan hiukan kurssin kuluessa, sillä React tukee ja osin edellyttää funktionaalisen tyylin käyttöä.
 
 **HUOM:** muutos, missä korvasimme metodit _increaseByOne_ ja _setToZero_ metodilla _setToValue_ ei välttämättä ole järkevä, sillä erikoistuneemmat metodit ovat paremmin nimettyjä. Teimme muutoksen oikeastaan ainoastaan demonstroidaksemme _currying_-tekniikan soveltamista.
 
-**HUOM2:** et todennäköisesti tarvitse tämän osan tehtävissä funktioita palauttavia funktioita, joten älä sekoita päätäsi asialla turhaan.
+**HUOM2:** et välttämättä tarvitse tämän osan, etkä kenties kurssin muissakaan tehtävissä funktioita palauttavia funktioita, joten älä sekoita päätäsi asialla turhaan.
 
 ### Tilan vieminen alikomponenttiin
 
@@ -638,9 +649,9 @@ Reactissa suositaan pieniä komponentteja, joita on mahdollista uusiokäyttää 
 
 Tehdään ensin näytöstä vastaava komponentti <i>Display</i>.
 
-Reactissa parhaana käytänteenä on sijoittaa tila [mahdollisimman ylös](https://reactjs.org/docs/lifting-state-up.html) komponenttihierarkiassa, mielellään sovelluksen juurikomponenttiin.
+Reactissa parhaana käytänteenä on sijoittaa tila [mahdollisimman ylös](https://reactjs.org/docs/lifting-state-up.html) komponenttihierarkiassa, mielellään sovelluksen juurikomponenttiin <i>App</i>.
 
-Jätetään sovelluksen tila, eli laskimen arvo komponenttiin <i>App</i> ja välitetään tila <i>props</i>:ien avulla komponentille <i>Display</i>:
+Jätetään sovelluksen tila, eli laskimen arvo komponenttiin <i>App</i> ja välitetään tila <i>propsien</i> avulla komponentille <i>Display</i>:
 
 ```js
 const Display = (props) => {
@@ -650,7 +661,7 @@ const Display = (props) => {
 }
 ```
 
-Voimme hyödyntää aiemmin mainittua [destrukturointia](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) myös metodien parametreissa. Eli koska olemme kiinnostuneita <i>props</i>:in kentästä _counter_, on edellinen mahdollista yksinkertaistaa seuraavaan muotoon:
+Voimme hyödyntää aiemmin mainittua [destrukturointia](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) myös metodien parametreissa. Eli koska olemme kiinnostuneita <i>propsin</i> kentästä _counter_, on edellinen mahdollista yksinkertaistaa seuraavaan muotoon:
 
 ```js
 const Display = ({ counter }) => {
@@ -670,16 +681,16 @@ Komponentin käyttö on suoraviivaista, riittää että sille välitetään lask
 
 ```js
 const App = (props) => {
-  const [ counter, setCounter ] = useState(0)
-  // ...
+  const [counter, setCounter] = useState(0)
+  const setToValue = (value) => setCounter(value)
 
   return (
     <div>
-      <Display counter={counter}/>
-      <button onClick={setToValue(counter + 1)}>
+      <Display counter={counter}/> // highlight-line
+      <button onClick={() => setToValue(counter + 1)}>
         plus
       </button>
-      <button onClick={setToValue(0)}>
+      <button onClick={() => setToValue(0)}>
         zero
       </button>
     </div>
@@ -689,7 +700,7 @@ const App = (props) => {
 
 Kaikki toimii edelleen. Kun nappeja painetaan ja <i>App</i> renderöityy uudelleen, renderöityvät myös kaikki sen alikomponentit, siis myös <i>Display</i> automaattisesti uudelleen.
 
-Tehdään seuraavaksi napeille tarkoitettu komponentti <i>button</i>. Napille on välitettävä propsien avulla tapahtumankäsittelijä sekä napin teksti:
+Tehdään seuraavaksi napeille tarkoitettu komponentti <i>Button</i>. Napille on välitettävä propsien avulla tapahtumankäsittelijä sekä napin teksti:
 
 ```js
 const Button = (props) => (
@@ -714,24 +725,22 @@ Komponentti <i>App</i> muuttuu nyt muotoon:
 ```js
 const App = (props) => {
   const [ counter, setCounter ] = useState(0)
+  const setToValue = (value) => setCounter(value)
 
-  const setToValue = (value) => {
-    return () => {
-      setCounter(value)
-    }
-  }
 
   return (
     <div>
       <Display counter={counter}/>
+      // highlight-start
       <Button
-        handleClick={setToValue(counter + 1)}
+        handleClick={() => setToValue(counter + 1)}
         text='plus'
       />
       <Button
-        handleClick={setToValue(0)}
+        handleClick={() => setToValue(0)}
         text='zero'
       />
+      // highlight-end
     </div>
   )
 }
