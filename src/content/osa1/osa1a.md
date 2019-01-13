@@ -330,7 +330,8 @@ Kannattaa pitää mielessä, että **React-komponenttien nimien tulee alkaa isol
 const footer = () => {
   return (
     <div>
-      greeting app created by <a href="https://github.com/mluukkai">mluukkai</a>
+      greeting app created by 
+      <a href="https://github.com/mluukkai">mluukkai</a>
     </div>
   )
 )
@@ -344,13 +345,13 @@ const App = () => {
     <div>
       <h1>Greetings</h1>
       <Hello name="Arto" age={26 + 10} />
-      <footer />
+      <footer /> // highlight-line
     </div>
   )
 )
 ```
 
-sivulle ei kuitenkaan ilmesty näkyviin Footer-komponentissa määriteltyä sisältöä, vaan React luo sivulle ainoastaan tyhjän _footer_-elementin. Jos muutat komponentin nimen alkamaan isolla kirjaimella, React luo sivulle <i>div</i>-elementin, joka määriteltiin Footer-komponentissa.
+sivulle ei kuitenkaan ilmesty näkyviin Footer-komponentissa määriteltyä sisältöä, vaan React luo sivulle ainoastaan tyhjän <i>footer</i>-elementin. Jos muutat komponentin nimen alkamaan isolla kirjaimella, React luo sivulle <i>div</i>-elementin, joka määriteltiin Footer-komponentissa.
 
 Kannattaa myös pitää mielessä, että React-komponentin sisällön tulee (yleensä) sisältää **yksi juurielementti**. Eli jos yrittäisimme määritellä komponentin <i>App</i> ilman uloimmaista <i>div</i>-elementtiä:
 
@@ -368,11 +369,15 @@ seurauksena on virheilmoitus:
 
 ![](../images/1/3a.png)
 
-Juurielementin käyttö ei ole ainoa toimiva vaihtoehto, myös _taulukollinen_ komponentteja on validi tapa:
+Juurielementin käyttö ei ole ainoa toimiva vaihtoehto, myös <i>taulukollinen</i> komponentteja on validi tapa:
 
 ```js
 const App = () => {
-  return [<h1>Greetings</h1>, <Hello name="Arto" age={26 + 10} />, <Footer />]
+  return [
+    <h1>Greetings</h1>,
+    <Hello name="Arto" age={26 + 10} />,
+    <Footer />
+  ]
 )
 ```
 
@@ -402,6 +407,14 @@ Nyt käännös menee läpi ja Reactin generoimaan DOM:iin ei tule ylimääräist
 
 <div class="tasks">
   <h3>Tehtäviä </h3>
+
+Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/courses/#fullstack2019).
+
+Jos palautat eri osien tehtäviä samaan repositorioon, käytä järkevää hakemistojen nimentää.
+
+Tehtävät palautetaan **yksi osa kerrallaan**. Kun olet palauttanut osan tehtävät, et voi enää palauttaa saman osan tekemättä jättämiäsi tehtäviä.
+
+Huomaa, että tässä osassa on muitakin tehtäviä kuin allaolevat, eli <i>älä tee palautusta</i> ennen kun olet tehnyt osan tehtävistä kaikki mitkä haluat palauttaa.
 
   <h4>1.1: jako komponenteiksi</h4>
 
