@@ -94,7 +94,7 @@ export default function PartIntroTemplate({ data }) {
         </Element>
       </Banner>
 
-      <PrevNext prev={part - 1} next={part + 1} />
+      <PrevNext part={part} />
 
       <Footer />
     </Layout>

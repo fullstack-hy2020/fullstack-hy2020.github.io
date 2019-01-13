@@ -209,7 +209,7 @@ export default class ContentTemplate extends Component {
 
           <EditLink part={part} letter={letter} />
 
-          <PrevNext prev={part - 1} next={part + 1} />
+          <PrevNext part={part} letter={letter} />
         </div>
 
         <Footer />
