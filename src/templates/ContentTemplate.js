@@ -198,11 +198,7 @@ export default class ContentTemplate extends Component {
                   {letter}
                 </p>
 
-                <SubHeader
-                  headingLevel="h1"
-                  text={navigation[part][letter]}
-                  style={{ fontSize: '3rem' }}
-                />
+                <SubHeader headingLevel="h1" text={navigation[part][letter]} />
               </Element>
             </Element>
 

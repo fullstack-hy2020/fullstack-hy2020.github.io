@@ -43,7 +43,7 @@ const IndexPage = () => (
         'mooc',
         'mooc.fi',
         'full stack',
-        'web-sovelluskehitys'
+        'web-sovelluskehitys',
       ]}
     />
 
@@ -99,7 +99,7 @@ const IndexPage = () => (
                 />
 
                 <Arrow
-                  className="col-10 spacing--after-small col-3--mobile arrow__container--with-link"
+                  className="col-10 col-3--mobile arrow__container--with-link"
                   bold
                   thickBorder
                   link="/about"
@@ -107,6 +107,8 @@ const IndexPage = () => (
                     { backgroundColor: colors['main'], text: 'Aloita kurssi' },
                   ]}
                 />
+
+                <div className="spacing--small" />
 
                 <BodyText
                   className="col-4 order-1--mobile col-8--mobile link"

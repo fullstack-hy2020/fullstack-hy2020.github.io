@@ -3,7 +3,7 @@
   "intro": "Ota haltuusi React, Redux, Node.js ja MongoDB! Kurssilla tutustutaan JavaScriptilla tapahtuvaan moderniin websovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST-rajapinnoissa.",
   "current": [
     "Kurssin ainoa luento pidetään maanantaina 14.1. klo 16-18 salissa B123",
-    "Ohjausta tehtäviin pajassa BK107 <ul><li>ajat selviävät maanantaina</li><ul>",
+    "Ohjausta tehtäviin pajassa BK107 <ul><li>ajat selviävät maanantaina</li></ul>",
     "Kurssiin liittyvää keskustelua Telegramissa, kanavalla <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>, tule mukaan! <ul><li>Huom: kaikki epäasialliset, halventavat ja jotain ihmisryhmää syrjivät kommentit kanavalla ovat kiellettyjä ja tälläisten kommenttien esittäjät poistetaan kanavalta.</li></ul>"
   ],
   "telegram": "Telegram on whatsappin/messengerin tyylinen keskustelufoorumisovellus, jota on mahdollista käyttää selaimella, mobiililaitteilla ja Windows/Linux/OSX-clienteillä.",
