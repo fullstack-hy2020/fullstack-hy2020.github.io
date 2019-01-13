@@ -8,7 +8,7 @@
     font-family: $font-heading;
 
     @include from($tablet) {
-      margin-left: 3rem;
+      margin-left: 1rem;
     }
   }
 
@@ -21,7 +21,7 @@
   h3,
   h4 {
     @include from($tablet) {
-      margin-left: 3rem;
+      margin-left: 1rem;
     }
     padding-bottom: 2rem;
   }
