@@ -31,6 +31,18 @@
     padding-bottom: 2rem;
   }
 
+  table {
+    @include from($tablet) {
+      margin-left: 1rem;
+    }
+  }
+
+  ul {
+    @include from($tablet) {
+      margin-left: 2.2rem;
+    }
+  }
+
   h2:not(:first-of-type) {
     margin-top: 2rem;
   }
