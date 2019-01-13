@@ -23,8 +23,12 @@ const App = (props) => {
     <div>
       <div>
         {left}
-        <button onClick={() => setLeft(left + 1)}>vasen</button>
-        <button onClick={() => setRight(right + 1)}>oikea</button>
+        <button onClick={() => setLeft(left + 1)}>
+          vasen
+        </button>
+        <button onClick={() => setRight(right + 1)}>
+          oikea
+        </button>
         {right}
       </div>
     </div>
@@ -32,9 +36,9 @@ const App = (props) => {
 }
 ```
 
-Komponentti saa käyttöönsä tilan alustuksen yhteydessä funktiot _setLeft_ ja _setRight_ joiden avulla se voi päivittää tilaa.
+Komponentti saa käyttöönsä tilan alustuksen yhteydessä funktiot _setLeft_ ja _setRight_ joiden avulla se voi päivittää tilan osia.
 
-Komponentin tila tai yksittäinen tilan pala voi olla minkä tahansa muotoinen. Voisimme toteuttaa saman toiminnallisuuden tallentamalla näppäimenpainallukset yhteen olioon
+Komponentin tila tai yksittäinen tilan pala voi olla minkä tahansa tyyppinen. Voisimme toteuttaa saman toiminnallisuuden tallentamalla nappien <i>vasen</i> ja <i>oikea</i> painallukset yhteen olioon
 
 ```js
 {
@@ -52,12 +56,18 @@ const App = (props) => {
   })
 
   const handleLeftClick = () => {
-    const newClicks = { left: clicks.left + 1, right: clicks.right }
+    const newClicks = { 
+      left: clicks.left + 1, 
+      right: clicks.right 
+    }
     setClicks(newClicks)
   }
 
   const handleRightClick = () => {
-    const newClicks = { left: clicks.left, right: clicks.right + 1 }
+    const newClicks = { 
+      left: clicks.left, 
+      right: clicks.right + 1 
+    }
     setClicks(newClicks)
   }
 
@@ -74,13 +84,16 @@ const App = (props) => {
 }
 ```
 
-Nyt komponentilla on siis ainoastaan yksi tila. Näppäinten painallusten yhteydessä on nyt huolehdittava koko tilan muutoksesta.
+Nyt komponentilla on siis ainoastaan yksi tila. Näppäinten painallusten yhteydessä on nyt huolehdittava <i>koko tilan</i> muutoksesta.
 
 Tapahtumankäsittelijä vaikuttaa hieman sotkuiselta. Kun vasenta nappia painetaan, suoritetaan seuraava funktio:
 
 ```js
 const handleLeftClick = () => {
-  const newClicks = { left: clicks.left + 1, right: clicks.right }
+  const newClicks = { 
+    left: clicks.left + 1, 
+    right: clicks.right 
+  }
   setClicks(newClicks)
 }
 ```
@@ -94,23 +107,29 @@ uudeksi tilaksi siis aseteaan seuraava olio
 }
 ```
 
-eli kentän _left_ arvo on sama kuin alkuperäisen tilan kentän _left + 1_ ja kentän _right_ arvo on sama kuin alkuperäisen tilan kenttä _right_.
+eli kentän <i>left</i> arvo on sama kuin alkuperäisen tilan kentän <i>left + 1</i> ja kentän <i>right</i> arvo on sama kuin alkuperäisen tilan kenttä <i>right</i>.
 
 Uuden tilan määrittelevän olion modostaminen onnistuu hieman tyylikkäämmin hyödyntämällä kesällä 2018 kieleen tuotua [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) -syntaksia:
 
 ```js
 const handleLeftClick = () => {
-  const newClicks = { ...clicks, left: clicks.left + 1 }
+  const newClicks = { 
+    ...clicks, 
+    left: clicks.left + 1 
+  }
   setClicks(newClicks)
 }
 
 const handleRightClick = () => {
-  const newClicks = { ...clicks, right: clicks.right + 1 }
+  const newClicks = { 
+    ...clicks, 
+    right: clicks.right + 1 
+  }
   setClicks(newClicks)
 }
 ```
 
-Merkintä vaikuttaa hieman erikoiselta. Käytännössä <code>{ ...clicks }</code> luo olion, jolla on kenttinään kopiot olion _clicks_ kenttien arvoista. Kun aaltosulkeisiin lisätään asioita, esim. <code>{ ...clicks, right: 1 }</code>, tulee uuden olion kenttä _right_ saamaan arvon 1.
+Merkintä vaikuttaa hieman erikoiselta. Käytännössä <em>{ ...clicks }</em> luo olion, jolla on kenttinään kopiot olion _clicks_ kenttien arvoista. Kun aaltosulkeisiin lisätään asioita, esim. <em>{ ...clicks, right: 1 }</em>, tulee uuden olion kenttä _right_ saamaan arvon 1.
 
 Esimerkissämme siis
 
@@ -123,7 +142,8 @@ luo oliosta _clicks_ kopion, missä kentän _right_ arvoa kasvatetaan yhdellä.
 Apumuuttujat ovat oikeastaan turhat, ja tapahtumankäsittelijät voidaan määritellä seuraavasti:
 
 ```js
-const handleLeftClick = () => setClicks({ ...clicks, left: clicks.left + 1 })
+const handleLeftClick = () =>
+  setClicks({ ...clicks, left: clicks.left + 1 })
 
 const handleRightClick = () =>
   setClicks({ ...clicks, right: clicks.right + 1 })
@@ -138,11 +158,11 @@ const handleLeftClick = () => {
 }
 ```
 
-Sovellus näyttää toimivan. Reactissa ei kuitenkaan ole saa muuttaa tilaa suoraan, sillä voi olla arvaamattomat seuraukset. Tilan muutos tulee aina tehdä asettamalla uudeksi tilaksi vanhan perusteella tehty kopio!
+Sovellus näyttää toimivan. Reactissa <i>ei kuitenkaan ole sallittua muuttaa tilaa suoraan</i>, sillä voi olla arvaamattomat seuraukset. Tilan muutos tulee aina tehdä asettamalla uudeksi tilaksi vanhan perusteella tehty kopio!
 
 Kaikien tilan pitäminen yhdessä oliossa on tämän sovelluksen kannalta huono ratkaisu, etuja siinä ei juuri ole, mutta sovellus monimutkaisuu merkittävästi. Onkin ehdottomasti parempi ratkaisu tallettaa nappien klikkaukset erillisiin tilan paloihin.
 
-On kuitenkin tilanteita, joissa jokin osa tilaa kannattaa pitää monimutkaisemman tietorakenteen sisällä [Reactin dokumentaatiossa](https://reactjs.org/docs/hooks-faq.html#should-i-use-one-or-many-state-variables) on hieman ohjeistusta aiheeseen liityen.
+On kuitenkin tilanteita, joissa jokin osa tilaa kannattaa pitää monimutkaisemman tietorakenteen sisällä. [Reactin dokumentaatiossa](https://reactjs.org/docs/hooks-faq.html#should-i-use-one-or-many-state-variables) on hieman ohjeistusta aiheeseen liityen.
 
 ### Taulukon käsittelyä
 
@@ -152,17 +172,21 @@ Tehdään sovellukseen vielä laajennus, lisätään sovelluken tilaan taulukko 
 const App = (props) => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
-  const [allClicks, setAll] = useState([])
+  const [allClicks, setAll] = useState([]) // highlight-line
 
+// highlight-start
   const handleLeftClick = () => {
     setAll(allClicks.concat('L'))
     setLeft(left + 1)
   }
+// highlight-end  
 
+// highlight-start
   const handleRightClick = () => {
     setAll(allClicks.concat('R'))
     setRight(right + 1)
   }
+// highlight-end  
 
   return (
     <div>
@@ -171,20 +195,20 @@ const App = (props) => {
         <button onClick={handleLeftClick}>vasen</button>
         <button onClick={handleRightClick}>oikea</button>
         {right}
-        <p>{allClicks.join(' ')}</p>
+        <p>{allClicks.join(' ')}</p> // highlight-line
       </div>
     </div>
   )
 }
 ```
 
-Kaikki klikkaukset siis talletetaan omaan tilan palaansa _allClicks_ joka alustetaan tyhjäksi taulukoksi
+Kaikki klikkaukset siis talletetaan omaan tilan osaansa _allClicks_, joka alustetaan tyhjäksi taulukoksi
 
 ```js
 const [allClicks, setAll] = useState([])
 ```
 
-Kun esim. nappia _vasen_ painetaan, lisätään tilan taulukkoon _kaikki_ kirjain _L_:
+Kun esim. nappia <i>vasen</i> painetaan, lisätään tilan taulukkoon _allClicks_ kirjain <i>L</i>:
 
 ```js
 const handleLeftClick = () => {
@@ -193,7 +217,7 @@ const handleLeftClick = () => {
 }
 ```
 
-Tilan osa _allClicks_ saa nyt arvokseen entisen taulukon, mihin on liitetty _L_ metodilla [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka toimii siten, että se ei muuta olemassaolevaa taulukkoa vaan luo _uuden taulukon_, mihin uusi alkio on lisätty.
+Tilan osa _allClicks_ saa nyt arvokseen taulukon, missä on entisen taulukon alkiot ja <i>L</i>. Uuden alkion liittäminen on tehty metodilla [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka toimii siten, että se ei muuta olemassaolevaa taulukkoa vaan luo <i>uuden taulukon</i>, mihin uusi alkio on lisätty.
 
 Kuten jo aiemmin mainittiin, Javascriptissa on myös mahdollista lisätä taulukkoon metodilla [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) ja sovellus näyttäisi tässä tilanteessa toimivan myös jos lisäys hoidettaisiin siten että _allClicks_-tilaa muuteaan pushaamalla siihen alkio ja sitten päivitetään tila:
 
@@ -205,7 +229,7 @@ const handleLeftClick = () => {
 }
 ```
 
-Älä kuitenkaan tee näin. Kuten jo mainitsimme, React-komponentin tilaa, eli esimerkiksi muuttujaa _allClicks_ ei saa muuttaa, vaikka se näyttääkin toimivan joissaikin tilanteissa, voi seurauksena olla hankalasti havaittavia ongelmia.
+Älä kuitenkaan tee näin. Kuten jo mainitsimme, React-komponentin tilaa, eli esimerkiksi muuttujaa _allClicks_ ei saa muuttaa. Vaikka tilan muuttaminen näyttääkin toimivan joissaikin tilanteissa, voi seurauksena olla hankalasti havaittavia ongelmia.
 
 Katsotaan vielä tarkemmin, miten kaikkien painallusten historia renderöidään ruudulle:
 
@@ -220,32 +244,32 @@ const App = (props) => {
         <button onClick={handleLeftClick}>vasen</button>
         <button onClick={handleRightClick}>oikea</button>
         {right}
-        <p>{allClicks.join(' ')}</p>
+        <p>{allClicks.join(' ')}</p> // highlight-line
       </div>
     </div>
   )
 }
 ```
 
-Taulukolle _allClicks_ kutsutaan metodia [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join), joka muodostaa taulukosta merkkijono, joka sisältää taulukon alkiot erotettuina välilyönnillä.
+Taulukolle _allClicks_ kutsutaan metodia [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join), joka muodostaa taulukosta merkkijono, joka sisältää taulukon alkiot erotettuina parametrina olevalla merkillä, eli välilyönnillä.
 
 ### Ehdollinen renderöinti
 
-Muutetaan sovellusta siten, että näppäilyhistorian renderöinnistä vastaa komponentti _History_:
+Muutetaan sovellusta siten, että näppäilyhistorian renderöinnistä vastaa komponentti <i>History</i>:
 
 ```js
 const History = (props) => {
   if (props.allClicks.length === 0) {
     return (
       <div>
-        <em>sovellusta käytetään nappeja painelemalla</em>
+        sovellusta käytetään nappeja painelemalla<
       </div>
     )
   }
 
   return (
     <div>
-        näppäilyhistoria: {props.allClicks.join(' ')}
+      näppäilyhistoria: {props.allClicks.join(' ')}
     </div>
   )
 }
@@ -260,26 +284,28 @@ const App = (props) => {
         <button onClick={handleLeftClick}>vasen</button>
         <button onClick={handleRightClick}>oikea</button>
         {right}
-        <History allClicks={allClicks} />
+        <History allClicks={allClicks} /> // highlight-line
       </div>
     </div>
   )
 }
 ```
 
-Nyt komponentin toiminta riippuu siitä, onko näppäimiä jo painettu. Jos ei, eli taulukko <code>allClicks</code> on tyhjä, renderöi komponentti "käyttöohjeen" sisältävän divin.
+Nyt komponentin toiminta riippuu siitä, onko näppäimiä jo painettu. Jos ei, eli taulukko <em>allClicks</em> on tyhjä, renderöi komponentti "käyttöohjeen" sisältävän divin.
 
-```html
-<div><em>sovellusta käytetään nappeja painelemalla</em></div>
+```js
+<div>sovellusta käytetään nappeja painelemalla</div>
 ```
 
 ja muussa tapauksessa näppäilyhistorian:
 
-```html
-<div>näppäilyhistoria: {this.state.kaikki.join(' ')}</div>
+```js
+<div>
+  näppäilyhistoria: {this.state.kaikki.join(' ')}
+</div>
 ```
 
-Komponentin _History_ ulkoasun muodostamat React-elementit siis ovat erilaisia riippuen sovelluksen tilasta, eli komponentissa on _ehdollista renderöintiä_.
+Komponentin <i>History</i> ulkoasun muodostamat React-elementit siis ovat erilaisia riippuen sovelluksen tilasta, eli komponentissa on <i>ehdollista renderöintiä</i>.
 
 Reactissa on monia muitakin tapoja [ehdolliseen renderöintiin](https://reactjs.org/docs/conditional-rendering.html). Katsotaan niitä tarkemmin [seuraavassa osassa](/osa2).
 
@@ -290,7 +316,7 @@ const History = (props) => {
   if (props.allClicks.length === 0) {
     return (
       <div>
-        <em>sovellusta käytetään nappeja painelemalla</em>
+        sovellusta käytetään nappeja painelemalla
       </div>
     )
   }
@@ -302,11 +328,13 @@ const History = (props) => {
   )
 }
 
+// highlight-start
 const Button = ({ handleClick, text }) => (
   <button onClick={handleClick}>
     {text}
   </button>
 )
+// highlight-end
 
 const App = (props) => {
   const [left, setLeft] = useState(0)
@@ -327,8 +355,10 @@ const App = (props) => {
     <div>
       <div>
         {left}
+        // highlight-start
         <Button handleClick={handleLeftClick} text='vasen' />
         <Button handleClick={handleLeftClick} text='oikea' />
+        // highlight-end
         {right}
         <History allClicks={allClicks} />
       </div>
@@ -339,9 +369,9 @@ const App = (props) => {
 
 ### Vanha React
 
-Tällä kurssilla käyttämämme tapa React-komponenttien tilan määrittelyyn, eli [state hook](https://reactjs.org/docs/hooks-state.html) on siis uutta Reactia ja käytettävissä tällä hetkellä ainoastaan versiossa [0.16.17.0-alpha.2](https://www.npmjs.com/package/react/v/16.7.0-alpha.2). Ennen hookeja Javascript-funktioina määriteltyihin React-komponentteihin ei ollut mahdollista saada tilaa ollenkaan, tilaa edellyttävät komponentit oli pakko määritellä [Class](https://reactjs.org/docs/react-component.html)-komponentteina Javascriptin luokkasyntaksia hyödyntäen.
+Tällä kurssilla käyttämämme tapa React-komponenttien tilan määrittelyyn, eli [state hook](https://reactjs.org/docs/hooks-state.html) on siis uutta Reactia ja käytettävissä tällä hetkellä ainoastaan versiossa [0.16.8.0-alpha.0](https://www.npmjs.com/package/react/v/16.8.0-alpha.0). Ennen hookeja Javascript-funktioina määriteltyihin React-komponentteihin ei ollut mahdollista saada tilaa ollenkaan, tilaa edellyttävät komponentit oli pakko määritellä [Class](https://reactjs.org/docs/react-component.html)-komponentteina Javascriptin luokkasyntaksia hyödyntäen.
 
-Olemme tällä kurssilla tehneet hieman radikaalinkin ratkaisun käyttää pelkästääm hookeja ja näin ollen opetella heti alusta asti ohjelmoimaan "huomisen" Reactia. Luokkasyntaksin hallitseminen on kuitenkin sikäli tärkeää, että vaikka funktiona määriteltävät komponentit ovat Reactin tulevaisuus, on maailmassa miljardeja rivejä vanhaa Reactia jota kenties sinäkin joudut jonain päivänä ylläpitämään. Dokumentaation ja internetistä löytyvien esimerkkien suhteen tilanne on sama, törmäät class-komponentteihin välittömästi.
+Olemme tällä kurssilla tehneet hieman radikaalinkin ratkaisun käyttää pelkästään hookeja ja näin ollen opetella heti alusta asti ohjelmoimaan "huomisen" Reactia. Luokkasyntaksin hallitseminen on kuitenkin sikäli tärkeää, että vaikka funktiona määriteltävät komponentit ovat Reactin tulevaisuus, on maailmassa miljardeja rivejä vanhaa Reactia, jota kenties sinäkin joudut jonain päivänä ylläpitämään. Dokumentaation ja internetistä löytyvien esimerkkien suhteen tilanne on sama, törmäät class-komponentteihin välittömästi.
 
 Tutustummekin riittävällä tasolla class-komponentteihin hieman myöhemmin kurssilla.
 
@@ -353,13 +383,11 @@ Onneksi React on debuggauksen suhteen jopa harvinaisen kehittäjäystävällinen
 
 Muistutetaan vielä tärkeimmästä web-sovelluskehitykseen liittyvästä asiasta:
 
-<div class="important">
-  <h4>Web-sovelluskehityksen sääntö numero yksi</h4>
-  <div>Pidä selaimen developer-konsoli koko ajan auki.</div>
-  <br />
-  <div>Välilehdistä tulee olla auki nimenomaan <em>Console</em> jollei ole erityistä syytä käyttää jotain muuta välilehteä.
-  </div>
-</div>
+<h4>Web-sovelluskehityksen sääntö numero yksi</h4>
+
+>  **Pidä selaimen developer-konsoli koko ajan auki.**
+>
+> Välilehdistä tulee olla auki nimenomaan <i>Console</i> jollei ole erityistä syytä käyttää jotain muuta välilehteä.
 
 Pidä myös koodi ja web-sivu **koko ajan** molemmat yhtä aikaa näkyvillä.
 
@@ -367,7 +395,7 @@ Jos ja kun koodi ei käänny, eli selaimessa alkaa näkyä punaista
 
 ![](../images/1/6a.png)
 
-älä kirjota enää lisää koodia vaan selvitä ongelma **välittömästi**. Koodauksen historia ei tunne tilannetta, missä kääntymätön koodi alkaisi ihmeenomaisesti toimimaan kirjoittamalla suurta määrää lisää koodia, en usko että sellaista ihmettä nähdään tälläkään kurssilla.
+älä kirjota enää lisää koodia vaan selvitä ongelma **välittömästi**. Koodauksen historia ei tunne tilannetta, missä kääntymätön koodi alkaisi ihmeenomaisesti toimimaan kirjoittamalla suurta määrää lisää koodia, enkä usko että sellaista ihmettä nähdään tälläkään kurssilla.
 
 Vanha kunnon printtaukseen perustuva debuggaus kannattaa aina. Eli jos esim. komponentissa
 
@@ -382,8 +410,8 @@ const Button = ({ handleClick, text }) => (
 olisi jotain ongelmia, kannattaa komponentista alkaa printtailla konsoliin. Pystyäksemme printtaamaan, tulee funktio muuttaa pitempään muotoon ja propsit kannattaa kenties vastaanottaa ilman destrukturointia:
 
 ```js
-const Button = (props) => {
-  console.log(props)
+const Button = (props) => { 
+  console.log(props) // highlight-line
   const { handleClick, text } = props
   return (
     <button onClick={handleClick}>
@@ -415,21 +443,21 @@ propsin arvo on [Object object]
 
 kun taas pilkulla tulostettavat asiat erotellessa saat developer-konsoliin olion, jonka sisältöä on mahdollista tarkastella.
 
-Koodin suorituksen voi pysäyttää chromen developer konsolin debuggeriin kirjoittamalla mihin tahansa kohtaa koodia komennon [debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger).
+Konsoliin tulostus ei ole suinkaan ainoa keino debuggaamiseen. Koodin suorituksen voi pysäyttää Chromen developer konsolin <i>debuggeriin</i> kirjoittamalla mihin tahansa kohtaa koodia komennon [debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger).
 
-Koodi pysähtyy kun suoritus etenee sellaiseen pisteeseen, että komento _debugger_ suoritetaan:
+Koodi pysähtyy kun suoritus etenee sellaiseen pisteeseen, missä komento _debugger_ suoritetaan:
 
 ![](../images/1/7a.png)
 
-Menemällä välilehdelle _Console_ on helppo tutkia muuttujien tilaa:
+Menemällä välilehdelle <i>Console</i> on helppo tutkia muuttujien tilaa:
 
 ![](../images/1/8a.png)
 
 Kun bugi selviää, voi komennon _debugger_ poistaa ja uudelleenladata sivun.
 
-Debuggerissa on mahdollista suorittaa koodia tarvittaessa rivi riviltä _Source_ välilehden oikealta laidalta.
+Debuggerissa on mahdollista suorittaa koodia tarvittaessa rivi riviltä <i>Source</i> välilehden oikealta laidalta.
 
-Debuggeriin pääsee myös ilman komentoa _debugger_ lisäämällä _Source_-välilehdellä sopiviin kohtiin koodia _breakpointeja_. Komponentin muuttujien arvojen tarkkailu on mahdollista _Scope_-osassa:
+Debuggeriin pääsee myös ilman komentoa _debugger_, lisäämällä <i>Source</i>-välilehdellä sopiviin kohtiin koodia <i>breakpointeja</i>. Komponentin muuttujien arvojen tarkkailu on mahdollista _Scope_-osassa:
 
 ![](../images/1/9a.png)
 
@@ -443,7 +471,7 @@ React developer tools ei osaa toistaiseksi näyttää hookeilla muodostettua til
 
 ![](../images/1/11a.png)
 
-Komponentin tila määriteltiin seuraavasti:
+Komponentin tila on määritelty seuraavasti:
 
 ```js
 const [left, setLeft] = useState(0)
@@ -451,13 +479,13 @@ const [right, setRight] = useState(0)
 const [allClicks, setAll] = useState([])
 ```
 
-Konsolin ylimpänä oleva _baseState_ kertoo ensimmäisen _useState_-kutsun määrittelevän tilan, eli muuttujan _left_ arvon, seuraava _baseState_ kertoo muuttujan _right_ arvon ja taulukon _allClicks_ arvo on alimpana.
+Konsolin ylimpänä oleva <i>baseState</i> kertoo ensimmäisen _useState_-kutsun määrittelevän tilan, eli muuttujan _left_ arvon, seuraava <i>baseState</i> kertoo muuttujan _right_ arvon ja taulukon _allClicks_ arvo on alimpana.
 
 ### Hookien säännöt
 
 Jotta hookeilla muodostettu sovelluksen tila toimisi oikein, on hookeja käytettävä tiettyjä [rajoituksia](https://reactjs.org/docs/hooks-rules.html) noudattaen.
 
-Funktiota _useState_ (eikä seuraavassa osassa esiteltävää funktiota _useEffect_) saa kutsua loopissa, ehtolausekkeiden sisältä tai muista kun komponentin määrittelevästä funktioista. Tämä takaa sen, että hookeja kutsutaan aina samassa järjestyksessä, jos näin ei ole, sovellus toimii miten sattuu.
+Funktiota _useState_ (eikä seuraavassa osassa esiteltävää funktiota _useEffect_) <i>ei saa kutsua</i> loopissa, ehtolausekkeiden sisältä tai muista kun komponentin määrittelevästä funktioista. Tämä takaa sen, että hookeja kutsutaan aina samassa järjestyksessä, jos näin ei ole, sovellus toimii miten sattuu.
 
 Hookeja siis kuuluu kutsua ainoastaan React-komponentin määrittelevän funktion rungosta:
 
@@ -508,7 +536,10 @@ const App = (props) => {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(
+  <App />, 
+  document.getElementById('root')
+)
 ```
 
 Haluamme, että napin avulla tilan talettava muuttuja _value_ saadaan nollattua.
