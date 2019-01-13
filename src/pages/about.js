@@ -14,8 +14,19 @@ import LandingImage from '../images/landing.svg';
 
 const About = () => (
   <Layout>
-    <SEO title="Home" keywords={['gatsby', 'application', 'react']} />
-
+    <SEO
+      title="ABOUT"
+      keywords={[
+        'fullstack',
+        'course',
+        'helsingin yliopisto',
+        'tietojenkäsittelytieteen osasto',
+        'mooc',
+        'mooc.fi',
+        'full stack',
+        'web-sovelluskehitys'
+      ]}
+    />
     <StaticQuery
       query={graphql`
         query aboutQuery {

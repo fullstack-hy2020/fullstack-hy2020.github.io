@@ -35,7 +35,16 @@ const IndexPage = () => (
   <Layout>
     <SEO
       title="Home"
-      keywords={['fullstack', 'course', 'helsingin yliopisto']}
+      keywords={[
+        'fullstack',
+        'course',
+        'helsingin yliopisto',
+        'tietojenkäsittelytieteen osasto',
+        'mooc',
+        'mooc.fi',
+        'full stack',
+        'web-sovelluskehitys'
+      ]}
     />
 
     <StaticQuery

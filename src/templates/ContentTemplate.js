@@ -153,7 +153,7 @@ export default class ContentTemplate extends Component {
                   {
                     backgroundColor: colorCode,
                     text: 'Fullstack',
-                    link: '/about',
+                    link: '/#course-contents',
                   },
                   {
                     backgroundColor: colorCode,

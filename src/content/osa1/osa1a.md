@@ -8,9 +8,9 @@ letter: a
 
 Alamme nyt tutustua kurssin ehkä tärkeimpään teemaan, [React](https://reactjs.org/)-kirjastoon. Tehdään heti yksinkertainen React-sovellus ja tutustutaan samalla Reactin peruskäsitteistöön.
 
-Ehdottomasti helpoin tapa päästä alkuun on [create-react-app](https://github.com/facebookincubator/create-react-app)-nimisen työkalun käyttö. _create-react-app_ on mahdollista asentaa omalle koneelle, mutta asennukseen ei ole tarvetta jos Noden mukana asentunut _npm_-työkalu on versioltaan vähintään _5.3_. Tällöin npm:n mukana asentuu komento _npx_, joka mahdollistaa create-react-app:in käytön asentamatta sitä erikseen. Npm:n version saa selville komennolla _npm -v_.
+Ehdottomasti helpoin tapa päästä alkuun on [create-react-app](https://github.com/facebookincubator/create-react-app)-nimisen työkalun käyttö. <i>create-react-app</i> on mahdollista asentaa omalle koneelle, mutta asennukseen ei ole tarvetta jos Noden mukana asentunut <i>npm</i>-työkalu on versioltaan vähintään <i>5.3</i>. Tällöin npm:n mukana asentuu komento </i>npx</i>, joka mahdollistaa create-react-app:in käytön asentamatta sitä erikseen. Npm:n version saa selville komennolla <code>npm -v</code>.
 
-Luodaan sovellus nimeltään _osa1_ ja mennään sovelluksen sisältämään hakemistoon:
+Luodaan sovellus nimeltään <i>osa1</i> ja mennään sovelluksen sisältämään hakemistoon:
 
 ```bash
 $ npx create-react-app osa1
@@ -18,16 +18,16 @@ $ cd osa1
 $ npm start
 ```
 
-Kaikki tässä (ja jatkossa) annettavat merkillä $alkavat komennot on kirjoitettu terminaaliin eli komentoriville. Merkkiä$ tule kirjoittaa, sillä se edustaa komentokehoitetta.
+Kaikki tässä (ja jatkossa) annettavat merkillä <code>$</code> alkavat komennot on kirjoitettu terminaaliin eli komentoriville. Merkkiä <code>$</code> ei tule kirjoittaa, sillä se edustaa komentokehoitetta.
 
-React on koko ajan aktiivisen kehityksen alla. Tämän vuoden ensimmäisen neljänneksen aikana Reactiin on tulossa erittäin merkittävä lisäys [hookit](https://reactjs.org/docs/hooks-intro.html) jotka tulevat vaikuttamaan merkittävästi siihen miten Reactia tullaan tulevaisuudessa käyttämään. Koska haluamme elää kehityksen eturintamassa käytämme kurssilla hookeja alusta asti.
+React on koko ajan aktiivisen kehityksen alla. Tämän vuoden ensimmäisen neljänneksen aikana Reactiin on tulossa erittäin merkittävä lisäys: [hookit](https://reactjs.org/docs/hooks-intro.html). Tämä täysin uusi ominaisuus tulee vaikuttamaan merkittävästi siihen, miten Reactia tullaan tulevaisuudessa käyttämään. Koska haluamme elää kehityksen eturintamassa käytämme kurssilla hookeja alusta asti.
 
-Hookit eivät ole vielä Reactin uusimmassa virallisessa julkaisussa 0.16.7, mutta ne löytyvät hieman [erikoisesti numeroidusta](https://reactjs.org/blog/2018/12/19/react-v-16-7.html) julkaisusta 0.16.7-alpha.2
+Hookit eivät ole vielä Reactin uusimmassa virallisessa julkaisussa 0.16.7, mutta ne löytyvät julkaisusta [0.16.8-alpha.0](https://www.npmjs.com/package/react/v/16.8.0-alpha.0)
 
 Saamme hookit käyttöön antamalla seuraavan komenon sovelluksen sisältävässä hakemistossa:
 
 <pre>
-npm install -s react@16.7.0-alpha.2 react-dom@16.7.0-alpha.2
+npm install -s react@16.8.0-alpha.0 react-dom@16.8.0-alpha.0
 </pre>
 
 Joudumme siis ainakin alkuvuoden ajan antamaan aina edellisen komennon kun aloitamme uuden React-projektin.
@@ -44,7 +44,7 @@ Chromen pitäisi aueta automaattisesti. Avaa konsoli **välittömästi**. Avaa m
 
 ![](../images/1/1a.png)
 
-Sovelluksen koodi on hakemistossa _src_. Yksinkertaistetaan valmiina olevaa koodia siten, että tiedoston _index.js_ sisällöksi tulee:
+Sovelluksen koodi on hakemistossa <i>src</i>. Yksinkertaistetaan valmiina olevaa koodia siten, että tiedoston <i>index.js</i> sisällöksi tulee:
 
 ```js
 import React from 'react'
@@ -59,19 +59,19 @@ const App = () => (
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-Tiedostot _App.js_, _App.css_, _App.test.js_, _logo.svg_ ja _registerServiceWorker.js_ voi poistaa sillä niitä emme sovelluksessamme nyt tarvitse.
+Tiedostot <i>App.js</i>, <i>App.css</i>, <i>App.test.js</i>, <i>logo.svg</i> ja <i>registerServiceWorker.js</i> voi poistaa sillä niitä emme sovelluksessamme nyt tarvitse.
 
 ### Komponentti
 
-Tiedosto _index.js_ määrittelee nyt React-[komponentin](https://reactjs.org/docs/components-and-props.html) nimeltään _App_ ja viimeisen rivin komento
+Tiedosto <i>index.js</i> määrittelee nyt React-[komponentin](https://reactjs.org/docs/components-and-props.html) nimeltään <i>App</i> ja viimeisen rivin komento
 
 ```js
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-renderöi komponentin sisällön tiedoston _public/index.html_ määrittelemään _div_-elementtiin, jonka _id:n_ arvona on 'root'
+renderöi komponentin sisällön tiedoston <i>public/index.html</i> määrittelemään <i>div</i>-elementtiin, jonka <i>id:n</i> arvona on 'root'.
 
-Tiedosto _public/index.html_ on oleellisesti ottaen tyhjä, voit kokeilla lisätä sinne HTML:ää. Reactilla ohjelmoitaessa yleensä kuitenkin kaikki renderöitävä sisältö määritellään Reactin komponenttien avulla.
+Tiedosto <i>public/index.html</i> on oleellisesti ottaen tyhjä, voit kokeilla lisätä sinne HTML:ää. Reactilla ohjelmoitaessa yleensä kuitenkin kaikki renderöitävä sisältö määritellään Reactin komponenttien avulla.
 
 Tarkastellaan vielä tarkemmin komponentin määrittelevää koodia:
 
@@ -83,7 +83,7 @@ const App = () => (
 )
 ```
 
-Kuten arvata saattaa, komponentti renderöityy _div_-tagina, jonka sisällä on _p_-tagin sisällä oleva teksti _Hello world_.
+Kuten arvata saattaa, komponentti renderöityy <i>div</i>-tagina, jonka sisällä on <i>p</i>-tagin sisällä oleva teksti <i>Hello world</i>.
 
 Teknisesti ottaen komponentti on määritelty Javascript-funktiona. Seuraava siis on funktio (joka ei saa yhtään parametria):
 
@@ -95,7 +95,7 @@ Teknisesti ottaen komponentti on määritelty Javascript-funktiona. Seuraava sii
 )
 ```
 
-joka sijoitetaan vakioarvoiseen muuttujaan _App_
+joka sijoitetaan vakioarvoiseen muuttujaan <i>App</i>
 
 ```js
 const App = ...
@@ -170,8 +170,12 @@ const App = () => {
   return React.createElement(
     'div',
     null,
-    React.createElement('p', null, 'Hello world, it is ', now.toString()),
-    React.createElement('p', null, a, ' plus ', b, ' is ', a + b)
+    React.createElement(
+      'p', null, 'Hello world, it is ', now.toString()
+    ),
+    React.createElement(
+      'p', null, a, ' plus ', b, ' is ', a + b
+    )
   )
 )
 
@@ -187,10 +191,10 @@ Reactia olisi myös mahdollista kirjoittaa "suoraan Javascriptinä" käyttämät
 
 Käytännössä JSX on melkein kuin HTML:ää sillä erotuksella, että mukaan voi upottaa helposti dynaamista sisältöä kirjoittamalla sopivaa Javascriptiä aaltosulkeiden sisälle. Idealtaan JSX on melko lähellä monia palvelimella käytettäviä templating-kieliä kuten Java Springin yhteydessä käytettävää thymeleafia.
 
-JSX on "XML:n kaltainen", eli jokainen tagi tulee sulkea. Esimerkiksi rivinvaihto on tyhjä elementti, joka kirjoitetaan HTML:ssä tyypillisesti
+JSX on "XML:n kaltainen", eli jokainen tagi tulee sulkea. Esimerkiksi rivinvaihto on tyhjä elementti, joka voidaan kirjottaa HTML:ssä seuraavasti
 
 ```html
-<br />
+<br>
 ```
 
 mutta JSX:ää kirjoittaessa tagi on pakko sulkea:
@@ -201,9 +205,10 @@ mutta JSX:ää kirjoittaessa tagi on pakko sulkea:
 
 ### Monta komponenttia
 
-Muutetaan sovellusta seuraavasti (yläreunan importit jätetään _esimerkeistä_ nyt ja jatkossa pois, niiden on kuitenkin oltava koodissa jotta ohjelma toimisi):
+Muutetaan sovellusta seuraavasti (yläreunan importit jätetään <i>esimerkeistä</i> nyt ja jatkossa pois, niiden on kuitenkin oltava koodissa jotta ohjelma toimisi):
 
 ```js
+// highlight-start
 const Hello = () => {
   return (
     <div>
@@ -211,12 +216,13 @@ const Hello = () => {
     </div>
   )
 )
+// highlight-end
 
 const App = () => {
   return (
     <div>
       <h1>Greetings</h1>
-      <Hello />
+      <Hello /> // highlight-line
     </div>
   )
 )
@@ -224,15 +230,15 @@ const App = () => {
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-Olemme määritelleet uuden komponentin _Hello_, jota käytetään komponentista _App_. Komponenttia voidaan luonnollisesti käyttää monta kertaa:
+Olemme määritelleet uuden komponentin <i>Hello</i>, jota käytetään komponentista <i>App</i>. Komponenttia voidaan luonnollisesti käyttää monta kertaa:
 
 ```js
 const App = () => {
   return (
     <div>
       <h1>Greetings</h1>
-      // highlight-start
       <Hello />
+      // highlight-start
       <Hello />
       <Hello />
       // highlight-end
@@ -243,23 +249,25 @@ const App = () => {
 
 Komponenttien tekeminen Reactissa on helppoa ja komponentteja yhdistelemällä monimutkaisempikin sovellus on mahdollista pitää kohtuullisesti ylläpidettävänä. Reactissa filosofiana onkin koostaa sovellus useista, pieneen asiaan keskittyvistä uudelleenkäytettävistä komponenteista.
 
+Vahva konventio on myös se, että sovelluksen ylimpänä oleva <i>juurikomponentti</i> on nimeltään <i>App</i>. Tosin kuten [osassa 6](/osa6) tulemme näkemän on tilanteita, joissa komponentti <i>App</i> ei ole suoraan juuressa, vaan se kääritään sopivan apukomponentin sisään.  
+
 ### props: tiedonvälitys komponenttien välillä
 
 Komponenteille on mahdollista välittää dataa [propsien](https://reactjs.org/docs/components-and-props.html) avulla.
 
-Muutetaan komponenttia _Hello_ seuraavasti
+Muutetaan komponenttia <i>Hello</i> seuraavasti
 
 ```js
-const Hello = props => {
+const Hello = (props) => { // highlight-line
   return (
     <div>
-      <p>Hello {props.name}</p>
+      <p>Hello {props.name}</p> // highlight-line
     </div>
   )
 )
 ```
 
-komponentin määrittelevällä funktiolla on nyt parametri _props_. Parametri saa arvokseen olion, jonka kenttinä ovat kaikki eri "propsit", jotka komponentin käyttäjä määrittelee.
+komponentin määrittelevällä funktiolla on nyt parametri <i>props</i>. Parametri saa arvokseen olion, jonka kenttinä ovat kaikki eri "propsit", jotka komponentin käyttäjä määrittelee.
 
 Propsit määritellään seuraavasti:
 
@@ -268,8 +276,8 @@ const App = () => {
   return (
     <div>
       <h1>Greetings</h1>
-      <Hello name="Arto" />
-      <Hello name="Pekka" />
+      <Hello name="Arto" /> // highlight-line
+      <Hello name="Pekka" /> // highlight-line
     </div>
   )
 )
@@ -277,34 +285,34 @@ const App = () => {
 
 Propseja voi olla mielivaltainen määrä ja niiden arvot voivat olla "kovakoodattuja" merkkijonoja tai Javascript-lausekkeiden tuloksia. Jos propsin arvo muodostetaan Javascriptillä, tulee se olla aaltosulkeissa.
 
-Muutetaan koodia siten, että komponentti _Hello_ käyttää kahta propsia:
+Muutetaan koodia siten, että komponentti <i>Hello</i> käyttää kahta propsia:
 
 ```js
-const Hello = props => {
+const Hello = (props) => {
   return (
     <div>
       <p>
-        Hello {props.name}, you are {props.age} years old
+        Hello {props.name}, you are {props.age} years old // highlight-line
       </p>
     </div>
   )
 )
 
 const App = () => {
-  const nimi = 'Pekka'
-  const ika = 10
+  const nimi = 'Pekka' // highlight-line
+  const ika = 10       // highlight-line
 
   return (
     <div>
       <h1>Greetings</h1>
-      <Hello name="Arto" age={26 + 10} />
-      <Hello name={nimi} age={ika} />
+      <Hello name="Arto" age={26 + 10} /> // highlight-line
+      <Hello name={nimi} age={ika} />     // highlight-line
     </div>
   )
 )
 ```
 
-Komponentti _App_ lähettää propseina muuttujan arvoja, summalausekkeen evaluoinnin tuloksen ja normaalin merkkijonon.
+Komponentti <i>App</i> lähettää propseina muuttujan arvoja, summalausekkeen evaluoinnin tuloksen ja normaalin merkkijonon.
 
 ### Muutamia huomioita
 
@@ -342,9 +350,9 @@ const App = () => {
 )
 ```
 
-sivulle ei kuitenkaan ilmesty näkyviin Footer-komponentissa määriteltyä sisältöä, vaan React luo sivulle ainoastaan tyhjän _footer_-elementin. Jos muutat komponentin nimen alkamaan isolla kirjaimella, React luo sivulle _div_-elementin, joka määriteltiin Footer-komponentissa.
+sivulle ei kuitenkaan ilmesty näkyviin Footer-komponentissa määriteltyä sisältöä, vaan React luo sivulle ainoastaan tyhjän _footer_-elementin. Jos muutat komponentin nimen alkamaan isolla kirjaimella, React luo sivulle <i>div</i>-elementin, joka määriteltiin Footer-komponentissa.
 
-Kannattaa myös pitää mielessä, että React-komponentin sisällön tulee (yleensä) sisältää **yksi juurielementti**. Eli jos yrittäisimme määritellä komponentin _App_ ilman uloimmaista _div_-elementtiä:
+Kannattaa myös pitää mielessä, että React-komponentin sisällön tulee (yleensä) sisältää **yksi juurielementti**. Eli jos yrittäisimme määritellä komponentin <i>App</i> ilman uloimmaista <i>div</i>-elementtiä:
 
 ```js
 const App = () => {

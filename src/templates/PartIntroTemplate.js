@@ -58,7 +58,7 @@ export default function PartIntroTemplate({ data }) {
               {
                 backgroundColor: colors[partColors[part]],
                 text: 'Fullstack',
-                link: '/about',
+                link: '/#course-contents',
               },
               {
                 backgroundColor: colors['black'],

@@ -10,7 +10,19 @@ import { SubHeader } from '../components/SubHeader/SubHeader';
 
 const FAQ = () => (
   <Layout>
-    <SEO title="FAQ" />
+    <SEO
+      title="FAQ"
+      keywords={[
+        'fullstack',
+        'course',
+        'helsingin yliopisto',
+        'tietojenkäsittelytieteen osasto',
+        'mooc',
+        'mooc.fi',
+        'full stack',
+        'web-sovelluskehitys'
+      ]}
+    />
 
     <Element className="container link spacing spacing--after-small">
       <SubHeader
