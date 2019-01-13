@@ -21,7 +21,7 @@
   h3,
   h4 {
     @include from($tablet) {
-      margin-left: 1rem;
+      margin-left: 3rem;
     }
     padding-bottom: 2rem;
   }
