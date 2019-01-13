@@ -16,12 +16,17 @@
     margin-bottom: $vertical-spacing;
   }
 
-  h1,
+  h1 {
+    @include from($tablet) {
+      margin-left: 3rem;
+    }
+  }
+
   h2,
   h3,
   h4 {
     @include from($tablet) {
-      margin-left: 3rem;
+      margin-left: 1rem;
     }
     padding-bottom: 2rem;
   }
