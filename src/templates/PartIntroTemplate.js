@@ -16,6 +16,7 @@ import Element from '../components/Element/Element';
 import Footer from '../components/Footer/Footer';
 import Layout from '../components/layout';
 import PrevNext from '../components/PrevNext/PrevNext';
+import SEO from '../components/seo';
 import navigation from '../content/partnavigation/partnavigation';
 import { partColors } from './partColors';
 
@@ -41,6 +42,11 @@ export default function PartIntroTemplate({ data }) {
 
   return (
     <Layout>
+      <SEO
+        title={`Fullstack osa${part}`}
+        keywords={Object.values(navigation[part])}
+      />
+
       <Banner
         style={{
           backgroundImage: `url(${path.resolve(mainImage.publicURL)})`,

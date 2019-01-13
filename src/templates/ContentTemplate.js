@@ -18,6 +18,7 @@ import Layout from '../components/layout';
 import PrevNext from '../components/PrevNext/PrevNext';
 import ReturnInfo from '../components/ReturnInfo/ReturnInfo';
 import ScrollNavigation from '../components/ScrollNavigation/ScrollNavigation';
+import SEO from '../components/seo';
 import { SubHeader } from '../components/SubHeader/SubHeader';
 import navigation from '../content/partnavigation/partnavigation';
 import ArrowToTop from '../images/up-arrow.svg';
@@ -29,6 +30,7 @@ export default class ContentTemplate extends Component {
 
     this.state = {
       h1Top: 0,
+      h1Title: '',
       top: 0,
     };
   }
@@ -47,6 +49,7 @@ export default class ContentTemplate extends Component {
 
     this.setState({
       h1Top: h1.offsetTop,
+      h1Title: h1.innerText,
     });
 
     window.addEventListener('scroll', this.handleScroll);
@@ -119,6 +122,11 @@ export default class ContentTemplate extends Component {
 
     return (
       <Layout>
+        <SEO
+          title={`Fullstack osa${part}`}
+          keywords={['Fullstack', this.state.h1Title]}
+        />
+
         {this.state.top > 300 && (
           <div
             className="arrow-go-up"
@@ -202,7 +210,7 @@ export default class ContentTemplate extends Component {
             {Parser(html, parserOptions)}
           </Element>
 
-          {false&&<ReturnInfo />}
+          {false && <ReturnInfo />}
 
           <EditLink part={part} letter={letter} />
 
