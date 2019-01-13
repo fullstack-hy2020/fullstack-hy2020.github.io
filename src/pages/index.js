@@ -33,7 +33,10 @@ const thingsToKnow = [
 
 const IndexPage = () => (
   <Layout>
-    <SEO title="Home" keywords={['gatsby', 'application', 'react']} />
+    <SEO
+      title="Home"
+      keywords={['fullstack', 'course', 'helsingin yliopisto']}
+    />
 
     <StaticQuery
       query={graphql`
@@ -72,7 +75,7 @@ const IndexPage = () => (
         } = data.allMainJson.edges[0].node;
 
         return (
-          <div>
+          <>
             <div className="container spacing--after">
               <Element
                 flex
@@ -97,7 +100,7 @@ const IndexPage = () => (
                 />
 
                 <BodyText
-                  className="col-4 order-1--mobile col-8--mobile"
+                  className="col-4 order-1--mobile col-8--mobile link"
                   text={intro}
                 />
 
@@ -111,40 +114,43 @@ const IndexPage = () => (
               </Element>
             </div>
 
-            {false&&<Banner>
-              <Element flex spaceBetween className="container">
-                <BodyText
-                  className="col-10 centered"
-                  heading={{ title: 'Things to Know', level: 'h2' }}
-                  headingFontSize="1.777rem"
-                />
+            {false && (
+              <Banner>
+                <Element flex spaceBetween className="container">
+                  <BodyText
+                    className="col-10 centered"
+                    heading={{ title: 'Things to Know', level: 'h2' }}
+                    headingFontSize="1.777rem"
+                  />
 
-                <Element
-                  className="col-8 push-right-1 col-10--mobile"
-                  flex
-                  spaceAround
-                >
-                  {thingsToKnow.map(item => {
-                    return (
-                      <Element
-                        key={item.text}
-                        centeredInDesktop
-                        flex
-                        dirColumn
-                        className="col-1 col-3--mobile"
-                      >
-                        <Image contain fullWidth src={item.icon} />
-                        <BodyText
-                          centered
-                          style={{ paddingTop: '1.666rem' }}
-                          text={item.text}
-                        />
-                      </Element>
-                    );
-                  })}
+                  <Element
+                    className="col-8 push-right-1 col-10--mobile"
+                    flex
+                    spaceAround
+                  >
+                    {thingsToKnow.map(item => {
+                      return (
+                        <Element
+                          key={item.text}
+                          centeredInDesktop
+                          flex
+                          dirColumn
+                          className="col-1 col-3--mobile"
+                        >
+                          <Image contain fullWidth src={item.icon} />
+                          <BodyText
+                            className="link"
+                            centered
+                            style={{ paddingTop: '1.666rem' }}
+                            text={item.text}
+                          />
+                        </Element>
+                      );
+                    })}
+                  </Element>
                 </Element>
-              </Element>
-            </Banner>}
+              </Banner>
+            )}
 
             <Element className="container spacing--large spacing--after">
               <Element className="push-right-1 push-left-1" spaceBetween flex>
@@ -158,34 +164,48 @@ const IndexPage = () => (
                     <Image contain small src={news} className="col-1--mobile" />
 
                     <BodyText
-                      className="col-7 col-8--mobile"
+                      className="col-7 col-8--mobile link"
                       heading={{ title: 'Ajankohtaista', level: 'h3' }}
                     />
                   </Element>
 
-                  <BodyText className="spacing--small" text={current} />
+                  <BodyText className="spacing--small link" text={current} />
 
-                  {false&&<Element flex spaceBetween className="col-10">
-                    <Image
-                      contain
-                      extraSmall
-                      src={telegramIcon}
-                      className="col-1--mobile"
-                    />
+                  {false && (
+                    <Element flex spaceBetween className="col-10">
+                      <Image
+                        contain
+                        extraSmall
+                        src={telegramIcon}
+                        className="col-1--mobile"
+                      />
 
-                    <BodyText className="col-8 col-8--mobile" text={telegram} />
-                  </Element>}
+                      <BodyText
+                        className="col-8 col-8--mobile link"
+                        text={telegram}
+                      />
+                    </Element>
+                  )}
 
-                  {false&&<Element flex spaceBetween className="col-10 spacing--small">
-                    <Image
-                      contain
-                      extraSmall
-                      src={announcement}
-                      className="col-1--mobile"
-                    />
+                  {false && (
+                    <Element
+                      flex
+                      spaceBetween
+                      className="col-10 spacing--small"
+                    >
+                      <Image
+                        contain
+                        extraSmall
+                        src={announcement}
+                        className="col-1--mobile"
+                      />
 
-                    <BodyText className="col-8 col-8--mobile" text={notice} />
-                  </Element>}
+                      <BodyText
+                        className="col-8 col-8--mobile link"
+                        text={notice}
+                      />
+                    </Element>
+                  )}
                 </Element>
 
                 <Element flex horizontalHalf flexStart>
@@ -206,61 +226,63 @@ const IndexPage = () => (
                     />
                   </Element>
 
-                  <BodyText className="spacing--small" text={licence} />
+                  <BodyText className="spacing--small link" text={licence} />
                 </Element>
               </Element>
             </Element>
 
             <PartBanner />
 
-            {false&&<Element className="container spacing--after" flex>
-              <Element flex spaceBetween className="col-8 push-right-1">
-                <ContentLiftup
-                  small
-                  image={{
-                    src: yliopistoLogo,
-                    alt: 'Helsingin yliopisto logo',
-                  }}
-                  className="col-2 col-4--mobile"
-                />
+            {false && (
+              <Element className="container spacing--after" flex>
+                <Element flex spaceBetween className="col-8 push-right-1">
+                  <ContentLiftup
+                    small
+                    image={{
+                      src: yliopistoLogo,
+                      alt: 'Helsingin yliopisto logo',
+                    }}
+                    className="col-2 col-4--mobile"
+                  />
 
-                <ContentLiftup
-                  small
-                  image={{ src: houstonLogo, alt: 'Houston Inc. logo' }}
-                  className="col-2 push-right-2 col-4--mobile"
-                />
+                  <ContentLiftup
+                    small
+                    image={{ src: houstonLogo, alt: 'Houston Inc. logo' }}
+                    className="col-2 push-right-2 col-4--mobile"
+                  />
 
-                <ContentLiftup
-                  small
-                  image={{
-                    src: yliopistoLogo,
-                    alt: 'Helsingin yliopisto logo',
-                  }}
-                  className="col-2 push-right-2 col-4--mobile"
-                />
+                  <ContentLiftup
+                    small
+                    image={{
+                      src: yliopistoLogo,
+                      alt: 'Helsingin yliopisto logo',
+                    }}
+                    className="col-2 push-right-2 col-4--mobile"
+                  />
 
-                <ContentLiftup
-                  small
-                  image={{ src: houstonLogo, alt: 'Houston Inc. logo' }}
-                  className="col-2 col-4--mobile"
-                />
+                  <ContentLiftup
+                    small
+                    image={{ src: houstonLogo, alt: 'Houston Inc. logo' }}
+                    className="col-2 col-4--mobile"
+                  />
 
-                <ContentLiftup
-                  small
-                  image={{
-                    src: yliopistoLogo,
-                    alt: 'Helsingin yliopisto logo',
-                  }}
-                  className="col-2 col-4--mobile"
-                />
+                  <ContentLiftup
+                    small
+                    image={{
+                      src: yliopistoLogo,
+                      alt: 'Helsingin yliopisto logo',
+                    }}
+                    className="col-2 col-4--mobile"
+                  />
 
-                <ContentLiftup
-                  small
-                  image={{ src: houstonLogo, alt: 'Houston Inc. logo' }}
-                  className="col-2 col-4--mobile"
-                />
+                  <ContentLiftup
+                    small
+                    image={{ src: houstonLogo, alt: 'Houston Inc. logo' }}
+                    className="col-2 col-4--mobile"
+                  />
+                </Element>
               </Element>
-            </Element>}
+            )}
 
             <Element
               flex
@@ -297,7 +319,7 @@ const IndexPage = () => (
                       className="col-4--mobile"
                     />
 
-                    <BodyText text={houston} />
+                    <BodyText className="link" text={houston} />
                   </Element>
                 </Element>
 
@@ -310,6 +332,7 @@ const IndexPage = () => (
                   <div className="col-3 col-10--mobile">
                     <BodyText
                       noPadding
+                      className="link"
                       style={{ paddingTop: '2.111rem' }}
                       text={contacts}
                     />
@@ -322,12 +345,12 @@ const IndexPage = () => (
                       className="col-4--mobile"
                     />
 
-                    <BodyText text={licenced} />
+                    <BodyText text={licenced} className="link" />
                   </div>
                 </Element>
               </TripleBorder>
             </Element>
-          </div>
+          </>
         );
       }}
     />

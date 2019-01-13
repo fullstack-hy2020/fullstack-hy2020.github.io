@@ -52,9 +52,10 @@ const About = () => (
 
               <Element flex spaceBetween>
                 <div className="col-6 spacing--after">
-                  <BodyText text={intro} />
+                  <BodyText text={intro} className="link" />
 
                   <BodyText
+                    className="link"
                     text={[
                       'Osallistujilta edellytetään vahvaa ohjelmointirutiinia, web-ohjelmoinnin ja tietokantojen perustuntemusta, git-versionhallintajärjestelmän peruskäytön hallintaa, kykyä pitkäjänteiseen työskentelyyn sekä valmiutta omatoimiseen tiedonhakuun ja ongelmanratkaisuun.',
                       'Osallistuminen ei kuitenkaan edellytä kurssilla käsiteltävien tekniikoiden tai Javascript-kielen hallintaa.',
@@ -71,17 +72,16 @@ const About = () => (
                     src={LandingImage}
                   />
                 </Element>
-                
               </Element>
 
-              {false&&info.map(item => (
-                <Accordion
-                  key={item}
-                  title={item.title}
-                  content={item.content}
-                />
-              ))}
-              
+              {false &&
+                info.map(item => (
+                  <Accordion
+                    key={item}
+                    title={item.title}
+                    content={item.content}
+                  />
+                ))}
             </Element>
 
             <PartBanner />

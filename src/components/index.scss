@@ -35,6 +35,12 @@ a {
   color: $black;
 }
 
+.link {
+  a {
+    border-bottom: 2px solid $main;
+  }
+}
+
 .container {
   position: relative;
   margin: 0 auto;
