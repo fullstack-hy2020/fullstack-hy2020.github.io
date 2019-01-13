@@ -52,6 +52,7 @@ class ScrollNavigation extends Component {
       if (currentPartTitle !== partsNode[key]) {
         arr.push(
           <Link
+            key={key}
             className="left-navigation-link"
             style={{ borderColor: colorCode }}
             to={`/osa${part}/${snakeCase(partsNode[key])}`}
@@ -70,7 +71,10 @@ class ScrollNavigation extends Component {
             key={key}
             title={`${letter} ${partsNode[key]}`}
             list={headings.map(i => {
-              return { href: `${currentPath}#${i.id}`, text: i.text };
+              return {
+                href: `${currentPath}#${i.id}`,
+                text: i.text,
+              };
             })}
           />
         );
