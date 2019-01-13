@@ -145,7 +145,6 @@ export default class ContentTemplate extends Component {
         <div className="course-container spacing--small spacing--after">
           <Banner
             backgroundColor={colorCode}
-            className="spacing--after"
             style={{
               backgroundImage: `url(${path.resolve(mainImage.publicURL)})`,
               backgroundPosition: 'center left',
@@ -154,7 +153,7 @@ export default class ContentTemplate extends Component {
               backgroundColor: colorCode,
             }}
           >
-            <div className="container">
+            <div className="container spacing--after">
               <Arrow
                 className="breadcrumb"
                 content={[
