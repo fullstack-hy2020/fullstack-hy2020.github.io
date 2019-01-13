@@ -7,7 +7,7 @@
     background: none;
     background-color: none;
 
-    @include from($desktop) {
+    @include from($tablet) {
       border-left: none;
 
       &::before {
@@ -105,8 +105,18 @@
   &:nth-of-type(n + 2) {
     margin-top: 1rem;
 
-    @include from($desktop) {
+    @include from($tablet) {
       margin-top: -2px;
+    }
+  }
+
+  .arrow__rectangle {
+    @include from($tablet) {
+      padding: 1.25rem;
+    }
+
+    @include from($desktop) {
+      padding: 1rem;
     }
   }
 
@@ -114,7 +124,7 @@
     padding: 1.08rem;
     margin-left: 2px;
 
-    @include from($desktop) {
+    @include from($tablet) {
       margin-left: unset;
       padding: 1.25rem;
     }
@@ -147,7 +157,7 @@
 
 .breadcrumb {
   .arrow__wrapper {
-    @include to($desktop) {
+    @include to($tablet) {
       padding: 0;
 
       &:not(:last-of-type)::after {
@@ -160,7 +170,7 @@
   }
 
   .arrow__rectangle {
-    @include to($desktop) {
+    @include to($tablet) {
       border: none;
       padding: 0;
       font-size: 0.7rem;
@@ -171,7 +181,7 @@
   }
 
   .arrow__point {
-    @include to($desktop) {
+    @include to($tablet) {
       display: none;
     }
   }
