@@ -44,7 +44,7 @@ export default function PartIntroTemplate({ data }) {
     <Layout>
       <SEO
         title={`Fullstack osa${part}`}
-        keywords={Object.values(navigation[part])}
+        keywords={navigation[part] ? Object.values(navigation[part]) : []}
       />
 
       <Banner
