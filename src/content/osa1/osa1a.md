@@ -8,7 +8,7 @@ letter: a
 
 Alamme nyt tutustua kurssin ehkä tärkeimpään teemaan, [React](https://reactjs.org/)-kirjastoon. Tehdään heti yksinkertainen React-sovellus ja tutustutaan samalla Reactin peruskäsitteistöön.
 
-Ehdottomasti helpoin tapa päästä alkuun on [create-react-app](https://github.com/facebookincubator/create-react-app)-nimisen työkalun käyttö. <i>create-react-app</i> on mahdollista asentaa omalle koneelle, mutta asennukseen ei ole tarvetta jos Noden mukana asentunut <i>npm</i>-työkalu on versioltaan vähintään <i>5.3</i>. Tällöin npm:n mukana asentuu komento </i>npx</i>, joka mahdollistaa create-react-app:in käytön asentamatta sitä erikseen. Npm:n version saa selville komennolla <code>npm -v</code>.
+Ehdottomasti helpoin tapa päästä alkuun on [create-react-app](https://github.com/facebookincubator/create-react-app)-nimisen työkalun käyttö. <i>create-react-app</i> on mahdollista asentaa omalle koneelle, mutta asennukseen ei ole tarvetta jos Noden mukana asentunut <i>npm</i>-työkalu on versioltaan vähintään <i>5.3</i>. Tällöin npm:n mukana asentuu komento </i>npx</i>, joka mahdollistaa create-react-app:in käytön asentamatta sitä erikseen. Npm:n version saa selville komennolla <em>npm -v</em>.
 
 Luodaan sovellus nimeltään <i>osa1</i> ja mennään sovelluksen sisältämään hakemistoon:
 
@@ -18,7 +18,7 @@ $ cd osa1
 $ npm start
 ```
 
-Kaikki tässä (ja jatkossa) annettavat merkillä <code>$</code> alkavat komennot on kirjoitettu terminaaliin eli komentoriville. Merkkiä <code>$</code> ei tule kirjoittaa, sillä se edustaa komentokehoitetta.
+Kaikki tässä (ja jatkossa) annettavat merkillä <em>$</em> alkavat komennot on kirjoitettu terminaaliin eli komentoriville. Merkkiä <em>$</em> ei tule kirjoittaa, sillä se edustaa komentokehoitetta.
 
 React on koko ajan aktiivisen kehityksen alla. Tämän vuoden ensimmäisen neljänneksen aikana Reactiin on tulossa erittäin merkittävä lisäys: [hookit](https://reactjs.org/docs/hooks-intro.html). Tämä täysin uusi ominaisuus tulee vaikuttamaan merkittävästi siihen, miten Reactia tullaan tulevaisuudessa käyttämään. Koska haluamme elää kehityksen eturintamassa käytämme kurssilla hookeja alusta asti.
 
@@ -322,7 +322,7 @@ React on konfiguroitu antamaan varsin hyviä virheilmoituksia. Kannattaa kuitenk
 
 ![](../images/1/2a.png)
 
-Kannattaa myös muistaa, että React-koodissakin on mahdollista ja kannattavaa lisätä koodin sekaan sopivia konsoliin tulostavia <code>console.log()</code>-komentoja. Tulemme hieman [myöhemmin](#react-sovellusten-debuggaus) tutustumaan muutamiin muihinkin tapoihin debugata Reactia.
+Kannattaa myös muistaa, että React-koodissakin on mahdollista ja kannattavaa lisätä koodin sekaan sopivia konsoliin tulostavia <em>console.log()</em>-komentoja. Tulemme hieman [myöhemmin](#react-sovellusten-debuggaus) tutustumaan muutamiin muihinkin tapoihin debugata Reactia.
 
 Kannattaa pitää mielessä, että **React-komponenttien nimien tulee alkaa isolla kirjaimella**. Jos yrität määritellä komponentin seuraavasti:
 

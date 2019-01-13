@@ -10,7 +10,7 @@ Kurssin aikana on websovelluskehityksen rinnalla tavoite ja tarve oppia riittäv
 
 Javascript on kehittynyt viime vuosina nopeaan tahtiin, ja käytämme kurssilla kielen uusimpien versioiden piirteitä. Javascript-standardin virallinen nimi on [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). Tämän hetken tuorein versio on kesäkuussa 2017 julkaistu [ES9](https://www.ecma-international.org/ecma-262/9.0/index.html), toiselta nimeltään ECMAScript 2018.
 
-Selaimet eivät vielä osaa kaikkia Javascriptin uusimpien versioiden ominaisuuksia. Tämän takia selaimessa suoritetaan useimmiten koodia joka on käännetty (englanniksi _transpiled_) uudemmasta Javascriptin versiosta johonkin vanhempaan, laajemmin tuettuun versioon.
+Selaimet eivät vielä osaa kaikkia Javascriptin uusimpien versioiden ominaisuuksia. Tämän takia selaimessa suoritetaan useimmiten koodia joka on käännetty (englanniksi <i>transpiled</i>) uudemmasta Javascriptin versiosta johonkin vanhempaan, laajemmin tuettuun versioon.
 
 Tällä hetkellä johtava tapa tehdä transpilointi on [Babel](https://babeljs.io/). Create-react-app:in avulla luoduissa React-sovelluksissa on valmiiksi konfiguroitu automaattinen transpilaus. Katsomme kurssin [osassa 7](/osa7) tarkemmin miten transpiloinnin konfigurointi tapahtuu.
 

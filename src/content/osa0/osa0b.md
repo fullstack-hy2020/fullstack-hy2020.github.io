@@ -104,7 +104,7 @@ app.get('/', (req, res) => {
 })
 ```
 
-Koodia ei tarvitse vielä ymmärtää, mutta käytännössä HTML-sivun sisältö on talletettu ns. template stringinä, eli merkkijonona, jonka sekaan on mahdollisuus evaluoida esim. muuttujien arvoja. Etusivun dynaamisesti muuttuva osa, eli muistiinpanojen lukumäärä (koodissa <code>noteCount</code>) korvataan template stringissä sen hetkisellä konkreettisella lukuarvolla (koodissa <code>notes.length</code>).
+Koodia ei tarvitse vielä ymmärtää, mutta käytännössä HTML-sivun sisältö on talletettu ns. template stringinä, eli merkkijonona, jonka sekaan on mahdollisuus evaluoida esim. muuttujien arvoja. Etusivun dynaamisesti muuttuva osa, eli muistiinpanojen lukumäärä (koodissa <em>noteCount</em>) korvataan template stringissä sen hetkisellä konkreettisella lukuarvolla (koodissa <em>notes.length</em>).
 
 HTML:n kirjoittaminen suoraan koodin sekaan ei tietenkään ole järkevää, mutta vanhan liiton PHP-ohjelmoijille se oli arkipäivää.
 
@@ -225,7 +225,7 @@ Painamalla rivin alussa olevaa kolmiota saat laajennettua konsolissa olevan rivi
 
 ![](../images/0/13.png)
 
-Konsoliin ilmestynyt tulostus johtuu siitä, että koodiin oli lisätty komento <code>console.log</code>:
+Konsoliin ilmestynyt tulostus johtuu siitä, että koodiin oli lisätty komento <em>console.log</em>:
 
 ```js
 const data = JSON.parse(this.responseText)
@@ -234,7 +234,7 @@ console.log(data)
 
 eli vastaanotettuaan datan palvelimelta, koodi tulostaa datan konsoliin.
 
-Konsolin välilehti <i>Console</i> sekä komento <code>console.log</code> tulevat varmasti erittäin tutuiksi kurssin kuluessa.
+Konsolin välilehti <i>Console</i> sekä komento <em>console.log</em> tulevat varmasti erittäin tutuiksi kurssin kuluessa.
 
 ### Tapahtumankäsittelijä ja takaisinkutsu
 
@@ -259,7 +259,7 @@ Rivillä
 xhttp.onreadystatechange = function () {
 ```
 
-kyselyn tekevään <code>xhttp</code>-olioon määritellään <i>tapahtumankäsittelijä</i> (event handler) tilanteelle <i>onreadystatechange</i>. Kun kyselyn tekevän olion tila muuttuu, kutsuu selain tapahtumankäsittelijänä olevaa funktiota. Funktion koodi tarkastaa, että [readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState):n arvo on 4 (joka kuvaa tilannetta <i>The operation is complete</i>) ja, että vastauksen HTTP-statuskoodi on onnistumisesta kertova 200.
+kyselyn tekevään <em>xhttp</em>-olioon määritellään <i>tapahtumankäsittelijä</i> (event handler) tilanteelle <i>onreadystatechange</i>. Kun kyselyn tekevän olion tila muuttuu, kutsuu selain tapahtumankäsittelijänä olevaa funktiota. Funktion koodi tarkastaa, että [readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState):n arvo on 4 (joka kuvaa tilannetta <i>The operation is complete</i>) ja, että vastauksen HTTP-statuskoodi on onnistumisesta kertova 200.
 
 ```js
 xhttp.onreadystatechange = function() {
@@ -303,7 +303,7 @@ Document Object Model eli [DOM](https://en.wikipedia.org/wiki/Document_Object_Mo
 
 Edellisessä luvussa esittelemämme Javascript-koodi käytti nimenomaan DOM-apia lisätäkseen sivulle muistiinpanojen listan.
 
-Allaoleva koodi luo muuttujaan <code>ul</code> DOM-apin avulla uuden "solmun" ja lisää sille joukon lapsisolmuja:
+Allaoleva koodi luo muuttujaan <em>ul</em> DOM-apin avulla uuden "solmun" ja lisää sille joukon lapsisolmuja:
 
 ```js
 var ul = document.createElement('ul')
@@ -316,7 +316,7 @@ data.forEach(function(note) {
 })
 ```
 
-lopulta muuttujassa <code>ul</code> oleva puun palanen yhdistetään sopivaan paikkaan koko sovelluksen HTML-koodia edustavassa puussa:
+lopulta muuttujassa <em>ul</em> oleva puun palanen yhdistetään sopivaan paikkaan koko sovelluksen HTML-koodia edustavassa puussa:
 
 ```js
 document.getElementById('notes').appendChild(ul)
@@ -324,12 +324,12 @@ document.getElementById('notes').appendChild(ul)
 
 ### document-olio ja sivun manipulointi konsolista
 
-HTML-dokumenttia esittävän DOM-puun ylimpänä solmuna on olio nimeltään <code>document</code>. Olioon pääsee käsiksi Console-välilehdeltä:
+HTML-dokumenttia esittävän DOM-puun ylimpänä solmuna on olio nimeltään <em>document</em>. Olioon pääsee käsiksi Console-välilehdeltä:
 
 ![](../images/0/15.png)
 
 
-Voimme suorittaa konsolista käsin DOM-apin avulla erilaisia operaatioita selaimessa näytettävälle web-sivulle hyödyntämällä <code>document</code>-olioa.
+Voimme suorittaa konsolista käsin DOM-apin avulla erilaisia operaatioita selaimessa näytettävälle web-sivulle hyödyntämällä <em>document</em>-olioa.
 
 Lisätään nyt sivulle uusi muistiinpano suoraan konsolista.
 
@@ -450,11 +450,11 @@ app.post('/new_note', (req, res) => {
 })
 ```
 
-POST-pyyntöihin liitettävä data lähetetään pyynnön mukana "runkona" eli [bodynä](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST). Palvelin saa POST-pyynnön datan pyytämällä sitä pyyntöä vastaavan olion <code>req</code> kentästä <code>req.body</code>.
+POST-pyyntöihin liitettävä data lähetetään pyynnön mukana "runkona" eli [bodynä](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST). Palvelin saa POST-pyynnön datan pyytämällä sitä pyyntöä vastaavan olion <em>req</em> kentästä <em>req.body</em>.
 
-Tekstikenttään kirjoitettu data on kentässä <i>note</i>, eli palvelin viittaa siihen <code>req.body.note</code>.
+Tekstikenttään kirjoitettu data on kentässä <i>note</i>, eli palvelin viittaa siihen <em>req.body.note</em>.
 
-Palvelin luo uutta muistiinpanoa vastaavan olion ja laittaa sen muistiinpanot sisältävään taulukkoon nimeltään <code>notes</code>:
+Palvelin luo uutta muistiinpanoa vastaavan olion ja laittaa sen muistiinpanot sisältävään taulukkoon nimeltään <em>notes</em>:
 
 ```js
 notes.push({
@@ -541,9 +541,9 @@ form.onsubmit = function(e) {
 )
 ```
 
-Komennolla <code>document.getElementById('notes\_form')</code> koodi hakee sivulta lomake-elementin ja rekisteröi sille <i>tapahtumankäsittelijän</i> hoitamaan tilanteen, missä lomake "submitoidaan", eli lähetetään. Tapahtumankäsittelijä kutsuu heti metodia <code>e.preventDefault()</code> jolla se estää lomakkeen lähetyksen oletusarvoisen toiminnan. Oletusarvoinen toiminta aiheuttaisi lomakkeen lähettämisen ja sivun uudelleen lataamisen, sitä emme single page -sovelluksissa halua tapahtuvan.
+Komennolla <em>document.getElementById('notes\_form')</em> koodi hakee sivulta lomake-elementin ja rekisteröi sille <i>tapahtumankäsittelijän</i> hoitamaan tilanteen, missä lomake "submitoidaan", eli lähetetään. Tapahtumankäsittelijä kutsuu heti metodia <em>e.preventDefault()</em> jolla se estää lomakkeen lähetyksen oletusarvoisen toiminnan. Oletusarvoinen toiminta aiheuttaisi lomakkeen lähettämisen ja sivun uudelleen lataamisen, sitä emme single page -sovelluksissa halua tapahtuvan.
 
-Tämän jälkeen se luo muistiinpanon, lisää sen muistiinpanojen listalle komennolla <code>notes.push(note)</code>, piirtää ruudun sisällön eli muistiinpanojen listan uudelleen ja lähettää uuden muistiinpanon palvelimelle.
+Tämän jälkeen se luo muistiinpanon, lisää sen muistiinpanojen listalle komennolla <em>notes.push(note)</em>, piirtää ruudun sisällön eli muistiinpanojen listan uudelleen ja lähettää uuden muistiinpanon palvelimelle.
 
 Palvelimelle muistiinpanon lähettävä koodi seuraavassa:
 
