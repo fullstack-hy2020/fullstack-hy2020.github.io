@@ -26,6 +26,7 @@ class ScrollNavigation extends Component {
 
     const headings = headingList.map(i => {
       i.id = kebabCase(i.innerText);
+      i.classList.add('offset');
 
       return {
         text: i.innerText,
