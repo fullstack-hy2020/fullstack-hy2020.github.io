@@ -79,17 +79,17 @@
     border-radius: 2.5rem;
     text-align: center;
     margin: 1rem;
-    line-height: 0.8em;
+    line-height: 1.3em;
     transform: translate(-1rem, 0);
 
     @include from($tablet) {
-      transform: translate(-3rem, 5rem);
+      transform: translate(-3rem, 4.5rem);
     }
   }
 
   .letter,
   h1 {
-    font-size: 3.444rem;
+    font-size: 2.3rem;
     font-weight: bold;
   }
 }
