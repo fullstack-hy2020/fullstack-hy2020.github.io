@@ -38,9 +38,9 @@ Osien **deadlinet** ovat maanantaisin klo 23:59, poikkeuksena kaksi viimeistä o
 | osa 2          |        ma 28.1.         |
 | osa 3          |        ma 4.2.          |
 | osa 4          |        ma 11.2.         |
-| osa 5          |        ma 18.3.         |
-| osa 6          |        su 3.4.          |
-| osa 7          |        su 3.4.          |
+| osa 5          |        ma 18.2.         |
+| osa 6          |        su 3.3.          |
+| osa 7          |        su 3.3.          |
 
 Tämän kurssin eri osiin jo tehtyjen palautusten ajankäyttöstatistiikan näet [tehtävien palautussovelluksesta](https://studies.cs.helsinki.fi/courses/#fullstack2019).
 
