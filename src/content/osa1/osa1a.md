@@ -373,11 +373,11 @@ Juurielementin käyttö ei ole ainoa toimiva vaihtoehto, myös <i>taulukollinen<
 
 ```js
 const App = () => {
-  return {
+  return [
     <h1>Greetings</h1>,
     <Hello name="Arto" age={26 + 10} />,
     <Footer />
-  }
+  ]
 }
 ```
 
@@ -390,14 +390,14 @@ const App = () => {
   const name = 'Pekka'
   const ika = 10
 
-  return [
+  return (
     <>
       <h1>Greetings</h1>
       <Hello name="Arto" age={26 + 10} />
       <Hello name={nimi} age={ika} />
       <Footer />
     </>
-  ]
+  )
 }
 ```
 
