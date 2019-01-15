@@ -64,7 +64,7 @@ Voit korvata ainoastaan kokonaisia osia, eli jos teit viime vuonna esim. 50% jon
 
 Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/courses/#fullstack2019).
 
-Jos palautat eri osien tehtäviä samaan repositorioon, käytä järkevää hakemistojen nimentää.
+Jos palautat eri osien tehtäviä samaan repositorioon, käytä järkevää hakemistojen nimentää. Voit toki tehdä jokaisen osan omaankin repositorioon, kaikki käy.
 
 Tehtävät palautetaan **yksi osa kerrallaan**. Kun olet palauttanut osan tehtävät, et voi enää palauttaa saman osan tekemättä jättämiäsi tehtäviä.
 

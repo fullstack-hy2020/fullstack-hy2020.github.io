@@ -1,5 +1,11 @@
 [
   {
+    "title": "Pitääkö jokainen osa palauttaa omaan repositorioon?",
+    "text": [
+      "Ei. Voit käyttää yhtä tai useampaa repositoriota, tärkeintä että asiat repositorion sisällä ovat selkeästi nimettyjä."
+    ]
+  },
+  {
     "title": "Voinko laajentaa aiempaa kurssisuoritustani?",
     "text": [
       "Voit, lue lisää <a href='osa0/yleista#aiemmin-suoritetun-kurssin-taydentaminen'>täältä</a>"
