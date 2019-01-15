@@ -112,7 +112,7 @@ const App = () => {
       <p>Hello world</p>
     </div>
   )
-)
+}
 ```
 
 eli funktio palauttaa sisältämänsä lausekkeen arvon.
@@ -127,7 +127,7 @@ const App = () => {
       <p>Hello world</p>
     </div>
   )
-)
+}
 ```
 
 Komponenttien sisällä on mahdollista renderöidä myös dynaamista sisältöä.
@@ -148,7 +148,7 @@ const App = () => {
       </p>
     </div>
   )
-)
+}
 ```
 
 Aaltosulkeiden sisällä oleva Javascript-koodi evaluoidaan ja evaluoinnin tulos upotetaan määriteltyyn kohtaan komponentin tuottamaa HTML-koodia.
@@ -177,7 +177,7 @@ const App = () => {
       'p', null, a, ' plus ', b, ' is ', a + b
     )
   )
-)
+}
 
 ReactDOM.render(
   React.createElement(App, null),
@@ -215,7 +215,7 @@ const Hello = () => {
       <p>Hello world</p>
     </div>
   )
-)
+}
 // highlight-end
 
 const App = () => {
@@ -225,7 +225,7 @@ const App = () => {
       <Hello /> // highlight-line
     </div>
   )
-)
+}
 
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
@@ -244,7 +244,7 @@ const App = () => {
       // highlight-end
     </div>
   )
-)
+}
 ```
 
 Komponenttien tekeminen Reactissa on helppoa ja komponentteja yhdistelemällä monimutkaisempikin sovellus on mahdollista pitää kohtuullisesti ylläpidettävänä. Reactissa filosofiana onkin koostaa sovellus useista, pieneen asiaan keskittyvistä uudelleenkäytettävistä komponenteista.
@@ -264,7 +264,7 @@ const Hello = (props) => { // highlight-line
       <p>Hello {props.name}</p> // highlight-line
     </div>
   )
-)
+}
 ```
 
 komponentin määrittelevällä funktiolla on nyt parametri <i>props</i>. Parametri saa arvokseen olion, jonka kenttinä ovat kaikki eri "propsit", jotka komponentin käyttäjä määrittelee.
@@ -280,7 +280,7 @@ const App = () => {
       <Hello name="Pekka" /> // highlight-line
     </div>
   )
-)
+}
 ```
 
 Propseja voi olla mielivaltainen määrä ja niiden arvot voivat olla "kovakoodattuja" merkkijonoja tai Javascript-lausekkeiden tuloksia. Jos propsin arvo muodostetaan Javascriptillä, tulee se olla aaltosulkeissa.
@@ -296,7 +296,7 @@ const Hello = (props) => {
       </p>
     </div>
   )
-)
+}
 
 const App = () => {
   const nimi = 'Pekka' // highlight-line
@@ -309,7 +309,7 @@ const App = () => {
       <Hello name={nimi} age={ika} />     // highlight-line
     </div>
   )
-)
+}
 ```
 
 Komponentti <i>App</i> lähettää propseina muuttujan arvoja, summalausekkeen evaluoinnin tuloksen ja normaalin merkkijonon.
@@ -334,7 +334,7 @@ const footer = () => {
       <a href="https://github.com/mluukkai">mluukkai</a>
     </div>
   )
-)
+}
 ```
 
 ja ottaa se käyttöön
@@ -348,7 +348,7 @@ const App = () => {
       <footer /> // highlight-line
     </div>
   )
-)
+}
 ```
 
 sivulle ei kuitenkaan ilmesty näkyviin Footer-komponentissa määriteltyä sisältöä, vaan React luo sivulle ainoastaan tyhjän <i>footer</i>-elementin. Jos muutat komponentin nimen alkamaan isolla kirjaimella, React luo sivulle <i>div</i>-elementin, joka määriteltiin Footer-komponentissa.
@@ -378,7 +378,7 @@ const App = () => {
     <Hello name="Arto" age={26 + 10} />,
     <Footer />
   ]
-)
+}
 ```
 
 Määritellessä sovelluksen juurikomponenttia, tämä ei kuitenkaan ole järkevää ja näyttää koodissakin pahalta.
@@ -398,7 +398,7 @@ const App = () => {
       <Footer />
     </>
   )
-)
+}
 ```
 
 Nyt käännös menee läpi ja Reactin generoimaan DOM:iin ei tule ylimääräistä div-elementtiä.
@@ -450,7 +450,7 @@ const App = () => {
       <p>yhteensä {exercises1 + exercises2 + exercises3} tehtävää</p>
     </div>
   )
-)
+}
 
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
