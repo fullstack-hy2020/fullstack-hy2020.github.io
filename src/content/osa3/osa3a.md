@@ -441,17 +441,17 @@ Representational State Transfer eli REST on Roy Fieldingin vuonna 2000 ilmestyne
 
 Emme nyt rupea määrittelemään REST:iä Fieldingiläisittäin tai rupea väittämään mitä REST on tai mitä se ei ole vaan otamme hieman [kapeamman näkökulman](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) miten REST tai RESTful API:t yleensä tulkitaan Web-sovelluksissa. Alkuperäinen REST-periaate ei edes sinänsä rajoitu Web-sovelluksiin.
 
-Mainitsimme jo [edellisessä osassa](/osa2/#rest-apin-käyttö), että yksittäisiä asioita, meidän tapauksessamme muistiinpanoja kutsutaan RESTful-ajattelussa _resursseiksi_. Jokaisella resurssilla on URL eli sen yksilöivä osoite.
+Mainitsimme jo [edellisessä osassa](/osa2/#rest-apin-käyttö), että yksittäisiä asioita, meidän tapauksessamme muistiinpanoja kutsutaan RESTful-ajattelussa <i>resursseiksi</i>. Jokaisella resurssilla on URL eli sen yksilöivä osoite.
 
 Erittäin yleinen konventio on muodostaa resurssien yksilöivät URLit liittäen resurssityypin nimi ja resurssin yksilöivä tunniste.
 
-Oletetaan että palvelumme juuriosoite on _www.example.com/api_
+Oletetaan että palvelumme juuriosoite on <i>www.example.com/api</i>
 
-Jos nimitämme muistiinpanoja _note_-resursseiksi, yksilöidään yksittäinen muistiinpano, jonka tunniste on 10 URLilla _www.example.com/api/notes/10_.
+Jos nimitämme muistiinpanoja <i>note</i>-resursseiksi, yksilöidään yksittäinen muistiinpano, jonka tunniste on 10 URLilla <i>www.example.com/api/notes/10</i>.
 
-Kaikkia muistiinpanoja edustavan kokoelmaresurssin URL taas on _www.example.com/api/notes_
+Kaikkia muistiinpanoja edustavan kokoelmaresurssin URL taas on <i>www.example.com/api/notes</i>
 
-Resursseille voi suorittaa erilaisia operaatiota. Suoritettavan operaation määrittelee HTTP-operaation tyyppi, jota kutsutaan usein myös _verbiksi_:
+Resursseille voi suorittaa erilaisia operaatiota. Suoritettavan operaation määrittelee HTTP-operaation tyyppi, jota kutsutaan usein myös <i>verbiksi</i>:
 
 | URL                   | verbi               | toiminnallisuus                                                  |
 | --------------------- | ------------------- | ---------------------------------------------------------------- |
@@ -473,24 +473,24 @@ Joissain yhteyksissä (ks. esim [Richardsom, Ruby: RESTful Web Services](http://
 
 Laajennetaan nyt sovellusta siten, että se tarjoaa muistiinpanojen operointiin REST-rajapinnan. Tehdään ensin [route](http://expressjs.com/en/guide/routing.html) yksittäisen resurssin katsomista varten.
 
-Yksittäisen muistiinpanon identifioi URL, joka on muotoa _notes/10_, missä lopussa oleva numero vastaa resurssin muistiinpanon id:tä.
+Yksittäisen muistiinpanon identifioi URL, joka on muotoa <i>notes/10</i>, missä lopussa oleva numero vastaa resurssin muistiinpanon id:tä.
 
 Voimme määritellä expressin routejen poluille [parametreja](http://expressjs.com/en/guide/routing.html) käyttämällä kaksoispistesyntaksia:
 
 ```js
 app.get('/notes/:id', (request, response) => {
-  const id = request.params.id;
-  const note = notes.find(note => note.id === id);
-  response.json(note);
-});
+  const id = request.params.id
+  const note = notes.find(note => note.id === id)
+  response.json(note)
+})
 ```
 
-Nyt <code>app.get('/notes/:id', ...)</code> käsittelee kaikki HTTP GET -pyynnöt, jotka ovat muotoa _note/JOTAIN_, missä _JOTAIN_ on mielivaltainen merkkijono.
+Nyt <code>app.get('/notes/:id', ...)</code> käsittelee kaikki HTTP GET -pyynnöt, jotka ovat muotoa <i>note/JOTAIN</i>, missä <i>JOTAIN</i> on mielivaltainen merkkijono.
 
-Polun parametrin _id_ arvoon päästään käsiksi pyynnön tiedot kertovan olion [request](http://expressjs.com/en/api.html#req) kautta:
+Polun parametrin <i>id</i> arvoon päästään käsiksi pyynnön tiedot kertovan olion [request](http://expressjs.com/en/api.html#req) kautta:
 
 ```js
-const id = request.params.id;
+const id = request.params.id
 ```
 
 Jo tutuksi tulleella taulukon _find_-metodilla haetaan taulukosta parametria vastaava muistiinpano ja palautetaan se pyynnön tekijälle.
@@ -501,38 +501,35 @@ Vanha hyvä keino on alkaa lisäillä koodiin _console.log_-komentoja:
 
 ```js
 app.get('/notes/:id', (request, response) => {
-  const id = request.params.id;
-  console.log(id);
-  const note = notes.find(note => note.id === id);
-  console.log(note);
-  response.json(note);
-});
+  const id = request.params.id
+  console.log(id)
+  const note = notes.find(note => note.id === id)
+  console.log(note)
+  response.json(note)
+})
 ```
 
-Konsoliin tulostuu
+Kun selaimella mennään jälleen osoitteeseen <http://localhost:3001/notes/1> konsoliin, eli siihen terminaaliin, mihin sovellus on käynnistetty tulostuu
 
-<pre>
-1
-undefined
-</pre>
+![](../images/3/8.png)
 
 eli halutun muistiinpanon id välittyy sovellukseen aivan oikein, mutta _find_ komento ei löydä mitään.
 
-Päätetään tulostella konsoliin myös _find_-komennon sisällä olevasta vertailijafunktiosta, joka onnistuu helposti kun tiiviissä muodossa oleva funktio <code>note => note.id === id</code> kirjoitetaan eksplisiittisen returnin sisältävässä muodossa:
+Päätetään tulostella konsoliin myös _find_-komennon sisällä olevasta vertailijafunktiosta, joka onnistuu helposti kun tiiviissä muodossa oleva funktio <em>note => note.id === id</em> kirjoitetaan eksplisiittisen returnin sisältävässä muodossa:
 
 ```js
 app.get('/notes/:id', (request, response) => {
-  const id = request.params.id;
+  const id = request.params.id
   const note = notes.find(note => {
-    console.log(note.id, typeof note.id, id, typeof id, note.id === id);
-    return note.id === id;
-  });
-  console.log(note);
-  response.json(note);
-});
+    console.log(note.id, typeof note.id, id, typeof id, note.id === id)
+    return note.id === id
+  })
+  console.log(note)
+  response.json(note)
+})
 ```
 
-Jokaisesta vertailufunktion kutsusta tulostetaan nyt monta asiaa. Konsolin tulostus on seuraava:
+Vierailtaessa jälleen yksittäisen muistiinpanon svulla jokaisesta vertailufunktion kutsusta tulostetaan nyt monta asiaa. Konsolin tulostus on seuraava:
 
 <pre>
 1 'number' '1' 'string' false
@@ -546,23 +543,23 @@ Korjataan ongelma, muuttamalla parametrina oleva merkkijonomuotoinen id [numerok
 
 ```js
 app.get('/notes/:id', (request, response) => {
-  const id = Number(request.params.id);
-  const note = notes.find(note => note.id === id);
-  response.json(note);
-});
+  const id = Number(request.params.id)
+  const note = notes.find(note => note.id === id)
+  response.json(note)
+})
 ```
 
 ja nyt yksittäisen resurssin hakeminen toimii
 
-![](../assets/3/6.png)
+![](../images/3/9.png)
 
 toiminnallisuuteen jää kuitenkin pieni ongelma.
 
 Jos haemme muistiinpanoa sellaisella indeksillä, mitä vastaavaa muistiinpanoa ei ole olemassa, vastaa palvelin seuraavasti
 
-![](../assets/3/7.png)
+![](../images/3/10.png)
 
-HTTP-statuskoodi on onnistumisesta kertova 200. Vastaukseen ei liity dataa, sillä headerin _content-length_ arvo on 0, ja samaa todistaa selain: mitään ei näy.
+HTTP-statuskoodi on onnistumisesta kertova 200. Vastaukseen ei liity dataa, sillä headerin <i>content-length</i> arvo on 0, ja samaa todistaa selain: mitään ei näy.
 
 Syynä tälle käyttäytymiselle on se, että muuttujan _note_ arvoksi tulee _undefined_ jos muistiinpanoa ei löydy. Tilanne tulisi käsitellä palvelimella järkevämmin, eli statuskoodin 200 sijaan tulee vastata statuskoodilla [404 not found](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5).
 
@@ -570,15 +567,17 @@ Tehdään koodiin muutos
 
 ```js
 app.get('/notes/:id', (request, response) => {
-  const id = Number(request.params.id);
-  const note = notes.find(note => note.id === id);
-
+  const id = Number(request.params.id)
+  const note = notes.find(note => note.id === id)
+  
+  // highlight-start
   if (note) {
-    response.json(note);
+    response.json(note)
   } else {
-    response.status(404).end();
+    response.status(404).end()
   }
-});
+  // highlight-end
+})
 ```
 
 Koska vastaukseen ei nyt liity mitään dataa käytetään statuskoodin asettavan metodin [status](http://expressjs.com/en/4x/api.html#res.status) lisäksi metodia [end](http://expressjs.com/en/4x/api.html#res.end) ilmoittamaan siitä, että pyyntöön tulee vastata ilman dataa.
@@ -614,11 +613,11 @@ Käytetään nyt kuitenkin [postman](https://www.getpostman.com/)-nimistä sovel
 
 Asennetaan postman ja kokeillaan
 
-![](../assets/3/8.png)
+![](../images/3/11.png)
 
 Postmanin käyttö on tässä tilanteessa suhteellisen yksinkertaista, riittää määritellä url ja valita oikea pyyntötyyppi.
 
-Palvelin näyttää vastaavan oikein. Tekemällä HTTP GET osoitteeseen _http://localhost:3001/notes_ selviää että poisto-operaatio oli onnistunut, muistiinpanoa, jonka id on 2 ei ole enää listalla.
+Palvelin näyttää vastaavan oikein. Tekemällä HTTP GET osoitteeseen <http://localhost:3001/notes> selviää että poisto-operaatio oli onnistunut, muistiinpanoa, jonka id on 2 ei ole enää listalla.
 
 Koska muistiinpanot on talletettu palvelimen muistiin, uudelleenkäynnistys palauttaa tilanteen ennalleen.
 
@@ -627,113 +626,127 @@ Koska muistiinpanot on talletettu palvelimen muistiin, uudelleenkäynnistys pala
 Jos käytät Visual Studio Codea, voit postmanin sijaan käyttää VS Coden
 [REST client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) -pluginia.
 
-Kun plugin on asennettu, on sen käyttö erittäin helppoa. Tehdään projektin juureen hakemisto _requests_, jonka sisään talletetaan REST Client -pyynnöt _.rest_-päätteisinä tiedostoina.
+Kun plugin on asennettu, on sen käyttö erittäin helppoa. Tehdään projektin juureen hakemisto <i>requests</i>, jonka sisään talletetaan REST Client -pyynnöt <i>.rest</i>-päätteisinä tiedostoina.
 
-Luodaan kaikki muistiinpanot hakevan pyynnön määrittelevä tiedosto _get_all_notes.rest_
+Luodaan kaikki muistiinpanot hakevan pyynnön määrittelevä tiedosto <i>get\_all\_notes.rest</i>
 
-![](../images/3/8a.pnng
+![](../images/3/12.png)
 
-Klikkaamalla _Send Request_ -tekstiä, REST client suorittaa määritellyn HTTP-pyynnön ja palvelimen vastaus avautuu editoriin:
+Klikkaamalla tekstiä <i>Send Request</i>, REST client suorittaa määritellyn HTTP-pyynnön ja palvelimen vastaus avautuu editoriin:
 
-![](../images/3/8b.pnng
+![](../images/3/13.png)
 
 ### Datan vastaanottaminen
 
-Toteutetaan seuraavana uusien muistiinpanojen lisäys, joka siis tapahtuu tekemällä HTTP POST -pyyntö osoitteeseen _http://localhost:3001/notes_ ja liittämällä pyynnön mukaan eli [bodyyn](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) luotavan muistiinpanon tiedot JSON-muodossa.
+Toteutetaan seuraavana uusien muistiinpanojen lisäys, joka siis tapahtuu tekemällä HTTP POST -pyyntö osoitteeseen http://localhost:3001/notes ja liittämällä pyynnön mukaan eli [bodyyn](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) luotavan muistiinpanon tiedot JSON-muodossa.
 
 Jotta pääsisimme pyynnön mukana lähetettyyn dataan helposti käsiksi, tarvitsemme [body-parser](https://github.com/expressjs/body-parser)-kirjaston apua.
 
 Otetaan body-parser käyttöön ja luodaan alustava määrittely HTTP POST -pyynnön käsittelyyn
 
 ```js
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
+const express = require('express')
+const app = express()
+const bodyParser = require('body-parser')
 
-app.use(bodyParser.json());
+app.use(bodyParser.json())
 
 //...
 
 app.post('/notes', (request, response) => {
-  const note = request.body;
-  console.log(note);
+  const note = request.body
+  console.log(note)
 
-  response.json(note);
-});
+  response.json(note)
+})
 ```
 
-Tapahtumankäsittelijäfunktio pääsee dataan käsiksi viittaamalla _request.body_.
+Tapahtumankäsittelijäfunktio pääsee dataan käsiksi olion _request_ kentän <i>body</i> avulla.
 
-Ilman body-parser-käyttöönottoa pyynnön kentän _body_ arvo olisi ollut määrittelemätön. body-parserin toimintaperiaatteena on, että se ottaa pyynnön mukana olevan JSON-muotoisen datan, muuttaa sen Javascript-olioksi ja sijoittaa _request_-olion kenttään _body_ ennen kuin routen käsittelijää kutsutaan.
+Ilman body-parser-käyttöönottoa pyynnön kentän <i>body</i> arvo olisi ollut määrittelemätön. body-parserin toimintaperiaatteena on, että se ottaa pyynnön mukana olevan JSON-muotoisen datan, muuttaa sen Javascript-olioksi ja sijoittaa _request_-olion kenttään <i>body</i> ennen kuin routen käsittelijää kutsutaan.
 
 Toistaiseksi sovellus ei vielä tee vastaanotetulle datalle mitään muuta kuin tulostaa sen konsoliin ja palauttaa sen pyynnön vastauksessa.
 
-Ennen toimintalogiikan viimeistelyä varmistetaan ensin postmanilla, että lähetetty tieto menee varmasti perille. Pyyntötyypin ja urlin lisäksi on määriteltävä myös pyynnön mukana menevä data eli _body_:
+Ennen toimintalogiikan viimeistelyä varmistetaan ensin postmanilla, että lähetetty tieto menee varmasti perille. Pyyntötyypin ja urlin lisäksi on määriteltävä myös pyynnön mukana menevä data eli <i>body</i>:
 
-![](../assets/3/9.pngng
-Näyttää kuitenkin siltä, että mitään ei mene perille, palvelin vastaanottaa ainoastaan tyhjän olion. Missä on vika? Olemme unohtaneet määritellä headerille _Content-Type_ oikean arvon:
+![](../images/3/14.png)
 
-![](../assets/3/10.pnng
+Sovellus tulostaa lähetetyn vastaanottamansa datan terminaaliin:
 
-Nyt kaikki toimii! Ilman oikeaa headerin arvoa palvelin ei osaa parsia dataa oikeaan muotoon. Se ei edes yritä arvailla missä muodossa data on, sillä potentiaalisia datan siirtomuotoja eli _Content-Typejä_ on olemassa [suuri määrä](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types).
+![](../images/3/15.png)
 
-Jos käytät VS Codea niin edellisessä luvussa esitelty REST client kannattaa asentaa viimeistään _nyt_. POST-pyyntö tehdään REST clientillä seuraavasti:
+**HUOM** kun ohjelmoit backendia, <i>pidä sovellusta suorittava konsoli koko ajan näkyvillä</i>. Nodemonin ansiosta sovellus käynnistyy uudelleen jos koodiin tehdään muutoksia. Jos seuraat konsolia, huomaat välittömästi jos sovelluksen koodiin tulee joku perustavanlaatuinen virhe:
 
-![](../images/3/8c.pnng
+![](../images/3/16.png)
 
-Eli pyyntöä varten on luotu oma tiedosto _new_note.rest_. Pyyntö on muotoiltu [dokumentaation ohjetta](https://github.com/Huachao/vscode-restclient/blob/master/README.md#usage) noudatellen.
+Vastaavasti konsolista kannattaa seurata reagoiko backend odotetulla tavalla, esim. kun sovellukselle lähetetään dataa metodilla HTTP POST. Backendiin kannattaa luonnollisesti lisäillä runsaat määrät <em>console.log</em>-komentoja kun sovellus on kehitysvaiheessa. 
 
-REST clientin eräs suuri etu postmaniin verrattuna on se, että pyynnöt saa kätevästi talletettua projektin repositorioon ja tällöin ne ovat helposti koko kehitystiimin käytössä. Postmanillakin on mahdollista tallettaa pyyntöjä, mutta tilanne menee helposti kaaoottiseksi etenkin jos työn alla on useita toisistaan riippumattomia projekteja.
+Eräs potentiaalinen ongelmanlähde on se, että dataa lähettäessä, sen headerille <i>Content-Type</i> ei aseteta oikeaa arvoa. Näin tapahtuu esim. jos Postmanissa bodyn tyypiä ei määritellä oikein:
+
+![](../images/3/17a.png)
+
+headerin <i>Content-Type</i> arvoksi asettuu <i>text/plain</i>
+
+![](../images/3/18.png)
+
+Palvelin näyttää vastaanottavan ainoastaan tyhjän olion
+
+![](../images/3/19.png)
+
+Ilman oikeaa headerin arvoa palvelin ei osaa parsia dataa oikeaan muotoon. Se ei edes yritä arvailla missä muodossa data on, sillä potentiaalisia datan siirtomuotoja eli <i>Content-Typejä</i> on olemassa [suuri määrä](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types).
+
+Jos käytät VS Codea niin edellisessä luvussa esitelty REST client kannattaa asentaa viimeistään <i>nyt</i>. POST-pyyntö tehdään REST clientillä seuraavasti:
+
+![](../images/3/20.png)
+
+Eli pyyntöä varten on luotu oma tiedosto <i>new\_note.rest</i>. Pyyntö on muotoiltu [dokumentaation ohjetta](https://github.com/Huachao/vscode-restclient/blob/master/README.md#usage) noudatellen.
+
+REST clientin eräs suuri etu Postmaniin verrattuna on se, että pyynnöt saa kätevästi talletettua projektin repositorioon ja tällöin ne ovat helposti koko kehitystiimin käytössä. Postmanillakin on mahdollista tallettaa pyyntöjä, mutta tilanne menee helposti kaaoottiseksi etenkin jos työn alla on useita toisistaan riippumattomia projekteja.
 
 > **Tärkeä sivuhuomio**
 >
-> Välillä debugatessa tulee vastaan tilanteita, joissa backendissä on tarve selvittää mitä headereja HTTP-pyynnöille on asetettu. Eräs menetelmä tähän on _request_-olion melko kehnosti nimetty metodi [get](http://expressjs.com/en/4x/api.html#req.get), jonka avulla voi selvittää yksittäisen headerin arvon. _request_-oliolla on myös kenttä _headers_, jonka arvona ovat kaikki pyyntöön liittyvät headerit.
+> Välillä debugatessa tulee vastaan tilanteita, joissa backendissä on tarve selvittää mitä headereja HTTP-pyynnöille on asetettu. Eräs menetelmä tähän on _request_-olion melko kehnosti nimetty metodi [get](http://expressjs.com/en/4x/api.html#req.get), jonka avulla voi selvittää yksittäisen headerin arvon. _request_-oliolla on myös kenttä <i>headers</i>, jonka arvona ovat kaikki pyyntöön liittyvät headerit.
 >
 > Ongelmia voi esim syntyä jos jätät vahingossa VS REST clientillä ylimmän rivin ja headerit määrittelevien rivien väliin tyhjän rivin. Tällöin REST client tulkitsee, että millekään headerille ei aseteta arvoa ja näin backend ei osaa tulkita pyynnön mukana olevaa dataa JSON:iksi.
 >
-> Puuttuvan _content-type_-headerin ongelma selviää kun backendissa tulostaa pyynnön headerit esim. komennolla console.log(request.headers)
+> Puuttuvan <i>content-type</i>-headerin ongelma selviää kun backendissa tulostaa pyynnön headerit esim. komennolla _console.log(request.headers)_
 
 Palataan taas sovelluksen pariin. Kun tiedämme, että sovellus vastaanottaa tiedon oikein, voimme viimeistellä sovelluslogiikan:
 
 ```js
 app.post('/notes', (request, response) => {
-  const maxId =
-    notes.length > 0
-      ? notes
-          .map(n => n.id)
-          .sort((a, b) => a - b)
-          .reverse()[0]
-      : 1;
-  const note = request.body;
-  note.id = maxId + 1;
+  const maxId = notes.length > 0
+    ? Math.max(...notes.map(n => n.id)) 
+    : 0
 
-  notes = notes.concat(note);
+  const note = request.body
+  note.id = maxId + 1
 
-  response.json(note);
-});
+  notes = notes.concat(note)
+
+  response.json(note)
+})
 ```
 
-Uudelle muistiinpanolle tarvitaan uniikki id. Ensin selvitetään olemassaolevista id:istä suurin muuttujaan _maxId_. Uuden muistiinpanon id:ksi asetetaan sitten _maxId+1_. Tämä tapa ei ole itseasiassa kovin hyvä, mutta emme nyt välitä siitä sillä tulemme pian korvaamaan tavan miten muistiinpanot talletetaan.
+Uudelle muistiinpanolle tarvitaan uniikki id. Ensin selvitetään olemassaolevista id:istä suurin muuttujaan _maxId_. Uuden muistiinpanon id:ksi asetetaan sitten _maxId + 1_. Tämä tapa ei ole itseasiassa kovin hyvä, mutta emme nyt välitä siitä sillä tulemme pian korvaamaan tavan miten muistiinpanot talletetaan.
 
-Tämän hetkisessä versiossa on vielä se ongelma, että voimme HTTP POST -pyynnöllä lisätä mitä tahansa kenttiä sisältäviä olioita. Parannellaan sovellusta siten, että kenttä _content_ vaaditaan. Kentille _important_ ja _date_ asetetaan oletusarvot. Kaikki muut kentät hylätään:
+Tämän hetkisessä versiossa on vielä se ongelma, että voimme HTTP POST -pyynnöllä lisätä mitä tahansa kenttiä sisältäviä olioita. Parannellaan sovellusta siten, että kenttä <i>content</i> vaaditaan. Kentille <i>important</i> ja <i>date</i> asetetaan oletusarvot. Kaikki muut kentät hylätään:
 
 ```js
 const generateId = () => {
-  const maxId =
-    notes.length > 0
-      ? notes
-          .map(n => n.id)
-          .sort((a, b) => a - b)
-          .reverse()[0]
-      : 1;
-  return maxId + 1;
-};
+  const maxId = notes.length > 0
+    ? Math.max(...notes.map(n => n.id))
+    : 0
+  return maxId + 1
+}
 
 app.post('/notes', (request, response) => {
-  const body = request.body;
+  const body = request.body
 
   if (body.content === undefined) {
-    return response.status(400).json({ error: 'content missing' });
+    return response.status(400).json({ 
+      error: 'content missing' 
+    })
   }
 
   const note = {
@@ -741,49 +754,134 @@ app.post('/notes', (request, response) => {
     important: body.important || false,
     date: new Date(),
     id: generateId(),
-  };
+  }
 
-  notes = notes.concat(note);
+  notes = notes.concat(note)
 
-  response.json(note);
-});
+  response.json(note)
+})
 ```
 
 Tunnisteena toimivan id-kentän arvon generointilogiikka on eriytetty funktioon _generateId_.
 
-Jos kenttä _content_ puuttuu, vastataan statuskoodilla [400 bad request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1):
+Jos vastaanotetulta datalta puuttuu kenttä <i>content</i>, vastataan statuskoodilla [400 bad request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1):
 
 ```js
 if (body.content === undefined) {
-  return response.status(400).json({ error: 'content missing' });
+  return response.status(400).json({ 
+    error: 'content missing' 
+  })
 }
 ```
 
-Huomaa, että returnin kutsuminen on tärkeää, jos sitä ei tapahdu, jatkaa koodi suoritusta metodin loppuun asti ja virheellinen muistiinpano tallettuu tietokantaan!
+Huomaa, että returnin kutsuminen on tärkeää, jos sitä ei tapahdu, jatkaa koodi suoritusta metodin loppuun asti ja virheellinen muistiinpano tallettuu!
 
-Jos content-kentällä on arvo, luodaan muistiinpano syötteen perusteella. Kuten edellisessä osassa mainitsimme, aikaleimoja ei kannata luoda selaimen koodissa, sillä käyttäjän koneen kellon aikaan ei voi luottaa. Aikaleiman eli kentän _date_ arvon generointi tapahtuukin nyt palvelimen toimesta.
+Jos content-kentällä on arvo, luodaan muistiinpano syötteen perusteella. Kuten edellisessä osassa mainitsimme, aikaleimoja ei kannata luoda selaimen koodissa, sillä käyttäjän koneen kellon aikaan ei voi luottaa. Aikaleiman eli kentän <i>date</i> arvon generointi tapahtuukin nyt palvelimen toimesta.
 
-Jos kenttä _important_ puuttuu, asetetaan sille oletusarvo _false_. Oletusarvo generoidaan nyt hieman erikoisella tavalla:
+Jos kenttä <i>important</i> puuttuu, asetetaan sille oletusarvo <i>false</i>. Oletusarvo generoidaan nyt hieman erikoisella tavalla:
 
 ```js
 important: body.important || false,
 ```
 
-jos sovelluksen vastaanottamassa muuttujaan _body_ talletetussa datassa on kenttä _important_, tulee lausekkeelle sen arvo. Jos kenttää ei ole olemassa, tulee lausekkeen arvoksi oikeanpuoleinen osa eli _important_.
+jos sovelluksen vastaanottamassa muuttujaan _body_ talletetussa datassa on kenttä <i>important</i>, tulee lausekkeelle sen arvo. Jos kenttää ei ole olemassa, tulee lausekkeen arvoksi oikeanpuoleinen osa eli <i>false</i>.
 
-> Jos ollaan tarkkoja, niin kentän _body.important_ arvon ollessa _false_, tulee lausekkeen <code>body.important || false</code> arvoksi oikean puoleinen _false_...
+> Jos ollaan tarkkoja, niin kentän <i>important</i> arvon ollessa <i>false</i>, tulee lausekkeen <em>body.important || false</em> arvoksi oikean puoleinen <i>false</i>...
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-1)
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-1)
 
-Huomaa, että repositorion master-haarassa on myöhemmän vaiheen koodi, tämän hetken koodi on tagissa [part3-1](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-1):
+Huomaa, että repositorion master-haarassa on myöhemmän vaiheen koodi, tämän hetken koodi on branchissa [part3-1](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-1):
 
-![](../master/3/1b.pnng
+![](../images/3/21.png)
 
-Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnistämistä eli komentoa _npm start_.
+Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnistämistä eli komentoa _npm start_ tai _npm run watch_.
+
+Vielä pieni huomio ennen tehtäviä. Uuden id:n generoiva funktio näyttää seuraavalta
+
+```js
+const generateId = () => {
+  const maxId = notes.length > 0
+    ? Math.max(...notes.map(n => n.id))
+    : 0
+  return maxId + 1
+}
+```
+
+Koodi sisältää hieman erikoisen näköisen rivin
+
+```js
+Math.max(...notes.map(n => n.id))
+```
+
+Mitä rivillä tapahtuu? <em>notes.map(n => n.id)</em> muodostaa taulukon, joka koostuu muisiinpanojen id-kentisstä. [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) palauttaa maksimin sille parametrina annetuista luvuista. <em>notes.map(n => n.id)</em> on kuitenkin <i>taulukko</i>, joten se ei kelpaa parametriksi komennolle _Math.max_. Taulukko voidaan muuttaa yksittäisiksi luvuiksi käyttäen taulukon [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)-syntaksia, eli kolmea pistettä <em>... taulukko</em>.
+
+</div>
+
+<div class="tasks">
 
 ### Tehtäviä
 
-Tee nyt tehtävät [3.1-3.6](/tehtävät#expressin-alkeet)
+**HUOM:** tämän osan tehtäväsarja kannattaa tehdä omaan git-repositorioon, suoraan repositorion juureen! Jos et tee näin, joudut ongelmiin tehtävässä 3.10
+
+**HUOM2:** Koska nyt ei ole kyse fronendista ja Reactista, sovellusta <strong>ei luoda</strong> create-react-app:illa vaan komennolla <em>npm init</em> kuten ylempänä tämän osan materiaalissa.
+
+
+**Vahva suositus:** kun teet backendin koodia, pidä koko ajan silmällä mitä palvelimen koodia suorittavassa konsolissa tapahtuu.
+
+#### 3.1 puhelinluettelon backend osa 1
+
+Tee Node-sovellus, joka tarjoaa osoitteessa <http://localhost:3001/api/persons> kovakoodatun taulukon puhelinnumerotietoja:
+
+![](../assets/teht/19.png)
+
+Huomaa, että Noden routejen määrittelyssä merkkijonon <i>api/persons</i> vinoviiva käyttäytyy kuten mikä tahansa muu merkki.
+
+Sovellus pitää pystyä käynnistämään komennolla _npm start_.
+
+Komennolla _npm run watch_ käynnistettäessa sovelluksen tulee käynnistyä uudelleen kun koodiin tehdään muutoksia.
+
+#### 3.2: puhelinluettelon backend osa 2
+
+Tee sovelluksen osoitteeseen <http://localhost:3001/info> suunnilleen seuraavanlainen sivu
+
+![](../assets/teht/20.png)
+
+
+eli sivu kertoo pyynnön tekohetken sekä sen kuinka monta puhelinluettelotietoa sovelluksen muistissa olevassa taulukossa on.
+
+#### 3.3: puhelinluettelon backend osa 3
+
+Toteuta toiminnallisuus yksittäisen puhelinnumerotiedon näyttämiseen. Esim. id:n 5 omaavan numerotiedon url on <http://localhost:3001/api/persons/5>
+
+Jos id:tä vastaavaa puhelinnumerotietoa ei ole, tulee palvelimen vastata asianmukaisella statuskoodilla.
+
+#### 3.4: puhelinluettelon backend osa 4
+
+Toteuta toiminnallisuus, jonka avulla puhelinnumerotieto on mahdollista poistaa numerotiedon yksilöivään URL:iin tehtävällä HTTP DELETE -pyynnöllä.
+
+Testaa toiminnallisuus Postmanilla tai Visual Studio Coden REST clientillä
+
+#### 3.5: puhelinluettelon backend osa 5
+
+Laajenna backendia siten, että uusia puhelintietoja on mahdollista lisätä osoitteeseen <http://localhost:3001/api/persons> tapahtuvalla HTTP POST -pyynnöllä.
+
+Generoi uuden puhelintiedon tunniste funktiolla [Math.random](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random). Käytä riittävän isoa arvoväliä jotta arvottu id on riittävän suurella todennäköisyydellä sellainen, joka ei ole jo käytössä.
+
+#### 3.6: puhelinluettelon backend osa 6
+
+Tee uuden numeron lisäykseen virheiden käsittely. Pyyntö ei saa onnistua, jos
+- nimi tai numero puuttuu
+- lisättävä nimi on jo luettelossa
+
+Vastaa asiaankuuluvalla statuskoodilla, liitä vastaukseen mukaan myös tieto, joka kertoo virheen syyn, esim:
+
+```js
+{ error: 'name must be unique' }
+```
+
+</div>
+
+<div class="content">
 
 ### Huomioita HTTP pyyntötyyppien käytöstä
 
@@ -855,7 +953,30 @@ const error = (request, response) => {
 app.use(error);
 ```
 
-### Tehtäviä
+</div>
 
-Tee nyt tehtävät [3.7 ja 3.8](/tehtävät#lisää-middlewareja)
+<div class="tasks">
+
+### tehtäviä
+
+#### 3.7: puhelinluettelon backend osa 7
+
+Lisää sovellukseesi loggausta tekevä middleware [morgan](https://github.com/expressjs/morgan). Konfiguroi se logaamaan konsoliin _tiny_-konfiguraation mukaisesti.
+
+Morganin ohjeet eivät ole ehkä kaikkein selvimmät ja joudut kenties miettimään hiukan. Toisaalta juuri koskaan dokumentaatio ei ole aivan itsestäänselvää, joten kryptisempiäkin asioita on hyvä oppia tulkitsemaan.
+
+Morgan asennetaan kuten muutkin kirjastot, eli komennolla _npm install_ ja sen käyttöönotto tapahtuu kaikkien middlewarejen tapaan komennolla _app.use_
+
+#### 3.8* :puhelinluettelon backend osa 8
+
+Konfiguroi morgania siten, että se näyttää myös HTTP-pyyntöjen mukana tulevan datan:
+
+![](../assets/teht/21.png)
+
+Tämä tehtävä on kohtuullisen haastava vaikka koodia ei tarvitakkaan paljoa.
+
+Pari vihjettä:
+- [creating new tokens](https://github.com/expressjs/morgan#creating-new-tokens)
+- [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
+
 </div>
