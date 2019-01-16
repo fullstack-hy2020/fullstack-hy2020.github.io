@@ -8,7 +8,7 @@ letter: b
 
 Jatketaan sovelluksen laajentamista siten, että se mahdollistaa uusien muistiinpanojen lisäämisen.
 
-Jotta saisimme sivun päivittymään uusien muistiinpanojen lisäyksen yhteydessä, on parasta sijoittaa muistiinpanot komponentin <code>App</code> tilaan. Eli importataan funktio [useState](https://reactjs.org/docs/hooks-state.html) ja määritellään sen avulla komponentille tila joka saa aluksi arvokseen propsina välitettävän muistiinpanot alustavan taulukon: 
+Jotta saisimme sivun päivittymään uusien muistiinpanojen lisäyksen yhteydessä, on parasta sijoittaa muistiinpanot komponentin <i>App</i> tilaan. Eli importataan funktio [useState](https://reactjs.org/docs/hooks-state.html) ja määritellään sen avulla komponentille tila, joka saa aluksi arvokseen propsina välitettävän muistiinpanot alustavan taulukon: 
 
 ```js
 import React, { useState } from 'react' // highlight-line
@@ -37,7 +37,7 @@ const App = (props) => { // highlight-line
 export default App
 ```
 
-Komponentti siis alustaa funktion <code>useState</code> avulla tilan  <code>notes</code> arvoksi propseina välitettävän alustavan muistiinpanojen listan:
+Komponentti siis alustaa funktion <em>useState</em> avulla tilan  <em>notes</em> arvoksi propseina välitettävän alustavan muistiinpanojen listan:
 
 ```js
 const App = (props) => { 
@@ -47,7 +47,7 @@ const App = (props) => {
 }
 ```
 
-Jos haluaisimme lähteä liikkeelle tyhjästä muistiinpanojen listasta, annettaisiin tilan alkuarvoksi tyhjä taulukko, ja koska komponentti ei käyttäisi ollenkaan propseja, voitaisiin parametri <code>props</code> jättää kokonaan määrittelemättä:
+Jos haluaisimme lähteä liikkeelle tyhjästä muistiinpanojen listasta, annettaisiin tilan alkuarvoksi tyhjä taulukko, ja koska komponentti ei käyttäisi ollenkaan propseja, voitaisiin parametri <em>props</em> jättää kokonaan määrittelemättä:
 
 ```js
 const App = () => { 
@@ -91,7 +91,7 @@ const App = (props) => {
 }
 ```
 
-Lomakkeelle on lisätty myös tapahtumankäsittelijäksi metodi _funktio_ reagoimaan sen "lähettämiseen", eli napin painamiseen.
+Lomakkeelle on lisätty myös tapahtumankäsittelijäksi funktio _addNote_ reagoimaan sen "lähettämiseen", eli napin painamiseen.
 
 Tapahtumankäsittelijä on [osasta 1](/osa1#tapahtumankäsittely) tuttuun tapaan määritelty seuraavasti:
 
@@ -102,9 +102,9 @@ const addNote = (event) => {
 }
 ```
 
-Parametrin <code>event</code> arvona on metodin kutsun aiheuttama [tapahtuma](https://reactjs.org/docs/handling-events.html).
+Parametrin <em>event</em> arvona on metodin kutsun aiheuttama [tapahtuma](https://reactjs.org/docs/handling-events.html).
 
-Tapahtumankäsittelijä kutsuu heti tapahtuman metodia <code>event.preventDefault()</code> jolla se estää lomakkeen lähetyksen oletusarvoisen toiminnan, joka aiheuttaisi mm. sivun uudelleenlatautumisen.
+Tapahtumankäsittelijä kutsuu heti tapahtuman metodia <em>event.preventDefault()</em> jolla se estää lomakkeen lähetyksen oletusarvoisen toiminnan, joka aiheuttaisi mm. sivun uudelleenlatautumisen.
 
 Tapahtuman kohde, eli _event.target_ on tulostettu konsoliin
 
@@ -112,17 +112,20 @@ Tapahtuman kohde, eli _event.target_ on tulostettu konsoliin
 
 Kohteena on siis komponentin määrittelemä lomake.
 
-Miten pääsemme käsiksi lomakkeen <code>input</code>-komponenttiin syötettyyn dataan?
+Miten pääsemme käsiksi lomakkeen <i>input</i>-komponenttiin syötettyyn dataan?
 
 Tapoja on useampia, tutustumme ensin ns. [kontrolloituina komponentteina](https://reactjs.org/docs/forms.html#controlled-components) toteutettuihin lomakkeisiin.
 
-Lisätään komonentille <code>App</code>tila <code>newNote</code> lomakkeen syötettä varten **ja** määritellään se <code>input</code>-komponentin attribuutin <code>value</code> arvoksi:
+Lisätään komonentille <i>App</i> tila <em>newNote</em> lomakkeen syötettä varten **ja** määritellään se <i>input</i>-komponentin attribuutin <i>value</i> arvoksi:
 
 ```js
 const App = (props) => {
   const [notes, setNotes] = useState(props.notes) 
-  const [newNote, setNewNote] = useState('uusi muistiinpano...') // highlight-line
-
+  // highlight-start
+  const [newNote, setNewNote] = useState(
+    'uusi muistiinpano...'
+  ) 
+// highlight-end
   // ...
 
   return (
@@ -140,18 +143,20 @@ const App = (props) => {
 }
 ```
 
-Tilaan <code>newNote</code> määritelty "placeholder"-teksti _uusi muistiinpano..._ ilmestyy syötekomponenttiin, tekstiä ei kuitenkaan voi muuttaa. Konsoliin tuleekin ikävä varoitus joka kertoo mistä on kyse
+Tilaan <em>newNote</em> määritelty "placeholder"-teksti <i>uusi muistiinpano...</i> ilmestyy syötekomponenttiin, tekstiä ei kuitenkaan voi muuttaa. Konsoliin tuleekin ikävä varoitus joka kertoo mistä on kyse
 
 ![](../images/2/7b.png)
 
-Koska määrittelimme syötekomponentille <code>value</code>-attribuutiksi komponentin <code>App</code> tilassa olevan muuttujan, alkaa <code>App</code> [kontrolloimaan](https://reactjs.org/docs/forms.html#controlled-components) syötekomponentin toimintaa.
+Koska määrittelimme syötekomponentille <i>value</i>-attribuutiksi komponentin <i>App</i> tilassa olevan muuttujan, alkaa <i>App</i> [kontrolloimaan](https://reactjs.org/docs/forms.html#controlled-components) syötekomponentin toimintaa.
 
-Jotta kontrolloidun syötekomponentin editoiminen olisi mahdollista, täytyy sille rekisteröidä _tapahtumankäsittelijä_, joka synkronoi syötekenttään tehdyt muutokset komponentin <code>App</code> tilaan:
+Jotta kontrolloidun syötekomponentin editoiminen olisi mahdollista, täytyy sille rekisteröidä <i>tapahtumankäsittelijä</i>, joka synkronoi syötekenttään tehdyt muutokset komponentin <i>App</i> tilaan:
 
 ```js
 const App = (props) => {
   const [notes, setNotes] = useState(props.notes) 
-  const [newNote, setNewNote] = useState('uusi muistiinpano...')
+  const [newNote, setNewNote] = useState(
+    'uusi muistiinpano...'
+  )
 
   // ...
 // highlight-start
@@ -179,7 +184,7 @@ const App = (props) => {
 }
 ```
 
-Lomakkeen <code>input</code>-komponentille on nyt rekisteröity tapahtumankäsittelijä tilanteeseen _onChange_:
+Lomakkeen <i>input</i>-komponentille on nyt rekisteröity tapahtumankäsittelijä tilanteeseen <i>onChange</i>:
 
 ```js
 <input
@@ -188,7 +193,7 @@ Lomakkeen <code>input</code>-komponentille on nyt rekisteröity tapahtumankäsit
 />
 ```
 
-Tapahtumankäsittelijää kutsutaan _aina kun syötekomponentissa tapahtuu jotain_. Tapahtumankäsittelijämetodi saa parametriksi tapahtumaolion <code>event</code>
+Tapahtumankäsittelijää kutsutaan <i>aina kun syötekomponentissa tapahtuu jotain</i>. Tapahtumankäsittelijämetodi saa parametriksi tapahtumaolion <em>event</em>
 
 ```js
 const handleNoteChange = (event) => {
@@ -197,9 +202,9 @@ const handleNoteChange = (event) => {
 }
 ```
 
-Tapahtumaolion kenttä <code>target</code> vastaa nyt kontrolloitua <code>input</code>-kenttää ja <code>event.target.value</code> viittaa inputin syötekentän arvoon.
+Tapahtumaolion kenttä <em>target</em> vastaa nyt kontrolloitua <i>input</i>-kenttää ja <em>event.target.value</em> viittaa inputin syötekentän arvoon.
 
-Huomaa, että toisin kuin tapahtuman _onSubmit_ käsittelijässä, nyt oletusarvoisen toiminnan estävää metodikutusua _event.preventDefault()_ ei tarvita, sillä syötekentän muutoksella ei ole oletusarvoista toimintaa toisin kuin lomakkeen lähettämisellä.
+Huomaa, että toisin kuin lomakkeen lähettämistä vastaavan tapahtuman <i>onSubmit</i> käsittelijässä, nyt oletusarvoisen toiminnan estävää metodikutusua _event.preventDefault()_ ei tarvita, sillä syötekentän muutoksella ei ole oletusarvoista toimintaa toisin kuin lomakkeen lähettämisellä.
 
 Voit seurata konsolista miten tapahtumankäsittelijää kutsutaan:
 
@@ -209,7 +214,7 @@ Muistithan jo asentaa [React devtoolsin](https://chrome.google.com/webstore/deta
 
 ![](../images/2/9b.png)
 
-Nyt komponentin <code>App</code> tilan <code>newNote</code> heijastaa koko ajan syötekentän arvoa, joten voimme viimeistellä uuden muistiinpanon lisäämisestä huolehtivan metodin <code>addNote</code>:
+Nyt komponentin <i>App</i> tila <em>newNote</em> heijastaa koko ajan syötekentän arvoa, joten voimme viimeistellä uuden muistiinpanon lisäämisestä huolehtivan metodin <em>addNote</em>:
 
 ```js
 const addNote = (event) => {
@@ -226,17 +231,17 @@ const addNote = (event) => {
 }
 ```
 
-Ensin luodaan uutta muistiinpanoa vastaava olio <code>noteObject</code>, jonka sisältökentän arvo saadaan komponentin tilasta <code>newNote</code>. Yksikäsitteinen tunnus eli </ode>id</code> generoidaan kaikkien muistiinpanojen lukumäärän perusteella. Koska muistiinpanoja ei poisteta, menetelmä toimii sovelluksessamme. Komennon <code>Math.random()</code> avulla muistiinpanosta tulee 50% todennäköisyydellä tärkeä.
+Ensin luodaan uutta muistiinpanoa vastaava olio <em>noteObject</em>, jonka sisältökentän arvo saadaan komponentin tilasta <em>newNote</em>. Yksikäsitteinen tunnus eli <i>id</i> generoidaan kaikkien muistiinpanojen lukumäärän perusteella. Koska muistiinpanoja ei poisteta, menetelmä toimii sovelluksessamme. Komennon <em>Math.random()</em> avulla muistiinpanosta tulee 50% todennäköisyydellä tärkeä.
 
-Uusi muistiinpano lisätään vanhojen joukkoon oikeaoppisesti käyttämällä [osasta 1](/osa1#taulukon-käsittelyä) tuttua taulukon metodia [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat):
+Uusi muistiinpano lisätään vanhojen joukkoon oikeaoppisesti käyttämällä [osasta 1](/osa1/javascriptia#taulukot) tuttua taulukon metodia [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat):
 
 ```js
 setNotes(notes.concat(noteObject))
 ```
 
-Metodi ei muuta alkuperäistä tilaa <code>notes</code> vaan luo uuden taulukon, joka sisältää myös lisättävän alkion. Tämä on tärkeää, sillä Reactin tilaa [ei saa muuttaa suoraan](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly)!
+Metodi ei muuta alkuperäistä tilaa <em>notes</em> vaan luo <i>uuden taulukon, joka sisältää myös lisättävän alkion</i>. Tämä on tärkeää, sillä Reactin tilaa [ei saa muuttaa suoraan](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly)!
 
-Tapahtumankäsittelijä tyhjentää myös syötekenttää kontrolloiva tila <code>newNote</code> sen tilaa muuttavalla funktiolla <code>setNewNote</code>
+Tapahtumankäsittelijä tyhjentää myös syötekenttää kontrolloivan tilan <em>newNote</em> sen funktiolla <em>setNewNote</em>
 
 ```js
 setNewNote('')
@@ -248,7 +253,7 @@ Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://git
 
 Tehdään sovellukseen toiminto, joka mahdollistaa ainoastaan tärkeiden muistiinpanojen näyttämisen.
 
-Lisätään komponentin <code>App</code> tilaan tieto siitä näytetäänkö muistiinpanoista kaikki vai ainoastaan tärkeät:
+Lisätään komponentin <i>App</i> tilaan tieto siitä näytetäänkö muistiinpanoista kaikki vai ainoastaan tärkeät:
 
 ```js
 const App = (props) => {
@@ -260,7 +265,7 @@ const App = (props) => {
 }
 ```
 
-Muutetaan komponenttia siten, että se tallettaa muuttujaan <code>notesToShow</code> näytettävien muistiinpanojen listan riippuen siitä tuleeko näyttää kaikki vai vain tärkeät:
+Muutetaan komponenttia siten, että se tallettaa muuttujaan <em>notesToShow</em> näytettävien muistiinpanojen listan riippuen siitä tuleeko näyttää kaikki vai vain tärkeät:
 
 ```js
 const App = (props) => {
@@ -283,7 +288,7 @@ const App = (props) => {
 }  
 ```
 
-Muuttujan <code>notesToShow</code> määrittely on melko kompakti
+Muuttujan <em>notesToShow</em> määrittely on melko kompakti
 
 ```js
 const notesToShow = showAll
@@ -291,33 +296,33 @@ const notesToShow = showAll
   : notes.filter(note => note.important === true)
 ```
 
-Käytössä on monissa muissakin kielissä oleva [ehdollinen](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) operaatio.
+Käytössä on monissa muissakin kielissä oleva [ehdollinen](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) operaattori.
 
-Operaatio toimii seuraavasti. Jos meillä on esim:
+Operaattori toimii seuraavasti. Jos meillä on esim:
 
 ```js
 const tulos = ehto ? val1 : val2
 ```
 
-muuttujan <code>tulos</code> arvoksi asetetaan <codeval1></code>:n arvo jos <code>tulos</code> on tosi. Jos <code>ehto</code> ei ole tosi, muuttujan <code>tulos</code> arvoksi tulee <code>val2</code>:n arvo.
+muuttujan <em>tulos</em> arvoksi asetetaan <em>val1</em>:n arvo jos <em>tulos</em> on tosi. Jos <em>ehto</em> ei ole tosi, muuttujan <em>tulos</em> arvoksi tulee <em>val2</em>:n arvo.
 
-Eli jos tilan arvo <code>showAll</code> on epätosi, muuttuja <code>notesToShow</code> saa arvokseen vaan ne muistiinpanot, joiden <code>important</code>-kentän arvo on tosi. Filtteröinti tapahtuu taulukon metodilla [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter):
+Eli jos tilan arvo <em>showAll</em> on epätosi, muuttuja <em>notesToShow</em> saa arvokseen vaan ne muistiinpanot, joiden <em>important</em>-kentän arvo on tosi. Filtteröinti tapahtuu taulukon metodilla [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter):
 
 ```js
 notes.filter(note => note.important === true)
 ```
 
-vertailu-operaatio on oikeastaan turha koska <code>note.important</code> on arvoltaan joko <code>true</code> tai <code>false</code>, eli riittää kirjoittaa
+vertailu-operaatio on oikeastaan turha, koska <em>note.important</em> on arvoltaan joko <i>true</i> tai <i>false</i>, eli riittää kirjoittaa
 
 ```js
 notes.filter(note => note.important)
 ```
 
-Tässä käytettiin kuitenkin ensin vertailuoperaattoria, mm. korostamaan erästä tärkeää seikkaa: Javascriptissa <code>arvo1 == arvo2</code> ei toimi kaikissa tilanteissa loogisesti ja onkin varmempi käyttää aina vertailuissa muotoa <code>arvo1 === arvo2</code>. Enemmän aiheesta [täällä](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness).
+Tässä käytettiin kuitenkin ensin vertailuoperaattoria, mm. korostamaan erästä tärkeää seikkaa: Javascriptissa <em>arvo1 == arvo2</em> ei toimi kaikissa tilanteissa loogisesti ja onkin varmempi käyttää aina vertailuissa muotoa <em>arvo1 === arvo2</em>. Enemmän aiheesta [täällä](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness).
 
-Filtteröinnin toimivuutta voi jo nyt kokeilla vaihtelemalla sitä, miten tilan kentän <code>showAll</code> alkuarvo määritelään konstruktorissa.
+Filtteröinnin toimivuutta voi jo nyt kokeilla vaihtelemalla sitä, miten tilan kentän <em>showAll</em> alkuarvo määritelään konstruktorissa.
 
-Lisätään sitten toiminnallisuus, mikä mahdollistaa <code>showAll</code>:in tilan muuttamisen sovelluksesta.
+Lisätään sitten toiminnallisuus, joka mahdollistaa <em>showAll</em>:in tilan muuttamisen sovelluksesta.
 
 Oleelliset muutokset ovat seuraavassa:
 
@@ -363,7 +368,7 @@ Näkyviä muistiinpanoja (kaikki vai ainoastaan tärkeät) siis kontrolloidaan n
 () => setShowAll(!showAll)
 ```
 
-Napin teksti riippuu tilan <code>showAll</code> arvosta:
+Napin teksti riippuu tilan <em>showAll</em> arvosta:
 
 ```js
 näytä {showAll ? 'vain tärkeät' : 'kaikki'}
@@ -379,23 +384,25 @@ Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://git
 
 <i>Seuraavassa tehtävässä aloitettavaa ohjelmaa kehitellään eteenpäin muutamassa seuraavassa tehtävässä. Tässä ja kurssin aikana muissakin vastaantulevissa tehtäväsarjoissa ohjelman lopullisen version palauttaminen riittää, voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.</i>
 
-Muista, että saadaksesi komponentin tilan luotua joudut asentamaan Reactin version _0.16.7.0-alpha.2_ antamalla seuraavan komennon projektin hakemistossa
+Muista, että saadaksesi komponentin tilan luotua joudut asentamaan Reactin version _16.8.0-alpha.0_ antamalla seuraavan komennon projektin hakemistossa
 
 ```js
-npm install -s react@16.7.0-alpha.2 react-dom@16.7.0-alpha.2
+npm install -s react@16.8.0-alpha.0 react-dom@16.8.0-alpha.0
 ```
 
 <h4>2.6: puhelinluettelo osa 1</h4>
 
-Toteutetaan yksinkertainen puhelinluettelo. **Aluksi luetteloon lisätään vaan nimiä.**
+Toteutetaan yksinkertainen puhelinluettelo. <i>**Aluksi luetteloon lisätään vaan nimiä.**</i>
 
-Voit ottaa sovelluksesi komponentin <code>App</code> pohjaksi seuraavan:
+Voit ottaa sovelluksesi komponentin <i>App</i> pohjaksi seuraavan:
 
 ```js
 import React, { useState } from 'react'
 
 const App = () => {
-  const [ persons, setPersons] = useState([ { name: 'Arto Hellas' }]) 
+  const [ persons, setPersons] = useState([
+    { name: 'Arto Hellas' }
+  ]) 
   const [ newName, setNewName ] = useState('')
 
   return (
@@ -419,7 +426,7 @@ const App = () => {
 export default App
 ```
 
-Tila <code>newName</code> on tarkoitettu lomakkeen kentän kontrollointiin.
+Tila <em>newName</em> on tarkoitettu lomakkeen kentän kontrollointiin.
 
 Joskus tilaa tallettavia ja tarvittaessa muitakin muuttujia voi olla hyödyllistä renderöidä debugatessa komponenttiin, eli voi tilapäisesti lisätä komponentin  palauttamaan koodiin esim. seuraavan:
 
@@ -437,7 +444,7 @@ Huomaa, React developer toolsin käyttö!
 
 **Huom:**
 
-- voit käyttää kentän <code>key</code> arvona henkilön nimeä
+- voit käyttää kentän <i>key</i> arvona henkilön nimeä
 - muista estää lomakkeen lähetyksen oletusarvoinen toiminta!
 
 <h4>2.7: puhelinluettelo osa 2</h4>
@@ -454,7 +461,7 @@ Anna tilanteessa virheilmoitus komennolla [alert](https://developer.mozilla.org/
 `${newName} on jo luettelossa`
 ```
 
-Jos muuttujalla <code>newName</code> on arvona <i>arto</i>, on tuloksena merkkijono
+Jos muuttujalla <em>newName</em> on arvona <i>arto</i>, on tuloksena merkkijono
 
 ```js
 `arto on jo luettelossa`
@@ -470,7 +477,7 @@ Template stringin käyttö antaa kuitenkin professionaalimman vaikutelman.
 
 <h4>2.8: puhlelinluettelo osa 3</h4>
 
-Lisää sovellukseen mahdollisuus antaa henkilöille puhelinnumero. Tarvitset siis lomakkeeseen myös toisen <code>input</code>-elementin (ja sille oman muutoksenkäsittelijän):
+Lisää sovellukseen mahdollisuus antaa henkilöille puhelinnumero. Tarvitset siis lomakkeeseen myös toisen <i>input</i>-elementin (ja sille oman muutoksenkäsittelijän):
 
 ```
 <form>
@@ -480,7 +487,7 @@ Lisää sovellukseen mahdollisuus antaa henkilöille puhelinnumero. Tarvitset si
 </form>
 ```
 
-Sovellus voi näyttää tässä vaiheessa seuraavalta. Kuvassa myös [react developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi):in tarjoama näkymä komponentin <code>App</code> tilaan:
+Sovellus voi näyttää tässä vaiheessa seuraavalta. Kuvassa myös [react developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi):in tarjoama näkymä komponentin <i>App</i> tilaan:
 
 ![](../images/2/12b.png)
 
@@ -490,7 +497,7 @@ Tee lomakkeeseen hakukenttä, jonka avulla näytettävien nimien listaa voidaan 
 
 ![](../images/2/13b.png)
 
-Rajausehdon syöttämisen voi hoitaa omana lomakkeeseen kuulumattomana <code>input</code>-elementtinä. Kuvassa rajausehdosta on tehty _caseinsensitiivinen_ eli ehto _arto_ löytää isolla kirjaimella kirjoitetun Arton.
+Rajausehdon syöttämisen voi hoitaa omana lomakkeeseen kuulumattomana <i>input</i>-elementtinä. Kuvassa rajausehdosta on tehty <i>caseinsensitiivinen</i> eli ehto <i>arto</i> löytää isolla kirjaimella kirjoitetun Arton.
 
 **Huom:** Kun toteutat jotain uutta toiminnallisuutta, on usein hyötyä 'kovakoodata' sovellukseen jotain sisältöä, esim.
 
@@ -511,9 +518,9 @@ Näin vältytään turhalta manuaaliselta työltä, missä testaaminen edellytt�
 
 <h4>2.10: puhelinluettelo osa 5</h4>
 
-Jos koko sovelluksesi on tehty yhteen komponenttiin, refaktoroi sitä eriyttämällä sopivia komponentteja. Pidä kuitenkin edelleen kaikki tila sekä tapahtumankäsittelijäfunktiot juurikomponentissa <code>App</code>.
+Jos koko sovelluksesi on tehty yhteen komponenttiin, refaktoroi sitä eriyttämällä sopivia komponentteja. Pidä kuitenkin edelleen kaikki tila sekä tapahtumankäsittelijäfunktiot juurikomponentissa <i>App</i>.
 
-Riittää että erotat sovelluksesta **kolme** komponenttia. Hyviä kandidaatteja ovat esim. filtteröintilomake, uuden henkilön lisäävä lomake, kaikki henkilöt renderöivä komponentti sekä yksittäisen henkilön renderöivä komponentti.
+Riittää että erotat sovelluksesta <i>**kolme**</i> komponenttia. Hyviä kandidaatteja ovat esim. filtteröintilomake, uuden henkilön lisäävä lomake, kaikki henkilöt renderöivä komponentti sekä yksittäisen henkilön renderöivä komponentti.
 
 Sovelluksen juurikomponentti voi näyttää refaktoroinnin jälkeen suunilleen seuraavalta, eli se ei itse renderöi suoraan oikeastaan mitään muita kuin otsikkoja:
 

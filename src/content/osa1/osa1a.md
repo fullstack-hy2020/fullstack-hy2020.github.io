@@ -21,7 +21,7 @@ Kaikki tässä (ja jatkossa) annettavat merkillä <em>$</em> alkavat komennot on
 
 React on koko ajan aktiivisen kehityksen alla. Tämän vuoden ensimmäisen neljänneksen aikana Reactiin on tulossa erittäin merkittävä lisäys: [hookit](https://reactjs.org/docs/hooks-intro.html). Tämä täysin uusi ominaisuus tulee vaikuttamaan merkittävästi siihen, miten Reactia tullaan tulevaisuudessa käyttämään. Koska haluamme elää kehityksen eturintamassa käytämme kurssilla hookeja alusta asti.
 
-Hookit eivät ole vielä Reactin uusimmassa virallisessa julkaisussa 0.16.7, mutta ne löytyvät julkaisusta [0.16.8-alpha.0](https://www.npmjs.com/package/react/v/16.8.0-alpha.0)
+Hookit eivät ole vielä Reactin uusimmassa virallisessa julkaisussa 0.16.7, mutta ne löytyvät julkaisusta [16.8-alpha.0](https://www.npmjs.com/package/react/v/16.8.0-alpha.0)
 
 Saamme hookit käyttöön antamalla seuraavan komenon sovelluksen sisältävässä hakemistossa:
 
