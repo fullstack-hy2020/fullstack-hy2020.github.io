@@ -15,7 +15,6 @@ Luodaan sovellus nimeltään <i>osa1</i> ja mennään sovelluksen sisältämää
 ```bash
 $ npx create-react-app osa1
 $ cd osa1
-$ npm start
 ```
 
 Kaikki tässä (ja jatkossa) annettavat merkillä <em>$</em> alkavat komennot on kirjoitettu terminaaliin eli komentoriville. Merkkiä <em>$</em> ei tule kirjoittaa, sillä se edustaa komentokehoitetta.
