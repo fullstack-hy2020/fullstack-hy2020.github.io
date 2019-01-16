@@ -377,10 +377,12 @@ const App = () => {
 // highlight-start
   useEffect(() => {
     console.log('effect')
-    axios.get('http://localhost:3001/notes').then(response => {
-      console.log('promise fulfilled')
-      setNotes(response.data)
-    })
+    axios
+      .get('http://localhost:3001/notes')
+      .then(response => {
+        console.log('promise fulfilled')
+        setNotes(response.data)
+      })
   }, [])
 
   console.log('render', notes.length, 'notes')
@@ -409,10 +411,12 @@ Efekti, eli funktio
 ```js
 () => {
   console.log('effect')
-  axios.get('http://localhost:3001/notes').then(response => {
-    console.log('promise fulfilled')
-    setNotes(response.data)
-  })
+  axios
+    .get('http://localhost:3001/notes')
+    .then(response => {
+      console.log('promise fulfilled')
+      setNotes(response.data)
+    })
 }
 ```
 
@@ -434,10 +438,11 @@ Tarkastellaan vielä efektihookin määrittelyä kokonaisuudessaan
 ```js
 useEffect(() => {
   console.log('effect')
-  axios.get('http://localhost:3001/notes').then(response => {
-    console.log('promise fulfilled')
-    setNotes(response.data)
-  })
+  axios
+    .get('http://localhost:3001/notes').then(response => {
+      console.log('promise fulfilled')
+      setNotes(response.data)
+    })
 }, [])
 ```
 
@@ -446,10 +451,12 @@ Kirjotetaan koodi hieman toisella tavalla.
 ```js
 const hook = () => {
   console.log('effect')
-  axios.get('http://localhost:3001/notes').then(response => {
-    console.log('promise fulfilled')
-    setNotes(response.data)
-  })
+  axios
+    .get('http://localhost:3001/notes')
+    .then(response => {
+      console.log('promise fulfilled')
+      setNotes(response.data)
+    })
 }
 
 useEffect(hook, [])
@@ -488,16 +495,18 @@ Muuttujaan <em>eventHandler</em> on sijoitettu viite tapahtumankäsittelijäfunk
 ```js
 useEffect(() => {
   console.log('effect')
-  axios.get('http://localhost:3001/notes').then(response => {
-    console.log('promise fulfilled')
-    setNotes(response.data)
-  })
+  axios
+    .get('http://localhost:3001/notes')
+    .then(response => {
+      console.log('promise fulfilled')
+      setNotes(response.data)
+    })
 }, [])
 ```
 
 Sovelluksessa on tällä hetkellä vielä se ongelma, että jos lisäämme uusia muisiinpanoja, ne eivät tallennu palvelimelle asti. Eli kun uudelleenlataamme sovelluksen, kaikki lisäykset katoavat. Korjaus asiaan tulee pian.
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part2-notes/tree/part2-4), branchissa _part2-4_.
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part2-notes/tree/part2-4), branchissa <i>part2-4</i>.
 
 ### Sovelluskehityksen suoritusympäristö
 
