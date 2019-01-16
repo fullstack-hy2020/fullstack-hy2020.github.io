@@ -73,7 +73,7 @@ export default function PartIntroTemplate({ data }) {
             ]}
           />
 
-          <div className="part-intro col-7 spacing--after-small">
+          <div className="part-intro col-7 col-6--mobile spacing--after-small">
             {Parser(html, parserOptions)}
           </div>
 
