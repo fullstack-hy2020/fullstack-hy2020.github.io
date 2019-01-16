@@ -633,7 +633,7 @@ Tutustu HTML:n lomakkeiden perusteisiin lukemalla Mozillan tutoriaali [Your firs
 
   <h4>0.4: uusi muistiinpano</h4>
 
-Luvussa [Javascriptia sisältävän sivun lataaminen - kertaus](Javascriptia sisältävän sivun lataaminen - kertaus) kuvataan [sekvenssikaavion](https://github.com/mluukkai/Ohjelmistotekniikka2018/blob/master/web/materiaali.md#sekvenssikaaviot) avulla sivun <https://fullstack-exampleapp.herokuapp.com/notes> avaamisen aikaansaama tapahtumasarja.
+Luvussa [Javascriptia sisältävän sivun lataaminen - kertaus](/osa0/web_sovelluksen_toimintaperiaatteita#javascriptia-sisaltavan-sivun-lataaminen-kertaus) kuvataan [sekvenssikaavion](https://github.com/mluukkai/Ohjelmistotekniikka2018/blob/master/web/materiaali.md#sekvenssikaaviot) avulla sivun <https://fullstack-exampleapp.herokuapp.com/notes> avaamisen aikaansaama tapahtumasarja.
 
 Kaavio on luotu [websequencediagrams](https://www.websequencediagrams.com)-palvelussa, seuraavasti:
 

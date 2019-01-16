@@ -17,10 +17,10 @@ module.exports = {
     e: 'Tyylien lisääminen React-sovellukseen',
   },
   '3': {
-    // a: 'Web-sovellusten toiminnan perusteet',
-    // b: 'Node.js/Express',
-    // c: 'Mongo',
-    // d: 'Konfiguraatiot',
+    //a: 'Node.js/Express',
+    //b: 'Sovellus internetiin',
+    //c: 'Mongo',
+    //d: 'Konfiguraatiot',
   },
   '4': {
     // a: 'Node.js/Express',

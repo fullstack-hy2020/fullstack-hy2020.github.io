@@ -58,7 +58,7 @@ const App = () => (
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-Tiedostot <i>App.js</i>, <i>App.css</i>, <i>App.test.js</i>, <i>logo.svg</i> ja <i>registerServiceWorker.js</i> voi poistaa sillä niitä emme sovelluksessamme nyt tarvitse.
+Tiedostot <i>App.js</i>, <i>App.css</i>, <i>App.test.js</i>, <i>logo.svg</i> ja <i>serviceWorker.js</i> voi poistaa sillä niitä emme sovelluksessamme nyt tarvitse.
 
 ### Komponentti
 
