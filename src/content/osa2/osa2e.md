@@ -6,17 +6,17 @@ letter: e
 
 <div class="content">
 
-Sovelluksemme ulkoasu on tällä hetkellä hyvin vaatimaton. Osaan 0 liittyvässä [tehtävässä 0.1](/tehtävät/#web-sovellusten-perusteet) oli tarkoitus tutustua Mozillan [CSS-tutoriaaliin](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).
+Sovelluksemme ulkoasu on tällä hetkellä hyvin vaatimaton. Osaan 0 liittyvässä [tehtävässä 0.2](http://localhost:8000/osa0/web_sovelluksen_toimintaperiaatteita#tehtavia) oli tarkoitus tutustua Mozillan [CSS-tutoriaaliin](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).
 
 Katsotaan vielä tämän osan lopussa nopeasti kahta tapaa liittää tyylejä React-sovellukseen. Tapoja on useita ja tulemme tarkastelemaan muita myöhemmin. Liitämme ensin CSS:n sovellukseemme vanhan kansan tapaan yksittäisenä, käsin eli ilman [esiprosessorien](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) apua kirjoitettuna tiedostona (tämä ei itseasiassa ole täysin totta, kuten myöhemmin tulemme huomaamaan).
 
-Tehdään sovelluksen hakemistoon _src_ tiedosto _index.css_ ja liitetään se sovellukseen lisäämällä tiedostoon _index.js_ seuraava import:
+Tehdään sovelluksen hakemistoon <i>src</i> tiedosto <i>index.css</i> ja liitetään se sovellukseen lisäämällä tiedostoon <i>index.js</i> seuraava import:
 
 ```js
 import './index.css'
 ```
 
-Lisätään seuraava sääntö tiedostoon _index.css_:
+Lisätään seuraava sääntö tiedostoon <i>index.css</i>:
 
 ```css
 h1 {
@@ -24,11 +24,11 @@ h1 {
 }
 ```
 
-CSS-säännöt koostuvat valitsimesta, eli _selektorista_ ja määrittelystä eli _deklaraatiosta_. Valitsin määrittelee, mihin elementteihin sääntö kohdistuu. Valitsimena on nyt _h1_, eli kaikki sovelluksessa käytetyt _h1_-otsikkotägit.
+CSS-säännöt koostuvat valitsimesta, eli <i>selektorista</i> ja määrittelystä eli <i>deklaraatiosta</i>. Valitsin määrittelee, mihin elementteihin sääntö kohdistuu. Valitsimena on nyt <i>h1</i>, eli kaikki sovelluksessa käytetyt <i>h1</i>-otsikkotägit.
 
-Määrittelyosa asettaa ominaisuuden _color_, eli fontin värin arvoksi vihreän, eli _green_.
+Määrittelyosa asettaa ominaisuuden _color_, eli fontin värin arvoksi vihreän, eli <i>green</i>.
 
-Sääntö voi sisältää mielivaltaisen määrän määrittelyjä. Muutetaan edellistä siten, että tekstistä tulee kursivoitua, eli fontin tyyliksi asetetaan _italics_:
+Sääntö voi sisältää mielivaltaisen määrän määrittelyjä. Muutetaan edellistä siten, että tekstistä tulee kursivoitua, eli fontin tyyliksi asetetaan <i>italics</i>:
 
 ```css
 h1 {
@@ -39,7 +39,7 @@ h1 {
 
 Erilaisia selektoreja eli tapoja valita tyylien kohde on [lukuisia](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors).
 
-Jos haluamme kohdistaa tyylejä esim. jokaiseen muistiinpanoon, voisimme nyt käyttää selektoria <code>li</code>, sillä muistiinpanot ovat <code>li</code>-tagien sisällä:
+Jos haluamme kohdistaa tyylejä esim. jokaiseen muistiinpanoon, voisimme nyt käyttää selektoria <i>li</i>, sillä muistiinpanot ovat <i>li</i>-tagien sisällä:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -66,17 +66,17 @@ li {
 }
 ```
 
-Tyylien kohdistaminen elementtityypin sijaan on kuitenkin hieman ongelmallista, jos sovelluksessa olisi myös muita  <code>li</code>-tageja, kaikki saisivat samat tyylit.
+Tyylien kohdistaminen elementtityypin sijaan on kuitenkin hieman ongelmallista, jos sovelluksessa olisi myös muita  <i>li</i>-tageja, kaikki saisivat samat tyylit.
 
 Jos haluamme kohdistaa tyylit nimenomaan muistiinpanoihin, on parempi käyttää [class selectoreja](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors).
 
-Normaalissa HTML:ssä luokat määritellään elementtien attribuutin  <code>class</code> arvona:
+Normaalissa HTML:ssä luokat määritellään elementtien attribuutin  <i>class</i> arvona:
 
 ```html
 <li class="note">tekstiä</li>
 ```
 
-Reactissa tulee kuitenkin classin sijaan käyttää attribuuttia [className](https://reactjs.org/docs/dom-elements.html#classname), eli muutetaan komponenttia _Note_ seuraavasti:
+Reactissa tulee kuitenkin classin sijaan käyttää attribuuttia [className](https://reactjs.org/docs/dom-elements.html#classname), eli muutetaan komponenttia <i>Note</i> seuraavasti:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -107,7 +107,7 @@ Jos nyt lisäät sovellukseen muita li-elementtejä, ne eivät saa muistiinpanoi
 
 ### Parempi virheilmoitus
 
-Toteutimme äsken olemassaolemattoman muistiinpanon tärkeyden muutokseen liittyvän virheilmoituksen <code>alert</code>-metodilla. Toteutetaan se nyt Reactilla omana komponenttinaan.
+Toteutimme äsken olemassaolemattoman muistiinpanon tärkeyden muutokseen liittyvän virheilmoituksen <em>alert</em>-metodilla. Toteutetaan se nyt Reactilla omana komponenttinaan.
 
 Komponentti on yksinkertainen:
 
@@ -125,16 +125,16 @@ const Notification = ({ message }) => {
 }
 ```
 
-Jos propsin <code>message</code> arvo on <code>null</code> ei renderöidä mitään, muussa tapauksessa renderöidään viesti div-elementtiin. Elementille on liitetty tyylien lisäämistä varten luokka <code>error</code>.
+Jos propsin <em>message</em> arvo on <em>null</em> ei renderöidä mitään, muussa tapauksessa renderöidään viesti div-elementtiin. Elementille on liitetty tyylien lisäämistä varten luokka <i>error</i>.
 
-Lisätään komponentin <code>App</code> tilaan kenttä <code>error</code> virheviestiä varten, laitetaan kentälle heti jotain sisältöä, jotta pääsemme heti testaamaan komponenttia:
+Lisätään komponentin <i>App</i> tilaan kenttä <i>error</i> virheviestiä varten, laitetaan kentälle heti jotain sisältöä, jotta pääsemme heti testaamaan komponenttia:
 
 ```js
 const App = () => {
   const [notes, setNotes] = useState([]) 
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
-  const [errorMessage, setErrorMessage] = useState(null) // highlight-line
+  const [errorMessage, setErrorMessage] = useState('virhe...') // highlight-line
 
   // ...
 
@@ -179,7 +179,7 @@ Lisätään sitten virheviestille sopiva tyyli:
 }
 ```
 
-Nyt olemme valmiina lisäämään virheviestin logiikan. Mmuutetaan metodia <code>toggleImportanceOf</code> seuraavasti:
+Nyt olemme valmiina lisäämään virheviestin logiikan. Muutetaan metodia <em>toggleImportanceOf</em> seuraavasti:
 
 ```js
   const toggleImportanceOf = id => {
@@ -192,7 +192,9 @@ Nyt olemme valmiina lisäämään virheviestin logiikan. Mmuutetaan metodia <cod
       })
       .catch(error => {
         // highlight-start
-        setErrorMessage(`muistiinpano '${note.content}' on jo valitettavasti poistettu palvelimelta`)
+        setErrorMessage(
+          `muistiinpano '${note.content}' poistettu palvelimelta`
+        )
         setTimeout(() => {
           setErrorMessage(null)
         }, 5000)
@@ -202,13 +204,13 @@ Nyt olemme valmiina lisäämään virheviestin logiikan. Mmuutetaan metodia <cod
   }
 ```
 
-Eli virheen yhteydessä asetetaan tilaan <code>errorMessage</code> sopiva virheviesti. Samalla käynnistetään ajastin, joka asettaa 5 sekunnin kuluttua tilan <code>errorMessage</code>-kentän arvoksi <code>null</code>.
+Eli virheen yhteydessä asetetaan tilaan <em>errorMessage</em> sopiva virheviesti. Samalla käynnistetään ajastin, joka asettaa 5 sekunnin kuluttua tilan <em>errorMessage</em>-kentän arvoksi <em>null</em>.
 
 Lopputulos näyttää seuraavalta
 
 ![](../images/2/26b.png)
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part2-notes/tree/part2-7), branchissa _part2-7_.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part2-notes/tree/part2-7), branchissa <i>part2-7</i>.
 
 ### Inline-tyylit
 
@@ -216,7 +218,7 @@ React mahdollistaa myös tyylien kirjoittamisen suoraan komponenttien koodin jou
 
 Periaate inline-tyylien määrittelyssä on erittäin yksinkertainen. Mihin tahansa React-komponenttiin tai elementtiin voi liittää attribuutin [style](https://reactjs.org/docs/dom-elements.html#style), jolle annetaan arvoksi Javascript-oliona määritelty joukko CSS-sääntöjä.
 
-CSS-säännöt määritellään olioden avulla hieman eri tavalla kuin normaaleissa CSS-tiedostoissa. Jos haluamme esimerkisi asettaa jollekin elementille vihreän, kursivoidun ja 16 pikselin korkuisen fontin, eli CSS-syntaksilla ilmaistuna
+CSS-säännöt määritellään JAvascriptin avulla hieman eri tavalla kuin normaaleissa CSS-tiedostoissa. Jos haluamme esimerkisi asettaa jollekin elementille vihreän, kursivoidun ja 16 pikselin korkuisen fontin, eli CSS-syntaksilla ilmaistuna
 
 ```css
 {
@@ -238,7 +240,7 @@ tulee tämä muotilla Reactin inline-tyylin määrittelevänä oliona seuraavast
 
 Jokainen CSS-sääntö on olion kenttä, joten ne erotetaan Javascript-syntaksin mukaan pilkuilla. Pikseleinä ilmaistut numeroarvot voidaan määritellä kokonaislukuina. Merkittävin ero normaaliin CSS:ään on väliviivan sisältämien CSS-ominaisuuksien kirjoittaminen camelCase-muodossa.
 
-Voisimme nyt lisätä sovelluksemme "alapalkin", muodostavan komponentin <code>Footer</code>, ja määritellä sille inline-tyylit seuraavasti:
+Voisimme nyt lisätä sovelluksemme "alapalkin", muodostavan komponentin <i>Footer</i>, ja määritellä sille inline-tyylit seuraavasti:
 
 ```js
 const Footer = () => {
@@ -289,17 +291,17 @@ Toiminnallisen kokonaisuuden strukturointiyksikkö on React-komponentti, joka m�
 
 <h4>2.19: puhelinluettelo osa 11</h4>
 
-Toteuta osan 2 esimerkin [parempi virheilmoitus](/osa2/#parempi-virheilmoitus) tyyliin ruudulla muutaman sekunnin näkyvä ilmoitus, joka kertoo onnistuneista operaatioista (henkilön lisäys ja poisto, sekä numeron muutos):
+Toteuta osan 2 esimerkin [parempi virheilmoitus](/osa2/tyylien_lisaaminen_react_sovellukseen#parempi-virheilmoitus) tyyliin ruudulla muutaman sekunnin näkyvä ilmoitus, joka kertoo onnistuneista operaatioista (henkilön lisäys ja poisto, sekä numeron muutos):
 
 ![](../images/2/27b.png)
 
 <h4>2.20*: puhelinluettelo osa 12</h4>
 
-Jos poistat jonkun henkilön toisesta selaimesta hieman ennen kun yrität <em>muuttaa henkilön numeroa</em> toisesta selaimesta, tapahtuu virhetilanne:
+Avaa sovelluksesi kahteen selaimeen. **Jos poistat jonkun henkilön toisesta selaimesta 1** hieman ennen kun yrität <i>muuttaa henkilön numeroa</i> selaimesta 2, tapahtuu virhetilanne:
 
 ![](../images/2/29b.png)
 
-Korjaa ongelma osan 2 esimerkin [promise ja virheet](/osa2/#promise-ja-virheet) hengessä, mutta siten että 
+Korjaa ongelma osan 2 esimerkin [promise ja virheet](http://localhost:8000/osa2/palvelimella_olevan_datan_muokkaaminen#promise-ja-virheet) hengessä, mutta siten että 
  käyttäjälle ilmoitetaan operaation epäonnistumisesta. Onnistuneen ja epäonnistuneen operaation ilmoitusten tulee erota toisistaan: 
 
 ![](../images/2/28a.png)
