@@ -36,20 +36,25 @@ propsin arvo on [Object object]
 
 kun taas pilkulla erotellessa saat tulostettavat asiat developer-konsoliin oliona, jonka sisältöä on mahdollista tarkastella.
 
+Lue tarvittaessa lisää React-sovellusten debuggaamisesta [täältä](osa1/monimutkaisempi_tila_reactin_debuggaus#react-sovellusten-debuggaus).
+
 ### Tapahtumankäsittely revisited
 
-Pajan ja telegrammin havaintojen perusteella tapahtumankäsittely on osoittautunut haastavaksi.
+Viime vuoden kurssin alun kokemusten perusteella tapahtumien käsittelu on osoittautunut haastavaksi.
 
-Osasan loppussa oleva kertaava osa [tapahtumankäsittely revisited](/osa1#tapahtumankäsittely-revisited) kannattaa käydä läpi jos osaaminen on vielä häilyvällä pohjalla.
+Edellisen osan loppussa oleva kertaava osa [tapahtumankäsittely revisited](/osa1#tapahtumankäsittely-revisited) kannattaa käydä läpi jos osaaminen on vielä häilyvällä pohjalla.
 
-### Visual Studio Coden snippetit
+Myös tapahtumankäsittelijöiden välittäminen komponentin <i>App</i> alikomponenteille on herättänyt ilmaan kysymyksiä, pieni kertaus aiheeseen [täällä](http://localhost:8000/osa1/monimutkaisempi_tila_reactin_debuggaus#tapahtumankasittelijan-vieminen-alikomponenttiin).
 
-Visual studio codeen on helppo määritellä "snippettejä", eli Netbeansin "sout":in tapaisia oikoteitä yleisesti käytettyjen koodinpätkien generointiin. Ohje snippetien luomiseen [täällä](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets)
+
+### Protip: Visual Studio Coden snippetit
+
+Visual studio codeen on helppo määritellä "snippettejä", eli Netbeansin "sout":in tapaisia oikoteitä yleisesti käytettyjen koodinpätkien generointiin. Ohje snippetien luomiseen [täällä](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets).
 
 VS Code -plugineina löytyy myös hyödyllisiä valmiiksi määriteltyjä snippettejä, esim.
-[tämä](https://marketplace.visualstudio.com/items?itemName=xabikos.ReactSnippets)
+[tämä](https://marketplace.visualstudio.com/items?itemName=xabikos.ReactSnippets).
 
-Tärkein kaikista snippeteistä on komennon <code>console.log()</code> nopeasti ruudulle tekevä snippet, esim. <code>clog</code>, jonka voi määritellä seuraavasti:
+Tärkein kaikista snippeteistä on komennon <em>console.log()</em> nopeasti ruudulle tekevä snippet, esim. <em>clog</em>, jonka voi määritellä seuraavasti:
 
 ```js
 {
@@ -67,13 +72,13 @@ Tärkein kaikista snippeteistä on komennon <code>console.log()</code> nopeasti 
 
 Tästä osasta lähtien käytämme runsaasti Javascriptin [taulukkojen](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) funktionaalisia käsittelymetodeja, kuten _find_, _filter_ ja _map_. Periaate niissä on täysin sama kuin Java 8:sta tutuissa streameissa, joita on käytetty jo parin vuoden ajan Tietojenkäsittelytieteen osaston Ohjelmoinnin perusteissa ja jatkokurssilla sekä Ohjelmoinnin MOOC:issa.
 
-Jos taulukon funktionaalinen käsittely tuntuu vielä vieraalta, kannattaa katsoa Youtubessa olevasta videosarjasta _Functional Programming in JavaScript_ ainakin kolme ensimmäistä osaa
+Jos taulukon funktionaalinen käsittely tuntuu vielä vieraalta, kannattaa katsoa Youtubessa olevasta videosarjasta <i>Functional Programming in JavaScript</i> ainakin kolme ensimmäistä osaa
 
 - [Higher-order functions](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84)
 - [Map](https://www.youtube.com/watch?v=bCqtb-Z5YGQ&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84&index=2)
 - [Reduce basics](https://www.youtube.com/watch?v=Wl98eZpkp-c&t=31s)
 
-## Kokoelmien renderöiminen
+### Kokoelmien renderöiminen
 
 Tehdään nyt Reactilla [osan 0](/osa0) alussa käytettyä esimerkkisovelluksen [Single page app -versiota](https://fullstack-exampleapp.herokuapp.com/spa) vastaavan sovelluksen 'frontend' eli selainpuolen sovelluslogiikka.
 
@@ -125,7 +130,7 @@ ReactDOM.render(
 )
 ```
 
-Jokaiseen muistiinpanoon on merkitty tekstuaalisen sisällön ja aikaleiman lisäksi myös _boolean_-arvo, joka kertoo onko muistiinpano luokiteltu tärkeäksi, sekä yksikäsitteinen tunniste _id_.
+Jokaiseen muistiinpanoon on merkitty tekstuaalisen sisällön ja aikaleiman lisäksi myös _boolean_-arvo, joka kertoo onko muistiinpano luokiteltu tärkeäksi, sekä yksikäsitteinen tunniste <i>id</i>.
 
 Koodin toiminta perustuu siihen, että taulukossa on tasan kolme muistiinpanoa, yksittäiset muistiinpanot renderöidään 'kovakoodatusti' viittaamalla suoraan taulukossa oleviin olioihin:
 
@@ -139,7 +144,7 @@ Tämä ei tietenkään ole järkevää. Ratkaisu voidaan yleistää generoimalla
 notes.map(note => <li>{note.content}</li>)
 ```
 
-nyt tuloksena on taulukko, jonka sisältö on joukko _li_-elementtejä
+nyt tuloksena on taulukko, jonka sisältö on joukko <i>li</i>-elementtejä
 
 ```js
 [
@@ -149,7 +154,7 @@ nyt tuloksena on taulukko, jonka sisältö on joukko _li_-elementtejä
 ]
 ```
 
-jotka voidaan sijoittaa _ul_-tagien sisälle:
+jotka voidaan sijoittaa <i>ul</i>-tagien sisälle:
 
 ```js
 const App = (props) => {
@@ -168,7 +173,7 @@ const App = (props) => {
 }
 ```
 
-Koska li-tagit generoiva koodi on Javascriptia, tulee se sijoittaa JSX-templatessa aaltosulkujen sisälle kaiken muun Javascript-koodin tapaan.
+Koska <i>li</i>-tagit generoiva koodi on Javascriptia, tulee se sijoittaa JSX-templatessa aaltosulkujen sisälle kaiken muun Javascript-koodin tapaan.
 
 Usein vastaavissa tilanteissa dynaamisesti generoitava sisältö eristetään omaan metodiin, jota JSX-template kutsuu:
 
@@ -198,7 +203,7 @@ Vaikka sovellus näyttää toimivan, tulee konsoliin ikävä varoitus
 
 ![](../images/2/1a.png)
 
-Kuten virheilmoituksen linkittämä [sivu](https://reactjs.org/docs/lists-and-keys.html#keys) kertoo, tulee taulukossa olevilla, eli käytännössä _map_-metodilla muodostetuilla elementeillä olla uniikki avain, eli attribuutti nimeltään _key_.
+Kuten virheilmoituksen linkittämä [sivu](https://reactjs.org/docs/lists-and-keys.html#keys) kertoo, tulee taulukossa olevilla, eli käytännössä _map_-metodilla muodostetuilla elementeillä olla uniikki avain, eli attribuutti nimeltään <i>key</i>.
 
 Lisätään avaimet:
 
@@ -206,8 +211,10 @@ Lisätään avaimet:
 const App = (props) => {
   const { notes } = props
 
+// highlight-start
   const rows = () =>
-    notes.map(note => <li key={note.id}>{note.content}</li>) // highlight-line
+    notes.map(note => <li key={note.id}>{note.content}</li>
+// highlight-end
 
   return (
     <div>
@@ -222,7 +229,7 @@ const App = (props) => {
 
 Virheilmoitus katoaa.
 
-React käyttää taulukossa olevien elementtien key-kenttiä päätellessään miten sen tulee päivittää komponentin generoimaa näkymää silloin kun komponentti uudelleenrenderöidään. Lisää aiheesta [täällä](https://reactjs.org/docs/reconciliation.html#recursing-on-children).
+React käyttää taulukossa olevien elementtien <i>key</i>-kenttiä päätellessään miten sen tulee päivittää komponentin generoimaa näkymää silloin kun komponentti uudelleenrenderöidään. Lisää aiheesta [täällä](https://reactjs.org/docs/reconciliation.html#recursing-on-children).
 
 ### Map
 
@@ -262,7 +269,7 @@ const result = notes.map(note => note.id)
 console.log(result)
 ```
 
-tulostuu konsoliin _[1, 2, 3]_ eli _map_ muodostaa uuden taulukon, jonka jokainen alkio on saatu alkuperäisen taulukon _notes_ alkioista _mappaamalla_ komennon parametrina olevan funktion avulla.
+tulostuu konsoliin <i>[1, 2, 3]</i> eli _map_ muodostaa uuden taulukon, jonka jokainen alkio on saatu alkuperäisen taulukon _notes_ alkioista <i>mappaamalla</i> komennon parametrina olevan funktion avulla.
 
 Funktio on
 
@@ -278,7 +285,7 @@ eli kompaktissa muodossa kirjoitettu nuolifunktio, joka on täydelliseltä kirjo
 }
 ```
 
-eli funktio saa parametrikseen muistiinpano-olion ja _palauttaa_ sen kentän _id_ arvon.
+eli funktio saa parametrikseen muistiinpano-olion ja <i>palauttaa</i> sen kentän <i>id</i> arvon.
 
 Muuttamalla komento muotoon
 
@@ -294,7 +301,7 @@ Tämä on jo lähellä käyttämäämme React-koodia:
 notes.map(note => <li key={note.id}>{note.content}</li>)
 ```
 
-joka muodostaa jokaista muistiinpano-olioa vastaavan _li_-tagin, jonka sisään tulee muistiinpanon sisältö.
+joka muodostaa jokaista muistiinpano-olioa vastaavan <i>li</i>-tagin, jonka sisään tulee muistiinpanon sisältö.
 
 Koska metodin _map_ parametrina olevan funktion
 
@@ -327,7 +334,7 @@ note => {
 }
 ```
 
-Koska funktio koostuu nyt _koodilohkosta_ on funktion paluuarvo määrittelemätön eli _undefined_. Nuolifunktiot siis palauttavat ainoan komentonsa arvon, ainoastaan jos nuolifunktio on määritelty kompaktissa muodossaan, ilman koodilohkoa:
+Koska funktio koostuu nyt <i>koodilohkosta</i> on funktion paluuarvo määrittelemätön eli _undefined_. Nuolifunktiot siis palauttavat ainoan komentonsa arvon, ainoastaan jos nuolifunktio on määritelty kompaktissa muodossaan, ilman koodilohkoa:
 
 ```js
 note => note.content
@@ -355,7 +362,7 @@ Olisimme saaneet konsolissa olevan varoituksen katoamaan myös käyttämällä a
 notes.map((note, i) => ...)
 ```
 
-näin kutsuttaessa _i_ saa arvokseen sen paikan indeksin taulukossa, missä _note_ sijaitsee.
+näin kutsuttaessa _i_ saa arvokseen sen paikan indeksin taulukossa, missä <i>Note</i> sijaitsee.
 
 Eli eräs virhettä aiheuttamaton tapa määritellä rivien generointi on
 
@@ -367,7 +374,7 @@ const rows = () => notes.map((note, i) =>
 )
 ```
 
-Tämä **ei kuitenkaan ole suositeltavaa** ja voi näennäisestä toimimisestaan aiheuttaa joissakin tilanteissa pahoja ongelmia. Lue lisää esim. [täältä](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318).
+Tämä **ei kuitenkaan ole suositeltavaa** ja voi näennäisestä toimimisestaan aiheuttaa joissakin tilanteissa pahoja ongelmia. Lue lisää esimerkiksi [täältä](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318).
 
 ### Refaktorointia - moduulit
 
@@ -388,7 +395,9 @@ const App = ({ notes }) => { // highlight-line
 }
 ```
 
-Erotetaan yksittäisen muistiinpanon esittäminen oman komponenttinsa _Note_ vastuulle:
+Jos unohdit mitä destrukturointi tarkottaa ja miten se toimii, kertaa [täältä](http://localhost:8000/osa1/komponentin_tila_ja_tapahtumankasittely#destrukturointi).
+
+Erotetaan yksittäisen muistiinpanon esittäminen oman komponenttinsa <i>Note</i> vastuulle:
 
 ```js
 // highlight-start
@@ -420,9 +429,9 @@ const App = ({ notes }) => {
 }
 ```
 
-Huomaa, että _key_-attribuutti täytyy nyt määritellä _Note_-komponenteille, eikä _li_-tageille kuten ennen muutosta.
+Huomaa, että <i>key</i>-attribuutti täytyy nyt määritellä <i>Note</i>-komponenteille, eikä <i>li</i>-tageille kuten ennen muutosta.
 
-Koko React-sovellus on mahdollista määritellä samassa tiedostossa, mutta se ei luonnollisesti ole järkevää. Usein käytäntönä on määritellä yksittäiset komponentit omassa tiedostossaan _ES6-moduuleina_.
+Koko React-sovellus on mahdollista määritellä samassa tiedostossa, mutta se ei luonnollisesti ole järkevää. Usein käytäntönä on määritellä yksittäiset komponentit omassa tiedostossaan <i>ES6-moduuleina</i>.
 
 Koodissamme on käytetty koko ajan moduuleja. Tiedoston ensimmäiset rivit
 
@@ -431,11 +440,13 @@ import Reactfrom 'react'
 import ReactDOM from 'react-dom'
 ```
 
-[importtaavat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) eli ottavat käyttöönsä kaksi moduulia. Moduuli _react_ sijoitetaan muuttujaan _React_ ja _react-dom_ muuttujaan _ReactDOM_. 
+[importtaavat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) eli ottavat käyttöönsä kaksi moduulia. Moduuli <i>react</i> sijoitetaan muuttujaan _React_ ja <i>react-dom</i> muuttujaan _ReactDOM_. 
 
-Siirretään nyt komponentti _Note_ omaan moduuliinsa.
+Siirretään nyt komponentti <i>Note</i> omaan moduuliinsa.
 
-Pienissä sovelluksissa komponentit sijoitetaan yleensä _src_-hakemiston alle sijoitettavaan hakemistoon _components_. Konventiona on nimetä tiedosto komponentin mukaan. Tehdään nyt sovellukseen hakemisto _components_ ja sinne tiedosto _Note.js_ jonka sisältö on seuraava:
+Pienissä sovelluksissa komponentit sijoitetaan yleensä <i>src</i>-hakemiston alle sijoitettavaan hakemistoon <i>components</i>. Konventiona on nimetä tiedosto komponentin mukaan. 
+
+Tehdään nyt sovellukseen hakemisto <i>components</i> ja sinne tiedosto <i>Note.js</i> jonka sisältö on seuraava:
 
 ```js
 import React from 'react'
@@ -451,9 +462,9 @@ export default Note
 
 Koska kyseessä on React-komponentti, tulee React importata komponentissa.
 
-Moduulin viimeisenä rivinä [eksportataan](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) määritelty komponentti, eli muuttuja _Note_.
+Moduulin viimeisenä rivinä [eksportataan](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) määritelty komponentti, eli muuttuja <i>Note</i>.
 
-Nyt komponenttia käyttävä tiedosto _index.js_ voi [importata](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) moduulin:
+Nyt komponenttia käyttävä tiedosto <i>index.js</i> voi [importata](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) moduulin:
 
 ```js
 import React from 'react'
@@ -465,17 +476,17 @@ const App = ({notes}) => {
 }
 ```
 
-Moduulin eksporttaama komponentti on nyt käytettävissä muuttujassa _Note_ täysin samalla tavalla kuin aiemmin.
+Moduulin eksporttaama komponentti on nyt käytettävissä muuttujassa <i>Note</i> täysin samalla tavalla kuin aiemmin.
 
-Huomaa, että itse määriteltyä komponenttia importatessa komponentin sijainti tulee ilmaista _suhteessa importtaavaan tiedostoon_:
+Huomaa, että itse määriteltyä komponenttia importatessa komponentin sijainti tulee ilmaista <i>suhteessa importtaavaan tiedostoon</i>:
 
 ```js
 './components/Note'
 ```
 
-Piste alussa viittaa nykyiseen hakemistoon, eli kyseessä on nykyisen hakemiston alihakemisto _components_ ja sen sisällä tiedosto _Note.js_. Tiedoston päätteen voi jättää pois.
+Piste alussa viittaa nykyiseen hakemistoon, eli kyseessä on nykyisen hakemiston alihakemisto <i>components</i> ja sen sisällä tiedosto <i>Note.js</i>. Tiedoston päätteen voi jättää pois.
 
-Koska myös <code>App</code> on komponentti, eristetään sekin omaan moduuliinsa. Koska kyseessä on sovelluksen juurikomponentti, sijoitetaan se suoraan hakemistoon _src_. Tiedoston sisältö on seuraava:
+Koska myös <i>App</i> on komponentti, eristetään sekin omaan moduuliinsa. Koska kyseessä on sovelluksen juurikomponentti, sijoitetaan se suoraan hakemistoon <i>src</i>. Tiedoston sisältö on seuraava:
 
 ```js
 import React from 'react'
@@ -502,7 +513,7 @@ const App = ({ notes }) => {
 export default App // highlight-line
 ```
 
-Tiedoston _index.js_ sisällöksi jää:
+Tiedoston <i>index.js</i> sisällöksi jää:
 
 ```js
 import React from 'react'
@@ -529,15 +540,15 @@ Huomaa, että repositorion master-haarassa on myöhemmän vaiheen koodi, tämän
 
 Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnistämistä eli komentoa _npm start_.
 
-### Kun sovellus hajoaa...
+### Kun sovellus hajoaa
 
-Kun aloitat ohjelmoijan uraasi (ja allekirjoittaneella yhä edelleen 30 vuoden ohjelmointikokemuksella) melko usein käy niin ett ohjelma hajoaa aivan totaalisesti. Erityisen usien näin käy dynaamisesti tyypitetyillä kielillä kuten Javascript, missä kääntäjä ei tarkasta minkä tyyppisiä arvoja esim. funktioden parametreina ja paluuarvoina liikkuu.
+Kun aloitat ohjelmoijan uraasi (ja allekirjoittaneella edelleen 30 vuoden ohjelmointikokemuksella) käy melko usein niin, että ohjelma hajoaa aivan totaalisesti. Erityisen usien näin käy dynaamisesti tyypitetyillä kielillä, kuten Javascript, missä kääntäjä ei tarkasta minkä tyyppisiä arvoja esim. funktioden parametreina ja paluuarvoina liikkuu.
 
 Reactissa räjähdys näyttää esim. seuraavalta
 
 ![](../images/2/3b.png)
 
-Tilanteista pelastaa yleensä parhaiten <code>console.log</code>. Pala räjähdyksen aiheuttavaa koodia seuraavassa
+Tilanteista pelastaa yleensä parhaiten <em>console.log</em>. Pala räjähdyksen aiheuttavaa koodia seuraavassa
 
 ```js
 const Course = ({ course }) => (
@@ -559,7 +570,7 @@ const App = () => {
 }
 ```
 
-Syy toimimattomuuteen alkaa selvitä lisäilemällä <code>console.log</code>-komentoja. Koska ensimmäinen renderöitävä asia on komponentti <code>App</code> voi jos sinne laittaa ensimmäisen tulostuksen. 
+Syy toimimattomuuteen alkaa selvitä lisäilemällä koodiin <em>console.log</em>-komentoja. Koska ensimmäinen renderöitävä asia on komponentti <i>App</i> kannattaa sinne laittaa ensimmäisen tulostus: 
 
 ```js
 const App = () => {
@@ -579,7 +590,7 @@ Konsoliin tulevan tulostuksen nähdäkseen on skrollattava pitkän punaisen virh
 
 ![](../images/2/4b.png)
 
-Kun joku asia havaitaan toimivaksi, on aika logata syvemmältä. Jos komponentti on määritelty yksilausekkeista, eli returnitonta funktiota, on konsoliin tulostus haastavampaa:
+Kun joku asia havaitaan toimivaksi, on aika logata syvemmältä. Jos komponentti on määritelty yksilausekkeista, eli returnittomana funktiota, on konsoliin tulostus haastavampaa:
 
 ```js
 const Course = ({ course }) => (
@@ -589,11 +600,11 @@ const Course = ({ course }) => (
 )
 ```
 
-komponentti on syytä muuttaa pidemmän kaavan mukaan määritellyksi:
+komponentti on syytä muuttaa pidemmän kaavan mukaan määritellyksi jotta tulostus päästään lisäämään:
 
 ```js
 const Course = ({ course }) => { 
-  console.log(course)
+  console.log(course) // highlight-line
   return (
     <div>
     <Header course={course} />
@@ -602,7 +613,7 @@ const Course = ({ course }) => {
 }
 ```
 
-Erittäin usein ongelma on siitä että propsien odotetaan olevan eri muodossa kuin ne todellisuudessa ovat ja destrukturointi epäonnistuu. Ongelma alkaa useimmiten ratketa kun poistetaan destrukturointi ja katsotaan mitä <code>props</code> oikeasti pitää sisällään:
+Erittäin usein ongelma on siitä että propsien odotetaan olevan eri muodossa tai eri nimisiä, kuin ne todellisuudessa ovat ja destrukturointi epäonnistuu. Ongelma alkaa useimmiten ratketa kun poistetaan destrukturointi ja katsotaan mitä <em>props</em> oikeasti pitää sisällään:
 
 ```js
 const Course = (props) => { // highlight-line
@@ -625,13 +636,22 @@ Lisäsin tämän luvun materiaaliin kun seuraavan tehtävän mallivastauksen koo
 <div class="tasks">
 
 <h3>Tehtäviä</h3>
+
+Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/courses/#fullstack2019).
+
+Voit palauttaa kurssin kaikki tehtävät samaan repositorioon, tai käyttää useita repositorioita. Jos palautat eri osien tehtäviä samaan repositorioon, käytä järkevää hakemistojen nimentää.
+
+Tehtävät palautetaan **yksi osa kerrallaan**. Kun olet palauttanut osan tehtävät, et voi enää palauttaa saman osan tekemättä jättämiäsi tehtäviä.
+
+Huomaa, että tässä osassa on muitakin tehtäviä kuin allaolevat, eli <i>älä tee palautusta</i> ennen kun olet tehnyt osan tehtävistä kaikki mitkä haluat palauttaa.
+
 <h4>2.1: kurssien sisältö</h4>
 
 Viimeistellään nyt tehtävien 1.1-1.5 kurssin sisältöjä renderöivän ohjelman koodi. Voit ottaa tarvittaessa pohjaksi mallivastauksen koodin.
 
-**Huomaa, että jos kopioit projektin paikasta toiseen, saattaa olla tarpeen ensin tuhota hakemisto *node_modules* ja antaa sen jälkeen asentaa riippuvuudet uudelleen, eli komento _npm install_ ennen kuin saat kopioidun projektin käynnistettyä.** Lähtökohtaisesti toki kannattaa olla kokonaan kopioimatta tai laittamatta versionhallintaan hakemistoa *node_modules*.
+**Huomaa, että jos kopioit projektin paikasta toiseen, saattaa olla tarpeen ensin tuhota hakemisto <i>node\_modules</i> ja antaa sen jälkeen asentaa riippuvuudet uudelleen, eli komento _npm install_ ennen kuin saat kopioidun projektin käynnistettyä.** Lähtökohtaisesti toki kannattaa olla kokonaan kopioimatta tai laittamatta versionhallintaan hakemistoa <i>node\_modules</i>
 
-Muutetaan komponenttia <code>App</code> seuraavasti:
+Muutetaan komponenttia <i>App</i> seuraavasti:
 
 ```js
 const App = () => {
@@ -664,7 +684,7 @@ const App = () => {
 }
 ```
 
-Määrittele sovellukseen yksittäisen kurssin muotoilusta huolehtiva komponentti _Course_.
+Määrittele sovellukseen yksittäisen kurssin muotoilusta huolehtiva komponentti <i>Course</i>.
 
 Sovelluksen komponenttirakenne voi olla esim. seuraava:
 
@@ -678,7 +698,7 @@ App
       ...
 </pre>
 
-Eli komponentti _Course_ sisältää edellisessä osassa määritellyt komponentit, joiden vastuulle tulee kurssin nimen ja osien renderöinti.
+Eli komponentti <i>Course</i> sisältää edellisessä osassa määritellyt komponentit, joiden vastuulle tulee kurssin nimen ja osien renderöinti.
 
 Renderöityvä sivu voi näyttää esim. seuraavalta:
 
@@ -686,7 +706,7 @@ Renderöityvä sivu voi näyttää esim. seuraavalta:
 
 Tässä vaiheessa siis tehtävien yhteenlaskettua lukumäärää ei vielä tarvita.
 
-Sovelluksen täytyy luonnollisesti toimia _riippumatta kurssissa olevien osien määrästä_, eli varmista että sovellus toimii jos lisäät tai poistat kurssin osia.
+Sovelluksen täytyy luonnollisesti toimia <i>riippumatta kurssissa olevien osien määrästä</i>, eli varmista että sovellus toimii jos lisäät tai poistat kurssin osia.
 
 Varmista, että konsolissa ei näy mitään virheilmoituksia!
 
@@ -703,7 +723,8 @@ Jos et jo niin tehnyt, laske koodissasi tehtävien määrä taulukon metodilla [
 **Pro tip:** Kun koodisi joka näyttää esimerkisi seuraavalta 
 
 ```js
-const total = parts.reduce( (s, p) => someMagicHere )
+const total = 
+  parts.reduce( (s, p) => someMagicHere )
 ```
 
 ei toimi, kannattaa taas kerran turvautua komentoon _console.log_, joka jälleen vaatii sen, että nuolifunktio muutetaan pidempään muotoonsa
@@ -721,7 +742,7 @@ const total = parts.reduce( (s, p) => {
 
 <h4>2.4: monta kurssia</h4>
 
-Laajennetaan sovellusta siten, että kursseja voi olla _mielivaltainen määrä_:
+Laajennetaan sovellusta siten, että kursseja voi olla <i>mielivaltainen määrä</i>:
 
 ```js
 const App = () => {
@@ -779,6 +800,6 @@ Sovelluksen ulkoasu voi olla esim seuraava:
 
 <h4>2.5: erillinen moduuli</h4>
 
-Määrittele komponentti _Course_ omana moduulinaan, jonka komponentti <code>App</code> importtaa. Voit sisällyttää kaikki kurssin alikomponentit samaan moduuliin.
+Määrittele komponentti <i>Course</i> omana moduulinaan, jonka komponentti <i>App</i> importtaa. Voit sisällyttää kaikki kurssin alikomponentit samaan moduuliin.
 
 </div>
