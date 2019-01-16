@@ -65,6 +65,7 @@
   z-index: 2;
   overflow: hidden;
   font-family: $font-heading;
+  position: relative;
 
   @include to($desktop) {
     font-size: 0.7rem;
@@ -111,6 +112,8 @@
   }
 
   .arrow__rectangle {
+    position: relative;
+
     @include from($tablet) {
       padding: 1.25rem;
     }
@@ -170,6 +173,8 @@
   }
 
   .arrow__rectangle {
+    position: relative;
+
     @include to($tablet) {
       border: none;
       padding: 0;
