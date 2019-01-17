@@ -1104,7 +1104,7 @@ Muuta sovellusta siten, että numeeriset tilastot näytetään ainoastaan jos pa
 
 ![](../images/1/15a.png)
 
-<h4>1.10: unicafe osa3</h4>
+<h4>1.10: unicafe osa5</h4>
 
 Jatketaan sovelluksen refaktorointia. Eriytä seuraavat komponentit
 
