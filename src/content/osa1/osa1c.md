@@ -331,7 +331,7 @@ ja koska muuttujan _counter_ arvo on 1, on koodi oleellisesti sama kuin tilan _c
 
 Ja tämä saa jälleen aikaan sen, että komponentti renderöidään uudelleen. Tilan arvo kasvaa sekunnin päästä yhdellä ja sama jatkuu niin kauan kun sovellus on toiminnassa.
 
-Jos komponentti ei renderöidy vaikka sen omasta mielestä pitäisi, tai se renderöityy "väärään aikaan", debuggaamista auttaa joskus komponentin määrittelevään kunktioon lisätty konsoliin tulostus. Esim. jos lisäämme koodiin seuraavan,
+Jos komponentti ei renderöidy vaikka sen omasta mielestä pitäisi, tai se renderöityy "väärään aikaan", debuggaamista auttaa joskus komponentin määrittelevään funktioon lisätty konsoliin tulostus. Esim. jos lisäämme koodiin seuraavan,
 
 ```js
 const App = (props) => {
