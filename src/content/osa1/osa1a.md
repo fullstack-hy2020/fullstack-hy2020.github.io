@@ -387,13 +387,13 @@ Juurielementin pakollinen käytöstä on se seuraus, että sovelluksen DOM-puuhu
 ```js
 const App = () => {
   const name = 'Pekka'
-  const ika = 10
+  const age = 10
 
   return (
     <>
       <h1>Greetings</h1>
       <Hello name="Arto" age={26 + 10} />
-      <Hello name={nimi} age={ika} />
+      <Hello name={name} age={age} />
       <Footer />
     </>
   )
