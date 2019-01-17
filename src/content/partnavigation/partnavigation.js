@@ -18,9 +18,9 @@ module.exports = {
   },
   '3': {
     a: 'Node.js ja Express',
-    //b: 'Sovellus internetiin',
+    b: 'Sovellus internetiin',
     //c: 'Mongo',
-    //d: 'Konfiguraatiot',
+    //d: 'ESlint',
   },
   '4': {
     // a: 'Node.js/Express',

@@ -5,8 +5,6 @@ part: 3
 
 <div class="intro">
 
-Bäkki...
+Tässä osassa fokus siirtyy bakendin, eli palvelimen toiminnallisuuden toteuttamiseen. Toteutamme Node.js:n Express-kirjastoa hyödyntäen yksinkertaisen REST-apin joka tallettaa dataa MongoDB-tietokantaan. Viemme myös sovelluksemme internettiin.
 
-
-Pahasti vaiheessa 
 </div>

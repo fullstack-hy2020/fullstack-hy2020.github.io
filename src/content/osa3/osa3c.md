@@ -4,6 +4,62 @@ part: 3
 letter: c
 ---
 
+<div class="content">
+
+### Node-sovellusten debuggaaminen
+
+Node-sovellusten debuggaaminen on jossain määrin hankalampaa kuin selaimessa toimivan Javascriptin.
+
+Vanha hyvä keino on tietysti konsoliin tulostelu. Se kannattaa aina. On mielipiteitä, joiden mukaan konsoliin tulostelun sijaan olisi syytä suosia jotain kehittyneempää menetelmää, mutta en ole ollenkaan samaa mieltä. Jopa maailman aivan eliittiin kuuluvat open source -kehittäjät [käyttävät](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) tätä [menetelmää](https://swizec.com/blog/javascript-debugging-slightly-beyond-console-log/swizec/6633).
+
+### Visual Studio Code
+
+Visual Studio Coden debuggeri voi olla hyödyksi joissain tapauksissa. Seuraavassa screenshot, missä koodi on pysäytetty kesken uuden muistiinpanon lisäyksen
+
+![](../images/3/17a.png)
+
+Koodi on pysähtynyt nuolen osoittaman <i>breakpointin</i> kohdalle ja konsoliin on evaluoitu muuttujan <i>request.params<i> arvo. Vasemmalla olevassa ikkunassa on nähtävillä myös muuta ohjelman tilaan liittyvää.
+
+Ylhäällä olevista nuolista yms. voidaan kontrolloida debuggauksen etenemistä.
+
+Itse en juurikaan käytä Visual Studio Code debuggeria.
+
+### Chromen dev tools
+
+Debuggaus onnisuu myös Chromen developer-konsolilla, käynnistämällä sovellus komennolla:
+
+```bash
+node --inspect index.js
+```
+
+Debuggeriin pääsee käsiksi kirjoittamalla chromen osoiteriville
+
+```bash
+chrome://inspect
+```
+
+Avautuvasta näkymästä valitaan debugattava sovellus:
+
+![](../assets/3/18.png)
+
+Debuggausnäkymä toimii kuten React-koodia debugattaessa, <i>Sources</i>-välilehdelle voidaan esim. asettaa breakpointeja, eli kohtia joihin suoritus pysähtyy:
+
+![](../images/3/19a.png)
+
+Kaikki sovelluksen console.log-tulostukset tulevat debuggerin <i>Console</i>-välilehdelle. Voit myös tutkia siellä muuttujien arvoja ja suorittaa mielivaltaista Javascript-koodia:
+
+![](../images/3/20a.png)
+
+### Epäile kaikkea
+
+Full Stack -sovellusten debuggaaminen vaikuttaa alussa erittäin hankalalta. Kun kohta kuvaan tulee myös tietokanta ja frontend on yhdistetty backendiin, on potentiaalisia virhelähteitä todella paljon.
+
+Kun sovellus "ei toimi", onkin selvitettävä missä vika on. On erittäin yleistä, että vika on sellaisessa paikassa, mitä ei osaa ollenkaan epäillä, ja menee minuutti-, tunti- tai jopa päiväkausia ennen kuin oikea ongelmien lähde löytyy.
+
+Avainasemassa onkin systemaattisuus. Koska virhe voi olla melkein missä vaan, kaikkea pitää epäillä, ja tulee pyrkiä poissulkemaan ne osat tarkastelusta, missä virhe ei ainakaan ole. Konsoliin kirjoitus, Postman, debuggeri ja kokemus auttavat.
+
+Virheiden ilmaantuessa ylivoimaisesti huonoin strategia on jatkaa koodin kirjoittamista. Se on tae siitä, että koodissa on pian kymmenen ongelmaa lisää ja niiden syyn selvittäminen on entistäkin vaikeampaa. Toyota Production Systemin periaate [Stop and fix](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/#.Wjv9axP1WCQ) toimii tässäkin yhteydessä paremmin kuin hyvin.
+
 ## Mongo
 
 Jotta saisimme talletettua muistiinpanot pysyvästi, tarvitsemme tietokannan. Useimmilla laitoksen kursseilla on käytetty relaatiotietokantoja. Tällä kurssilla käytämme [MongoDB](https://www.mongodb.com/):tä, joka on ns. [dokumenttitietokanta](https://en.wikipedia.org/wiki/Document-oriented_database).
@@ -203,9 +259,17 @@ Note.find({ important: true }).then(result => {
 });
 ```
 
+</div>
+
+<div class="tasks">
+
 ### Tehtäviä
 
 Tee nyt tehtävä [3.12](/tehtävät#mongoosen-alkeet)
+
+</div>
+
+<div class="content">
 
 ## Tietokantaa käyttävä backend
 
@@ -394,9 +458,17 @@ Kun kuvioissa on mukana tietokanta, on tietokannan tilan tarkastelu mlabin halli
 
 Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-3), tagissa _part3-3_.
 
+</div>
+
+<div class="tasks">
+
 ### Tehtäviä
 
 Tee nyt tehtävät [3.13-3.15](/tehtävät#backend-ja-tietokanta)
+
+</div>
+
+<div class="content">
 
 ### Virheiden käsittely
 
@@ -548,179 +620,13 @@ Pieni, mutta tärkeä detalji liittyen operaatioon _findOneAndUpdate_. Oletusarv
 
 Backend vaikuttaa toimivan postmanista ja VS Code REST clientistä tehtyjen kokeilujen perusteella ja myös frontend toimii moitteettomasti tietokantaa käyttävän backendin kanssa.
 
+</div>
+
+<div class="tasks">
+
 ### Tehtäviä
 
 Tee nyt tehtävät [3.16-3.18](/tehtävät#lisää-operaatioita)
 
-## Refaktorointia - promisejen ketjutus
+</div>
 
-Useat routejen tapahtumankäsittelijöistä muuttivat palautettavan datan oikeaan formaattiin kutsumalla metodia _formatNote_:
-
-```js
-const formatNote = note => {
-  return {
-    id: note._id,
-    content: note.content,
-    date: note.date,
-    important: note.important,
-  };
-};
-```
-
-esim uuden muistiinpanon luomisessa metodia kutsutaan _then_:in parametrina palauttama olio parametrina:
-
-```js
-app.post('/api/notes', (request, response) => {
-  // ...
-
-  note.save().then(savedNote => {
-    response.json(formatNote(savedNote));
-  });
-});
-```
-
-Voisimme tehdä saman myös hieman tyylikkäämmin [promiseja ketjuttamalla](https://javascript.info/promise-chaining):
-
-```js
-app.post('/api/notes', (request, response) => {
-  // ...
-
-  note
-    .save()
-    .then(savedNote => {
-      return formatNote(savedNote);
-    })
-    .then(savedAndFormattedNote => {
-      response.json(savedAndFormattedNote);
-    });
-});
-```
-
-Eli ensimmäisen _then_:in takaisinkutsussa otamme mongoosen palauttaman olion _savedNote_ ja formatoimme sen. Operaation tulos palautetaan returnilla. Kuten osassa 2 [todettiin](/osa2/#palvelimen-kanssa-tapahtuvan-kommunikoinnin-eristäminen-omaan-moduuliin), promisen then-metodi palauttaa myös promisen. Eli kun palautamme _formatNote(savedNote)_:n takaisinkutsufunktiosta, syntyy promise, jonka arvona on formatoitu muistiinpano. Pääsemme käsiksi arvoon rekisteröimällä _then_-kutsulla uuden tapahtumankäsittelijän.
-
-Itseasiassa selviämme vieläkin tiiviimmällä koodilla:
-
-```js
-app.post('/api/notes', (request, response) => {
-  // ...
-
-  note
-    .save()
-    .then(formatNote)
-    .then(savedAndFormattedNote => {
-      response.json(savedAndFormattedNote);
-    });
-});
-```
-
-koska _formatNote_ on viite funktioon, on oleellisesti ottaen kyse samasta kuin kirjoittaisimme:
-
-```js
-app.post('/api/notes', (request, response) => {
-  // ...
-
-  note
-    .save()
-    .then(savedNote => {
-      return {
-        id: savedNote._id,
-        content: savedNote.content,
-        date: savedNote.date,
-        important: savedNote.important,
-      };
-    })
-    .then(savedAndFormattedNote => {
-      response.json(savedAndFormattedNote);
-    });
-});
-```
-
-## Sovelluksen vieminen tuotantoon
-
-Sovelluksen pitäisi toimia tuotannossa, eli herokussa sellaisenaan. Frontendin muutosten takia on tehtävä siitä uusi tuotantoversio ja kopioitava se backendiin.
-
-Sovellusta voi käyttää sekä frontendin kautta <https://fullstack-notes.herokuapp.com>, ja myös API:n <https://fullstack-notes.herokuapp.com/api/notes> suora käyttö selaimella ja postmanilla onnistuu.
-
-Sovelluksessamme on tällä hetkellä eräs ikävä piirre. Tietokannan osoite on kovakoodattu backendiin ja samaa tietokantaa käytetään sekä tuotannossa, että sovellusta kehitettäessä.
-
-Tarvitsemme oman kannan sovelluskehitystä varten. Luodaan mlabiin toinen tietokanta ja sille käyttäjä.
-
-Tietokannan osoitetta ei kannata kirjoittaa koodiin. Eräs hyvä tapa tietokannan osoitteen määrittelemiseen on [ympäristömuuttujien](https://en.wikipedia.org/wiki/Environment_variable) käyttö.
-
-Talletetaan kannan osoite ympäristömuuttujaan _MONGODB_URI_.
-
-Ympäristömuuttujiin pääsee Node-sovelluksesta käsiksi seuraavasti:
-
-```js
-const mongoose = require('mongoose');
-
-const url = process.env.MONGODB_URI;
-
-// ...
-
-module.exports = Note;
-```
-
-Tee muutos koodiin ja deployaa uusi versio herokuun. Sovelluksen pitäisi toimia kun asetat ympäristömuuttujan arvo herokuun komennolla _heroku config:set_
-
-```bash
-heroku config:set MONGODB_URI=mongodb://fullstack:sekred@ds211088.mlab.com:11088/fullstack-notes
-```
-
-Sovelluksen pitäisi toimia muutosten jälkeen. Aina kaikki ei kuitenkaan mene suunnitelmien mukaan. Jos ongelmia ilmenee, _heroku logs_ auttaa. Oma sovellukseni ei toiminut muutoksen jälkeen. Loki kertoi seuraavaa
-
-![](../images/3/21.png)
-
-eli tietokannan osoite olikin jostain syystä määrittelemätön. Komento _heroku config_ paljasti että olin vahingossa määritellyt ympäristömuuttujan _MONGO_URL_ kun koodi oletti sen olevan nimeltään _MONGODB_URI_.
-
-Muutoksen jälkeen sovellus ei toimi paikallisesti, koska ympäristömuuttujalla _MONGODB_URI_ ei ole mitään arvoa. Tapoja määritellä ympäristömuuttujalle arvo on monia, käytetään nyt [dotenv](https://www.npmjs.com/package/dotenv)-kirjastoa.
-
-Asennetaan kirjasto komennolla
-
-```bash
-npm install dotenv --save
-```
-
-Sovelluksen juurihakemistoon tehdään sitten tiedosto nimeltään _.env_, minne tarvittavien ympäristömuuttujien arvot asetetaan. Määritellään tiedostoon sovelluskehitystä varten luodun tietokannan osoite:
-
-```bash
-MONGODB_URI=mongodb://fullstack:sekred@ds111078.mlab.com:11078/fullstact-notes-dev
-```
-
-Tiedosto .env **tulee heti gitignorata** sillä emme halua julkaista .env -tiedoston sisältöä verkkoon.
-
-dotenvissä määritellyt ympäristömuuttujat otetaan koodissa käyttöön komennolla
-
-```js
-require('dotenv').config();
-```
-
-ja niihin viitataan Nodessa kuten "normaaleihin" ympäristömuuttujiin syntaksilla _process.env.MONGODB_URI_
-
-Otetaan dotenv käyttöön seuraavasti:
-
-```js
-const mongoose = require('mongoose');
-
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
-}
-
-const url = process.env.MONGODB_URI;
-
-// ...
-
-module.exports = Note;
-```
-
-Nyt dotenvissä olevat ympäristömuuttujat otetaan käyttöön ainoastaan silloin kun sovellus ei ole _production_- eli tuotantomoodissa (kuten esim. Herokussa).
-
-Uudelleenkäynnistyksen jälkeen sovellus toimii taas paikallisesti.
-
-Node-sovellusten konfigurointiin on olemassa ympäristömuuttujien ja dotenvin lisäksi lukuisia vaihtoehtoja, mm. [node-conf](https://github.com/lorenwest/node-config). Ympäristömuuttujien käyttö riittää meille nyt, joten emme rupea overengineeraamaan. Palaamme aiheeseen kenties myöhemmin.
-
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-4), tagissa _part3-4_.
-
-### Tehtäviä
-
-Tee nyt tehtävät [3.19 - 3.21](/tehtävät#loppuhuipennus)
