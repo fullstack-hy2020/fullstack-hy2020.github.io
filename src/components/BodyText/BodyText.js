@@ -16,6 +16,7 @@ export const BodyText = ({
   bold,
   centered,
   noPadding,
+  headingFont,
   ...props
 }) => {
   const classes = [];
@@ -23,6 +24,7 @@ export const BodyText = ({
   centered && classes.push('centered');
   bold && classes.push('bold');
   noPadding && classes.push('body-text--no-padding');
+  headingFont && classes.push('heading-font');
 
   const parserOptions = {
     replace: ({ type, attribs, children }) => {

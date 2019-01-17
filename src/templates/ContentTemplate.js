@@ -147,8 +147,8 @@ export default class ContentTemplate extends Component {
             backgroundColor={colorCode}
             style={{
               backgroundImage: `url(${path.resolve(mainImage.publicURL)})`,
-              backgroundPosition: 'center left',
-              backgroundSize: '80%',
+              backgroundPosition: 'center center',
+              backgroundSize: '50%',
               backgroundRepeat: 'no-repeat',
               backgroundColor: colorCode,
             }}
