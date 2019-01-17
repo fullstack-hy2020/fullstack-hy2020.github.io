@@ -39,14 +39,16 @@ Osien **deadlinet** ovat maanantaisin klo 23:59, poikkeuksena kaksi viimeistä o
 | osa 3          |        ma 4.2.          |
 | osa 4          |        ma 11.2.         |
 | osa 5          |        ma 18.2.         |
-| osa 6          |        su 3.3.          |
-| osa 7          |        su 3.3.          |
+| osa 6          |        ma 4.3.          |
+| osa 7          |        ma 4.3.          |
 
 Tämän kurssin eri osiin jo tehtyjen palautusten ajankäyttöstatistiikan näet [tehtävien palautussovelluksesta](https://studies.cs.helsinki.fi/courses/#fullstack2019).
 
 ### Arvosteluperusteet
 
 Kurssin oletusarvoinen laajuus on 5 opintopistettä. Arvosana määräytyy kaikkien tehtyjen tehtävien perusteella, myös tähdellä merkityt "vapaavalintaiset" tehtävät siis vaikuttavat arvosanaan. Noin 50% deadlineen mennessä tehdyistä tehtävistä tuo arvosanan 1 ja 80% arvosanan 5. Kurssin lopussa on koe, joka on suoritettava hyväksytysti. Koe ei kuitenkaan vaikuta arvosanaan.
+
+Koe pidetään tiistaina 5.3. klo 9 saleissa A111 ja B123. 
 
 Kurssilta on mahdollisuus ansaita lisäopintopisteitä. Jos teet 87.5% kurssin tehtävistä, saat yhden lisäopintopisteen. Tekemällä 95% tehtävistä saat 2 lisäopintopistettä.
 

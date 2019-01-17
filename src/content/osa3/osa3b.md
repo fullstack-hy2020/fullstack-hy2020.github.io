@@ -4,8 +4,6 @@ part: 3
 letter: b
 ---
 
-## Yhteys frontendiin
-
 Palataan yritykseemme käyttää nyt tehtyä backendiä [osassa 2](/osa2) tehdyllä React-frontendillä. Aiempi yritys lopahti seuraavaan virheilmoitukseen
 
 ![](../assets/3/3.pngng

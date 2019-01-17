@@ -17,7 +17,7 @@ module.exports = {
     e: 'Tyylien lisääminen React-sovellukseen',
   },
   '3': {
-    //a: 'Node.js ja Express',
+    a: 'Node.js ja Express',
     //b: 'Sovellus internetiin',
     //c: 'Mongo',
     //d: 'Konfiguraatiot',
