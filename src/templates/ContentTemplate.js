@@ -42,9 +42,9 @@ export default class ContentTemplate extends Component {
     const { frontmatter } = this.props.data.markdownRemark;
 
     links.map(i => {
-      return (i.style = `border-color: ${
-        colors[partColors[frontmatter.part]]
-      }`);
+      i.style = `border-color: ${colors[partColors[frontmatter.part]]}`;
+      i.target = '_blank';
+      return;
     });
 
     this.setState({
