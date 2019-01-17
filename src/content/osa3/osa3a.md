@@ -832,7 +832,7 @@ Mitä rivillä tapahtuu? <em>notes.map(n => n.id)</em> muodostaa taulukon, joka 
 
 Tee Node-sovellus, joka tarjoaa osoitteessa <http://localhost:3001/api/persons> kovakoodatun taulukon puhelinnumerotietoja:
 
-![](../assets/teht/19.png)
+![](../images/3/22.png)
 
 Huomaa, että Noden routejen määrittelyssä merkkijonon <i>api/persons</i> vinoviiva käyttäytyy kuten mikä tahansa muu merkki.
 
@@ -844,7 +844,7 @@ Komennolla _npm run watch_ käynnistettäessa sovelluksen tulee käynnistyä uud
 
 Tee sovelluksen osoitteeseen <http://localhost:3001/info> suunnilleen seuraavanlainen sivu
 
-![](../assets/teht/20.png)
+![](../images/3/23.png)
 
 
 eli sivu kertoo pyynnön tekohetken sekä sen kuinka monta puhelinluettelotietoa sovelluksen muistissa olevassa taulukossa on.
