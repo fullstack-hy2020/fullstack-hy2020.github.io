@@ -629,4 +629,3 @@ Backend vaikuttaa toimivan postmanista ja VS Code REST clientistä tehtyjen koke
 Tee nyt tehtävät [3.16-3.18](/tehtävät#lisää-operaatioita)
 
 </div>
-
