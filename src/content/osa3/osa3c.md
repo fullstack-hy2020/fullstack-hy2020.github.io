@@ -14,15 +14,21 @@ Nodella tehtyjen sovellusten debuggaaminen on jossain määrin hankalampaa kuin 
 
 #### Visual Studio Code
 
-Visual Studio Coden debuggeri voi olla hyödyksi joissain tapauksissa. Seuraavassa screenshot, missä koodi on pysäytetty kesken uuden muistiinpanon lisäyksen
+Visual Studio Coden debuggeri voi olla hyödyksi joissain tapauksissa. Saat käynnistettyä sovelluksen debuggaustilassa seuraavasti
 
-![](../images/3/17a.png)
+![](../images/3/35.png)
 
-Koodi on pysähtynyt nuolen osoittaman <i>breakpointin</i> kohdalle ja konsoliin on evaluoitu muuttujan <i>request.params</i> arvo. Vasemmalla olevassa ikkunassa on nähtävillä myös muuta ohjelman tilaan liittyvää.
+Huomaa, että sovellus ei saa olla samalla käynnissä "normaalisti" konsolista, sillä tällöin sovelluksen käyttämä portti on varattu.
+
+Seuraavassa screenshot, missä koodi on pysäytetty kesken uuden muistiinpanon lisäyksen
+
+![](../images/3/36a.png)
+
+Koodi on pysähtynyt nuolen osoittaman <i>breakpointin</i> kohdalle ja konsoliin on evaluoitu muuttujan <i>note</i> arvo. Vasemmalla olevassa ikkunassa on nähtävillä myös muuta ohjelman tilaan liittyvää.
 
 Ylhäällä olevista nuolista yms. voidaan kontrolloida debuggauksen etenemistä.
 
-Itse en juurikaan käytä Visual Studio Code debuggeria.
+Itse en jostain syystä juurikaan käytä Visual Studio Code debuggeria.
 
 #### Chromen dev tools
 
@@ -32,23 +38,17 @@ Debuggaus onnisuu myös Chromen developer-konsolilla, käynnistämällä sovellu
 node --inspect index.js
 ```
 
-Debuggeriin pääsee käsiksi kirjoittamalla chromen osoiteriville
+Debuggeriin pääsee käsiksi klikkaamalla chromen devloper-konsoliin ilmestyneestä vihreästä ikonista
 
-```bash
-chrome://inspect
-```
-
-Avautuvasta näkymästä valitaan debugattava sovellus:
-
-![](../assets/3/18.png)
+![](../images/3/37.png)
 
 Debuggausnäkymä toimii kuten React-koodia debugattaessa, <i>Sources</i>-välilehdelle voidaan esim. asettaa breakpointeja, eli kohtia joihin suoritus pysähtyy:
 
-![](../images/3/19a.png)
+![](../images/3/38.png)
 
 Kaikki sovelluksen console.log-tulostukset tulevat debuggerin <i>Console</i>-välilehdelle. Voit myös tutkia siellä muuttujien arvoja ja suorittaa mielivaltaista Javascript-koodia:
 
-![](../images/3/20a.png)
+![](../images/3/39.png)
 
 #### Epäile kaikkea
 
@@ -56,50 +56,50 @@ Full Stack -sovellusten debuggaaminen vaikuttaa alussa erittäin hankalalta. Kun
 
 Kun sovellus "ei toimi", onkin selvitettävä missä vika on. On erittäin yleistä, että vika on sellaisessa paikassa, mitä ei osaa ollenkaan epäillä, ja menee minuutti-, tunti- tai jopa päiväkausia ennen kuin oikea ongelmien lähde löytyy.
 
-Avainasemassa onkin systemaattisuus. Koska virhe voi olla melkein missä vaan, kaikkea pitää epäillä, ja tulee pyrkiä poissulkemaan ne osat tarkastelusta, missä virhe ei ainakaan ole. Konsoliin kirjoitus, Postman, debuggeri ja kokemus auttavat.
+Avainasemassa onkin systemaattisuus. Koska virhe voi olla melkein missä vaan, <i>kaikkea pitää epäillä</i>, ja tulee pyrkiä poissulkemaan ne osat tarkastelusta, missä virhe ei ainakaan ole. Konsoliin kirjoitus, Postman, debuggeri ja kokemus auttavat.
 
-Virheiden ilmaantuessa ylivoimaisesti huonoin strategia on jatkaa koodin kirjoittamista. Se on tae siitä, että koodissa on pian kymmenen ongelmaa lisää ja niiden syyn selvittäminen on entistäkin vaikeampaa. Toyota Production Systemin periaate [Stop and fix](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/#.Wjv9axP1WCQ) toimii tässäkin yhteydessä paremmin kuin hyvin.
+Virheiden ilmaantuessa <i>ylivoimaisesti huonoin strategia</i> on jatkaa koodin kirjoittamista. Se on tae siitä, että koodissa on pian kymmenen ongelmaa lisää ja niiden syyn selvittäminen on entistäkin vaikeampaa. Toyota Production Systemin periaate [Stop and fix](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/#.Wjv9axP1WCQ) toimii tässäkin yhteydessä paremmin kuin hyvin.
 
-## Mongo
+### MongoDB
 
 Jotta saisimme talletettua muistiinpanot pysyvästi, tarvitsemme tietokannan. Useimmilla laitoksen kursseilla on käytetty relaatiotietokantoja. Tällä kurssilla käytämme [MongoDB](https://www.mongodb.com/):tä, joka on ns. [dokumenttitietokanta](https://en.wikipedia.org/wiki/Document-oriented_database).
 
-Dokumenttitietokannat poikkeavat jossain määrin relaatiotietokannoista niin datan organisointitapansa kuin kyselykielensäkin suhteen. Dokumenttitietokantojen ajatellaan kuuluvan sateenvarjotermin [NoSQL](https://en.wikipedia.org/wiki/NoSQL) alle. Lisää dokumenttitietokannoista ja NoSQL:stä Tietokantojen perusteiden [viikon 7 materiaalista](https://materiaalit.github.io/tikape-s17/part7/).
+Dokumenttitietokannat poikkeavat jossain määrin relaatiotietokannoista niin datan organisointitapansa kuin kyselykielensäkin suhteen. Dokumenttitietokantojen ajatellaan kuuluvan sateenvarjotermin [NoSQL](https://en.wikipedia.org/wiki/NoSQL) alle. Lisää dokumenttitietokannoista ja NoSQL:stä Tietokantojen perusteiden [viikon 7 materiaalista](https://tikape-s18.mooc.fi/part7/).
 
-**Lue nyt Tietokantojen perusteiden dokumenttitietokantoja kuvaava osuus.** Jatkossa oletetaan, että hallitset käsitteet _dokumentti_ ja _kokoelma_ (collection).
+**Lue nyt Tietokantojen perusteiden dokumenttitietokantoja kuvaava osuus.** Jatkossa oletetaan, että hallitset käsitteet <i>dokumentti</i> ja <i>kokoelma</i> (collection).
 
 MongoDB:n voi luonnollisesti asentaa omalle koneelle. Internetistä löytyy kuitenkin myös palveluna toimivia Mongoja (esim [mlab](https://mlab.com/) ja [MongoDbCloud](https://www.mongodb.com/cloud/atlas)) ja seuraava ohje olettaa, että käytössä on jo vuosien kokemuksella luotettavaksi havaittu [mlab](https://mlab.com/).
 
-Mlab-kanta on helppo ottaa käyttöön suoraan [Herokun kautta](https://elements.heroku.com/addons/mongolab); vaikka tämä on maksutonta, edellyttää se luottokorttitietojen antamista Herokulle.
+Mlab-kanta on helppo ottaa käyttöön suoraan [Herokun kautta](https://elements.heroku.com/addons/mongolab), vaikka tämä on maksutonta, edellyttää se luottokorttitietojen antamista Herokulle.
 
 Määrittelemmekin seuraavassa kannan suoraan [mlab](https://mlab.com/):iin, jolloin luottokorttitietoja ei tarvita.
 
 Aloita luomalla mlabiin käyttäjätili, saatuasi mlabilta verifiointimailin ja kirjauduttuasi mailin linkin kautta sisään, voit luoda tietokannan:
 
-![](../images/3/12a.png)
+![](../images/3/40.png)
 
-Määrittele esim. _Amazon web services_, tyypiksi ilmainen _sandbox_ ja sijoituspaikaksi Irlanti ja anna kannalle sopiva nimi.
+Määrittele esim. <i>Amazon web services</i>, tyypiksi ilmainen <>sandbox</i> ja sijoituspaikaksi <i>Irlanti</i> ja anna kannalle sopiva nimi.
 
 Kun kanta on hetken kuluttua valmis, mene tietokannan hallintanäkymään
 
-![](../images/3/12b.png)
+![](../images/3/41.png)
 
-Näkymä kertoo _MongoDB URI:n_ eli osoitteen, jonka avulla sovelluksemme käyttämä MongoDB-kirjasto saa yhteyden kantaan.
+Näkymä kertoo <i>MongoDB URI:n</i> eli osoitteen, jonka avulla sovelluksemme käyttämä MongoDB-kirjasto saa yhteyden kantaan.
 
 Osoite näyttää seuraavalta:
 
+```bash
+mongodb://<dbuser>:<dbpassword>@ds161224.mlab.com:61224/fullstack2019-notes
 ```
-mongodb://<dbuser>:<dbpassword>@ds211088.mlab.com:11088/fullstack-notes
-```
 
-Tarvitsemme kannan käyttöä varten _dbuserin_ eli käyttäjätunnuksen. Käyttäjätunnuksen luominen tapahtuu tietokannan hallintanäkymästä
+Tarvitsemme kannan käyttöä varten <i>dbuserin</i> eli käyttäjätunnuksen. Käyttäjätunnuksen luominen tapahtuu tietokannan hallintanäkymästä
 
-![](../images/3/12c.png)
+![](../images/3/42.png)
 
-Jos luotiin käyttäjätunnus _fullstack_ jonka salasana on _sekred_, on tietokannan osoite seuraava:
+Jos luotiin käyttäjätunnus <i>fullstack</i> jonka salasana on <i>sekred1</i>, on tietokannan osoite seuraava:
 
-```
-mongodb://fullstack:sekred@ds211088.mlab.com:11088/fullstack-notes
+```bash
+mongodb://fullstack:sekred1@ds161224.mlab.com:61224/fullstack2019-notes
 ```
 
 Olemme nyt valmiina kannan käyttöön.
@@ -107,7 +107,7 @@ Olemme nyt valmiina kannan käyttöön.
 Voisimme käyttää kantaa Javascript-koodista suoraan Mongon virallisen
 [MongoDB Node.js driver](https://mongodb.github.io/node-mongodb-native/) -kirjaston avulla, mutta se on ikävän työlästä. Käytämmekin hieman korkeammalla tasolla toimivaa [mongoose](http://mongoosejs.com/index.html)-kirjastoa.
 
-Mongoosesta voisi käyttää luonnehdintaa _object document mapper_ (ODM), ja sen avulla Javascript-olioiden tallettaminen mongon dokumenteiksi on suoraviivaista.
+Mongoosesta voisi käyttää luonnehdintaa <i>object document mapper</i> (ODM), ja sen avulla Javascript-olioiden tallettaminen mongon dokumenteiksi on suoraviivaista.
 
 Asennetaan mongoose:
 
@@ -115,59 +115,54 @@ Asennetaan mongoose:
 npm install mongoose --save
 ```
 
-Ei lisätä mongoa käsittelevää koodia heti backendin koodin sekaan, vaan tehdään erillinen kokeilusovellus tiedostoon _mongo.js_:
+Ei lisätä mongoa käsittelevää koodia heti backendin koodin sekaan, vaan tehdään erillinen kokeilusovellus tiedostoon <i>mongo.js</i>:
 
 ```js
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-// korvaa url oman tietokantasi urlilla. ethän laita salasanaa Githubiin!
+if ( process.argv.length<3 ) {
+  console.log('give password as argument')
+  process.exit(1)
+}
+
+const password = process.argv[2]
+
 const url =
-  'mongodb://fullstack:sekred@ds211088.mlab.com:11088/fullstack-notes';
+  `mongodb://fullstack:${password}@ds161224.mlab.com:61224/fullstack2019-notes`
 
-mongoose.connect(url);
+mongoose.connect(url, { useNewUrlParser: true })
 
 const Note = mongoose.model('Note', {
   content: String,
   date: Date,
   important: Boolean,
-});
+})
 
 const note = new Note({
   content: 'HTML on helppoa',
   date: new Date(),
   important: true,
-});
+})
 
 note.save().then(response => {
   console.log('note saved!');
   mongoose.connection.close();
-});
+})
 ```
 
-Kun koodi suoritetaan komennolla _node mongo.js_ lisää mongoose tietokantaaan uuden dokumentin.
+ Koodi siis olettaa, että sille annetan parametrina mlabiin määritelty salasana. Komentoriviparametriin se pääsee käsiksi seuraavasti
+
+```js
+const password = process.argv[2]
+```
+
+Kun koodi suoritetaan komennolla <i>node mongo.js salasana</i> lisää mongoose tietokantaaan uuden dokumentin.
 
 Mlab:in hallintanäkymä näyttää lisäämämme datan:
 
-![](../images/3/13a.png)
+![](../images/3/43.png)
 
-Kuten näkymä kertoo, on muistiinpanoa vastaava _dokumentti_ lisätty kokoelmaan (collection) nimeltään _notes_.
-
-Koodi sisältää muutamia mielenkiintoisia asioita. Aluksi avataan yhteys ja määritellään, että mongoose käyttää _promiseja_, eikä oldschool-takaisinkutsufunktioita:
-
-```js
-const mongoose = require('mongoose');
-
-const url =
-  'mongodb://fullstack:fullstack@ds211088.mlab.com:11088/fullstack-notes';
-
-mongoose.connect(url);
-```
-
-Valitettavasti mongoosen dokumentaatiossa käytetään joka paikassa takaisinkutsufunktioita, joten sieltä ei kannata suoraan copypasteta koodia, sillä promisejen ja vanhanaikaisten callbackien sotkeminen samaan koodiin ei ole kovin järkevää.
-
-<div class='important'>
-Kannattaa muistaa, että tietokannan salasanaa ei kannata laittaa missään vaiheessa Githubiin!
-</div>
+Kuten näkymä kertoo, on muistiinpanoa vastaava <i>dokumentti</i> lisätty kokoelmaan (collection) nimeltään <i>notes</i>.
 
 ### Skeema
 
@@ -178,12 +173,12 @@ const Note = mongoose.model('Note', {
   content: String,
   date: Date,
   important: Boolean,
-});
+})
 ```
 
-Modelin parametrina määritellään _muistiinpanon_ [skeema](http://mongoosejs.com/docs/guide.html), joka kertoo mongooselle, miten muistiinpano-oliot tulee tallettaa tietokantaan.
+Modelin parametrina määritellään <i>muistiinpanon</i> [skeema](http://mongoosejs.com/docs/guide.html), joka kertoo mongooselle, miten muistiinpano-oliot tulee tallettaa tietokantaan.
 
-Ensimmäisenä parametrina oleva _Note_ määrittelee, että mongoose tallettaa muistiinpanoa vastaavat oliot kokoelmaan nimeltään _notes_ sillä [mongoosen konventiona](http://mongoosejs.com/docs/models.html) on määritellä kokoelmien nimet monikossa (esim. _notes_), kun niihin viitataan modelin määrittelyssä yksikkömuodossa (esim. _Note_).
+Ensimmäisenä parametrina oleva merkkijono <i>Note</i> määrittelee, että mongoose tallettaa muistiinpanoa vastaavat oliot kokoelmaan nimeltään <i>notes</i> sillä [mongoosen konventiona](http://mongoosejs.com/docs/models.html) on määritellä kokoelmien nimet monikossa (esim. <i>notes</i>), kun niihin viitataan modelin määrittelyssä yksikkömuodossa (esim. <i>Note</i>).
 
 Mongoosen dokumentaatiossa skeema ja sitä vastaava model määritellään kumpikin erikseen:
 
@@ -192,16 +187,16 @@ const noteSchema = new mongoose.Schema({
   content: String,
   date: Date,
   important: Boolean,
-});
+})
 
-const Note = mongoose.model('Note', noteSchema);
+const Note = mongoose.model('Note', noteSchema)
 ```
 
-Koska meillä ei ole skeema-oliolle muuta käyttöä kuin modelin parametrina, käytämme hyväksemme sitä, että skeema voidaan määritellä modeleille suoraan antamalla toisena parametrina skeeman määrittelevä olio.
+Koska meillä ei tällä hetkellä ole skeema-oliolle muuta käyttöä kuin modelin parametrina, käytämme hyväksemme sitä, että skeema voidaan määritellä modeleille suoraan antamalla toisena parametrina skeeman määrittelevä olio.
 
-Dokumenttikannat, kuten Mongo ovat _skeemattomia_, eli tietokanta itsessään ei välitä mitään sinne talletettavan tiedon muodosta. Samaan kokoelmaankin on mahdollista tallettaa olioita joilla on täysin eri kentät.
+Dokumenttikannat, kuten Mongo ovat <i>skeemattomia</i>, eli tietokanta itsessään ei välitä mitään sinne talletettavan tiedon muodosta. Samaan kokoelmaankin on mahdollista tallettaa olioita joilla on täysin eri kentät.
 
-Mongoosea käytettäessä periaatteena on kuitenkin se, että tietokantaan talletettavalle tiedolle määritellään _sovelluksen koodin tasolla skeema_, joka määrittelee minkä muotoisia olioita kannan eri kokoelmiin talletetaan.
+Mongoosea käytettäessä periaatteena on kuitenkin se, että tietokantaan talletettavalle tiedolle määritellään <i>sovelluksen koodin tasolla skeema</i>, joka määrittelee minkä muotoisia olioita kannan eri kokoelmiin talletetaan.
 
 ### Olioiden luominen ja tallettaminen
 
@@ -212,18 +207,18 @@ const note = new Note({
   content: 'Selain pystyy suorittamaan vain javascriptiä',
   date: new Date(),
   important: false,
-});
+})
 ```
 
-Modelit ovat ns. _konstruktorifunktioita_, jotka luovat parametrien perusteella Javascript-olioita. Koska oliot on luotu modelien konstruktorifunktiolla, niillä on kaikki modelien ominaisuudet, eli joukko metodeja, joiden avulla olioita voidaan mm. tallettaa tietokantaan.
+Modelit ovat ns. <i>konstruktorifunktioita</i>, jotka luovat parametrien perusteella Javascript-olioita. Koska oliot on luotu modelien konstruktorifunktiolla, niillä on kaikki modelien ominaisuudet, eli joukko metodeja, joiden avulla olioita voidaan mm. tallettaa tietokantaan.
 
 Tallettaminen tapahtuu metodilla _save_. Metodi palauttaa _promisen_, jolle voidaan rekisteröidä _then_-metodin avulla tapahtumankäsittelijä:
 
 ```js
 note.save().then(result => {
-  console.log('note saved!');
-  mongoose.connection.close();
-});
+  console.log('note saved!')
+  mongoose.connection.close()
+})
 ```
 
 Kun olio on tallennettu kantaan, kutsutaan _then_:in parametrina olevaa tapahtumankäsittelijää, joka sulkee tietokantayhteyden komennolla <code>mongoose.connection.close()</code>. Ilman yhteyden sulkemista ohjelman suoritus ei pääty.
@@ -239,10 +234,10 @@ Kommentoidaan koodista uusia muistiinpanoja generoiva osa, ja korvataan se seura
 ```js
 Note.find({}).then(result => {
   result.forEach(note => {
-    console.log(note);
-  });
-  mongoose.connection.close();
-});
+    console.log(note)
+  })
+  mongoose.connection.close()
+})
 ```
 
 Kun koodi suoritetaan, kantaan talletetut muistiinpanot tulostuvat.
@@ -256,7 +251,7 @@ Voisimme hakea esim. ainoastaan tärkeät muistiinpanot seuraavasti:
 ```js
 Note.find({ important: true }).then(result => {
   // ...
-});
+})
 ```
 
 </div>
@@ -265,31 +260,103 @@ Note.find({ important: true }).then(result => {
 
 ### Tehtäviä
 
-Tee nyt tehtävä [3.12](/tehtävät#mongoosen-alkeet)
+#### 3.12: tietokanta komentoriviltä
+
+Luo sovellukselle pilvessä oleva mongo mlabin avulla.
+
+Tee projektihakemistoon tiedosto <i>mongo.js</i>, jonka avulla voit lisätä tietokantaan puhelinnumeroja sekä listata kaikki kannassa olevat numerot.
+
+**Huom** jos/kun laitat tiedoston Githubiin, älä laita tietokannan salasanaa mukaan!
+
+Ohjelma toimii siten, että jos sille annetaan käynnistäessä kolme komentoriviparametria (joista ensimmäinen on salasana), esim:
+
+```bash
+node mongo.js salasana Joulupukki 040-1234556
+```
+
+Ohjelma tulostaa
+
+```bash
+lisätään Joulupukki numero 040-1234556 luetteloon
+```
+
+ja lisää uuden yhteystiedon tietokantaan. Huomaa, että jos nimi sisältää välilyöntejä, on se annettava hipsuissa:
+
+```bash
+node mongo.js "Arto Vihavainen" 040-1234556
+```
+
+Jos komentoriviparametreina ei ole muuta kuin salasana, eli ohjelma suoritetaan komennolla
+
+```bash
+node mongo.js salasana
+```
+
+tulostaa ohjelma tietokannassa olevat numerotiedot:
+
+<pre>
+puhelinluettelo:
+Pekka Mikkola 040-1234556
+Arto Vihavainen 045-1232456
+Tiina Niklander 040-1231236
+</pre>
+
+Saat selville ohjelman komentoriviparametrit muuttujasta [process.argv](https://nodejs.org/docs/latest-v8.x/api/process.html#process_process_argv)
+
+**HUOM: älä sulje tietokantayhteyttä väärässä kohdassa**. Esim. seuraava koodi ei toimi
+
+```js
+Person
+  .find({})
+  .then(persons=> {
+    // ...
+  })
+
+mongoose.connection.close()
+```
+
+Koodin suoritus nimittäin etenee siten, että heti operaation <i>Person.find</i> käynnistymisen jälkeen suoritetaan komento <i>mongoose.connection.close()</i> ja tietokantayhteys katkeaa välittömästi. Näin ei koskaan päästä siihen pisteeseen, että <i>Person.find</i>-operaation valmistumisen käsittelevää <i>takaisinkutsufunktiota</i> kutsuttaisiin.
+
+Oikea paikka tietokantayhteyden sulkemiselle on takaisinkutsufunktion loppu:
+
+```js
+Person
+  .find({})
+  .then(persons=> {
+    // ...
+    mongoose.connection.close()
+  })
+```
+
+**HUOM2** jos määrittelet modelin nimeksi <i>Person</i>, muuttaa mongoose sen monikkomuotoon <i>people</i>, jota se käyttää vastaavan kokoelman nimenä.
 
 </div>
 
 <div class="content">
 
-## Tietokantaa käyttävä backend
+### Tietokantaa käyttävä backend
 
 Nyt meillä on periaatteessa hallussamme riittävä tietämys ottaa mongo käyttöön sovelluksessamme.
 
-Aloitetaan nopean kaavan mukaan, copypastetaan tiedostoon _index.js_ mongoosen määrittelyt, eli
+Aloitetaan nopean kaavan mukaan, copypastetaan tiedostoon <i>index.js</i> mongoosen määrittelyt, eli
 
 ```js
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
+
+// ÄLÄ KOSKAAN TALLETA SALASANOJA githubiin!
+const USERNAME = 'fullstack'
+const PASSWORD = 'fullstack1'
 
 const url =
-  'mongodb://fullstack:sekred@ds211088.mlab.com:11088/fullstack-notes';
+  `mongodb://${USERNAME}:${PASSWORD}@ds161224.mlab.com:61224/fullstack2019-notes`
 
-mongoose.connect(url);
+mongoose.connect(url, { useNewUrlParser: true })
 
 const Note = mongoose.model('Note', {
   content: String,
   date: Date,
   important: Boolean,
-});
+})
 ```
 
 ja muutetaan kaikkien muistiinpanojen hakemisesta vastaava käsittelijä seuraavaan muotoon
@@ -297,16 +364,16 @@ ja muutetaan kaikkien muistiinpanojen hakemisesta vastaava käsittelijä seuraav
 ```js
 app.get('/api/notes', (request, response) => {
   Note.find({}).then(notes => {
-    response.json(notes);
-  });
-});
+    response.json(notes)
+  })
+})
 ```
 
 Voimme todeta selaimella, että backend toimii kaikkien dokumenttien näyttämisen osalta:
 
-![](../assets/3/14.png)
+![](../images/3/44.png)
 
-Toiminnallisuus on muuten kunnossa, mutta frontend olettaa, että olioiden yksikäsitteinen tunniste on kentässä _id_. Emme myöskään halua näyttää frontendille mongon versiointiin käyttämää kenttää <em>\_\_v</em>. Tehdään pieni apufunktio, jonka avulla yksittäinen muistiinpano saadaan muutettua mongon sisäisestä esitysmuodosta haluamaamme muotoon:
+Toiminnallisuus on muuten kunnossa, mutta frontend olettaa, että olioiden yksikäsitteinen tunniste on kentässä <i>id</i>. Emme myöskään halua näyttää frontendille mongon versiointiin käyttämää kenttää <em>\_\_v</em>. Tehdään pieni apufunktio, jonka avulla yksittäinen muistiinpano saadaan muutettua mongon sisäisestä esitysmuodosta haluamaamme muotoon:
 
 ```js
 const formatNote = note => {

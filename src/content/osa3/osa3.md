@@ -9,5 +9,4 @@ Tässä osassa fokus siirtyy bakendin, eli palvelimen toiminnallisuuden toteutta
 
 **Tämän osan tehtävien deadline on maanantaina 11.2. klo 23:59**
 
-
 </div>
