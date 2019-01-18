@@ -17,7 +17,7 @@
   transition: opacity 0.3s ease-in-out;
   font-weight: 200;
 
-  @include from($desktop) {
+  @include from($tablet) {
     display: flex;
     opacity: 1;
     padding: 0;
@@ -42,7 +42,7 @@
   outline: none;
   border-radius: 4px;
 
-  @include from($desktop) {
+  @include from($tablet) {
     display: none;
   }
 }
@@ -107,7 +107,7 @@
     top: 47px;
     left: 5%;
 
-    @include from($desktop) {
+    @include from($tablet) {
       display: none;
     }
   }
@@ -144,7 +144,7 @@
     margin: 22px 0 0;
   }
 
-  @include from($desktop) {
+  @include from($tablet) {
     margin: 0 30px;
     padding: 0 !important;
 
