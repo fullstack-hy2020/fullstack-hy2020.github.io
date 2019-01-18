@@ -6,25 +6,25 @@ letter: c
 
 <div class="content">
 
+Ennen kun siirrymmen osan varsinaiseen aiheeseen, eli tiedon tallettamiseen tietokantaan, tarkastellaan muutamaa tapaa Node-sovellusten debuggaamiseen.
+
 ### Node-sovellusten debuggaaminen
 
-Node-sovellusten debuggaaminen on jossain määrin hankalampaa kuin selaimessa toimivan Javascriptin.
+Nodella tehtyjen sovellusten debuggaaminen on jossain määrin hankalampaa kuin selaimessa toimivan Javascriptin. Vanha hyvä keino on tietysti konsoliin tulostelu. Se kannattaa aina. On mielipiteitä, joiden mukaan konsoliin tulostelun sijaan olisi syytä suosia jotain kehittyneempää menetelmää, mutta en ole ollenkaan samaa mieltä. Jopa maailman aivan eliittiin kuuluvat open source -kehittäjät [käyttävät](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) tätä [menetelmää](https://swizec.com/blog/javascript-debugging-slightly-beyond-console-log/swizec/6633).
 
-Vanha hyvä keino on tietysti konsoliin tulostelu. Se kannattaa aina. On mielipiteitä, joiden mukaan konsoliin tulostelun sijaan olisi syytä suosia jotain kehittyneempää menetelmää, mutta en ole ollenkaan samaa mieltä. Jopa maailman aivan eliittiin kuuluvat open source -kehittäjät [käyttävät](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) tätä [menetelmää](https://swizec.com/blog/javascript-debugging-slightly-beyond-console-log/swizec/6633).
-
-### Visual Studio Code
+#### Visual Studio Code
 
 Visual Studio Coden debuggeri voi olla hyödyksi joissain tapauksissa. Seuraavassa screenshot, missä koodi on pysäytetty kesken uuden muistiinpanon lisäyksen
 
 ![](../images/3/17a.png)
 
-Koodi on pysähtynyt nuolen osoittaman <i>breakpointin</i> kohdalle ja konsoliin on evaluoitu muuttujan <i>request.params<i> arvo. Vasemmalla olevassa ikkunassa on nähtävillä myös muuta ohjelman tilaan liittyvää.
+Koodi on pysähtynyt nuolen osoittaman <i>breakpointin</i> kohdalle ja konsoliin on evaluoitu muuttujan <i>request.params</i> arvo. Vasemmalla olevassa ikkunassa on nähtävillä myös muuta ohjelman tilaan liittyvää.
 
 Ylhäällä olevista nuolista yms. voidaan kontrolloida debuggauksen etenemistä.
 
 Itse en juurikaan käytä Visual Studio Code debuggeria.
 
-### Chromen dev tools
+#### Chromen dev tools
 
 Debuggaus onnisuu myös Chromen developer-konsolilla, käynnistämällä sovellus komennolla:
 
@@ -50,7 +50,7 @@ Kaikki sovelluksen console.log-tulostukset tulevat debuggerin <i>Console</i>-vä
 
 ![](../images/3/20a.png)
 
-### Epäile kaikkea
+#### Epäile kaikkea
 
 Full Stack -sovellusten debuggaaminen vaikuttaa alussa erittäin hankalalta. Kun kohta kuvaan tulee myös tietokanta ja frontend on yhdistetty backendiin, on potentiaalisia virhelähteitä todella paljon.
 

@@ -30,17 +30,18 @@ Materiaalissa osasta <i>n</i> osaan <i>n+1</i> eteneminen ei ole mielekästä en
 
 Oletuksena on, että teet kunkin osan tehtävistä <i>ainakin ne</i> jotka eivät ole merkattu tähdellä. Myös tähdellä merkatut tehtävät vaikuttavat arvosteluun, mutta niiden tekemättäjättäminen ei aiheuta liian suuria esteitä seuraavan osan (tähdellä merkkaamattomien) tehtävien tekemiseen.
 
-Osien **deadlinet** ovat maanantaisin klo 23:59, poikkeuksena kaksi viimeistä osaa, joiden deadline on sunnuntai klo 23:59:
+Osien **deadlinet** ovat maanantaisin klo 23:59, poikkeuksena kaksi viimeistä osaa, joiden deadline on sunnuntaina klo 23:59.
 
 | osa            | deadline&nbsp; &nbsp; |
 | -------------- | :-------------------: |
-| osa 0 ja osa 1 |        ma 21.1.         |
-| osa 2          |        ma 28.1.         |
-| osa 3          |        ma 4.2.          |
-| osa 4          |        ma 11.2.         |
-| osa 5          |        ma 18.2.         |
-| osa 6          |        ma 4.3.          |
-| osa 7          |        ma 4.3.          |
+| osa 0          |        ma 21.1.       |
+| osa 1          |        ma 28.1.       |
+| osa 2          |        ma 4.2.        |
+| osa 3          |        ma 11.2.       |
+| osa 4          |        ma 18.2.       |
+| osa 5          |        ma 25.2.       |
+| osa 6          |        su 10.3.        |
+| osa 7          |        su 10.3.        |
 
 Tämän kurssin eri osiin jo tehtyjen palautusten ajankäyttöstatistiikan näet [tehtävien palautussovelluksesta](https://studies.cs.helsinki.fi/courses/#fullstack2019).
 
