@@ -9,4 +9,6 @@ Kurssilla tutustutaan Javascriptilla tapahtuvaan moderniin websovelluskehityksee
 
 Kurssilla käsitellään myös sovellusten testaamista, konfigurointia ja suoritusympäristöjen hallintaa sekä NoSQL-tietokantoja.
 
+**Tämän osan tehtävien deadline on maanantaina 25.2. klo 23:59**
+
 </div>
