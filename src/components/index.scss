@@ -15,19 +15,6 @@ body {
   }
 }
 
-.offset {
-  &:target {
-    display: block;
-    position: relative;
-    top: -80px;
-    visibility: hidden;
-
-    @include from($desktop) {
-      top: -2.055rem;
-    }
-  }
-}
-
 p {
   margin: 0;
   text-align: left;
