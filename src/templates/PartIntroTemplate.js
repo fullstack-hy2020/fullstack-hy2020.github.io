@@ -47,7 +47,7 @@ export default function PartIntroTemplate({ data }) {
         keywords={navigation[part] ? Object.values(navigation[part]) : []}
       />
 
-      <div className="spacing--small spacing--after">
+      <div className="spacing--after">
         <Banner
           style={{
             backgroundImage: `url(${path.resolve(mainImage.publicURL)})`,
