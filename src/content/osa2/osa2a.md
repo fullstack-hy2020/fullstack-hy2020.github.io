@@ -213,7 +213,7 @@ const App = (props) => {
 
 // highlight-start
   const rows = () =>
-    notes.map(note => <li key={note.id}>{note.content}</li>
+    notes.map(note => <li key={note.id}>{note.content}</li>)
 // highlight-end
 
   return (
