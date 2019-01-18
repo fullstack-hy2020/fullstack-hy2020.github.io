@@ -20,11 +20,11 @@ const FAQ = () => (
         'mooc',
         'mooc.fi',
         'full stack',
-        'web-sovelluskehitys'
+        'web-sovelluskehitys',
       ]}
     />
 
-    <Element className="container link spacing spacing--after-small">
+    <Element className="container link spacing spacing--after">
       <SubHeader
         className="spacing--small spacing--after-small"
         headingLevel="h1"

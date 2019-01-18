@@ -24,7 +24,7 @@ const About = () => (
         'mooc',
         'mooc.fi',
         'full stack',
-        'web-sovelluskehitys'
+        'web-sovelluskehitys',
       ]}
     />
     <StaticQuery
@@ -63,10 +63,11 @@ const About = () => (
 
               <Element flex spaceBetween>
                 <div className="col-6 spacing--after">
-                  <BodyText text={intro} className="link" />
+                  <BodyText text={intro} className="link" headingFont />
 
                   <BodyText
                     className="link"
+                    headingFont
                     text={[
                       'Osallistujilta edellytetään vahvaa ohjelmointirutiinia, web-ohjelmoinnin ja tietokantojen perustuntemusta, git-versionhallintajärjestelmän peruskäytön hallintaa, kykyä pitkäjänteiseen työskentelyyn sekä valmiutta omatoimiseen tiedonhakuun ja ongelmanratkaisuun.',
                       'Osallistuminen ei kuitenkaan edellytä kurssilla käsiteltävien tekniikoiden tai Javascript-kielen hallintaa.',
@@ -76,9 +77,8 @@ const About = () => (
                   />
                 </div>
 
-                <Element className="col-3 col-3--mobile">
+                <Element className="col-2 col-3--mobile">
                   <img
-                    style={{ marginTop: 'auto' }}
                     alt="Stacked cubes with React logo and JavaScript text"
                     src={LandingImage}
                   />

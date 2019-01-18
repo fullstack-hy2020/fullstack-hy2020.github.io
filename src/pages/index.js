@@ -163,7 +163,7 @@ const IndexPage = () => (
               </Banner>
             )}
 
-            <Element className="container spacing--large spacing--after">
+            <Element className="container spacing spacing--after">
               <Element className="push-right-1 push-left-1" spaceBetween flex>
                 <Element flex horizontalHalf flexStart>
                   <Element
@@ -176,11 +176,16 @@ const IndexPage = () => (
 
                     <BodyText
                       className="col-7 col-8--mobile link"
+                      style={{ marginRight: '2rem' }}
                       heading={{ title: 'Ajankohtaista', level: 'h3' }}
                     />
                   </Element>
 
-                  <BodyText className="spacing--small link" text={current} />
+                  <BodyText
+                    className="spacing--small link"
+                    headingFont
+                    text={current}
+                  />
 
                   {false && (
                     <Element flex spaceBetween className="col-10">
@@ -230,6 +235,7 @@ const IndexPage = () => (
 
                     <BodyText
                       className="col-7 col-8--mobile"
+                      style={{ marginRight: '2rem' }}
                       heading={{
                         title: 'Materiaalin tekijä ja lisenssi',
                         level: 'h3',
@@ -237,7 +243,11 @@ const IndexPage = () => (
                     />
                   </Element>
 
-                  <BodyText className="spacing--small link" text={licence} />
+                  <BodyText
+                    className="spacing--small link"
+                    headingFont
+                    text={licence}
+                  />
                 </Element>
               </Element>
             </Element>

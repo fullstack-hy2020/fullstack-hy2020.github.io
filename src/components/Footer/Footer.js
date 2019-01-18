@@ -23,7 +23,11 @@ const images = [
 ];
 
 const Footer = () => (
-  <Element id="footer" className="container spacing--after" flex>
+  <Element
+    id="footer"
+    className="container spacing--after-small spacing--mobile"
+    flex
+  >
     <Element
       className="col-5 col-10--mobile order-2--mobile footer__links"
       flex

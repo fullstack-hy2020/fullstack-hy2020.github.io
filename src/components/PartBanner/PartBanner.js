@@ -8,7 +8,10 @@ const parts = Object.keys(navigation);
 
 export const PartBanner = () => {
   return (
-    <Banner className="spacing spacing--after offset" id="course-contents">
+    <Banner
+      className="spacing spacing--after-small spacing--after-mobile offset"
+      id="course-contents"
+    >
       <div className="container spacing flex-fix-aligning col-7--mobile">
         {parts.map(part => {
           const partNames = [

@@ -47,54 +47,55 @@ export default function PartIntroTemplate({ data }) {
         keywords={navigation[part] ? Object.values(navigation[part]) : []}
       />
 
-      <Banner
-        style={{
-          backgroundImage: `url(${path.resolve(mainImage.publicURL)})`,
-          backgroundPosition: 'center right',
-          backgroundSize: '80%',
-          backgroundRepeat: 'no-repeat',
-          backgroundColor: colors[partColors[part]],
-        }}
-        className="spacing spacing--after"
-      >
-        <Element className="container">
-          <Arrow
-            className="breadcrumb"
-            content={[
-              {
-                backgroundColor: colors[partColors[part]],
-                text: 'Fullstack',
-                link: '/#course-contents',
-              },
-              {
-                backgroundColor: colors['black'],
-                text: `osa ${part}`,
-              },
-            ]}
-          />
-
-          <div className="part-intro col-7 col-6--mobile spacing--after-small">
-            {Parser(html, parserOptions)}
-          </div>
-
-          {titles && (
+      <div className="spacing--small spacing--after">
+        <Banner
+          style={{
+            backgroundImage: `url(${path.resolve(mainImage.publicURL)})`,
+            backgroundPosition: 'center right',
+            backgroundSize: '80%',
+            backgroundRepeat: 'no-repeat',
+            backgroundColor: colors[partColors[part]],
+          }}
+        >
+          <Element className="container">
             <Arrow
-              className="spacing--mobile"
-              stack
-              content={titles.map(n => {
-                return {
-                  backgroundColor: colors['white'],
-                  letter: n,
-                  path: `/osa${part}/${snakeCase(navigation[part][n])}`,
-                  text: navigation[part][n],
-                };
-              })}
+              className="breadcrumb"
+              content={[
+                {
+                  backgroundColor: colors[partColors[part]],
+                  text: 'Fullstack',
+                  link: '/#course-contents',
+                },
+                {
+                  backgroundColor: colors['black'],
+                  text: `osa ${part}`,
+                },
+              ]}
             />
-          )}
-        </Element>
-      </Banner>
 
-      <PrevNext part={part} />
+            <div className="part-intro col-7 col-6--mobile spacing--after-small">
+              {Parser(html, parserOptions)}
+            </div>
+
+            {titles && (
+              <Arrow
+                className="spacing--mobile"
+                stack
+                content={titles.map(n => {
+                  return {
+                    backgroundColor: colors['white'],
+                    letter: n,
+                    path: `/osa${part}/${snakeCase(navigation[part][n])}`,
+                    text: navigation[part][n],
+                  };
+                })}
+              />
+            )}
+          </Element>
+        </Banner>
+
+        <PrevNext part={part} />
+      </div>
 
       <Footer />
     </Layout>
