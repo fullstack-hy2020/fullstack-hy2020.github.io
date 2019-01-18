@@ -52,7 +52,7 @@ const About = () => (
           <>
             <Element className="container">
               <Arrow
-                className="spacing--large"
+                className="spacing--small"
                 content={[
                   {
                     backgroundColor: colors['black'],

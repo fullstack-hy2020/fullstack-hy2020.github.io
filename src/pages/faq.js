@@ -26,7 +26,7 @@ const FAQ = () => (
 
     <Element className="container link spacing spacing--after">
       <SubHeader
-        className="spacing--small spacing--after-small"
+        className="spacing--after-small"
         headingLevel="h1"
         text="Usein kysytyt kysymykset"
       />

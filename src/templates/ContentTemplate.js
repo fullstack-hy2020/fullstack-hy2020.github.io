@@ -142,7 +142,7 @@ export default class ContentTemplate extends Component {
           </div>
         )}
 
-        <div className="course-container spacing--small spacing--after">
+        <div className="course-container spacing--after">
           <Banner
             backgroundColor={colorCode}
             style={{

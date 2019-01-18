@@ -89,7 +89,7 @@ const IndexPage = () => (
               <Element
                 flex
                 spaceBetween
-                className="col-10 spacing--large frontpage__hero"
+                className="col-10 spacing--small frontpage__hero"
                 relative
               >
                 <SubHeader

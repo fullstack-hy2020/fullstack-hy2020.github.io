@@ -15,14 +15,6 @@ body {
   }
 }
 
-body {
-  padding-top: 80px;
-
-  @include from($desktop) {
-    padding-top: 2.055rem;
-  }
-}
-
 .offset {
   &:target {
     display: block;
