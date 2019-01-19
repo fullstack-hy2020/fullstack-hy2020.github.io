@@ -438,7 +438,7 @@ Muista myös osan 1 luku [React-sovellusten debuggaus](#react-sovellusten-debugg
 
 Sovellus voi näyttää tässä vaiheessa seuraavalta:
 
-![](../images/2/10a.png)
+![](../images/2/10b.png)
 
 Huomaa, React developer toolsin käyttö!
 
