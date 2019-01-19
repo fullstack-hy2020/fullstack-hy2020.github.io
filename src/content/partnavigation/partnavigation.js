@@ -20,7 +20,7 @@ module.exports = {
     a: 'Node.js ja Express',
     b: 'Sovellus internetiin',
     c: 'Tietojen tallettaminen MongoDB-tietokantaan',
-    d: 'Konfiguraatioita',
+    d: 'Validointi ja ESLint',
   },
   '4': {
     // a: 'Node.js/Express',

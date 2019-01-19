@@ -6,9 +6,55 @@ letter: d
 
 <div class="content">
 
+### Validointi
 
+https://mongoosejs.com/docs/validation.html
 
-## Refaktorointia - promisejen ketjutus
+```js
+const noteSchema = new mongoose.Schema({
+  content: {
+    type: String,
+    required: true,
+    minlength: 5
+  },
+  date: Date,
+  important: Boolean,
+})
+```
+
+```js
+app.post('/api/notes', (request, response, next) => {
+  const body = request.body
+
+  const note = new Note({
+    content: body.content,
+    important: body.important || false,
+    date: new Date(),
+  })
+
+  note.save()
+    .then(savedNote => {
+      response.json(savedNote.toJSON())
+    })
+    .catch(error => next(error))
+})
+```
+
+```js
+const errorHandler = (error, request, response, next) => {
+  console.error(error.message)
+
+  if (error.name === 'CastError' && error.kind == 'ObjectId') {
+    return response.status(400).send({ error: 'malformatted id' })
+  }  else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
+  }
+
+  next(error)
+}
+```
+
+### Promisejen ketjutus
 
 Useat routejen tapahtumankäsittelijöistä muuttivat palautettavan datan oikeaan formaattiin kutsumalla metodia _formatNote_:
 
@@ -91,7 +137,7 @@ app.post('/api/notes', (request, response) => {
 });
 ```
 
-## Sovelluksen vieminen tuotantoon
+### Sovelluksen vieminen tuotantoon
 
 Sovelluksen pitäisi toimia tuotannossa, eli herokussa sellaisenaan. Frontendin muutosten takia on tehtävä siitä uusi tuotantoversio ja kopioitava se backendiin.
 

@@ -696,9 +696,9 @@ Aina kun ohjelmoit ja projektissa on mukana backend <i>**tulee ehdottomasti koko
 
 ### Virheidenkäsittelyn keskittäminen middlewareen
 
-Olemme kirjoittaneet virhetilanteet käsittelevän koodin muun koodin sekaan. Se on välillä ihan toimiva ratkaisu, mutta on myös tilanteita, joissa on järkevämpää keskittää virheiden käsittely yhteen paikkaan. Tästä on huomattava etu esim. jos virhetilanteiden yhteydessä virhen aiheuttaneen pyynnön tiedot logataan tai lähetetään johonkin virhediagnostiikkajärjestelmään, esim. [Sentryyn](https://sentry.io/welcome/). 
+Olemme kirjoittaneet poikkeuksen aiheuttavan virhetilanteen käsittelevän koodin muun koodin sekaan. Se on välillä ihan toimiva ratkaisu, mutta on myös tilanteita, joissa on järkevämpää keskittää virheiden käsittely yhteen paikkaan. Tästä on huomattava etu esim. jos virhetilanteiden yhteydessä virhen aiheuttaneen pyynnön tiedot logataan tai lähetetään johonkin virhediagnostiikkajärjestelmään, esim. [Sentryyn](https://sentry.io/welcome/). 
 
-Muutetaan routen <i>/api/notes/:id</i> käsittelijää siten, että se <i>siirtää virhetilanteiden käsittelyn eteenpäin</i> funktiolla <em>next</em> jonka se saa <i>kolmantena</i> parametrina:
+Muutetaan routen <i>/api/notes/:id</i> käsittelijää siten, että se <i>siirtää virhetilanteen käsittelyn eteenpäin</i> funktiolla <em>next</em> jonka se saa <i>kolmantena</i> parametrina:
 
 ```js
 app.get('/api/notes/:id', (request, response, next) => {
@@ -707,39 +707,32 @@ app.get('/api/notes/:id', (request, response, next) => {
       if (note) {
         response.json(note.toJSON())
       } else {
-        next({ status: 404, error })
+        response.status(204).end()
       }
     })
-    .catch(error => {
-      next({ status: 404, message: 'malformatted id', error })
-    })
+    .catch(error => next(error))
 })
 ```
 
-Eteenpäin siirrettävän virheen syy määritellään funktiolle <em>next</em> annettavana parametrina. Jos funktiota <em>next</em> kutsuttaisiin ilman parametria, käsittely siirtyisi ainoastaan eteenpäin seuraavaksi määritellylle routelle tai middlewarelle. Jos funktiota <em>next</em> kutsussa annetaan parametri, siirtyy käsittely <i>virheidenkäsittelymiddlewarelle</i>.
+Eteenpäin siirrettävä virhe annetaan funktiolle <em>next</em> parametrina. Jos funktiota <em>next</em> kutsuttaisiin ilman parametria, käsittely siirtyisi ainoastaan eteenpäin seuraavaksi määritellylle routelle tai middlewarelle. Jos funktiota <em>next</em> kutsussa annetaan parametri, siirtyy käsittely <i>virheidenkäsittelymiddlewarelle</i>.
 
 Expressin [virheidenkäsittelijät](https://expressjs.com/en/guide/error-handling.html) ovat middlewareja, joiden määrittelevällä funktiolla on <i>neljä parametria</i>. Virheidenkäsittelijämme näyttää seuraavalta:
 
 ```js
 const errorHandler = (error, request, response, next) => {
-  if (response.headersSent || error.status === undefined) {
-    return next(error)
-  }
+  console.error(error.message)
 
-  console.error(error.error.stack)
-  if ( error.message ) {
-    response.status(error.status).send({ error: error.message })
-  } else {
-    response.status(error.status).end()
+  if (error.name === 'CastError' && error.kind == 'ObjectId') {
+    return response.status(400).send({ error: 'malformatted id' })
   } 
+
+  next(error)
 }
 
 app.use(unknownEndpoint)
 ```
 
-Virheenkäsittelijän ensimmäinen <em>if</em> siirtää virheenkäsittelyn eteenpäin, oletusarvoiselle virheenkäsittelijälle, jos kyse ei ole itse määrittelemästämme virheoliosta, jolla on kenttä status.
-
-Koodin jälkimäinen osa lähettä pyynnön tehneelle selaimelle vastauksen parametrina olevan <em>response</em>-olion avulla, asettaen sille routessa <em>error</em>-oliolle määritellyn statuksen ja viestin.
+Virhekäsittelijä tarkastaa onko kyse <i>CastError</i>-poikkeuksesta, eli virheellisestä olioid:stä, jos on, se lähettä pyynnön tehneelle selaimelle vastauksen käsittelijän parametrina olevan response-olion avulla. Muussa tapauksessa se siirtää funktiolla <em>next</em> virheen käsittelyn Expressin oletusarvoisen virheidenkäsittelijän hoidettavavksi.
 
 ### Muut operaatiot
 
@@ -753,9 +746,7 @@ app.delete('/api/notes/:id', (request, response, next) => {
     .then(result => {
       response.status(204).end()
     })
-    .catch(error => {
-      next({ status: 400, message: 'malformatted id', error })
-    })
+    .catch(error => next(error))
 })
 ```
 
@@ -776,9 +767,7 @@ app.put('/api/notes/:id', (request, response, next) => {
     .then(updatedNote => {
       response.json(updatedNote.toJSON())
     })
-    .catch(error => {
-      next({ status: 400, message: 'malformatted id', error })
-    })
+    .catch(error => next(error))
 })
 ```
 
