@@ -132,11 +132,13 @@ const url =
 
 mongoose.connect(url, { useNewUrlParser: true })
 
-const Note = mongoose.model('Note', {
+const noteSchema = new mongoose.Schema({
   content: String,
   date: Date,
   important: Boolean,
 })
+
+const Note = mongoose.model('Note', noteSchema)
 
 const note = new Note({
   content: 'HTML on helppoa',
@@ -166,21 +168,7 @@ Kuten näkymä kertoo, on muistiinpanoa vastaava <i>dokumentti</i> lisätty koko
 
 ### Skeema
 
-Yhteyden avaamisen jälkeen määritellään mustiinpanoa vastaava [model](http://mongoosejs.com/docs/models.html):
-
-```js
-const Note = mongoose.model('Note', {
-  content: String,
-  date: Date,
-  important: Boolean,
-})
-```
-
-Modelin parametrina määritellään <i>muistiinpanon</i> [skeema](http://mongoosejs.com/docs/guide.html), joka kertoo mongooselle, miten muistiinpano-oliot tulee tallettaa tietokantaan.
-
-Ensimmäisenä parametrina oleva merkkijono <i>Note</i> määrittelee, että mongoose tallettaa muistiinpanoa vastaavat oliot kokoelmaan nimeltään <i>notes</i> sillä [mongoosen konventiona](http://mongoosejs.com/docs/models.html) on määritellä kokoelmien nimet monikossa (esim. <i>notes</i>), kun niihin viitataan modelin määrittelyssä yksikkömuodossa (esim. <i>Note</i>).
-
-Mongoosen dokumentaatiossa skeema ja sitä vastaava model määritellään kumpikin erikseen:
+Yhteyden avaamisen jälkeen määritellään mustiinpanon [skeema](http://mongoosejs.com/docs/guide.html) ja sitä vastaava [model](http://mongoosejs.com/docs/models.html):
 
 ```js
 const noteSchema = new mongoose.Schema({
@@ -192,7 +180,9 @@ const noteSchema = new mongoose.Schema({
 const Note = mongoose.model('Note', noteSchema)
 ```
 
-Koska meillä ei tällä hetkellä ole skeema-oliolle muuta käyttöä kuin modelin parametrina, käytämme hyväksemme sitä, että skeema voidaan määritellä modeleille suoraan antamalla toisena parametrina skeeman määrittelevä olio.
+Ensin muuttujaan _noteSchema_ määritellään muistiinpanon [skeema](http://mongoosejs.com/docs/guide.html), joka kertoo mongooselle, miten muistiinpano-oliot tulee tallettaa tietokantaan.
+
+Modelin _Note_ määrittelyssä ensimmäisenä parametrina oleva merkkijono <i>Note</i> määrittelee, että mongoose tallettaa muistiinpanoa vastaavat oliot kokoelmaan nimeltään <i>notes</i>, sillä [mongoosen konventiona](http://mongoosejs.com/docs/models.html) on määritellä kokoelmien nimet monikossa (esim. <i>notes</i>), kun niihin viitataan skeeman määrittelyssä yksikkömuodossa (esim. <i>Note</i>).
 
 Dokumenttikannat, kuten Mongo ovat <i>skeemattomia</i>, eli tietokanta itsessään ei välitä mitään sinne talletettavan tiedon muodosta. Samaan kokoelmaankin on mahdollista tallettaa olioita joilla on täysin eri kentät.
 
@@ -344,19 +334,18 @@ Aloitetaan nopean kaavan mukaan, copypastetaan tiedostoon <i>index.js</i> mongoo
 const mongoose = require('mongoose')
 
 // ÄLÄ KOSKAAN TALLETA SALASANOJA githubiin!
-const USERNAME = 'fullstack'
-const PASSWORD = 'fullstack1'
-
 const url =
-  `mongodb://${USERNAME}:${PASSWORD}@ds161224.mlab.com:61224/fullstack2019-notes`
+  'mongodb://fullstack:secred@ds161224.mlab.com:61224/fullstack2019-notes'
 
 mongoose.connect(url, { useNewUrlParser: true })
 
-const Note = mongoose.model('Note', {
+const noteSchema = new mongoose.Schema({
   content: String,
   date: Date,
   important: Boolean,
 })
+
+const Note = mongoose.model('Note', noteSchema)
 ```
 
 ja muutetaan kaikkien muistiinpanojen hakemisesta vastaava käsittelijä seuraavaan muotoon
@@ -373,99 +362,150 @@ Voimme todeta selaimella, että backend toimii kaikkien dokumenttien näyttämis
 
 ![](../images/3/44.png)
 
-Toiminnallisuus on muuten kunnossa, mutta frontend olettaa, että olioiden yksikäsitteinen tunniste on kentässä <i>id</i>. Emme myöskään halua näyttää frontendille mongon versiointiin käyttämää kenttää <em>\_\_v</em>. Tehdään pieni apufunktio, jonka avulla yksittäinen muistiinpano saadaan muutettua mongon sisäisestä esitysmuodosta haluamaamme muotoon:
+Toiminnallisuus on muuten kunnossa, mutta frontend olettaa, että olioiden yksikäsitteinen tunniste on kentässä <i>id</i>. Emme myöskään halua näyttää frontendille mongon versiointiin käyttämää kenttää <i>\_\_v</i>. 
+
+Eräs tapa muotoilla mongoosen palauttamat oliot haluttuun muotoon on [muokata](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id) kannasta haettavilla olioilla olevan _toJSON_-metodin palauttamaa muotoa. Metodin muokkaus onnistuu seuraavasti:
 
 ```js
-const formatNote = note => {
-  return {
-    content: note.content,
-    date: note.date,
-    important: note.important,
-    id: note._id,
-  };
-};
+noteSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id
+    delete returnedObject._id
+    delete returnedObject.__v
+  }
+})
 ```
 
-ja palautetaan HTTP-pyynnön vastauksena funktion avulla muotoiltuja oliota:
+Palautetaan HTTP-pyynnön vastauksena _toJSON_-metodin avulla muotoiltuja oliota:
 
 ```js
 app.get('/api/notes', (request, response) => {
   Note.find({}).then(notes => {
-    response.json(notes.map(formatNote));
+    response.json(notes.map(note => note.toJSON()))
   });
 });
 ```
 
-Nyt siis muuttujassa _notes_ on taulukollinen mongon palauttamia olioita. Kun suoritamme operaation <code>notes.map(formatNote)</code> seurauksena on uusi taulukko, missä on jokaista alkuperäisen taulukon alkiota vastaava funktion _formatNote_ avulla muodostettu alkio.
+Nyt siis muuttujassa _notes_ on taulukollinen mongon palauttamia olioita. Kun suoritamme operaation <em>notes.map(note => note.toJSON())</em> seurauksena on uusi taulukko, missä on jokaista alkuperäisen taulukon alkiota vastaava metodin _toJSON_ avulla muodostettu alkio.
 
-Jos kannasta haettavilla olioilla olisi suuri määrä kenttiä, apufunktio _formatNote_ kannattaisi muotoilla hieman geneerisemmässä muodossa, esim:
-
-```js
-const formatNote = note => {
-  const formattedNote = { ...note._doc, id: note._id };
-  delete formattedNote._id;
-  delete formattedNote.__v;
-
-  return formattedNote;
-};
-```
-
-Ensimmäinen rivi luo uuden olion, mihin kopioituu kaikki vanhan olion kentät. Uuteen olioon lisätään myös kenttä _id_:
-
-```js
-const formattedNote = { ...note._doc, id: note._id };
-```
-
-Ennen olion palauttamista turhat kentät poistetaan.
-
-Jos ohjelma käyttäisi muunkin tyyppisiä olioita kuin _muistiinpanoja_ sopisi sama funktio niidenkin muotoiluun. Jatkon kannalta on kuitenkin parempi, että pidämme alkuperäisen version funktiosta.
-
-On myös mahdollista estää mongoosea palauttamasta tiettyjen kenttien arvoa, tai pyytää sitä palauttamaan vain tietyt kentät. Saamme estettyä parametrin <em>\_\_v</em>:n lisäämällä _find_-metodiin toiseksi parametriksi _{\_\_v: 0}_ seuraavasti:
-
-```js
-app.get('/api/notes', (request, response) => {
-  Note.find({}, { __v: 0 }).then(notes => {
-    response.json(notes.map(formatNote));
-  });
-});
-```
-
-Kyselyjen palauttamien kenttien määrittely tapahtuu Mongon [syntaksin mukaan](https://docs.mongodb.com/manual/tutorial/project-fields-from-query-results/).
-
-### Tietokantamäärittelyjen eriyttäminen omaksi moduuliksi
+### Tietokantamäärittelyjen eriyttäminen moduuliksi
 
 Ennen kuin täydennämme backendin muutkin osat käyttämään tietokantaa, eriytetään mongoose-spesifinen koodi omaan moduuliin.
 
-Tehdään moduulia varten hakemisto _models_ ja sinne tiedosto _note.js_:
+Tehdään moduulia varten hakemisto <i>models</i> ja sinne tiedosto <i>note.js</i>:
 
 ```js
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-const url =
-  'mongodb://fullstack:sekred@ds211088.mlab.com:11088/fullstack-notes';
+const url = process.env.MONGODB_URI // highlight-line
 
-mongoose.connect(url);
+console.log('commecting to', url) // highlight-line
 
-const Note = mongoose.model('Note', {
+mongoose.connect(url, { useNewUrlParser: true })
+// highlight-start
+  .then(result => {
+    console.log('connected to MongoDB')
+  })
+  .catch((error) => {
+    console.log('error connection to MongoDB:', error.message)
+  })
+// highlight-end
+
+const noteSchema = new mongoose.Schema({
   content: String,
   date: Date,
   important: Boolean,
-});
+})
 
-module.exports = Note;
+noteSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id
+    delete returnedObject._id
+    delete returnedObject.__v
+  }
+})
+
+module.exports = mongoose.model('Note', noteSchema) // highlight-line
 ```
 
-Noden [moduulien](https://nodejs.org/docs/latest-v8.x/api/modules.html) määrittely poikkeaa hiukan osassa 2 määrittelemistämme frontendin käyttämistä [ES6-moduuleista](/osa2/#refaktorointia---moduulit).
+Noden [moduulien](https://nodejs.org/docs/latest-v8.x/api/modules.html) määrittely poikkeaa hiukan osassa 2 määrittelemistämme frontendin käyttämistä [ES6-moduuleista](/osa2/kokoelmien_renderointi_ja_moduulit#refaktorointia-moduulit).
 
-Moduulin ulos näkyvä osa määritellään asettamalla arvo muuttujalle _module.exports_. Asetamme arvoksi määritellyn modelin _Note_. Muut moduulin sisällä määritellyt asiat, esim. muuttujat _mongoose_ ja _url_ eivät näy moduulin käyttäjälle.
+Moduulin ulos näkyvä osa määritellään asettamalla arvo muuttujalle _module.exports_. Asetamme arvoksi modelin <i>Note</i>. Muut moduulin sisällä määritellyt asiat, esim. muuttujat _mongoose_ ja _url_ eivät näy moduulin käyttäjälle.
 
-Moduulin käyttöönotto tapahtuu lisäämällä tiedostoon _index.js_ seuraava rivi
+Moduulin käyttöönotto tapahtuu lisäämällä tiedostoon <i>index.js</i> seuraava rivi
 
 ```js
-const Note = require('./models/note');
+const Note = require('./models/note')
 ```
 
 Näin muuttuja _Note_ saa arvokseen saman olion, jonka moduuli määrittelee.
+
+Yhteyden muodostustavassa on pieni muutos aiempaan:
+
+```js
+const url = process.env.MONGODB_URI
+
+console.log('commecting to', url)
+
+mongoose.connect(url, { useNewUrlParser: true })
+  .then(result => {
+    console.log('connected to MongoDB')
+  })
+  .catch((error) => {
+    console.log('error connection to MongoDB:', error.message)
+  })
+```
+
+Tietokannan osoitetta ei kannata kirjoittaa koodiin, joten osoite annetaan sovellukselle ympäristömuuttujan <em>MONGODB_URI</em> välityksellä. 
+
+Yhteyden muodostavalle metodille on nyt rekisteröity onnistuneen ja epäonnistuneen yhteydenmuodostuksen käsittelevät funktiot, jotka tulostavat konsoliin tiedon siitä, onnistuuko yhteyden muodostaminen:
+
+![](../images/3/45.png)
+
+On useita tapoja määritellä ympäristömuuttujan arvo, voimme esim. antaa sen ohjelman käynnistyksen yhteydessä seuraavasti
+
+```bash
+MONGODB_URI=osoite_tahan npm run watch
+```
+
+Eräs kehittyneempi tapa on käyttää [dotenv](https://github.com/motdotla/dotenv#readme)-kirjastoa. Asennetaan kirjasto komennolla
+
+```bash
+npm install dotenv --save
+```
+
+Sovelluksen juurihakemistoon tehdään sitten tiedosto nimeltään <i>.env</i>, minne tarvittavien ympäristömuuttujien arvot määritellään. Tiedosto näyttää seuraavalta
+
+```bash
+MONGODB_URI=mongodb://fullstack:secred@ds161224.mlab.com:61224/fullstack2019-notes
+PORT=3001
+```
+
+Määrittelimme samalla aiemmin kovakoodaamamme sovelluksen käyttämän portin eli ympäristömuuttujan <em>PORT</em>.
+
+**Tiedosto <i>.env</i> tulee heti gitignorata sillä emme halua julkaista tiedoston sisältöä verkkoon!**
+
+dotenvissä määritellyt ympäristömuuttujat otetaan koodissa käyttöön komennolla
+<em>require('dotenv').config()</em> ja niihin viitataan Nodessa kuten "normaaleihin" ympäristömuuttujiin syntaksilla <em>process.env.MONGODB_URI</em>.
+
+Muutetaan nyt tiedostoa <i>index.js</i> seuraavasti
+
+```js
+require('dotenv').config() // highlight-line
+const express = require('express')
+const bodyParser = require('body-parser') 
+const app = express()
+const Note = require('./models/note') // highlight-line
+
+// ..
+
+const PORT = process.env.PORT // highlight-line
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`)
+})
+```
+
+On tärkeää, että <i>dotenv</i> otetaan käyttöön ennen modelin <i>note</i> importtaamista, tällöin varmistutaan siitä, että tiedostossa <i>.env</i> olevat ympäristömuuttujat ovat alustettuja kun moduulin koodia importoidaan.
 
 ### Muut operaatiot
 
@@ -475,30 +515,30 @@ Uuden muistiinpanon luominen tapahtuu seuraavasti:
 
 ```js
 app.post('/api/notes', (request, response) => {
-  const body = request.body;
+  const body = request.body
 
   if (body.content === undefined) {
-    return response.status(400).json({ error: 'content missing' });
+    return response.status(400).json({ error: 'content missing' })
   }
 
   const note = new Note({
     content: body.content,
     important: body.important || false,
     date: new Date(),
-  });
+  })
 
   note.save().then(savedNote => {
-    response.json(formatNote(savedNote));
-  });
-});
+    response.json(savedNote.toJSON())
+  })
+})
 ```
 
 Muistiinpano-oliot siis luodaan _Note_-konstruktorifunktiolla. Pyyntöön vastataan _save_-operaation takaisinkutsufunktion sisällä. Näin varmistutaan, että operaatio vastaus tapahtuu vain jos operaatio on onnistunut. Palaamme virheiden käsittelyyn myöhemmin.
 
-Takaisinkutsufunktion parametrina oleva _savedNote_ on talletettu muistiinpano. HTTP-pyyntöön palautetaan kuitenkin siitä funktiolla _formatNote_ formatoitu muoto:
+Takaisinkutsufunktion parametrina oleva _savedNote_ on talletettu muistiinpano. HTTP-pyyntöön palautetaan kuitenkin siitä metodilla _toJSON_formatoitu muoto:
 
 ```js
-response.json(formatNote(savedNote));
+response.json(savedNote.toJSON())
 ```
 
 Yksittäisen muistiinpanon tarkastelu muuttuu muotoon
@@ -506,24 +546,24 @@ Yksittäisen muistiinpanon tarkastelu muuttuu muotoon
 ```js
 app.get('/api/notes/:id', (request, response) => {
   Note.findById(request.params.id).then(note => {
-    response.json(formatNote(note));
-  });
-});
+    response.json(note.toJSON())
+  })
+})
 ```
 
 ### Frontendin ja backendin yhteistominnallisuuden varmistaminen
 
-Kun backendia laajennetaan, kannattaa sitä testailla aluksi **ehdottomasti selaimella, postmanilla tai VS Coden REST clientillä:**. Seuraavassa kokeillaan uuden muistiinpanon luomista tietokannan käyttöönoton jälkeen:
+Kun backendia laajennetaan, kannattaa sitä testailla aluksi **ehdottomasti selaimella, postmanilla tai VS Coden REST clientillä**. Seuraavassa kokeillaan uuden muistiinpanon luomista tietokannan käyttöönoton jälkeen:
 
-![](../images/3/14b.png)
+![](../images/3/46.png)
 
 Vasta kun kaikki on todettu toimivaksi, kannattaa siirtyä testailemaan että muutosten jälkeinen backend toimii yhdessä myös frontendin kanssa. Kaikkien kokeilujen tekeminen ainoastaan frontendin kautta on todennäköisesti varsin tehotonta.
 
 Todennäköisesti voi olla kannattavaa edetä frontin ja backin integroinnissa toiminnallisuus kerrallaan, eli ensin voidaan toteuttaa esim. kaikkien muistiinpanojen näyttäminen backendiin ja testata että toiminnallisuus toimii selaimella. Tämän jälkeen varmistetaan, että frontend toimii yhteen muutetun backendin kanssa. Kun kaikki on todettu olevan kunnossa, siirrytään seuraavan ominaisuuden toteuttamiseen.
 
-Kun kuvioissa on mukana tietokanta, on tietokannan tilan tarkastelu mlabin hallintanäkymästä varsin hyödyllistä, usein myös suoraan tietokantaa käyttävät Node-apuohjelmat, kuten tiedostoon _mongo.js_ kirjoittamamme koodi auttavat sovelluskehityksen edetessä.
+Kun kuvioissa on mukana tietokanta, on tietokannan tilan tarkastelu mlabin hallintanäkymästä varsin hyödyllistä, usein myös suoraan tietokantaa käyttävät Node-apuohjelmat, kuten tiedostoon <i>mongo.js</i> kirjoittamamme koodi auttavat sovelluskehityksen edetessä.
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-3), tagissa _part3-3_.
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-3), branchissa <i>part3-3</i>.
 
 </div>
 
@@ -531,7 +571,22 @@ Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://git
 
 ### Tehtäviä
 
-Tee nyt tehtävät [3.13-3.15](/tehtävät#backend-ja-tietokanta)
+Seuraavat tehtävät saattavat olla melko suoraviivaisia, tosin jos frontend-koodissasi sattuu olemaan bugeja tai epäyhteensopivuutta backendin kanssa, voi seurauksena olla myös mielenkiintoisia bugeja.
+
+#### 3.13: puhelinluettelo ja tietokanta, osa 1
+
+Muuta backendin kaikkien puhelintietojen näyttämistä siten, että se <i>hakee näytettävät puhelintiedot tietokannasta</i>.
+
+Varmista, että frontend toimii muutosten jälkeen.
+
+Tee tässä ja seuraavissa tehtävissä mongoose-spesifinen koodi omaan moduuliin samaan tapaan kuin luvussa [Tietokantamäärittelyjen eriyttäminen moduuliksi](http://localhost:8000/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#tietokantamaarittelyjen-eriyttaminen-moduuliksi).
+
+#### 3.14: puhelinluettelo ja tietokanta, osa 2
+
+Muuta backendiä siten, että uudet numerot <i>tallennetaan tietokantaan</i>. 
+Varmista, että frontend toimii muutosten jälkeen.
+
+<i>**Tässä vaiheessa voit olla välittämättä siitä, onko tietokannassa jo henkilöä jolla on sama nimi kuin lisättävällä.**</i>
 
 </div>
 
@@ -539,13 +594,13 @@ Tee nyt tehtävät [3.13-3.15](/tehtävät#backend-ja-tietokanta)
 
 ### Virheiden käsittely
 
-Jos yritämme mennä selaimella sellaisen yksittäisen muistiinpanon sivulle, jota ei ole olemassa, eli esim. urliin <http://localhost:3001/api/notes/5a3b80015b6ec6f1bdf68d> missä _5a3b80015b6ec6f1bdf68d_ ei ole minkään tietokannassa olevan muistiinpanon tunniste, jää selain "jumiin" sillä palvelin ei vastaa pyyntöön koskaan.
+Jos yritämme mennä selaimella sellaisen yksittäisen muistiinpanon sivulle, jota ei ole olemassa, eli esim. urliin <http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431> missä <i>5a3b80015b6ec6f1bdf68d</i> ei ole minkään tietokannassa olevan muistiinpanon tunniste, jää selain "jumiin" sillä palvelin ei vastaa pyyntöön koskaan.
 
 Palvelimen konsolissa näkyykin virheilmoitus:
 
-![](../assets/3/15.png)
+![](../images/3/47.png)
 
-Kysely on epäonnistunut ja kyselyä vastaava promise mennyt tilaan _rejected_. Koska emme käsittele promisen epäonnistumista, ei pyyntöön vastata koskaan. Osassa 2 tutustuimme jo [promisejen virhetilanteiden käsittelyyn](/osa2#promise-ja-virheet).
+Kysely on epäonnistunut ja kyselyä vastaava promise mennyt tilaan <i>rejected</i>. Koska emme käsittele promisen epäonnistumista, ei pyyntöön vastata koskaan. Osassa 2 tutustuimme jo [promisejen virhetilanteiden käsittelyyn](/osa2/palvelimella_olevan_datan_muokkaaminen#promise-ja-virheet).
 
 Lisätään tilanteeseen yksinkertainen virheidenkäsittelijä:
 
@@ -553,13 +608,13 @@ Lisätään tilanteeseen yksinkertainen virheidenkäsittelijä:
 app.get('/api/notes/:id', (request, response) => {
   Note.findById(request.params.id)
     .then(note => {
-      response.json(formatNote(note));
+      response.json(formatNote(note))
     })
     .catch(error => {
       console.log(error);
-      response.status(404).end();
-    });
-});
+      response.status(404).end()
+    })
+})
 ```
 
 Kaikissa virheeseen päättyvissä tilanteissa HTTP-pyyntöön vastataan statuskoodilla 404 not found. Konsoliin tulostetaan tarkempi tieto virheestä.
@@ -586,12 +641,12 @@ Method: GET
 Path:   /api/notes/5a3b7c3c31d61cbd9f8a0343
 Body:   {}
 ---
-TypeError: Cannot read property '_doc' of null
-    at formatNote (/Users/mluukkai/opetus/_fullstack/osa3-muisiinpanot/index.js:46:33)
-    at Note.findById.then.note (/Users/mluukkai/opetus/_fullstack/osa3-muisiinpanot/index.js:65:21)
+TypeError: Cannot read property 'toJSON' of null
+    at Note.findById.then.note (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/index.js:27:24)
+    at process._tickCallback (internal/process/next_tick.js:178:7)
 </pre>
 
-Nämä tilanteet on syytä erottaa toisistaan, ja itseasiassa jälkimmäinen poikkeus on oman koodimme <code>/Users/mluukkai/opetus/\_fullstack/osa3-muisiinpanot/index.js:46</code> aiheuttama.
+Nämä tilanteet on syytä erottaa toisistaan, ja itseasiassa jälkimmäinen poikkeus on oman koodimme aiheuttama.
 
 Muutetaan koodia seuraavasti:
 
@@ -599,24 +654,26 @@ Muutetaan koodia seuraavasti:
 app.get('/api/notes/:id', (request, response) => {
   Note.findById(request.params.id)
     .then(note => {
+      // highlight-start
       if (note) {
-        response.json(formatNote(note));
+        response.json(formatNote(note))
       } else {
-        response.status(404).end();
+        response.status(404).end() 
       }
+      // highlight-end
     })
     .catch(error => {
-      console.log(error);
-      response.status(400).send({ error: 'malformatted id' });
-    });
-});
+      console.log(error)
+      response.status(400).send({ error: 'malformatted id' }) // highlight-line
+    })
+})
 ```
 
-Jos kannasta ei löydy haettua olioa, muuttujan _note_ arvo on _undefined_ ja koodi ajautuu _else_-haaraan. Siellä vastataan kyselyyn _404 not found_.
+Jos kannasta ei löydy haettua olioa, muuttujan _note_ arvo on _undefined_ ja koodi ajautuu _else_-haaraan. Siellä vastataan kyselyyn <i>404 not found_</i>
 
 Jos id ei ole hyväksyttävässä muodossa, ajaudutaan _catch_:in avulla määriteltyyn virheidenkäsittelijään. Sopiva statuskoodi on [400 bad request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1) koska kyse on juuri siitä:
 
-> The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.
+> <i>The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.</i>
 
 Vastaukseen on lisätty myös hieman dataa kertomaan virheen syystä.
 
@@ -633,59 +690,123 @@ Ei ole koskaan huono idea tulostaa poikkeuksen aiheuttanutta olioa konsoliin vir
 
 Virheenkäsittelijään joutumisen syy voi olla joku ihan muu kuin mitä on tullut alunperin ajatelleeksi. Jos virheen tulostaa konsoliin, voi säästyä pitkiltä ja turhauttavilta väärää asiaa debuggaavilta sessioilta.
 
-Aina kun ohjelmoit ja projektissa on mukana backend **tulee ehdottomasti koko ajan pitää silmällä backendin konsolin tulostuksia**. Jos työskentelet pienellä näytöllä, riittää että konsolista on näkyvissä edes pieni kaistale:
+Aina kun ohjelmoit ja projektissa on mukana backend <i>**tulee ehdottomasti koko ajan pitää silmällä backendin konsolin tulostuksia**</i>. Jos työskentelet pienellä näytöllä, riittää että konsolista on näkyvissä edes pieni kaistale:
 
 ![](../images/3/15b.png)
 
-### loput operaatiot
+### Virheidenkäsittelyn keskittäminen middlewareen
+
+Olemme kirjoittaneet virhetilanteet käsittelevän koodin muun koodin sekaan. Se on välillä ihan toimiva ratkaisu, mutta on myös tilanteita, joissa on järkevämpää keskittää virheiden käsittely yhteen paikkaan. Tästä on huomattava etu esim. jos virhetilanteiden yhteydessä virhen aiheuttaneen pyynnön tiedot logataan tai lähetetään johonkin virhediagnostiikkajärjestelmään, esim. [Sentryyn](https://sentry.io/welcome/). 
+
+Muutetaan routen <i>/api/notes/:id</i> käsittelijää siten, että se <i>siirtää virhetilanteiden käsittelyn eteenpäin</i> funktiolla <em>next</em> jonka se saa <i>kolmantena</i> parametrina:
+
+```js
+app.get('/api/notes/:id', (request, response, next) => {
+  Note.findById(request.params.id)
+    .then(note => {
+      if (note) {
+        response.json(note.toJSON())
+      } else {
+        next({ status: 404, error })
+      }
+    })
+    .catch(error => {
+      next({ status: 404, message: 'malformatted id', error })
+    })
+})
+```
+
+Eteenpäin siirrettävän virheen syy määritellään funktiolle <em>next</em> annettavana parametrina. Jos funktiota <em>next</em> kutsuttaisiin ilman parametria, käsittely siirtyisi ainoastaan eteenpäin seuraavaksi määritellylle routelle tai middlewarelle. Jos funktiota <em>next</em> kutsussa annetaan parametri, siirtyy käsittely <i>virheidenkäsittelymiddlewarelle</i>.
+
+Expressin [virheidenkäsittelijät](https://expressjs.com/en/guide/error-handling.html) ovat middlewareja, joiden määrittelevällä funktiolla on <i>neljä parametria</i>. Virheidenkäsittelijämme näyttää seuraavalta:
+
+```js
+const errorHandler = (error, request, response, next) => {
+  if (response.headersSent || error.status === undefined) {
+    return next(error)
+  }
+
+  console.error(error.error.stack)
+  if ( error.message ) {
+    response.status(error.status).send({ error: error.message })
+  } else {
+    response.status(error.status).end()
+  } 
+}
+
+app.use(unknownEndpoint)
+```
+
+Virheenkäsittelijän ensimmäinen <em>if</em> siirtää virheenkäsittelyn eteenpäin, oletusarvoiselle virheenkäsittelijälle, jos kyse ei ole itse määrittelemästämme virheoliosta, jolla on kenttä status.
+
+Koodin jälkimäinen osa lähettä pyynnön tehneelle selaimelle vastauksen parametrina olevan <em>response</em>-olion avulla, asettaen sille routessa <em>error</em>-oliolle määritellyn statuksen ja viestin.
+
+### Muut operaatiot
 
 Toteutetaan vielä jäljellä olevat operaatiot, eli yksittäisen muistiinpanon poisto ja muokkaus.
 
-Poisto onnistuu helpoiten metodilla [findByIdAndRemove](http://mongoosejs.com/docs/api.html#findbyidandremove_findByIdAndRemove):
+Poisto onnistuu helpoiten metodilla [findByIdAndRemove](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove):
 
 ```js
-app.delete('/api/notes/:id', (request, response) => {
+app.delete('/api/notes/:id', (request, response, next) => {
   Note.findByIdAndRemove(request.params.id)
     .then(result => {
-      response.status(204).end();
+      response.status(204).end()
     })
     .catch(error => {
-      response.status(400).send({ error: 'malformatted id' });
-    });
-});
+      next({ status: 400, message: 'malformatted id', error })
+    })
+})
 ```
 
-Vastauksena on statauskoodi _204 no content_ molemmissa "onnistuneissa" tapauksissa, eli jos olio poistettiin tai olioa ei ollut mutta _id_ oli periaatteessa oikea. Takaisinkutsun parametrin _result_ perusteella olisi mahdollisuus haarautua ja palauttaa tilanteissa eri statuskoodi jos sille on tarvetta.
+Vastauksena on statauskoodi <i>204 no content</i> molemmissa "onnistuneissa" tapauksissa, eli jos olio poistettiin tai olioa ei ollut mutta <i>id</i> oli periaatteessa oikea. Takaisinkutsun parametrin _result_ perusteella olisi mahdollisuus haarautua ja palauttaa tilanteissa eri statuskoodi jos sille on tarvetta. Mahdollinen poikkeus siirretään jälleen virheenkäsittelijälle.
 
-Muistiinpanon tärkeyden muuttamisen mahdollistava olemassaolevan muistiinpanon päivitys onnistuu helposti metodilla [findOneAndUpdate](http://mongoosejs.com/docs/api.html#findoneandupdate_findOneAndUpdate). Tässä ja myöhemmin sivulla on _findOneAndUpdate_, mutta koodissa alla [findByIdAndUpdate](http://mongoosejs.com/docs/api.html#findbyidandupdate_findByIdAndUpdate), joka vastaa `findOneAndUpdate({ _id: id }, ...)` kutsua.
+Muistiinpanon tärkeyden muuttamisen mahdollistava olemassaolevan muistiinpanon päivitys onnistuu helposti metodilla [findByIdAndUpdate](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate). 
 
 ```js
-app.put('/api/notes/:id', (request, response) => {
-  const body = request.body;
+app.put('/api/notes/:id', (request, response, next) => {
+  const body = request.body
 
   const note = {
     content: body.content,
     important: body.important,
-  };
+  }
 
   Note.findByIdAndUpdate(request.params.id, note, { new: true })
     .then(updatedNote => {
-      response.json(formatNote(updatedNote));
+      response.json(updatedNote.toJSON())
     })
     .catch(error => {
-      console.log(error);
-      response.status(400).send({ error: 'malformatted id' });
-    });
-});
+      next({ status: 400, message: 'malformatted id', error })
+    })
+})
 ```
 
 Operaatio mahdollistaa myös muistiinpanon sisällön editoinnin. Päivämäärän muuttaminen ei ole mahdollista.
 
-Huomaa, että metodin _findOneAndUpdate_ parametrina tulee antaa normaali Javascript-olio, eikä uuden olion luomisessa käytettävä _Note_-konstruktorifunktiolla luotu olio.
+Huomaa, että metodin <em>findByIdAndUpdate</em> parametrina tulee antaa normaali Javascript-olio, eikä uuden olion luomisessa käytettävä <em>Note</em>-konstruktorifunktiolla luotu olio.
 
-Pieni, mutta tärkeä detalji liittyen operaatioon _findOneAndUpdate_. Oletusarvoisesti tapahtumankäsittelijä saa parametrikseen _updatedNote_ päivitetyn olion [ennen muutosta](http://mongoosejs.com/docs/api.html#findoneandupdate_findOneAndUpdate) olleen tilan. Lisäsimme operaatioon parametrin <code>{ new: true }</code> jotta saamme muuttuneen olion palautetuksi kutsujalle.
+Pieni, mutta tärkeä detalji liittyen operaatioon <em>findByIdAndUpdate</em>. Oletusarvoisesti tapahtumankäsittelijä saa parametrikseen <em>updatedNote</em> päivitetyn olion [ennen muutosta](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate) olleen tilan. Lisäsimme operaatioon parametrin <code>{ new: true }</code> jotta saamme muuttuneen olion palautetuksi kutsujalle.
 
 Backend vaikuttaa toimivan postmanista ja VS Code REST clientistä tehtyjen kokeilujen perusteella ja myös frontend toimii moitteettomasti tietokantaa käyttävän backendin kanssa.
+
+Kun muutamme muistiinpanon tärkeyttä, tulostuu backendin konsoliin ikävä varoitus
+
+![](../images/3/48.png)
+
+Googlaamalla virheilmoitusta löytyy [ohje](https://stackoverflow.com/questions/52572852/deprecationwarning-collection-findandmodify-is-deprecated-use-findoneandupdate) ongelman korjaamiseen. Eli kuten [mongoosen dokumentaatio kehottaa](https://mongoosejs.com/docs/deprecations.html) lisätään tiedostoon <i>note.js</i> yksi rivi:
+
+```js
+const mongoose = require('mongoose')
+
+mongoose.set('useFindAndModify', false) // highlight-line
+
+// ...
+  
+module.exports = mongoose.model('Note', noteSchema) 
+```
+
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-3), branchissa <i>part3-4</i>.
 
 </div>
 
@@ -693,6 +814,30 @@ Backend vaikuttaa toimivan postmanista ja VS Code REST clientistä tehtyjen koke
 
 ### Tehtäviä
 
-Tee nyt tehtävät [3.16-3.18](/tehtävät#lisää-operaatioita)
+#### 3.15: puhelinluettelo ja tietokanta, osa 3
+
+Muuta backendiä siten, että numerotietojen poistaminen päivittyy tietokantaan.
+
+Varmista, että frontend toimii muutosten jälkeen.
+
+#### 3.16: puhelinluettelo ja tietokanta, osa 3
+
+Keskitä sovelluksen virheidenkäsittely middlewareen.
+
+#### 3.17*: puhelinluettelo ja tietokanta, osa 4
+
+Jos frontendissä annetaan numero henkilölle, joka on jo olemassa, päivittää frontend tehtävässä 2.18 tehdyn toteutuksen ansiosta tiedot uudella numerolla tekemällä HTTP PUT -pyynnön henkilön tietoja vastaavaan url:iin.
+
+Laajenna backendisi käsittelemään tämä tilanne.
+
+Varmista, että frontend toimii muutosten jälkeen.
+
+#### 3.18*: puhelinluettelo ja tietokanta, osa 5
+
+Päivitä myös polkujen <i>api/persons/:id</i> ja <i>info</i> käsittely, ja varmista niiden toimivuus suoraan selaimella, postmanilla tai VS Coden REST clientillä.
+
+Selaimella tarkastellen yksittäisen numerotiedon tulisi näyttää seuraavalta:
+
+![](../images/3/49.png)
 
 </div>
