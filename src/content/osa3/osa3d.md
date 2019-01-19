@@ -181,9 +181,12 @@ Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://git
 
 ### Tehtäviä
 
-#### 3.19: puhelinluettelo ja tietokanta, osa 7
+#### 3.19*: puhelinluettelo ja tietokanta, osa 7
 
 Toteuta sovelluksellesi validaatio, joka huolehtii, että backendiin voi lisätä yhdelle nimelle ainoastaan yhden numeron. Frontendin nykyisestä versiosta ei duplikaatteja voi luoda, mutta suoraan Postmanilla tai VS Coden REST clientillä se onnistuu.
+
+Mongoose ei tarjoa tilanteeseen sopivaa valmista validaattoria. Käytä npm:llä asennettavaa pakettia
+[mongoose-unique-validator](https://github.com/blakehaswell/mongoose-unique-validator#readme).
 
 Jos HTTP POST -pyyntö yrittää lisätä nimeä, joka on jo puhelinluettelossa, tulee vastata sopivalla statuskoodilla ja lisätä vastaukseen asianmukainen virheilmoitus.
 
