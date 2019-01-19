@@ -6,21 +6,48 @@ letter: d
 
 <div class="content">
 
-### Validointi
+Sovelluksen tietokantaan tallettamalle datan muodolle on usein tarve asettaa jotain ehtoja. Sovelluksemme ei esim. hyväksy muistiinpanoja, joiden sisältö eli <i>content</i> kenttä puuttuu. Muistiinpanon oikeellisuus tallennetaan sen luovassa metodissa:
 
-https://mongoosejs.com/docs/validation.html
+```js
+app.post('/api/notes', (request, response) => {
+  const body = request.body
+  // highlight-start
+  if (body.content === undefined) {
+    return response.status(400).json({ error: 'content missing' })
+  }
+  // highlight-end
+
+  // ...
+})
+```
+
+Eli jos muistiinpanolla ei ole kenttää <i>content</i>, vastataan pyyntöön statuskoodilla <i>400 bad request</i>. 
+
+Routejen tapahtumakäsittelijöissä tehtävää tarkastusta järkevämpi tapa tietokantaan talletettavan tiedon oikean muodon määrittelylle ja tarkastamiselle on mongoosen [validointitoiminnallisuuden](https://mongoosejs.com/docs/validation.html) käyttö.
+
+Kullekin talletettavan datan kentälle voidaan määritellä validointisääntöjä skeemassa:
 
 ```js
 const noteSchema = new mongoose.Schema({
+  // highlight-start
   content: {
     type: String,
-    required: true,
     minlength: 5
   },
-  date: Date,
-  important: Boolean,
+  date: { 
+    type: Date,
+    required: true
+  }
+    // highlight-end
+  important: Boolean
 })
 ```
+
+Kentän <i>content</i> pituuden vaaditaan nyt olevan vähintään 5 merkkiä. Kentälle <i>data</i> taas on asetettu ehdoksi että sillä on oltava joku arvo, eli kenttä ei voi olla tyhjä. Kentälle <i>important</i> ei ole asetettu mitään ehtoa, joten se on määritelty edelleen yksinkertaisemmassa muodossa.
+
+Esimerkissä käytetyt validaattorit <i>minlength</i> ja <i>required</i> ovat mongooseen [sisäänrakennettuja](https://mongoosejs.com/docs/validation.html#built-in-validators) validointisääntöjä. Mongoosen [custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) -ominaisuus mahdollistaa mielivaltaisten validaattorien toteuttamisen jos valmiiden joukosta ei löydy tarkoitukseen sopivaa.
+
+Jos tietokantaan yritetään tallettaa validointisäännön rikkova olio, heittää tallennusoperaatio poikkeuksen. Muutetaan uuden muistiinpanon luomisesta huolehtivaa käsittelijää siten, että se välittää mahdollisen poikkeuksen virheenkäsittelijämiddlewaren huolehdittavaksi:  
 
 ```js
 app.post('/api/notes', (request, response, next) => {
@@ -36,9 +63,11 @@ app.post('/api/notes', (request, response, next) => {
     .then(savedNote => {
       response.json(savedNote.toJSON())
     })
-    .catch(error => next(error))
+    .catch(error => next(error)) // highlight-line
 })
 ```
+
+Laajennetaan virheenkäsittelijää huomioimaan validointivirheet:
 
 ```js
 const errorHandler = (error, request, response, next) => {
@@ -46,39 +75,32 @@ const errorHandler = (error, request, response, next) => {
 
   if (error.name === 'CastError' && error.kind == 'ObjectId') {
     return response.status(400).send({ error: 'malformatted id' })
-  }  else if (error.name === 'ValidationError') {
-    return response.status(400).json({ error: error.message })
+  } else if (error.name === 'ValidationError') { // highlight-line
+    return response.status(400).json({ error: error.message }) // highlight-line
   }
 
   next(error)
 }
 ```
 
+Validoinnin epäonnistuessa palautetaan validaattorin oletusarvoinen virheviesti:
+
+![](../images/3/50.png)
+
 ### Promisejen ketjutus
 
-Useat routejen tapahtumankäsittelijöistä muuttivat palautettavan datan oikeaan formaattiin kutsumalla metodia _formatNote_:
+Useat routejen tapahtumankäsittelijöistä muuttivat palautettavan datan oikeaan formaattiin kutsumalla palautetuille olioille niiden metodia _toJSON_. Esimimerkiksi uuden muistiinpanon luomisessa metodia kutsutaan _then_:in parametrina palauttamalle oliolle:
 
 ```js
-const formatNote = note => {
-  return {
-    id: note._id,
-    content: note.content,
-    date: note.date,
-    important: note.important,
-  };
-};
-```
-
-esim uuden muistiinpanon luomisessa metodia kutsutaan _then_:in parametrina palauttama olio parametrina:
-
-```js
-app.post('/api/notes', (request, response) => {
+app.post('/api/notes', (request, response, next) => {
   // ...
 
-  note.save().then(savedNote => {
-    response.json(formatNote(savedNote));
-  });
-});
+  note.save()
+    .then(savedNote => {
+      response.json(savedNote.toJSON())
+    })
+    .catch(error => next(error)) 
+})
 ```
 
 Voisimme tehdä saman myös hieman tyylikkäämmin [promiseja ketjuttamalla](https://javascript.info/promise-chaining):
@@ -89,18 +111,21 @@ app.post('/api/notes', (request, response) => {
 
   note
     .save()
+    // highlight-start
     .then(savedNote => {
-      return formatNote(savedNote);
+      return savedNote.toJSON()
     })
     .then(savedAndFormattedNote => {
-      response.json(savedAndFormattedNote);
-    });
-});
+      response.json(savedAndFormattedNote)
+    }) 
+    // highlight-end
+    .catch(error => next(error)) 
+})
 ```
 
-Eli ensimmäisen _then_:in takaisinkutsussa otamme mongoosen palauttaman olion _savedNote_ ja formatoimme sen. Operaation tulos palautetaan returnilla. Kuten osassa 2 [todettiin](/osa2/#palvelimen-kanssa-tapahtuvan-kommunikoinnin-eristäminen-omaan-moduuliin), promisen then-metodi palauttaa myös promisen. Eli kun palautamme _formatNote(savedNote)_:n takaisinkutsufunktiosta, syntyy promise, jonka arvona on formatoitu muistiinpano. Pääsemme käsiksi arvoon rekisteröimällä _then_-kutsulla uuden tapahtumankäsittelijän.
+Eli ensimmäisen _then_:in takaisinkutsussa otamme mongoosen palauttaman olion _savedNote_ ja formatoimme sen. Operaation tulos palautetaan returnilla. Kuten osassa 2 [todettiin](/osa2/palvelimella_olevan_datan_muokkaaminen#palvelimen-kanssa-tapahtuvan-kommunikoinnin-eristaminen-omaan-moduuliin), promisen then-metodi palauttaa myös promisen. Eli kun palautamme _savedNote.toJSON()_:n takaisinkutsufunktiosta, syntyy promise, jonka arvona on formatoitu muistiinpano. Pääsemme käsiksi arvoon rekisteröimällä _then_-kutsulla uuden tapahtumankäsittelijän.
 
-Itseasiassa selviämme vieläkin tiiviimmällä koodilla:
+Selviämme vieläkin tiiviimmällä koodilla käyttämällä nuolifunktion lyhempää muotoa:
 
 ```js
 app.post('/api/notes', (request, response) => {
@@ -108,125 +133,75 @@ app.post('/api/notes', (request, response) => {
 
   note
     .save()
-    .then(formatNote)
+    .then(savedNote => savedNote.toJSON()) // highlight-line
     .then(savedAndFormattedNote => {
-      response.json(savedAndFormattedNote);
-    });
-});
+      response.json(savedAndFormattedNote)
+    }) 
+    .catch(error => next(error)) 
+})
 ```
 
-koska _formatNote_ on viite funktioon, on oleellisesti ottaen kyse samasta kuin kirjoittaisimme:
+Esimerkkimme tapauksessa promisejen ketjutuksesta ei ole suurta hyötyä. Tilanne alkaa muuttua jos joudumme tekemään useita peräkkäisiä asynkronisia operaatiota. Emme kuitenkaan mene asiaan sen tarkemmin. Tutustumme seuraavassa osassa Javascriptin <i>async/await</i>-syntaksiin, jota käyttämällä peräkkäisten asynkronisten operaatioiden tekeminen helpottuu olellisesti.
+
+### Tietokantaa käyttävän version vieminen tuotantoon
+
+Sovelluksen pitäisi toimia tuotannossa, eli herokussa lähes sellaisenaan. Frontendin muutosten takia on tehtävä siitä uusi tuotantoversio ja kopioitava se backendiin. Toinen muutos on se, että <i>emme halua</i> herokussa olevan version käyttävän tiedostossa <i>.env</i> määriteltyjä ympäristömuuttujia. Tämän takia tiedoston <i>index.js</i> alussa oleva rivi
 
 ```js
-app.post('/api/notes', (request, response) => {
-  // ...
-
-  note
-    .save()
-    .then(savedNote => {
-      return {
-        id: savedNote._id,
-        content: savedNote.content,
-        date: savedNote.date,
-        important: savedNote.important,
-      };
-    })
-    .then(savedAndFormattedNote => {
-      response.json(savedAndFormattedNote);
-    });
-});
+require('dotenv').config()
 ```
 
-### Sovelluksen vieminen tuotantoon
-
-Sovelluksen pitäisi toimia tuotannossa, eli herokussa sellaisenaan. Frontendin muutosten takia on tehtävä siitä uusi tuotantoversio ja kopioitava se backendiin.
-
-Sovellusta voi käyttää sekä frontendin kautta <https://fullstack-notes.herokuapp.com>, ja myös API:n <https://fullstack-notes.herokuapp.com/api/notes> suora käyttö selaimella ja postmanilla onnistuu.
-
-Sovelluksessamme on tällä hetkellä eräs ikävä piirre. Tietokannan osoite on kovakoodattu backendiin ja samaa tietokantaa käytetään sekä tuotannossa, että sovellusta kehitettäessä.
-
-Tarvitsemme oman kannan sovelluskehitystä varten. Luodaan mlabiin toinen tietokanta ja sille käyttäjä.
-
-Tietokannan osoitetta ei kannata kirjoittaa koodiin. Eräs hyvä tapa tietokannan osoitteen määrittelemiseen on [ympäristömuuttujien](https://en.wikipedia.org/wiki/Environment_variable) käyttö.
-
-Talletetaan kannan osoite ympäristömuuttujaan _MONGODB_URI_.
-
-Ympäristömuuttujiin pääsee Node-sovelluksesta käsiksi seuraavasti:
+on muutettava muotoon
 
 ```js
-const mongoose = require('mongoose');
-
-const url = process.env.MONGODB_URI;
-
-// ...
-
-module.exports = Note;
-```
-
-Tee muutos koodiin ja deployaa uusi versio herokuun. Sovelluksen pitäisi toimia kun asetat ympäristömuuttujan arvo herokuun komennolla _heroku config:set_
-
-```bash
-heroku config:set MONGODB_URI=mongodb://fullstack:sekred@ds211088.mlab.com:11088/fullstack-notes
-```
-
-Sovelluksen pitäisi toimia muutosten jälkeen. Aina kaikki ei kuitenkaan mene suunnitelmien mukaan. Jos ongelmia ilmenee, _heroku logs_ auttaa. Oma sovellukseni ei toiminut muutoksen jälkeen. Loki kertoi seuraavaa
-
-![](../images/3/21.png)
-
-eli tietokannan osoite olikin jostain syystä määrittelemätön. Komento _heroku config_ paljasti että olin vahingossa määritellyt ympäristömuuttujan _MONGO_URL_ kun koodi oletti sen olevan nimeltään _MONGODB_URI_.
-
-Muutoksen jälkeen sovellus ei toimi paikallisesti, koska ympäristömuuttujalla _MONGODB_URI_ ei ole mitään arvoa. Tapoja määritellä ympäristömuuttujalle arvo on monia, käytetään nyt [dotenv](https://www.npmjs.com/package/dotenv)-kirjastoa.
-
-Asennetaan kirjasto komennolla
-
-```bash
-npm install dotenv --save
-```
-
-Sovelluksen juurihakemistoon tehdään sitten tiedosto nimeltään _.env_, minne tarvittavien ympäristömuuttujien arvot asetetaan. Määritellään tiedostoon sovelluskehitystä varten luodun tietokannan osoite:
-
-```bash
-MONGODB_URI=mongodb://fullstack:sekred@ds111078.mlab.com:11078/fullstact-notes-dev
-```
-
-Tiedosto .env **tulee heti gitignorata** sillä emme halua julkaista .env -tiedoston sisältöä verkkoon.
-
-dotenvissä määritellyt ympäristömuuttujat otetaan koodissa käyttöön komennolla
-
-```js
-require('dotenv').config();
-```
-
-ja niihin viitataan Nodessa kuten "normaaleihin" ympäristömuuttujiin syntaksilla _process.env.MONGODB_URI_
-
-Otetaan dotenv käyttöön seuraavasti:
-
-```js
-const mongoose = require('mongoose');
-
 if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
+  require('dotenv').config()
 }
-
-const url = process.env.MONGODB_URI;
-
-// ...
-
-module.exports = Note;
 ```
 
-Nyt dotenvissä olevat ympäristömuuttujat otetaan käyttöön ainoastaan silloin kun sovellus ei ole _production_- eli tuotantomoodissa (kuten esim. Herokussa).
+Nyt dotenvissä olevat ympäristömuuttujat otetaan käyttöön ainoastaan silloin kun sovellus ei ole <i>production</i>- eli tuotantomoodissa (kuten esim. Herokussa).
 
-Uudelleenkäynnistyksen jälkeen sovellus toimii taas paikallisesti.
+Tietokantaurlin kertovan ympäristömuuttujan arvo asetetaan Herokuun komennolla _heroku config:set_
 
-Node-sovellusten konfigurointiin on olemassa ympäristömuuttujien ja dotenvin lisäksi lukuisia vaihtoehtoja, mm. [node-conf](https://github.com/lorenwest/node-config). Ympäristömuuttujien käyttö riittää meille nyt, joten emme rupea overengineeraamaan. Palaamme aiheeseen kenties myöhemmin.
+```bash
+heroku config:set MONGODB_URI=mongodb://fullstack:secred@ds161224.mlab.com:61224/fullstack2019-notes
+```
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-4), tagissa _part3-4_.
+Sovelluksen pitäisi toimia muutosten jälkeen. Aina kaikki ei kuitenkaan mene suunnitelmien mukaan. Jos ongelmia ilmenee, <i>heroku logs</i> auttaa. Oma sovellukseni ei toiminut muutoksen jälkeen. Loki kertoi seuraavaa
+
+![](../images/3/51.png)
+
+eli tietokannan osoite olikin jostain syystä määrittelemätön. Komento <i>heroku config</i> paljasti että olin vahingossa määritellyt ympäristömuuttujan _MONGO_URL_ kun koodi oletti sen olevan nimeltään _MONGODB_URI_.
+
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-5), branchissä <i>part3-5</i>.
+
+</div>
+
+<div class="tasks">
 
 ### Tehtäviä
 
-Tee nyt tehtävät [3.19 - 3.21](/tehtävät#loppuhuipennus)
+#### 3.19: puhelinluettelo ja tietokanta, osa 7
 
+Toteuta sovelluksellesi validaatio, joka huolehtii, että backendiin voi lisätä yhdelle nimelle ainoastaan yhden numeron. Frontendin nykyisestä versiosta ei duplikaatteja voi luoda, mutta suoraan Postmanilla tai VS Coden REST clientillä se onnistuu.
+
+Jos HTTP POST -pyyntö yrittää lisätä nimeä, joka on jo puhelinluettelossa, tulee vastata sopivalla statuskoodilla ja lisätä vastaukseen asianmukainen virheilmoitus.
+
+#### 3.20*: puhelinluettelo ja tietokanta, osa 8
+
+Laajenna validaatiota siten, että tietokantaan talletettavan nimen on oltava pituudeltaan vähintään 3 merkkiä ja puhellinnumeron vähitään 8 merkkiä. 
+
+Laajenna sovelluksen frontendia siten, että se antaa virheilmoituksen validoinnin epäonnistuessa.
+
+#### 3.21 tietokantaa käyttävä versio internettiin
+
+Generoi päivitetystä sovelluksesta "full stack"-versio, eli tee frontendista uusi production build ja kopioi se backendin repositorioon. Varmista että kaikki toimii paikallisesti käyttämällä koko sovellusta backendin osoitteesta <https://localhost:3001>.
+
+Pushaa uusi versio Herokuun ja varmista, että kaikki toimii myös siellä.
+
+</div>
+
+<div class="content">
 
 ### Lint
 
@@ -400,8 +375,14 @@ Monissa yrityksissä on tapana määritellä yrityksen laajuiset koodausstandard
 
 Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-5), tagissa _part3-5_.
 
+</div>
+
 ### Tehtäviä
 
-Tee nyt viimeinen tehtävä [3.22](/tehtävät#eslint)
+<div class="tasks">
+
+#### 3.22: lint-konfiguraatio
+
+Ota sovellukseesi käyttöön ESlint.
 
 </div>

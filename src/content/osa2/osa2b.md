@@ -384,7 +384,7 @@ Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://git
 
 <i>Seuraavassa tehtävässä aloitettavaa ohjelmaa kehitellään eteenpäin muutamassa seuraavassa tehtävässä. Tässä ja kurssin aikana muissakin vastaantulevissa tehtäväsarjoissa ohjelman lopullisen version palauttaminen riittää, voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.</i>
 
-Muista, että saadaksesi komponentin tilan luotua joudut asentamaan Reactin version _16.8.0-alpha.0_ antamalla seuraavan komennon projektin hakemistossa
+Muista, että saadaksesi komponentin tilan luotua joudut asentamaan Reactin version <i>16.8.0-alpha.0</i> antamalla seuraavan komennon projektin hakemistossa
 
 ```js
 npm install -s react@16.8.0-alpha.0 react-dom@16.8.0-alpha.0
