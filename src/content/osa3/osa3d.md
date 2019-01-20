@@ -32,7 +32,8 @@ const noteSchema = new mongoose.Schema({
   // highlight-start
   content: {
     type: String,
-    minlength: 5
+    minlength: 5,
+    required: true
   },
   date: { 
     type: Date,
@@ -43,7 +44,7 @@ const noteSchema = new mongoose.Schema({
 })
 ```
 
-Kentän <i>content</i> pituuden vaaditaan nyt olevan vähintään 5 merkkiä. Kentälle <i>data</i> taas on asetettu ehdoksi että sillä on oltava joku arvo, eli kenttä ei voi olla tyhjä. Kentälle <i>important</i> ei ole asetettu mitään ehtoa, joten se on määritelty edelleen yksinkertaisemmassa muodossa.
+Kentän <i>content</i> pituuden vaaditaan nyt olevan vähintään 5 merkkiä. Kentälle <i>data</i> taas on asetettu ehdoksi että sillä on oltava joku arvo, eli kenttä ei voi olla tyhjä. Sama ehto on asetettu myös kentälle <i>content</i>, sillä minimipituuden tarkistava ehto ei huomioi tilannetta, missä kentällä ei ole mitään arvoa. Kentälle <i>important</i> ei ole asetettu mitään ehtoa, joten se on määritelty edelleen yksinkertaisemmassa muodossa.
 
 Esimerkissä käytetyt validaattorit <i>minlength</i> ja <i>required</i> ovat mongooseen [sisäänrakennettuja](https://mongoosejs.com/docs/validation.html#built-in-validators) validointisääntöjä. Mongoosen [custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) -ominaisuus mahdollistaa mielivaltaisten validaattorien toteuttamisen jos valmiiden joukosta ei löydy tarkoitukseen sopivaa.
 
@@ -181,7 +182,7 @@ Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://git
 
 ### Tehtäviä
 
-#### 3.19*: puhelinluettelo ja tietokanta, osa 7
+#### 3.19: puhelinluettelo ja tietokanta, osa 7
 
 Toteuta sovelluksellesi validaatio, joka huolehtii, että backendiin voi lisätä yhdelle nimelle ainoastaan yhden numeron. Frontendin nykyisestä versiosta ei duplikaatteja voi luoda, mutta suoraan Postmanilla tai VS Coden REST clientillä se onnistuu.
 
@@ -194,7 +195,23 @@ Jos HTTP POST -pyyntö yrittää lisätä nimeä, joka on jo puhelinluettelossa,
 
 Laajenna validaatiota siten, että tietokantaan talletettavan nimen on oltava pituudeltaan vähintään 3 merkkiä ja puhelinnumeron vähitään 8 merkkiä. 
 
-Laajenna sovelluksen frontendia siten, että se antaa virheilmoituksen validoinnin epäonnistuessa.
+Laajenna sovelluksen frontendia siten, että se antaa jonkinlaisen virheilmoituksen validoinnin epäonnistuessa. Virheidenkäsittely hoidetaan lisäämällä <em>catch</em>-lohko uuden henkilön lisäämisen yhteyteen:
+
+```js
+personService
+    .create({ ... })
+    .then(createdPerson => {
+      // ...
+    })
+    .catch(error => {
+      // pääset käsiksi palvelimen palauttamaan virheilmoitusolioon näin
+      console.log(error.response.data)
+    })
+```
+
+Voit näyttää frontendissa käyttäjälle mongoosen validoinnin oletusarvoisen virheilmoituksen vaikka ne eivät olekaan luettavuudeltaan parhaat mahdolliset:
+
+![](../images/3/56.png)
 
 #### 3.21 tietokantaa käyttävä versio internettiin
 
