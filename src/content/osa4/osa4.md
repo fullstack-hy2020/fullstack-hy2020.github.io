@@ -5,9 +5,7 @@ part: 4
 
 <div class="intro">
 
-Kurssilla tutustutaan Javascriptilla tapahtuvaan moderniin websovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST-rajapinnoissa.
-
-Kurssilla käsitellään myös sovellusten testaamista, konfigurointia ja suoritusympäristöjen hallintaa sekä NoSQL-tietokantoja.
+Jatkamme tämän osan backendin parissa. Osan ensimmäinen iso teema on backendin yksittö- ja integraatiotestaus. Testauksen jälkeen toteutetaan backendin logiikka käyttäjienhallintaan ja kirjautumiseen.
 
 **Tämän osan tehtävien deadline on maanantaina 18.2. klo 23:59**
 
