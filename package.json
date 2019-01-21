@@ -31,9 +31,16 @@
     "react-helmet": "^5.2.0"
   },
   "keywords": [
-    "gatsby"
+    "fullstack",
+    "course",
+    "helsingin yliopisto",
+    "tietojenkäsittelytieteen osasto",
+    "mooc",
+    "mooc.fi",
+    "full stack",
+    "web-sovelluskehitys"
   ],
-  "license": "MIT",
+  "license": "Creative Commons BY-NC-SA 3.0",
   "scripts": {
     "build": "gatsby build",
     "develop": "gatsby develop",
