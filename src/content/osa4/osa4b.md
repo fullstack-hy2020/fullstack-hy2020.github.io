@@ -6,8 +6,9 @@ letter: b
 
 <div class="content">
 
-
 ## API:n testaaminen
+
+Ruvetaan nyt tekemään testejä backendille. Koska backend ei sisällä monimutkaista laskentaa, ei yksittäisiä funktioita testaavia [yksikkötestejä](https://en.wikipedia.org/wiki/Unit_testing) oikeastaan kannata tehdä. Ainoa potentiaalinen yksikkötestattava asia olisi muistiinpanojen metodi _toJSON_. 
 
 Joissain tilanteissa voisi olla mielekästä suorittaa ainakin osa backendin testauksesta siten, että oikea tietokanta eristettäisiin testeistä ja korvattaisiin "valekomponentilla" eli mockilla. Eräs tähän sopiva ratkaisu olisi [mongo-mock](https://github.com/williamkapke/mongo-mock).
 
@@ -15,7 +16,7 @@ Koska sovelluksemme backend on koodiltaan kuitenkin suhteellisen yksinkertainen,
 
 ### test-ympäristö
 
-Edellisen osan luvussa [Sovelluksen vieminen tuotantoon](/osa3/#sovelluksen-vieminen-tuotantoon) mainitsimme, että kun sovellusta suoritetaan Herokussa, on se _production_-moodissa.
+Edellisen osan luvussa [Tietokantaa käyttävän version vieminen tuotantoon](/osa3/validointi_ja_es_lint#tietokantaa-kayttavan-version-vieminen-tuotantoon) mainitsimme, että kun sovellusta suoritetaan Herokussa, on se <i>production</i>-moodissa.
 
 Noden konventiona on määritellä projektin suoritusmoodi ympäristömuuttujan _NODE_ENV_ avulla. Lataammekin sovelluksen nykyisessä versiossa tiedostossa _.env_ määritellyt ympäristömuuttujat ainoastaan jos sovellus _ei ole_ production moodissa:
 

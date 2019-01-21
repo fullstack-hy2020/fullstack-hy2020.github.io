@@ -5,9 +5,7 @@ part: 5
 
 <div class="intro">
 
-Kurssilla tutustutaan Javascriptilla tapahtuvaan moderniin websovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST-rajapinnoissa.
-
-Kurssilla käsitellään myös sovellusten testaamista, konfigurointia ja suoritusympäristöjen hallintaa sekä NoSQL-tietokantoja.
+Tässä osassa palataan fronendin pariin, ensin tarkastellaan erilaisia tarjolla olevia mahdollisuuksia React-koodin testaamiseen. Osassa myös toteutetaan fronendiin tokeneihin perustuva autentikaatio, joka mahdolistaa käyttäjien kirjautumisen sovellukseen.
 
 **Tämän osan tehtävien deadline on maanantaina 25.2. klo 23:59**
 

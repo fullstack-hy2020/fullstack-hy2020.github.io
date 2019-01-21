@@ -24,7 +24,7 @@ module.exports = {
   },
   '4': {
     //a: 'Sovelluksen rakenne ja testauksen alkeet',
-    //b: 'API:n testaaminen, async/await',
+    //b: 'Backendin testaaminen ja async/await',
     //c: 'Käyttäjänhallinta',
     //d: 'Kirjautuminen',
   },

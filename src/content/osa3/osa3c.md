@@ -579,7 +579,7 @@ Muuta backendin kaikkien puhelintietojen näyttämistä siten, että se <i>hakee
 
 Varmista, että frontend toimii muutosten jälkeen.
 
-Tee tässä ja seuraavissa tehtävissä mongoose-spesifinen koodi omaan moduuliin samaan tapaan kuin luvussa [Tietokantamäärittelyjen eriyttäminen moduuliksi](http://localhost:8000/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#tietokantamaarittelyjen-eriyttaminen-moduuliksi).
+Tee tässä ja seuraavissa tehtävissä mongoose-spesifinen koodi omaan moduuliin samaan tapaan kuin luvussa [Tietokantamäärittelyjen eriyttäminen moduuliksi](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#tietokantamaarittelyjen-eriyttaminen-moduuliksi).
 
 #### 3.14: puhelinluettelo ja tietokanta, osa 2
 
