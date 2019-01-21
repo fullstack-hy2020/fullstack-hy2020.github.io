@@ -369,7 +369,7 @@ Eräs tapa muotoilla mongoosen palauttamat oliot haluttuun muotoon on [muokata](
 ```js
 noteSchema.set('toJSON', {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString(()
+    returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
     delete returnedObject.__v
   }
