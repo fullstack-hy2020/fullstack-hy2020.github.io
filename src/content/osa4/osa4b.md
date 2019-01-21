@@ -910,7 +910,7 @@ Javascriptin asynkroninen suoritusmalli aiheuttaakin siis helposti yllätyksiä 
 
 ### Tehtäviä
 
-**Huom:** materiaalissa käytetään muutamaan kertaan ekspektaatiota [toContain](https://facebook.github.io/jest/docs/en/expect.html#tocontainitem) tarkastettaessa, että jokin arvo on taulukossa. Kannattaa huomata, että metodi käyttää samuuden vertailuun ===-operaattoria ja olioiden kohdalla tämä ei ole useinkaan se mitä halutaan ja parempi vaihtoehto onkin [toContainEqual](https://facebook.github.io/jest/docs/en/expect.html#tocontainequalitem).
+**Huom:** materiaalissa käytetään muutamaan kertaan matcheria [toContain](https://facebook.github.io/jest/docs/en/expect.html#tocontainitem) tarkastettaessa, että jokin arvo on taulukossa. Kannattaa huomata, että metodi käyttää samuuden vertailuun ===-operaattoria ja olioiden kohdalla tämä ei ole useinkaan se mitä halutaan ja parempi vaihtoehto onkin [toContainEqual](https://facebook.github.io/jest/docs/en/expect.html#tocontainequalitem). Tosin mallivastauksissa ei vertailla kertaakaan olioita matcherien avulla, joten ilmankin selviää varsin hyvin.
 
 **Varoitus:** Jos huomaat kirjoittavasi sekaisin async/awaitia ja <i>then</i>-kutsuja, on 99% varmaa, että teet jotain väärin. Käytä siis jompaa kumpaa tapaa, älä missään tapauksessa "varalta" molempia.
 
@@ -1127,52 +1127,21 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 ### Tehtäviä
 
-#### 4.12* blogilistan laajennus, osa 1
-
-Refaktoroi projektin testit siten, että ne eivät enää ole riippuvaisia siitä, että HTTP GET -operaatioiden testit suoritetaan ennen uusien blogien lisäämisen testaamista. Määrittele myös sopivia apumetodeja, joiden avulla saat poistettua testeistä copypastea:
-
-Testit voivat tämän tehtävän jälkeen noudattaa esim. osan 4 luvun [Testien refaktorointi](/osa4#testien-refaktorointi) tyyliä
-
-```js
-const helper = require('./test_helper')
-
-// ...
-
-test('a valid blog can be added', async () => {
-  const newBlog = {
-    // ....
-  }
-
-  const blogsBefore = await helper.blogsInDb()
-
-  await api
-    .post('/api/blogs')
-    .send(newBlog)
-    .expect(201)
-    .expect('Content-Type', /application\/json/)
-
-  const blogsAfter = await helper.blogsInDb()
-
-  expect(blogsAfter.length).toBe(blogsBefore.length+1)
-  expect(blogsAfter).toContainEqual(newBlog)
-})
-```
-
-#### 4.13 blogilistan laajennus, osa 2
+#### 4.13 blogilistan laajennus, osa 1
 
 Toteuta sovellukseen mahdollisuus yksittäisen blogin poistoon.
 
-Käytä async/awaitia. Noudata operaation HTTP-rajapinnan suhteen [RESTful](/osa3#rest)-käytänteitä.
+Käytä async/awaitia. Noudata operaation HTTP-rajapinnan suhteen [RESTful](/osa3/node_js_ja_express#rest)-käytänteitä.
 
 Saat toteuttaa ominaisuudelle testit jos haluat. Jos et, varmista ominaisuuden toimivuus esim. Postmanilla.
 
-#### 4.14* blogilistan laajennus, osa 3
+#### 4.14* blogilistan laajennus, osa 2
 
 Toteuta sovellukseen mahdollisuus yksittäisen blogin muokkaamiseen.
 
 Käytä async/awaitia.
 
-Tarvitsemme muokkausta lähinnä <i>likejen</i> lukumäärän päivittämiseen. Toiminnallisuuden voi toteuttaa samaan tapaan kuin muistiinpanon päivittäminen toteutettiin [osassa 3](/osa3#loput-operaatiot).
+Tarvitsemme muokkausta lähinnä <i>likejen</i> lukumäärän päivittämiseen. Toiminnallisuuden voi toteuttaa samaan tapaan kuin muistiinpanon päivittäminen toteutettiin [osassa 3](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#muut-operaatiot).
 
 Saat toteuttaa ominaisuudelle testit jos haluat. Jos et, varmista ominaisuuden toimivuus esim. Postmanilla.
 
