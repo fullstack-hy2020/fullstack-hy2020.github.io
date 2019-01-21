@@ -160,13 +160,13 @@ const handleLeftClick = () => {
 
 Sovellus näyttää toimivan. Reactissa <i>ei kuitenkaan ole sallittua muuttaa tilaa suoraan</i>, sillä voi olla arvaamattomat seuraukset. Tilan muutos tulee aina tehdä asettamalla uudeksi tilaksi vanhan perusteella tehty kopio!
 
-Kaikien tilan pitäminen yhdessä oliossa on tämän sovelluksen kannalta huono ratkaisu, etuja siinä ei juuri ole, mutta sovellus monimutkaisuu merkittävästi. Onkin ehdottomasti parempi ratkaisu tallettaa nappien klikkaukset erillisiin tilan paloihin.
+Kaiken tilan pitäminen yhdessä oliossa on tämän sovelluksen kannalta huono ratkaisu; etuja siinä ei juuri ole, mutta sovellus monimutkaistuu merkittävästi. Onkin ehdottomasti parempi ratkaisu tallettaa nappien klikkaukset erillisiin tilan paloihin.
 
 On kuitenkin tilanteita, joissa jokin osa tilaa kannattaa pitää monimutkaisemman tietorakenteen sisällä. [Reactin dokumentaatiossa](https://reactjs.org/docs/hooks-faq.html#should-i-use-one-or-many-state-variables) on hieman ohjeistusta aiheeseen liityen.
 
 ### Taulukon käsittelyä
 
-Tehdään sovellukseen vielä laajennus, lisätään sovelluken tilaan taulukko _allClicks_ joka muistaa kaikki näppäimenpainallukset.
+Tehdään sovellukseen vielä laajennus, lisätään sovelluksen tilaan taulukko _allClicks_ joka muistaa kaikki näppäimenpainallukset.
 
 ```js
 const App = (props) => {
@@ -262,7 +262,7 @@ const History = (props) => {
   if (props.allClicks.length === 0) {
     return (
       <div>
-        sovellusta käytetään nappeja painelemalla<
+        sovellusta käytetään nappeja painelemalla
       </div>
     )
   }
@@ -357,7 +357,7 @@ const App = (props) => {
         {left}
         // highlight-start
         <Button handleClick={handleLeftClick} text='vasen' />
-        <Button handleClick={handleLeftClick} text='oikea' />
+        <Button handleClick={handleRightClick} text='oikea' />
         // highlight-end
         {right}
         <History allClicks={allClicks} />
