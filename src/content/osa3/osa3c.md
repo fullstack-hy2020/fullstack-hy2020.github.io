@@ -369,12 +369,14 @@ Eräs tapa muotoilla mongoosen palauttamat oliot haluttuun muotoon on [muokata](
 ```js
 noteSchema.set('toJSON', {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id
+    returnedObject.id = returnedObject._id.toString(()
     delete returnedObject._id
     delete returnedObject.__v
   }
 })
 ```
+
+Vaikka mongoose-olioiden kenttä <i>_id</i> näyttääkin merkkijonolta, se on todellisuudessa olio. Määrittelemämme metodi _toJSON_ muuttaa sen merkkijonoksi kaiken varalta. Jos emme tekisi muutosta, siitä aiheutuisi ylimääräistä harmia testien yhteydessä.
 
 Palautetaan HTTP-pyynnön vastauksena _toJSON_-metodin avulla muotoiltuja oliota:
 

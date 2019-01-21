@@ -24,12 +24,12 @@ module.exports = {
   },
   '4': {
     a: 'Sovelluksen rakenne ja testauksen alkeet',
-    c: 'Backendin testaaminen',
-    d: 'Käyttäjänhallinta',
-    e: 'Kirjautuminen',
+    //c: 'Backendin testaaminen',
+    //d: 'Käyttäjänhallinta',
+    //e: 'Kirjautuminen',
   },
   '5': {
-    a: 'React',
+    //a: 'React',
     //b: 'Frontendin testauksen alkeet',
     // c: 'Redux',
     // d: 'React+Redux',
