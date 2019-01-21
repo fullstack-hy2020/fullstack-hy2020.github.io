@@ -44,7 +44,7 @@ Viime vuoden kurssin alun kokemusten perusteella tapahtumien käsittelu on osoit
 
 Edellisen osan loppussa oleva kertaava osa [tapahtumankäsittely revisited](/osa1#tapahtumankäsittely-revisited) kannattaa käydä läpi jos osaaminen on vielä häilyvällä pohjalla.
 
-Myös tapahtumankäsittelijöiden välittäminen komponentin <i>App</i> alikomponenteille on herättänyt ilmaan kysymyksiä, pieni kertaus aiheeseen [täällä](http://localhost:8000/osa1/monimutkaisempi_tila_reactin_debuggaus#tapahtumankasittelijan-vieminen-alikomponenttiin).
+Myös tapahtumankäsittelijöiden välittäminen komponentin <i>App</i> alikomponenteille on herättänyt ilmaan kysymyksiä, pieni kertaus aiheeseen [täällä](/osa1/monimutkaisempi_tila_reactin_debuggaus#tapahtumankasittelijan-vieminen-alikomponenttiin).
 
 
 ### Protip: Visual Studio Coden snippetit
@@ -395,7 +395,7 @@ const App = ({ notes }) => { // highlight-line
 }
 ```
 
-Jos unohdit mitä destrukturointi tarkottaa ja miten se toimii, kertaa [täältä](http://localhost:8000/osa1/komponentin_tila_ja_tapahtumankasittely#destrukturointi).
+Jos unohdit mitä destrukturointi tarkottaa ja miten se toimii, kertaa [täältä](/osa1/komponentin_tila_ja_tapahtumankasittely#destrukturointi).
 
 Erotetaan yksittäisen muistiinpanon esittäminen oman komponenttinsa <i>Note</i> vastuulle:
 

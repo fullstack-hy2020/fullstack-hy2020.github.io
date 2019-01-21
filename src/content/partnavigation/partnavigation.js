@@ -23,10 +23,10 @@ module.exports = {
     d: 'Validointi ja ESLint',
   },
   '4': {
-    a: 'Sovelluksen rakenne ja testauksen alkeet',
-    b: 'API:n testaaminen, async/await',
-    c: 'Käyttäjänhallinta',
-    d: 'Kirjautuminen',
+    //a: 'Sovelluksen rakenne ja testauksen alkeet',
+    //b: 'API:n testaaminen, async/await',
+    //c: 'Käyttäjänhallinta',
+    //d: 'Kirjautuminen',
   },
   '5': {
     // a: 'React',
