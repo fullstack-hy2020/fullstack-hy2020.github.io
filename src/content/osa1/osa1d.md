@@ -262,7 +262,7 @@ const History = (props) => {
   if (props.allClicks.length === 0) {
     return (
       <div>
-        sovellusta käytetään nappeja painelemalla<
+        sovellusta käytetään nappeja painelemalla
       </div>
     )
   }
@@ -301,7 +301,7 @@ ja muussa tapauksessa näppäilyhistorian:
 
 ```js
 <div>
-  näppäilyhistoria: {this.state.kaikki.join(' ')}
+  näppäilyhistoria: {props.allClicks.join(' ')}
 </div>
 ```
 
