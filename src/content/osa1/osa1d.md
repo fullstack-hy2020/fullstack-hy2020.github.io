@@ -301,7 +301,7 @@ ja muussa tapauksessa näppäilyhistorian:
 
 ```js
 <div>
-  näppäilyhistoria: {this.state.kaikki.join(' ')}
+  näppäilyhistoria: {props.allClicks.join(' ')}
 </div>
 ```
 
