@@ -10,7 +10,7 @@ Jatketaan [osassa 3](/osa3) tehdyn muistiinpanosovelluksen backendin kehittämis
 
 ### Sovelluksen rakenne
 
-Ennen osan ensimmäistä isoa teemaa eli testaamista, muutetaan sovelluksen rakennetta noudattamaan paremmin Noden [parhaita käytänteiä](https://github.com/i0natan/nodebestpractices/tree/master/sections/projectstructre).
+Ennen osan ensimmäistä isoa teemaa eli testaamista, muutetaan sovelluksen rakennetta noudattamaan paremmin Noden [parhaita käytänteitä](https://github.com/i0natan/nodebestpractices/tree/master/sections/projectstructre).
 
 Seuraavassa läpikäytävien muutosten jälkeen sovelluksemme hakemistorakenne näyttää seuraavalta
 
