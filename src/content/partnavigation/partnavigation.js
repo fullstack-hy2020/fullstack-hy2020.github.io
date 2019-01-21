@@ -24,9 +24,9 @@ module.exports = {
   },
   '4': {
     a: 'Sovelluksen rakenne ja testauksen alkeet',
-    //c: 'Backendin testaaminen',
-    //d: 'Käyttäjänhallinta',
-    //e: 'Kirjautuminen',
+    b: 'Backendin testaaminen',
+    //c: 'Käyttäjänhallinta',
+    //d: 'Kirjautuminen',
   },
   '5': {
     //a: 'React',
