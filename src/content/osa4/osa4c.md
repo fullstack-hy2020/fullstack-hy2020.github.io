@@ -8,7 +8,7 @@ letter: c
 
 Haluamme toteuttaa sovellukseemme käyttäjien hallinnan. Käyttäjät tulee tallettaa tietokantaan ja jokaisesta muistiinpanosta tulee tietää sen luonut käyttäjä. Muistiinpanojen poisto ja editointi tulee olla sallittua ainoastaan muistiinpanot tehneelle käyttäjälle.
 
-Aloitetaan lisäämällä tietokantaan tieto käyttäjistä. Käyttäjän (User) ja muistiinpanojen (Note) välillä on yhden suhde moneen -yhteys:
+Aloitetaan lisäämällä tietokantaan tieto käyttäjistä. Käyttäjän (<i>User</i>) ja muistiinpanojen (<i>Note</i>) välillä on yhden suhde moneen -yhteys:
 
 ![](https://yuml.me/a187045b.png)
 
@@ -16,19 +16,19 @@ Relaatiotietokantoja käytettäessä ratkaisua ei tarvitsisi juuri miettiä. Mol
 
 Dokumenttitietokantoja käytettäessä tilanne on kuitenkin toinen, erilaisia tapoja mallintaa tilanne on useita.
 
-Olemassaoleva ratkaisumme tallentaa jokaisen luodun muistiinpanon tietokantaan _notes_-kokoelmaan eli _collectioniin_. Jos emme halua muuttaa tätä, lienee luontevinta tallettaa käyttäjät omaan kokoelmaansa, esim. nimeltään _users_.
+Olemassaoleva ratkaisumme tallentaa jokaisen luodun muistiinpanon tietokantaan <i>notes</i>-kokoelmaan eli <i>collectioniin</i>. Jos emme halua muuttaa tätä, lienee luontevinta tallettaa käyttäjät omaan kokoelmaansa, esim. nimeltään <i>users</i>.
 
 Mongossa voidaan kaikkien dokumenttitietokantojen tapaan käyttää olioiden id:itä viittaamaan muissa kokoelmissa talletettaviin dokumentteihin, vastaavasti kuten viiteavaimia käytetään relaatiotietokannoissa.
 
-Dokumenttitietokannat kuten Mongo eivät kuitenkaan tue relaatiotietokantojen _liitoskyselyitä_ vastaavaa toiminnallisuutta, joka mahdollistaisi useaan kokoelmaan kohdistuvan tietokantahaun (tämä ei tarkalleen ottaen enää välttämättä pidä paikkaansa, sillä versiosta 3.2. alkaen Mongo on tukenut useampaan kokoelmaan kohdistuvia [lookup-aggregaattikyselyitä](https://docs.mongodb.com/manual/reference/operator/aggregation/lookup/), emme kuitenkaan käsittele niitä kurssilla).
+Dokumenttitietokannat kuten Mongo eivät kuitenkaan tue relaatiotietokantojen <i>liitoskyselyitä</i> vastaavaa toiminnallisuutta, joka mahdollistaisi useaan kokoelmaan kohdistuvan tietokantahaun. Tämä ei tarkalleen ottaen enää välttämättä pidä paikkaansa, sillä versiosta 3.2. alkaen Mongo on tukenut useampaan kokoelmaan kohdistuvia [lookup-aggregaattikyselyitä](https://docs.mongodb.com/manual/reference/operator/aggregation/lookup/), emme kuitenkaan käsittele niitä kurssilla.
 
 Jos tarvitsemme liitoskyselyitä vastaavaa toiminnallisuutta, tulee se toteuttaa sovelluksen tasolla, eli käytännössä tekemällä tietokantaan useita kyselyitä. Tietyissä tilanteissa mongoose-kirjasto osaa hoitaa liitosten tekemisen, jolloin kysely näyttää mongoosen käyttäjälle toimivan liitoskyselyn tapaan. Mongoose tekee kuitenkin näissä tapauksissa taustalla useamman kyselyn tietokantaan.
 
 ### Viitteet kokoelmien välillä
 
-Jos käyttäisimme relaatiotietokantaa, muistiinpano sisältäisi _viiteavaimen_ sen tehneeseen käyttäjään. Dokumenttitietokannassa voidaan toimia samoin.
+Jos käyttäisimme relaatiotietokantaa, muistiinpano sisältäisi <i>viiteavaimen</i> sen tehneeseen käyttäjään. Dokumenttitietokannassa voidaan toimia samoin.
 
-Oletetaan että kokoelmassa _users_ on kaksi käyttäjää:
+Oletetaan että kokoelmassa <i>users</i> on kaksi käyttäjää:
 
 ```js
 [
@@ -43,7 +43,7 @@ Oletetaan että kokoelmassa _users_ on kaksi käyttäjää:
 ];
 ```
 
-Kokoelmassa _notes_ on kolme muistiinpanoa, kaikkien kenttä _user_ viittaa _users_-kentässä olevaan käyttäjään:
+Kokoelmassa <i>notes</i> on kolme muistiinpanoa, kaikkien kenttä <i>user</i> viittaa <i>users</i>-kentässä olevaan käyttäjään:
 
 ```js
 [
@@ -68,7 +68,7 @@ Kokoelmassa _notes_ on kolme muistiinpanoa, kaikkien kenttä _user_ viittaa _use
 ];
 ```
 
-Mikään ei kuitenkaan määrää dokumenttitietokannoissa, että viitteet on talletettava muistiinpanoihin, ne voivat olla _myös_ (tai ainoastaan) käyttäjien yhteydessä:
+Mikään ei kuitenkaan määrää dokumenttitietokannoissa, että viitteet on talletettava muistiinpanoihin, ne voivat olla <i>myös</i> (tai ainoastaan) käyttäjien yhteydessä:
 
 ```js
 [
@@ -85,7 +85,7 @@ Mikään ei kuitenkaan määrää dokumenttitietokannoissa, että viitteet on ta
 ];
 ```
 
-Koska käyttäjiin liittyy potentiaalisesti useita muistiinpanoja, niiden id:t talletetaan käyttäjän kentässä _notes_ olevaan taulukkoon.
+Koska käyttäjiin liittyy potentiaalisesti useita muistiinpanoja, niiden id:t talletetaan käyttäjän kentässä <i>notes</i> olevaan taulukkoon.
 
 Dokumenttitietokannat tarjoavat myös radikaalisti erilaisen tavan datan organisointiin; joissain tilanteissa saattaisi olla mielekästä tallettaa muistiinpanot kokonaisuudessa käyttäjien sisälle:
 
@@ -127,45 +127,74 @@ Hieman paradoksaalisesti tietokannan tasolla skeematon Mongo edellyttääkin pro
 
 ### Käyttäjien mongoose-skeema
 
-Päätetään tallettaa käyttäjän yhteyteen myös tieto käyttäjän luomista muistiinpanoista, eli käytännössä muistiinpanojen id:t. Määritellään käyttäjää edustava model tiedostoon _models/user:_
+Päätetään tallettaa käyttäjän yhteyteen myös tieto käyttäjän luomista muistiinpanoista, eli käytännössä muistiinpanojen id:t. Määritellään käyttäjää edustava model tiedostoon <i>models/user.js</i>
 
 ```js
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
-const User = mongoose.model('User', {
+const userSchema = mongoose.Schema({
   username: String,
   name: String,
   passwordHash: String,
-  notes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Note' }],
-});
+  notes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Note'
+    }
+  ],
+})
 
-module.exports = User;
+userSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString()
+    delete returnedObject._id
+    delete returnedObject.__v
+    // suodatetaan passwordHash eli salasanan tiiviste pois näkyviltä
+    delete returnedObject.passwordHash
+  }
+})
+
+const User = mongoose.model('User', userSchema)
+
+module.exports = User
 ```
 
 Muistiinpanojen id:t on talletettu käyttäjien sisälle taulukkona mongo-id:itä. Määrittely on seuraava
 
 ```js
-{ type: mongoose.Schema.Types.ObjectId, ref: 'Note' }
+{
+  type: mongoose.Schema.Types.ObjectId,
+  ref: 'Note'
+}
 ```
 
-kentän tyyppi on _ObjectId_ joka viittaa _Note_-tyyppisiin dokumentteihin. Mongo ei itsessään tiedä mitään siitä, että kyse on kentästä joka viittaa nimenomaan muistiinpanoihin, kyseessä onkin puhtaasti mongoosen syntaksi.
+kentän tyyppi on <i>ObjectId</i> joka viittaa <i>note</i>-tyyppisiin dokumentteihin. Mongo ei itsessään tiedä mitään siitä, että kyse on kentästä, joka viittaa nimenomaan muistiinpanoihin, kyseessä onkin puhtaasti mongoosen syntaksi.
 
-Laajennetaan tiedostossa _model/note.js_ olevaa muistiinpanon skeemaa siten, että myös muistiinpanossa on tieto sen luoneesta käyttäjästä
+Laajennetaan tiedostossa <i>model/note.js</i> olevaa muistiinpanon skeemaa siten, että myös muistiinpanossa on tieto sen luoneesta käyttäjästä
 
 ```js
-const Note = mongoose.model('Note', {
-  content: String,
+const noteSchema = new mongoose.Schema({
+  content: {
+    type: String,
+    required: true,
+    minlength: 5
+  },
   date: Date,
   important: Boolean,
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-});
+  // highlight-start
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
+  // highlight-end
+})
 ```
 
-Relaatiotietokantojen käytänteistä poiketen _viitteet on nyt talletettu molempiin dokumentteihin_, muistiinpano viittaa sen luoneeseen käyttäjään ja käyttäjä sisältää taulukollisen viitteitä sen luomiin muistiinpanoihin.
+Relaatiotietokantojen käytänteistä poiketen <i>viitteet on nyt talletettu molempiin dokumentteihin</i>, muistiinpano viittaa sen luoneeseen käyttäjään ja käyttäjä sisältää taulukollisen viitteitä sen luomiin muistiinpanoihin.
 
 ### Käyttäjien luominen
 
-Toteutetaan seuraavaksi route käyttäjien luomista varten. Käyttäjällä on siis _username_ jonka täytyy olla järjestelmässä yksikäsitteinen, nimi eli _name_ sekä _passwordHash_, eli salasanasta [yksisuuntaisen funktion](https://en.wikipedia.org/wiki/Cryptographic_hash_function) perusteella laskettu tunniste. Salasanojahan ei ole koskaan viisasta tallentaa tietokantaan selväsanaisena!
+Toteutetaan seuraavaksi route käyttäjien luomista varten. Käyttäjällä on siis <i>username</i> jonka täytyy olla järjestelmässä yksikäsitteinen, nimi eli <i>name</i> sekä <i>passwordHash</i>, eli salasanasta [yksisuuntaisen funktion](https://en.wikipedia.org/wiki/Cryptographic_hash_function) perusteella laskettu tunniste. Salasanojahan ei ole koskaan viisasta tallentaa tietokantaan selväsanaisena!
 
 Asennetaan salasanojen hashaamiseen käyttämämme [bcrypt](https://github.com/kelektiv/node.bcrypt.js)-kirjasto:
 
@@ -173,51 +202,50 @@ Asennetaan salasanojen hashaamiseen käyttämämme [bcrypt](https://github.com/k
 npm install bcrypt --save
 ```
 
-Käyttäjien luominen tapahtuu osassa 3 läpikäytyjä [RESTful](/osa3#rest)-periaatteita seuraten tekemällä HTTP POST -pyyntö polkuun _users_.
+Käyttäjien luominen tapahtuu osassa 3 läpikäytyjä [RESTful](/osa3/node_js_ja_express#rest)-periaatteita seuraten tekemällä HTTP POST -pyyntö polkuun <i>users</i>.
 
-Määritellään käyttäjienhallintaa varten oma _router_ tiedostoon _controllers/users.js_, ja liitetään se _index.js_-tiedostossa huolehtimaan polulle _/api/users/_ tulevista pyynnöistä:
+Määritellään käyttäjienhallintaa varten oma <i>router</i> tiedostoon <i>controllers/users.js</i>, ja liitetään se <i>app.js</i>-tiedostossa huolehtimaan polulle <i>/api/users/</i> tulevista pyynnöistä:
 
 ```js
-const usersRouter = require('./controllers/users');
+const usersRouter = require('./controllers/users')
 
 // ...
 
-app.use('/api/users', usersRouter);
+app.use('/api/users', usersRouter)
 ```
 
 Routerin alustava sisältö on seuraava:
 
 ```js
-const bcrypt = require('bcrypt');
-const usersRouter = require('express').Router();
-const User = require('../models/user');
+const bcrypt = require('bcrypt')
+const usersRouter = require('express').Router()
+const User = require('../models/user')
 
-usersRouter.post('/', async (request, response) => {
+usersRouter.post('/', async (request, response, next) => {
   try {
-    const body = request.body;
+    const body = request.body
 
-    const saltRounds = 10;
-    const passwordHash = await bcrypt.hash(body.password, saltRounds);
+    const saltRounds = 10
+    const passwordHash = await bcrypt.hash(body.password, saltRounds)
 
     const user = new User({
       username: body.username,
       name: body.name,
       passwordHash,
-    });
+    })
 
-    const savedUser = await user.save();
+    const savedUser = await user.save()
 
-    response.json(savedUser);
+    response.json(savedUser)
   } catch (exception) {
-    console.log(exception);
-    response.status(500).json({ error: 'something went wrong...' });
+    next(exception)
   }
-});
+})
 
-module.exports = usersRouter;
+module.exports = usersRouter
 ```
 
-Tietokantaan siis _ei_ talleteta pyynnön mukana tulevaa salasanaa, vaan funktion _bcrypt.hash_ avulla laskettu _hash_.
+Tietokantaan siis <i>ei</i> talleteta pyynnön mukana tulevaa salasanaa, vaan funktion _bcrypt.hash_ avulla laskettu <i>hash</i>.
 
 Materiaalin tilamäärä ei valitettavasti riitä käsittelemään sen tarkemmin salasanojen [tallennuksen perusteita](https://codahale.com/how-to-safely-store-a-password/), esim. mitä maaginen luku 10 muuttujan [saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds) arvona tarkoittaa. Lue linkkien takaa lisää.
 
@@ -230,368 +258,270 @@ Pienellä vaivalla voimme tehdä automaattisesti suoritettavat testit, jotka hel
 Alustava testi näyttää seuraavalta:
 
 ```js
-const User = require('../models/user');
-const {
-  format,
-  initialNotes,
-  nonExistingId,
-  notesInDb,
-  usersInDb,
-} = require('./test_helper');
+const User = require('../models/user')
 
 //...
 
-describe.only('when there is initially one user at db', async () => {
-  beforeAll(async () => {
-    await User.remove({});
-    const user = new User({ username: 'root', password: 'sekret' });
-    await user.save();
-  });
+describe('when there is initially one user at db', async () => {
+  beforeEach(async () => {
+    await User.remove({})
+    const user = new User({ username: 'root', password: 'sekret' })
+    await user.save()
+  })
 
-  test('POST /api/users succeeds with a fresh username', async () => {
-    const usersBeforeOperation = await usersInDb();
+  test('creation succeeds with a fresh username', async () => {
+    const usersAtStart = await helper.usersInDb()
 
     const newUser = {
       username: 'mluukkai',
       name: 'Matti Luukkainen',
       password: 'salainen',
-    };
+    }
 
     await api
       .post('/api/users')
       .send(newUser)
       .expect(200)
-      .expect('Content-Type', /application\/json/);
+      .expect('Content-Type', /application\/json/)
 
-    const usersAfterOperation = await usersInDb();
-    expect(usersAfterOperation.length).toBe(usersBeforeOperation.length + 1);
-    const usernames = usersAfterOperation.map(u => u.username);
-    expect(usernames).toContain(newUser.username);
-  });
-});
+    const usersAtEnd = await helper.usersInDb()
+    expect(usersAtEnd.length).toBe(usersAtStart.length + 1)
+
+    const usernames = usersAtEnd.map(u => u.username)
+    expect(usernames).toContain(newUser.username)
+  })
+})
 ```
 
-Koska testi on määritelty [describe.only](https://facebook.github.io/jest/docs/en/api.html#describeonlyname-fn)-lohkoksi, suorittaa _Jest_ ainoastaan lohkon sisälle määritellyt testit. Tämä on alkuvaiheessa hyödyllistä, sillä ennen kuin uusia käyttäjiä lisäävä toiminnallisuus on valmis, kannattaa suorittaa testeistä ainoastaan kyseistä toiminnallisuutta tutkivat testitapaukset.
-
-Testit käyttävät myös tiedostossa _tests/test_helper.js_ määriteltyä apufunktiota _usersInDb()_ tarkastamaan lisäysoperaation jälkeisen tietokannan tilan:
+Testit käyttävät myös tiedostossa <i>tests/test_helper.js</i> määriteltyä apufunktiota <i>usersInDb()</i> tarkastamaan lisäysoperaation jälkeisen tietokannan tilan:
 
 ```js
-const User = require('../models/user');
+const User = require('../models/user')
 
 // ...
 
 const usersInDb = async () => {
-  const users = await User.find({});
-  return users;
-};
+  const users = await User.find({})
+  return users.map(u => u.toJSON())
+}
 
 module.exports = {
   initialNotes,
-  format,
   nonExistingId,
   notesInDb,
   usersInDb,
-};
+}
 ```
 
-Lohkon _beforeAll_ lisää kantaan käyttäjän, jonka username on _root_. Voimmekin tehdä uuden testin, jolla varmistetaan, että samalla käyttäjätunnuksella ei voi luoda uutta käyttäjää:
+Lohkon <i>beforeEach</i> lisää kantaan käyttäjän, jonka username on <i>root</i>. Voimmekin tehdä uuden testin, jolla varmistetaan, että samalla käyttäjätunnuksella ei voi luoda uutta käyttäjää:
 
 ```js
-test('POST /api/users fails with proper statuscode and message if username already taken', async () => {
-  const usersBeforeOperation = await usersInDb();
+describe('when there is initially one user at db', async () => {
+  // ...
 
-  const newUser = {
-    username: 'root',
-    name: 'Superuser',
-    password: 'salainen',
-  };
+  test('creation fails with proper statuscode and message if username already taken', async () => {
+    const usersAtStart = await helper.usersInDb()
 
-  const result = await api
-    .post('/api/users')
-    .send(newUser)
-    .expect(400)
-    .expect('Content-Type', /application\/json/);
+    const newUser = {
+      username: 'root',
+      name: 'Superuser',
+      password: 'salainen',
+    }
 
-  expect(result.body).toEqual({ error: 'username must be unique' });
+    const result = await api
+      .post('/api/users')
+      .send(newUser)
+      .expect(400)
+      .expect('Content-Type', /application\/json/)
 
-  const usersAfterOperation = await usersInDb();
-  expect(usersAfterOperation.length).toBe(usersBeforeOperation.length);
-});
+    expect(result.body.error).toContain('`username` to be unique')
+
+    const usersAtEnd = await helper.usersInDb()
+    expect(usersAtEnd.length).toBe(usersAtStart.length)
+  })
+})
 ```
 
 Testi ei tietenkään mene läpi tässä vaiheessa. Toimimme nyt oleellisesti [TDD:n eli test driven developmentin](https://en.wikipedia.org/wiki/Test-driven_development) hengessä, uuden ominaisuuden testi on kirjoitettu ennen ominaisuuden ohjelmointia.
 
-Koodi laajenee seuraavasti:
+Hoidetaan uniikkiuden tarkastaminen mongoosen validoinnin avulla. Kuten edellisen osan tehtävässä [3.19](/osa3/validointi_ja_es_lint#tehtavia) mainittiin, mongoose ei tarjoa valmista validaattoria kentän uniikkiuden tarkastamiseen. Tilanteeseen ratkaisun tarjoaa npm-pakettina asennettava
+[mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator). Suoritetaan asennus
 
-```js
-usersRouter.post('/', async (request, response) => {
-  try {
-    const body = request.body
-
-    const existingUser = await User.find({username: body.username})
-    if (existingUser.length>0) {
-      return response.status(400).json({ error: 'username must be unique' })
-    }
-
-    //...
-
-  }
-})
+```bash
+npm install --save mongoose-unique-validator
 ```
 
-Eli haetaan tietokannasta ne user-dokumentit, joiden _username_-kentän arvo on sama kuin pyynnössä oleva. Jos sellainen user-dokumentti löytyy, vastataan pyyntöön statuskoodilla _400 bad request_ ja kerrotaan syy ongelmaan.
+Käyttäjän skeemaa tiedostossa <i>models/user.js</i> tulee muuttaa seuraavasti seuraavasti:
+
+```js
+const mongoose = require('mongoose')
+const uniqueValidator = require('mongoose-unique-validator') // highlight-line
+
+const userSchema = mongoose.Schema({
+  username: {
+    type: String,
+    unique: true  // highlight-line
+  },
+  name: String,
+  passwordHash: String,
+  notes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Note'
+    }
+  ],
+})
+
+userSchema.plugin(uniqueValidator) // highlight-line
+
+// ...
+```
 
 Voisimme toteuttaa käyttäjien luomisen yhteyteen myös muita tarkistuksia, esim. onko käyttäjätunnus tarpeeksi pitkä, koostuuko se sallituista merkeistä ja onko salasana tarpeeksi hyvä. Jätämme ne kuitenkin harjoitustehtäväksi.
 
-Ennen kuin menemme eteenpäin, lisätään alustava versio joka palauttaa kaikki käyttäjät palauttavasta käsittelijäfunktiosta:
+
+Ennen kuin menemme eteenpäin, lisätään sovellukseen alustava versio palauttaa kaikki käyttäjät palauttavasta käsittelijäfunktiosta:
 
 ```js
-const formatUser = user => {
-  return {
-    id: user.id,
-    username: user.username,
-    name: user.name,
-    notes: user.notes,
-  };
-};
-
 usersRouter.get('/', async (request, response) => {
-  const users = await User.find({});
-  response.json(users.map(formatUser));
-});
+  const users = await User.find({})
+  response.json(users.map(formatUser))
+})
 ```
 
 Lista näyttää seuraavalta
 
-![](../images/4/1.png)
+![](../images/4/9.png)
 
-### Formatointifunktioiden siirto modelien märittelyn yhteyteen
-
-Kuten muistinpanojenkin tapauksessa, olemme myös nyt määritellet apufunktion _formatUser_, joka muodostaa tietokannan palauttamista _user_-olioista selaimelle lähetettävän muodon, joista on mm. poistettu kenttä _passwordHash_.
-
-Formatointifunktio on nyt sijoitettu routejen määrittelyn yhteyteen. Paikka ei välttämättä ole optimaalinen ja päätetäänkin viedä formatointi _User_-skeeman vastuulle, sen [staattiseksi metodiksi](http://mongoosejs.com/docs/guide.html#statics).
-
-Tehdään seuraava muutos tiedostoon _models/user.js_:
-
-```js
-const mongoose = require('mongoose');
-
-const userSchema = new mongoose.Schema({
-  username: String,
-  name: String,
-  passwordHash: String,
-  notes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Note' }],
-});
-
-userSchema.statics.format = user => {
-  return {
-    id: user.id,
-    username: user.username,
-    name: user.name,
-    notes: user.notes,
-  };
-};
-
-const User = mongoose.model('User', userSchema);
-
-module.exports = User;
-```
-
-Näin määriteltyä metodia kutsutaan _User.format(user)_. Voimme muuttaa tiedostossa _controllers/users.js_ olevat routet seuraavaan muotoon:
-
-```js
-usersRouter.get('/', async (request, response) => {
-  const users = await User.find({});
-  response.json(users.map(User.format));
-});
-
-usersRouter.post('/', async (request, response) => {
-  try {
-    // ...
-    const savedUser = await user.save();
-
-    response.json(User.format(savedUser));
-  } catch (exception) {
-    // ...
-  }
-});
-```
-
-Formatointifunktion määritteleminen skeeman määrittelyn yhteydessä on sikäli luontevaa, että jos skeemaan tulee muutoksia, on formatointifunktio samassa tiedostossa ja todennäköisyys sen päivittämisen unohtamiselle pienenee.
-
-Tehdään sama muutos muistiinpanojen formatointiin, eli muutetaan _models/note.js_ muotoon
-
-```js
-const mongoose = require('mongoose');
-
-const noteSchema = new mongoose.Schema({
-  content: String,
-  date: Date,
-  important: Boolean,
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-});
-
-noteSchema.statics.format = note => {
-  return {
-    id: note._id,
-    content: note.content,
-    date: note.date,
-    important: note.important,
-  };
-};
-
-const Note = mongoose.model('Note', noteSchema);
-
-module.exports = Note;
-```
-
-ja muutetaan tiedostosta _controllers/notes.js_ metotodikutsut _formatNote(note)_ muotoon _Note.format(note)_ ja kutsu _notes.map(formatNote)_ muotoon _notes.map(Note.format)_
-
-Testien suoritus varmistaa, että sovelluksemme ei hajonnut refaktoroinnin myötä.
-
-Pääsemme nyt eroon myös testien yhteyteen määritellystä muistiinpanoja formatoivasta apumetodista _format_, sillä myös testeissä kannattaa hyödyntää funktiota _Note.format_.
-
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part3-notes-backend/tree/part4-5), tagissa _part4-5_.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part4-6), branchissä <i>part4-6</i>.
 
 ### Muistiinpanon luominen
 
 Muistiinpanot luovaa koodia on nyt mukautettava siten, että uusi muistiinpano tulee liitetyksi sen luoneeseen käyttäjään.
 
-Laajennetaan ensin olemassaolevaa toteutusta siten, että tieto muistiinpanon luovan käyttäjän id:stä lähetetään pyynnön rungossa kentän _userId_ arvona:
+Laajennetaan ensin olemassaolevaa toteutusta siten, että tieto muistiinpanon luovan käyttäjän id:stä lähetetään pyynnön rungossa kentän <i>userId</i> arvona:
 
 ```js
-const User = require('../models/user');
+const User = require('../models/user')
 
 //...
 
-notesRouter.post('/', async (request, response) => {
+notesRouter.post('/', async (request, response, next) => {
+  const body = request.body
+
+  const user = await User.findById(body.userId) //highlight-line
+
+  const note = new Note({
+    content: body.content,
+    important: body.important === undefined ? false : body.important,
+    date: new Date(),
+    user: user._id //highlight-line
+  })
+
   try {
-    const body = request.body;
-
-    if (body.content === undefined) {
-      return response.status(400).json({ error: 'content missing' });
-    }
-
-    const user = await User.findById(body.userId);
-
-    const note = new Note({
-      content: body.content,
-      important: body.important === undefined ? false : body.important,
-      date: new Date(),
-      user: user._id,
-    });
-
-    const savedNote = await note.save();
-
-    user.notes = user.notes.concat(savedNote._id);
-    await user.save();
-
-    response.json(Note.format(note));
-  } catch (exception) {
-    console.log(exception);
-    response.status(500).json({ error: 'something went wrong...' });
+    const savedNote = await note.save()
+    user.notes = user.notes.concat(savedNote._id) //highlight-line
+    await user.save()  //highlight-line
+    response.json(savedNote.toJSON())
+  } catch(exception) {
+    next(exception)
   }
-});
+})
 ```
 
-Huomionarvoista on nyt se, että myös _user_-olio muuttuu. Sen kenttään _notes_ talletetaan luodun muistiinpanon _id_:
+Huomionarvoista on nyt se, että myös <i>user</i>-olio muuttuu. Sen kenttään <i>notes</i> talletetaan luodun muistiinpanon <i>id</i>:
 
 ```js
-const user = User.findById(userId);
+const user = User.findById(userId)
 
-user.notes = user.notes.concat(savedNote._id);
-await user.save();
+user.notes = user.notes.concat(savedNote._id)
+await user.save()
 ```
 
 Kokeillaan nyt lisätä uusi muistiinpano
 
-![](../images/4/1.png)
+![](../images/4/10.png)
 
 Operaatio vaikuttaa toimivan. Lisätään vielä yksi muistiinpano ja mennään kaikkien käyttäjien sivulle:
 
-![](../images/4/1.png)
+![](../images/4/11.png)
 
 Huomaamme siis, että käyttäjällä on kaksi muistiinpanoa.
 
-Jos laajennamme muistiinpanojen JSON:in muotoileman koodin näyttämään muistiinpanoon liittyvän käyttäjän
+Muistiinpanon luoneen käyttäjän id näkyviin muistiinpanon yhteyteen:
 
-```js
-noteSchema.statics.format = note => {
-  return {
-    id: note._id,
-    content: note.content,
-    date: note.date,
-    important: note.important,
-    user: note.user,
-  };
-};
-```
-
-tulee muistiinpanon luoneen käyttäjän id näkyviin muistiinpanon yhteyteen.
-
-![](../images/4/1.png)
+![](../images/4/12.png)
 
 ### populate
 
-Haluaisimme API:n toimivan siten, että haettaessa esim. käyttäjien tiedot polulle _/api/users_ tehtävällä HTTP GET -pyynnöllä tulisi käyttäjien tekemien muistiinpanojen id:iden lisäksi näyttää niiden sisältö. Relaatiotietokannoilla toiminnallisuus toteutettaisiin _liitoskyselyn_ avulla.
+Haluaisimme API:n toimivan siten, että haettaessa esim. käyttäjien tiedot polulle <i>/api/users</i> tehtävällä HTTP GET -pyynnöllä tulisi käyttäjien tekemien muistiinpanojen id:iden lisäksi näyttää niiden sisältö. Relaatiotietokannoilla toiminnallisuus toteutettaisiin <i>liitoskyselyn</i> avulla.
 
-Kuten aiemmin mainittiin, eivät dokumenttitietokannat tue (kunnolla) eri kokoelmien välisiä liitoskyselyitä. Mongoose-kirjasto osaa kuitenkin tehdä liitoksen puolestamme. Mongoose toteuttaa liitoksen tekemällä useampia tietokantakyselyitä, joten siinä mielessä kyseessä on täysin erilainen tapa kuin relaatiotietokantojen liitoskyselyt, jotka ovat _transaktionaalisia_, eli liitoskyselyä tehdessä tietokannan tila ei muutu. Mongoosella tehtävä liitos taas on sellainen, että mikään ei takaa sitä, että liitettävien kokoelmien tila on konsistentti, toisin sanoen jos tehdään users- ja notes-kokoelmat liittävä kysely, kokoelmien tila saattaa muuttua kesken mongoosen liitosoperaation.
+Kuten aiemmin mainittiin, eivät dokumenttitietokannat tue (kunnolla) eri kokoelmien välisiä liitoskyselyitä. Mongoose-kirjasto osaa kuitenkin tehdä liitoksen puolestamme. Mongoose toteuttaa liitoksen tekemällä useampia tietokantakyselyitä, joten siinä mielessä kyseessä on täysin erilainen tapa kuin relaatiotietokantojen liitoskyselyt, jotka ovat <i>transaktionaalisia</i>, eli liitoskyselyä tehdessä tietokannan tila ei muutu. Mongoosella tehtävä liitos taas on sellainen, että mikään ei takaa sitä, että liitettävien kokoelmien tila on konsistentti, toisin sanoen jos tehdään users- ja notes-kokoelmat liittävä kysely, kokoelmien tila saattaa muuttua kesken Mongoosen liitosoperaation.
 
 Liitoksen tekeminen suoritetaan mongoosen komennolla [populate](http://mongoosejs.com/docs/populate.html). Päivitetään ensin kaikkien käyttäjien tiedot palauttava route:
 
 ```js
 usersRouter.get('/', async (request, response) => {
-  const users = await User.find({}).populate('notes');
+  const users = await User  // highlight-line
+    .find({}).populate('notes') // highlight-line
 
-  response.json(users.map(User.format));
-});
+  response.json(users.map(User.format))
+})
 ```
 
-Funktion [populate](http://mongoosejs.com/docs/populate.html) kutsu siis ketjutetaan kyselyä vastaavan metodikutsun (tässä tapauksessa _find_) perään. Populaten parametri määrittelee, että _user_-dokumenttien _notes_-kentässä olevat _note_-olioihin viittaavat _id_:t korvataan niitä vastaavilla dokumenteilla.
+Funktion [populate](http://mongoosejs.com/docs/populate.html) kutsu siis ketjutetaan kyselyä vastaavan metodikutsun (tässä tapauksessa <i>find_</i> perään. Populaten parametri määrittelee, että <i>user</i>-dokumenttien <i>notes</i>-kentässä olevat <i>note</i>-olioihin viittaavat <i>id</i>:t korvataan niitä vastaavilla dokumenteilla.
 
 Lopputulos on jo melkein haluamamme kaltainen:
 
-![](../images/4/1.png)
+![](../images/4/31.png)
 
 Populaten yhteydessä on myös mahdollista rajata mitä kenttiä sisällytettävistä dokumenteista otetaan mukaan. Rajaus tapahtuu Mongon [syntaksilla](https://docs.mongodb.com/manual/tutorial/project-fields-from-query-results/#return-the-specified-fields-and-the-id-field-only):
 
 ```js
 usersRouter.get('/', async (request, response) => {
-  const users = await User.find({}).populate('notes', { content: 1, date: 1 });
+  const users = await User
+    .find({}).populate('notes', { content: 1, date: 1 })
 
-  response.json(users.map(User.format));
+  response.json(users.map(User.format))
 });
 ```
 
-Tulos on nyt halutun kaltainen (:
+Tulos on täsmälleen sellainen kuin haluamme
 
-![](../images/4/1.png)
+![](../images/4/14.png)
 
-Lisätään sopiva käyttäjän tietojen populointi, muistiinpanojen yhteyteen:
+Lisätään sopiva käyttäjän tietojen populointi muistiinpanojen yhteyteen:
 
 ```js
 notesRouter.get('/', async (request, response) => {
-  const notes = await Note.find({}).populate('user', { username: 1, name: 1 });
+  const notes = await Note
+    .find({}).populate('user', { username: 1, name: 1 })
 
-  response.json(notes.map(Note.format));
+  response.json(notes.map(Note.format))
 });
 ```
 
-Nyt käyttäjän tiedot tulevat muistiinpanon kenttään _user_.
+Nyt käyttäjän tiedot tulevat muistiinpanon kenttään <i>user</i>.
 
-![](../images/4/1.png)
+![](../images/4/15.png)
 
-Korostetaan vielä, että tietokannan tasolla ei siis ole mitään määrittelyä siitä, että esim. muistiinpanojen kenttään _user_ talletetut id:t viittaavat käyttäjä-kokoelman dokumentteihin.
+Korostetaan vielä, että tietokannan tasolla ei siis ole mitään määrittelyä siitä, että esim. muistiinpanojen kenttään <i>user</i> talletetut id:t viittaavat käyttäjä-kokoelman dokumentteihin.
 
-Mongoosen _populate_-funktion toiminnallisuus perustuu siihen, että olemme määritelleet viitteiden "tyypit" olioiden mongoose-skeemaan _ref_-kentän avulla:
+Mongoosen <p>populate</i>-funktion toiminnallisuus perustuu siihen, että olemme määritelleet viitteiden "tyypit" olioiden mongoose-skeemaan <i>ref</i-kentän avulla:
 
 ```js
-const Note = mongoose.model('Note', {
-  content: String,
+const noteSchema = new mongoose.Schema({
+  content: {
+    type: String,
+    required: true,
+    minlength: 5
+  },
   date: Date,
   important: Boolean,
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-});
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
+})
 ```
-
 </div>
