@@ -12,16 +12,16 @@ Toteutamme nyt backendiin tuen [token-perustaiselle](https://scotch.io/tutorials
 
 Token-autentikaation periaatetta kuvaa seuraava sekvenssikaavio:
 
-![](../images/4/1.png)
+![](../images/4/16.png)
 
 - Alussa käyttäjä kirjautuu Reactilla toteutettua kirjautumislomaketta käyttäen
   - lisäämme kirjautumislomakkeen frontendiin [osassa 5](/osa5)
-- Tämän seurauksena selaimen React-koodi lähettää käyttäjätunnuksen ja salasanan HTTP POST -pyynnöllä palvelimen osoitteeseen _/api/login_
-- Jos käyttäjätunnus ja salasana ovat oikein, generoi palvelin _Tokenin_, joka yksilöi jollain tavalla kirjautumisen tehneen käyttäjän
-  - token on kryptattu, joten sen väärentäminen on (kryptografisesti) mahdotonta
-- backend vastaa selaimelle onnistumisesta kertovalla statuskoodilla ja palauttaa Tokenin vastauksen mukana
+- Tämän seurauksena selaimen React-koodi lähettää käyttäjätunnuksen ja salasanan HTTP POST -pyynnöllä palvelimen osoitteeseen <i>/api/login</i>
+- Jos käyttäjätunnus ja salasana ovat oikein, generoi palvelin <i>tokenin</i>, joka yksilöi jollain tavalla kirjautumisen tehneen käyttäjän
+  - token on digitaalisesti allekirjoitettu, joten sen väärentäminen on (kryptografisesti) mahdotonta
+- backend vastaa selaimelle onnistumisesta kertovalla statuskoodilla ja palauttaa tokenin vastauksen mukana
 - Selain tallentaa tokenin esimerkiksi React-sovelluksen tilaan
-- Kun käyttäjä luo uuden muistiinpanon (tai tekee jonkin operaation, joka edellyttää tunnistautumista), lähettää React-koodi Tokenin pyynnön mukana palvelimelle
+- Kun käyttäjä luo uuden muistiinpanon (tai tekee jonkin operaation, joka edellyttää tunnistautumista), lähettää React-koodi tokenin pyynnön mukana palvelimelle
 - Palvelin tunnistaa pyynnön tekijän tokenin perusteella
 
 Tehdään ensin kirjautumistoiminto. Asennetaan [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)-kirjasto, jonka avulla koodimme pystyy generoimaan [JSON web token](https://jwt.io/) -muotoisia tokeneja.
@@ -33,196 +33,229 @@ npm install jsonwebtoken --save
 Tehdään kirjautumisesta vastaava koodi tiedostoon _controllers/login.js_
 
 ```js
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-const loginRouter = require('express').Router();
-const User = require('../models/user');
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
+const loginRouter = require('express').Router()
+const User = require('../models/user')
 
 loginRouter.post('/', async (request, response) => {
-  const body = request.body;
+  const body = request.body
 
-  const user = await User.findOne({ username: body.username });
-  const passwordCorrect =
-    user === null
-      ? false
-      : await bcrypt.compare(body.password, user.passwordHash);
+  const user = await User.findOne({ username: body.username })
+  const passwordCorrect = user === null
+    ? false
+    : await bcrypt.compare(body.password, user.passwordHash)
 
   if (!(user && passwordCorrect)) {
-    return response.status(401).json({ error: 'invalid username or password' });
+    return response.status(401).json({
+      error: 'invalid username or password'
+    })
   }
 
   const userForToken = {
     username: user.username,
     id: user._id,
-  };
+  }
 
-  const token = jwt.sign(userForToken, process.env.SECRET);
+  const token = jwt.sign(userForToken, process.env.SECRET)
 
   response
     .status(200)
-    .send({ token, username: user.username, name: user.name });
-});
+    .send({ token, username: user.username, name: user.name })
+})
 
-module.exports = loginRouter;
+module.exports = loginRouter
 ```
 
-Koodi aloittaa etsimällä pyynnön mukana olevaa _username_:a vastaavan käyttäjän tietokannasta. Seuraavaksi katsotaan onko pyynnön mukana oleva _password_ oikea. Koska tietokantaan ei ole talletettu salasanaa, vaan salasanasta laskettu _hash_, tehdään vertailu metodilla _bcrypt.compare_:
+Koodi aloittaa etsimällä pyynnön mukana olevaa <i>usernamea</i> vastaavan käyttäjän tietokannasta. Seuraavaksi katsotaan onko pyynnön mukana oleva <i>password</i> oikea. Koska tietokantaan ei ole talletettu salasanaa, vaan salasanasta laskettu <i>hash</i>, tehdään vertailu metodilla _bcrypt.compare_:
 
 ```js
-await bcrypt.compare(body.password, user.passwordHash);
+await bcrypt.compare(body.password, user.passwordHash)
 ```
 
 Jos käyttäjää ei ole olemassa tai salasana on väärä, vastataan kyselyyn statuskoodilla [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) ja kerrotaan syy vastauksen bodyssä.
 
-Jos salasana on oikein, luodaan metodin _jwt.sign_ avulla token, joka sisältää kryptatussa muodossa käyttäjätunnuksen ja käyttäjän id:
+Jos salasana on oikein, luodaan metodin _jwt.sign_ avulla token, joka sisältää digitaalisesti allekirjoitetussa muodossa käyttäjätunnuksen ja käyttäjän id:
 
 ```js
 const userForToken = {
   username: user.username,
   id: user._id,
-};
+}
 
-const token = jwt.sign(userForToken, process.env.SECRET);
+const token = jwt.sign(userForToken, process.env.SECRET)
 ```
 
-Token on digitaalisesti allekirjoitettu käyttämällä _salaisuutena_ ympäristömuuttujassa _SECRET_ olevaa merkkijonoa. Digitaalinen allekirjoitus varmistaa sen, että ainoastaan salaisuuden tuntevilla on mahdollisuus generoida validi token. Ympäristömuuttujalle pitää muistaa asettaa arvo tiedostoon .env.
+Token on digitaalisesti allekirjoitettu käyttämällä <i>salaisuutena</i> ympäristömuuttujassa <i>SECRET</i> olevaa merkkijonoa. Digitaalinen allekirjoitus varmistaa sen, että ainoastaan salaisuuden tuntevilla on mahdollisuus generoida validi token. Ympäristömuuttujalle pitää muistaa asettaa arvo tiedostoon <i>.env</i>.
 
-Onnistuneeseen pyyntöön vastataan statuskoodilla _200 ok_ ja generoitu token sekä kirjautuneen käyttäjän käyttäjätunnus ja nimi lähetetään vastauksen bodyssä pyynnön tekijälle.
+Onnistuneeseen pyyntöön vastataan statuskoodilla <i>200 ok</i> ja generoitu token sekä kirjautuneen käyttäjän käyttäjätunnus ja nimi lähetetään vastauksen bodyssä pyynnön tekijälle.
 
-Kirjautumisesta huolehtiva koodi on vielä liitettävä sovellukseen lisäämällä tiedostoon _index.js_ muiden routejen käyttöönoton yhteyteen
+Kirjautumisesta huolehtiva koodi on vielä liitettävä sovellukseen lisäämällä tiedostoon <i>app.js</i> muiden routejen käyttöönoton yhteyteen
 
 ```js
-const loginRouter = require('./controllers/login');
+const loginRouter = require('./controllers/login')
 
 //...
 
-app.use('/api/login', loginRouter);
+app.use('/api/login', loginRouter)
 ```
 
 Kokeillaan kirjautumista, käytetään VS Coden REST-clientiä:
 
-![](../images/4/1.png)
+![](../images/4/17.png)
 
 Kirjautuminen ei kuitenkaan toimi, konsoli näyttää seuraavalta:
 
 ```bash
-Method: POST
-Path:   /api/login
-Body:   { username: 'mluukkai', password: 'salainen' }
----
-(node:17486) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 2): Error: secretOrPrivateKey must have a value
+(node:32911) UnhandledPromiseRejectionWarning: Error: secretOrPrivateKey must have a value
+    at Object.module.exports [as sign] (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/node_modules/jsonwebtoken/sign.js:101:20)
+    at loginRouter.post (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/controllers/login.js:26:21)
+(node:32911) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 2)
 ```
 
-Ongelman aiheuttaa komento _jwt.sign(userForToken, process.env.SECRET)_ sillä ympäristömuuttujalle _SECRET_ on unohtunut määritellä arvo. Kun arvo määritellään tiedostoon _.env_, alkaa kirjautuminen toimia.
+Ongelman aiheuttaa komento _jwt.sign(userForToken, process.env.SECRET)_ sillä ympäristömuuttujalle <i>SECRET</i> on unohtunut määritellä arvo. Kun arvo (joka saa olla mikä tahansa merkkijono) määritellään tiedostoon <i>.env</i>, alkaa kirjautuminen toimia.
 
 Onnistunut kirjautuminen palauttaa kirjautuneen käyttäjän tiedot ja tokenin:
 
-![](../images/4/1.png)
+![](../images/4/18.png)
 
 Virheellisellä käyttäjätunnuksella tai salasanalla kirjautuessa annetaan asianmukaisella statuskoodilla varustettu virheilmoitus
 
-![](../images/4/1.png)
+![](../images/4/19.png)
 
 ### Muistiinpanojen luominen vain kirjautuneille
 
 Muutetaan vielä muistiinpanojen luomista, siten että luominen onnistuu ainoastaan jos luomista vastaavan pyynnön mukana on validi token. Muistiinpano talletetaan tokenin identifioiman käyttäjän tekemien muistiinpanojen listaan.
 
 Tapoja tokenin välittämiseen selaimesta backendiin on useita. Käytämme ratkaisussamme [Authorization](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization)-headeria. Tokenin lisäksi headerin avulla kerrotaan mistä [autentikointiskeemasta](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#Authentication_schemes) on kyse. Tämä voi olla tarpeen, jos palvelin tarjoaa useita eri tapoja autentikointiin. Skeeman ilmaiseminen kertoo näissä tapauksissa palvelimelle, miten mukana olevat kredentiaalit tulee tulkita.
-Meidän käyttöömme sopii _Bearer_-skeema.
+Meidän käyttöömme sopii <i>Bearer</i>-skeema.
 
-Käytännössä tämä tarkoittaa, että jos token on esimerkiksi merkkijono _eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW_, laitetaan pyynnöissä headerin Authorization arvoksi merkkijono
+Käytännössä tämä tarkoittaa, että jos token on esimerkiksi merkkijono <i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i>, laitetaan pyynnöissä headerin Authorization arvoksi merkkijono
 
 <pre>
 Bearer eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW
 </pre>
 
-Modifioitu muistiinpanojen luomisesta huolehtiva koodi seuraavassa:
+Modifioitu muistiinpanojen muuttuu seuraavasti:
 
 ```js
-const jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken') //highlight-line
 
 // ...
-
+  //highlight-start
 const getTokenFrom = request => {
-  const authorization = request.get('authorization');
+  const authorization = request.get('authorization')
   if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-    return authorization.substring(7);
+    return authorization.substring(7)
   }
-  return null;
-};
+  return null
+}
+  //highlight-end
 
-notesRouter.post('/', async (request, response) => {
-  const body = request.body;
+notesRouter.post('/', async (request, response, next) => {
+  const body = request.body
 
+  const token = getTokenFrom(request)
+
+//highlight-start
   try {
-    const token = getTokenFrom(request);
-    const decodedToken = jwt.verify(token, process.env.SECRET);
+    const decodedToken = jwt.verify(token, process.env.SECRET)
 
     if (!token || !decodedToken.id) {
-      return response.status(401).json({ error: 'token missing or invalid' });
+      return response.status(401).json({ error: 'token missing or invalid' })
     }
+//highlight-end
 
-    if (body.content === undefined) {
-      return response.status(400).json({ error: 'content missing' });
-    }
-
-    const user = await User.findById(decodedToken.id);
+    const user = await User.findById(decodedToken.id)
 
     const note = new Note({
       content: body.content,
       important: body.important === undefined ? false : body.important,
       date: new Date(),
-      user: user._id,
-    });
+      user: user._id
+    })
 
-    const savedNote = await note.save();
-
-    user.notes = user.notes.concat(savedNote._id);
-    await user.save();
-
-    response.json(Note.format(note));
-  } catch (exception) {
-    if (exception.name === 'JsonWebTokenError') {
-      response.status(401).json({ error: exception.message });
-    } else {
-      console.log(exception);
-      response.status(500).json({ error: 'something went wrong...' });
-    }
+    const savedNote = await note.save()
+    user.notes = user.notes.concat(savedNote._id) //highlight-line
+    await user.save()  //highlight-line
+    response.json(savedNote.toJSON())
+  } catch(exception) {
+    next(exception)
   }
-});
+})
 ```
 
-Apufunktio _getTokenFrom_ eristää tokenin headerista _authorization_. Tokenin oikeellisuus varmistetaan metodilla _jwt.verify_. Metodi myös dekoodaa tokenin, eli palauttaa olion, jonka perusteella token on laadittu:
+Apufunktio _getTokenFrom_ eristää tokenin headerista <i>authorization</i>. Tokenin oikeellisuus varmistetaan metodilla _jwt.verify_. Metodi myös dekoodaa tokenin, eli palauttaa olion, jonka perusteella token on laadittu:
 
 ```js
-const decodedToken = jwt.verify(token, process.env.SECRET);
+const decodedToken = jwt.verify(token, process.env.SECRET)
 ```
 
-Tokenista dekoodatun olion sisällä on kentät _username_ ja _id_ eli se kertoo palvelimelle kuka pyynnön on tehnyt.
+Tokenista dekoodatun olion sisällä on kentät <i>username</i> ja <i>id</i> eli se kertoo palvelimelle kuka pyynnön on tehnyt.
 
 Jos tokenia ei ole tai tokenista dekoodattu olio ei sisällä käyttäjän identiteettiä (eli _decodedToken.id_ ei ole määritelty), palautetaan virheestä kertova statuskoodi [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) ja kerrotaan syy vastauksen bodyssä:
 
 ```js
 if (!token || !decodedToken.id) {
-  return response.status(401).json({ error: 'token missing or invalid' });
+  return response.status(401).json({
+    error: 'token missing or invalid'
+  })
 }
 ```
 
 Kun pyynnön tekijän identiteetti on selvillä, jatkuu suoritus entiseen tapaan.
 
-Tokenin verifiointi voi myös aiheuttaa poikkeuksen _JsonWebTokenError_. Syynä tälle voi olla viallinen, väärennetty tai eliniältään vanhentunut token. Poikkeusten käsittelyssä haaraudutaan virheen tyypin perusteella ja vastataan 401 jos poikkeus johtuu tokenista, ja muuten vastataan [500 internal server error](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.1).
-
-Uuden muistiinpanon luominen onnistuu nyt postmanilla jos _authorization_-headerille asetetaan oikeanlainen arvo, eli merkkijono _bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ_, missä osa on _login_-operaation palauttama token.
+Uuden muistiinpanon luominen onnistuu nyt postmanilla jos <i>authorization</i>-headerille asetetaan oikeanlainen arvo, eli merkkijono <i>bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ</i>, missä loppuosa on <i>login</i>-operaation palauttama token.
 
 Postmanilla luominen näyttää seuraavalta
 
-![](../images/4/1.png)
+![](../images/4/20.png)
 
 ja Visual Studio Coden REST clientillä
 
-![](../images/4/1.png)
+![](../images/4/21.png)
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part3-notes-backend/tree/part4-6), tagissa _part4-6_.
+### Poikkeusten käsittely
+
+Tokenin verifiointi voi myös aiheuttaa poikkeuksen <i>JsonWebTokenError</i>. Jos esim. poistetaan tokenista pari merkkiä, ja yritetään luoda muistiinpano, tapahtuu seuraavati
+
+```bash
+JsonWebTokenError: invalid signature
+    at /Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/node_modules/jsonwebtoken/verify.js:126:19
+    at getSecret (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/node_modules/jsonwebtoken/verify.js:80:14)
+    at Object.module.exports [as verify] (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/node_modules/jsonwebtoken/verify.js:84:10)
+    at notesRouter.post (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/controllers/notes.js:40:30)
+```
+
+Syynä tokenin dekoodaamisen aiheuttamalle virheille on monia. Token voi olla viallinen, kuten esimerkissämme, väärennetty tai eliniältään vanhentunut. Laajennetaan virheidenkäsittelymiddlewarea huomioimaan tokenin dekoodaamisen aiheuttamat virheet
+
+```js
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: 'unknown endpoint' })
+}
+
+const errorHandler = (error, request, response, next) => {
+  if (error.name === 'CastError' && error.kind === 'ObjectId') {
+    return response.status(400).send({
+      error: 'malformatted id'
+    })
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({
+      error: error.message 
+    })
+  } else if (error.name === 'JsonWebTokenError') {  // highlight-line
+    return response.status(401).json({ // highlight-line
+      error: 'invalid token' // highlight-line
+    }) // highlight-line
+  }
+
+  logger.error(error.message)
+
+  next(error)
+}
+```
+
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part4-8), branchissä <i>part4-8</i>.
 
 Jos sovelluksessa on useampia rajapintoja jotka vaativat kirjautumisen kannattaa JWT:n validointi eriyttää omaksi middlewarekseen, tai käyttää jotain jo olemassa olevaa kirjastoa kuten [express-jwt](https://www.npmjs.com/package/express-jwt).
 
@@ -240,17 +273,17 @@ Toteutamme kirjautumisen frontendin puolelle kurssin [seuraavassa osassa](/osa5)
 
 ### Tehtäviä
 
-Seuraavien tehtävien myötä Blogilistalle luodaan käyttäjienhallinnan perusteet. Varminta on seurata melko tarkkaan osan 4 luvusta [Käyttäjien hallinta ja monimutkaisempi tietokantaskeema](/osa4#käyttäjien-hallinta-ja-monimutkaisempi-tietokantaskeema) alkavaa tarinaa. Toki luovuus on sallittua.
+Seuraavien tehtävien myötä Blogilistalle luodaan käyttäjienhallinnan perusteet. Varminta on seurata melko tarkkaan osan 4 luvusta [Käyttäjien hallinta](/osa4/kayttajien_hallinta) ja [Token-perustainen kirjautuminen](/osa4/token_perustainen_kirjautuminen) etenevää tarinaa. Toki luovuus on sallittua.
 
 **Varoitus vielä kerran:** jos huomaat kirjoittavasi sekaisin async/awaitia ja _then_-kutsuja, on 99% varmaa, että teet jotain väärin. Käytä siis jompaa kumpaa tapaa, älä missään tapauksessa "varalta" molempia.
 
 #### 4.15: blogilistan laajennus, osa 4
 
-Tee sovellukseen mahdollisuus luoda käyttäjiä tekemällä HTTP POST -pyyntö osoitteeseen _api/users_. Käyttäjillä on käyttäjätunnus, salasana ja nimi sekä totuusarvoinen kenttä, joka kertoo onko käyttäjä täysi-ikäinen.
+Tee sovellukseen mahdollisuus luoda käyttäjiä tekemällä HTTP POST -pyyntö osoitteeseen <i>api/users</i>. Käyttäjillä on <i>käyttäjätunnus, salasana ja nimi</i>.
 
-Älä talleta tietokantaan salasanoja selväkielisenä vaan käytä osan 4 luvun [Käyttäjien luominen](/osa4#käyttäjien-luominen) tapaan _bcrypt_-kirjastoa.
+Älä talleta tietokantaan salasanoja selväkielisenä vaan käytä osan 4 luvun [Käyttäjien luominen](/osa4/kayttajien_hallinta#kayttajien-luominen) tapaan <i>bcrypt</i>-kirjastoa.
 
-**HUOM** joillain windows-käyttäjillä on ollut ongelmia _bcrypt_:in kanssa. Jos törmäät ongelmiin, poista kirjasto komennolla
+**HUOM** joillain windows-käyttäjillä on ollut ongelmia <i>bcryptin</i> kanssa. Jos törmäät ongelmiin, poista kirjasto komennolla
 
 ```bash
 npm uninstall bcrypt --save 
@@ -262,29 +295,29 @@ Tee järjestelmään myös mahdollisuus katsoa kaikkien käyttäjien tiedot sopi
 
 Käyttäjien lista voi näyttää esim. seuraavalta:
 
-![](../images/4/1.png)
+![](../images/4/22.png)
 
 #### 4.16*: blogilistan laajennus, osa 5
 
-Laajenna käyttäjätunnusten luomista siten, että salasanan tulee olla vähintään 3 merkkiä pitkä ja käyttäjätunnus on järjestelmässä uniikki. Jos täysi-ikäisyydelle ei määritellä luotaessa arvoa, on se oletusarvoisesti true.
+Laajenna käyttäjätunnusten luomista siten, että käyttäjätunuksen sekä salasanan tulee olla olla olemassa ja vähintään 3 merkkiä pitkiä. Käyttäjätunnuksen on oltava järjestelmässä uniikki. 
 
-Luomisoperaation tulee palauttaa sopiva statuskoodi ja kuvaava virheilmoitus, jos yritetään luoda epävalidi käyttäjä.
+Luomisoperaation tulee palauttaa sopiva statuskoodi ja jonkinlainen virheilmoitus, jos yritetään luoda epävalidi käyttäjä.
 
-Tee testit, jotka varmistavat, että virheellisiä käyttäjiä ei luoda, ja että virheellisen käyttäjän luomisoperaatioon vastaus on järkevä statuskoodin ja virheilmoituksen osalta.
+Tee myös testit, jotka varmistavat, että virheellisiä käyttäjiä ei luoda, ja että virheellisen käyttäjän luomisoperaatioon vastaus on järkevä statuskoodin ja virheilmoituksen osalta.
 
 #### 4.17: blogilistan laajennus, osa 6
 
 Laajenna blogia siten, että blogiin tulee tieto sen lisänneestä käyttäjästä.
 
-Muokkaa blogien lisäystä osan 4 luvun [populate](/osa4/#populate) tapaan siten, että blogin lisäämisen yhteydessä määritellään blogin lisääjäksi _joku_ järjestelmän tietokannassa olevista käyttäjistä (esim. ensimmäisenä löytyvä). Tässä vaiheessa ei ole väliä kuka käyttäjistä määritellään lisääväksi. Toiminnallisuus viimeistellään tehtävässä 4.19.
+Muokkaa blogien lisäystä osan 4 luvun [populate](/osa4/kayttajien_hallinta#populate) tapaan siten, että blogin lisäämisen yhteydessä määritellään blogin lisääjäksi _<i>oku</i> järjestelmän tietokannassa olevista käyttäjistä (esim. ensimmäisenä löytyvä). Tässä vaiheessa ei ole väliä kuka käyttäjistä määritellään lisääväksi. Toiminnallisuus viimeistellään tehtävässä 4.19.
 
 Muokaa kaikkien blogien listausta siten, että blogien yhteydessä näytetään lisääjän tiedot:
 
-![](../images/4/1.png)
+![](../images/4/23.png)
 
 ja käyttäjien listausta siten että käyttäjien lisäämät blogit ovat näkyvillä
 
-![](../images/4/1.png)
+![](../images/4/24.png)
 
 #### 4.18: blogilistan laajennus, osa 7
 
@@ -298,9 +331,9 @@ Muuta blogien lisäämistä siten, että se on mahdollista vain, jos lisäyksen 
 
 Osan 4 [esimerkissä](/osa4#kirjautuminen) token otetaan headereista apufunktion _getTokenFrom_ avulla.
 
-Jos käytit samaa ratkaisua, refaktoroi tokenin erottaminen [middlewareksi](/osa3#middlewaret), joka ottaa tokenin _Authorization_-headerista ja sijoittaa sen _request_-olion kenttään _token_.
+Jos käytit samaa ratkaisua, refaktoroi tokenin erottaminen [middlewareksi](/osa3#middlewaret), joka ottaa tokenin <i>Authorization</i>-headerista ja sijoittaa sen <i>request</i>-olion kenttään <i>token</i>.
 
-Eli kun rekisteröit middlewaren ennen routeja tiedostossa _index.js_
+Eli kun rekisteröit middlewaren ennen routeja tiedostossa <i>app.js</i>
 
 ```js
 app.use(middleware.tokenExtractor)
@@ -328,7 +361,7 @@ Huomaa, että jos haet blogin tietokannasta
 const blog = await Blog.findById(...)
 ```
 
-ei kenttä _blog.user_ ole tyypiltään merkkijono vaan _object_. Eli jos haluat verrata kannasta haetun olion id:tä merkkijonomuodossa olevaan id:hen, ei normaali vertailu toimi. Kannasta haettu id tulee muuttaa vertailua varten merkkijonoksi:
+ei kenttä <i>blog.user</i> ole tyypiltään merkkijono vaan <i>object</i>. Eli jos haluat verrata kannasta haetun olion id:tä merkkijonomuodossa olevaan id:hen, ei normaali vertailu toimi. Kannasta haettu id tulee muuttaa vertailua varten merkkijonoksi:
 
 ```js
 if ( blog.user.toString() === userid.toString() ) ...

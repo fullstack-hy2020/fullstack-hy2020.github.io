@@ -36,13 +36,13 @@ propsin arvo on [Object object]
 
 kun taas pilkulla erotellessa saat tulostettavat asiat developer-konsoliin oliona, jonka sisältöä on mahdollista tarkastella.
 
-Lue tarvittaessa lisää React-sovellusten debuggaamisesta [täältä](osa1/monimutkaisempi_tila_reactin_debuggaus#react-sovellusten-debuggaus).
+Lue tarvittaessa lisää React-sovellusten debuggaamisesta [täältä](/osa1/monimutkaisempi_tila_reactin_debuggaus#react-sovellusten-debuggaus).
 
 ### Tapahtumankäsittely revisited
 
 Viime vuoden kurssin alun kokemusten perusteella tapahtumien käsittelu on osoittautunut haastavaksi.
 
-Edellisen osan loppussa oleva kertaava osa [tapahtumankäsittely revisited](/osa1#tapahtumankäsittely-revisited) kannattaa käydä läpi jos osaaminen on vielä häilyvällä pohjalla.
+Edellisen osan loppussa oleva kertaava osa [tapahtumankäsittely revisited](/osa1/monimutkaisempi_tila_reactin_debuggaus#tapahtumankasittely-revisited) kannattaa käydä läpi jos osaaminen on vielä häilyvällä pohjalla.
 
 Myös tapahtumankäsittelijöiden välittäminen komponentin <i>App</i> alikomponenteille on herättänyt ilmaan kysymyksiä, pieni kertaus aiheeseen [täällä](/osa1/monimutkaisempi_tila_reactin_debuggaus#tapahtumankasittelijan-vieminen-alikomponenttiin).
 
