@@ -621,7 +621,7 @@ osa1
   anekdootit
 osa2
   puhelinluettelo
-  maiden tiedot
+  maiden_tiedot
 ```
 
 Eli kutakin osaa kohti on oma hakemistonsa, joka vielä jakautuu tehtäväsarjat (kuten osan 1 unicafe) sisältäviin hakemistoihin.

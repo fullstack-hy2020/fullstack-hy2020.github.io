@@ -498,29 +498,27 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 ### Tehtäviä
 
-Teemme nyt edellisen osan tehtävissä tehtyä bloglist-backendia käyttävän frontendin. Voit ottaa tehtävien pohjaksi [Githubista](https://github.com/FullStack-HY/bloglist-frontend) olevan sovellusrungon. Sovellus olettaa, että backend on käynnissä koneesi portissa 3003.
+Teemme nyt edellisen osan tehtävissä tehtyä bloglist-backendia käyttävän frontendin. Voit ottaa tehtävien pohjaksi [Githubista](https://github.com/fullstack-hy2019/bloglist-frontend) olevan sovellusrungon. Sovellus olettaa, että backend on käynnissä koneesi portissa 3003.
 Lopullisen version palauttaminen riittää, voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.
 
 Tämän osan alun tehtävät käytännössä kertaavat kaiken oleellisen tämän kurssin puitteissa Reactista läpikäydyn asian ja voivat siinä mielessä olla kohtuullisen haastavia, erityisesti jos edellisen osan tehtävissä toteuttamasi backend toimii puutteellisesti. Saattaakin olla varminta siirtyä käyttämään osan 4 mallivastauksen backendia.
 
 Muista tehtäviä tehdessäsi kaikki debuggaukseen liittyvät käytänteet, erityisesti konsolin tarkkailu.
 
-### Varoitus
-
 **Varoitus:** jos huomaat kirjoittavasi sekaisin async/awaitia ja _then_-kutsuja, on 99.9% varmaa, että teet jotain väärin. Käytä siis jompaa kumpaa tapaa, älä missään tapauksessa "varalta" molempia.
 
-####: 5.1: blogilistan frontend, osa 1
+#### 5.1: blogilistan frontend, step1
 
-Ota tehtävien pohjaksi [Githubissa](https://github.com/FullStack-HY/bloglist-frontend) olevan sovellusrungo kloonaamalla se sopivaan paikkaan komennolla
+Ota tehtävien pohjaksi [Githubissa](https://github.com/fullstack-hy2019/bloglist-frontend.git) olevan sovellusrungo kloonaamalla se sopivaan paikkaan komennolla
 
 ```bash
-git clone git@github.com:FullStack-HY/bloglist-frontend.git
+git clone https://github.com/fullstack-hy2019/bloglist-frontend.git
 ```
 
-Jos kloonaat projektin olemassaolevan git-reposition sisälle, <i>poista kloonatun sovelluksen git-konfiguraatio</i>
+<i>Poista kloonatun sovelluksen git-konfiguraatio</i>
 
 ```bash
-cd bloglist-frontend   // eli mene ensin kloonatun repositorion hakemistoon
+cd bloglist-frontend   // mene kloonatun repositorion hakemistoon
 rm -rf .git
 ```
 
@@ -535,22 +533,21 @@ Toteuta frontendiin kirjautumisen mahdollistava toiminnallisuus. Kirjautumisen y
 
 Jos käyttäjä ei ole kirjautunut, sivulla näytetään <i>pelkästään</i> kirjautumislomake:
 
-![](../assets/teht/27.png)
+![](../images/5/4.png)
 
 Kirjautuneelle käyttäjälle näytetään kirjautuneen käyttäjän nimi sekä blogien lista
 
-![](../assets/teht/28.png)
+![](../images/5/5.png)
 
 Tässä vaiheessa kirjautuneiden käyttäjien tietoja ei vielä tarvitse muistaa local storagen avulla.
 
 **HUOM** Voit tehdä kirjautumislomakkeen ehdollisen renderöinnin esim. seuraavasti:
 
-```react
-render() {
-  if (this.state.user === null) {
+```js
+  if (user === null) {
     return (
       <div>
-        <h2>Kirjaudu sovellukseen</h2>
+        <h2>Log in to application</h2>
         <form>
           //...
         </form>
@@ -561,39 +558,39 @@ render() {
   return (
     <div>
       <h2>blogs</h2>
-      {this.state.blogs.map(blog =>
-        <Blog key={blog._id} blog={blog} />
+      {blogs.map(blog =>
+        <Blog key={blog.id} blog={blog} />
       )}
     </div>
   )
 }
 ```
 
-#### 5.2: blogilistan frontend, osa 2
+#### 5.2: blogilistan frontend, step2
 
 Tee kirjautumisesta "pysyvä" local storagen avulla. Tee sovellukseen myös mahdollisuus uloskirjautumiseen
 
-![](../assets/teht/29.png)
+![](../images/5/6.png)
 
 Uloskirjautumisen jälkeen selain ei saa muistaa kirjautunutta käyttäjää reloadauksen jälkeen.
 
-#### 5.3: blogilistan frontend, osa 3
+#### 5.3: blogilistan frontend, step3
 
 Laajenna sovellusta siten, että kirjautunut käyttäjä voi luoda uusia blogeja:
 
-![](../assets/teht/30.png)
+![](../images/5/7.png)
 
-Bloginluomislomakkeesta voi tehdä oman komponenttinsa, joka hallitsee lomakkeen kenttien sisältöä tilansa avulla. Kaiken blogin luomiseen liittyvän tilan voi toki tallettaa myös _App_-komponenttiin.
+Bloginluomislomakkeesta voi tehdä oman komponenttinsa, joka hallitsee lomakkeen kenttien sisältöä tilansa avulla. Kaiken blogin luomiseen liittyvän tilan voi toki tallettaa myös <i>App</i>-komponenttiin.
 
-#### 5.4*: blogilistan frontend, osa 4
+#### 5.4*: blogilistan frontend, step4
 
 Toteuta sovellukseen notifikaatiot, jotka kertovat sovelluksen yläosassa onnistuneista ja epäonnistuneista toimenpiteistä. Esim. blogin lisäämisen yhteydessä voi antaa seuraavan notifikaation
 
-![](../assets/teht/32.png)
+![](../images/5/8.png)
 
 epäonnistunut kirjautuminen taas johtaa notifikaatioon
 
-![](../assets/teht/31.png)
+![](../images/5/9.png)
 
 Notifikaation tulee olla näkyvillä muutaman sekunnin ajan. Värien lisääminen ei ole pakollista.
 

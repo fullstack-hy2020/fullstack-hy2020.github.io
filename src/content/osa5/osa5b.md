@@ -6,54 +6,68 @@ letter: b
 
 <div class="content">
 
-
-## Kirjautumislomakkeen näyttäminen vain tarvittaessa
+### Kirjautumislomakkeen näyttäminen vain tarvittaessa
 
 Muutetaan sovellusta siten, että kirjautumislomaketta ei oletusarvoisesti näytetä:
 
-![](../assets/5/3.png)
+![](../images/5/10.png)
 
-Lomake aukeaa, jos käyttäjä painaa nappia _login_:
+Lomake aukeaa, jos käyttäjä painaa nappia <i>login</i>:
 
-![](../assets/5/4.png)
+![](../images/5/11a.png)
 
-Napilla _cancel_ käyttäjä saa tarvittaessa suljettua lomakkeen.
+Napilla <i>cancel</i> käyttäjä saa tarvittaessa suljettua lomakkeen.
 
 Aloitetaan eristämällä kirjautumislomake omaksi komponentikseen:
 
-```html
-const LoginForm = ({ handleSubmit, handleChange, username, password }) => {
-return (
-<div>
-  <h2>Kirjaudu</h2>
+```js
+import React from 'react' 
 
-  <form onSubmit="{handleSubmit}">
+const LoginForm = ({
+   handleSubmit,
+   handleUsernameChange,
+   handlePasswordChange,
+   username, 
+   password 
+  }) => {
+  return (
     <div>
-      käyttäjätunnus
-      <input value="{username}" onChange="{handleChange}" name="username" />
+      <h2>Kirjaudu</h2>
+
+      <form onSubmit={handleSubmit}>
+        <div>
+          käyttäjätunnus
+          <input
+            value={username}
+            onChange={handleUsernameChange}
+          />
+        </div>
+        <div>
+          salasana
+          <input
+            type="password"
+            value={password}
+            onChange={handlePasswordChange}
+          />
+      </div>
+        <button type="submit">kirjaudu</button>
+      </form>
     </div>
-    <div>
-      salasana
-      <input
-        type="password"
-        name="password"
-        value="{password}"
-        onChange="{handleChange}"
-      />
-    </div>
-    <button type="submit">kirjaudu</button>
-  </form>
-</div>
-) }
+  )
+}
+
+export default LoginForm
 ```
 
-Reactin [suosittelemaan tyyliin](https://reactjs.org/docs/lifting-state-up.html) tila ja tilaa käsittelevät funktiot on kaikki määritelty komponentin ulkopuolella ja välitetään komponentille propseina.
+Tila ja tilaa käsittelevät funktiot on kaikki määritelty komponentin ulkopuolella ja välitetään komponentille propseina.
 
-Huomaa, että propsit otetaan vastaan _destrukturoimalla_, eli sen sijaan että määriteltäisiin
+Huomaa, että propsit otetaan vastaan <i>destrukturoimalla</i>, eli sen sijaan että määriteltäisiin
 
-```html
+```js
 const LoginForm = (props) => {
   return (
+    <div>
+      <h2>Kirjaudu</h2>
       <form onSubmit={props.handleSubmit}>
         <div>
           käyttäjätunnus
@@ -73,85 +87,97 @@ const LoginForm = (props) => {
 
 jolloin muuttujan _props_ kenttiin on viitattava muuttujan kautta esim. _props.handleSubmit_, otetaan kentät suoraan vastaan omiin muuttujiinsa.
 
-Nopea tapa toiminnallisuuden toteuttamiseen on muuttaa komponentin _App_ käyttämä funktio _loginForm_ seuraavaan muotoon:
+Nopea tapa toiminnallisuuden toteuttamiseen on muuttaa komponentin <i>App</i> käyttämä funktio _loginForm_ seuraavaan muotoon:
 
-```react
-const loginForm = () => {
-  const hideWhenVisible = { display: this.state.loginVisible ? 'none' : '' }
-  const showWhenVisible = { display: this.state.loginVisible ? '' : 'none' }
+```js
+const App = () => {
+  const [loginVisible, setLoginVisible] = useState(false) // highlight-line
 
-  return (
-    <div>
-      <div style={hideWhenVisible}>
-        <button onClick={e => this.setState({ loginVisible: true })}>log in</button>
+  // ...
+
+  const loginForm = () => {
+    const hideWhenVisible = { display: loginVisible ? 'none' : '' }
+    const showWhenVisible = { display: loginVisible ? '' : 'none' }
+
+    return (
+      <div>
+        <div style={hideWhenVisible}>
+          <button onClick={() => setLoginVisible(true)}>log in</button>
+        </div>
+        <div style={showWhenVisible}>
+          <LoginForm
+            username={username}
+            password={password}
+            handleUsernameChange={({ target }) => setUsername(target.value)}
+            handlePasswordChange={({ target }) => setPassword(target.value)}
+            handleSubmit={handleLogin}
+          />
+          <button onClick={() => setLoginVisible(false)}>cancel</button>
+        </div>
       </div>
-      <div style={showWhenVisible}>
-        <LoginForm
-          username={this.state.username}
-          password={this.state.password}
-          handleChange={this.handleLoginFieldChange}
-          handleSubmit={this.login}
-        />
-        <button onClick={e => this.setState({ loginVisible: false })}>cancel</button>
-      </div>
-    </div>
-  )
+    )
+  }
+
+  // ...
 }
 ```
 
-Komponentin _App_ tilaan on nyt lisätty kenttä _loginVisible_ joka määrittelee sen näytetäänkö kirjautumislomake.
+Komponentin <i>App</i> tilaan on nyt lisätty tutuusarvo <i>loginVisible</i> joka määrittelee sen näytetäänkö kirjautumislomake.
 
 Näkyvyyttä säätelevää tilaa vaihdellaan kahden napin avulla, molempiin on kirjoitettu tapahtumankäsittelijän koodi suoraan:
 
-```react
-<button onClick={e => this.setState({ loginVisible: true })}>log in</button>
+```js
+<button onClick={() => setLoginVisible(true)}>log in</button>
 
-<button onClick={e => this.setState({ loginVisible: false })}>cancel</button>
+<button onClick={() => setLoginVisible(false)}>cancel</button>
 ```
 
-Komponenttien näkyvyys on määritelty asettamalla komponentille CSS-määrittely, jossa [display](https://developer.mozilla.org/en-US/docs/Web/CSS/display)-propertyn arvoksi asetetaan _none_ jos komponentin ei haluta näkyvän:
+Komponenttien näkyvyys on määritelty asettamalla komponentille [inline](/osa2/tyylien_lisaaminen_react_sovellukseen#inline-tyylit)-tyyleinä CSS-määrittely, jossa [display](https://developer.mozilla.org/en-US/docs/Web/CSS/display)-propertyn arvoksi asetetaan <i>none</i> jos komponentin ei haluta näkyvän:
 
-```html
-const hideWhenVisible = { display: this.state.loginVisible ? 'none' : '' } const
-showWhenVisible = { display: this.state.loginVisible ? '' : 'none' } // ...
+```js
+    const hideWhenVisible = { display: loginVisible ? 'none' : '' }
+    const showWhenVisible = { display: loginVisible ? '' : 'none' }
 
-<div style="{hideWhenVisible}">// nappi</div>
+<div style="{hideWhenVisible}">
+  // nappi
+</div>
 
-<div style="{showWhenVisible}">// lomake</div>
+<div style="{showWhenVisible}">
+  // lomake
+</div>
 ```
 
-Käytössä on taas kysymysmerkkioperaattori, eli jos _this.state.loginVisible_ on _true_, tulee napin CSS-määrittelyksi
+Käytössä on taas kysymysmerkkioperaattori, eli jos _loginVisible_ on <i>true</i>, tulee napin CSS-määrittelyksi
 
 ```css
 display: 'none';
 ```
 
-jos _this.state.loginVisible_ on _false_, ei _display_ saa mitään (napin näkyvyyteen liittyvää) arvoa.
+jos _loginVisible_ on <i>false</i>, ei <i>display</i> saa mitään napin näkyvyyteen liittyvää arvoa.
 
-Hyödynsimme mahdollisuutta määritellä React-komponenteille koodin avulla [inline](https://react-cn.github.io/react/tips/inline-styles.html)-tyylejä. Palaamme asiaan tarkemmin seuraavassa osassa.
+### Komponentin lapset, eli props.children
 
-## Komponentin lapset, eli this.props.children
+Kirjautumislomakkeen näkyvyyttä ympäröivän koodin voi ajatella olevan oma looginen kokonaisuutensa ja se onkin hyvä eristää pois komponentista <i>App</i> omaksi komponentikseen.
 
-Kirjautumislomakkeen näkyvyyttä ympäröivän koodin voi ajatella olevan oma looginen kokonaisuutensa ja se onkin hyvä eristää pois komponentista _App_ omaksi komponentikseen.
+Tavoitteena on luoda komponentti <i>Togglable</i>, jota käytetään seuraavalla tavalla:
 
-Tavoitteena on luoda komponentti _Togglable_, jota käytetään seuraavalla tavalla:
-
-```html
-<Togglable buttonLabel="login">
+```js
+<Togglable buttonLabel='login'>
   <LoginForm
-    username={this.state.username}
-    password={this.state.password}
-    handleChange={this.handleLoginFieldChange}
-    handleSubmit={this.login}
+    username={username}
+    password={password}
+    handleUsernameChange={({ target }) => setUsername(target.value)}
+    handlePasswordChange={({ target }) => setPassword(target.value)}
+    handleSubmit={handleLogin}
   />
 </Togglable>
 ```
 
-Komponentin käyttö poikkeaa aiemmin näkemistämme siinä, että käytössä on nyt avaava ja sulkeva tagi, joiden sisällä määritellään toinen komponentti eli _LoginForm_. Reactin terminologiassa _LoginForm_ on nyt komponentin _Togglable_ lapsi.
+Komponentin käyttö poikkeaa aiemmin näkemistämme siinä, että käytössä on nyt avaava ja sulkeva tagi, joiden sisällä määritellään toinen komponentti eli <i>LoginForm</i>. Reactin terminologiassa <i>LoginForm</i> on nyt komponentin <i>Togglable</i> lapsi.
 
-_Togglablen_ avaavan ja sulkevan tagin sisälle voi sijoittaa lapsiksi mitä tahansa React-elementtejä, esim.:
+<i>Togglablen</i> avaavan ja sulkevan tagin sisälle voi sijoittaa lapsiksi mitä tahansa React-elementtejä, esim.:
 
-```html
+```js
 <Togglable buttonLabel="paljasta">
   <p>tämä on aluksi piilossa</p>
   <p>toinen salainen rivi</p>
@@ -160,66 +186,63 @@ _Togglablen_ avaavan ja sulkevan tagin sisälle voi sijoittaa lapsiksi mitä tah
 
 Komponentin koodi on seuraavassa:
 
-```react
-class Togglable extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      visible: false
-    }
+```js
+import React, { useState } from 'react' 
+
+const Togglable = (props) => {
+  const [visible, setVisible] = useState(false)
+
+  const hideWhenVisible = { display: visible ? 'none' : '' }
+  const showWhenVisible = { display: visible ? '' : 'none' }
+
+  const toggleVisibility = () => {
+    setVisible(!visible)
   }
 
-  toggleVisibility = () => {
-    this.setState({visible: !this.state.visible})
-  }
-
-  render() {
-    const hideWhenVisible = { display: this.state.visible ? 'none' : '' }
-    const showWhenVisible = { display: this.state.visible ? '' : 'none' }
-
-    return (
-      <div>
-        <div style={hideWhenVisible}>
-          <button onClick={this.toggleVisibility}>{this.props.buttonLabel}</button>
-        </div>
-        <div style={showWhenVisible}>
-          {this.props.children}
-          <button onClick={this.toggleVisibility}>cancel</button>
-        </div>
+  return (
+    <div>
+      <div style={hideWhenVisible}>
+        <button onClick={toggleVisibility}>{props.buttonLabel}</button>
       </div>
-    )
-  }
+      <div style={showWhenVisible}>
+        {props.children}
+        <button onClick={toggleVisibility}>cancel</button>
+      </div>
+    </div>
+  )  
 }
+
+export default Togglable
 ```
 
-Mielenkiintoista ja meille uutta on [this.props.children](https://reactjs.org/docs/glossary.html#propschildren), jonka avulla koodi viittaa komponentin lapsiin, eli avaavan ja sulkevan tagin sisällä määriteltyihin React-elementteihin.
+Mielenkiintoista ja meille uutta on [props.children](https://reactjs.org/docs/glossary.html#propschildren), jonka avulla koodi viittaa komponentin lapsiin, eli avaavan ja sulkevan tagin sisällä määriteltyihin React-elementteihin.
 
 Tällä kertaa lapset ainoastaan renderöidään komponentin oman renderöivän koodin seassa:
 
-```html
-<div style="{showWhenVisible}">
-  {this.props.children}
-  <button onClick="{this.toggleVisibility}">cancel</button>
+```js
+<div style={showWhenVisible}>
+  {props.children}
+  <button onClick={toggleVisibility}>cancel</button>
 </div>
 ```
 
-Toisin kuin "normaalit" propsit, _children_ on Reactin automaattisesti määrittelemä, aina olemassa oleva propsi. Jos komponentti määritellään automaattisesti suljettavalla eli _/>_ loppuvalla tagilla, esim.
+Toisin kuin "normaalit" propsit, <i>children</i> on Reactin automaattisesti määrittelemä, aina olemassa oleva propsi. Jos komponentti määritellään automaattisesti suljettavalla eli _/>_ loppuvalla tagilla, esim.
 
-```html
+```js
 <Note
   key={note.id}
   note={note}
-  toggleImportance={this.toggleImportanceOf(note.id)}
+  toggleImportance={() => toggleImportanceOf(note.id)}
 />
 ```
 
-on _this.props.children_ tyhjä taulukko.
+on <i>props.children</i> tyhjä taulukko.
 
-Komponentti _Togglable_ on uusiokäytettävä ja voimme käyttää sitä tekemään myös uuden muistiinpanon luomisesta huolehtivan formin vastaavalla tavalla tarpeen mukaan näytettäväksi.
+Komponentti <i>Togglable</i> on uusiokäytettävä ja voimme käyttää sitä tekemään myös uuden muistiinpanon luomisesta huolehtivan formin vastaavalla tavalla tarpeen mukaan näytettäväksi.
 
 Eristetään ensin muistiinpanojen luominen omaksi komponentiksi
 
-```react
+```js
 const NoteForm = ({ onSubmit, handleChange, value}) => {
   return (
     <div>
@@ -237,108 +260,268 @@ const NoteForm = ({ onSubmit, handleChange, value}) => {
 }
 ```
 
-ja määritellään lomakkeen näyttävä koodi komponentin _Togglable_ sisällä
+ja määritellään lomakkeen näyttävä koodi komponentin <i>Togglable</i> sisällä
 
-```html
+```js
 <Togglable buttonLabel="new note">
   <NoteForm
-    onSubmit={this.addNote}
-    value={this.state.newNote}
-    handleChange={this.handleNoteChange}
+    onSubmit={addNote}
+    value={newNote}
+    handleChange={handleNoteChange}
   />
-</Togglable>
+</Togglable>    
 ```
 
-## ref eli viite komponenttiin
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019part2-notes/tree/part5-4), branchissa <i>part5-4</i>.
+
+### ref eli viite komponenttiin
 
 Ratkaisu on melko hyvä, haluaisimme kuitenkin parantaa sitä erään seikan osalta.
 
-Kun uusi muistiinpano luodaan, olisi loogista jos luomislomake menisi piiloon. Nyt lomake pysyy näkyvillä. Lomakkeen piilottamiseen sisältyy kuitenkin pieni ongelma, sillä näkyvyyttä kontrolloidaan _Togglable_-komponentin tilassa olevalla muuttujalla ja komponentissa määritellyllä metodilla _toggleVisibility_. Miten pääsemme niihin käsiksi komponentin ulkopuolelta?
+Kun uusi muistiinpano luodaan, olisi loogista jos luomislomake menisi piiloon. Nyt lomake pysyy näkyvillä. Lomakkeen piilottamiseen sisältyy kuitenkin pieni ongelma, sillä näkyvyyttä kontrolloidaan <i>Togglable</i>-komponentin tilassa olevalla muuttujalla <i>visible</i>. Miten pääsemme tilaan käsiksi komponentin ulkopuolelta?
 
-Koska React-komponentit ovat Javascript-olioita, on niiden metodeja mahdollista kutsua jos komponenttia vastaavaan olioon onnistutaan saamaan viite.
+Reactin [ref](https://reactjs.org/docs/refs-and-the-dom.html)-mekanismi tarjoaa eräänlaisen viitteen komponenttiin. 
 
-Eräs keino viitteen saamiseen on React-komponenttien attribuutti [ref](https://reactjs.org/docs/refs-and-the-dom.html#adding-a-ref-to-a-class-component).
-
-Muutetaan lomakkeen renderöivää koodia seuraavasti:
-
-```bash
-<div>
-  <Togglable buttonLabel="new note" ref={component => this.noteForm = component}>
-    <NoteForm
-      ...
-    />
-  </Togglable>
-</div>
-```
-
-Kun komponentti _Togglable_ renderöidään, suorittaa React ref-attribuutin sisällä määritellyn funktion:
+Tehdään komponenttiin <i>App</i> seuraavat muutokset
 
 ```js
-component => (this.noteForm = component);
+const App = () => {
+  // ...
+  const noteFormRef = React.createRef() // highlight-line
+
+  const noteForm = () => (
+    <Togglable buttonLabel="new note" ref={noteFormRef}> // highlight-line
+      <NoteForm
+        onSubmit={addNote}
+        value={newNote}
+        handleChange={handleNoteChange}
+      />
+    </Togglable>    
+  )
+
+  // ...
+}
 ```
 
-parametrin _component_ arvona on viite komponenttiin. Funktio tallettaa viitteen muuttujaan _this.noteForm_ eli _App_-komponentin kenttään _noteForm_.
+Metodilla [createRef](https://reactjs.org/docs/react-api.html#reactcreateref) luodaan ref <i>noteFormRef</i>, joka kiinnitetään muistiinpanojen luomislomakkeen sisältävälle <i>Togglable</i>-komponentille. Nyt siis muuttuja <i>noteFormRef</i> toimii viitteenä komponenttiin.
 
-Nyt mistä tahansa komponentin _App_ sisältä on mahdollista päästä käsiksi uusien muistiinpanojen luomisen sisältävään _Togglable_-komponenttiin.
-
-Voimme nyt piilottaa lomakkeen kutsumalla _this.noteForm.toggleVisibility()_ samalla kun uuden muistiinpanon luominen tapahtuu:
+Komponenttia <i>Togglable</i> laajennetaan seuraavasti
 
 ```js
-addNote = e => {
-  e.preventDefault();
-  this.noteForm.toggleVisibility();
+import React, { useState, useImperativeMethods } from 'react' // highlight-line
 
-  // ..
-};
+const Togglable = React.forwardRef((props, ref) => { // highlight-line
+  const [visible, setVisible] = useState(false)
+
+  const hideWhenVisible = { display: visible ? 'none' : '' }
+  const showWhenVisible = { display: visible ? '' : 'none' }
+
+  const toggleVisibility = () => {
+    setVisible(!visible)
+  }
+
+// highlight-start
+  useImperativeMethods(ref, () => {
+    return {
+      toggleVisibility
+    }
+  })
+// highlight-end  
+
+  return (
+    <div>
+      <div style={hideWhenVisible}>
+        <button onClick={toggleVisibility}>{props.buttonLabel}</button>
+      </div>
+      <div style={showWhenVisible}>
+        {props.children}
+        <button onClick={toggleVisibility}>cancel</button>
+      </div>
+    </div>
+  )  
+})
+
+export default Togglable
 ```
+
+Komponentin luova funktio on kääritty funktiokutsun [forwardRef](https://reactjs.org/docs/react-api.html#reactforwardref) sisälle, näin komponentti pääsee käsikseen sille määriteltyyn refiin.
+
+Komponentti tarjoaa [useImperativeMethods](https://reactjs.org/docs/hooks-reference.html#useimperativehandle)-hookin avulla sisäisesti määritellyn funktionsa <i>toggleVisibility</i> ulkopuolelta kutsuttavaksi.
+
+Voimme nyt piilottaa lomakkeen kutsumalla <i>noteFormRef.current.toggleVisibility()</i> samalla kun uuden muistiinpanon luominen tapahtuu:
+
+```js
+const App = () => {
+  // ...
+  const addNote = (event) => {
+    event.preventDefault()
+    noteFormRef.current.toggleVisibility() // highlight-line
+    const noteObject = {
+      content: newNote,
+      date: new Date().toISOString(),
+      important: Math.random() > 0.5
+    }
+
+    noteService
+      .create(noteObject).then(returnedNote => {
+        setNotes(notes.concat(returnedNote))
+        setNewNote('')
+      })
+  }
+  // ...
+}
+```
+
+Käyttämämme [useImperativeMethods](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) on siis React hook, jonka avulla funktiona määritellylle komponentille voidaan määrittää funktioita, joita on mahdollista kutsua sen ulkopuolelta. Metodin nimi ei ole vielä tässä vaiheessa (25.1.2019) täysin vakiintunut, dokumentaatiossa sen nimi on <i>useImperativeHandle</i>. 
+
+Käyttämämme kikka komponentin tilan muuttamikseksi toimii, mutta se vaikuttaa hieman ikävältä. Saman olisi saanut aavistuksen siistimmin toteutettua "vanhan Reactin" class-perustaisilla komponenteilla, joihin tutustumme tämän osan lopussa. Tämä on toistaiseksi ainoa tapaus, jossa Reactin hook-syntaksiin nojaava ratkaisu on aavistuksen likaisen oloinen kuin class-komponenttien tarjoama ratkaisu.
 
 Refeille on myös [muita käyttötarkoituksia](https://reactjs.org/docs/refs-and-the-dom.html) kuin React-komponentteihin käsiksi pääseminen.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019part2-notes/tree/part5-4), tagissa _part5-4_.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019part2-notes/tree/part5-4), branchissa <i>part5-5</i>.
 
 ### Huomio komponenteista
 
 Kun Reactissa määritellään komponentti
 
 ```js
-class Togglable extends React.Component {
+const Togglable = () => ...
   // ...
 }
 ```
 
 ja otetaan se käyttöön seuraavasti
 
-```react
+```js
 <div>
-  <Togglable buttonLabel="1" ref={component => this.t1 = component}>
+  <Togglable buttonLabel="1" ref={togglable1}>
     ensimmäinen
   </Togglable>
 
-  <Togglable buttonLabel="2" ref={component => this.t2 = component}>
+  <Togglable buttonLabel="2" ref={togglable2}>
     toinen
   </Togglable>
 
-  <Togglable buttonLabel="3" ref={component => this.t3 = component}>
+  <Togglable buttonLabel="3" ref={togglable3}>
     kolmas
   </Togglable>
 </div>
 ```
 
-syntyy _kolme erillistä komponenttiolioa_, joilla on kaikilla oma tilansa:
+syntyy <i>kolme erillistä komponenttiolioa</i>, joilla on kaikilla oma tilansa:
 
-![](../assets/5/5.png)
+![](../images/5/12.png)
 
-_ref_-attribuutin avulla on talletettu viite jokaiseen komponenttiin muuttujiin _this.t1_, _this.t2_ ja _this.t3_.
+<i>ref</i>-attribuutin avulla on talletettu viite jokaiseen komponenttiin muuttujiin <i>togglable1</i>, <i>togglable2</i> ja <i>togglable3</i>.
 
-## Tehtäviä
+### Tehtäviä
 
-Tee nyt tehtävät [5.5-5.10](/tehtävät#komponenttien-näyttäminen-vain-tarvittaessa)
 
-## PropTypes
+#### 5.5 blogilistan frontend, osa 5
+
+Tee blogin luomiseen käytettävästä lomakkeesta ainoastaan tarvittaessa näytettävä osan 5 luvun [Kirjautumislomakkeen näyttäminen vain tarvittaessa](/osa5#kirjautumislomakkeen-näyttäminen-vain-tarvittaessa) tapaan. Voit halutessasi hyödyntää osassa 5 määriteltyä komponenttia _Togglable_.
+
+#### 5.6* blogilistan frontend, osa 6
+
+Laajenna blogien listausta siten, että klikkaamalla blogin nimeä, sen täydelliset tiedot aukeavat
+
+![]({{ "/assets/teht/33.png" | absolute_url }})
+
+Uusi klikkaus blogin nimeen pienentää näkymän.
+
+Napin _like_ ei tässä vaiheessa tarvitse tehdä mitään.
+
+Kuvassa on myös käytetty hieman CSS:ää parantamaan sovelluksen ulkoasua.
+
+Tyylejä voidaan määritellä osan 5 tapaan helposti [inline](https://react-cn.github.io/react/tips/inline-styles.html)-tyyleinä seuraavasti:
+
+```react
+class Blog extends React.Component {
+  // ...
+
+  render() {
+    // ..
+
+    const blogStyle = {
+      paddingTop: 10,
+      paddingLeft: 2,
+      border: 'solid',
+      borderWidth: 1,
+      marginBottom: 5
+    }
+
+    return (
+      <div style={blogStyle}>
+        ...
+      </div>
+    )
+  }
+}
+```
+
+### Varoitus vielä kerran
+
+Jos huomaat kirjoittavasi sekaisin async/awaitia ja _then_-kutsuja, on 99.9% varmaa, että teet jotain väärin. Käytä siis jompaa kumpaa tapaa, älä missään tapauksessa "varalta" molempia.
+
+#### 5.7* blogilistan frontend, osa 7
+
+Toteuta like-painikkeen toiminnallisuus. Like lisätään backendiin blogin yksilöivään urliin tapahtuvalla _PUT_-pyynnöllä.
+
+Koska backendin operaatio korvaa aina koko blogin, joudut lähettämään operaation mukana blogin kaikki kentät, eli jos seuraavaa blogia liketetään
+
+```js
+{
+  _id: "5a43fde2cbd20b12a2c34e91",
+  user: {
+    _id: "5a43e6b6c37f3d065eaaa581",
+    username: "mluukkai",
+    name: "Matti Luukkainen"
+  },
+  likes: 0,
+  author: "Joel Spolsky",
+  title: "The Joel Test: 12 Steps to Better Code",
+  url: "https://www.joelonsoftware.com/2000/08/09/the-joel-test-12-steps-to-better-code/"
+},
+```
+
+tulee palvelimelle tehdä PUT-pyyntö osoitteeseen _/api/blogs/5a43fde2cbd20b12a2c34e91_ ja sisällyttää pyynnön mukaan seuraava data:
+
+```js
+{
+  user: "5a43e6b6c37f3d065eaaa581",
+  likes: 1,
+  author: "Joel Spolsky",
+  title: "The Joel Test: 12 Steps to Better Code",
+  url: "https://www.joelonsoftware.com/2000/08/09/the-joel-test-12-steps-to-better-code/"
+}
+```
+
+#### 5.8* blogilistan frontend, osa 8
+
+Järjestä sovellus näyttämään blogit _likejen_ mukaisessa suuruusjärjestyksessä. Järjestäminen onnistuu taulukon metodilla [sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
+
+#### 5.9* blogilistan frontend, osa 9
+
+Lisää nappi blogin poistamiselle.
+
+Toteuta myös poiston tekevä logiikka. Laajenna backendiä siten, että ne blogit, joihin ei liity lisääjää (joita syntyi ennen kuin olimme lisänneet järjestelmään käyttäjiä), ovat kaikkien kirjautuneiden käyttäjien poistettavissa.
+
+Ohjelmasi voi näyttää esim. seuraavalta:
+
+![]({{ "/assets/teht/34.png" | absolute_url }})
+
+Kuvassa näkyvä poiston varmistus on helppo toteuttaa funktiolla
+[window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm).
+
+#### 5.10* blogilistan frontend, osa 10
+
+Näytä poistonappi ainoastaan jos kyseessä on kirjautuneen käyttäjän lisäämä blogi _tai_ blogi, jolle ei ole määritelty lisääjää (joita siis syntyi järjestelmään ennen käyttäjien olemassaoloa).
+
+### PropTypes
 
 Komponentti _Togglable_ olettaa, että sille määritellään propsina _buttonLabel_ napin teksti. Jos määrittely unohtuu
 
-```html
+```js
 <Togglable> buttonLabel unohtui... </Togglable>
 ```
 
@@ -348,13 +531,13 @@ Haluaisimmekin varmistaa että jos _Togglable_-komponenttia käytetään, on pro
 
 Kirjaston olettamat ja edellyttämät propsit ja niiden tyypit voidaan määritellä kirjaston [prop-types](https://github.com/facebook/prop-types) avulla. Asennetaan kirjasto
 
-```bash
+```js
 npm install --save prop-types
 ```
 
 _buttonLabel_ voidaan määritellä _pakolliseksi_ string-tyyppiseksi propsiksi seuraavasti
 
-```react
+```js
 import PropTypes from 'prop-types'
 
 class Togglable extends React.Component {
@@ -374,7 +557,7 @@ Koodi kuitenkin toimii edelleen, eli mikään ei pakota määrittelemään props
 
 Määritellään Proptypet myös _LoginForm_-komponentille:
 
-```react
+```js
 import PropTypes from 'prop-types'
 
 const LoginForm = ({ handleSubmit, handleChange, username, password }) => {
@@ -399,7 +582,7 @@ Jos propsin tyyppi on väärä, esim. yritetään määritellä propsiksi _handl
 
 Luokkaperustaisille komponenteille PropTypet on mahdollista määritellä myös _luokkamuuttujina_, seuraavalla syntaksilla:
 
-```react
+```js
 import PropTypes from 'prop-types'
 
 class Togglable extends React.Component {
@@ -421,10 +604,100 @@ Togglable.propTypes = {
 
 Surffatessasi internetissä saatat vielä nähdä ennen Reactin versiota 0.16 tehtyjä esimerkkejä, joissa PropTypejen käyttö ei edellytä erillistä kirjastoa. Versiosta 0.16 alkaen PropTypejä ei enää määritelty React-kirjastossa itsessään ja kirjaston _prop-types_ käyttö on pakollista.
 
-## Tehtäviä
+### Tehtäviä
 
-Tee nyt tehtävä [5.11](/tehtävät#proptypet)
+#### 5.11: blogilistan frontend, osa 11
+
+Määrittele joillekin sovelluksesi komponenteille PropTypet.
 
 
+### ESlint
+
+Konfiguroimme osassa 3 koodin tyylistä huolehtivan [ESlintin](/osa3#lint) backendiin. Otetaan nyt ESlint käyttöön myös frontendissa.
+
+Create-react-app on asentanut projektille eslintin valmiiksi, joten ei tarvita muuta kun sopiva konfiguraatio tiedoston _.eslintrc.js_.
+
+Tiedoston voi generoida komennolla
+
+```js
+npx eslint --init
+```
+
+ja vastailemalla sopivasti kysymyksiin:
+
+![](../images/6/1a.png)
+
+Jotta pääsemme eroon testeissä olevista turhista huomautuksista asennetaan [eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest)
+
+```js
+npm add --save-dev eslint-plugin-jest
+```
+
+ja otetaan se käyttöön manuaalin opastamalla tavalla.
+
+Jos vastailit initialisoinnissa kysymyksiin kuvan osoittamalla tavalla, asentuu projektiin [eslint-plugin-react](https://github.com/yannickcr/eslint-plugin-react). Laajennetaan konfiguraatiota pluginin [manuaalin](https://github.com/yannickcr/eslint-plugin-react#configuration) ohjeen mukaan.
+
+Joudumme asentamaan myös [babel-eslint](https://github.com/babel/babel-eslint)-pluginin, jotta ESlint osaisi tulkita koodissa käyttämäämme _class property_ -syntaksia. Pluginin asennus tapahtuu komennolla
+
+```js
+npm install babel-eslint --save-dev
+```
+
+ja se tulee muistaa ottaa käyttöön konfiguraatiossa.
+
+Seuraavassa lopullinen konfiguraatio, mihin on lisätty muutama muukin osassa 3 käyttöönotettu sääntö:
+
+```js
+module.exports = {
+    "env": {
+        "browser": true,
+        "es6": true,
+        "jest/globals": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": [
+        "react", "jest"
+    ],
+    "rules": {
+        "indent": [
+            "error",
+            2
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "never"
+        ],
+        "eqeqeq": "error",
+        "no-trailing-spaces": "error",
+        "object-curly-spacing": [
+            "error", "always"
+        ],
+        "arrow-spacing": [
+            "error", { "before": true, "after": true }
+        ],
+        "no-console": 0,
+        "react/prop-types": 0
+    }
+};
+```
 
 </div>
