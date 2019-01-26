@@ -148,15 +148,15 @@ Jos lomakkeella on paljon kenttiä, voi olla työlästä toteuttaa jokaiselle ke
 
 Lisätään _input_ elementteihin nimet _name_-attribuutteina ja vaihdetaan molemmat käyttämään samaa muutoksenkäsittelijää:
 
-```jsx
-<form onSubmit={this.login}>
+```html
+<form onSubmit="{this.login}">
   <div>
     käyttäjätunnus
     <input
       type="text"
       name="username"
-      value={this.state.username}
-      onChange={this.handleLoginFieldChange}
+      value="{this.state.username}"
+      onChange="{this.handleLoginFieldChange}"
     />
   </div>
   <div>
@@ -164,8 +164,8 @@ Lisätään _input_ elementteihin nimet _name_-attribuutteina ja vaihdetaan mole
     <input
       type="password"
       name="password"
-      value={this.state.password}
-      onChange={this.handleLoginFieldChange}
+      value="{this.state.password}"
+      onChange="{this.handleLoginFieldChange}"
     />
   </div>
   <button type="submit">kirjaudu</button>

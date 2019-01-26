@@ -1025,7 +1025,7 @@ Tehtävät palautetaan **yksi osa kerrallaan**. Kun olet palauttanut osan tehtä
 
 **VAROITUS** create-react-app tekee projektista automaattisesti git-repositorion, ellei sovellusta luoda jo olemassaolevan repositorion sisälle. Todennäköisesti **et halua** että projektista tulee repositorio, joten suorita projektin juuressa komento _rm -rf .git_.
 
-  <h4> 1.6: unicafe osa1</h4>
+  <h4> 1.6: unicafe step1</h4>
 
 Monien firmojen tapaan nykyään myös [Unicafe](https://www.unicafe.fi/#/9/4) kerää asiakaspalautetta. Tee Unicafelle verkossa toimiva palautesovellus. Vastausvaihtoehtoja olkoon vain kolme: <i>hyvä</i>, <i>neutraali</i> ja <i>huono</i>.
 
@@ -1065,13 +1065,13 @@ ReactDOM.render(<App />,
 )
 ```
 
-<h4>1.7: unicafe osa2</h4>
+<h4>1.7: unicafe step2</h4>
 
 Laajenna sovellusta siten, että se näyttää palautteista enemmän statistiikkaa: yhteenlasketun määrän, keskiarvon (hyvän arvo 1, neutraalin 0, huonon -1) ja sen kuinka monta prosenttia palautteista on ollut positiivisia:
 
 ![](../images/1/14a.png)
 
-<h4>1.8: unicafe osa3</h4>
+<h4>1.8: unicafe step3</h4>
 
 Refaktoroi sovelluksesi siten, että tilastojen näyttäminen on eriytetty oman komponentin <i>Statistics</i> vastuulle. Sovelluksen tila säilyy edelleen juurikomponentissa <i>App</i>.
 
@@ -1100,13 +1100,13 @@ const App = () => {
 }
 ```
 
-<h4>1.9: unicafe osa4</h4>
+<h4>1.9: unicafe step4</h4>
 
 Muuta sovellusta siten, että numeeriset tilastot näytetään ainoastaan jos palautteita on jo annettu:
 
 ![](../images/1/15a.png)
 
-<h4>1.10: unicafe osa5</h4>
+<h4>1.10: unicafe step5</h4>
 
 Jatketaan sovelluksen refaktorointia. Eriytä seuraavat komponentit
 
@@ -1115,7 +1115,7 @@ Jatketaan sovelluksen refaktorointia. Eriytä seuraavat komponentit
 
 Sovelluksen tila säilytetään edelleen juurikomponentissa <i>App</i>.
 
-<h4>1.11*: unicafe osa6</h4>
+<h4>1.11*: unicafe step6</h4>
 
 Toteuta tilastojen näyttäminen HTML:n [taulukkona](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Basics) siten, että saat sovelluksesi näyttämään suunnilleen seuraavanlaiselta:
 
@@ -1129,7 +1129,7 @@ tee tarvittavat toimenpiteet jotta saat warningin katoamaan. Googlaa tarvittaess
 
 **Huolehdi nyt ja jatkossa, että konsolissa ei näy mitään warningeja!**
 
-<h4>1.12*: anekdootit osa1</h4>
+<h4>1.12*: anekdootit step1</h4>
 
 Ohjelmistotuotannossa tunnetaan lukematon määrä [anekdootteja](http://www.comp.nus.edu.sg/~damithch/pages/SE-quotes.htm) eli pieniä "onelinereita", jotka kiteyttävät alan ikuisia totuuksia.
 
@@ -1178,7 +1178,7 @@ npm install -s react@16.8.0-alpha.0 react-dom@16.8.0-alpha.0
 
 **VAROITUS** create-react-app tekee projektista automaattisesti git-repositorion, ellei sovellusta luoda jo olemassaolevan repositorion sisälle. Todennäköisesti **et halua** että projektista tulee repositorio, joten suorita projektin juuressa komento _rm -rf .git_.
 
-<h4>1.13*: anekdootit osa2</h4>
+<h4>1.13*: anekdootit step2</h4>
 
 Laajenna sovellusta siten, että näytettävää anekdoottia on mahdollista äänestää:
 
@@ -1208,7 +1208,7 @@ copy[2] += 1
 
 Yksinkertaisempi ratkaisu lienee nyt taulukon käyttö. Googlaamalla löydät paljon vihjeitä sille, miten kannattaa luoda halutun mittainen taulukko, joka on täytetty nollilla esim. [tämän](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-array-of-arbitrary-length/22209781).
 
-<h4>1.14*: anekdootit osa3</h4>
+<h4>1.14*: anekdootit step3</h4>
 
 Ja sitten vielä lopullinen versio, joka näyttää eniten ääniä saaneen anekdootin:
 

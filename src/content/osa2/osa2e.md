@@ -289,13 +289,13 @@ Toiminnallisen kokonaisuuden strukturointiyksikkö on React-komponentti, joka m�
 
 <h3>Tehtäviä</h3>
 
-<h4>2.19: puhelinluettelo osa 11</h4>
+<h4>2.19: puhelinluettelo step11</h4>
 
 Toteuta osan 2 esimerkin [parempi virheilmoitus](/osa2/tyylien_lisaaminen_react_sovellukseen#parempi-virheilmoitus) tyyliin ruudulla muutaman sekunnin näkyvä ilmoitus, joka kertoo onnistuneista operaatioista (henkilön lisäys ja poisto, sekä numeron muutos):
 
 ![](../images/2/27b.png)
 
-<h4>2.20*: puhelinluettelo osa 12</h4>
+<h4>2.20*: puhelinluettelo step12</h4>
 
 Avaa sovelluksesi kahteen selaimeen. **Jos poistat jonkun henkilön toisesta selaimesta 1** hieman ennen kun yrität <i>muuttaa henkilön numeroa</i> selaimesta 2, tapahtuu virhetilanne:
 

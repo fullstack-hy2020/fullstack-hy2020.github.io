@@ -29,11 +29,10 @@ module.exports = {
     d: 'Token-perustainen kirjautuminen'
   },
   '5': {
-    //a: 'React',
-    //b: 'Frontendin testauksen alkeet',
-    // c: 'Redux',
-    // d: 'React+Redux',
-    // e: 'Javascript',
+    //a: 'Kirjautuminen frontendissä',
+    //b: 'Lomakkeita',
+    //c: 'React-sovellusten testaaminen',
+    //d: 'Custom hookit ja Class-komponentit'
   },
   '6': {
     // a: 'Redux',

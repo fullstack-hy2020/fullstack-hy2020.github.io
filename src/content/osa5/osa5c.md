@@ -6,704 +6,241 @@ letter: c
 
 <div class="content">
 
-## Kirjautuminen React-sovelluksesta
+## React-sovelluksen testaus
 
-Kaksi edellistä osaa keskittyivät lähinnä backendin toiminnallisuuteen. Edellisessä osassa backendiin toteutettua käyttäjänhallintaa ei ole tällä hetkellä tuettuna frontendissa millään tavalla.
+Reactilla tehtyjen frontendien testaamiseen on monia tapoja. Aloitetaan niihin tutustuminen nyt.
 
-Frontend näyttää tällä hetkellä olemassaolevat muistiinpanot ja antaa muuttaa niiden tilaa. Uusia muistiinpanoja ei kuitenkaan voi lisätä, sillä osan 4 muutosten myötä backend edellyttää, että lisäyksen mukana on käyttäjän identiteetin varmistava token.
+Testit tehdään samaan tapaan kuin edellisessä osassa eli Facebookin [Jest](http://jestjs.io/)-kirjastolla. Jest onkin valmiiksi konfiguroitu create-react-app:illa luotuihin projekteihin.
 
-Toteutetaan nyt osa käyttäjienhallinnan edellyttämästä toiminnallisuudesta frontendiin. Aloitetaan käyttäjän kirjautumisesta. Oletetaan vielä tässä osassa, että käyttäjät luodaan suoraan backendiin.
+Jestin lisäksi käytetään AirBnB:n kehittämää [enzyme](https://github.com/airbnb/enzyme)-kirjastoa.
 
-Sovelluksen yläosaan on nyt lisätty kirjautumislomake, myös uuden muistiinpanon lisäämisestä huolehtiva lomake on siirretty sivun yläosaan:
-
-![](../assets/5/1.png)
-
-Komponentin _App_ koodi näyttää seuraavalta:
-
-```react
-import React from 'react'
-import noteService from './services/notes'
-
-class App extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      notes: [],
-      newNote: '',
-      showAll: true,
-      error: null,
-      username: '',
-      password: '',
-      user: null
-    }
-  }
-
-  componentDidMount() {
-    noteService.getAll().then(notes =>
-      this.setState({ notes })
-    )
-  }
-
-  addNote = (event) => {
-    event.preventDefault()
-    const noteObject = {
-      content: this.state.newNote,
-      date: new Date(),
-      important: Math.random() > 0.5
-    }
-
-    noteService
-      .create(noteObject)
-      .then(newNote => {
-        this.setState({
-          notes: this.state.notes.concat(newNote),
-          newNote: ''
-        })
-      })
-  }
-
-  toggleImportanceOf = (id) => {
-    // ...
-  }
-
-  login = (event) => {
-    event.preventDefault()
-    console.log('logging in with', this.state.username, this.state.password)
-  }
-
-  handleNoteChange = (event) => {
-    this.setState({ newNote: event.target.value })
-  }
-
-  handlePasswordChange = (event) => {
-    this.setState({ password: event.target.value })
-  }
-
-  handleUsernameChange = (event) => {
-    this.setState({ username: event.target.value })
-  }
-
-  toggleVisible = () => {
-    this.setState({ showAll: !this.state.showAll })
-  }
-
-  render() {
-    // ...
-
-    return (
-      <div>
-        <h1>Muistiinpanot</h1>
-
-        <Notification message={this.state.error} />
-
-        <h2>Kirjaudu</h2>
-
-        <form onSubmit={this.login}>
-          <div>
-            käyttäjätunnus
-            <input
-              type="text"
-              value={this.state.username}
-              onChange={this.handleUsernameChange}
-            />
-          </div>
-          <div>
-            salasana
-            <input
-              type="password"
-              value={this.state.password}
-              onChange={this.handlePasswordChange}
-            />
-          </div>
-          <button type="submit">kirjaudu</button>
-        </form>
-
-        <h2>Luo uusi muistiinpano</h2>
-
-        <form onSubmit={this.addNote}>
-          <input
-            value={this.state.newNote}
-            onChange={this.handleNoteChange}
-          />
-          <button type="submit">tallenna</button>
-        </form>
-
-        <h2>Muistiinpanot</h2>
-
-        // ...
-
-      </div >
-    )
-  }
-}
-
-export default App
-```
-
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part2-notes/tree/part5-1), tagissa _part5-1_.
-
-Kirjautumislomakkeen käsittely noudattaa samaa periaatetta kuin [osassa 2](/osa2#lomakkeet). Lomakkeen kenttiä varten on lisätty komponentin tilaan kentät _username_ ja _password_. Molemmille kentille on rekisteröity muutoksenkäsittelijä (_handleUsernameChange_ ja _handlePasswordChange_), joka synkronoi kenttään tehdyt muutokset komponentin _App_ tilaan. Kirjautumislomakkeen lähettämisestä vastaava metodi _login_ ei tee vielä mitään.
-
-Jos lomakkeella on paljon kenttiä, voi olla työlästä toteuttaa jokaiselle kentälle oma muutoksenkäsittelijä. React tarjoaakin tapoja, miten yhden muutoksenkäsittelijän avulla on mahdollista huolehtia useista syötekentistä. Jaetun käsittelijän on saatava jollain tavalla tieto minkä syötekentän muutos aiheutti tapahtuman. Eräs tapa tähän on lomakkeen syötekenttien nimeäminen.
-
-Lisätään _input_ elementteihin nimet _name_-attribuutteina ja vaihdetaan molemmat käyttämään samaa muutoksenkäsittelijää:
-
-```html
-<form onSubmit="{this.login}">
-  <div>
-    käyttäjätunnus
-    <input
-      type="text"
-      name="username"
-      value="{this.state.username}"
-      onChange="{this.handleLoginFieldChange}"
-    />
-  </div>
-  <div>
-    salasana
-    <input
-      type="password"
-      name="password"
-      value="{this.state.password}"
-      onChange="{this.handleLoginFieldChange}"
-    />
-  </div>
-  <button type="submit">kirjaudu</button>
-</form>
-```
-
-Yhteinen muutoksista huolehtiva tapahtumankäsittelijä on seuraava:
-
-```js
-handleLoginFieldChange = event => {
-  if (event.target.name === 'password') {
-    this.setState({ password: event.target.value });
-  } else if (event.target.name === 'username') {
-    this.setState({ username: event.target.value });
-  }
-};
-```
-
-Tapahtumankäsittelijän parametrina olevan tapahtumaolion _event_ kentän _target.name_ arvona on tapahtuman aiheuttaneen komponentin _name_-attribuutti, eli joko _username_ tai _password_. Koodi haarautuu nimen perusteella ja asettaa tilaan oikean kentän arvon.
-
-Javascriptissa on ES6:n myötä uusi syntaksi [computed property name](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer), jonka avulla olion kentän voi määritellä muuttujan avulla. Esim. seuraava koodi
-
-```js
-const field = 'name';
-
-const object = { [field]: 'Arto Hellas' };
-```
-
-määrittelee olion <code>{ name: 'Arto Hellas'}</code>
-
-Näin saamme eliminoitua if-lauseen tapahtumankäsittelijästä ja se pelkistyy yhden rivin mittaiseksi:
-
-```js
-handleLoginFieldChange = event => {
-  this.setState({ [event.target.name]: event.target.value });
-};
-```
-
-Kirjautuminen tapahtuu tekemällä HTTP POST -pyyntö palvelimen osoitteeseen _api/login_. Eristetään pyynnön tekevä koodi omaan moduuliin, tiedostoon _services/login.js_.
-
-Käytetään nyt promisejen sijaan _async/await_-syntaksia HTTP-pyynnön tekemiseen:
-
-```js
-import axios from 'axios';
-const baseUrl = '/api/login';
-
-const login = async credentials => {
-  const response = await axios.post(baseUrl, credentials);
-  return response.data;
-};
-
-export default { login };
-```
-
-Kirjautumisen käsittelystä huolehtiva metodi voidaan toteuttaa seuraavasti:
-
-```js
-login = async event => {
-  event.preventDefault();
-  try {
-    const user = await loginService.login({
-      username: this.state.username,
-      password: this.state.password,
-    });
-
-    this.setState({ username: '', password: '', user });
-  } catch (exception) {
-    this.setState({
-      error: 'käyttäjätunnus tai salasana virheellinen',
-    });
-    setTimeout(() => {
-      this.setState({ error: null });
-    }, 5000);
-  }
-};
-```
-
-Kirjautumisen onnistuessa nollataan kirjautumislomakkeen kentät _ja_ talletetaan palvelimen vastaus (joka sisältää _tokenin_ sekä kirjautuneen käyttäjän tiedot) sovelluksen tilan kenttään _user_.
-
-Jos kirjautuminen epäonnistuu, eli metodin _loginService.login_ suoritus aiheuttaa poikkeuksen, ilmoitetaan siitä käyttäjälle.
-
-Onnistunut kirjautuminen ei nyt näy sovelluksen käyttäjälle mitenkään. Muokataan sovellusta vielä siten, että kirjautumislomake näkyy vain _jos käyttäjä ei ole kirjautuneena_ eli _this.state.user === null_ ja uuden muistiinpanon luomislomake vain _jos käyttäjä on kirjautuneena_, eli (eli _this.state.user_ sisältää kirjautuneen käyttäjän tiedot.
-
-Määritellään ensin komponentin _App_ metodiin render apufunktiot lomakkeiden generointia varten:
-
-```html
-const loginForm = () => (
-<div>
-  <h2>Kirjaudu</h2>
-
-  <form onSubmit="{this.login}">
-    <div>
-      käyttäjätunnus
-      <input
-        type="text"
-        name="username"
-        value="{this.state.username}"
-        onChange="{this.handleLoginFieldChange}"
-      />
-    </div>
-    <div>
-      salasana
-      <input
-        type="password"
-        name="password"
-        value="{this.state.password}"
-        onChange="{this.handleLoginFieldChange}"
-      />
-    </div>
-    <button type="submit">kirjaudu</button>
-  </form>
-</div>
-) const noteForm = () => (
-<div>
-  <h2>Luo uusi muistiinpano</h2>
-
-  <form onSubmit="{this.addNote}">
-    <input value="{this.state.newNote}" onChange="{this.handleNoteChange}" />
-    <button type="submit">tallenna</button>
-  </form>
-</div>
-)
-```
-
-ja renderöidään ne ehdollisesti komponentin _App_ render-metodissa:
+Asennetaan enzyme komennolla:
 
 ```bash
-class App extends React.Component {
-  // ..
+npm install --save-dev enzyme enzyme-adapter-react-16
+```
+
+Testataan aluksi muistiinpanon renderöivää komponenttia:
+
+```html
+const Note = ({ note, toggleImportance }) => {
+  const label = note.important ? 'make not important' : 'make important'
   return (
-    <div>
-      <h1>Muistiinpanot</h1>
-
-      <Notification message={this.state.error}/>
-
-      {this.state.user === null && loginForm()}
-
-      {this.state.user !== null && noteForm()}
-
-
-      <h2>Muistiinpanot</h2>
-
-      // ...
-
-    </div>
-  )
-}
-```
-
-Lomakkeiden ehdolliseen renderöintiin käytetään hyväksi aluksi hieman erikoiselta näyttävää, mutta Reactin yhteydessä [yleisesti käytettyä kikkaa](https://reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator):
-
-```js
-{
-  this.state.user === null && loginForm();
-}
-```
-
-Jos ensimmäinen osa evaluoituu epätodeksi eli on [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy), ei toista osaa eli lomakkeen generoivaa koodia suoriteta ollenkaan.
-
-Voimme suoraviivaistaa edellistä vielä hieman käyttämällä [kysymysmerkkioperaattoria](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator):
-
-```html
-return (
-  <div>
-    <h1>Muistiinpanot</h1>
-
-    <Notification message={this.state.error}/>
-
-    {this.state.user === null ?
-      loginForm() :
-      noteForm()
-    }
-
-    <h2>Muistiinpanot</h2>
-
-    // ...
-
-  </div>
-)
-```
-
-Eli jos _this.state.user === null_ on [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), suoritetaan _loginForm_ ja muussa tapauksessa _noteForm_.
-
-Tehdään vielä sellainen muutos, että jos käyttäjä on kirjautunut, renderöidään kirjautuneet käyttäjän nimi:
-
-```html
-return (
-  <div>
-    <h1>Muistiinpanot</h1>
-
-    <Notification message={this.state.error}/>
-
-    {this.state.user === null ?
-      loginForm() :
+    <div className="wrapper">
+      <div className="content">
+        {note.content}
+      </div>
       <div>
-        <p>{this.state.user.name} logged in</p>
-        {noteForm()}
+        <button onClick={toggleImportance}>{label}</button>
       </div>
+    </div>
+  )
+}
+```
+
+Testauksen helpottamiseksi komponenttiin on lisätty sisällön määrittelevälle _div_-elementille [CSS-luokka](https://reactjs.org/docs/dom-elements.html#classname) _content_.
+
+### shallow-renderöinti
+
+Ennen testien tekemistä, tehdään _enzymen_ konfiguraatioita varten tiedosto _src/setupTests.js_ ja sille seuraava sisältö:
+
+```js
+import { configure } from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
+
+configure({ adapter: new Adapter() })
+```
+
+Nyt olemme valmiina testien tekemiseen.
+
+Koska _Note_ on yksinkertainen komponentti, joka ei käytä yhtään monimutkaista alikomponenttia vaan renderöi suoraan HTML:ää, sopii sen testaamiseen hyvin enzymen [shallow](http://airbnb.io/enzyme/docs/api/shallow.html)-renderöijä.
+
+Tehdään testi tiedostoon _src/components/Note.test.js_, eli samaan hakemistoon, missä komponentti itsekin sijaitsee.
+
+Ensimmäinen testi varmistaa, että komponentti renderöi muistiinpanon sisällön:
+
+```html
+import React from 'react'
+import { shallow } from 'enzyme'
+import Note from './Note'
+
+describe.only('<Note />', () => {
+  it('renders content', () => {
+    const note = {
+      content: 'Komponenttitestaus tapahtuu jestillä ja enzymellä',
+      important: true
     }
 
-    <h2>Muistiinpanot</h2>
+    const noteComponent = shallow(<Note note={note} />)
+    const contentDiv = noteComponent.find('.content')
+
+    expect(contentDiv.text()).toContain(note.content)
+  })
+})
+```
+
+Edellisessä osassa määrittelimme testitapaukset metodin [test](https://facebook.github.io/jest/docs/en/api.html#testname-fn-timeout) avulla. Nyt käytössä oleva _it_ viittaa samaan olioon kuin _test_, eli on sama kumpaa käytät. It on tietyissä piireissä suositumpi ja käytössä mm. Enzymen dokumentaatiossa joten käytämme it-muotoa tässä osassa.
+
+Alun konfiguroinnin jälkeen testi renderöi komponentin metodin _shallow_ avulla:
+
+```html
+const noteComponent = shallow(<Note note={note} />)
+```
+
+Normaalisti React-komponentit renderöityvät _DOM_:iin. Nyt kuitenkin renderöimme komponentteja [shallowWrapper](http://airbnb.io/enzyme/docs/api/shallow.html)-tyyppisiksi, testaukseen sopiviksi olioiksi.
+
+ShallowWrapper-muotoon renderöidyillä React-komponenteilla on runsaasti metodeja, joiden avulla niiden sisältöä voidaan tutkia. Esimerkiksi [find](http://airbnb.io/enzyme/docs/api/ShallowWrapper/find.html) mahdollistaa komponentin sisällä olevien _elementtien_ etsimisen [enzyme-selektorien](http://airbnb.io/enzyme/docs/api/selector.html) avulla. Eräs tapa elementtien etsimiseen on [CSS-selektorien](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) käyttö. Liitimme muistiinpanon sisällön kertovaan div-elementtiin luokan _content_, joten voimme etsiä elementin seuraavasti:
+
+```js
+const contentDiv = noteComponent.find('.content')
+```
+
+ekspektaatiossa varmistamme, että elementtiin on renderöitynyt oikea teksti, eli muistiinpanon sisältö:
+
+```js
+expect(contentDiv.text()).toContain(note.content)
+```
+
+### Testien suorittaminen
+
+Create-react-app:issa on konfiguroitu testit oletusarvoisesti suoritettavaksi ns. watch-moodissa, eli jos suoritat testit komennolla _npm test_, jää konsoli odottamaan koodissa tapahtuvia muutoksia. Muutosten jälkeen testit suoritetaan automaattisesti ja Jest alkaa taas odottamaan uusia muutoksia koodiin.
+
+Jos haluat ajaa testit "normaalisti", se onnistuu komennolla
+
+```bash
+CI=true npm test
+```
+
+Konsoli saattaa herjata virhettä, jos sinulla ei ole asennettuna watchmania. Watchman on Facebookin kehittämä tiedoston muutoksia tarkkaileva ohjelma. Ohjelma nopeuttaa testien ajoa ja ainakin osx sierrasta ylöspäin jatkuva testien vahtiminen aiheuttaa käyttäjillä virheilmoituksia. Näistä ilmoituksista pääsee eroon asentamalla Watchmanin.
+
+Ohjeet ohjelman asentamiseen eri käyttöjärjestelmille löydät Watchmanin sivulta:
+https://facebook.github.io/watchman/
+
+Mikäli testejä suoritettaessa ei löydetä tiedostossa _src/setupTests.js_ tehtyä adapterin konfigurointia, auttaa seuraavan asetuksen lisääminen tiedostoon package-lock.json:
+
+```
+  "jest": {
+    ...
+    "setupFiles": [
+      "<rootDir>/src/setupTests.js"
+    ],
+    ...
+  }
+```
+
+### Testien sijainti
+
+Reactissa on (ainakin) [kaksi erilaista](https://medium.com/@JeffLombardJr/organizing-tests-in-jest-17fc431ff850) konventiota testien sijoittamiseen. Sijoitimme testit ehkä vallitsevan tavan mukaan, eli samaan hakemistoon missä testattava komponentti sijaitsee.
+
+Toinen tapa olisi sijoittaa testit "normaaliin" tapaan omaan erilliseen hakemistoon. Valitaanpa kumpi tahansa tapa, on varmaa että se on jonkun mielestä täysin väärä.
+
+Itse en pidä siitä, että testit ja normaali koodi ovat samassa hakemistossa. Noudatamme kuitenkin nyt tätä tapaa, sillä se on oletusarvo create-react-app:illa konfiguroiduissa sovelluksissa.
+
+### Testien debuggaaminen
+
+Testejä tehdessä törmäämme tyypillisesti erittäin moniin ongelmiin. Näissä tilanteissa vanha kunnon _console.log_ on hyödyllinen. Voimme tulostaa _shallow_-metodin avulla renderöityjä komponentteja ja niiden sisällä olevia elementtejä metodin [debug](http://airbnb.io/enzyme/docs/api/ShallowWrapper/debug.html) avulla:
+
+```bash
+describe.only('<Note />', () => {
+  it('renders content', () => {
+    const note = {
+      content: 'Komponenttitestaus tapahtuu jestillä ja enzymellä',
+      important: true
+    }
+
+    const noteComponent = shallow(<Note note={note} />)
+    console.log(noteComponent.debug())
+
+
+    const contentDiv = noteComponent.find('.content')
+    console.log(contentDiv.debug())
 
     // ...
+  })
+})
+```
 
+Konsoliin tulostuu komponentin generoima html:
+
+```bash
+console.log src/components/Note.test.js:16
+  <div className="wrapper">
+    <div className="content">
+      Komponenttitestaus tapahtuu jestillä ja enzymellä
+    </div>
+    <div>
+      <button onClick={[undefined]}>
+        make not important
+      </button>
+    </div>
   </div>
-)
+
+console.log src/components/Note.test.js:20
+  <div className="content">
+    Komponenttitestaus tapahtuu jestillä ja enzymellä
+  </div>
 ```
 
-Ratkaisu näyttää hieman rumalta, mutta jätämme sen koodiin toistaiseksi.
+### Nappien painelu testeissä
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part2-notes/tree/part5-2), tagissa _part5-2_. **HUOM** koodissa on parissa kohtaa käytetty vahingossa komponentin kentästä nimeä _new_note_, oikea (seuraaviin tageihin korjattu) muoto on _newNote_,
+Sisällön näyttämisen lisäksi toinen _Note_-komponenttien vastuulla oleva asia on huolehtia siitä, että painettaessa noten yhteydessä olevaa nappia, tulee propsina välitettyä tapahtumankäsittelijäfunktiota _toggleImportance_ kutsua.
 
-Sovelluksemme pääkomponentti _App_ on tällä hetkellä jo aivan liian laaja ja nyt tekemämme muutokset ovat ilmeinen signaali siitä, että lomakkeet olisi syytä refaktoroida omiksi komponenteikseen. Jätämme sen kuitenkin harjoitustehtäväksi.
+Testaus onnistuu seuraavasti:
 
-## Muistiinpanojen luominen
-
-Frontend on siis tallettanut onnistuneen kirjautumisen yhteydessä backendilta saamansa tokenin sovelluksen tilaan _this.state.user.token_:
-
-![](../images/5/1b.png)
-
-Korjataan uusien muistiinpanojen luominen siihen muotoon, mitä backend edellyttää, eli lisätään kirjautuneen käyttäjän token HTTP-pyynnön Authorization-headeriin.
-
-_noteService_-moduuli muuttuu seuraavasti:
-
-```js
-import axios from 'axios';
-const baseUrl = '/api/notes';
-
-let token = null;
-
-const getAll = () => {
-  const request = axios.get(baseUrl);
-  return request.then(response => response.data);
-};
-
-const setToken = newToken => {
-  token = `bearer ${newToken}`;
-};
-
-const create = async newObject => {
-  const config = {
-    headers: { Authorization: token },
-  };
-
-  const response = await axios.post(baseUrl, newObject, config);
-  return response.data;
-};
-
-const update = (id, newObject) => {
-  const request = axios.put(`${baseUrl}/${id}`, newObject);
-  return request.then(response => response.data);
-};
-
-export default { getAll, create, update, setToken };
-```
-
-Moduulille on määritelty vain moduulin sisällä näkyvä muuttuja _token_, jolle voidaan asettaa arvo moduulin exporttaamalla funktiolla _setToken_. Async/await-syntaksiin muutettu _create_ asettaa moduulin tallessa pitämän tokenin _Authorization_-headeriin, jonka se antaa axiosille metodin _post_ kolmantena parametrina.
-
-Kirjautumisesta huolehtivaa tapahtumankäsittelijää pitää vielä viilata sen verran, että se kutsuu metodia <code>noteService.setToken(user.token)</code> onnistuneen kirjautumisen yhteydessä:
-
-```js
-login = async event => {
-  event.preventDefault();
-  try {
-    const user = await loginService.login({
-      username: this.state.username,
-      password: this.state.password,
-    });
-
-    noteService.setToken(user.token);
-    this.setState({ username: '', password: '', user });
-  } catch (exception) {
-    // ...
+```bash
+it('clicking the button calls event handler once', () => {
+  const note = {
+    content: 'Komponenttitestaus tapahtuu jestillä ja enzymellä',
+    important: true
   }
-};
-```
 
-Uusien muistiinpanojen luominen onnistuu taas!
+  const mockHandler = jest.fn()
 
-## Tokenin tallettaminen selaimen local storageen
-
-Sovelluksessamme on ikävä piirre: kun sivu uudelleenladataan, tieto käyttäjän kirjautumisesta katoaa. Tämä hidastaa melkoisesti myös sovelluskehitystä, esim. testatessamme uuden muistiinpanon luomista, joudumme joka kerta kirjautumaan järjestelmään.
-
-Ongelma korjaantuu helposti tallettamalla kirjautumistiedot [local storageen](https://developer.mozilla.org/en-US/docs/Web/API/Storage) eli selaimessa olevaan avain-arvo- eli [key-value](https://en.wikipedia.org/wiki/Key-value_database)-periaatteella toimivaan tietokantaan.
-
-Local storage on erittäin helppokäyttöinen. Metodilla [setItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem) talletetaan tiettyä _avainta_ vastaava _arvo_, esim:
-
-```js
-window.localStorage.setItem('nimi', 'juha tauriainen');
-```
-
-tallettaa avaimen _nimi_ arvoksi toisena parametrina olevan merkkijonon.
-
-Avaimen arvo selviää metodilla [getItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem):
-
-```js
-window.localStorage.getItem('nimi');
-```
-
-ja [removeItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/removeItem) poistaa avaimen.
-
-Storageen talletetut arvot säilyvät vaikka sivu uudelleenladattaisiin. Storage on ns. [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin)-kohtainen, eli jokaisella selaimella käytettävällä web-sovelluksella on oma storagensa.
-
-Laajennetaan sovellusta siten, että se asettaa kirjautuneen käyttäjän tiedot local storageen.
-
-Koska storageen talletettavat arvot ovat [merkkijonoja](https://developer.mozilla.org/en-US/docs/Web/API/DOMString), emme voi tallettaa storageen suoraan Javascript-oliota, vaan ne on muutettava ensin JSON-muotoon metodilla _JSON.stringify_. Vastaavasti kun JSON-muotoinen olio luetaan local storagesta, on se parsittava takaisin Javascript-olioksi metodilla _JSON.parse_.
-
-Kirjautumisen yhteyteen tehtävä muutos on seuraava:
-
-```js
-login = async event => {
-  event.preventDefault();
-
-  try {
-    const user = await loginService.login({
-      username: this.state.username,
-      password: this.state.password,
-    });
-
-    window.localStorage.setItem('loggedNoteappUser', JSON.stringify(user));
-    noteService.setToken(user.token);
-    this.setState({ username: '', password: '', user });
-  } catch (exception) {
-    // ...
-  }
-};
-```
-
-Kirjautuneen käyttäjän tiedot tallentuvat nyt local storageen ja niitä voidaan tarkastella konsolista:
-
-![](../images/5/2a.png)
-
-Sovellusta on vielä laajennettava siten, että kun sivulle tullaan uudelleen, esim. selaimen uudelleenlataamisen yhteydessä, tulee sovelluksen tarkistaa löytyykö local storagesta tiedot kirjautuneesta käyttäjästä. Jos löytyy, asetetaan ne sovelluksen tilaan ja _noteServicelle_.
-
-Sopiva paikka tähän on _App_-komponentin metodi [componentDidMount](https://reactjs.org/docs/react-component.html#componentdidmount) johon tutustuimme jo [osassa 2](/osa2#komponenttien-lifecycle-metodit).
-
-Kyseessä on siis ns. lifecycle-metodi, jota React-kutsuu heti komponentin ensimmäisen renderöinnin jälkeen. Metodissa on tällä hetkellä jo muistiinpanot palvelimelta lataava koodi. Laajennetaan koodia seuraavasti
-
-```js
-componentDidMount() {
-  noteService.getAll().then(notes =>
-    this.setState({ notes })
+  const noteComponent = shallow(
+    <Note
+      note={note}
+      toggleImportance={mockHandler}
+    />
   )
 
-  const loggedUserJSON = window.localStorage.getItem('loggedNoteappUser')
-  if (loggedUserJSON) {
-    const user = JSON.parse(loggedUserJSON)
-    this.setState({user})
-    noteService.setToken(user.token)
-  }
-}
+  const button = noteComponent.find('button')
+  button.simulate('click')
+
+  expect(mockHandler.mock.calls.length).toBe(1)
+})
 ```
 
-Nyt käyttäjä pysyy kirjautuneena sovellukseen ikuisesti. Sovellukseen olisikin kenties syytä lisätä _logout_-toiminnallisuus, joka poistaisi kirjautumistiedot local storagesta. Jätämme kuitenkin uloskirjautumisen harjoitustehtäväksi.
-
-Meille riittää se, että sovelluksesta on mahdollista kirjautua ulos kirjoittamalla konsoliin
+Testissä on muutama mielenkiintoinen seikka. Tapahtumankäsittelijäksi annetaan Jestin avulla määritelty [mock](https://facebook.github.io/jest/docs/en/mock-functions.html)-funktio:
 
 ```js
-window.localStorage.removeItem('loggedNoteappUser');
+const mockHandler = jest.fn()
 ```
 
-tai local storagen tilan kokonaan nollaavan komennon
+Testi hakee renderöidystä komponentista _button_-elementin ja klikkaa sitä. Koska komponentissa on ainoastaan yksi nappi, on sen hakeminen helppoa:
 
 ```js
-window.localStorage.clear();
+const button = noteComponent.find('button')
+button.simulate('click')
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part2-notes/tree/part5-3), tagissa _part5-3_.
+Klikkaaminen tapahtuu metodin [simulate](http://airbnb.io/enzyme/docs/api/ShallowWrapper/simulate.html) avulla.
 
-## Tehtäviä
+Testin ekspektaatio varmistaa, että _mock-funktiota_ on kutsuttu täsmälleen kerran:
 
-Tee nyt tehtävät [5.1-5.4](/tehtävät#osa-5)
-
-## Kirjautumislomakkeen näyttäminen vain tarvittaessa
-
-Muutetaan sovellusta siten, että kirjautumislomaketta ei oletusarvoisesti näytetä:
-
-![](../assets/5/3.png)
-
-Lomake aukeaa, jos käyttäjä painaa nappia _login_:
-
-![](../assets/5/4.png)
-
-Napilla _cancel_ käyttäjä saa tarvittaessa suljettua lomakkeen.
-
-Aloitetaan eristämällä kirjautumislomake omaksi komponentikseen:
-
-```html
-const LoginForm = ({ handleSubmit, handleChange, username, password }) => {
-return (
-<div>
-  <h2>Kirjaudu</h2>
-
-  <form onSubmit="{handleSubmit}">
-    <div>
-      käyttäjätunnus
-      <input value="{username}" onChange="{handleChange}" name="username" />
-    </div>
-    <div>
-      salasana
-      <input
-        type="password"
-        name="password"
-        value="{password}"
-        onChange="{handleChange}"
-      />
-    </div>
-    <button type="submit">kirjaudu</button>
-  </form>
-</div>
-) }
+```js
+expect(mockHandler.mock.calls.length).toBe(1)
 ```
 
-Reactin [suosittelemaan tyyliin](https://reactjs.org/docs/lifting-state-up.html) tila ja tilaa käsittelevät funktiot on kaikki määritelty komponentin ulkopuolella ja välitetään komponentille propseina.
+[Mockoliot ja -funktiot](https://en.wikipedia.org/wiki/Mock_object) ovat testauksessa yleisesti käytettyjä valekomponentteja, joiden avulla korvataan testattavien komponenttien riippuvuuksia, eli niiden tarvitsemia muita komponentteja. Mockit mahdollistavat mm. kovakoodattujen syötteiden palauttamisen sekä niiden metodikutsujen lukumäärän sekä parametrien testauksen aikaisen tarkkailun.
 
-Huomaa, että propsit otetaan vastaan _destrukturoimalla_, eli sen sijaan että määriteltäisiin
+Esimerkissämme mock-funktio sopi tarkoitukseen erinomaisesti, sillä sen avulla on helppo varmistaa, että metodia on kutsuttu täsmälleen kerran.
 
-```html
-const LoginForm = (props) => {
-  return (
-      <form onSubmit={props.handleSubmit}>
-        <div>
-          käyttäjätunnus
-          <input
-            value={props.username}
-            onChange={props.handleChange}
-            name="username"
-          />
-        </div>
-        // ...
-        <button type="submit">kirjaudu</button>
-      </form>
-    </div>
-  )
-}
-```
+### Komponentin _Togglable_ testit
 
-jolloin muuttujan _props_ kenttiin on viitattava muuttujan kautta esim. _props.handleSubmit_, otetaan kentät suoraan vastaan omiin muuttujiinsa.
-
-Nopea tapa toiminnallisuuden toteuttamiseen on muuttaa komponentin _App_ käyttämä funktio _loginForm_ seuraavaan muotoon:
-
-```react
-const loginForm = () => {
-  const hideWhenVisible = { display: this.state.loginVisible ? 'none' : '' }
-  const showWhenVisible = { display: this.state.loginVisible ? '' : 'none' }
-
-  return (
-    <div>
-      <div style={hideWhenVisible}>
-        <button onClick={e => this.setState({ loginVisible: true })}>log in</button>
-      </div>
-      <div style={showWhenVisible}>
-        <LoginForm
-          username={this.state.username}
-          password={this.state.password}
-          handleChange={this.handleLoginFieldChange}
-          handleSubmit={this.login}
-        />
-        <button onClick={e => this.setState({ loginVisible: false })}>cancel</button>
-      </div>
-    </div>
-  )
-}
-```
-
-Komponentin _App_ tilaan on nyt lisätty kenttä _loginVisible_ joka määrittelee sen näytetäänkö kirjautumislomake.
-
-Näkyvyyttä säätelevää tilaa vaihdellaan kahden napin avulla, molempiin on kirjoitettu tapahtumankäsittelijän koodi suoraan:
-
-```react
-<button onClick={e => this.setState({ loginVisible: true })}>log in</button>
-
-<button onClick={e => this.setState({ loginVisible: false })}>cancel</button>
-```
-
-Komponenttien näkyvyys on määritelty asettamalla komponentille CSS-määrittely, jossa [display](https://developer.mozilla.org/en-US/docs/Web/CSS/display)-propertyn arvoksi asetetaan _none_ jos komponentin ei haluta näkyvän:
-
-```html
-const hideWhenVisible = { display: this.state.loginVisible ? 'none' : '' } const
-showWhenVisible = { display: this.state.loginVisible ? '' : 'none' } // ...
-
-<div style="{hideWhenVisible}">// nappi</div>
-
-<div style="{showWhenVisible}">// lomake</div>
-```
-
-Käytössä on taas kysymysmerkkioperaattori, eli jos _this.state.loginVisible_ on _true_, tulee napin CSS-määrittelyksi
-
-```css
-display: 'none';
-```
-
-jos _this.state.loginVisible_ on _false_, ei _display_ saa mitään (napin näkyvyyteen liittyvää) arvoa.
-
-Hyödynsimme mahdollisuutta määritellä React-komponenteille koodin avulla [inline](https://react-cn.github.io/react/tips/inline-styles.html)-tyylejä. Palaamme asiaan tarkemmin seuraavassa osassa.
-
-## Komponentin lapset, eli this.props.children
-
-Kirjautumislomakkeen näkyvyyttä ympäröivän koodin voi ajatella olevan oma looginen kokonaisuutensa ja se onkin hyvä eristää pois komponentista _App_ omaksi komponentikseen.
-
-Tavoitteena on luoda komponentti _Togglable_, jota käytetään seuraavalla tavalla:
-
-```html
-<Togglable buttonLabel="login">
-  <LoginForm
-    username={this.state.username}
-    password={this.state.password}
-    handleChange={this.handleLoginFieldChange}
-    handleSubmit={this.login}
-  />
-</Togglable>
-```
-
-Komponentin käyttö poikkeaa aiemmin näkemistämme siinä, että käytössä on nyt avaava ja sulkeva tagi, joiden sisällä määritellään toinen komponentti eli _LoginForm_. Reactin terminologiassa _LoginForm_ on nyt komponentin _Togglable_ lapsi.
-
-_Togglablen_ avaavan ja sulkevan tagin sisälle voi sijoittaa lapsiksi mitä tahansa React-elementtejä, esim.:
-
-```html
-<Togglable buttonLabel="paljasta">
-  <p>tämä on aluksi piilossa</p>
-  <p>toinen salainen rivi</p>
-</Togglable>
-```
-
-Komponentin koodi on seuraavassa:
+Tehdään komponentille _Togglable_ muutama testi. Lisätään komponentin lapset renderöivään div-elementtiin CSS-luokka _togglableContent_:
 
 ```react
 class Togglable extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      visible: false
-    }
-  }
-
-  toggleVisibility = () => {
-    this.setState({visible: !this.state.visible})
-  }
 
   render() {
     const hideWhenVisible = { display: this.state.visible ? 'none' : '' }
@@ -714,7 +251,7 @@ class Togglable extends React.Component {
         <div style={hideWhenVisible}>
           <button onClick={this.toggleVisibility}>{this.props.buttonLabel}</button>
         </div>
-        <div style={showWhenVisible}>
+        <div style={showWhenVisible} className="togglableContent">
           {this.props.children}
           <button onClick={this.toggleVisibility}>cancel</button>
         </div>
@@ -724,35 +261,214 @@ class Togglable extends React.Component {
 }
 ```
 
-Mielenkiintoista ja meille uutta on [this.props.children](https://reactjs.org/docs/glossary.html#propschildren), jonka avulla koodi viittaa komponentin lapsiin, eli avaavan ja sulkevan tagin sisällä määriteltyihin React-elementteihin.
+Testit ovat seuraavassa
 
-Tällä kertaa lapset ainoastaan renderöidään komponentin oman renderöivän koodin seassa:
+```react
+import React from 'react'
+import { shallow } from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
+import Note from './Note'
+import Togglable from './Togglable'
 
-```html
-<div style="{showWhenVisible}">
-  {this.props.children}
-  <button onClick="{this.toggleVisibility}">cancel</button>
+describe('<Togglable />', () => {
+  let togglableComponent
+
+  beforeEach(() => {
+    togglableComponent = shallow(
+      <Togglable buttonLabel="show...">
+        <div className="testDiv" />
+      </Togglable>
+    )
+  })
+
+  it('renders its children', () => {
+    expect(togglableComponent.contains(<div className="testDiv" />)).toEqual(true)
+  })
+
+  it('at start the children are not displayed', () => {
+    const div = togglableComponent.find('.togglableContent')
+    expect(div.getElement().props.style).toEqual({ display: 'none' })
+  })
+
+  it('after clicking the button, children are displayed', () => {
+    const button = togglableComponent.find('button')
+
+    button.at(0).simulate('click')
+    const div = togglableComponent.find('.togglableContent')
+    expect(div.getElement().props.style).toEqual({ display: '' })
+  })
+
+})
+```
+
+Ennen jokaista testiä suoritettava _beforeEach_ alustaa shallow-renderöimällä _Togglable_-komponentin muuttujaan _togglableComponent_.
+
+Ensimmäinen testi tarkastaa, että _Togglable_ renderöi lapsikomponentin _<div className="testDiv" />_. Loput testit varmistavat, että Togglablen sisältämä lapsikomponentti on alussa näkymättömissä, eli sen sisältävään _div_-elementtiin liittyy tyyli _{ display: 'none' }_, ja että nappia painettaessa komponentti näkyy, eli tyyli on _{ display: '' }_. Koska Togglablessa on kaksi nappia, painallusta simuloidessa niistä pitää valita oikea, eli tällä kertaa ensimmäinen.
+
+## Tehtäviä
+
+Tee nyt tehtävät [5.12-14](/tehtävät#komponenttien-testaaminen)
+
+### mount ja full DOM -renderöinti
+
+Käyttämämme _shallow_-renderöijä on useimmista tapauksissa riittävä. Joskus tarvitsemme kuitenkin järeämmän työkalun sillä _shallow_ renderöi ainoastaan "yhden tason", eli sen komponentin, jolle metodia kutsutaan.
+
+Jos yritämme esim. sijoittaa kaksi _Note_-komponenttia _Togglable_-komponentin sisälle ja tulostamme syntyvän _ShallowWrapper_ -olion
+
+```bash
+it('shallow renders only one level', () => {
+  const note1 = {
+    content: 'Komponenttitestaus tapahtuu jestillä ja enzymellä',
+    important: true
+  }
+  const note2 = {
+    content: 'shallow ei renderöi alikomponentteja',
+    important: true
+  }
+
+  const togglableComponent = shallow(
+    <Togglable buttonLabel="show...">
+      <Note note={note1} />
+      <Note note={note2} />
+    </Togglable>
+  )
+
+  console.log(togglableComponent.debug())
+})
+```
+
+huomaamme, että _Togglable_ komponentti on renderöitynyt, eli "muuttunut" HTML:ksi, mutta sen sisällä olevat _Note_-komponentit eivät ole HTML:ää vaan React-komponentteja.
+
+```bash
+<div>
+  <div style={{...}}>
+    <button onClick={[Function]}>
+      show...
+    </button>
+  </div>
+  <div style={{...}} className="togglableContent">
+    <Note note={{...}} />
+    <Note note={{...}} />
+    <button onClick={[Function]}>
+      cancel
+    </button>
+  </div>
 </div>
 ```
 
-Toisin kuin "normaalit" propsit, _children_ on Reactin automaattisesti määrittelemä, aina olemassa oleva propsi. Jos komponentti määritellään automaattisesti suljettavalla eli _/>_ loppuvalla tagilla, esim.
+Jos komponentille tehdään edellisten esimerkkien tapaan yksikkötestejä, _shallow_-renderöinti on useimmiten riittävä. Jos haluamme testata isompia kokonaisuuksia, eli tehdä frontendin _integraatiotestausta_, ei _shallow_-renderöinti riitä vaan on turvauduttava komponentit kokonaisuudessaan renderöivään [mount](http://airbnb.io/enzyme/docs/api/mount.html):iin.
 
-```html
-<Note
-  key={note.id}
-  note={note}
-  toggleImportance={this.toggleImportanceOf(note.id)}
-/>
-```
-
-on _this.props.children_ tyhjä taulukko.
-
-Komponentti _Togglable_ on uusiokäytettävä ja voimme käyttää sitä tekemään myös uuden muistiinpanon luomisesta huolehtivan formin vastaavalla tavalla tarpeen mukaan näytettäväksi.
-
-Eristetään ensin muistiinpanojen luominen omaksi komponentiksi
+Muutetaan testi käyttämään _shallowin_ sijaan _mountia_:
 
 ```react
-const NoteForm = ({ onSubmit, handleChange, value}) => {
+import React from 'react'
+import { shallow, mount } from 'enzyme'
+import Note from './Note'
+import Togglable from './Togglable'
+
+it('mount renders all components', () => {
+  const note1 = {
+    content: 'Komponenttitestaus tapahtuu jestillä ja enzymellä',
+    important: true
+  }
+  const note2 = {
+    content: 'mount renderöi myös alikomponentit',
+    important: true
+  }
+
+  const noteComponent = mount(
+    <Togglable buttonLabel="show...">
+      <Note note={note1} />
+      <Note note={note2} />
+    </Togglable>
+  )
+
+  console.log(noteComponent.debug())
+})
+```
+
+Tuloksena on kokonaisuudessaan HTML:ksi renderöitynyt _Togglable_-komponentti:
+
+```bash
+<Togglable buttonLabel="show...">
+  <div>
+    <div style={{...}}>
+      <button onClick={[Function]}>
+        show...
+      </button>
+    </div>
+    <div style={{...}} className="togglableContent">
+      <Note note={{...}}>
+        <div className="wrapper">
+          <div className="content">
+            Komponenttitestaus tapahtuu jestillä ja enzymellä
+          </div>
+          <div>
+            <button onClick={[undefined]}>
+              make not important
+            </button>
+          </div>
+        </div>
+      </Note>
+      <Note note={{...}}>
+        <div className="wrapper">
+          <div className="content">
+            mount renderöi myös alikomponentit
+          </div>
+          <div>
+            <button onClick={[undefined]}>
+              make not important
+            </button>
+          </div>
+        </div>
+      </Note>
+      <button onClick={[Function]}>
+        cancel
+      </button>
+    </div>
+  </div>
+</Togglable>
+```
+
+Mountin avulla renderöitäessä testi pääsee siis käsiksi periaatteessa samaan HTML-koodiin, joka todellisuudessa renderöidään selaimeen ja tämä luonnollisesti mahdollistaa huomattavasti monipuolisemman testauksen kuin _shallow_-renderöinti. Komennolla _mount_ tapahtuva renderöinti on kuitenkin hitaampaa, joten jos _shallow_ riittää, sitä kannattaa käyttää.
+
+Huomaa, että testin käyttämä metodi [debug](http://airbnb.io/enzyme/docs/api/ReactWrapper/debug.html) ei palauta todellista HTML:ää vaan debuggaustarkoituksiin sopivan tekstuaalisen esitysmuodon komponentista. Todellisessa HTML:ssä ei mm. ole ollenkaan React-komponenttien tageja.
+
+Jos on tarvetta tietää, mikä on testattaessa syntyvä todellinen HTML, sen saa selville metodilla [html](http://airbnb.io/enzyme/docs/api/ReactWrapper/html.html).
+
+Jos muutamme testin viimeisen komennon muotoon
+
+```js
+console.log(noteComponent.html())
+```
+tulostuu todellinen HTML:
+
+```html
+<div>
+  <div><button>show...</button></div>
+  <div style="display: none;">
+    <div class="wrapper">
+      <div class="content">Komponenttitestaus tapahtuu jestillä ja enzymellä</div>
+      <div><button>make not important</button></div>
+    </div>
+    <div class="wrapper">
+      <div class="content">mount renderöi myös alikomponentit</div>
+      <div><button>make not important</button></div>
+    </div>
+    <button>cancel</button></div>
+</div>
+```
+
+Komento _mount_ palauttaa renderöidyn "komponenttipuun" [ReactWrapper](https://airbnb.io/enzyme/docs/api/mount.html#mountnode-options--reactwrapper)-tyyppisenä oliona, joka tarjoaa hyvin samantyyppisen rajapinnan komponentin sisällön tutkimiseen kuin _ShallowWrapper_.
+
+### Lomakkeiden testaus
+
+Lomakkeiden testaaminen Enzymellä on jossain määrin haasteellista. Enzymen dokumentaatio ei mainitse lomakkeista sanaakaan. [Issueissa](https://github.com/airbnb/enzyme/issues/364) asiasta kuitenkin keskustellaan.
+
+Tehdään testi komponentille _NoteForm_. Lomakkeen koodi näyttää seuraavalta
+
+```react
+const NoteForm = ({ onSubmit, handleChange, value }) => {
   return (
     <div>
       <h2>Luo uusi muistiinpano</h2>
@@ -769,192 +485,228 @@ const NoteForm = ({ onSubmit, handleChange, value}) => {
 }
 ```
 
-ja määritellään lomakkeen näyttävä koodi komponentin _Togglable_ sisällä
+Lomakkeen toimintaperiaatteena on synkronoida lomakkeen tila sen ulkopuolella olevan React-komponentin tilaan. Lomakettamme on jossain määrin vaikea testata yksistään.
 
-```html
-<Togglable buttonLabel="new note">
-  <NoteForm
-    onSubmit={this.addNote}
-    value={this.state.newNote}
-    handleChange={this.handleNoteChange}
-  />
-</Togglable>
-```
-
-## ref eli viite komponenttiin
-
-Ratkaisu on melko hyvä, haluaisimme kuitenkin parantaa sitä erään seikan osalta.
-
-Kun uusi muistiinpano luodaan, olisi loogista jos luomislomake menisi piiloon. Nyt lomake pysyy näkyvillä. Lomakkeen piilottamiseen sisältyy kuitenkin pieni ongelma, sillä näkyvyyttä kontrolloidaan _Togglable_-komponentin tilassa olevalla muuttujalla ja komponentissa määritellyllä metodilla _toggleVisibility_. Miten pääsemme niihin käsiksi komponentin ulkopuolelta?
-
-Koska React-komponentit ovat Javascript-olioita, on niiden metodeja mahdollista kutsua jos komponenttia vastaavaan olioon onnistutaan saamaan viite.
-
-Eräs keino viitteen saamiseen on React-komponenttien attribuutti [ref](https://reactjs.org/docs/refs-and-the-dom.html#adding-a-ref-to-a-class-component).
-
-Muutetaan lomakkeen renderöivää koodia seuraavasti:
-
-```bash
-<div>
-  <Togglable buttonLabel="new note" ref={component => this.noteForm = component}>
-    <NoteForm
-      ...
-    />
-  </Togglable>
-</div>
-```
-
-Kun komponentti _Togglable_ renderöidään, suorittaa React ref-attribuutin sisällä määritellyn funktion:
-
-```js
-component => (this.noteForm = component);
-```
-
-parametrin _component_ arvona on viite komponenttiin. Funktio tallettaa viitteen muuttujaan _this.noteForm_ eli _App_-komponentin kenttään _noteForm_.
-
-Nyt mistä tahansa komponentin _App_ sisältä on mahdollista päästä käsiksi uusien muistiinpanojen luomisen sisältävään _Togglable_-komponenttiin.
-
-Voimme nyt piilottaa lomakkeen kutsumalla _this.noteForm.toggleVisibility()_ samalla kun uuden muistiinpanon luominen tapahtuu:
-
-```js
-addNote = e => {
-  e.preventDefault();
-  this.noteForm.toggleVisibility();
-
-  // ..
-};
-```
-
-Refeille on myös [muita käyttötarkoituksia](https://reactjs.org/docs/refs-and-the-dom.html) kuin React-komponentteihin käsiksi pääseminen.
-
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part2-notes/tree/part5-4), tagissa _part5-4_.
-
-### Huomio komponenteista
-
-Kun Reactissa määritellään komponentti
-
-```js
-class Togglable extends React.Component {
-  // ...
-}
-```
-
-ja otetaan se käyttöön seuraavasti
+Teemmekin testejä varten apukomponentin _Wrapper_, joka renderöi _NoteForm_:in ja hallitsee lomakkeen tilaa:
 
 ```react
-<div>
-  <Togglable buttonLabel="1" ref={component => this.t1 = component}>
-    ensimmäinen
-  </Togglable>
-
-  <Togglable buttonLabel="2" ref={component => this.t2 = component}>
-    toinen
-  </Togglable>
-
-  <Togglable buttonLabel="3" ref={component => this.t3 = component}>
-    kolmas
-  </Togglable>
-</div>
-```
-
-syntyy _kolme erillistä komponenttiolioa_, joilla on kaikilla oma tilansa:
-
-![](../assets/5/5.png)
-
-_ref_-attribuutin avulla on talletettu viite jokaiseen komponenttiin muuttujiin _this.t1_, _this.t2_ ja _this.t3_.
-
-## Tehtäviä
-
-Tee nyt tehtävät [5.5-5.10](/tehtävät#komponenttien-näyttäminen-vain-tarvittaessa)
-
-## PropTypes
-
-Komponentti _Togglable_ olettaa, että sille määritellään propsina _buttonLabel_ napin teksti. Jos määrittely unohtuu
-
-```html
-<Togglable> buttonLabel unohtui... </Togglable>
-```
-
-Sovellus kyllä toimii, mutta selaimeen renderöityy hämäävästi nappi, jolla ei ole mitään tekstiä.
-
-Haluaisimmekin varmistaa että jos _Togglable_-komponenttia käytetään, on propsille "pakko" antaa arvo.
-
-Kirjaston olettamat ja edellyttämät propsit ja niiden tyypit voidaan määritellä kirjaston [prop-types](https://github.com/facebook/prop-types) avulla. Asennetaan kirjasto
-
-```bash
-npm install --save prop-types
-```
-
-_buttonLabel_ voidaan määritellä _pakolliseksi_ string-tyyppiseksi propsiksi seuraavasti
-
-```react
-import PropTypes from 'prop-types'
-
-class Togglable extends React.Component {
-  // ...
-}
-
-Togglable.propTypes = {
-  buttonLabel: PropTypes.string.isRequired
-}
-```
-
-Jos propsia ei määritellä, seurauksena on konsoliin tulostuva virheilmoitus
-
-![](../assets/5/6.png)
-
-Koodi kuitenkin toimii edelleen, eli mikään ei pakota määrittelemään propseja PropTypes-määrittelyistä huolimatta. On kuitenkin erittäin epäprofessionaalia jättää konsoliin _mitään_ punaisia tulosteita.
-
-Määritellään Proptypet myös _LoginForm_-komponentille:
-
-```react
-import PropTypes from 'prop-types'
-
-const LoginForm = ({ handleSubmit, handleChange, username, password }) => {
-  return (
-    // ...
-  )
-}
-
-LoginForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired,
-  username: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired
-}
-```
-
-Funktionaalisen komponentin proptypejen määrittely tapahtuu samalla tavalla kuin luokkaperustaisten.
-
-Jos propsin tyyppi on väärä, esim. yritetään määritellä propsiksi _handleChange_ merkkijono, seurauksena on varoitus:
-
-![](../assets/5/7.png)
-
-Luokkaperustaisille komponenteille PropTypet on mahdollista määritellä myös _luokkamuuttujina_, seuraavalla syntaksilla:
-
-```react
-import PropTypes from 'prop-types'
-
-class Togglable extends React.Component {
-  static propTypes = {
-    buttonLabel: PropTypes.string.isRequired
+class Wrapper extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      formInput: ''
+    }
   }
+  onChange = (e) => {
+    this.setState({ formInput: e.target.value })
+  }
+  render() {
+    return (
+      <NoteForm
+        value={this.state.formInput}
+        onSubmit={this.props.onSubmit}
+        handleChange={this.onChange}
+      />
+  )}
+}
+```
+
+Testi on seuraavassa:
+
+```react
+import React from 'react'
+import { mount } from 'enzyme'
+import NoteForm from './NoteForm'
+
+it('renders content', () => {
+  const onSubmit = jest.fn()
+
+  const wrapper = mount(
+    <Wrapper onSubmit={onSubmit} />
+  )
+
+  const input = wrapper.find('input')
+  const button = wrapper.find('button')
+
+  input.simulate('change', { target: { value: 'lomakkeiden testaus on hankalaa' } })
+  button.simulate('submit')
+
+  expect(wrapper.state().formInput).toBe('lomakkeiden testaus on hankalaa')
+  expect(onSubmit.mock.calls.length).toBe(1)
+})
+```
+
+Testi luo _Wrapper_-komponentin, jolle se välittää propseina mockatun funktion _onSubmit_. Wrapper välittää funktion edelleen _NoteFormille_ tapahtuman _onSubmit_ käsittelijäksi.
+
+Syötekenttään _input_ kirjoittamista simuloidaan tekemällä syötekenttään tapahtuma _change_ ja määrittelemällä sopiva olio, joka määrittelee syötekenttään 'kirjoitetun' sisällön.
+
+Lomakkeen nappia tulee painaa simuloimalla tapahtumaa _submit_, tapahtuma _click_ ei lähetä lomaketta.
+
+Testin ensimmäinen ekspektaatio tutkii komponentin _Wrapper_ tilaa metodilla [state](http://airbnb.io/enzyme/docs/api/ReactWrapper/state.html), ja varmistaa, että lomakkeelle kirjoitettu teksti on siirtynyt tilaan. Toinen ekspektaatio varmistaa, että lomakkeen lähetys on aikaansaanut tapahtumankäsittelijän kutsumisen.
+
+## Frontendin integraatiotestaus
+
+Suoritimme edellisessä osassa backendille integraatiotestejä, jotka testasivat backendin tarjoaman API:n läpi backendia ja tietokantaa. Backendin testauksessa tehtiin tietoinen päätös olla kirjoittamatta yksikkötestejä sillä backendin koodi on melko suoraviivaista ja ongelmat tulevatkin esiin todennäköisemmin juuri monimutkaisemmissa skenaarioissa, joita integraatiotestit testaavat hyvin.
+
+Toistaiseksi kaikki frontendiin tekemämme testit ovat olleet yksittäisten komponenttien oikeellisuutta valvovia yksikkötestejä. Yksikkötestaus on toki tärkeää, mutta kattavinkaan yksikkötestaus ei riitä antamaan riittävää luotettavuutta sille, että järjestelmä toimii kokonaisuudessaan.
+
+Tehdään nyt sovellukselle yksi integraatiotesti. Integraatiotestaus on huomattavasti komponenttien yksikkötestausta hankalampaa. Erityisesti sovelluksemme kohdalla ongelmia aiheuttaa kaksi seikkaa: sovellus hakee näytettävät muistiinpanot palvelimelta _ja_ sovellus käyttää local storagea kirjautuneen käyttäjän tietojen tallettamiseen.
+
+Local storage ei ole oletusarvoiseti käytettävissä testejä suorittaessa, sillä kyseessä on selaimen tarjoama toiminnallisuus ja testit ajetaan selaimen ulkopuolella. Ongelma on helppo korjata määrittelemällä testien suorituksen ajaksi _mock_ joka matkii local storagea. Tapoja tähän on [monia](https://stackoverflow.com/questions/32911630/how-do-i-deal-with-localstorage-in-jest-tests).
+
+Koska testimme ei edellytä local storagelta juuri mitään toiminnallisuutta, teemme tiedostoon [src/setupTests.js](https://github.com/facebookincubator/create-react-app/blob/ed5c48c81b2139b4414810e1efe917e04c96ee8d/packages/react-scripts/template/README.md#initializing-test-environment) hyvin yksinkertaisen mockin
+
+```js
+let savedItems = {}
+
+const localStorageMock = {
+  setItem: (key, item) => {
+    savedItems[key] = item
+  },
+  getItem: (key) => savedItems[key],
+  clear: savedItems = {}
+}
+
+window.localStorage = localStorageMock
+```
+
+Toinen ongelmistamme on se, että sovellus hakee näytettävät muistiinpanot palvelimelta. Muistiinpanojen haku tapahtuu heti komponentin _App_ luomisen jälkeen, kun metodi _componentDidMount_ kutsuu _noteService_:n metodia _getAll_:
+
+
+```js
+componentDidMount() {
+  noteService.getAll().then(notes =>
+    this.setState({ notes })
+  )
 
   // ...
 }
 ```
 
-Muuttujamäärittelyn edessä oleva _static_ määrittelee nyt, että _propTypes_-kenttä on nimenomaan komponentin määrittelevällä luokalla _Togglable_ eikä luokan instansseilla. Oleellisesti ottaen kyseessä on ainoastaan Javascriptin vielä standardoimattoman [ominaisuuden](https://github.com/tc39/proposal-class-fields) mahdollistava syntaktinen oikotie määritellä seuraava:
+Jestin [manual mock](https://facebook.github.io/jest/docs/en/manual-mocks.html#content) -konsepti tarjoaa tilanteeseen hyvän ratkaisun. Manual mockien avulla voidaan kokonainen moduuli, tässä tapauksessa _noteService_ korvata testien ajaksi vaihtoehtoisella esim. kovakoodattua dataa tarjoavalla toiminnallisuudella.
+
+Luodaan Jestin ohjeiden mukaisesti hakemistoon _src/services_ alihakemisto *\_\_mocks\_\_* (alussa ja lopussa kaksi alaviivaa) ja sinne tiedosto _notes.js_ jonka määrittelemä metodi _getAll_ palauttaa kovakoodatun listan muistiinpanoja:
 
 ```js
-Togglable.propTypes = {
-  buttonLabel: PropTypes.string.isRequired,
-};
+let token = null
+
+const notes = [
+  {
+    id: "5a451df7571c224a31b5c8ce",
+    content: "HTML on helppoa",
+    date: "2017-12-28T16:38:15.541Z",
+    important: false,
+    user: {
+      _id: "5a437a9e514ab7f168ddf138",
+      username: "mluukkai",
+      name: "Matti Luukkainen"
+    }
+  },
+  {
+    id: "5a451e21e0b8b04a45638211",
+    content: "Selain pystyy suorittamaan vain javascriptiä",
+    date: "2017-12-28T16:38:57.694Z",
+    important: true,
+    user: {
+      _id: "5a437a9e514ab7f168ddf138",
+      username: "mluukkai",
+      name: "Matti Luukkainen"
+    }
+  },
+  {
+    id: "5a451e30b5ffd44a58fa79ab",
+    content: "HTTP-protokollan tärkeimmät metodit ovat GET ja POST",
+    date: "2017-12-28T16:39:12.713Z",
+    important: true,
+    user: {
+      _id: "5a437a9e514ab7f168ddf138",
+      username: "mluukkai",
+      name: "Matti Luukkainen"
+    }
+  }
+]
+
+const getAll = () => {
+  return Promise.resolve(notes)
+}
+
+export default { getAll, notes }
 ```
 
-Surffatessasi internetissä saatat vielä nähdä ennen Reactin versiota 0.16 tehtyjä esimerkkejä, joissa PropTypejen käyttö ei edellytä erillistä kirjastoa. Versiosta 0.16 alkaen PropTypejä ei enää määritelty React-kirjastossa itsessään ja kirjaston _prop-types_ käyttö on pakollista.
+Määritelty metodi _getAll_ palauttaa muistiinpanojen listan käärittynä promiseksi metodin [Promise.resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve) avulla sillä käytettäessä metodia, oletetaan sen paluuarvon olevan promise:
+
+```js
+noteService.getAll().then(notes =>
+```
+
+Olemme valmiina määrittelemään testin:
+
+```js
+import React from 'react'
+import { mount } from 'enzyme'
+import App from './App'
+import Note from './components/Note'
+jest.mock('./services/notes')
+import noteService from './services/notes'
+
+describe('<App />', () => {
+  let app
+  beforeAll(() => {
+    app = mount(<App />)
+  })
+
+  it('renders all notes it gets from backend', () => {
+    app.update()
+    const noteComponents = app.find(Note)
+    expect(noteComponents.length).toEqual(noteService.notes.length)
+  })
+})
+```
+
+Komennolla _jest.mock('./services/notes')_ otetaan juuri määritelty mock käyttöön. Loogisempi paikka komennolle olisi kenties testien määrittelyt tekevä tiedosto _src/setupTests.js_
+
+Testin toimivuuden kannalta on oleellista metodin [app.update](http://airbnb.io/enzyme/docs/api/ReactWrapper/update.html) kutsuminen, näin pakotetaan sovellus renderöitymään uudelleen siten, että myös mockatun backendin palauttamat muistiinpanot renderöityvät.
+
+## Testauskattavuus
+
+[Testauskattavuus](https://github.com/facebookincubator/create-react-app/blob/ed5c48c81b2139b4414810e1efe917e04c96ee8d/packages/react-scripts/template/README.md#coverage-reporting) saadaan helposti selville suorittamalla testit komennolla
+
+```bash
+CI=true npm test -- --coverage
+```
+
+![]({{ "/assets/5/8.png" | absolute_url }})
+
+Melko primitiivinen HTML-muotoinen raportti generoituu hakemistoon _coverage/lcov-report_. HTML-muotoinen raportti kertoo mm. yksittäisen komponenttien testaamattomat koodirivit:
+
+![]({{ "/assets/5/9.png" | absolute_url }})
+
+Huomaamme, että parannettavaa jäi vielä runsaasti.
+
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019part2-notes/tree/part5-5), tagissa _part5-5_.
 
 ## Tehtäviä
 
-Tee nyt tehtävä [5.11](/tehtävät#proptypet)
+Tee nyt tehtävät [5.15 ja 5.16](/tehtävät#integraatiotestaus)
+
+## Snapshot-testaus
+
+Jest tarjoaa "perinteisen" testaustavan lisäksi aivan uudenlaisen tavan testaukseen, ns. [snapshot](https://facebook.github.io/jest/docs/en/snapshot-testing.html)-testauksen. Mielenkiintoista snapshot-testauksessa on se, että sovelluskehittäjän ei tarvitse itse määritellä ollenkaan testejä, snapshot-testauksen käyttöönotto riittää.
+
+Periaatteena on verrata komponenttien määrittelemää HTML:ää aina koodin muutoksen jälkeen siihen, minkälaisen HTML:n komponentit määrittelivät ennen muutosta.
+
+Jos snapshot-testi huomaa muutoksen komponenttien määrittelemässä HTML:ssä, voi kyseessä joko olla haluttu muutos tai vahingossa aiheutettu "bugi". Snapshot-testi huomauttaa sovelluskehittäjälle, jos komponentin määrittelemä HTML muuttuu. Sovelluskehittäjä kertoo muutosten yhteydessä, oliko muutos haluttu. Jos muutos tuli yllätyksenä, eli kyseessä oli bugi, sovelluskehittäjä huomaa sen snapshot-testauksen ansiosta nopeasti.
+
+## End to end -testaus
+
+Olemme tehneet sekä backendille että frontendille hieman niitä kokonaisuutena testaavia integraatiotestejä. Eräs tärkeä testauksen kategoria on vielä käsittelemättä, [järjestelmää kokonaisuutena](https://en.wikipedia.org/wiki/System_testing) testaavat "end to end" (eli E2E) -testit.
+
+Web-sovellusten E2E-testaus tapahtuu simuloidun selaimen avulla esimerkiksi [Selenium](http://www.seleniumhq.org)-kirjastoa käyttäen. Toinen vaihtoehto on käyttää ns. [headless browseria](https://en.wikipedia.org/wiki/Headless_browser) eli selainta, jolla ei ole ollenkaan graafista käyttöliittymää. Esim. Chromea on mahdollista suorittaa Headless-moodissa.
+
+E2E testit ovat potentiaalisesti kaikkein hyödyllisin testikategoria, sillä ne tutkivat järjestelmää saman rajapinnan kautta kuin todelliset käyttäjät.
+
+E2E-testeihin liittyy myös ikäviä puolia. Niiden konfigurointi on haastavampaa kuin yksikkö- ja integraatiotestien. E2E-testit ovat tyypillisesti myös melko hitaita ja isommassa ohjelmistossa niiden suoritusaika voi helposti nousta minuutteihin, tai jopa tunteihin. Tämä on ikävää sovelluskehityksen kannalta, sillä sovellusta koodatessa on erittäin hyödyllistä pystyä ajamaan testejä mahdollisimman usein koodin regressioiden varalta.
+
+Palaamme end to end -testeihin kurssin viimeisessä, eli seitsemännessä osassa.
 
 </div>
