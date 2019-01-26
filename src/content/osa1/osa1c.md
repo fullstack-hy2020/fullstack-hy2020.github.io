@@ -158,7 +158,7 @@ const Hello = ({ name, age }) => { // highlight-line
 }
 ```
 
-Destrukturointi tehdään nyt suodaan sijoittamalla komponentin saamat propsit muuttujiin _name_ ja _age_.
+Destrukturointi tehdään nyt suoraan sijoittamalla komponentin saamat propsit muuttujiin _name_ ja _age_.
 
 Eli sensijaan että props-olio otettaisiin vastaan muuttujaan <i>props</i> ja sen kentät sijoitettaisiin tämän jälkeen muuttujiin _name_ ja _age_
 
