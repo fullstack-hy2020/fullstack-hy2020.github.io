@@ -525,7 +525,8 @@ Kaikki sovelluksen osat ovat näin sovelluskehitysvaiheessa ohjelmoijan koneella
 <div class="tasks">
 
 <h3>Tehtäviä</h3>
-<h4>2.11: puhelinluettelo osa 6</h4>
+
+<h4>2.11: puhelinluettelo step6</h4>
 
 Jatketaan puhelinluettelon kehittämistä. Talleta sovelluksen alkutila projektin juureen sijoitettavaan tiedostoon <i>db.json</i>:
 
@@ -574,7 +575,7 @@ on portti 3001 jo jonkin muun sovelluksen, esim. jo käynnissä olevan json-serv
 
 Muuta sovellusta siten, että datan alkutila haetaan <i>axios</i>-kirjaston avulla palvelimelta. Hoida datan hakeminen [Effect hookilla](https://reactjs.org/docs/hooks-effect.html)).
 
-<h4>2.12* maiden tiedot, osa 1</h4>
+<h4>2.12* maiden tiedot, step1</h4>
 
 Rajapinta [https://restcountries.eu](https://restcountries.eu) tarjoaa paljon eri maihin liittyvää tietoa koneluettavassa muodossa ns. REST-apina.
 
@@ -598,7 +599,7 @@ Kun ehdon täyttäviä maita on enää yksi, näytetään maan perustiedot, lipp
 
 **VAROITUS** create-react-app tekee projektista automaattisesti git-repositorion, ellei sovellusta luoda jo olemassaolevan repositorion sisälle. Todennäköisesti **et halua** että projektista tulee repositorio, joten suorita projektin juuressa komento _rm -rf .git_.
 
-<h4>2.13*: maiden tiedot, osa 2</h4>
+<h4>2.13*: maiden tiedot, step2</h4>
 
 **Tässä osassa on vielä paljon tekemistä, joten älä juutu tähän tehtävään!**
 
@@ -608,7 +609,7 @@ Paranna edellisen tehtävän maasovellusta siten, että kun sivulla näkyy useid
 
 Tässäkin tehtävässä riittää, että ohjelmasi toimii suurella osalla maita ja maat joiden nimi sisältyy johonkin muuhun maahan, kuten <i>Sudan</i> voit unohtaa. 
 
-<h4>2.14*: maiden tiedot, osa 3</h4>
+<h4>2.14*: maiden tiedot, step3</h4>
 
 **Tässä osassa on vielä paljon tekemistä, joten älä juutu tähän tehtävään!**
 

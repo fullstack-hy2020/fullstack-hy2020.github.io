@@ -647,7 +647,7 @@ Huomaa, että tässä osassa on muitakin tehtäviä kuin allaolevat, eli <i>äl�
 
 **VAROITUS** create-react-app tekee projektista automaattisesti git-repositorion, ellei sovellusta luoda jo olemassaolevan repositorion sisälle. Todennäköisesti **et halua** että projektista tulee repositorio, joten suorita projektin juuressa komento _rm -rf .git_.
 
-<h4>2.1: kurssien sisältö</h4>
+<h4>2.1: kurssitiedot step6</h4>
 
 Viimeistellään nyt tehtävien 1.1-1.5 kurssin sisältöjä renderöivän ohjelman koodi. Voit ottaa tarvittaessa pohjaksi mallivastauksen koodin.
 
@@ -712,13 +712,13 @@ Sovelluksen täytyy luonnollisesti toimia <i>riippumatta kurssissa olevien osien
 
 Varmista, että konsolissa ei näy mitään virheilmoituksia!
 
-<h4>2.2: tehtävien määrä</h4>
+<h4>2.2: kurssitiedot step7</h4>
 
 Ilmoita myös kurssin yhteenlaskettu tehtävien lukumäärä:
 
 ![](../images/teht/9.png)
 
-<h4>2.3*: reduce</h4>
+<h4>2.3*: kurssitiedot step8</h4>
 
 Jos et jo niin tehnyt, laske koodissasi tehtävien määrä taulukon metodilla [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce).
 
@@ -742,7 +742,7 @@ const total = parts.reduce( (s, p) => {
 
 ![](../images/2/5b.png)
 
-<h4>2.4: monta kurssia</h4>
+<h4>2.4: kurssitiedot step9</h4>
 
 Laajennetaan sovellusta siten, että kursseja voi olla <i>mielivaltainen määrä</i>:
 

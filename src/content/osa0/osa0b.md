@@ -611,6 +611,21 @@ Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät [pal
 
 Voit palauttaa kurssin kaikki tehtävät samaan repositorioon, tai käyttää useita repositorioita. Jos palautat eri osien tehtäviä samaan repositorioon, käytä järkevää hakemistojen nimentää.
 
+Eräs varsin toimiva hakemistorakenne palautusrepositoriolle on seuraava
+
+```
+osa0
+osa1
+  kurssitiedot
+  unicafe
+  anekdootit
+osa2
+  puhelinluettelo
+  maiden tiedot
+```
+
+Eli kutakin osaa kohti on oma hakemistonsa, joka vielä jakautuu tehtäväsarjat (kuten osan 1 unicafe) sisältäviin hakemistoihin.
+
 Tehtävät palautetaan **yksi osa kerrallaan**. Kun olet palauttanut osan tehtävät, et voi enää palauttaa saman osan tekemättä jättämiäsi tehtäviä.
 
   <h4>0.1: HTML</h4>

@@ -256,7 +256,7 @@ const Header = (props) => {
 }
 ```
 
-  <h4>1.3: tieto olioissa</h4>
+  <h4>1.3: kurssitiedot step3</h4>
 
 Siirrytään käyttämään sovelluksessamme oliota. Muuta komponentin <i>App</i> muuttujamäärittelyt seuraavaan muotoon ja muuta sovelluksen kaikkia osia niin, että se taas toimii:
 
@@ -284,7 +284,7 @@ const App = () => {
 }
 ```
 
-  <h4>1.4: oliot taulukkoon</h4>
+  <h4>1.4: kurssitiedot step4</h4>
 
 Ja laitetaan oliot taulukkoon, eli muuta  <i>App</i> :in muuttujamäärittelyt seuraavaan muotoon ja muuta sovelluksen kaikki osat vastaavasti:
 
@@ -332,7 +332,7 @@ const App = () => {
 }
 ```
 
-  <h4>1.5: jako komponenteiksi</h4>
+  <h4>1.5: kurssitiedot step5</h4>
 
 Viedään muutos vielä yhtä askelta pidemmälle, eli tehdään kurssista ja sen osista yksi Javascript-olio. Korjaa kaikki mikä menee rikki.
 

@@ -392,7 +392,7 @@ npm install -s react@16.8.0-alpha.0 react-dom@16.8.0-alpha.0
 
 **VAROITUS** create-react-app tekee projektista automaattisesti git-repositorion, ellei sovellusta luoda jo olemassaolevan repositorion sisälle. Todennäköisesti **et halua** että projektista tulee repositorio, joten suorita projektin juuressa komento _rm -rf .git_.
 
-<h4>2.6: puhelinluettelo osa 1</h4>
+<h4>2.6: puhelinluettelo step1</h4>
 
 Toteutetaan yksinkertainen puhelinluettelo. <i>**Aluksi luetteloon lisätään vaan nimiä.**</i>
 
@@ -449,7 +449,7 @@ Huomaa, React developer toolsin käyttö!
 - voit käyttää kentän <i>key</i> arvona henkilön nimeä
 - muista estää lomakkeen lähetyksen oletusarvoinen toiminta!
 
-<h4>2.7: puhelinluettelo osa 2</h4>
+<h4>2.7: puhelinluettelo step2</h4>
 
 Jos lisättävä nimi on jo sovelluksen tiedossa, estä lisäys. Taulukolla on lukuisia sopivia [metodeja](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) tehtävän tekemiseen.
 
@@ -477,7 +477,7 @@ newName + ' on jo luettelossa'
 
 Template stringin käyttö antaa kuitenkin professionaalimman vaikutelman.
 
-<h4>2.8: puhlelinluettelo osa 3</h4>
+<h4>2.8: puhlelinluettelo step3</h4>
 
 Lisää sovellukseen mahdollisuus antaa henkilöille puhelinnumero. Tarvitset siis lomakkeeseen myös toisen <i>input</i>-elementin (ja sille oman muutoksenkäsittelijän):
 
@@ -493,7 +493,7 @@ Sovellus voi näyttää tässä vaiheessa seuraavalta. Kuvassa myös [react deve
 
 ![](../images/2/12b.png)
 
-<h4>2.9*: puhelinluettelo osa 4</h4>
+<h4>2.9*: puhelinluettelo step4</h4>
 
 Tee lomakkeeseen hakukenttä, jonka avulla näytettävien nimien listaa voidaan rajata:
 
@@ -518,7 +518,7 @@ const App = () => {
 
 Näin vältytään turhalta manuaaliselta työltä, missä testaaminen edellyttäisi myös testiaineiston syöttämistä käsin soveluksen lomakkeen kautta.
 
-<h4>2.10: puhelinluettelo osa 5</h4>
+<h4>2.10: puhelinluettelo step5</h4>
 
 Jos koko sovelluksesi on tehty yhteen komponenttiin, refaktoroi sitä eriyttämällä sopivia komponentteja. Pidä kuitenkin edelleen kaikki tila sekä tapahtumankäsittelijäfunktiot juurikomponentissa <i>App</i>.
 

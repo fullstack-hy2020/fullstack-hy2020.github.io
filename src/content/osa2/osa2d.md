@@ -686,17 +686,17 @@ Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://git
 
 <h3>Tehtäviä</h3>
 
-<h4>2.15: puhelinluettelo osa 7</h4>
+<h4>2.15: puhelinluettelo step7</h4>
 
 Palataan jälleen puhelinluettelon pariin.
 
 Tällä hetkellä luetteloon lisättäviä uusia numeroita ei synkronoida palvelimelle. Korjaa tilanne.
 
-<h4>2.16: puhelinluettelo osa 8</h4>
+<h4>2.16: puhelinluettelo step8</h4>
 
 Siirrä palvelimen kanssa kommunikoinnista vastaava toiminnallisuus omaan moduuliin tämän osan materiaalissa olevan esimerkin tapaan.
 
-<h4>2.17: puhelinluettelo osa 9</h4>
+<h4>2.17: puhelinluettelo step9</h4>
 
 Tee ohjelmaan mahdollisuus yhteystietojen poistamiseen. Poistaminen voi tapahtua esim. nimen yhteyteen liitetyllä napilla. Poiston suorittaminen voidaan varmistaa käyttäjältä [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm)-metodilla:
 
@@ -715,7 +715,7 @@ const delete = (id) => {
 }
 ```
 
-<h4>2.18*: puhelinluettelo osa 10</h4>
+<h4>2.18*: puhelinluettelo step10</h4>
 
 Muuta toiminnallisuutta siten, että jos jo olemassaolevalle henkilölle lisätään numero, korvaa lisätty numero aiemman numeron. Korvaaminen kannattaa tehdä HTTP PUT -pyynnöllä.
 
