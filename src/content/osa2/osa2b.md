@@ -477,7 +477,7 @@ newName + ' on jo luettelossa'
 
 Template stringin käyttö antaa kuitenkin professionaalimman vaikutelman.
 
-<h4>2.8: puhlelinluettelo step3</h4>
+<h4>2.8: puhelinluettelo step3</h4>
 
 Lisää sovellukseen mahdollisuus antaa henkilöille puhelinnumero. Tarvitset siis lomakkeeseen myös toisen <i>input</i>-elementin (ja sille oman muutoksenkäsittelijän):
 
