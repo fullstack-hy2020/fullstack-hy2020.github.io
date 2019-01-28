@@ -442,8 +442,8 @@ Jos yritämme samaa metodille _greet_, aiheutuu ongelmia:
 ```js
 arto.greet()       // tulostuu hello, my name is Arto Hellas
 
-const referenceToGreet = arto.referenceToGreet
-referenceToGreet() // tulostuu hello, my name is undefined
+const referenceToGreet = arto.greet
+referenceToGreet() // konsoliin tulostuu virheilmoitus
 ```
 
 Kutsuttaessa metodia viitteen kautta, on metodi kadottanut tiedon siitä mikä oli alkuperäinen _this_. Toisin kuin melkein kaikissa muissa kielissä, Javascriptissa [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this):n arvo määrittyy sen mukaan <i>miten metodia on kutsuttu</i>. Kutsuttaessa metodia viitteen kautta, _this_:in arvoksi tulee ns. [globaali objekti](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) ja lopputulos ei ole yleensä ollenkaan se, mitä sovelluskehittäjä olettaa.
