@@ -913,7 +913,7 @@ Javascriptin asynkroninen suoritusmalli aiheuttaakin siis helposti yllätyksiä 
 
 **Varoitus:** Jos huomaat kirjoittavasi sekaisin async/awaitia ja <i>then</i>-kutsuja, on 99% varmaa, että teet jotain väärin. Käytä siis jompaa kumpaa tapaa, älä missään tapauksessa "varalta" molempia.
 
-#### 4.8: blogilistan testit, osa 1
+#### 4.8: blogilistan testit, step 1
 
 Tee supertest-kirjastolla testit blogilistan osoitteeseen <i>/api/blogs</i> tapahtuvalle HTTP GET -pyynnölle. Testaa, että sovellus palauttaa oikean määrän JSON-muotoisia blogeja. 
 
@@ -935,25 +935,25 @@ module.exports = {
 
 **Huom2:** testien kehitysvaiheessa yleensä **<i>ei kannata suorittaa joka kerta kaikkia testejä</i>**, vaan keskittyä yhteen testiin kerrallaan. Katso lisää [täältä](http://localhost:8000/osa4/backendin_testaaminen#testien-suorittaminen-yksitellen).
 
-#### 4.9*: blogilistan testit, osa 2
+#### 4.9*: blogilistan testit, step2
 
 Tee testi, joka varmistaa että palautettujen blogeien identifioivan kentän tulee olla nimeltään <i>id</i>,  oletusarvoisestihan tietokantaan talletettujen olioiden tunnistekenttä on <i>_id</i>. Olion kentän olemassaolon tarkastaminen onnistuu jestin matcherillä [toBeDefined](https://jestjs.io/docs/en/expect#tobedefined)
 
 Muuta koodia siten, että testi menee läpi. Osassa 3 käsitelty [toJSON](http://localhost:8000/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#tietokantaa-kayttava-backend) on sopiva paikka parametrin <i>id</i> määrittelyyn. 
 
-#### 4.10: blogilistan testit, osa 3
+#### 4.10: blogilistan testit, step3
 
 Tee testi joka varmistaa että sovellukseen voi lisätä blogeja osoitteeseen <i>/api/blogs</i> tapahtuvalla HTTP POST -pyynnölle. Testaa ainakin, että blogien määrä kasvaa yhdellä. Voit myös varmistaa, että oikean sisältöinen blogi on lisätty järjestelmään.
 
 Kun testi on valmis, refaktoroi operaatio käyttämään promisejen sijaan async/awaitia.
 
-#### 4.11*: blogilistan testit, osa 4
+#### 4.11*: blogilistan testit, step4
 
 Tee testi joka varmistaa, että jos kentälle <i>likes</i> ei anneta arvoa, asetetaan sen arvoksi 0. Muiden kenttien sisällöstä ei tässä tehtävässä vielä välitetä.
 
 Laajenna ohjelmaa siten, että testi menee läpi.
 
-#### 4.12*: blogilistan testit, osa 4
+#### 4.12*: blogilistan testit, step5
 
 Tee testit blogin lisäämiselle, eli osoitteeseen <i>/api/blogs</i> tapahtuvalle HTTP POST -pyynnölle, joka varmistaa, että jos uusi blogi ei sisällä kenttiä <i>title</i> ja <i>url</i>, pyyntöön vastataan statuskoodilla <i>400 Bad request</i>
 
@@ -1126,7 +1126,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 ### Tehtäviä
 
-#### 4.13 blogilistan laajennus, osa 1
+#### 4.13 blogilistan laajennus, step1
 
 Toteuta sovellukseen mahdollisuus yksittäisen blogin poistoon.
 
@@ -1134,7 +1134,7 @@ Käytä async/awaitia. Noudata operaation HTTP-rajapinnan suhteen [RESTful](/osa
 
 Saat toteuttaa ominaisuudelle testit jos haluat. Jos et, varmista ominaisuuden toimivuus esim. Postmanilla.
 
-#### 4.14* blogilistan laajennus, osa 2
+#### 4.14* blogilistan laajennus, step2
 
 Toteuta sovellukseen mahdollisuus yksittäisen blogin muokkaamiseen.
 

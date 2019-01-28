@@ -390,6 +390,11 @@ Muista, että saadaksesi komponentin tilan luotua joudut asentamaan Reactin vers
 npm install -s react@16.8.0-alpha.0 react-dom@16.8.0-alpha.0
 ```
 
+Jos et asenna uutta versiota törmäät pian virheilmoitukseen
+
+![](../images/1/fail.png)
+
+
 **VAROITUS** create-react-app tekee projektista automaattisesti git-repositorion, ellei sovellusta luoda jo olemassaolevan repositorion sisälle. Todennäköisesti **et halua** että projektista tulee repositorio, joten suorita projektin juuressa komento _rm -rf .git_.
 
 <h4>2.6: puhelinluettelo step1</h4>

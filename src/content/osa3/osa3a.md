@@ -828,7 +828,7 @@ Mitä rivillä tapahtuu? <em>notes.map(n => n.id)</em> muodostaa taulukon, joka 
 
 **Vahva suositus:** kun teet backendin koodia, pidä koko ajan silmällä mitä palvelimen koodia suorittavassa konsolissa tapahtuu.
 
-#### 3.1 puhelinluettelon backend osa 1
+#### 3.1 puhelinluettelon backend step1
 
 Tee Node-sovellus, joka tarjoaa osoitteessa <http://localhost:3001/api/persons> kovakoodatun taulukon puhelinnumerotietoja:
 
@@ -840,7 +840,7 @@ Sovellus pitää pystyä käynnistämään komennolla _npm start_.
 
 Komennolla _npm run watch_ käynnistettäessa sovelluksen tulee käynnistyä uudelleen kun koodiin tehdään muutoksia.
 
-#### 3.2: puhelinluettelon backend osa 2
+#### 3.2: puhelinluettelon backend step2
 
 Tee sovelluksen osoitteeseen <http://localhost:3001/info> suunnilleen seuraavanlainen sivu
 
@@ -848,25 +848,25 @@ Tee sovelluksen osoitteeseen <http://localhost:3001/info> suunnilleen seuraavanl
 
 eli sivu kertoo pyynnön tekohetken sekä sen kuinka monta puhelinluettelotietoa sovelluksen muistissa olevassa taulukossa on.
 
-#### 3.3: puhelinluettelon backend osa 3
+#### 3.3: puhelinluettelon backend step3
 
 Toteuta toiminnallisuus yksittäisen puhelinnumerotiedon näyttämiseen. Esim. id:n 5 omaavan numerotiedon url on <http://localhost:3001/api/persons/5>
 
 Jos id:tä vastaavaa puhelinnumerotietoa ei ole, tulee palvelimen vastata asianmukaisella statuskoodilla.
 
-#### 3.4: puhelinluettelon backend osa 4
+#### 3.4: puhelinluettelon backend step4
 
 Toteuta toiminnallisuus, jonka avulla puhelinnumerotieto on mahdollista poistaa numerotiedon yksilöivään URL:iin tehtävällä HTTP DELETE -pyynnöllä.
 
 Testaa toiminnallisuus Postmanilla tai Visual Studio Coden REST clientillä
 
-#### 3.5: puhelinluettelon backend osa 5
+#### 3.5: puhelinluettelon backend step5
 
 Laajenna backendia siten, että uusia puhelintietoja on mahdollista lisätä osoitteeseen <http://localhost:3001/api/persons> tapahtuvalla HTTP POST -pyynnöllä.
 
 Generoi uuden puhelintiedon tunniste funktiolla [Math.random](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random). Käytä riittävän isoa arvoväliä jotta arvottu id on riittävän suurella todennäköisyydellä sellainen, joka ei ole jo käytössä.
 
-#### 3.6: puhelinluettelon backend osa 6
+#### 3.6: puhelinluettelon backend step6
 
 Tee uuden numeron lisäykseen virheiden käsittely. Pyyntö ei saa onnistua, jos
 - nimi tai numero puuttuu
@@ -962,7 +962,7 @@ Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://git
 
 ### Tehtäviä
 
-#### 3.7: puhelinluettelon backend osa 7
+#### 3.7: puhelinluettelon backend step7
 
 Lisää sovellukseesi loggausta tekevä middleware [morgan](https://github.com/expressjs/morgan). Konfiguroi se logaamaan konsoliin <i>tiny</i>-konfiguraation mukaisesti.
 
@@ -970,7 +970,7 @@ Morganin ohjeet eivät ole ehkä kaikkein selvimmät ja joudut kenties miettimä
 
 Morgan asennetaan kuten muutkin kirjastot, eli komennolla _npm install_ ja sen käyttöönotto tapahtuu kaikkien middlewarejen tapaan komennolla _app.use_
 
-#### 3.8* :puhelinluettelon backend osa 8
+#### 3.8* :puhelinluettelon backend step8
 
 Konfiguroi morgania siten, että se näyttää myös HTTP-pyyntöjen mukana tulevan datan:
 

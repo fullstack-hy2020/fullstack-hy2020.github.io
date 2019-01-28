@@ -313,7 +313,7 @@ Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnist�
 Rakennamme tämän osan tehtävissä <i>blogilistasovellusta</i>, jonka avulla käyttäjien on mahdollista tallettaa tietoja internetistä löytämistään mielenkiintoisista blogeista. Kustakin blogista talletetaan sen kirjoittaja (author), aihe (title), url sekä blogilistasovelluksen käyttäjien antamien äänien määrä.
 
 
-#### 4.1 blogilista, osa 1
+#### 4.1 blogilista, step1
 
 Kuvitellaan tilanne, jossa saat sähköpostitse seuraavan, yhteen tiedostoon koodatun sovellusrungon:
 
@@ -368,7 +368,7 @@ Tee sovelluksesta toimiva _npm_-projekti. Jotta sovelluskehitys olisi sujuvaa, k
 
 Varmista, että sovellukseen on mahdollista lisätä blogeja Postmanilla tai VS Code REST clientilla, ja että sovellus näyttää lisätyt blogit.
 
-#### 4.2 blogilista, osa 2
+#### 4.2 blogilista, step2
 
 Jaa sovelluksen koodi tämän osan alun tapaan useaan moduuliin.
 
@@ -604,7 +604,7 @@ test('of empty array is zero', () => {
 
 Tehdään joukko blogilistan käsittelyyn tarkoitettuja apufunktioita. Tee funktiot esim. tiedostoon <i>utils/list_helper.js</i>. Tee testit sopivasti nimettyyn tiedostoon hakemistoon <i>tests</i>.
 
-#### 4.3: apufunktioita ja yksikkötestejä, osa 1
+#### 4.3: apufunktioita ja yksikkötestejä, step1
 
 Määrittele ensin funktio _dummy_ joka saa parametrikseen taulukollisen blogeja ja palauttaa aina luvun 1. Tiedoston <i>list_helper.js</i> sisällöksi siis tulee tässä vaiheessa
 
@@ -631,7 +631,7 @@ test('dummy returns one', () => {
 })
 ```
 
-#### 4.4: apufunktioita ja yksikkötestejä, osa 2
+#### 4.4: apufunktioita ja yksikkötestejä, step2
 
 Määrittele funktio _totalLikes_ joka saa parametrikseen taulukollisen blogeja. Funktio palauttaa blogien yhteenlaskettujen tykkäysten eli <i>likejen</i> määrän.
 
@@ -673,7 +673,7 @@ Toinen, tapa suorittaa yksittäinen testi (tai describe-lohko) on kutsua jestiä
 npx jest -t 'when list has only one blog equals the likes of that'
 ```
 
-#### 4.5*: apufunktioita ja yksikkötestejä, osa 3
+#### 4.5*: apufunktioita ja yksikkötestejä, step3
 
 Määrittele funktio _favoriteBlog_ joka saa parametrikseen taulukollisen blogeja. Funktio selvittää millä blogilla on eniten likejä. Jos suosikkeja on monta, riittää että funktio palauttaa niistä jonkun.
 
@@ -691,7 +691,7 @@ Paluuarvo voi olla esim. seuraavassa muodossa:
 
 Tee myös tämän ja seuraavien kohtien testit kukin oman <i>describe</i>-lohkon sisälle.
 
-#### 4.6*: apufunktioita ja yksikkötestejä, osa 4
+#### 4.6*: apufunktioita ja yksikkötestejä, step4
 
 Tämä ja seuraava tehtävä ovat jo hieman haastavampia. Tehtävien tekeminen ei ole osan jatkon kannalta oleellista, eli voi olla hyvä idea palata näihin vasta kun muu osa on kahlattu läpi.
 
@@ -708,7 +708,7 @@ Määrittele funktio _mostBlogs_ joka saa parametrikseen taulukollisen blogeja. 
 
 Jos ennätysblogaajia on monta, riittää että funktio palauttaa niistä jonkun.
 
-#### 4.7*: apufunktioita ja yksikkötestejä, osa 5
+#### 4.7*: apufunktioita ja yksikkötestejä, step5
 
 Määrittele funktio _mostLikes_ joka saa parametrikseen taulukollisen blogeja. Funktio selvittää kirjoittajan, kenen blogeilla on eniten likejä. Funktion paluuarvo kertoo myös suosikkiblogaajan likejen yhteenlasketun määrän:
 

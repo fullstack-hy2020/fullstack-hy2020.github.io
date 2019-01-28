@@ -577,7 +577,7 @@ Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://git
 
 Seuraavat tehtävät saattavat olla melko suoraviivaisia, tosin jos frontend-koodissasi sattuu olemaan bugeja tai epäyhteensopivuutta backendin kanssa, voi seurauksena olla myös mielenkiintoisia bugeja.
 
-#### 3.13: puhelinluettelo ja tietokanta, osa 1
+#### 3.13: puhelinluettelo ja tietokanta, step1
 
 Muuta backendin kaikkien puhelintietojen näyttämistä siten, että se <i>hakee näytettävät puhelintiedot tietokannasta</i>.
 
@@ -585,7 +585,7 @@ Varmista, että frontend toimii muutosten jälkeen.
 
 Tee tässä ja seuraavissa tehtävissä Mongoose-spesifinen koodi omaan moduuliin samaan tapaan kuin luvussa [Tietokantamäärittelyjen eriyttäminen moduuliksi](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#tietokantamaarittelyjen-eriyttaminen-moduuliksi).
 
-#### 3.14: puhelinluettelo ja tietokanta, osa 2
+#### 3.14: puhelinluettelo ja tietokanta, step2
 
 Muuta backendiä siten, että uudet numerot <i>tallennetaan tietokantaan</i>. 
 Varmista, että frontend toimii muutosten jälkeen.
@@ -807,17 +807,17 @@ Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://git
 
 ### Tehtäviä
 
-#### 3.15: puhelinluettelo ja tietokanta, osa 3
+#### 3.15: puhelinluettelo ja tietokanta, step3
 
 Muuta backendiä siten, että numerotietojen poistaminen päivittyy tietokantaan.
 
 Varmista, että frontend toimii muutosten jälkeen.
 
-#### 3.16: puhelinluettelo ja tietokanta, osa 3
+#### 3.16: puhelinluettelo ja tietokanta, step3
 
 Keskitä sovelluksen virheidenkäsittely middlewareen.
 
-#### 3.17*: puhelinluettelo ja tietokanta, osa 4
+#### 3.17*: puhelinluettelo ja tietokanta, step4
 
 Jos frontendissä annetaan numero henkilölle, joka on jo olemassa, päivittää frontend tehtävässä 2.18 tehdyn toteutuksen ansiosta tiedot uudella numerolla tekemällä HTTP PUT -pyynnön henkilön tietoja vastaavaan url:iin.
 
@@ -825,7 +825,7 @@ Laajenna backendisi käsittelemään tämä tilanne.
 
 Varmista, että frontend toimii muutosten jälkeen.
 
-#### 3.18*: puhelinluettelo ja tietokanta, osa 5
+#### 3.18*: puhelinluettelo ja tietokanta, step5
 
 Päivitä myös polkujen <i>api/persons/:id</i> ja <i>info</i> käsittely, ja varmista niiden toimivuus suoraan selaimella, postmanilla tai VS Coden REST clientillä.
 

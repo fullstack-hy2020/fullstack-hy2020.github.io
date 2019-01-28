@@ -182,7 +182,7 @@ Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://git
 
 ### Tehtäviä
 
-#### 3.19: puhelinluettelo ja tietokanta, osa 7
+#### 3.19: puhelinluettelo ja tietokanta, step7
 
 Toteuta sovelluksellesi validaatio, joka huolehtii, että backendiin voi lisätä yhdelle nimelle ainoastaan yhden numeron. Frontendin nykyisestä versiosta ei duplikaatteja voi luoda, mutta suoraan Postmanilla tai VS Coden REST clientillä se onnistuu.
 
@@ -191,7 +191,7 @@ Mongoose ei tarjoa tilanteeseen sopivaa valmista validaattoria. Käytä npm:llä
 
 Jos HTTP POST -pyyntö yrittää lisätä nimeä, joka on jo puhelinluettelossa, tulee vastata sopivalla statuskoodilla ja lisätä vastaukseen asianmukainen virheilmoitus.
 
-#### 3.20*: puhelinluettelo ja tietokanta, osa 8
+#### 3.20*: puhelinluettelo ja tietokanta, step8
 
 Laajenna validaatiota siten, että tietokantaan talletettavan nimen on oltava pituudeltaan vähintään 3 merkkiä ja puhelinnumeron vähitään 8 merkkiä. 
 

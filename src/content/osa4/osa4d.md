@@ -277,7 +277,7 @@ Seuraavien tehtävien myötä Blogilistalle luodaan käyttäjienhallinnan perust
 
 **Varoitus vielä kerran:** jos huomaat kirjoittavasi sekaisin async/awaitia ja _then_-kutsuja, on 99% varmaa, että teet jotain väärin. Käytä siis jompaa kumpaa tapaa, älä missään tapauksessa "varalta" molempia.
 
-#### 4.15: blogilistan laajennus, osa 4
+#### 4.15: blogilistan laajennus, step4
 
 Tee sovellukseen mahdollisuus luoda käyttäjiä tekemällä HTTP POST -pyyntö osoitteeseen <i>api/users</i>. Käyttäjillä on <i>käyttäjätunnus, salasana ja nimi</i>.
 
@@ -297,7 +297,7 @@ Käyttäjien lista voi näyttää esim. seuraavalta:
 
 ![](../images/4/22.png)
 
-#### 4.16*: blogilistan laajennus, osa 5
+#### 4.16*: blogilistan laajennus, step5
 
 Laajenna käyttäjätunnusten luomista siten, että käyttäjätunuksen sekä salasanan tulee olla olla olemassa ja vähintään 3 merkkiä pitkiä. Käyttäjätunnuksen on oltava järjestelmässä uniikki. 
 
@@ -305,7 +305,7 @@ Luomisoperaation tulee palauttaa sopiva statuskoodi ja jonkinlainen virheilmoitu
 
 Tee myös testit, jotka varmistavat, että virheellisiä käyttäjiä ei luoda, ja että virheellisen käyttäjän luomisoperaatioon vastaus on järkevä statuskoodin ja virheilmoituksen osalta.
 
-#### 4.17: blogilistan laajennus, osa 6
+#### 4.17: blogilistan laajennus, step6
 
 Laajenna blogia siten, että blogiin tulee tieto sen lisänneestä käyttäjästä.
 
@@ -319,15 +319,15 @@ ja käyttäjien listausta siten että käyttäjien lisäämät blogit ovat näky
 
 ![](../images/4/24.png)
 
-#### 4.18: blogilistan laajennus, osa 7
+#### 4.18: blogilistan laajennus, step7
 
 Toteuta osan 4 luvun [Kirjautuminen](/osa4#kirjautuminen) tapaan järjestelmään token-perustainen autentikointi.
 
-#### 4.19: blogilistan laajennus, osa 8
+#### 4.19: blogilistan laajennus, step8
 
 Muuta blogien lisäämistä siten, että se on mahdollista vain, jos lisäyksen tekevässä HTTP POST -pyynnössä on mukana validi token. Tokenin haltija määritellään blogin lisääjäksi.
 
-#### 4.20*: blogilistan laajennus, osa 9
+#### 4.20*: blogilistan laajennus, step9
 
 Osan 4 [esimerkissä](/osa4#kirjautuminen) token otetaan headereista apufunktion _getTokenFrom_ avulla.
 
@@ -349,7 +349,7 @@ blogsRouter.post('/', async (request, response) => {
 })
 ```
 
-#### 4.21*: blogilistan laajennus, osa 10
+#### 4.21*: blogilistan laajennus, step10
 
 Muuta blogin poistavaa operaatiota siten, että poisto onnistuu ainoastaan jos poisto-operaation tekijä (eli se kenen token on pyynnön mukana) on sama kuin blogin lisääjä.
 

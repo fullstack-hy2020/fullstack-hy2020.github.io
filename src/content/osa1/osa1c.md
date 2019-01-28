@@ -354,6 +354,18 @@ on konsolista helppo seurata metodin _render_ kutsuja:
 
 ![](../images/1/4a.png)
 
+### Kun React ei toimi...
+
+Käyttäessäsi tilan tuovaa hookia <i>useState</i>, saatat törmätä seuraavaan virheilmoitukseen:
+
+![](../images/1/fail.png)
+
+Syynä tälle on se, että <i>et ole asentanut</i> riittävän uutta Reactia kuten [osan 1 alussa](/osa1/reactin_alkeet) neuvottiin.
+
+``` 
+rm -rf node_modules/ && npm i
+```
+
 ### Tapahtumankäsittely
 
 Mainitsimme jo [osassa 0](/osa0) muutamaan kertaan <i>tapahtumankäsittelijät</i>, eli funktiot, jotka on rekisteröity kutsuttavaksi tiettyjen tapahtumien eli eventien yhteydessä. Esim. käyttäjän interaktio sivun elementtien kanssa aiheuttaa joukon erinäisiä tapahtumia.
