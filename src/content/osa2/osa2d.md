@@ -32,7 +32,7 @@ Muutetaan nyt uuden muistiinpanon lisäämisestä huolehtivaa tapahtumankäsitte
 addNote = event => {
   event.preventDefault()
   const noteObject = {
-    content: this.state.newNote,
+    content: newNote,
     date: new Date(),
     important: Math.random() > 0.5,
   }
@@ -71,7 +71,7 @@ Uusi muistiinpano ei vielä renderöidy ruudulle, sillä emme aseta komponentill
 addNote = event => {
   event.preventDefault()
   const noteObject = {
-    content: this.state.newNote,
+    content: newNote,
     date: new Date(),
     important: Math.random() > 0.5,
   }
@@ -306,7 +306,7 @@ const App = () => {
 
     // highlight-start
     noteService
-      .update(changedNote)
+      .update(id, changedNote)
       .then(response => {
         setNotes(notes.map(note => note.id !== id ? note : response.data))
       })
@@ -433,7 +433,7 @@ const App = () => {
     const changedNote = { ...note, important: !note.important }
 
     noteService
-      .update(changedNote)
+      .update(id, changedNote)
       // highlight-start      
         .then(returnedNote => {
         setNotes(notes.map(note => note.id !== id ? note : returnedNote))
@@ -654,7 +654,7 @@ const toggleImportanceOf = id => {
   const changedNote = { ...note, important: !note.important }
 
   noteService
-    .update(changedNote).then(returnedNote => {
+    .update(id, changedNote).then(returnedNote => {
       setNotes(notes.map(note => note.id !== id ? note : returnedNote))
     })
     // highlight-start
