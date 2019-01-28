@@ -10,12 +10,12 @@ Reactilla tehtyjen frontendien testaamiseen on monia tapoja. Aloitetaan niihin t
 
 Testit tehdään samaan tapaan kuin edellisessä osassa eli Facebookin [Jest](http://jestjs.io/)-kirjastolla. Jest onkin valmiiksi konfiguroitu create-react-app:illa luotuihin projekteihin.
 
-Jestin lisäksi käytetään AirBnB:n kehittämää [enzyme](https://github.com/airbnb/enzyme)-kirjastoa.
+Tarvitsemme Jestin lisäksi testaamiseen apukirjaston, jonka avulla React-komonentteja voidaan renderöidä testejä varten. Tähän tarkoitukseen ehdottomasti paras vaihtoehto vielä viime syksyyn asti oli AirBnB:n kehittämä [enzyme](https://github.com/airbnb/enzyme)-kirjastoa. Enzyme ei kuitenkaan tue kunnolla Reactin hookeja joten käytämme Enzymen sijaan viime aikoina nopeasti suosiota kasvattanutta kirjastoa [react-testing-library](https://github.com/kentcdodds/react-testing-library). Jestin ilmaisuvoimaa kannattaa mysö laajentaa kirjastolla [jest-dom](https://www.npmjs.com/package/jest-dom).
 
-Asennetaan enzyme komennolla:
+Asennetaan kirjastot komennolla:
 
 ```js
-npm install --save-dev enzyme enzyme-adapter-react-16
+npm install --save-dev react-testing-library jest-dom
 ```
 
 Testataan aluksi muistiinpanon renderöivää komponenttia:
@@ -37,20 +37,7 @@ const Note = ({ note, toggleImportance }) => {
 
 Huomaa, että blogin sisältävällä <i>li</i>-edelmentillä on [CSS](https://reactjs.org/docs/dom-elements.html#classname)-luokka <i>note</i>, pääsemme sen avulla blogiin käsiksi testistä.
 
-### shallow-renderöinti
-
-Ennen testien tekemistä, tehdään <i>enzymen</i> konfiguraatioita varten tiedosto <i>src/setupTests.js</i> ja sille seuraava sisältö:
-
-```js
-import { configure } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
-
-configure({ adapter: new Adapter() })
-```
-
-Nyt olemme valmiina testien tekemiseen.
-
-Koska <i>Note</i> on yksinkertainen komponentti, joka ei käytä yhtään monimutkaista alikomponenttia vaan renderöi suoraan HTML:ää, sopii sen testaamiseen hyvin enzymen [shallow](http://airbnb.io/enzyme/docs/api/shallow.html)-renderöijä.
+### Komponentin renderöinti testiä varten
 
 Tehdään testi tiedostoon <i>src/components/Note.test.js</i>, eli samaan hakemistoon, missä komponentti itsekin sijaitsee.
 
@@ -58,44 +45,46 @@ Ensimmäinen testi varmistaa, että komponentti renderöi muistiinpanon sisäll�
 
 ```js
 import React from 'react'
-import { shallow } from 'enzyme'
+import 'jest-dom/extend-expect'
+import { render, cleanup } from 'react-testing-library'
 import Note from './Note'
 
-describe.only('<Note />', () => {
-  it('renders content', () => {
-    const note = {
-      content: 'Komponenttitestaus tapahtuu jestillä ja enzymellä',
-      important: true
-    }
+afterEach(cleanup)
 
-    const noteComponent = shallow(<Note note={note} />)
-    const contentElement = noteComponent.find('.content')
+test('renders content', () => {
+  const note = {
+    content: 'Komponenttitestaus tapahtuu react-testing-library:llä',
+    important: true
+  }
 
-    expect(contentElement.text()).toContain(note.content)
-  })
+  const component = render(
+    <Note note={note} />
+  )
+
+  expect(component.container).toHaveTextContent(
+    'Komponenttitestaus tapahtuu react-testing-library:llä'
+  )
 })
 ```
 
-Edellisessä osassa määrittelimme testitapaukset metodin [test](https://facebook.github.io/jest/docs/en/api.html#testname-fn-timeout) avulla. Nyt käytössä oleva _it_ viittaa samaan olioon kuin _test_, eli on sama kumpaa käytät. It on tietyissä piireissä suositumpi ja käytössä mm. Enzymen dokumentaatiossa joten käytämme it-muotoa tässä osassa.
-
-Alun konfiguroinnin jälkeen testi renderöi komponentin metodin _shallow_ avulla:
+Alun konfiguroinnin jälkeen testi renderöi komponentin metodin react-testing-library-kirjaston tarjoaman [render](https://testing-library.com/docs/react-testing-library/api#render) avulla:
 
 ```js
-const noteComponent = shallow(<Note note={note} />)
+const component = render(
+  <Note note={note} />
+)
 ```
 
-Normaalisti React-komponentit renderöityvät <i>DOM</i>:iin. Nyt kuitenkin renderöimme komponentteja [shallowWrapper](http://airbnb.io/enzyme/docs/api/shallow.html)-tyyppisiksi, testaukseen sopiviksi olioiksi.
+Normaalisti React-komponentit renderöityvät <i>DOM</i>:iin. Nyt kuitenkin renderöimme komponentteja testeille sopivaan muotoon laittamatta niitä DOM:iin. 
 
-ShallowWrapper-muotoon renderöidyillä React-komponenteilla on runsaasti metodeja, joiden avulla niiden sisältöä voidaan tutkia. Esimerkiksi [find](http://airbnb.io/enzyme/docs/api/ShallowWrapper/find.html) mahdollistaa komponentin sisällä olevien <i>elementtien</i> etsimisen [enzyme-selektorien](http://airbnb.io/enzyme/docs/api/selector.html) avulla. Eräs tapa elementtien etsimiseen on [CSS-selektorien](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) käyttö. Muistiinpanon sisältävässä li-elementissä on CSS-luokka <i>note</i>, joten voimme etsiä elementin seuraavasti:
+_render_ palauttaa olion, jolla on useita kenttiä. Yksi kentistä on <i>container</i>, se sisältää koko komponentin renderöimän HTML:n.
 
-```js
-const contentElement = noteComponent.find('.content')
-```
-
-ekspektaatiossa varmistamme, että elementtiin on renderöitynyt oikea teksti, eli muistiinpanon sisältö:
+Ekspektaatiossa varmistamme, että komponenttiin on renderöitynyt oikea teksti, eli muistiinpanon sisältö:
 
 ```js
-expect(contentElement.text()).toContain(note.content)
+expect(component.container).toHaveTextContent(
+  'Komponenttitestaus tapahtuu react-testing-library:llä'
+)
 ```
 
 ### Testien suorittaminen
@@ -108,12 +97,162 @@ Jos haluat ajaa testit "normaalisti", se onnistuu komennolla
 CI=true npm test
 ```
 
-Konsoli saattaa herjata virhettä, jos sinulla ei ole asennettuna watchmania. Watchman on Facebookin kehittämä tiedoston muutoksia tarkkaileva ohjelma. Ohjelma nopeuttaa testien ajoa ja ainakin osx sierrasta ylöspäin jatkuva testien vahtiminen aiheuttaa käyttäjillä virheilmoituksia. Näistä ilmoituksista pääsee eroon asentamalla Watchmanin.
+**HUOM:** konsoli saattaa herjata virhettä, jos sinulla ei ole asennettuna watchmania. Watchman on Facebookin kehittämä tiedoston muutoksia tarkkaileva ohjelma. Ohjelma nopeuttaa testien ajoa ja ainakin osx sierrasta ylöspäin jatkuva testien vahtiminen aiheuttaa käyttäjillä virheilmoituksia. Näistä ilmoituksista pääsee eroon asentamalla Watchmanin.
 
 Ohjeet ohjelman asentamiseen eri käyttöjärjestelmille löydät Watchmanin sivulta:
 https://facebook.github.io/watchman/
 
-Mikäli testejä suoritettaessa ei löydetä tiedostossa <i>src/setupTests.js</i> tehtyä adapterin konfigurointia, auttaa seuraavan asetuksen lisääminen tiedostoon package-lock.json:
+### Testien sijainti
+
+Reactissa on (ainakin) [kaksi erilaista](https://medium.com/@JeffLombardJr/organizing-tests-in-jest-17fc431ff850) konventiota testien sijoittamiseen. Sijoitimme testit ehkä vallitsevan tavan mukaan, eli samaan hakemistoon missä testattava komponentti sijaitsee.
+
+Toinen tapa olisi sijoittaa testit "normaaliin" tapaan omaan erilliseen hakemistoon. Valitaanpa kumpi tahansa tapa, on varmaa että se on jonkun mielestä täysin väärä.
+
+Itse en pidä siitä, että testit ja normaali koodi ovat samassa hakemistossa. Noudatamme kuitenkin nyt tätä tapaa, sillä se on oletusarvo create-react-app:illa konfiguroiduissa sovelluksissa.
+
+### Sisällön etsiminen testattavasta komponentista
+
+react-testing-library-kirjasto tarjoaa runsaasti tapoja, miten voimme tutkia testattavan komponentin sisältöä. Laajennetaan testiämme hiukan:
+
+```js
+test('renders content', () => {
+  const note = {
+    content: 'Komponenttitestaus tapahtuu react-testing-library:llä',
+    important: true
+  }
+
+  const component = render(
+    <Note note={note} />
+  )
+
+  // tapa 1
+  expect(component.container).toHaveTextContent(
+    'Komponenttitestaus tapahtuu react-testing-library:llä'
+  )
+
+  // tapa 2
+  const element = component.getByText('Komponenttitestaus tapahtuu react-testing-library:llä')
+  expect(element).toBeDefined()
+
+  // tapa 3
+  const div = component.container.querySelector('.note')
+  expect(div).toHaveTextContent(
+    'Komponenttitestaus tapahtuu react-testing-library:llä'
+  )
+})
+```
+
+Ensimmäinen tapa siis etsii tiettyä tekstiä koko komponentin renderöimästä HTML-koodista. 
+
+Toisena käytimme render-metodin palauttamaan olioon liitettyä [getByText](https://testing-library.com/docs/api-queries#getbytext)-metodia, joka palauttaa sen elementin, jolla on määritelty teksti. Jos elementtiä ei ole, tapahtuu poikkeus. Eli mitään ekspektaatiota ei välttämättä edes tarvittaisi.
+
+Kolmas tapa on etsiä komponentin sisältä tietty elementti metodilla [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector), joka saa parametrikseen [CSS-selektorin](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors).
+
+
+### Testien debuggaaminen
+
+Testejä tehdessä törmäämme tyypillisesti erittäin moniin ongelmiin. 
+
+Renderin palauttaman olion metodilla [debug](https://testing-library.com/docs/react-testing-library/api#debug) voimme tulostaa komponentin tuottaman HTML:n konsoliin, eli kun muutamme testiä seuraavasti
+
+```js
+test('renders content', () => {
+  const note = {
+    content: 'Komponenttitestaus tapahtuu react-testing-library:llä',
+    important: true
+  }
+
+  const component = render(
+    <Note note={note} />
+  )
+
+  component.debug() // highlight-line
+
+  // ...
+})
+```
+
+Konsoliin tulostuu komponentin generoima HTML:
+
+```js
+console.log node_modules/react-testing-library/dist/index.js:64
+  <body>
+    <div>
+      <li
+        class="note"
+      >
+        Komponenttitestaus tapahtuu react-testing-library:llä
+        <button>
+          make not important
+        </button>
+      </li>
+    </div>
+  </body>
+```
+
+On myös mahdollista etsiä komponentista pienempi osa, ja tulostaa sen HTML-koodi, tällöin tarvitsemme metodia _prettyDOM_, joka löytyy react-testing-library:n mukana tulevasta kirjastosta <i>dom-testing-library</i>:
+
+```js
+import React from 'react'
+import 'jest-dom/extend-expect'
+import { render, cleanup } from 'react-testing-library'
+import { prettyDOM } from 'dom-testing-library' // highlight-line
+import Note from './Note'
+
+test('renders content', () => {
+  const note = {
+    content: 'Komponenttitestaus tapahtuu react-testing-library:llä',
+    important: true
+  }
+
+  const component = render(
+    <Note note={note} />
+  )
+  const li = component.container.querySelector('li')
+  
+  console.log(prettyDOM(li)) // highlight-line
+})
+```
+
+Eli haimme selektorin avulla komponentin sisältä <i>li</i>-elementin ja tulostimme sen HTML:n konsoliin:
+
+```js
+console.log src/components/Note.test.js:38
+  <li
+    class="note"
+  >
+    Komponenttitestaus tapahtuu react-testing-library:llä
+    <button>
+      make not important
+    </button>
+  </li>
+```
+
+### setup
+
+react-testing-library:n manuaali kehoittaa kutsumaan jokaisen testin jälkeen metodia
+[cleanup](https://testing-library.com/docs/react-testing-library/api#cleanup). Hoidimme asian lisäämällä testitiedostoon [afterEach](https://jestjs.io/docs/en/setup-teardown)-määreen, joka kutsuu metodia:
+
+```js 
+import React from 'react'
+import 'jest-dom/extend-expect' // highlight-line
+import { render, cleanup } from 'react-testing-library'
+import { prettyDOM } from 'dom-testing-library'
+import Note from './Note'
+
+afterEach(cleanup)  // highlight-line
+```
+
+Voisimme toistaa saman kaikkiin testitiedostoihin. Parempi vaihtoehto on kuitenkin [konfiguroida](https://testing-library.com/docs/react-testing-library/setup) cleanup tapahtumaan automaattisesti. Tehdään konfiguraatiota varten tiedosto <i>src/setupTests.js</i> jolla on seuraava sisältö:
+
+```js
+import 'jest-dom/extend-expect'
+import 'react-testing-library/cleanup-after-each'
+```
+
+Nyt pääsemme eroon molemmista ylläolevan testikoodin korostetuista riveistä.
+
+**HUOM** mikäli testejä suoritettaessa ei löydetä tiedostossa <i>src/setupTests.js</i> tehtyjä konfiguraatioita, auttaa seuraavan asetuksen lisääminen tiedostoon package-lock.json:
 
 ```
   "jest": {
@@ -125,50 +264,6 @@ Mikäli testejä suoritettaessa ei löydetä tiedostossa <i>src/setupTests.js</i
   }
 ```
 
-### Testien sijainti
-
-Reactissa on (ainakin) [kaksi erilaista](https://medium.com/@JeffLombardJr/organizing-tests-in-jest-17fc431ff850) konventiota testien sijoittamiseen. Sijoitimme testit ehkä vallitsevan tavan mukaan, eli samaan hakemistoon missä testattava komponentti sijaitsee.
-
-Toinen tapa olisi sijoittaa testit "normaaliin" tapaan omaan erilliseen hakemistoon. Valitaanpa kumpi tahansa tapa, on varmaa että se on jonkun mielestä täysin väärä.
-
-Itse en pidä siitä, että testit ja normaali koodi ovat samassa hakemistossa. Noudatamme kuitenkin nyt tätä tapaa, sillä se on oletusarvo create-react-app:illa konfiguroiduissa sovelluksissa.
-
-### Testien debuggaaminen
-
-Testejä tehdessä törmäämme tyypillisesti erittäin moniin ongelmiin. Näissä tilanteissa vanha kunnon <i>console.log</i> on hyödyllinen. Voimme tulostaa _shallow_-metodin avulla renderöityjä komponentteja ja niiden sisällä olevia elementtejä metodin [debug](http://airbnb.io/enzyme/docs/api/ShallowWrapper/debug.html) avulla:
-
-```js
-describe.only('<Note />', () => {
-  it('renders content', () => {
-    const note = {
-      content: 'Komponenttitestaus tapahtuu jestillä ja enzymellä',
-      important: true
-    }
-
-    const noteComponent = shallow(<Note note={note} />)
-    console.log(noteComponent.debug())
-
-
-    const contentElement = noteComponent.find('.note')
-    console.log(contentElement.debug())
-
-    // ...
-  })
-})
-```
-
-Konsoliin tulostuu komponentin generoima html:
-
-```js
-  console.log src/components/Note.test.js:15
-    <li className="note">
-      Komponenttitestaus tapahtuu jestillä ja enzymellä
-      <button onClick={[undefined]}>
-        make not important
-      </button>
-    </li>
-```
-
 ### Nappien painelu testeissä
 
 Sisällön näyttämisen lisäksi toinen <i>Note</i>-komponenttien vastuulla oleva asia on huolehtia siitä, että painettaessa noten yhteydessä olevaa nappia, tulee propsina välitettyä tapahtumankäsittelijäfunktiota _toggleImportance_ kutsua.
@@ -176,7 +271,14 @@ Sisällön näyttämisen lisäksi toinen <i>Note</i>-komponenttien vastuulla ole
 Testaus onnistuu seuraavasti:
 
 ```js
-it('clicking the button calls event handler once', () => {
+import React from 'react'
+import { render, fireEvent } from 'react-testing-library' // highlight-line
+import { prettyDOM } from 'dom-testing-library' 
+import Note from './Note'
+
+// ...
+
+it('clicking the button calls event handler once', async () => {
   const note = {
     content: 'Komponenttitestaus tapahtuu jestillä ja enzymellä',
     important: true
@@ -184,15 +286,12 @@ it('clicking the button calls event handler once', () => {
 
   const mockHandler = jest.fn()
 
-  const noteComponent = shallow(
-    <Note
-      note={note}
-      toggleImportance={mockHandler}
-    />
+  const { getByText } = render(
+    <Note note={note} toggleImportance={mockHandler} />
   )
 
-  const button = noteComponent.find('button')
-  button.simulate('click')
+  const button = getByText('make not important')
+  fireEvent.click(button)
 
   expect(mockHandler.mock.calls.length).toBe(1)
 })
@@ -204,14 +303,14 @@ Testissä on muutama mielenkiintoinen seikka. Tapahtumankäsittelijäksi annetaa
 const mockHandler = jest.fn()
 ```
 
-Testi hakee renderöidystä komponentista <i>button</i>-elementin ja klikkaa sitä. Koska komponentissa on ainoastaan yksi nappi, on sen hakeminen helppoa:
+Testi hakee renderöidystä komponentista napin <i>tekstin perusteella</i> ja klikkaa sitä:
 
 ```js
-const button = noteComponent.find('button')
-button.simulate('click')
+const button = getByText('make not important')
+fireEvent.click(button)
 ```
 
-Klikkaaminen tapahtuu metodin [simulate](http://airbnb.io/enzyme/docs/api/ShallowWrapper/simulate.html) avulla.
+Klikkaaminen tapahtuu metodin [fireEvent](https://testing-library.com/docs/api-events#fireevent) avulla.
 
 Testin ekspektaatio varmistaa, että <i>mock-funktiota</i> on kutsuttu täsmälleen kerran:
 
@@ -247,22 +346,19 @@ const Togglable = React.forwardRef((props, ref) => {
 })
 ```
 
-**HUOM:** tällä hetkellä (27.1.2019) shallow-renderöinti [ei toimi komponenteille, joissa käytetään hookeja](https://github.com/facebook/react/pull/14567), eli käytä seuraavissa funktion _shallow_ sijaan funktiota _mount_. Tuen pitäisi olla valmiina helmikuun alkupuolella.
 
 Testit ovat seuraavassa
 
 ```js
 import React from 'react'
-import { shallow, mount } from 'enzyme'
-import Note from './Note'
+import { render, fireEvent } from 'react-testing-library'
 import Togglable from './Togglable'
 
 describe('<Togglable />', () => {
-  let togglableComponent
+  let component
 
   beforeEach(() => {
-    // korvaa shallow funktiolla mount jos testit eivät toimi!
-    togglableComponent = shallow(
+    component = render(
       <Togglable buttonLabel="show...">
         <div className="testDiv" />
       </Togglable>
@@ -270,36 +366,35 @@ describe('<Togglable />', () => {
   })
 
   it('renders its children', () => {
-    expect(togglableComponent.contains(<div className="testDiv" />))
-      .toEqual(true)
+    component.container.querySelector('.testDiv')
   })
 
   it('at start the children are not displayed', () => {
-    const div = togglableComponent.find('.togglableContent')
-    expect(div.getElement().props.style)
-      .toEqual({ display: 'none' })
+    const div = component.container.querySelector('.togglableContent')
+
+    expect(div).toHaveStyle('display: none')
   })
 
   it('after clicking the button, children are displayed', () => {
-    const button = togglableComponent.find('button')
+    const button = component.getByText('show...')
+    fireEvent.click(button)
 
-    button.at(0).simulate('click')
-    const div = togglableComponent.find('.togglableContent')
-    expect(div.getElement().props.style)
-      .toEqual({ display: '' })
+    const div = component.container.querySelector('.togglableContent')
+    expect(div).not.toHaveStyle('display: none')
   })
 
 })
 ```
 
-Ennen jokaista testiä suoritettava _beforeEach_ alustaa shallow-renderöimällä <i>Togglable</i>-komponentin muuttujaan _togglableComponent_.
+Ennen jokaista testiä suoritettava _beforeEach_ renderöi <i>Togglable</i>-komponentin muuttujaan _component_.
 
 Ensimmäinen testi tarkastaa, että <i>Togglable</i> renderöi sen lapsikomponentin `<div className="testDiv" />`. 
 
-Loput testit varmistavat, että Togglablen sisältämä lapsikomponentti on alussa näkymättömissä, eli sen sisältävään <i>div</i>-elementtiin liittyy tyyli `{ display: 'none' }`, ja että nappia painettaessa komponentti näkyy, eli tyyli on `{ display: '' }`. Koska Togglablessa on kaksi nappia, painallusta simuloidessa niistä pitää valita oikea, eli tällä kertaa ensimmäinen.
+Loput testit varmistavat metodia [toHaveStyle](https://www.npmjs.com/package/jest-dom#tohavestyle) käyttäen, että Togglablen sisältämä lapsikomponentti on alussa näkymättömissä, eli sen sisältävään <i>div</i>-elementtiin liittyy tyyli `{ display: 'none' }`, ja että nappia painettaessa komponentti näkyy, eli näkymättömäksi tekevää tyyliä <i>ei</i> enää ole. 
 
+Nappi etsitään jälleen nappiin liittyvän tekstin perusteella.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019part2-notes/tree/part5-6), branchissa _part5-6_.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019part2-notes/tree/part5-7), branchissa <i>part5-7</i>.
 
 </div>
 
@@ -745,7 +840,7 @@ Melko primitiivinen HTML-muotoinen raportti generoituu hakemistoon _coverage/lco
 
 Huomaamme, että parannettavaa jäi vielä runsaasti.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019part2-notes/tree/part5-7), branchissa _part5-7_.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019part2-notes/tree/part5-8), branchissa <i>part5-8</i>.
 
 </div>
 

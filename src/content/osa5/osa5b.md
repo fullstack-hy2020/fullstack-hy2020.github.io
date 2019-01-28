@@ -586,10 +586,9 @@ LoginForm.propTypes = {
 
 Funktionaalisen komponentin proptypejen määrittely tapahtuu samalla tavalla kuin luokkaperustaisten.
 
-Jos propsin tyyppi on väärä, esim. yritetään määritellä propsiksi _handleSubmit_ merkkijono, seurauksena on varoitus:
+Jos propsin tyyppi on väärä, esim. yritetään määritellä propsiksi <i>handleSubmit</i> merkkijono, seurauksena on varoitus:
 
 ![](../images/5/16.png)
-
 
 ### ESlint
 
@@ -597,31 +596,15 @@ Konfiguroimme osassa 3 koodin tyylistä huolehtivan [ESlintin](/osa3/validointi_
 
 Create-react-app on asentanut projektille eslintin valmiiksi, joten ei tarvita muuta kun sopiva konfiguraatio tiedoston <i>.eslintrc.js</i>.
 
-Tiedoston voi generoida komennolla
+**HUOM:** älä suorita komentoa _npm init_ se asentaa uuden version eslintistä joka on epäsopiva create-react-app:in konfiguraatioiden kanssa! 
 
-```js
-npx eslint --init
-```
-
-ja vastailemalla sopivasti kysymyksiin:
-
-![](../images/5/17.png)
-
-Asennetaan eslintin ehdottama riippuvuus:
-
-```js
-npm install --save-dev eslint-plugin-react@latest
-```
-
-Aloitamme seuraavaksi testaamisen, ja jotta pääsemme eroon testeissä olevista turhista huomautuksista asennetaan myös[eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest)
+Aloitamme seuraavaksi testaamisen, ja jotta pääsemme eroon testeissä olevista turhista huomautuksista asennetaan plugin [eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest)
 
 ```js
 npm add --save-dev eslint-plugin-jest
 ```
 
-Laajennetaan konfiguraatiota pluginien ohjeen mukaan.
-
-Seuraavassa lopullinen konfiguraatio, mihin on lisätty muutama muukin osassa 3 käyttöönotettu sääntö:
+Luodaan tiedosto <i>.eslintrc.js</i> ja kopioidaan sinne seuraava sisältö:
 
 ```js
 module.exports = {
