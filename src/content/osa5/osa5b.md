@@ -378,7 +378,7 @@ Käyttämämme kikka komponentin tilan muuttamikseksi toimii, mutta se vaikuttaa
 
 Refeille on myös [muita käyttötarkoituksia](https://reactjs.org/docs/refs-and-the-dom.html) kuin React-komponentteihin käsiksi pääseminen.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019part2-notes/tree/part5-4), branchissa <i>part5-5</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019part2-notes/tree/part5-5), branchissa <i>part5-5</i>.
 
 ### Huomio komponenteista
 
@@ -414,56 +414,55 @@ syntyy <i>kolme erillistä komponenttiolioa</i>, joilla on kaikilla oma tilansa:
 
 <i>ref</i>-attribuutin avulla on talletettu viite jokaiseen komponenttiin muuttujiin <i>togglable1</i>, <i>togglable2</i> ja <i>togglable3</i>.
 
+</div>
+
+<div class="tasks">
+
 ### Tehtäviä
 
+#### 5.5 blogilistan frontend, step5
 
-#### 5.5 blogilistan frontend, osa 5
+Tee blogin luomiseen käytettävästä lomakkeesta ainoastaan tarvittaessa näytettävä osan 5 luvun [Kirjautumislomakkeen näyttäminen vain tarvittaessa](/osa5#kirjautumislomakkeen-näyttäminen-vain-tarvittaessa) tapaan. Voit halutessasi hyödyntää osassa 5 määriteltyä komponenttia <i>Togglable</i>.
 
-Tee blogin luomiseen käytettävästä lomakkeesta ainoastaan tarvittaessa näytettävä osan 5 luvun [Kirjautumislomakkeen näyttäminen vain tarvittaessa](/osa5#kirjautumislomakkeen-näyttäminen-vain-tarvittaessa) tapaan. Voit halutessasi hyödyntää osassa 5 määriteltyä komponenttia _Togglable_.
-
-#### 5.6* blogilistan frontend, osa 6
+#### 5.6* blogilistan frontend, step6
 
 Laajenna blogien listausta siten, että klikkaamalla blogin nimeä, sen täydelliset tiedot aukeavat
 
-![]({{ "/assets/teht/33.png" | absolute_url }})
+![](../images/5/13.png)
 
 Uusi klikkaus blogin nimeen pienentää näkymän.
 
-Napin _like_ ei tässä vaiheessa tarvitse tehdä mitään.
+Napin <i>like</i> ei tässä vaiheessa tarvitse tehdä mitään.
 
 Kuvassa on myös käytetty hieman CSS:ää parantamaan sovelluksen ulkoasua.
 
-Tyylejä voidaan määritellä osan 5 tapaan helposti [inline](https://react-cn.github.io/react/tips/inline-styles.html)-tyyleinä seuraavasti:
+Tyylejä voidaan määritellä osan 2 tapaan helposti [inline](http://localhost:8000/osa2/tyylien_lisaaminen_react_sovellukseen#inline-tyylit)-tyyleinä seuraavasti:
 
-```react
-class Blog extends React.Component {
-  // ...
-
-  render() {
-    // ..
-
-    const blogStyle = {
-      paddingTop: 10,
-      paddingLeft: 2,
-      border: 'solid',
-      borderWidth: 1,
-      marginBottom: 5
-    }
-
-    return (
-      <div style={blogStyle}>
-        ...
-      </div>
-    )
+```js
+const Blog = ({ blog }) => {
+  const blogStyle = {
+    paddingTop: 10,
+    paddingLeft: 2,
+    border: 'solid',
+    borderWidth: 1,
+    marginBottom: 5
   }
-}
+
+  return (
+    <div style={blogStyle}>
+      <div onClick={() => console.log('clicked')}>  // highlight-line
+        {blog.title} {blog.author}
+      </div>
+      // ...
+  </div>
+)}
 ```
 
-### Varoitus vielä kerran
+**Huom1:** voit tehdä blogin nimestä klikattavan korstetun koodirivin tapaan. 
 
-Jos huomaat kirjoittavasi sekaisin async/awaitia ja _then_-kutsuja, on 99.9% varmaa, että teet jotain väärin. Käytä siis jompaa kumpaa tapaa, älä missään tapauksessa "varalta" molempia.
+**Huom2:** vaikka tämän tehtävän toiminnallisuus on melkein samanlainen kuin komponentin <i>Togglable</i> tarjoama toiminnallisuus, ei Togglable kuitenkaan sovi tarkotukseen sellaisenaan. Helpoin ratkaisu lienee lisätä blogille tila joka kontrolloi sitä missä muodossa blogi näytetään.
 
-#### 5.7* blogilistan frontend, osa 7
+#### 5.7*: blogilistan frontend, step7
 
 Toteuta like-painikkeen toiminnallisuus. Like lisätään backendiin blogin yksilöivään urliin tapahtuvalla _PUT_-pyynnöllä.
 
@@ -484,7 +483,7 @@ Koska backendin operaatio korvaa aina koko blogin, joudut lähettämään operaa
 },
 ```
 
-tulee palvelimelle tehdä PUT-pyyntö osoitteeseen _/api/blogs/5a43fde2cbd20b12a2c34e91_ ja sisällyttää pyynnön mukaan seuraava data:
+tulee palvelimelle tehdä PUT-pyyntö osoitteeseen <i>/api/blogs/5a43fde2cbd20b12a2c34e91</i> ja sisällyttää pyynnön mukaan seuraava data:
 
 ```js
 {
@@ -496,11 +495,13 @@ tulee palvelimelle tehdä PUT-pyyntö osoitteeseen _/api/blogs/5a43fde2cbd20b12a
 }
 ```
 
-#### 5.8* blogilistan frontend, osa 8
+**Varoitus vielä kerran:** jos huomaat kirjoittavasi sekaisin async/awaitia ja _then_-kutsuja, on 99.9% varmaa, että teet jotain väärin. Käytä siis jompaa kumpaa tapaa, älä missään tapauksessa "varalta" molempia.
 
-Järjestä sovellus näyttämään blogit _likejen_ mukaisessa suuruusjärjestyksessä. Järjestäminen onnistuu taulukon metodilla [sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
+#### 5.8*: blogilistan frontend, step8
 
-#### 5.9* blogilistan frontend, osa 9
+Järjestä sovellus näyttämään blogit <i>likejen</i> mukaisessa suuruusjärjestyksessä. Järjestäminen onnistuu taulukon metodilla [sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
+
+#### 5.9*: blogilistan frontend, step9
 
 Lisää nappi blogin poistamiselle.
 
@@ -508,18 +509,22 @@ Toteuta myös poiston tekevä logiikka. Laajenna backendiä siten, että ne blog
 
 Ohjelmasi voi näyttää esim. seuraavalta:
 
-![]({{ "/assets/teht/34.png" | absolute_url }})
+![](../images/5/14.png)
 
 Kuvassa näkyvä poiston varmistus on helppo toteuttaa funktiolla
 [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm).
 
-#### 5.10* blogilistan frontend, osa 10
+#### 5.10*: blogilistan frontend, step10
 
-Näytä poistonappi ainoastaan jos kyseessä on kirjautuneen käyttäjän lisäämä blogi _tai_ blogi, jolle ei ole määritelty lisääjää (joita siis syntyi järjestelmään ennen käyttäjien olemassaoloa).
+Näytä poistonappi ainoastaan jos kyseessä on kirjautuneen käyttäjän lisäämä blogi.
+
+</div>
+
+<div class="content">
 
 ### PropTypes
 
-Komponentti _Togglable_ olettaa, että sille määritellään propsina _buttonLabel_ napin teksti. Jos määrittely unohtuu
+Komponentti <i>Togglable</i> olettaa, että sille määritellään propsina <i>buttonLabel</i> napin teksti. Jos määrittely unohtuu
 
 ```js
 <Togglable> buttonLabel unohtui... </Togglable>
@@ -527,21 +532,21 @@ Komponentti _Togglable_ olettaa, että sille määritellään propsina _buttonLa
 
 Sovellus kyllä toimii, mutta selaimeen renderöityy hämäävästi nappi, jolla ei ole mitään tekstiä.
 
-Haluaisimmekin varmistaa että jos _Togglable_-komponenttia käytetään, on propsille "pakko" antaa arvo.
+Haluaisimmekin varmistaa että jos <i>Togglable</i>-komponenttia käytetään, on propsille "pakko" antaa arvo.
 
-Kirjaston olettamat ja edellyttämät propsit ja niiden tyypit voidaan määritellä kirjaston [prop-types](https://github.com/facebook/prop-types) avulla. Asennetaan kirjasto
+Komponentin olettamat ja edellyttämät propsit ja niiden tyypit voidaan määritellä kirjaston [prop-types](https://github.com/facebook/prop-types) avulla. Asennetaan kirjasto
 
 ```js
 npm install --save prop-types
 ```
 
-_buttonLabel_ voidaan määritellä _pakolliseksi_ string-tyyppiseksi propsiksi seuraavasti
+<i>buttonLabel</i> voidaan määritellä <i>pakolliseksi</i> string-tyyppiseksi propsiksi seuraavasti
 
 ```js
 import PropTypes from 'prop-types'
 
-class Togglable extends React.Component {
-  // ...
+const Togglable = React.forwardRef((props, ref) => {
+  // ..
 }
 
 Togglable.propTypes = {
@@ -551,24 +556,29 @@ Togglable.propTypes = {
 
 Jos propsia ei määritellä, seurauksena on konsoliin tulostuva virheilmoitus
 
-![](../assets/5/6.png)
+![](../images/5/15.png)
 
-Koodi kuitenkin toimii edelleen, eli mikään ei pakota määrittelemään propseja PropTypes-määrittelyistä huolimatta. On kuitenkin erittäin epäprofessionaalia jättää konsoliin _mitään_ punaisia tulosteita.
+Koodi kuitenkin toimii edelleen, eli mikään ei pakota määrittelemään propseja PropTypes-määrittelyistä huolimatta. On kuitenkin erittäin epäprofessionaalia jättää konsoliin <i>mitään</i> punaisia tulosteita.
 
-Määritellään Proptypet myös _LoginForm_-komponentille:
+Määritellään Proptypet myös <i>LoginForm</i>-komponentille:
 
 ```js
 import PropTypes from 'prop-types'
 
-const LoginForm = ({ handleSubmit, handleChange, username, password }) => {
-  return (
+const LoginForm = ({
+   handleSubmit,
+   handleUsernameChange,
+   handlePasswordChange,
+   username, 
+   password 
+  }) => {
     // ...
-  )
-}
+  }
 
 LoginForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  handleChange: PropTypes.func.isRequired,
+  handleUsernameChange: PropTypes.func.isRequired,
+  handlePasswordChange: PropTypes.func.isRequired,
   username: PropTypes.string.isRequired,
   password: PropTypes.string.isRequired
 }
@@ -576,46 +586,16 @@ LoginForm.propTypes = {
 
 Funktionaalisen komponentin proptypejen määrittely tapahtuu samalla tavalla kuin luokkaperustaisten.
 
-Jos propsin tyyppi on väärä, esim. yritetään määritellä propsiksi _handleChange_ merkkijono, seurauksena on varoitus:
+Jos propsin tyyppi on väärä, esim. yritetään määritellä propsiksi _handleSubmit_ merkkijono, seurauksena on varoitus:
 
-![](../assets/5/7.png)
-
-Luokkaperustaisille komponenteille PropTypet on mahdollista määritellä myös _luokkamuuttujina_, seuraavalla syntaksilla:
-
-```js
-import PropTypes from 'prop-types'
-
-class Togglable extends React.Component {
-  static propTypes = {
-    buttonLabel: PropTypes.string.isRequired
-  }
-
-  // ...
-}
-```
-
-Muuttujamäärittelyn edessä oleva _static_ määrittelee nyt, että _propTypes_-kenttä on nimenomaan komponentin määrittelevällä luokalla _Togglable_ eikä luokan instansseilla. Oleellisesti ottaen kyseessä on ainoastaan Javascriptin vielä standardoimattoman [ominaisuuden](https://github.com/tc39/proposal-class-fields) mahdollistava syntaktinen oikotie määritellä seuraava:
-
-```js
-Togglable.propTypes = {
-  buttonLabel: PropTypes.string.isRequired,
-};
-```
-
-Surffatessasi internetissä saatat vielä nähdä ennen Reactin versiota 0.16 tehtyjä esimerkkejä, joissa PropTypejen käyttö ei edellytä erillistä kirjastoa. Versiosta 0.16 alkaen PropTypejä ei enää määritelty React-kirjastossa itsessään ja kirjaston _prop-types_ käyttö on pakollista.
-
-### Tehtäviä
-
-#### 5.11: blogilistan frontend, osa 11
-
-Määrittele joillekin sovelluksesi komponenteille PropTypet.
+![](../images/5/16.png)
 
 
 ### ESlint
 
-Konfiguroimme osassa 3 koodin tyylistä huolehtivan [ESlintin](/osa3#lint) backendiin. Otetaan nyt ESlint käyttöön myös frontendissa.
+Konfiguroimme osassa 3 koodin tyylistä huolehtivan [ESlintin](/osa3/validointi_ja_es_lint) backendiin. Otetaan nyt ESlint käyttöön myös frontendissa.
 
-Create-react-app on asentanut projektille eslintin valmiiksi, joten ei tarvita muuta kun sopiva konfiguraatio tiedoston _.eslintrc.js_.
+Create-react-app on asentanut projektille eslintin valmiiksi, joten ei tarvita muuta kun sopiva konfiguraatio tiedoston <i>.eslintrc.js</i>.
 
 Tiedoston voi generoida komennolla
 
@@ -625,25 +605,21 @@ npx eslint --init
 
 ja vastailemalla sopivasti kysymyksiin:
 
-![](../images/6/1a.png)
+![](../images/5/17.png)
 
-Jotta pääsemme eroon testeissä olevista turhista huomautuksista asennetaan [eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest)
+Asennetaan eslintin ehdottama riippuvuus:
+
+```js
+npm install --save-dev eslint-plugin-react@latest
+```
+
+Aloitamme seuraavaksi testaamisen, ja jotta pääsemme eroon testeissä olevista turhista huomautuksista asennetaan myös[eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest)
 
 ```js
 npm add --save-dev eslint-plugin-jest
 ```
 
-ja otetaan se käyttöön manuaalin opastamalla tavalla.
-
-Jos vastailit initialisoinnissa kysymyksiin kuvan osoittamalla tavalla, asentuu projektiin [eslint-plugin-react](https://github.com/yannickcr/eslint-plugin-react). Laajennetaan konfiguraatiota pluginin [manuaalin](https://github.com/yannickcr/eslint-plugin-react#configuration) ohjeen mukaan.
-
-Joudumme asentamaan myös [babel-eslint](https://github.com/babel/babel-eslint)-pluginin, jotta ESlint osaisi tulkita koodissa käyttämäämme _class property_ -syntaksia. Pluginin asennus tapahtuu komennolla
-
-```js
-npm install babel-eslint --save-dev
-```
-
-ja se tulee muistaa ottaa käyttöön konfiguraatiossa.
+Laajennetaan konfiguraatiota pluginien ohjeen mukaan.
 
 Seuraavassa lopullinen konfiguraatio, mihin on lisätty muutama muukin osassa 3 käyttöönotettu sääntö:
 
@@ -652,13 +628,14 @@ module.exports = {
     "env": {
         "browser": true,
         "es6": true,
-        "jest/globals": true
+        "jest/globals": true // highlight-line
     },
-    "extends": [
+    // highlight-start
+    "extends": [ 
         "eslint:recommended",
         "plugin:react/recommended"
     ],
-    "parser": "babel-eslint",
+    // highlight-end
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -667,12 +644,12 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "react", "jest"
+        "react", "jest" // highlight-line
     ],
     "rules": {
         "indent": [
             "error",
-            2
+            2  // highlight-line
         ],
         "linebreak-style": [
             "error",
@@ -685,7 +662,8 @@ module.exports = {
         "semi": [
             "error",
             "never"
-        ],
+        ], 
+        // highlight-start
         "eqeqeq": "error",
         "no-trailing-spaces": "error",
         "object-curly-spacing": [
@@ -695,9 +673,26 @@ module.exports = {
             "error", { "before": true, "after": true }
         ],
         "no-console": 0,
-        "react/prop-types": 0
+        "react/prop-types": 0   
+        // highlight-end
     }
 };
 ```
+
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019part2-notes/tree/part5-6), branchissa <i>part5-6</i>.
+
+</div>
+
+<div class="tasks">
+
+### Tehtäviä
+
+#### 5.11: blogilistan frontend, step11
+
+Määrittele joillekin sovelluksesi komponenteille PropTypet.
+
+#### 5.12: blogilistan frontend, step12
+
+Ota projektiin käyttöön ESlint. Määrittele haluamasi kaltainen konfiguraatio. Korjaa kaikki lint-virheet.
 
 </div>

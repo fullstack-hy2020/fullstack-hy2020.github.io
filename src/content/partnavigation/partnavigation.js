@@ -30,7 +30,7 @@ module.exports = {
   },
   '5': {
     a: 'Kirjautuminen frontendissä',
-    b: 'Lomakkeita',
+    b: 'props.children ja proptypet',
     c: 'React-sovellusten testaaminen',
     d: 'Custom hookit ja Class-komponentit'
   },

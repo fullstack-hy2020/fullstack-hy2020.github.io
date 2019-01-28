@@ -6,8 +6,6 @@ letter: c
 
 <div class="content">
 
-## React-sovelluksen testaus
-
 Reactilla tehtyjen frontendien testaamiseen on monia tapoja. Aloitetaan niihin tutustuminen nyt.
 
 Testit tehdään samaan tapaan kuin edellisessä osassa eli Facebookin [Jest](http://jestjs.io/)-kirjastolla. Jest onkin valmiiksi konfiguroitu create-react-app:illa luotuihin projekteihin.
@@ -16,33 +14,32 @@ Jestin lisäksi käytetään AirBnB:n kehittämää [enzyme](https://github.com/
 
 Asennetaan enzyme komennolla:
 
-```bash
+```js
 npm install --save-dev enzyme enzyme-adapter-react-16
 ```
 
 Testataan aluksi muistiinpanon renderöivää komponenttia:
 
-```html
+```js
 const Note = ({ note, toggleImportance }) => {
-  const label = note.important ? 'make not important' : 'make important'
+  const label = note.important
+    ? 'make not important'
+    : 'make important'
+
   return (
-    <div className="wrapper">
-      <div className="content">
-        {note.content}
-      </div>
-      <div>
-        <button onClick={toggleImportance}>{label}</button>
-      </div>
-    </div>
+    <li className='note'> // highlight-line
+      {note.content}
+      <button onClick={toggleImportance}>{label}</button>
+    </li>
   )
 }
 ```
 
-Testauksen helpottamiseksi komponenttiin on lisätty sisällön määrittelevälle _div_-elementille [CSS-luokka](https://reactjs.org/docs/dom-elements.html#classname) _content_.
+Huomaa, että blogin sisältävällä <i>li</i>-edelmentillä on [CSS](https://reactjs.org/docs/dom-elements.html#classname)-luokka <i>note</i>, pääsemme sen avulla blogiin käsiksi testistä.
 
 ### shallow-renderöinti
 
-Ennen testien tekemistä, tehdään _enzymen_ konfiguraatioita varten tiedosto _src/setupTests.js_ ja sille seuraava sisältö:
+Ennen testien tekemistä, tehdään <i>enzymen</i> konfiguraatioita varten tiedosto <i>src/setupTests.js</i> ja sille seuraava sisältö:
 
 ```js
 import { configure } from 'enzyme'
@@ -53,13 +50,13 @@ configure({ adapter: new Adapter() })
 
 Nyt olemme valmiina testien tekemiseen.
 
-Koska _Note_ on yksinkertainen komponentti, joka ei käytä yhtään monimutkaista alikomponenttia vaan renderöi suoraan HTML:ää, sopii sen testaamiseen hyvin enzymen [shallow](http://airbnb.io/enzyme/docs/api/shallow.html)-renderöijä.
+Koska <i>Note</i> on yksinkertainen komponentti, joka ei käytä yhtään monimutkaista alikomponenttia vaan renderöi suoraan HTML:ää, sopii sen testaamiseen hyvin enzymen [shallow](http://airbnb.io/enzyme/docs/api/shallow.html)-renderöijä.
 
-Tehdään testi tiedostoon _src/components/Note.test.js_, eli samaan hakemistoon, missä komponentti itsekin sijaitsee.
+Tehdään testi tiedostoon <i>src/components/Note.test.js</i>, eli samaan hakemistoon, missä komponentti itsekin sijaitsee.
 
 Ensimmäinen testi varmistaa, että komponentti renderöi muistiinpanon sisällön:
 
-```html
+```js
 import React from 'react'
 import { shallow } from 'enzyme'
 import Note from './Note'
@@ -72,9 +69,9 @@ describe.only('<Note />', () => {
     }
 
     const noteComponent = shallow(<Note note={note} />)
-    const contentDiv = noteComponent.find('.content')
+    const contentElement = noteComponent.find('.content')
 
-    expect(contentDiv.text()).toContain(note.content)
+    expect(contentElement.text()).toContain(note.content)
   })
 })
 ```
@@ -83,22 +80,22 @@ Edellisessä osassa määrittelimme testitapaukset metodin [test](https://facebo
 
 Alun konfiguroinnin jälkeen testi renderöi komponentin metodin _shallow_ avulla:
 
-```html
+```js
 const noteComponent = shallow(<Note note={note} />)
 ```
 
-Normaalisti React-komponentit renderöityvät _DOM_:iin. Nyt kuitenkin renderöimme komponentteja [shallowWrapper](http://airbnb.io/enzyme/docs/api/shallow.html)-tyyppisiksi, testaukseen sopiviksi olioiksi.
+Normaalisti React-komponentit renderöityvät <i>DOM</i>:iin. Nyt kuitenkin renderöimme komponentteja [shallowWrapper](http://airbnb.io/enzyme/docs/api/shallow.html)-tyyppisiksi, testaukseen sopiviksi olioiksi.
 
-ShallowWrapper-muotoon renderöidyillä React-komponenteilla on runsaasti metodeja, joiden avulla niiden sisältöä voidaan tutkia. Esimerkiksi [find](http://airbnb.io/enzyme/docs/api/ShallowWrapper/find.html) mahdollistaa komponentin sisällä olevien _elementtien_ etsimisen [enzyme-selektorien](http://airbnb.io/enzyme/docs/api/selector.html) avulla. Eräs tapa elementtien etsimiseen on [CSS-selektorien](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) käyttö. Liitimme muistiinpanon sisällön kertovaan div-elementtiin luokan _content_, joten voimme etsiä elementin seuraavasti:
+ShallowWrapper-muotoon renderöidyillä React-komponenteilla on runsaasti metodeja, joiden avulla niiden sisältöä voidaan tutkia. Esimerkiksi [find](http://airbnb.io/enzyme/docs/api/ShallowWrapper/find.html) mahdollistaa komponentin sisällä olevien <i>elementtien</i> etsimisen [enzyme-selektorien](http://airbnb.io/enzyme/docs/api/selector.html) avulla. Eräs tapa elementtien etsimiseen on [CSS-selektorien](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) käyttö. Muistiinpanon sisältävässä li-elementissä on CSS-luokka <i>note</i>, joten voimme etsiä elementin seuraavasti:
 
 ```js
-const contentDiv = noteComponent.find('.content')
+const contentElement = noteComponent.find('.content')
 ```
 
 ekspektaatiossa varmistamme, että elementtiin on renderöitynyt oikea teksti, eli muistiinpanon sisältö:
 
 ```js
-expect(contentDiv.text()).toContain(note.content)
+expect(contentElement.text()).toContain(note.content)
 ```
 
 ### Testien suorittaminen
@@ -107,7 +104,7 @@ Create-react-app:issa on konfiguroitu testit oletusarvoisesti suoritettavaksi ns
 
 Jos haluat ajaa testit "normaalisti", se onnistuu komennolla
 
-```bash
+```js
 CI=true npm test
 ```
 
@@ -116,7 +113,7 @@ Konsoli saattaa herjata virhettä, jos sinulla ei ole asennettuna watchmania. Wa
 Ohjeet ohjelman asentamiseen eri käyttöjärjestelmille löydät Watchmanin sivulta:
 https://facebook.github.io/watchman/
 
-Mikäli testejä suoritettaessa ei löydetä tiedostossa _src/setupTests.js_ tehtyä adapterin konfigurointia, auttaa seuraavan asetuksen lisääminen tiedostoon package-lock.json:
+Mikäli testejä suoritettaessa ei löydetä tiedostossa <i>src/setupTests.js</i> tehtyä adapterin konfigurointia, auttaa seuraavan asetuksen lisääminen tiedostoon package-lock.json:
 
 ```
   "jest": {
@@ -138,9 +135,9 @@ Itse en pidä siitä, että testit ja normaali koodi ovat samassa hakemistossa. 
 
 ### Testien debuggaaminen
 
-Testejä tehdessä törmäämme tyypillisesti erittäin moniin ongelmiin. Näissä tilanteissa vanha kunnon _console.log_ on hyödyllinen. Voimme tulostaa _shallow_-metodin avulla renderöityjä komponentteja ja niiden sisällä olevia elementtejä metodin [debug](http://airbnb.io/enzyme/docs/api/ShallowWrapper/debug.html) avulla:
+Testejä tehdessä törmäämme tyypillisesti erittäin moniin ongelmiin. Näissä tilanteissa vanha kunnon <i>console.log</i> on hyödyllinen. Voimme tulostaa _shallow_-metodin avulla renderöityjä komponentteja ja niiden sisällä olevia elementtejä metodin [debug](http://airbnb.io/enzyme/docs/api/ShallowWrapper/debug.html) avulla:
 
-```bash
+```js
 describe.only('<Note />', () => {
   it('renders content', () => {
     const note = {
@@ -152,8 +149,8 @@ describe.only('<Note />', () => {
     console.log(noteComponent.debug())
 
 
-    const contentDiv = noteComponent.find('.content')
-    console.log(contentDiv.debug())
+    const contentElement = noteComponent.find('.note')
+    console.log(contentElement.debug())
 
     // ...
   })
@@ -162,32 +159,23 @@ describe.only('<Note />', () => {
 
 Konsoliin tulostuu komponentin generoima html:
 
-```bash
-console.log src/components/Note.test.js:16
-  <div className="wrapper">
-    <div className="content">
+```js
+  console.log src/components/Note.test.js:15
+    <li className="note">
       Komponenttitestaus tapahtuu jestillä ja enzymellä
-    </div>
-    <div>
       <button onClick={[undefined]}>
         make not important
       </button>
-    </div>
-  </div>
-
-console.log src/components/Note.test.js:20
-  <div className="content">
-    Komponenttitestaus tapahtuu jestillä ja enzymellä
-  </div>
+    </li>
 ```
 
 ### Nappien painelu testeissä
 
-Sisällön näyttämisen lisäksi toinen _Note_-komponenttien vastuulla oleva asia on huolehtia siitä, että painettaessa noten yhteydessä olevaa nappia, tulee propsina välitettyä tapahtumankäsittelijäfunktiota _toggleImportance_ kutsua.
+Sisällön näyttämisen lisäksi toinen <i>Note</i>-komponenttien vastuulla oleva asia on huolehtia siitä, että painettaessa noten yhteydessä olevaa nappia, tulee propsina välitettyä tapahtumankäsittelijäfunktiota _toggleImportance_ kutsua.
 
 Testaus onnistuu seuraavasti:
 
-```bash
+```js
 it('clicking the button calls event handler once', () => {
   const note = {
     content: 'Komponenttitestaus tapahtuu jestillä ja enzymellä',
@@ -216,7 +204,7 @@ Testissä on muutama mielenkiintoinen seikka. Tapahtumankäsittelijäksi annetaa
 const mockHandler = jest.fn()
 ```
 
-Testi hakee renderöidystä komponentista _button_-elementin ja klikkaa sitä. Koska komponentissa on ainoastaan yksi nappi, on sen hakeminen helppoa:
+Testi hakee renderöidystä komponentista <i>button</i>-elementin ja klikkaa sitä. Koska komponentissa on ainoastaan yksi nappi, on sen hakeminen helppoa:
 
 ```js
 const button = noteComponent.find('button')
@@ -225,7 +213,7 @@ button.simulate('click')
 
 Klikkaaminen tapahtuu metodin [simulate](http://airbnb.io/enzyme/docs/api/ShallowWrapper/simulate.html) avulla.
 
-Testin ekspektaatio varmistaa, että _mock-funktiota_ on kutsuttu täsmälleen kerran:
+Testin ekspektaatio varmistaa, että <i>mock-funktiota</i> on kutsuttu täsmälleen kerran:
 
 ```js
 expect(mockHandler.mock.calls.length).toBe(1)
@@ -235,38 +223,37 @@ expect(mockHandler.mock.calls.length).toBe(1)
 
 Esimerkissämme mock-funktio sopi tarkoitukseen erinomaisesti, sillä sen avulla on helppo varmistaa, että metodia on kutsuttu täsmälleen kerran.
 
-### Komponentin _Togglable_ testit
+### Komponentin <i>Togglable</i> testit
 
-Tehdään komponentille _Togglable_ muutama testi. Lisätään komponentin lapset renderöivään div-elementtiin CSS-luokka _togglableContent_:
+Tehdään komponentille <i>Togglable</i> muutama testi. Lisätään komponentin lapset renderöivään div-elementtiin CSS-luokka <i>togglableContent</i>:
 
-```react
-class Togglable extends React.Component {
+```js
+const Togglable = React.forwardRef((props, ref) => {
+  // ...
 
-  render() {
-    const hideWhenVisible = { display: this.state.visible ? 'none' : '' }
-    const showWhenVisible = { display: this.state.visible ? '' : 'none' }
-
-    return (
-      <div>
-        <div style={hideWhenVisible}>
-          <button onClick={this.toggleVisibility}>{this.props.buttonLabel}</button>
-        </div>
-        <div style={showWhenVisible} className="togglableContent">
-          {this.props.children}
-          <button onClick={this.toggleVisibility}>cancel</button>
-        </div>
+  return (
+    <div>
+      <div style={hideWhenVisible}>
+        <button onClick={toggleVisibility}>
+          {props.buttonLabel}
+        </button>
       </div>
-    )
-  }
-}
+      <div style={showWhenVisible} className="togglableContent"> // highlight-line
+        {props.children}
+        <button onClick={toggleVisibility}>cancel</button>
+      </div>
+    </div>
+  )
+})
 ```
+
+**HUOM:** tällä hetkellä (27.1.2019) shallow-renderöinti [ei toimi komponenteille, joissa käytetään hookeja](https://github.com/facebook/react/pull/14567), eli käytä seuraavissa funktion _shallow_ sijaan funktiota _mount_. Tuen pitäisi olla valmiina helmikuun alkupuolella.
 
 Testit ovat seuraavassa
 
-```react
+```js
 import React from 'react'
-import { shallow } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
+import { shallow, mount } from 'enzyme'
 import Note from './Note'
 import Togglable from './Togglable'
 
@@ -274,6 +261,7 @@ describe('<Togglable />', () => {
   let togglableComponent
 
   beforeEach(() => {
+    // korvaa shallow funktiolla mount jos testit eivät toimi!
     togglableComponent = shallow(
       <Togglable buttonLabel="show...">
         <div className="testDiv" />
@@ -282,12 +270,14 @@ describe('<Togglable />', () => {
   })
 
   it('renders its children', () => {
-    expect(togglableComponent.contains(<div className="testDiv" />)).toEqual(true)
+    expect(togglableComponent.contains(<div className="testDiv" />))
+      .toEqual(true)
   })
 
   it('at start the children are not displayed', () => {
     const div = togglableComponent.find('.togglableContent')
-    expect(div.getElement().props.style).toEqual({ display: 'none' })
+    expect(div.getElement().props.style)
+      .toEqual({ display: 'none' })
   })
 
   it('after clicking the button, children are displayed', () => {
@@ -295,27 +285,103 @@ describe('<Togglable />', () => {
 
     button.at(0).simulate('click')
     const div = togglableComponent.find('.togglableContent')
-    expect(div.getElement().props.style).toEqual({ display: '' })
+    expect(div.getElement().props.style)
+      .toEqual({ display: '' })
   })
 
 })
 ```
 
-Ennen jokaista testiä suoritettava _beforeEach_ alustaa shallow-renderöimällä _Togglable_-komponentin muuttujaan _togglableComponent_.
+Ennen jokaista testiä suoritettava _beforeEach_ alustaa shallow-renderöimällä <i>Togglable</i>-komponentin muuttujaan _togglableComponent_.
 
-Ensimmäinen testi tarkastaa, että _Togglable_ renderöi lapsikomponentin _<div className="testDiv" />_. Loput testit varmistavat, että Togglablen sisältämä lapsikomponentti on alussa näkymättömissä, eli sen sisältävään _div_-elementtiin liittyy tyyli _{ display: 'none' }_, ja että nappia painettaessa komponentti näkyy, eli tyyli on _{ display: '' }_. Koska Togglablessa on kaksi nappia, painallusta simuloidessa niistä pitää valita oikea, eli tällä kertaa ensimmäinen.
+Ensimmäinen testi tarkastaa, että <i>Togglable</i> renderöi sen lapsikomponentin `<div className="testDiv" />`. 
 
-## Tehtäviä
+Loput testit varmistavat, että Togglablen sisältämä lapsikomponentti on alussa näkymättömissä, eli sen sisältävään <i>div</i>-elementtiin liittyy tyyli `{ display: 'none' }`, ja että nappia painettaessa komponentti näkyy, eli tyyli on `{ display: '' }`. Koska Togglablessa on kaksi nappia, painallusta simuloidessa niistä pitää valita oikea, eli tällä kertaa ensimmäinen.
 
-Tee nyt tehtävät [5.12-14](/tehtävät#komponenttien-testaaminen)
+
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019part2-notes/tree/part5-6), branchissa _part5-6_.
+
+</div>
+
+<div class="tasks">
+
+### Tehtäviä
+
+#### 5.13: blogilistan testit, step1
+
+Lisää sovellukseesi tilapäisesti seuraava komponentti
+
+```js
+import React from 'react'
+
+const SimpleBlog = ({ blog, onClick }) => (
+  <div>
+    <div>
+      {blog.title} {blog.author}
+    </div>
+    <div>
+      blog has {blog.likes} likes
+      <button onClick={onClick}>like</button>
+    </div>
+  </div>
+)
+
+export default SimpleBlog
+```
+
+Tee testi, joka varmistaa, että komponentti renderöi blogin titlen, authorin ja likejen määrän.
+
+Lisää komponenttiin tarvittaessa testausta helpottavia CSS-luokkia.
+
+#### 5.14*: blogilistan testit, step2
+
+Tee testi, joka varmistaa, että jos komponentin <i>like</i>-nappia painetaan kahdesti, komponentin propsina saamaa tapahtumankäsittelijäfunktiota kutsutaan kaksi kertaa.
+
+#### 5.15*: blogilistan testit, step3
+
+Tee oman sovelluksesi komponentille <i>Blog</i> testit, jotka varmistavat, että oletusarvoisesti blogista on näkyvissä ainoastaan nimi ja kirjoittaja, ja että klikkaamalla niitä saadaan näkyviin myös muut osat blogin tiedoista.
+
+**HUOM:** tee testissä klikkaus <i>ennen</i> kuin haet tarkastettavan elementin muuttujaan, eli tee komennot tässä järjestyksessä
+
+```js
+it('after clicking name the details are displayed', () => {
+  // haetaan klikattava osa komponentista
+  const nameDiv = ...
+  nameDiv.simulate('click')
+
+  // haetaan tarkastettava, eli detaljit sisältävä osa komponentista
+  const contentDiv = ...
+  expect(contentDiv...)
+})
+```
+
+**väärä** järjestys on siis seuraava
+
+```js
+it('DOES NOT WORK', () => {
+  const nameDiv = ...
+  const contentDiv = ...
+
+  // klikataan liian myöhään
+  nameDiv.simulate('click')
+
+  expect(contentDiv...)
+})
+```
+
+**HUOM2:** tällä hetkellä (27.1.2019) shallow-renderöinti [ei toimi komponenteille, joissa käytetään hookeja](https://github.com/facebook/react/pull/14567), eli käytä  funktion _shallow_ sijaan funktiota _mount_ jos testaamasi komponentti käyttää hookeja. Tuen pitäisi olla valmiina helmikuun alkupuolella.
+
+</div>
+
+<div class="content">
 
 ### mount ja full DOM -renderöinti
 
 Käyttämämme _shallow_-renderöijä on useimmista tapauksissa riittävä. Joskus tarvitsemme kuitenkin järeämmän työkalun sillä _shallow_ renderöi ainoastaan "yhden tason", eli sen komponentin, jolle metodia kutsutaan.
 
-Jos yritämme esim. sijoittaa kaksi _Note_-komponenttia _Togglable_-komponentin sisälle ja tulostamme syntyvän _ShallowWrapper_ -olion
+Jos yritämme esim. sijoittaa kaksi <i>Note</i>-komponenttia <i>Togglable</i>-komponentin sisälle ja tulostamme syntyvän <i>ShallowWrapper</i>-olion
 
-```bash
+```js
 it('shallow renders only one level', () => {
   const note1 = {
     content: 'Komponenttitestaus tapahtuu jestillä ja enzymellä',
@@ -337,9 +403,9 @@ it('shallow renders only one level', () => {
 })
 ```
 
-huomaamme, että _Togglable_ komponentti on renderöitynyt, eli "muuttunut" HTML:ksi, mutta sen sisällä olevat _Note_-komponentit eivät ole HTML:ää vaan React-komponentteja.
+huomaamme, että <i>Togglable</i> komponentti on renderöitynyt, eli "muuttunut" HTML:ksi, mutta sen sisällä olevat <i>Note</i>-komponentit eivät ole HTML:ää vaan React-komponentteja.
 
-```bash
+```js
 <div>
   <div style={{...}}>
     <button onClick={[Function]}>
@@ -360,7 +426,7 @@ Jos komponentille tehdään edellisten esimerkkien tapaan yksikkötestejä, _sha
 
 Muutetaan testi käyttämään _shallowin_ sijaan _mountia_:
 
-```react
+```js
 import React from 'react'
 import { shallow, mount } from 'enzyme'
 import Note from './Note'
@@ -387,47 +453,39 @@ it('mount renders all components', () => {
 })
 ```
 
-Tuloksena on kokonaisuudessaan HTML:ksi renderöitynyt _Togglable_-komponentti:
+Tuloksena on kokonaisuudessaan HTML:ksi renderöitynyt <i>Togglable</i>-komponentti:
 
-```bash
-<Togglable buttonLabel="show...">
+```js
+<ForwardRef buttonLabel="show...">
   <div>
     <div style={{...}}>
-      <button onClick={[Function]}>
+      <button onClick={[Function: toggleVisibility]}>
         show...
       </button>
     </div>
     <div style={{...}} className="togglableContent">
       <Note note={{...}}>
-        <div className="wrapper">
-          <div className="content">
-            Komponenttitestaus tapahtuu jestillä ja enzymellä
-          </div>
-          <div>
-            <button onClick={[undefined]}>
-              make not important
-            </button>
-          </div>
-        </div>
+        <li className="note">
+          Komponenttitestaus tapahtuu jestillä ja enzymellä
+          <button onClick={[undefined]}>
+            make not important
+          </button>
+        </li>
       </Note>
       <Note note={{...}}>
-        <div className="wrapper">
-          <div className="content">
-            mount renderöi myös alikomponentit
-          </div>
-          <div>
-            <button onClick={[undefined]}>
-              make not important
-            </button>
-          </div>
-        </div>
+        <li className="note">
+          mount renderöi myös alikomponentit
+          <button onClick={[undefined]}>
+            make not important
+          </button>
+        </li>
       </Note>
-      <button onClick={[Function]}>
+      <button onClick={[Function: toggleVisibility]}>
         cancel
       </button>
     </div>
   </div>
-</Togglable>
+</ForwardRef>
 ```
 
 Mountin avulla renderöitäessä testi pääsee siis käsiksi periaatteessa samaan HTML-koodiin, joka todellisuudessa renderöidään selaimeen ja tämä luonnollisesti mahdollistaa huomattavasti monipuolisemman testauksen kuin _shallow_-renderöinti. Komennolla _mount_ tapahtuva renderöinti on kuitenkin hitaampaa, joten jos _shallow_ riittää, sitä kannattaa käyttää.
@@ -443,19 +501,20 @@ console.log(noteComponent.html())
 ```
 tulostuu todellinen HTML:
 
-```html
+```js
 <div>
   <div><button>show...</button></div>
-  <div style="display: none;">
-    <div class="wrapper">
-      <div class="content">Komponenttitestaus tapahtuu jestillä ja enzymellä</div>
-      <div><button>make not important</button></div>
-    </div>
-    <div class="wrapper">
-      <div class="content">mount renderöi myös alikomponentit</div>
-      <div><button>make not important</button></div>
-    </div>
-    <button>cancel</button></div>
+  <div style="display: none;" class="togglableContent">
+    <li class="note">
+      Komponenttitestaus tapahtuu jestillä ja enzymellä
+      <button>make not important</button>
+    </li>
+    <li class="note">
+      mount renderöi myös alikomponentit
+      <button>make not important</button>
+    </li>
+    <button>cancel</button>
+  </div>
 </div>
 ```
 
@@ -465,9 +524,9 @@ Komento _mount_ palauttaa renderöidyn "komponenttipuun" [ReactWrapper](https://
 
 Lomakkeiden testaaminen Enzymellä on jossain määrin haasteellista. Enzymen dokumentaatio ei mainitse lomakkeista sanaakaan. [Issueissa](https://github.com/airbnb/enzyme/issues/364) asiasta kuitenkin keskustellaan.
 
-Tehdään testi komponentille _NoteForm_. Lomakkeen koodi näyttää seuraavalta
+Tehdään testi komponentille <i>NoteForm</i>. Lomakkeen koodi näyttää seuraavalta
 
-```react
+```js
 const NoteForm = ({ onSubmit, handleChange, value }) => {
   return (
     <div>
@@ -487,42 +546,40 @@ const NoteForm = ({ onSubmit, handleChange, value }) => {
 
 Lomakkeen toimintaperiaatteena on synkronoida lomakkeen tila sen ulkopuolella olevan React-komponentin tilaan. Lomakettamme on jossain määrin vaikea testata yksistään.
 
-Teemmekin testejä varten apukomponentin _Wrapper_, joka renderöi _NoteForm_:in ja hallitsee lomakkeen tilaa:
+Teemmekin testejä varten apukomponentin <i>Wrapper</i>, joka renderöi <i>NoteForm</i>:in ja hallitsee lomakkeen tilaa parametrinaan saamansa propsin <i>state</i> avulla:
 
-```react
-class Wrapper extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      formInput: ''
-    }
+```js
+const Wrapper = (props) => {
+
+  const onChange = (event) => {
+    props.state.value = event.target.value
   }
-  onChange = (e) => {
-    this.setState({ formInput: e.target.value })
-  }
-  render() {
-    return (
-      <NoteForm
-        value={this.state.formInput}
-        onSubmit={this.props.onSubmit}
-        handleChange={this.onChange}
-      />
-  )}
-}
+
+  return(
+    <NoteForm
+      value={props.state.value}
+      onSubmit={props.onSubmit}
+      handleChange={onChange}
+    />
+  )
+} 
 ```
 
 Testi on seuraavassa:
 
-```react
+```js
 import React from 'react'
 import { mount } from 'enzyme'
 import NoteForm from './NoteForm'
 
-it('renders content', () => {
+it('<NoteForm /> updates parent state and calls onSubmit', () => {
   const onSubmit = jest.fn()
+  const state = {
+    value: ''
+  }
 
   const wrapper = mount(
-    <Wrapper onSubmit={onSubmit} />
+    <Wrapper onSubmit={onSubmit} state={state} />
   )
 
   const input = wrapper.find('input')
@@ -531,28 +588,31 @@ it('renders content', () => {
   input.simulate('change', { target: { value: 'lomakkeiden testaus on hankalaa' } })
   button.simulate('submit')
 
-  expect(wrapper.state().formInput).toBe('lomakkeiden testaus on hankalaa')
   expect(onSubmit.mock.calls.length).toBe(1)
+  expect(state.value).toBe('lomakkeiden testaus on hankalaa')
 })
 ```
 
-Testi luo _Wrapper_-komponentin, jolle se välittää propseina mockatun funktion _onSubmit_. Wrapper välittää funktion edelleen _NoteFormille_ tapahtuman _onSubmit_ käsittelijäksi.
+Testi luo <i>Wrapper</i>-komponentin, jolle se välittää propseina mockatun funktion _onSubmit_ sekä tilaa edustavan olion _state_.
 
-Syötekenttään _input_ kirjoittamista simuloidaan tekemällä syötekenttään tapahtuma _change_ ja määrittelemällä sopiva olio, joka määrittelee syötekenttään 'kirjoitetun' sisällön.
+Wrapper välittää funktion edelleen <i>NoteFormille</i> tapahtuman <i>onSubmit</i> käsittelijäksi ja saamansa propsin _state_ kentän <i>value</i> syötekentän <i>input</i> arvoksi. 
 
-Lomakkeen nappia tulee painaa simuloimalla tapahtumaa _submit_, tapahtuma _click_ ei lähetä lomaketta.
+Syötekenttään <i>input</i> kirjoittamista simuloidaan tekemällä syötekenttään tapahtuma <i>change</i> ja määrittelemällä sopiva olio, joka määrittelee syötekenttään 'kirjoitetun' sisällön.
 
-Testin ensimmäinen ekspektaatio tutkii komponentin _Wrapper_ tilaa metodilla [state](http://airbnb.io/enzyme/docs/api/ReactWrapper/state.html), ja varmistaa, että lomakkeelle kirjoitettu teksti on siirtynyt tilaan. Toinen ekspektaatio varmistaa, että lomakkeen lähetys on aikaansaanut tapahtumankäsittelijän kutsumisen.
+Lomakkeen nappia tulee painaa simuloimalla tapahtumaa <i>submit</i>, tapahtuma <i>click</i> ei lähetä lomaketta.
 
-## Frontendin integraatiotestaus
+Tenstin ensimmäinen ekspektaatio varmistaa, että lomakkeen lähetys on aikaansaanut tapahtumankäsittelijän kutsumisen.
+Toinen ekspektaatio tutkii komponentille <i>Wrapper</i> propsina välitettyä muuttujaa _state_, ja varmistaa, että lomakkeelle kirjoitettu teksti on siirtynyt tilaan. 
+
+### Frontendin integraatiotestaus
 
 Suoritimme edellisessä osassa backendille integraatiotestejä, jotka testasivat backendin tarjoaman API:n läpi backendia ja tietokantaa. Backendin testauksessa tehtiin tietoinen päätös olla kirjoittamatta yksikkötestejä sillä backendin koodi on melko suoraviivaista ja ongelmat tulevatkin esiin todennäköisemmin juuri monimutkaisemmissa skenaarioissa, joita integraatiotestit testaavat hyvin.
 
-Toistaiseksi kaikki frontendiin tekemämme testit ovat olleet yksittäisten komponenttien oikeellisuutta valvovia yksikkötestejä. Yksikkötestaus on toki tärkeää, mutta kattavinkaan yksikkötestaus ei riitä antamaan riittävää luotettavuutta sille, että järjestelmä toimii kokonaisuudessaan.
+Toistaiseksi kaikki frontendiin tekemämme testit ovat olleet yksittäisten komponenttien oikeellisuutta valvovia yksikkötestejä. Yksikkötestaus on toki välillä hyödyllistä, mutta kattavinkaan yksikkötestaus ei riitä antamaan riittävää luotettavuutta sille, että järjestelmä toimii kokonaisuudessaan.
 
-Tehdään nyt sovellukselle yksi integraatiotesti. Integraatiotestaus on huomattavasti komponenttien yksikkötestausta hankalampaa. Erityisesti sovelluksemme kohdalla ongelmia aiheuttaa kaksi seikkaa: sovellus hakee näytettävät muistiinpanot palvelimelta _ja_ sovellus käyttää local storagea kirjautuneen käyttäjän tietojen tallettamiseen.
+Tehdään nyt sovellukselle yksi integraatiotesti. Integraatiotestaus on huomattavasti komponenttien yksikkötestausta hankalampaa. Erityisesti sovelluksemme kohdalla ongelmia aiheuttaa kaksi seikkaa: sovellus hakee näytettävät muistiinpanot palvelimelta <i>ja</i> sovellus käyttää local storagea kirjautuneen käyttäjän tietojen tallettamiseen.
 
-Local storage ei ole oletusarvoiseti käytettävissä testejä suorittaessa, sillä kyseessä on selaimen tarjoama toiminnallisuus ja testit ajetaan selaimen ulkopuolella. Ongelma on helppo korjata määrittelemällä testien suorituksen ajaksi _mock_ joka matkii local storagea. Tapoja tähän on [monia](https://stackoverflow.com/questions/32911630/how-do-i-deal-with-localstorage-in-jest-tests).
+Local storage ei ole oletusarvoiseti käytettävissä testejä suorittaessa, sillä kyseessä on selaimen tarjoama toiminnallisuus ja testit ajetaan selaimen ulkopuolella. Ongelma on helppo korjata määrittelemällä testien suorituksen ajaksi <i>mock</i> joka matkii local storagea. Tapoja tähän on [monia](https://stackoverflow.com/questions/32911630/how-do-i-deal-with-localstorage-in-jest-tests).
 
 Koska testimme ei edellytä local storagelta juuri mitään toiminnallisuutta, teemme tiedostoon [src/setupTests.js](https://github.com/facebookincubator/create-react-app/blob/ed5c48c81b2139b4414810e1efe917e04c96ee8d/packages/react-scripts/template/README.md#initializing-test-environment) hyvin yksinkertaisen mockin
 
@@ -570,22 +630,27 @@ const localStorageMock = {
 window.localStorage = localStorageMock
 ```
 
-Toinen ongelmistamme on se, että sovellus hakee näytettävät muistiinpanot palvelimelta. Muistiinpanojen haku tapahtuu heti komponentin _App_ luomisen jälkeen, kun metodi _componentDidMount_ kutsuu _noteService_:n metodia _getAll_:
+Toinen ongelmistamme on se, että sovellus hakee näytettävät muistiinpanot palvelimelta. Muistiinpanojen haku tapahtuu heti komponentin <i>App</i> luomisen jälkeen suoritettavassa effect hookissa:
 
 
 ```js
-componentDidMount() {
-  noteService.getAll().then(notes =>
-    this.setState({ notes })
-  )
-
+const App = () => {
   // ...
+
+  useEffect(() => {
+    noteService
+      .getAll().then(initialNotes => {
+        setNotes(initialNotes)
+      })
+  }, [])
+
+// ...
 }
 ```
 
 Jestin [manual mock](https://facebook.github.io/jest/docs/en/manual-mocks.html#content) -konsepti tarjoaa tilanteeseen hyvän ratkaisun. Manual mockien avulla voidaan kokonainen moduuli, tässä tapauksessa _noteService_ korvata testien ajaksi vaihtoehtoisella esim. kovakoodattua dataa tarjoavalla toiminnallisuudella.
 
-Luodaan Jestin ohjeiden mukaisesti hakemistoon _src/services_ alihakemisto *\_\_mocks\_\_* (alussa ja lopussa kaksi alaviivaa) ja sinne tiedosto _notes.js_ jonka määrittelemä metodi _getAll_ palauttaa kovakoodatun listan muistiinpanoja:
+Luodaan Jestin ohjeiden mukaisesti hakemistoon <i>src/services</i> alihakemisto <i>\_\_mocks\_\_</i> (alussa ja lopussa kaksi alaviivaa) ja sinne tiedosto <i>notes.js</i> jonka määrittelemä metodi <i>getAll</i> palauttaa kovakoodatun listan muistiinpanoja:
 
 ```js
 let token = null
@@ -594,7 +659,7 @@ const notes = [
   {
     id: "5a451df7571c224a31b5c8ce",
     content: "HTML on helppoa",
-    date: "2017-12-28T16:38:15.541Z",
+    date: "2019-01-28T16:38:15.541Z",
     important: false,
     user: {
       _id: "5a437a9e514ab7f168ddf138",
@@ -605,7 +670,7 @@ const notes = [
   {
     id: "5a451e21e0b8b04a45638211",
     content: "Selain pystyy suorittamaan vain javascriptiä",
-    date: "2017-12-28T16:38:57.694Z",
+    date: "2019-01-28T16:38:57.694Z",
     important: true,
     user: {
       _id: "5a437a9e514ab7f168ddf138",
@@ -616,7 +681,7 @@ const notes = [
   {
     id: "5a451e30b5ffd44a58fa79ab",
     content: "HTTP-protokollan tärkeimmät metodit ovat GET ja POST",
-    date: "2017-12-28T16:39:12.713Z",
+    date: "2019-01-28T16:39:12.713Z",
     important: true,
     user: {
       _id: "5a437a9e514ab7f168ddf138",
@@ -635,9 +700,6 @@ export default { getAll, notes }
 
 Määritelty metodi _getAll_ palauttaa muistiinpanojen listan käärittynä promiseksi metodin [Promise.resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve) avulla sillä käytettäessä metodia, oletetaan sen paluuarvon olevan promise:
 
-```js
-noteService.getAll().then(notes =>
-```
 
 Olemme valmiina määrittelemään testin:
 
@@ -667,11 +729,11 @@ Komennolla _jest.mock('./services/notes')_ otetaan juuri määritelty mock käyt
 
 Testin toimivuuden kannalta on oleellista metodin [app.update](http://airbnb.io/enzyme/docs/api/ReactWrapper/update.html) kutsuminen, näin pakotetaan sovellus renderöitymään uudelleen siten, että myös mockatun backendin palauttamat muistiinpanot renderöityvät.
 
-## Testauskattavuus
+### Testauskattavuus
 
 [Testauskattavuus](https://github.com/facebookincubator/create-react-app/blob/ed5c48c81b2139b4414810e1efe917e04c96ee8d/packages/react-scripts/template/README.md#coverage-reporting) saadaan helposti selville suorittamalla testit komennolla
 
-```bash
+```js
 CI=true npm test -- --coverage
 ```
 
@@ -683,13 +745,73 @@ Melko primitiivinen HTML-muotoinen raportti generoituu hakemistoon _coverage/lco
 
 Huomaamme, että parannettavaa jäi vielä runsaasti.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019part2-notes/tree/part5-5), tagissa _part5-5_.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019part2-notes/tree/part5-7), branchissa _part5-7_.
 
-## Tehtäviä
+</div>
 
-Tee nyt tehtävät [5.15 ja 5.16](/tehtävät#integraatiotestaus)
+<div class="tasks">
 
-## Snapshot-testaus
+### Tehtäviä
+
+#### 5.16: blogilistan testit, step4
+
+Tee sovelluksesi integraatiotesti, joka varmistaa, että jos käyttäjä ei ole kirjautunut järjestelmään, näyttää sovellus ainoastaan kirjautumislomakkeen, eli yhtään blogia ei vielä renderöidä.
+
+#### 5.17*: blogilistan testit, step5
+
+Tee myös testi, joka varmistaa, että kun käyttäjä on kirjautuneena, blogit renderöityvät sivulle.
+
+**Vihje 1:**
+
+Kirjautuminen kannattaa toteuttaa manipuloimalla testeissä local storagea. Jos määrittelet testeille mock-localstoragen osan 5 materiaalia seuraten, voit käyttää testikoodissa local storagea seuraavasti:
+
+```js
+const user = {
+  username: 'tester',
+  token: '1231231214',
+  name: 'Teuvo Testaaja'
+}
+
+localStorage.setItem('loggedBlogAppUser', JSON.stringify(user))
+```
+
+**Vihje 2:**
+
+Jotta mockin palauttamat blogit renderöityvät, kannattaa komponentti _App_ luoda _describe_-lohkossa. Voit noudattaa tämän ja edellisen tehtävän organisoinnissa esim. seuraavaa tapaa:
+
+```js
+describe('<App />', () => {
+  let app
+
+  describe('when user is not logged', () => {
+    beforeEach(() => {
+      // luo sovellus siten, että käyttäjä ei ole kirjautuneena
+    })
+
+    it('only login form is rendered', () => {
+      app.update()
+      // ...
+    })
+  })
+
+  describe('when user is logged', () => {
+    beforeEach(() => {
+      // luo sovellus siten, että käyttäjä on kirjautuneena
+    })
+
+    it('all notes are rendered', () => {
+      app.update()
+      // ...
+    })
+  })
+})
+```
+
+</div>
+
+<div class="content">
+
+### Snapshot-testaus
 
 Jest tarjoaa "perinteisen" testaustavan lisäksi aivan uudenlaisen tavan testaukseen, ns. [snapshot](https://facebook.github.io/jest/docs/en/snapshot-testing.html)-testauksen. Mielenkiintoista snapshot-testauksessa on se, että sovelluskehittäjän ei tarvitse itse määritellä ollenkaan testejä, snapshot-testauksen käyttöönotto riittää.
 
@@ -697,7 +819,7 @@ Periaatteena on verrata komponenttien määrittelemää HTML:ää aina koodin mu
 
 Jos snapshot-testi huomaa muutoksen komponenttien määrittelemässä HTML:ssä, voi kyseessä joko olla haluttu muutos tai vahingossa aiheutettu "bugi". Snapshot-testi huomauttaa sovelluskehittäjälle, jos komponentin määrittelemä HTML muuttuu. Sovelluskehittäjä kertoo muutosten yhteydessä, oliko muutos haluttu. Jos muutos tuli yllätyksenä, eli kyseessä oli bugi, sovelluskehittäjä huomaa sen snapshot-testauksen ansiosta nopeasti.
 
-## End to end -testaus
+### End to end -testaus
 
 Olemme tehneet sekä backendille että frontendille hieman niitä kokonaisuutena testaavia integraatiotestejä. Eräs tärkeä testauksen kategoria on vielä käsittelemättä, [järjestelmää kokonaisuutena](https://en.wikipedia.org/wiki/System_testing) testaavat "end to end" (eli E2E) -testit.
 
