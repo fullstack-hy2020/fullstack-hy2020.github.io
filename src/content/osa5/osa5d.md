@@ -211,7 +211,7 @@ Pääsemme itseasiassa helpommalla. Koska oliolla _name_ on nyt täsmälleen ne 
 <input {...name} /> 
 ```
 
-Eli kuten Reactin dokumentaation [esimerkki](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) sanoo, seuraavat ovat 
+Eli kuten Reactin dokumentaation [esimerkki](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) sanoo, seuraavat kaksi tapaa välittää propseja komponentille tuottavat saman lopputuloksen:
 
 
 ```js
