@@ -1120,10 +1120,27 @@ Muuta sovellusta siten, että numeeriset tilastot näytetään ainoastaan jos pa
 
 <h4>1.10: unicafe step5</h4>
 
-Jatketaan sovelluksen refaktorointia. Eriytä seuraavat komponentit
+Jatketaan sovelluksen refaktorointia. Eriytä seuraavat <i>kaksi</i> komponenttia
 
 - <i>Button</i> vastaa yksittäistä palautteenantonappia
-- <i>Statistic</i> huolehtii yksittäisen tilastorivin, esim. keskiarvon näyttämisestä
+- <i>Statistic</i> huolehtii tilastorivien, esim. keskiarvon näyttämisestä
+
+Tarkennuksena: komponentti <i>Statistic</i> näyttää aina yhden tilastorivin, joten sovellus käyttää montaa komponenttia kaikkien tilastorivien renderöintiin 
+
+```js
+const Statistics = (props) => {
+  /// ...
+  return(
+    <div>
+      <Statistic text="hyvä" value ={...} />
+      <Statistic text="neutraali" value ={...} />
+      <Statistic text="huono" value ={...} />
+      // ...
+    </div>
+  )
+}
+
+```
 
 Sovelluksen tila säilytetään edelleen juurikomponentissa <i>App</i>.
 
