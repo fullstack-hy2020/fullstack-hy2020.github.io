@@ -266,14 +266,91 @@ Custom hookit eivät selvästikään ole pelkkä uusiokäytön väline, ne mahdo
 
 #### 5.18: blogilista ja hookit step1
 
-Yksinkertaista ainakin jotain sovelluksesi lomakkeen käyttöä äsken määritellyn _useField_ custom hookin avulla.
+Yksinkertaista sovelluksesi kirjautumislomakkeen käyttöä äsken määritellyn _useField_ custom hookin avulla.
+
+Luonteva paikka tallentaa hook on tiedosto <i>/src/hooks/index.js</i>. 
+
+Jos käytät normaalisti käyttämämme default exportin sijaan [nimettyä exportia](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description)
+
+```js
+import { useState } from 'react'
+
+export const useField = (type) => {
+  const [value, setValue] = useState('')
+
+  const onChange = (event) => {
+    setValue(event.target.value)
+  }
+
+  return {
+    type,
+    value,
+    onChange
+  }
+}
+
+// moduulissa voi olla monta nimettyä eksportia
+export const useAnotherHook = () =>
+```
+
+[importtaus](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) tapahtuu seuraavasti
+
+```js
+import  { useField } from './hooks'
+
+const App = () => {
+  // ...
+  const username = useField('text')
+  // ...
+}
+```
 
 #### 5.19: blogilista ja hookit step2
 
-_useField_-hookissa on pieni epäkohta. Se mahdollista lomakkeen syötekentän tyhjentämistä. Lisää sille kenttä _reset_ joka mahdollistaa
+<i>useField</i>-hookissa on pieni epäkohta. Se ei mahdollista lomakkeen syötekentän tyhjentämistä. Laajenna hookia siten, että se tarjoaa operaation <i>reset</i> kentän tyhjentämiseen. Ota hook käyttöön myös uuden blogin luovassa formissa.
 
+Lisäyksen jälkeen lomakeet toimivat edelleen, mutta riippuen ratkaisustasi konsoliin saattaa ilmestyä ikävä varoitus:
 
-#### 5.20*: ultimate hooks
+![](../images/5/22.png)
+
+Ei välitet virheestä vielä tässä tehtävässä.
+
+#### 5.20: blogilista ja hookit step3
+
+Jos ratkaisusi ei aiheuttanut warningia, ei sinut tarvitse tehdä tässä tehtävässä mitään.
+
+Tee sovellukseen korjaus, joka poistaa varoituksen `Invalid value for prop reset' on <input> tag`. Virheen syynä on siis se, että edellisen tehtävän laajennuksen jälkeen seuraava
+
+```js
+<input {...username}/>
+```
+
+tarkoittaa samaa kuin
+
+```js
+<input
+  value={username.value} 
+  type={username.type}
+  onChange={username.onChange}
+  reset={username.reset} // highlight-line
+/>
+```
+
+Elementille <i>input</i> ei kuitenkaan kuuluisi antaa propsia <i>reset</i>. 
+
+Yksinkertainen korjaus olisi tietysti olla käyttämättä spread-syntaksia ja kirjoittaa kaikki lomakkeet seuraavasti
+
+```js
+<input
+  value={username.value} 
+  type={username.type}
+  onChange={username.onChange}
+/>
+```
+
+Tällöin menettäisimme suurelta osin useField-hookin edut. Eli keksi tähän tehtävään spread-syntaksia edelleen käyttävä helppokäyttöinen ratkaisu ongelman kiertämiseen.
+
+#### 5.21*: ultimate hooks
 
 Tämän osan materiaalissa jatkokehitetyn muistiinpanosovelluksen palvelimen kanssa keskusteleva koodi näyttää seuraavalta:
 
@@ -370,15 +447,5 @@ Jos toteutit hookin oikein mahdollistaa sovellus bogien ja puhelinnumeroiden yht
 
 ```js
 ```
-
-### Class-muotoiset komponentit
-
-</div>
-
-<div class="tasks">
-
-### Tehtäviä
-
-#### 5:20
 
 </div>
