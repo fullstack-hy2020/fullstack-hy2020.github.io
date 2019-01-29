@@ -257,6 +257,25 @@ Lomakkeiden käsittely yksinkertaistuu huomattavasti kun ikävät tilan synkrono
 
 Custom hookit eivät selvästikään ole pelkkä uusiokäytön väline, ne mahdollistavat myös entistä paremman tavan jakaa koodia pienempiin, modulaarisiin osiin.
 
+### Hookien säännöt revisited
+
+Kuten [osassa 1](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot)  mainittiin, on hookeja käytettävä tiettyjä [rajoituksia](https://reactjs.org/docs/hooks-rules.html) noudattaen. Seuraavassa vielä hookien käytön säännöt suoraan Reactin dokumentaatiosta kopioituna
+
+**Don’t call Hooks inside loops, conditions, or nested functions.** Instead, always use Hooks at the top level of your React function. 
+
+**Don’t call Hooks from regular JavaScript functions.** Instead, you can:
+
+- Call Hooks from React function components.
+- Call Hooks from custom Hooks
+
+On olemassa [ESlint](https://www.npmjs.com/package/eslint-plugin-react-hooks)-sääntö, jonka avulla voidaa varmistaa, että sovellus käyttää hookeja oikein. Valitettavasti sääntöä ei voi vielä tässä vaiheessa (29.1.2019) käyttää create-react-app:issa sovelluksissa.
+
+### Lisää hookeista
+
+Internetistä alkaa löytyä yhä enenevissä määrin hyödyllistä hookeihin liittyvä materiaalia, esim. seuraavia kannattaa vilkaista
+
+* [Awesome React Hooks](https://github.com/rehooks/awesome-react-hooks)
+* [Easy to understand React Hook recipes by Gabe Ragland](https://usehooks.com/)
 
 </div>
 
@@ -313,13 +332,15 @@ Lisäyksen jälkeen lomakeet toimivat edelleen, mutta riippuen ratkaisustasi kon
 
 ![](../images/5/22.png)
 
-Ei välitet virheestä vielä tässä tehtävässä.
+Ei välitetä virheestä vielä tässä tehtävässä.
 
 #### 5.20: blogilista ja hookit step3
 
 Jos ratkaisusi ei aiheuttanut warningia, ei sinut tarvitse tehdä tässä tehtävässä mitään.
 
-Tee sovellukseen korjaus, joka poistaa varoituksen `Invalid value for prop reset' on <input> tag`. Virheen syynä on siis se, että edellisen tehtävän laajennuksen jälkeen seuraava
+Muussa tapauksessa tee sovellukseen korjaus, joka poistaa varoituksen `Invalid value for prop reset' on <input> tag`. 
+
+Warningin syynä on siis se, että edellisen tehtävän laajennuksen jälkeen seuraava
 
 ```js
 <input {...username}/>
@@ -336,7 +357,7 @@ tarkoittaa samaa kuin
 />
 ```
 
-Elementille <i>input</i> ei kuitenkaan kuuluisi antaa propsia <i>reset</i>. 
+Elementille <i>input</i> ei kuitenkaan kuuluisi antaa propsia <i>reset</i>
 
 Yksinkertainen korjaus olisi tietysti olla käyttämättä spread-syntaksia ja kirjoittaa kaikki lomakkeet seuraavasti
 
@@ -348,7 +369,7 @@ Yksinkertainen korjaus olisi tietysti olla käyttämättä spread-syntaksia ja k
 />
 ```
 
-Tällöin menettäisimme suurelta osin useField-hookin edut. Eli keksi tähän tehtävään spread-syntaksia edelleen käyttävä helppokäyttöinen ratkaisu ongelman kiertämiseen.
+Tällöin menettäisimme suurelta osin <i>useField</i>-hookin edut. Eli keksi tähän tehtävään spread-syntaksia edelleen käyttävä helppokäyttöinen ratkaisu ongelman kiertämiseen.
 
 #### 5.21*: ultimate hooks
 
@@ -437,15 +458,5 @@ Custom hook _useResource_ siis palauttaa (tilahookien tapaan) kaksialkioisen tau
 Jos toteutit hookin oikein mahdollistaa sovellus bogien ja puhelinnumeroiden yhtäaikaisen käsittelyn (käynnistä backend porttiin 3005 komennolla _npm run server_)
 
 ![](../images/5/21.png)
-
-</div>
-
-<div class="content">
-
-
-### useEffectin unsubscribau
-
-```js
-```
 
 </div>

@@ -32,12 +32,13 @@ module.exports = {
     a: 'Kirjautuminen frontendissä',
     b: 'props.children ja proptypet',
     c: 'React-sovellusten testaaminen',
-    d: 'Custom hookit ja Class-komponentit'
+    d: 'Custom hookit'
   },
   '6': {
     // a: 'Redux',
     // b: 'React+Redux',
     // c: 'React'
+    // d: 'Class-komponentit'
   },
   '7': {
     // a: 'Webpack',
