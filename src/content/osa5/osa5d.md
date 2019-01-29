@@ -274,7 +274,8 @@ On olemassa [ESlint](https://www.npmjs.com/package/eslint-plugin-react-hooks)-s�
 
 Internetistä alkaa löytyä yhä enenevissä määrin hyödyllistä hookeihin liittyvä materiaalia, esim. seuraavia kannattaa vilkaista
 
-* [Awesome React Hooks](https://github.com/rehooks/awesome-react-hooks)
+* [Awesome React Hooks Resouces](https://github.com/rehooks/awesome-react-hooks)
+* [Why Do React Hooks Rely on Call Order?](https://overreacted.io/why-do-hooks-rely-on-call-order/)
 * [Easy to understand React Hook recipes by Gabe Ragland](https://usehooks.com/)
 
 </div>
