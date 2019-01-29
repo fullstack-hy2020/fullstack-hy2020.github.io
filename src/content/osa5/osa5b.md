@@ -122,7 +122,7 @@ const App = () => {
 }
 ```
 
-Komponentin <i>App</i> tilaan on nyt lisätty tutuusarvo <i>loginVisible</i> joka määrittelee sen näytetäänkö kirjautumislomake.
+Komponentin <i>App</i> tilaan on nyt lisätty totuusarvo <i>loginVisible</i> joka määrittelee sen, näytetäänkö kirjautumislomake.
 
 Näkyvyyttä säätelevää tilaa vaihdellaan kahden napin avulla, molempiin on kirjoitettu tapahtumankäsittelijän koodi suoraan:
 
@@ -344,7 +344,7 @@ const Togglable = React.forwardRef((props, ref) => { // highlight-line
 export default Togglable
 ```
 
-Komponentin luova funktio on kääritty funktiokutsun [forwardRef](https://reactjs.org/docs/react-api.html#reactforwardref) sisälle, näin komponentti pääsee käsikseen sille määriteltyyn refiin.
+Komponentin luova funktio on kääritty funktiokutsun [forwardRef](https://reactjs.org/docs/react-api.html#reactforwardref) sisälle, näin komponentti pääsee käsiksi sille määriteltyyn refiin.
 
 Komponentti tarjoaa [useImperativeMethods](https://reactjs.org/docs/hooks-reference.html#useimperativehandle)-hookin avulla sisäisesti määritellyn funktionsa <i>toggleVisibility</i> ulkopuolelta kutsuttavaksi.
 
@@ -374,7 +374,7 @@ const App = () => {
 
 Käyttämämme [useImperativeMethods](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) on siis React hook, jonka avulla funktiona määritellylle komponentille voidaan määrittää funktioita, joita on mahdollista kutsua sen ulkopuolelta. Metodin nimi ei ole vielä tässä vaiheessa (25.1.2019) täysin vakiintunut, dokumentaatiossa sen nimi on <i>useImperativeHandle</i>. 
 
-Käyttämämme kikka komponentin tilan muuttamikseksi toimii, mutta se vaikuttaa hieman ikävältä. Saman olisi saanut aavistuksen siistimmin toteutettua "vanhan Reactin" class-perustaisilla komponenteilla, joihin tutustumme tämän osan lopussa. Tämä on toistaiseksi ainoa tapaus, jossa Reactin hook-syntaksiin nojaava ratkaisu on aavistuksen likaisen oloinen kuin class-komponenttien tarjoama ratkaisu.
+Käyttämämme kikka komponentin tilan muuttamikseksi toimii, mutta se vaikuttaa hieman ikävältä. Saman olisi saanut aavistuksen siistimmin toteutettua "vanhan Reactin" class-perustaisilla komponenteilla, joihin tutustumme tämän osan lopussa. Tämä on toistaiseksi ainoa tapaus, jossa Reactin hook-syntaksiin nojaava ratkaisu on aavistuksen likaisemman oloinen kuin class-komponenttien tarjoama ratkaisu.
 
 Refeille on myös [muita käyttötarkoituksia](https://reactjs.org/docs/refs-and-the-dom.html) kuin React-komponentteihin käsiksi pääseminen.
 
@@ -390,7 +390,7 @@ const Togglable = () => ...
 }
 ```
 
-ja otetaan se käyttöön seuraavasti
+ja otetaan se käyttöön seuraavasti,
 
 ```js
 <div>
@@ -412,7 +412,7 @@ syntyy <i>kolme erillistä komponenttiolioa</i>, joilla on kaikilla oma tilansa:
 
 ![](../images/5/12.png)
 
-<i>ref</i>-attribuutin avulla on talletettu viite jokaiseen komponenttiin muuttujiin <i>togglable1</i>, <i>togglable2</i> ja <i>togglable3</i>.
+<i>ref</i>-attribuutin avulla on talletettu viite jokaiseen komponentin muuttujaan <i>togglable1</i>, <i>togglable2</i> ja <i>togglable3</i>.
 
 </div>
 
