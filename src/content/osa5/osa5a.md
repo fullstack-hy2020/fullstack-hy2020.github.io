@@ -146,7 +146,7 @@ Kirjautumisen onnistuessa nollataan kirjautumislomakkeen kentät <i>ja</i> talle
 
 Jos kirjautuminen epäonnistuu, eli funktion _loginService.login_ suoritus aiheuttaa poikkeuksen, ilmoitetaan siitä käyttäjälle.
 
-Onnistunut kirjautuminen ei nyt näy sovelluksen käyttäjälle mitenkään. Muokataan sovellusta vielä siten, että kirjautumislomake näkyy vain <i>jos käyttäjä ei ole kirjautuneena</i> eli _user === null_ ja uuden muistiinpanon luomislomake vain <i>jos käyttäjä on kirjautuneen</i>, eli (eli _user_ sisältää kirjautuneen käyttäjän tiedot.
+Onnistunut kirjautuminen ei nyt näy sovelluksen käyttäjälle mitenkään. Muokataan sovellusta vielä siten, että kirjautumislomake näkyy vain <i>jos käyttäjä ei ole kirjautuneena</i> eli _user === null_ ja uuden muistiinpanon luomislomake vain <i>jos käyttäjä on kirjautuneena</i>, eli (eli _user_ sisältää kirjautuneen käyttäjän tiedot.
 
 Määritellään ensin komponenttiin <i>App</i> apufunktiot lomakkeiden generointia varten:
 
@@ -274,7 +274,7 @@ return (
 
 Eli jos _this.state.user === null_ on [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), suoritetaan _loginForm_ ja muussa tapauksessa _noteForm_.
 
-Tehdään vielä sellainen muutos, että jos käyttäjä on kirjautunut, renderöidään kirjautuneet käyttäjän nimi:
+Tehdään vielä sellainen muutos, että jos käyttäjä on kirjautunut, renderöidään kirjautuneen käyttäjän nimi:
 
 ```js
 return (
@@ -312,7 +312,7 @@ Frontend on siis tallettanut onnistuneen kirjautumisen yhteydessä backendilta s
 
 ![](../images/5/2.png)
 
-Valitettavasti react dev toolsi uusimmassa 15.1.2019 versiossa 3.6.0 hookatut tilat [eivät näy kunnolla](https://github.com/facebook/react-devtools/issues/1282) jos ne ovat taulukkoja tai olioita. Kuvakaappaus on versiosta 3.5. 
+Valitettavasti react dev toolsin uusimmassa 15.1.2019 versiossa 3.6.0 hookatut tilat [eivät näy kunnolla](https://github.com/facebook/react-devtools/issues/1282) jos ne ovat taulukkoja tai olioita. Kuvakaappaus on versiosta 3.5. 
 
 Korjataan uusien muistiinpanojen luominen siihen muotoon, mitä backend edellyttää, eli lisätään kirjautuneen käyttäjän token HTTP-pyynnön Authorization-headeriin.
 
@@ -509,7 +509,7 @@ Muista tehtäviä tehdessäsi kaikki debuggaukseen liittyvät käytänteet, erit
 
 #### 5.1: blogilistan frontend, step1
 
-Ota tehtävien pohjaksi [Githubissa](https://github.com/fullstack-hy2019/bloglist-frontend.git) olevan sovellusrungo kloonaamalla se sopivaan paikkaan komennolla
+Ota tehtävien pohjaksi [Githubissa](https://github.com/fullstack-hy2019/bloglist-frontend.git) olevan sovellusrunko kloonaamalla se sopivaan paikkaan komennolla
 
 ```bash
 git clone https://github.com/fullstack-hy2019/bloglist-frontend.git
