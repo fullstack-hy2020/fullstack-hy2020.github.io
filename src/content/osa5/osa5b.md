@@ -122,7 +122,7 @@ const App = () => {
 }
 ```
 
-Komponentin <i>App</i> tilaan on nyt lisätty tutuusarvo <i>loginVisible</i> joka määrittelee sen näytetäänkö kirjautumislomake.
+Komponentin <i>App</i> tilaan on nyt lisätty totuusarvo <i>loginVisible</i> joka määrittelee sen, näytetäänkö kirjautumislomake.
 
 Näkyvyyttä säätelevää tilaa vaihdellaan kahden napin avulla, molempiin on kirjoitettu tapahtumankäsittelijän koodi suoraan:
 
@@ -344,7 +344,7 @@ const Togglable = React.forwardRef((props, ref) => { // highlight-line
 export default Togglable
 ```
 
-Komponentin luova funktio on kääritty funktiokutsun [forwardRef](https://reactjs.org/docs/react-api.html#reactforwardref) sisälle, näin komponentti pääsee käsikseen sille määriteltyyn refiin.
+Komponentin luova funktio on kääritty funktiokutsun [forwardRef](https://reactjs.org/docs/react-api.html#reactforwardref) sisälle, näin komponentti pääsee käsiksi sille määriteltyyn refiin.
 
 Komponentti tarjoaa [useImperativeMethods](https://reactjs.org/docs/hooks-reference.html#useimperativehandle)-hookin avulla sisäisesti määritellyn funktionsa <i>toggleVisibility</i> ulkopuolelta kutsuttavaksi.
 
@@ -374,7 +374,7 @@ const App = () => {
 
 Käyttämämme [useImperativeMethods](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) on siis React hook, jonka avulla funktiona määritellylle komponentille voidaan määrittää funktioita, joita on mahdollista kutsua sen ulkopuolelta. Metodin nimi ei ole vielä tässä vaiheessa (25.1.2019) täysin vakiintunut, dokumentaatiossa sen nimi on <i>useImperativeHandle</i>. 
 
-Käyttämämme kikka komponentin tilan muuttamikseksi toimii, mutta se vaikuttaa hieman ikävältä. Saman olisi saanut aavistuksen siistimmin toteutettua "vanhan Reactin" class-perustaisilla komponenteilla, joihin tutustumme tämän osan lopussa. Tämä on toistaiseksi ainoa tapaus, jossa Reactin hook-syntaksiin nojaava ratkaisu on aavistuksen likaisen oloinen kuin class-komponenttien tarjoama ratkaisu.
+Käyttämämme kikka komponentin tilan muuttamikseksi toimii, mutta se vaikuttaa hieman ikävältä. Saman olisi saanut aavistuksen siistimmin toteutettua "vanhan Reactin" class-perustaisilla komponenteilla, joihin tutustumme tämän osan lopussa. Tämä on toistaiseksi ainoa tapaus, jossa Reactin hook-syntaksiin nojaava ratkaisu on aavistuksen likaisemman oloinen kuin class-komponenttien tarjoama ratkaisu.
 
 Refeille on myös [muita käyttötarkoituksia](https://reactjs.org/docs/refs-and-the-dom.html) kuin React-komponentteihin käsiksi pääseminen.
 
@@ -390,7 +390,7 @@ const Togglable = () => ...
 }
 ```
 
-ja otetaan se käyttöön seuraavasti
+ja otetaan se käyttöön seuraavasti,
 
 ```js
 <div>
@@ -412,7 +412,7 @@ syntyy <i>kolme erillistä komponenttiolioa</i>, joilla on kaikilla oma tilansa:
 
 ![](../images/5/12.png)
 
-<i>ref</i>-attribuutin avulla on talletettu viite jokaiseen komponenttiin muuttujiin <i>togglable1</i>, <i>togglable2</i> ja <i>togglable3</i>.
+<i>ref</i>-attribuutin avulla on talletettu viite jokaiseen komponentin muuttujaan <i>togglable1</i>, <i>togglable2</i> ja <i>togglable3</i>.
 
 </div>
 
@@ -458,15 +458,15 @@ const Blog = ({ blog }) => {
 )}
 ```
 
-**Huom1:** voit tehdä blogin nimestä klikattavan korstetun koodirivin tapaan. 
+**Huom1:** voit tehdä blogin nimestä klikattavan korostetun koodirivin tapaan. 
 
-**Huom2:** vaikka tämän tehtävän toiminnallisuus on melkein samanlainen kuin komponentin <i>Togglable</i> tarjoama toiminnallisuus, ei Togglable kuitenkaan sovi tarkotukseen sellaisenaan. Helpoin ratkaisu lienee lisätä blogille tila joka kontrolloi sitä missä muodossa blogi näytetään.
+**Huom2:** vaikka tämän tehtävän toiminnallisuus on melkein samanlainen kuin komponentin <i>Togglable</i> tarjoama toiminnallisuus, ei Togglable kuitenkaan sovi tarkoitukseen sellaisenaan. Helpoin ratkaisu lienee lisätä blogille tila, joka kontrolloi sitä missä muodossa blogi näytetään.
 
 #### 5.7*: blogilistan frontend, step7
 
 Toteuta like-painikkeen toiminnallisuus. Like lisätään backendiin blogin yksilöivään urliin tapahtuvalla _PUT_-pyynnöllä.
 
-Koska backendin operaatio korvaa aina koko blogin, joudut lähettämään operaation mukana blogin kaikki kentät, eli jos seuraavaa blogia liketetään
+Koska backendin operaatio korvaa aina koko blogin, joudut lähettämään operaation mukana blogin kaikki kentät, eli jos seuraavaa blogia liketetään,
 
 ```js
 {
@@ -524,13 +524,13 @@ Näytä poistonappi ainoastaan jos kyseessä on kirjautuneen käyttäjän lisä�
 
 ### PropTypes
 
-Komponentti <i>Togglable</i> olettaa, että sille määritellään propsina <i>buttonLabel</i> napin teksti. Jos määrittely unohtuu
+Komponentti <i>Togglable</i> olettaa, että sille määritellään propsina <i>buttonLabel</i> napin teksti. Jos määrittely unohtuu,
 
 ```js
 <Togglable> buttonLabel unohtui... </Togglable>
 ```
 
-Sovellus kyllä toimii, mutta selaimeen renderöityy hämäävästi nappi, jolla ei ole mitään tekstiä.
+sovellus kyllä toimii, mutta selaimeen renderöityy hämäävästi nappi, jolla ei ole mitään tekstiä.
 
 Haluaisimmekin varmistaa että jos <i>Togglable</i>-komponenttia käytetään, on propsille "pakko" antaa arvo.
 
@@ -540,7 +540,7 @@ Komponentin olettamat ja edellyttämät propsit ja niiden tyypit voidaan määri
 npm install --save prop-types
 ```
 
-<i>buttonLabel</i> voidaan määritellä <i>pakolliseksi</i> string-tyyppiseksi propsiksi seuraavasti
+<i>buttonLabel</i> voidaan määritellä <i>pakolliseksi</i> string-tyyppiseksi propsiksi seuraavasti:
 
 ```js
 import PropTypes from 'prop-types'
@@ -596,7 +596,7 @@ Konfiguroimme osassa 3 koodin tyylistä huolehtivan [ESlintin](/osa3/validointi_
 
 Create-react-app on asentanut projektille eslintin valmiiksi, joten ei tarvita muuta kun sopiva konfiguraatio tiedoston <i>.eslintrc.js</i>.
 
-**HUOM:** älä suorita komentoa _npm init_ se asentaa uuden version eslintistä joka on epäsopiva create-react-app:in konfiguraatioiden kanssa! 
+**HUOM:** älä suorita komentoa _npm init_. Se asentaa uuden version eslintistä joka on epäsopiva create-react-app:in konfiguraatioiden kanssa! 
 
 Aloitamme seuraavaksi testaamisen, ja jotta pääsemme eroon testeissä olevista turhista huomautuksista asennetaan plugin [eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest)
 

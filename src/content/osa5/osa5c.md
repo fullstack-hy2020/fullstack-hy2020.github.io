@@ -10,7 +10,7 @@ Reactilla tehtyjen frontendien testaamiseen on monia tapoja. Aloitetaan niihin t
 
 Testit tehdään samaan tapaan kuin edellisessä osassa eli Facebookin [Jest](http://jestjs.io/)-kirjastolla. Jest onkin valmiiksi konfiguroitu create-react-app:illa luotuihin projekteihin.
 
-Tarvitsemme Jestin lisäksi testaamiseen apukirjaston, jonka avulla React-komonentteja voidaan renderöidä testejä varten. Tähän tarkoitukseen ehdottomasti paras vaihtoehto vielä viime syksyyn asti oli AirBnB:n kehittämä [enzyme](https://github.com/airbnb/enzyme)-kirjastoa. Enzyme ei kuitenkaan tue kunnolla Reactin hookeja joten käytämme Enzymen sijaan viime aikoina nopeasti suosiota kasvattanutta kirjastoa [react-testing-library](https://github.com/kentcdodds/react-testing-library). Jestin ilmaisuvoimaa kannattaa myös laajentaa kirjastolla [jest-dom](https://www.npmjs.com/package/jest-dom).
+Tarvitsemme Jestin lisäksi testaamiseen apukirjaston, jonka avulla React-komponentteja voidaan renderöidä testejä varten. Tähän tarkoitukseen ehdottomasti paras vaihtoehto vielä viime syksyyn asti oli AirBnB:n kehittämä [enzyme](https://github.com/airbnb/enzyme)-kirjasto. Enzyme ei kuitenkaan tue kunnolla Reactin hookeja, joten käytämme Enzymen sijaan viime aikoina nopeasti suosiota kasvattanutta kirjastoa [react-testing-library](https://github.com/kentcdodds/react-testing-library). Jestin ilmaisuvoimaa kannattaa myös laajentaa kirjastolla [jest-dom](https://www.npmjs.com/package/jest-dom).
 
 Asennetaan kirjastot komennolla:
 
@@ -35,7 +35,8 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-Huomaa, että blogin sisältävällä <i>li</i>-edelmentillä on [CSS](https://reactjs.org/docs/dom-elements.html#classname)-luokka <i>note</i>, pääsemme sen avulla blogiin käsiksi testistä.
+Huomaa, että blogin sisältävällä <i>li</i>-elementillä on [CSS](https://reactjs.org/docs/dom-elements.html#classname)-luokka <i>note</i>, pääsemme sen avulla blogiin käsiksi testistä.
+
 
 ### Komponentin renderöinti testiä varten
 
@@ -152,7 +153,7 @@ Kolmas tapa on etsiä komponentin sisältä tietty elementti metodilla [querySel
 
 Testejä tehdessä törmäämme tyypillisesti erittäin moniin ongelmiin. 
 
-Renderin palauttaman olion metodilla [debug](https://testing-library.com/docs/react-testing-library/api#debug) voimme tulostaa komponentin tuottaman HTML:n konsoliin, eli kun muutamme testiä seuraavasti
+Renderin palauttaman olion metodilla [debug](https://testing-library.com/docs/react-testing-library/api#debug) voimme tulostaa komponentin tuottaman HTML:n konsoliin, eli kun muutamme testiä seuraavasti,
 
 ```js
 test('renders content', () => {
@@ -171,7 +172,7 @@ test('renders content', () => {
 })
 ```
 
-Konsoliin tulostuu komponentin generoima HTML:
+konsoliin tulostuu komponentin generoima HTML:
 
 ```js
 console.log node_modules/react-testing-library/dist/index.js:64
@@ -398,7 +399,7 @@ const button = component.container.querySelector('button')
 
 Komponentissa on kaksi nappia, mutta koska [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) palauttaa <i>ensimmäisen</i> löytyvän napin, löytyy napeista oikea.
 
-Lisätään vielä mukaan testi, joka varmistaa että auki togglattu sisältö saadaan piilotettua painamalla komponentin toisena olevaa napia
+Lisätään vielä mukaan testi, joka varmistaa että auki togglattu sisältö saadaan piilotettua painamalla komponentin toisena olevaa nappia
 
 ```js
 it('toggled content can be closed', () => {
@@ -413,7 +414,7 @@ it('toggled content can be closed', () => {
 })
 ```
 
-eli määrittelimme selektorin, joka palauttaa toisena olevan napin `button:nth-child(2)`. Testeissä ei kuitenkaan ole viisasta riippua komponentin nappien järjestyksestä, joten parempi onkin hakea napit niiden tekstin perusteella:
+eli määrittelimme selektorin, joka palauttaa toisena olevan napin `button:nth-child(2)`. Testeissä ei kuitenkaan ole viisasta olla riippuvainen komponentin nappien järjestyksestä, joten parempi onkin hakea napit niiden tekstin perusteella:
 
 ```js
 it('toggled content can be closed', () => {
@@ -428,7 +429,7 @@ it('toggled content can be closed', () => {
 })
 ```
 
-Käyttämämme _getByText_ on vain yksi monista [queryistä](https://testing-library.com/docs/api-queries#queries), mitä <i>react-testing-library</i> tarjoaa.
+Käyttämämme _getByText_ on vain yksi monista [queryistä](https://testing-library.com/docs/api-queries#queries), joita <i>react-testing-library</i> tarjoaa.
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019part2-notes/tree/part5-7), branchissa <i>part5-7</i>.
 
@@ -507,7 +508,7 @@ const NoteForm = ({ onSubmit, handleChange, value }) => {
 }
 ```
 
-Lomakkeen toimintaperiaatteena on synkronoida syötekentäm tila sen ulkopuolella olevan React-komponentin tilaan. Lomakettamme on jossain määrin vaikea testata yksistään.
+Lomakkeen toimintaperiaatteena on synkronoida syötekentän tila sen ulkopuolella olevan React-komponentin tilaan. Lomakettamme on jossain määrin vaikea testata yksistään.
 
 Teemmekin testejä varten apukomponentin <i>Wrapper</i>, joka renderöi <i>NoteForm</i>:in ja hallitsee lomakkeen tilaa parametrinaan saamansa propsin <i>state</i> avulla:
 
@@ -740,7 +741,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 Tee sovelluksesi integraatiotesti, joka varmistaa, että jos käyttäjä ei ole kirjautunut järjestelmään, näyttää sovellus ainoastaan kirjautumislomakkeen, eli yhtään blogia ei vielä renderöidä.
 
-Testin voi odottaa komponentin sisällön renderöitymistä funktiolla _waitForElement_
+Testi voi odottaa komponentin sisällön renderöitymistä funktiolla _waitForElement_
 
 ```js
 import React from 'react'
@@ -768,7 +769,7 @@ describe('<App />', () => {
 })
 ```
 
-**VAROITUS** kun tein tehtävää, esiintyi testeissä ajoittain epästabiiliutta sen suhteen toimiko _waitForElement_ tai joku sitä vastaavista asynkronisten operaatioiden odottamiseen tarkoitetuista metodeista.
+**VAROITUS** kun tein tehtävää, esiintyi testeissä ajoittain epästabiiliutta sen suhteen, toimiko _waitForElement_ tai joku sitä vastaavista asynkronisten operaatioiden odottamiseen tarkoitetuista metodeista.
 
 #### 5.17*: blogilistan testit, step5
 
