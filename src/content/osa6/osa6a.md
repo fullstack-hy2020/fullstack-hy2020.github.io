@@ -1057,4 +1057,6 @@ Huolehdi siitä, että anekdootit pysyvät äänten mukaisessa suuruusjärjestyk
 
 Jos et jo sitä tehnyt, eriytä action-olioiden luominen [action creator](https://redux.js.org/basics/actions#action-creators) -funktioihin ja sijoita ne tiedostoon <i>src/reducers/anecdoteReducer.js</i>. Eli toimi samalla tavalla kuin materiaali esimerkissä kohdasta [action creator](/osa6/flux_arkkitehtuuri_ja_redux#action-creatorit) alkaen on toimittu.
 
+#### eriytä lomake ja lista omiksi komp
+
 </div>
