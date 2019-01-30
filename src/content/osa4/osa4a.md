@@ -309,7 +309,6 @@ Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnist�
 
 ### Tehtäviä
 
-
 Rakennamme tämän osan tehtävissä <i>blogilistasovellusta</i>, jonka avulla käyttäjien on mahdollista tallettaa tietoja internetistä löytämistään mielenkiintoisista blogeista. Kustakin blogista talletetaan sen kirjoittaja (author), aihe (title), url sekä blogilistasovelluksen käyttäjien antamien äänien määrä.
 
 

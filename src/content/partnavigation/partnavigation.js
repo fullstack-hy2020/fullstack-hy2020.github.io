@@ -35,10 +35,10 @@ module.exports = {
     d: 'Custom hookit'
   },
   '6': {
-    // a: 'Redux',
-    // b: 'React+Redux',
-    // c: 'React'
-    // d: 'Class-komponentit'
+    a: 'Flux-arkkitehtuuri ja Redux',
+    b: 'Monta reduseria, connect',
+    c: 'Redux-sovelluksen kommunikointi palvelimen kanssa',
+    d: 'React-router, valmiit tyylikirjastot'
   },
   '7': {
     // a: 'Webpack',

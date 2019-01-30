@@ -970,9 +970,9 @@ Morganin ohjeet eivät ole ehkä kaikkein selvimmät ja joudut kenties miettimä
 
 Morgan asennetaan kuten muutkin kirjastot, eli komennolla _npm install_ ja sen käyttöönotto tapahtuu kaikkien middlewarejen tapaan komennolla _app.use_
 
-#### 3.8* :puhelinluettelon backend step8
+#### 3.8*: puhelinluettelon backend step8
 
-Konfiguroi morgania siten, että se näyttää myös HTTP-pyyntöjen mukana tulevan datan:
+Konfiguroi morgania siten, että se näyttää myös HTTP POST -pyyntöjen mukana tulevan datan:
 
 ![](../images/3/24.png)
 
