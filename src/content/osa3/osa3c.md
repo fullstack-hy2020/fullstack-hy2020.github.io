@@ -733,7 +733,7 @@ const errorHandler = (error, request, response, next) => {
   next(error)
 }
 
-app.use(unknownEndpoint)
+app.use(errorHandler)
 ```
 
 Virhekäsittelijä tarkastaa onko kyse <i>CastError</i>-poikkeuksesta, eli virheellisestä olioid:stä, jos on, se lähettä pyynnön tehneelle selaimelle vastauksen käsittelijän parametrina olevan response-olion avulla. Muussa tapauksessa se siirtää funktiolla <em>next</em> virheen käsittelyn Expressin oletusarvoisen virheidenkäsittelijän hoidettavavksi.
