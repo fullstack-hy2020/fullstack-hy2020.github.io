@@ -1057,6 +1057,31 @@ Huolehdi siitä, että anekdootit pysyvät äänten mukaisessa suuruusjärjestyk
 
 Jos et jo sitä tehnyt, eriytä action-olioiden luominen [action creator](https://redux.js.org/basics/actions#action-creators) -funktioihin ja sijoita ne tiedostoon <i>src/reducers/anecdoteReducer.js</i>. Eli toimi samalla tavalla kuin materiaali esimerkissä kohdasta [action creator](/osa6/flux_arkkitehtuuri_ja_redux#action-creatorit) alkaen on toimittu.
 
-#### eriytä lomake ja lista omiksi komp
+#### 6.7: anekdootit, step5
 
+Eriytä uuden anekdootin luominen omaksi komponentikseen nimeltään <i>AnecdoteForm</i>. Siirrä kaikki anekdootin luomiseen liittyvä logiikka uuteen komponenttiin.
+
+#### 6.8: anekdootit, step6
+
+Eriytä anekdoottilistan näyttäminen omaksi komponentikseen nimeltään <i>AnecdoteList</i>. Siirrä kaikki anekdoottien äänestämiseen liittyvä logiikka uuteen komponenttiin.
+
+Tämän tehtävän jälkeen komponentin <i>App</i> pitäisi näyttää seuraavalta:
+
+```js
+import React from 'react'
+import AnecdoteForm from './components/AnecdoteForm'
+import AnecdoteList from './components/AnecdoteList'
+
+const App = (props) => {
+  return (
+    <div>
+      <h2>Anecdotes</h2>
+      <AnecdoteForm store={props.store} />
+      <AnecdoteList store={props.store} />
+    </div>
+  )
+}
+
+export default App
+```
 </div>

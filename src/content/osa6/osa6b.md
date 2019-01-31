@@ -339,7 +339,7 @@ Sovelluksessa on vielä pieni kauneusvirhe, vaikka oletusarvosesti filtterin arv
 
 Jatketaan tehtävässä 6.3 aloitetun reduxia käyttävän anekdoottisovelluksen parissa.
 
-#### 6.7 anekdootit, step5
+#### 6.9 anekdootit, step7
 
 Sovelluksessa on valmiina komponentin <i>Notification</i> runko:
 
@@ -374,7 +374,7 @@ Joudut siis muuttamaan/laajentamaan sovelluksen olemassaolevaa reduceria. Tee to
 
 Tässä vaiheessa sovelluksen ei vielä tarvitse osata käyttää <i>Notification</i> komponenttia järkevällä tavalla, riittää että sovellus toimii ja näyttää <i>notificationReducerin</i> alkuarvoksi asettaman viestin.
 
-#### 6.8 paremmat anekdootit, step6
+#### 6.10 paremmat anekdootit, step8
 
 Laajenna sovellusta siten, että se näyttää <i>Notification</i>-komponentin avulla viiden sekunnin ajan kun sovelluksessa äänestetään tai luodaan uusia anekdootteja:
 
@@ -382,7 +382,7 @@ Laajenna sovellusta siten, että se näyttää <i>Notification</i>-komponentin a
 
 Notifikaation asettamista ja poistamista varten kannattaa toteuttaa [action creatorit](https://redux.js.org/basics/actions#action-creators).
 
-#### 6.9* paremmat anekdootit, step7
+#### 6.11* paremmat anekdootit, step9
 
 Toteuta sovellukseen näytettävien muistiinpanojen filtteröiminen
 
@@ -746,7 +746,7 @@ Kannattaa huomata, että parametri _mapDispatchToProps_ on nyt _olio_, sillä m�
 
 ```js
 {
-  noteCreation;
+  noteCreation
 }
 ```
 
@@ -754,7 +754,7 @@ on lyhempi tapa määritellä olioliteraali
 
 ```js
 {
-  noteCreation: noteCreation;
+  noteCreation: noteCreation
 }
 ```
 
@@ -785,7 +785,7 @@ Tässä vaihtoehtoisessa tavassa _mapDispatchToProps_ on funktio, jota _connect_
 
 ```js
 value => {
-  dispatch(noteCreation(value));
+  dispatch(noteCreation(value))
 };
 ```
 
@@ -946,7 +946,7 @@ Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-h
 
 ### Tehtäviä
 
-#### 6.10 paremmat anekdootit, step8
+#### 6.12 paremmat anekdootit, step10
 
 Sovelluksessa välitetään _redux store_ tällä hetkellä kaikille komponenteille propseina.
 
@@ -955,11 +955,11 @@ Ota käyttöön kirjasto [react-redux](https://github.com/reactjs/react-redux) j
 Huomaa, että toimiakseen _connect_ edellyttää että sovellukselle on määriteltävä [Provider](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store).
 
 
-#### 6.11 paremmat anekdootit, step9
+#### 6.13 paremmat anekdootit, step11
 
 Tee sama komponentille <i>filter</i> ja _AnecdoteForm_.
 
-#### 6.12 paremmat anekdootit, step10
+#### 6.14 paremmat anekdootit, step12
 
 Muuta myös _AnecdoteList_ käyttämään connectia.
 
@@ -980,7 +980,7 @@ class App extends React.Component {
 }
 ```
 
-#### 6.13 paremmat anekdootit, step11
+#### 6.15 paremmat anekdootit, step13
 
 Välitä komponentille _AnecdoteList_ connectin avulla ainoastaan yksi stateen liittyvä propsi, filtterin tilan perusteella näytettävät anekdootit samaan tapaan kuin materiaalin luvussa [Presentational/Container revisited](/osa6/#presentationalcontainer-revisited).
 

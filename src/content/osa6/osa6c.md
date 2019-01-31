@@ -247,9 +247,9 @@ Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/FullStack-H
 
 ## Tehtäviä
 
-6.14
-6.15
 6.16
+6.17
+6.18
 
 Tee nyt tehtävät [6.10-6.12](/tehtävät#redux-ja-backend)
 
@@ -465,9 +465,9 @@ Egghead.io:ssa on ilmaiseksi saatavilla Reduxin kehittäjän Dan Abramovin loist
 
 ## tehtäviä
 
-6.17
-6.18
 6.19
+6.20
+6.21
 
 Tee nyt tehtävät [6.13-6.15](/tehtävät#thunk)
 
