@@ -287,7 +287,7 @@ export default VisibilityFilter
 
 Toteutus on suoraviivainen, radiobuttonin klikkaaminen muuttaa storen kentän <i>filter</i> tilaa.
 
-Muutetaan vielä komponentin <i>NoteList</i> ottamaan huomioon filtteri
+Muutetaan vielä komponentin <i>Notes</i> ottamaan huomioon filtteri
 
 ```js
 const Notes = ({ store }) => {
@@ -343,7 +343,7 @@ Jatketaan tehtävässä 6.3 aloitetun reduxia käyttävän anekdoottisovelluksen
 
 Sovelluksessa on valmiina komponentin <i>Notification</i> runko:
 
-```react
+```js
 class Notification extends React.Component {
   render() {
     const style = {
@@ -362,10 +362,10 @@ class Notification extends React.Component {
 
 Laajenna komponenttia siten, että se renderöi redux-storeen talletetun viestin, eli renderöitävä komponentti muuttuu muodoon:
 
-```react
+```js
 return (
   <div style={style}>
-    {this.props.store.getState()...}
+    {props.store.getState()...}
   </div>
 )
 ```
@@ -378,7 +378,7 @@ Tässä vaiheessa sovelluksen ei vielä tarvitse osata käyttää <i>Notificatio
 
 Laajenna sovellusta siten, että se näyttää <i>Notification</i>-komponentin avulla viiden sekunnin ajan kun sovelluksessa äänestetään tai luodaan uusia anekdootteja:
 
-![]({{ "/assets/teht/37.png" | absolute_url }})
+![](../images/6/8.png)
 
 Notifikaation asettamista ja poistamista varten kannattaa toteuttaa [action creatorit](https://redux.js.org/basics/actions#action-creators).
 
@@ -386,256 +386,71 @@ Notifikaation asettamista ja poistamista varten kannattaa toteuttaa [action crea
 
 Toteuta sovellukseen näytettävien muistiinpanojen filtteröiminen
 
-![]({{ "/assets/teht/38.png" | absolute_url }})
+![](../images/6/9.png)
 
 Säilytä filtterin tila redux storessa, eli käytännössä kannattaa jälleen luoda uusi reduceri ja action creatorit.
 
 Tee filtterin ruudulla näyttämistä varten komponentti <i>Filter</i>. Voit ottaa sen pohjaksi seuraavan
 
-```bash
+```js
+import React from 'react'
+
 const Filter = (props) => {
-  handleChange = (event) => {
+  const handleChange = (event) => {
     // input-kentän arvo muuttujassa event.target.value
   }
-  render() {
-    const style = {
-      marginBottom: 10
-    }
-
-    return (
-      <div style={style}>
-        filter <input onChange={this.handleChange}/>
-      </div>
-    )
+  const style = {
+    marginBottom: 10
   }
+
+  return (
+    <div style={style}>
+      filter <input onChange={handleChange} />
+    </div>
+  )
 }
+
+export default Filter
 ```
 
 ### Connect
 
-ikävästi store propseissa, ja gludge indexissä jolla uudelleenrenderöidään
+Reduxin käytön ansiosta sovelluksen rakenne alkaa jo olla mukavan modulaarinen. Pystymme kuitenkin vielä parempaan.
 
-[React Redux](https://github.com/reactjs/react-redux) -kirjaston määrittelemä funktio [connect](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options) on paras ratkaisu siihen, miten Redux-store saadaan välitettyä React-componenteille.
-
-Connect voi olla aluksi haastava sisäistää, mutta hieman vaivaa kannattaa ehdottomasti nähdä. Tutustutaan nyt connectin käyttöön. Asensimme jo edellisessä osassa kirjaston, joten voimme aloittaa sen käytön suoraan.
-
-Tutkitaan ensin komponenttia _NoteList_. Funktiota _connect_ käyttämällä "normaaleista" React-komponenteista saadaan muodostettua komponentteja, joiden _propseihin_ on "mäpätty" eli yhdistetty haluttuja osia storen määrittelemästä tilasta.
-
-Muodostetaan ensin komponentista _NoteList_ connectin avulla _yhdistetty komponentti_:
+Eräs tämän hetkisen ratkaisun ikävistä puolista on se, että Redux-store täytyy välittää propseina kaikille sitä tarvitseville komponenteille. <i>App</i> ei itse tarvitse ollenkaan Reduxia, mutta joutuu silti välittämään sen eteenäin lapsikomponenteille: 
 
 ```js
-// ...
-import { connect } from 'react-redux';
+const App = (props) => {
+  const store = props.store
 
-class NoteList extends React.Component {
-  // ...
-}
-
-const ConnectedNoteList = connect()(NoteList);
-
-export default ConnectedNoteList;
-```
-
-Moduuli eksporttaa nyt alkuperäisen komponentin sijaan _yhdistetyn komponentin_, joka toimii toistaiseksi täsmälleen alkuperäisen komponentin kaltaisesti.
-
-Komponentti tarvitsee storesta sekä muistiinpanojen listan, että filtterin arvon. Funktion _connect_ ensimmäisenä parametrina voidaan määritellä funktio [mapStateToProps](https://github.com/reactjs/react-redux/blob/master/docs/api.md#arguments), joka liittää joitakin storen tilan perusteella määriteltyjä asioita connectilla muodostetun _yhdistetyn komponentin_ propseiksi.
-
-Jos määritellään:
-
-```js
-const mapStateToProps = state => {
-  return {
-    notes: state.notes,
-    filter: state.filter,
-  };
-};
-
-const ConnectedNoteList = connect(mapStateToProps)(NoteList);
-
-export default ConnectedNoteList;
-```
-
-on komponentin _NoteList_ sisällä mahdollista viitata storen tilaan, esim. muistiinpanoihin suoraan propsin kautta _props.notes_ sen sijaan, että käytettäisiin suoraan contextia muodossa _this.context.store.getState().notes_. Vastaavasti _props.filter_ viittaa storessa olevaan filter-kentän tilaan.
-
-Metodin _render_ sisältö pelkistyy seuraavasti
-
-```js
-class NoteList extends React.Component {
-  render() {
-    const notesToShow = () => {
-      const { notes, filter } = this.props;
-      if (filter === 'ALL') {
-        return notes;
-      }
-
-      return filter === 'IMPORTANT'
-        ? notes.filter(note => note.important)
-        : notes.filter(note => !note.important);
-    };
-
-    // ...
-  }
-}
-```
-
-Connect-komennolla, ja _mapStateToProps_-määrittelyllä aikaan saatua tilannetta voidaan visualisoida seuraavasti:
-
-![](../assets/6/5b.png)
-
-eli komponentin _NoteList_ sisältä on propsien _props.notes_ ja _props.filter_ kautta "suora pääsy" tarkastelemaan Redux storen sisällä olevaa tilaa.
-
-_NoteList_ viittaa edelleen suoraan kontekstin kautta storen metodiin _dispatch_, jota se tarvitsee action creatorin _importanceToggling_ avulla tehdyn actionin dispatchaamiseen:
-
-```js
-toggleImportance = (id) => () => {
-  this.context.store.dispatch(
-    importanceToggling(id)
+  return (
+    <div>
+      <NewNote store={store}/>  
+      <VisibilityFilter store={store} />    
+      <Notes store={store} />
+    </div>
   )
-```
-
-Connect-funktion toisena parametrina voidaan määritellä [mapDispatchToProps](https://github.com/reactjs/react-redux/blob/master/docs/api.md#arguments) eli joukko _action creator_ -funktioita, jotka välitetään yhdistetylle komponentille propseina. Laajennetaan connectausta seuraavasti
-
-```js
-const mapStateToProps = state => {
-  return {
-    notes: state.notes,
-    filter: state.filter,
-  };
-};
-
-const mapDispatchToProps = {
-  importanceToggling,
-};
-
-const ConnectedNoteList = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NoteList);
-
-export default ConnectedNoteList;
-```
-
-Nyt komponentti voi dispatchata suoraan action creatorin _importanceToggling_ määrittelemän actionin kutsumalla propsien kautta saamaansa funktiota koodissa:
-
-```js
-class NoteList extends React.Component {
-  toggleImportance = id => () => {
-    this.props.importanceToggling(id);
-  };
-
-  // ...
 }
 ```
 
-Storen _dispatch_-funktiota ei enää tarvitse kutsua, sillä _connect_ on muokannut action creatorin _importanceToggling_ sellaiseen muotoon, joka sisältää dispatchauksen.
+Otetaan nyt käyttöön
+[React Redux](https://github.com/reactjs/react-redux) -kirjaston määrittelemä funktio [connect](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options), joka on tämän hetken defacto-ratkaisu sille, miten Redux-store saadaan välitettyä React-componenteille.
 
-_mapDispatchToProps_ lienee aluksi hieman haastava ymmärtää, etenkin sen kohta käsiteltävä [vaihtoehtoinen käyttötapa](/osa6/#mapdispatchtopropsin-vaihtoehtoinen-käyttötapa).
-
-Connectin aikaansaamaa tilannetta voidaan havainnollistaa seuraavasti:
-
-![](../assets/6/5c.png)
-
-eli sen lisäksi että _NoteList_ pääsee storen tilaan propsien _props.notes_ ja _props.filter_ kautta, se viittaa _props.importanceToggling_:lla funktioon, jonka avulla storeen saadaan dispatchattua _TOGGLE_IMPORTANCE_-tyyppisiä actioneja.
-
-Koska komponentti saa storeen liittyvät asiat propseina, voidaan koodista poistaa metodit _componentDidMount_ ja _componentWillUnMount_ jotka huolehtivat komponentin uudelleenrenderöitymisestä storen tilan muuttuessa. Connect tekee tämän puolestamme.
-
-Komponentti _NoteList_ ei tarvitse storea enää mihinkään, se saa kaiken tarvitsemansa propseina _connect_-funktion ansiosta. Komponentti ei käytä enää suoraan contextia, joten koodi yksinkertaistuu seuraavaan muotoon:
+Connect voi olla aluksi haastava sisäistää, mutta hieman vaivaa kannattaa ehdottomasti nähdä. Tutustutaan nyt connectin käyttöön. 
 
 ```js
-import React from 'react'
-import { connect } from 'react-redux'
-import { importanceToggling } from './../reducers/noteReducer'
-import Note from './Note'
-
-class NoteList extends React.Component {
-  render() {
-    const notesToShow = () => {
-      const { notes, filter } = this.props
-      if (filter === 'ALL') {
-        return notes
-      }
-
-      return filter === 'IMPORTANT'
-        ? notes.filter(note => note.important)
-        : notes.filter(note => !note.important)
-    }
-
-    return (
-      <ul>
-        {notesToShow().map(note =>
-          <Note
-            key={note.id}
-            note={note}
-            handleClick={() => this.props.importanceToggling(note.id)}
-          />
-        )}
-      </ul>
-    )
-  }
-}
-
-const mapStateToProps = (state) => {
-  return {
-    notes: state.notes,
-    filter: state.filter
-  }
-}
-
-const ConnectedNoteList = connect(
-  mapStateToProps,
-  { importanceToggling }
-)(NoteList)
-
-export default ConnectedNoteList
+npm install --save react-redux
 ```
 
-Koodi sisältää pari muutakin oikaisua, mm. apumetodista _toggleImportance_ on hankkiuduttu eroon.
-Itseasiassa komponentti on nyt niin yksinkertainen että se voitaisiin määritellä funktionaalisena komponenttina. Emme kuitenkaan tee muutosta nyt.
+Edellytyksenä kirjaston tarjoaman _connect_-funktion käytölle on se, että sovellus on määritelty React redux kirjaston tarjoaman [Provider](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store)-komponentin lapsena ja että sovelluksen käyttämä store on annettu Provider-komponentin attribuutiksi <i>store</i>. 
 
-Otetaan _connect_ käyttöön myös uuden muistiinpanon luomisessa:
-
-```js
-import React from 'react'
-import { noteCreation } from './../reducers/noteReducer'
-import { connect } from 'react-redux'
-
-class NoteForm extends React.Component {
-
-  addNote = (event) => {
-    event.preventDefault()
-    this.props.noteCreation(event.target.note.value)
-    event.target.note.value = ''
-  }
-
-  render() {
-    return (
-      <form onSubmit={this.addNote}>
-        <input name="note" />
-        <button>lisää</button>
-      </form>
-    )
-  }
-}
-
-export default connect(
-  null,
-  { noteCreation }
-)(NoteForm)
-```
-
-Koska komponentti ei tarvitse storen tilasta mitään, on funktion _connect_ ensimmäinen parametri _null_.
-
-Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2019/redux-notes) tagissä _part6-3_.
-
-### Provider
-
-Funktion _connect_ käytön edellytyksenä on se, että sovellus on määritelty React redux kirjaston tarjoaman [Provider](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store)-komponentin lapseksi ja että sovelluksen käyttämä store on annettu Provider-komponentin attribuutiksi _store_:
+Eli tiedosto <i>index.js</i> tulee muuttaa seuraavaan muotoon
 
 ```js
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, combineReducers } from 'redux'
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux' // highlight-line
 import App from './App'
 import noteReducer from './reducers/noteReducer'
 import filterReducer from './reducers/filterReducer'
@@ -648,105 +463,338 @@ const reducer = combineReducers({
 const store = createStore(reducer)
 
 ReactDOM.render(
+  // highlight-start
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('root'))
+  // highlight-end
+document.getElementById('root'))
 ```
 
-Lisäsimme jo edellisen osan lopussa sovellukseen _Providerin_, joten _connect_ oli tällä kertaa suoraan käytettävissä.
+Tutkitaan ensin komponenttia <i>Notes</i>. Funktiota _connect_ käyttämällä "normaaleista" React-komponenteista saadaan muodostettua komponentteja, joiden <i>propseihin</i> on "mäpätty" eli yhdistetty haluttuja osia storen määrittelemästä tilasta.
 
-### Huomio propsina välitettyyn action creatoriin viittaamisesta
-
-Tarkastellaan vielä erästä mielenkiintoista seikkaa komponentista _NoteForm_:
+Muodostetaan ensin komponentista <i>Notes</i> connectin avulla <i>yhdistetty komponentti</i>:
 
 ```js
 import React from 'react'
-import { noteCreation } from './../reducers/noteReducer'
-import { connect } from 'react-redux'
+import { connect } from 'react-redux' // highlight-line
+import Note from './Note'
+import { toggleImportanceOf } from '../reducers/noteReducer'
 
-class NoteForm extends React.Component {
+const Notes = ({ store }) => {
+  // ...
+}
 
-  addNote = (event) => {
-    event.preventDefault()
-    this.props.noteCreation(event.target.note.value)
-    event.target.note.value = ''
-  }
+const ConnectedNotes = connect()(Notes) // highlight-line
+export default ConnectedNotes           // highlight-line
+```
 
-  render() {
-    // ...
+Moduuli eksporttaa nyt alkuperäisen komponentin sijaan <i>yhdistetyn komponentin</i>, joka toimii toistaiseksi täsmälleen alkuperäisen komponentin kaltaisesti.
+
+Komponentti tarvitsee storesta sekä muistiinpanojen listan, että filtterin arvon. Funktion _connect_ ensimmäisenä parametrina voidaan määritellä funktio [mapStateToProps](https://github.com/reactjs/react-redux/blob/master/docs/api.md#arguments), joka liittää joitakin storen tilan perusteella määriteltyjä asioita connectilla muodostetun <i>yhdistetyn komponentin</i> propseiksi.
+
+Jos määritellään:
+
+```js
+const Notes = (props) => {
+  // ...
+}
+
+const mapStateToProps = (state) => {
+  return {
+    notes: state.notes,
+    filter: state.filter,
   }
 }
 
-export default connect(
-  null,
-  { noteCreation }
-)(NoteForm)
+const ConnectedNotes = connect(mapStateToProps)(Notes)
+
+export default ConnectedNotes
 ```
 
-Aloittelevalle connectin käyttäjälle aiheuttaa joskus ihmetystä se, että action creatorista _noteCreation_ on komponentin sisällä käytettävissä _kaksi eri versiota_.
+on komponentin <i>Notes</i> sisällä mahdollista viitata storen tilaan, esim. muistiinpanoihin suoraan propsin kautta <i>props.notes</i> sen sijaan, että käytettäisiin suoraan propseina saatua storea muodossa <i>props.store.getState().notes</i>. Vastaavasti <i>props.filter</i> viittaa storessa olevaan filter-kentän tilaan.
 
-Funktioon tulee viitata propsien kautta, eli _this.props.noteCreation_, tällöin kyseessä on _connectin_ muotoilema, _dispatchauksen sisältävä_ versio funktiosta.
-
-Moduulissa olevan import-lauseen
+Komponentti muuttuu seuraavasti
 
 ```js
-import { noteCreation } from './../reducers/noteReducer';
-```
+const Notes = (props) => {  // highlight-line
+  const notesToShow = () => {
+    if ( props.filter === 'ALL' ) { // highlight-line
+      return props.notes // highlight-line
+    }
 
-ansiosta komponentin sisältä on mahdollista viitata funktioon myös suoraan, eli _noteCreation_. Näin ei kuitenkaan tule tehdä, sillä silloin on kyseessä alkuperäinen action creator joka _ei sisällä dispatchausta_.
+    return props.filter === 'IMPORTANT' // highlight-line
+      ? props.notes.filter(note => note.important) // highlight-line
+      : props.notes.filter(note => !note.important) // highlight-line
+  }
 
-Jos tulostamme funktiot koodin sisällä (emme olekaan vielä käyttäneet kurssilla tätä erittäin hyödyllistä debug-kikkaa)
-
-```js
-render() {
-  console.log(noteCreation)
-  console.log(this.props.noteCreation)
-  return (
-    <form onSubmit={this.addNote}>
-      <input name="note" />
-      <button>lisää</button>
-    </form>
+  return(
+    <ul>
+      {notesToShow().map(note =>
+        <Note
+          key={note.id}
+          note={note}
+          handleClick={() =>
+            props.store.dispatch(toggleImportanceOf(note.id))
+          }
+        />
+      )}
+    </ul>
   )
 }
 ```
 
-näemme eron:
+Connect-komennolla ja <i>mapStateToProps</i>-määrittelyllä aikaan saatua tilannetta voidaan visualisoida seuraavasti:
 
-![](../assets/6/5d.png)
+![](../assets/6/5b.png)
 
-Ensimmäinen funktioista siis on normaali _action creator_, toinen taas connectin muotoilema funktio, joka sisältää storen metodin dispatch-kutsun.
+eli komponentin <i>Notes</i> sisältä on propsien <i>props.notes</i> ja <i>props.filter</i> kautta "suora pääsy" tarkastelemaan Redux storen sisällä olevaa tilaa.
 
-Connect on erittäin kätevä työkalu, mutta abstraktiutensa takia kenties käsitteellisesti haastavin kurssin tähänastisista asioista.
-
-Viimeistään nyt kannattaa katsoa kokonaisuudessaan Egghead.io:ta Reduxin kehittäjän Dan Abramovin loistava tuoriaali [Getting started with Redux](https://egghead.io/courses/getting-started-with-redux). Neljässä viimeisessä videossa käsitellään _connect_-metodia.
-
-Siinä vaiheessa kun videot on tehty, connectin käyttö oli asteen verran nykyistä hankalampaa, sillä esimerkeissä käyttämämme tapa määritellä connectin toinen parametri _mapDispatchToProps_ suoraan _action creator_ -funktioiden avulla ei ollut vielä mahdollinen. Katsotaan seuraavassa luvussa lyhyesti vaihtoehtoista, "hankalampaa" tapaa, sitä näkee usein vanhemmassa React-koodissa, joten sen tunteminen on oleellista.
-
-### mapDispatchToPropsin vaihtoehtoinen käyttötapa
-
-Määrittelimme siis connectin komponentille _NoteForm_ antamat actioneja dispatchaavan funktion seuraavasti:
+<i>Notes</i> viittaa edelleen propsien avulla saamaansa funktioon _dispatch_, jota se käyttää muuttamaan Reduxin tilaa:
 
 ```js
-class NoteForm extends React.Component {
+<Note
+  key={note.id}
+  note={note}
+  handleClick={() =>
+    props.store.dispatch(toggleImportanceOf(note.id)) // highlight-line
+  }
+/>
+```
+
+
+Propsia <i>store</i> ei kuitenkaan ole enää olemassa, joten tilan muutos ei tällä hetkellä toimi.
+
+Connect-funktion toisena parametrina voidaan määritellä [mapDispatchToProps](https://github.com/reactjs/react-redux/blob/master/docs/api.md#arguments) eli joukko <i>action creator</i> -funktioita, jotka välitetään yhdistetylle komponentille propseina. Laajennetaan connectausta seuraavasti
+
+```js
+const mapStateToProps = state => {
+  return {
+    notes: state.notes,
+    filter: state.filter,
+  }
+}
+
+
+const mapStateToProps = (state) => {
+  return {
+    notes: state.notes,
+    filter: state.filter,
+  }
+}
+
+// highlight-start
+const mapDispatchToProps = {
+  toggleImportanceOf,
+}
+// highlight-end
+
+const ConnectedNotes = connect(
+  mapStateToProps,
+  mapDispatchToProps // highlight-line
+)(Notes)
+```
+
+Nyt komponentti voi dispatchata suoraan action creatorin _toggleImportanceOf_ määrittelemän actionin kutsumalla propsien kautta saamaansa funktiota koodissa:
+
+```js
+<Note
+  key={note.id}
+  note={note}
+  handleClick={() => props.toggleImportanceOf(note.id)} // highlight-line
+/>
+```
+
+Eli se sijaan että kutsuttaisiin kutsuttaisiin
+
+```js
+props.store.dispatch(toggleImportanceOf(note.id))
+```
+
+_connect_-metodia käytettäessä actionin dispatchaamiseen riittää
+
+```js
+props.toggleImportanceOf(note.id)
+```
+
+Storen _dispatch_-funktiota ei enää tarvitse kutsua, sillä _connect_ on muokannut action creatorin _toggleImportanceOf_ sellaiseen muotoon, joka sisältää dispatchauksen.
+
+_mapDispatchToProps_ lienee aluksi hieman haastava ymmärtää, etenkin sen kohta käsiteltävä [vaihtoehtoinen käyttötapa](/osa6/monta_reduseria_connect#map-dispatch-to-propsin-vaihtoehtoinen-kayttotapa).
+
+Connectin aikaansaamaa tilannetta voidaan havainnollistaa seuraavasti:
+
+![](../assets/6/5c.png)
+
+eli sen lisäksi että <i>Notes</i> pääsee storen tilaan propsien <i>props.notes</i> ja <i>props.filter</i> kautta, se viittaa <i>props.toggleImportanceOf</i>:lla funktioon, jonka avulla storeen saadaan dispatchattua <i>TOGGLE\_IMPORTANCE</i>-tyyppisiä actioneja.
+
+Connectia käyttämään refaktoroitu komponentti <i>Notes</i> on kokonaisuudessaan seuraava:
+
+```js
+import React from 'react'
+import { connect } from 'react-redux'
+import Note from './Note'
+import { toggleImportanceOf } from '../reducers/noteReducer'
+
+const Notes = (props) => {
+  const notesToShow = () => {
+    if ( props.filter === 'ALL' ) {
+      return props.notes
+    }
+
+    return props.filter === 'IMPORTANT'
+      ? props.notes.filter(note => note.important)
+      : props.notes.filter(note => !note.important)
+  }
+
+  return(
+    <ul>
+      {notesToShow().map(note =>
+        <Note
+          key={note.id}
+          note={note}
+          handleClick={() => props.toggleImportanceOf(note.id)}
+        />
+      )}
+    </ul>
+  )
+}
+
+const mapStateToProps = (state) => {
+  return {
+    notes: state.notes,
+    filter: state.filter,
+  }
+}
+
+const mapDispatchToProps = {
+  toggleImportanceOf,
+}
+
+// eksportoidaan suoraan connectin palauttama komponentti
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Notes)
+```
+
+Otetaan _connect_ käyttöön myös uuden muistiinpanon luomisessa:
+
+```js
+import React from 'react'
+import { connect } from 'react-redux'
+import { createNote } from '../reducers/noteReducer'
+
+const NewNote = (props) => {
+
+  const addNote = (event) => {
+    event.preventDefault()
+    props.createNote(event.target.note.value)
+    event.target.note.value = ''
+  }
+  return (
+    <form onSubmit={addNote}>
+      <input name="note" />
+      <button type="submit">lisää</button>
+    </form>
+  )
+}
+
+export default connect(
+  null,
+  { createNote }
+)(NewNote)
+```
+
+Koska komponentti ei tarvitse storen tilasta mitään, on funktion _connect_ ensimmäinen parametri <i>null</i>.
+
+Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2019/redux-notes) branchissa <i>part6-3</i>.
+
+### Huomio propsina välitettyyn action creatoriin viittaamisesta
+
+Tarkastellaan vielä erästä mielenkiintoista seikkaa komponentista <i>NewNote</i>:
+
+```js
+import React from 'react'
+import { connect } from 'react-redux'
+import { createNote } from '../reducers/noteReducer' // highlight-line
+
+const NewNote = (props) => {
+
+  const addNote = (event) => {
+    event.preventDefault()
+    props.createNote(event.target.note.value) // highlight-line
+    event.target.note.value = ''
+  }
   // ...
 }
 
 export default connect(
   null,
-  { noteCreation }
-)(NoteForm);
+  { createNote }
+)(NewNote)
 ```
 
-Eli määrittelyn ansiosta komponentti dispatchaa uuden muistiinpanon lisäyksen suorittavan actionin suoraan komennolla <code>this.props.noteCreation('uusi muistiinpano')</code>.
+Aloittelevalle connectin käyttäjälle aiheuttaa joskus ihmetystä se, että action creatorista <i>createNote</i> on komponentin sisällä käytettävissä <i>kaksi eri versiota</i>.
 
-Parametrin _mapDispatchToProps_ kenttinä ei voi antaa mitä tahansa funktiota, vaan funktion on oltava _action creator_, eli Redux-actionin palauttava funktio.
+Funktioon tulee viitata propsien kautta, eli <i>props.createNote</i>, tällöin kyseessä on _connectin_ muotoilema, <i>dispatchauksen sisältävä</i> versio funktiosta.
 
-Kannattaa huomata, että parametri _mapDispatchToProps_ on nyt _olio_, sillä määrittely
+Moduulissa olevan import-lauseen
+
+```js
+import { createNote } from './../reducers/noteReducer'
+```
+
+ansiosta komponentin sisältä on mahdollista viitata funktioon myös suoraan, eli _noteCreation_. Näin ei kuitenkaan tule tehdä, sillä silloin on kyseessä alkuperäinen action creator joka <i>ei sisällä dispatchausta</i>.
+
+Jos tulostamme funktiot koodin sisällä (emme olekaan vielä käyttäneet kurssilla tätä erittäin hyödyllistä debug-kikkaa)
+
+```js
+const NewNote = (props) => {
+  console.log(createNote)
+  console.log(props.createNote)
+
+  const addNote = (event) => {
+    event.preventDefault()
+    props.createNote(event.target.note.value)
+    event.target.note.value = ''
+  }
+
+  // ...
+}
+```
+
+näemme eron:
+
+![](../images/6/10.png)
+
+Ensimmäinen funktioista siis on normaali <i>action creator</i>, toinen taas connectin muotoilema funktio, joka sisältää storen metodin dispatch-kutsun.
+
+Connect on erittäin kätevä työkalu, mutta abstraktiutensa takia se voi aluksi tuntua hankalalta.
+
+### mapDispatchToPropsin vaihtoehtoinen käyttötapa
+
+Määrittelimme siis connectin komponentille <i>NewNote</i> antamat actioneja dispatchaavan funktion seuraavasti:
+
+```js
+class NewNote extends React.Component {
+  // ...
+}
+
+export default connect(
+  null,
+  { createNote }
+)(NewNote)
+```
+
+Eli määrittelyn ansiosta komponentti dispatchaa uuden muistiinpanon lisäyksen suorittavan actionin suoraan komennolla <code>props.createNote('uusi muistiinpano')</code>.
+
+Parametrin <i>mapDispatchToProps</i> kenttinä ei voi antaa mitä tahansa funktiota, vaan funktion on oltava <i>action creator</i>, eli Redux-actionin palauttava funktio.
+
+Kannattaa huomata, että parametri <i>mapDispatchToProps</i> on nyt <i>olio</i>, sillä määrittely
 
 ```js
 {
-  noteCreation
+  createNote
 }
 ```
 
@@ -754,107 +802,112 @@ on lyhempi tapa määritellä olioliteraali
 
 ```js
 {
-  noteCreation: noteCreation
+  createNote: createNote
 }
 ```
 
-eli olio, jonka ainoan kentän _noteCreation_ arvona on funktio _noteCreation_.
+eli olio, jonka ainoan kentän <i>createNote</i> arvona on funktio <i>createNote</i>.
 
-Voimme määritellä saman myös "pitemmän kaavan" kautta, antamalla _connectin_ toisena parametrina seuraavanlaisen _funktion_:
+Voimme määritellä saman myös "pitemmän kaavan" kautta, antamalla _connectin_ toisena parametrina seuraavanlaisen <i>funktion</i>:
 
 ```js
-class NoteForm extends React.Component {
+const NewNote = (props) => {
   // ...
 }
 
+// highlight-start
 const mapDispatchToProps = dispatch => {
   return {
-    createTodo: value => {
-      dispatch(noteCreation(value));
+    createNote: value => {
+      dispatch(createNote(value))
     },
-  };
-};
+  }
+}
+// highlight-end
 
 export default connect(
   null,
   mapDispatchToProps
-)(NoteForm);
+)(NewNote)
 ```
 
-Tässä vaihtoehtoisessa tavassa _mapDispatchToProps_ on funktio, jota _connect_ kutsuu antaen sille parametriksi storen _dispatch_-funktion. Funktion paluuarvona on olio, joka määrittelee joukon funktioita, jotka annetaan connectoitavalle komponentille propsiksi. Esimerkkimme määrittelee propsin _createTodo_ olevan funktion
+Tässä vaihtoehtoisessa tavassa <i>mapDispatchToProps</i> on funktio, jota _connect_ kutsuu antaen sille parametriksi storen _dispatch_-funktion. Funktion paluuarvona on olio, joka määrittelee joukon funktioita, jotka annetaan connectoitavalle komponentille propsiksi. Esimerkkimme määrittelee propsin <i>createNote</i> olevan funktion
 
 ```js
 value => {
-  dispatch(noteCreation(value))
-};
+  dispatch(createNote(value))
+}
 ```
 
 eli action creatorilla luodun actionin dispatchaus.
 
-Komponentti siis viittaa funktioon propsin _this.props.createTodo_ kautta:
+Komponentti siis viittaa funktioon propsin <i>props.createTodo</i> kautta:
 
 ```js
-class NoteForm extends React.Component {
+const NewNote = (props) => {
 
   addNote = (event) => {
     event.preventDefault()
-    this.props.createTodo(event.target.note.value)
+    props.createTodo(event.target.note.value)
     event.target.note.value = ''
   }
 
-  render() {
-    return (
-      <form onSubmit={this.addNote}>
-        <input name="note" />
-        <button>lisää</button>
-      </form>
-    )
-  }
+  return (
+    <form onSubmit={addNote}>
+      <input name="note" />
+      <button type="submit">lisää</button>
+    </form>
+  )
 }
 ```
 
-Konsepti on hiukan monimutkainen ja sen selittäminen sanallisesti on haastavaa. Kannattaa katsoa huolellisesti Dan Abramovin videot ja koittaa miettiä mistä on kyse.
+Konsepti on hiukan monimutkainen ja sen selittäminen sanallisesti on haastavaa. Useimmissa tapauksissa onneksi riittää <i>mapDispatchToProps</i>:in yksinkertaisempi muoto. On kuitenkin tilanteita, joissa monimutkaisempi muoto on tarpeen, esim. jos määriteltäessä propseiksi mäpättyjä <i>dispatchattavia actioneja</i> on [viitattava komponentin omiin propseihin](https://github.com/gaearon/redux-devtools/issues/250#issuecomment-186429931).
 
-Useimmissa tapauksissa riittää _mapDispatchToProps_:in yksinkertaisempi muoto. On kuitenkin tilanteita, joissa monimutkaisempi muoto on tarpeen, esim. jos määriteltäessä propseiksi mäpättyjä _dispatchattavia actioneja_ on [viitattava komponentin omiin propseihin](https://github.com/gaearon/redux-devtools/issues/250#issuecomment-186429931).
+Egghead.io:sta löytyy Reduxin kehittäjän Dan Abramovin loistava tuoriaali [Getting started with Redux](https://egghead.io/courses/getting-started-with-redux), jonka katsomista voin suositella kaikille. Neljässä viimeisessä videossa käsitellään _connect_-metodia ja nimenomaan sen "hankalampaa" käyttötapaa.
 
 ### Presentational/Container revisited
 
-Komponentti _NoteList_ käyttää apumetodia _notesToShow_, joka päättelee filtterin perusteella näytettävien muistiinpanojen listan:
+Komponentti <i>Notes</i> käyttää apumetodia <i>notesToShow</i>, joka päättelee filtterin perusteella näytettävien muistiinpanojen listan:
 
 ```js
-const notesToShow = () => {
-  const { notes, filter } = this.props;
-  if (filter === 'ALL') {
-    return notes;
+const Notes = (props) => {
+  const notesToShow = () => {
+    if ( props.filter === 'ALL' ) {
+      return props.notes
+    }
+
+    return props.filter === 'IMPORTANT'
+      ? props.notes.filter(note => note.important)
+      : props.notes.filter(note => !note.important)
   }
 
-  return filter === 'IMPORTANT'
-    ? notes.filter(note => note.important)
-    : notes.filter(note => !note.important);
-};
+  // ...
+}
 ```
 
-Komponentin on tarpeetonta sisältää kaikkea tätä logiikkaa. Eriytetään se komponentin ulkopuolelle _connect_-metodin parametrin _mapStateToProps_ yhteyteen. Muutetaan komponentti samalla funktionaaliseksi:
+Komponentin on tarpeetonta sisältää kaikkea tätä logiikkaa. Eriytetään se komponentin ulkopuolelle _connect_-metodin parametrin <i>mapStateToProps</i> yhteyteen:
 
 ```js
 import React from 'react'
 import { connect } from 'react-redux'
-import { importanceToggling } from './../reducers/noteReducer'
 import Note from './Note'
+import { toggleImportanceOf } from '../reducers/noteReducer'
 
-const NoteList = (props) => (
-  <ul>
-    {props.visibleNotes.map(note =>
-      <Note
-        key={note.id}
-        note={note}
-        handleClick={() => props.importanceToggling(note.id)}
-      />
-    )}
-  </ul>
-)
+const Notes = (props) => {
+  return(
+    <ul>
+      {props.visibleNotes.map(note => // highlight-line
+        <Note
+          key={note.id}
+          note={note}
+          handleClick={() => props.toggleImportanceOf(note.id)}
+        />
+      )}
+    </ul>
+  )
+}
 
-const notesToShow = (notes, filter) => {
+const notesToShow = ({ notes, filter }) => { // highlight-line
   if (filter === 'ALL') {
     return notes
   }
@@ -865,19 +918,25 @@ const notesToShow = (notes, filter) => {
 
 const mapStateToProps = (state) => {
   return {
-    visibleNotes: notesToShow(state.notes, state.filter)
+    visibleNotes: notesToShow(state), // highlight-line
   }
+}
+
+
+const mapDispatchToProps = {
+  toggleImportanceOf,
 }
 
 export default connect(
   mapStateToProps,
-  { importanceToggling }
-)(NoteList)
+  mapDispatchToProps
+)(Notes)
+
 ```
 
-_mapStateToProps_ ei siis tällä kertaa mäppää propsiksi suoraan storessa olevaa asiaa, vaan storen tilasta funktion _notesToShow_ avulla muodostetun sopivasti filtteröidyn datan.
+<i>mapStateToProps</i> ei siis tällä kertaa mäppää propsiksi suoraan storessa olevaa asiaa, vaan storen tilasta funktion _notesToShow_ avulla muodostetun sopivasti filtteröidyn datan. Uusi versio funktiosta _notesToShow_ siis saa parametriksi koko tilan ja <i>valitsee</i> siitä sopivan osajoukon välitettäväksi komponentille. Tämänkaltaisia funktioita kutsutaan [selektoreiksi](https://medium.com/@pearlmcphee/selectors-react-redux-reselect-9ab984688dd4).
 
-Uudistettu _NoteList_ keskittyy lähes ainoastaan muistiinpanojen renderöimiseen, se on hyvin lähellä sitä minkä sanotaan olevan [presentational](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)-komponentti, joita Dan Abramovin [sanoin](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) kuvailee seuraavasti:
+Uudistettu <i>Notes</i> keskittyy lähes ainoastaan muistiinpanojen renderöimiseen, se on hyvin lähellä sitä minkä sanotaan olevan [presentational](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)-komponentti, joita Dan Abramovin [sanoin](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) kuvaillaan seuraavasti:
 
 - Are concerned with how things look.
 - May contain both presentational and container components inside, and usually have some DOM markup and styles of their own.
@@ -891,28 +950,27 @@ Uudistettu _NoteList_ keskittyy lähes ainoastaan muistiinpanojen renderöimisee
 Connect-metodin avulla muodostettu _yhdistetty komponentti_
 
 ```js
-const notesToShow = (notes, filter) => {
-  if (filter === 'ALL') {
-    return notes;
-  }
-  return filter === 'IMPORTANT'
-    ? notes.filter(note => note.important)
-    : notes.filter(note => !note.important);
-};
+const notesToShow = ({notes, filter}) => {
+  // ...
+}
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    visibleNotes: notesToShow(state.notes, state.filter),
-  };
-};
+    visibleNotes: notesToShow(state),
+  }
+}
 
-connect(
+const mapDispatchToProps = {
+  toggleImportanceOf,
+}
+
+export default connect(
   mapStateToProps,
-  { importanceToggling }
-)(NoteList);
+  mapDispatchToProps
+)(Notes)
 ```
 
-taas on selkeästi _container_-komponentti, joita Dan Abramov [luonnehtii](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) seuraavasti:
+taas on selkeästi <i>container</i>-komponentti, joita Dan Abramov [luonnehtii](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) seuraavasti:
 
 - Are concerned with how things work.
 - May contain both presentational and container components inside but usually don’t have any DOM markup of their own except for some wrapping divs, and never have any styles.
@@ -929,7 +987,7 @@ Abramov mainitsee jaon [eduiksi](https://medium.com/@dan_abramov/smart-and-dumb-
 - Better reusability. You can use the same presentational component with completely different state sources, and turn those into separate container components that can be further reused.
 - Presentational components are essentially your app’s “palette”. You can put them on a single page and let the designer tweak all their variations without touching the app’s logic. You can run screenshot regression tests on that page.
 
-Abramov mainitsee termin [high order component](https://reactjs.org/docs/higher-order-components.html). Esim. _NoteList_ on normaali komponentti, React-reduxin _connect_ metodi taas on _high order komponentti_, eli käytännössä funktio, joka haluaa parametrikseen komponentin muuttuakseen "normaaliksi" komponentiksi.
+Abramov mainitsee termin [high order component](https://reactjs.org/docs/higher-order-components.html). Esim. <i>Notes</i> on normaali komponentti, React-reduxin _connect_ metodi taas on <i>high order komponentti</i>, eli käytännössä funktio, joka haluaa parametrikseen komponentin muuttuakseen "normaaliksi" komponentiksi.
 
 High order componentit eli HOC:t ovatkin yleinen tapa määritellä geneeristä toiminnallisuutta, joka sitten erikoistetaan esim. renderöitymisen määrittelyn suhteen parametrina annettavan komponentin avulla. Kyseessä on funktionaalisen ohjelmoinnin etäisesti olio-ohjelmoinnin perintää muistuttava käsite.
 
@@ -941,66 +999,58 @@ filterClicked = value => () => {
 };
 ```
 
-Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2019/redux-notes) tagissa _part6-4_.
-
+Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2019/redux-notes) branchissa <i>part6-4</i>.
 
 ### Tehtäviä
 
 #### 6.12 paremmat anekdootit, step10
 
-Sovelluksessa välitetään _redux store_ tällä hetkellä kaikille komponenteille propseina.
+Sovelluksessa välitetään <i>redux store</i> tällä hetkellä kaikille komponenteille propseina.
 
-Ota käyttöön kirjasto [react-redux](https://github.com/reactjs/react-redux) ja muuta komponenttia _Notification_ niin, että se pääsee käsiksi tilaan _connect_-funktion välityksellä.
-
-Huomaa, että toimiakseen _connect_ edellyttää että sovellukselle on määriteltävä [Provider](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store).
-
+Ota käyttöön kirjasto [react-redux](https://github.com/reactjs/react-redux) ja muuta komponenttia <i>Notification</i> niin, että se pääsee käsiksi tilaan _connect_-funktion välityksellä.
 
 #### 6.13 paremmat anekdootit, step11
 
-Tee sama komponentille <i>filter</i> ja _AnecdoteForm_.
+Tee sama komponentille <i>Filter</i> ja <i>AnecdoteForm</i>.
 
 #### 6.14 paremmat anekdootit, step12
 
-Muuta myös _AnecdoteList_ käyttämään connectia.
+Muuta myös <i>AnecdoteList</i> käyttämään connectia.
 
 Poista turhaksi staten propseina tapahtuva välittäminen, eli pelkistä _App_ muotoon:
 
-```react
-class App extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>Programming anecdotes</h1>
-        <Notification />
-        <AnecdoteForm />
-        <AnecdoteList />
-      </div>
-    )
-  }
+```js
+const = () => {
+  return (
+    <div>
+      <h1>Programming anecdotes</h1>
+      <Notification />
+      <AnecdoteForm />
+      <AnecdoteList />
+    </div>
+  )
 }
 ```
 
 #### 6.15 paremmat anekdootit, step13
 
-Välitä komponentille _AnecdoteList_ connectin avulla ainoastaan yksi stateen liittyvä propsi, filtterin tilan perusteella näytettävät anekdootit samaan tapaan kuin materiaalin luvussa [Presentational/Container revisited](/osa6/#presentationalcontainer-revisited).
+Välitä komponentille <i>AnecdoteList</i> connectin avulla ainoastaan yksi stateen liittyvä propsi, filtterin tilan perusteella näytettävät anekdootit samaan tapaan kuin materiaalin luvussa [Presentational/Container revisited](/osa6/#presentationalcontainer-revisited).
 
-Komponentin _AnecdoteList_ metodi _render_ siis typistyy suunnilleen seuraavaan muotoon
+Komponentti <i>AnecdoteList</i> siis typistyy suunnilleen seuraavaan muotoon
 
-```react
-class AnecdoteList extends React.Component {
+```js
+const AnecdoteList = (props) => {
   // ...
-  render() {
-    return (
-      <div>
-        <h2>Anecdotes</h2>
-        <Filter />
-        {this.props.anecdotesToShow.map(anecdote =>
-          <div key={anecdote.id}>
-            ...
-          </div>
-        )}
-      </div>
-    )
+  return (
+    <div>
+      <h2>Anecdotes</h2>
+      <Filter />
+      {this.props.anecdotesToShow.map(anecdote =>
+        <div key={anecdote.id}>
+          ...
+        </div>
+      )}
+    </div>
   )
 }
 ```

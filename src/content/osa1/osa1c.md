@@ -244,7 +244,7 @@ _ReactDOM.render_-metodin toistuva kutsuminen ei kuitenkaan ole suositeltu tapa 
 
 Tähänastiset komponenttimme ovat olleet siinä mielessä yksinkertaisia, että niillä ei ole ollut ollenkaan omaa tilaa, joka voisi muuttua komponentin elinaikana.
 
-Määritellään nyt sovelluksemme komonentille <i>App</i> tila Reactin [state hookin](https://reactjs.org/docs/hooks-state.html) avulla.
+Määritellään nyt sovelluksemme komponentille <i>App</i> tila Reactin [state hookin](https://reactjs.org/docs/hooks-state.html) avulla.
 
 Muutetaan ohjelmaa seuraavasti
 

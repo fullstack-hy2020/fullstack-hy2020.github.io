@@ -38,11 +38,12 @@ module.exports = {
     a: 'Flux-arkkitehtuuri ja Redux',
     b: 'Monta reduseria, connect',
     c: 'Redux-sovelluksen kommunikointi palvelimen kanssa',
-    d: 'React-router, valmiit tyylikirjastot'
   },
   '7': {
-    // a: 'Webpack',
-    // b: 'Tyylien lisääminen sovellukseen',
+    // a: 'React-router
+    // b valmiit tyylikirjastot'
+    // c: 'Tyylien lisääminen sovellukseen',
+    // d: 'Webpack',
     // c: 'Testaus',
     // d: 'React',
     // e: 'React/Node-sovellusten tietoturva',
