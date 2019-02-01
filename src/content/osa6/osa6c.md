@@ -245,13 +245,29 @@ Muistiinpanojen tärkeyden muuttaminen olisi mahdollista toteuttaa samalla peria
 
 Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/FullStack-HY/redux-notes/tree/part6-5) tagissä _part6-5_.
 
+</div>
+
+<div class="tasks">
+
 ## Tehtäviä
 
-6.16
-6.17
-6.18
+#### 6.16 anekdootit ja backend, step1
 
-Tee nyt tehtävät [6.10-6.12](/tehtävät#redux-ja-backend)
+Hae sovelluksen käynnistyessä anekdootit json-serverillä toteutetusta backendistä.
+
+Backendin alustavan sisällön saat esim. [täältä](https://github.com/FullStack-HY/redux-anecdotes-v2/wiki).
+
+#### 6.17 anekdootit ja backend, step2
+
+Muuta uusien anekdoottien luomista siten, että anekdootit talletetaan backendiin.
+
+#### 6.18 anekdootit ja backend, step3
+
+Muuta myös äänestäminen siten, että anekdootit talletetaan backendiin. Jos teet talletuksen HTTP PUT -operaatiolla, niin muista että joudut korvaamaan tallettaessa koko olion.
+
+</div>
+
+<div class="content">
 
 ### Asynkroniset actionit ja redux thunk
 
@@ -462,14 +478,39 @@ Storen tietyn hetkisen tilan lisäksi on myös mahdollista tarkastella, mikä on
 
 Egghead.io:ssa on ilmaiseksi saatavilla Reduxin kehittäjän Dan Abramovin loistava tutoriaali [Getting started with Redux](https://egghead.io/courses/getting-started-with-redux). Neljässä viimeisessä videossa käytettävää _connect_-metodia käsittelemme vasta kurssin seuraavassa osassa.
 
-
-## tehtäviä
-
-6.19
-6.20
-6.21
-
-Tee nyt tehtävät [6.13-6.15](/tehtävät#thunk)
-
 </div>
 
+<div class="tasks">
+
+### tehtäviä
+
+#### 6.19 anekdootit ja backend, step4 
+
+Muuta redux-storen alustus tapahtumaan _redux-thunk_-kirjaston avulla toteutettuun asynkroniseen actioniin.
+
+#### 6.20 anekdootit ja backend, step5
+
+Muuta myös uuden anekdootin luominen ja äänestäminen tapahtumaan _redux-thunk_-kirjaston avulla toteutettuihin asynkronisiin actioneihin.
+
+#### 6.21 anekdootit ja backend, step6
+
+Notifikaatioiden tekeminen on nyt hieman ikävää, sillä se edellyttää kahden actionin tekemistä ja _setTimeout_-funktion käyttöä:
+
+```js
+this.props.notifyWith(`you voted '${anecdote.content}'`)
+setTimeout(() => {
+  this.props.clearNotification()
+}, 10000)
+```
+
+Tee asynkrooninen action creator, joka mahdollistaa notifikaation antamisen seuraavasti:
+
+```js
+this.props.notify(`you voted '${anecdote.content}'`, 10)
+```
+
+eli ensimmäisenä parametrina on renderöitävä teksti ja toisena notifikaation näyttöaika sekunneissa.
+
+Ota paranneltu notifikaatiotapa käyttöön sovelluksessasi.
+
+</div>

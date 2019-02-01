@@ -991,13 +991,7 @@ Abramov mainitsee termin [high order component](https://reactjs.org/docs/higher-
 
 High order componentit eli HOC:t ovatkin yleinen tapa määritellä geneeristä toiminnallisuutta, joka sitten erikoistetaan esim. renderöitymisen määrittelyn suhteen parametrina annettavan komponentin avulla. Kyseessä on funktionaalisen ohjelmoinnin etäisesti olio-ohjelmoinnin perintää muistuttava käsite.
 
-HOC:it ovat oikeastaan käsitteen [High Order Function](https://en.wikipedia.org/wiki/Higher-order_function) (HOF) yleistys. HOF:eja ovat sellaiset funkiot, jotka joko ottavat parametrikseen funktioita tai palauttavat funkioita. Olemme oikeastaan käyttäneet HOF:eja läpi kurssin, esim. lähes kaikki taulukoiden käsittelyyn tarkoitetut metodit, kuten _map, filter ja find_ ovat HOF:eja, samoin jo monta kertaa käyttämämme funktioita palauttavat (eli kahden nuolen) funktiot, esim.
-
-```js
-filterClicked = value => () => {
-  this.props.filterChange(value);
-};
-```
+HOC:it ovat oikeastaan käsitteen [High Order Function](https://en.wikipedia.org/wiki/Higher-order_function) (HOF) yleistys. HOF:eja ovat sellaiset funkiot, jotka joko ottavat parametrikseen funktioita tai palauttavat funkioita. Olemme oikeastaan käyttäneet HOF:eja läpi kurssin, esim. lähes kaikki taulukoiden käsittelyyn tarkoitetut metodit, kuten _map, filter ja find_ ovat HOF:eja.
 
 Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2019/redux-notes) branchissa <i>part6-4</i>.
 
@@ -1007,17 +1001,32 @@ Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-h
 
 Sovelluksessa välitetään <i>redux store</i> tällä hetkellä kaikille komponenteille propseina.
 
-Ota käyttöön kirjasto [react-redux](https://github.com/reactjs/react-redux) ja muuta komponenttia <i>Notification</i> niin, että se pääsee käsiksi tilaan _connect_-funktion välityksellä.
+Ota käyttöön kirjasto [react-redux](https://github.com/reactjs/react-redux) ja muuta komponenttia <i>AnecdoteList</i> niin, että se pääsee käsiksi tilaan _connect_-funktion välityksellä. 
+
+Anekdoottien äänestyksen ja uusien anekdoottien luomisen **ei tarvitse vielä toimia** tämän tehtävän jälkeen.
+
+Tehtävässäsi tarvitsema <i>mapStateToProps</i> on suunilleen seuraavanlainen
+
+```js
+const mapStateToProps = (state) => {
+  // joskus on hyödyllistä tulostaa mapStateToProps:ista...
+  console.log(state)
+  return {
+    anecdotes: state.anecdotes,
+    filter: state.filter
+  }
+}
+```
 
 #### 6.13 paremmat anekdootit, step11
 
-Tee sama komponentille <i>Filter</i> ja <i>AnecdoteForm</i>.
+Tee sama komponentille  <i>Filter</i> ja <i>AnecdoteForm</i>.
 
 #### 6.14 paremmat anekdootit, step12
 
-Muuta myös <i>AnecdoteList</i> käyttämään connectia.
+Muuta komponenttia <i>AnecdoteList</i> siten, että anekdoottien äänestys taas onnistuu ja muuta myös <i>Notification</i> käyttämään connectia.
 
-Poista turhaksi staten propseina tapahtuva välittäminen, eli pelkistä _App_ muotoon:
+Poista turhaksi staten propseina tapahtuva välittäminen, eli pelkistä <i>App</i> muotoon:
 
 ```js
 const = () => {
@@ -1032,22 +1041,29 @@ const = () => {
 }
 ```
 
-#### 6.15 paremmat anekdootit, step13
+#### 6.15* paremmat anekdootit, step13
 
-Välitä komponentille <i>AnecdoteList</i> connectin avulla ainoastaan yksi stateen liittyvä propsi, filtterin tilan perusteella näytettävät anekdootit samaan tapaan kuin materiaalin luvussa [Presentational/Container revisited](/osa6/#presentationalcontainer-revisited).
+Välitä komponentille <i>AnecdoteList</i> connectin avulla ainoastaan yksi stateen liittyvä propsi, filtterin tilan perusteella näytettävät anekdootit samaan tapaan kuin materiaalin luvussa [Presentational/Container revisited](/osa6/monta_reduseria_connect#presentational-container-revisited).
 
 Komponentti <i>AnecdoteList</i> siis typistyy suunnilleen seuraavaan muotoon
 
 ```js
 const AnecdoteList = (props) => {
-  // ...
+  const vote = (id) => {
+    // ...
+  }
+
   return (
     <div>
-      <h2>Anecdotes</h2>
-      <Filter />
-      {this.props.anecdotesToShow.map(anecdote =>
+      {props.anecdotesToShow.map(anecdote => // highlight-line
         <div key={anecdote.id}>
-          ...
+          <div>
+            {anecdote.content}
+          </div>
+          <div>
+            has {anecdote.votes}
+            <button onClick={() => vote(anecdote.id)}>vote</button>
+          </div>
         </div>
       )}
     </div>
