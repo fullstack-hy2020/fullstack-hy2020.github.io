@@ -26,7 +26,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 Yleinen käytäntö on määritellä sovelluksille omat moodinsa myös sovelluskehitykseen ja testaukseen.
 
-Määritellään nyt tiedostossa <i>package.json</i>, että testejä suorittaessa sovelluksen <i>NODE\_ENV</i> saa arvokseen <i>test</i>:
+Määritellään nyt tiedostossa <i>package.json</i>, että testejä suoritettaessa sovelluksen <i>NODE\_ENV</i> saa arvokseen <i>test</i>:
 
 ```json
 {
@@ -41,11 +41,11 @@ Määritellään nyt tiedostossa <i>package.json</i>, että testejä suorittaess
 }
 ```
 
-Lisäsimme testit suorittavaan npm-skriptiin myös määreen [runInBand](https://jestjs.io/docs/en/cli.html#runinband) joka estää testien rinnakkaisen suorituksen. Tämä tarkennus on viisainta tehdä kun testimme tulevat käyttämään tietokantaa.
+Lisäsimme testit suorittavaan npm-skriptiin myös määreen [runInBand](https://jestjs.io/docs/en/cli.html#runinband), joka estää testien rinnakkaisen suorituksen. Tämä tarkennus on viisainta tehdä sitten, kun testimme tulevat käyttämään tietokantaa.
 
 Samalla määriteltiin, että suoritettaessa sovellusta komennolla _npm run watch_ eli nodemonin avulla, on sovelluksen moodi <i>development</i>. Jos sovellusta suoritetaan normaalisti Nodella, on moodiksi määritelty <i>production</i>.
 
-Määrittelyssämme on kuitenkin pieni ongelma, se ei toimi windowsilla. Tilanne korjautuu asentamalla kirjasto [cross-env](https://www.npmjs.com/package/cross-env) komennolla
+Määrittelyssämme on kuitenkin pieni ongelma, se ei toimi Windowsilla. Tilanne korjautuu asentamalla kirjasto [cross-env](https://www.npmjs.com/package/cross-env) komennolla
 
 ```bash
 npm install --save-dev cross-env
@@ -70,7 +70,7 @@ Nyt sovelluksen toimintaa on mahdollista muokata sen suoritusmoodiin perustuen. 
 
 Sovelluksen testikanta voidaan luoda tuotantokäytön ja sovelluskehityksen tapaan [mlabiin](https://mlab.com/). Ratkaisu ei ole optimaalinen erityisesti, jos sovellusta on tekemässä yhtä aikaa useita henkilöitä. Testien suoritus nimittäin yleensä edellyttää, että samaa tietokantainstanssia ei ole yhtä aikaa käyttämässä useampia testiajoja.
 
-Testaukseen kannattaakin käyttää verkossa olevaa jaettua tietokantaa mieluummin esim. sovelluskehittäjän paikallisen koneen tietokantaa. Optimiratkaisu olisi tietysti se, että jokaista testiajoa varten olisi käytettävissä oma tietokanta, sekin periaatteessa onnistuu "suhteellisen helposti" mm. [keskusmuistissa toimivan Mongon](https://docs.mongodb.com/manual/core/inmemory/) ja [docker](https://www.docker.com)-kontainereiden avulla. Etenemme kuitenkin nyt lyhyemmän kaavan mukaan ja käytetään testikantana normaalia Mongoa.
+Testaukseen kannattaakin käyttää verkossa olevaa jaettua tietokantaa mieluummin kuin esimerkiksi sovelluskehittäjän paikallisen koneen tietokantaa. Optimiratkaisu olisi tietysti se, että jokaista testiajoa varten olisi käytettävissä oma tietokanta, sekin periaatteessa onnistuu "suhteellisen helposti" mm. [keskusmuistissa toimivan Mongon](https://docs.mongodb.com/manual/core/inmemory/) ja [docker](https://www.docker.com)-kontainereiden avulla. Etenemme kuitenkin nyt lyhyemmän kaavan mukaan ja käytetään testikantana normaalia Mongoa.
 
 Muutetaan konfiguraatiot suorittavaa moduulia seuraavasti:
 
@@ -724,7 +724,7 @@ notesRouter.post('/', async (request, response, next) => {
 })
 ```
 
-Catch-lohkossa siis ainoastaan kutsutaan funktiota _next_ siirretään poikkeuksen käsittely virheidenkäittelymiddlewarelle.
+Catch-lohkossa siis ainoastaan kutsutaan funktiota _next_ siirretään poikkeuksen käsittely virheidenkäsittelymiddlewarelle.
 
 Muutoksen jälkeen testit menevät läpi.
 
@@ -770,7 +770,7 @@ test('a note can be deleted', async () => {
 
 Molemmat testit ovat rakenteeltaan samankaltaisia. Alustusvaiheessa ne hakevat kannasta yksittäisen muistiinpanon. Tämän jälkeen on itse testattava operaatio, joka on koodissa korostettuna. Lopussa tarkastetaan, että operaation tulos on haluttu. 
 
-Testit menevät läpi, joten voimme turvallisesti refaktoroida testatut toutet käyttämään async/awaitia:
+Testit menevät läpi, joten voimme turvallisesti refaktoroida testatut routet käyttämään async/awaitia:
 
 ```js
 notesRouter.get('/:id', async (request, response, next) => {
@@ -943,7 +943,7 @@ Muuta koodia siten, että testi menee läpi. Osassa 3 käsitelty [toJSON](http:/
 
 #### 4.10: blogilistan testit, step3
 
-Tee testi joka varmistaa että sovellukseen voi lisätä blogeja osoitteeseen <i>/api/blogs</i> tapahtuvalla HTTP POST -pyynnölle. Testaa ainakin, että blogien määrä kasvaa yhdellä. Voit myös varmistaa, että oikean sisältöinen blogi on lisätty järjestelmään.
+Tee testi joka varmistaa että sovellukseen voi lisätä blogeja osoitteeseen <i>/api/blogs</i> tapahtuvalla HTTP POST -pyynnölle. Testaa ainakin, että blogien määrä kasvaa yhdellä. Voit myös varmistaa, että oikeansisältöinen blogi on lisätty järjestelmään.
 
 Kun testi on valmis, refaktoroi operaatio käyttämään promisejen sijaan async/awaitia.
 
