@@ -776,7 +776,7 @@ const App = () => {
       parts: [
         {
           name: 'Routing',
-          exercises: 2,
+          exercises: 3,
           id: 1
         },
         {
