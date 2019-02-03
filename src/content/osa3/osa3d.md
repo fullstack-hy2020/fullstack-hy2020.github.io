@@ -6,7 +6,7 @@ letter: d
 
 <div class="content">
 
-Sovelluksen tietokantaan tallettamalle datan muodolle on usein tarve asettaa jotain ehtoja. Sovelluksemme ei esim. hyväksy muistiinpanoja, joiden sisältö eli <i>content</i> kenttä puuttuu. Muistiinpanon oikeellisuus tallennetaan sen luovassa metodissa:
+Sovelluksen tietokantaan tallettamalle datan muodolle on usein tarve asettaa joitain ehtoja. Sovelluksemme ei esim. hyväksy muistiinpanoja, joiden sisältö eli <i>content</i> kenttä puuttuu. Muistiinpanon oikeellisuus tallennetaan sen luovassa metodissa:
 
 ```js
 app.post('/api/notes', (request, response) => {
@@ -371,13 +371,13 @@ Estetään rivien lopussa olevat [turhat välilyönnit](https://eslint.org/docs/
 }
 ```
 
-Oletusarvoinen konfiguraatiomme ottaa käyttöön joukon valmiiksi määriteltyjä sääntöjä <i>eslint:recommended</i>:
+Oletusarvoinen konfiguraatiomme ottaa käyttöön joukon valmiiksi määriteltyjä sääntöjä <i>eslint:recommended</i>
 
 ```bash
 "extends": "eslint:recommended",
 ```
 
-Mukana on myös _console.log_-komennoista varoittava sääntö-
+Mukana on myös _console.log_-komennoista varoittava sääntö.
 Yksittäisen sääntö on helppo kytkeä [pois päältä](https://eslint.org/docs/user-guide/configuring#configuring-rules) määrittelemällä sen "arvoksi" konfiguraatiossa 0. Tehdään toistaiseksi näin säännölle <i>no-console</i>.
 
 ```json
@@ -404,7 +404,7 @@ Yksittäisen sääntö on helppo kytkeä [pois päältä](https://eslint.org/doc
 
 Jos konfiguraatiossa on jotain vikaa, voi editorin lint-plugin näyttää mitä sattuu.
 
-Monissa yrityksissä on tapana määritellä yrityksen laajuiset koodausstandardit ja näiden käyttöä valvova ESlint-konfiguraatio. Pyörää ei kannata välttämättä keksiä uudelleen ja voi olla hyvä idea ottaa omaan projektiin joku käyttöön jossain muualla hyväksi havaittu konfiguraatio. Viime aikoina monissa projekteissa on omaksuttu AirBnB:n [Javascript](https://github.com/airbnb/javascript)-tyyliohjeet ottamalla käyttöön firman määrittelemä [ESLint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb)-konfiguraatio.
+Monissa yrityksissä on tapana määritellä yrityksen laajuiset koodausstandardit ja näiden käyttöä valvova ESlint-konfiguraatio. Pyörää ei kannata välttämättä keksiä uudelleen ja voi olla hyvä idea ottaa omaan projektiin käyttöön joku jossain muualla hyväksi havaittu konfiguraatio. Viime aikoina monissa projekteissa on omaksuttu AirBnB:n [Javascript](https://github.com/airbnb/javascript)-tyyliohjeet ottamalla käyttöön firman määrittelemä [ESLint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb)-konfiguraatio.
 
 Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-6), branchissa <i>part3-6</i>.
 
