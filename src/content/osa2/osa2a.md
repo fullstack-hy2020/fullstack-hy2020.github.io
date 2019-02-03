@@ -436,7 +436,7 @@ Koko React-sovellus on mahdollista määritellä samassa tiedostossa, mutta se e
 Koodissamme on käytetty koko ajan moduuleja. Tiedoston ensimmäiset rivit
 
 ```js
-import Reactfrom 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 ```
 
