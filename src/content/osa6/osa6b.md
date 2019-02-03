@@ -327,8 +327,8 @@ const { notes, filter } = store.getState()
 siis on sama kuin kirjoittaisimme
 
 ```js
-const notes = this.context.store.getState().notes
-const filter = this.context.store.getState().filter
+const notes = store.getState().notes
+const filter = store.getState().filter
 ```
 
 Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2019/redux-notes) branchissa </i>part6-2</i>.
@@ -940,7 +940,7 @@ Uudistettu <i>Notes</i> keskittyy lähes ainoastaan muistiinpanojen renderöimis
 
 - Are concerned with how things look.
 - May contain both presentational and container components inside, and usually have some DOM markup and styles of their own.
-- Often allow containment via this.props.children.
+- Often allow containment via props.children.
 - Have no dependencies on the rest of the app, such Redux actions or stores.
 - Don’t specify how the data is loaded or mutated.
 - Receive data and callbacks exclusively via props.

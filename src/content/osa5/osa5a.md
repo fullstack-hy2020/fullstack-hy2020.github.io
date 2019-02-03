@@ -272,7 +272,7 @@ return (
 )
 ```
 
-Eli jos _this.state.user === null_ on [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), suoritetaan _loginForm_ ja muussa tapauksessa _noteForm_.
+Eli jos _user === null_ on [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), suoritetaan _loginForm_ ja muussa tapauksessa _noteForm_.
 
 Tehdään vielä sellainen muutos, että jos käyttäjä on kirjautunut, renderöidään kirjautuneen käyttäjän nimi:
 
@@ -281,7 +281,7 @@ return (
   <div>
     <h1>Muistiinpanot</h1>
 
-    <Notification message={this.state.error}/>
+    <Notification message={errorMessage}/>
 
     <h2>Kirjaudu</h2>
 

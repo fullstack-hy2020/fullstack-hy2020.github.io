@@ -29,13 +29,13 @@ Tallennetaan projektin juuren tiedostoon <i>db.json</i> tietokannan alkutila:
 
 Asennetaan projektiin json-server
 
-```bash
+```js
 npm install json-server --save
 ```
 
 ja lisätään tiedoston <i>package.json</i> osaan <i>scripts</i> rivi
 
-```bash
+```js
 "scripts": {
   "server": "json-server -p3001 db.json",
   // ...
@@ -61,7 +61,7 @@ export default { getAll }
 
 Asennetaan myös axios projektiin
 
-```bash
+```js
 npm install axios --save
 ```
 
@@ -258,13 +258,14 @@ Muuta uusien anekdoottien luomista siten, että anekdootit talletetaan backendii
 
 ### Asynkroniset actionit ja redux thunk
 
-Lähestymistapamme on ok, mutta siinä mielessä ikävä, että palvelimen kanssa kommunikointi tapahtuu komponenttien metodeissa. Olisi parempi, jos kommunikointi voitaisiin abstrahoida komponenteilta siten, että niiden ei tarvitsisi kuin kutsua sopivaa <i>action creatoria</i>, esim. <i>App</i> alustaisi sovelluksen tilan seuraavasti:
+Lähestymistapamme on ok, mutta siinä mielessä ikävä, että palvelimen kanssa kommunikointi tapahtuu komponenttien funktioissa. Olisi parempi, jos kommunikointi voitaisiin abstrahoida komponenteilta siten, että niiden ei tarvitsisi kuin kutsua sopivaa <i>action creatoria</i>, esim. <i>App</i> alustaisi sovelluksen tilan seuraavasti:
 
 ```js
-class App extends React.Component {
-  componentDidMount() {
-    this.props.initializeNotes();
-  }
+const App = (props) => {
+
+  useEffect(() => {
+    props.initializeNotes(notes)
+  },[])
   // ...
 }
 ```
@@ -272,44 +273,43 @@ class App extends React.Component {
 ja <i>NoteForm</i> loisi uuden muistiinpanon seuraavasti:
 
 ```js
-class NoteForm extends React.Component {
-  addNote = async event => {
-    event.preventDefault();
-    const content = event.target.note.value;
-    event.target.note.value = '';
-    this.props.createNote(content);
-  };
-}
+const NewNote = (props) => {
+  const addNote = (event) => {
+    event.preventDefault()
+    const content = event.target.note.value
+    props.createNote(content)
+    event.target.note.value = ''
+  }
 ```
 
 Molemmat komponentit käyttäisivät ainoastaan propsina saamaansa funktiota, välittämättä siitä että taustalla tapahtuu todellisuudessa palvelimen kanssa tapahtuvaa kommunikointia.
 
-Asennetaan nyt [redux-thunk](https://github.com/gaearon/redux-thunk)-kirjasto, joka mahdollistaa _asynkronisten actionien_ luomisen. Asennus tapahtuu komennolla:
+Asennetaan nyt [redux-thunk](https://github.com/gaearon/redux-thunk)-kirjasto, joka mahdollistaa <i>asynkronisten actionien</i> luomisen. Asennus tapahtuu komennolla:
 
-```bash
+```js
 npm install --save redux-thunk
 ```
 
-redux-thunk-kirjasto on ns. _redux-middleware_ joka täytyy ottaa käyttöön storen alustuksen yhteydessä. Eriytetään samalla storen määrittely omaan tiedostoon _store.js_:
+redux-thunk-kirjasto on ns. <i>redux-middleware</i> joka täytyy ottaa käyttöön storen alustuksen yhteydessä. Eriytetään samalla storen määrittely omaan tiedostoon <i>src/store.js</i>:
 
 ```js
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk';
 
-import noteReducer from './reducers/noteReducer';
-import filterReducer from './reducers/filterReducer';
+import noteReducer from './reducers/noteReducer'
+import filterReducer from './reducers/filterReducer'
 
 const reducer = combineReducers({
   notes: noteReducer,
   filter: filterReducer,
-});
+})
 
-const store = createStore(reducer, applyMiddleware(thunk));
+const store = createStore(reducer, applyMiddleware(thunk))
 
-export default store;
+export default store
 ```
 
-Tiedosto _src/index.js_ on muutoksen jälkeen seuraava
+Tiedosto <i>src/index.js</i> on muutoksen jälkeen seuraava
 
 ```js
 import React from 'react'
@@ -322,45 +322,43 @@ ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('root')
-)
+document.getElementById('root'))
 ```
 
-redux-thunkin ansiosta on mahdollista määritellä _action creatoreja_ siten, että ne palauttavat funktion, jonka parametrina on redux-storen _dispatch_-metodi. Tämän ansiosta on mahdollista tehdä asynkronisia action creatoreja, jotka ensin odottavat jonkin toimenpiteen valmistumista ja vasta sen jälkeen dispatchaavat varsinaisen actionin.
+redux-thunkin ansiosta on mahdollista määritellä <i>action creatoreja</i> siten, että ne palauttavat funktion, jonka parametrina on redux-storen <i>dispatch</i>-metodi. Tämän ansiosta on mahdollista tehdä asynkronisia action creatoreja, jotka ensin odottavat jonkin toimenpiteen valmistumista ja vasta sen jälkeen dispatchaavat varsinaisen actionin.
 
-Voimme nyt määritellä muistiinpanojen alkutilan palvelimelta hakevan action creatorin _initializeNotes_ seuraavasti:
+Voimme nyt määritellä muistiinpanojen alkutilan palvelimelta hakevan action creatorin <i>initializeNotes</i> seuraavasti:
 
 ```js
 export const initializeNotes = () => {
   return async dispatch => {
-    const notes = await noteService.getAll();
+    const notes = await noteService.getAll()
     dispatch({
       type: 'INIT_NOTES',
       data: notes,
-    });
-  };
-};
+    })
+  }
+}
 ```
 
-Sisemmässä funktiossaan, eli _asynkronisessa actionissa_ operaatio hakee ensin palvelimelta kaikki muistiinpanot ja sen jälkeen _dispatchaa_ muistiinpanot storeen lisäävän actionin.
+Sisemmässä funktiossaan, eli <i>asynkronisessa actionissa</i> operaatio hakee ensin palvelimelta kaikki muistiinpanot ja sen jälkeen <i>dispatchaa</i> muistiinpanot storeen lisäävän actionin.
 
 Komponentti <i>App</i> voidaan nyt määritellä seuraavasti:
 
 ```js
-class App extends React.Component {
-  componentDidMount () {
-    this.props.initializeNotes()
-  }
+const App = (props) => {
 
-  render() {
-    return (
-      <div>
-        <NoteForm />
-        <NoteList />
-        <VisibilityFilter />
-      </div>
-    )
-  }
+  useEffect(() => {
+    props.initializeNotes()
+  },[])
+
+  return (
+    <div>
+      <NewNote />  
+      <VisibilityFilter />    
+      <Notes />
+    </div>
+  )
 }
 
 export default connect(
@@ -379,41 +377,38 @@ export const createNew = content => {
     dispatch({
       type: 'NEW_NOTE',
       data: newNote,
-    });
-  };
-};
+    })
+  }
+}
 ```
 
-Periaate on jälleen sama, ensin suoritetaan asynkroninen operaatio, ja sen valmistuttua _dispatchataan_ storen tilaa muuttava action.
+Periaate on jälleen sama, ensin suoritetaan asynkroninen operaatio, ja sen valmistuttua <i>dispatchataan</i> storen tilaa muuttava action.
 
-Lomake muuttuu seuraavasti:
+Komponentti <i>NewNote</i> muuttuu seuraavasti:
 
 ```js
-class NoteForm extends React.Component {
-
-  addNote = async (event) => {
+const NewNote = (props) => {
+  const addNote = async (event) => {
     event.preventDefault()
     const content = event.target.note.value
     event.target.note.value = ''
-    this.props.createNew(content)
+    rops.createNote(content)
   }
 
-  render() {
-    return (
-      <form onSubmit={this.addNote}>
-        <input name='note' />
-        <button>lisää</button>
-      </form>
-    )
-  }
+  return (
+    <form onSubmit={addNote}>
+      <input name="note" />
+      <button type="submit">lisää</button>
+    </form>
+  )
 }
 
 export default connect(
-  null, { createNew }
-)(NoteForm)
+  null, { createNote }
+)(NewNote)
 ```
 
-Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2019/redux-notes//tree/part6-6) brachissa <i>part6-6</i>.
+Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2019/redux-notes/tree/part6-6) brachissa <i>part6-6</i>.
 
 ### Redux DevTools
 
@@ -431,7 +426,7 @@ Storen luomistapaa täytyy hieman muuttaa, että kirjasto saadaan käyttöön:
 // ...
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-import { composeWithDevTools } from 'redux-devtools-extension'
+import { composeWithDevTools } from 'redux-devtools-extension' // highlight-line
 
 import noteReducer from './reducers/noteReducer'
 import filterReducer from './reducers/filterReducer'
@@ -443,27 +438,33 @@ const reducer = combineReducers({
 
 const store = createStore(
   reducer,
-  composeWithDevTools(
+  // highlight-start
+  composeWithDevTools( 
     applyMiddleware(thunk)
   )
+  // highlight-end
 )
 
 export default store
 ```
 
-Kun nyt avaat konsolin, välilehti _redux_ näyttää seuraavalta:
+Kun nyt avaat konsolin, välilehti <i>redux</i> näyttää seuraavalta:
 
-![](../assets/6/5e.png)
+![](../images/6/11.png)
 
 Konsolin avulla on myös mahdollista dispatchata actioneja storeen
 
-![](../assets/6/5f.png)
+![](../images/6/12.png)
 
 Storen tietyn hetkisen tilan lisäksi on myös mahdollista tarkastella, mikä on kunkin actionin tilalle aiheuttama muutos:
 
-![](../assets/6/5g.png)
+![](../images/6/13.png)
 
-Egghead.io:ssa on ilmaiseksi saatavilla Reduxin kehittäjän Dan Abramovin loistava tutoriaali [Getting started with Redux](https://egghead.io/courses/getting-started-with-redux). Neljässä viimeisessä videossa käytettävää _connect_-metodia käsittelemme vasta kurssin seuraavassa osassa.
+### Redux ja komponenttien tila
+
+Kurssi on ehtinyt pitkälle, ja olemme vihdoin päässeet siihen pisteeseen missä käytämme Reactia "oikein", eli React keskittyy pelkästään näkymien muodostamiseen ja sovelluksen tila sekä sovelluslogiikka on eristetty kokonaan React-komponenttien ulkopuolelle, Reduxiin ja action reducereihin.
+
+Entä _useState_-hookilla saatava komponenttien oma tila, onko sillä roolia jos sovellus käyttää Reduxia tai muuta komponenttien ulkoista tilanhallintaratkaisua? Jos sovelluksessa on monimutkaisempia lomakkeita, saattaa niiden lokaali tila olla edelleen järkevä toteuttaa funktiolla _useState_ saatavan tilan avulla. Lomakkeidenkin tilan voi toki tallettaa myös reduxiin, mutta jos lomakkeen tila on oleellinen ainoastaan lomakkeen täyttövaiheessa (esim. syötteen muodon validoinnin kannalta), voi olla viisaampi jättää tilan hallinta suoraan lomakkeesta huolehtivan komponentin vastuulle. 
 
 </div>
 
@@ -473,34 +474,32 @@ Egghead.io:ssa on ilmaiseksi saatavilla Reduxin kehittäjän Dan Abramovin loist
 
 #### 6.19 anekdootit ja backend, step4 
 
-Muuta redux-storen alustus tapahtumaan _redux-thunk_-kirjaston avulla toteutettuun asynkroniseen actioniin.
+Muuta redux-storen alustus tapahtumaan <i>redux-thunk</i>-kirjaston avulla toteutettuun asynkroniseen actioniin.
 
 #### 6.20 anekdootit ja backend, step5
 
-Muuta myös uuden anekdootin luominen tapahtumaan _redux-thunk_-kirjaston avulla toteutettuihin asynkronisiin actioneihin.
+Muuta myös uuden anekdootin luominen tapahtumaan <i>redux-thunk</i>-kirjaston avulla toteutettuihin asynkronisiin actioneihin.
 
 
 #### 6.18 anekdootit ja backend, step3
 
-FIX
-
-Muuta myös äänestäminen siten, että anekdootit talletetaan backendiin. Jos teet talletuksen HTTP PUT -operaatiolla, niin muista että joudut korvaamaan tallettaessa koko olion.
+Äänestäminen ei vielä talleta muutoksia backendiin. Korjaa tilanne <i>redux-thunk</i>-kirjastoa hyödyntäen.
 
 #### 6.21 anekdootit ja backend, step6
 
 Notifikaatioiden tekeminen on nyt hieman ikävää, sillä se edellyttää kahden actionin tekemistä ja _setTimeout_-funktion käyttöä:
 
 ```js
-this.props.notifyWith(`you voted '${anecdote.content}'`)
+props.setNotification(`you voted '${anecdote.content}'`)
 setTimeout(() => {
-  this.props.clearNotification()
-}, 10000)
+  props.clearNotification()
+}, 5000)
 ```
 
 Tee asynkrooninen action creator, joka mahdollistaa notifikaation antamisen seuraavasti:
 
 ```js
-this.props.notify(`you voted '${anecdote.content}'`, 10)
+props.setNotification(`you voted '${anecdote.content}'`, 10)
 ```
 
 eli ensimmäisenä parametrina on renderöitävä teksti ja toisena notifikaation näyttöaika sekunneissa.
