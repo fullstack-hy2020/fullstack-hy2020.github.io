@@ -252,10 +252,6 @@ Backendin alustavan sisällön saat esim. [täältä](https://github.com/fullsta
 
 Muuta uusien anekdoottien luomista siten, että anekdootit talletetaan backendiin.
 
-#### 6.18 anekdootit ja backend, step3
-
-Muuta myös äänestäminen siten, että anekdootit talletetaan backendiin. Jos teet talletuksen HTTP PUT -operaatiolla, niin muista että joudut korvaamaan tallettaessa koko olion.
-
 </div>
 
 <div class="content">
@@ -481,7 +477,14 @@ Muuta redux-storen alustus tapahtumaan _redux-thunk_-kirjaston avulla toteutettu
 
 #### 6.20 anekdootit ja backend, step5
 
-Muuta myös uuden anekdootin luominen ja äänestäminen tapahtumaan _redux-thunk_-kirjaston avulla toteutettuihin asynkronisiin actioneihin.
+Muuta myös uuden anekdootin luominen tapahtumaan _redux-thunk_-kirjaston avulla toteutettuihin asynkronisiin actioneihin.
+
+
+#### 6.18 anekdootit ja backend, step3
+
+FIX
+
+Muuta myös äänestäminen siten, että anekdootit talletetaan backendiin. Jos teet talletuksen HTTP PUT -operaatiolla, niin muista että joudut korvaamaan tallettaessa koko olion.
 
 #### 6.21 anekdootit ja backend, step6
 

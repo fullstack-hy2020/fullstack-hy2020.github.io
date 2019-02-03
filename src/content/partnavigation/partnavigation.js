@@ -44,9 +44,9 @@ module.exports = {
     // b valmiit tyylikirjastot'
     // c: 'Tyylien lisääminen sovellukseen',
     // d: 'Webpack',
-    // c: 'Testaus',
-    // d: 'React',
-    // e: 'React/Node-sovellusten tietoturva',
+    // e: 'vanha react'
+    // f: 'Ent to end -testaus',
+    // g: 'React/Node-sovellusten tietoturva',
     // f: 'Tyypitys',
     // g: 'Tulevaisuuden trendejä',
   },
