@@ -135,7 +135,7 @@ sillä ensin storen tila on 0. Kolmen <i>INCREMENT</i>-actionin jälkeen tila on
 
 Kolmas tärkeä metodi storella on [subscribe](https://redux.js.org/api-reference/store#subscribe-listener), jonka avulla voidaan määritellä takaisinkutsufunktioita, joita store kutsuu sen tilan muuttumisen yhteydessä.
 
-Jos esim. lisäisimme seuraavan funktion subscribellä, tulostuisi <i>jokainen storen muutos</i> konsoliin.
+Jos esim. lisäisimme seuraavan funktion subscribe:lla, tulostuisi <i>jokainen storen muutos</i> konsoliin.
 
 ```js
 store.subscribe(() => {
@@ -505,7 +505,7 @@ Spread-syntaksi toimii seuraavasti. Jos määrittelemme
 const luvut = [1, 2, 3]
 ```
 
-niin <code>...luvut</code> hajottaa taulukon yksittäisiksi alkioiksi, eli voimme sijoittaa sen esim, toisen taulukon sisään:
+niin <code>...luvut</code> hajottaa taulukon yksittäisiksi alkioiksi, eli voimme sijoittaa sen esim. toisen taulukon sisään:
 
 ```js
 [...luvut, 4, 5]
@@ -541,7 +541,7 @@ console.log(loput)  // tulostuu [3, 4, 5, 6]
 
 Tehdään hieman yksinkertaistettu versio osan 1 unicafe-tehtävästä. Hoidetaan sovelluksen tilan käsittely Reduxin avulla.
 
-Voit ottaa sovelluksesi pohjaksi repositorissa https://github.com/fullstack-hy2019/unicafe-redux olevan projektin.
+Voit ottaa sovelluksesi pohjaksi repositoriossa https://github.com/fullstack-hy2019/unicafe-redux olevan projektin.
 
 <i>Aloita poistamalla kloonatun sovelluksen git-konfiguraatio ja asentamalla riippuvuudet</i>
 
@@ -553,7 +553,7 @@ npm install
 
 #### 6.1: unicafe revisited, step1
 
-Ennen sivulla näkyvää toiminnallisuutta, toteutetaan storen edellyttämä toiminnallisuus.
+Ennen sivulla näkyvää toiminnallisuutta toteutetaan storen edellyttämä toiminnallisuus.
 
 Storeen täytyy tallettaa erikseen lukumäärä jokaisentyyppisestä palautteesta. Storen hallitsema tila on siis muotoa:
 
@@ -722,7 +722,7 @@ addNote = (event) => {
 }
 ```
 
-Uuden muistiinpanon sisältö saadaan suoraan lomakkeen syötekentästä, johon kentän nimeämisen ansiosta päästään käsiksi tapahtumaolion kautta <i>event.target.note.value</i>. Kannattaa huomata, että syötekentällä on oltava nimi, jotta sen arvoon on mahdollista päästään käsiksi:
+Uuden muistiinpanon sisältö saadaan suoraan lomakkeen syötekentästä, johon kentän nimeämisen ansiosta päästään käsiksi tapahtumaolion kautta <i>event.target.note.value</i>. Kannattaa huomata, että syötekentällä on oltava nimi, jotta sen arvoon on mahdollista päästä käsiksi:
 
 ```js
 <form onSubmit={addNote}>
@@ -768,7 +768,7 @@ const toggleImportanceOf = (id) => {
 }
 ```
 
-Actioneja luovia funktioita kutsutaan [action creaatoreiksi](https://redux.js.org/advanced/async-actions#synchronous-action-creators).
+Actioneja luovia funktioita kutsutaan [action creatoreiksi](https://redux.js.org/advanced/async-actions#synchronous-action-creators).
 
 
 Komponentin <i>App</i> ei tarvitse enää tietää mitään actionien sisäisestä esitystavasta, se saa sopivan actionin kutsumalla creator-funktiota:
@@ -931,7 +931,7 @@ Normaalisti (eli ei defaultina) exportattujen funktioiden käyttöönotto tapaht
 import { noteCreation } from './../reducers/noteReducer'
 ```
 
-Eriytetään uuden muistiinpanon luominen omaksi komponenteiksi. 
+Eriytetään uuden muistiinpanon luominen omaksi komponentiksi. 
 
 ```js
 import { createNote } from '../reducers/noteReducer' // highlight-line
@@ -1019,7 +1019,7 @@ Redux-sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https:
 
 ## Tehtäviä
 
-Toteutetaan nyt versio toisesta ensimmäisen osan anekdoottien äänestyssovelluksesta. Ota ratkaisusi pohjaksi repositoriossa https://github.com/fullstack-hy2019/redux-anecdotes> olevan projektin.
+Toteutetaan nyt versio toisesta ensimmäisen osan anekdoottien äänestyssovelluksesta. Ota ratkaisusi pohjaksi repositoriossa https://github.com/fullstack-hy2019/redux-anecdotes oleva projekti.
 
 Jos kloonaat projektin olemassaolevan git-reposition sisälle, <i>poista kloonatun sovelluksen git-konfiguraatio:</i>
 
