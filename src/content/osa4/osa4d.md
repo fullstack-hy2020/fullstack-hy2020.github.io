@@ -136,7 +136,7 @@ Käytännössä tämä tarkoittaa, että jos token on esimerkiksi merkkijono <i>
 Bearer eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW
 </pre>
 
-Modifioitu muistiinpanojen muuttuu seuraavasti:
+Muistiinpanojen luominen muuttuu seuraavasti:
 
 ```js
 const jwt = require('jsonwebtoken') //highlight-line
@@ -217,7 +217,7 @@ ja Visual Studio Coden REST clientillä
 
 ### Poikkeusten käsittely
 
-Tokenin verifiointi voi myös aiheuttaa poikkeuksen <i>JsonWebTokenError</i>. Jos esim. poistetaan tokenista pari merkkiä, ja yritetään luoda muistiinpano, tapahtuu seuraavati
+Tokenin verifiointi voi myös aiheuttaa poikkeuksen <i>JsonWebTokenError</i>. Jos esim. poistetaan tokenista pari merkkiä, ja yritetään luoda muistiinpano, tapahtuu seuraavasti
 
 ```bash
 JsonWebTokenError: invalid signature
@@ -227,7 +227,7 @@ JsonWebTokenError: invalid signature
     at notesRouter.post (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/controllers/notes.js:40:30)
 ```
 
-Syynä tokenin dekoodaamisen aiheuttamalle virheille on monia. Token voi olla viallinen, kuten esimerkissämme, väärennetty tai eliniältään vanhentunut. Laajennetaan virheidenkäsittelymiddlewarea huomioimaan tokenin dekoodaamisen aiheuttamat virheet
+Syynä tokenin dekoodaamisen aiheuttamalle virheelle on monia. Token voi olla viallinen, kuten esimerkissämme, väärennetty tai eliniältään vanhentunut. Laajennetaan virheidenkäsittelymiddlewarea huomioimaan tokenin dekoodaamisen aiheuttamat virheet
 
 ```js
 const unknownEndpoint = (request, response) => {
@@ -257,7 +257,7 @@ const errorHandler = (error, request, response, next) => {
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part4-8), branchissä <i>part4-8</i>.
 
-Jos sovelluksessa on useampia rajapintoja jotka vaativat kirjautumisen kannattaa JWT:n validointi eriyttää omaksi middlewarekseen, tai käyttää jotain jo olemassa olevaa kirjastoa kuten [express-jwt](https://www.npmjs.com/package/express-jwt).
+Jos sovelluksessa on useampia rajapintoja jotka vaativat kirjautumisen, kannattaa JWT:n validointi eriyttää omaksi middlewarekseen, tai käyttää jotain jo olemassa olevaa kirjastoa kuten [express-jwt](https://www.npmjs.com/package/express-jwt).
 
 ### Loppuhuomioita
 
