@@ -6,393 +6,405 @@ letter: a
 
 <div class="content">
 
-## Webpack
+Palataan osan 6 jälkeen jälleen Reduxittoman Reactin pariin.
 
-React on ollut jossain määrin kuuluisa siitä, että sovelluskehityksen edellyttämien työkalujen konfigurointi on ollut hyvin hankalaa. Kiitos [create-react-app](https://github.com/facebookincubator/create-react-app):in, sovelluskehitys Reactilla on kuitenkin nykyään tuskatonta, parempaa työskentelyflowta on tuskin ollut koskaan Javascriptillä tehtävässä selainpuolen sovelluskehityksessä.
+On erittäin tyypillistä, että web-sovelluksissa on navigaatiopalkki, jonka avulla on mahdollista vaihtaa sovelluksen näkymää. Muistiinpanosovelluksemme voisi sisältää pääsivun:
 
-Emme voi kuitenkaan turvautua ikuisesti create-react-app:in magiaan ja nyt onkin aika selvittää mitä kaikkea taustalla on. Avainasemassa React-sovelluksen toimintakuntoon saattamisessa on [webpack](https://webpack.js.org/)-niminen työkalu.
+![](../assets/6/6.png)
 
-### bundlaus
+ja omat sivunsa muistiinpanojen ja käyttäjien tietojen näyttämiseen:
 
-Olemme toteuttaneet sovelluksia jakamalla koodin moduuleihin, joita on _importattu_ niitä tarvitseviin paikkoihin. Vaikka ES6-moduulit ovatkin Javascript-standardissa määriteltyjä, ei mikään selain vielä osaa käsitellä moduuleihin jaettua koodia.
+![](../assets/6/7.png)
 
-Selainta varten moduuleissa oleva koodi _bundlataan_, eli siitä muodostetaan yksittäinen, kaiken koodin sisältävä tiedosto. Kun veimme Reactilla toteutetun frontendin tuotantoon osan 3 luvussa [Frontendin tuotantoversio](/osa3#frontendin-tuotantoversio), suoritimme bundlauksen komennolla _npm run build_. Konepellin alla kyseinen npm-skripti suorittaa bundlauksen webpackia hyväksi käyttäen. Tuloksena on joukko hakemistoon _build_ sijoitettavia tiedostoja:
+[Vanhan koulukunnan websovelluksessa](/osa0#perinteinen-web-sovellus) sovelluksen näyttämän sivun vaihto tapahtui siten että selain teki palvelimelle uuden HTTP GET -pyynnön ja renderöi sitten palvelimen palauttaman näkymää vastaavan HTML-koodin.
 
-<pre>
-├── asset-manifest.json
-├── favicon.ico
-├── index.html
-├── manifest.json
-├── service-worker.js
-└── static
-    ├── css
-    │   ├── main.1b1453df.css
-    │   └── main.1b1453df.css.map
-    └── js
-        ├── main.54f11b10.js
-        └── main.54f11b10.js.map
-</pre>
+Single page appeissa taas ollaan todellisuudessa koko ajan samalla sivulla, ja selaimessa suoritettava Javascript-koodi luo illuusion eri "sivuista". Jos näkymää vaihdettaessa tehdään HTTP-kutsuja, niiden avulla haetaan ainoastaan JSON-muotoista dataa jota uuden näkymän näyttäminen ehkä edellyttää.
 
-Hakemiston juuressa oleva sovelluksen "päätiedosto" _index.html_ lataa _script_-tagin avulla bundlatun Javascript-tiedoston:
+Navigaatiopalkki ja useita näkymiä sisältävä sovellus on erittäin helppo toteuttaa Reactilla.
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>React App</title>
-    <link href="/static/css/main.1b1453df.css" rel="stylesheet" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="text/javascript" src="/static/js/main.54f11b10.js"></script>
-  </body>
-</html>
-```
-
-Kuten esimerkistä näemme, create-react-app:illa tehdyssä sovelluksessa bundlataan Javascriptin lisäksi sovelluksen CSS-määrittelyt tiedostoon _static/css/main.1b1453df.css_
-
-Käytännössä bundlaus tapahtuu siten, että sovelluksen Javascriptille määritellään alkupiste, usein tiedosto _index.js_, ja bundlauksen yhteydessä webpack ottaa mukaan kaiken koodin mitä alkupiste importtaa, sekä importattujen koodien importtaamat koodit, jne.
-
-Koska osa importeista on kirjastoja, kuten React, Redux ja Axios, bundlattuun javascript-tiedostoon tulee myös kaikkien näiden sisältö.
-
-> Vanha tapa jakaa sovelluksen koodi moneen tiedostoon perustui siihen, että _index.html_ latasi kaikki sovelluksen tarvitsemat erilliset Javascript-tiedostot script-tagien avulla. Tämä on kuitenkin tehotonta, sillä jokaisen tiedoston lataaminen aiheuttaa pienen overheadin ja nykyään pääosin suositaankin koodin bundlaamista yksittäiseksi tiedostoksi.
-
-Tehdään nyt React-projektille sopiva webpack-konfiguraatio kokonaan käsin.
-
-Luodaan projektia varten hakemisto ja sen sisälle seuraavat hakemistot (dist ja src) sekä tiedostot:
-
-<pre>
-├── dist
-├── package.json
-├── src
-│   └── index.js
-└── webpack.config.js
-</pre>
-
-Tiedoston _package.json_ sisältö voi olla esim. seuraava:
-
-```json
-{
-  "name": "webpack-osa7",
-  "version": "0.0.1",
-  "description": "practising webpack",
-  "scripts": {},
-  "license": "MIT"
-}
-```
-
-Asennetaan webpack komennolla
-
-```bash
-npm install --save-dev webpack webpack-cli
-```
-
-Webpackin toiminta konfiguroidaan tiedostoon _webpack.config.js_, laitetaan sen alustavaksi sisällöksi seuraava
-
-```bash
-const path = require('path')
-
-const config = {
-  entry: './src/index.js',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'main.js'
-  }
-}
-module.exports = config
-```
-
-Määritellään sitten npm-skripti _build_ jonka avulla bundlaus suoritetaan
-
-```bash
-// ...
-"scripts": {
-  "build": "webpack --mode=development"
-},
-// ...
-```
-
-Lisätään hieman koodia tiedostoon _src/index.js_:
+Seuraavassa on eräs tapa:
 
 ```js
-const hello = name => {
-  console.log(`hello ${name}`);
-};
-```
-
-Kun nyt suoritamme komennon _npm run build_ webpack bundlaa koodin. Tuloksena on hakemistoon _dist_ sijoitettava tiedosto _main.js_:
-
-![](../images/7/1.png)
-
-Tiedostossa on paljon erikoisen näköistä tavaraa. Lopussa on mukana myös kirjoittamamme koodi.
-
-Lisätään hakemistoon _src_ tiedosto _App.js_ ja sille sisältö
-
-```js
-const App = () => {
-  return null;
-};
-
-export default App;
-```
-
-Importataan ja käytetään modulia _App_ tiedostossa _index.js_
-
-```js
-import App from './App';
-
-const hello = name => {
-  console.log(`hello ${name}`);
-};
-
-App();
-```
-
-Kun nyt suoritamme bundlauksen komennolla _npm run build_ huomaamme webpackin havainneen molemmat tiedostot:
-
-![](../images/7/2.png)
-
-Kirjoittamamme koodi löytyy melko kryptisesti muotoiltuna bundlen lopussa:
-
-```js
-/***/ "./src/App.js":
-/*!********************!*\
-  !*** ./src/App.js ***!
-  \********************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nconst App = () => {\n  return null;\n};\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (App);\n\n//# sourceURL=webpack:///./src/App.js?");
-
-/***/ }),
-
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App */ \"./src/App.js\");\n\n\nconst hello = name => {\n  console.log(`hello ${name}`);\n};\n\nObject(_App__WEBPACK_IMPORTED_MODULE_0__[\"default\"])();\n\n//# sourceURL=webpack:///./src/index.js?");
-```
-
-### Konfiguraatiotiedosto
-
-Katsotaan nyt tarkemmin konfiguraation _webpack.config.js_ tämänhetkistä sisältöä:
-
-```js
-const path = require('path');
-
-const config = {
-  entry: './src/index.js',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'main.js',
-  },
-};
-module.exports = config;
-```
-
-Konfiguraatio on Javascriptia ja tapahtuu eksporttaamalla määrittelyt sisältävä olio Noden moduulisyntaksilla.
-
-Tämän hetkinen minimaalinen määrittely on aika ilmeinen, kenttä [entry](https://webpack.js.org/concepts/#entry) kertoo sen tiedoston, mistä bundlaus aloitetaan.
-
-Kenttä [output](https://webpack.js.org/concepts/#output) taas kertoo minne muodostettu bundle sijoitetaan. Kohdehakemisto täytyy määritellä _absoluuttisena polkuna_, se taas onnistuu helposti [path.resolve](https://nodejs.org/docs/latest-v8.x/api/path.html#path_path_resolve_paths)-metodilla. [\_\_dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) on Noden globaali muuttuja, joka viittaa nykyiseen hakemistoon.
-
-### Webpack 4
-
-Helmikuun viimeisten päivien aikana julkaistu Webpackin versio 4 on vähentänyt välttämättömän konfiguroinnin määrää määrittelemällä Webpackille joukon oletusarvoisia konfiguraatioita.
-
-Konfiguraatiossamme _entryllä_ ja _outputilla_ on niiden oletusarvo, eli voisimme myös jättää ne määrittelemättä, ja tiedoston _webpack.config.js_ sisällöksi kävisi:
-
-```js
-const config = {};
-module.exports = config;
-```
-
-Jätämme kuitenkin _entryn_ ja _outputin_ määrittelyt tiedostoon.
-
-### Reactin bundlaaminen
-
-Muutetaan sitten sovellus minimalistiseksi React-sovellukseksi. Asennetaan tarvittavat kirjastot
-
-```bash
-npm install --save react react-dom
-```
-
-Liitetään tavanomaiset loitsut tiedostoon _index.js_
-
-```js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-
-ReactDOM.render(<App />, document.getElementById('root'));
-```
-
-ja muutetaan _App.js_ muotoon
-
-```react
-import React from 'react'
-
-const App = () => (
-  <div>hello webpack</div>
+const Home = () => (
+  <div> <h2>TKTL notes app</h2> </div>
 )
 
-export default App
+const Notes = () => (
+  <div> <h2>Notes</h2> </div>
+)
+
+const Users = () => (
+  <div> <h2>Users</h2> </div>
+)
+
+class App extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      page: 'home'
+    }
+  }
+
+  toPage = (page) => (event) => {
+    event.preventDefault()
+    this.setState({ page })
+  }
+
+  render() {
+    const content = () => {
+      if (this.state.page === 'home') {
+        return <Home />
+      } else if (this.state.page === 'notes') {
+        return <Notes />
+      } else if (this.state.page === 'users') {
+        return <Users />
+      }
+    }
+
+    return (
+      <div>
+        <div>
+          <a href="" onClick={ this.toPage('home') }>home</a> &nbsp;
+          <a href="" onClick={ this.toPage('notes') }>notes</a> &nbsp;
+          <a href="" onClick={ this.toPage('users') }>users</a>
+        </div>
+
+        {content()}
+      </div>
+    )
+  }
+}
 ```
 
-Tarvitsemme sovellukselle myös "pääsivuna" toimivan tiedoston _dist/index.html_ joka lataa _script_-tagin avulla bundlatun Javascriptin:
+Eli jokainen näkymä on toteutettu omana komponenttinaan ja sovelluksen tilassa pidetään tieto siitä, minkä näkymää vastaava komponentti menupalkin alla näytetään.
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>React App</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="text/javascript" src="./main.js"></script>
-  </body>
-</html>
+**Huom:** navigointivalikossa oleva _&amp;nbsp;_ tarkoittaa _a_-tagien väliin sjijoitettavaa välilyöntiä. CSS:n käyttö olisi luonnollisesti parempi tapa sivun ulkoasun muotoilulle mutta nyt tyydymme quick'n'dirty-ratkaisuun.
+
+Menetelmä ei kuitenkaan ole optimaalinen. Kuten kuvista näkyy, sivuston osoite pysyy samana vaikka välillä ollaankin eri näkymässä. Jokaisella näkymällä tulisi kuitenkin olla oma osoitteensa, jotta esim. bookmarkien tekeminen olisi mahdollista. Sovelluksessamme ei myöskään selaimen _back_-painike toimi loogisesti, eli _back_ ei vie edelliseksi katsottuun sovelluksen näkymään vaan jonnekin ihan muualle. Jos sovellus kasvaisi suuremmaksi ja sinne haluttaisiin esim. jokaiselle käyttäjälle sekä muistiinpanolle oma yksittäinen näkymänsä, itse koodattu _reititys_ eli sivuston navigaationhallinta menisi turhan monimutkaiseksi.
+
+Reactissa on onneksi valmis komponentti [React router](https://github.com/ReactTraining/react-router) joka tarjoaa erinomaisen ratkaisun React-sovelluksen navigaation hallintaan.
+
+Muutetaan ylläoleva sovellus käyttämään React routeria. Asennetaan React router komennolla
+
+```bash
+npm install --save react-router-dom
 ```
 
-Kun bundlaamme sovelluksen, törmäämme kuitenkin ongelmaan
+React routerin tarjoama reititys saadaan käyttöön muuttamalla sovellusta seuraavasti:
 
-![](../images/7/3.png)
+```js
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
-### Loaderit
+class App extends React.Component {
 
-Webpack mainitsee että saatamme tarvita _loaderin_ tiedoston _App.js_ käsittelyyn. Webpack ymmärtää itse vain Javascriptia ja vaikka se saattaa meiltä matkan varrella olla unohtunutkin, käytämme Reactia ohjelmoidessamme [JSX](https://facebook.github.io/jsx/):ää näkymien renderöintiin, eli esim. seuraava
+  render() {
+    return (
+      <div>
+        <Router>
+          <div>
+            <div>
+              <Link to="/">home</Link> &nbsp;
+              <Link to="/notes">notes</Link> &nbsp;
+              <Link to="/users">users</Link>
+            </div>
+            <Route exact path="/" render={() => <Home />} />
+            <Route path="/notes" render={() => <Notes />} />
+            <Route path="/users" render={() => <Users />} />
+          </div>
+        </Router>
+      </div>
+    )
+  }
+}
+```
 
-```react
-const App = () => (
-  <div>hello webpack</div>
+Reititys, eli komponenttien ehdollinen, selaimen _urliin perustuva_ renderöinti otetaan käyttöön sijoittamalla komponentteja _Router_-komponentin lapsiksi, eli _Router_-tagien sisälle.
+
+Huomaa, että vaikka komponenttiin viitataan nimellä _Router_ kyseessä on [BrowserRouter](https://reacttraining.com/react-router/web/api/BrowserRouter), sillä
+importtaus tapahtuu siten, että importattava olio uudelleennimetään:
+
+```js
+import { BrowserRouter as Router ... } from 'react-router-dom'
+```
+
+Manuaalin mukaan
+
+> _BrowserRouter_ is a _Router_ that uses the HTML5 history API (pushState, replaceState and the popstate event) to keep your UI in sync with the URL.
+
+Normaalisti selain lataa uuden sivun osoiterivillä olevan urlin muuttuessa. [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/):n avulla _BrowserRouter_ kuitenkin mahdollistaa sen, että selaimen osoiterivillä olevaa urlia voidaan käyttää React-sovelluksen sisäiseen "reitittämiseen", eli vaikka osoiterivillä oleva url muuttuu, sivun sisältöä manipuloidaan ainoastaan Javascriptillä ja selain ei lataa uutta sisältöä palvelimelta. Selaimen toiminta back- ja forward-toimintojen ja bookmarkien tekemisen suhteen on kuitenkin loogista, eli toimii kuten perinteisillä web-sivuilla.
+
+Routerin sisälle määritellään selaimen osoiteriviä muokkaavia _linkkejä_ komponentin [Link](https://reacttraining.com/react-router/web/api/Link) avulla. Esim.
+
+```bash
+<Link to="/notes">notes</Link>
+```
+
+luo sovellukseen linkin, jonka teksti on _notes_ ja jonka klikkaaminen vaihtaa selaimen osoiteriville urliksi _/notes_.
+
+Selaimen urliin perustuen renderöitävät komponentit määritellään komponentin [Route](https://reacttraining.com/react-router/web/api/Route) avulla. Esim.
+
+```bash
+<Route path="/notes" render={() => <Notes />} />
+```
+
+määrittelee, että jos selaimen osoiteena on _/notes_, renderöidään komponentti _Notes_.
+
+Sovelluksen juuren, eli osoitteen _/_ määritellään renderöivän komponentti _Home_:
+
+```bash
+<Route exact path="/" render={() => <Home />} />
+```
+
+joudumme käyttämään routen _path_ attribuutin edessä määrettä _exact_, muuten _Home_ renderöityy kaikilla muillakin poluilla, sillä juuri _/_ on kaikkien muiden polkujen _alkuosa_.
+
+### parametroitu route
+
+Tarkastellaan sitten hieman modifioitua versiota edellisestä esimerkistä. Esimerkin koodi kokonaisuudessaan on [täällä](https://github.com/FullStack-HY/FullStack-Hy.github.io/wiki/router-esimerkki).
+
+Sovellus sisältää nyt viisi eri näkymää, joiden näkyvyyttä kontrolloidaan routerin avulla. Edellisestä esimerkistä tuttujen komponenttien _Home_, _Notes_ ja _Users_ lisäksi mukana on kirjautumisnäkymää vastaava _Login_ ja yksittäisen muistiinpanon näkymää vastaava _Note_.
+
+_Home_ ja _Users_ ovat kuten aiemmassa esimerkissä. _Notes_ on hieman monimutkaisempi, se renderöi propseina saamansa muistiinpanojen listan siten, että jokaisen muistiinpanon nimi on klikattavissa
+
+![](../assets/6/8.png)
+
+Nimen klikattavuus on toteutettu komponentilla _Link_ ja esim. muistiinpanon, jonka id on 3 nimen klikkaaminen aiheuttaa selaimen osoitteen arvon päivittymisen muotoon _notes/3_:
+
+```js
+const Notes = ({notes}) => (
+  <div>
+    <h2>Notes</h2>
+    <ul>
+      {notes.map(note=>
+        <li key={note.id}>
+          <Link to={`/notes/${note.id}`}>{note.content}</Link>
+        </li>
+      )}
+    </ul>
+  </div>
 )
 ```
 
-ei ole "normaalia" Javascriptia, vaan JSX:n tarjoama syntaktinen oikotie määritellä _div_-tagiä vastaava React-elementti.
-
-[Loaderien](https://webpack.js.org/concepts/loaders/) avulla on mahdollista kertoa webpackille miten tiedostot tulee käsitellä ennen niiden bundlausta.
-
-Määritellään projektiimme Reactin käyttämän JSX:n normaaliksi Javascriptiksi muuntava loaderi:
+Kun selain siirtyy muistiinpanon yksilöivään osoitteeseen, esim. _notes/3_, renderöidään komponentti _Note_:
 
 ```js
-const config = {
-  entry: './src/index.js',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'main.js',
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['react'],
-        },
-      },
-    ],
-  },
-};
+const Note = ({note}) => {
+  return(
+  <div>
+    <h2>{note.content}</h2>
+    <div>{note.user}</div>
+    <div><strong>{note.important ? 'tärkeä' : ''}</strong></div>
+  </div>
+)}
 ```
 
-Loaderit määritellään kentän _module_ alle sijoitettavaan taulukkoon _rules_.
-
-Yksittäisen loaderin määrittely on kolmiosainen:
-
-```js
-{
-  test: /\.js$/,
-  loader: 'babel-loader',
-  query: {
-    presets: ['react']
-  }
-}
-```
-
-Kenttä _test_ määrittelee että käsitellään _.js_-päätteisiä tiedostoja, _loader_ kertoo että käsittely tapahtuu [babel-loader](https://github.com/babel/babel-loader):illa. Kenttä _query_ taas antaa loaderille sen toimintaa ohjaavia parametreja.
-
-Asennetaan loader ja sen tarvitsemat kirjastot _kehitysaikaiseksi riippuvuudeksi_:
+Tämä tapahtuu laajentamalla komponentissa _App_ olevaa reititystä seuraavasti:
 
 ```bash
-npm install --save-dev babel-core babel-loader babel-preset-react
-```
+<div>
+  <Router>
+    <div>
+      <div>
+        <Link to="/">home</Link> &nbsp;
+        <Link to="/notes">notes</Link> &nbsp;
+        <Link to="/users">users</Link> &nbsp;
+      </div>
 
-Nyt bundlaus onnistuu.
-
-Jos katsomme bundlattua koodia, huomaamme, että komponentti _App_ on muuttunut muotoon
-
-```js
-const App = () =>
-  react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-    'div',
-    null,
-    'hello webpack'
-  );
-```
-
-Eli JSX-syntaksin sijaan komponentit luodaan pelkällä Javascriptilla käyttäen Reactin funktiota [createElement](https://reactjs.org/docs/react-without-jsx.html).
-
-Sovellusta voi nyt kokeilla avaamalla tiedoston dist/index.html* selaimen \_open file* -toiminnolla:
-
-![](../assets/7/4.png)
-
-Tässä on jo melkein kaikki mitä tarvitsemme React-sovelluskehitykseen.
-
-### Transpilaus
-
-Prosessista, joka muuttaa Javascriptia muodosta toiseen käytetään englanninkielistä termiä [transpiling](https://en.wiktionary.org/wiki/transpile), joka taas on termi, joka viittaa koodin kääntämiseen (compile) sitä muuntamalla (transform). Suomenkielisen termin puuttuessa käytämme prosessista tällä kurssilla nimitystä _transpilaus_.
-
-Edellisen luvun konfiguraation avulla siis _transpiloimme_ JSX:ää sisältävän Javascriptin normaaliksi Javascriptiksi tämän hetken johtavan työkalun [babelin](https://babeljs.io/) avulla.
-
-Kuten osassa 1 jo mainittiin, läheskään kaikki selaimet eivät vielä osaa Javascriptin uusimpien versioiden ES6:n ja ES7:n ominaisuuksia ja tämän takia koodi yleensä transpiloidaan käyttämään vanhempaa Javascript-syntaksia ES5:ttä.
-
-Babelin suorittama transpilointiprosessi määritellään _pluginien_ avulla. Käytännössä useimmiten käytetään valmiita [presetejä](https://babeljs.io/docs/plugins/), eli useamman sopivan pluginin joukkoja.
-
-Tällä hetkellä sovelluksemme transpiloinnissa käytetään presetiä [react](https://babeljs.io/docs/plugins/preset-react/):
-
-```js
-{
-  test: /\.js$/,
-  loader: 'babel-loader',
-  query: {
-    presets: ['react']
-  }
-}
-```
-
-Otetaan käyttöön preset [env](https://babeljs.io/docs/plugins/preset-env/), joka sisältää kaiken hyödyllisen, minkä avulla uusimman standardin mukainen koodi saadaan transpiloitua ES5-standardin mukaiseksi koodiksi:
-
-```js
-{
-  test: /\.js$/,
-  loader: 'babel-loader',
-  query: {
-    presets: ['env', 'react']
-  }
-}
-```
-
-Preset asennetaan komennolla
-
-```js
-npm install babel-preset-env --save-dev
-```
-
-Kun nyt transpiloimme koodin, muuttuu se vanhan koulukunnan Javascriptiksi. Komponentin _App_ määrittely näyttää seuraavalta:
-
-```js
-var App = function App() {
-  return _react2.default.createElement('div', null, 'hello webpack');
-};
-```
-
-Muuttujan määrittely tapahtuu avainsanan _var_ avulla, sillä ES5 ei tunne avainsanaa _const_. Myöskään nuolifunktiot eivät ole käytössä, joten funktiomäärittely käyttää avainsanaa _function_.
-
+      <Route exact path="/" render={() => <Home />} />
+      <Route exact path="/notes" render={() =>
+        <Notes notes={this.state.notes} />}
+      />
+      <Route exact path="/notes/:id" render={({match}) =>
+        <Note note={noteById(match.params.id)} />}
+      />
+    </div>
+  </Router>
 </div>
+```
+
+Kaikki muistiinpanon renderöivään routeen on lisätty määre _exact path="/notes"_ sillä muuten se renderöityisi myös _/notes/3_-muotoisten polkujen yhteydessä.
+
+Yksittäisen muistiinpanon näkymän renderöivä route määritellään "expressin tyyliin" merkkaamalla reitin parametrina oleva osa merkinnällä _:id_
+
+```js
+<Route exact path="/notes/:id" />
+```
+
+Renderöityvän komponentin määrittävä _render_-attribuutti pääsee käsiksi id:hen parametrinsa [match](https://reacttraining.com/react-router/web/api/match) avulla seuraavasti:
+
+```js
+render={({match}) => <Note note={noteById(match.params.id)} />}
+```
+
+Muuttujassa _match.params.id_ olevaa id:tä vastaava muistiinpano selvitetään apufunktion _noteById_ avulla
+
+```js
+const noteById = (id) =>
+  this.state.notes.find(note => note.id === Number(id))
+```
+
+renderöityvä _Note_-komponentti saa siis propsina urlin yksilöivää osaa vastaavan muistiinpanon.
+
+### history
+
+Sovellukseen on myös toteutettu erittäin yksinkertainen kirjautumistoiminto. Jos sovellukseen ollaan kirjautuneena, talletetaan tieto kirjautuneesta käyttäjästä komponentin _App_ tilaan _this.state.user_.
+
+Mahdollisuus _Login_-näkymään navigointiin renderöidään menuun ehdollisesti
+
+```bash
+<Router>
+  <div>
+    <div>
+      <Link to="/">home</Link> &nbsp;
+      <Link to="/notes">notes</Link> &nbsp;
+      <Link to="/users">users</Link> &nbsp;
+      {this.state.user
+        ? <em>{this.state.user} logged in</em>
+        : <Link to="/login">login</Link>
+      }
+    </div>
+  ...
+  </div>
+</Router>
+```
+
+eli jos käyttäjä on kirjaantunut, renderöidäänkin linkin _Login_ sijaan kirjautuneen käyttäjän käyttäjätunnus:
+
+![](../assets/6/9.png)
+
+Kirjautumisen toteuttamiseen liittyy eräs mielenkiintoinen seikka. Kirjaantumislomakkeelle mennään selaimen osoitteen ollessa _/login_. Toiminnallisuuden määrittelevä Route on seuraavassa
+
+```bash
+<Route path="/login" render={({history}) =>
+  <Login history={history} onLogin={this.login} />}
+/>
+```
+
+Routen render-attribuutissa määritelty metodi ottaa nyt vastaan olion [history](https://reacttraining.com/react-router/web/api/history), joka tarjoaa mm. mahdollisuuden manipuloida selaimen osoiterivin arvoa ohjelmallisesti.
+
+Renderöitävälle _Login_-näkymälle annetaan parametriksi _history_-olio ja kirjautumisen komponentin _App_ tilaan synkronoiva funktio _this.login_:
+
+```bash
+<Login history={history} onLogin={this.login}/>}
+```
+
+Komponentin koodi seuraavassa
+
+```js
+const Login = ({onLogin, history}) => {
+  const onSubmit = (event) => {
+    event.preventDefault()
+    onLogin(event.target.username.value)
+    history.push('/')
+  }
+  return (
+    <div>
+      <h2>login</h2>
+      <form onSubmit={onSubmit}>
+        <div>
+          username: <input />
+        </div>
+        <div>
+          password: <input type="password" />
+        </div>
+        <button type="submit">login</button>
+      </form>
+    </div>
+  )
+}
+```
+
+Kirjautumisen yhteydessä funktiossa _onSubmit_ kutsutaan [history](https://reacttraining.com/react-router/web/api/history)-olion metodia _push_. Käytetty komento <code>history.push('/')</code> saa aikaan sen, että selaimen osoiteriville tulee osoitteeksi _/_ ja sovellus renderöi osoitetta vastaavan komponentin _Home_.
+
+### redirect
+
+Näkymän _Users_ routeen liittyy vielä eräs mielenkiintoinen detalji:
+
+```bash
+<Route path="/users" render={() =>
+  this.state.user
+    ? <Users />
+    : <Redirect to="/login" />
+  }/>
+```
+
+Jos käyttäjä ei ole kirjautuneena, ei renderöidäkään näkymää _Users_ vaan sen sijaan _uudelleenohjataan_ käyttäjä _Redirect_-komponentin avulla kirjautumisnäkymään
+
+```js
+<Redirect to="/login" />
+```
+
+Todellisessa sovelluksessa olisi kenties parempi olla kokonaan näyttämättä navigaatiovalikossa kirjautumista edellyttäviä näkymiä jos käyttäjä ei ole kirjautunut sovellukseen.
+
+Seuraavassa vielä komponentin _App_ koodi kokonaisuudessaan:
+
+```js
+class App extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      notes: [
+        {
+          id: 1,
+          content: 'HTML on helppoa',
+          important: true,
+          user: 'Matti Luukkainen'
+        },
+        // ...
+      ],
+      user: null
+    }
+  }
+
+  login = (user) => {
+    this.setState({user})
+  }
+
+  render() {
+    const noteById = (id) =>
+      this.state.notes.find(note => note.id === Number(id))
+
+    return (
+      <div>
+        <Router>
+          <div>
+            <div>
+              <Link to="/">home</Link> &nbsp;
+              <Link to="/notes">notes</Link> &nbsp;
+              <Link to="/users">users</Link> &nbsp;
+              {this.state.user
+                ? <em>{this.state.user} logged in</em>
+                : <Link to="/login">login</Link>
+              }
+            </div>
+
+            <Route exact path="/" render={() => <Home />} />
+            <Route exact path="/notes" render={() => <Notes notes={this.state.notes}/>} />
+            <Route exact path="/notes/:id" render={({match}) =>
+              <Note note={noteById(match.params.id)} />}
+            />
+            <Route path="/users" render={() =>
+              this.state.user
+                ? <Users />
+                : <Redirect to="/login" />
+              }/>
+            <Route path="/login" render={({history}) =>
+              <Login history={history} onLogin={this.login} />}
+            />
+          </div>
+        </Router>
+        <div>
+          <em>Note app, Department of Computer Science 2018</em>
+        </div>
+      </div>
+    )
+  }
+}
+```
+
+Render-metodissa määritellään myös kokonaan _Router_:in ulkopuolella oleva nykyisille web-sovelluksille tyypillinen _footer_-elementti, eli sivuston pohjalla oleva osa, joka on näkyvillä riippumatta siitä mikä komponentti sovelluksen reititetyssä osassa näytetään.
+
+**Huom:** edellä olevassa esimerkissä käytetään React Routerin versiota 4.2.6. Jos ja kun etsit esimerkkejä internetistä, kannattaa varmistaa, että niissä käytetään Routerista vähintään versiota 4.0. Nelosversio ei ole ollenkaan alaspäinyhteensopiva kolmosen kanssa, eli vanhaa React Routeria käyttävä koodi on täysin käyttökelvotonta Routerin versiota 4 käytettäessä.
+
+# tehtäviä
+
+Tee nyt tehtävät [6.16-6.18](/tehtävät#router)

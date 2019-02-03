@@ -40,15 +40,14 @@ module.exports = {
     c: 'Redux-sovelluksen kommunikointi palvelimen kanssa',
   },
   '7': {
-    // a: 'React-router
-    // b valmiit tyylikirjastot'
-    // c: 'Tyylien lisääminen sovellukseen',
-    // d: 'Webpack',
-    // e: 'vanha react'
-    // f: 'Ent to end -testaus',
-    // g: 'React/Node-sovellusten tietoturva',
-    // f: 'Tyypitys',
-    // g: 'Tulevaisuuden trendejä',
+    a: 'React-router',
+    // b: 'Lisää tyyleistä'
+    // c: 'Webpack',
+    // d: 'Vanha react'
+    // e: 'Ent to end -testaus',
+    // f: 'React/Node-sovellusten tietoturva',
+    // g: 'Tyypitys',
+    // h: 'Tulevaisuuden trendejä',
   },
   // '8': { a: 'GraphQL' },
 };

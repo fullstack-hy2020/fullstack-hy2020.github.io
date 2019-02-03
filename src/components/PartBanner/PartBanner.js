@@ -22,7 +22,7 @@ export const PartBanner = () => {
             'Express-sovellusten testaaminen',
             'React-sovelluksen testaaminen',
             'Sovelluksen tilan hallinta Redux-kirjastolla',
-            'Tulevaisuuden trendejä',
+            'React router, tyylikirjastot ja webpack',
           ];
 
           return (

@@ -6,477 +6,460 @@ letter: b
 
 <div class="content">
 
-### CSS
+## Valmiit käyttöliittymätyylikirjastot
 
-Lisätään sovellukseemme hieman CSS:ää. Tehdään tiedosto _src/index.css_
+Eräs lähestymistapa sovelluksen tyylien määrittelyyn on valmiin "UI frameworkin", eli suomeksi ehkä käyttöliittymätyylikirjaston käyttö.
 
-```css
-.container {
-  margin: 10;
-  background-color: #dee8e4;
+Ensimmäinen laajaa kuuluisuutta saanut UI framework oli Twitterin kehittämä [Bootstrap](https://getbootstrap.com/), joka lienee edelleen UI frameworkeista eniten käytetty. Viime aikoina UI frameworkeja on noussut kuin sieniä sateella. Valikoima on niin iso, ettei tässä kannata edes yrittää tehdä tyhjentävää listaa.
+
+Monet UI-frameworkit sisältävät web-sovellusten käyttöön valmiiksi määriteltyjä teemoja sekä "komponentteja", kuten painikkeita, menuja, taulukkoja. Termi komponentti on edellä kirjotettu hipsuissa sillä kyse ei ole samasta asiasta kuin React-komponentti. Useimmiten UI-frameworkeja käytetään sisällyttämällä sovellukseen frameworkin määrittelemät CSS-tyylitiedostot sekä Javascript-koodi.
+
+Monesta UI-frameworkista on tehty React-ystävällisiä versiota, joissa UI-frameworkin avulla määritellyistä "komponenteista" on tehty React-komponentteja. Esim. Bootstrapista on olemassa parikin React-versiota [reactstrap](http://reactstrap.github.io/) ja [react-bootstrap](https://react-bootstrap.github.io/).
+
+Katsotaan seuraavaksi kahta UI-framworkia bootstrapia ja [semantic ui](https://semantic-ui.com/):ta.
+Lisätään molempien avulla samantapaiset tyylit luvun [React-router](/osa6/#react-router) sovellukseen.
+
+### react bootstrap
+
+Aloitetaan bootstrapista, käytetään kirjastoa [react-bootstrap](https://react-bootstrap.github.io/).
+
+Asennetaan kirjasto suorittamalla komento
+
+```bash
+npm install --save react-bootstrap
+```
+
+Lisätään sitten sovelluksen _public/index.html_ tiedoston _head_-tagin sisään bootstrapin css-määrittelyt lataava rivi:
+
+```html
+<head>
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous"
+  />
+  // ...
+</head>
+```
+
+Kun sovellus ladataan uudelleen, näyttää se jo aavistuksen tyylikkäämmältä:
+
+![](../assets/6/10.png)
+
+Bootstrapissa koko sivun sisältö renderöidään yleensä [container](https://getbootstrap.com/docs/4.0/layout/overview/#containers):ina, eli käytännössä koko sovelluksen ympäröivä _div_-elementti merkitään luokalla _container_:
+
+```react
+// ...
+
+class App extends React.Component {
+  // ...
+  render() {
+    return (
+      <div className="container">
+        // ...
+      </div>
+    )
+  }
 }
 ```
 
-Määritellään tyyli käytettäväksi komponentissa _App_
+Sovelluksen ulkoasu muuttuu siten, että sisältö ei ole enää yhtä kiinni selaimen reunoissa:
+
+![](../assets/6/11.png)
+
+Muutetaan seuraavaksi komponenttia _Notes_ siten, että se renderöi muistiinpanojen listan [taulukkona](https://getbootstrap.com/docs/4.0/content/tables/). React bootstrap tarjoaa valmiin komponentin [Table](https://react-bootstrap.github.io/components/table/), joten CSS-luokan käyttöön ei ole tarvetta.
 
 ```react
-const App = () => (
-  <div className="container">
-    hello webpack
+const Notes = ({notes}) => (
+  <div>
+    <h2>Notes</h2>
+    <Table striped>
+      <tbody>
+        {notes.map(note=>
+          <tr key={note.id}>
+            <td>
+              <Link to={`/notes/${note.id}`}>{note.content}</Link>
+            </td>
+            <td>
+              {note.user}
+            </td>
+          </tr>
+        )}
+      </tbody>
+    </Table>
   </div>
 )
 ```
 
-ja importataan se tiedostossa _index.js_
+Ulkoasu on varsin tyylikäs:
+
+![](../assets/6/12.png)
+
+Huomaa, että koodissa käytettävät React bootstrapin komponentit täytyy importata, eli koodiin on lisättävä:
 
 ```js
-import './index.css';
+import { Table } from 'react-bootstrap';
 ```
 
-Transpilointi hajoaa, ja CSS:ää varten onkin otettava käyttöön [css](https://webpack.js.org/loaders/css-loader/)- ja [style](https://webpack.js.org/loaders/style-loader/)-loaderit:
+#### Lomake
+
+Parannellaan seuraavaksi näkymän _Login_ kirjautumislomaketta Bootstrapin [lomakkeiden](https://getbootstrap.com/docs/4.0/components/forms/) avulla.
+
+React bootstrap tarjoaa valmiit [komponentit](https://react-bootstrap.github.io/components/forms/) myös lomakkeiden muodostamiseen (dokumentaatio tosin ei ole paras mahdollinen):
+
+```react
+const Login = ({onLogin, history}) => {
+  // ...
+  return (
+    <div>
+      <h2>login</h2>
+      <form onSubmit={onSubmit}>
+        <FormGroup>
+          <ControlLabel>username:</ControlLabel>
+          <FormControl
+            type="text"
+            name="username"
+          />
+          <ControlLabel>password:</ControlLabel>
+          <FormControl
+            type="password"
+          />
+          <Button bsStyle="success" type="submit">login</Button>
+        </FormGroup>
+      </form>
+    </div>
+)}
+```
+
+Importoitavien komponenttien määrä kasvaa:
 
 ```js
-{
-  rules: [
-    {
-      test: /\.js$/,
-      loader: 'babel-loader',
-      query: {
-        presets: ['env', 'react'],
-      },
-    },
-    {
-      test: /\.css$/,
-      loaders: ['style-loader', 'css-loader'],
-    },
-  ];
-}
+import {
+  Table,
+  FormGroup,
+  FormControl,
+  ControlLabel,
+  Button,
+} from 'react-bootstrap';
 ```
 
-[css-loaderin](https://webpack.js.org/loaders/css-loader/) tehtävänä on ladata _CSS_-tiedostot, ja [style-loader](https://webpack.js.org/loaders/style-loader/) generoi koodiin CSS:t sisältävän _style_-elementin.
+Lomake näyttää parantelun jälkeen seuraavalta:
 
-Näin konfiguroituna CSS-määrittelyt sisällytetään sovelluksen Javascriptin sisältävään tiedostoon _main.js_. Sovelluksen päätiedostossa _index.html_ ei siis ole tarvetta erikseen ladata CSS:ää.
+![](../assets/6/12b.png)
 
-CSS voidaan tarpeen vaatiessa myös generoida omaan tiedostoonsa esim. [mini-css-extract-pluginin](https://github.com/webpack-contrib/mini-css-extract-plugin) avulla.
+#### Notifikaatio
 
-Kun loaderit asennetaan
+Toteutetaan sovellukseen kirjautumisen jälkeinen _notifikaatio_:
 
-```bash
-npm install style-loader css-loader --save-dev
-```
+![](../assets/6/13.png)
 
-bundlaus toimii taas ja sovellus saa uudet tyylit.
-
-### Webpack-dev-server
-
-Sovelluskehitys onnistuu jo, mutta development workflow on suorastaan hirveä (alkaa jo muistuttaa Javalla tapahtuvaa sovelluskehitystä...), muutosten jälkeen koodin on bundlattava ja selain uudelleenladattava jos haluamme testata koodia.
-
-Ratkaisun tarjoaa [webpack-dev-server](https://webpack.js.org/guides/development/#using-webpack-dev-server). Asennetaan se komennolla
-
-```bash
-npm install --save-dev webpack-dev-server
-```
-
-Määritellään dev-serverin käynnistävä npm-skripti:
-
-```bash
-{
-  // ...
-  "scripts": {
-    "build": "webpack --mode=development",
-    "start": "webpack-dev-server --mode=development"
-  },
-  // ...
-}
-```
-
-Lisätään tiedostoon _webpack.config.js_ kenttä _devServer_
+Asetetaan notifikaatio kirjautumisen yhteydessä komponentin _App_ tilan kenttään _message_:
 
 ```js
-const config = {
-  entry: './src/index.js',
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'main.js',
-  },
-  devServer: {
-    contentBase: path.resolve(__dirname, 'dist'),
-    compress: true,
-    port: 3000,
-  },
-  // ...
+login = user => {
+  this.setState({ user, message: `welcome ${user}` });
+  setTimeout(() => {
+    this.setState({ message: null });
+  }, 10000);
 };
 ```
 
-Komento _npm start_ käynnistää nyt dev-serverin porttiin, eli sovelluskehitys tapahtuu avaamalla tuttuun tapaan selain osoitteeseen <http://localhost:3000>. Kun teemme koodiin muutoksia, reloadaa selain automaattisesti itsensä.
-
-Päivitysprosessi on nopea, dev-serveriä käytettäessä webpack ei bundlaa koodia normaaliin tapaan tiedostoksi _main.js_, bundlauksen tuotos on olemassa ainoastaan keskusmuistissa.
-
-Laajennetaan koodia muuttamalla komponentin _App_ määrittelyä seuraavasti:
+ja renderöidään viesti Bootstrapin [Alert](https://getbootstrap.com/docs/4.0/components/alerts/)-komponentin avulla. React bootstrap tarjoaa tähän jälleen valmiin [React-komponentin](https://react-bootstrap.github.io/components/alerts/):
 
 ```react
-class App extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      counter: 0
-    }
-  }
+{(this.state.message &&
+  <Alert color="success">
+    {this.state.message}
+  </Alert>
+)}
+```
 
+#### Navigaatiorakenne
+
+Muutetaan vielä lopuksi sovelluksen navigaatiomenu käyttämään Bootstrapin [Navbaria](https://getbootstrap.com/docs/4.0/components/navbar/). Tähänkin React bootstrap tarjoaa [valmiit komponentit](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly), dokumentaatio on hieman kryptistä, mutta trial and error johtaa lopulta toimivaan ratkaisuun:
+
+```bash
+<Navbar inverse collapseOnSelect>
+  <Navbar.Header>
+    <Navbar.Brand>
+      Anecdote app
+    </Navbar.Brand>
+    <Navbar.Toggle />
+  </Navbar.Header>
+  <Navbar.Collapse>
+    <Nav>
+      <NavItem href="#">
+        <Link to="/">home</Link>
+      </NavItem>
+      <NavItem href="#">
+        <Link to="/notes">notes</Link>
+      </NavItem>
+      <NavItem href="#">
+        <Link to="/users">users</Link>
+      </NavItem>
+      <NavItem>
+        {this.state.user
+          ? <em>{this.state.user} logged in</em>
+          : <Link to="/login">login</Link>
+        }
+      </NavItem>
+    </Nav>
+  </Navbar.Collapse>
+</Navbar>
+```
+
+Ulkoasu on varsin tyylikäs
+
+![](../assets/6/14.png)
+
+Jos selaimen kokoa kaventaa, huomaamme että menu "kollapsoituu" ja sen saa näkyville vain klikkaamalla:
+
+![](../assets/6/15.png)
+
+Bootstrap ja valtaosa tarjolla olevista UI-frameworkeista tuottavat [responsiivisia](https://en.wikipedia.org/wiki/Responsive_web_design) näkymiä, eli sellaisia jotka renderöityvät vähintään kohtuullisesti monen kokoisilla näytöillä.
+
+Chromen konsolin avulla on mahdollista simuloida sovelluksen käyttöä erilaisilla mobiilipäätteillä
+
+![](../assets/6/16.png)
+
+Sovellus toimii hyvin, mutta konsoliin vilkaisu paljastaa erään ikävän detaljin:
+
+![](../assets/6/17.png)
+
+Syy valituksiin on navigaatiorakenteessa
+
+```bash
+<NavItem href="#">
+  <Link to="/">home</Link>
+</NavItem>
+```
+
+Nämä sisäkkäiset komponentit sisältävät molemmat _a_-tagin ja React hermostuu tästä.
+
+Ongelma on ikävä ja sen kiertäminen on toki mahdollista, katso esim.
+<https://serverless-stack.com/chapters/adding-links-in-the-navbar.html>
+
+Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/FullStack-HY/FullStack-Hy.github.io/wiki/bootstrap).
+
+### Semantic UI
+
+Olen käyttänyt bootstrapia vuosia, mutta siirryin hiljattain [Semantic UI](https://semantic-ui.com/):n käyttäjäksi. Kurssin tehtävien [palautusovellus](https://studies.cs.helsinki.fi/fs-stats) on tehty Semanticilla ja kokemukset ovat olleet rohkaisevia, erityisesti semanticin [React-tuki](https://react.semantic-ui.com) on ensiluokkainen ja dokumentaatiokin huomattavasti parempi kuin bootstrapissa.
+
+Lisätään nyt [React-router](/osa6/#react-router)-sovellukselle edellisen luvun tapaan tyylit semanticilla.
+
+Aloitetaan asentamalla [semantic-ui-react](https://react.semantic-ui.com)-kirjasto:
+
+```bash
+npm install --save semantic-ui-react
+```
+
+Lisätään sitten sovelluksen tiedostoon _public/index.html_ head-tagin sisään semanticin css-määrittelyt lataava rivi (joka löytyy [tästä](https://react.semantic-ui.com/usage#content-delivery-network-cdn)):
+
+```html
+<head>
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"></link>
+  // ...
+</head>
+```
+
+Sijoitetaan koko sovelluksen renderöimä sisältö Semanticin komponentin [Container](https://react.semantic-ui.com/elements/container) sisälle.
+
+Semanticin dokumentaatio sisältää jokaisesta komponentista useita esimerkkikoodinpätkiä, joiden avulla komponenttien käytön periaatteet on helppo omaksua:
+
+![](../images/6/18.png)
+
+Muutetaan komponentin App uloin _div_-elementti _Containeriksi_:
+
+```bash
+import { Container } from 'semantic-ui-react'
+
+// ...
+
+class App extends React.Component {
+  // ...
   render() {
     return (
-      <div className="container">
-        <p>hello webpack {this.state.counter} clicks</p>
-        <button onClick={()=>this.setState({counter: this.state.counter+1})}>click</button>
-      </div>
+      <Container>
+        // ...
+      </Container>
     )
   }
 }
 ```
 
-Kannattaa huomata, että virheviestit eivät renderöidy selaimeen kuten create-react-app:illa tehdyissä sovelluksissa, eli on seurattava tarkasti konsolia:
+Sivun sisältö ei ole enää reunoissa kiinni:
 
-![](../images/7/5.png)
+![](../images/6/19.png)
 
-Sovellus toimii hyvin ja kehitys on melko sujuvaa.
-
-### Sourcemappaus
-
-Erotetaan napin klikkauksenkäsittelijä omaksi funktioksi:
+Edellisen luvun tapaan, renderöidään muistiinpanot taulukkona, komponentin [Table](https://react.semantic-ui.com/collections/table) avulla. Koodi näyttää seuraavalta
 
 ```react
-class App extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      counter: 0
-    }
-  }
+import { Table } from 'semantic-ui-react'
 
-  onClick() {
-    this.setState({ counter: this.state.counter + 1 })
-  }
+const Notes = ({ notes }) => (
+  <div>
+    <h2>Notes</h2>
+    <Table striped celled>
+      <Table.Body>
+        {notes.map(note =>
+          <Table.Row key={note.id}>
+            <Table.Cell>
+              <Link to={`/notes/${note.id}`}>{note.content}</Link>
+            </Table.Cell>
+            <Table.Cell>
+              {note.user}
+            </Table.Cell>
+          </Table.Row>
+        )}
+      </Table.Body>
+    </Table>
+  </div>
+)
+```
 
-  render() {
-    return (
-      <div className="container">
-        <p>hello webpack {this.state.counter} clicks</p>
-        <button onClick={this.onClick}>click</button>
-      </div>
-    )
+Muistiinpanojen lista näyttää seuraavalta:
+
+![](../images/6/20.png)
+
+#### Lomake
+
+Otetaan kirjautumissivulla käyttöön Semanticin [Form](https://react.semantic-ui.com/collections/form)-komponentti:
+
+```
+import { Form, Button } from 'semantic-ui-react'
+
+const Login = ({ onLogin, history }) => {
+  const onSubmit = (event) => {
+    // ...
   }
+  return (
+    <div>
+      <h2>login</h2>
+      <Form onSubmit={onSubmit}>
+        <Form.Field>
+          <label>username</label>
+          <input name='username' />
+        </Form.Field>
+        <Form.Field>
+          <label>password</label>
+          <input type='password' />
+        </Form.Field>
+        <Button type='submit'>login</Button>
+      </Form>
+    </div>
+  )
 }
 ```
 
-Sovellus ei enää toimi, ja konsoli kertoo virheestä
+Ulkoasu näyttää seuraavalta:
 
-![](../images/7/6.png)
+![](../images/6/21.png)
 
-Tiedämme tietenkin nyt että virhe on metodissa onClick, mutta jos olisi kyse suuremmasta sovelluksesta, on virheilmoitus sikäli hyvin ikävä, että sen ilmoittama paikka:
+#### Notifikaatio
 
-<pre>
-App.js:38 Uncaught TypeError: Cannot read property 'setState' of undefined
-    at onClick (App.js:38)
-</pre>
+Edellisen luvun tapaan, toteutetaan sovellukseen kirjautumisen jälkeinen _notifikaatio_:
 
-ei vastaa alkuperäisen koodin virheen sijaintia. Jos klikkaamme virheilmoitusta, huomaamme, että näytettävä koodi on jotain ihan muuta kuin kirjoittamamme koodi:
+![](../images/6/22.png)
 
-![](../images/7/6a.png)
-
-Haluamme tietenkin, että virheilmoitusten yhteydessä näytetään kirjoittamamme koodi.
-
-Korjaus on onneksi hyvin helppo, pyydetään webpackia generoimaan bundlelle ns. [source map](https://webpack.js.org/configuration/devtool/), jonka avulla bundlea suoritettaessa tapahtuva virhe on mahdollista _mäpätä_ alkuperäisen koodin vastaavaan kohtaan.
-
-Source map saadaan generoitua lisäämällä konfiguraatioon kenttä _devtool_ ja sen arvoksi 'source-map':
+Kuten edellisessä luvussa, asetetaan notifikaatio kirjautumisen yhteydessä komponentin _App_ tilan kenttään _message_:
 
 ```js
-const config = {
-  entry: './src/index.js',
-  output: {
-    // ...
-  },
-  devServer: {
-    // ...
-  },
-  devtool: 'source-map',
-  // ..
+login = user => {
+  this.setState({ user, message: `welcome ${user}` });
+  setTimeout(() => {
+    this.setState({ message: null });
+  }, 10000);
 };
 ```
 
-Konfiguraatioiden muuttuessa webpack tulee käynnistää uudelleen, on tosin mahdollista konfiguroida webpack tarkkailemaan konfiguraatioiden muutoksia, mutta emme tee sitä.
-
-Nyt virheilmoitus on hyvä
-
-![](../assets/7/7.png)
-
-Source mapin käyttö mahdollistaa myös chromen debuggerin luontevan käytön
-
-![](../assets/7/8.png)
-
-Kyseinen virhe on siis jo [osasta 1](/osa1#metodien-käyttö-ja-this) tuttu this:in kadottaminen. Korjataan ongelma määrittelemällä metodi uudelleen meille jo kovin tutulla syntaksilla:
-
-```js
-onClick = () => {
-  this.setState({ counter: this.state.counter + 1 });
-};
-```
-
-Tästä aiheutuu kuitenkin virheilmoitus
-
-![](../assets/7/9.png)
-
-Virhe johtuu siitä, että käyttämämme syntaksi ei ole vielä mukana Javascriptin uusimmassa standardissa ES7. Saamme syntaksin käyttöön asentamalla [transform-class-properties](https://babeljs.io/docs/plugins/transform-class-properties/)-pluginin komennolla
-
-```bash
-npm install babel-plugin-transform-class-properties --save-dev
-```
-
-ja kehottamalla _babel-loader_:ia käyttämään pluginia:
-
-```js
-{
-  test: /\.js$/,
-  loader: 'babel-loader',
-  query: {
-    presets: ['env', 'react'],
-    plugins: [require('babel-plugin-transform-class-properties')]
-  }
-}
-```
-
-### Koodin minifiointi
-
-Kun sovellus viedään tuotantoon, on siis käytössä tiedostoon _main.js_ webpackin generoima koodi. Vaikka sovelluksemme sisältää omaa koodia vain muutaman rivin, on tiedoston _main.js_ koko 557450 tavua, sillä se sisältää myös kaiken React-kirjaston koodin. Tiedoston koollahan on sikäli väliä, että selain joutuu lataamaan tiedoston kun sovellusta aletaan käyttämään. Nopeilla internetyhteyksillä 557450 tavua ei sinänsä ole ongelma, mutta jos mukaan sisällytetään enemmän kirjastoja, alkaa sovelluksen lataaminen pikkuhiljaa hidastua etenkin mobiilikäytössä.
-
-Jos tiedoston sisältöä tarkastelee, huomaa että sitä voisi optimoida huomattavasti koon suhteen esim. poistamalla kommentit. Tiedostoa ei kuitenkaan kannata lähteä optimoimaan käsin, sillä tarkoitusta varten on olemassa monia työkaluja.
-
-Javascript-tiedostojen optimointiprosessista käytetään nimitystä _minifiointi_. Alan johtava työkalu tällä hetkellä lienee [UglifyJS](http://lisperator.net/uglifyjs/).
-
-Webpackin versiosta 4 alkaen pluginia ei ole tarvinnut konfiguroida erikseen, riittää että muutetaan tiedoston _package.json_ määrittelyä siten, että koodin bundlaus tapahtuu _production_-moodissa:
-
-```json
-{
-  "name": "webpack-osa7",
-  "version": "0.0.1",
-  "description": "practising webpack",
-  "scripts": {
-    "build": "webpack --mode=production",
-    "start": "webpack-dev-server --mode=development"
-  },
-  "license": "MIT",
-  "dependencies": {
-    // ...
-  },
-  "devDependencies": {
-    // ...
-  }
-}
-```
-
-Kun sovellus bundlataan uudelleen, pienenee tuloksena oleva _main.js_ mukavasti
-
-```bash
--rw-r--r--  1 mluukkai  984178727  101944 Mar  3 21:29 main.js
-```
-
-Minifioinnin lopputulos on kuin vanhan liiton c-koodia, kommentit ja jopa turhat välilyönnit ja rivinvaihdot on poistettu ja muuttujanimet ovat yksikirjaimisia:
-
-```js
-function h(){if(!d){var e=u(p);d=!0;for(var t=c.length;t;){for(s=c,c=[];++f<t;)s&&s[f].run();f=-1,t=c.length}s=null,d=!1,function(e){if(o===clearTimeout)return clearTimeout(e);if((o===l||!o)&&clearTimeout)return o=clearTimeout,clearTimeout(e);try{o(e)}catch(t){try{return o.call(null,e)}catch(t){return o.call(this,e)}}}(e)}}a.nextTick=function(e){var t=new Array(arguments.length-1);if(arguments.length>1)
-```
-
-### Sovelluskehitys- ja tuotantokonfiguraatio
-
-Lisätään sovellukselle backend. Käytetään jo tutuksi käynyttä muistiinpanoja tarjoavaa palvelua.
-
-Talletetaan seuraava sisältö tiedostoon _db.json_
-
-```json
-{
-  "notes": [
-    {
-      "important": true,
-      "content": "HTML on helppoa",
-      "id": "5a3b8481bb01f9cb00ccb4a9"
-    },
-    {
-      "important": false,
-      "content": "Mongo osaa tallettaa oliot",
-      "id": "5a3b920a61e8c8d3f484bdd0"
-    }
-  ]
-}
-```
-
-Tarkoituksena on konfiguroida sovellus webpackin avulla siten, että paikallisesti sovellusta kehitettäessä käytetään backendina portissa 3001 toimivaa json-serveriä.
-
-Bundlattu tiedosto laitetaan sitten käyttämään todellista, osoitteessa <https://radiant-plateau-25399.herokuapp.com/api/notes> olevaa backendia.
-
-Asennetaan _axios_, käynnistetään json-server ja muokataan komponenttia _App_ seuraavasti:
+ja renderöidään viesti käyttäen komponenttia [Message](https://react.semantic-ui.com/collections/message):
 
 ```react
-class App extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      counter: 0,
-      noteCount: 0
+{(this.state.message &&
+  <Message success>
+    {this.state.message}
+  </Message>
+)}
+```
+
+#### Navigaatiorakenne
+
+Navigaatiorakenne toteutetaan komponentin [Menu](https://react.semantic-ui.com/collections/menu) avulla:
+
+```bash
+<Menu inverted>
+  <Menu.Item link>
+    <Link to="/">home</Link>
+  </Menu.Item>
+  <Menu.Item link>
+    <Link to="/notes">notes</Link>
+  </Menu.Item>
+  <Menu.Item link>
+    <Link to="/users">users</Link>
+  </Menu.Item>
+  <Menu.Item link>
+    {this.state.user
+      ? <em>{this.state.user} logged in</em>
+      : <Link to="/login">login</Link>
     }
-  }
-
-  componentDidMount() {
-    axios.get('http://localhost:3001/notes').then(result => {
-      this.setState({ noteCount: result.data.length })
-    })
-  }
-
-  onClick = () => {
-    this.setState({ counter: this.state.counter + 1 })
-  }
-
-  render() {
-    return (
-      <div className="container">
-        <p>hello webpack {this.state.counter} clicks</p>
-        <button onClick={this.onClick}>click</button>
-        <p>{this.state.noteCount} notes in server</p>
-      </div>
-    )
-  }
-}
+  </Menu.Item>
+</Menu>
 ```
 
-Koodissa on nyt kovakoodattuna sovelluskehityksessä käytettävän palvelimen osoite. Miten saamme osoitteen hallitusti muutettua osoittamaan internetissä olevaan backendiin bundlatessamme koodin?
+Lopputulos näyttää seuraavalta:
 
-Muutetaan _webpack.config.js_ oliosta [funktioksi](https://webpack.js.org/configuration/configuration-types/#exporting-a-function):
+![](../images/6/23.png)
 
-```js
-const path = require('path');
+Bootstrapin yhteydessä esiintynyttä sisäkkäisen _a_-tagien ongelmaa ei semanticin kanssa ole.
 
-const config = (env, argv) => {
-  return {
-    entry: './src/index.js',
-    output: {
-      // ...
-    },
-    devServer: {
-      // ...
-    },
-    devtool: 'source-map',
-    module: {
-      // ...
-    },
-    plugins: [
-      // ...
-    ],
-  };
-};
+Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/FullStack-HY/FullStack-Hy.github.io/wiki/semantic-ui).
 
-module.exports = config;
-```
+### Loppuhuomioita
 
-Määrittely on muuten täysin sama, mutta aiemmin eksportattu olio on nyt määritellyn funktion paluuarvo. Funktio saa parametrit _env_ ja _argv_, joista jälkimmäisen avulla saamme selville npm-skriptissä määritellyn _moden_.
+Ero react-bootstrapin ja semantic-ui-reactin välillä ei ole suuri. On makuasia kummalla tuotettu ulkoasu on tyylikkäämpi. Oma vuosia kestäneen bootstrapin käytön jälkeinen siirtymiseni semanticiin johtuu semanticin saumattomammasta React-tuesta, laajemmasta valmiiden komponenttien valikoimasta ja paremmasta sekä selkeämmästä dokumentaatiosta. Semantic UI projektin kehitystyön jatkuvuuden suhteen on kuitenkin viime aikoina ollut ilmoilla muutamia [kysymysmerkkejä](https://github.com/Semantic-Org/Semantic-UI/issues/6109), ja tilannetta kannattaakin seurata.
 
-Webpackin [DefinePlugin](https://webpack.js.org/plugins/define-plugin/):in avulla voimme määritellä globaaleja _vakioarvoja_, joita on mahdollista käyttää bundlattavassa koodissa. Määritellään nyt vakio _BACKEND_URL_, joka saa eri arvon riippuen siitä ollaanko kehitysympäristössä vai tehdäänkö tuotantoon sopivaa bundlea:
+Esimerkissä käytettiin UI-frameworkeja niiden React-integraatiot tarjoavien kirjastojen kautta.
+
+Sen sijaan että käytimme kirjastoa [React bootstrap](https://react-bootstrap.github.io/), olisimme voineet aivan yhtä hyvin käyttää Bootstrapia suoraan, liittämällä HTML-elementteihin CSS-luokkia. Eli sen sijaan että määrittelimme esim. taulukon komponentin _Table_ avulla
 
 ```bash
-const path = require('path')
-const webpack = require('webpack')
-
-const config = (env, argv) => {
-  console.log('argv', argv.mode)
-
-  const backend_url = argv.mode === 'production'
-    ? 'https://radiant-plateau-25399.herokuapp.com/api/notes'
-    : 'http://localhost:3001/notes'
-
-  return {
-    entry: './src/index.js',
-    output: {
-      path: path.resolve(__dirname, 'dist'),
-      filename: 'main.js'
-    },
-    devServer: {
-      contentBase: path.resolve(__dirname, "dist"),
-      compress: true,
-      port: 3000
-    },
-    devtool: 'source-map',
-    module: {
-      // ...
-    },
-    plugins: [
-      new webpack.DefinePlugin({
-        BACKEND_URL: JSON.stringify(backend_url)
-      })
-    ]
-  }
-
-}
-
-module.exports = config
+<Table striped>
+  // ...
+</Table>
 ```
 
-Määriteltyä vakiota käytetään koodissa seuraavasti:
-
-```js
-componentDidMount() {
-  axios.get(BACKEND_URL)
-    .then(result => {
-      this.setState({noteCount: result.data.length})
-    })
-}
-```
-
-Jos kehitys- ja tuotantokonfiguraatio eriytyvät paljon, saattaa olla hyvä idea [eriyttää konfiguraatiot](https://webpack.js.org/guides/production/) omiin tiedostoihinsa.
-
-Tuotantoversiota eli bundlattua sovellusta on mahdollista kokeilla lokaalisti suorittamalla komento
+olisimme voineet käyttää normaalia HTML:n taulukkoa _table_ ja CSS-luokkaa
 
 ```bash
-npx static-server
+<table className="table striped">
+  // ...
+</table>
 ```
 
-hakemistossa _dist_ jolloin sovellus käynnistyy oletusarvoisesti osoitteeseen <http://localhost:9080>.
+Taulukon määrittelyssä React bootstrapin tuoma etu ei ole suuri.
 
-### Polyfill
+Tiiviimmän ja ehkä paremmin luettavissa olevan kirjoitusasun lisäksi toinen etu React-kirjastoina olevissa UI-frameworkeissa on se, että kirjastojen mahdollisesti käyttämä Javascript-koodi on sisällytetty React-komponentteihin. Esim. osa Bootstrapin komponenteista edellyttää toimiakseen muutamaakin ikävää [Javascript-riippuvuutta](https://getbootstrap.com/docs/4.0/getting-started/introduction/#js) joita emme mielellään halua React-sovelluksiin sisällyttää.
 
-Sovelluksemme on valmis ja toimii muiden selaimien kohtuullisen uusilla versiolla, mutta Internet Explorerilla sovellus ei toimi. Syynä tähän on se, että _axiosin_ ansiosta koodissa käytetään [Promiseja](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), mikään IE:n versio ei kuitenkaan niitä tue:
+React-kirjastoina tarjottavien UI-frameworkkien ikävä puoli verrattuna frameworkin "suoraan käyttöön" on React-kirjastojen API:n mahdollinen epästabiilius ja osittain huono dokumentaatio. Tosin [react-semanticin](https://react.semantic-ui.com) suhteen tilanne on paljon parempi kuin monien muiden UI-frameworkien sillä kyseessä on virallinen React-integraatio.
 
-![](../assets/7/13.png)
+Kokonaan toinen kysymys on se kannattaako UI-frameworkkeja ylipäätän käyttää. Kukin muodostakoon oman mielipiteensä, mutta CSS:ää taitamattomalle ja puutteellisilla design-taidoilla varustetulle ne ovat varsin käyttökelpoisia työkaluja.
 
-On paljon muutakin standardissa määriteltyjä asioita, joita IE ei tue, esim. niinkin harmiton komento kuin taulukoiden [find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) ylittää IE:n kyvyt:
+### Muita UI-frameworkeja
 
-![](../assets/7/14.png)
+Luetellaan tässä kaikesta huolimatta muitakin UI-frameworkeja. Jos oma suosikkisi ei ole mukana, tee pull request
 
-Tälläisessä tilanteessa normaali koodin transpilointi ei auta, sillä transpiloinnissa koodia käännetään uudemmasta Javascript-syntaksista vanhempaan, selaimien paremmin tukemaan syntaksiin. Promiset ovat syntaktisesti täysin IE:n ymmärrettävissä, IE:ltä vain puuttuu toteutus promisesta, samoin on tilanne taulukoiden suhteen, IE:llä taulukoiden _find_ on arvoltaan _undefined_.
+- <http://www.material-ui.com/>
+- <https://bulma.io/>
+- <https://ant.design/>
+- <https://foundation.zurb.com/>
 
-Jos haluamme sovelluksen IE-yhteensopivaksi, tarvitsemme [polyfilliä](https://remysharp.com/2010/10/08/what-is-a-polyfill), eli koodia, joka lisää puuttuvan toiminnallisuuden vanhempiin selaimiin.
+Alun perin tässä osassa oli tarkoitus käyttää [Material UI](http://www.material-ui.com/):ta, mutta kirjasto on juuri nyt kiivaan kehityksen alla ennen version 1.0 julkaisemista ja osa dokumentaation esimerkeistä ei toiminut uusimmalla versiolla. Voikin olla viisainta odotella Materialin kanssa versiota 1.0.
 
-Polyfillaus on mahdollista hoitaa [Webpackin ja Babelin avulla](https://babeljs.io/docs/usage/polyfill/) tai asentamalla yksi monista tarjolla olevista polyfill-kirjastoista.
+## Tehtäviä
 
-Esim. kirjaston [promise-polyfill](https://www.npmjs.com/package/promise-polyfill) tarjoaman polyfillin käyttö on todella helppoa, koodiin lisätään seuraava:
+Tee nyt tehtävät [6.21-6.23](/tehtävät#ui-framework)
 
-```js
-import PromisePolyfill from 'promise-polyfill';
-
-if (!window.Promise) {
-  window.Promise = PromisePolyfill;
-}
-```
-
-Jos globaalia _Promise_-olioa ei ole olemassa, eli selain ei tue promiseja, sijoitetaan polyfillattu promise globaaliin muuttujaan. Jos polyfillattu promise on hyvin toteutettu, muun koodin pitäisi toimia ilman ongelmia.
-
-Kattavahko lista olemassaolevista polyfilleistä löytyy [täältä](https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills).
-
-Selaimien yhteensopivuus käytettävien API:en suhteen kannattaakin tarkistaa esim. [https://caniuse.com](https://caniuse.com)-sivustolta tai [Mozillan sivuilta](https://developer.mozilla.org/en-US/).
-
-### Eject
-
-Create-react-app käyttää taustalla webpackia. Jos peruskonfiguraatio ei riitä, on projektit mahdollista [ejektoida](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md#npm-run-eject), jolloin kaikki konepellin alla oleva magia häviää, ja konfiguraatiot tallettuvat hakemistoon _config_ ja muokattuun _package.json_-tiedostoon.
-
-Jos create-react-app:illa tehdyn sovelluksen ejektoi, paluuta ei ole, sen jälkeen kaikesta konfiguroinnista on huolehdittava itse. Konfiguraatiot eivät ole triviaaleimmasta päästä ja create-react-appin ja ejektoinnin sijaan parempi vaihtoehto saattaa joskus olla tehdä itse koko webpack-konfiguraatio.
-
-Ejektoidun sovelluksen konfiguraatioiden lukeminen on suositeltavaa ja sangen opettavaista!
 
 ## Lisää tyyleistä
 

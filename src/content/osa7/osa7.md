@@ -5,9 +5,7 @@ part: 7
 
 <div class="intro">
 
-Kurssilla tutustutaan Javascriptilla tapahtuvaan moderniin websovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST-rajapinnoissa.
-
-Kurssilla käsitellään myös sovellusten testaamista, konfigurointia ja suoritusympäristöjen hallintaa sekä NoSQL-tietokantoja.
+Kurssin seitsemäs osa käsittelee montaa teemaa. Ensin tutustutaan React routeriin, joka avulla sovellus voidaan jakaa useiksi eri näkymiksi, joiden näkymistä hallitaan selaimen osoiterivillä olevalla URL:illa. Tämän jälkeen katsotaan vielä muutamaa tapaa miten CSS-tyylejä voi lisätä React-sovelluksille. Olemme koko kurssin käyttäneen create-react-app:ia sovelluten rungon luomiseen. Nyt katsomme miten konepellin alla oleva Webpack-toimii ja miten voimme sen avulla konfiguroida sovelluksen kokonaan itse. 
 
 **Tämän osan tehtävien deadline on sunnuntaina 10.3. klo 23:59**
 
