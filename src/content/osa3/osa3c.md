@@ -738,6 +738,55 @@ app.use(errorHandler)
 
 Virhekäsittelijä tarkastaa onko kyse <i>CastError</i>-poikkeuksesta, eli virheellisestä olioid:stä, jos on, se lähettä pyynnön tehneelle selaimelle vastauksen käsittelijän parametrina olevan response-olion avulla. Muussa tapauksessa se siirtää funktiolla <em>next</em> virheen käsittelyn Expressin oletusarvoisen virheidenkäsittelijän hoidettavavksi.
 
+### Middlewarejen käyttöönottojärjestys
+
+Koska middlewaret suoritetaan siinä järjestyksessä, missä ne on otettu käyttöön funktiolla _app.use_ on niiden määrittelyn kanssa oltava tarkkana.
+
+Oikeaoppinen järjestys seuraavassa:
+
+```js
+app.use(express.static('build'))
+app.use(bodyParser.json())
+app.use(logger)
+
+app.post('/api/notes', (request, response) => {
+  const body = request.body
+  // ...
+})
+
+const unknownEndpoint = (request, response) => {
+  // ...
+}
+
+// olemattomien osoitteiden käsittely
+app.use(unknownEndpoint)
+
+const errorHandler = (error, request, response, next) => {
+  // ...
+}
+
+// virheellisten pyyntöjen käsittely
+app.use(errorHandler)
+```
+
+_bodyParser_ on syytä ottaa käyttöön melkeimpä ensimmäisenä. Jos järjestys olisi seuraava
+
+```js
+app.use(logger) // request.body on tyhjä
+
+app.post('/api/notes', (request, response) => {
+  // request.body on tyhjä
+  const body = request.body
+  // ...
+})
+
+app.use(bodyParser.json())
+```
+
+ei HTTP-pyynnön mukana oleva data olisi loggerin eikä POST-pyynnön käsittelyn aikana käytettävissä, kentässä _request.body_ olisi tyhjä olio.
+
+Oleellista on myös ottaa käyttöön virheenkäsittelijä viimeisenä.
+
 ### Muut operaatiot
 
 Toteutetaan vielä jäljellä olevat operaatiot, eli yksittäisen muistiinpanon poisto ja muokkaus.
