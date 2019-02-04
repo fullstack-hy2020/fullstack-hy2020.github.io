@@ -755,7 +755,7 @@ app.post('/api/notes', (request, response) => {
 })
 
 const unknownEndpoint = (request, response) => {
-  // ...
+  response.status(404).send({ error: 'unknown endpoint' })
 }
 
 // olemattomien osoitteiden käsittely
@@ -785,7 +785,24 @@ app.use(bodyParser.json())
 
 ei HTTP-pyynnön mukana oleva data olisi loggerin eikä POST-pyynnön käsittelyn aikana käytettävissä, kentässä _request.body_ olisi tyhjä olio.
 
-Oleellista on myös ottaa käyttöön virheenkäsittelijä viimeisenä.
+Oleellista on myös ottaa käyttöön virheiden viimeisenä.
+
+Myös seuraava järjestys aiheuttaisi ongelman
+
+```js
+const unknownEndpoint = (request, response) => {
+  response.status(404).send({ error: 'unknown endpoint' })
+}
+
+// olemattomien osoitteiden käsittely
+app.use(unknownEndpoint)
+
+app.get('/api/notes', (request, response) => {
+  // ...
+})
+```
+
+Nyt olemattomien osoitteiden käsittely on sijoitettu <i>ennen HTTP GET -pyynnön käsittelyä</i>. Koska olemattomien osoitteiden käsittelijä vastaa kaikkiin pyyntöihin <i>404 unknown endpoint</i>, ei mihinkään sen jälkeen määriteltyyn reittiin tai middlewareen (poikkeuksena virheenkäsittelijä) enää mennä. 
 
 ### Muut operaatiot
 
