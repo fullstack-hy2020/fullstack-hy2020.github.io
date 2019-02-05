@@ -59,9 +59,11 @@ Tarkemmat arvosanarajat määritellään siinä vaiheessa kun kurssin tehtävien
 
 ### Aiemmin suoritetun kurssin täydentäminen
 
-Jos olet suorittanut kurssin vuonna 2018 alle 7 opintoviikon laajuisena, voit täydentää nyt suoritustasi. Käytännössä täydentäminen tapahtuu siten, että voit korvata tämän kurssin <i>osia</i> viime vuonna suorittamasi kurssin aikana palauttamillasi osilla. Eli jos olet suorittanut kurssin esim. avoimen yliopiston kautta kolmen opintopisteen laajuisena, voit korvata vanhan suorituksesi osilla 0-3 tämän kurssin osat 0-3. 
+Jos olet suorittanut kurssin vuonna 2018 alle 7 opintopisteen laajuisena, voit täydentää nyt suoritustasi. Käytännössä täydentäminen tapahtuu siten, että voit korvata tämän kurssin <i>osia</i> viime vuonna suorittamasi kurssin aikana palauttamillasi osilla. Eli jos olet suorittanut kurssin esim. avoimen yliopiston kautta kolmen opintopisteen laajuisena, voit korvata vanhan suorituksesi osilla 0-3 tämän kurssin osat 0-3. 
 
-Voit korvata ainoastaan kokonaisia osia, eli jos teit viime vuonna esim. 50% jonkin osan tehtävistä, et voi tällä kurssilla jatkaa samaa osaa. Viime vuotisten osien "hyväksiluku" tapahtuu tehtävien palautussovelluksella
+Voit korvata ainoastaan kokonaisia osia, eli jos teit viime vuonna esim. 50% jonkin osan tehtävistä, et voi tällä kurssilla jatkaa samaa osaa. 
+
+Viime vuotisten osien "hyväksiluku" tapahtuu tehtävien [palautussovelluksen](https://studies.cs.helsinki.fi/courses/#fullstack2019) välilehdellä <i>crediting</i>.
 
 ### Tehtävien palauttaminen
 
