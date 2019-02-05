@@ -6,7 +6,9 @@ letter: b
 
 <div class="content">
 
-## Valmiit käyttöliittymätyylikirjastot
+Osassa 2 jo katsottu kahta tapaa tyylien lisäämiseen eli vanhan koulukunnan [yksittäistä CSS](/osa2#tyylien-lisääminen)-tiedostoa, [inline-tyylejä](/osa6#inline-tyylit). Kolme tapaa...
+
+### Valmiit käyttöliittymätyylikirjastot
 
 Eräs lähestymistapa sovelluksen tyylien määrittelyyn on valmiin "UI frameworkin", eli suomeksi ehkä käyttöliittymätyylikirjaston käyttö.
 
@@ -456,12 +458,32 @@ Luetellaan tässä kaikesta huolimatta muitakin UI-frameworkeja. Jos oma suosikk
 
 Alun perin tässä osassa oli tarkoitus käyttää [Material UI](http://www.material-ui.com/):ta, mutta kirjasto on juuri nyt kiivaan kehityksen alla ennen version 1.0 julkaisemista ja osa dokumentaation esimerkeistä ei toiminut uusimmalla versiolla. Voikin olla viisainta odotella Materialin kanssa versiota 1.0.
 
-## Tehtäviä
+</div>
+<div class="tasks">
 
-Tee nyt tehtävät [6.21-6.23](/tehtävät#ui-framework)
+### Tehtäviä
 
+#### 7.4: styled anecdotes, step1
 
-## Lisää tyyleistä
+Ota käyttöön bootstrap (tai valitsemasi framework) ja renderöi anekdoottien lista tyylikkäämmin, esim. bootstrapissa [ListGroup](https://react-bootstrap.github.io/components/list-group/)-komponentin tai Semanticissa [Tablen](https://react.semantic-ui.com/collections/table) avulla:
+
+![](../assets/teht/47b.png)
+
+#### 7.5: styled anecdotes, step2
+
+Tutustu [bootstrapin](https://react-bootstrap.github.io/layout/grid/) tai [semanticin](https://react.semantic-ui.com/collections/grid) grideihin ja muuta niiden avulla sovelluksen _about_-sivua siten, että oikeassa reunassa näytetään jonkun kuuluisan tietojenkäsittelijän kuva:
+
+![](../assets/teht/48.png)
+
+#### 7.6: styled anecdotes, step3
+
+Lisää vielä vapaavalintaisia tyylejä valitsemallasi UI frameworkilla. Voit merkata tehtävän, jos käytät aikaa vapaavalintaisten tyylien lisäämiseen noin 30 minuuttia.
+
+</div>
+
+<div class="content">
+
+### Lisää tyyleistä
 
 Osissa 2 ja 6 on jo katsottu muutamaa tapaa tyylien lisäämiseen eli vanhan koulukunnan [yksittäistä CSS](/osa2#tyylien-lisääminen)-tiedostoa, [inline-tyylejä](/osa6#inline-tyylit) ja [UI-frameworkien](/osa6#valmiit-käyttöliittymätyylikirjastot) kuten Bootstrapin käyttöä.
 
