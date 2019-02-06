@@ -612,7 +612,7 @@ Lisätään tilanteeseen yksinkertainen virheidenkäsittelijä:
 app.get('/api/notes/:id', (request, response) => {
   Note.findById(request.params.id)
     .then(note => {
-      response.json(formatNote(note))
+      response.json(note.toJSON())
     })
     .catch(error => {
       console.log(error);
@@ -660,7 +660,7 @@ app.get('/api/notes/:id', (request, response) => {
     .then(note => {
       // highlight-start
       if (note) {
-        response.json(formatNote(note))
+        response.json(note.toJSON())
       } else {
         response.status(404).end() 
       }
