@@ -467,6 +467,10 @@ Luetellaan tässä kaikesta huolimatta muitakin UI-frameworkeja. Jos oma suosikk
 </div>
 <div class="tasks">
 
+</div>
+
+<div class="tasks">
+
 ### Tehtäviä
 
 #### 7.4: styled anecdotes, step1
@@ -491,7 +495,7 @@ Tapoja liittää tyylejä React-sovellukseen on jo näkemiämme lisäksi [muitak
 
 Mielenkiintoisen näkökulman tyylien määrittelyyn tarjoaa ES6:n [tagged template literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) -syntaksia hyödyntävä [styled components](https://www.styled-components.com/) -kirjasto.
 
-Tehdään styled-componentsin avulla esimerkkisovellukseemme muutama tyylillinen muutos:
+Tehdään styled-componentsin avulla esimerkkisovellukseemme muutama tyylillinen muutos. Tehdään ensin kaksi tyylimäärittelyyn käytettävää komponenttia:
 
 ```js
 import styled from 'styled-components'
@@ -508,7 +512,39 @@ const Button = styled.button`
 const Input = styled.input`
   margin: 0.25em;
 `
+```
 
+Kodi luo HTML:n elementeistä <i>button</i> ja <i>input</i> tyyleillä rikastetut versiot ja sijoitetaan ne muuttujiin </i>Button</i> ja <i>Input</i>:
+
+Tyylien määrittelyn syntaksi on varsin mielenkiintoinen, css-määrittelyt asetetaan backtick-hipsujen sisään.
+
+Määritellyt komponentit toimivat kuten normaali <i>button</i> ja <i>input</i> ja sovelluksessa käytetään niitä  normaaliin tapaan:
+
+```js
+const Login = (props) => {
+  // ...
+  return (
+    <div>
+      <h2>login</h2>
+      <form onSubmit={onSubmit}>
+        <div>
+          username: 
+          <Input /> // highlight-line
+        </div>
+        <div>
+          password: 
+          <Input type='password' /> // highlight-line
+        </div>
+        <Button type="submit" primary=''>login</Button> // highlight-line
+      </form>
+    </div>
+  )
+}
+```
+
+Määritellään vielä seuraavat tyylien lisäämiseen tarkoitetut komponentit, jotka ovat kaikki rikastettuja versioita <i>div</i>-elementistä:
+
+```js
 const Page = styled.div`
   padding: 1em;
   background: papayawhip;
@@ -526,54 +562,17 @@ const Footer = styled.div`
 `
 ```
 
-```js
-let Login = (props) => {
-  const onSubmit = (event) => {
-    event.preventDefault()
-    props.onLogin('mluukkai')
-    props.history.push('/')
-  }
-
-  return (
-    <div>
-      <h2>login</h2>
-      <form onSubmit={onSubmit}>
-        <div>
-          username: <Input />
-        </div>
-        <div>
-          password: <Input type='password' />
-        </div>
-        <Button type="submit" primary=''>login</Button>
-      </form>
-    </div>
-  )
-}
-```
+Otetaan uudet komponentit käyttöön sovelluksessa:
 
 ```js
-class App extends React.Component {
-  //...
-
-  render() {
-    return (
-      <div>
-        <StyledHello counter={this.state.counter} />
-        <Button onClick={this.onClick}>click</Button>
-      </div>
-    )
-  }
-}
-
-
 const App = () => {
   // ...
 
   return (
-    <Page>
+    <Page> // highlight-line
       <Router>
         <div>
-          <Navigation>
+          <Navigation> // highlight-line
             <Link style={padding} to="/">home</Link> 
             <Link style={padding} to="/notes">notes</Link> 
             <Link style={padding} to="/users">users</Link> 
@@ -584,7 +583,9 @@ const App = () => {
           </Navigation>
 
           <Route exact path="/" render={() => <Home />} />
-          <Route exact path="/notes" render={() => <Notes notes={notes} />} />
+          <Route exact path="/notes" render={() => 
+            <Notes notes={notes} />} 
+          />
           <Route exact path="/notes/:id" render={({ match }) =>
             <Note note={noteById(match.params.id)} />}
           />
@@ -596,7 +597,7 @@ const App = () => {
           />
         </div>
       </Router>
-      <Footer>
+      <Footer> // highlight-line
         <em>Note app, Department of Computer Science 2019</em>
       </Footer>
     </Page>
@@ -604,53 +605,140 @@ const App = () => {
 }
 ```
 
-Heti alussa luodaan HTML:n _button_-elementistä jalostettu versio ja sijoitetaan se muuttujaan _Button_:
+Lopputulos on seuraavassa:
+
+![](../images/7/18.png)
+
+Styled components on nostanut tasaisesti suosiotaan viime aikoina ja tällä hetkellä näyttääkin, että se on melko monien mielestä paras tapa React-sovellusten tyylien määrittelyyn.
+
+</div>
+
+<!--
+
+### Komponenttikohtainen CSS ja CSS-moduulit
+
+Tapoja liittää tyylejä React-sovellukseen on jo näkemiämme lisäksi [muitakin](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b). Katsotaan vielä lyhyestä muutamaa tapaa.
+
+On melko yleistä, että React-sovelluksen CSS määritellään useassa eri tiedostossa. Koko sovellusta koskeva CSS saattaa tiedostossa <i>index.js</i> ja sen lisäksi eri komponentteja koskevat määrittelyt tehdään komponenttikohtaisiin tiedostoihin. 
+
+Voisimme määritellä esimerkkisovelukselle fontin ja taustavärin tiedostossa <i>index.css</i>
+
+```css
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  background: lightgrey;
+}
+```
+
+ja importata tyylit sovellukseen
 
 ```js
-const Button = styled.button`
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
+import './index.css'
+
+ReactDOM.render(<App />, document.getElementById('root'));
+```
+
+Tämän lisäksi voisimme määritellä komponentille <i>Login</i> oman tyylimäärityksen
+
+```css
+button {
+  background: Bisque;
   font-size: 1em;
   margin: 1em;
   padding: 0.25em 1em;
-  border: 2px solid black;
+  border: 2px solid Chocolate;
   border-radius: 3px;
-`;
+}
+
+input {
+  margin: 0.25em;
+}
 ```
 
-Tyylien määrittelyn syntaksi on varsin mielenkiintoinen.
-
-Määritelty komponentti toimii kuten normaali _button_ ja sovellus renderöi sen normaaliin tapaan:
+ja importata sen komponentin koodissa
 
 ```js
-<button onClick="{this.onClick}">click</button>
+import React from 'react'
+import { withRouter } from 'react-router-dom'
+import './login.css' // highlight-line
+
+const Login = (props) => {
+  // ...
+}
+
+
+export default withRouter(Login)
 ```
 
-Seuraavaksi koodi määrittelee normaalin React-komponentin
+Yksi CSS:n keskeisistä ongelmista on se, että CSS-määrittelyt ovat <i>globaaleja</i>. Suurissa tai jo keskikokoisissakin sovelluksissa tämä aiheuttaa ongelmia, sillä tiettyihin komponentteihin vaikuttavat monissa paikoissa määritellyt tyylit ja lopputulos voi olla vaikeasti ennakoitavissa.
+
+Oletetaan, että nyt haluaisimme lisätä komponenttiin <i>Note</i> painikkeen jolla on oma tyylinsä. Määritellään tyyli tiedostoon <i>note.css</i>
+
+```css
+button {
+  font-size: 2em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid black;
+  border-radius: 1px;
+}
+```
+
+ja importataan se komponentin koodista
+
+```css
+import React from 'react'
+import './note.css' // highlight-line
+
+const Note = ({ note }) => {
+  return (
+    <div>
+      <h2>{note.content}</h2>
+      <div>{note.user}</div>
+      <div><strong>{note.important ? 'tärkeä' : ''}</strong></div>
+      <button>merkitse tärkeäksi</button> // highlight-line
+    </div>
+  )
+}
+```
+
+Lopputulos ei kuitenkaan ole haluamamme kaltainen. Koska molemmat komponentit asettavat tyylit button-elementille, käykin niin että myöhemmin määritelty ylikirjoittaa aiemmin määritellyn, ja molempien tyyli on sama.
+
+Perinteinen tapa kiertää ongelma on ollut käyttää monimutkaisempia CSS-luokan nimiä, esim. _Login_button_ ja _Note_button_, tämä muuttuu kuitenkin jossain vaiheessa varsin hankalaksi.
+
+[CSS-moduulit](https://github.com/css-modules/css-modules) tarjoaa tähän erään ratkaisun.
+
+Lyhyesti ilmaisten periaatteena on tehdä CSS-määrittelyistä lähtökohtaisesti lokaaleja, vain yhden komponentin kontekstissa voimassa olevia, joka taas mahdollistaa luontevien CSS-luokkanimien käytön. Käytännössä tämä lokaalius toteutetaan generoimalla konepellin alla CSS-luokille uniikit luokkanimet.
+
+Muutetaan tyylejä käyttäviä komponentteja hiukan:
 
 ```js
-const Hello = ({ className, counter }) => (
-  <p className={className}>
-    hello webpack {counter} clicks
+import styles from './Hello.css'
+
+const Hello = ({ counter }) => (
+  <p className={styles.content}>
+    hello webpack {counter} clicks!
   </p>
 )
+
+export default Hello
 ```
 
-ja lisää tälle tyylit metodin _styled_ avulla:
+Erona siis edelliseen on se, että tyyliit "sijoitetaan muuttujaan" _styles_
 
 ```js
-const StyledHello = styled(Hello)`
-  color: blue;
-  font-weight: bold;
-`;
+import styles from './Hello.css';
 ```
 
-Muuttujaan _StyledHello_ sijoitettua tyyleillä jalostettua komponenttia käytetään kuten alkuperäistä:
+Nyt tyylitiedoston määrittelelyihin voi viitata muuttujan _styles_ kautta, ja CSS-luokan liittäminen tapahtuu seuraavasti
 
 ```js
-<StyledHello counter={this.state.counter} />
+<p className={styles.content}>
 ```
 
-Sovelluksen ulkoasu seuraavassa:
-
-![](../images/7/1.png)
-
-</div>
+>

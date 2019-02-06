@@ -40,9 +40,9 @@ module.exports = {
     c: 'Redux-sovelluksen kommunikointi palvelimen kanssa',
   },
   '7': {
-    //a: 'React-router',
-    //b: 'Lisää tyyleistä'
-    // c: 'Webpack',
+    a: 'React-router',
+    b: 'Lisää tyyleistä',
+    c: 'Webpack',
     // d: 'Vanha react'
     // e: 'End to end -testaus',
     // f: 'React/Node-sovellusten tietoturva',
