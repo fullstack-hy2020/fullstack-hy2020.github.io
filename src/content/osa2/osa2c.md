@@ -146,8 +146,8 @@ Nykyään lähes kaikki Javascript-projektit määritellään node "pakkausmanag
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.7.0-alpha.2",
-    "react-dom": "^16.7.0-alpha.2",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
     "react-scripts": "2.1.3"
   },
   "scripts": {
@@ -185,8 +185,8 @@ Nyt axios on mukana riippuvuuksien joukossa:
   "dependencies": {
     "axios": "^0.18.0", // highlight-line
     "json-server": "^0.14.2",
-    "react": "^16.7.0-alpha.2",
-    "react-dom": "^16.7.0-alpha.2",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
     "react-scripts": "2.1.3"
   },
   // ...
@@ -349,7 +349,7 @@ Ei ole kuitenkaan ihan selvää, mihin kohtaan komponentin koodia komento <em>ax
 
 ### Effect-hookit
 
-Olemme jo käyttäneet Reactin version [16.8.0-alpha.0](https://www.npmjs.com/package/react/v/16.8.0-alpha.0) mukanaan tuomia [state hookeja](https://reactjs.org/docs/hooks-state.html) tuomaan funktioina määriteltyihin React-komponentteihin tilan. Versio 16.8.0-alpha.0 tarjoaa kokonaan uutena ominaisuutena myös
+Olemme jo käyttäneet Reactin version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) mukanaan tuomia [state hookeja](https://reactjs.org/docs/hooks-state.html) tuomaan funktioina määriteltyihin React-komponentteihin tilan. Versio 16.8.0 tarjoaa kokonaan uutena ominaisuutena myös
 [effect hookit](https://reactjs.org/docs/hooks-effect.html), dokumentaation sanoin
 
 > <i>The Effect Hook lets you perform side effects in function components.</i>
