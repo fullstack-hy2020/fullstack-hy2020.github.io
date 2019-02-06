@@ -6,7 +6,7 @@ letter: b
 
 <div class="content">
 
-Osassa 2 jo katsottu kahta tapaa tyylien lisäämiseen eli vanhan koulukunnan [yksittäistä CSS](/osa2#tyylien-lisääminen)-tiedostoa, [inline-tyylejä](/osa6#inline-tyylit). Kolme tapaa...
+Osassa 2 jo katsottu kahta tapaa tyylien lisäämiseen eli vanhan koulukunnan [yksittäistä CSS](/osa2#tyylien-lisääminen)-tiedostoa, [inline-tyylejä](/osa6#inline-tyylit). Katsotaan tässä osassa vielä muutamaa tapaa.
 
 ### Valmiit käyttöliittymätyylikirjastot
 
@@ -19,7 +19,7 @@ Monet UI-frameworkit sisältävät web-sovellusten käyttöön valmiiksi määri
 Monesta UI-frameworkista on tehty React-ystävällisiä versiota, joissa UI-frameworkin avulla määritellyistä "komponenteista" on tehty React-komponentteja. Esim. Bootstrapista on olemassa parikin React-versiota [reactstrap](http://reactstrap.github.io/) ja [react-bootstrap](https://react-bootstrap.github.io/).
 
 Katsotaan seuraavaksi kahta UI-framworkia bootstrapia ja [semantic ui](https://semantic-ui.com/):ta.
-Lisätään molempien avulla samantapaiset tyylit luvun [React-router](/osa6/#react-router) sovellukseen.
+Lisätään molempien avulla samantapaiset tyylit luvun [React-router](/osa7/react_router) sovellukseen.
 
 ### react bootstrap
 
@@ -27,61 +27,60 @@ Aloitetaan bootstrapista, käytetään kirjastoa [react-bootstrap](https://react
 
 Asennetaan kirjasto suorittamalla komento
 
-```bash
+```js
 npm install --save react-bootstrap
 ```
 
-Lisätään sitten sovelluksen _public/index.html_ tiedoston _head_-tagin sisään bootstrapin css-määrittelyt lataava rivi:
+Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään bootstrapin css-määrittelyt lataava rivi:
 
-```html
+```js
 <head>
-  <link
-    rel="stylesheet"
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-    crossorigin="anonymous"
-  />
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+  crossorigin="anonymous"
+/>
   // ...
 </head>
 ```
 
 Kun sovellus ladataan uudelleen, näyttää se jo aavistuksen tyylikkäämmältä:
 
-![](../assets/6/10.png)
+![](../images/7/5.png)
 
-Bootstrapissa koko sivun sisältö renderöidään yleensä [container](https://getbootstrap.com/docs/4.0/layout/overview/#containers):ina, eli käytännössä koko sovelluksen ympäröivä _div_-elementti merkitään luokalla _container_:
+Bootstrapissa koko sivun sisältö renderöidään yleensä [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers):ina, eli käytännössä koko sovelluksen ympäröivä _div_-elementti merkitään luokalla _container_:
 
-```react
-// ...
-
-class App extends React.Component {
+```js
+const App = () => {
   // ...
-  render() {
-    return (
-      <div className="container">
-        // ...
-      </div>
-    )
-  }
+
+  return (
+    <div class="container"> // highlight-line
+      // ...
+    </div>
+  )
 }
 ```
 
 Sovelluksen ulkoasu muuttuu siten, että sisältö ei ole enää yhtä kiinni selaimen reunoissa:
 
-![](../assets/6/11.png)
+![](../images/7/6.png)
 
-Muutetaan seuraavaksi komponenttia _Notes_ siten, että se renderöi muistiinpanojen listan [taulukkona](https://getbootstrap.com/docs/4.0/content/tables/). React bootstrap tarjoaa valmiin komponentin [Table](https://react-bootstrap.github.io/components/table/), joten CSS-luokan käyttöön ei ole tarvetta.
+Muutetaan seuraavaksi komponenttia <i>Notes</i> siten, että se renderöi muistiinpanojen listan [taulukkona](https://getbootstrap.com/docs/4.1/content/tables/). React bootstrap tarjoaa valmiin komponentin [Table](https://react-bootstrap.github.io/components/table/), joten CSS-luokan käyttöön ei ole tarvetta.
 
-```react
-const Notes = ({notes}) => (
+```js
+const Notes = (props) => (
   <div>
     <h2>Notes</h2>
     <Table striped>
       <tbody>
-        {notes.map(note=>
+        {props.notes.map(note =>
           <tr key={note.id}>
             <td>
-              <Link to={`/notes/${note.id}`}>{note.content}</Link>
+              <Link to={`/notes/${note.id}`}>
+                {note.content}
+              </Link>
             </td>
             <td>
               {note.user}
@@ -96,40 +95,42 @@ const Notes = ({notes}) => (
 
 Ulkoasu on varsin tyylikäs:
 
-![](../assets/6/12.png)
+![](../images/7/7.png)
 
 Huomaa, että koodissa käytettävät React bootstrapin komponentit täytyy importata, eli koodiin on lisättävä:
 
 ```js
-import { Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap'
 ```
 
 #### Lomake
 
-Parannellaan seuraavaksi näkymän _Login_ kirjautumislomaketta Bootstrapin [lomakkeiden](https://getbootstrap.com/docs/4.0/components/forms/) avulla.
+Parannellaan seuraavaksi näkymän <i>Login</i> kirjautumislomaketta Bootstrapin [lomakkeiden](https://getbootstrap.com/docs/4.1/components/forms/) avulla.
 
 React bootstrap tarjoaa valmiit [komponentit](https://react-bootstrap.github.io/components/forms/) myös lomakkeiden muodostamiseen (dokumentaatio tosin ei ole paras mahdollinen):
 
-```react
-const Login = ({onLogin, history}) => {
+```js
+let Login = (props) => {
   // ...
   return (
     <div>
       <h2>login</h2>
-      <form onSubmit={onSubmit}>
-        <FormGroup>
-          <ControlLabel>username:</ControlLabel>
-          <FormControl
+      <Form onSubmit={onSubmit}>
+        <Form.Group>
+          <Form.Label>username:</Form.Label>
+          <Form.Control
             type="text"
             name="username"
           />
-          <ControlLabel>password:</ControlLabel>
-          <FormControl
+          <Form.Label>password:</Form.Label>
+          <Form.Control
             type="password"
           />
-          <Button bsStyle="success" type="submit">login</Button>
-        </FormGroup>
-      </form>
+          <Button variant="primary" type="submit">
+            login
+          </Button>
+        </Form.Group>
+      </Form>
     </div>
 )}
 ```
@@ -137,75 +138,84 @@ const Login = ({onLogin, history}) => {
 Importoitavien komponenttien määrä kasvaa:
 
 ```js
-import {
-  Table,
-  FormGroup,
-  FormControl,
-  ControlLabel,
-  Button,
-} from 'react-bootstrap';
+import { Table, Form, Button } from 'react-bootstrap'
 ```
 
 Lomake näyttää parantelun jälkeen seuraavalta:
 
-![](../assets/6/12b.png)
+![](../images/7/8.png)
 
 #### Notifikaatio
 
-Toteutetaan sovellukseen kirjautumisen jälkeinen _notifikaatio_:
+Toteutetaan sovellukseen kirjautumisen jälkeinen <i>notifikaatio</i>:
 
-![](../assets/6/13.png)
+![](../images/7/9.png)
 
-Asetetaan notifikaatio kirjautumisen yhteydessä komponentin _App_ tilan kenttään _message_:
+Asetetaan notifikaatio kirjautumisen yhteydessä komponentin <i>App</i> tilan muuttujaan _message_:
 
 ```js
-login = user => {
-  this.setState({ user, message: `welcome ${user}` });
-  setTimeout(() => {
-    this.setState({ message: null });
-  }, 10000);
-};
+const App = () => {
+  const [notes, setNotes] = useState([
+    // ...
+  ])
+
+  const [user, setUser] = useState(null) 
+  const [message, setMessage] = useState(null) // highlight-line
+
+  const login = (user) => {
+    setUser(user)
+    // highlight-start
+    setMessage(`welcome ${user}`)
+    setTimeout(() => {
+      setMessage(null)
+    }, 10000)
+    // highlight-end
+  }
+  // ...
+}
 ```
 
-ja renderöidään viesti Bootstrapin [Alert](https://getbootstrap.com/docs/4.0/components/alerts/)-komponentin avulla. React bootstrap tarjoaa tähän jälleen valmiin [React-komponentin](https://react-bootstrap.github.io/components/alerts/):
+ja renderöidään viesti Bootstrapin [Alert](https://getbootstrap.com/docs/4.1/components/alerts/)-komponentin avulla. React bootstrap tarjoaa tähän jälleen valmiin [React-komponentin](https://react-bootstrap.github.io/components/alerts/):
 
-```react
-{(this.state.message &&
-  <Alert color="success">
-    {this.state.message}
-  </Alert>
-)}
+```js
+<div className="container">
+  <Router>
+    <div>
+    // highlight-start
+      {(message &&
+        <Alert variant="success">
+          {message}
+        </Alert>
+      )}
+      // highlight-end
+    //...
+)}  
 ```
 
 #### Navigaatiorakenne
 
-Muutetaan vielä lopuksi sovelluksen navigaatiomenu käyttämään Bootstrapin [Navbaria](https://getbootstrap.com/docs/4.0/components/navbar/). Tähänkin React bootstrap tarjoaa [valmiit komponentit](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly), dokumentaatio on hieman kryptistä, mutta trial and error johtaa lopulta toimivaan ratkaisuun:
+Muutetaan vielä lopuksi sovelluksen navigaatiomenu käyttämään Bootstrapin [Navbaria](https://getbootstrap.com/docs/4.1/components/navbar/). Tähänkin React bootstrap tarjoaa [valmiit komponentit](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly), dokumentaatio on hieman kryptistä, mutta trial and error johtaa lopulta toimivaan ratkaisuun:
 
-```bash
-<Navbar inverse collapseOnSelect>
-  <Navbar.Header>
-    <Navbar.Brand>
-      Anecdote app
-    </Navbar.Brand>
-    <Navbar.Toggle />
-  </Navbar.Header>
-  <Navbar.Collapse>
-    <Nav>
-      <NavItem href="#">
-        <Link to="/">home</Link>
-      </NavItem>
-      <NavItem href="#">
-        <Link to="/notes">notes</Link>
-      </NavItem>
-      <NavItem href="#">
-        <Link to="/users">users</Link>
-      </NavItem>
-      <NavItem>
-        {this.state.user
-          ? <em>{this.state.user} logged in</em>
+```js
+<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+  <Navbar.Collapse id="responsive-navbar-nav">
+    <Nav className="mr-auto">
+      <Nav.Link href="#" as="span">
+        <Link style={padding} to="/">home</Link>
+      </Nav.Link>
+      <Nav.Link href="#" as="span">
+        <Link style={padding} to="/notes">notes</Link> 
+      </Nav.Link>
+      <Nav.Link href="#" as="span">
+        <Link style={padding} to="/users">users</Link>
+      </Nav.Link>
+      <Nav.Link href="#" as="span">
+        {user
+          ? <em>{user} logged in</em>
           : <Link to="/login">login</Link>
         }
-      </NavItem>
+    </Nav.Link>
     </Nav>
   </Navbar.Collapse>
 </Navbar>
@@ -213,54 +223,41 @@ Muutetaan vielä lopuksi sovelluksen navigaatiomenu käyttämään Bootstrapin [
 
 Ulkoasu on varsin tyylikäs
 
-![](../assets/6/14.png)
+![](../images/7/10.png)
 
 Jos selaimen kokoa kaventaa, huomaamme että menu "kollapsoituu" ja sen saa näkyville vain klikkaamalla:
 
-![](../assets/6/15.png)
+![](../images/7/11a.png)
 
 Bootstrap ja valtaosa tarjolla olevista UI-frameworkeista tuottavat [responsiivisia](https://en.wikipedia.org/wiki/Responsive_web_design) näkymiä, eli sellaisia jotka renderöityvät vähintään kohtuullisesti monen kokoisilla näytöillä.
 
-Chromen konsolin avulla on mahdollista simuloida sovelluksen käyttöä erilaisilla mobiilipäätteillä
+Chromen developer-konsolin avulla on mahdollista simuloida sovelluksen käyttöä erilaisilla mobiilipäätteillä
 
-![](../assets/6/16.png)
+![](../images/7/12.png)
 
-Sovellus toimii hyvin, mutta konsoliin vilkaisu paljastaa erään ikävän detaljin:
 
-![](../assets/6/17.png)
-
-Syy valituksiin on navigaatiorakenteessa
-
-```bash
-<NavItem href="#">
-  <Link to="/">home</Link>
-</NavItem>
-```
-
-Nämä sisäkkäiset komponentit sisältävät molemmat _a_-tagin ja React hermostuu tästä.
-
-Ongelma on ikävä ja sen kiertäminen on toki mahdollista, katso esim.
-<https://serverless-stack.com/chapters/adding-links-in-the-navbar.html>
-
-Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/FullStack-HY/FullStack-Hy.github.io/wiki/bootstrap).
+Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/fullstack-hy2019/misc/blob/master/notes-bootstrap.js.
 
 ### Semantic UI
 
-Olen käyttänyt bootstrapia vuosia, mutta siirryin hiljattain [Semantic UI](https://semantic-ui.com/):n käyttäjäksi. Kurssin tehtävien [palautusovellus](https://studies.cs.helsinki.fi/fs-stats) on tehty Semanticilla ja kokemukset ovat olleet rohkaisevia, erityisesti semanticin [React-tuki](https://react.semantic-ui.com) on ensiluokkainen ja dokumentaatiokin huomattavasti parempi kuin bootstrapissa.
+Olen käyttänyt bootstrapia vuosia, mutta reilu vuosi sitten [Semantic UI](https://semantic-ui.com/):n käyttäjäksi. Kurssin tehtävien [palautusovellus](https://studies.cs.helsinki.fi/courses) on tehty Semanticilla ja kokemukset ovat olleet rohkaisevia, erityisesti semanticin [React-tuki](https://react.semantic-ui.com) on ensiluokkainen ja dokumentaatiokin huomattavasti parempi kuin bootstrapissa.
 
 Lisätään nyt [React-router](/osa6/#react-router)-sovellukselle edellisen luvun tapaan tyylit semanticilla.
 
 Aloitetaan asentamalla [semantic-ui-react](https://react.semantic-ui.com)-kirjasto:
 
-```bash
+```js
 npm install --save semantic-ui-react
 ```
 
-Lisätään sitten sovelluksen tiedostoon _public/index.html_ head-tagin sisään semanticin css-määrittelyt lataava rivi (joka löytyy [tästä](https://react.semantic-ui.com/usage#content-delivery-network-cdn)):
+Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> head-tagin sisään semanticin css-määrittelyt lataava rivi (joka löytyy [tästä](https://react.semantic-ui.com/usage#content-delivery-network-cdn)):
 
-```html
+```js
 <head>
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css"></link>
+  <link
+    rel="stylesheet"
+    href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"
+  />
   // ...
 </head>
 ```
@@ -269,45 +266,45 @@ Sijoitetaan koko sovelluksen renderöimä sisältö Semanticin komponentin [Cont
 
 Semanticin dokumentaatio sisältää jokaisesta komponentista useita esimerkkikoodinpätkiä, joiden avulla komponenttien käytön periaatteet on helppo omaksua:
 
-![](../images/6/18.png)
+![](../images/7/13.png)
 
-Muutetaan komponentin App uloin _div_-elementti _Containeriksi_:
+Muutetaan komponentin App uloin <i>div</i>-elementti komponentiksi <i>Container</i>:
 
-```bash
+```js
 import { Container } from 'semantic-ui-react'
 
 // ...
 
-class App extends React.Component {
+const App = () => {
   // ...
-  render() {
-    return (
-      <Container>
-        // ...
-      </Container>
-    )
-  }
+  return (
+    <Container>
+      // ...
+    </Container>
+  )
 }
 ```
 
 Sivun sisältö ei ole enää reunoissa kiinni:
 
-![](../images/6/19.png)
+![](../images/7/14.png)
 
 Edellisen luvun tapaan, renderöidään muistiinpanot taulukkona, komponentin [Table](https://react.semantic-ui.com/collections/table) avulla. Koodi näyttää seuraavalta
 
-```react
+```js
 import { Table } from 'semantic-ui-react'
 
-const Notes = ({ notes }) => (
+const Notes = (props) => (
   <div>
     <h2>Notes</h2>
     <Table striped celled>
       <Table.Body>
-        {notes.map(note =>
+        {props.notes.map(note =>
           <Table.Row key={note.id}>
             <Table.Cell>
-              <Link to={`/notes/${note.id}`}>{note.content}</Link>
+              <Link to={`/notes/${note.id}`}>
+                {note.content}
+              </Link>
             </Table.Cell>
             <Table.Cell>
               {note.user}
@@ -317,105 +314,116 @@ const Notes = ({ notes }) => (
       </Table.Body>
     </Table>
   </div>
-)
 ```
 
 Muistiinpanojen lista näyttää seuraavalta:
 
-![](../images/6/20.png)
+![](../images/7/14.png)
 
 #### Lomake
 
 Otetaan kirjautumissivulla käyttöön Semanticin [Form](https://react.semantic-ui.com/collections/form)-komponentti:
 
-```
+```js
 import { Form, Button } from 'semantic-ui-react'
 
-const Login = ({ onLogin, history }) => {
+let Login = (props) => {
   const onSubmit = (event) => {
     // ...
   }
+
   return (
-    <div>
-      <h2>login</h2>
-      <Form onSubmit={onSubmit}>
-        <Form.Field>
-          <label>username</label>
-          <input name='username' />
-        </Form.Field>
-        <Form.Field>
-          <label>password</label>
-          <input type='password' />
-        </Form.Field>
-        <Button type='submit'>login</Button>
-      </Form>
-    </div>
+    <Form onSubmit={onSubmit}>
+      <Form.Field>
+        <label>username</label>
+        <input name='username' />
+      </Form.Field>
+      <Form.Field>
+        <label>password</label>
+        <input type='password' />
+      </Form.Field>
+      <Button type='submit'>login</Button>
+    </Form>
   )
 }
 ```
 
 Ulkoasu näyttää seuraavalta:
 
-![](../images/6/21.png)
+![](../images/7/15.png)
 
 #### Notifikaatio
 
-Edellisen luvun tapaan, toteutetaan sovellukseen kirjautumisen jälkeinen _notifikaatio_:
+Edellisen luvun tapaan, toteutetaan sovellukseen kirjautumisen jälkeinen <i>notifikaatio</i>:
 
-![](../images/6/22.png)
+![](../images/7/6.png)
 
-Kuten edellisessä luvussa, asetetaan notifikaatio kirjautumisen yhteydessä komponentin _App_ tilan kenttään _message_:
+Kuten edellisessä luvussa, asetetaan notifikaatio kirjautumisen yhteydessä komponentin <i>App</i> tilan muuttujaan _message_:
 
 ```js
-login = user => {
-  this.setState({ user, message: `welcome ${user}` });
-  setTimeout(() => {
-    this.setState({ message: null });
-  }, 10000);
-};
+const App = () => {
+  // ...
+  const [message, setMessage] = useState(null)
+
+  const login = (user) => {
+    setUser(user)
+    setMessage(`welcome ${user}`)
+    setTimeout(() => {
+      setMessage(null)
+    }, 10000)
+  }
+
+  // ...
+}
 ```
 
 ja renderöidään viesti käyttäen komponenttia [Message](https://react.semantic-ui.com/collections/message):
 
-```react
-{(this.state.message &&
-  <Message success>
-    {this.state.message}
-  </Message>
-)}
+```js
+<Container>
+  {(message &&
+    <Message success>
+      {message}
+    </Message>
+  )}
+  // ...
+</Conteiner>
 ```
 
 #### Navigaatiorakenne
 
 Navigaatiorakenne toteutetaan komponentin [Menu](https://react.semantic-ui.com/collections/menu) avulla:
 
-```bash
-<Menu inverted>
-  <Menu.Item link>
-    <Link to="/">home</Link>
-  </Menu.Item>
-  <Menu.Item link>
-    <Link to="/notes">notes</Link>
-  </Menu.Item>
-  <Menu.Item link>
-    <Link to="/users">users</Link>
-  </Menu.Item>
-  <Menu.Item link>
-    {this.state.user
-      ? <em>{this.state.user} logged in</em>
-      : <Link to="/login">login</Link>
-    }
-  </Menu.Item>
-</Menu>
+```js
+<Router>
+  <div>
+    <Menu inverted>
+      <Menu.Item link>
+        <Link to="/">home</Link>
+      </Menu.Item>
+      <Menu.Item link>
+        <Link to="/notes">notes</Link>
+      </Menu.Item>
+      <Menu.Item link>
+        <Link to="/users">users</Link>
+      </Menu.Item>
+      <Menu.Item link>
+        {user
+          ? <em>{user} logged in</em>
+          : <Link to="/login">login</Link>
+        }
+      </Menu.Item>
+    </Menu>   
+    // ...
+  </div>
+</Router> 
 ```
 
 Lopputulos näyttää seuraavalta:
 
-![](../images/6/23.png)
+![](../images/7/17.png)
 
-Bootstrapin yhteydessä esiintynyttä sisäkkäisen _a_-tagien ongelmaa ei semanticin kanssa ole.
-
-Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/FullStack-HY/FullStack-Hy.github.io/wiki/semantic-ui).
+Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/fullstack-hy2019/misc/blob/master/notes-semantic.js).
 
 ### Loppuhuomioita
 
@@ -423,17 +431,17 @@ Ero react-bootstrapin ja semantic-ui-reactin välillä ei ole suuri. On makuasia
 
 Esimerkissä käytettiin UI-frameworkeja niiden React-integraatiot tarjoavien kirjastojen kautta.
 
-Sen sijaan että käytimme kirjastoa [React bootstrap](https://react-bootstrap.github.io/), olisimme voineet aivan yhtä hyvin käyttää Bootstrapia suoraan, liittämällä HTML-elementteihin CSS-luokkia. Eli sen sijaan että määrittelimme esim. taulukon komponentin _Table_ avulla
+Sen sijaan että käytimme kirjastoa [React bootstrap](https://react-bootstrap.github.io/), olisimme voineet aivan yhtä hyvin käyttää Bootstrapia suoraan, liittämällä HTML-elementteihin CSS-luokkia. Eli sen sijaan että määrittelimme esim. taulukon komponentin <i>Table</i> avulla
 
-```bash
+```js
 <Table striped>
   // ...
 </Table>
 ```
 
-olisimme voineet käyttää normaalia HTML:n taulukkoa _table_ ja CSS-luokkaa
+olisimme voineet käyttää normaalia HTML:n taulukkoa <i>table</i> ja CSS-luokkaa
 
-```bash
+```js
 <table className="table striped">
   // ...
 </table>
@@ -441,7 +449,7 @@ olisimme voineet käyttää normaalia HTML:n taulukkoa _table_ ja CSS-luokkaa
 
 Taulukon määrittelyssä React bootstrapin tuoma etu ei ole suuri.
 
-Tiiviimmän ja ehkä paremmin luettavissa olevan kirjoitusasun lisäksi toinen etu React-kirjastoina olevissa UI-frameworkeissa on se, että kirjastojen mahdollisesti käyttämä Javascript-koodi on sisällytetty React-komponentteihin. Esim. osa Bootstrapin komponenteista edellyttää toimiakseen muutamaakin ikävää [Javascript-riippuvuutta](https://getbootstrap.com/docs/4.0/getting-started/introduction/#js) joita emme mielellään halua React-sovelluksiin sisällyttää.
+Tiiviimmän ja ehkä paremmin luettavissa olevan kirjoitusasun lisäksi toinen etu React-kirjastoina olevissa UI-frameworkeissa on se, että kirjastojen mahdollisesti käyttämä Javascript-koodi on sisällytetty React-komponentteihin. Esim. osa Bootstrapin komponenteista edellyttää toimiakseen muutamaakin ikävää [Javascript-riippuvuutta](https://getbootstrap.com/docs/4.1/getting-started/introduction/#js) joita emme mielellään halua React-sovelluksiin sisällyttää.
 
 React-kirjastoina tarjottavien UI-frameworkkien ikävä puoli verrattuna frameworkin "suoraan käyttöön" on React-kirjastojen API:n mahdollinen epästabiilius ja osittain huono dokumentaatio. Tosin [react-semanticin](https://react.semantic-ui.com) suhteen tilanne on paljon parempi kuin monien muiden UI-frameworkien sillä kyseessä on virallinen React-integraatio.
 
@@ -456,8 +464,6 @@ Luetellaan tässä kaikesta huolimatta muitakin UI-frameworkeja. Jos oma suosikk
 - <https://ant.design/>
 - <https://foundation.zurb.com/>
 
-Alun perin tässä osassa oli tarkoitus käyttää [Material UI](http://www.material-ui.com/):ta, mutta kirjasto on juuri nyt kiivaan kehityksen alla ennen version 1.0 julkaisemista ja osa dokumentaation esimerkeistä ei toiminut uusimmalla versiolla. Voikin olla viisainta odotella Materialin kanssa versiota 1.0.
-
 </div>
 <div class="tasks">
 
@@ -467,176 +473,85 @@ Alun perin tässä osassa oli tarkoitus käyttää [Material UI](http://www.mate
 
 Ota käyttöön bootstrap (tai valitsemasi framework) ja renderöi anekdoottien lista tyylikkäämmin, esim. bootstrapissa [ListGroup](https://react-bootstrap.github.io/components/list-group/)-komponentin tai Semanticissa [Tablen](https://react.semantic-ui.com/collections/table) avulla:
 
-![](../assets/teht/47b.png)
+![](../images/7/1.png)
 
 #### 7.5: styled anecdotes, step2
 
 Tutustu [bootstrapin](https://react-bootstrap.github.io/layout/grid/) tai [semanticin](https://react.semantic-ui.com/collections/grid) grideihin ja muuta niiden avulla sovelluksen _about_-sivua siten, että oikeassa reunassa näytetään jonkun kuuluisan tietojenkäsittelijän kuva:
 
-![](../assets/teht/48.png)
-
-#### 7.6: styled anecdotes, step3
-
-Lisää vielä vapaavalintaisia tyylejä valitsemallasi UI frameworkilla. Voit merkata tehtävän, jos käytät aikaa vapaavalintaisten tyylien lisäämiseen noin 30 minuuttia.
+![](../images/7/1.png)
 
 </div>
 
 <div class="content">
 
-### Lisää tyyleistä
-
-Osissa 2 ja 6 on jo katsottu muutamaa tapaa tyylien lisäämiseen eli vanhan koulukunnan [yksittäistä CSS](/osa2#tyylien-lisääminen)-tiedostoa, [inline-tyylejä](/osa6#inline-tyylit) ja [UI-frameworkien](/osa6#valmiit-käyttöliittymätyylikirjastot) kuten Bootstrapin käyttöä.
-
-Tapoja on [monia muitakin](https://survivejs.com/react/advanced-techniques/styling-react/), katsotaan vielä lyhyestä kahta tapaa.
-
-### CSS-moduulit
-
-Yksi CSS:n keskeisistä ongelmista on se, että CSS-määrittelyt ovat _globaaleja_. Suurissa tai jo keskikokoisissakin sovelluksissa tämä aiheuttaa ongelmia, sillä tiettyihin komponentteihin vaikuttavat monissa paikoissa määritellyt tyylit ja lopputulos voi olla vaikeasti ennakoitavissa.
-
-Laitoksen [kurssilistasivun](https://www.cs.helsinki.fi/courses) alaosassa on itseasiassa eräs ilmentymä tälläisestä ikävästä bugista
-
-![](../assets/7/15.png)
-
-Sivulla on monessa paikassa määriteltyjä tyylejä, osa määrittelyistä tulee Drupal-sisällönhallintajärjestelmän oletuskonfiguraatiosta, osa on Drupaliin laitoksella tehtyjä lisäyksiä, osa taas tulee sivun yläosan olemassaolevaa opetustarjontaa näyttävistä syksyllä lisätyistä komponenteista. Vika on niin hankala korjata, ettei kukaan ole viitsinyt sitä tehdä.
-
-Demonstroidaan vastaavankaltaista ongelmatilannetta esimerkkisovelluksessamme.
-
-Muutetaan esimerkkitiedostoamme siten, että komponentista _App_ irrotetaan osa toiminnallisuudesta komponentteihin _Hello_ ja _NoteCount_:
-
-```react
-import './Hello.css'
-
-const Hello = ({ counter }) => (
-  <p className="content">
-    hello webpack {counter} clicks!
-  </p>
-)
-
-export default Hello
-```
-
-```react
-import './NoteCount.css'
-
-const NoteCount = ({ noteCount }) => (
-  <p className="content">
-    {noteCount} notes in server
-  </p>
-)
-
-export default NoteCount
-```
-
-Molemmat komponentit määrittelevät oman tyylitiedostonsa:
-
-_Hello.css_
-
-```CSS
-.content {
-  background-color: yellow;
-}
-```
-
-_NoteCount.css_:
-
-```CSS
-.content {
-  background-color: blue;
-}
-```
-
-Koska molemmat komponentit käyttävät samaa CSS-luokan nimeä _content_, käykin niin että myöhemmin määritelty ylikirjoittaa aiemmin määritellyn, ja molempien tyyli on sama:
-
-![](../assets/7/16.png)
-
-Perinteinen tapa kiertää ongelma on ollut käyttää monimutkaisempia CSS-luokan nimiä, esim. _Hello_container_ ja _NoteCount_container_, tämä muuttuu kuitenkin jossain vaiheessa varsin hankalaksi.
-
-[CSS-moduulit](https://github.com/css-modules/css-modules) tarjoaa tähän erään ratkaisun.
-
-Lyhyesti ilmaisten periaatteena on tehdä CSS-määrittelyistä lähtökohtaisesti lokaaleja, vain yhden komponentin kontekstissa voimassa olevia, joka taas mahdollistaa luontevien CSS-luokkanimien käytön. Käytännössä tämä lokaalius toteutetaan generoimalla konepellin alla CSS-luokille uniikit luokkanimet.
-
-CSS-moduulit voidaan toteuttaa suoraan Webpackin css-loaderin avulla seuraten [sivun](https://www.triplet.fi/blog/practical-guide-to-react-and-css-modules/) ohjetta.
-
-Muutetaan tyylejä käyttäviä komponentteja hiukan:
-
-```react
-import styles from './Hello.css'
-
-const Hello = ({ counter }) => (
-  <p className={styles.content}>
-    hello webpack {counter} clicks!
-  </p>
-)
-
-export default Hello
-```
-
-Erona siis edelliseen on se, että tyyliit "sijoitetaan muuttujaan" _styles_
-
-```js
-import styles from './Hello.css';
-```
-
-Nyt tyylitiedoston määrittelelyihin voi viitata muuttujan _styles_ kautta, ja CSS-luokan liittäminen tapahtuu seuraavasti
-
-```react
-<p className={styles.content}>
-```
-
-Vastaava muutos tehdään komponentille _NoteCount_.
-
-Muutetaan sitten Webpackin konfiguraatiossa olevaa _css-loaderin_ määrittelyä siten että se enabloi [CSS-modulit](https://github.com/webpack-contrib/css-loader#modules):
-
-```js
-{
-  test: /\.css$/,
-  loaders: [
-    'style-loader',
-    'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]&sourceMap&-minimize'
-  ]
-}
-```
-
-Nyt molemmat komponentit saavat omat tyylinsä. Konsolista tarkastelemalla huomaamme, että komponenttien luokille on generoitunut webpackin css-loaderin generoimat uniikit nimet:
-
-![](../assets/7/17.png)
-
-CSS-luokan nimen muotoileva osa on _css-loaderin_ yhteydessä oleva
-
-<pre>
-localIdentName=[name]\_\_[local]\_\_\_[hash:base64:5]
-</pre>
-
-Jos olet aikeissa käyttää CSS-moduuleja, kannattaa vilkaista mitä kirjasto [react-css-modules](https://github.com/gajus/react-css-modules) tarjoaa.
-
 ### Styled components
+
+Tapoja liittää tyylejä React-sovellukseen on jo näkemiämme lisäksi [muitakin](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b). 
 
 Mielenkiintoisen näkökulman tyylien määrittelyyn tarjoaa ES6:n [tagged template literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) -syntaksia hyödyntävä [styled components](https://www.styled-components.com/) -kirjasto.
 
 Tehdään styled-componentsin avulla esimerkkisovellukseemme muutama tyylillinen muutos:
 
-```bash
+```js
 import styled from 'styled-components'
 
-const Button = styled.button `
+const Button = styled.button`
+  background: Bisque;
   font-size: 1em;
   margin: 1em;
   padding: 0.25em 1em;
-  border: 2px solid black;
+  border: 2px solid Chocolate;
   border-radius: 3px;
 `
 
-const Hello = ({ className, counter }) => (
-  <p className={className}>
-    hello webpack {counter} clicks
-  </p>
-)
-
-const StyledHello = styled(Hello) `
-  color: blue;
-  font-weight: bold;
+const Input = styled.input`
+  margin: 0.25em;
 `
 
+const Page = styled.div`
+  padding: 1em;
+  background: papayawhip;
+`
+
+const Navigation = styled.div`
+  background: BurlyWood;
+  padding: 1em;
+`
+
+const Footer = styled.div`
+  background: Chocolate;
+  padding: 1em;
+  margin-top: 1em;
+`
+```
+
+```js
+let Login = (props) => {
+  const onSubmit = (event) => {
+    event.preventDefault()
+    props.onLogin('mluukkai')
+    props.history.push('/')
+  }
+
+  return (
+    <div>
+      <h2>login</h2>
+      <form onSubmit={onSubmit}>
+        <div>
+          username: <Input />
+        </div>
+        <div>
+          password: <Input type='password' />
+        </div>
+        <Button type="submit" primary=''>login</Button>
+      </form>
+    </div>
+  )
+}
+```
+
+```js
 class App extends React.Component {
   //...
 
@@ -648,6 +563,44 @@ class App extends React.Component {
       </div>
     )
   }
+}
+
+
+const App = () => {
+  // ...
+
+  return (
+    <Page>
+      <Router>
+        <div>
+          <Navigation>
+            <Link style={padding} to="/">home</Link> 
+            <Link style={padding} to="/notes">notes</Link> 
+            <Link style={padding} to="/users">users</Link> 
+            {user
+              ? <em>{user} logged in</em>
+              : <Link to="/login">login</Link>
+            }
+          </Navigation>
+
+          <Route exact path="/" render={() => <Home />} />
+          <Route exact path="/notes" render={() => <Notes notes={notes} />} />
+          <Route exact path="/notes/:id" render={({ match }) =>
+            <Note note={noteById(match.params.id)} />}
+          />
+          <Route path="/users" render={() =>
+            user ? <Users /> : <Redirect to="/login" />
+          } />
+          <Route path="/login" render={() =>
+            <Login onLogin={login} />}
+          />
+        </div>
+      </Router>
+      <Footer>
+        <em>Note app, Department of Computer Science 2019</em>
+      </Footer>
+    </Page>
+  )
 }
 ```
 
@@ -667,13 +620,13 @@ Tyylien määrittelyn syntaksi on varsin mielenkiintoinen.
 
 Määritelty komponentti toimii kuten normaali _button_ ja sovellus renderöi sen normaaliin tapaan:
 
-```html
+```js
 <button onClick="{this.onClick}">click</button>
 ```
 
 Seuraavaksi koodi määrittelee normaalin React-komponentin
 
-```react
+```js
 const Hello = ({ className, counter }) => (
   <p className={className}>
     hello webpack {counter} clicks
@@ -692,12 +645,12 @@ const StyledHello = styled(Hello)`
 
 Muuttujaan _StyledHello_ sijoitettua tyyleillä jalostettua komponenttia käytetään kuten alkuperäistä:
 
-```bash
+```js
 <StyledHello counter={this.state.counter} />
 ```
 
 Sovelluksen ulkoasu seuraavassa:
 
-![](../assets/7/18.png)
+![](../images/7/1.png)
 
 </div>
