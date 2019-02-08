@@ -43,11 +43,9 @@ module.exports = {
     a: 'React-router',
     b: 'Lisää tyyleistä',
     c: 'Webpack',
-    // d: 'Vanha react'
-    // e: 'End to end -testaus',
-    // f: 'React/Node-sovellusten tietoturva',
-    // g: 'Tyypitys',
-    // h: 'Tulevaisuuden trendejä',
+    d: 'Luokkakomponentit, E2E-testaus',
+    e: 'Sekalaista',
+    // f: 'Tehtäviä',
   },
   // '8': { a: 'GraphQL' },
 };
