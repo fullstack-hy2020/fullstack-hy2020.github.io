@@ -464,31 +464,6 @@ Luetellaan tässä kaikesta huolimatta muitakin UI-frameworkeja. Jos oma suosikk
 - <https://ant.design/>
 - <https://foundation.zurb.com/>
 
-</div>
-<div class="tasks">
-
-</div>
-
-<div class="tasks">
-
-### Tehtäviä
-
-#### 7.4: styled anecdotes, step1
-
-Ota käyttöön bootstrap (tai valitsemasi framework) ja renderöi anekdoottien lista tyylikkäämmin, esim. bootstrapissa [ListGroup](https://react-bootstrap.github.io/components/list-group/)-komponentin tai Semanticissa [Tablen](https://react.semantic-ui.com/collections/table) avulla:
-
-![](../images/7/1.png)
-
-#### 7.5: styled anecdotes, step2
-
-Tutustu [bootstrapin](https://react-bootstrap.github.io/layout/grid/) tai [semanticin](https://react.semantic-ui.com/collections/grid) grideihin ja muuta niiden avulla sovelluksen _about_-sivua siten, että oikeassa reunassa näytetään jonkun kuuluisan tietojenkäsittelijän kuva:
-
-![](../images/7/1.png)
-
-</div>
-
-<div class="content">
-
 ### Styled components
 
 Tapoja liittää tyylejä React-sovellukseen on jo näkemiämme lisäksi [muitakin](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b). 

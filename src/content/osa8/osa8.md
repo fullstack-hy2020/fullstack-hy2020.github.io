@@ -5,8 +5,6 @@ part: 8
 
 <div class="intro">
 
-Kurssilla tutustutaan Javascriptilla tapahtuvaan moderniin websovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST-rajapinnoissa.
-
-Kurssilla käsitellään myös sovellusten testaamista, konfigurointia ja suoritusympäristöjen hallintaa sekä NoSQL-tietokantoja.
+Kurssin uudessa osassa käsitellään GraphQL:ää, eli Facebookin kehittämää RESTille vaihtoehtoista tapaa selaimen ja palvelimen väliseen kommunikointiin. Tämä osa tulee vasta 15.3. alkavalle MOOC-kurssille.
 
 </div>

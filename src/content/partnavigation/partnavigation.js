@@ -45,7 +45,7 @@ module.exports = {
     c: 'Webpack',
     d: 'Luokkakomponentit, E2E-testaus',
     e: 'Sekalaista',
-    // f: 'Tehtäviä',
+    f: 'Tehtäviä',
   },
   // '8': { a: 'GraphQL' },
 };

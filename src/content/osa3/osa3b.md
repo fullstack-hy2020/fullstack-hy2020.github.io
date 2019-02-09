@@ -297,9 +297,9 @@ Joudut todennäköisesti tekemään frontendiin erinäisiä pieniä muutoksia ai
 
 #### 3.10 puhelinluettelon backend step10
 
-Vie sovelluksen backend internetiin, esim. Herokuun. Toinen, käyttäjän kannalta helpompi vaihtoehto on Zeit.co:n [now](https://zeit.co/now).
+Vie sovelluksen backend internetiin, esim. Herokuun. 
 
-**Huom** komento _heroku_ toimii laitoksen koneilla ja fuksikannettavilla 9.2. alkaen. Jos et jostain syystä saa [asennettua](https://devcenter.heroku.com/articles/heroku-cli) herokua koneellesi, voit käyttää komentoa [npx heroku-cli](https://www.npmjs.com/package/heroku-cli).
+**Huom** komento _heroku_ toimii laitoksen koneilla ja fuksikannettavilla. Jos et jostain syystä saa [asennettua](https://devcenter.heroku.com/articles/heroku-cli) herokua koneellesi, voit käyttää komentoa [npx heroku-cli](https://www.npmjs.com/package/heroku-cli).
 
 Testaa selaimen ja postmanin tai VS Code REST clientin avulla, että internetissä oleva backend toimii.
 
