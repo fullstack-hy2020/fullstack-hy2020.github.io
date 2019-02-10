@@ -635,3 +635,13 @@ Cypress tarjoaa melko hyvät mahdollisuudet testien [debuggaamiseen](https://doc
 Itselläni ei ole kovin paljoa kokemusta Cypressistä. Se kuitenkin jo tässä vaiheessa vaikuttaa ylivoimaisesti parhaalta E2E-testauskirjastolta mihin olen törmännyt. Muilta kuulemani kommentitkin ovat olleet pääasiassa erittäin positiivisia.
 
 Cypressin dokumentaatio on poikkeuksellisen hyvä. Suosittelenkin lämpimästi Cypressin kokeilemista!
+
+</div>
+
+<div class="tasks">
+
+### Tehtäviä
+
+End to end -testaukseen liittyvät tehtävät ovat osan lopun [blogilistaa laajentavassa tehtäväsarjassa](http://localhost:8000/osa7/tehtavia_blogilistan_laajennus).
+
+</div>

@@ -68,7 +68,7 @@ ja muuttamalla <i>package.js</i> kaikilla käyttöjärjestelmillä toimivaan muo
 
 Nyt sovelluksen toimintaa on mahdollista muokata sen suoritusmoodiin perustuen. Eli voimme määritellä, esim. että testejä suoritettaessa ohjelma käyttää erillistä, testejä varten luotua tietokantaa.
 
-Sovelluksen testikanta voidaan luoda tuotantokäytön ja sovelluskehityksen tapaan [mlabiin](https://mlab.com/). Ratkaisu ei ole optimaalinen erityisesti, jos sovellusta on tekemässä yhtä aikaa useita henkilöitä. Testien suoritus nimittäin yleensä edellyttää, että samaa tietokantainstanssia ei ole yhtä aikaa käyttämässä useampia testiajoja.
+Sovelluksen testikanta voidaan luoda tuotantokäytön ja sovelluskehityksen tapaan Mongo DB Atlasiin. Ratkaisu ei ole optimaalinen erityisesti, jos sovellusta on tekemässä yhtä aikaa useita henkilöitä. Testien suoritus nimittäin yleensä edellyttää, että samaa tietokantainstanssia ei ole yhtä aikaa käyttämässä useampia testiajoja.
 
 Testaukseen kannattaakin käyttää verkossa olevaa jaettua tietokantaa mieluummin kuin esimerkiksi sovelluskehittäjän paikallisen koneen tietokantaa. Optimiratkaisu olisi tietysti se, että jokaista testiajoa varten olisi käytettävissä oma tietokanta, sekin periaatteessa onnistuu "suhteellisen helposti" mm. [keskusmuistissa toimivan Mongon](https://docs.mongodb.com/manual/core/inmemory/) ja [docker](https://www.docker.com)-kontainereiden avulla. Etenemme kuitenkin nyt lyhyemmän kaavan mukaan ja käytetään testikantana normaalia Mongoa.
 
@@ -99,11 +99,11 @@ Koodi siis lataa ympäristömuuttujat tiedostosta <i>.env</i> jos se <i>ei ole</
 Tiedostossa <i>.env</i> on nyt määritelty <i>erikseen</i> sekä sovelluskehitysympäristön että testausympäristön tietokannan osoite (esimerkissä molemmat ovat sovelluskehityskoneen lokaaleja mongo-kantoja):
 
 ```bash
-MONGODB_URI=mongodb://fullstack:secred@ds161224.mlab.com:61224/fullstack2019-notes
+MONGODB_URI=mongodb+srv://fullstack:secred@cluster0-ostce.mongodb.net/note-app?retryWrites=true
 PORT=3001
 
 // highlight-start
-TEST_MONGODB_URI=mongodb://fullstack:secred@ds163054.mlab.com:63054/fullstack2019-notes-test
+TEST_MONGODB_URI=mongodb+srv://fullstack:fullstack@cluster0-ostce.mongodb.net/note-app-test?retryWrites=true
 // highlight-end
 ```
 

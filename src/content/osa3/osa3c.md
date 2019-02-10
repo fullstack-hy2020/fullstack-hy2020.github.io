@@ -68,38 +68,45 @@ Dokumenttitietokannat poikkeavat jossain määrin relaatiotietokannoista niin da
 
 **Lue nyt Tietokantojen perusteiden dokumenttitietokantoja kuvaava osuus.** Jatkossa oletetaan, että hallitset käsitteet <i>dokumentti</i> ja <i>kokoelma</i> (collection).
 
-MongoDB:n voi luonnollisesti asentaa omalle koneelle. Internetistä löytyy kuitenkin myös palveluna toimivia Mongoja (esim [mlab](https://mlab.com/) ja [MongoDbCloud](https://www.mongodb.com/cloud/atlas)) ja seuraava ohje olettaa, että käytössä on jo vuosien kokemuksella luotettavaksi havaittu [mlab](https://mlab.com/).
+MongoDB:n voi luonnollisesti asentaa omalle koneelle. Internetistä löytyy kuitenkin myös palveluna toimivia Mongoja, joista tämän hetken paras valinta on  
+[MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 
-Mlab-kanta on helppo ottaa käyttöön suoraan [Herokun kautta](https://elements.heroku.com/addons/mongolab), vaikka tämä on maksutonta, edellyttää se luottokorttitietojen antamista Herokulle.
+Kun käyttäjätili on luotu ja kirjauduttu, Atlas kehoittaa luomaan klusterin:
 
-Määrittelemmekin seuraavassa kannan suoraan [mlab](https://mlab.com/):iin, jolloin luottokorttitietoja ei tarvita.
+![](../images/3/57.png)
 
-Aloita luomalla mlabiin käyttäjätili, saatuasi mlabilta verifiointimailin ja kirjauduttuasi mailin linkin kautta sisään, voit luoda tietokannan:
+Valitaan <i>AWS</i> ja <i>Frankfurt</i> ja luodaan klusteri.
 
-![](../images/3/40.png)
+![](../images/3/58.png)
 
-Määrittele esim. <i>Amazon web services</i>, tyypiksi ilmainen <>sandbox</i> ja sijoituspaikaksi <i>Irlanti</i> ja anna kannalle sopiva nimi.
 
-Kun kanta on hetken kuluttua valmis, mene tietokannan hallintanäkymään
+Kun klusteri on hetken kuluttua valmis, luodaan <i>security</i> välilehdeltä tietokantakäyttäjätunnus joka on siis eri tunnus kuin se, jonka avulla kirjaudutaan MongoDB Atlasiin:
 
-![](../images/3/41.png)
+![](../images/3/59.png)
+
+annetaan käyttäjälle luku- ja kirjoitustoikeus kaikkiin tietokantoihin
+
+![](../images/3/60.png)
+
+Seuraavaksi tulee määritellä ne ip-osoitteet, joista tietokantaan pääsee käsiksi
+
+![](../images/3/61.png)
+
+Sallitaan yksinkertaisuuden vuoksi yhteydet kaikkialta:
+
+![](../images/3/62.png)
+
+Lopultakin ollaan valmiina ottamaan tietokantayhteyden. Valitaan <i>Connect your application</i> ja <i>Short SRV connection string</i>
+
+![](../images/3/64.png)
+
 
 Näkymä kertoo <i>MongoDB URI:n</i> eli osoitteen, jonka avulla sovelluksemme käyttämä MongoDB-kirjasto saa yhteyden kantaan.
 
 Osoite näyttää seuraavalta:
 
 ```bash
-mongodb://<dbuser>:<dbpassword>@ds161224.mlab.com:61224/fullstack2019-notes
-```
-
-Tarvitsemme kannan käyttöä varten <i>dbuserin</i> eli käyttäjätunnuksen. Käyttäjätunnuksen luominen tapahtuu tietokannan hallintanäkymästä
-
-![](../images/3/42.png)
-
-Jos luotiin käyttäjätunnus <i>fullstack</i> jonka salasana on <i>sekred1</i>, on tietokannan osoite seuraava:
-
-```bash
-mongodb://fullstack:sekred1@ds161224.mlab.com:61224/fullstack2019-notes
+mongodb+srv://fullstack:<PASSWORD>@cluster0-ostce.mongodb.net/test?retryWrites=true
 ```
 
 Olemme nyt valmiina kannan käyttöön.
@@ -128,7 +135,7 @@ if ( process.argv.length<3 ) {
 const password = process.argv[2]
 
 const url =
-  `mongodb://fullstack:${password}@ds161224.mlab.com:61224/fullstack2019-notes`
+  `mongodb+srv://fullstack:${password}@cluster0-ostce.mongodb.net/test?retryWrites=true`
 
 mongoose.connect(url, { useNewUrlParser: true })
 
@@ -152,7 +159,7 @@ note.save().then(response => {
 })
 ```
 
- Koodi siis olettaa, että sille annetan parametrina mlabiin määritelty salasana. Komentoriviparametriin se pääsee käsiksi seuraavasti
+Koodi siis olettaa, että sille annetan parametrina MongoDB Atlasissa luodulle käyttäjälle määritelty salasana. Komentoriviparametriin se pääsee käsiksi seuraavasti
 
 ```js
 const password = process.argv[2]
@@ -160,11 +167,29 @@ const password = process.argv[2]
 
 Kun koodi suoritetaan komennolla <i>node mongo.js salasana</i> lisää Mongoose tietokantaan uuden dokumentin.
 
-Mlab:in hallintanäkymä näyttää lisäämämme datan:
+Voimme tarkastella tietokannan tilaa MongoDB Atlasin hallintanäkymän <i>collections</i>-osasta
 
-![](../images/3/43.png)
+![](../images/3/65.png)
 
-Kuten näkymä kertoo, on muistiinpanoa vastaava <i>dokumentti</i> lisätty kokoelmaan (collection) nimeltään <i>notes</i>.
+Kuten näkymä kertoo, on muistiinpanoa vastaava <i>dokumentti</i> lisätty tietokannan <i>test</i> kokoelmaan (collection) nimeltään <i>notes</i>.
+
+![](../images/3/66a.png)
+
+Tietokanta lienee loogisempaa nimetä paremmin. Kuten dokumentaatio sanoo, kontrolloidaan kannan nimeä tietokanta-URI:in perusteella
+
+![](../images/3/67.png)
+
+eli tuhotaan kanta <i>test</i>. Päätetään käyttää tietokannasta nimeä <i>note-app</i> muutetaan siis tietokanta-URI muotoon
+
+```bash
+mongodb+srv://fullstack:<PASSWORD>@cluster0-ostce.mongodb.net/note-app?retryWrites=true
+```
+
+Suoritetaan ohjelma uudelleen.
+
+![](../images/3/68.png)
+
+Data on nyt oikeassa kannassa. Hallintanäkymä sisältää myös toiminnon <i>create database</i>, joka mahdollistaa uusien tietokantojenluomisen hallintanäkymän kautta. Kannan luominen etukäteen hallintanäkymässä ei kuitenkaan ole tarpeen, sillä MongoDB Atlasosaa luoda kannan automaattisesti jos sovellus yrittää yhdistää kantaan, jota ei ole vielä olemassa.
 
 ### Skeema
 
@@ -254,7 +279,7 @@ Note.find({ important: true }).then(result => {
 
 #### 3.12: tietokanta komentoriviltä
 
-Luo sovellukselle pilvessä oleva mongo mlabin avulla.
+Luo sovellukselle pilvessä oleva mongo Mongo DB Atlaksen avulla.
 
 Tee projektihakemistoon tiedosto <i>mongo.js</i>, jonka avulla voit lisätä tietokantaan puhelinnumeroja sekä listata kaikki kannassa olevat numerot.
 
@@ -337,7 +362,7 @@ const mongoose = require('mongoose')
 
 // ÄLÄ KOSKAAN TALLETA SALASANOJA githubiin!
 const url =
-  'mongodb://fullstack:secred@ds161224.mlab.com:61224/fullstack2019-notes'
+  'mongodb+srv://fullstack:sekred@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
 
 mongoose.connect(url, { useNewUrlParser: true })
 
@@ -378,7 +403,7 @@ noteSchema.set('toJSON', {
 })
 ```
 
-Vaikka Mongoose-olioiden kenttä <i>_id</i> näyttääkin merkkijonolta, se on todellisuudessa olio. Määrittelemämme metodi _toJSON_ muuttaa sen merkkijonoksi kaiken varalta. Jos emme tekisi muutosta, siitä aiheutuisi ylimääräistä harmia testien yhteydessä.
+Vaikka Mongoose-olioiden kenttä <i>\_id</i> näyttääkin merkkijonolta, se on todellisuudessa olio. Määrittelemämme metodi _toJSON_ muuttaa sen merkkijonoksi kaiken varalta. Jos emme tekisi muutosta, siitä aiheutuisi ylimääräistä harmia testien yhteydessä.
 
 Palautetaan HTTP-pyynnön vastauksena _toJSON_-metodin avulla muotoiltuja oliota:
 
@@ -481,7 +506,7 @@ npm install dotenv --save
 Sovelluksen juurihakemistoon tehdään sitten tiedosto nimeltään <i>.env</i>, minne tarvittavien ympäristömuuttujien arvot määritellään. Tiedosto näyttää seuraavalta
 
 ```bash
-MONGODB_URI=mongodb://fullstack:secred@ds161224.mlab.com:61224/fullstack2019-notes
+MONGODB_URI=mongodb+srv://fullstack:sekred@cluster0-ostce.mongodb.net/note-app?retryWrites=true
 PORT=3001
 ```
 
@@ -565,7 +590,7 @@ Vasta kun kaikki on todettu toimivaksi, kannattaa siirtyä testailemaan että mu
 
 Todennäköisesti voi olla kannattavaa edetä frontin ja backin integroinnissa toiminnallisuus kerrallaan, eli ensin voidaan toteuttaa esim. kaikkien muistiinpanojen näyttäminen backendiin ja testata että toiminnallisuus toimii selaimella. Tämän jälkeen varmistetaan, että frontend toimii yhteen muutetun backendin kanssa. Kun kaikki on todettu olevan kunnossa, siirrytään seuraavan ominaisuuden toteuttamiseen.
 
-Kun kuvioissa on mukana tietokanta, on tietokannan tilan tarkastelu mlabin hallintanäkymästä varsin hyödyllistä, usein myös suoraan tietokantaa käyttävät Node-apuohjelmat, kuten tiedostoon <i>mongo.js</i> kirjoittamamme koodi auttavat sovelluskehityksen edetessä.
+Kun kuvioissa on mukana tietokanta, on tietokannan tilan tarkastelu MongoDB Atlasin hallintanäkymästä varsin hyödyllistä, usein myös suoraan tietokantaa käyttävät Node-apuohjelmat, kuten tiedostoon <i>mongo.js</i> kirjoittamamme koodi auttavat sovelluskehityksen edetessä.
 
 Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-3), branchissa <i>part3-3</i>.
 

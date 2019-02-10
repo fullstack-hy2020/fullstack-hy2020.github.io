@@ -165,7 +165,7 @@ Nyt dotenvissä olevat ympäristömuuttujat otetaan käyttöön ainoastaan sillo
 Tietokantaurlin kertovan ympäristömuuttujan arvo asetetaan Herokuun komennolla _heroku config:set_
 
 ```bash
-heroku config:set MONGODB_URI=mongodb://fullstack:secred@ds161224.mlab.com:61224/fullstack2019-notes
+heroku config:set MONGODB_URI=mongodb+srv://fullstack:secred@cluster0-ostce.mongodb.net/note-app?retryWrites=true
 ```
 
 Sovelluksen pitäisi toimia muutosten jälkeen. Aina kaikki ei kuitenkaan mene suunnitelmien mukaan. Jos ongelmia ilmenee, <i>heroku logs</i> auttaa. Oma sovellukseni ei toiminut muutoksen jälkeen. Loki kertoi seuraavaa

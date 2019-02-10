@@ -1017,7 +1017,7 @@ Redux-sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https:
 
 <div class="tasks">
 
-## Tehtäviä
+### Tehtäviä
 
 Toteutetaan nyt versio toisesta ensimmäisen osan anekdoottien äänestyssovelluksesta. Ota ratkaisusi pohjaksi repositoriossa https://github.com/fullstack-hy2019/redux-anecdotes oleva projekti.
 

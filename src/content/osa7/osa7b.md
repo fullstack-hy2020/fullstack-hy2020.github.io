@@ -588,6 +588,15 @@ Styled components on nostanut tasaisesti suosiotaan viime aikoina ja tällä het
 
 </div>
 
+<div class="tasks">
+
+### Tehtäviä
+
+Tämän luvun asioihin liittyvät tehtävät ovat osan lopun [blogilistaa laajentavassa tehtäväsarjassa](http://localhost:8000/osa7/tehtavia_blogilistan_laajennus).
+
+</div>
+
+
 <!--
 
 ### Komponenttikohtainen CSS ja CSS-moduulit
@@ -716,4 +725,4 @@ Nyt tyylitiedoston määrittelelyihin voi viitata muuttujan _styles_ kautta, ja 
 <p className={styles.content}>
 ```
 
->
+-->

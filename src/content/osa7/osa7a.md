@@ -6,6 +6,12 @@ letter: a
 
 <div class="content">
 
+Kurssin seitsemännen osan tehtävät poikkeavat poikkeavat jossain määrin. Tässä luvussa on normaaliin tapaan [kolme luvun teoriaan liittyvää tehtävää](http://localhost:8000/osa7/react_router#tehtavia).
+
+Tämän luvun tehtävien lisäksi seitsemäs osa sisältää kertaavan ja hieman tämän osan teoriaakin soveltavan [tehtäväsarjan](http://localhost:8000/osa7/tehtavia_blogilistan_laajennus), jossa laajennetaan osissa 4 ja 5 tehtyä Bloglist-sovellusta. 
+
+### Sovelluksen navigaatiorakenne
+
 Palataan osan 6 jälkeen jälleen Reduxittoman Reactin pariin.
 
 On erittäin tyypillistä, että web-sovelluksissa on navigaatiopalkki, jonka avulla on mahdollista vaihtaa sovelluksen näkymää. Muistiinpanosovelluksemme voisi sisältää pääsivun:
@@ -403,7 +409,7 @@ Render-metodissa määritellään myös kokonaan <i>Router</i>:in ulkopuolella o
 
 Jatketaan anekdoottien parissa. Ota seuraaviin tehtäviin pohjaksi repositoriossa <https://github.com/mluukkai/routed-anecdotes> oleva reduxiton anekdoottisovellus.
 
-Jos kloonaat projektin olemassaolevan git-reposition sisälle, *poista kloonatun sovelluksen git-konfiguraatio*
+Jos kloonaat projektin olemassaolevan git-reposition sisälle, <i>poista kloonatun sovelluksen git-konfiguraatio:</i>
 
 ```bash
 cd routed-anecdotes   // eli mene ensin kloonatun repositorion hakemistoon

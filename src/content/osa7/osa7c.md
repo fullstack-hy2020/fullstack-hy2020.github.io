@@ -859,3 +859,11 @@ Jos create-react-app:illa tehdyn sovelluksen ejektoi, paluuta ei ole, sen jälke
 
 Ejektoidun sovelluksen konfiguraatioiden lukeminen on suositeltavaa ja sangen opettavaista!
 </div>
+
+<div class="tasks">
+
+### Tehtäviä
+
+Koko osan lopun [blogilistaa laajentavassa tehtäväsarjassa](http://localhost:8000/osa7/tehtavia_blogilistan_laajennus) on myös yksi webpackiin liittyvä tehtävä.
+
+</div>
