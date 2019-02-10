@@ -30,7 +30,7 @@ Muuta tässä tehtävässä notifikaatio käyttämään Reduxia.
 
 Siirrä blogien tietojen talletus Reduxiin.
 
-Kirjautumisen ja uden blogin luomisen lomakkeiden tilaa voit halutessasi hallita edelleen Reactin tilan avulla. 
+Kirjautumisen ja uuden blogin luomisen lomakkeiden tilaa voit halutessasi hallita edelleen Reactin tilan avulla. 
 
 Tämä ja seuraava osa ovat kohtuullisen työläitä, mutta erittäin opettavaisia.
 
@@ -55,7 +55,7 @@ Näkymään päästään klikkaamalla nimeä kaikkien käyttäjien näkymästä
 
 ![](../images/7/43.png)
 
-<i>**Huom1:**</i> jos sovelluksesi käyttää tilanhallintan Reduxia saattaa tässä tehtävässä olla hyödyksi käyttää funktion _mapStateToProps_ toista parametria [ownPropsia](https://react-redux.js.org/api/connect#mapstatetoprops-state-ownprops-object), joka on dokumentaation hienoisesta kryptisyydestä huolimatta aika [helppokäyttöinen](https://stackoverflow.com/questions/41198842/what-is-the-use-of-the-ownprops-arg-in-mapstatetoprops-and-mapdispatchtoprops).
+<i>**Huom1:**</i> jos sovelluksesi käyttää tilanhallintaan Reduxia, saattaa tässä tehtävässä olla hyödyksi käyttää funktion _mapStateToProps_ toista parametria [ownPropsia](https://react-redux.js.org/api/connect#mapstatetoprops-state-ownprops-object), joka on dokumentaation hienoisesta kryptisyydestä huolimatta aika [helppokäyttöinen](https://stackoverflow.com/questions/41198842/what-is-the-use-of-the-ownprops-arg-in-mapstatetoprops-and-mapdispatchtoprops).
 
 <i>**Huom2:**</i> törmäät tätä tehtävää tehdessäsi lähes varmasti seuraavaan virheeseen
 
@@ -94,7 +94,7 @@ Näkymään päästään klikkaamalla blogin nimeä kaikkien blogien näkymäst�
 
 ![](../images/7/46.png)
 
-Tämän tehtävän jälkeen tehtävässä 5.6 toteutettua toiminnallisuutta ei enää tarvita, eli kaikkien blogien näkymässä yksittäisten blogien detaljien ei enää tarvitse avautua klikatessa.
+Tämän tehtävän jälkeen tehtävässä 5.6 toteutettua toiminnallisuutta ei enää tarvita, eli kaikkien blogien näkymässä yksittäisten blogien detaljien ei enää tarvitse avautua klikattaessa.
 
 #### 7.10 navigointi
 
@@ -130,7 +130,7 @@ Jos käytät tyylien lisäämiseen noin tunnin aikaa, merkkaa myös tämä teht�
 
 #### 7.15 ESLint
 
-Konfiguroi frontend käyttämään ELintiä
+Konfiguroi frontend käyttämään ESLintiä
 
 #### 7.16 Webpack
 
