@@ -22,7 +22,7 @@ Hyvä neuvo niin refaktorointiin kuin uudenkin koodin kirjoittamiseen on <i>pien
 
 #### 7.4: redux, step1
 
-Siirry käyttämään React-komponenttien tilan eli sijaan Reduxia.
+Siirry käyttämään React-komponenttien tilan sijaan Reduxia sovelluksen tilan hallintaan.
 
 Muuta tässä tehtävässä notifikaatio käyttämään Reduxia.
 
