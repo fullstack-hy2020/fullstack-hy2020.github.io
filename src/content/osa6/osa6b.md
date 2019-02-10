@@ -995,6 +995,10 @@ HOC:it ovat oikeastaan käsitteen [High Order Function](https://en.wikipedia.org
 
 Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2019/redux-notes) branchissa <i>part6-4</i>.
 
+</div>
+
+<div class="tasks">
+
 ### Tehtäviä
 
 #### 6.12 paremmat anekdootit, step10
