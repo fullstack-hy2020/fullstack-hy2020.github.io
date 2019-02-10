@@ -40,12 +40,12 @@ module.exports = {
     c: 'Redux-sovelluksen kommunikointi palvelimen kanssa',
   },
   '7': {
-    //a: 'React-router',
-    //b: 'Lisää tyyleistä',
-    //c: 'Webpack',
-    //d: 'Luokkakomponentit, E2E-testaus',
-    //e: 'Sekalaista',
-    //f: 'Tehtäviä: blogilistan laajennus',
+    a: 'React-router',
+    b: 'Lisää tyyleistä',
+    c: 'Webpack',
+    d: 'Luokkakomponentit, E2E-testaus',
+    e: 'Sekalaista',
+    f: 'Tehtäviä: blogilistan laajennus',
   },
   // '8': { a: 'GraphQL' },
 };

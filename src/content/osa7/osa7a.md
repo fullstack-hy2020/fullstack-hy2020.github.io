@@ -105,6 +105,11 @@ npm install --save react-router-dom
 React routerin tarjoama reititys saadaan käyttöön muuttamalla sovellusta seuraavasti:
 
 ```js
+import {
+  BrowserRouter as Router,
+  Route, Link, Redirect, withRouter
+} from 'react-router-dom'
+
 const App = () => {
 
   const padding = { padding: 5 }
@@ -133,7 +138,10 @@ Reititys, eli komponenttien ehdollinen, selaimen <i>urliin perustuva</i> render�
 Huomaa, että vaikka komponenttiin viitataan nimellä <i>Router</i> kyseessä on [BrowserRouter](https://reacttraining.com/react-router/web/api/BrowserRouter), sillä importtaus tapahtuu siten, että importattava olio uudelleennimetään:
 
 ```js
-import { BrowserRouter as Router ... } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Route, Link, Redirect, withRouter
+} from 'react-router-dom'
 ```
 
 Manuaalin mukaan

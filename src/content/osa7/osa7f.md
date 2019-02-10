@@ -6,7 +6,7 @@ letter: f
 
 <div class="content">
 
-Kurssin seitsemännessä osassa on luvun [React router](/osa7/react_router) kolmen tehtävän lisäksi 19 tehtävää, joissa jatketaan osissa 4 ja 5 tehtyä Bloglist-sovellusta.  Osa seuraavassa olevista tehtävistä on toisistaan riippumattomia "featureita", eli tehtäviä ei tarvitse tehdä järjestyksessä, voit jättää osan aivan hyvin toteuttamatta.
+Kurssin seitsemännessä osassa on luvun [React router](/osa7/react_router) kolmen tehtävän lisäksi 17 tehtävää, joissa jatketaan osissa 4 ja 5 tehtyä Bloglist-sovellusta.  Osa seuraavassa olevista tehtävistä on toisistaan riippumattomia "featureita", eli tehtäviä ei tarvitse tehdä järjestyksessä, voit jättää osan aivan hyvin toteuttamatta.
 
 Voit ottaa pohjaksi oman sovelluksesi sijaan myös mallivastauksen koodin.
 
@@ -42,55 +42,71 @@ Siirrä myös kirjautuneen käyttäjän tietojen talletus Reduxiin.
 
 Tee sovellukseen näkymä, joka näyttää kaikkiin käyttäjiin liittyvät perustietot:
 
-![](../assets/teht/53.png)
+![](../images/7/41.png)
 
 
-#### 7.8 yksittäisen käyttäjän näkymä, step1
+#### 7.8 yksittäisen käyttäjän näkymä
 
 Tee sovellukseen yksittäisen käyttäjän näkymä, jolta selviää mm. käyttäjän lisäämät blogit
 
-![](../assets/teht/54.png)
+![](../images/7/44.png)
 
 Näkymään päästään klikkaamalla nimeä kaikkien käyttäjien näkymästä
 
-![](../assets/teht/55.png)
+![](../images/7/43.png)
 
-#### 7.10 yksittäisen käyttäjän näkymä step2
+<i>**Huom1:**</i> jos sovelluksesi käyttää tilanhallintan Reduxia saattaa tässä tehtävässä olla hyödyksi käyttää funktion _mapStateToProps_ toista parametria [ownPropsia](https://react-redux.js.org/api/connect#mapstatetoprops-state-ownprops-object), joka on dokumentaation hienoisesta kryptisyydestä huolimatta aika [helppokäyttöinen](https://stackoverflow.com/questions/41198842/what-is-the-use-of-the-ownprops-arg-in-mapstatetoprops-and-mapdispatchtoprops).
 
-Merkkaa tämä tehtävä tehdyksi jos toteuttamasi yksittäisen käyttäjän näkymä toimii oikein myös siinä tilanteessa että menet urliin suoraan tai refreshaat selaimen ollessasi käyttäjän näkymässä.
+<i>**Huom2:**</i> törmäät tätä tehtävää tehdessäsi lähes varmasti seuraavaan virheeseen
 
-#### 7.5 redux, step2
+![](../images/7/42a.png)
 
-Siirrä kaikkien käyttäjien tietojen talletus Reduxiin. 
+vika ilmenee jos uudelleenlataat sivun ollessasi yksittäisen käyttäjän sivulla. 
 
-Tässä tehtävässä saattaa olla hyödyksi käyttää metodin <i>mapStateToProps</i> toista parametria
-[ownPropsia](https://github.com/reactjs/react-redux/blob/master/docs/api.md#inject-todos-of-a-specific-user-depending-on-props) joka on dokumentaation hienoisesta kryptisyydestä huolimatta [aika simppeli](https://stackoverflow.com/questions/41198842/what-is-the-use-of-the-ownprops-arg-in-mapstatetoprops-and-mapdispatchtoprops) asia.
+Vian syynä on se, että jos mennään suoraan jonkin käyttäjän sivulle, eivät käyttäjien tiedot ole vielä ehtineet palvelimelta React-sovellukseen. Ongelman voi kiertää ehdollisella renderöinnillä esim. seuraavasti:
 
+```js
+const User = (props) => {
+  // highlight-start
+  if ( props.user === undefined) { 
+    return null
+  }
+  // highlight-end
 
-#### 7.11 blogin näkymä
+  return (
+    <div>
+      <h2>{props.user.name}</h2>
+
+      <h3>added blogs</h3>
+      // ...
+    </div>
+  )
+}
+```
+
+#### 7.9 blogin näkymä
 
 Toteuta sovellukseen oma näkymä yksittäisille blogeille. Näkymä voi näyttää seuraavalta
 
-![](../assets/teht/49.png)
+![](../images/7/45.png)
 
 Näkymään päästään klikkaamalla blogin nimeä kaikkien blogien näkymästä
 
-![](../assets/teht/50.png)
-
+![](../images/7/46.png)
 
 Tämän tehtävän jälkeen tehtävässä 5.6 toteutettua toiminnallisuutta ei enää tarvita, eli kaikkien blogien näkymässä yksittäisten blogien detaljien ei enää tarvitse avautua klikatessa.
 
-#### 7.12 navigointi
+#### 7.10 navigointi
 
 Tee sovellukseen navigaatiomenu
 
-![](../assets/teht/56.png)
+![](../images/7/47.png)
 
-#### 7.13 kommentit, step1
+#### 7.11 kommentit, step1
 
 Tee sovellukseen mahdollisuus blogien kommentointiin:
 
-![](../assets/teht/51.png)
+![](../images/7/48.png)
 
 Kommentit ovat anonyymejä, eli ne eivät liity järjestelmän käyttäjiin.
 
@@ -98,29 +114,29 @@ Tässä tehtävässä riittää, että frontend osaa näyttää blogilla olevat 
 
 Sopiva rajapinta kommentin luomiseen on osoitteeseen <i>api/blogs/:id/comments</i> tapahtuva HTTP POST -pyyntö.
 
-#### 7.14 kommentit, step2
+#### 7.12 kommentit, step2
 
 Laajenna sovellusta siten, että kommentointi onnistuu frontendista käsin:
 
-![](../assets/teht/52.png)
+![](../images/7/49.png)
 
-#### 7.15 tyylit, step1
+#### 7.13 tyylit, step1
 
 Tee sovelluksesi ulkoasusta tyylikkäämpi jotain kurssilla esiteltyä tapaa käyttäen
 
-#### 7.16 tyylit, step2
+#### 7.14 tyylit, step2
 
 Jos käytät tyylien lisäämiseen noin tunnin aikaa, merkkaa myös tämä tehtävä tehdyksi.
 
-#### 7.17 ESLint
+#### 7.15 ESLint
 
 Konfiguroi frontend käyttämään ELintiä
 
-#### 7.18 Webpack
+#### 7.16 Webpack
 
 Tee sovellukselle sopiva webpack-konfiguraatio
 
-#### 7.19 End to end -testaus, step1
+#### 7.17 End to end -testaus, step1
 
 Tee sovellukselle ainakin kaksi E2E-testiä [Cypress-kirjaston](/osa7/luokkakomponentit_e_2_e_testaus#sovelluksen-end-to-end-testaus) avulla. Sopiva testattava asia on esim. käyttäjän kirjautuminen sovellukseen.
 
@@ -129,15 +145,15 @@ Tämän tehtävän testeissä voit olettaa, että tietokannan tila on testien ka
 Kannattanee käyttää hetki aikaa Cypressin dokumentaation silmäilemiseen, erityisesti 
 [best practices](https://docs.cypress.io/guides/references/best-practices.html) sisältää monia asioita, joita on hyvä pitää mielessä testejä kirjoittaessa.
 
-#### 7.20 End to end -testaus, step2
+#### 7.18 End to end -testaus, step2
 
 Laajenna E2E-testejä siten, että testit [alustavat tietokannan](/osa7/luokkakomponentit_e_2_e_testaus#tietokannan-tilan-kontrollointi) aina ennen testien suorittamista. Tee myös ainakin yksi testi, joka muokkaa sovelluksen tietokantaa, esim. lisää sovellukseen blogin.
 
-#### 7.21 End to end -testaus, step3
+#### 7.19 End to end -testaus, step3
 
 Laajenna vielä E2E-testejäsi. Voit merkitä tehtävän, jos käytät laajentamiseen vähintään 30 minuuttia aikaa.
 
-#### 7.22 Kurssipalaute
+#### 7.20 Kurssipalaute
 
 Anna kurssille palautetta weboodissa.
 
