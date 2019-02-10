@@ -6,7 +6,7 @@ letter: a
 
 <div class="content">
 
-Kurssin seitsemännen osan tehtävät poikkeavat poikkeavat jossain määrin. Tässä luvussa on normaaliin tapaan [kolme luvun teoriaan liittyvää tehtävää](http://localhost:8000/osa7/react_router#tehtavia).
+Kurssin seitsemännen osan tehtävät poikkeavat jossain määrin. Tässä luvussa on normaaliin tapaan [kolme luvun teoriaan liittyvää tehtävää](http://localhost:8000/osa7/react_router#tehtavia).
 
 Tämän luvun tehtävien lisäksi seitsemäs osa sisältää kertaavan ja hieman tämän osan teoriaakin soveltavan [tehtäväsarjan](http://localhost:8000/osa7/tehtavia_blogilistan_laajennus), jossa laajennetaan osissa 4 ja 5 tehtyä Bloglist-sovellusta. 
 
@@ -146,7 +146,7 @@ import {
 
 Manuaalin mukaan
 
-> <i>BrowserRouter</i> is a <i>Router</i> that uses the HTML5 history API (pushState, replaceState and the popstate event) to keep your UI in sync with the URL.
+> <i>BrowserRouter</i> is a <i>Router</i> that uses the HTML5 history API (pushState, replaceState and the popState event) to keep your UI in sync with the URL.
 
 Normaalisti selain lataa uuden sivun osoiterivillä olevan urlin muuttuessa. [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/):n avulla <i>BrowserRouter</i> kuitenkin mahdollistaa sen, että selaimen osoiterivillä olevaa urlia voidaan käyttää React-sovelluksen sisäiseen "reitittämiseen", eli vaikka osoiterivillä oleva url muuttuu, sivun sisältöä manipuloidaan ainoastaan Javascriptillä ja selain ei lataa uutta sisältöä palvelimelta. Selaimen toiminta back- ja forward-toimintojen ja bookmarkien tekemisen suhteen on kuitenkin loogista, eli toimii kuten perinteisillä web-sivuilla.
 
@@ -277,6 +277,7 @@ Mahdollisuus <i>Login</i>-näkymään navigointiin renderöidään menuun ehdoll
       // highlight-start
       {user
         ? <em>{user} logged in</em>
+        
         : <Link to="/login">login</Link>
       }
       // highlight-end
@@ -285,11 +286,11 @@ Mahdollisuus <i>Login</i>-näkymään navigointiin renderöidään menuun ehdoll
 </Router>
 ```
 
-eli jos käyttäjä on kirjaantunut, renderöidäänkin linkin <i>Login</i> sijaan kirjautuneen käyttäjän käyttäjätunnus:
+eli jos käyttäjä on kirjautunut, renderöidäänkin linkin <i>Login</i> sijaan kirjautuneen käyttäjän käyttäjätunnus:
 
 ![](../images/7/4a.png)
 
-Kirjautumisen toteuttamiseen liittyy eräs mielenkiintoinen seikka. Kirjaantumislomakkeelle mennään selaimen osoitteen ollessa <i>/login</i>. Toiminnallisuuden määrittelevä Route on seuraavassa
+Kirjautumisen toteuttamiseen liittyy eräs mielenkiintoinen seikka. Kirjautumislomakkeelle mennään selaimen osoitteen ollessa <i>/login</i>. Toiminnallisuuden määrittelevä Route on seuraavassa
 
 Kirjautumisesta huolehtivan komponentin koodi seuraavassa
 
@@ -325,7 +326,7 @@ const LoginNoHistory = (props) => {
 const Login = withRouter(LoginNoHistory) // highlight-line
 ```
 
-Lomakkeen toteutukseen liittyy muutama huomionarvoinen seukka.
+Lomakkeen toteutukseen liittyy muutama huomionarvoinen seikka.
 Kirjautumisen yhteydessä funktiossa _onSubmit_ kutsutaan propseina vastaanotetun [history](https://reacttraining.com/react-router/web/api/history)-olion metodia _push_. Käytetty komento _props.history.push('/')_ saa aikaan sen, että selaimen osoiteriville tulee osoitteeksi <code>/</code> ja sovellus renderöi osoitetta vastaavan komponentin <i>Home</i>.
 
 Komponentti saa käyttöönsä propsin <i>history</i> siten, että se "kääritään" funktiolla [withRouter](https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/api/withRouter.md). Funktio _withRouter_ toimii hyvin samaan tapaan kuin Reduxin yhteydessä käytetty _connect_, se lisää parametrina saamallensa komponentille joukon propseja.
