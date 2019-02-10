@@ -224,14 +224,16 @@ Tämä tapahtuu laajentamalla komponentissa <i>App</i> olevaa reititystä seuraa
       <Link style={padding} to="/users">users</Link> 
     </div>
 
-    <Route exact path="/" render={() => <Home />} />
+    <Route exact path="/" render={() => 
+      <Home />
+    } />
     // highlight-start
     <Route exact path="/notes" render={() => 
-      <Notes notes={notes} />} 
-    />
+      <Notes notes={notes} />
+    } />
     <Route exact path="/notes/:id" render={({ match }) =>
-      <Note note={noteById(match.params.id)} />}
-    />
+      <Note note={noteById(match.params.id)} />
+    } />
   </div>
   // highlight-end
 </Router>
@@ -289,8 +291,6 @@ Mahdollisuus <i>Login</i>-näkymään navigointiin renderöidään menuun ehdoll
 eli jos käyttäjä on kirjautunut, renderöidäänkin linkin <i>Login</i> sijaan kirjautuneen käyttäjän käyttäjätunnus:
 
 ![](../images/7/4a.png)
-
-Kirjautumisen toteuttamiseen liittyy eräs mielenkiintoinen seikka. Kirjautumislomakkeelle mennään selaimen osoitteen ollessa <i>/login</i>. Toiminnallisuuden määrittelevä Route on seuraavassa
 
 Kirjautumisesta huolehtivan komponentin koodi seuraavassa
 
@@ -388,17 +388,21 @@ const App = () => {
             }
           </div>
 
-          <Route exact path="/" render={() => <Home />} />
-          <Route exact path="/notes" render={() => <Notes notes={notes} />} />
+          <Route exact path="/" render={() => 
+            <Home />
+          } />
+          <Route exact path="/notes" render={() => 
+            <Notes notes={notes} />
+          } />
           <Route exact path="/notes/:id" render={({ match }) =>
-            <Note note={noteById(match.params.id)} />}
-          />
+            <Note note={noteById(match.params.id)} />
+          } />
           <Route path="/users" render={() =>
             user ? <Users /> : <Redirect to="/login" />
           } />
           <Route path="/login" render={() =>
-            <Login onLogin={login} />}
-          />
+            <Login onLogin={login} />
+          } />
         </div>
       </Router>
       <div>
@@ -432,25 +436,25 @@ npm install
 npm start
 ```
 
-#### 7.1: routed anecdotes, step31
+#### 7.1: routed anecdotes, step1
 
-Lisää sovellukseen React Router siten, että _Menu_-komponentissa olevia linkkejä klikkailemalla saadaan säädeltyä näytettävää näkymää.
+Lisää sovellukseen React Router siten, että <i>Menu</i>-komponentissa olevia linkkejä klikkailemalla saadaan säädeltyä näytettävää näkymää.
 
 Sovelluksen juuressa, eli polulla _/_ näytetään anekdoottien lista:
 
 ![](../assets/teht/40.png)
 
-Pohjalla oleva _Footer_-komponentti tulee näyttää aina.
+Pohjalla oleva <i>Footer</i>-komponentti tulee näyttää aina.
 
-Uuden anekdootin luominen tapahtuu esim. polulla _create_:
+Uuden anekdootin luominen tapahtuu esim. polulla <i>create</i>:
 
-![]({{ "/assets/teht/41.png" | absolute_url }})
+![](../assets/teht/41.png)
 
 Huom: jos saat seuraavan virheilmoituksen
 
-![]({{ "/assets/teht/39.png" | absolute_url }})
+![](../assets/teht/39.png)
 
-pääset siitä eroon sisällyttämällä kaiken Router-elementin sisälle tulevaan _div_-elementtiin:
+pääset siitä eroon sisällyttämällä kaiken Router-elementin sisälle tulevaan <i>div</i>-elementtiin:
 
 ```bash
 <Router>
@@ -474,7 +478,7 @@ Yksittäisen anekdootin sivulle navigoidaan klikkaamalla anekdootin nimeä
 
 Luomislomakkeen oletusarvoinen toiminnallisuus on melko hämmentävä, sillä kun lomakkeen avulla luodaan uusi muistiinpano, mitään ei näytä tapahtuvan.
 
-Paranna toiminnallisuutta siten, että luomisen jälkeen siirrytään automaattisesti kaikkien anekdoottien näkymään _ja_ käyttäjälle näytetään 10 sekunnin ajan onnistuneesta lisäyksestä kertova notifikaatio:
+Paranna toiminnallisuutta siten, että luomisen jälkeen siirrytään automaattisesti kaikkien anekdoottien näkymään <i>ja</i> käyttäjälle näytetään 10 sekunnin ajan onnistuneesta lisäyksestä kertova notifikaatio:
 
 ![](../assets/teht/44.png)
 
