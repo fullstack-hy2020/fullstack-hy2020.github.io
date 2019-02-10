@@ -156,7 +156,7 @@ Kun nyt suoritamme bundlauksen komennolla _npm run build_ huomaamme webpackin ha
 
 ![](../images/7/20.png)
 
-Kirjoittamamme koodi löytyy erittäin kryptisesti muotoiltuna bundlen lopussa:
+Kirjoittamamme koodi löytyy erittäin kryptisesti muotoiltuna bundlen lopusta:
 
 ```js
 /***/ "./src/App.js":
