@@ -285,7 +285,7 @@ Note.find({ important: true }).then(result => {
 
 #### 3.12: tietokanta komentoriviltä
 
-Luo sovellukselle pilvessä oleva mongo Mongo DB Atlaksen avulla.
+Luo puhelinluettelo sovellukselle pilvessä oleva mongo Mongo DB Atlaksen avulla.
 
 Tee projektihakemistoon tiedosto <i>mongo.js</i>, jonka avulla voit lisätä tietokantaan puhelinnumeroja sekä listata kaikki kannassa olevat numerot.
 
