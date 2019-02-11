@@ -46,6 +46,8 @@ CORS:ista voi lukea tarkemmin esim. [Mozillan sivuilta](https://developer.mozill
 
 Kun koko "stäkki" on saatu vihdoin kuntoon, siirretään sovellus internettiin. Viime aikoina on tullut uusia mielenkiintoisa sovellusten hostausmahdollisuuksia, esim. [Zeit](https://zeit.co). Käytetään seuraavassa vanhaa kunnon [Herokua](https://www.heroku.com).
 
+> <i>Jos et ole koskaan käyttänyt herokua, löydät käyttöohjeita kurssin [Tietokantasovellus](https://materiaalit.github.io/tsoha-18/viikko1/)-materiaalista ja Googlaamalla...</i>
+
 Lisätään projektin juureen tiedosto <i>Procfile</i>, joka kertoo Herokulle, miten sovellus käynnistetään
 
 ```bash

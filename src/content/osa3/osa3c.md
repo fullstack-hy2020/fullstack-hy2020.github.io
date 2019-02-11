@@ -71,6 +71,8 @@ Dokumenttitietokannat poikkeavat jossain määrin relaatiotietokannoista niin da
 MongoDB:n voi luonnollisesti asentaa omalle koneelle. Internetistä löytyy kuitenkin myös palveluna toimivia Mongoja, joista tämän hetken paras valinta on  
 [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 
+> <i>Jos ehdit jo konfiguroida itsellesi mlabin, löydät ohjeet sen käyttöön [viime vuoden materiaalista](https://fullstackopen.github.io/osa3/).</i>
+
 Kun käyttäjätili on luotu ja kirjauduttu, Atlas kehoittaa luomaan klusterin:
 
 ![](../images/3/57.png)
@@ -79,8 +81,11 @@ Valitaan <i>AWS</i> ja <i>Frankfurt</i> ja luodaan klusteri.
 
 ![](../images/3/58.png)
 
+Odotetaan että klusteri on valmiina, tähän menee noin 10 minuuttia. 
 
-Kun klusteri on hetken kuluttua valmis, luodaan <i>security</i> välilehdeltä tietokantakäyttäjätunnus joka on siis eri tunnus kuin se, jonka avulla kirjaudutaan MongoDB Atlasiin:
+**HUOM** älä jatka eteenpäin ennen kun klusteri on valmis!
+
+Luodaan <i>security</i> välilehdeltä tietokantakäyttäjätunnus joka on siis eri tunnus kuin se, jonka avulla kirjaudutaan MongoDB Atlasiin:
 
 ![](../images/3/59.png)
 
