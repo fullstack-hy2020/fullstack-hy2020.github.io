@@ -68,10 +68,9 @@ Dokumenttitietokannat poikkeavat jossain määrin relaatiotietokannoista niin da
 
 **Lue nyt Tietokantojen perusteiden dokumenttitietokantoja kuvaava osuus.** Jatkossa oletetaan, että hallitset käsitteet <i>dokumentti</i> ja <i>kokoelma</i> (collection).
 
-MongoDB:n voi luonnollisesti asentaa omalle koneelle. Internetistä löytyy kuitenkin myös palveluna toimivia Mongoja, joista tämän hetken paras valinta on  
-[MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+MongoDB:n voi luonnollisesti asentaa omalle koneelle. Internetistä löytyy kuitenkin myös palveluna toimivia Mongoja, joista tämän hetken paras valinta on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 
-> <i>Jos ehdit jo konfiguroida itsellesi mlabin, löydät ohjeet sen käyttöön [viime vuoden materiaalista](https://fullstackopen.github.io/osa3/).</i>
+> <i>Jos ehdit jo konfiguroida itsellesi mlabin, löydät ohjeita sen käyttöön [viime vuoden materiaalista](https://fullstackopen.github.io/osa3/).</i>
 
 Kun käyttäjätili on luotu ja kirjauduttu, Atlas kehoittaa luomaan klusterin:
 
@@ -92,6 +91,8 @@ Luodaan <i>security</i> välilehdeltä tietokantakäyttäjätunnus joka on siis 
 annetaan käyttäjälle luku- ja kirjoitustoikeus kaikkiin tietokantoihin
 
 ![](../images/3/60.png)
+
+**HUOM** muutamissa tapauksissa uusi käyttäjä ei ole toiminut heti luomisen jälkeen. On saattanut kestää jopa useita minuutteja ennen kuin käyttäjätunnus on ruvennut toimimaan.
 
 Seuraavaksi tulee määritellä ne ip-osoitteet, joista tietokantaan pääsee käsiksi
 
