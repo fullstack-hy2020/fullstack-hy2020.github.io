@@ -81,7 +81,7 @@ Jos ei, vikaa voi selvittää herokun lokeja lukemalla, eli komennolla <i>heroku
 
 Myös frontend toimii Herokussa olevan backendin avulla. Voit varmistaa asian muuttamalla frontendiin määritellyn backendin osoitteen viittaamaan <i>http://localhost:3001</i>:n sijaan Herokussa olevaan backendiin.
 
-Seuraavaksi herää kysymys miten saamme myös frontendin internettiin? Vaihtoehtoja on useita.
+Seuraavaksi herää kysymys miten saamme myös frontendin internettiin? Vaihtoehtoja on useita, mutta käydään seuraavaksi läpi yksi niistä.
 
 ### Frontendin tuotantoversio
 
