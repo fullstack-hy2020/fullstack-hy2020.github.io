@@ -816,7 +816,7 @@ app.use(bodyParser.json())
 
 ei HTTP-pyynnön mukana oleva data olisi loggerin eikä POST-pyynnön käsittelyn aikana käytettävissä, kentässä _request.body_ olisi tyhjä olio.
 
-Oleellista on myös ottaa käyttöön virheiden viimeisenä.
+Tärkeää on myös ottaa käyttöön olemattomien osoitteiden käsittely viimeisenä.
 
 Myös seuraava järjestys aiheuttaisi ongelman
 
