@@ -503,9 +503,7 @@ Järjestä sovellus näyttämään blogit <i>likejen</i> mukaisessa suuruusjärj
 
 #### 5.9*: blogilistan frontend, step9
 
-Lisää nappi blogin poistamiselle.
-
-Toteuta myös poiston tekevä logiikka. Laajenna backendiä siten, että ne blogit, joihin ei liity lisääjää (joita syntyi ennen kuin olimme lisänneet järjestelmään käyttäjiä), ovat kaikkien kirjautuneiden käyttäjien poistettavissa.
+Lisää nappi blogin poistamiselle. Toteuta myös poiston tekevä logiikka. 
 
 Ohjelmasi voi näyttää esim. seuraavalta:
 
