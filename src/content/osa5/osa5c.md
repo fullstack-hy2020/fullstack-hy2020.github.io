@@ -431,7 +431,7 @@ it('toggled content can be closed', () => {
 
 Käyttämämme _getByText_ on vain yksi monista [queryistä](https://testing-library.com/docs/api-queries#queries), joita <i>react-testing-library</i> tarjoaa.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019part2-notes/tree/part5-7), branchissa <i>part5-7</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part2-notes/tree/part5-7), branchissa <i>part5-7</i>.
 
 </div>
 
@@ -729,7 +729,7 @@ Melko primitiivinen HTML-muotoinen raportti generoituu hakemistoon <i>coverage/l
 
 Huomaamme, että parannettavaa jäi vielä runsaasti.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019part2-notes/tree/part5-8), branchissa <i>part5-8</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part2-notes/tree/part5-8), branchissa <i>part5-8</i>.
 
 </div>
 
