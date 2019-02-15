@@ -47,7 +47,7 @@ module.exports = {
     e: 'Sekalaista',
     f: 'Tehtäviä: blogilistan laajennus',
   },
-  //'8': { 
-  //  a: 'GraphQL' 
-  //},
+  '8': { 
+    a: 'GraphQL' 
+  },
 };

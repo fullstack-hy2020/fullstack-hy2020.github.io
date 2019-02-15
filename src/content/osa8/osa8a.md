@@ -214,34 +214,160 @@ vastaus on <i>null</i>
 }
 ```
 
-Kuten huomaamme, GraphQL kyseily ikäänkuin kuvailee sen muodon, jo
+Kuten huomaamme, GraphQL kyselyn ja siihen vastauksena tulevan JSON:in muodoilla on vahva yhteys, voidaan ajatella että kysely kuvailee sen minkälaista dataa vastauksena halutaan. Ero REST:issä tehtäviin pyyntöihin on suuri, REST:iä käytettäessä pyynnon tyyppi ei kerro mitään palautettavan datan muodosta. 
 
+GraphQL:n skeema kuvaa ainoastaan palvelimen ja sitä käyttäjien clientien välillä liikkuvan tiedon muodon. Tieto voi olla organisoituna palvelimen tietokantaan ihan missä muodossa tahansa.
 
-
-Nimestään huolimatta GraphQL:llä ei ole suoranaisesti mitään tekemistä tietokantojen kanssa, se ei ota mitään kantaa siihen miten data on tallennettu. GraphQL-periaattella toimivan API:n käyttämä data voi siis olla talletettu relaatiotietokantaan, dokumenttitietokantaan tai muille palvelimille, joita GraphQL-palvelin käyttää vaikkapa REST:in välityksellä. GraphQL on täysin ohjelmointikieliriippumaton, sekä GraphQL-clientien että -servereiden toteuttamisen tueksi on olemassa kirjastoja useilla ohjelmointikielillä.
+Nimestään huolimatta GraphQL:llä ei siis ole mitään tekemistä tietokantojen kanssa, se ei ota mitään kantaa siihen miten data on tallennettu. GraphQL-periaattella toimivan API:n käyttämä data voi siis olla talletettu relaatiotietokantaan, dokumenttitietokantaan tai muille palvelimille, joita GraphQL-palvelin käyttää vaikkapa REST:in välityksellä. 
 
 ### Apollo server
 
-```js
-```
+Toteuteaan nyt GraphQL-palvelin tämän hetken johtavaa kirjastoa [Apollo serveriä](https://www.apollographql.com/docs/apollo-server/) käyttäen. 
+
+Luodaan uusi npm-projekti komennolla _npm init_ ja asennetaan tarvittavat riippuvuuet
 
 ```js
+npm install --save apollo-server graphql
 ```
 
+Alustava toteutus on seuraavassa
+
 ```js
+const { ApolloServer, gql } = require('apollo-server')
+
+const persons = [
+  {
+    name: "Arto Hellas",
+    phone: "040-123543",
+    street: "Tapiolankatu 5 A",
+    city: "Espoo"
+  },
+  {
+    name: "Matti Luukkainen",
+    phone: "040-432342",
+    street: "Malminkaari 10 A",
+    city: "Helsinki"
+  },
+  {
+    name: "Venla Ruuska",
+    street: "Nallemäentie 22 C",
+    city: "Helsinki"
+  },
+]
+
+const typeDefs = gql`
+  type Person {
+    name: String!
+    phone: String
+    street: String!
+    city: String! 
+  }
+
+  type Query {
+    personCount: Int!
+    allPersons: [Person!]!
+    findPerson(name: String!): Person
+  }
+`
+
+const resolvers = {
+  Query: {
+    personCount: () => persons.length,
+    allPersons: () => persons,
+    findPerson: (root, args) => persons.find(p => p.name === args.name)
+  }
+}
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+})
+
+server.listen().then(({ url }) => {
+  console.log(`Server ready at ${url}`)
+})
 ```
+
+Toteutuksen ytimessä on _ApolloServer_, joka saa kaksi parametria 
+
+```js
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+})
+```
+
+parametreista ensimmäinen _typeDefs_ sisältää sovelluksen käyttämän GraphQL-skeeman. 
+
+Toinen parametri on olio, joka sisältää palvelimen [resolverit](https://www.apollographql.com/docs/apollo-server/essentials/data.html#resolver-map), eli käytännössä koodin, joka määrittelee <i>miten</i> GraphQL-kyselyihin vastataan.
+
+Resolverien koodi on seuraavassa:
+
+```js
+const resolvers = {
+  Query: {
+    personCount: () => persons.length,
+    allPersons: () => persons,
+    findPerson: (root, args) => persons.find(p => p.name === args.name)
+  }
+}
+```
+
+kuten huomataan vastaavat resolverit rakenteeltaan skeemassa määriteltyjä kyseilyitä:
+
+```js
+type Query {
+  personCount: Int!
+  allPersons: [Person!]!
+  findPerson(name: String!): Person
+}
+```
+
+eli jokaista skeemassa määriteltyä kyselyä kohti om määritelty oma kentän <i>Query</i> alle tuleva kenttänsä.
+
+Kyselyn 
+
+```js
+query {
+	personCount
+}
+```
+
+resolveri on funktio
+
+```js
+() => persons.length
+```
+
+eli kyselyyn palautetaan vastauksena taulukon _persons_ pituus. 
+
+Kaikki luettelossa olevat henkilöt hakevan kyselyn 
+
+```js
+query {
+  allPersons {
+    name
+  }
+}
+```
+
+resolveri on funktio, joka palauttaa <i>kaikki</i> taulukon _persons_ oliot
+
+```js
+() => persons
+```
+
+### GraphQL-playground
+
+Kun Apollo serveriä suoritetaan sovelluskehitysmoodissa, käynnistää se osoitteeseen [http://localhost:4000/graphql](http://localhost:4000/graphql) sovelluskehittäjälle eritäin hyödyllisen [GraphQL-playground](https://www.apollographql.com/docs/apollo-server/features/graphql-playground.html) näkymän, joka avulla on mahdollista tehdä kyselyjä palvelimelle.
+
+### Triviaaliresolveri
+
+### Olion sisällä olio
+
+### Frontti
 
 
 GraphQL on jo melko iäkäs teknologia, se on ollut Facebookin sisäisessä käytössä jo vuodesta 2012 lähtien, teknologian voi siis todeta olevan "battle tested". Facebook julkaisi GraphQL:n vuonna 2015 ja se on pikkuhiljaa saanut enenevissä määrin huomiota ja nousee ehkä lähivuosina uhmaamaan REST:in valta-asemaa.
-
-Teen kurssille ehkä tulevaisuudessa uuden, GraphQL:ää käsittelevän osan. Tänä keväänä se ei kuitenkaan tule ilmestymään. Jos haluat kulkea etujoukkojen mukana, voikin olla hyvä idea tutustua GraphQL:n [Full Stack -harjoitustyön](https://courses.helsinki.fi/fi/TKT21010/121540755) yhteydessä.
-
-Lisää GraphQL:stä esim. seuraavissa:
-* <http://graphql.org/>
-* <https://github.com/facebook/graphql>
-* [Tutoriaali](https://dev-blog.apollodata.com/full-stack-react-graphql-tutorial-582ac8d24e3b) GraphQL:n käyttöön Reactista [Apollo clientin](https://www.apollographql.com/docs/react/) avulla
-* [Why GraphQL is the future](https://dev-blog.apollodata.com/why-graphql-is-the-future-3bec28193807)
-
-
 
 </div>
