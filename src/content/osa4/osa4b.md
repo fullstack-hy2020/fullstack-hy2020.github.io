@@ -336,7 +336,7 @@ const initialNotes = [
 ]
 
 beforeEach(async () => {
-  await Note.remove({})
+  await Note.deleteMany({})
 
   let noteObject = new Note(initialNotes[0])
   await noteObject.save()
@@ -600,7 +600,7 @@ const api = supertest(app)
 const Note = require('../models/note')
 
 beforeEach(async () => {
-  await Note.remove({})
+  await Note.deleteMany({})
 
   let noteObject = new Note(helper.initialNotes[0]) // highlight-line
   await noteObject.save()
@@ -819,7 +819,7 @@ Palataan takaisin testien pariin, ja tarkastellaan määrittelemäämme testit a
 
 ```js
 beforeEach(async () => {
-  await Note.remove({})
+  await Note.deleteMany({})
 
   let noteObject = new Note(helper.initialNotes[0])
   await noteObject.save()
@@ -833,7 +833,7 @@ Funktio tallettaa tietokantaan taulukon _helper.initialNotes_ nollannen ja ensim
 
 ```js
 beforeEach(async () => {
-  await Note.remove({})
+  await Note.deleteMany({})
   console.log('cleared')
 
   helper.initialNotes.forEach(async (note) => {
@@ -980,7 +980,7 @@ const Note = require('../models/note')
 
 describe('when there is initially some notes saved', async () => {
   beforeEach(async () => {
-    await Note.remove({})
+    await Note.deleteMany({})
 
     const noteObjects = helper.initialNotes
       .map(note => new Note(note))

@@ -264,7 +264,7 @@ const User = require('../models/user')
 
 describe('when there is initially one user at db', async () => {
   beforeEach(async () => {
-    await User.remove({})
+    await User.deleteMany({})
     const user = new User({ username: 'root', password: 'sekret' })
     await user.save()
   })
