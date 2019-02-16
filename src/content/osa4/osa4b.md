@@ -871,10 +871,10 @@ Koska testien suoritus alkaa heti _beforeEach_ metodin suorituksen jälkeen, tes
 Toimiva ratkaisu tilanteessa on odottaa asynkronisten talletusoperaatioiden valmistumista _beforeEach_-funktiossa, esim. metodin [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) avulla:
 
 ```js
-beforeAll(async () => {
+beforeEach(async () => {
   await Note.remove({})
 
-  const helper.noteObjects = initialNotes
+  const noteObjects = helper.initialNotes
     .map(note => new Note(note))
   const promiseArray = noteObjects.map(note => note.save())
   await Promise.all(promiseArray)
@@ -891,7 +891,7 @@ Siispä viimeinen rivi, <em>await Promise.all(promiseArray)</em> odottaa, että 
 Promise.all suorittaa kaikkia syötteenä saamiaan promiseja rinnakkain. Jos operaatioiden suoritusjärjestyksellä on merkitystä, voi tämä aiheuttaa ongelmia. Tällöin asynkroniset operaatiot on mahdollista määrittää [for...of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) lohkon sisällä, jonka suoritusjärjestys on taattu.
 
 ```js
-beforeAll(async () => {
+beforeEach(async () => {
   await Note.remove({})
 
   for (let note of initialNotes) {
