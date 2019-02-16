@@ -44,7 +44,6 @@ Tee sovellukseen näkymä, joka näyttää kaikkiin käyttäjiin liittyvät peru
 
 ![](../images/7/41.png)
 
-
 #### 7.8 yksittäisen käyttäjän näkymä
 
 Tee sovellukseen yksittäisen käyttäjän näkymä, jolta selviää mm. käyttäjän lisäämät blogit
