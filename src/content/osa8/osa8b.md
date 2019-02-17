@@ -519,21 +519,275 @@ Muitakin tapoja välimuistin tilan päivittämiseksi on, niistä lisää myöhem
 
 **HUOM** Apollo Client devtools vaikuttaa olevan hieman buginen, se lopettaa jossain vaiheessa välimuistin tilan päivittämisen. Jos törmäät ongelmaan, selaimen välimuistin tyhjentäminen auttaa.
 
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-frontend/tree/part8-2), branchissa <i>part8-2</i>.
+
 #### Mutaatioiden virheiden käsittely
+
+Jos yritämme luoda epävalidia henkilöä, seurauksena on poikkeus
+
+![](../images/8/14.png)
+
+Poikkeus on syytä käsitellä. Eräs tapa poikkeusten käsittelyyn on rekisteröidä mutaatiolle poikkeuksenkäsittelijä [onError](https://www.apollographql.com/docs/react/essentials/mutations.html#props)-propsin avulla:
+
+```js
+const App = () => {
+  // highlight-start
+  const [errorMessage, setErrorMessage] = useState(null)
+
+  const handleError = (error) => {
+    setErrorMessage(error.graphQLErrors[0].message)
+    setTimeout(() => {
+      setErrorMessage(null)
+    }, 10000)
+  }
+  // highlight-end
+
+  return (
+    <div>
+    // highlight-start
+      {errorMessage&&
+        <div style={{color: 'red'}}>
+          {errorMessage}
+        </div>
+      }
+      // highlight-end
+      <ApolloConsumer>
+        // ...
+      </ApolloConsumer>
+      <Mutation
+        mutation={createPerson} 
+        refetchQueries={[{ query: allPersons }]}
+        onError={handleError} // highlight-line
+      >
+        {(addPerson) =>
+          <PersonForm
+            addUser={addPerson}
+          />
+        }
+      </Mutation>
+    </div>
+  )
+}
+```
+
+Poikkeukesta tiedotetaan nyt käyttäjää yksinkertaisella notifikaatiolla
+
+![](../images/8/15.png)
+
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-frontend/tree/part8-3), branchissa <i>part8-3</i>.
+
+### Apollo Client ja sovelluksen tila
+
+Esimerkissämme sovelluksen tilan käsittely on siirtynyt suurimmaksi osaksi Apollo Clientin vastuulle. Tämä onkin melko tyypillinen ratkaisu GraphQL-sovelluksissa. Esimerkkimme käyttää Reactin komponenttien tilaa ainoastaan lomakkeen tilan hallintaan sekä virhetilanteesta kertovan notifikaation näyttämiseen. GraphQL:ää käyttäessä voikin olla, että ei ole enää kovin perusteltuja syitä siirtää sovelluksen tilaa ollenkaan Reduxiin. 
+
+Apollo mahdollistaa tarvittaessa myös sovelluksen paikallisen tilan tallettamisen [Apollon välimuistiin](https://www.apollographql.com/docs/react/essentials/local-state.html).
 
 ### Render props
 
-Query-komponentti noudattaa periaatetta, joka kulkee nimellä [render props](https://reactjs.org/docs/render-props.html), eli komponentti saa propsina tai tagiensa välissä lapsina <i>funktion</i> joka määrittelee miten renderöinti tapahtuu. Render props -periaate on ollut viime aikoina melko suosittu, mm. osassa 7 käsittelemämme [react router](/osa7/react_router) käyttää sitä. Itse en ole suuri render propsien fani ja erityisesti GraphQL:n yhteydessä niiden käyttö tuntuu erittäin ikävältä. Muutaman kuukauden kuluessa asiaan on kuitenkin odotettavissa muutoksia ja Apollo Clientiin tullaan lisäämään rajapinta, jonka avulla kyselyjä (ja mutaatioita) on mahdollista tehdä hookien avulla. 
+GraphQL:n Query, Mutation ja ApolloConsumer komponentit noudattavat periaatetta, joka kulkee nimellä [render props](https://reactjs.org/docs/render-props.html). Periaatetta noudattava komponentti saa propsina tai tagiensa välissä lapsina (joka on teknisesti ottaen myös props) <i>funktion</i>, joka määrittelee miten komponentin renderöinti tapahtuu. Render props -periaatten avulla on mahdollista siirtää renderöinnistä huolehtivalle komponentille joko dataa tai funktioviitteitä.
 
+Render props -periaate on ollut viime aikoina melko suosittu, mm. osassa 7 käsittelemämme [react router](/osa7/react_router) käyttää sitä. React routerin komponentin <i>Route</i> avulla määritellään mitä sovellus renderöi selaimen ollessa tietyssä urlissa. Seuraavassa määritellään, että jos selaimen url on <i>/notes</i> renderöidään komponentti <i>Notes</i>, jos taas selaimen url on esim. <i>/notes</i> renderöidään komponentti <i>Note</i> joka saa propsina tietyn muistiinpano-olion:
 
-Esimerkki ....
+```js
+<Router>
+  <div>
+    // ...
+    <Route exact path="/notes" render={() => 
+      <Notes notes={notes} />
+    } />    
+    <Route exact path="/notes/:id" render={({ match }) =>
+      <Note note={noteById(match.params.id)} />
+    } />
+  </div>
+</Router>
+```
+
+Urleja vastaavat komponentit on määritelty render propseina. Render props -funktion avulla renderöitävälle komponentille on mahdollista välittää tietoa, esim. yksittäisen muistiinpanon sivu saa propsina urliaan vastaavan muistiinpanon.
+
+Itse en ole suuri render propsien fani. React routerin yhteydessä ne vielä menettelevät mutta erityisesti GraphQL:n yhteydessä niiden käyttö tuntuu erittäin ikävältä. 
+
+Joudumme esimerkissämme käärimään komponentin <i>Persons</i> ikävästi kahden render props -komponentin sisälle:
+
+```js
+<ApolloConsumer>
+  {(client) => 
+    <Query query={allPersons}>
+      {(result) => <Persons result={result} client={client} />}
+    </Query> 
+  }
+</ApolloConsumer>
+```
+
+Muutaman kuukauden kuluessa asiaan on kuitenkin odotettavissa muutoksia ja Apollo Clientiin tullaan lisäämään rajapinta, jonka avulla kyselyjä (ja mutaatioita) on mahdollista tehdä [hookien avulla](https://github.com/apollographql/react-apollo/issues/2539). 
 
 Yleisemminkin trendinä on se, että hookeilla tullaan useissa tapauksissa korvaamaan tarve render propsien käyttöön.
 
+### react-apollo-hooks
 
-### Frontti
+Jo tällä hetkellä on olemassa kirjasto [react-apollo-hooks](https://github.com/trojanowski/react-apollo-hooks), joka mahdollistaa Apollo clientin käytön hookien avulla. Asennetaan kirjasto
 
-GraphQL on jo melko iäkäs teknologia, se on ollut Facebookin sisäisessä käytössä jo vuodesta 2012 lähtien, teknologian voi siis todeta olevan "battle tested". Facebook julkaisi GraphQL:n vuonna 2015 ja se on pikkuhiljaa saanut enenevissä määrin huomiota ja nousee ehkä lähivuosina uhmaamaan REST:in valta-asemaa.
+```js
+npm install --save react-apollo-hooks
+```
+
+Otetaan nyt apollo-hookit käyttöön sovelluksessa. Muutetaan <i>index.js</i> ensin muotoon, joka mahdollistaa yhtäaikaisen hookien ja Query- sekä Mutation-komponenttien käytön:
+
+```js
+import ApolloClient from 'apollo-boost'
+import { ApolloProvider } from 'react-apollo'
+import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks' // highlight-line
+
+const client = new ApolloClient({
+  uri: "http://localhost:4000/graphql"
+})
+
+ReactDOM.render(
+  <ApolloProvider client={client}>
+    <ApolloHooksProvider client={client}> // highlight-line
+      <App />
+    </ApolloHooksProvider> // highlight-line
+  </ApolloProvider>,
+  document.getElementById('root')
+)
+```
+
+Muutetaan komponenttia <i>Persons</i> siten, että se käyttää _useApolloClient_-hookia 
+
+```js
+import React,  {useState } from 'react'
+import { gql } from 'apollo-boost'
+import { useApolloClient } from 'react-apollo-hooks' // highlight-line
+
+// ...
+
+const Persons = ({ result }) => { // highlight-line
+  const client = useApolloClient() // highlight-line
+  // ...
+}
+```
+
+Komponentti <i>App</i> ykseinkertaistuu, render props -komponentti <i>ApolloConsumer</i> voidaan poistaa:
+
+```js
+const App = () => {
+
+  return(
+    <div>
+      {errorMessage &&
+        <div style={{ color: 'red' }}>
+          {errorMessage}
+        </div>
+      }
+      // highlight-start
+      <Query query={allPersons}>
+        {(result) => <Persons result={result} />}
+      </Query> 
+      // highlight-end
+      <Mutation
+        // ..
+      </Mutation>
+    </div>
+  )
+}
+```
+
+Hankkiudutaan seruaavaksi eroon komponentista <i>Query</i> hookin _useQuery_ avulla. Komponentti <i>App</i> yksinkertaistuu edelleen:
+
+```js
+import { useQuery } from 'react-apollo-hooks' // highlight-line
+
+const App = () => {
+  const result = useQuery(allPersons) // highlight-line
+
+  // ...
+
+  return (
+    <div>
+      {errorMessage &&
+        <div style={{ color: 'red' }}>
+          {errorMessage}
+        </div>
+      }
+      <Persons result={result} /> // highlight-line
+      <Mutation
+        mutation={createPerson} 
+        refetchQueries={[{ query: allPersons }]}
+        onError={handleError}
+      >
+        {(addPerson) =>
+          <PersonForm
+            addUser={addPerson}
+          />
+        }
+      </Mutation>
+    </div>
+  )
+}
+```
+
+Komponentti <i>Mutation</i> saadaan korvattua hookin _useMutation_ avulla. Komponentin <i>App</i> lopullinen muoto on seuraava:
+
+```js
+import { useQuery, useMutation } from 'react-apollo-hooks' // highlight-line
+
+const App = () => {
+  const result = useQuery(allPersons)
+
+  const [errorMessage, setErrorMessage] = useState(null)
+
+  const handleError = (error) => {
+    // ...
+  }
+
+  // highlight-start
+  const addPerson = useMutation(createPerson, {
+    onError: handleError,
+    refetchQueries: [{ query: allPersons }]
+  })
+  // highlight-end
+
+  return (
+    <div>
+      {errorMessage &&
+        <div style={{ color: 'red' }}>
+          {errorMessage}
+        </div>
+      }
+      <Persons result={result} />
+      <PersonForm addUser={addPerson} /> // highlight-line
+    </div>
+  )
+}
+```
+
+Lopputulos on todellakin monin verroin selkeämpi kun render props -komponentteja käyttävä sotku. Voimme yhtyä Ryan Florencen React Confissa 2018 esittämään mielipiteeseen [90% Cleaner React With Hooks](https://www.youtube.com/watch?v=wXLf18DsV-I).
+
+Apollo-tiimi on lupaillut että suora hook-tuki ilmestyy kevään aikana. Ennen suoran tuen toteuttamista voi jo melko turvallisin mielin käyttää kirjastoa [react-apollo-hooks](https://github.com/trojanowski/react-apollo-hooks).
+
+Koska render props -komponenteista on päästy kokonaan eroon, yksinkertaistuu <i>inder.js</i> seuraavasti
+
+```js
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
+
+import ApolloClient from 'apollo-boost'
+import { ApolloProvider } from 'react-apollo-hooks'
+
+const client = new ApolloClient({
+  uri: "http://localhost:4000/graphql"
+})
+
+ReactDOM.render(
+  <ApolloProvider client={client}>
+    <App />
+  </ApolloProvider>,
+  document.getElementById('root')
+)
+```
+
+Sovelluksen kirjastoa react-apollo-hooks käyttävä koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-frontend/tree/part8-4), branchissa <i>part8-4</i>.
+
 
 </div>
 
