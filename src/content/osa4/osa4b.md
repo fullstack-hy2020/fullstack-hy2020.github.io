@@ -665,7 +665,7 @@ test('note without content is not added', async () => {
 
   const notesAtEnd = await helper.notesInDb() // highlight-line
 
-  expect(notesAtEnd).toBe(helper.initialNotes.length) // highlight-line
+  expect(notesAtEnd.length).toBe(helper.initialNotes.length) // highlight-line
 })
 
 afterAll(() => {
