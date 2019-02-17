@@ -308,8 +308,7 @@ Metodilla [createRef](https://reactjs.org/docs/react-api.html#reactcreateref) lu
 Komponenttia <i>Togglable</i> laajennetaan seuraavasti
 
 ```js
-import React, { useState, useImperativeHandle
- } from 'react' // highlight-line
+import React, { useState, useImperativeHandle } from 'react' // highlight-line
 
 const Togglable = React.forwardRef((props, ref) => { // highlight-line
   const [visible, setVisible] = useState(false)
