@@ -308,7 +308,8 @@ Metodilla [createRef](https://reactjs.org/docs/react-api.html#reactcreateref) lu
 Komponenttia <i>Togglable</i> laajennetaan seuraavasti
 
 ```js
-import React, { useState, useImperativeMethods } from 'react' // highlight-line
+import React, { useState, useImperativeHandle
+ } from 'react' // highlight-line
 
 const Togglable = React.forwardRef((props, ref) => { // highlight-line
   const [visible, setVisible] = useState(false)
@@ -321,7 +322,7 @@ const Togglable = React.forwardRef((props, ref) => { // highlight-line
   }
 
 // highlight-start
-  useImperativeMethods(ref, () => {
+  useImperativeHandle(ref, () => {
     return {
       toggleVisibility
     }
@@ -346,7 +347,8 @@ export default Togglable
 
 Komponentin luova funktio on kääritty funktiokutsun [forwardRef](https://reactjs.org/docs/react-api.html#reactforwardref) sisälle, näin komponentti pääsee käsiksi sille määriteltyyn refiin.
 
-Komponentti tarjoaa [useImperativeMethods](https://reactjs.org/docs/hooks-reference.html#useimperativehandle)-hookin avulla sisäisesti määritellyn funktionsa <i>toggleVisibility</i> ulkopuolelta kutsuttavaksi.
+Komponentti tarjoaa [useImperativeHandle
+](https://reactjs.org/docs/hooks-reference.html#useimperativehandle)-hookin avulla sisäisesti määritellyn funktionsa <i>toggleVisibility</i> ulkopuolelta kutsuttavaksi.
 
 Voimme nyt piilottaa lomakkeen kutsumalla <i>noteFormRef.current.toggleVisibility()</i> samalla kun uuden muistiinpanon luominen tapahtuu:
 
@@ -372,7 +374,8 @@ const App = () => {
 }
 ```
 
-Käyttämämme [useImperativeMethods](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) on siis React hook, jonka avulla funktiona määritellylle komponentille voidaan määrittää funktioita, joita on mahdollista kutsua sen ulkopuolelta. Metodin nimi ei ole vielä tässä vaiheessa (25.1.2019) täysin vakiintunut, dokumentaatiossa sen nimi on <i>useImperativeHandle</i>. 
+Käyttämämme [useImperativeHandle
+](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) on siis React hook, jonka avulla funktiona määritellylle komponentille voidaan määrittää funktioita, joita on mahdollista kutsua sen ulkopuolelta. 
 
 Käyttämämme kikka komponentin tilan muuttamikseksi toimii, mutta se vaikuttaa hieman ikävältä. Saman olisi saanut aavistuksen siistimmin toteutettua "vanhan Reactin" class-perustaisilla komponenteilla, joihin tutustumme tämän osan lopussa. Tämä on toistaiseksi ainoa tapaus, jossa Reactin hook-syntaksiin nojaava ratkaisu on aavistuksen likaisemman oloinen kuin class-komponenttien tarjoama ratkaisu.
 
