@@ -577,7 +577,7 @@ Myös mutaatioita varten on määriteltävä resolveri:
 ```js
   Mutation: {
     addPerson: (root, args) => {
-      const person = {...args}
+      const person = { ...args }
       persons.push(person)
       return person
     }
@@ -638,22 +638,186 @@ eli tyypin <i>Person</i> kentän <i>address</i> resolveri muotoilee vastauksena 
 
 ### Virheiden käsittely
 
-```js
-```
+Jos yritämme luoda uuden henkilön, mutta parametrit eivät vastaa skeemassa määriteltyä, antaa palvelin virheilmoituksen: 
+
+![](../images/8/5.png)
+
+GraphQL:n [validoinnin](https://graphql.org/learn/validation/) avulla pystytään siis jo automaattisesi hoitamaan osa virheenkäsittelyä. 
+
+Kaikkea GraphQL ei kuitenkaan pysty hoitamaan automaattisesti. Esimerkiksi tarkemmat säännöt mutaatiolla lisättävän datan kenttien muodolle on lisättävä itse. Niistä aiheutuvat virheen tulee hoitaa [GraphQL:n poikkeuskäsittelymekanismilla](https://www.apollographql.com/docs/apollo-server/features/errors.html).
+
+Estetään saman nimen lisääminen puhelinluetteloon useampaan kertaan:
 
 ```js
+const { ApolloServer, UserInputError, gql } = require('apollo-server') // highlight-line
+
+// ...
+
+const resolvers = {
+  // ..
+  Mutation: {
+    addPerson: (root, args) => {
+      // highlight-start
+      if (persons.find(p => p.name === args.name)) {
+        throw new UserInputError('Name must be unique', {
+          invalidArgs: args.name,
+        })
+      }
+      // highlight-end
+
+      const person = { ...args }
+      persons.push(person)
+      return person
+    }
+  }
+}
 ```
 
+Eli jos lisättävä nimi on jo luettelossa heitetään poikkeus _UserInputError_
+
+![](../images/8/6.png)
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-backend/tree/part8-2), branchissa <i>part8-2</i>.
 
-### enum yes no
+### Enum
+
+Tehdään sovellukseen vielä sellainen lisäys, että kaikki henkilöt palauttavaa kyselyä voidaan säädellä parametrilla <i>phone</i> siten, että kysely palauttaa vain henkilöt, joilla on puhelinnumero
 
 ```js
+query {
+  allPersons(phone: YES) {
+    name
+		phone 
+  }
+}
 ```
 
+tai henkilöt, joilla ei ole puhelinnumeroa
+
 ```js
+query {
+  allPersons(phone: NO) {
+    name
+  }
+}
 ```
+
+Skeema laajenee seuraavasti
+
+```js
+// highlight-start
+enum YesNo {
+  YES
+  NO
+}
+// highlight-end
+
+type Query {
+  personCount: Int!
+  allPersons(phone: YesNo): [Person!]! // highlight-line
+  findPerson(name: String!): Person
+}
+```
+
+Tyyppi <i>YesNo</i> on GraphQL:n [enum](https://graphql.org/learn/schema/#enumeration-types), eli lueteltu tyyppi, jolla on kaksi mahdollista arvoa, <i>YES</i> ja <i>NO</i>. Kyselyssä _allPersons_ parametri _phone_ on tyypiltään <i>YesNo</i>, mutta sen arvo ei ole pakollinen.
+
+Resolveri muuttuu seuraavasti
+
+```js
+Query: {
+  personCount: () => persons.length,
+  // highlight-start
+  allPersons: (root, args) => {
+    if (!args.phone) {
+      return persons
+    }
+
+    const byPhone = (person) =>
+      args.phone === 'YES' ? person.phone : !person.phone
+
+    return persons.filter(byPhone)
+  },
+  // highlight-end
+  findPerson: (root, args) => persons.find(p => p.name === args.name)
+},
+```
+
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-backend/tree/part8-3), branchissa <i>part8-3</i>.
+
+### Lisää kyselyistä
+
+GraphQL:ssä on yheen kyselyyn mahdollista yhdistää monia tyypin <i>Query</i> kenttiä, eli "yksittäisiä kyselyitä". Esim. seuraava kysely palautta puhelinluettelon henkilöiden lukumäärän sekä nimet:
+
+```js
+query {
+  personCount
+  allPersons{
+    name
+  }
+}
+```
+
+Vastaus näyttää seuraavalta
+
+```js
+{
+  "data": {
+    "personCount": 3,
+    "allPersons": [
+      {
+        "name": "Arto Hellas"
+      },
+      {
+        "name": "Matti Luukkainen"
+      },
+      {
+        "name": "Venla Ruuska"
+      }
+    ]
+  }
+}
+```
+
+Yhdistetty kysely voi myös viitata useampaan kertaan samaan kyselyyn. Tällöin erillisille kyselyille on kuitenkin annettava vaihtoehoiset nimet kaksoispistesyntaksilla
+
+```js
+query {
+  havePhone: allPersons(phone: YES){
+    name
+  }
+  phoneless: allPersons(phone: NO){
+    name
+  }
+}
+```
+
+Vastaus on muotoa
+
+```js
+{
+  "data": {
+    "havePhone": [
+      {
+        "name": "Arto Hellas"
+      },
+      {
+        "name": "Matti Luukkainen"
+      }
+    ],
+    "phoneless": [
+      {
+        "name": "Venla Ruuska"
+      }
+    ]
+  }
+}
+```
+
+Joissain tilanteissa voi myös olla hyötyä nimetä kyselyt. Näin on erityisesti tilanteissa, missä kyselyillä tai mutaatiolla on [parametreja](https://graphql.org/learn/queries/#variables). Tutustumme parametreihin pian.
+
+Jos kyselyitä on useita, pyytää Playground valitsemaan mikä niistä suoritetaan:
+
+![](../images/8/7.png)
 
 </div>
 
