@@ -49,6 +49,7 @@ module.exports = {
   },
   '8': { 
     a: 'GraphQL-palvelin',
-    b: 'React ja GraphQL'  
+    b: 'React ja GraphQL',
+    c: 'GraphQL-palvelin ja tietokanta' 
   },
 };

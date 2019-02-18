@@ -825,4 +825,276 @@ Jos kyselyitä on useita, pyytää Playground valitsemaan mikä niistä suoritet
 
 ### Tehtäviä
 
+Tehtävissä toteutetaan yksinkertaisen kirjaston GraphQL:ää tarjoava backend. Ota sovelluksesi lähtökohtaksi [tämä tiedosto](https://github.com/fullstack-hy2019/misc/blob/master/library-backend.js). Muista _npm init_ ja riippuvuuksien asentaminen!
+
+#### 8.1: kijojen ja kirjailijoiden määrä
+
+Toteuta kyselyt _bookCount_ ja _authorCount_ jotka palauttavat kirjojen ja kirjailijoiden lukumäärän.
+
+Kyselyn 
+
+```js
+query {
+  bookCount
+  authorCount
+}
+```
+
+pitäisi alustavalla datalla tuottaa vastaus
+
+```js
+{
+  "data": {
+    "bookCount": 7,
+    "authorCount": 5
+  }
+}
+```
+
+#### 8.2: kaikki kirjat ja kirjailijat
+
+Toteuta kysely _allBooks_,  joka palauttavat kaikki kirjat.
+
+Seurava kyselyn siis pitäisi pystyä tekemään
+
+```js
+query {
+  allBooks { 
+    title 
+    author
+    published 
+    genres
+  }
+}
+```
+
+#### 8.3: kaikki kirjailijat
+
+Toteuta kysely _allAuthors_ joka palauttaa kaikki kirjailijat. Kyselyn vastauksessa kirjailijoilla tulee myös olla kenttä _bookCount_ joka keroo kirjailijan tekemien kirjojen määrän.
+
+Esim. kyselyn
+
+```js
+query {
+  allAuthors {
+    name
+    bookCount
+  }
+}
+```
+
+vastauksen tulisi näyttää seuraavalta
+
+```js
+{
+  "data": {
+    "allAuthors": [
+      {
+        "name": "Robert Martin",
+        "bookCount": 2
+      },
+      {
+        "name": "Martin Fowler",
+        "bookCount": 1
+      },
+      {
+        "name": "Fyodor Dostoevsky",
+        "bookCount": 2
+      },
+      {
+        "name": "Joshua Kerievsky",
+        "bookCount": 1
+      },
+      {
+        "name": "Sandi Metz",
+        "bookCount": 1
+      }
+    ]
+  }
+}
+```
+
+#### 8.4: kirjailijan kirjat
+
+Laajenna kyselyä _allBooks_ että sille voi antaa optionaalisen parametrin <i>author</i>, joka rajoittaa kirjalistan niihin joiden author on parametrina annettu kirjailija.
+
+Esim. kyselyn
+
+```js
+query {
+  allBooks(author: "Robert Martin") {
+    title
+  }
+}
+```
+
+tulisi palauttaa
+
+```js
+{
+  "data": {
+    "allBooks": [
+      {
+        "title": "Clean Code"
+      },
+      {
+        "title": "Agile software development"
+      }
+    ]
+  }
+}
+```
+
+#### 8.5: genren kirjat
+
+Laajenna kyselyä _allBooks_ että sille voi antaa optionaalisen parametrin <i>genre</i>, joka rajoittaa kirjalistan niihin joiden genrejen joukossa on parametrina annettu genre.
+
+Esim. kyselyn
+
+```js
+query {
+  allBooks(genre: "refactoring") {
+    title
+    author
+  }
+}
+```
+
+tulisi palauttaa
+
+```js
+{
+  "data": {
+    "allBooks": [
+      {
+        "title": "Clean Code",
+        "author": "Robert Martin"
+      },
+      {
+        "title": "Refactoring, edition 2",
+        "author": "Martin Fowler"
+      },
+      {
+        "title": "Refactoring to patterns",
+        "author": "Joshua Kerievsky"
+      },
+      {
+        "title": "Practical Object-Oriented Design, An Agile Primer Using Ruby",
+        "author": "Sandi Metz"
+      }
+    ]
+  }
+}
+```
+
+Kyselyn pitää toimia myös siinä tapauksessa, että se saa molemmat optionaaliset parametrit:
+
+```js
+query {
+  allBooks(author: "Robert Martin", genre: "refactoring") {
+    title
+    author
+  }
+}
+```
+
+#### 8.6: Kirjan lisäys
+
+Toteuta mutaatio _addBook_, jota voi käyttää seuraavasti
+
+```js
+mutation {
+  addBook(
+    title: "NoSQL Distilled",
+    author: "Martin Fowler",
+    published: 2012,
+    genres: ["database", "nosql"]
+  ) {
+    title,
+    author
+  }
+}
+```
+
+Mutaatio toimii myös niissä tilanteissa, joissa kirjoittaja ei ole ennestään palvelimen tiedossa:
+
+```js
+mutation {
+  addBook(
+    title: "Pimeyden tango",
+    author: "Reijo Mäki",
+    published: 1997,
+    genres: ["crime"]
+  ) {
+    title,
+    author
+  }
+}
+```
+
+Jos näin on, lisätään uusi kirjailija järjestelmään. Kirjailijan syntymävuodesta ei ole tässä vaiheessa tietoa, eli kysely
+
+```js
+query {
+  allAuthors {
+    name
+    born
+    bookCount
+  }
+}
+```
+
+palauttaa
+
+```js
+{
+  "data": {
+    "allAuthors": [
+      // ...
+      {
+        "name": "Reijo Mäki",
+        "born": null,
+        "bookCount": 1
+      }
+    ]
+  }
+}
+```
+
+#### 8.7: Kirjailijan syntymävuoden päiyitys
+
+Toteuta mutaatio _editAuthor_ jonka avulla on mahdollista asettaa kirjailijalle syntymävuosi. Mutaatiota käytetään seuraavasti
+
+```js
+mutation {
+  editAuthor(name: "Reijo Mäki", setBornTo: 1958) {
+    name
+    born
+  }
+}
+```
+
+Jos kirjailija löytyy, palauttaa operaatio editoidun kirjailijan:
+
+```js
+{
+  "data": {
+    "editAuthor": {
+      "name": "Reijo Mäki",
+      "born": 1958
+    }
+  }
+}
+```
+
+Olemattoman kirjailijan syntymävuoden editointiin reagoidaan palauttamalla <i>null</i>:
+
+```js
+{
+  "data": {
+    "editAuthor": null
+  }
+}
+```
+
 </div>
