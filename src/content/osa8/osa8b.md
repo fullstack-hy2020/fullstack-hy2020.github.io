@@ -32,7 +32,7 @@ import ReactDOM from 'react-dom'
 import ApolloClient, { gql } from 'apollo-boost'
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql"
+  uri: 'http://localhost:4000/graphql'
 })
 
 const query = gql`
@@ -84,7 +84,7 @@ import ApolloClient, { gql } from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo' // highlight-line
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql"
+  uri: 'http://localhost:4000/graphql'
 })
 
 ReactDOM.render(
@@ -108,7 +108,7 @@ Komponentin <i>App</i> koodi on seuraavassa:
 
 ```js
 import React from 'react'
-import { Query } from "react-apollo"
+import { Query } from 'react-apollo'
 import { gql } from 'apollo-boost'
 
 const allPersons = gql`
@@ -237,7 +237,7 @@ Eräs tapa on käyttää suoraan <i>client</i> olion metodia <i>query</i>. Sovel
 Muutetaan komponenttia <i>App</i> siten, että hakee <i>ApolloConsumerin</i> avulla viitteen _query_-olioon ja välittää sen komponentille <i>Persons</i>
 
 ```js
-import { Query, ApolloConsumer } from "react-apollo" // highlight-line
+import { Query, ApolloConsumer } from 'react-apollo' // highlight-line
 
 // ...
 
@@ -592,10 +592,10 @@ Render props -periaate on ollut viime aikoina melko suosittu, mm. osassa 7 käsi
 <Router>
   <div>
     // ...
-    <Route exact path="/notes" render={() => 
+    <Route exact path='/notes' render={() => 
       <Notes notes={notes} />
     } />    
-    <Route exact path="/notes/:id" render={({ match }) =>
+    <Route exact path='/notes/:id' render={({ match }) =>
       <Note note={noteById(match.params.id)} />
     } />
   </div>
@@ -638,7 +638,7 @@ import { ApolloProvider } from 'react-apollo'
 import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks' // highlight-line
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql"
+  uri: 'http://localhost:4000/graphql'
 })
 
 ReactDOM.render(
@@ -683,7 +683,7 @@ const App = () => {
         {(result) => <Persons result={result} />}
       </Query> 
       // highlight-end
-      <Mutation
+      <Mutation>
         // ..
       </Mutation>
     </div>
@@ -775,7 +775,7 @@ import ApolloClient from 'apollo-boost'
 import { ApolloProvider } from 'react-apollo-hooks'
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000/graphql"
+  uri: 'http://localhost:4000/graphql'
 })
 
 ReactDOM.render(
@@ -801,12 +801,26 @@ Ota sovelluksesi lähtökohtaksi [tämä projekti](https://github.com/fullstack-
 
 Voit tehdä sovelluksesi joko käyttäen Apollo Clientin render prop -komponentteja <i>Query</i> ja <i>Mutation</i> tai käyttää kirjastoa [react-apollo-hooks](https://github.com/trojanowski/react-apollo-hooks).
 
-#### 8.8: Kirjojen näkymä
+#### 8.8: Kirjailijoiden näkymä
 
-#### 8.9: Authoreiden näkymä
+Toteuta kirjailijoiden näkymä, eli näytä sivulla kaikkien kirjailijoiden tiedot esim. seuraavasti
+
+![](../images/8/16.png)
+
+#### 8.9: Kirjojen näkymä
+
+Toteuta kirjojen näkymä, eli näytä sivulla kirjoista muut tiedot paitsi genret
+
+![](../images/8/17.png)
 
 #### 8.10: Kirjan lisäys
 
-#### 8.11: Filtteröity näkymä
+Toteuta sovellukseen mahdollisuus uusien kirjojen lisäämiseen.
+
+#### 8.11: Kirjan lisäys, virheenkäsittely
+
+#### 8.12: Filtteröity näkymä
+
+#### 8.13: Filtteröity näkymä
 
 </div>
