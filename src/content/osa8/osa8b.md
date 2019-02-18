@@ -835,6 +835,6 @@ Tämä tehtävä voi olla haastava ja niin kurssin tässä vaiheessa jo kuuluuki
 - komponetin <i>Query</i> tai hookin <i>useQuery</i> käyttö kannattaa kirjalistan osalta sillä kysely on pystyttävä tekemään käyttäjän valitessa haluamansa genren
 - GraphQL-kyselyjen tuloksia kannatta joskus tallentaan komponentin tilaan
 - huomaa, että voit tehdä GraphQL-kyselyjä <i>useEffect</i>-hookissa
-- <i>useEffect</i>-hookin [toisesta parametrista](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) voi olla tehtävässä apua, se tosin riippuu käyttämästäsi lähestymistavasta
+- <i>useEffect</i>-hookin [toisesta parametrista](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) voi olla tehtävässä apua, se tosin riippuu käyttämästäsi lähestymistavasta.
 
 </div>
