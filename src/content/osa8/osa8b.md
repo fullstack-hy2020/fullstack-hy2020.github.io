@@ -815,12 +815,26 @@ Toteuta kirjojen näkymä, eli näytä sivulla kirjoista muut tiedot paitsi genr
 
 #### 8.10: Kirjan lisäys
 
-Toteuta sovellukseen mahdollisuus uusien kirjojen lisäämiseen.
+Toteuta sovellukseen mahdollisuus uusien kirjojen lisäämiseen. Voit tehdä sovellukseen lisäystä varten oman "näkymän", samalla logiikalla kuin kirjailijoiden ja kirjojen näkymät on tehty. Toiminnallisuus voi näyttää seuraavalta
 
-#### 8.11: Kirjan lisäys, virheenkäsittely
+![](../images/8/18.png)
 
-#### 8.12: Filtteröity näkymä
+Huolehdi siitä, että kirjailijoiden ja kirjojen näkymä pysyy ajantasaisena lisäyksen jälkeen.
 
-#### 8.13: Filtteröity näkymä
+#### 8.11: Genren kirjat
+
+Laajenna sovellustasi siten, että kirjojen näkymästä voidaan rajata näytettävä kirjalista ainoastaan niihin jotka kuuluvat valittuun genreen. Toteutuksesi voi näyttää seuraavalta:
+
+![](../images/8/19.png)
+
+#### 8.12: Genren kirjat GraphQL:llä
+
+Tietyn genren kirjoihin rajoittamisen voi tehdä kokonaan React-sovelluksen puolella. Voit merkitä tämän tehtävän, jos rajaat näytettävät kirjat tahtävässä 8.5 palvelimeen toteutetun suoran GraphQ-kyselyn avulla. 
+
+Tämä tehtävä voi olla haastava ja niin kurssin tässä vaiheessa jo kuuluukin olla. Muutama vihje
+- komponetin <i>Query</i> tai hookin <i>useQuery</i> käyttö kannattaa kirjalistan osalta sillä kysely on pystyttävä tekemään käyttäjän valitessa haluamansa genren
+- GraphQL-kyselyjen tuloksia kannatta joskus tallentaan komponentin tilaan
+- huomaa, että voit tehdä GraphQL-kyselyjä <i>useEffect</i>-hookissa
+- <i>useEffect</i>-hookin [toisesta parametrista](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) voi olla tehtävässä apua, se tosin riippuu käyttämästäsi lähestymistavasta
 
 </div>
