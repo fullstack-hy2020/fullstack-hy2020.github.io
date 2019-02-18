@@ -795,4 +795,18 @@ Sovelluksen kirjastoa react-apollo-hooks käyttävä koodi on kokonaisuudessaan 
 
 ### Tehtäviä
 
+Tehtävissä toteutetaan GraphQL-kirjastolle fronend.
+
+Ota sovelluksesi lähtökohtaksi [tämä projekti](https://github.com/fullstack-hy2019/library-frontend).
+
+Voit tehdä sovelluksesi joko käyttäen Apollo Clientin render prop -komponentteja <i>Query</i> ja <i>Mutation</i> tai käyttää kirjastoa [react-apollo-hooks](https://github.com/trojanowski/react-apollo-hooks).
+
+#### 8.8: Kirjojen näkymä
+
+#### 8.9: Authoreiden näkymä
+
+#### 8.10: Kirjan lisäys
+
+#### 8.11: Filtteröity näkymä
+
 </div>
