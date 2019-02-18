@@ -320,7 +320,7 @@ Päätetään alustaa tietokanta ennen <i>jokaisen testin suoritusta,</i> eli fu
 
 ```js
 const supertest = require('supertest')
-const { app, server } = require('../index')
+const app = require('../app')
 const api = supertest(app)
 const Note = require('../models/note')
 
