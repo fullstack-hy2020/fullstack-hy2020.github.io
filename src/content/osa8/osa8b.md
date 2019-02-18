@@ -821,20 +821,20 @@ Toteuta sovellukseen mahdollisuus uusien kirjojen lisäämiseen. Voit tehdä sov
 
 Huolehdi siitä, että kirjailijoiden ja kirjojen näkymä pysyy ajantasaisena lisäyksen jälkeen.
 
-#### 8.11: Genren kirjat
+#### 8.11: Kirjailijan syntymävuosi
 
-Laajenna sovellustasi siten, että kirjojen näkymästä voidaan rajata näytettävä kirjalista ainoastaan niihin jotka kuuluvat valittuun genreen. Toteutuksesi voi näyttää seuraavalta:
+Tee sovellukseen mahdollisuus asettaa kirjailijalle syntymävuosi. Voit tehdä syntymävuoden asettamista varten oman näkymän tai sijoittaa sen kirjailijat näyttävälle sivulle:
 
-![](../images/8/19.png)
+![](../images/8/20.png)
 
-#### 8.12: Genren kirjat GraphQL:llä
+Huolehdi siitä, että kirjailijoiden näkymä pysyy ajantasaisena lisäyksen jälkeen.
 
-Tietyn genren kirjoihin rajoittamisen voi tehdä kokonaan React-sovelluksen puolella. Voit merkitä tämän tehtävän, jos rajaat näytettävät kirjat tahtävässä 8.5 palvelimeen toteutetun suoran GraphQ-kyselyn avulla. 
+#### 8.12: Kirjailijan syntymävuosi advanced
 
-Tämä tehtävä voi olla haastava ja niin kurssin tässä vaiheessa jo kuuluukin olla. Muutama vihje
-- komponetin <i>Query</i> tai hookin <i>useQuery</i> käyttö kannattaa kirjalistan osalta sillä kysely on pystyttävä tekemään käyttäjän valitessa haluamansa genren
-- GraphQL-kyselyjen tuloksia kannatta joskus tallentaan komponentin tilaan
-- huomaa, että voit tehdä GraphQL-kyselyjä <i>useEffect</i>-hookissa
-- <i>useEffect</i>-hookin [toisesta parametrista](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) voi olla tehtävässä apua, se tosin riippuu käyttämästäsi lähestymistavasta.
+Tee syntymävuoden asetuslomakkeesta [select-tagin](https://reactjs.org/docs/forms.html#the-select-tag), kirjaston [react-select](https://github.com/JedWatson/react-select) tai jonkun muun mekanismin avulla sellainen, että syntymävuoden voi asettaa ainoastaan olemassaolevalle kirjailijalle. 
+
+react-select-kirjastoa hyödyntävä ratkaisu näyttää seuraavalta
+
+![](../images/8/21.png)
 
 </div>
