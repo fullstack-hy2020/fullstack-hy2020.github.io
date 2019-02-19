@@ -377,7 +377,7 @@ userSchema.plugin(uniqueValidator) // highlight-line
 // ...
 ```
 
-Voisimme toteuttaa käyttäjien luomisen yhteyteen myös muita tarkistuksia, esim. onko käyttäjätunnus tarpeeksi pitkä, koostuuko se sallituista merkeistä ja onko salasana tarpeeksi hyvä. Jätämme ne kuitenkin harjoitustehtäväksi.
+Voisimme toteuttaa käyttäjien luomisen yhteyteen myös muita tarkistuksia, esim. onko käyttäjätunnus tarpeeksi pitkä, koostuuko se sallituista merkeistä ja onko salasana tarpeeksi hyvä. Jätämme ne kuitenkin vapaaehtoiseksi harjoitustehtäväksi.
 
 
 Ennen kuin menemme eteenpäin, lisätään sovellukseen alustava versio palauttaa kaikki käyttäjät palauttavasta käsittelijäfunktiosta:
