@@ -780,6 +780,47 @@ Query: {
 },
 ```
 
+### Numeron muutos
+
+Tehdään sovellukseen myös mutaatio, joka mahdollistaa henkilön puhelinnumeron muuttamisen. Mutaation skeema näyttää seuraavalta
+
+```js
+type Mutation {
+  addPerson(
+    name: String!
+    phone: String
+    street: String!
+    city: String!
+  ): Person
+  // highlight-start
+  editNumber(
+    name: String!
+    number: String!
+  ): Person
+  // highlight-end
+}
+```
+
+ja sen toteuttaa seuraava resolveri:
+
+```js
+Mutation: {
+  // ...
+  editNumber: (root, args) => {
+    const person = persons.find(p => p.name === args.name)
+    if (!person) {
+      return null
+    }
+
+    const updatedPerson = { ...person, phone: args.phone }
+    persons = persons.map(p => p.name === args.name ? updatedPerson : p)
+    return updatedPerson
+  }   
+}
+```
+
+Mutaatio hakee siis hakee kentän <i>name</i> perusteella henkilön, jonka numero päivitetään.
+
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-backend/tree/part8-3), branchissa <i>part8-3</i>.
 
 ### Lisää kyselyistä
