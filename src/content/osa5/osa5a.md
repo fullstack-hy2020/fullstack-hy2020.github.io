@@ -252,16 +252,13 @@ return (
   <div>
     <h1>Muistiinpanot</h1>
 
-    <Notification message={errorMessage} />
+    <Notification message={errorMessage}/>
 
     <h2>Kirjaudu</h2>
 
     {user === null ?
       loginForm() :
-      <div>
-        <p>{user.name} logged in</p>
-        {noteForm()}
-      </div>
+      noteForm()
     }
 
     <h2>Muistiinpanot</h2>
@@ -281,13 +278,16 @@ return (
   <div>
     <h1>Muistiinpanot</h1>
 
-    <Notification message={errorMessage}/>
+    <Notification message={errorMessage} />
 
     <h2>Kirjaudu</h2>
 
     {user === null ?
       loginForm() :
-      noteForm()
+      <div>
+        <p>{user.name} logged in</p>
+        {noteForm()}
+      </div>
     }
 
     <h2>Muistiinpanot</h2>
