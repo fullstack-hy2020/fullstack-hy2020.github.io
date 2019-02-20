@@ -335,6 +335,11 @@ Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-h
 
 Sovelluksessa on vielä pieni kauneusvirhe, vaikka oletusarvosesti filtterin arvo on <i>ALL</i>, eli näytetään kaikki muistiinpanot, ei vastaava radiobutton ole valittuna. Ongelma on luonnollisestikin mahdollista korjata, mutta koska kyseessä on ikävä, mutta harmiton feature, jätämme korjauksen myöhemmäksi.
 
+
+</div>
+
+<div class="tasks">
+
 ### Tehtäviä
 
 Jatketaan tehtävässä 6.3 aloitetun reduxia käyttävän anekdoottisovelluksen parissa.
@@ -412,6 +417,10 @@ const Filter = (props) => {
 
 export default Filter
 ```
+
+</div>
+
+<div class="content">
 
 ### Connect
 

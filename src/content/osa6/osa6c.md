@@ -472,16 +472,16 @@ Entä _useState_-hookilla saatava komponenttien oma tila, onko sillä roolia jos
 
 ### tehtäviä
 
-#### 6.19 anekdootit ja backend, step4 
+#### 6.18 anekdootit ja backend, step4 
 
 Muuta redux-storen alustus tapahtumaan <i>redux-thunk</i>-kirjaston avulla toteutettuun asynkroniseen actioniin.
 
-#### 6.20 anekdootit ja backend, step5
+#### 6.19 anekdootit ja backend, step5
 
 Muuta myös uuden anekdootin luominen tapahtumaan <i>redux-thunk</i>-kirjaston avulla toteutettuihin asynkronisiin actioneihin.
 
 
-#### 6.18 anekdootit ja backend, step3
+#### 6.20 anekdootit ja backend, step3
 
 Äänestäminen ei vielä talleta muutoksia backendiin. Korjaa tilanne <i>redux-thunk</i>-kirjastoa hyödyntäen.
 

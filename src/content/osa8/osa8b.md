@@ -617,7 +617,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 ### Puhelinnumeron päivitys
 
-Tehdään sovellukseen mahdollisuus vaihtaa henkilöiden puheninnumeroita. 
+Tehdään sovellukseen mahdollisuus vaihtaa henkilöiden puheninnumeroita. Ratkaisu on lähes samanlainen kuin uuden henkilön lisäykseen käytetty.
 
 Mutaatio edellyttää jälleen muuttujien käyttöä
 
@@ -637,7 +637,7 @@ mutation editNumber($name: String!, $phone: String!) {
 `
 ```
 
-Listätään uusi mutaatio-komponentti <i>App</i>-komponentiin:
+Tehdään lisäys <i>App</i>-komponentiin:
 
 ```js
 
@@ -659,7 +659,6 @@ const App = () => {
       <h2>change number</h2>
       <Mutation
         mutation={EDIT_NUMBER}
-        onError={handleError}
       >
         {(editNumber) =>
           <PhoneForm
@@ -706,7 +705,7 @@ const PersonForm = (props) => {
             onChange={({ target }) => setPhone(target.value)}
           />
         </div>
-        <button type='submit'>add!</button>
+        <button type='submit'>change number</button>
       </form>
     </div>
   )
@@ -715,13 +714,13 @@ const PersonForm = (props) => {
 
 Ulkoasu on karu mutta toimiva:
 
-![](../images/8/22.png)
+![](../images/8/22a.png)
 
-Pari huomiota: ei tapahdu mitään jos väärä hlö
+Kun numero muutetaan, päivittyy se hieman yllättäen automaattisesti komponentin <i>Persons</i> renderöimään nimien ja numeroiden listaan. Tämä johtuu kahdesta seikasta. Ensinnäkin koska henkilöillä on identifioiva, tyyppiä <i>ID</i> oleva kenttä, päivittyy henkilö välimustissa uusilla tiedoilla päivitysoperaation yhteydessä. Toinen syy näkymän päivittymiselle on se, että komponentin <i>Query</i> avulla tehdyn kyselyn palauttama data huomaa välimuistiin tulleet muutokset ja päivittää itsensä automaattisesti. Tämä koskee ainoastaan kyselyn alunperin palauttamia olioita, ei välimuistiin lisättäviä kokonaan uusia olioita, jotka uudelleen tehtävä kysely palauttaisi.
 
-kasse päivittyy...
+Jos yritämme vaihtaa olemattomaan nimeen liittyvän puhelinnumeron ei mitään näytä tapahtuvan. Syynä tälle on se, että jos nimeä vastaavaa henkilöä ei löydy, vastataan kyselyyn <i>null</i>:
 
-
+![](../images/8/23.png)
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-frontend/tree/part8-4), branchissa <i>part8-4</i>.
 
@@ -733,9 +732,9 @@ Apollo mahdollistaa tarvittaessa myös sovelluksen paikallisen tilan tallettamis
 
 ### Render props
 
-GraphQL:n Query, Mutation ja ApolloConsumer komponentit noudattavat periaatetta, joka kulkee nimellä [render props](https://reactjs.org/docs/render-props.html). Periaatetta noudattava komponentti saa propsina tai tagiensa välissä lapsina (joka on teknisesti ottaen myös props) <i>funktion</i>, joka määrittelee miten komponentin renderöinti tapahtuu. Render props -periaatten avulla on mahdollista siirtää renderöinnistä huolehtivalle komponentille joko dataa tai funktioviitteitä.
+GraphQL:n <i>Query</i>, <i>Mutation</i> ja <i>ApolloConsumer</i> komponentit noudattavat periaatetta, joka kulkee nimellä [render props](https://reactjs.org/docs/render-props.html). Periaatetta noudattava komponentti saa propsina tai tagiensa välissä lapsina (joka on teknisesti ottaen myös props) <i>funktion</i>, joka määrittelee miten komponentin renderöinti tapahtuu. Render props -periaatten avulla on mahdollista siirtää renderöinnistä huolehtivalle komponentille joko dataa tai funktioviitteitä.
 
-Render props -periaate on ollut viime aikoina melko suosittu, mm. osassa 7 käsittelemämme [react router](/osa7/react_router) käyttää sitä. React routerin komponentin <i>Route</i> avulla määritellään mitä sovellus renderöi selaimen ollessa tietyssä urlissa. Seuraavassa määritellään, että jos selaimen url on <i>/notes</i> renderöidään komponentti <i>Notes</i>, jos taas selaimen url on esim. <i>/notes</i> renderöidään komponentti <i>Note</i> joka saa propsina tietyn muistiinpano-olion:
+Render props -periaate on ollut viime aikoina melko suosittu, mm. osassa 7 käsittelemämme [react router](/osa7/react_router) käyttää sitä. React routerin komponentin <i>Route</i> avulla määritellään mitä sovellus renderöi selaimen ollessa tietyssä urlissa. Seuraavassa määritellään, että jos selaimen url on <i>/notes</i> renderöidään komponentti <i>Notes</i>, jos taas selaimen url on esim. <i>/notes/10</i> renderöidään komponentti <i>Note</i> joka saa propsina muistiinpano-olion, jonka id on 10
 
 ```js
 <Router>
@@ -767,7 +766,7 @@ Joudumme esimerkissämme käärimään komponentin <i>Persons</i> ikävästi kah
 </ApolloConsumer>
 ```
 
-Muutaman kuukauden kuluessa asiaan on kuitenkin odotettavissa muutoksia ja Apollo Clientiin tullaan lisäämään rajapinta, jonka avulla kyselyjä (ja mutaatioita) on mahdollista tehdä [hookien avulla](https://github.com/apollographql/react-apollo/issues/2539). 
+Muutaman kuukauden kuluessa asiaan on kuitenkin odotettavissa muutoksia ja Apollo Clientiin tullaan lisäämään rajapinta, jonka avulla kyselyjä ja mutaatioita on mahdollista tehdä [hookien avulla](https://github.com/apollographql/react-apollo/issues/2539). 
 
 Yleisemminkin trendinä on se, että hookeilla tullaan useissa tapauksissa korvaamaan tarve render propsien käyttöön.
 
@@ -828,13 +827,11 @@ const App = () => {
         </div>
       }
       // highlight-start
-      <Query query={allPersons}>
+      <Query query={ALL_PERSONS}>
         {(result) => <Persons result={result} />}
       </Query> 
       // highlight-end
-      <Mutation>
-        // ..
-      </Mutation>
+      // ...
     </div>
   )
 }
@@ -846,7 +843,7 @@ Hankkiudutaan seruaavaksi eroon komponentista <i>Query</i> hookin _useQuery_ avu
 import { useQuery } from 'react-apollo-hooks' // highlight-line
 
 const App = () => {
-  const result = useQuery(allPersons) // highlight-line
+  const result = useQuery(ALL_PERSONS) // highlight-line
 
   // ...
 
@@ -857,7 +854,9 @@ const App = () => {
           {errorMessage}
         </div>
       }
+
       <Persons result={result} /> // highlight-line
+
       <Mutation
         mutation={createPerson} 
         refetchQueries={[{ query: allPersons }]}
@@ -869,12 +868,13 @@ const App = () => {
           />
         }
       </Mutation>
+      // ...
     </div>
   )
 }
 ```
 
-Komponentti <i>Mutation</i> saadaan korvattua hookin _useMutation_ avulla. Komponentin <i>App</i> lopullinen muoto on seuraava:
+<i>Mutation</i>-komponentit saadaan korvattua hookin _useMutation_ avulla. Komponentin <i>App</i> lopullinen muoto on seuraava:
 
 ```js
 import { useQuery, useMutation } from 'react-apollo-hooks' // highlight-line
@@ -889,10 +889,14 @@ const App = () => {
   }
 
   // highlight-start
-  const addPerson = useMutation(createPerson, {
+  const addPerson = useMutation(CREATE_PERSON, {
     onError: handleError,
-    refetchQueries: [{ query: allPersons }]
+    refetchQueries: [{ query: ALL_PERSONS }]
   })
+  // highlight-end
+
+  // highlight-start
+  const editNumber = useMutation(EDIT_NUMBER)
   // highlight-end
 
   return (
@@ -903,7 +907,12 @@ const App = () => {
         </div>
       }
       <Persons result={result} />
-      <PersonForm addUser={addPerson} /> // highlight-line
+
+      <h2>create new</h2>
+      <PersonForm addPerson={addPerson} /> // highlight-line
+
+      <h2>change number</h2>
+      <PhoneForm editNumber={editNumber} /> // highlight-line  
     </div>
   )
 }
