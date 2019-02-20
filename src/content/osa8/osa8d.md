@@ -1,4 +1,3 @@
-
 ---
 mainImage: ../../images/part-8.svg
 part: 8

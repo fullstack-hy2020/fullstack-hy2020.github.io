@@ -158,33 +158,40 @@ Person.find({ phone: { $exists: false }})
 
 #### Validoinnit
 
-GraphQL:n lisäksi syötteet validoidaan nyt mongoose-skeemassa määriteltyjen validointeja käyttäen. Skeemassa olevien validointivirheiden varalta _save_-metodeille täytyy lisätä virheen käsittelevä _catch_-lohko. Heitetään sielä vastaukseksi sopiva poikkeus:
+GraphQL:n lisäksi syötteet validoidaan nyt mongoose-skeemassa määriteltyjen validointeja käyttäen. Skeemassa olevien validointivirheiden varalta _save_-metodeille täytyy lisätä virheen käsittelevä _try/catch_-lohko. Heitetään catchiin jouduttaessa vastaukseksi sopiva poikkeus:
 
 ```js
 Mutation: {
-  addPerson: (root, args) => {
+  addPerson: async (root, args) => {
       const person = new Person({ ...args })
 
-      return person.save()
-        .catch(error=> {
-          throw new UserInputError(error.message, {
-            invalidArgs: args,
-          })
+      try {
+        await person.save()
+      } catch (error) {
+        throw new UserInputError(error.message, {
+          invalidArgs: args,
         })
+      }
+      return person
   },
     editNumber: async (root, args) => {
       const person = await Person.findOne({ name: args.name })
       person.phone = args.phone
 
-      return person.save()
-        .catch(error => {
-          throw new UserInputError(error.message, {
-            invalidArgs: args,
-          })
+      try {
+        await person.save()
+      } catch (error) {
+        throw new UserInputError(error.message, {
+          invalidArgs: args,
         })
+      }
+      return person
     }       
 }
 ```
+
+Backendin lopullinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-backend/tree/part8-4), branchissa <i>part8-4</i>.
+
 
 ### Käyttäjä ja kirjaantuminen
 
@@ -301,9 +308,11 @@ const server = new ApolloServer({
   resolvers,
   // highlight-start
   context: async ({ req }) => {
-    const authorization = req.headers.authorization
-    if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-      const decodedToken = jwt.verify(authorization.substring(7), JWT_SECRET)
+    const auth = req.headers.authorization
+    if (auth && auth.toLowerCase().startsWith('bearer ')) {
+      const decodedToken = jwt.verify(
+        auth.substring(7), JWT_SECRET
+      )
       
       const currentUser = await User.findById(decodedToken.id)
       return { currentUser }
@@ -328,22 +337,91 @@ Query: {
 },
 ```
 
+### Tuttavalista
 
-### friend
+Viimeistellään sovelluksen backend siten, että henkilöiden luominen ja editointi edellyttää kirjautumista ja, että luodut henkilöt menevät automaattisesti kirjautuneen käyttäjän tuttavalistalle.
 
-Tyhjennetään kanta. 
+Tyhjennetään ensin kannasta siellä ennestään olevat kenenkään tuttaiin kuulumattomat käyttäjtä
 
-uudet henkilöt lisääjän frendeiksi
-
-```js
-```
-
-mahdollisuus lisätä kuka vaan frendiksi
+Mutaatio _addPerson_ muuttuu seuraavasti
 
 ```js
+Mutation: {
+  addPerson: async (root, args, context) => {
+    const person = new Person({ ...args })
+    const currentUser = context.currentUser
+
+    if (!currentUser) {
+      throw new AuthenticationError("not authenticated")
+    }
+
+    try {
+      await person.save()
+      currentUser.friends = currentUser.friends.concat(person)
+      await currentUser.save()
+    } catch (error) {
+      throw new UserInputError(error.message, {
+        invalidArgs: args,
+      })
+    }
+
+    return person
+  }, 
+  //...
+}
 ```
 
-profit.
+Jos kirjautunutta käyttäjää ei löydy kontekstista heitetään poikkeus _AuthenticationError_. Henkilön talletus hoidetaan nyt _async/await_-syntaksilla, koska joudumme onnistuneet talletuksen yhteydessä tallettamaan uuden henkilön käyttäjän tuttavalistalle.
+
+Lisätään sovellukseen vielä mahdollisuus liittää jokin henkilö omalle tuttavalistalle. Mutaatio seuraavassa
+
+```js
+type Mutation {
+  // ...
+  addAsFriend(
+    name: String!
+  ): User 
+}
+```
+
+Mutaation toteuttava resolveri:
+
+```js
+  addAsFriend: async (root, args, { currentUser }) => {
+    const nonFriendAlready = (person) => {
+      !currentUser.friends.map(f => f._id).includes(person._id)
+    }
+
+    if (!currentUser) {
+      throw new AuthenticationError("not authenticated")
+    }
+
+    const person = await Person.findOne({ name: args.name })
+    if ( nonFriendAlready(person) ) {
+      currentUser.friends = currentUser.friends.concat(person)
+    } 
+    
+    await currentUser.save()
+
+    return currentUser
+  },
+```
+
+Huomaa miten resolveri <i>destrukturoi</i> kirjautuneen käyttäjän kontekstista, eli sen sijaan että _currentUser_ otettaisiin erilliseen muuttujaan funktiossa
+
+```js
+addAsFriend: async (root, args, { currentUser }) => {
+  const currentUser = context.currentUser
+```
+
+otetaan se vastaan suoraan funktion parametrimäärittelyssä:
+
+```js
+addAsFriend: async (root, args, { currentUser }) => {
+```
+
+Backendin lopullinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-backend/tree/part8-5), branchissa <i>part8-5</i>.
+
 
 </div>
 
@@ -351,21 +429,12 @@ profit.
 
 ### Tehtäviä
 
-#### DEPRECATED: Genren kirjat
+#### 8.13 kanta
 
-Laajenna sovellustasi siten, että kirjojen näkymästä voidaan rajata näytettävä kirjalista ainoastaan niihin jotka kuuluvat valittuun genreen. Toteutuksesi voi näyttää seuraavalta:
+#### 8.14 käyttäjä
 
-![](../images/8/19.png)
+#### 8.15 suosikki
 
-#### DEPRECATED: Genren kirjat GraphQL:llä
-
-Tietyn genren kirjoihin rajoittamisen voi tehdä kokonaan React-sovelluksen puolella. Voit merkitä tämän tehtävän, jos rajaat näytettävät kirjat tahtävässä 8.5 palvelimeen toteutetun suoran GraphQ-kyselyn avulla. 
-
-Tämä tehtävä voi olla haastava ja niin kurssin tässä vaiheessa jo kuuluukin olla. Muutama vihje
-- komponetin <i>Query</i> tai hookin <i>useQuery</i> käyttö kannattaa kirjalistan osalta sillä kysely on pystyttävä tekemään käyttäjän valitessa haluamansa genren
-- GraphQL-kyselyjen tuloksia kannatta joskus tallentaan komponentin tilaan
-- huomaa, että voit tehdä GraphQL-kyselyjä <i>useEffect</i>-hookissa
-- <i>useEffect</i>-hookin [toisesta parametrista](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) voi olla tehtävässä apua, se tosin riippuu käyttämästäsi lähestymistavasta.
-
+#### 8.16 suosikki
 
 </div>

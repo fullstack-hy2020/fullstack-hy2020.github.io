@@ -47,9 +47,14 @@ module.exports = {
     e: 'Sekalaista',
     f: 'Tehtäviä: blogilistan laajennus',
   },
+  
   '8': { 
     a: 'GraphQL-palvelin',
     b: 'React ja GraphQL',
-    c: 'GraphQL-palvelin ja tietokanta' 
+    c: 'Tietokanta ja käyttäjien hallinta',
+    d: 'Kirjautuminen ja välimuistin päivitys',
+    e: 'Fragmentit, subskriptiot etc' 
   },
+  /*
+  */
 };
