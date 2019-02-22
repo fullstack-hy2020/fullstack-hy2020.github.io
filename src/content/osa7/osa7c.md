@@ -864,6 +864,6 @@ Ejektoidun sovelluksen konfiguraatioiden lukeminen on suositeltavaa ja sangen op
 
 ### Tehtäviä
 
-Koko osan lopun [blogilistaa laajentavassa tehtäväsarjassa](http://localhost:8000/osa7/tehtavia_blogilistan_laajennus) on myös yksi webpackiin liittyvä tehtävä.
+Koko osan lopun [blogilistaa laajentavassa tehtäväsarjassa](/osa7/tehtavia_blogilistan_laajennus) on myös yksi webpackiin liittyvä tehtävä.
 
 </div>

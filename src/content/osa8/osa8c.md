@@ -6,7 +6,7 @@ letter: c
 
 <div class="content">
 
-Laajennetaan sovellusta käyttäjänhallinnalla. Siirrytään kuitenkin ensin käyttämään tietokantaa datan tallettamiseen. 
+Laajennetaan sovellusta käyttäjänhallinnalla. Siirrytään kuitenkin ensin käyttämään tietokantaa datan tallettamiseen.
 
 #### Mongoose ja Apollo
 
@@ -16,7 +16,7 @@ Otetaan käyttöön mongoose ja mongoose-unique-validator:
 npm install mongoose mongoose-unique-validator --save
 ```
 
-Tehdään osien [3](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan) ja [4](http://localhost:8000/osa4/sovelluksen_rakenne_ja_testauksen_alkeet) tapaa imitoiden.
+Tehdään osien [3](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan) ja [4](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet) tapaa imitoiden.
 
 Henkilön skeema on määritelty seuraavasti
 
@@ -38,12 +38,12 @@ const schema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 5
-  },  
+  },
   city: {
     type: String,
     required: true,
     minlength: 3
-  },  
+  },
 })
 
 module.exports = mongoose.model('Person', schema)
@@ -88,7 +88,7 @@ const resolvers = {
       },
       Person: {
         address: (root) => {
-          return { 
+          return {
             street: root.street,
             city: root.city
           }
@@ -103,7 +103,7 @@ const resolvers = {
         const person = await Person.findOne({ name: args.name })
         person.phone = args.phone
         return person.save()
-      }           
+      }
     },
 }
 ```
@@ -134,7 +134,7 @@ Täydennetään vielä resolveri _allPersons_ ottamaan huomioon optionaalinen fi
 ```js
 Query: {
   // ..
-  allPersons: (root, args) => {    
+  allPersons: (root, args) => {
     if (!args.phone) {
       return Person.find({})
     }
@@ -144,16 +144,16 @@ Query: {
 },
 ```
 
-Eli jos kyselylle ei ole annettu parametria _phone_, palautetaan kaikki henkilöt. Jos parametrilla on arvo <i>YES</i> palautetaan kyselyn 
+Eli jos kyselylle ei ole annettu parametria _phone_, palautetaan kaikki henkilöt. Jos parametrilla on arvo <i>YES</i> palautetaan kyselyn
 
 ```js
-Person.find({ phone: { $exists: true }}) 
+Person.find({ phone: { $exists: true }})
 ```
 
 palauttamet henkilöt, eli ne joiden kentällä _phone_ on jokin arvo. Jos parametrin arvo on <i>YES</i> palauttaa kysely ne henkilöt, joilla ei ole arvoa kentällä _phone_:
 
 ```js
-Person.find({ phone: { $exists: false }}) 
+Person.find({ phone: { $exists: false }})
 ```
 
 #### Validoinnit
@@ -186,7 +186,7 @@ Mutation: {
         })
       }
       return person
-    }       
+    }
 }
 ```
 
@@ -195,7 +195,7 @@ Backendin lopullinen koodi on kokonaisuudessaan [githubissa](https://github.com/
 
 ### Käyttäjä ja kirjaantuminen
 
-Lisätään järjestelmään käyttäjänhallinta. Oletetaan nyt yksinkertaisuuden takia, että kaikkien käyttäjien salasana on sama järjestelmään kovakoodattu merkkijono. [Osan 4](http://localhost:8000/osa4/kayttajien_hallinta) periaatteilla on toki suoraviivaista tallettaa käyttäjille yksilöllinen salasana mutta koska fokuksemme on GraphQL:ssä, jätämme salasanaan liittyvät rönsyt tälläkertaa pois.
+Lisätään järjestelmään käyttäjänhallinta. Oletetaan nyt yksinkertaisuuden takia, että kaikkien käyttäjien salasana on sama järjestelmään kovakoodattu merkkijono. [Osan 4](/osa4/kayttajien_hallinta) periaatteilla on toki suoraviivaista tallettaa käyttäjille yksilöllinen salasana mutta koska fokuksemme on GraphQL:ssä, jätämme salasanaan liittyvät rönsyt tälläkertaa pois.
 
 Käyttäjän skeema seuraavassa
 
@@ -242,15 +242,15 @@ type Query {
   me: User
 }
 
-type Mutation { 
+type Mutation {
   // ...
   createUser(
     username: String!
-  ): User 
+  ): User
   login(
     username: String!
-    password: String!      
-  ): Token  
+    password: String!
+  ): Token
 }
 ```
 
@@ -288,13 +288,13 @@ Mutation: {
     }
 
     return { value: jwt.sign(userForToken, JWT_SECRET) }
-  },              
+  },
 },
 ```
 
-Käyttäjän luova mutaatio on suoraviivainen. Kirjautumisesta vastaava mutaatio tarkastaa onko käyttäjätunnus/salasana-pari validi ja jos on, palautetaan [osasta 4](http://localhost:8000/osa4/token_perustainen_kirjautuminen) tuttu jwt-token.
+Käyttäjän luova mutaatio on suoraviivainen. Kirjautumisesta vastaava mutaatio tarkastaa onko käyttäjätunnus/salasana-pari validi ja jos on, palautetaan [osasta 4](/osa4/token_perustainen_kirjautuminen) tuttu jwt-token.
 
-Aivan kuten REST:in tapauksessa myös nyt ideana on, että kirjaantunut käyttäjä liittää kirjautumisen yhteydessä saamansa tokenin kaikkiin pyyntöihinsä. REST:in tapaan token liitetään GraphQL-pyyntöihin headerin <i>Authorization</i> avulla. 
+Aivan kuten REST:in tapauksessa myös nyt ideana on, että kirjaantunut käyttäjä liittää kirjautumisen yhteydessä saamansa tokenin kaikkiin pyyntöihinsä. REST:in tapaan token liitetään GraphQL-pyyntöihin headerin <i>Authorization</i> avulla.
 
 GraphQL-playgroundissa headerin liittäminen pyyntöön tapahtuu seuraavasti
 
@@ -313,7 +313,7 @@ const server = new ApolloServer({
       const decodedToken = jwt.verify(
         auth.substring(7), JWT_SECRET
       )
-      
+
       const currentUser = await User.findById(decodedToken.id)
       return { currentUser }
     }
@@ -366,7 +366,7 @@ Mutation: {
     }
 
     return person
-  }, 
+  },
   //...
 }
 ```
@@ -380,7 +380,7 @@ type Mutation {
   // ...
   addAsFriend(
     name: String!
-  ): User 
+  ): User
 }
 ```
 
@@ -399,8 +399,8 @@ Mutaation toteuttava resolveri:
     const person = await Person.findOne({ name: args.name })
     if ( nonFriendAlready(person) ) {
       currentUser.friends = currentUser.friends.concat(person)
-    } 
-    
+    }
+
     await currentUser.save()
 
     return currentUser

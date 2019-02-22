@@ -21,14 +21,14 @@ Napilla <i>cancel</i> käyttäjä saa tarvittaessa suljettua lomakkeen.
 Aloitetaan eristämällä kirjautumislomake omaksi komponentikseen:
 
 ```js
-import React from 'react' 
+import React from 'react'
 
 const LoginForm = ({
    handleSubmit,
    handleUsernameChange,
    handlePasswordChange,
-   username, 
-   password 
+   username,
+   password
   }) => {
   return (
     <div>
@@ -187,7 +187,7 @@ Komponentin käyttö poikkeaa aiemmin näkemistämme siinä, että käytössä o
 Komponentin koodi on seuraavassa:
 
 ```js
-import React, { useState } from 'react' 
+import React, { useState } from 'react'
 
 const Togglable = (props) => {
   const [visible, setVisible] = useState(false)
@@ -209,7 +209,7 @@ const Togglable = (props) => {
         <button onClick={toggleVisibility}>cancel</button>
       </div>
     </div>
-  )  
+  )
 }
 
 export default Togglable
@@ -269,7 +269,7 @@ ja määritellään lomakkeen näyttävä koodi komponentin <i>Togglable</i> sis
     value={newNote}
     handleChange={handleNoteChange}
   />
-</Togglable>    
+</Togglable>
 ```
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part2-notes/tree/part5-4), branchissa <i>part5-4</i>.
@@ -280,7 +280,7 @@ Ratkaisu on melko hyvä, haluaisimme kuitenkin parantaa sitä erään seikan osa
 
 Kun uusi muistiinpano luodaan, olisi loogista jos luomislomake menisi piiloon. Nyt lomake pysyy näkyvillä. Lomakkeen piilottamiseen sisältyy kuitenkin pieni ongelma, sillä näkyvyyttä kontrolloidaan <i>Togglable</i>-komponentin tilassa olevalla muuttujalla <i>visible</i>. Miten pääsemme tilaan käsiksi komponentin ulkopuolelta?
 
-Reactin [ref](https://reactjs.org/docs/refs-and-the-dom.html)-mekanismi tarjoaa eräänlaisen viitteen komponenttiin. 
+Reactin [ref](https://reactjs.org/docs/refs-and-the-dom.html)-mekanismi tarjoaa eräänlaisen viitteen komponenttiin.
 
 Tehdään komponenttiin <i>App</i> seuraavat muutokset
 
@@ -296,7 +296,7 @@ const App = () => {
         value={newNote}
         handleChange={handleNoteChange}
       />
-    </Togglable>    
+    </Togglable>
   )
 
   // ...
@@ -326,7 +326,7 @@ const Togglable = React.forwardRef((props, ref) => { // highlight-line
       toggleVisibility
     }
   })
-// highlight-end  
+// highlight-end
 
   return (
     <div>
@@ -338,7 +338,7 @@ const Togglable = React.forwardRef((props, ref) => { // highlight-line
         <button onClick={toggleVisibility}>cancel</button>
       </div>
     </div>
-  )  
+  )
 })
 
 export default Togglable
@@ -374,7 +374,7 @@ const App = () => {
 ```
 
 Käyttämämme [useImperativeHandle
-](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) on siis React hook, jonka avulla funktiona määritellylle komponentille voidaan määrittää funktioita, joita on mahdollista kutsua sen ulkopuolelta. 
+](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) on siis React hook, jonka avulla funktiona määritellylle komponentille voidaan määrittää funktioita, joita on mahdollista kutsua sen ulkopuolelta.
 
 Käyttämämme kikka komponentin tilan muuttamikseksi toimii, mutta se vaikuttaa hieman ikävältä. Saman olisi saanut aavistuksen siistimmin toteutettua "vanhan Reactin" class-perustaisilla komponenteilla, joihin tutustumme tämän osan lopussa. Tämä on toistaiseksi ainoa tapaus, jossa Reactin hook-syntaksiin nojaava ratkaisu on aavistuksen likaisemman oloinen kuin class-komponenttien tarjoama ratkaisu.
 
@@ -438,7 +438,7 @@ Napin <i>like</i> ei tässä vaiheessa tarvitse tehdä mitään.
 
 Kuvassa on myös käytetty hieman CSS:ää parantamaan sovelluksen ulkoasua.
 
-Tyylejä voidaan määritellä osan 2 tapaan helposti [inline](http://localhost:8000/osa2/tyylien_lisaaminen_react_sovellukseen#inline-tyylit)-tyyleinä seuraavasti:
+Tyylejä voidaan määritellä osan 2 tapaan helposti [inline](/osa2/tyylien_lisaaminen_react_sovellukseen#inline-tyylit)-tyyleinä seuraavasti:
 
 ```js
 const Blog = ({ blog }) => {
@@ -460,7 +460,7 @@ const Blog = ({ blog }) => {
 )}
 ```
 
-**Huom1:** voit tehdä blogin nimestä klikattavan korostetun koodirivin tapaan. 
+**Huom1:** voit tehdä blogin nimestä klikattavan korostetun koodirivin tapaan.
 
 **Huom2:** vaikka tämän tehtävän toiminnallisuus on melkein samanlainen kuin komponentin <i>Togglable</i> tarjoama toiminnallisuus, ei Togglable kuitenkaan sovi tarkoitukseen sellaisenaan. Helpoin ratkaisu lienee lisätä blogille tila, joka kontrolloi sitä missä muodossa blogi näytetään.
 
@@ -505,7 +505,7 @@ Järjestä sovellus näyttämään blogit <i>likejen</i> mukaisessa suuruusjärj
 
 #### 5.9*: blogilistan frontend, step9
 
-Lisää nappi blogin poistamiselle. Toteuta myös poiston tekevä logiikka. 
+Lisää nappi blogin poistamiselle. Toteuta myös poiston tekevä logiikka.
 
 Ohjelmasi voi näyttää esim. seuraavalta:
 
@@ -569,8 +569,8 @@ const LoginForm = ({
    handleSubmit,
    handleUsernameChange,
    handlePasswordChange,
-   username, 
-   password 
+   username,
+   password
   }) => {
     // ...
   }
@@ -596,7 +596,7 @@ Konfiguroimme osassa 3 koodin tyylistä huolehtivan [ESlintin](/osa3/validointi_
 
 Create-react-app on asentanut projektille eslintin valmiiksi, joten ei tarvita muuta kun sopiva konfiguraatio tiedoston <i>.eslintrc.js</i>.
 
-**HUOM:** älä suorita komentoa _npm init_. Se asentaa uuden version eslintistä joka on epäsopiva create-react-app:in konfiguraatioiden kanssa! 
+**HUOM:** älä suorita komentoa _npm init_. Se asentaa uuden version eslintistä joka on epäsopiva create-react-app:in konfiguraatioiden kanssa!
 
 Aloitamme seuraavaksi testaamisen, ja jotta pääsemme eroon testeissä olevista turhista huomautuksista asennetaan plugin [eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest)
 
@@ -645,7 +645,7 @@ module.exports = {
         "semi": [
             "error",
             "never"
-        ], 
+        ],
         // highlight-start
         "eqeqeq": "error",
         "no-trailing-spaces": "error",
@@ -656,7 +656,7 @@ module.exports = {
             "error", { "before": true, "after": true }
         ],
         "no-console": 0,
-        "react/prop-types": 0   
+        "react/prop-types": 0
         // highlight-end
     }
 };

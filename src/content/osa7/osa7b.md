@@ -159,7 +159,7 @@ const App = () => {
     // ...
   ])
 
-  const [user, setUser] = useState(null) 
+  const [user, setUser] = useState(null)
   const [message, setMessage] = useState(null) // highlight-line
 
   const login = (user) => {
@@ -189,7 +189,7 @@ ja renderöidään viesti Bootstrapin [Alert](https://getbootstrap.com/docs/4.1/
       )}
       // highlight-end
     //...
-)}  
+)}
 ```
 
 #### Navigaatiorakenne
@@ -205,7 +205,7 @@ Muutetaan vielä lopuksi sovelluksen navigaatiomenu käyttämään Bootstrapin [
         <Link style={padding} to="/">home</Link>
       </Nav.Link>
       <Nav.Link href="#" as="span">
-        <Link style={padding} to="/notes">notes</Link> 
+        <Link style={padding} to="/notes">notes</Link>
       </Nav.Link>
       <Nav.Link href="#" as="span">
         <Link style={padding} to="/users">users</Link>
@@ -413,10 +413,10 @@ Navigaatiorakenne toteutetaan komponentin [Menu](https://react.semantic-ui.com/c
           : <Link to="/login">login</Link>
         }
       </Menu.Item>
-    </Menu>   
+    </Menu>
     // ...
   </div>
-</Router> 
+</Router>
 ```
 
 Lopputulos näyttää seuraavalta:
@@ -466,7 +466,7 @@ Luetellaan tässä kaikesta huolimatta muitakin UI-frameworkeja. Jos oma suosikk
 
 ### Styled components
 
-Tapoja liittää tyylejä React-sovellukseen on jo näkemiämme lisäksi [muitakin](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b). 
+Tapoja liittää tyylejä React-sovellukseen on jo näkemiämme lisäksi [muitakin](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b).
 
 Mielenkiintoisen näkökulman tyylien määrittelyyn tarjoaa ES6:n [tagged template literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) -syntaksia hyödyntävä [styled components](https://www.styled-components.com/) -kirjasto.
 
@@ -503,11 +503,11 @@ const Login = (props) => {
       <h2>login</h2>
       <form onSubmit={onSubmit}>
         <div>
-          username: 
+          username:
           <Input /> // highlight-line
         </div>
         <div>
-          password: 
+          password:
           <Input type='password' /> // highlight-line
         </div>
         <Button type="submit" primary=''>login</Button> // highlight-line
@@ -548,9 +548,9 @@ const App = () => {
       <Router>
         <div>
           <Navigation> // highlight-line
-            <Link style={padding} to="/">home</Link> 
-            <Link style={padding} to="/notes">notes</Link> 
-            <Link style={padding} to="/users">users</Link> 
+            <Link style={padding} to="/">home</Link>
+            <Link style={padding} to="/notes">notes</Link>
+            <Link style={padding} to="/users">users</Link>
             {user
               ? <em>{user} logged in</em>
               : <Link to="/login">login</Link>
@@ -558,8 +558,8 @@ const App = () => {
           </Navigation>
 
           <Route exact path="/" render={() => <Home />} />
-          <Route exact path="/notes" render={() => 
-            <Notes notes={notes} />} 
+          <Route exact path="/notes" render={() =>
+            <Notes notes={notes} />}
           />
           <Route exact path="/notes/:id" render={({ match }) =>
             <Note note={noteById(match.params.id)} />}
@@ -592,7 +592,7 @@ Styled components on nostanut tasaisesti suosiotaan viime aikoina ja tällä het
 
 ### Tehtäviä
 
-Tämän luvun asioihin liittyvät tehtävät ovat osan lopun [blogilistaa laajentavassa tehtäväsarjassa](http://localhost:8000/osa7/tehtavia_blogilistan_laajennus).
+Tämän luvun asioihin liittyvät tehtävät ovat osan lopun [blogilistaa laajentavassa tehtäväsarjassa](/osa7/tehtavia_blogilistan_laajennus).
 
 </div>
 
@@ -603,7 +603,7 @@ Tämän luvun asioihin liittyvät tehtävät ovat osan lopun [blogilistaa laajen
 
 Tapoja liittää tyylejä React-sovellukseen on jo näkemiämme lisäksi [muitakin](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b). Katsotaan vielä lyhyestä muutamaa tapaa.
 
-On melko yleistä, että React-sovelluksen CSS määritellään useassa eri tiedostossa. Koko sovellusta koskeva CSS saattaa tiedostossa <i>index.js</i> ja sen lisäksi eri komponentteja koskevat määrittelyt tehdään komponenttikohtaisiin tiedostoihin. 
+On melko yleistä, että React-sovelluksen CSS määritellään useassa eri tiedostossa. Koko sovellusta koskeva CSS saattaa tiedostossa <i>index.js</i> ja sen lisäksi eri komponentteja koskevat määrittelyt tehdään komponenttikohtaisiin tiedostoihin.
 
 Voisimme määritellä esimerkkisovelukselle fontin ja taustavärin tiedostossa <i>index.css</i>
 

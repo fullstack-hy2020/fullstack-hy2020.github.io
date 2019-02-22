@@ -6,7 +6,7 @@ letter: c
 
 <div class="content">
 
-Laajennetaan sovellusta siten, että muistiinpanot talletetaan backendiin. Käytetään osasta 2 tuttua [json-serveriä](http://localhost:8000/osa2/palvelimella_olevan_datan_hakeminen).
+Laajennetaan sovellusta siten, että muistiinpanot talletetaan backendiin. Käytetään osasta 2 tuttua [json-serveriä](/osa2/palvelimella_olevan_datan_hakeminen).
 
 Tallennetaan projektin juuren tiedostoon <i>db.json</i> tietokannan alkutila:
 
@@ -137,7 +137,7 @@ noteService.getAll().then(notes =>
 >
 > await toimii ainoastaan <i>async</i>-funktioiden sisällä, ja <i>index.js</i>:ssä oleva koodi ei ole funktiossa, joten päädyimme tilanteen yksinkertaisuuden takia tällä kertaa jättämään <i>async</i>:in käyttämättä.
 
-Päätetään kuitenkin siirtää muistiinpanojen alustus <i>App</i>-komponentiin, eli kuten yleensä dataa palvelimelta haettaessa, käytetään <i>effect hookia</i>.  
+Päätetään kuitenkin siirtää muistiinpanojen alustus <i>App</i>-komponentiin, eli kuten yleensä dataa palvelimelta haettaessa, käytetään <i>effect hookia</i>.
 
 Jotta saamme action creatorin <i>initializeNotes</i> käyttöön komponentissa <i>App</i> tarvitsemme jälleen _connect_-metodin apua:
 
@@ -160,8 +160,8 @@ const App = (props) => {
 
   return (
     <div>
-      <NewNote />  
-      <VisibilityFilter />    
+      <NewNote />
+      <VisibilityFilter />
       <Notes />
     </div>
   )
@@ -183,7 +183,7 @@ const getAll = async () => {
 }
 
 // highlight-start
-const createNew = async content => { 
+const createNew = async content => {
   const object = { content, important: false }
   const response = await axios.post(url, object)
   return response.data
@@ -203,14 +203,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { createNote } from '../reducers/noteReducer'
 import noteService from '../services/notes'  // highlight-line
- 
+
 const NewNote = (props) => {
   const addNote = async (event) => {
     event.preventDefault()
     const content = event.target.note.value // highlight-line
     const newNote = await noteService.createNew(content) // highlight-line
     props.createNote(newNote.content) // highlight-line
-    event.target.note.value = '' 
+    event.target.note.value = ''
   }
 
   return (
@@ -354,8 +354,8 @@ const App = (props) => {
 
   return (
     <div>
-      <NewNote />  
-      <VisibilityFilter />    
+      <NewNote />
+      <VisibilityFilter />
       <Notes />
     </div>
   )
@@ -439,7 +439,7 @@ const reducer = combineReducers({
 const store = createStore(
   reducer,
   // highlight-start
-  composeWithDevTools( 
+  composeWithDevTools(
     applyMiddleware(thunk)
   )
   // highlight-end
@@ -464,7 +464,7 @@ Storen tietyn hetkisen tilan lisäksi on myös mahdollista tarkastella, mikä on
 
 Kurssi on ehtinyt pitkälle, ja olemme vihdoin päässeet siihen pisteeseen missä käytämme Reactia "oikein", eli React keskittyy pelkästään näkymien muodostamiseen ja sovelluksen tila sekä sovelluslogiikka on eristetty kokonaan React-komponenttien ulkopuolelle, Reduxiin ja action reducereihin.
 
-Entä _useState_-hookilla saatava komponenttien oma tila, onko sillä roolia jos sovellus käyttää Reduxia tai muuta komponenttien ulkoista tilanhallintaratkaisua? Jos sovelluksessa on monimutkaisempia lomakkeita, saattaa niiden lokaali tila olla edelleen järkevä toteuttaa funktiolla _useState_ saatavan tilan avulla. Lomakkeidenkin tilan voi toki tallettaa myös reduxiin, mutta jos lomakkeen tila on oleellinen ainoastaan lomakkeen täyttövaiheessa (esim. syötteen muodon validoinnin kannalta), voi olla viisaampi jättää tilan hallinta suoraan lomakkeesta huolehtivan komponentin vastuulle. 
+Entä _useState_-hookilla saatava komponenttien oma tila, onko sillä roolia jos sovellus käyttää Reduxia tai muuta komponenttien ulkoista tilanhallintaratkaisua? Jos sovelluksessa on monimutkaisempia lomakkeita, saattaa niiden lokaali tila olla edelleen järkevä toteuttaa funktiolla _useState_ saatavan tilan avulla. Lomakkeidenkin tilan voi toki tallettaa myös reduxiin, mutta jos lomakkeen tila on oleellinen ainoastaan lomakkeen täyttövaiheessa (esim. syötteen muodon validoinnin kannalta), voi olla viisaampi jättää tilan hallinta suoraan lomakkeesta huolehtivan komponentin vastuulle.
 
 </div>
 
@@ -472,7 +472,7 @@ Entä _useState_-hookilla saatava komponenttien oma tila, onko sillä roolia jos
 
 ### tehtäviä
 
-#### 6.18 anekdootit ja backend, step4 
+#### 6.18 anekdootit ja backend, step4
 
 Muuta redux-storen alustus tapahtumaan <i>redux-thunk</i>-kirjaston avulla toteutettuun asynkroniseen actioniin.
 

@@ -6,9 +6,9 @@ letter: a
 
 <div class="content">
 
-Kurssin seitsemännen osan tehtävät poikkeavat jossain määrin. Tässä luvussa on normaaliin tapaan [kolme luvun teoriaan liittyvää tehtävää](http://localhost:8000/osa7/react_router#tehtavia).
+Kurssin seitsemännen osan tehtävät poikkeavat jossain määrin. Tässä luvussa on normaaliin tapaan [kolme luvun teoriaan liittyvää tehtävää](/osa7/react_router#tehtavia).
 
-Tämän luvun tehtävien lisäksi seitsemäs osa sisältää kertaavan ja hieman tämän osan teoriaakin soveltavan [tehtäväsarjan](http://localhost:8000/osa7/tehtavia_blogilistan_laajennus), jossa laajennetaan osissa 4 ja 5 tehtyä Bloglist-sovellusta. 
+Tämän luvun tehtävien lisäksi seitsemäs osa sisältää kertaavan ja hieman tämän osan teoriaakin soveltavan [tehtäväsarjan](/osa7/tehtavia_blogilistan_laajennus), jossa laajennetaan osissa 4 ja 5 tehtyä Bloglist-sovellusta.
 
 ### Sovelluksen navigaatiorakenne
 
@@ -73,10 +73,10 @@ const App = () => {
       <div>
         <a href="" onClick={toPage('home')} style={padding}>
           home
-        </a> 
+        </a>
         <a href="" onClick={toPage('notes')} style={padding}>
           notes
-        </a> 
+        </a>
         <a href="" onClick={toPage('users')} style={padding}>
           users
         </a>
@@ -119,8 +119,8 @@ const App = () => {
       <Router>
         <div>
           <div>
-            <Link style={padding} to="/">home</Link> 
-            <Link style={padding} to="/notes">notes</Link> 
+            <Link style={padding} to="/">home</Link>
+            <Link style={padding} to="/notes">notes</Link>
             <Link style={padding} to="/users">users</Link>
           </div>
           <Route exact path="/" render={() => <Home />} />
@@ -219,16 +219,16 @@ Tämä tapahtuu laajentamalla komponentissa <i>App</i> olevaa reititystä seuraa
 <Router>
   <div>
     <div>
-      <Link style={padding} to="/">home</Link> 
-      <Link style={padding} to="/notes">notes</Link> 
-      <Link style={padding} to="/users">users</Link> 
+      <Link style={padding} to="/">home</Link>
+      <Link style={padding} to="/notes">notes</Link>
+      <Link style={padding} to="/users">users</Link>
     </div>
 
-    <Route exact path="/" render={() => 
+    <Route exact path="/" render={() =>
       <Home />
     } />
     // highlight-start
-    <Route exact path="/notes" render={() => 
+    <Route exact path="/notes" render={() =>
       <Notes notes={notes} />
     } />
     <Route exact path="/notes/:id" render={({ match }) =>
@@ -273,13 +273,13 @@ Mahdollisuus <i>Login</i>-näkymään navigointiin renderöidään menuun ehdoll
 <Router>
   <div>
     <div>
-      <Link style={padding} to="/">home</Link> 
-      <Link style={padding} to="/notes">notes</Link> 
-      <Link style={padding} to="/users">users</Link> 
+      <Link style={padding} to="/">home</Link>
+      <Link style={padding} to="/notes">notes</Link>
+      <Link style={padding} to="/users">users</Link>
       // highlight-start
       {user
         ? <em>{user} logged in</em>
-        
+
         : <Link to="/login">login</Link>
       }
       // highlight-end
@@ -363,7 +363,7 @@ const App = () => {
     // ...
   ])
 
-  const [user, setUser] = useState(null) 
+  const [user, setUser] = useState(null)
 
   const login = (user) => {
     setUser(user)
@@ -379,19 +379,19 @@ const App = () => {
       <Router>
         <div>
           <div>
-            <Link style={padding} to="/">home</Link> 
-            <Link style={padding} to="/notes">notes</Link> 
-            <Link style={padding} to="/users">users</Link> 
+            <Link style={padding} to="/">home</Link>
+            <Link style={padding} to="/notes">notes</Link>
+            <Link style={padding} to="/users">users</Link>
             {user
               ? <em>{user} logged in</em>
               : <Link to="/login">login</Link>
             }
           </div>
 
-          <Route exact path="/" render={() => 
+          <Route exact path="/" render={() =>
             <Home />
           } />
-          <Route exact path="/notes" render={() => 
+          <Route exact path="/notes" render={() =>
             <Notes notes={notes} />
           } />
           <Route exact path="/notes/:id" render={({ match }) =>

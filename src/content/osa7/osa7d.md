@@ -12,7 +12,7 @@ Class-, eli luokkakomponentit on syytä tuntea ainakin jossain määrin, sillä 
 
 ### Luokkakomponentit
 
-Tutustutaan nyt luokkakomponenttien tärkeimpiin ominaisuuksiin toteuttamalla jälleen kerran jo niin tuttu anekdoottisovellus. Talletetaan anekdootit <i>json-serveriä</i> hyödyntäen tiedostoon <i>db.json</i>. Tiedoston sisältö otetaan [täältä](https://github.com/fullstack-hy2019/misc/blob/master/anecdotes.json). 
+Tutustutaan nyt luokkakomponenttien tärkeimpiin ominaisuuksiin toteuttamalla jälleen kerran jo niin tuttu anekdoottisovellus. Talletetaan anekdootit <i>json-serveriä</i> hyödyntäen tiedostoon <i>db.json</i>. Tiedoston sisältö otetaan [täältä](https://github.com/fullstack-hy2019/misc/blob/master/anecdotes.json).
 
 Luokkakomponentin ensimmäinen versio näyttää seuraavalta
 
@@ -36,7 +36,7 @@ class App extends React.Component {
 export default App
 ```
 
-Komponentilla on nyt [konstruktori](https://reactjs.org/docs/react-component.html#constructor) missä ei toistaiseksi tehdä mitään sekä metodi [render](https://reactjs.org/docs/react-component.html#render). Kuten arvata saattaa, _render_ määrittelee sen miten komponentti piirtyy ruudulle. 
+Komponentilla on nyt [konstruktori](https://reactjs.org/docs/react-component.html#constructor) missä ei toistaiseksi tehdä mitään sekä metodi [render](https://reactjs.org/docs/react-component.html#render). Kuten arvata saattaa, _render_ määrittelee sen miten komponentti piirtyy ruudulle.
 
 Määritellään komponenttiin tila anekdoottien listalle sekä näkyvissä olevalle anekdootille. Toisin kuin [useState](https://reactjs.org/docs/hooks-state.html)-hookia käytettäessä, luokkakomponenteilla on ainoastaan yksi tila. Eli jos tila koostuu useista "osista", tulee osat tallettaa tilan kenttiin.  Tila alustetaan konstruktorissa:
 
@@ -63,7 +63,7 @@ class App extends React.Component {
         <h1>anecdote of the day</h1>
         <div>
           {this.state.anecdotes[this.state.current].content} // highlight-line
-        </div> 
+        </div>
         <button>next</button>
       </div>
     )
@@ -148,7 +148,7 @@ class App extends React.Component {
 }
 ```
 
-Vertailun vuoksi sama sovellus funktionaalisena komponenttina: 
+Vertailun vuoksi sama sovellus funktionaalisena komponenttina:
 
 ```js
 const App = () => {
@@ -179,13 +179,13 @@ const App = () => {
 }
 ```
 
-Esimerkkimme tapauksessa erot eivät ole suuret. Suurin ero funktionaalisissa ja luokkakompontenteissa lienee se, että luokkakomponentin tila on aina yksittäinen olio, ja tilaa muutetaan metodin _setState_ avulla kun taas funktionaalisessa komponentissa tila voi koostua useista muuttujista, joilla kaikilla on oma päivitysfunktio. 
+Esimerkkimme tapauksessa erot eivät ole suuret. Suurin ero funktionaalisissa ja luokkakompontenteissa lienee se, että luokkakomponentin tila on aina yksittäinen olio, ja tilaa muutetaan metodin _setState_ avulla kun taas funktionaalisessa komponentissa tila voi koostua useista muuttujista, joilla kaikilla on oma päivitysfunktio.
 
 Hieman edistyneemmissä käyttöskenaarioissa effect hookit tarjoavat huomattavasti paremman mekanismin sivuvaikutusten hallintaan verrattuna luokkakomponenttien elinkaarimetodeihin.
 
-Merkittävä etu funktionaalisille komponenttien käytössä on se, että paljon harmia tuottavaa Javascriptin olioon itseensä viittaavaa _this_-viitettä ei tarvite käsitellä ollenkaan. 
+Merkittävä etu funktionaalisille komponenttien käytössä on se, että paljon harmia tuottavaa Javascriptin olioon itseensä viittaavaa _this_-viitettä ei tarvite käsitellä ollenkaan.
 
-Oman ja suuren enemmistön mielestä luokkakomponenteilla ei ole oikeastaan mitään etuja hookeilla rikastettuihin funktionaalisiin komponentteihin verrattuna, poikkeuksen tähän muodostaa ns. [error boundary](https://reactjs.org/docs/error-boundaries.html) -mekanismi, joka ei ole toistaiseksi (7.2.2019) funktionaalisten komponenttien käytössä. 
+Oman ja suuren enemmistön mielestä luokkakomponenteilla ei ole oikeastaan mitään etuja hookeilla rikastettuihin funktionaalisiin komponentteihin verrattuna, poikkeuksen tähän muodostaa ns. [error boundary](https://reactjs.org/docs/error-boundaries.html) -mekanismi, joka ei ole toistaiseksi (7.2.2019) funktionaalisten komponenttien käytössä.
 
 Kun kirjoitat uutta koodia, [ei siis ole mitään rationaalista syytä käyttää luokkakomponentteja](https://reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both) jos projektissa on käytössä Reactista vähintään versio 16.8. Toisaalta kaikkea vanhaa Reactia [ei ole toistaiseksi mitään syytä uudelleenkirjoittaa](https://reactjs.org/docs/hooks-faq.html#do-i-need-to-rewrite-all-my-class-components) funktionaalisina komponentteina.
 
@@ -193,18 +193,18 @@ Kun kirjoitat uutta koodia, [ei siis ole mitään rationaalista syytä käyttä�
 
 Palataan vielä hetkeksi testauksen pariin. Aiemmissa osissa teimme sovelluksille yksikkötestejä sekä integraatiotestejä. Katsotaan nyt erästä tapaa tehdä [järjestelmää kokonaisuutena](https://en.wikipedia.org/wiki/System_testing) tutkivia <i>End to End (E2E) -testejä</i>.
 
-Web-sovellusten E2E-testaus tapahtuu käyttäen selainta jonkin kirjaston avulla. Ratkaisuja on tarjolla useita, esim. [Selenium](http://www.seleniumhq.org/), joka mahdollistaa testien automatisoinnin lähes mitä tahansa selainta käyttäen. 
+Web-sovellusten E2E-testaus tapahtuu käyttäen selainta jonkin kirjaston avulla. Ratkaisuja on tarjolla useita, esim. [Selenium](http://www.seleniumhq.org/), joka mahdollistaa testien automatisoinnin lähes mitä tahansa selainta käyttäen.
 
 Tämän kurssin kurssin [edellisessä versiossa](https://fullstackopen.github.io/osa7/) E2E-testeihin käytettiin [puppeteer](https://pptr.dev/)-kirjastoa, joka tarjoaa suoran rajapinnan [chrome](https://developers.google.com/web/updates/2017/04/headless-chrome)-selaimen käyttöön ns. [headless](https://en.wikipedia.org/wiki/Headless_browser)-moodissa eli siten että selain ei näytä ollenkaan ollenkaan graafista käyttöliittymää.
 
 Websovellusten E2E on ollut teknolgioiden puolesta mahdollista jo yli kymmenen vuotta, erityisesti Single Page App -periaatteella toteutettujen sovellusten testaaminen on kuitenkin ollut valitettavan hankalaa ja testit ovat usein epäluotettaia eli englanniksi [flaky](https://hackernoon.com/flaky-tests-a-war-that-never-ends-9aa32fdef359), osa testeistä on mennyt välillä läpi ja välillä ei, vaikka koodi olisi ollut muuttumaton.
 
-Vuoden 2018 aikana [Cypress](https://www.cypress.io/)-niminen kirjasto on ruvennut nostamaan nopeasti suosiota E2E-testauksessa. Cypress on poikkeuksellisen helppokäyttöinen, tunkkauksen määrä esim. Seleniumin käyttöön verrattuna on lähes olematon. Cypressin toimintaperiaate poikkeaa radikaalisti useimmista E2E-testaukseen sopivista kirjastoista. Cypress-testit ajetaan kokonaisuudessaan selaimen sisällä toisin. Muissa lähestymistavoissa testit suoritetaan Node-prosessissa, joka on yhteydessä selaimeen sen tarjoamien ohjelmointirajapintojen kautta. 
+Vuoden 2018 aikana [Cypress](https://www.cypress.io/)-niminen kirjasto on ruvennut nostamaan nopeasti suosiota E2E-testauksessa. Cypress on poikkeuksellisen helppokäyttöinen, tunkkauksen määrä esim. Seleniumin käyttöön verrattuna on lähes olematon. Cypressin toimintaperiaate poikkeaa radikaalisti useimmista E2E-testaukseen sopivista kirjastoista. Cypress-testit ajetaan kokonaisuudessaan selaimen sisällä toisin. Muissa lähestymistavoissa testit suoritetaan Node-prosessissa, joka on yhteydessä selaimeen sen tarjoamien ohjelmointirajapintojen kautta.
 
 
-Tehdään muutamia testejä osissa 2-5 kehitetylle muistiinpanosovellukselle. 
+Tehdään muutamia testejä osissa 2-5 kehitetylle muistiinpanosovellukselle.
 
-Asennetaan cypress 
+Asennetaan cypress
 
 ```js
 npm install --save-dev cypress
@@ -213,7 +213,7 @@ npm install --save-dev cypress
 ja määritellään npm-skripti käynnistämistä varten.
 
 ```js
-{ 
+{
   // ...
   "scripts": {
     "start": "react-scripts start",
@@ -232,7 +232,7 @@ Cypress-testit olettavat että testattava järjestelmä on käynnissä kun testi
 Tehdään backendille npm-skripti jonka avulla se saadaan käynnistettyä siten, että <i>NODE\_ENV</i> saa arvon <i>test</i>
 
 ```js
-{ 
+{
   // ...
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
@@ -267,7 +267,7 @@ Testin suoritus avaa selaimen ja näyttää miten sovellus käyttäytyy testin e
 
 ![](../images/7/37a.png)
 
-Testi näyttää rakenteen puolesta melko tutulta. <i>describe</i>-lohkoja käytetään samaan tapaan kuin Jestissä ryhmittelemään yksittäisiä testitapauksia, jotka on määritelty <i>it</i>-metodin avulla. Nämä osat Cypress on lainannut sisäisesti käyttämältään [Mocha](https://mochajs.org/)-testikirjastolta. Mocha oli testikirjastojen vanha hallitsija, se on edelleen suosittu, mutta Jest on mennyt selvästi edelle. [visit](https://docs.cypress.io/api/commands/visit.html#Syntax) ja[contains](https://docs.cypress.io/api/commands/contains.html#Syntax) taas ovat Cypressin komentoja, joiden merkitys on aika ilmeinen. 
+Testi näyttää rakenteen puolesta melko tutulta. <i>describe</i>-lohkoja käytetään samaan tapaan kuin Jestissä ryhmittelemään yksittäisiä testitapauksia, jotka on määritelty <i>it</i>-metodin avulla. Nämä osat Cypress on lainannut sisäisesti käyttämältään [Mocha](https://mochajs.org/)-testikirjastolta. Mocha oli testikirjastojen vanha hallitsija, se on edelleen suosittu, mutta Jest on mennyt selvästi edelle. [visit](https://docs.cypress.io/api/commands/visit.html#Syntax) ja[contains](https://docs.cypress.io/api/commands/contains.html#Syntax) taas ovat Cypressin komentoja, joiden merkitys on aika ilmeinen.
 
 Olisimme voineet määritellä testin myös käyttäen nuolifunktioita
 
@@ -295,8 +295,8 @@ describe('Note app', function() {
   it('front page contains random text', function() {
     cy.visit('http://localhost:3000')
     cy.contains('wtf is this app?')
-  }) 
-// highlight-end   
+  })
+// highlight-end
 })
 ```
 
@@ -314,7 +314,7 @@ describe('Note app',  function() {
     cy.visit('http://localhost:3000')
     cy.contains('login')
       .click()
-  })  
+  })
 })
 ```
 
@@ -337,11 +337,11 @@ describe('Note app', function() {
   it('login form can be opened', function() {
     cy.contains('login')
       .click()
-  })  
+  })
 })
 ```
 
-Ilmoittautumislomake sisältää kaksi <i>input</i>-kenttää, joihin testin tulisi kirjoittaa. 
+Ilmoittautumislomake sisältää kaksi <i>input</i>-kenttää, joihin testin tulisi kirjoittaa.
 
 Komento [get](https://docs.cypress.io/api/commands/get.html#Syntax) mahdollistaa elementtien etsimisen CSS-selektorien avulla.
 
@@ -356,9 +356,9 @@ it('user can login', function() {
   cy.get('input:last')
     .type('salainen')
   cy.contains('kirjaudu')
-    .click()  
-  cy.contains('Matti Luukkainen logged in')  
-})  
+    .click()
+  cy.contains('Matti Luukkainen logged in')
+})
 ```
 
 Testi toimii mutta on kuitenkin sikäli ongelmallinen, että jos sovellukseen tulee jossain vaiheessa lisää input-kenttiä testi saattaa hajota, sillä se luottaa tarvitsemiensa kenttien olevan ensimmäisenä ja viimeisenä.
@@ -408,9 +408,9 @@ describe('Note app',  function() {
     cy.get('#password')  // highlight-line
       .type('salainen')
     cy.contains('kirjaudu')
-      .click()  
-    cy.contains('Matti Luukkainen logged in')  
-  })  
+      .click()
+    cy.contains('Matti Luukkainen logged in')
+  })
 })
 ```
 
@@ -433,14 +433,14 @@ describe('Note app', function() {
 
     it('name of the user is shown', function() {
       cy.contains('Matti Luukkainen logged in')
-    })  
+    })
 
     // highlight-start
     it('a new note can be created', function() {
       cy.contains('new note')
         .click()
       cy.get('input')
-        .type('a note created by cypress')    
+        .type('a note created by cypress')
       cy.contains('tallenna')
         .click()
       cy.contains('a note created by cypress')
@@ -460,13 +460,13 @@ jos kenttiä on useampia, testi hajoaa
 
 ![](../images/7/39.png)
 
-Tämän takia olisi jälleen parempi lisätä lomakkeen kentälle <i>id</i> ja hakea kenttä testissä id:n perusteella. 
+Tämän takia olisi jälleen parempi lisätä lomakkeen kentälle <i>id</i> ja hakea kenttä testissä id:n perusteella.
 
 ### Tietokannan tilan kontrollointi
 
-Jos testatessa on tarvetta muokata tietokantaa, muuttuu tilanne heti haastavammaksi. Ideaalitilanteessa testauksen tulee aina lähteä liikkeelle samasta alkutilasta, jotta testeistä saadaan luotettavia ja helposti toistettavia. 
+Jos testatessa on tarvetta muokata tietokantaa, muuttuu tilanne heti haastavammaksi. Ideaalitilanteessa testauksen tulee aina lähteä liikkeelle samasta alkutilasta, jotta testeistä saadaan luotettavia ja helposti toistettavia.
 
-Yleinen ratkaisu on nollata tietokanta ja mahdollisesti alustaa se sopivasti aina ennen testien suorittamista. E2E-testauksessa lisähaasteen luo se, että testeistä ei ole mahdollista päästä suoraan käsiksi tietokantaan. 
+Yleinen ratkaisu on nollata tietokanta ja mahdollisesti alustaa se sopivasti aina ennen testien suorittamista. E2E-testauksessa lisähaasteen luo se, että testeistä ei ole mahdollista päästä suoraan käsiksi tietokantaan.
 
 
 Ratkaistaan ongelma luomalla backendiin testejä varten API endpoint, jonka avulla testit voivat tarvittaessa nollata kannan. Tehdään testejä varten oma <i>router</i>
@@ -527,7 +527,7 @@ describe('Note app', function() {
     cy.visit('http://localhost:3000')
   })
 
-  it('front page can be opened', function() { 
+  it('front page can be opened', function() {
     cy.contains('Muistiinpanosovellus')
   })
 })
@@ -539,8 +539,8 @@ Testi tekee alustuksen aikana HTTP-pyyntöjä backendiin komennolla [request](ht
 describe('Note app', function() {
   // ...
 
-  describe('when logged in', function() { 
-    beforeEach(function() { 
+  describe('when logged in', function() {
+    beforeEach(function() {
       cy.contains('login')
         .click()
       cy.get('#username')
@@ -551,11 +551,11 @@ describe('Note app', function() {
         .click()
     })
 
-    it('name of the user is shown', function() { 
+    it('name of the user is shown', function() {
       cy.contains('Matti Luukkainen logged in')
     })
 
-    it('a new note can be created', function() { 
+    it('a new note can be created', function() {
       cy.contains('new note')
         .click()
       cy.get('input')
@@ -563,7 +563,7 @@ describe('Note app', function() {
       cy.contains('tallenna')
         .click()
       cy.contains('a note created by cypress')
-    }) 
+    })
   })
 })
 ```
@@ -600,7 +600,7 @@ On useita eri tapoja testata asia. Seuraavassa etsitään ensin muistiinpano ja 
 describe('Note app', function() {
   // ...
 
-  describe('when logged in', function() { 
+  describe('when logged in', function() {
     // ...
 
     describe('and a note is created', function () {
@@ -617,13 +617,13 @@ describe('Note app', function() {
         cy.contains('another note cypress')
           .contains('make important')
           .click()
-        
+
         cy.contains('another note cypress')
           .contains('make not important')
       })
-    })    
+    })
   })
-})      
+})
 ```
 
 Testit ja frontendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019part2-notes/tree/part7-1), branchissa <i>part7-1</i>.
@@ -642,6 +642,6 @@ Cypressin dokumentaatio on poikkeuksellisen hyvä. Suosittelenkin lämpimästi C
 
 ### Tehtäviä
 
-End to end -testaukseen liittyvät tehtävät ovat osan lopun [blogilistaa laajentavassa tehtäväsarjassa](http://localhost:8000/osa7/tehtavia_blogilistan_laajennus).
+End to end -testaukseen liittyvät tehtävät ovat osan lopun [blogilistaa laajentavassa tehtäväsarjassa](/osa7/tehtavia_blogilistan_laajennus).
 
 </div>
