@@ -880,7 +880,7 @@ const App = () => {
 import { useQuery, useMutation } from 'react-apollo-hooks' // highlight-line
 
 const App = () => {
-  const result = useQuery(allPersons)
+  const result = useQuery(ALL_PERSONS)
 
   const [errorMessage, setErrorMessage] = useState(null)
 
