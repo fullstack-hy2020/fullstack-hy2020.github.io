@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="10.956037cm"
+   height="13.081454cm"
+   viewBox="60 -15 211.81671 255.08836"
+   version="1.1"
+   id="svg96"
+   sodipodi:docname="24a.svg"
+   inkscape:version="0.92.2 5c3e80d, 2017-08-06">
+  <metadata
+     id="metadata102">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs100" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="738"
+     inkscape:window-height="549"
+     id="namedview98"
+     showgrid="false"
+     inkscape:zoom="0.3571875"
+     inkscape:cx="453.54331"
+     inkscape:cy="302.3622"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="g36" />
+  <g
+     id="g6"
+     transform="translate(-298.78974,-56.733271)">
+    <rect
+       style="fill:#ffffff"
+       x="61"
+       y="65"
+       width="178"
+       height="167"
+       id="rect2" />
+    <rect
+       style="fill:none;fill-opacity:0;stroke:#000000;stroke-width:2"
+       x="61"
+       y="65"
+       width="178"
+       height="167"
+       id="rect4" />
+  </g>
+  <text
+     font-size="22.5778"
+     style="font-style:normal;font-weight:700;font-size:22.57780075px;font-family:sans-serif;text-anchor:start;fill:#000000"
+     x="-228.78973"
+     y="39.266727"
+     id="text10">
+    <tspan
+       x="-228.78973"
+       y="39.266727"
+       id="tspan8">NOTELIST</tspan>
+  </text>
+  <text
+     font-size="14.6753"
+     style="font-style:normal;font-weight:normal;font-size:14.67529964px;font-family:sans-serif;text-anchor:start;fill:#000000"
+     x="-143.28973"
+     y="78.266731"
+     id="text14">
+    <tspan
+       x="-143.28973"
+       y="78.266731"
+       id="tspan12">PROPS:</tspan>
+  </text>
+  <text
+     font-size="12.7998"
+     style="font-style:normal;font-weight:normal;font-size:12.79979992px;font-family:sans-serif;text-anchor:start;fill:#000000"
+     x="-139.78973"
+     y="100.26673"
+     id="text18">
+    <tspan
+       x="-139.78973"
+       y="100.26673"
+       id="tspan16">NOTES</tspan>
+  </text>
+  <text
+     font-size="12.7998"
+     style="font-style:normal;font-weight:normal;font-size:12.79979992px;font-family:sans-serif;text-anchor:start;fill:#000000"
+     x="-139.78973"
+     y="124.26673"
+     id="text22">
+    <tspan
+       x="-139.78973"
+       y="124.26673"
+       id="tspan20">FILTER</tspan>
+  </text>
+  <line
+     style="fill:none;fill-opacity:0;stroke:#000000;stroke-width:2"
+     x1="-229.78973"
+     y1="45.266727"
+     x2="-82.789742"
+     y2="45.266727"
+     id="line24" />
+  <g
+     id="g36"
+     transform="matrix(1.3872903,0,0,0.99866381,-437.26263,-56.514803)">
+    <path
+       style="fill:#ffffff"
+       d="m 358,75.1667 c 30.4,-33.125 45.6,-42.720323 76,-42.720323 30.4,0 45.6,9.595323 76,42.720323 V 251.833 C 479.6,284.958 464.4,296 434,296 c -30.4,0 -45.6,-11.042 -76,-44.167 z"
+       id="path26"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="csccscc" />
+    <path
+       style="fill:none;fill-opacity:0;stroke:#000000;stroke-width:2"
+       d="m 358,75.1667 c 30.4,-33.125 45.6,-32.595684 76,-32.595684 30.4,0 45.6,-0.529316 76,32.595684 V 251.833 C 479.6,284.958 464.4,296 434,296 403.6,296 388.4,284.958 358,251.833 V 75.1667"
+       id="path28"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="csccscc" />
+    <path
+       style="fill:none;fill-opacity:0;stroke:#000000;stroke-width:1.60953629"
+       d="M 357.86996,75.074249 C 388.32198,96.491261 403.54798,103.62977 434,103.62977 c 30.45202,0 45.67802,-7.138509 76.13004,-28.555521"
+       id="path30"
+       inkscape:connector-curvature="0" />
+    <text
+       font-size="12.7998"
+       style="font-style:normal;font-weight:normal;font-size:12.79979992px;font-family:sans-serif;text-anchor:middle;fill:#000000"
+       x="434"
+       y="189.58299"
+       id="text34">
+      <tspan
+         x="434"
+         y="189.58299"
+         id="tspan32" />
+    </text>
+  </g>
+  <text
+     font-size="22.5778"
+     style="font-style:normal;font-weight:700;font-size:22.57780075px;font-family:sans-serif;text-anchor:start;fill:#000000"
+     x="46.210262"
+     y="-50.733273"
+     id="text40">
+    <tspan
+       x="46.210262"
+       y="-50.733273"
+       id="tspan38">REDUX STORE</tspan>
+  </text>
+  <text
+     font-size="12.7998"
+     style="font-style:normal;font-weight:normal;font-size:12.79979992px;font-family:sans-serif;text-anchor:start;fill:#000000"
+     x="94.210258"
+     y="81.266731"
+     id="text44">
+    <tspan
+       x="94.210258"
+       y="81.266731"
+       id="tspan42">NOTES</tspan>
+  </text>
+  <g
+     id="g50"
+     transform="matrix(1.5069326,0,0,0.97504056,-505.69757,-52.827118)">
+    <rect
+       style="fill:#ffffff"
+       x="408.57501"
+       y="148"
+       width="59"
+       height="17"
+       id="rect46" />
+    <rect
+       style="fill:none;fill-opacity:0;stroke:#000000;stroke-width:2"
+       x="408.57501"
+       y="148"
+       width="59"
+       height="17"
+       id="rect48" />
+  </g>
+  <g
+     id="g56"
+     transform="matrix(1.5069326,0,0,0.97504056,-505.69757,-52.352889)">
+    <rect
+       style="fill:#ffffff"
+       x="408.57501"
+       y="167"
+       width="59"
+       height="17"
+       id="rect52" />
+    <rect
+       style="fill:none;fill-opacity:0;stroke:#000000;stroke-width:2"
+       x="408.57501"
+       y="167"
+       width="59"
+       height="17"
+       id="rect54" />
+  </g>
+  <g
+     id="g62"
+     transform="matrix(1.5069326,0,0,0.97504056,-505.69757,-51.87866)">
+    <rect
+       style="fill:#ffffff"
+       x="408.57501"
+       y="186"
+       width="59"
+       height="17"
+       id="rect58" />
+    <rect
+       style="fill:none;fill-opacity:0;stroke:#000000;stroke-width:2"
+       x="408.57501"
+       y="186"
+       width="59"
+       height="17"
+       id="rect60" />
+  </g>
+  <g
+     id="g68"
+     transform="matrix(1.5069326,0,0,0.97504056,-505.69757,-51.40443)">
+    <rect
+       style="fill:#ffffff"
+       x="408.57501"
+       y="205"
+       width="59"
+       height="17"
+       id="rect64" />
+    <rect
+       style="fill:none;fill-opacity:0;stroke:#000000;stroke-width:2"
+       x="408.57501"
+       y="205"
+       width="59"
+       height="17"
+       id="rect66" />
+  </g>
+  <g
+     id="g74"
+     transform="matrix(1.5311089,0,0,0.9739794,-515.5664,-49.87164)">
+    <rect
+       style="fill:#ffffff"
+       x="408.57501"
+       y="255.2"
+       width="59"
+       height="17"
+       id="rect70" />
+    <rect
+       style="fill:none;fill-opacity:0;stroke:#000000;stroke-width:2"
+       x="408.57501"
+       y="255.2"
+       width="59"
+       height="17"
+       id="rect72" />
+  </g>
+  <text
+     font-size="12.7998"
+     style="font-style:normal;font-weight:normal;font-size:12.79979992px;font-family:sans-serif;text-anchor:start;fill:#000000"
+     x="94.210258"
+     y="191.26672"
+     id="text78">
+    <tspan
+       x="94.210258"
+       y="191.26672"
+       id="tspan76">FILTER</tspan>
+  </text>
+  <g
+     id="g86"
+     transform="translate(-298.78974,-56.733271)">
+    <path
+       style="fill:none;fill-opacity:0;stroke:#000000;stroke-width:2"
+       d="M 374.675,145.219 A 269.109,269.109 0 0 0 212,151"
+       id="path80"
+       inkscape:connector-curvature="0" />
+    <polygon
+       style="fill:#000000"
+       points="374.722,145.049 373.855,139.527 381.869,147.322 370.824,149.057 "
+       id="polygon82" />
+    <polygon
+       style="fill:none;fill-opacity:0;stroke:#000000;stroke-width:2"
+       points="374.722,145.049 373.855,139.527 381.869,147.322 370.824,149.057 "
+       id="polygon84" />
+  </g>
+  <g
+     id="g94"
+     transform="translate(-298.78974,-56.733271)">
+    <path
+       style="fill:none;fill-opacity:0;stroke:#000000;stroke-width:2"
+       d="m 212,177 a 242.412,242.412 0 0 0 165.279,80.567"
+       id="path88"
+       inkscape:connector-curvature="0" />
+    <polygon
+       style="fill:#000000"
+       points="377.267,257.762 374.89,252.703 384.765,257.945 374.645,262.7 "
+       id="polygon90" />
+    <polygon
+       style="fill:none;fill-opacity:0;stroke:#000000;stroke-width:2"
+       points="377.267,257.762 374.89,252.703 384.765,257.945 374.645,262.7 "
+       id="polygon92" />
+  </g>
+</svg>

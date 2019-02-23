@@ -555,7 +555,7 @@ const Notes = (props) => {  // highlight-line
 
 Connect-komennolla ja <i>mapStateToProps</i>-määrittelyllä aikaan saatua tilannetta voidaan visualisoida seuraavasti:
 
-![](../assets/6/5b.png)
+![](../images/6/24c.png)
 
 eli komponentin <i>Notes</i> sisältä on propsien <i>props.notes</i> ja <i>props.filter</i> kautta "suora pääsy" tarkastelemaan Redux storen sisällä olevaa tilaa.
 
@@ -632,7 +632,7 @@ _mapDispatchToProps_ lienee aluksi hieman haastava ymmärtää, etenkin sen koht
 
 Connectin aikaansaamaa tilannetta voidaan havainnollistaa seuraavasti:
 
-![](../assets/6/5c.png)
+![](../images/6/25b.png)
 
 eli sen lisäksi että <i>Notes</i> pääsee storen tilaan propsien <i>props.notes</i> ja <i>props.filter</i> kautta, se viittaa <i>props.toggleImportanceOf</i>:lla funktioon, jonka avulla storeen saadaan dispatchattua <i>TOGGLE\_IMPORTANCE</i>-tyyppisiä actioneja.
 

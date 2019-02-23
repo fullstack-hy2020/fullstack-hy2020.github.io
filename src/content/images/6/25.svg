@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="26cm" height="30cm" viewBox="60 -150 504 596" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <path style="fill: #ffffff" d="M 319.753 -13.5566 C 368.402,-82.3227 392.726,-105.245 441.375,-105.245 C 490.024,-105.245 514.349,-82.3227 562.998,-13.5566 L 562.998,353.196 C 514.349,421.962 490.024,444.884 441.375,444.884 C 392.726,444.884 368.402,421.962 319.753,353.196 L 319.753,-13.5566z"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 319.753 -13.5566 C 368.402,-82.3227 392.726,-105.245 441.375,-105.245 C 490.024,-105.245 514.349,-82.3227 562.998,-13.5566 L 562.998,353.196 C 514.349,421.962 490.024,444.884 441.375,444.884 C 392.726,444.884 368.402,421.962 319.753,353.196 L 319.753,-13.5566"/>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 319.753 -13.5566 C 368.402,55.2096 392.726,78.1316 441.375,78.1316 C 490.024,78.1316 514.349,55.2096 562.998,-13.5566"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="441.375" y="219.664">
+      <tspan x="441.375" y="219.664"></tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="377.029" y="113.958" width="115.966" height="125.865"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="377.029" y="113.958" width="115.966" height="125.865"/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="61" y="65" width="178" height="167"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="61" y="65" width="178" height="167"/>
+  </g>
+  <text font-size="22.5778" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:700" x="70" y="96">
+    <tspan x="70" y="96">NOTELIST</tspan>
+  </text>
+  <text font-size="14.6753" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="76.304" y="132.879">
+    <tspan x="76.304" y="132.879">PROPS:</tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="79.804" y="154.879">
+    <tspan x="79.804" y="154.879">NOTES</tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="79.804" y="178.879">
+    <tspan x="79.804" y="178.879">FILTER</tspan>
+  </text>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="69" y1="102" x2="216" y2="102"/>
+  <text font-size="22.5778" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:700" x="343.586" y="-128.35">
+    <tspan x="343.586" y="-128.35">REDUX STORE</tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="393" y="138">
+    <tspan x="393" y="138">NOTES</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="408.575" y="148" width="59" height="33.8406"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="408.575" y="148" width="59" height="33.8406"/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="408.575" y="210.652" width="59" height="17"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="408.575" y="210.652" width="59" height="17"/>
+  </g>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="393" y="203.452">
+    <tspan x="393" y="203.452">FILTER</tspan>
+  </text>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 388.767,156.269 A 640.224,640.224 0 0 0 130.956,150.728"/>
+    <polygon style="fill: #000000" points="396.07,157.976 385.169,160.461 388.784,156.197 387.541,150.746 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="396.07,157.976 385.169,160.461 388.784,156.197 387.541,150.746 "/>
+  </g>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 387.859,214.823 A 594.509,594.509 0 0 0 133.077,170.527"/>
+    <polygon style="fill: #000000" points="394.775,217.723 383.612,218.348 387.89,214.749 387.578,209.168 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="394.775,217.723 383.612,218.348 387.89,214.749 387.578,209.168 "/>
+  </g>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="78.9832" y="200.933">
+    <tspan x="78.9832" y="200.933">IMPORTANCETOGGLING</tspan>
+  </text>
+  <text font-size="14.6753" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="377.029" y="108.302">
+    <tspan x="377.029" y="108.302">STAGE</tspan>
+  </text>
+  <g>
+    <ellipse style="fill: #ffffff" cx="447.233" cy="278.108" rx="49.8772" ry="24.9386"/>
+    <ellipse style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" cx="447.233" cy="278.108" rx="49.8772" ry="24.9386"/>
+    <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="447.233" y="282.008">
+      <tspan x="447.233" y="282.008">DISPATCH</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="362.058" y="328.429" width="158.392" height="46.669"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="362.058" y="328.429" width="158.392" height="46.669"/>
+  </g>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="369.315" y="350.132">
+    <tspan x="369.315" y="350.132">{TYPE: 'TOGGLE_IMP..',</tspan>
+    <tspan x="369.315" y="366.132">   ID: ID</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="347.27" y="328.429" width="12.7886" height="46.669"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="347.27" y="328.429" width="12.7886" height="46.669"/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="522.45" y="328.429" width="12.7886" height="46.669"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="522.45" y="328.429" width="12.7886" height="46.669"/>
+  </g>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 133.077,208.711 A 405.112,405.112 0 0 0 331.65,347.313"/>
+    <polygon style="fill: #000000" points="338.818,349.51 327.822,351.532 331.614,347.424 330.603,341.926 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="338.818,349.51 327.822,351.532 331.614,347.424 330.603,341.926 "/>
+  </g>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 398.164,297.162 A 136.45,136.45 0 0 0 369.251,328.212"/>
+    <polygon style="fill: #000000" points="404.167,292.693 398.675,302.432 397.95,296.889 393.081,294.143 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="404.167,292.693 398.675,302.432 397.95,296.889 393.081,294.143 "/>
+  </g>
+</svg>

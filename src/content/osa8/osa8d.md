@@ -159,7 +159,7 @@ Määrittely käyttää apunaan [apollo-boost](https://github.com/apollographql/
 
 Eli apollo-boost tarjoaa helpon tavan konfiguroida _ApolloClient_ useisiin tilanteisiin rittävillä oletusasetuksilla. 
 
-Joudumme nyt luopumaan apollo-boostilla tapahtuvasta konfiguroinnista sillä se ei mahdollista headereiden asettamista pyyntöihin.
+Vaikka apollo-boostilla olisi myös mahdollista konfiguroida pyyntöihin asetettavat headerit, luovutaan nyt apollo-boostin käytöstä ja tehdään konfiguraatio kokonaan itse.
 
 Konfiguraatio on seuraavassa
 
@@ -229,7 +229,84 @@ const PersonForm = (props) => {
 
 Sovelluksen tämän vaiheen koodi [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-frontend/tree/part8-7), branchissa <i>part8-7</i>.
 
-### Cachen päivitys
+### Välimuistin päivitys revisited
+
+Uusien henkilöiden lisäyksen yhteydessä on siis 
+[päivitettävä](/osa8/react_ja_graph_ql#valimuistin-paivitys) Apollo clientin välimuisti. Päivitys tapahtuu määrittelemällä mutaation yhteydessä option _refetchQueries_ avulla että kysely <em>ALL\_PERSONS</em> on suoritettava uudelleen:
+
+
+```js 
+const App = () => {
+  // ...
+
+  const addPerson = useMutation(CREATE_PERSON, {
+    onError: handleError,
+    refetchQueries: [{ query: ALL_PERSONS }]
+  })
+
+  // ..
+}
+```
+
+Lähestymistapa on kohtuullisen toimiva, ikävänä puolena on toki se, että päivityksen yhteydessä suoritetaan aina myös kysely. 
+
+Ratkaisua on mahdollista optimoida hoitamalla välimuistin päivitys itse. Tämä tapahtuu määrittelemällä mutaatiolle sopiva [update](https://www.apollographql.com/docs/react/advanced/caching.html#after-mutations)-callback, jonka Apollo suorittaa mutaation päätteeksi: 
+
+
+```js 
+const App = () => {
+  // ...
+
+  const addPerson = useMutation(CREATE_PERSON, {
+    onError: handleError,
+    // highlight-start
+    update: (store, response) => {
+      const dataInStore = store.readQuery({ query: ALL_PERSONS })
+      dataInStore.allPersons.push(response.data.addPerson)
+      store.writeQuery({
+        query: ALL_PERSONS,
+        data: dataInStore
+      })
+    }
+    // highlight-end
+  })
+ 
+  // ..
+}  
+```
+
+Callback-funktio saa parametriksi viitten välimuistiin sekä mutaation mukana palautetun datan, eli esimerkkimme tapauksessa lisätyn käyttäjän.
+
+Koodi lukee funktion [readQuery](https://www.apollographql.com/docs/react/advanced/caching.html#readquery) avulla kyselyn <em>ALL\_PERSONS</em> välimuitiin talletetun tilan ja päivittää välimuistin funktion [writeQuery](https://www.apollographql.com/docs/react/advanced/caching.html#writequery-and-writefragment) avulla lisäten henkilöiden joukkoon mutaation lisäämän henkilön.
+
+On myös olemassa tilanteita, joissa ainoa järkevä tapa saada välimuisti pidettyä ajantasaisena on _update_-callbackillä tehtävä päivitys. 
+
+Tarvittaessa valimuisti on mahdollista kytkeä pois päältä joko koko sovelluksesta tai yksittäisiltä kyselyiltä määrittelemällä välimuistin käyttöä kontrolloivalle [fetchPolicy](https://www.apollographql.com/docs/react/api/react-apollo.html#query-props):lle arvo <em>no-cache</em>. 
+
+Voisimme määritellä, että yksittäisen henkilön osoitetietoja ei tallenneta välimuistiin:
+
+```js 
+const Persons = ({ result }) => {
+  // ...
+  const show = async (name) => {
+    const { data } = await client.query({
+      query: FIND_PERSON,
+      variables: { nameToSearch: name },
+      fetchPolicy: 'no-cache' // highlight-line
+    })
+    setPerson(data.findPerson)
+  }
+
+  // ...
+}
+``` 
+
+Jätämme kuitenkin koodin ennalleen. 
+
+Välimuistin kanssa kannattaa olla tarkkana sillä oleva epäajantasainen data voi aiheuttaa vaikeasti havaittavissa olevia bugeja. Kuten tunnettua välimuistin ajantasalla pitäminen on erittäin haastavaa. Koodareiden joukossa kulkevan kansanviisauden mukaan 
+
+> <i>There are only two hard things in Computer Science: cache invalidation and naming things.</i> Katso lisää [täältä](https://www.google.com/search?q=two+hard+things+in+Computer+Science&oq=two+hard+things+in+Computer+Science).
+
 
 
 Sovelluksen tämän vaiheen koodi [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-frontend/tree/part8-8), branchissa <i>part8-8</i>.
