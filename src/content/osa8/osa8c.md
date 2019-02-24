@@ -429,12 +429,78 @@ Backendin lopullinen koodi on kokonaisuudessaan [githubissa](https://github.com/
 
 ### Tehtäviä
 
-#### 8.13 kanta
+#### 8.13: Tietokanta, osa 1
 
-#### 8.14 käyttäjä
+Muuta kirjastosovellusta siten, että se tallettaa tiedot tietokantaan. Kirjojen ja kirjailijoiden skeema löytyy valmiiksi [täältä](https://github.com/fullstack-hy2019/misc/blob/master/library-schema.md).
 
-#### 8.15 suosikki
+Muutetaan myös skeemaa hiukan kirjan osalta
 
-#### 8.16 suosikki
+```js
+type Book {
+  title: String!
+  published: Int!
+  author: Author!
+  genres: [String!]!
+  id: ID!
+}
+```  
+
+eli kirja sisältää pelkän kirjailijan nimen sijaan kirjailijan kaikki tiedot.
+
+Voit olettaa tässä tehtävässä, että käyttäjä ei yritä luoda virheellisiä kirjoja tai kirjailijoita, eli validointivirheistä ei tarvitse vielä välittää.
+
+Seuraavien asioiden ei vielä tässä tehtävässä tarvitse toimia
+
+- queryn _allBooks_ parametrilliset versiot
+- kirjailijoiden kenttä <i>bookCount</i>
+- kirjojen kenttä _author_
+- mutaatio _editAuthor_
+
+#### 8.14: Tietokanta, osa 2
+
+Täydennä sovellusta siten, että kaikki kyselyt (paitsi kyselyn _allBooks_ parametri _author_) sekä mutaatiot toimivat.
+
+Saatat tässä tehtävässä hyötyä [tästä](https://docs.mongodb.com/manual/reference/operator/query/in/)
+
+#### 8.15 Tietokanta, osa 3
+
+Täydennä sovellusta siten, että validointivirheet käsitellään järkevästi, eli niiden seurauksena heitetään poikkeus _UserInputError_ jolle asetetaan sopiva virheviesti.
+
+#### 8.16 käyttäjä ja kirjautuminen
+
+Lisää järjestelmään käyttäjienhallinta. Laajenna skeemaa seuraavasti
+
+```js
+type User {
+  username: String!
+  favoriteGenre: String!
+  id: ID!
+}
+
+type Token {
+  value: String!
+}
+
+type Query {
+  // ..
+  me: User
+}
+
+type Mutation {
+  // ...
+  createUser(
+    username: String!
+    favoriteGenre: String!
+  ): User
+  login(
+    username: String!
+    password: String!
+  ): Token
+}
+```
+
+Toteuta uusien queryn _me_ sekä mutaatioiden _createUser_ ja _login_ resolverit. Voit olettaa tämän luvun materiaalin tapaan, että kaikilla käyttäjillä on sama, kovakoodattu salasana.
+
+Tee mutaatiot _addBook_ ja _editAuthor_ mahdollisiksi ainoastaan jos pyynnön mukana lähetetään validi token. 
 
 </div>

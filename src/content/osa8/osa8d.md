@@ -14,11 +14,11 @@ Lisätään sovelluksen tilaan muuttuja _token_ joka tallettaa tokenin siinä va
 
 ```js
 const LOGIN = gql`
-mutation login($username: String!, $password: String!) {
-  login(username: $username, password: $password)  {
-    value
+  mutation login($username: String!, $password: String!) {
+    login(username: $username, password: $password)  {
+      value
+    }
   }
-}
 `
 
 const App = () => {
@@ -75,7 +75,7 @@ const LoginForm = (props) => {
       const token = result.data.login.value
 
       props.setToken(token)
-      localStorage.setItem('library-user-token', token)
+      localStorage.setItem('phonenumbers-user-token', token)
     } catch(error){
       props.handleError(error)
     }
@@ -174,7 +174,7 @@ const httpLink = createHttpLink({
 })
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('library-user-token')
+  const token = localStorage.getItem('phonenumbers-user-token')
   return {
     headers: {
       ...headers,
@@ -317,21 +317,54 @@ Sovelluksen tämän vaiheen koodi [githubissa](https://github.com/fullstack-hy20
 
 ### Tehtäviä
 
-#### DEPRECATED: Genren kirjat
+#### 8.17 Kirjojen lista
 
-Laajenna sovellustasi siten, että kirjojen näkymästä voidaan rajata näytettävä kirjalista ainoastaan niihin jotka kuuluvat valittuun genreen. Toteutuksesi voi näyttää seuraavalta:
+Backendin muutosten jälkeen kirjojen lista ei enää toimi. Korjaa se.
 
-![](../images/8/19.png)
+#### 8.18 Kirjautuminen
 
-#### DEPRECATED: Genren kirjat GraphQL:llä
+Kirjojen lisäys ja kirjailijan syntymävuoden muutos eivät toimi sillä ne edellyttävät kirjautumista. 
 
-Tietyn genren kirjoihin rajoittamisen voi tehdä kokonaan React-sovelluksen puolella. Voit merkitä tämän tehtävän, jos rajaat näytettävät kirjat tahtävässä 8.5 palvelimeen toteutetun suoran GraphQ-kyselyn avulla. 
+Toteuta sovellukseesi kirjautuminen ja korjaa mutaatiot.
 
-Tämä tehtävä voi olla haastava ja niin kurssin tässä vaiheessa jo kuuluukin olla. Muutama vihje
-- komponetin <i>Query</i> tai hookin <i>useQuery</i> käyttö kannattaa kirjalistan osalta sillä kysely on pystyttävä tekemään käyttäjän valitessa haluamansa genren
+Sovelluksesi ei ole pakko käsitellä validointivirheitä järkevästi.
+
+Voit päättää itse miltä kirjautuminen näyttää käyttöliittymässä. Eräs mahdollinen ratkaisu on tehdä kirjautumislomakkeesta erillinen näkymä jonne pääsee sovelluksen navigaatiomenusta:
+
+![](../images/8/26.png)
+
+Kirjatumislomake
+
+![](../images/8/27.png)
+
+Kun käyttäjä on kirjautuneena muutetaan navigaatio näyttämään ne toiminnot jotka ovat vain kirjaantuneen käytettävissä
+
+![](../images/8/28.png)
+
+#### 8.19 genren kirjat, osa 1
+
+Laajenna sovellustasi siten, että kirjojen näkymästä voidaan rajata näytettävä kirjalista ainoastaan niihin, jotka kuuluvat valittuun genreen. Toteutuksesi voi näyttää seuraavalta:
+
+![](../images/8/30.png)
+
+#### 8.19 genren kirjat
+
+Tee sovellukseen näkymä, joka näyttää kirjaantuneelle käyttäjälle käyttäjän lempigenreen kuuluvat kirjat
+
+![](../images/8/29.png)
+
+#### 8.20 genren kirjat GraphQL:llä
+
+Tietyn genren kirjoihin rajoittamisen voi tehdä kokonaan React-sovelluksen puolella. Voit merkitä tämän tehtävän, jos rajaat näytettävät kirjat tahtävässä 8.5 palvelimelle toteutetun suoran GraphQ-kyselyn avulla. 
+
+Tämä tehtävä on haastava ja niin kurssin tässä vaiheessa jo kuuluukin olla. Muutama vihje
+- komponetin <i>Query</i> tai hookin <i>useQuery</i> käytön sijaan saattaa olla parempi tehdä kyselyitä suoraan _client_-oliolla, jonhon päästään käsiksi komponentin [ApolloConsumer](https://www.apollographql.com/docs/react/essentials/queries.html#manual-query) tai hookilla [useApolloClient](https://github.com/trojanowski/react-apollo-hooks#useapolloclient), katso lisää [täältä](http://localhost:8000/osa8/react_ja_graph_ql#nimetyt-kyselyt-ja-muuttujat)
 - GraphQL-kyselyjen tuloksia kannatta joskus tallentaan komponentin tilaan
 - huomaa, että voit tehdä GraphQL-kyselyjä <i>useEffect</i>-hookissa
 - <i>useEffect</i>-hookin [toisesta parametrista](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) voi olla tehtävässä apua, se tosin riippuu käyttämästäsi lähestymistavasta.
 
+#### 8.21 kirjasuositukset, välimuistin ajantasaisuus
+
+Jos haet kirjasuositukset GraphQL:llä, varmista jollain tavalla, kirjojen näkymä säilyy ajantasaisena. Eli kun lisäät uuden kirjan, päivittyy se kirjalistalle **viimeistään** siinä vaiheessa kun painat jotain genrevalintanappia. Ilman uuden genrevalinnan tekemistä sivun ei näkymän ole pakko päivittyä. 
 
 </div>

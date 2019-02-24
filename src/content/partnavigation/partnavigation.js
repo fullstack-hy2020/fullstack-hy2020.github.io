@@ -54,6 +54,6 @@ module.exports = {
     d: 'Kirjautuminen ja välimuistin päivitys',
     e: 'Fragmentit, subskriptiot etc' 
   },
-/*
+  /*
   */
 };
