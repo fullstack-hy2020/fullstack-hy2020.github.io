@@ -35,7 +35,7 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-Huomaa, että blogin sisältävällä <i>li</i>-elementillä on [CSS](https://reactjs.org/docs/dom-elements.html#classname)-luokka <i>note</i>, pääsemme sen avulla blogiin käsiksi testistä.
+Huomaa, että muistiinpanon sisältävällä <i>li</i>-elementillä on [CSS](https://reactjs.org/docs/dom-elements.html#classname)-luokka <i>note</i>, pääsemme sen avulla muistiinpanoon käsiksi testistä.
 
 
 ### Komponentin renderöinti testiä varten
