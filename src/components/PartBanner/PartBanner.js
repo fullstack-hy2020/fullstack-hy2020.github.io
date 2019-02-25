@@ -23,6 +23,7 @@ export const PartBanner = () => {
             'React-sovelluksen testaaminen',
             'Sovelluksen tilan hallinta Redux-kirjastolla',
             'React router, tyylikirjastot ja webpack',
+            'GraphQL'
           ];
 
           return (

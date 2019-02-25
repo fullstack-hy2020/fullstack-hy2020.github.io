@@ -308,7 +308,7 @@ const server = new ApolloServer({
   resolvers,
   // highlight-start
   context: async ({ req }) => {
-    const auth = req.headers.authorization
+    const auth = req ? req.headers.authorization : null
     if (auth && auth.toLowerCase().startsWith('bearer ')) {
       const decodedToken = jwt.verify(
         auth.substring(7), JWT_SECRET
@@ -420,7 +420,7 @@ otetaan se vastaan suoraan funktion parametrimäärittelyssä:
 addAsFriend: async (root, args, { currentUser }) => {
 ```
 
-Backendin lopullinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-backend/tree/part8-5), branchissa <i>part8-5</i>.
+Backendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-backend/tree/part8-5), branchissa <i>part8-5</i>.
 
 
 </div>

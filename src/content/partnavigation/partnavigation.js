@@ -52,8 +52,6 @@ module.exports = {
     b: 'React ja GraphQL',
     c: 'Tietokanta ja käyttäjien hallinta',
     d: 'Kirjautuminen ja välimuistin päivitys',
-    e: 'Fragmentit, subskriptiot etc' 
+    e: 'Fragmentit ja subskriptiot' 
   },
-  /*
-  */
 };
