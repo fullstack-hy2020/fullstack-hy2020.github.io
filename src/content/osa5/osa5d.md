@@ -295,7 +295,7 @@ Jos käytät normaalisti käyttämämme default exportin sijaan [nimettyä expor
 ```js
 import { useState } from 'react'
 
-export const useField = (type) => { // highlighl-line
+export const useField = (type) => { // highlight-line
   const [value, setValue] = useState('')
 
   const onChange = (event) => {
@@ -310,7 +310,7 @@ export const useField = (type) => { // highlighl-line
 }
 
 // moduulissa voi olla monta nimettyä eksportia
-export const useAnotherHook = () => { // highlighl-line
+export const useAnotherHook = () => { // highlight-line
   // ...
 }
 ```
