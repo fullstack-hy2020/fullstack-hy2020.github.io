@@ -510,7 +510,7 @@ query {
 }
 ```
 
-vastaksena on henkilö-olio, joka <i>sisältää</i> osoite-olion:
+vastauksena on henkilö-olio, joka <i>sisältää</i> osoite-olion:
 
 ```js
 {
@@ -618,7 +618,7 @@ const resolvers = {
 
 Mutaatio siis lisää parametreina _args_ saamansa olion taulukkoon _persons_ ja palauttaa lisätyn olion. 
 
-Kentälle <i>id</i> saadaan luotua uniikko tunniste kirjaston [uuid](https://github.com/kelektiv/node-uuid#readme) avulla. 
+Kentälle <i>id</i> saadaan luotua uniikki tunniste kirjaston [uuid](https://github.com/kelektiv/node-uuid#readme) avulla. 
 
 Uusi henkilö voidaan lisätä seuraavalla mutaatiolla
 
@@ -857,7 +857,7 @@ Vastaus näyttää seuraavalta
 }
 ```
 
-Yhdistetty kysely voi myös viitata useampaan kertaan samaan kyselyyn. Tällöin erillisille kyselyille on kuitenkin annettava vaihtoehoiset nimet kaksoispistesyntaksilla
+Yhdistetty kysely voi myös viitata useampaan kertaan samaan kyselyyn. Tällöin erillisille kyselyille on kuitenkin annettava vaihtoehtoiset nimet kaksoispistesyntaksilla
 
 ```js
 query {
@@ -949,7 +949,7 @@ query {
 
 #### 8.3: kaikki kirjailijat
 
-Toteuta kysely _allAuthors_ joka palauttaa kaikki kirjailijat. Kyselyn vastauksessa kirjailijoilla tulee myös olla kenttä _bookCount_ joka keroo kirjailijan tekemien kirjojen määrän.
+Toteuta kysely _allAuthors_ joka palauttaa kaikki kirjailijat. Kyselyn vastauksessa kirjailijoilla tulee myös olla kenttä _bookCount_ joka kertoo kirjailijan tekemien kirjojen määrän.
 
 Esim. kyselyn
 
