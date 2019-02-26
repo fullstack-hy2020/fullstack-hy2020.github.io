@@ -494,7 +494,7 @@ type Query {
 }
 ```
 
-eli henkillä on nyt kenttä jonka tyyppi on <i>Address</i> joka koostuu kadusta ja kaupungista. 
+eli henkilöllä on nyt kenttä jonka tyyppi on <i>Address</i> joka koostuu kadusta ja kaupungista. 
 
 Osoitetta tarvitsevat kyselyt muuttuvat muotoon
 
