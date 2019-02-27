@@ -55,7 +55,18 @@ Kurssilta on mahdollisuus ansaita lisäopintopisteitä. Jos teet 87.5% kurssin t
 
 ### Arvosanarajat
 
-Tarkemmat arvosanarajat määritellään siinä vaiheessa kun kurssin tehtävien yhteenlaskettu määrä on selvillä.
+| tehtäviä           | opintopisteitä | arvosana | 
+| -------------- | :-------------------: | :-------------------: |
+| 138          |       7       |  5 |
+| 127         |        6      |5 |
+| 116          |       5       | 5 |
+| 105          |       5       | 4 |
+| 94          |       5       | 3 |
+| 83          |        5       | 2 |
+| 72          |       5       | 1 |
+
+Suoritukseen edellytetään tehtävien lisäksi hyväksytysti suoritettu koe.
+
 
 ### Aiemmin suoritetun kurssin täydentäminen
 
