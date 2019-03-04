@@ -1,29 +1,29 @@
 import { StaticQuery, graphql } from 'gatsby';
-import React from 'react';
 
-import { Banner } from './../components/Banner/Banner';
-import { Image } from './../components/Image/Image';
-import colors from '../colors';
 import Arrow from '../components/Arrow/Arrow';
+import { Banner } from './../components/Banner/Banner';
 import { BodyText } from '../components/BodyText/BodyText';
-import { ContentLiftup } from '../components/ContentLiftup/ContentLiftup';
+import { CompaniesBanner } from '../components/CompaniesBanner/CompaniesBanner';
 import Element from '../components/Element/Element';
+import { Image } from './../components/Image/Image';
 import Layout from '../components/layout';
 import { PartBanner } from '../components/PartBanner/PartBanner';
+import React from 'react';
 import SEO from '../components/seo';
 import { SubHeader } from '../components/SubHeader/SubHeader';
 import { TripleBorder } from '../components/TripleBorder/TripleBorder';
-import licenceIcon from '../images/by-nc-sa.eu.png';
+import announcement from '../images/ic_announcement_48px.svg';
 import calendarIcon from '../images/calendar-60.svg';
 import cc from '../images/cc.svg';
-import yliopistoLogo from '../images/hgin_yliopisto.png';
+import colors from '../colors';
 import houstonLogo from '../images/houston_logo.png';
-import announcement from '../images/ic_announcement_48px.svg';
-import starIcon from '../images/ic_stars_48px.svg';
-import timerIcon from '../images/ic_timer_48px.svg';
 import landingImage from '../images/landing.svg';
+import licenceIcon from '../images/by-nc-sa.eu.png';
 import news from '../images/noun_news_1248039.svg';
+import starIcon from '../images/ic_stars_48px.svg';
 import telegramIcon from '../images/telegram-logo-png-open-2000.png';
+import timerIcon from '../images/ic_timer_48px.svg';
+import yliopistoLogo from '../images/hgin_yliopisto.png';
 
 const thingsToKnow = [
   { icon: timerIcon, text: '5-20 tuntia / osa' },
@@ -254,56 +254,7 @@ const IndexPage = () => (
 
             <PartBanner />
 
-            {false && (
-              <Element className="container spacing--after" flex>
-                <Element flex spaceBetween className="col-8 push-right-1">
-                  <ContentLiftup
-                    small
-                    image={{
-                      src: yliopistoLogo,
-                      alt: 'Helsingin yliopisto logo',
-                    }}
-                    className="col-2 col-4--mobile"
-                  />
-
-                  <ContentLiftup
-                    small
-                    image={{ src: houstonLogo, alt: 'Houston Inc. logo' }}
-                    className="col-2 push-right-2 col-4--mobile"
-                  />
-
-                  <ContentLiftup
-                    small
-                    image={{
-                      src: yliopistoLogo,
-                      alt: 'Helsingin yliopisto logo',
-                    }}
-                    className="col-2 push-right-2 col-4--mobile"
-                  />
-
-                  <ContentLiftup
-                    small
-                    image={{ src: houstonLogo, alt: 'Houston Inc. logo' }}
-                    className="col-2 col-4--mobile"
-                  />
-
-                  <ContentLiftup
-                    small
-                    image={{
-                      src: yliopistoLogo,
-                      alt: 'Helsingin yliopisto logo',
-                    }}
-                    className="col-2 col-4--mobile"
-                  />
-
-                  <ContentLiftup
-                    small
-                    image={{ src: houstonLogo, alt: 'Houston Inc. logo' }}
-                    className="col-2 col-4--mobile"
-                  />
-                </Element>
-              </Element>
-            )}
+            <CompaniesBanner />
 
             <Element
               flex
