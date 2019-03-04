@@ -27,13 +27,12 @@
 
 .active,
 .accordion:hover {
-  background-color: #ccc;
+  background-color: $main;
 }
 
 .accordion:after {
   content: '\02795';
   font-size: 1rem;
-  color: $black;
   float: right;
   margin-left: 5px;
 }
@@ -74,19 +73,6 @@
       background-color: $black !important;
       color: $white !important;
     }
-
-    // &::before {
-    //   content: '';
-    //   display: inline-block;
-    //   width: 1.5rem;
-    //   height: 1.5rem;
-    //   border-radius: 50%;
-    //   border-width: 2px;
-    //   border-style: solid;
-    //   margin-right: 2rem;
-    //   background-color: currentColor;
-    //   border-color: inherit;
-    // }
   }
 
   .panel {

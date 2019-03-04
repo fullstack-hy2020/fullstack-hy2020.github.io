@@ -1,16 +1,17 @@
 import { StaticQuery, graphql } from 'gatsby';
-import React from 'react';
 
-import colors from '../colors';
 import Accordion from '../components/Accordion/Accordion';
 import Arrow from '../components/Arrow/Arrow';
 import { BodyText } from '../components/BodyText/BodyText';
 import Element from '../components/Element/Element';
 import Footer from '../components/Footer/Footer';
+import { Image } from './../components/Image/Image';
 import Layout from '../components/layout';
 import { PartBanner } from '../components/PartBanner/PartBanner';
+import React from 'react';
 import SEO from '../components/seo';
-import LandingImage from '../images/landing.svg';
+import colors from '../colors';
+import landingImage from '../images/landing.svg';
 
 const About = () => (
   <Layout>
@@ -77,12 +78,12 @@ const About = () => (
                   />
                 </div>
 
-                <Element className="col-2 col-3--mobile">
-                  <img
-                    alt="Stacked cubes with React logo and JavaScript text"
-                    src={LandingImage}
-                  />
-                </Element>
+                <Image
+                  contain
+                  style={{ margin: 0 }}
+                  alt="Stacked cubes with React logo and JavaScript text"
+                  src={landingImage}
+                />
               </Element>
 
               {false &&

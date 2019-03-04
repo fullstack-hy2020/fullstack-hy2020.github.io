@@ -54,6 +54,18 @@
   &:nth-of-type(3) {
     z-index: 5;
   }
+
+  &:hover {
+    .arrow__rectangle,
+    .arrow__point {
+      background-color: $black !important;
+      color: $white !important;
+    }
+    .arrow__rectangle > a {
+      color: $white !important;
+      background-color: $black !important;
+    }
+  }
 }
 
 .arrow__rectangle {
@@ -168,6 +180,17 @@
         font-size: 0.7rem;
         font-weight: $font-weight-regular;
         margin: 0 0.5rem;
+      }
+    }
+
+    &:hover {
+      .arrow__rectangle,
+      .arrow__point {
+        background-color: $black !important;
+      }
+      .arrow--stacked-title,
+      .arrow--stacked-letter {
+        color: $white;
       }
     }
   }

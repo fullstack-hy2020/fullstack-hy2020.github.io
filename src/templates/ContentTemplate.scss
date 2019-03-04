@@ -113,6 +113,11 @@
 .tasks {
   a {
     border-color: $black !important;
+
+    &:hover {
+      background-color: white !important;
+      color: black !important;
+    }
   }
 }
 

@@ -30,6 +30,10 @@ a {
 .link {
   a {
     border-bottom: 2px solid $main;
+
+    &:hover {
+      background-color: $main;
+    }
   }
 }
 

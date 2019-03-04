@@ -1,28 +1,27 @@
 import './ContentTemplate.scss';
 
-import path from 'path';
-
-import { graphql } from 'gatsby';
-import Parser from 'html-react-parser';
-import domToReact from 'html-react-parser/lib/dom-to-react';
-import snakeCase from 'lodash/fp/snakeCase';
 import React, { Component } from 'react';
 
-import colors from '../colors';
 import Arrow from '../components/Arrow/Arrow';
+import ArrowToTop from '../images/up-arrow.svg';
 import { Banner } from '../components/Banner/Banner';
 import EditLink from '../components/EditLink/EditLink';
 import Element from '../components/Element/Element';
 import Footer from '../components/Footer/Footer';
 import Layout from '../components/layout';
+import Parser from 'html-react-parser';
 import PrevNext from '../components/PrevNext/PrevNext';
 import ReturnInfo from '../components/ReturnInfo/ReturnInfo';
-import ScrollNavigation from '../components/ScrollNavigation/ScrollNavigation';
 import SEO from '../components/seo';
+import ScrollNavigation from '../components/ScrollNavigation/ScrollNavigation';
 import { SubHeader } from '../components/SubHeader/SubHeader';
+import colors from '../colors';
+import domToReact from 'html-react-parser/lib/dom-to-react';
+import { graphql } from 'gatsby';
 import navigation from '../content/partnavigation/partnavigation';
-import ArrowToTop from '../images/up-arrow.svg';
 import { partColors } from './partColors';
+import path from 'path';
+import snakeCase from 'lodash/fp/snakeCase';
 
 export default class ContentTemplate extends Component {
   constructor(props) {
@@ -44,7 +43,18 @@ export default class ContentTemplate extends Component {
     links.map(i => {
       i.style = `border-color: ${colors[partColors[frontmatter.part]]}`;
       i.target = '_blank';
-      return;
+
+      function over() {
+        i.style.backgroundColor = colors[partColors[frontmatter.part]];
+      }
+      function out() {
+        i.style.backgroundColor = 'transparent';
+      }
+
+      i.onmouseover = over;
+      i.onmouseleave = out;
+
+      return null;
     });
 
     this.setState({
@@ -104,7 +114,10 @@ export default class ContentTemplate extends Component {
               <div className="container">
                 <div
                   className="course-content col-6 push-right-3"
-                  style={{ borderColor: colorCode }}
+                  style={{
+                    borderColor: colorCode,
+                    backgroundColor: 'transparent',
+                  }}
                 >
                   {children.name === 'pre' ? (
                     <pre>{domToReact(children, parserOptions)}</pre>
