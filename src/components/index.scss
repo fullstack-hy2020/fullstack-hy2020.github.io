@@ -227,7 +227,7 @@ a {
   &:active,
   &:focus {
     color: $white;
-    background-color: $black;
+    background-color: $black !important;
   }
 
   &:focus,

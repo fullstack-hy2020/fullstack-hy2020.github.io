@@ -51,6 +51,7 @@ export const CompaniesBanner = ({ frontPage }) => (
         <Element className="spacing spacing--after col-6 push-right-2">
           <BodyText
             heading={{ level: 'h2', title: 'Tämä on Full stack -haaste' }}
+            headingFont
             text={[
               'Full stack -haaste rohkaisee niin osaajat kuin yritykset kasvattamaan osaamistaan Full stack -hengessä.',
               'Päämäärämme on auttaa oppimaan. Tarjoamme valmiiksi kootun ja ajatuksella rajatun Full Stack -kurssin, joka helpottaa ja vauhdittaa nykyaikaisiin teknologioihin tutustumista. Kurssin materiaali ja tehtävät sopivat niin konkarille kuin aloittelevalle osaajalle; täydennyskoulutusta etsivälle, alanvaihtajalle, taitojaan päivittävälle, alan opiskelijalle sekä jokaiselle, joka haluaa tarttua haasteeseen ja kasvattaa osaamistaan koodarina.',
@@ -58,7 +59,9 @@ export const CompaniesBanner = ({ frontPage }) => (
             ]}
           />
 
-          <BodyText className="spacing"
+          <BodyText
+            className="spacing"
+            headingFont
             heading={{
               level: 'h2',
               title: 'Yritys, anna tukesi Full stack -haasteelle',

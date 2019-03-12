@@ -23,9 +23,9 @@ const Companies = () => (
       ))}
 
       <Element className="spacing" />
-
-      <CompaniesBanner />
     </Element>
+
+    <CompaniesBanner />
 
     <Footer />
   </Layout>

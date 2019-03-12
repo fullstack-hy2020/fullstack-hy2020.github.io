@@ -111,6 +111,7 @@ const IndexPage = () => (
                 <div className="spacing--small" />
 
                 <BodyText
+                  headingFont
                   className="col-4 order-1--mobile col-8--mobile link"
                   text={intro}
                 />
@@ -234,6 +235,7 @@ const IndexPage = () => (
                     <Image contain small src={cc} className="col-1--mobile" />
 
                     <BodyText
+                      headingFont
                       className="col-7 col-8--mobile"
                       style={{ marginRight: '2rem' }}
                       heading={{
@@ -244,8 +246,8 @@ const IndexPage = () => (
                   </Element>
 
                   <BodyText
-                    className="spacing--small link"
                     headingFont
+                    className="spacing--small link"
                     text={licence}
                   />
                 </Element>
@@ -280,7 +282,7 @@ const IndexPage = () => (
                       className="col-5 col-4--mobile"
                     />
 
-                    <BodyText text={university} />
+                    <BodyText headingFont text={university} />
                   </div>
 
                   <Element flex spaceBetween className="col-3 col-10--mobile">
@@ -291,7 +293,7 @@ const IndexPage = () => (
                       className="col-4--mobile"
                     />
 
-                    <BodyText className="link" text={houston} />
+                    <BodyText headingFont className="link" text={houston} />
                   </Element>
                 </Element>
 
@@ -304,6 +306,7 @@ const IndexPage = () => (
                   <div className="col-3 col-10--mobile">
                     <BodyText
                       noPadding
+                      headingFont
                       className="link"
                       style={{ paddingTop: '2.111rem' }}
                       text={contacts}
@@ -317,7 +320,7 @@ const IndexPage = () => (
                       className="col-4--mobile"
                     />
 
-                    <BodyText text={licenced} className="link" />
+                    <BodyText headingFont text={licenced} className="link" />
                   </div>
                 </Element>
               </TripleBorder>
