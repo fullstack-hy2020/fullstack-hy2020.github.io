@@ -173,14 +173,7 @@
 .breadcrumb {
   .arrow__wrapper {
     @include to($tablet) {
-      padding: 0;
-
-      &:not(:last-of-type)::after {
-        content: '>';
-        font-size: 0.7rem;
-        font-weight: $font-weight-regular;
-        margin: 0 0.5rem;
-      }
+      display: none;
     }
 
     &:hover {
