@@ -71,7 +71,7 @@ export const CompaniesBanner = () => (
         <BodyText
           text={[
             'This is a description of what the Full Stack challenge is about. A reason for why the companies should take part in this challenge. What do students who do the course get out of this. What is the benefit for the companies if they do this challenge.',
-            'This is a description of what the Full Stack challenge is about. A reason for why the companies should take part in this challenge. What do students who do the course get out of this. What is the benefit for the companies if they do this challenge.',
+            'This is a second description of what the Full Stack challenge is about. A reason for why the companies should take part in this challenge. What do students who do the course get out of this. What is the benefit for the companies if they do this challenge.',
           ]}
         />
       </Element>
