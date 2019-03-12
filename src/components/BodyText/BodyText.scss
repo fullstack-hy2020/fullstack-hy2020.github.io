@@ -26,3 +26,11 @@
 .body-text--no-padding {
   padding: 0 !important;
 }
+
+.companies__main-title {
+  .body-text__title {
+    @include from($tablet) {
+      font-size: 3rem;
+    }
+  }
+}

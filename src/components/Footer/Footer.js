@@ -1,13 +1,12 @@
 import './Footer.scss';
 
-import { Link } from 'gatsby';
-import React from 'react';
-
-import yliopisto from '../../images/hgin_yliopisto.png';
-import houston from '../../images/houston_logo.png';
 import Element from '../Element/Element';
 import { Image } from '../Image/Image';
+import { Link } from 'gatsby';
+import React from 'react';
+import houston from '../../images/houston_logo.png';
 import { navigation } from '../Navigation/Navigation';
+import yliopisto from '../../images/hgin_yliopisto.png';
 
 const images = [
   {
@@ -29,7 +28,7 @@ const Footer = () => (
     flex
   >
     <Element
-      className="col-5 col-10--mobile order-2--mobile footer__links"
+      className="col-5 col-10--mobile order-2--mobile order-2--tablet footer__links"
       flex
       spaceBetween
     >
@@ -46,18 +45,20 @@ const Footer = () => (
 
     <Element
       flex
-      className="col-5 col-5--mobile order-1--mobile footer__navigation"
+      className="col-5 col-5--mobile order-1--mobile order-1--tablet footer__navigation"
     >
-      {navigation.map(item => (
-        <Link
-          key={item.path}
-          to={item.path}
-          className="footer__navigation-link nav-item-hover col-10--mobile"
-          style={{ marginLeft: '4.5rem' }}
-        >
-          {item.text}
-        </Link>
-      ))}
+      <div className="footer__navigation-link-container">
+        {navigation.map(item => (
+          <Link
+            key={item.path}
+            to={item.path}
+            className="footer__navigation-link nav-item-hover"
+            style={{ marginLeft: '4.5rem' }}
+          >
+            {item.text}
+          </Link>
+        ))}
+      </div>
     </Element>
   </Element>
 );

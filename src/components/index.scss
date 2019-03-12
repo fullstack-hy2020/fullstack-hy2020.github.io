@@ -183,6 +183,29 @@ a {
   }
 }
 
+@include to($large) {
+  @for $i from 1 through 10 {
+    .col-#{$i}--tablet {
+      width: #{$i * 10%};
+    }
+
+    @for $i from 0 through 5 {
+      .order-#{$i}--tablet {
+        order: $i;
+      }
+    }
+  }
+
+  @for $i from 0 through 5 {
+    .order-#{$i}--mobile {
+      order: $i;
+    }
+  }
+  .hidden--mobile {
+    display: none;
+  }
+}
+
 .centered-vertically {
   display: flex;
   flex-direction: column;
