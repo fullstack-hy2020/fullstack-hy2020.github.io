@@ -2,7 +2,7 @@ import { Banner } from '../Banner/Banner';
 import { BodyText } from '../BodyText/BodyText';
 import { ContentLiftup } from '../ContentLiftup/ContentLiftup';
 import Element from '../Element/Element';
-import {PropTypes} from 'prop-types';
+import { PropTypes } from 'prop-types';
 import React from 'react';
 import elisaLogo from '../../images/elisa_logo.png';
 import houstonLogo from '../../images/houston_logo.png';
@@ -45,17 +45,40 @@ const companies = [
 ];
 
 export const CompaniesBanner = ({ frontPage }) => (
-  <Banner
-    backgroundColor={frontPage && 'white'}
-    className="spacing--after"
-  >
+  <Banner backgroundColor={frontPage && 'white'} className="spacing--after">
     <Element className="container" flex>
+      {!frontPage && (
+        <Element className="spacing spacing--after col-6 push-right-2">
+          <BodyText
+            heading={{ level: 'h2', title: 'Tämä on Full stack -haaste' }}
+            text={[
+              'Full stack -haaste rohkaisee niin osaajat kuin yritykset kasvattamaan osaamistaan Full stack -hengessä.',
+              'Päämäärämme on auttaa oppimaan. Tarjoamme valmiiksi kootun ja ajatuksella rajatun Full Stack -kurssin, joka helpottaa ja vauhdittaa nykyaikaisiin teknologioihin tutustumista. Kurssin materiaali ja tehtävät sopivat niin konkarille kuin aloittelevalle osaajalle; täydennyskoulutusta etsivälle, alanvaihtajalle, taitojaan päivittävälle, alan opiskelijalle sekä jokaiselle, joka haluaa tarttua haasteeseen ja kasvattaa osaamistaan koodarina.',
+              'Full stack -kurssi on ilmainen verkkokurssi, joka on koottu ajatuksella koodarilta koodarille. Kokonaisuus on Helsingin yliopiston ja Houston Inc.’n yhteistyössä toteuttama.',
+            ]}
+          />
+
+          <BodyText className="spacing"
+            heading={{
+              level: 'h2',
+              title: 'Yritys, anna tukesi Full stack -haasteelle',
+            }}
+            text={[
+              'Haastekumppanuus',
+              'Kevyesti kyytiin! Anna yrityksesi tuki Full stack -haasteelle, ja kannustakaa työntekijöitänne kurssin pariin päivittämään ja laajentamaan taitojaan. Kiitoksena yhteistyöstä haastekumppanin logo nostetaan Full stack -kurssin sivulle.',
+              'Yhteistyökumppanuus',
+              'Kaikki hyöty irti! Tärkein lisäarvo syntyy aidosta yhteistyöstä rekrytointimahdollisuuksien, hackathonien ja vierailijaluentojen merkeissä. Lisäksi yhteistyökumppanuus tarjoaa logonäkyvyyden sekä yritysesittelyn Full stack -sivulle. Yhteistyökumppanuus on maksullinen.',
+              'Kasvatetaan osaamista yhdessä! Kumppanuuksista vastaa Jan Myller, yhteyspäällikkö, Helsingin yliopisto p. xxx.xxxx.xxxxx, jan.myller@helsinki.fi',
+              '#fullstackhaaste',
+            ]}
+          />
+        </Element>
+      )}
       <BodyText
         centered
         className="col-4 push-right-3"
-        text="These companies are taking the Full Stack Challenge"
+        text="Haasteessa mukana"
       />
-
       <Element flex spaceBetween className="col-6 push-right-2">
         {companies.map(company => (
           <ContentLiftup
@@ -70,17 +93,6 @@ export const CompaniesBanner = ({ frontPage }) => (
           />
         ))}
       </Element>
-
-      {!frontPage && (
-        <Element className="spacing--large col-6 push-right-2">
-          <BodyText
-            text={[
-              'This is a description of what the Full Stack challenge is about. A reason for why the companies should take part in this challenge. What do students who do the course get out of this. What is the benefit for the companies if they do this challenge.',
-              'This is a second description of what the Full Stack challenge is about. A reason for why the companies should take part in this challenge. What do students who do the course get out of this. What is the benefit for the companies if they do this challenge.',
-            ]}
-          />
-        </Element>
-      )}
     </Element>
   </Banner>
 );
