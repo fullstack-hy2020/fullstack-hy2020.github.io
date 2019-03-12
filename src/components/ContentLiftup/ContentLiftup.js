@@ -29,7 +29,7 @@ export const ContentLiftup = ({
   small && classes.push('content-liftup--small');
 
   return path ? (
-    <div className={`content-liftup col-3 ${className} ${classes.join(' ')}`}>
+    <div className={`content-liftup ${className} ${classes.join(' ')}`}>
       <TripleBorder largeMargin>
         <Link
           to={path}

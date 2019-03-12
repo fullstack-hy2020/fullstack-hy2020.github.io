@@ -1,8 +1,7 @@
-import React from 'react';
-
-import navigation from '../../content/partnavigation/partnavigation';
 import { Banner } from '../Banner/Banner';
 import { ContentLiftup } from '../ContentLiftup/ContentLiftup';
+import React from 'react';
+import navigation from '../../content/partnavigation/partnavigation';
 
 const parts = Object.keys(navigation);
 
@@ -29,6 +28,7 @@ export const PartBanner = () => {
           return (
             <ContentLiftup
               key={partNames[part]}
+              className="col-3 col-10--mobile col-4--tablet"
               image={{
                 src: require(`../../images/thumbnails/part-${part}.svg`),
                 alt: partNames[part],

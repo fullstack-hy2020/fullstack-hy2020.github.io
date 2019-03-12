@@ -166,10 +166,10 @@ a {
   }
 }
 
-@include to($desktop) {
+@include to($tablet) {
   @for $i from 1 through 10 {
     .col-#{$i}--mobile {
-      width: #{$i * 10%};
+      width: #{$i * 10%} !important;
     }
   }
 
