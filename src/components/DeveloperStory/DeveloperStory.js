@@ -26,7 +26,7 @@ export const DeveloperStory = ({ image, companyLogo, text, name, title }) => (
         />
       )}
 
-      <BodyText className="col-10" text={text} />
+      <BodyText headingFont className="col-10" text={text} />
 
       <p className="col-10 developer-story__name">{name}</p>
 
