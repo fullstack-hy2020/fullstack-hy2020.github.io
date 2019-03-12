@@ -2,6 +2,7 @@ import { Banner } from '../Banner/Banner';
 import { BodyText } from '../BodyText/BodyText';
 import { ContentLiftup } from '../ContentLiftup/ContentLiftup';
 import Element from '../Element/Element';
+import {PropTypes} from 'prop-types';
 import React from 'react';
 import elisaLogo from '../../images/elisa_logo.png';
 import houstonLogo from '../../images/houston_logo.png';
@@ -43,8 +44,11 @@ const companies = [
   },
 ];
 
-export const CompaniesBanner = () => (
-  <Banner className="spacing--after">
+export const CompaniesBanner = ({ frontPage }) => (
+  <Banner
+    backgroundColor={frontPage && 'white'}
+    className="spacing--after"
+  >
     <Element className="container" flex>
       <BodyText
         centered
@@ -67,14 +71,24 @@ export const CompaniesBanner = () => (
         ))}
       </Element>
 
-      <Element className="spacing--large col-6 push-right-2">
-        <BodyText
-          text={[
-            'This is a description of what the Full Stack challenge is about. A reason for why the companies should take part in this challenge. What do students who do the course get out of this. What is the benefit for the companies if they do this challenge.',
-            'This is a second description of what the Full Stack challenge is about. A reason for why the companies should take part in this challenge. What do students who do the course get out of this. What is the benefit for the companies if they do this challenge.',
-          ]}
-        />
-      </Element>
+      {!frontPage && (
+        <Element className="spacing--large col-6 push-right-2">
+          <BodyText
+            text={[
+              'This is a description of what the Full Stack challenge is about. A reason for why the companies should take part in this challenge. What do students who do the course get out of this. What is the benefit for the companies if they do this challenge.',
+              'This is a second description of what the Full Stack challenge is about. A reason for why the companies should take part in this challenge. What do students who do the course get out of this. What is the benefit for the companies if they do this challenge.',
+            ]}
+          />
+        </Element>
+      )}
     </Element>
   </Banner>
 );
+
+CompaniesBanner.defaultProps = {
+  frontPage: false,
+};
+
+CompaniesBanner.propTypes = {
+  frontPage: PropTypes.bool,
+};
