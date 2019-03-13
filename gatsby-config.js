@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Fullstack 2019',
+    title: 'Full Stack Open 2019',
     description: '',
     author: 'Houston Inc. Consulting oy',
   },
