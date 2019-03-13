@@ -38,11 +38,12 @@ const companies = [
     url: 'https://elisa.fi/',
     className: 'col-2 col-4--mobile',
   },
+  /*
   {
     image: { src: seLogo, alt: 'Storaenso logo' },
     url: 'https://www.storaensometsa.fi/',
     className: 'col-2 col-4--mobile',
-  },
+  },*/
 ];
 
 export const CompaniesBanner = ({ frontPage }) => (
@@ -72,11 +73,11 @@ export const CompaniesBanner = ({ frontPage }) => (
               title: 'Yritys, anna tukesi Full stack -haasteelle',
             }}
             text={[
-              'Haastekumppanuus',
+              '<b>Haastekumppanuus</b>',
               'Kevyesti kyytiin! Anna yrityksesi tuki Full stack -haasteelle, ja kannustakaa työntekijöitänne kurssin pariin päivittämään ja laajentamaan taitojaan. Kiitoksena yhteistyöstä haastekumppanin logo nostetaan Full stack -kurssin sivulle.',
-              'Yhteistyökumppanuus',
+              '<b>Yhteistyökumppanuus</b>',
               'Kaikki hyöty irti! Tärkein lisäarvo syntyy aidosta yhteistyöstä rekrytointimahdollisuuksien, hackathonien ja vierailijaluentojen merkeissä. Lisäksi yhteistyökumppanuus tarjoaa logonäkyvyyden sekä yritysesittelyn Full stack -sivulle. Yhteistyökumppanuus on maksullinen.',
-              'Kasvatetaan osaamista yhdessä! Kumppanuuksista vastaa Jan Myller, yhteyspäällikkö, Helsingin yliopisto p. xxx.xxxx.xxxxx, jan.myller@helsinki.fi',
+              'Kasvatetaan osaamista yhdessä! Kumppanuuksista vastaa Jan Myller, yhteyspäällikkö, Helsingin yliopisto p. 0294140361, jan.myller@helsinki.fi',
               '#fullstackhaaste',
             ]}
           />
@@ -85,7 +86,7 @@ export const CompaniesBanner = ({ frontPage }) => (
       <BodyText
         centered
         className="col-4 push-right-3"
-        text="Haasteessa mukana"
+        text="Full stack -haasteessa mukana"
       />
       <Element flex spaceBetween className="col-6 push-right-2">
         {companies.map(company => (
@@ -104,7 +105,7 @@ export const CompaniesBanner = ({ frontPage }) => (
         {frontPage && (
           <Element flex spaceAround className="col-10 spacing">
             <Link className="nav-item-hover" to="/companies/#challenge">
-              Learn more about this challenge
+              Lisätietoja haasteesta
             </Link>
           </Element>
         )}

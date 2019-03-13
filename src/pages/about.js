@@ -49,41 +49,11 @@ const About = () => (
 
         return (
           <>
-<<<<<<< HEAD
-            <Element className="container">
-              <Arrow
-                className="spacing--small"
-                content={[
-                  {
-                    backgroundColor: colors['black'],
-                    text: name,
-                  },
-                ]}
-              />
-
-              <Element flex spaceBetween>
-                <div className="col-6 spacing--after">
-                  <BodyText text={intro} className="link" headingFont />
-
-                  <BodyText
-                    className="link"
-                    headingFont
-                    text={[
-                      'Osallistujilta edellytetään vahvaa ohjelmointirutiinia, web-ohjelmoinnin ja tietokantojen perustuntemusta, git-versionhallintajärjestelmän peruskäytön hallintaa, kykyä pitkäjänteiseen työskentelyyn sekä valmiutta omatoimiseen tiedonhakuun ja ongelmanratkaisuun.',
-                      'Osallistuminen ei kuitenkaan edellytä kurssilla käsiteltävien tekniikoiden tai Javascript-kielen hallintaa.',
-                      'Kurssi sisältää yhden luennon, kohtuullisen määrään pajaohjausta ja hirveän määrän itsenäistä koodaamista. Varaudu käyttämään aikaa noin 10-15 tuntia viikossa koko periodin ajan.',
-                      "Kurssin sisällöstä ja suoritustavasta kerrotaan materiaalin <a href='/osa0/yleista'>osassa 0</a>, lue ne huolella.",
-                    ]}
-                  />
-                </div>
-
-=======
             <Banner style={{ paddingBottom: 0 }}>
               <div
                 style={{ display: 'flex', justifyContent: 'center' }}
                 className="container"
               >
->>>>>>> e21196fe14eac53c9c6f786cc14b49f269ee1372
                 <Image
                   className="col-4 push-right-2"
                   contain
