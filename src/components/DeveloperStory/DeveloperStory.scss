@@ -1,0 +1,26 @@
+@import '../common.scss';
+
+.developer-story__image {
+  margin-bottom: auto;
+}
+
+.developer-story__name {
+  margin-top: 4rem;
+  font-size: 1.2rem;
+}
+
+.developer-story__title {
+  font-size: 0.9rem;
+}
+
+.developer-story__read-more {
+  margin-top: 2rem;
+  width: auto;
+  background: none !important;
+  color: inherit;
+  border: none;
+  padding: 0 !important;
+  font: inherit;
+  border-bottom: 2px solid $main;
+  cursor: pointer;
+}

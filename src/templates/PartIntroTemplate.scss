@@ -6,4 +6,19 @@
   p:not(:last-of-type) {
     padding-bottom: 2em;
   }
+
+  &__banner {
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: bottom right;
+
+    @include to($tablet) {
+      background-position: top center;
+
+      > .container {
+        margin-top: 40%;
+      }
+    }
+
+  }
 }

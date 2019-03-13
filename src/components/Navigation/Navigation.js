@@ -1,15 +1,15 @@
 import './Navigation.scss';
 
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import { NavigationItem } from './Item';
+import PropTypes from 'prop-types';
 
 export const navigation = [
   { text: 'KURSSISTA', path: '/about' },
   { text: 'KURSSIN SISÄLTÖ', path: '#course-contents' },
   { text: 'FAQ', path: '/faq' },
-  // { text: 'YRITYSESITTELYT', path: '/companies' },
+  { text: 'YRITYSESITTELYT', path: '/companies' },
 ];
 
 const handleCloseMenu = () =>

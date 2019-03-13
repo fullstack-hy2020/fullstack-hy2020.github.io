@@ -115,6 +115,25 @@
   align-items: center;
   margin: auto auto auto 0;
 
+  @include to($tablet) {
+    .arrow--stacked-letter {
+      margin-right: 1rem;
+      font-family: $font-body;
+    }
+
+    .arrow__rectangle {
+      border: none;
+      background-color: transparent !important;
+      padding: 0;
+      font-size: 1rem;
+      justify-content: unset;
+    }
+
+    .arrow__point {
+      display: none;
+    }
+  }
+
   &:nth-of-type(n + 2) {
     margin-top: 1rem;
 
@@ -173,14 +192,7 @@
 .breadcrumb {
   .arrow__wrapper {
     @include to($tablet) {
-      padding: 0;
-
-      &:not(:last-of-type)::after {
-        content: '>';
-        font-size: 0.7rem;
-        font-weight: $font-weight-regular;
-        margin: 0 0.5rem;
-      }
+      display: none;
     }
 
     &:hover {

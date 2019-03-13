@@ -70,5 +70,15 @@ module.exports = {
         ],
       },
     },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: 'UA-135975842-1',
+        head: true,
+        respectDNT: true,
+        exclude: [],
+        cookieDomain: 'fullstackopen-2019.github.io',
+      },
+    },
   ],
 };

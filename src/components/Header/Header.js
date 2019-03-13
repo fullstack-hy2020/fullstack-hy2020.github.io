@@ -1,8 +1,8 @@
 import './Header.scss';
 
-import { Link } from 'gatsby';
 import React, { Component } from 'react';
 
+import { Link } from 'gatsby';
 import Navigation from '../Navigation/Navigation';
 import { TripleBorder } from '../TripleBorder/TripleBorder';
 
@@ -32,7 +32,7 @@ class Header extends Component {
     this.setState({
       top: scroll,
       headerClass:
-        this.state.top > 0 && scroll > this.state.top ? 'header-small' : '',
+        this.state.top > 10 && scroll > this.state.top ? 'header--small' : '',
     });
   };
 
@@ -43,7 +43,7 @@ class Header extends Component {
       <div
         ref={this.header}
         className={`header ${headerClass}`}
-        style={headerClass === '' ? { backgroundColor: 'white' } : {}}
+        style={{ backgroundColor: 'white' }}
       >
         <div
           className="container"
@@ -68,7 +68,7 @@ class Header extends Component {
             )}
           </Link>
 
-          {headerClass !== 'header-small' && <Navigation />}
+          <Navigation />
         </div>
       </div>
     );

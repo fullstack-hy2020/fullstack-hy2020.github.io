@@ -1,14 +1,14 @@
 import './Arrow.scss';
 
+import Element from '../Element/Element';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import React from 'react';
-
 import colors from '../../colors';
-import Element from '../Element/Element';
 
 const Arrow = ({
   className,
+  wrapperClassName,
   link,
   content,
   stack,
@@ -74,7 +74,7 @@ const Arrow = ({
     );
   } else if (stack) {
     render = (
-      <div className="col-10 spacing--after">
+      <div className={`col-10 spacing--after ${wrapperClassName}`}>
         <div
           className="arrow__container arrow__container--with-link"
           style={{ display: 'flex', flexDirection: 'column' }}
@@ -116,6 +116,7 @@ const Arrow = ({
 
 Arrow.propTypes = {
   className: PropTypes.string,
+  wrapperClassName: PropTypes.string,
   link: PropTypes.string,
   content: PropTypes.array.isRequired,
   stack: PropTypes.bool,
@@ -126,6 +127,7 @@ Arrow.propTypes = {
 
 Arrow.defaultProps = {
   className: '',
+  wrapperClassName: '',
 };
 
 export default Arrow;

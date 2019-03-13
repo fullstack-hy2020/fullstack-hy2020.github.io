@@ -133,6 +133,12 @@ a {
   @include to($desktop) {
     margin-top: $vertical-spacing * 2;
   }
+
+  &--large {
+    @include to($large) {
+      margin-top: $vertical-spacing * 3;
+    }
+  }
 }
 
 @for $i from 1 through 10 {
@@ -166,10 +172,33 @@ a {
   }
 }
 
-@include to($desktop) {
+@include to($tablet) {
   @for $i from 1 through 10 {
     .col-#{$i}--mobile {
+      width: #{$i * 10%} !important;
+    }
+  }
+
+  @for $i from 0 through 5 {
+    .order-#{$i}--mobile {
+      order: $i;
+    }
+  }
+  .hidden--mobile {
+    display: none;
+  }
+}
+
+@include to($large) {
+  @for $i from 1 through 10 {
+    .col-#{$i}--tablet {
       width: #{$i * 10%};
+    }
+
+    @for $i from 0 through 5 {
+      .order-#{$i}--tablet {
+        order: $i;
+      }
     }
   }
 
@@ -204,7 +233,7 @@ a {
   &:active,
   &:focus {
     color: $white;
-    background-color: $black;
+    background-color: $black !important;
   }
 
   &:focus,

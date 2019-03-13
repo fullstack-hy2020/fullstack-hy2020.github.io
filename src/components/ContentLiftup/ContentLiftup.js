@@ -1,12 +1,11 @@
 import './ContentLiftup.scss';
 
+import { Image } from '../Image/Image';
 import { Link } from 'gatsby';
 import { PropTypes } from 'prop-types';
 import React from 'react';
-
-import colors from '../../colors';
-import { Image } from '../Image/Image';
 import { TripleBorder } from '../TripleBorder/TripleBorder';
+import colors from '../../colors';
 
 const setSrcToChildrenImage = (event, src) => {
   event.currentTarget.firstElementChild.firstElementChild.firstElementChild.src = src;
@@ -21,6 +20,7 @@ export const ContentLiftup = ({
   name,
   summary,
   path,
+  companyPath,
   small,
   className,
 }) => {
@@ -29,7 +29,7 @@ export const ContentLiftup = ({
   small && classes.push('content-liftup--small');
 
   return path ? (
-    <div className={`content-liftup col-3 ${className} ${classes.join(' ')}`}>
+    <div className={`content-liftup ${className} ${classes.join(' ')}`}>
       <TripleBorder largeMargin>
         <Link
           to={path}
@@ -53,19 +53,44 @@ export const ContentLiftup = ({
       <p className="content-liftup__summary">{summary}</p>
     </div>
   ) : (
-    <div
-      className={`content-liftup ${className} ${classes.join(' ')} no-hover`}
-    >
-      <Image
-        {...image}
-        contain
-        className="content-liftup__image image--square-big"
-      />
+    <>
+      {companyPath ? (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href={companyPath}
+          className={`content-liftup ${className} ${classes.join(
+            ' '
+          )} no-hover`}
+        >
+          <Image
+            {...image}
+            contain
+            className="content-liftup__image image--square-big"
+          />
 
-      {name && <p className="content-liftup__name">{name}</p>}
+          {name && <p className="content-liftup__name">{name}</p>}
 
-      {summary && <p className="content-liftup__summary">{summary}</p>}
-    </div>
+          {summary && <p className="content-liftup__summary">{summary}</p>}
+        </a>
+      ) : (
+        <div
+          className={`content-liftup ${className} ${classes.join(
+            ' '
+          )} no-hover`}
+        >
+          <Image
+            {...image}
+            contain
+            className="content-liftup__image image--square-big"
+          />
+
+          {name && <p className="content-liftup__name">{name}</p>}
+
+          {summary && <p className="content-liftup__summary">{summary}</p>}
+        </div>
+      )}
+    </>
   );
 };
 
@@ -73,6 +98,7 @@ ContentLiftup.defaultProps = {
   className: '',
   published: '',
   path: '',
+  companyPath: '',
 };
 
 ContentLiftup.propTypes = {
@@ -85,5 +111,6 @@ ContentLiftup.propTypes = {
   name: PropTypes.string,
   summary: PropTypes.string,
   path: PropTypes.string,
+  companyPath: PropTypes.string,
   small: PropTypes.bool,
 };

@@ -148,3 +148,15 @@ pre[class*='language-'] {
     right: 10%;
   }
 }
+
+.part-main__banner {
+  background-position: bottom right;
+  background-size: 60%;
+  padding-bottom: 20%;
+  background-repeat: no-repeat;
+
+  @include to($tablet) {
+    background-position: top center;
+    padding-bottom: 30% !important;
+  }
+}

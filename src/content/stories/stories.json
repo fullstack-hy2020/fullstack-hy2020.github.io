@@ -1,0 +1,54 @@
+[
+  {
+    "image": "Juha_Tauriainen.jpg",
+    "companyLogo": "houston_logo.png",
+    "text": [
+      "Roolini Houstonilla keskittyy frontend-kehitykseen. Käytämme teknologioita ja kirjastoja laidasta laitaan, muun muassa kurssilla opetettuja teknologioita. Konsulttitalona autamme asiakkaitamme ja yhteistyökumppaneitamme saavuttamaan korkean laadun kautta paremman tuloksen. Tuomme projekteihin koodin lisäksi myös alan parhaat käytännöt ja autamme asiakkaitamme menestymään.",
+      "Työskentely Houstonille on mahtavaa monesta syystä, eniten pidän siitä että työntekijät ovat aina ykkössijalla, henkilökunnan ideoita, ehdotuksia ja mielipiteitä todellakin kuunnellaan ja niihin reagoidaan. Esimerkiksi olen saanut Houstonilta täyden tuen mentorointiohjelman aloittamiseen. Autamme ihmisiä eri aloilta ohjelmoinnin parissa, opastamme heitä parhaiden käytäntöjen kanssa ja pyrimme saamaan heidät alalle. Tämä on opettanut sekä minulle että Houstonille todella paljon. Saankin todella paljon kiksejä muiden auttamisesta - olivat he sitten asiakkaita, työkavereita tai opiskelijoita."
+    ],
+    "name": "Juha Tauriainen",
+    "title": "Sovelluskehittäjä"
+  },
+  {
+    "image": "Juho_Kyrola.jpg",
+    "companyLogo": "elisa_logo.png",
+    "text": [
+      "Työskentelen Elisalla ohjelmistokehittäjänä ja opiskelen samalla tietotekniikkaa Aalto-yliopistossa. Olen opintojeni loppuvaiheessa, ja alan pian tekemään diplomityötäni. Kurssejakin olen suorittanut samaan aikaan kuin olen ollut töissä täällä. Elisalle päädyin ystäväni suosituksesta, hän kertoi, että tämä on hyvä yritys olla töissä ja kehotti minua hakemaan.",
+      "Tätä ennen olin töissä parissa muussa yrityksessä, yhteensä reilut 1,5 vuotta devaajana. Ohjelmointia olen harrastanut pienestä pitäen, ja olen aina tiennyt, että tietokoneet ovat oma juttuni. Ensimmäinen ohjelmointikieleni oli Java.",
+      "Työskentelen Elisa Automatessa mobiiliverkon optimointialustan parissa, siis itse alustan, en niinkään optimointialgoritmien. Projekteissa käyttämiäni teknologioita ovat mm. Python, React, Elasticsearch ja Docker, ja itselleni parasta on juuri tämä full stack -tekeminen. Et ole mikään fronttisankari, vaan pääset tekemään kaikkea. Se pitää intohimoa yllä. Projektit ovat myös merkityksellisiä minulle. Se on kivaa että tehdään pioneerihommia, eikä vain omaa versiota jostain olemassaolevasta.",
+      "Aluksi oli vähän vaikeaa päästä kärryille projektista, jossa työskentelen, mutta hiljalleen pääsin kunnolla vauhtiin. On ollut todella innostavaa, että kyseessä on jotain muuta kuin ”normaalin” nettisivun tekeminen. Työtä on helppo uppoutua tekemään yksin, mutta on tärkeää pitää mielessä tiimityön tärkeys. Ilman tiimityöskentelyä työt etenevät hitaasti ja saattaa ajautua tekemään väärää asiaa. Uusille työntekijöille (harjoittelijoille ja kokeneillekin) olisi suurta hyötyä tehdä esimerkiksi parikoodausta aluksi.",
+      "Etukäteen minua kiinnosti tietää, olisiko isossa firmassa hirveän jäykkää menoa, mutta yllätyin positiivisesti siitä, että tiimi on niin ketterä. Työn edistäminen ei tunnu miltään suossa tarpomiselta, vaan ihan asfaltilla päästään kulkemaan. Ennen työn aloittamista ajattelin joutuvani herkästi johonkin tiukkaan siiloon, mutta todellisuudessa olen päässyt tekemään monipuolisesti erilaisia juttuja. Pitää kuitenkin muistaa itse pyytää sitä vaihtelevaa tekemistä! Omaa innostusta täytyy itse huoltaa.",
+      "Haastattelu oli kaksivaiheinen. Aluksi tapasin tulevan esimieheni, joka luotasi, minkälainen ihminen olen. Eri päivänä oli tekninen haastattelu, jossa haisteltiin osaamistani juttelemalla ja pikkutehtävien kautta. Työhönotossa huomasi selkeästi inhimillisen puolen, ei pelkästään katsottu kuinka kova koodari on vaan että minkälainen persoona. Juteltiin koodista, ja selvästi katsottiin myös, kuinka hyvin pystyn kommunikoimaan ajatuksiani. Työnhausta ei tullut sellainen olo, että olisi vain minua tutkittu, vaan että etsittiin yhteistä säveltä, ja minulle rakentui kuva siitä, millaisia tulevat tiimiläiset ovat.",
+      "Työkulttuuri täällä vastaa hyvin omia toiveitani, ja työtä on helppo järjestää oman elämän mukaan. Viestintä toimii myös hyvin, asioista kerrotaan tarpeeksifirman sisällä eikä ole tullut tunnetta siitä, että olisi jokin hämärä ”yläkerta” jossa asioista päätetään. Aina ei tietenkään tiedä, mitä kaikkea muualla tehdään, mutta se taitaa olla isoissa taloissa aina samoin.",
+      "On riittävästi mahdollisuuksia kehittyä ja oppia uutta, ja pääsee hyödyntämäänomaa osaamista. Oma esimies ja tiimin ScrumMaster ehdottelee uusia asioita, nytkin olen menossa React Finland -tapahtumaan. Ylipäätään on joka päivä kivatulla töihin, ei harmita."
+    ],
+    "name": "Juho Kyrölä",
+    "title": "Sovelluskehittäjä"
+  },
+  {
+    "image": "mikko_kotola_ja_panu_vartiainen.jpg",
+    "companyLogo": "sympa_logo.png",
+    "text": [
+      "Kurssi oli kyllä todella tärkeä osa tietojenkäsittelytieteen kandiopintojani. Single page web appien logiikka ja modernit työkalut tulivat tutuksi. Yleisemmin ottaen minulle oli tärkeää saada rutiinia asynkroniseen ja funktionaaliseen ohjelmointiin.",
+      "Kyllä siinä otsa välillä oli kipeänä kun jotakin kiharaista kohtaa viilasi. Mutta tekemällähän sitä asioita opitaan!",
+      "Kotola sai kandiopintonsa päätökseen kesällä 2018 ja aloitti full stack -kehittäjän tehtävässä Sympalla syksyllä. Sympa tarjoaa asiakkailleen henkilöstöjärjestelmiä SaaS-toimintamallilla. Yrityksessä on yli 100 työntekijää viidessä maassa, ja kasvu on nopeaa. Kotolalle työnpaikan vaihdos oli samalla toimialan vaihdos, sillä hän on aiemmalta koulutukseltaan valtiotieteiden maisteri ja oli aiemmin työskennellyt yliopiston hallinnossa. Innostus koodaukseen imaisi miehen kuitenkin mukaansa opintoihin ja uudelle alalle.",
+      "Sympassa minua viehätti se, että yritys oli sopivan kokoinen. Devaajana kehittymisen kannalta on hienoa, että on riittävästi haasteita ja osaavia ihmisiä ympärillä. Esimerkiksi käyttämäämme mikropalveluarkkitehtuuriin perehtyminen on ollut mielenkiintoista. Toisaalta Sympan kokoisessa yrityksessä asia hoituvat mutkattomasti ja kulttuuri on hyvin välitön. Yksi firman arvoista on ”have fun”, ja täytyy kyllä sanoa, että hauskaa on ollut!",
+      "Kotola jatkaa vielä työn ohella opintojaan Helsingin yliopistossa datatieteen maisteriohjelmassa.",
+      "– Koneoppimisen kurssit ovat olleet kiinnostavia, ja varmasti opeille on käyttöä jatkossa myös työssä."
+    ],
+    "name": "Mikko Kotola",
+    "title": "Sovelluskehittäjä"
+  },
+  {
+    "image": "Tuukka_Peuraniemi.jpg",
+    "companyLogo": "terveystalo_logo.png",
+    "text": [
+      "Minulla on usean vuoden kokemus terveydenhuollon teknologioista. Päädyin sovelluskehittäjäksi muutaman mutkan kautta, aloittaen urani proviisorina. Tämän jälkeen valmistuin tietojenkäsittelytieteiden maisteriksi ja siirryin kehityspäälliköksi ja edelleen sovelluskehittäjäksi.",
+      "Viihdyn Terveystalossa, koska täällä pääsee itse vaikuttamaan sekä käytettäviin teknologioihin, että mihin projekteihin haluaa osallistua. Roolini ja kokemukseni ansiosta pääsen mukaan erilaisten uusien palveluiden aloitukseen ja kehittämiseen. Tällä hetkellä kehitän uutta mobiilipuolen sovellusta, joka näkee päivänvalonsa asiakkaiden parissa lähitulevaisuudessa.",
+      "Haluan jatkossakin kehittyä omassa työssäni ja oppia koko ajan uutta. Multivendor-projekteissa työskentely yhdessä kokeneiden kollegojen kanssa ylläpitää ja kehittää omaa osaamista.",
+      "Uskon, että Terveystalosta löytyy mielekkäitä ja uusia projekteja jatkossakin."
+    ],
+    "name": "Tuukka Peuraniemi",
+    "title": "Sovelluskehittäjä"
+  }
+]

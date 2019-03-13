@@ -1,24 +1,22 @@
 import './PartIntroTemplate.scss';
 
-import path from 'path';
-
-import { graphql } from 'gatsby';
-import Parser from 'html-react-parser';
-import domToReact from 'html-react-parser/lib/dom-to-react';
-import isEmpty from 'lodash/fp/isEmpty';
-import snakeCase from 'lodash/fp/snakeCase';
-import React from 'react';
-
-import colors from '../colors';
 import Arrow from '../components/Arrow/Arrow';
 import { Banner } from '../components/Banner/Banner';
 import Element from '../components/Element/Element';
 import Footer from '../components/Footer/Footer';
 import Layout from '../components/layout';
+import Parser from 'html-react-parser';
 import PrevNext from '../components/PrevNext/PrevNext';
+import React from 'react';
 import SEO from '../components/seo';
+import colors from '../colors';
+import domToReact from 'html-react-parser/lib/dom-to-react';
+import { graphql } from 'gatsby';
+import isEmpty from 'lodash/fp/isEmpty';
 import navigation from '../content/partnavigation/partnavigation';
 import { partColors } from './partColors';
+import path from 'path';
+import snakeCase from 'lodash/fp/snakeCase';
 
 export default function PartIntroTemplate({ data }) {
   const { markdownRemark } = data;
@@ -49,11 +47,9 @@ export default function PartIntroTemplate({ data }) {
 
       <div className="spacing--after">
         <Banner
+          className="part-intro__banner"
           style={{
             backgroundImage: `url(${path.resolve(mainImage.publicURL)})`,
-            backgroundPosition: 'center right',
-            backgroundSize: '80%',
-            backgroundRepeat: 'no-repeat',
             backgroundColor: colors[partColors[part]],
           }}
         >
@@ -73,13 +69,13 @@ export default function PartIntroTemplate({ data }) {
               ]}
             />
 
-            <div className="part-intro col-7 col-6--mobile spacing--after-small">
+            <div className="part-intro col-7 col-9--mobile spacing--after-small">
               {Parser(html, parserOptions)}
             </div>
 
             {titles && (
               <Arrow
-                className="spacing--mobile"
+                wrapperClassName="spacing--mobile--large"
                 stack
                 content={titles.map(n => {
                   return {

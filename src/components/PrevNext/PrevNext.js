@@ -1,12 +1,11 @@
 import './PrevNext.scss';
 
+import Element from '../Element/Element';
 import { Link } from 'gatsby';
-import snakeCase from 'lodash/fp/snakeCase';
 import { PropTypes } from 'prop-types';
 import React from 'react';
-
 import navigation from '../../content/partnavigation/partnavigation';
-import Element from '../Element/Element';
+import snakeCase from 'lodash/fp/snakeCase';
 
 const navArray = Object.keys(navigation);
 
@@ -113,7 +112,7 @@ const PrevNext = ({ part, letter }) => {
             </Element>
           </Link>
         );
-      } else {
+      } else if (hasPart(part + 1)) {
         return (
           <Link
             to={`/osa${part + 1}`}
@@ -126,6 +125,8 @@ const PrevNext = ({ part, letter }) => {
             </Element>
           </Link>
         );
+      } else {
+        return <Element className="push-left-1" />;
       }
     } else {
       return <Element className="push-left-1" />;

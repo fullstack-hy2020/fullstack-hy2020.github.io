@@ -17,7 +17,7 @@
   transition: opacity 0.3s ease-in-out;
   font-weight: 200;
 
-  @include from($tablet) {
+  @include from($large) {
     display: flex;
     opacity: 1;
     padding: 0;
@@ -42,7 +42,7 @@
   outline: none;
   border-radius: 4px;
 
-  @include from($tablet) {
+  @include from($large) {
     display: none;
   }
 }
@@ -82,6 +82,7 @@
 
 .is-open--navigation {
   overflow: hidden;
+  height: 100vh;
 
   .navigation {
     opacity: 1;
@@ -107,7 +108,7 @@
     top: 47px;
     left: 5%;
 
-    @include from($tablet) {
+    @include from($large) {
       display: none;
     }
   }
@@ -144,7 +145,7 @@
     margin: 22px 0 0;
   }
 
-  @include from($tablet) {
+  @include from($large) {
     margin: 0 30px;
     padding: 0 !important;
 

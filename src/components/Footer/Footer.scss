@@ -5,20 +5,39 @@
     align-items: center;
   }
 
+  a:hover {
+    background-color: transparent !important;
+  }
+
   .footer__navigation {
+    @include to($large) {
+      width: 100%;
+
+      &-link-container {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
     &-link {
       font-size: 1rem;
       line-height: 18px;
       white-space: nowrap;
       font-family: $font-heading;
       margin-left: 0 !important;
+      margin-right: auto;
+
+      &:hover {
+        color: $white !important;
+        background-color: $black !important;
+      }
 
       &:nth-of-type(n + 2) {
         margin-top: 2.142rem;
       }
     }
 
-    @include from($desktop) {
+    @include from($large) {
       flex-direction: row;
       flex-wrap: nowrap;
       justify-content: flex-end;
