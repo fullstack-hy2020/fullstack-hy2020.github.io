@@ -7,7 +7,7 @@ import { PropTypes } from 'prop-types';
 import React from 'react';
 import elisaLogo from '../../images/elisa_logo.png';
 import houstonLogo from '../../images/houston_logo.png';
-import seLogo from '../../images/SE_logo.png';
+// import seLogo from '../../images/SE_logo.png';
 import sympaLogo from '../../images/sympa_logo.png';
 import terveystaloLogo from '../../images/terveystalo_logo.png';
 import yliopistoLogo from '../../images/hgin_yliopisto.png';
@@ -16,34 +16,27 @@ const companies = [
   {
     image: { src: yliopistoLogo, alt: 'Helsingin yliopisto logo' },
     url: 'https://www.helsinki.fi/',
-    className: 'col-2 col-4--mobile',
   },
   {
     image: { src: houstonLogo, alt: 'Houston inc. logo' },
     url: 'https://www.houston-inc.com/',
-    className: 'col-2 push-right-2 col-4--mobile',
   },
   {
     image: { src: terveystaloLogo, alt: 'Terveystalo logo' },
     url: 'https://www.terveystalo.com/',
-    className: 'col-2 push-right-2 col-4--mobile',
   },
   {
     image: { src: sympaLogo, alt: 'Sympa logo' },
     url: 'https://www.sympa.com/fi/',
-    className: 'col-2 col-4--mobile',
   },
   {
     image: { src: elisaLogo, alt: 'Elisa logo' },
     url: 'https://elisa.fi/',
-    className: 'col-2 col-4--mobile',
   },
-  /*
-  {
-    image: { src: seLogo, alt: 'Storaenso logo' },
-    url: 'https://www.storaensometsa.fi/',
-    className: 'col-2 col-4--mobile',
-  },*/
+  // {
+  //   image: { src: seLogo, alt: 'Storaenso logo' },
+  //   url: 'https://www.storaensometsa.fi/',
+  // },
 ];
 
 export const CompaniesBanner = ({ frontPage }) => (
@@ -88,8 +81,8 @@ export const CompaniesBanner = ({ frontPage }) => (
         className="col-4 push-right-3"
         text="Full stack -haasteessa mukana"
       />
-      <Element flex spaceBetween className="col-6 push-right-2">
-        {companies.map(company => (
+      <Element flex className="col-6 push-right-2 flex-fix-aligning">
+        {companies.map((company, i) => (
           <ContentLiftup
             key={company.url}
             small
@@ -98,7 +91,7 @@ export const CompaniesBanner = ({ frontPage }) => (
               src: company.image.src,
               alt: company.image.alt,
             }}
-            className={company.className}
+            className={`col-2 col-5--mobile col-4--tablet push-right-1`}
           />
         ))}
 
