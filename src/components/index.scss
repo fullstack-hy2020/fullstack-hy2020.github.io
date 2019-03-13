@@ -290,3 +290,10 @@ a {
 .heading-font {
   font-family: $font-heading;
 }
+
+.about__challenge-button {
+  background-color: $main;
+  padding: 0.6rem 1rem;
+  border: 3px solid $black;
+  font-weight: $font-weight-semi-bold;
+}
