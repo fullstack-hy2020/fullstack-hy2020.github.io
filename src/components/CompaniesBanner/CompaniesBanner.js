@@ -2,6 +2,7 @@ import { Banner } from '../Banner/Banner';
 import { BodyText } from '../BodyText/BodyText';
 import { ContentLiftup } from '../ContentLiftup/ContentLiftup';
 import Element from '../Element/Element';
+import { Link } from 'gatsby';
 import { PropTypes } from 'prop-types';
 import React from 'react';
 import elisaLogo from '../../images/elisa_logo.png';
@@ -45,7 +46,11 @@ const companies = [
 ];
 
 export const CompaniesBanner = ({ frontPage }) => (
-  <Banner backgroundColor={frontPage && 'white'} className="spacing--after">
+  <Banner
+    backgroundColor={frontPage && 'white'}
+    className="spacing--after"
+    id="challenge"
+  >
     <Element className="container" flex>
       {!frontPage && (
         <Element className="spacing spacing--after col-6 push-right-2">
@@ -95,6 +100,14 @@ export const CompaniesBanner = ({ frontPage }) => (
             className={company.className}
           />
         ))}
+
+        {frontPage && (
+          <Element flex spaceAround className="col-10 spacing">
+            <Link className="nav-item-hover" to="/companies/#challenge">
+              Learn more about this challenge
+            </Link>
+          </Element>
+        )}
       </Element>
     </Element>
   </Banner>
