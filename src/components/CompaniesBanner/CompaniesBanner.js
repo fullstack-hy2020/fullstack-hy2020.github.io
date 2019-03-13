@@ -81,7 +81,7 @@ export const CompaniesBanner = ({ frontPage }) => (
         className="col-4 push-right-3"
         text="Full stack -haasteessa mukana"
       />
-      <Element flex className="col-6 push-right-2 flex-fix-aligning">
+      <Element flex className="col-6 push-right-2 flex-fix-aligning space-between--mobile">
         {companies.map((company, i) => (
           <ContentLiftup
             key={company.url}
@@ -91,7 +91,7 @@ export const CompaniesBanner = ({ frontPage }) => (
               src: company.image.src,
               alt: company.image.alt,
             }}
-            className={`col-2 col-5--mobile col-4--tablet push-right-1`}
+            className={`col-2 col-4--mobile col-4--tablet push-right-1`}
           />
         ))}
 

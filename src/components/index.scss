@@ -302,3 +302,9 @@ a {
     color: $white;
   }
 }
+
+.space-between--mobile {
+  @include to($desktop) {
+    justify-content: space-between;
+  }
+}
