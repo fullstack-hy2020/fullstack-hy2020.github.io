@@ -1,13 +1,9 @@
 {
   "mainTitle": "Syväsukellus moderniin websovelluskehitykseen",
-  "intro": "Ota haltuusi React, Redux, Node.js ja MongoDB! Kurssilla tutustutaan JavaScriptilla tapahtuvaan moderniin websovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST-rajapinnoissa.",
+  "intro": "Ota haltuusi React, Redux, Node.js, MongoDB ja GraphQL! Kurssilla tutustutaan JavaScriptilla tapahtuvaan moderniin websovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST-rajapinnoissa.",
   "current": [
-    "Vierailuluentoja <ul><li>Torstai 21.2. B123 14-17 Panu Vartiainen Sympa, Niko Salminen Houston, Joonas Mertanen Smartly</li><li>Torstai 28.2. B123 14-17 Ilari Richard Terveystalo, Ilmari Koskinen Houston, Junaid Rasheed Elisa</li></ul>",
-    "Kurssikoe tiistaina 5.3. klo 9 saleissa A111 ja B123. Kokeeseen tulee <a href='https://courses.helsinki.fi/fi/TKT21009/128295287'>ilmoittautua</a> 23.2. klo 23.59 mennessä!",
-    "Torstaina 28.2. paja poikkeuksellisesti klo 12-14 BK107",
-    "Ohjausta tehtäviin<ul><li>maanantaisin 14-17 B221</li><li>torstaisin 14-16 B221</li><li>perjantaisin 12-16 BK107</li></ul>",
+    "Kurssista on mahdollista saada suoritusmerkintä <a target='_blank' href='https://courses.helsinki.fi/fi/aytkt21009/124726896'>Avoimen yliopiston</a> kautta. Kurssi on suoritettavissa 10.1.2020 asti.",
     "Kurssiin liittyvää keskustelua Telegramissa, kanavalla <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>, tule mukaan! <ul><li>Huom: kaikki epäasialliset, halventavat ja jotain ihmisryhmää syrjivät kommentit kanavalla ovat kiellettyjä ja tälläisten kommenttien esittäjät poistetaan kanavalta.</li></ul>"
-
   ],
   "telegram": "Telegram on whatsappin/messengerin tyylinen keskustelufoorumisovellus, jota on mahdollista käyttää selaimella, mobiililaitteilla ja Windows/Linux/OSX-clienteillä.",
   "notice": "Huom: kaikki epäasialliset, halventavat ja jotain ihmisryhmää syrjivät kommentit kanavalla ovat kiellettyjä ja tälläisten kommenttien esittäjät poistetaan kanavalta.",

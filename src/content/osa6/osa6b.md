@@ -349,20 +349,22 @@ Jatketaan tehtävässä 6.3 aloitetun reduxia käyttävän anekdoottisovelluksen
 Sovelluksessa on valmiina komponentin <i>Notification</i> runko:
 
 ```js
-class Notification extends React.Component {
-  render() {
-    const style = {
-      border: 'solid',
-      padding: 10,
-      borderWidth: 1
-    }
-    return (
-      <div style={style}>
-        render here notification...
-      </div>
-    )
+import React from 'react';
+
+const Notification = () => {
+  const style = {
+    border: 'solid',
+    padding: 10,
+    borderWidth: 1
   }
+  return (
+    <div style={style}>
+      render here notification...
+    </div>
+  )
 }
+
+export default Notification
 ```
 
 Laajenna komponenttia siten, että se renderöi redux-storeen talletetun viestin, eli renderöitävä komponentti muuttuu muodoon:
@@ -785,7 +787,7 @@ Connect on erittäin kätevä työkalu, mutta abstraktiutensa takia se voi aluks
 Määrittelimme siis connectin komponentille <i>NewNote</i> antamat actioneja dispatchaavan funktion seuraavasti:
 
 ```js
-class NewNote extends React.Component {
+const NewNote = () => {
   // ...
 }
 

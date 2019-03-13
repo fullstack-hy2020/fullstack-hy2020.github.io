@@ -170,7 +170,7 @@ module.exports = {
 }
 ```
 
-Pieni mutta tärkeä huomio: eristimme tämän osan [alussa](http://fullstack-hy2019.github.io/osa4/sovelluksen_rakenne_ja_testauksen_alkeet#sovelluksen-rakenne) Express-sovelluksen tiedostoon <i>app.js</i> ja tiedoston <i>index.js</i> rooliksi jäi sovelluksen käynnistäminen määriteltyyn porttiin Noden <i>http</i>-olion avulla:
+Pieni mutta tärkeä huomio: eristimme tämän osan [alussa](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet#sovelluksen-rakenne) Express-sovelluksen tiedostoon <i>app.js</i> ja tiedoston <i>index.js</i> rooliksi jäi sovelluksen käynnistäminen määriteltyyn porttiin Noden <i>http</i>-olion avulla:
 
 ```js
 const app = require('./app') // varsinainen Express-sovellus
@@ -919,7 +919,7 @@ Tee supertest-kirjastolla testit blogilistan osoitteeseen <i>/api/blogs</i> tapa
 
 Kun testi on valmis, refaktoroi operaatio käyttämään promisejen sijaan async/awaitia.
 
-Huomaa, että joudut tekemään koodiin [materiaalin tapaan](http://:fullstack-hy2019.github.io/osa4/backendin_testaaminen#test-ymparisto) hieman muutoksia (mm. testausympäristön määrittely), jotta saat järkevästi tehtyä omaa tietokantaa käyttäviä API-tason testejä.
+Huomaa, että joudut tekemään koodiin [materiaalin tapaan](/osa4/backendin_testaaminen#test-ymparisto) hieman muutoksia (mm. testausympäristön määrittely), jotta saat järkevästi tehtyä omaa tietokantaa käyttäviä API-tason testejä.
 
 **Huom1:** Testejä suorittaessa saatat törmätä seuraavaan varoitukseen
 
@@ -933,13 +933,13 @@ module.exports = {
 }
 ```
 
-**Huom2:** testien kehitysvaiheessa yleensä **<i>ei kannata suorittaa joka kerta kaikkia testejä</i>**, vaan keskittyä yhteen testiin kerrallaan. Katso lisää [täältä](http://fullstack-hy2019.github.io/osa4/backendin_testaaminen#testien-suorittaminen-yksitellen).
+**Huom2:** testien kehitysvaiheessa yleensä **<i>ei kannata suorittaa joka kerta kaikkia testejä</i>**, vaan keskittyä yhteen testiin kerrallaan. Katso lisää [täältä](/osa4/backendin_testaaminen#testien-suorittaminen-yksitellen).
 
 #### 4.9*: blogilistan testit, step2
 
 Tee testi, joka varmistaa että palautettujen blogeien identifioivan kentän tulee olla nimeltään <i>id</i>,  oletusarvoisestihan tietokantaan talletettujen olioiden tunnistekenttä on <i>_id</i>. Olion kentän olemassaolon tarkastaminen onnistuu jestin matcherillä [toBeDefined](https://jestjs.io/docs/en/expect#tobedefined)
 
-Muuta koodia siten, että testi menee läpi. Osassa 3 käsitelty [toJSON](http://fullstack-hy2019.github.io/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#tietokantaa-kayttava-backend) on sopiva paikka parametrin <i>id</i> määrittelyyn. 
+Muuta koodia siten, että testi menee läpi. Osassa 3 käsitelty [toJSON](osa3/tietojen_tallettaminen_mongo_db_tietokantaan#tietokantaa-kayttava-backend) on sopiva paikka parametrin <i>id</i> määrittelyyn. 
 
 #### 4.10: blogilistan testit, step3
 

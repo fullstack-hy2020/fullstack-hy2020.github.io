@@ -607,7 +607,7 @@ Javascript-väsymys tulee varmasti iskemään myös tällä kurssilla. Onneksi n
 <div class="tasks"> 
   <h3>Tehtäviä</h3>
 
-Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/courses/#fullstack2019).
+Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/fullstackopen2019/).
 
 Voit palauttaa kurssin kaikki tehtävät samaan repositorioon, tai käyttää useita repositorioita. Jos palautat eri osien tehtäviä samaan repositorioon, käytä järkevää hakemistojen nimentää.
 
@@ -690,6 +690,6 @@ Tee kaavio tilanteesta, missä käyttäjä menee selaimella osoitteeseen <https:
 
 Tee kaavio tilanteesta, missä käyttäjä luo uuden muistiinpanon single page -versiossa.
 
-Tämä oli osan viimeinen tehtävä ja on aika pushata vastaukset githubiin merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/courses/#fullstack2019).
+Tämä oli osan viimeinen tehtävä ja on aika pushata vastaukset githubiin merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/fullstackopen2019/).
 
 </div>

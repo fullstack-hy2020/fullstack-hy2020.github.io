@@ -12,7 +12,7 @@ GraphQL:ää on periaatteessa mahdollista käyttää HTTP POST -pyyntöjen avull
 
 ![](../images/8/8.png)
 
-Kommunikointi siis tapahtuu osoitteeseen http://localhosto:4000/graphql kohdistuvina POST-pyyntöinä, ja itse kysely lähetetään pyynnön mukana merkkijonona avaimen <i>query</i> arvona. 
+Kommunikointi tapahtuu siis osoitteeseen http://localhosto:4000/graphql kohdistuvina POST-pyyntöinä, ja itse kysely lähetetään pyynnön mukana merkkijonona avaimen <i>query</i> arvona. 
 
 Voisimmekin hoitaa React-sovelluksen ja GraphQL:n kommunikoinnin Axiosilla. Tämä ei kuitenkaan ole useimmiten järkevää ja on parempi idea käyttää korkeamman tason kirjastoa, joka pystyy abstrahoimaan kommunikoinnin turhia detaljeja. Tällä hetkellä järkeviä vaihtoehtoja on kaksi, Facebookin [Relay](https://facebook.github.io/relay/) ja
 [Apollo Client](https://www.apollographql.com/docs/react/), näistä Apollo on ylivoimaisesti suositumpi ja myös meidän valintamme.
@@ -77,7 +77,7 @@ Palvelimen palauttama vastaus tulostuu konsoliin:
 
 ![](../images/8/9a.png)
 
-Sovelluksen siis pystyy kommunikoimaan GraphQL-palvelimen kanssa olion _client_ välityksellä. Client saadaan sovelluksen kaikkien komponenttien saataville käärimällä komponenttti <i>App</i> komponentin [ApolloProvider](https://www.apollographql.com/docs/react/essentials/get-started.html#creating-provider) lapseksi:
+Sovellus pystyy siis kommunikoimaan GraphQL-palvelimen kanssa olion _client_ välityksellä. Client saadaan sovelluksen kaikkien komponenttien saataville käärimällä komponenttti <i>App</i> komponentin [ApolloProvider](https://www.apollographql.com/docs/react/essentials/get-started.html#creating-provider) lapseksi:
 
 ```js
 import React from 'react'
@@ -160,7 +160,7 @@ Kun tulos on valmis, otetaan tuloksen kentästä <i>data</i> kyselyn <i>allPerso
 </div>
 ```
 
-Saadaksemme ratkaisua hieman siistimmäksi eriytetään henkilöiden näyttäminen omaan komponenttiin <i>Persons</i>. Komponentti <i>App</i> muuttuu seuraavasti
+Saadaksemme ratkaisua hieman siistimmäksi, eriytetään henkilöiden näyttäminen omaan komponenttiin <i>Persons</i>. Komponentti <i>App</i> muuttuu seuraavasti
 
 ```js
 const App = () => {
@@ -239,9 +239,9 @@ Myös GraphQL Playground mahdollistaa muuttujia sisältävän kyselyjen tekemise
 
 Äsken käyttämämme komponentti <i>Query</i> ei sovellu optimaalisella tavalla tarkoitukseen sillä haluaisimme tehdä kyselyn vasta siinä vaiheessa kun käyttäjä haluaa nähdä jonkin henkilön tiedot. 
 
-Eräs tapa on käyttää suoraan <i>client</i> olion metodia <i>query</i>. Sovelluksen komponentit pääsevät käsiksi query-olioon komponentin [ApolloConsumer](https://www.apollographql.com/docs/react/essentials/queries.html#manual-query) avulla.
+Eräs tapa on käyttää suoraan <i>client</i> -olion metodia <i>query</i>. Sovelluksen komponentit pääsevät käsiksi query-olioon komponentin [ApolloConsumer](https://www.apollographql.com/docs/react/essentials/queries.html#manual-query) avulla.
 
-Muutetaan komponenttia <i>App</i> siten, että hakee <i>ApolloConsumerin</i> avulla viitteen _query_-olioon ja välittää sen komponentille <i>Persons</i>
+Muutetaan komponenttia <i>App</i> siten, että se hakee <i>ApolloConsumerin</i> avulla viitteen _query_-olioon ja välittää sen komponentille <i>Persons</i>
 
 ```js
 import { Query, ApolloConsumer } from 'react-apollo' // highlight-line
@@ -345,7 +345,7 @@ const showPerson = async (name) => {
 }
 ```
 
-Jos tilalla _person_ on arvo näytetään kaikkien henkilöiden sijaan yhden henkilön tarkemmat tiedot:
+Jos tilalla _person_ on arvo, näytetään kaikkien henkilöiden sijaan yhden henkilön tarkemmat tiedot:
 
 ![](../images/8/11.png)
 
@@ -355,7 +355,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 ### Välimuisti
 
-Kun haemme monta kertaa esim. Arto Hellaksen tiedot huomaamme mielenkinntoisen asian. Kysely backendiin tapahtuu ainoastaan tietojen ensimmäisellä katsomiskerralla, tämän jälkeen siitäkin huomiatta, että koodi tekee saman kysely uudelleen, ei kyselyä lähetetä backendille:
+Kun haemme monta kertaa esim. Arto Hellaksen tiedot, huomaamme mielenkinntoisen asian. Kysely backendiin tapahtuu ainoastaan tietojen ensimmäisellä katsomiskerralla, tämän jälkeen siitäkin huomlimatta, että koodi tekee saman kysely uudelleen, ei kyselyä lähetetä backendille:
 
 ![](../images/8/12.png)
 
@@ -554,7 +554,7 @@ Edut ja haitat tällä ratkaisulla ovat melkeimpä päinvastauset pollaukseen. V
 
 Muitakin tapoja välimuistin tilan päivittämiseksi on, niistä lisää myöhemmin tässä osassa.
 
-**HUOM** Apollo Client devtools vaikuttaa olevan hieman buginen, se lopettaa jossain vaiheessa välimuistin tilan päivittämisen. Jos törmäät ongelmaan avaa sovellus uudessa välilehdessä.
+**HUOM** Apollo Client devtools vaikuttaa olevan hieman buginen, se lopettaa jossain vaiheessa välimuistin tilan päivittämisen. Jos törmäät ongelmaan, avaa sovellus uudessa välilehdessä.
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-frontend/tree/part8-2), branchissa <i>part8-2</i>.
 
@@ -609,7 +609,7 @@ const App = () => {
 }
 ```
 
-Poikkeukesta tiedotetaan nyt käyttäjää yksinkertaisella notifikaatiolla
+Poikkeuksesta tiedotetaan nyt käyttäjää yksinkertaisella notifikaatiolla
 
 ![](../images/8/15.png)
 
@@ -617,7 +617,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 ### Puhelinnumeron päivitys
 
-Tehdään sovellukseen mahdollisuus vaihtaa henkilöiden puheninnumeroita. Ratkaisu on lähes samanlainen kuin uuden henkilön lisäykseen käytetty.
+Tehdään sovellukseen mahdollisuus vaihtaa henkilöiden puhelinnumeroita. Ratkaisu on lähes samanlainen kuin uuden henkilön lisäykseen käytetty.
 
 Mutaatio edellyttää jälleen muuttujien käyttöä
 
@@ -637,7 +637,7 @@ mutation editNumber($name: String!, $phone: String!) {
 `
 ```
 
-Tehdään lisäys <i>App</i>-komponentiin:
+Tehdään lisäys <i>App</i>-komponenttiin:
 
 ```js
 
@@ -672,7 +672,7 @@ const App = () => {
 }
 ```
 
-Muutoksen suorittava komponentti <i>PhoneForm</i> on suoriaviivainen, se kysyy lomakkeen avulla henkilön nimeä ja uutta puhelinnumeroa, ja kutsuu mutaation tekevää funktiota _editNumber_:
+Muutoksen suorittava komponentti <i>PhoneForm</i> on suoraviivainen, se kysyy lomakkeen avulla henkilön nimeä ja uutta puhelinnumeroa, ja kutsuu mutaation tekevää funktiota _editNumber_:
 
 ```js
 const PersonForm = (props) => {
@@ -716,9 +716,9 @@ Ulkoasu on karu mutta toimiva:
 
 ![](../images/8/22a.png)
 
-Kun numero muutetaan, päivittyy se hieman yllättäen automaattisesti komponentin <i>Persons</i> renderöimään nimien ja numeroiden listaan. Tämä johtuu kahdesta seikasta. Ensinnäkin koska henkilöillä on identifioiva, tyyppiä <i>ID</i> oleva kenttä, päivittyy henkilö välimustissa uusilla tiedoilla päivitysoperaation yhteydessä. Toinen syy näkymän päivittymiselle on se, että komponentin <i>Query</i> avulla tehdyn kyselyn palauttama data huomaa välimuistiin tulleet muutokset ja päivittää itsensä automaattisesti. Tämä koskee ainoastaan kyselyn alunperin palauttamia olioita, ei välimuistiin lisättäviä kokonaan uusia olioita, jotka uudelleen tehtävä kysely palauttaisi.
+Kun numero muutetaan, päivittyy se hieman yllättäen automaattisesti komponentin <i>Persons</i> renderöimään nimien ja numeroiden listaan. Tämä johtuu kahdesta seikasta. Ensinnäkin koska henkilöillä on identifioiva, tyyppiä <i>ID</i> oleva kenttä, päivittyy henkilö välimuistissa uusilla tiedoilla päivitysoperaation yhteydessä. Toinen syy näkymän päivittymiselle on se, että komponentin <i>Query</i> avulla tehdyn kyselyn palauttama data huomaa välimuistiin tulleet muutokset ja päivittää itsensä automaattisesti. Tämä koskee ainoastaan kyselyn alunperin palauttamia olioita, ei välimuistiin lisättäviä kokonaan uusia olioita, jotka uudelleen tehtävä kysely palauttaisi.
 
-Jos yritämme vaihtaa olemattomaan nimeen liittyvän puhelinnumeron ei mitään näytä tapahtuvan. Syynä tälle on se, että jos nimeä vastaavaa henkilöä ei löydy, vastataan kyselyyn <i>null</i>:
+Jos yritämme vaihtaa olemattomaan nimeen liittyvän puhelinnumeron, ei mitään näytä tapahtuvan. Syynä tälle on se, että jos nimeä vastaavaa henkilöä ei löydy, vastataan kyselyyn <i>null</i>:
 
 ![](../images/8/23.png)
 
@@ -726,7 +726,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 ### Apollo Client ja sovelluksen tila
 
-Esimerkissämme sovelluksen tilan käsittely on siirtynyt suurimmaksi osaksi Apollo Clientin vastuulle. Tämä onkin melko tyypillinen ratkaisu GraphQL-sovelluksissa. Esimerkkimme käyttää Reactin komponenttien tilaa ainoastaan lomakkeen tilan hallintaan sekä virhetilanteesta kertovan notifikaation näyttämiseen. GraphQL:ää käyttäessä voikin olla, että ei ole enää kovin perusteltuja syitä siirtää sovelluksen tilaa ollenkaan Reduxiin. 
+Esimerkissämme sovelluksen tilan käsittely on siirtynyt suurimmaksi osaksi Apollo Clientin vastuulle. Tämä onkin melko tyypillinen ratkaisu GraphQL-sovelluksissa. Esimerkkimme käyttää Reactin komponenttien tilaa ainoastaan lomakkeen tilan hallintaan sekä virhetilanteesta kertovan notifikaation näyttämiseen. GraphQL:ää käytettäessä voikin olla, että ei ole enää kovin perusteltuja syitä siirtää sovelluksen tilaa ollenkaan Reduxiin. 
 
 Apollo mahdollistaa tarvittaessa myös sovelluksen paikallisen tilan tallettamisen [Apollon välimuistiin](https://www.apollographql.com/docs/react/essentials/local-state.html).
 
@@ -734,7 +734,7 @@ Apollo mahdollistaa tarvittaessa myös sovelluksen paikallisen tilan tallettamis
 
 GraphQL:n <i>Query</i>, <i>Mutation</i> ja <i>ApolloConsumer</i> komponentit noudattavat periaatetta, joka kulkee nimellä [render props](https://reactjs.org/docs/render-props.html). Periaatetta noudattava komponentti saa propsina tai tagiensa välissä lapsina (joka on teknisesti ottaen myös props) <i>funktion</i>, joka määrittelee miten komponentin renderöinti tapahtuu. Render props -periaatten avulla on mahdollista siirtää renderöinnistä huolehtivalle komponentille joko dataa tai funktioviitteitä.
 
-Render props -periaate on ollut viime aikoina melko suosittu, mm. osassa 7 käsittelemämme [react router](/osa7/react_router) käyttää sitä. React routerin komponentin <i>Route</i> avulla määritellään mitä sovellus renderöi selaimen ollessa tietyssä urlissa. Seuraavassa määritellään, että jos selaimen url on <i>/notes</i> renderöidään komponentti <i>Notes</i>, jos taas selaimen url on esim. <i>/notes/10</i> renderöidään komponentti <i>Note</i> joka saa propsina muistiinpano-olion, jonka id on 10
+Render props -periaate on ollut viime aikoina melko suosittu, mm. osassa 7 käsittelemämme [react router](/osa7/react_router) käyttää sitä. React routerin komponentin <i>Route</i> avulla määritellään mitä sovellus renderöi selaimen ollessa tietyssä urlissa. Seuraavassa määritellään, että jos selaimen url on <i>/notes</i>, renderöidään komponentti <i>Notes</i>, jos taas selaimen url on esim. <i>/notes/10</i>, renderöidään komponentti <i>Note</i>, joka saa propsina muistiinpano-olion, jonka id on 10
 
 ```js
 <Router>
@@ -752,7 +752,7 @@ Render props -periaate on ollut viime aikoina melko suosittu, mm. osassa 7 käsi
 
 Urleja vastaavat komponentit on määritelty render propseina. Render props -funktion avulla renderöitävälle komponentille on mahdollista välittää tietoa, esim. yksittäisen muistiinpanon sivu saa propsina urliaan vastaavan muistiinpanon.
 
-Itse en ole suuri render propsien fani. React routerin yhteydessä ne vielä menettelevät mutta erityisesti GraphQL:n yhteydessä niiden käyttö tuntuu erittäin ikävältä. 
+Itse en ole suuri render propsien fani. React routerin yhteydessä ne vielä menettelevät, mutta erityisesti GraphQL:n yhteydessä niiden käyttö tuntuu erittäin ikävältä. 
 
 Joudumme esimerkissämme käärimään komponentin <i>Persons</i> ikävästi kahden render props -komponentin sisälle:
 
@@ -814,7 +814,7 @@ const Persons = ({ result }) => { // highlight-line
 }
 ```
 
-Komponentti <i>App</i> ykseinkertaistuu, render props -komponentti <i>ApolloConsumer</i> voidaan poistaa:
+Komponentti <i>App</i> yksinkertaistuu, render props -komponentti <i>ApolloConsumer</i> voidaan poistaa:
 
 ```js
 const App = () => {
@@ -837,7 +837,7 @@ const App = () => {
 }
 ```
 
-Hankkiudutaan seruaavaksi eroon komponentista <i>Query</i> hookin _useQuery_ avulla. Komponentti <i>App</i> yksinkertaistuu edelleen:
+Hankkiudutaan seuraavaksi eroon komponentista <i>Query</i> hookin _useQuery_ avulla. Komponentti <i>App</i> yksinkertaistuu edelleen:
 
 ```js
 import { useQuery } from 'react-apollo-hooks' // highlight-line
@@ -953,9 +953,9 @@ Sovelluksen kirjastoa react-apollo-hooks käyttävä koodi on kokonaisuudessaan 
 
 ### Tehtäviä
 
-Tehtävissä toteutetaan GraphQL-kirjastolle fronend.
+Tehtävissä toteutetaan GraphQL-kirjastolle frontend.
 
-Ota sovelluksesi lähtökohtaksi [tämä projekti](https://github.com/fullstack-hy2019/library-frontend).
+Ota sovelluksesi lähtökohdaksi [tämä projekti](https://github.com/fullstack-hy2019/library-frontend).
 
 Voit tehdä sovelluksesi joko käyttäen Apollo Clientin render prop -komponentteja <i>Query</i> ja <i>Mutation</i> tai käyttää kirjastoa [react-apollo-hooks](https://github.com/trojanowski/react-apollo-hooks).
 

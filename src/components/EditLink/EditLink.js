@@ -10,7 +10,7 @@ const EditLink = ({ part, letter }) => (
     <a
       className="edit-link"
       target="__BLANK"
-      href={`https://github.com/fullstack-hy2019/fullstack-hy2019.github.io/edit/source/src/content/osa${part}/osa${part}${letter}.md`}
+      href={`https://github.com/fullstackopen-2019/fullstackopen-2019.github.io/edit/source/src/content/osa${part}/osa${part}${letter}.md`}
     >
       Ehdota muutosta materiaalin sisältöön
     </a>

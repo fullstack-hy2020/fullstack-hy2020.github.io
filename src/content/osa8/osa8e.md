@@ -71,7 +71,7 @@ query {
 }
 ```
 
-Fragmentteja <i><strong>ei määritellä</strong></i> GraphQL:n skeemassa vaan kyselty tekevän vlientin puolella. Fragmenttien tulee olla määriteltynä siinä vaiheessa kun client käyttää kyselyssään niitä. 
+Fragmentteja <i><strong>ei määritellä</strong></i> GraphQL:n skeemassa, vaan kyselyn tekevän clientin puolella. Fragmenttien tulee olla määriteltynä siinä vaiheessa kun client käyttää kyselyssään niitä. 
 
 Voisimme periaatteessa määritellä fragmentin jokaisen kyselyn yhteydessä seuraavasti
 
@@ -124,9 +124,9 @@ ${PERSON_DETAILS}
 
 ### Subscriptiot eli tilaukset
 
-GraphQL tarjoaa query- ja mutation-tyyppien lisäksi kolmannenkin operaatiotyypin [subscriptioin](https://www.apollographql.com/docs/react/advanced/subscriptions.html) jonka avulla clientit voivat <i>tilata</i> palvelimelta tiedotuksia palvelimelle tapahtuneista muutoksista.
+GraphQL tarjoaa query- ja mutation-tyyppien lisäksi kolmannenkin operaatiotyypin [subscriptioin](https://www.apollographql.com/docs/react/advanced/subscriptions.html), jonka avulla clientit voivat <i>tilata</i> palvelimelta tiedotuksia palvelimelle tapahtuneista muutoksista.
 
-Subscriptionit poikkeavatkin radikaalisti kaikesta mitä kurssilla on tähän mennessä nähty. Toistaiseksi kaikki interaktio on koostunut selaimessa olevan React-sovelluksen palvelimelle tekemistä HTTP-pyynnöistä. Myös GraphQL:n queryt ja mutaatiot on hoidettu näin. Subscriptionien myötä tilanne käänyy päinvastaiseksi. Sen jälkeen kun selaimessa oleva sovellus on tehnyt tilauksen muutostiedoista, alkaa selain kuunnella palvelinta. Muutosten tullessa palvelin lähettää muutostiedon <i>kaikille sitä kuunteleville</i> selaimille.
+Subscriptionit poikkeavatkin radikaalisti kaikesta, mitä kurssilla on tähän mennessä nähty. Toistaiseksi kaikki interaktio on koostunut selaimessa olevan React-sovelluksen palvelimelle tekemistä HTTP-pyynnöistä. Myös GraphQL:n queryt ja mutaatiot on hoidettu näin. Subscriptionien myötä tilanne käänyy päinvastaiseksi. Sen jälkeen kun selaimessa oleva sovellus on tehnyt tilauksen muutostiedoista, alkaa selain kuunnella palvelinta. Muutosten tullessa palvelin lähettää muutostiedon <i>kaikille sitä kuunteleville</i> selaimille.
 
 Teknisesti ottaen HTTP-protokolla ei taivu hyvin palvelimelta selaimeen päin tapahtuvaan kommunikaatioon. Konepellin alla GraphQL käyttääkin [WebSocketeja](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) hoitamaan tilauksista aiheutuvan kommunikaation.
 
@@ -200,7 +200,7 @@ server.listen().then(({ url, subscriptionsUrl }) => { // highlight-line
 })
 ```
 
-Nyh näemme, että palvelin kuuntelee subscriptioita osoitteessa _ws://localhost:4000/graphql_
+Nyt näemme, että palvelin kuuntelee subscriptioita osoitteessa _ws://localhost:4000/graphql_
 
 ```js
 Server ready at http://localhost:4000/
@@ -219,7 +219,7 @@ Backendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-h
 
 ### Tilaukset clientissä
 
-Jotta saamme tilaukset käyttöön React-sovelluksessa, tarvitaan hieman enemmän muutoksia, erityisesti [konfiguraatioiden osalta](https://www.apollographql.com/docs/react/advanced/subscriptions.html#subscriptions-client). Tiedostossa <i>index.js</i> olevat konfiguraatiot on tunkattava seuraavaan muotoon:
+Jotta saamme tilaukset käyttöön React-sovelluksessa, tarvitaan hieman enemmän muutoksia, erityisesti [konfiguraatioiden osalta](https://www.apollographql.com/docs/react/advanced/subscriptions.html#subscriptions-client). Tiedostossa <i>index.js</i> olevat konfiguraatiot on muokattava seuraavaan muotoon:
 
 ```js
 import React from 'react'
@@ -321,7 +321,7 @@ const httpLink = createHttpLink({
 Tilaukset tehdään komponentin 
 [Subscription](https://www.apollographql.com/docs/react/advanced/subscriptions.html#subscription-component) avulla.
 
-Tehdään koodiin seuraavat muuokset:
+Tehdään koodiin seuraavat muutokset:
 
 ```js
 import { Subscription } from 'react-apollo' // highlight-line
@@ -360,7 +360,7 @@ Kun puhelinluetteloon nyt lisätään henkilöitä, tapahtuupa se mistä tahansa
 
 ![](../images/8/32.png)
 
-Kun luetteloon lisätään uusi henkilö, palvelin lähettää siitä tiedot clientille ja kommponentin _Subscription_ attribuuttissa _onSubscriptionData_ määriteltyä callback-funktiotakutsutaan antaen sille parametriksi palvelimelle lisätty henkilö. 
+Kun luetteloon lisätään uusi henkilö, palvelin lähettää siitä tiedot clientille ja komponentin _Subscription_ attribuuttissa _onSubscriptionData_ määriteltyä callback-funktiota kutsutaan antaen sille parametriksi palvelimelle lisätty henkilö. 
 
 Toinen tapa ottaa palvelimen lähettämää dataa vastaan olisi komponentin _Subscription_ render prop -funktio, joka on nyt ainoastaan 
 
@@ -474,7 +474,7 @@ Person: {
 },
 ```
 
-Resolverin parametrina _root_ on se henkilöolio jonka tuttavalista on selvityksen alla, eli etsimme olioista _User_ ne, joiden _friends_-listalle sisältyy _root._id_:
+Resolverin parametrina _root_ on se henkilöolio jonka tuttavalista on selvityksen alla, eli etsimme olioista _User_ ne, joiden _friends_-listalle sisältyy _root.\_id_:
 
 ```js
   Person: {
@@ -519,9 +519,9 @@ User.find
 
 Eli vaikka pääasiallisesti tehdään ainoastaan yksi kysely, haetaan kaikki henkilöt, aiheuttaa jokainen henkilö yhden kyselyn omassa resolverissaan.
 
-Kyseessä on ilmentymä kuuluisasta [n+1-ongelmasta](https://www.google.com/search?q=n%2B1+problem), joka ilmenee aika ajoin eri yhteyksissä yhteydessä, välillä salakavalastikin sovelluskehittäjän huomaamatta aluksi mitään.
+Kyseessä on ilmentymä kuuluisasta [n+1-ongelmasta](https://www.google.com/search?q=n%2B1+problem), joka ilmenee aika ajoin eri yhteyksissä, välillä salakavalastikin sovelluskehittäjän huomaamatta aluksi mitään.
 
-Sopiva ratkaisutapa n+1-ongelmaan on riippuu tilanteesta, usein se edellyttää jonkinlaisen liitoskyselyn tekemistä usean yksittäisen kyselyn sijaan.
+Sopiva ratkaisutapa n+1-ongelmaan riippuu tilanteesta, usein se edellyttää jonkinlaisen liitoskyselyn tekemistä usean yksittäisen kyselyn sijaan.
 
 Tilanteessamme helpoimman ratkaisun toisi se, että tallettaisimme _Person_-olioihin viitteet niistä käyttäjistä kenen ystävälistalla henkilö on:
 
@@ -558,7 +558,7 @@ const schema = new mongoose.Schema({
 })
 ```
 
-Tällöin voisimme tehdä "liitoskyselyn", eli hakiessamme _Person_-oliot populoida niiden _friendOf_-kentät:
+Tällöin voisimme tehdä "liitoskyselyn", eli hakiessamme _Person_-oliot, voimme populoida niiden _friendOf_-kentät:
 
 ```js
 Query: {
@@ -595,14 +595,14 @@ Jos kyselyä _allPersons_ muokataan tekemään liitoskysely sen varalta, että s
 > <i>Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered. We should forget about small efficiencies, say about 97% of the time: <strong>premature optimization is the root of all evil.</strong></i>
 
 Erään varteenotettavan ratkaisun monien muiden seikkojen lisäksi n+1-ongelmaan tarjoaa 
-Facebookin kehittämä [dataloader](https://github.com/facebook/dataloader)-kirjasto, dataloaderin käytöstä  Apollo serverin kanssa [täällä](https://www.robinwieruch.de/graphql-apollo-server-tutorial/#graphql-server-data-loader-caching-batching) ja [täällä](http://www.petecorey.com/blog/2017/08/14/batching-graphql-queries-with-dataloader/)
+Facebookin kehittämä [dataloader](https://github.com/facebook/dataloader)-kirjasto, dataloaderin käytöstä  Apollo serverin kanssa [täällä](https://www.robinwieruch.de/graphql-apollo-server-tutorial/#graphql-server-data-loader-caching-batching) ja [täällä](http://www.petecorey.com/blog/2017/08/14/batching-graphql-queries-with-dataloader/).
 
 ### Loppusanat
 
-Tässä osassa rakentamamme sovellus ei ole optimaalisella tavalla strukturoitu, skeeman, kyselyiden ja mutaatioiden määrittely olisi ainakin syytä siirtää muualle sovelluskoodin seasta. Esimerkkejä GraphQL-sovellusten parempaan strukturointiin löytyy internetistä, esim. serverii 
+Tässä osassa rakentamamme sovellus ei ole optimaalisella tavalla strukturoitu: skeeman, kyselyiden ja mutaatioiden määrittely olisi ainakin syytä siirtää muualle sovelluskoodin seasta. Esimerkkejä GraphQL-sovellusten parempaan strukturointiin löytyy internetistä, esim. serveriin
 [täältä](https://blog.apollographql.com/modularizing-your-graphql-schema-code-d7f71d5ed5f2) ja clientiin [täältä](https://medium.com/@peterpme/thoughts-on-structuring-your-apollo-queries-mutations-939ba4746cd8).
 
-GraphQL on jo melko iäkäs teknologia, se on ollut Facebookin sisäisessä käytössä jo vuodesta 2012 lähtien, teknologian voi siis todeta olevan "battle tested". Facebook julkaisi GraphQL:n vuonna 2015 ja se on pikkuhiljaa saanut enenevissä määrin huomiota ja nousee ehkä lähivuosina uhmaamaan REST:in valta-asemaa. REST:in [kuolemaakin](https://www.stridenyc.com/podcasts/52-is-2018-the-year-graphql-kills-rest) on jo ennusteltu. Vaikka se ei tulekaan ihan heti tapahtumaan, on GraphQL ehdottomasto [tutustumisen arvoinen](https://blog.graphqleditor.com/javascript-predictions-for-2019-by-npm/).
+GraphQL on jo melko iäkäs teknologia, se on ollut Facebookin sisäisessä käytössä jo vuodesta 2012 lähtien, teknologian voi siis todeta olevan "battle tested". Facebook julkaisi GraphQL:n vuonna 2015 ja se on pikkuhiljaa saanut enenevissä määrin huomiota ja nousee ehkä lähivuosina uhmaamaan REST:in valta-asemaa. REST:in [kuolemaakin](https://www.stridenyc.com/podcasts/52-is-2018-the-year-graphql-kills-rest) on jo ennusteltu. Vaikka se ei tulekaan ihan heti tapahtumaan, on GraphQL ehdottomasti [tutustumisen arvoinen](https://blog.graphqleditor.com/javascript-predictions-for-2019-by-npm/).
 
 </div>
 
@@ -610,19 +610,19 @@ GraphQL on jo melko iäkäs teknologia, se on ollut Facebookin sisäisessä käy
 
 ### Tehtäviä
 
-#### 8.22: Subscriptionit palvelin
+#### 8.23: Subscriptionit palvelin
 
-Tee palvelimelle toteutus subscriptiolle _bookAdded_, joka palauttaa tilaajilleen lisätyn kirjojen tiedot.
+Tee palvelimelle toteutus subscriptiolle _bookAdded_, joka palauttaa tilaajilleen lisättyjen kirjojen tiedot.
 
-#### 8.23: Subscriptionit client, osa 1
+#### 8.24: Subscriptionit client, osa 1
 
 Ota clientillä käyttöön subscriptiot ja tilaa _bookAdded_. Uusien kirjojen tullessa anna ilmoitus käyttäjälle. Mikä tahansa menetelmä käy, voit käyttää esim. funktiota [window.alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert).
 
-#### 8.24: Subscriptionit client, osa 2
+#### 8.25: Subscriptionit client, osa 2
 
-Pidä sovelluksen käyttöliittymä ajantasaisena kun palvelin tiedottaa uusista kirjoista.
+Pidä sovelluksen käyttöliittymä ajantasaisena, kun palvelin tiedottaa uusista kirjoista.
 
-#### 8.23: n+1
+#### 8.26: n+1
 
 Ratkaise haluamallasi menetelmällä seuraavaa kyselyä vaivaava n+1-ongelma:
 

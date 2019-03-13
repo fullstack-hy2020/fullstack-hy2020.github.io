@@ -642,7 +642,7 @@ Reducerin toteutuksessa kannattaa ottaa mallia ylläolevasta [redux-muistiinpano
 
 #### 6.2: unicafe revisited, step2
 
-Toteuta sitten sovelluksen koko sen varsinainen toiminnallisuus.
+Toteuta sitten sovelluksen koko sen varsinainen toiminnallisuus. 
 
 </div>
 

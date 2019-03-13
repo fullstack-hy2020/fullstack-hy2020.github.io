@@ -10,7 +10,7 @@ Tälläkin kurssilla moneen kertaan käytetty REST on ollut pitkään vallitseva
 
 RESTin rinnalle selaimessa ja mobiililaitteessa toimivan logiikan ja palvelimien väliseen kommunikointiin on viime vuosina noussut alunperin Facebookin kehittämä [GraphQL](http://graphql.org/).
 
-GraphQL on filosofialtaan todella erilainen RESTiin verrattuna. REST on <i>resurssipohjainen</i>, jokaisella resurssilla, esim. <i>käyttäjällä</i> on oma sen identifioiva osoite, esim. <i>/users/10</i>, ja kaikki resursseille tehtävät operaatiot toteutetaan tekemällä URL:ille kohdistuvia pyyntöjä, joiden toiminta määrittyy käytetyn HTTP-metodin avulla.
+GraphQL on filosofialtaan todella erilainen RESTiin verrattuna. REST on <i>resurssipohjainen</i>. Jokaisella resurssilla, esim. <i>käyttäjällä</i> on oma sen identifioiva osoite, esim. <i>/users/10</i> ja kaikki resursseille tehtävät operaatiot toteutetaan tekemällä URL:ille kohdistuvia pyyntöjä, joiden toiminta määrittyy käytetyn HTTP-metodin avulla.
 
 RESTin resurssiperustaisuus toimii hyvin useissa tapauksissa, joissain tapauksissa se voi kuitenkin olla hieman kankea.
 
@@ -22,7 +22,7 @@ Jos kyseessä olisi usein käytetty toiminnallisuus, voitaisiin sitä varten tot
 
 GraphQL:n avulla toteutettava palvelin sopii tämänkaltaisiin tilanteisiin hyvin.
 
-GraphQL:ssä periaatteena, on että selaimen koodi muodostaa <i>kyselyn</i>, joka kuvailee halutun datan ja lähettää sen API:lle HTTP POST -pyynnöllä. Toisin kuin REST:issä, GraphQL:ssä kaikki kyselyt kohdistetaan samaan osoitteeseen ja ovat POST-tyyppisiä.
+GraphQL:ssä periaatteena on, että selaimen koodi muodostaa <i>kyselyn</i>, joka kuvailee halutun datan ja lähettää sen API:lle HTTP POST -pyynnöllä. Toisin kuin REST:issä, GraphQL:ssä kaikki kyselyt kohdistetaan samaan osoitteeseen ja ovat POST-tyyppisiä.
 
 Edellä kuvatun skenaarion data saataisiin haettua (suurinpiirtein) seuraavan kaltaisella kyselyllä:
 
@@ -72,7 +72,7 @@ Sovelluslogiikka säilyy yksinkertaisena ja selaimen koodi saa täsmälleen halu
 
 ### Skeema ja kyselyt
 
-Tutustutaan GraphQL:n peruskäsitteistöön toteuttamalla GraphQL-versio osien 2 ja 3 puhelinluettelosovelluksesta.
+Tutustutaan GraphQL:n peruskäsitteistöön toteuttamalla GraphQL-version osien 2 ja 3 puhelinluettelosovelluksesta.
 
 Jokaisen GraphQL-sovelluksen ytimessä on [skeema](https://graphql.org/learn/schema/), joka määrittelee minkä muotoista dataa sovelluksessa vaihdetaan clientin ja palvelimen välillä. Puhelinluettelon alustava skeema on seuraavassa:
 
@@ -92,15 +92,15 @@ type Query {
 }
 ```
 
-Skeema määrittelee kaksi [tyyppiä](https://graphql.org/learn/schema/#type-system). Tyypeistä ensimmäinen <i>Person</i> määrittelee, että henkilöillä on neljä kenttää. Kentistä neljä on tyyppiä <i>String</i>, joka on yksi GraphQL:n määrittelemistä [valmiista tyypeistä](https://graphql.org/learn/schema/#scalar-types). String-arvoisista kentistä muilla paitsi puhelinnumerolla (<i>phone</i>) on oltava arvo, tämä on merkitty skeemaan huutomerkillä. Kentän <i>id</i> tyyppi on <i>ID</i>. Arvoltaan <i>ID</i>-tyyppiset kentät ovat merkkijonoja, mutta GraphQL takaa, että ne ovat uniikkeja.
+Skeema määrittelee kaksi [tyyppiä](https://graphql.org/learn/schema/#type-system). Tyypeistä ensimmäinen <i>Person</i> määrittelee, että henkilöillä on viisi kenttää. Kentistä neljä on tyyppiä <i>String</i>, joka on yksi GraphQL:n määrittelemistä [valmiista tyypeistä](https://graphql.org/learn/schema/#scalar-types). String-arvoisista kentistä muilla paitsi puhelinnumerolla (<i>phone</i>) on oltava arvo, tämä on merkitty skeemaan huutomerkillä. Kentän <i>id</i> tyyppi on <i>ID</i>. Arvoltaan <i>ID</i>-tyyppiset kentät ovat merkkijonoja, mutta GraphQL takaa, että ne ovat uniikkeja.
 
-Toinen skeeman määrittelemistä tyypeistä on [Query](https://graphql.org/learn/schema/#the-query-and-mutation-types). Käytännössä jokaisessa GraphQL-skeemassa määritellään tyyppi Query, joka kertoo mitä kyselyjä API:n voidaan tehdä. 
+Toinen skeeman määrittelemistä tyypeistä on [Query](https://graphql.org/learn/schema/#the-query-and-mutation-types). Käytännössä jokaisessa GraphQL-skeemassa määritellään tyyppi Query, joka kertoo mitä kyselyjä API:iin voidaan tehdä. 
 
-Puhelinluettelo määrittelee kolme erilaista kyselyä ja _personCount_ palauttaa kokonaisluvun. _allPersons_ palauttaa listan <i>Person</i> tyyppisiä olioita. <i>findPerson</i> saa merkkijonomuotoisen parametrin ja palauttaa <i>Person</i>-olion. 
+Puhelinluettelo määrittelee kolme erilaista kyselyä ja _personCount_ palauttaa kokonaisluvun. _allPersons_ palauttaa listan <i>Person</i>-tyyppisiä olioita. <i>findPerson</i> saa merkkijonomuotoisen parametrin ja palauttaa <i>Person</i>-olion. 
 
 Queryjen paluuarvon ja parametrin määrittelyssä on jälleen käytetty välillä huutomerkkiä merkkaamaan <i>pakollisuutta</i>, eli _personCount_ palauttaa varmasti kokonaisluvun. Kyselylle _findPerson_ on pakko antaa parametriksi merkkijono. Kysely palauttaa <i>Person</i>-olion tai arvon <i>null</i>. _allPersons_ palauttaa listan <i>Person</i>-olioita, listalla ei ole <i>null</i>-arvoja. 
 
-Skeema siis määrittelee mitä kyselyjä client pystyy palvelimelta tekemään, minkälaisia parametreja kyselyillä voi olla sen minkä muotoista kyselyjen palauttama data on.
+Skeema siis määrittelee mitä kyselyjä client pystyy palvelimelta tekemään, minkälaisia parametreja kyselyillä voi olla sekä sen, minkä muotoista kyselyjen palauttama data on.
 
 Kyselyistä yksinkertaisin _personCount_ näyttää seuraavalta
 
@@ -110,7 +110,7 @@ query {
 }
 ```
 
-Olettaen että sovellukseen olisi talletettu kolmen henkilön tiedot vastaus kyselyyn näyttäisi seuraavalta:
+Olettaen että sovellukseen olisi talletettu kolmen henkilön tiedot, vastaus kyselyyn näyttäisi seuraavalta:
 
 ```js
 {
@@ -219,13 +219,13 @@ vastaus on <i>null</i>
 
 Kuten huomaamme, GraphQL kyselyn ja siihen vastauksena tulevan JSON:in muodoilla on vahva yhteys, voidaan ajatella että kysely kuvailee sen minkälaista dataa vastauksena halutaan. Ero REST:issä tehtäviin pyyntöihin on suuri, REST:iä käytettäessä pyynnon url ja sen tyyppi (GET, POST, PUT, DELETE) ei kerro mitään palautettavan datan muodosta. 
 
-GraphQL:n skeema kuvaa ainoastaan palvelimen ja sitä käyttävien clientien välillä liikkuvan tiedon muodon. Tieto voi olla organisoituna ja talletettuna palvelimen ihan missä muodossa tahansa.
+GraphQL:n skeema kuvaa ainoastaan palvelimen ja sitä käyttävien clientien välillä liikkuvan tiedon muodon. Tieto voi olla organisoituna ja talletettuna palvelimeen ihan missä muodossa tahansa.
 
 Nimestään huolimatta GraphQL:llä ei itseasiassa ole mitään tekemistä tietokantojen kanssa, se ei ota mitään kantaa siihen miten data on tallennettu. GraphQL-periaattella toimivan API:n käyttämä data voi siis olla talletettu relaatiotietokantaan, dokumenttitietokantaan tai muille palvelimille, joita GraphQL-palvelin käyttää vaikkapa REST:in välityksellä. 
 
 ### Apollo server
 
-Toteuteaan nyt GraphQL-palvelin tämän hetken johtavaa kirjastoa [Apollo serveriä](https://www.apollographql.com/docs/apollo-server/) käyttäen. 
+Toteuteaan nyt GraphQL-palvelin tämän hetken johtavaa kirjastoa [Apollo -serveriä](https://www.apollographql.com/docs/apollo-server/) käyttäen. 
 
 Luodaan uusi npm-projekti komennolla _npm init_ ja asennetaan tarvittavat riippuvuuet
 
@@ -322,7 +322,7 @@ const resolvers = {
 }
 ```
 
-kuten huomataan vastaavat resolverit rakenteeltaan skeemassa määriteltyjä kyseilyitä:
+kuten huomataan, vastaavat resolverit rakenteeltaan skeemassa määriteltyjä kyseilyitä:
 
 ```js
 type Query {
@@ -368,7 +368,7 @@ resolveri on funktio, joka palauttaa <i>kaikki</i> taulukon _persons_ oliot
 
 ### GraphQL-playground
 
-Kun Apollo serveriä suoritetaan sovelluskehitysmoodissa, käynnistää se osoitteeseen [http://localhost:4000/graphql](http://localhost:4000/graphql) sovelluskehittäjälle eritäin hyödyllisen [GraphQL-playground](https://www.apollographql.com/docs/apollo-server/features/graphql-playground.html) näkymän, joka avulla on mahdollista tehdä kyselyjä palvelimelle.
+Kun Apollo -serveriä suoritetaan sovelluskehitysmoodissa, käynnistää se osoitteeseen [http://localhost:4000/graphql](http://localhost:4000/graphql) sovelluskehittäjälle erittäin hyödyllisen [GraphQL-playground](https://www.apollographql.com/docs/apollo-server/features/graphql-playground.html) näkymän, joka avulla on mahdollista tehdä kyselyjä palvelimelle.
 
 Kokeillaan 
 
@@ -378,7 +378,7 @@ Playgroundin kanssa pitää olla välillä tarkkana. Jos kysely on syntaktisesti
 
 ![](../images/8/2.png)
 
-Edellisen kyselyn tulos näkyy edelleen playgroundin oikeassa osassa kyselyn virheellisyydestä huomimatta. 
+Edellisen kyselyn tulos näkyy edelleen playgroundin oikeassa osassa kyselyn virheellisyydestä huolimatta. 
 
 Osoittamalla oikeaa kohtaa virheelliseltä riviltä saa virheilmoituksen näkyville
 
@@ -459,7 +459,7 @@ Oletusarvoinen resolveri siis palauttaa olion vastaavan kentän arvon. Itse olio
 
 Jos oletusarvoisen resolverin toiminnallisuus riittää, ei omaa resolveria tarvitse määritellä. On myös mahdollista määritellä ainoastaan joillekin tyypin yksittäiselle kentille oma resolverinsa ja antaa oletusarvoisen resolverin hoitaa muut kentät.
 
-Voisimme esim, määritellä että kaikkien henkilöiden osoitteeksi tulisi <i>Manhattan New York</i> kovakoodaamalla seuraavat tyypin <i>Person</i> kenttien street ja city resolvereiksi:
+Voisimme esimerkiksi määritellä, että kaikkien henkilöiden osoitteeksi tulisi <i>Manhattan New York</i> kovakoodaamalla seuraavat tyypin <i>Person</i> kenttien street ja city resolvereiksi:
 
 ```js
 Person: {
@@ -494,7 +494,7 @@ type Query {
 }
 ```
 
-eli henkilöllä on nyt kenttä jonka tyyppi on <i>Address</i> joka koostuu kadusta ja kaupungista. 
+eli henkilöllä on nyt kenttä, jonka tyyppi on <i>Address</i>, joka koostuu kadusta ja kaupungista. 
 
 Osoitetta tarvitsevat kyselyt muuttuvat muotoon
 
@@ -541,9 +541,9 @@ let persons = [
 ]
 ```
 
-Nyt siis palvelimen tallettamat henkilö-oliot eivät ole muodoltaan täysin samanlaisia kuin GraphQL-skeeman määrittelemät tyypin <i>Person</i> oliot. 
+Nyt siis palvelimen tallettamat henkilö-oliot eivät ole muodoltaan täysin samanlaisia kuin GraphQL-skeeman määrittelemät tyypin <i>Person</i> -oliot. 
 
-Toisin kuin tyypille <i>Person</i> ei tyypille <i>Address</i> ole määritelty <i>id</i>-kenttää sillä osoitteita ei ole talletettu palvelimella omaan tietorakenteeseen.
+Toisin kuin tyypille <i>Person</i> ei tyypille <i>Address</i> ole määritelty <i>id</i>-kenttää, sillä osoitteita ei ole talletettu palvelimella omaan tietorakenteeseen.
 
 Koska taulukkoon talletetuilla olioilla ei ole kenttää <i>address</i> oletusarvoinen resolveri ei enää riitä. Lisätään resolveri tyypin <i>Person</i> kentälle <i>address</i>:
 
@@ -568,7 +568,7 @@ const resolvers = {
 }
 ```
 
-Eli aina palautetaessa <i>Person</i>-oliota, palautetaan niiden kentät <i>name</i>, <i>phone</i> sekä <i>id</i> käyttäen oletusarvoista resolveria, kenttä <i>address</i> muodostetaan itse määritellyn resolverin avulla. Resolvelrifunktion parametrina _root_ on käsittelyssä oleva henkilöolio, eli osoitteen katu ja kaupunki saadaan sen kentistä.
+Eli aina palautettaessa <i>Person</i>-oliota, palautetaan niiden kentät <i>name</i>, <i>phone</i> sekä <i>id</i> käyttäen oletusarvoista resolveria, kenttä <i>address</i> muodostetaan itse määritellyn resolverin avulla. Resolvelrifunktion parametrina _root_ on käsittelyssä oleva henkilö-olio, eli osoitteen katu ja kaupunki saadaan sen kentistä.
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-backend/tree/part8-1), branchissa <i>part8-1</i>.
 
@@ -906,7 +906,7 @@ Jos kyselyitä on useita, pyytää Playground valitsemaan mikä niistä suoritet
 
 Tehtävissä toteutetaan yksinkertaisen kirjaston GraphQL:ää tarjoava backend. Ota sovelluksesi lähtökohtaksi [tämä tiedosto](https://github.com/fullstack-hy2019/misc/blob/master/library-backend.js). Muista _npm init_ ja riippuvuuksien asentaminen!
 
-#### 8.1: kijojen ja kirjailijoiden määrä
+#### 8.1: kirjojen ja kirjailijoiden määrä
 
 Toteuta kyselyt _bookCount_ ja _authorCount_ jotka palauttavat kirjojen ja kirjailijoiden lukumäärän.
 
@@ -934,7 +934,7 @@ pitäisi alustavalla datalla tuottaa vastaus
 
 Toteuta kysely _allBooks_,  joka palauttavat kaikki kirjat.
 
-Seurava kyselyn siis pitäisi pystyä tekemään
+Seurava kysely siis pitäisi pystyä tekemään
 
 ```js
 query {
@@ -995,7 +995,7 @@ vastauksen tulisi näyttää seuraavalta
 
 #### 8.4: kirjailijan kirjat
 
-Laajenna kyselyä _allBooks_ että sille voi antaa optionaalisen parametrin <i>author</i>, joka rajoittaa kirjalistan niihin joiden author on parametrina annettu kirjailija.
+Laajenna kyselyä _allBooks_ siten, että sille voi antaa optionaalisen parametrin <i>author</i>, joka rajoittaa kirjalistan niihin, joiden author on parametrina annettu kirjailija.
 
 Esim. kyselyn
 
@@ -1133,15 +1133,14 @@ palauttaa
       {
         "name": "Reijo Mäki",
         "born": null,
-        "bookCount": 1,
-        "id": "14ffaf81-345b-11e9-92fb-61a5d24ee250"
+        "bookCount": 1
       }
     ]
   }
 }
 ```
 
-#### 8.7: Kirjailijan syntymävuoden päiyitys
+#### 8.7: Kirjailijan syntymävuoden päivitys
 
 Toteuta mutaatio _editAuthor_ jonka avulla on mahdollista asettaa kirjailijalle syntymävuosi. Mutaatiota käytetään seuraavasti
 

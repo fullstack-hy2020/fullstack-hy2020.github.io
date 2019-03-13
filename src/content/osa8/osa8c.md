@@ -49,7 +49,7 @@ const schema = new mongoose.Schema({
 module.exports = mongoose.model('Person', schema)
 ```
 
-Mukana on myös muutama validointi. Arvon olemassaolon takaava _required: true_ on sikäli turha, että GraphQL:n käyttö takaa että kentätä ovat olemassa. Validointi on kuitenkin hyvä pitää myös tietokannan puolella.
+Mukana on myös muutama validointi. Arvon olemassaolon takaava _required: true_ on sikäli turha, että GraphQL:n käyttö takaa sen, että kentät ovat olemassa. Validointi on kuitenkin hyvä pitää myös tietokannan puolella.
 
 Saamme sovelluksen jo suurilta osin toimimaan seuraavilla muutoksilla:
 
@@ -113,7 +113,7 @@ Muutokset ovat melko suoraviivaisia. Huomio kiinnittyy pariin seikkaan. Kuten mu
 Toinen huomionarvoinen seikka on se, että resolverifunktiot palauttavat nyt <i>promisen</i>, aiemmihan ne palauttivat aina normaaleja oliota. Kun resolveri palauttaa promisen Apollo server [osaa lähettää vastaukseksi](https://www.apollographql.com/docs/apollo-server/essentials/data.html#result) sen arvon mihin promise resolvoituu.
 
 
-Eli esim. seuraava resolverifunktio suoritetaan
+Eli esimerkiksi jos seuraava resolverifunktio suoritetaan,
 
 ```js
 allPersons: (root, args) => {
@@ -121,7 +121,7 @@ allPersons: (root, args) => {
 },
 ```
 
-odottaa Apollo server promisen valmistumista ja lähettää promisen vastauksen kyselyn tekijälle. Apollo toimii siis suunilleen seuraavasti
+odottaa Apollo server promisen valmistumista ja lähettää promisen vastauksen kyselyn tekijälle. Apollo toimii siis suunnilleen seuraavasti
 
 ```js
 Person.find({}).then( result => {
@@ -129,7 +129,7 @@ Person.find({}).then( result => {
 })
 ```
 
-Täydennetään vielä resolveri _allPersons_ ottamaan huomioon optionaalinen fillterinä toimiva parametri _phone_:
+Täydennetään vielä resolveri _allPersons_ ottamaan huomioon optionaalinen filtterinä toimiva parametri _phone_:
 
 ```js
 Query: {
@@ -144,13 +144,13 @@ Query: {
 },
 ```
 
-Eli jos kyselylle ei ole annettu parametria _phone_, palautetaan kaikki henkilöt. Jos parametrilla on arvo <i>YES</i> palautetaan kyselyn
+Eli jos kyselylle ei ole annettu parametria _phone_, palautetaan kaikki henkilöt. Jos parametrilla on arvo <i>YES</i>, palautetaan kyselyn
 
 ```js
 Person.find({ phone: { $exists: true }})
 ```
 
-palauttamet henkilöt, eli ne joiden kentällä _phone_ on jokin arvo. Jos parametrin arvo on <i>YES</i> palauttaa kysely ne henkilöt, joilla ei ole arvoa kentällä _phone_:
+palauttamat henkilöt, eli ne joiden kentällä _phone_ on jokin arvo. Jos parametrin arvo on <i>YES</i>, palauttaa kysely ne henkilöt, joilla ei ole arvoa kentällä _phone_:
 
 ```js
 Person.find({ phone: { $exists: false }})
@@ -158,7 +158,7 @@ Person.find({ phone: { $exists: false }})
 
 #### Validoinnit
 
-GraphQL:n lisäksi syötteet validoidaan nyt mongoose-skeemassa määriteltyjen validointeja käyttäen. Skeemassa olevien validointivirheiden varalta _save_-metodeille täytyy lisätä virheen käsittelevä _try/catch_-lohko. Heitetään catchiin jouduttaessa vastaukseksi sopiva poikkeus:
+GraphQL:n lisäksi syötteet validoidaan nyt mongoose-skeemassa määriteltyjä validointeja käyttäen. Skeemassa olevien validointivirheiden varalta _save_-metodeille täytyy lisätä virheen käsittelevä _try/catch_-lohko. Heitetään catchiin jouduttaessa vastaukseksi sopiva poikkeus:
 
 ```js
 Mutation: {
@@ -195,7 +195,7 @@ Backendin lopullinen koodi on kokonaisuudessaan [githubissa](https://github.com/
 
 ### Käyttäjä ja kirjaantuminen
 
-Lisätään järjestelmään käyttäjänhallinta. Oletetaan nyt yksinkertaisuuden takia, että kaikkien käyttäjien salasana on sama järjestelmään kovakoodattu merkkijono. [Osan 4](/osa4/kayttajien_hallinta) periaatteilla on toki suoraviivaista tallettaa käyttäjille yksilöllinen salasana mutta koska fokuksemme on GraphQL:ssä, jätämme salasanaan liittyvät rönsyt tälläkertaa pois.
+Lisätään järjestelmään käyttäjänhallinta. Oletetaan nyt yksinkertaisuuden takia, että kaikkien käyttäjien salasana on sama järjestelmään kovakoodattu merkkijono. [Osan 4](/osa4/kayttajien_hallinta) periaatteilla on toki suoraviivaista tallettaa käyttäjille yksilöllinen salasana, mutta koska fokuksemme on GraphQL:ssä, jätämme salasanaan liittyvät rönsyt tällä kertaa pois.
 
 Käyttäjän skeema seuraavassa
 
@@ -220,7 +220,7 @@ const schema = new mongoose.Schema({
 module.exports = mongoose.model('User', schema)
 ```
 
-Käyttäjään siis liittyy kentän _friens_ kautta joukko luettelossa olevia henkilöitä. Ideana on, että kun käyttäjä, esim. <i>mluukkai</i> lisää henkilön, esim. <i>Arto Hellas</i> luetteloon, liitetään henkilö käyttäjän _friends_-listaan. Näin kirjautuneilla henkilöillä on mahdollista saada sovellukseen oma personoitu näkymänsä.
+Käyttäjään siis liittyy kentän _friends_ kautta joukko luettelossa olevia henkilöitä. Ideana on se, että kun käyttäjä, esim. <i>mluukkai</i> lisää henkilön, vaikkapa <i>Arto Hellas</i> luetteloon, liitetään henkilö käyttäjän _friends_-listaan. Näin kirjautuneilla henkilöillä on mahdollista saada sovellukseen oma personoitu näkymänsä.
 
 Kirjautuminen ja käyttäjän tunnistautuminen hoidetaan samoin kuten teimme [osassa 4](/osa4/token_perustainen_kirjautuminen) RESTin yhteydessä, eli käyttämällä tokeneita.
 
@@ -324,9 +324,9 @@ const server = new ApolloServer({
 
 Contextin palauttama olio annetaan kaikille resolvereille <i>kolmantena parametrina</i>, onotext on siis oikea paikka tehdä asioita, jotka ovat useille resolvereille yhteistä, kuten pyyntöön liittyvän [käyttäjän tunnistaminen](https://blog.apollographql.com/authorization-in-graphql-452b1c402a9?_ga=2.45656161.474875091.1550613879-1581139173.1549828167).
 
-Määrittelemämme koodi siis asettaa kontektin kenttään _currentUser_ pyynnön tehnyttä käyttäjää vastaavan olion. Jos pyyntöön ei liity käyttäjää, on kentän arvo määrittelemätön.
+Määrittelemämme koodi siis asettaa kontekstin kenttään _currentUser_ pyynnön tehnyttä käyttäjää vastaavan olion. Jos pyyntöön ei liity käyttäjää, on kentän arvo määrittelemätön.
 
-Kyselyn _me_ resolveri on erittäin yksinkertainen, se ainoastaan palauttaa kirjaantuneen käyttäjän jonka se saa resolvelin kolmantena olevan parametrin _context_ kentästä _currentUser_. Kannattaa huomata, että jos käyttäjä ei ole kirjaantunut, ts. pyynnön headerina ei tule validia tokenia, vastaa kysely <i>null</i>:
+Kyselyn _me_ resolveri on erittäin yksinkertainen, se ainoastaan palauttaa kirjaantuneen käyttäjän, jonka se saa resolverin kolmantena olevan parametrin _context_ kentästä _currentUser_. Kannattaa huomata, että jos käyttäjä ei ole kirjaantunut, ts. pyynnön headerina ei tule validia tokenia, vastaa kysely <i>null</i>:
 
 ```js
 Query: {
@@ -339,9 +339,9 @@ Query: {
 
 ### Tuttavalista
 
-Viimeistellään sovelluksen backend siten, että henkilöiden luominen ja editointi edellyttää kirjautumista ja, että luodut henkilöt menevät automaattisesti kirjautuneen käyttäjän tuttavalistalle.
+Viimeistellään sovelluksen backend siten, että henkilöiden luominen ja editointi edellyttää kirjautumista, ja että luodut henkilöt menevät automaattisesti kirjautuneen käyttäjän tuttavalistalle.
 
-Tyhjennetään ensin kannasta siellä ennestään olevat kenenkään tuttaiin kuulumattomat käyttäjtä
+Tyhjennetään ensin kannasta siellä ennestään olevat kenenkään tuttaviin kuulumattomat käyttäjät
 
 Mutaatio _addPerson_ muuttuu seuraavasti
 
@@ -371,7 +371,7 @@ Mutation: {
 }
 ```
 
-Jos kirjautunutta käyttäjää ei löydy kontekstista heitetään poikkeus _AuthenticationError_. Henkilön talletus hoidetaan nyt _async/await_-syntaksilla, koska joudumme onnistuneet talletuksen yhteydessä tallettamaan uuden henkilön käyttäjän tuttavalistalle.
+Jos kirjautunutta käyttäjää ei löydy kontekstista, heitetään poikkeus _AuthenticationError_. Henkilön talletus hoidetaan nyt _async/await_-syntaksilla, koska joudumme onnistuneen talletuksen yhteydessä tallettamaan uuden henkilön käyttäjän tuttavalistalle.
 
 Lisätään sovellukseen vielä mahdollisuus liittää jokin henkilö omalle tuttavalistalle. Mutaatio seuraavassa
 
@@ -464,7 +464,7 @@ Saatat tässä tehtävässä hyötyä [tästä](https://docs.mongodb.com/manual/
 
 #### 8.15 Tietokanta, osa 3
 
-Täydennä sovellusta siten, että validointivirheet käsitellään järkevästi, eli niiden seurauksena heitetään poikkeus _UserInputError_ jolle asetetaan sopiva virheviesti.
+Täydennä sovellusta siten, että validointivirheet käsitellään järkevästi, eli niiden seurauksena heitetään poikkeus _UserInputError_ , jolle asetetaan sopiva virheviesti.
 
 #### 8.16 käyttäjä ja kirjautuminen
 
@@ -499,8 +499,8 @@ type Mutation {
 }
 ```
 
-Toteuta uusien queryn _me_ sekä mutaatioiden _createUser_ ja _login_ resolverit. Voit olettaa tämän luvun materiaalin tapaan, että kaikilla käyttäjillä on sama, kovakoodattu salasana.
+Toteuta uuden queryn _me_ sekä uusien mutaatioiden _createUser_ ja _login_ resolverit. Voit olettaa tämän luvun materiaalin tapaan, että kaikilla käyttäjillä on sama, kovakoodattu salasana.
 
-Tee mutaatiot _addBook_ ja _editAuthor_ mahdollisiksi ainoastaan jos pyynnön mukana lähetetään validi token. 
+Tee mutaatiot _addBook_ ja _editAuthor_ mahdollisiksi ainoastaan, jos pyynnön mukana lähetetään validi token. 
 
 </div>

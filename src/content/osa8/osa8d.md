@@ -6,11 +6,11 @@ letter: d
 
 <div class="content">
 
-Sovelluksen fronend toimii puhelinluettelon näyttämisen osalta päivitetyn palvelimen kanssa. Jotta luetteloon voitaisiin lisätä henkilöitä, tulee backendiin toteuttaa kirjaantuminen.
+Sovelluksen frontend toimii puhelinluettelon näyttämisen osalta päivitetyn palvelimen kanssa. Jotta luetteloon voitaisiin lisätä henkilöitä, tulee backendiin toteuttaa kirjaantuminen.
 
 ### Käyttän kirjautuminen
 
-Lisätään sovelluksen tilaan muuttuja _token_ joka tallettaa tokenin siinä vaiheessa kun käyttäjä on kirjaantunut. Jos _token_ ei ole määritelty, näytetään kirjautumisesta huoleviva komponentti <i>LoginForm</i>, joka saa parametriksi mutaation tekevän funktion _login_:
+Lisätään sovelluksen tilaan muuttuja _token_, joka tallettaa tokenin siinä vaiheessa kun käyttäjä on kirjaantunut. Jos _token_ ei ole määritelty, näytetään kirjautumisesta huolehtiva komponentti <i>LoginForm</i>, joka saa parametriksi mutaation tekevän funktion _login_:
 
 ```js
 const LOGIN = gql`
@@ -106,7 +106,7 @@ const LoginForm = (props) => {
 export default LoginForm
 ```
 
-Lisätään sovellukselle myös nappi, jonka avulla kirjautunut käyttäjä voi kirjautua ulos. Napin klikkauskäsittelijässä asetetaan tilaan _token_ null, poistetaan token local storagesta ja resetoidaan Apollo clientin välimuisti. Tämä on [tärkeää](https://www.apollographql.com/docs/react/recipes/authentication.html#login-logout), sillä joissain välimustiin on saatettu hakea dataa, johon vain kirjaantuneella käyttäjällä on oikeus päästä käsiksi:
+Lisätään sovellukselle myös nappi, jonka avulla kirjautunut käyttäjä voi kirjautua ulos. Napin klikkauskäsittelijässä asetetaan  _token_ tilaan null, poistetaan token local storagesta ja resetoidaan Apollo clientin välimuisti. Tämä on [tärkeää](https://www.apollographql.com/docs/react/recipes/authentication.html#login-logout), sillä joissain välimuistiin on saatettu hakea dataa, johon vain kirjaantuneella käyttäjällä on oikeus päästä käsiksi:
 
 
 ```js
@@ -130,7 +130,7 @@ Sovelluksen tämän vaiheen koodi [githubissa](https://github.com/fullstack-hy20
 
 ### Tokenin lisääminen headeriin
 
-Backendin muutosten jälkeen uusien henkilöiden lisäys puhelinluetteloon vaatii sen, että käyttäjän token lähetetään pyynnon mukana. Jotta saamme tokenin lähetettyä pyyntöjen mukana, joudumme hieman muuttamaan tapaa, jonka avulla määrittelemme _ApolloClient_-olion tiedostossa <i>index.js</i>
+Backendin muutosten jälkeen uusien henkilöiden lisäys puhelinluetteloon vaatii sen, että käyttäjän token lähetetään pyynnön mukana. Jotta saamme tokenin lähetettyä pyyntöjen mukana, joudumme hieman muuttamaan tapaa, jonka avulla määrittelemme _ApolloClient_-olion tiedostossa <i>index.js</i>
 
 ```js
 import React from 'react'
@@ -157,7 +157,7 @@ Määrittely käyttää apunaan [apollo-boost](https://github.com/apollographql/
 
 > <i>Apollo Boost is a zero-config way to start using Apollo Client. It includes some sensible defaults, such as our recommended InMemoryCache and HttpLink, which come configured for you with our recommended settings.</i>
 
-Eli apollo-boost tarjoaa helpon tavan konfiguroida _ApolloClient_ useisiin tilanteisiin rittävillä oletusasetuksilla. 
+Eli apollo-boost tarjoaa helpon tavan konfiguroida _ApolloClient_ useisiin tilanteisiin riittävillä oletusasetuksilla. 
 
 Vaikka apollo-boostilla olisi myös mahdollista konfiguroida pyyntöihin asetettavat headerit, luovutaan nyt apollo-boostin käytöstä ja tehdään konfiguraatio kokonaan itse.
 
@@ -197,15 +197,15 @@ npm install --save apollo-link apollo-link-context
 
 _client_ muodostetaan nyt kirjaston [apollo-link](https://www.apollographql.com/docs/link/index.html) tarjoaman konstruktorifunktion [ApolloClient](https://www.apollographql.com/docs/react/api/apollo-client.html#apollo-client). Parametreja on kaksi, _link_ ja _cache_. Näistä jälkimmäinen määrittelee, että sovelluksen käyttöön tulee keskusmuistissa toimiva välimuisti [InMemoryCache](https://www.apollographql.com/docs/react/advanced/caching.html#smooth-scroll-top). 
 
-Ensimmäinen parametri _link_ määrittelee miten client ottaa yhteyttä palvelimeen, missä pohjalla on [httpLink](https://www.apollographql.com/docs/link/links/http.htm), eli normaali HTTP:n yli tapahtuva yhteys, jota on höystetty siten että pyyntöjen mukaan [asetetaan headerille](https://www.apollographql.com/docs/react/recipes/authentication.html#Header) <i>authorization</i> arvoksi localStoragessa mahdollisesti oleva token.
+Ensimmäinen parametri _link_ määrittelee sen, miten client ottaa yhteyttä palvelimeen, jonka pohjalla on [httpLink](https://www.apollographql.com/docs/link/links/http.htm), eli normaali HTTP:n yli tapahtuva yhteys, jota on höystetty siten että pyyntöjen mukaan [asetetaan headerille](https://www.apollographql.com/docs/react/recipes/authentication.html#Header) <i>authorization</i> arvoksi localStoragessa mahdollisesti oleva token.
 
-Uusien henkilöiden lisäys ja numeroiden muuttaminen toimii taas. Sovellukseen jää kuitenkin yksi ongelma, jos yritämme lisätä puhelinnumerotonta henkilöä se ei onnistu
+Uusien henkilöiden lisäys ja numeroiden muuttaminen toimii taas. Sovellukseen jää kuitenkin yksi ongelma, jos yritämme lisätä puhelinnumerotonta henkilöä, se ei onnistu
 
 ![](../images/8/25.png)
 
-Validointi epäonnistuu sillä fronend lähettää kentän _phone_ arvona tyhjän merkkijonon. 
+Validointi epäonnistuu, sillä frontend lähettää kentän _phone_ arvona tyhjän merkkijonon. 
 
-Muutetaan uuden henkilön luovaa funktiota siten, että se asettaa kentälle _phone_  arvon _null_ jos käyttäjä ei ole syöttänyt kenttään mitään:
+Muutetaan uuden henkilön luovaa funktiota siten, että se asettaa kentälle _phone_  arvon _null_, jos käyttäjä ei ole syöttänyt kenttään mitään:
 
 ```js
 const PersonForm = (props) => {
@@ -232,7 +232,7 @@ Sovelluksen tämän vaiheen koodi [githubissa](https://github.com/fullstack-hy20
 ### Välimuistin päivitys revisited
 
 Uusien henkilöiden lisäyksen yhteydessä on siis 
-[päivitettävä](/osa8/react_ja_graph_ql#valimuistin-paivitys) Apollo clientin välimuisti. Päivitys tapahtuu määrittelemällä mutaation yhteydessä option _refetchQueries_ avulla että kysely <em>ALL\_PERSONS</em> on suoritettava uudelleen:
+[päivitettävä](/osa8/react_ja_graph_ql#valimuistin-paivitys) Apollo clientin välimuisti. Päivitys tapahtuu määrittelemällä mutaation yhteydessä option _refetchQueries_ avulla, että kysely <em>ALL\_PERSONS</em> on suoritettava uudelleen:
 
 
 ```js 
@@ -281,7 +281,7 @@ Koodi lukee funktion [readQuery](https://www.apollographql.com/docs/react/advanc
 
 On myös olemassa tilanteita, joissa ainoa järkevä tapa saada välimuisti pidettyä ajantasaisena on _update_-callbackillä tehtävä päivitys. 
 
-Tarvittaessa valimuisti on mahdollista kytkeä pois päältä joko koko sovelluksesta tai yksittäisiltä kyselyiltä määrittelemällä välimuistin käyttöä kontrolloivalle [fetchPolicy](https://www.apollographql.com/docs/react/api/react-apollo.html#query-props):lle arvo <em>no-cache</em>. 
+Tarvittaessa välimuisti on mahdollista kytkeä pois päältä joko koko sovelluksesta tai yksittäisiltä kyselyiltä määrittelemällä välimuistin käyttöä kontrolloivalle [fetchPolicy](https://www.apollographql.com/docs/react/api/react-apollo.html#query-props):lle arvo <em>no-cache</em>. 
 
 Voisimme määritellä, että yksittäisen henkilön osoitetietoja ei tallenneta välimuistiin:
 
@@ -322,7 +322,7 @@ Backendin muutosten jälkeen kirjojen lista ei enää toimi. Korjaa se.
 
 #### 8.18 Kirjautuminen
 
-Kirjojen lisäys ja kirjailijan syntymävuoden muutos eivät toimi sillä ne edellyttävät kirjautumista. 
+Kirjojen lisäys ja kirjailijan syntymävuoden muutos eivät toimi, sillä ne edellyttävät kirjautumista. 
 
 Toteuta sovellukseesi kirjautuminen ja korjaa mutaatiot.
 
@@ -336,7 +336,7 @@ Kirjatumislomake
 
 ![](../images/8/27.png)
 
-Kun käyttäjä on kirjautuneena muutetaan navigaatio näyttämään ne toiminnot jotka ovat vain kirjaantuneen käytettävissä
+Kun käyttäjä on kirjautuneena, muutetaan navigaatio näyttämään ne toiminnot, jotka ovat vain kirjaantuneen käytettävissä
 
 ![](../images/8/28.png)
 
@@ -346,24 +346,24 @@ Laajenna sovellustasi siten, että kirjojen näkymästä voidaan rajata näytett
 
 ![](../images/8/30.png)
 
-#### 8.19 genren kirjat
+#### 8.20 genren kirjat
 
 Tee sovellukseen näkymä, joka näyttää kirjaantuneelle käyttäjälle käyttäjän lempigenreen kuuluvat kirjat
 
 ![](../images/8/29.png)
 
-#### 8.20 genren kirjat GraphQL:llä
+#### 8.21 genren kirjat GraphQL:llä
 
 Tietyn genren kirjoihin rajoittamisen voi tehdä kokonaan React-sovelluksen puolella. Voit merkitä tämän tehtävän, jos rajaat näytettävät kirjat tahtävässä 8.5 palvelimelle toteutetun suoran GraphQ-kyselyn avulla. 
 
-Tämä tehtävä on haastava ja niin kurssin tässä vaiheessa jo kuuluukin olla. Muutama vihje
-- komponetin <i>Query</i> tai hookin <i>useQuery</i> käytön sijaan saattaa olla parempi tehdä kyselyitä suoraan _client_-oliolla, jonhon päästään käsiksi komponentin [ApolloConsumer](https://www.apollographql.com/docs/react/essentials/queries.html#manual-query) tai hookilla [useApolloClient](https://github.com/trojanowski/react-apollo-hooks#useapolloclient), katso lisää [täältä](http://localhost:8000/osa8/react_ja_graph_ql#nimetyt-kyselyt-ja-muuttujat)
-- GraphQL-kyselyjen tuloksia kannatta joskus tallentaan komponentin tilaan
+Tämä **tehtävä on haastava** ja niin kurssin tässä vaiheessa jo kuuluukin olla. Muutama vihje
+- komponetin <i>Query</i> tai hookin <i>useQuery</i> käytön sijaan saattaa olla parempi tehdä kyselyitä suoraan _client_-oliolla, jonhon päästään käsiksi komponentin [ApolloConsumer](https://www.apollographql.com/docs/react/essentials/queries.html#manual-query) tai hookilla [useApolloClient](https://github.com/trojanowski/react-apollo-hooks#useapolloclient), katso lisää [täältä](/osa8/react_ja_graph_ql#nimetyt-kyselyt-ja-muuttujat)
+- GraphQL-kyselyjen tuloksia kannattaa joskus tallentaan komponentin tilaan
 - huomaa, että voit tehdä GraphQL-kyselyjä <i>useEffect</i>-hookissa
 - <i>useEffect</i>-hookin [toisesta parametrista](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) voi olla tehtävässä apua, se tosin riippuu käyttämästäsi lähestymistavasta.
 
-#### 8.21 kirjasuositukset, välimuistin ajantasaisuus
+#### 8.22 kirjasuositukset, välimuistin ajantasaisuus
 
-Jos haet kirjasuositukset GraphQL:llä, varmista jollain tavalla, kirjojen näkymä säilyy ajantasaisena. Eli kun lisäät uuden kirjan, päivittyy se kirjalistalle **viimeistään** siinä vaiheessa kun painat jotain genrevalintanappia. Ilman uuden genrevalinnan tekemistä sivun ei näkymän ole pakko päivittyä. 
+Jos haet kirjasuositukset GraphQL:llä, varmista jollain tavalla se, että kirjojen näkymä säilyy ajantasaisena. Eli kun lisäät uuden kirjan, päivittyy se kirjalistalle **viimeistään** siinä vaiheessa kun painat jotain genrevalintanappia. Ilman uuden genrevalinnan tekemistä, ei näkymän ole pakko päivittyä. 
 
 </div>

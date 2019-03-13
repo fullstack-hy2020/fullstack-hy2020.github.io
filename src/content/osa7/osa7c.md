@@ -335,6 +335,18 @@ Sovellusta voi nyt kokeilla avaamalla tiedoston <i>build/index.html</i>  selaime
 
 ![](../images/7/22.png)
 
+On kuitenkin huomionarvoista, että jos sovelluksemme sisältää <i>async/await</i> -toiminnallisuutta, selaimeen ei piirry mitään. [Konsoliin saapuneen virheviestin googlaaminen](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) valaisee asiaa. Asian korjaamiseksi on asennettava vielä yksi puuttuva riippuvuus, [@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill).
+
+```
+npm install --save-dev @babel/polyfill
+```
+
+Muutetaan vielä tiedostoon <i>webpack.config.js</i> entry-kohdan määrittelyä seuraavasti:
+
+```js
+  entry: ['@babel/polyfill', './src/index.js']
+```
+
 Tässä on jo melkein kaikki mitä tarvitsemme React-sovelluskehitykseen.
 
 ### Transpilaus

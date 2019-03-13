@@ -12,21 +12,9 @@
     ]
   },
   {
-    "title": "Minulla ei ole opinto-oikeutta Helsingin Yliopistoon, voinko suorittaa kurssin?",
-    "text": [
-      "Voit! Tosin suoritusmerkinnän voit saada vasta 15.3. alkavassa MOOC:issa, et myöskään voi palauttaa tehtäviä vielä. MOOCin ja kampuskurssin sisältö on sama, joten nyt tehty työ ei mene hukkaan."
-    ]
-  },
-  {
     "title": "Voinko muokata tekemääni palautusta?",
     "text": [
       "Et. Kaikki osan tehtävät on palautettava kerralla. Jos merkkasit tehtäviä vahingossa väärin tai typotit repositorion nimen, lähetä mailia mluukkai@cs.helsinki.fi"
-    ]
-  },
-  {
-    "title": "Eikö kursilla olekaan uutta GraphQL:ää käsittelevää osuutta niinkuin syksyllä luvattiin?",
-    "text": [
-      "GraphQL:ää käsittelevä osa tulee vasta 15.3. alkavaan MOOC:iin ja voit tehdä sen heti kampuskurssin päätteeksi."
     ]
   }
 ]
