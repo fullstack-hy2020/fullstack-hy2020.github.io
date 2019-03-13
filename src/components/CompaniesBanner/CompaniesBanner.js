@@ -26,12 +26,12 @@ const companies = [
     url: 'https://www.terveystalo.com/',
   },
   {
-    image: { src: sympaLogo, alt: 'Sympa logo' },
-    url: 'https://www.sympa.com/fi/',
-  },
-  {
     image: { src: elisaLogo, alt: 'Elisa logo' },
     url: 'https://elisa.fi/',
+  },
+  {
+    image: { src: sympaLogo, alt: 'Sympa logo' },
+    url: 'https://www.sympa.com/fi/',
   },
   // {
   //   image: { src: seLogo, alt: 'Storaenso logo' },

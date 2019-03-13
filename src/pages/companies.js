@@ -15,7 +15,7 @@ const Companies = () => (
     <Element className="container">
       <BodyText
         className="col-10 spacing companies__main-title"
-        heading={{ title: 'Developer stories', level: 'h1' }}
+        heading={{ title: 'Yhteistyöyritysten sovelluskehittäjiä', level: 'h1' }}
       />
 
       {stories.map(story => (
