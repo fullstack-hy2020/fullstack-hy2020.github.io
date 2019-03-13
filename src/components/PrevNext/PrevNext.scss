@@ -7,7 +7,7 @@
     @include to($tablet) {
       display: block;
       background-color: $black;
-      width: 2px;
+      width: 2px !important;
     }
   }
 
