@@ -133,6 +133,12 @@ a {
   @include to($desktop) {
     margin-top: $vertical-spacing * 2;
   }
+
+  &--large {
+    @include to($large) {
+      margin-top: $vertical-spacing * 3;
+    }
+  }
 }
 
 @for $i from 1 through 10 {

@@ -99,7 +99,7 @@ const IndexPage = () => (
                 />
 
                 <Arrow
-                  className="col-10 col-3--mobile arrow__container--with-link"
+                  className="col-10 arrow__container--with-link"
                   bold
                   thickBorder
                   link="/about"

@@ -75,7 +75,7 @@ export default function PartIntroTemplate({ data }) {
 
             {titles && (
               <Arrow
-                className="spacing--mobile"
+                wrapperClassName="spacing--mobile--large"
                 stack
                 content={titles.map(n => {
                   return {
