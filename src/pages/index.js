@@ -34,7 +34,7 @@ const thingsToKnow = [
 const IndexPage = () => (
   <Layout>
     <SEO
-      title="Home"
+      title="Aloitussivu"
       keywords={[
         'fullstack',
         'course',

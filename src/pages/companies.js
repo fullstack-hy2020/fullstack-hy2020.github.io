@@ -10,7 +10,7 @@ import stories from '../content/stories/stories';
 
 const Companies = () => (
   <Layout>
-    <SEO title="Companies" />
+    <SEO title="Yritysesittelyt" />
 
     <Element className="container">
       <BodyText

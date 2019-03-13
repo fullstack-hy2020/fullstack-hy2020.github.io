@@ -15,7 +15,7 @@ import landingImage from '../images/landing.svg';
 const About = () => (
   <Layout>
     <SEO
-      title="ABOUT"
+      title="Kurssista"
       keywords={[
         'fullstack',
         'course',

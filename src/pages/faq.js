@@ -1,17 +1,17 @@
 import { StaticQuery, graphql } from 'gatsby';
-import React from 'react';
 
 import Accordion from '../components/Accordion/Accordion';
 import Element from '../components/Element/Element';
 import Footer from '../components/Footer/Footer';
 import Layout from '../components/layout';
+import React from 'react';
 import SEO from '../components/seo';
 import { SubHeader } from '../components/SubHeader/SubHeader';
 
 const FAQ = () => (
   <Layout>
     <SEO
-      title="FAQ"
+      title="Usein kysytyt kysymykset"
       keywords={[
         'fullstack',
         'course',

@@ -1,13 +1,12 @@
-import React from 'react';
-
 import Element from '../components/Element/Element';
 import Footer from '../components/Footer/Footer';
 import Layout from '../components/layout';
+import React from 'react';
 import SEO from '../components/seo';
 
 const NotFoundPage = () => (
   <Layout>
-    <SEO title="404: Not found" />
+    <SEO title="Sivua ei löytynyt" />
 
     <Element className="container spacing--small spacing--after link">
       <h1>NOT FOUND</h1>
