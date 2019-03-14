@@ -35,20 +35,18 @@
       "Uskon, että Terveystalosta löytyy mielekkäitä ja uusia projekteja jatkossakin."
     ],
     "name": "Tuukka Peuraniemi",
-    "title": "Sovelluskehittäjä"
+    "title": "Sovelluskehittäjä ja digitaalinen moniosaaja"
   },  
   {
     "image": "mikko_kotola_ja_panu_vartiainen.jpg",
     "companyLogo": "sympa_logo.png",
     "text": [
-      "Suoritin Full stack -kurssin ensimmäisten joukossa alkuvuodesta 2018.  Kurssi oli kyllä todella tärkeä osa tietojenkäsittelytieteen kandiopintojani. Single page web appien logiikka ja modernit työkalut tulivat tutuksi. Yleisemmin ottaen minulle oli tärkeää saada rutiinia asynkroniseen ja funktionaaliseen ohjelmointiin.",
-      "Kyllä siinä otsa välillä oli kipeänä kun jotakin kiharaista kohtaa viilasi. Mutta tekemällähän sitä asioita opitaan!",
-      "Kotola sai kandiopintonsa päätökseen kesällä 2018 ja aloitti full stack -kehittäjän tehtävässä Sympalla syksyllä. Sympa tarjoaa asiakkailleen henkilöstöjärjestelmiä SaaS-toimintamallilla. Yrityksessä on yli 100 työntekijää viidessä maassa, ja kasvu on nopeaa. Kotolalle työnpaikan vaihdos oli samalla toimialan vaihdos, sillä hän on aiemmalta koulutukseltaan valtiotieteiden maisteri ja oli aiemmin työskennellyt yliopiston hallinnossa. Innostus koodaukseen imaisi miehen kuitenkin mukaansa opintoihin ja uudelle alalle.",
-      "Sympassa minua viehätti se, että yritys oli sopivan kokoinen. Devaajana kehittymisen kannalta on hienoa, että on riittävästi haasteita ja osaavia ihmisiä ympärillä. Esimerkiksi käyttämäämme mikropalveluarkkitehtuuriin perehtyminen on ollut mielenkiintoista. Toisaalta Sympan kokoisessa yrityksessä asia hoituvat mutkattomasti ja kulttuuri on hyvin välitön. Yksi firman arvoista on ”have fun”, ja täytyy kyllä sanoa, että hauskaa on ollut!",
-      "Kotola jatkaa vielä työn ohella opintojaan Helsingin yliopistossa datatieteen maisteriohjelmassa.",
-      "– Koneoppimisen kurssit ovat olleet kiinnostavia, ja varmasti opeille on käyttöä jatkossa myös työssä."
+      "Suoritin Full stack -kurssin ensimmäisten joukossa alkuvuodesta 2018.  Kurssi oli todella tärkeä osa tietojenkäsittelytieteen kandiopintojani. Single page web appien logiikka ja modernit työkalut tulivat tutuksi. Yleisemmin ottaen minulle olitärkeää saada rutiinia asynkroniseen ja funktionaaliseen ohjelmointiin.  Kurssi ei tuntunut aina helpolta: välillä oli kyllä otsa kipeänä kun jotakin kiharaista kohtaa viilasi. Mutta tekemällähän sitä asioita opitaan!",
+      "Sain kandiopintoni päätökseen kesällä 2018 ja aloitin full stack -kehittäjän tehtävässä Sympalla syksyllä. Sympa tarjoaa asiakkailleen henkilöstöjärjestelmiäSaaS-toimintamallilla. Yrityksessä on yli 100 työntekijää viidessä maassa, ja kasvu on nopeaa. Minulle työnpaikan vaihdos oli samalla toimialan vaihdos, sillä olen aiemmalta koulutukseltani valtiotieteiden maisteri ja työskentelin aiemmin yliopiston hallinnossa. Innostus koodaukseen imaisi minut kuitenkin mukaansa opintoihin ja uudelle alalle.",
+      "Sympassa minua viehätti se, että yritys oli sopivan kokoinen. Devaajana kehittymisen kannalta on hienoa, että on riittävästi haasteita ja osaavia ihmisiä ympärillä (kuten kuvassa oikealla näkyvä Panu Vartiainen). Esimerkiksi käyttämäämme mikropalveluarkkitehtuuriin perehtyminen on ollut mielenkiintoista. Toisaalta Sympan kokoisessa yrityksessä asia hoituvat mutkattomasti ja kulttuuri on hyvin välitön. Yksi firman arvoista on ”have fun”, jatäytyy kyllä sanoa, että hauskaa on ollut!",
+      "Jatkan vielä työn ohella opintojani Helsingin yliopistossa datatieteen maisteriohjelmassa. Erityisesti koneoppimisen kurssit ovat olleet kiinnostavia, ja opeille on varmasti käyttöä jatkossa myös töissä.",
     ],
     "name": "Mikko Kotola",
-    "title": "Full stack -developer"
+    "title": "Full stack developer"
   }
 ]
