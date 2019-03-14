@@ -31,7 +31,7 @@ const companies = [
   },
   {
     image: { src: sympaLogo, alt: 'Sympa logo' },
-    url: 'https://www.sympa.com/fi/',
+    url: 'https://sympa.com/careers',
   },
   // {
   //   image: { src: seLogo, alt: 'Storaenso logo' },
