@@ -13,7 +13,7 @@ const NotFoundPage = () => (
     <Element className="container spacing--large spacing--after">
       <h1>404 - Sivua ei löytynyt</h1>
 
-      <p className="col-10 spacing--small">Looks like you're lost.</p>
+      <p className="col-10 spacing--small">Uncaught ReferenceError: unknown is not defined</p>
 
       <Arrow
         className="col-10 spacing arrow__container--with-link"
