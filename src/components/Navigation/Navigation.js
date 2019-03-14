@@ -9,7 +9,7 @@ export const navigation = [
   { text: 'KURSSISTA', path: '/about' },
   { text: 'KURSSIN SISÄLTÖ', path: '#course-contents' },
   { text: 'FAQ', path: '/faq' },
-  { text: 'YRITYSESITTELYT', path: '/companies' },
+  { text: 'KURSSILLA MUKANA', path: '/companies' },
 ];
 
 const handleCloseMenu = () =>
