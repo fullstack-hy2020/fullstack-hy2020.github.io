@@ -68,7 +68,7 @@ const About = () => (
               </div>
             </Banner>
 
-            <Element className="container spacing">
+            <Element className="container spacing spacing--mobile--large">
               <Element className="col-8 push-right-1">
                 <BodyText
                   heading={{ level: 'h1', title: 'Yleistä' }}
