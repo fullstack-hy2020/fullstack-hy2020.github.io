@@ -157,7 +157,7 @@ export default class ContentTemplate extends Component {
 
         <div className="course-container spacing--after">
           <Banner
-            className="part-main__banner"
+            className="part-main__banner spacing--mobile--small"
             backgroundColor={colorCode}
             style={{
               backgroundImage: `url(${path.resolve(mainImage.publicURL)})`,

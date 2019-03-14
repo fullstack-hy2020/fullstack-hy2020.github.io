@@ -150,13 +150,14 @@ pre[class*='language-'] {
 }
 
 .part-main__banner {
-  background-position: bottom right;
-  background-size: 60%;
-  padding-bottom: 20%;
+  background-position: center center;
+  background-size: 50%;
+  padding-bottom: 10%;
   background-repeat: no-repeat;
 
   @include to($tablet) {
     background-position: top center;
+    background-size: 70%;
     padding-bottom: 30% !important;
   }
 }

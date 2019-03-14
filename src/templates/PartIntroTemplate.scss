@@ -8,9 +8,9 @@
   }
 
   &__banner {
-    background-size: 60%;
+    background-size: 50%;
     background-repeat: no-repeat;
-    background-position: bottom right;
+    background-position: center right;
 
     @include to($tablet) {
       background-position: top center;
@@ -18,7 +18,8 @@
       > .container {
         margin-top: 40%;
       }
-    }
 
+      background-size: 70%;
+    }
   }
 }

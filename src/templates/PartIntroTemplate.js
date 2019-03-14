@@ -47,7 +47,7 @@ export default function PartIntroTemplate({ data }) {
 
       <div className="spacing--after">
         <Banner
-          className="part-intro__banner"
+          className="part-intro__banner spacing--mobile--small"
           style={{
             backgroundImage: `url(${path.resolve(mainImage.publicURL)})`,
             backgroundColor: colors[partColors[part]],
@@ -69,7 +69,7 @@ export default function PartIntroTemplate({ data }) {
               ]}
             />
 
-            <div className="part-intro col-7 col-9--mobile spacing--after-small">
+            <div className="part-intro col-7 col-10--mobile spacing--after-small">
               {Parser(html, parserOptions)}
             </div>
 
@@ -82,7 +82,7 @@ export default function PartIntroTemplate({ data }) {
                     backgroundColor: colors['white'],
                     letter: n,
                     path: `/osa${part}/${snakeCase(navigation[part][n])}`,
-                    text: navigation[part][n],
+                    text: `${n} ${navigation[part][n]}`,
                   };
                 })}
               />
