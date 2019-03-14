@@ -5,12 +5,12 @@ import Element from '../Element/Element';
 import { Link } from 'gatsby';
 import { PropTypes } from 'prop-types';
 import React from 'react';
-import elisaLogo from '../../images/elisa_logo.png';
-import houstonLogo from '../../images/houston_logo.png';
+import elisaLogo from '../../images/elisa_logo.svg';
+import houstonLogo from '../../images/houston_logo.svg';
 // import seLogo from '../../images/SE_logo.png';
-import sympaLogo from '../../images/sympa_logo.png';
-import terveystaloLogo from '../../images/terveystalo_logo.png';
-import yliopistoLogo from '../../images/hgin_yliopisto.png';
+import sympaLogo from '../../images/sympa_logo.svg';
+import terveystaloLogo from '../../images/terveystalo_logo.svg';
+import yliopistoLogo from '../../images/hgin_yliopisto.svg';
 
 const companies = [
   {
@@ -81,7 +81,7 @@ export const CompaniesBanner = ({ frontPage }) => (
         className="col-4 push-right-3 challenge-title"
         text="Full stack -haasteessa mukana"
       />
-      <Element flex className="col-6 push-right-2 flex-fix-aligning space-between--mobile">
+      <Element flex spaceBetween className="col-6 push-right-2 flex-fix-aligning space-between--mobile">
         {companies.map((company, i) => (
           <ContentLiftup
             key={company.url}
@@ -91,7 +91,7 @@ export const CompaniesBanner = ({ frontPage }) => (
               src: company.image.src,
               alt: company.image.alt,
             }}
-            className={`col-2 col-4--mobile col-4--tablet push-right-1`}
+            className={`col-3 col-5--mobile col-5--tablet`}
           />
         ))}
 

@@ -4,9 +4,9 @@ import Element from '../Element/Element';
 import { Image } from '../Image/Image';
 import { Link } from 'gatsby';
 import React from 'react';
-import houston from '../../images/houston_logo.png';
+import houston from '../../images/houston_logo.svg';
 import { navigation } from '../Navigation/Navigation';
-import yliopisto from '../../images/hgin_yliopisto.png';
+import yliopisto from '../../images/hgin_yliopisto.svg';
 
 const images = [
   {
