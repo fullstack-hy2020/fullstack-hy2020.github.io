@@ -27,7 +27,7 @@ const companies = [
   },
   {
     image: { src: elisaLogo, alt: 'Elisa logo' },
-    url: 'https://elisa.fi/',
+    url: 'https://corporate.elisa.fi/rekrytointi/',
   },
   {
     image: { src: sympaLogo, alt: 'Sympa logo' },
