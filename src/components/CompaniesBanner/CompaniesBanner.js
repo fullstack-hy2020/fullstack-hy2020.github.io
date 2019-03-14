@@ -78,7 +78,7 @@ export const CompaniesBanner = ({ frontPage }) => (
       )}
       <BodyText
         centered
-        className="col-4 push-right-3"
+        className="col-4 push-right-3 challenge-title"
         text="Full stack -haasteessa mukana"
       />
       <Element flex className="col-6 push-right-2 flex-fix-aligning space-between--mobile">

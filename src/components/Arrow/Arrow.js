@@ -98,9 +98,7 @@ const Arrow = ({
                 {...props}
               >
                 <Element flex className="arrow__rectangle" style={arrowStyle}>
-                  <p className="arrow--stacked-letter">{arrow.letter}</p>
-
-                  <p className="arrow--stacked-title">{arrow.text}</p>
+                  <p className="arrow--stacked-title"><span>{arrow.text}</span></p>
                 </Element>
                 <div className="arrow__point" style={arrowStyle} />
               </Link>

@@ -85,11 +85,11 @@ const IndexPage = () => (
 
         return (
           <>
-            <div className="container spacing--after">
+            <div className="container spacing--after spacing--mobile">
               <Element
                 flex
                 spaceBetween
-                className="col-10 spacing--small frontpage__hero"
+                className="col-10 spacing--small frontpage__hero spacing--mobile"
                 relative
               >
                 <SubHeader
@@ -102,6 +102,7 @@ const IndexPage = () => (
                   className="col-10 arrow__container--with-link"
                   bold
                   thickBorder
+                  style={{ fontSize: '1.2rem' }}
                   link="/about"
                   content={[
                     { backgroundColor: colors['main'], text: 'Aloita kurssi' },

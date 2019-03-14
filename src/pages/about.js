@@ -49,9 +49,13 @@ const About = () => (
 
         return (
           <>
-            <Banner style={{ paddingBottom: 0 }}>
+            <Banner style={{ paddingBottom: 0, overflow: 'hidden' }}>
               <div
-                style={{ display: 'flex', justifyContent: 'center' }}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  marginBottom: '-70px',
+                }}
                 className="container"
               >
                 <Image
@@ -65,11 +69,14 @@ const About = () => (
             </Banner>
 
             <Element className="container spacing">
-              <Element className="col-7 push-right-3">
-                <BodyText heading={{ level: 'h1', title: 'Yleistä' }} />
+              <Element className="col-8 push-right-1">
+                <BodyText
+                  heading={{ level: 'h1', title: 'Yleistä' }}
+                  headingFontSize="2.3rem"
+                />
 
                 <Element flex spaceBetween>
-                  <div className="col-6 spacing--after">
+                  <div className="col-10 spacing--after">
                     <BodyText text={intro} className="link" headingFont />
 
                     <BodyText

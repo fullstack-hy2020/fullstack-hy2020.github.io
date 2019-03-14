@@ -15,6 +15,12 @@ body {
   }
 }
 
+.main-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 p {
   margin: 0;
   text-align: left;
@@ -45,6 +51,10 @@ a {
   justify-content: space-between;
   width: 90%;
   max-width: $large;
+
+  @include to($tablet) {
+    padding: 0 20px;
+  }
 }
 
 .container--right {
@@ -134,6 +144,12 @@ a {
     margin-top: $vertical-spacing * 2;
   }
 
+  &--small {
+    @include to($large) {
+      margin-top: $vertical-spacing * 1.5;
+    }
+  }
+
   &--large {
     @include to($large) {
       margin-top: $vertical-spacing * 3;
@@ -176,6 +192,18 @@ a {
   @for $i from 1 through 10 {
     .col-#{$i}--mobile {
       width: #{$i * 10%} !important;
+    }
+
+    @for $i from 1 through 5 {
+      .push-right-#{$i}--mobile {
+        margin-left: $i * 10% !important;
+      }
+    }
+
+    @for $i from 1 through 5 {
+      .push-left-#{$i}--mobile {
+        margin-right: $i * 10% !important;
+      }
     }
   }
 

@@ -1,6 +1,8 @@
 @import '../common.scss';
 
 #footer {
+  margin-top: auto;
+  
   @include from($desktop) {
     align-items: center;
   }
@@ -26,6 +28,10 @@
       font-family: $font-heading;
       margin-left: 0 !important;
       margin-right: auto;
+
+      @include to($tablet) {
+        line-height: 8px;
+      }
 
       &:hover {
         color: $white !important;

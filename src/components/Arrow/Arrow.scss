@@ -80,7 +80,7 @@
   position: relative;
 
   @include to($desktop) {
-    font-size: 0.7rem;
+    font-size: 1rem;
   }
 
   .bold {
@@ -116,17 +116,22 @@
   margin: auto auto auto 0;
 
   @include to($tablet) {
-    .arrow--stacked-letter {
-      margin-right: 1rem;
-      font-family: $font-body;
-    }
-
     .arrow__rectangle {
       border: none;
       background-color: transparent !important;
       padding: 0;
       font-size: 1rem;
       justify-content: unset;
+
+      > p > span {
+        border-bottom: 1px solid $black;
+        margin: auto;
+
+        &:hover {
+          background-color: $white !important;
+          color: black;
+        }
+      }
     }
 
     .arrow__point {
@@ -144,7 +149,7 @@
 
   .arrow__rectangle {
     position: relative;
-
+  
     @include from($tablet) {
       padding: 1.25rem;
     }
@@ -167,22 +172,25 @@
   &:hover {
     .arrow__rectangle,
     .arrow__point {
-      background-color: $black !important;
+      @include from($tablet) {
+        background-color: $black !important;
+      }
     }
     .arrow--stacked-title,
     .arrow--stacked-letter {
-      color: $white;
+      @include from($tablet) {
+        color: $white;
+      }
     }
   }
 }
 
-.arrow--stacked-letter {
-  margin-right: 2rem;
-}
-
 .arrow--stacked-title {
-  white-space: nowrap;
   font-family: $font-body;
+
+  @include from($tablet) {
+    white-space: nowrap;
+  }
 }
 
 .arrow__container--with-link {
