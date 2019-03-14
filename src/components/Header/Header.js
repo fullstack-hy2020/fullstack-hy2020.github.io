@@ -68,7 +68,7 @@ class Header extends Component {
             )}
           </Link>
 
-          <Navigation />
+          {this.state.headerClass !== 'header--small' && <Navigation />}
         </div>
       </div>
     );
