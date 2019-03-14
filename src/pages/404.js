@@ -1,17 +1,27 @@
+import Arrow from '../components/Arrow/Arrow';
 import Element from '../components/Element/Element';
 import Footer from '../components/Footer/Footer';
 import Layout from '../components/layout';
 import React from 'react';
 import SEO from '../components/seo';
+import colors from '../colors';
 
 const NotFoundPage = () => (
   <Layout>
     <SEO title="Sivua ei löytynyt" />
 
-    <Element className="container spacing--small spacing--after link">
-      <h1>NOT FOUND</h1>
+    <Element className="container spacing--large spacing--after">
+      <h1>404 - Sivua ei löytynyt</h1>
 
-      <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
+      <p className="col-10 spacing--small">Looks like you're lost.</p>
+
+      <Arrow
+        className="col-10 spacing arrow__container--with-link"
+        bold
+        thickBorder
+        link="/"
+        content={[{ backgroundColor: colors['main'], text: 'Go back home' }]}
+      />
     </Element>
 
     <Footer />
