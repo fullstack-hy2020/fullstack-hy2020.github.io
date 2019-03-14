@@ -19,7 +19,7 @@ const companies = [
   },
   {
     image: { src: houstonLogo, alt: 'Houston inc. logo' },
-    url: 'https://www.houston-inc.com/',
+    url: 'https://www.houston-inc.com/careers',
   },
   {
     image: { src: terveystaloLogo, alt: 'Terveystalo logo' },
