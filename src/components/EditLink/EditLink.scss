@@ -1,4 +1,7 @@
 .edit-link {
-  border-bottom-width: 3px;
-  border-bottom-style: solid;
+  > span {
+    border-bottom-width: 3px;
+    border-bottom-style: solid;
+    border-bottom-color: inherit;
+  }
 }
