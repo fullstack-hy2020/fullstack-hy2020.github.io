@@ -66,7 +66,8 @@ export const ContentLiftup = ({
           <Image
             {...image}
             contain
-            className="content-liftup__image image--square-big"
+            squareBig
+            className="content-liftup__image"
           />
 
           {name && <p className="content-liftup__name">{name}</p>}
