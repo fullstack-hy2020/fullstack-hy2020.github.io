@@ -1096,7 +1096,7 @@ const App = () => {
 
   // EI NÄIN!!! eli älä määrittele komponenttia 
   // toisen komponentin sisällä!
-  const Statistis = (props) => {
+  const Statistics = (props) => {
     // ...
   }
 
