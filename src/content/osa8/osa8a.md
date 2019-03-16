@@ -28,7 +28,7 @@ Edellä kuvatun skenaarion data saataisiin haettua (suurinpiirtein) seuraavan ka
 
 ```bash
 query FetchBlogsQuery {
-  user(username: 'mluukkai') {
+  user(username: "mluukkai") {
     followedUsers {
       blogs {
         comments {
@@ -49,21 +49,35 @@ Palvelimen vastaus pyyntöön olisi suunnilleen seuraavanlainen JSON-olio:
 
 ```bash
 {
-  data: {
-    followedUsers: {
-      blogs: {
-        comments: {
-          user: {
-            blogs: [
-              'Goto considered harmful',
-              'End to End Testing with Puppeteer and Jest',
-              'Navigating your transition to GraphQL',
-              'From REST to GraphQL'
+  "data": {
+    "followedUsers": [
+      {
+        "blogs": [
+          {
+            "comments": [
+              {
+                "user": {
+                  "blogs": [
+                    {
+                      "title": "Goto considered harmful"
+                    },
+                    {
+                      "title": "End to End Testing with Puppeteer and Jest"
+                    },
+                    {
+                      "title": "Navigating your transition to GraphQL"
+                    },
+                    {
+                      "title": "From REST to GraphQL"
+                    }
+                  ]
+                }
+              }
             ]
           }
-        }
+        ]
       }
-    }
+    ]
   }
 }
 ```
@@ -124,7 +138,7 @@ Kaikkien henkilöiden tiedot hakeva _allPersons_ on hieman monimutkaisempi. Kosk
 
 ```js
 query {
-  allPersons{
+  allPersons {
     name
     phone
   }
@@ -167,7 +181,7 @@ query {
 }
 ```
 
-Vielä esimerkki parametria edellyttävästä kyselystä, joka hakee yksittäisen henkilön tiedot palauttavasta kyselystä
+Vielä esimerkki parametria edellyttävästä kyselystä, joka hakee yksittäisen henkilön tiedot palauttavasta kyselystä.
 
 ```js
 query {
@@ -384,9 +398,9 @@ Osoittamalla oikeaa kohtaa virheelliseltä riviltä saa virheilmoituksen näkyvi
 
 ![](../images/8/3.png)
 
-Jos Playground vaikuttaa olevan jumissa, niin sivun reloadaaminen yleensä auttaa,
+Jos Playground vaikuttaa olevan jumissa, niin sivun reloadaaminen yleensä auttaa.
 
-Klikkaamalla oikean reunan tekstiä <i>schema</i> näyttää Playground palvelimen GraphQL-skeeman
+Klikkaamalla oikean reunan tekstiä <i>schema</i> näyttää Playground palvelimen GraphQL-skeeman.
 
 ![](../images/8/4.png)
 
@@ -404,7 +418,7 @@ query {
 }
 ```
 
-resolveri on funktio, joka poikkeaa kahdesta aiemmasta resolverista siinä että se saa <i></i>kaksi parametria</i>:
+resolveri on funktio, joka poikkeaa kahdesta aiemmasta resolverista siinä että se saa <i>kaksi parametria</i>:
 
 ```js
 (root, args) => persons.find(p => p.name === args.name)
@@ -433,7 +447,7 @@ osaa palvelin liittää vastaukseen täsmälleen ne kentät, joita kysely pyytä
 
 GraphQL-palvelimen tulee määritellä resolverit <i>jokaiselle</i> skeemassa määritellyn tyypin kentälle. Olemme nyt määritelleet resolverit ainoastaan tyypin <i>Query</i> kentille, eli kaikille sovelluksen tarjoamille kyselyille. 
 
-Koska skeemassa olevan tyypin <i>Person</i> kentille ei ole määritelty resorvereja,  Apollo on määritellyt niille [oletusarvoisen resolverin](https://www.apollographql.com/docs/graphql-tools/resolvers.html#Default-resolver), joka toimii samaan tapaan kuin seuraavassa itse määritelty resolveri:
+Koska skeemassa olevan tyypin <i>Person</i> kentille ei ole määritelty resolvereita, Apollo on määritellyt niille [oletusarvoisen resolverin](https://www.apollographql.com/docs/graphql-tools/resolvers.html#Default-resolver), joka toimii samaan tapaan kuin seuraavassa itse määritelty resolveri:
 
 
 ```js
@@ -526,7 +540,7 @@ vastauksena on henkilö-olio, joka <i>sisältää</i> osoite-olion:
 }
 ```
 
-Talletetaan henkilöt palvelimella edelleen samassa muodossa kuin aiemmin
+Talletetaan henkilöt palvelimella edelleen samassa muodossa kuin aiemmin.
 
 ```js
 let persons = [
@@ -543,7 +557,7 @@ let persons = [
 
 Nyt siis palvelimen tallettamat henkilö-oliot eivät ole muodoltaan täysin samanlaisia kuin GraphQL-skeeman määrittelemät tyypin <i>Person</i> -oliot. 
 
-Toisin kuin tyypille <i>Person</i> ei tyypille <i>Address</i> ole määritelty <i>id</i>-kenttää, sillä osoitteita ei ole talletettu palvelimella omaan tietorakenteeseen.
+Toisin kuin tyypille <i>Person</i> ei tyypille <i>Address</i> ole määritelty <i>id</i>-kenttää, sillä osoitteita ei ole talletettu palvelimella omaan tietorakenteeseensa.
 
 Koska taulukkoon talletetuilla olioilla ei ole kenttää <i>address</i> oletusarvoinen resolveri ei enää riitä. Lisätään resolveri tyypin <i>Person</i> kentälle <i>address</i>:
 
@@ -568,7 +582,7 @@ const resolvers = {
 }
 ```
 
-Eli aina palautettaessa <i>Person</i>-oliota, palautetaan niiden kentät <i>name</i>, <i>phone</i> sekä <i>id</i> käyttäen oletusarvoista resolveria, kenttä <i>address</i> muodostetaan itse määritellyn resolverin avulla. Resolvelrifunktion parametrina _root_ on käsittelyssä oleva henkilö-olio, eli osoitteen katu ja kaupunki saadaan sen kentistä.
+Eli aina palautettaessa <i>Person</i>-oliota, palautetaan niiden kentät <i>name</i>, <i>phone</i> sekä <i>id</i> käyttäen oletusarvoista resolveria, kenttä <i>address</i> muodostetaan itse määritellyn resolverin avulla. Resolverifunktion parametrina _root_ on käsittelyssä oleva henkilö-olio, eli osoitteen katu ja kaupunki saadaan sen kentistä.
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-backend/tree/part8-1), branchissa <i>part8-1</i>.
 
@@ -675,13 +689,13 @@ eli tyypin <i>Person</i> kentän <i>address</i> resolveri muotoilee vastauksena 
 
 ### Virheiden käsittely
 
-Jos yritämme luoda uuden henkilön, mutta parametrit eivät vastaa skeemassa määriteltyä (esim. katuosoite puuttuu) antaa palvelin virheilmoituksen: 
+Jos yritämme luoda uuden henkilön, mutta parametrit eivät vastaa skeemassa määriteltyä (esim. katuosoite puuttuu), antaa palvelin virheilmoituksen: 
 
 ![](../images/8/5.png)
 
 GraphQL:n [validoinnin](https://graphql.org/learn/validation/) avulla pystytään siis jo automaattisesi hoitamaan osa virheenkäsittelyä. 
 
-Kaikkea GraphQL ei kuitenkaan pysty hoitamaan automaattisesti. Esimerkiksi tarkemmat säännöt mutaatiolla lisättävän datan kenttien muodolle on lisättävä itse. Niistä aiheutuvat virheen tulee hoitaa [GraphQL:n poikkeuskäsittelymekanismilla](https://www.apollographql.com/docs/apollo-server/features/errors.html).
+Kaikkea GraphQL ei kuitenkaan pysty hoitamaan automaattisesti. Esimerkiksi tarkemmat säännöt mutaatiolla lisättävän datan kenttien muodolle on lisättävä itse. Niistä aiheutuvat virheet tulee hoitaa [GraphQL:n poikkeuskäsittelymekanismilla](https://www.apollographql.com/docs/apollo-server/features/errors.html).
 
 Estetään saman nimen lisääminen puhelinluetteloon useampaan kertaan:
 
@@ -710,7 +724,7 @@ const resolvers = {
 }
 ```
 
-Eli jos lisättävä nimi on jo luettelossa heitetään poikkeus _UserInputError_
+Eli jos lisättävä nimi on jo luettelossa heitetään poikkeus _UserInputError_.
 
 ![](../images/8/6.png)
 
@@ -739,7 +753,7 @@ query {
 }
 ```
 
-Skeema laajenee seuraavasti
+Skeema laajenee seuraavasti:
 
 ```js
 // highlight-start
@@ -830,7 +844,7 @@ GraphQL:ssä on yhteen kyselyyn mahdollista yhdistää monia tyypin <i>Query</i>
 ```js
 query {
   personCount
-  allPersons{
+  allPersons {
     name
   }
 }
@@ -892,7 +906,7 @@ Vastaus on muotoa
 }
 ```
 
-Joissain tilanteissa voi myös olla hyötyä nimetä kyselyt. Näin on erityisesti tilanteissa, missä kyselyillä tai mutaatiolla on [parametreja](https://graphql.org/learn/queries/#variables). Tutustumme parametreihin pian.
+Joissain tilanteissa voi myös olla hyötyä nimetä kyselyt. Näin on erityisesti tilanteissa, joissa kyselyillä tai mutaatiolla on [parametreja](https://graphql.org/learn/queries/#variables). Tutustumme parametreihin pian.
 
 Jos kyselyitä on useita, pyytää Playground valitsemaan mikä niistä suoritetaan:
 
@@ -1026,7 +1040,7 @@ tulisi palauttaa
 
 #### 8.5: genren kirjat
 
-Laajenna kyselyä _allBooks_ että sille voi antaa optionaalisen parametrin <i>genre</i>, joka rajoittaa kirjalistan niihin joiden genrejen joukossa on parametrina annettu genre.
+Laajenna kyselyä _allBooks_ siten, että sille voi antaa optionaalisen parametrin <i>genre</i>, joka rajoittaa kirjalistan niihin, joiden genrejen joukossa on parametrina annettu genre.
 
 Esim. kyselyn
 
