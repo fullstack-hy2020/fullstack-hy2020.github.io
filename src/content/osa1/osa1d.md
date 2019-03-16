@@ -1193,12 +1193,6 @@ Sovellus voi näyttää esim. seuraavalta:
 
 ![](../images/1/18a.png)
 
-Muista, että saadaksesi komponentin tilan luotua joudut asentamaan Reactin version _16.8.0-alpha.0_ antamalla seuraavan komennon projektin hakemistossa
-
-```js
-npm install -s react@16.8.0-alpha.0 react-dom@16.8.0-alpha.0
-```
-
 **VAROITUS** create-react-app tekee projektista automaattisesti git-repositorion, ellei sovellusta luoda jo olemassaolevan repositorion sisälle. Todennäköisesti **et halua** että projektista tulee repositorio, joten suorita projektin juuressa komento _rm -rf .git_.
 
 <h4>1.13*: anekdootit step2</h4>
