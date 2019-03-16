@@ -40,9 +40,9 @@ Lue tarvittaessa lisää React-sovellusten debuggaamisesta [täältä](/osa1/mon
 
 ### Tapahtumankäsittely revisited
 
-Viime vuoden kurssin alun kokemusten perusteella tapahtumien käsittelu on osoittautunut haastavaksi.
+Viime vuoden kurssin alun kokemusten perusteella tapahtumien käsittely on osoittautunut haastavaksi.
 
-Edellisen osan loppussa oleva kertaava osa [tapahtumankäsittely revisited](/osa1/monimutkaisempi_tila_reactin_debuggaus#tapahtumankasittely-revisited) kannattaa käydä läpi jos osaaminen on vielä häilyvällä pohjalla.
+Edellisen osan lopussa oleva kertaava osa [tapahtumankäsittely revisited](/osa1/monimutkaisempi_tila_reactin_debuggaus#tapahtumankasittely-revisited) kannattaa käydä läpi, jos osaaminen on vielä häilyvällä pohjalla.
 
 Myös tapahtumankäsittelijöiden välittäminen komponentin <i>App</i> alikomponenteille on herättänyt ilmaan kysymyksiä, pieni kertaus aiheeseen [täällä](/osa1/monimutkaisempi_tila_reactin_debuggaus#tapahtumankasittelijan-vieminen-alikomponenttiin).
 
@@ -542,7 +542,7 @@ Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnist�
 
 ### Kun sovellus hajoaa
 
-Kun aloitat ohjelmoijan uraasi (ja allekirjoittaneella edelleen 30 vuoden ohjelmointikokemuksella) käy melko usein niin, että ohjelma hajoaa aivan totaalisesti. Erityisen usien näin käy dynaamisesti tyypitetyillä kielillä, kuten Javascript, missä kääntäjä ei tarkasta minkä tyyppisiä arvoja esim. funktioden parametreina ja paluuarvoina liikkuu.
+Kun aloitat ohjelmoijan uraasi (ja allekirjoittaneella edelleen 30 vuoden ohjelmointikokemuksella) käy melko usein niin, että ohjelma hajoaa aivan totaalisesti. Erityisen usein näin käy dynaamisesti tyypitetyillä kielillä, kuten Javascript, missä kääntäjä ei tarkasta minkä tyyppisiä arvoja esim. funktioiden parametreina ja paluuarvoina liikkuu.
 
 Reactissa räjähdys näyttää esim. seuraavalta
 
@@ -629,7 +629,7 @@ const Course = (props) => { // highlight-line
 
 Ja jos ongelma ei vieläkään selviä, ei auta kuin jatkaa vianjäljitystä, eli kirjoittaa lisää console.logeja.
 
-Lisäsin tämän luvun materiaaliin kun seuraavan tehtävän mallivastauksen koodi räjähti ihan totaalisesti (syynä väärässä muodossa ollut propsi) ja jouduin jälleen kerran debuggaamaan console.logaamalla.
+Lisäsin tämän luvun materiaaliin, kun seuraavan tehtävän mallivastauksen koodi räjähti ihan totaalisesti (syynä väärässä muodossa ollut propsi), ja jouduin jälleen kerran debuggaamaan console.logaamalla.
 
 </div>
 
