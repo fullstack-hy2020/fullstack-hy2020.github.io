@@ -18,7 +18,7 @@ npm install mongoose mongoose-unique-validator --save
 
 Tehdään osien [3](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan) ja [4](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet) tapaa imitoiden.
 
-Henkilön skeema on määritelty seuraavasti
+Henkilön skeema on määritelty seuraavasti:
 
 ```js
 const mongoose = require('mongoose')
@@ -121,7 +121,7 @@ allPersons: (root, args) => {
 },
 ```
 
-odottaa Apollo server promisen valmistumista ja lähettää promisen vastauksen kyselyn tekijälle. Apollo toimii siis suunnilleen seuraavasti
+odottaa Apollo server promisen valmistumista ja lähettää promisen vastauksen kyselyn tekijälle. Apollo toimii siis suunnilleen seuraavasti:
 
 ```js
 Person.find({}).then( result => {
@@ -193,11 +193,11 @@ Mutation: {
 Backendin lopullinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-backend/tree/part8-4), branchissa <i>part8-4</i>.
 
 
-### Käyttäjä ja kirjaantuminen
+### Käyttäjä ja kirjautuminen
 
 Lisätään järjestelmään käyttäjänhallinta. Oletetaan nyt yksinkertaisuuden takia, että kaikkien käyttäjien salasana on sama järjestelmään kovakoodattu merkkijono. [Osan 4](/osa4/kayttajien_hallinta) periaatteilla on toki suoraviivaista tallettaa käyttäjille yksilöllinen salasana, mutta koska fokuksemme on GraphQL:ssä, jätämme salasanaan liittyvät rönsyt tällä kertaa pois.
 
-Käyttäjän skeema seuraavassa
+Käyttäjän skeema seuraavassa:
 
 ```js
 const mongoose = require('mongoose')
@@ -224,7 +224,7 @@ Käyttäjään siis liittyy kentän _friends_ kautta joukko luettelossa olevia h
 
 Kirjautuminen ja käyttäjän tunnistautuminen hoidetaan samoin kuten teimme [osassa 4](/osa4/token_perustainen_kirjautuminen) RESTin yhteydessä, eli käyttämällä tokeneita.
 
-Laajennetaan skeemaa seuraavasti
+Laajennetaan skeemaa seuraavasti:
 
 ```js
 type User {
@@ -254,9 +254,9 @@ type Mutation {
 }
 ```
 
-Kyselyn _me_ palauttaa kirjaantuneena olevan käyttäjän. Käyttäjät luodaan mutaatiolla _createUser_ ja kirjaantuminen tapahtuu mutaatiolla _login_.
+Kysely _me_ palauttaa kirjautuneena olevan käyttäjän. Käyttäjät luodaan mutaatiolla _createUser_ ja kirjautuminen tapahtuu mutaatiolla _login_.
 
-Mutaatioiden resolverit seuraavassa
+Mutaatioiden resolverit seuraavassa:
 
 ```js
 const jwt = require('jsonwebtoken')
@@ -294,7 +294,7 @@ Mutation: {
 
 Käyttäjän luova mutaatio on suoraviivainen. Kirjautumisesta vastaava mutaatio tarkastaa onko käyttäjätunnus/salasana-pari validi ja jos on, palautetaan [osasta 4](/osa4/token_perustainen_kirjautuminen) tuttu jwt-token.
 
-Aivan kuten REST:in tapauksessa myös nyt ideana on, että kirjaantunut käyttäjä liittää kirjautumisen yhteydessä saamansa tokenin kaikkiin pyyntöihinsä. REST:in tapaan token liitetään GraphQL-pyyntöihin headerin <i>Authorization</i> avulla.
+Aivan kuten REST:in tapauksessa myös nyt ideana on, että kirjautunut käyttäjä liittää kirjautumisen yhteydessä saamansa tokenin kaikkiin pyyntöihinsä. REST:in tapaan token liitetään GraphQL-pyyntöihin headerin <i>Authorization</i> avulla.
 
 GraphQL-playgroundissa headerin liittäminen pyyntöön tapahtuu seuraavasti
 
@@ -322,11 +322,11 @@ const server = new ApolloServer({
 })
 ```
 
-Contextin palauttama olio annetaan kaikille resolvereille <i>kolmantena parametrina</i>, onotext on siis oikea paikka tehdä asioita, jotka ovat useille resolvereille yhteistä, kuten pyyntöön liittyvän [käyttäjän tunnistaminen](https://blog.apollographql.com/authorization-in-graphql-452b1c402a9?_ga=2.45656161.474875091.1550613879-1581139173.1549828167).
+Contextin palauttama olio annetaan kaikille resolvereille <i>kolmantena parametrina</i>, context on siis oikea paikka tehdä asioita, jotka ovat useille resolvereille yhteistä, kuten pyyntöön liittyvän [käyttäjän tunnistaminen](https://blog.apollographql.com/authorization-in-graphql-452b1c402a9?_ga=2.45656161.474875091.1550613879-1581139173.1549828167).
 
 Määrittelemämme koodi siis asettaa kontekstin kenttään _currentUser_ pyynnön tehnyttä käyttäjää vastaavan olion. Jos pyyntöön ei liity käyttäjää, on kentän arvo määrittelemätön.
 
-Kyselyn _me_ resolveri on erittäin yksinkertainen, se ainoastaan palauttaa kirjaantuneen käyttäjän, jonka se saa resolverin kolmantena olevan parametrin _context_ kentästä _currentUser_. Kannattaa huomata, että jos käyttäjä ei ole kirjaantunut, ts. pyynnön headerina ei tule validia tokenia, vastaa kysely <i>null</i>:
+Kyselyn _me_ resolveri on erittäin yksinkertainen, se ainoastaan palauttaa kirjautuneen käyttäjän, jonka se saa resolverin kolmantena olevan parametrin _context_ kentästä _currentUser_. Kannattaa huomata, että jos käyttäjä ei ole kirjautunut, ts. pyynnön headerina ei tule validia tokenia, vastaa kysely <i>null</i>:
 
 ```js
 Query: {
@@ -341,9 +341,9 @@ Query: {
 
 Viimeistellään sovelluksen backend siten, että henkilöiden luominen ja editointi edellyttää kirjautumista, ja että luodut henkilöt menevät automaattisesti kirjautuneen käyttäjän tuttavalistalle.
 
-Tyhjennetään ensin kannasta siellä ennestään olevat kenenkään tuttaviin kuulumattomat käyttäjät
+Tyhjennetään ensin kannasta siellä ennestään olevat kenenkään tuttaviin kuulumattomat käyttäjät.
 
-Mutaatio _addPerson_ muuttuu seuraavasti
+Mutaatio _addPerson_ muuttuu seuraavasti:
 
 ```js
 Mutation: {
@@ -373,7 +373,7 @@ Mutation: {
 
 Jos kirjautunutta käyttäjää ei löydy kontekstista, heitetään poikkeus _AuthenticationError_. Henkilön talletus hoidetaan nyt _async/await_-syntaksilla, koska joudumme onnistuneen talletuksen yhteydessä tallettamaan uuden henkilön käyttäjän tuttavalistalle.
 
-Lisätään sovellukseen vielä mahdollisuus liittää jokin henkilö omalle tuttavalistalle. Mutaatio seuraavassa
+Lisätään sovellukseen vielä mahdollisuus liittää jokin henkilö omalle tuttavalistalle. Mutaatio seuraavassa:
 
 ```js
 type Mutation {
@@ -449,7 +449,7 @@ eli kirja sisältää pelkän kirjailijan nimen sijaan kirjailijan kaikki tiedot
 
 Voit olettaa tässä tehtävässä, että käyttäjä ei yritä luoda virheellisiä kirjoja tai kirjailijoita, eli validointivirheistä ei tarvitse vielä välittää.
 
-Seuraavien asioiden ei vielä tässä tehtävässä tarvitse toimia
+Seuraavien asioiden ei vielä tässä tehtävässä tarvitse toimia.
 
 - queryn _allBooks_ parametrilliset versiot
 - kirjailijoiden kenttä <i>bookCount</i>
@@ -460,7 +460,7 @@ Seuraavien asioiden ei vielä tässä tehtävässä tarvitse toimia
 
 Täydennä sovellusta siten, että kaikki kyselyt (paitsi kyselyn _allBooks_ parametri _author_) sekä mutaatiot toimivat.
 
-Saatat tässä tehtävässä hyötyä [tästä](https://docs.mongodb.com/manual/reference/operator/query/in/)
+Saatat tässä tehtävässä hyötyä [tästä](https://docs.mongodb.com/manual/reference/operator/query/in/).
 
 #### 8.15 Tietokanta, osa 3
 
@@ -468,7 +468,7 @@ Täydennä sovellusta siten, että validointivirheet käsitellään järkevästi
 
 #### 8.16 käyttäjä ja kirjautuminen
 
-Lisää järjestelmään käyttäjienhallinta. Laajenna skeemaa seuraavasti
+Lisää järjestelmään käyttäjienhallinta. Laajenna skeemaa seuraavasti:
 
 ```js
 type User {
