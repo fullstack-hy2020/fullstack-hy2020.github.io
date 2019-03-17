@@ -18,6 +18,12 @@
     ]
   },  
   {
+    "title": "Miten tehtävät palautetaan?",
+    "text": [
+      "Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät palautussovellukseen, lue lisää <a href='/osa0/yleista#tehtavien-palauttaminen'>täältä</a>."
+    ]
+  },
+  {
     "title": "Pitääkö jokainen osa palauttaa omaan repositorioon?",
     "text": [
       "Ei. Voit käyttää yhtä tai useampaa repositoriota, tärkeintä että asiat repositorion sisällä ovat selkeästi nimettyjä."
@@ -26,7 +32,7 @@
   {
     "title": "Voinko muokata tekemääni palautusta?",
     "text": [
-      "Et. Kaikki osan tehtävät on palautettava kerralla. Jos merkkasit tehtäviä vahingossa väärin tai typotit repositorion nimen, lähetä mailia mluukkai@cs.helsinki.fi"
+      "Et. Kaikki osan tehtävät on palautettava kerralla. Jos merkkasit tehtäviä vahingossa väärin tai typotit repositorion nimen, lähetä mailia osoitteeseen mluukkai@cs.helsinki.fi"
     ]
   },
   {
@@ -36,7 +42,7 @@
     ]
   },
   {
-    "title": "Suoritin kurssin viime vuonna. Missä kohtaa materiaalia käsitellään React hookeja?",
+    "title": "Suoritin kurssin viime vuonna. Miten opin käyttämään React hookeja?",
     "text": [
       "State hookia, eli tapaa määritellä tila funktionaalisille komponenteille käsitellään <a href='/osa1/komponentin_tila_ja_tapahtumankasittely/#tilallinen-komponentti'>osassa 1</a>. Lifecycle-metodien roolia hoitavia effect hookeja käsitellään <a href='/osa2/palvelimella_olevan_datan_hakeminen#effect-hookit'>osassa 2</a>. Custom hookeista puhutaan <a href='/osa5/custom_hookit'>osassa 5</a>"
     ]
