@@ -19,7 +19,7 @@ export const PartBanner = () => {
             'Palvelimen kanssa tapahtuva kommunikointi',
             'Palvelimen ohjelmointi NodeJS:n Express-kirjastolla',
             'Express-sovellusten testaaminen',
-            'React-sovelluksen testaaminen',
+            'React-sovelluksen testaaminen, custom hookit.',
             'Sovelluksen tilan hallinta Redux-kirjastolla',
             'React router, tyylikirjastot ja webpack',
             'GraphQL'

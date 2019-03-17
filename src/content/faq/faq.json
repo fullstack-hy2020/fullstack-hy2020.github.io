@@ -2,13 +2,13 @@
   {
     "title": "Miten kurssille ilmoittaudutaan?",
     "text": [
-      "Kurssille ei tarvitse varsinaisesti ilmoittautua ennen kuin haluat tehdä kurssin kokeen. Koe tehdään Avoimen yliopiston Moodle-järjestelmään. Katso lisää <a href='osa0/yleista#arvosteluperusteet'>täältä</a>"
+      "Kurssille ei tarvitse varsinaisesti ilmoittautua ennen kuin haluat tehdä kurssin kokeen. Koe tehdään Avoimen yliopiston Moodle-järjestelmään. Katso lisää <a href='/osa0/yleista#arvosteluperusteet'>täältä</a>."
     ]
   },
   {
     "title": "Mikä on kurssin laajuus?",
     "text": [
-      "Kurssin laajuus on <a href='osa0/yleista#arvosteluperusteet'>riippuen tekemiesi tehtävien määrästä</a>  3-8 opintopistettä. Suoritettuasi kurssin voit jatkaa aihepiiriin syventymistä 1-10 opintopisteen laajuisessa <a href='osa0/yleista#full-stack-harjoitustyo'>Full stack -harjoitustyön</a> parissa."
+      "Kurssin laajuus on <a href='osa0/yleista#arvosteluperusteet'>riippuen tekemiesi tehtävien määrästä</a>  3-8 opintopistettä. Suoritettuasi kurssin voit jatkaa aihepiiriin syventymistä 1-10 opintopisteen laajuisessa <a href='/osa0/yleista#full-stack-harjoitustyo'>Full stack -harjoitustyön</a> parissa."
     ]
   },
   {
@@ -16,7 +16,7 @@
     "text": [
       "Etenemisnopeus on vapaa, kurssilla on ainoastaan yksi deadline sekä tehtäville että kokeelle 10.1.2020 klo 23.59.59. Kannattaa kuitenkin huomata, että kurssille on ilmoittauduttava viimeistään deadliea edeltävänä päivänä 9.1.2020."
     ]
-  },
+  },  
   {
     "title": "Pitääkö jokainen osa palauttaa omaan repositorioon?",
     "text": [
@@ -24,15 +24,21 @@
     ]
   },
   {
-    "title": "Voinko laajentaa aiempaa kurssisuoritustani?",
-    "text": [
-      "Voit, lue lisää <a href='osa0/yleista#aiemmin-suoritetun-kurssin-taydentaminen'>täältä</a>"
-    ]
-  },
-  {
     "title": "Voinko muokata tekemääni palautusta?",
     "text": [
       "Et. Kaikki osan tehtävät on palautettava kerralla. Jos merkkasit tehtäviä vahingossa väärin tai typotit repositorion nimen, lähetä mailia mluukkai@cs.helsinki.fi"
+    ]
+  },
+  {
+    "title": "Voinko laajentaa aiempaa kurssisuoritustani?",
+    "text": [
+      "Voit, lue lisää <a href='/osa0/yleista#aiemmin-suoritetun-kurssin-taydentaminen'>täältä</a>"
+    ]
+  },
+  {
+    "title": "Suoritin kurssin viime vuonna. Missä kohtaa materiaalia käsitellään React hookeja?",
+    "text": [
+      "State hookia, eli tapaa määritellä tila funktionaalisille komponenteille käsitellään <a href='/osa1/komponentin_tila_ja_tapahtumankasittely/#tilallinen-komponentti'>osassa 1</a>. Lifecycle-metodien roolia hoitavia effect hookeja käsitellään <a href='/osa2/palvelimella_olevan_datan_hakeminen#effect-hookit'>osassa 2</a>. Custom hookeista puhutaan <a href='/osa5/custom_hookit'>osassa 5</a>"
     ]
   }
 ]
