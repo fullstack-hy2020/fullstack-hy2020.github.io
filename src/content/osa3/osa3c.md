@@ -434,7 +434,7 @@ const mongoose = require('mongoose')
 
 const url = process.env.MONGODB_URI // highlight-line
 
-console.log('commecting to', url) // highlight-line
+console.log('connecting to', url) // highlight-line
 
 mongoose.connect(url, { useNewUrlParser: true })
 // highlight-start
@@ -442,7 +442,7 @@ mongoose.connect(url, { useNewUrlParser: true })
     console.log('connected to MongoDB')
   })
   .catch((error) => {
-    console.log('error connection to MongoDB:', error.message)
+    console.log('error connecting to MongoDB:', error.message)
   })
 // highlight-end
 
@@ -480,14 +480,14 @@ Yhteyden muodostustavassa on pieni muutos aiempaan:
 ```js
 const url = process.env.MONGODB_URI
 
-console.log('commecting to', url)
+console.log('connecting to', url)
 
 mongoose.connect(url, { useNewUrlParser: true })
   .then(result => {
     console.log('connected to MongoDB')
   })
   .catch((error) => {
-    console.log('error connection to MongoDB:', error.message)
+    console.log('error connecting to MongoDB:', error.message)
   })
 ```
 
