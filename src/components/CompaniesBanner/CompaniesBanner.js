@@ -81,7 +81,11 @@ export const CompaniesBanner = ({ frontPage }) => (
         className="col-4 push-right-3 challenge-title"
         text="Full stack -haasteessa mukana"
       />
-      <Element flex spaceBetween className="col-6 push-right-2 flex-fix-aligning space-between--mobile">
+      <Element
+        flex
+        spaceBetween
+        className="col-6 push-right-2 flex-fix-aligning space-between--mobile"
+      >
         {companies.map((company, i) => (
           <ContentLiftup
             key={company.url}
@@ -94,15 +98,15 @@ export const CompaniesBanner = ({ frontPage }) => (
             className={`col-3 col-5--mobile col-5--tablet`}
           />
         ))}
-
-        {frontPage && (
-          <Element flex spaceAround className="col-10 spacing">
-            <Link className="about__challenge-button" to="/companies/#challenge">
-              Lisätietoja haasteesta
-            </Link>
-          </Element>
-        )}
       </Element>
+      
+      {frontPage && (
+        <Element flex spaceAround className="col-10 spacing">
+          <Link className="about__challenge-button" to="/companies/#challenge">
+            Lisätietoja haasteesta
+          </Link>
+        </Element>
+      )}
     </Element>
   </Banner>
 );
