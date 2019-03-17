@@ -374,7 +374,7 @@ Napin teksti riippuu tilan <em>showAll</em> arvosta:
 näytä {showAll ? 'vain tärkeät' : 'kaikki'}
 ```
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019-hy2019-HY/part2-notes/tree/part2-3), branchissa <i>part2-3</i>.
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part2-notes/tree/part2-3), branchissa <i>part2-3</i>.
 
 </div>
 

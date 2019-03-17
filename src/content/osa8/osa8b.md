@@ -8,24 +8,24 @@ letter: b
 
 Toteutetaan seuraavaksi React-sovellus, joka käyttää toteuttamaamme GraphQL-palvelinta. 
 
-GraphQL:ää on periaatteessa mahdollista käyttää HTTP POST -pyyntöjen avulla. Seuraavassa esimerkki Postmanilla tehdystä kyselystä
+GraphQL:ää on periaatteessa mahdollista käyttää HTTP POST -pyyntöjen avulla. Seuraavassa esimerkki Postmanilla tehdystä kyselystä.
 
 ![](../images/8/8.png)
 
-Kommunikointi tapahtuu siis osoitteeseen http://localhosto:4000/graphql kohdistuvina POST-pyyntöinä, ja itse kysely lähetetään pyynnön mukana merkkijonona avaimen <i>query</i> arvona. 
+Kommunikointi tapahtuu siis osoitteeseen http://localhost:4000/graphql kohdistuvina POST-pyyntöinä, ja itse kysely lähetetään pyynnön mukana merkkijonona avaimen <i>query</i> arvona.
 
-Voisimmekin hoitaa React-sovelluksen ja GraphQL:n kommunikoinnin Axiosilla. Tämä ei kuitenkaan ole useimmiten järkevää ja on parempi idea käyttää korkeamman tason kirjastoa, joka pystyy abstrahoimaan kommunikoinnin turhia detaljeja. Tällä hetkellä järkeviä vaihtoehtoja on kaksi, Facebookin [Relay](https://facebook.github.io/relay/) ja
-[Apollo Client](https://www.apollographql.com/docs/react/), näistä Apollo on ylivoimaisesti suositumpi ja myös meidän valintamme.
+Voisimmekin hoitaa React-sovelluksen ja GraphQL:n kommunikoinnin Axiosilla. Tämä ei kuitenkaan ole useimmiten järkevää ja on parempi idea käyttää korkeamman tason kirjastoa, joka pystyy abstrahoimaan kommunikoinnin turhia detaljeja. Tällä hetkellä järkeviä vaihtoehtoja on kaksi: Facebookin [Relay](https://facebook.github.io/relay/) ja
+[Apollo Client](https://www.apollographql.com/docs/react/). Näistä Apollo on ylivoimaisesti suositumpi ja myös meidän valintamme.
 
 ### Apollo client
 
-Luodaan uusi React-sovellus ja asennetaan siihen [Apollo clientin](https://www.apollographql.com/docs/react/essentials/get-started.html#installation) vaatimat riippuvuudet
+Luodaan uusi React-sovellus ja asennetaan siihen [Apollo clientin](https://www.apollographql.com/docs/react/essentials/get-started.html#installation) vaatimat riippuvuudet.
 
 ```js
 npm install apollo-boost react-apollo graphql --save
 ```
 
-Aloitetaan seuraavalla ohjelmarungolla
+Aloitetaan seuraavalla ohjelmarungolla.
 
 ```js
 import React from 'react'
@@ -152,7 +152,7 @@ if ( result.loading ) {
 }
 ```
 
-Kun tulos on valmis, otetaan tuloksen kentästä <i>data</i> kyselyn <i>allPersons</i> vastaus ja renderöidään luettelossa olevat nimet ruudulle
+Kun tulos on valmis, otetaan tuloksen kentästä <i>data</i> kyselyn <i>allPersons</i> vastaus ja renderöidään luettelossa olevat nimet ruudulle.
 
 ```js
 <div>
@@ -160,7 +160,7 @@ Kun tulos on valmis, otetaan tuloksen kentästä <i>data</i> kyselyn <i>allPerso
 </div>
 ```
 
-Saadaksemme ratkaisua hieman siistimmäksi, eriytetään henkilöiden näyttäminen omaan komponenttiin <i>Persons</i>. Komponentti <i>App</i> muuttuu seuraavasti
+Saadaksemme ratkaisua hieman siistimmäksi, eriytetään henkilöiden näyttäminen omaan komponenttiin <i>Persons</i>. Komponentti <i>App</i> muuttuu seuraavasti:
 
 ```js
 const App = () => {
@@ -241,7 +241,7 @@ Myös GraphQL Playground mahdollistaa muuttujia sisältävän kyselyjen tekemise
 
 Eräs tapa on käyttää suoraan <i>client</i> -olion metodia <i>query</i>. Sovelluksen komponentit pääsevät käsiksi query-olioon komponentin [ApolloConsumer](https://www.apollographql.com/docs/react/essentials/queries.html#manual-query) avulla.
 
-Muutetaan komponenttia <i>App</i> siten, että se hakee <i>ApolloConsumerin</i> avulla viitteen _query_-olioon ja välittää sen komponentille <i>Persons</i>
+Muutetaan komponenttia <i>App</i> siten, että se hakee <i>ApolloConsumerin</i> avulla viitteen _query_-olioon ja välittää sen komponentille <i>Persons</i>.
 
 ```js
 import { Query, ApolloConsumer } from 'react-apollo' // highlight-line
@@ -263,7 +263,7 @@ const App = () => {
 }
 ```
 
-Komponentti <i>Persons</i> muuttuu seuraavasti
+Komponentti <i>Persons</i> muuttuu seuraavasti:
 
 ```js
 // highlight-start
@@ -392,7 +392,7 @@ mutation createPerson($name: String!, $street: String!, $city: String!, $phone: 
 `
 ```
 
-Komponentti <i>App</i> muuttuu seuraavasti
+Komponentti <i>App</i> muuttuu seuraavasti:
 
 ```js
 const App = () => {
@@ -424,7 +424,7 @@ const App = () => {
 
 Komponentin <i>Mutation</i> tagien sisällä on <i>funktio</i>, joka palauttaa varsinaisen renderöitävän lomakkeen muodostaman komponentin <i>PersonForm</i>. Parametrina tuleva <i>addPerson</i> on funktio, jota kutsumalla mutaatio suoritetaan.
 
-Lomakkeen muodostama komponentti ei sisällä mitään ihmeellistä
+Lomakkeen muodostama komponentti ei sisällä mitään ihmeellistä.
 
 ```js
 const PersonForm = (props) => {
@@ -479,7 +479,7 @@ const PersonForm = (props) => {
 }
 ```
 
-Lisäys kyllä toimii, mutta sovelluksen näkymä ei päivity. Syynä tälle on se, että Apollo Client ei osaa automaattisesti päivittää sovelluksen välimuistia, se sisältää edelleen ennen lisäystä olevan tilanteen. Saisimme kyllä uuden käyttäjän näkyviin uudelleenlataamalla selaimen, sillä Apollon välimuiti nollautuu uudelleenlatauksen yhteydessä. Tilanteeseen on kuitenkin pakko löytää joku järkevämpi ratkaisu.
+Lisäys kyllä toimii, mutta sovelluksen näkymä ei päivity. Syynä tälle on se, että Apollo Client ei osaa automaattisesti päivittää sovelluksen välimuistia, se sisältää edelleen ennen lisäystä olevan tilanteen. Saisimme kyllä uuden käyttäjän näkyviin uudelleenlataamalla selaimen, sillä Apollon välimuisti nollautuu uudelleenlatauksen yhteydessä. Tilanteeseen on kuitenkin pakko löytää joku järkevämpi ratkaisu.
 
 ### Välimuistin päivitys
 
@@ -560,7 +560,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 #### Mutaatioiden virheiden käsittely
 
-Jos yritämme luoda epävalidia henkilöä, seurauksena on poikkeus
+Jos yritämme luoda epävalidia henkilöä, seurauksena on poikkeus.
 
 ![](../images/8/14.png)
 
@@ -609,7 +609,7 @@ const App = () => {
 }
 ```
 
-Poikkeuksesta tiedotetaan nyt käyttäjää yksinkertaisella notifikaatiolla
+Poikkeuksesta tiedotetaan nyt käyttäjälle yksinkertaisella notifikaatiolla.
 
 ![](../images/8/15.png)
 
@@ -619,7 +619,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 Tehdään sovellukseen mahdollisuus vaihtaa henkilöiden puhelinnumeroita. Ratkaisu on lähes samanlainen kuin uuden henkilön lisäykseen käytetty.
 
-Mutaatio edellyttää jälleen muuttujien käyttöä
+Mutaatio edellyttää jälleen muuttujien käyttöä.
 
 ```js
 const EDIT_NUMBER = gql`
@@ -734,7 +734,7 @@ Apollo mahdollistaa tarvittaessa myös sovelluksen paikallisen tilan tallettamis
 
 GraphQL:n <i>Query</i>, <i>Mutation</i> ja <i>ApolloConsumer</i> komponentit noudattavat periaatetta, joka kulkee nimellä [render props](https://reactjs.org/docs/render-props.html). Periaatetta noudattava komponentti saa propsina tai tagiensa välissä lapsina (joka on teknisesti ottaen myös props) <i>funktion</i>, joka määrittelee miten komponentin renderöinti tapahtuu. Render props -periaatten avulla on mahdollista siirtää renderöinnistä huolehtivalle komponentille joko dataa tai funktioviitteitä.
 
-Render props -periaate on ollut viime aikoina melko suosittu, mm. osassa 7 käsittelemämme [react router](/osa7/react_router) käyttää sitä. React routerin komponentin <i>Route</i> avulla määritellään mitä sovellus renderöi selaimen ollessa tietyssä urlissa. Seuraavassa määritellään, että jos selaimen url on <i>/notes</i>, renderöidään komponentti <i>Notes</i>, jos taas selaimen url on esim. <i>/notes/10</i>, renderöidään komponentti <i>Note</i>, joka saa propsina muistiinpano-olion, jonka id on 10
+Render props -periaate on ollut viime aikoina melko suosittu, mm. osassa 7 käsittelemämme [react router](/osa7/react_router) käyttää sitä. React routerin komponentin <i>Route</i> avulla määritellään mitä sovellus renderöi selaimen ollessa tietyssä urlissa. Seuraavassa määritellään, että jos selaimen url on <i>/notes</i>, renderöidään komponentti <i>Notes</i>, jos taas selaimen url on esim. <i>/notes/10</i>, renderöidään komponentti <i>Note</i>, joka saa propsina muistiinpano-olion, jonka id on 10.
 
 ```js
 <Router>
@@ -772,7 +772,7 @@ Yleisemminkin trendinä on se, että hookeilla tullaan useissa tapauksissa korva
 
 ### react-apollo-hooks
 
-Jo tällä hetkellä on olemassa kirjasto [react-apollo-hooks](https://github.com/trojanowski/react-apollo-hooks), joka mahdollistaa Apollo clientin käytön hookien avulla. Asennetaan kirjasto
+Jo tällä hetkellä on olemassa kirjasto [react-apollo-hooks](https://github.com/trojanowski/react-apollo-hooks), joka mahdollistaa Apollo clientin käytön hookien avulla. Asennetaan kirjasto.
 
 ```js
 npm install --save react-apollo-hooks
@@ -799,7 +799,7 @@ ReactDOM.render(
 )
 ```
 
-Muutetaan komponenttia <i>Persons</i> siten, että se käyttää _useApolloClient_-hookia 
+Muutetaan komponenttia <i>Persons</i> siten, että se käyttää _useApolloClient_-hookia.
 
 ```js
 import React,  {useState } from 'react'
@@ -918,11 +918,11 @@ const App = () => {
 }
 ```
 
-Lopputulos on todellakin monin verroin selkeämpi kun render props -komponentteja käyttävä sotku. Voimme yhtyä Ryan Florencen React Confissa 2018 esittämään mielipiteeseen [90% Cleaner React With Hooks](https://www.youtube.com/watch?v=wXLf18DsV-I).
+Lopputulos on todellakin monin verroin selkeämpi kuin render props -komponentteja käyttävä sotku. Voimme yhtyä Ryan Florencen React Confissa 2018 esittämään mielipiteeseen [90% Cleaner React With Hooks](https://www.youtube.com/watch?v=wXLf18DsV-I).
 
 Apollo-tiimi on lupaillut että suora hook-tuki ilmestyy kevään aikana. Ennen suoran tuen toteuttamista voi jo melko turvallisin mielin käyttää kirjastoa [react-apollo-hooks](https://github.com/trojanowski/react-apollo-hooks).
 
-Koska render props -komponenteista on päästy kokonaan eroon, yksinkertaistuu <i>inder.js</i> seuraavasti
+Koska render props -komponenteista on päästy kokonaan eroon, yksinkertaistuu <i>index.js</i> seuraavasti
 
 ```js
 import React from 'react'
@@ -961,19 +961,19 @@ Voit tehdä sovelluksesi joko käyttäen Apollo Clientin render prop -komponentt
 
 #### 8.8: Kirjailijoiden näkymä
 
-Toteuta kirjailijoiden näkymä, eli näytä sivulla kaikkien kirjailijoiden tiedot esim. seuraavasti
+Toteuta kirjailijoiden näkymä, eli näytä sivulla kaikkien kirjailijoiden tiedot esim. seuraavasti:
 
 ![](../images/8/16.png)
 
 #### 8.9: Kirjojen näkymä
 
-Toteuta kirjojen näkymä, eli näytä sivulla kirjoista muut tiedot paitsi genret
+Toteuta kirjojen näkymä, eli näytä sivulla kirjoista muut tiedot paitsi genret.
 
 ![](../images/8/17.png)
 
 #### 8.10: Kirjan lisäys
 
-Toteuta sovellukseen mahdollisuus uusien kirjojen lisäämiseen. Voit tehdä sovellukseen lisäystä varten oman "näkymän", samalla logiikalla kuin kirjailijoiden ja kirjojen näkymät on tehty. Toiminnallisuus voi näyttää seuraavalta
+Toteuta sovellukseen mahdollisuus uusien kirjojen lisäämiseen. Voit tehdä sovellukseen lisäystä varten oman "näkymän", samalla logiikalla kuin kirjailijoiden ja kirjojen näkymät on tehty. Toiminnallisuus voi näyttää seuraavalta:
 
 ![](../images/8/18.png)
 
@@ -989,7 +989,7 @@ Huolehdi siitä, että kirjailijoiden näkymä pysyy ajantasaisena lisäyksen j�
 
 #### 8.12: Kirjailijan syntymävuosi advanced
 
-Tee syntymävuoden asetuslomakkeesta [select-tagin](https://reactjs.org/docs/forms.html#the-select-tag), kirjaston [react-select](https://github.com/JedWatson/react-select) tai jonkun muun mekanismin avulla sellainen, että syntymävuoden voi asettaa ainoastaan olemassaolevalle kirjailijalle. 
+Tee syntymävuoden asetuslomakkeesta [select-tagin](https://reactjs.org/docs/forms.html#the-select-tag), kirjaston [react-select](https://github.com/JedWatson/react-select) tai jonkun muun mekanismin avulla sellainen, että syntymävuoden voi asettaa ainoastaan olemassaolevalle kirjailijalle.
 
 react-select-kirjastoa hyödyntävä ratkaisu näyttää seuraavalta
 

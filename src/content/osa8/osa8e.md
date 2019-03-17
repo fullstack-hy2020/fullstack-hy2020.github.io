@@ -6,7 +6,7 @@ letter: e
 
 <div class="content">
 
-Kurssi lähestyy loppua, katsotaan lopuksi vielä muutamaa GraphQL:n liittyvää asiaa.
+Kurssi lähestyy loppuaan. Katsotaan lopuksi vielä muutamaa GraphQL:ään liittyvää asiaa.
 
 ### fragmentit
 
@@ -42,7 +42,7 @@ query {
 
 palauttavat molemmat henkilöitä. Valitessaan palautettavia kenttiä, molemmat kyselyt joutuvat määrittelemään täsmälleen samat kentät. 
 
-Tälläisiä tilanteita voidaan yksinkertaistaa [fragmenttien](https://graphql.org/learn/queries/#fragments) avulla. Määritellään kaikki henkilön tiedot valitseva fragmentti
+Tälläisiä tilanteita voidaan yksinkertaistaa [fragmenttien](https://graphql.org/learn/queries/#fragments) avulla. Määritellään kaikki henkilön tiedot valitseva fragmentti:
 
 ```js
 fragment PersonDetails on Person {
@@ -55,7 +55,7 @@ fragment PersonDetails on Person {
 }
 ```
 
-Kyselyt voidan nyt tehdä fragmenttien avulla kompaktimmassa muodossa
+Kyselyt voidan nyt tehdä fragmenttien avulla kompaktimmassa muodossa:
 
 ```js
 query {
@@ -73,7 +73,7 @@ query {
 
 Fragmentteja <i><strong>ei määritellä</strong></i> GraphQL:n skeemassa, vaan kyselyn tekevän clientin puolella. Fragmenttien tulee olla määriteltynä siinä vaiheessa kun client käyttää kyselyssään niitä. 
 
-Voisimme periaatteessa määritellä fragmentin jokaisen kyselyn yhteydessä seuraavasti
+Voisimme periaatteessa määritellä fragmentin jokaisen kyselyn yhteydessä seuraavasti:
 
 ```js
 const ALL_PERSONS = gql`
@@ -93,7 +93,7 @@ fragment PersonDetails on Person {
 `
 ```
 
-Huomattavasti järkevämpää on kuitenkin määritellä fragmentti kertaalleen ja sijoittaa se muuttujaan
+Huomattavasti järkevämpää on kuitenkin määritellä fragmentti kertaalleen ja sijoittaa se muuttujaan.
 
 ```js
 const PERSON_DETAILS = gql`
@@ -124,7 +124,7 @@ ${PERSON_DETAILS}
 
 ### Subscriptiot eli tilaukset
 
-GraphQL tarjoaa query- ja mutation-tyyppien lisäksi kolmannenkin operaatiotyypin [subscriptioin](https://www.apollographql.com/docs/react/advanced/subscriptions.html), jonka avulla clientit voivat <i>tilata</i> palvelimelta tiedotuksia palvelimelle tapahtuneista muutoksista.
+GraphQL tarjoaa query- ja mutation-tyyppien lisäksi kolmannenkin operaatiotyypin, [subscriptionin](https://www.apollographql.com/docs/react/advanced/subscriptions.html), jonka avulla clientit voivat <i>tilata</i> palvelimelta tiedotuksia palvelimella tapahtuneista muutoksista.
 
 Subscriptionit poikkeavatkin radikaalisti kaikesta, mitä kurssilla on tähän mennessä nähty. Toistaiseksi kaikki interaktio on koostunut selaimessa olevan React-sovelluksen palvelimelle tekemistä HTTP-pyynnöistä. Myös GraphQL:n queryt ja mutaatiot on hoidettu näin. Subscriptionien myötä tilanne käänyy päinvastaiseksi. Sen jälkeen kun selaimessa oleva sovellus on tehnyt tilauksen muutostiedoista, alkaa selain kuunnella palvelinta. Muutosten tullessa palvelin lähettää muutostiedon <i>kaikille sitä kuunteleville</i> selaimille.
 
@@ -132,9 +132,9 @@ Teknisesti ottaen HTTP-protokolla ei taivu hyvin palvelimelta selaimeen päin ta
 
 ### Tilaukset palvelimella
 
-Toteutetaan nyt sovellukseemme subscriptionit, joiden avulla palvelimelta on mahdollista tilata tieto puhelinluetteloon lisätyistä henkilöistä. 
+Toteutetaan nyt sovellukseemme subscriptiot, joiden avulla palvelimelta on mahdollista tilata tieto puhelinluetteloon lisätyistä henkilöistä.
 
-Palvelimen ei ole tarve kovin monille muutoksille. Skeemaan tarvitaan seuraava lisäys:
+Palvelimella ei ole tarvetta kovin monille muutoksille. Skeemaan tarvitaan seuraava lisäys:
 
 ```js
 type Subscription {
@@ -521,7 +521,7 @@ Eli vaikka pääasiallisesti tehdään ainoastaan yksi kysely, haetaan kaikki he
 
 Kyseessä on ilmentymä kuuluisasta [n+1-ongelmasta](https://www.google.com/search?q=n%2B1+problem), joka ilmenee aika ajoin eri yhteyksissä, välillä salakavalastikin sovelluskehittäjän huomaamatta aluksi mitään.
 
-Sopiva ratkaisutapa n+1-ongelmaan riippuu tilanteesta, usein se edellyttää jonkinlaisen liitoskyselyn tekemistä usean yksittäisen kyselyn sijaan.
+Sopiva ratkaisutapa n+1-ongelmaan riippuu tilanteesta. Usein se edellyttää jonkinlaisen liitoskyselyn tekemistä usean yksittäisen kyselyn sijaan.
 
 Tilanteessamme helpoimman ratkaisun toisi se, että tallettaisimme _Person_-olioihin viitteet niistä käyttäjistä kenen ystävälistalla henkilö on:
 
@@ -595,7 +595,7 @@ Jos kyselyä _allPersons_ muokataan tekemään liitoskysely sen varalta, että s
 > <i>Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered. We should forget about small efficiencies, say about 97% of the time: <strong>premature optimization is the root of all evil.</strong></i>
 
 Erään varteenotettavan ratkaisun monien muiden seikkojen lisäksi n+1-ongelmaan tarjoaa 
-Facebookin kehittämä [dataloader](https://github.com/facebook/dataloader)-kirjasto, dataloaderin käytöstä  Apollo serverin kanssa [täällä](https://www.robinwieruch.de/graphql-apollo-server-tutorial/#graphql-server-data-loader-caching-batching) ja [täällä](http://www.petecorey.com/blog/2017/08/14/batching-graphql-queries-with-dataloader/).
+Facebookin kehittämä [dataloader](https://github.com/facebook/dataloader)-kirjasto, dataloaderin käytöstä Apollo serverin kanssa [täällä](https://www.robinwieruch.de/graphql-apollo-server-tutorial/#graphql-server-data-loader-caching-batching) ja [täällä](http://www.petecorey.com/blog/2017/08/14/batching-graphql-queries-with-dataloader/).
 
 ### Loppusanat
 

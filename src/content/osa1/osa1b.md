@@ -153,7 +153,7 @@ const object3 = {
 
 Kenttien arvot voivat olla tyypiltään mitä vaan, lukuja, merkkijonoja, taulukoita, olioita...
 
-Olioiden kenttiin viitataan pistenotaatioll, tai hakasulkeilla:
+Olioiden kenttiin viitataan pistenotaatiolla, tai hakasulkeilla:
 
 ```js
 console.log(object1.name)         // tulostuu Arto Hellas
