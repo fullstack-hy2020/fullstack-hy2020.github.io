@@ -730,7 +730,7 @@ app.post('/notes', (request, response) => {
 
 Uudelle muistiinpanolle tarvitaan uniikki id. Ensin selvitetään olemassaolevista id:istä suurin muuttujaan _maxId_. Uuden muistiinpanon id:ksi asetetaan sitten _maxId + 1_. Tämä tapa ei ole itseasiassa kovin hyvä, mutta emme nyt välitä siitä sillä tulemme pian korvaamaan tavan, jolla muistiinpanot talletetaan.
 
-Tämän hetkisessä versiossa on vielä se ongelma, että voimme HTTP POST -pyynnöllä lisätä mitä tahansa kenttiä sisältäviä olioita. Parannellaan sovellusta siten, että kenttä <i>content</i> vaaditaan. Kentille <i>important</i> ja <i>date</i> asetetaan oletusarvot. Kaikki muut kentät hylätään:
+Tämän hetkisessä versiossa on vielä se ongelma, että voimme HTTP POST -pyynnöllä lisätä mitä tahansa kenttiä sisältäviä olioita. Parannellaan sovellusta siten, että kenttä <i>content</i> ei voi olla tyhjä. Kentille <i>important</i> ja <i>date</i> asetetaan oletusarvot. Kaikki muut kentät hylätään:
 
 ```js
 const generateId = () => {
@@ -743,7 +743,7 @@ const generateId = () => {
 app.post('/notes', (request, response) => {
   const body = request.body
 
-  if (body.content === undefined) {
+  if (!body.content) {
     return response.status(400).json({ 
       error: 'content missing' 
     })
@@ -764,10 +764,10 @@ app.post('/notes', (request, response) => {
 
 Tunnisteena toimivan id-kentän arvon generointilogiikka on eriytetty funktioon _generateId_.
 
-Jos vastaanotetulta datalta puuttuu kenttä <i>content</i>, vastataan statuskoodilla [400 bad request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1):
+Jos vastaanotetulta datalta puuttuu sisältö kentästä <i>content</i>, vastataan statuskoodilla [400 bad request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1):
 
 ```js
-if (body.content === undefined) {
+if (!body.content) {
   return response.status(400).json({ 
     error: 'content missing' 
   })
