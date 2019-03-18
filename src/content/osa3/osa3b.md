@@ -186,22 +186,20 @@ Tarvitsemme sovelluksellemme tietokannan. Ennen tietokannan käyttöönottoa kat
 
 ### Frontendin deployauksen suoraviivaistus
 
-Jotta uuden frontendin version generointi onnistuisi jatkossa ilman turhia manuaalisia askelia, tehdään frontendin repositorion juureen yksinkertainen shell-scripti, joka suorittaa uuden tuotantoversion buildaamisen eli komennon _npm run build_ ja sen siirron backendin alle. Annetaan skriptille nimeksi <i>deploy.sh</i>. Sisältö on seuraava
-
-```bash
-#!/bin/sh
-npm run build
-rm -rf ../../osa3/notebackend/build
-cp -r build ../../osa3/notebackend/
+Jotta uuden frontendin version generointi onnistuisi jatkossa ilman turhia manuaalisia askelia, luodaan uusia skriptejä <i>package.json</i>-tiedostoon
+```json
+{
+  "scripts": {
+    "build:ui": "rm -rf build && cd ../fullstack-open-2019-answers/Osa2/puhelinluettelo && npm run build --prod && cp -r build ../../../fullstack-open-2019-answers-osa3/",
+    "deploy": "git push heroku master",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",    
+    "logs:prod": "heroku logs --tail"
+  }
+}
 ```
-
-Skriptille pitää antaa vielä suoritusoikeudet:
-
-```bash
-chmod u+x deploy.sh
-```
-
-Skripti voidaan suorittaa frontendin juuresta komennolla _./deploy.sh_
+Skripteistä _npm run build:ui_ kääntää ui:n tuotantoversioksi ja kopioi sen. _npm run deploy_ julkaisee herokuun. 
+_npm run deploy:full_ yhdistää nuo molemmat sekä lisää vaadittavat <i>git</i>-komennot versionhallinnan päivittämistä varten.
+Lisätään lisäksi oma skripti lokien lukemiseen, niin käytännössä kaikki toimii npm-skriptein.
 
 ### Backendin urlit
 
