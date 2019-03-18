@@ -66,11 +66,11 @@ export const CompaniesBanner = ({ frontPage }) => (
               title: 'Yritys, anna tukesi Full stack -haasteelle',
             }}
             text={[
-              '<b>Haastekumppanuus</b>',
+              //'<b>Haastekumppanuus</b>',
               'Kevyesti kyytiin! Anna yrityksesi tuki Full stack -haasteelle, ja kannustakaa työyhteisönne osaajat kurssin pariin päivittämään ja laajentamaan taitojaan. Kiitoksena yhteistyöstä haastekumppanin logo nostetaan Full stack -kurssin sivulle.',
-              '<b>Yhteistyökumppanuus</b>',
-              'Kaikki hyöty irti! Iso lisäarvo syntyy aidosta yhteistyöstä rekrytointimahdollisuuksien, hackathonien ja vierailijaluentojen merkeissä. Lisäksi yhteistyökumppanuus tarjoaa logonäkyvyyden sekä yritysesittelyn Full stack -sivulle.Yhteistyökumppanuus on maksullinen.',
-              'Kasvatetaan osaamista yhdessä! Kumppanuuksista vastaa Jan Myller, yhteyspäällikkö, Helsingin yliopisto p. 02 941 40361, jan.myller@helsinki.fi',
+              //'<b>Yhteistyökumppanuus</b>',
+              //'Kaikki hyöty irti! Iso lisäarvo syntyy aidosta yhteistyöstä rekrytointimahdollisuuksien, hackathonien ja vierailijaluentojen merkeissä. Lisäksi yhteistyökumppanuus tarjoaa logonäkyvyyden sekä yritysesittelyn Full stack -sivulle.Yhteistyökumppanuus on maksullinen.',
+              'Kasvatetaan osaamista yhdessä! Kumppanuudesta vastaa Jan Myller, yhteyspäällikkö, Helsingin yliopisto p. 02 941 40361, jan.myller@helsinki.fi',
               '#fullstackhaaste',
             ]}
           />
