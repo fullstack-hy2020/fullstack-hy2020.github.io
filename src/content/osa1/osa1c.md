@@ -589,7 +589,7 @@ const setToValue = (value) => {
 }
 ```
 
-Kun komponentissa määritellään tapahtumankäsittelijä kutsumalla <em>setCounter(0)</em> on lopputuloksena funktio
+Kun komponentissa määritellään tapahtumankäsittelijä kutsumalla <em>setToValue(0)</em> on lopputuloksena funktio
 
 ```js
 () => {
