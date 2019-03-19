@@ -519,7 +519,7 @@ Mistä on kyse? Tapahtumankäsittelijäksi on tarkoitus määritellä <i>viite f
 
 tapahtumankäsittelijäksi tulee määriteltyä <i>funktiokutsu</i>. Sekin on monissa tilanteissa ok, mutta ei nyt, nimittäin kun React renderöi metodin, se suorittaa kutsun <em>setToValue(0)</em>. Kutsu aiheuttaa komponentin tilan päivittävän funktion _setCounter_ kutsumisen. Tämä taas aiheuttaa komponentin uudelleenrenderöitymisen. Ja sama toistuu uudelleen...
 
-Tilanteeseen on kaksi ratkaisua. Ratkaisuista yksinkertaisempi on muuttaa tapahtumankäsitteyä seuraavasti
+Tilanteeseen on kaksi ratkaisua. Ratkaisuista yksinkertaisempi on muuttaa tapahtumankäsittelyä seuraavasti
 
 ```js
 const App = (props) => {
@@ -541,7 +541,7 @@ const App = (props) => {
 }
 ```
 
-eli tapahtumankäsittelijäki on määritelty <i>funktio</i>, joka kutsuu funktiota _setToValue_ sopivalla parametrilla:
+eli tapahtumankäsittelijä on määritelty <i>funktio</i>, joka kutsuu funktiota _setToValue_ sopivalla parametrilla:
 
 ```js
 <button onClick={() => setToValue(counter + 1)}>
