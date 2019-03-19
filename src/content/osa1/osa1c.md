@@ -599,7 +599,7 @@ Kun komponentissa määritellään tapahtumankäsittelijä kutsumalla <em>setCou
 
 eli juuri oikeanlainen tilan nollaamisen aiheuttava funktio!
 
-Plus-napin tapahtumankäsittelijä määritellään kutsumalla <em>setCounter(counter + 1)</em>. Kun komponentti renderöidään ensimmäisen kerran, _counter_ on saanut alkuarvon 0, eli plus-napin tapahtumankäsittelijäksi tulee funktiokutsun <em>setCounter(1)</em> tulos, eli funktio
+Plus-napin tapahtumankäsittelijä määritellään kutsumalla <em>setToValue(counter + 1)</em>. Kun komponentti renderöidään ensimmäisen kerran, _counter_ on saanut alkuarvon 0, eli plus-napin tapahtumankäsittelijäksi tulee funktiokutsun <em>setToValue(1)</em> tulos, eli funktio
 
 ```js
 () => {
