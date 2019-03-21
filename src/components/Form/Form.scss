@@ -1,0 +1,25 @@
+@import '../common.scss';
+
+.form {
+  p {
+    font-family: $font-heading;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+  }
+
+  input {
+    padding: 1rem;
+    border: 1px solid $main;
+    outline: 0;
+    
+    &:focus {      
+      border: 1px solid $black;
+    }
+  }
+
+  .submit {
+    border: 3px solid $black;
+    background-color: $main;
+    padding: 0.7rem 2rem;
+  }  
+}
