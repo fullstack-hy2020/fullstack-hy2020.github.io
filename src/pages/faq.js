@@ -54,6 +54,7 @@ const FAQ = () => (
 
                 return (
                   <Accordion
+                    track
                     key={node.title}
                     title={node.title}
                     content={node.text}

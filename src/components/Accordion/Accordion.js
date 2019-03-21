@@ -1,10 +1,11 @@
 import './Accordion.scss';
 
-import { Link } from 'gatsby';
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
 import { BodyText } from '../BodyText/BodyText';
+import { Link } from 'gatsby';
+import PropTypes from 'prop-types';
+import ReactGA from 'react-ga';
 
 class Accordion extends Component {
   constructor(props) {
@@ -17,6 +18,19 @@ class Accordion extends Component {
 
   componentDidMount() {
     this.props.initiallyOpened && this.setState({ isOpened: true });
+  }
+
+  handleClick() {
+    const { isOpened } = this.state;
+    const { title, track } = this.props;
+
+    this.setState({ isOpened: !isOpened }, () => {
+      track &&
+        ReactGA.event({
+          category: 'FAQ',
+          action: `${title} ${!isOpened ? 'expanded' : 'closed'}`,
+        });
+    });
   }
 
   render() {
@@ -39,7 +53,7 @@ class Accordion extends Component {
             isOpened ? 'active' : ''
           } ${className}`}
           style={titleStyle}
-          onClick={() => this.setState({ isOpened: !isOpened })}
+          onClick={() => this.handleClick()}
         >
           {title}
         </button>
@@ -71,6 +85,7 @@ class Accordion extends Component {
 
 Accordion.propTypes = {
   title: PropTypes.string.isRequired,
+  track: PropTypes.bool,
   content: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   list: PropTypes.array,
   className: PropTypes.string,
@@ -81,6 +96,7 @@ Accordion.propTypes = {
 
 Accordion.defaultProps = {
   className: '',
+  track: false,
   containerClassName: '',
   initiallyOpened: false,
   titleStyle: {},

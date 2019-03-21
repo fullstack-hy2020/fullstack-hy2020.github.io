@@ -29,6 +29,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "react-ga": "^2.5.7",
     "react-helmet": "^5.2.0"
   },
   "keywords": [
