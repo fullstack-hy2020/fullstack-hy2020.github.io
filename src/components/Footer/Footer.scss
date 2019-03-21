@@ -2,7 +2,7 @@
 
 #footer {
   margin-top: auto;
-  
+
   @include from($desktop) {
     align-items: center;
   }
@@ -12,8 +12,11 @@
   }
 
   .footer__navigation {
+    display: none;
+
     @include to($large) {
       width: 100%;
+      display: block;
 
       &-link-container {
         display: flex;

@@ -10,6 +10,7 @@ export const navigation = [
   { text: 'KURSSIN SISÄLTÖ', path: '#course-contents' },
   { text: 'FAQ', path: '/faq' },
   { text: 'KURSSILLA MUKANA', path: '/companies' },
+  { text: 'HAASTE', path: '/companies/#challenge' },
 ];
 
 const handleCloseMenu = () =>
