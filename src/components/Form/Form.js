@@ -12,7 +12,6 @@ const GOOGLE_FORM_TITLE_ID = 'entry.659646544';
 const GOOGLE_FORM_ORGANIZATION_ID = 'entry.1144701613';
 const GOOGLE_FORM_PHONE_ID = 'entry.658079226';
 const GOOGLE_FORM_EMAIL_ID = 'entry.1005441181';
-const GOOGLE_FORM_QUESTION_ID = 'entry.1721353614';
 
 const PROXY_URL = 'https://cors-anywhere.herokuapp.com/';
 
@@ -27,7 +26,6 @@ class Form extends Component {
       organization: '',
       phone: '',
       email: '',
-      whereDidYouFind: '',
     };
   }
 
@@ -47,7 +45,6 @@ class Form extends Component {
       organization,
       phone,
       email,
-      whereDidYouFind,
     } = this.state;
 
     const formData = new FormData();
@@ -56,7 +53,6 @@ class Form extends Component {
     formData.append(GOOGLE_FORM_ORGANIZATION_ID, organization);
     formData.append(GOOGLE_FORM_PHONE_ID, phone);
     formData.append(GOOGLE_FORM_EMAIL_ID, email);
-    formData.append(GOOGLE_FORM_QUESTION_ID, whereDidYouFind);
 
     axios
       .post(PROXY_URL + GOOGLE_FORM_ACTION_URL, formData)
@@ -67,7 +63,6 @@ class Form extends Component {
           organization: '',
           phone: '',
           email: '',
-          whereDidYouFind: '',
           formIsSent: true,
         });
       })
@@ -86,79 +81,65 @@ class Form extends Component {
       organization,
       phone,
       email,
-      whereDidYouFind,
     } = this.state;
 
     return (
       <>
         {!formIsSent ? (
           <form onSubmit={this.handleSubmit} className="form col-10">
-            <p className="spacing--small">Name</p>
+            <p className="spacing--small">Nimi</p>
             <input
               required
               autoComplete="off"
               className="col-10"
-              placeholder="Nimi"
+              placeholder="Matti Meikäläinen"
               type="text"
               name="name"
               value={name}
               onChange={this.handleChange}
             />
-            <p className="spacing--small">Title</p>
+            <p className="spacing--small">Titteli</p>
             <input
               required
               autoComplete="off"
               className="col-10"
-              placeholder="Titteli"
+              placeholder="CEO"
               type="text"
               name="title"
               value={title}
               onChange={this.handleChange}
             />
-            <p className="spacing--small">Organization</p>
+            <p className="spacing--small">Yritys</p>
             <input
               required
               autoComplete="off"
               className="col-10"
-              placeholder="Yritys"
+              placeholder="Yritys Oy"
               type="text"
               name="organization"
               value={organization}
               onChange={this.handleChange}
             />
-            <p className="spacing--small">Phone</p>
+            <p className="spacing--small">Puhelinnumero</p>
             <input
               required
               autoComplete="off"
               className="col-10"
-              placeholder="Puhelinnumero"
+              placeholder="+358 40 234 5678"
               type="text"
               name="phone"
               value={phone}
               onChange={this.handleChange}
             />
-            <p className="spacing--small">Email</p>
+            <p className="spacing--small">Sähköpostiosoite</p>
             <input
               required
               autoComplete="off"
               className="col-10"
-              placeholder="Sähköpostiosoite"
+              placeholder="email@domain.com"
               type="email"
               name="email"
               value={email}
-              onChange={this.handleChange}
-            />
-            <p className="spacing--small">
-              Where did you get the information about the full stack challenge?
-            </p>
-            <input
-              required
-              autoComplete="off"
-              className="col-10"
-              placeholder="Mistä sait tiedon Full Stack haasteesta"
-              type="text"
-              name="whereDidYouFind"
-              value={whereDidYouFind}
               onChange={this.handleChange}
             />
             <button
