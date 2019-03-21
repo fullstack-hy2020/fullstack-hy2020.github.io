@@ -28,7 +28,7 @@ const Footer = () => (
     flex
   >
     <Element
-      className="col-5 col-10--mobile order-2--mobile order-2--tablet footer__links"
+      className="col-5 push-right-3 col-10--mobile order-2--mobile order-2--tablet footer__links"
       flex
       spaceBetween
     >
