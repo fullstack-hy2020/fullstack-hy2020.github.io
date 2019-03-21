@@ -5,11 +5,14 @@ import Element from '../Element/Element';
 import { Link } from 'gatsby';
 import { PropTypes } from 'prop-types';
 import React from 'react';
+import appgyverLogo from '../../images/appgyver_logo.svg';
 import elisaLogo from '../../images/elisa_logo.svg';
 import houstonLogo from '../../images/houston_logo.svg';
-// import seLogo from '../../images/SE_logo.png';
+import keskoLogo from '../../images/kesko_logo.svg';
 import sympaLogo from '../../images/sympa_logo.svg';
 import terveystaloLogo from '../../images/terveystalo_logo.svg';
+// import seLogo from '../../images/SE_logo.png';
+import unityLogo from '../../images/unity_logo.svg';
 import yliopistoLogo from '../../images/hgin_yliopisto.svg';
 
 const companies = [
@@ -33,6 +36,19 @@ const companies = [
     image: { src: sympaLogo, alt: 'Sympa logo' },
     url: 'https://sympa.com/careers',
   },
+  {
+    image: { src: keskoLogo, alt: 'Kesko logo' },
+    url: 'https://www.kesko.fi/',
+  },
+  {
+    image: { src: unityLogo, alt: 'Unity logo' },
+    url: 'https://careers.unity.com/location/helsinki',
+  },
+  {
+    image: { src: appgyverLogo, alt: 'AppGyver logo' },
+    url: 'https://www.appgyver.com/',
+  },
+
   // {
   //   image: { src: seLogo, alt: 'Storaenso logo' },
   //   url: 'https://www.storaensometsa.fi/',
@@ -46,36 +62,6 @@ export const CompaniesBanner = ({ frontPage }) => (
     id="challenge"
   >
     <Element className="container" flex>
-      {!frontPage && (
-        <Element className="spacing spacing--after col-6 push-right-2">
-          <BodyText
-            heading={{ level: 'h2', title: 'Tämä on Full stack -haaste' }}
-            headingFont
-            text={[
-              'Full stack -haaste rohkaisee niin osaajat kuin yritykset kasvattamaan osaamistaan Full stack -hengessä.',
-              'Päämäärämme on auttaa oppimaan. Tarjoamme valmiiksi kootun ja ajatuksella rajatun Full Stack -kurssin, joka helpottaa ja vauhdittaa nykyaikaisiin, tuotannossa käytettyihin teknologioihin tutustumista. Kurssin materiaali ja tehtävät sopivat niin konkarille kuin aloittelevalle osaajalle; täydennyskoulutusta etsivälle, alanvaihtajalle, taitojaan päivittävälle, alan opiskelijalle sekä jokaiselle, joka haluaa tarttua haasteeseen ja kasvattaa osaamistaan koodarina.',
-              'Full stack -kurssi on ilmainen verkkokurssi, joka on koottu ajatuksella koodarilta koodarille. Kokonaisuus on Helsingin yliopiston ja Houston Inc.’n yhteistyössä toteuttama.',
-            ]}
-          />
-
-          <BodyText
-            className="spacing"
-            headingFont
-            heading={{
-              level: 'h2',
-              title: 'Yritys, anna tukesi Full stack -haasteelle',
-            }}
-            text={[
-              //'<b>Haastekumppanuus</b>',
-              'Kevyesti kyytiin! Anna yrityksesi tuki Full stack -haasteelle, ja kannustakaa työyhteisönne osaajat kurssin pariin päivittämään ja laajentamaan taitojaan. Kiitoksena yhteistyöstä haastekumppanin logo nostetaan Full stack -kurssin sivulle.',
-              //'<b>Yhteistyökumppanuus</b>',
-              //'Kaikki hyöty irti! Iso lisäarvo syntyy aidosta yhteistyöstä rekrytointimahdollisuuksien, hackathonien ja vierailijaluentojen merkeissä. Lisäksi yhteistyökumppanuus tarjoaa logonäkyvyyden sekä yritysesittelyn Full stack -sivulle.Yhteistyökumppanuus on maksullinen.',
-              'Kasvatetaan osaamista yhdessä! Kumppanuudesta vastaa Jan Myller, yhteyspäällikkö, Helsingin yliopisto p. 02 941 40361, jan.myller@helsinki.fi',
-              '#fullstackhaaste',
-            ]}
-          />
-        </Element>
-      )}
       <BodyText
         centered
         className="col-4 push-right-3 challenge-title"
@@ -99,10 +85,10 @@ export const CompaniesBanner = ({ frontPage }) => (
           />
         ))}
       </Element>
-      
+
       {frontPage && (
         <Element flex spaceAround className="col-10 spacing">
-          <Link className="about__challenge-button" to="/companies/#challenge">
+          <Link className="about__challenge-button" to="/challenge">
             Lisätietoja haasteesta
           </Link>
         </Element>
