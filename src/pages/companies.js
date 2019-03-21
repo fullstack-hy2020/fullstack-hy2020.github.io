@@ -1,5 +1,4 @@
 import { BodyText } from '../components/BodyText/BodyText';
-import { CompaniesBanner } from '../components/CompaniesBanner/CompaniesBanner';
 import { DeveloperStory } from '../components/DeveloperStory/DeveloperStory';
 import Element from '../components/Element/Element';
 import Footer from '../components/Footer/Footer';
@@ -14,7 +13,7 @@ const Companies = () => (
 
     <Element className="container">
       <BodyText
-        className="col-10 spacing companies__main-title"
+        className="col-10 spacing"
         heading={{ title: 'Devaaja-tarinoita yhteistyökumppaneiltamme', level: 'h1' }}
       />
 
@@ -24,8 +23,6 @@ const Companies = () => (
 
       <Element className="spacing" />
     </Element>
-
-    <CompaniesBanner />
 
     <Footer />
   </Layout>
