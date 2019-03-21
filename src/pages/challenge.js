@@ -8,25 +8,17 @@ import Layout from '../components/layout';
 import React from 'react';
 import SEO from '../components/seo';
 import { SubHeader } from '../components/SubHeader/SubHeader';
-import landingImage from '../images/landing.svg';
+import landingImage from '../images/haaste.svg';
 
 const Challenge = () => (
   <Layout>
     <SEO title="Yritysesittelyt" />
 
     <Banner style={{ paddingBottom: 0, overflow: 'hidden' }}>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          marginBottom: '-70px',
-        }}
-        className="container"
-      >
+      <div className="container challenge__banner">
         <Image
-          className="col-4 push-right-2"
           contain
-          style={{ margin: 0 }}
+          className="col-10"
           alt="Stacked cubes with React logo and JavaScript text"
           src={landingImage}
         />

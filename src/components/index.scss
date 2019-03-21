@@ -335,3 +335,31 @@ a {
     justify-content: space-between;
   }
 }
+
+.challenge__banner {
+  display: flex;
+  justify-content: center;
+  margin-bottom: -70px;
+
+  @include from($tablet) {
+    transform: translateY(-10px);
+  }
+
+  @include from($large) {
+    margin-bottom: -370px;
+  }
+
+  .image {
+    margin: 0;
+    width: 70%;
+    transform: translateY(-25%);
+
+    @include from($tablet) {
+      transform: translateY(-10%);
+    }
+
+    @include from($large) {
+      transform: translateY(-30%);
+    }
+  }
+}
