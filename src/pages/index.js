@@ -98,6 +98,12 @@ const IndexPage = () => (
                   headingLevel="h1"
                 />
 
+                <SubHeader
+                  className="col-10"
+                  text="Full Stack Open 2019"
+                  headingLevel="h2"
+                />
+
                 <Arrow
                   className="col-10 arrow__container--with-link"
                   bold
