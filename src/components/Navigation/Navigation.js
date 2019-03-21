@@ -6,11 +6,11 @@ import { NavigationItem } from './Item';
 import PropTypes from 'prop-types';
 
 export const navigation = [
-  { text: 'KURSSISTA', path: '/about' },
-  { text: 'KURSSIN SISÄLTÖ', path: '#course-contents' },
+  { text: 'Kurssista', path: '/about' },
+  { text: 'Kurssin Sisältö', path: '#course-contents' },
   { text: 'FAQ', path: '/faq' },
-  { text: 'KURSSILLA MUKANA', path: '/companies' },
-  { text: 'HAASTE', path: '/companies/#challenge' },
+  { text: 'Kurssilla Mukana', path: '/companies' },
+  { text: 'Haaste', path: '/challenge' },
 ];
 
 const handleCloseMenu = () =>
