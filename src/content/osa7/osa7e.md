@@ -72,7 +72,7 @@ Koska sekä React että [Flux](https://facebook.github.io/flux/docs/in-depth-ove
 
 ### React/node-sovellusten tietoturva
 
-Emme ole vielä maininneet kurssilla sanaakaan tietoturvaan liittyen. Kovin paljoon ei nytkään ole aikaa, ja onneksi laitoksella on MOOC-kurssi [Securing Software](https://cybersecuritybase.github.io/securing/) tähän tärkeään aihepiiriin.
+Emme ole vielä maininneet kurssilla sanaakaan tietoturvaan liittyen. Kovin paljon ei nytkään ole aikaa, ja onneksi laitoksella on MOOC-kurssi [Securing Software](https://cybersecuritybase.github.io/securing/) tähän tärkeään aihepiiriin.
 
 Katsotaan kuitenkin muutamaa kurssispesifistä seikkaa.
 
