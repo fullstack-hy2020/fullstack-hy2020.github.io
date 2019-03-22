@@ -6,12 +6,13 @@ import { BodyText } from '../BodyText/BodyText';
 import axios from 'axios';
 
 const GOOGLE_FORM_ACTION_URL =
-  'https://docs.google.com/forms/d/e/1FAIpQLSeBDG4e55ml96b5TJriFznAcpF8mV38RoEI5mQjqvBoDMn-IQ/formResponse';
-const GOOGLE_FORM_NAME_ID = 'entry.1531562037';
-const GOOGLE_FORM_TITLE_ID = 'entry.659646544';
-const GOOGLE_FORM_ORGANIZATION_ID = 'entry.1144701613';
-const GOOGLE_FORM_PHONE_ID = 'entry.658079226';
-const GOOGLE_FORM_EMAIL_ID = 'entry.1005441181';
+  'https://docs.google.com/forms/d/e/1FAIpQLSeO9jt4-iUsiFaLT5Rpwt47sNceu25te2UO7WGQ2wcUNTbBiQ/formResponse';
+const GOOGLE_FORM_NAME_ID = 'entry.1118152809';
+const GOOGLE_FORM_TITLE_ID = 'entry.2015280305';
+const GOOGLE_FORM_ORGANIZATION_ID = 'entry.578868795';
+const GOOGLE_FORM_PHONE_ID = 'entry.1958784460';
+const GOOGLE_FORM_EMAIL_ID = 'entry.2042435833';
+const GOOGLE_FORM_QUESTION_ID = 'entry.1350466445';
 
 const PROXY_URL = 'https://cors-anywhere.herokuapp.com/';
 
@@ -26,6 +27,7 @@ class Form extends Component {
       organization: '',
       phone: '',
       email: '',
+      question: '',
     };
   }
 
@@ -39,13 +41,7 @@ class Form extends Component {
   };
 
   sendMessage = () => {
-    const {
-      name,
-      title,
-      organization,
-      phone,
-      email,
-    } = this.state;
+    const { name, title, organization, phone, email, question } = this.state;
 
     const formData = new FormData();
     formData.append(GOOGLE_FORM_NAME_ID, name);
@@ -53,6 +49,7 @@ class Form extends Component {
     formData.append(GOOGLE_FORM_ORGANIZATION_ID, organization);
     formData.append(GOOGLE_FORM_PHONE_ID, phone);
     formData.append(GOOGLE_FORM_EMAIL_ID, email);
+    formData.append(GOOGLE_FORM_QUESTION_ID, question);
 
     axios
       .post(PROXY_URL + GOOGLE_FORM_ACTION_URL, formData)
@@ -63,6 +60,7 @@ class Form extends Component {
           organization: '',
           phone: '',
           email: '',
+          question: '',
           formIsSent: true,
         });
       })
@@ -81,13 +79,16 @@ class Form extends Component {
       organization,
       phone,
       email,
+      question,
     } = this.state;
 
     return (
       <>
         {!formIsSent ? (
           <form onSubmit={this.handleSubmit} className="form col-10">
-            <p className="spacing--small">Nimi</p>
+            <p className="spacing--small">
+              Nimi<span aria-hidden="true">*</span>
+            </p>
             <input
               required
               autoComplete="off"
@@ -98,7 +99,9 @@ class Form extends Component {
               value={name}
               onChange={this.handleChange}
             />
-            <p className="spacing--small">Titteli</p>
+            <p className="spacing--small">
+              Titteli<span aria-hidden="true">*</span>
+            </p>
             <input
               required
               autoComplete="off"
@@ -109,7 +112,9 @@ class Form extends Component {
               value={title}
               onChange={this.handleChange}
             />
-            <p className="spacing--small">Yritys</p>
+            <p className="spacing--small">
+              Yritys<span aria-hidden="true">*</span>
+            </p>
             <input
               required
               autoComplete="off"
@@ -120,7 +125,9 @@ class Form extends Component {
               value={organization}
               onChange={this.handleChange}
             />
-            <p className="spacing--small">Puhelinnumero</p>
+            <p className="spacing--small">
+              Puhelinnumero<span aria-hidden="true">*</span>
+            </p>
             <input
               required
               autoComplete="off"
@@ -131,7 +138,9 @@ class Form extends Component {
               value={phone}
               onChange={this.handleChange}
             />
-            <p className="spacing--small">Sähköpostiosoite</p>
+            <p className="spacing--small">
+              Sähköpostiosoite<span aria-hidden="true">*</span>
+            </p>
             <input
               required
               autoComplete="off"
@@ -140,6 +149,17 @@ class Form extends Component {
               type="email"
               name="email"
               value={email}
+              onChange={this.handleChange}
+            />
+            <p className="spacing--small">
+              Mistä kuulit Full Stack -haasteesta?
+            </p>
+            <input
+              autoComplete="off"
+              className="col-10"
+              type="text"
+              name="question"
+              value={question}
               onChange={this.handleChange}
             />
             <button
@@ -153,7 +173,7 @@ class Form extends Component {
           <BodyText
             className="spacing"
             headingFont
-            text={['Kiitos lomakkeen lähettämisestä! Palaamme asiaan pian.']}
+            text={['Kiitos! Otamme sinuun yhteyttä!']}
           />
         )}
       </>
