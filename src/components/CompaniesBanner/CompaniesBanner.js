@@ -9,7 +9,7 @@ import appgyverLogo from '../../images/appgyver_logo.svg';
 import elisaLogo from '../../images/elisa_logo.svg';
 import houstonLogo from '../../images/houston_logo.svg';
 import keskoLogo from '../../images/kesko_logo.svg';
-// import smartlyLogo from '../../images/smartly_logo.svg';
+import smartlyLogo from '../../images/smartly_logo.svg';
 import sympaLogo from '../../images/sympa_logo.svg';
 import terveystaloLogo from '../../images/terveystalo_logo.svg';
 // import seLogo from '../../images/SE_logo.png';
@@ -49,10 +49,10 @@ const companies = [
     image: { src: appgyverLogo, alt: 'AppGyver logo' },
     url: 'https://www.appgyver.com/',
   },
-  // {
-  //   image: { src: smartlyLogo, alt: 'Smartly.io logo' },
-  //   url: 'https://www.smartly.io/',
-  // },
+  {
+    image: { src: smartlyLogo, alt: 'Smartly.io logo' },
+    url: 'https://www.smartly.io/',
+  },
   // {
   //   image: { src: seLogo, alt: 'Storaenso logo' },
   //   url: 'https://www.storaensometsa.fi/',
