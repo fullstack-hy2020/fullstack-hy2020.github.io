@@ -749,6 +749,10 @@ const App = (props) => {
         text='plus'
       />
       <Button
+        handleClick={() => setToValue(counter - 1)}
+        text='minus'
+      />
+      <Button
         handleClick={() => setToValue(0)}
         text='zero'
       />
