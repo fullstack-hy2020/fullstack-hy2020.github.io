@@ -7,6 +7,8 @@ import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import ReactGA from 'react-ga';
 
+ReactGA.initialize('UA-135975842-1');
+
 class Accordion extends Component {
   constructor(props) {
     super(props);
