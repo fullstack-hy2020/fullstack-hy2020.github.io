@@ -7,9 +7,9 @@ import PropTypes from 'prop-types';
 
 export const navigation = [
   { text: 'Kurssista', path: '/about' },
-  { text: 'Kurssin Sisältö', path: '#course-contents' },
+  { text: 'Kurssin sisältö', path: '#course-contents' },
   { text: 'FAQ', path: '/faq' },
-  { text: 'Kurssilla Mukana', path: '/companies' },
+  { text: 'Kurssilla mukana', path: '/companies' },
   { text: 'Haaste', path: '/challenge' },
 ];
 
