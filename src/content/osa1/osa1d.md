@@ -542,11 +542,11 @@ ReactDOM.render(
 )
 ```
 
-Haluamme, että napin avulla tilan talettava muuttuja _value_ saadaan nollattua.
+Haluamme, että napin avulla tilan tallettava muuttuja _value_ saadaan nollattua.
 
 Jotta saamme napin reagoimaan, on sille lisättävä <i>tapahtumankäsittelijä</i>.
 
-Tapahtumankäsittelijän tulee aina olla <i>funktio</i> tai viite funktioon. Jos tapahtumankäisttelijän paikalle yritetään laittaa jotain muuta, ei nappi toimi.
+Tapahtumankäsittelijän tulee aina olla <i>funktio</i> tai viite funktioon. Jos tapahtumankäsittelijän paikalle yritetään laittaa jotain muuta, ei nappi toimi.
 
 Jos esim. antaisimme tapahtumankäsittelijäksi merkkijonon:
 
