@@ -36,9 +36,10 @@ const Challenge = () => (
         <BodyText
           headingFont
           text={[
-            'Full stack -haaste rohkaisee niin osaajat kuin yritykset kasvattamaan osaamistaan Full stack -hengessä.',
-            'Päämäärämme on auttaa oppimaan. Tarjoamme valmiiksi kootun ja ajatuksella rajatun Full Stack -kurssin, joka helpottaa ja vauhdittaa nykyaikaisiin, tuotannossa käytettyihin teknologioihin tutustumista. Kurssin materiaali ja tehtävät sopivat niin konkarille kuin aloittelevalle osaajalle; täydennyskoulutusta etsivälle, alanvaihtajalle, taitojaan päivittävälle, alan opiskelijalle sekä jokaiselle, joka haluaa tarttua haasteeseen ja kasvattaa osaamistaan koodarina.',
-            'Full stack -kurssi on ilmainen verkkokurssi, joka on koottu ajatuksella koodarilta koodarille. Kokonaisuus on Helsingin yliopiston ja Houston Inc.’n yhteistyössä toteuttama.',
+            'Helsingin yliopisto ja Houston Inc. haastavat niin koodarit kuin yritykset kasvattamaan osaamistaan Full Stack -hengessä. Haaste on tarkoitettu jokaiselle sovelluskehitysalan osaajalle.',
+            'Haasteen päämäärä on kannustaa oppimaan. Tarjoamme valmiiksi kootun ja ajatuksella rajatun Full Stack -kurssin, joka helpottaa ja vauhdittaa nykyaikaisiin, tuotannossa käytettyihin teknologioihin tutustumista.',
+            'Kurssin materiaali ja tehtävät sopivat niin konkarille kuin aloittelevalle osaajalle; täydennyskoulutusta etsivälle, alanvaihtajalle, taitojaan päivittävälle, alan opiskelijalle sekä jokaiselle, joka haluaa tarttua haasteeseen ja kasvattaa osaamistaan. Kurssi on kattava ja sen suorittaminen kestää taitotasosta riippuen 50-150 tuntia.',
+            "Full Stack -kurssi on ilmainen verkkokurssi, joka on koottu ajatuksella koodarilta koodarille. Kokonaisuus on Helsingin yliopiston ja Houston Inc.'n yhteistyössä toteuttama.",
           ]}
         />
 
@@ -50,11 +51,10 @@ const Challenge = () => (
             title: 'Yritys, anna tukesi Full stack -haasteelle',
           }}
           text={[
-            //'<b>Haastekumppanuus</b>',
-            'Kevyesti kyytiin! Anna yrityksesi tuki Full stack -haasteelle, ja kannustakaa työyhteisönne osaajat kurssin pariin päivittämään ja laajentamaan taitojaan. Kiitoksena yhteistyöstä haastekumppanin logo nostetaan Full stack -kurssin sivulle.',
-            //'<b>Yhteistyökumppanuus</b>',
-            //'Kaikki hyöty irti! Iso lisäarvo syntyy aidosta yhteistyöstä rekrytointimahdollisuuksien, hackathonien ja vierailijaluentojen merkeissä. Lisäksi yhteistyökumppanuus tarjoaa logonäkyvyyden sekä yritysesittelyn Full stack -sivulle.Yhteistyökumppanuus on maksullinen.',
-            'Kasvatetaan osaamista yhdessä! Kumppanuudesta vastaa Jan Myller, yhteyspäällikkö, Helsingin yliopisto p. 02 941 40361, jan.myller@helsinki.fi',
+            'Tarttumalla Full Stack -haasteeseen kannustatte työyhteisönne osaajia uuden oppimisen äärelle. Haasteen kautta Full Stack osaamisalueena tulee tutuksi niin kokeneelle kuin aloittelevalle koodarille.',
+            'Haasteeseen sisällön tuo Full Stack -kurssi, joka toimii hienosti itseopiskelumateriaalina yrityksen muiden koulutusmahdollisuuksien joukossa',
+            'Haasteeseen osallistuminen on maksutonta. Haasteen vastaanottaneiden yritysten logot nostetaan Full Stack -kurssin sivulle.',
+            'Yritys, lähde mukaan haasteeseen!',
           ]}
         />
 
