@@ -21,5 +21,9 @@
     border: 3px solid $black;
     background-color: $main;
     padding: 0.7rem 2rem;
+
+    &:hover {
+      cursor: pointer;
+    }
   }  
 }
