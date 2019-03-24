@@ -809,7 +809,7 @@ type Mutation {
   // highlight-start
   editNumber(
     name: String!
-    number: String!
+    phone: String!
   ): Person
   // highlight-end
 }
