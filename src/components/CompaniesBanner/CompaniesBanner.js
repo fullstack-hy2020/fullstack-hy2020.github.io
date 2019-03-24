@@ -6,7 +6,9 @@ import { Link } from 'gatsby';
 import { PropTypes } from 'prop-types';
 import React from 'react';
 import appgyverLogo from '../../images/appgyver_logo.svg';
+import codentoLogo from '../../images/codento_logo.svg';
 import elisaLogo from '../../images/elisa_logo.svg';
+import emblicaLogo from '../../images/emblica_logo.svg';
 import houstonLogo from '../../images/houston_logo.svg';
 import keskoLogo from '../../images/kesko_logo.svg';
 import smartlyLogo from '../../images/smartly_logo.svg';
@@ -52,6 +54,14 @@ const companies = [
   {
     image: { src: smartlyLogo, alt: 'Smartly.io logo' },
     url: 'https://www.smartly.io/',
+  },
+  {
+    image: { src: codentoLogo, alt: 'Codento logo' },
+    url: 'https://www.codento.fi/',
+  },
+  {
+    image: { src: emblicaLogo, alt: 'Emblica logo' },
+    url: 'https://emblica.com/',
   },
   // {
   //   image: { src: seLogo, alt: 'Storaenso logo' },
