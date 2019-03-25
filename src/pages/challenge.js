@@ -38,7 +38,7 @@ const Challenge = () => (
           text={[
             'Helsingin yliopisto ja Houston Inc. haastavat niin koodarit kuin yritykset kasvattamaan osaamistaan Full Stack -hengessä. Haaste on tarkoitettu jokaiselle sovelluskehitysalan osaajalle.',
             'Haasteen päämäärä on kannustaa oppimaan. Tarjoamme valmiiksi kootun ja ajatuksella rajatun Full Stack -kurssin, joka helpottaa ja vauhdittaa nykyaikaisiin, tuotannossa käytettyihin teknologioihin tutustumista.',
-            'Kurssin materiaali ja tehtävät sopivat niin konkarille kuin aloittelevalle osaajalle; täydennyskoulutusta etsivälle, alanvaihtajalle, taitojaan päivittävälle, alan opiskelijalle sekä jokaiselle, joka haluaa tarttua haasteeseen ja kasvattaa osaamistaan. Kurssi on kattava ja sen suorittaminen kestää taitotasosta riippuen 50-150 tuntia.',
+            'Kurssin materiaali ja tehtävät sopivat niin konkarille kuin aloittelevalle osaajalle; täydennyskoulutusta etsivälle, alanvaihtajalle, taitojaan päivittävälle, alan opiskelijalle sekä jokaiselle, joka haluaa tarttua haasteeseen ja kasvattaa osaamistaan.',
             "Full Stack -kurssi on ilmainen verkkokurssi, joka on koottu ajatuksella koodarilta koodarille. Kokonaisuus on Helsingin yliopiston ja Houston Inc.'n yhteistyössä toteuttama.",
           ]}
         />
