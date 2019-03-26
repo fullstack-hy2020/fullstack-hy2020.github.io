@@ -165,7 +165,7 @@ Saadaksemme ratkaisua hieman siistimmäksi, eriytetään henkilöiden näyttämi
 ```js
 const App = () => {
   return (
-    <Query query={allPersons}>
+    <Query query={ALL_PERSONS}>
       {(result) => <Persons result={result} />}
     </Query>
   )
