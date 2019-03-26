@@ -536,7 +536,7 @@ const App = () => {
 
       <h2>create new</h2>
       <Mutation
-        mutation={createPerson} 
+        mutation={CREATE_PERSON} 
         refetchQueries={[{ query: ALL_PERSONS }]}  // highlight-line
       >
         {(addPerson) =>
