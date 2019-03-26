@@ -51,10 +51,6 @@ const partners = [
     image: { src: konecranesLogo, alt: 'Konecranes' },
     url: 'https://careers.konecranes.com/Konecranes/',
   },
-  {
-    image: { src: ciniaLogo, alt: 'Cinia' },
-    url: 'https://www.cinia.fi/',
-  },
 ];
 
 const inChallenge = [
@@ -89,6 +85,10 @@ const inChallenge = [
   {
     src: relexLogo,
     alt: 'Relex',
+  },
+  {
+    src: ciniaLogo,
+    alt: 'Cinia',
   },
 ];
 
