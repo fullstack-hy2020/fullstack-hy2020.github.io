@@ -48,7 +48,7 @@ const Challenge = () => (
           headingFont
           heading={{
             level: 'h2',
-            title: 'Yritys, anna tukesi Full stack -haasteelle',
+            title: 'Yritys, anna tukesi Full Stack -haasteelle',
           }}
           text={[
             'Tarttumalla Full Stack -haasteeseen kannustatte työyhteisönne osaajia uuden oppimisen äärelle. Haasteen kautta Full Stack osaamisalueena tulee tutuksi niin kokeneelle kuin aloittelevalle koodarille.',
