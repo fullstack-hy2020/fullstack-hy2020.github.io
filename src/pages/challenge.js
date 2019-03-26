@@ -54,17 +54,7 @@ const Challenge = () => (
             'Tarttumalla Full Stack -haasteeseen kannustatte työyhteisönne osaajia uuden oppimisen äärelle. Haasteen kautta Full Stack osaamisalueena tulee tutuksi niin kokeneelle kuin aloittelevalle koodarille.',
             'Haasteeseen sisällön tuo Full Stack -kurssi, joka toimii hienosti itseopiskelumateriaalina yrityksen muiden koulutusmahdollisuuksien joukossa',
             'Haasteeseen osallistuminen on maksutonta. Haasteen vastaanottaneiden yritysten logot nostetaan Full Stack -kurssin sivulle.',
-            'Yritys, lähde mukaan haasteeseen!',
           ]}
-        />
-
-        <BodyText
-          className="spacing spacing--after"
-          headingFont
-          heading={{
-            level: 'h2',
-            title: 'Otamme sinuun yhteyttä ja kerromme lisää.',
-          }}
         />
 
         <Form />

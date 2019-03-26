@@ -189,7 +189,7 @@ class Form extends Component {
                 className="about__challenge-button"
                 onClick={() => this.setState({ showForm: true })}
               >
-                Jätä yhteydenottopyyntö
+                Ilmoittaudu mukaan haasteeseen!
               </button>
             </Element>
           </>
