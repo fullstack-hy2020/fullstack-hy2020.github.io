@@ -55,41 +55,41 @@ const partners = [
 
 const inChallenge = [
   {
+    src: relexLogo,
+    alt: 'Relex',
+  },  
+  {
+    src: smartlyLogo,
+    alt: 'Smartly.io',
+  }, 
+  {
+    src: eficodeLogo,
+    alt: 'Eficode',
+  }, 
+  {
     src: sympaLogo,
     alt: 'Sympa',
   },
   {
+    src: ciniaLogo,
+    alt: 'Cinia',
+  }, 
+  {
     src: appgyverLogo,
     alt: 'AppGyver',
-  },
-  {
-    src: smartlyLogo,
-    alt: 'Smartly.io',
   },
   {
     src: codentoLogo,
     alt: 'Codento',
   },
   {
-    src: emblicaLogo,
-    alt: 'Emblica',
-  },
-  {
     src: taitounitedLogo,
     alt: 'Taito united',
   },
   {
-    src: eficodeLogo,
-    alt: 'Eficode',
-  },
-  {
-    src: relexLogo,
-    alt: 'Relex',
-  },
-  {
-    src: ciniaLogo,
-    alt: 'Cinia',
-  },
+    src: emblicaLogo,
+    alt: 'Emblica',
+  },  
 ];
 
 export const CompaniesBanner = ({ frontPage }) => (
