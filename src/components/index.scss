@@ -336,7 +336,7 @@ a {
 }
 
 .space-between--mobile {
-  @include to($desktop) {
+  @include to($large) {
     justify-content: space-between;
   }
 }
