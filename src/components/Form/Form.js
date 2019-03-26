@@ -186,7 +186,7 @@ class Form extends Component {
           <>
             <Element flex spaceAround className="col-10 spacing">
               <button
-                className="about__challenge-button"
+                className="about__challenge-button about__challenge-button--turquoise"
                 onClick={() => this.setState({ showForm: true })}
               >
                 Ilmoittaudu mukaan haasteeseen!

@@ -329,6 +329,10 @@ a {
     color: $white;
     cursor: pointer;
   }
+
+  &--turquoise {
+    background-color: $turquoise;
+  }
 }
 
 .space-between--mobile {
