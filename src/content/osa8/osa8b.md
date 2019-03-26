@@ -252,7 +252,7 @@ const App = () => {
   return (
     <ApolloConsumer>
       {(client => 
-        <Query query={allPersons}>
+        <Query query={ALL_PERSONS}>
           {(result) => 
             <Persons result={result} client={client} /> 
           }
