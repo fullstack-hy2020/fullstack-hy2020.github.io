@@ -218,7 +218,7 @@ React mahdollistaa myös tyylien kirjoittamisen suoraan komponenttien koodin jou
 
 Periaate inline-tyylien määrittelyssä on erittäin yksinkertainen. Mihin tahansa React-komponenttiin tai elementtiin voi liittää attribuutin [style](https://reactjs.org/docs/dom-elements.html#style), jolle annetaan arvoksi Javascript-oliona määritelty joukko CSS-sääntöjä.
 
-CSS-säännöt määritellään JAvascriptin avulla hieman eri tavalla kuin normaaleissa CSS-tiedostoissa. Jos haluamme esimerkisi asettaa jollekin elementille vihreän, kursivoidun ja 16 pikselin korkuisen fontin, eli CSS-syntaksilla ilmaistuna
+CSS-säännöt määritellään Javascriptin avulla hieman eri tavalla kuin normaaleissa CSS-tiedostoissa. Jos haluamme esimerkiksi asettaa jollekin elementille vihreän, kursivoidun ja 16 pikselin korkuisen fontin, eli CSS-syntaksilla ilmaistuna
 
 ```css
 {
@@ -228,7 +228,7 @@ CSS-säännöt määritellään JAvascriptin avulla hieman eri tavalla kuin norm
 }
 ```
 
-tulee tämä muotilla Reactin inline-tyylin määrittelevänä oliona seuraavasti
+tulee tämä muotoilla Reactin inline-tyylin määrittelevänä oliona seuraavasti
 
 ```js
  {
