@@ -1,7 +1,8 @@
 import { StaticQuery, graphql } from 'gatsby';
+
+import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Helmet from 'react-helmet';
 
 function SEO({ description, lang, meta, keywords, title }) {
   return (
@@ -49,6 +50,10 @@ function SEO({ description, lang, meta, keywords, title }) {
               {
                 name: 'twitter:description',
                 content: metaDescription,
+              },
+              {
+                name: 'google-site-verification',
+                content: 'ds9pQKiK3kjhRSHHbf5ccoG-oJggn7Lq4A8uHxM3Mkw',
               },
             ]
               .concat(
