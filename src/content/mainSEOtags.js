@@ -4,7 +4,7 @@ module.exports = [
   'course',
   'helsingin yliopisto',
   'tietojenkäsittelytieteen osasto',
-  'mooc',,
+  'mooc',
   'mooc.fi',
   'full stack',
   'full stack open',
