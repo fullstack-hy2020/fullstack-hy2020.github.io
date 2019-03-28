@@ -20,7 +20,7 @@ const Challenge = () => (
       'elisa',
       'terveystalo',
       'sympa',
-      'konecrames',
+      'konecranes',
       'unity technologies',
       'täydennyskoulutus',
       'koodari',
