@@ -13,6 +13,7 @@ import mainSEOtags from '../content/mainSEOtags';
 
 const Challenge = () => (
   <Layout>
+<<<<<<< HEAD
     <SEO title="Yrityshaaste"
       description="Full stack -yrityshaaste"
       keywords={[
@@ -29,6 +30,21 @@ const Challenge = () => (
         'haaste'
       ]} 
     />
+=======
+    <SEO title="Yritysesittelyt" keywords={[
+      ...mainSEOtags,
+      'fullstackhaaste',
+      'full stack haaste',
+      'elisa',
+      'terveystalo',
+      'sympa',
+      'konecranes',
+      'unity technologies',
+      'täydennyskoulutus',
+      'koodari',
+      'haaste'
+    ]} />
+>>>>>>> 2eeeca0f3f01aadd7438870fd1cb287e73842952
 
     <Banner style={{ paddingBottom: 0, overflow: 'hidden' }}>
       <div className="container challenge__banner">
