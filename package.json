@@ -16,6 +16,7 @@
     "gatsby-plugin-remove-serviceworker": "^1.0.0",
     "gatsby-plugin-sass": "^2.0.7",
     "gatsby-plugin-sharp": "^2.0.14",
+    "gatsby-plugin-sitemap": "^2.0.10",
     "gatsby-remark-picture": "^1.0.1",
     "gatsby-remark-prismjs": "^3.2.0",
     "gatsby-remark-unwrap-images": "^1.0.1",
