@@ -43,7 +43,22 @@ const IndexPage = () => (
         'mooc',
         'mooc.fi',
         'full stack',
+        'full stack open',
         'web-sovelluskehitys',
+        'web',
+        'houston',
+        'houston inc',
+        'websovelluskehitys',
+        'web-sovellus',
+        'React',
+        'Redux',
+        'Node.js',
+        'Node',
+        'MongoDB',
+        'GraphQL',
+        'REST',
+        'REST api',
+        'single page'
       ]}
     />
 
