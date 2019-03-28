@@ -5,16 +5,31 @@ import Footer from '../components/Footer/Footer';
 import Layout from '../components/layout';
 import React from 'react';
 import SEO from '../components/seo';
+import mainSEOtags from '../content/mainSEOtags';
 import stories from '../content/stories/stories';
 
 const Companies = () => (
   <Layout>
-    <SEO title="Yritysesittelyt" />
+    <SEO title="Yritysesittelyt" keywords={[
+      ...mainSEOtags,
+      'houston',
+      'houston inc',
+      'sovelluskehitys',
+      'frontend',
+      'elisa',
+      'terveystalo',
+      'sympa',
+      'funktionaalinen ohjelmointi',
+      'mikropalveluarkkitehtuuri'
+    ]} />
 
     <Element className="container">
       <BodyText
         className="col-10 spacing"
-        heading={{ title: 'Devaaja-tarinoita yhteistyökumppaneiltamme', level: 'h1' }}
+        heading={{
+          title: 'Devaaja-tarinoita yhteistyökumppaneiltamme',
+          level: 'h1',
+        }}
       />
 
       {stories.map(story => (

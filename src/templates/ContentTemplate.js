@@ -18,6 +18,7 @@ import { SubHeader } from '../components/SubHeader/SubHeader';
 import colors from '../colors';
 import domToReact from 'html-react-parser/lib/dom-to-react';
 import { graphql } from 'gatsby';
+import mainSEOtags from '../content/mainSEOtags';
 import navigation from '../content/partnavigation/partnavigation';
 import { partColors } from './partColors';
 import path from 'path';
@@ -30,6 +31,7 @@ export default class ContentTemplate extends Component {
     this.state = {
       h1Top: 0,
       h1Title: '',
+      otherTitles: '',
       top: 0,
     };
   }
@@ -37,6 +39,8 @@ export default class ContentTemplate extends Component {
   componentDidMount() {
     const links = Array.from(document.querySelectorAll('a'));
     const h1 = document.querySelector('h1');
+    const h3 = document.querySelectorAll('h3');
+    const h3Arr = Array.from(h3).map(t => t.innerText);
 
     const { frontmatter } = this.props.data.markdownRemark;
 
@@ -60,6 +64,7 @@ export default class ContentTemplate extends Component {
     this.setState({
       h1Top: h1.offsetTop,
       h1Title: h1.innerText,
+      otherTitles: [...h3Arr],
     });
 
     window.addEventListener('scroll', this.handleScroll);
@@ -137,7 +142,11 @@ export default class ContentTemplate extends Component {
       <Layout>
         <SEO
           title={`Fullstack osa${part} | ${this.state.h1Title}`}
-          keywords={['Fullstack', this.state.h1Title]}
+          keywords={[
+            ...mainSEOtags,
+            this.state.h1Title,
+            ...this.state.otherTitles,
+          ]}
         />
 
         {this.state.top > 300 && (

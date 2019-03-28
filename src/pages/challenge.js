@@ -9,10 +9,23 @@ import React from 'react';
 import SEO from '../components/seo';
 import { SubHeader } from '../components/SubHeader/SubHeader';
 import landingImage from '../images/haaste.svg';
+import mainSEOtags from '../content/mainSEOtags';
 
 const Challenge = () => (
   <Layout>
-    <SEO title="Yritysesittelyt" />
+    <SEO title="Yritysesittelyt" keywords={[
+      ...mainSEOtags,
+      'fullstackhaaste',
+      'full stack haaste',
+      'elisa',
+      'terveystalo',
+      'sympa',
+      'konecrames',
+      'unity technologies',
+      'täydennyskoulutus',
+      'koodari',
+      'haaste'
+    ]} />
 
     <Banner style={{ paddingBottom: 0, overflow: 'hidden' }}>
       <div className="container challenge__banner">

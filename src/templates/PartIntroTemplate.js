@@ -13,6 +13,7 @@ import colors from '../colors';
 import domToReact from 'html-react-parser/lib/dom-to-react';
 import { graphql } from 'gatsby';
 import isEmpty from 'lodash/fp/isEmpty';
+import mainSEOtags from '../content/mainSEOtags';
 import navigation from '../content/partnavigation/partnavigation';
 import { partColors } from './partColors';
 import path from 'path';
@@ -42,7 +43,10 @@ export default function PartIntroTemplate({ data }) {
     <Layout>
       <SEO
         title={`Fullstack osa${part}`}
-        keywords={navigation[part] ? Object.values(navigation[part]) : []}
+        keywords={[
+          ...mainSEOtags,
+          navigation[part] ? Object.values(navigation[part]) : [],
+        ]}
       />
 
       <div className="spacing--after">
