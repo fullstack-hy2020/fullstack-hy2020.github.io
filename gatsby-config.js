@@ -3,8 +3,12 @@ module.exports = {
     title: 'Full Stack Open 2019',
     description: '',
     author: 'Houston Inc. Consulting oy',
+    siteUrl: 'https://fullstackopen-2019.github.io',
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-sitemap`,
+    },
     {
       resolve: 'gatsby-plugin-i18n',
       options: {
