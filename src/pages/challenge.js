@@ -9,10 +9,11 @@ import React from 'react';
 import SEO from '../components/seo';
 import { SubHeader } from '../components/SubHeader/SubHeader';
 import landingImage from '../images/haaste.svg';
+import mainSEOtags from '../content/mainSEOtags';
 
 const Challenge = () => (
   <Layout>
-    <SEO title="Yritysesittelyt" />
+    <SEO title="Yritysesittelyt" keywords={[...mainSEOtags]} />
 
     <Banner style={{ paddingBottom: 0, overflow: 'hidden' }}>
       <div className="container challenge__banner">

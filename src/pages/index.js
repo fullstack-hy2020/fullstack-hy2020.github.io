@@ -19,6 +19,7 @@ import colors from '../colors';
 import houstonLogo from '../images/houston_logo.png';
 import landingImage from '../images/landing.svg';
 import licenceIcon from '../images/by-nc-sa.eu.png';
+import mainSEOtags from '../content/mainSEOtags';
 import news from '../images/noun_news_1248039.svg';
 import starIcon from '../images/ic_stars_48px.svg';
 import telegramIcon from '../images/telegram-logo-png-open-2000.png';
@@ -33,19 +34,7 @@ const thingsToKnow = [
 
 const IndexPage = () => (
   <Layout>
-    <SEO
-      title="Aloitussivu"
-      keywords={[
-        'fullstack',
-        'course',
-        'helsingin yliopisto',
-        'tietojenkäsittelytieteen osasto',
-        'mooc',
-        'mooc.fi',
-        'full stack',
-        'web-sovelluskehitys',
-      ]}
-    />
+    <SEO title="Aloitussivu" keywords={[...mainSEOtags]} />
 
     <StaticQuery
       query={graphql`
