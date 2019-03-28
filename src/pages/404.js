@@ -8,7 +8,7 @@ import colors from '../colors';
 
 const NotFoundPage = () => (
   <Layout>
-    <SEO title="Sivua ei löytynyt" />
+    <SEO title="Sivua ei löytynyt | Full Stack Open 2019" />
 
     <Element className="container spacing--large spacing--after">
       <h1>404 - Sivua ei löytynyt</h1>

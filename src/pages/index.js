@@ -19,7 +19,8 @@ import colors from '../colors';
 import houstonLogo from '../images/houston_logo.png';
 import landingImage from '../images/landing.svg';
 import licenceIcon from '../images/by-nc-sa.eu.png';
-import mainSEOtags from '../content/mainSEOtags';
+import mainSEOdescription from '../content/seo/mainSEOdescription';
+import mainSEOtags from '../content/seo/mainSEOtags';
 import news from '../images/noun_news_1248039.svg';
 import starIcon from '../images/ic_stars_48px.svg';
 import telegramIcon from '../images/telegram-logo-png-open-2000.png';
@@ -35,8 +36,8 @@ const thingsToKnow = [
 const IndexPage = () => (
   <Layout>
     <SEO
-      title=""
-      description="Helsingin yliopiston ja Houston Inc:n kaikille avoin ja ilmainen moderniin Javascript-pohjaiseen web-sovelluskehitykseen keskittyvä kurssi. Osallistujilta edellytetään vahvaa ohjelmointirutiinia, pitkäjänteistyyttä ja valmiuksia omatoimiseen ongelmanratkaisuun. "
+      title="Full Stack Open 2019"
+      description={mainSEOdescription}
       keywords={[...mainSEOtags]}
     />
 

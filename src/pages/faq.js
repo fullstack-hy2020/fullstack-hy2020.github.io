@@ -7,12 +7,12 @@ import Layout from '../components/layout';
 import React from 'react';
 import SEO from '../components/seo';
 import { SubHeader } from '../components/SubHeader/SubHeader';
-import mainSEOtags from '../content/mainSEOtags';
+import mainSEOtags from '../content/seo/mainSEOtags';
 
 const FAQ = () => (
   <Layout>
-    <SEO 
-      title="FAQ"
+    <SEO
+      title="FAQ | Full Stack Open 2019"
       description="Usein kysytyt kysymykset"
       keywords={[
         ...mainSEOtags,
@@ -20,7 +20,7 @@ const FAQ = () => (
         'frequently asked questions',
         'ukk',
         'usein kysytyt kysymykset',
-        ]}
+      ]}
     />
 
     <Element className="container link spacing spacing--after">

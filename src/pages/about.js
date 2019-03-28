@@ -11,18 +11,15 @@ import { PartBanner } from '../components/PartBanner/PartBanner';
 import React from 'react';
 import SEO from '../components/seo';
 import landingImage from '../images/landing.svg';
-import mainSEOtags from '../content/mainSEOtags';
+import mainSEOdescription from '../content/seo/mainSEOdescription';
+import mainSEOtags from '../content/seo/mainSEOtags';
 
 const About = () => (
   <Layout>
-    <SEO 
-      title="Kurssista"
-      description="Usein kysyttyjä kysymyksiä"
-      keywords={[
-        ...mainSEOtags,
-        'Avoin yliopisto',
-        'Full stack harjoitustyö'
-      ]} 
+    <SEO
+      title="Kurssista | Full Stack Open 2019"
+      description={mainSEOdescription}
+      keywords={[...mainSEOtags, 'Avoin yliopisto', 'Full stack harjoitustyö']}
     />
     <StaticQuery
       query={graphql`
@@ -103,7 +100,6 @@ const About = () => (
         );
       }}
     />
-
     <Footer />
   </Layout>
 );

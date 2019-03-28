@@ -5,12 +5,12 @@ import Footer from '../components/Footer/Footer';
 import Layout from '../components/layout';
 import React from 'react';
 import SEO from '../components/seo';
-import mainSEOtags from '../content/mainSEOtags';
+import mainSEOtags from '../content/seo/mainSEOtags';
 import stories from '../content/stories/stories';
 
 const Companies = () => (
   <Layout>
-    <SEO title="Yhteistyöyritykset"
+    <SEO title="Yritysesittelyt | Full Stack Open 2019"
       description="Kurssin yhteistyöyritysten devaajat esittäytyvät"
       keywords={[
         ...mainSEOtags,

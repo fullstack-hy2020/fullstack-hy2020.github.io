@@ -18,7 +18,8 @@ import { SubHeader } from '../components/SubHeader/SubHeader';
 import colors from '../colors';
 import domToReact from 'html-react-parser/lib/dom-to-react';
 import { graphql } from 'gatsby';
-import mainSEOtags from '../content/mainSEOtags';
+import mainSEOdescription from '../content/seo/mainSEOdescription';
+import mainSEOtags from '../content/seo/mainSEOtags';
 import navigation from '../content/partnavigation/partnavigation';
 import { partColors } from './partColors';
 import path from 'path';
@@ -142,6 +143,7 @@ export default class ContentTemplate extends Component {
       <Layout>
         <SEO
           title={`Fullstack osa${part} | ${this.state.h1Title}`}
+          description={mainSEOdescription}
           keywords={[
             ...mainSEOtags,
             this.state.h1Title,

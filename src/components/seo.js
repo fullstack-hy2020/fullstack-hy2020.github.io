@@ -21,7 +21,6 @@ function SEO({ description, lang, meta, image, keywords, title }) {
               lang,
             }}
             title={title}
-            titleTemplate={`%s | ${data.site.siteMetadata.title}`}
             meta={[
               {
                 name: 'description',
@@ -61,7 +60,7 @@ function SEO({ description, lang, meta, image, keywords, title }) {
               },
               {
                 name: 'twitter:image',
-                content: path.resolve(seoImage)
+                content: path.resolve(seoImage),
               },
               {
                 name: 'google-site-verification',
