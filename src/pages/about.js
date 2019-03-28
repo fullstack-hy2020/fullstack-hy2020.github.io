@@ -15,11 +15,15 @@ import mainSEOtags from '../content/mainSEOtags';
 
 const About = () => (
   <Layout>
-    <SEO title="Kurssista" keywords={[
-      ...mainSEOtags,
-      'Avoin yliopisto',
-      'Full stack harjoitustyö'
-    ]} />
+    <SEO 
+      title="Kurssista"
+      description="Usein kysyttyjä kysymyksiä"
+      keywords={[
+        ...mainSEOtags,
+        'Avoin yliopisto',
+        'Full stack harjoitustyö'
+      ]} 
+    />
     <StaticQuery
       query={graphql`
         query aboutQuery {

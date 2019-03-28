@@ -11,13 +11,17 @@ import mainSEOtags from '../content/mainSEOtags';
 
 const FAQ = () => (
   <Layout>
-    <SEO title="Usein kysytyt kysymykset" keywords={[
-      ...mainSEOtags, 
-      'faq', 
-      'frequently asked questions', 
-      'ukk',
-      'usein kysytyt kysymykset', 
-      ]} />
+    <SEO 
+      title="FAQ"
+      description="Usein kysytyt kysymykset"
+      keywords={[
+        ...mainSEOtags,
+        'faq',
+        'frequently asked questions',
+        'ukk',
+        'usein kysytyt kysymykset',
+        ]}
+    />
 
     <Element className="container link spacing spacing--after">
       <SubHeader

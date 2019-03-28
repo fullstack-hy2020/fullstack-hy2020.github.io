@@ -10,18 +10,21 @@ import stories from '../content/stories/stories';
 
 const Companies = () => (
   <Layout>
-    <SEO title="Yritysesittelyt" keywords={[
-      ...mainSEOtags,
-      'houston',
-      'houston inc',
-      'sovelluskehitys',
-      'frontend',
-      'elisa',
-      'terveystalo',
-      'sympa',
-      'funktionaalinen ohjelmointi',
-      'mikropalveluarkkitehtuuri'
-    ]} />
+    <SEO title="Yhteistyöyritykset"
+      description="Kurssin yhteistyöyritysten devaajat esittäytyvät"
+      keywords={[
+        ...mainSEOtags,
+        'houston',
+        'houston inc',
+        'sovelluskehitys',
+        'frontend',
+        'elisa',
+        'terveystalo',
+        'sympa',
+        'funktionaalinen ohjelmointi',
+        'mikropalveluarkkitehtuuri'
+      ]} 
+    />
 
     <Element className="container">
       <BodyText
