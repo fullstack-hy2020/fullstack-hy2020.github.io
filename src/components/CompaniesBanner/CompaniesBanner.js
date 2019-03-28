@@ -13,6 +13,7 @@ import elisaLogo from '../../images/elisa_logo.svg';
 import emblicaLogo from '../../images/emblica_logo.svg';
 import houstonLogo from '../../images/houston_logo.svg';
 import keskoLogo from '../../images/kesko_logo.svg';
+import kodanLogo from '../../images/kodan_logo.png';
 import konecranesLogo from '../../images/konecranes_logo.svg';
 import relexLogo from '../../images/relex_logo.svg';
 import smartlyLogo from '../../images/smartly_logo.svg';
@@ -57,15 +58,15 @@ const inChallenge = [
   {
     src: relexLogo,
     alt: 'Relex',
-  },  
+  },
   {
     src: smartlyLogo,
     alt: 'Smartly.io',
-  }, 
+  },
   {
     src: eficodeLogo,
     alt: 'Eficode',
-  }, 
+  },
   {
     src: sympaLogo,
     alt: 'Sympa',
@@ -73,7 +74,7 @@ const inChallenge = [
   {
     src: ciniaLogo,
     alt: 'Cinia',
-  }, 
+  },
   {
     src: appgyverLogo,
     alt: 'AppGyver',
@@ -89,7 +90,11 @@ const inChallenge = [
   {
     src: emblicaLogo,
     alt: 'Emblica',
-  },  
+  },
+  {
+    src: kodanLogo,
+    alt: 'Kodan',
+  },
 ];
 
 export const CompaniesBanner = ({ frontPage }) => (
