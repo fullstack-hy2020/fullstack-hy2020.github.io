@@ -10,6 +10,18 @@
     "title": "Senior Consultant"
   },
   {
+    "image": "Tuukka_Peuraniemi.jpg",
+    "companyLogo": "terveystalo_logo.png",
+    "text": [
+      "Minulla on usean vuoden kokemus terveydenhuollon teknologioista. Päädyin sovelluskehittäjäksi muutaman mutkan kautta, aloittaen urani proviisorina. Tämän jälkeen valmistuin tietojenkäsittelytieteiden maisteriksi ja siirryin kehityspäälliköksi ja edelleen sovelluskehittäjäksi.",
+      "Viihdyn Terveystalossa, koska täällä pääsee itse vaikuttamaan sekä käytettäviin teknologioihin, että mihin projekteihin haluaa osallistua. Roolini ja kokemukseni ansiosta pääsen mukaan erilaisten uusien palveluiden aloitukseen ja kehittämiseen. Tällä hetkellä kehitän uutta mobiilipuolen sovellusta, joka näkee päivänvalonsa asiakkaiden parissa lähitulevaisuudessa.",
+      "Haluan jatkossakin kehittyä omassa työssäni ja oppia koko ajan uutta. Multivendor-projekteissa työskentely yhdessä kokeneiden kollegojen kanssa ylläpitää ja kehittää omaa osaamista.",
+      "Uskon, että Terveystalosta löytyy mielekkäitä ja uusia projekteja jatkossakin."
+    ],
+    "name": "Tuukka Peuraniemi",
+    "title": "Sovelluskehittäjä ja digitaalinen moniosaaja"
+  },
+  {
     "image": "Juho_Kyrola.jpg",
     "companyLogo": "elisa_logo.png",
     "text": [
@@ -26,17 +38,15 @@
     "title": "Software Developer"
   },
   {
-    "image": "Tuukka_Peuraniemi.jpg",
-    "companyLogo": "terveystalo_logo.png",
+    "image": "kristiina_ronnberg.jpg",
+    "companyLogo": "konecranes_logo.svg",
     "text": [
-      "Minulla on usean vuoden kokemus terveydenhuollon teknologioista. Päädyin sovelluskehittäjäksi muutaman mutkan kautta, aloittaen urani proviisorina. Tämän jälkeen valmistuin tietojenkäsittelytieteiden maisteriksi ja siirryin kehityspäälliköksi ja edelleen sovelluskehittäjäksi.",
-      "Viihdyn Terveystalossa, koska täällä pääsee itse vaikuttamaan sekä käytettäviin teknologioihin, että mihin projekteihin haluaa osallistua. Roolini ja kokemukseni ansiosta pääsen mukaan erilaisten uusien palveluiden aloitukseen ja kehittämiseen. Tällä hetkellä kehitän uutta mobiilipuolen sovellusta, joka näkee päivänvalonsa asiakkaiden parissa lähitulevaisuudessa.",
-      "Haluan jatkossakin kehittyä omassa työssäni ja oppia koko ajan uutta. Multivendor-projekteissa työskentely yhdessä kokeneiden kollegojen kanssa ylläpitää ja kehittää omaa osaamista.",
-      "Uskon, että Terveystalosta löytyy mielekkäitä ja uusia projekteja jatkossakin."
+      "Alalla, jolla jatkuva oppiminen on melkeinpä elinehto, olen ollut onnekkaassa asemassa saadessani työskennellä uusimpien teknologioiden ja kokeneiden kollegojen kanssa. Roolissani Konecranesilla pääsen toimimaan kansainvälisessä ympäristössä ja kehittämään ratkaisuja, joilla tuodaan teollisen internetin hyödyt asiakkaan arkeen. Käytössämme oleva teknologiapaletti on hyvinkin rikas ja kehitysmenetelmät ovat muuttuneet yhä ketterämmiksi – myös kurssilla opiskeltavat sisällöt ovat läsnä tekemisessä.",
+      "Oma tieni ohjelmistoalalle ei kulkenut suoraviivaisinta reittiä. Opiskelin aiemmin äidinkielen ja kirjallisuuden aineenopettajaksi, mutta päädyin muuntokoulutuksen kautta alanvaihtajaksi tähän hieman toisenlaiseen maailmaan, jossa toisaalta korostuvat yhtä lailla kielen ja kirjoittamisen taidot sekä luovuus. Osaltaan lähtökohtieni vuoksi olen ollut erityisen ilahtunut siitä, että Konecranesilla arvostetaan työntekijöiden erilaisia taustoja ja osaamista sekä tuetaan heidän kehittymistään. Sellaisessa ympäristössä uusi ala ja siellä kasvaminen on tuntunut luontevalta ja innostavalta."
     ],
-    "name": "Tuukka Peuraniemi",
-    "title": "Sovelluskehittäjä ja digitaalinen moniosaaja"
-  },  
+    "name": "Kristiina Rönnberg",
+    "title": "Software Engineer"
+  },
   {
     "image": "mikko_kotola_ja_panu_vartiainen.jpg",
     "companyLogo": "sympa_logo.png",
