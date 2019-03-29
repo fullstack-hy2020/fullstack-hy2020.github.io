@@ -21,6 +21,7 @@ import sympaLogo from '../../images/sympa_logo.svg';
 import taitounitedLogo from '../../images/taito_logo.svg';
 import terveystaloLogo from '../../images/terveystalo_logo.svg';
 import unityLogo from '../../images/unity_logo.svg';
+import upcloudLogo from '../../images/upcloud_logo.png';
 import yliopistoLogo from '../../images/hgin_yliopisto.svg';
 
 const partners = [
@@ -95,6 +96,10 @@ const inChallenge = [
     src: kodanLogo,
     alt: 'Kodan',
   },
+  {
+    src: upcloudLogo,
+    alt: 'UpCloud'
+  }
 ];
 
 export const CompaniesBanner = ({ frontPage }) => (
