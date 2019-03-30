@@ -1,7 +1,7 @@
 [
   {
     "image": "Juha_Tauriainen.jpg",
-    "companyLogo": "houston_logo.png",
+    "companyLogo": "houston.svg",
     "text": [
       "Roolini Houstonilla keskittyy frontend-kehitykseen. Käytämme teknologioita ja kirjastoja laidasta laitaan, muun muassa kurssilla opetettuja teknologioita. Konsulttitalona autamme asiakkaitamme ja yhteistyökumppaneitamme saavuttamaan korkean laadun kautta paremman tuloksen. Tuomme projekteihin koodin lisäksi myös alan parhaat käytännöt ja autamme asiakkaitamme menestymään.",
       "Työskentely Houstonille on mahtavaa monesta syystä, eniten pidän siitä että työntekijät ovat aina ykkössijalla, henkilökunnan ideoita, ehdotuksia ja mielipiteitä todellakin kuunnellaan ja niihin reagoidaan. Esimerkiksi olen saanut Houstonilta täyden tuen mentorointiohjelman aloittamiseen. Autamme ihmisiä eri aloilta ohjelmoinnin parissa, opastamme heitä parhaiden käytäntöjen kanssa ja pyrimme saamaan heidät alalle. Tämä on opettanut sekä minulle että Houstonille todella paljon. Saankin todella paljon kiksejä muiden auttamisesta - olivat he sitten asiakkaita, työkavereita tai opiskelijoita."
@@ -11,7 +11,7 @@
   },
   {
     "image": "Tuukka_Peuraniemi.jpg",
-    "companyLogo": "terveystalo_logo.png",
+    "companyLogo": "terveystalo.svg",
     "text": [
       "Minulla on usean vuoden kokemus terveydenhuollon teknologioista. Päädyin sovelluskehittäjäksi muutaman mutkan kautta, aloittaen urani proviisorina. Tämän jälkeen valmistuin tietojenkäsittelytieteiden maisteriksi ja siirryin kehityspäälliköksi ja edelleen sovelluskehittäjäksi.",
       "Viihdyn Terveystalossa, koska täällä pääsee itse vaikuttamaan sekä käytettäviin teknologioihin, että mihin projekteihin haluaa osallistua. Roolini ja kokemukseni ansiosta pääsen mukaan erilaisten uusien palveluiden aloitukseen ja kehittämiseen. Tällä hetkellä kehitän uutta mobiilipuolen sovellusta, joka näkee päivänvalonsa asiakkaiden parissa lähitulevaisuudessa.",
@@ -23,7 +23,7 @@
   },
   {
     "image": "Juho_Kyrola.jpg",
-    "companyLogo": "elisa_logo.png",
+    "companyLogo": "elisa.svg",
     "text": [
       "Työskentelen Elisalla ohjelmistokehittäjänä ja opiskelen samalla tietotekniikkaa Aalto-yliopistossa. Olen opintojeni loppuvaiheessa, ja alan pian tekemään diplomityötäni. Kurssejakin olen suorittanut samaan aikaan kuin olen ollut töissä täällä. Elisalle päädyin ystäväni suosituksesta, hän kertoi, että tämä on hyvä yritys olla töissä ja kehotti minua hakemaan.",
       "Tätä ennen olin töissä parissa muussa yrityksessä, yhteensä reilut 1,5 vuotta devaajana. Ohjelmointia olen harrastanut pienestä pitäen, ja olen aina tiennyt, että tietokoneet ovat oma juttuni. Ensimmäinen ohjelmointikieleni oli Java.",
@@ -38,8 +38,19 @@
     "title": "Software Developer"
   },
   {
+    "image": "burcu_aybak.jpg",
+    "companyLogo": "unity.svg",
+    "text": [
+      "I am working at Unity as a Full-stack Software Engineer and have ten years of experience in software development including e.g. web applications, command and control systems and communication systems.",
+      "I love being in software engineering because it is a combination of intelligent problem solving and creative work. Sometimes it makes me feel like I am a superhero! Then again there are always new things and subjects to learn and you get paid to do what you enjoy with people you like - work in engineering is fun! Our industry and customers are fun (games!) and it is great to do work that helps our customers to make a living with what they love.",
+      "I like working at Unity because the work allows me to work with excellent colleagues and different personalities from all over the world who are also very good at their jobs. It is a perfect place to learn new technologies and explore new areas. Unity is a perfect workplace for me in ways that I can’t explain in just a few sentences."
+    ],
+    "name": "Burcu Aybak",
+    "title": "Software Engineer"
+  },
+  {
     "image": "kristiina_ronnberg.jpg",
-    "companyLogo": "konecranes_logo.svg",
+    "companyLogo": "konecranes.svg",
     "text": [
       "Alalla, jolla jatkuva oppiminen on melkeinpä elinehto, olen ollut onnekkaassa asemassa saadessani työskennellä uusimpien teknologioiden ja kokeneiden kollegojen kanssa. Roolissani Konecranesilla pääsen toimimaan kansainvälisessä ympäristössä ja kehittämään ratkaisuja, joilla tuodaan teollisen internetin hyödyt asiakkaan arkeen. Käytössämme oleva teknologiapaletti on hyvinkin rikas ja kehitysmenetelmät ovat muuttuneet yhä ketterämmiksi – myös kurssilla opiskeltavat sisällöt ovat läsnä tekemisessä.",
       "Oma tieni ohjelmistoalalle ei kulkenut suoraviivaisinta reittiä. Opiskelin aiemmin äidinkielen ja kirjallisuuden aineenopettajaksi, mutta päädyin muuntokoulutuksen kautta alanvaihtajaksi tähän hieman toisenlaiseen maailmaan, jossa toisaalta korostuvat yhtä lailla kielen ja kirjoittamisen taidot sekä luovuus. Osaltaan lähtökohtieni vuoksi olen ollut erityisen ilahtunut siitä, että Konecranesilla arvostetaan työntekijöiden erilaisia taustoja ja osaamista sekä tuetaan heidän kehittymistään. Sellaisessa ympäristössä uusi ala ja siellä kasvaminen on tuntunut luontevalta ja innostavalta."
@@ -49,7 +60,7 @@
   },
   {
     "image": "mikko_kotola_ja_panu_vartiainen.jpg",
-    "companyLogo": "sympa_logo.png",
+    "companyLogo": "sympa.svg",
     "text": [
       "Suoritin Full stack -kurssin ensimmäisten joukossa alkuvuodesta 2018. Kurssi oli todella tärkeä osa tietojenkäsittelytieteen kandiopintojani. Single page web appien logiikka ja modernit työkalut tulivat tutuksi. Yleisemmin ottaen minulle oli tärkeää saada rutiinia asynkroniseen ja funktionaaliseen ohjelmointiin.  Kurssi ei tuntunut aina helpolta: välillä oli kyllä otsa kipeänä kun jotakin kiharaista kohtaa viilasi. Mutta tekemällähän sitä asioita opitaan!",
       "Sain kandiopintoni päätökseen kesällä 2018 ja aloitin full stack -kehittäjän tehtävässä Sympalla syksyllä. Sympa tarjoaa asiakkailleen henkilöstöjärjestelmiä SaaS-toimintamallilla. Yrityksessä on yli 100 työntekijää viidessä maassa, ja kasvu on nopeaa. Minulle työnpaikan vaihdos oli samalla toimialan vaihdos, sillä olen aiemmalta koulutukseltani valtiotieteiden maisteri ja työskentelin aiemmin yliopiston hallinnossa. Innostus koodaukseen imaisi minut kuitenkin mukaansa opintoihin ja uudelle alalle.",
