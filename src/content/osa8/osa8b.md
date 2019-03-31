@@ -165,7 +165,7 @@ Saadaksemme ratkaisua hieman siistimmäksi, eriytetään henkilöiden näyttämi
 ```js
 const App = () => {
   return (
-    <Query query={allPersons}>
+    <Query query={ALL_PERSONS}>
       {(result) => <Persons result={result} />}
     </Query>
   )
@@ -252,7 +252,7 @@ const App = () => {
   return (
     <ApolloConsumer>
       {(client => 
-        <Query query={allPersons}>
+        <Query query={ALL_PERSONS}>
           {(result) => 
             <Persons result={result} client={client} /> 
           }
@@ -536,7 +536,7 @@ const App = () => {
 
       <h2>create new</h2>
       <Mutation
-        mutation={createPerson} 
+        mutation={CREATE_PERSON} 
         refetchQueries={[{ query: ALL_PERSONS }]}  // highlight-line
       >
         {(addPerson) =>
