@@ -32,7 +32,7 @@ Varmista, että välilehti <i>Network</i> on avattuna ja aktivoi valinta <i>Disa
 
 Selain ja web-palvelin kommunikoivat keskenään [HTTP](https://developer.mozilla.org/fi/docs/Web/HTTP)-protokollaa käyttäen. Avoinna oleva konsolin Network-tabi kertoo miten selain ja palvelin kommunikoivat.
 
-Kun nyt reloadaat sivun (eli painat F5-näppäintä tai selaimessa olevaa symbolia &#8634;), kertoo konsoli, että tapahtuu kaksi asiaa
+Kun päivität sivun (eli painat F5-näppäintä tai selaimessa olevaa symbolia &#8634;), kertoo konsoli, että tapahtuu kaksi asiaa
 
 - selain hakee web-palvelimelta sivun <i>fullstack-exampleapp.herokuapp.com/</i> sisällön
 - ja lataa kuvan <i>kuva.png</i>
