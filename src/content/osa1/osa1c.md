@@ -123,7 +123,7 @@ const Hello = (props) => {
 
   return (
     <div>
-      <p>Hello {name}, you are {props.age} years old</p>
+      <p>Hello {name}, you are {age} years old</p>
       <p>So you were probably born {bornYear()}</p>
     </div>
   )
