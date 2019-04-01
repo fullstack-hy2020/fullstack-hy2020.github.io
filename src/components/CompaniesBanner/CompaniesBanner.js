@@ -86,6 +86,14 @@ const inChallenge = [
     name: 'perfektio.png',
     alt: 'Perfektio',
   },
+  {
+    name: 'blok.png',
+    alt: 'Blok',
+  },
+  {
+    name: 'webscale.png',
+    alt: 'Webscale',
+  },
 ];
 
 export const CompaniesBanner = ({ isFrontPage }) => (
