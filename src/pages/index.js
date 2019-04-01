@@ -257,7 +257,7 @@ const IndexPage = () => (
 
             <PartBanner />
 
-            <CompaniesBanner frontPage />
+            <CompaniesBanner isFrontPage />
 
             <Element
               flex

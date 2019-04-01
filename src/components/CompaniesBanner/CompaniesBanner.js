@@ -88,9 +88,9 @@ const inChallenge = [
   },
 ];
 
-export const CompaniesBanner = ({ frontPage }) => (
+export const CompaniesBanner = ({ isFrontPage }) => (
   <Banner
-    backgroundColor={frontPage && 'white'}
+    backgroundColor={isFrontPage && 'white'}
     className="spacing--after"
     id="challenge"
   >
@@ -128,7 +128,7 @@ export const CompaniesBanner = ({ frontPage }) => (
         flex
         className="col-6 push-right-2 flex-fix-aligning space-between--mobile"
       >
-        {inChallenge.map((company, i) => (
+        {inChallenge.map((company => company.name !== '' && (
           <ContentLiftup
             key={company.alt}
             small
@@ -138,10 +138,10 @@ export const CompaniesBanner = ({ frontPage }) => (
             }}
             className={`col-2 push-right-1 col-3--mobile col-3--tablet`}
           />
-        ))}
+        )))}
       </Element>
 
-      {frontPage && (
+      {isFrontPage && (
         <Element flex spaceAround className="col-10 spacing">
           <Link className="about__challenge-button" to="/challenge">
             Lisätietoja haasteesta
@@ -153,9 +153,9 @@ export const CompaniesBanner = ({ frontPage }) => (
 );
 
 CompaniesBanner.defaultProps = {
-  frontPage: false,
+  isFrontPage: false,
 };
 
 CompaniesBanner.propTypes = {
-  frontPage: PropTypes.bool,
+  isFrontPage: PropTypes.bool,
 };
