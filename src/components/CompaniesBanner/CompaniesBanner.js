@@ -91,6 +91,10 @@ const inChallenge = [
     alt: 'Blok',
   },
   {
+    name: 'gworks.png',
+    alt: 'G-Works',
+  },
+  {
     name: 'webscale.png',
     alt: 'Webscale',
   },
@@ -136,17 +140,20 @@ export const CompaniesBanner = ({ isFrontPage }) => (
         flex
         className="col-6 push-right-2 flex-fix-aligning space-between--mobile"
       >
-        {inChallenge.map((company => company.name !== '' && (
-          <ContentLiftup
-            key={company.alt}
-            small
-            image={{
-              src: require(`../../images/company_logos/${company.name}`),
-              alt: company.alt,
-            }}
-            className={`col-2 push-right-1 col-3--mobile col-3--tablet`}
-          />
-        )))}
+        {inChallenge.map(
+          company =>
+            company.name !== '' && (
+              <ContentLiftup
+                key={company.alt}
+                small
+                image={{
+                  src: require(`../../images/company_logos/${company.name}`),
+                  alt: company.alt,
+                }}
+                className={`col-2 push-right-1 col-3--mobile col-3--tablet`}
+              />
+            )
+        )}
       </Element>
 
       {isFrontPage && (
