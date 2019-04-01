@@ -306,7 +306,7 @@ lisätään Joulupukki numero 040-1234556 luetteloon
 ja lisää uuden yhteystiedon tietokantaan. Huomaa, että jos nimi sisältää välilyöntejä, on se annettava hipsuissa:
 
 ```bash
-node mongo.js "Arto Vihavainen" 040-1234556
+node mongo.js salasana "Arto Vihavainen" 040-1234556
 ```
 
 Jos komentoriviparametreina ei ole muuta kuin salasana, eli ohjelma suoritetaan komennolla
