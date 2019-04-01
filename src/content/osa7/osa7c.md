@@ -386,7 +386,7 @@ Otetaan käyttöön preset [@babel/preset-env](https://babeljs.io/docs/plugins/p
 Preset asennetaan komennolla
 
 ```js
-npm install @babel/preset-env--save-dev
+npm install @babel/preset-env --save-dev
 ```
 
 Kun nyt transpiloimme koodin, muuttuu se vanhan koulukunnan Javascriptiksi. Komponentin <i>App</i> määrittely näyttää seuraavalta:
