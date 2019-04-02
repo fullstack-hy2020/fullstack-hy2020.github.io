@@ -101,12 +101,16 @@ const inChallenge = [
   },
   {
     name: 'siili.png',
-    alt: 'Siili'
+    alt: 'Siili',
   },
   {
     name: 'fmi.svg',
-    alt: 'Ilmatieteenlaitos'
-  }
+    alt: 'Ilmatieteenlaitos',
+  },
+  {
+    name: 'futurice.png',
+    alt: 'Futurice',
+  },
 ];
 
 export const CompaniesBanner = ({ isFrontPage }) => (
