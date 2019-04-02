@@ -2,6 +2,7 @@ import { Banner } from '../Banner/Banner';
 import { BodyText } from '../BodyText/BodyText';
 import { ContentLiftup } from '../ContentLiftup/ContentLiftup';
 import Element from '../Element/Element';
+import { Image } from '../Image/Image';
 import { Link } from 'gatsby';
 import { PropTypes } from 'prop-types';
 import React from 'react';
@@ -151,13 +152,10 @@ export const CompaniesBanner = ({ isFrontPage }) => (
         {inChallenge.map(
           company =>
             company.name !== '' && (
-              <ContentLiftup
-                key={company.alt}
-                small
-                image={{
-                  src: require(`../../images/company_logos/${company.name}`),
-                  alt: company.alt,
-                }}
+              <Image
+                contain
+                src={require(`../../images/company_logos/${company.name}`)}
+                alt={company.alt}
                 className={`col-2 push-right-1 col-3--mobile col-3--tablet`}
               />
             )
