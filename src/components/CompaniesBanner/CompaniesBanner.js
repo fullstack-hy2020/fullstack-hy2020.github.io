@@ -98,6 +98,14 @@ const inChallenge = [
     name: 'webscale.png',
     alt: 'Webscale',
   },
+  {
+    name: 'siili.png',
+    alt: 'Siili'
+  },
+  {
+    name: 'fmi.svg',
+    alt: 'Ilmatieteenlaitos'
+  }
 ];
 
 export const CompaniesBanner = ({ isFrontPage }) => (
