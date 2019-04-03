@@ -118,6 +118,9 @@ Harjoitustyö on mahdollista tehdä myös pari- tai ryhmätyönä.
 
 Lisää tietoa harjoitustyöstä kevään aikana.
 
+### Haastattelulupaus
+
+Kurssin yhteistyökumppaneista Houston Inc, Terveystalo, Elisa ja Konecranes ovat antaneet _haastattelulupauksen_, eli he kutsuvat kaikki sekä kurssin että projektin täydessä laajuudessa (8+10 op) suorittavat työhaastatteluun.
 
 ### Alkutoimet
 
