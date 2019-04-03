@@ -84,5 +84,11 @@ module.exports = {
         cookieDomain: 'fullstackopen-2019.github.io',
       },
     },
+    {
+      resolve: `gatsby-plugin-canonical-urls`,
+      options: {
+        siteUrl: `https://fullstackopen-2019.github.io`,
+      },
+    },
   ],
 };
