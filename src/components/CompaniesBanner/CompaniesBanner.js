@@ -42,6 +42,10 @@ const partners = [
 
 const inChallenge = [
   {
+    name: 'tivia.png',
+    alt: 'Tivia',
+  },
+  {
     name: 'relex.svg',
     alt: 'Relex',
   },
