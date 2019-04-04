@@ -8,6 +8,7 @@
 
   &::before,
   &::after {
+    z-index: 2;
     content: '';
     border: 2px solid $black;
     border-radius: 5px;
