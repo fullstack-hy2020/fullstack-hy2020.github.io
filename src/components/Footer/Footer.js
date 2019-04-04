@@ -6,7 +6,7 @@ import { Link } from 'gatsby';
 import React from 'react';
 import houston from '../../images/company_logos/houston.svg';
 import { navigation } from '../Navigation/Navigation';
-import yliopisto from '../../images/company_logos/hgin_yliopisto.svg';
+import yliopisto from '../../images/company_logos/uoh_centre.svg';
 
 const images = [
   {

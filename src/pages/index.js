@@ -26,7 +26,7 @@ import news from '../images/noun_news_1248039.svg';
 import starIcon from '../images/ic_stars_48px.svg';
 import telegramIcon from '../images/telegram-logo-png-open-2000.png';
 import timerIcon from '../images/ic_timer_48px.svg';
-import yliopistoLogo from '../images/company_logos/hgin_yliopisto.png';
+import yliopistoLogo from '../images/company_logos/uoh_centre.svg';
 
 const thingsToKnow = [
   { icon: timerIcon, text: '5-20 tuntia / osa' },

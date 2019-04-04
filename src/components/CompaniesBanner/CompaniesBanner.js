@@ -11,7 +11,7 @@ import React from 'react';
 
 const partners = [
   {
-    image: { name: 'hgin_yliopisto.svg', alt: 'Helsingin yliopisto' },
+    image: { name: 'uoh_centre.svg', alt: 'Helsingin yliopisto' },
     url: 'https://www.helsinki.fi/',
   },
   {
