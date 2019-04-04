@@ -157,6 +157,7 @@ export const CompaniesBanner = ({ isFrontPage }) => (
           company =>
             company.name !== '' && (
               <Image
+                key={company.name}
                 contain
                 src={require(`../../images/company_logos/${company.name}`)}
                 alt={company.alt}
