@@ -1,12 +1,8 @@
 import './BodyText.scss';
 
 import Parser from 'html-react-parser';
-import domToReact from 'html-react-parser/lib/dom-to-react';
 import PropTypes from 'prop-types';
 import React from 'react';
-
-import githubLogo from '../../images/GitHub-Mark-32px.png';
-import Element from '../Element/Element';
 
 export const BodyText = ({
   text,
@@ -25,30 +21,6 @@ export const BodyText = ({
   bold && classes.push('bold');
   noPadding && classes.push('body-text--no-padding');
   headingFont && classes.push('heading-font');
-
-  const parserOptions = {
-    replace: ({ type, attribs, children }) => {
-      if (type === 'tag' && attribs.class === 'github-logo') {
-        return (
-          <Element flex autoBottomMargin className="github-logo__container">
-            <img
-              style={{
-                maxWidth: '1rem',
-                maxHeight: '1rem',
-                margin: 'auto 0',
-              }}
-              alt="github-logo"
-              src={githubLogo}
-            />
-
-            <p style={{ marginLeft: '0.611rem' }}>
-              {domToReact(children, parserOptions)}
-            </p>
-          </Element>
-        );
-      }
-    },
-  };
 
   const getHeading = () => {
     if (heading) {
@@ -75,7 +47,7 @@ export const BodyText = ({
         text &&
         text.map(p => (
           <div key={p} className={`body-text__content ${classes.join(' ')}`}>
-            {Parser(p, parserOptions)}
+            {Parser(p)}
           </div>
         ))
       )}

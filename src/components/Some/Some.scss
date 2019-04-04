@@ -1,0 +1,12 @@
+.some-logo {
+  &__link {
+    margin: 0.5rem 0.5rem 0 0;
+    display: inline-block;
+  }
+
+  &__image {
+    width: 1rem;
+    height: 1rem;
+    margin: 0;
+  }
+}
