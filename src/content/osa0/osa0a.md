@@ -120,7 +120,9 @@ Lisää tietoa harjoitustyöstä kevään aikana.
 
 ### Haastattelulupaus
 
-Kurssin yhteistyökumppaneista Houston Inc, Terveystalo, Elisa ja Konecranes ovat antaneet _haastattelulupauksen_, eli he kutsuvat kaikki sekä kurssin että projektin täydessä laajuudessa (8+10 op) suorittavat työhaastatteluun.
+Kurssin yhteistyökumppaneista Houston Inc, Terveystalo, Elisa ja Konecranes ovat antaneet <i>haastattelulupauksen</i> kaikille projektin täydessä laajuudessa (8+10 op) suorittaville.
+
+Haastattelulupaus tarkoittaa, että opiskelija voi niin halutessaan ilmoittautua työhaastatteluun haastattelulupauksen antaneelle yritykselle. Kurssin opettaja, Matti Luukkainen, toimittaa ohjeet opiskelijalle henkilökohtaisesti kurssisuorituksen jälkeen.
 
 ### Alkutoimet
 
