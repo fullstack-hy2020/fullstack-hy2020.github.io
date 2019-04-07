@@ -117,6 +117,30 @@ const inChallenge = [
     name: 'futurice.png',
     alt: 'Futurice',
   },
+  {
+    name: 'visma.svg',
+    alt: 'Visma',
+  },
+  {
+    name: 'platonic.png',
+    alt: 'Platonic Partnership',
+  },
+  {
+    name: 'circles.png',
+    alt: 'Circles',
+  },
+  {
+    name: 'nordcloud.svg',
+    alt: 'Nordcloud',
+  },
+  {
+    name: 'wunderdog.svg',
+    alt: 'Wunderdog',
+  },
+  {
+    name: 'gofore.svg',
+    alt: 'Gofore',
+  },
 ];
 
 export const CompaniesBanner = ({ isFrontPage }) => (
