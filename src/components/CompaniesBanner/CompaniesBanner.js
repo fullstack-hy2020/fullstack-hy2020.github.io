@@ -157,6 +157,10 @@ const inChallenge = [
     name: 'pori.png',
     alt: 'Pori',
   },
+  {
+    name: 'bonsky.png',
+    alt: 'Bonsky',
+  },
 ];
 
 export const CompaniesBanner = ({ isFrontPage }) => (
