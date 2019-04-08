@@ -130,6 +130,10 @@ const inChallenge = [
     alt: 'Omnia',
   },
   {
+    name: 'tietotalo.svg',
+    alt: 'Tietotalo',
+  },
+  {
     name: 'circles.png',
     alt: 'Circles',
   },
