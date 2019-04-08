@@ -149,6 +149,10 @@ const inChallenge = [
     name: 'wolt.svg',
     alt: 'Wolt',
   },
+  {
+    name: 'pori.png',
+    alt: 'Pori',
+  },
 ];
 
 export const CompaniesBanner = ({ isFrontPage }) => (
