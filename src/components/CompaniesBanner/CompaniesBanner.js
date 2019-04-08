@@ -126,6 +126,10 @@ const inChallenge = [
     alt: 'Platonic Partnership',
   },
   {
+    name: 'omnia.png',
+    alt: 'Omnia',
+  },
+  {
     name: 'circles.png',
     alt: 'Circles',
   },
@@ -140,6 +144,10 @@ const inChallenge = [
   {
     name: 'gofore.svg',
     alt: 'Gofore',
+  },
+  {
+    name: 'wolt.svg',
+    alt: 'Wolt',
   },
 ];
 
