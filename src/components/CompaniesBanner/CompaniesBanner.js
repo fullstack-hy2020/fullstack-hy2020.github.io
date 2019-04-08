@@ -134,7 +134,7 @@ const inChallenge = [
     alt: 'Tietotalo',
   },
   {
-    name: 'circles.png',
+    name: 'circles.svg',
     alt: 'Circles',
   },
   {
