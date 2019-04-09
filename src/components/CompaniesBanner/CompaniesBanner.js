@@ -122,7 +122,7 @@ const inChallenge = [
     alt: 'Visma',
   },
   {
-    name: 'platonic.png',
+    name: 'platonic.svg',
     alt: 'Platonic Partnership',
   },
   {
@@ -158,8 +158,12 @@ const inChallenge = [
     alt: 'Pori',
   },
   {
-    name: 'bonsky.png',
-    alt: 'Bonsky',
+    name: 'motley.svg',
+    alt: 'Motley',
+  },
+  {
+    name: 'bonsky.svg',
+    alt: 'Bonsky Digital',
   },
 ];
 
