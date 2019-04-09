@@ -530,7 +530,7 @@ test('palindrom of react', () => {
 })
 ```
 
-seurauksena on seuraava virheilmotus
+seurauksena on seuraava virheilmoitus
 
 ![](../images/4/2.png)
 
