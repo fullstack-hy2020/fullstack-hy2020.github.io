@@ -165,6 +165,10 @@ const inChallenge = [
     name: 'bonsky.svg',
     alt: 'Bonsky Digital',
   },
+  {
+    name: 'planbrothers.svg',
+    alt: 'Plan Brothers',
+  },
 ];
 
 export const CompaniesBanner = ({ isFrontPage }) => (
