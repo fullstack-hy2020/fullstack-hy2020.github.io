@@ -8,6 +8,7 @@ import { Image } from '../Image/Image';
 import { Link } from 'gatsby';
 import { PropTypes } from 'prop-types';
 import React from 'react';
+import snakeCase from 'lodash/fp/snakeCase';
 
 const partners = [
   {
@@ -41,142 +42,40 @@ const partners = [
 ];
 
 const inChallenge = [
-  {
-    name: 'tivia.svg',
-    alt: 'Tivia',
-  },
-  {
-    name: 'relex.svg',
-    alt: 'Relex',
-  },
-  {
-    name: 'smartly.svg',
-    alt: 'Smartly.io',
-  },
-  {
-    name: 'eficode.svg',
-    alt: 'Eficode',
-  },
-  {
-    name: 'sympa.svg',
-    alt: 'Sympa',
-  },
-  {
-    name: 'cinia.svg',
-    alt: 'Cinia',
-  },
-  {
-    name: 'appgyver.svg',
-    alt: 'AppGyver',
-  },
-  {
-    name: 'codento.svg',
-    alt: 'Codento',
-  },
-  {
-    name: 'taito.svg',
-    alt: 'Taito united',
-  },
-  {
-    name: 'emblica.svg',
-    alt: 'Emblica',
-  },
-  {
-    name: 'kodan.svg',
-    alt: 'Kodan',
-  },
-  {
-    name: 'upcloud.svg',
-    alt: 'UpCloud',
-  },
-  {
-    name: 'perfektio.svg',
-    alt: 'Perfektio',
-  },
-  {
-    name: 'blok.svg',
-    alt: 'Blok',
-  },
-  {
-    name: 'gworks.svg',
-    alt: 'G-Works',
-  },
-  {
-    name: 'webscale.svg',
-    alt: 'Webscale',
-  },
-  {
-    name: 'siili.svg',
-    alt: 'Siili',
-  },
-  {
-    name: 'fmi.svg',
-    alt: 'Ilmatieteenlaitos',
-  },
-  {
-    name: 'futurice.svg',
-    alt: 'Futurice',
-  },
-  {
-    name: 'visma.svg',
-    alt: 'Visma',
-  },
-  {
-    name: 'platonic.svg',
-    alt: 'Platonic Partnership',
-  },
-  {
-    name: 'omnia.svg',
-    alt: 'Omnia',
-  },
-  {
-    name: 'tietotalo.svg',
-    alt: 'Tietotalo',
-  },
-  {
-    name: 'circles.svg',
-    alt: 'Circles',
-  },
-  {
-    name: 'nordcloud.svg',
-    alt: 'Nordcloud',
-  },
-  {
-    name: 'wunderdog.svg',
-    alt: 'Wunderdog',
-  },
-  {
-    name: 'gofore.svg',
-    alt: 'Gofore',
-  },
-  {
-    name: 'nortal.svg',
-    alt: 'Nortal Oy',
-  },
-  {
-    name: 'nursebuddy.svg',
-    alt: 'NurseBuddy',
-  },
-  {
-    name: 'wolt.svg',
-    alt: 'Wolt',
-  },
-  {
-    name: 'pori.svg',
-    alt: 'Pori',
-  },
-  {
-    name: 'motley.svg',
-    alt: 'Motley',
-  },
-  {
-    name: 'bonsky.svg',
-    alt: 'Bonsky Digital',
-  },
-  {
-    name: 'planbrothers.svg',
-    alt: 'Plan Brothers',
-  },
+  'Tivia',
+  'Relex',
+  'Smartly.io',
+  'Eficode',
+  'Sympa',
+  'Cinia',
+  'AppGyver',
+  'Codento',
+  'Taito united',
+  'Emblica',
+  'Kodan',
+  'UpCloud',
+  'Perfektio',
+  'Blok',
+  'G-Works',
+  'Webscale',
+  'Siili',
+  'Ilmatieteenlaitos',
+  'Futurice',
+  'Visma',
+  'Platonic Partnership',
+  'Omnia',
+  'Tietotalo',
+  'Circles',
+  'Nordcloud',
+  'Wunderdog',
+  'Gofore',
+  'Nortal Oy',
+  'NurseBuddy',
+  'Wolt',
+  'Pori',
+  'Motley',
+  'Bonsky Digital',
+  'Plan Brothers',
 ];
 
 export const CompaniesBanner = ({ isFrontPage }) => (
@@ -221,18 +120,17 @@ export const CompaniesBanner = ({ isFrontPage }) => (
             flex
             className="col-9 flex-fix-aligning space-between--mobile"
           >
-            {inChallenge.map(
-              company =>
-                company.name !== '' && (
-                  <Image
-                    key={company.name}
-                    contain
-                    src={require(`../../images/company_logos/${company.name}`)}
-                    alt={company.alt}
-                    className={`company__logo push-right-1 col-3--mobile col-3--tablet`}
-                  />
-                )
-            )}
+            {inChallenge.map(company => (
+              <Image
+                key={company}
+                contain
+                src={require(`../../images/company_logos/${snakeCase(
+                  company
+                )}.svg`)}
+                alt={company}
+                className={`company__logo push-right-1 col-3--mobile col-3--tablet`}
+              />
+            ))}
           </Element>
         </>
       )}
