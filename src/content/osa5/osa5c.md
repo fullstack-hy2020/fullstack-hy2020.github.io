@@ -252,7 +252,7 @@ import 'react-testing-library/cleanup-after-each'
 
 Nyt pääsemme eroon molemmista ylläolevan testikoodin korostetuista riveistä.
 
-**HUOM** mikäli testejä suoritettaessa ei löydetä tiedostossa <i>src/setupTests.js</i> tehtyjä konfiguraatioita, auttaa seuraavan asetuksen lisääminen tiedostoon package-lock.json:
+**HUOM** mikäli testejä suoritettaessa ei löydetä tiedostossa <i>src/setupTests.js</i> tehtyjä konfiguraatioita, auttaa seuraavan asetuksen lisääminen tiedostoon package.json:
 
 ```
   "jest": {
