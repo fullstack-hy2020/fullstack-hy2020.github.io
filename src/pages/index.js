@@ -17,9 +17,9 @@ import announcement from '../images/ic_announcement_48px.svg';
 import calendarIcon from '../images/calendar-60.svg';
 import cc from '../images/cc.svg';
 import colors from '../colors';
-import houstonLogo from '../images/company_logos/houston.png';
+import houstonLogo from '../images/Houston_big.svg';
 import landingImage from '../images/landing.svg';
-import licenceIcon from '../images/by-nc-sa.eu.png';
+import licenceIcon from '../images/cc-logo.svg';
 import mainSEOdescription from '../content/seo/mainSEOdescription';
 import mainSEOtags from '../content/seo/mainSEOtags';
 import news from '../images/noun_news_1248039.svg';
@@ -277,23 +277,36 @@ const IndexPage = () => (
                   className="col-10 col-8--mobile spacing--small"
                 >
                   <div className="col-3 col-10--mobile">
-                    <Image
-                      contain
-                      src={yliopistoLogo}
-                      alt="Helsingin Yliopisto logo"
-                      className="col-5 col-4--mobile"
-                    />
+                    <a
+                      target="_BLANK"
+                      rel="noopener noreferrer"
+                      className="col-10 col-4--mobile"
+                      href="https://www.helsinki.fi/fi"
+                    >
+                      <Image
+                        contain
+                        src={yliopistoLogo}
+                        alt="Helsingin Yliopisto logo"
+                        className="col-5 col-4--mobile"
+                      />
+                    </a>
 
                     <BodyText headingFont text={university} />
                   </div>
 
                   <Element flex spaceBetween className="col-3 col-10--mobile">
-                    <Image
-                      contain
-                      src={houstonLogo}
-                      alt="Houston Inc. logo"
-                      className="col-4--mobile"
-                    />
+                    <a
+                      target="_BLANK"
+                      rel="noopener noreferrer"
+                      className="col-10 col-4--mobile"
+                      href="https://www.houston-inc.com"
+                    >
+                      <Image
+                        contain
+                        src={houstonLogo}
+                        alt="Houston Inc. logo"
+                      />
+                    </a>
 
                     <BodyText headingFont className="link" text={houston} />
                   </Element>
