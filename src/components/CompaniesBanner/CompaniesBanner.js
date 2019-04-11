@@ -42,7 +42,7 @@ const partners = [
 
 const inChallenge = [
   {
-    name: 'tivia.png',
+    name: 'tivia.svg',
     alt: 'Tivia',
   },
   {
@@ -82,31 +82,31 @@ const inChallenge = [
     alt: 'Emblica',
   },
   {
-    name: 'kodan.png',
+    name: 'kodan.svg',
     alt: 'Kodan',
   },
   {
-    name: 'upcloud.png',
+    name: 'upcloud.svg',
     alt: 'UpCloud',
   },
   {
-    name: 'perfektio.png',
+    name: 'perfektio.svg',
     alt: 'Perfektio',
   },
   {
-    name: 'blok.png',
+    name: 'blok.svg',
     alt: 'Blok',
   },
   {
-    name: 'gworks.png',
+    name: 'gworks.svg',
     alt: 'G-Works',
   },
   {
-    name: 'webscale.png',
+    name: 'webscale.svg',
     alt: 'Webscale',
   },
   {
-    name: 'siili.png',
+    name: 'siili.svg',
     alt: 'Siili',
   },
   {
@@ -114,7 +114,7 @@ const inChallenge = [
     alt: 'Ilmatieteenlaitos',
   },
   {
-    name: 'futurice.png',
+    name: 'futurice.svg',
     alt: 'Futurice',
   },
   {
@@ -126,7 +126,7 @@ const inChallenge = [
     alt: 'Platonic Partnership',
   },
   {
-    name: 'omnia.png',
+    name: 'omnia.svg',
     alt: 'Omnia',
   },
   {
@@ -150,11 +150,19 @@ const inChallenge = [
     alt: 'Gofore',
   },
   {
+    name: 'nortal.svg',
+    alt: 'Nortal Oy',
+  },
+  {
+    name: 'nursebuddy.svg',
+    alt: 'NurseBuddy',
+  },
+  {
     name: 'wolt.svg',
     alt: 'Wolt',
   },
   {
-    name: 'pori.png',
+    name: 'pori.svg',
     alt: 'Pori',
   },
   {
