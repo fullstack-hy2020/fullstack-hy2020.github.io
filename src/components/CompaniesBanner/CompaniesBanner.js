@@ -210,25 +210,32 @@ export const CompaniesBanner = ({ isFrontPage }) => (
         ))}
       </Element>
 
-      <BodyText
-        centered
-        className="col-4 spacing push-right-3 challenge-title"
-        text="Full stack -haasteessa mukana"
-      />
-      <Element flex className="col-9 flex-fix-aligning space-between--mobile">
-        {inChallenge.map(
-          company =>
-            company.name !== '' && (
-              <Image
-                key={company.name}
-                contain
-                src={require(`../../images/company_logos/${company.name}`)}
-                alt={company.alt}
-                className={`company__logo push-right-1 col-3--mobile col-3--tablet`}
-              />
-            )
-        )}
-      </Element>
+      {!isFrontPage && (
+        <>
+          <BodyText
+            centered
+            className="col-4 spacing push-right-3 challenge-title"
+            text="Full stack -haasteessa mukana"
+          />
+          <Element
+            flex
+            className="col-9 flex-fix-aligning space-between--mobile"
+          >
+            {inChallenge.map(
+              company =>
+                company.name !== '' && (
+                  <Image
+                    key={company.name}
+                    contain
+                    src={require(`../../images/company_logos/${company.name}`)}
+                    alt={company.alt}
+                    className={`company__logo push-right-1 col-3--mobile col-3--tablet`}
+                  />
+                )
+            )}
+          </Element>
+        </>
+      )}
 
       {isFrontPage && (
         <Element flex spaceAround className="col-10 spacing">
