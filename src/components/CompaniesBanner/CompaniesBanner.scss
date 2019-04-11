@@ -2,6 +2,6 @@
 
 .company__logo {
   @include from($desktop) {
-    width: 15%;
+    width: 15% !important;
   }
 }
