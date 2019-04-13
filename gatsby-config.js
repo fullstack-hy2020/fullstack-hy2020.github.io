@@ -3,7 +3,7 @@ module.exports = {
     title: 'Full Stack Open 2019',
     description: '',
     author: 'Houston Inc. Consulting oy',
-    siteUrl: 'https://fullstackopen-2019.github.io',
+    siteUrl: 'https://www.fullstackopen.com',
   },
   plugins: [
     {
@@ -81,13 +81,13 @@ module.exports = {
         head: false,
         respectDNT: true,
         exclude: [],
-        cookieDomain: 'fullstackopen-2019.github.io',
+        cookieDomain: 'fullstackopen.com',
       },
     },
     {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
-        siteUrl: `https://fullstackopen-2019.github.io`,
+        siteUrl: `https://www.fullstackopen.com`,
       },
     },
   ],
