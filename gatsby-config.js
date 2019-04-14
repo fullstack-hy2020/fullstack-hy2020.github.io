@@ -3,7 +3,7 @@ module.exports = {
     title: 'Full Stack Open 2019',
     description: '',
     author: 'Houston Inc. Consulting oy',
-    siteUrl: 'https://www.fullstackopen.com',
+    siteUrl: 'https://fullstackopen.com',
   },
   plugins: [
     {
@@ -87,7 +87,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-canonical-urls`,
       options: {
-        siteUrl: `https://www.fullstackopen.com`,
+        siteUrl: `https://fullstackopen.com`,
       },
     },
   ],
