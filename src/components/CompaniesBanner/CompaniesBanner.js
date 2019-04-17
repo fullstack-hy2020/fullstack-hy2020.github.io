@@ -41,6 +41,7 @@ const partners = [
   },
 ];
 
+/* All logos must be in SVG format */
 const inChallenge = [
   'Tivia',
   'Relex',
@@ -76,6 +77,9 @@ const inChallenge = [
   'Motley',
   'Bonsky Digital',
   'Plan Brothers',
+  'Integrify',
+  'Rentle',
+  'Compile',
 ];
 
 export const CompaniesBanner = ({ isFrontPage }) => (
