@@ -262,7 +262,7 @@ const User = require('../models/user')
 
 //...
 
-describe('when there is initially one user at db', async () => {
+describe('when there is initially one user at db', () => {
   beforeEach(async () => {
     await User.deleteMany({})
     const user = new User({ username: 'root', password: 'sekret' })
@@ -316,7 +316,7 @@ module.exports = {
 Lohkon <i>beforeEach</i> lisää kantaan käyttäjän, jonka username on <i>root</i>. Voimmekin tehdä uuden testin, jolla varmistetaan, että samalla käyttäjätunnuksella ei voi luoda uutta käyttäjää:
 
 ```js
-describe('when there is initially one user at db', async () => {
+describe('when there is initially one user at db', () => {
   // ...
 
   test('creation fails with proper statuscode and message if username already taken', async () => {
