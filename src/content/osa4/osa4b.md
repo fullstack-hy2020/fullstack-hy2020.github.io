@@ -978,7 +978,7 @@ const api = supertest(app)
 
 const Note = require('../models/note')
 
-describe('when there is initially some notes saved', async () => {
+describe('when there is initially some notes saved', () => {
   beforeEach(async () => {
     await Note.deleteMany({})
 
@@ -1010,7 +1010,7 @@ describe('when there is initially some notes saved', async () => {
     )
   })
 
-  describe('viewing a specifin note', async () => {
+  describe('viewing a specifin note', () => {
 
     test('succeeds with a valid id', async () => {
       const notesAtStart = await helper.notesInDb()
@@ -1044,7 +1044,7 @@ describe('when there is initially some notes saved', async () => {
     })
   })
 
-  describe('addition of a new note', async () => {
+  describe('addition of a new note', () => {
     test('succeeds with valid data', async () => {
       const newNote = {
         content: 'async/await yksinkertaistaa asynkronisten funktioiden kutsua',
@@ -1083,7 +1083,7 @@ describe('when there is initially some notes saved', async () => {
     })
   })
 
-  describe('deletion of a note', async () => {
+  describe('deletion of a note', () => {
     test('succeeds with status code 200 if id is valid', async () => {
       const notesAtStart = await helper.notesInDb()
       const noteToDelete = notesAtStart[0]
