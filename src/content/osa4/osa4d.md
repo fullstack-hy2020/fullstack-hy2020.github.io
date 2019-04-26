@@ -333,7 +333,7 @@ Muuta blogien lisäämistä siten, että se on mahdollista vain, jos lisäyksen 
 
 Osan 4 [esimerkissä](/osa4#kirjautuminen) token otetaan headereista apufunktion _getTokenFrom_ avulla.
 
-Jos käytit samaa ratkaisua, refaktoroi tokenin erottaminen [middlewareksi](/osa3#middlewaret), joka ottaa tokenin <i>Authorization</i>-headerista ja sijoittaa sen <i>request</i>-olion kenttään <i>token</i>.
+Jos käytit samaa ratkaisua, refaktoroi tokenin erottaminen [middlewareksi](/osa3/node_js_ja_express#middlewaret), joka ottaa tokenin <i>Authorization</i>-headerista ja sijoittaa sen <i>request</i>-olion kenttään <i>token</i>.
 
 Eli kun rekisteröit middlewaren ennen routeja tiedostossa <i>app.js</i>
 
