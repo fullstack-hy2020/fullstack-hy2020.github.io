@@ -33,7 +33,7 @@ addNote = event => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
-    date: new Date(),
+    date: new Date().toISOString(),
     important: Math.random() > 0.5,
   }
 
@@ -72,7 +72,7 @@ addNote = event => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
-    date: new Date(),
+    date: new Date().toISOString(),
     important: Math.random() > 0.5,
   }
 
