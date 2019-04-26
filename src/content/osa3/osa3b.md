@@ -190,7 +190,7 @@ Jotta uuden frontendin version generointi onnistuisi jatkossa ilman turhia manua
 ```json
 {
   "scripts": {
-    "build:ui": "rm -rf build && cd ../fullstack-open-2019-answers/Osa2/puhelinluettelo && npm run build --prod && cp -r build ../../../fullstack-open-2019-answers-osa3/",
+    "build:ui": "rm -rf build && cd ../../osa2/materiaali/notes-new && npm run build --prod && cp -r build ../../../osa3/notes-backend/",
     "deploy": "git push heroku master",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",    
     "logs:prod": "heroku logs --tail"
@@ -198,8 +198,9 @@ Jotta uuden frontendin version generointi onnistuisi jatkossa ilman turhia manua
 }
 ```
 Skripteistä _npm run build:ui_ kääntää ui:n tuotantoversioksi ja kopioi sen. _npm run deploy_ julkaisee herokuun. 
-_npm run deploy:full_ yhdistää nuo molemmat sekä lisää vaadittavat <i>git</i>-komennot versionhallinnan päivittämistä varten.
-Lisätään lisäksi oma skripti lokien lukemiseen, niin käytännössä kaikki toimii npm-skriptein.
+_npm run deploy:full_ yhdistää nuo molemmat sekä lisää vaadittavat <i>git</i>-komennot versionhallinnan päivittämistä varten. Lisätään lisäksi oma skripti lokien lukemiseen, niin käytännössä kaikki toimii npm-skriptein.
+
+Huomaa, että skriptissä <i>build:ui</i> olevat polut riippuvat repositorioiden sijainnista.
 
 ### Backendin urlit
 
