@@ -16,15 +16,7 @@ Koska sovelluksemme backend on koodiltaan kuitenkin suhteellisen yksinkertainen,
 
 Edellisen osan luvussa [Tietokantaa käyttävän version vieminen tuotantoon](/osa3/validointi_ja_es_lint#tietokantaa-kayttavan-version-vieminen-tuotantoon) mainitsimme, että kun sovellusta suoritetaan Herokussa, on se <i>production</i>-moodissa.
 
-Noden konventiona on määritellä projektin suoritusmoodi ympäristömuuttujan <i>NODE\_ENV</i> avulla. Lataammekin sovelluksen nykyisessä versiossa tiedostossa <i>.env</i> määritellyt ympäristömuuttujat ainoastaan jos sovellus <i>ei ole</i> production moodissa:
-
-```js
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
-```
-
-Yleinen käytäntö on määritellä sovelluksille omat moodinsa myös sovelluskehitykseen ja testaukseen.
+Noden konventiona on määritellä projektin suoritusmoodi ympäristömuuttujan <i>NODE\_ENV</i> avulla. Yleinen käytäntö on määritellä sovelluksille omat moodinsa tuotantokäyttöön,  sovelluskehitykseen ja testaukseen.
 
 Määritellään nyt tiedostossa <i>package.json</i>, että testejä suoritettaessa sovelluksen <i>NODE\_ENV</i> saa arvokseen <i>test</i>:
 
@@ -75,9 +67,7 @@ Testaukseen kannattaisikin käyttää verkossa olevan jaetun tietokannan sijaan 
 Muutetaan konfiguraatiot suorittavaa moduulia seuraavasti:
 
 ```js
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
+require('dotenv').config()
 
 let port = process.env.PORT
 let mongoUrl = process.env.MONGODB_URI
