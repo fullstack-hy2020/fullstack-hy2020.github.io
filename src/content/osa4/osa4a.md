@@ -422,7 +422,7 @@ Koska testejä on tarkoitus suorittaa ainoastaan sovellusta kehitettäessä, ase
 npm install --save-dev jest
 ```
 
-määritellään <i>npm skripti _test</i> suorittamaan testaus jestillä ja raportoimaan testien suorituksesta <i>verbose</i>-tyylillä:
+määritellään npm-skripti <i>test</i> suorittamaan testaus jestillä ja raportoimaan testien suorituksesta <i>verbose</i>-tyylillä:
 
 ```bash
 {
