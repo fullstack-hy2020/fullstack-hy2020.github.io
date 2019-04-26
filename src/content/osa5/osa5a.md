@@ -119,6 +119,11 @@ import loginService from './services/login'
 
 const App = () => {
   // ...
+  const [username, setUsername] = useState('') 
+  const [password, setPassword] = useState('') 
+// highlight-start
+  const [user, setUser] = useState(null)
+// highlight-end
 
   const handleLogin = async (event) => {
     event.preventDefault()
