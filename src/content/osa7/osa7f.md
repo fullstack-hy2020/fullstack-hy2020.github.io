@@ -154,6 +154,6 @@ Laajenna vielä E2E-testejäsi. Voit merkitä tehtävän, jos käytät laajentam
 
 #### 7.20 Kurssipalaute
 
-Anna kurssille palautetta weboodissa.
+Anna kurssille palautetta Moodlessa.
 
 </div>
