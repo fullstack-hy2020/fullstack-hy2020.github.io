@@ -688,7 +688,7 @@ const App = () => {
         {store.getState().map(note =>
           <li
             key={note.id} 
-            onClick={() => toggleImportance(note.id)}
+            onClick={toggleImportance(note.id)}
           >
             {note.content} <strong>{note.important ? 'tärkeä' : ''}</strong>
           </li>
