@@ -146,22 +146,7 @@ Esimerkkimme tapauksessa promisejen ketjutuksesta ei ole suurta hyötyä. Tilann
 
 ### Tietokantaa käyttävän version vieminen tuotantoon
 
-Sovelluksen pitäisi toimia tuotannossa, eli Herokussa lähes sellaisenaan. Frontendin muutosten takia on tehtävä siitä uusi tuotantoversio ja kopioitava se backendiin. Toinen muutos on se, että <i>emme halua</i> Herokussa olevan version käyttävän tiedostossa <i>.env</i> määriteltyjä ympäristömuuttujia. Tämän takia tiedoston <i>index.js</i> alussa oleva rivi
-
-```js
-require('dotenv').config()
-```
-
-on muutettava muotoon
-
-```js
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
-```
-
-Nyt dotenvissä olevat ympäristömuuttujat otetaan käyttöön ainoastaan silloin kun sovellus ei ole <i>production</i>- eli tuotantomoodissa (kuten esim. Herokussa).
-
+Sovelluksen pitäisi toimia tuotannossa, eli Herokussa lähes sellaisenaan. Frontendin muutosten takia on tehtävä siitä uusi tuotantoversio ja kopioitava se backendiin. 
 Tietokantaurlin kertovan ympäristömuuttujan arvo asetetaan Herokuun komennolla _heroku config:set_
 
 ```bash
