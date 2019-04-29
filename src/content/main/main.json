@@ -3,7 +3,6 @@
   "intro": "Ota haltuusi React, Redux, Node.js, MongoDB ja GraphQL! Kurssilla tutustutaan JavaScriptilla tapahtuvaan moderniin websovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST-rajapinnoissa.",
   "current": [
     "Kurssista on mahdollista saada suoritusmerkintä <a target='_blank' href='https://courses.helsinki.fi/fi/aytkt21009/124726896'>Avoimen yliopiston</a> kautta. Kurssi on suoritettavissa 10.1.2020 asti.",
-    "<strong>Full stack -paja</strong>, eli ohjausta tehtävien tekoon huhtikuun loppuun asti <strong>maanantaisin ja perjantaisin klo 14-16</strong> <a href='https://www.helsinki.fi/fi/kumpulan-kampus'>Kumpulan kampuksella</a>, Exactumin salissa B221. Ota oma kone mukaan!",
     "Kurssiin liittyvää keskustelua Telegramissa, kanavalla <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>, tule mukaan! <ul><li>Huom: kaikki epäasialliset, halventavat ja jotain ihmisryhmää syrjivät kommentit kanavalla ovat kiellettyjä ja tälläisten kommenttien esittäjät poistetaan kanavalta.</li></ul>"
   ],
   "telegram": "Telegram on whatsappin/messengerin tyylinen keskustelufoorumisovellus, jota on mahdollista käyttää selaimella, mobiililaitteilla ja Windows/Linux/OSX-clienteillä.",
