@@ -109,7 +109,7 @@ console.log(m2)
 // tulostuu [ '<li>1</li>', '<li>2</li>', '<li>3</li>' ]
 ```
 
-Eli lukuja sisältävästä taulukosta tehdään map-metodin avulla HTML-koodia sisältävä taulukko. Tulemmekin kurssin [osassa2](/osa2) näkemään että mapia käytetään Reactissa todella usein.
+Eli lukuja sisältävästä taulukosta tehdään map-metodin avulla HTML-koodia sisältävä taulukko. Tulemmekin kurssin [osassa2](/osa2) näkemään, että mapia käytetään Reactissa todella usein.
 
 Taulukon yksittäisiä alkioita on helppo sijoittaa muuttujiin [destrukturoivan](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) sijoituslauseen avulla:
 
@@ -165,10 +165,10 @@ Olioille voidaan lisätä kenttiä myös lennossa joko pistenotaation tai hakasu
 
 ```js
 object1.address = 'Tapiola'
-object1['secred number'] = 12341
+object1['secret number'] = 12341
 ```
 
-Jälkimmäinen lisäyksistä on pakko tehdä hakasulkeiden avulla, sillä pistenotaatiota käytettäessä <i>secred number</i> ei kelpaa kentän nimeksi.
+Jälkimmäinen lisäyksistä on pakko tehdä hakasulkeiden avulla, sillä pistenotaatiota käytettäessä <i>secret number</i> ei kelpaa kentän nimeksi.
 
 Javascriptissä olioilla voi luonnollisesti olla myös metodeja. Emme kuitenkaan tarvitse tällä kurssilla ollenkaan itse määriteltyjä metodillisia olioita, joten asiaa ei tällä kurssilla käsitellä kuin lyhyesti.
 
@@ -193,7 +193,7 @@ const result = sum(1, 5)
 console.log(result)
 ```
 
-Jos parameteja on vain yksi, voidaan sulut jättää määrittelystä pois:
+Jos parametreja on vain yksi, voidaan sulut jättää määrittelystä pois:
 
 ```js
 const square = p => {
