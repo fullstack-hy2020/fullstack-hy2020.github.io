@@ -605,7 +605,7 @@ Create-react-app on asentanut projektille eslintin valmiiksi, joten ei tarvita m
 Aloitamme seuraavaksi testaamisen, ja jotta pääsemme eroon testeissä olevista turhista huomautuksista asennetaan plugin [eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest)
 
 ```js
-npm add --save-dev eslint-plugin-jest
+npm install --save-dev eslint-plugin-jest
 ```
 
 Luodaan tiedosto <i>.eslintrc.js</i> ja kopioidaan sinne seuraava sisältö:
