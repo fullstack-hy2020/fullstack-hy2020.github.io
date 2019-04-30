@@ -80,6 +80,8 @@ const inChallenge = [
   'Integrify',
   'Rentle',
   'Compile',
+  'Telia',
+  'Umbrella Interactive',
 ];
 
 export const CompaniesBanner = ({ isFrontPage }) => (
