@@ -22,4 +22,12 @@
       background-size: 70%;
     }
   }
+
+  a {
+    border-bottom: 1px solid $black;
+
+    &:hover {
+      background-color: $white;
+    }
+  }
 }
