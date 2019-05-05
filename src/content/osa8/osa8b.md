@@ -954,7 +954,7 @@ Sovelluksen kirjastoa react-apollo-hooks käyttävä koodi on kokonaisuudessaan 
 
 ### Tehtäviä
 
-Tehtävissä toteutetaan GraphQL-kirjastolle frontend.
+Tehtävissä toteutetaan edellisen osan tehtävissä tehdylle backendille frontend.
 
 Ota sovelluksesi lähtökohdaksi [tämä projekti](https://github.com/fullstack-hy2019/library-frontend).
 
