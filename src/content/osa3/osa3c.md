@@ -742,7 +742,7 @@ app.get('/api/notes/:id', (request, response, next) => {
       if (note) {
         response.json(note.toJSON())
       } else {
-        response.status(204).end()
+        response.status(404).end()
       }
     })
     .catch(error => next(error))
