@@ -974,7 +974,7 @@ Toteuta kirjojen näkymä, eli näytä sivulla kirjoista muut tiedot paitsi genr
 
 #### 8.10: Kirjan lisäys
 
-Toteuta sovellukseen mahdollisuus uusien kirjojen lisäämiseen. Voit tehdä sovellukseen lisäystä varten oman "näkymän", samalla logiikalla kuin kirjailijoiden ja kirjojen näkymät on tehty. Toiminnallisuus voi näyttää seuraavalta:
+Toteuta sovellukseen mahdollisuus uusien kirjojen lisäämiseen.
 
 ![](../images/8/18.png)
 
