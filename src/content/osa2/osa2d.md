@@ -473,7 +473,7 @@ Promisejen ymmärtäminen on erittäin keskeistä modernissa Javascript-sovellus
 
 Muistiinpanopalvelut määrittelevä moduuli siis eksporttaa olion, jonka kenttinä <i>getAll</i>, <i>create</i> ja <i>update</i> ovat muistiinpanojen käsittelyyn tarkoitetut funktiot. 
 
-Moduulin määrittelu tapahtui seuraavasti:
+Moduulin määrittely tapahtui seuraavasti:
 
 ```js
 import axios from 'axios'
