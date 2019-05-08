@@ -317,10 +317,12 @@ const Note = require('../models/note')
 const initialNotes = [
   {
     content: 'HTML on helppoa',
+    date: '2019-01-01T00:00:00.000+00:00',
     important: false,
   },
   {
     content: 'HTTP-protokollan tärkeimmät metodit ovat GET ja POST',
+    date: '2019-01-01T00:00:00.000+00:00',
     important: true,
   },
 ]
