@@ -208,9 +208,9 @@ const NewNote = (props) => {
   const addNote = async (event) => {
     event.preventDefault()
     const content = event.target.note.value // highlight-line
+    event.target.note.value = '' //highlight-line
     const newNote = await noteService.createNew(content) // highlight-line
-    props.createNote(newNote.content) // highlight-line
-    event.target.note.value = ''
+    props.createNote(newNote) // highlight-line
   }
 
   return (
