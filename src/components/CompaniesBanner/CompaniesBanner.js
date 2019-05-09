@@ -82,6 +82,8 @@ const inChallenge = [
   'Compile',
   'Telia',
   'Umbrella Interactive',
+  'Tabella',
+  'Nextup',
 ];
 
 export const CompaniesBanner = ({ isFrontPage }) => (
