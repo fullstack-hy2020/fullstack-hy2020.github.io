@@ -852,14 +852,14 @@ value => {
 
 eli action creatorilla luodun actionin dispatchaus.
 
-Komponentti siis viittaa funktioon propsin <i>props.createTodo</i> kautta:
+Komponentti siis viittaa funktioon propsin <i>props.createNote</i> kautta:
 
 ```js
 const NewNote = (props) => {
 
   addNote = (event) => {
     event.preventDefault()
-    props.createTodo(event.target.note.value)
+    props.createNote(event.target.note.value)
     event.target.note.value = ''
   }
 
