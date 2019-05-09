@@ -194,7 +194,7 @@ eli Supertest huolehtii testattavan sovelluksen käynnistämisestä sisäisesti 
 Tehdään pari testiä lisää:
 
 ```js
-test('there are five notes', async () => {
+test('there are three notes', async () => {
   const response = await api.get('/api/notes')
 
   expect(response.body.length).toBe(3)
@@ -212,11 +212,11 @@ Molemmat testit sijoittavat pyynnön vastauksen muuttujaan _response_ ja toisin 
 Async/await-kikan hyödyt tulevat nyt selkeästi esiin. Normaalisti tarvitsisimme asynkronisten pyyntöjen vastauksiin käsille pääsemiseen promiseja ja takaisinkutsuja, mutta nyt kaikki menee mukavasti:
 
 ```js
-const res = await api.get('/api/notes')
+const response = await api.get('/api/notes')
 
 // tänne tullaan vasta kun edellinen komento eli HTTP-pyyntö on suoritettu
 // muuttujassa res on nyt HTTP-pyynnön tulos
-expect(res.body.length).toBe(3)
+expect(response.body.length).toBe(3)
 ```
 
 ### Loggeri
