@@ -755,7 +755,7 @@ Moduulissa olevan import-lauseen
 import { createNote } from './../reducers/noteReducer'
 ```
 
-ansiosta komponentin sisältä on mahdollista viitata funktioon myös suoraan, eli _noteCreation_. Näin ei kuitenkaan tule tehdä, sillä silloin on kyseessä alkuperäinen action creator joka <i>ei sisällä dispatchausta</i>.
+ansiosta komponentin sisältä on mahdollista viitata funktioon myös suoraan, eli _createNote_. Näin ei kuitenkaan tule tehdä, sillä silloin on kyseessä alkuperäinen action creator joka <i>ei sisällä dispatchausta</i>.
 
 Jos tulostamme funktiot koodin sisällä (emme olekaan vielä käyttäneet kurssilla tätä erittäin hyödyllistä debug-kikkaa)
 
