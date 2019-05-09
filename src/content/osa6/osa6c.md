@@ -183,7 +183,7 @@ const getAll = async () => {
 }
 
 // highlight-start
-const createNew = async content => {
+const createNew = async (content) => {
   const object = { content, important: false }
   const response = await axios.post(url, object)
   return response.data
@@ -196,7 +196,7 @@ export default {
 }
 ```
 
-Komponentin <i>NoteForm</i> metodi _addNote_ muuttuu hiukan:
+Komponentin <i>NewNote</i> metodi _addNote_ muuttuu hiukan:
 
 ```js
 import React from 'react'
