@@ -86,6 +86,8 @@ Osassa 8 tehtyjen tehtävien lukumäärä ei vaikuta kurssin 5-7 opintopisteen l
 
 ### Suoritusmerkinnän pyytäminen
 
+Jos haluat kurssilta suorituksen, tallenna <b>Helsingin yliopiston</b> opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/fullstackopen2019) näkymään my submissions. Jos et ole Helsingin yliopiston opiskelija, saat opiskelijanumeron ilmoittautumalla kurssille [Avoimen yliopiston kurssisivun](https://courses.helsinki.fi/fi/aytkt21009/124726896) kautta.
+
 Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi valmis kurssin suorituksen kanssa:
 
 ![](../images/0/28.png)
