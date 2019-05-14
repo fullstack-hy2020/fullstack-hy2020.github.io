@@ -681,7 +681,7 @@ Sovellus tulostaa lähetetyn vastaanottamansa datan terminaaliin:
 
 Vastaavasti konsolista kannattaa seurata reagoiko backend odotetulla tavalla, esim. kun sovellukselle lähetetään dataa metodilla HTTP POST. Backendiin kannattaa luonnollisesti lisäillä runsaat määrät <em>console.log</em>-komentoja kun sovellus on kehitysvaiheessa. 
 
-Eräs potentiaalinen ongelmanlähde on se, että dataa lähettäessä, sen headerille <i>Content-Type</i> ei aseteta oikeaa arvoa. Näin tapahtuu esim. jos Postmanissa bodyn tyypiä ei määritellä oikein:
+Eräs potentiaalinen ongelmanlähde on se, että dataa lähettäessä, sen headerille <i>Content-Type</i> ei aseteta oikeaa arvoa. Näin tapahtuu esim. jos Postmanissa bodyn tyyppiä ei määritellä oikein:
 
 ![](../images/3/17a.png)
 
