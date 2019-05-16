@@ -1,6 +1,7 @@
 ---
 mainImage: ../../images/part-8.svg
 part: 8
+lang: fi
 ---
 
 <div class="intro">
