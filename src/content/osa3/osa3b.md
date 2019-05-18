@@ -63,27 +63,27 @@ app.listen(PORT, () => {
 })
 ```
 
-Nyt käyttöön tulee [ympäristömuuttujassa](https://en.wikipedia.org/wiki/Environment_variable) _PORT_ määritelty portti tai 3001 jos ympäristömuuttuja _PORT_ ei ole määritelty. Heroku konfiguroi sovelluksen portin ympäristömuuttujan avulla.
+Nyt käyttöön tulee [ympäristömuuttujassa](https://en.wikipedia.org/wiki/Environment_variable) _PORT_ määritelty portti tai 3001, jos ympäristömuuttuja _PORT_ ei ole määritelty. Heroku konfiguroi sovelluksen portin ympäristömuuttujan avulla.
 
-Tehdään projektihakemistosta git-repositorio, lisätään <i>.gitignore</i> jolla seuraava sisältö
+Tehdään projektihakemistosta git-repositorio ja lisätään <i>.gitignore</i>, jolla on seuraava sisältö
 
 ```bash
 node_modules
 ```
 
-Luodaan heroku-sovellus komennolla <i>heroku create</i>, tehdään sovelluksen hakemistosta git-repositorio, commitoidaan koodi ja siirretään se Herokuun komennolla <i>git push heroku master</i>.
+Luodaan heroku-sovellus komennolla _heroku create_, tehdään sovelluksen hakemistosta git-repositorio, commitoidaan koodi ja siirretään se Herokuun komennolla _git push heroku master_.
 
 Jos kaikki meni hyvin, sovellus toimii:
 
 ![](../images/3/25a.png)
 
-Jos ei, vikaa voi selvittää herokun lokeja lukemalla, eli komennolla <i>heroku logs</i>.
+Jos ei, vikaa voi selvittää herokun lokeja lukemalla, eli komennolla _heroku logs_.
 
-> **HUOM** ainakin alussa on järkevää tarkkailla Herokussa olevan sovelluksen lokeja koko ajan. Parhaiten tämä onnistuu antamalla komento <i>heroku logs -t</i>, jolloin logit tulevat konsoliin sitä mukaan kun palvelimella tapahtuu jotain.
+> **HUOM** ainakin alussa on järkevää tarkkailla Herokussa olevan sovelluksen lokeja koko ajan. Parhaiten tämä onnistuu antamalla komento _heroku logs -t_, jolloin logit tulevat konsoliin sitä mukaan kun palvelimella tapahtuu jotain.
 
 Myös frontend toimii Herokussa olevan backendin avulla. Voit varmistaa asian muuttamalla frontendiin määritellyn backendin osoitteen viittaamaan <i>http://localhost:3001</i>:n sijaan Herokussa olevaan backendiin.
 
-Seuraavaksi herää kysymys miten saamme myös frontendin internettiin? Vaihtoehtoja on useita, mutta käydään seuraavaksi läpi yksi niistä.
+Seuraavaksi herää kysymys: miten saamme myös frontendin internettiin? Vaihtoehtoja on useita, mutta käydään seuraavaksi läpi yksi niistä.
 
 ### Frontendin tuotantoversio
 
@@ -92,7 +92,7 @@ Olemme toistaiseksi suorittaneet React-koodia <i>sovelluskehitysmoodissa</i>, mi
 Kun sovellus viedään tuotantoon, täytyy siitä tehdä [production build](https://reactjs.org/docs/optimizing-performance.html#use-the-production-build)
 eli tuotantoa varten optimoitu versio.
 
-<i>create-react-app</i>:in avulla tehdyistä sovelluksista saadaan muodostettua tuotantoversio komennolla [npm run build](https://github.com/facebookincubator/create-react-app#npm-run-build-or-yarn-build).
+<i>create-react-app</i>:in avulla tehdyistä sovelluksista saadaan muodostettua tuotantoversio komennolla [_npm run build_](https://github.com/facebookincubator/create-react-app#npm-run-build-or-yarn-build).
 
 Suoritetaan nyt komento <i>frontendin projektin juuressa</i>.
 
@@ -198,13 +198,13 @@ Jotta uuden frontendin version generointi onnistuisi jatkossa ilman turhia manua
 }
 ```
 Skripteistä _npm run build:ui_ kääntää ui:n tuotantoversioksi ja kopioi sen. _npm run deploy_ julkaisee herokuun. 
-_npm run deploy:full_ yhdistää nuo molemmat sekä lisää vaadittavat <i>git</i>-komennot versionhallinnan päivittämistä varten. Lisätään lisäksi oma skripti _npm run logs:prod_ lokien lukemiseen, niin käytännössä kaikki toimii npm-skriptein.
+_npm run deploy:full_ yhdistää nuo molemmat sekä lisää vaadittavat <i>git</i>-komennot versionhallinnan päivittämistä varten. Lisätään lisäksi oma skripti _npm run logs:prod_ lokien lukemiseen, jolloin käytännössä kaikki toimii npm-skriptein.
 
 Huomaa, että skriptissä <i>build:ui</i> olevat polut riippuvat repositorioiden sijainnista.
 
-### Backendin urlit
+### Backendin URL:it
 
-Backendin tarjoama muistiinpanojen käsittelyn rajapinta on nyt suoraan sovelluksen URL:in <https://gentle-ravine-74840.herokuapp.com/> alla. Eli <https://gentle-ravine-74840.herokuapp.com//notes> on kaikkien mustiinpanojen lista ym. Koska backendin roolina on tarjota frontendille koneluettava rajapinta, eli API, olisi ehkä parempi erottaa API:n tarjoama osoitteisto selkeämmin, esim. aloittamalla kaikki sanalla _api_.
+Backendin tarjoama muistiinpanojen käsittelyn rajapinta on nyt suoraan sovelluksen URL:in <https://gentle-ravine-74840.herokuapp.com/> alla. Eli <https://gentle-ravine-74840.herokuapp.com/notes> on kaikkien mustiinpanojen lista ym. Koska backendin roolina on tarjota frontendille koneluettava rajapinta, eli API, olisi ehkä parempi erottaa API:n tarjoama osoitteisto selkeämmin, esim. aloittamalla kaikki sanalla _api_.
 
 Tehdään muutos ensin muuttamalla käsin **kaikki backendin routet**:
 
@@ -254,7 +254,7 @@ Syynä tälle on se, että backendin osoite muutettiin suhteellisesti määritel
 const baseUrl = '/api/notes'
 ```
 
-Koska frontend toimii osoitteessa <i>localhost:3000</i>, menevät backendiin tehtävät pyynnöt väärään osoitteeseen <i>localhost:3000/api/notes</i>. Backend toimii kuitenkin osoitteessa <i>localhost:3001</i>
+Koska frontend toimii osoitteessa <i>localhost:3000</i>, menevät backendiin tehtävät pyynnöt väärään osoitteeseen <i>localhost:3000/api/notes</i>. Backend toimii kuitenkin osoitteessa <i>localhost:3001</i>.
 
 create-react-app:illa luoduissa projekteissa ongelma on helppo ratkaista. Riittää, että frontendin repositorion tiedostoon <i>package.json</i> lisätään seuraava määritelmä:
 
@@ -270,17 +270,17 @@ create-react-app:illa luoduissa projekteissa ongelma on helppo ratkaista. Riitt�
 }
 ```
 
-Uudelleenkäynnistyksen jälkeen Reactin sovelluskehitysympäristö toimii [proxynä](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#proxying-api-requests-in-development) ja jos React-koodi tekee HTTP-pyynnön palvelimen <i>http://localhost:3000</i> johonkin osoitteeseen joka ei ole React-sovelluksen vastuulla (eli kyse ei ole esim. sovelluksen Javascript-koodin tai CSS:n lataamisesta), lähetetään pyyntö edelleen osoitteessa <i>http://localhost:3001</i> olevalle palvelimelle.
+Uudelleenkäynnistyksen jälkeen Reactin sovelluskehitysympäristö toimii [proxynä](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#proxying-api-requests-in-development). Jos React-koodi tekee HTTP-pyynnön palvelimen <i>http://localhost:3000</i> johonkin osoitteeseen, joka ei ole React-sovelluksen vastuulla (eli kyse ei ole esim. sovelluksen Javascript-koodin tai CSS:n lataamisesta), lähetetään pyyntö edelleen osoitteessa <i>http://localhost:3001</i> olevalle palvelimelle.
 
-Nyt myös frontend on kunnossa, se toimii sekä sovelluskehitysmoodissa että tuotannossa yhdessä palvelimen kanssa.
+Nyt myös frontend on kunnossa. Se toimii sekä sovelluskehitysmoodissa että tuotannossa yhdessä palvelimen kanssa.
 
 Eräs negatiivinen puoli käyttämässämme lähestymistavassa on se, että sovelluksen uuden version tuotantoon vieminen edellyttää frontendin koodin tuotantoversion generoinnista ja sen backendin repositorion kopioimisesta huolehtivan skriptin <i>deploy.sh</i> suorittamisen. Tämä taas hankaloittaa automatisoidun [deployment pipelinen](https://martinfowler.com/bliki/DeploymentPipeline.html) toteuttamista. Deployment pipelinellä tarkoitetaan automatisoitua ja hallittua tapaa viedä koodi sovelluskehittäjän koneelta erilaisten testien ja laadunhallinnallisten vaiheiden kautta tuotantoympäristöön.
 
 Tähänkin on useita erilaisia ratkaisuja (esim. sekä frontendin että backendin [sijoittaminen samaan repositorioon](https://github.com/mars/heroku-cra-node)), emme kuitenkaan nyt mene niihin.
 
-Myös frontendin koodin deployaaminen omana sovelluksenaan voi joissain tilanteissa olla järkevää. create-react-app:in avulla luotujen sovellusten osalta se on [suoraviivaista](https://github.com/mars/create-react-app-buildpack).
+Myös frontendin koodin deployaaminen omana sovelluksenaan voi joissain tilanteissa olla järkevää. _create-react-app_:in avulla luotujen sovellusten osalta se on [suoraviivaista](https://github.com/mars/create-react-app-buildpack).
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-3), branchissa <i>part3-3</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-3), branchissa <i>part3-3</i>.
 
 </div>
 
@@ -288,25 +288,25 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 ### Tehtäviä
 
-Seuraavissa tehtävissä koodia ei tarvita montaa riviä. Tehtävät ovat kuitenkin haastavia, sillä nyt on tarkalleen hallittava missä tapahtuu mitäkin, ja kaikki konfiguraatiot on tehtävä täsmälleen oikein. 
+Seuraavissa tehtävissä koodia ei tarvita montaa riviä. Tehtävät ovat kuitenkin haastavia, sillä nyt on tarkalleen hallittava, missä tapahtuu mitäkin, ja kaikki konfiguraatiot on tehtävä täsmälleen oikein. 
 
 #### 3.9 puhelinluettelon backend step9
 
 Laita backend toimimaan edellisessä osassa tehdyn puhelinluettelon frontendin kanssa muilta osin, paitsi mahdollisen puhelinnumeron muutoksen osalta, jonka vastaava toiminnallisuus toteutetaan backendiin vasta tehtävässä 3.17.
 
-Joudut todennäköisesti tekemään frontendiin erinäisiä pieniä muutoksia ainakin backendin oletettujen urlien osalta. Muista pitää selaimen konsoli koko ajan auki. Jos jotkut HTTP-pyynnöt epäonnistuvat, kannattaa katsoa <i>Network</i>-välilehdeltä mitä tapahtuu. Pidä myös silmällä mitä palvelimen konsolissa tapahtuu. Jos et tehnyt edellistä tehtävää, kannattaa POST-pyyntöä käsittelevässä tapahtumankäsittelijässä tulostaa konsoliin mukana tuleva data eli <i>request.body</i>.
+Joudut todennäköisesti tekemään frontendiin erinäisiä pieniä muutoksia ainakin backendin oletettujen urlien osalta. Muista pitää selaimen konsoli koko ajan auki. Jos jotkut HTTP-pyynnöt epäonnistuvat, kannattaa katsoa <i>Network</i>-välilehdeltä, mitä tapahtuu. Pidä myös silmällä, mitä palvelimen konsolissa tapahtuu. Jos et tehnyt edellistä tehtävää, kannattaa POST-pyyntöä käsittelevässä tapahtumankäsittelijässä tulostaa konsoliin mukana tuleva data eli <i>request.body</i>.
 
 #### 3.10 puhelinluettelon backend step10
 
 Vie sovelluksen backend internetiin, esim. Herokuun. 
 
-**Huom** komento _heroku_ toimii laitoksen koneilla ja fuksikannettavilla. Jos et jostain syystä saa [asennettua](https://devcenter.heroku.com/articles/heroku-cli) herokua koneellesi, voit käyttää komentoa [npx heroku-cli](https://www.npmjs.com/package/heroku-cli).
+**Huom.** komento _heroku_ toimii laitoksen koneilla ja fuksikannettavilla. Jos et jostain syystä saa [asennettua](https://devcenter.heroku.com/articles/heroku-cli) herokua koneellesi, voit käyttää komentoa [npx heroku-cli](https://www.npmjs.com/package/heroku-cli).
 
-Testaa selaimen ja postmanin tai VS Code REST clientin avulla, että internetissä oleva backend toimii.
+Testaa selaimen ja postmanin tai VS Code REST-clientin avulla, että internetissä oleva backend toimii.
 
-**PRO TIP:** kun deployaat sovelluksen herokuun, kannattaa ainakin alkuvaiheissa pitää **KOKO AJAN** näkyvillä Herokussa olevan sovelluksen loki antamalla komento <em>heroku logs -t</em>. 
+**PRO TIP:** kun deployaat sovelluksen Herokuun, kannattaa ainakin alkuvaiheissa pitää **KOKO AJAN** näkyvillä Herokussa olevan sovelluksen loki antamalla komento <em>heroku logs -t</em>.
 
-Seuraavassa loki eräästä tyypillisestä ongelmatilanteesta, heroku ei löydä sovelluksen riippuvuutena olevaa moduulia <i>express</i>:
+Seuraavassa loki eräästä tyypillisestä ongelmatilanteesta, jossa Heroku ei löydä sovelluksen riippuvuutena olevaa moduulia <i>express</i>:
 
 ![](../images/3/33.png)
 
@@ -322,7 +322,7 @@ Tee repositorion juureen tiedosto README.md ja lisää siihen linkki internetiss
 
 Generoi frontendistä tuotantoversio ja lisää se internetissä olevaan sovellukseesi tässä osassa esiteltyä menetelmää noudattaen.
 
-**Huom** eihän hakemisto <i>build</i> ole gitignoroituna projektissasi?
+**Huom.** eihän hakemisto <i>build</i> ole gitignoroituna projektissasi?
 
 Huolehdi myös, että frontend toimii edelleen myös paikallisesti.
 
