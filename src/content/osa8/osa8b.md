@@ -284,13 +284,13 @@ query findPersonByName($nameToSearch: String!) {
 // highlight-end
 
 const Persons = ({ result, client }) => {
+  // highlight-start
+  const [person, setPerson] = useState(null)
+  // highlight-end
+  
   if (result.loading) {
     return <div>loading...</div>
   }
-
-// highlight-start
-  const [person, setPerson] = useState(null)
-// highlight-end
 
 // highlight-start
   const showPerson = async (name) => {
