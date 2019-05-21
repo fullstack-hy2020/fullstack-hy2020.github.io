@@ -705,11 +705,11 @@ REST clientin eräs suuri etu Postmaniin verrattuna on se, että pyynnöt saa k�
 
 > **Tärkeä sivuhuomio**
 >
-> Välillä debugatessa tulee vastaan tilanteita, joissa backendissä on tarve selvittää mitä headereja HTTP-pyynnöille on asetettu. Eräs menetelmä tähän on _request_-olion melko kehnosti nimetty metodi [get](http://expressjs.com/en/4x/api.html#req.get), jonka avulla voi selvittää yksittäisen headerin arvon. _request_-oliolla on myös kenttä <i>headers</i>, jonka arvona ovat kaikki pyyntöön liittyvät headerit.
+> Välillä debugatessa tulee vastaan tilanteita, joissa backendissä on tarve selvittää, mitä headereja HTTP-pyynnöille on asetettu. Eräs menetelmä tähän on _request_-olion melko kehnosti nimetty metodi [get](http://expressjs.com/en/4x/api.html#req.get), jonka avulla voi selvittää yksittäisen headerin arvon. _request_-oliolla on myös kenttä <i>headers</i>, jonka arvona ovat kaikki pyyntöön liittyvät headerit.
 >
-> Ongelmia voi esim syntyä jos jätät vahingossa VS REST clientillä ylimmän rivin ja headerit määrittelevien rivien väliin tyhjän rivin. Tällöin REST client tulkitsee, että millekään headerille ei aseteta arvoa ja näin backend ei osaa tulkita pyynnön mukana olevaa dataa JSON:iksi.
+> Ongelmia voi esim. syntyä, jos jätät vahingossa VS Coden REST-clientillä ylimmän rivin ja headerit määrittelevien rivien väliin tyhjän rivin. Tällöin REST-client tulkitsee, että millekään headerille ei aseteta arvoa ja näin backend ei osaa tulkita pyynnön mukana olevaa dataa JSON:iksi.
 >
-> Puuttuvan <i>content-type</i>-headerin ongelma selviää kun backendissa tulostaa pyynnön headerit esim. komennolla _console.log(request.headers)_
+> Puuttuvan <i>content-type</i>-headerin ongelma selviää, kun backendissa tulostaa pyynnön headerit esim. komennolla _console.log(request.headers)_.
 
 Palataan taas sovelluksen pariin. Kun tiedämme, että sovellus vastaanottaa tiedon oikein, voimme viimeistellä sovelluslogiikan:
 
@@ -728,7 +728,7 @@ app.post('/notes', (request, response) => {
 })
 ```
 
-Uudelle muistiinpanolle tarvitaan uniikki id. Ensin selvitetään olemassaolevista id:istä suurin muuttujaan _maxId_. Uuden muistiinpanon id:ksi asetetaan sitten _maxId + 1_. Tämä tapa ei ole itseasiassa kovin hyvä, mutta emme nyt välitä siitä sillä tulemme pian korvaamaan tavan, jolla muistiinpanot talletetaan.
+Uudelle muistiinpanolle tarvitaan uniikki id. Ensin selvitetään olemassaolevista id:istä suurin muuttujaan _maxId_. Uuden muistiinpanon id:ksi asetetaan sitten _maxId + 1_. Tämä tapa ei ole itse asiassa kovin hyvä, mutta emme nyt välitä siitä, sillä tulemme pian korvaamaan tavan, jolla muistiinpanot talletetaan.
 
 Tämän hetkisessä versiossa on vielä se ongelma, että voimme HTTP POST -pyynnöllä lisätä mitä tahansa kenttiä sisältäviä olioita. Parannellaan sovellusta siten, että kenttä <i>content</i> ei voi olla tyhjä. Kentille <i>important</i> ja <i>date</i> asetetaan oletusarvot. Kaikki muut kentät hylätään:
 
@@ -774,7 +774,7 @@ if (!body.content) {
 }
 ```
 
-Huomaa, että returnin kutsuminen on tärkeää, jos sitä ei tapahdu, jatkaa koodi suoritusta metodin loppuun asti ja virheellinen muistiinpano tallettuu!
+Huomaa, että returnin kutsuminen on tärkeää. Jos sitä ei tapahdu, koodi jatkaa suoritusta metodin loppuun asti, ja virheellinen muistiinpano tallettuu!
 
 Jos content-kentällä on arvo, luodaan muistiinpano syötteen perusteella. Kuten edellisessä osassa mainitsimme, aikaleimoja ei kannata luoda selaimen koodissa, sillä käyttäjän koneen kellon aikaan ei voi luottaa. Aikaleiman eli kentän <i>date</i> arvon generointi tapahtuukin nyt palvelimen toimesta.
 
@@ -784,13 +784,13 @@ Jos kenttä <i>important</i> puuttuu, asetetaan sille oletusarvo <i>false</i>. O
 important: body.important || false,
 ```
 
-jos sovelluksen vastaanottamassa muuttujaan _body_ talletetussa datassa on kenttä <i>important</i>, tulee lausekkeelle sen arvo. Jos kenttää ei ole olemassa, tulee lausekkeen arvoksi oikeanpuoleinen osa eli <i>false</i>.
+Jos sovelluksen vastaanottamassa muuttujaan _body_ talletetussa datassa on kenttä <i>important</i>, tulee lausekkeelle sen arvo. Jos kenttää ei ole olemassa, tulee lausekkeen arvoksi oikeanpuoleinen osa eli <i>false</i>.
 
 > Jos ollaan tarkkoja, niin kentän <i>important</i> arvon ollessa <i>false</i>, tulee lausekkeen <em>body.important || false</em> arvoksi oikean puoleinen <i>false</i>...
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-1)
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-1).
 
-Huomaa, että repositorion master-haarassa on myöhemmän vaiheen koodi, tämän hetken koodi on branchissa [part3-1](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-1):
+Huomaa, että repositorion master-haarassa on myöhemmän vaiheen koodi. Tämän hetken koodi on branchissa [part3-1](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-1):
 
 ![](../images/3/21.png)
 
@@ -813,7 +813,7 @@ Koodi sisältää hieman erikoisen näköisen rivin
 Math.max(...notes.map(n => n.id))
 ```
 
-Mitä rivillä tapahtuu? <em>notes.map(n => n.id)</em> muodostaa taulukon, joka koostuu muistiinpanojen id-kentisstä. [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) palauttaa maksimin sille parametrina annetuista luvuista. <em>notes.map(n => n.id)</em> on kuitenkin <i>taulukko</i>, joten se ei kelpaa parametriksi komennolle _Math.max_. Taulukko voidaan muuttaa yksittäisiksi luvuiksi käyttäen taulukon [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)-syntaksia, eli kolmea pistettä <em>... taulukko</em>.
+Mitä rivillä tapahtuu? <em>notes.map(n => n.id)</em> muodostaa taulukon, joka koostuu muistiinpanojen id-kentisstä. [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) palauttaa maksimin sille parametrina annetuista luvuista. <em>notes.map(n => n.id)</em> on kuitenkin <i>taulukko</i>, joten se ei kelpaa parametriksi komennolle _Math.max_. Taulukko voidaan muuttaa yksittäisiksi luvuiksi käyttäen taulukon [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)-syntaksia, eli kolmea pistettä <em>...taulukko</em>.
 
 </div>
 
@@ -823,10 +823,10 @@ Mitä rivillä tapahtuu? <em>notes.map(n => n.id)</em> muodostaa taulukon, joka 
 
 **HUOM:** tämän osan tehtäväsarja kannattaa tehdä omaan git-repositorioon, suoraan repositorion juureen! Jos et tee näin, joudut ongelmiin tehtävässä 3.10
 
-**HUOM2:** Koska nyt ei ole kyse frontendista ja Reactista, sovellusta <strong>ei luoda</strong> create-react-app:illa vaan komennolla <em>npm init</em> kuten ylempänä tämän osan materiaalissa.
+**HUOM2:** Koska nyt ei ole kyse frontendista ja Reactista, sovellusta <strong>ei luoda</strong> create-react-app:illa vaan komennolla <em>npm init</em>, kuten ylempänä tämän osan materiaalissa.
 
 
-**Vahva suositus:** kun teet backendin koodia, pidä koko ajan silmällä mitä palvelimen koodia suorittavassa konsolissa tapahtuu.
+**Vahva suositus:** kun teet backendin koodia, pidä koko ajan silmällä, mitä palvelimen koodia suorittavassa konsolissa tapahtuu.
 
 #### 3.1 puhelinluettelon backend step1
 
@@ -838,7 +838,7 @@ Huomaa, että Noden routejen määrittelyssä merkkijonon <i>api/persons</i> vin
 
 Sovellus pitää pystyä käynnistämään komennolla _npm start_.
 
-Komennolla _npm run watch_ käynnistettäessa sovelluksen tulee käynnistyä uudelleen kun koodiin tehdään muutoksia.
+Komennolla _npm run watch_ käynnistettäessa sovelluksen tulee käynnistyä uudelleen, kun koodiin tehdään muutoksia.
 
 #### 3.2: puhelinluettelon backend step2
 
@@ -846,7 +846,7 @@ Tee sovelluksen osoitteeseen <http://localhost:3001/info> suunnilleen seuraavanl
 
 ![](../images/3/23.png)
 
-eli sivu kertoo pyynnön tekohetken sekä sen kuinka monta puhelinluettelotietoa sovelluksen muistissa olevassa taulukossa on.
+eli sivu kertoo pyynnön tekohetken sekä sen, kuinka monta puhelinluettelotietoa sovelluksen muistissa olevassa taulukossa on.
 
 #### 3.3: puhelinluettelon backend step3
 
@@ -858,13 +858,13 @@ Jos id:tä vastaavaa puhelinnumerotietoa ei ole, tulee palvelimen vastata asianm
 
 Toteuta toiminnallisuus, jonka avulla puhelinnumerotieto on mahdollista poistaa numerotiedon yksilöivään URL:iin tehtävällä HTTP DELETE -pyynnöllä.
 
-Testaa toiminnallisuus Postmanilla tai Visual Studio Coden REST clientillä
+Testaa toiminnallisuus Postmanilla tai Visual Studio Coden REST-clientillä.
 
 #### 3.5: puhelinluettelon backend step5
 
 Laajenna backendia siten, että uusia puhelintietoja on mahdollista lisätä osoitteeseen <http://localhost:3001/api/persons> tapahtuvalla HTTP POST -pyynnöllä.
 
-Generoi uuden puhelintiedon tunniste funktiolla [Math.random](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random). Käytä riittävän isoa arvoväliä jotta arvottu id on riittävän suurella todennäköisyydellä sellainen, joka ei ole jo käytössä.
+Generoi uuden puhelintiedon tunniste funktiolla [Math.random](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random). Käytä riittävän isoa arvoväliä, jotta arvottu id on riittävän suurella todennäköisyydellä sellainen, joka ei ole jo käytössä.
 
 #### 3.6: puhelinluettelon backend step6
 
@@ -872,7 +872,7 @@ Tee uuden numeron lisäykseen virheiden käsittely. Pyyntö ei saa onnistua, jos
 - nimi tai numero puuttuu
 - lisättävä nimi on jo luettelossa
 
-Vastaa asiaankuuluvalla statuskoodilla, liitä vastaukseen mukaan myös tieto, joka kertoo virheen syyn, esim:
+Vastaa asiaankuuluvalla statuskoodilla ja liitä vastaukseen mukaan myös tieto, joka kertoo virheen syyn, esim:
 
 ```js
 { error: 'name must be unique' }
@@ -882,7 +882,7 @@ Vastaa asiaankuuluvalla statuskoodilla, liitä vastaukseen mukaan myös tieto, j
 
 <div class="content">
 
-### Huomioita HTTP pyyntötyyppien käytöstä
+### Huomioita HTTP-pyyntötyyppien käytöstä
 
 [HTTP-standardi](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) puhuu pyyntötyyppien yhteydessä kahdesta ominaisuudesta, **safe** ja **idempotent**.
 
@@ -890,23 +890,23 @@ HTTP-pyynnöistä GET:in tulisi olla <i>safe</i>:
 
 > <i>In particular, the convention has been established that the GET and HEAD methods SHOULD NOT have the significance of taking an action other than retrieval. These methods ought to be considered "safe".</i>
 
-Safety siis tarkoittaa, että pyynnön suorittaminen ei saa aiheuttaa palvelimelle <i>sivuvaikutuksia</i> eli esim. muuttaa palvelimen tietokannan tilaa, pyynnön tulee ainoastaan palauttaa palvelimella olevaa dataa.
+Safety siis tarkoittaa, että pyynnön suorittaminen ei saa aiheuttaa palvelimelle <i>sivuvaikutuksia</i> eli esim. muuttaa palvelimen tietokannan tilaa. Pyynnön tulee ainoastaan palauttaa palvelimella olevaa dataa.
 
-Mikään ei automaattisesti takaa, että GET-pyynnöt olisivat luonteeltaan <i>safe</i>, kyseessä onkin HTTP-standardin suositus palvelimien toteuttajille. RESTful-periaatetta noudattaessa GET-pyyntöjä käytetäänkin aina siten, että ne ovat safe.
+Mikään ei automaattisesti takaa, että GET-pyynnöt olisivat luonteeltaan <i>safe</i>. Kyseessä onkin HTTP-standardin suositus palvelimien toteuttajille. RESTful-periaatetta noudattaessa GET-pyyntöjä käytetäänkin aina siten, että ne ovat safe.
 
-HTTP-standardi määrittelee myös pyyntötyypin [HEAD](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.4), jonka tulee olla safe. Käytännössä HEAD:in tulee toimia kuten GET, mutta se ei palauta vastauksenaan muuta kuin statuskoodin ja headerit, viestin bodyä HEAD ei palauta ollenkaan.
+HTTP-standardi määrittelee myös pyyntötyypin [HEAD](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.4), jonka tulee olla safe. Käytännössä HEAD:in tulee toimia kuten GET, mutta se ei palauta vastauksenaan muuta kuin statuskoodin ja headerit. Viestin bodyä HEAD ei palauta ollenkaan.
 
 HTTP-pyynnöistä muiden paitsi POST:in tulisi olla <i>idempotentteja</i>:
 
 > <i>Methods can also have the property of "idempotence" in that (aside from error or expiration issues) the side-effects of N > 0 identical requests is the same as for a single request. The methods GET, HEAD, PUT and DELETE share this property</i>
 
-Eli jos pyynnöllä on sivuvaikutuksia, lopputulos on sama suoritetaanko pyyntö yhden tai useamman kerran.
+Eli jos pyynnöllä on sivuvaikutuksia, lopputulos on sama suoritettaessa pyyntö yhden tai useamman kerran.
 
-Esim. jos tehdään HTTP PUT pyyntö osoitteeseen <i>/notes/10</i> ja pyynnön mukana on <em>{ content: "ei sivuvaikutuksia", important: true }</em>, on lopputulos sama riippumatta siitä kuinka monta kertaa pyyntö suoritetaan.
+Esim. jos tehdään HTTP PUT -pyyntö osoitteeseen <i>/notes/10</i> ja pyynnön mukana on <em>{ content: "ei sivuvaikutuksia", important: true }</em>, on lopputulos sama riippumatta siitä, kuinka monta kertaa pyyntö suoritetaan.
 
-Kuten metodin GET <i>safety</i> myös <i>idempotence</i> on HTTP-standardin suositus palvelimien toteuttajille. RESTful-periaatetta noudattaessa GET, HEAD, PUT ja DELETE-pyyntöjä käytetäänkin aina siten, että ne ovat idempotentteja.
+Kuten metodin GET <i>safety</i> myös <i>idempotence</i> on HTTP-standardin suositus palvelimien toteuttajille. RESTful-periaatetta noudattaessa GET-, HEAD-, PUT- ja DELETE-pyyntöjä käytetäänkin aina siten, että ne ovat idempotentteja.
 
-HTTP pyyntötyypeistä POST on ainoa joka ei ole <i>safe</i> eikä <i>idempotent</i>. Jos tehdään 5 kertaa HTTP POST -pyyntö osoitteeseen <i>/notes</i> siten että pyynnön mukana on <em>{ content: "monta samaa", important: true }</em>, tulee palvelimelle 5 saman sisältöistä muistiinpanoa.
+HTTP-pyyntötyypeistä POST on ainoa, joka ei ole <i>safe</i> eikä <i>idempotent</i>. Jos tehdään 5 kertaa HTTP POST -pyyntö osoitteeseen <i>/notes</i> siten että pyynnön mukana on <em>{ content: "monta samaa", important: true }</em>, tulee palvelimelle 5 saman sisältöistä muistiinpanoa.
 
 ### Middlewaret
 
@@ -916,7 +916,7 @@ Middlewaret ovat funktioita, joiden avulla voidaan käsitellä _request_- ja _re
 
 Esim. body-parser ottaa pyynnön mukana tulevan raakadatan _request_-oliosta, parsii sen Javascript-olioksi ja sijoittaa olion _request_:in kenttään <i>body</i>
 
-Middlewareja voi olla käytössä useita, jolloin ne suoritetaan peräkkäin siinä järjestyksessä kun ne on otettu koodissa käyttöön.
+Middlewareja voi olla käytössä useita, jolloin ne suoritetaan peräkkäin siinä järjestyksessä, kuin ne on otettu koodissa käyttöön.
 
 Toteutetaan itse yksinkertainen middleware, joka tulostaa konsoliin palvelimelle tulevien pyyntöjen perustietoja.
 
@@ -942,7 +942,7 @@ app.use(requestLogger)
 
 Middlewaret suoritetaan siinä järjestyksessä, jossa ne on otettu käyttöön sovellusolion metodilla _use_. Huomaa, että _bodyParser_ tulee ottaa käyttään ennen middlewarea _requestLogger_, muuten <i>request.body</i> ei ole vielä alustettu loggeria suoritettaessa!
 
-Middlewaret tulee ottaa käyttöön ennen routeja jos ne halutaan suorittaa ennen niitä. On myös eräitä tapauksia, joissa middleware tulee määritellä vasta routejen jälkeen, käytännössä tällöin on kyse middlewareista, joita suoritetaan vain, jos mikään route ei käsittele HTTP-pyyntöä.
+Middlewaret tulee ottaa käyttöön ennen routeja, jos ne halutaan suorittaa ennen niitä. On myös eräitä tapauksia, joissa middleware tulee määritellä vasta routejen jälkeen. Käytännössä tällöin on kyse middlewareista, joita suoritetaan vain, jos mikään route ei käsittele HTTP-pyyntöä.
 
 Lisätään routejen jälkeen seuraava middleware, jonka ansiosta saadaan routejen käsittelemättömistä virhetilanteista JSON-muotoinen virheilmoitus:
 
@@ -954,7 +954,7 @@ const unknownEndpoint = (request, response) => {
 app.use(unknownEndpoint)
 ```
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-2), branchissa <i>part3-2</i>.
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-2), branchissa <i>part3-2</i>.
 
 </div>
 
@@ -966,7 +966,7 @@ Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://git
 
 Lisää sovellukseesi loggausta tekevä middleware [morgan](https://github.com/expressjs/morgan). Konfiguroi se logaamaan konsoliin <i>tiny</i>-konfiguraation mukaisesti.
 
-Morganin ohjeet eivät ole ehkä kaikkein selvimmät ja joudut kenties miettimään hiukan. Toisaalta juuri koskaan dokumentaatio ei ole aivan itsestäänselvää, joten kryptisempiäkin asioita on hyvä oppia tulkitsemaan.
+Morganin ohjeet eivät ole ehkä kaikkein selvimmät, ja joudut kenties miettimään hiukan. Toisaalta juuri koskaan dokumentaatio ei ole aivan itsestäänselvää, joten kryptisempiäkin asioita on hyvä oppia tulkitsemaan.
 
 Morgan asennetaan kuten muutkin kirjastot, eli komennolla _npm install_ ja sen käyttöönotto tapahtuu kaikkien middlewarejen tapaan komennolla _app.use_
 
@@ -976,9 +976,9 @@ Konfiguroi morgania siten, että se näyttää myös HTTP POST -pyyntöjen mukan
 
 ![](../images/3/24.png)
 
-Tämä tehtävä on kohtuullisen haastava vaikka koodia ei tarvitakkaan paljoa. 
+Tämä tehtävä on kohtuullisen haastava, vaikka koodia ei tarvitakkaan paljoa. 
 
-Tehtävän voi tehdä muutamallakin tavalla, eräs näistä onnistuu hyödyntämällä seuraavia
+Tehtävän voi tehdä muutamallakin tavalla. Eräs näistä onnistuu hyödyntämällä seuraavia
 - [creating new tokens](https://github.com/expressjs/morgan#creating-new-tokens)
 - [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
 

@@ -46,7 +46,7 @@ const noteSchema = new mongoose.Schema({
 
 Kentän <i>content</i> pituuden vaaditaan nyt olevan vähintään 5 merkkiä. Kentälle <i>data</i> taas on asetettu ehdoksi että sillä on oltava joku arvo, eli kenttä ei voi olla tyhjä. Sama ehto on asetettu myös kentälle <i>content</i>, sillä minimipituuden tarkistava ehto ei huomioi tilannetta, missä kentällä ei ole mitään arvoa. Kentälle <i>important</i> ei ole asetettu mitään ehtoa, joten se on määritelty edelleen yksinkertaisemmassa muodossa.
 
-Esimerkissä käytetyt validaattorit <i>minlength</i> ja <i>required</i> ovat Mongooseen [sisäänrakennettuja](https://mongoosejs.com/docs/validation.html#built-in-validators) validointisääntöjä. Mongoosen [custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) -ominaisuus mahdollistaa mielivaltaisten validaattorien toteuttamisen jos valmiiden joukosta ei löydy tarkoitukseen sopivaa.
+Esimerkissä käytetyt validaattorit <i>minlength</i> ja <i>required</i> ovat Mongooseen [sisäänrakennettuja](https://mongoosejs.com/docs/validation.html#built-in-validators) validointisääntöjä. Mongoosen [custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) -ominaisuus mahdollistaa mielivaltaisten validaattorien toteuttamisen, jos valmiiden joukosta ei löydy tarkoitukseen sopivaa.
 
 Jos tietokantaan yritetään tallettaa validointisäännön rikkova olio, heittää tallennusoperaatio poikkeuksen. Muutetaan uuden muistiinpanon luomisesta huolehtivaa käsittelijää siten, että se välittää mahdollisen poikkeuksen virheenkäsittelijämiddlewaren huolehdittavaksi:  
 
@@ -142,7 +142,7 @@ app.post('/api/notes', (request, response) => {
 })
 ```
 
-Esimerkkimme tapauksessa promisejen ketjutuksesta ei ole suurta hyötyä. Tilanne alkaa muuttua jos joudumme tekemään useita peräkkäisiä asynkronisia operaatiota. Emme kuitenkaan mene asiaan sen tarkemmin. Tutustumme seuraavassa osassa Javascriptin <i>async/await</i>-syntaksiin, jota käyttämällä peräkkäisten asynkronisten operaatioiden tekeminen helpottuu olellisesti.
+Esimerkkimme tapauksessa promisejen ketjutuksesta ei ole suurta hyötyä. Tilanne alkaa muuttua, jos joudumme tekemään useita peräkkäisiä asynkronisia operaatiota. Emme kuitenkaan mene asiaan sen tarkemmin. Tutustumme seuraavassa osassa Javascriptin <i>async/await</i>-syntaksiin, jota käyttämällä peräkkäisten asynkronisten operaatioiden tekeminen helpottuu olellisesti.
 
 ### Tietokantaa käyttävän version vieminen tuotantoon
 
@@ -160,7 +160,7 @@ Sovelluksen pitäisi nyt toimia. Aina kaikki ei kuitenkaan mene suunnitelmien mu
 
 eli tietokannan osoite olikin jostain syystä määrittelemätön. Komento <i>heroku config</i> paljasti että olin vahingossa määritellyt ympäristömuuttujan <em>MONGO\_URL</em> kun koodi oletti sen olevan nimeltään <em>MONGODB\_URI</em>.
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-5), branchissä <i>part3-5</i>.
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-5), branchissä <i>part3-5</i>.
 
 </div>
 
@@ -170,7 +170,7 @@ Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://git
 
 #### 3.19: puhelinluettelo ja tietokanta, step7
 
-Toteuta sovelluksellesi validaatio, joka huolehtii, että backendiin ei voi lisätä nimeä joka on jo puhelinluettelossa. Frontendin nykyisestä versiosta ei duplikaatteja voi luoda, mutta suoraan Postmanilla tai VS Coden REST clientillä se onnistuu.
+Toteuta sovelluksellesi validaatio, joka huolehtii, että backendiin ei voi lisätä nimeä, joka on jo puhelinluettelossa. Frontendin nykyisestä versiosta ei duplikaatteja voi luoda, mutta suoraan Postmanilla tai VS Coden REST-clientillä se onnistuu.
 
 Mongoose ei tarjoa tilanteeseen sopivaa valmista validaattoria. Käytä npm:llä asennettavaa pakettia
 [mongoose-unique-validator](https://github.com/blakehaswell/mongoose-unique-validator#readme).
@@ -392,7 +392,7 @@ Jos konfiguraatiossa on jotain vikaa, voi editorin lint-plugin näyttää mitä 
 
 Monissa yrityksissä on tapana määritellä yrityksen laajuiset koodausstandardit ja näiden käyttöä valvova ESlint-konfiguraatio. Pyörää ei kannata välttämättä keksiä uudelleen ja voi olla hyvä idea ottaa omaan projektiin käyttöön joku jossain muualla hyväksi havaittu konfiguraatio. Viime aikoina monissa projekteissa on omaksuttu AirBnB:n [Javascript](https://github.com/airbnb/javascript)-tyyliohjeet ottamalla käyttöön firman määrittelemä [ESLint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb)-konfiguraatio.
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-6), branchissa <i>part3-6</i>.
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-6), branchissa <i>part3-6</i>.
 
 </div>
 
@@ -403,5 +403,7 @@ Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://git
 #### 3.22: lint-konfiguraatio
 
 Ota sovellukseesi käyttöön ESlint.
+
+Tämä oli osan viimeinen tehtävä, joten on aika pushata koodi Githubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/fullstackopen2019/).
 
 </div>

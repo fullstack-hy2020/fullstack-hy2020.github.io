@@ -28,7 +28,7 @@ Koodi on pysähtynyt nuolen osoittaman <i>breakpointin</i> kohdalle ja konsoliin
 
 Ylhäällä olevista nuolista yms. voidaan kontrolloida debuggauksen etenemistä.
 
-Itse en jostain syystä juurikaan käytä Visual Studio Code debuggeria.
+Itse en jostain syystä juurikaan käytä Visual Studio Coden debuggeria.
 
 #### Chromen dev tools
 
@@ -56,7 +56,7 @@ Full Stack -sovellusten debuggaaminen vaikuttaa alussa erittäin hankalalta. Kun
 
 Kun sovellus "ei toimi", onkin selvitettävä missä vika on. On erittäin yleistä, että vika on sellaisessa paikassa, mitä ei osaa ollenkaan epäillä, ja menee minuutti-, tunti- tai jopa päiväkausia ennen kuin oikea ongelmien lähde löytyy.
 
-Avainasemassa onkin systemaattisuus. Koska virhe voi olla melkein missä vaan, <i>kaikkea pitää epäillä</i>, ja tulee pyrkiä poissulkemaan ne osat tarkastelusta, missä virhe ei ainakaan ole. Konsoliin kirjoitus, Postman, debuggeri ja kokemus auttavat.
+Avainasemassa onkin systemaattisuus. Koska virhe voi olla melkein missä vain, <i>kaikkea pitää epäillä</i>, ja tulee pyrkiä poissulkemaan ne osat tarkastelusta, missä virhe ei ainakaan ole. Konsoliin kirjoitus, Postman, debuggeri ja kokemus auttavat.
 
 Virheiden ilmaantuessa <i>ylivoimaisesti huonoin strategia</i> on jatkaa koodin kirjoittamista. Se on tae siitä, että koodissa on pian kymmenen ongelmaa lisää ja niiden syyn selvittäminen on entistäkin vaikeampaa. Toyota Production Systemin periaate [Stop and fix](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/#.Wjv9axP1WCQ) toimii tässäkin yhteydessä paremmin kuin hyvin.
 
@@ -195,7 +195,7 @@ Suoritetaan ohjelma uudelleen.
 
 ![](../images/3/68.png)
 
-Data on nyt oikeassa kannassa. Hallintanäkymä sisältää myös toiminnon <i>create database</i>, joka mahdollistaa uusien tietokantojenluomisen hallintanäkymän kautta. Kannan luominen etukäteen hallintanäkymässä ei kuitenkaan ole tarpeen, sillä MongoDB Atlasosaa luoda kannan automaattisesti jos sovellus yrittää yhdistää kantaan, jota ei ole vielä olemassa.
+Data on nyt oikeassa kannassa. Hallintanäkymä sisältää myös toiminnon <i>create database</i>, joka mahdollistaa uusien tietokantojenluomisen hallintanäkymän kautta. Kannan luominen etukäteen hallintanäkymässä ei kuitenkaan ole tarpeen, sillä MongoDB Atlas osaa luoda kannan automaattisesti, jos sovellus yrittää yhdistää kantaan, jota ei ole vielä olemassa.
 
 ### Skeema
 
@@ -244,11 +244,11 @@ note.save().then(result => {
 
 Kun olio on tallennettu kantaan, kutsutaan _then_:in parametrina olevaa tapahtumankäsittelijää, joka sulkee tietokantayhteyden komennolla <code>mongoose.connection.close()</code>. Ilman yhteyden sulkemista ohjelman suoritus ei pääty.
 
-Tallennusoperaation tulos on takaisinkutsun parametrissa _result_. Yhtä olioa tallentaessamme tulos ei ole kovin mielenkiintoinen, olion sisällön voi esim. tulostaa konsoliin jos haluaa tutkia sitä tarkemmin sovelluslogiikassa tai esim. debugatessa.
+Tallennusoperaation tulos on takaisinkutsun parametrissa _result_. Yhtä olioa tallentaessamme tulos ei ole kovin mielenkiintoinen, olion sisällön voi esim. tulostaa konsoliin, jos haluaa tutkia sitä tarkemmin sovelluslogiikassa tai esim. debugatessa.
 
 Talletetaan kantaan myös pari muuta muistiinpanoa muokkaamalla dataa koodista ja suorittamalla ohjelma uudelleen.
 
-**HUOM** valitettavasti Mongoosen dokumentaatiossa käytetään joka paikassa takaisinkutsufunktioita, joten sieltä ei kannata suoraan copypasteta koodia, sillä promisejen ja vanhanaikaisten callbackien sotkeminen samaan koodiin ei ole kovin järkevää.
+**HUOM.** Valitettavasti Mongoosen dokumentaatiossa käytetään joka paikassa takaisinkutsufunktioita, joten sieltä ei kannata suoraan copypasteta koodia, sillä promisejen ja vanhanaikaisten callbackien sotkeminen samaan koodiin ei ole kovin järkevää.
 
 ### Olioiden hakeminen tietokannasta
 
@@ -289,7 +289,7 @@ Luo puhelinluettelo-sovellukselle pilvessä oleva mongo Mongo DB Atlaksen avulla
 
 Tee projektihakemistoon tiedosto <i>mongo.js</i>, jonka avulla voit lisätä tietokantaan puhelinnumeroja sekä listata kaikki kannassa olevat numerot.
 
-**Huom** jos/kun laitat tiedoston Githubiin, älä laita tietokannan salasanaa mukaan!
+**HUOM.** Jos/kun laitat tiedoston Githubiin, älä laita tietokannan salasanaa mukaan!
 
 Ohjelma toimii siten, että jos sille annetaan käynnistäessä kolme komentoriviparametria (joista ensimmäinen on salasana), esim:
 
@@ -326,7 +326,7 @@ Tiina Niklander 040-1231236
 
 Saat selville ohjelman komentoriviparametrit muuttujasta [process.argv](https://nodejs.org/docs/latest-v8.x/api/process.html#process_process_argv)
 
-**HUOM: älä sulje tietokantayhteyttä väärässä kohdassa**. Esim. seuraava koodi ei toimi
+**HUOM. Älä sulje tietokantayhteyttä väärässä kohdassa**. Esim. seuraava koodi ei toimi
 
 ```js
 Person
@@ -351,7 +351,7 @@ Person
   })
 ```
 
-**HUOM2** jos määrittelet modelin nimeksi <i>Person</i>, muuttaa mongoose sen monikkomuotoon <i>people</i>, jota se käyttää vastaavan kokoelman nimenä.
+**HUOM.** Jos määrittelet modelin nimeksi <i>Person</i>, muuttaa mongoose sen monikkomuotoon <i>people</i>, jota se käyttää vastaavan kokoelman nimenä.
 
 </div>
 
@@ -518,7 +518,7 @@ PORT=3001
 
 Määrittelimme samalla aiemmin kovakoodaamamme sovelluksen käyttämän portin eli ympäristömuuttujan <em>PORT</em>.
 
-**Tiedosto <i>.env</i> tulee heti gitignorata sillä emme halua julkaista tiedoston sisältöä verkkoon!**
+**Tiedosto <i>.env</i> tulee heti gitignorata, sillä emme halua julkaista tiedoston sisältöä verkkoon!**
 
 dotenvissä määritellyt ympäristömuuttujat otetaan koodissa käyttöön komennolla
 <em>require('dotenv').config()</em> ja niihin viitataan Nodessa kuten "normaaleihin" ympäristömuuttujiin syntaksilla <em>process.env.MONGODB_URI</em>.
@@ -592,13 +592,13 @@ Kun backendia laajennetaan, kannattaa sitä testailla aluksi **ehdottomasti sela
 
 ![](../images/3/46.png)
 
-Vasta kun kaikki on todettu toimivaksi, kannattaa siirtyä testailemaan että muutosten jälkeinen backend toimii yhdessä myös frontendin kanssa. Kaikkien kokeilujen tekeminen ainoastaan frontendin kautta on todennäköisesti varsin tehotonta.
+Vasta kun kaikki on todettu toimivaksi, kannattaa siirtyä testailemaan, että muutosten jälkeinen backend toimii yhdessä myös frontendin kanssa. Kaikkien kokeilujen tekeminen ainoastaan frontendin kautta on todennäköisesti varsin tehotonta.
 
 Todennäköisesti voi olla kannattavaa edetä frontin ja backin integroinnissa toiminnallisuus kerrallaan, eli ensin voidaan toteuttaa esim. kaikkien muistiinpanojen näyttäminen backendiin ja testata että toiminnallisuus toimii selaimella. Tämän jälkeen varmistetaan, että frontend toimii yhteen muutetun backendin kanssa. Kun kaikki on todettu olevan kunnossa, siirrytään seuraavan ominaisuuden toteuttamiseen.
 
 Kun kuvioissa on mukana tietokanta, on tietokannan tilan tarkastelu MongoDB Atlasin hallintanäkymästä varsin hyödyllistä, usein myös suoraan tietokantaa käyttävät Node-apuohjelmat, kuten tiedostoon <i>mongo.js</i> kirjoittamamme koodi auttavat sovelluskehityksen edetessä.
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-3), branchissa <i>part3-3</i>.
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-3), branchissa <i>part3-3</i>.
 
 </div>
 
@@ -733,7 +733,7 @@ Aina kun ohjelmoit ja projektissa on mukana backend <i>**tulee ehdottomasti koko
 
 Olemme kirjoittaneet poikkeuksen aiheuttavan virhetilanteen käsittelevän koodin muun koodin sekaan. Se on välillä ihan toimiva ratkaisu, mutta on myös tilanteita, joissa on järkevämpää keskittää virheiden käsittely yhteen paikkaan. Tästä on huomattava etu esim. jos virhetilanteiden yhteydessä virheen aiheuttaneen pyynnön tiedot logataan tai lähetetään johonkin virhediagnostiikkajärjestelmään, esim. [Sentryyn](https://sentry.io/welcome/). 
 
-Muutetaan routen <i>/api/notes/:id</i> käsittelijää siten, että se <i>siirtää virhetilanteen käsittelyn eteenpäin</i> funktiolla <em>next</em> jonka se saa <i>kolmantena</i> parametrina:
+Muutetaan routen <i>/api/notes/:id</i> käsittelijää siten, että se <i>siirtää virhetilanteen käsittelyn eteenpäin</i> funktiolla <em>next</em>, jonka se saa <i>kolmantena</i> parametrina:
 
 ```js
 app.get('/api/notes/:id', (request, response, next) => {
@@ -851,7 +851,7 @@ app.delete('/api/notes/:id', (request, response, next) => {
 })
 ```
 
-Vastauksena on statauskoodi <i>204 no content</i> molemmissa "onnistuneissa" tapauksissa, eli jos olio poistettiin tai olioa ei ollut mutta <i>id</i> oli periaatteessa oikea. Takaisinkutsun parametrin _result_ perusteella olisi mahdollisuus haarautua ja palauttaa tilanteissa eri statuskoodi jos sille on tarvetta. Mahdollinen poikkeus siirretään jälleen virheenkäsittelijälle.
+Vastauksena on statauskoodi <i>204 no content</i> molemmissa "onnistuneissa" tapauksissa, eli jos olio poistettiin tai olioa ei ollut mutta <i>id</i> oli periaatteessa oikea. Takaisinkutsun parametrin _result_ perusteella olisi mahdollisuus haarautua ja palauttaa tilanteissa eri statuskoodi, jos sille on tarvetta. Mahdollinen poikkeus siirretään jälleen virheenkäsittelijälle.
 
 Muistiinpanon tärkeyden muuttamisen mahdollistava olemassaolevan muistiinpanon päivitys onnistuu helposti metodilla [findByIdAndUpdate](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate). 
 
@@ -876,9 +876,9 @@ Operaatio mahdollistaa myös muistiinpanon sisällön editoinnin. Päivämäär�
 
 Huomaa, että metodin <em>findByIdAndUpdate</em> parametrina tulee antaa normaali Javascript-olio, eikä uuden olion luomisessa käytettävä <em>Note</em>-konstruktorifunktiolla luotu olio.
 
-Pieni, mutta tärkeä detalji liittyen operaatioon <em>findByIdAndUpdate</em>. Oletusarvoisesti tapahtumankäsittelijä saa parametrikseen <em>updatedNote</em> päivitetyn olion [ennen muutosta](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate) olleen tilan. Lisäsimme operaatioon parametrin <code>{ new: true }</code> jotta saamme muuttuneen olion palautetuksi kutsujalle.
+Pieni, mutta tärkeä detalji liittyen operaatioon <em>findByIdAndUpdate</em>. Oletusarvoisesti tapahtumankäsittelijä saa parametrikseen <em>updatedNote</em> päivitetyn olion [ennen muutosta](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate) olleen tilan. Lisäsimme operaatioon parametrin <code>{ new: true }</code>, jotta saamme muuttuneen olion palautetuksi kutsujalle.
 
-Backend vaikuttaa toimivan postmanista ja VS Code REST clientistä tehtyjen kokeilujen perusteella ja myös frontend toimii moitteettomasti tietokantaa käyttävän backendin kanssa.
+Backend vaikuttaa toimivan postmanista ja VS Coden REST-clientistä tehtyjen kokeilujen perusteella, ja myös frontend toimii moitteettomasti tietokantaa käyttävän backendin kanssa.
 
 Kun muutamme muistiinpanon tärkeyttä, tulostuu backendin konsoliin ikävä varoitus
 
