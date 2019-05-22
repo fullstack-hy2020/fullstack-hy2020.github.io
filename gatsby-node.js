@@ -20,6 +20,7 @@ exports.createPages = ({ actions, graphql }) => {
               }
               part
               letter
+              lang
             }
           }
         }
@@ -32,25 +33,35 @@ exports.createPages = ({ actions, graphql }) => {
 
     result.data.allMarkdownRemark.edges.forEach(({ node }) => {
       const { frontmatter } = node;
-      const { part } = frontmatter;
+      const { part, lang } = frontmatter;
 
       if (!frontmatter.letter) {
         createPage({
-          path: `/osa${part.toString()}`,
+          path:
+            lang === 'en'
+              ? `/en/part${part.toString()}`
+              : `/osa${part.toString()}`,
           component: partIntroTemplate,
           context: {
             part: part,
+            lang: lang,
           },
         });
-      } else if (!isEmpty(navigation[part]) && frontmatter.letter) {
+      } else if (!isEmpty(navigation[lang][part]) && frontmatter.letter) {
         createPage({
-          path: `/osa${part}/${snakeCase(
-            navigation[part][frontmatter.letter]
-          )}`,
+          path:
+            lang === 'en'
+              ? `/en/part${part}/${snakeCase(
+                  navigation[lang][part][frontmatter.letter]
+                )}`
+              : `/osa${part}/${snakeCase(
+                  navigation[lang][part][frontmatter.letter]
+                )}`,
           component: contentTemplate,
           context: {
             part: part,
             letter: frontmatter.letter,
+            lang: lang,
           },
         });
       } else return;

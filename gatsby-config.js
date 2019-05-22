@@ -13,6 +13,8 @@ module.exports = {
       resolve: 'gatsby-plugin-i18n',
       options: {
         langKeyDefault: 'fi',
+        langKeyForNull: 'fi',
+        prefixDefault: false,
         useLangKeyLayout: false,
       },
     },
