@@ -62,7 +62,7 @@ const IndexPage = () => {
           relative
         >
           <SubHeader
-            className="col-10 index__main-title"
+            className="col-6 index__main-title"
             text={mainTitle}
             headingLevel="h1"
           />
