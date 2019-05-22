@@ -1,5 +1,5 @@
 ---
-mainImage: ../../images/part-8.svg
+mainImage: ../../../images/part-8.svg
 part: 8
 letter: b
 lang: fi
@@ -11,7 +11,7 @@ Toteutetaan seuraavaksi React-sovellus, joka käyttää toteuttamaamme GraphQL-p
 
 GraphQL:ää on periaatteessa mahdollista käyttää HTTP POST -pyyntöjen avulla. Seuraavassa esimerkki Postmanilla tehdystä kyselystä.
 
-![](../images/8/8.png)
+![](../../images/8/8.png)
 
 Kommunikointi tapahtuu siis osoitteeseen http://localhost:4000/graphql kohdistuvina POST-pyyntöinä, ja itse kysely lähetetään pyynnön mukana merkkijonona avaimen <i>query</i> arvona.
 
@@ -77,7 +77,7 @@ client.query({ query })
 
 Palvelimen palauttama vastaus tulostuu konsoliin:
 
-![](../images/8/9a.png)
+![](../../images/8/9a.png)
 
 Sovellus pystyy siis kommunikoimaan GraphQL-palvelimen kanssa olion _client_ välityksellä. Client saadaan sovelluksen kaikkien komponenttien saataville käärimällä komponenttti <i>App</i> komponentin [ApolloProvider](https://www.apollographql.com/docs/react/essentials/get-started.html#creating-provider) lapseksi:
 
@@ -237,7 +237,7 @@ Kyselyn nimenä on <i>findPersonByName</i>, ja se saa yhden merkkijonomuotoisen 
 
 Myös GraphQL Playground mahdollistaa muuttujia sisältävän kyselyjen tekemisen. Tällöin muuttujille on annettava arvot kohdassa <i>Query variables</i>:
 
-![](../images/8/10.png)
+![](../../images/8/10.png)
 
 Äsken käyttämämme komponentti <i>Query</i> ei sovellu optimaalisella tavalla tarkoitukseen sillä haluaisimme tehdä kyselyn vasta siinä vaiheessa kun käyttäjä haluaa nähdä jonkin henkilön tiedot. 
 
@@ -349,7 +349,7 @@ const showPerson = async (name) => {
 
 Jos tilalla _person_ on arvo, näytetään kaikkien henkilöiden sijaan yhden henkilön tarkemmat tiedot:
 
-![](../images/8/11.png)
+![](../../images/8/11.png)
 
 Ratkaisu ei ole siistein mahdollinen mutta saa kelvata meille.
 
@@ -359,13 +359,13 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 Kun haemme monta kertaa esim. Arto Hellaksen tiedot, huomaamme mielenkiintoisen asian: kysely backendiin tapahtuu ainoastaan tietojen ensimmäisellä katsomiskerralla. Tämän jälkeen, siitäkin huolimatta, että koodi tekee saman kyselyn uudelleen, ei kyselyä lähetetä backendille:
 
-![](../images/8/12.png)
+![](../../images/8/12.png)
 
 Apollo client tallettaa kyselyjen tulokset cacheen eli [välimuistiin](https://www.apollographql.com/docs/react/advanced/caching.html) ja optimoi suoritusta siten, että jos kyselyn vastaus on jo välimuistissa, ei kyselyä lähetetä ollenkaan palvelimelle.
 
 Chromeen on mahdollista asentaa lisäosa [Apollo Client devtools](https://chrome.google.com/webstore/detail/apollo-client-developer-t/jdkknkkbebbapilgoeccciglkfbmbnfm/related), jonka avulla voidaan tarkastella mm. välimuistin tilaa
 
-![](../images/8/13a.png)
+![](../../images/8/13a.png)
 
 Tieto on organisoitu välimuistiin kyselykohtaisesti. Koska <i>Person</i>-tyypin olioilla on identifioiva kenttä <i>id</i>, jonka tyypiksi on määritelty <i>ID</i>, osaa Apollo yhdistää kahden eri kyselyn palauttaman saman olion. Tämän ansiosta Arto Hellaksen osoitetietojen hakeminen kyselyllä <i>findPerson</i> on päivittänyt välimuistia Arton osoitetietojen osalta myös kyselyn <i>allPersons</i> alta.
 
@@ -564,7 +564,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 Jos yritämme luoda epävalidia henkilöä, seurauksena on poikkeus.
 
-![](../images/8/14.png)
+![](../../images/8/14.png)
 
 Poikkeus on syytä käsitellä. Eräs tapa poikkeusten käsittelyyn on rekisteröidä mutaatiolle poikkeuksenkäsittelijä [onError](https://www.apollographql.com/docs/react/essentials/mutations.html#props)-propsin avulla:
 
@@ -613,7 +613,7 @@ const App = () => {
 
 Poikkeuksesta tiedotetaan nyt käyttäjälle yksinkertaisella notifikaatiolla.
 
-![](../images/8/15.png)
+![](../../images/8/15.png)
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-frontend/tree/part8-3), branchissa <i>part8-3</i>.
 
@@ -716,13 +716,13 @@ const PersonForm = (props) => {
 
 Ulkoasu on karu mutta toimiva:
 
-![](../images/8/22a.png)
+![](../../images/8/22a.png)
 
 Kun numero muutetaan, päivittyy se hieman yllättäen automaattisesti komponentin <i>Persons</i> renderöimään nimien ja numeroiden listaan. Tämä johtuu kahdesta seikasta. Ensinnäkin koska henkilöillä on identifioiva, tyyppiä <i>ID</i> oleva kenttä, päivittyy henkilö välimuistissa uusilla tiedoilla päivitysoperaation yhteydessä. Toinen syy näkymän päivittymiselle on se, että komponentin <i>Query</i> avulla tehdyn kyselyn palauttama data huomaa välimuistiin tulleet muutokset ja päivittää itsensä automaattisesti. Tämä koskee ainoastaan kyselyn alunperin palauttamia olioita, ei välimuistiin lisättäviä kokonaan uusia olioita, jotka uudelleen tehtävä kysely palauttaisi.
 
 Jos yritämme vaihtaa olemattomaan nimeen liittyvän puhelinnumeron, ei mitään näytä tapahtuvan. Syynä tälle on se, että jos nimeä vastaavaa henkilöä ei löydy, vastataan kyselyyn <i>null</i>:
 
-![](../images/8/23.png)
+![](../../images/8/23.png)
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-frontend/tree/part8-4), branchissa <i>part8-4</i>.
 
@@ -965,19 +965,19 @@ Voit tehdä sovelluksesi joko käyttäen Apollo Clientin render prop -komponentt
 
 Toteuta kirjailijoiden näkymä, eli näytä sivulla kaikkien kirjailijoiden tiedot esim. seuraavasti:
 
-![](../images/8/16.png)
+![](../../images/8/16.png)
 
 #### 8.9: Kirjojen näkymä
 
 Toteuta kirjojen näkymä, eli näytä sivulla kirjoista muut tiedot paitsi genret.
 
-![](../images/8/17.png)
+![](../../images/8/17.png)
 
 #### 8.10: Kirjan lisäys
 
 Toteuta sovellukseen mahdollisuus uusien kirjojen lisäämiseen.
 
-![](../images/8/18.png)
+![](../../images/8/18.png)
 
 Huolehdi siitä, että kirjailijoiden ja kirjojen näkymä pysyy ajantasaisena lisäyksen jälkeen.
 
@@ -985,7 +985,7 @@ Huolehdi siitä, että kirjailijoiden ja kirjojen näkymä pysyy ajantasaisena l
 
 Tee sovellukseen mahdollisuus asettaa kirjailijalle syntymävuosi. Voit tehdä syntymävuoden asettamista varten oman näkymän tai sijoittaa sen kirjailijat näyttävälle sivulle:
 
-![](../images/8/20.png)
+![](../../images/8/20.png)
 
 Huolehdi siitä, että kirjailijoiden näkymä pysyy ajantasaisena lisäyksen jälkeen.
 
@@ -995,6 +995,6 @@ Tee syntymävuoden asetuslomakkeesta [select-tagin](https://reactjs.org/docs/for
 
 react-select-kirjastoa hyödyntävä ratkaisu näyttää seuraavalta
 
-![](../images/8/21.png)
+![](../../images/8/21.png)
 
 </div>

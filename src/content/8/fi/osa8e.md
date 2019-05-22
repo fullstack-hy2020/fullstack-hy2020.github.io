@@ -1,5 +1,5 @@
 ---
-mainImage: ../../images/part-8.svg
+mainImage: ../../../images/part-8.svg
 part: 8
 letter: e
 lang: fi
@@ -212,7 +212,7 @@ Muita muutoksia palvelimeen ei tarvita.
 
 Tilauksia on mahdollista testata GraphQL-playgroundin avulla seuraavasti:
 
-![](../images/8/31.png)
+![](../../images/8/31.png)
 
 Kun tilauksen "play"-painiketta painetaan, jää playground odottamaan tilaukseen tulevia vastauksia. 
 
@@ -359,7 +359,7 @@ const App = () => {
 
 Kun puhelinluetteloon nyt lisätään henkilöitä, tapahtuupa se mistä tahansa, tulostuvat clientin konsoliin lisätyn henkilön tiedot:
 
-![](../images/8/32.png)
+![](../../images/8/32.png)
 
 Kun luetteloon lisätään uusi henkilö, palvelin lähettää siitä tiedot clientille ja komponentin _Subscription_ attribuuttissa _onSubscriptionData_ määriteltyä callback-funktiota kutsutaan antaen sille parametriksi palvelimelle lisätty henkilö. 
 

@@ -1,5 +1,5 @@
 ---
-mainImage: ../../images/part-7.svg
+mainImage: ../../../images/part-7.svg
 part: 7
 letter: e
 lang: fi
@@ -32,7 +32,7 @@ Edistyneempi tapa on käyttää [WebSocketeja](https://developer.mozilla.org/en-
 
 WebSocketit ovat selaimen tarjoama rajapinta, jolla ei kuitenkaan ole kaikille selaimille vielä täyttä tukea:
 
-![](../images/7/31.png)
+![](../../images/7/31.png)
 
 WebSocket API:n suoran käyttämisen sijaan onkin suositeltavaa käyttää [Socket.io](https://socket.io/)-kirjastoa, joka tarjoaa erilaisia automaattisia <i>fallback</i>-mahdollisuuksia, jos käytettävässä selaimessa ei ole täyttä WebSocket-tukea.
 
@@ -77,7 +77,7 @@ Emme ole vielä maininneet kurssilla sanaakaan tietoturvaan liittyen. Kovin palj
 
 Katsotaan kuitenkin muutamaa kurssispesifistä seikkaa.
 
-The Open Web Application Security Project eli [OWASP](https://www.owasp.org) julkaisee vuosittain listan Websovellusten yleisimmistä turvallisuusuhista. Tuorein lista on [täällä](https://www.owasp.org/images/7/72/OWASP_Top_10-2017_%28en%29.pdf.pdf). Samat uhat ovat listalla vuodesta toiseen.
+The Open Web Application Security Project eli [OWASP](https://www.owasp.org) julkaisee vuosittain listan Websovellusten yleisimmistä turvallisuusuhista. Tuorein lista on [täällä](https://www.owasp.org/../images/7/72/OWASP_Top_10-2017_%28en%29.pdf.pdf). Samat uhat ovat listalla vuodesta toiseen.
 
 Listaykkösenä on <i>injection</i>, joka tarkoittaa sitä, että sovellukseen esim. lomakkeen avulla lähetettävä teksti tulkitaankin aivan eri tavalla kun sovelluskehittäjä on tarkoittanut. Kuuluisin injektioiden muoto lienevät [SQL-injektiot](https://stackoverflow.com/questions/332365/how-does-the-sql-injection-from-the-bobby-tables-xkcd-comic-work).
 
@@ -113,7 +113,7 @@ Myös NoSQL-kantoihin tehtävät injektiohyökkäykset ovat mahdollisia. Mongoos
 
 koodia ei suoriteta, vaan koodi renderöityy sivulle 'tekstinä':
 
-![](../images/7/32.png)
+![](../../images/7/32.png)
 
 sillä React [huolehtii muuttujissa olevan datan sanitoinnista](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks). Reactin jotkut versiot [ovat mahdollistaneet](https://medium.com/dailyjs/exploiting-script-injection-flaws-in-reactjs-883fb1fe36c1) XSS-hyökkäyksiä, aukot on toki korjattu, mutta mikään ei takaa etteikö niitä voisi vielä löytyä.
 
@@ -127,7 +127,7 @@ npm outdated --depth 0
 
 Viime vuoden mallivastaus osan 4 tehtäväsarjaan sisältää jo aika paljon vanhentuneita riippuvuuksia:
 
-![](../images/7/33.png)
+![](../../images/7/33.png)
 
 Riippuvuudet saa ajantasaistettua päivittämällä tiedostoa <i>package.json</i> ja suorittamalla komennon _npm install_. Riippuvuuksien vanhat versiot eivät tietenkään välttämättä ole tietoturvariski.
 
@@ -193,7 +193,7 @@ Eräs OWASP:in listan mainitsemista uhista on <i>Broken Authentication</i> ja si
 
 Mozillan MDN:n erittäin hyvä [Website security -guide](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security) nostaakin esiin tämän tärkeän seikan:
 
-![](../images/7/34.png)
+![](../../images/7/34.png)
 
 Expressin dokumentaatio sisältää tietoturvaa käsittelevän osan [Production Best Practices: Security](https://expressjs.com/en/advanced/best-practice-security.html) joka kannattaa lukea läpi. Erittäin suositeltavaa on ottaa backendissa käyttöön [Helmet](https://helmetjs.github.io/)-kirjasto, joka sisältää joukon Express-sovelluksista tunnettuja turvallisuusriskejä eliminoivia middlewareja.
 
@@ -221,7 +221,7 @@ const sum = (n: number, m: number): number => {
 
 Funktion kutsuminen ei nyt onnistu väärän tyyppisillä parametreilla, väärällä parametrien määrällä tai jos vastaus yritetään sijoittaa väärän tyyppiseen muuttujaan. Visual Studio Code tekee tyypintarkastuksen jo siinä vaiheessa kun koodia kirjoitetaan, ja varottaa heti jos koodi sisältää tyyppien kanssa epäyhteensopivia operaatioita:
 
-![](../images/7/35.png)
+![](../../images/7/35.png)
 
 Ero normaaliin Javascriptiin on suuri, tyypitys löytää monia potentiaalisia bugeja jo koodin kirjoitusvaiheessa.
 
@@ -263,7 +263,7 @@ Esim. blogilistasovelluksen voisi koostaa kahdesta palvelusta, toinen huolehtisi
 
 Seuraava kuva havainnollistaa mikropalveluarkkitehtuuriin perustuvan sovelluksen rakennetta perinteiseen monoliittiseen rakenteeseen verrattuna:
 
-![](../images/7/36.png)
+![](../../images/7/36.png)
 
 Frontendin (kuvassa neliöitynä) rooli ei välttämättä poikkea malleissa kovinkaan paljoa, mikropalveluiden ja frontendin välissä on usein [API gateway](http://microservices.io/patterns/apigateway) joka tarjoaa frontendille perinteisen kaltaisen, "yhdessä palvelimessa" olevan näkymän backendiin, esim. [Netflix](https://medium.com/netflix-techblog/optimizing-the-netflix-api-5c9ac715cf19) käyttää tätä ratkaisua.
 

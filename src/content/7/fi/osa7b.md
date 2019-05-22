@@ -1,5 +1,5 @@
 ---
-mainImage: ../../images/part-7.svg
+mainImage: ../../../images/part-7.svg
 part: 7
 letter: b
 lang: fi
@@ -48,7 +48,7 @@ Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head
 
 Kun sovellus ladataan uudelleen, näyttää se jo aavistuksen tyylikkäämmältä:
 
-![](../images/7/5.png)
+![](../../images/7/5.png)
 
 Bootstrapissa koko sivun sisältö renderöidään yleensä [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers):ina, eli käytännössä koko sovelluksen ympäröivä _div_-elementti merkitään luokalla _container_:
 
@@ -66,7 +66,7 @@ const App = () => {
 
 Sovelluksen ulkoasu muuttuu siten, että sisältö ei ole enää yhtä kiinni selaimen reunoissa:
 
-![](../images/7/6.png)
+![](../../images/7/6.png)
 
 Muutetaan seuraavaksi komponenttia <i>Notes</i> siten, että se renderöi muistiinpanojen listan [taulukkona](https://getbootstrap.com/docs/4.1/content/tables/). React bootstrap tarjoaa valmiin komponentin [Table](https://react-bootstrap.github.io/components/table/), joten CSS-luokan käyttöön ei ole tarvetta.
 
@@ -96,7 +96,7 @@ const Notes = (props) => (
 
 Ulkoasu on varsin tyylikäs:
 
-![](../images/7/7.png)
+![](../../images/7/7.png)
 
 Huomaa, että koodissa käytettävät React bootstrapin komponentit täytyy importata, eli koodiin on lisättävä:
 
@@ -144,13 +144,13 @@ import { Table, Form, Button } from 'react-bootstrap'
 
 Lomake näyttää parantelun jälkeen seuraavalta:
 
-![](../images/7/8.png)
+![](../../images/7/8.png)
 
 #### Notifikaatio
 
 Toteutetaan sovellukseen kirjautumisen jälkeinen <i>notifikaatio</i>:
 
-![](../images/7/9.png)
+![](../../images/7/9.png)
 
 Asetetaan notifikaatio kirjautumisen yhteydessä komponentin <i>App</i> tilan muuttujaan _message_:
 
@@ -224,17 +224,17 @@ Muutetaan vielä lopuksi sovelluksen navigaatiomenu käyttämään Bootstrapin [
 
 Ulkoasu on varsin tyylikäs
 
-![](../images/7/10.png)
+![](../../images/7/10.png)
 
 Jos selaimen kokoa kaventaa, huomaamme että menu "kollapsoituu" ja sen saa näkyville vain klikkaamalla:
 
-![](../images/7/11a.png)
+![](../../images/7/11a.png)
 
 Bootstrap ja valtaosa tarjolla olevista UI-frameworkeista tuottavat [responsiivisia](https://en.wikipedia.org/wiki/Responsive_web_design) näkymiä, eli sellaisia jotka renderöityvät vähintään kohtuullisesti monen kokoisilla näytöillä.
 
 Chromen developer-konsolin avulla on mahdollista simuloida sovelluksen käyttöä erilaisilla mobiilipäätteillä
 
-![](../images/7/12.png)
+![](../../images/7/12.png)
 
 
 Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/fullstack-hy2019/misc/blob/master/notes-bootstrap.js)
@@ -267,7 +267,7 @@ Sijoitetaan koko sovelluksen renderöimä sisältö Semanticin komponentin [Cont
 
 Semanticin dokumentaatio sisältää jokaisesta komponentista useita esimerkkikoodinpätkiä, joiden avulla komponenttien käytön periaatteet on helppo omaksua:
 
-![](../images/7/13.png)
+![](../../images/7/13.png)
 
 Muutetaan komponentin App uloin <i>div</i>-elementti komponentiksi <i>Container</i>:
 
@@ -288,7 +288,7 @@ const App = () => {
 
 Sivun sisältö ei ole enää reunoissa kiinni:
 
-![](../images/7/14.png)
+![](../../images/7/14.png)
 
 Edellisen luvun tapaan, renderöidään muistiinpanot taulukkona, komponentin [Table](https://react.semantic-ui.com/collections/table) avulla. Koodi näyttää seuraavalta
 
@@ -319,7 +319,7 @@ const Notes = (props) => (
 
 Muistiinpanojen lista näyttää seuraavalta:
 
-![](../images/7/14.png)
+![](../../images/7/14.png)
 
 #### Lomake
 
@@ -351,13 +351,13 @@ let Login = (props) => {
 
 Ulkoasu näyttää seuraavalta:
 
-![](../images/7/15.png)
+![](../../images/7/15.png)
 
 #### Notifikaatio
 
 Edellisen luvun tapaan, toteutetaan sovellukseen kirjautumisen jälkeinen <i>notifikaatio</i>:
 
-![](../images/7/6.png)
+![](../../images/7/6.png)
 
 Kuten edellisessä luvussa, asetetaan notifikaatio kirjautumisen yhteydessä komponentin <i>App</i> tilan muuttujaan _message_:
 
@@ -422,7 +422,7 @@ Navigaatiorakenne toteutetaan komponentin [Menu](https://react.semantic-ui.com/c
 
 Lopputulos näyttää seuraavalta:
 
-![](../images/7/17.png)
+![](../../images/7/17.png)
 
 Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/fullstack-hy2019/misc/blob/master/notes-semantic.js).
 
@@ -583,7 +583,7 @@ const App = () => {
 
 Lopputulos on seuraavassa:
 
-![](../images/7/18.png)
+![](../../images/7/18.png)
 
 Styled components on nostanut tasaisesti suosiotaan viime aikoina ja tällä hetkellä näyttääkin, että se on melko monien mielestä paras tapa React-sovellusten tyylien määrittelyyn.
 

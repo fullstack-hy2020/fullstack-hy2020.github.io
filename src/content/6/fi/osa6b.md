@@ -1,5 +1,5 @@
 ---
-mainImage: ../../images/part-6.svg
+mainImage: ../../../images/part-6.svg
 part: 6
 letter: b
 lang: fi
@@ -37,7 +37,7 @@ export default noteReducer
 
 Toteutetaan sovellukseen näytettävien muistiinpanojen filtteröinti, jonka avulla näytettäviä muistiinpanoja voidaan rajata. Filtterin toteutus tapahtuu [radiobuttoneiden](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio) avulla:
 
-![](../assets/6/1.png)
+![](../../assets/6/1.png)
 
 Aloitetaan todella suoraviivaisella toteutuksella:
 
@@ -169,7 +169,7 @@ Koska sovelluksemme hajoaa tässä vaiheessa täysin, komponentin <i>App</i> sij
 
 Konsoliin tulostuu storen tila:
 
-![](../images/6/4.png)
+![](../../images/6/4.png)
 
 eli store on juuri siinä muodossa missä haluammekin sen olevan!
 
@@ -197,7 +197,7 @@ store.dispatch(createNote('combineReducers muodostaa yhdistetyn reducerin'))
 
 Kun simuloimme näin filtterin tilan muutosta ja muistiinpanon luomista Konsoliin tulostuu storen tila jokaisen muutoksen jälkeen:
 
-![](../images/6/5.png)
+![](../../images/6/5.png)
 
 Jo tässä vaiheessa kannattaa laittaa mieleen eräs tärkeä detalji. Jos lisäämme <i>molempien reducerien alkuun</i> konsoliin tulostuksen:
 
@@ -210,7 +210,7 @@ const filterReducer = (state = 'ALL', action) => {
 
 Näyttää konsolin perusteella siltä, että jokainen action kahdentuu:
 
-![](../images/6/6.png)
+![](../../images/6/6.png)
 
 Onko koodissa bugi? Ei. Yhdistetty reducer toimii siten, että jokainen <i>action</i> käsitellään <i>kaikissa</i> yhdistetyn reducerin osissa. Usein tietystä actionista on kiinnostunut vain yksi reduceri, on kuitenkin tilanteita, joissa useampi reduceri muuttaa hallitsemaansa staten tilaa jonkin actionin seurauksena.
 
@@ -227,7 +227,7 @@ ReactDOM.render(
 
 Korjataan sitten bugi, joka johtuu siitä, että koodi olettaa storen tilan olevan mustiinpanot tallettava taulukko:
 
-![](../images/6/7.png)
+![](../../images/6/7.png)
 
 Korjaus on helppo. Viitteen <i>store.getState()</i> sijaan kaikki muistiinpanot sisältävään taulukkoon viitataan <i>store.getState().notes</i>:
 
@@ -386,7 +386,7 @@ Tässä vaiheessa sovelluksen ei vielä tarvitse osata käyttää <i>Notificatio
 
 Laajenna sovellusta siten, että se näyttää <i>Notification</i>-komponentin avulla viiden sekunnin ajan kun sovelluksessa äänestetään tai luodaan uusia anekdootteja:
 
-![](../images/6/8.png)
+![](../../images/6/8.png)
 
 Notifikaation asettamista ja poistamista varten kannattaa toteuttaa [action creatorit](https://redux.js.org/basics/actions#action-creators).
 
@@ -394,7 +394,7 @@ Notifikaation asettamista ja poistamista varten kannattaa toteuttaa [action crea
 
 Toteuta sovellukseen näytettävien muistiinpanojen filtteröiminen
 
-![](../images/6/9.png)
+![](../../images/6/9.png)
 
 Säilytä filtterin tila redux storessa, eli käytännössä kannattaa jälleen luoda uusi reduceri ja action creatorit.
 
@@ -558,7 +558,7 @@ const Notes = (props) => {  // highlight-line
 
 Connect-komennolla ja <i>mapStateToProps</i>-määrittelyllä aikaan saatua tilannetta voidaan visualisoida seuraavasti:
 
-![](../images/6/24c.png)
+![](../../images/6/24c.png)
 
 eli komponentin <i>Notes</i> sisältä on propsien <i>props.notes</i> ja <i>props.filter</i> kautta "suora pääsy" tarkastelemaan Redux storen sisällä olevaa tilaa.
 
@@ -635,7 +635,7 @@ _mapDispatchToProps_ lienee aluksi hieman haastava ymmärtää, etenkin sen koht
 
 Connectin aikaansaamaa tilannetta voidaan havainnollistaa seuraavasti:
 
-![](../images/6/25b.png)
+![](../../images/6/25b.png)
 
 eli sen lisäksi että <i>Notes</i> pääsee storen tilaan propsien <i>props.notes</i> ja <i>props.filter</i> kautta, se viittaa <i>props.toggleImportanceOf</i>:lla funktioon, jonka avulla storeen saadaan dispatchattua <i>TOGGLE\_IMPORTANCE</i>-tyyppisiä actioneja.
 
@@ -777,7 +777,7 @@ const NewNote = (props) => {
 
 näemme eron:
 
-![](../images/6/10.png)
+![](../../images/6/10.png)
 
 Ensimmäinen funktioista siis on normaali <i>action creator</i>, toinen taas connectin muotoilema funktio, joka sisältää storen metodin dispatch-kutsun.
 

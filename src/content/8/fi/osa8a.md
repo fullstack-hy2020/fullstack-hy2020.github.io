@@ -1,5 +1,5 @@
 ---
-mainImage: ../../images/part-8.svg
+mainImage: ../../../images/part-8.svg
 part: 8
 letter: a
 lang: fi
@@ -387,23 +387,23 @@ Kun Apollo -serveriä suoritetaan sovelluskehitysmoodissa, käynnistää se osoi
 
 Kokeillaan 
 
-![](../images/8/1.png)
+![](../../images/8/1.png)
 
 Playgroundin kanssa pitää olla välillä tarkkana. Jos kysely on syntaktisesti virheellinen, on virheilmoitus aika huomaamaton ja kyselyn suoritusnappia painamalla ei tapahdu mitään:
 
-![](../images/8/2.png)
+![](../../images/8/2.png)
 
 Edellisen kyselyn tulos näkyy edelleen playgroundin oikeassa osassa kyselyn virheellisyydestä huolimatta. 
 
 Osoittamalla oikeaa kohtaa virheelliseltä riviltä saa virheilmoituksen näkyville
 
-![](../images/8/3.png)
+![](../../images/8/3.png)
 
 Jos Playground vaikuttaa olevan jumissa, niin sivun reloadaaminen yleensä auttaa.
 
 Klikkaamalla oikean reunan tekstiä <i>schema</i> näyttää Playground palvelimen GraphQL-skeeman.
 
-![](../images/8/4.png)
+![](../../images/8/4.png)
 
 ### Resolverin parametrit
 
@@ -692,7 +692,7 @@ eli tyypin <i>Person</i> kentän <i>address</i> resolveri muotoilee vastauksena 
 
 Jos yritämme luoda uuden henkilön, mutta parametrit eivät vastaa skeemassa määriteltyä (esim. katuosoite puuttuu), antaa palvelin virheilmoituksen: 
 
-![](../images/8/5.png)
+![](../../images/8/5.png)
 
 GraphQL:n [validoinnin](https://graphql.org/learn/validation/) avulla pystytään siis jo automaattisesi hoitamaan osa virheenkäsittelyä. 
 
@@ -727,7 +727,7 @@ const resolvers = {
 
 Eli jos lisättävä nimi on jo luettelossa heitetään poikkeus _UserInputError_.
 
-![](../images/8/6.png)
+![](../../images/8/6.png)
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-backend/tree/part8-2), branchissa <i>part8-2</i>.
 
@@ -911,7 +911,7 @@ Joissain tilanteissa voi myös olla hyötyä nimetä kyselyt. Näin on erityises
 
 Jos kyselyitä on useita, pyytää Playground valitsemaan mikä niistä suoritetaan:
 
-![](../images/8/7.png)
+![](../../images/8/7.png)
 
 </div>
 

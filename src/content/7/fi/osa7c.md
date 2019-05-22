@@ -1,5 +1,5 @@
 ---
-mainImage: ../../images/part-7.svg
+mainImage: ../../../images/part-7.svg
 part: 7
 letter: c
 lang: fi
@@ -127,7 +127,7 @@ const hello = name => {
 
 Kun nyt suoritamme komennon _npm run build_ webpack bundlaa koodin. Tuloksena on hakemistoon <i>build</i> sijoitettava tiedosto <i>main.js</i>:
 
-![](../images/7/19.png)
+![](../../images/7/19.png)
 
 Tiedostossa on paljon erikoisen näköistä tavaraa. Lopussa on mukana myös kirjoittamamme koodi.
 
@@ -155,7 +155,7 @@ App()
 
 Kun nyt suoritamme bundlauksen komennolla _npm run build_ huomaamme webpackin havainneen molemmat tiedostot:
 
-![](../images/7/20.png)
+![](../../images/7/20.png)
 
 Kirjoittamamme koodi löytyy erittäin kryptisesti muotoiltuna bundlen lopusta:
 
@@ -256,7 +256,7 @@ Tarvitsemme sovellukselle myös "pääsivuna" toimivan tiedoston <i>build/index.
 
 Kun bundlaamme sovelluksen, törmäämme kuitenkin ongelmaan
 
-![](../images/7/21.png)
+![](../../images/7/21.png)
 
 ### Loaderit
 
@@ -334,7 +334,7 @@ Eli JSX-syntaksin sijaan komponentit luodaan pelkällä Javascriptilla käyttäe
 
 Sovellusta voi nyt kokeilla avaamalla tiedoston <i>build/index.html</i>  selaimen <i>open file</i> -toiminnolla:
 
-![](../images/7/22.png)
+![](../../images/7/22.png)
 
 On kuitenkin huomionarvoista, että jos sovelluksemme sisältää <i>async/await</i> -toiminnallisuutta, selaimeen ei piirry mitään. [Konsoliin saapuneen virheviestin googlaaminen](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) valaisee asiaa. Asian korjaamiseksi on asennettava vielä yksi puuttuva riippuvuus, [@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill).
 
@@ -429,7 +429,7 @@ import './index.css'
 
 Transpilointi hajoaa
 
-![](../images/7/23.png)
+![](../../images/7/23.png)
 
 CSS:ää varten onkin otettava käyttöön [css](https://webpack.js.org/loaders/css-loader/)- ja [style](https://webpack.js.org/loaders/style-loader/)-loaderit:
 
@@ -535,7 +535,7 @@ export default App
 
 Kannattaa huomata, että virheviestit eivät renderöidy selaimeen kuten create-react-app:illa tehdyissä sovelluksissa, eli on seurattava tarkasti konsolia:
 
-![](../images/7/24.png)
+![](../../images/7/24.png)
 
 Sovellus toimii hyvin ja kehitys on melko sujuvaa.
 
@@ -564,7 +564,7 @@ const App = () => {
 
 Sovellus ei enää toimi, ja konsoli kertoo virheestä
 
-![](../images/7/25.png)
+![](../../images/7/25.png)
 
 Tiedämme tietenkin nyt että virhe on metodissa onClick, mutta jos olisi kyse suuremmasta sovelluksesta, on virheilmoitus sikäli hyvin ikävä, että sen ilmoittama paikka:
 
@@ -575,7 +575,7 @@ App.js:27 Uncaught TypeError: Cannot read property 'concat' of undefined
 
 ei vastaa alkuperäisen koodin virheen sijaintia. Jos klikkaamme virheilmoitusta, huomaamme, että näytettävä koodi on jotain ihan muuta kuin kirjoittamamme koodi:
 
-![](../images/7/26.png)
+![](../../images/7/26.png)
 
 Haluamme tietenkin, että virheilmoitusten yhteydessä näytetään kirjoittamamme koodi.
 
@@ -601,11 +601,11 @@ Konfiguraatioiden muuttuessa webpack tulee käynnistää uudelleen, on tosin mah
 
 Nyt virheilmoitus on hyvä
 
-![](../images/7/27.png)
+![](../../images/7/27.png)
 
 Source mapin käyttö mahdollistaa myös chromen debuggerin luontevan käytön
 
-![](../images/7/28.png)
+![](../../images/7/28.png)
 
 Korjataan bugi alustamalla tila <i>values</i> tyhjäksi taulukoksi:
 
@@ -836,11 +836,11 @@ hakemistossa <i>build</i>, jolloin sovellus käynnistyy oletusarvoisesti osoitte
 
 Sovelluksemme on valmis ja toimii muiden selaimien kohtuullisen uusilla versiolla, mutta Internet Explorerilla sovellus ei toimi. Syynä tähän on se, että _axiosin_ ansiosta koodissa käytetään [Promiseja](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), mikään IE:n versio ei kuitenkaan niitä tue:
 
-![](../images/7/29.png)
+![](../../images/7/29.png)
 
 On paljon muutakin standardissa määriteltyjä asioita, joita IE ei tue, esim. niinkin harmiton komento kuin taulukoiden [find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) ylittää IE:n kyvyt:
 
-![](../images/7/30.png)
+![](../../images/7/30.png)
 
 Tälläisessä tilanteessa normaali koodin transpilointi ei auta, sillä transpiloinnissa koodia käännetään uudemmasta Javascript-syntaksista vanhempaan, selaimien paremmin tukemaan syntaksiin. Promiset ovat syntaktisesti täysin IE:n ymmärrettävissä, IE:ltä vain puuttuu toteutus promisesta, samoin on tilanne taulukoiden suhteen, IE:llä taulukoiden _find_ on arvoltaan <i>undefined</i>.
 

@@ -1,5 +1,5 @@
 ---
-mainImage: ../../images/part-6.svg
+mainImage: ../../../images/part-6.svg
 part: 6
 letter: a
 lang: fi
@@ -29,7 +29,7 @@ Facebookilla on olemassa valmis toteutus Fluxille, käytämme kuitenkin saman pe
 
 Tutustutaan Reduxiin tekemällä jälleen kerran laskurin toteuttava sovellus:
 
-![](../images/6/1.png)
+![](../../images/6/1.png)
 
 
 Tehdään uusi create-react-app-sovellus ja asennetaan siihen <i></i>redux</i> komennolla
@@ -381,7 +381,7 @@ describe('noteReducer', () => {
 
 Komento <i>deepFreeze(state)</i> varmistaa, että reducer ei muuta parametrina olevaa storen tilaa. Jos reduceri käyttää state:n manipulointiin komentoa _push_, testi ei mene läpi
 
-![](../images/6/2.png)
+![](../../images/6/2.png)
 
 Tehdään sitten testi actionin <i>TOGGLE\_IMPORTANCE</i> käsittelylle:
 
@@ -1038,7 +1038,7 @@ npm start
 
 Kun teet seuraavat tehtävät, tulisi sovelluksen näyttää seuraavalta
 
-![](../images/6/3.png)
+![](../../images/6/3.png)
 
 #### 6.3: anekdootit, step1
 

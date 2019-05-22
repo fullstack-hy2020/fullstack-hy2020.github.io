@@ -1,5 +1,5 @@
 ---
-mainImage: ../../images/part-7.svg
+mainImage: ../../../images/part-7.svg
 part: 7
 letter: d
 lang: fi
@@ -266,7 +266,7 @@ describe('Note ', function() {
 
 Testin suoritus avaa selaimen ja näyttää miten sovellus käyttäytyy testin edetessä:
 
-![](../images/7/37a.png)
+![](../../images/7/37a.png)
 
 Testi näyttää rakenteen puolesta melko tutulta. <i>describe</i>-lohkoja käytetään samaan tapaan kuin Jestissä ryhmittelemään yksittäisiä testitapauksia, jotka on määritelty <i>it</i>-metodin avulla. Nämä osat Cypress on lainannut sisäisesti käyttämältään [Mocha](https://mochajs.org/)-testikirjastolta. Mocha oli testikirjastojen vanha hallitsija, se on edelleen suosittu, mutta Jest on mennyt selvästi edelle. [visit](https://docs.cypress.io/api/commands/visit.html#Syntax) ja[contains](https://docs.cypress.io/api/commands/contains.html#Syntax) taas ovat Cypressin komentoja, joiden merkitys on aika ilmeinen.
 
@@ -303,7 +303,7 @@ describe('Note app', function() {
 
 havaitsee Cypress ongelman
 
-![](../images/7/38.png)
+![](../../images/7/38.png)
 
 Laajennetaan testiä siten, että testi yrittää kirjautua sovellukseen. Aloitetaan kirjautumislomakkeen avaamisella.
 
@@ -459,7 +459,7 @@ cy.get('input')
 
 jos kenttiä on useampia, testi hajoaa
 
-![](../images/7/39.png)
+![](../../images/7/39.png)
 
 Tämän takia olisi jälleen parempi lisätä lomakkeen kentälle <i>id</i> ja hakea kenttä testissä id:n perusteella.
 
@@ -631,7 +631,7 @@ Testit ja frontendin koodi on kokonaisuudessaan [githubissa](https://github.com/
 
 Cypress tarjoaa melko hyvät mahdollisuudet testien [debuggaamiseen](https://docs.cypress.io/guides/getting-started/writing-your-first-test.html#Debugging). Testin kunkin vaiheen aikaista sovelluksen DOM:in tilaa on erittäin helppo tarkastella:
 
-![](../images/7/39.png)
+![](../../images/7/39.png)
 
 Itselläni ei ole kovin paljoa kokemusta Cypressistä. Se kuitenkin jo tässä vaiheessa vaikuttaa ylivoimaisesti parhaalta E2E-testauskirjastolta mihin olen törmännyt. Muilta kuulemani kommentitkin ovat olleet pääasiassa erittäin positiivisia.
 

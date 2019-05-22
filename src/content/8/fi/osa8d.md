@@ -1,5 +1,5 @@
 ---
-mainImage: ../../images/part-8.svg
+mainImage: ../../../images/part-8.svg
 part: 8
 letter: d
 lang: fi
@@ -202,7 +202,7 @@ Ensimmäinen parametri _link_ määrittelee sen, miten client ottaa yhteyttä pa
 
 Uusien henkilöiden lisäys ja numeroiden muuttaminen toimii taas. Sovellukseen jää kuitenkin yksi ongelma. Jos yritämme lisätä puhelinnumerotonta henkilöä, se ei onnistu.
 
-![](../images/8/25.png)
+![](../../images/8/25.png)
 
 Validointi epäonnistuu, sillä frontend lähettää kentän _phone_ arvona tyhjän merkkijonon. 
 
@@ -331,27 +331,27 @@ Sovelluksesi ei ole pakko käsitellä validointivirheitä järkevästi.
 
 Voit päättää itse miltä kirjautuminen näyttää käyttöliittymässä. Eräs mahdollinen ratkaisu on tehdä kirjautumislomakkeesta erillinen näkymä jonne pääsee sovelluksen navigaatiomenusta:
 
-![](../images/8/26.png)
+![](../../images/8/26.png)
 
 Kirjatumislomake
 
-![](../images/8/27.png)
+![](../../images/8/27.png)
 
 Kun käyttäjä on kirjautuneena, muutetaan navigaatio näyttämään ne toiminnot, jotka ovat vain kirjautuneen käytettävissä
 
-![](../images/8/28.png)
+![](../../images/8/28.png)
 
 #### 8.19 genren kirjat, osa 1
 
 Laajenna sovellustasi siten, että kirjojen näkymästä voidaan rajata näytettävä kirjalista ainoastaan niihin, jotka kuuluvat valittuun genreen. Toteutuksesi voi näyttää seuraavalta:
 
-![](../images/8/30.png)
+![](../../images/8/30.png)
 
 #### 8.20 genren kirjat
 
 Tee sovellukseen näkymä, joka näyttää kirjautuneelle käyttäjälle käyttäjän lempigenreen kuuluvat kirjat.
 
-![](../images/8/29.png)
+![](../../images/8/29.png)
 
 #### 8.21 genren kirjat GraphQL:llä
 

@@ -1,5 +1,5 @@
 ---
-mainImage: ../../images/part-8.svg
+mainImage: ../../../images/part-8.svg
 part: 8
 letter: c
 lang: fi
@@ -298,7 +298,7 @@ Aivan kuten REST:in tapauksessa myös nyt ideana on, että kirjautunut käyttäj
 
 GraphQL-playgroundissa headerin liittäminen pyyntöön tapahtuu seuraavasti
 
-![](../images/8/24.png)
+![](../../images/8/24.png)
 
 Laajennetaan sitten sovelluksen olion _server_ määrittelyä lisäämällä konstruktorikutsuun kolmas parametri [context](https://www.apollographql.com/docs/apollo-server/essentials/data.html#context):
 

@@ -1,5 +1,5 @@
 ---
-mainImage: ../../images/part-6.svg
+mainImage: ../../../images/part-6.svg
 part: 6
 letter: c
 lang: fi
@@ -451,15 +451,15 @@ export default store
 
 Kun nyt avaat konsolin, välilehti <i>redux</i> näyttää seuraavalta:
 
-![](../images/6/11.png)
+![](../../images/6/11.png)
 
 Konsolin avulla on myös mahdollista dispatchata actioneja storeen
 
-![](../images/6/12.png)
+![](../../images/6/12.png)
 
 Storen tietyn hetkisen tilan lisäksi on myös mahdollista tarkastella, mikä on kunkin actionin tilalle aiheuttama muutos:
 
-![](../images/6/13.png)
+![](../../images/6/13.png)
 
 ### Redux ja komponenttien tila
 

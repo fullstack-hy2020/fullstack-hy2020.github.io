@@ -1,5 +1,5 @@
 ---
-mainImage: ../../images/part-7.svg
+mainImage: ../../../images/part-7.svg
 part: 7
 letter: a
 lang: fi
@@ -17,11 +17,11 @@ Palataan osan 6 jälkeen jälleen Reduxittoman Reactin pariin.
 
 On erittäin tyypillistä, että web-sovelluksissa on navigaatiopalkki, jonka avulla on mahdollista vaihtaa sovelluksen näkymää. Muistiinpanosovelluksemme voisi sisältää pääsivun:
 
-![](../images/7/1b.png)
+![](../../images/7/1b.png)
 
 ja omat sivunsa muistiinpanojen ja käyttäjien tietojen näyttämiseen:
 
-![](../images/7/2b.png)
+![](../../images/7/2b.png)
 
 [Vanhan koulukunnan websovelluksessa](/osa0#perinteinen-web-sovellus) sovelluksen näyttämän sivun vaihto tapahtui siten että selain teki palvelimelle uuden HTTP GET -pyynnön ja renderöi sitten palvelimen palauttaman näkymää vastaavan HTML-koodin.
 
@@ -183,7 +183,7 @@ Sovellus sisältää nyt viisi eri näkymää, joiden näkyvyyttä kontrolloidaa
 
 <i>Home</i> ja <i>Users</i> ovat kuten aiemmassa esimerkissä. <i>Notes</i> on hieman monimutkaisempi, se renderöi propseina saamansa muistiinpanojen listan siten, että jokaisen muistiinpanon nimi on klikattavissa
 
-![](../images/7/3a.png)
+![](../../images/7/3a.png)
 
 Nimen klikattavuus on toteutettu komponentilla <i>Link</i> ja esim. muistiinpanon, jonka id on 3 nimen klikkaaminen aiheuttaa selaimen osoitteen arvon päivittymisen muotoon <i>notes/3</i>:
 
@@ -291,7 +291,7 @@ Mahdollisuus <i>Login</i>-näkymään navigointiin renderöidään menuun ehdoll
 
 eli jos käyttäjä on kirjautunut, renderöidäänkin linkin <i>Login</i> sijaan kirjautuneen käyttäjän käyttäjätunnus:
 
-![](../images/7/4a.png)
+![](../../images/7/4a.png)
 
 Kirjautumisesta huolehtivan komponentin koodi seuraavassa
 
@@ -443,17 +443,17 @@ Lisää sovellukseen React Router siten, että <i>Menu</i>-komponentissa olevia 
 
 Sovelluksen juuressa, eli polulla _/_ näytetään anekdoottien lista:
 
-![](../assets/teht/40.png)
+![](../../assets/teht/40.png)
 
 Pohjalla oleva <i>Footer</i>-komponentti tulee näyttää aina.
 
 Uuden anekdootin luominen tapahtuu esim. polulla <i>create</i>:
 
-![](../assets/teht/41.png)
+![](../../assets/teht/41.png)
 
 Huom: jos saat seuraavan virheilmoituksen
 
-![](../assets/teht/39.png)
+![](../../assets/teht/39.png)
 
 pääset siitä eroon sisällyttämällä kaiken Router-elementin sisälle tulevaan <i>div</i>-elementtiin:
 
@@ -469,11 +469,11 @@ pääset siitä eroon sisällyttämällä kaiken Router-elementin sisälle tulev
 
 Toteuta sovellukseen yksittäisen anekdootin tiedot näyttävä näkymä:
 
-![](../assets/teht/42.png)
+![](../../assets/teht/42.png)
 
 Yksittäisen anekdootin sivulle navigoidaan klikkaamalla anekdootin nimeä
 
-![](../assets/teht/43.png)
+![](../../assets/teht/43.png)
 
 #### 7.3: routed anecdotes, step3
 
@@ -481,6 +481,6 @@ Luomislomakkeen oletusarvoinen toiminnallisuus on melko hämmentävä, sillä ku
 
 Paranna toiminnallisuutta siten, että luomisen jälkeen siirrytään automaattisesti kaikkien anekdoottien näkymään <i>ja</i> käyttäjälle näytetään 10 sekunnin ajan onnistuneesta lisäyksestä kertova notifikaatio:
 
-![](../assets/teht/44.png)
+![](../../assets/teht/44.png)
 
 </div>

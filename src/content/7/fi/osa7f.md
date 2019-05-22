@@ -1,5 +1,5 @@
 ---
-mainImage: ../../images/part-7.svg
+mainImage: ../../../images/part-7.svg
 part: 7
 letter: f
 lang: fi
@@ -43,23 +43,23 @@ Siirrä myös kirjautuneen käyttäjän tietojen talletus Reduxiin.
 
 Tee sovellukseen näkymä, joka näyttää kaikkiin käyttäjiin liittyvät perustietot:
 
-![](../images/7/41.png)
+![](../../images/7/41.png)
 
 #### 7.8 yksittäisen käyttäjän näkymä
 
 Tee sovellukseen yksittäisen käyttäjän näkymä, jolta selviää mm. käyttäjän lisäämät blogit
 
-![](../images/7/44.png)
+![](../../images/7/44.png)
 
 Näkymään päästään klikkaamalla nimeä kaikkien käyttäjien näkymästä
 
-![](../images/7/43.png)
+![](../../images/7/43.png)
 
 <i>**Huom1:**</i> jos sovelluksesi käyttää tilanhallintaan Reduxia, saattaa tässä tehtävässä olla hyödyksi käyttää funktion _mapStateToProps_ toista parametria [ownPropsia](https://react-redux.js.org/api/connect#mapstatetoprops-state-ownprops-object), joka on dokumentaation hienoisesta kryptisyydestä huolimatta aika [helppokäyttöinen](https://stackoverflow.com/questions/41198842/what-is-the-use-of-the-ownprops-arg-in-mapstatetoprops-and-mapdispatchtoprops).
 
 <i>**Huom2:**</i> törmäät tätä tehtävää tehdessäsi lähes varmasti seuraavaan virheeseen
 
-![](../images/7/42a.png)
+![](../../images/7/42a.png)
 
 vika ilmenee jos uudelleenlataat sivun ollessasi yksittäisen käyttäjän sivulla. 
 
@@ -88,11 +88,11 @@ const User = (props) => {
 
 Toteuta sovellukseen oma näkymä yksittäisille blogeille. Näkymä voi näyttää seuraavalta
 
-![](../images/7/45.png)
+![](../../images/7/45.png)
 
 Näkymään päästään klikkaamalla blogin nimeä kaikkien blogien näkymästä
 
-![](../images/7/46.png)
+![](../../images/7/46.png)
 
 Tämän tehtävän jälkeen tehtävässä 5.6 toteutettua toiminnallisuutta ei enää tarvita, eli kaikkien blogien näkymässä yksittäisten blogien detaljien ei enää tarvitse avautua klikattaessa.
 
@@ -100,13 +100,13 @@ Tämän tehtävän jälkeen tehtävässä 5.6 toteutettua toiminnallisuutta ei e
 
 Tee sovellukseen navigaatiomenu
 
-![](../images/7/47.png)
+![](../../images/7/47.png)
 
 #### 7.11 kommentit, step1
 
 Tee sovellukseen mahdollisuus blogien kommentointiin:
 
-![](../images/7/48.png)
+![](../../images/7/48.png)
 
 Kommentit ovat anonyymejä, eli ne eivät liity järjestelmän käyttäjiin.
 
@@ -118,7 +118,7 @@ Sopiva rajapinta kommentin luomiseen on osoitteeseen <i>api/blogs/:id/comments</
 
 Laajenna sovellusta siten, että kommentointi onnistuu frontendista käsin:
 
-![](../images/7/49.png)
+![](../../images/7/49.png)
 
 #### 7.13 tyylit, step1
 
