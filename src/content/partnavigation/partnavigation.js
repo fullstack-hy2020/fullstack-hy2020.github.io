@@ -1,57 +1,116 @@
 module.exports = {
-  '0': {
-    a: 'Yleistä',
-    b: 'Web-sovelluksen toimintaperiaatteita',
+  fi: {
+    '0': {
+      a: 'Yleistä',
+      b: 'Web-sovelluksen toimintaperiaatteita',
+    },
+    '1': {
+      a: 'Reactin alkeet',
+      b: 'Javascriptiä',
+      c: 'Komponentin tila ja tapahtumankäsittely',
+      d: 'Monimutkaisempi tila, Reactin debuggaus',
+    },
+    '2': {
+      a: 'Kokoelmien renderöinti ja moduulit',
+      b: 'Lomakkeiden käsittely',
+      c: 'Palvelimella olevan datan hakeminen',
+      d: 'Palvelimella olevan datan muokkaaminen',
+      e: 'Tyylien lisääminen React-sovellukseen',
+    },
+    '3': {
+      a: 'Node.js ja Express',
+      b: 'Sovellus internetiin',
+      c: 'Tietojen tallettaminen MongoDB-tietokantaan',
+      d: 'Validointi ja ESLint',
+    },
+    '4': {
+      a: 'Sovelluksen rakenne ja testauksen alkeet',
+      b: 'Backendin testaaminen',
+      c: 'Käyttäjien hallinta',
+      d: 'Token-perustainen kirjautuminen',
+    },
+    '5': {
+      a: 'Kirjautuminen frontendissä',
+      b: 'props.children ja proptypet',
+      c: 'React-sovellusten testaaminen',
+      d: 'Custom hookit',
+    },
+    '6': {
+      a: 'Flux-arkkitehtuuri ja Redux',
+      b: 'Monta reduseria, connect',
+      c: 'Redux-sovelluksen kommunikointi palvelimen kanssa',
+    },
+    '7': {
+      a: 'React-router',
+      b: 'Lisää tyyleistä',
+      c: 'Webpack',
+      d: 'Luokkakomponentit, E2E-testaus',
+      e: 'Sekalaista',
+      f: 'Tehtäviä: blogilistan laajennus',
+    },
+    '8': {
+      a: 'GraphQL-palvelin',
+      b: 'React ja GraphQL',
+      c: 'Tietokanta ja käyttäjien hallinta',
+      d: 'Kirjautuminen ja välimuistin päivitys',
+      e: 'Fragmentit ja subskriptiot',
+    },
   },
-  '1': {
-    a: 'Reactin alkeet',
-    b: 'Javascriptiä',
-    c: 'Komponentin tila ja tapahtumankäsittely',
-    d: 'Monimutkaisempi tila, Reactin debuggaus',
-  },
-  '2': {
-    a: 'Kokoelmien renderöinti ja moduulit',
-    b: 'Lomakkeiden käsittely',
-    c: 'Palvelimella olevan datan hakeminen',
-    d: 'Palvelimella olevan datan muokkaaminen',
-    e: 'Tyylien lisääminen React-sovellukseen',
-  },
-  '3': {
-    a: 'Node.js ja Express',
-    b: 'Sovellus internetiin',
-    c: 'Tietojen tallettaminen MongoDB-tietokantaan',
-    d: 'Validointi ja ESLint',
-  },
-  '4': {
-    a: 'Sovelluksen rakenne ja testauksen alkeet',
-    b: 'Backendin testaaminen',
-    c: 'Käyttäjien hallinta',
-    d: 'Token-perustainen kirjautuminen'
-  },
-  '5': {
-    a: 'Kirjautuminen frontendissä',
-    b: 'props.children ja proptypet',
-    c: 'React-sovellusten testaaminen',
-    d: 'Custom hookit'
-  },
-  '6': {
-    a: 'Flux-arkkitehtuuri ja Redux',
-    b: 'Monta reduseria, connect',
-    c: 'Redux-sovelluksen kommunikointi palvelimen kanssa',
-  },
-  '7': {
-    a: 'React-router',
-    b: 'Lisää tyyleistä',
-    c: 'Webpack',
-    d: 'Luokkakomponentit, E2E-testaus',
-    e: 'Sekalaista',
-    f: 'Tehtäviä: blogilistan laajennus',
-  },
-  '8': { 
-    a: 'GraphQL-palvelin',
-    b: 'React ja GraphQL',
-    c: 'Tietokanta ja käyttäjien hallinta',
-    d: 'Kirjautuminen ja välimuistin päivitys',
-    e: 'Fragmentit ja subskriptiot' 
+  en: {
+    '0': {
+      a: 'General',
+      b: 'Web Application Policy',
+    },
+    '1': {
+      a: 'React Alchets',
+      b: 'Javascript',
+      c: 'Component Status and Event Handling',
+      d: 'More complex mode, Reactin debugging',
+    },
+    '2': {
+      a: 'Rendering collections and modules',
+      b: 'Form processing',
+      c: 'Retrieving data on the server',
+      d: 'Edit data on server',
+      e: 'Add styles to React',
+    },
+    '3': {
+      a: 'Node.js and Express',
+      b: 'Internet application',
+      c: 'Storing Data in MongoDB Database',
+      d: 'Validation and ESLint',
+    },
+    '4': {
+      a: 'Application Structure and Testing Basics',
+      b: 'Testing Backend',
+      c: 'User Management',
+      d: 'Token-based login',
+    },
+    '5': {
+      a: 'Sign in frontend',
+      b: 'props.children and proptypet',
+      c: 'Testing React Applications',
+      d: 'Custom Hookit',
+    },
+    '6': {
+      a: 'Flux architecture and Redux',
+      b: 'Monta reduseria, connect',
+      c: 'Communicating with the server with Redux',
+    },
+    '7': {
+      a: 'React-router',
+      b: 'Add Styles',
+      c: 'Webpack',
+      d: 'Class Components, E2E Testing',
+      e: 'Miscellaneous',
+      f: 'Tasks: Blog List Extension',
+    },
+    '8': {
+      a: 'GraphQL Server',
+      b: 'React and GraphQL',
+      c: 'Database and User Management',
+      d: 'Login and cache update',
+      e: 'Fragments and Sub-Scripts',
+    },
   },
 };

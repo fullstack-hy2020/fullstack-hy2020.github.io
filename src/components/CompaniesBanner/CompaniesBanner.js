@@ -86,7 +86,7 @@ const inChallenge = [
   'Nextup',
 ];
 
-export const CompaniesBanner = ({ isFrontPage }) => (
+export const CompaniesBanner = ({ isFrontPage, lang }) => (
   <Banner
     backgroundColor={isFrontPage && 'white'}
     className="spacing--after"
@@ -146,7 +146,7 @@ export const CompaniesBanner = ({ isFrontPage }) => (
       {isFrontPage && (
         <Element flex spaceAround className="col-10 spacing">
           <Link className="about__challenge-button" to="/challenge">
-            Lisätietoja haasteesta
+            {lang === 'en' ? 'More' : 'Lisätietoja haasteesta'}
           </Link>
         </Element>
       )}
@@ -156,8 +156,10 @@ export const CompaniesBanner = ({ isFrontPage }) => (
 
 CompaniesBanner.defaultProps = {
   isFrontPage: false,
+  lang: 'fi',
 };
 
 CompaniesBanner.propTypes = {
   isFrontPage: PropTypes.bool,
+  lang: PropTypes.string.isRequired,
 };

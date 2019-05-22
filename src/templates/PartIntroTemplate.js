@@ -23,10 +23,10 @@ import snakeCase from 'lodash/fp/snakeCase';
 export default function PartIntroTemplate({ data }) {
   const { markdownRemark } = data;
   const { frontmatter, html } = markdownRemark;
-  const { mainImage, part } = frontmatter;
+  const { mainImage, part, lang } = frontmatter;
 
-  const titles = !isEmpty(navigation[part])
-    ? Object.keys(navigation[part])
+  const titles = !isEmpty(navigation[lang][part])
+    ? Object.keys(navigation[lang][part])
     : [];
 
   const parserOptions = {
@@ -43,11 +43,11 @@ export default function PartIntroTemplate({ data }) {
   return (
     <Layout>
       <SEO
-        title={`Fullstack osa${part}`}
+        title={`Fullstack ${lang === 'en' ? 'part' : 'osa'}${part}`}
         description={mainSEOdescription}
         keywords={[
           ...mainSEOtags,
-          navigation[part] ? Object.values(navigation[part]) : [],
+          navigation[lang][part] ? Object.values(navigation[lang][part]) : [],
         ]}
       />
 
@@ -66,11 +66,11 @@ export default function PartIntroTemplate({ data }) {
                 {
                   backgroundColor: colors[partColors[part]],
                   text: 'Fullstack',
-                  link: '/#course-contents',
+                  link: `/${lang === 'en' && 'en/'}#course-contents`,
                 },
                 {
                   backgroundColor: colors['black'],
-                  text: `osa ${part}`,
+                  text: `${lang === 'en' ? 'Part' : 'Osa'} ${part}`,
                 },
               ]}
             />
@@ -87,8 +87,10 @@ export default function PartIntroTemplate({ data }) {
                   return {
                     backgroundColor: colors['white'],
                     letter: n,
-                    path: `/osa${part}/${snakeCase(navigation[part][n])}`,
-                    text: `${n} ${navigation[part][n]}`,
+                    path: `/${
+                      lang === 'en' ? 'en/part' : 'osa'
+                    }${part}/${snakeCase(navigation[lang][part][n])}`,
+                    text: `${n} ${navigation[lang][part][n]}`,
                   };
                 })}
               />
@@ -96,23 +98,30 @@ export default function PartIntroTemplate({ data }) {
           </Element>
         </Banner>
 
-        <PrevNext part={part} />
+        <PrevNext part={part} lang={lang} />
       </div>
 
-      <Footer />
+      <Footer lang={lang} />
     </Layout>
   );
 }
 
 export const partInfoQuery = graphql`
-  query($part: Int!) {
-    markdownRemark(frontmatter: { part: { eq: $part }, letter: { eq: null } }) {
+  query($part: Int!, $lang: String!) {
+    markdownRemark(
+      frontmatter: {
+        part: { eq: $part }
+        letter: { eq: null }
+        lang: { eq: $lang }
+      }
+    ) {
       html
       frontmatter {
         mainImage {
           publicURL
         }
         part
+        lang
       }
     }
   }

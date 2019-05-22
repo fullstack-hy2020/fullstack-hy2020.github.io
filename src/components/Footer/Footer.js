@@ -21,7 +21,7 @@ const images = [
   },
 ];
 
-const Footer = () => (
+const Footer = ({ lang }) => (
   <Element
     id="footer"
     className="container spacing--after-small spacing--mobile"
@@ -48,7 +48,7 @@ const Footer = () => (
       className="col-5 col-5--mobile order-1--mobile order-1--tablet footer__navigation"
     >
       <div className="footer__navigation-link-container">
-        {navigation.map(item => (
+        {navigation[lang].map(item => (
           <Link
             key={item.path}
             to={item.path}

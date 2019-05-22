@@ -45,7 +45,7 @@ const Challenge = () => (
     <Element className="container spacing">
       <SubHeader
         className="col-10col-8 push-right-1"
-        text="Tämä on Full Stack -haaste"
+        text="This is Full Stack -challenge"
         headingLevel="h1"
       />
 
@@ -53,10 +53,10 @@ const Challenge = () => (
         <BodyText
           headingFont
           text={[
-            'Suomi tarvitsee lisää ohjelmistokehittäjiä. Haluamme kasvattaa seuraavan sukupolven koodareita - yksi valitsemistamme tavoista on osallistuminen Full Stack MOOC -kurssille.',
-            'Helsingin yliopisto ja Houston Inc. haastavat niin tekijöitä kuin yrityksiä oppimaan uutta ja laajentamaan osaamistaan Full Stack -hengessä. Yhteistyökumppaneina ja haasteen käynnistäjinä ovat myös Elisa Oyj, K-ryhmä, Konecranes Oyj, Terveystalo Oyj ja Unity Technologies Finland Ltd.',
-            'Haasteen päämäärä on kannustaa oppimaan. Tarjoamme valmiiksi kootun ja ajatuksella rajatun Full Stack -kurssin, joka helpottaa ja vauhdittaa nykyaikaisiin, tuotannossa käytettyihin teknologioihin tutustumista. Kurssi on maksuton, eikä sen suorittaminen ole aikaan tai paikkaan sidottu.',
-            'Kurssi on rakennettu koodarilta koodarille ja tarjoaa uutta kokeneemmallekin konkarille. Pohjatiedoiksi vaaditaan hyvä perustason ohjelmointirutiini.',
+            'Finland needs more software developers. We want to grow the next generation of coders - one of the ways we choose is to participate in the Full Stack MOOC course. ',
+            'The University of Helsinki and Houston Inc. challenge both authors and companies to learn new things and expand their skills in the spirit of Full Stack. Also partners and launchers are Elisa Corporation, K-Group, Konecranes Plc, Terveystalo Oyj and Unity Technologies Finland Ltd. ',
+            'The goal of the challenge is to encourage learning. We offer a pre-assembled and thought-out Full Stack course that facilitates and accelerates familiarization with modern technologies used in production. The course is free of charge and is not tied to time or place. ',
+            'The course is built from an encoder to a coder and offers a new experience for a more experienced competitor. A good basic programming routine is required for the background information. ',
           ]}
         />
 
@@ -68,9 +68,9 @@ const Challenge = () => (
             title: 'Yritykset, ottakaa haaste vastaan!',
           }}
           text={[
-            'Tarttumalla haasteeseen kannustatte työyhteisönne osaajia uuden oppimisen äärelle. Full Stack -verkkokurssi on oiva lisä yrityksen täydennyskoulutusvalikoimaan ja toimii hyvin itseopiskelumateriaalina yrityksen muiden koulutusmahdollisuuksien joukossa',
-            'Osallistumalla haasteeseen voitte viestiä omaa teknologista osaamistanne yrityksen ulkopuolelle – tämä auttaa niin työnantajakuvan muodostamisessa kuin näkyvyydessä sovelluskehitysalan ammattilaisille.',
-            'Haasteeseen osallistuminen on maksutonta. Haasteen vastaanottaneiden yritysten logot nostetaan Full Stack -kurssin sivulle.',
+            "By grabbing the challenge, you encourage the skills of your work community to learn new things. The Full Stack Online Course is a great addition to the company's in-service training portfolio and works well as a self-study tool among the company's other training opportunities",
+            'By participating in the challenge, you can communicate your own technological expertise outside the company - this helps both the image of the employer and the visibility of the application development professionals.',
+            'Participation in the challenge is free of charge. The logos of the companies that received the challenge will be placed on the Full Stack course page. ',
           ]}
         />
 
@@ -78,11 +78,11 @@ const Challenge = () => (
       </Element>
     </Element>
 
-    <CompaniesBanner lang="fi" />
+    <CompaniesBanner lang="en" />
 
     <SubHeader
       className="col-10 spacing--after centered"
-      text="#fullstackhaaste"
+      text="#fullstackchallenge"
       headingLevel="h3"
     />
   </Layout>

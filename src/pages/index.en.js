@@ -45,7 +45,7 @@ const IndexPage = () => {
     houston,
     contacts,
     licenced,
-  } = content.fi;
+  } = content.en;
 
   return (
     <Layout>
@@ -78,9 +78,9 @@ const IndexPage = () => {
             bold
             thickBorder
             style={{ fontSize: '1.2rem' }}
-            link="/about"
+            link="/en/about"
             content={[
-              { backgroundColor: colors['main'], text: 'Aloita kurssi' },
+              { backgroundColor: colors['main'], text: 'Start course' },
             ]}
           />
 
@@ -218,9 +218,9 @@ const IndexPage = () => {
         </Element>
       </Element>
 
-      <PartBanner lang="fi" />
+      <PartBanner lang="en" />
 
-      <CompaniesBanner lang="fi" isFrontPage />
+      <CompaniesBanner lang="en" isFrontPage />
 
       <Element flex spaceBetween className="container col-10 spacing--after">
         <TripleBorder

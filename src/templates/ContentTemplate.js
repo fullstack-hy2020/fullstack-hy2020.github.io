@@ -84,7 +84,7 @@ export default class ContentTemplate extends Component {
   render() {
     const { markdownRemark } = this.props.data;
     const { frontmatter, html } = markdownRemark;
-    const { mainImage, letter, part } = frontmatter;
+    const { mainImage, letter, part, lang } = frontmatter;
     const colorCode = colors[partColors[part]];
 
     const parserOptions = {
@@ -182,16 +182,16 @@ export default class ContentTemplate extends Component {
                   {
                     backgroundColor: colorCode,
                     text: 'Fullstack',
-                    link: '/#course-contents',
+                    link: `/${lang === 'en' && 'en/'}#course-contents`,
                   },
                   {
                     backgroundColor: colorCode,
-                    text: `osa ${part}`,
-                    link: `/osa${part}`,
+                    text: `${lang === 'en' ? 'part' : 'osa'} ${part}`,
+                    link: lang === 'en' ? `/en/part${part}` : `/osa${part}`,
                   },
                   {
                     backgroundColor: colors['black'],
-                    text: navigation[part][letter],
+                    text: navigation[lang][part][letter],
                   },
                 ]}
               />
@@ -203,10 +203,11 @@ export default class ContentTemplate extends Component {
               <ScrollNavigation
                 part={part}
                 letter={letter}
-                currentPartTitle={navigation[part][letter]}
-                currentPath={`/osa${part}/${snakeCase(
-                  navigation[part][letter]
-                )}`}
+                lang={lang}
+                currentPartTitle={navigation[lang][part][letter]}
+                currentPath={`/${
+                  lang === 'en' ? 'en/part' : 'osa'
+                }${part}/${snakeCase(navigation[lang][part][letter])}`}
                 colorCode={colorCode}
                 className="col-2 spacing"
                 style={{ top: this.state.h1Top }}
@@ -220,7 +221,10 @@ export default class ContentTemplate extends Component {
                   {letter}
                 </p>
 
-                <SubHeader headingLevel="h1" text={navigation[part][letter]} />
+                <SubHeader
+                  headingLevel="h1"
+                  text={navigation[lang][part][letter]}
+                />
               </Element>
             </Element>
 
@@ -229,21 +233,25 @@ export default class ContentTemplate extends Component {
 
           {false && <ReturnInfo />}
 
-          <EditLink part={part} letter={letter} />
+          <EditLink part={part} letter={letter} lang={lang} />
 
-          <PrevNext part={part} letter={letter} />
+          <PrevNext part={part} letter={letter} lang={lang} />
         </div>
 
-        <Footer />
+        <Footer lang={lang} />
       </Layout>
     );
   }
 }
 
 export const contentPageQuery = graphql`
-  query($part: Int!, $letter: String!) {
+  query($part: Int!, $letter: String!, $lang: String!) {
     markdownRemark(
-      frontmatter: { part: { eq: $part }, letter: { eq: $letter } }
+      frontmatter: {
+        part: { eq: $part }
+        letter: { eq: $letter }
+        lang: { eq: $lang }
+      }
     ) {
       html
       frontmatter {
@@ -252,6 +260,7 @@ export const contentPageQuery = graphql`
         }
         part
         letter
+        lang
       }
     }
   }

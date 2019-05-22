@@ -51,7 +51,10 @@ class Header extends Component {
           className="container"
           style={{ alignItems: 'center', justifyContent: 'flex-start' }}
         >
-          <Link to="/" className="header__logo">
+          <Link
+            to={this.props.lang === 'en' ? '/en' : '/'}
+            className="header__logo"
+          >
             {headerClass === '' ? (
               <TripleBorder
                 className="nav-item-hover"
@@ -70,7 +73,9 @@ class Header extends Component {
             )}
           </Link>
 
-          {this.state.headerClass !== 'header--small' && <Navigation />}
+          {this.state.headerClass !== 'header--small' && (
+            <Navigation lang={this.props.lang} />
+          )}
         </div>
       </div>
     );

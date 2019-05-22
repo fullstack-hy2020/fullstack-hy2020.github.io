@@ -7,35 +7,38 @@ import React from 'react';
 import navigation from '../../content/partnavigation/partnavigation';
 import snakeCase from 'lodash/fp/snakeCase';
 
-const navArray = Object.keys(navigation);
-
 const prevChar = c => String.fromCharCode(c.charCodeAt(0) - 1);
 const nextChar = c => String.fromCharCode(c.charCodeAt(0) + 1);
-const hasPart = part => navArray.includes(part.toString());
-const nextLetterExists = (letter, part) => nextChar(letter) in navigation[part];
-const hasNext = (letter, part) => {
+const hasPart = (part, lang) =>
+  Object.keys(navigation[lang]).includes(part.toString());
+const nextLetterExists = (letter, part, lang) =>
+  nextChar(letter) in navigation[lang][part];
+const hasNext = (letter, part, lang) => {
   return (
-    (!letter && hasPart(part + 1)) || (letter && nextLetterExists(letter, part))
+    (!letter && hasPart(part + 1, lang)) ||
+    (letter && nextLetterExists(letter, part, lang))
   );
 };
 
-const PrevNext = ({ part, letter }) => {
+const PrevNext = ({ part, letter, lang }) => {
   const getPrev = () => {
-    if (!letter && hasPart(part - 1)) {
+    if (!letter && hasPart(part - 1, lang)) {
       return (
         <>
           <Link
-            to={`/osa${part - 1}`}
+            to={`/${lang === 'en' ? 'en/part' : 'osa'}${part - 1}`}
             className="col-4--mobile push-right-1 prev"
           >
             <Element flex dirColumn>
               <p>Osa {part - 1}</p>
 
-              <b>Edellinen osa</b>
+              <b>{lang === 'en' ? 'Previous part' : 'Edellinen osa'}</b>
             </Element>
           </Link>
 
-          {hasNext(letter, part) && <div className="col-1--mobile separator" />}
+          {hasNext(letter, part, lang) && (
+            <div className="col-1--mobile separator" />
+          )}
         </>
       );
     } else if (letter) {
@@ -43,38 +46,38 @@ const PrevNext = ({ part, letter }) => {
         return (
           <>
             <Link
-              to={`/osa${part}/${snakeCase(
-                navigation[part][prevChar(letter)]
+              to={`/${lang === 'en' ? 'en/part' : 'osa'}${part}/${snakeCase(
+                navigation[lang][part][prevChar(letter)]
               )}`}
               className="col-4--mobile push-right-1 prev"
             >
               <Element flex dirColumn>
                 <p>Osa {`${part}${prevChar(letter)}`}</p>
 
-                <b>Edellinen osa</b>
+                <b>{lang === 'en' ? 'Previous part' : 'Edellinen osa'}</b>
               </Element>
             </Link>
 
-            {hasNext(letter, part) && (
+            {hasNext(letter, part, lang) && (
               <div className="col-1--mobile separator" />
             )}
           </>
         );
-      } else if (hasPart(part - 1)) {
+      } else if (hasPart(part - 1, lang)) {
         return (
           <>
             <Link
-              to={`/osa${part - 1}`}
+              to={`/${lang === 'en' ? 'en/part' : 'osa'}${part - 1}`}
               className="col-4--mobile push-right-1 prev"
             >
               <Element flex dirColumn>
                 <p>Osa {part - 1}</p>
 
-                <b>Edellinen osa</b>
+                <b>{lang === 'en' ? 'Previous part' : 'Edellinen osa'}</b>
               </Element>
             </Link>
 
-            {hasNext(letter, part) && (
+            {hasNext(letter, part, lang) && (
               <div className="col-1--mobile separator" />
             )}
           </>
@@ -88,40 +91,45 @@ const PrevNext = ({ part, letter }) => {
   };
 
   const getNext = () => {
-    if (!letter && hasPart(part + 1)) {
+    if (!letter && hasPart(part + 1, lang)) {
       return (
-        <Link to={`/osa${part + 1}`} className="col-4--mobile push-left-1 next">
+        <Link
+          to={`/${lang === 'en' ? 'en/part' : 'osa'}${part + 1}`}
+          className="col-4--mobile push-left-1 next"
+        >
           <Element flex dirColumn>
             <p>Osa {part + 1}</p>
 
-            <b>Seuraava osa</b>
+            <b>{lang === 'en' ? 'Next part' : 'Seuraava osa'}</b>
           </Element>
         </Link>
       );
     } else if (letter) {
-      if (nextLetterExists(letter, part)) {
+      if (nextLetterExists(letter, part, lang)) {
         return (
           <Link
-            to={`/osa${part}/${snakeCase(navigation[part][nextChar(letter)])}`}
+            to={`/${lang === 'en' ? 'en/part' : 'osa'}${part}/${snakeCase(
+              navigation[lang][part][nextChar(letter)]
+            )}`}
             className="col-4--mobile push-left-1 next"
           >
             <Element flex dirColumn>
               <p>Osa {`${part}${nextChar(letter)}`}</p>
 
-              <b>Seuraava osa</b>
+              <b>{lang === 'en' ? 'Next part' : 'Seuraava osa'}</b>
             </Element>
           </Link>
         );
-      } else if (hasPart(part + 1)) {
+      } else if (hasPart(part + 1, lang)) {
         return (
           <Link
-            to={`/osa${part + 1}`}
+            to={`/${lang === 'en' ? 'en/part' : 'osa'}${part + 1}`}
             className="col-4--mobile push-left-1 next"
           >
             <Element flex dirColumn>
               <p>Osa {part + 1}</p>
 
-              <b>Seuraava osa</b>
+              <b>{lang === 'en' ? 'Next part' : 'Seuraava osa'}</b>
             </Element>
           </Link>
         );
@@ -150,6 +158,7 @@ PrevNext.defaultProps = {
 PrevNext.propTypes = {
   part: PropTypes.number,
   letter: PropTypes.string,
+  lang: PropTypes.string.isRequired,
 };
 
 export default PrevNext;

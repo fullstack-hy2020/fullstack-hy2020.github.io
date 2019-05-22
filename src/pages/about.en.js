@@ -14,7 +14,7 @@ import mainSEOdescription from '../content/seo/mainSEOdescription';
 import mainSEOtags from '../content/seo/mainSEOtags';
 
 const About = () => {
-  const { intro, info } = content.fi;
+  const { intro, info } = content.en;
 
   return (
     <Layout>
@@ -50,7 +50,7 @@ const About = () => {
       <Element className="container spacing spacing--mobile--large">
         <Element className="col-8 push-right-1">
           <BodyText
-            heading={{ level: 'h1', title: 'Yleistä' }}
+            heading={{ level: 'h1', title: 'General' }}
             headingFontSize="2.3rem"
           />
 
@@ -76,8 +76,8 @@ const About = () => {
           <Accordion key={item} title={item.title} content={item.content} />
         ))}
 
-      <PartBanner lang="fi" />
-      <Footer lang="fi" />
+      <PartBanner lang="en" />
+      <Footer lang="en" />
     </Layout>
   );
 };

@@ -8,10 +8,10 @@ import colors from '../colors';
 
 const NotFoundPage = () => (
   <Layout>
-    <SEO title="Sivua ei löytynyt | Full Stack Open 2019" />
+    <SEO title="Page not found | Full Stack Open 2019" />
 
     <Element className="container spacing--large spacing--after">
-      <h1>404 - Sivua ei löytynyt</h1>
+      <h1>404 - Page not found</h1>
 
       <p className="col-10 spacing--small spacing--after">
         Uncaught ReferenceError: unknown is not defined
@@ -26,7 +26,7 @@ const NotFoundPage = () => (
       />
     </Element>
 
-    <Footer lang="fi" />
+    <Footer lang="en" />
   </Layout>
 );
 

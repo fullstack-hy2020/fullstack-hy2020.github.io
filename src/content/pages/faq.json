@@ -1,0 +1,138 @@
+{
+  "fi": [
+    {
+      "title": "Miten kurssille ilmoittaudutaan?",
+      "text": [
+        "Kurssille ei tarvitse varsinaisesti ilmoittautua ennen kuin haluat tehdä kurssin kokeen. Koe tehdään Avoimen yliopiston Moodle-järjestelmään. Katso lisää <a href='/osa0/yleista#arvosteluperusteet'>täältä</a>."
+      ]
+    },
+    {
+      "title": "Mikä on kurssin laajuus?",
+      "text": [
+        "Kurssin laajuus on <a href='osa0/yleista#arvosteluperusteet'>riippuen tekemiesi tehtävien määrästä</a>  3-8 opintopistettä. Suoritettuasi kurssin voit jatkaa aihepiiriin syventymistä 1-10 opintopisteen laajuisessa <a href='/osa0/yleista#full-stack-harjoitustyo'>Full stack -harjoitustyön</a> parissa."
+      ]
+    },
+    {
+      "title": "Milloin on tehtävien ja kokeen deadline?",
+      "text": [
+        "Etenemisnopeus on vapaa, kurssilla on ainoastaan yksi deadline sekä tehtäville että kokeelle 10.1.2020 klo 23.59.59. Kannattaa kuitenkin huomata, että kurssille on ilmoittauduttava viimeistään deadliea edeltävänä päivänä 9.1.2020."
+      ]
+    },
+    {
+      "title": "Miten tehtävät palautetaan?",
+      "text": [
+        "Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät palautussovellukseen, lue lisää <a href='/osa0/yleista#tehtavien-palauttaminen'>täältä</a>."
+      ]
+    },
+    {
+      "title": "Pitääkö jokainen osa palauttaa omaan repositorioon?",
+      "text": [
+        "Ei. Voit käyttää yhtä tai useampaa repositoriota, tärkeintä että asiat repositorion sisällä ovat selkeästi nimettyjä."
+      ]
+    },
+    {
+      "title": "Voinko muokata tekemääni palautusta?",
+      "text": [
+        "Et. Kaikki osan tehtävät on palautettava kerralla. Jos merkkasit tehtäviä vahingossa väärin tai typotit repositorion nimen, lähetä mailia osoitteeseen matti.luukkainen@helsinki.fi"
+      ]
+    },
+    {
+      "title": "Milloin ja miten saan kurssilta suoritusmerkinnän?",
+      "text": [
+        "Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suositukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi valmis kurssin suorituksen kanssa. Viimeinen mahdollinen suorituspäivä on 10.1.2020. Lue lisää <a href='/osa0/yleista#arvosteluperusteet'>täältä</a>."
+      ]
+    },
+    {
+      "title": "Voinko laajentaa aiempaa kurssisuoritustani?",
+      "text": [
+        "Voit, lue lisää <a href='/osa0/yleista#aiemmin-suoritetun-kurssin-taydentaminen'>täältä</a>"
+      ]
+    },
+    {
+      "title": "Suoritin kurssin viime vuonna. Miten opin käyttämään React hookeja?",
+      "text": [
+        "State hookia, eli tapaa määritellä tila funktionaalisille komponenteille käsitellään <a href='/osa1/komponentin_tila_ja_tapahtumankasittely/#tilallinen-komponentti'>osassa 1</a>. Lifecycle-metodien roolia hoitavia effect hookeja käsitellään <a href='/osa2/palvelimella_olevan_datan_hakeminen#effect-hookit'>osassa 2</a>. Custom hookeista puhutaan <a href='/osa5/custom_hookit'>osassa 5</a>"
+      ]
+    },
+    {
+      "title": "Kuulin että suorittamalla kurssin on mahdollista päästä työhaastatteluun",
+      "text": [
+        "Pitää paikkansa, jos suoritat täydellä laajuudella kurssin ja siihen liittyvän 10 op:n laajuisen harjoitustyön, pääset yhteistyökumppaniemme työhaastatteluun, lue lisää <a href='/osa0/yleista#haastattelulupaus'>täältä</a>."
+      ]
+    },
+    {
+      "title": "Will there be an English translation of the course?",
+      "text": [
+        "Yes, it will be released Monday 3.6.2019!"
+      ]
+    }
+  ],
+  "en": [
+    {
+      "title": "How do I enroll in a course?",
+      "text": [
+        "There is no need to actually enroll in the course before you want to take the course test. The test is done in the Open University Moodle System."
+      ]
+    },
+    {
+      "title": "What is the scope of the course?",
+      "text": [
+        "The scope of the course is <a href='osa0/general#criteria'> depending on the number of assignments you have made </a> 3-8 credits. full-stack training exercise '> Full stack workout </a>."
+      ]
+    },
+    {
+      "title": "When is the deadline for tasks and experiment?",
+      "text": [
+        "The speed of the advancement is free, the course has only one deadline for both the assignments and the test 10.1.2020 at 23.59.59."
+      ]
+    },
+    {
+      "title": "How do I restore my tasks?",
+      "text": [
+        "Tasks are returned through GitHub and tagged tasks in the recovery application, read more about <a href='/osa0/support #replacement'> here </a>."
+      ]
+    },
+    {
+      "title": "Does every part need to be returned to its repository?",
+      "text": [
+        "No. You can use one or more repositories, the most important thing is that things inside the repository are clearly named."
+      ]
+    },
+    {
+      "title": "Can I edit my refund?",
+      "text": [
+        "No. All the tasks in the part must be returned at once. If you marked the jobs by mistake or dropped the name of the repository, send mail to matti.luukkainen@helsinki.fi"
+      ]
+    },
+    {
+      "title": "When and how do I get a course mark?",
+      "text": [
+        "You will receive a performance label after completing a qualifying assignment for an acceptable recommendation, passing the exam and announcing that you have completed the course in the return application. </a>. "
+      ]
+    },
+    {
+      "title": "Can I extend my previous course rate?",
+      "text": [
+        "You can, read more <a href='/osa0/yleista\t"
+      ]
+    },
+    {
+      "title": "I ran the course last year. How did I learn to use React hooks?",
+      "text": [
+        "The state hook, ie the way to define the state of functional components, is discussed in the <a href='/osa1/component_space_and_content/#static component \"> section 1 </a>. on server_existing_data_handling # effect-Hookit>> section 2. </a> For custom hooks, see <a href='/osa5/custom_hookit'> section 5 </a>"
+      ]
+    },
+    {
+      "title": "I heard that it is possible to get a job interview by completing a course",
+      "text": [
+        "It is true that if you run a full course course and a related 10-cr graduate work, you will get to the interviews with our partners, read more about <a href='/osa0/your#questioning'> here </a>."
+      ]
+    },
+    {
+      "title": "Will there be an English translation of the course?",
+      "text": [
+        "Yes, it will be released Monday 3.6.2019!"
+      ]
+    }
+  ]
+}

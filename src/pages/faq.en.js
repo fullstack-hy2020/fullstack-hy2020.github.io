@@ -26,9 +26,9 @@ const FAQ = () => (
       <SubHeader
         className="spacing--after-small"
         headingLevel="h1"
-        text="Usein kysytyt kysymykset"
+        text="Frequently asked questions"
       />
-      {content.fi.map(item => {
+      {content.en.map(item => {
         return (
           <Accordion
             track
@@ -40,7 +40,7 @@ const FAQ = () => (
       })}
     </Element>
 
-    <Footer lang="fi" />
+    <Footer lang="en" />
   </Layout>
 );
 

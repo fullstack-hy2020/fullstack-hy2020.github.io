@@ -6,9 +6,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const Layout = ({ children }) => {
+  const siteLanguage =
+    window.location.pathname.indexOf('/en') !== -1 ? 'en' : 'fi';
+
   return (
     <div className="main-wrapper">
-      <Header />
+      <Header lang={siteLanguage} />
 
       {children}
     </div>
