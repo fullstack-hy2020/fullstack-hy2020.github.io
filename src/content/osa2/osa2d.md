@@ -159,7 +159,7 @@ const App = () => {
 
 Huomaa, että jokaisen muistiinpanon tapahtumankäsittelijäksi tulee nyt <i>yksilöllinen</i> funktio, sillä kunkin muistiinpanon <i>id</i> on uniikki.
 
-Esim. jos <i>node.id</i> on 3, tulee tapahtumankäsittelijäksi _toggleImportance(note.id)_ eli käytännössä:
+Esim. jos <i>note.id</i> on 3, tulee tapahtumankäsittelijäksi _toggleImportance(note.id)_ eli käytännössä:
 
 ```js
 () => { console.log('importance of 3 needs to be toggled') }
