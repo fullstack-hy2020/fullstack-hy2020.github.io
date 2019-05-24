@@ -96,7 +96,7 @@ export const CompaniesBanner = ({ isFrontPage, lang }) => (
       <BodyText
         centered
         className="col-4 push-right-3 challenge-title"
-        text="Yhteistyössä"
+        text="In co-operation with"
       />
       <Element
         flex
@@ -146,7 +146,7 @@ export const CompaniesBanner = ({ isFrontPage, lang }) => (
       {isFrontPage && (
         <Element flex spaceAround className="col-10 spacing">
           <Link className="about__challenge-button" to="/challenge">
-            {lang === 'en' ? 'More' : 'Lisätietoja haasteesta'}
+            {lang === 'en' ? 'More about challenge' : 'Lisätietoja haasteesta'}
           </Link>
         </Element>
       )}

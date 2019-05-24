@@ -23,7 +23,7 @@ Ennen kun jatkat eteenpäin, selvitä miten saat koneellasi konsolin auki (googl
 
 Konsoli näyttää seuraavalta:
 
-![](../../images/0/1.png)
+![](../../images/0/1e.png)
 
 Varmista, että välilehti <i>Network</i> on avattuna ja aktivoi valinta <i>Disable cache</i> kuten kuvassa on tehty. Myös <i>Preserve logs</i> on joskus hyödyllinen, se säilyttää sovelluksen tulostamat logit sivujen uudelleenlatauksen yhteydessä.
 
@@ -38,31 +38,31 @@ Kun päivität sivun (eli painat F5-näppäintä tai selaimessa olevaa symbolia 
 - selain hakee web-palvelimelta sivun <i>fullstack-exampleapp.herokuapp.com/</i> sisällön
 - ja lataa kuvan <i>kuva.png</i>
 
-![](../../images/0/2.png)
+![](../../images/0/2e.png)
 
 Jos ruutusi on pieni, saatat joutua suurentamaan konsoli-ikkunaa, jotta saat selaimen tekemät haut näkyviin.
 
 Klikkaamalla näistä ensimmäistä, paljastuu tarkempaa tietoa siitä mistä on kyse:
 
-![](../../images/0/3.png)
+![](../../images/0/3e.png)
 
 Ylimmästä osasta <i>General</i> selviää, että selain teki [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET)-metodilla pyynnön osoitteeseen <i>https://fullstack-exampleapp.herokuapp.com/</i> ja että pyyntö oli onnistunut, sillä pyyntöön saatiin vastaus, jonka [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) on 200.
 
 Pyyntöön ja palvelimen lähettämään vastaukseen liittyy erinäinen määrä otsakkeita eli [headereita](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields):
 
-![](../../images/0/4.png)
+![](../../images/0/4e.png)
 
 Ylempänä oleva <i>Response headers</i> kertoo mm. vastauksen koon tavuina ja vastaushetken. Tärkeä headeri [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) kertoo, että vastaus on [utf-8](https://en.wikipedia.org/wiki/UTF-8)-muodossa oleva tekstitiedosto, jonka sisältö on muotoiltu HTML:llä. Näin selain tietää, että kyseessä on normaali [HTML](https://en.wikipedia.org/wiki/HTML)-sivu, joka tulee renderöidä käyttäjän selaimeen "websivun tavoin".
 
 Välilehti <i>Response</i> näyttää, miltä pyyntöön vastauksena lähetetty data näyttää. Kyseessä on siis normaali HTML-sivu, jonka <i>body</i>-osassa määritellään selaimessa näytettävän sivun rakenne:
 
-![](../../images/0/5.png)
+![](../../images/0/5e.png)
 
 Sivu sisältää [div](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div)-elementin, jonka sisällä on otsikko sekä tieto luotujen muistiinpanojen määrästä, linkki sivulle <i>muistiinpanot</i> ja kuvaa vastaava [img](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img)-tagi.
 
 img-tagin ansiosta selain tekee toisenkin <i>HTTP-pyynnön</i>, jonka avulla se hakee kuvan <i>kuva.png</i> palvelimelta. Pyynnön tiedot näyttävät seuraavalta:
 
-![](../../images/0/6.png)
+![](../../images/0/6e.png)
 
 eli pyyntö on tehty osoitteeseen <https://fullstack-exampleapp.herokuapp.com/kuva.png> ja se on tyypiltään HTTP GET. Vastaukseen liittyvät headerit kertovat että vastauksen koko on 89350 tavua ja vastauksen [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) on <i>image/png</i>, eli kyseessä on png-tyyppinen kuva. Tämän tiedon ansiosta selain tietää, miten kuva on piirrettävä HTML-sivulle.
 
@@ -117,12 +117,12 @@ Pidä konsoli edelleen auki. Tyhjennä konsolin näkymä painamalla vasemmalla o
 
 Kun menet nyt [muistiinpanojen](https://fullstack-exampleapp.herokuapp.com/notes) sivulle, selain tekee 4 HTTP-pyyntöä:
 
-![](../../images/0/8.png)
+![](../../images/0/8e.png)
 
 Kaikki pyynnöt ovat <i>eri tyyppisiä</i>. Ensimmäinen pyyntö on tyypiltään <i>document</i>.
 Kyseessä on sivun HTML-koodi, joka näyttää seuraavalta:
 
-![](../../images/0/9.png)
+![](../../images/0/9e.png)
 
 Kun vertaamme, selaimen näyttämää sivua ja pyynnön palauttamaa HTML-koodia, huomaamme, että koodi ei sisällä ollenkaan muistiinpanoja sisältävää listaa.
 
@@ -173,11 +173,11 @@ Kyseessä on alin Network-välilehden näyttämistä selaimen tekemistä pyynnö
 
 Voimme kokeilla mennä osoitteeseen <https://fullstack-exampleapp.herokuapp.com/data.json> suoraan selaimella:
 
-![](../../images/0/10.png)
+![](../../images/0/10e.png)
 
 Osoitteesta löytyvät muistiinpanot [JSON](https://en.wikipedia.org/wiki/JSON)-muotoisena "raakadatana". Oletusarvoisesti selain ei osaa näyttää JSON-dataa kovin hyvin, mutta on olemassa lukuisia plugineja, jotka hoitavat muotoilun. Asenna nyt Chromeen esim. [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) ja lataa sivu uudelleen. Data on nyt miellyttävämmin muotoiltua:
 
-![](../../images/0/11.png)
+![](../../images/0/11e.png)
 
 Ylläoleva muistiinpanojen sivun Javascript-koodi siis lataa muistiinpanot sisältävän JSON-muotoisen datan ja muodostaa datan avulla selaimeen "bulletlistan" muistiinpanojen sisällöstä:
 
@@ -220,11 +220,11 @@ data.forEach(function(note) {
 
 Avaa nyt konsolin <i>Console</i>-välilehti:
 
-![](../../images/0/12.png)
+![](../../images/0/12e.png)
 
 Painamalla rivin alussa olevaa kolmiota saat laajennettua konsolissa olevan rivin:
 
-![](../../images/0/13.png)
+![](../../images/0/13e.png)
 
 Konsoliin ilmestynyt tulostus johtuu siitä, että koodiin oli lisätty komento <em>console.log</em>:
 
@@ -296,7 +296,7 @@ html
 
 Sama puumaisuus on nähtävissä konsolin välilehdellä </i>Elements</i>:
 
-![](../../images/0/14.png)
+![](../../images/0/14e.png)
 
 Selainten toiminta perustuukin ideaan esittää HTML-elementit puurakenteena.
 
@@ -327,7 +327,7 @@ document.getElementById('notes').appendChild(ul)
 
 HTML-dokumenttia esittävän DOM-puun ylimpänä solmuna on olio nimeltään <em>document</em>. Olioon pääsee käsiksi Console-välilehdeltä:
 
-![](../../images/0/15.png)
+![](../../images/0/15e.png)
 
 
 Voimme suorittaa konsolista käsin DOM-apin avulla erilaisia operaatioita selaimessa näytettävälle web-sivulle hyödyntämällä <em>document</em>-olioa.
@@ -337,23 +337,23 @@ Lisätään nyt sivulle uusi muistiinpano suoraan konsolista.
 Haetaan ensin sivulta muistiinpanojen lista, eli sivun ul-elementeistä ensimmäinen:
 
 ```js
-lista = document.getElementsByTagName('ul')[0]
+list = document.getElementsByTagName('ul')[0]
 ```
 
 luodaan uusi li-elementti ja lisätään sille sopiva tekstisisältö:
 
 ```js
-uusi = document.createElement('li')
-uusi.textContent = 'Sivun manipulointi konsolista on helppoa'
+newElement = document.createElement('li')
+newElement.textContent = 'Page manipulation from console is easy'
 ```
 
 liitetään li-elementti listalle:
 
 ```js
-lista.appendChild(uusi)
+list.appendChild(newElement)
 ```
 
-![](../../images/0/16.png)
+![](../../images/0/16e.png)
 
 Vaikka selaimen näyttämä sivu päivittyy, ei muutos ole lopullinen. Jos sivu uudelleenladataan, katoaa uusi muistiinpano, sillä muutos ei mennyt palvelimelle asti. Selaimen lataama Javascript luo muistiinpanojen listan aina palvelimelta osoitteesta <https://fullstack-exampleapp.herokuapp.com/data.json> haettavan JSON-muotoisen raakadatan perusteella.
 
@@ -384,7 +384,7 @@ Luokat ovat [attribuutteja](https://developer.mozilla.org/en-US/docs/Web/HTML/Gl
 
 Konsolin <i>Elements</i>-välilehti mahdollistaa class-attribuuttien tarkastelun:
 
-![](../../images/0/17.png)
+![](../../images/0/17e.png)
 
 sovelluksen uloimmalle <i>div</i>-elementille on siis liitetty luokka <i>container</i>. Muistiinpanojen listan sisältävä <i>ul</i>-elementin sisällä oleva lista sisältää luokan <i>notes</i>.
 
@@ -396,7 +396,7 @@ HTML-elementeillä on muitakin attribuutteja kuin luokkia. Muistiinpanot sisält
 
 Konsolin <i>Elements</i>-välilehdellä on mahdollista manipuloida elementtien tyylejä:
 
-![](../../images/0/18.png)
+![](../../images/0/18e.png)
 
 Tehdyt muutokset eivät luonnollisestikaan jää voimaan kun selaimen sivu uudelleenladataan, eli jos muutokset halutaan pysyviksi, tulee ne konsolissa tehtävien kokeilujen jälkeen tallettaa palvelimella olevaan tyylitiedostoon.
 

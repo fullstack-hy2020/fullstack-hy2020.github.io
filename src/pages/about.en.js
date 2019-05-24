@@ -62,8 +62,8 @@ const About = () => {
                 className="link"
                 headingFont
                 text={[
-                  'Osallistujilta edellytetään vahvaa ohjelmointirutiinia, web-ohjelmoinnin ja tietokantojen perustuntemusta, git-versionhallintajärjestelmän peruskäytön hallintaa, kykyä pitkäjänteiseen työskentelyyn sekä valmiutta omatoimiseen tiedonhakuun ja ongelmanratkaisuun. Osallistuminen ei kuitenkaan edellytä kurssilla käsiteltävien tekniikoiden tai Javascript-kielen hallintaa.',
-                  'Kurssin sisällöstä ja suoritustavasta kerrotaan materiaalissa osassa 0, lue ne huolella.',
+                  'Participants are expected to have good programming skills, basic knowledge of web - programming and databases, and to know the basics of working with the Git version-control system. You are also expected to have perseverance and the ability for independent problem solving and information seeking.',
+                  'Part 0 of the course material goes through the content and conduct of the course in more detail. Make sure to read the material and instructions thoroughly.'
                 ]}
               />
             </div>

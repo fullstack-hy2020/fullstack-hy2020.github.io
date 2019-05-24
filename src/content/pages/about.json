@@ -57,10 +57,10 @@
   "en": {
     "name": "General",
     "intro": [
-      "The course introduces the modern web application development with JavaScript.",
-      "This course also covers application testing, configuration and performance environment management, and the use of MongoDB database to store application data,",
-      "The scope of the course is 3 to 8 credits, the content is the same as the course of <a href='https://fullstack-hy2019.github. There is also a 1-10 credit point <a href='/osa0/yleista#full-stack-harjoustyo'> practice </a>. ",
-      "The partners in the course are <a href='https://www.houston-inc.com/'> Houston Inc </a>, <a href = 'https: //www.terveystalo.com/Company/HealthHealth Digital-Health / '> Health House </a>, <a href='https://elisa.fi/'> Elisa </a>, <a href =' https: //www.kesko.fi / '> K Group </a>, <a href='https://www.instagram.com/unitytechnologies/?hl=en'> Unity Technologies </a> and <a href =' https: // See <a href='https://www.youtube.com/playlist?list=PLumQiZ25uijis31zaRL7rhzLalSwLqUtm'> here </a> partner experts for visiting lectures on course topics."
+      "This course serves as an introduction to modern web application development with JavaScript. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js. The course also contains a section on GraphQL, a modern alternative to REST APIs.",
+      "The course covers testing, configuration and environment management, and the use of MongoDB for storing the application’s data.",
+      "The course is worth 3-8 credits, and the content is the same as in the  <a href='https://fullstack-hy2019.github.io/'>Full stack course</a> held at the <a href='https://www.helsinki.fi/en/computer-science'>Department of Computer Science</a> at the University of Helsinki in Spring 2019. There is also an associated <a href='/osa0/yleista#full-stack-harjoitustyo'>project work</a> that is worth 1-10 credits.",
+      "Partners and affiliates of the course include <a href='https://www.houston-inc.com/'>Houston Inc</a>, <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>, <a href='https://elisa.fi/'>Elisa</a>, <a href='https://www.kesko.fi/'>K-ryhmä</a>, <a href='https://www.instagram.com/unitytechnologies/?hl=en'>Unity Technologies</a> ja <a href='https://careers.konecranes.com/Konecranes/'>Konecranes</a>. See <a href='https://www.youtube.com/watch?v=BZexOyQZMMc&list=PLumQiZ25uijis31zaRL7rhzLalSwLqUtm'>here for guest lectures</a> on course-related topics given by various experts from our partners and affiliates."
     ],
     "info": [
       {

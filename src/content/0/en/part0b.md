@@ -25,7 +25,7 @@ With windows the console opens by pressing _F12_ or _ctrl_ _shift_ and _i_ simul
 Before continuing, find out how to open the developer console on your computer (google if necessary) and remember to <i>always</i> keep it open when developing web applications. 
 
 The console looks as follows: 
-![](../../images/0/1.png)
+![](../../images/0/1e.png)
 
 Ensure that the <i>Network</i> tab is open, and activate <i>Disable cache</i> as shown. <i>Preserve log</i> can also be useful. It saves the logs printed by the application when the page is reloaded. 
 
@@ -38,40 +38,40 @@ The server and the web browser communicate with each other using the [HTTP](http
 When you reload the page (press the F5 key or the &#8634; symbol on your browser), the console shows that two events have happened:
 
 - The browser fetches the contents of the page <i>fullstack-exampleapp.herokuapp.com/</i> from the server
-- And downloads the image<i>kuva.png</i>
+- And downloads the image <i>kuva.png</i>
 
-![](../../images/0/2.png)
+![](../../images/0/2e.png)
 
 On a small screen you might have to widen the console window to see these. 
 
 Clicking the first event reveals more information on what's happening: 
 
-![](../../images/0/3.png)
+![](../../images/0/3e.png)
 
 The upper part ,<i>General</i>, shows that the browser did a request to the address <i>https://fullstack-exampleapp.herokuapp.com/</i> using the  [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) method, and that the request was successfull, because the server response had the [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200. 
 
 The request and the server response have serveral [headers](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields):
 
-![](../../images/0/4.png)
+![](../../images/0/4e.png)
 
 
 The <i>Response headers</i> on top tell us e.g the size of the response in bytes, and the exact time of the response. An important header [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) tells us that the response is a text file in [utf-8](https://en.wikipedia.org/wiki/UTF-8)-format, contents of which have been formatted with HTML. This way the browser knows the response to be a regular [HTML](https://en.wikipedia.org/wiki/HTML)-page, and to render it to the browser 'like a web page'.
 
 <i>Response</i> tab shows the response data, a regular HTML-page. The <i>body</i> section determines the structure of the page rendered to the screen: 
 
-![](../../images/0/5.png)
+![](../../images/0/5e.png)
 
 The page contains a [div](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div) element, which in turn contains a header, a link to the page <i>notes</i>, and an [img](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img) tag, and displays the amount of notes created.
 
 Because of the img tag, the browser does a second <i>HTTP-request</i> to fetch the image <i>kuva.png</i> from the server. The details of the request are as follows: 
 
-![](../../images/0/6.png)
+![](../../images/0/6e.png)
 
 The request was made to the address <https://fullstack-exampleapp.herokuapp.com/kuva.png> and it's type is HTTP GET. The response headers tell us that the response size is 89350 bytes, and it's [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) is <i>image/png</i>, so it is a png image. Browser uses this information to render the image correctly to the screen. 
 
 The chain of events caused by opening the page https://fullstack-exampleapp.herokuapp.com/ on a browser form the following [sequence diagram](https://github.com/mluukkai/ohjelmistotekniikka-kevat2019/blob/master/web/materiaali.md#sekvenssikaaviot)
 
-![](../../images/0/7b.png)
+![](../../images/0/7e.png)
 
 First, the browser does a HTTP GET request to the server to fetch the HTML code of the page. The <i>img</i> tag in the HTML prompts the browser to fetch the image <i>kuva.png</i>. The browser renders the HTML page and the image to the screen. 
 
@@ -87,23 +87,23 @@ The HTML code of the example application has been formed dynamically, because it
 The HTML code of the homepage is as follows: 
 
 ```js
-const getFrontPageHtml = noteCount => {
-  return `
+const getFronPageHtml = (noteCount) => {
+  return(`
     <!DOCTYPE html>
     <html>
       <head>
       </head>
       <body>
-        <div class="container">
-          <h1>Full stack -esimerkkisovellus</h1>
-          <p>muistiinpanoja luotu ${noteCount} kappaletta</p>
-          <a href="/notes">muistiinpanot</a>
-          <img src="kuva.png" width="200" />
+        <div class='container'>
+          <h1>Full stack example app</h1>
+          <p>number of notes created ${noteCount}</p>
+          <a href='/notes'>notes</a>
+          <img src='kuva.png' width='200' />
         </div>
       </body>
     </html>
-  `
-}
+`)
+} 
 
 app.get('/', (req, res) => {
   const page = getFrontPageHtml(notes.length)
@@ -116,7 +116,8 @@ The content of the HTML page has been saved as a template string, or a string wh
 
 Writing HTML in the midst of the code is of course not smart, but for old-school PHP-programmers it was a normal practice.
 
-In traditional web applications the browser is "dumb". It only fetches HTML data from the server, and all application logic is on the server. A server can be created for example using Java Spring like on the course [Web-palvelinohjelmointi](https://courses.helsinki.fi/fi/tkt21007/119558639), Python Flask like on the course [tietokantasovellus](https://materiaalit.github.io/tsoha-18/) or  [Ruby on Railsilla](http://rubyonrails.org/).
+In traditional web applications the browser is "dumb". It only fetches HTML data from the server, and all application logic is on the server. A server can be created for example using Java Spring like on the University of Helsinki course [Web-palvelinohjelmointi](https://courses.helsinki.fi/fi/tkt21007/119558639), Python Flask like on the course [tietokantasovellus](https://materiaalit.github.io/tsoha-18/) or [Ruby on Railsilla](http://rubyonrails.org/).
+
 The example uses [Express](https://expressjs.com/) from Node.js. 
 This course will use Node.js and Express to create web servers. 
 
@@ -125,11 +126,11 @@ This course will use Node.js and Express to create web servers.
 Keep the developer console open. Empty the console by clicking the &empty; symbol. 
 Now when you go to the [notes](https://fullstack-exampleapp.herokuapp.com/notes) page, the browser does 4 HTTP requests: 
 
-![](../../images/0/8.png)
+![](../../images/0/8e.png)
 
 All of the requests have <i>different</i> types. The first request's type is <i>document</i>. It is the HTML code of the page, and it looks as follows: 
 
-![](../../images/0/9.png)
+![](../../images/0/9e.png)
 
 When we compare the page shown on the browser and the HTML code returned by the server, we notice that the code does not contain the list of notes. 
 The [head](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head)-section of the HTML contains a [script](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script)-tag, which causes the browser to fetch a JavaScript file called <i>main.js</i>.
@@ -161,7 +162,7 @@ xhttp.onreadystatechange = function() {
 xhttp.open('GET', '/data.json', true)
 xhttp.send()
 ```
-The details of the code are not important right now, but some code has been included to spice up the images and the text. We will properly start coding in [part 1](/osa1). The sample code in this part is actually not relevant at all to the coding techniques of this course. 
+The details of the code are not important right now, but some code has been included to spice up the images and the text. We will properly start coding in [part 1](/en/part1). The sample code in this part is actually not relevant at all to the coding techniques of this course. 
 
 > Some might wonder why xhttp-object is used instead of the modern fetch. This is due to not wanting to go into promises at all yet, and the code having a secondary role in this part. We will return to modern ways to make requests to the server in part 2. 
 
@@ -177,12 +178,12 @@ This is the down-most request shown on the Network tab.
 
 We can try going to the address <https://fullstack-exampleapp.herokuapp.com/data.json> straight from the browser:
 
-![](../../images/0/10.png)
+![](../../images/0/10e.png)
 
 There we find the notes in [JSON](https://en.wikipedia.org/wiki/JSON) "raw data". 
 By default, the browser is not too good at displaying JSON-data. Plugins can be used to handle the formatting. Install for example [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) to Chrome, and reload the page. The data is now much more nicely formatted. 
 
-![](../../images/0/11.png)
+![](../../images/0/11e.png)
 
 So, the JavaScript code of the notes page above downloads the JSON-data containing the notes, and forms a bullet-point list from the note contents: 
 
@@ -223,11 +224,11 @@ data.forEach(function(note) {
 Now open the <i>Console</i>-tab on your developer console:
 
 
-![](../../images/0/12.png)
+![](../../images/0/12e.png)
 
 By clicking the little triangle at the beginning of the line, you can expand the text on the console.
 
-![](../../images/0/13.png)
+![](../../images/0/13e.png)
 
 This output on the console is caused by <em>console.log</em> command in the code:
 
@@ -250,7 +251,7 @@ The structure of the code is a bit odd:
 var xhttp = new XMLHttpRequest()
 
 xhttp.onreadystatechange = function() {
-  // koodi, joka käsittelee palvelimen vastauksen
+  // code that takes care of the server response
 }
 
 xhttp.open('GET', '/data.json', true)
@@ -269,7 +270,7 @@ an <i>event handler</i> for event <i>onreadystatechange</i> is defined for the <
 ```js
 xhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
-    // koodi, joka käsittelee palvelimen vastauksen
+    // code that takes care of the server response
   }
 )
 ```
@@ -299,7 +300,7 @@ html
 
 The same treelike structure can be seen on the console tab <i>Elements</i>.
 
-![](../../images/0/14.png)
+![](../../images/0/14e.png)
 
 The functioning of the browser is based on the idea of depicting HTML elements as a tree. 
 
@@ -327,9 +328,9 @@ document.getElementById('notes').appendChild(ul)
 
 ### manipulating the document-object from console
 
-The topmost node of the DOM tree of a HTML document is called the <em>document</em>. You can access this object from the Console-tab: 
+The topmost node of the DOM tree of a HTML document is called the <em>document</em>. You can access this object from the Console-tab (you have to type it by yourself): 
 
-![](../../images/0/15.png)
+![](../../images/0/15e.png)
 
 We can perform various operations on a web-page using the DOM-API and utilizing the <em>document</em> object. 
 
@@ -339,23 +340,23 @@ First, we'll get the list of notes from the page. The list is in the first ul-el
 
 
 ```js
-lista = document.getElementsByTagName('ul')[0]
+list = document.getElementsByTagName('ul')[0]
 ```
 
 Then create a new li-element and add some text content to it:
 
 ```js
-uusi = document.createElement('li')
-uusi.textContent = 'Sivun manipulointi konsolista on helppoa'
+newElement = document.createElement('li')
+newElement.textContent = 'Page manipulation from console is easy'
 ```
 
 And add the new li-element to the list:
 
 ```js
-lista.appendChild(uusi)
+list.appendChild(newElement)
 ```
 
-![](../../images/0/16.png)
+![](../../images/0/16e.png)
 
 Even though the page updates on your browser, the changes are not permanent. If the page is reloaded, the new note will dissappear, because the changes were not pushed to the server. The JavaScript code the browser fetches will always create the list of notes based on JSON-data from address <https://fullstack-exampleapp.herokuapp.com/data.json>.
 
@@ -385,7 +386,7 @@ The classes are [attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/G
 
 CSS attributes can be examined on the <i>elements</i> tab on the console:  
 
-![](../../images/0/17.png)
+![](../../images/0/17e.png)
 
 The outermost <i>div</i> element has the class <i>container</i>. The <i>ul</i> element containing the list of notes has the class <i>notes</i>.
 
@@ -397,7 +398,7 @@ HTML elements can also have other attributes than classes. The <i>div</i> elemen
 
 The <i>Elements</i> tab of the console can be used to change the styles of the elements. 
 
-![](../../images/0/18.png)
+![](../../images/0/18e.png)
 
 Changes made on the console will not be permanent. If you want to make lasting changes, they must be saved to the CSS style sheet on the server. 
 
@@ -406,7 +407,7 @@ Changes made on the console will not be permanent. If you want to make lasting c
 
 Let's revise what happens when the page https://fullstack-exampleapp.herokuapp.com/notes is opened on the browser. 
 
-![](../../images/0/19b.png)
+![](../../images/0/19e.png)
 
 - The browser fetches the HTML code defining the content and the structure of the page from the server using a HTTP GET request.
 - Links in the HTML code cause the browser to also fetch the CSS style sheet <i>main.css</i>...
@@ -666,24 +667,24 @@ In chapter [Loading a page containing JavaScript - revised](/osa0/web_sovellukse
 The diagram was made using [websequencediagrams](https://www.websequencediagrams.com) service as follows: 
 
 ```
-selain->palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/notes
-palvelin-->selain: HTML-koodi
-selain->palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.css
-palvelin-->selain: main.css
-selain->palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.js
-palvelin-->selain: main.js
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/notes
+server-->browser: HTML-code
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.css
+server-->browser: main.css
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.js
+server-->browser: main.js
 
-note over selain:
-selain alkaa suorittaa js-koodia
-joka pyytää JSON-datan palvelimelta
+note over browser:
+browser starts executing js-code
+that requests JSON data from server 
 end note
 
-selain->palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/data.json
-palvelin-->selain: [{ content: "HTML on helppoa", date: "2019-01-01" }, ...]
+browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/data.json
+server-->browser: [{ content: "HTML is easy", date: "2019-05-23" }, ...]
 
-note over selain:
-selain suorittaa tapahtumankäsittelijän
-joka renderöi muistiinpanot näytölle
+note over browser:
+browser executes the event handler
+that renders notes to display
 end note
 ```
 

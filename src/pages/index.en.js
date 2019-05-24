@@ -149,7 +149,7 @@ const IndexPage = () => {
               <BodyText
                 className="col-7 col-8--mobile link"
                 style={{ marginRight: '2rem' }}
-                heading={{ title: 'Ajankohtaista', level: 'h3' }}
+                heading={{ title: 'Announcements', level: 'h3' }}
               />
             </Element>
 
@@ -203,7 +203,7 @@ const IndexPage = () => {
                 className="col-7 col-8--mobile"
                 style={{ marginRight: '2rem' }}
                 heading={{
-                  title: 'Materiaalin tekijä ja lisenssi',
+                  title: 'Authors and License',
                   level: 'h3',
                 }}
               />

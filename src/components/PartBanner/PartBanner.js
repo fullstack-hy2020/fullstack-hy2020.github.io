@@ -16,15 +16,15 @@ export const PartBanner = ({ lang }) => {
           const partNames =
             lang === 'en'
               ? [
-                  'Basics of Web Application Activity',
-                  'React Basics',
-                  'Communication with the server',
-                  'Programming the Server with Express NodeJS',
-                  'Testing Express Applications, User Management',
-                  'React Testing, Custom Hookit',
-                  'Manage application status with Redux library',
-                  'React router, style libraries and webpack',
-                  'GraphQL',
+                  'Fundamentals of Web apps',
+                  'Introduction to React',
+                  'Communicating with server',
+                  'Programming a server with NodeJS and Express',
+                  'Testing Express servers, user administration',
+                  'Testing React apps, custom hooks',
+                  'State management with Redux',
+                  'React router, styling app with CSS and webpack',
+                  'GraphQL'
                 ]
               : [
                   'Web-sovellusten toiminnan perusteet',
