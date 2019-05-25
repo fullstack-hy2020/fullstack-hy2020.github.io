@@ -165,7 +165,7 @@ note.save().then(response => {
 })
 ```
 
-Koodi siis olettaa, että sille annetan parametrina MongoDB Atlasissa luodulle käyttäjälle määritelty salasana. Komentoriviparametriin se pääsee käsiksi seuraavasti
+Koodi siis olettaa, että sille annetaan parametrina MongoDB Atlasissa luodulle käyttäjälle määritelty salasana. Komentoriviparametriin se pääsee käsiksi seuraavasti
 
 ```js
 const password = process.argv[2]
@@ -199,7 +199,7 @@ Data on nyt oikeassa kannassa. Hallintanäkymä sisältää myös toiminnon <i>c
 
 ### Skeema
 
-Yhteyden avaamisen jälkeen määritellään mustiinpanon [skeema](http://mongoosejs.com/docs/guide.html) ja sitä vastaava [model](http://mongoosejs.com/docs/models.html):
+Yhteyden avaamisen jälkeen määritellään muistiinpanon [skeema](http://mongoosejs.com/docs/guide.html) ja sitä vastaava [model](http://mongoosejs.com/docs/models.html):
 
 ```js
 const noteSchema = new mongoose.Schema({
@@ -767,7 +767,7 @@ const errorHandler = (error, request, response, next) => {
 app.use(errorHandler)
 ```
 
-Virhekäsittelijä tarkastaa onko kyse <i>CastError</i>-poikkeuksesta, eli virheellisestä olioid:stä, jos on, se lähettä pyynnön tehneelle selaimelle vastauksen käsittelijän parametrina olevan response-olion avulla. Muussa tapauksessa se siirtää funktiolla <em>next</em> virheen käsittelyn Expressin oletusarvoisen virheidenkäsittelijän hoidettavavksi.
+Virhekäsittelijä tarkastaa onko kyse <i>CastError</i>-poikkeuksesta, eli virheellisestä olioid:stä, jos on, se lähettää pyynnön tehneelle selaimelle vastauksen käsittelijän parametrina olevan response-olion avulla. Muussa tapauksessa se siirtää funktiolla <em>next</em> virheen käsittelyn Expressin oletusarvoisen virheidenkäsittelijän hoidettavavksi.
 
 ### Middlewarejen käyttöönottojärjestys
 
