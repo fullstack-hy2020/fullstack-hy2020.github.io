@@ -74,7 +74,7 @@ const Challenge = () => (
           ]}
         />
 
-        <Form />
+        <Form lang="en" />
       </Element>
     </Element>
 

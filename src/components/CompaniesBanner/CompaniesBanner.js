@@ -122,7 +122,7 @@ export const CompaniesBanner = ({ isFrontPage, lang }) => (
           <BodyText
             centered
             className="col-4 spacing push-right-3 challenge-title"
-            text="Full stack -haasteessa mukana"
+            text={lang === 'fi' ? 'Full stack -haasteessa mukana' : 'Taking part to Full stack challenge'}
           />
           <Element
             flex

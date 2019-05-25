@@ -53,10 +53,10 @@ const Challenge = () => (
         <BodyText
           headingFont
           text={[
-            'Finland needs more software developers. We want to grow the next generation of coders - one of the ways we choose is to participate in the Full Stack MOOC course. ',
-            'The University of Helsinki and Houston Inc. challenge both authors and companies to learn new things and expand their skills in the spirit of Full Stack. Also partners and launchers are Elisa Corporation, K-Group, Konecranes Plc, Terveystalo Oyj and Unity Technologies Finland Ltd. ',
-            'The goal of the challenge is to encourage learning. We offer a pre-assembled and thought-out Full Stack course that facilitates and accelerates familiarization with modern technologies used in production. The course is free of charge and is not tied to time or place. ',
-            'The course is built from an encoder to a coder and offers a new experience for a more experienced competitor. A good basic programming routine is required for the background information. ',
+            'The world is in dire need of software developers. We want to help breed the next generation of coders — one of our offered methods is to enroll in the Full Stack MOOC course.',
+            'The University of Helsinki and Houston Inc. have partnered up to challenge both individual developers and companies alike to learn and build upon their expertise in true Full Stack spirit. Among our affiliates and challenge initiators are Elisa Oyj, K-ryhmä, Konecranes Oyj, Terveystalo Oyj, and Unity Technologies Finland Ltd.',
+            'Our objective is to encourage learning. We offer a fully-assembled and purposefully-scoped Full Stack course that lowers the barrier of entry for learning about new state-of-the-art and production grade technologies. The course is free of charge and you can participate from anywhere at anytime, at your leisure.',
+            'The course is built by coders for coders, and offers something for both newcomers and seasoned industry veterans alike. The only prerequisite is a solid grasp of basic programming fundamentals.',
           ]}
         />
 
@@ -65,16 +65,16 @@ const Challenge = () => (
           headingFont
           heading={{
             level: 'h2',
-            title: 'Yritykset, ottakaa haaste vastaan!',
+            title: 'Companies, Heed The Call!',
           }}
           text={[
-            "By grabbing the challenge, you encourage the skills of your work community to learn new things. The Full Stack Online Course is a great addition to the company's in-service training portfolio and works well as a self-study tool among the company's other training opportunities",
-            'By participating in the challenge, you can communicate your own technological expertise outside the company - this helps both the image of the employer and the visibility of the application development professionals.',
-            'Participation in the challenge is free of charge. The logos of the companies that received the challenge will be placed on the Full Stack course page. ',
+            'By accepting the challenge you are encouraging and empowering the members of your working community to acquire new skills. The fully-online Full Stack course will make a great addition to your internal training and development programs and will serve well as self-study material amongst your other in-company training offerings.',
+            'By partaking in the challenge, you will send a strong message to the outside world about your company’s technical expertise — this will help build your employer image and increase your visibility to software industry professionals.',
+            'Joining the challenge is free of charge. Companies that heed the call and accept the challenge will have their logo proudly placed on the Full Stack course webpage.',
           ]}
         />
 
-        <Form />
+        <Form lang="en" />
       </Element>
     </Element>
 

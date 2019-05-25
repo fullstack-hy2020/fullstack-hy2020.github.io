@@ -85,6 +85,8 @@ class Form extends Component {
       question,
     } = this.state;
 
+    const { lang } = this.props
+
     return (
       <>
         {showForm ? (
@@ -92,20 +94,22 @@ class Form extends Component {
             {!formIsSent ? (
               <form onSubmit={this.handleSubmit} className="form col-10">
                 <p className="spacing--small">
-                  Nimi<span aria-hidden="true">*</span>
+                  {lang === 'fi' ? 'Nimi' : 'Name'}
+                  <span aria-hidden="true">*</span>
                 </p>
                 <input
                   required
                   autoComplete="off"
                   className="col-10"
-                  placeholder="Matti Meikäläinen"
+                  placeholder={lang === 'fi' ? "Matti Meikäläinen" : "Jane Doe"}
                   type="text"
                   name="name"
                   value={name}
                   onChange={this.handleChange}
                 />
                 <p className="spacing--small">
-                  Titteli<span aria-hidden="true">*</span>
+                  {lang === 'fi' ? 'Titteli' : 'Title'}
+                  <span aria-hidden="true">*</span>
                 </p>
                 <input
                   required
@@ -118,23 +122,24 @@ class Form extends Component {
                   onChange={this.handleChange}
                 />
                 <p className="spacing--small">
-                  Yritys<span aria-hidden="true">*</span>
+                  {lang === 'fi' ? 'Yritys' : 'Company'}
+                  <span aria-hidden="true">*</span>
                 </p>
                 <input
                   required
                   autoComplete="off"
                   className="col-10"
-                  placeholder="Yritys Oy"
+                  placeholder={lang === 'fi' ? "Yritys Oy" : "Company Inc"}
                   type="text"
                   name="organization"
                   value={organization}
                   onChange={this.handleChange}
                 />
                 <p className="spacing--small">
-                  Puhelinnumero<span aria-hidden="true">*</span>
+                  {lang === 'fi' ? 'Puhelinnumero' : 'Phone'}
+                  <span aria-hidden="true">*</span>
                 </p>
                 <input
-                  required
                   autoComplete="off"
                   className="col-10"
                   placeholder="+358 40 234 5678"
@@ -144,7 +149,8 @@ class Form extends Component {
                   onChange={this.handleChange}
                 />
                 <p className="spacing--small">
-                  Sähköpostiosoite<span aria-hidden="true">*</span>
+                  {lang === 'fi' ? 'Sähköpostiosoite' : 'email address'}
+                  <span aria-hidden="true">*</span>
                 </p>
                 <input
                   required
@@ -157,7 +163,7 @@ class Form extends Component {
                   onChange={this.handleChange}
                 />
                 <p className="spacing--small">
-                  Mistä kuulit Full Stack -haasteesta?
+                  {lang === 'fi' ? 'Mistä kuulit Full Stack -haasteesta?' : 'Where did you hear from the challenge'} 
                 </p>
                 <input
                   autoComplete="off"
@@ -171,14 +177,14 @@ class Form extends Component {
                   className="submit spacing spacing--after push-right-4"
                   type="submit"
                 >
-                  Lähetä
+                  {lang === 'fi' ? 'Lähetä' : 'Submit'}
                 </button>
               </form>
             ) : (
               <BodyText
                 className="spacing"
                 headingFont
-                text={['Kiitos! Otamme sinuun yhteyttä!']}
+                  text={[lang === 'fi' ? 'Kiitos! Otamme sinuun yhteyttä!' : 'Thanks! We will contact you soon!']}
               />
             )}
           </>
@@ -189,7 +195,7 @@ class Form extends Component {
                 className="about__challenge-button about__challenge-button--turquoise"
                 onClick={() => this.setState({ showForm: true })}
               >
-                Ilmoittaudu mukaan haasteeseen!
+                {lang ==='fi' ? 'Ilmoita yrityksesi mukaan haasteeseen!' : 'Register your company to Full stack challenge'}
               </button>
             </Element>
           </>
