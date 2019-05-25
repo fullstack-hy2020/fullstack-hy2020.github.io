@@ -3,9 +3,9 @@ import { ContentLiftup } from '../ContentLiftup/ContentLiftup';
 import React from 'react';
 import navigation from '../../content/partnavigation/partnavigation';
 
-const parts = Object.keys(navigation);
+export const PartBanner = ({ lang }) => {
+  const parts = Object.keys(navigation[lang]);
 
-export const PartBanner = () => {
   return (
     <Banner
       className="spacing spacing--after-small spacing--after-mobile offset"
@@ -13,17 +13,30 @@ export const PartBanner = () => {
     >
       <div className="container spacing flex-fix-aligning col-7--mobile">
         {parts.map(part => {
-          const partNames = [
-            'Web-sovellusten toiminnan perusteet',
-            'Reactin perusteet',
-            'Palvelimen kanssa tapahtuva kommunikointi',
-            'Palvelimen ohjelmointi NodeJS:n Express-kirjastolla',
-            'Express-sovellusten testaaminen, käyttäjänhallinta',
-            'React-sovelluksen testaaminen, custom hookit',
-            'Sovelluksen tilan hallinta Redux-kirjastolla',
-            'React router, tyylikirjastot ja webpack',
-            'GraphQL'
-          ];
+          const partNames =
+            lang === 'en'
+              ? [
+                  'Fundamentals of Web apps',
+                  'Introduction to React',
+                  'Communicating with server',
+                  'Programming a server with NodeJS and Express',
+                  'Testing Express servers, user administration',
+                  'Testing React apps, custom hooks',
+                  'State management with Redux',
+                  'React router, styling app with CSS and webpack',
+                  'GraphQL'
+                ]
+              : [
+                  'Web-sovellusten toiminnan perusteet',
+                  'Reactin perusteet',
+                  'Palvelimen kanssa tapahtuva kommunikointi',
+                  'Palvelimen ohjelmointi NodeJS:n Express-kirjastolla',
+                  'Express-sovellusten testaaminen, käyttäjänhallinta',
+                  'React-sovelluksen testaaminen, custom hookit',
+                  'Sovelluksen tilan hallinta Redux-kirjastolla',
+                  'React router, tyylikirjastot ja webpack',
+                  'GraphQL',
+                ];
 
           return (
             <ContentLiftup
@@ -34,9 +47,9 @@ export const PartBanner = () => {
                 alt: partNames[part],
               }}
               hoverImageSrc={require(`../../images/thumbnails/part-${part}_ovr.svg`)}
-              name={`Osa ${part}`}
+              name={`${lang === 'en' ? 'Part' : 'Osa'} ${part}`}
               summary={partNames[part]}
-              path={`/osa${part}`}
+              path={lang === 'en' ? `/en/part${part}` : `/osa${part}`}
             />
           );
         })}

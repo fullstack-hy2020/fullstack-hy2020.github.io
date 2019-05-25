@@ -74,11 +74,11 @@ const Challenge = () => (
           ]}
         />
 
-        <Form />
+        <Form lang="en" />
       </Element>
     </Element>
 
-    <CompaniesBanner />
+    <CompaniesBanner lang="fi" />
 
     <SubHeader
       className="col-10 spacing--after centered"

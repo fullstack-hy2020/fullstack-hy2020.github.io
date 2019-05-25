@@ -1,14 +1,14 @@
 import './ScrollNavigation.scss';
 
-import { Link } from 'gatsby';
-import kebabCase from 'lodash/fp/kebabCase';
-import snakeCase from 'lodash/fp/snakeCase';
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 
-import navigation from '../../content/partnavigation/partnavigation';
 import Accordion from '../Accordion/Accordion';
 import Element from '../Element/Element';
+import { Link } from 'gatsby';
+import PropTypes from 'prop-types';
+import kebabCase from 'lodash/fp/kebabCase';
+import navigation from '../../content/partnavigation/partnavigation';
+import snakeCase from 'lodash/fp/snakeCase';
 
 class ScrollNavigation extends Component {
   constructor(props) {
@@ -46,6 +46,7 @@ class ScrollNavigation extends Component {
       currentPath,
       currentPartTitle,
       colorCode,
+      lang
     } = this.props;
     let arr = [];
 
@@ -56,7 +57,7 @@ class ScrollNavigation extends Component {
             key={key}
             className="left-navigation-link"
             style={{ borderColor: colorCode }}
-            to={`/osa${part}/${snakeCase(partsNode[key])}`}
+            to={`/${lang === 'en' ? 'en/part' : 'osa'}${part}/${snakeCase(partsNode[key])}`}
           >{`${key} ${partsNode[key]}`}</Link>
         );
       } else {
@@ -94,7 +95,7 @@ class ScrollNavigation extends Component {
         dirColumn
         className={`scroll-navigation ${this.props.className}`}
       >
-        {this.loopThroughPartsNode(navigation[part])}
+        {this.loopThroughPartsNode(navigation[this.props.lang][part])}
       </Element>
     );
   }
@@ -102,10 +103,12 @@ class ScrollNavigation extends Component {
 
 ScrollNavigation.defaultProps = {
   className: '',
+  lang: 'fi',
 };
 
 ScrollNavigation.propTypes = {
   className: PropTypes.string,
+  lang: PropTypes.string.isRequired,
   colorCode: PropTypes.string.isRequired,
 };
 

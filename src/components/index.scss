@@ -125,6 +125,12 @@ a {
   @include from($desktop) {
     margin-bottom: $vertical-spacing * 5;
   }
+
+  &--mobile {
+    @include to($tablet) {
+      margin-bottom: $vertical-spacing * 5;
+    }
+  }
 }
 
 .spacing--after-small {
@@ -321,7 +327,7 @@ a {
 }
 
 .about__challenge-button {
-  background-color: $main;
+  box-shadow: -3px 5px $black;
   padding: 0.6rem 1rem;
   border: 3px solid $black;
   font-weight: $font-weight-semi-bold;
