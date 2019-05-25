@@ -142,7 +142,9 @@ export default class ContentTemplate extends Component {
     return (
       <Layout>
         <SEO
-          title={`Fullstack osa${part} | ${this.state.h1Title}`}
+          title={`Fullstack ${lang === 'en' ? 'part' : 'osa'}${part} | ${
+            this.state.h1Title
+          }`}
           description={mainSEOdescription}
           keywords={[
             ...mainSEOtags,

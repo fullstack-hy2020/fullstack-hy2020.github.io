@@ -20,7 +20,11 @@ const hasNext = (letter, part, lang) => {
   );
 };
 
-const labelOsaPart = (lang) => lang === 'en' ? 'Part' : 'Osa'
+const labelOsaPart = lang => (lang === 'en' ? 'Part' : 'Osa');
+const prevPartText = lang =>
+  lang === 'en' ? 'Previous part' : 'Edellinen osa';
+const nextPartText = lang => (lang === 'en' ? 'Next part' : 'Seuraava osa');
+const langUrl = lang => `/${lang === 'en' ? 'en/part' : 'osa'}`;
 
 const PrevNext = ({ part, letter, lang }) => {
   const getPrev = () => {
@@ -28,13 +32,15 @@ const PrevNext = ({ part, letter, lang }) => {
       return (
         <>
           <Link
-            to={`/${lang === 'en' ? 'en/part' : 'osa'}${part - 1}`}
+            to={`${langUrl(lang)}${part - 1}`}
             className="col-4--mobile push-right-1 prev"
           >
             <Element flex dirColumn>
-              <p>{labelOsaPart(lang)}  {part - 1}</p>
+              <p>
+                {labelOsaPart(lang)} {part - 1}
+              </p>
 
-              <b>{lang === 'en' ? 'Previous part' : 'Edellinen osa'}</b>
+              <b>{prevPartText(lang)}</b>
             </Element>
           </Link>
 
@@ -48,15 +54,17 @@ const PrevNext = ({ part, letter, lang }) => {
         return (
           <>
             <Link
-              to={`/${lang === 'en' ? 'en/part' : 'osa'}${part}/${snakeCase(
+              to={`${langUrl(lang)}${part}/${snakeCase(
                 navigation[lang][part][prevChar(letter)]
               )}`}
               className="col-4--mobile push-right-1 prev"
             >
               <Element flex dirColumn>
-                <p>{labelOsaPart(lang)} {`${part}${prevChar(letter)}`}</p>
+                <p>
+                  {labelOsaPart(lang)} {`${part}${prevChar(letter)}`}
+                </p>
 
-                <b>{lang === 'en' ? 'Previous part' : 'Edellinen osa'}</b>
+                <b>{prevPartText(lang)}</b>
               </Element>
             </Link>
 
@@ -69,13 +77,15 @@ const PrevNext = ({ part, letter, lang }) => {
         return (
           <>
             <Link
-              to={`/${lang === 'en' ? 'en/part' : 'osa'}${part - 1}`}
+              to={`${langUrl(lang)}${part - 1}`}
               className="col-4--mobile push-right-1 prev"
             >
               <Element flex dirColumn>
-                <p>{labelOsaPart(lang)} {part - 1}</p>
+                <p>
+                  {labelOsaPart(lang)} {part - 1}
+                </p>
 
-                <b>{lang === 'en' ? 'Previous part' : 'Edellinen osa'}</b>
+                <b>{prevPartText(lang)}</b>
               </Element>
             </Link>
 
@@ -96,13 +106,15 @@ const PrevNext = ({ part, letter, lang }) => {
     if (!letter && hasPart(part + 1, lang)) {
       return (
         <Link
-          to={`/${lang === 'en' ? 'en/part' : 'osa'}${part + 1}`}
+          to={`${langUrl(lang)}${part + 1}`}
           className="col-4--mobile push-left-1 next"
         >
           <Element flex dirColumn>
-            <p>{labelOsaPart(lang)} {part + 1}</p>
+            <p>
+              {labelOsaPart(lang)} {part + 1}
+            </p>
 
-            <b>{lang === 'en' ? 'Next part' : 'Seuraava osa'}</b>
+            <b>{nextPartText(lang)}</b>
           </Element>
         </Link>
       );
@@ -110,28 +122,32 @@ const PrevNext = ({ part, letter, lang }) => {
       if (nextLetterExists(letter, part, lang)) {
         return (
           <Link
-            to={`/${lang === 'en' ? 'en/part' : 'osa'}${part}/${snakeCase(
+            to={`${langUrl(lang)}${part}/${snakeCase(
               navigation[lang][part][nextChar(letter)]
             )}`}
             className="col-4--mobile push-left-1 next"
           >
             <Element flex dirColumn>
-              <p>{labelOsaPart(lang)} {`${part}${nextChar(letter)}`}</p>
+              <p>
+                {labelOsaPart(lang)} {`${part}${nextChar(letter)}`}
+              </p>
 
-              <b>{lang === 'en' ? 'Next part' : 'Seuraava osa'}</b>
+              <b>{nextPartText(lang)}</b>
             </Element>
           </Link>
         );
       } else if (hasPart(part + 1, lang)) {
         return (
           <Link
-            to={`/${lang === 'en' ? 'en/part' : 'osa'}${part + 1}`}
+            to={`${langUrl(lang)}${part + 1}`}
             className="col-4--mobile push-left-1 next"
           >
             <Element flex dirColumn>
-              <p>{labelOsaPart(lang)}  {part + 1}</p>
+              <p>
+                {labelOsaPart(lang)} {part + 1}
+              </p>
 
-              <b>{lang === 'en' ? 'Next part' : 'Seuraava osa'}</b>
+              <b>{nextPartText(lang)}</b>
             </Element>
           </Link>
         );
