@@ -416,15 +416,15 @@ Kerrataan vielä mitä tapahtuu kun selaimessa avataan sivu https://fullstack-ex
 
 Tutkitaan seuraavaksi sitä, miten uusien muistiinpanojen luominen tapahtuu. Tätä varten muistiinpanojen sivu sisältää lomakkeen eli [form-elementin](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form).
 
-![](../../images/0/20.png)
+![](../../images/0/20e.png)
 
 Kun lomakkeen painiketta painetaan, lähettää selain lomakkeelle syötetyn datan palvelimelle. Avataan <i>Network</i>-välilehti ja katsotaan miltä lomakkeen lähettäminen näyttää:
 
-![](../../images/0/21.png)
+![](../../images/0/21e.png)
 
 Lomakkeen lähettäminen aiheuttaa yllättäen yhteensä <i>viisi</i> HTTP-pyyntöä. Näistä ensimmäinen vastaa lomakkeen lähetystapahtumaa. Tarkennetaan siihen:
 
-![](../../images/0/22.png)
+![](../../images/0/22e.png)
 
 Kyseessä on siis [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) -pyyntö ja se on tehty palvelimen osoitteeseen <i>new\_note</i>. Palvelin vastaa pyyntöön HTTP-statuskoodilla 302. Kyseessä on ns. [uudelleenohjauspyyntö](https://en.wikipedia.org/wiki/URL_redirection) eli redirectaus, minkä avulla palvelin kehottaa selainta tekemään automaattisesti uuden HTTP GET -pyynnön headerin <i>Location</i> kertomaan paikkaan, eli osoitteeseen <i>notes</i>.
 
@@ -432,11 +432,11 @@ Selain siis lataa uudelleen muistiinpanojen sivun. Sivunlataus saa aikaan myös 
 
 Network-välilehti näyttää myös lomakkeen mukana lähetetyn datan:
 
-![](../../images/0/23.png)
+![](../../images/0/23e.png)
 
 Lomakkeen lähettäminen tapahtuu HTTP POST -pyyntönä ja osoitteeseen <i>new_note</i> form-tagiin määriteltyjen attribuuttien <i>action</i>  ja <i>method</i>  ansiosta:
 
-![](../../images/0/24.png)
+![](../../images/0/24e.png)
 
 POST-pyynnöstä huolehtiva palvelimen koodi on yksinkertainen (huom: tämä koodi on siis palvelimella eikä näy selaimen lataamassa Javascript-tiedostossa):
 
@@ -498,13 +498,13 @@ Sovellus näyttää ensivilkaisulta täsmälleen samalta kuin edellinen versio.
 
 HTML-koodi on lähes samanlainen, erona on ladattava Javascript-tiedosto (<i>spa.js</i>) ja pieni muutos form-tagin määrittelyssä:
 
-![](../../images/0/25.png)
+![](../../images/0/25e.png)
 
 Lomakkeelle ei ole nyt määritelty ollenkaan <i>action</i>- eikä <i>method</i>-attribuutteja, jotka määräävät minne ja miten selain lähettää lomakkeelle syötetyn datan.
 
 Avaa nyt <i>Network</i>-välilehti ja tyhjennä se &empty;-symbolilla. Kun luot uuden muistiinpanon, huomaat, että selain lähettää ainoastaan yhden pyynnön palvelimelle:
 
-![](../../images/0/26.png)
+![](../../images/0/26e.png)
 
 Pyyntö kohdistuu osoitteeseen <i>new\_note\_spa</i>, on tyypiltään POST ja se sisältää JSON-muodossa olevan uuden muistiinpanon, johon kuuluu sekä sisältö (<i>content</i>), että aikaleima (<i>date</i>):
 
@@ -517,7 +517,7 @@ Pyyntö kohdistuu osoitteeseen <i>new\_note\_spa</i>, on tyypiltään POST ja se
 
 Pyyntöön liitetty headeri <i>Content-Type</i> kertoo palvelimelle, että pyynnön mukana tuleva data on JSON-muotoista:
 
-![](../../images/0/27.png)
+![](../../images/0/27e.png)
 
 Ilman headeria palvelin ei osaisi parsia pyynnön mukana tulevaa dataa oiken.
 

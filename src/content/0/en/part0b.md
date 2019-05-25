@@ -422,17 +422,16 @@ Next let's examine how adding a new note is done.
 
 The Notes page contains a [form-element](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form)
 
-![](../../images/0/20.png)
-
+![](../../images/0/20e.png)
 
 When the button on the form is clicked, the browser will send the user input to the server. Let's open the <i>Network</i> tab and see what submitting the form looks like: 
 
-![](../../images/0/21.png)
+![](../../images/0/21e.png)
 
 Surprisingly, submitting the form causes altogether <i>five</i> HTTP requests. 
 The first one is the form submit event. Let's zoom into it: 
 
-![](../../images/0/22.png)
+![](../../images/0/22e.png)
 
 It is a [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request to the server address <i>new\_note</i>. The server responds with HTTP status code 302. This is an [URL redirect](https://en.wikipedia.org/wiki/URL_redirection), with which the server asks the browser to do a new HTTP GET request to the address defined in the header's <i>Location</i> - the address <i>notes</i>.
 
@@ -440,11 +439,11 @@ So, the browser reloads the Notes page. The reload causes three more HTTP reques
 
 The network tab also shows the data submitted with the form: 
 
-![](../../images/0/23.png)
+![](../../images/0/23e.png)
 
 The Form tag has attributes <i>action</i> and <i>method</i>, which define that submitting the form is done as a HTTP POST request to the address <i>new_note</i>. 
 
-![](../../images/0/24.png)
+![](../../images/0/24e.png)
 
 The code on the server responsible for the POST request is simple (NB: this code is on the server, and not on the JavaScript code fetched by the browser):
 
@@ -507,13 +506,13 @@ A single page app version of our example application can be found from <https://
 At first glance, the application looks exactly the same as the previous one. 
 The HTML code is almost identical, but the JavaScript file is different (<i>spa.js</i>) and there is a small change in the form-tag is defined: 
 
-![](../../images/0/25.png)
+![](../../images/0/25e.png)
 
 The form has no <i>action</i> or <i>method</i> attributes to define how and where to send the input data. 
 
 Open the <i>Network</i>-tab and empty it by clicking the &empty; symbol. When you now create a new note, you'll notice that the browser sends only one request to the server. 
 
-![](../../images/0/26.png)
+![](../../images/0/26e.png)
 
 The POST request to the address <i>new\_note\_spa</i> contains the new note as JSON-data containing both the content of the note (<i>content</i>) and the timestamp (<i>date</i>): 
 
@@ -526,7 +525,7 @@ The POST request to the address <i>new\_note\_spa</i> contains the new note as J
 
 The <i>Content-Type</i> header of the request tells the server, that the included data is represented in the JSON format. 
 
-![](../../images/0/27.png)
+![](../../images/0/27e.png)
 
 Without this header, the server would not know how to correctly parse the data. 
 
@@ -630,12 +629,12 @@ One good way to name the directories in your submission repository is as follows
 ```
 part0
 part1
-  kurssitiedot
+  courseinfo
   unicafe
-  anekdootit
+  anecdotes
 part2
-  puhelinluettelo
-  maiden_tiedot
+  phonebook
+  countries
 ```
 
 So each part has it's own directory, which contains a directory for each exercise set (like the unicafe exercises in part 1). 

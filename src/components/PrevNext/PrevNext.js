@@ -20,6 +20,8 @@ const hasNext = (letter, part, lang) => {
   );
 };
 
+const labelOsaPart = (lang) => lang === 'en' ? 'Part' : 'Osa'
+
 const PrevNext = ({ part, letter, lang }) => {
   const getPrev = () => {
     if (!letter && hasPart(part - 1, lang)) {
@@ -30,7 +32,7 @@ const PrevNext = ({ part, letter, lang }) => {
             className="col-4--mobile push-right-1 prev"
           >
             <Element flex dirColumn>
-              <p>Osa {part - 1}</p>
+              <p>{labelOsaPart(lang)}  {part - 1}</p>
 
               <b>{lang === 'en' ? 'Previous part' : 'Edellinen osa'}</b>
             </Element>
@@ -52,7 +54,7 @@ const PrevNext = ({ part, letter, lang }) => {
               className="col-4--mobile push-right-1 prev"
             >
               <Element flex dirColumn>
-                <p>Osa {`${part}${prevChar(letter)}`}</p>
+                <p>{labelOsaPart(lang)} {`${part}${prevChar(letter)}`}</p>
 
                 <b>{lang === 'en' ? 'Previous part' : 'Edellinen osa'}</b>
               </Element>
@@ -71,7 +73,7 @@ const PrevNext = ({ part, letter, lang }) => {
               className="col-4--mobile push-right-1 prev"
             >
               <Element flex dirColumn>
-                <p>Osa {part - 1}</p>
+                <p>{labelOsaPart(lang)} {part - 1}</p>
 
                 <b>{lang === 'en' ? 'Previous part' : 'Edellinen osa'}</b>
               </Element>
@@ -98,7 +100,7 @@ const PrevNext = ({ part, letter, lang }) => {
           className="col-4--mobile push-left-1 next"
         >
           <Element flex dirColumn>
-            <p>Osa {part + 1}</p>
+            <p>{labelOsaPart(lang)} {part + 1}</p>
 
             <b>{lang === 'en' ? 'Next part' : 'Seuraava osa'}</b>
           </Element>
@@ -114,7 +116,7 @@ const PrevNext = ({ part, letter, lang }) => {
             className="col-4--mobile push-left-1 next"
           >
             <Element flex dirColumn>
-              <p>Osa {`${part}${nextChar(letter)}`}</p>
+              <p>{labelOsaPart(lang)} {`${part}${nextChar(letter)}`}</p>
 
               <b>{lang === 'en' ? 'Next part' : 'Seuraava osa'}</b>
             </Element>
@@ -127,7 +129,7 @@ const PrevNext = ({ part, letter, lang }) => {
             className="col-4--mobile push-left-1 next"
           >
             <Element flex dirColumn>
-              <p>Osa {part + 1}</p>
+              <p>{labelOsaPart(lang)}  {part + 1}</p>
 
               <b>{lang === 'en' ? 'Next part' : 'Seuraava osa'}</b>
             </Element>
