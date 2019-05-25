@@ -93,7 +93,7 @@ const App = (props) => {
 
 Lomakkeelle on lisätty myös tapahtumankäsittelijäksi funktio _addNote_ reagoimaan sen "lähettämiseen", eli napin painamiseen.
 
-Tapahtumankäsittelijä on [osasta 1](/osa1#tapahtumankäsittely) tuttuun tapaan määritelty seuraavasti:
+Tapahtumankäsittelijä on [osasta 1](/osa1/komponentin_tila_ja_tapahtumankasittely#tapahtumankasittely) tuttuun tapaan määritelty seuraavasti:
 
 ```js
 const addNote = (event) => {
@@ -430,7 +430,7 @@ Joskus tilaa tallettavia ja tarvittaessa muitakin muuttujia voi olla hyödyllist
 <div>debug: {newName}</div>
 ```
 
-Muista myös osan 1 luku [React-sovellusten debuggaus](#react-sovellusten-debuggaus), erityisesti [react developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) on välillä todella kätevä komponentin tilan muutosten seuraamisessa.
+Muista myös osan 1 luku [React-sovellusten debuggaus](/osa1/monimutkaisempi_tila_reactin_debuggaus#react-sovellusten-debuggaus), erityisesti [react developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) on välillä todella kätevä komponentin tilan muutosten seuraamisessa.
 
 Sovellus voi näyttää tässä vaiheessa seuraavalta:
 
