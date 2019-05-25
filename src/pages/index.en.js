@@ -1,4 +1,3 @@
-import Arrow from '../components/Arrow/Arrow';
 import { Banner } from './../components/Banner/Banner';
 import { BodyText } from '../components/BodyText/BodyText';
 import { CompaniesBanner } from '../components/CompaniesBanner/CompaniesBanner';
@@ -73,16 +72,12 @@ const IndexPage = () => {
             headingLevel="h2"
           />
 
-          <Arrow
-            className="col-10 arrow__container--with-link"
-            bold
-            thickBorder
-            style={{ fontSize: '1.2rem' }}
-            link="/en/about"
-            content={[
-              { backgroundColor: colors['main'], text: 'Start course' },
-            ]}
-          />
+          <a
+            className="col-2 centered about__challenge-button spacing--after--mobile"
+            href="/en/about"
+          >
+            Start course
+          </a>
 
           <div className="spacing--small" />
 

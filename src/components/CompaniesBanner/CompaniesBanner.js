@@ -84,6 +84,7 @@ const inChallenge = [
   'Umbrella Interactive',
   'Tabella',
   'Nextup',
+  // 'Vertix'
 ];
 
 export const CompaniesBanner = ({ isFrontPage, lang }) => (
@@ -122,7 +123,11 @@ export const CompaniesBanner = ({ isFrontPage, lang }) => (
           <BodyText
             centered
             className="col-4 spacing push-right-3 challenge-title"
-            text={lang === 'fi' ? 'Full stack -haasteessa mukana' : 'Taking part to Full stack challenge'}
+            text={
+              lang === 'fi'
+                ? 'Full stack -haasteessa mukana'
+                : 'Taking part to Full stack challenge'
+            }
           />
           <Element
             flex
