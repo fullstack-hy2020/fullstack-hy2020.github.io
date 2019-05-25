@@ -11,11 +11,11 @@ Alamme nyt tutustua kurssin ehkä tärkeimpään teemaan, [React](https://reactj
 
 Ehdottomasti helpoin tapa päästä alkuun on [create-react-app](https://github.com/facebookincubator/create-react-app)-nimisen työkalun käyttö. <i>create-react-app</i> on mahdollista asentaa omalle koneelle, mutta asennukseen ei ole tarvetta jos Noden mukana asentunut <i>npm</i>-työkalu on versioltaan vähintään <i>5.3</i>. Tällöin npm:n mukana asentuu komento </i>npx</i>, joka mahdollistaa create-react-app:in käytön asentamatta sitä erikseen. Npm:n version saa selville komennolla <em>npm -v</em>.
 
-Luodaan sovellus nimeltään <i>osa1</i> ja mennään sovelluksen sisältämään hakemistoon:
+Luodaan sovellus nimeltään <i>part1</i> ja mennään sovelluksen sisältämään hakemistoon:
 
 ```bash
-$ npx create-react-app osa1
-$ cd osa1
+$ npx create-react-app part1
+$ cd part1
 ```
 
 Kaikki tässä (ja jatkossa) annettavat merkillä <em>$</em> alkavat komennot on kirjoitettu terminaaliin eli komentoriville. Merkkiä <em>$</em> ei tule kirjoittaa, sillä se edustaa komentokehoitetta.
@@ -30,7 +30,7 @@ Sovellus käynnistyy oletusarvoisesti localhostin porttiin 3000, eli osoitteesee
 
 Chromen pitäisi aueta automaattisesti. Avaa konsoli **välittömästi**. Avaa myös tekstieditori siten, että näet koodin ja web-sivun samaan aikaan ruudulla:
 
-![](../../images/1/1a.png)
+![](../../images/1/1e.png)
 
 Sovelluksen koodi on hakemistossa <i>src</i>. Yksinkertaistetaan valmiina olevaa koodia siten, että tiedoston <i>index.js</i> sisällöksi tulee:
 
@@ -264,7 +264,7 @@ const App = () => {
   return (
     <div>
       <h1>Greetings</h1>
-      <Hello name="Arto" /> // highlight-line
+      <Hello name="Maya" /> // highlight-line
       <Hello name="Pekka" /> // highlight-line
     </div>
   )
@@ -293,7 +293,7 @@ const App = () => {
   return (
     <div>
       <h1>Greetings</h1>
-      <Hello name="Arto" age={26 + 10} /> // highlight-line
+      <Hello name="Maya" age={26 + 10} /> // highlight-line
       <Hello name={nimi} age={ika} />     // highlight-line
     </div>
   )
@@ -332,7 +332,7 @@ const App = () => {
   return (
     <div>
       <h1>Greetings</h1>
-      <Hello name="Arto" age={26 + 10} />
+      <Hello name="Maya" age={26 + 10} />
       <footer /> // highlight-line
     </div>
   )
@@ -347,7 +347,7 @@ Kannattaa myös pitää mielessä, että React-komponentin sisällön tulee (yle
 const App = () => {
   return (
     <h1>Greetings</h1>
-    <Hello name="Arto" age={26 + 10} />
+    <Hello name="Maya" age={26 + 10} />
     <Footer />
   )
 }
@@ -363,7 +363,7 @@ Juurielementin käyttö ei ole ainoa toimiva vaihtoehto, myös <i>taulukollinen<
 const App = () => {
   return [
     <h1>Greetings</h1>,
-    <Hello name="Arto" age={26 + 10} />,
+    <Hello name="Maya" age={26 + 10} />,
     <Footer />
   ]
 }
@@ -381,7 +381,7 @@ const App = () => {
   return (
     <>
       <h1>Greetings</h1>
-      <Hello name="Arto" age={26 + 10} />
+      <Hello name="Maya" age={26 + 10} />
       <Hello name={name} age={age} />
       <Footer />
     </>
@@ -438,12 +438,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 const App = () => {
-  const course = 'Half Stack -sovelluskehitys'
-  const part1 = 'Reactin perusteet'
+  const course = 'Half Stack application development'
+  const part1 = 'Fundamentals of React'
   const exercises1 = 10
-  const part2 = 'Tiedonvälitys propseilla'
+  const part2 = 'Using props to pass data'
   const exercises2 = 7
-  const part3 = 'Komponenttien tila'
+  const part3 = 'State of a component'
   const exercises3 = 14
 
   return (
@@ -458,7 +458,7 @@ const App = () => {
       <p>
         {part3} {exercises3}
       </p>
-      <p>yhteensä {exercises1 + exercises2 + exercises3} tehtävää</p>
+      <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>
     </div>
   )
 }

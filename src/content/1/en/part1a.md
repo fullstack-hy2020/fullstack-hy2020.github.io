@@ -14,8 +14,8 @@ The easiest way to get started by far is using a tool called [create-react-app](
 Let's create an application called <i>part1</i> and navigate to its directory.
 
 ```bash
-$ npx create-react-app osa1
-$ cd osa1
+$ npx create-react-app part1
+$ cd part1
 ```
 
 Every command, here and in the future, starting with the character <em>$</em> is typed into a terminal prompt, aka the command-line. The character <em>$</em> is not to be typed out because it represents the prompt.
@@ -30,7 +30,7 @@ By default, the application runs in localhost port 3000 with the address <http:/
 
 Chrome should launch automatically. Open the console **immediately**. Also open a text editor so that you can view the code as well as the web-page at the same time on the screen:
 
-![](../../images/1/1a.png)
+![](../../images/1/1e.png)
 
 The code of the application resides in the <i>src</i> folder. Let's simplify the default code such that the contents of the file <i>index.js</i> looks like:
 
@@ -173,7 +173,7 @@ ReactDOM.render(
 )
 ```
 
-The compiling is handled by [Babel](https://babeljs.io/repl/). Projects created with *create-react-app* are configured to compile automatically. We will learn more about this topic in [part 7](/part7) of this course.
+The compiling is handled by [Babel](https://babeljs.io/repl/). Projects created with *create-react-app* are configured to compile automatically. We will learn more about this topic in [part 7](/en/part7) of this course.
 
 It is also possible to write React as "pure Javascript" without using JSX. Although, nobody with a sound mind would actually do so.
 
@@ -237,7 +237,7 @@ const App = () => {
 
 Writing components with React is easy, and by combining components, even a more complex application can be kept fairly maintainable. In deed, a core philosophy of React is composing applications from many specialized reusable components.
 
-Another strong convention is the idea of a <i>root component</i> called <i>App</i> at the top of the component tree of the application. Nevertheless, as we will find in [part 6](/part6), there are situations where the component <i>App</i> is not exactly the root, but is wrapped within an appropriate utility component.
+Another strong convention is the idea of a <i>root component</i> called <i>App</i> at the top of the component tree of the application. Nevertheless, as we will find in [part 6](/en/part6), there are situations where the component <i>App</i> is not exactly the root, but is wrapped within an appropriate utility component.
 
 ### props: passing data to components
 
@@ -264,8 +264,8 @@ const App = () => {
   return (
     <div>
       <h1>Greetings</h1>
-      <Hello name="Arto" /> // highlight-line
-      <Hello name="Pekka" /> // highlight-line
+      <Hello name="George" /> // highlight-line
+      <Hello name="Daisy" /> // highlight-line
     </div>
   )
 }
@@ -287,13 +287,13 @@ const Hello = (props) => {
 }
 
 const App = () => {
-  const nimi = 'Pekka' // highlight-line
+  const nimi = 'Peter' // highlight-line
   const ika = 10       // highlight-line
 
   return (
     <div>
       <h1>Greetings</h1>
-      <Hello name="Arto" age={26 + 10} /> // highlight-line
+      <Hello name="Maya" age={26 + 10} /> // highlight-line
       <Hello name={nimi} age={ika} />     // highlight-line
     </div>
   )
@@ -332,7 +332,7 @@ const App = () => {
   return (
     <div>
       <h1>Greetings</h1>
-      <Hello name="Arto" age={26 + 10} />
+      <Hello name="Maya" age={26 + 10} />
       <footer /> // highlight-line
     </div>
   )
@@ -347,7 +347,7 @@ Take note that (usually) the content of a React component needs to contain **one
 const App = () => {
   return (
     <h1>Greetings</h1>
-    <Hello name="Arto" age={26 + 10} />
+    <Hello name="Maya" age={26 + 10} />
     <Footer />
   )
 }
@@ -355,7 +355,7 @@ const App = () => {
 
 the result is an error message.
 
-![](../../images/1/3a.png)
+![](../../images/1/3e.png)
 
 Using a root element is not the only working option. An <i>array</i> of components is also a valid solution:
 
@@ -363,7 +363,7 @@ Using a root element is not the only working option. An <i>array</i> of componen
 const App = () => {
   return [
     <h1>Greetings</h1>,
-    <Hello name="Arto" age={26 + 10} />,
+    <Hello name="Maya" age={26 + 10} />,
     <Footer />
   ]
 }
@@ -375,13 +375,13 @@ The consequence of the obligatory nature of the root element is "extra" div-elem
 
 ```js
 const App = () => {
-  const name = 'Pekka'
+  const name = 'Peter'
   const age = 10
 
   return (
     <>
       <h1>Greetings</h1>
-      <Hello name="Arto" age={26 + 10} />
+      <Hello name="Maya" age={26 + 10} />
       <Hello name={name} age={age} />
       <Footer />
     </>
@@ -403,14 +403,14 @@ You may submit all the exercises of this course into the same repository, or usi
 One very functional file  structure for the submission repository is as follows:
 
 ```
-osa0
-osa1
-  kurssitiedot
+part0
+part1
+  courseinfo
   unicafe
-  anekdootit
-osa2
-  puhelinluettelo
-  maiden_tiedot
+  anecdotes
+part2
+  phonebook
+  countries
 ```
 
 For each part of the course there is a directory, which further branches into directories containing a series of exercises, like "unicafe" for part 1.
@@ -432,12 +432,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 const App = () => {
-  const course = 'Half Stack -sovelluskehitys'
-  const part1 = 'Reactin perusteet'
+  const course = 'Half Stack application development'
+  const part1 = 'Fundamentals of React'
   const exercises1 = 10
-  const part2 = 'Tiedonvälitys propseilla'
+  const part2 = 'Using props to pass data'
   const exercises2 = 7
-  const part3 = 'Komponenttien tila'
+  const part3 = 'State of a component'
   const exercises3 = 14
 
   return (
@@ -452,7 +452,7 @@ const App = () => {
       <p>
         {part3} {exercises3}
       </p>
-      <p>yhteensä {exercises1 + exercises2 + exercises3} tehtävää</p>
+      <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>
     </div>
   )
 }
