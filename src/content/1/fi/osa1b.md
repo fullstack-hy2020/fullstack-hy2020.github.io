@@ -263,19 +263,20 @@ Siirrytään käyttämään sovelluksessamme oliota. Muuta komponentin <i>App</i
 
 ```js
 const App = () => {
-  const course = 'Half Stack -sovelluskehitys'
+  const course = 'Half Stack application development'
   const part1 = {
-    name: 'Reactin perusteet',
+    name: 'Fundamentals of React',
     exercises: 10
   }
   const part2 = {
-    name: 'Tiedonvälitys propseilla',
+    name: 'Using props to pass data',
     exercises: 7
   }
   const part3 = {
-    name: 'Komponenttien tila',
+    name: 'State of a component',
     exercises: 14
   }
+
 
   return (
     <div>
@@ -291,18 +292,18 @@ Ja laitetaan oliot taulukkoon, eli muuta  <i>App</i> :in muuttujamäärittelyt s
 
 ```js
 const App = () => {
-  const course = 'Half Stack -sovelluskehitys'
+  const course = 'Half Stack application development'
   const parts = [
     {
-      name: 'Reactin perusteet',
+      name: 'Fundamentals of React',
       exercises: 10
     },
     {
-      name: 'Tiedonvälitys propseilla',
+      name: 'Using props to pass data',
       exercises: 7
     },
     {
-      name: 'Komponenttien tila',
+      name: 'State of a component',
       exercises: 14
     }
   ]
@@ -340,18 +341,18 @@ Viedään muutos vielä yhtä askelta pidemmälle, eli tehdään kurssista ja se
 ```js
 const App = () => {
   const course = {
-    name: 'Half Stack -sovelluskehitys',
+    name: 'Half Stack application development',
     parts: [
       {
-        name: 'Reactin perusteet',
+        name: 'Fundamentals of React',
         exercises: 10
       },
       {
-        name: 'Tiedonvälitys propseilla',
+        name: 'Using props to pass data',
         exercises: 7
       },
       {
-        name: 'Komponenttien tila',
+        name: 'State of a component',
         exercises: 14
       }
     ]

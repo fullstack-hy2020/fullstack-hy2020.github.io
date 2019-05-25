@@ -17,7 +17,7 @@ Today, the most popular way to do the transpiling is using [Babel](https://babel
 
 [Node.js](https://nodejs.org/en/) is a Javascript runtime environment based on Google's [chrome V8](https://developers.google.com/v8/) Javascript engine and works practically anywhere from servers to mobile phones. Let's practice writing some Javascript using Node. It is expected that the version of Node.js installed on your machine is at least version <i>v8.10.0</i>. The latest verisons of Node already understand the latest versions of Javascript, so the code does not need to be transpiled.
 
-The code is written into files ending with <i>.js</i> and are run by issuing the command <em>node name_of_file.js</em>
+The code is written into files ending with <i>.js</i> and are run by issuing the command <em>node name\_of\_file.js</em>
 
 It is also possible to write Javascript code into the Node.js console, which is opened by typing _node_ in the command-line, as well as into the browser's developer tool console. The newest revisions of Chrome handle the newer features of Javascript [pretty well](http://kangax.github.io/compat-table/es2016plus/) without transpiling the code.
 
@@ -33,12 +33,12 @@ In Javascript there are a few way to go about defining variables:
 const x = 1
 let y = 5
 
-console.log(x, y)   // tulostuu 1, 5
+console.log(x, y)   // 1, 5 are printed
 y += 10
-console.log(x, y)   // tulostuu 1, 15
-y = 'teksti'
-console.log(x, y)   // tulostuu 1, teksti
-x = 4               // aiheuttaa virheen
+console.log(x, y)   // 1, 15 are printed
+y = 'sometext'
+console.log(x, y)   // 1, sometext are printed
+x = 4               // causes an error
 ```
 
 [const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) does not actually define a variable but a <i>constant</i> for which the value can no longer be changed. On the other hand [let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let) defines a normal variable.
@@ -58,11 +58,11 @@ const t = [1, -1, 3]
 
 t.push(5)
 
-console.log(t.length) // tulostuu 4
-console.log(t[1])     // tulostuu -1
+console.log(t.length) // 4 is printed
+console.log(t[1])     // -1 is printed
 
 t.forEach(value => {
-  console.log(value)  // tulostuu 1, -1, 3, 5 omille riveilleen
+  console.log(value)  // numbers 1, -1, 3, 5 are printed, each to own line
 })                    
 ```
 
@@ -85,8 +85,8 @@ const t = [1, -1, 3]
 
 const t2 = t.concat(5)
 
-console.log(t)  // tulostuu [1, -1, 3]
-console.log(t2) // tulostuu [1, -1, 3, 5]
+console.log(t)  // [1, -1, 3] is printed
+console.log(t2) // [1, -1, 3, 5] is printed
 ```
 
 The method call _t.concat(5)_ does not add a new item to the old array, but returns a new array, which besides containing the items of the old array also contains the new item.
@@ -97,7 +97,7 @@ There are plenty of useful methods defined for arrays. Let's look at a short exa
 const t = [1, 2, 3]
 
 const m1 = t.map(value => value * 2)
-console.log(m1)   // tulostuu [2, 4, 6]
+console.log(m1)   // [2, 4, 6] is printed
 ```
 
 Based on the old array, map creates a <i>new array</i>, for which the function given as a parameter is used to create the items. In the case of this example, the original value is multiplied by two.
@@ -107,7 +107,7 @@ Map can also transform the array into something completely different:
 ```js
 const m2 = t.map(value => '<li>' + value + '</li>')
 console.log(m2)  
-// tulostuu [ '<li>1</li>', '<li>2</li>', '<li>3</li>' ]
+// [ '<li>1</li>', '<li>2</li>', '<li>3</li>' ] is printed
 ```
 
 Here an array filled with integer values is transformed into an array containing HTML using the map method. In [part2](/part2) of this course, we will see that map is used quite frequently in React.
@@ -119,8 +119,8 @@ const t = [1, 2, 3, 4, 5]
 
 const [first, second, ...rest] = t
 
-console.log(first, second)  // tulostuu 1, 2
-console.log(rest)           // tulostuu [3, 4 ,5]
+console.log(first, second)  // 1, 2 is printed
+console.log(rest)          // [3, 4 ,5] is printed
 ```
 
 Thanks to the assignment the variables _first_ and _second_ will receive the first two integers of the array as their values. The remaining integers are "collected" into an array of their own, which is then assigned to the variable _rest_.
@@ -133,22 +133,22 @@ There are a few different ways of defining objects in Javascript. One very commo
 const object1 = {
   name: 'Arto Hellas',
   age: 35,
-  education: 'Filosofian tohtori',
+  education: 'PhD',
 }
 
 const object12 = {
-  name: 'Full Stack -websovelluskehitys',
-  level: 'aineopinto',
+  name: 'Full Stack web application development',
+  level: 'intermediate studies',
   size: 5,
 }
 
 const object3 = {
   name: {
-    first: 'Juha',
-    last: 'Tauriainen',
+    first: 'Dan',
+    last: 'Abramov',
   },
   grades: [2, 3, 5, 3],
-  department: 'TKTL',
+  department: 'Standford University',
 }
 ```
 
@@ -157,15 +157,15 @@ The values of the properties can be of any type, like integers, strings, arrays,
 The properties of an object are referenced by using the "dot" notation, or using brackets:
 
 ```js
-console.log(object1.name)         // tulostuu Arto Hellas
+console.log(object1.name)         // Arto Hellas is printed
 const fieldName = 'age' 
-console.log(object1[fieldName])   // tulostuu 35
+console.log(object1[fieldName])    // 35 is printed
 ```
 
 You can also add properties to an object on the fly by either using dot notation or using brackets:
 
 ```js
-object1.address = 'Tapiola'
+object1.address = 'Helsinki'
 object1['secred number'] = 12341
 ```
 
@@ -226,7 +226,8 @@ function product(a, b) {
   return a * b
 }
 
-const vastaus = product(2, 6)
+const result = product(2, 6)
+// result is now 8
 ```
 
 The other way to define the function is using a [function expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function). In this case, there is no need to give the function a name, and the definition may reside among the rest of the code:
@@ -236,7 +237,8 @@ const average = function(a, b) {
   return (a + b) / 2
 }
 
-const vastaus = average(2, 5)
+const result = average(2, 5)
+// result is now 3.5
 ```
 
 During this course we will define all functions using the arrow syntax.
@@ -263,17 +265,17 @@ Let's move forward to using objects in our application. Modify the variable defi
 
 ```js
 const App = () => {
-  const course = 'Half Stack -sovelluskehitys'
+  const course = 'Half Stack application development'
   const part1 = {
-    name: 'Reactin perusteet',
+    name: 'Fundamentals of React',
     exercises: 10
   }
   const part2 = {
-    name: 'Tiedonvälitys propseilla',
+    name: 'Using props to pass data',
     exercises: 7
   }
   const part3 = {
-    name: 'Komponenttien tila',
+    name: 'State of a component',
     exercises: 14
   }
 
@@ -291,18 +293,18 @@ And then place the objects into an array. Modify the variable definitions of <i>
 
 ```js
 const App = () => {
-  const course = 'Half Stack -sovelluskehitys'
+  const course = 'Half Stack application development'
   const parts = [
     {
-      name: 'Reactin perusteet',
+      name: 'Fundamentals of React',
       exercises: 10
     },
     {
-      name: 'Tiedonvälitys propseilla',
+      name: 'Using props to pass data',
       exercises: 7
     },
     {
-      name: 'Komponenttien tila',
+      name: 'State of a component',
       exercises: 14
     }
   ]
@@ -321,7 +323,7 @@ However, do not pass different objects as separate props from the <i>App</i> com
 
 ```js
 const App = () => {
-  // const-määrittelyt
+  // const definitions
 
   return (
     <div>
@@ -340,18 +342,18 @@ Let's take the changes one step further. Change the course and its parts into a 
 ```js
 const App = () => {
   const course = {
-    name: 'Half Stack -sovelluskehitys',
+    name: 'Half Stack application development',
     parts: [
       {
-        name: 'Reactin perusteet',
+        name: 'Fundamentals of React',
         exercises: 10
       },
       {
-        name: 'Tiedonvälitys propseilla',
+        name: 'Using props to pass data',
         exercises: 7
       },
       {
-        name: 'Komponenttien tila',
+        name: 'State of a component',
         exercises: 14
       }
     ]
@@ -381,13 +383,13 @@ We can assign methods to an objects by defining properties that are functions:
 const arto = {
   name: 'Arto Hellas',
   age: 35,
-  education: 'Filosofian tohtori',
+  education: 'PhD',
   greet: function() {
     console.log('hello, my name is', this.name)
   },
 }
 
-arto.greet()  // tulostuu hello, my name is Arto Hellas
+arto.greet()  // hello, my name is Arto Hellas gets printed
 ```
 
 methods can be assigned to objects even after the creation of the object:
@@ -396,7 +398,7 @@ methods can be assigned to objects even after the creation of the object:
 const arto = {
   name: 'Arto Hellas',
   age: 35,
-  education: 'Filosofian tohtori',
+  education: 'PhD',
   greet: function() {
     console.log('hello, my name is', this.name)
   },
@@ -408,9 +410,9 @@ arto.growOlder = function() {
 }
 // highlight-end
 
-console.log(arto.age)   // tulostuu 35
+console.log(arto.age)   // 35 is printed
 arto.growOlder()
-console.log(arto.age)   // tulostuu 36
+console.log(arto.age)   // 36 is printed
 ```
 
 Let's slightly modify the object 
@@ -419,7 +421,7 @@ Let's slightly modify the object
 const arto = {
   name: 'Arto Hellas',
   age: 35,
-  education: 'Filosofian tohtori',
+  education: 'PhD',
   greet: function() {
     console.log('hello, my name is', this.name)
   },
@@ -430,10 +432,10 @@ const arto = {
   // highlight-end
 }
 
-arto.doAddition(1, 4) // tulostuu 5
+arto.doAddition(1, 4)        // 5 is printed
 
 const referenceToAdditon = arto.doAddition
-referenceToAdditon(10, 15) // tulostuu 25
+referenceToAdditon(10, 15)   // 25 is printed
 ```
 
 Now the object has the method _doAddition_, which calculates the sum of numbers given to it as parameters. The method is called in the usual way using the object <em>arto.doAddition(1, 4)</em> or by storing a <i>method reference</i> in a variable and calling the method through the variable <em>referenceToAdditon(10, 15)</em>.
@@ -441,10 +443,10 @@ Now the object has the method _doAddition_, which calculates the sum of numbers 
 If we try to do the same with the method _greet_ we run into an issue:
 
 ```js
-arto.greet()       // tulostuu hello, my name is Arto Hellas
+arto.greet()       // hello, my name is Arto Hellas gets printed
 
 const referenceToGreet = arto.greet
-referenceToGreet() // konsoliin tulostuu virheilmoitus
+referenceToGreet() // error message is printed to console
 ```
 
 When calling the method through a reference, the method has lost knowledge of what was the original _this_. Contrary to other languages, in Javascript the value of [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) is defined based on <i>how the method is called</i>. When calling the method through a reference, the value of _this_ becomes the so-called [global object](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) and the end result is often not what the software developer had originally intended.
@@ -497,11 +499,11 @@ class Person {
   }
 }
 
-const arto = new Person('Arto Hellas', 35)
-arto.greet()
+const arto = new Person('Adam Ondra', 35)
+adam.greet()
 
-const juhq = new Person('Juha Tauriainen', 48)
-juhq.greet()
+const janja = new Person('Janja Garnbret', 22)
+janja.greet()
 ```
 
 When it comes to syntax, the classes and the objects created from them are very reminiscent of e.g. Java classes and objects. Their behavior is also quite similar to Java objects. At the core, they are still objects based on Javascript's [prototype inheritance](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance). The type of both objects is actually _Object_, since Javascript essentially only the types [Boolean, Null, Undefined, Number, String, Symbol and Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures).
