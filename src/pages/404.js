@@ -1,33 +1,54 @@
+import React, { Component } from 'react';
+
 import Arrow from '../components/Arrow/Arrow';
 import Element from '../components/Element/Element';
 import Footer from '../components/Footer/Footer';
 import Layout from '../components/layout';
-import React from 'react';
 import SEO from '../components/seo';
 import colors from '../colors';
 
-const NotFoundPage = () => (
-  <Layout>
-    <SEO title="Sivua ei löytynyt | Full Stack Open 2019" />
+class NotFoundPage extends Component {
+  state = {
+    siteLanguage: 'fi',
+  };
 
-    <Element className="container spacing--large spacing--after">
-      <h1>404 - Sivua ei löytynyt</h1>
+  componentDidMount() {
+    const siteLanguage =
+      window.location.pathname.indexOf('/en') !== -1 ? 'en' : 'fi';
 
-      <p className="col-10 spacing--small spacing--after">
-        Uncaught ReferenceError: unknown is not defined
-      </p>
+    this.setState({ siteLanguage });
+  }
 
-      <Arrow
-        className="col-10 arrow__container--with-link"
-        bold
-        thickBorder
-        link="/"
-        content={[{ backgroundColor: colors['main'], text: 'Go back home' }]}
-      />
-    </Element>
+  render() {
+    const title =
+      this.state.siteLanguage === 'en' ? 'Page not found' : 'Sivua ei löytynyt';
 
-    <Footer lang="fi" />
-  </Layout>
-);
+    return (
+      <Layout>
+        <SEO title={`${title} | Full Stack Open 2019`} />
+
+        <Element className="container spacing--large spacing--after">
+          <h1>404 - {title}</h1>
+
+          <p className="col-10 spacing--small spacing--after">
+            Uncaught ReferenceError: unknown is not defined
+          </p>
+
+          <Arrow
+            className="col-10 arrow__container--with-link"
+            bold
+            thickBorder
+            link={this.state.siteLanguage === 'en' ? '/en' : '/'}
+            content={[
+              { backgroundColor: colors['main'], text: 'Go back home' },
+            ]}
+          />
+        </Element>
+
+        <Footer lang={this.state.siteLanguage} />
+      </Layout>
+    );
+  }
+}
 
 export default NotFoundPage;

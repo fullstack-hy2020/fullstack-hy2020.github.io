@@ -3,9 +3,9 @@ import './index.scss';
 
 import Header from './Header/Header';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { Component } from 'react';
 
-class Layout extends React.Component {
+class Layout extends Component {
   state = {
     siteLanguage: 'fi'
   }
