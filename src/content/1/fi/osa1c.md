@@ -343,7 +343,7 @@ const App = (props) => {
     1000
   )
 
-  console.log('renderöidään', counter) // highlight-line
+  console.log('rendering...', counter) // highlight-line
 
   return (
     <div>{counter}</div>
@@ -353,19 +353,7 @@ const App = (props) => {
 
 on konsolista helppo seurata metodin _render_ kutsuja:
 
-![](../../images/1/4a.png)
-
-### Kun React ei toimi...
-
-Käyttäessäsi tilan tuovaa hookia <i>useState</i>, saatat törmätä seuraavaan virheilmoitukseen:
-
-![](../../images/1/fail.png)
-
-Syynä tälle on se, että <i>et ole asentanut</i> riittävän uutta Reactia kuten [osan 1 alussa](/osa1/reactin_alkeet) neuvottiin.
-
-``` 
-rm -rf node_modules/ && npm i
-```
+![](../../images/1/4e.png)
 
 ### Tapahtumankäsittely
 
@@ -383,7 +371,7 @@ const App = (props) => {
 
   // highlight-start
   const handleClick = () => {
-    console.log('klicked')
+    console.log('clicked')
   }
   // highlight-end
 
@@ -413,7 +401,7 @@ const App = (props) => {
   return (
     <div>
       <div>{counter}</div>
-      <button onClick={() => console.log('klicked')}> // highlight-line
+      <button onClick={() => console.log('clicked')}> // highlight-line
         plus
       </button>
     </div>

@@ -23,13 +23,13 @@ const Hello = (props) => {
 }
 
 const App = () => {
-  const nimi = 'Pekka'
+  const nimi = 'Peter'
   const ika = 10
 
   return (
     <div>
       <h1>Greetings</h1>
-      <Hello name="Arto" age={26 + 10} />
+      <Hello name="Maya" age={26 + 10} />
       <Hello name={nimi} age={ika} />
     </div>
   )
@@ -341,7 +341,7 @@ const App = (props) => {
     1000
   )
 
-  console.log('renderöidään', counter) // highlight-line
+  console.log('rendering...', counter) // highlight-line
 
   return (
     <div>{counter}</div>
@@ -351,23 +351,11 @@ const App = (props) => {
 
 It's easy to follow and track the calls made to the _render_ function:
 
-![](../../images/1/4a.png)
-
-### When React stops working...
-
-When you take the <i>useState</i> hook into use, you may run into the following error message:
-
-![](../../images/1/fail.png)
-
-The reason for this is that <i>you have not installed</i> a new enough version of React, as was instructed at [the beginning of part 1](/osa1/reactin_alkeet).
-
-``` 
-rm -rf node_modules/ && npm i
-```
+![](../../images/1/4e.png)
 
 ### Event handling
 
-We have already mentioned <i>event handlers</i> a few times in [part 0](/osa0), that are registered to be called when specific events occur. E.g. a user's interaction with the different elements of a web page can cause a collection of various different kinds of events to be triggered.
+We have already mentioned <i>event handlers</i> a few times in [part 0](/en/part0), that are registered to be called when specific events occur. E.g. a user's interaction with the different elements of a web page can cause a collection of various different kinds of events to be triggered.
 
 Let's change the application so that increasing the counter happens when a user clicks a button, which is implemented with the [button](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button)-element.
 
@@ -381,7 +369,7 @@ const App = (props) => {
 
   // highlight-start
   const handleClick = () => {
-    console.log('klicked')
+    console.log('clicked')
   }
   // highlight-end
 
@@ -411,7 +399,7 @@ const App = (props) => {
   return (
     <div>
       <div>{counter}</div>
-      <button onClick={() => console.log('klicked')}> // highlight-line
+      <button onClick={() => console.log('clicked')}> // highlight-line
         plus
       </button>
     </div>

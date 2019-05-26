@@ -25,10 +25,10 @@ const App = (props) => {
       <div>
         {left}
         <button onClick={() => setLeft(left + 1)}>
-          vasen
+          left
         </button>
         <button onClick={() => setRight(right + 1)}>
-          oikea
+          right
         </button>
         {right}
       </div>
@@ -39,7 +39,7 @@ const App = (props) => {
 
 Komponentti saa käyttöönsä tilan alustuksen yhteydessä funktiot _setLeft_ ja _setRight_ joiden avulla se voi päivittää tilan osia.
 
-Komponentin tila tai yksittäinen tilan pala voi olla minkä tahansa tyyppinen. Voisimme toteuttaa saman toiminnallisuuden tallentamalla nappien <i>vasen</i> ja <i>oikea</i> painallukset yhteen olioon
+Komponentin tila tai yksittäinen tilan pala voi olla minkä tahansa tyyppinen. Voisimme toteuttaa saman toiminnallisuuden tallentamalla nappien <i>left</i> ja <i>right</i> painallukset yhteen olioon
 
 ```js
 {
@@ -76,8 +76,8 @@ const App = (props) => {
     <div>
       <div>
         {clicks.left}
-        <button onClick={handleLeftClick}>vasen</button>
-        <button onClick={handleRightClick}>oikea</button>
+        <button onClick={handleLeftClick}>left</button>
+        <button onClick={handleRightClick}>right</button>
         {clicks.right}
       </div>
     </div>
@@ -87,7 +87,7 @@ const App = (props) => {
 
 Nyt komponentilla on siis ainoastaan yksi tila. Näppäinten painallusten yhteydessä on nyt huolehdittava <i>koko tilan</i> muutoksesta.
 
-Tapahtumankäsittelijä vaikuttaa hieman sotkuiselta. Kun vasenta nappia painetaan, suoritetaan seuraava funktio:
+Tapahtumankäsittelijä vaikuttaa hieman sotkuiselta. Kun nappia <i>left</i> painetaan, suoritetaan seuraava funktio:
 
 ```js
 const handleLeftClick = () => {
@@ -193,8 +193,8 @@ const App = (props) => {
     <div>
       <div>
         {left}
-        <button onClick={handleLeftClick}>vasen</button>
-        <button onClick={handleRightClick}>oikea</button>
+        <button onClick={handleLeftClick}>left</button>
+        <button onClick={handleRightClick}>right</button>
         {right}
         <p>{allClicks.join(' ')}</p> // highlight-line
       </div>
@@ -209,7 +209,7 @@ Kaikki klikkaukset siis talletetaan omaan tilan osaansa _allClicks_, joka aluste
 const [allClicks, setAll] = useState([])
 ```
 
-Kun esim. nappia <i>vasen</i> painetaan, lisätään tilan taulukkoon _allClicks_ kirjain <i>L</i>:
+Kun esim. nappia <i>left</i> painetaan, lisätään tilan taulukkoon _allClicks_ kirjain <i>L</i>:
 
 ```js
 const handleLeftClick = () => {
@@ -242,8 +242,8 @@ const App = (props) => {
     <div>
       <div>
         {left}
-        <button onClick={handleLeftClick}>vasen</button>
-        <button onClick={handleRightClick}>oikea</button>
+        <button onClick={handleLeftClick}>left</button>
+        <button onClick={handleRightClick}>right</button>
         {right}
         <p>{allClicks.join(' ')}</p> // highlight-line
       </div>
@@ -263,14 +263,14 @@ const History = (props) => {
   if (props.allClicks.length === 0) {
     return (
       <div>
-        sovellusta käytetään nappeja painelemalla
+        the app is used by pressing the buttons
       </div>
     )
   }
 
   return (
     <div>
-      näppäilyhistoria: {props.allClicks.join(' ')}
+      button press history: {props.allClicks.join(' ')}
     </div>
   )
 }
@@ -282,8 +282,8 @@ const App = (props) => {
     <div>
       <div>
         {left}
-        <button onClick={handleLeftClick}>vasen</button>
-        <button onClick={handleRightClick}>oikea</button>
+        <button onClick={handleLeftClick}>left</button>
+        <button onClick={handleRightClick}>right</button>
         {right}
         <History allClicks={allClicks} /> // highlight-line
       </div>
@@ -295,14 +295,14 @@ const App = (props) => {
 Nyt komponentin toiminta riippuu siitä, onko näppäimiä jo painettu. Jos ei, eli taulukko <em>allClicks</em> on tyhjä, renderöi komponentti "käyttöohjeen" sisältävän divin.
 
 ```js
-<div>sovellusta käytetään nappeja painelemalla</div>
+<div>the app is used by pressing the buttons</div>
 ```
 
 ja muussa tapauksessa näppäilyhistorian:
 
 ```js
 <div>
-  näppäilyhistoria: {props.allClicks.join(' ')}
+  button press history: {props.allClicks.join(' ')}
 </div>
 ```
 
@@ -317,14 +317,14 @@ const History = (props) => {
   if (props.allClicks.length === 0) {
     return (
       <div>
-        sovellusta käytetään nappeja painelemalla
+        the app is used by pressing the buttons
       </div>
     )
   }
 
   return (
     <div>
-        näppäilyhistoria: {props.allClicks.join(' ')}
+      button press history: {props.allClicks.join(' ')}
     </div>
   )
 }
@@ -357,8 +357,8 @@ const App = (props) => {
       <div>
         {left}
         // highlight-start
-        <Button handleClick={handleLeftClick} text='vasen' />
-        <Button handleClick={handleRightClick} text='oikea' />
+        <Button handleClick={handleLeftClick} text='left' />
+        <Button handleClick={handleRightClick} text='right' />
         // highlight-end
         {right}
         <History allClicks={allClicks} />
@@ -394,7 +394,7 @@ Pidä myös koodi ja web-sivu **koko ajan** molemmat yhtä aikaa näkyvillä.
 
 Jos ja kun koodi ei käänny, eli selaimessa alkaa näkyä punaista
 
-![](../../images/1/6a.png)
+![](../../images/1/6e.png)
 
 älä kirjota enää lisää koodia vaan selvitä ongelma **välittömästi**. Koodauksen historia ei tunne tilannetta, missä kääntymätön koodi alkaisi ihmeenomaisesti toimimaan kirjoittamalla suurta määrää lisää koodia, enkä usko että sellaista ihmettä nähdään tälläkään kurssilla.
 
@@ -427,19 +427,19 @@ näin selviää heti onko esim. joku propsia vastaava attribuutti nimetty väär
 **HUOM** kun käytät komentoa _console.log_ debuggaukseen, älä yhdistele asioita "javamaisesti" plussalla, eli sen sijaan että kirjoittaisit
 
 ```js
-console.log('propsin arvo on' + props)
+console.log('props value is' + props)
 ```
 
 erottele tulostettavat asiat pilkulla:
 
 ```js
-console.log('propsin arvo on', props)
+console.log('props value is', props)
 ```
 
 Jos yhdistät merkkijonoon olion, tuloksena on suhteellisen hyödytön tulostusmuoto
 
 ```js
-propsin arvo on [Object object]
+props value is [Object object]
 ```
 
 kun taas pilkulla tulostettavat asiat erotellessa saat developer-konsoliin olion, jonka sisältöä on mahdollista tarkastella.
@@ -464,13 +464,13 @@ Debuggeriin pääsee myös ilman komentoa _debugger_, lisäämällä <i>Source</
 
 Chromeen kannattaa ehdottomasti asentaa [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) -lisäosa, joka tuo konsoliin uuden tabin _React_:
 
-![](../../images/1/10a.png)
+![](../../images/1/10e.png)
 
 Uuden konsolitabin avulla voidaan tarkkailla sovelluksen React-elementtejä ja niiden tilaa ja propseja.
 
-React developer tools ei osaa toistaiseksi näyttää hookeilla muodostettua tilaa parhaalla mahdollisella tavalla.
+React developer tools ei osaa toistaiseksi näyttää hookeilla muodostettua tilaa kovin hyvin..
 
-![](../../images/1/11a.png)
+![](../../images/1/11e.png)
 
 Komponentin tila on määritelty seuraavasti:
 
@@ -480,7 +480,13 @@ const [right, setRight] = useState(0)
 const [allClicks, setAll] = useState([])
 ```
 
-Konsolin ylimpänä oleva <i>baseState</i> kertoo ensimmäisen _useState_-kutsun määrittelevän tilan, eli muuttujan _left_ arvon, seuraava <i>baseState</i> kertoo muuttujan _right_ arvon ja taulukon _allClicks_ arvo on alimpana.
+Dev tools näyttää hookien tilan siinä järjestyksessä kun ne on määritelty koodissa. Hookien _left_ ja _right_ tila näkyy hyvin, mutta valitettavasti dev tools ei tässä vaiheessa osaa näyttää taulukkotyyppistä hookia _allClicks_ kunnolla.
+
+Dev toolsin hooken toteutusta käsitellään [tässä issuessa](https://github.com/facebook/react-devtools/issues/1215).
+
+Dev toolsin hookeja tukevasta versiosta on jo tehty epävirallinen [beta-julkaisu](https://github.com/bvaughn/react-devtools-experimental). En saanut itse Chrome-versiota toimimaan, mutta Firefox-versio toimii ja näyttää hookatun taulukkomuotoisen tilan hyvin
+
+![](../../images/1/11be.png)
 
 ### Hookien säännöt
 
@@ -532,7 +538,7 @@ const App = (props) => {
   return (
     <div>
       {value}
-      <button>nollaa</button>
+      <button>reset to zero</button>
     </div>
   )
 }
@@ -552,7 +558,7 @@ Tapahtumankäsittelijän tulee aina olla <i>funktio</i> tai viite funktioon. Jos
 Jos esim. antaisimme tapahtumankäsittelijäksi merkkijonon:
 
 ```js
-<button onClick={'roskaa'}>nappi</button>
+<button onClick={'crap...'}>button</button>
 ```
 
 React varoittaa asiasta konsolissa
@@ -567,7 +573,7 @@ index.js:2178 Warning: Expected `onClick` listener to be a function, instead got
 myös seuraavanlainen yritys olisi tuhoon tuomittu
 
 ```js
-<button onClick={value + 1}>nappi</button>
+<button onClick={value + 1}>button</button>
 ```
 
 nyt tapahtumankäsittelijäksi on yritetty laittaa _value + 1_ mikä tarkoittaa laskuoperaation tulosta. React varoittaa tästäkin konsolissa
@@ -579,7 +585,7 @@ index.js:2178 Warning: Expected `onClick` listener to be a function, instead got
 Myöskään seuraava ei toimi
 
 ```js
-<button onClick={value = 0}>nappi</button>
+<button onClick={value = 0}>button</button>
 ```
 
 taaskaan tapahtumankäsittelijänä ei ole funktio vaan sijoitusoperaatio. Konsoliin tulee valitus. Tämä tapa on myös toisella tavalla väärin. Tilan muuttaminen ei onnistu suoraan tilan arvon tallentavaa muuttujaa muuttamalla.
@@ -587,21 +593,21 @@ taaskaan tapahtumankäsittelijänä ei ole funktio vaan sijoitusoperaatio. Konso
 Entä seuraava:
 
 ```js
-<button onClick={console.log('nappia painettu')}>
-  nappi
+<button onClick={console.log('clicked the button')}>
+  button
 </button>
 ```
 
-konsoliin tulostuu kertaalleen <i>nappia painettu</i>, mutta nappia painellessa ei tapahdu mitään. Miksi tämä ei toimi vaikka tapahtumankäsittelijänä on nyt funktio _console.log_?
+konsoliin tulostuu kertaalleen <i>clicked the button</i>, mutta nappia painellessa ei tapahdu mitään. Miksi tämä ei toimi vaikka tapahtumankäsittelijänä on nyt funktio _console.log_?
 
 Ongelma on nyt siinä, että tapahtumankäsittelijänä on <i>funktion kutsu</i>, eli varsinaiseksi tapahtumankäsittelijäksi tulee funktion kutsun paluuarvo, joka on tässä tapauksessa määrittelemätön arvo <i>undefined</i>.
 
-Funktiokutsu _console.log('nappia painettu')_ suoritetaan siinä vaiheessa kun komponentti renderöidään, ja tämän takia konsoliin tulee tulostus kertalleen.
+Funktiokutsu _console.log('clicked the button')_ suoritetaan siinä vaiheessa kun komponentti renderöidään, ja tämän takia konsoliin tulee tulostus kertalleen.
 
 Myös seuraava yritys on virheellinen
 
 ```js
-<button onClick={setValue(0)}>nappi</button>
+<button onClick={setValue(0)}>button</button>
 ```
 
 jälleen olemme yrittäneet laittaa tapahtumankäsittelijäksi funktiokutsun. Ei toimi. Tämä yritys aiheuttaa myös toisen ongelman. Kun komponenttia renderöidään, suoritetaan tapahtumankäsittelijänä oleva funktiokutsu _setValue(0)_ joka taas saa aikaan komponentin uudelleenrenderöinnin. Ja uudelleenrenderöinnin yhteydessä funktiota kutsutaan uudelleen käynnistäen jälleen uusi uudelleenrenderöinti, ja joudutaan päättymättömään rekursioon.
@@ -609,17 +615,17 @@ jälleen olemme yrittäneet laittaa tapahtumankäsittelijäksi funktiokutsun. Ei
 Jos haluamme suorittaa tietyn funktiokutsun tapahtuvan nappia painettaessa, toimii seuraava
 
 ```js
-<button onClick={() => console.log('nappia painettu')}>
-  nappi
+<button onClick={() => console.log('clicked the button')}>
+  button
 </button>
 ```
 
-Nyt tapahtumankäsittelijä on nuolisyntaksilla määritelty funktio _() => console.log('nappia painettu')_. Kun komponentti renderöidään, ei suoriteta mitään, ainoastaan talletetaan funktioviite tapahtumankäsittelijäksi. Itse funktion suoritus tapahtuu vasta napin painallusten yhteydessä.
+Nyt tapahtumankäsittelijä on nuolisyntaksilla määritelty funktio _() => console.log('clicked the button')_. Kun komponentti renderöidään, ei suoriteta mitään, ainoastaan talletetaan funktioviite tapahtumankäsittelijäksi. Itse funktion suoritus tapahtuu vasta napin painallusten yhteydessä.
 
 Saamme myös nollauksen toimimaan samalla tekniikalla
 
 ```js
-<button onClick={() => setValue(0)}>nappi</button>
+<button onClick={() => setValue(0)}>button</button>
 ```
 
 eli nyt tapahtumankäsittelijä on funktio _() => setValue(0)_.
@@ -633,12 +639,12 @@ const App = (props) => {
   const [value, setValue] = useState(10)
 
   const handleClick = () =>
-    console.log('nappia painettu')
+    console.log('clicked the button')
 
   return (
     <div>
       {value}
-      <button onClick={handleClick}>nappi</button>
+      <button onClick={handleClick}>button</button>
     </div>
   )
 }
@@ -647,7 +653,7 @@ const App = (props) => {
 Muuttujassa _handleClick_ on nyt talletettuna viite itse funktioon. Viite annetaan napin määrittelyn yhteydessä attribuutin <i>onClick</i>:
 
 ```js
-<button onClick={handleClick}>nappi</button>
+<button onClick={handleClick}>button</button>
 ```
 
 Tapahtumankäsittelijäfunktio voi luonnollisesti koostua useista komennoista, tällöin käytetään nuolifunktion aaltosulullista muotoa:
@@ -658,7 +664,7 @@ const App = (props) => {
 
   // highlight-start
   const handleClick = () => {
-    console.log('nappia painettu')
+    console.log('clicked the button')
     setValue(0)
   }
    // highlight-end
@@ -666,7 +672,7 @@ const App = (props) => {
   return (
     <div>
       {value}
-      <button onClick={handleClick}>nappi</button>
+      <button onClick={handleClick}>button</button>
     </div>
   )
 }
@@ -691,7 +697,7 @@ const App = (props) => {
   return (
     <div>
       {value}
-      <button onClick={hello()}>nappi</button>
+      <button onClick={hello()}>button</button>
     </div>
   )
 }
@@ -702,7 +708,7 @@ Koodi näyttää hankalalta mutta se ihme kyllä toimii.
 Tapahtumankäsittelijäksi on nyt "rekisteröity" funktiokutsu:
 
 ```js
-<button onClick={hello()}>nappi</button>
+<button onClick={hello()}>button</button>
 ```
 
 Aiemmin varoteltiin, että tapahtumankäsittelijä ei saa olla funktiokutsu vaan sen on oltava funktio tai viite funktioon. Miksi funktiokutsu kuitenkin toimii nyt?
@@ -722,14 +728,14 @@ funktion <i>paluuarvona</i> on nyt toinen, muuttujaan _handler_ määritelty fun
 eli kun react renderöi seuraavan rivin
 
 ```js
-<button onClick={hello()}>nappi</button>
+<button onClick={hello()}>button</button>
 ```
 
 sijoittaa se onClick-käsittelijäksi funktiokutsun _hello()_ paluuarvon. Eli oleellisesti ottaen rivi "muuttuu" seuraavaksi
 
 ```js
 <button onClick={() => console.log('hello world')}>
-  nappi
+  button
 </button>
 ```
 
@@ -757,21 +763,21 @@ const App = (props) => {
     <div>
       {value}
   // highlight-start      
-      <button onClick={hello('world')}>nappi</button>
-      <button onClick={hello('react')}>nappi</button>
-      <button onClick={hello('function')}>nappi</button>
+      <button onClick={hello('world')}>button</button>
+      <button onClick={hello('react')}>button</button>
+      <button onClick={hello('function')}>button</button>
   // highlight-end      
     </div>
   )
 }
 ```
 
-Nyt meillä on kolme nappia joiden tapahtumankäsittelijät määritellään parametrin saavan funktion _hello_ avulla.
+Nyt meillä on kolme nappia joiden tapahtumankäsittelijät määritellään parametrin saavan funktion _button_ avulla.
 
 Ensimmäinen nappi määritellään seuraavasti
 
 ```js
-<button onClick={hello('world')}>nappi</button>
+<button onClick={hello('world')}>button</button>
 ```
 
 Tapahtumankäsittelijä siis saadaan <i>suorittamalla</i> funktiokutsu _hello('world')_. Funktiokutsu palauttaa funktion
@@ -785,7 +791,7 @@ Tapahtumankäsittelijä siis saadaan <i>suorittamalla</i> funktiokutsu _hello('w
 Toinen nappi määritellään seuraavasti
 
 ```js
-<button onClick={hello('react')}>nappi</button>
+<button onClick={hello('react')}>button</button>
 ```
 
 Tapahtumankäsittelijän määrittelevä funktiokutsu _hello('react')_ palauttaa
@@ -850,18 +856,18 @@ render() {
   return (
     <div>
       {value}
-      <button onClick={setToValue(1000)}>tuhat</button>
-      <button onClick={setToValue(0)}>nollaa</button>
-      <button onClick={setToValue(value + 1)}>kasvata</button>
+      <button onClick={setToValue(1000)}>thousand</button>
+      <button onClick={setToValue(0)}>reset</button>
+      <button onClick={setToValue(value + 1)}>increment</button>
     </div>
   )
 }
 ```
 
-Kun komponentti renderöidään, ja tehdään nappia <i>tuhat</i>
+Kun komponentti renderöidään, ja tehdään nappia <i>thousand</i>
 
 ```js
-<button onClick={setToValue(1000)}>tuhat</button>
+<button onClick={setToValue(1000)}>thousand</button>
 ```
 
 tulee tapahtumankäsittelijäksi funktiokutsun _setToValue(1000)_ paluuarvo eli seuraava funktio
@@ -875,7 +881,7 @@ tulee tapahtumankäsittelijäksi funktiokutsun _setToValue(1000)_ paluuarvo eli 
 Kasvatusnapin generoima rivi on seuraava
 
 ```js
-<button onClick={setToValue(value + 1)}>kasvata</button>
+<button onClick={setToValue(value + 1)}>increment</button>
 ```
 
 Tapahtumankäsittelijän muodostaa funktiokutsu _setToValue(value + 1)_, joka saa parametrikseen tilan tallettavan muuttujan _value_ nykyisen arvon kasvatettuna yhdellä. Jos _value_ olisi 10, tulisi tapahtumankäsittelijäksi funktio
@@ -900,13 +906,13 @@ const App = (props) => {
     <div>
       {value}
       <button onClick={() => setToValue(1000)}>
-        tuhat
+        thousand
       </button>
       <button onClick={() => setToValue(0)}>
-        nollaa
+        reset
       </button>
       <button onClick={() => setToValue(value + 1)}>
-        kasvata
+        increment
       </button>
     </div>
   )
@@ -916,7 +922,7 @@ const App = (props) => {
 Voimme nyt määritellä tapahtumankäsittelijän funktioksi, joka kutsuu funktiota _setToValue_ sopivalla parametrilla, esim. nollaamisen tapahtumankäsittelijä:
 
 ```js
-<button onClick={() => setToValue(0)}>nollaa</button>
+<button onClick={() => setToValue(0)}>reset</button>
 ```
 
 On aikalailla makuasia käyttääkö tapahtumankäsittelijänä funktioita palauttavia funktioita vai nuolifunktioita.
@@ -937,7 +943,7 @@ Komponentti saa siis propsina _handleClick_ tapahtumankäsittelijän ja propsina
 
 Komponentin <i>Button</i> käyttö on helppoa, on toki pidettävä huolta siitä, että komponentille annettavat propsit on nimetty niin kuin komponentti olettaa:
 
-![](../../images/1/12a.png)
+![](../../images/1/12e.png)
 
 ### Älä määrittele komponenttia komponentin sisällä
 
@@ -966,9 +972,9 @@ const App = props => {
   return (
     <div>
       <Display value={value} />
-      <Button handleClick={() => setToValue(1000)} text="tuhat" />
-      <Button handleClick={() => setToValue(0)} text="nollaa" />
-      <Button handleClick={() => setToValue(value + 1)} text="kasvata" />
+      <Button handleClick={() => setToValue(1000)} text="thousand" />
+      <Button handleClick={() => setToValue(0)} text="reset" />
+      <Button handleClick={() => setToValue(value + 1)} text="increment" />
     </div>
   )
 }
@@ -995,9 +1001,9 @@ const App = props => {
   return (
     <div>
       <Display value={value} />
-      <Button handleClick={() => setToValue(1000)} text="tuhat" />
-      <Button handleClick={() => setToValue(0)} text="nollaa" />
-      <Button handleClick={() => setToValue(value + 1)} text="kasvata" />
+      <Button handleClick={() => setToValue(1000)} text="thousand" />
+      <Button handleClick={() => setToValue(0)} text="reset" />
+      <Button handleClick={() => setToValue(value + 1)} text="increment" />
     </div>
   )
 }
@@ -1044,7 +1050,7 @@ Monien firmojen tapaan nykyään myös [Unicafe](https://www.unicafe.fi/#/9/4) k
 
 Sovelluksen tulee näyttää jokaisen palautteen lukumäärä. Sovellus voi näyttää esim. seuraavalta:
 
-![](../../images/1/13a.png)
+![](../../images/1/13e.png)
 
 Huomaa, että sovelluksen tarvitsee toimia vain yhden selaimen käyttökerran ajan, esim. kun selain refreshataan, tilastot saavat hävitä.
 
@@ -1076,7 +1082,7 @@ ReactDOM.render(<App />,
 
 Laajenna sovellusta siten, että se näyttää palautteista enemmän statistiikkaa: yhteenlasketun määrän, keskiarvon (hyvän arvo 1, neutraalin 0, huonon -1) ja sen kuinka monta prosenttia palautteista on ollut positiivisia:
 
-![](../../images/1/14a.png)
+![](../../images/1/14e.png)
 
 <h4>1.8: unicafe step3</h4>
 
@@ -1111,7 +1117,7 @@ const App = () => {
 
 Muuta sovellusta siten, että numeeriset tilastot näytetään ainoastaan jos palautteita on jo annettu:
 
-![](../../images/1/15a.png)
+![](../../images/1/15e.png)
 
 <h4>1.10: unicafe step5</h4>
 
@@ -1127,9 +1133,9 @@ const Statistics = (props) => {
   /// ...
   return(
     <div>
-      <Statistic text="hyvä" value ={...} />
-      <Statistic text="neutraali" value ={...} />
-      <Statistic text="huono" value ={...} />
+      <Statistic text="good" value ={...} />
+      <Statistic text="neutral" value ={...} />
+      <Statistic text="bad" value ={...} />
       // ...
     </div>
   )
@@ -1143,7 +1149,7 @@ Sovelluksen tila säilytetään edelleen juurikomponentissa <i>App</i>.
 
 Toteuta tilastojen näyttäminen HTML:n [taulukkona](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Basics) siten, että saat sovelluksesi näyttämään suunnilleen seuraavanlaiselta:
 
-![](../../images/1/16a.png)
+![](../../images/1/16e.png)
 
 Muista pitää konsoli koko ajan auki. Jos saat konsoliin seuraavan warningin:
 

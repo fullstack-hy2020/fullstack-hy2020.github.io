@@ -25,10 +25,10 @@ const App = (props) => {
       <div>
         {left}
         <button onClick={() => setLeft(left + 1)}>
-          vasen
+          left
         </button>
         <button onClick={() => setRight(right + 1)}>
-          oikea
+          right
         </button>
         {right}
       </div>
@@ -75,8 +75,8 @@ const App = (props) => {
     <div>
       <div>
         {clicks.left}
-        <button onClick={handleLeftClick}>vasen</button>
-        <button onClick={handleRightClick}>oikea</button>
+        <button onClick={handleLeftClick}>left</button>
+        <button onClick={handleRightClick}>right</button>
         {clicks.right}
       </div>
     </div>
@@ -191,8 +191,8 @@ const App = (props) => {
     <div>
       <div>
         {left}
-        <button onClick={handleLeftClick}>vasen</button>
-        <button onClick={handleRightClick}>oikea</button>
+        <button onClick={handleLeftClick}>left</button>
+        <button onClick={handleRightClick}>right</button>
         {right}
         <p>{allClicks.join(' ')}</p> // highlight-line
       </div>
@@ -240,8 +240,8 @@ const App = (props) => {
     <div>
       <div>
         {left}
-        <button onClick={handleLeftClick}>vasen</button>
-        <button onClick={handleRightClick}>oikea</button>
+        <button onClick={handleLeftClick}>left</button>
+        <button onClick={handleRightClick}>right</button>
         {right}
         <p>{allClicks.join(' ')}</p> // highlight-line
       </div>
@@ -261,14 +261,14 @@ const History = (props) => {
   if (props.allClicks.length === 0) {
     return (
       <div>
-        sovellusta käytetään nappeja painelemalla
+        the app is used by pressing the buttons
       </div>
     )
   }
 
   return (
     <div>
-      näppäilyhistoria: {props.allClicks.join(' ')}
+      button press history: {props.allClicks.join(' ')}
     </div>
   )
 }
@@ -280,8 +280,8 @@ const App = (props) => {
     <div>
       <div>
         {left}
-        <button onClick={handleLeftClick}>vasen</button>
-        <button onClick={handleRightClick}>oikea</button>
+        <button onClick={handleLeftClick}>left</button>
+        <button onClick={handleRightClick}>right</button>
         {right}
         <History allClicks={allClicks} /> // highlight-line
       </div>
@@ -293,20 +293,20 @@ const App = (props) => {
 Now the behavior of the component depends on whether or not any buttons have been clicked. If not, meaning that the <em>allClicks</em> array is empty, the component renders a div component with some instructions:
 
 ```js
-<div>sovellusta käytetään nappeja painelemalla</div>
+<div>the app is used by pressing the buttons</div>
 ```
 
 And in all other cases, the component renders the clicking history:
 
 ```js
 <div>
-  näppäilyhistoria: {props.allClicks.join(' ')}
+  button press history: {props.allClicks.join(' ')}
 </div>
 ```
 
 The <i>History</i> component renders completely different React-elements depending on the state of the application. This is called <i>conditional rendering</i>.
 
-React also offers many other ways of doing [conditional rendering](https://reactjs.org/docs/conditional-rendering.html). We will take a closer look at this in [part 2](/osa2).
+React also offers many other ways of doing [conditional rendering](https://reactjs.org/docs/conditional-rendering.html). We will take a closer look at this in [part 2](/en/part2).
 
 Let's make one last modification to our application by refactoring it to use the _Button_ component that we defined earlier on:
 
@@ -315,14 +315,14 @@ const History = (props) => {
   if (props.allClicks.length === 0) {
     return (
       <div>
-        sovellusta käytetään nappeja painelemalla
+        the app is used by pressing the buttons
       </div>
     )
   }
 
   return (
     <div>
-        näppäilyhistoria: {props.allClicks.join(' ')}
+      button press history: {props.allClicks.join(' ')}
     </div>
   )
 }
@@ -355,8 +355,8 @@ const App = (props) => {
       <div>
         {left}
         // highlight-start
-        <Button handleClick={handleLeftClick} text='vasen' />
-        <Button handleClick={handleRightClick} text='oikea' />
+        <Button handleClick={handleLeftClick} text='left' />
+        <Button handleClick={handleRightClick} text='right' />
         // highlight-end
         {right}
         <History allClicks={allClicks} />
@@ -392,7 +392,7 @@ Keep both your code and the web page open together **at the same time, all the t
 
 If and when your code fails to compile and your browser lights up like a Christmas tree:
 
-![](../../images/1/6a.png)
+![](../../images/1/6e.png)
 
 don't write more code but rather find and fix the problem **immediately**. There has yet to be a moment in the history of coding where code that fails to compile would miraculously start working after writing large amounts of additional code. I highly doubt that such an event will transpire during this course either.
 
@@ -425,19 +425,19 @@ This will immediately reveal if e.g. one of the attributes has been misspelled w
 **NB** when you use _console.log_ for debugging, don't combine objects in a Java-like fashion by  using a plus. Instead of writing:
 
 ```js
-console.log('propsin arvo on' + props)
+console.log('props value is' + props)
 ```
 
 Separate the the things you want to log to the console with a comma:
 
 ```js
-console.log('propsin arvo on', props)
+console.log('props value is', props)
 ```
 
 If you use the Java-like way to combine a string with an object, you will end up with a rather uninformative log message:
 
 ```js
-propsin arvo on [Object object]
+props value is [Object object]
 ```
 
 Whereas the items separated by a comma will all be available in the browser console for further inspection.
@@ -462,13 +462,13 @@ You can also access the debugger with the _debugger_ command by adding break poi
 
 It is highly recommended to add the [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension to Chrome. It adds a new _React_ tab to the developer tools:
 
-![](../../images/1/10a.png)
+![](../../images/1/10e.png)
 
 The new _React_ developer tools tab can be used to inspect the different React elements in the application, along with their state and props.
 
 Unfortunately the current version of React developer tools leaves something to be desired when displaying component state created with hooks:
 
-![](../../images/1/11a.png)
+![](../../images/1/11e.png)
 
 The component state was defined like so:
 
@@ -478,7 +478,12 @@ const [right, setRight] = useState(0)
 const [allClicks, setAll] = useState([])
 ```
 
-The topmost <i>baseState</i> shows the current value of the first piece of state defined with the _useState_ hook which in our case is the _left_ variable. The next <i>baseState</i> shows the value of the _right_ variable and the value of the _allClicks_ array is shown last.
+Dev tools shows the state of hooks in the order of their definition.
+The state of hooks _left_ and _right_ shows nicely but the hook _allClicks_ that is of the type array is not shown properly. Hopefully this will be fixed soon. You can follow this [issue](https://github.com/facebook/react-devtools/issues/1215) to get an idea when the proper hook support will be available.
+
+The version of developer tools that has support hooks has already an unofficial [beta release](https://github.com/bvaughn/react-devtools-experimental). I could not get it to work with an up to date version of Chrome. With Firefox it seems to work and shows nicely the hooked array state:
+
+![](../../images/1/11be.png)
 
 ### Rules of Hooks
 
@@ -490,22 +495,22 @@ To recap, hooks may only be called from inside of a function body that defines a
 
 ```js
 const App = (props) => {
-  // nämä ovat ok
+  // there are ok
   const [age, setAge] = useState(0)
   const [name, setName] = useState('Juha Tauriainen')
 
   if ( age > 10 ) {
-    // ei näin!
+    // this does not work!
     const [foobar, setFoobar] = useState(null)
   }
 
   for ( let i = 0; i < age; i++ ) {
-    // eikä näin!
+    // also this is not good
     const [rightWay, setRightWay] = useState(false)
   }
 
   const notGood = () => {
-    // eikä myöskään näin
+    // and this is also illegal
     const [x, setX] = useState(-1000)
   }
 
@@ -529,7 +534,7 @@ const App = (props) => {
   return (
     <div>
       {value}
-      <button>nollaa</button>
+      <button>reset to zero</button>
     </div>
   )
 }
@@ -547,8 +552,9 @@ In order to make the button react to a click event, we have add an <i>event hand
 Event handlers must always be a function or a reference to a function. The button will not work if the event handler is set to a variable of any other type.
 
 If we were to define the event handler as a string:
+
 ```js
-<button onClick={'roskaa'}>nappi</button>
+<button onClick={'crap...'}>button</button>
 ```
 
 React will warn us about this in the console:
@@ -563,7 +569,7 @@ index.js:2178 Warning: Expected `onClick` listener to be a function, instead got
 The following attempt would also not work:
 
 ```js
-<button onClick={value + 1}>nappi</button>
+<button onClick={value + 1}>button</button>
 ```
 
 We have attempted to set the event handler to _value + 1_ which simply returns the result of the operation. React will kindly warn us about this in the console:
@@ -574,7 +580,7 @@ index.js:2178 Warning: Expected `onClick` listener to be a function, instead got
 
 This attempt would not work either:
 ```js
-<button onClick={value = 0}>nappi</button>
+<button onClick={value = 0}>button</button>
 ```
 
 The event handler is not a function but a variable assignment, and React will once again issue a warning to the console. This attempt is also flawed in the sense that we must never mutate state directly in React.
@@ -582,8 +588,8 @@ The event handler is not a function but a variable assignment, and React will on
 What about the following:
 
 ```js
-<button onClick={console.log('nappia painettu')}>
-  nappi
+<button onClick={console.log('clicked the button')}>
+  button
 </button>
 ```
 
@@ -595,7 +601,7 @@ The _console.log_ function call gets executed when the component is rendered and
 
 The following attempt is flawed as well:
 ```js
-<button onClick={setValue(0)}>nappi</button>
+<button onClick={setValue(0)}>button</button>
 ```
 
 We have once again tried to set a function call as the event handler. This does not work. This particular attempt also causes another problem. When the component is rendered the function _setValue(0)_ gets executed which in turn causes the component to be re-rendered. Re-rendering in turn calls _setValue(0)_ again, resulting in an infinite recursion.
@@ -603,17 +609,17 @@ We have once again tried to set a function call as the event handler. This does 
 Executing a particular function call when the button is clicked can be accomplished like this:
 
 ```js
-<button onClick={() => console.log('nappia painettu')}>
-  nappi
+<button onClick={() => console.log('clicked the button')}>
+  button
 </button>
 ```
 
-Now the event handler is a function defined with the arrow function syntax _() => console.log('nappia painettu')_. When the component gets rendered, no function gets called and only the reference to the arrow function is set to the event handler. Calling the function happens only once the button is clicked.
+Now the event handler is a function defined with the arrow function syntax _() => console.log('clicked the button')_. When the component gets rendered, no function gets called and only the reference to the arrow function is set to the event handler. Calling the function happens only once the button is clicked.
 
 We can implement resetting the state in our application with this same technique:
 
 ```js
-<button onClick={() => setValue(0)}>nappi</button>
+<button onClick={() => setValue(0)}>button</button>
 ```
 
 The event handler is now the function _() => setValue(0)_.
@@ -627,12 +633,12 @@ const App = (props) => {
   const [value, setValue] = useState(10)
 
   const handleClick = () =>
-    console.log('nappia painettu')
+    console.log('clicked the button')
 
   return (
     <div>
       {value}
-      <button onClick={handleClick}>nappi</button>
+      <button onClick={handleClick}>button</button>
     </div>
   )
 }
@@ -641,7 +647,7 @@ const App = (props) => {
 The _handleClick_ variable is now assigned to a reference to the function. The reference is passed to the button as the <i>onClick</i> attribute:
 
 ```js
-<button onClick={handleClick}>nappi</button>
+<button onClick={handleClick}>button</button>
 ```
 
 Naturally, our event handler function can be composed of multiple commands. In these cases we use the longer curly brace syntax for arrow functions:
@@ -652,7 +658,7 @@ const App = (props) => {
 
   // highlight-start
   const handleClick = () => {
-    console.log('nappia painettu')
+    console.log('clicked the button')
     setValue(0)
   }
    // highlight-end
@@ -660,7 +666,7 @@ const App = (props) => {
   return (
     <div>
       {value}
-      <button onClick={handleClick}>nappi</button>
+      <button onClick={handleClick}>button</button>
     </div>
   )
 }
@@ -685,7 +691,7 @@ const App = (props) => {
   return (
     <div>
       {value}
-      <button onClick={hello()}>nappi</button>
+      <button onClick={hello()}>button</button>
     </div>
   )
 }
@@ -696,7 +702,7 @@ The code functions correctly even though it looks complicated.
 The event handler is now set to a function call:
 
 ```js
-<button onClick={hello()}>nappi</button>
+<button onClick={hello()}>button</button>
 ```
 
 Earlier on we stated that an event handler may not be a call to a function, and that it has to be a function or a reference to a function. Why then does a function call work in this case?
@@ -716,14 +722,14 @@ The <i>return value</i> of the function is another function that is assigned to 
 When React renders the line:
 
 ```js
-<button onClick={hello()}>nappi</button>
+<button onClick={hello()}>button</button>
 ```
 
 It assigns the return value of _hello()_ to the onClick-attribute. Essentially the line gets transformed into:
 
 ```js
 <button onClick={() => console.log('hello world')}>
-  nappi
+  button
 </button>
 ```
 
@@ -751,9 +757,9 @@ const App = (props) => {
     <div>
       {value}
   // highlight-start      
-      <button onClick={hello('world')}>nappi</button>
-      <button onClick={hello('react')}>nappi</button>
-      <button onClick={hello('function')}>nappi</button>
+      <button onClick={hello('world')}>button</button>
+      <button onClick={hello('react')}>button</button>
+      <button onClick={hello('function')}>button</button>
   // highlight-end      
     </div>
   )
@@ -765,7 +771,7 @@ Now the application has three buttons with event handlers defined by the _hello_
 The first button is defined as
 
 ```js
-<button onClick={hello('world')}>nappi</button>
+<button onClick={hello('world')}>button</button>
 ```
 
 The event handler is created by <i>executing</i> the function call _hello('world')_. The function call returns the function:
@@ -779,7 +785,7 @@ The event handler is created by <i>executing</i> the function call _hello('world
 The second button is defined as:
 
 ```js
-<button onClick={hello('react')}>nappi</button>
+<button onClick={hello('react')}>button</button>
 ```
 
 The function call _hello('react')_ that creates the event handler returns:
@@ -844,32 +850,32 @@ render() {
   return (
     <div>
       {value}
-      <button onClick={setToValue(1000)}>tuhat</button>
-      <button onClick={setToValue(0)}>nollaa</button>
-      <button onClick={setToValue(value + 1)}>kasvata</button>
+      <button onClick={setToValue(1000)}>thousand</button>
+      <button onClick={setToValue(0)}>reset</button>
+      <button onClick={setToValue(value + 1)}>increment</button>
     </div>
   )
 }
 ```
 
-When the component is rendered, the <i>tuhat</i> button is created:
+When the component is rendered, the <i>thousand</i> button is created:
 
 ```js
-<button onClick={setToValue(1000)}>tuhat</button>
+<button onClick={setToValue(1000)}>thousand</button>
 ```
 
 The event handler is set to the return value of _setToValue(1000)_ which is the following function:
 
 ```js
 () => {
-    setValue(1000)
+  setValue(1000)
 }
 ```
 
 The row generated for the increase button is the following:
 
 ```js
-<button onClick={setToValue(value + 1)}>kasvata</button>
+<button onClick={setToValue(value + 1)}>increment</button>
 ```
 
 The event handler is created by the function call _setToValue(value + 1)_ which receives as its parameter the current value of the state variable _value_ increased by one. If the value of _value_ was 10, then the created event handler would be the function:
@@ -894,13 +900,13 @@ const App = (props) => {
     <div>
       {value}
       <button onClick={() => setToValue(1000)}>
-        tuhat
+        thousand
       </button>
       <button onClick={() => setToValue(0)}>
-        nollaa
+        reset
       </button>
       <button onClick={() => setToValue(value + 1)}>
-        kasvata
+        increment
       </button>
     </div>
   )
@@ -910,7 +916,7 @@ const App = (props) => {
 We can now define the event handler as a function that calls the _setToValue_ function with an appropriate parameter. The event handler for resetting the application state would be:
 
 ```js
-<button onClick={() => setToValue(0)}>nollaa</button>
+<button onClick={() => setToValue(0)}>reset</button>
 ```
 
 Choosing between the two presented ways of defining your event handlers is mostly a matter of taste.
@@ -931,7 +937,7 @@ The component gets the event handler function from the _handleClick_ prop, and t
 
 Using the <i>Button</i> component is simple, although we have to make sure that the we use the correct attribute names when passing props to the component.
 
-![](../../images/1/12a.png)
+![](../../images/1/12e.png)
 
 ### Do Not Define Components Within Components
 
@@ -940,7 +946,7 @@ Let's extract displaying the value of the application into its own <i>Display</i
 We will change the application by defining a new component inside of the <i>App</i>-component.
 
 ```js
-// tämä on oikea paikka määritellä komponentti!
+// This is right place to define a component
 const Button = (props) => (
   <button onClick={props.handleClick}>
     {props.text}
@@ -954,15 +960,15 @@ const App = props => {
     setValue(newValue)
   }
 
-  // älä määrittele komponenttia täällä!
+  // Do not define components inside another component
   const Display = props => <div>{props.value}</div> // highlight-line
 
   return (
     <div>
       <Display value={value} />
-      <Button handleClick={() => setToValue(1000)} text="tuhat" />
-      <Button handleClick={() => setToValue(0)} text="nollaa" />
-      <Button handleClick={() => setToValue(value + 1)} text="kasvata" />
+      <Button handleClick={() => setToValue(1000)} text="thousand" />
+      <Button handleClick={() => setToValue(0)} text="reset" />
+      <Button handleClick={() => setToValue(value + 1)} text="increment" />
     </div>
   )
 }
@@ -989,9 +995,9 @@ const App = props => {
   return (
     <div>
       <Display value={value} />
-      <Button handleClick={() => setToValue(1000)} text="tuhat" />
-      <Button handleClick={() => setToValue(0)} text="nollaa" />
-      <Button handleClick={() => setToValue(value + 1)} text="kasvata" />
+      <Button handleClick={() => setToValue(1000)} text="thousand" />
+      <Button handleClick={() => setToValue(0)} text="reset" />
+      <Button handleClick={() => setToValue(value + 1)} text="increment" />
     </div>
   )
 }
@@ -1020,12 +1026,6 @@ Remember, submit **all** the exercises of one part **in a single submission**. O
 
 **WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application.
 
-**React does not work...** you may run into the following error message once you start using the <i>useState</i> hook:
-
-![](../../images/1/fail.png)
-
-The reason for this is that <i>you have not installed</i> a recent enough version of React, as it was instructed at [the beginning of part 1](/osa1/reactin_alkeet).
-
 In some situations you may also have to run the command below from the root of the project:
 
 ``` 
@@ -1038,7 +1038,7 @@ Like most companies, [Unicafe](https://www.unicafe.fi/#/9/4) collects feedback f
 
 The application must display the total amount of collected feedback for each category. Your final application could look like this:
 
-![](../../images/1/13a.png)
+![](../../images/1/13e.png)
 
 Note that your application needs to work only during a single browser session. Once you refresh the page, the collected feedback is allowed to disappear.
 
@@ -1049,7 +1049,7 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 const App = () => {
-  // tallenna napit omaan tilaansa
+  // save clicks of each button to own state
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
@@ -1070,7 +1070,7 @@ ReactDOM.render(<App />,
 
 Expand your application so that it shows more statistics about the gathered feedback: the total number of collected feedback, the average score (good: 1, neutral: 0, bad: -1) and the percentage of positive feedback.
 
-![](../../images/1/14a.png)
+![](../../images/1/14e.png)
 
 <h4>1.8: unicafe step3</h4>
 
@@ -1079,7 +1079,7 @@ Refactor your application so that displaying the statistics is extracted into it
 Remember that components should not be defined inside other components:
 
 ```js
-// oikea paikka komponentin määrittelyyn
+// a proper place to define a component
 const Statistics = (props) => {
   // ...
 }
@@ -1089,8 +1089,7 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
-  // EI NÄIN!!! eli älä määrittele komponenttia 
-  // toisen komponentin sisällä!
+  // do not define a component within another component
   const Statistics = (props) => {
     // ...
   }
@@ -1105,7 +1104,7 @@ const App = () => {
 
 Change your application to display statistics only once feedback has been gathered.
 
-![](../../images/1/15a.png)
+![](../../images/1/15e.png)
 
 <h4>1.10: unicafe step5</h4>
 
@@ -1121,9 +1120,9 @@ const Statistics = (props) => {
   /// ...
   return(
     <div>
-      <Statistic text="hyvä" value ={...} />
-      <Statistic text="neutraali" value ={...} />
-      <Statistic text="huono" value ={...} />
+      <Statistic text="good" value ={...} />
+      <Statistic text="neutral" value ={...} />
+      <Statistic text="bad" value ={...} />
       // ...
     </div>
   )
@@ -1137,7 +1136,7 @@ The application's state should still be kept in the root <i>App</i> component.
 
 Display the statistics in an HTML [table](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Basics), so that your application looks roughly like this:
 
-![](../../images/1/16a.png)
+![](../../images/1/16e.png)
 
 Remember to keep your console open at all times. If you see this warning in your console:
 
@@ -1204,18 +1203,17 @@ You can create a copy of an object like this:
 const points = { 0: 1, 1: 3, 2: 4, 3: 2 }
 
 const copy = { ...points }
-// kasvatetaan olion kentän 2 arvoa yhdellä
+// increment the property 2 value by one
 copy[2] += 1     
 ```
 
-<!-- ja taulukko esim. seuraavasti: -->
 And a copy of an array like this:
 
 ```js
 const points = [1, 4, 6, 3]
 
 const copy = [...points]
-// kasvatetaan taulukon paikan 2 arvoa yhdellä
+// increment the value in position 2 by one
 copy[2] += 1     
 ```
 

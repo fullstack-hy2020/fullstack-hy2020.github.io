@@ -10,7 +10,7 @@ export const navigation = {
     { text: 'About course', path: '/en/about' },
     { text: 'Course contents', path: '/en#course-contents' },
     { text: 'FAQ', path: '/en/faq' },
-    { text: 'Participating in course', path: '/en/companies' },
+    { text: 'Partners', path: '/en/companies' },
     { text: 'Challenge', path: '/en/challenge' },
   ],
   fi: [
