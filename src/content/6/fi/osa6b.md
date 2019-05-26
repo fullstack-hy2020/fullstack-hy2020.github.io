@@ -580,14 +580,6 @@ Propsia <i>store</i> ei kuitenkaan ole en채채 olemassa, joten tilan muutos ei t�
 Connect-funktion toisena parametrina voidaan m채채ritell채 [mapDispatchToProps](https://github.com/reactjs/react-redux/blob/master/docs/api.md#arguments) eli joukko <i>action creator</i> -funktioita, jotka v채litet채채n yhdistetylle komponentille propseina. Laajennetaan connectausta seuraavasti
 
 ```js
-const mapStateToProps = state => {
-  return {
-    notes: state.notes,
-    filter: state.filter,
-  }
-}
-
-
 const mapStateToProps = (state) => {
   return {
     notes: state.notes,
@@ -617,7 +609,7 @@ Nyt komponentti voi dispatchata suoraan action creatorin _toggleImportanceOf_ m�
 />
 ```
 
-Eli se sijaan ett채 kutsuttaisiin kutsuttaisiin
+Eli se sijaan ett채 kutsuttaisiin
 
 ```js
 props.store.dispatch(toggleImportanceOf(note.id))
