@@ -858,7 +858,7 @@ Komponentti siis viittaa funktioon propsin <i>props.createNote</i> kautta:
 ```js
 const NewNote = (props) => {
 
-  addNote = (event) => {
+  const addNote = (event) => {
     event.preventDefault()
     props.createNote(event.target.note.value)
     event.target.note.value = ''
