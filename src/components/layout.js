@@ -5,18 +5,28 @@ import Header from './Header/Header';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const Layout = ({ children }) => {
-  const siteLanguage =
-    window.location.pathname.indexOf('/en') !== -1 ? 'en' : 'fi';
+class Layout extends React.Component {
+  state = {
+    siteLanguage: 'fi'
+  }
 
-  return (
-    <div className="main-wrapper">
-      <Header lang={siteLanguage} />
+  componentDidMount() {
+    const siteLanguage =
+      window.location.pathname.indexOf('/en') !== -1 ? 'en' : 'fi';
 
-      {children}
-    </div>
-  );
-};
+    this.setState({ siteLanguage });
+  };
+
+  render() {
+    return (
+      <div className="main-wrapper">
+        <Header lang={this.state.siteLanguage} />
+
+        {this.props.children}
+      </div>
+    );
+  }
+}
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
