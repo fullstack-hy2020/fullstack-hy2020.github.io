@@ -222,7 +222,7 @@ const NewNote = (props) => {
 export default connect(null, { createNote } )(NewNote)
 ```
 
-Koska backend generoi muistiinpanoille id:t, muutetaan action creator _noteCreation_ muotoon
+Koska backend generoi muistiinpanoille id:t, muutetaan action creator _createNote_ muotoon
 
 ```js
 export const createNote = (data) => {
