@@ -129,7 +129,7 @@ Harjoitustyön opintopistemäärä määrittyy käytettyjen työtuntien mukaan, 
 
 Harjoitustyö on mahdollista tehdä myös pari- tai ryhmätyönä.
 
-Lisää tietoa harjoitustyöstä avoimen yliopiston [sivulla]().
+Lisää tietoa harjoitustyöstä avoimen yliopiston [sivulla](https://courses.helsinki.fi/fi/aytkt21010/129098202).
 
 ### Haastattelulupaus
 
