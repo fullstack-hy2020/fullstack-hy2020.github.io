@@ -120,17 +120,17 @@ Exercises are submitted **one part at a time**. When you have once submitted exe
 
 Many of the exercises build a larger application bit by bit. In these cases, submitting only the completed application is enough. You  can make a commit after each exercise, but that is not compulsory.
 
-### Full stack -practical work
+### Full stack project
 
-Full stack practical work worth 1-10 credits will be available through the Open University later this Spring.
+Full stack project worth 1-10 credits will be available through the Open University.
 
-For the practical work, an application is implemented in React and/or Node. Implementing a mobile application in React Native is also possible. 
+For the project, an application is implemented in React and/or Node. Implementing a mobile application in React Native is also possible. 
 
 The number of credits is based on hours of work done. One credit is approccimately 17.5 hours of work. The work  is graded pass/fail.
 
-It is possible to complete the practical work as a pair or a group.
+It is possible to complete the project as a pair or a group.
 
-More information to come  later this spring.
+For more information see [the open university page](https://courses.helsinki.fi/en/aytkt21010/129098202).
 
 ### Interview promise
 

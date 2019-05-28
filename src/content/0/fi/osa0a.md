@@ -121,7 +121,7 @@ Suurin osa tehtävistä on moniosaisia, samaa ohjelmaa pala palalta rakentavia k
 
 ### Full stack -harjoitustyö
 
-Myöhemmin keväällä Avoimen yliopiston tarjontaan on tulossa 1-10 opintopisteen laajuinen Full Stack -harjoitustyö.
+Avoimen yliopiston tarjonnassa on 1-10 opintopisteen laajuinen Full Stack -harjoitustyö, johon voit halutessasi osallistua suoritettuasi tämän kurssin vähintään 5 opintopisteen laajuisena.
 
 Harjoitustyössä toteutetaan vapaavalintainen sovellus Reactilla ja/tai Nodella. Myös React Nativella toteutettu mobiilisovellus on mahdollinen.
 
@@ -129,7 +129,7 @@ Harjoitustyön opintopistemäärä määrittyy käytettyjen työtuntien mukaan, 
 
 Harjoitustyö on mahdollista tehdä myös pari- tai ryhmätyönä.
 
-Lisää tietoa harjoitustyöstä kevään aikana.
+Lisää tietoa harjoitustyöstä avoimen yliopiston [sivulla]().
 
 ### Haastattelulupaus
 
