@@ -20,7 +20,7 @@ const About = () => {
     <Layout>
       <SEO
         title="Kurssista | Full Stack Open 2019"
-        description={mainSEOdescription}
+        description={mainSEOdescription['fi']}
         keywords={[
           ...mainSEOtags,
           'Avoin yliopisto',

@@ -50,7 +50,7 @@ const IndexPage = () => {
     <Layout>
       <SEO
         title="Full Stack Open 2019"
-        description={mainSEOdescription}
+        description={mainSEOdescription['fi']}
         keywords={[...mainSEOtags]}
       />
       <div className="container spacing--after spacing--mobile">

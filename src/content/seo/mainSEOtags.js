@@ -23,5 +23,13 @@ module.exports = [
   'REST',
   'REST api',
   'single page -sovellus',
-  'ohjelmointi'
+  'ohjelmointi',
+  'university of helsinki',
+  'department of computer science',
+  'web development',
+  'software development',
+  'web',
+  'web application',
+  'single page app',
+  'programming'
 ];

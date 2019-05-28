@@ -145,7 +145,7 @@ export default class ContentTemplate extends Component {
           title={`Fullstack ${lang === 'en' ? 'part' : 'osa'}${part} | ${
             this.state.h1Title
           }`}
-          description={mainSEOdescription}
+          description={mainSEOdescription[lang]}
           keywords={[
             ...mainSEOtags,
             this.state.h1Title,

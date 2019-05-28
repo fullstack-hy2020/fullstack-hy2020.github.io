@@ -14,8 +14,8 @@ import mainSEOtags from '../content/seo/mainSEOtags';
 const Challenge = () => (
   <Layout>
     <SEO
-      title="Full stack -haaste | Full Stack Open 2019"
-      description="Helsingin yliopisto, Houston Inc ja kumppaniyrityksemme haastavat niin koodarit kuin yritykset kasvattamaan osaamistaan tätä kurssia suorittamalla. Haaste on tarkoitettu jokaiselle sovelluskehitysalan osaajalle ja sellaiseksi haluavalle."
+      title="Full stack -challenge | Full Stack Open 2019"
+      description="The University of Helsinki and Houston Inc. have partnered up to challenge both individual developers and companies alike to learn and build upon their expertise in true Full Stack development. The course is built by coders for coders, and offers something for both newcomers and seasoned industry veterans alike. "
       keywords={[
         ...mainSEOtags,
         'fullstackhaaste',
