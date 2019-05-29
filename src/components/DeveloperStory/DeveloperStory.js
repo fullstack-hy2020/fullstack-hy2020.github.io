@@ -18,7 +18,7 @@ export class DeveloperStory extends Component {
   }
 
   render() {
-    const { image, companyLogo, text, name, title } = this.props;
+    const { image, companyLogo, text, name, title, lang } = this.props;
     const { readMore } = this.state;
 
     return (
@@ -55,7 +55,7 @@ export class DeveloperStory extends Component {
               onClick={() => this.setState({ readMore: true })}
               className="col-10 developer-story__read-more"
             >
-              Lue lisää
+              {lang === 'en' ? 'Read more' : 'Lue lisää'}
             </button>
           )}
 
@@ -74,6 +74,7 @@ DeveloperStory.defaultProps = {
   text: '',
   name: '',
   title: '',
+  lang: 'fi',
 };
 
 DeveloperStory.propTypes = {
@@ -82,4 +83,5 @@ DeveloperStory.propTypes = {
   text: PropTypes.array.isRequired,
   name: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  lang: PropTypes.string.isRequired,
 };

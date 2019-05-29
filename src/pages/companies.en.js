@@ -23,6 +23,7 @@ const Companies = () => (
         'terveystalo',
         'sympa',
         'funktionaalinen ohjelmointi',
+        'functional programming',
         'mikropalveluarkkitehtuuri',
       ]}
     />
@@ -31,19 +32,19 @@ const Companies = () => (
       <BodyText
         className="col-10 spacing"
         heading={{
-          title: 'Devaaja-tarinoita yhteistyökumppaneiltamme',
+          title: 'Developer stories from our partners',
           level: 'h1',
         }}
       />
 
-      {stories.map(story => (
-        <DeveloperStory key={story.name} {...story} />
+      {stories.en.map(story => (
+        <DeveloperStory key={story.name} {...story} lang="en" />
       ))}
 
       <Element className="spacing" />
     </Element>
 
-    <Footer lang="fi" />
+    <Footer lang="en" />
   </Layout>
 );
 

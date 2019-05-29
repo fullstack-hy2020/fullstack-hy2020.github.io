@@ -36,8 +36,8 @@ const Companies = () => (
         }}
       />
 
-      {stories.map(story => (
-        <DeveloperStory key={story.name} {...story} />
+      {stories.fi.map(story => (
+        <DeveloperStory key={story.name} {...story} lang="fi" />
       ))}
 
       <Element className="spacing" />
