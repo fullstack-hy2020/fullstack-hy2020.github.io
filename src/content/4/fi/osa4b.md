@@ -216,7 +216,7 @@ Async/await-kikan hyödyt tulevat nyt selkeästi esiin. Normaalisti tarvitsisimm
 const response = await api.get('/api/notes')
 
 // tänne tullaan vasta kun edellinen komento eli HTTP-pyyntö on suoritettu
-// muuttujassa res on nyt HTTP-pyynnön tulos
+// muuttujassa response on nyt HTTP-pyynnön tulos
 expect(response.body.length).toBe(3)
 ```
 
@@ -1077,7 +1077,7 @@ describe('when there is initially some notes saved', () => {
   })
 
   describe('deletion of a note', () => {
-    test('succeeds with status code 200 if id is valid', async () => {
+    test('succeeds with status code 204 if id is valid', async () => {
       const notesAtStart = await helper.notesInDb()
       const noteToDelete = notesAtStart[0]
 
