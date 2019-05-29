@@ -11,20 +11,27 @@ import stories from '../content/pages/stories';
 const Companies = () => (
   <Layout>
     <SEO
-      title="Yritysesittelyt | Full Stack Open 2019"
-      description="Kurssin yhteistyöyritysten devaajat esittäytyvät"
+      title="Partner companies | Full Stack Open 2019"
+      description="Full stack development in partner companies"
       keywords={[
         ...mainSEOtags,
         'houston',
         'houston inc',
-        'sovelluskehitys',
+        'software development',
         'frontend',
         'elisa',
         'terveystalo',
+        'konecranes',
+        'k-ryhmä',
+        'unity technologies',
+        'unity',
+        'kesko',
         'sympa',
         'funktionaalinen ohjelmointi',
         'functional programming',
         'mikropalveluarkkitehtuuri',
+        'micro service architecture',
+        'micro service',
       ]}
     />
 

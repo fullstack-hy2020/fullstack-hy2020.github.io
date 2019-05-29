@@ -21,9 +21,17 @@ const Companies = () => (
         'frontend',
         'elisa',
         'terveystalo',
+        'konecranes',
+        'k-ryhmä',
+        'unity technologies',
+        'unity',
+        'kesko',
         'sympa',
         'funktionaalinen ohjelmointi',
+        'functional programming',
         'mikropalveluarkkitehtuuri',
+        'micro service architecture',
+        'micro service',
       ]}
     />
 
