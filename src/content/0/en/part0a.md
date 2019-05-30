@@ -42,7 +42,7 @@ Speed of completing the course is quite free, and the exercises can be submitted
 
 Statistics on the time used for exercises which have already been submitted on different parts of this course can be found from [the submission system](https://studies.cs.helsinki.fi/fullstackopen2019).
 
-### Evaluation criteria
+### Grading
 
 The course can be taken as a shorter course worth 3 credits, or as the full course worth 5-8 credits debending on the number of submitted exercises.
 

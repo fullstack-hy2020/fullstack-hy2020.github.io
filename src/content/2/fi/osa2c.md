@@ -18,20 +18,20 @@ Tehdään projektin juurihakemistoon tiedosto <i>db.json</i>, jolla on seuraava 
   "notes": [
     {
       "id": 1,
-      "content": "HTML on helppoa",
-      "date": "2019-01-10T17:30:31.098Z",
+      "content": "HTML is easy",
+      "date": "2019-05-30T17:30:31.098Z",
       "important": true
     },
     {
       "id": 2,
-      "content": "Selain pystyy suorittamaan vain javascriptiä",
-      "date": "2019-01-10T18:39:34.091Z",
+      "content": "Browser can execute only Javascript",
+      "date": "2019-05-30T18:39:34.091Z",
       "important": false
     },
     {
       "id": 3,
-      "content": "HTTP-protokollan tärkeimmät metodit ovat GET ja POST",
-      "date": "2019-01-10T19:20:14.298Z",
+      "content": "GET and POST are the most important methods of HTTP protocol",
+      "date": "2019-05-30T19:20:14.298Z",
       "important": true
     }
   ]
@@ -50,7 +50,7 @@ Oletusarvoisesti <i>json-server</i> käynnistyy porttiin 3000, mutta create-reac
 
 Mennään selaimella osoitteeseen <http://localhost:3001/notes>. Kuten huomaamme, <i>json-server</i> tarjoaa osoitteessa tiedostoon tallentamamme muistiinpanot JSON-muodossa:
 
-![](../../images/2/14b.png)
+![](../../images/2/14e.png)
 
 Jos selaimesi ei osaa näyttää JSON-muotoista dataa formatoituna, asenna jokin sopiva plugin, esim. [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc)
 helpottamaan elämääsi.
@@ -95,11 +95,11 @@ Esim. Java-ohjelmoinnista tuttu synkroninen tapa tehdä kyselyjä etenisi seuraa
 HTTPRequest request = new HTTPRequest();
 
 String url = "https://fullstack-exampleapp.herokuapp.com/data.json";
-List<Muistiinpano> muistiinpanot = request.get(url);
+List<Note> notes = request.get(url);
 
-muistiinpanot.forEach(m => {
+notes.forEach(m => {
   System.out.println(m.content);
-})
+});
 ```
 
 Javassa koodi etenee nyt rivi riviltä ja koodi pysähtyy odottamaan HTTP-pyynnön, eli komennon _request.get(...)_ valmistumista. Komennon palauttama data, eli muistiinpanot talletetaan muuttujaan ja dataa aletaan käsittelemään halutulla tavalla.
@@ -147,9 +147,9 @@ Nykyään lähes kaikki Javascript-projektit määritellään node "pakkausmanag
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
-    "react-scripts": "2.1.3"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -184,11 +184,10 @@ Nyt axios on mukana riippuvuuksien joukossa:
 ```json
 {
   "dependencies": {
-    "axios": "^0.18.0", // highlight-line
-    "json-server": "^0.14.2",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
-    "react-scripts": "2.1.3"
+    "axios": "^0.19.0", // highlight-line
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.1"
   },
   // ...
 }

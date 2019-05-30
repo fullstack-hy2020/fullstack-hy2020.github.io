@@ -18,20 +18,20 @@ Make a file <i>db.json</i> into the root directory of the project with the follo
   "notes": [
     {
       "id": 1,
-      "content": "HTML on helppoa",
-      "date": "2019-01-10T17:30:31.098Z",
+      "content": "HTML is easy",
+      "date": "2019-05-30T17:30:31.098Z",
       "important": true
     },
     {
       "id": 2,
-      "content": "Selain pystyy suorittamaan vain javascriptiä",
-      "date": "2019-01-10T18:39:34.091Z",
+      "content": "Browser can execute only Javascript",
+      "date": "2019-05-30T18:39:34.091Z",
       "important": false
     },
     {
       "id": 3,
-      "content": "HTTP-protokollan tärkeimmät metodit ovat GET ja POST",
-      "date": "2019-01-10T19:20:14.298Z",
+      "content": "GET and POST are the most important methods of HTTP protocol",
+      "date": "2019-05-30T19:20:14.298Z",
       "important": true
     }
   ]
@@ -50,7 +50,7 @@ By default <i>json-server</i> starts running on port 3000, but because projects 
 
 In the browser let's navigate to the address <http://localhost:3001/notes>. We can see that <i>json-server</i> serves the notes we previously wrote to the file in the JSON format:
 
-![](../../images/2/14b.png)
+![](../../images/2/14e.png)
 
 If your browser doesn't have a way to format the display of JSON-data, then install an appropriate plugin, e.g. [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) to make your life easier.
 
@@ -58,13 +58,13 @@ The idea, going forward, is to save the notes to the server, which in this case 
 
 json-server stores all the data into the file <i>db.json</i>, which resides on the server. In the real world data will be stored into some kind of database. However, json-server is a handy tool, which facilitates the usage of server side functionality in the development phase without needing to program anything.
 
-We will get familiar with the principles of implementing server side functionality in more detail in [part 3](/part3) of this course.
+We will get familiar with the principles of implementing server side functionality in more detail in [part 3](/en/part3) of this course.
 
 ### The browser as a runtime environment
 
 Our first task is fetching the already existing notes to our React application from the address <http://localhost:3001/notes>.
 
-In the the [project example](/osa0#selaimessa-suoritettava-sovelluslogiikka) from part 0 we already encountered a way to data from a server using Javascript. The code in the example was fetching the data using [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), otherwise known as a HTTP request made using a XHR object. This is a technique launched in the year 1999, which every browser has supported for a good while.
+In the the [example project](/en/part0/fundamentals_of_web_apps#running-application-logic-on-the-browser) from part 0 we already encountered a way to data from a server using Javascript. The code in the example was fetching the data using [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), otherwise known as a HTTP request made using a XHR object. This is a technique launched in the year 1999, which every browser has supported for a good while.
 
 Nowadays it is not recommended to use XHR and browsers already widely support the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) method, which is based on so-called [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), instead of the event driven model used by XHR.
 
@@ -76,7 +76,7 @@ const xhttp = new XMLHttpRequest()
 xhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
     const data = JSON.parse(this.responseText)
-    // käsittele muuttujaan data sijoitettu kyselyn tulos
+    // handle the response that is saved in variable data
   }
 }
 
@@ -94,11 +94,11 @@ The way of doing requests synchronously, familiar from e.g. Java programming, wo
 HTTPRequest request = new HTTPRequest();
 
 String url = "https://fullstack-exampleapp.herokuapp.com/data.json";
-List<Muistiinpano> muistiinpanot = request.get(url);
+List<Note> notes = request.get(url);
 
-muistiinpanot.forEach(m => {
+notes.forEach(m => {
   System.out.println(m.content);
-})
+});
 ```
 
 In Java the code executes line by line and stops to wait for the HTTP request, which means waiting for the command _request.get(...)_ to finish. The data returned by the command, the notes, are then stored in a variable and we start manipulation the data in the as we want.
@@ -146,9 +146,9 @@ Nowadays practically all Javascript projects are defined using the node package 
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
-    "react-scripts": "2.1.3"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -176,6 +176,7 @@ Now we want to use axios. We define the library directly into the file <i>packag
 npm install axios --save
 ```
 
+
 **NB _npm_-commands should always be run in the project root directory**, which is where the <i>package.json</i> file can be found.
 
 Axios is now included among the other dependencies:
@@ -183,15 +184,13 @@ Axios is now included among the other dependencies:
 ```json
 {
   "dependencies": {
-    "axios": "^0.18.0", // highlight-line
-    "json-server": "^0.14.2",
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0",
-    "react-scripts": "2.1.3"
+    "axios": "^0.19.0", // highlight-line
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.1"
   },
   // ...
 }
-
 ```
 
 In addition to adding axios to the dependencies, the <em>npm install</em> command also  <i>downloaded</i> the library code. As with other dependencies the code can be found in the <i>node_modules</i> directory located in the root. As one might notice, <i>node_modules</i> contains a fair bit of interesting stuff.
@@ -223,7 +222,7 @@ We can now conveniently, without parameter definitions, start the json-server fr
 npm run server
 ```
 
-We will get more familiar with the _npm_ tool in the [third part of the course](/part3).
+We will get more familiar with the _npm_ tool in the [third part of the course](/en/part3).
 
 NB the previously started json-server must be terminated before staring a new one, otherwise there will be trouble
 
@@ -250,6 +249,8 @@ Now we are ready to use axios. Going forward, json-server is assumed to be runni
 
 The library can be brought into use like other libraries, e.g. React, are brought in with an appropriate <em>import</em> statement.
 
+
+
 Add the following to the file <i>index.js</i>
 
 ```js
@@ -262,23 +263,39 @@ const promise2 = axios.get('http://localhost:3001/foobar')
 console.log(promise2)
 ```
 
+
+
 This should be printed to the console
 
 ![](../../images/2/16b.png)
 
+
+
 Axios' method _get_ returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).
+
+
 
 The documentation on Mozilla's site states the following about promises:
 
 > <i>A Promise is an object representing the eventual completion or failure of an asynchronous operation.</i>
 
+
+
 On other words a promise is an object that represents an asynchronous operation. A promise can have three distinct states:
+
+
+
+
 
 - first, the promise is <i>pending</i>, meaning the respective asynchronous operation has not yet occurred
 - if the operation finishes successfully, then the promise will move its state to <i>fulfilled</i>, sometimes called <i>resolved</i>
 - a third possible state is <i>rejected</i>, which represents a failed operation
 
+
+
 The first promise in our example is <i>fulfilled</i>, representing a successful <em>axios.get('http://localhost:3001/notes')</em> request. The second one, however, is <i>rejected</i>, and the console will tell us the reason. It looks like we were trying to make a HTTP GET request to an address, which doesn't exist.
+
+
 
 If and when we want to access the result of the operation represented by the promise, we must register an event handler to the promise. This is achieved using the method <em>then</em>:
 
@@ -290,11 +307,17 @@ promise.then(response => {
 })
 ```
 
+
+
 The following is printed to the console
 
 ![](../../images/2/17b.png)
 
+
+
 The Javascript runtime environment calls the callback function registered by the <em>then</em> method providing it with a <em>result</em> object as a parameter. The <em>result</em> object contains all the essential data related to the response of a HTTP GET request, which would include the returned <i>data</i>, <i>status code</i> and <i>headers</i>.
+
+
 
 Rarely does one need to save the promise object to a variable, and it is common to chain the <em>then</em> method call right after the axios method call:
 
@@ -305,7 +328,11 @@ axios.get('http://localhost:3001/notes').then(response => {
 })
 ```
 
+
+
 The callback function now takes the data contained within the response, saves it to a variable and print the notes to the console.
+
+
 
 A more readable way to format <i>chained</i> method calls is to place each call on its own line:
 
@@ -318,11 +345,20 @@ axios
   })
 ```
 
+
+
 this way a quick glance at the left side of the screen gives a decent picture of what's going on.
+
+
+
 
 The data returned by the server is plaint text, basically just one long string. The axios library is still able to parse the data into a Javascript array, since the server has specified that the data format is <i>application/json; charset=utf-8</i> (see previous image) using the <i>content-type</i> header.
 
+
+
 Finally we can begin using data fetched from the server.
+
+
 
 Let's first do it "poorly", which would mean putting the <i>App</i> component representing the application inside the callback function by modifying <i>index.js</i> as follows:
 
@@ -342,26 +378,39 @@ axios.get('http://localhost:3001/notes').then(response => {
 })
 ```
 
+
+
 In some cases this way might be fine, but it is still a bit problematic. Instead we move the fetching of data into the <i>App</i> component.
+
+
 
 However, it is not immediately obvious where among the component's code the command <em>axios.get</em> should be placed.
 
-### Effect-hookit
 
-Olemme jo käyttäneet Reactin version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) mukanaan tuomia [state hookeja](https://reactjs.org/docs/hooks-state.html) tuomaan funktioina määriteltyihin React-komponentteihin tilan. Versio 16.8.0 tarjoaa kokonaan uutena ominaisuutena myös
-[effect hookit](https://reactjs.org/docs/hooks-effect.html), dokumentaation sanoin
+### Effect-hooks
+
+
+
+
+We have already used [state hooks](https://reactjs.org/docs/hooks-state.html), that were introduced along with React version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), provide state to React components defined as functions. Version 16.8.0 also introduces the [effect hooks](https://reactjs.org/docs/hooks-effect.html) as a new. In the words of the docs
 
 > <i>The Effect Hook lets you perform side effects in function components.</i>
 > <i>Data fetching, setting up a subscription, and manually changing the DOM in React components are all examples of side effects. </i>
 
-Eli effect hookit ovat juuri oikea tapa hakea dataa palvelimelta.
 
-Poistetaan nyt datan hakeminen tiedostosta <i>index.js</i>. Komponentille <i>App</i> ei ole enää tarvetta välittää dataa propseina. Eli  <i>index.js</i> pelkistyy seuraavaan muotoon
+
+Thereby effect hooks are precisely the right tool to use when fetching data from a server.
+
+
+
+Let's remove the fetching of data from <i>index.js</i>. There is no longer a need to pass data as props to the <i>App</i> component. So <i>index.js</i> gets simplified into
 
 ```js
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
-Komponentti <i>App</i> muuttuu seuraavasti:
+
+
+The <i>App</i> component changes as follows:
 
 ```js
 import React, { useState, useEffect } from 'react' // highlight-line
@@ -392,9 +441,13 @@ const App = () => {
 ```
 
 
-Koodiin on myös lisätty muutama aputulostus, jotka auttavat hahmottamaan miten suoritus etenee.
 
-Konsoliin tulostuu
+
+We have also added a few helpful prints, which clarify the progression of the execution.
+
+
+
+This is printed to the console
 
 <pre>
 render 0 notes
@@ -403,10 +456,13 @@ promise fulfilled
 render 3 notes
 </pre>
 
-Ensin siis suoritetaan komponentin määrittelevan funktion runko ja renderöidään komponentti ensimmäistä kertaa. Tässä vaiheessa tulostuu <i>render 0 notes</i> eli dataa ei ole vielä haettu palvelimelta.
 
-Efekti, eli funktio 
 
+First the body of the function defining the component is executed, and the component is rendered for the first time. At this point <i>render 0 notes</i> is printed, meaning data hasn't yet been fetched from the server.
+
+
+
+The effect, or function,
 ```js
 () => {
   console.log('effect')
@@ -419,7 +475,9 @@ Efekti, eli funktio
 }
 ```
 
-suoritetaan heti renderöinnin jälkeen. Funktion suoritus saa aikaan sen, että konsoliin tulostuu <i>effect</i> ja että komento <em>axios.get</em> aloittaa datan hakemisen palvelimelta sekä rekisteröi operaatiolle <i>tapahtumankäsittelijäksi</i> funktion
+
+
+is executed immediately after rendering. The execution of the function results in <i>effect</i> being printed to the console, and the command <em>axios.get</em> initiating the fetching of data from the server as well as registering a function as an <i>event handler</i> for the operation
 
 ```js
 response => {
@@ -428,11 +486,16 @@ response => {
 })
 ```
 
-Siinä vaiheessa kun data saapuu palvelimelta, Javascriptin runtime kutsuu rekisteröityä tapahtumankäsittelijäfunktiota, joka tulostaa konsoliin <i>promise fulfilled</i> sekä tallettaa tilaan palvelimen palauttamat muistiinpanot funktiolla <em>setNotes(response.data)</em>.
 
-Kuten aina, tilan päivittävän funktion kutsu aiheuttaa komponentin uudelleen renderöitymisen. Tämän seurauksena konsoliin tulostuu <i>render 3 notes</i> ja palvelimelta haetut muistiinpanot renderöityvät ruudulle.
 
-Tarkastellaan vielä efektihookin määrittelyä kokonaisuudessaan
+When data arrives from the server the Javascript runtime calls the function registered as the event handler, which prints <i>promise fulfilled</i> to the console and stores the notes received from the server into the state using the function <em>setNotes(response.data)</em>.
+
+
+
+As usual, the call to a function updating state triggers the re-rendering of the component. As a result <i>render 3 notes</i> is printed to the console and the notes fetched from the server are rendered to the screen.
+
+
+Finally, let's take a look at the definition of the effect hook as a whole
 
 ```js
 useEffect(() => {
@@ -445,7 +508,8 @@ useEffect(() => {
 }, [])
 ```
 
-Kirjotetaan koodi hieman toisella tavalla. 
+
+Let's rewrite the code a bit differently.
 
 ```js
 const hook = () => {
@@ -461,19 +525,31 @@ const hook = () => {
 useEffect(hook, [])
 ```
 
-Nyt huomaamme selvemmin, että funktiolle [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect) annetaan <i>kaksi parametria</i>. Näistä ensimmäinen on funktio, eli itse <i>efekti</i>. Dokumentaation mukaan
+
+
+Now we can more clearly see that the function [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect) is actually given <i>two parameters</i>. The first is a function, the <i>effect</i> itself. According to the documentation
 
 > <i>By default, effects run after every completed render, but you can choose to fire it only when certain values have changed.</i>
 
-Eli oletusarvoisesti efekti suoritetaan <i>aina</i> sen jälkeen, kun komponentti renderöidään. Meidän tapauksessamme emme kuitenkaan halua suorittaa efektin kuin ensimmäisen renderöinnin yhteydessä. 
 
-Funktion <em>useEffect</em> toista parametria käytetään [tarkentamaan sitä miten usein efekti suoritetaan](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect). Jos toisena parametrina on tyhjä taulukko <em>[]</em>, suoritetaan efekti ainoastaan komponentin ensimmäisen renderöinnin aikana.
 
-Efektihookien avulla on mahdollisuus tehdä paljon muutakin kuin hakea dataa palvelimelta, tämä riittää kuitenkin meille tässä vaiheessa.
+So by default the effect is <i>always</i> run after the component has been rendered. In our case, however, we only want to execute the effect along with the first render.
 
-Mieti vielä tarkasti äsken läpikäytyä tapahtumasarjaa, eli mitä kaikkea koodista suoritetaan, missä järjetyksessä ja kuinka monta kertaa. Tapahtumien järjestyksen ymmärtäminen on erittäin tärkeää!
 
-Huomaa, että olisimme voineet kirjoittaa efektifunktion koodin myös seuraavasti:
+
+The second parameter of <em>useEffect</em> is used to [specify how often the effect is run](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect). If the second parameter is an empty array <em>[]</em>, then the effect is only run along with the first render of the component.
+
+
+
+There are many possible use cases for effect hook other than fetching data from the server. At this moment this is enough for us.
+
+
+
+Think back at the sequence of events we just discussed. Which parts of the code is run? In what order? How often? Understanding the order of events is critical!
+
+
+
+Note, that we could have also written the code of the effect function in the following way:
 
 ```js
 useEffect(() => {
@@ -489,7 +565,9 @@ useEffect(() => {
 }, [])
 ```
 
-Muuttujaan <em>eventHandler</em> on sijoitettu viite tapahtumankäsittelijäfunktioon. Axiosin metodin <em>get</em> palauttama promise on talletettu muuttujaan <em>promise</em>. Takaisinkutsun rekisteröinti tapahtuu antamalla promisen then-metodin parametrina muuttuja <em>eventHandler</em>, joka viittaa käsittelijäfunktioon. Useimmiten funktioiden ja promisejen sijoittaminen muuttujiin ei ole tarpeen ja ylempänä käyttämämme kompaktimpi esitystapa riittää:
+
+
+The variable <em>eventHandler</em> has been assigned reference to a event handler function. The promise returned by the <em>get</em> method of Axios is stored into the variable <em>promise</em>. The registration of the callback happens by giving <em>eventHandler</em>, referring to the event handler function, as a parameter to the then method of the promise. It isn't usually necessary to assign functions and promises to variables and a more compact way of representing things, which we saw further above, is enough.
 
 ```js
 useEffect(() => {
@@ -503,31 +581,48 @@ useEffect(() => {
 }, [])
 ```
 
-Sovelluksessa on tällä hetkellä vielä se ongelma, että jos lisäämme uusia muisiinpanoja, ne eivät tallennu palvelimelle asti. Eli kun uudelleenlataamme sovelluksen, kaikki lisäykset katoavat. Korjaus asiaan tulee pian.
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part2-notes/tree/part2-4), branchissa <i>part2-4</i>.
 
-### Sovelluskehityksen suoritusympäristö
+We still have a problem in our application. When adding new notes they are not stored on the server.
 
-Sovelluksemme kokonaisuuden konfiguraatiosta on pikkuhiljaa muodostunut melko monimutkainen. Käydään vielä läpi mitä tapahtuu missäkin. Seuraava diagrammi kuvaa asetelmaa
+
+
+The code so far for the application can be found in full on [github](https://github.com/fullstack-hy2019/part2-notes/tree/part2-4) in the branch <i>part2-4</i>.
+
+
+### The runtime environment of software development
+
+
+
+The configuration for the whole of our application has steadily grown to be more complex. Let's review what happens and where. The following image describes the makeup of the application
 
 ![](../../images/2/18c.png)
 
-React-sovelluksen muodostavaa Javascript-koodia siis suoritetaan selaimessa. Selain hakee Javascriptin <i>React dev serveriltä</i>, joka on se ohjelma, mikä käynnistyy kun suoritetaan komento <em>npm start</em>. Dev-serveri muokkaa sovelluksen Javascriptin selainta varten sopivaan muotoon, se mm. yhdistelee eri tiedostoissa olevan Javascript-koodin yhdeksi tiedostoksi. Puhumme enemmän dev-serveristä kurssin osassa 7.
 
-JSON-modossa olevan datan selaimessa pyörivä React-sovellus siis hakee koneella portissa 3001 käynnissä olevalta <i>json-serveriltä</i>, joka taas saa JSON-datan tiedostosta <i>db.json</i>.
 
-Kaikki sovelluksen osat ovat näin sovelluskehitysvaiheessa ohjelmoijan koneella eli <i>localhostissa</i>. Tilanne muuttuu sitten kun sovellus viedään internettiin. Teemme näin osassa 3.
+The Javascript code making up our React application is run in the browser. The browser gets the Javascript from the <i>React dev server</i>, which is the application that runs after running the command <em>npm start</em>. The dev-server transforms the Javascript into a format understood by the browser. Among other things, it stitches together Javascript from different files into one file. We'll discuss the dev-server in more detail in part 7 of the course.
+
+
+
+The React application running in the browser fetches the JSON formatted data from <i>json-server</i> running on port 3001 on the machine. json-server gets its data from the file <i>db.json</i>.
+
+
+
+At this point in development, all the parts of the application happen to reside on the software developer's machine, otherwise known as localhost. The situation changes when the application is deployed to the internet. We will do this in part 3.
 
 </div>
 
 <div class="tasks">
 
-<h3>Tehtäviä</h3>
 
-<h4>2.11: puhelinluettelo step6</h4>
+<h3>Exercises</h3>
 
-Jatketaan puhelinluettelon kehittämistä. Talleta sovelluksen alkutila projektin juureen sijoitettavaan tiedostoon <i>db.json</i>:
+
+<h4>2.11: The Phonebook Step6</h4>
+
+
+
+We continue developing the phonebook. Store the initial state of the application into the file <i>db.json</i>, which should be placed in the root of the project.
 
 ```json
 {
@@ -556,9 +651,12 @@ Jatketaan puhelinluettelon kehittämistä. Talleta sovelluksen alkutila projekti
 }
 ```
 
-Käynnistä json-server porttiin 3001 ja varmista selaimella osoitteesta <http://localhost:3001/persons>, että palvelin palauttaa henkilölistan.
 
-Jos saat virheilmoituksen:
+
+Start json-server on port 3001 and make sure that the server returns the list of people by going to the address <http://localhost:3001/persons> in the browser.
+
+
+If you get the error message:
 
 ```js
 events.js:182
@@ -570,49 +668,79 @@ Error: listen EADDRINUSE 0.0.0.0:3001
     at _exceptionWithHostPort (util.js:1041:20)
 ```
 
-on portti 3001 jo jonkin muun sovelluksen, esim. jo käynnissä olevan json-serverin käytössä. Sulje toinen sovellus tai jos se ei onnistu, vaihda porttia.
 
-Muuta sovellusta siten, että datan alkutila haetaan <i>axios</i>-kirjaston avulla palvelimelta. Hoida datan hakeminen [Effect hookilla](https://reactjs.org/docs/hooks-effect.html)).
 
-<h4>2.12* maiden tiedot, step1</h4>
+it means that port 3001 is already in use by another application, e.g. in use by an already running json-server. Close the other application, or change the port in case that doesn't work.
 
-Rajapinta [https://restcountries.eu](https://restcountries.eu) tarjoaa paljon eri maihin liittyvää tietoa koneluettavassa muodossa ns. REST-apina.
 
-Tee sovellus, jonka avulla voit tarkastella eri maiden tietoja. Sovelluksen kannattaa hakea tiedot endpointista [all](https://restcountries.eu/#api-endpoints-all).
 
-Sovelluksen käyttöliittymä on yksinkertainen. Näytettävä maa haetaan kirjoittamalla hakuehto etsintäkenttään.
+Modify the application such that the initial state of the data is fetched from the server using the <i>axios</i>-library. Complete the fetching with an [Effect hook](https://reactjs.org/docs/hooks-effect.html).
 
-Jos ehdon täyttäviä maita on liikaa (yli 10), kehoitetaan tarkentamaan hakuehtoa:
+
+<h4>2.12* Data for countries, step1</h4>
+
+
+
+The API [https://restcountries.eu](https://restcountries.eu) provides a lot data for different countries in a machine readable format, a so-called REST API.
+
+
+
+Create an application, using which one can look at data of various countries. The application should probably get the data from the endpoint [all](https://restcountries.eu/#api-endpoints-all).
+
+
+
+The user interface is very simple. The country to be shown is found by typing a search query into the search field.
+
+
+
+If there are too many (over 10) countries that match the query, then the user is prompted to make their query more specific:
 
 ![](../../images/2/19b1.png)
 
-Jos maita on alle kymmenen, mutta yli 1 näytetään hakuehdon täyttävät maat:
+
+
+If there are fewer than ten countries, but more than one, then all countries matching the query are shown:
 
 ![](../../images/2/19b2.png)
 
-Kun ehdon täyttäviä maita on enää yksi, näytetään maan perustiedot, lippu sekä siellä puhutut kielet:
+
+
+When there is only one country matching the query, then the basic data of the country, its flag and the languages spoken in that country are shown:
 
 ![](../../images/2/19b3.png)
 
-**Huom:** riittää että sovelluksesi toimii suurimmalle osalle maista. Jotkut maat kuten <i>Sudan</i> voivat tuottaa ongelmia, sillä maan nimi on toisen maan <i>South Sudan</i> osa. Näistä corner caseista ei tarvitse välittää.
 
-**VAROITUS** create-react-app tekee projektista automaattisesti git-repositorion, ellei sovellusta luoda jo olemassaolevan repositorion sisälle. Todennäköisesti **et halua** että projektista tulee repositorio, joten suorita projektin juuressa komento _rm -rf .git_.
 
-<h4>2.13*: maiden tiedot, step2</h4>
+**NB**: it is enough that your application works for most of the countries. Some countries, like <i>Sudan</i>, can cause trouble, since the name of the country is part of the name for another country, <i>South Sudan</i>. You need not worry about these corner cases.
 
-**Tässä osassa on vielä paljon tekemistä, joten älä juutu tähän tehtävään!**
 
-Paranna edellisen tehtävän maasovellusta siten, että kun sivulla näkyy useiden maiden nimiä, tulee maan nimen viereen nappi, jota klikkaamalla pääsee suoraan maan näkymään:
+**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application.
+
+
+<h4>2.13*: Data for countries, step2</h4>
+
+
+
+**There is still a lot to do in this part, so don't get stuck on this exercise!**
+
+
+
+Improve on the application in the previous exercise, such that when the names of multiple countries are shown on the page there is a button next to the name of the country, which when pressed shows the view for that country:
 
 ![](../../images/2/19b4.png)
 
-Tässäkin tehtävässä riittää, että ohjelmasi toimii suurella osalla maita ja maat joiden nimi sisältyy johonkin muuhun maahan, kuten <i>Sudan</i> voit unohtaa. 
 
-<h4>2.14*: maiden tiedot, step3</h4>
 
-**Tässä osassa on vielä paljon tekemistä, joten älä juutu tähän tehtävään!**
+In this exercise it is also enough that your application works for most of the countries. Countries whose name appears in the name of another country, like <i>Sudan</i> can be ignored.
 
-Lisää yksittäisen maan näkymään pääkaupungin säätiedotus. Säätiedotuksen tarjoavia palveluita on kymmeniä. Itse käytin [https://www.apixu.com](https://www.apixu.com):ia. 
+
+<h4>2.14*: Data for countries, step3</h4>
+
+**There is still a lot to do in this part, so don't get stuck on this exercise!**
+
+
+
+Add to the view showing the data of a single country the weather report for the capital of that country. There are dozens of providers for weather data. I used [https://www.apixu.com](https://www.apixu.com).
 
 ![](../../images/2/19b5.png)
 
