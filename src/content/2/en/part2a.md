@@ -7,26 +7,31 @@ lang: en
 
 <div class="content">
 
+
 Before we go into a new topic, let's go through some topics which proved difficult last year. 
 
 ### console.log
 
+
 ***What's the difference between experienced JavaScript programmer and a rookie? The experienced one uses 10-100 times more console.log***
+
 
 Paradoxically, this seems to be true even though rookie programmers would need console.log (or any debugging method) more than experienced ones. 
 
-When something does not work, don't just guess, but log or use some other way of debugging. 
+When something does not work, don't just guess what's wrong. Instead, log or use some other way of debugging. 
+
 
 **NB** when you use the command console.log for debugging, don't concatenate things 'the Java way' with a plus. Instead of writing 
 ```js
 console.log('propsin arvo on' + props)
 ```
 
-separate the things to be printed with a dash:
+separate the things to be printed with a comma:
 
 ```js
 console.log('propsin arvo on', props)
 ```
+
 
 If you add an object to a string, the result is a pretty useless read. 
 
@@ -34,23 +39,33 @@ If you add an object to a string, the result is a pretty useless read.
 propsin arvo on [Object object]
 ```
 
-But if you use a dash you'll get the things printed to the developer-console as an object, contents of which can be read. 
+
+When you use a comma, you'll get the things printed to the developer-console as an object, contents of which can be read. 
 If necessary, read more about debugging React-applications from [here](/osa1/monimutkaisempi_tila_reactin_debuggaus#react-sovellusten-debuggaus)
+
+
+
+
 
 ### Event handlers revisited
 
-Based on last year's course, event handling has proven to be difficult. 
-It's worth reading the revision chapter at the end of the previous part [event handlers revisited](/osa1/monimutkaisempi_tila_reactin_debuggaus#tapahtumankasittely-revisited) if it feels like your own knowledge on the topic needs some brusing up. 
 
-Passing event handlers to the child components of the <i>App</i> component has raised some questions. Small revision on the topic [here](/osa1/monimutkaisempi_tila_reactin_debuggaus#tapahtumankasittelijan-vieminen-alikomponenttiin).
+Based on last year's course, event handling has also proven to be difficult. 
+It's worth reading the revision chapter at the end of the previous part [event handlers revisited](/osa1/monimutkaisempi_tila_reactin_debuggaus#tapahtumankasittely-revisited) if it feels like your own knowledge on the topic needs some brushing up. 
+
+Passing event handlers to the child components of the <i>App</i> component has raised some questions. A small revision on the topic can be found [here](/osa1/monimutkaisempi_tila_reactin_debuggaus#tapahtumankasittelijan-vieminen-alikomponenttiin).
 
 
 ### Protip: Visual Studio Code snippets
 
-With visual studio code it's easy to create 'snippets', shortcuts to generating the most used bits of code like 'sout' on Netbeans. 
-Instructions for creating snippets [here](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets).
 
-Useful, ready made snippets can also be found as VS Code plugins for example  [here](https://marketplace.visualstudio.com/items?itemName=xabikos.ReactSnippets).
+With Visual studio code it's easy to create 'snippets', shortcuts to generating the most used bits of code, much like 'sout' works on Netbeans. 
+Instructions for creating snippets can be found [here](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets).
+
+
+
+Useful, ready made snippets can also be found as VS Code plugins for example [here](https://marketplace.visualstudio.com/items?itemName=xabikos.ReactSnippets).
+
 
 The most important snippet is a shortcut to adding the <em>console.log()</em> command, for example <em>clog</em>. This can be created like so: 
 ```js
@@ -67,13 +82,22 @@ The most important snippet is a shortcut to adding the <em>console.log()</em> co
 
 ### JavaScript Arrays
 
-From here on out, we will be using the functional programming methods of JavaScript [array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array), such as  _find_, _filter_  and _map_  all the time. They operate on the same general princible as streams in Java 8, which have been used last few years in ohjelmoinnin perusteet and ohjelmoinnin jatkokurssi at the department of Computer Science, and in the programming MOOC. 
+
+From here on out, we will be using the functional programming methods of JavaScript [array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array), such as  _find_, _filter_  and _map_  all the time. They operate on the same general princible as streams in Java 8, which have been used last few years in Ohjelmoinnin perusteet and Ohjelmoinnin jatkokurssi at the department of Computer Science, and in the programming MOOC. 
+
 
 If functional programming with arrays feels foreign, it is worth it to watch at least the three first parts from YouTube video series <i>Functional Programming in JavaScript</i>:
 
 - [Higher-order functions](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84)
 - [Map](https://www.youtube.com/watch?v=bCqtb-Z5YGQ&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84&index=2)
 - [Reduce basics](https://www.youtube.com/watch?v=Wl98eZpkp-c&t=31s)
+
+### Event handlers revisited
+
+Based on last year's course, event handling has proven to be difficult. 
+It's worth reading the revision chapter at the end of the previous part [event handlers revisited](/osa1/monimutkaisempi_tila_reactin_debuggaus#tapahtumankasittely-revisited) if it feels like your own knowledge on the topic needs some brusing up. 
+
+Passing event handlers to the child components of the <i>App</i> component has raised some questions. Small revision on the topic [here](/osa1/monimutkaisempi_tila_reactin_debuggaus#tapahtumankasittelijan-vieminen-alikomponenttiin).
 
 ### Rendering collections
 
@@ -127,10 +151,12 @@ ReactDOM.render(
 )
 ```
 
+
 Every note contains its textual content and a timestamp as well as a _boolean_ value for marking wether the note has been categorized as important or not, and a unique <i>id</i>.
 
-The code is based on there being exactly three notes in the array. 
-Single note is rendered by accessing the objects in the array by referring to a hard coded index number:
+
+The code functions based on the fact that there are exactly three notes in the array. 
+A single note is rendered by accessing the objects in the array by referring to a hard coded index number:
 
 ```js
 <li>{note[1].content}</li>
@@ -152,6 +178,7 @@ The result is an array of <i>li</i> elements.
 ]
 ```
 
+
 Which can then be put inside <i>ul</i> tags:
 
 ```js
@@ -171,7 +198,9 @@ const App = (props) => {
 }
 ```
 
-Because the code generating the <i>li</i> tags is JavaScript, in a JSX template it must be put inside brackets like all other JavaScript code. 
+
+Because the code generating the <i>li</i> tags is JavaScript, in a JSX template it must be put inside braces like all other JavaScript code. 
+
 
 Often in similar situations the dynamically generated content is separated into its own method, which the JSX template calls: 
 
@@ -229,9 +258,15 @@ And the error message dissappears.
 
 React uses the key attributes of objects in an array to determine how to update the view generated by a component when the component is rerendered. More about this [here](https://reactjs.org/docs/reconciliation.html#recursing-on-children).
 
+
+
+
+
 ### Map
 
+
 Understanding how the array method [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) works is crucial for the rest of the course. 
+
 
 The application contains an array called _notes_
 
@@ -258,23 +293,28 @@ const notes = [
 ]
 ```
 
+
 Lets pause for a moment and examine how _map_ works.
 
-If the following code is added e.g to the end of the file 
+
+If the following code is added e.g. to the end of the file 
 
 ```js
 const result = notes.map(note => note.id)
 console.log(result)
 ```
 
+
 <i>[1, 2, 3]</i>  will be printed to the console.
  _Map_ always creates a new array, elements of which have been created from the elements of the original array by <i>mapping</i> using the function given as a parameter to the map method. 
+
 
 The function is
 
 ```js
 note => note.id
 ```
+
 
 Which is an arrow function written in a compact form. The full form would be: 
 
@@ -284,13 +324,18 @@ Which is an arrow function written in a compact form. The full form would be:
 }
 ```
 
-The function gets a note object as a parameter, and <i>returns</i> the value of it's  <i>id</i> field.
+
+The function gets a note object as a parameter, and <i>returns</i> the value of its  <i>id</i> field.
+
 
 Changing the command to:
 
 ```js
 const result = notes.map(note => note.content)
 ```
+
+
+
 results into an array containing the contents of the notes.
 
 This is already pretty close to the React code we used:
@@ -300,6 +345,9 @@ This is already pretty close to the React code we used:
 notes.map(note => <li key={note.id}>{note.content}</li>)
 ```
 
+
+
+
 which generates a <i>li</i> tag containing the contents of the note from each note object. 
 
 Because the function parameter of the _map_ method
@@ -308,10 +356,13 @@ Because the function parameter of the _map_ method
 note => <li key={note.id}>{note.content}</li>
 ```
 
-is used to create view elements, the value of the variable must be rendered inside of curly brackets. 
-Try what happens if the brackets are removed. 
 
-The use of curly brackets will cause some headache in the beginning, but you will get used to them soon. The visual feedback from React is immediate. 
+is used to create view elements, the value of the variable must be rendered inside of curly braces. 
+Try what happens if the braces are removed. 
+
+
+The use of curly braces will cause some headache in the beginning, but you will get used to them soon. The visual feedback from React is immediate. 
+
 
 Let's examine one source of bugs. Add the following to your code
 
@@ -320,10 +371,12 @@ const result = notes.map(note => {note.content} )
 console.log(result)
 ```
 
+
 It will print
 ```js
 [undefined, undefined, undefined]
 ```
+
 
 Whats the matter? The code is exactly the same as the one that worked earlier. Except not quite. The _map_  method now has the following function as a parameter
 
@@ -333,11 +386,15 @@ note => {
 }
 ```
 
-Because the function now forms <i>a code block</i>, it's return value is undefined. Arrow functions return the value of their only statement only if the function is defined in the compact form. Without the code block: 
+
+Because the function now forms <i>a code block</i>, its return value is undefined. Arrow functions return the value of their only statement only if the function is defined in the compact form. Without the code block: 
 
 ```js
 note => note.content
 ```
+
+
+
 
 Note that 'oneliner' arrow functions do not need to be, nor should always be, written on one line. 
 
@@ -352,9 +409,12 @@ const rows = () => notes.map(note =>
 )
 ```
 
+
 This still is an arrow function with only one statement, the statement just happens to be a bit more complicated. 
 
+
 ### Antipattern: arrow indexes as keys
+
 
 We could have made the error message on our console dissappear by using the array indexes as keys. The indexes can be retrieved by giving a second parameter to the map-method: 
 
@@ -362,7 +422,9 @@ We could have made the error message on our console dissappear by using the arra
 notes.map((note, i) => ...)
 ```
 
+
 When called like this, _i_ gets the value of the index of the position in the array where the <i>Note</i> resides.
+
 
 So one way to define the row generation without getting errors is
 
@@ -374,8 +436,26 @@ const rows = () => notes.map((note, i) =>
 )
 ```
 
+
 This is however **not recommended** and can cause bad problems even if it seems to be working just fine. 
 Read more [from here](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### Refactoring modules
 
