@@ -20,19 +20,19 @@ Eli kun joku ei toimi, älä arvaile vaan logaa tai käytä jotain muita debugga
 **HUOM** kun käytät komentoa _console.log_ debuggaukseen, älä yhdistele asioita "javamaisesti" plussalla, eli sen sijaan että kirjoittaisit
 
 ```js
-console.log('propsin arvo on' + props)
+console.log('props value is' + props)
 ```
 
 erottele tulostettavat asiat pilkulla:
 
 ```js
-console.log('propsin arvo on', props)
+console.log('props value is', props)
 ```
 
 Jos yhdistät merkkijonoon olion, tuloksena on suhteellisen hyödytön tulostusmuoto
 
 ```js
-propsin arvo on [Object object]
+props value is [Object object]
 ```
 
 kun taas pilkulla erotellessa saat tulostettavat asiat developer-konsoliin oliona, jonka sisältöä on mahdollista tarkastella.
@@ -46,7 +46,6 @@ Viime vuoden kurssin alun kokemusten perusteella tapahtumien käsittely on osoit
 Edellisen osan lopussa oleva kertaava osa [tapahtumankäsittely revisited](/osa1/monimutkaisempi_tila_reactin_debuggaus#tapahtumankasittely-revisited) kannattaa käydä läpi, jos osaaminen on vielä häilyvällä pohjalla.
 
 Myös tapahtumankäsittelijöiden välittäminen komponentin <i>App</i> alikomponenteille on herättänyt ilmaan kysymyksiä, pieni kertaus aiheeseen [täällä](/osa1/monimutkaisempi_tila_reactin_debuggaus#tapahtumankasittelijan-vieminen-alikomponenttiin).
-
 
 ### Protip: Visual Studio Coden snippetit
 
@@ -92,20 +91,20 @@ import ReactDOM from 'react-dom'
 const notes = [
   {
     id: 1,
-    content: 'HTML on helppoa',
-    date: '2019-01-10T17:30:31.098Z',
+    content: 'HTML is easy',
+    date: '2019-05-30T17:30:31.098Z',
     important: true
   },
   {
     id: 2,
-    content: 'Selain pystyy suorittamaan vain javascriptiä',
-    date: '2019-01-10T18:39:34.091Z',
+    content: 'Browser can execute only Javascript',
+    date: '2019-05-30T18:39:34.091Z',
     important: false
   },
   {
     id: 3,
-    content: 'HTTP-protokollan tärkeimmät metodit ovat GET ja POST',
-    date: '2019-01-10T19:20:14.298Z',
+    content: 'GET and POST are the most important methods of HTTP protocol',
+    date: '2019-05-30T19:20:14.298Z',
     important: true
   }
 ]
@@ -115,7 +114,7 @@ const App = (props) => {
 
   return (
     <div>
-      <h1>Muistiinpanot</h1>
+      <h1>Notes</h1>
       <ul>
         <li>{notes[0].content}</li>
         <li>{notes[1].content}</li>
@@ -149,9 +148,9 @@ nyt tuloksena on taulukko, jonka sisältö on joukko <i>li</i>-elementtejä
 
 ```js
 [
-  '<li>HTML on helppoa</li>',
-  '<li>Selain pystyy suorittamaan vain javascriptiä</li>',
-  '<li>HTTP-protokollan tärkeimmät metodit ovat GET ja POST</li>',
+  '<li>HTML is easy</li>',
+  '<li>Browser can execute only Javascript</li>',
+  '<li>GET and POST are the most important methods of HTTP protocol</li>',
 ]
 ```
 
@@ -163,7 +162,7 @@ const App = (props) => {
 
   return (
     <div>
-      <h1>Muistiinpanot</h1>
+      <h1>Notes</h1>
 // highlight-start
       <ul>
         {notes.map(note => <li>{note.content}</li>)}
@@ -189,7 +188,7 @@ const App = (props) => {
 
   return (
     <div>
-      <h1>Muistiinpanot</h1>
+      <h1>Notes</h1>
       <ul>
         {rows()} // highlight-line
       </ul>
@@ -219,7 +218,7 @@ const App = (props) => {
 
   return (
     <div>
-      <h1>Muistiinpanot</h1>
+      <h1>Notes</h1>
       <ul>
         {rows()}
       </ul>
@@ -242,22 +241,22 @@ Sovellus siis sisältää taulukon _notes_
 const notes = [
   {
     id: 1,
-    content: 'HTML on helppoa',
-    date: '2017-12-10T17:30:31.098Z',
-    important: true,
+    content: 'HTML is easy',
+    date: '2019-05-30T17:30:31.098Z',
+    important: true
   },
   {
     id: 2,
-    content: 'Selain pystyy suorittamaan vain javascriptiä',
-    date: '2017-12-10T18:39:34.091Z',
-    important: false,
+    content: 'Browser can execute only Javascript',
+    date: '2019-05-30T18:39:34.091Z',
+    important: false
   },
   {
     id: 3,
-    content: 'HTTP-protokollan tärkeimmät metodit ovat GET ja POST',
-    date: '2017-12-10T19:20:14.298Z',
-    important: true,
-  },
+    content: 'GET and POST are the most important methods of HTTP protocol',
+    date: '2019-05-30T19:20:14.298Z',
+    important: true
+  }
 ]
 ```
 
@@ -387,7 +386,7 @@ const App = ({ notes }) => { // highlight-line
 
   return (
     <div>
-      <h1>Muistiinpanot</h1>
+      <h1>Notes</h1>
       <ul>
         {rows()}
       </ul>
@@ -421,7 +420,7 @@ const App = ({ notes }) => {
 
   return (
     <div>
-      <h1>Muistiinpanot</h1>
+      <h1>Notes</h1>
       <ul>
         {rows()}
       </ul>
@@ -503,7 +502,7 @@ const App = ({ notes }) => {
 
   return (
     <div>
-      <h1>Muistiinpanot</h1>
+      <h1>Notes</h1>
       <ul>
         {rows()}
       </ul>
@@ -659,20 +658,20 @@ Muutetaan komponenttia <i>App</i> seuraavasti:
 ```js
 const App = () => {
   const course = {
-    name: 'Half Stack -sovelluskehitys',
+    name: 'Half Stack application development',
     parts: [
       {
-        name: 'Reactin perusteet',
+        name: 'Fundamentals of React',
         exercises: 10,
         id: 1
       },
       {
-        name: 'Tiedonvälitys propseilla',
+        name: 'Using props to pass data',
         exercises: 7,
         id: 2
       },
       {
-        name: 'Komponenttien tila',
+        name: 'State of a component',
         exercises: 14,
         id: 3
       }
@@ -705,7 +704,7 @@ Eli komponentti <i>Course</i> sisältää edellisessä osassa määritellyt komp
 
 Renderöityvä sivu voi näyttää esim. seuraavalta:
 
-![](../../images/teht/8.png)
+![](../../images/teht/8e.png)
 
 Tässä vaiheessa siis tehtävien yhteenlaskettua lukumäärää ei vielä tarvita.
 
@@ -717,7 +716,7 @@ Varmista, että konsolissa ei näy mitään virheilmoituksia!
 
 Ilmoita myös kurssin yhteenlaskettu tehtävien lukumäärä:
 
-![](../../images/teht/9.png)
+![](../../images/teht/9e.png)
 
 <h4>2.3*: kurssitiedot step8</h4>
 
@@ -751,29 +750,32 @@ Laajennetaan sovellusta siten, että kursseja voi olla <i>mielivaltainen määr�
 const App = () => {
   const courses = [
     {
-      name: 'Half Stack -sovelluskehitys',
-      id: 1,
+      name: 'Half Stack application development',
       parts: [
         {
-          name: 'Reactin perusteet',
+          name: 'Fundamentals of React',
           exercises: 10,
           id: 1
         },
         {
-          name: 'Tiedonvälitys propseilla',
+          name: 'Using props to pass data',
           exercises: 7,
           id: 2
         },
         {
-          name: 'Komponenttien tila',
+          name: 'State of a component',
           exercises: 14,
           id: 3
+        },
+        {
+          name: 'Redux',
+          exercises: 11,
+          id: 4
         }
       ]
-    },
+    }, 
     {
       name: 'Node.js',
-      id: 2,
       parts: [
         {
           name: 'Routing',
@@ -781,7 +783,7 @@ const App = () => {
           id: 1
         },
         {
-          name: 'Middlewaret',
+          name: 'Middlewares',
           exercises: 7,
           id: 2
         }
@@ -799,7 +801,7 @@ const App = () => {
 
 Sovelluksen ulkoasu voi olla esim seuraava:
 
-![](../../images/teht/10.png)
+![](../../images/teht/10e.png)
 
 <h4>2.5: erillinen moduuli</h4>
 
