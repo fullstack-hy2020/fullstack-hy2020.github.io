@@ -27,7 +27,7 @@ const App = (props) => { // highlight-line
 
   return (
     <div>
-      <h1>Muistiinpanot</h1>
+      <h1>Notes</h1>
       <ul>
         {rows()}
       </ul>
@@ -71,20 +71,20 @@ const App = (props) => {
 // highlight-start 
   const addNote = (event) => {
     event.preventDefault()
-    console.log('nappia painettu', event.target)
+    console.log('button clicked', event.target)
   }
  // highlight-end  
 
   return (
     <div>
-      <h1>Muistiinpanot</h1>
+      <h1>Notes</h1>
       <ul>
         {rows()}
       </ul>
 // highlight-start    
       <form onSubmit={addNote}>
         <input />
-        <button type="submit">tallenna</button>
+        <button type="submit">save</button>
       </form>   
 // highlight-end       
     </div>
@@ -99,7 +99,7 @@ Tapahtumankäsittelijä on [osasta 1](/osa1/komponentin_tila_ja_tapahtumankasitt
 ```js
 const addNote = (event) => {
   event.preventDefault()
-  console.log('nappia painettu', event.target)
+  console.log('button clicked'', event.target)
 }
 ```
 
@@ -109,7 +109,7 @@ Tapahtumankäsittelijä kutsuu heti tapahtuman metodia <em>event.preventDefault(
 
 Tapahtuman kohde, eli _event.target_ on tulostettu konsoliin
 
-![](../../images/2/6b.png)
+![](../../images/2/6e.png)
 
 Kohteena on siis komponentin määrittelemä lomake.
 
@@ -124,20 +124,20 @@ const App = (props) => {
   const [notes, setNotes] = useState(props.notes) 
   // highlight-start
   const [newNote, setNewNote] = useState(
-    'uusi muistiinpano...'
+    'a new note...'
   ) 
-// highlight-end
+  // highlight-end
   // ...
 
   return (
     <div>
-      <h1>Muistiinpanot</h1>
+      <h1>Notes</h1>
       <ul>
         {rows()}
       </ul>
       <form onSubmit={addNote}>
         <input value={newNote} /> // highlight-line
-        <button type="submit">tallenna</button>
+        <button type="submit">save</button>
       </form>      
     </div>
   )
@@ -146,7 +146,7 @@ const App = (props) => {
 
 Tilaan <em>newNote</em> määritelty "placeholder"-teksti <i>uusi muistiinpano...</i> ilmestyy syötekomponenttiin, tekstiä ei kuitenkaan voi muuttaa. Konsoliin tuleekin ikävä varoitus joka kertoo mistä on kyse
 
-![](../../images/2/7b.png)
+![](../../images/2/7e.png)
 
 Koska määrittelimme syötekomponentille <i>value</i>-attribuutiksi komponentin <i>App</i> tilassa olevan muuttujan, alkaa <i>App</i> [kontrolloimaan](https://reactjs.org/docs/forms.html#controlled-components) syötekomponentin toimintaa.
 
@@ -156,7 +156,7 @@ Jotta kontrolloidun syötekomponentin editoiminen olisi mahdollista, täytyy sil
 const App = (props) => {
   const [notes, setNotes] = useState(props.notes) 
   const [newNote, setNewNote] = useState(
-    'uusi muistiinpano...'
+    'a new note...'
   )
 
   // ...
@@ -169,7 +169,7 @@ const App = (props) => {
 
   return (
     <div>
-      <h1>Muistiinpanot</h1>
+      <h1>Notes</h1>
       <ul>
         {rows()}
       </ul>
@@ -178,7 +178,7 @@ const App = (props) => {
           value={newNote}
           onChange={handleNoteChange} // highlight-line
         />
-        <button type="submit">tallenna</button>
+        <button type="submit">save</button>
       </form>      
     </div>
   )
@@ -209,11 +209,11 @@ Huomaa, että toisin kuin lomakkeen lähettämistä vastaavan tapahtuman <i>onSu
 
 Voit seurata konsolista miten tapahtumankäsittelijää kutsutaan:
 
-![](../../images/2/8b.png)
+![](../../images/2/8e.png)
 
 Muistithan jo asentaa [React devtoolsin](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)? Devtoolsista näet, miten tila muuttuu syötekenttään kirjoitettaessa:
 
-![](../../images/2/9b.png)
+![](../../images/2/9e.png)
 
 Nyt komponentin <i>App</i> tila <em>newNote</em> heijastaa koko ajan syötekentän arvoa, joten voimme viimeistellä uuden muistiinpanon lisäämisestä huolehtivan metodin <em>addNote</em>:
 
@@ -340,11 +340,11 @@ const App = (props) => {
 
   return (
     <div>
-      <h1>Muistiinpanot</h1>
+      <h1>Notes</h1>
 // highlight-start      
       <div>
         <button onClick={() => setShowAll(!showAll)}>
-          näytä {showAll ? 'vain tärkeät' : 'kaikki' }
+          show {showAll ? 'important' : 'all' }
         </button>
       </div>
 // highlight-end            
@@ -356,7 +356,7 @@ const App = (props) => {
           value={newNote}
           onChange={handleNoteChange}
         />
-        <button type="submit">tallenna</button>
+        <button type="submit">save</button>
       </form>      
     </div>
   )
@@ -372,7 +372,7 @@ Näkyviä muistiinpanoja (kaikki vai ainoastaan tärkeät) siis kontrolloidaan n
 Napin teksti riippuu tilan <em>showAll</em> arvosta:
 
 ```js
-näytä {showAll ? 'vain tärkeät' : 'kaikki'}
+show {showAll ? 'important' : 'all' }
 ```
 
 Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part2-notes/tree/part2-3), branchissa <i>part2-3</i>.
@@ -404,16 +404,16 @@ const App = () => {
 
   return (
     <div>
-      <h2>Puhelinluettelo</h2>
+      <h2>Phonebook</h2>
       <form>
         <div>
-          nimi: <input />
+          name: <input />
         </div>
         <div>
-          <button type="submit">lisää</button>
+          <button type="submit">add</button>
         </div>
       </form>
-      <h2>Numerot</h2>
+      <h2>Numbers</h2>
       ...
     </div>
   )
@@ -435,7 +435,7 @@ Muista myös osan 1 luku [React-sovellusten debuggaus](/osa1/monimutkaisempi_til
 
 Sovellus voi näyttää tässä vaiheessa seuraavalta:
 
-![](../../images/2/10b.png)
+![](../../images/2/10e.png)
 
 Huomaa, React developer toolsin käyttö!
 
@@ -450,24 +450,24 @@ Jos lisättävä nimi on jo sovelluksen tiedossa, estä lisäys. Taulukolla on l
 
 Anna tilanteessa virheilmoitus komennolla [alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert):
 
-![](../../images/2/11b.png)
+![](../../images/2/11e.png)
 
 **Muistutus edellisestä osasta:** kun muodostat Javascriptissä merkkijonoja muuttujaan perustuen, on tyylikkäin tapa asian hoitamiseen [template string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals):
 
 ```js
-`${newName} on jo luettelossa`
+`${newName} is already added to phonebook`
 ```
 
 Jos muuttujalla <em>newName</em> on arvona <i>arto</i>, on tuloksena merkkijono
 
 ```js
-`arto on jo luettelossa`
+`arto is already added to phonebook`
 ```
 
 Sama toki hoituisi javamaisesti merkkijonojen plus-metodilla
 
 ```js
-newName + ' on jo luettelossa'
+newName + ' is already added to phonebook'
 ```
 
 Template stringin käyttö antaa kuitenkin professionaalimman vaikutelman.
@@ -476,23 +476,23 @@ Template stringin käyttö antaa kuitenkin professionaalimman vaikutelman.
 
 Lisää sovellukseen mahdollisuus antaa henkilöille puhelinnumero. Tarvitset siis lomakkeeseen myös toisen <i>input</i>-elementin (ja sille oman muutoksenkäsittelijän):
 
-```
+```js
 <form>
-  <div>nimi: <input /></div>
-  <div>numero: <input /></div>
-  <div><button type="submit">lisää</button></div>
+  <div>name: <input /></div>
+  <div>number: <input /></div>
+  <div><button type="submit">add</button></div>
 </form>
 ```
 
 Sovellus voi näyttää tässä vaiheessa seuraavalta. Kuvassa myös [react developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi):in tarjoama näkymä komponentin <i>App</i> tilaan:
 
-![](../../images/2/12b.png)
+![](../../images/2/12e.png)
 
 <h4>2.9*: puhelinluettelo step4</h4>
 
 Tee lomakkeeseen hakukenttä, jonka avulla näytettävien nimien listaa voidaan rajata:
 
-![](../../images/2/13b.png)
+![](../../images/2/13e.png)
 
 Rajausehdon syöttämisen voi hoitaa omana lomakkeeseen kuulumattomana <i>input</i>-elementtinä. Kuvassa rajausehdosta on tehty <i>caseinsensitiivinen</i> eli ehto <i>arto</i> löytää isolla kirjaimella kirjoitetun Arton.
 
@@ -502,9 +502,9 @@ Rajausehdon syöttämisen voi hoitaa omana lomakkeeseen kuulumattomana <i>input<
 const App = () => {
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas', number: '040-123456' },
-    { name: 'Martti Tienari', number: '040-123456' },
-    { name: 'Arto Järvinen', number: '040-123456' },
-    { name: 'Lea Kutvonen', number: '040-123456' }
+    { name: 'Ada Lovelace', number: '39-44-5323523' },
+    { name: 'Dan Abramov', number: '12-43-234345' },
+    { name: 'Mary Poppendieck', number: '39-23-6423122' }
   ])
 
   // ...
@@ -527,17 +527,17 @@ const App = () => {
 
   return (
     <div>
-      <h2>Puhelinluettelo</h2>
+      <h2>Phonebook</h2>
 
       <Filter ... />
 
-      <h3>lisää uusi</h3>
+      <h3>Add a new</h3>
 
       <PersonForm 
         ...
       />
 
-      <h3>Numerot</h3>
+      <h3>Numbers</h3>
 
       <Persons ... />
     </div>
