@@ -25,7 +25,10 @@ class NotFoundPage extends Component {
 
     return (
       <Layout>
-        <SEO title={`${title} | Full Stack Open 2019`} />
+        <SEO
+          title={`${title} | Full Stack Open 2019`}
+          lang={this.state.siteLanguage}
+        />
 
         <Element className="container spacing--large spacing--after">
           <h1>404 - {title}</h1>

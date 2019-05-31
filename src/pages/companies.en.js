@@ -11,6 +11,7 @@ import stories from '../content/pages/stories';
 const Companies = () => (
   <Layout>
     <SEO
+      lang="en"
       title="Partner companies | Full Stack Open 2019"
       description="Full stack development in partner companies"
       keywords={[

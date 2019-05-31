@@ -4,10 +4,12 @@ import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
 import defaultImage from '../images/seo_image.jpg';
+import englishVersionSeoImage from '../images/EYE_green_wide.jpg';
 import path from 'path';
 
 function SEO({ description, lang, meta, image, keywords, title }) {
-  const seoImage = image || defaultImage;
+  const seoImage =
+    image || lang === 'fi' ? defaultImage : englishVersionSeoImage;
 
   return (
     <StaticQuery

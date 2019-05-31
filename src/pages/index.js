@@ -49,6 +49,7 @@ const IndexPage = () => {
   return (
     <Layout>
       <SEO
+        lang="fi"
         title="Full Stack Open 2019"
         description={mainSEOdescription['fi']}
         keywords={[...mainSEOtags]}

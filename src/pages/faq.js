@@ -11,6 +11,7 @@ import mainSEOtags from '../content/seo/mainSEOtags';
 const FAQ = () => (
   <Layout>
     <SEO
+      lang="fi"
       title="FAQ | Full Stack Open 2019"
       description="Usein kysytyt kysymykset"
       keywords={[

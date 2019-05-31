@@ -11,6 +11,7 @@ import stories from '../content/pages/stories';
 const Companies = () => (
   <Layout>
     <SEO
+      lang="fi"
       title="Yritysesittelyt | Full Stack Open 2019"
       description="Kurssin yhteistyöyritysten devaajat esittäytyvät"
       keywords={[
