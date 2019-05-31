@@ -135,19 +135,19 @@ const App = () => {
   const [notes, setNotes] = useState([]) 
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
-  const [errorMessage, setErrorMessage] = useState('virhe...') // highlight-line
+  const [errorMessage, setErrorMessage] = useState('some error happened...') // highlight-line
 
   // ...
 
   return (
     <div>
-      <h1>Muistiinpanot</h1>
+      <h1>Notes</h1>
 
       <Notification message={errorMessage} /> // highlight-line
       
       <div>
         <button onClick={() => setShowAll(!showAll)}>
-          näytä {showAll ? 'vain tärkeät' : 'kaikki'}
+          show {showAll ? 'important' : 'all'}
         </button>
       </div>
       <ul>
@@ -159,7 +159,7 @@ const App = () => {
           value={newNote}
           onChange={handleNoteChange}
         />
-        <button type="submit">tallenna</button>
+        <button type="submit">save</button>
       </form>      
     </div>
   )
@@ -194,7 +194,7 @@ Nyt olemme valmiina lisäämään virheviestin logiikan. Muutetaan metodia <em>t
       .catch(error => {
         // highlight-start
         setErrorMessage(
-          `muistiinpano '${note.content}' poistettu palvelimelta`
+          `Note '${note.content}' was already removed from server`
         )
         setTimeout(() => {
           setErrorMessage(null)
@@ -209,7 +209,7 @@ Eli virheen yhteydessä asetetaan tilaan <em>errorMessage</em> sopiva virheviest
 
 Lopputulos näyttää seuraavalta
 
-![](../../images/2/26b.png)
+![](../../images/2/26e.png)
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/FullStack-HY/part2-notes/tree/part2-7), branchissa <i>part2-7</i>.
 
@@ -254,8 +254,8 @@ const Footer = () => {
   return (
     <div style={footerStyle}>
       <br />
-      <em>Note app, Department of Computer Science 2019</em>
-    </div> 
+      <em>Note app, Department of Computer Science, University of Helsinki 2019</em>
+    </div>
   )
 }
 
@@ -264,7 +264,7 @@ const App = () => {
 
   return (
     <div>
-      <h1>Muistiinpanot</h1>
+      <h1>Notes</h1>
 
       <Notification message={errorMessage} />
 
@@ -294,7 +294,7 @@ Toiminnallisen kokonaisuuden strukturointiyksikkö on React-komponentti, joka m�
 
 Toteuta osan 2 esimerkin [parempi virheilmoitus](/osa2/tyylien_lisaaminen_react_sovellukseen#parempi-virheilmoitus) tyyliin ruudulla muutaman sekunnin näkyvä ilmoitus, joka kertoo onnistuneista operaatioista (henkilön lisäys ja poisto, sekä numeron muutos):
 
-![](../../images/2/27b.png)
+![](../../images/2/27e.png)
 
 <h4>2.20*: puhelinluettelo step12</h4>
 
@@ -305,7 +305,7 @@ Avaa sovelluksesi kahteen selaimeen. **Jos poistat jonkun henkilön toisesta sel
 Korjaa ongelma osan 2 esimerkin [promise ja virheet](/osa2/palvelimella_olevan_datan_muokkaaminen#promise-ja-virheet) hengessä, mutta siten että 
  käyttäjälle ilmoitetaan operaation epäonnistumisesta. Onnistuneen ja epäonnistuneen operaation ilmoitusten tulee erota toisistaan: 
 
-![](../../images/2/28a.png)
+![](../../images/2/28e.png)
 
 Tämä oli osan viimeinen tehtävä ja on aika pushata koodi githubiin merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/fullstackopen2019/).
 
