@@ -54,13 +54,13 @@ Olio lähetetään palvelimelle käyttämällä axiosin metodia <em>post</em>. R
 
 Kun nyt kokeillaan luoda uusi muistiinpano, konsoliin tulostus näyttää seuraavalta:
 
-![](../../images/2/20b.png)
+![](../../images/2/20e.png)
 
 Uusi muistiinpano on siis _response_-olion kentän <i>data</i> arvona. Palvelin on lisännyt muistiinpanolle tunnisteen, eli <i>id</i>-kentän.
 
 Joskus on hyödyllistä tarkastella HTTP-pyyntöjä [osan 0 alussa](/osa0/web_sovelluksen_toimintaperiaatteita#http-get) paljon käytetyn konsolin <i>Network</i>-välilehden kautta:
 
-![](../../images/2/21b.png)
+![](../../images/2/21e.png)
 
 Voimme esim. tarkastaa onko POST-pyynnön mukana menevä data juuri se mitä oletimme, onko headerit asetettu oikein ym.
 
@@ -94,7 +94,7 @@ Kun palvelimella oleva data alkaa vaikuttaa web-sovelluksen toimintalogiikkaan, 
 
 Palvelimen tilaa kannattaa tarkastella myös suoraan, esim. selaimella:
 
-![](../../images/2/22b.png)
+![](../../images/2/22e.png)
 
 näin on mahdollista varmistua, mm. siirtyykö kaikki oletettu data palvelimelle.
 
@@ -585,8 +585,8 @@ const getAll = () => {
   const request = axios.get(baseUrl)
   const nonExisting = {
     id: 10000,
-    content: 'Tätä muistiinpanoa ei ole palvelimelta',
-    date: '2017-12-10T17:30:31.098Z',
+    content: 'This note is not saved to server',
+    date: '2019-05-30T17:30:31.098Z',
     important: true,
   }
   return request.then(response => response.data.concat(nonExisting))
@@ -595,11 +595,11 @@ const getAll = () => {
 
 Kun valemuistiinpanon tärkeyttä yritetään muuttaa, konsoliin tulee virheilmoitus, joka kertoo palvelimen vastanneen urliin <i>/notes/10000</i> tehtyyn HTTP PUT -pyyntöön statuskoodilla 404 <i>not found</i>:
 
-![](../../images/2/23b.png)
+![](../../images/2/23e.png)
 
 Sovelluksen tulisi pystyä käsittelemään tilanne hallitusti. Jos konsoli ei ole auki, ei käyttäjä huomaa mitään muuta kuin sen, että muistiinpanon tärkeys ei vaihdu napin painelusta huolimatta.
 
-Jo [aiemmin](#axios-ja-promiset) mainittiin, että promisella voi olla kolme tilaa. Kun HTTP-pyyntö epäonnistuu, menee pyyntöä vastaava promise tilaan <i>rejected</i>. Emme tällä hetkellä käsittele koodissamme promisen epäonnistumista mitenkään.
+Jo [aiemmin](/en/part2/getting_data_from_server#axios-and-promises) mainittiin, että promisella voi olla kolme tilaa. Kun HTTP-pyyntö epäonnistuu, menee pyyntöä vastaava promise tilaan <i>rejected</i>. Emme tällä hetkellä käsittele koodissamme promisen epäonnistumista mitenkään.
 
 Promisen epäonnistuminen [käsitellään](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) antamalla <em>then</em>-metodille parametriksi myös toinen takaisinkutsufunktio, jota kutsutaan siinä tapauksessa jos promise epäonnistuu.
 
@@ -661,7 +661,7 @@ const toggleImportanceOf = id => {
     // highlight-start
     .catch(error => {
       alert(
-        `muistiinpano '${note.content}' on jo valitettavasti poistettu palvelimelta`
+        `the note '${note.content}' was already deleted from server`
       )
       setNotes(notes.filter(n => n.id !== id))
     })
@@ -701,7 +701,7 @@ Siirrä palvelimen kanssa kommunikoinnista vastaava toiminnallisuus omaan moduul
 
 Tee ohjelmaan mahdollisuus yhteystietojen poistamiseen. Poistaminen voi tapahtua esim. nimen yhteyteen liitetyllä napilla. Poiston suorittaminen voidaan varmistaa käyttäjältä [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm)-metodilla:
 
-![](../../images/2/24b.png)
+![](../../images/2/24e.png)
 
 Palvelimelta tiettyä henkilöä vastaava resurssi tuhotaan tekemällä HTTP DELETE -pyyntö resurssia vastaavaan <i>URL</i>:iin, eli jos poistaisimme esim. käyttäjän, jonka <i>id</i> on 2, tulisi tapauksessamme tehdä HTTP DELETE osoitteeseen <i>localhost:3001/persons/2</i>. Pyynnön mukana ei lähetetä mitään dataa.
 
@@ -722,6 +722,6 @@ Muuta toiminnallisuutta siten, että jos jo olemassaolevalle henkilölle lisät�
 
 Jos henkilön tiedot löytyvät jo luettelosta, voi ohjelma kysyä käyttäjältä varmistuksen korvataanko numero:
 
-![](../../images/teht/16a.png)
+![](../../images/teht/16e.png)
 
 </div>

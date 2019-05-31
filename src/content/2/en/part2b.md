@@ -102,7 +102,7 @@ const App = (props) => {
 We have added the _addNote_ function as an event handler to the form element that will be called when the form is submitted by clicking the submit button.
 
 
-We use the method discussed in [part 1](/osa1#tapahtumankäsittely) for defining our event handler:
+We use the method discussed in [part 1](/en/part1/component_state_event_handlers#event-handling) for defining our event handler:
 
 ```js
 const addNote = (event) => {

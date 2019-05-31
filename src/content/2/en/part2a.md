@@ -407,7 +407,7 @@ const App = ({ notes }) => { // highlight-line
 ```
 
 
-If you have forgotten what destructuring means and how it works, revise [this](/osa1/komponentin_tila_ja_tapahtumankasittely#destrukturointi).
+If you have forgotten what destructuring means and how it works, revise [this](/en/part1/component_state_event_handlers#destructuring).
 
 
 We'll separate displaying a single note into its own component <i>Note</i>: 
