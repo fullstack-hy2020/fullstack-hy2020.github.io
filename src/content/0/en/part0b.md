@@ -87,7 +87,7 @@ The HTML code of the example application has been formed dynamically, because it
 The HTML code of the homepage is as follows: 
 
 ```js
-const getFronPageHtml = (noteCount) => {
+const getFrontPageHtml = (noteCount) => {
   return(`
     <!DOCTYPE html>
     <html>
