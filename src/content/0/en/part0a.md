@@ -44,7 +44,7 @@ Statistics on the time used for exercises which have already been submitted on d
 
 ### Grading
 
-The course can be taken as a shorter course worth 3 credits, or as the full course worth 5-8 credits debending on the number of submitted exercises.
+The course can be taken as a shorter course worth 3 credits, or as the full course worth 5-8 credits depending on the number of submitted exercises.
 
 The amount of credits and the grade are determined by the number of submitted exercises, so also the exercises without stars count towards your final grade. There is also a course exam  which must be passed. The exam does not however count towards your grade. 
 
