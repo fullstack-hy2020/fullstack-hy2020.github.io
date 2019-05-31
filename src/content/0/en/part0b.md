@@ -8,7 +8,7 @@ lang: en
 <div class="content">
 
 Before we start programming, we will go through some principles of web development by examining an example application at <https://fullstack-exampleapp.herokuapp.com/>.
-Another version of the application can be found at <https://fullstack-example.now.sh>. You are free to use either one. 
+Another (Finnish language) version of the application can be found at <https://fullstack-example.now.sh>. You are free to use either one. 
 
 The applications are there only to demonstrate some basic concepts of the course, and are by no means examples of <i>how</i>  web applications should be made. 
 In the contrary, they demonstrate some old techniques of web development, which can even be seen as <i>bad practice</i> nowadays. 
