@@ -89,7 +89,7 @@ const IndexPage = () => {
 
           <Image
             contain
-            className="col-4--mobile absolute-top-right--desktop"
+            className="col-4--mobile spacing--tablet absolute-top-right--desktop"
             style={{ margin: 0 }}
             alt="Stacked cubes with React logo and JavaScript text"
             src={landingImage}

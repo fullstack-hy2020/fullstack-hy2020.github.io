@@ -90,6 +90,12 @@ a {
 .spacing {
   margin-top: $vertical-spacing * 2;
 
+  &--tablet {
+    @media (max-width: $desktop) and (min-width: $tablet) {
+      margin-top: $vertical-spacing * 5 !important;
+    }
+  }
+
   @include from($desktop) {
     margin-top: $vertical-spacing * 5;
   }
