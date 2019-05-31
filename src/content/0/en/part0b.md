@@ -518,8 +518,8 @@ The POST request to the address <i>new\_note\_spa</i> contains the new note as J
 
 ```js
 {
-  content: "single page app ei tee turhia sivunlatauksia",
-  date: "2019-01-03T15:11:22.123Z"
+  content: "single page app does not reload the whole page",
+  date: "2019-05-25T15:15:59.905Z"
 }
 ```
 
