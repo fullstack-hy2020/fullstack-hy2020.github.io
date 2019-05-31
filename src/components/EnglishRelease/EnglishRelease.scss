@@ -1,0 +1,44 @@
+@import '../common.scss';
+
+.release-message {
+  position: fixed;
+  bottom: 0;
+  z-index: 1000;
+  left: 0;
+  right: 0;
+  padding: 0.5rem 3rem;
+  margin: 1rem 1rem 0.5rem;
+  border: 2px solid $black;
+  border-radius: 5px;
+  background: $white;
+
+  a {
+    font-weight: bold;
+    border-bottom: 1px solid $black;
+    margin-left: 0.5rem;
+
+    &:hover {
+      color: $white;
+      background-color: $black;
+    }
+  }
+
+  &__button {
+    position: absolute;
+    top: 0.1rem;
+    right: 1rem;
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background: none;
+    cursor: pointer;
+
+    span {
+      &:hover {
+        color: white;
+        background-color: black;
+      }
+    }
+  }
+}
