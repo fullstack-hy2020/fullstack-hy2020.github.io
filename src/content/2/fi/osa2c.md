@@ -292,7 +292,7 @@ promise.then(response => {
 
 Konsoliin tulostuu seuraavaa
 
-![](../../images/2/17b.png)
+![](../../images/2/17e.png)
 
 Javascriptin suoritusympäristö kutsuu <em>then</em>-metodin avulla rekisteröityä takaisinkutsufunktiota antaen sille parametriksi olion <em>result</em>, joka sisältää kaiken oleellisen HTTP GET -pyynnön vastaukseen liittyvän, eli palautetun <i>datan</i>, <i>statuskoodin</i> ja <i>headerit</i>.
 
@@ -532,25 +532,25 @@ Jatketaan puhelinluettelon kehittämistä. Talleta sovelluksen alkutila projekti
 
 ```json
 {
-  "persons": [
-    {
-      "name": "Arto Hellas",
+  "persons":[
+    { 
+      "name": "Arto Hellas", 
       "number": "040-123456",
       "id": 1
     },
-    {
-      "name": "Martti Tienari",
-      "number": "040-123456",
-      "id": 2
+    { 
+      "name": "Ada Lovelace", 
+      "number": "39-44-5323523",
+      "id": 4
     },
-    {
-      "name": "Arto Järvinen",
-      "number": "040-123456",
+    { 
+      "name": "Dan Abramov", 
+      "number": "12-43-234345",
       "id": 3
     },
-    {
-      "name": "Lea Kutvonen",
-      "number": "040-123456",
+    { 
+      "name": "Mary Poppendieck", 
+      "number": "39-23-6423122",
       "id": 4
     }
   ]

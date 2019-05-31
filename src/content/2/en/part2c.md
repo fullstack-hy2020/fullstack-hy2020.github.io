@@ -263,39 +263,23 @@ const promise2 = axios.get('http://localhost:3001/foobar')
 console.log(promise2)
 ```
 
-
-
 This should be printed to the console
 
 ![](../../images/2/16b.png)
 
-
-
 Axios' method _get_ returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).
-
-
 
 The documentation on Mozilla's site states the following about promises:
 
 > <i>A Promise is an object representing the eventual completion or failure of an asynchronous operation.</i>
 
-
-
 On other words a promise is an object that represents an asynchronous operation. A promise can have three distinct states:
-
-
-
-
 
 - first, the promise is <i>pending</i>, meaning the respective asynchronous operation has not yet occurred
 - if the operation finishes successfully, then the promise will move its state to <i>fulfilled</i>, sometimes called <i>resolved</i>
 - a third possible state is <i>rejected</i>, which represents a failed operation
 
-
-
 The first promise in our example is <i>fulfilled</i>, representing a successful <em>axios.get('http://localhost:3001/notes')</em> request. The second one, however, is <i>rejected</i>, and the console will tell us the reason. It looks like we were trying to make a HTTP GET request to an address, which doesn't exist.
-
-
 
 If and when we want to access the result of the operation represented by the promise, we must register an event handler to the promise. This is achieved using the method <em>then</em>:
 
@@ -306,18 +290,11 @@ promise.then(response => {
   console.log(response)
 })
 ```
-
-
-
 The following is printed to the console
 
-![](../../images/2/17b.png)
-
-
+![](../../images/2/17e.png)
 
 The Javascript runtime environment calls the callback function registered by the <em>then</em> method providing it with a <em>result</em> object as a parameter. The <em>result</em> object contains all the essential data related to the response of a HTTP GET request, which would include the returned <i>data</i>, <i>status code</i> and <i>headers</i>.
-
-
 
 Rarely does one need to save the promise object to a variable, and it is common to chain the <em>then</em> method call right after the axios method call:
 
@@ -345,20 +322,11 @@ axios
   })
 ```
 
-
-
 this way a quick glance at the left side of the screen gives a decent picture of what's going on.
-
-
-
 
 The data returned by the server is plaint text, basically just one long string. The axios library is still able to parse the data into a Javascript array, since the server has specified that the data format is <i>application/json; charset=utf-8</i> (see previous image) using the <i>content-type</i> header.
 
-
-
 Finally we can begin using data fetched from the server.
-
-
 
 Let's first do it "poorly", which would mean putting the <i>App</i> component representing the application inside the callback function by modifying <i>index.js</i> as follows:
 
@@ -378,37 +346,25 @@ axios.get('http://localhost:3001/notes').then(response => {
 })
 ```
 
-
-
 In some cases this way might be fine, but it is still a bit problematic. Instead we move the fetching of data into the <i>App</i> component.
-
-
 
 However, it is not immediately obvious where among the component's code the command <em>axios.get</em> should be placed.
 
 
 ### Effect-hooks
 
-
-
-
 We have already used [state hooks](https://reactjs.org/docs/hooks-state.html), that were introduced along with React version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), provide state to React components defined as functions. Version 16.8.0 also introduces the [effect hooks](https://reactjs.org/docs/hooks-effect.html) as a new. In the words of the docs
 
 > <i>The Effect Hook lets you perform side effects in function components.</i>
 > <i>Data fetching, setting up a subscription, and manually changing the DOM in React components are all examples of side effects. </i>
 
-
-
 Thereby effect hooks are precisely the right tool to use when fetching data from a server.
-
-
 
 Let's remove the fetching of data from <i>index.js</i>. There is no longer a need to pass data as props to the <i>App</i> component. So <i>index.js</i> gets simplified into
 
 ```js
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
-
 
 The <i>App</i> component changes as follows:
 
@@ -440,12 +396,7 @@ const App = () => {
 }
 ```
 
-
-
-
 We have also added a few helpful prints, which clarify the progression of the execution.
-
-
 
 This is printed to the console
 
@@ -456,11 +407,7 @@ promise fulfilled
 render 3 notes
 </pre>
 
-
-
 First the body of the function defining the component is executed, and the component is rendered for the first time. At this point <i>render 0 notes</i> is printed, meaning data hasn't yet been fetched from the server.
-
-
 
 The effect, or function,
 ```js
@@ -475,8 +422,6 @@ The effect, or function,
 }
 ```
 
-
-
 is executed immediately after rendering. The execution of the function results in <i>effect</i> being printed to the console, and the command <em>axios.get</em> initiating the fetching of data from the server as well as registering a function as an <i>event handler</i> for the operation
 
 ```js
@@ -486,14 +431,9 @@ response => {
 })
 ```
 
-
-
 When data arrives from the server the Javascript runtime calls the function registered as the event handler, which prints <i>promise fulfilled</i> to the console and stores the notes received from the server into the state using the function <em>setNotes(response.data)</em>.
 
-
-
 As usual, the call to a function updating state triggers the re-rendering of the component. As a result <i>render 3 notes</i> is printed to the console and the notes fetched from the server are rendered to the screen.
-
 
 Finally, let's take a look at the definition of the effect hook as a whole
 
@@ -507,7 +447,6 @@ useEffect(() => {
     })
 }, [])
 ```
-
 
 Let's rewrite the code a bit differently.
 
@@ -525,29 +464,17 @@ const hook = () => {
 useEffect(hook, [])
 ```
 
-
-
 Now we can more clearly see that the function [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect) is actually given <i>two parameters</i>. The first is a function, the <i>effect</i> itself. According to the documentation
 
 > <i>By default, effects run after every completed render, but you can choose to fire it only when certain values have changed.</i>
 
-
-
 So by default the effect is <i>always</i> run after the component has been rendered. In our case, however, we only want to execute the effect along with the first render.
-
-
 
 The second parameter of <em>useEffect</em> is used to [specify how often the effect is run](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect). If the second parameter is an empty array <em>[]</em>, then the effect is only run along with the first render of the component.
 
-
-
 There are many possible use cases for effect hook other than fetching data from the server. At this moment this is enough for us.
 
-
-
 Think back at the sequence of events we just discussed. Which parts of the code is run? In what order? How often? Understanding the order of events is critical!
-
-
 
 Note, that we could have also written the code of the effect function in the following way:
 
@@ -565,8 +492,6 @@ useEffect(() => {
 }, [])
 ```
 
-
-
 The variable <em>eventHandler</em> has been assigned reference to a event handler function. The promise returned by the <em>get</em> method of Axios is stored into the variable <em>promise</em>. The registration of the callback happens by giving <em>eventHandler</em>, referring to the event handler function, as a parameter to the then method of the promise. It isn't usually necessary to assign functions and promises to variables and a more compact way of representing things, which we saw further above, is enough.
 
 ```js
@@ -581,32 +506,19 @@ useEffect(() => {
 }, [])
 ```
 
-
-
 We still have a problem in our application. When adding new notes they are not stored on the server.
 
+The code so far for the application can be found in full on [github](https://github.com/fullstackopen-2019/part2-notes/tree/part2-4) in the branch <i>part2-4</i>.
 
-
-The code so far for the application can be found in full on [github](https://github.com/fullstack-hy2019/part2-notes/tree/part2-4) in the branch <i>part2-4</i>.
-
-
-### The runtime environment of software development
-
-
+### The development runtime environment 
 
 The configuration for the whole of our application has steadily grown to be more complex. Let's review what happens and where. The following image describes the makeup of the application
 
 ![](../../images/2/18c.png)
 
-
-
 The Javascript code making up our React application is run in the browser. The browser gets the Javascript from the <i>React dev server</i>, which is the application that runs after running the command <em>npm start</em>. The dev-server transforms the Javascript into a format understood by the browser. Among other things, it stitches together Javascript from different files into one file. We'll discuss the dev-server in more detail in part 7 of the course.
 
-
-
 The React application running in the browser fetches the JSON formatted data from <i>json-server</i> running on port 3001 on the machine. json-server gets its data from the file <i>db.json</i>.
-
-
 
 At this point in development, all the parts of the application happen to reside on the software developer's machine, otherwise known as localhost. The situation changes when the application is deployed to the internet. We will do this in part 3.
 
@@ -626,32 +538,30 @@ We continue developing the phonebook. Store the initial state of the application
 
 ```json
 {
-  "persons": [
-    {
-      "name": "Arto Hellas",
+  "persons":[
+    { 
+      "name": "Arto Hellas", 
       "number": "040-123456",
       "id": 1
     },
-    {
-      "name": "Martti Tienari",
-      "number": "040-123456",
-      "id": 2
+    { 
+      "name": "Ada Lovelace", 
+      "number": "39-44-5323523",
+      "id": 4
     },
-    {
-      "name": "Arto Järvinen",
-      "number": "040-123456",
+    { 
+      "name": "Dan Abramov", 
+      "number": "12-43-234345",
       "id": 3
     },
-    {
-      "name": "Lea Kutvonen",
-      "number": "040-123456",
+    { 
+      "name": "Mary Poppendieck", 
+      "number": "39-23-6423122",
       "id": 4
     }
   ]
 }
 ```
-
-
 
 Start json-server on port 3001 and make sure that the server returns the list of people by going to the address <http://localhost:3001/persons> in the browser.
 
@@ -668,77 +578,47 @@ Error: listen EADDRINUSE 0.0.0.0:3001
     at _exceptionWithHostPort (util.js:1041:20)
 ```
 
-
-
 it means that port 3001 is already in use by another application, e.g. in use by an already running json-server. Close the other application, or change the port in case that doesn't work.
-
-
 
 Modify the application such that the initial state of the data is fetched from the server using the <i>axios</i>-library. Complete the fetching with an [Effect hook](https://reactjs.org/docs/hooks-effect.html).
 
-
 <h4>2.12* Data for countries, step1</h4>
-
-
 
 The API [https://restcountries.eu](https://restcountries.eu) provides a lot data for different countries in a machine readable format, a so-called REST API.
 
-
-
 Create an application, using which one can look at data of various countries. The application should probably get the data from the endpoint [all](https://restcountries.eu/#api-endpoints-all).
 
-
-
 The user interface is very simple. The country to be shown is found by typing a search query into the search field.
-
-
 
 If there are too many (over 10) countries that match the query, then the user is prompted to make their query more specific:
 
 ![](../../images/2/19b1.png)
 
-
-
 If there are fewer than ten countries, but more than one, then all countries matching the query are shown:
 
 ![](../../images/2/19b2.png)
-
-
 
 When there is only one country matching the query, then the basic data of the country, its flag and the languages spoken in that country are shown:
 
 ![](../../images/2/19b3.png)
 
-
-
 **NB**: it is enough that your application works for most of the countries. Some countries, like <i>Sudan</i>, can cause trouble, since the name of the country is part of the name for another country, <i>South Sudan</i>. You need not worry about these corner cases.
-
 
 **WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application.
 
-
 <h4>2.13*: Data for countries, step2</h4>
 
-
-
 **There is still a lot to do in this part, so don't get stuck on this exercise!**
-
-
 
 Improve on the application in the previous exercise, such that when the names of multiple countries are shown on the page there is a button next to the name of the country, which when pressed shows the view for that country:
 
 ![](../../images/2/19b4.png)
 
-
-
 In this exercise it is also enough that your application works for most of the countries. Countries whose name appears in the name of another country, like <i>Sudan</i> can be ignored.
-
 
 <h4>2.14*: Data for countries, step3</h4>
 
 **There is still a lot to do in this part, so don't get stuck on this exercise!**
-
-
 
 Add to the view showing the data of a single country the weather report for the capital of that country. There are dozens of providers for weather data. I used [https://www.apixu.com](https://www.apixu.com).
 
