@@ -14,7 +14,7 @@ We naturally want to store all notes that are created in our application in a ba
 
 If we go by the original textbook [definition](https://en.wikipedia.org/wiki/Representational_state_transfer), the json-server does not fit the description of a REST API, but the same is true of most APIs claiming to be RESTful.
 
-We will take a closer look at REST in the [next part](/osa3) of the course, but it's good to familiarize ourselves at this point with some of the [conventions](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) used by json-server and REST APIs at large. In particular, we will be taking a look at how [routes](https://github.com/typicode/json-server#routes) aka. URLs and HTTP request types are conventionally used in REST.
+We will take a closer look at REST in the [next part](/en/part3) of the course, but it's good to familiarize ourselves at this point with some of the [conventions](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) used by json-server and REST APIs at large. In particular, we will be taking a look at how [routes](https://github.com/typicode/json-server#routes) aka. URLs and HTTP request types are conventionally used in REST.
 
 ### REST
 
@@ -91,7 +91,7 @@ addNote = event => {
 }
 ```
 
-The new note returned by the backend server is added to the list of notes in our application's state in a familiar fashion, by using the <em>setNotes</em> function and then resetting the note creation form. An [important detail](/osa1#taulukon-käsittelyä) to remember is that the <em>concat</em> method does not change the original state, but rather creates a new copy of the list.
+The new note returned by the backend server is added to the list of notes in our application's state in a familiar fashion, by using the <em>setNotes</em> function and then resetting the note creation form. An [important detail](/en/part1/a_more_complex_state_debugging_react_apps#handling-arrays) to remember is that the <em>concat</em> method does not change the original state, but rather creates a new copy of the list.
 
 
 Once the data returned by the server starts to have an effect on the behavior of our web applications, we are immediately faced by a whole new set of challenges that arise due to the nature of asynchronous communication among other things. This creates the demand for new debugging strategies. Logging to the console and other means of debugging become more and more important, and we have to develop an understanding of the inner workings of the JavaScript runtime and React components — guessing is no longer an option.
