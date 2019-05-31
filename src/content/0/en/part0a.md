@@ -155,7 +155,7 @@ Node package manager [npm](https://www.npmjs.com/get-npm) will be automatically 
 ### Typos in the material
 
 If you find a typo in the material, or something has been expressed unclearly, or is simply bad grammar, do a <i>pull request</i> to the course material in repository <https://github.com/fullstackopen-2019/fullstackopen-2019.github.io>.
-For example, the markdown source code of this page can be found in the repository at <https://github.com/fullstackopen-2019/fullstackopen-2019.github.io/blob/source/src/content/osa0/osa0a.md> 
+For example, the markdown source code of this page can be found in the repository at <https://github.com/fullstackopen-2019/fullstackopen-2019.github.io/edit/source/src/content/0/en/part0a.md> 
 
 At the foot of each part of the material is a link <em>Suggest a change to the material</em>. By clicking the link you can edit the source code of the page. 
 
