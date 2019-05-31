@@ -47,7 +47,9 @@ export default class ContentTemplate extends Component {
 
     links.map(i => {
       i.style = `border-color: ${colors[partColors[frontmatter.part]]}`;
-      i.target = '_blank';
+      i.classList.contains('language-switcher__language')
+        ? (i.target = i.target)
+        : (i.target = '_blank');
 
       function over() {
         i.style.backgroundColor = colors[partColors[frontmatter.part]];

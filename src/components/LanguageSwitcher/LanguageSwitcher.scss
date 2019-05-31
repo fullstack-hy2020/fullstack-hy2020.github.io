@@ -1,0 +1,31 @@
+@import '../common.scss';
+
+.language-switcher {
+  margin-left: auto;
+  display: flex;
+  width: 63px;
+  justify-content: space-between;
+  text-decoration: none;
+
+  span,
+  a {
+    padding: 1px 3px;
+    text-transform: uppercase;
+    border-radius: 5px;
+    font-weight: 500;
+  }
+
+  a {
+    cursor: pointer;
+    margin: 1px;
+
+    &:hover {
+      background-color: $black !important;
+      color: $white !important;
+    }
+  }
+
+  &__active-language {
+    border: 1px solid $black !important;
+  }
+}

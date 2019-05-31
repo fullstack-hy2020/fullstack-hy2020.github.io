@@ -27,6 +27,18 @@
     overflow: hidden;
     flex-direction: row;
   }
+
+  &__wrapper {
+    @include to($large) {
+      .language-switcher {
+        margin: 20px 0 0 0;
+      }
+    }
+
+    @include from($large) {
+      flex-grow: 100;
+    }
+  }
 }
 
 .navigation__toggle {

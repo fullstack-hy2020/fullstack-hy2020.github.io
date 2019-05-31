@@ -2,6 +2,7 @@ import './Navigation.scss';
 
 import React, { Component } from 'react';
 
+import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 import { NavigationItem } from './Item';
 import PropTypes from 'prop-types';
 
@@ -58,6 +59,8 @@ class Navigation extends Component {
             {navigation[this.props.lang].map(i => (
               <NavigationItem key={i.path} {...i} onClick={handleCloseMenu} />
             ))}
+
+            <LanguageSwitcher lang={this.props.lang} />
           </ul>
         </nav>
       </div>
