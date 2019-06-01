@@ -150,7 +150,7 @@ Don't code with nano, Notepad or Gedit. NetBeans isn't very good for web develop
 
 Immediately also install [Node.js](https://nodejs.org/en/). The material has been done with version 10.0, so don't install anything older than that. Although if you already happen to have Node installed, anything newer than 8.0 should work just fine. Installation instructions have been collected [here](https://github.com/fullstack-hy2019/misc/tree/master).
 
-Node package manager [npm](https://www.npmjs.com/get-npm) will be automatically installed with Node. We will be using npm actively throughout the course. Node also comes with [npx](https://www.npmjs.com/package/npx), which well need a few times. 
+Node package manager [npm](https://www.npmjs.com/get-npm) will be automatically installed with Node. We will be using npm actively throughout the course. Node also comes with [npx](https://www.npmjs.com/package/npx), which we'll need a few times. 
 
 ### Typos in the material
 
