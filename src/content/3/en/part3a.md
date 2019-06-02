@@ -945,7 +945,7 @@ Notice that the master branch of the repository contains the code from a later v
 If you clone the project, run the _npm install_ command before starting the application with _npm start_ or _npm run watch_.
 
 
-One more thing before we move onto the exercises. The function for generating id's looks currently like this:
+One more thing before we move onto the exercises. The function for generating IDs looks currently like this:
 
 ```js
 const generateId = () => {
@@ -990,13 +990,13 @@ Implement a Node application that returns a hardcoded list of phonebook entries 
 ![](../../images/3/22e.png)
 
 
-Notice that the forward slash in the route <i>api/persons</i> is not a special character, and is just like any other character in thes string. 
+Notice that the forward slash in the route <i>api/persons</i> is not a special character, and is just like any other character in the string. 
 
 
 The application must be started with the command _npm start_.
 
 
-The application must also offer an _npm run command_ that will run the application and restart the server whenever changes are made and saved to a file in the source code.
+The application must also offer an _npm run_ command that will run the application and restart the server whenever changes are made and saved to a file in the source code.
 
 
 #### 3.2: Phonebook backend step2
@@ -1107,7 +1107,7 @@ Middleware are functions that can be used for handling _request_ and _response_ 
 The body-parser we used earlier takes the raw data from the requests that's stored in the _request_ object, parses it into a JavaScript object and assigns it to the _request_ object as a new property <i>body</i>.
 
 
-In practice you can use several middleware at the same time. When you have more than one, they're executed one by one in the order that they were taken into use in express.
+In practice, you can use several middleware at the same time. When you have more than one, they're executed one by one in the order that they were taken into use in express.
 
 
 Let's implement our own middleware that prints information about every request that is sent to the server.
@@ -1142,7 +1142,7 @@ Middleware functions are called in the order that they're taken into use with th
 Middleware functions have to be taken into use before routes if we want them to be executed before the route event handlers are called. There are also situations where we want to define middleware functions after routes. In practice, this means that we are defining middleware functions that are only called if no route handles the HTTP request.
 
 
-Let's add the following middleware after our routes, that is used for catching requests made to non-existent routes. For these requests the middleware will return an error message in the JSON format.
+Let's add the following middleware after our routes, that is used for catching requests made to non-existent routes. For these requests, the middleware will return an error message in the JSON format.
 
 ```js
 const unknownEndpoint = (request, response) => {
@@ -1165,7 +1165,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 Add the [morgan](https://github.com/expressjs/morgan) middleware to your application for logging. Configure it to log messages to your console based on the <i>tiny</i> configuration.
 
-The documentation for Morgan is not the best, and you may have to some time figuring out how to configure it correctly. However, most documentation in the world falls under the same category and it's good to learn to decipher and interpret more cryptic documentation.
+The documentation for Morgan is not the best, and you may have to some time figuring out how to configure it correctly. However, most documentation in the world falls under the same category, so it's good to learn to decipher and interpret cryptic documentation in any case.
 
 
 Morgan is installed just like all other libraries with the _npm install_ command. Taking morgan into use happens the same as configuring any other middle by using the _app.use_ command.
@@ -1179,7 +1179,7 @@ Configure morgan so that it also shows the data sent in HTTP POST requests:
 ![](../../images/3/24.png)
 
 
-This exercise can be quite challenging even though the solution does not require a lot of code.
+This exercise can be quite challenging, even though the solution does not require a lot of code.
 
 
 This exercise can be completed in a few different ways. One of the possible solutions utilizes these two techniques:
