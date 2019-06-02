@@ -48,7 +48,7 @@ Clicking the first event reveals more information on what's happening:
 
 ![](../../images/0/3e.png)
 
-The upper part ,<i>General</i>, shows that the browser did a request to the address <i>https://fullstack-exampleapp.herokuapp.com/</i> using the  [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) method, and that the request was successfull, because the server response had the [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200. 
+The upper part, <i>General</i>, shows that the browser did a request to the address <i>https://fullstack-exampleapp.herokuapp.com/</i> using the  [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) method, and that the request was successfull, because the server response had the [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200. 
 
 The request and the server response have serveral [headers](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields):
 
@@ -57,7 +57,7 @@ The request and the server response have serveral [headers](https://en.wikipedia
 
 The <i>Response headers</i> on top tell us e.g the size of the response in bytes, and the exact time of the response. An important header [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) tells us that the response is a text file in [utf-8](https://en.wikipedia.org/wiki/UTF-8)-format, contents of which have been formatted with HTML. This way the browser knows the response to be a regular [HTML](https://en.wikipedia.org/wiki/HTML)-page, and to render it to the browser 'like a web page'.
 
-<i>Response</i> tab shows the response data, a regular HTML-page. The <i>body</i> section determines the structure of the page rendered to the screen: 
+The <i>Response</i> tab shows the response data, a regular HTML-page. The <i>body</i> section determines the structure of the page rendered to the screen: 
 
 ![](../../images/0/5e.png)
 
@@ -67,9 +67,9 @@ Because of the img tag, the browser does a second <i>HTTP-request</i> to fetch t
 
 ![](../../images/0/6e.png)
 
-The request was made to the address <https://fullstack-exampleapp.herokuapp.com/kuva.png> and it's type is HTTP GET. The response headers tell us that the response size is 89350 bytes, and it's [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) is <i>image/png</i>, so it is a png image. Browser uses this information to render the image correctly to the screen. 
+The request was made to the address <https://fullstack-exampleapp.herokuapp.com/kuva.png> and its type is HTTP GET. The response headers tell us that the response size is 89350 bytes, and its [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) is <i>image/png</i>, so it is a png image. The browser uses this information to render the image correctly to the screen. 
 
-The chain of events caused by opening the page https://fullstack-exampleapp.herokuapp.com/ on a browser form the following [sequence diagram](https://github.com/mluukkai/ohjelmistotekniikka-kevat2019/blob/master/web/materiaali.md#sekvenssikaaviot)
+The chain of events caused by opening the page https://fullstack-exampleapp.herokuapp.com/ on a browser form the following [sequence diagram](https://github.com/mluukkai/ohjelmistotekniikka-kevat2019/blob/master/web/materiaali.md#sekvenssikaaviot):
 
 ![](../../images/0/7e.png)
 
@@ -79,9 +79,9 @@ Even though it is difficult to notice, the HTML page begins to render before the
 
 ### Traditional web applications
 
-The homepage of the example application works like a <i>traditional web application</i>. When entering the page, browser fetches the HTML document detailing the structure and the textual content of the page from the server.
+The homepage of the example application works like a <i>traditional web application</i>. When entering the page, the browser fetches the HTML document detailing the structure and the textual content of the page from the server.
 
-The server has formed this document somehow. The document can be a <i>static</i> text file saved into the server's directory. The server can also form the HTML documents <i>dynamically</i>  according to the application code, using for example data from a database. 
+The server has formed this document somehow. The document can be a <i>static</i> text file saved into the server's directory. The server can also form the HTML documents <i>dynamically</i>  according to the application code, using, for example, data from a database. 
 The HTML code of the example application has been formed dynamically, because it contains information on the amount of created notes. 
 
 The HTML code of the homepage is as follows: 
@@ -116,7 +116,7 @@ The content of the HTML page has been saved as a template string, or a string wh
 
 Writing HTML in the midst of the code is of course not smart, but for old-school PHP-programmers it was a normal practice.
 
-In traditional web applications the browser is "dumb". It only fetches HTML data from the server, and all application logic is on the server. A server can be created for example using Java Spring like on the University of Helsinki course [Web-palvelinohjelmointi](https://courses.helsinki.fi/fi/tkt21007/119558639), Python Flask (like on the course [tietokantasovellus](https://materiaalit.github.io/tsoha-18/)) or with [Ruby on Rails](http://rubyonrails.org/).
+In traditional web applications the browser is "dumb". It only fetches HTML data from the server, and all application logic is on the server. A server can be created, for example, using Java Spring like on the University of Helsinki course [Web-palvelinohjelmointi](https://courses.helsinki.fi/fi/tkt21007/119558639), Python Flask (like on the course [tietokantasovellus](https://materiaalit.github.io/tsoha-18/)) or with [Ruby on Rails](http://rubyonrails.org/).
 
 The example uses [Express](https://expressjs.com/) from Node.js. 
 This course will use Node.js and Express to create web servers. 
@@ -168,7 +168,7 @@ The details of the code are not important right now, but some code has been incl
 
 Immediately after fetching the <i>script</i> tag, the browser begins to execute the code. 
 
-The last two lines define that the the browser does a HTTP GET request to the servers address <i>/data.json</i>:
+The last two lines define that the browser does a HTTP GET request to the server's address <i>/data.json</i>:
 
 ```js
 xhttp.open('GET', '/data.json', true)
@@ -181,7 +181,7 @@ We can try going to the address <https://fullstack-exampleapp.herokuapp.com/data
 ![](../../images/0/10e.png)
 
 There we find the notes in [JSON](https://en.wikipedia.org/wiki/JSON) "raw data". 
-By default, the browser is not too good at displaying JSON-data. Plugins can be used to handle the formatting. Install for example [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) to Chrome, and reload the page. The data is now much more nicely formatted. 
+By default, the browser is not too good at displaying JSON-data. Plugins can be used to handle the formatting. Install, for example, [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) to Chrome, and reload the page. The data is now much more nicely formatted: 
 
 ![](../../images/0/11e.png)
 
@@ -244,7 +244,7 @@ The <i>Console</i> tab and the <em>console.log</em> command will become very fam
 
 ### Event handlers and Callback functions
 
-The structure of the code is a bit odd:
+The structure of this code is a bit odd:
 
 
 ```js
@@ -326,7 +326,7 @@ Finally, the tree branch of the <em>ul</em> variable is connected to its proper 
 document.getElementById('notes').appendChild(ul)
 ```
 
-### manipulating the document-object from console
+### Manipulating the document-object from console
 
 The topmost node of the DOM tree of a HTML document is called the <em>document</em>. You can access this object from the Console-tab (you have to type it by yourself): 
 
@@ -390,7 +390,7 @@ CSS attributes can be examined on the <i>elements</i> tab on the console:
 
 The outermost <i>div</i> element has the class <i>container</i>. The <i>ul</i> element containing the list of notes has the class <i>notes</i>.
 
-The CSS rule defines, that element with the <i>container</i> class will be outlined with one pixel wide [border](https://developer.mozilla.org/en-US/docs/Web/CSS/border). It also sets 10 pixel [padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding) to the element. This sets some empty space between the element content and the border. 
+The CSS rule defines that elements with the <i>container</i> class will be outlined with a one pixel wide [border](https://developer.mozilla.org/en-US/docs/Web/CSS/border). It also sets 10 pixel [padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding) to the element. This sets some empty space between the element content and the border. 
 
 The second CSS rule sets the text color of the notes blue. 
 
@@ -409,10 +409,10 @@ Let's revise what happens when the page https://fullstack-exampleapp.herokuapp.c
 
 ![](../../images/0/19e.png)
 
-- The browser fetches the HTML code defining the content and the structure of the page from the server using a HTTP GET request.
+- The browser fetches the HTML code defining the content and the structure of the page from the server using an HTTP GET request.
 - Links in the HTML code cause the browser to also fetch the CSS style sheet <i>main.css</i>...
 - ...and a JavaScript code file <i>main.js</i>
-- The browser executes the JavaScript code. The code makes a HTTP GET request to the address https://fullstack-exampleapp.herokuapp.com/data.json, which 
+- The browser executes the JavaScript code. The code makes an HTTP GET request to the address https://fullstack-exampleapp.herokuapp.com/data.json, which 
   returns the notes as JSON  data. 
 - When the data has been fetched, the browser executes an <i>event handler</i>, which renders the notes to the page using the DOM-API. 
 
@@ -433,15 +433,15 @@ The first one is the form submit event. Let's zoom into it:
 
 ![](../../images/0/22e.png)
 
-It is a [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request to the server address <i>new\_note</i>. The server responds with HTTP status code 302. This is an [URL redirect](https://en.wikipedia.org/wiki/URL_redirection), with which the server asks the browser to do a new HTTP GET request to the address defined in the header's <i>Location</i> - the address <i>notes</i>.
+It is an [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request to the server address <i>new\_note</i>. The server responds with HTTP status code 302. This is an [URL redirect](https://en.wikipedia.org/wiki/URL_redirection), with which the server asks the browser to do a new HTTP GET request to the address defined in the header's <i>Location</i> - the address <i>notes</i>.
 
-So, the browser reloads the Notes page. The reload causes three more HTTP requests: fetching the style sheet (main.css), the JavaScript code (main.js) and the raw data of the notes (data.json). 
+So, the browser reloads the Notes page. The reload causes three more HTTP requests: fetching the style sheet (main.css), the JavaScript code (main.js), and the raw data of the notes (data.json). 
 
 The network tab also shows the data submitted with the form: 
 
 ![](../../images/0/23e.png)
 
-The Form tag has attributes <i>action</i> and <i>method</i>, which define that submitting the form is done as a HTTP POST request to the address <i>new_note</i>. 
+The Form tag has attributes <i>action</i> and <i>method</i>, which define that submitting the form is done as an HTTP POST request to the address <i>new_note</i>. 
 
 ![](../../images/0/24e.png)
 
@@ -504,7 +504,7 @@ The Notes page of our application bears some resemblance to SPA-style apps, but 
 
 A single page app version of our example application can be found from <https://fullstack-exampleapp.herokuapp.com/spa>.
 At first glance, the application looks exactly the same as the previous one. 
-The HTML code is almost identical, but the JavaScript file is different (<i>spa.js</i>) and there is a small change in the form-tag is defined: 
+The HTML code is almost identical, but the JavaScript file is different (<i>spa.js</i>) and there is a small change in how the form-tag is defined: 
 
 ![](../../images/0/25e.png)
 
@@ -571,10 +571,10 @@ var sendToServer = function(note) {
 )
 ```
 
-The code determines, that the data is to be send with a HTTP POST request and the data type is to be JSON. The data type is determined with a <i>Content-type</i> header. Then the data is sent as JSON-string. 
+The code determines, that the data is to be sent with an HTTP POST request and the data type is to be JSON. The data type is determined with a <i>Content-type</i> header. Then the data is sent as JSON-string. 
 
 The application code is available at <https://github.com/mluukkai/example_app>. 
-It's worth to remember, that the application is only ment to demonstrate the concepts of the course. The code is partially bad style, and should not be used as an example when coding your own applications. The same is true for the URLs used. The URL <i>new\_note\_spa</i> new notes are sent to does not follow the current best practices. 
+It's worth to remember, that the application is only meant to demonstrate the concepts of the course. The code is partially bad style, and should not be used as an example when coding your own applications. The same is true for the URLs used. The URL <i>new\_note\_spa</i>, which new notes are sent to, does not follow the current best practices. 
 
 ### Javascript-libraries
 
@@ -582,16 +582,16 @@ The sample app is done with so called [vanilla Javascript](https://medium.freeco
 
 Instead of using just JavaScript and the DOM-API, different libraries containing easier to use tools than the DOM-API are often used to manipulate pages. One of these libraries is the ever-so-popular [JQuery](https://jquery.com/).
 
-JQuery was developed back when web-pages mainly followed the traditional style of the server generating HTML pages, functionality of which was enhanced on the browser using JavaScript written with JQuery. One of the reasons for the success of JQuery was so called cross-browser compatibility. The library worked regardless of the browser or the company who made it, so there was no need for browser specific solutions. Nowadays using JQuery is not as justified, as VanillaJS has advanced a lot, and the most popular browsers generally support basic functionalities well. 
+JQuery was developed back when web-pages mainly followed the traditional style of the server generating HTML pages, functionality of which was enhanced on the browser using JavaScript written with JQuery. One of the reasons for the success of JQuery was so-called cross-browser compatibility. The library worked regardless of the browser or the company who made it, so there was no need for browser-specific solutions. Nowadays using JQuery is not as justified, as VanillaJS has advanced a lot, and the most popular browsers generally support basic functionalities well. 
 
-The rise of the single page app brought serveral more "modern" ways of web development than JQuery. The favourite of the first wave of developers was [BackboneJS](http://backbonejs.org/). After it's launch (https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) in 2012 Googles [AngularJS](https://angularjs.org/) quicly became almost the de facto standard of modern web development. 
+The rise of the single page app brought serveral more "modern" ways of web development than JQuery. The favourite of the first wave of developers was [BackboneJS](http://backbonejs.org/). After its launch (https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) in 2012, Google's [AngularJS](https://angularjs.org/) quickly became almost the de facto standard of modern web development. 
 
-However, the popularity of Angular plummeted after the Angluar team [announced](https://jaxenter.com/angular-2-0-announcement-backfires-112127.html) in October 2014 that support for version 1 will end, and Angular 2 will not be backwards compatible with the first version. Angular 2 and the newer versions have not gotten too warm of a welcome. 
+However, the popularity of Angular plummeted after the Angular team [announced](https://jaxenter.com/angular-2-0-announcement-backfires-112127.html) in October 2014 that support for version 1 will end, and Angular 2 will not be backwards compatible with the first version. Angular 2 and the newer versions have not gotten too warm of a welcome. 
 
-Currently the most popular tool for implementing the browser side logic of web-applications is Facebook's [React](https://reactjs.org/)-library. 
+Currently the most popular tool for implementing the browser-side logic of web-applications is Facebook's [React](https://reactjs.org/)-library. 
 During this course, we will get familiar with React and the [Redux](https://github.com/reactjs/redux)-library, which are frequently used together. 
 
-The status of React seems strong, but the world of JavaScript is ever changing. Recently for example a newcomer [VueJS](https://vuejs.org/) has been capturing some interest. 
+The status of React seems strong, but the world of JavaScript is ever changing. For example, recently a newcomer [VueJS](https://vuejs.org/) has been capturing some interest. 
 
 ### Full stack -web development
 
@@ -601,7 +601,7 @@ Practically all web applications have (at least) two "layers": the browser at th
 
 Often we also talk about the [frontend](https://en.wikipedia.org/wiki/Front_and_back_ends) and the [backend](https://en.wikipedia.org/wiki/Front_and_back_ends). The browser is the frontend, and JavaScript run on the browser is frontend code. The server on the other hand is the backend. 
 
-In the context of this course, full stack web development means that we focus on all parts of the application: the frontend, the backend and the database. Sometimes the software on the server and its operating system are seen as parts of the stack, but we won't go into those. 
+In the context of this course, full stack web development means that we focus on all parts of the application: the frontend, the backend, and the database. Sometimes the software on the server and its operating system are seen as parts of the stack, but we won't go into those. 
 
 We will code the backend with JavaScript, using [Node.js](https://nodejs.org/en/) runtime environment. Using the same programming language on multiple layers of the stack gives full stack web development a whole new dimension. However it's not a requirement of full stack web development to use the same programming language (JavaScript) for all layers of the stack. 
 
@@ -702,7 +702,7 @@ Create a diagram depicting the situation where the user goes to the [single page
 
   <h4>0.6: New note</h4>
 
-Create a diagram depicting the situation, where user creates a new note using the single page -version of the app. 
+Create a diagram depicting the situation, where user creates a new note using the single page version of the app. 
 
 This was the last exercise, and it's time to push your answers to GitHub and mark the exercises as done in the [submission application](https://studies.cs.helsinki.fi/fullstackopen2019/).
 
