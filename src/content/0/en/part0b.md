@@ -611,7 +611,7 @@ It used to be more common for developers to specialize in one layer of the stack
 
 Full stack web development is challenging in many ways. Things are happening in many places at once, and  debugging is quite a bit harder than with regular desktop applications. JavaScript does not always work like you'd expect it to (compared to many other languages) and the asynchronous way its runtime environments work causes all sorts of challenges. Communicating in the web requires knowledge of the HTTP-protocol. One must also handle databases and server administration and configuration. It would also be good to know enough CSS to make applications at least somewhat presentable. 
 
-The world of JavaScript develops fast, which brings its own set of challenges. Tools, libraries and the language itself are under constant development. Some are starting to get tired of the constant changes, and have launched to term for it: [Javascript](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4) [fatigue](https://auth0.com/blog/how-to-manage-javascript-fatigue/).
+The world of JavaScript develops fast, which brings its own set of challenges. Tools, libraries and the language itself are under constant development. Some are starting to get tired of the constant changes, and have coined a term for it: [Javascript](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4) [fatigue](https://auth0.com/blog/how-to-manage-javascript-fatigue/).
 
 You will catch the JavaScript fatigue during this course. Lucky for us, there are a few ways to lower the learning curve, and we can start with coding instead of configuration. We can't avoid configuration completely, but the next few weeks we can merrily push ahead avoiding the worst of the configuration hells. 
 
