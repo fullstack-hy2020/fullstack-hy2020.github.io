@@ -76,7 +76,7 @@ Luodaan heroku-sovellus komennolla _heroku create_, tehdään sovelluksen hakemi
 
 Jos kaikki meni hyvin, sovellus toimii:
 
-![](../../images/3/25a.png)
+![](../../images/3/25e.png)
 
 Jos ei, vikaa voi selvittää herokun lokeja lukemalla, eli komennolla _heroku logs_.
 
@@ -149,7 +149,7 @@ Muutoksen jälkeen on luotava uusi production build ja kopioitava se backendin r
 
 Sovellusta voidaan käyttää nyt <i>backendin</i> osoitteesta <http://localhost:3001>:
 
-![](../../images/3/28.png)
+![](../../images/3/28e.png)
 
 Sovelluksemme toiminta vastaa nyt täysin osan 0 luvussa [Single page app](/osa0/#single-page-app) läpikäydyn esimerkkisovelluksen toimintaa.
 
@@ -173,13 +173,13 @@ Sivu sisältää ohjeen ladata sovelluksen tyylit määrittelevän CSS-tiedoston
 
 React-koodi hakee palvelimelta muistiinpanot osoitteesta <http://localhost:3001/notes> ja renderöi ne ruudulle. Selaimen ja palvelimen kommunikaatio selviää tuttuun tapaan konsolin välilehdeltä <i>Network</i>:
 
-![](../../images/3/29.png)
+![](../../images/3/29e.png)
 
-Kun sovelluksen "internettiin vietävä" versio todetaan toimivan paikallisesti, commitoidaan frontendin tuotantoversio backendin repositorioon ja pushataan koodi uudelleen herokuun.
+Kun sovelluksen "internettiin vietävä" tuotantoversio todetaan toimivan paikallisesti, commitoidaan frontendin tuotantoversio backendin repositorioon ja pushataan koodi uudelleen herokuun.
 
-[Sovellus](https://gentle-ravine-74840.herokuapp.com/) toimii moitteettomasti lukuunottamatta vielä backendiin toteuttamatonta muistiinpanon tärkeyden muuttamista:
+[Sovellus](https://vast-oasis-81447.herokuapp.com/) toimii moitteettomasti lukuunottamatta vielä backendiin toteuttamatonta muistiinpanon tärkeyden muuttamista:
 
-![](../../images/3/30.png)
+![](../../images/3/30e.png)
 
 Sovelluksemme tallettama tieto ei ole ikuisesti pysyvää, sillä sovellus tallettaa muistiinpanot muuttujaan. Jos sovellus kaatuu tai se uudelleenkäynnistetään, kaikki tiedot katoavat.
 
@@ -199,13 +199,14 @@ Jotta uuden frontendin version generointi onnistuisi jatkossa ilman turhia manua
 }
 ```
 Skripteistä _npm run build:ui_ kääntää ui:n tuotantoversioksi ja kopioi sen. _npm run deploy_ julkaisee herokuun. 
+
 _npm run deploy:full_ yhdistää nuo molemmat sekä lisää vaadittavat <i>git</i>-komennot versionhallinnan päivittämistä varten. Lisätään lisäksi oma skripti _npm run logs:prod_ lokien lukemiseen, jolloin käytännössä kaikki toimii npm-skriptein.
 
 Huomaa, että skriptissä <i>build:ui</i> olevat polut riippuvat repositorioiden sijainnista.
 
 ### Backendin URL:it
 
-Backendin tarjoama muistiinpanojen käsittelyn rajapinta on nyt suoraan sovelluksen URL:in <https://gentle-ravine-74840.herokuapp.com/> alla. Eli <https://gentle-ravine-74840.herokuapp.com/notes> on kaikkien mustiinpanojen lista ym. Koska backendin roolina on tarjota frontendille koneluettava rajapinta, eli API, olisi ehkä parempi erottaa API:n tarjoama osoitteisto selkeämmin, esim. aloittamalla kaikki sanalla _api_.
+Backendin tarjoama muistiinpanojen käsittelyn rajapinta on nyt suoraan sovelluksen URL:in <https://vast-oasis-81447.herokuapp.com/> alla. Eli <https://vast-oasis-81447.herokuapp.com/notes> on kaikkien mustiinpanojen lista ym. Koska backendin roolina on tarjota frontendille koneluettava rajapinta, eli API, olisi ehkä parempi erottaa API:n tarjoama osoitteisto selkeämmin, esim. aloittamalla kaikki sanalla _api_.
 
 Tehdään muutos ensin muuttamalla käsin **kaikki backendin routet**:
 
@@ -231,11 +232,11 @@ const getAll = () => {
 // ...
 ```
 
-Muutosten jälkeen esim. kaikki muistiinpanot tarjoavan API-endpointin osoite on <https://gentle-ravine-74840.herokuapp.com/api/notes>
+Muutosten jälkeen esim. kaikki muistiinpanot tarjoavan API-endpointin osoite on <https://vast-oasis-81447.herokuapp.com/api/notes>
 
-![](../../images/3/31.png)
+![](../../images/3/31e.png)
 
-Frontend on edelleen sovelluksen juuressa eli osoitteessa <https://fullstack-notes.herokuapp.com/>.
+Frontend on edelleen sovelluksen juuressa eli osoitteessa <https://vast-oasis-81447.herokuapp.com/>.
 
 > Sivuhuomautus: **API:en versiointi**
 >
@@ -247,7 +248,7 @@ Frontend on edelleen sovelluksen juuressa eli osoitteessa <https://fullstack-not
 
 Frontendiin tehtyjen muutosten seurauksena on nyt se, että kun suoritamme frontendiä sovelluskehitysmoodissa, eli käynnistämällä sen komennolla _npm start_, yhteys backendiin ei toimi:
 
-![](../../images/3/32.png)
+![](../../images/3/32e.png)
 
 Syynä tälle on se, että backendin osoite muutettiin suhteellisesti määritellyksi:
 
@@ -275,7 +276,7 @@ Uudelleenkäynnistyksen jälkeen Reactin sovelluskehitysympäristö toimii [prox
 
 Nyt myös frontend on kunnossa. Se toimii sekä sovelluskehitysmoodissa että tuotannossa yhdessä palvelimen kanssa.
 
-Eräs negatiivinen puoli käyttämässämme lähestymistavassa on se, että sovelluksen uuden version tuotantoon vieminen edellyttää frontendin koodin tuotantoversion generoinnista ja sen backendin repositorion kopioimisesta huolehtivan skriptin <i>deploy.sh</i> suorittamisen. Tämä taas hankaloittaa automatisoidun [deployment pipelinen](https://martinfowler.com/bliki/DeploymentPipeline.html) toteuttamista. Deployment pipelinellä tarkoitetaan automatisoitua ja hallittua tapaa viedä koodi sovelluskehittäjän koneelta erilaisten testien ja laadunhallinnallisten vaiheiden kautta tuotantoympäristöön.
+Eräs negatiivinen puoli käyttämässämme lähestymistavassa on se, että sovelluksen uuden version tuotantoon vieminen edellyttää erillisessä repositoriossa olevan frontendin koodin tuotantoversion generoinnista. Tämä taas hankaloittaa automatisoidun [deployment pipelinen](https://martinfowler.com/bliki/DeploymentPipeline.html) toteuttamista. Deployment pipelinellä tarkoitetaan automatisoitua ja hallittua tapaa viedä koodi sovelluskehittäjän koneelta erilaisten testien ja laadunhallinnallisten vaiheiden kautta tuotantoympäristöön.
 
 Tähänkin on useita erilaisia ratkaisuja (esim. sekä frontendin että backendin [sijoittaminen samaan repositorioon](https://github.com/mars/heroku-cra-node)), emme kuitenkaan nyt mene niihin.
 

@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-Let's continue with our efforts to use the new backend with the React-frontend from [part 2](/part2).
+Let's continue with our efforts to use the new backend with the React-frontend from [part 2](/en/part2).
 Our last attempt failed with the following error message: 
 
 ![](../../assets/3/3.png)
@@ -51,7 +51,7 @@ You can read more about CORS from [Mozillas page](https://developer.mozilla.org/
 
 Now that the whole stack is ready, lets move our application to the internet. We'll use good old [Heroku](https://www.heroku.com) for this.
 
->If you have never used Heroku before, you can find instructions from the course material of [Tietokantasovellus](https://materiaalit.github.io/tsoha-18/viikko1/) course (in Finnish) or by Googling
+>If you have never used Heroku before, you can find instructions from [Heroku documentation](https://devcenter.heroku.com/articles/getting-started-with-nodejs) or by Googling.
 
 Add a file called  <i>Procfile</i> to the projects root to tell Heroku how to start the application. 
 
@@ -81,7 +81,7 @@ Create an heroku-application with the command <i>heroku create</i>, create a git
 
 If everything went well, the application works:
 
-![](../../images/3/25a.png)
+![](../../images/3/25e.png)
 
 If not, the issue can be found by reading heroku logs with command <i>heroku logs</i>.
 
@@ -152,9 +152,9 @@ After the change we have to create a new production build and copy it to the roo
 
 The application can now be used from the <i>backend</i> address <http://localhost:3001>:
 
-![](../../images/3/28.png)
+![](../../images/3/28e.png)
 
-Our application now works exactly like the [Single page app](/part0/#single-page-app) example application we studied in part 0. 
+Our application now works exactly like the [Single page app](/en/part0/fundamentals_of_web_apps#single-page-app) example application we studied in part 0. 
 
 When we use a browser to go to the address <http://localhost:3001>, the server returns the <i>index.html</i> file from the <i>build</i>  repository. Summarized contents of the file are as follows: 
 
@@ -174,15 +174,15 @@ When we use a browser to go to the address <http://localhost:3001>, the server r
 
 The file contains instructions to fetch a CSS-stylesheet defining the styles of the application, and two <i>script</i> tags which instruct the browser to fetch the JavaScript code of the application - the actual React application. 
 
-The React code fetches notes from the server address http://localhost:3001/notes> and renders them to the screen. The communications between the server and the browser can be seen on the <i>Network</i> tab of the developer console:
+The React code fetches notes from the server address <http://localhost:3001/notes> and renders them to the screen. The communications between the server and the browser can be seen on the <i>Network</i> tab of the developer console:
 
-![](../../images/3/29.png)
+![](../../images/3/29e.png)
 
-After ensuring that the 'online' version of the application works locally, commit the production build of the frontend to the backend repository, and push the code to heroku again. 
+After ensuring that the production version of the application works locally, commit the production build of the frontend to the backend repository, and push the code to heroku again. 
 
-[The application](https://gentle-ravine-74840.herokuapp.com/) works perfectly, except we haven't added the functionality for changing the importance of a note to the backend yet. 
+[The application](https://vast-oasis-81447.herokuapp.com/) works perfectly, except we haven't added the functionality for changing the importance of a note to the backend yet. 
 
-![](../../images/3/30.png)
+![](../../images/3/30e.png)
 
 Our application saves the notes to a variable. If the application craches or is restarted, all of the data will dissappear. 
 
@@ -192,24 +192,31 @@ The application needs a database. Before we introduce one, let's go through a fe
 
 To create a new production build of the frontend without extra manual work, let's add a simple shell-script to the root of the frontend repository. The script builds a new  production build with _npm run build_ and moves it to the backend directory. We name the script <i>deploy.sh</i>. It's contents are like so: 
 
-```bash
-#!/bin/sh
-npm run build
-rm -rf ../../osa3/notebackend/build
-cp -r build ../../osa3/notebackend/
+
+To create a new production build of the frontend without extra manual work, let's add a some npm-scripts to the <i>package.json</i> of the backend repository: 
+
+```json
+{
+  "scripts": {
+    "build:ui": "rm -rf build && cd ../../osa2/materiaali/notes-new && npm run build --prod && cp -r build ../../../osa3/notes-backend/",
+    "deploy": "git push heroku master",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",    
+    "logs:prod": "heroku logs --tail"
+  }
+}
 ```
 
-The script needs permission to execute: 
+The script _npm run build:ui_ builds the fronend and copies the production version under the backend repository.  _npm run deploy_ releases the current backend to heroku. 
 
-```bash
-chmod u+x deploy.sh
-```
+_npm run deploy:full_ combines these two and contains the necessary <i>git</i> commands to update the backend repository. 
 
-You can run the script from the root of the frontend with command _./deploy.sh_. 
+There is also a script _npm run logs:prod_ to show the heroku logs.
+
+Note that the directory paths is script <i>build:ui</i> depend on the location of repositories in the file system.
 
 ### Backend URLs
 
-Our backends interface for handling the notes is currently at the applications URL <https://gentle-ravine-74840.herokuapp.com/>. This means that <https://gentle-ravine-74840.herokuapp.com/notes> is the list of all notes and so on. The role of the backend is to offer a machine readable interface, or an API, to the frontend. It might be better to name the API addresses more clearly, for example by starting all of them with the word _api_.
+Our backends api for handling the notes is currently at the applications root URL <https://vast-oasis-81447.herokuapp.com/>. This means that <https://vast-oasis-81447.herokuapp.com/notes> is the list of all notes and so on. The role of the backend is to offer a machine readable interface, or an API, to the frontend. It might be better to name the API addresses more clearly, for example by starting all of them with the word _api_.
 
 Let's change **all backend routes** by hand: 
 
@@ -217,7 +224,7 @@ Let's change **all backend routes** by hand:
 //...
 app.get('/api/notes', (request, response) => {
   response.json(notes)
-});
+})
 //...
 ```
 
@@ -235,11 +242,11 @@ const getAll = () => {
 // ...
 ```
 
-After these changes i.e the API endpoint for all notes is <https://gentle-ravine-74840.herokuapp.com/api/notes>.
+After these changes i.e the API endpoint for all notes is <https://vast-oasis-81447.herokuapp.com/api/notes>.
 
-![](../../images/3/31.png)
+![](../../images/3/31e.png)
 
-Frontend is still at the root of the application at <https://fullstack-notes.herokuapp.com/>. 
+Frontend is still at the root of the application at <https://vast-oasis-81447.herokuapp.com/>. 
 
 >Sidenote: **API versions**
 >
@@ -250,9 +257,9 @@ Frontend is still at the root of the application at <https://fullstack-notes.her
 
 ### Proxy
 
-Changes on the frontend have caused it not to work on development mode (when started with command _npm start_ ) anymore, as the connection to the backend does not work. 
+Changes on the frontend have caused it not to work on development mode (when started with command _npm start_) anymore, as the connection to the backend does not work. 
 
-![](../../images/3/32.png)
+![](../../images/3/32e.png)
 
 This is due to changing the backend address to a relative URL: 
 
@@ -280,13 +287,13 @@ After a restart, the react development environment will work as a [proxy](https:
 
 Now the frontend is also fine, working with the server both in development- and production mode. 
 
-A negative aspect of our approach is how complicated it is to deploy the frontend. Deploying a new version requires generating new production build of the frontend and running the <i>deploy.sh</i> script to copy it to the backend repository. This makes creating an automated [deployment pipeline](https://martinfowler.com/bliki/DeploymentPipeline.html) more difficult. Deployment pipeline means an automated and controlled way to move the code from the computer of the developer through different tests and quality checks to the production environment. 
+A negative aspect of our approach is how complicated it is to deploy the frontend. Deploying a new version requires generating new production build of the frontend and copying it to the backend repository. This makes creating an automated [deployment pipeline](https://martinfowler.com/bliki/DeploymentPipeline.html) more difficult. Deployment pipeline means an automated and controlled way to move the code from the computer of the developer through different tests and quality checks to the production environment. 
 
 There are multiple ways to achieve this (for example placing both backend and frontend code [to the same repository](https://github.com/mars/heroku-cra-node) ) but we will not go into those now. 
 
 In some situations it may be sensible to deploy the frontend code as it's own application. With apps created with create-react-app it is [straightforward](https://github.com/mars/create-react-app-buildpack).
 
-Current application code can be found from [github](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-3).
+Current code of the backend can be found from [github](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part3-3), in the branch <i>part3-3</i>. The changes in frontend code are in <i>part3-1</i> branch of the [frontend repository](https://github.com/fullstackopen-2019/part2-notes/tree/part3-1).
 
 </div>
 
