@@ -65,9 +65,11 @@ When bugs occur, <i>the worst of all possible strategies</i> is to continue writ
 
 In order to store our saved notes indefinitely, we need a database. Most of the courses taught at the University of Helsinki use relational databases. In this course we will use [MongoDB](https://www.mongodb.com/) which is a so-called [document database](https://en.wikipedia.org/wiki/Document-oriented_database).
 
-Document databases differ from relational databases in how they organize data as well as the query languages they support. Document databases are usually categorized under the [NoSQL](https://en.wikipedia.org/wiki/NoSQL) umbrella term. You can read more about document databases and NoSQL from the course material for [week 7](https://tikape-s18.mooc.fi/part7/) from the introduction to databases course. Unfortunately the material is currently only available in Finnish.
+Document databases differ from relational databases in how they organize data as well as the query languages they support. Document databases are usually categorized under the [NoSQL](https://en.wikipedia.org/wiki/NoSQL) umbrella term. 
 
-**Lue nyt Tietokantojen perusteiden dokumenttitietokantoja kuvaava osuus.** Jatkossa oletetaan, että hallitset käsitteet <i>dokumentti</i> ja <i>kokoelma</i> (collection).
+You can read more about document databases and NoSQL from the course material for [week 7](https://tikape-s18.mooc.fi/part7/) from the introduction to databases course. Unfortunately the material is currently only available in Finnish. 
+
+Read now chapters on [collections](https://docs.mongodb.com/manual/core/databases-and-collections/) and [documents](https://docs.mongodb.com/manual/core/document/) from the MongoDB manual to get a basic idea how a document database stores the data.
 
 Naturally, you can install and run MongoDB on your own computer. However, the internet is also full of Mongo database services that you can use. Our preferred MongoDB provider in this course will be [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 
