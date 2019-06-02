@@ -693,12 +693,12 @@ If necessary, show operations on the browser or on the server as comments on the
 
 The diagram does not have to be a sequence diagram. Any sensible way of presenting the events is fine. 
 
-All necessary information for doing this, and the next three exercises, can be found from the text of [this part](../osa0).
+All necessary information for doing this, and the next three exercises, can be found from the text of [this part](/en/part0/fundamentals_of_web_apps).
 The idea of these exercises is to read the text through once more, and to think through what is going on where. Reading the application [code](https://github.com/mluukkai/example_app) is not necessary, but it is of course possible. 
 
   <h4>0.5: Single page app</h4>
 
-Create a diagram depicting the situation where the user goes to the [single page app](../osa0/#single-page-app) version of the notes app at <https://fullstack-exampleapp.herokuapp.com/spa>.
+Create a diagram depicting the situation where the user goes to the [single page app](/en/part0/fundamentals_of_web_apps#single-page-app) version of the notes app at <https://fullstack-exampleapp.herokuapp.com/spa>.
 
   <h4>0.6: New note</h4>
 

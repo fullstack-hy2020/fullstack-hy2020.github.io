@@ -11,4 +11,3 @@ In this part our focus shifts towards the backend, that is, towards implementing
 <b>This part will be available by 15.6.2019</b>
 
 </div>
-
