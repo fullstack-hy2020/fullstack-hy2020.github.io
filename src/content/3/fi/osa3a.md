@@ -101,7 +101,7 @@ const http = require('http')
 const app = http.createServer((req, res) => {
   res.writeHead(200, { 'Content-Type': 'text/plain' })
   res.end('Hello World')
-});
+})
 
 const port = 3001
 app.listen(port)
@@ -188,22 +188,22 @@ const http = require('http')
 let notes = [
   {
     id: 1,
-    content: 'HTML on helppoa',
-    date: '2017-12-10T17:30:31.098Z',
-    important: true,
+    content: "HTML is easy",
+    date: "2019-05-30T17:30:31.098Z",
+    important: true
   },
   {
     id: 2,
-    content: 'Selain pystyy suorittamaan vain javascriptiä',
-    date: '2017-12-10T18:39:34.091Z',
-    important: false,
+    content: "Browser can execute only Javascript",
+    date: "2019-05-30T18:39:34.091Z",
+    important: false
   },
   {
     id: 3,
-    content: 'HTTP-protokollan tärkeimmät metodit ovat GET ja POST',
-    date: '2017-12-10T19:20:14.298Z',
-    important: true,
-  },
+    content: "GET and POST are the most important methods of HTTP protocol",
+    date: "2019-05-30T19:20:14.298Z",
+    important: true
+  }
 ]
 
 const app = http.createServer((request, response) => {
@@ -223,7 +223,7 @@ Headerin <i>Content-Type</i> arvolla <i>application/json</i> kerrotaan, että ky
 
 Kun avaamme selaimen, on tulostusasu sama kuin [osassa 2](/osa2#datan-haku-palvelimelta) käytetyn [json-serverin](https://github.com/typicode/json-server) tarjoamalla muistiinpanojen listalla:
 
-![](../../images/3/2.png)
+![](../../images/3/2e.png)
 
 Voimme jo melkein ruveta käyttämään uutta backendiämme osan 2 muistiinpano-frontendin kanssa. Mutta vain _melkein_, sillä kun käynnistämme frontendin, tulee konsoliin virheilmoitus
 
@@ -342,12 +342,12 @@ Routeista toinen määrittelee tapahtumankäsittelijän, joka hoitaa sovelluksen
 ```js
 app.get('/notes', (request, response) => {
   response.json(notes)
-});
+})
 ```
 
 Pyyntöön vastataan _response_-olion metodilla [json](http://expressjs.com/en/4x/api.html#res.json), joka lähettää HTTP-pyynnön vastaukseksi parametrina olevaa Javascript-olioa eli taulukkoa _notes_ vastaavan JSON-muotoisen merkkijonon. Express asettaa headerin <i>Content-type</i> arvoksi <i>application/json</i>.
 
-![](../../images/3/6.png)
+![](../../images/3/6e.png)
 
 Pieni huomio JSON-muodossa palautettavasta datasta.
 
@@ -552,7 +552,7 @@ app.get('/notes/:id', (request, response) => {
 
 ja nyt yksittäisen resurssin hakeminen toimii.
 
-![](../../images/3/9.png)
+![](../../images/3/9e.png)
 
 Toiminnallisuuteen jää kuitenkin pieni ongelma.
 
@@ -593,11 +593,11 @@ Toteutetaan seuraavaksi resurssin poistava route. Poisto tapahtuu tekemällä HT
 
 ```js
 app.delete('/notes/:id', (request, response) => {
-  const id = Number(request.params.id);
-  notes = notes.filter(note => note.id !== id);
+  const id = Number(request.params.id)
+  notes = notes.filter(note => note.id !== id)
 
-  response.status(204).end();
-});
+  response.status(204).end()
+})
 ```
 
 Jos poisto onnistuu, eli poistettava muistiinpano on olemassa, vastataan statuskoodilla [204 no content](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.5) sillä mukaan ei lähetetä mitään dataa.
@@ -635,7 +635,7 @@ Luodaan kaikki muistiinpanot hakevan pyynnön määrittelevä tiedosto <i>get\_a
 
 Klikkaamalla tekstiä <i>Send Request</i>, REST client suorittaa määritellyn HTTP-pyynnön ja palvelimen vastaus avautuu editoriin:
 
-![](../../images/3/13.png)
+![](../../images/3/13e.png)
 
 ### Datan vastaanottaminen
 
@@ -670,11 +670,11 @@ Toistaiseksi sovellus ei vielä tee vastaanotetulle datalle mitään muuta kuin 
 
 Ennen toimintalogiikan viimeistelyä varmistetaan ensin postmanilla, että lähetetty tieto menee varmasti perille. Pyyntötyypin ja urlin lisäksi on määriteltävä myös pyynnön mukana menevä data eli <i>body</i>:
 
-![](../../images/3/14.png)
+![](../../images/3/14e.png)
 
 Sovellus tulostaa lähetetyn vastaanottamansa datan terminaaliin:
 
-![](../../images/3/15.png)
+![](../../images/3/15e.png)
 
 **HUOM** kun ohjelmoit backendia, <i>pidä sovellusta suorittava konsoli koko ajan näkyvillä</i>. Nodemonin ansiosta sovellus käynnistyy uudelleen jos koodiin tehdään muutoksia. Jos seuraat konsolia, huomaat välittömästi jos sovelluksen koodiin tulee joku perustavanlaatuinen virhe:
 
@@ -684,11 +684,11 @@ Vastaavasti konsolista kannattaa seurata reagoiko backend odotetulla tavalla, es
 
 Eräs potentiaalinen ongelmanlähde on se, että dataa lähettäessä, sen headerille <i>Content-Type</i> ei aseteta oikeaa arvoa. Näin tapahtuu esim. jos Postmanissa bodyn tyyppiä ei määritellä oikein:
 
-![](../../images/3/17a.png)
+![](../../images/3/17e.png)
 
 headerin <i>Content-Type</i> arvoksi asettuu <i>text/plain</i>
 
-![](../../images/3/18.png)
+![](../../images/3/18e.png)
 
 Palvelin näyttää vastaanottavan ainoastaan tyhjän olion
 
@@ -698,9 +698,9 @@ Ilman oikeaa headerin arvoa palvelin ei osaa parsia dataa oikeaan muotoon. Se ei
 
 Jos käytät VS Codea niin edellisessä luvussa esitelty REST client kannattaa asentaa viimeistään <i>nyt</i>. POST-pyyntö tehdään REST clientillä seuraavasti:
 
-![](../../images/3/20.png)
+![](../../images/3/20e.png)
 
-Eli pyyntöä varten on luotu oma tiedosto <i>new\_note.rest</i>. Pyyntö on muotoiltu [dokumentaation ohjetta](https://github.com/Huachao/vscode-restclient/blob/master/README.md#usage) noudatellen.
+Eli pyyntöä varten on luotu oma tiedosto <i>create\_note.rest</i>. Pyyntö on muotoiltu [dokumentaation ohjetta](https://github.com/Huachao/vscode-restclient/blob/master/README.md#usage) noudatellen.
 
 REST clientin eräs suuri etu Postmaniin verrattuna on se, että pyynnöt saa kätevästi talletettua projektin repositorioon ja tällöin ne ovat helposti koko kehitystiimin käytössä. Postmanillakin on mahdollista tallettaa pyyntöjä, mutta tilanne menee helposti kaaoottiseksi etenkin jos työn alla on useita toisistaan riippumattomia projekteja.
 
@@ -833,7 +833,7 @@ Mitä rivillä tapahtuu? <em>notes.map(n => n.id)</em> muodostaa taulukon, joka 
 
 Tee Node-sovellus, joka tarjoaa osoitteessa <http://localhost:3001/api/persons> kovakoodatun taulukon puhelinnumerotietoja:
 
-![](../../images/3/22a.png)
+![](../../images/3/22e.png)
 
 Huomaa, että Noden routejen määrittelyssä merkkijonon <i>api/persons</i> vinoviiva käyttäytyy kuten mikä tahansa muu merkki.
 
@@ -845,7 +845,7 @@ Komennolla _npm run watch_ käynnistettäessa sovelluksen tulee käynnistyä uud
 
 Tee sovelluksen osoitteeseen <http://localhost:3001/info> suunnilleen seuraavanlainen sivu
 
-![](../../images/3/23.png)
+![](../../images/3/23e.png)
 
 eli sivu kertoo pyynnön tekohetken sekä sen, kuinka monta puhelinluettelotietoa sovelluksen muistissa olevassa taulukossa on.
 
