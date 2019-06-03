@@ -65,7 +65,7 @@ When bugs occur, <i>the worst of all possible strategies</i> is to continue writ
 
 In order to store our saved notes indefinitely, we need a database. Most of the courses taught at the University of Helsinki use relational databases. In this course we will use [MongoDB](https://www.mongodb.com/) which is a so-called [document database](https://en.wikipedia.org/wiki/Document-oriented_database).
 
-Document databases differ from relational databases in how they organize data as well as the query languages they support. Document databases are usually categorized under the [NoSQL](https://en.wikipedia.org/wiki/NoSQL) umbrella term. 
+Document databases differ from relational databases in how they organize data as well as the query languages they support. Document databases are usually categorized under the [NoSQL](https://en.wikipedia.org/wiki/NoSQL) umbrella term.
 
 You can read more about document databases and NoSQL from the course material for [week 7](https://tikape-s18.mooc.fi/part7/) from the introduction to databases course. Unfortunately the material is currently only available in Finnish. 
 
@@ -216,9 +216,9 @@ const Note = mongoose.model('Note', noteSchema)
 
 First we define the [schema](http://mongoosejs.com/docs/guide.html) of a note that is stored in the _noteSchema_ variable. The schema tells Mongoose how the note objects are to be stored in the database.
 
-In the _Note_ model definition, the first <i>'Note'</i> parameter is the singular name of the model. The name of collection will the lowercased plural <i>notes</i>, because the [Mongoose convention](http://mongoosejs.com/docs/models.html) is to automatically name collections as the plural (e.g. <i>notes</i>) when the schema refers to them in the singular (e.g. <i>Note</i>).
+In the _Note_ model definition, the first <i>"Note"</i> parameter is the singular name of the model. The name of collection will the lowercased plural <i>notes</i>, because the [Mongoose convention](http://mongoosejs.com/docs/models.html) is to automatically name collections as the plural (e.g. <i>notes</i>) when the schema refers to them in the singular (e.g. <i>Note</i>).
 
-Document databases like Mongo are <i>schemaless</i>, meaning that the database itself does not  care about the structure of the data that is stored in the database. It is possible to store documents with completely different fields in the same collection.
+Document databases like Mongo are <i>schemaless</i>, meaning that the database itself does not care about the structure of the data that is stored in the database. It is possible to store documents with completely different fields in the same collection.
 
 The idea behind Mongoose is that the data stored in the database is given a <i>schema at the level of the application</i> that defines the shape of the documents stored in any given collection.
 
@@ -341,7 +341,7 @@ Person
 mongoose.connection.close()
 ```
 
-In the code above the <i>mongoose.connection.close()</i> command will get executed immediately after the <i>Person.find</i> operation gets started. This means that the database connection will be closed immediately, and the execution will never get to the point where <i>Person.find</i> operation finishes and the <i>callback</i> function gets called.
+In the code above the <i>mongoose.connection.close()</i> command will get executed immediately after the <i>Person.find</i> operation is started. This means that the database connection will be closed immediately, and the execution will never get to the point where <i>Person.find</i> operation finishes and the <i>callback</i> function gets called.
 
 The correct place for closing the database connection is at the end of the callback function:
 
@@ -466,7 +466,7 @@ noteSchema.set('toJSON', {
 module.exports = mongoose.model('Note', noteSchema) // highlight-line
 ```
 
-Defining Node [modules](https://nodejs.org/docs/latest-v8.x/api/modules.html) differs slightly from the way pf defining [ES6 modules](/osa2/kokoelmien_renderointi_ja_moduulit#refaktorointia-moduulit) in part 2.
+Defining Node [modules](https://nodejs.org/docs/latest-v8.x/api/modules.html) differs slightly from the way of defining [ES6 modules](/osa2/kokoelmien_renderointi_ja_moduulit#refaktorointia-moduulit) in part 2.
 
 The public interface of the module is defined by setting a value to the _module.exports_ variable. We will set the value to be the <i>Note</i> model. The other things defined inside of the module, like the variables _mongoose_ and _url_ will not be accessible or visible to users of the module.
 
@@ -596,7 +596,7 @@ When the backend gets expanded, it's a good idea to test the backend first with 
 
 Only once everything has been verified to work in the backend, is it a good idea to test that the frontend works with the backend. It is highly inefficient to test things exclusively through the frontend.
 
-It's probably a good idea to integrate the frontend and backend one functionality at a time. First we could implement fetching all of the notes from the database and test it through the backend endpoint in the browser. After this we could verify that the frontend works with the new backend. Once everything seems to work, we would move onto the next feature.
+It's probably a good idea to integrate the frontend and backend one functionality at a time. First, we could implement fetching all of the notes from the database and test it through the backend endpoint in the browser. After this, we could verify that the frontend works with the new backend. Once everything seems to work, we would move onto the next feature.
 
 Once we introduce a database into the mix, it is useful to inspect the state persisted in the database, e.g. from the control panel in MongoDB Atlas. Quite often little Node helper programs like the <i>mongo.js</i> program we wrote earlier can be very helpful during development.
 
@@ -622,7 +622,7 @@ In the following exercises, write all Mongoose-specific code into its own module
 
 Change the backend so that new numbers are <i>saved to the database</i>. Verify that your frontend still works after the changes.
 
-At this point you can choose to simply allow users to create all phonebook entries. At this stage, the phonebook can have multiple entries for a person with the same name. 
+At this point, you can choose to simply allow users to create all phonebook entries. At this stage, the phonebook can have multiple entries for a person with the same name. 
 
 </div>
 
@@ -636,7 +636,7 @@ We can see the following error message appear in the logs for the backend:
 
 ![](../../images/3/47.png)
 
-The request has failed and the associated Promise has been <i>rejected</i>. Since we don't handle the rejection of the promise, the request never gets a response. In part 2 we already acquainted ourselves [handling errors in promises](/osa2/palvelimella_olevan_datan_muokkaaminen#promise-ja-virheet).
+The request has failed and the associated Promise has been <i>rejected</i>. Since we don't handle the rejection of the promise, the request never gets a response. In part 2, we already acquainted ourselves with [handling errors in promises](/osa2/palvelimella_olevan_datan_muokkaaminen#promise-ja-virheet).
 
 Let's add a simple error handler:
 
@@ -655,9 +655,9 @@ app.get('/api/notes/:id', (request, response) => {
 
 Every request that leads to an error will be responded to with the HTTP status code 404 not found. The console displays more detailed information about the error.
 
-There's actually two different types of error situations. In one of the situations we are trying to fetch a note with a wrong kind of _id_, meaning an _id_ that doesn't match the mongo identifier format.
+There's actually two different types of error situations. In one of those situations, we are trying to fetch a note with a wrong kind of _id_, meaning an _id_ that doesn't match the mongo identifier format.
 
-If we make the following request we will get the error message shown below:
+If we make the following request, we will get the error message shown below:
 
 <pre>
 Method: GET
@@ -705,7 +705,7 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-If no matching object is found in the database, the value of _note_ will be undefined and the _else_ block gets executed. This results in a response with the status code <i>404 not found</i>.
+If no matching object is found in the database, the value of _note_ will be undefined and the _else_ block is executed. This results in a response with the status code <i>404 not found</i>.
 
 If the format of the id is incorrect, then we will end up in the error handler defined in the _catch_ block. The appropriate status code for the situation is [400 bad request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1), because the situation fits the description perfectly:
 
@@ -713,7 +713,7 @@ If the format of the id is incorrect, then we will end up in the error handler d
 
 We have also added some data to the response to shed some light on the cause of the error.
 
-When dealing with Promises it's almost always a good idea to add error and exception handling, because otherwise you will find yourself dealing with strange bugs.
+When dealing with Promises, it's almost always a good idea to add error and exception handling, because otherwise you will find yourself dealing with strange bugs.
 
 It's never a bad idea to print the object that caused the exception to the console in the error handler:
 
@@ -750,7 +750,7 @@ app.get('/api/notes/:id', (request, response, next) => {
 })
 ```
 
-The error that is passed forward, is given to the <em>next</em> function as a parameter. If <em>next</em> was called without a parameter, then the execution would simply move onto the next route or middleware. If the <em>next</em> function is called with a parameter, then the execution will continue to the <i>error handler middleware</i>.
+The error that is passed forwards is given to the <em>next</em> function as a parameter. If <em>next</em> was called without a parameter, then the execution would simply move onto the next route or middleware. If the <em>next</em> function is called with a parameter, then the execution will continue to the <i>error handler middleware</i>.
 
 Express [error handlers](https://expressjs.com/en/guide/error-handling.html) are middleware that are defined with a function that accepts <i>four parameters</i>. Our error handler looks like this:
 
@@ -768,7 +768,7 @@ const errorHandler = (error, request, response, next) => {
 app.use(errorHandler)
 ```
 
-The error handler checks if the error was a <i>CastError</i> exception, and if was, then we know that the error was caused by an invalid object id for Mongo. In this situation the error handler will send a response to the browser with the response object passed as a parameter. In all other error situations the middleware passes the error forward to the default Express error handler. 
+The error handler checks if the error is a <i>CastError</i> exception, in which case we know that the error was caused by an invalid object id for Mongo. In this situation the error handler will send a response to the browser with the response object passed as a parameter. In all other error situations, the middleware passes the error forward to the default Express error handler. 
 
 ### The order of middleware loading
 
@@ -873,7 +873,7 @@ app.put('/api/notes/:id', (request, response, next) => {
 })
 ```
 
-In the code above we also allow the content of the note to be edited. However, we will not support changing the creation date for obvious reasons.
+In the code above, we also allow the content of the note to be edited. However, we will not support changing the creation date for obvious reasons.
 
 Notice that the <em>findByIdAndUpdate</em> method receives a regular JavaScript object as its parameter, and not a new note object created with the <em>Note</em> constructor function.
 
