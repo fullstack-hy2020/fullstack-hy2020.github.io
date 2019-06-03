@@ -45,11 +45,13 @@ You can access the debugger by clicking the green icon that appears in the Chrom
 
 The debugging view works the same way as it did with React applications. The <i>Sources</i> tab can be used for setting breakpoints where the execution of the code will be paused.
 
-![](../../images/3/38.png)
+![](../../images/3/38e.png)
+
+Note that currently there is a [bug](https://github.com/nodejs/node/issues/23693) in debugger that forces one to use the _debugger_ statement in the code to get breakpoints working.
 
 All of the application's console.log messages will appear in the <i>Console</i> tab of the debugger. You can also inspect values of variables and execute your own JavaScript code.
 
-![](../../images/3/39.png)
+![](../../images/3/39e.png)
 
 #### Question everything
 
@@ -72,8 +74,6 @@ You can read more about document databases and NoSQL from the course material fo
 Read now chapters on [collections](https://docs.mongodb.com/manual/core/databases-and-collections/) and [documents](https://docs.mongodb.com/manual/core/document/) from the MongoDB manual to get a basic idea how a document database stores the data.
 
 Naturally, you can install and run MongoDB on your own computer. However, the internet is also full of Mongo database services that you can use. Our preferred MongoDB provider in this course will be [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
-
-<i>If you have already configured mlab, you can continue to use it with instructions from [last year's course material](https://fullstackopen.github.io/osa3/).</i>
 
 Once you've created and logged into your account, Atlas will recommend creating a cluster:
 
@@ -156,7 +156,7 @@ const noteSchema = new mongoose.Schema({
 const Note = mongoose.model('Note', noteSchema)
 
 const note = new Note({
-  content: 'HTML on helppoa',
+  content: 'HTML is Easy',
   date: new Date(),
   important: true,
 })
@@ -228,7 +228,7 @@ Next, the application creates a new note object with the help of the <i>Note</i>
 
 ```js
 const note = new Note({
-  content: 'Selain pystyy suorittamaan vain javascriptiä',
+  content: 'Browser can execute only Javascript',
   date: new Date(),
   important: false,
 })
@@ -297,34 +297,34 @@ Create a <i>mongo.js</i> file in the project directory, that can be used for add
 The application should work as follows. You use the program by passing three command-line arguments (the first is the password), e.g.:
 
 ```bash
-node mongo.js salasana Joulupukki 040-1234556
+node mongo.js yourpassword Anna 040-1234556
 ```
 
 As a result, the application will print:
 
 ```bash
-lisätään Joulupukki numero 040-1234556 luetteloon
+added Anna number 040-1234556 to phonebook
 ```
 
 The new entry to the phonebook will be saved to the database. Notice that if the name contains whitespace characters, it must be specified in quotes:
 
 ```bash
-node mongo.js salasana "Arto Vihavainen" 040-1234556
+node mongo.js yourpassword "Arto Vihavainen" 040-1234556
 ```
 
 If the password is the only parameter given to the program, meaning that it is invoked like this:
 
 ```bash
-node mongo.js salasana
+node mongo.js yourpassword
 ```
 
 Then the program should display all of the entries in the phonebook:
 
 <pre>
-puhelinluettelo:
-Pekka Mikkola 040-1234556
+phonebook:
+Anna 040-1234556
 Arto Vihavainen 045-1232456
-Tiina Niklander 040-1231236
+Ada Lovelace 040-1231236
 </pre>
 
 You can get the command-line parameters from the [process.argv](https://nodejs.org/docs/latest-v8.x/api/process.html#process_process_argv) variable.
@@ -369,7 +369,7 @@ Let's get a quick start by copy pasting the Mongoose definitions to the <i>index
 ```js
 const mongoose = require('mongoose')
 
-// ÄLÄ KOSKAAN TALLETA SALASANOJA githubiin!
+// DO NOT SAVE YOUR PASSWORD TO GITHUB!!
 const url =
   'mongodb+srv://fullstack:sekred@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
 
@@ -396,7 +396,7 @@ app.get('/api/notes', (request, response) => {
 
 We can verify in the browser that the backend works for displaying all of the documents:
 
-![](../../images/3/44.png)
+![](../../images/3/44e.png)
 
 The application works almost perfectly. The frontend assumes that every object has a unique id in the <i>id</i> field. We also don't want to return the mongo versioning field <i>\_\_v</i> to the frontend.
 
@@ -466,7 +466,7 @@ noteSchema.set('toJSON', {
 module.exports = mongoose.model('Note', noteSchema) // highlight-line
 ```
 
-Defining Node [modules](https://nodejs.org/docs/latest-v8.x/api/modules.html) differs slightly from the way of defining [ES6 modules](/osa2/kokoelmien_renderointi_ja_moduulit#refaktorointia-moduulit) in part 2.
+Defining Node [modules](https://nodejs.org/docs/latest-v8.x/api/modules.html) differs slightly from the way of defining [ES6 modules](/en/part2/rendering_a_collection_modules#refactoring-modules) in part 2.
 
 The public interface of the module is defined by setting a value to the _module.exports_ variable. We will set the value to be the <i>Note</i> model. The other things defined inside of the module, like the variables _mongoose_ and _url_ will not be accessible or visible to users of the module.
 
@@ -498,12 +498,12 @@ It's not a good idea to hardcode the address of the database into the code, so i
 
 The method for establishing the connection is now given functions for dealing with a successful and unsuccessful connection attempt. Both functions just log a message to the console about the success status:
 
-![](../../images/3/45.png)
+![](../../images/3/45e.png)
 
 There are many ways to define the value of an environment variable. One way would be to define it when the application is started:
 
 ```bash
-MONGODB_URI=osoite_tahan npm run watch
+MONGODB_URI=address_here npm run watch
 ```
 
 A more sophisticated way is to use the [dotenv](https://github.com/motdotla/dotenv#readme) library. You can install the library with the command:
@@ -522,6 +522,8 @@ PORT=3001
 We also added the hardcoded port of the server into the <em>PORT</em> environment variable.
 
 **The <i>.env</i> file should be gitignored right away, since we do not want to publish any confidential information publicly online!**
+
+![](../../images/3/45ae.png)
 
 The enviroment variables defined in the dotenv file can be taken into use with the command <em>require('dotenv').config()</em> and you can reference them in your code just like you would reference normal environment variables, with the familiar <em>process.env.MONGODB_URI</em> syntax.
 
@@ -592,7 +594,7 @@ app.get('/api/notes/:id', (request, response) => {
 
 When the backend gets expanded, it's a good idea to test the backend first with **the browser, Postman or the VS Code REST client**. Next, let's try creating a new note after taking the database into use:
 
-![](../../images/3/46.png)
+![](../../images/3/46e.png)
 
 Only once everything has been verified to work in the backend, is it a good idea to test that the frontend works with the backend. It is highly inefficient to test things exclusively through the frontend.
 
@@ -600,7 +602,7 @@ It's probably a good idea to integrate the frontend and backend one functionalit
 
 Once we introduce a database into the mix, it is useful to inspect the state persisted in the database, e.g. from the control panel in MongoDB Atlas. Quite often little Node helper programs like the <i>mongo.js</i> program we wrote earlier can be very helpful during development.
 
-You can find the code for our current application in its entirety in the <i>part3-3</i> branch of [this github repository](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-3).
+You can find the code for our current application in its entirety in the <i>part3-3</i> branch of [this github repository](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part3-3).
 
 </div>
 
@@ -636,7 +638,7 @@ We can see the following error message appear in the logs for the backend:
 
 ![](../../images/3/47.png)
 
-The request has failed and the associated Promise has been <i>rejected</i>. Since we don't handle the rejection of the promise, the request never gets a response. In part 2, we already acquainted ourselves with [handling errors in promises](/osa2/palvelimella_olevan_datan_muokkaaminen#promise-ja-virheet).
+The request has failed and the associated Promise has been <i>rejected</i>. Since we don't handle the rejection of the promise, the request never gets a response. In part 2, we already acquainted ourselves with [handling errors in promises](/en/part2/altering_data_in_server#promises-and-errors).
 
 Let's add a simple error handler:
 
@@ -790,24 +792,24 @@ const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
 }
 
-// olemattomien osoitteiden käsittely
+// handler of requests with unknown endpoint
 app.use(unknownEndpoint)
 
 const errorHandler = (error, request, response, next) => {
   // ...
 }
 
-// virheellisten pyyntöjen käsittely
+// handler of requests with result to errors
 app.use(errorHandler)
 ```
 
 The _bodyParser_ middleware should be among the very first middleware loaded into Express. If the order was the following:
 
 ```js
-app.use(logger) // request.body on tyhjä
+app.use(logger) // request.body is empty!
 
 app.post('/api/notes', (request, response) => {
-  // request.body on tyhjä
+  // request.body is empty!
   const body = request.body
   // ...
 })
@@ -826,7 +828,7 @@ const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
 }
 
-// olemattomien osoitteiden käsittely
+// handler of requests with unknown endpoint
 app.use(unknownEndpoint)
 
 app.get('/api/notes', (request, response) => {
@@ -897,7 +899,7 @@ mongoose.set('useFindAndModify', false) // highlight-line
 module.exports = mongoose.model('Note', noteSchema) 
 ```
 
-You can find the code for our current application in its entirety in the <i>part3-4</i> branch of [this github repository](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-4).
+You can find the code for our current application in its entirety in the <i>part3-4</i> branch of [this github repository](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part3-4).
 
 </div>
 

@@ -45,11 +45,14 @@ Debuggeriin pääsee käsiksi klikkaamalla chromen devloper-konsoliin ilmestynee
 
 Debuggausnäkymä toimii kuten React-koodia debugattaessa, <i>Sources</i>-välilehdelle voidaan esim. asettaa breakpointeja, eli kohtia joihin suoritus pysähtyy:
 
-![](../../images/3/38.png)
+![](../../images/3/38e.png)
+
+Huomaa, että tällä hetkellä eräs debuggeriin liittyvä [bugi](https://github.com/nodejs/node/issues/23693) aiheuttaa sen, että breakpointit toimivat ainoastaan jos koodissa käytetään koodin pysäyttävää _debugger_-komentoa. 
+
 
 Kaikki sovelluksen console.log-tulostukset tulevat debuggerin <i>Console</i>-välilehdelle. Voit myös tutkia siellä muuttujien arvoja ja suorittaa mielivaltaista Javascript-koodia:
 
-![](../../images/3/39.png)
+![](../../images/3/39e.png)
 
 #### Epäile kaikkea
 
@@ -70,8 +73,6 @@ Dokumenttitietokannat poikkeavat jossain määrin relaatiotietokannoista niin da
 **Lue nyt Tietokantojen perusteiden dokumenttitietokantoja kuvaava osuus.** Jatkossa oletetaan, että hallitset käsitteet <i>dokumentti</i> ja <i>kokoelma</i> (collection).
 
 MongoDB:n voi luonnollisesti asentaa omalle koneelle. Internetistä löytyy kuitenkin myös palveluna toimivia Mongoja, joista tämän hetken paras valinta on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
-
-> <i>Jos ehdit jo konfiguroida itsellesi mlabin, löydät ohjeita sen käyttöön [viime vuoden materiaalista](https://fullstackopen.github.io/osa3/).</i>
 
 Kun käyttäjätili on luotu ja kirjauduttu, Atlas kehoittaa luomaan klusterin:
 
@@ -155,7 +156,7 @@ const noteSchema = new mongoose.Schema({
 const Note = mongoose.model('Note', noteSchema)
 
 const note = new Note({
-  content: 'HTML on helppoa',
+  content: 'HTML is Easy',
   date: new Date(),
   important: true,
 })
@@ -226,7 +227,7 @@ Seuraavaksi sovellus luo muistiinpanoa vastaavan [model](http://mongoosejs.com/d
 
 ```js
 const note = new Note({
-  content: 'Selain pystyy suorittamaan vain javascriptiä',
+  content: 'Browser can execute only Javascript',
   date: new Date(),
   important: false,
 })
@@ -295,34 +296,34 @@ Tee projektihakemistoon tiedosto <i>mongo.js</i>, jonka avulla voit lisätä tie
 Ohjelma toimii siten, että jos sille annetaan käynnistäessä kolme komentoriviparametria (joista ensimmäinen on salasana), esim:
 
 ```bash
-node mongo.js salasana Joulupukki 040-1234556
+node mongo.js yourpassword Anna 040-1234556
 ```
 
 Ohjelma tulostaa
 
 ```bash
-lisätään Joulupukki numero 040-1234556 luetteloon
+added Anna number 040-1234556 to phonebook
 ```
 
 ja lisää uuden yhteystiedon tietokantaan. Huomaa, että jos nimi sisältää välilyöntejä, on se annettava hipsuissa:
 
 ```bash
-node mongo.js salasana "Arto Vihavainen" 040-1234556
+node mongo.js yourpassword "Arto Vihavainen" 040-1234556
 ```
 
 Jos komentoriviparametreina ei ole muuta kuin salasana, eli ohjelma suoritetaan komennolla
 
 ```bash
-node mongo.js salasana
+node mongo.js yourpassword
 ```
 
 tulostaa ohjelma tietokannassa olevat numerotiedot:
 
 <pre>
-puhelinluettelo:
-Pekka Mikkola 040-1234556
+phonebook:
+Anna 040-1234556
 Arto Vihavainen 045-1232456
-Tiina Niklander 040-1231236
+Ada Lovelace 040-1231236
 </pre>
 
 Saat selville ohjelman komentoriviparametrit muuttujasta [process.argv](https://nodejs.org/docs/latest-v8.x/api/process.html#process_process_argv)
@@ -394,7 +395,7 @@ app.get('/api/notes', (request, response) => {
 
 Voimme todeta selaimella, että backend toimii kaikkien dokumenttien näyttämisen osalta:
 
-![](../../images/3/44.png)
+![](../../images/3/44e.png)
 
 Toiminnallisuus on muuten kunnossa, mutta frontend olettaa, että olioiden yksikäsitteinen tunniste on kentässä <i>id</i>. Emme myöskään halua näyttää frontendille mongon versiointiin käyttämää kenttää <i>\_\_v</i>. 
 
@@ -496,7 +497,7 @@ Tietokannan osoitetta ei kannata kirjoittaa koodiin, joten osoite annetaan sovel
 
 Yhteyden muodostavalle metodille on nyt rekisteröity onnistuneen ja epäonnistuneen yhteydenmuodostuksen käsittelevät funktiot, jotka tulostavat konsoliin tiedon siitä, onnistuuko yhteyden muodostaminen:
 
-![](../../images/3/45.png)
+![](../../images/3/45e.png)
 
 On useita tapoja määritellä ympäristömuuttujan arvo, voimme esim. antaa sen ohjelman käynnistyksen yhteydessä seuraavasti
 
@@ -520,6 +521,8 @@ PORT=3001
 Määrittelimme samalla aiemmin kovakoodaamamme sovelluksen käyttämän portin eli ympäristömuuttujan <em>PORT</em>.
 
 **Tiedosto <i>.env</i> tulee heti gitignorata, sillä emme halua julkaista tiedoston sisältöä verkkoon!**
+
+![](../../images/3/45ae.png)
 
 dotenvissä määritellyt ympäristömuuttujat otetaan koodissa käyttöön komennolla
 <em>require('dotenv').config()</em> ja niihin viitataan Nodessa kuten "normaaleihin" ympäristömuuttujiin syntaksilla <em>process.env.MONGODB_URI</em>.
@@ -591,7 +594,7 @@ app.get('/api/notes/:id', (request, response) => {
 
 Kun backendia laajennetaan, kannattaa sitä testailla aluksi **ehdottomasti selaimella, postmanilla tai VS Coden REST clientillä**. Seuraavassa kokeillaan uuden muistiinpanon luomista tietokannan käyttöönoton jälkeen:
 
-![](../../images/3/46.png)
+![](../../images/3/46e.png)
 
 Vasta kun kaikki on todettu toimivaksi, kannattaa siirtyä testailemaan, että muutosten jälkeinen backend toimii yhdessä myös frontendin kanssa. Kaikkien kokeilujen tekeminen ainoastaan frontendin kautta on todennäköisesti varsin tehotonta.
 
