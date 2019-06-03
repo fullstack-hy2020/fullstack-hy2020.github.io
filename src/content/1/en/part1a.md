@@ -73,7 +73,7 @@ const App = () => (
 
 As you probably guessed, the component will be rendered as a <i>div</i>-tag, which wraps a <i>p</i>-tag containing the text <i>Hello world</i>.
 
-Technically the component is defined as a Javascript function. The following is a function (which does not receive any parameters):
+Technically the component is defined as a JavaScript function. The following is a function (which does not receive any parameters):
 
 ```js
 () => (
@@ -83,13 +83,13 @@ Technically the component is defined as a Javascript function. The following is 
 )
 ```
 
-which is then assigned to a constant variable <i>App</i>
+The function is then assigned to a constant variable <i>App</i>:
 
 ```js
 const App = ...
 ```
 
-There are a few ways to define functions in Javascript. Here we will use [arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions), which are described in a newer version of Javascript known as [EcmaScript 6](http://es6-features.org/#Constants), also called ES6.
+There are a few ways to define functions in JavaScript. Here we will use [arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions), which are described in a newer version of JavaScript known as [EcmaScript 6](http://es6-features.org/#Constants), also called ES6.
 
 Because the function consist of only a single expression we have used a shorthand, which represents this piece of code:
 
@@ -105,7 +105,7 @@ const App = () => {
 
 In other words, the function returns the value of the expression.
 
-The function defining the component may contain any kind of Javascript code. Modify your component to be as follows and observe what happens in the console:
+The function defining the component may contain any kind of JavaScript code. Modify your component to be as follows and observe what happens in the console:
 
 ```js
 const App = () => {
@@ -139,11 +139,11 @@ const App = () => {
 }
 ```
 
-Any Javascript code within the curly braces is evaluated and the result of this evaluation is embedded into the defined place in the HTML produced by the component.
+Any JavaScript code within the curly braces is evaluated and the result of this evaluation is embedded into the defined place in the HTML produced by the component.
 
 ### JSX
 
-It seems like React components are returning HTML markup. However, this is not the case. The layout of React components is mostly written using [JSX](https://reactjs.org/docs/introducing-jsx.html). Although JSX looks like HTML, we are actually dealing with a way to write Javascript. Under the hood JSX returned by React components is compiled into Javascript.
+It seems like React components are returning HTML markup. However, this is not the case. The layout of React components is mostly written using [JSX](https://reactjs.org/docs/introducing-jsx.html). Although JSX looks like HTML, we are actually dealing with a way to write JavaScript. Under the hood JSX returned by React components is compiled into JavaScript.
 
 After compiling our application looks like this:
 
@@ -175,9 +175,9 @@ ReactDOM.render(
 
 The compiling is handled by [Babel](https://babeljs.io/repl/). Projects created with *create-react-app* are configured to compile automatically. We will learn more about this topic in [part 7](/en/part7) of this course.
 
-It is also possible to write React as "pure Javascript" without using JSX. Although, nobody with a sound mind would actually do so.
+It is also possible to write React as "pure JavaScript" without using JSX. Although, nobody with a sound mind would actually do so.
 
-In practice, JSX is much like HTML with the distinction that with JSX you can easily embed dynamic content by writing appropriate Javascript within curly braces. The idea of JSX is quite similar to many templating languages, such as Thymeleaf used along Java Spring, which are used on servers.
+In practice, JSX is much like HTML with the distinction that with JSX you can easily embed dynamic content by writing appropriate JavaScript within curly braces. The idea of JSX is quite similar to many templating languages, such as Thymeleaf used along Java Spring, which are used on servers.
 
 JSX is "XML-like", which means that every tag needs to be closed. For example, a newline is an empty element, which in HTML can be written as follows:
 
@@ -271,7 +271,7 @@ const App = () => {
 }
 ```
 
-There can be an arbitrary amount of props and their values can be "hard coded" strings or results of Javascript expressions. If the value of the prop is achieved using Javascript it must be wrapped with curly braces.
+There can be an arbitrary amount of props and their values can be "hard coded" strings or results of JavaScript expressions. If the value of the prop is achieved using JavaScript it must be wrapped with curly braces.
 
 Let's modify the code so that the component <i>Hello</i> uses two props:
 
