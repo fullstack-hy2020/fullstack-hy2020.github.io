@@ -187,7 +187,7 @@ export default class ContentTemplate extends Component {
                   {
                     backgroundColor: colorCode,
                     text: 'Fullstack',
-                    link: `/${lang === 'en' && 'en/'}#course-contents`,
+                    link: `/${lang === 'en' ? 'en/' : ''}#course-contents`,
                   },
                   {
                     backgroundColor: colorCode,
