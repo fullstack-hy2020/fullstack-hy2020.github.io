@@ -145,7 +145,7 @@ Any Javascript code within the curly braces is evaluated and the result of this 
 
 It seems like React components are returning HTML markup. However, this is not the case. The layout of React components is mostly written using [JSX](https://reactjs.org/docs/introducing-jsx.html). Although JSX looks like HTML, we are actually dealing with a way to write Javascript. Under the hood JSX returned by React components is compiled into Javascript.
 
-After compiling our application looks like this:
+After compiling, our application looks like this:
 
 ```js
 import React from 'react'
