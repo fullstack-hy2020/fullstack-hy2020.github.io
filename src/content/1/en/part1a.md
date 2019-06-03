@@ -237,7 +237,7 @@ const App = () => {
 
 Writing components with React is easy, and by combining components, even a more complex application can be kept fairly maintainable. In deed, a core philosophy of React is composing applications from many specialized reusable components.
 
-Another strong convention is the idea of a <i>root component</i> called <i>App</i> at the top of the component tree of the application. Nevertheless, as we will find in [part 6](/en/part6), there are situations where the component <i>App</i> is not exactly the root, but is wrapped within an appropriate utility component.
+Another strong convention is the idea of a <i>root component</i> called <i>App</i> at the top of the component tree of the application. Nevertheless, as we will learn in [part 6](/en/part6), there are situations where the component <i>App</i> is not exactly the root, but is wrapped within an appropriate utility component.
 
 ### props: passing data to components
 
