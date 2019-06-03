@@ -126,7 +126,7 @@ Full stack project worth 1-10 credits will be available through the Open Univers
 
 For the project, an application is implemented in React and/or Node. Implementing a mobile application in React Native is also possible. 
 
-The number of credits is based on hours of work done. One credit is approccimately 17.5 hours of work. The work  is graded pass/fail.
+The number of credits is based on hours of work done. One credit is approximately 17.5 hours of work. The work  is graded pass/fail.
 
 It is possible to complete the project as a pair or a group.
 
