@@ -462,7 +462,7 @@ ReactDOM.render(<App />, document.getElementById('root'))
 
 and remove extra files (App.js, App.css, App.test.js, logo.svg, serviceWorker.js).
 
-Unfortunately, the entire application is in the same component. Refactor the code so that it consists of three new components: <i>Header</i>, <i>Content</i> ja <i>Total</i>. All data still resides in the <i>App</i> component, which passes the necessary data to each component using <i>props</i>. <i>Header</i> takes care of rendering the name of the course, <i>Content</i> renders the parts and their number of exercises and <i>Total</i> renders the total amount of exercises.
+Unfortunately, the entire application is in the same component. Refactor the code so that it consists of three new components: <i>Header</i>, <i>Content</i>, and <i>Total</i>. All data still resides in the <i>App</i> component, which passes the necessary data to each component using <i>props</i>. <i>Header</i> takes care of rendering the name of the course, <i>Content</i> renders the parts and their number of exercises and <i>Total</i> renders the total amount of exercises.
 
 The <i>App</i> component's body will approximately be as follows:
 
