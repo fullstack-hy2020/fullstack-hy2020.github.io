@@ -150,7 +150,10 @@ export const CompaniesBanner = ({ isFrontPage, lang }) => (
 
       {isFrontPage && (
         <Element flex spaceAround className="col-10 spacing">
-          <Link className="about__challenge-button" to={`${lang === 'en' && '/en'}/challenge`}>
+          <Link
+            className="about__challenge-button"
+            to={`${lang === 'en' ? '/en' : ''}/challenge`}
+          >
             {lang === 'en' ? 'More about challenge' : 'Lisätietoja haasteesta'}
           </Link>
         </Element>
