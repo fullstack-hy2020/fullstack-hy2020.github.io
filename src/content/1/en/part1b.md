@@ -166,10 +166,10 @@ You can also add properties to an object on the fly by either using dot notation
 
 ```js
 object1.address = 'Helsinki'
-object1['secred number'] = 12341
+object1['secret number'] = 12341
 ```
 
-The latter of the additions has to be done by using brackets, because when using dot notation, <i>secred number</i> is not a valid property name.
+The latter of the additions has to be done by using brackets, because when using dot notation, <i>secret number</i> is not a valid property name.
 
 Naturally, objects in Javascript can also have methods. However, during this course we do not need to define any objects with methods of their own. This is why they are only discussed briefly during the course.
 

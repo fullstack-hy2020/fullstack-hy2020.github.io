@@ -166,7 +166,7 @@ How the environment variables defined in dotenv will only be used when the backe
 The environment variable that defines the database URL can be set to Heroku with the _heroku config:set_ command.
 
 ```bash
-heroku config:set MONGODB_URI=mongodb+srv://fullstack:secred@cluster0-ostce.mongodb.net/note-app?retryWrites=true
+heroku config:set MONGODB_URI=mongodb+srv://fullstack:secret@cluster0-ostce.mongodb.net/note-app?retryWrites=true
 ```
 
 The application should work after making these changes. Sometimes things don't go according to plan. If there are problems, <i>heroku logs</i> will be there to help. My own application did not work after the making the changes. The logs showed the following:
