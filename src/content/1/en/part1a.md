@@ -9,7 +9,7 @@ lang: en
 
 We will now start getting familiar with probably the most important topic of this course, namely the [React](https://reactjs.org/)-library. Let's start off with making a simple React application as well as getting to know the core concepts of React.
 
-The easiest way to get started by far is using a tool called [create-react-app](https://github.com/facebookincubator/create-react-app). It is possible to install <i>create-react-app</i> on your machine, but it is not necessary if the <i>npm</i> tool that was installed along with Node has a version number of at least <i>5.3</i>.
+The easiest way to get started by far is using a tool called [create-react-app](https://github.com/facebookincubator/create-react-app). It is possible (but not necessary) to install <i>create-react-app</i> on your machine if the <i>npm</i> tool that was installed along with Node has a version number of at least <i>5.3</i>.
 
 Let's create an application called <i>part1</i> and navigate to its directory.
 
@@ -304,9 +304,9 @@ The props sent by the component <i>App</i> are the values of the variables, the 
 
 ### Some notes
 
-React has been configured to generate quite good error messages. Despite this, you should, at least in the beginning, advance in **very small steps** and make sure that every change works as desired.
+React has been configured to generate quite clear error messages. Despite this, you should, at least in the beginning, advance in **very small steps** and make sure that every change works as desired.
 
-**The console should always be open**. If the browser reports about errors, it is not advisable to continue blindly writing more code, hoping for miracles. You should instead try to understand the cause of the error and, for example, go back to the previous working state:
+**The console should always be open**. If the browser reports errors, it is not advisable to continue writing more code, hoping for miracles. You should instead try to understand the cause of the error and, for example, go back to the previous working state:
 
 ![](../../images/1/2a.png)
 
