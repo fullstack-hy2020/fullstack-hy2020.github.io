@@ -84,7 +84,9 @@ const inChallenge = [
   'Umbrella Interactive',
   'Tabella',
   'Nextup',
-  // 'Vertix'
+  // 'Vertix',
+  // 'Future Captcha Consulting',
+  'Kela',
 ];
 
 export const CompaniesBanner = ({ isFrontPage, lang }) => (
