@@ -227,7 +227,7 @@ function product(a, b) {
 }
 
 const result = product(2, 6)
-// result is now 8
+// result is now 12
 ```
 
 The other way to define the function is using a [function expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function). In this case, there is no need to give the function a name, and the definition may reside among the rest of the code:
