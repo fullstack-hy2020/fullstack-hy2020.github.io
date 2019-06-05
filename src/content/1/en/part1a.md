@@ -287,14 +287,14 @@ const Hello = (props) => {
 }
 
 const App = () => {
-  const nimi = 'Peter' // highlight-line
-  const ika = 10       // highlight-line
+  const name = 'Peter' // highlight-line
+  const age = 10       // highlight-line
 
   return (
     <div>
       <h1>Greetings</h1>
       <Hello name="Maya" age={26 + 10} /> // highlight-line
-      <Hello name={nimi} age={ika} />     // highlight-line
+      <Hello name={name} age={age} />     // highlight-line
     </div>
   )
 }
