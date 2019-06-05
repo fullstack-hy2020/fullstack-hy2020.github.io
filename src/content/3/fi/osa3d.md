@@ -198,7 +198,7 @@ personService
 
 Voit näyttää frontendissa käyttäjälle Mongoosen validoinnin oletusarvoisen virheilmoituksen vaikka ne eivät olekaan luettavuudeltaan parhaat mahdolliset:
 
-![](../../images/3/56.png)
+![](../../images/3/56e.png)
 
 #### 3.21 tietokantaa käyttävä versio internettiin
 
@@ -234,41 +234,45 @@ node_modules/.bin/eslint --init
 
 Vastaillaan kysymyksiin:
 
-![](../../images/3/52.png)
+![](../../images/3/52ae.png)
 
 Konfiguraatiot tallentuvat tiedostoon _.eslintrc.js_:
 
 ```js
 module.exports = {
-    "env": {
-        "es6": true,
-        "node": true
+    'env': {
+        'commonjs': true,
+        'es6': true,
+        'node': true
     },
-    "extends": "eslint:recommended",
-    "parserOptions": {
-        "ecmaVersion": 2018
+    'extends': 'eslint:recommended',
+    'globals': {
+        'Atomics': 'readonly',
+        'SharedArrayBuffer': 'readonly'
     },
-    "rules": {
-        "indent": [
-            "error",
+    'parserOptions': {
+        'ecmaVersion': 2018
+    },
+    'rules': {
+        'indent': [
+            'error',
             4
         ],
-        "linebreak-style": [
-            "error",
-            "unix"
+        'linebreak-style': [
+            'error',
+            'unix'
         ],
-        "quotes": [
-            "error",
-            "single"
+        'quotes': [
+            'error',
+            'single'
         ],
-        "semi": [
-            "error",
-            "never"
+        'semi': [
+            'error',
+            'never'
         ]
     }
-};
+}
 ```
-
 Muutetaan heti konfiguraatioista sisennystä määrittelevä sääntö, siten että sisennystaso on 2 välilyöntiä
 
 
@@ -311,7 +315,7 @@ Näin koko hakemiston <em>build</em> sisältö jätetään huomioimatta linttauk
 
 Lintillä on jonkin verran huomautettavaa koodistamme:
 
-![](../../images/3/53.png)
+![](../../images/3/53e.png)
 
 Ei kuitenkaan korjata ongelmia vielä.
 
