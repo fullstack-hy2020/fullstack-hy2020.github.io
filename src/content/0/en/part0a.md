@@ -142,7 +142,7 @@ This means, that the student can if they so choose, sign up for a job interview 
 
 Use of the chrome browser is recommended for this course,  because it provides the best tools for web development.
 
-The course exercises are submitted to GitHub, so Git must be installed and one should know how to use it. Instructions for Git can be found i.a [here](https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners).
+The course exercises are submitted to GitHub, so Git must be installed and one should know how to use it. Instructions for Git can be found [here](https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners).
 
 Install also some sensible text editor which supports web development. More than recommended choice is [Visual studio code](https://code.visualstudio.com/).
 
