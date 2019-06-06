@@ -377,22 +377,24 @@ Due to the fact that during this course, we are using a version of React contain
 
 Arrow functions and functions defined using the _function_ keyword vary substantially when it comes to how they behave with respect to the keyword [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this), which refers to the object itself.
 
-We can assign methods to an objects by defining properties that are functions:
+We can assign methods to an object by defining properties that are functions:
 
 ```js
 const arto = {
   name: 'Arto Hellas',
   age: 35,
   education: 'PhD',
+  // highlight-start
   greet: function() {
     console.log('hello, my name is', this.name)
   },
+  // highlight-end
 }
 
 arto.greet()  // hello, my name is Arto Hellas gets printed
 ```
 
-methods can be assigned to objects even after the creation of the object:
+Methods can be assigned to objects even after the creation of the object:
 
 ```js
 const arto = {
