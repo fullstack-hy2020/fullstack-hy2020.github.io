@@ -237,7 +237,7 @@ setInterval(() => {
 }, 1000)
 ```
 
-Making repeated calls to the _ReactDOM.render_-method is not the recommended way to re-render components. Next, we'll introduce ourselves to a better way of accomplishing this effect.
+Making repeated calls to the _ReactDOM.render_-method is not the recommended way to re-render components. Next, we'll introduce a better way of accomplishing this effect.
 
 ### Stateful component
 
