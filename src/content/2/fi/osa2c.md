@@ -246,7 +246,9 @@ Parametrissa oli siis hienoinen ero. <i>axios</i> tallennettiin sovelluksen ajon
 
 ### Axios ja promiset
 
-Olemme nyt valmiina käyttämään axiosia. Jatkossa oletetaan että <i>json-server</i> on käynnissä portissa 3001.
+Olemme nyt valmiina käyttämään axiosia. Jatkossa oletetaan että <i>json-server</i> on käynnissä portissa 3001. Lisäksi varsinainen React-sovellus tulee käynnistää erikseen, erilliseen komentorivi-ikkunaan komennolla:
+
+```npm start```
 
 Kirjaston voi ottaa käyttöön samaan tapaan kuin esim. React otetaan käyttöön, eli sopivalla <em>import</em>-lauseella.
 
