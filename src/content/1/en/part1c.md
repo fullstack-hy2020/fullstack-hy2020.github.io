@@ -197,7 +197,7 @@ ReactDOM.render(
 The root component is given the value of the counter in the _counter_ prop. The root component renders the value to the screen. But what happens when the value of _counter_ changes? Even if we were to add the command
 
 ```js
-counter.value += 1
+counter += 1
 ```
 
 the component won't re-render. We can get the component to re-render by calling the _ReactDOM.render_ method a second time, e.g. in the following way:
