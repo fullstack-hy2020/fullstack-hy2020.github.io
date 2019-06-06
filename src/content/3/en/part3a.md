@@ -1060,7 +1060,6 @@ Respond to requests like these with the appropriate status code, and also send b
 
 ### About HTTP request types
 
-[HTTP-standardi](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) puhuu pyyntötyyppien yhteydessä kahdesta ominaisuudesta, **safe** ja **idempotent**.
 [The HTTP standard](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) talks about two qualities related to request types, **safety** and **idempotence**.
 
 
@@ -1092,7 +1091,7 @@ If we make an HTTP PUT request to the url <i>/notes/10</i> and with the request 
 Like <i>safety</i> for the GET request, also <i>idempotence</i> is simply a recommendation in the HTTP standard and not something that can be guaranteed simply based on the request type. However, when our API adheres to RESTful principles, then GET, HEAD, PUT, and DELETE requests are used in such a way that they are idempotent.
 
 
-POST is the only HTTP request type that is neither <i>safe</i> nor <i>idempotent</i>. If we make an HTTP POST request five time into the <i>/notes</i> url, so that each time we send the 
+POST is the only HTTP request type that is neither <i>safe</i> nor <i>idempotent</i>. If we send 5 different HTTP POST requests to <i>/notes</i> with a body of <em>{content: "many same", important: true}</em>, the resulting 5 notes on the server will all have the same content.
 
 
 ### Middleware
