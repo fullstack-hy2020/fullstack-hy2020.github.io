@@ -484,7 +484,7 @@ If you want to gain a better understanding of how _this_ works in Javascript, th
 
 ### Classes
 
-As mentioned previously, there is no class mechanism like ones in object oriented programming languages. There are, however, features in Javascript which makes "simulating" object oriented [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) possible.
+As mentioned previously, there is no class mechanism like ones in object oriented programming languages. There are, however, features in Javascript which make "simulating" object oriented [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) possible.
 
 Let's take a quick look at the <i>class syntax</i> that was introduced into Javascript along with ES6, which substantially simplifies the definition of classes (or class-like things) in Javascript.
 
@@ -508,7 +508,7 @@ const janja = new Person('Janja Garnbret', 22)
 janja.greet()
 ```
 
-When it comes to syntax, the classes and the objects created from them are very reminiscent of e.g. Java classes and objects. Their behavior is also quite similar to Java objects. At the core, they are still objects based on Javascript's [prototype inheritance](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance). The type of both objects is actually _Object_, since Javascript essentially only defines the types [Boolean, Null, Undefined, Number, String, Symbol and Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures).
+When it comes to syntax, the classes and the objects created from them are very reminiscent of Java classes and objects. Their behavior is also quite similar to Java objects. At the core, they are still objects based on Javascript's [prototype inheritance](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance). The type of both objects is actually _Object_, since Javascript essentially only defines the types [Boolean, Null, Undefined, Number, String, Symbol and Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures).
 
 Introduction of the class syntax is a controversial addition, e.g. check out [Not Awesome: ES6 Classes](https://github.com/joshburgess/not-awesome-es6-classes) or [Is “Class” In ES6 The New “Bad” Part?](https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65)
 
