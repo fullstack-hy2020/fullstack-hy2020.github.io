@@ -386,7 +386,7 @@ Olemme laiminlyöneet ikävästi yhtä oleellista ohjelmistokehityksen osa-aluet
 Aloitamme yksikkötestauksesta. Sovelluksemme logiikka on sen verran yksinkertaista, että siinä ei ole juurikaan mielekästä yksikkötestattavaa. Luodaan tiedosto <i>utils/for_testing.js</i> ja määritellään sinne pari yksinkertaista funktiota testattavaksi:
 
 ```js
-const palindrom = string => {
+const palindrome = string => {
   return string
     .split('')
     .reverse()
@@ -402,7 +402,7 @@ const average = array => {
 }
 
 module.exports = {
-  palindrom,
+  palindrome,
   average,
 }
 ```
@@ -429,8 +429,12 @@ määritellään npm-skripti <i>test</i> suorittamaan testaus jestillä ja rapor
   "scripts": {
     "start": "node index.js",
     "watch": "nodemon index.js",
+    "build:ui": "rm -rf build && cd ../../osa2/notes/ && npm run build --prod && cp -r build ../../osa3/backend/",
+    "deploy": "git push heroku master",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
+    "logs:prod": "heroku logs --tail",
     "lint": "eslint .",
-    "test": "jest --verbose"
+    "test": "jest --verbose" // highlight-line
   },
   //...
 }
@@ -455,24 +459,24 @@ module.exports = {
 };
 ```
 
-Tehdään testejä varten hakemisto <i>tests</i> ja sinne tiedosto <i>palindrom.test.js</i>, jonka sisältö on seuraava
+Tehdään testejä varten hakemisto <i>tests</i> ja sinne tiedosto <i>palindrome.test.js</i>, jonka sisältö on seuraava
 
 ```js
-const palindrom = require('../utils/for_testing').palindrom
+const palindrome = require('../utils/for_testing').palindrome
 
-test('palindrom of a', () => {
+test('palindrome of a', () => {
   const result = palindrom('a')
 
   expect(result).toBe('a')
 })
 
-test('palindrom of react', () => {
+test('palindrome of react', () => {
   const result = palindrom('react')
 
   expect(result).toBe('tcaer')
 })
 
-test('palindrom of saippuakauppias', () => {
+test('palindrome of saippuakauppias', () => {
   const result = palindrom('saippuakauppias')
 
   expect(result).toBe('saippuakauppias')
@@ -484,9 +488,10 @@ Edellisessä osassa käyttöön ottamamme ESlint valittaa testien käyttämistä
 ```js
 module.exports = {
   "env": {
-      "es6": true,
-      "node": true,
-      "jest": true 
+    "commonjs": true 
+    "es6": true,
+    "node": true,
+    "jest": true, // highlight-line
   },
   "extends": "eslint:recommended",
   "rules": {
@@ -495,10 +500,10 @@ module.exports = {
 };
 ```
 
-Testi ottaa ensimmäisellä rivillä käyttöön testattavan funktion sijoittaen sen muuttujaan _palindrom_:
+Testi ottaa ensimmäisellä rivillä käyttöön testattavan funktion sijoittaen sen muuttujaan _palindrome_:
 
 ```js
-const palindrom = require('../utils/for_testing').palindrom
+const palindrome = require('../utils/for_testing').palindrome
 ```
 
 Yksittäiset testitapaukset määritellään funktion _test_ avulla. Ensimmäisenä parametrina on merkkijonomuotoinen testin kuvaus. Toisena parametrina on <i>funktio</i>, joka määrittelee testitapauksen toiminnallisuuden. Esim. toisen testitapauksen toiminnallisuus näyttää seuraavalta:
@@ -531,7 +536,7 @@ test('palindrom of react', () => {
 
 seurauksena on seuraava virheilmoitus
 
-![](../../images/4/2.png)
+![](../../images/4/2e.png)
 
 Lisätään muutama testi metodille _average_, tiedostoon <i>tests/average.test.js</i>.
 
@@ -576,7 +581,7 @@ Pari huomiota keskiarvon testeistä. Määrittelimme testien ympärille nimellä
 
 ```js
 describe('average', () => {
-  // testit
+  // tests
 })
 ```
 
@@ -659,7 +664,7 @@ describe('total likes', () => {
 })
 ```
 
-Jos et viitsi itse määritellä testisyötteenä käytettäviä blogeja, saat valmiin listan [täältä.](https://github.com/fullstack-hy2019/misc/blob/master/blogs_for_test.md)
+Jos et viitsi itse määritellä testisyötteenä käytettäviä blogeja, saat valmiin listan [täältä.](https://github.com/fullstackopen-2019/misc/blob/master/blogs_for_test.md)
 
 Törmäät varmasti testien tekemisen yhteydessä erinäisiin ongelmiin. Pidä mielessä osassa 3 käsitellyt [debuggaukseen](osa3/tietojen_tallettaminen_mongo_db_tietokantaan#node-sovellusten-debuggaaminen) liittyvät asiat, voit testejäkin suorittaessasi printtailla konsoliin komennolla _console.log_. Myös debuggerin käyttö testejä suorittaessa on mahdollista, ohje [täällä](https://jestjs.io/docs/en/troubleshooting).
 
