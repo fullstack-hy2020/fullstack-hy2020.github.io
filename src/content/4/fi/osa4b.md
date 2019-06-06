@@ -355,7 +355,7 @@ test('a specific note is within the returned notes', async () => {
 
   const contents = response.body.map(r => r.content) // highlight-line
 
-  expect(contents).toContain(
+  expect(contents).toContain(// highlight-line
     'HTTP-protokollan tärkeimmät metodit ovat GET ja POST' // highlight-line
   )
 })
