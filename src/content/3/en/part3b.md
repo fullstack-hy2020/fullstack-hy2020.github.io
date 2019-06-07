@@ -101,7 +101,7 @@ Production build of applications created with <i>create-react-app</i> can be cre
 
 Lets run this command from the <i>root of the frontend project</i>.
 
-This creates a directory called <i>build</i> (which contains the only html-file of our application, <i>index.html</i> ) which contains the directory <i>static</i>. [Minified](<https://en.wikipedia.org/wiki/Minification_(programming)>) version of our applications JavaScript code will be generated to the <i>static</i>  directory. Even though the application code is in multiple files, all of the JavaScript will be minified into one file. Actually all of the code from all of the applications debendencies will also be minified into this single file. 
+This creates a directory called <i>build</i> (which contains the only html-file of our application, <i>index.html</i> ) which contains the directory <i>static</i>. [Minified](<https://en.wikipedia.org/wiki/Minification_(programming)>) version of our applications JavaScript code will be generated to the <i>static</i>  directory. Even though the application code is in multiple files, all of the JavaScript will be minified into one file. Actually all of the code from all of the applications dependencies will also be minified into this single file. 
 
 The minified code is not very readable. The beginning of the code looks like this: 
 
@@ -190,9 +190,6 @@ The application needs a database. Before we introduce one, let's go through a fe
 
 ###  Streamlining debloying of the frontend 
 
-To create a new production build of the frontend without extra manual work, let's add a simple shell-script to the root of the frontend repository. The script builds a new  production build with _npm run build_ and moves it to the backend directory. We name the script <i>deploy.sh</i>. It's contents are like so: 
-
-
 To create a new production build of the frontend without extra manual work, let's add a some npm-scripts to the <i>package.json</i> of the backend repository: 
 
 ```json
@@ -206,7 +203,7 @@ To create a new production build of the frontend without extra manual work, let'
 }
 ```
 
-The script _npm run build:ui_ builds the fronend and copies the production version under the backend repository.  _npm run deploy_ releases the current backend to heroku. 
+The script _npm run build:ui_ builds the frontend and copies the production version under the backend repository.  _npm run deploy_ releases the current backend to heroku. 
 
 _npm run deploy:full_ combines these two and contains the necessary <i>git</i> commands to update the backend repository. 
 
@@ -319,11 +316,11 @@ Test the deployed backend with a browser and postman or VS Code REST client to e
 
 **PRO TIP:** When you deploy your application to heroku, it is worth it at least in the beginning to keep an eye on the logs of the heroku application **AT ALL TIMES** with the command <em>heroku logs -t</em>.
 
-The following is a log about one typical problem. Heroku cannot find application debendency <i>express</i>:
+The following is a log about one typical problem. Heroku cannot find application dependency <i>express</i>:
 
 ![](../../images/3/33.png)
 
-The reason is, that the option <i>--save</i> was forgotten when <i>express</i> was installed, so information about the debendency was not saved to the file <i>package.json</i>.
+The reason is, that the option <i>--save</i> was forgotten when <i>express</i> was installed, so information about the dependency was not saved to the file <i>package.json</i>.
 
 Another typical problem is, that the application is not configured to use the port set to environment variable <em>PORT</em>: 
 
