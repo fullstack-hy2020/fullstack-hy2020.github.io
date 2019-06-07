@@ -935,7 +935,7 @@ const Button = (props) => (
 
 The component gets the event handler function from the _handleClick_ prop, and the text of the button from the _text_ prop.
 
-Using the <i>Button</i> component is simple, although we have to make sure that the we use the correct attribute names when passing props to the component.
+Using the <i>Button</i> component is simple, although we have to make sure that we use the correct attribute names when passing props to the component.
 
 ![](../../images/1/12e.png)
 
