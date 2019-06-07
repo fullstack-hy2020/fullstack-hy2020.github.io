@@ -376,11 +376,11 @@ We will learn more about React class components later on in the course.
 
 ### Debugging React applications
 
-A large part of a typical developer's time is spent on debugging and reading existing code. Every now and then we do get to write a line or two of new code, but a large part of our of time is spent on trying to figure out why something is broken or how something works. Good practices and tools for debugging are extremely important for this reason.
+A large part of a typical developer's time is spent on debugging and reading existing code. Every now and then we do get to write a line or two of new code, but a large part of our time is spent on trying to figure out why something is broken or how something works. Good practices and tools for debugging are extremely important for this reason.
 
 Lucky for us, React is an extremely developer friendly library when it comes to debugging.
 
-Before we move on, let us reminds ourselves of one of the most important rules of web development.
+Before we move on, let us remind ourselves of one of the most important rules of web development.
 
 <h4>The first rule of web development</h4>
 
@@ -396,7 +396,7 @@ If and when your code fails to compile and your browser lights up like a Christm
 
 don't write more code but rather find and fix the problem **immediately**. There has yet to be a moment in the history of coding where code that fails to compile would miraculously start working after writing large amounts of additional code. I highly doubt that such an event will transpire during this course either.
 
-Old school, print based debugging is always a good idea. If, e.g. the component
+Old school, print based debugging is always a good idea. If the component
 
 ```js
 const Button = ({ handleClick, text }) => (
@@ -406,7 +406,7 @@ const Button = ({ handleClick, text }) => (
 )
 ```
 
-is not working as intended, it's useful to start printing its variables out to the console. In order to do this effectively, we must transform our function into the less compact form and receive the entire props project without destructuring it immediately:
+is not working as intended, it's useful to start printing its variables out to the console. In order to do this effectively, we must transform our function into the less compact form and receive the entire props object without destructuring it immediately:
 
 ```js
 const Button = (props) => { 
@@ -420,7 +420,7 @@ const Button = (props) => {
 }
 ```
 
-This will immediately reveal if e.g. one of the attributes has been misspelled when using the component.
+This will immediately reveal if, for instance, one of the attributes has been misspelled when using the component.
 
 **NB** when you use _console.log_ for debugging, don't combine objects in a Java-like fashion by  using a plus. Instead of writing:
 
@@ -428,7 +428,7 @@ This will immediately reveal if e.g. one of the attributes has been misspelled w
 console.log('props value is' + props)
 ```
 
-Separate the the things you want to log to the console with a comma:
+Separate the things you want to log to the console with a comma:
 
 ```js
 console.log('props value is', props)
@@ -456,7 +456,7 @@ Once the cause of the bug is discovered you can remove the _debugger_ command an
 
 The debugger also enables us to execute our code line by line with the controls found in the right-hand side of the <i>Source</i> tab.
 
-You can also access the debugger with the _debugger_ command by adding break points in the <i>Sources</i> tab. Inspecting the values of the component's variable can be done in the _Scope_-section:
+You can also access the debugger with the _debugger_ command by adding break points in the <i>Sources</i> tab. Inspecting the values of the component's variables can be done in the _Scope_-section:
 
 ![](../../images/1/9a.png)
 
@@ -481,7 +481,7 @@ const [allClicks, setAll] = useState([])
 Dev tools shows the state of hooks in the order of their definition.
 The state of hooks _left_ and _right_ shows nicely but the hook _allClicks_ that is of the type array is not shown properly. Hopefully this will be fixed soon. You can follow this [issue](https://github.com/facebook/react-devtools/issues/1215) to get an idea when the proper hook support will be available.
 
-The version of developer tools that has support hooks has already an unofficial [beta release](https://github.com/bvaughn/react-devtools-experimental). I could not get it to work with an up to date version of Chrome. With Firefox it seems to work and shows nicely the hooked array state:
+The version of developer tools that supports hooks has already an unofficial [beta release](https://github.com/bvaughn/react-devtools-experimental). I could not get it to work with an up to date version of Chrome. With Firefox it seems to work and shows nicely the hooked array state:
 
 ![](../../images/1/11be.png)
 
