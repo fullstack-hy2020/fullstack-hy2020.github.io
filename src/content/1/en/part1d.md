@@ -557,7 +557,7 @@ If we were to define the event handler as a string:
 <button onClick={'crap...'}>button</button>
 ```
 
-React will warn us about this in the console:
+React would warn us about this in the console:
 
 ```js
 index.js:2178 Warning: Expected `onClick` listener to be a function, instead got a value of `string` type.
