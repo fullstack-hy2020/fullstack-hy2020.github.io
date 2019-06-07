@@ -495,7 +495,7 @@ To recap, hooks may only be called from inside of a function body that defines a
 
 ```js
 const App = (props) => {
-  // there are ok
+  // these are ok
   const [age, setAge] = useState(0)
   const [name, setName] = useState('Juha Tauriainen')
 
