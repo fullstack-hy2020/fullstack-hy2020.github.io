@@ -25,10 +25,14 @@ Määritellään nyt tiedostossa <i>package.json</i>, että testejä suoritettae
 {
   // ...
   "scripts": {
-    "start": "NODE_ENV=production node index.js",
-    "watch": "NODE_ENV=development nodemon index.js",
-    "test": "NODE_ENV=test jest --verbose --runInBand",
-    "lint": "eslint ."
+    "start": "NODE_ENV=production node index.js", // highlight-line
+    "watch": "NODE_ENV=development nodemon index.js", // highlight-line
+    "build:ui": "rm -rf build && cd ../../osa2/notes/ && npm run build --prod && cp -r build ../../osa3/backend/",
+    "deploy": "git push heroku master",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
+    "logs:prod": "heroku logs --tail",
+    "lint": "eslint .",
+    "test": "NODE_ENV=test jest --verbose --runInBand" // highlight-line
   },
   // ...
 }
@@ -52,8 +56,8 @@ ja muuttamalla <i>package.js</i> kaikilla käyttöjärjestelmillä toimivaan muo
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
     "watch": "cross-env NODE_ENV=development nodemon index.js",
+    // ...
     "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
-    "lint": "eslint ."
   },
   // ...
 }
@@ -70,18 +74,18 @@ Muutetaan konfiguraatiot suorittavaa moduulia seuraavasti:
 ```js
 require('dotenv').config()
 
-let port = process.env.PORT
-let mongoUrl = process.env.MONGODB_URI
+let PORT = process.env.PORT
+let MONGODB_URI = process.env.MONGODB_URI
 
 // highlight-start
 if (process.env.NODE_ENV === 'test') {
-  mongoUrl = process.env.TEST_MONGODB_URI
+  MONGODB_URI = process.env.TEST_MONGODB_URI
 }
 // highlight-end
 
 module.exports = {
-  mongoUrl,
-  port,
+  MONGODB_URI,
+  PORT
 }
 ```
 
