@@ -547,7 +547,7 @@ ReactDOM.render(
 
 We want the clicking of the button to reset the state stored in the _value_ variable.
 
-In order to make the button react to a click event, we have add an <i>event handler</i> to it.
+In order to make the button react to a click event, we have to add an <i>event handler</i> to it.
 
 Event handlers must always be a function or a reference to a function. The button will not work if the event handler is set to a variable of any other type.
 
