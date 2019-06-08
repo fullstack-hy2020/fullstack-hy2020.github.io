@@ -29,7 +29,7 @@ console.log('props value is', props)
 ```
 
 
-If you add an object to a string, the result is a pretty useless read. 
+If you concatenate an object with a string and log it to the console (like in our first example), the result will be pretty useless: 
 
 ```js
 props value is [Object object]
