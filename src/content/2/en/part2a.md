@@ -11,9 +11,9 @@ Before starting a new topic, let's recap some of the topics which proved difficu
 
 ### console.log
 
-***What's the difference between experienced JavaScript programmer and a rookie? The experienced one uses 10-100 times more console.log***
+***What's the difference between an experienced JavaScript programmer and a rookie? The experienced one uses 10-100 times more console.log***
 
-Paradoxically, this seems to be true even though rookie programmers would need console.log (or any debugging method) more than experienced ones. 
+Paradoxically, this seems to be true even though a rookie programmer would need console.log (or any debugging method) more than an experienced one.
 
 When something does not work, don't just guess what's wrong. Instead, log or use some other way of debugging. 
 
