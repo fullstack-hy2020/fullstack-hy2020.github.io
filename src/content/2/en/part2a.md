@@ -199,7 +199,7 @@ const App = (props) => {
 
 ### Key-attribute
 
-Even thought the application seems to be working, there is a nasty warning on the console: 
+Even though the application seems to be working, there is a nasty warning on the console: 
 
 ![](../../images/2/1a.png)
 
