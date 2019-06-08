@@ -38,13 +38,6 @@ props value is [Object object]
 On the contrary, when you pass objects as distinct arguments separated by commas to _console.log_ like in our second example from above, the content of the object is printed to the developer console as strings, which give you great insight.
 If necessary, read more about debugging React-applications [here](/en/part1/a_more_complex_state_debugging_react_apps#debugging-react-applications).
 
-### Event handlers revisited
-
-Based on last year's course, event handling has also proven to be difficult. 
-It's worth reading the revision chapter at the end of the previous part [event handlers revisited](/en/part1/a_more_complex_state_debugging_react_apps#event-handling-revisited) if it feels like your own knowledge on the topic needs some brushing up. 
-
-Passing event handlers to the child components of the <i>App</i> component has raised some questions. A small revision on the topic can be found [here](/en/part1/a_more_complex_state_debugging_react_apps#passing-event-handlers-to-child-components).
-
 ### Protip: Visual Studio Code snippets
 
 With Visual studio code it's easy to create 'snippets', shortcuts to generating the most used bits of code, much like 'sout' works on Netbeans. 
