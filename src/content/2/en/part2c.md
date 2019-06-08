@@ -547,7 +547,7 @@ We continue developing the phonebook. Store the initial state of the application
     { 
       "name": "Ada Lovelace", 
       "number": "39-44-5323523",
-      "id": 4
+      "id": 2
     },
     { 
       "name": "Dan Abramov", 
