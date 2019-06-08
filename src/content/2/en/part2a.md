@@ -35,8 +35,8 @@ If you concatenate an object with a string and log it to the console (like in ou
 props value is [Object object]
 ```
 
-When you use a comma, you'll get the things printed to the developer-console as an object, contents of which can be read. 
-If necessary, read more about debugging React-applications from [here](/en/part1/a_more_complex_state_debugging_react_apps#debugging-react-applications).
+On the contrary, when you pass objects as distinct arguments separated by commas to _console.log_ like in our second example from above, the content of the object is printed to the developer console as strings, which give you great insight.
+If necessary, read more about debugging React-applications [here](/en/part1/a_more_complex_state_debugging_react_apps#debugging-react-applications).
 
 ### Event handlers revisited
 
