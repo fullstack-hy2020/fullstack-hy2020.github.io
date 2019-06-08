@@ -17,7 +17,7 @@ Paradoxically, this seems to be true even though a rookie programmer would need 
 
 When something does not work, don't just guess what's wrong. Instead, log or use some other way of debugging. 
 
-**NB** when you use the command console.log for debugging, don't concatenate things 'the Java way' with a plus. Instead of writing 
+**NB** when you use the command _console.log_ for debugging, don't concatenate things 'the Java way' with a plus. Instead of writing 
 ```js
 console.log('props value is' + props)
 ```
