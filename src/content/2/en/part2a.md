@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-Before we go into a new topic, let's go through some topics which proved difficult last year. 
+Before starting a new topic, let's recap some of the topics which proved difficult last year.
 
 ### console.log
 
