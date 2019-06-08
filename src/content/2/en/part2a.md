@@ -367,7 +367,7 @@ notes.map((note, i) => ...)
 
 When called like this, _i_ gets the value of the index of the position in the array where the <i>Note</i> resides.
 
-So one way to define the row generation without getting errors is
+So one way to define the row generation without getting errors is:
 
 ```js
 const rows = () => notes.map((note, i) => 
