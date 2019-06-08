@@ -548,7 +548,7 @@ Note, that the master branch of the repository contains the code for a later ver
 
 ![](../../images/2/2e.png)
 
-If you clone the project to yourself, run the command _npm install_ before starting the application with _npm start_.
+If you clone the project, run the command _npm install_ before starting the application with _npm start_.
 
 ### When the application breaks
 
