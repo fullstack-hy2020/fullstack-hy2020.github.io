@@ -264,7 +264,7 @@ const notes = [
 Lets pause for a moment and examine how _map_ works.
 
 
-If the following code is added e.g. to the end of the file 
+If the following code is added to, let's say, the end of the file:
 
 ```js
 const result = notes.map(note => note.id)
