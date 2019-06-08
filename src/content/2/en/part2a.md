@@ -664,7 +664,7 @@ You can submit all of the exercises into the same repository, or use multiple di
 The exercises are submitted **One part at a time**. When you have submitted the exercises for a part, you can no longer submit any missed exercises for that part.
 
 
-Note, that this part has more exercises than the ones below, so <i>do not submit</i> before you have done all exercises from this part you want to submit. 
+Note that this part has more exercises than the ones before, so <i>do not submit</i> before you have done all exercises from this part you want to submit. 
 
 
 **WARNING** create-react-app makes the project automatically into a git-repository, if the project is not created inside of an already existing repository. You propably **do not** want the project to become a repository, so run the command  _rm -rf .git_ from its root. 
