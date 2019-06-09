@@ -682,7 +682,7 @@ Note, that this part has more exercises than the ones below, so <i>do not submit
 Let's finish the code for rendering course contents from exercises 1.1 - 1.5. You can start with the code from the model answers. 
 
 
-**Note that if you copy a project from one place to another, you might have to destroy the <i>node\_modules</i> directory and install the debendencies again with the command _npm install_ before you can start the application.**
+**Note that if you copy a project from one place to another, you might have to destroy the <i>node\_modules</i> directory and install the dependencies again with the command _npm install_ before you can start the application.**
 It might not be good to copy a project or to put the  <i>node\_modules</i> directory into the version control per se. 
 
 
