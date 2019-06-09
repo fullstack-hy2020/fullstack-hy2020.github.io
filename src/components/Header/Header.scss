@@ -10,8 +10,13 @@
   padding-top: 1.444rem;
   padding-bottom: 1rem;
   transition: all 0.2s ease-in-out;
+
+  &--small {
+    pointer-events: none;
+  }
 }
 
 .header__logo {
   margin: 0 10px;
+  pointer-events: auto;
 }
