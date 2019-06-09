@@ -199,16 +199,16 @@ eli Supertest huolehtii testattavan sovelluksen käynnistämisestä sisäisesti 
 Tehdään pari testiä lisää:
 
 ```js
-test('there are three notes', async () => {
+test('there are five notes', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body.length).toBe(3)
+  expect(response.body.length).toBe(4)
 })
 
 test('the first note is about HTTP methods', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body[0].content).toBe('HTML on helppoa')
+  expect(response.body[0].content).toBe('HTML is easy')
 })
 ```
 
@@ -321,13 +321,11 @@ const Note = require('../models/note')
 
 const initialNotes = [
   {
-    content: 'HTML on helppoa',
-    date: '2019-01-01T00:00:00.000+00:00',
+    content: 'HTML is easy',
     important: false,
   },
   {
-    content: 'HTTP-protokollan tärkeimmät metodit ovat GET ja POST',
-    date: '2019-01-01T00:00:00.000+00:00',
+    content: 'Browser can execute only Javascript',
     important: true,
   },
 ]
@@ -359,8 +357,8 @@ test('a specific note is within the returned notes', async () => {
 
   const contents = response.body.map(r => r.content) // highlight-line
 
-  expect(contents).toContain(// highlight-line
-    'HTTP-protokollan tärkeimmät metodit ovat GET ja POST' // highlight-line
+  expect(contents).toContain(
+    'Browser can execute only JavascriptT' // highlight-line
   )
 })
 ```
@@ -407,7 +405,7 @@ Esim. muistiinpanojen hakeminen tietokannasta hoidetaan promisejen avulla seuraa
 
 ```js
 Note.find({}).then(notes => {
-  console.log('operaatio palautti seuraavat muistiinpanot', notes)
+  console.log('operation returned the following notes', notes)
 })
 ```
 
@@ -437,7 +435,7 @@ Voisimme hakea tietokannasta kaikki muistiinpanot [await](https://developer.mozi
 ```js
 const notes = await Note.find({})
 
-console.log('operaatio palautti seuraavat muistiinpanot ', notes)
+console.log('operation returned the following notes', notes)
 ```
 
 Koodi siis näyttää täsmälleen synkroniselta koodilta. Suoritettavan koodinpätkän suhteen tilanne on se, että suoritus pysähtyy komentoon <em>const notes = await Note.find({})</em> ja jatkuu kyselyä vastaavan promisen <i>fulfillmentin</i> eli onnistuneen suorituksen jälkeen seuraavalta riviltä. Kun suoritus jatkuu, promisea vastaavan operaation tulos on muuttujassa _notes_.

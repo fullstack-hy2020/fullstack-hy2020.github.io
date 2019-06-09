@@ -127,7 +127,7 @@ The _config_ module that we have implemented slightly resembles the [node-config
 These are the only changes we need to make to our application's code.
 
 
-You can find the code for our current application in its entirety in the <i>part4-2</i> branch of [this github repository](https://github.com/fullstackopen-2019/part3-notes-backend/pull/new/part4-2).
+You can find the code for our current application in its entirety in the <i>part4-2</i> branch of [this github repository](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part4-2).
 
 
 
@@ -172,7 +172,7 @@ The test imports the Express application from the <i>app.js</i> module and wraps
 Our test makes an HTTP GET request to the <i>api/notes</i> url and verifies that the request is responded to with the status code 200. The test also verifies that the <i>Content-Type</i> header is set to <i>application/json</i> indicating that the data is in the desired format.
 
 
-The test contains some details that we will explore [a bit later on](/osa4/backendin_testaaminen#async-await). The arrow function that defines the test is preceded by the <i>async</i> keyword and the method call for the <i>api</i> object is preceded by the <i>await</i> keyword. We will write a few tests and then take a closer look at this async/await magic. Do not concern yourself with them for now, just be assured that the example tests work correctly. The async/await syntax is related to the fact that making a request to the API is an <i>asynchronous</i> operation. The [Async/await syntax](https://facebook.github.io/jest/docs/en/asynchronous.html) can be used for writing asynchronous code with the appearance of synchronous code.
+The test contains some details that we will explore [a bit later on](/en/part4/testing_the_backend#async-await). The arrow function that defines the test is preceded by the <i>async</i> keyword and the method call for the <i>api</i> object is preceded by the <i>await</i> keyword. We will write a few tests and then take a closer look at this async/await magic. Do not concern yourself with them for now, just be assured that the example tests work correctly. The async/await syntax is related to the fact that making a request to the API is an <i>asynchronous</i> operation. The [Async/await syntax](https://facebook.github.io/jest/docs/en/asynchronous.html) can be used for writing asynchronous code with the appearance of synchronous code.
 
 
 Once all the tests (there is currently only one) have finished running we have to close the database connection used by Mongoose. This can be easily achieved with the [afterAll](https://facebook.github.io/jest/docs/en/api.html#afterallfn-timeout) method:
@@ -198,10 +198,10 @@ module.exports = {
 ```
 
 
-One tiny but important detail: at the [beginning](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet#sovelluksen-rakenne) of this part we extracted the Express application into the <i>app.js</i> file, and the role of the <i>index.js</i> file was changed to launch the application at the specified port with Node's built-in <i>http</i> object:
+One tiny but important detail: at the [beginning](/en/part4/structure_of_backend_application_introduction_to_testing#project-structure) of this part we extracted the Express application into the <i>app.js</i> file, and the role of the <i>index.js</i> file was changed to launch the application at the specified port with Node's built-in <i>http</i> object:
 
 ```js
-const app = require('./app') // varsinainen Express-sovellus
+const app = require('./app') // the actual Express app
 const http = require('http')
 const config = require('./utils/config')
 
@@ -240,13 +240,13 @@ Let's write a few more tests:
 test('there are five notes', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body.length).toBe(3)
+  expect(response.body.length).toBe(4)
 })
 
 test('the first note is about HTTP methods', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body[0].content).toBe('HTML on helppoa')
+  expect(response.body[0].content).toBe('HTML is easy')
 })
 ```
 
@@ -259,9 +259,9 @@ The benefit of using the async/await syntax is starting to become evident. Norma
 ```js
 const res = await api.get('/api/notes')
 
-// tänne tullaan vasta kun edellinen komento eli HTTP-pyyntö on suoritettu
-// muuttujassa res on nyt HTTP-pyynnön tulos
-expect(res.body.length).toBe(3)
+// execution gets here only after the HTTP request is complete
+// the result of HTTP request is saved in variable res
+expect(res.body.length).toBe(4)
 ```
 
 
@@ -364,6 +364,7 @@ Our tests are already using the [afterAll](https://facebook.github.io/jest/docs/
 Let's initialize the database <i>before every test</i> with the [beforeEach](https://jestjs.io/docs/en/api.html#aftereachfn-timeout) function:
 
 ```js
+const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
@@ -371,11 +372,11 @@ const Note = require('../models/note')
 
 const initialNotes = [
   {
-    content: 'HTML on helppoa',
+    content: 'HTML is easy',
     important: false,
   },
   {
-    content: 'HTTP-protokollan tärkeimmät metodit ovat GET ja POST',
+    content: 'Browser can execute only Javascript',
     important: true,
   },
 ]
@@ -410,7 +411,7 @@ test('a specific note is within the returned notes', async () => {
   const contents = response.body.map(r => r.content) // highlight-line
 
   expect(contents).toContain(
-    'HTTP-protokollan tärkeimmät metodit ovat GET ja POST' // highlight-line
+    'Browser can execute only JavascriptT' // highlight-line
   )
 })
 ```
@@ -468,7 +469,7 @@ As an example, the fetching notes from the database with promises looks like thi
 
 ```js
 Note.find({}).then(notes => {
-  console.log('operaatio palautti seuraavat muistiinpanot', notes)
+  console.log('operation returned the following notes', notes)
 })
 ```
 
@@ -504,7 +505,7 @@ We could fetch all of the notes in the database by utilizing the [await](https:/
 ```js
 const notes = await Note.find({})
 
-console.log('operaatio palautti seuraavat muistiinpanot ', notes)
+console.log('operation returned the following notes', notes)
 ```
 
 
@@ -535,7 +536,7 @@ This means that in order for the previous examples to work they have to be using
 ```js
 const main = async () => { // highlight-line
   const notes = await Note.find({})
-  console.log('operaatio palautti seuraavat muistiinpanot', notes)
+  console.log('operation returned the following notes', notes)
 
   const notes = await Note.find({})
   const response = await notes[0].remove()
@@ -569,7 +570,7 @@ notesRouter.get('/', async (request, response) => {
 We can verify that our refactoring was successful by testing the endpoint through the browser and by running the tests that we wrote earlier.
 
 
-You can find the code for our current application in its entirety in the <i>part4-3</i> branch of [this github repository](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part4-3).
+You can find the code for our current application in its entirety in the <i>part4-3</i> branch of [this github repository](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part4-3).
 
 
 ### More tests and refactoring the backend

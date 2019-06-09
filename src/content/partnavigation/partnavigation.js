@@ -81,10 +81,10 @@ module.exports = {
       d: 'Validation and ESLint',
     },
     '4': {
-/*
+
       a: 'Structure of backend application, introduction to testing',
       b: 'Testing the backend',
-
+/*
       c: 'User administration',
       d: 'Token authentication'
       */
