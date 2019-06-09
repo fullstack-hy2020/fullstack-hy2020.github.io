@@ -101,7 +101,7 @@ A production build of applications created with <i>create-react-app</i> can be c
 
 Lets run this command from the <i>root of the frontend project</i>.
 
-This creates a directory called <i>build</i> (containing the only html-file of our application, <i>index.html</i> ) which contains the directory <i>static</i>. [Minified](<https://en.wikipedia.org/wiki/Minification_(programming)>) version of our applications JavaScript code will be generated to the <i>static</i>  directory. Even though the application code is in multiple files, all of the JavaScript will be minified into one file. Actually all of the code from all of the applications dependencies will also be minified into this single file. 
+This creates a directory called <i>build</i> (which contains the only html-file of our application, <i>index.html</i> ) which contains the directory <i>static</i>. [Minified](<https://en.wikipedia.org/wiki/Minification_(programming)>) version of our applications JavaScript code will be generated to the <i>static</i>  directory. Even though the application code is in multiple files, all of the JavaScript will be minified into one file. Actually all of the code from all of the applications dependencies will also be minified into this single file. 
 
 The minified code is not very readable. The beginning of the code looks like this: 
 
@@ -188,7 +188,7 @@ Our application saves the notes to a variable. If the application craches or is 
 
 The application needs a database. Before we introduce one, let's go through a few things. 
 
-###  Streamlining deploying of the frontend
+###  Streamlining deploying of the frontend 
 
 To create a new production build of the frontend without extra manual work, let's add a some npm-scripts to the <i>package.json</i> of the backend repository: 
 
