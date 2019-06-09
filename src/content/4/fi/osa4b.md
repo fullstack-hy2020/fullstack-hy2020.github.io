@@ -358,7 +358,7 @@ test('a specific note is within the returned notes', async () => {
   const contents = response.body.map(r => r.content) // highlight-line
 
   expect(contents).toContain(
-    'Browser can execute only JavascriptT' // highlight-line
+    'Browser can execute only Javascript' // highlight-line
   )
 })
 ```
@@ -426,7 +426,7 @@ Note.find({})
   })
 ```
 
-Then-ketju on ok, mutta parempaankin pystytään. Jo ES6:ssa esitellyt [generaattorifunktiot](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) mahdollistivat [ovelan tavan](https://github.com/getify/You-Dont-Know-JS/blob/master/async%20%26%20performance/ch4.md#iterating-generators-asynchronously) määritellä asynkronista koodia siten että se "näyttää synkroniselta". Syntaksi ei kuitenkaan ole täysin luonteva ja sitä ei käytetä kovin yleisesti.
+Then-ketju on ok, mutta parempaankin pystytään. Jo ES6:ssa esitellyt [generaattorifunktiot](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) mahdollistivat [ovelan tavan](https://github.com/getify/You-Dont-Know-JS/JavascriptTblob/master/async%20%26%20performance/ch4.md#iterating-generators-asynchronously) määritellä asynkronista koodia siten että se "näyttää synkroniselta". Syntaksi ei kuitenkaan ole täysin luonteva ja sitä ei käytetä kovin yleisesti.
 
 ES7:ssa _async_ ja _await_ tuovat generaattoreiden tarjoaman toiminnallisuuden ymmärrettävästi ja syntaksin puolesta selkeällä tavalla koko Javascript-kansan ulottuville.
 
@@ -499,7 +499,7 @@ Aloitetaan lisäysoperaatiosta. Tehdään testi, joka lisää uuden muistiinpano
 ```js
 test('a valid note can be added ', async () => {
   const newNote = {
-    content: 'async/await yksinkertaistaa asynkronisten funktioiden kutsua',
+    content: 'async/await simplifies making async calls',
     important: true,
   }
 
@@ -515,7 +515,7 @@ test('a valid note can be added ', async () => {
 
   expect(response.body.length).toBe(initialNotes.length + 1)
   expect(contents).toContain(
-    'async/await yksinkertaistaa asynkronisten funktioiden kutsua'
+    'async/await simplifies making async calls'
   )
 })
 ```
@@ -554,11 +554,11 @@ const Note = require('../models/note')
 
 const initialNotes = [
   {
-    content: 'HTML on helppoa',
+    content: 'HTML is easy',
     important: false
   },
   {
-    content: 'HTTP-protokollan tärkeimmät metodit ovat GET ja POST',
+    content: 'Browser can execute only Javascript',
     important: true
   }
 ]
@@ -622,13 +622,13 @@ test('a specific note is within the returned notes', async () => {
 
   const contents = response.body.map(r => r.content)
   expect(contents).toContain(
-    'HTTP-protokollan tärkeimmät metodit ovat GET ja POST'
+    'Browser can execute only Javascript'
   )
 })
 
 test('a valid note can be added ', async () => {
   const newNote = {
-    content: 'async/await yksinkertaistaa asynkronisten funktioiden kutsua',
+    content: 'async/await simplifies making async calls',
     important: true,
   }
 
@@ -644,7 +644,7 @@ test('a valid note can be added ', async () => {
 
   const contents = notesAtEnd.map(n => n.content) // highlight-line
   expect(contents).toContain(
-    'async/await yksinkertaistaa asynkronisten funktioiden kutsua'
+    'async/await simplifies making async calls'
   )
 })
 
@@ -1005,7 +1005,7 @@ describe('when there is initially some notes saved', () => {
     )
   })
 
-  describe('viewing a specifin note', () => {
+  describe('viewing a specific note', () => {
 
     test('succeeds with a valid id', async () => {
       const notesAtStart = await helper.notesInDb()
@@ -1042,7 +1042,7 @@ describe('when there is initially some notes saved', () => {
   describe('addition of a new note', () => {
     test('succeeds with valid data', async () => {
       const newNote = {
-        content: 'async/await yksinkertaistaa asynkronisten funktioiden kutsua',
+        content: 'async/await simplifies making async calls',
         important: true,
       }
 
@@ -1058,7 +1058,7 @@ describe('when there is initially some notes saved', () => {
 
       const contents = notesAtEnd.map(n => n.content)
       expect(contents).toContain(
-        'async/await yksinkertaistaa asynkronisten funktioiden kutsua'
+        'async/await simplifies making async calls'
       )
     })
 

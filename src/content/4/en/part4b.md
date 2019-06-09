@@ -411,7 +411,7 @@ test('a specific note is within the returned notes', async () => {
   const contents = response.body.map(r => r.content) // highlight-line
 
   expect(contents).toContain(
-    'Browser can execute only JavascriptT' // highlight-line
+    'Browser can execute only Javascript' // highlight-line
   )
 })
 ```
@@ -584,7 +584,7 @@ Let's start with the operation for adding a new note. Let's write a test that ad
 ```js
 test('a valid note can be added ', async () => {
   const newNote = {
-    content: 'async/await yksinkertaistaa asynkronisten funktioiden kutsua',
+    content: 'async/await simplifies making async calls',
     important: true,
   }
 
@@ -600,7 +600,7 @@ test('a valid note can be added ', async () => {
 
   expect(response.body.length).toBe(initialNotes.length + 1)
   expect(contents).toContain(
-    'async/await yksinkertaistaa asynkronisten funktioiden kutsua'
+    'async/await simplifies making async calls'
   )
 })
 ```
@@ -643,11 +643,11 @@ const Note = require('../models/note')
 
 const initialNotes = [
   {
-    content: 'HTML on helppoa',
+    content: 'HTML is easy',
     important: false
   },
   {
-    content: 'HTTP-protokollan tärkeimmät metodit ovat GET ja POST',
+    content: 'Browser can execute only Javascript',
     important: true
   }
 ]
@@ -719,7 +719,7 @@ test('a specific note is within the returned notes', async () => {
 
 test('a valid note can be added ', async () => {
   const newNote = {
-    content: 'async/await yksinkertaistaa asynkronisten funktioiden kutsua',
+    content: 'async/await simplifies making async calls',
     important: true,
   }
 
@@ -735,7 +735,7 @@ test('a valid note can be added ', async () => {
 
   const contents = notesAtEnd.map(n => n.content) // highlight-line
   expect(contents).toContain(
-    'async/await yksinkertaistaa asynkronisten funktioiden kutsua'
+    'async/await simplifies making async calls'
   )
 })
 
@@ -912,7 +912,7 @@ This begs the question, would it be possible to refactor the repeated <i>catch</
 Not everyone is convinced that the async/await syntax is a good addition to JavaScript. To provide an example, you can read [ES7 async functions - a step in the wrong direction](https://spion.github.io/posts/es7-async-await-step-in-the-wrong-direction.html).
 
 
-You can find the code for our current application in its entirety in the <i>part4-4</i> branch of [this github repository](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part4-4). The same branch also contains a slightly improved version of tests from the next part of the course material.
+You can find the code for our current application in its entirety in the <i>part4-4</i> branch of [this github repository](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part4-4). The same branch also contains a slightly improved version of tests from the next part of the course material.
 
 
 ### Optimizing the beforeEach function
@@ -1104,7 +1104,6 @@ Make the required changes to the code so that it passes the test.
 
 ### Refactoring tests
 
-
 Our test coverage is currently lacking. Some requests like <i>GET /api/notes/:id</i> and <i>DELETE /api/notes/:id</i> aren't tested when the request is sent with an invalid id. The grouping and organization of tests could also use some improvement, as all tests exist on the same "top level" in the test file. The readability of the test would improve, if we grouped related tests with <i>describe</i> blocks.
 
 
@@ -1119,7 +1118,7 @@ const api = supertest(app)
 
 const Note = require('../models/note')
 
-describe('when there is initially some notes saved', async () => {
+describe('when there is initially some notes saved', () => {
   beforeEach(async () => {
     await Note.deleteMany({})
 
@@ -1147,12 +1146,11 @@ describe('when there is initially some notes saved', async () => {
 
     const contents = response.body.map(r => r.content)
     expect(contents).toContain(
-      'HTTP-protokollan tärkeimmät metodit ovat GET ja POST'
+      'Browser can execute only Javascript'
     )
   })
 
-  describe('viewing a specifin note', async () => {
-
+  describe('viewing a specific note', () => {
     test('succeeds with a valid id', async () => {
       const notesAtStart = await helper.notesInDb()
 
@@ -1185,10 +1183,10 @@ describe('when there is initially some notes saved', async () => {
     })
   })
 
-  describe('addition of a new note', async () => {
+  describe('addition of a new note', () => {
     test('succeeds with valid data', async () => {
       const newNote = {
-        content: 'async/await yksinkertaistaa asynkronisten funktioiden kutsua',
+        content: 'async/await simplifies making async calls',
         important: true,
       }
 
@@ -1204,7 +1202,7 @@ describe('when there is initially some notes saved', async () => {
 
       const contents = notesAtEnd.map(n => n.content)
       expect(contents).toContain(
-        'async/await yksinkertaistaa asynkronisten funktioiden kutsua'
+        'async/await simplifies making async calls'
       )
     })
 
@@ -1224,7 +1222,7 @@ describe('when there is initially some notes saved', async () => {
     })
   })
 
-  describe('deletion of a note', async () => {
+  describe('deletion of a note', () => {
     test('succeeds with status code 200 if id is valid', async () => {
       const notesAtStart = await helper.notesInDb()
       const noteToDelete = notesAtStart[0]
@@ -1263,7 +1261,7 @@ There is still room for improvement but it is time to move forward.
 This way of testing the API, by making HTTP requests and inspecting the database with Mongoose, is by no means the only nor the best way of conducting API-level integration tests for server applications. There is no universal best way of writing tests, as it all depends on the application being tested and available resources.
 
 
-You can find the code for our current application in its entirety in the <i>part4-5</i> branch of [this github repository](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part4-5).
+You can find the code for our current application in its entirety in the <i>part4-5</i> branch of [this github repository](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part4-5).
 
 </div>
 
