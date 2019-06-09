@@ -141,6 +141,7 @@ This means, that the student can if they so choose, sign up for a job interview 
 ### To do before you start
 
 Use of the chrome browser is recommended for this course,  because it provides the best tools for web development.
+Another alternative is the Developer Edition of Firefox. Which provide the same range of features and can be downloaded [here](https://www.mozilla.org/en-US/firefox/developer/).
 
 The course exercises are submitted to GitHub, so Git must be installed and one should know how to use it. Instructions for Git can be found [here](https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners).
 
@@ -157,6 +158,6 @@ Node package manager [npm](https://www.npmjs.com/get-npm) will be automatically 
 If you find a typo in the material, or something has been expressed unclearly, or is simply bad grammar, do a <i>pull request</i> to the course material in repository <https://github.com/fullstackopen-2019/fullstackopen-2019.github.io>.
 For example, the markdown source code of this page can be found in the repository at <https://github.com/fullstackopen-2019/fullstackopen-2019.github.io/edit/source/src/content/0/en/part0a.md> 
 
-At the foot of each part of the material is a link <em>Suggest a change to the material</em>. By clicking the link you can edit the source code of the page. 
+At the bottom of each part of the material is a link <em>Suggest a change to the material</em>. By clicking the link you can edit the source code of the page. 
 
 </div>
