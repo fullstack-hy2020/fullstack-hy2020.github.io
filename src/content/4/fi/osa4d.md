@@ -167,7 +167,7 @@ notesRouter.post('/', async (request, response, next) => {
     }
 //highlight-end
 
-    const user = await User.findById(decodedToken.id)
+    const user = await User.findById(decodedToken.id) //highlight-line
 
     const note = new Note({
       content: body.content,
