@@ -7,17 +7,17 @@ lang: en
 
 <div class="content">
 
-Before we go into a new topic, let's go through some topics which proved difficult last year. 
+Before starting a new topic, let's recap some of the topics which proved difficult last year.
 
 ### console.log
 
-***What's the difference between experienced JavaScript programmer and a rookie? The experienced one uses 10-100 times more console.log***
+***What's the difference between an experienced JavaScript programmer and a rookie? The experienced one uses 10-100 times more console.log***
 
-Paradoxically, this seems to be true even though rookie programmers would need console.log (or any debugging method) more than experienced ones. 
+Paradoxically, this seems to be true even though a rookie programmer would need console.log (or any debugging method) more than an experienced one.
 
 When something does not work, don't just guess what's wrong. Instead, log or use some other way of debugging. 
 
-**NB** when you use the command console.log for debugging, don't concatenate things 'the Java way' with a plus. Instead of writing 
+**NB** when you use the command _console.log_ for debugging, don't concatenate things 'the Java way' with a plus. Instead of writing:
 ```js
 console.log('props value is' + props)
 ```
@@ -29,21 +29,14 @@ console.log('props value is', props)
 ```
 
 
-If you add an object to a string, the result is a pretty useless read. 
+If you concatenate an object with a string and log it to the console (like in our first example), the result will be pretty useless: 
 
 ```js
 props value is [Object object]
 ```
 
-When you use a comma, you'll get the things printed to the developer-console as an object, contents of which can be read. 
-If necessary, read more about debugging React-applications from [here](/en/part1/a_more_complex_state_debugging_react_apps#debugging-react-applications).
-
-### Event handlers revisited
-
-Based on last year's course, event handling has also proven to be difficult. 
-It's worth reading the revision chapter at the end of the previous part [event handlers revisited](/en/part1/a_more_complex_state_debugging_react_apps#event-handling-revisited) if it feels like your own knowledge on the topic needs some brushing up. 
-
-Passing event handlers to the child components of the <i>App</i> component has raised some questions. A small revision on the topic can be found [here](/en/part1/a_more_complex_state_debugging_react_apps#passing-event-handlers-to-child-components).
+On the contrary, when you pass objects as distinct arguments separated by commas to _console.log_ like in our second example from above, the content of the object is printed to the developer console as strings, which give you great insight.
+If necessary, read more about debugging React-applications [here](/en/part1/a_more_complex_state_debugging_react_apps#debugging-react-applications).
 
 ### Protip: Visual Studio Code snippets
 
@@ -69,7 +62,7 @@ The most important snippet is a shortcut to adding the <em>console.log()</em> co
 
 From here on out, we will be using the functional programming methods of JavaScript [array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array), such as  _find_, _filter_  and _map_  all the time. They operate on the same general princible as streams in Java 8, which have been used last few years in Ohjelmoinnin perusteet and Ohjelmoinnin jatkokurssi at the department of Computer Science, and in the programming MOOC. 
 
-If functional programming with arrays feels foreign, it is worth it to watch at least the three first parts from YouTube video series <i>Functional Programming in JavaScript</i>:
+If functional programming with arrays feels foreign, it is worth watching at least the three first parts from the YouTube video series [Functional Programming in JavaScript](https://www.youtube.com/playlist?list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84):
 
 - [Higher-order functions](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84)
 - [Map](https://www.youtube.com/watch?v=bCqtb-Z5YGQ&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84&index=2)
@@ -80,7 +73,7 @@ If functional programming with arrays feels foreign, it is worth it to watch at 
 Based on last year's course, event handling has proven to be difficult. 
 It's worth reading the revision chapter at the end of the previous part [event handlers revisited](/en/part1/a_more_complex_state_debugging_react_apps#event-handling-revisited) if it feels like your own knowledge on the topic needs some brusing up. 
 
-Passing event handlers to the child components of the <i>App</i> component has raised some questions. Small revision on the topic [here](/en/part1/a_more_complex_state_debugging_react_apps#passing-event-handlers-to-child-components).
+Passing event handlers to the child components of the <i>App</i> component has raised some questions. A small revision on the topic can be found [here](/en/part1/a_more_complex_state_debugging_react_apps#passing-event-handlers-to-child-components).
 
 ### Rendering collections
 
@@ -206,11 +199,11 @@ const App = (props) => {
 
 ### Key-attribute
 
-Even thought the application seems to be working, there is a nasty warning on the console: 
+Even though the application seems to be working, there is a nasty warning on the console: 
 
 ![](../../images/2/1a.png)
 
-As the [page](https://reactjs.org/docs/lists-and-keys.html#keys) linked to in the error message tells, items in an array, so the elements generated by the _map_ method, must have an unique key value:  an attribute called <i>key</i>.
+As the [page](https://reactjs.org/docs/lists-and-keys.html#keys) linked to in the error message tells, items in an array, so the elements generated by the _map_ method, must have a unique key value:  an attribute called <i>key</i>.
 
 Lets add the keys:
 
@@ -271,7 +264,7 @@ const notes = [
 Lets pause for a moment and examine how _map_ works.
 
 
-If the following code is added e.g. to the end of the file 
+If the following code is added to, let's say, the end of the file:
 
 ```js
 const result = notes.map(note => note.id)
@@ -374,7 +367,7 @@ notes.map((note, i) => ...)
 
 When called like this, _i_ gets the value of the index of the position in the array where the <i>Note</i> resides.
 
-So one way to define the row generation without getting errors is
+So one way to define the row generation without getting errors is:
 
 ```js
 const rows = () => notes.map((note, i) => 
@@ -548,14 +541,14 @@ ReactDOM.render(
 Modules have plenty of other uses than enabling component declarations to be separated into their own files. We will get back into them later in this course. 
 
 
-The current code of the application can be found from [github](https://github.com/fullstackopen-2019/part2-notes/tree/part2-1).
+The current code of the application can be found on [github](https://github.com/fullstackopen-2019/part2-notes/tree/part2-1).
 
 
 Note, that the master branch of the repository contains the code for a later version of the application. The current code is in the branch [part2-1](https://github.com/fullstackopen-2019/part2-notes/tree/part2-1):
 
 ![](../../images/2/2e.png)
 
-If you clone the project to yourself, run the command _npm install_ before starting the application with _npm start_.
+If you clone the project, run the command _npm install_ before starting the application with _npm start_.
 
 ### When the application breaks
 
@@ -671,7 +664,7 @@ You can submit all of the exercises into the same repository, or use multiple di
 The exercises are submitted **One part at a time**. When you have submitted the exercises for a part, you can no longer submit any missed exercises for that part.
 
 
-Note, that this part has more exercises than the ones below, so <i>do not submit</i> before you have done all exercises from this part you want to submit. 
+Note that this part has more exercises than the ones before, so <i>do not submit</i> before you have done all exercises from this part you want to submit. 
 
 
 **WARNING** create-react-app makes the project automatically into a git-repository, if the project is not created inside of an already existing repository. You propably **do not** want the project to become a repository, so run the command  _rm -rf .git_ from its root. 
