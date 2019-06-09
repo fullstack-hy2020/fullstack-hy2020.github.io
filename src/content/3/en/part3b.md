@@ -8,11 +8,11 @@ lang: en
 <div class="content">
 
 Let's continue with our efforts to use the new backend with the React-frontend from [part 2](/en/part2).
-Our last attempt failed with the following error message: 
+Our last attempt failed with the following error message:
 
 ![](../../assets/3/3.png)
 
-For some reason, the GET-request the frontend sends to the address <http://localhost:3001/notes> is not working. Why is that? The backend works just fine on the browser and with postman. 
+For some reason, the GET-request sent by the frontend to the address <http://localhost:3001/notes> is not working. Why is that? The backend works just fine in the browser and with postman. 
 
 ### Same origin policy and CORS
 
@@ -22,10 +22,10 @@ According to [Wikipedia](https://en.wikipedia.org/wiki/Cross-origin_resource_sha
 
 > <i>Cross-origin resource sharing (CORS) is a mechanism that allows restricted resources (e.g. fonts) on a web page to be requested from another domain outside the domain from which the first resource was served. A web page may freely embed cross-origin images, stylesheets, scripts, iframes, and videos. Certain "cross-domain" requests, notably Ajax requests, are forbidden by default by the same-origin security policy.</i>
 
-In our context the problem is, that by default the JavaScript code of an application run on a browser can only communicate with a server in the same [origin](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy). 
-Because our server is in localhosts port 3001, and our frontend in localhost port 3000, they are not in the same origin.  
+In our context the problem is, that by default the JavaScript code of an application run in a browser can only communicate with a server in the same [origin](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy). 
+Because our server is in localhosts port 3001, and our frontend in localhost port 3000, they do not have the same origin.
 
-Keep in mind, that [same origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) and CORS are not specific to React or Node. They are in fact universal princibles of the opration of web applications. 
+Keep in mind, that [same origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) and CORS are not specific to React or Node. They are in fact universal principles of the operation of web applications. 
 
 We can allow for requests from other <i>origins</i> by using Nodes [cors](https://github.com/expressjs/cors)-middleware.
 
@@ -43,7 +43,7 @@ const cors = require('cors')
 app.use(cors())
 ```
 
-And the frontend works! Although the functionality for changing the importance of notes has not yet been implemented to the backend. 
+And the frontend works! However, the functionality for changing the importance of notes has not yet been implemented to the backend. 
 
 You can read more about CORS from [Mozillas page](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
 
@@ -93,15 +93,15 @@ The next question is, how do we deploy the frontend to the Internet? We have mul
 
 ### Frontend production build
 
-So far we have been running React-code in <i>development mode</i>. In development mode the application is configured to give clear error messages, immediately render code changes to the browser and so on. 
+So far we have been running React-code in <i>development mode</i>. In development mode the application is configured to give clear error messages, immediately render code changes to the browser, and so on. 
 
 When the application is deployed, we must create a [production build](https://reactjs.org/docs/optimizing-performance.html#use-the-production-build) or a version of the application which is optimized for production. 
 
-Production build of applications created with <i>create-react-app</i> can be created with command [npm run build](https://github.com/facebookincubator/create-react-app#npm-run-build-or-yarn-build).
+A production build of applications created with <i>create-react-app</i> can be created with command [npm run build](https://github.com/facebookincubator/create-react-app#npm-run-build-or-yarn-build).
 
 Lets run this command from the <i>root of the frontend project</i>.
 
-This creates a directory called <i>build</i> (which contains the only html-file of our application, <i>index.html</i> ) which contains the directory <i>static</i>. [Minified](<https://en.wikipedia.org/wiki/Minification_(programming)>) version of our applications JavaScript code will be generated to the <i>static</i>  directory. Even though the application code is in multiple files, all of the JavaScript will be minified into one file. Actually all of the code from all of the applications debendencies will also be minified into this single file. 
+This creates a directory called <i>build</i> (containing the only html-file of our application, <i>index.html</i> ) which contains the directory <i>static</i>. [Minified](<https://en.wikipedia.org/wiki/Minification_(programming)>) version of our applications JavaScript code will be generated to the <i>static</i>  directory. Even though the application code is in multiple files, all of the JavaScript will be minified into one file. Actually all of the code from all of the applications dependencies will also be minified into this single file. 
 
 The minified code is not very readable. The beginning of the code looks like this: 
 
@@ -111,7 +111,7 @@ The minified code is not very readable. The beginning of the code looks like thi
 
 ### Serving static files from the backend
 
-One option for debloying the frontend is to copy the production build (the <i>build</i> directory) to the root of the backend repository and configure the backend to show the frontends <i>main page</i> (the file <i>build/index.html</i>) as its main page. 
+One option for deploying the frontend is to copy the production build (the <i>build</i> directory) to the root of the backend repository and configure the backend to show the frontends <i>main page</i> (the file <i>build/index.html</i>) as its main page. 
 
 We begin by copying the production build of the frontend to the root of the backend. With my computer the copying can be done from the frontend directory with the command
 
@@ -123,7 +123,7 @@ The backend directory should now look as follows:
 
 ![](../../images/3/27.png)
 
-To make express show <i>static content</i>, the page <i>index.html</i> and the JavaScript etc. it fetches, we need build-in middleware from express called [static](http://expressjs.com/en/starter/static-files.html).
+To make express show <i>static content</i>, the page <i>index.html</i> and the JavaScript etc. it fetches, we need built-in middleware from express called [static](http://expressjs.com/en/starter/static-files.html).
 
 When we add the following amidst the declarations of middlewares
 ```js
@@ -156,7 +156,7 @@ The application can now be used from the <i>backend</i> address <http://localhos
 
 Our application now works exactly like the [Single page app](/en/part0/fundamentals_of_web_apps#single-page-app) example application we studied in part 0. 
 
-When we use a browser to go to the address <http://localhost:3001>, the server returns the <i>index.html</i> file from the <i>build</i>  repository. Summarized contents of the file are as follows: 
+When we use a browser to go to the address <http://localhost:3001>, the server returns the <i>index.html</i> file from the <i>build</i> repository. Summarized contents of the file are as follows: 
 
 ```html
 <head>
@@ -174,7 +174,7 @@ When we use a browser to go to the address <http://localhost:3001>, the server r
 
 The file contains instructions to fetch a CSS-stylesheet defining the styles of the application, and two <i>script</i> tags which instruct the browser to fetch the JavaScript code of the application - the actual React application. 
 
-The React code fetches notes from the server address <http://localhost:3001/notes> and renders them to the screen. The communications between the server and the browser can be seen on the <i>Network</i> tab of the developer console:
+The React code fetches notes from the server address <http://localhost:3001/notes> and renders them to the screen. The communications between the server and the browser can be seen in the <i>Network</i> tab of the developer console:
 
 ![](../../images/3/29e.png)
 
@@ -188,10 +188,7 @@ Our application saves the notes to a variable. If the application craches or is 
 
 The application needs a database. Before we introduce one, let's go through a few things. 
 
-###  Streamlining debloying of the frontend 
-
-To create a new production build of the frontend without extra manual work, let's add a simple shell-script to the root of the frontend repository. The script builds a new  production build with _npm run build_ and moves it to the backend directory. We name the script <i>deploy.sh</i>. It's contents are like so: 
-
+###  Streamlining deploying of the frontend
 
 To create a new production build of the frontend without extra manual work, let's add a some npm-scripts to the <i>package.json</i> of the backend repository: 
 
@@ -206,13 +203,13 @@ To create a new production build of the frontend without extra manual work, let'
 }
 ```
 
-The script _npm run build:ui_ builds the fronend and copies the production version under the backend repository.  _npm run deploy_ releases the current backend to heroku. 
+The script _npm run build:ui_ builds the frontend and copies the production version under the backend repository.  _npm run deploy_ releases the current backend to heroku. 
 
 _npm run deploy:full_ combines these two and contains the necessary <i>git</i> commands to update the backend repository. 
 
 There is also a script _npm run logs:prod_ to show the heroku logs.
 
-Note that the directory paths is script <i>build:ui</i> depend on the location of repositories in the file system.
+Note that the directory paths in the script <i>build:ui</i> depend on the location of repositories in the file system.
 
 ### Backend URLs
 
@@ -257,7 +254,7 @@ Frontend is still at the root of the application at <https://vast-oasis-81447.he
 
 ### Proxy
 
-Changes on the frontend have caused it not to work on development mode (when started with command _npm start_) anymore, as the connection to the backend does not work. 
+Changes on the frontend have caused it to no longer work in development mode (when started with command _npm start_), as the connection to the backend does not work. 
 
 ![](../../images/3/32e.png)
 
@@ -269,7 +266,7 @@ const baseUrl = '/api/notes'
 
 Because in development mode the frontend is at the address <i>localhost:3000</i>, the requests to the backend go to the wrong address <i>localhost:3000/api/notes</i>. The backend is at <i>localhost:3001</i>. 
 
-If project was created with create-react-app, this problem is easy to solve. It is enough to add the following declaration to the <i>package.json</i> file at the frontend repository. 
+If project was created with create-react-app, this problem is easy to solve. It is enough to add the following declaration to the <i>package.json</i> file of the frontend repository. 
 
 ```bash
 {
@@ -293,7 +290,7 @@ There are multiple ways to achieve this (for example placing both backend and fr
 
 In some situations it may be sensible to deploy the frontend code as it's own application. With apps created with create-react-app it is [straightforward](https://github.com/mars/create-react-app-buildpack).
 
-Current code of the backend can be found from [github](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part3-3), in the branch <i>part3-3</i>. The changes in frontend code are in <i>part3-1</i> branch of the [frontend repository](https://github.com/fullstackopen-2019/part2-notes/tree/part3-1).
+Current code of the backend can be found on [github](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part3-3), in the branch <i>part3-3</i>. The changes in frontend code are in <i>part3-1</i> branch of the [frontend repository](https://github.com/fullstackopen-2019/part2-notes/tree/part3-1).
 
 </div>
 
@@ -301,13 +298,13 @@ Current code of the backend can be found from [github](https://github.com/fullst
 
 ### Exercises
 
-The next exercises don't require many lines of code. They can however be challenging, because you must understand exactly what is happening where, and the configurations must be just right. 
+The following exercises don't require many lines of code. They can however be challenging, because you must understand exactly what is happening and where, and the configurations must be just right. 
 
 #### 3.9 phonebook backend step9
 
 Make the backend work with the frontend from the previous part. Do not implement the functionality for making changes to the phone numbers yet, that will be implemented in exercise 3.17. 
 
-You will propably have to do some small changes to the frontend, at least to the URL's to the backend. Remember to keep the developer console open on your browser. If some HTTP-requests fail, you should check from the <i>Network</i>-tab what is going on. Keep an eye on the backends console as well. If you did not do the previous exercise, it is worth it to print the request data or <i>request.body</i> to the console in the event handler responsible for POST-requests. 
+You will propably have to do some small changes to the frontend, at least to the URL's for the backend. Remember to keep the developer console open in your browser. If some HTTP-requests fail, you should check from the <i>Network</i>-tab what is going on. Keep an eye on the backends console as well. If you did not do the previous exercise, it is worth it to print the request data or <i>request.body</i> to the console in the event handler responsible for POST-requests. 
 
 #### 3.10 phonebook backend step10
 
@@ -317,13 +314,13 @@ Deploy the backend to the internet, for example to Heroku.
 
 Test the deployed backend with a browser and postman or VS Code REST client to ensure it works. 
 
-**PRO TIP:** When you deploy your application to heroku, it is worth it at least in the beginning to keep an eye on the logs of the heroku application **AT ALL TIMES** with the command <em>heroku logs -t</em>.
+**PRO TIP:** When you deploy your application to heroku, it is worth it to at least in the beginning keep an eye on the logs of the heroku application **AT ALL TIMES** with the command <em>heroku logs -t</em>.
 
-The following is a log about one typical problem. Heroku cannot find application debendency <i>express</i>:
+The following is a log about one typical problem. Heroku cannot find application dependency <i>express</i>:
 
 ![](../../images/3/33.png)
 
-The reason is, that the option <i>--save</i> was forgotten when <i>express</i> was installed, so information about the debendency was not saved to the file <i>package.json</i>.
+The reason is, that the option <i>--save</i> was forgotten when <i>express</i> was installed, so information about the dependency was not saved to the file <i>package.json</i>.
 
 Another typical problem is, that the application is not configured to use the port set to environment variable <em>PORT</em>: 
 
