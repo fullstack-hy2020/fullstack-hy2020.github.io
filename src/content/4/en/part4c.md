@@ -476,7 +476,6 @@ notesRouter.post('/', async (request, response, next) => {
 })
 ```
 
-
 It's worth noting that the <i>user</i> object also changes. The <i>id</i> of the note is stored in the <i>notes</i> field:
 
 ```js
@@ -489,12 +488,12 @@ await user.save()
 
 Let's try to create a new note
 
-![](../../images/4/10.png)
+![](../../images/4/10e.png)
 
 
 The operation appears to work. Let's add one more note and then visit the route for fetching all users:
 
-![](../../images/4/11.png)
+![](../../images/4/11e.png)
 
 
 We can see that the user has two notes. 
@@ -502,7 +501,7 @@ We can see that the user has two notes.
 
 Likewise, the id of the user who created the note can be seen when we visit the route for fetching all notes:
 
-![](../../images/4/12.png)
+![](../../images/4/12e.png)
 
 
 ### Populate
@@ -531,7 +530,7 @@ The [populate](http://mongoosejs.com/docs/populate.html) method is chained after
 
 The result is almost exactly what we wanted:
 
-![](../../images/4/13.png)
+![](../../images/4/13e.png)
 
 
 We can use the same populate parameter for choosing the fields we want to include from the documents. The selection of fields is done with the Mongo [syntax](https://docs.mongodb.com/manual/tutorial/project-fields-from-query-results/#return-the-specified-fields-and-the-id-field-only):
@@ -548,7 +547,7 @@ usersRouter.get('/', async (request, response) => {
 
 The result is now exactly like we want it to be:
 
-![](../../images/4/14.png)
+![](../../images/4/14e.png)
 
 
 Let's also add a suitable population of user information to notes:
@@ -565,7 +564,7 @@ notesRouter.get('/', async (request, response) => {
 
 Now the user's information is added to the <i>user</i> field of note objects.
 
-![](../../images/4/15.png)
+![](../../images/4/15e.png)
 
 
 It's important to understand that the database does not actually know that the ids stored in the <i>user</i> field of notes reference documents in the user collection.

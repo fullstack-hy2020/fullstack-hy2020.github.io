@@ -150,7 +150,7 @@ userSchema.set('toJSON', {
     returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
     delete returnedObject.__v
-    // suodatetaan passwordHash eli salasanan tiiviste pois näkyviltä
+    // the passwordHash should not be revealed
     delete returnedObject.passwordHash
   }
 })
@@ -441,17 +441,17 @@ await user.save()
 
 Kokeillaan nyt lisätä uusi muistiinpano
 
-![](../../images/4/10.png)
+![](../../images/4/10e.png)
 
 Operaatio vaikuttaa toimivan. Lisätään vielä yksi muistiinpano ja mennään kaikkien käyttäjien sivulle:
 
-![](../../images/4/11.png)
+![](../../images/4/11e.png)
 
 Huomaamme siis, että käyttäjällä on kaksi muistiinpanoa.
 
 Muistiinpanon luoneen käyttäjän id näkyviin muistiinpanon yhteyteen:
 
-![](../../images/4/12.png)
+![](../../images/4/12e.png)
 
 ### populate
 
@@ -474,7 +474,7 @@ Funktion [populate](http://mongoosejs.com/docs/populate.html) kutsu siis ketjute
 
 Lopputulos on jo melkein haluamamme kaltainen:
 
-![](../../images/4/13.png)
+![](../../images/4/13e.png)
 
 Populaten yhteydessä on myös mahdollista rajata mitä kenttiä sisällytettävistä dokumenteista otetaan mukaan. Rajaus tapahtuu Mongon [syntaksilla](https://docs.mongodb.com/manual/tutorial/project-fields-from-query-results/#return-the-specified-fields-and-the-id-field-only):
 
@@ -489,7 +489,7 @@ usersRouter.get('/', async (request, response) => {
 
 Tulos on täsmälleen sellainen kuin haluamme
 
-![](../../images/4/14.png)
+![](../../images/4/14e.png)
 
 Lisätään sopiva käyttäjän tietojen populointi muistiinpanojen yhteyteen:
 
@@ -504,7 +504,7 @@ notesRouter.get('/', async (request, response) => {
 
 Nyt käyttäjän tiedot tulevat muistiinpanon kenttään <i>user</i>.
 
-![](../../images/4/15.png)
+![](../../images/4/15e.png)
 
 Korostetaan vielä, että tietokannan tasolla ei siis ole mitään määrittelyä siitä, että esim. muistiinpanojen kenttään <i>user</i> talletetut id:t viittaavat käyttäjä-kokoelman dokumentteihin.
 
