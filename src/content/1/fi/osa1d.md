@@ -482,7 +482,7 @@ const [allClicks, setAll] = useState([])
 
 Dev tools näyttää hookien tilan siinä järjestyksessä kun ne on määritelty koodissa. Hookien _left_ ja _right_ tila näkyy hyvin, mutta valitettavasti dev tools ei tässä vaiheessa osaa näyttää taulukkotyyppistä hookia _allClicks_ kunnolla.
 
-Dev toolsin hooken toteutusta käsitellään [tässä issuessa](https://github.com/facebook/react-devtools/issues/1215).
+Dev toolsin hookien toteutusta käsitellään [tässä issuessa](https://github.com/facebook/react-devtools/issues/1215).
 
 Dev toolsin hookeja tukevasta versiosta on jo tehty epävirallinen [beta-julkaisu](https://github.com/bvaughn/react-devtools-experimental). En saanut itse Chrome-versiota toimimaan, mutta Firefox-versio toimii ja näyttää hookatun taulukkomuotoisen tilan hyvin
 
