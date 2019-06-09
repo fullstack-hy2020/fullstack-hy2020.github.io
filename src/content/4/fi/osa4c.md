@@ -41,7 +41,7 @@ Oletetaan että kokoelmassa <i>users</i> on kaksi käyttäjää:
     username: 'hellas',
     _id: 141414,
   },
-];
+]
 ```
 
 Kokoelmassa <i>notes</i> on kolme muistiinpanoa, kaikkien kenttä <i>user</i> viittaa <i>users</i>-kentässä olevaan käyttäjään:
@@ -49,24 +49,24 @@ Kokoelmassa <i>notes</i> on kolme muistiinpanoa, kaikkien kenttä <i>user</i> vi
 ```js
 [
   {
-    content: 'HTML on helppoa',
+    content: 'HTML is easy',
     important: false,
     _id: 221212,
     user: 123456,
   },
   {
-    content: 'HTTP-protokollan tärkeimmät metodit ovat GET ja POST',
+    content: 'The most important operations of HTTP protocol are GET and POST',
     important: true,
     _id: 221255,
     user: 123456,
   },
   {
-    content: 'Java on kieli, jota käytetään siihen asti kunnes aurinko sammuu',
+    content: 'A proper dinosaur codes with Java',
     important: false,
     _id: 221244,
     user: 141414,
   },
-];
+]
 ```
 
 Mikään ei kuitenkaan määrää dokumenttitietokannoissa, että viitteet on talletettava muistiinpanoihin, ne voivat olla <i>myös</i> (tai ainoastaan) käyttäjien yhteydessä:
@@ -83,7 +83,7 @@ Mikään ei kuitenkaan määrää dokumenttitietokannoissa, että viitteet on ta
     _id: 141414,
     notes: [141414],
   },
-];
+]
 ```
 
 Koska käyttäjiin liittyy potentiaalisesti useita muistiinpanoja, niiden id:t talletetaan käyttäjän kentässä <i>notes</i> olevaan taulukkoon.
@@ -97,11 +97,11 @@ Dokumenttitietokannat tarjoavat myös radikaalisti erilaisen tavan datan organis
     _id: 123456,
     notes: [
       {
-        content: 'HTML on helppoa',
+        content: 'HTML is easy',
         important: false,
       },
       {
-        content: 'HTTP-protokollan tärkeimmät metodit ovat GET ja POST',
+        content: 'The most important operations of HTTP protocol are GET and POST',
         important: true,
       },
     ],
@@ -112,12 +112,12 @@ Dokumenttitietokannat tarjoavat myös radikaalisti erilaisen tavan datan organis
     notes: [
       {
         content:
-          'Java on kieli, jota käytetään siihen asti kunnes aurinko sammuu',
+          'A proper dinosaur codes with Java',
         important: false,
       },
     ],
   },
-];
+]
 ```
 
 Muistiinpanot olisivat tässä skeemaratkaisussa siis yhteen käyttäjään alisteisia kenttiä, niillä ei olisi edes omaa identiteettiä, eli id:tä tietokannan tasolla.
