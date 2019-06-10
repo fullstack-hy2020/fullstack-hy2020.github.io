@@ -789,9 +789,9 @@ Jos sovelluksen vastaanottamassa muuttujaan _body_ talletetussa datassa on kentt
 
 > Jos ollaan tarkkoja, niin kentän <i>important</i> arvon ollessa <i>false</i>, tulee lausekkeen <em>body.important || false</em> arvoksi oikean puoleinen <i>false</i>...
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-1).
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part3-1).
 
-Huomaa, että repositorion master-haarassa on myöhemmän vaiheen koodi. Tämän hetken koodi on branchissa [part3-1](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-1):
+Huomaa, että repositorion master-haarassa on myöhemmän vaiheen koodi. Tämän hetken koodi on branchissa [part3-1](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part3-1):
 
 ![](../../images/3/21.png)
 
@@ -955,7 +955,7 @@ const unknownEndpoint = (request, response) => {
 app.use(unknownEndpoint)
 ```
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-2), branchissa <i>part3-2</i>.
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part3-2), branchissa <i>part3-2</i>.
 
 </div>
 

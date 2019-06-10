@@ -13,10 +13,10 @@ We will now implement support for [token based authentication](https://scotch.io
 
 The princibles of token based authentication are depicted in the following sequence diagram: 
 
-![](../../images/4/16.png)
+![](../../images/4/16e.png)
 
 - User starts by logging in using a login form implemented with React 
-    - We will add the login form to the frontend in [part 5](/part5) 
+    - We will add the login form to the frontend in [part 5](/en/part5) 
 - This causes the React code to send the username and the password to the server address <i>/api/login</i> as a HTTP POST request. 
 - If the username and the password are correct, the server generates a <i>token</i> which somehow identifies the logged in user. 
     - The token is signed digitally, making it impossible to falsify (with cryptographic means)
@@ -108,7 +108,7 @@ app.use('/api/login', loginRouter)
 
 Lets try logging in using VS Code REST-client: 
 
-![](../../images/4/17.png)
+![](../../images/4/17e.png)
 
 It does not work. The following is printed to console: 
 
@@ -123,11 +123,11 @@ The command _jwt.sign(userForToken, process.env.SECRET)_ fails. We forgot to set
 
 Successful login returns the user details and the token: 
 
-![](../../images/4/18.png)
+![](../../images/4/18e.png)
 
 Wrong username or password returns an error message and the proper statuscode
 
-![](../../images/4/19.png)
+![](../../images/4/19e.png)
 
 ### Limiting creating new notes to logged in users
 
@@ -218,11 +218,11 @@ A new note can now be created using postman if the <i>authorization</i> header i
 
 Using postman this looks as follows: 
 
-![](../../images/4/20.png)
+![](../../images/4/20e.png)
 
 and with Visual Studio Code REST client
 
-![](../../images/4/21.png)
+![](../../images/4/21e.png)
 
 ### Error handling
 
@@ -264,7 +264,7 @@ const errorHandler = (error, request, response, next) => {
 }
 ```
 
-Current application code can be found from [github](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part4-8), branch <i>part4-8</i>.
+Current application code can be found from [github](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part4-8), branch <i>part4-8</i>.
 
 If the application has multiple interfaces requiring identification, JWTs validation should be separated into its own middleware. Some existing library, like [express-jwt](https://www.npmjs.com/package/express-jwt), could also be used. 
 
@@ -274,7 +274,7 @@ There has been many changes to the code, which has caused a typical problem for 
 
 Usernames, passwords and applications using token authentication must always be used over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). We could use a Node [HTTPS](https://nodejs.org/api/https.html) server in our application instead of the [HTTP](https://nodejs.org/docs/latest-v8.x/api/http.html) server (it requires more configurations). In the other hand the production version of our application is in Heroku, so our applications stays secured because Heroku routes all traffic between a browser and the Heroku server over HTTPS. 
 
-We will implement login to the frontend in the [next part](/part5).
+We will implement login to the frontend in the [next part](/en/part5).
 
 </div>
 
@@ -282,7 +282,7 @@ We will implement login to the frontend in the [next part](/part5).
 
 ### Exercises
 
-In the next exercises, basics of user management will be implemented for the Bloglist application. The safest way is to follow the story from part 4 chapter [User management](/osa4/kayttajien_hallinta) to the chapter [Token-based authorization](/osa4/token_perustainen_kirjautuminen). Creativity is of course allowed. 
+In the next exercises, basics of user management will be implemented for the Bloglist application. The safest way is to follow the story from part 4 chapter [User administration](/en/part4/user_administration) to the chapter [Token-based authentication](/en/part4/token_authentication). Creativity is of course allowed. 
 
 **One more warning:** If you notice you are mixing async/await and _then_ calls, it is 99% certain you are doing something wrong. Use either or, never both. 
 
@@ -291,7 +291,7 @@ In the next exercises, basics of user management will be implemented for the Blo
 Implement a way to create new users by doing a HTTP POST-request to address <i>api/users</i>. Users have <i>username
 , password and name</i>.
 
-Do not save passwords to the database as clear text, but use <i>bcrypt</i>-library like we did in part 4 chapter [Creating new users](/osa4/kayttajien_hallinta#kayttajien-luominen)
+Do not save passwords to the database as clear text, but use <i>bcrypt</i>-library like we did in part 4 chapter [Creating new users](/en/part4/user_administration#creating-users)
 
 **NB** some windows users have had problems with <i>bcrypt</i>. If you run into problems, remove the library with command 
 
@@ -313,7 +313,7 @@ Add a feature which adds the following restrictions to creating new users: Both 
 
 The operation must respond with a suitable statuscode and some kind of an error message if invalid user is created. 
 
-**NB** Do not test password restrictions with Mongoose validations. It is not a good idea because the password received by the backend and the password hash saved to the database are not the same thing. The password length should be validated in the controller like we did in [part 3](/osa3/validointi_ja_es_lint) before using Mongoose validation. 
+**NB** Do not test password restrictions with Mongoose validations. It is not a good idea because the password received by the backend and the password hash saved to the database are not the same thing. The password length should be validated in the controller like we did in [part 3](/en/part3/validation_and_es_lint) before using Mongoose validation. 
 
 Implement also tests which test that invalid users are not created and invalid add user operation returns a suitable statuscode and an error message. 
 
@@ -321,20 +321,20 @@ Implement also tests which test that invalid users are not created and invalid a
 
 Expand blog so, that each blog contains information on the creator of the blog. 
 
-Modify adding new blogs so, that when a new blog is created,  <i>any</i> user from the database is designated as it's creator (for example the one found first). Implement this according to part 4 chapter [populate](/osa4/kayttajien_hallinta#populate).
+Modify adding new blogs so, that when a new blog is created,  <i>any</i> user from the database is designated as it's creator (for example the one found first). Implement this according to part 4 chapter [populate](/en/part4/user_administration#populate).
 Which user is designated as the creator does not matter just yet. The functionality is finished in exercise 4.19. 
 
 Modify listing all blogs so that the creators user information is displayed with the blog: 
 
-![](../../images/4/23.png)
+![](../../images/4/23e.png)
 
 and listing users so that the blogs user has created are listed with the user: 
 
-![](../../images/4/24.png)
+![](../../images/4/24e.png)
 
 #### 4.18: bloglist expansion, step7
 
-Implement token-based authentication according to part 4 chapter [Authorization](/osa4#kirjautuminen)
+Implement token-based authentication according to part 4 chapter [Token authentication](/en/part4/token_authentication)
 
 #### 4.19: bloglist expansion, step8
 
@@ -342,9 +342,9 @@ Modify adding new blogs so, that it requires a valid token to be sent with the H
 
 #### 4.20*: bloglist expansion, step9
 
-[Example](/osa4#kirjautuminen) from part 4 shows taking the token from the header with the _getTokenFrom_ helperfunction.
+[Example](/en/part4/token_authentication) from part 4 shows taking the token from the header with the _getTokenFrom_ helperfunction.
 
-If you used the same solution, refactor taking the token to a [middleware](/osa3#middlewaret). The middleware should take the token from the <i>Authorization</i>-header and place it to <i>token</i> field of the <i>request</i> object. 
+If you used the same solution, refactor taking the token to a [middleware](/en/part3/node_js_and_express#middleware). The middleware should take the token from the <i>Authorization</i>-header and place it to <i>token</i> field of the <i>request</i> object. 
 
 So when you register middlewares in the <i>app.js</i> file before all routes
 
@@ -380,32 +380,32 @@ if ( blog.user.toString() === userid.toString() ) ...
 ```
 
 <!---
-note left of kayttaja
-  käyttäjä täyttää kirjautumislomakkeelle
-  käyttäjätunnuksen ja salasanan
+note left of user
+  user fills in login form with
+  username and password
 end note
-kayttaja -> selain: painetaan login-nappia
+user -> browser: login button pressed
 
-selain -> backend: HTTP POST /api/login {username, password}
+browser -> backend: HTTP POST /api/login { username, password }
 note left of backend
-  backend generoi käyttäjän identifioivan TOKENin
+  backend generates TOKEN that identifies user 
 end note
-backend -> selain: TOKEN palautetaan vastauksen bodyssä
-note left of selain
-  selain tallettaa TOKENin
+backend -> browser: TOKEN returned as message body 
+note left of browser
+  browser saves TOKEN
 end note
-note left of kayttaja
-  käyttäjä luo uden muistiinpanon
+note left of user
+  user creates a note
 end note
-kayttaja -> selain: painetaan create note -nappia
-selain -> backend: HTTP POST /api/notes {content} headereissa TOKEN
+user -> browser: create note button pressed
+browser -> backend: HTTP POST /api/notes { content } TOKEN in header
 note left of backend
-  backend tunnistaa TOKENin perusteella kuka käyttää kyseessä
+  backend identifies userfrom the TOKEN
 end note
 
-backend -> selain: 201 created
+backend -> browser: 201 created
 
-kayttaja -> kayttaja:
+user -> user:
 -->
 
 </div>

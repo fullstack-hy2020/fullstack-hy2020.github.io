@@ -282,7 +282,7 @@ Tähänkin on useita erilaisia ratkaisuja (esim. sekä frontendin että backendi
 
 Myös frontendin koodin deployaaminen omana sovelluksenaan voi joissain tilanteissa olla järkevää. _create-react-app_:in avulla luotujen sovellusten osalta se on [suoraviivaista](https://github.com/mars/create-react-app-buildpack).
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-3), branchissa <i>part3-3</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part3-3), branchissa <i>part3-3</i>.
 
 </div>
 

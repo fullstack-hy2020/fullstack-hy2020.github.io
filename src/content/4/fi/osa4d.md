@@ -103,7 +103,7 @@ app.use('/api/login', loginRouter)
 
 Kokeillaan kirjautumista, käytetään VS Coden REST-clientiä:
 
-![](../../images/4/17.png)
+![](../../images/4/17e.png)
 
 Kirjautuminen ei kuitenkaan toimi, konsoli näyttää seuraavalta:
 
@@ -118,11 +118,11 @@ Ongelman aiheuttaa komento _jwt.sign(userForToken, process.env.SECRET)_ sillä y
 
 Onnistunut kirjautuminen palauttaa kirjautuneen käyttäjän tiedot ja tokenin:
 
-![](../../images/4/18.png)
+![](../../images/4/18e.png)
 
 Virheellisellä käyttäjätunnuksella tai salasanalla kirjautuessa annetaan asianmukaisella statuskoodilla varustettu virheilmoitus
 
-![](../../images/4/19.png)
+![](../../images/4/19e.png)
 
 ### Muistiinpanojen luominen vain kirjautuneille
 
@@ -210,11 +210,11 @@ Uuden muistiinpanon luominen onnistuu nyt postmanilla jos <i>authorization</i>-h
 
 Postmanilla luominen näyttää seuraavalta
 
-![](../../images/4/20.png)
+![](../../images/4/20e.png)
 
 ja Visual Studio Coden REST clientillä
 
-![](../../images/4/21.png)
+![](../../images/4/21e.png)
 
 ### Poikkeusten käsittely
 
@@ -256,7 +256,7 @@ const errorHandler = (error, request, response, next) => {
 }
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part4-8), branchissä <i>part4-8</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part4-8), branchissä <i>part4-8</i>.
 
 Jos sovelluksessa on useampia rajapintoja jotka vaativat kirjautumisen, kannattaa JWT:n validointi eriyttää omaksi middlewarekseen, tai käyttää jotain jo olemassa olevaa kirjastoa kuten [express-jwt](https://www.npmjs.com/package/express-jwt).
 
@@ -316,15 +316,15 @@ Muokkaa blogien lisäystä osan 4 luvun [populate](/osa4/kayttajien_hallinta#pop
 
 Muokaa kaikkien blogien listausta siten, että blogien yhteydessä näytetään lisääjän tiedot:
 
-![](../../images/4/23.png)
+![](../../images/4/23e.png)
 
 ja käyttäjien listausta siten että käyttäjien lisäämät blogit ovat näkyvillä
 
-![](../../images/4/24.png)
+![](../../images/4/24e.png)
 
 #### 4.18: blogilistan laajennus, step7
 
-Toteuta osan 4 luvun [Kirjautuminen](/osa4#kirjautuminen) tapaan järjestelmään token-perustainen autentikointi.
+Toteuta osan 4 luvun [Token-perustainen kirjautuminen](/osa4#/token_perustainen_kirjautuminen) tapaan järjestelmään token-perustainen autentikointi.
 
 #### 4.19: blogilistan laajennus, step8
 
@@ -332,7 +332,7 @@ Muuta blogien lisäämistä siten, että se on mahdollista vain, jos lisäyksen 
 
 #### 4.20*: blogilistan laajennus, step9
 
-Osan 4 [esimerkissä](/osa4#kirjautuminen) token otetaan headereista apufunktion _getTokenFrom_ avulla.
+Osan 4 [esimerkissä](/osa4#/token_perustainen_kirjautuminen) token otetaan headereista apufunktion _getTokenFrom_ avulla.
 
 Jos käytit samaa ratkaisua, refaktoroi tokenin erottaminen [middlewareksi](/osa3/node_js_ja_express#middlewaret), joka ottaa tokenin <i>Authorization</i>-headerista ja sijoittaa sen <i>request</i>-olion kenttään <i>token</i>.
 
