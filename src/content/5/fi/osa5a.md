@@ -15,7 +15,7 @@ Toteutetaan nyt osa käyttäjienhallinnan edellyttämästä toiminnallisuudesta 
 
 Sovelluksen yläosaan on nyt lisätty kirjautumislomake, myös uuden muistiinpanon lisäämisestä huolehtiva lomake on siirretty muistiinpanojen yläpuolelle:
 
-![](../../images/5/1.png)
+![](../../images/5/1e.png)
 
 Komponentin <i>App</i> koodi näyttää seuraavalta:
 
@@ -48,16 +48,16 @@ const App = () => {
 
   return (
     <div>
-      <h1>Muistiinpanot</h1>
+      <h1>Notes</h1>
 
       <Notification message={errorMessage} />
 
-      <h2>Kirjaudu</h2>
+      <h2>Login</h2>
 
       // highlight-start
       <form onSubmit={handleLogin}>
         <div>
-          käyttäjätunnus
+          username
             <input
             type="text"
             value={username}
@@ -66,7 +66,7 @@ const App = () => {
           />
         </div>
         <div>
-          salasana
+          password
             <input
             type="password"
             value={password}
@@ -74,7 +74,7 @@ const App = () => {
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
-        <button type="submit">kirjaudu</button>
+        <button type="submit">login</button>
       </form>
     // highlight-end
 
@@ -137,7 +137,7 @@ const App = () => {
       setUsername('')
       setPassword('')
     } catch (exception) {
-      setErrorMessage('käyttäjätunnus tai salasana virheellinen')
+      setErrorMessage('wrong credentials')
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000)
@@ -161,9 +161,9 @@ const App = () => {
   // ...
 
   const loginForm = () => (
-    <form onSubmit={login}>
+    <form onSubmit={handleLogin}>
       <div>
-        käyttäjätunnus
+        username
           <input
           type="text"
           value={username}
@@ -172,7 +172,7 @@ const App = () => {
         />
       </div>
       <div>
-        salasana
+        password
           <input
           type="password"
           value={password}
@@ -180,7 +180,7 @@ const App = () => {
           onChange={({ target }) => setPassword(target.value)}
         />
       </div>
-      <button type="submit">kirjaudu</button>
+      <button type="submit">login</button>
     </form>      
   )
 
@@ -190,7 +190,7 @@ const App = () => {
         value={newNote}
         onChange={handleNoteChange}
       />
-      <button type="submit">tallenna</button>
+      <button type="submit">save</button>
     </form>  
   )
 
@@ -216,18 +216,18 @@ const App = () => {
 
   return (
     <div>
-      <h1>Muistiinpanot</h1>
+      <h1>Notes</h1>
 
       <Notification message={errorMessage} />
 
-      <h2>Kirjaudu</h2>
+      <h2>login</h2>
 
       {user === null && loginForm()} // highlight-line
       {user !== null && noteForm()} // highlight-line
 
       <div>
         <button onClick={() => setShowAll(!showAll)}>
-          näytä {showAll ? 'vain tärkeät' : 'kaikki'}
+          show {showAll ? 'important' : 'all'}
         </button>
       </div>
       <ul>
@@ -256,18 +256,18 @@ Voimme suoraviivaistaa edellistä vielä hieman käyttämällä [kysymysmerkkiop
 ```js
 return (
   <div>
-    <h1>Muistiinpanot</h1>
+    <h1>Notes</h1>
 
     <Notification message={errorMessage}/>
 
-    <h2>Kirjaudu</h2>
+    <h2>Login</h2>
 
     {user === null ?
       loginForm() :
       noteForm()
     }
 
-    <h2>Muistiinpanot</h2>
+    <h2>Notes</h2>
 
     // ...
 
@@ -282,11 +282,11 @@ Tehdään vielä sellainen muutos, että jos käyttäjä on kirjautunut, render�
 ```js
 return (
   <div>
-    <h1>Muistiinpanot</h1>
+    <h1>Notes</h1>
 
     <Notification message={errorMessage} />
 
-    <h2>Kirjaudu</h2>
+    <h2>Login</h2>
 
     {user === null ?
       loginForm() :
@@ -296,7 +296,7 @@ return (
       </div>
     }
 
-    <h2>Muistiinpanot</h2>
+    <h2>Notes</h2>
 
     // ...
 
@@ -316,9 +316,22 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 Frontend on siis tallettanut onnistuneen kirjautumisen yhteydessä backendilta saamansa tokenin sovelluksen tilan <i>user</i> kenttään <i>token</i>:
 
-![](../../images/5/2.png)
+```js
+const handleLogin = async (event) => {
+  event.preventDefault()
+  try {
+    const user = await loginService.login({
+      username, password,
+    })
 
-Valitettavasti react dev toolsin uusimmassa 15.1.2019 versiossa 3.6.0 hookatut tilat [eivät näy kunnolla](https://github.com/facebook/react-devtools/issues/1282) jos ne ovat taulukkoja tai olioita. Kuvakaappaus on versiosta 3.5. 
+    setUser(user) // highlight-line
+    setUsername('')
+    setPassword('')
+  } catch (exception) {
+    // ...
+  }
+}
+```
 
 Korjataan uusien muistiinpanojen luominen siihen muotoon, mitä backend edellyttää, eli lisätään kirjautuneen käyttäjän token HTTP-pyynnön Authorization-headeriin.
 
@@ -393,15 +406,15 @@ Ongelma korjaantuu helposti tallettamalla kirjautumistiedot [local storageen](ht
 Local storage on erittäin helppokäyttöinen. Metodilla [setItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem) talletetaan tiettyä <i>avainta</i> vastaava <i>arvo</i>, esim:
 
 ```js
-window.localStorage.setItem('nimi', 'juha tauriainen')
+window.localStorage.setItem('name', 'juha tauriainen')
 ```
 
-tallettaa avaimen <i>nimi</i> arvoksi toisena parametrina olevan merkkijonon.
+tallettaa avaimen <i>name</i> arvoksi toisena parametrina olevan merkkijonon.
 
 Avaimen arvo selviää metodilla [getItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem):
 
 ```js
-window.localStorage.getItem('nimi')
+window.localStorage.getItem('name')
 ```
 
 ja [removeItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/removeItem) poistaa avaimen.
@@ -439,7 +452,7 @@ Kirjautumisen yhteyteen tehtävä muutos on seuraava:
 
 Kirjautuneen käyttäjän tiedot tallentuvat nyt local storageen ja niitä voidaan tarkastella konsolista:
 
-![](../../images/5/3b.png)
+![](../../images/5/3e.png)
 
 Sovellusta on vielä laajennettava siten, että kun sivulle tullaan uudelleen, esim. selaimen uudelleenlataamisen yhteydessä, tulee sovelluksen tarkistaa löytyykö local storagesta tiedot kirjautuneesta käyttäjästä. Jos löytyy, asetetaan ne sovelluksen tilaan ja <i>noteServicelle</i>.
 
@@ -504,7 +517,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa]https://githu
 
 ### Tehtäviä
 
-Teemme nyt edellisen osan tehtävissä tehtyä bloglist-backendia käyttävän frontendin. Voit ottaa tehtävien pohjaksi [Githubista](https://github.com/fullstack-hy2019/bloglist-frontend) olevan sovellusrungon. Sovellus olettaa, että backend on käynnissä koneesi portissa 3003.
+Teemme nyt edellisen osan tehtävissä tehtyä bloglist-backendia käyttävän frontendin. Voit ottaa tehtävien pohjaksi [Githubista](https://github.com/fullstackopen-2019/bloglist-frontend) olevan sovellusrungon. Sovellus olettaa, että backend on käynnissä koneesi portissa 3003.
 
 Lopullisen version palauttaminen riittää, voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.
 
@@ -516,10 +529,10 @@ Muista tehtäviä tehdessäsi kaikki debuggaukseen liittyvät käytänteet, erit
 
 #### 5.1: blogilistan frontend, step1
 
-Ota tehtävien pohjaksi [Githubissa](https://github.com/fullstack-hy2019/bloglist-frontend.git) olevan sovellusrunko kloonaamalla se sopivaan paikkaan komennolla
+Ota tehtävien pohjaksi [Githubissa](https://github.com/fullstackopen-2019/bloglist-frontendt) olevan sovellusrunko kloonaamalla se sopivaan paikkaan komennolla
 
 ```bash
-git clone https://github.com/fullstack-hy2019/bloglist-frontend.git
+git clone https://github.com/fullstackopen-2019/bloglist-frontend
 ```
 
 <i>Poista kloonatun sovelluksen git-konfiguraatio</i>
@@ -540,11 +553,11 @@ Toteuta frontendiin kirjautumisen mahdollistava toiminnallisuus. Kirjautumisen y
 
 Jos käyttäjä ei ole kirjautunut, sivulla näytetään <i>pelkästään</i> kirjautumislomake:
 
-![](../../images/5/4.png)
+![](../../images/5/4e.png)
 
 Kirjautuneelle käyttäjälle näytetään kirjautuneen käyttäjän nimi sekä blogien lista
 
-![](../../images/5/5.png)
+![](../../images/5/5e.png)
 
 Tässä vaiheessa kirjautuneiden käyttäjien tietoja ei vielä tarvitse muistaa local storagen avulla.
 
@@ -577,7 +590,7 @@ Tässä vaiheessa kirjautuneiden käyttäjien tietoja ei vielä tarvitse muistaa
 
 Tee kirjautumisesta "pysyvä" local storagen avulla. Tee sovellukseen myös mahdollisuus uloskirjautumiseen
 
-![](../../images/5/6.png)
+![](../../images/5/6e.png)
 
 Uloskirjautumisen jälkeen selain ei saa muistaa kirjautunutta käyttäjää reloadauksen jälkeen.
 
@@ -585,7 +598,7 @@ Uloskirjautumisen jälkeen selain ei saa muistaa kirjautunutta käyttäjää rel
 
 Laajenna sovellusta siten, että kirjautunut käyttäjä voi luoda uusia blogeja:
 
-![](../../images/5/7.png)
+![](../../images/5/7e.png)
 
 Bloginluomislomakkeesta voi tehdä oman komponenttinsa, joka hallitsee lomakkeen kenttien sisältöä tilansa avulla. Kaiken blogin luomiseen liittyvän tilan voi toki tallettaa myös <i>App</i>-komponenttiin.
 
@@ -593,11 +606,11 @@ Bloginluomislomakkeesta voi tehdä oman komponenttinsa, joka hallitsee lomakkeen
 
 Toteuta sovellukseen notifikaatiot, jotka kertovat sovelluksen yläosassa onnistuneista ja epäonnistuneista toimenpiteistä. Esim. blogin lisäämisen yhteydessä voi antaa seuraavan notifikaation
 
-![](../../images/5/8.png)
+![](../../images/5/8e.png)
 
 epäonnistunut kirjautuminen taas johtaa notifikaatioon
 
-![](../../images/5/9.png)
+![](../../images/5/9e.png)
 
 Notifikaation tulee olla näkyvillä muutaman sekunnin ajan. Värien lisääminen ei ole pakollista.
 
