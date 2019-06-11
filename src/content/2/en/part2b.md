@@ -249,7 +249,7 @@ const addNote = (event) => {
 
 First we create a new object for the note called <em>noteObject</em>, that will receive its content from the component's <em>newNote</em> state. The unique identifier <i>id</i> is generated based on the total number of notes. Since notes are never deleted, this method works in our application. With the help of the <em>Math.random()</em> command, our note has a 50% change of being marked as important.
 
-The new note is added to the list of notes by using the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) method of arrays that was introduced in [part](/en/part1/javascript#arrays):
+The new note is added to the list of notes by using the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) method of arrays that was introduced in [part 1](/en/part1/javascript#arrays):
 
 ```js
 setNotes(notes.concat(noteObject))
@@ -329,7 +329,7 @@ If the value of <em>showAll</em> is false, the <em>notesToShow</em> variable wil
 notes.filter(note => note.important === true)
 ```
 
-The comparison operator is in fact redundant, since the value of <em>note.important</em> is either <i>true</i> or <i>false</i> which means that we can simply write
+The comparison operator is in fact redundant, since the value of <em>note.important</em> is either <i>true</i> or <i>false</i> which means that we can simply write:
 
 ```js
 notes.filter(note => note.important)
@@ -450,7 +450,7 @@ Sometimes it can be useful to render state and other variables as text for debug
 <div>debug: {newName}</div>
 ```
 
-It's also important to put what we learned in the [debugging React applications](#react-sovellusten-debuggaus) chapter of part one into good use. The [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension especially, is incredibly useful for tracking changes that occur in the application's state.
+It's also important to put what we learned in the [debugging React applications](/en/part1/a_more_complex_state_debugging_react_apps) chapter of part one into good use. The [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension especially, is incredibly useful for tracking changes that occur in the application's state.
 
 After finishing this exercise your application should look something like this:
 
@@ -539,7 +539,7 @@ This saves you from having to manually input data into your application for test
 
 If you have implemented your application in a single component, refactor it by extracting suitable parts into new components. Maintain the application's state and all event handlers in the <i>App</i> root component.
 
-It is sufficient to extract <i>**three**</i> components from the application. Good candidates for separate components are e.g. the search filter, the form for adding new people into the phonebook, a component that renders all people from the phonebook, and a component that renders a single person's details.
+It is sufficient to extract <i>**three**</i> components from the application. Good candidates for separate components are, for example, the search filter, the form for adding new people into the phonebook, a component that renders all people from the phonebook, and a component that renders a single person's details.
 
 The application's root component could look something like this after refactoring. The refactored root component below only renders titles and lets the extracted components take care of the rest.
 

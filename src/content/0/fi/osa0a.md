@@ -147,7 +147,7 @@ Asenna myös joku järkevä web-devausta tukeva tekstieditori, enemmän kuin suo
 
 Älä koodaa nanolla, Notepadilla tai Geditillä. Myöskään NetBeans ei ole omimmillaan Web-devauksessa ja se on myös turhan raskas verrattuna esim. Visual Studio Codeen.
 
-Asenna koneeseesi heti myös [Node.js](https://nodejs.org/en/). Materiaali on tehty versiolla 10.0, älä asenna mitään sitä vanhempaa versiota. Kaiken tosin pitäisi toimia jos konellasi on Nodesta vähintään versio 8.0. Asennusohjeita on koottu [tänne](https://github.com/fullstack-hy2019/misc/tree/master).
+Asenna koneeseesi heti myös [Node.js](https://nodejs.org/en/). Materiaali on tehty versiolla 10.0, älä asenna mitään sitä vanhempaa versiota. Kaiken tosin pitäisi toimia jos konellasi on Nodesta vähintään versio 8.0. Asennusohjeita on koottu [tänne](https://github.com/fullstack-hy2019/misc/blob/master/asennusohjeita.md).
 
 Noden myötä koneelle asentuu myös [npm](https://www.npmjs.com/get-npm) (alunperin lyhennelmä _Node Package Manager_ -nimelle), jota tulemme tarvitsemaan kurssin aikana aktiivisesti. Tuoreen Noden kera asentuu myös [npx](https://www.npmjs.com/package/npx), jota tarvitaan myös muutaman kerran.
 

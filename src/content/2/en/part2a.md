@@ -749,14 +749,14 @@ Show also the sum of the exercises of the course.
 
 If you haven't done so already, calculate the sum of exercises with the array method [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce).
 
-**Pro tip:** when your code looks as follows
+**Pro tip:** when your code looks as follows:
 
 ```js
 const total = 
   parts.reduce( (s, p) => someMagicHere )
 ```
 
-and does not work, it's worth to use console.log, which requires the arrow function to be written in its longer form
+and does not work, it's worth to use console.log, which requires the arrow function to be written in its longer form:
 
 ```js
 const total = parts.reduce( (s, p) => {
@@ -765,14 +765,14 @@ const total = parts.reduce( (s, p) => {
 })
 ```
 
-**Pro tip2:** There is a plugin for VS code, [this one](https://marketplace.visualstudio.com/items?itemName=cmstead.jsrefactor), which  changes short form arrow functions into their longer form automatically, and vice versa. 
+**Pro tip2:** There is a [plugin for VS code](https://marketplace.visualstudio.com/items?itemName=cmstead.jsrefactor) that automatically changes short form arrow functions into their longer form, and vice versa. 
 
 ![](../../images/2/5b.png)
 
 <h4>2.4: Course contents step9</h4>
 
 
-Let's extend our application to allow for <i>arbituary number</i> of courses:
+Let's extend our application to allow for an <i>arbitrary number</i> of courses:
 
 ```js
 const App = () => {
