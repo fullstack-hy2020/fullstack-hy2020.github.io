@@ -329,7 +329,7 @@ If the value of <em>showAll</em> is false, the <em>notesToShow</em> variable wil
 notes.filter(note => note.important === true)
 ```
 
-The comparison operator is in fact redundant, since the value of <em>note.important</em> is either <i>true</i> or <i>false</i> which means that we can simply write
+The comparison operator is in fact redundant, since the value of <em>note.important</em> is either <i>true</i> or <i>false</i> which means that we can simply write:
 
 ```js
 notes.filter(note => note.important)
