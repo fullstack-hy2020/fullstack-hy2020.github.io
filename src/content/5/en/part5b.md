@@ -750,7 +750,7 @@ Let us also create a npm script to run the lint:
 }
 ```
 
-You can find the code for our current application in its entirety in the <i>part5-6</i> branch of [this github repository](https://github.com/fullstack-hy2019/part2-notes/tree/part5-6).
+You can find the code for our current application in its entirety in the <i>part5-6</i> branch of [this github repository](https://github.com/fullstackopen-2019/part2-notes/tree/part5-6).
 
 </div>
 
