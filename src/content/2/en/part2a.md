@@ -772,7 +772,7 @@ const total = parts.reduce( (s, p) => {
 <h4>2.4: Course contents step9</h4>
 
 
-Let's extend our application to allow for <i>arbituary number</i> of courses:
+Let's extend our application to allow for an <i>arbitrary number</i> of courses:
 
 ```js
 const App = () => {
