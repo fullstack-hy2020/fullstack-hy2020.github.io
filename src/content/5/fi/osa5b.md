@@ -11,11 +11,11 @@ lang: fi
 
 Muutetaan sovellusta siten, että kirjautumislomaketta ei oletusarvoisesti näytetä:
 
-![](../../images/5/10.png)
+![](../../images/5/10e.png)
 
 Lomake aukeaa, jos käyttäjä painaa nappia <i>login</i>:
 
-![](../../images/5/11a.png)
+![](../../images/5/11e.png)
 
 Napilla <i>cancel</i> käyttäjä saa tarvittaessa suljettua lomakkeen.
 
@@ -33,25 +33,25 @@ const LoginForm = ({
   }) => {
   return (
     <div>
-      <h2>Kirjaudu</h2>
+      <h2>Login</h2>
 
       <form onSubmit={handleSubmit}>
         <div>
-          käyttäjätunnus
+          username
           <input
             value={username}
             onChange={handleUsernameChange}
           />
         </div>
         <div>
-          salasana
+          password
           <input
             type="password"
             value={password}
             onChange={handlePasswordChange}
           />
       </div>
-        <button type="submit">kirjaudu</button>
+        <button type="submit">login</button>
       </form>
     </div>
   )
@@ -68,10 +68,10 @@ Huomaa, että propsit otetaan vastaan <i>destrukturoimalla</i>, eli sen sijaan e
 const LoginForm = (props) => {
   return (
     <div>
-      <h2>Kirjaudu</h2>
+      <h2>Login</h2>
       <form onSubmit={props.handleSubmit}>
         <div>
-          käyttäjätunnus
+          username
           <input
             value={props.username}
             onChange={props.handleChange}
@@ -79,7 +79,7 @@ const LoginForm = (props) => {
           />
         </div>
         // ...
-        <button type="submit">kirjaudu</button>
+        <button type="submit">login</button>
       </form>
     </div>
   )
@@ -136,8 +136,8 @@ Näkyvyyttä säätelevää tilaa vaihdellaan kahden napin avulla, molempiin on 
 Komponenttien näkyvyys on määritelty asettamalla komponentille [inline](/osa2/tyylien_lisaaminen_react_sovellukseen#inline-tyylit)-tyyleinä CSS-määrittely, jossa [display](https://developer.mozilla.org/en-US/docs/Web/CSS/display)-propertyn arvoksi asetetaan <i>none</i> jos komponentin ei haluta näkyvän:
 
 ```js
-    const hideWhenVisible = { display: loginVisible ? 'none' : '' }
-    const showWhenVisible = { display: loginVisible ? '' : 'none' }
+const hideWhenVisible = { display: loginVisible ? 'none' : '' }
+const showWhenVisible = { display: loginVisible ? '' : 'none' }
 
 <div style="{hideWhenVisible}">
   // nappi
@@ -247,14 +247,14 @@ Eristetään ensin muistiinpanojen luominen omaksi komponentiksi
 const NoteForm = ({ onSubmit, handleChange, value}) => {
   return (
     <div>
-      <h2>Luo uusi muistiinpano</h2>
+      <h2>Create a new note</h2>
 
       <form onSubmit={onSubmit}>
         <input
           value={value}
           onChange={handleChange}
         />
-        <button type="submit">tallenna</button>
+        <button type="submit">save</button>
       </form>
     </div>
   )
@@ -281,7 +281,8 @@ Ratkaisu on melko hyvä, haluaisimme kuitenkin parantaa sitä erään seikan osa
 
 Kun uusi muistiinpano luodaan, olisi loogista jos luomislomake menisi piiloon. Nyt lomake pysyy näkyvillä. Lomakkeen piilottamiseen sisältyy kuitenkin pieni ongelma, sillä näkyvyyttä kontrolloidaan <i>Togglable</i>-komponentin tilassa olevalla muuttujalla <i>visible</i>. Miten pääsemme tilaan käsiksi komponentin ulkopuolelta?
 
-Reactin [ref](https://reactjs.org/docs/refs-and-the-dom.html)-mekanismi tarjoaa eräänlaisen viitteen komponenttiin.
+On useita erilaisia tapoja toteuttaa pääsy komponentin funktoihin sen ulkopuolelta, käytetään nyt 
+Reactin [ref](https://reactjs.org/docs/refs-and-the-dom.html)-mekanismia, joka tarjoaa eräänlaisen viitteen komponenttiin.
 
 Tehdään komponenttiin <i>App</i> seuraavat muutokset
 
@@ -349,8 +350,6 @@ Komponentin luova funktio on kääritty funktiokutsun [forwardRef](https://react
 
 Komponentti tarjoaa [useImperativeHandle
 ](https://reactjs.org/docs/hooks-reference.html#useimperativehandle)-hookin avulla sisäisesti määritellyn funktionsa <i>toggleVisibility</i> ulkopuolelta kutsuttavaksi.
-
-**HUOM** hookin _useImperativeHandle_ vanha nimi on _useImperativeMethod_. Jos käytät Reactin alpha-versiota, on hook siellä vielä vanhalla nimellä!
 
 Voimme nyt piilottaa lomakkeen kutsumalla <i>noteFormRef.current.toggleVisibility()</i> samalla kun uuden muistiinpanon luominen tapahtuu:
 
@@ -429,13 +428,19 @@ syntyy <i>kolme erillistä komponenttiolioa</i>, joilla on kaikilla oma tilansa:
 
 Tee blogin luomiseen käytettävästä lomakkeesta ainoastaan tarvittaessa näytettävä osan 5 luvun [Kirjautumislomakkeen näyttäminen vain tarvittaessa](/osa5#kirjautumislomakkeen-näyttäminen-vain-tarvittaessa) tapaan. Voit halutessasi hyödyntää osassa 5 määriteltyä komponenttia <i>Togglable</i>.
 
-**HUOM** hookin _useImperativeHandle_ vanha nimi on _useImperativeMethod_. Jos käytät Reactin alpha-versiota, on hook siellä vielä vanhalla nimellä!
+Lomake ei ole oletusarvoisesti näkyvillä
+
+![](../../images/5/13ae.png)
+
+Klikkaamalla nappia <i>new note</i> lomake aukeaa
+
+![](../../images/5/13be.png)
 
 #### 5.6* blogilistan frontend, step6
 
 Laajenna blogien listausta siten, että klikkaamalla blogin nimeä, sen täydelliset tiedot aukeavat
 
-![](../../images/5/13.png)
+![](../../images/5/13e.png)
 
 Uusi klikkaus blogin nimeen pienentää näkymän.
 
@@ -456,7 +461,7 @@ const Blog = ({ blog }) => {
   }
 
   return (
-    <div style={blogStyle}>
+    <div style={blogStyle}> 
       <div onClick={() => console.log('clicked')}>  // highlight-line
         {blog.title} {blog.author}
       </div>
@@ -514,7 +519,7 @@ Lisää nappi blogin poistamiselle. Toteuta myös poiston tekevä logiikka.
 
 Ohjelmasi voi näyttää esim. seuraavalta:
 
-![](../../images/5/14.png)
+![](../../images/5/14e.png)
 
 Kuvassa näkyvä poiston varmistus on helppo toteuttaa funktiolla
 [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm).
@@ -667,6 +672,33 @@ module.exports = {
 };
 ```
 
+Tehdään projektin juureen tiedosto [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) ja sille seuraava sisältö
+
+```bash
+node_modules
+build
+```
+
+Näin ainoastaan sovelluksessa oleva itse kirjoitettu koodi huomioidaan linttauksessa. 
+
+Tehdään lintausta varten npm-skripti:
+
+```js
+{
+  // ...
+  {
+    "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "server": "json-server -p3001 db.json",
+    "eslint": "eslint ." // highlight-line
+  },
+  // ...
+}
+```
+
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part2-notes/tree/part5-6, branchissa <i>part5-6</i>.
 
 </div>
@@ -682,5 +714,9 @@ Määrittele joillekin sovelluksesi komponenteille PropTypet.
 #### 5.12: blogilistan frontend, step12
 
 Ota projektiin käyttöön ESlint. Määrittele haluamasi kaltainen konfiguraatio. Korjaa kaikki lint-virheet.
+
+Create-react-app on asentanut projektille eslintin valmiiksi, joten ei tarvita muuta kun sopiva konfiguraatio tiedoston <i>.eslintrc.js</i>.
+
+**HUOM:** älä suorita komentoa _npm init_. Se asentaa uuden version eslintistä joka on epäsopiva create-react-app:in konfiguraatioiden kanssa!
 
 </div>
