@@ -505,7 +505,7 @@ What's causing the application to break? The event handler is supposed to define
 
 meaning that the event handler is actually a <i>function call</i>, not a reference to the function. As a general rule, there is nothing wrong with this, but in this particular case the <em>setToValue(0)</em> function is called when React renders the component. This function then makes a call to the _setCounter_ function, which in turn causes the component to be re-rendered. And this cycle goes on and on...
 
-There's two potential solutions to this problem. The simpler solution is to change the event handlers into the form shown below:
+There are two potential solutions to this problem. The simpler solution is to change the event handlers into the form shown below:
 
 ```js
 const App = (props) => {
