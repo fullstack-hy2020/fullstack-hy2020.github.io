@@ -7,21 +7,21 @@ lang: en
 
 <div class="content">
 
-During the course, along with web development, we have a goal and need to learn a sufficient amount of Javascript.
+During the course, along with web development, we have a goal and a need to learn a sufficient amount of Javascript.
 
-Javascript has advanced rapidly the last few years, and on this course, we are using features from the newer versions. The official name of the Javascript standard is [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). At this moment, the latest version is the one released in June of 2017 with the name [ES9](https://www.ecma-international.org/ecma-262/9.0/index.html), otherwise known as ECMAScript 2018.
+Javascript has advanced rapidly the last few years, and in this course, we are using features from the newer versions. The official name of the Javascript standard is [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). At this moment, the latest version is the one released in June of 2017 with the name [ES9](https://www.ecma-international.org/ecma-262/9.0/index.html), otherwise known as ECMAScript 2018.
 
 Browsers do not yet support all of Javascript's newest features. Due to this fact, a lot of code run in browsers has been <i>transpiled</i> from a newer version of Javascript to an older, more compatible version.
 
 Today, the most popular way to do the transpiling is using [Babel](https://babeljs.io/). Transpilation is automatically configured in React applications created with create-react-app. We will take a closer look at the configuration of the transpilation in [part 7](/part7) of this course.
 
-[Node.js](https://nodejs.org/en/) is a Javascript runtime environment based on Google's [chrome V8](https://developers.google.com/v8/) Javascript engine and works practically anywhere from servers to mobile phones. Let's practice writing some Javascript using Node. It is expected that the version of Node.js installed on your machine is at least version <i>v8.10.0</i>. The latest versions of Node already understand the latest versions of Javascript, so the code does not need to be transpiled.
+[Node.js](https://nodejs.org/en/) is a Javascript runtime environment based on Google's [chrome V8](https://developers.google.com/v8/) Javascript engine and works practically anywhere - from servers to mobile phones. Let's practice writing some Javascript using Node. It is expected that the version of Node.js installed on your machine is at least version <i>v8.10.0</i>. The latest versions of Node already understand the latest versions of Javascript, so the code does not need to be transpiled.
 
 The code is written into files ending with <i>.js</i> and are run by issuing the command <em>node name\_of\_file.js</em>
 
 It is also possible to write Javascript code into the Node.js console, which is opened by typing _node_ in the command-line, as well as into the browser's developer tool console. The newest revisions of Chrome handle the newer features of Javascript [pretty well](http://kangax.github.io/compat-table/es2016plus/) without transpiling the code.
 
-Javascript is sort of reminiscent both in name and syntax to Java. But when it comes to core mechanism of the language they could not be more different. Coming from a Java background the behavior of Javascript can seem a bit alien, especially if one cannot bother to look up the features of the language.
+Javascript is sort of reminiscent both in name and syntax to Java. But when it comes to core mechanism of the language they could not be more different. Coming from a Java background, the behavior of Javascript can seem a bit alien, especially if one cannot bother to look up the features of the language.
 
 In certain circles it has also been popular to attempt "simulating" Java features and design patterns in Javascript. We do not recommend doing this.
 
@@ -45,13 +45,13 @@ x = 4               // causes an error
 
 In the example, we also see that the type of the data assigned to the variable can change during execution. At the start _y_ stores an integer and at the end a string.
 
-It is also possible to define variables in Javascript using the keyword [var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var). Var was for a long time the only way to define variables. Const and let were only recently added in version ES6. In specific situations, var works in a [different](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f) [way](http://www.jstips.co/en/javascript/keyword-var-vs-let/) compared to variable definitions in most languages. During this course the use of var is ill advised and you should stick with using const and let!
+It is also possible to define variables in Javascript using the keyword [var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var). Var was for a long time the only way to define variables. Const and let were only recently added in version ES6. In specific situations, var works in a [different](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f) [way](http://www.jstips.co/en/javascript/keyword-var-vs-let/) compared to variable definitions in most languages. During this course the use of var is ill-advised and you should stick with using const and let!
 
 You can find more on this topic on e.g. YouTube - [var, let and const - ES6 JavaScript Features](https://youtu.be/sjyJBL5fkp8)
 
 ### Arrays
 
-An [array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) and a couple of examples of its use
+An [array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) and a couple of examples of its use:
 
 ```js
 const t = [1, -1, 3]
@@ -76,7 +76,7 @@ value => {
 }
 ```
 
-forEach calls the function <i>for each of the items in the array</i> always passing the individual item as a parameter. The function as the parameter of forEach may also receive [other parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach).
+forEach calls the function <i>for each of the items in the array</i>, always passing the individual item as a parameter. The function as the parameter of forEach may also receive [other parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach).
 
 In the previous example, a new item was added to the array using the method [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push). When using React, techniques from functional programming are often used. One characteristic of the functional programming paradigm is the use of [immutable](https://en.wikipedia.org/wiki/Immutable_object) data structures. In React code, it is preferable to use the method [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), which does not add the item to the array, but creates a new array in which the content of the old array and the new item are both included.
 
@@ -89,7 +89,7 @@ console.log(t)  // [1, -1, 3] is printed
 console.log(t2) // [1, -1, 3, 5] is printed
 ```
 
-The method call _t.concat(5)_ does not add a new item to the old array, but returns a new array, which besides containing the items of the old array also contains the new item.
+The method call _t.concat(5)_ does not add a new item to the old array, but returns a new array, which, besides containing the items of the old array, also contains the new item.
 
 There are plenty of useful methods defined for arrays. Let's look at a short example of using the [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) method.
 
@@ -123,7 +123,7 @@ console.log(first, second)  // 1, 2 is printed
 console.log(rest)          // [3, 4 ,5] is printed
 ```
 
-Thanks to the assignment the variables _first_ and _second_ will receive the first two integers of the array as their values. The remaining integers are "collected" into an array of their own, which is then assigned to the variable _rest_.
+Thanks to the assignment, the variables _first_ and _second_ will receive the first two integers of the array as their values. The remaining integers are "collected" into an array of their own, which is then assigned to the variable _rest_.
 
 ### Objects
 
@@ -154,7 +154,7 @@ const object3 = {
 
 The values of the properties can be of any type, like integers, strings, arrays, objects...
 
-The properties of an object are referenced by using the "dot" notation, or using brackets:
+The properties of an object are referenced by using the "dot" notation, or by using brackets:
 
 ```js
 console.log(object1.name)         // Arto Hellas is printed
@@ -173,11 +173,11 @@ The latter of the additions has to be done by using brackets, because when using
 
 Naturally, objects in Javascript can also have methods. However, during this course we do not need to define any objects with methods of their own. This is why they are only discussed briefly during the course.
 
-Objects can also be defined using so-called constructor functions, which results in a mechanism reminiscent of many other programming languages', e.g. Java's classes. Despite this similarity Javascript does not have classes in the same sense as object oriented programming languages. There has been, however, an addition of the <i>class syntax</i> starting from version ES6, which in some cases helps structure object oriented classes.
+Objects can also be defined using so-called constructor functions, which results in a mechanism reminiscent of many other programming languages', e.g. Java's classes. Despite this similarity Javascript does not have classes in the same sense as object-oriented programming languages. There has been, however, an addition of the <i>class syntax</i> starting from version ES6, which in some cases helps structure object-oriented classes.
 
 ### Functions
 
-We have already become familiar with defining arrow functions. The complete process, without cutting corners, to defining an arrow function is as follows 
+We have already become familiar with defining arrow functions. The complete process, without cutting corners, to defining an arrow function is as follows:
 
 ```js
 const sum = (p1, p2) => {
@@ -187,7 +187,7 @@ const sum = (p1, p2) => {
 }
 ```
 
-and the function is called as can be expected
+and the function is called as can be expected:
 
 ```js
 const result = sum(1, 5)
@@ -209,7 +209,7 @@ If the function only contains a single expression, then the braces are not neede
 const square = p => p * p
 ```
 
-This form is particularly handy when manipulating arrays, e.g using the map method:
+This form is particularly handy when manipulating arrays, e.g. using the map method:
 
 ```js
 const t = [1, 2, 3]
@@ -219,7 +219,7 @@ const tSquared = t.map(p => p * p)
 
 The arrow function was added to Javascript only a couple of years ago along with version [ES6](http://es6-features.org/). Prior to this the only way to define functions was by using the keyword _function_.
 
-There are two ways, one of which is giving a name in a [function declaration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function), by which the function can be referenced.
+There are two ways by which the function can be referenced; one is giving a name in a [function declaration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function).
 
 ```js
 function product(a, b) {
@@ -453,7 +453,7 @@ referenceToGreet() // error message is printed to console
 
 When calling the method through a reference, the method has lost knowledge of what was the original _this_. Contrary to other languages, in Javascript the value of [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) is defined based on <i>how the method is called</i>. When calling the method through a reference, the value of _this_ becomes the so-called [global object](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) and the end result is often not what the software developer had originally intended.
 
-Losing track of _this_ when writing Javascript code brings forth a few potential issues. Situations often arise where React's or Node's (or more specifically the Javascript engine of the web browser) needs to call some method in an object that the developer has defined. However, in this course we are spared from the issues, since we are only using the "this-less" Javascript.
+Losing track of _this_ when writing Javascript code brings forth a few potential issues. Situations often arise where React or Node (or more specifically the Javascript engine of the web browser) needs to call some method in an object that the developer has defined. However, in this course we are spared from the issues, since we are only using the "this-less" Javascript.
 
 One situation leading to the disappearance of _this_ arises when, e.g. we ask Arto to greet in one second using the [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) method.
 
@@ -468,7 +468,7 @@ const arto = {
 setTimeout(arto.greet, 1000)  // highlight-line
 ```
 
-The value of _this_ in Javascript is defined based on how the method is being called. When setTimeout is using the method it is the Javascript engine that calls the method and _this_ refers to the Timeout object.
+The value of _this_ in Javascript is defined based on how the method is being called. When setTimeout is using the method, it is the Javascript engine that calls the method and _this_ refers to the Timeout object.
 
 There are several mechanisms by which the original _this_ can be preserved. One of these is using a method called [bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind):
 
@@ -478,13 +478,13 @@ setTimeout(arto.greet.bind(arto), 1000)
 
 The command <em>arto.greet.bind(arto)</em> creates a new function, where it has bound _this_ to point to Arto independent of where and how the method is being called.
 
-Using [arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions), it is possible to solve some of the problems related to _this_. They should not, however, be used as methods for objects, because then _this_ does not work at all. We will come back to the behavior of _this_ in relation to arrow functions later.
+Using [arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions), it is possible to solve some of the problems related to _this_. They should not, however, be used as methods for objects, because then _this_ does not work at all. We will come back later to the behavior of _this_ in relation to arrow functions.
 
 If you want to gain a better understanding of how _this_ works in Javascript, the internet is full of material about the topic, e.g. the screen cast series [Understand JavaScript's this Keyword in Depth](https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth) by [egghead.io](https://egghead.io) is highly recommended!
 
 ### Classes
 
-As mentioned previously, there is no class mechanism like ones in object oriented programming languages. There are, however, features in Javascript which make "simulating" object oriented [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) possible.
+As mentioned previously, there is no class mechanism like the ones in object-oriented programming languages. There are, however, features in Javascript which make "simulating" object-oriented [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) possible.
 
 Let's take a quick look at the <i>class syntax</i> that was introduced into Javascript along with ES6, which substantially simplifies the definition of classes (or class-like things) in Javascript.
 
@@ -508,11 +508,11 @@ const janja = new Person('Janja Garnbret', 22)
 janja.greet()
 ```
 
-When it comes to syntax, the classes and the objects created from them are very reminiscent of Java classes and objects. Their behavior is also quite similar to Java objects. At the core, they are still objects based on Javascript's [prototype inheritance](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance). The type of both objects is actually _Object_, since Javascript essentially only defines the types [Boolean, Null, Undefined, Number, String, Symbol and Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures).
+When it comes to syntax, the classes and the objects created from them are very reminiscent of Java classes and objects. Their behavior is also quite similar to Java objects. At the core, they are still objects based on Javascript's [prototype inheritance](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance). The type of both objects is actually _Object_, since Javascript essentially only defines the types [Boolean, Null, Undefined, Number, String, Symbol, and Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures).
 
 Introduction of the class syntax is a controversial addition, e.g. check out [Not Awesome: ES6 Classes](https://github.com/joshburgess/not-awesome-es6-classes) or [Is “Class” In ES6 The New “Bad” Part?](https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65)
 
-The ES6 class syntax is used a lot in the "old" React and in Node.js, and therefore understanding it is beneficial even on this course. Because we are using the new [hook](https://reactjs.org/docs/hooks-intro.html) feature of React during this course we have no need to use the class syntax of Javascript.
+The ES6 class syntax is used a lot in the "old" React and in Node.js, an understanding of it is beneficial even in this course. But because we are using the new [hook](https://reactjs.org/docs/hooks-intro.html) feature of React throughout this course, we have no need to actually use the class syntax of Javascript.
 
 ### Javascript materials
 
