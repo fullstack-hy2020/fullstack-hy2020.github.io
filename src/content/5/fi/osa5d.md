@@ -126,34 +126,34 @@ Lomakkeiden käsittely on Reactissa jokseenkin vaivalloista. Seuraavassa sovellu
 const App = () => {
   const [name, setName] = useState('')
   const [born, setBorn] = useState('')
-  const [length, setLength] = useState('')
+  const [height, setHeight] = useState('')
 
   return (
     <div>
       <form>
-        nimi: 
+        name: 
         <input
           type='text'
           value={name}
           onChange={(event) => setName(event.target.value)} 
         /> 
         <br/> 
-        syntymäaika:
+        birthdate:
         <input
           type='date'
           value={born}
           onChange={(event) => setBorn(event.target.value)}
         />
         <br /> 
-        pituus:
+        height:
         <input
           type='number'
-          value={length}
-          onChange={(event) => setLength(event.target.value)}
+          value={height}
+          onChange={(event) => setheight(event.target.value)}
         />
       </form>
       <div>
-        {name} {born} {length} 
+        {name} {born} {height} 
       </div>
     </div>
   )
@@ -220,7 +220,7 @@ Eli kuten Reactin dokumentaation [esimerkki](https://reactjs.org/docs/jsx-in-dep
 
 const person = {
   firstName: 'Arto',
-  lastName: 'Hella'
+  lastName: 'Hellas'
 }
 
 <Greeting {...person} />
@@ -232,22 +232,22 @@ Sovellus pelkistyy muotoon
 const App = () => {
   const name = useField('text')
   const born = useField('date')
-  const length = useField('number')
+  const height = useField('number')
 
   return (
     <div>
       <form>
-        nimi: 
+        name: 
         <input  {...name} /> 
         <br/> 
-        syntymäaika:
+        birthdate:
         <input {...born} />
         <br /> 
-        pituus:
-        <input {...length} />
+        height:
+        <input {...height} />
       </form>
       <div>
-        {name.value} {born.value} {length.value}
+        {name.value} {born.value} {height.value}
       </div>
     </div>
   )
@@ -269,8 +269,27 @@ Kuten [osassa 1](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot)  
 - Call Hooks from React function components.
 - Call Hooks from custom Hooks
 
-On olemassa [ESlint](https://www.npmjs.com/package/eslint-plugin-react-hooks)-sääntö, jonka avulla voidaa varmistaa, että sovellus käyttää hookeja oikein. Valitettavasti sääntöä ei voi vielä tässä vaiheessa (29.1.2019) käyttää create-react-app:issa sovelluksissa.
+On olemassa [ESlint](https://www.npmjs.com/package/eslint-plugin-react-hooks)-sääntö, jonka avulla voidaa varmistaa, että sovellus käyttää hookeja oikein. 
 
+Kun sääntö [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks) on asennettu, se saadaan käyttöön muuttamalla tiedostoa _.eslintrc.js_ seuraavasti:
+
+```js
+module.exports = {
+  // ...
+  "plugins": [
+    // ...
+    "react-hooks" // highlight-line
+  ],
+  "rules": {
+    "react-hooks/rules-of-hooks": "error", // highlight-line
+    // ...
+  }
+}; 
+```
+
+Lint valittaa nyt jos hookeja käytetään kielletyllä tavalla:
+
+![](../../images/5/24e.png)
 ### Lisää hookeista
 
 Internetistä alkaa löytyä yhä enenevissä määrin hyödyllistä hookeihin liittyvä materiaalia, esim. seuraavia kannattaa vilkaista

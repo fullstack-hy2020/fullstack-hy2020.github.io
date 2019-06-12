@@ -550,7 +550,7 @@ window.localStorage.clear()
 ```
 
 
-Current application code can be found from [github](https://github.com/fullstack-hy2019/part2-notes/tree/part5-3), branch <i>part5-3</i>.
+Current application code can be found from [github](https://github.com/fullstackopen-2019/part2-notes/tree/part5-3), branch <i>part5-3</i>.
 
 </div>
 

@@ -248,7 +248,7 @@ Tapahtumankäsittelijä tyhjentää myös syötekenttää kontrolloivan tilan <e
 setNewNote('')
 ```
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part2-notes/tree/part2-2), branchissä <i>part2-2</i>.
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/part2-notes/tree/part2-2), branchissä <i>part2-2</i>.
 
 ### Näytettävien elementtien filtteröinti
 
@@ -375,7 +375,7 @@ Napin teksti riippuu tilan <em>showAll</em> arvosta:
 show {showAll ? 'important' : 'all' }
 ```
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part2-notes/tree/part2-3), branchissa <i>part2-3</i>.
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/part2-notes/tree/part2-3), branchissa <i>part2-3</i>.
 
 </div>
 

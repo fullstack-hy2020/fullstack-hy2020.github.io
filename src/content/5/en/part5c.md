@@ -829,7 +829,7 @@ If you have React version 16.8.6 (the most recent at the time of writing 11th Ju
 
 As described [here](https://github.com/facebook/react/issues/14769), the warning can be ignored. It is caused by an issue that shall be fixed in React version 16.9.0 that should be released in June/July. 
 
-Error can be silenced by adding following code to file <i>src/setupTests.js</i>
+Warning can be silenced by adding the following code to file <i>src/setupTests.js</i>
 
 ```js
 const originalError = console.error

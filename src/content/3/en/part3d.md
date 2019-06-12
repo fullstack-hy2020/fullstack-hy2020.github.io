@@ -458,7 +458,7 @@ If there is something wrong in your configuration file, the lint plugin can beha
 Many companies define coding standards that are enforced throughout the organization through the ESlint configuration file. It is not recommended to keep reinventing the wheel over and over again, and it can be a good idea to adopt a ready-made configuration from someone else's project into yours. Recently many projects have adopted the AirBnB [Javascript style guide](https://github.com/airbnb/javascript) by taking AirBnB's [ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) configuration into use.
 
 
-You can find the code for our current application in its entirety in the <i>part3-6</i> branch of [this github repository](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-6).
+You can find the code for our current application in its entirety in the <i>part3-6</i> branch of [this github repository](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part3-6).
 </div>
 
 <div class="tasks">

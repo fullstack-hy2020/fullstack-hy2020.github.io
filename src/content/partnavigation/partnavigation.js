@@ -87,12 +87,10 @@ module.exports = {
       d: 'Token authentication'
     },
     '5': {
-      /*
       a: 'Login in frontend',
       b: 'props.children and proptypes',
       c: 'Testing React apps',
       d: 'Custom hooks'
-      */
     },
     '6': {
       /*

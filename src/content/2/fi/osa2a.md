@@ -532,9 +532,9 @@ ReactDOM.render(
 
 Moduuleilla on paljon muutakin käyttöä kuin mahdollistaa komponenttien määritteleminen omissa tiedostoissaan, palaamme moduuleihin tarkemmin myöhemmin kurssilla.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part2-notes/tree/part2-1)
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/part2-notes/tree/part2-1)
 
-Huomaa, että repositorion master-haarassa on myöhemmän vaiheen koodi, tämän hetken koodi on branchissa [part2-1](https://github.com/fullstack-hy2019/part2-notes/tree/part2-1):
+Huomaa, että repositorion master-haarassa on myöhemmän vaiheen koodi, tämän hetken koodi on branchissa [part2-1](https://github.com/fullstackopen-2019/part2-notes/tree/part2-1):
 
 ![](../../images/2/2b.png)
 
