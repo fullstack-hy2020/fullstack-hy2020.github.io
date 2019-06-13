@@ -407,7 +407,7 @@ promise fulfilled
 render 3 notes
 </pre>
 
-First the body of the function defining the component is executed, and the component is rendered for the first time. At this point <i>render 0 notes</i> is printed, meaning data hasn't yet been fetched from the server.
+First the body of the function defining the component is executed and the component is rendered for the first time. At this point <i>render 0 notes</i> is printed, meaning data hasn't been fetched from the server yet.
 
 The effect, or function,
 ```js
