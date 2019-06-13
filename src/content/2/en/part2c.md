@@ -273,11 +273,11 @@ The documentation on Mozilla's site states the following about promises:
 
 > <i>A Promise is an object representing the eventual completion or failure of an asynchronous operation.</i>
 
-On other words a promise is an object that represents an asynchronous operation. A promise can have three distinct states:
+In other words, a promise is an object that represents an asynchronous operation. A promise can have three distinct states:
 
-- first, the promise is <i>pending</i>, meaning the respective asynchronous operation has not yet occurred
-- if the operation finishes successfully, then the promise will move its state to <i>fulfilled</i>, sometimes called <i>resolved</i>
-- a third possible state is <i>rejected</i>, which represents a failed operation
+1. The promise is <i>pending</i>: It means that the final value (one of the following two) is not available yet.
+2. The promise is <i>fullfilled</i>: It means that the operation has completed and the final value is available, which generally is a successful operation. This state is sometimes also called <i>resolved</i>.
+3. The promise is <i>rejected</i>: It means that an error prevented the final value from being determined, which generally represents a failed operation.
 
 The first promise in our example is <i>fulfilled</i>, representing a successful <em>axios.get('http://localhost:3001/notes')</em> request. The second one, however, is <i>rejected</i>, and the console will tell us the reason. It looks like we were trying to make a HTTP GET request to an address, which doesn't exist.
 
