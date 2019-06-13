@@ -11,7 +11,7 @@ For a while now we have only worked on the "frontend", aka the functionality in 
 
 Let's use a tool called [JSON Server](https://github.com/typicode/json-server), which is meant to be used during software development, to act as our server.
 
-Make a file <i>db.json</i> into the root directory of the project with the following content:
+Create a file named <i>db.json</i> in the root directory of the project with the following content:
 
 ```json
 {
