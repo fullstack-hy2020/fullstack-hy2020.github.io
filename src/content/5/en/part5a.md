@@ -8,13 +8,13 @@ lang: en
 <div class="content">
 
 
-Last two parts have mainly concentrated on the backend. The frontend does not yet support the user management we implemented to the backend in part 4.
+Last two parts we have mainly concentrated on the backend, and the frontend does not yet support the user management we implemented to the backend in part 4.
 
 
-At the moment the frontend shows existing notes, and lets user change the state of a note from important to not important and vice versa. New notes cannot be added anymore because of the changes made to the backend in part 4. The backend now expects that a token verifying users identity is sent with the new note. 
+At the moment the frontend shows existing notes, and lets user change the state of a note from important to not important and vice versa. New notes cannot be added anymore because of the changes made to the backend in part 4: the backend now expects that a token verifying users identity is sent with the new note. 
 
 
-We'll now implement a part of the required user management functionality to the frontend. Lets begin with user login. Throughout this part we will assume, that new users are not added from the frontend. 
+We'll now implement a part of the required user management functionality to the frontend. Lets begin with user login. Throughout this part we will assume that new users will not be added from the frontend. 
 
 
 A login form has now been added to the top of the page. The form for adding new notes has also been moved to the top of the list of notes. 
@@ -166,7 +166,7 @@ If the login is successfull, the form fields are emptied <i>and</i> the server r
 If the login fails, or running the function _loginService.login_ results in an error, the user is notified. 
 
 
-User is not notified about successful login in any way. Lets modify the application to show the login form only <i>if the user is not logged in</i> so _user === null_. The form for adding new notes is shown only if <i>user is logged in</i>, so <i>user</i> contains the user details. 
+User is not notified about a successful login in any way. Lets modify the application to show the login form only <i>if the user is not logged in</i> so _user === null_. The form for adding new notes is shown only if <i>user is logged in</i>, so <i>user</i> contains the user details. 
 
 
 Lets add two helper functions to the <i>App</i> component for generating the forms: 
@@ -257,7 +257,7 @@ const App = () => {
 
 ```
 
-A slightly weird looking, but commonly used [React trick](https://reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator) is used to render the forms conditionally: 
+A slightly odd looking, but commonly used [React trick](https://reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator) is used to render the forms conditionally: 
 
 ```js
 {
@@ -296,7 +296,7 @@ return (
 If _user === null_ is [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), _loginForm()_ is executed. If not, _noteForm()_.
 
 
-Lets do one more modification. If user is logged in, their name is rendered: 
+Lets do one more modification. If user is logged in, their name is shown on the screen: 
 
 ```js
 return (
@@ -327,7 +327,7 @@ return (
 The solution looks a bit ugly, but well leave it for now. 
 
 
-Our main component <i>App</i> is at the moment way too large. The changes we did now are a clear sign that the forms should be refactored into their own components. However we will leave that for an noncomplusory excercise. 
+Our main component <i>App</i> is at the moment way too large. The changes we did now are a clear sign that the forms should be refactored into their own components. However we will leave that for an optional excercise. 
 
 
 Current application code can be found from [github](https://github.com/fullstackopen-2019/part2-notes/tree/part5-2), branch <i>part5-2</i>.
@@ -353,10 +353,10 @@ const handleLogin = async (event) => {
 }
 ```
 
-Lets fix creating new notes to work with the backend. This means adding the token of logged in user to the Authorization-header of the HTTP-request. 
+Lets fix creating new notes to work with the backend. This means adding the token of the logged in user to the Authorization-header of the HTTP-request. 
 
 
-The <i>noteService</i>-module changes as follows: 
+The <i>noteService</i>-module changes like so: 
 
 ```js
 import axios from 'axios'
@@ -453,7 +453,7 @@ and [removeItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/remove
 Values in the storage stay even when the page is rerendered. The storage is [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin)- specific, so each web-application has it's own storage. 
 
 
-Lets extend our application so it saves the user details of a logged in user to the local storage. 
+Lets extend our application so that it saves the user details of a logged in user to the local storage. 
 
 
 Values saved to the storage are [DOMstrings](https://developer.mozilla.org/en-US/docs/Web/API/DOMString), so we cannot save a JavaScript object as is. The object has to be first parsed to JSON with the method _JSON.stringify_. Correspondigly when a JSON-object is read from the local storage, it has to be parsed back to JavaScript with _JSON.parse_.
@@ -490,10 +490,10 @@ The details of a logged in user are now saved to the local storage, and they can
 ![](../../images/5/3e.png)
 
 
-We still have to modify our application so, that when we enter the page, the application checks if user details of a logged in user can already be found from the local storage. If they can, the details are saved to the state of the application and to <i>noteServicelle</i>.
+We still have to modify our application so, that when we enter the page, the application checks if user details of a logged in user can already be found from the local storage. If they can, the details are saved to the state of the application and to <i>noteService</i>.
 
 
-The right place to do this is an [effect hook](https://reactjs.org/docs/hooks-effect.html). A mechanism we first encountered in [part 2](/en/part2/getting_data_from_server#effect-hooks), and use to fetch notes from the server to the frontend. 
+The right place to do this is an [effect hook](https://reactjs.org/docs/hooks-effect.html):  A mechanism we first encountered in [part 2](/en/part2/getting_data_from_server#effect-hooks), and use to fetch notes from the server to the frontend. 
 
 
 We can have multiple effect hooks, so lets create a second one to handle the first loading of the page:
@@ -534,7 +534,7 @@ const App = () => {
 The empty array as the parameter of the effect ensures, that the effect is executed only then the component is rendered [for the first time](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect).
 
 
-Now a user stays logged in to the application forever. We should propably add <i>logout</i> functionality which removes the login details from the local storage. We will however leave it to the exercises. 
+Now a user stays logged in to the application forever. We should propably add <i>logout</i> functionality which removes the login details from the local storage. We will however leave it for a exercise. 
 
 
 Its possible to log out using the console, and that is enough for us. 
@@ -559,7 +559,7 @@ Current application code can be found from [github](https://github.com/fullstack
 ### Exercises
 
 
-We will now create a frontend for the bloglist-backend we created in last part. You can use [this application](https://github.com/fullstackopen-2019/bloglist-frontend) from GitHub as the base of your solution. The application expects your backend to be running on port 3003. 
+We will now create a frontend for the bloglist-backend we created in the last part. You can use [this application](https://github.com/fullstackopen-2019/bloglist-frontend) from GitHub as the base of your solution. The application expects your backend to be running on port 3003. 
 
 It is enough to submit your finished solution. You can do a commit after each exercise, but that is not necessary. 
 
@@ -575,7 +575,7 @@ While doing the exercises, remember all of the debugging methods we have talked 
 #### 5.1: bloglist frontend, step1
 
 
-Clone the application from [Github](https://github.com/fullstackopen-2019/bloglist-frontend with the command: 
+Clone the application from [Github](https://github.com/fullstackopen-2019/bloglist-frontend) with the command: 
 
 ```bash
 git clone https://github.com/fullstackopen-2019/bloglist-frontend
@@ -646,7 +646,7 @@ Make the login 'permanent' by using the local storage. Implement also a way to l
 
 ![](../../images/5/6e.png)
 
-The browser does not remember the details of the user after logging out. 
+Ensure the browser does not remember the details of the user after logging out. 
 
 #### 5.3: bloglist frontend, step3
 
@@ -671,6 +671,6 @@ Failed login can show the following notification:
 ![](../../images/5/9e.png)
 
 
-The notifications muse be visible for a few seconds. It is not compulsory to add colors. 
+The notifications must be visible for a few seconds. It is not compulsory to add colors. 
 
 </div>
