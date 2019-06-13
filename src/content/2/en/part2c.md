@@ -195,13 +195,13 @@ Axios is now included among the other dependencies:
 
 In addition to adding axios to the dependencies, the <em>npm install</em> command also  <i>downloaded</i> the library code. As with other dependencies, the code can be found in the <i>node_modules</i> directory located in the root. As one might have noticed, <i>node_modules</i> contains a fair bit of interesting stuff.
 
-Let's make another addition. Install <i>json-server</i> as a development dependency, which is only used during development, by providing the command
+Let's make another addition. Install <i>json-server</i> as a development dependency, which is only used during development, by executing the command:
 
 ```js
 npm install json-server --save-dev
 ```
 
-and making a small addition to the <i>scripts</i> part of the <i>package.json</i> file
+and making a small addition to the <i>scripts</i> part of the <i>package.json</i> file:
 
 ```json
 {
