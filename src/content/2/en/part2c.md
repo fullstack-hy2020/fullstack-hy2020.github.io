@@ -435,7 +435,7 @@ When data arrives from the server, the JavaScript runtime calls the function reg
 
 As usual, the call to a function updating state triggers the re-rendering of the component. As a result, <i>render 3 notes</i> is printed to the console and the notes fetched from the server are rendered to the screen.
 
-Finally, let's take a look at the definition of the effect hook as a whole
+Finally, let's take a look at the definition of the effect hook as a whole:
 
 ```js
 useEffect(() => {
