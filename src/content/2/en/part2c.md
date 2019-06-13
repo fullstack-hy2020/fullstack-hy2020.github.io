@@ -251,7 +251,7 @@ The library can be brought into use like other libraries, e.g. React, are brough
 
 
 
-Add the following to the file <i>index.js</i>
+Add the following to the file <i>index.js</i>:
 
 ```js
 import axios from 'axios'
