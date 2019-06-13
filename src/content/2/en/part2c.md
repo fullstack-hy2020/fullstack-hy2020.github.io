@@ -492,7 +492,7 @@ useEffect(() => {
 }, [])
 ```
 
-The variable <em>eventHandler</em> has been assigned reference to a event handler function. The promise returned by the <em>get</em> method of Axios is stored into the variable <em>promise</em>. The registration of the callback happens by giving <em>eventHandler</em>, referring to the event handler function, as a parameter to the then method of the promise. It isn't usually necessary to assign functions and promises to variables and a more compact way of representing things, which we saw further above, is enough.
+A reference to an event handler function is assigned to the variable <em>eventHandler</em>. The promise returned by the <em>get</em> method of Axios is stored in the variable <em>promise</em>. The registration of the callback happens by giving the <em>eventHandler</em> variable, referring to the event handler function, as a parameter to the then method of the promise. It isn't usually necessary to assign functions and promises to variables and a more compact way of representing things, which we saw further above, is enough.
 
 ```js
 useEffect(() => {
