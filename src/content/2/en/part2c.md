@@ -307,7 +307,7 @@ axios.get('http://localhost:3001/notes').then(response => {
 
 
 
-The callback function now takes the data contained within the response, saves it to a variable and print the notes to the console.
+The callback function now takes the data contained within the response, saves it to a variable and prints the notes to the console.
 
 
 
