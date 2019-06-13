@@ -224,7 +224,7 @@ npm run server
 
 We will get more familiar with the _npm_ tool in the [third part of the course](/en/part3).
 
-NB the previously started json-server must be terminated before staring a new one, otherwise there will be trouble
+**NB** The previously started json-server must be terminated before starting a new one, otherwise there will be trouble:
 
 ![](../../images/2/15b.png)
 
@@ -232,7 +232,7 @@ The red print in the error message informs us about the issue:
 
 <i>Cannot bind to the port 3001. Please specify another port number either through --port argument or through the json-server.json configuration file</i> 
 
-as we can see the application is not able to bind itself to the [port](https://en.wikipedia.org/wiki/Port_(computer_networking)). The reason being that port 3001 is already occupied by the previously started json-server.
+As we can see, the application is not able to bind itself to the [port](https://en.wikipedia.org/wiki/Port_(computer_networking)). The reason being that port 3001 is already occupied by the previously started json-server.
 
 We used the command _npm install_ twice, but with slight differences
 
