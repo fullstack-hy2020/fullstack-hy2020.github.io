@@ -56,7 +56,7 @@ If your browser doesn't have a way to format the display of JSON-data, then inst
 
 The idea, going forward, is to save the notes to the server, which in this case means saving to json-server. The React code fetches the notes from the server and renders them to the screen. When a new note is added to the application the React code also sends it to the server to make the new note persistent in "memory".
 
-json-server stores all the data into the file <i>db.json</i>, which resides on the server. In the real world data will be stored into some kind of database. However, json-server is a handy tool, which facilitates the usage of server side functionality in the development phase without needing to program anything.
+json-server stores all the data in the <i>db.json</i> file, which resides on the server. In the real world data would be stored in some kind of database. However, json-server is a handy tool, which facilitates the usage of server-side functionality in the development phase without the need to program anything.
 
 We will get familiar with the principles of implementing server side functionality in more detail in [part 3](/en/part3) of this course.
 
