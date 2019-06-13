@@ -290,11 +290,11 @@ promise.then(response => {
   console.log(response)
 })
 ```
-The following is printed to the console
+The following is printed to the console:
 
 ![](../../images/2/17e.png)
 
-The Javascript runtime environment calls the callback function registered by the <em>then</em> method providing it with a <em>result</em> object as a parameter. The <em>result</em> object contains all the essential data related to the response of a HTTP GET request, which would include the returned <i>data</i>, <i>status code</i> and <i>headers</i>.
+The Javascript runtime environment calls the callback function registered by the <em>then</em> method providing it with a <em>result</em> object as a parameter. The <em>result</em> object contains all the essential data related to the response of an HTTP GET request, which would include the returned <i>data</i>, <i>status code</i>, and <i>headers</i>.
 
 Rarely does one need to save the promise object to a variable, and it is common to chain the <em>then</em> method call right after the axios method call:
 
