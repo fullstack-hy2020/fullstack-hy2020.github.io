@@ -868,7 +868,7 @@ app.post('/notes', (request, response) => {
 We need a unique id for the note. First, we find out the largest id number in the current list and assign it to the _maxId_ variable. The id of the new note is then defined as _maxId + 1_. This method is in fact not recommended, but we will live with it for now as we will replace it soon enough.
 
 
-The current version still has the problem that the HTTP POST request can be used to add objects with arbitrary properties. Let's improve the application by defining that the <i>concept</i> property may not be empty. The <i>important</i> and <i>date</i> properties will be given default values. All other properties are discarded:
+The current version still has the problem that the HTTP POST request can be used to add objects with arbitrary properties. Let's improve the application by defining that the <i>content</i> property may not be empty. The <i>important</i> and <i>date</i> properties will be given default values. All other properties are discarded:
 
 ```js
 const generateId = () => {
@@ -915,7 +915,7 @@ if (!body.content) {
 ```
 
 
-Notice that calling return is crucial, because other the code will execute to the very end and the malformed note gets saved to the application.
+Notice that calling return is crucial, because otherwise the code will execute to the very end and the malformed note gets saved to the application.
 
 
 If the content property has a value, the note will be based on the received data. As mentioned previously, it is better to generate timestamps on the server than in the browser, since we can't trust that host machine running the browser has its clock set correctly. The generation of the <i>date</i> property is now done by the server.
