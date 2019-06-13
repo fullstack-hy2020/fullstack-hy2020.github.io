@@ -64,7 +64,7 @@ We will get familiar with the principles of implementing server side functionali
 
 Our first task is fetching the already existing notes to our React application from the address <http://localhost:3001/notes>.
 
-In the the [example project](/en/part0/fundamentals_of_web_apps#running-application-logic-on-the-browser) from part 0 we already encountered a way to data from a server using Javascript. The code in the example was fetching the data using [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), otherwise known as a HTTP request made using a XHR object. This is a technique launched in the year 1999, which every browser has supported for a good while.
+In the [example project](/en/part0/fundamentals_of_web_apps#running-application-logic-on-the-browser) from part 0 we already learned a way to fetch data from a server using JavaScript. The code in the example was fetching the data using [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), otherwise known as an HTTP request made using an XHR object. This is a technique launched in 1999, that every browser supports for a good while now.
 
 Nowadays it is not recommended to use XHR and browsers already widely support the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) method, which is based on so-called [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), instead of the event driven model used by XHR.
 
