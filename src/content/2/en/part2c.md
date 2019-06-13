@@ -105,7 +105,7 @@ In Java the code executes line by line and stops to wait for the HTTP request, w
 
 On the other hand, JavaScript engines, or runtime environments, follow the [asynchronous model](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop), behind which is a principle that requires all [IO-operations](https://en.wikipedia.org/wiki/Input/output) (with some exceptions) to be executed as non-blocking. This means that the code execution continues immediately after calling an IO function, without waiting for it to return.
 
-When operations are completed, or more specifically at some point after completion, the Javascript engine calls the event handlers registered to the operation.
+When an asynchronous operation is completed, or more specifically at some point after its completion, the JavaScript engine calls the event handlers registered to the operation.
 
 Currently Javascript engines are <i>single threaded</i>, meaning they cannot execute code in parallel. Due to this fact, it is practically a requirement to use a non-blocking model for executing IO operations. Otherwise the browser would "freeze" for the duration of e.g. fetching data from a server.
 
