@@ -464,7 +464,7 @@ const hook = () => {
 useEffect(hook, [])
 ```
 
-Now we can more clearly see that the function [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect) is actually given <i>two parameters</i>. The first is a function, the <i>effect</i> itself. According to the documentation
+Now we can more clearly see that the function [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect) actually takes <i>two parameters</i>. The first is a function, the <i>effect</i> itself. According to the documentation:
 
 > <i>By default, effects run after every completed render, but you can choose to fire it only when certain values have changed.</i>
 
