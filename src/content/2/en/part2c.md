@@ -170,7 +170,7 @@ Nowadays, practically all JavaScript projects are defined using the node package
 
 At this point the <i>dependencies</i> part is most interesting to us, because it defines what <i>dependencies</i>, or external libraries, the project has.
 
-Now we want to use axios. We define the library directly into the file <i>package.json</i>, but it is better to install it from the command line.
+Now we want to use axios. Theoretically, we could define the library directly in the <i>package.json</i> file, but it is better to install it from the command line.
 
 ```js
 npm install axios --save
