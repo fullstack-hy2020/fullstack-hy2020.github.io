@@ -353,7 +353,7 @@ However, it is not immediately obvious where among the component's code the comm
 
 ### Effect-hooks
 
-We have already used [state hooks](https://reactjs.org/docs/hooks-state.html), that were introduced along with React version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), provide state to React components defined as functions. Version 16.8.0 also introduces the [effect hooks](https://reactjs.org/docs/hooks-effect.html) as a new. In the words of the docs
+We have already used [state hooks](https://reactjs.org/docs/hooks-state.html), that were introduced along with React version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), providing state to React components defined as functions. Version 16.8.0 also introduces the [effect hooks](https://reactjs.org/docs/hooks-effect.html) as a new feature. In the words of the docs:
 
 > <i>The Effect Hook lets you perform side effects in function components.</i>
 > <i>Data fetching, setting up a subscription, and manually changing the DOM in React components are all examples of side effects. </i>
