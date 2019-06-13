@@ -324,7 +324,7 @@ axios
 
 this way a quick glance at the left side of the screen gives a decent picture of what's going on.
 
-The data returned by the server is plaint text, basically just one long string. The axios library is still able to parse the data into a Javascript array, since the server has specified that the data format is <i>application/json; charset=utf-8</i> (see previous image) using the <i>content-type</i> header.
+The data returned by the server is plain text, basically just one long string. The axios library is still able to parse the data into a Javascript array, since the server has specified that the data format is <i>application/json; charset=utf-8</i> (see previous image) using the <i>content-type</i> header.
 
 Finally we can begin using data fetched from the server.
 
