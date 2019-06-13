@@ -501,7 +501,7 @@ class Person {
   }
 }
 
-const arto = new Person('Adam Ondra', 35)
+const adam = new Person('Adam Ondra', 35)
 adam.greet()
 
 const janja = new Person('Janja Garnbret', 22)
