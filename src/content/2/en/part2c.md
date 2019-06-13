@@ -234,7 +234,7 @@ The red print in the error message informs us about the issue:
 
 As we can see, the application is not able to bind itself to the [port](https://en.wikipedia.org/wiki/Port_(computer_networking)). The reason being that port 3001 is already occupied by the previously started json-server.
 
-We used the command _npm install_ twice, but with slight differences
+We used the command _npm install_ twice, but with slight differences:
 
 ```js
 npm install axios --save
