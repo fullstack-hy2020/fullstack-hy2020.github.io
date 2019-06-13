@@ -68,7 +68,7 @@ In the [example project](/en/part0/fundamentals_of_web_apps#running-application-
 
 Nowadays it is not recommended to use XHR and browsers already widely support the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) method, which is based on so-called [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), instead of the event driven model used by XHR.
 
-The following is a refresh of how data was fetched using XHR, mentioned in part 0 (which one should actually <i>remember to not use</i> without a good reason)
+The following is a refresher of how data was fetched using XHR, mentioned in part 0 (which one should actually <i>remember to not use</i> without a good reason)
 
 ```js
 const xhttp = new XMLHttpRequest()
