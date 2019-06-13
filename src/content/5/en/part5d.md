@@ -481,7 +481,7 @@ We notice that the code is in no way specific to the fact that our application d
 Extract the code for communicating with the backend into its own _useResource_ hook. It is sufficient to implement fetching all resources and creating a new resource.
 
 
-You can do the exercise for the project found in the https://github.com/fullstack-hy2019/custom-hooks repository. The <i>App</i> component for the project is the following:
+You can do the exercise for the project found in the https://github.com/fullstackopen-2019/custom-hooks repository. The <i>App</i> component for the project is the following:
 
 ```js
 const App = () => {
@@ -529,6 +529,6 @@ The _useResource_ custom hook returns an array of two items just like the state 
 
 If you implement the hook correctly, it can be used for both notes and phone numbers (start the server with the _npm run server_ command at the port 3005).
 
-![](../../images/5/21.png)
+![](../../images/5/21e.png)
 
 </div>

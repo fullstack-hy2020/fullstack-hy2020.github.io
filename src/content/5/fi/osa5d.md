@@ -290,6 +290,7 @@ module.exports = {
 Lint valittaa nyt jos hookeja käytetään kielletyllä tavalla:
 
 ![](../../images/5/24e.png)
+
 ### Lisää hookeista
 
 Internetistä alkaa löytyä yhä enenevissä määrin hyödyllistä hookeihin liittyvä materiaalia, esim. seuraavia kannattaa vilkaista
@@ -434,7 +435,7 @@ Huomaamme, että koodi ei itseasiassa välitä ollenkaan siitä että se käsitt
 
 Eristä kommunikoiva koodi hookiksi _useResource_. Riittää, että kaikkien olioiden haku ja uuden olion luominen onnistuvat.
 
-Voit tehdä tehtävän repositoriosta https://github.com/fullstack-hy2019/custom-hooks löytyvään projektiin. Projektin komponentti <i>App</i> on seuraavassa:
+Voit tehdä tehtävän repositoriosta https://github.com/fullstackopen-2019/custom-hooks löytyvään projektiin. Projektin komponentti <i>App</i> on seuraavassa:
 
 ```js
 const App = () => {
@@ -480,6 +481,6 @@ Custom hook _useResource_ siis palauttaa (tilahookien tapaan) kaksialkioisen tau
 
 Jos toteutit hookin oikein, mahdollistaa sovellus blogien ja puhelinnumeroiden yhtäaikaisen käsittelyn (käynnistä backend porttiin 3005 komennolla _npm run server_)
 
-![](../../images/5/21.png)
+![](../../images/5/21e.png)
 
 </div>

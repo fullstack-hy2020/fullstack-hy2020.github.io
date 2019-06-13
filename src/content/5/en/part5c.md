@@ -675,7 +675,7 @@ const localStorageMock = {
   clear: savedItems = {}
 }
 
-window.localStorage = localStorageMock
+Object.defineProperty(window, 'localStorage', { value: localStorageMock })
 ```
 
 

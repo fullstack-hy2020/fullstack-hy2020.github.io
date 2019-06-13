@@ -273,7 +273,7 @@ ja määritellään lomakkeen näyttävä koodi komponentin <i>Togglable</i> sis
 </Togglable>
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part2-notes/tree/part5-4), branchissa <i>part5-4</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/part2-notes/tree/part5-4), branchissa <i>part5-4</i>.
 
 ### ref eli viite komponenttiin
 
@@ -382,7 +382,7 @@ Käyttämämme kikka komponentin tilan muuttamikseksi toimii, mutta se vaikuttaa
 
 Refeille on myös [muita käyttötarkoituksia](https://reactjs.org/docs/refs-and-the-dom.html) kuin React-komponentteihin käsiksi pääseminen.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part2-notes/tree/part5-5), branchissa <i>part5-5</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/part2-notes/tree/part5-5), branchissa <i>part5-5</i>.
 
 ### Huomio komponenteista
 
@@ -699,7 +699,7 @@ Tehdään lintausta varten npm-skripti:
 }
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part2-notes/tree/part5-6, branchissa <i>part5-6</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/part2-notes/tree/part5-6, branchissa <i>part5-6</i>.
 
 </div>
 
