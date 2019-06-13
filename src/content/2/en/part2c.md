@@ -46,7 +46,7 @@ However, a global installation is not necessary, since we can run the <i>json-se
 npx json-server --port=3001 --watch db.json
 ```
 
-By default <i>json-server</i> starts running on port 3000, but because projects created using create-react-app reserve port 3000 we must define an alternate port, e.g. 3001, for json-server.
+By default <i>json-server</i> starts running on port 3000, but because projects created using create-react-app reserve port 3000, we must define an alternate port, like 3001, for json-server.
 
 In the browser let's navigate to the address <http://localhost:3001/notes>. We can see that <i>json-server</i> serves the notes we previously wrote to the file in the JSON format:
 
