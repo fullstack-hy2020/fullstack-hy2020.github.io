@@ -88,7 +88,7 @@ Right at the beginning we register an <i>event handler</i> to the <em>xhttp</em>
 
 It is notable that the code in the event handler is defined before the request is sent to the server. Despite this the code within the event handler will be executed at a later point in time. Therefore, the code does not execute synchronously "from top to bottom", but does so <i>asynchronously</i>. JavaScript calls the event handler that was registered for the request at some point.
 
-The way of doing requests synchronously, familiar from e.g. Java programming, would play out as follows (NB this is not actually working Java code):
+The way of doing requests synchronously, familiar from Java programming, for example, would play out as follows (NB this is not actually working Java code):
 
 ```java
 HTTPRequest request = new HTTPRequest();
