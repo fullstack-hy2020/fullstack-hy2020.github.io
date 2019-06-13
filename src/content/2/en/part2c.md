@@ -409,7 +409,7 @@ render 3 notes
 
 First the body of the function defining the component is executed and the component is rendered for the first time. At this point <i>render 0 notes</i> is printed, meaning data hasn't been fetched from the server yet.
 
-The effect, or function,
+The following function, or effect in React parlance:
 ```js
 () => {
   console.log('effect')
@@ -422,7 +422,7 @@ The effect, or function,
 }
 ```
 
-is executed immediately after rendering. The execution of the function results in <i>effect</i> being printed to the console, and the command <em>axios.get</em> initiating the fetching of data from the server as well as registering a function as an <i>event handler</i> for the operation
+is executed immediately after rendering. The execution of the function results in <i>effect</i> being printed to the console, and the command <em>axios.get</em> initiates the fetching of data from the server as well as registers the following function as an <i>event handler</i> for the operation:
 
 ```js
 response => {
