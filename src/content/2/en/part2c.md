@@ -107,7 +107,7 @@ On the other hand, JavaScript engines, or runtime environments, follow the [asyn
 
 When an asynchronous operation is completed, or more specifically at some point after its completion, the JavaScript engine calls the event handlers registered to the operation.
 
-Currently Javascript engines are <i>single threaded</i>, meaning they cannot execute code in parallel. Due to this fact, it is practically a requirement to use a non-blocking model for executing IO operations. Otherwise the browser would "freeze" for the duration of e.g. fetching data from a server.
+Currently, JavaScript engines are <i>single-threaded</i>, which means that they cannot execute code in parallel. Due to this fact, it is practically a requirement to use a non-blocking model for executing IO operations. Otherwise, the browser would "freeze" for the duration of, let's say, fetching data from a server.
 
 Another consequence of the single threaded nature of Javascript engines is that if some code execution takes up a lot of time the browser will be stuck for the duration of the execution. If we add the following code at the top of our application:
 
