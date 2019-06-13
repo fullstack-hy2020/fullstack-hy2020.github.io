@@ -109,7 +109,7 @@ When an asynchronous operation is completed, or more specifically at some point 
 
 Currently, JavaScript engines are <i>single-threaded</i>, which means that they cannot execute code in parallel. Due to this fact, it is practically a requirement to use a non-blocking model for executing IO operations. Otherwise, the browser would "freeze" for the duration of, let's say, fetching data from a server.
 
-Another consequence of the single threaded nature of Javascript engines is that if some code execution takes up a lot of time the browser will be stuck for the duration of the execution. If we add the following code at the top of our application:
+Another consequence of the single threaded nature of Javascript engines is that if some code execution takes up a lot of time, the browser will be stuck for the duration of the execution. If we added the following code at the top of our application:
 
 ```js
 setTimeout(() => {
@@ -122,7 +122,7 @@ setTimeout(() => {
 }, 5000)
 ```
 
-Everything works normally for 5 seconds. When the function defined as the parameter for <em>setTimeout</em> is run the browser is stuck for the duration of the execution of the long loop. At least in Chrome, the browser tab cannot even be closed during the execution of the loop.
+everything would work normally for 5 seconds. But when the function defined as the parameter for <em>setTimeout</em> is run, the browser is stuck for the duration of the execution of the long loop. At least in Chrome, the browser tab cannot even be closed during the execution of the loop.
 
 For the browser to remain <i>responsive</i>, which would include continuously reacting to operations desired by the user in a timely manner, the code logic needs to be such that an individual computation cannot take too long.
 
