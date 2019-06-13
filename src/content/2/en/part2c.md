@@ -360,7 +360,7 @@ We have already used [state hooks](https://reactjs.org/docs/hooks-state.html), t
 
 Thereby effect hooks are precisely the right tool to use when fetching data from a server.
 
-Let's remove the fetching of data from <i>index.js</i>. There is no longer a need to pass data as props to the <i>App</i> component. So <i>index.js</i> gets simplified into
+Let's remove the fetching of data from <i>index.js</i>. There is no longer a need to pass data as props to the <i>App</i> component. So <i>index.js</i> gets simplified into:
 
 ```js
 ReactDOM.render(<App />, document.getElementById('root'))
