@@ -216,7 +216,7 @@ and making a small addition to the <i>scripts</i> part of the <i>package.json</i
 }
 ```
 
-We can now conveniently, without parameter definitions, start the json-server from the project root directory with the command
+We can now conveniently, without parameter definitions, start the json-server from the project root directory with the command:
 
 ```js
 npm run server
