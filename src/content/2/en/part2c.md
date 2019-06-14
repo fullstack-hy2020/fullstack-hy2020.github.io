@@ -534,7 +534,7 @@ At this point in development, all the parts of the application happen to reside 
 
 
 
-We continue developing the phonebook. Store the initial state of the application into the file <i>db.json</i>, which should be placed in the root of the project.
+We continue developing the phonebook. Store the initial state of the application in the file <i>db.json</i>, which should be placed in the root of the project.
 
 ```json
 {
@@ -566,7 +566,7 @@ We continue developing the phonebook. Store the initial state of the application
 Start json-server on port 3001 and make sure that the server returns the list of people by going to the address <http://localhost:3001/persons> in the browser.
 
 
-If you get the error message:
+If you receive the following error message:
 
 ```js
 events.js:182
