@@ -527,7 +527,7 @@ const App = (props) => {
 }
 ```
 
-The event hander is now a <i>function</i> that calls the _setToValue_ function with the appropriate parameter:
+The event handler is now a <i>function</i> that calls the _setToValue_ function with the appropriate parameter:
 
 ```js
 <button onClick={() => setToValue(counter + 1)}>
