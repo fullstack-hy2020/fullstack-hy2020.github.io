@@ -43,7 +43,7 @@ You can [install](https://github.com/typicode/json-server#install) JSON server g
 However, a global installation is not necessary, since we can run the <i>json-server</i> using the command _npx_:
 
 ```js
-npx json-server --port=3001 --watch db.json
+npx json-server --port 3001 --watch db.json
 ```
 
 By default <i>json-server</i> starts running on port 3000, but because projects created using create-react-app reserve port 3000, we must define an alternate port, like 3001, for json-server.
