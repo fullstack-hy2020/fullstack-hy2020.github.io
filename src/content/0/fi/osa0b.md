@@ -267,7 +267,7 @@ xhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
     // koodi, joka käsittelee palvelimen vastauksen
   }
-)
+}
 ```
 
 Tapahtumankäsittelijöihin liittyvä mekanismi koodin suorittamiseen on JavaScriptissä erittäin yleistä. Tapahtumankäsittelijöinä olevia JavaScript-funktioita kutsutaan [callback](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function)- eli takaisinkutsu-funktioiksi, sillä sovelluksen koodi ei kutsu niitä itse, vaan suoritusympäristö. Web-selain suorittaa funktion kutsumisen sopivana ajankohtana, eli kyseisen <i>tapahtuman</i> tapahduttua.
