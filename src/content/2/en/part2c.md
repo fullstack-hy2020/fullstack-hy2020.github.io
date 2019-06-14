@@ -11,7 +11,7 @@ For a while now we have only worked on the "frontend", aka the functionality in 
 
 Let's use a tool called [JSON Server](https://github.com/typicode/json-server), which is meant to be used during software development, to act as our server.
 
-Make a file <i>db.json</i> into the root directory of the project with the following content:
+Create a file named <i>db.json</i> in the root directory of the project with the following content:
 
 ```json
 {
@@ -38,7 +38,7 @@ Make a file <i>db.json</i> into the root directory of the project with the follo
 }
 ```
 
-You can [install](https://github.com/typicode/json-server#install) JSON server so-called globally on your machine using the command _npm install -g json-server_. A global installation requires administrative privileges, which means it is not possible on the faculty computers or freshman laptops.
+You can [install](https://github.com/typicode/json-server#install) JSON server globally on your machine using the command _npm install -g json-server_. A global installation requires administrative privileges, which means it is not possible on the faculty computers or freshman laptops.
 
 However, a global installation is not necessary, since we can run the <i>json-server</i> using the command _npx_:
 
@@ -46,7 +46,7 @@ However, a global installation is not necessary, since we can run the <i>json-se
 npx json-server --port=3001 --watch db.json
 ```
 
-By default <i>json-server</i> starts running on port 3000, but because projects created using create-react-app reserve port 3000 we must define an alternate port, e.g. 3001, for json-server.
+By default <i>json-server</i> starts running on port 3000, but because projects created using create-react-app reserve port 3000, we must define an alternate port, like 3001, for json-server.
 
 In the browser let's navigate to the address <http://localhost:3001/notes>. We can see that <i>json-server</i> serves the notes we previously wrote to the file in the JSON format:
 
@@ -56,7 +56,7 @@ If your browser doesn't have a way to format the display of JSON-data, then inst
 
 The idea, going forward, is to save the notes to the server, which in this case means saving to json-server. The React code fetches the notes from the server and renders them to the screen. When a new note is added to the application the React code also sends it to the server to make the new note persistent in "memory".
 
-json-server stores all the data into the file <i>db.json</i>, which resides on the server. In the real world data will be stored into some kind of database. However, json-server is a handy tool, which facilitates the usage of server side functionality in the development phase without needing to program anything.
+json-server stores all the data in the <i>db.json</i> file, which resides on the server. In the real world data would be stored in some kind of database. However, json-server is a handy tool, which facilitates the usage of server-side functionality in the development phase without the need to program anything.
 
 We will get familiar with the principles of implementing server side functionality in more detail in [part 3](/en/part3) of this course.
 
@@ -64,11 +64,11 @@ We will get familiar with the principles of implementing server side functionali
 
 Our first task is fetching the already existing notes to our React application from the address <http://localhost:3001/notes>.
 
-In the the [example project](/en/part0/fundamentals_of_web_apps#running-application-logic-on-the-browser) from part 0 we already encountered a way to data from a server using Javascript. The code in the example was fetching the data using [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), otherwise known as a HTTP request made using a XHR object. This is a technique launched in the year 1999, which every browser has supported for a good while.
+In the [example project](/en/part0/fundamentals_of_web_apps#running-application-logic-on-the-browser) from part 0 we already learned a way to fetch data from a server using JavaScript. The code in the example was fetching the data using [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), otherwise known as an HTTP request made using an XHR object. This is a technique launched in 1999, that every browser supports for a good while now.
 
-Nowadays it is not recommended to use XHR and browsers already widely support the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) method, which is based on so-called [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), instead of the event driven model used by XHR.
+Nowadays, it is not recommended to use XHR and browsers already widely support the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) method, which is based on so-called [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), instead of the event driven model used by XHR.
 
-The following is a refresh of how data was fetched using XHR, mentioned in part 0 (which one should actually <i>remember to not use</i> without a good reason)
+The following is a refresher of how data was fetched using XHR, mentioned in part 0 (which one should actually <i>remember to not use</i> without a good reason)
 
 ```js
 const xhttp = new XMLHttpRequest()
@@ -84,11 +84,11 @@ xhttp.open('GET', '/data.json', true)
 xhttp.send()
 ```
 
-Right at the beginning we register an <i>event handler</i> to the <em>xhttp</em> object, which represents the HTTP request, and will be called by the Javascript runtime when the state of the <em>xhttp</em> object changes. If the change in state means that the response to the request has arrived, then the data is handled accordingly.
+Right at the beginning we register an <i>event handler</i> to the <em>xhttp</em> object, which represents the HTTP request, and will be called by the JavaScript runtime when the state of the <em>xhttp</em> object changes. If the change in state means that the response to the request has arrived, then the data is handled accordingly.
 
-It is notable that the code in the event handler is defined before the request is sent to the server. Despite this the code within the event handler will be executed at a later point in time. Therefore the code does not execute synchronously "from top to bottom", but does so <i>asynchronously</i>. Javascript calls the event handler that was registered for the request at some point.
+It is notable that the code in the event handler is defined before the request is sent to the server. Despite this the code within the event handler will be executed at a later point in time. Therefore, the code does not execute synchronously "from top to bottom", but does so <i>asynchronously</i>. JavaScript calls the event handler that was registered for the request at some point.
 
-The way of doing requests synchronously, familiar from e.g. Java programming, would play out as follows (NB this is not actually working Java code):
+The way of doing requests synchronously, familiar from Java programming, for example, would play out as follows (NB this is not actually working Java code):
 
 ```java
 HTTPRequest request = new HTTPRequest();
@@ -101,15 +101,15 @@ notes.forEach(m => {
 });
 ```
 
-In Java the code executes line by line and stops to wait for the HTTP request, which means waiting for the command _request.get(...)_ to finish. The data returned by the command, the notes, are then stored in a variable and we start manipulation the data in the as we want.
+In Java the code executes line by line and stops to wait for the HTTP request, which means waiting for the command _request.get(...)_ to finish. The data returned by the command, the notes, are then stored in a variable and we start manipulating the data as we want.
 
-On the other hand Javascript engines, or runtime environments, follow the [asynchronous model](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop), behind which is a principle, according to which all [IO-operations](https://en.wikipedia.org/wiki/Input/output) (with some exceptions) are executed as non-blocking, meaning not waiting and immediately resuming code execution.
+On the other hand, JavaScript engines, or runtime environments, follow the [asynchronous model](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop), behind which is a principle that requires all [IO-operations](https://en.wikipedia.org/wiki/Input/output) (with some exceptions) to be executed as non-blocking. This means that the code execution continues immediately after calling an IO function, without waiting for it to return.
 
-When operations are completed, or more specifically at some point after completion, the Javascript engine calls the event handlers registered to the operation.
+When an asynchronous operation is completed, or more specifically at some point after its completion, the JavaScript engine calls the event handlers registered to the operation.
 
-Currently Javascript engines are <i>single threaded</i>, meaning they cannot execute code in parallel. Due to this fact, it is practically a requirement to use a non-blocking model for executing IO operations. Otherwise the browser would "freeze" for the duration of e.g. fetching data from a server.
+Currently, JavaScript engines are <i>single-threaded</i>, which means that they cannot execute code in parallel. Due to this fact, it is practically a requirement to use a non-blocking model for executing IO operations. Otherwise, the browser would "freeze" for the duration of, let's say, fetching data from a server.
 
-Another consequence of the single threaded nature of Javascript engines is that if some code execution takes up a lot of time the browser will be stuck for the duration of the execution. If we add the following code at the top of our application:
+Another consequence of the single threaded nature of Javascript engines is that if some code execution takes up a lot of time, the browser will be stuck for the duration of the execution. If we added the following code at the top of our application:
 
 ```js
 setTimeout(() => {
@@ -122,13 +122,13 @@ setTimeout(() => {
 }, 5000)
 ```
 
-Everything works normally for 5 seconds. When the function defined as the parameter for <em>setTimeout</em> is run the browser is stuck for the duration of the execution of the long loop. At least in Chrome, the browser tab cannot even be closed during the execution of the loop.
+everything would work normally for 5 seconds. But when the function defined as the parameter for <em>setTimeout</em> is run, the browser is stuck for the duration of the execution of the long loop. At least in Chrome, the browser tab cannot even be closed during the execution of the loop.
 
 For the browser to remain <i>responsive</i>, which would include continuously reacting to operations desired by the user in a timely manner, the code logic needs to be such that an individual computation cannot take too long.
 
 There is a bunch of extra material about this topic on the internet. One particularly clear presentation of the topic is the keynote by Philip Roberts called [What the heck is the event loop anyway?](https://www.youtube.com/watch?v=8aGhZQkoFbQ)
 
-In today's browsers it is possible to run parallelized code with the help of so-called [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers). The event loop of an individual browser window is, however, still only handled by a [single thread](https://medium.com/techtrument/multithreading-javascript-46156179cf9a).
+In today's browsers, it is possible to run parallelized code with the help of so-called [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers). The event loop of an individual browser window is, however, still only handled by a [single thread](https://medium.com/techtrument/multithreading-javascript-46156179cf9a).
 
 ### npm
 
@@ -138,7 +138,7 @@ We could use the previously mentioned promise based function [fetch](https://dev
 
 Having said that, for the communication between the browser and server we will instead be using the [axios](https://github.com/axios/axios) library, which functions like fetch, but is a bit more pleasant to use. Another good reason for the use of axios is us getting familiar with adding external libraries, so-called <i>npm packages</i>, to React projects.
 
-Nowadays practically all Javascript projects are defined using the node package manager, aka [npm](https://docs.npmjs.com/getting-started/what-is-npm). The projects created using create-react-app also follow the npm format. A strong sign that a project uses npm is the file <i>package.json</i> at the root of the project:
+Nowadays, practically all JavaScript projects are defined using the node package manager, aka [npm](https://docs.npmjs.com/getting-started/what-is-npm). The projects created using create-react-app also follow the npm format. A strong sign that a project uses npm is the file <i>package.json</i> at the root of the project:
 
 ```json
 {
@@ -170,7 +170,7 @@ Nowadays practically all Javascript projects are defined using the node package 
 
 At this point the <i>dependencies</i> part is most interesting to us, because it defines what <i>dependencies</i>, or external libraries, the project has.
 
-Now we want to use axios. We define the library directly into the file <i>package.json</i>, but it is better to install it from the command line.
+Now we want to use axios. Theoretically, we could define the library directly in the <i>package.json</i> file, but it is better to install it from the command line.
 
 ```js
 npm install axios --save
@@ -193,15 +193,15 @@ Axios is now included among the other dependencies:
 }
 ```
 
-In addition to adding axios to the dependencies, the <em>npm install</em> command also  <i>downloaded</i> the library code. As with other dependencies the code can be found in the <i>node_modules</i> directory located in the root. As one might notice, <i>node_modules</i> contains a fair bit of interesting stuff.
+In addition to adding axios to the dependencies, the <em>npm install</em> command also  <i>downloaded</i> the library code. As with other dependencies, the code can be found in the <i>node_modules</i> directory located in the root. As one might have noticed, <i>node_modules</i> contains a fair bit of interesting stuff.
 
-Let's make another addition. Install <i>json-server</i> as a development dependency, which is only used during development, by providing the command
+Let's make another addition. Install <i>json-server</i> as a development dependency, which is only used during development, by executing the command:
 
 ```js
 npm install json-server --save-dev
 ```
 
-and making a small addition to the <i>scripts</i> part of the <i>package.json</i> file
+and making a small addition to the <i>scripts</i> part of the <i>package.json</i> file:
 
 ```json
 {
@@ -216,7 +216,7 @@ and making a small addition to the <i>scripts</i> part of the <i>package.json</i
 }
 ```
 
-We can now conveniently, without parameter definitions, start the json-server from the project root directory with the command
+We can now conveniently, without parameter definitions, start the json-server from the project root directory with the command:
 
 ```js
 npm run server
@@ -224,7 +224,7 @@ npm run server
 
 We will get more familiar with the _npm_ tool in the [third part of the course](/en/part3).
 
-NB the previously started json-server must be terminated before staring a new one, otherwise there will be trouble
+**NB** The previously started json-server must be terminated before starting a new one, otherwise there will be trouble:
 
 ![](../../images/2/15b.png)
 
@@ -232,16 +232,16 @@ The red print in the error message informs us about the issue:
 
 <i>Cannot bind to the port 3001. Please specify another port number either through --port argument or through the json-server.json configuration file</i> 
 
-as we can see the application is not able to bind itself to the [port](https://en.wikipedia.org/wiki/Port_(computer_networking)). The reason being that port 3001 is already occupied by the previously started json-server.
+As we can see, the application is not able to bind itself to the [port](https://en.wikipedia.org/wiki/Port_(computer_networking)). The reason being that port 3001 is already occupied by the previously started json-server.
 
-We used the command _npm install_ twice, but with slight differences
+We used the command _npm install_ twice, but with slight differences:
 
 ```js
 npm install axios --save
 npm install json-server --save-dev
 ```
 
-There is a fine difference in the parameters. <i>axios</i> is installed as a runtime dependency (_--save_) of the application, because the execution of the program requires the existence of the library. On the other hand <i>json-server</i> was installed as a development dependency (_--save-dev_), since the program itself doesn't require it. It is used as assistance during software development. There will be more on different dependencies in the next part of the course.
+There is a fine difference in the parameters. <i>axios</i> is installed as a runtime dependency (_--save_) of the application, because the execution of the program requires the existence of the library. On the other hand, <i>json-server</i> was installed as a development dependency (_--save-dev_), since the program itself doesn't require it. It is used for assistance during software development. There will be more on different dependencies in the next part of the course.
 
 ### Axios and promises
 
@@ -251,7 +251,7 @@ The library can be brought into use like other libraries, e.g. React, are brough
 
 
 
-Add the following to the file <i>index.js</i>
+Add the following to the file <i>index.js</i>:
 
 ```js
 import axios from 'axios'
@@ -273,13 +273,13 @@ The documentation on Mozilla's site states the following about promises:
 
 > <i>A Promise is an object representing the eventual completion or failure of an asynchronous operation.</i>
 
-On other words a promise is an object that represents an asynchronous operation. A promise can have three distinct states:
+In other words, a promise is an object that represents an asynchronous operation. A promise can have three distinct states:
 
-- first, the promise is <i>pending</i>, meaning the respective asynchronous operation has not yet occurred
-- if the operation finishes successfully, then the promise will move its state to <i>fulfilled</i>, sometimes called <i>resolved</i>
-- a third possible state is <i>rejected</i>, which represents a failed operation
+1. The promise is <i>pending</i>: It means that the final value (one of the following two) is not available yet.
+2. The promise is <i>fullfilled</i>: It means that the operation has completed and the final value is available, which generally is a successful operation. This state is sometimes also called <i>resolved</i>.
+3. The promise is <i>rejected</i>: It means that an error prevented the final value from being determined, which generally represents a failed operation.
 
-The first promise in our example is <i>fulfilled</i>, representing a successful <em>axios.get('http://localhost:3001/notes')</em> request. The second one, however, is <i>rejected</i>, and the console will tell us the reason. It looks like we were trying to make a HTTP GET request to an address, which doesn't exist.
+The first promise in our example is <i>fulfilled</i>, representing a successful <em>axios.get('http://localhost:3001/notes')</em> request. The second one, however, is <i>rejected</i>, and the console tells us the reason. It looks like we were trying to make an HTTP GET request to an address, which didn't exist.
 
 If and when we want to access the result of the operation represented by the promise, we must register an event handler to the promise. This is achieved using the method <em>then</em>:
 
@@ -290,11 +290,11 @@ promise.then(response => {
   console.log(response)
 })
 ```
-The following is printed to the console
+The following is printed to the console:
 
 ![](../../images/2/17e.png)
 
-The Javascript runtime environment calls the callback function registered by the <em>then</em> method providing it with a <em>result</em> object as a parameter. The <em>result</em> object contains all the essential data related to the response of a HTTP GET request, which would include the returned <i>data</i>, <i>status code</i> and <i>headers</i>.
+The Javascript runtime environment calls the callback function registered by the <em>then</em> method providing it with a <em>result</em> object as a parameter. The <em>result</em> object contains all the essential data related to the response of an HTTP GET request, which would include the returned <i>data</i>, <i>status code</i>, and <i>headers</i>.
 
 Rarely does one need to save the promise object to a variable, and it is common to chain the <em>then</em> method call right after the axios method call:
 
@@ -307,7 +307,7 @@ axios.get('http://localhost:3001/notes').then(response => {
 
 
 
-The callback function now takes the data contained within the response, saves it to a variable and print the notes to the console.
+The callback function now takes the data contained within the response, saves it to a variable and prints the notes to the console.
 
 
 
@@ -324,7 +324,7 @@ axios
 
 this way a quick glance at the left side of the screen gives a decent picture of what's going on.
 
-The data returned by the server is plaint text, basically just one long string. The axios library is still able to parse the data into a Javascript array, since the server has specified that the data format is <i>application/json; charset=utf-8</i> (see previous image) using the <i>content-type</i> header.
+The data returned by the server is plain text, basically just one long string. The axios library is still able to parse the data into a Javascript array, since the server has specified that the data format is <i>application/json; charset=utf-8</i> (see previous image) using the <i>content-type</i> header.
 
 Finally we can begin using data fetched from the server.
 
@@ -353,14 +353,14 @@ However, it is not immediately obvious where among the component's code the comm
 
 ### Effect-hooks
 
-We have already used [state hooks](https://reactjs.org/docs/hooks-state.html), that were introduced along with React version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), provide state to React components defined as functions. Version 16.8.0 also introduces the [effect hooks](https://reactjs.org/docs/hooks-effect.html) as a new. In the words of the docs
+We have already used [state hooks](https://reactjs.org/docs/hooks-state.html), that were introduced along with React version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), providing state to React components defined as functions. Version 16.8.0 also introduces the [effect hooks](https://reactjs.org/docs/hooks-effect.html) as a new feature. In the words of the docs:
 
 > <i>The Effect Hook lets you perform side effects in function components.</i>
 > <i>Data fetching, setting up a subscription, and manually changing the DOM in React components are all examples of side effects. </i>
 
 Thereby effect hooks are precisely the right tool to use when fetching data from a server.
 
-Let's remove the fetching of data from <i>index.js</i>. There is no longer a need to pass data as props to the <i>App</i> component. So <i>index.js</i> gets simplified into
+Let's remove the fetching of data from <i>index.js</i>. There is no longer a need to pass data as props to the <i>App</i> component. So <i>index.js</i> gets simplified into:
 
 ```js
 ReactDOM.render(<App />, document.getElementById('root'))
@@ -407,9 +407,9 @@ promise fulfilled
 render 3 notes
 </pre>
 
-First the body of the function defining the component is executed, and the component is rendered for the first time. At this point <i>render 0 notes</i> is printed, meaning data hasn't yet been fetched from the server.
+First the body of the function defining the component is executed and the component is rendered for the first time. At this point <i>render 0 notes</i> is printed, meaning data hasn't been fetched from the server yet.
 
-The effect, or function,
+The following function, or effect in React parlance:
 ```js
 () => {
   console.log('effect')
@@ -422,7 +422,7 @@ The effect, or function,
 }
 ```
 
-is executed immediately after rendering. The execution of the function results in <i>effect</i> being printed to the console, and the command <em>axios.get</em> initiating the fetching of data from the server as well as registering a function as an <i>event handler</i> for the operation
+is executed immediately after rendering. The execution of the function results in <i>effect</i> being printed to the console, and the command <em>axios.get</em> initiates the fetching of data from the server as well as registers the following function as an <i>event handler</i> for the operation:
 
 ```js
 response => {
@@ -431,11 +431,11 @@ response => {
 })
 ```
 
-When data arrives from the server the Javascript runtime calls the function registered as the event handler, which prints <i>promise fulfilled</i> to the console and stores the notes received from the server into the state using the function <em>setNotes(response.data)</em>.
+When data arrives from the server, the JavaScript runtime calls the function registered as the event handler, which prints <i>promise fulfilled</i> to the console and stores the notes received from the server into the state using the function <em>setNotes(response.data)</em>.
 
-As usual, the call to a function updating state triggers the re-rendering of the component. As a result <i>render 3 notes</i> is printed to the console and the notes fetched from the server are rendered to the screen.
+As usual, the call to a function updating state triggers the re-rendering of the component. As a result, <i>render 3 notes</i> is printed to the console and the notes fetched from the server are rendered to the screen.
 
-Finally, let's take a look at the definition of the effect hook as a whole
+Finally, let's take a look at the definition of the effect hook as a whole:
 
 ```js
 useEffect(() => {
@@ -464,7 +464,7 @@ const hook = () => {
 useEffect(hook, [])
 ```
 
-Now we can more clearly see that the function [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect) is actually given <i>two parameters</i>. The first is a function, the <i>effect</i> itself. According to the documentation
+Now we can more clearly see that the function [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect) actually takes <i>two parameters</i>. The first is a function, the <i>effect</i> itself. According to the documentation:
 
 > <i>By default, effects run after every completed render, but you can choose to fire it only when certain values have changed.</i>
 
@@ -492,7 +492,7 @@ useEffect(() => {
 }, [])
 ```
 
-The variable <em>eventHandler</em> has been assigned reference to a event handler function. The promise returned by the <em>get</em> method of Axios is stored into the variable <em>promise</em>. The registration of the callback happens by giving <em>eventHandler</em>, referring to the event handler function, as a parameter to the then method of the promise. It isn't usually necessary to assign functions and promises to variables and a more compact way of representing things, which we saw further above, is enough.
+A reference to an event handler function is assigned to the variable <em>eventHandler</em>. The promise returned by the <em>get</em> method of Axios is stored in the variable <em>promise</em>. The registration of the callback happens by giving the <em>eventHandler</em> variable, referring to the event handler function, as a parameter to the then method of the promise. It isn't usually necessary to assign functions and promises to variables and a more compact way of representing things, which we saw further above, is enough.
 
 ```js
 useEffect(() => {
@@ -506,7 +506,7 @@ useEffect(() => {
 }, [])
 ```
 
-We still have a problem in our application. When adding new notes they are not stored on the server.
+We still have a problem in our application. When adding new notes, they are not stored on the server.
 
 The code so far for the application can be found in full on [github](https://github.com/fullstackopen-2019/part2-notes/tree/part2-4) in the branch <i>part2-4</i>.
 
@@ -516,7 +516,7 @@ The configuration for the whole of our application has steadily grown to be more
 
 ![](../../images/2/18e.png)
 
-The Javascript code making up our React application is run in the browser. The browser gets the Javascript from the <i>React dev server</i>, which is the application that runs after running the command <em>npm start</em>. The dev-server transforms the Javascript into a format understood by the browser. Among other things, it stitches together Javascript from different files into one file. We'll discuss the dev-server in more detail in part 7 of the course.
+The JavaScript code making up our React application is run in the browser. The browser gets the Javascript from the <i>React dev server</i>, which is the application that runs after running the command <em>npm start</em>. The dev-server transforms the JavaScript into a format understood by the browser. Among other things, it stitches together Javascript from different files into one file. We'll discuss the dev-server in more detail in part 7 of the course.
 
 The React application running in the browser fetches the JSON formatted data from <i>json-server</i> running on port 3001 on the machine. json-server gets its data from the file <i>db.json</i>.
 
