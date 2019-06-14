@@ -542,7 +542,7 @@ form.onsubmit = function(e) {
   var note = {
     content: e.target.elements[0].value,
     date: new Date(),
-  )
+  }
 
   notes.push(note)
   e.target.elements[0].value = ''
