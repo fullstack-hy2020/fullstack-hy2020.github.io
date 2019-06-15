@@ -977,7 +977,7 @@ const Notes = ({ store }) => {
         <Note
           key={note.id}
           note={note}
-          handleClick={() => 
+          onClick={() => 
             store.dispatch(toggleImportanceOf(note.id))
           }
         />

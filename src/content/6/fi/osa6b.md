@@ -239,7 +239,7 @@ const Notes = ({ store }) => {
         <Note
           key={note.id}
           note={note}
-          handleClick={() => store.dispatch(toggleImportanceOf(note.id))}
+          onClick={() => store.dispatch(toggleImportanceOf(note.id))}
         />
       )}
     </ul>
@@ -311,7 +311,7 @@ const Notes = ({ store }) => {
         <Note
           key={note.id}
           note={note}
-          handleClick={() => store.dispatch(toggleImportanceOf(note.id))}
+          onClick={() => store.dispatch(toggleImportanceOf(note.id))}
         />
       )}
     </ul>
@@ -546,7 +546,7 @@ const Notes = (props) => {  // highlight-line
         <Note
           key={note.id}
           note={note}
-          handleClick={() =>
+          onClick={() =>
             props.store.dispatch(toggleImportanceOf(note.id))
           }
         />
@@ -568,7 +568,7 @@ eli komponentin <i>Notes</i> sisältä on propsien <i>props.notes</i> ja <i>prop
 <Note
   key={note.id}
   note={note}
-  handleClick={() =>
+  onClick={() =>
     props.store.dispatch(toggleImportanceOf(note.id)) // highlight-line
   }
 />
@@ -605,7 +605,7 @@ Nyt komponentti voi dispatchata suoraan action creatorin _toggleImportanceOf_ m�
 <Note
   key={note.id}
   note={note}
-  handleClick={() => props.toggleImportanceOf(note.id)} // highlight-line
+  onClick={() => props.toggleImportanceOf(note.id)} // highlight-line
 />
 ```
 
@@ -656,7 +656,7 @@ const Notes = (props) => {
         <Note
           key={note.id}
           note={note}
-          handleClick={() => props.toggleImportanceOf(note.id)}
+          onClick={() => props.toggleImportanceOf(note.id)}
         />
       )}
     </ul>
@@ -904,7 +904,7 @@ const Notes = (props) => {
         <Note
           key={note.id}
           note={note}
-          handleClick={() => props.toggleImportanceOf(note.id)}
+          onClick={() => props.toggleImportanceOf(note.id)}
         />
       )}
     </ul>

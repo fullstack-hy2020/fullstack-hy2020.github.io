@@ -734,15 +734,15 @@ const App = (props) => {
       <Display counter={counter}/>
       // highlight-start
       <Button
-        handleClick={() => setToValue(counter + 1)}
+        onClick={() => setToValue(counter + 1)}
         text='plus'
       />
       <Button
-        handleClick={() => setToValue(counter - 1)}
+        onClick={() => setToValue(counter - 1)}
         text='minus'
       />
       <Button
-        handleClick={() => setToValue(0)}
+        onClick={() => setToValue(0)}
         text='zero'
       />
       // highlight-end
@@ -753,6 +753,6 @@ const App = (props) => {
 
 Koska meillä on nyt uudelleenkäytettävä nappi, sovellukselle on lisätty uutena toiminnallisuutena nappi, jolla laskurin arvoa voi vähentää.
 
-Tapahtumankäsittelijä välitetään napeille propsin _handleClick_ välityksellä. Propsin nimellä ei ole sinänsä merkitystä, mutta valinta ei ollut täysin sattumanvarainen, esim. Reactin [tutoriaali](https://reactjs.org/tutorial/tutorial.html) suosittelee tätä konventiota.
+Tapahtumankäsittelijä välitetään napeille propsin _onClick_ välityksellä. Propsin nimellä ei ole sinänsä merkitystä, mutta valinta ei ollut täysin sattumanvarainen, esim. Reactin [tutoriaali](https://reactjs.org/tutorial/tutorial.html) suosittelee tätä konventiota.
 
 </div>
