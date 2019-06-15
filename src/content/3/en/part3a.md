@@ -1060,7 +1060,7 @@ Respond to requests like these with the appropriate status code, and also send b
 
 ### About HTTP request types
 
-[The HTTP standard](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) talks about two propesties related to request types, **safety** and **idempotence**.
+[The HTTP standard](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) talks about two properties related to request types, **safety** and **idempotence**.
 
 The HTTP GET request should be <i>safe</i>:
 
