@@ -702,7 +702,7 @@ Next, let's make a <i>Button</i> component for the buttons of our application. W
 
 ```js
 const Button = (props) => (
-  <button onClick={props.handleClick}>
+  <button onClick={props.onClick}>
     {props.text}
   </button>
 )
@@ -711,8 +711,8 @@ const Button = (props) => (
 and let's utilize destructuring again to unpack and assign the needed properties from the props object to variables:
 
 ```js
-const Button = ({ handleClick, text }) => (
-  <button onClick={handleClick}>
+const Button = ({ onClick, text }) => (
+  <button onClick={onClick}>
     {text}
   </button>
 )
@@ -731,15 +731,15 @@ const App = (props) => {
       <Display counter={counter}/>
       // highlight-start
       <Button
-        handleClick={() => setToValue(counter + 1)}
+        onClick={() => setToValue(counter + 1)}
         text='plus'
       />
       <Button
-        handleClick={() => setToValue(counter - 1)}
+        onClick={() => setToValue(counter - 1)}
         text='minus'
       />
       <Button
-        handleClick={() => setToValue(0)}
+        onClick={() => setToValue(0)}
         text='zero'
       />
       // highlight-end
@@ -750,5 +750,5 @@ const App = (props) => {
 
 Since we now have an easily reusable <i>Button</i> component, we've also implemented new functionality into our application by adding a button that can be used to decrement the counter.
 
-The event handler is passed to the <i>Button</i> component through the _handleClick_ prop. The name of the prop itself is not that significant, but our naming choice wasn't completely random, e.g. React's own official [tutorial](https://reactjs.org/tutorial/tutorial.html) suggests this convention.
+The event handler is passed to the <i>Button</i> component through the _onClick_ prop. The name of the prop itself is not that significant, but our naming choice wasn't completely random, e.g. React's own official [tutorial](https://reactjs.org/tutorial/tutorial.html) suggests this convention.
 </div>
