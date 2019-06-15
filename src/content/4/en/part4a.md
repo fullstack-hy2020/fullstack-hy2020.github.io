@@ -638,7 +638,7 @@ There's a few things to notice about the tests that we just wrote. We defined a 
 
 ```js
 describe('average', () => {
-  // testit
+  // tests
 })
 ```
 
