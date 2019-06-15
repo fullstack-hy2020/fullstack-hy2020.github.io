@@ -357,7 +357,7 @@ const rows = () => notes.map(note =>
 
 This still is an arrow function with only one statement, the statement just happens to be a bit more complicated. 
 
-### Antipattern: arrow indexes as keys
+### Antipattern: array indexes as keys
 
 We could have made the error message on our console dissappear by using the array indexes as keys. The indexes can be retrieved by giving a second parameter to the map-method: 
 
