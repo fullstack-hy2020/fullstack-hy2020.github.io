@@ -568,7 +568,7 @@ Jos propsia ei määritellä, seurauksena on konsoliin tulostuva virheilmoitus
 
 ![](../../images/5/15.png)
 
-Koodi kuitenkin toimii edelleen, eli mikään ei pakota määrittelemään propseja PropTypes-määrittelyistä huolimatta. On kuitenkin erittäin epäprofessionaalia jättää konsoliin <i>mitään</i> punaisia tulosteita.
+Koodi kuitenkin toimii edelleen, eli mikään ei pakota määrittelemään propseja PropTypes-määrittelyistä huolimatta. On kuitenkin erittäin epäammattimaista jättää konsoliin <i>mitään</i> punaisia tulosteita.
 
 Määritellään Proptypet myös <i>LoginForm</i>-komponentille:
 
