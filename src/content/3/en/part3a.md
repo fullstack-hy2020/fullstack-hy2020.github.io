@@ -1163,7 +1163,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 Add the [morgan](https://github.com/expressjs/morgan) middleware to your application for logging. Configure it to log messages to your console based on the <i>tiny</i> configuration.
 
-The documentation for Morgan is not the best, and you may have to some time figuring out how to configure it correctly. However, most documentation in the world falls under the same category, so it's good to learn to decipher and interpret cryptic documentation in any case.
+The documentation for Morgan is not the best, and you may have to spend some time figuring out how to configure it correctly. However, most documentation in the world falls under the same category, so it's good to learn to decipher and interpret cryptic documentation in any case.
 
 
 Morgan is installed just like all other libraries with the _npm install_ command. Taking morgan into use happens the same as configuring any other middle by using the _app.use_ command.
