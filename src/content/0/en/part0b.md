@@ -33,7 +33,7 @@ Ensure that the <i>Network</i> tab is open, and activate <i>Disable cache</i> as
 
 ### HTTP GET
 
-The server and the web browser communicate with each other using the [HTTP](https://developer.mozilla.org/fi/docs/Web/HTTP) protocol. The Network tab shows how the browser and the server communicate.
+The server and the web browser communicate with each other using the [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP) protocol. The Network tab shows how the browser and the server communicate.
 
 When you reload the page (press the F5 key or the &#8634; symbol on your browser), the console shows that two events have happened:
 
