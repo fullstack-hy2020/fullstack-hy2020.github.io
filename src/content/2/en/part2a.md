@@ -627,7 +627,7 @@ const Course = ({ course }) => {
 }
 ```
 
-Very often the root of the problem is, that the props are expected to be different type or called different than they actually are, and desctructuring fails. The problem often begins to solve itself when desctructuring is removed and we see what the <em>props</em> actually contains. 
+Very often, the root of the problem is that the props are expected to be of a different type, or called with a different name than they actually are, and desctructuring fails. The problem often begins to solve itself when desctructuring is removed and we see what the <em>props</em> actually contains. 
 
 ```js
 const Course = (props) => { // highlight-line
