@@ -71,7 +71,7 @@ If functional programming with arrays feels foreign, it is worth watching at lea
 ### Event handlers revisited
 
 Based on last year's course, event handling has proven to be difficult. 
-It's worth reading the revision chapter at the end of the previous part [event handlers revisited](/en/part1/a_more_complex_state_debugging_react_apps#event-handling-revisited) if it feels like your own knowledge on the topic needs some brusing up. 
+It's worth reading the revision chapter at the end of the previous part [event handlers revisited](/en/part1/a_more_complex_state_debugging_react_apps#event-handling-revisited) if it feels like your own knowledge on the topic needs some brushing up. 
 
 Passing event handlers to the child components of the <i>App</i> component has raised some questions. A small revision on the topic can be found [here](/en/part1/a_more_complex_state_debugging_react_apps#passing-event-handlers-to-child-components).
 
