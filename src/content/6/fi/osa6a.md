@@ -253,7 +253,7 @@ const store = createStore(noteReducer)
 store.dispatch({
   type: 'NEW_NOTE',
   data: {
-    content: 'sovelluksen tila talletetaan storeen',
+    content: 'the app state is in redux store',
     important: true,
     id: 1
   }
@@ -262,7 +262,7 @@ store.dispatch({
 store.dispatch({
   type: 'NEW_NOTE',
   data: {
-    content: 'tilanmuutokset tehdään actioneilla',
+    content: 'state changes are made with actions',
     important: false,
     id: 2
   }
@@ -274,7 +274,7 @@ const App = () => {
       <ul>
         {store.getState().map(note=>
           <li key={note.id}>
-            {note.content} <strong>{note.important ? 'tärkeä' : ''}</strong>
+            {note.content} <strong>{note.important ? 'important' : ''}</strong>
           </li>
         )}
         </ul>
@@ -291,7 +291,7 @@ Actioneissa on nyt tyypin lisäksi kenttä <i>data</i>, joka sisältää lisätt
 {
   type: 'NEW_NOTE',
   data: {
-    content: 'tilanmuutokset tehdään actioneilla',
+    content: 'state changes are made with actions',
     important: false,
     id: 2
   }
@@ -319,7 +319,7 @@ Sovellus näyttää toimivan, mutta määrittelemämme reduceri on huono, se rik
 
 Puhtaat funktiot ovat sellaisia, että ne <i>eivät aiheuta mitään sivuvaikutuksia</i> ja niiden tulee aina palauttaa sama vastaus samoilla parametreilla kutsuttaessa.
 
-Lisäsimme tilaan uuden muistiinpanon metodilla <i>state.push(action.data)</i> joka <i>muuttaa</i> state-olion tilaa. Tämä ei ole sallittua. Ongelma korjautuu helposti käyttämällä metodia [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka luo <i>uuden taulukon</i>, jonka sisältönä on vanhan taulukon alkiot sekä lisättävä alkio:
+Lisäsimme tilaan uuden muistiinpanon metodilla _state.push(action.data)_  joka <i>muuttaa</i> state-olion tilaa. Tämä ei ole sallittua. Ongelma korjautuu helposti käyttämällä metodia [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka luo <i>uuden taulukon</i>, jonka sisältönä on vanhan taulukon alkiot sekä lisättävä alkio:
 
 ```js
 const noteReducer = (state = [], action) => {
@@ -364,7 +364,7 @@ describe('noteReducer', () => {
     const action = {
       type: 'NEW_NOTE',
       data: {
-        content: 'sovelluksen tila talletetaan storeen',
+        content: 'the app state is in redux store',
         important: true,
         id: 1
       }
@@ -389,12 +389,12 @@ Tehdään sitten testi actionin <i>TOGGLE\_IMPORTANCE</i> käsittelylle:
 test('returns new state with action TOGGLE_IMPORTANCE', () => {
   const state = [
     {
-      content: 'sovelluksen tila talletetaan storeen',
+      content: 'the app state is in redux store',
       important: true,
       id: 1
     },
     {
-      content: 'tilanmuutokset tehdään actioneilla',
+      content: 'state changes are made with actions',
       important: false,
       id: 2
     }]
@@ -414,7 +414,7 @@ test('returns new state with action TOGGLE_IMPORTANCE', () => {
   expect(newState).toContainEqual(state[0])
 
   expect(newState).toContainEqual({
-    content: 'tilanmuutokset tehdään actioneilla',
+    content: 'state changes are made with actions',
     important: true,
     id: 2
   })
@@ -683,7 +683,7 @@ const App = () => {
     <div>
       <form onSubmit={addNote}>
         <input name="note" /> 
-        <button type="submit">lisää</button>
+        <button type="submit">add</button>
       </form>
       <ul>
         {store.getState().map(note =>
@@ -691,7 +691,7 @@ const App = () => {
             key={note.id} 
             onClick={toggleImportance(note.id)}
           >
-            {note.content} <strong>{note.important ? 'tärkeä' : ''}</strong>
+            {note.content} <strong>{note.important ? 'important' : ''}</strong>
           </li>
         )}
       </ul>
@@ -728,7 +728,7 @@ Uuden muistiinpanon sisältö saadaan suoraan lomakkeen syötekentästä, johon 
 ```js
 <form onSubmit={addNote}>
   <input name="note" /> // highlight-line
-  <button type="submit">lisää</button>
+  <button type="submit">add</button>
 </form>
 ```
 
@@ -774,20 +774,18 @@ Actioneja luovia funktioita kutsutaan [action creatoreiksi](https://redux.js.org
 
 Komponentin <i>App</i> ei tarvitse enää tietää mitään actionien sisäisestä esitystavasta, se saa sopivan actionin kutsumalla creator-funktiota:
 
+
 ```js
 const App = () => {
   const addNote = (event) => {
     event.preventDefault()
-    store.dispatch(
-      createNote(event.target.note.value) // highlight-line
-    )
+    const content = event.target.note.value
+    store.dispatch(createNote(content)) // highlight-line
     event.target.note.value = ''
   }
   
   const toggleImportance = (id) => () => {
-    store.dispatch(
-      toggleImportanceOf(id) // highlight-line
-    )
+    store.dispatch(toggleImportanceOf(id))// highlight-line
   }
 
   // ...
@@ -854,7 +852,7 @@ const App = (props) => {
     <div>
       <form onSubmit={addNote}>
         <input name="note" />
-        <button type="submit">lisää</button>
+        <button type="submit">add</button>
       </form>
       <ul>
         {store.getState().map(note =>
@@ -862,7 +860,7 @@ const App = (props) => {
             key={note.id}
             onClick={() => toggleImportance(note.id)}
           >
-            {note.content} <strong>{note.important ? 'tärkeä' : ''}</strong>
+            {note.content} <strong>{note.important ? 'important' : ''}</strong>
           </li>
         )}
       </ul>
@@ -940,16 +938,17 @@ import { createNote } from '../reducers/noteReducer' // highlight-line
 const NewNote = (props) => {
   const addNote = (event) => {
     event.preventDefault()
-    props.store.dispatch(
-      createNote(event.target.note.value)
-    )
+    const content = event.target.note.value
     event.target.note.value = ''
+    props.store.dispatch(
+      createNote(content)
+    )
   }
 
   return (
     <form onSubmit={addNote}>
       <input name="note" />
-      <button type="submit">lisää</button>
+      <button type="submit">add</button>
     </form>
   )
 }
@@ -965,7 +964,7 @@ const Note = ({ note, handleClick }) => {
   return(
     <li onClick={handleClick}>
       {note.content} 
-      <strong>{note.important ? 'tärkeä' : ''}</strong>
+      <strong>{note.important ? 'important' : ''}</strong>
     </li>
   )
 }
