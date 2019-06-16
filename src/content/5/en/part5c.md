@@ -88,10 +88,10 @@ const component = render(
 Normally React components are rendered to the <i>DOM</i>. The render method we used renders the components in a format that is suitable for tests without rendering them to the DOM.
 
 
-_render_ returns an object that has several properties. One of the properties is called <i>container</i> and it contains all of the HTML rendered by the component.
+_render_ returns an object that has several properties. One of the properties is called <i>container</i>, and it contains all of the HTML rendered by the component.
 
 
-In the expectation we verify that the component renders the correct text, which in this case is the content of the note:
+In the expectation, we verify that the component renders the correct text, which in this case is the content of the note:
 
 ```js
 expect(component.container).toHaveTextContent(
@@ -103,7 +103,7 @@ expect(component.container).toHaveTextContent(
 ### Running tests
 
 
-Create-react-app configures the tests to be run in watch mode by default, which means that the _npm test_ command will not exit once the tests have finished, and will instead wait for changes to be made to the code. Once new changes to the code are saved, the tests are executed automatically after which Jest goes back to waiting for new changes to be made.
+Create-react-app configures tests to be run in watch mode by default, which means that the _npm test_ command will not exit once the tests have finished, and will instead wait for changes to be made to the code. Once new changes to the code are saved, the tests are executed automatically after which Jest goes back to waiting for new changes to be made.
 
 
 If you want to run tests "normally", you can do so with the command:
@@ -447,7 +447,7 @@ const button = component.container.querySelector('button')
 ```
 
 
-The component contains two buttons but since [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) returns the <i>first</i> matching button, we happen to get the button that we wanted.
+The component contains two buttons, but since [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) returns the <i>first</i> matching button, we happen to get the button that we wanted.
 
 
 Let's also add a test that can be used to verify that the visible content can be hidden by clicking the second button of the component:
@@ -544,7 +544,7 @@ Write tests for the <i>Blog</i> component of your application, that verify that 
 ### Testing forms
 
 
-In the previous tests we used the [fireEvent](https://testing-library.com/docs/api-events#fireevent) function for clicking buttons:
+In the previous tests, we used the [fireEvent](https://testing-library.com/docs/api-events#fireevent) function for clicking buttons:
 
 ```js
 const button = component.getByText('show...')
@@ -552,7 +552,7 @@ fireEvent.click(button)
 ```
 
 
-In practice we created used <i>fireEventin</i> to create a <i>click</i> event for the button component. We can also use <i>fireEvent</i>  to simulate filling in forms.
+In practice, we used <i>fireEvent</i> to create a <i>click</i> event for the button component. We can also use <i>fireEvent</i>  to simulate filling forms.
 
 
 Let's write a test for the <i>NoteForm</i> component. The code for the form looks like this:
@@ -579,7 +579,7 @@ const NoteForm = ({ onSubmit, handleChange, value }) => {
 The operating principle of the form is to synchronize the state of the input with the state of its parent React component. It is quite difficult to test the form on its own.
 
 
-For this reason we will create a helper <i>Wrapper</i> component that renders the <i>NoteForm</i> and manages its state with the <i>state</i> prop that it receives:
+For this reason, we will create a helper <i>Wrapper</i> component that renders the <i>NoteForm</i> and manages its state with the <i>state</i> prop that it receives:
 
 ```js
 const Wrapper = (props) => {
@@ -635,7 +635,7 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
 The test creates a <i>Wrapper</i> component that is passed an _onSubmit_ mock function and a <i>state</i> object for representing the state.
 
 
-The wrapper passes the function on to the <i>NoteForm</i> as its <i>onSubmit</i> event handler, and the the <i>value</i> property of the <i>state</i> prop as the value of the <i>input</i> element.
+The wrapper passes the function on to the <i>NoteForm</i> as its <i>onSubmit</i> event handler, and the <i>value</i> property of the <i>state</i> prop as the value of the <i>input</i> element.
 
 
 We simulate writing text into the <i>input</i> element by creating a <i>change</i> event for the input, and by defining a suitable object that defines the content we want to write.
@@ -644,16 +644,16 @@ We simulate writing text into the <i>input</i> element by creating a <i>change</
 The form is submitted by simulating a <i>submit</i> event for the form.
 
 
-The first expect of the test verifies that submitting the form results in a call to the event handler. The second expect inspects the <i>state</i> object that was passed to the <i>Wrapper</i> component, and verifies that the value that was written in the input is reflected in the state.
+The first expect of the test verifies that submitting the form results in a call to the event handler. The second expect inspects the <i>state</i> object that was passed to the <i>Wrapper</i> component, and verifies that the value written in the input has become part of the state.
 
 
 ### Frontend integration tests
 
 
-In the previous part of the course material, we wrote integration tests for the backend that tested its logic and connected database through the API provided by the backend. When writing these tests we made the conscious decision not to write unit tests, as the code for that backend is fairly simple, and it is likely that bugs in our application occur in more complicated scenarios that integration tests are well suited for.
+In the previous part of the course material, we wrote integration tests for the backend that tested its logic and connected database through the API provided by the backend. When writing these tests, we made the conscious decision not to write unit tests, as the code for that backend is fairly simple, and it is likely that bugs in our application occur in more complicated scenarios that integration tests are well suited for.
 
 
-So far all of our tests for the frontend have been unit tests that have validated the correct functioning of individual components. Unit testing is useful at times but even a comprehensive suite of unit tests is not enough to validate that the application works as a whole.
+So far all of our tests for the frontend have been unit tests that have validated the correct functioning of individual components. Unit testing is useful at times, but even a comprehensive suite of unit tests is not enough to validate that the application works as a whole.
 
 
 Next let's write a single integration test for the application. Writing integration tests is considerably more difficult than writing unit tests for individual components. There are two challenges specific to our application: the application fetches the notes from the backend <i>and</i> the application uses local storage for storing information about the user who is logged in.
@@ -698,7 +698,7 @@ const App = () => {
 ```
 
 
-The [manual mock](https://facebook.github.io/jest/docs/en/manual-mocks.html#content) concept from Jest provides us with a good solution. With manual mocks we can replace an entire module like _noteService_ with an alternative module that can mock the functionality of the module e.g. by returning hardcoded data. 
+The [manual mock](https://facebook.github.io/jest/docs/en/manual-mocks.html#content) concept from Jest provides us with a good solution. With manual mocks, we can replace an entire module like _noteService_ with an alternative module that can mock the functionality of the module e.g. by returning hardcoded data. 
 
 
 We follow the instructions provided by Jest and create a <i>\_\_mocks\_\_</i> subdirectory under the <i>src/services</i> directory, and inside the directory we create a new <i>notes.js</i> file that defines a <i>getAll</i> function that returns a hardcoded list of notes:
@@ -748,7 +748,7 @@ export default { getAll }
 ```
 
 
-The _getAll_ function returns a list of notes wrapped inside of a promise with the [Promise.resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve) method. This is done because our application expects a promise when it uses the method.
+The _getAll_ function returns a list of notes wrapped inside a promise with the [Promise.resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve) method. This is done because our application expects a promise when it uses the method.
 
 
 We are ready to write our test. Since this test deals with the entire application, we will write our test in a new <i>App.test.js</i> file:
@@ -799,7 +799,7 @@ await waitForElement(() => component.container.querySelector('.note'))
 ```
 
 
-After this we implement the actual expect validations for the test, by verifying that the application has three elements that contain the CSS classname <i>note</i>, and that the content of each note is rendered.
+Next, we implement the actual expect validations for the test. We do this by verifying that the application has three elements containing the CSS classname <i>note</i>, and that the content of each note is rendered.
 
 
 ### Test coverage
@@ -814,7 +814,7 @@ CI=true npm test -- --coverage
 ![](../../images/5/18.png)
 
 
-The result is a fairly primitive HTML report that gets generated inside of the <i>coverage/lcov-report</i> directory. The HTML report tells us the untested lines of code in a component:
+The result is a fairly primitive HTML report that is generated inside the <i>coverage/lcov-report</i> directory. The HTML report tells us the untested lines of code in a component:
 
 ![](../../images/5/19.png)
 
@@ -829,7 +829,7 @@ If you have React version 16.8.6 (the most recent at the time of writing 11th Ju
 
 As described [here](https://github.com/facebook/react/issues/14769), the warning can be ignored. It is caused by an issue that shall be fixed in React version 16.9.0 that should be released in June/July. 
 
-Warning can be silenced by adding the following code to file <i>src/setupTests.js</i>
+The warning can be silenced by adding the following code to <i>src/setupTests.js</i>
 
 ```js
 const originalError = console.error
@@ -861,7 +861,7 @@ You can find the code for our current application in its entirety in the <i>part
 #### 5.16*: Blog list tests, step4
 
 
-Write an integration test for your application that verifies that if the user is not logged into the application, the application only displays a login form and no blogs are rendered.
+Write an integration test for your application that verifies that if the user is not logged into the application, then the application only displays a login form and no blogs are rendered.
 
 
 The test can wait for the content of the component to render with the _waitForElement_ function.
@@ -893,7 +893,7 @@ describe('<App />', () => {
 ```
 
 
-**WARNING** when I was piloting this exercise, there was occasional instability related to _waitForElement_ or any other method intended for waiting for asynchronous operations to finish.
+**WARNING** when I was piloting this exercise, there were occasional instabilities related to _waitForElement_ or any other method intended for waiting for asynchronous operations to finish.
 
 
 #### 5.17*: Blog list tests, step5
@@ -934,21 +934,21 @@ The fundamental principle is to compare the HTML code defined by the component a
 If the snapshot notices some change in the HTML defined by the component, then either it is new functionality or a "bug" caused by the accident. Snapshot tests notify the developer if the HTML code of the component changes. The developer has to tell Jest if the change was desired or undesired. If the change to the HTML code is unexpected it strongly implicates a bug, and developer can become aware of these potential issues easily thanks to snapshot testing.
 
 
-### End to end tests
+### End-to-end tests
 
 
-We have written integration tests for testing the entire component for both the frontend and the backend. We have not yet taken a look at another important category of tests, that test [the entire system](https://en.wikipedia.org/wiki/System_testing) with "end to end" (E2E) tests.
+We have written integration tests for testing the entire component for both the frontend and the backend. We have not yet taken a look at another important category of tests, that test [the entire system](https://en.wikipedia.org/wiki/System_testing) with "end-to-end" (E2E) tests.
 
 
-The E2E testing of web applications happens by simulating a browser with a library like [Selenium](http://www.seleniumhq.org). Another alternative is to use a so-called [headless browseria](https://en.wikipedia.org/wiki/Headless_browser), that is a browser without a graphical user interface. It's even possible to use Chrome in Headless mode.
+The E2E testing of web applications happens by simulating a browser with a library like [Selenium](http://www.seleniumhq.org). Another alternative is to use a so-called [headless browser](https://en.wikipedia.org/wiki/Headless_browser), that is a browser without a graphical user interface. It's even possible to use Chrome in Headless mode.
 
 
-End to end tests have the potential to be the most valuable category of tests, as they inspect the application through the same interface as real end users.
+End-to-end tests have the potential to be the most valuable category of tests, as they inspect the application through the same interface as real end users.
 
 
 There are also challenging aspects related to E2E tests. Configuring them is a lot more challenging than configuring unit and integration tests. E2E tests also tend to be quite slow to run, and in a larger application their execution time can range from minutes up to hours. This is unfortunate for application development, as it is extremely useful to be able to run tests as often as possible in order to catch any possible regressions quickly.
 
 
-We will return to the topic of end to end testing in the final part of the course material.
+We will return to the topic of end-to-end testing in the final part of the course material.
 
 </div>
