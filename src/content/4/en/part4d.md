@@ -11,7 +11,7 @@ Users must be able to log into our application, and when a user is logged in, th
 
 We will now implement support for [token based authentication](https://scotch.io/tutorials/the-ins-and-outs-of-token-based-authentication#toc-how-token-based-works) to the backend. 
 
-The princibles of token based authentication are depicted in the following sequence diagram: 
+The principles of token based authentication are depicted in the following sequence diagram: 
 
 ![](../../images/4/16e.png)
 
@@ -70,7 +70,7 @@ module.exports = loginRouter
 ```
 
 The code starts by searching for the user from the database by the <i>username</i> attached to the request. 
-Next it checks the <i>password</i>, also attached to the request. 
+Next, it checks the <i>password</i>, also attached to the request. 
 Because the passwords themselves are not saved to the database, but <i>hashes</i> calculated from the passwords, _bcrypt.compare_ method is used to check if the password is correct: 
 
 ```js
@@ -94,7 +94,7 @@ The token has been digitally signed using a string from the environment variable
 Digital signature ensures, that only parties who know the secret can generate a valid token. 
 Value for the environment variable must be set in the <i>.env</i> file. 
 
-Successfull request is responded with the statuscode <i>200 ok</i>. The generated token and the username of the user are sent back in the response body. 
+Successful request is responded with the statuscode <i>200 OK</i>. The generated token and the username of the user are sent back in the response body. 
 
 Now the code for login just has to be added to the application by adding the new router to <i>app.js</i>. 
 
@@ -139,7 +139,7 @@ Identifying the schema tells the server how the attached credentials should be i
 
 The <i>Bearer</i>-schema is suitable for our needs. 
 
-In practice this means, that if the token is for example the string <i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i>, the Authorization header will have the value: 
+In practice this means, that if the token is, for example, the string <i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i>, the Authorization header will have the value: 
 
 <pre>
 Bearer eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW
@@ -214,9 +214,9 @@ if (!token || !decodedToken.id) {
 
 When the identity of the maker of the request is resolved, the execution continues as before. 
 
-A new note can now be created using postman if the <i>authorization</i> header is given the correct value, the string <i>bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ</i>, where the second value is the token returned by the <i>login</i> operation. 
+A new note can now be created using Postman if the <i>authorization</i> header is given the correct value, the string <i>bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ</i>, where the second value is the token returned by the <i>login</i> operation. 
 
-Using postman this looks as follows: 
+Using Postman this looks as follows: 
 
 ![](../../images/4/20e.png)
 
@@ -236,7 +236,7 @@ JsonWebTokenError: invalid signature
     at notesRouter.post (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/controllers/notes.js:40:30)
 ```
 
-There are many possible reasons for a decoding error. The token can be faulty (like in our example), falsified, or expired. Lets extend our errorhandlermiddleware to take into account the different decoding errors. 
+There are many possible reasons for a decoding error. The token can be faulty (like in our example), falsified, or expired. Lets extend our errorHandler middleware to take into account the different decoding errors. 
 
 ```js
 const unknownEndpoint = (request, response) => {
@@ -272,7 +272,7 @@ If the application has multiple interfaces requiring identification, JWTs valida
 
 There has been many changes to the code, which has caused a typical problem for a fast phased software project: most of the tests have broken. Because this part of the course is already jammed with new information, we will leave fixing the tests to a non compulsory exercise. 
 
-Usernames, passwords and applications using token authentication must always be used over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). We could use a Node [HTTPS](https://nodejs.org/api/https.html) server in our application instead of the [HTTP](https://nodejs.org/docs/latest-v8.x/api/http.html) server (it requires more configurations). In the other hand the production version of our application is in Heroku, so our applications stays secured because Heroku routes all traffic between a browser and the Heroku server over HTTPS. 
+Usernames, passwords and applications using token authentication must always be used over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). We could use a Node [HTTPS](https://nodejs.org/api/https.html) server in our application instead of the [HTTP](https://nodejs.org/docs/latest-v8.x/api/http.html) server (it requires more configurations). On the other hand, the production version of our application is in Heroku, so our applications stays secure: Heroku routes all traffic between a browser and the Heroku server over HTTPS. 
 
 We will implement login to the frontend in the [next part](/en/part5).
 
@@ -282,7 +282,7 @@ We will implement login to the frontend in the [next part](/en/part5).
 
 ### Exercises
 
-In the next exercises, basics of user management will be implemented for the Bloglist application. The safest way is to follow the story from part 4 chapter [User administration](/en/part4/user_administration) to the chapter [Token-based authentication](/en/part4/token_authentication). Creativity is of course allowed. 
+In the next exercises, basics of user management will be implemented for the Bloglist application. The safest way is to follow the story from part 4 chapter [User administration](/en/part4/user_administration) to the chapter [Token-based authentication](/en/part4/token_authentication). You can of course also use your creativity. 
 
 **One more warning:** If you notice you are mixing async/await and _then_ calls, it is 99% certain you are doing something wrong. Use either or, never both. 
 
@@ -293,7 +293,7 @@ Implement a way to create new users by doing a HTTP POST-request to address <i>a
 
 Do not save passwords to the database as clear text, but use <i>bcrypt</i>-library like we did in part 4 chapter [Creating new users](/en/part4/user_administration#creating-users)
 
-**NB** some windows users have had problems with <i>bcrypt</i>. If you run into problems, remove the library with command 
+**NB** some Windows users have had problems with <i>bcrypt</i>. If you run into problems, remove the library with command 
 
 ```bash
 npm uninstall bcrypt --save 
@@ -309,7 +309,7 @@ List of users can, for example, look as follows:
 
 #### 4.16*: bloglist expansion, step5
 
-Add a feature which adds the following restrictions to creating new users: Both username and password must be given. Both username and password must be at least 3 characters long. Username must be unique. 
+Add a feature which adds the following restrictions to creating new users: Both username and password must be given. Both username and password must be at least 3 characters long. The username must be unique. 
 
 The operation must respond with a suitable statuscode and some kind of an error message if invalid user is created. 
 
@@ -319,7 +319,7 @@ Implement also tests which test that invalid users are not created and invalid a
 
 #### 4.17: bloglist expansion, step6
 
-Expand blog so, that each blog contains information on the creator of the blog. 
+Expand blogs so that each blog contains information on the creator of the blog. 
 
 Modify adding new blogs so, that when a new blog is created,  <i>any</i> user from the database is designated as it's creator (for example the one found first). Implement this according to part 4 chapter [populate](/en/part4/user_administration#populate).
 Which user is designated as the creator does not matter just yet. The functionality is finished in exercise 4.19. 
@@ -338,15 +338,15 @@ Implement token-based authentication according to part 4 chapter [Token authenti
 
 #### 4.19: bloglist expansion, step8
 
-Modify adding new blogs so, that it requires a valid token to be sent with the HTTP POST request. The user identified by the token is designated as the creator of the blog. 
+Modify adding new blogs so that it is only possible if a valid token is sent with the HTTP POST request. The user identified by the token is designated as the creator of the blog. 
 
 #### 4.20*: bloglist expansion, step9
 
-[Example](/en/part4/token_authentication) from part 4 shows taking the token from the header with the _getTokenFrom_ helperfunction.
+[This example](/en/part4/token_authentication) from part 4 shows taking the token from the header with the _getTokenFrom_ helperfunction.
 
 If you used the same solution, refactor taking the token to a [middleware](/en/part3/node_js_and_express#middleware). The middleware should take the token from the <i>Authorization</i>-header and place it to <i>token</i> field of the <i>request</i> object. 
 
-So when you register middlewares in the <i>app.js</i> file before all routes
+In other words, if you register this middleware in the <i>app.js</i> file before all routes
 
 ```js
 app.use(middleware.tokenExtractor)
@@ -363,7 +363,7 @@ blogsRouter.post('/', async (request, response) => {
 
 #### 4.21*: bloglist expansion, step10
 
-Change the delete blog operation so, that deleting a blog is possible only if the user deleting a blog (the user identified by the token) is the same as the blogs creator. 
+Change the delete blog operation so, that a blog can be deleted only by the user who added the blog. Therefore, deleting a blog is possible only if the token sent with the request is the same than that of the blog's creator. 
 
 If deleting a blog is attempted without a token or by a wrong user, the operation should return a suitable statuscode. 
 
