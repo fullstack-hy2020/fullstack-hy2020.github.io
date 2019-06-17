@@ -75,7 +75,7 @@ const useCounter = () => {
 ```
 
 
-Our custom hook uses the _useState_ hook internally to create its own state. The hook returns an object, that's properties contain the value of the counter as well as functions for manipulating the value.
+Our custom hook uses the _useState_ hook internally to create its own state. The hook returns an object, the properties of which include the value of the counter as well as functions for manipulating the value.
 
 
 React components can use the hook as shown below:
@@ -195,7 +195,7 @@ const useField = (type) => {
 ```
 
 
-The hook function receives the type of the input field as a parameter. The function returns all of the attributes required by the <i>input</i> which are its type, value and the onChange handler.
+The hook function receives the type of the input field as a parameter. The function returns all of the attributes required by the <i>input</i>: its type, value and the onChange handler.
 
 
 The hook can be used in the following way:
@@ -224,7 +224,7 @@ const App = () => {
 ### Spread attributes
 
 
-We make simplify things a bit further. Since the _name_ object has exactly all of the attributes that the <i>input</i> element excepts to receive as props, we can pass the props to the element with the [spread syntax](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) in the following way:
+We could simplify things a bit further. Since the _name_ object has exactly all of the attributes that the <i>input</i> element expects to receive as props, we can pass the props to the element using the [spread syntax](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) in the following way:
 
 ```js
 <input {...name} /> 
