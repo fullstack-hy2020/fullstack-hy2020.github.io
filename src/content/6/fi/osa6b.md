@@ -7,19 +7,19 @@ lang: fi
 
 <div class="content">
 
-Jatketaan muistiinpanosovelluksen yksinkertaistetun [redux-version](/osa5#redux-muistiinpanot) laajentamista.
+Jatketaan muistiinpanosovelluksen yksinkertaistetun [redux-version](/osa6/flux_arkkitehtuuri_ja_redux#redux-muistiinpanot) laajentamista.
 
 Sovelluskehitystä helpottaaksemme laajennetaan reduceria siten, että storelle määritellään alkutila, jossa on pari muistiinpanoa:
 
 ```js
 const initialState = [
   {
-    content: 'reduxin storen toiminnan määrittelee reduceri',
+    content: 'reducer defines how redux store works',
     important: true,
     id: 1,
   },
   {
-    content: 'storen tilassa voi olla mielivaltaista dataa',
+    content: 'state of store can contain any data',
     important: false,
     id: 2,
   },
@@ -37,7 +37,7 @@ export default noteReducer
 
 Toteutetaan sovellukseen näytettävien muistiinpanojen filtteröinti, jonka avulla näytettäviä muistiinpanoja voidaan rajata. Filtterin toteutus tapahtuu [radiobuttoneiden](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio) avulla:
 
-![](../../assets/6/1.png)
+![](../../images/6/1e.png)
 
 Aloitetaan todella suoraviivaisella toteutuksella:
 
@@ -61,11 +61,11 @@ const App = (props) => {
       <div>
         <div>
         //highlight-start
-          kaikki    <input type="radio" name="filter"
+          all          <input type="radio" name="filter"
             onChange={filterSelected('ALL')} />
-          tärkeät   <input type="radio" name="filter"
+          important    <input type="radio" name="filter"
             onChange={filterSelected('IMPORTANT')} />
-          eitärkeät <input type="radio" name="filter"
+          nonimportant <input type="radio" name="filter"
             onChange={filterSelected('NONIMPORTANT')} />
           //highlight-end
         </div>
@@ -86,8 +86,8 @@ Päätämme toteuttaa filtteröinnin siten, että talletamme muistiinpanojen lis
 ```js
 {
   notes: [
-    { content: 'reduxin storen toiminnan määrittelee reduceri', important: true, id: 1},
-    { content: 'storen tilassa voi olla mielivaltaista dataa', important: false, id: 2}
+    { content: 'reducer defines how redux store works', important: true, id: 1},
+    { content: 'state of store can contain any data', important: false, id: 2}
   ],
   filter: 'IMPORTANT'
 }
@@ -169,7 +169,7 @@ Koska sovelluksemme hajoaa tässä vaiheessa täysin, komponentin <i>App</i> sij
 
 Konsoliin tulostuu storen tila:
 
-![](../../images/6/4.png)
+![](../../images/6/4e.png)
 
 eli store on juuri siinä muodossa missä haluammekin sen olevan!
 
@@ -192,12 +192,12 @@ import { filterChange } from './reducers/filterReducer'
 //...
 store.subscribe(() => console.log(store.getState()))
 store.dispatch(filterChange('IMPORTANT'))
-store.dispatch(createNote('combineReducers muodostaa yhdistetyn reducerin'))
+store.dispatch(createNote('combineReducers forms one reduces from many simple reducers'))
 ```
 
 Kun simuloimme näin filtterin tilan muutosta ja muistiinpanon luomista Konsoliin tulostuu storen tila jokaisen muutoksen jälkeen:
 
-![](../../images/6/5.png)
+![](../../images/6/5e.png)
 
 Jo tässä vaiheessa kannattaa laittaa mieleen eräs tärkeä detalji. Jos lisäämme <i>molempien reducerien alkuun</i> konsoliin tulostuksen:
 
@@ -205,7 +205,7 @@ Jo tässä vaiheessa kannattaa laittaa mieleen eräs tärkeä detalji. Jos lisä
 const filterReducer = (state = 'ALL', action) => {
   console.log('ACTION: ', action)
   // ...
-};
+}
 ```
 
 Näyttää konsolin perusteella siltä, että jokainen action kahdentuu:
@@ -261,19 +261,19 @@ const VisibilityFilter = (props) => {
 
   return (
     <div>
-      kaikki    
+      all    
       <input 
         type="radio" 
         name="filter" 
         onChange={() => filterClicked('ALL')}
       />
-      tärkeät   
+      important   
       <input
         type="radio"
         name="filter"
         onChange={() => filterClicked('IMPORTANT')}
       />
-      eitärkeät 
+      nonimportant 
       <input
         type="radio"
         name="filter"
@@ -287,6 +287,29 @@ export default VisibilityFilter
 ```
 
 Toteutus on suoraviivainen, radiobuttonin klikkaaminen muuttaa storen kentän <i>filter</i> tilaa.
+
+Komponentti <i>App</i> yksinkertaisuu nyt seuraavasti:
+
+```js
+import React from 'react'
+import Notes from './components/Notes'
+import NewNote from './components/NewNote'
+import VisibilityFilter from './components/VisibilityFilter'
+
+const App = (props) => {
+  const store = props.store
+
+  return (
+    <div>
+      <NewNote store={store} />
+      <VisibilityFilter store={store} />
+      <Notes store={store} />
+    </div>
+  )
+}
+
+export default App
+```
 
 Muutetaan vielä komponentin <i>Notes</i> ottamaan huomioon filtteri
 
@@ -350,7 +373,7 @@ Jatketaan tehtävässä 6.3 aloitetun reduxia käyttävän anekdoottisovelluksen
 Sovelluksessa on valmiina komponentin <i>Notification</i> runko:
 
 ```js
-import React from 'react';
+import React from 'react'
 
 const Notification = () => {
   const style = {
@@ -480,7 +503,8 @@ ReactDOM.render(
     <App />
   </Provider>,
   // highlight-end
-document.getElementById('root'))
+  document.getElementById('root')
+)
 ```
 
 Tutkitaan ensin komponenttia <i>Notes</i>. Funktiota _connect_ käyttämällä "normaaleista" React-komponenteista saadaan muodostettua komponentteja, joiden <i>propseihin</i> on "mäpätty" eli yhdistetty haluttuja osia storen määrittelemästä tilasta.
@@ -689,16 +713,17 @@ import { connect } from 'react-redux'
 import { createNote } from '../reducers/noteReducer'
 
 const NewNote = (props) => {
-
   const addNote = (event) => {
     event.preventDefault()
-    props.createNote(event.target.note.value)
+    const content = event.target.note.value
     event.target.note.value = ''
+    props.createNote(content)
   }
+
   return (
     <form onSubmit={addNote}>
       <input name="note" />
-      <button type="submit">lisää</button>
+      <button type="submit">add</button>
     </form>
   )
 }
@@ -859,7 +884,7 @@ const NewNote = (props) => {
   return (
     <form onSubmit={addNote}>
       <input name="note" />
-      <button type="submit">lisää</button>
+      <button type="submit">add</button>
     </form>
   )
 }
@@ -998,6 +1023,8 @@ High order componentit eli HOC:t ovatkin yleinen tapa määritellä geneeristä 
 HOC:it ovat oikeastaan käsitteen [High Order Function](https://en.wikipedia.org/wiki/Higher-order_function) (HOF) yleistys. HOF:eja ovat sellaiset funkiot, jotka joko ottavat parametrikseen funktioita tai palauttavat funkioita. Olemme oikeastaan käyttäneet HOF:eja läpi kurssin, esim. lähes kaikki taulukoiden käsittelyyn tarkoitetut metodit, kuten _map, filter ja find_ ovat HOF:eja.
 
 Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2019/redux-notes/tree/part6-4) branchissa <i>part6-4</i>.
+
+Huomaa muutokset kompnenteissa <i>VisibilityFilter</i> ja <i>App</i>
 
 </div>
 

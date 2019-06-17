@@ -1041,7 +1041,7 @@ Use the supertest package for writing a test that makes an HTTP GET request to t
 Once the test is finished, refactor the route handler to use the async/await syntax instead of promises.
 
 
-Notice that you will have to make similar changes to the code that were made [in the material](/osa4/backendin_testaaminen#test-ymparisto), like defining the test environment so that you can write tests that use their own separate database.
+Notice that you will have to make similar changes to the code that were made [in the material](/en/part4/testing_the_backend#test-environment), like defining the test environment so that you can write tests that use their own separate database.
 
 
 **NB:** When running the tests you may run into the following warning:
@@ -1059,7 +1059,7 @@ module.exports = {
 
 
 
-**NB:** when yo are writing your tests **<i>it is better to not execute all of your tests</i>**, only execute the ones you are working on. Read more about this [here](/osa4/backendin_testaaminen#testien-suorittaminen-yksitellen).
+**NB:** when yo are writing your tests **<i>it is better to not execute all of your tests</i>**, only execute the ones you are working on. Read more about this [here](/en/part4/testing_the_backend#running-tests-one-by-one).
 
 
 #### 4.9*: Blog list tests, step2
@@ -1068,7 +1068,7 @@ module.exports = {
 Write a test that verifies that the unique identifier property of the blog posts is named <i>id</i>, by default the database names the property <i>_id</i>. Verifying the existence of a property is easily done with Jest's [toBeDefined](https://jestjs.io/docs/en/expect#tobedefined) matcher:
 
 
-Make the required changes to the code so that it passes the test. The [toJSON](osa3/tietojen_tallettaminen_mongo_db_tietokantaan#tietokantaa-kayttava-backend) method discussed in part 3 is an appropriate place for defining the <i>id</i> parameter.
+Make the required changes to the code so that it passes the test. The [toJSON](/en/part3/saving_data_to_mongo_db#backend-connected-to-a-database) method discussed in part 3 is an appropriate place for defining the <i>id</i> parameter.
 
 
 #### 4.10: Blog list tests, step3
