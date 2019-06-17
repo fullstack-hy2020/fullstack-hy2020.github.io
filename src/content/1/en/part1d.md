@@ -399,8 +399,8 @@ don't write more code but rather find and fix the problem **immediately**. There
 Old school, print based debugging is always a good idea. If the component
 
 ```js
-const Button = ({ handleClick, text }) => (
-  <button onClick={handleClick}>
+const Button = ({ onClick, text }) => (
+  <button onClick={onClick}>
     {text}
   </button>
 )
@@ -411,9 +411,9 @@ is not working as intended, it's useful to start printing its variables out to t
 ```js
 const Button = (props) => { 
   console.log(props) // highlight-line
-  const { handleClick, text } = props
+  const { onClick, text } = props
   return (
-    <button onClick={handleClick}>
+    <button onClick={onClick}>
       {text}
     </button>
   )
