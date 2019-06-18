@@ -18,7 +18,7 @@ We will take a closer look at REST in the [next part](/en/part3) of the course, 
 
 ### REST
 
-In REST terminology, we refer to individual data objects like the notes in our application as <i>resources</i>. Every resource has an associated unique address, aka. its URL. In the convention used by json-server, we would be able to locate an individual note at the resource URL <i>notes/3</i>, where 3 is the id of the resource. In this convention the <i>notes</i> url would point to a resource collection containing all notes.
+In REST terminology, we refer to individual data objects like the notes in our application as <i>resources</i>. Every resource has an associated unique address, aka its URL. In the convention used by json-server, we would be able to locate an individual note at the resource URL <i>notes/3</i>, where 3 is the id of the resource. In this convention the <i>notes</i> url would point to a resource collection containing all notes.
 
 Resources are fetched from the server with HTTP GET requests. E.g. an HTTP GET request to the URL <i>notes/3</i> will return the note that has the id number 3. An HTTP GET request to the <i>notes</i> URL would return a list of all notes.
 
