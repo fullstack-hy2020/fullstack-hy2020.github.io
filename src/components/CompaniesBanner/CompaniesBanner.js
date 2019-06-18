@@ -87,6 +87,10 @@ const inChallenge = [
   // 'Vertix',
   // 'Future Captcha Consulting',
   'Kela',
+  'Geometrix',
+  'Netyourself',
+  // 'Vincit',
+  'Vero',
 ];
 
 export const CompaniesBanner = ({ isFrontPage, lang }) => (
