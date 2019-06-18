@@ -224,7 +224,7 @@ const changedNote = { ...note, important: !note.important }
 The command uses the [object spread](https://github.com/tc39/proposal-object-rest-spread) syntax which is not yet a standard part of the JavaScript language specification.
 
 
-In practice <em>{ ...note }</em> creates a new object, with copies of all the properties from the _note_ object. When we add properties inside the brackets after the spreaded object, e.g. <em>{ ...note, important: true }</em>, then the value of the _important_ property of the new object will be _true_. In our example the <em>important</em> property gets the negation of its previous value in the original object.
+In practice <em>{ ...note }</em> creates a new object, with copies of all the properties from the _note_ object. When we add properties inside the curly braces after the spreaded object, e.g. <em>{ ...note, important: true }</em>, then the value of the _important_ property of the new object will be _true_. In our example the <em>important</em> property gets the negation of its previous value in the original object.
 
 
 There's a few things to point out. Why did we make a copy of the note object we wanted to modify, when the following code also appears to work:
