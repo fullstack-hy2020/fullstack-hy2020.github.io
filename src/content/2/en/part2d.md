@@ -301,7 +301,7 @@ export default {
 ```
 
 
-The module returns an object that has three functions (<i>getAll</i>, <i>create</i> ja <i>update</i>) for dealing with notes as its properties. The functions directly return the promises returned by the axios methods.
+The module returns an object that has three functions (<i>getAll</i>, <i>create</i>, and <i>update</i>) as its properties that deal with notes. The functions directly return the promises returned by the axios methods.
 
 Components <i>App</i> uses <em>import</em> to get access to the module:
 
