@@ -303,7 +303,7 @@ export default {
 
 The module returns an object that has three functions (<i>getAll</i>, <i>create</i>, and <i>update</i>) as its properties that deal with notes. The functions directly return the promises returned by the axios methods.
 
-Components <i>App</i> uses <em>import</em> to get access to the module:
+The <i>App</i> component uses <em>import</em> to get access to the module:
 
 ```js
 import noteService from './services/notes' // highlight-line
@@ -311,7 +311,7 @@ import noteService from './services/notes' // highlight-line
 const App = () => {
 ```
 
-The functions of the module can be used directly with the imported variable _noteService_ like this:
+The functions of the module can be used directly with the imported variable _noteService_ as follows:
 
 ```js
 const App = () => {
