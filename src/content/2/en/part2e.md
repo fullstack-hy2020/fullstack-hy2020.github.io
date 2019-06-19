@@ -37,7 +37,7 @@ CSS rules are comprised of <i>selectors</i> and <i>declarations</i>. The selecto
 The declaration sets the _color_ property to the value <i>green</i>.
 
 
-One CSS rule can contain an arbitrary number of properties. Let's modify the previous rule by making the text cursive, by defining the font style as <i>italic</i>:
+One CSS rule can contain an arbitrary number of properties. Let's modify the previous rule to make the text cursive, by defining the font style as <i>italic</i>:
 
 ```css
 h1 {
