@@ -164,7 +164,7 @@ Error: listen EADDRINUSE :::3001
 You have two options. Either shutdown the application using the port 3001 (the json-server in the last part of the material was using the port 3001), or use a different port for this application.
 
 
-Let's take a closer look at first row of the code:
+Let's take a closer look at the first line of the code:
 
 ```js
 const http = require('http')
