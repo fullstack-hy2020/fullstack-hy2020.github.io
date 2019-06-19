@@ -50,7 +50,7 @@ h1 {
 There are many ways of matching elements by using [different types of CSS selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors).
 
 
-If we want to target our styles e.g. to each note, we could use the selector <i>li</i>, as all of the notes are inside <i>li</i> tags:
+If we wanted to target, let's say, each one of the notes with our styles, we could use the selector <i>li</i>, as all of the notes are wrapped inside <i>li</i> tags:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
