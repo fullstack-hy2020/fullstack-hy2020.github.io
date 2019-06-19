@@ -89,7 +89,7 @@ const inChallenge = [
   'Kela',
   'Geometrix',
   'Netyourself',
-  // 'Vincit',
+  'Vincit',
   'Vero',
 ];
 
