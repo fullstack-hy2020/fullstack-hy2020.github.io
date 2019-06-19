@@ -46,7 +46,7 @@ Let's navigate to an appropriate directory, and create a new template for our ap
 ```
 
 
-The file defines e.g. the that the entry point of the application is the <i>index.js</i> file.
+The file defines, for instance, that the entry point of the application is the <i>index.js</i> file.
 
 
 Let's make a small change to the <i>scripts</i> object:
