@@ -312,7 +312,7 @@ const App = () => {
 ```
 
 
-Inline selectors come with certain limitations. E.g. so-called pseudo selectors can't be used in any straightforward manner.
+Inline selectors come with certain limitations. For instance, so-called pseudo selectors can't be used in any straightforward manner.
 
 
 Inline styles and some of the other ways of adding styles to React components go completely against the grain of old conventions. Traditionally it was considered a best practice to separate CSS entirely from content (HTML) and functionality (JavaScript). According to the old school of thought, the goal was to write CSS, HTML, and JavaScript into their own separate files.
