@@ -15,7 +15,7 @@ Before we move onto the next part, let's take a look at how we can add styles to
 
 
 
-Let's add a new <i>index.css</i> file under the <i>src</i> directory, and then add it to the application by importing it in the <i>index.js</i> file:
+Let's add a new <i>index.css</i> file under the <i>src</i> directory and then add it to the application by importing it in the <i>index.js</i> file:
 
 ```js
 import './index.css'
