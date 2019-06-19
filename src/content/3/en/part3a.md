@@ -26,7 +26,7 @@ Our goal is to implement a backend that will work with the notes application fro
 **Notice** that the applications and exercises in this part are not all React applications, and we will not use the <i>create-react-app</i> utility for initializing the project for this application.
 
 
-We had already mentioned [npm](/en/part2/getting_data_from_server#npm) back in part 2, which is tool used for managing JavaScript projects. In fact, npm originates from the Node ecosystem.
+We had already mentioned [npm](/en/part2/getting_data_from_server#npm) back in part 2, which is a tool used for managing JavaScript packages. In fact, npm originates from the Node ecosystem.
 
 
 Let's navigate to an appropriate directory, and create a new template for our application with the _npm init_ command. We will answer the questions presented by the utility, and the result will be an automatically generated <i>package.json</i> file at the root of the project, that contains information about the project.
