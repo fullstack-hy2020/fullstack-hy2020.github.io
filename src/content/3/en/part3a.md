@@ -555,7 +555,7 @@ Let's expand our application so that it offers a REST interface for operating on
 The unique address we will use for an individual note is of the form <i>notes/10</i>, where the number at the end refers to the note's unique id number.
 
 
-We can define [parameters](http://expressjs.com/en/guide/routing.html) for routes in express by using the colon syntax:
+We can define [parameters](http://expressjs.com/en/guide/routing.html#route-parameters) for routes in express by using the colon syntax:
 
 ```js
 app.get('/notes/:id', (request, response) => {
