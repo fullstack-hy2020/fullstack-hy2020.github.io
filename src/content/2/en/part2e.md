@@ -15,7 +15,7 @@ Before we move onto the next part, let's take a look at how we can add styles to
 
 
 
-Let's add a new <i>index.css</i> file under the <i>src</i> directory, and then add it to the application by importing it in the <i>index.js</i> file:
+Let's add a new <i>index.css</i> file under the <i>src</i> directory and then add it to the application by importing it in the <i>index.js</i> file:
 
 ```js
 import './index.css'
@@ -37,7 +37,7 @@ CSS rules are comprised of <i>selectors</i> and <i>declarations</i>. The selecto
 The declaration sets the _color_ property to the value <i>green</i>.
 
 
-One CSS rule can contain an arbitrary number of properties. Let's modify the previous rule by making the text cursive, by defining the font style as <i>italic</i>:
+One CSS rule can contain an arbitrary number of properties. Let's modify the previous rule to make the text cursive, by defining the font style as <i>italic</i>:
 
 ```css
 h1 {
@@ -50,7 +50,7 @@ h1 {
 There are many ways of matching elements by using [different types of CSS selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors).
 
 
-If we want to target our styles e.g. to each note, we could use the selector <i>li</i>, as all of the notes are inside <i>li</i> tags:
+If we wanted to target, let's say, each one of the notes with our styles, we could use the selector <i>li</i>, as all of the notes are wrapped inside <i>li</i> tags:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -312,7 +312,7 @@ const App = () => {
 ```
 
 
-Inline selectors come with certain limitations. E.g. so-called pseudo selectors can't be used in any straightforward manner.
+Inline selectors come with certain limitations. For instance, so-called pseudo selectors can't be used in any straightforward manner.
 
 
 Inline styles and some of the other ways of adding styles to React components go completely against the grain of old conventions. Traditionally it was considered a best practice to separate CSS entirely from content (HTML) and functionality (JavaScript). According to the old school of thought, the goal was to write CSS, HTML, and JavaScript into their own separate files.
