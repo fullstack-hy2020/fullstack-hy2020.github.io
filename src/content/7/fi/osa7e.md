@@ -113,7 +113,7 @@ Myös NoSQL-kantoihin tehtävät injektiohyökkäykset ovat mahdollisia. Mongoos
 
 koodia ei suoriteta, vaan koodi renderöityy sivulle 'tekstinä':
 
-![](../../images/7/32.png)
+![](../../images/7/32e.png)
 
 sillä React [huolehtii muuttujissa olevan datan sanitoinnista](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks). Reactin jotkut versiot [ovat mahdollistaneet](https://medium.com/dailyjs/exploiting-script-injection-flaws-in-reactjs-883fb1fe36c1) XSS-hyökkäyksiä, aukot on toki korjattu, mutta mikään ei takaa etteikö niitä voisi vielä löytyä.
 

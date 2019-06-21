@@ -35,7 +35,7 @@ and separate pages for showing the information of notes and users:
 
 
 
-In an [old school web app](/osa0#perinteinen-web-sovellus) changing the page shown by the application would be accomplished by the browser making a HTTP GET request to the server and rendering the HTML representing the view that was returned.
+In an [old school web app](/en/part0/fundamentals_of_web_apps#traditional-web-applications) changing the page shown by the application would be accomplished by the browser making a HTTP GET request to the server and rendering the HTML representing the view that was returned.
 
 
 
