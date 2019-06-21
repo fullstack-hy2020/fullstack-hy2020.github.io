@@ -41,7 +41,7 @@ export default noteReducer
 
 Let's implement filtering for the notes that are displayed to the user. The user interface for the filters will be implemented with [radio buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio):
 
-![](../../images/6/1e.png)
+![](../../images/6/01e.png)
 
 
 Let's start with a very simple and straightforward implementation:
@@ -1127,7 +1127,7 @@ High order components, or HOCs, are a way of defining generic functionality that
 HOCs are in fact a generalization of the [High Order Function](https://en.wikipedia.org/wiki/Higher-order_function) (HOF) concept. HOFs are functions that either accept functions as parameters or return functions. We have actually been using HOFs throughout the course, e.g. all of the methods used for dealing with arrays like _map, filter and fine_ are HOFs. 
 
 
-You can find the code for our current application in its entirety in the <i>part6-4</i> branch of [this github repository](https://github.com/fullstack-hy2019/redux-notes/tree/part6-4). 
+You can find the code for our current application in its entirety in the <i>part6-4</i> branch of [this github repository](https://github.com/fullstackopen-2019/redux-notes/tree/part6-4). 
 
 Note the changes in component <i>VisibilityFilter</i> and removal of all the props in component <i>App</i>.
 

@@ -15,12 +15,12 @@ Tallennetaan projektin juuren tiedostoon <i>db.json</i> tietokannan alkutila:
 {
   "notes": [
     {
-      "content": "reduxin storen toiminnan määrittelee reduceri",
+      "content": "the app state is in redux store",
       "important": true,
       "id": 1
     },
     {
-      "content": "storen tilassa voi olla mielivaltaista dataa",
+      "content": "state changes are made with actions",
       "important": false,
       "id": 2
     }
@@ -111,14 +111,14 @@ const noteReducer = (state = [], action) => {
       return action.data // highlight-line
     // ...
   }
-};
+}
 
 export const initializeNotes = (notes) => {
   return {
     type: 'INIT_NOTES',
     data: notes,
-  };
-};
+  }
+}
 
 // ...
 ```
@@ -235,7 +235,7 @@ export const createNote = (data) => {
 
 Muistiinpanojen tärkeyden muuttaminen olisi mahdollista toteuttaa samalla periaatteella, eli tehdä palvelimelle ensin asynkroninen metodikutsu ja sen jälkeen dispatchata sopiva action.
 
-Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2019/redux-notes/tree/part6-5) branchissa <i>part6-5</i>.
+Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstackopen-2019/redux-notes/tree/part6-5) branchissa <i>part6-5</i>.
 
 </div>
 
@@ -247,7 +247,7 @@ Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-h
 
 Hae sovelluksen käynnistyessä anekdootit json-serverillä toteutetusta backendistä.
 
-Backendin alustavan sisällön saat esim. [täältä](https://github.com/fullstack-hy2019/misc/blob/master/anecdotes.json).
+Backendin alustavan sisällön saat esim. [täältä](https://github.com/fullstackopen-2019/misc/blob/master/anecdotes.json).
 
 #### 6.17 anekdootit ja backend, step2
 
@@ -409,7 +409,7 @@ export default connect(
 )(NewNote)
 ```
 
-Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2019/redux-notes/tree/part6-6) brachissa <i>part6-6</i>.
+Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstackopen-2019/redux-notes/tree/part6-6) brachissa <i>part6-6</i>.
 
 ### Redux DevTools
 
@@ -451,15 +451,11 @@ export default store
 
 Kun nyt avaat konsolin, välilehti <i>redux</i> näyttää seuraavalta:
 
-![](../../images/6/11.png)
+![](../../images/6/11e.png)
 
 Konsolin avulla on myös mahdollista dispatchata actioneja storeen
 
-![](../../images/6/12.png)
-
-Storen tietyn hetkisen tilan lisäksi on myös mahdollista tarkastella, mikä on kunkin actionin tilalle aiheuttama muutos:
-
-![](../../images/6/13.png)
+![](../../images/6/12e.png)
 
 ### Redux ja komponenttien tila
 

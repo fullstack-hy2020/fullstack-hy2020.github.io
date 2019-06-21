@@ -93,11 +93,9 @@ module.exports = {
       d: 'Custom hooks'
     },
     '6': {
-            /*
-      a: 'Flux-arkkitecture and Redux',
+      a: 'Flux-architecture and Redux',
       b: 'Many redusers, connect',
       c: 'Communicating with server in a redux application',
-      */
     },
     '7': {
       /*
