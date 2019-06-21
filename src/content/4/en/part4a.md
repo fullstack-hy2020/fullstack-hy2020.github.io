@@ -212,7 +212,7 @@ const notesRouter = require('./controllers/notes')
 const middleware = require('./utils/middleware')
 const mongoose = require('mongoose')
 
-console.log('commecting to', config.MONGODB_URI)
+console.log('connecting to', config.MONGODB_URI)
 
 mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true })
   .then(() => {
