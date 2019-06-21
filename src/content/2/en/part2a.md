@@ -650,7 +650,7 @@ I added this chapter to the material after the model answer of the next question
 
 <div class="tasks">
 
-<h3>Excercises</h3>
+<h3>Exercises</h3>
 
 
 
