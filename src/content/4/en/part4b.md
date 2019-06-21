@@ -355,7 +355,7 @@ Extracting logging into its own module is a good idea in more ways than one. If 
 ### Initializing the database before tests
 
 
-Testing appears to be easy and our tests are currently passing. However, our tests are bad as they are dependent on the state of the database (that happens to be correct in my test database). In order to make our tests more eobust, we have to reset the database and generate the needed test data in a controlled manner before we run the tests.
+Testing appears to be easy and our tests are currently passing. However, our tests are bad as they are dependent on the state of the database (that happens to be correct in my test database). In order to make our tests more robust, we have to reset the database and generate the needed test data in a controlled manner before we run the tests.
 
 
 Our tests are already using the [afterAll](https://facebook.github.io/jest/docs/en/api.html#afterallfn-timeout) function of Jest to close the connection to the database after the tests are finished executing. Jest offers many other [functions](https://facebook.github.io/jest/docs/en/setup-teardown.html#content) that can be used for executing operations once before any test is run, or every time before a test is run.
@@ -1040,7 +1040,7 @@ Use the supertest package for writing a test that makes an HTTP GET request to t
 Once the test is finished, refactor the route handler to use the async/await syntax instead of promises.
 
 
-Notice that you will have to make similar changes to the code that were made [in the material](/osa4/backendin_testaaminen#test-ymparisto), like defining the test environment so that you can write tests that use their own separate database.
+Notice that you will have to make similar changes to the code that were made [in the material](/en/part4/testing_the_backend#test-environment), like defining the test environment so that you can write tests that use their own separate database.
 
 
 **NB:** When running the tests, you may run into the following warning:
@@ -1058,6 +1058,7 @@ module.exports = {
 
 
 
+
 **NB:** when you are writing your tests **<i>it is better to not execute all of your tests</i>**, only execute the ones you are working on. Read more about this [here](/osa4/backendin_testaaminen#testien-suorittaminen-yksitellen).
 
 
@@ -1067,7 +1068,7 @@ module.exports = {
 Write a test that verifies that the unique identifier property of the blog posts is named <i>id</i>, by default the database names the property <i>_id</i>. Verifying the existence of a property is easily done with Jest's [toBeDefined](https://jestjs.io/docs/en/expect#tobedefined) matcher:
 
 
-Make the required changes to the code so that it passes the test. The [toJSON](osa3/tietojen_tallettaminen_mongo_db_tietokantaan#tietokantaa-kayttava-backend) method discussed in part 3 is an appropriate place for defining the <i>id</i> parameter.
+Make the required changes to the code so that it passes the test. The [toJSON](/en/part3/saving_data_to_mongo_db#backend-connected-to-a-database) method discussed in part 3 is an appropriate place for defining the <i>id</i> parameter.
 
 
 #### 4.10: Blog list tests, step3

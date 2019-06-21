@@ -71,7 +71,7 @@ If functional programming with arrays feels foreign, it is worth watching at lea
 ### Event handlers revisited
 
 Based on last year's course, event handling has proven to be difficult. 
-It's worth reading the revision chapter at the end of the previous part [event handlers revisited](/en/part1/a_more_complex_state_debugging_react_apps#event-handling-revisited) if it feels like your own knowledge on the topic needs some brusing up. 
+It's worth reading the revision chapter at the end of the previous part [event handlers revisited](/en/part1/a_more_complex_state_debugging_react_apps#event-handling-revisited) if it feels like your own knowledge on the topic needs some brushing up. 
 
 Passing event handlers to the child components of the <i>App</i> component has raised some questions. A small revision on the topic can be found [here](/en/part1/a_more_complex_state_debugging_react_apps#passing-event-handlers-to-child-components).
 
@@ -627,7 +627,7 @@ const Course = ({ course }) => {
 }
 ```
 
-Very often the root of the problem is, that the props are expected to be different type or called different than they actually are, and desctructuring fails. The problem often begins to solve itself when desctructuring is removed and we see what the <em>props</em> actually contains. 
+Very often, the root of the problem is that the props are expected to be of a different type, or called with a different name than they actually are, and desctructuring fails. The problem often begins to solve itself when desctructuring is removed and we see what the <em>props</em> actually contains. 
 
 ```js
 const Course = (props) => { // highlight-line

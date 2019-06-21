@@ -14,13 +14,13 @@ We naturally want to store all notes that are created in our application in a ba
 
 If we go by the original textbook [definition](https://en.wikipedia.org/wiki/Representational_state_transfer), the json-server does not fit the description of a REST API, but the same is true of most APIs claiming to be RESTful.
 
-We will take a closer look at REST in the [next part](/en/part3) of the course, but it's good to familiarize ourselves at this point with some of the [conventions](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) used by json-server and REST APIs at large. In particular, we will be taking a look at how [routes](https://github.com/typicode/json-server#routes) aka. URLs and HTTP request types are conventionally used in REST.
+We will take a closer look at REST in the [next part](/en/part3) of the course, but it's good to familiarize ourselves at this point with some of the [conventions](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) used by json-server and REST APIs at large. In particular, we will be taking a look at how [routes](https://github.com/typicode/json-server#routes), aka URLs and HTTP request types, are conventionally used in REST.
 
 ### REST
 
-In REST terminology, we refer to individual data objects like the notes in our application as <i>resources</i>. Every resource has an associated unique address, aka. its URL. In the convention used by json-server, we would be able to locate an individual note at the resource URL <i>notes/3</i>, where 3 is the id of the resource. In this convention the <i>notes</i> url would point to a resource collection containing all notes.
+In REST terminology, we refer to individual data objects like the notes in our application as <i>resources</i>. Every resource has an associated unique address, aka its URL. In the convention used by json-server, we would be able to locate an individual note at the resource URL <i>notes/3</i>, where 3 is the id of the resource. In this convention the <i>notes</i> url would point to a resource collection containing all notes.
 
-Resources are fetched from the server with HTTP GET requests. E.g. an HTTP GET request to the URL <i>notes/3</i> will return the note that has the id number 3. An HTTP GET request to the <i>notes</i> URL would return a list of all notes.
+Resources are fetched from the server with HTTP GET requests. For instance, an HTTP GET request to the URL <i>notes/3</i> will return the note that has the id number 3. An HTTP GET request to the <i>notes</i> URL would return a list of all notes.
 
 The creation of a new note resource in the REST convention followed by json-server is done with an HTTP POST request, that is made to the <i>notes</i> URL. The data for the new note resource is sent in the <i>body</i> of the request.
 
@@ -105,7 +105,7 @@ This makes it possible to verify that all the data we intended to send was actua
 
 In the next part of the course we will learn to implement our own logic in the backend. We will then take a closer look at tools like [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop) that help us to debug our server applications. However, inspecting the state of the json-server through the browser is sufficient for our current needs.
 
-> **NB:** in the current version of our application the browser adds the creation date property to the note. Since the clock of the machine running the browser can be wrongly configured, it's much wiser to let the backend server generate this timestamp for us. This is in fact what we will do in the next part of the course.
+> **NB:** In the current version of our application the browser adds the creation date property to the note. Since the clock of the machine running the browser can be wrongly configured, it's much wiser to let the backend server generate this timestamp for us. This is in fact what we will do in the next part of the course.
 
 
 The code for the current state of our application can be found in the  <i>part2-5</i> branch on [github](https://github.com/fullstackopen-2019/part2-notes/tree/part2-5).
@@ -224,7 +224,7 @@ const changedNote = { ...note, important: !note.important }
 The command uses the [object spread](https://github.com/tc39/proposal-object-rest-spread) syntax which is not yet a standard part of the JavaScript language specification.
 
 
-In practice <em>{ ...note }</em> creates a new object, with copies of all the properties from the _note_ object. When we add properties inside the brackets after the spreaded object, e.g. <em>{ ...note, important: true }</em>, then the value of the _important_ property of the new object will be _true_. In our example the <em>important</em> property gets the negation of its previous value in the original object.
+In practice <em>{ ...note }</em> creates a new object, with copies of all the properties from the _note_ object. When we add properties inside the curly braces after the spreaded object, e.g. <em>{ ...note, important: true }</em>, then the value of the _important_ property of the new object will be _true_. In our example the <em>important</em> property gets the negation of its previous value in the original object.
 
 
 There's a few things to point out. Why did we make a copy of the note object we wanted to modify, when the following code also appears to work:
@@ -301,9 +301,9 @@ export default {
 ```
 
 
-The module returns an object that has three functions (<i>getAll</i>, <i>create</i> ja <i>update</i>) for dealing with notes as its properties. The functions directly return the promises returned by the axios methods.
+The module returns an object that has three functions (<i>getAll</i>, <i>create</i>, and <i>update</i>) as its properties that deal with notes. The functions directly return the promises returned by the axios methods.
 
-Components <i>App</i> uses <em>import</em> to get access to the module:
+The <i>App</i> component uses <em>import</em> to get access to the module:
 
 ```js
 import noteService from './services/notes' // highlight-line
@@ -311,7 +311,7 @@ import noteService from './services/notes' // highlight-line
 const App = () => {
 ```
 
-The functions of the module can be used directly with the imported variable _noteService_ like this:
+The functions of the module can be used directly with the imported variable _noteService_ as follows:
 
 ```js
 const App = () => {
@@ -653,7 +653,7 @@ When we try to change the importance of the hardcoded note, we see the following
 The application should be able to handle these types of error situations gracefully. Users won't be able to tell that an error has actually occurred unless they happen to have their console open. The only way the error can be seen  in the application is that clicking the button has no effect on the importance of the note.
 
 
-We had [previously](#axios-ja-promiset) mentioned that a promise can be in one of three different states. When an HTTP request fails, the associated promise is <i>rejected</i>. In our current code we do not handle this rejection in any way.
+We had [previously](/en/part2/getting_data_from_server#axios-and-promises) mentioned that a promise can be in one of three different states. When an HTTP request fails, the associated promise is <i>rejected</i>. In our current code we do not handle this rejection in any way.
 
 
 The rejection of a promise is [handled](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) by providing the <em>then</em> method with a second callback function, that is called in the situation where the promise is rejected.
