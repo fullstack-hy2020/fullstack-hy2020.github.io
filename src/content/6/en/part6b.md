@@ -1196,7 +1196,7 @@ const = () => {
 #### 6.15* Better anecdotes, step13
 
 
-Change your application so that the <i>AnecdoteList</i> component only receives a single prop based on the store's state. Construct the filtered list of anecdotes as shown in the [Presentational/Container revisited](/osa6/monta_reduseria_connect#presentational-container-revisited) section in this part of the course material.
+Change your application so that the <i>AnecdoteList</i> component only receives a single prop based on the store's state. Construct the filtered list of anecdotes as shown in the [Presentational/Container revisited](/en/part6/many_redusers_connect#presentational-container-revisited) section in this part of the course material.
 
 
 As a result, the <i>AnecdoteList</i> component should get simplified into the following form:
