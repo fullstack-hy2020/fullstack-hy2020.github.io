@@ -555,7 +555,7 @@ Let's expand our application so that it offers a REST interface for operating on
 The unique address we will use for an individual note is of the form <i>notes/10</i>, where the number at the end refers to the note's unique id number.
 
 
-We can define [parameters](http://expressjs.com/en/guide/routing.html) for routes in express by using the colon syntax:
+We can define [parameters](http://expressjs.com/en/guide/routing.html#route-parameters) for routes in express by using the colon syntax:
 
 ```js
 app.get('/notes/:id', (request, response) => {
@@ -602,7 +602,7 @@ When we visit <http://localhost:3001/notes/1> again in the browser, the console 
 The id parameter from the route is passed to our application but the _find_ method does not find a matching note.
 
 
-To further our investigation, we also add a console log inside of the comparison function passed to the _find_ method. In order to do this, we have to get rid of the compact arrow function syntax <em>note => note.id === id</em>, and use the syntax with an explicit return statement:
+To further our investigation, we also add a console log inside the comparison function passed to the _find_ method. In order to do this, we have to get rid of the compact arrow function syntax <em>note => note.id === id</em>, and use the syntax with an explicit return statement:
 
 ```js
 app.get('/notes/:id', (request, response) => {
