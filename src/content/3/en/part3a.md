@@ -825,7 +825,7 @@ The server appears to only receive an empty object:
 The server will not be able to parse the data correctly without the correct value in the header. It won't even try to guess the format of the data, since there's a [massive amount](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) of potential <i>Content-Types</i>.
 
 
-If you are using VS Code, then you should install the REST client form the previous chapter <i>now, if you didn't already</i>. The POST request can be sent with the REST client like this:
+If you are using VS Code, then you should install the REST client from the previous chapter <i>now, if you haven't already</i>. The POST request can be sent with the REST client like this:
 
 ![](../../images/3/20e.png)
 
