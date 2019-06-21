@@ -98,16 +98,12 @@ module.exports = {
       c: 'Communicating with server in a redux application',
     },
     '7': {
-            /*
       a: 'React-router',
       b: 'More about styles',
-
-      c: 'Webpack',
-
+      //c: 'Webpack',
       d: 'Class components, E2E-testing',
       e: 'Miscellaneous',
-      f: 'Exercises: extending the blogilist',
-            /*
+      f: 'Exercises: extending the blogilist',          
     },
     '8': {
       /*

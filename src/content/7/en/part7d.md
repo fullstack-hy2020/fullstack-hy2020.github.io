@@ -20,7 +20,7 @@ It is beneficial to at least be familiar with Class Components to some extent, s
 
 
 
-Lets get to know the main features of Class Components by producing yet another very familiar anecdote application. We store the anecdotes in the file <i>db.json</i> using <i>json-server</i>. The contents of the file are lifted from [here](https://github.com/fullstack-hy2019/misc/blob/master/anecdotes.json).
+Lets get to know the main features of Class Components by producing yet another very familiar anecdote application. We store the anecdotes in the file <i>db.json</i> using <i>json-server</i>. The contents of the file are lifted from [here](https://github.com/fullstackopen-2019/misc/blob/master/anecdotes.json).
 
 
 
@@ -221,7 +221,7 @@ A notable benefit of using Functional components is not having to deal with the 
 
 
 
-In my opinion, and the opinion of many others, is that Class Components basically no benefits over Functional components enhanced with hooks, with the exception of the so-called [error boundary](https://reactjs.org/docs/error-boundaries.html) mechanism, which currently (7.2.2019) isn't yet in use by functional components.
+In my opinion, and the opinion of many others, is that Class Components basically no benefits over Functional components enhanced with hooks, with the exception of the so-called [error boundary](https://reactjs.org/docs/error-boundaries.html) mechanism, which currently (21.6.2019) isn't yet in use by functional components.
 
 
 
@@ -294,10 +294,14 @@ We make a npm-script for the backend so we can run it such that <i>NODE\_ENV</i>
   // ...
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
-    "start:test": "cross-env NODE_ENV=test node index.js", // highlight-line
     "watch": "cross-env NODE_ENV=development nodemon index.js",
+    "build:ui": "rm -rf build && cd ../../osa2/notes/ && npm run build --prod && cp -r build ../../osa3/backend/",
+    "deploy": "git push heroku master",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
+    "logs:prod": "heroku logs --tail",
+    "lint": "eslint .",
     "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
-    "lint": "eslint ."
+    "start:test": "cross-env NODE_ENV=test node index.js" // highlight-line
   },
   // ...
 }
@@ -311,24 +315,20 @@ When the backend and frontend are running we can start Cypress using the command
 npm run cypress:open
 ```
 
-
-
 In the project there will appear a directory called <i>cypress</i>, in which there is a subdirectory <i>integrations</i> where the tests are to be placed. Cypress generates a set of example test. Lets remove them and create our first test into the file <i>note_app_spec.js</i>:
 
 ```js
 describe('Note ', function() {
   it('front page can be opened', function() {
     cy.visit('http://localhost:3000')
-    cy.contains('Muistiinpanosovellus')
+    cy.contains('Notes')
   })
 })
 ```
 
-
-
 The execution of the test opens the browser and displays how the application behaves as the test progresses:
 
-![](../../images/7/37a.png)
+![](../../images/7/37e.png)
 
 
 
@@ -342,7 +342,7 @@ We could have also defined the test using arrow functions
 describe('Note app', () => { // highlight-line
   it('front page can be opened', () => { // highlight-line
     cy.visit('http://localhost:3000')
-    cy.contains('Muistiinpanosovellus')
+    cy.contains('Notes')
   })
 })
 ```
@@ -359,7 +359,7 @@ The test doesn't pass if contains cannot find the text it is looking for on the 
 describe('Note app', function() {
   it('front page can be opened',  function() {
     cy.visit('http://localhost:3000')
-    cy.contains('Muistiinpanosovellus')
+    cy.contains('Notes')
   })
 
 // highlight-start
@@ -375,7 +375,7 @@ describe('Note app', function() {
 
 Cypress will detect the problem
 
-![](../../images/7/38.png)
+![](../../images/7/38e.png)
 
 
 
@@ -387,7 +387,7 @@ describe('Note app',  function() {
 
   it('login form can be opened', function() {
     cy.visit('http://localhost:3000')
-    cy.contains('login')
+    cy.contains('log in')
       .click()
   })
 })
@@ -410,11 +410,11 @@ describe('Note app', function() {
   // highlight-end
 
   it('front page can be opened', function() {
-    cy.contains('Muistiinpanosovellus')
+    cy.contains('Notes')
   })
 
   it('login form can be opened', function() {
-    cy.contains('login')
+    cy.contains('log in')
       .click()
   })
 })
@@ -433,17 +433,17 @@ The command [get](https://docs.cypress.io/api/commands/get.html#Syntax) enables 
 We can get the first and last input-fields of the form and write text into them using the command [type](https://docs.cypress.io/api/commands/type.html#Syntax) as follows:
 
 ```js
-it('user can login', function() {
-  cy.contains('login')
+it('user can login', function () {
+  cy.contains('log in')
     .click()
   cy.get('input:first')
     .type('mluukkai')
   cy.get('input:last')
     .type('salainen')
-  cy.contains('kirjaudu')
+  cy.contains('login')
     .click()
   cy.contains('Matti Luukkainen logged in')
-})
+})  
 ```
 
 
@@ -458,10 +458,10 @@ A better (but not [optimal](https://docs.cypress.io/guides/references/best-pract
 const LoginForm = ({ ... }) => {
   return (
     <div>
-      <h2>Kirjaudu</h2>
+      <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          käyttäjätunnus
+          username
           <input
             id='username'  // highlight-line
             value={username}
@@ -469,7 +469,7 @@ const LoginForm = ({ ... }) => {
           />
         </div>
         <div>
-          salasana
+          password
           <input
             id='password' // highlight-line
             type="password"
@@ -477,14 +477,12 @@ const LoginForm = ({ ... }) => {
             onChange={handlePasswordChange}
           />
       </div>
-        <button type="submit">kirjaudu</button>
+        <button type="submit">login</button>
       </form>
     </div>
   )
 }
 ```
-
-
 
 The test changes like so
 
@@ -492,13 +490,13 @@ The test changes like so
 describe('Note app',  function() {
   // ..
   it('user can login', function() {
-    cy.contains('login')
+    cy.contains('log in')
       .click()
     cy.get('#username')  // highlight-line
       .type('mluukkai')
     cy.get('#password')  // highlight-line
       .type('salainen')
-    cy.contains('kirjaudu')
+    cy.contains('login')
       .click()
     cy.contains('Matti Luukkainen logged in')
   })
@@ -514,13 +512,13 @@ describe('Note app', function() {
   // ..
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('login')
+      cy.contains('log in')
         .click()
       cy.get('#username')
         .type('mluukkai')
       cy.get('#password')
         .type('salainen')
-      cy.contains('kirjaudu')
+      cy.contains('login')
         .click()
     })
 
@@ -534,7 +532,7 @@ describe('Note app', function() {
         .click()
       cy.get('input')
         .type('a note created by cypress')
-      cy.contains('tallenna')
+      cy.contains('save')
         .click()
       cy.contains('a note created by cypress')
     })
@@ -551,11 +549,9 @@ Because two of the tests expect a user to be logged in, their common part has ag
 cy.get('input')
 ```
 
+the test breaks if there would be multiple fields
 
-
-the test breaks if there are multiple fields
-
-![](../../images/7/39.png)
+![](../../images/7/39e.png)
 
 
 
@@ -621,7 +617,7 @@ so after the modification a HTTP POST request to the backend endpoint <i>/api/te
 
 
 
-The code for the modified backend can be found in full on [github](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part7-1), in the branch <i>part7-1</i>.
+The code for the modified backend can be found in full on [github](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part7-1), in the branch <i>part7-1</i>.
 
 
 
@@ -641,14 +637,14 @@ describe('Note app', function() {
   })
 
   it('front page can be opened', function() {
-    cy.contains('Muistiinpanosovellus')
+    cy.contains('Notes')
   })
 })
 ```
 
 
 
-During the initialization the test makes HTTP requests to the backend using the command [request](https://docs.cypress.io/api/commands/request.html). We move the previously created test for the creation of a note to a new test base:
+During the initialization the test makes HTTP requests to the backend using the command [request](https://docs.cypress.io/api/commands/request.html). We move the previously created test for the creation of a note to the describe block
 
 ```js
 describe('Note app', function() {
@@ -656,13 +652,13 @@ describe('Note app', function() {
 
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('login')
+      cy.contains('log in')
         .click()
       cy.get('#username')
         .type('mluukkai')
       cy.get('#password')
         .type('salainen')
-      cy.contains('kirjaudu')
+      cy.contains('login')
         .click()
     })
 
@@ -675,7 +671,7 @@ describe('Note app', function() {
         .click()
       cy.get('input')
         .type('a note created by cypress')
-      cy.contains('tallenna')
+      cy.contains('save')
         .click()
       cy.contains('a note created by cypress')
     })
@@ -683,11 +679,7 @@ describe('Note app', function() {
 })
 ```
 
-
-
 Unlike before, now the testing always starts from an identical state: one user in the database and no notes.
-
-
 
 Lets add one more test which makes sure the importance of notes can be changed. First we modify the frontend of the application so that a new note is unimportant by default, in other words the field <i>important</i> gets the value <i>false</i>: 
 
@@ -730,7 +722,7 @@ describe('Note app', function() {
           .click()
         cy.get('input')
           .type('another note cypress')
-        cy.contains('tallenna')
+        cy.contains('save')
           .click()
       })
 
@@ -749,19 +741,13 @@ describe('Note app', function() {
 
 
 
-The tests and the code for the frontend can be found in full on [github](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part7-1), in the branch <i>part7-1</i>.
+The tests and the code for the frontend can be found in full on [github](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part7-1), in the branch <i>part7-1</i>.
 
 
 
 Cypress provides fairly good ways of [debugging](https://docs.cypress.io/guides/getting-started/writing-your-first-test.html#Debugging) the tests. It is very easy to inspect the state of the DOM for each step of the execution.
 
-![](../../images/7/39.png)
-
-
-
-I don't have much experience with Cypress myself. However, it already seems like the overall best E2E testing library I have come across. Comments I've heard from other people have also mainly been very positive.
-
-
+![](../../images/7/39e.png)
 
 The documentation for Cypress is exceptionally good. I strongly recommend trying Cypress!
 
@@ -774,6 +760,6 @@ The documentation for Cypress is exceptionally good. I strongly recommend trying
 
 
 
-The exercises relating to End to end -testing are part of the [exercise series expanding on the bloglist application](/osa7/tehtavia_blogilistan_laajennus) at the end of this part. 
+The exercises relating to End to end -testing are part of the [exercise series expanding on the bloglist application](/en/part7/exercises_extending_the_blogilist) at the end of this part. 
 
 </div>

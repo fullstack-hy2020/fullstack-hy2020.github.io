@@ -13,7 +13,7 @@ Class-, eli luokkakomponentit on syytä tuntea ainakin jossain määrin, sillä 
 
 ### Luokkakomponentit
 
-Tutustutaan nyt luokkakomponenttien tärkeimpiin ominaisuuksiin toteuttamalla jälleen kerran jo niin tuttu anekdoottisovellus. Talletetaan anekdootit <i>json-serveriä</i> hyödyntäen tiedostoon <i>db.json</i>. Tiedoston sisältö otetaan [täältä](https://github.com/fullstack-hy2019/misc/blob/master/anecdotes.json).
+Tutustutaan nyt luokkakomponenttien tärkeimpiin ominaisuuksiin toteuttamalla jälleen kerran jo niin tuttu anekdoottisovellus. Talletetaan anekdootit <i>json-serveriä</i> hyödyntäen tiedostoon <i>db.json</i>. Tiedoston sisältö otetaan [täältä](https://github.com/fullstackopen-2019/misc/blob/master/anecdotes.json).
 
 Luokkakomponentin ensimmäinen versio näyttää seuraavalta
 
@@ -186,7 +186,7 @@ Hieman edistyneemmissä käyttöskenaarioissa effect hookit tarjoavat huomattava
 
 Merkittävä etu funktionaalisille komponenttien käytössä on se, että paljon harmia tuottavaa Javascriptin olioon itseensä viittaavaa _this_-viitettä ei tarvite käsitellä ollenkaan.
 
-Oman ja suuren enemmistön mielestä luokkakomponenteilla ei ole oikeastaan mitään etuja hookeilla rikastettuihin funktionaalisiin komponentteihin verrattuna, poikkeuksen tähän muodostaa ns. [error boundary](https://reactjs.org/docs/error-boundaries.html) -mekanismi, joka ei ole toistaiseksi (7.2.2019) funktionaalisten komponenttien käytössä.
+Oman ja suuren enemmistön mielestä luokkakomponenteilla ei ole oikeastaan mitään etuja hookeilla rikastettuihin funktionaalisiin komponentteihin verrattuna, poikkeuksen tähän muodostaa ns. [error boundary](https://reactjs.org/docs/error-boundaries.html) -mekanismi, joka ei ole toistaiseksi (21.6.2019) funktionaalisten komponenttien käytössä.
 
 Kun kirjoitat uutta koodia, [ei siis ole mitään rationaalista syytä käyttää luokkakomponentteja](https://reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both) jos projektissa on käytössä Reactista vähintään versio 16.8. Toisaalta kaikkea vanhaa Reactia [ei ole toistaiseksi mitään syytä uudelleenkirjoittaa](https://reactjs.org/docs/hooks-faq.html#do-i-need-to-rewrite-all-my-class-components) funktionaalisina komponentteina.
 
@@ -237,10 +237,14 @@ Tehdään backendille npm-skripti jonka avulla se saadaan käynnistettyä siten,
   // ...
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
-    "start:test": "cross-env NODE_ENV=test node index.js", // highlight-line
     "watch": "cross-env NODE_ENV=development nodemon index.js",
+    "build:ui": "rm -rf build && cd ../../osa2/notes/ && npm run build --prod && cp -r build ../../osa3/backend/",
+    "deploy": "git push heroku master",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
+    "logs:prod": "heroku logs --tail",
+    "lint": "eslint .",
     "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
-    "lint": "eslint ."
+    "start:test": "cross-env NODE_ENV=test node index.js" // highlight-line
   },
   // ...
 }
@@ -259,14 +263,14 @@ Sovellukselle tulee hakemisto <i>cypress</i> jonka alihakemistoon <i>integration
 describe('Note ', function() {
   it('front page can be opened', function() {
     cy.visit('http://localhost:3000')
-    cy.contains('Muistiinpanosovellus')
+    cy.contains('Notes')
   })
 })
 ```
 
 Testin suoritus avaa selaimen ja näyttää miten sovellus käyttäytyy testin edetessä:
 
-![](../../images/7/37a.png)
+![](../../images/7/37e.png)
 
 Testi näyttää rakenteen puolesta melko tutulta. <i>describe</i>-lohkoja käytetään samaan tapaan kuin Jestissä ryhmittelemään yksittäisiä testitapauksia, jotka on määritelty <i>it</i>-metodin avulla. Nämä osat Cypress on lainannut sisäisesti käyttämältään [Mocha](https://mochajs.org/)-testikirjastolta. Mocha oli testikirjastojen vanha hallitsija, se on edelleen suosittu, mutta Jest on mennyt selvästi edelle. [visit](https://docs.cypress.io/api/commands/visit.html#Syntax) ja[contains](https://docs.cypress.io/api/commands/contains.html#Syntax) taas ovat Cypressin komentoja, joiden merkitys on aika ilmeinen.
 
@@ -276,7 +280,7 @@ Olisimme voineet määritellä testin myös käyttäen nuolifunktioita
 describe('Note app', () => { // highlight-line
   it('front page can be opened', () => { // highlight-line
     cy.visit('http://localhost:3000')
-    cy.contains('Muistiinpanosovellus')
+    cy.contains('Notes')
   })
 })
 ```
@@ -289,7 +293,7 @@ Jos contains ei löydä sivulta etsimäänsä tekstiä, testi ei mene läpi. Eli
 describe('Note app', function() {
   it('front page can be opened',  function() {
     cy.visit('http://localhost:3000')
-    cy.contains('Muistiinpanosovellus')
+    cy.contains('Notes')
   })
 
 // highlight-start
@@ -303,7 +307,7 @@ describe('Note app', function() {
 
 havaitsee Cypress ongelman
 
-![](../../images/7/38.png)
+![](../../images/7/38e.png)
 
 Laajennetaan testiä siten, että testi yrittää kirjautua sovellukseen. Aloitetaan kirjautumislomakkeen avaamisella.
 
@@ -313,7 +317,7 @@ describe('Note app',  function() {
 
   it('login form can be opened', function() {
     cy.visit('http://localhost:3000')
-    cy.contains('login')
+    cy.contains('log in')
       .click()
   })
 })
@@ -332,11 +336,11 @@ describe('Note app', function() {
   // highlight-end
 
   it('front page can be opened', function() {
-    cy.contains('Muistiinpanosovellus')
+    cy.contains('Notes')
   })
 
   it('login form can be opened', function() {
-    cy.contains('login')
+    cy.contains('log in')
       .click()
   })
 })
@@ -349,17 +353,17 @@ Komento [get](https://docs.cypress.io/api/commands/get.html#Syntax) mahdollistaa
 Voimme hakea lomakkeen ensimmäisen ja viimeisen input-kentän ja kirjoittaa niihin komennolla [type](https://docs.cypress.io/api/commands/type.html#Syntax) seuraavasti:
 
 ```js
-it('user can login', function() {
-  cy.contains('login')
+it('user can login', function () {
+  cy.contains('log in')
     .click()
   cy.get('input:first')
     .type('mluukkai')
   cy.get('input:last')
     .type('salainen')
-  cy.contains('kirjaudu')
+  cy.contains('login')
     .click()
   cy.contains('Matti Luukkainen logged in')
-})
+})  
 ```
 
 Testi toimii mutta on kuitenkin sikäli ongelmallinen, että jos sovellukseen tulee jossain vaiheessa lisää input-kenttiä testi saattaa hajota, sillä se luottaa tarvitsemiensa kenttien olevan ensimmäisenä ja viimeisenä.
@@ -370,10 +374,10 @@ Parempi (mutta ei kuitenkaan dokumentaation mukaan täysin [optimaali](https://d
 const LoginForm = ({ ... }) => {
   return (
     <div>
-      <h2>Kirjaudu</h2>
+      <h2>Login</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          käyttäjätunnus
+          username
           <input
             id='username'  // highlight-line
             value={username}
@@ -381,7 +385,7 @@ const LoginForm = ({ ... }) => {
           />
         </div>
         <div>
-          salasana
+          password
           <input
             id='password' // highlight-line
             type="password"
@@ -389,7 +393,7 @@ const LoginForm = ({ ... }) => {
             onChange={handlePasswordChange}
           />
       </div>
-        <button type="submit">kirjaudu</button>
+        <button type="submit">login</button>
       </form>
     </div>
   )
@@ -402,13 +406,13 @@ Testi muuttuu muotoon
 describe('Note app',  function() {
   // ..
   it('user can login', function() {
-    cy.contains('login')
+    cy.contains('log in')
       .click()
     cy.get('#username')  // highlight-line
       .type('mluukkai')
     cy.get('#password')  // highlight-line
       .type('salainen')
-    cy.contains('kirjaudu')
+    cy.contains('login')
       .click()
     cy.contains('Matti Luukkainen logged in')
   })
@@ -422,13 +426,13 @@ describe('Note app', function() {
   // ..
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('login')
+      cy.contains('log in')
         .click()
       cy.get('#username')
         .type('mluukkai')
       cy.get('#password')
         .type('salainen')
-      cy.contains('kirjaudu')
+      cy.contains('login')
         .click()
     })
 
@@ -442,7 +446,7 @@ describe('Note app', function() {
         .click()
       cy.get('input')
         .type('a note created by cypress')
-      cy.contains('tallenna')
+      cy.contains('save')
         .click()
       cy.contains('a note created by cypress')
     })
@@ -459,7 +463,7 @@ cy.get('input')
 
 jos kenttiä on useampia, testi hajoaa
 
-![](../../images/7/39.png)
+![](../../images/7/39e.png)
 
 Tämän takia olisi jälleen parempi lisätä lomakkeen kentälle <i>id</i> ja hakea kenttä testissä id:n perusteella.
 
@@ -511,7 +515,7 @@ module.exports = app
 
 eli lisäyksen jälkeen HTTP POST -operaatio backendin endpointiin <i>/api/testing/reset</i> tyhjentää tietokannan.
 
-Backendin testejä varten muokattu koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part7-1), branchissä <i>part7-1</i>.
+Backendin testejä varten muokattu koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part7-1), branchissä <i>part7-1</i>.
 
 Tällä hetkellä sovelluksen käyttöliittymän ei ole mahdollista luoda käyttäjiä järjestelmään. Testien alustuksessa on siis suoraan luotava testikäyttäjä backendiin.
 
@@ -529,12 +533,12 @@ describe('Note app', function() {
   })
 
   it('front page can be opened', function() {
-    cy.contains('Muistiinpanosovellus')
+    cy.contains('Notes')
   })
 })
 ```
 
-Testi tekee alustuksen aikana HTTP-pyyntöjä backendiin komennolla [request](https://docs.cypress.io/api/commands/request.html). Siirretään aiemmin tehty uuden muistiinpanon testi uuteen testipohjaan:
+Testi tekee alustuksen aikana HTTP-pyyntöjä backendiin komennolla [request](https://docs.cypress.io/api/commands/request.html). Siirretään aiemmin tehty uuden muistiinpanon testi describe-lohkon sisälle:
 
 ```js
 describe('Note app', function() {
@@ -542,13 +546,13 @@ describe('Note app', function() {
 
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('login')
+      cy.contains('log in')
         .click()
       cy.get('#username')
         .type('mluukkai')
       cy.get('#password')
         .type('salainen')
-      cy.contains('kirjaudu')
+      cy.contains('login')
         .click()
     })
 
@@ -561,7 +565,7 @@ describe('Note app', function() {
         .click()
       cy.get('input')
         .type('a note created by cypress')
-      cy.contains('tallenna')
+      cy.contains('save')
         .click()
       cy.contains('a note created by cypress')
     })
@@ -627,13 +631,11 @@ describe('Note app', function() {
 })
 ```
 
-Testit ja frontendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019part2-notes/tree/part7-1), branchissa <i>part7-1</i>.
+Testit ja frontendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/part2-notes/tree/part7-1), branchissa <i>part7-1</i>.
 
 Cypress tarjoaa melko hyvät mahdollisuudet testien [debuggaamiseen](https://docs.cypress.io/guides/getting-started/writing-your-first-test.html#Debugging). Testin kunkin vaiheen aikaista sovelluksen DOM:in tilaa on erittäin helppo tarkastella:
 
-![](../../images/7/39.png)
-
-Itselläni ei ole kovin paljoa kokemusta Cypressistä. Se kuitenkin jo tässä vaiheessa vaikuttaa ylivoimaisesti parhaalta E2E-testauskirjastolta mihin olen törmännyt. Muilta kuulemani kommentitkin ovat olleet pääasiassa erittäin positiivisia.
+![](../../images/7/39e.png)
 
 Cypressin dokumentaatio on poikkeuksellisen hyvä. Suosittelenkin lämpimästi Cypressin kokeilemista!
 
