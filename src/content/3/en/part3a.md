@@ -835,7 +835,7 @@ We created a new <i>create\_note.rest</i> file for the request. The request is f
 
 One benefit that the REST client has over Postman is that the requests are handily available at the root of the project repository, and they can be distributed to everyone in the development team. Postman also allows users to save requests, but the situation can get quite chaotic especially when you're working on multiple unrelated projects.
 
-> **Important sidenode**
+> **Important sidenote**
 >
 
 > Sometimes when you're debugging, you may want to find out what headers have been set to the HTTP request. One way of accomplishing this is through the [get](http://expressjs.com/en/4x/api.html#req.get) method of the _request_ object, that can be used for getting the value of a single header. The _request_ object also has the <i>headers</i> property, that contains all of the headers of the application.
