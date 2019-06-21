@@ -465,19 +465,19 @@ Tehdään testejä varten hakemisto <i>tests</i> ja sinne tiedosto <i>palindrome
 const palindrome = require('../utils/for_testing').palindrome
 
 test('palindrome of a', () => {
-  const result = palindrom('a')
+  const result = palindrome('a')
 
   expect(result).toBe('a')
 })
 
 test('palindrome of react', () => {
-  const result = palindrom('react')
+  const result = palindrome('react')
 
   expect(result).toBe('tcaer')
 })
 
 test('palindrome of saippuakauppias', () => {
-  const result = palindrom('saippuakauppias')
+  const result = palindrome('saippuakauppias')
 
   expect(result).toBe('saippuakauppias')
 })
@@ -510,7 +510,7 @@ Yksittäiset testitapaukset määritellään funktion _test_ avulla. Ensimmäise
 
 ```js
 () => {
-  const result = palindrom('react')
+  const result = palindrome('react')
 
   expect(result).toBe('tcaer')
 }
@@ -527,8 +527,8 @@ Jest olettaa oletusarvoisesti, että testitiedoston nimessä on merkkijono <i>.t
 Jestin antamat virheilmoitukset ovat hyviä, rikotaan testi
 
 ```js
-test('palindrom of react', () => {
-  const result = palindrom('react')
+test('palindrome of react', () => {
+  const result = palindrome('react')
 
   expect(result).toBe('tkaer')
 })
