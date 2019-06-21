@@ -100,14 +100,14 @@ module.exports = {
     '7': {
       a: 'React-router',
       b: 'More about styles',
-      //c: 'Webpack',
+      c: 'Webpack',
       d: 'Class components, E2E-testing',
       e: 'Miscellaneous',
       f: 'Exercises: extending the blogilist',          
     },
     '8': {
       /*
-      a: 'GraphQL-serves',
+      a: 'GraphQL-server',
       b: 'React and GraphQL',
       c: 'Database and user administration',
       d: 'Login and updating the cache',

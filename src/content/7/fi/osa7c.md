@@ -121,8 +121,8 @@ Lisätään hieman koodia tiedostoon <i>src/index.js</i>:
 
 ```js
 const hello = name => {
-  console.log(`hello ${name}`);
-};
+  console.log(`hello ${name}`)
+}
 ```
 
 Kun nyt suoritamme komennon _npm run build_ webpack bundlaa koodin. Tuloksena on hakemistoon <i>build</i> sijoitettava tiedosto <i>main.js</i>:
@@ -148,7 +148,7 @@ import App from './App';
 
 const hello = name => {
   console.log(`hello ${name}`)
-};
+}
 
 App()
 ```
@@ -199,6 +199,7 @@ const config = {
     filename: 'main.js'
   }
 }
+
 module.exports = config
 ```
 
@@ -263,9 +264,9 @@ Kun bundlaamme sovelluksen, törmäämme kuitenkin ongelmaan
 Webpack mainitsee että saatamme tarvita <i>loaderin</i> tiedoston <i>App.js</i> käsittelyyn. Webpack ymmärtää itse vain Javascriptia ja vaikka se saattaa meiltä matkan varrella olla unohtunutkin, käytämme Reactia ohjelmoidessamme [JSX](https://facebook.github.io/jsx/):ää näkymien renderöintiin, eli esim. seuraava
 
 ```js
-const App = () => (
-  <div>hello webpack</div>
-)
+const App = () => {
+  return <div>hello webpack</div>
+}
 ```
 
 ei ole "normaalia" Javascriptia, vaan JSX:n tarjoama syntaktinen oikotie määritellä <i>div</i>-tagiä vastaava React-elementti.
@@ -281,17 +282,19 @@ const config = {
     path: path.resolve(__dirname, 'build'),
     filename: 'main.js',
   },
+  // highlight-start
   module: {
     rules: [
       {
         test: /\.js$/,
         loader: 'babel-loader',
         query: {
-          presets: ['react'],
+          presets: ['@babel/preset-react'],
         },
       },
     ],
   },
+  // highlight-end
 }
 ```
 
@@ -314,7 +317,7 @@ Kenttä <i>test</i> määrittelee että käsitellään <i>.js</i>-päätteisiä 
 Asennetaan loader ja sen tarvitsemat kirjastot <i>kehitysaikaiseksi riippuvuudeksi</i>:
 
 ```js
-npm i @babel/core babel-loader @babel/preset-react --save-dev
+npm install @babel/core babel-loader @babel/preset-react --save-dev
 ```
 
 Nyt bundlaus onnistuu.
@@ -336,7 +339,7 @@ Sovellusta voi nyt kokeilla avaamalla tiedoston <i>build/index.html</i>  selaime
 
 ![](../../images/7/22.png)
 
-On kuitenkin huomionarvoista, että jos sovelluksemme sisältää <i>async/await</i> -toiminnallisuutta, selaimeen ei piirry mitään. [Konsoliin saapuneen virheviestin googlaaminen](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) valaisee asiaa. Asian korjaamiseksi on asennettava vielä yksi puuttuva riippuvuus, [@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill).
+On kuitenkin huomionarvoista, että jos sovelluksemme sisältää <i>async/await</i> -toiminnallisuutta, selaimeen ei joillain selaimilla renderöidy mitään. [Konsoliin tulostuneen virheviestin googlaaminen](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) valaisee asiaa. Asian korjaamiseksi on asennettava vielä yksi puuttuva riippuvuus, [@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill).
 
 ```
 npm install --save-dev @babel/polyfill
@@ -414,11 +417,13 @@ Lisätään sovellukseemme hieman CSS:ää. Tehdään tiedosto <i>src/index.css<
 Määritellään tyyli käytettäväksi komponentissa <i>App</i>
 
 ```js
-const App = () => (
-  <div className="container">
-    hello webpack
-  </div>
-)
+const App = () => {
+  return (
+    <div className="container">
+      hello webpack
+    </div>
+  )
+}
 ```
 
 ja importataan se tiedostossa <i>index.js</i>
@@ -619,7 +624,7 @@ const App = () => {
 
 ### Koodin minifiointi
 
-Kun sovellus viedään tuotantoon, on siis käytössä tiedostoon <i>main.js</i> webpackin generoima koodi. Vaikka sovelluksemme sisältää omaa koodia vain muutaman rivin, on tiedoston <i>main.js</i> koko 807027 tavua, sillä se sisältää myös kaiken React-kirjaston koodin. Tiedoston koollahan on sikäli väliä, että selain joutuu lataamaan tiedoston kun sovellusta aletaan käyttämään. Nopeilla internetyhteyksillä 807027 tavua ei sinänsä ole ongelma, mutta jos mukaan sisällytetään enemmän kirjastoja, alkaa sovelluksen lataaminen pikkuhiljaa hidastua etenkin mobiilikäytössä.
+Kun sovellus viedään tuotantoon, on siis käytössä tiedostoon <i>main.js</i> webpackin generoima koodi. Vaikka sovelluksemme sisältää omaa koodia vain muutaman rivin, on tiedoston <i>main.js</i> koko 1281572 tavua, sillä se sisältää myös kaiken React-kirjaston koodin. Tiedoston koollahan on sikäli väliä, että selain joutuu lataamaan tiedoston kun sovellusta aletaan käyttämään. Nopeilla internetyhteyksillä 1281572 tavua ei sinänsä ole ongelma, mutta jos mukaan sisällytetään enemmän kirjastoja, alkaa sovelluksen lataaminen pikkuhiljaa hidastua etenkin mobiilikäytössä.
 
 Jos tiedoston sisältöä tarkastelee, huomaa että sitä voisi optimoida huomattavasti koon suhteen esim. poistamalla kommentit. Tiedostoa ei kuitenkaan kannata lähteä optimoimaan käsin, sillä tarkoitusta varten on olemassa monia työkaluja.
 
@@ -649,8 +654,8 @@ Webpackin versiosta 4 alkaen pluginia ei ole tarvinnut konfiguroida erikseen, ri
 Kun sovellus bundlataan uudelleen, pienenee tuloksena oleva <i>main.js</i> mukavasti
 
 ```js
-$ ls -l main.js
--rw-r--r--  1 mluukkai  984178727  126388 Feb  6 18:27 main.js
+$ build ls -l main.js
+-rw-r--r--  1 mluukkai  984178727  217450 Jun 21 20:18 main.js
 ```
 
 Minifioinnin lopputulos on kuin vanhan liiton c-koodia, kommentit ja jopa turhat välilyönnit ja rivinvaihdot on poistettu ja muuttujanimet ovat yksikirjaimisia:
@@ -670,12 +675,12 @@ Talletetaan seuraava sisältö tiedostoon <i>db.json</i>
   "notes": [
     {
       "important": true,
-      "content": "HTML on helppoa",
+      "content": "HTML is easy",
       "id": "5a3b8481bb01f9cb00ccb4a9"
     },
     {
       "important": false,
-      "content": "Mongo osaa tallettaa oliot",
+      "content": "Mongo can save js objects",
       "id": "5a3b920a61e8c8d3f484bdd0"
     }
   ]
@@ -690,7 +695,7 @@ Asennetaan <i>axios</i>, käynnistetään json-server ja tehdään tarvittavat l
 
 ```js
 import React, { useState, useEffect } from 'react'
-import axios from 'axios';
+import axios from 'axios'
 
 // highlight-start
 const useNotes = (url) => {
