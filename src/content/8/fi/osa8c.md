@@ -314,7 +314,7 @@ const server = new ApolloServer({
         auth.substring(7), JWT_SECRET
       )
 
-      const currentUser = await User.findById(decodedToken.id)
+      const currentUser = await User.findById(decodedToken.id).populate('friends')
       return { currentUser }
     }
   }
@@ -388,9 +388,8 @@ Mutaation toteuttava resolveri:
 
 ```js
   addAsFriend: async (root, args, { currentUser }) => {
-    const nonFriendAlready = (person) => {
+    const nonFriendAlready = (person) => 
       !currentUser.friends.map(f => f._id).includes(person._id)
-    }
 
     if (!currentUser) {
       throw new AuthenticationError("not authenticated")
