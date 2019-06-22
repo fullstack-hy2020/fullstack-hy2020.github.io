@@ -401,9 +401,9 @@ Osoittamalla oikeaa kohtaa virheelliseltä riviltä saa virheilmoituksen näkyvi
 
 Jos Playground vaikuttaa olevan jumissa, niin sivun reloadaaminen yleensä auttaa.
 
-Klikkaamalla oikean reunan tekstiä <i>schema</i> näyttää Playground palvelimen GraphQL-skeeman.
+Klikkaamalla oikean reunan tekstiä <i>DOCS</i> näyttää Playground palvelimen GraphQL-skeeman.
 
-![](../../images/8/4.png)
+![](../../images/8/4e.png)
 
 ### Resolverin parametrit
 
@@ -617,12 +617,6 @@ const resolvers = {
   // ...
   Mutation: {
     addPerson: (root, args) => {
-      if (persons.find(p => p.name === args.name)) {
-        throw new UserInputError('Name must be unique', {
-          invalidArgs: args.name,
-        })
-      }
-
       const person = { ...args, id: uuid() }
       persons = persons.concat(person)
       return person

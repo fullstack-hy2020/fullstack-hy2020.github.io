@@ -6,8 +6,8 @@ lang: en
 
 <div class="intro">
 
-In this part we will use GraphQL, the REST alternative developed by Facebook, to implement the frontend backend communication. 
+This part of the course is about GraphQL, Facebook's alternative to REST for communication between browser and a server.
 
-<b>This part will be available by 30.6.2019</b>
+<b>In progress. This part will be completely available by 30.6.2019</b>
 
 </div>
