@@ -107,7 +107,7 @@ ReactDOM.render(
 Olemme valmiina toteuttamaan sovelluksen päänäkymän, joka listaa kaikkien henkilöiden puhelinnumerot. 
 
 Apollo Client tarjoaa muutaman vaihtoehtoisen tavan kyselyjen tekemiselle.
-Tämän hetken (tämä osa on kirjoitettu 17.2.2019) vallitseva käytäntö on komponentin [Query](https://www.apollographql.com/docs/react/essentials/queries.html) käyttäminen.
+Tämän hetken (tämä osa on editoitu viimeksi 22.6.2019) vallitseva käytäntö on komponentin [Query](https://www.apollographql.com/docs/react/essentials/queries.html) käyttäminen.
 
 Kyselyn tekevän komponentin <i>App</i> koodi näyttää seuraavalta:
 
@@ -270,17 +270,17 @@ Komponentti <i>Persons</i> muuttuu seuraavasti:
 ```js
 // highlight-start
 const FIND_PERSON = gql`
-query findPersonByName($nameToSearch: String!) {
-  findPerson(name: $nameToSearch) {
-    name
-    phone 
-    id
-    address {
-      street
-      city
+  query findPersonByName($nameToSearch: String!) {
+    findPerson(name: $nameToSearch) {
+      name
+      phone 
+      id
+      address {
+        street
+        city
+      }
     }
   }
-}
 `
 // highlight-end
 
@@ -414,7 +414,7 @@ const App = () => {
       <Mutation mutation={CREATE_PERSON}>
         {(addPerson) =>
           <PersonForm
-            addUser={addPerson}
+            addPerson={addPerson}
           />
         }
       </Mutation>
@@ -437,7 +437,7 @@ const PersonForm = (props) => {
 
   const submit = async (e) => {
     e.preventDefault()
-    await props.addUser({
+    await props.addPerson({
       variables: { name, phone, street, city }
     })
 
@@ -507,7 +507,7 @@ const App = () => {
       <Mutation mutation={createPerson} >
         {(addPerson) =>
           <PersonForm
-            addUser={addPerson}
+            addPerson={addPerson}
           />
         }
       </Mutation>
@@ -543,7 +543,7 @@ const App = () => {
       >
         {(addPerson) =>
           <PersonForm
-            addUser={addPerson}
+            addPerson={addPerson}
           />
         }
       </Mutation>
@@ -564,7 +564,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 Jos yritämme luoda epävalidia henkilöä, seurauksena on poikkeus.
 
-![](../../images/8/14.png)
+![](../../images/8/14e.png)
 
 Poikkeus on syytä käsitellä. Eräs tapa poikkeusten käsittelyyn on rekisteröidä mutaatiolle poikkeuksenkäsittelijä [onError](https://www.apollographql.com/docs/react/essentials/mutations.html#props)-propsin avulla:
 
@@ -602,7 +602,7 @@ const App = () => {
       >
         {(addPerson) =>
           <PersonForm
-            addUser={addPerson}
+            addPerson={addPerson}
           />
         }
       </Mutation>
@@ -866,7 +866,7 @@ const App = () => {
       >
         {(addPerson) =>
           <PersonForm
-            addUser={addPerson}
+            addPerson={addPerson}
           />
         }
       </Mutation>
