@@ -966,9 +966,9 @@ const App = props => {
   return (
     <div>
       <Display value={value} />
-      <Button onClick={() => setToValue(1000)} text="thousand" />
-      <Button onClick={() => setToValue(0)} text="reset" />
-      <Button onClick={() => setToValue(value + 1)} text="increment" />
+      <Button handleClick={() => setToValue(1000)} text="thousand" />
+      <Button handleClick={() => setToValue(0)} text="reset" />
+      <Button handleClick={() => setToValue(value + 1)} text="increment" />
     </div>
   )
 }
@@ -995,9 +995,9 @@ const App = props => {
   return (
     <div>
       <Display value={value} />
-      <Button onClick={() => setToValue(1000)} text="thousand" />
-      <Button onClick={() => setToValue(0)} text="reset" />
-      <Button onClick={() => setToValue(value + 1)} text="increment" />
+      <Button handleClick={() => setToValue(1000)} text="thousand" />
+      <Button handleClick={() => setToValue(0)} text="reset" />
+      <Button handleClick={() => setToValue(value + 1)} text="increment" />
     </div>
   )
 }
@@ -1143,6 +1143,8 @@ Remember to keep your console open at all times. If you see this warning in your
 ![](../../images/1/17a.png)
 
 Then perform the necessary actions to make the warning disappear. Try Googling the error message if you get stuck.
+
+<i>Typical source of an error `Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.` is Chrome extension. Try going to `chrome://extensions/` and try disabling them one by one and refreshing React app page; the error should eventually disappear.</i>
 
 **Make sure that from now on you don't see any warnings in your console!**
 
