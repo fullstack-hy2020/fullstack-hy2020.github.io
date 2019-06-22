@@ -202,7 +202,7 @@ Ensimmäinen parametri _link_ määrittelee sen, miten client ottaa yhteyttä pa
 
 Uusien henkilöiden lisäys ja numeroiden muuttaminen toimii taas. Sovellukseen jää kuitenkin yksi ongelma. Jos yritämme lisätä puhelinnumerotonta henkilöä, se ei onnistu.
 
-![](../../images/8/25.png)
+![](../../images/8/25e.png)
 
 Validointi epäonnistuu, sillä frontend lähettää kentän _phone_ arvona tyhjän merkkijonon. 
 
