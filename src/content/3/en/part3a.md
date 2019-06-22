@@ -996,7 +996,7 @@ Notice that the forward slash in the route <i>api/persons</i> is not a special c
 The application must be started with the command _npm start_.
 
 
-The application must also offer an _npm run_ command that will run the application and restart the server whenever changes are made and saved to a file in the source code.
+The application must also offer an _npm run watch_ command that will run the application and restart the server whenever changes are made and saved to a file in the source code.
 
 
 #### 3.2: Phonebook backend step2
