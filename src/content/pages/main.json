@@ -25,8 +25,7 @@
     "mainTitle": "Deep Dive Into Modern Web Development",
     "intro": "Learn React, Redux, Node.js, MongoDB, and GraphQL in one go! This course will introduce you to modern JavaScript-based web development. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js.",
     "current": [
-      "You can discuss the course and related topics in our dedicated group on Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Please join the conversation!",
-      "Currently parts 0-7 of the course are released. Part 8 will be released by 30 June 2019."
+      "You can discuss the course and related topics in our dedicated group on Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Please join the conversation!"
     ],
     "telegram": "Telegram is a whatsapp / messenger-style discussion forum application that can be used with a browser, mobile devices, and Windows / Linux / OSX clients.",
     "notice": "NB: Inappropriate, degrading and discriminatory comments are strictly forbidden on the channel, and anyone who sends these types of messages will be permanently removed from the discussion.",

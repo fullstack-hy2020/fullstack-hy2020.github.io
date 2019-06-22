@@ -359,7 +359,7 @@ const App = () => {
 
 Kun puhelinluetteloon nyt lisätään henkilöitä, tapahtuupa se mistä tahansa, tulostuvat clientin konsoliin lisätyn henkilön tiedot:
 
-![](../../images/8/32.png)
+![](../../images/8/32e.png)
 
 Kun luetteloon lisätään uusi henkilö, palvelin lähettää siitä tiedot clientille ja komponentin _Subscription_ attribuuttissa _onSubscriptionData_ määriteltyä callback-funktiota kutsutaan antaen sille parametriksi palvelimelle lisätty henkilö. 
 
