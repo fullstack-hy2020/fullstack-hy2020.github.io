@@ -212,7 +212,7 @@ import { filterChange } from './reducers/filterReducer'
 //...
 store.subscribe(() => console.log(store.getState()))
 store.dispatch(filterChange('IMPORTANT'))
-store.dispatch(createNote('combineReducers forms one reduces from many simple reducers'))
+store.dispatch(createNote('combineReducers forms one reducer from many simple reducers'))
 ```
 
 
