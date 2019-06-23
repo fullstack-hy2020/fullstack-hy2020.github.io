@@ -41,7 +41,7 @@ We will get to know Redux by implementing a counter application yet again:
 ![](../../images/6/1.png)
 
 
-Create a new crate-react-app-application and install </i>redux</i> with the command
+Create a new create-react-app-application and install </i>redux</i> with the command
 
 ```bash
 npm install redux --save
