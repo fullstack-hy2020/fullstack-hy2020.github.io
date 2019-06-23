@@ -237,7 +237,7 @@ In other words, supertest takes care that the application being tested is starte
 Let's write a few more tests:
 
 ```js
-test('there are five notes', async () => {
+test('there are four notes', async () => {
   const response = await api.get('/api/notes')
 
   expect(response.body.length).toBe(4)
