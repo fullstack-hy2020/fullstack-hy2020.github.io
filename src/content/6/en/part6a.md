@@ -204,7 +204,7 @@ would cause the following to be printed
 
 
 
-The code of our counter application is the following. All of the code has been written in the same file, so <i>store</i> is straght available for the React-code. We will get to know better ways to sturcture React/Redux-code later.
+The code of our counter application is the following. All of the code has been written in the same file, so <i>store</i> is straight available for the React-code. We will get to know better ways to sturcture React/Redux-code later.
 
 ```js
 import React from 'react'
