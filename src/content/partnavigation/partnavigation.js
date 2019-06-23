@@ -94,7 +94,7 @@ module.exports = {
     },
     '6': {
       a: 'Flux-architecture and Redux',
-      b: 'Many redusers, connect',
+      b: 'Many reducers, connect',
       c: 'Communicating with server in a redux application',
     },
     '7': {

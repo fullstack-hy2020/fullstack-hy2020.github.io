@@ -713,7 +713,7 @@ props.toggleImportanceOf(note.id)
 There is no need to call the _dispatch_ function separately since _connect_ has already modified the _toggleImportanceOf_ action creator into a form that contains the dispatch.
 
 
-It can take some to time to wrap your head around how _mapDispatchToProps_ works, especially once we take a look at an [alternative way of using it](/en/part6/many_redusers_connect#alternative-way-of-using-map-dispatch-to-props).
+It can take some to time to wrap your head around how _mapDispatchToProps_ works, especially once we take a look at an [alternative way of using it](/en/part6/many_reducers_connect#alternative-way-of-using-map-dispatch-to-props).
 
 
 The resulting situation from using _connect_ can be visualized like this:
@@ -1196,7 +1196,7 @@ const = () => {
 #### 6.15* Better anecdotes, step13
 
 
-Change your application so that the <i>AnecdoteList</i> component only receives a single prop based on the store's state. Construct the filtered list of anecdotes as shown in the [Presentational/Container revisited](/en/part6/many_redusers_connect#presentational-container-revisited) section in this part of the course material.
+Change your application so that the <i>AnecdoteList</i> component only receives a single prop based on the store's state. Construct the filtered list of anecdotes as shown in the [Presentational/Container revisited](/en/part6/many_reducers_connect#presentational-container-revisited) section in this part of the course material.
 
 
 As a result, the <i>AnecdoteList</i> component should get simplified into the following form:
