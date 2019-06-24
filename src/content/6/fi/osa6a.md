@@ -542,7 +542,7 @@ console.log(loput)  // tulostuu [3, 4, 5, 6]
 
 Tehdään hieman yksinkertaistettu versio osan 1 unicafe-tehtävästä. Hoidetaan sovelluksen tilan käsittely Reduxin avulla.
 
-Voit ottaa sovelluksesi pohjaksi repositoriossa https://github.com/fullstackopen-2019/unicafe-redux olevan projektin.
+Voit ottaa sovelluksesi pohjaksi repositoriossa https://github.com/fullstack-hy2019/unicafe-redux olevan projektin.
 
 <i>Aloita poistamalla kloonatun sovelluksen git-konfiguraatio ja asentamalla riippuvuudet</i>
 
