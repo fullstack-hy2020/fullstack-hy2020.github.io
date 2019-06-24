@@ -713,7 +713,7 @@ test('a specific note is within the returned notes', async () => {
 
   const contents = response.body.map(r => r.content)
   expect(contents).toContain(
-    'HTTP-protokollan tärkeimmät metodit ovat GET ja POST'
+    'Browser can execute only Javascript'
   )
 })
 
@@ -982,7 +982,7 @@ One way of fixing this is to wait for all of the asynchronous operations to fini
 
 ```js
 beforeEach(async () => {
-  await Note.remove({})
+  await Note.deleteMany({})
 
   const noteObjects = helper.initialNotes
     .map(note => new Note(note))
@@ -1005,9 +1005,9 @@ Promise.all executes the promises it receives in parallel. If the promises need 
 
 ```js
 beforeEach(async () => {
-  await Note.remove({})
+  await Note.deleteMany({})
 
-  for (let note of initialNotes) {
+  for (let note of helper.initialNotes) {
     let noteObject = new Note(note)
     await noteObject.save()
   }
@@ -1092,7 +1092,7 @@ Make the required changes to the code so that it passes the test.
 #### 4.12*: Blog list tests, step5
 
 
-Write a test related to creating new notes via the <i>/api/blogs</i> endpoint, that verifies that if the <i>title</i> and <i>url</i> properties are missing from the request data, the backend responds to the request with the status code <i>400 Bad Request</i>.
+Write a test related to creating new blogs via the <i>/api/blogs</i> endpoint, that verifies that if the <i>title</i> and <i>url</i> properties are missing from the request data, the backend responds to the request with the status code <i>400 Bad Request</i>.
 
 
 Make the required changes to the code so that it passes the test.
