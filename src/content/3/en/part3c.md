@@ -266,7 +266,7 @@ Note.find({}).then(result => {
 })
 ```
 
-When the code gets executed, all of the notes stored in the database get printed.
+When the code is executed, the program prints all the notes stored in the database.
 
 The objects are retrieved from the database with the [find](http://mongoosejs.com/docs/api.html#find_find) method of the _Note_ model. The parameter of the method is an object expressing search conditions. Since the parameter is an empty object<code>{}</code>, we get all of the notes stored in the  _notes_ collection.
 
