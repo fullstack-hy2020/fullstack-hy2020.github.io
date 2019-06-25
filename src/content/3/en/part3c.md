@@ -268,7 +268,7 @@ Note.find({}).then(result => {
 
 When the code is executed, the program prints all the notes stored in the database.
 
-The objects are retrieved from the database with the [find](http://mongoosejs.com/docs/api.html#find_find) method of the _Note_ model. The parameter of the method is an object expressing search conditions. Since the parameter is an empty object<code>{}</code>, we get all of the notes stored in the  _notes_ collection.
+The objects are retrieved from the database with the [find](https://mongoosejs.com/docs/api.html#model_Model.find) method of the _Note_ model. The parameter of the method is an object expressing search conditions. Since the parameter is an empty object<code>{}</code>, we get all of the notes stored in the  _notes_ collection.
 
 The search conditions adhere to the Mongo search query [syntax](https://docs.mongodb.com/manual/reference/operator/).
 
