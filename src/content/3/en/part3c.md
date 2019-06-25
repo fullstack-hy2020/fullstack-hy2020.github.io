@@ -306,7 +306,7 @@ As a result, the application will print:
 added Anna number 040-1234556 to phonebook
 ```
 
-The new entry to the phonebook will be saved to the database. Notice that if the name contains whitespace characters, it must be specified in quotes:
+The new entry to the phonebook will be saved to the database. Notice that if the name contains whitespace characters, it must be enclosed in quotes:
 
 ```bash
 node mongo.js yourpassword "Arto Vihavainen" 040-1234556
