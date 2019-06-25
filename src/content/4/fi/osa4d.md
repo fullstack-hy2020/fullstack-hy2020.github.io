@@ -399,4 +399,7 @@ backend -> selain: 201 created
 kayttaja -> kayttaja:
 -->
 
+Tämä oli osan viimeinen tehtävä ja on aika pushata koodi githubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/fullstackopen2019).
+
+
 </div>
