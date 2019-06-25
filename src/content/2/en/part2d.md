@@ -558,7 +558,7 @@ The module exports the following, rather peculiar looking object:
 The names to the left of the colon in the object definition are the <i>keys</i> of the object while the names to the right are <i>variables</i> that are defined inside of the module.
 
 
-Since the name of thy keys and the assigned variables are the same, we can write the object definition with a more compact syntax:
+Since the name of the keys and the assigned variables are the same, we can write the object definition with a more compact syntax:
 
 ```js
 { 
