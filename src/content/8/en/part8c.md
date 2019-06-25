@@ -10,7 +10,7 @@ lang: en
 
 We will now add user management to our application, but let's first start using a database for storing data.
 
-#### Mongoose and Apollo
+### Mongoose and Apollo
 
 
 Install mongoose and mongoose-unique-validator:
@@ -169,7 +169,7 @@ is returned, so the objects whichs field _phone_ has a value. If the parameter h
 Person.find({ phone: { $exists: false }})
 ```
 
-#### Validation
+### Validation
 
 
 As well as in GraphQL, the input is now validated using the validations defined in the mongoose-schema. For handling possible validation errors in the schema, we must add an error handling _try/catch_-block to the save _save_-method. When we end up in the catch, we throw a suitable exception: 

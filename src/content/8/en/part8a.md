@@ -1029,7 +1029,7 @@ If there are multiple queries, Playground asks you to choose which of them to ru
 ### Exercises
 
 
-Through the exercises we implement a GraphQl backend for a small library. 
+Through the exercises we implement a GraphQL backend for a small library. 
 Start with [this file](https://github.com/fullstackopen-2019/misc/blob/master/library-backend.js). Remember _npm init_ and to install dependencies!
 
 #### 8.1: The number of books and authors

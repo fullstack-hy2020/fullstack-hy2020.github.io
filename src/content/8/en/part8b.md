@@ -83,7 +83,6 @@ client.query({ query })
   })
 ```
 
-
 The servers response is printed to the console: 
 
 ![](../../images/8/9a.png)
@@ -855,7 +854,7 @@ There is already [a beta release](https://www.npmjs.com/package/react-apollo/v/3
 npm install --save react-apollo@3.0.0-beta.2
 ```
 
-There is currently (22.6.2019) no documentation how to use Apollo hooks, [this blog](https://moonhighway.com/apollo-hooks) is one of the rare examples fond by google.
+There is currently (22.6.2019) no documentation how to use Apollo hooks, [this blog](https://moonhighway.com/apollo-hooks) is one of the rare examples fonud by google.
 
 A small change is needed to _index.js_ after the new version is installed:
 
@@ -1036,7 +1035,7 @@ Implement a Books view, so show on a page all other details of all books except 
 #### 8.10: Adding a book
 
 
-Implmement a possibility to add new books to your application. You can create a new view for adding books, similarly to how the views for Authors and Books were done. The functionality can look like this: 
+Implmement a possibility to add new books to your application. The functionality can look like this: 
 
 ![](../../images/8/18.png)
 

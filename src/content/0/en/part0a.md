@@ -48,18 +48,22 @@ The course can be taken as a shorter course worth 3 credits, or as the full cour
 
 The amount of credits and the grade are determined by the number of submitted exercises, so also the exercises without stars count towards your final grade. There is also a course exam  which must be passed. The exam does not however count towards your grade. 
 
-If you want university credits, save your student id number to the "my submissions" view on the [submission system](https://studies.cs.helsinki.fi/fullstackopen2019). To register university credits, you must have a Finnish social security number. 
+If you want university credits, save your student id number to the "my submissions" view on the [submission system](https://studies.cs.helsinki.fi/fullstackopen2019). To register for university credits that are provided by [Open university](https://courses.helsinki.fi/fi/aytkt21009/124726896), you must have a Finnish social security number. 
+
+You can download the course certificate from [submission system](https://studies.cs.helsinki.fi/fullstackopen2019) once you have completed enough exercises for a passing grade. For getting the course certificate Finnish social security number is not needed.
 
 ####  3 credits
 
-For three credits, all compulsory exercises (without stars) for parts 0-3 must be submitted, and the 3 credit course exam must be passed.
+For three credits, all compulsory exercises (without stars) for parts 0-3 must be submitted.
 
-The exam is done on Moodle. You can access Moodle through [the course page of the open university](https://courses.helsinki.fi/fi/aytkt21009/124726896). Last exam date is 10.1.2020. You can take the exam only after submitting all of the required exercises. <b>Note, that the last date for signing up for the exam is 9.1.2020</b>
+For university credits also the 3 credit course exam must be passed. The exam is done on Moodle. You can access Moodle through [the course page of the open university](https://courses.helsinki.fi/fi/aytkt21009/124726896). Last exam date is 10.1.2020. You can take the exam only after submitting all of the required exercises. <b>Note, that the last date for signing up for the exam is 9.1.2020</b>
 
 Exam results can be found from "my submissions" tab of the submission system no later than 4 weeks after taking the exam (exams might be marked slower on July).
 Remember to save your student number to the submission system.
 
 The three credit course is graded pass/fail.
+
+<i>For the course certificate, you do not need to attend to the course exam or register to open university course.</i>
 
 Three credit course can later be extended to the 5-8 credit version. If you are working towards 5-8 credits from the beginning, there is no need to take the 3 credit course exam. 
 
@@ -79,12 +83,14 @@ Grade/credit limits are as follows:
 | 83           |       5        | 2        |
 | 72           |       5        | 1        |
 
-The 5-7 credit course also requires passing the course exam. The exam is done on Moodle. You can access Moodle through the course page of the Open University. The last possible date for taking the exam is 10.1.2020 <b>Note, that the last date for signing up for the exam is 9.1.2020</b>
+For university credits the 5-7 credit course also requires passing the course exam. The exam is done on Moodle. You can access Moodle through [the course page of the open university](https://courses.helsinki.fi/fi/aytkt21009/124726896). The last possible date for taking the exam is 10.1.2020 <b>Note, that the last date for signing up for the exam is 9.1.2020</b>
 
 You can take the exam only after submitting enough exercises for 5 credits. In practice it is not wise to take the course exam immediately after the critical amount of exercises has been submitted. The exam is the same for 5-7 credits. The exam does not count towards your grade.
 
 Exam results can be found from my submissions tab of the submission system not later than 4 weeks after taking the exam (exams might be marked slower on July).
 Remember to save your student number to the submission system.
+
+<i>For the course certificate, you do not need to attend to the course exam or register to open university course.</i>
 
 #### 8 credits
 
@@ -92,6 +98,12 @@ By submitting at least 22/26 of the exercises for part 8 of the course, the Grap
 Part 8 can be done any time after part 5, because it's contents are separate from parts 6 and 7. 
 
 Exercises of part 8 do not count towards the grade for the 5-7 credit course. 
+
+### Course certificate
+
+Even if you do not register to Open university course and take the exam, you can download the course certificate from [submission system](https://studies.cs.helsinki.fi/fullstackopen2019) once you have completed enough exercises for a passing grade. For getting the certificate Finnish social security number is not needed.
+
+![](../../images/0/29.png)
 
 ### Expanding a previously completed course
 

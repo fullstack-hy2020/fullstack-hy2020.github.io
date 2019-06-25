@@ -95,6 +95,12 @@ Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suorituk
 
 Arvosana siirtyy Weboodiin neljän viikon sisällä suoritusmerkintäpyynnön jälkeen.
 
+### Kurssitodistus
+
+Riippumatta siitä ilmoittaudutko Avoimen yliopiston kurssille ja teetkö kurssikokeen, saat ladattua kurssitodistuksen palautussovelluksesta siinä vaiheessa kun tekemiesi tehtävien lukumäärä oikeuttaisi kurssisuoritukseen
+
+![](../../images/0/29.png)
+
 ### Aiemmin suoritetun kurssin täydentäminen
 
 Jos olet jo suorittanut kurssin joko MOOC:ina tai Yliopiston kurssina, voit täydentää nyt suoritustasi.
