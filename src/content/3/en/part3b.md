@@ -304,7 +304,7 @@ The following exercises don't require many lines of code. They can however be ch
 
 Make the backend work with the frontend from the previous part. Do not implement the functionality for making changes to the phone numbers yet, that will be implemented in exercise 3.17. 
 
-You will propably have to do some small changes to the frontend, at least to the URL's for the backend. Remember to keep the developer console open in your browser. If some HTTP-requests fail, you should check from the <i>Network</i>-tab what is going on. Keep an eye on the backends console as well. If you did not do the previous exercise, it is worth it to print the request data or <i>request.body</i> to the console in the event handler responsible for POST-requests. 
+You will probably have to do some small changes to the frontend, at least to the URL's for the backend. Remember to keep the developer console open in your browser. If some HTTP-requests fail, you should check from the <i>Network</i>-tab what is going on. Keep an eye on the backends console as well. If you did not do the previous exercise, it is worth it to print the request data or <i>request.body</i> to the console in the event handler responsible for POST-requests. 
 
 #### 3.10 phonebook backend step10
 
