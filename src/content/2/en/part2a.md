@@ -127,7 +127,7 @@ ReactDOM.render(
 )
 ```
 
-Every note contains its textual content and a timestamp as well as a _boolean_ value for marking wether the note has been categorized as important or not, and a unique <i>id</i>.
+Every note contains its textual content and a timestamp as well as a _boolean_ value for marking whether the note has been categorized as important or not, and a unique <i>id</i>.
 
 
 The code functions based on the fact that there are exactly three notes in the array. 
