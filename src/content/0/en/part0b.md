@@ -473,7 +473,7 @@ notes.push({
 ```
 
 The Note objects have two fields: <i>content</i> containing the actual content of the note, and <i>date</i> containing the date and time the note was created. 
-The server does not save new notes to a database, so new notes dissappear when Heroku restarts the service. 
+The server does not save new notes to a database, so new notes disappear when Heroku restarts the service. 
 
 ### AJAX
 
