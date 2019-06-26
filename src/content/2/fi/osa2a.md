@@ -742,6 +742,13 @@ const total = parts.reduce( (s, p) => {
 
 ![](../../images/2/5b.png)
 
+**Pro tip3:** Mikäli console.login haluaa vain pikaisesti ujuttaa koodiin nuolifunktiota muuttamatta, voi sen tehdä näppärästi myös tällä tapaa:
+
+```js
+const total = 
+  parts.reduce( (s, p) => console.log('what is happening', s, p) || someMagicHere )
+```
+
 <h4>2.4: kurssitiedot step9</h4>
 
 Laajennetaan sovellusta siten, että kursseja voi olla <i>mielivaltainen määrä</i>:
