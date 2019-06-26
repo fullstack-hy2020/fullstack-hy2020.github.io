@@ -566,7 +566,7 @@ app.get('/notes/:id', (request, response) => {
 ```
 
 
-Now <code>app.get('/notes/:id', ...)</code> will handle all HTTP GET requests, that are of the form <i>note/SOMETING</i>, where <i>SOMETHING</i> is an arbitrary string.
+Now <code>app.get('/notes/:id', ...)</code> will handle all HTTP GET requests, that are of the form <i>note/SOMETHING</i>, where <i>SOMETHING</i> is an arbitrary string.
 
 
 The <i>id</i> parameter in the route of a request, can be accessed through the [request](http://expressjs.com/en/api.html#req) object:
