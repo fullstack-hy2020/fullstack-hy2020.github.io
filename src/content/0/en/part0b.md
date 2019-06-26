@@ -477,7 +477,7 @@ The server does not save new notes to a database, so new notes dissappear when H
 
 ### AJAX
 
-The Notes page of the application follows an early 90's style of web development and "uses Ajax". As such, it's on the crest of the wave of early 2000's web technology.
+The Notes page of the application follows an early-noughties style of web development and "uses Ajax". As such, it's on the crest of the wave of early 2000's web technology.
 
 [AJAX](<https://en.wikipedia.org/wiki/Ajax_(programming)>) (Asynchronous Javascript and XML) is a term introduced in February 2005 on the back of advancements in browser technology to describe a new revolutionary approach that enabled the fetching of content to webpages using JavaScript included within the HTML, without the need to rerender the page. 
 
