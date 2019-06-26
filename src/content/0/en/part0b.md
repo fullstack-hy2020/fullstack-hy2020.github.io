@@ -642,13 +642,13 @@ The exercises are submitted **one part at a time**. When you have submitted the 
 
   <h4>0.1: HTML</h4>
 
-Revise the basics of HTML by reading this tutorial from Mozilla: [HTML tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics). 
+Review the basics of HTML by reading this tutorial from Mozilla: [HTML tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics). 
 
 <i>This exercise is not submitted to GitHub, it's enough to just read the tutorial</i>
 
   <h4>0.2: CSS</h4>
 
-Revise the basics of CSS by reading this tutorial from Mozilla: [CSS tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).
+Review the basics of CSS by reading this tutorial from Mozilla: [CSS tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).
 
 <i>This exercise is not submitted to GitHub, it's enough to just read the tutorial</i>
 
