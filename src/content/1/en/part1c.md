@@ -314,7 +314,7 @@ When the state modifying function _setCounter_ is called, <i>React re-renders th
 }
 ```
 
-When the component function gets executed a second time, calling the _useState_ function returns the already-existing current value of the state which is now "1". Executing the function body again also makes the function call to _setState_, which will increment the _counter_ state after a second has passed. Finally, the current value of _counter_, which is "1", is rendered to the screen.
+When the component function gets executed a second time, calling the _useState_ function returns the already-existing current value of the state which is now "1". Executing the function body again also makes the function call to _setTimeout_, which will increment the _counter_ state after a second has passed. Finally, the current value of _counter_, which is "1", is rendered to the screen.
 
 The function passed as the first parameter to the _setTimeout_ function will get invoked one second after calling the _setTimeout_ function
 
