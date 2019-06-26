@@ -150,7 +150,7 @@ Eli jos kyselylle ei ole annettu parametria _phone_, palautetaan kaikki henkilö
 Person.find({ phone: { $exists: true }})
 ```
 
-palauttamat henkilöt, eli ne joiden kentällä _phone_ on jokin arvo. Jos parametrin arvo on <i>YES</i>, palauttaa kysely ne henkilöt, joilla ei ole arvoa kentällä _phone_:
+palauttamat henkilöt, eli ne joiden kentällä _phone_ on jokin arvo. Jos parametrin arvo on <i>NO</i>, palauttaa kysely ne henkilöt, joilla ei ole arvoa kentällä _phone_:
 
 ```js
 Person.find({ phone: { $exists: false }})
