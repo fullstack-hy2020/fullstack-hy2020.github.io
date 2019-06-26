@@ -300,7 +300,7 @@ Käyttäjien lista voi näyttää esim. seuraavalta:
 
 #### 4.16*: blogilistan laajennus, step5
 
-Laajenna käyttäjätunnusten luomista siten, että käyttäjätunuksen sekä salasanan tulee olla olla olemassa ja vähintään 3 merkkiä pitkiä. Käyttäjätunnuksen on oltava järjestelmässä uniikki.
+Laajenna käyttäjätunnusten luomista siten, että käyttäjätunnuksen sekä salasanan tulee olla olemassa ja vähintään 3 merkkiä pitkiä. Käyttäjätunnuksen on oltava järjestelmässä uniikki.
 
 Luomisoperaation tulee palauttaa sopiva statuskoodi ja jonkinlainen virheilmoitus, jos yritetään luoda epävalidi käyttäjä.
 
