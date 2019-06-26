@@ -63,7 +63,7 @@ mongoose.set('useFindAndModify', false)
 
 const MONGODB_URI = 'mongodb+srv://fullstack:fullstack@cluster0-ostce.mongodb.net/graphql?retryWrites=true'
 
-console.log('commecting to', MONGODB_URI)
+console.log('connecting to', MONGODB_URI)
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
   .then(() => {
@@ -430,9 +430,9 @@ Backendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-h
 
 #### 8.13: Tietokanta, osa 1
 
-Muuta kirjastosovellusta siten, että se tallettaa tiedot tietokantaan. Kirjojen ja kirjailijoiden skeema löytyy valmiiksi [täältä](https://github.com/fullstack-hy2019/misc/blob/master/library-schema.md).
+Muuta kirjastosovellusta siten, että se tallettaa tiedot tietokantaan. Kirjojen ja kirjailijoiden <i>mongoose-skeema</i> löytyy valmiiksi [täältä](https://github.com/fullstack-hy2019/misc/blob/master/library-schema.md).
 
-Muutetaan myös skeemaa hiukan kirjan osalta
+Muutetaan myös graphql-skeemaa hiukan kirjan osalta
 
 ```js
 type Book {
@@ -463,7 +463,7 @@ Saatat tässä tehtävässä hyötyä [tästä](https://docs.mongodb.com/manual/
 
 #### 8.15 Tietokanta, osa 3
 
-Täydennä sovellusta siten, että validointivirheet käsitellään järkevästi, eli niiden seurauksena heitetään poikkeus _UserInputError_ , jolle asetetaan sopiva virheviesti.
+Täydennä sovellusta siten, että tietokannan validointivirheet (esim. liian lyhyt kirjan tai kirjailijan nimi) käsitellään järkevästi, eli niiden seurauksena heitetään poikkeus _UserInputError_, jolle asetetaan sopiva virheviesti.
 
 #### 8.16 käyttäjä ja kirjautuminen
 

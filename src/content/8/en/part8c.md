@@ -69,7 +69,7 @@ mongoose.set('useFindAndModify', false)
 
 const MONGODB_URI = 'mongodb+srv://fullstack:fullstack@cluster0-ostce.mongodb.net/graphql?retryWrites=true'
 
-console.log('commecting to', MONGODB_URI)
+console.log('connecting to', MONGODB_URI)
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
   .then(() => {
@@ -468,10 +468,10 @@ The code of the backend can be found from [github](https://github.com/fullstacko
 #### 8.13: Database, part 1
 
 
-Change the library application so that it saves the data to a database. You can find the schema for books and authors from [here](https://github.com/fullstackopen-2019/misc/blob/master/library-schema.md).
+Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstackopen-2019/misc/blob/master/library-schema.md).
 
 
-Let's change the book schema a little
+Let's change the book graphql schema a little
 
 ```js
 type Book {
@@ -490,7 +490,7 @@ so that instead of just the authors name the book object contains all the detail
 You can assume that the user will not try to add faulty books or authors, so you don't have to care about validation errors. 
 
 
-The following things do not have to work just yet. 
+The following things do <i>not</i> have to work just yet
 
  - _allBooks_ query with parameters
  -  <i>bookCount</i> field of an author object
@@ -499,16 +499,15 @@ The following things do not have to work just yet.
 
 #### 8.14: Database, part 2
 
-
 Complete the program so, that all queries (except _allBooks_ with the parameter _author_  ) and mutations work. 
-
 
 You might find this [useful](https://docs.mongodb.com/manual/reference/operator/query/in/).
 
 #### 8.15 Database, part 3
 
 
-Complete the program so, that validation errors are handled sensibly. This means that they cause _UserInputError_ with a suitable error message to be thrown. 
+Complete the program so, that database validation errors (eg. too short book title or author name) are handled sensibly. This means that they cause _UserInputError_ with a suitable error message to be thrown. 
+
 
 #### 8.16 user and logging in
 
