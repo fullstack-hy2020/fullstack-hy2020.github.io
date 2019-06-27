@@ -19,7 +19,7 @@ Use the Chrome browser <i>now and all throughout the course</i>.
 
 Open the [example application](https://fullstack-exampleapp.herokuapp.com/) on your browser. Sometimes this takes a while. 
 
-**The 1st rule of web development**: Always keep the developer console open on your browser. With mac, the console can be opened by pressing _alt_ _cmd_ and _i_ simultaneously. 
+**The 1st rule of web development**: Always keep the developer console open on your browser. With mac, the console can be opened by pressing _F12_ or _alt_ _cmd_ and _i_ simultaneously. 
 With windows the console opens by pressing _F12_ or _ctrl_ _shift_ and _i_ simultaneously. 
 
 Before continuing, find out how to open the developer console on your computer (google if necessary) and remember to <i>always</i> keep it open when developing web applications. 
