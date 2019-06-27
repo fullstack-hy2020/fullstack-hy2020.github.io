@@ -19,7 +19,7 @@ Use the Chrome browser <i>now and all throughout the course</i>.
 
 Open the [example application](https://fullstack-exampleapp.herokuapp.com/) on your browser. Sometimes this takes a while. 
 
-**The 1st rule of web development**: Always keep the developer console open on your browser. With mac, the console can be opened by pressing _alt_ _cmd_ and _i_ simultaneously. 
+**The 1st rule of web development**: Always keep the developer console open on your browser. With mac, the console can be opened by pressing _F12_ or _alt_ _cmd_ and _i_ simultaneously. 
 With windows the console opens by pressing _F12_ or _ctrl_ _shift_ and _i_ simultaneously. 
 
 Before continuing, find out how to open the developer console on your computer (google if necessary) and remember to <i>always</i> keep it open when developing web applications. 
@@ -473,11 +473,11 @@ notes.push({
 ```
 
 The Note objects have two fields: <i>content</i> containing the actual content of the note, and <i>date</i> containing the date and time the note was created. 
-The server does not save new notes to a database, so new notes dissappear when Heroku restarts the service. 
+The server does not save new notes to a database, so new notes disappear when Heroku restarts the service. 
 
 ### AJAX
 
-The Notes page of the application follows an early 90's style of web development and "uses Ajax". As such, it's on the crest of the wave of early 2000's web technology.
+The Notes page of the application follows an early-noughties style of web development and "uses Ajax". As such, it's on the crest of the wave of early 2000's web technology.
 
 [AJAX](<https://en.wikipedia.org/wiki/Ajax_(programming)>) (Asynchronous Javascript and XML) is a term introduced in February 2005 on the back of advancements in browser technology to describe a new revolutionary approach that enabled the fetching of content to webpages using JavaScript included within the HTML, without the need to rerender the page. 
 
