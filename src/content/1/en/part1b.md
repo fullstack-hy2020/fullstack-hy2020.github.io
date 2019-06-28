@@ -148,7 +148,7 @@ const object3 = {
     last: 'Abramov',
   },
   grades: [2, 3, 5, 3],
-  department: 'Standford University',
+  department: 'Stanford University',
 }
 ```
 
