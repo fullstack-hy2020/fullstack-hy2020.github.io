@@ -604,7 +604,7 @@ Jos propsin tyyppi on väärä, esim. yritetään määritellä propsiksi <i>han
 
 Konfiguroimme osassa 3 koodin tyylistä huolehtivan [ESlintin](/osa3/validointi_ja_es_lint) backendiin. Otetaan nyt ESlint käyttöön myös frontendissa.
 
-Create-react-app on asentanut projektille eslintin valmiiksi, joten ei tarvita muuta kun sopiva konfiguraatio tiedoston <i>.eslintrc.js</i>.
+Create-react-app on asentanut projektille eslintin valmiiksi, joten ei tarvita muuta kuin sopiva konfiguraatio tiedostoon <i>.eslintrc.js</i>.
 
 **HUOM:** älä suorita komentoa _npm init_. Se asentaa uuden version eslintistä joka on epäsopiva create-react-app:in konfiguraatioiden kanssa!
 
