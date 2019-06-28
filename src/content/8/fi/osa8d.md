@@ -7,6 +7,9 @@ lang: fi
 
 <div class="content">
 
+
+**HUOM** osan 8 sisältöä muutettiin Apollo hookien osalta 28.6. noin klo 21. Jos olet aloittanut osan 8 tekemisen tätä aiemmin tarkista [täältä](/osa8/react_ja_graph_ql#apollon-hookit) että konfiguraatiosi ovat oikeat!
+
 Sovelluksen frontend toimii puhelinluettelon näyttämisen osalta päivitetyn palvelimen kanssa. Jotta luetteloon voitaisiin lisätä henkilöitä, tulee backendiin toteuttaa kirjautuminen.
 
 ### Käyttäjän kirjautuminen
@@ -27,7 +30,9 @@ const App = () => {
 
   // ...
 
-  const login = useMutation(LOGIN)
+  const [login] = useMutation(LOGIN, {
+    onError: handleError
+  })
 
   const errorNotification = () => errorMessage &&
     <div style={{ color: 'red' }}>
@@ -42,7 +47,6 @@ const App = () => {
         <LoginForm
           login={login}
           setToken={(token) => setToken(token)}
-          handleError={handleError}
         />
       </div>
     )
@@ -68,17 +72,14 @@ const LoginForm = (props) => {
   const submit = async (event) => {
     event.preventDefault()
 
-    try {
-      const result = await props.login({
-        variables: { username, password }
-      })
+    const result = await props.login({
+      variables: { username, password }
+    })
 
+    if (result) {
       const token = result.data.login.value
-
       props.setToken(token)
       localStorage.setItem('phonenumbers-user-token', token)
-    } catch(error){
-      props.handleError(error)
     }
   }
 
@@ -127,7 +128,7 @@ const App = () => {
 
 ```
 
-Sovelluksen tämän vaiheen koodi [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-frontend/tree/part8-6), branchissa <i>part8-6</i>.
+Sovelluksen tämän vaiheen koodi [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-6), branchissa <i>part8-6</i>.
 
 ### Tokenin lisääminen headeriin
 
@@ -136,9 +137,9 @@ Backendin muutosten jälkeen uusien henkilöiden lisäys puhelinluetteloon vaati
 ```js
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
 import ApolloClient from 'apollo-boost' // highlight-line
-import { ApolloProvider } from 'react-apollo-hooks'
+import { ApolloProvider } from "@apollo/react-hooks"
+import App from './App'
 
 // highlight-start
 const client = new ApolloClient({
@@ -228,7 +229,7 @@ const PersonForm = (props) => {
 }
 ```
 
-Sovelluksen tämän vaiheen koodi [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-frontend/tree/part8-7), branchissa <i>part8-7</i>.
+Sovelluksen tämän vaiheen koodi [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-7), branchissa <i>part8-7</i>.
 
 ### Välimuistin päivitys revisited
 
@@ -258,7 +259,7 @@ Ratkaisua on mahdollista optimoida hoitamalla välimuistin päivitys itse. Täm�
 const App = () => {
   // ...
 
-  const addPerson = useMutation(CREATE_PERSON, {
+  const [addPerson] = useMutation(CREATE_PERSON, {
     onError: handleError,
     // highlight-start
     update: (store, response) => {
@@ -309,7 +310,7 @@ Välimuistin kanssa kannattaa olla tarkkana. Välimuistissa oleva epäajantasain
 > <i>There are only two hard things in Computer Science: cache invalidation and naming things.</i> Katso lisää [täältä](https://www.google.com/search?q=two+hard+things+in+Computer+Science&oq=two+hard+things+in+Computer+Science).
 
 
-Sovelluksen tämän vaiheen koodi [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-frontend/tree/part8-8), branchissa <i>part8-8</i>.
+Sovelluksen tämän vaiheen koodi [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-8), branchissa <i>part8-8</i>.
 
 </div>
 

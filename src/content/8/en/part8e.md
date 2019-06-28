@@ -370,6 +370,7 @@ When a new person is now added to the phonebook, no matter where it's done, the 
 When a new person is added, the server sends a notification to the client, and the callback-function defined in the _onSubscriptionData_ attribute is called and given the details of the new person as parameters. 
 
 Let's extend our solution so that when the details of a new person are received, the person is added to the Apollo cache, so it is rendered to the screen immediately. 
+
 However we have to keep in mind, that when our application creates a new person, it should not be added to the cache twice: 
 
 ```js
@@ -617,20 +618,17 @@ GraphQL is already pretty old technology, being used by Facebook since 2012, so 
 #### 8.23: Subscriptions - server
 
 
-Do an implementation for subscription _bookAdded_, which returns the details of all new books to its subscribers. 
+Do a backend implementation for subscription _bookAdded_, which returns the details of all new books to its subscribers. 
 
 #### 8.24: Subscriptions - client, part 1
-
 
 Start using subscriptions in the client, and subscribe to _bookAdded_. When new books are added, notify the user. Any method works, you can use for example the [window.alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) function. 
 
 #### 8.25: Subscriptions - client, part 2
 
-
 Keep the applications view updated, when the server notifies about new books. 
 
 #### 8.26: n+1
-
 
 Solve the n+1 problem of the following query using any method you like
 

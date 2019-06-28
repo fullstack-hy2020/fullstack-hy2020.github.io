@@ -126,9 +126,7 @@ const App = () => {
 
   // ...
 }
-
 ```
-
 
 The current code of the application can be found from [github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-6), branch <i>part8-6</i>.
 
@@ -141,7 +139,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import ApolloClient from 'apollo-boost' // highlight-line
 import { ApolloProvider } from "@apollo/react-hooks"
-
 import App from './App'
 
 // highlight-start
@@ -153,8 +150,8 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client} >
     <App />
-  </ApolloProvider>
-  , document.getElementById('root')
+  </ApolloProvider>, 
+  document.getElementById('root')
 )
 ```
 
@@ -197,7 +194,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 })
 ```
-
 
 It requires installing two libraries:
 
@@ -358,7 +354,7 @@ Implement log in functionality and fix the mutations.
 It is not necessary yet to handle validation errors. 
 
 
-You can decide how the log in looks on the interface. One possible solution is to make the log in form into a separate view which can be accessed through a navigation menu: 
+You can decide how the log in looks on the user interface. One possible solution is to make the log in form into a separate view which can be accessed through a navigation menu: 
 
 ![](../../images/8/26.png)
 
@@ -379,10 +375,12 @@ Complete your application to filter the book list by genre. Your solution might 
 
 ![](../../images/8/30.png)
 
+In this exercise the filtering can be done using just React.
+
 #### 8.20 Books by genre, part 2
 
 
-Implement a view, which shows the user all books in their favourite genre.
+Implement a view, which shows the logged in user all books in their favourite genre.
 
 ![](../../images/8/29.png)
 
@@ -392,19 +390,19 @@ Implement a view, which shows the user all books in their favourite genre.
 The filtering can be done using just React. You can mark this exercise as completed if you filter the books using a GraphQL query to the server in exercise 8.5. 
 
 
-This **exercise is difficult** like it should be this late in the course. Some tips
+This and the next exercises are quite **challenging** like it should be this late in the course. You might want to complete first the easier ones in [next part](/en/part8/fragments_and_subscriptions).
 
- - Instead of using the <i>Query</i> component or the <i>useQuery</i> hook it might be better to do the queries with the _client_-object, which can be accessed with the [ApolloConsumer](https://www.apollographql.com/docs/react/essentials/queries.html#manual-query) component or [useApolloClient](https://github.com/trojanowski/react-apollo-hooks#useapolloclient) hook. See more [here](/osa8/react_ja_graph_ql#nimetyt-kyselyt-ja-muuttujat).
+Some tips
 
+ - Instead of using the <i>Query</i> component or the <i>useQuery</i> hook it might be better to do the queries with the _client_-object, which can be accessed with the [ApolloConsumer](https://www.apollographql.com/docs/react/essentials/queries.html#manual-query) component or _useApolloClient_ hook. See more [here](/en/part8/react_and_graph_ql#named-queries-and-variables).
  -  It is sometimes useful to save the results of a GraphQL query to the state of a component. 
-
  -  Note, that you can do GraphQL queries in a <i>useEffect</i>-hook.
-
- -  The [second parameter](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) of a <i>useEffect</i> - hook can become handy debending on your approach. 
+ -  The [second parameter](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) of a <i>useEffect</i> - hook can become handy depending on your approach. 
 
 #### 8.22 Up to date cache and book recommendations
 
+If you fetch the book recommendations with GraphQL, ensure somehow that the books view is kept up to date. So when a new book is added, the books view is updated **at least** when a genre selection button is pressed. 
 
-If you fetch the book recommendations with GraphQL, ensure somehow that the books view is kept up to date. So when a new book is added, the books view is updated **at least** when a genre selection button is pressed. When new genre selection is not done, the view does not have to be updated. 
+<i>iWhen new genre selection is not done, the view does not have to be updated. </>
 
 </div>

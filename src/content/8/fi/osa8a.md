@@ -585,7 +585,7 @@ const resolvers = {
 
 Eli aina palautettaessa <i>Person</i>-oliota, palautetaan niiden kentät <i>name</i>, <i>phone</i> sekä <i>id</i> käyttäen oletusarvoista resolveria, kenttä <i>address</i> muodostetaan itse määritellyn resolverin avulla. Resolverifunktion parametrina _root_ on käsittelyssä oleva henkilö-olio, eli osoitteen katu ja kaupunki saadaan sen kentistä.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-backend/tree/part8-1), branchissa <i>part8-1</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-1), branchissa <i>part8-1</i>.
 
 ### Mutaatio
 
@@ -723,7 +723,7 @@ Eli jos lisättävä nimi on jo luettelossa heitetään poikkeus _UserInputError
 
 ![](../../images/8/6.png)
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-backend/tree/part8-2), branchissa <i>part8-2</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-2), branchissa <i>part8-2</i>.
 
 ### Enum
 
@@ -830,7 +830,7 @@ Mutation: {
 
 Mutaatio hakee siis hakee kentän <i>name</i> perusteella henkilön, jonka numero päivitetään.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-backend/tree/part8-3), branchissa <i>part8-3</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-3), branchissa <i>part8-3</i>.
 
 ### Lisää kyselyistä
 
@@ -913,7 +913,7 @@ Jos kyselyitä on useita, pyytää Playground valitsemaan mikä niistä suoritet
 
 ### Tehtäviä
 
-Tehtävissä toteutetaan yksinkertaisen kirjaston GraphQL:ää tarjoava backend. Ota sovelluksesi lähtökohtaksi [tämä tiedosto](https://github.com/fullstack-hy2019/misc/blob/master/library-backend.js). Muista _npm init_ ja riippuvuuksien asentaminen!
+Tehtävissä toteutetaan yksinkertaisen kirjaston GraphQL:ää tarjoava backend. Ota sovelluksesi lähtökohtaksi [tämä tiedosto](https://github.com/fullstackopen-2019/misc/blob/master/library-backend.js). Muista _npm init_ ja riippuvuuksien asentaminen!
 
 #### 8.1: kirjojen ja kirjailijoiden määrä
 

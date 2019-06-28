@@ -1014,7 +1014,6 @@ The code of the application which uses hooks can be found from [github](https://
 
 Through these exercises we'll implement a frontend for the GraphQL-library. 
 
-
 Take [this project](https://github.com/fullstackopen-2019/library-frontend) for a start of your application. 
 
 You can implement your application either using the render prop -components <i>Query</i> and <i>Mutation</i> of the Apollo Client, or using the hooks provided by Apollo client 3.0 beta version. 
