@@ -55,7 +55,7 @@ class App extends React.Component {
   }
 
   render() {
-    if (this.state.anecdotes.length == 0 ) { // highlight-line
+    if (this.state.anecdotes.length === 0 ) { // highlight-line
       return <div>no anecdotes...</div>
     }
 
