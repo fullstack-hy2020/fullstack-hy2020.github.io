@@ -184,7 +184,7 @@ After ensuring that the production version of the application works locally, com
 
 ![](../../images/3/30e.png)
 
-Our application saves the notes to a variable. If the application craches or is restarted, all of the data will dissappear. 
+Our application saves the notes to a variable. If the application crashes or is restarted, all of the data will disappear. 
 
 The application needs a database. Before we introduce one, let's go through a few things. 
 
