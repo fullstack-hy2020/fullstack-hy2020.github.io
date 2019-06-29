@@ -481,17 +481,17 @@ const [allClicks, setAll] = useState([])
 Dev tools shows the state of hooks in the order of their definition.
 The state of hooks _left_ and _right_ shows nicely but the hook _allClicks_ that is of the type array is not shown properly. Hopefully this will be fixed soon. You can follow this [issue](https://github.com/facebook/react-devtools/issues/1215) to get an idea when the proper hook support will be available.
 
-The version of developer tools that supports hooks has already an unofficial [beta release](https://github.com/bvaughn/react-devtools-experimental). I could not get it to work with an up to date version of Chrome. With Firefox it seems to work and shows nicely the hooked array state:
+The version of developer tools that supports hooks has already an unofficial [beta release](https://github.com/bvaughn/react-devtools-experimental). I could not get it to work with an up-to-date version of Chrome. With Firefox it seems to work and shows the hooked array state nicely:
 
 ![](../../images/1/11be.png)
 
 ### Rules of Hooks
 
-There's a few limitations and rules we have to follow to ensure that our application using hooks based state functions correctly.
+There are a few limitations and rules we have to follow to ensure that our application using hooks-based state functions correctly.
 
 The _useState_ function (as well as the _useEffect_ function introduced later on in the course) <i>must not be called</i> from inside of a loop, a conditional expression, or any place that is not a function defining a component. This must be done to ensure that the hooks are always called in the same order, and if this isn't the case the application will behave erratically.
 
-To recap, hooks may only be called from inside of a function body that defines a React component:
+To recap, hooks may only be called from the inside of a function body that defines a React component:
 
 ```js
 const App = (props) => {
@@ -672,9 +672,9 @@ const App = (props) => {
 }
 ```
 
-Finally, let us revisit <i>functions that return functions</i>. As mentioned previously, you will probably not need to use functions that return functions in any of the exercises in this course.  If the topic seems particularly confusing you may skip over this section for now and return to it later.
+Finally, let us revisit <i>functions that return functions</i>. As mentioned previously, you probably won't need to use functions that return functions in any of the exercises in this course.  If the topic seems particularly confusing, you may skip over this section for now and return to it later.
 
-Let's make the following changes to our code
+Let's make the following changes to our code:
 
 ```js
 const App = (props) => {
@@ -946,7 +946,7 @@ Let's extract displaying the value of the application into its own <i>Display</i
 We will change the application by defining a new component inside of the <i>App</i>-component.
 
 ```js
-// This is right place to define a component
+// This is the right place to define a component
 const Button = (props) => (
   <button onClick={props.handleClick}>
     {props.text}
@@ -974,7 +974,7 @@ const App = props => {
 }
 ```
 
-The application still appears to work but **don't implement components like this!** Never define components inside of other components. The method provides no benefits and leads to many unpleasant problems. Let's instead move the <i>Display</i> component function to its correct place, which is outside of the <i>App</i> component function:
+The application still appears to work, but **don't implement components like this!** Never define components inside of other components. The method provides no benefits and leads to many unpleasant problems. Let's instead move the <i>Display</i> component function to its correct place, which is outside of the <i>App</i> component function:
 
 ```js
 const Display = props => <div>{props.value}</div>
