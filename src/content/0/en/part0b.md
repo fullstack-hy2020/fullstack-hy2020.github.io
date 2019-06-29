@@ -328,11 +328,9 @@ document.getElementById('notes').appendChild(ul)
 
 ### Manipulating the document-object from console
 
-The topmost node of the DOM tree of a HTML document is called the <em>document</em>. You can access this object from the Console-tab (you have to type it by yourself): 
+The topmost node of the DOM tree of a HTML document is called the <em>document</em> object. We can perform various operations on a web-page using the DOM-API. You can access the <em>document</em> object by typing <em>document</em> into the Console-tab: 
 
 ![](../../images/0/15e.png)
-
-We can perform various operations on a web-page using the DOM-API and utilizing the <em>document</em> object. 
 
 Let's add a new note to the page from the console. 
 
