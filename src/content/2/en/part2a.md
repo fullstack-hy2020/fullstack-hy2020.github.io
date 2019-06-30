@@ -7,11 +7,11 @@ lang: en
 
 <div class="content">
 
-Before starting a new topic, let's recap some of the topics which proved difficult last year.
+Before starting a new topic, let's recap some of the topics that proved difficult last year.
 
 ### console.log
 
-***What's the difference between an experienced JavaScript programmer and a rookie? The experienced one uses 10-100 times more console.log***
+***What's the difference between an experienced JavaScript programmer and a rookie? The experienced one uses console.log 10-100 times more***
 
 Paradoxically, this seems to be true even though a rookie programmer would need console.log (or any debugging method) more than an experienced one.
 
@@ -35,17 +35,17 @@ If you concatenate an object with a string and log it to the console (like in ou
 props value is [Object object]
 ```
 
-On the contrary, when you pass objects as distinct arguments separated by commas to _console.log_ like in our second example from above, the content of the object is printed to the developer console as strings, which give you great insight.
+On the contrary, when you pass objects as distinct arguments separated by commas to _console.log_, like in our second example above, the content of the object is printed to the developer console as strings that are insightful.
 If necessary, read more about debugging React-applications [here](/en/part1/a_more_complex_state_debugging_react_apps#debugging-react-applications).
 
 ### Protip: Visual Studio Code snippets
 
-With Visual studio code it's easy to create 'snippets', shortcuts to generating the most used bits of code, much like 'sout' works on Netbeans. 
+With Visual studio code it's easy to create 'snippets', i.e. shortcuts for quickly generating commonly re-used portions of code, much like 'sout' works in Netbeans. 
 Instructions for creating snippets can be found [here](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets).
 
-Useful, ready made snippets can also be found as VS Code plugins for example [here](https://marketplace.visualstudio.com/items?itemName=xabikos.ReactSnippets).
+Useful, ready-made snippets can also be found as VS Code plugins, for example [here](https://marketplace.visualstudio.com/items?itemName=xabikos.ReactSnippets).
 
-The most important snippet is a shortcut to adding the <em>console.log()</em> command, for example <em>clog</em>. This can be created like so: 
+The most important snippet is the one for the <em>console.log()</em> command, for example <em>clog</em>. This can be created like so: 
 ```js
 {
   "console.log": {
@@ -60,9 +60,9 @@ The most important snippet is a shortcut to adding the <em>console.log()</em> co
 
 ### JavaScript Arrays
 
-From here on out, we will be using the functional programming methods of JavaScript [array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array), such as  _find_, _filter_  and _map_  all the time. They operate on the same general princible as streams in Java 8, which have been used last few years in Ohjelmoinnin perusteet and Ohjelmoinnin jatkokurssi at the department of Computer Science, and in the programming MOOC. 
+From here on out, we will be using the functional programming methods of the JavaScript [array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array), such as  _find_, _filter_, and _map_ - all of the time. They operate on the same general principles as streams do in Java 8, which have been used during the last few years in both the 'Ohjelmoinnin perusteet' and 'Ohjelmoinnin jatkokurssi' courses at the university's department of Computer Science, and also in the programming MOOC. 
 
-If functional programming with arrays feels foreign, it is worth watching at least the three first parts from the YouTube video series [Functional Programming in JavaScript](https://www.youtube.com/playlist?list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84):
+If functional programming with arrays feels foreign to you, it is worth watching at least the three first parts of the YouTube video series [Functional Programming in JavaScript](https://www.youtube.com/playlist?list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84):
 
 - [Higher-order functions](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84)
 - [Map](https://www.youtube.com/watch?v=bCqtb-Z5YGQ&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84&index=2)
@@ -71,13 +71,13 @@ If functional programming with arrays feels foreign, it is worth watching at lea
 ### Event handlers revisited
 
 Based on last year's course, event handling has proven to be difficult. 
-It's worth reading the revision chapter at the end of the previous part [event handlers revisited](/en/part1/a_more_complex_state_debugging_react_apps#event-handling-revisited) if it feels like your own knowledge on the topic needs some brushing up. 
+It's worth reading the revision chapter at the end of the previous part [event handlers revisited](/en/part1/a_more_complex_state_debugging_react_apps#event-handling-revisited), if it feels like your own knowledge on the topic needs some brushing up. 
 
 Passing event handlers to the child components of the <i>App</i> component has raised some questions. A small revision on the topic can be found [here](/en/part1/a_more_complex_state_debugging_react_apps#passing-event-handlers-to-child-components).
 
 ### Rendering collections
 
-We will now do the 'frontend', or the browser side application logic, in React for a similar application to the example application from [part 0](/en/part0)
+We will now do the 'frontend', or the browser-side application logic, in React for an application that's similar to the example application from [part 0](/en/part0)
 
 Let's start with the following:
 
@@ -127,17 +127,17 @@ ReactDOM.render(
 )
 ```
 
-Every note contains its textual content and a timestamp as well as a _boolean_ value for marking whether the note has been categorized as important or not, and a unique <i>id</i>.
+Every note contains its textual content and a timestamp as well as a _boolean_ value for marking whether the note has been categorized as important or not, and also a unique <i>id</i>.
 
 
-The code functions based on the fact that there are exactly three notes in the array. 
-A single note is rendered by accessing the objects in the array by referring to a hard coded index number:
+The code functions due to the fact that there are exactly three notes in the array. 
+A single note is rendered by accessing the objects in the array by referring to a hard-coded index number:
 
 ```js
 <li>{note[1].content}</li>
 ```
 
-This is of course not practical. The solution can be generalized by generating React-elements from the array objects using the [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) function.
+This is, of course, not practical. The solution can be made general by generating React-elements from the array objects using the [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) function.
 
 ```js
 notes.map(note => <li>{note.content}</li>)
@@ -173,9 +173,9 @@ const App = (props) => {
 }
 ```
 
-Because the code generating the <i>li</i> tags is JavaScript, in a JSX template it must be put inside braces like all other JavaScript code. 
+Because the code generating the <i>li</i> tags is JavaScript, it must be wrapped in curly braces in a JSX template just like all other JavaScript code. 
 
-Often in similar situations the dynamically generated content is separated into its own method, which the JSX template calls: 
+It's common in similar situations for the dynamically-generated content to be separated into its own method, which the JSX template calls: 
 
 ```js
 const App = (props) => {
@@ -203,7 +203,7 @@ Even though the application seems to be working, there is a nasty warning on the
 
 ![](../../images/2/1a.png)
 
-As the [page](https://reactjs.org/docs/lists-and-keys.html#keys) linked to in the error message tells, items in an array, so the elements generated by the _map_ method, must have a unique key value:  an attribute called <i>key</i>.
+As the linked [page](https://reactjs.org/docs/lists-and-keys.html#keys) in the error message instructs, the list items, i.e. the elements generated by the _map_ method, must each have a unique key value:  an attribute called <i>key</i>.
 
 Lets add the keys:
 
@@ -229,7 +229,7 @@ const App = (props) => {
 
 And the error message dissappears. 
 
-React uses the key attributes of objects in an array to determine how to update the view generated by a component when the component is rerendered. More about this [here](https://reactjs.org/docs/reconciliation.html#recursing-on-children).
+React uses the key attributes of objects in an array to determine how to update the view generated by a component when the component is re-rendered. More about this [here](https://reactjs.org/docs/reconciliation.html#recursing-on-children).
 
 ### Map
 
@@ -272,7 +272,7 @@ console.log(result)
 ```
 
 <i>[1, 2, 3]</i>  will be printed to the console.
- _Map_ always creates a new array, elements of which have been created from the elements of the original array by <i>mapping</i> using the function given as a parameter to the map method. 
+ _Map_ always creates a new array, the elements of which have been created from the elements of the original array by <i>mapping</i>, using the function given as a parameter to the map method. 
 
 
 The function is
@@ -281,7 +281,7 @@ The function is
 note => note.id
 ```
 
-Which is an arrow function written in a compact form. The full form would be: 
+Which is an arrow function written in compact form. The full form would be: 
 
 ```js
 (note) => {
@@ -297,7 +297,7 @@ Changing the command to:
 const result = notes.map(note => note.content)
 ```
 
-results into an array containing the contents of the notes.
+results in an array containing the contents of the notes.
 
 This is already pretty close to the React code we used:
 
@@ -312,9 +312,9 @@ Because the function parameter of the _map_ method
 ```js
 note => <li key={note.id}>{note.content}</li>
 ```
-is used to create view elements, the value of the variable must be rendered inside of curly braces. Try what happens if the braces are removed. 
+is used to create view elements, the value of the variable must be rendered inside of curly braces. Try to see what happens if the braces are removed. 
 
-The use of curly braces will cause some headache in the beginning, but you will get used to them soon. The visual feedback from React is immediate. 
+The use of curly braces will cause some headache in the beginning, but you will get used to them soon enough. The visual feedback from React is immediate. 
 
 Let's examine one source of bugs. Add the following to your code
 
@@ -337,13 +337,13 @@ note => {
 ```
 
 
-Because the function now forms <i>a code block</i>, its return value is undefined. Arrow functions return the value of their only statement only if the function is defined in the compact form. Without the code block: 
+Because the function now forms <i>a code block</i>, its return value is undefined. Arrow functions return the value of their sole statement only if the function is defined in compact form. Without the code block: 
 
 ```js
 note => note.content
 ```
 
-Note that 'oneliner' arrow functions do not need to be, nor should always be, written on one line. 
+Note that 'oneliner' arrow functions do not need to be, nor should they always be, written on a single line. 
 
 Better formatting for the helper function returning the rows of notes in our application could be the following version spread over multiple lines: 
 
@@ -357,17 +357,17 @@ const rows = () => notes.map(note =>
 
 This still is an arrow function with only one statement, the statement just happens to be a bit more complicated. 
 
-### Antipattern: array indexes as keys
+### Anti-pattern: array indexes as keys
 
-We could have made the error message on our console dissappear by using the array indexes as keys. The indexes can be retrieved by giving a second parameter to the map-method: 
+We could have made the error message on our console disappear by using the array indexes as keys. The indexes can be retrieved by passing a second parameter to the map-method: 
 
 ```js
 notes.map((note, i) => ...)
 ```
 
-When called like this, _i_ gets the value of the index of the position in the array where the <i>Note</i> resides.
+When called like this, _i_ is assigned the value of the index of the position in the array where the <i>Note</i> resides.
 
-So one way to define the row generation without getting errors is:
+As such, one way to define the row generation without getting errors is:
 
 ```js
 const rows = () => notes.map((note, i) => 
@@ -377,12 +377,12 @@ const rows = () => notes.map((note, i) =>
 )
 ```
 
-This is however **not recommended** and can cause bad problems even if it seems to be working just fine. 
+This is, however, **not recommended** and can cause undesired problems even if it seems to be working just fine. 
 Read more [from here](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318).
 
 ### Refactoring modules
 
-Let's tidy the code up a bit. We are only interested in the field _notes_ of the props, so let's receive that straight using [destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment): 
+Let's tidy the code up a bit. We are only interested in the field _notes_ of the props, so let's retrieve that directly using [destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment): 
 
 ```js
 const App = ({ notes }) => { // highlight-line
@@ -437,7 +437,7 @@ const App = ({ notes }) => {
 
 Note, that the <i>key</i> attribute must now be defined for the <i>Note</i> components, and not for the <i>li</i> tags like before. 
 
-A whole React application can be written to a single file, but that is of course not very practical. Common practice is to declare each component in their own file as a <i>ES6-module</i>.
+A whole React application can be written on a single file. Although that is, of course, not very practical. Common practice is to declare each component in their own file as a <i>ES6-module</i>.
 
 We have been using modules the whole time. The first few lines of a file
 
@@ -446,12 +446,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 ```
 
-[Import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) two modules, enabling them to be used in the code. The <i>react</i> module is placed into a variable called _React_ and <i>react-dom</i> to variable _ReactDOM_.
+[Imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) two modules, enabling them to be used in the code. The <i>react</i> module is placed into a variable called _React_ and <i>react-dom</i> to variable _ReactDOM_.
 
 
 Let's move our <i>Note</i> component into its own module. 
 
-In smaller applications components are usually placed in a directory called <i>components</i> , which is placed within the <i>src</i> directory. The convention is to name the file after the component. 
+In smaller applications, components are usually placed in a directory called <i>components</i> , which is in turn placed within the <i>src</i> directory. The convention is to name the file after the component. 
 
 Now we'll create a directory called <i>components</i> to our application and place a file <i>Note.js</i> there. 
 The contents of the Note.js file are as follows: 
@@ -484,7 +484,7 @@ const App = ({ notes }) => {
 }
 ```
 
-The component exported by the module is now available for use in the variable <i>Note</i> just as it was earlier. 
+The component exported by the module is now available for use in the variable <i>Note</i>, just as it was earlier. 
 
 Note, that when importing our own components their location must be given <i>in relation to the importing file</i>:
 
@@ -492,9 +492,9 @@ Note, that when importing our own components their location must be given <i>in 
 './components/Note'
 ```
 
-The period in the beginning refers to the current directory, so the module's location is a file called <i>Note.js</i> in a subdirectory of the current directory called <i>components</i>. The filename extension can be left out.
+The period in the beginning refers to the current directory, so the module's location is a file called <i>Note.js</i> in a sub-directory of the current <i>components</i>. directory. The filename extension can be ommited.
 
-<i>App</i> is a component as well, so let's declare it in its own module as well. Because it is the root component of the application, we'll place it in the <i>src</i> directory. The contents of the file are as follows: 
+<i>App</i> is a component as well, so let's declare it in its own module as well. Since it is the root component of the application, we'll place it in the <i>src</i> directory. The contents of the file are as follows: 
 
 ```js
 import React from 'react'
@@ -538,13 +538,13 @@ ReactDOM.render(
 )
 ```
 
-Modules have plenty of other uses than enabling component declarations to be separated into their own files. We will get back into them later in this course. 
+Modules have plenty of other uses other than enabling component declarations to be separated into their own files. We will get back into them later in this course. 
 
 
 The current code of the application can be found on [github](https://github.com/fullstackopen-2019/part2-notes/tree/part2-1).
 
 
-Note, that the master branch of the repository contains the code for a later version of the application. The current code is in the branch [part2-1](https://github.com/fullstackopen-2019/part2-notes/tree/part2-1):
+Note that the master branch of the repository contains the code for a later version of the application. The current code is in the branch [part2-1](https://github.com/fullstackopen-2019/part2-notes/tree/part2-1):
 
 ![](../../images/2/2e.png)
 
@@ -552,7 +552,7 @@ If you clone the project, run the command _npm install_ before starting the appl
 
 ### When the application breaks
 
-When you start your programming career (and even after 30 years of coding like yours truly) quite often the application just breaks down completely. Especially this happens with dynamically typed languages like JavaScript, where the compiler does not check the data type of e.g. function variables or return values. 
+Early in your programming career (and even after 30 years of coding like yours truly), what often happens is that the application just completely breaks down. This is even more the case with dynamically typed languages, such as JavaScript, where the compiler does not check the data type of, for instance, function variables or return values. 
 
 
 React explosion can for example look like this:
@@ -584,7 +584,7 @@ const App = () => {
 ```
 
 
-We'll hone in on the reason of the breakdown by adding <em>console.log</em> commands to the code. Because the first thing to be rendered is the <i>App</i> component, it's worth putting the first console.log there: 
+We'll hone in on the reason for the breakdown by adding <em>console.log</em> commands to the code. Because the first thing to be rendered is the <i>App</i> component, it's worth putting the first console.log there: 
 
 ```js
 const App = () => {
@@ -600,7 +600,7 @@ const App = () => {
 }
 ```
 
-To see the printing on the console we must scroll up over the long red wall of errors.
+To see the printing on the console, we must scroll up over the long red wall of errors.
 
 ![](../../images/2/4b.png)
 
@@ -614,7 +614,7 @@ const Course = ({ course }) => (
 )
 ```
 
-The component should be changed to the longer form, so we can add the printing: 
+The component should be changed to its longer form, in order for us to add the printing: 
 
 ```js
 const Course = ({ course }) => { 
@@ -627,7 +627,7 @@ const Course = ({ course }) => {
 }
 ```
 
-Very often, the root of the problem is that the props are expected to be of a different type, or called with a different name than they actually are, and desctructuring fails. The problem often begins to solve itself when desctructuring is removed and we see what the <em>props</em> actually contains. 
+Quite often the root of the problem is that the props are expected to be of a different type, or called with a different name than they actually are, and desctructuring fails as a result. The problem often begins to solve itself when desctructuring is removed and we see what the <em>props</em> actually contains. 
 
 ```js
 const Course = (props) => { // highlight-line
@@ -641,9 +641,9 @@ const Course = (props) => { // highlight-line
 }
 ```
 
-If the problem has still not been solved, doesn't help but continue tracking down the issue by writing more console.log. 
+If the problem has still not been resolved, there really isn't much to do apart from continuing to bug-hunt by sprinkling more console.log statements around your code. 
 
-I added this chapter to the material after the model answer of the next question exploded completely (due to props of the wrong type), and I had to debug by using console.log.
+I added this chapter to the material after the model answer for the next question exploded completely (due to props being of the wrong type), and I had to debug it using console.log.
 
 
 </div>
@@ -714,7 +714,7 @@ const App = () => {
 
 Define a component responsible for formatting a single course called <i>Course</i>. 
 
-The component structure of the application can be for example the following: 
+The component structure of the application can be, for example, the following: 
 
 <pre>
 App
@@ -726,13 +726,13 @@ App
       ...
 </pre>
 
-So the component <i>Course</i> contains the components defined in the previous part, which are responsible for rendering the course name and its parts. 
+Hence, the <i>Course</i> component contains the components defined in the previous part, which are responsible for rendering the course name and its parts. 
 
-The rendered page can for example look as follows: 
+The rendered page can, for example, look as follows: 
 
 ![](../../images/teht/8e.png)
 
-You don't need the sum of exercises yet. 
+You don't need the sum of the exercises yet. 
 
 The application must work <i>regardless of the number of parts a course has</i>, so make sure the application works if you add or remove parts of a course. 
 
@@ -829,7 +829,7 @@ const App = () => {
 }
 ```
 
-The application can for example look like this: 
+The application can, for example, look like this: 
 
 ![](../../images/teht/10e.png)
 
