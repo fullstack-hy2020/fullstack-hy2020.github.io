@@ -162,8 +162,8 @@ const note = new Note({
 })
 
 note.save().then(response => {
-  console.log('note saved!');
-  mongoose.connection.close();
+  console.log('note saved!')
+  mongoose.connection.close()
 })
 ```
 
