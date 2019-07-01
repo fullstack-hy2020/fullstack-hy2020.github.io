@@ -182,7 +182,7 @@ import http from 'http'
 These days, code that runs in the browser uses ES6 modules. Modules are defined with an [export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) and taken into use with an [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import).
 
 
-However, Node.js uses so-called [CommonJS](https://en.wikipedia.org/wiki/CommonJS) modules. The reason for this is that the Node ecosystem had a need for modules long before JavaScript supported them in the the language specification. At the time of writing this material, Node does not support ES6 modules, but support for them [is coming](https://nodejs.org/api/esm.html) somewhere down the road.
+However, Node.js uses so-called [CommonJS](https://en.wikipedia.org/wiki/CommonJS) modules. The reason for this is that the Node ecosystem had a need for modules long before JavaScript supported them in the language specification. At the time of writing this material, Node does not support ES6 modules, but support for them [is coming](https://nodejs.org/api/esm.html) somewhere down the road.
 
 
 CommonJS modules function almost exactly like ES6 modules, at least as far as our needs in this course are concerned.
@@ -729,7 +729,7 @@ Using Postman is quite easy in this situation. It's enough to define the url and
 The backend server appears to respond correctly. By making an HTTP GET request to <http://localhost:3001/notes> we see that the note with the id 2 is no longer in the list, which indicates that the deletion was successful. 
 
 
-Because the notes in the application are only saved to memory, the list of notes will return to its original state when we restsart the application.
+Because the notes in the application are only saved to memory, the list of notes will return to its original state when we restart the application.
 
 
 ### The Visual Studio Code REST client
@@ -928,7 +928,7 @@ important: body.important || false,
 ```
 
 
-If the data saved in the _body_ variable has the <i>important</i> property, the expression will evaluate to its value. If the property does not exist, then the expression will evaluate to false which is defined on the right-hand side of the the vertical lines.
+If the data saved in the _body_ variable has the <i>important</i> property, the expression will evaluate to its value. If the property does not exist, then the expression will evaluate to false which is defined on the right-hand side of the vertical lines.
 
 
 > To be exact, when the <i>important</i> property is <i>false</i>, then the <em>body.important || false</em> expression will in fact return the <i>false</i> from the right-hand side...
