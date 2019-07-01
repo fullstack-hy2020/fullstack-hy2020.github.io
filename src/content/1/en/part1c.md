@@ -284,17 +284,23 @@ The function body that defines the component begins with the function call:
 const [ counter, setCounter ] = useState(0)
 ```
 
-The function call adds <i>state</i> to the component, that gets initialized with the value of zero. The function returns an array that contains two items. We assign the items to the variables _counter_ and _setCounter_ by using the destructuring assignment syntax shown earlier.
+The function call adds <i>state</i> to the component and renders it initialized with the value of zero. The function returns an array that contains two items. We assign the items to the variables _counter_ and _setCounter_ by using the destructuring assignment syntax shown earlier.
 
-The _counter_ variable is assigned the value of the current <i>state</i> which is initially zero. The variable _setCounter_ is assigned to a function that can be used to <i>modify the state</i>.
+The _counter_ variable is assigned the initial value of <i>state</i> which is zero. The variable _setCounter_ is assigned to a function that will be used to <i>modify the state</i>.
 
-The application uses the [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) function to increment the _counter_ state after a second has passed:
+The application calls the [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) function and passes it two parameters: a function to increment the counter state and a timeout of one second:
 
 ```js
 setTimeout(
   () => setCounter(counter + 1),
   1000
 )
+```
+
+The function passed as the first parameter to the _setTimeout_ function is invoked one second after calling the _setTimeout_ function
+
+```js
+() => setCounter(counter + 1)
 ```
 
 When the state modifying function _setCounter_ is called, <i>React re-renders the component</i> which means that the function body of the component function gets re-executed:
@@ -314,21 +320,14 @@ When the state modifying function _setCounter_ is called, <i>React re-renders th
 }
 ```
 
-When the component function gets executed a second time, calling the _useState_ function returns the already-existing current value of the state which is now "1". Executing the function body again also makes the function call to _setTimeout_, which will increment the _counter_ state after a second has passed. Finally, the current value of _counter_, which is "1", is rendered to the screen.
-
-The function passed as the first parameter to the _setTimeout_ function will get invoked one second after calling the _setTimeout_ function
-
-```js
-() => setCounter(counter + 1)
-```
-
-and because the value of the _counter_ variable is 1, the code is essentially the same as a command setting the state _counter_ value to 2
+The second time the component function is executed it calls the _useState_ function and returns the new value of the state: 1. Executing the function body again also makes a new function call to _setTimeout_, which executes the one second timeout and increments the _counter_ state again. Because the value of the _counter_ variable is 1, incrementing the value by 1 is essentially the same as a command setting the state _counter_ value to 2.
 
 ```js
 () => setCounter(2)
 ```
+Meanwhile, the old value of _counter_,  "1", is rendered to the screen.
 
-This again causes the component to re-render. The value of the state will be incremented again after one second, and this will continue to repeat for as long as the application is running.
+Every time the _setCounter_  modifies the state it causes the component to re-render. The value of the state will be incremented again after one second, and this will continue to repeat for as long as the application is running.
 
 If the component doesn't render when you think it should, or if it renders at the "wrong time", you can debug the application by logging the values of the component's variables to the console. If we make the following additions to our code:
 
