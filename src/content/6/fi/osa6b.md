@@ -391,7 +391,7 @@ const Notification = () => {
 export default Notification
 ```
 
-Laajenna komponenttia siten, että se renderöi redux-storeen talletetun viestin, eli renderöitävä komponentti muuttuu muodoon:
+Laajenna komponenttia siten, että se renderöi redux-storeen talletetun viestin, eli renderöitävä komponentti muuttuu muotoon:
 
 ```js
 return (
@@ -407,7 +407,7 @@ Tässä vaiheessa sovelluksen ei vielä tarvitse osata käyttää <i>Notificatio
 
 #### 6.10 paremmat anekdootit, step8
 
-Laajenna sovellusta siten, että se näyttää <i>Notification</i>-komponentin avulla viiden sekunnin ajan kun sovelluksessa äänestetään tai luodaan uusia anekdootteja:
+Laajenna sovellusta siten, että se näyttää <i>Notification</i>-komponentin avulla viiden sekunnin ajan, kun sovelluksessa äänestetään tai luodaan uusia anekdootteja:
 
 ![](../../images/6/8.png)
 
