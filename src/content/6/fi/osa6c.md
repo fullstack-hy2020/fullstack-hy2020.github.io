@@ -66,7 +66,7 @@ Asennetaan myös axios projektiin
 npm install axios --save
 ```
 
-Muutetaan <i>nodeReducer</i>:issa tapahtuva muistiinpanojen tilan alustusta, siten että oletusarvoisesti mustiinpanoja ei ole:
+Muutetaan <i>nodeReducer</i>:issa tapahtuva muistiinpanojen tilan alustusta, siten että oletusarvoisesti muistiinpanoja ei ole:
 
 ```js
 const noteReducer = (state = [], action) => {
@@ -409,7 +409,7 @@ export default connect(
 )(NewNote)
 ```
 
-Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstackopen-2019/redux-notes/tree/part6-6) brachissa <i>part6-6</i>.
+Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstackopen-2019/redux-notes/tree/part6-6) branchissa <i>part6-6</i>.
 
 ### Redux DevTools
 
@@ -493,7 +493,7 @@ setTimeout(() => {
 }, 5000)
 ```
 
-Tee asynkrooninen action creator, joka mahdollistaa notifikaation antamisen seuraavasti:
+Tee asynkroninen action creator, joka mahdollistaa notifikaation antamisen seuraavasti:
 
 ```js
 props.setNotification(`you voted '${anecdote.content}'`, 10)
