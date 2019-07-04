@@ -115,7 +115,7 @@ const addNote = (event) => {
 The <em>event</em> parameter is the [event](https://reactjs.org/docs/handling-events.html) that triggers the call to the event handler function: 
 
 
-The event handler immediately calls the <em>event.preventDefault()</em> method, which prevents the default action of submitting a form, which would cause the page to reload among other things.
+The event handler immediately calls the <em>event.preventDefault()</em> method, which prevents the default action of submitting a form. The default action would, among other things, cause the page to reload.
 
 
 The target of the event stored in _event.target_ is logged to the console
@@ -158,13 +158,13 @@ const App = (props) => {
 ```
 
 
-The placeholder text stored as the initial value of the <em>newNote</em> state appears in the <i>input</i> element but the input text can't be edited. The console displays a warning that gives us a clue as to what might be wrong:
+The placeholder text stored as the initial value of the <em>newNote</em> state appears in the <i>input</i> element, but the input text can't be edited. The console displays a warning that gives us a clue as to what might be wrong:
 
 ![](../../images/2/7e.png)
 
 Since we assigned a piece of the <i>App</i> component's state as the <i>value</i> attribute of the input element, the <i>App</i> component now [controls](https://reactjs.org/docs/forms.html#controlled-components) the behavior of the input element.
 
-In order to enable editing for the input element we have to register an <i>event handler</i> that synchronizes the changes made to the input with the component's state:
+In order to enable editing of the input element, we have to register an <i>event handler</i> that synchronizes the changes made to the input with the component's state:
 
 ```js
 const App = (props) => {
@@ -219,7 +219,7 @@ const handleNoteChange = (event) => {
 
 The <em>target</em> property of the event object now corresponds the controlled <i>input</i> element and <em>event.target.value</em> refers to the input value of that element.
 
-Note that we did not need to call the _event.preventDefault()_ method like we did in the <i>onSubmit</i> event handler. This is because unlike on a form submission there is no default action that occurs on an input change.
+Note that we did not need to call the _event.preventDefault()_ method like we did in the <i>onSubmit</i> event handler. This is because there is no default action that occurs on an input change, unlike on a form submission.
 
 You can follow along in the console to see how the event handler is called:
 
@@ -247,9 +247,9 @@ const addNote = (event) => {
 }
 ```
 
-First we create a new object for the note called <em>noteObject</em>, that will receive its content from the component's <em>newNote</em> state. The unique identifier <i>id</i> is generated based on the total number of notes. Since notes are never deleted, this method works in our application. With the help of the <em>Math.random()</em> command, our note has a 50% change of being marked as important.
+First we create a new object for the note called <em>noteObject</em> that will receive its content from the component's <em>newNote</em> state. The unique identifier <i>id</i> is generated based on the total number of notes. This method works for our application since notes are never deleted. With the help of the <em>Math.random()</em> command, our note has a 50% chance of being marked as important.
 
-The new note is added to the list of notes by using the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) method of arrays that was introduced in [part 1](/en/part1/javascript#arrays):
+The new note is added to the list of notes using the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) array method introduced in [part 1](/en/part1/javascript#arrays):
 
 ```js
 setNotes(notes.concat(noteObject))
@@ -313,7 +313,7 @@ const notesToShow = showAll
   : notes.filter(note => note.important === true)
 ```
 
-The definition uses the [conditional](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) operator that can also be seen in many other programming languages.
+The definition uses the [conditional](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) operator also found in many other programming languages.
 
 The operator functions as follows. If we have:
 
@@ -466,7 +466,7 @@ Note the use of the React developer tools extension in the picture above!
 
 <h4>2.7: The Phonebook Step2</h4>
 
-Prevent the user from being able to add names that  already exist in the phonebook. JavaScript arrays have numerous suitable [methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) for accomplishing this task.
+Prevent the user from being able to add names that already exist in the phonebook. JavaScript arrays have numerous suitable [methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) for accomplishing this task.
 
 Issue a warning with the [alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) command when such an action is attempted:
 
@@ -541,7 +541,7 @@ If you have implemented your application in a single component, refactor it by e
 
 It is sufficient to extract <i>**three**</i> components from the application. Good candidates for separate components are, for example, the search filter, the form for adding new people into the phonebook, a component that renders all people from the phonebook, and a component that renders a single person's details.
 
-The application's root component could look something like this after refactoring. The refactored root component below only renders titles and lets the extracted components take care of the rest.
+The application's root component could look similar to this after the refactoring. The refactored root component below only renders titles and lets the extracted components take care of the rest.
 
 ```js
 const App = () => {
