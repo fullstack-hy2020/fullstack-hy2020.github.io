@@ -177,7 +177,7 @@ We defined the environment variables for development in file <i>.env</i>, but th
 heroku config:set MONGODB_URI=mongodb+srv://fullstack:secred@cluster0-ostce.mongodb.net/note-app?retryWrites=true
 ```
 
-The application should now work. Sometimes things don't go according to plan. If there are problems, <i>heroku logs</i> will be there to help. My own application did not work after the making the changes. The logs showed the following:
+The application should now work. Sometimes things don't go according to plan. If there are problems, <i>heroku logs</i> will be there to help. My own application did not work after making the changes. The logs showed the following:
 
 ![](../../images/3/51a.png)
 
