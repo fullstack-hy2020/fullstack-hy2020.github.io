@@ -1040,7 +1040,7 @@ Ota käyttöön kirjasto [react-redux](https://github.com/reactjs/react-redux) j
 
 Anekdoottien äänestyksen ja uusien anekdoottien luomisen **ei tarvitse vielä toimia** tämän tehtävän jälkeen.
 
-Tehtävässäsi tarvitsema <i>mapStateToProps</i> on suunilleen seuraavanlainen
+Tehtävässä tarvitsemasi <i>mapStateToProps</i> on suunnilleen seuraavanlainen
 
 ```js
 const mapStateToProps = (state) => {
