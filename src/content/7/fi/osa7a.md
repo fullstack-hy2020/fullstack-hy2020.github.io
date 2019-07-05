@@ -240,7 +240,7 @@ Tämä tapahtuu laajentamalla komponentissa <i>App</i> olevaa reititystä seuraa
 </Router>
 ```
 
-Kaikki muistiinpanon renderöivään routeen on lisätty määre <i>exact path="/notes"</i> sillä muuten se renderöityisi myös <i>/notes/3</i>-muotoisten polkujen yhteydessä.
+Kaikki muistiinpanot renderöivään routeen on lisätty määre <i>exact path="/notes"</i> sillä muuten se renderöityisi myös <i>/notes/3</i>-muotoisten polkujen yhteydessä.
 
 Yksittäisen muistiinpanon näkymän renderöivä route määritellään "expressin tyyliin" merkkaamalla reitin parametrina oleva osa merkinnällä <i>:id</i>
 
