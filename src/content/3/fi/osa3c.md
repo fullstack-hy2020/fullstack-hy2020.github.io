@@ -7,7 +7,7 @@ lang: fi
 
 <div class="content">
 
-Ennen kuin siirrymmen osan varsinaiseen aiheeseen, eli tiedon tallettamiseen tietokantaan, tarkastellaan muutamaa tapaa Node-sovellusten debuggaamiseen.
+Ennen kuin siirrymme osan varsinaiseen aiheeseen, eli tiedon tallettamiseen tietokantaan, tarkastellaan muutamaa tapaa Node-sovellusten debuggaamiseen.
 
 ### Node-sovellusten debuggaaminen
 
