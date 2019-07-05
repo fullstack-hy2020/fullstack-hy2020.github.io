@@ -594,7 +594,7 @@ The status of React seems strong, but the world of JavaScript is ever changing. 
 
 ### Full stack -web development
 
-What does the name of the course, <i>Full stack web development</i>, mean? Full stack is a buzzword that everyone talks about, while no one really knows what is means. Or at least, there is no agreed-upon definition for the term. 
+What does the name of the course, <i>Full stack web development</i>, mean? Full stack is a buzzword that everyone talks about, while no one really knows what it means. Or at least, there is no agreed-upon definition for the term. 
 
 Practically all web applications have (at least) two "layers": the browser, being closer to the end user, is the top layer, and the server the bottom one. There is often also a database layer below the server. We can therefore think of the <i>architecture</i> of a web application as a kind of a <i>stack</i> of layers. 
 
