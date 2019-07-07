@@ -505,7 +505,7 @@ module.exports = {
 ```
 
 
-Let's create a separate directory for our tests called <i>tests</i> and create a new file called <i>palindrom.test.js</i> with the following contents:
+Let's create a separate directory for our tests called <i>tests</i> and create a new file called <i>palindrome.test.js</i> with the following contents:
 
 ```js
 const palindrome = require('../utils/for_testing').palindrome
@@ -559,7 +559,7 @@ Individual test cases are defined with the _test_ function. The first parameter 
 
 ```js
 () => {
-  const result = palindrom('react')
+  const result = palindrome('react')
 
   expect(result).toBe('tcaer')
 }
@@ -581,7 +581,7 @@ Jest has excellent error messages, let's break the test to demonstrate this:
 
 ```js
 test('palindrom of react', () => {
-  const result = palindrom('react')
+  const result = palindrome('react')
 
   expect(result).toBe('tkaer')
 })
