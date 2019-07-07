@@ -168,7 +168,7 @@ The application should work almost as-is in Heroku. We do have to generate a new
 
 
 
-How the environment variables defined in dotenv will only be used when the backend is not in <i>production mode</i>, i.e. Heroku.
+The environment variables defined in dotenv will only be used when the backend is not in <i>production mode</i>, i.e. Heroku.
 
 
 We defined the environment variables for development in file <i>.env</i>, but the environment variable that defines the database URL in production should be set to Heroku with the _heroku config:set_ command.
