@@ -941,9 +941,9 @@ pitäisi alustavalla datalla tuottaa vastaus
 
 #### 8.2: kaikki kirjat ja kirjailijat
 
-Toteuta kysely _allBooks_,  joka palauttavat kaikki kirjat.
+Toteuta kysely _allBooks_, joka palauttaa kaikki kirjat.
 
-Seurava kysely siis pitäisi pystyä tekemään
+Seuraava kysely siis pitäisi pystyä tekemään
 
 ```js
 query {
@@ -958,7 +958,7 @@ query {
 
 #### 8.3: kaikki kirjailijat
 
-Toteuta kysely _allAuthors_ joka palauttaa kaikki kirjailijat. Kyselyn vastauksessa kirjailijoilla tulee myös olla kenttä _bookCount_ joka kertoo kirjailijan tekemien kirjojen määrän.
+Toteuta kysely _allAuthors_ joka palauttaa kaikki kirjailijat. Kyselyn vastauksessa kirjailijoilla tulee myös olla kenttä _bookCount_, joka kertoo kirjailijan tekemien kirjojen määrän.
 
 Esim. kyselyn
 
