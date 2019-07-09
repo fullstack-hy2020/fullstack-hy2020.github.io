@@ -405,7 +405,7 @@ Verify that it is possible to add blogs to list with Postman or the VS Code REST
 Refactor the application into separate modules as shown earlier in this part of the course material.
 
 
-**NB** refactor your application in baby steps and verify that the application works after every change you make. If you try to take a "shortcut" by refactoring many things at once, then [Murphy's law](https://fi.wikipedia.org/wiki/Murphyn_laki) will kick in and it is almost certain that something will break in your application. The "shortcut" will end up taking more time than moving forward slowly and systematically.
+**NB** refactor your application in baby steps and verify that the application works after every change you make. If you try to take a "shortcut" by refactoring many things at once, then [Murphy's law](https://en.wikipedia.org/wiki/Murphy%27s_law) will kick in and it is almost certain that something will break in your application. The "shortcut" will end up taking more time than moving forward slowly and systematically.
 
 
 One best practice is to commit your code every time it is in a stable state. This makes it easy to rollback to a situation where the application still works.
