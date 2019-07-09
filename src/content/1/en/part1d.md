@@ -1209,7 +1209,7 @@ const copy = { ...points }
 copy[2] += 1     
 ```
 
-And a copy of an array like this:
+OR a copy of an array like this:
 
 ```js
 const points = [1, 4, 6, 3]
