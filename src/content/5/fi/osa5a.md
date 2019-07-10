@@ -529,7 +529,7 @@ Muista tehtäviä tehdessäsi kaikki debuggaukseen liittyvät käytänteet, erit
 
 #### 5.1: blogilistan frontend, step1
 
-Ota tehtävien pohjaksi [Githubissa](https://github.com/fullstackopen-2019/bloglist-frontendt) olevan sovellusrunko kloonaamalla se sopivaan paikkaan komennolla
+Ota tehtävien pohjaksi [Githubissa](https://github.com/fullstackopen-2019/bloglist-frontend) olevan sovellusrunko kloonaamalla se sopivaan paikkaan komennolla
 
 ```bash
 git clone https://github.com/fullstackopen-2019/bloglist-frontend
