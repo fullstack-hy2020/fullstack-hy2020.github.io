@@ -375,7 +375,7 @@ import axios from 'axios' // highlight-line
 import Note from './components/Note'
 
 const App = () => {
-  const [notes, setNotes] = useState([]) 
+  const [notes, setNotes] = useState([]) // highlight-line
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
 
