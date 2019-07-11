@@ -633,7 +633,7 @@ The first function call is used to "configure" the second function, by defining 
 () => setCounter(5)
 ```
 
-This way of utilizing functions that return functions is effectively the same thing as [currying](http://www.datchley.name/currying-vs-partial-application/) in functional programming. The term currying does not originate from functional programming, rather the term is deeply rooted in [mathematics](https://en.wikipedia.org/wiki/Currying).
+This way of utilizing functions that return functions is effectively the same thing as [currying](https://web.archive.org/web/20170919010057/http://www.datchley.name/currying-vs-partial-application/) in functional programming. The term currying does not originate from functional programming, rather the term is deeply rooted in [mathematics](https://en.wikipedia.org/wiki/Currying).
 
 We've mentioned <i>functional programming</i> a few times now, which may not be familiar to everyone. We will explore some aspects of functional programming throughout the course, as React supports and partially requires the use of some of the styles of functional programming.
 
