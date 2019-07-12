@@ -321,7 +321,7 @@ To recap, the directory structure looks like this after the changes have been ma
 ```
 
 
-For smaller applications the structure does not matter that much. Once the application starts to grow in size, you are going to have establish some kind of a structure, and separate the different responsibilities of the application into separate modules. This will make developing the application much easier.
+For smaller applications the structure does not matter that much. Once the application starts to grow in size, you are going to have to establish some kind of structure, and separate the different responsibilities of the application into separate modules. This will make developing the application much easier.
 
 There is no strict directory structure or file naming convention that is required for Express applications. To contrast this, Ruby on Rails does require a specific structure. Our current structure simply follows some of the best practices you can come across on the internet.
 
