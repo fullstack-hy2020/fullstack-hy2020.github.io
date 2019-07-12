@@ -54,7 +54,7 @@ const Hello = (props) => {
       <p>
         Hello {props.name}, you are {props.age} years old
       </p>
-      <p>So you were probably born {bornYear()}</p> // highlight-line
+      <p>So you were probably born in {bornYear()}</p> // highlight-line
     </div>
   )
 }
@@ -95,7 +95,7 @@ const Hello = (props) => {
   return (
     <div>
       <p>Hello {name}, you are {age} years old</p>
-      <p>So you were probably born {bornYear()}</p>
+      <p>So you were probably born in {bornYear()}</p>
     </div>
   )
 }
@@ -124,7 +124,7 @@ const Hello = (props) => {
   return (
     <div>
       <p>Hello {name}, you are {age} years old</p>
-      <p>So you were probably born {bornYear()}</p>
+      <p>So you were probably born in {bornYear()}</p>
     </div>
   )
 }
@@ -151,7 +151,7 @@ const Hello = ({ name, age }) => { // highlight-line
       <p>
         Hello {name}, you are {age} years old
       </p>
-      <p>So you were probably born {bornYear()}</p>
+      <p>So you were probably born in {bornYear()}</p>
     </div>
   )
 }
