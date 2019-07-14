@@ -545,7 +545,7 @@ form.onsubmit = function(e) {
   e.target.elements[0].value = ''
   redrawNotes()
   sendToServer(note)
-)
+}
 ```
 
 The command <em>document.getElementById('notes\_form')</em> instructs the code to fetch the form-element from the page, and to register an <i>event handler</i> to handle the form submit event. The event handler immediately calls the method <em>e.preventDefault()</em> to prevent the default handling of form submit. The default method would send the data to server and cause a redirect, which we don't want to happen. 
@@ -565,7 +565,7 @@ var sendToServer = function(note) {
     'Content-type', 'application/json'
   )
   xhttpForPost.send(JSON.stringify(note))
-)
+}
 ```
 
 The code determines that the data is to be sent with an HTTP POST request and the data type is to be JSON. The data type is determined with a <i>Content-type</i> header. Then the data is sent as JSON-string. 
