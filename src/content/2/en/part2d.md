@@ -594,7 +594,7 @@ export default { getAll, create, update } // highlight-line
 ```
 
 
-In defining the object using this shorter notation, we make use of a [new feature](https://developer.mozilla.org/enUS/docs/Web/JavaScript/Reference/Operators/Object_initializer#Property_definitions) that was introduced to JavaScript through ES6, enabling a slightly more compact way of defining objects using variables.
+In defining the object using this shorter notation, we make use of a [new feature](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#Property_definitions) that was introduced to JavaScript through ES6, enabling a slightly more compact way of defining objects using variables.
 
 
 To demonstrate this feature, let's consider a situation where we have the following values assigned to variables:
