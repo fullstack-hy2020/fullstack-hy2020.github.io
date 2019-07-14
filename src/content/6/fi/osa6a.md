@@ -15,11 +15,11 @@ Facebook kehitti tilan hallinnan ongelmia helpottamaan [Flux](https://facebook.g
 
 Kun action muuttaa storen tilaa, renderöidään näkymät uudelleen:
 
-![](https://facebook.github.io/flux/img/flux-simple-f8-diagram-1300w.png)
+![](https://facebook.github.io/flux/img/overview/flux-simple-f8-diagram-1300w.png)
 
 Jos sovelluksen käyttö, esim. napin painaminen aiheuttaa tarpeen tilan muutokseen, tehdään tilanmuutos actionin avulla. Tämä taas aiheuttaa uuden näytön renderöitymisen:
 
-![](https://facebook.github.io/flux/img/flux-simple-f8-diagram-with-client-action-1300w.png)
+![](https://facebook.github.io/flux/img/overview/flux-simple-f8-diagram-with-client-action-1300w.png)
 
 Flux tarjoaa siis standardin tavan sille miten ja missä sovelluksen tila pidetään sekä tavalle tehdä tilaan muutoksia.
 
