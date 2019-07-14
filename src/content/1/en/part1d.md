@@ -223,7 +223,7 @@ As mentioned previously, it's also possible in JavaScript to add items to an arr
 ```js
 const handleLeftClick = () => {
   allClicks.push('L')
-  setAll(allClick)
+  setAll(allClicks)
   setLeft(left + 1)
 }
 ```
