@@ -492,7 +492,7 @@ Note, that when importing our own components their location must be given <i>in 
 './components/Note'
 ```
 
-The period in the beginning refers to the current directory, so the module's location is a file called <i>Note.js</i> in a sub-directory of the current <i>components</i>. directory. The filename extension can be ommited.
+The period in the beginning refers to the current directory, so the module's location is a file called <i>Note.js</i> in a sub-directory of the current <i>components</i>. directory. The filename extension can be omitted.
 
 <i>App</i> is a component as well, so let's declare it in its own module as well. Since it is the root component of the application, we'll place it in the <i>src</i> directory. The contents of the file are as follows: 
 
