@@ -111,7 +111,7 @@ notesRouter.post('/', (request, response, next) => {
   const note = new Note({
     content: body.content,
     important: body.important || false,
-    date: new Date(),
+    date: new Date()
   })
 
   note.save()
