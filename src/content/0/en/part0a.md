@@ -152,16 +152,16 @@ This means, that the student can if they so choose, sign up for a job interview 
 
 ### To do before you start
 
-Use of the chrome browser is recommended for this course,  because it provides the best tools for web development.
-Another alternative is the Developer Edition of Firefox. Which provide the same range of features and can be downloaded [here](https://www.mozilla.org/en-US/firefox/developer/).
+Use of the Chrome browser is recommended for this course,  because it provides the best tools for web development.
+Another alternative is the Developer Edition of Firefox, which provides the same range of features and can be downloaded [here](https://www.mozilla.org/en-US/firefox/developer/).
 
 The course exercises are submitted to GitHub, so Git must be installed and one should know how to use it. Instructions for Git can be found [here](https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners).
 
-Install also some sensible text editor which supports web development. More than recommended choice is [Visual studio code](https://code.visualstudio.com/).
+Also install some sensible text editor which supports web development. [Visual studio code](https://code.visualstudio.com/) is highly recommended.
 
 Don't code with nano, Notepad or Gedit. NetBeans isn't very good for web development either. It is also rather heavy in comparison to Visual Studio Code. 
 
-Immediately also install [Node.js](https://nodejs.org/en/). The material has been done with version 10.0, so don't install anything older than that. Although if you already happen to have Node installed, anything newer than 8.0 should work just fine. Installation instructions are [here](https://nodejs.org/en/download/package-manager/).
+Also install [Node.js](https://nodejs.org/en/). The material has been done with version 10.0, so don't install anything older than that. Although if you already happen to have Node installed, anything newer than 8.0 should work just fine. Installation instructions are [here](https://nodejs.org/en/download/package-manager/).
 
 Node package manager [npm](https://www.npmjs.com/get-npm) will be automatically installed with Node. We will be using npm actively throughout the course. Node also comes with [npx](https://www.npmjs.com/package/npx), which we'll need a few times. 
 
