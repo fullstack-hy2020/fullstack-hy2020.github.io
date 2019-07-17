@@ -821,7 +821,7 @@ Then the JSON data sent with the HTTP requests would not be available for the lo
 
 It's also important that the middleware for handling unsupported routes is next to the last middleware that is loaded into Express, just before the error handler.
 
-The following loading order would also cause an issue:
+For example, the following loading order would cause an issue:
 
 ```js
 const unknownEndpoint = (request, response) => {
