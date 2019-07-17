@@ -672,7 +672,7 @@ Body:   {}
     ...
 </pre>
 
-The other error situation is related a situation where the id is in the correct format, but no note is found from the database for that id.
+The other error situation happens when the id is in the correct format, but no note is found in the database for that id.
 
 <pre>
 Method: GET
