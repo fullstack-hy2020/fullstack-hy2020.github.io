@@ -819,7 +819,7 @@ app.use(bodyParser.json())
 
 Then the JSON data sent with the HTTP requests would not be available for the logger middleware or the POST route handler, since the _request.body_ would be an empty object.
 
-It's also important that the middleware for handling unsupported routes is the last middleware that is loaded into Express.
+It's also important that the middleware for handling unsupported routes is next to the last middleware that is loaded into Express, just before the error handler.
 
 The following loading order would also cause an issue:
 
