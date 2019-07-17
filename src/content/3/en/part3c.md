@@ -840,7 +840,7 @@ Now the handling of unknown endpoints is ordered <i>before the HTTP request hand
 
 ### Other operations
 
-Let's add the missing functionality to our application, i.e. deleting and updating an individual note.
+Let's add some missing functionality to our application, including deleting and updating an individual note.
 
 The easiest way to delete a note from the database is with the [findByIdAndRemove](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove) method:
 
