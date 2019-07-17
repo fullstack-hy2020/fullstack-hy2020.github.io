@@ -357,8 +357,8 @@ const App = (props) => {
       <div>
         {left}
         // highlight-start
-        <Button onClick={handleLeftClick} text='left' />
-        <Button onClick={handleRightClick} text='right' />
+        <Button handleClick={handleLeftClick} text='left' />
+        <Button handleClick={handleRightClick} text='right' />
         // highlight-end
         {right}
         <History allClicks={allClicks} />
