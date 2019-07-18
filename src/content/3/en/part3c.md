@@ -672,7 +672,7 @@ Body:   {}
     ...
 </pre>
 
-The other error situation is related a situation where the id is in the correct format, but no note is found from the database for that id.
+The other error situation happens when the id is in the correct format, but no note is found in the database for that id.
 
 <pre>
 Method: GET
@@ -817,11 +817,11 @@ app.post('/api/notes', (request, response) => {
 app.use(bodyParser.json())
 ```
 
-Then the JSON data sent with the HTTP requests would not be available for the logger middleware the or POST route handler, since the _request.body_ would be an empty object.
+Then the JSON data sent with the HTTP requests would not be available for the logger middleware or the POST route handler, since the _request.body_ would be an empty object.
 
-It's also important that the middleware for handling unsupported routes is the last middleware that is loaded into Express.
+It's also important that the middleware for handling unsupported routes is next to the last middleware that is loaded into Express, just before the error handler.
 
-The following loading order would also cause an issue:
+For example, the following loading order would cause an issue:
 
 ```js
 const unknownEndpoint = (request, response) => {
@@ -836,11 +836,11 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-Now the handling of unknown endpoints is ordered <i>before the HTTP request handler</i>. Since the unknown endpoint handler responds to all requests with <i>404 unknown endpoint</i>, no routes or middleware will be called after the response has been sent by unknown endpoint middleware. The only exception to this is the error handler.
+Now the handling of unknown endpoints is ordered <i>before the HTTP request handler</i>. Since the unknown endpoint handler responds to all requests with <i>404 unknown endpoint</i>, no routes or middleware will be called after the response has been sent by unknown endpoint middleware. The only exception to this is the error handler which needs to come at the very end, after the unknown endpoints handler.
 
 ### Other operations
 
-Let's add the missing functionality to our application, i.e. deleting and updating an individual note.
+Let's add some missing functionality to our application, including deleting and updating an individual note.
 
 The easiest way to delete a note from the database is with the [findByIdAndRemove](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove) method:
 
