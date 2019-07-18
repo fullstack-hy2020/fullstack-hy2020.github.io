@@ -1118,16 +1118,16 @@ const api = supertest(app)
 
 const Note = require('../models/note')
 
+beforeEach(async () => {
+  await Note.deleteMany({})
+
+  const noteObjects = helper.initialNotes
+    .map(note => new Note(note))
+  const promiseArray = noteObjects.map(note => note.save())
+  await Promise.all(promiseArray)
+})
+
 describe('when there is initially some notes saved', () => {
-  beforeEach(async () => {
-    await Note.deleteMany({})
-
-    const noteObjects = helper.initialNotes
-      .map(note => new Note(note))
-    const promiseArray = noteObjects.map(note => note.save())
-    await Promise.all(promiseArray)
-  })
-
   test('notes are returned as json', async () => {
     await api
       .get('/api/notes')
@@ -1223,7 +1223,7 @@ describe('when there is initially some notes saved', () => {
   })
 
   describe('deletion of a note', () => {
-    test('succeeds with status code 200 if id is valid', async () => {
+    test('succeeds with status code 204 if id is valid', async () => {
       const notesAtStart = await helper.notesInDb()
       const noteToDelete = notesAtStart[0]
 
