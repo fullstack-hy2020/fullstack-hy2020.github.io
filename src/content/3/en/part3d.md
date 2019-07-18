@@ -50,7 +50,7 @@ const noteSchema = new mongoose.Schema({
 ```
 
 
-The <i>content</i> field is now required to be at least five characters long. The <i>data</i> field is set as required, meaning that it can not be missing. The same constraint is also implicitly applied to the <i>content</i> field, since the minimum length constraint by default requires the field to not be missing. We have not added any constraints to the <i>important</i> field, so its definition in the schema has not changed.
+The <i>content</i> field is now required to be at least five characters long. The <i>date</i> field is set as required, meaning that it can not be missing. The same constraint is also implicitly applied to the <i>content</i> field, since the minimum length constraint by default requires the field to not be missing. We have not added any constraints to the <i>important</i> field, so its definition in the schema has not changed.
 
 
 The <i>minlength</i> and <i>required</i> validators are [built-in](https://mongoosejs.com/docs/validation.html#built-in-validators) and provided by Mongoose. The Mongoose [custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) functionality allows us to create new validators, if none of the built-in ones cover our needs.
@@ -138,7 +138,7 @@ app.post('/api/notes', (request, response) => {
 ```
 
 
-In the first _then_ we receive _savedNote_ object returned by Mongoose and format it. The result of the operation is returned. Then as [we discussed earlier](/osa2/palvelimella_olevan_datan_muokkaaminen#palvelimen-kanssa-tapahtuvan-kommunikoinnin-eristaminen-omaan-moduuliin), the _then_ method of a promise also returns a promise. This means that when we return _savedNote.toJSON()_ from the callback function, we are actually creating a promise that receives the formatted note as its value. We can access the formatted note by registering a new callback function with the _then_ method.
+In the first _then_ we receive _savedNote_ object returned by Mongoose and format it. The result of the operation is returned. Then as [we discussed earlier](/en/part2/altering_data_in_server#extracting-communication-with-the-backend-into-a-separate-module), the _then_ method of a promise also returns a promise. This means that when we return _savedNote.toJSON()_ from the callback function, we are actually creating a promise that receives the formatted note as its value. We can access the formatted note by registering a new callback function with the _then_ method.
 
 
 We can clean up our code even more by using the more compact syntax for arrow functions:
@@ -168,7 +168,7 @@ The application should work almost as-is in Heroku. We do have to generate a new
 
 
 
-How the environment variables defined in dotenv will only be used when the backend is not in <i>production mode</i>, i.e. Heroku.
+The environment variables defined in dotenv will only be used when the backend is not in <i>production mode</i>, i.e. Heroku.
 
 
 We defined the environment variables for development in file <i>.env</i>, but the environment variable that defines the database URL in production should be set to Heroku with the _heroku config:set_ command.
@@ -177,7 +177,7 @@ We defined the environment variables for development in file <i>.env</i>, but th
 heroku config:set MONGODB_URI=mongodb+srv://fullstack:secred@cluster0-ostce.mongodb.net/note-app?retryWrites=true
 ```
 
-The application should now work. Sometimes things don't go according to plan. If there are problems, <i>heroku logs</i> will be there to help. My own application did not work after the making the changes. The logs showed the following:
+The application should now work. Sometimes things don't go according to plan. If there are problems, <i>heroku logs</i> will be there to help. My own application did not work after making the changes. The logs showed the following:
 
 ![](../../images/3/51a.png)
 
@@ -257,7 +257,7 @@ Before we move onto the next part, we will take a look at an important tool call
 In compiled statically typed languages like Java, IDEs like NetBeans can point out errors in the code, even ones that are more than just compile errors. Additional tools for performing [static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) like [checkstyle](http://checkstyle.sourceforge.net/), can be used for expanding the capabilities of the IDE to also point out problems related to style, like indentation.
 
 
-In the JavaScript university, the current leading tool for static analysis aka. "linting" is [ESlint](https://eslint.org/).
+In the JavaScript universe, the current leading tool for static analysis aka. "linting" is [ESlint](https://eslint.org/).
 
 Let's install ESlint as a development dependency to the backend project with the command:
 
@@ -455,7 +455,7 @@ This includes a rule that warns about _console.log_ commands. [Disabling](https:
 If there is something wrong in your configuration file, the lint plugin can behave quite erratically.
 
 
-Many companies define coding standards that are enforced throughout the organization through the ESlint configuration file. It is not recommended to keep reinventing the wheel over and over again, and it can be a good idea to adopt a ready-made configuration from someone else's project into yours. Recently many projects have adopted the AirBnB [Javascript style guide](https://github.com/airbnb/javascript) by taking AirBnB's [ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) configuration into use.
+Many companies define coding standards that are enforced throughout the organization through the ESlint configuration file. It is not recommended to keep reinventing the wheel over and over again, and it can be a good idea to adopt a ready-made configuration from someone else's project into yours. Recently many projects have adopted the Airbnb [Javascript style guide](https://github.com/airbnb/javascript) by taking Airbnb's [ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) configuration into use.
 
 
 You can find the code for our current application in its entirety in the <i>part3-6</i> branch of [this github repository](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part3-6).

@@ -93,30 +93,24 @@ module.exports = {
       d: 'Custom hooks'
     },
     '6': {
-            /*
-      a: 'Flux-arkkitecture and Redux',
-      b: 'Many redusers, connect',
+      a: 'Flux-architecture and Redux',
+      b: 'Many reducers, connect',
       c: 'Communicating with server in a redux application',
-      */
     },
     '7': {
-      /*
       a: 'React-router',
       b: 'More about styles',
       c: 'Webpack',
       d: 'Class components, E2E-testing',
       e: 'Miscellaneous',
-      f: 'Exercises: extending the blogilist',
-      */
+      f: 'Exercises: extending the blogilist',          
     },
     '8': {
-      /*
-      a: 'GraphQL-serves',
+      a: 'GraphQL-server',
       b: 'React and GraphQL',
       c: 'Database and user administration',
       d: 'Login and updating the cache',
       e: 'Fragments and subscriptions'
-      */
     },
   },
 };

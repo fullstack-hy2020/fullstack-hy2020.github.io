@@ -331,7 +331,7 @@ describe('when there is initially one user at db', () => {
 ```
 
 
-The tests use the <i>usersInDb()</i> helper function that we imlemented in the <i>tests/test_helper.js</i> file. The function is used to help us verify the state of the database after a user is created:
+The tests use the <i>usersInDb()</i> helper function that we implemented in the <i>tests/test_helper.js</i> file. The function is used to help us verify the state of the database after a user is created:
 
 ```js
 const User = require('../models/user')

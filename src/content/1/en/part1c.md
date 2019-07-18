@@ -23,14 +23,14 @@ const Hello = (props) => {
 }
 
 const App = () => {
-  const nimi = 'Peter'
-  const ika = 10
+  const name = 'Peter'
+  const age = 10
 
   return (
     <div>
       <h1>Greetings</h1>
       <Hello name="Maya" age={26 + 10} />
-      <Hello name={nimi} age={ika} />
+      <Hello name={name} age={age} />
     </div>
   )
 }
@@ -54,7 +54,7 @@ const Hello = (props) => {
       <p>
         Hello {props.name}, you are {props.age} years old
       </p>
-      <p>So you were probably born {bornYear()}</p> // highlight-line
+      <p>So you were probably born in {bornYear()}</p> // highlight-line
     </div>
   )
 }
@@ -95,7 +95,7 @@ const Hello = (props) => {
   return (
     <div>
       <p>Hello {name}, you are {age} years old</p>
-      <p>So you were probably born {bornYear()}</p>
+      <p>So you were probably born in {bornYear()}</p>
     </div>
   )
 }
@@ -124,7 +124,7 @@ const Hello = (props) => {
   return (
     <div>
       <p>Hello {name}, you are {age} years old</p>
-      <p>So you were probably born {bornYear()}</p>
+      <p>So you were probably born in {bornYear()}</p>
     </div>
   )
 }
@@ -151,7 +151,7 @@ const Hello = ({ name, age }) => { // highlight-line
       <p>
         Hello {name}, you are {age} years old
       </p>
-      <p>So you were probably born {bornYear()}</p>
+      <p>So you were probably born in {bornYear()}</p>
     </div>
   )
 }
@@ -314,7 +314,7 @@ When the state modifying function _setCounter_ is called, <i>React re-renders th
 }
 ```
 
-When the component function gets executed a second time, calling the _useState_ function returns the already-existing current value of the state which is now "1". Executing the function body again also makes the function call to _setState_, which will increment the _counter_ state after a second has passed. Finally, the current value of _counter_, which is "1", is rendered to the screen.
+When the component function gets executed a second time, calling the _useState_ function returns the already-existing current value of the state which is now "1". Executing the function body again also makes the function call to _setTimeout_, which will increment the _counter_ state after a second has passed. Finally, the current value of _counter_, which is "1", is rendered to the screen.
 
 The function passed as the first parameter to the _setTimeout_ function will get invoked one second after calling the _setTimeout_ function
 
@@ -633,7 +633,7 @@ The first function call is used to "configure" the second function, by defining 
 () => setCounter(5)
 ```
 
-This way of utilizing functions that return functions is effectively the same thing as [currying](http://www.datchley.name/currying-vs-partial-application/) in functional programming. The term currying does not originate from functional programming, rather the term is deeply rooted in [mathematics](https://en.wikipedia.org/wiki/Currying).
+This way of utilizing functions that return functions is effectively the same thing as [currying](https://web.archive.org/web/20170919010057/http://www.datchley.name/currying-vs-partial-application/) in functional programming. The term currying does not originate from functional programming, rather the term is deeply rooted in [mathematics](https://en.wikipedia.org/wiki/Currying).
 
 We've mentioned <i>functional programming</i> a few times now, which may not be familiar to everyone. We will explore some aspects of functional programming throughout the course, as React supports and partially requires the use of some of the styles of functional programming.
 

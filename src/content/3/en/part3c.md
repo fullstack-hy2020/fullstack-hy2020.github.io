@@ -71,7 +71,7 @@ Document databases differ from relational databases in how they organize data as
 
 You can read more about document databases and NoSQL from the course material for [week 7](https://tikape-s18.mooc.fi/part7/) from the introduction to databases course. Unfortunately the material is currently only available in Finnish. 
 
-Read now chapters on [collections](https://docs.mongodb.com/manual/core/databases-and-collections/) and [documents](https://docs.mongodb.com/manual/core/document/) from the MongoDB manual to get a basic idea how a document database stores the data.
+Read now the chapters on [collections](https://docs.mongodb.com/manual/core/databases-and-collections/) and [documents](https://docs.mongodb.com/manual/core/document/) from the MongoDB manual to get a basic idea on how a document database stores the data.
 
 Naturally, you can install and run MongoDB on your own computer. However, the internet is also full of Mongo database services that you can use. Our preferred MongoDB provider in this course will be [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 
@@ -162,8 +162,8 @@ const note = new Note({
 })
 
 note.save().then(response => {
-  console.log('note saved!');
-  mongoose.connection.close();
+  console.log('note saved!')
+  mongoose.connection.close()
 })
 ```
 
@@ -216,7 +216,7 @@ const Note = mongoose.model('Note', noteSchema)
 
 First we define the [schema](http://mongoosejs.com/docs/guide.html) of a note that is stored in the _noteSchema_ variable. The schema tells Mongoose how the note objects are to be stored in the database.
 
-In the _Note_ model definition, the first <i>"Note"</i> parameter is the singular name of the model. The name of collection will the lowercased plural <i>notes</i>, because the [Mongoose convention](http://mongoosejs.com/docs/models.html) is to automatically name collections as the plural (e.g. <i>notes</i>) when the schema refers to them in the singular (e.g. <i>Note</i>).
+In the _Note_ model definition, the first <i>"Note"</i> parameter is the singular name of the model. The name of the collection will be the lowercased plural <i>notes</i>, because the [Mongoose convention](http://mongoosejs.com/docs/models.html) is to automatically name collections as the plural (e.g. <i>notes</i>) when the schema refers to them in the singular (e.g. <i>Note</i>).
 
 Document databases like Mongo are <i>schemaless</i>, meaning that the database itself does not care about the structure of the data that is stored in the database. It is possible to store documents with completely different fields in the same collection.
 
@@ -266,9 +266,9 @@ Note.find({}).then(result => {
 })
 ```
 
-When the code gets executed, all of the notes stored in the database get printed.
+When the code is executed, the program prints all the notes stored in the database.
 
-The objects are retrieved from the database with the [find](http://mongoosejs.com/docs/api.html#find_find) method of the _Note_ model. The parameter of the method is an object expressing search conditions. Since the parameter is an empty object<code>{}</code>, we get all of the notes stored in the  _notes_ collection.
+The objects are retrieved from the database with the [find](https://mongoosejs.com/docs/api.html#model_Model.find) method of the _Note_ model. The parameter of the method is an object expressing search conditions. Since the parameter is an empty object<code>{}</code>, we get all of the notes stored in the  _notes_ collection.
 
 The search conditions adhere to the Mongo search query [syntax](https://docs.mongodb.com/manual/reference/operator/).
 
@@ -306,7 +306,7 @@ As a result, the application will print:
 added Anna number 040-1234556 to phonebook
 ```
 
-The new entry to the phonebook will be saved to the database. Notice that if the name contains whitespace characters, it must be specified in quotes:
+The new entry to the phonebook will be saved to the database. Notice that if the name contains whitespace characters, it must be enclosed in quotes:
 
 ```bash
 node mongo.js yourpassword "Arto Vihavainen" 040-1234556
@@ -457,7 +457,7 @@ const noteSchema = new mongoose.Schema({
 
 noteSchema.set('toJSON', {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id
+    returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
     delete returnedObject.__v
   }
@@ -618,7 +618,7 @@ Change the fetching of all phonebook entries so that the data is <i>fetched from
 
 Verify that the frontend works after the changes have been made.
 
-In the following exercises, write all Mongoose-specific code into its own module, just like we did in the chapter [Database configuration into its own module](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#tietokantamaarittelyjen-eriyttaminen-moduuliksi)
+In the following exercises, write all Mongoose-specific code into its own module, just like we did in the chapter [Database configuration into its own module](/en/part3/saving_data_to_mongo_db#database-configuration-into-its-own-module)
 
 #### 3.13: Phonebook database, step2
 
@@ -672,7 +672,7 @@ Body:   {}
     ...
 </pre>
 
-The other error situation is related a situation where the id is in the correct format, but no note is found from the database for that id.
+The other error situation happens when the id is in the correct format, but no note is found in the database for that id.
 
 <pre>
 Method: GET
@@ -817,11 +817,11 @@ app.post('/api/notes', (request, response) => {
 app.use(bodyParser.json())
 ```
 
-Then the JSON data sent with the HTTP requests would not be available for the logger middleware the or POST route handler, since the _request.body_ would be an empty object.
+Then the JSON data sent with the HTTP requests would not be available for the logger middleware or the POST route handler, since the _request.body_ would be an empty object.
 
-It's also important that the middleware for handling unsupported routes is the last middleware that is loaded into Express.
+It's also important that the middleware for handling unsupported routes is next to the last middleware that is loaded into Express, just before the error handler.
 
-The following loading order would also cause an issue:
+For example, the following loading order would cause an issue:
 
 ```js
 const unknownEndpoint = (request, response) => {
@@ -836,11 +836,11 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-Now the handling of unknown endpoints is ordered <i>before the HTTP request handler</i>. Since the unknown endpoint handler responds to all requests with <i>404 unknown endpoint</i>, no routes or middleware will be called after the response has been sent by unknown endpoint middleware. The only exception to this is the error handler.
+Now the handling of unknown endpoints is ordered <i>before the HTTP request handler</i>. Since the unknown endpoint handler responds to all requests with <i>404 unknown endpoint</i>, no routes or middleware will be called after the response has been sent by unknown endpoint middleware. The only exception to this is the error handler which needs to come at the very end, after the unknown endpoints handler.
 
 ### Other operations
 
-Let's add the missing functionality to our application, i.e. deleting and updating an individual note.
+Let's add some missing functionality to our application, including deleting and updating an individual note.
 
 The easiest way to delete a note from the database is with the [findByIdAndRemove](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove) method:
 

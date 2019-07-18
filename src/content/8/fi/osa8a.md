@@ -401,9 +401,9 @@ Osoittamalla oikeaa kohtaa virheelliseltä riviltä saa virheilmoituksen näkyvi
 
 Jos Playground vaikuttaa olevan jumissa, niin sivun reloadaaminen yleensä auttaa.
 
-Klikkaamalla oikean reunan tekstiä <i>schema</i> näyttää Playground palvelimen GraphQL-skeeman.
+Klikkaamalla oikean reunan tekstiä <i>DOCS</i> näyttää Playground palvelimen GraphQL-skeeman.
 
-![](../../images/8/4.png)
+![](../../images/8/4e.png)
 
 ### Resolverin parametrit
 
@@ -585,7 +585,7 @@ const resolvers = {
 
 Eli aina palautettaessa <i>Person</i>-oliota, palautetaan niiden kentät <i>name</i>, <i>phone</i> sekä <i>id</i> käyttäen oletusarvoista resolveria, kenttä <i>address</i> muodostetaan itse määritellyn resolverin avulla. Resolverifunktion parametrina _root_ on käsittelyssä oleva henkilö-olio, eli osoitteen katu ja kaupunki saadaan sen kentistä.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-backend/tree/part8-1), branchissa <i>part8-1</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-1), branchissa <i>part8-1</i>.
 
 ### Mutaatio
 
@@ -617,12 +617,6 @@ const resolvers = {
   // ...
   Mutation: {
     addPerson: (root, args) => {
-      if (persons.find(p => p.name === args.name)) {
-        throw new UserInputError('Name must be unique', {
-          invalidArgs: args.name,
-        })
-      }
-
       const person = { ...args, id: uuid() }
       persons = persons.concat(person)
       return person
@@ -729,7 +723,7 @@ Eli jos lisättävä nimi on jo luettelossa heitetään poikkeus _UserInputError
 
 ![](../../images/8/6.png)
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-backend/tree/part8-2), branchissa <i>part8-2</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-2), branchissa <i>part8-2</i>.
 
 ### Enum
 
@@ -836,7 +830,7 @@ Mutation: {
 
 Mutaatio hakee siis hakee kentän <i>name</i> perusteella henkilön, jonka numero päivitetään.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-backend/tree/part8-3), branchissa <i>part8-3</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-3), branchissa <i>part8-3</i>.
 
 ### Lisää kyselyistä
 
@@ -919,7 +913,7 @@ Jos kyselyitä on useita, pyytää Playground valitsemaan mikä niistä suoritet
 
 ### Tehtäviä
 
-Tehtävissä toteutetaan yksinkertaisen kirjaston GraphQL:ää tarjoava backend. Ota sovelluksesi lähtökohtaksi [tämä tiedosto](https://github.com/fullstack-hy2019/misc/blob/master/library-backend.js). Muista _npm init_ ja riippuvuuksien asentaminen!
+Tehtävissä toteutetaan yksinkertaisen kirjaston GraphQL:ää tarjoava backend. Ota sovelluksesi lähtökohtaksi [tämä tiedosto](https://github.com/fullstackopen-2019/misc/blob/master/library-backend.js). Muista _npm init_ ja riippuvuuksien asentaminen!
 
 #### 8.1: kirjojen ja kirjailijoiden määrä
 
@@ -947,9 +941,9 @@ pitäisi alustavalla datalla tuottaa vastaus
 
 #### 8.2: kaikki kirjat ja kirjailijat
 
-Toteuta kysely _allBooks_,  joka palauttavat kaikki kirjat.
+Toteuta kysely _allBooks_, joka palauttaa kaikki kirjat.
 
-Seurava kysely siis pitäisi pystyä tekemään
+Seuraava kysely siis pitäisi pystyä tekemään
 
 ```js
 query {
@@ -964,7 +958,7 @@ query {
 
 #### 8.3: kaikki kirjailijat
 
-Toteuta kysely _allAuthors_ joka palauttaa kaikki kirjailijat. Kyselyn vastauksessa kirjailijoilla tulee myös olla kenttä _bookCount_ joka kertoo kirjailijan tekemien kirjojen määrän.
+Toteuta kysely _allAuthors_ joka palauttaa kaikki kirjailijat. Kyselyn vastauksessa kirjailijoilla tulee myös olla kenttä _bookCount_, joka kertoo kirjailijan tekemien kirjojen määrän.
 
 Esim. kyselyn
 

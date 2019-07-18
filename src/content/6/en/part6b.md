@@ -41,7 +41,7 @@ export default noteReducer
 
 Let's implement filtering for the notes that are displayed to the user. The user interface for the filters will be implemented with [radio buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio):
 
-![](../../images/6/1e.png)
+![](../../images/6/01e.png)
 
 
 Let's start with a very simple and straightforward implementation:
@@ -102,7 +102,7 @@ We decide to implement the filter functionality by storing <i>the value of the f
 ```
 
 
-Only the array of notes is stored in the state of the current implementation of our application. In the new implementation the state object has two properties, <i>notes</i> that contains the array of notes and <i>filter</i> that contains a string that indicates which notes should be displayed to the user.
+Only the array of notes is stored in the state of the current implementation of our application. In the new implementation the state object has two properties, <i>notes</i> that contains the array of notes and <i>filter</i> that contains a string indicating which notes should be displayed to the user.
 
 ### Combined reducers
 
@@ -201,7 +201,7 @@ const reducer = combineReducers({
 ```
 
 
-The state of the store defined by the reducer above is an object with two properties <i>notes</i> and <i>filter</i>. The value of the <i>notes</i> property is defined by the <i>noteReducer</i>, that does not have to deal with the other properties of the state. Likewise, the <i>filter</i> property is managed by the <i>filterReducer</i>.
+The state of the store defined by the reducer above is an object with two properties: <i>notes</i> and <i>filter</i>. The value of the <i>notes</i> property is defined by the <i>noteReducer</i>, which does not have to deal with the other properties of the state. Likewise, the <i>filter</i> property is managed by the <i>filterReducer</i>.
 
 
 Before we make more changes to the code, let's take a look at how different actions change the state of the store defined by the combined reducer. Let's add the following to the <i>index.js</i> file:
@@ -212,7 +212,7 @@ import { filterChange } from './reducers/filterReducer'
 //...
 store.subscribe(() => console.log(store.getState()))
 store.dispatch(filterChange('IMPORTANT'))
-store.dispatch(createNote('combineReducers forms one reduces from many simple reducers'))
+store.dispatch(createNote('combineReducers forms one reducer from many simple reducers'))
 ```
 
 
@@ -236,7 +236,7 @@ Based on the console output one might get the impression that every action gets 
 ![](../../images/6/6.png)
 
 
-Is there a bug in our code? No. The combined reducer works in such a way that every <i>action</i> gets handled in <i>every</i> part of the combined reducer. Typically only one reducer is interested in any given action, but there are situations where multiple reducers change their own piece state based on the same action.
+Is there a bug in our code? No. The combined reducer works in such a way that every <i>action</i> gets handled in <i>every</i> part of the combined reducer. Typically only one reducer is interested in any given action, but there are situations where multiple reducers change their respective parts of the state based on the same action.
 
 
 ### Finishing the filters
@@ -388,7 +388,7 @@ const filter = store.getState().filter
 ```
 
 
-You can find the code for our current application in its entirety in the <i>part6-2</i> branch of [this github repository](https://github.com/fullstackopen-2019/redux-notes/tree/part6-2).
+You can find the code for our current application in its entirety in the <i>part6-2</i> branch of [this Github repository](https://github.com/fullstackopen-2019/redux-notes/tree/part6-2).
 
 
 There is a slight cosmetic flaw in our application. Even though the filter is set to <i>ALL</i> by default, the associated radio button is not selected. Naturally this issue can be fixed, but since this is an unpleasant but ultimately harmless bug we will save the fix for later. 
@@ -429,7 +429,7 @@ export default Notification
 ```
 
 
-Extend the component so that it renders the message stored in the redux store, so that the component gets changed to the form:
+Extend the component so that it renders the message stored in the redux store, making the component to take the form:
 
 ```js
 return (
@@ -443,7 +443,7 @@ return (
 You will have to make changes to the application's existing reducer. Create a separate reducer for the new functionality and refactor the application so that it uses a combined reducer as shown in this part of the course material.
 
 
-The application does not have to use the <i>Notification</i> component in any intelligent way at this point of the exercise. It is enough for the application display the initial value set for the message in the <i>notificationReducer</i>.
+The application does not have to use the <i>Notification</i> component in any intelligent way at this point in the exercises. It is enough for the application to display the initial value set for the message in the <i>notificationReducer</i>.
 
 
 #### 6.10 Better anecdotes, step8
@@ -497,7 +497,7 @@ export default Filter
 
 ### Connect
 
-The structure of our current application is quite modular thanks to Redux. Naturally there's still room for improvement.
+The structure of our current application is quite modular thanks to Redux. Naturally, there's still room for improvement.
 
 
 One unpleasant aspect of our current implementation is that the Redux store has to be passed via props to all of the components that use it. The <i>App</i> component does not actually need Redux for any other purpose than passing it to its children:
@@ -662,7 +662,7 @@ The <i>Notes</i> component still uses the _dispatch_ function that it receives t
 The <i>store</i> prop no longer exists, so altering the state through the function is currently broken.
 
 
-The second parameter of the _connect_ function can be used for defining [mapDispatchToProps](https://github.com/reactjs/react-redux/blob/master/docs/api.md#arguments) which is a group of <i>action creator</i> functions that are passed to the connected component as props. Let's make the following changes to our existing connect operation:
+The second parameter of the _connect_ function can be used for defining [mapDispatchToProps](https://github.com/reactjs/react-redux/blob/master/docs/api.md#arguments) which is a group of <i>action creator</i> functions passed to the connected component as props. Let's make the following changes to our existing connect operation:
 
 ```js
 const mapStateToProps = (state) => {
@@ -685,7 +685,7 @@ const ConnectedNotes = connect(
 ```
 
 
-Now the component can directly dispatch the action defined by _toggleImportanceOf_ action creator by calling the function through its props:
+Now the component can directly dispatch the action defined by the _toggleImportanceOf_ action creator by calling the function through its props:
 
 ```js
 <Note
@@ -713,7 +713,7 @@ props.toggleImportanceOf(note.id)
 There is no need to call the _dispatch_ function separately since _connect_ has already modified the _toggleImportanceOf_ action creator into a form that contains the dispatch.
 
 
-It can take some to time to wrap your head around how _mapDispatchToProps_ works, especially once we take a look at an [alternative way of using it](/en/part6/many_redusers_connect#alternative-way-of-using-map-dispatch-to-props).
+It can take some to time to wrap your head around how _mapDispatchToProps_ works, especially once we take a look at an [alternative way of using it](/en/part6/many_reducers_connect#alternative-way-of-using-map-dispatch-to-props).
 
 
 The resulting situation from using _connect_ can be visualized like this:
@@ -808,7 +808,7 @@ export default connect(
 Since the component does not need to access the store's state, we can simply pass <i>null</i> as the first parameter to _connect_. 
 
 
-You can find the code for our current application in its entirety in the <i>part6-3</i> branch of [this github repository](https://github.com/fullstackopen-2019/redux-notes/tree/part6-3).
+You can find the code for our current application in its entirety in the <i>part6-3</i> branch of [this Github repository](https://github.com/fullstackopen-2019/redux-notes/tree/part6-3).
 
 
 ### Referencing action creators passed as props
@@ -1127,9 +1127,9 @@ High order components, or HOCs, are a way of defining generic functionality that
 HOCs are in fact a generalization of the [High Order Function](https://en.wikipedia.org/wiki/Higher-order_function) (HOF) concept. HOFs are functions that either accept functions as parameters or return functions. We have actually been using HOFs throughout the course, e.g. all of the methods used for dealing with arrays like _map, filter and fine_ are HOFs. 
 
 
-You can find the code for our current application in its entirety in the <i>part6-4</i> branch of [this github repository](https://github.com/fullstack-hy2019/redux-notes/tree/part6-4). 
+You can find the code for our current application in its entirety in the <i>part6-4</i> branch of [this Github repository](https://github.com/fullstackopen-2019/redux-notes/tree/part6-4). 
 
-Note the changes in component <i>VisibilityFilter</i> and removal of all the props in component <i>App</i>.
+Note the changes in the <i>VisibilityFilter</i> component and removal of all the props in the <i>App</i> component.
 
 </div>
 
@@ -1196,7 +1196,7 @@ const = () => {
 #### 6.15* Better anecdotes, step13
 
 
-Change your application so that the <i>AnecdoteList</i> component only receives a single prop based on the store's state. Construct the filtered list of anecdotes as shown in the [Presentational/Container revisited](/osa6/monta_reduseria_connect#presentational-container-revisited) section in this part of the course material.
+Change your application so that the <i>AnecdoteList</i> component only receives a single prop based on the store's state. Construct the filtered list of anecdotes as shown in the [Presentational/Container revisited](/en/part6/many_reducers_connect#presentational-container-revisited) section in this part of the course material.
 
 
 As a result, the <i>AnecdoteList</i> component should get simplified into the following form:

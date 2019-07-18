@@ -11,10 +11,10 @@ lang: en
 We will now start writing tests for the backend. Since the backend does not contain any complicated logic, it doesn't make sense to write [unit tests](https://en.wikipedia.org/wiki/Unit_testing) for it. The only potential thing we could unit test is the _toJSON_ method that is used for formatting notes.
 
 
-In some situations it can be beneficial to implement a part of the backend's tests by mocking the database instead of using a real database. One library that could be used for this is [mongo-mock](https://github.com/williamkapke/mongo-mock).
+In some situations, it can be beneficial to implement some of the backend tests by mocking the database instead of using a real database. One library that could be used for this is [mongo-mock](https://github.com/williamkapke/mongo-mock).
 
 
-Since our application's backend is still relatively simple, we will make the decision to test the entire application through its REST API, so that the database is also included. This kind of testing where multiple components of the system are being tested as a group, can be described as [integration testing](https://en.wikipedia.org/wiki/Integration_testing).
+Since our application's backend is still relatively simple, we will make the decision to test the entire application through its REST API, so that the database is also included. This kind of testing where multiple components of the system are being tested as a group, is called [integration testing](https://en.wikipedia.org/wiki/Integration_testing).
 
 
 ### Test environment
@@ -23,7 +23,7 @@ Since our application's backend is still relatively simple, we will make the dec
 In one of the previous chapters of the course material, we mentioned that when your backend server is running in Heroku, it is in <i>production</i> mode.
 
 
-The convention in Node is to define the execution mode of the application with the <i>NODE\_ENV</i> environment variable. In our current application we only load the environment variables defined in the <i>.env</i> file is the application is <i>not</i> in production mode.
+The convention in Node is to define the execution mode of the application with the <i>NODE\_ENV</i> environment variable. In our current application, we only load the environment variables defined in the <i>.env</i> file is the application is <i>not</i> in production mode.
 
 It is common practice to define separate modes for development and testing.
 
@@ -47,7 +47,7 @@ Next, let's change the scripts in our <i>package.json</i> so that when tests are
 ```
 
 
-We also added the [runInBand](https://jestjs.io/docs/en/cli.html#runinband) option to the npm script that executes the tests. This option will prevent Jest from running tests in parallel and we will discuss its significance once our tests start using the database.
+We also added the [runInBand](https://jestjs.io/docs/en/cli.html#runinband) option to the npm script that executes the tests. This option will prevent Jest from running tests in parallel; we will discuss its significance once our tests start using the database.
 
 
 We specified the mode of the application to be <i>development</i> in the _npm run watch_ script that uses nodemon. We also specified that the default _npm start_ command will define the mode as <i>production</i>.
@@ -121,7 +121,7 @@ TEST_MONGODB_URI=mongodb+srv://fullstack:fullstack@cluster0-ostce.mongodb.net/no
 ```
 
 
-The _config_ module that we have implemented slightly resembles the [node-config](https://github.com/lorenwest/node-config) package. Writing our own implementation is justified since our application is simple and also because doing so teaches us valuable lessons.
+The _config_ module that we have implemented slightly resembles the [node-config](https://github.com/lorenwest/node-config) package. Writing our own implementation is justified since our application is simple, and also because it teaches us valuable lessons.
 
 
 These are the only changes we need to make to our application's code.
@@ -169,7 +169,7 @@ afterAll(() => {
 The test imports the Express application from the <i>app.js</i> module and wraps it with the <i>supertest</i> function into a so-called [superagent](https://github.com/visionmedia/superagent) object. This object is assigned to the <i>api</i> variable and tests can use it for making HTTP requests to the backend.
 
 
-Our test makes an HTTP GET request to the <i>api/notes</i> url and verifies that the request is responded to with the status code 200. The test also verifies that the <i>Content-Type</i> header is set to <i>application/json</i> indicating that the data is in the desired format.
+Our test makes an HTTP GET request to the <i>api/notes</i> url and verifies that the request is responded to with the status code 200. The test also verifies that the <i>Content-Type</i> header is set to <i>application/json</i>, indicating that the data is in the desired format.
 
 
 The test contains some details that we will explore [a bit later on](/en/part4/testing_the_backend#async-await). The arrow function that defines the test is preceded by the <i>async</i> keyword and the method call for the <i>api</i> object is preceded by the <i>await</i> keyword. We will write a few tests and then take a closer look at this async/await magic. Do not concern yourself with them for now, just be assured that the example tests work correctly. The async/await syntax is related to the fact that making a request to the API is an <i>asynchronous</i> operation. The [Async/await syntax](https://facebook.github.io/jest/docs/en/asynchronous.html) can be used for writing asynchronous code with the appearance of synchronous code.
@@ -237,7 +237,7 @@ In other words, supertest takes care that the application being tested is starte
 Let's write a few more tests:
 
 ```js
-test('there are five notes', async () => {
+test('there are four notes', async () => {
   const response = await api.get('/api/notes')
 
   expect(response.body.length).toBe(4)
@@ -355,7 +355,7 @@ Extracting logging into its own module is a good idea in more ways than one. If 
 ### Initializing the database before tests
 
 
-Testing appears to be easy and our tests are currently passing. However, our tests are bad as they are dependent on the state of the database (that happens to be correct in my test database). In order to make our tests more robust we have to reset the database and generate the needed test data in a controlled manner before we run the tests.
+Testing appears to be easy and our tests are currently passing. However, our tests are bad as they are dependent on the state of the database (that happens to be correct in my test database). In order to make our tests more robust, we have to reset the database and generate the needed test data in a controlled manner before we run the tests.
 
 
 Our tests are already using the [afterAll](https://facebook.github.io/jest/docs/en/api.html#afterallfn-timeout) function of Jest to close the connection to the database after the tests are finished executing. Jest offers many other [functions](https://facebook.github.io/jest/docs/en/setup-teardown.html#content) that can be used for executing operations once before any test is run, or every time before a test is run.
@@ -393,7 +393,7 @@ beforeEach(async () => {
 ```
 
 
-The database is cleared out at the beginning and after that we save the two notes stored in the _initialNotes_ array to the database. By doing this we ensure that the database is in the same state before every test is run.
+The database is cleared out at the beginning, and after that we save the two notes stored in the _initialNotes_ array to the database. Doing this, we ensure that the database is in the same state before every test is run.
 
 
 Let's also make the following changes to the last two tests:
@@ -423,7 +423,7 @@ Pay special attention to the expect in the latter test. The <code>response.body.
 ### Running tests one by one
 
 
-The _npm test_ command executes all of the tests of the application. When we are writing tests it is usually wise to only execute one or two tests. Jest offers a few different ways of accomplishing this, one of which is the [only](https://jestjs.io/docs/en/api#testonlyname-fn-timeout) method. If tests are written across many files this method is not great.
+The _npm test_ command executes all of the tests of the application. When we are writing tests, it is usually wise to only execute one or two tests. Jest offers a few different ways of accomplishing this, one of which is the [only](https://jestjs.io/docs/en/api#testonlyname-fn-timeout) method. If tests are written across many files, this method is not great.
 
 
 A better option is to use Jest directly without npm. This way we can specify what the tests that we want to run with Jest. The following command only runs the tests found in the <i>tests/note_api.test.js</i> file:
@@ -477,7 +477,7 @@ Note.find({}).then(notes => {
 The _Note.find()_ method returns a promise and we can access the result of the operation by registering a callback function with the _then_ method.
 
 
-All of the code we want to execute once the operation finishes is written in the callback function. If we wanted make several asynchronous function calls in sequence, the situation would start to become painful. The asynchronous calls would have to be made in the callback. This would likely lead to complicated code and could potentially give birth to a so-called [callback hell](http://callbackhell.com/).
+All of the code we want to execute once the operation finishes is written in the callback function. If we wanted to make several asynchronous function calls in sequence, the situation would soon become painful. The asynchronous calls would have to be made in the callback. This would likely lead to complicated code and could potentially give birth to a so-called [callback hell](http://callbackhell.com/).
 
 
 By [chaining promises](https://javascript.info/promise-chaining) we could keep the situation somewhat under control, and avoid callback hell by creating a fairly clean chain of _then_ method calls. We have seen a few of these during the course. To illustrate this, you can view an artificial example of a function that fetches all notes and then deletes the first one:
@@ -494,7 +494,7 @@ Note.find({})
 ```
 
 
-The then-chain is alright but we can do better. The [generator functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) introduced in ES6 provided a [clever way](https://github.com/getify/You-Dont-Know-JS/blob/master/async%20%26%20performance/ch4.md#iterating-generators-asynchronously) of writing asynchronous code in a way that "looks synchronous". The syntax is a bit clunky and not widely used.
+The then-chain is alright, but we can do better. The [generator functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) introduced in ES6 provided a [clever way](https://github.com/getify/You-Dont-Know-JS/blob/master/async%20%26%20performance/ch4.md#iterating-generators-asynchronously) of writing asynchronous code in a way that "looks synchronous". The syntax is a bit clunky and not widely used.
 
 
 The _async_ and _await_ keywords introduced in ES7 bring the same functionality as the generators, but in an understandable and syntactically cleaner way to the hands of all citizens of the JavaScript world.
@@ -522,16 +522,16 @@ console.log('the first note is removed')
 ```
 
 
-Thanks to the new syntax the code is a lot simpler than the previous then-chain.
+Thanks to the new syntax, the code is a lot simpler than the previous then-chain.
 
 
-There are a few important details to pay attention to when using async/await syntax. In order to use the await operator with asynchronous operations they have to return a promise. This is not a problem as such, as regular asynchronous functions using callbacks are easy to wrap around promises.
+There are a few important details to pay attention to when using async/await syntax. In order to use the await operator with asynchronous operations, they have to return a promise. This is not a problem as such, as regular asynchronous functions using callbacks are easy to wrap around promises.
 
 
 The await keyword can't be used just anywhere in JavaScript code. Using await is possible only inside of an [async](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) function.
 
 
-This means that in order for the previous examples to work they have to be using async functions. Notice the first line in the arrow function definition:
+This means that in order for the previous examples to work, they have to be using async functions. Notice the first line in the arrow function definition:
 
 ```js
 const main = async () => { // highlight-line
@@ -576,7 +576,7 @@ You can find the code for our current application in its entirety in the <i>part
 ### More tests and refactoring the backend
 
 
-When code gets refactored there is always the risk of [regression](https://en.wikipedia.org/wiki/Regression_testing), meaning that existing functionality may break. Let's refactor the remaining operations by first writing a test for each route of the API.
+When code gets refactored, there is always the risk of [regression](https://en.wikipedia.org/wiki/Regression_testing), meaning that existing functionality may break. Let's refactor the remaining operations by first writing a test for each route of the API.
 
 
 Let's start with the operation for adding a new note. Let's write a test that adds a new note and verifies that the amount of notes returned by the API increases, and that the newly added note is in the list.
@@ -713,7 +713,7 @@ test('a specific note is within the returned notes', async () => {
 
   const contents = response.body.map(r => r.content)
   expect(contents).toContain(
-    'HTTP-protokollan tärkeimmät metodit ovat GET ja POST'
+    'Browser can execute only Javascript'
   )
 })
 
@@ -865,7 +865,7 @@ test('a note can be deleted', async () => {
 ```
 
 
-Both tests share a similar structure. In the initialization phase they fetch a note from the database. After this the tests call the actual operation being tested, which is highlighted in the code block. Lastly, the tests verify that the outcome of the operation is as expected.
+Both tests share a similar structure. In the initialization phase they fetch a note from the database. After this, the tests call the actual operation being tested, which is highlighted in the code block. Lastly, the tests verify that the outcome of the operation is as expected.
 
 
 The tests pass and we can safely refactor the tested routes to use async/await:
@@ -969,10 +969,10 @@ saved
 </pre>
 
 
-Despite our use of the async/await syntax our solution does not work like we expected it to. The test execution begins before the database is initialized!
+Despite our use of the async/await syntax, our solution does not work like we expected it to. The test execution begins before the database is initialized!
 
 
-The problem is that every iteration of the forEach loop generates its own asynchronous operation and _beforeEach_ won't wait for them to finish executing. In other words, the _await_ commands defined inside of the _forEach_ loop are not in the _beforeEach_ function, but in separate functions that _beforeEach_ will not wait for.
+The problem is that every iteration of the forEach loop generates its own asynchronous operation, and _beforeEach_ won't wait for them to finish executing. In other words, the _await_ commands defined inside of the _forEach_ loop are not in the _beforeEach_ function, but in separate functions that _beforeEach_ will not wait for.
 
 
 Since the execution of tests begins immediately after _beforeEach_ has finished executing, the execution of tests begins before the database state is initialized.
@@ -982,7 +982,7 @@ One way of fixing this is to wait for all of the asynchronous operations to fini
 
 ```js
 beforeEach(async () => {
-  await Note.remove({})
+  await Note.deleteMany({})
 
   const noteObjects = helper.initialNotes
     .map(note => new Note(note))
@@ -1005,9 +1005,9 @@ Promise.all executes the promises it receives in parallel. If the promises need 
 
 ```js
 beforeEach(async () => {
-  await Note.remove({})
+  await Note.deleteMany({})
 
-  for (let note of initialNotes) {
+  for (let note of helper.initialNotes) {
     let noteObject = new Note(note)
     await noteObject.save()
   }
@@ -1015,7 +1015,7 @@ beforeEach(async () => {
 ```
 
 
-The asynchronous nature of JavaScript can lead to surprising behavior and for this reason it is important to pay careful attention when using the async/await syntax. Even though the syntax makes it easier to deal with promises, it is still necessary to understand how promises work!
+The asynchronous nature of JavaScript can lead to surprising behavior, and for this reason, it is important to pay careful attention when using the async/await syntax. Even though the syntax makes it easier to deal with promises, it is still necessary to understand how promises work!
 
 </div>
 
@@ -1024,9 +1024,8 @@ The asynchronous nature of JavaScript can lead to surprising behavior and for th
 
 ### Exercises
 
-**Huom:** materiaalissa käytetään muutamaan kertaan matcheria [toContain](https://facebook.github.io/jest/docs/en/expect.html#tocontainitem) tarkastettaessa, että jokin arvo on taulukossa. Kannattaa huomata, että metodi käyttää samuuden vertailuun ===-operaattoria ja olioiden kohdalla tämä ei ole useinkaan se mitä halutaan ja parempi vaihtoehto onkin [toContainEqual](https://facebook.github.io/jest/docs/en/expect.html#tocontainequalitem). Tosin mallivastauksissa ei vertailla kertaakaan olioita matcherien avulla, joten ilmankin selviää varsin hyvin.
 
-**NB:** the material uses the [toContain](https://facebook.github.io/jest/docs/en/expect.html#tocontainitem) matcher in several places to verify that an array contains a specific element. It's worth noting that the method uses the === operator for comparing and matching elements, which means that it is often not well-suited for matching objects. In most cases the appropriate method for verifying objects in arrays is the [toContainEqual](https://facebook.github.io/jest/docs/en/expect.html#tocontainequalitem) matcher. The model solutions don't check for objects in arrays with matchers, so using the method is not required for solving the exercises.
+**NB:** the material uses the [toContain](https://facebook.github.io/jest/docs/en/expect.html#tocontainitem) matcher in several places to verify that an array contains a specific element. It's worth noting that the method uses the === operator for comparing and matching elements, which means that it is often not well-suited for matching objects. In most cases, the appropriate method for verifying objects in arrays is the [toContainEqual](https://facebook.github.io/jest/docs/en/expect.html#tocontainequalitem) matcher. However, the model solutions don't check for objects in arrays with matchers, so using the method is not required for solving the exercises.
 
 
 **Warning:** If you find yourself using async/await and <i>then</i> methods in the same code, it is almost guaranteed that you are doing something wrong. Use one or the other and don't mix the two.
@@ -1044,7 +1043,7 @@ Once the test is finished, refactor the route handler to use the async/await syn
 Notice that you will have to make similar changes to the code that were made [in the material](/en/part4/testing_the_backend#test-environment), like defining the test environment so that you can write tests that use their own separate database.
 
 
-**NB:** When running the tests you may run into the following warning:
+**NB:** When running the tests, you may run into the following warning:
 
 ![](../../images/4/8a.png)
 
@@ -1059,7 +1058,8 @@ module.exports = {
 
 
 
-**NB:** when yo are writing your tests **<i>it is better to not execute all of your tests</i>**, only execute the ones you are working on. Read more about this [here](/en/part4/testing_the_backend#running-tests-one-by-one).
+
+**NB:** when you are writing your tests **<i>it is better to not execute all of your tests</i>**, only execute the ones you are working on. Read more about this [here](/osa4/backendin_testaaminen#testien-suorittaminen-yksitellen).
 
 
 #### 4.9*: Blog list tests, step2
@@ -1092,7 +1092,7 @@ Make the required changes to the code so that it passes the test.
 #### 4.12*: Blog list tests, step5
 
 
-Write a test related to creating new notes via the <i>/api/blogs</i> endpoint, that verifies that if the <i>title</i> and <i>url</i> properties are missing from the request data, the backend responds to the request with the status code <i>400 Bad Request</i>.
+Write a test related to creating new blogs via the <i>/api/blogs</i> endpoint, that verifies that if the <i>title</i> and <i>url</i> properties are missing from the request data, the backend responds to the request with the status code <i>400 Bad Request</i>.
 
 
 Make the required changes to the code so that it passes the test.
@@ -1255,7 +1255,7 @@ The test output is grouped according to the <i>describe</i> blocks:
 ![](../../images/4/7.png)
 
 
-There is still room for improvement but it is time to move forward.
+There is still room for improvement, but it is time to move forward.
 
 
 This way of testing the API, by making HTTP requests and inspecting the database with Mongoose, is by no means the only nor the best way of conducting API-level integration tests for server applications. There is no universal best way of writing tests, as it all depends on the application being tested and available resources.

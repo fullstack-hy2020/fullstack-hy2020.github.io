@@ -7,7 +7,7 @@ lang: fi
 
 <div class="content">
 
-Osassa 2 on jo katsottu kahta tapaa tyylien lisäämiseen eli vanhan koulukunnan [yksittäistä CSS](/osa2#tyylien-lisääminen)-tiedostoa, [inline-tyylejä](/osa6#inline-tyylit). Katsotaan tässä osassa vielä muutamaa tapaa.
+Osassa 2 on jo katsottu kahta tapaa tyylien lisäämiseen eli vanhan koulukunnan [yksittäistä CSS](/osa2#tyylien-lisääminen)-tiedostoa, [inline-tyylejä](/osa2/tyylien_lisaaminen_react_sovellukseen#inline-tyylit). Katsotaan tässä osassa vielä muutamaa tapaa.
 
 ### Valmiit käyttöliittymätyylikirjastot
 
@@ -96,7 +96,7 @@ const Notes = (props) => (
 
 Ulkoasu on varsin tyylikäs:
 
-![](../../images/7/7.png)
+![](../../images/7/7e.png)
 
 Huomaa, että koodissa käytettävät React bootstrapin komponentit täytyy importata, eli koodiin on lisättävä:
 
@@ -228,7 +228,7 @@ Ulkoasu on varsin tyylikäs
 
 Jos selaimen kokoa kaventaa, huomaamme että menu "kollapsoituu" ja sen saa näkyville vain klikkaamalla:
 
-![](../../images/7/11a.png)
+![](../../images/7/11e.png)
 
 Bootstrap ja valtaosa tarjolla olevista UI-frameworkeista tuottavat [responsiivisia](https://en.wikipedia.org/wiki/Responsive_web_design) näkymiä, eli sellaisia jotka renderöityvät vähintään kohtuullisesti monen kokoisilla näytöillä.
 
@@ -237,7 +237,7 @@ Chromen developer-konsolin avulla on mahdollista simuloida sovelluksen käyttö�
 ![](../../images/7/12.png)
 
 
-Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/fullstack-hy2019/misc/blob/master/notes-bootstrap.js)
+Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/fullstackopen-2019/misc/blob/master/notes-bootstrap.js)
 
 ### Semantic UI
 
@@ -286,9 +286,7 @@ const App = () => {
 }
 ```
 
-Sivun sisältö ei ole enää reunoissa kiinni:
-
-![](../../images/7/14.png)
+Sivun sisältö ei ole enää reunoissa kiinni.
 
 Edellisen luvun tapaan, renderöidään muistiinpanot taulukkona, komponentin [Table](https://react.semantic-ui.com/collections/table) avulla. Koodi näyttää seuraavalta
 
@@ -319,7 +317,7 @@ const Notes = (props) => (
 
 Muistiinpanojen lista näyttää seuraavalta:
 
-![](../../images/7/14.png)
+![](../../images/7/14e.png)
 
 #### Lomake
 
@@ -424,7 +422,7 @@ Lopputulos näyttää seuraavalta:
 
 ![](../../images/7/17.png)
 
-Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/fullstack-hy2019/misc/blob/master/notes-semantic.js).
+Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/fullstackopen-2019/misc/blob/master/notes-semantic.js).
 
 ### Loppuhuomioita
 

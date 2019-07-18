@@ -15,11 +15,11 @@ Facebook kehitti tilan hallinnan ongelmia helpottamaan [Flux](https://facebook.g
 
 Kun action muuttaa storen tilaa, renderöidään näkymät uudelleen:
 
-![](https://facebook.github.io/flux/img/flux-simple-f8-diagram-1300w.png)
+![](https://facebook.github.io/flux/img/overview/flux-simple-f8-diagram-1300w.png)
 
-Jos sovelluksen käyttö, esim. napin painaminen aiheuttaa tarpeen tilan muutokseen, tehdään tilanmuutos actonin avulla. Tämä taas aiheuttaa uuden näytön renderöitymisen:
+Jos sovelluksen käyttö, esim. napin painaminen aiheuttaa tarpeen tilan muutokseen, tehdään tilanmuutos actionin avulla. Tämä taas aiheuttaa uuden näytön renderöitymisen:
 
-![](https://facebook.github.io/flux/img/flux-simple-f8-diagram-with-client-action-1300w.png)
+![](https://facebook.github.io/flux/img/overview/flux-simple-f8-diagram-with-client-action-1300w.png)
 
 Flux tarjoaa siis standardin tavan sille miten ja missä sovelluksen tila pidetään sekä tavalle tehdä tilaan muutoksia.
 
@@ -957,7 +957,7 @@ const NewNote = (props) => {
 Toisin kuin aiemmin ilman Reduxia tekemässämme React-koodissa, sovelluksen tilaa (joka on nyt siis reduxissa) muuttava tapahtumankäsittelijä on siirretty pois <i>App</i>-komponentista, alikomponentin vastuulle. Itse tilaa muuttava logiikka on kuitenkin siististi reduxissa eristettynä koko sovelluksen React-osuudesta.
 
 
-Eriytetään veilä muistiinpanojen lista ja yksittäisen muistiinpanon esittäminen omiksi komponenteikseen:
+Eriytetään vielä muistiinpanojen lista ja yksittäisen muistiinpanon esittäminen omiksi komponenteikseen:
 
 ```js
 const Note = ({ note, handleClick }) => {
@@ -1003,7 +1003,7 @@ const App = (props) => {
 ```
 
 
-Yksittäisen muistiinpanon renderöinnistä huolehtiva <i>Note</i> on erittäin yksinkertainen, eikä ole tietoinen siitä, että sen propsina saama tapahtumankäsittelijä dispatchaa actionin. Tälläisiä komponentteja kutsutaan Reactin terminologiassa [presentational](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)-komponenteiksi.
+Yksittäisen muistiinpanon renderöinnistä huolehtiva <i>Note</i> on erittäin yksinkertainen, eikä ole tietoinen siitä, että sen propsina saama tapahtumankäsittelijä dispatchaa actionin. Tällaisia komponentteja kutsutaan Reactin terminologiassa [presentational](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)-komponenteiksi.
 
 <i>Notes</i> taas on sellainen mitä kutsutaan [container](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)-komponenteiksi, se sisältää sovelluslogiikkaa, eli määrittelee mitä <i>Note</i>-komponenttien tapahtumankäsittelijät tekevät ja koordinoi <i>presentational</i>-komponenttien, eli <i>Notejen</i> konfigurointia.
 
@@ -1011,7 +1011,7 @@ Palaamme presentational/container-jakoon tarkemmin myöhemmin tässä osassa.
 
 <i>storen</i> välittäminen sitä tarvitseviin komponentteihin propsien avulla on melko ikävää. Vaikka <i>App</i> ei itse tarvitse storea, sen on otettava store vastaan, pystyäkseen välittämään sen edelleen komponenteille <i>NewNote</i> ja <i>Notes</i>. Tähän on kuitenkin tulossa parannus hetken päästä.
 
-Redux-sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/redux-notes/tree/part6-1), branchissa <i>part6-1</i>.
+Redux-sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/redux-notes/tree/part6-1), branchissa <i>part6-1</i>.
 
 </div>
 
@@ -1019,7 +1019,7 @@ Redux-sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https:
 
 ### Tehtäviä
 
-Toteutetaan nyt versio toisesta ensimmäisen osan anekdoottien äänestyssovelluksesta. Ota ratkaisusi pohjaksi repositoriossa https://github.com/fullstack-hy2019/redux-anecdotes oleva projekti.
+Toteutetaan nyt versio toisesta ensimmäisen osan anekdoottien äänestyssovelluksesta. Ota ratkaisusi pohjaksi repositoriossa https://github.com/fullstackopen-2019/redux-anecdotes oleva projekti.
 
 Jos kloonaat projektin olemassaolevan git-reposition sisälle, <i>poista kloonatun sovelluksen git-konfiguraatio:</i>
 

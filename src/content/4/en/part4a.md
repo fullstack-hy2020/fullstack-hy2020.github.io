@@ -111,7 +111,7 @@ notesRouter.post('/', (request, response, next) => {
   const note = new Note({
     content: body.content,
     important: body.important || false,
-    date: new Date(),
+    date: new Date()
   })
 
   note.save()
@@ -208,11 +208,12 @@ const config = require('./utils/config')
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
+const cors = require('cors')
 const notesRouter = require('./controllers/notes')
 const middleware = require('./utils/middleware')
 const mongoose = require('mongoose')
 
-console.log('commecting to', config.MONGODB_URI)
+console.log('connecting to', config.MONGODB_URI)
 
 mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true })
   .then(() => {
@@ -222,6 +223,7 @@ mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true })
     console.log('error connection to MongoDB:', error.message)
   })
 
+app.use(cors())
 app.use(express.static('build'))
 app.use(bodyParser.json())
 app.use(middleware.requestLogger)
@@ -290,7 +292,7 @@ const noteSchema = new mongoose.Schema({
 
 noteSchema.set('toJSON', {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id
+    returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
     delete returnedObject.__v
   }
@@ -319,7 +321,7 @@ To recap, the directory structure looks like this after the changes have been ma
 ```
 
 
-For smaller applications the structure does not matter that much. Once the application starts to grow in size, you are going to have establish some kind of a structure, and separate the different responsibilities of the application into separate modules. This will make developing the application much easier.
+For smaller applications the structure does not matter that much. Once the application starts to grow in size, you are going to have to establish some kind of structure, and separate the different responsibilities of the application into separate modules. This will make developing the application much easier.
 
 There is no strict directory structure or file naming convention that is required for Express applications. To contrast this, Ruby on Rails does require a specific structure. Our current structure simply follows some of the best practices you can come across on the internet.
 
@@ -403,7 +405,7 @@ Verify that it is possible to add blogs to list with Postman or the VS Code REST
 Refactor the application into separate modules as shown earlier in this part of the course material.
 
 
-**NB** refactor your application in baby steps and verify that the application works after every change you make. If you try to take a "shortcut" by refactoring many things at once, then [Murphy's law](https://fi.wikipedia.org/wiki/Murphyn_laki) will kick in and it is almost certain that something will break in your application. The "shortcut" will end up taking more time than moving forward slowly and systematically.
+**NB** refactor your application in baby steps and verify that the application works after every change you make. If you try to take a "shortcut" by refactoring many things at once, then [Murphy's law](https://en.wikipedia.org/wiki/Murphy%27s_law) will kick in and it is almost certain that something will break in your application. The "shortcut" will end up taking more time than moving forward slowly and systematically.
 
 
 One best practice is to commit your code every time it is in a stable state. This makes it easy to rollback to a situation where the application still works.
@@ -503,7 +505,7 @@ module.exports = {
 ```
 
 
-Let's create a separate directory for our tests called <i>tests</i> and create a new file called <i>palindrom.test.js</i> with the following contents:
+Let's create a separate directory for our tests called <i>tests</i> and create a new file called <i>palindrome.test.js</i> with the following contents:
 
 ```js
 const palindrome = require('../utils/for_testing').palindrome
@@ -557,7 +559,7 @@ Individual test cases are defined with the _test_ function. The first parameter 
 
 ```js
 () => {
-  const result = palindrom('react')
+  const result = palindrome('react')
 
   expect(result).toBe('tcaer')
 }
@@ -579,7 +581,7 @@ Jest has excellent error messages, let's break the test to demonstrate this:
 
 ```js
 test('palindrom of react', () => {
-  const result = palindrom('react')
+  const result = palindrome('react')
 
   expect(result).toBe('tkaer')
 })

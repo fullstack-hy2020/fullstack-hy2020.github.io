@@ -63,7 +63,7 @@ mongoose.set('useFindAndModify', false)
 
 const MONGODB_URI = 'mongodb+srv://fullstack:fullstack@cluster0-ostce.mongodb.net/graphql?retryWrites=true'
 
-console.log('commecting to', MONGODB_URI)
+console.log('connecting to', MONGODB_URI)
 
 mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
   .then(() => {
@@ -150,7 +150,7 @@ Eli jos kyselylle ei ole annettu parametria _phone_, palautetaan kaikki henkilö
 Person.find({ phone: { $exists: true }})
 ```
 
-palauttamat henkilöt, eli ne joiden kentällä _phone_ on jokin arvo. Jos parametrin arvo on <i>YES</i>, palauttaa kysely ne henkilöt, joilla ei ole arvoa kentällä _phone_:
+palauttamat henkilöt, eli ne joiden kentällä _phone_ on jokin arvo. Jos parametrin arvo on <i>NO</i>, palauttaa kysely ne henkilöt, joilla ei ole arvoa kentällä _phone_:
 
 ```js
 Person.find({ phone: { $exists: false }})
@@ -190,7 +190,7 @@ Mutation: {
 }
 ```
 
-Backendin lopullinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-backend/tree/part8-4), branchissa <i>part8-4</i>.
+Backendin lopullinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-4), branchissa <i>part8-4</i>.
 
 
 ### Käyttäjä ja kirjautuminen
@@ -314,7 +314,7 @@ const server = new ApolloServer({
         auth.substring(7), JWT_SECRET
       )
 
-      const currentUser = await User.findById(decodedToken.id)
+      const currentUser = await User.findById(decodedToken.id).populate('friends')
       return { currentUser }
     }
   }
@@ -388,9 +388,8 @@ Mutaation toteuttava resolveri:
 
 ```js
   addAsFriend: async (root, args, { currentUser }) => {
-    const nonFriendAlready = (person) => {
+    const nonFriendAlready = (person) => 
       !currentUser.friends.map(f => f._id).includes(person._id)
-    }
 
     if (!currentUser) {
       throw new AuthenticationError("not authenticated")
@@ -420,7 +419,7 @@ otetaan se vastaan suoraan funktion parametrimäärittelyssä:
 addAsFriend: async (root, args, { currentUser }) => {
 ```
 
-Backendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-backend/tree/part8-5), branchissa <i>part8-5</i>.
+Backendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-5), branchissa <i>part8-5</i>.
 
 
 </div>
@@ -431,9 +430,9 @@ Backendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-h
 
 #### 8.13: Tietokanta, osa 1
 
-Muuta kirjastosovellusta siten, että se tallettaa tiedot tietokantaan. Kirjojen ja kirjailijoiden skeema löytyy valmiiksi [täältä](https://github.com/fullstack-hy2019/misc/blob/master/library-schema.md).
+Muuta kirjastosovellusta siten, että se tallettaa tiedot tietokantaan. Kirjojen ja kirjailijoiden <i>mongoose-skeema</i> löytyy valmiiksi [täältä](https://github.com/fullstackopen-2019/misc/blob/master/library-schema.md).
 
-Muutetaan myös skeemaa hiukan kirjan osalta
+Muutetaan myös graphql-skeemaa hiukan kirjan osalta
 
 ```js
 type Book {
@@ -464,7 +463,7 @@ Saatat tässä tehtävässä hyötyä [tästä](https://docs.mongodb.com/manual/
 
 #### 8.15 Tietokanta, osa 3
 
-Täydennä sovellusta siten, että validointivirheet käsitellään järkevästi, eli niiden seurauksena heitetään poikkeus _UserInputError_ , jolle asetetaan sopiva virheviesti.
+Täydennä sovellusta siten, että tietokannan validointivirheet (esim. liian lyhyt kirjan tai kirjailijan nimi) käsitellään järkevästi, eli niiden seurauksena heitetään poikkeus _UserInputError_, jolle asetetaan sopiva virheviesti.
 
 #### 8.16 käyttäjä ja kirjautuminen
 

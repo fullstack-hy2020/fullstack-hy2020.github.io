@@ -426,7 +426,7 @@ Note.find({})
   })
 ```
 
-Then-ketju on ok, mutta parempaankin pystytään. Jo ES6:ssa esitellyt [generaattorifunktiot](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) mahdollistivat [ovelan tavan](https://github.com/getify/You-Dont-Know-JS/JavascriptTblob/master/async%20%26%20performance/ch4.md#iterating-generators-asynchronously) määritellä asynkronista koodia siten että se "näyttää synkroniselta". Syntaksi ei kuitenkaan ole täysin luonteva ja sitä ei käytetä kovin yleisesti.
+Then-ketju on ok, mutta parempaankin pystytään. Jo ES6:ssa esitellyt [generaattorifunktiot](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) mahdollistivat [ovelan tavan](https://github.com/getify/You-Dont-Know-JS/blob/master/async%20%26%20performance/ch4.md#iterating-generators-asynchronously) määritellä asynkronista koodia siten että se "näyttää synkroniselta". Syntaksi ei kuitenkaan ole täysin luonteva ja sitä ei käytetä kovin yleisesti.
 
 ES7:ssa _async_ ja _await_ tuovat generaattoreiden tarjoaman toiminnallisuuden ymmärrettävästi ja syntaksin puolesta selkeällä tavalla koko Javascript-kansan ulottuville.
 
@@ -934,7 +934,7 @@ module.exports = {
 
 Tee testi, joka varmistaa että palautettujen blogien identifioivan kentän tulee olla nimeltään <i>id</i>,  oletusarvoisestihan tietokantaan talletettujen olioiden tunnistekenttä on <i>_id</i>. Olion kentän olemassaolon tarkastaminen onnistuu jestin matcherillä [toBeDefined](https://jestjs.io/docs/en/expect#tobedefined)
 
-Muuta koodia siten, että testi menee läpi. Osassa 3 käsitelty [toJSON](osa3/tietojen_tallettaminen_mongo_db_tietokantaan#tietokantaa-kayttava-backend) on sopiva paikka parametrin <i>id</i> määrittelyyn. 
+Muuta koodia siten, että testi menee läpi. Osassa 3 käsitelty [toJSON](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#tietokantaa-kayttava-backend) on sopiva paikka parametrin <i>id</i> määrittelyyn. 
 
 #### 4.10: blogilistan testit, step3
 

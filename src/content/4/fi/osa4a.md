@@ -187,6 +187,7 @@ const config = require('./utils/config')
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
+const cors = require('cors')
 const notesRouter = require('./controllers/notes')
 const middleware = require('./utils/middleware')
 const mongoose = require('mongoose')
@@ -201,6 +202,7 @@ mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true })
     console.log('error connection to MongoDB:', error.message)
   })
 
+app.use(cors())
 app.use(express.static('build'))
 app.use(bodyParser.json())
 app.use(middleware.requestLogger)
@@ -465,19 +467,19 @@ Tehdään testejä varten hakemisto <i>tests</i> ja sinne tiedosto <i>palindrome
 const palindrome = require('../utils/for_testing').palindrome
 
 test('palindrome of a', () => {
-  const result = palindrom('a')
+  const result = palindrome('a')
 
   expect(result).toBe('a')
 })
 
 test('palindrome of react', () => {
-  const result = palindrom('react')
+  const result = palindrome('react')
 
   expect(result).toBe('tcaer')
 })
 
 test('palindrome of saippuakauppias', () => {
-  const result = palindrom('saippuakauppias')
+  const result = palindrome('saippuakauppias')
 
   expect(result).toBe('saippuakauppias')
 })
@@ -510,7 +512,7 @@ Yksittäiset testitapaukset määritellään funktion _test_ avulla. Ensimmäise
 
 ```js
 () => {
-  const result = palindrom('react')
+  const result = palindrome('react')
 
   expect(result).toBe('tcaer')
 }
@@ -527,8 +529,8 @@ Jest olettaa oletusarvoisesti, että testitiedoston nimessä on merkkijono <i>.t
 Jestin antamat virheilmoitukset ovat hyviä, rikotaan testi
 
 ```js
-test('palindrom of react', () => {
-  const result = palindrom('react')
+test('palindrome of react', () => {
+  const result = palindrome('react')
 
   expect(result).toBe('tkaer')
 })

@@ -7,7 +7,7 @@ lang: fi
 
 <div class="content">
 
-Toteutetaan seuraavaksi React-sovellus, joka käyttää toteuttamaamme GraphQL-palvelinta. Palvelimen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-backend/tree/part8-3), branchissa <i>part8-3</i>.
+Toteutetaan seuraavaksi React-sovellus, joka käyttää toteuttamaamme GraphQL-palvelinta. Palvelimen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-3), branchissa <i>part8-3</i>.
 
 GraphQL:ää on periaatteessa mahdollista käyttää HTTP POST -pyyntöjen avulla. Seuraavassa esimerkki Postmanilla tehdystä kyselystä.
 
@@ -107,7 +107,7 @@ ReactDOM.render(
 Olemme valmiina toteuttamaan sovelluksen päänäkymän, joka listaa kaikkien henkilöiden puhelinnumerot. 
 
 Apollo Client tarjoaa muutaman vaihtoehtoisen tavan kyselyjen tekemiselle.
-Tämän hetken (tämä osa on kirjoitettu 17.2.2019) vallitseva käytäntö on komponentin [Query](https://www.apollographql.com/docs/react/essentials/queries.html) käyttäminen.
+Tämän hetken (tämä osa on editoitu viimeksi 22.6.2019) vallitseva käytäntö on komponentin [Query](https://www.apollographql.com/docs/react/essentials/queries.html) käyttäminen.
 
 Kyselyn tekevän komponentin <i>App</i> koodi näyttää seuraavalta:
 
@@ -270,17 +270,17 @@ Komponentti <i>Persons</i> muuttuu seuraavasti:
 ```js
 // highlight-start
 const FIND_PERSON = gql`
-query findPersonByName($nameToSearch: String!) {
-  findPerson(name: $nameToSearch) {
-    name
-    phone 
-    id
-    address {
-      street
-      city
+  query findPersonByName($nameToSearch: String!) {
+    findPerson(name: $nameToSearch) {
+      name
+      phone 
+      id
+      address {
+        street
+        city
+      }
     }
   }
-}
 `
 // highlight-end
 
@@ -353,7 +353,7 @@ Jos tilalla _person_ on arvo, näytetään kaikkien henkilöiden sijaan yhden he
 
 Ratkaisu ei ole siistein mahdollinen mutta saa kelvata meille.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-frontend/tree/part8-1), branchissa <i>part8-1</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-1), branchissa <i>part8-1</i>.
 
 ### Välimuisti
 
@@ -414,7 +414,7 @@ const App = () => {
       <Mutation mutation={CREATE_PERSON}>
         {(addPerson) =>
           <PersonForm
-            addUser={addPerson}
+            addPerson={addPerson}
           />
         }
       </Mutation>
@@ -437,7 +437,7 @@ const PersonForm = (props) => {
 
   const submit = async (e) => {
     e.preventDefault()
-    await props.addUser({
+    await props.addPerson({
       variables: { name, phone, street, city }
     })
 
@@ -507,7 +507,7 @@ const App = () => {
       <Mutation mutation={createPerson} >
         {(addPerson) =>
           <PersonForm
-            addUser={addPerson}
+            addPerson={addPerson}
           />
         }
       </Mutation>
@@ -543,7 +543,7 @@ const App = () => {
       >
         {(addPerson) =>
           <PersonForm
-            addUser={addPerson}
+            addPerson={addPerson}
           />
         }
       </Mutation>
@@ -552,19 +552,19 @@ const App = () => {
 }
 ```
 
-Edut ja haitat tällä ratkaisulla ovat melkeimpä päinvastauset pollaukseen. Verkkoliikennettä ei synny kuin tarpeen vaatiessa, eli kyselyjä ei tehdä varalta. Jos joku muu käyttäjä päivittää palvelimen tilaa, muutokset eivät kuitenkaan siirry nyt kaikille käyttäjille.
+Edut ja haitat tällä ratkaisulla ovat melkeinpä päinvastaiset pollaukseen. Verkkoliikennettä ei synny kuin tarpeen vaatiessa, eli kyselyjä ei tehdä varalta. Jos joku muu käyttäjä päivittää palvelimen tilaa, muutokset eivät kuitenkaan siirry nyt kaikille käyttäjille.
 
 Muitakin tapoja välimuistin tilan päivittämiseksi on, niistä lisää myöhemmin tässä osassa.
 
 **HUOM** Apollo Client devtools vaikuttaa olevan hieman buginen, se lopettaa jossain vaiheessa välimuistin tilan päivittämisen. Jos törmäät ongelmaan, avaa sovellus uudessa välilehdessä.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-frontend/tree/part8-2), branchissa <i>part8-2</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-2), branchissa <i>part8-2</i>.
 
 #### Mutaatioiden virheiden käsittely
 
 Jos yritämme luoda epävalidia henkilöä, seurauksena on poikkeus.
 
-![](../../images/8/14.png)
+![](../../images/8/14e.png)
 
 Poikkeus on syytä käsitellä. Eräs tapa poikkeusten käsittelyyn on rekisteröidä mutaatiolle poikkeuksenkäsittelijä [onError](https://www.apollographql.com/docs/react/essentials/mutations.html#props)-propsin avulla:
 
@@ -602,7 +602,7 @@ const App = () => {
       >
         {(addPerson) =>
           <PersonForm
-            addUser={addPerson}
+            addPerson={addPerson}
           />
         }
       </Mutation>
@@ -615,7 +615,7 @@ Poikkeuksesta tiedotetaan nyt käyttäjälle yksinkertaisella notifikaatiolla.
 
 ![](../../images/8/15.png)
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-frontend/tree/part8-3), branchissa <i>part8-3</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-3), branchissa <i>part8-3</i>.
 
 ### Puhelinnumeron päivitys
 
@@ -724,7 +724,7 @@ Jos yritämme vaihtaa olemattomaan nimeen liittyvän puhelinnumeron, ei mitään
 
 ![](../../images/8/23.png)
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-frontend/tree/part8-4), branchissa <i>part8-4</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-4), branchissa <i>part8-4</i>.
 
 ### Apollo Client ja sovelluksen tila
 
@@ -734,7 +734,7 @@ Apollo mahdollistaa tarvittaessa myös sovelluksen paikallisen tilan tallettamis
 
 ### Render props
 
-GraphQL:n <i>Query</i>, <i>Mutation</i> ja <i>ApolloConsumer</i> komponentit noudattavat periaatetta, joka kulkee nimellä [render props](https://reactjs.org/docs/render-props.html). Periaatetta noudattava komponentti saa propsina tai tagiensa välissä lapsina (joka on teknisesti ottaen myös props) <i>funktion</i>, joka määrittelee miten komponentin renderöinti tapahtuu. Render props -periaatten avulla on mahdollista siirtää renderöinnistä huolehtivalle komponentille joko dataa tai funktioviitteitä.
+GraphQL:n <i>Query</i>, <i>Mutation</i> ja <i>ApolloConsumer</i> komponentit noudattavat periaatetta, joka kulkee nimellä [render props](https://reactjs.org/docs/render-props.html). Periaatetta noudattava komponentti saa propsina tai tagiensa välissä lapsina (joka on teknisesti ottaen myös props) <i>funktion</i>, joka määrittelee miten komponentin renderöinti tapahtuu. Render props -periaatteen avulla on mahdollista siirtää renderöinnistä huolehtivalle komponentille joko dataa tai funktioviitteitä.
 
 Render props -periaate on ollut viime aikoina melko suosittu, mm. osassa 7 käsittelemämme [react router](/osa7/react_router) käyttää sitä. React routerin komponentin <i>Route</i> avulla määritellään mitä sovellus renderöi selaimen ollessa tietyssä urlissa. Seuraavassa määritellään, että jos selaimen url on <i>/notes</i>, renderöidään komponentti <i>Notes</i>, jos taas selaimen url on esim. <i>/notes/10</i>, renderöidään komponentti <i>Note</i>, joka saa propsina muistiinpano-olion, jonka id on 10.
 
@@ -768,35 +768,39 @@ Joudumme esimerkissämme käärimään komponentin <i>Persons</i> ikävästi kah
 </ApolloConsumer>
 ```
 
-Muutaman kuukauden kuluessa asiaan on kuitenkin odotettavissa muutoksia ja Apollo Clientiin tullaan lisäämään rajapinta, jonka avulla kyselyjä ja mutaatioita on mahdollista tehdä [hookien avulla](https://github.com/apollographql/react-apollo/issues/2539). 
+Muutaman viikon kuluessa asiaan on kuitenkin odotettavissa muutoksia ja Apollo Clientiin tullaan lisäämään rajapinta, jonka avulla kyselyjä ja mutaatioita on mahdollista tehdä [hookien avulla](https://github.com/apollographql/react-apollo/pull/2892). 
 
 Yleisemminkin trendinä on se, että hookeilla tullaan useissa tapauksissa korvaamaan tarve render propsien käyttöön.
 
-### react-apollo-hooks
+### Apollon hookit
 
-Jo tällä hetkellä on olemassa kirjasto [react-apollo-hooks](https://github.com/trojanowski/react-apollo-hooks), joka mahdollistaa Apollo clientin käytön hookien avulla. Asennetaan kirjasto.
+Jo nyt Apollo Client 3.0:sta on olemassa [beta-julkaisu](https://www.npmjs.com/package/react-apollo/v/3.0.0-beta.2). Kokeillaan sitä nyt. Asennetaan kirjastosta oikea versio:
 
 ```js
-npm install --save react-apollo-hooks
+npm install --save react-apollo@3.0.0-beta.2
 ```
 
-Otetaan nyt apollo-hookit käyttöön sovelluksessa. Muutetaan <i>index.js</i> ensin muotoon, joka mahdollistaa yhtäaikaisen hookien ja Query- sekä Mutation-komponenttien käytön:
+Tällä hetkellä (28.6.2019) ei ole olemassa juuri mitään dokumentaatiota Apollon hookien käytöstä. [Tämä blogi](https://moonhighway.com/apollo-hooks) on eräs ainoista googlen löytämistä ohjeista.
+
+
+Tiedostoon _index.js_ tarvitaan vielä pieni muutos kirjaston asennuksen jälkeen:
 
 ```js
+import React from 'react'
+import ReactDOM from 'react-dom'
 import ApolloClient from 'apollo-boost'
-import { ApolloProvider } from 'react-apollo'
-import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks' // highlight-line
+import { ApolloProvider } from "@apollo/react-hooks" // highlight-line
+
+import App from './App'
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000/graphql'
 })
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <ApolloHooksProvider client={client}> // highlight-line
-      <App />
-    </ApolloHooksProvider> // highlight-line
-  </ApolloProvider>,
+  <ApolloProvider client={client} >
+    <App />
+  </ApolloProvider>, 
   document.getElementById('root')
 )
 ```
@@ -804,9 +808,9 @@ ReactDOM.render(
 Muutetaan komponenttia <i>Persons</i> siten, että se käyttää _useApolloClient_-hookia.
 
 ```js
-import React,  {useState } from 'react'
+import React,  { useState } from 'react'
 import { gql } from 'apollo-boost'
-import { useApolloClient } from 'react-apollo-hooks' // highlight-line
+import { useApolloClient } from '@apollo/react-hooks' // highlight-line
 
 // ...
 
@@ -842,10 +846,10 @@ const App = () => {
 Hankkiudutaan seuraavaksi eroon komponentista <i>Query</i> hookin _useQuery_ avulla. Komponentti <i>App</i> yksinkertaistuu edelleen:
 
 ```js
-import { useQuery } from 'react-apollo-hooks' // highlight-line
+import { useQuery } from '@apollo/react-hooks' // highlight-line
 
 const App = () => {
-  const result = useQuery(ALL_PERSONS) // highlight-line
+  const persons = useQuery(ALL_PERSONS) // highlight-line
 
   // ...
 
@@ -857,7 +861,7 @@ const App = () => {
         </div>
       }
 
-      <Persons result={result} /> // highlight-line
+      <Persons result={persons} /> // highlight-line
 
       <Mutation
         mutation={createPerson} 
@@ -866,7 +870,7 @@ const App = () => {
       >
         {(addPerson) =>
           <PersonForm
-            addUser={addPerson}
+            addPerson={addPerson}
           />
         }
       </Mutation>
@@ -879,7 +883,7 @@ const App = () => {
 <i>Mutation</i>-komponentit saadaan korvattua hookin _useMutation_ avulla. Komponentin <i>App</i> lopullinen muoto on seuraava:
 
 ```js
-import { useQuery, useMutation } from 'react-apollo-hooks' // highlight-line
+import { useQuery, useMutation } from '@apollo/react-hooks' // highlight-line
 
 const App = () => {
   const result = useQuery(ALL_PERSONS)
@@ -891,14 +895,14 @@ const App = () => {
   }
 
   // highlight-start
-  const addPerson = useMutation(CREATE_PERSON, {
+  const [addPerson] = useMutation(CREATE_PERSON, {
     onError: handleError,
     refetchQueries: [{ query: ALL_PERSONS }]
   })
   // highlight-end
 
   // highlight-start
-  const editNumber = useMutation(EDIT_NUMBER)
+  const [editNumber] = useMutation(EDIT_NUMBER)
   // highlight-end
 
   return (
@@ -920,33 +924,11 @@ const App = () => {
 }
 ```
 
+Huomaa, että _useMutation_ palauttaa taulukon, jonka ensimmäinen elemetti on funktio, jonka avulla mutaatio tehdään. Taulukon toinen elementti on olio, jonka avulla mutaation <i>loading</i>- ja <i> error</i>-tiloja voidaan tarkkailla. Me emme kuitenkaan näitä tarvitse.
+
 Lopputulos on todellakin monin verroin selkeämpi kuin render props -komponentteja käyttävä sotku. Voimme yhtyä Ryan Florencen React Confissa 2018 esittämään mielipiteeseen [90% Cleaner React With Hooks](https://www.youtube.com/watch?v=wXLf18DsV-I).
 
-Apollo-tiimi on lupaillut että suora hook-tuki ilmestyy kevään aikana. Ennen suoran tuen toteuttamista voi jo melko turvallisin mielin käyttää kirjastoa [react-apollo-hooks](https://github.com/trojanowski/react-apollo-hooks).
-
-Koska render props -komponenteista on päästy kokonaan eroon, yksinkertaistuu <i>index.js</i> seuraavasti
-
-```js
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
-
-import ApolloClient from 'apollo-boost'
-import { ApolloProvider } from 'react-apollo-hooks'
-
-const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql'
-})
-
-ReactDOM.render(
-  <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>,
-  document.getElementById('root')
-)
-```
-
-Sovelluksen kirjastoa react-apollo-hooks käyttävä koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-frontend/tree/part8-5), branchissa <i>part8-5</i>.
+Sovelluksen kirjastoa react-apollo-hooks käyttävä koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-5), branchissa <i>part8-5</i>.
 
 
 </div>
@@ -957,9 +939,9 @@ Sovelluksen kirjastoa react-apollo-hooks käyttävä koodi on kokonaisuudessaan 
 
 Tehtävissä toteutetaan edellisen osan tehtävissä tehdylle backendille frontend.
 
-Ota sovelluksesi lähtökohdaksi [tämä projekti](https://github.com/fullstack-hy2019/library-frontend).
+Ota sovelluksesi lähtökohdaksi [tämä projekti](https://github.com/fullstackopen-2019/library-frontend).
 
-Voit tehdä sovelluksesi joko käyttäen Apollo Clientin render prop -komponentteja <i>Query</i> ja <i>Mutation</i> tai käyttää kirjastoa [react-apollo-hooks](https://github.com/trojanowski/react-apollo-hooks).
+Voit tehdä sovelluksesi joko käyttäen Apollo Clientin render prop -komponentteja <i>Query</i> ja <i>Mutation</i> tai Apollo client 3.0 beta-version tarjoamien hookien avulla.
 
 #### 8.8: Kirjailijoiden näkymä
 

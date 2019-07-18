@@ -6,8 +6,6 @@ lang: en
 
 <div class="intro">
 
-So far we have placed the applications state and the logic responsible for it straight into the React-components. When the applications grow larger, the state should be moved outside of the React-components. In this part we introduce the Redux-library, which is right now the most used solution for managing the state of React-applications. 
-
-<b>This part will be available by 20.6.2019</b>
+So far, we have placed the application's state and state logic directly inside React-components. When applications grow larger, state management should be moved outside React-components. In this part, we will introduce the Redux-library, which is currently the most popular solution for managing the state of React-applications. 
 
 </div>

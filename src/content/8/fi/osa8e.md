@@ -7,6 +7,8 @@ lang: fi
 
 <div class="content">
 
+**HUOM** osan 8 sisältöä muutettiin Apollo hookien osalta 28.6. noin klo 21. Jos olet aloittanut osan 8 tekemisen tätä aiemmin tarkista [täältä](/osa8/react_ja_graph_ql#apollon-hookit) että konfiguraatiosi ovat oikeat!
+
 Kurssi lähestyy loppuaan. Katsotaan lopuksi vielä muutamaa GraphQL:ään liittyvää asiaa.
 
 ### fragmentit
@@ -127,7 +129,7 @@ ${PERSON_DETAILS}
 
 GraphQL tarjoaa query- ja mutation-tyyppien lisäksi kolmannenkin operaatiotyypin, [subscriptionin](https://www.apollographql.com/docs/react/advanced/subscriptions.html), jonka avulla clientit voivat <i>tilata</i> palvelimelta tiedotuksia palvelimella tapahtuneista muutoksista.
 
-Subscriptionit poikkeavatkin radikaalisti kaikesta, mitä kurssilla on tähän mennessä nähty. Toistaiseksi kaikki interaktio on koostunut selaimessa olevan React-sovelluksen palvelimelle tekemistä HTTP-pyynnöistä. Myös GraphQL:n queryt ja mutaatiot on hoidettu näin. Subscriptionien myötä tilanne käänyy päinvastaiseksi. Sen jälkeen kun selaimessa oleva sovellus on tehnyt tilauksen muutostiedoista, alkaa selain kuunnella palvelinta. Muutosten tullessa palvelin lähettää muutostiedon <i>kaikille sitä kuunteleville</i> selaimille.
+Subscriptionit poikkeavatkin radikaalisti kaikesta, mitä kurssilla on tähän mennessä nähty. Toistaiseksi kaikki interaktio on koostunut selaimessa olevan React-sovelluksen palvelimelle tekemistä HTTP-pyynnöistä. Myös GraphQL:n queryt ja mutaatiot on hoidettu näin. Subscriptionien myötä tilanne kääntyy päinvastaiseksi. Sen jälkeen kun selaimessa oleva sovellus on tehnyt tilauksen muutostiedoista, alkaa selain kuunnella palvelinta. Muutosten tullessa palvelin lähettää muutostiedon <i>kaikille sitä kuunteleville</i> selaimille.
 
 Teknisesti ottaen HTTP-protokolla ei taivu hyvin palvelimelta selaimeen päin tapahtuvaan kommunikaatioon. Konepellin alla Apollo käyttääkin [WebSocketeja](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) hoitamaan tilauksista aiheutuvan kommunikaation.
 
@@ -216,7 +218,7 @@ Tilauksia on mahdollista testata GraphQL-playgroundin avulla seuraavasti:
 
 Kun tilauksen "play"-painiketta painetaan, jää playground odottamaan tilaukseen tulevia vastauksia. 
 
-Backendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-backend/tree/part8-6), branchissa <i>part8-6</i>.
+Backendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-6), branchissa <i>part8-6</i>.
 
 ### Tilaukset clientissä
 
@@ -227,8 +229,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 
-import { ApolloProvider } from 'react-apollo'
-import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks'
+import { ApolloProvider } from '@apollo/react-hooks'
 
 import { ApolloClient } from 'apollo-client'
 import { createHttpLink } from 'apollo-link-http'
@@ -249,7 +250,7 @@ const httpLink = createHttpLink({
 })
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('phonebook-user-token')
+  const token = localStorage.getItem('phonenumbers-user-token')
   return {
     headers: {
       ...headers,
@@ -274,9 +275,7 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <ApolloHooksProvider client={client}>
-      <App />
-    </ApolloHooksProvider>
+    <App />
   </ApolloProvider>,
   document.getElementById('root')
 )
@@ -288,25 +287,7 @@ Jotta kaikki toimisi, on asennettava uusia riippuvuuksia:
 npm install --save subscriptions-transport-ws apollo-link-ws
 ```
 
-Uudet konfiguraatiot johtuvat kahdesta muutostarpeesta. Simppelimpi näistä on tarve 
-[palata malliin](/osa8/react_ja_graph_ql#react-apollo-hooks), jossa voimme käyttää GraphQL:ää sekä hookien että render props -komponenttien kanssa (react-apollo-hooks ei vielä tue subscritpioneita):
-
-```js
-import { ApolloProvider } from 'react-apollo'
-import { ApolloProvider as ApolloHooksProvider } from 'react-apollo-hooks'
-
-// ...
-
-ReactDOM.render(
-  <ApolloProvider client={client}>
-    <ApolloHooksProvider client={client}>
-      <App />
-    </ApolloHooksProvider>
-  </ApolloProvider>,
-  document.getElementById('root')
-```
-
-Toinen konfuguraatiomuutos huomioi sen, että sovelluksella tulee nyt olla HTTP-yhteyden lisäksi websocket-yhteys GraphQL-palvelimelle:
+Uusi konfiguraatio johtuu siitä, että sovelluksella tulee nyt olla HTTP-yhteyden lisäksi websocket-yhteys GraphQL-palvelimelle:
 
 ```js
 const wsLink = new WebSocketLink({
@@ -320,114 +301,85 @@ const httpLink = createHttpLink({
 ```
 
 Tilaukset tehdään komponentin 
-[Subscription](https://www.apollographql.com/docs/react/advanced/subscriptions.html#subscription-component) avulla.
+[Subscription](https://www.apollographql.com/docs/react/advanced/subscriptions.html#subscription-component) tai  Apollo Client 3.0:n tarjoaman  hookin _useSubscription_ avulla. Käytämme jälleen hookeja.
 
 Tehdään koodiin seuraavat muutokset:
 
 ```js
-import { Subscription } from 'react-apollo' // highlight-line
+import { useQuery, useMutation, useSubscription ,useApolloClient } from '@apollo/react-hooks'// highlight-line
+
+// ...
 
 // highlight-start
 const PERSON_ADDED = gql`
-subscription {
-  personAdded {
-    ...PersonDetails
+  subscription {
+    personAdded {
+      ...PersonDetails
+    }
   }
-}
-${PERSON_DETAILS}
+  ${PERSON_DETAILS}
 `
 // highlight-end
 
 const App = () => {
-  return (
-    <div>
-      // ...
-      // highlight-start
-      <Subscription
-        subscription={PERSON_ADDED}
-        onSubscriptionData={({subscriptionData}) => {
-          console.log(subscriptionData)
-        }}
-      > 
-        {() => null}
-      </Subscription>
-      // highlight-end
-    </div>
-  )
+  // ...
+
+  useSubscription(PERSON_ADDED, {
+    onSubscriptionData: ({ subscriptionData }) => {
+      console.log(subscriptionData)
+    }
+  })
+
+  // ...
 }
 ```
 
 Kun puhelinluetteloon nyt lisätään henkilöitä, tapahtuupa se mistä tahansa, tulostuvat clientin konsoliin lisätyn henkilön tiedot:
 
-![](../../images/8/32.png)
+![](../../images/8/32e.png)
 
-Kun luetteloon lisätään uusi henkilö, palvelin lähettää siitä tiedot clientille ja komponentin _Subscription_ attribuuttissa _onSubscriptionData_ määriteltyä callback-funktiota kutsutaan antaen sille parametriksi palvelimelle lisätty henkilö. 
-
-Toinen tapa ottaa palvelimen lähettämää dataa vastaan olisi komponentin _Subscription_ render prop -funktio, joka on nyt ainoastaan 
-
-```js
-() => null
-```
-
-sillä data on käytännöllisempää käsitellä callback-funktiossa.
+Kun luetteloon lisätään uusi henkilö, palvelin lähettää siitä tiedot clientille ja attribuutin _onSubscriptionData_ arvokosi määriteltyä callback-funktiota kutsutaan antaen sille parametriksi palvelimelle lisätty henkilö. 
 
 Laajennetaan ratkaisua vielä siten, että uuden henkilön tietojen saapuessa henkilö lisätään Apollon välimuistiin, jolloin se renderöityy heti ruudulle. Koodissa on jouduttu huomioimaan se, että sovelluksen itsensä lisäämää henkilöä ei saa lisätä välimuistiin kahteen kertaan:
 
 ```js
-import { Subscription } from 'react-apollo'
-
 const App = () => {
   // ...
 
-  const includedIn = (set, object) => 
-    set.map(p => p.id).includes(object.id)    
+  const updateCacheWith = (addedPerson) => {
+    const includedIn = (set, object) => 
+      set.map(p => p.id).includes(object.id)  
 
-  const addPerson = useMutation(CREATE_PERSON, {
-    onError: handleError,
-    update: (store, response) => {
-      const dataInStore = store.readQuery({ query: ALL_PERSONS })
-      // highlight-start
-      const addedPerson = response.data.addPerson
-      
-      if (!includedIn(dataInStore.allPersons, addedPerson)) {
-        dataInStore.allPersons.push(addedPerson)
-        client.writeQuery({
-          query: ALL_PERSONS,
-          data: dataInStore
-        })
-      }
-      // highlight-end
+    const dataInStore = client.readQuery({ query: ALL_PERSONS })
+    if (!includedIn(dataInStore.allPersons, addedPerson)) {
+      dataInStore.allPersons.push(addedPerson)
+      client.writeQuery({
+        query: ALL_PERSONS,
+        data: dataInStore
+      })
+    }   
+  }
+
+  useSubscription(PERSON_ADDED, {
+    onSubscriptionData: ({ subscriptionData }) => {
+      const addedPerson = subscriptionData.data.personAdded
+      notify(`${addedPerson.name} added`)
+      updateCacheWith(addedPerson)
     }
   })
 
-  return (
-    <div>
-      // ...
-      <Subscription
-        subscription={PERSON_ADDED}
-        onSubscriptionData={({subscriptionData}) => {
-          const addedPerson = subscriptionData.data.personAdded
-          // näytetään muualla tehty lisäys myös notifikaationa
-          notify(`${addedPerson.name} added`)
+  const [addPerson] = useMutation(CREATE_PERSON, {
+    onError: handleError,
+    update: (store, response) => {
+      updateCacheWith(response.data.addPerson)
+    }
+  })
 
-          const dataInStore = client.readQuery({ query: ALL_PERSONS })
-          if (!includedIn(dataInStore.allPersons, addedPerson)) {
-            dataInStore.allPersons.push(addedPerson)
-            client.writeQuery({
-              query: ALL_PERSONS,
-              data: dataInStore
-            })
-          }
-        }}
-      > 
-        {() => null}
-      </Subscription>
-    </div>
-  )
+  // ...
 }
 ```
 
-Clientin lopullinen koodi [githubissa](https://github.com/fullstack-hy2019/graphql-phonebook-frontend/tree/part8-9), branchissa <i>part8-9</i>.
+Clientin lopullinen koodi [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-9), branchissa <i>part8-9</i>.
 
 ### n+1-ongelma
 

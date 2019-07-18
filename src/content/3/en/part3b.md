@@ -22,7 +22,7 @@ According to [Wikipedia](https://en.wikipedia.org/wiki/Cross-origin_resource_sha
 
 > <i>Cross-origin resource sharing (CORS) is a mechanism that allows restricted resources (e.g. fonts) on a web page to be requested from another domain outside the domain from which the first resource was served. A web page may freely embed cross-origin images, stylesheets, scripts, iframes, and videos. Certain "cross-domain" requests, notably Ajax requests, are forbidden by default by the same-origin security policy.</i>
 
-In our context the problem is, that by default the JavaScript code of an application run in a browser can only communicate with a server in the same [origin](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy). 
+In our context the problem is that, by default, the JavaScript code of an application that runs in a browser can only communicate with a server in the same [origin](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy). 
 Because our server is in localhosts port 3001, and our frontend in localhost port 3000, they do not have the same origin.
 
 Keep in mind, that [same origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) and CORS are not specific to React or Node. They are in fact universal principles of the operation of web applications. 
@@ -184,7 +184,7 @@ After ensuring that the production version of the application works locally, com
 
 ![](../../images/3/30e.png)
 
-Our application saves the notes to a variable. If the application craches or is restarted, all of the data will dissappear. 
+Our application saves the notes to a variable. If the application crashes or is restarted, all of the data will disappear. 
 
 The application needs a database. Before we introduce one, let's go through a few things. 
 
@@ -266,7 +266,7 @@ const baseUrl = '/api/notes'
 
 Because in development mode the frontend is at the address <i>localhost:3000</i>, the requests to the backend go to the wrong address <i>localhost:3000/api/notes</i>. The backend is at <i>localhost:3001</i>. 
 
-If project was created with create-react-app, this problem is easy to solve. It is enough to add the following declaration to the <i>package.json</i> file of the frontend repository. 
+If the project was created with create-react-app, this problem is easy to solve. It is enough to add the following declaration to the <i>package.json</i> file of the frontend repository. 
 
 ```bash
 {
@@ -304,7 +304,7 @@ The following exercises don't require many lines of code. They can however be ch
 
 Make the backend work with the frontend from the previous part. Do not implement the functionality for making changes to the phone numbers yet, that will be implemented in exercise 3.17. 
 
-You will propably have to do some small changes to the frontend, at least to the URL's for the backend. Remember to keep the developer console open in your browser. If some HTTP-requests fail, you should check from the <i>Network</i>-tab what is going on. Keep an eye on the backends console as well. If you did not do the previous exercise, it is worth it to print the request data or <i>request.body</i> to the console in the event handler responsible for POST-requests. 
+You will probably have to do some small changes to the frontend, at least to the URL's for the backend. Remember to keep the developer console open in your browser. If some HTTP-requests fail, you should check from the <i>Network</i>-tab what is going on. Keep an eye on the backends console as well. If you did not do the previous exercise, it is worth it to print the request data or <i>request.body</i> to the console in the event handler responsible for POST-requests. 
 
 #### 3.10 phonebook backend step10
 

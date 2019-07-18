@@ -14,7 +14,7 @@ In this part our focus shifts towards the backend: that is, towards implementing
 We will be building our backend on top of [NodeJS](https://nodejs.org/en/), which is a JavaScript runtime based on Google's [Chrome V8](https://developers.google.com/v8/) JavaScript engine.
 
 
-This course material was written with the version <i>v8.10.0</i> of Node.js. Please make sure that your version of Node is at least as new the version used in the material (you can check the version by running _node -v_ in the command line).
+This course material was written with the version <i>v8.10.0</i> of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running _node -v_ in the command line).
 
 
 As mentioned in [part 1](/en/part1/javascript), browsers don't yet support the newest features of JavaScript, and that is why the code running in the browser must be <i>transpiled</i> with e.g. [babel](https://babeljs.io/). The situation with JavaScript running in the backend is different. The newest version of Node supports a large majority of the latest features of JavaScript, so we can use the latest features without having to transpile our code.
@@ -26,7 +26,7 @@ Our goal is to implement a backend that will work with the notes application fro
 **Notice** that the applications and exercises in this part are not all React applications, and we will not use the <i>create-react-app</i> utility for initializing the project for this application.
 
 
-We had already mentioned [npm](/en/part2/getting_data_from_server#npm) back in part 2, which is tool used for managing JavaScript projects. In fact, npm originates from the Node ecosystem.
+We had already mentioned [npm](/en/part2/getting_data_from_server#npm) back in part 2, which is a tool used for managing JavaScript packages. In fact, npm originates from the Node ecosystem.
 
 
 Let's navigate to an appropriate directory, and create a new template for our application with the _npm init_ command. We will answer the questions presented by the utility, and the result will be an automatically generated <i>package.json</i> file at the root of the project, that contains information about the project.
@@ -46,7 +46,7 @@ Let's navigate to an appropriate directory, and create a new template for our ap
 ```
 
 
-The file defines e.g. the that the entry point of the application is the <i>index.js</i> file.
+The file defines, for instance, that the entry point of the application is the <i>index.js</i> file.
 
 
 Let's make a small change to the <i>scripts</i> object:
@@ -164,7 +164,7 @@ Error: listen EADDRINUSE :::3001
 You have two options. Either shutdown the application using the port 3001 (the json-server in the last part of the material was using the port 3001), or use a different port for this application.
 
 
-Let's take a closer look at first row of the code:
+Let's take a closer look at the first line of the code:
 
 ```js
 const http = require('http')
@@ -182,7 +182,7 @@ import http from 'http'
 These days, code that runs in the browser uses ES6 modules. Modules are defined with an [export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) and taken into use with an [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import).
 
 
-However, Node.js uses so-called [CommonJS](https://en.wikipedia.org/wiki/CommonJS) modules. The reason for this is that the Node ecosystem had a need for modules long before JavaScript supported them in the the language specification. At the time of writing this material, Node does not support ES6 modules, but support for them [is coming](https://nodejs.org/api/esm.html) somewhere down the road.
+However, Node.js uses so-called [CommonJS](https://en.wikipedia.org/wiki/CommonJS) modules. The reason for this is that the Node ecosystem had a need for modules long before JavaScript supported them in the language specification. At the time of writing this material, Node does not support ES6 modules, but support for them [is coming](https://nodejs.org/api/esm.html) somewhere down the road.
 
 
 CommonJS modules function almost exactly like ES6 modules, at least as far as our needs in this course are concerned.
@@ -555,7 +555,7 @@ Let's expand our application so that it offers a REST interface for operating on
 The unique address we will use for an individual note is of the form <i>notes/10</i>, where the number at the end refers to the note's unique id number.
 
 
-We can define [parameters](http://expressjs.com/en/guide/routing.html) for routes in express by using the colon syntax:
+We can define [parameters](http://expressjs.com/en/guide/routing.html#route-parameters) for routes in express by using the colon syntax:
 
 ```js
 app.get('/notes/:id', (request, response) => {
@@ -566,7 +566,7 @@ app.get('/notes/:id', (request, response) => {
 ```
 
 
-Now <code>app.get('/notes/:id', ...)</code> will handle all HTTP GET requests, that are of the form <i>note/SOMETING</i>, where <i>SOMETHING</i> is an arbitrary string.
+Now <code>app.get('/notes/:id', ...)</code> will handle all HTTP GET requests, that are of the form <i>note/SOMETHING</i>, where <i>SOMETHING</i> is an arbitrary string.
 
 
 The <i>id</i> parameter in the route of a request, can be accessed through the [request](http://expressjs.com/en/api.html#req) object:
@@ -602,7 +602,7 @@ When we visit <http://localhost:3001/notes/1> again in the browser, the console 
 The id parameter from the route is passed to our application but the _find_ method does not find a matching note.
 
 
-To further our investigation, we also add a console log inside of the comparison function passed to the _find_ method. In order to do this, we have to get rid of the compact arrow function syntax <em>note => note.id === id</em>, and use the syntax with an explicit return statement:
+To further our investigation, we also add a console log inside the comparison function passed to the _find_ method. In order to do this, we have to get rid of the compact arrow function syntax <em>note => note.id === id</em>, and use the syntax with an explicit return statement:
 
 ```js
 app.get('/notes/:id', (request, response) => {
@@ -729,7 +729,7 @@ Using Postman is quite easy in this situation. It's enough to define the url and
 The backend server appears to respond correctly. By making an HTTP GET request to <http://localhost:3001/notes> we see that the note with the id 2 is no longer in the list, which indicates that the deletion was successful. 
 
 
-Because the notes in the application are only saved to memory, the list of notes will return to its original state when we restsart the application.
+Because the notes in the application are only saved to memory, the list of notes will return to its original state when we restart the application.
 
 
 ### The Visual Studio Code REST client
@@ -825,7 +825,7 @@ The server appears to only receive an empty object:
 The server will not be able to parse the data correctly without the correct value in the header. It won't even try to guess the format of the data, since there's a [massive amount](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) of potential <i>Content-Types</i>.
 
 
-If you are using VS Code, then you should install the REST client form the previous chapter <i>now, if you didn't already</i>. The POST request can be sent with the REST client like this:
+If you are using VS Code, then you should install the REST client from the previous chapter <i>now, if you haven't already</i>. The POST request can be sent with the REST client like this:
 
 ![](../../images/3/20e.png)
 
@@ -835,13 +835,13 @@ We created a new <i>create\_note.rest</i> file for the request. The request is f
 
 One benefit that the REST client has over Postman is that the requests are handily available at the root of the project repository, and they can be distributed to everyone in the development team. Postman also allows users to save requests, but the situation can get quite chaotic especially when you're working on multiple unrelated projects.
 
-> **Important sidenode**
+> **Important sidenote**
 >
 
-> Sometimes when you're debugging, you may want to find out what headers have been set to the HTTP request. One way of accomplishing this is through the [get](http://expressjs.com/en/4x/api.html#req.get) method of the _request_ object, that can be used for getting the value of a single header. The _request_ object also has the <i>headers</i> property, that contains all of the headers of the application.
+> Sometimes when you're debugging, you may want to find out what headers have been set in the HTTP request. One way of accomplishing this is through the [get](http://expressjs.com/en/4x/api.html#req.get) method of the _request_ object, that can be used for getting the value of a single header. The _request_ object also has the <i>headers</i> property, that contains all of the headers of a specific request.
 >
 
-> Problems can occur with the VS REST client if you accidentally add an empty line between the top row and the row specifying the HTTP headers. In this situation, the REST client interprets this to mean that all headers are left empty, which means that the backend server has no way of knowing that the data it has received is in the JSON format.
+> Problems can occur with the VS REST client if you accidentally add an empty line between the top row and the row specifying the HTTP headers. In this situation, the REST client interprets this to mean that all headers are left empty, which leads to the backend server not knowing that the data it has received is in the JSON format.
 >
 
 You will be able to spot this missing <i>Content-Type</i> header if at some point in your code you print all of the request headers with the _console.log(request.headers)_ command.
@@ -928,7 +928,7 @@ important: body.important || false,
 ```
 
 
-If the data saved in the _body_ variable has the <i>important</i> property, the expression will evaluate to its value. If the property does not exist, then the expression will evaluate to false which is defined on the right-hand side of the the vertical lines.
+If the data saved in the _body_ variable has the <i>important</i> property, the expression will evaluate to its value. If the property does not exist, then the expression will evaluate to false which is defined on the right-hand side of the vertical lines.
 
 
 > To be exact, when the <i>important</i> property is <i>false</i>, then the <em>body.important || false</em> expression will in fact return the <i>false</i> from the right-hand side...
@@ -963,7 +963,7 @@ The function body contains a row that looks a bit intriguing:
 Math.max(...notes.map(n => n.id))
 ```
 
-What exactly is happening in that line of code? <em>notes.map(n => n.id)</em> creates a new array that contains all the id's of the notes. [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) returns the maximum value of the numbers that are passed to it. However, <em>notes.map(n => n.id)</em> is an <i>array</i> so it can't directly be given as a parameter to _Math.max_. The array can be transformed into individual numbers by using the "three dot" [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax <em>... taulukko</em>.
+What exactly is happening in that line of code? <em>notes.map(n => n.id)</em> creates a new array that contains all the id's of the notes. [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) returns the maximum value of the numbers that are passed to it. However, <em>notes.map(n => n.id)</em> is an <i>array</i> so it can't directly be given as a parameter to _Math.max_. The array can be transformed into individual numbers by using the "three dot" [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax <em>...</em>.
 
 </div>
 
@@ -996,7 +996,7 @@ Notice that the forward slash in the route <i>api/persons</i> is not a special c
 The application must be started with the command _npm start_.
 
 
-The application must also offer an _npm run_ command that will run the application and restart the server whenever changes are made and saved to a file in the source code.
+The application must also offer an _npm run watch_ command that will run the application and restart the server whenever changes are made and saved to a file in the source code.
 
 
 #### 3.2: Phonebook backend step2
@@ -1166,7 +1166,7 @@ Add the [morgan](https://github.com/expressjs/morgan) middleware to your applica
 The documentation for Morgan is not the best, and you may have to spend some time figuring out how to configure it correctly. However, most documentation in the world falls under the same category, so it's good to learn to decipher and interpret cryptic documentation in any case.
 
 
-Morgan is installed just like all other libraries with the _npm install_ command. Taking morgan into use happens the same as configuring any other middle by using the _app.use_ command.
+Morgan is installed just like all other libraries with the _npm install_ command. Taking morgan into use happens the same as configuring any other middleware by using the _app.use_ command.
 
 
 #### 3.8*: Phonebook backend step8

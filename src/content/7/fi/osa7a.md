@@ -21,7 +21,7 @@ On erittäin tyypillistä, että web-sovelluksissa on navigaatiopalkki, jonka av
 
 ja omat sivunsa muistiinpanojen ja käyttäjien tietojen näyttämiseen:
 
-![](../../images/7/2b.png)
+![](../../images/7/2ae.png)
 
 [Vanhan koulukunnan websovelluksessa](/osa0#perinteinen-web-sovellus) sovelluksen näyttämän sivun vaihto tapahtui siten että selain teki palvelimelle uuden HTTP GET -pyynnön ja renderöi sitten palvelimen palauttaman näkymää vastaavan HTML-koodin.
 
@@ -177,13 +177,13 @@ joudumme käyttämään routen <i>path</i> attribuutin edessä määrettä <i>ex
 
 ### Parametroitu route
 
-Tarkastellaan sitten hieman modifioitua versiota edellisestä esimerkistä. Esimerkin koodi kokonaisuudessaan on [täällä](https://github.com/fullstack-hy2019/misc/blob/master/router-app.js).
+Tarkastellaan sitten hieman modifioitua versiota edellisestä esimerkistä. Esimerkin koodi kokonaisuudessaan on [täällä](https://github.com/fullstackopen-2019/misc/blob/master/router-app.js).
 
 Sovellus sisältää nyt viisi eri näkymää, joiden näkyvyyttä kontrolloidaan routerin avulla. Edellisestä esimerkistä tuttujen komponenttien <i>Home</i>, <i>Notes</i> ja <i>Users</i> lisäksi mukana on kirjautumisnäkymää vastaava <i>Login</i> ja yksittäisen muistiinpanon näkymää vastaava <i>Note</i>.
 
 <i>Home</i> ja <i>Users</i> ovat kuten aiemmassa esimerkissä. <i>Notes</i> on hieman monimutkaisempi, se renderöi propseina saamansa muistiinpanojen listan siten, että jokaisen muistiinpanon nimi on klikattavissa
 
-![](../../images/7/3a.png)
+![](../../images/7/3e.png)
 
 Nimen klikattavuus on toteutettu komponentilla <i>Link</i> ja esim. muistiinpanon, jonka id on 3 nimen klikkaaminen aiheuttaa selaimen osoitteen arvon päivittymisen muotoon <i>notes/3</i>:
 
@@ -209,7 +209,7 @@ const Note = ({ note }) => (
   <div>
     <h2>{note.content}</h2>
     <div>{note.user}</div>
-    <div><strong>{note.important ? 'tärkeä' : ''}</strong></div>
+    <div><strong>{note.important ? 'important' : ''}</strong></div>
   </div>
 )
 ```
@@ -240,7 +240,7 @@ Tämä tapahtuu laajentamalla komponentissa <i>App</i> olevaa reititystä seuraa
 </Router>
 ```
 
-Kaikki muistiinpanon renderöivään routeen on lisätty määre <i>exact path="/notes"</i> sillä muuten se renderöityisi myös <i>/notes/3</i>-muotoisten polkujen yhteydessä.
+Kaikki muistiinpanot renderöivään routeen on lisätty määre <i>exact path="/notes"</i> sillä muuten se renderöityisi myös <i>/notes/3</i>-muotoisten polkujen yhteydessä.
 
 Yksittäisen muistiinpanon näkymän renderöivä route määritellään "expressin tyyliin" merkkaamalla reitin parametrina oleva osa merkinnällä <i>:id</i>
 
@@ -421,7 +421,7 @@ Komponentin sisällössä määritellään myös kokonaan <i>Router</i>:in ulkop
 
 ### Tehtäviä
 
-Jatketaan anekdoottien parissa. Ota seuraaviin tehtäviin pohjaksi repositoriossa <https://github.com/fullstack-hy2019/routed-anecdotes> oleva reduxiton anekdoottisovellus.
+Jatketaan anekdoottien parissa. Ota seuraaviin tehtäviin pohjaksi repositoriossa <https://github.com/fullstackopen-2019/routed-anecdotes> oleva reduxiton anekdoottisovellus.
 
 Jos kloonaat projektin olemassaolevan git-reposition sisälle, <i>poista kloonatun sovelluksen git-konfiguraatio:</i>
 

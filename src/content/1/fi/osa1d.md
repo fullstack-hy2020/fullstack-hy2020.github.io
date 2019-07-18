@@ -357,8 +357,8 @@ const App = (props) => {
       <div>
         {left}
         // highlight-start
-        <Button onClick={handleLeftClick} text='left' />
-        <Button onClick={handleRightClick} text='right' />
+        <Button handleClick={handleLeftClick} text='left' />
+        <Button handleClick={handleRightClick} text='right' />
         // highlight-end
         {right}
         <History allClicks={allClicks} />
@@ -456,9 +456,9 @@ Menemällä välilehdelle <i>Console</i> on helppo tutkia muuttujien tilaa:
 
 Kun bugi selviää, voi komennon _debugger_ poistaa ja uudelleenladata sivun.
 
-Debuggerissa on mahdollista suorittaa koodia tarvittaessa rivi riviltä <i>Source</i> välilehden oikealta laidalta.
+Debuggerissa on mahdollista suorittaa koodia tarvittaessa rivi riviltä <i>Sources</i>-välilehden oikealta laidalta.
 
-Debuggeriin pääsee myös ilman komentoa _debugger_, lisäämällä <i>Source</i>-välilehdellä sopiviin kohtiin koodia <i>breakpointeja</i>. Komponentin muuttujien arvojen tarkkailu on mahdollista _Scope_-osassa:
+Debuggeriin pääsee myös ilman komentoa _debugger_, lisäämällä <i>Sources</i>-välilehdellä sopiviin kohtiin koodia <i>breakpointeja</i>. Komponentin muuttujien arvojen tarkkailu on mahdollista _Scope_-osassa:
 
 ![](../../images/1/9a.png)
 
@@ -468,7 +468,7 @@ Chromeen kannattaa ehdottomasti asentaa [React developer tools](https://chrome.g
 
 Uuden konsolitabin avulla voidaan tarkkailla sovelluksen React-elementtejä ja niiden tilaa ja propseja.
 
-React developer tools ei osaa toistaiseksi näyttää hookeilla muodostettua tilaa kovin hyvin..
+React developer tools ei osaa toistaiseksi näyttää hookeilla muodostettua tilaa kovin hyvin.
 
 ![](../../images/1/11e.png)
 
