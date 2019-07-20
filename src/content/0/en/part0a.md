@@ -15,7 +15,7 @@ Other topics include debugging applications, configuration, managing runtime env
 ### Prerequisites
 
 Participants are expected to have good programming skills, basic knowledge of web programming and databases, and mastery of basic use of the Git version management system. 
-You are also expected to have perseverance and a capacity for solving problems and seeking informations independently. 
+You are also expected to have perseverance and a capacity for solving problems and seeking information independently. 
 
 Previous knowledge of JavaScript or other course topics is not required. 
 
