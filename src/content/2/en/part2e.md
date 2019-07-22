@@ -11,7 +11,7 @@ lang: en
 The appearance of our current application is quite modest. In [exercise 0.2](/en/part0/fundamentals_of_web_apps#exercises), the assignment was to go through Mozilla's [CSS tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).
 
 
-Before we move onto the next part, let's take a look at how we can add styles to a React application. There are several different ways of doing this and we will take a look at the other methods later on. First we will add CSS to our application the old-school way, as a single file without using a [CSS preprocessor](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) (this is actually not entirely true as we will learn later on). 
+Before we move onto the next part, let's take a look at how we can add styles to a React application. There are several different ways of doing this and we will take a look at the other methods later on. At first, we will add CSS to our application the old-school way; in a single file without using a [CSS preprocessor](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) (although this is not entirely true as we will learn later on). 
 
 
 
@@ -31,7 +31,7 @@ h1 {
 ```
 
 
-CSS rules are comprised of <i>selectors</i> and <i>declarations</i>. The selector defines which elements the rule should be applied to. The selector above is <i>h1</i>, which will match all of the <i>h1</i> header tags in our application.
+CSS rules comprise of <i>selectors</i> and <i>declarations</i>. The selector defines which elements the rule should be applied to. The selector above is <i>h1</i>, which will match all of the <i>h1</i> header tags in our application.
 
 
 The declaration sets the _color_ property to the value <i>green</i>.
@@ -251,7 +251,7 @@ React also makes it possible to write styles directly in the code as so-called [
 The idea behind defining inline styles is extremely simple. Any React component or element can be provided with a set of CSS properties as a JavaScript object through the [style](https://reactjs.org/docs/dom-elements.html#style) attribute.
 
 
-CSS rules are defined slightly differently in JavaScript than in normal CSS files. Let's say that we'd want to give some element a green color, and an italic font with the size of 16 pixels. In CSS it would look like this:
+CSS rules are defined slightly differently in JavaScript than in normal CSS files. Let's say that we wanted to give some element the color green and italic font that's 16 pixels in size. In CSS, it would look like this:
 
 ```css
 {
@@ -312,16 +312,16 @@ const App = () => {
 ```
 
 
-Inline selectors come with certain limitations. For instance, so-called pseudo selectors can't be used in any straightforward manner.
+Inline selectors come with certain limitations. For instance, so-called pseudo selectors can't be used straightforwardly.
 
 
-Inline styles and some of the other ways of adding styles to React components go completely against the grain of old conventions. Traditionally it was considered a best practice to separate CSS entirely from content (HTML) and functionality (JavaScript). According to the old school of thought, the goal was to write CSS, HTML, and JavaScript into their own separate files.
+Inline styles and some of the other ways of adding styles to React components go completely against the grain of old conventions. Traditionally, it has been considered the best practice to entirely separate CSS from the content (HTML) and functionality (JavaScript). According to this older school of thought, the goal was to write CSS, HTML, and JavaScript into their separate files.
 
 
-The philosophy of React is in fact the polar opposite. Because the separation of CSS, HTML, and JavaScript into separate files never appeared to scale well in larger applications, in React the fundamental principle is to divide the application along the lines of its logical and functional entities.
+The philosophy of React is, in fact, the polar opposite of this. Since the separation of CSS, HTML, and JavaScript into separate files did not seem to scale well in larger applications, React bases the division of the application along the lines of its logical functional entities.
 
 
-The unit of a functional entity is the React component, that defines both the structure expressed through HTML, its functionality defined as JavaScript functions, and also its style in one place, so that the individual components become as independent and reusable as possible.
+The structural units that make up the application's functional entities are React components. A React component defines the HTML for structuring the content, the JavaScript functions for determining functionality, and also the component's styling; all in one place. This is to create individual components that are as independent and reusable as possible.
 
 </div>
 
@@ -332,13 +332,13 @@ The unit of a functional entity is the React component, that defines both the st
 <h4>2.19: Phonebook step11</h4>
 
 
-Use the [improved error message](/en/part2/adding_styles_to_react_app#improved-error-message) example from part 2 as a guide, for showing a notification that lasts for a few seconds when a successful operation is executed (a person is added or a number is changed): 
+Use the [improved error message](/en/part2/adding_styles_to_react_app#improved-error-message) example from part 2 as a guide to show a notification that lasts for a few seconds after a successful operation is executed (a person is added or a number is changed): 
 
 ![](../../images/2/27e.png)
 
 <h4>2.20*: Phonebook step12</h4>
 
-Open your application in two browsers. **If you delete some person from browser 1** a little bit before you try to <i>change the person's phone number</i> from browser 2, you will get the following error message:
+Open your application in two browsers. **If you delete a person in browser 1** a short while before attempting to <i>change the person's phone number</i> in browser 2, you will get the following error message:
 
 ![](../../images/2/29b.png)
 
