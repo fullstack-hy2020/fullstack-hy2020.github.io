@@ -426,7 +426,7 @@ Pay special attention to the expect in the latter test. The <code>response.body.
 The _npm test_ command executes all of the tests of the application. When we are writing tests, it is usually wise to only execute one or two tests. Jest offers a few different ways of accomplishing this, one of which is the [only](https://jestjs.io/docs/en/api#testonlyname-fn-timeout) method. If tests are written across many files, this method is not great.
 
 
-A better option is to use Jest directly without npm. This way we can specify what the tests that we want to run with Jest. The following command only runs the tests found in the <i>tests/note_api.test.js</i> file:
+A better option is to use Jest directly without npm. This way we can specify which are the tests that we want to run with Jest. The following command only runs the tests found in the <i>tests/note_api.test.js</i> file:
 
 ```js
 npx jest tests/note_api.test.js --runInBand
