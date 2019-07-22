@@ -574,7 +574,7 @@ As expected, all of the tests pass:
 ![](../../images/4/1.png)
 
 
-Jest expects by default that the names of test files contain <i>.test</i>. In this course, we will follow the convention of naming our tests files with the extension <i>test.js</i>.
+Jest expects by default that the names of test files contain <i>.test</i>. In this course, we will follow the convention of naming our tests files with the extension <i>.test.js</i>.
 
 
 Jest has excellent error messages, let's break the test to demonstrate this:
