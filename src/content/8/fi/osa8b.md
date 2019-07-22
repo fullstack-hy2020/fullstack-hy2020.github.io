@@ -924,7 +924,7 @@ const App = () => {
 }
 ```
 
-Huomaa, että _useMutation_ palauttaa taulukon, jonka ensimmäinen elemetti on funktio, jonka avulla mutaatio tehdään. Taulukon toinen elementti on olio, jonka avulla mutaation <i>loading</i>- ja <i> error</i>-tiloja voidaan tarkkailla. Me emme kuitenkaan näitä tarvitse.
+Huomaa, että _useMutation_ palauttaa taulukon, jonka ensimmäinen elementti on funktio, jonka avulla mutaatio tehdään. Taulukon toinen elementti on olio, jonka avulla mutaation <i>loading</i>- ja <i> error</i>-tiloja voidaan tarkkailla. Me emme kuitenkaan näitä tarvitse.
 
 Lopputulos on todellakin monin verroin selkeämpi kuin render props -komponentteja käyttävä sotku. Voimme yhtyä Ryan Florencen React Confissa 2018 esittämään mielipiteeseen [90% Cleaner React With Hooks](https://www.youtube.com/watch?v=wXLf18DsV-I).
 
