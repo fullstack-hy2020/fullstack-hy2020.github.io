@@ -161,7 +161,7 @@ Noden myötä koneelle asentuu myös [npm](https://www.npmjs.com/get-npm) (alunp
 
 ### Typoja materiaalissa
 
-Jos löydät kirjoitusvirheen tai jokin asia on ilmaistu epäselvästi tai kielioppisääntöjen vastaisesti, tee <i>pull request</i> repositoriossa <https://github.com/fullstackopen-2019/fullstackopen-2019.github.io> olevaan kurssimateriaaliin. Esim. tämän sivun Markdown-muotoinen lähdekoodi löytyy repositoryn alta osoitteesta <https://github.com/fullstackopen-2019/fullstackopen-2019.github.io/blob/source/src/content/osa0/osa0a.md>
+Jos löydät kirjoitusvirheen tai jokin asia on ilmaistu epäselvästi tai kielioppisääntöjen vastaisesti, tee <i>pull request</i> repositoriossa <https://github.com/fullstackopen-2019/fullstackopen-2019.github.io> olevaan kurssimateriaaliin. Esim. tämän sivun Markdown-muotoinen lähdekoodi löytyy repositoryn alta osoitteesta <https://github.com/fullstackopen-2019/fullstackopen-2019.github.io/blob/source/src/content/0/fi/osa0a.md>
 
 Materiaalin jokaisen osan alalaidassa on linkki <em>Ehdota muutosta materiaalin sisältöön</em>, jota klikkaamalla pääset suoraan editoimaan sivun lähdekoodia.
 
