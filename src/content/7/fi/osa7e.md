@@ -225,7 +225,7 @@ Funktion kutsuminen ei nyt onnistu väärän tyyppisillä parametreilla, väär�
 
 Ero normaaliin Javascriptiin on suuri, tyypitys löytää monia potentiaalisia bugeja jo koodin kirjoitusvaiheessa.
 
-Jotta koodia voitaisiin suorittaa selaimessa tai Nodella, Typescriptillä tehty koodi on käänettävä normaaliksi Javascriptiksi Typescript-kääntäjällä. Käännösprosessi on luonnollisesti mahdollista automatisoida esim. Webpackin avulla siten, että ohjelmoijan workflow säilyy yhtä hyvänä kun normaalia Javascritpiä kirjoittaessa.
+Jotta koodia voitaisiin suorittaa selaimessa tai Nodella, Typescriptillä tehty koodi on käänettävä normaaliksi Javascriptiksi Typescript-kääntäjällä. Käännösprosessi on luonnollisesti mahdollista automatisoida esim. Webpackin avulla siten, että ohjelmoijan workflow säilyy yhtä hyvänä kun normaalia Javascriptiä kirjoittaessa.
 
 Katso [täältä](https://www.youtube.com/watch?v=obZaI2rYkLU&list=PLumQiZ25uijis31zaRL7rhzLalSwLqUtm&index=2) Terveystalon Ilari Richardin ja Tuukka Peuraniemen vierailuluento Typescriptistä ja mobiilisovellusten kehittämisestä Reactilla.
 
