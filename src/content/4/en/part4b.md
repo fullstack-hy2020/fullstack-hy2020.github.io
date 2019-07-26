@@ -538,9 +538,7 @@ const main = async () => { // highlight-line
   const notes = await Note.find({})
   console.log('operation returned the following notes', notes)
 
-  const notes = await Note.find({})
   const response = await notes[0].remove()
-
   console.log('the first note is removed')
 }
 
