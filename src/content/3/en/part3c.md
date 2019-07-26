@@ -525,7 +525,7 @@ We also added the hardcoded port of the server into the <em>PORT</em> environmen
 
 ![](../../images/3/45ae.png)
 
-The enviroment variables defined in the dotenv file can be taken into use with the command <em>require('dotenv').config()</em> and you can reference them in your code just like you would reference normal environment variables, with the familiar <em>process.env.MONGODB_URI</em> syntax.
+The environment variables defined in the dotenv file can be taken into use with the command <em>require('dotenv').config()</em> and you can reference them in your code just like you would reference normal environment variables, with the familiar <em>process.env.MONGODB_URI</em> syntax.
 
 Let's change the <i>index.js</i> file in the following way:
 
@@ -620,7 +620,7 @@ Verify that the frontend works after the changes have been made.
 
 In the following exercises, write all Mongoose-specific code into its own module, just like we did in the chapter [Database configuration into its own module](/en/part3/saving_data_to_mongo_db#database-configuration-into-its-own-module)
 
-#### 3.13: Phonebook database, step2
+#### 3.14: Phonebook database, step2
 
 Change the backend so that new numbers are <i>saved to the database</i>. Verify that your frontend still works after the changes.
 
