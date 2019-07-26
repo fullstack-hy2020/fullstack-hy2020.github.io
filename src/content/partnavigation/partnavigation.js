@@ -59,7 +59,7 @@ module.exports = {
   en: {
     '0': {
       a: 'General info',
-      b: 'Fundamentals of Web-apps',
+      b: 'Fundamentals of Web apps',
     },
     '1': {
       a: 'Introduction to React',
