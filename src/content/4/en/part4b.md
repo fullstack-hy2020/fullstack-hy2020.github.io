@@ -1057,7 +1057,7 @@ module.exports = {
 
 
 
-**NB:** when you are writing your tests **<i>it is better to not execute all of your tests</i>**, only execute the ones you are working on. Read more about this [here](/osa4/backendin_testaaminen#testien-suorittaminen-yksitellen).
+**NB:** when you are writing your tests **<i>it is better to not execute all of your tests</i>**, only execute the ones you are working on. Read more about this [here](/en/part4/testing_the_backend#running-tests-one-by-one).
 
 
 #### 4.9*: Blog list tests, step2
