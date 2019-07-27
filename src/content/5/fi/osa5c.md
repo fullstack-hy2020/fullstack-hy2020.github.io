@@ -16,7 +16,7 @@ Tarvitsemme Jestin lisäksi testaamiseen apukirjaston, jonka avulla React-kompon
 Asennetaan kirjastot komennolla:
 
 ```js
-npm install --save-dev @testing-library/react jest-dom
+npm install --save-dev @testing-library/react @testing-library/jest-dom
 ```
 
 Testataan aluksi muistiinpanon renderöivää komponenttia:
@@ -47,7 +47,7 @@ Ensimmäinen testi varmistaa, että komponentti renderöi muistiinpanon sisäll�
 
 ```js
 import React from 'react'
-import 'jest-dom/extend-expect'
+import '@testing-library/jest-dom/extend-expect'
 import { render, cleanup } from '@testing-library/react'
 import Note from './Note'
 
@@ -197,7 +197,7 @@ On myös mahdollista etsiä komponentista pienempi osa, ja tulostaa sen HTML-koo
 
 ```js
 import React from 'react'
-import 'jest-dom/extend-expect'
+import '@testing-library/jest-dom/extend-expect'
 import { render, cleanup } from '@testing-library/react'
 import { prettyDOM } from '@testing-library/dom' // highlight-line
 import Note from './Note'
@@ -238,7 +238,7 @@ react-testing-library:n manuaali kehoittaa kutsumaan jokaisen testin jälkeen me
 
 ```js 
 import React from 'react'
-import 'jest-dom/extend-expect' // highlight-line
+import '@testing-library/jest-dom/extend-expect' // highlight-line
 import { render, cleanup } from '@testing-library/react'
 import { prettyDOM } from '@testing-library/dom' 
 import Note from './Note'
@@ -249,7 +249,7 @@ afterEach(cleanup)  // highlight-line
 Voisimme toistaa saman kaikkiin testitiedostoihin. Parempi vaihtoehto on kuitenkin [konfiguroida](https://testing-library.com/docs/react-testing-library/setup) cleanup tapahtumaan automaattisesti. Tehdään konfiguraatiota varten tiedosto <i>src/setupTests.js</i> jolla on seuraava sisältö:
 
 ```js
-import 'jest-dom/extend-expect'
+import '@testing-library/jest-dom/extend-expect'
 import '@testing-library/react/cleanup-after-each'
 ```
 
