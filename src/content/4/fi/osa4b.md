@@ -845,6 +845,15 @@ test('notes are returned as json', async () => {
 }
 ```
 
+Helpoimmalla kuitenkin päästään, kun hyödynnetään mongoosen valmista metodia insertMany:
+
+```js
+beforeEach(async () => {
+  await Note.deleteMany({})
+  await Note.insertMany(helper.initialNotes)
+})
+```
+
 Talletamme siis taulukossa olevat muistiinpanot tietokantaan _forEach_-loopissa. Testeissä kuitenkin ilmenee jotain häikkää, ja sitä varten koodin sisään on lisätty aputulosteita.
 
 Konsoliin tulostuu
