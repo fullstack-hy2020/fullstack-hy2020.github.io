@@ -9,7 +9,7 @@ lang: en
 
 Let's go back to working with React.
 
-We left our application in the following state:
+We start with a new example:
 
 ```js
 const Hello = (props) => {
