@@ -395,6 +395,16 @@ npm install -g jest
 
 testien suoritus onnistuu suoraan komennolla _jest_. Globaaliin asennukseen tarvitset pääkäyttäjän oikeudet.
 
+On huomattava, että yksittäisiä testejä ajettaessa -t haulla saattaa mongoose-yhteys valitettavasti jäädä auki, mikäli yhtään yhteyttä hyödyntävää testiä ei ajeta. Ongelma seurannee siitä, että supertest alustaa yhteyden, mutta jest ei suorita afterAll-osiota.
+
+Yllä olevat testit on mahdollista ilman muutoksia suorittaa myös npm:n avulla hyödyntämällä package.json-tiedostossa määriteltyä test-skriptiä. Tämän tavan hyvä puoli on se, että testaus suoritetaan aina samoin parametrein.
+
+```js
+npm t -- tests/note_api.test.js
+npm t -- -t 'a specific note is within the returned notes'
+npm t -- -t 'notes'
+```
+
 ### async/await
 
 Ennen kuin teemme lisää testejä, tarkastellaan tarkemmin mitä _async_ ja _await_ tarkoittavat.
