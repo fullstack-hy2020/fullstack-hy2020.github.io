@@ -369,10 +369,10 @@ export default connect(
 
 Ratkaisu on elegantti, muistiinpanojen alustuslogiikka on eriytetty kokonaan React-komponenttien ulkopuolelle.
 
-Uuden muistiinpanon lisäävä action creator _createNew_ on seuraavassa
+Uuden muistiinpanon lisäävä action creator _createNote_ on seuraavassa
 
 ```js
-export const createNew = content => {
+export const createNote = content => {
   return async dispatch => {
     const newNote = await noteService.createNew(content)
     dispatch({
