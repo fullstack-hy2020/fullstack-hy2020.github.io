@@ -110,7 +110,7 @@ Even if you do not register to Open university course and take the exam, you can
 If you have already taken the course either as a MOOC or as a University Course, you can now expand your course. 
 
 You can substitute <i>parts</i> of this course with parts you have previously submitted. 
-For example, if you have previously completend the 3-credit course, you can substitute parts 0-3 of this course with the parts you have previously completed. 
+For example, if you have previously completed the 3-credit course, you can substitute parts 0-3 of this course with the parts you have previously completed. 
 You can only substitute parts in sequence, so you cannot for example substitute parts 0 and 2 but now complete part 1. 
 
 You can only substitute whole parts. For example, if you have previously done 50% of the exercises for a part, you cannot substitute those exercises but need to start over that part on this course. 
