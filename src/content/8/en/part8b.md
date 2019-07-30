@@ -455,7 +455,7 @@ const App = () => {
       <h2>create new</h2>
       <Mutation mutation={CREATE_PERSON}>
         {(addPerson) =>
-          <PhoneForm
+          <PersonForm
             addPerson={addPerson}
           />
         }
