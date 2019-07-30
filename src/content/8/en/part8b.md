@@ -393,7 +393,7 @@ The current code of the application can be found from [github](https://github.co
 
 ### Cache
 
-When we do multiple queries for for example the address details of Arto Hellas, we notice something interesting: The query to the backend is done only the first time around. After this, despite of the same query being done again by the code, the query is not sent to the backend. 
+When we do multiple queries for example the address details of Arto Hellas, we notice something interesting: The query to the backend is done only the first time around. After this, despite of the same query being done again by the code, the query is not sent to the backend. 
 
 ![](../../images/8/12.png)
 
