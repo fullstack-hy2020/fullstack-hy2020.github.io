@@ -169,7 +169,7 @@ const App = () => {
 Notice how every note receives its own <i>unique</i> event handler function, since the <i>id</i> of every note is unique.
 
 
-E.g. if <i>node.id</i> is 3, the event handler function returned by _toggleImportance(note.id)_ will be:
+E.g. if <i>note.id</i> is 3, the event handler function returned by _toggleImportance(note.id)_ will be:
 
 ```js
 () => { console.log('importance of 3 needs to be toggled') }
