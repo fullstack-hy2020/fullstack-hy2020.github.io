@@ -82,7 +82,7 @@ The <i>notes</i> collection contains three notes that all have a <i>user</i> fie
 ```
 
 
-Document databases do not demand the foreign key to be stored in the note resources, they could <i>also</i> be stored in the users collection, or even both:
+Document databases do not demand the foreign key to be stored in the note resources, it could <i>also</i> be stored in the users collection, or even both:
 
 ```js
 [
