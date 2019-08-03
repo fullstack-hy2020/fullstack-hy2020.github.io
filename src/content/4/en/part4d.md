@@ -134,7 +134,7 @@ Wrong username or password returns an error message and the proper statuscode
 Lets change creating new notes so, that it is only possible if the post request has a valid token attached. 
 The note is then saved to the notes list of the user identified by the token. 
 
-There are serveral ways for sending the token from the browser to the server. We will use the [Authorization](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization) header. The header also tells which [authentication schema](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#Authentication_schemes) is used. This can be necessary if the server offers multiple ways to authenticate. 
+There are several ways for sending the token from the browser to the server. We will use the [Authorization](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization) header. The header also tells which [authentication schema](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#Authentication_schemes) is used. This can be necessary if the server offers multiple ways to authenticate. 
 Identifying the schema tells the server how the attached credentials should be interpreted. 
 
 The <i>Bearer</i>-schema is suitable for our needs. 
