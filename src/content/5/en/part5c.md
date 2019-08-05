@@ -20,7 +20,7 @@ In addition to Jest, we also need another testing library that will help us rend
 Let's install the library with the command:
 
 ```js
-npm install --save-dev @testing-library/react jest-dom
+npm install --save-dev @testing-library/react @testing-library/jest-dom
 ```
 
 
@@ -53,7 +53,7 @@ The first test verifies that the component renders the contents of the note:
 
 ```js
 import React from 'react'
-import 'jest-dom/extend-expect'
+import '@testing-library/jest-dom/extend-expect'
 import { render, cleanup } from '@testing-library/react'
 import Note from './Note'
 
@@ -225,7 +225,7 @@ It is also possible to search for a smaller part of the component and print its 
 
 ```js
 import React from 'react'
-import 'jest-dom/extend-expect'
+import '@testing-library/jest-dom/extend-expect'
 import { render, cleanup } from '@testing-library/react'
 import { prettyDOM } from '@testing-library/dom'  // highlight-line
 import Note from './Note'
@@ -267,7 +267,7 @@ The manual for the react-testing-library recommends to call the [cleanup](https:
 
 ```js 
 import React from 'react'
-import 'jest-dom/extend-expect' // highlight-line
+import '@testing-library/jest-dom/extend-expect' // highlight-line
 import { render, cleanup } from '@testing-library/react'
 import { prettyDOM } from '@testing-library/dom' 
 import Note from './Note'
@@ -279,7 +279,7 @@ afterEach(cleanup)  // highlight-line
 We could repeat the same cleanup in all of our test files. A better option is to [configure](https://testing-library.com/docs/react-testing-library/setup) the cleanup to be done automatically. Let's create a new <i>src/setupTests.js</i> file for this configuration with the following contents:
 
 ```js
-import 'jest-dom/extend-expect'
+import '@testing-library/jest-dom/extend-expect'
 import '@testing-library/react/cleanup-after-each'
 ```
 
@@ -316,7 +316,7 @@ import Note from './Note'
 
 // ...
 
-test('clicking the button calls event handler once', async () => {
+test('clicking the button calls event handler once', () => {
   const note = {
     content: 'Component testing is done with react-testing-library',
     important: true
@@ -437,7 +437,7 @@ The _beforeEach_ function gets called before each test, which then renders the <
 The first test verifies that the <i>Togglable</i> component renders its child component `<div className="testDiv" />`.
 
 
-The remaining tests use the [toHaveStyle](https://www.npmjs.com/package/jest-dom#tohavestyle) method to verify that the child component of the <i>Togglable</i> component is not visible initially, by checking that the style of the <i>div</i> element contains `{ display: 'none' }`. Another test verifies that when the button is pressed the component is visible, meaning that the style for hiding the component <i>is no longer</i> assigned to the component.
+The remaining tests use the [toHaveStyle](https://www.npmjs.com/package/@testing-library/jest-dom#tohavestyle) method to verify that the child component of the <i>Togglable</i> component is not visible initially, by checking that the style of the <i>div</i> element contains `{ display: 'none' }`. Another test verifies that when the button is pressed the component is visible, meaning that the style for hiding the component <i>is no longer</i> assigned to the component.
 
 
 The button is searched for once again based on the text that it contains. The button could have been located also with the help of a CSS selector:
@@ -672,7 +672,9 @@ const localStorageMock = {
     savedItems[key] = item
   },
   getItem: (key) => savedItems[key],
-  clear: savedItems = {}
+  clear: () => {
+    savedItems = {}
+  }
 }
 
 Object.defineProperty(window, 'localStorage', { value: localStorageMock })
