@@ -38,7 +38,7 @@ const App = () => {
 
 ### Component helper functions
 
-Let's expand our <i>Hello</i> component so that it guesses the age of the person being greeted:
+Let's expand our <i>Hello</i> component so that it guesses the year of birth of the person being greeted:
 
 ```js
 const Hello = (props) => {
