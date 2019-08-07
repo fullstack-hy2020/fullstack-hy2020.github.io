@@ -741,7 +741,7 @@ If you use Visual Studio Code, you can use the VS Code [REST client](https://mar
 Once the plugin is installed, using it is very simple. We make a directory at the root of application named <i>requests</i>. We save all the REST client requests in the directory as files that end with the <i>.rest</i> extension.
 
 
-Let's create a new <i>get\_all\_notes.rest</i> file and for defining the request that fetches all notes.
+Let's create a new <i>get\_all\_notes.rest</i> file and define the request that fetches all notes.
 
 ![](../../images/3/12.png)
 
