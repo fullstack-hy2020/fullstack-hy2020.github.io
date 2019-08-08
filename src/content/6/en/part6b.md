@@ -517,7 +517,7 @@ const App = (props) => {
 ```
 
 
-To get rid of this unpleasantness we will use the [connect](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options) function provided by the [React Redux](https://github.com/reactjs/react-redux) library. This is currently the de facto solution for passing the Redux store to React components.
+To get rid of this unpleasantness we will use the [connect](https://react-redux.js.org/api/connect) function provided by the [React Redux](https://github.com/reactjs/react-redux) library. This is currently the de facto solution for passing the Redux store to React components.
 
 
 It takes some time to wrap your head around how connect works, but your efforts will be rewarded. Next, let's take a look at how connect is used in practice.
@@ -1124,7 +1124,7 @@ Abramov mentions the term [high order component](https://reactjs.org/docs/higher
 High order components, or HOCs, are a way of defining generic functionality that can be applied to components. This is a concept from functional programming that very slightly resembles inheritance in object oriented programming.
 
 
-HOCs are in fact a generalization of the [High Order Function](https://en.wikipedia.org/wiki/Higher-order_function) (HOF) concept. HOFs are functions that either accept functions as parameters or return functions. We have actually been using HOFs throughout the course, e.g. all of the methods used for dealing with arrays like _map, filter and fine_ are HOFs. 
+HOCs are in fact a generalization of the [High Order Function](https://en.wikipedia.org/wiki/Higher-order_function) (HOF) concept. HOFs are functions that either accept functions as parameters or return functions. We have actually been using HOFs throughout the course, e.g. all of the methods used for dealing with arrays like _map, filter and find_ are HOFs. 
 
 
 You can find the code for our current application in its entirety in the <i>part6-4</i> branch of [this Github repository](https://github.com/fullstackopen-2019/redux-notes/tree/part6-4). 
@@ -1174,7 +1174,7 @@ Do the same for the <i>Filter</i> and <i>AnecdoteForm</i> components.
 #### 6.14 Better anecdotes, step12.
 
 
-Change the <i>AnecdoteList</i> component so that the voting for anecdotes works again, and also refactor the <i>Notification</i>component to use connect.
+Change the <i>AnecdoteList</i> component so that the voting for anecdotes works again, and also refactor the <i>Notification</i> component to use connect.
 
 
 Remove the redundant passing of the store's state via props by simplifying the <i>App</i> component into the following form:
