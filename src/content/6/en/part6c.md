@@ -80,7 +80,7 @@ npm install axios --save
 
 
 
-We change the initialization of the state in <i>nodeReducer</i>, such that by default there are no notes:
+We change the initialization of the state in <i>noteReducer</i>, such that by default there are no notes:
 
 ```js
 const noteReducer = (state = [], action) => {
@@ -491,11 +491,11 @@ The current state of the code for the application can be found on [github](https
 
 
 
-There is an extension [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) that can be installed on Chrome, using which the state of Redux-store and the action that change it can be monitored from the console of the browser.
+There is an extension [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) that can be installed on Chrome, in which the state of Redux-store and the action that change it can be monitored from the console of the browser.
 
 
 
-When debugging, in addition the the browser extension we also the software library [redux-devtools-extension](https://www.npmjs.com/package/redux-devtools-extension). We insatll it using the command:
+When debugging, in addition to the browser extension we also have the software library [redux-devtools-extension](https://www.npmjs.com/package/redux-devtools-extension). We install it using the command:
 
 ```js
 npm install --save redux-devtools-extension
