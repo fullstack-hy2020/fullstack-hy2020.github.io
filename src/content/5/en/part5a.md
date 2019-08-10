@@ -661,7 +661,7 @@ Form for adding blogs can be its own component, which manages the input from the
 #### 5.4*: bloglist frontend, step4
 
 
-Implement notifications, which inform the user about successfull and unsuccessfull operations at the top of the page. For example when a new blog is addedd, the following notification can be shown: 
+Implement notifications, which inform the user about successful and unsuccessful operations at the top of the page. For example when a new blog is addedd, the following notification can be shown: 
 
 ![](../../images/5/8e.png)
 
