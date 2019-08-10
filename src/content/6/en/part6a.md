@@ -718,7 +718,7 @@ Ensure that the provided first test passes, because Redux expects that the reduc
 Start by expanding the reducer so that both tests pass. Then add the rest of the tests, and finally the functionality which they are testing. 
 
 
-A good model for the reducer is the [redux-notes](/en/part6/flux_arkkitecture_and_redux#pure-functions-immutable)
+A good model for the reducer is the [redux-notes](/en/part6/flux_architecture_and_redux#pure-functions-immutable)
 example above. 
 
 #### 6.2: unicafe revisited, step2
@@ -1159,7 +1159,7 @@ Implement functionality for voting anecdotes. The amount of votes must be saved 
 Implement functionality for adding new anecdotes. 
 
 
-You can keep the form uncontrolled, like we did [earlier](/en/part6/flux_arkkitecture_and_redux#uncontrolled-form).
+You can keep the form uncontrolled, like we did [earlier](/en/part6/flux_architecture_and_redux#uncontrolled-form).
 
 #### 6.5*: anecdotes, step3
 
@@ -1169,7 +1169,7 @@ Make sure, that the anecdotes are oredered by the number of votes.
 #### 6.6: anecdotes, step4
 
 
-If you haven't done so already, separate the creation of action-objects to [action creator](https://redux.js.org/basics/actions#action-creators)-functions and place them in the <i>src/reducers/anecdoteReducer.js</i> file, so do like we have been doing since the chapter [action creators](/en/part6/flux_arkkitecture_and_redux#action-creators).
+If you haven't done so already, separate the creation of action-objects to [action creator](https://redux.js.org/basics/actions#action-creators)-functions and place them in the <i>src/reducers/anecdoteReducer.js</i> file, so do like we have been doing since the chapter [action creators](/en/part6/flux_architecture_and_redux#action-creators).
 
 #### 6.7: anecdotes, step5
 
