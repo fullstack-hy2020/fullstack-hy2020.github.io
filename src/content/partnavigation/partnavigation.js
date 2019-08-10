@@ -103,7 +103,7 @@ module.exports = {
       c: 'Webpack',
       d: 'Class components, E2E-testing',
       e: 'Miscellaneous',
-      f: 'Exercises: extending the blogilist',          
+      f: 'Exercises: extending the bloglist',          
     },
     '8': {
       a: 'GraphQL-server',
