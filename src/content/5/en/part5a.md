@@ -531,10 +531,10 @@ const App = () => {
 ```
 
 
-The empty array as the parameter of the effect ensures, that the effect is executed only then the component is rendered [for the first time](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect).
+The empty array as the parameter of the effect ensures that the effect is executed only when the component is rendered [for the first time](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect).
 
 
-Now a user stays logged in to the application forever. We should propably add <i>logout</i> functionality which removes the login details from the local storage. We will however leave it for a exercise. 
+Now a user stays logged in to the application forever. We should probably add a <i>logout</i> functionality which removes the login details from the local storage. We will however leave it for an exercise. 
 
 
 Its possible to log out using the console, and that is enough for us. 
