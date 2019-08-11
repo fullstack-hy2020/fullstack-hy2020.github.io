@@ -131,7 +131,7 @@ Wrong username or password returns an error message and the proper statuscode
 
 ### Limiting creating new notes to logged in users
 
-Lets change creating new notes so, that it is only possible if the post request has a valid token attached. 
+Lets change creating new notes so that it is only possible if the post request has a valid token attached. 
 The note is then saved to the notes list of the user identified by the token. 
 
 There are several ways for sending the token from the browser to the server. We will use the [Authorization](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization) header. The header also tells which [authentication schema](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#Authentication_schemes) is used. This can be necessary if the server offers multiple ways to authenticate. 
