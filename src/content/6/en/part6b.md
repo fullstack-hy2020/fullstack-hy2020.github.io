@@ -527,7 +527,7 @@ npm install --save react-redux
 ```
 
 
-In order to use the _connect_ function we have to define our application as the child of the [Provider](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store) component that is provided by the React Redux library. Additionally, the <i>Provider</i> component must receive the Redux store of the application as its <i>store</i> attribute.
+In order to use the _connect_ function we have to define our application as the child of the [Provider](https://github.com/reduxjs/react-redux/blob/master/docs/api/Provider.md) component that is provided by the React Redux library. Additionally, the <i>Provider</i> component must receive the Redux store of the application as its <i>store</i> attribute.
 
 
 Let's make these changes to the <i>index.js</i> file of our application:
