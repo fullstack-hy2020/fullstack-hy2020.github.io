@@ -232,7 +232,7 @@ Lets examine the slightly modified version from the previous example. The code f
 
 
 
-The application now contains five different views, the display of of which is controlled by the router. In addition to the components <i>Home</i>, <i>Notes</i> and <i>Users</i> familiar from the previous example we have <i>Login</i> representing the login view and <i>Note</i> representing the view of a single note.
+The application now contains five different views, the display of which is controlled by the router. In addition to the components <i>Home</i>, <i>Notes</i> and <i>Users</i> familiar from the previous example we have <i>Login</i> representing the login view and <i>Note</i> representing the view of a single note.
 
 
 
