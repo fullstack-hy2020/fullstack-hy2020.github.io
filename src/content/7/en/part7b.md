@@ -222,7 +222,7 @@ We will render the message as a Bootstrap [Alert](https://getbootstrap.com/docs/
 #### Navigation structure
 
 
-Lastly, let's alter the application's navigation menu to use Bootstrap's [Navbaria](https://getbootstrap.com/docs/4.1/components/navbar/) component. The React Bootstrap library provides us with [matching built-in components](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly). Through trial and error, we end up with a working solution in spite of the cryptic documentation:
+Lastly, let's alter the application's navigation menu to use Bootstrap's [Navbar](https://getbootstrap.com/docs/4.1/components/navbar/) component. The React Bootstrap library provides us with [matching built-in components](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly). Through trial and error, we end up with a working solution in spite of the cryptic documentation:
 
 ```js
 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -482,7 +482,7 @@ You can find the complete code for the application [here](https://github.com/ful
 ### Closing thoughts
 
 
-The different between React-Bootstrap and Semantic-UI-React is not that big. Determining which one produces more aesthetically pleasing results comes down to a matter of taste. After years of using Bootstrap, the reasons that made me switch over to Semantic UI were its seamless integration with React, its wider selection of built-in components, and its overall better documentation. There has been some [uncertainty](https://github.com/Semantic-Org/Semantic-UI/issues/6109) regarding the future of Semantic UI, and it's recommended to keep your ear on the ground.
+The difference between React-Bootstrap and Semantic-UI-React is not that big. Determining which one produces more aesthetically pleasing results comes down to a matter of taste. After years of using Bootstrap, the reasons that made me switch over to Semantic UI were its seamless integration with React, its wider selection of built-in components, and its overall better documentation. There has been some [uncertainty](https://github.com/Semantic-Org/Semantic-UI/issues/6109) regarding the future of Semantic UI, and it's recommended to keep your ear on the ground.
 
 
 In the two previous examples we used the UI frameworks with the help of React-integration libraries.
@@ -668,7 +668,7 @@ Styled components have seen a consistent growth in popularity in recent times, a
 ### Exercises
 
 
-The exercises related to the topics presented here, can be found at the end of this course material section in the exercise set [for extending the blog list application](/en/part7/exercises_extending_the_blogilist).
+The exercises related to the topics presented here, can be found at the end of this course material section in the exercise set [for extending the blog list application](/en/part7/exercises_extending_the_bloglist).
 
 </div>
 
