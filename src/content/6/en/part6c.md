@@ -8,10 +8,10 @@ lang: en
 <div class="content">
 
 
-We expand the application, such that the notes are stored to the backend. Let's use [json-server](/en/part2/getting_data_from_server) familiar from part 2.
+Let's expand the application, such that the notes are stored to the backend. We'll use [json-server](/en/part2/getting_data_from_server) familiar from part 2.
 
 
-We store the initial state of the database into the file <i>db.json</i> placed in the root of the project:
+The initial state of the database is stored into the file <i>db.json</i>, which is placed in the root of the project:
 
 ```json
 {
@@ -32,7 +32,7 @@ We store the initial state of the database into the file <i>db.json</i> placed i
 
 
 
-We install json-server for the project
+We'll install json-server for the project...
 
 ```js
 npm install json-server --save
@@ -40,7 +40,7 @@ npm install json-server --save
 
 
 
-and we add the following line to <i>scripts</i> part of the file <i>package.json</i>
+and add the following line to <i>scripts</i> part of the file <i>package.json</i>
 
 ```js
 "scripts": {
@@ -51,11 +51,11 @@ and we add the following line to <i>scripts</i> part of the file <i>package.json
 
 
 
-We launch json-server with the command _npm run server_.
+Now let's launch json-server with the command _npm run server_.
 
 
 
-Next we create a method into the file <i>services/notes.js</i>, which uses <i>axios</i> to fetch data from the backend
+Next we'll create a method into the file <i>services/notes.js</i>, which uses <i>axios</i> to fetch data from the backend
 
 ```js
 import axios from 'axios'
@@ -72,7 +72,7 @@ export default { getAll }
 
 
 
-We add axios to the project
+We'll add axios to the project
 
 ```js
 npm install axios --save
@@ -80,7 +80,7 @@ npm install axios --save
 
 
 
-We change the initialization of the state in <i>noteReducer</i>, such that by default there are no notes:
+We'll change the initialization of the state in <i>noteReducer</i>, such that by default there are no notes:
 
 ```js
 const noteReducer = (state = [], action) => {
@@ -154,18 +154,18 @@ noteService.getAll().then(notes =>
 ```
 
 
-> **NB:** why didn't we in place of promises and event handlers registered to _then_-methods use await?
+> **NB:** why didn't we use await in place of promises and event handlers (registered to _then_-methods)?
 >
 
-> await only works inside <i>async</i> functions, and the code in <i>index.js</i> is not inside a function, so due to the simple nature of operation we abstain from using <i>async</i> this time.
+> Await only works inside <i>async</i> functions, and the code in <i>index.js</i> is not inside a function, so due to the simple nature of operation, we'll abstain from using <i>async</i> this time.
 
 
 
-We do, however, decide to move the initialization of the notes into the <i>App</i> component, and as usual when fetching data from a server, we use the <i>effect hook</i>. 
+We do, however, decide to move the initialization of the notes into the <i>App</i> component, and as usual when fetching data from a server, we'll use the <i>effect hook</i>. 
 
 
 
-To get the action creator <i>initializeNotes</i> into use in the component <i>App</i> we, once again need the the help of the _connect_-method:
+To get the action creator <i>initializeNotes</i> into use in the component <i>App</i> we will once again need the help of the _connect_-method:
 
 ```js
 import React, { useEffect } from 'react' // highlight-line
@@ -196,11 +196,11 @@ const App = (props) => {
 export default connect(null, { initializeNotes })(App) // highlight-line
 ```
 
-This way the function <i>initializeNotes</i> becomes a prop, in the form of <i>props.initializeNotes</i>, for the component <i>App</i>, and when calling it we don't need the _dispatch_-method because _connect_ handles this for us.
+This way the function <i>initializeNotes</i> becomes a prop, in the form of <i>props.initializeNotes</i>, for the component <i>App</i>, and when calling it we won't need the _dispatch_-method, because _connect_ handles this for us.
 
 
 
-We can do the same thing when it comes to creating a new note. We expand the code communicating with the server as follows:
+We can do the same thing when it comes to creating a new note. Let's expand the code communicating with the server as follows:
 
 ```js
 import axios from 'axios'
@@ -254,7 +254,7 @@ export default connect(null, { createNote } )(NewNote)
 
 
 
-Because the backend generates id:s for the notes we change the action creator _noteCreation_
+Because the backend generates ids for the notes, we'll change the action creator _noteCreation_
 
 ```js
 export const createNote = (data) => {
@@ -284,11 +284,11 @@ The current state of the code for the application can be found on [github](https
 #### 6.16 Anecdotes and the backend, step1
 
 
-When the application launches fetch the anecdotes from the backend implemented using json-server.
+When the application launches, fetch the anecdotes from the backend implemented using json-server.
 
 
 
-The initial backend data can be found, e.g. [here](https://github.com/fullstackopen-2019/misc/blob/master/anecdotes.json).
+As the initial backend data, you can use, e.g. [this](https://github.com/fullstackopen-2019/misc/blob/master/anecdotes.json).
 
 
 #### 6.17 Anecdotes and the backend, step2
@@ -306,7 +306,7 @@ Modify the creation of new anecdotes, such that the anecdotes are stored in the 
 
 
 
-Our approach is ok, but it is not that great that the communication with the server happens inside the functions of the components. It would be better if the communication could be abstracted away from the components, such that they wouldn't have to do anything else but call the appropriate <i>action creator</i>. E.g. <i>App</i> would initialize the state of the application as follows:
+Our approach is OK, but it is not great that the communication with the server happens inside the functions of the components. It would be better if the communication could be abstracted away from the components, such that they don't have to do anything else but call the appropriate <i>action creator</i>. As an example, <i>App</i> would initialize the state of the application as follows:
 
 ```js
 const App = (props) => {
@@ -338,7 +338,7 @@ Both components would only use the function provided to them as a prop without c
 
 
 
-Now we install the [redux-thunk](https://github.com/gaearon/redux-thunk)-library, which enables us to create <i>asynchronous actions</i>. Installation is done with the command:
+Now let's install the [redux-thunk](https://github.com/gaearon/redux-thunk)-library, which enables us to create <i>asynchronous actions</i>. Installation is done with the command:
 
 ```js
 npm install --save redux-thunk
@@ -346,7 +346,7 @@ npm install --save redux-thunk
 
 
 
-The redux-thunk-library is a so-called <i>redux-middleware</i>, which must be initialized along with the initialization of the store. At the same time we will extract the definition of the store into its own file <i>src/store.js</i>:
+The redux-thunk-library is a so-called <i>redux-middleware</i>, which must be initialized along with the initialization of the store. While we're here, let's will extract the definition of the store into its own file <i>src/store.js</i>:
 
 ```js
 import { createStore, combineReducers, applyMiddleware } from 'redux'
@@ -385,7 +385,7 @@ document.getElementById('root'))
 
 
 
-Thanks to redux-thunk it is possible to define <i>action creators</i>, such that they return a function having the <i>dispatch</i>-method of redux-store as its parameter. As a result of this one can make asynchronous action creators, which first wait for some operation to finish, after which they then dispatch the real action.
+Thanks to redux-thunk, it is possible to define <i>action creators</i> so that they return a function having the <i>dispatch</i>-method of redux-store as its parameter. As a result of this, one can make asynchronous action creators, which first wait for some operation to finish, after which they then dispatch the real action.
 
 
 
@@ -495,7 +495,7 @@ There is an extension [Redux DevTools](https://chrome.google.com/webstore/detail
 
 
 
-When debugging, in addition to the browser extension we also have the software library [redux-devtools-extension](https://www.npmjs.com/package/redux-devtools-extension). We install it using the command:
+When debugging, in addition to the browser extension we also have the software library [redux-devtools-extension](https://www.npmjs.com/package/redux-devtools-extension). Let's install it using the command:
 
 ```js
 npm install --save redux-devtools-extension
@@ -503,7 +503,7 @@ npm install --save redux-devtools-extension
 
 
 
-We have to slightly change the definition of the store to get the library up and running:
+We'll have to slightly change the definition of the store to get the library up and running:
 
 ```js
 // ...
@@ -531,6 +531,8 @@ const store = createStore(
 export default store
 ```
 
+Now when you open the console, the <i>redux</i> tab looks like this:
+
 ![](../../images/6/11e.png)
 
 It's also possible to dispatch actions to the store using the console
@@ -539,9 +541,9 @@ It's also possible to dispatch actions to the store using the console
 
 ### Redux and component state
 
-We have come far along this course and, finally, we have come to the point at which we are using React "the right way", meaning React only focuses on generating the views and the application state is separated completely from the React components to Redux, its actions and reducers.
+We have come a long way in this course and, finally, we have come to the point at which we are using React "the right way", meaning React only focuses on generating the views and the application state is separated completely from the React components and passed on to Redux, its actions, and its reducers.
 
-What about the _useState_-hook, which provides components with their own state? Does it have a role if an application is using Redux or some other external state management solution? If the application has more complicated forms it may be beneficial to implement their local state using the state provided by the _useState_ function. One can, of course, have redux manage the state of the forms, however, if the state of the form is only relevant when filling the form (e.g. for validation) it may be wise to leave the management of state to the component responsible for the form.
+What about the _useState_-hook, which provides components with their own state? Does it have any role if an application is using Redux or some other external state management solution? If the application has more complicated forms, it may be beneficial to implement their local state using the state provided by the _useState_ function. One can, of course, have Redux manage the state of the forms, however, if the state of the form is only relevant when filling the form (e.g. for validation) it may be wise to leave the management of state to the component responsible for the form.
 
 The final version of the code for the application can be found on [github](https://github.com/fullstackopen-2019/redux-notes/tree/part6-7) in the branch <i>part6-7</i>.
 
@@ -557,14 +559,14 @@ The final version of the code for the application can be found on [github](https
 
 
 
-Modify the initialization of redux-store to happen using asynchronous action creators made possible by the <i>redux-thunk</i>-library.
+Modify the initialization of redux-store to happen using asynchronous action creators, which are made possible by the <i>redux-thunk</i>-library.
 
 
 #### 6.19 Anecdotes and the backend, step5
 
 
 
-Also modify the creation of a new anecdote to happen using asynchronous action creators made possible by the <i>redux-thunk</i>-library.
+Also modify the creation of a new anecdote to happen using asynchronous action creators, made possible by the <i>redux-thunk</i>-library.
 
 
 #### 6.20 Anecdotes and the backend, step6
@@ -597,7 +599,7 @@ props.setNotification(`you voted '${anecdote.content}'`, 10)
 
 
 
-so as the first parameter is the text to be rendered and as the second the amount of time for which to display the notification given in seconds. 
+the first parameter is the text to be rendered and the second parameter is the time to display the notification given in seconds. 
 
 
 
