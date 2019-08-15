@@ -14,7 +14,7 @@ There are many different ways of testing React applications. Let's take a look a
 Tests will be implemented with the same [Jest](http://jestjs.io/) testing library developed by Facebook that was used in the previous part. Jest is actually configured by default to applications created with create-react-app.
 
 
-In addition to Jest, we also need another testing library that will help us render components for testing purposes. The best option for this used to be the [enzyme](https://github.com/airbnb/enzyme) library developed by AirBnB. Unfortunately Enzyme does not support React hooks properly, so we will instead use [react-testing-library](https://github.com/testing-library/react-testing-library) which has seen a rapid growth in popularity in recent times.
+In addition to Jest, we also need another testing library that will help us render components for testing purposes. The best option for this used to be the [enzyme](https://github.com/airbnb/enzyme) library developed by Airbnb. Unfortunately, Enzyme does not support React hooks properly, so we will instead use [react-testing-library](https://github.com/testing-library/react-testing-library) which has seen rapid growth in popularity in recent times.
 
 
 Let's install the library with the command:
@@ -122,19 +122,19 @@ Instructions for installing Watchman on different operating systems can be found
 ### Test file location
 
 
-In React there are (at least) [two different conventions](https://medium.com/@JeffLombardJr/organizing-tests-in-jest-17fc431ff850) for test file location. We created our test files according to the current standard by placing them in the same directory as the component being tested.
+In React there are (at least) [two different conventions](https://medium.com/@JeffLombardJr/organizing-tests-in-jest-17fc431ff850) for the test file's location. We created our test files according to the current standard by placing them in the same directory as the component being tested.
 
 
 The other convention is to store the test files "normally" in their own separate directory. Whichever convention we choose, it is almost guaranteed to be wrong according to someone's opinion.
 
 
-Personally, I do not like this way of storing tests and application code in the same directory. The reason we choose to follow this convention is because it is configured by default in applications created by create-react-app.
+Personally, I do not like this way of storing tests and application code in the same directory. The reason we choose to follow this convention is that it is configured by default in applications created by create-react-app.
 
 
 ### Searching for content in a component
 
 
-The react-testing-library package offers many different ways for investigating the content of the component being tested. Let's expand our test slightly:
+The react-testing-library package offers many different ways of investigating the content of the component being tested. Let's slightly expand our test:
 
 ```js
 test('renders content', () => {
@@ -170,7 +170,7 @@ test('renders content', () => {
 The first way searches for a matching text from the entire HTML code rendered by the component.
 
 
-The second way uses the [getByText](https://testing-library.com/docs/dom-testing-library/api-queries#bytext) method of the object returned by the render method. The method returns the element that contains the given text. An exception occurs if no such element exists. For this reason we would technically not need to specify any additional expectation.
+The second way uses the [getByText](https://testing-library.com/docs/dom-testing-library/api-queries#bytext) method of the object returned by the render method. The method returns the element that contains the given text. An exception occurs if no such element exists. For this reason, we would technically not need to specify any additional expectation.
 
 
 The third way is to search for a specific element that is rendered by the component with the [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) method that receives a [CSS-selector](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) as its parameter.
@@ -303,7 +303,7 @@ Now we can get rid of both of the highlighted rows of the test code.
 ### Clicking buttons in tests
 
 
-In addition to displaying content, the <i>Note</i> component also makes sure that when the button associated to the note is pressed, the _toggleImportance_ event handler functions gets called.
+In addition to displaying content, the <i>Note</i> component also makes sure that when the button associated with the note is pressed, the _toggleImportance_ event handler function gets called.
 
 
 Testing this functionality can be accomplished like this:
@@ -360,10 +360,10 @@ expect(mockHandler.mock.calls.length).toBe(1)
 ```
 
 
-[Mock objects and functions](https://en.wikipedia.org/wiki/Mock_object) are commonly used stub components in testing, that are used for replacing dependencies of the components being tested. Mocks make it possible to return hardcoded responses, and to verify the amount of times the mock functions are called and with what parameters.
+[Mock objects and functions](https://en.wikipedia.org/wiki/Mock_object) are commonly used stub components in testing that are used for replacing dependencies of the components being tested. Mocks make it possible to return hardcoded responses, and to verify the number of times the mock functions are called and with what parameters.
 
 
-In our example the mock function is a perfect choice, since it can be easily used for verifying that the method gets called exactly once.
+In our example, the mock function is a perfect choice since it can be easily used for verifying that the method gets called exactly once.
 
 
 ### Tests for the <i>Togglable</i> component
@@ -525,7 +525,7 @@ Write a test that verifies that the component renders the title, author and amou
 If necessary, add CSS classes to the component for making testing easier.
 
 
-#### 4.14: Blog list tests, step2
+#### 5.14: Blog list tests, step2
 
 
 Write a test that verifies that if the <i>like</i> button of a component is pressed twice, the event handler function passed in the component's props is called twice.
@@ -534,7 +534,7 @@ Write a test that verifies that if the <i>like</i> button of a component is pres
 #### 5.15*: Blog list tests, step3
 
 
-Write tests for the <i>Blog</i> component of your application, that verify that by default only the name and author of the blog post is shown. Also verify that when the blog post is clicked, the other information of the blog post become visible.
+Write tests for the <i>Blog</i> component of your application that verify that only the name and author of the blog post are shown by default. Also verify that when the blog post is clicked, the other information of the blog post becomes visible.
 
 </div>
 
@@ -656,7 +656,7 @@ In the previous part of the course material, we wrote integration tests for the 
 So far all of our tests for the frontend have been unit tests that have validated the correct functioning of individual components. Unit testing is useful at times, but even a comprehensive suite of unit tests is not enough to validate that the application works as a whole.
 
 
-Next let's write a single integration test for the application. Writing integration tests is considerably more difficult than writing unit tests for individual components. There are two challenges specific to our application: the application fetches the notes from the backend <i>and</i> the application uses local storage for storing information about the user who is logged in.
+Next, let's write a single integration test for the application. Writing integration tests is considerably more difficult than writing unit tests for individual components. There are two challenges specific to our application: the application fetches the notes from the backend <i>and</i> the application uses local storage for storing information about the user who is logged in.
 
 
 Local storage is not available to our tests by default, as it is functionality provided by the browser and our tests are not running in the browser. It is quite easy to overcome this challenge by defining a <i>mock</i> that mimics the functionality of the local storage. There are  [many](https://stackoverflow.com/questions/32911630/how-do-i-deal-with-localstorage-in-jest-tests) ways to accomplish this.
@@ -789,7 +789,7 @@ describe('<App />', () => {
 The <i>jest.mock('./services/notes')</i> command takes our mock into use in the test. Perhaps a more logical place for this command would be in the <i>src/setupTests.js</i> file that configures our tests.
 
 
-The test start by re-rendering the component `component.rerender(<App />)`, this is done to ensure that all of the effects are executed. It is possible that this command is no longer necessary with newer versions of React.
+The test starts by re-rendering the component `component.rerender(<App />)`, this is done to ensure that all of the effects are executed. This command may no longer be necessary with newer versions of React.
 
 
 Since the action for fetching notes from the server is an [asynchronous](https://testing-library.com/docs/api-async) event, we use the [waitForElement](https://testing-library.com/docs/api-async#waitforelement) function for verifying that the <i>App</i> component renders all of the notes.
@@ -943,10 +943,10 @@ We have written integration tests for testing the entire component for both the 
 The E2E testing of web applications happens by simulating a browser with a library like [Selenium](http://www.seleniumhq.org). Another alternative is to use a so-called [headless browser](https://en.wikipedia.org/wiki/Headless_browser), that is a browser without a graphical user interface. It's even possible to use Chrome in Headless mode.
 
 
-End-to-end tests have the potential to be the most valuable category of tests, as they inspect the application through the same interface as real end users.
+End-to-end tests have the potential to be the most valuable category of tests, as they inspect the application through the same interface as real end-users.
 
 
-There are also challenging aspects related to E2E tests. Configuring them is a lot more challenging than configuring unit and integration tests. E2E tests also tend to be quite slow to run, and in a larger application their execution time can range from minutes up to hours. This is unfortunate for application development, as it is extremely useful to be able to run tests as often as possible in order to catch any possible regressions quickly.
+There are also challenging aspects related to E2E tests. Configuring them is a lot more challenging than configuring unit and integration tests. E2E tests also tend to be quite slow to run, and in a larger application their execution time can range from minutes up to hours. This is unfortunate for application development, as it is extremely useful to be able to run tests as often as possible to catch any possible regressions quickly.
 
 
 We will return to the topic of end-to-end testing in the final part of the course material.
