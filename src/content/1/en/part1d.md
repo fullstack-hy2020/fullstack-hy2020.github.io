@@ -842,17 +842,23 @@ const hello = (who) => () => {
 We can use the same trick to define event handlers that set the state of the component to a given value. Let's make the following changes to our code:
 
 ```js
-render() {
+const App = (props) => {
+  const [value, setValue] = useState(10)
+  
+  // hightlight-start
   const setToValue = (newValue) => () => {
     setValue(newValue)
   }
-
+  // hightlight-end
+  
   return (
     <div>
       {value}
+      // hightlight-start
       <button onClick={setToValue(1000)}>thousand</button>
       <button onClick={setToValue(0)}>reset</button>
       <button onClick={setToValue(value + 1)}>increment</button>
+      // hightlight-end
     </div>
   )
 }
