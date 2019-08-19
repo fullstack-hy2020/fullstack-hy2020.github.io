@@ -526,9 +526,7 @@ It takes some time to wrap your head around how connect works, but your efforts 
 npm install --save react-redux
 ```
 
-
-In order to use the _connect_ function we have to define our application as the child of the [Provider](https://github.com/reduxjs/react-redux/blob/master/docs/api/Provider.md) component that is provided by the React Redux library. Additionally, the <i>Provider</i> component must receive the Redux store of the application as its <i>store</i> attribute.
-
+In order to use the _connect_ function we have to define our application as the child of the [Provider](https://github.com/reduxjs/react-redux/blob/master/docs/api/Provider.md#provider) component that is provided by the React Redux library. Additionally, the <i>Provider</i> component must receive the Redux store of the application as its <i>store</i> attribute.
 
 Let's make these changes to the <i>index.js</i> file of our application:
 
@@ -582,7 +580,7 @@ export default ConnectedNotes           // highlight-line
 The module exports the <i>connected component</i> that works exactly like the previous regular component for now.
 
 
-The component needs the list of notes and the value of the filter from the Redux store. The _connect_ function accepts a so-called [mapStateToProps](https://github.com/reactjs/react-redux/blob/master/docs/api.md#arguments) function as its first parameter. The function can be used for defining the props of the <i>connected component</i> that are based on the state of the Redux store.
+The component needs the list of notes and the value of the filter from the Redux store. The _connect_ function accepts a so-called [mapStateToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapstatetoprops-state-ownprops--object) function as its first parameter. The function can be used for defining the props of the <i>connected component</i> that are based on the state of the Redux store.
 
 
 If we define:
@@ -662,7 +660,7 @@ The <i>Notes</i> component still uses the _dispatch_ function that it receives t
 The <i>store</i> prop no longer exists, so altering the state through the function is currently broken.
 
 
-The second parameter of the _connect_ function can be used for defining [mapDispatchToProps](https://github.com/reactjs/react-redux/blob/master/docs/api.md#arguments) which is a group of <i>action creator</i> functions passed to the connected component as props. Let's make the following changes to our existing connect operation:
+The second parameter of the _connect_ function can be used for defining [mapDispatchToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapdispatchtoprops-object--dispatch-ownprops--object) which is a group of <i>action creator</i> functions passed to the connected component as props. Let's make the following changes to our existing connect operation:
 
 ```js
 const mapStateToProps = (state) => {

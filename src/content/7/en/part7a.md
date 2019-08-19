@@ -115,7 +115,7 @@ So each view is implemented as its own component and we store the information fo
 
 
 
-However, the method is not very optimal. A we can see from the pictures, the address stays the same even though at times we are in different views. Each view should preferably have its own address, e.g to make bookmarking possible. The <i>back</i>-button doesn't work as expected for our application either, meaning that <i>back</i> doesn't move you to the previously displayed view of the application, but somewhere completely different. If the application were to grow even bigger and we wanted to e.g add their separate views for each user and note, then this self made <i>routing</i>, meaning the navigation management of the application, would get overly complicated.
+However, the method is not very optimal. As we can see from the pictures, the address stays the same even though at times we are in different views. Each view should preferably have its own address, e.g to make bookmarking possible. The <i>back</i>-button doesn't work as expected for our application either, meaning that <i>back</i> doesn't move you to the previously displayed view of the application, but somewhere completely different. If the application were to grow even bigger and we wanted to e.g add their separate views for each user and note, then this self made <i>routing</i>, meaning the navigation management of the application, would get overly complicated.
 
 
 
@@ -232,7 +232,7 @@ Lets examine the slightly modified version from the previous example. The code f
 
 
 
-The application now contains five different views, the display of of which is controlled by the router. In addition to the components <i>Home</i>, <i>Notes</i> and <i>Users</i> familiar from the previous example we have <i>Login</i> representing the login view and <i>Note</i> representing the view of a single note.
+The application now contains five different views, the display of which is controlled by the router. In addition to the components <i>Home</i>, <i>Notes</i> and <i>Users</i> familiar from the previous example we have <i>Login</i> representing the login view and <i>Note</i> representing the view of a single note.
 
 
 

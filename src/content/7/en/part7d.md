@@ -24,7 +24,7 @@ Lets get to know the main features of Class Components by producing yet another 
 
 
 
-THe initial version of the Class Component look like this
+The initial version of the Class Component look like this
 
 ```js
 import React from 'react'
@@ -52,7 +52,7 @@ The component now has a [constructor](https://reactjs.org/docs/react-component.h
 
 
 
-Lets define a state for the list of anecdotes and the currently visible anecdote. On contrast to when using the [useState](https://reactjs.org/docs/hooks-state.html)-hook Class Components only contain one state. So if the state is made up of multiple "parts" they should be stored as properties of the state. THe state is initialized in the constructor:
+Lets define a state for the list of anecdotes and the currently visible anecdote. In contrast to when using the [useState](https://reactjs.org/docs/hooks-state.html)-hook Class Components only contain one state. So if the state is made up of multiple "parts" they should be stored as properties of the state. The state is initialized in the constructor:
 
 ```js
 class App extends React.Component {
@@ -122,7 +122,7 @@ class App extends React.Component {
 
 
 
-THe callback function of the HTTP request updates the component state using the method [setState](https://reactjs.org/docs/react-component.html#setstate). The method only touches the keys that have been defined in the object passed to the method as an argument. The value for the key <i>current</i> remains unchanged.
+The callback function of the HTTP request updates the component state using the method [setState](https://reactjs.org/docs/react-component.html#setstate). The method only touches the keys that have been defined in the object passed to the method as an argument. The value for the key <i>current</i> remains unchanged.
 
 
 
@@ -209,7 +209,7 @@ const App = () => {
 
 
 
-In the case of our example the differences were minor. The biggest difference between class Functional components and Class components is mainly that the state of a Class component is a single object, and that the state is updated using the method _setState_, while in Functional components the state can consist of multiple different variables, with all of them having their own update function.
+In the case of our example the differences were minor. The biggest difference between Functional components and Class components is mainly that the state of a Class component is a single object, and that the state is updated using the method _setState_, while in Functional components the state can consist of multiple different variables, with all of them having their own update function.
 
 
 
@@ -221,7 +221,7 @@ A notable benefit of using Functional components is not having to deal with the 
 
 
 
-In my opinion, and the opinion of many others, is that Class Components basically no benefits over Functional components enhanced with hooks, with the exception of the so-called [error boundary](https://reactjs.org/docs/error-boundaries.html) mechanism, which currently (21.6.2019) isn't yet in use by functional components.
+In my opinion, and the opinion of many others, Class Components offer basically no benefits over Functional components enhanced with hooks, with the exception of the so-called [error boundary](https://reactjs.org/docs/error-boundaries.html) mechanism, which currently (21.6.2019) isn't yet in use by functional components.
 
 
 
@@ -232,11 +232,11 @@ When writing fresh code [there is no rational reason to use Class Components](ht
 
 
 
-Lets return to testing for a bit. In previous parts we wrote unit tests, as well as integration tests, for the applications. Now we take a look a way to create <i>End to End (E2E) -tests</i> which inspect the [entire system](https://en.wikipedia.org/wiki/System_testing).
+Lets return to testing for a bit. In previous parts we wrote unit tests, as well as integration tests, for the applications. Now we take a look at a way to create <i>End to End (E2E) -tests</i> which inspect the [entire system](https://en.wikipedia.org/wiki/System_testing).
 
 
 
-E2E-testing of web applications is done using the browser with the help of some library. There are plenty of solutions out there, e.g. [Selenium](http://www.seleniumhq.org/), which enables automatic tests using paractically any browser. 
+E2E-testing of web applications is done using the browser with the help of some library. There are plenty of solutions out there, e.g. [Selenium](http://www.seleniumhq.org/), which enables automatic tests using practically any browser. 
 
 
 
@@ -248,7 +248,7 @@ Even though E2E for web applications has been technologically possible for more 
 
 
 
-In the year 2018 a software library called [Cypress](https://www.cypress.io/) has quickly grown in favor in E2E-testing. Cypress is exceptionally easy to use. The amount of legwork one has to do compared to using, e.g. Selenium, is practically non existent. Cypress' way of operating differs radically from most libraries used for E2E-testing. This is because Cypress-tests are run all run entirely within the browser. With other approaches the tests are in a Node-process, which is connected to the browser through the APIs that it offers.
+In the year 2018 a software library called [Cypress](https://www.cypress.io/) has quickly grown in favor in E2E-testing. Cypress is exceptionally easy to use. The amount of legwork one has to do compared to using, e.g. Selenium, is practically non existent. Cypress' way of operating differs radically from most libraries used for E2E-testing. This is because Cypress-tests are all run entirely within the browser. With other approaches the tests are in a Node-process, which is connected to the browser through the APIs that it offers.
 
 
 
@@ -315,7 +315,7 @@ When the backend and frontend are running we can start Cypress using the command
 npm run cypress:open
 ```
 
-In the project there will appear a directory called <i>cypress</i>, in which there is a subdirectory <i>integrations</i> where the tests are to be placed. Cypress generates a set of example test. Lets remove them and create our first test into the file <i>note_app_spec.js</i>:
+In the project there will appear a directory called <i>cypress</i>, in which there is a subdirectory <i>integrations</i> where the tests are to be placed. Cypress generates a set of example test. Lets remove them and create our first test into the file <i>note\_app\_spec.js</i>:
 
 ```js
 describe('Note ', function() {
@@ -570,7 +570,7 @@ A common solution is to reset the database and possibly initialize it appropriat
 
 
 
-This problem can be solved by creating an API endpoint in the backend for the tests, using which the tests can reset the database if necessary. We make a <i>router</i> for the tests
+This problem can be solved by creating an API endpoint in the backend for the tests, in which the tests can reset the database if necessary. We make a <i>router</i> for the tests
 
 ```js
 const router = require('express').Router()
@@ -760,6 +760,6 @@ The documentation for Cypress is exceptionally good. I strongly recommend trying
 
 
 
-The exercises relating to End to end -testing are part of the [exercise series expanding on the bloglist application](/en/part7/exercises_extending_the_blogilist) at the end of this part. 
+The exercises relating to End to end -testing are part of the [exercise series expanding on the bloglist application](/en/part7/exercises_extending_the_bloglist) at the end of this part. 
 
 </div>

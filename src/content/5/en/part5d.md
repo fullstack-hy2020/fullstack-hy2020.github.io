@@ -161,7 +161,7 @@ const App = () => {
         <input
           type='number'
           value={height}
-          onChange={(event) => setheight(event.target.value)}
+          onChange={(event) => setHeight(event.target.value)}
         />
       </form>
       <div>

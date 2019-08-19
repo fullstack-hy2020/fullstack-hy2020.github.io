@@ -377,7 +377,7 @@ const App = () =>
 ```
 
 
-As we can see from example above, the React elements that were written in JSX are now created with regular JavaScript by using React's [createElement](https://reactjs.org/docs/react-without-jsx.html) function.
+As we can see from the example above, the React elements that were written in JSX are now created with regular JavaScript by using React's [createElement](https://reactjs.org/docs/react-without-jsx.html) function.
 
 
 You can test the bundled application by opening the <i>build/index.html</i> file with the <i>open file</i> functionality of your browser:
@@ -385,7 +385,7 @@ You can test the bundled application by opening the <i>build/index.html</i> file
 ![](../../images/7/22.png)
 
 
-It's worth noting that that if the bundled application's source code uses <i>async/await</i>, the browser will not render anything on some browsers. [Googling the error message in the console](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) will shed some light on the issue. We have to install one more missing dependency, that is [@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill):
+It's worth noting that if the bundled application's source code uses <i>async/await</i>, the browser will not render anything on some browsers. [Googling the error message in the console](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) will shed some light on the issue. We have to install one more missing dependency, that is [@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill):
 
 ```
 npm install --save-dev @babel/polyfill
@@ -696,7 +696,7 @@ The error message is now a lot better:
 ![](../../images/7/27.png)
 
 
-Generating the source map also makes it possible to the Chrome debugger:
+Generating the source map also makes it possible to use the Chrome debugger:
 
 ![](../../images/7/28.png)
 
@@ -1006,7 +1006,7 @@ Going through and reading the configuration files of an ejected application is s
 ### Exercises
 
 
-One exercise related to the topics presented here, can be found at the end of this course material section in the exercise set [for extending the blog list application](/en/part7/exercises_extending_the_blogilist).
+One exercise related to the topics presented here, can be found at the end of this course material section in the exercise set [for extending the blog list application](/en/part7/exercises_extending_the_bloglist).
 
 
 </div>
