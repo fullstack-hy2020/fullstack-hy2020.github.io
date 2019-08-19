@@ -38,7 +38,7 @@ In pedagogic terms, the course uses <i>mastery learning</i>, and the intent is f
 
 You are expected to do <i>at least</i> all of the exercises that are not marked with a star. Exercises marked with a star count towards your final grade, but skipping them does not prevent you from doing the compulsory exercises in the next part. 
 
-The speed of completing the course is quite free, and the exercises can be submitted up until 23:59 10.1.2020. 
+The speed of completing the course is quite free, and the exercises can be submitted up until 23:59 10th January 2020. 
 
 Statistics on the time used for exercises which have already been submitted on different parts of this course can be found from [the submission system](https://studies.cs.helsinki.fi/fullstackopen2019).
 
@@ -56,7 +56,7 @@ You can download the course certificate from the [submission system](https://stu
 
 For three credits, you must submit all compulsory exercises (without stars) for parts 0-3.
 
-For university credits, you also must pass the 3 credit course exam. The exam is done on Moodle. You can access Moodle through [the course page of the open university](https://courses.helsinki.fi/fi/aytkt21009/124726896). The last exam date is 10.1.2020. You can take the exam only after submitting all of the required exercises. <b>Note that you must sign up for the exam on 9.1.2020 at the latest.</b>
+For university credits, you also must pass the 3 credit course exam. The exam is done on Moodle. You can access Moodle through [the course page of the open university](https://courses.helsinki.fi/fi/aytkt21009/124726896). The last exam date is 10th January 2020. You can take the exam only after submitting all of the required exercises. <b>Note that you must sign up for the exam on 9th January 2020 at the latest.</b>
 
 Exam results can be found from the "my submissions" tab of the submission system no later than 4 weeks after taking the exam (exams might be marked slower during July).
 Remember to save your student number to the submission system.
@@ -83,7 +83,7 @@ Credits and grades are calculated as follows:
 | 83           |       5        | 2        |
 | 72           |       5        | 1        |
 
-For university credits the 5-7 credit course also requires passing the course exam. The exam is done on Moodle. You can access Moodle through [the course page of the open university](https://courses.helsinki.fi/fi/aytkt21009/124726896). The last possible date for taking the exam is 10.1.2020 <b>Note that you must sign up for the exam on 9.1.2020 at the latest.</b>
+For university credits the 5-7 credit course also requires passing the course exam. The exam is done on Moodle. You can access Moodle through [the course page of the open university](https://courses.helsinki.fi/fi/aytkt21009/124726896). The last possible date for taking the exam is 10th January 2020 <b>Note that you must sign up for the exam on 9th January 2020 at the latest.</b>
 
 You can take the exam only after submitting enough exercises for 5 credits. In practice it is not wise to take the course exam immediately after the critical amount of exercises has been submitted. The exam is the same for 5-7 credits. The exam does not count towards your grade.
 
