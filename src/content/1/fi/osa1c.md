@@ -705,7 +705,7 @@ Tehdään seuraavaksi napeille tarkoitettu komponentti <i>Button</i>. Napille on
 
 ```js
 const Button = (props) => (
-  <button onClick={props.handleClick}>
+  <button onClick={props.onClick}>
     {props.text}
   </button>
 )
@@ -714,8 +714,8 @@ const Button = (props) => (
 ja hyödynnetään taas destrukturointia ottamaan <i>props</i>:in tarpeelliset kentät suoraan:
 
 ```js
-const Button = ({ handleClick, text }) => (
-  <button onClick={handleClick}>
+const Button = ({ onClick, text }) => (
+  <button onClick={onClick}>
     {text}
   </button>
 )
@@ -734,15 +734,15 @@ const App = (props) => {
       <Display counter={counter}/>
       // highlight-start
       <Button
-        handleClick={() => setToValue(counter + 1)}
+        onClick={() => setToValue(counter + 1)}
         text='plus'
       />
       <Button
-        handleClick={() => setToValue(counter - 1)}
+        onClick={() => setToValue(counter - 1)}
         text='minus'
       />
       <Button
-        handleClick={() => setToValue(0)}
+        onClick={() => setToValue(0)}
         text='zero'
       />
       // highlight-end
