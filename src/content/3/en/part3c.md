@@ -173,7 +173,7 @@ The code assumes that it will be passed the password from the credentials we cre
 const password = process.argv[2]
 ```
 
-When the code is run with the command <i>node mongo.js salasana</i>, Mongo will add a new document to the database.
+When the code is run with the command <i>node mongo.js password</i>, Mongo will add a new document to the database.
 
 We can view the current state of the database from the MongoDB Atlas from <i>Collections</i>
 in the Overview tab.
