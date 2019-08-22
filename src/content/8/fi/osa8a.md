@@ -834,7 +834,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 ### Lisää kyselyistä
 
-GraphQL:ssä on yhteen kyselyyn mahdollista yhdistää monia tyypin <i>Query</i> kenttiä, eli "yksittäisiä kyselyitä". Esim. seuraava kysely palautta puhelinluettelon henkilöiden lukumäärän sekä nimet:
+GraphQL:ssä on yhteen kyselyyn mahdollista yhdistää monia tyypin <i>Query</i> kenttiä, eli "yksittäisiä kyselyitä". Esim. seuraava kysely palauttaa puhelinluettelon henkilöiden lukumäärän sekä nimet:
 
 ```js
 query {
