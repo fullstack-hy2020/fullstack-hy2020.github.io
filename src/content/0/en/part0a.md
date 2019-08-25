@@ -95,7 +95,7 @@ Remember to save your student number to the submission system.
 #### 8 credits
 
 By submitting at least 22/26 of the exercises for part 8 of the course, GraphQL, you can get one additional credit. 
-Part 8 can be done any time after part 5, because it's contents are independent from parts 6 and 7. 
+Part 8 can be done any time after part 5, because its contents are independent from parts 6 and 7. 
 
 Exercises in part 8 do not count towards the grade for the 5-7 credit course. 
 
