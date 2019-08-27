@@ -726,7 +726,7 @@ test('a valid note can be added ', async () => {
   await api
     .post('/api/notes')
     .send(newNote)
-    .expect(200)
+    .expect(201)
     .expect('Content-Type', /application\/json/)
 
 
@@ -1193,7 +1193,7 @@ describe('when there is initially some notes saved', () => {
       await api
         .post('/api/notes')
         .send(newNote)
-        .expect(200)
+        .expect(201)
         .expect('Content-Type', /application\/json/)
 
 
