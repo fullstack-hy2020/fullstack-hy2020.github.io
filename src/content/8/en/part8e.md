@@ -47,7 +47,7 @@ query {
 both return persons. When choosing the fields to return, both queries have to define exactly the same fields. 
 
 
-These kinds of situations can be simplified with the use of [fragments](https://graphql.org/learn/queries/#fragments). Lets declare a fragment for selecting all fields of a person: 
+These kinds of situations can be simplified with the use of [fragments](https://graphql.org/learn/queries/#fragments). Let's declare a fragment for selecting all fields of a person: 
 
 ```js
 fragment PersonDetails on Person {
