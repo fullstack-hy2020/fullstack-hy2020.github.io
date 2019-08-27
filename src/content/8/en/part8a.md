@@ -559,7 +559,7 @@ Person: {
 ### Object within an object
 
 
-Lets modify the scheme a bit
+Let's modify the scheme a bit
 
 ```js
   // highlight-start
