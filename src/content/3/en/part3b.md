@@ -49,7 +49,7 @@ You can read more about CORS from [Mozillas page](https://developer.mozilla.org/
 
 ### Application to the Internet
 
-Now that the whole stack is ready, lets move our application to the internet. We'll use good old [Heroku](https://www.heroku.com) for this.
+Now that the whole stack is ready, let's move our application to the internet. We'll use good old [Heroku](https://www.heroku.com) for this.
 
 >If you have never used Heroku before, you can find instructions from [Heroku documentation](https://devcenter.heroku.com/articles/getting-started-with-nodejs) or by Googling.
 
@@ -89,7 +89,7 @@ If not, the issue can be found by reading heroku logs with command <i>heroku log
 
 The frontend also works with the backend on Heroku. You can check this by changing the backends address on the frontend to be the backends address in Heroku instead of <i>http://localhost:3001</i>.
 
-The next question is, how do we deploy the frontend to the Internet? We have multiple options. Lets go through one of them next. 
+The next question is, how do we deploy the frontend to the Internet? We have multiple options. Let's go through one of them next. 
 
 ### Frontend production build
 
@@ -99,7 +99,7 @@ When the application is deployed, we must create a [production build](https://re
 
 A production build of applications created with <i>create-react-app</i> can be created with command [npm run build](https://github.com/facebookincubator/create-react-app#npm-run-build-or-yarn-build).
 
-Lets run this command from the <i>root of the frontend project</i>.
+Let's run this command from the <i>root of the frontend project</i>.
 
 This creates a directory called <i>build</i> (which contains the only html-file of our application, <i>index.html</i> ) which contains the directory <i>static</i>. [Minified](<https://en.wikipedia.org/wiki/Minification_(programming)>) version of our applications JavaScript code will be generated to the <i>static</i>  directory. Even though the application code is in multiple files, all of the JavaScript will be minified into one file. Actually all of the code from all of the applications dependencies will also be minified into this single file. 
 
