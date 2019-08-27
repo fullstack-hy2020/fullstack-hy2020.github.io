@@ -845,20 +845,20 @@ We can use the same trick to define event handlers that set the state of the com
 const App = (props) => {
   const [value, setValue] = useState(10)
   
-  // hightlight-start
+  // highlight-start
   const setToValue = (newValue) => () => {
     setValue(newValue)
   }
-  // hightlight-end
+  // highlight-end
   
   return (
     <div>
       {value}
-      // hightlight-start
+      // highlight-start
       <button onClick={setToValue(1000)}>thousand</button>
       <button onClick={setToValue(0)}>reset</button>
       <button onClick={setToValue(value + 1)}>increment</button>
-      // hightlight-end
+      // highlight-end
     </div>
   )
 }
