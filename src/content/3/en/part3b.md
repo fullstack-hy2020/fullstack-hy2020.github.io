@@ -190,7 +190,7 @@ The application needs a database. Before we introduce one, let's go through a fe
 
 ###  Streamlining deploying of the frontend 
 
-To create a new production build of the frontend without extra manual work, let's add a some npm-scripts to the <i>package.json</i> of the backend repository: 
+To create a new production build of the frontend without extra manual work, let's add some npm-scripts to the <i>package.json</i> of the backend repository: 
 
 ```json
 {
