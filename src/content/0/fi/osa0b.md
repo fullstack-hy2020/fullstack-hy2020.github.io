@@ -124,7 +124,7 @@ Kyseessä on sivun HTML-koodi, joka näyttää seuraavalta:
 
 ![](../../images/0/9e.png)
 
-Kun vertaamme, selaimen näyttämää sivua ja pyynnön palauttamaa HTML-koodia, huomaamme, että koodi ei sisällä ollenkaan muistiinpanoja sisältävää listaa.
+Kun vertaamme selaimen näyttämää sivua ja pyynnön palauttamaa HTML-koodia, huomaamme, että koodi ei sisällä ollenkaan muistiinpanoja sisältävää listaa.
 
 HTML-koodin [head](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head)-osio sisältää [script](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script)-tagin, jonka ansiosta selain lataa <i>main.js</i>-nimisen JavaScript-tiedoston palvelimelta.
 
