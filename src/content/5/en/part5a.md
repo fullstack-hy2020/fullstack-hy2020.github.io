@@ -14,7 +14,7 @@ In the last two parts we have mainly concentrated on the backend, and the fronte
 At the moment the frontend shows existing notes, and lets users change the state of a note from important to not important and vice versa. New notes cannot be added anymore because of the changes made to the backend in part 4: the backend now expects that a token verifying users identity is sent with the new note. 
 
 
-We'll now implement a part of the required user management functionality to the frontend. Lets begin with user login. Throughout this part we will assume that new users will not be added from the frontend. 
+We'll now implement a part of the required user management functionality to the frontend. Let's begin with user login. Throughout this part we will assume that new users will not be added from the frontend. 
 
 
 A login form has now been added to the top of the page. The form for adding new notes has also been moved to the top of the list of notes. 
@@ -106,7 +106,7 @@ The login form is handled the same way we handled forms in
 The method _handleLogin_, which is  responsible for sending the form, does not yet do anything. 
 
 
-Logging in is done by sending a HTTP POST -request to server address <i>api/login</i>. Lets separate the code responsible for this request to its own module, to file <i>services/login.js</i>.
+Logging in is done by sending a HTTP POST -request to server address <i>api/login</i>. Let's separate the code responsible for this request to its own module, to file <i>services/login.js</i>.
 
 
 We'll use <i>async/await</i> -syntax instead of promises for the HTTP-request: 
@@ -166,10 +166,10 @@ If the login is successfull, the form fields are emptied <i>and</i> the server r
 If the login fails, or running the function _loginService.login_ results in an error, the user is notified. 
 
 
-User is not notified about a successful login in any way. Lets modify the application to show the login form only <i>if the user is not logged in</i> so _user === null_. The form for adding new notes is shown only if <i>user is logged in</i>, so <i>user</i> contains the user details. 
+User is not notified about a successful login in any way. Let's modify the application to show the login form only <i>if the user is not logged in</i> so _user === null_. The form for adding new notes is shown only if <i>user is logged in</i>, so <i>user</i> contains the user details. 
 
 
-Lets add two helper functions to the <i>App</i> component for generating the forms: 
+Let's add two helper functions to the <i>App</i> component for generating the forms: 
 
 ```js
 const App = () => {
@@ -296,7 +296,7 @@ return (
 If _user === null_ is [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), _loginForm()_ is executed. If not, _noteForm()_.
 
 
-Lets do one more modification. If user is logged in, their name is shown on the screen: 
+Let's do one more modification. If user is logged in, their name is shown on the screen: 
 
 ```js
 return (
@@ -353,7 +353,7 @@ const handleLogin = async (event) => {
 }
 ```
 
-Lets fix creating new notes to work with the backend. This means adding the token of the logged in user to the Authorization-header of the HTTP-request. 
+Let's fix creating new notes to work with the backend. This means adding the token of the logged in user to the Authorization-header of the HTTP-request. 
 
 
 The <i>noteService</i>-module changes like so: 
@@ -453,7 +453,7 @@ and [removeItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/remove
 Values in the storage stay even when the page is rerendered. The storage is [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin)- specific, so each web-application has it's own storage. 
 
 
-Lets extend our application so that it saves the user details of a logged in user to the local storage. 
+Let's extend our application so that it saves the user details of a logged in user to the local storage. 
 
 
 Values saved to the storage are [DOMstrings](https://developer.mozilla.org/en-US/docs/Web/API/DOMString), so we cannot save a JavaScript object as is. The object has to be first parsed to JSON with the method _JSON.stringify_. Correspondigly when a JSON-object is read from the local storage, it has to be parsed back to JavaScript with _JSON.parse_.
@@ -496,7 +496,7 @@ We still have to modify our application so, that when we enter the page, the app
 The right place to do this is an [effect hook](https://reactjs.org/docs/hooks-effect.html):  A mechanism we first encountered in [part 2](/en/part2/getting_data_from_server#effect-hooks), and use to fetch notes from the server to the frontend. 
 
 
-We can have multiple effect hooks, so lets create a second one to handle the first loading of the page:
+We can have multiple effect hooks, so let's create a second one to handle the first loading of the page:
 
 ```js
 const App = () => {
