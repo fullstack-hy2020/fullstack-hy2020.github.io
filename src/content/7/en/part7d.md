@@ -20,7 +20,7 @@ It is beneficial to at least be familiar with Class Components to some extent, s
 
 
 
-Lets get to know the main features of Class Components by producing yet another very familiar anecdote application. We store the anecdotes in the file <i>db.json</i> using <i>json-server</i>. The contents of the file are lifted from [here](https://github.com/fullstackopen-2019/misc/blob/master/anecdotes.json).
+Let's get to know the main features of Class Components by producing yet another very familiar anecdote application. We store the anecdotes in the file <i>db.json</i> using <i>json-server</i>. The contents of the file are lifted from [here](https://github.com/fullstackopen-2019/misc/blob/master/anecdotes.json).
 
 
 
@@ -52,7 +52,7 @@ The component now has a [constructor](https://reactjs.org/docs/react-component.h
 
 
 
-Lets define a state for the list of anecdotes and the currently visible anecdote. In contrast to when using the [useState](https://reactjs.org/docs/hooks-state.html)-hook Class Components only contain one state. So if the state is made up of multiple "parts" they should be stored as properties of the state. The state is initialized in the constructor:
+Let's define a state for the list of anecdotes and the currently visible anecdote. In contrast to when using the [useState](https://reactjs.org/docs/hooks-state.html)-hook Class Components only contain one state. So if the state is made up of multiple "parts" they should be stored as properties of the state. The state is initialized in the constructor:
 
 ```js
 class App extends React.Component {
@@ -232,7 +232,7 @@ When writing fresh code [there is no rational reason to use Class Components](ht
 
 
 
-Lets return to testing for a bit. In previous parts we wrote unit tests, as well as integration tests, for the applications. Now we take a look at a way to create <i>End to End (E2E) -tests</i> which inspect the [entire system](https://en.wikipedia.org/wiki/System_testing).
+Let's return to testing for a bit. In previous parts we wrote unit tests, as well as integration tests, for the applications. Now we take a look at a way to create <i>End to End (E2E) -tests</i> which inspect the [entire system](https://en.wikipedia.org/wiki/System_testing).
 
 
 
@@ -252,7 +252,7 @@ In the year 2018 a software library called [Cypress](https://www.cypress.io/) ha
 
 
 
-Lets make a few tests for that notes application we made in parts 2-5.
+Let's make a few tests for that notes application we made in parts 2-5.
 
 
 
@@ -315,7 +315,7 @@ When the backend and frontend are running we can start Cypress using the command
 npm run cypress:open
 ```
 
-In the project there will appear a directory called <i>cypress</i>, in which there is a subdirectory <i>integrations</i> where the tests are to be placed. Cypress generates a set of example test. Lets remove them and create our first test into the file <i>note\_app\_spec.js</i>:
+In the project there will appear a directory called <i>cypress</i>, in which there is a subdirectory <i>integrations</i> where the tests are to be placed. Cypress generates a set of example test. Let's remove them and create our first test into the file <i>note\_app\_spec.js</i>:
 
 ```js
 describe('Note ', function() {
@@ -379,7 +379,7 @@ Cypress will detect the problem
 
 
 
-Lets expand the test such that the test tries to log into the application. We begin by opening the login form.
+Let's expand the test such that the test tries to log into the application. We begin by opening the login form.
 
 ```js
 describe('Note app',  function() {
@@ -681,7 +681,7 @@ describe('Note app', function() {
 
 Unlike before, now the testing always starts from an identical state: one user in the database and no notes.
 
-Lets add one more test which makes sure the importance of notes can be changed. First we modify the frontend of the application so that a new note is unimportant by default, in other words the field <i>important</i> gets the value <i>false</i>: 
+Let's add one more test which makes sure the importance of notes can be changed. First we modify the frontend of the application so that a new note is unimportant by default, in other words the field <i>important</i> gets the value <i>false</i>: 
 
 ```js
 const App = () => {
