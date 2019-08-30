@@ -123,7 +123,7 @@ Luckily, in React there exists a component [React router](https://github.com/Rea
 
 
 
-Lets change the above application to use React router. First we install React router with the command
+Let's change the above application to use React router. First we install React router with the command
 
 ```js
 npm install --save react-router-dom
@@ -228,7 +228,7 @@ we have to use the modifier <i>exact</i> in front of the <i>path</i> attribute o
 
 
 
-Lets examine the slightly modified version from the previous example. The code for the example can be found in full over [here](https://github.com/fullstackopen-2019/misc/blob/master/router-app.js).
+Let's examine the slightly modified version from the previous example. The code for the example can be found in full over [here](https://github.com/fullstackopen-2019/misc/blob/master/router-app.js).
 
 
 
@@ -518,7 +518,7 @@ We define an element common for modern web apps called <i>footer</i>, which defi
 
 
 
-Lets return to working with anecdotes. Use the redux-free anecdote app found in the repository <https://github.com/fullstackopen-2019/routed-anecdotes> as the starting point for the exercises.
+Let's return to working with anecdotes. Use the redux-free anecdote app found in the repository <https://github.com/fullstackopen-2019/routed-anecdotes> as the starting point for the exercises.
 
 
 
