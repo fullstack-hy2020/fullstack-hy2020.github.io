@@ -25,7 +25,7 @@ The principles of token based authentication are depicted in the following seque
 - When the user creates a new note (or does some other operation requiring identification), the React code sends the token to the server with the request.
 - The server uses the token to identify the user
 
-Lets first implement the functionality for logging in. Install the [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) library, which allows us to generate [JSON web tokens](https://jwt.io/).
+Let's first implement the functionality for logging in. Install the [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) library, which allows us to generate [JSON web tokens](https://jwt.io/).
 
 ```bash
 npm install jsonwebtoken --save
@@ -106,7 +106,7 @@ const loginRouter = require('./controllers/login')
 app.use('/api/login', loginRouter)
 ```
 
-Lets try logging in using VS Code REST-client: 
+Let's try logging in using VS Code REST-client: 
 
 ![](../../images/4/17e.png)
 
@@ -131,7 +131,7 @@ Wrong username or password returns an error message and the proper statuscode
 
 ### Limiting creating new notes to logged in users
 
-Lets change creating new notes so that it is only possible if the post request has a valid token attached. 
+Let's change creating new notes so that it is only possible if the post request has a valid token attached. 
 The note is then saved to the notes list of the user identified by the token. 
 
 There are several ways for sending the token from the browser to the server. We will use the [Authorization](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization) header. The header also tells which [authentication schema](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#Authentication_schemes) is used. This can be necessary if the server offers multiple ways to authenticate. 
@@ -236,7 +236,7 @@ JsonWebTokenError: invalid signature
     at notesRouter.post (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/controllers/notes.js:40:30)
 ```
 
-There are many possible reasons for a decoding error. The token can be faulty (like in our example), falsified, or expired. Lets extend our errorHandler middleware to take into account the different decoding errors. 
+There are many possible reasons for a decoding error. The token can be faulty (like in our example), falsified, or expired. Let's extend our errorHandler middleware to take into account the different decoding errors. 
 
 ```js
 const unknownEndpoint = (request, response) => {
