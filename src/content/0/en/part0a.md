@@ -48,7 +48,7 @@ The course can be taken as a shorter course worth 3 credits, or as the full cour
 
 The amount of credits and the grade are determined by the number of submitted exercises, so also the exercises without stars count towards your final grade. There is also a course exam, which must be passed. The exam does not count towards your grade. 
 
-If you want university credits, save your student ID number to the "my submissions" view in the [submission system](https://studies.cs.helsinki.fi/fullstackopen2019). To register for university credits that are provided by [Open university](https://courses.helsinki.fi/fi/aytkt21009/124726896), you must have a Finnish social security number. 
+If you want university credits, save your student ID number to the "my submissions" view in the [submission system](https://studies.cs.helsinki.fi/fullstackopen2019). To register for university credits that are provided by [Open university](https://courses.helsinki.fi/en/aytkt21009en/130942194), you must have a Finnish social security number. 
 
 You can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/fullstackopen2019) once you have completed enough exercises for a passing grade. For getting the course certificate, a Finnish social security number is not needed.
 
@@ -56,7 +56,7 @@ You can download the course certificate from the [submission system](https://stu
 
 For three credits, you must submit all compulsory exercises (without stars) for parts 0-3.
 
-For university credits, you also must pass the 3 credit course exam. The exam is done on Moodle. You can access Moodle through [the course page of the open university](https://courses.helsinki.fi/fi/aytkt21009/124726896). The last exam date is 10th January 2020. You can take the exam only after submitting all of the required exercises. <b>Note that you must sign up for the exam on 9th January 2020 at the latest.</b>
+For university credits, you also must pass the 3 credit course exam. The exam is done on Moodle. You can access Moodle through [the course page of the open university](https://courses.helsinki.fi/en/aytkt21009en/130942194). The last exam date is 10th January 2020. You can take the exam only after submitting all of the required exercises. <b>Note that you must sign up for the exam on 9th January 2020 at the latest.</b>
 
 Exam results can be found from the "my submissions" tab of the submission system no later than 4 weeks after taking the exam (exams might be marked slower during July).
 Remember to save your student number to the submission system.
@@ -83,7 +83,7 @@ Credits and grades are calculated as follows:
 | 83           |       5        | 2        |
 | 72           |       5        | 1        |
 
-For university credits the 5-7 credit course also requires passing the course exam. The exam is done on Moodle. You can access Moodle through [the course page of the open university](https://courses.helsinki.fi/fi/aytkt21009/124726896). The last possible date for taking the exam is 10th January 2020 <b>Note that you must sign up for the exam on 9th January 2020 at the latest.</b>
+For university credits the 5-7 credit course also requires passing the course exam. The exam is done on Moodle. You can access Moodle through [the course page of the open university](https://courses.helsinki.fi/en/aytkt21009en/130942194). The last possible date for taking the exam is 10th January 2020 <b>Note that you must sign up for the exam on 9th January 2020 at the latest.</b>
 
 You can take the exam only after submitting enough exercises for 5 credits. In practice it is not wise to take the course exam immediately after the critical amount of exercises has been submitted. The exam is the same for 5-7 credits. The exam does not count towards your grade.
 
@@ -142,7 +142,7 @@ The number of credits is based on hours of work done. One credit is approximatel
 
 It is possible to complete the project as a pair or a group.
 
-For more information, see [the open university page](https://courses.helsinki.fi/en/aytkt21010/129098202).
+For more information, see [the open university page](https://courses.helsinki.fi/en/aytkt21009en/130942194).
 
 ### Interview promise
 
