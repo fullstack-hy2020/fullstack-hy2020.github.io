@@ -47,8 +47,6 @@ The debugging view works the same way as it did with React applications. The <i>
 
 ![](../../images/3/38e.png)
 
-Note that currently there is a [bug](https://github.com/nodejs/node/issues/23693) in debugger that forces one to use the _debugger_ statement in the code to get breakpoints working.
-
 All of the application's console.log messages will appear in the <i>Console</i> tab of the debugger. You can also inspect values of variables and execute your own JavaScript code.
 
 ![](../../images/3/39e.png)
