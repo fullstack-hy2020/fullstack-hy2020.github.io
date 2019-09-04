@@ -605,4 +605,6 @@ the first parameter is the text to be rendered and the second parameter is the t
 
 Implement the use of this improved notification in your application.
 
+This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/fullstackopen2019).
+
 </div>
