@@ -352,10 +352,9 @@ const App = () => {
 
     const dataInStore = client.readQuery({ query: ALL_PERSONS })
     if (!includedIn(dataInStore.allPersons, addedPerson)) {
-      dataInStore.allPersons.push(addedPerson)
       client.writeQuery({
         query: ALL_PERSONS,
-        data: dataInStore
+        data: { allPersons : dataInStore.allPersons.concat(addedPerson) }
       })
     }   
   }
