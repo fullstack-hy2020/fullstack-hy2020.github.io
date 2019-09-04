@@ -503,7 +503,7 @@ const App = () => {
 This is all quite complicated and attempting to explain it may just make it harder to understand. The internet is full of material discussing the topic, such as [this](https://javascript.info/promise-chaining) one.
 
 
-The "Async and performance" book from the [You do not know JS](https://github.com/getify/You-Dont-Know-JS) book series explains the topic [well](https://github.com/getify/You-Dont-Know-JS/blob/master/async%20%26%20performance/ch3.md), but the explanation is many pages long.
+The "Async and performance" book from the [You do not know JS](https://github.com/getify/You-Dont-Know-JS/tree/1st-ed) book series explains the topic [well](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch3.md), but the explanation is many pages long.
 
 
 Promises are central to modern JavaScript development and it is highly recommended to invest a reasonable amount of time into understanding them.
