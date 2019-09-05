@@ -142,7 +142,7 @@ The number of credits is based on hours of work done. One credit is approximatel
 
 It is possible to complete the project as a pair or a group.
 
-For more information, see [the open university page](https://courses.helsinki.fi/en/aytkt21010en/130941690).
+For more information, see [the open university page](https://courses.helsinki.fi/fi/aytkt21009en/130942194).
 
 ### Interview promise
 
