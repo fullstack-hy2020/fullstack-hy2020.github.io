@@ -304,11 +304,11 @@ You can find the code for our current application in its entirety in the <i>part
 
 ### References to components with ref
 
-Our current implementation is quite good, is has one aspect that could be improved.
+Our current implementation is quite good, it has one aspect that could be improved.
 
 After a new note is created, it would make sense to hide the new note form. Currently the form stays visible. There is a slight problem with hiding the form. The visibility is controlled with the <i>visible</i> variable inside of the <i>Togglable</i> component. How can we access it outside of the component?
 
-There are many ways to implement closing the form from the parent component, but the but let's use the [ref](https://reactjs.org/docs/refs-and-the-dom.html) mechanism of React, which offers a reference to the component.
+There are many ways to implement closing the form from the parent component, but let's use the [ref](https://reactjs.org/docs/refs-and-the-dom.html) mechanism of React, which offers a reference to the component.
 
 Let's make the following changes to the <i>App</i> component:
 
@@ -406,7 +406,7 @@ const App = () => {
 
 To recap, the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) function is a React hook, that is used for defining functions in a component which can be invoked from outside of the component.
 
-This trick works for for changing the state of a component, but it looks a bit unpleasant. We could have accomplished the same functionality with slightly cleaner code using "old React" class-based components. We will take a look at these class components at the end of this part of the course material. So far this is the only situations where using React hooks leads to code that is not cleaner than with class components.
+This trick works for changing the state of a component, but it looks a bit unpleasant. We could have accomplished the same functionality with slightly cleaner code using "old React" class-based components. We will take a look at these class components at the end of this part of the course material. So far this is the only situation where using React hooks leads to code that is not cleaner than with class components.
 
 There are also [other use cases](https://reactjs.org/docs/refs-and-the-dom.html) for refs than accessing React components.
 
@@ -621,7 +621,7 @@ The console will display the following error message if the prop is left undefin
 
 The application still works and nothing forces us to define props despite the PropTypes definitions. Mind you, it is extremely unprofessional to leave <i>any</i> red output to the browser console.
 
-Let's also defined PropTypes to the <i>LoginForm</i> component:
+Let's also define PropTypes to the <i>LoginForm</i> component:
 
 ```js
 import PropTypes from 'prop-types'
@@ -730,7 +730,7 @@ node_modules
 build
 ```
 
-Now the deirectorys <em>build</em> and <em>node_modules</em> will be skipped when linting.
+Now the directories <em>build</em> and <em>node_modules</em> will be skipped when linting.
 
 Let us also create a npm script to run the lint:
 
