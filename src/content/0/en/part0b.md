@@ -8,26 +8,26 @@ lang: en
 <div class="content">
 
 Before we start programming, we will go through some principles of web development by examining an example application at <https://fullstack-exampleapp.herokuapp.com/>.
-Another (Finnish language) version of the application can be found at <https://fullstack-example.now.sh>. You are free to use either one. 
+A Finnish language version of the application can be found at <https://fullstack-example.now.sh>. You are free to use either one. 
 
-The applications are there only to demonstrate some basic concepts of the course, and are by no means examples of <i>how</i>  web applications should be made. 
-On the contrary, they demonstrate some old techniques of web development, which can even be seen as <i>bad practice</i> nowadays. 
+The applications exist only to demonstrate some basic concepts of the course, and are by no means examples of <i>how</i> web applications should be made. 
+On the contrary, they demonstrate some old techniques of web development, which can even be seen as <i>bad practice</i> nowadays.
 
 Coding in the recommended style begins in [part 1](/en/part1).
 
-Use the Chrome browser <i>now and all throughout the course</i>.
+Use the Chrome browser <i>now and for the rest of the course</i>.
 
 Open the [example application](https://fullstack-exampleapp.herokuapp.com/) on your browser. Sometimes this takes a while. 
 
-**The 1st rule of web development**: Always keep the developer console open on your browser. With mac, the console can be opened by pressing _F12_ or _alt_ _cmd_ and _i_ simultaneously. 
-With windows the console opens by pressing _F12_ or _ctrl_ _shift_ and _i_ simultaneously. 
+**The 1st rule of web development**: Always keep the developer console open on your browser. On macOS, open the console by pressing `F12` or `alt-cmd-i` simultaneously. 
+On Windows, open the console by pressing `F12` or `ctrl-shift-i` simultaneously. 
 
 Before continuing, find out how to open the developer console on your computer (google if necessary) and remember to <i>always</i> keep it open when developing web applications. 
 
-The console looks as follows: 
+The console looks like this: 
 ![](../../images/0/1e.png)
 
-Ensure that the <i>Network</i> tab is open, and activate <i>Disable cache</i> as shown. <i>Preserve log</i> can also be useful. It saves the logs printed by the application when the page is reloaded. 
+Make sure that the <i>Network</i> tab is open, and check the <i>Disable cache</i> option as shown. <i>Preserve log</i> can also be useful: it saves the logs printed by the application when the page is reloaded. 
 
 **NB:** The most important tab is the <i>Console</i>. However, in the introduction we will be using the <i>Network</i> tab quite a bit.
 
