@@ -36,7 +36,7 @@ The course contains nine parts, the first of which is numbered 0 for historical 
 Proceeding from part <i>n</i> to part <i>n+1</i> is not sensible before good enough know-how of the topics of part <i>n</i>  has been achieved. 
 In pedagogic terms, the course uses <i>mastery learning</i>, and the intent is for you to proceed to the next part only after doing enough of the exercices of the previous part. 
 
-You are expected to do <i>at least</i> all of the exercises that are not marked with a star. Exercises marked with a star count towards your final grade, but skipping them does not prevent you from doing the compulsory exercises in the next part. 
+You are expected to do <i>at least</i> all of the exercises that are not marked with a star(*). Exercises marked with a star count towards your final grade, but skipping them does not prevent you from doing the compulsory exercises in the next part. 
 
 The speed of completing the course is quite free, and the exercises can be submitted up until 23:59 10th January 2020. 
 
