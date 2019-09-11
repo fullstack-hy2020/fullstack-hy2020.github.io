@@ -13,7 +13,7 @@ So far, we have followed the state management conventions recommended by React. 
 ### Flux-architecture
 
 
-Facebook developed the [Flux](https://facebook.github.io/flux/docs/in-depth-overview.html#content)- architecture to make state management easier. In Flux, the state is separated completely from the React-components into its own <i>stores</i>.
+Facebook developed the [Flux](https://facebook.github.io/flux/docs/in-depth-overview/)- architecture to make state management easier. In Flux, the state is separated completely from the React-components into its own <i>stores</i>.
 State in the store is not changed directly, but with different <i>actions</i>.
 
 
