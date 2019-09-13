@@ -338,7 +338,7 @@ Kun puhelinluetteloon nyt lisätään henkilöitä, tapahtuupa se mistä tahansa
 
 ![](../../images/8/32e.png)
 
-Kun luetteloon lisätään uusi henkilö, palvelin lähettää siitä tiedot clientille ja attribuutin _onSubscriptionData_ arvokosi määriteltyä callback-funktiota kutsutaan antaen sille parametriksi palvelimelle lisätty henkilö. 
+Kun luetteloon lisätään uusi henkilö, palvelin lähettää siitä tiedot clientille ja attribuutin _onSubscriptionData_ arvoksi määriteltyä callback-funktiota kutsutaan antaen sille parametriksi palvelimelle lisätty henkilö. 
 
 Laajennetaan ratkaisua vielä siten, että uuden henkilön tietojen saapuessa henkilö lisätään Apollon välimuistiin, jolloin se renderöityy heti ruudulle. Koodissa on jouduttu huomioimaan se, että sovelluksen itsensä lisäämää henkilöä ei saa lisätä välimuistiin kahteen kertaan:
 
