@@ -962,7 +962,7 @@ value => {
 Which simply dispatches the action created with the <i>createNote</i> action creator.
 
 
-The component then references the function through its props by calling <i>props.createTodo</i>:
+The component then references the function through its props by calling <i>props.createNote</i>:
 
 ```js
 const NewNote = (props) => {
