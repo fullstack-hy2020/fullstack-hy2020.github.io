@@ -48,7 +48,7 @@ Määrittelyssämme on kuitenkin pieni ongelma: se ei toimi Windowsilla. Tilanne
 npm install --save-dev cross-env
 ```
 
-ja muuttamalla <i>package.js</i> kaikilla käyttöjärjestelmillä toimivaan muotoon
+ja muuttamalla <i>package.json</i> kaikilla käyttöjärjestelmillä toimivaan muotoon
 
 ```json
 {
