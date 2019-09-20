@@ -614,7 +614,7 @@ describe('average', () => {
 ```
 
 
-The test reveals that the function does not work correctly with an empty array (this is because in JavaScript diving by zero results in <i>NaN</i>):
+The test reveals that the function does not work correctly with an empty array (this is because in JavaScript dividing by zero results in <i>NaN</i>):
 
 ![](../../images/4/3.png)
 
