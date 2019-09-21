@@ -175,7 +175,7 @@ E.g. if <i>note.id</i> is 3, the event handler function returned by _toggleImpor
 () => { console.log('importance of 3 needs to be toggled') }
 ```
 
-A short reminder here. The string printed by the event handler is defined in Java-like manner by plussing strings:
+A short reminder here. The string printed by the event handler is defined in Java-like manner by adding the strings:
 
 ```js
 console.log('importance of ' + id + ' needs to be toggled')
