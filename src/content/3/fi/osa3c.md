@@ -914,11 +914,11 @@ Muuta backendiä siten, että numerotietojen poistaminen päivittyy tietokantaan
 
 Varmista, että frontend toimii muutosten jälkeen.
 
-#### 3.16: puhelinluettelo ja tietokanta, step3
+#### 3.16: puhelinluettelo ja tietokanta, step4
 
 Keskitä sovelluksen virheidenkäsittely middlewareen.
 
-#### 3.17*: puhelinluettelo ja tietokanta, step4
+#### 3.17*: puhelinluettelo ja tietokanta, step5
 
 Jos frontendissä annetaan numero henkilölle, joka on jo olemassa, päivittää frontend tehtävässä 2.18 tehdyn toteutuksen ansiosta tiedot uudella numerolla tekemällä HTTP PUT -pyynnön henkilön tietoja vastaavaan url:iin.
 
@@ -926,7 +926,7 @@ Laajenna backendisi käsittelemään tämä tilanne.
 
 Varmista, että frontend toimii muutosten jälkeen.
 
-#### 3.18*: puhelinluettelo ja tietokanta, step5
+#### 3.18*: puhelinluettelo ja tietokanta, step6
 
 Päivitä myös polkujen <i>api/persons/:id</i> ja <i>info</i> käsittely, ja varmista niiden toimivuus suoraan selaimella, postmanilla tai VS Coden REST clientillä.
 
