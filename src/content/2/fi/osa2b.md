@@ -470,7 +470,7 @@ Sama toki hoituisi javamaisesti merkkijonojen plus-metodilla
 newName + ' is already added to phonebook'
 ```
 
-Template stringin käyttö antaa kuitenkin professionaalimman vaikutelman.
+Template stringin käyttö antaa kuitenkin ammattimaisemman vaikutelman.
 
 <h4>2.8: puhelinluettelo step3</h4>
 
