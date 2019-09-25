@@ -8,7 +8,7 @@ lang: en
 <div class="content">
 
 
-REST, familiar to us from the previous parts of the course, has long been the most prevalent way to implement the interfaces servers offer for browsers, and in general the integration between different applications in the web. 
+REST, familiar to us from the previous parts of the course, has long been the most prevalent way to implement the interfaces servers offer for browsers, and in general the integration between different applications on the web. 
 
 
 In the recent years [GraphQL](http://graphql.org/), developed by Facebook, has become popular for communication between web applications and servers. 
@@ -17,22 +17,22 @@ In the recent years [GraphQL](http://graphql.org/), developed by Facebook, has b
 The GraphQL philosophy is very different from REST. REST is <i>resource based</i>. Every resource, for example a <i>user</i> has its own address which identifies it, for example <i>/users/10</i>. All operations done to the resource are done with HTTP requests to its URL. The action depends on the used HTTP-method. 
 
 
-The resource basedness of REST works well in most situations. However, it can be bit awkward sometimes. 
+The resource basedness of REST works well in most situations. However, it can be a bit awkward sometimes. 
 
 
 Let's assume our bloglist application contains social media like functionality, and we would i.e want to show a list of all the blogs the users who have commented on the blogs we follow have added. 
 
 
-If the server implemented a REST API, we would propably have to do multiple HTTP-requests from the browser before we had all the data we wanted. The requests would also return a lot of unnecessary data, and the code on the browser would propably be quite complicated. 
+If the server implemented a REST API, we would probably have to do multiple HTTP-requests from the browser before we had all the data we wanted. The requests would also return a lot of unnecessary data, and the code on the browser would probably be quite complicated. 
 
 
-If this was an often used functionality, there could be a REST-endpoint for it. If there were a lot of these kind of scenarios however, it would become very laborious to implement REST-endpoints for all of them. 
+If this was an often used functionality, there could be a REST-endpoint for it. If there were a lot of these kinds of scenarios however, it would become very laborious to implement REST-endpoints for all of them. 
 
 
 A GraphQL server is well suited for these kinds of situations. 
 
 
-The main princible of GraphQl is, that the code on the browser forms a <i>query</i> describing the data wanted, and sends it to the API with a HTTP POST request. Unlike REST, all GraphQl queries are sent to the same address, and their type is POST. 
+The main principle of GraphQL is, that the code on the browser forms a <i>query</i> describing the data wanted, and sends it to the API with an HTTP POST request. Unlike REST, all GraphQL queries are sent to the same address, and their type is POST. 
 
 
 The data described in the above scenario could be fetched with ( roughly ) the following query: 
@@ -271,7 +271,7 @@ The difference to REST queries is stark. With REST, the URL and the type of the 
 GraphQL query describes only the data moving between a server and the client. On the server the data can be organized and saved any way we like. 
 
 
-Despite of its name, GraphQL does not actually have anything to do with databases. It does not care how the data is saved. 
+Despite its name, GraphQL does not actually have anything to do with databases. It does not care how the data is saved. 
 The data a GraphQL API uses can be saved into a relational database, document database, or to other servers which GraphQL-server can access with for example REST. 
 
 ### Apollo server
@@ -414,7 +414,7 @@ Has the resolver
 So the response to the query is the length of the array _persons_.
 
 
-The query which fethches all persons
+The query which fetches all persons
 
 ```js
 query {
@@ -602,7 +602,7 @@ query {
 ```
 
 
-and the response now is an person object, which <i>contains</i> an address object. 
+and the response now is a person object, which <i>contains</i> an address object. 
 
 ```js
 {
@@ -691,7 +691,7 @@ type Mutation {
 ```
 
 
-The Mutation is given the details of the person as parameters. The parameter <i>phone</i> is the only one which is not non-null. The Mutation also has a return value. The return value is type <i>Person</i>, the idea being that the details of the added person are returned is the operation is successfull and if not, null. Value for the field <i>id</i> is not given as a parameter. Generating an id is better left for the server. 
+The Mutation is given the details of the person as parameters. The parameter <i>phone</i> is the only one which is not non-null. The Mutation also has a return value. The return value is type <i>Person</i>, the idea being that the details of the added person are returned is the operation is successful and if not, null. Value for the field <i>id</i> is not given as a parameter. Generating an id is better left for the server. 
 
 
 Mutations also require a resolver: 
@@ -717,7 +717,7 @@ const resolvers = {
 The mutation adds the object given to it as a parameter _args_ to the array _persons_, and returns the object it added to the array. 
 
 
-The <i>id</i> field is given an unique value using the [uuid](https://github.com/kelektiv/node-uuid#readme) library. 
+The <i>id</i> field is given a unique value using the [uuid](https://github.com/kelektiv/node-uuid#readme) library. 
 
 
 A new person can be added with the following mutation
@@ -779,7 +779,7 @@ So the resolver of the <i>address</i> field of the <i>Person</i> type formats th
 ### Error handling
 
 
-If we try to create a new person, but the parameters do not correspond with the schema description, the server gives a error message: 
+If we try to create a new person, but the parameters do not correspond with the schema description, the server gives an error message: 
 
 ![](../../images/8/5.png)
 
@@ -944,7 +944,7 @@ The current code of the application can be found from [github](https://github.co
 ### More on queries
 
 
-With GraphQl it is possible to combine multiple fields of type <i>Query</i>, or "separate queries" into one query. For example the following query returns both the amount of persons in the phonebook and their names: 
+With GraphQL it is possible to combine multiple fields of type <i>Query</i>, or "separate queries" into one query. For example the following query returns both the amount of persons in the phonebook and their names: 
 
 ```js
 query {
@@ -1323,3 +1323,5 @@ If the author is not in the system, <i>null</i> is returned:
 ```
 
 </div>
+
+
