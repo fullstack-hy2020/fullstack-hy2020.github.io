@@ -6,6 +6,6 @@ lang: en
 
 <div class="intro">
 
-The seventh part of the course touches on several different themes. First we'll get familiar with React router, with the help of which we can divide the application into different views that are shown based on the URL in the address bar of the browser. After this we look at a few more ways to add CSS-styles to React-applications. So far, during the entire course we've used create-react-app to generate the body of our applications. Now we will look under the hood and learn how Webpack works and how we can use it to configure the application ourselves.
+The seventh part of the course touches on several different themes. First, we'll get familiar with React router. React router helps us divide the application into different views that are shown based on the URL in the browser's address bar. After this, we'll look at a few more ways to add CSS-styles to React applications. During the entire course we've used create-react-app to generate the body of our applications. This time we'll take a look under the hood: we'll learn how Webpack works and how we can use it to configure the application ourselves.
 
 </div>
