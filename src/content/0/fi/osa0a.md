@@ -45,7 +45,7 @@ Jos haluat kurssilta virallisen suoritusmerkinnän, tallenna <b>Helsingin yliopi
 
 Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suositukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja [ilmoittanut palautussovelluksessa](/osa0/yleista#suoritusmerkinnan-pyytaminen) olevasi valmis kurssin suorituksen kanssa.
 
-Suoritusmerkintä ja kokeen tekeminen edellyttävät että olet ilmoittautunut kurssille Avoimeen yliopistoon. Ilmoittautuminen tapahtuu kurssin [avoimen yliopiston kurssisivun](https://courses.helsinki.fi/fi/aytkt21009/124726896) kautta. Läydät sivulta tarkemmat ohjeet ilmoittautumiseen, Moodlen kurssiavaimen ja lisätietoja opintosuorituksen rekisteröinnistä. 
+Suoritusmerkintä ja kokeen tekeminen edellyttävät että olet ilmoittautunut kurssille Avoimeen yliopistoon. Ilmoittautuminen tapahtuu kurssin [avoimen yliopiston kurssisivun](https://courses.helsinki.fi/fi/aytkt21009/124726896) kautta. Löydät sivulta tarkemmat ohjeet ilmoittautumiseen, Moodlen kurssiavaimen ja lisätietoja opintosuorituksen rekisteröinnistä. 
 
 #### Kolmen opintopisteen suoritus
 
