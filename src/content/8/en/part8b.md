@@ -26,7 +26,7 @@ At the moment there are two good options: [Relay](https://facebook.github.io/rel
 
 ### Apollo client
 
-Create a new React-app and install the dependencies required by [Apollo client](https://www.apollographql.com/docs/react/essentials/get-started.html#installation).
+Create a new React-app and install the dependencies required by [Apollo client](https://www.apollographql.com/docs/react/get-started/#installation).
 
 ```js
 npm install apollo-boost react-apollo graphql --save
@@ -74,7 +74,7 @@ ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
 
-The beginning of the code creates a new [client](https://www.apollographql.com/docs/react/essentials/get-started.html#creating-client) - object, which is then used to send a query to the server: 
+The beginning of the code creates a new [client](https://www.apollographql.com/docs/react/get-started/#create-a-client) - object, which is then used to send a query to the server: 
 
 ```js
 client.query({ query })
@@ -89,7 +89,7 @@ The servers response is printed to the console:
 
 
 The application can communicate with a GraphQL server using the _client_ object. 
-The client can be made accessible for all components of the application by wrapping the <i>App</i> component with [ApolloProvider](https://www.apollographql.com/docs/react/essentials/get-started.html#creating-provider).
+The client can be made accessible for all components of the application by wrapping the <i>App</i> component with [ApolloProvider](https://www.apollographql.com/docs/react/get-started/#connect-your-client-to-react).
 
 ```js
 import React from 'react'
@@ -119,7 +119,7 @@ We are ready to implement the main view of the application, which shows a list o
 
 
 
-Apollo Client offers few alternative ways for making queries. At the moment (this part was translated 22.6.2019) the predominant way is to use a [Query](https://www.apollographql.com/docs/react/essentials/queries.html) component. 
+Apollo Client offers few alternative ways for making queries. At the moment (this part was translated 22.6.2019) the predominant way is to use a [Query](https://www.apollographql.com/docs/react/v2.5/essentials/queries/) component. 
 
 
 The code for the component <i>App</i>, which makes the query, is as follows: 
@@ -162,7 +162,7 @@ The code does seem a bit confusing.
 The core of the code is the component <i>Query</i>. The query to be made is in the variable <em>ALL\_PERSONS</em>. The query is given to the Query component as a parameter. Within the tags of the <i>Query</i> component is a function, which returns the actual JSX to be rendered. A parameter of the function, <i>results</i>, contains the result of the GraphQL query. 
 
 
-The result, the object in parameter _results_, has multiple [fields](https://www.apollographql.com/docs/react/essentials/queries.html#render-prop).
+The result, the object in parameter _results_, has multiple [fields](https://www.apollographql.com/docs/react/v2.5/essentials/queries/#render-prop-function).
 The field <i>loading</i> has the value true, if there is no response to the query yet. In this case the code to be rendered is
 
 ```js
@@ -271,7 +271,7 @@ The component we just used,<i>Query</i>, is not optimal for our purposes, becaus
 
 
 One way would be to use the <i>query</i> method of the <i>client</i> object. 
-All components of the application can access the query object via the [ApolloConsumer](https://www.apollographql.com/docs/react/essentials/queries.html#manual-query) component. 
+All components of the application can access the query object via the [ApolloConsumer](https://www.apollographql.com/docs/react/v2.5/essentials/queries/#manually-firing-a-query) component. 
 
 
 Let's modify the <i>App</i> component to fetch a reference to the _query_ object via <i>ApolloConsumer</i>, and pass it on to the <i>Persons</i> component. 
@@ -398,7 +398,7 @@ When we do multiple queries for example the address details of Arto Hellas, we n
 ![](../../images/8/12.png)
 
 
-Apollo client saves the responses of queries to [cache](https://www.apollographql.com/docs/react/advanced/caching.html). To optimize performance if the response to a query is already in the cache, the query is not sent to the server at all. 
+Apollo client saves the responses of queries to [cache](https://www.apollographql.com/docs/react/v2.5/advanced/caching/). To optimize performance if the response to a query is already in the cache, the query is not sent to the server at all. 
 
 
 It is possible to install [Apollo Client devtools](https://chrome.google.com/webstore/detail/apollo-client-developer-t/jdkknkkbebbapilgoeccciglkfbmbnfm/related) to Chrome to view the state of the cache. 
@@ -412,7 +412,7 @@ Because of this, doing <i>findPerson</i> queries for the address details of Arto
 ### Mutation-component
 
 
-Let's implement functionality for adding new persons. The [mutation](https://www.apollographql.com/docs/react/essentials/mutations.html#basic) component offers suitable tools for this. In the previous chapter we hardcoded the parameters for mutations. Now we need a version of the addPerson mutation which uses  [variables](https://graphql.org/learn/queries/#variables).
+Let's implement functionality for adding new persons. The [mutation](https://www.apollographql.com/docs/react/v2.5/essentials/mutations/#the-mutation-component) component offers suitable tools for this. In the previous chapter we hardcoded the parameters for mutations. Now we need a version of the addPerson mutation which uses [variables](https://graphql.org/learn/queries/#variables).
 
 ```js
 const CREATE_PERSON = gql`
@@ -531,7 +531,7 @@ We could update the screen by reloading the page, as the cache is emptied when t
 
 ### Updating the cache
 
-There are few different solutions for this. One way is to make the query for all persons [poll](https://www.apollographql.com/docs/react/essentials/queries.html#refetching) the server, or make the query repeatedly. 
+There are few different solutions for this. One way is to make the query for all persons [poll](https://www.apollographql.com/docs/react/v2.5/essentials/queries/#polling-and-refetching) the server, or make the query repeatedly. 
 
 
 The change is small. Let's set the query to poll every two seconds: 
@@ -568,7 +568,7 @@ The solution is simple, and every time a user adds a new person, it appears imme
 
 The bad side of the solution is all the pointless web traffic. 
 
-Another easy way to synchronize the cache is to declare, that the <i>ALL_PERSONS</i> query should be done again when a new person is added. This can be done with the [refetchQueries](https://www.apollographql.com/docs/react/essentials/mutations.html#props) props of the <i>Mutation</i> component:
+Another easy way to synchronize the cache is to declare, that the <i>ALL_PERSONS</i> query should be done again when a new person is added. This can be done with the [refetchQueries](https://www.apollographql.com/docs/react/v2.5/essentials/mutations/#props) props of the <i>Mutation</i> component:
 
 ```js
 const App = () => {
@@ -620,7 +620,7 @@ If we try to create an invalid person, it results in an error.
 ![](../../images/8/14e.png)
 
 
-The error should be handled. One way to do this is to register an errorhandler to the mutation using the [onError](https://www.apollographql.com/docs/react/essentials/mutations.html#props) props. 
+The error should be handled. One way to do this is to register an errorhandler to the mutation using the [onError](https://www.apollographql.com/docs/react/v2.5/essentials/mutations/#props) props. 
 
 ```js
 const App = () => {
@@ -797,7 +797,7 @@ In our example, management of the applications state has mostly become the respo
 Our example uses the state of the React components only to manage the state of a form and to show error notifications. When using GraphQL it can be, that there are no more justifiable reasons to move the management of the applications state to Redux at all. 
 
 
-When necessary Apollo enables saving the applications local state to [Apollo cache](https://www.apollographql.com/docs/react/essentials/local-state.html).
+When necessary Apollo enables saving the applications local state to [Apollo cache](https://www.apollographql.com/docs/react/v2.5/essentials/local-state/).
 
 ### Render props
 
