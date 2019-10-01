@@ -27,7 +27,7 @@ In certain circles it has also been popular to attempt "simulating" Java feature
 
 ### Variables
 
-In Javascript there are a few way to go about defining variables:
+In Javascript there are a few ways to go about defining variables:
 
 ```js
 const x = 1
