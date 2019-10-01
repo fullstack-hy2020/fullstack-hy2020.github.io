@@ -54,10 +54,8 @@ The first test verifies that the component renders the contents of the note:
 ```js
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
-import { render, cleanup } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import Note from './Note'
-
-afterEach(cleanup)
 
 test('renders content', () => {
   const note = {
@@ -226,7 +224,7 @@ It is also possible to search for a smaller part of the component and print its 
 ```js
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
-import { render, cleanup } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { prettyDOM } from '@testing-library/dom'  // highlight-line
 import Note from './Note'
 
@@ -263,28 +261,23 @@ console.log src/components/Note.test.js:21
 ### setup
 
 
-The manual for the react-testing-library recommends to call the [cleanup](https://testing-library.com/docs/react-testing-library/api#cleanup) method after every test. We can accomplish with the [afterEach](https://jestjs.io/docs/en/setup-teardown) function, that calls the method:
+We'll use a small utility library for jest that helps making tests more readable: [`jest-dom`](https://testing-library.com/docs/ecosystem-jest-dom) adds new ["matchers"](https://jestjs.io/docs/en/using-matchers) for DOM specific assertions such as `toBeVisible` or `toHaveFocus`.
 
 ```js 
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect' // highlight-line
-import { render, cleanup } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { prettyDOM } from '@testing-library/dom' 
 import Note from './Note'
-
-afterEach(cleanup)  // highlight-line
 ```
 
 
-We could repeat the same cleanup in all of our test files. A better option is to [configure](https://testing-library.com/docs/react-testing-library/setup) the cleanup to be done automatically. Let's create a new <i>src/setupTests.js</i> file for this configuration with the following contents:
+We could repeat the same import in all of our test files. To prevent repetition and potentially forgetting the import we can use the import once in a single file. Let's create a new <i>src/setupTests.js</i> file for this configuration with the following contents:
 
 ```js
 import '@testing-library/jest-dom/extend-expect'
-import '@testing-library/react/cleanup-after-each'
 ```
 
-
-Now we can get rid of both of the highlighted rows of the test code.
 
 
 **NB** if the configuration defined in the <i>src/setupTests.js</i> file is not used when the tests are run, it may help to add the following configuration to the <i>package.json</i> file:
