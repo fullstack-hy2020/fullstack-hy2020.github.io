@@ -415,7 +415,7 @@ part2
 
 For each part of the course there is a directory, which further branches into directories containing a series of exercises, like "unicafe" for part 1.
 
-For each web application for a series of exercises, it is recommended to submit all files relating to that application, except for the directory <i>node\_modules</i>).
+For each web application for a series of exercises, it is recommended to submit all files relating to that application, except for the directory <i>node\_modules</i>.
 
 The exercises are submitted **one part at a time**. When you have submitted the exercises for a part of the course you can no longer submit undone exercises for the same part.
 
