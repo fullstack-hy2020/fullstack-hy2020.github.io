@@ -21,7 +21,7 @@ The code is written into files ending with <i>.js</i> and are run by issuing the
 
 It is also possible to write Javascript code into the Node.js console, which is opened by typing _node_ in the command-line, as well as into the browser's developer tool console. The newest revisions of Chrome handle the newer features of Javascript [pretty well](http://kangax.github.io/compat-table/es2016plus/) without transpiling the code.
 
-Javascript is sort of reminiscent, both in name and syntax, to Java. But when it comes to core mechanism of the language they could not be more different. Coming from a Java background, the behavior of Javascript can seem a bit alien, especially if one does not make the effort to look up its features.
+Javascript is sort of reminiscent, both in name and syntax, to Java. But when it comes to the core mechanism of the language they could not be more different. Coming from a Java background, the behavior of Javascript can seem a bit alien, especially if one does not make the effort to look up its features.
 
 In certain circles it has also been popular to attempt "simulating" Java features and design patterns in Javascript. We do not recommend doing this.
 
