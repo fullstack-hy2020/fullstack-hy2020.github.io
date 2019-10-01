@@ -159,7 +159,7 @@ export default App
 
 
 The code does seem a bit confusing. 
-The core of the code is the component <i>Query</i>. The query to be made is in the variable <em>ALL\_PERSONS</em>. The query is given to the Query component as a parameter. Within the tags of the <i>Query</i> component is a function, which returns the actual JSX to be rendered. A parameter of the function, <i>results</i>, contains the result of the QraphQL query. 
+The core of the code is the component <i>Query</i>. The query to be made is in the variable <em>ALL\_PERSONS</em>. The query is given to the Query component as a parameter. Within the tags of the <i>Query</i> component is a function, which returns the actual JSX to be rendered. A parameter of the function, <i>results</i>, contains the result of the GraphQL query. 
 
 
 The result, the object in parameter _results_, has multiple [fields](https://www.apollographql.com/docs/react/essentials/queries.html#render-prop).
@@ -181,7 +181,7 @@ When the result is ready, response to the query <i>allPersons</i> is taken from 
 ```
 
 
-To clean the solution up a bit, let's separate rendering the list of persons into its own component <i>Persons</i>. The coponent <i>App</i> becomes:
+To clean the solution up a bit, let's separate rendering the list of persons into its own component <i>Persons</i>. The component <i>App</i> becomes:
 
 ```js
 const App = () => {
@@ -620,7 +620,7 @@ If we try to create an invalid person, it results in an error.
 ![](../../images/8/14e.png)
 
 
-The error should be handled. One way to do this is to reqister a errorhandler to the mutation using the [onError](https://www.apollographql.com/docs/react/essentials/mutations.html#props) props. 
+The error should be handled. One way to do this is to register an errorhandler to the mutation using the [onError](https://www.apollographql.com/docs/react/essentials/mutations.html#props) props. 
 
 ```js
 const App = () => {
@@ -666,16 +666,16 @@ const App = () => {
 ```
 
 
-Now the user is informed about an error with a simple norification. 
+Now the user is informed about an error with a simple notification. 
 
 ![](../../images/8/15.png)
 
 
 The current code of the application can be found from [github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-3) branch <i>part8-3</i>.
 
-### Updating a phonenumber
+### Updating a phone number
 
-Let's add the possibility to change the phonenumbers of persons to our application. The solutions is almost identical to the one we used for adding new persons. 
+Let's add the possibility to change the phone numbers of persons to our application. The solutions is almost identical to the one we used for adding new persons. 
 
 Again, the mutation requires parameters.
 
@@ -783,7 +783,7 @@ This is due to two factors. First, because persons have identifying field type <
 This is true only for the objects originally returned by the query, not for completely new objects added to the cache, which would be returned from a query done again. 
 
 
-If we try to change the phonenumber of a nonexisting name, nothing seems to happen. The reason for this is, that if a person corresponding to the name cannot be found, the response to the query is <i>null</i>:
+If we try to change the phone number of a nonexisting name, nothing seems to happen. The reason for this is, that if a person corresponding to the name cannot be found, the response to the query is <i>null</i>:
 
 ![](../../images/8/23.png)
 
@@ -797,12 +797,12 @@ In our example, management of the applications state has mostly become the respo
 Our example uses the state of the React components only to manage the state of a form and to show error notifications. When using GraphQL it can be, that there are no more justifiable reasons to move the management of the applications state to Redux at all. 
 
 
-When necessary Apollo enables saving the applictions local state to [Apollo cache](https://www.apollographql.com/docs/react/essentials/local-state.html).
+When necessary Apollo enables saving the applications local state to [Apollo cache](https://www.apollographql.com/docs/react/essentials/local-state.html).
 
 ### Render props
 
 
-GraphQLs components <i>Query</i>, <i>Mutation</i> and <i>ApolloConsumer</i> follow the so called [render props](https://reactjs.org/docs/render-props.html) principle. A component following this principle is given, as props or as a child between its tags (which technically is also a props), a <i>function</i> which defines how the component is rendered. With the render props -principle it is possible to move data or functionreferences to the component responsible for rendering. 
+GraphQLs components <i>Query</i>, <i>Mutation</i> and <i>ApolloConsumer</i> follow the so called [render props](https://reactjs.org/docs/render-props.html) principle. A component following this principle is given, as props or as a child between its tags (which technically is also a props), a <i>function</i> which defines how the component is rendered. With the render props -principle it is possible to move data or function references to the component responsible for rendering. 
 
 
 The Render props -principle has been quite popular. For example [react router](/en/part7/react_router) we used in part 7 uses it.  Using the component <i>Route</i> of the React router it is defined what the application renders when the browser is in a certain url. 
@@ -854,7 +854,7 @@ There is already [a beta release](https://www.npmjs.com/package/react-apollo/v/3
 npm install --save react-apollo@3.0.0-beta.2
 ```
 
-There is currently (22.6.2019) no documentation how to use Apollo hooks, [this blog](https://moonhighway.com/apollo-hooks) is one of the rare examples fonud by google.
+There is currently (22.6.2019) no documentation how to use Apollo hooks, [this blog](https://moonhighway.com/apollo-hooks) is one of the rare examples found by Google.
 
 A small change is needed to _index.js_ after the new version is installed:
 
@@ -878,7 +878,7 @@ ReactDOM.render(
 )
 ```
 
-Let's change the <i>Persons</i> component so, that is uses the _useApolloClient_-hook.
+Let's change the <i>Persons</i> component so that it uses the _useApolloClient_-hook.
 
 ```js
 import React,  { useState } from 'react'
@@ -1020,7 +1020,7 @@ You can implement your application either using the render prop -components <i>Q
 
 #### 8.8: Authors view
 
-Implement a Authors view, so show the details of all authors on a page i.e as follows: 
+Implement an Authors view, so show the details of all authors on a page i.e as follows: 
 
 ![](../../images/8/16.png)
 
@@ -1034,27 +1034,27 @@ Implement a Books view, so show on a page all other details of all books except 
 #### 8.10: Adding a book
 
 
-Implmement a possibility to add new books to your application. The functionality can look like this: 
+Implement a possibility to add new books to your application. The functionality can look like this: 
 
 ![](../../images/8/18.png)
 
 
-Make sure, that the Authors and Books views are kept up to date after a new book is added. 
+Make sure that the Authors and Books views are kept up to date after a new book is added. 
 
-#### 8.11: Authors birthyear
+#### 8.11: Authors birth year
 
 
-Implement a possibility to set authors birthyear. You can create a new view for setting the birth year, or place it on the Authors view: 
+Implement a possibility to set authors birth year. You can create a new view for setting the birth year, or place it on the Authors view: 
 
 ![](../../images/8/20.png)
 
 
-make sure, that the Authors view is kept up to date after setting a birth year. 
+Make sure that the Authors view is kept up to date after setting a birth year. 
 
-#### 8.12: Authors birthyear advanced
+#### 8.12: Authors birth year advanced
 
 
-Change the birthyear form so, that a birthyear can be set only for an existing author. Use [select-tag](https://reactjs.org/docs/forms.html#the-select-tag), [react-select](https://github.com/JedWatson/react-select) library or some other mechanism. 
+Change the birth year form so that a birth year can be set only for an existing author. Use [select-tag](https://reactjs.org/docs/forms.html#the-select-tag), [react-select](https://github.com/JedWatson/react-select) library or some other mechanism. 
 
 
 A solution using the react-select -library looks as follows: 
@@ -1062,3 +1062,4 @@ A solution using the react-select -library looks as follows:
 ![](../../images/8/21.png)
 
 </div>
+
