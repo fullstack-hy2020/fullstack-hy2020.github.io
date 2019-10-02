@@ -313,35 +313,6 @@ käyttötarkoitus on näkymäelementtien muodostaminen, tulee muuttujan arvo ren
 
 Aaltosulkeiden käyttö tulee varmaan aiheuttamaan alussa pientä päänvaivaa, mutta totut niihin pian. Reactin antama visuaalinen feedback on välitön.
 
-Tarkastellaan vielä erästä bugien lähdettä. Lisää koodiin seuraava
-
-```js
-const result = notes.map(note => {note.content} )
-console.log(result)
-```
-
-Tulostuu
-
-```js
-[undefined, undefined, undefined]
-```
-
-Missä on vika? Koodihan on ihan sama kun äsken toiminut koodi. Paitsi ei ihan. Metodin _map_ parametrina on nyt seuraava funktio
-
-```js
-note => {
-  note.content
-}
-```
-
-Koska funktio koostuu nyt <i>koodilohkosta</i> on funktion paluuarvo määrittelemätön eli _undefined_. Nuolifunktiot siis palauttavat ainoan komentonsa arvon, ainoastaan jos nuolifunktio on määritelty kompaktissa muodossaan, ilman koodilohkoa:
-
-```js
-note => note.content
-```
-
-huomaa, että 'oneliner'-nuolifunktioissa kaikkea ei tarvitse eikä aina kannatakaan kirjoittaa samalle riville.
-
 Parempi muotoilu ohjelmamme muistiinpanorivit tuottavalle apufunktiolle saattaakin olla seuraava useille riveille jaoteltu versio:
 
 ```js
