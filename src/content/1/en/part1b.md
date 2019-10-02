@@ -21,13 +21,13 @@ The code is written into files ending with <i>.js</i> and are run by issuing the
 
 It is also possible to write Javascript code into the Node.js console, which is opened by typing _node_ in the command-line, as well as into the browser's developer tool console. The newest revisions of Chrome handle the newer features of Javascript [pretty well](http://kangax.github.io/compat-table/es2016plus/) without transpiling the code.
 
-Javascript is sort of reminiscent, both in name and syntax, to Java. But when it comes to core mechanism of the language they could not be more different. Coming from a Java background, the behavior of Javascript can seem a bit alien, especially if one does not make the effort to look up its features.
+Javascript is sort of reminiscent, both in name and syntax, to Java. But when it comes to the core mechanism of the language they could not be more different. Coming from a Java background, the behavior of Javascript can seem a bit alien, especially if one does not make the effort to look up its features.
 
 In certain circles it has also been popular to attempt "simulating" Java features and design patterns in Javascript. We do not recommend doing this.
 
 ### Variables
 
-In Javascript there are a few way to go about defining variables:
+In Javascript there are a few ways to go about defining variables:
 
 ```js
 const x = 1
@@ -112,7 +112,7 @@ console.log(m2)
 
 Here an array filled with integer values is transformed into an array containing strings of HTML using the map method. In [part2](/part2) of this course, we will see that map is used quite frequently in React.
 
-Individual items of an array are easy to assign to variables with the help of [destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment).
+Individual items of an array are easy to assign to variables with the help of the [destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment).
 
 ```js
 const t = [1, 2, 3, 4, 5]
@@ -136,7 +136,7 @@ const object1 = {
   education: 'PhD',
 }
 
-const object12 = {
+const object2 = {
   name: 'Full Stack web application development',
   level: 'intermediate studies',
   size: 5,
