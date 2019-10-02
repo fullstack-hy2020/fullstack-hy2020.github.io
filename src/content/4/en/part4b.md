@@ -1083,7 +1083,7 @@ Once the test is finished, refactor the operation to use async/await instead of 
 #### 4.11*: Blog list tests, step4
 
 
-Write a test that verifies that if the <i>likes</i> property is missing from the request, it will default to the value 0. Do not test the other properties of the created notes yet.
+Write a test that verifies that if the <i>likes</i> property is missing from the request, it will default to the value 0. Do not test the other properties of the created blogs yet.
 
 
 Make the required changes to the code so that it passes the test.
