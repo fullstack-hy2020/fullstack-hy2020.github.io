@@ -30,7 +30,7 @@ json-server vaatii, että tiedot lähetetään JSON-muodossa, eli käytännöss�
 Muutetaan nyt uuden muistiinpanon lisäämisestä huolehtivaa tapahtumankäsittelijää seuraavasti:
 
 ```js
-addNote = event => {
+const addNote = event => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
