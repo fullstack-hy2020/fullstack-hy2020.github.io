@@ -73,7 +73,7 @@ For 5-7 credits the number of credits and the grade are based on the total numbe
 
 Credits and grades are calculated as follows:
 
-| exercises     | credits       | grade    | 
+| exercises    | credits        | grade    | 
 | ------------ | :------------: | :------: |
 | 138          |       7        | 5        |
 | 127          |       6        | 5        |
