@@ -32,7 +32,7 @@ Chrome should launch automatically. Open the browser console **immediately**. Al
 
 ![](../../images/1/1e.png)
 
-The code of the application resides in the <i>src</i> folder. Let's simplify the default code such that the contents of the file <i>index.js</i> looks like:
+The code of the application resides in the <i>src</i> folder. Let's simplify the default code such that the contents of the file <i>index.js</i> look like:
 
 ```js
 import React from 'react'
@@ -369,7 +369,7 @@ const App = () => {
 }
 ```
 
-However, when defining the root component of the application this is not a particulary wise thing to do, and it makes the code look a bit ugly.
+However, when defining the root component of the application this is not a particularly wise thing to do, and it makes the code look a bit ugly.
 
 Because the root element is stipulated, we have "extra" div-elements in the DOM-tree. This can be avoided by using [fragments](https://reactjs.org/docs/fragments.html#short-syntax), i.e. by wrapping the elements to be returned by the component with an empty element:
 
