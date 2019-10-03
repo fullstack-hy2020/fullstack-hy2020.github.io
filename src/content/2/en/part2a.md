@@ -316,35 +316,6 @@ is used to create view elements, the value of the variable must be rendered insi
 
 The use of curly braces will cause some headache in the beginning, but you will get used to them soon enough. The visual feedback from React is immediate. 
 
-Let's examine one source of bugs. Add the following to your code
-
-```js
-const result = notes.map(note => {note.content} )
-console.log(result)
-```
-It will print
-
-```js
-[undefined, undefined, undefined]
-```
-
-Whats the matter? The code is exactly the same as the one that worked earlier. Except not quite. The _map_  method now has the following function as a parameter
-
-```js
-note => {
-  note.content
-}
-```
-
-
-Because the function now forms <i>a code block</i>, its return value is undefined. Arrow functions return the value of their sole statement only if the function is defined in compact form. Without the code block: 
-
-```js
-note => note.content
-```
-
-Note that 'oneliner' arrow functions do not need to be, nor should they always be, written on a single line. 
-
 Better formatting for the helper function returning the rows of notes in our application could be the following version spread over multiple lines: 
 
 ```js
