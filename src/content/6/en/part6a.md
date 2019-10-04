@@ -104,7 +104,7 @@ const counterReducer = (state = 0, action) => {
       return state - 1
     case 'ZERO':
       return 0
-    default: // if none of the above does not match, code comes here
+    default: // if none of the above matches, code comes here
     return state
   }
 }
