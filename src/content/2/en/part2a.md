@@ -526,7 +526,7 @@ If you clone the project, run the command _npm install_ before starting the appl
 Early in your programming career (and even after 30 years of coding like yours truly), what often happens is that the application just completely breaks down. This is even more the case with dynamically typed languages, such as JavaScript, where the compiler does not check the data type of, for instance, function variables or return values. 
 
 
-React explosion can for example look like this:
+A "React explosion" can for example look like this:
 
 ![](../../images/2/3b.png)
 
