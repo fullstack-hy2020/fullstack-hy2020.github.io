@@ -29,7 +29,7 @@ Kurssi koostuu yhdeksästä osasta, joista ensimmäinen on historiallisista syis
 
 Materiaalissa osasta <i>n</i> osaan <i>n+1</i> eteneminen ei ole mielekästä ennen kuin riittävä osaaminen osan <i>n</i> asioista on saavutettu. Kurssilla sovelletaankin pedagogisin termein <i>tavoiteoppimista</i>, [engl. mastery learning](https://en.wikipedia.org/wiki/Mastery_learning) ja on tarkoitus, että etenet seuraavaan osaan vasta, kun riittävä määrä edellisen osan tehtävistä on tehty.
 
-Oletuksena on, että teet kunkin osan tehtävistä <i>ainakin ne</i> jotka eivät ole merkattu tähdellä. Myös tähdellä merkatut tehtävät vaikuttavat arvosteluun, mutta niiden tekemättäjättäminen ei aiheuta liian suuria esteitä seuraavan osan (tähdellä merkkaamattomien) tehtävien tekemiseen.
+Oletuksena on, että teet kunkin osan tehtävistä <i>ainakin ne</i> jotka eivät ole merkattu tähdellä. Myös tähdellä merkatut tehtävät vaikuttavat arvosteluun, mutta niiden tekemättä jättäminen ei aiheuta liian suuria esteitä seuraavan osan (tähdellä merkkaamattomien) tehtävien tekemiseen.
 
 Etenemisnopeus kurssilla on vapaa, tehtäviä voi palauttaa 10.1.2020. klo 23:59 asti. Mahdollisen suoritusmerkinnän saat sen jälkeen kun olet suorittanut myös kurssiin liittyvän kokeen.
 
@@ -41,11 +41,11 @@ Kurssi voidaan suorittaa joko 3 tai 5-8 opintopisteen laajuisena.
 
 Laajuus ja arvosana määräytyy kaikkien tehtyjen tehtävien perusteella, myös tähdellä merkityt tehtävät siis vaikuttavat arvosanaan. Kurssilla on myös koe, joka on suoritettava hyväksytysti. Koe ei kuitenkaan vaikuta arvosanaan.
 
-Jos haluat kurssilta virallisen suoritusmerkinnän, tallenna <b>Helsingin yliopiston</b> opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/fullstackopen2019) näkymään my submissions. Jos et ole Helsingin yliopiston opiskelija, saat opiskelijanumeron ilmoittautumalla kurssille [Avoimen yliopiston kurssisivun](https://courses.helsinki.fi/fi/aytkt21009/124726896) kautta.
+Jos haluat kurssilta virallisen suoritusmerkinnän, tallenna <b>Helsingin yliopiston</b> opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/fullstackopen2019) näkymään <i>my submissions</i>. Jos et ole Helsingin yliopiston opiskelija, saat opiskelijanumeron ilmoittautumalla kurssille [Avoimen yliopiston kurssisivun](https://courses.helsinki.fi/fi/aytkt21009/124726896) kautta.
 
-Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suositukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja [ilmoittanut palautussovelluksessa](/osa0/yleista#suoritusmerkinnan-pyytaminen) olevasi valmis kurssin suorituksen kanssa.
+Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja [ilmoittanut palautussovelluksessa](/osa0/yleista#suoritusmerkinnan-pyytaminen) olevasi valmis kurssin suorituksen kanssa.
 
-Suoritusmerkintä ja kokeen tekeminen edellyttävät että olet ilmoittautunut kurssille Avoimeen yliopistoon. Ilmoittautuminen tapahtuu kurssin [avoimen yliopiston kurssisivun](https://courses.helsinki.fi/fi/aytkt21009/124726896) kautta. Löydät sivulta tarkemmat ohjeet ilmoittautumiseen, Moodlen kurssiavaimen ja lisätietoja opintosuorituksen rekisteröinnistä. 
+Suoritusmerkintä ja kokeen tekeminen edellyttävät että olet ilmoittautunut kurssille Avoimeen yliopistoon. Ilmoittautuminen tapahtuu kurssin [avoimen yliopiston kurssisivun](https://courses.helsinki.fi/fi/aytkt21009/124726896) kautta. Löydät sivulta tarkemmat ohjeet ilmoittautumiseen, Moodlen kurssiavaimen ja lisätietoja opintosuorituksen rekisteröinnistä.
 
 #### Kolmen opintopisteen suoritus
 
@@ -53,7 +53,7 @@ Kolmen opintopisteen suorituksen edellytyksenä on osien 0-3 kaikkien tähdellä
 
 Koe suoritetaan Moodlessa. Pääset Moodleen [Avoimen yliopiston kurssisivun](https://courses.helsinki.fi/fi/aytkt21009/124726896) kautta. Kokeen voi suorittaa 1.4. alkaen. Kokeen viimeinen suorituspäivä on 10.1.2020. Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt kaikki kolmen opintopisteen suorituksen edellyttämät tehtävät. <b>Huomaa, että viimeinen päivä kokeeseen ilmoittautumiselle on 9.1.2020.</b>
 
-Kokeen tuloksen näet palautussovelluksen välilehdeltä my submissions viimeistään 4 viikkoa kokeen suorittamisen jälkeen (heinäkuu saattaa aiheuttaa kokeen tarkastamiseen pidemmän viiveen). Muista tallettaa opiskelijanumerosi palautussovellukseen.
+Kokeen tuloksen näet palautussovelluksen välilehdeltä <i>my submissions</i> viimeistään 4 viikkoa kokeen suorittamisen jälkeen (heinäkuu saattaa aiheuttaa kokeen tarkastamiseen pidemmän viiveen). Muista tallettaa opiskelijanumerosi palautussovellukseen.
 
 Suoritus rekisteröidään arvosanalla hyväksytty.
 
@@ -79,7 +79,7 @@ Myös 5-7 op:n suorituksen edellytyksenä on hyväksytysti suoritettu koe. Koe s
 
 Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt riittävästi tehtäviä 5 opintopisteen suoritukseen. Käytännössä kokeeseen ei kuitenkaan kannata osallistua heti kun riittävä tehtäväpistemäärä on suoritettu. Koe on sisällöltään sama riippumatta onko suorituksesi laajuus 5-7 opintopistettä. Koe ei vaikuta kurssilta saamaasi arvosanaan.
 
-Kokeen tuloksen näet palautussovelluksen välilehdeltä my submissions viimeistään 4 viikkoa kokeen suorittamisen jälkeen (heinäkuu saattaa aiheuttaa kokeen tarkastamiseen pidemmän viiveen). Muista tallettaa opiskelijanumerosi palautussovellukseen.
+Kokeen tuloksen näet palautussovelluksen välilehdeltä <i>my submissions</i> viimeistään 4 viikkoa kokeen suorittamisen jälkeen (heinäkuu saattaa aiheuttaa kokeen tarkastamiseen pidemmän viiveen). Muista tallettaa opiskelijanumerosi palautussovellukseen.
 
 #### 8 opintopisteen suoritus
 
@@ -89,7 +89,7 @@ Osassa 8 tehtyjen tehtävien lukumäärä ei vaikuta kurssin 5-7 opintopisteen l
 
 ### Suoritusmerkinnän pyytäminen
 
-Jos haluat kurssilta suorituksen, tallenna <b>Helsingin yliopiston</b> opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/fullstackopen2019) näkymään my submissions. Jos et ole Helsingin yliopiston opiskelija, saat opiskelijanumeron ilmoittautumalla kurssille [Avoimen yliopiston kurssisivun](https://courses.helsinki.fi/fi/aytkt21009/124726896) kautta.
+Jos haluat kurssilta suorituksen, tallenna <b>Helsingin yliopiston</b> opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/fullstackopen2019) näkymään <i>my submissions</i>. Jos et ole Helsingin yliopiston opiskelija, saat opiskelijanumeron ilmoittautumalla kurssille [Avoimen yliopiston kurssisivun](https://courses.helsinki.fi/fi/aytkt21009/124726896) kautta.
 
 Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi valmis kurssin suorituksen kanssa:
 
@@ -99,7 +99,7 @@ Arvosana siirtyy Weboodiin neljän viikon sisällä suoritusmerkintäpyynnön j�
 
 ### Kurssitodistus
 
-Riippumatta siitä ilmoittaudutko Avoimen yliopiston kurssille ja teetkö kurssikokeen, saat ladattua kurssitodistuksen palautussovelluksesta siinä vaiheessa kun tekemiesi tehtävien lukumäärä oikeuttaisi kurssisuoritukseen
+Riippumatta siitä ilmoittaudutko Avoimen yliopiston kurssille ja teetkö kurssikokeen, saat ladattua kurssitodistuksen palautussovelluksesta siinä vaiheessa kun tekemiesi tehtävien lukumäärä oikeuttaisi kurssisuoritukseen.
 
 ![](../../images/0/29.png)
 
@@ -119,13 +119,13 @@ Jos olet tehnyt jo aiemmin kurssin kokeen (poislukien 3 opintopisteen laajuuden 
 
 Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/fullstackopen2019).
 
-Jos palautat eri osien tehtäviä samaan repositorioon, käytä järkevää hakemistojen nimentää. Voit toki tehdä jokaisen osan omaankin repositorioon, kaikki käy. Jos käytät privaattirepositorioa tehtävien palautukseen liitä repositoriolle collaboratoriksi _mluukkai_
+Jos palautat eri osien tehtäviä samaan repositorioon, käytä järkevää hakemistojen nimentää. Voit toki tehdä jokaisen osan omaankin repositorioon, kaikki käy. Jos käytät privaattirepositoriota tehtävien palautukseen, liitä repositoriolle collaboratoriksi _mluukkai_
 
 Tehtävät palautetaan **yksi osa kerrallaan**. Kun olet palauttanut osan tehtävät, et voi enää palauttaa saman osan tekemättä jättämiäsi tehtäviä.
 
 GitHubiin palautettuja tehtäviä tarkastetaan [MOSS](https://theory.stanford.edu/~aiken/moss/)-plagiaattitunnistusjärjestelmän avulla. Jos GitHubista löytyy kurssin mallivastausten koodia tai useammalta opiskelijalta löytyy samaa koodia, käsitellään tilanne yliopiston [vilppikäytäntöjen](https://blogs.helsinki.fi/alakopsaa/opettajalle/epailen-opiskelijaa-vilpista-mita-tehda/) mukaan.
 
-Suurin osa tehtävistä on moniosaisia, samaa ohjelmaa pala palalta rakentavia kokonaisuuksia. Tälläisissä tehtäväsarjoissa ohjelman lopullisen version palauttaminen riittää, voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.
+Suurin osa tehtävistä on moniosaisia, samaa ohjelmaa pala palalta rakentavia kokonaisuuksia. Tällaisissa tehtäväsarjoissa ohjelman lopullisen version palauttaminen riittää, voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.
 
 ### Full stack -harjoitustyö
 
@@ -149,13 +149,13 @@ Haastattelulupaus tarkoittaa, että opiskelija voi niin halutessaan ilmoittautua
 
 Tällä kurssilla suositellaan Chrome-selaimen käyttöä, sillä se tarjoaa parhaan välineistön web-sovelluskehitystä ajatellen.
 
-Kurssin tehtävät palautetaan GitHubiin, joten Git tulee olla asennettuna ja sitä on syytä osata käyttää. Ohjeita Gitin käyttämiseen löytyy muunmuassa [täältä](https://github.com/mluukkai/ohjelmistotekniikka-kevat2019/blob/master/tehtavat/viikko1.md#gitin-alkeet).
+Kurssin tehtävät palautetaan GitHubiin, joten Git tulee olla asennettuna ja sitä on syytä osata käyttää. Ohjeita Gitin käyttämiseen löytyy muun muassa [täältä](https://github.com/mluukkai/ohjelmistotekniikka-kevat2019/blob/master/tehtavat/viikko1.md#gitin-alkeet).
 
 Asenna myös joku järkevä web-devausta tukeva tekstieditori, enemmän kuin suositeltava valinta on [Visual Studio Code](https://code.visualstudio.com/).
 
 Älä koodaa nanolla, Notepadilla tai Geditillä. Myöskään NetBeans ei ole omimmillaan Web-devauksessa ja se on myös turhan raskas verrattuna esim. Visual Studio Codeen.
 
-Asenna koneeseesi heti myös [Node.js](https://nodejs.org/en/). Materiaali on tehty versiolla 10.0, älä asenna mitään sitä vanhempaa versiota. Kaiken tosin pitäisi toimia jos konellasi on Nodesta vähintään versio 8.0. Asennusohjeita on koottu [tänne](https://github.com/fullstack-hy2019/misc/blob/master/asennusohjeita.md).
+Asenna koneeseesi heti myös [Node.js](https://nodejs.org/en/). Materiaali on tehty versiolla 10.0, älä asenna mitään sitä vanhempaa versiota. Kaiken tosin pitäisi toimia jos koneellasi on Nodesta vähintään versio 8.0. Asennusohjeita on koottu [tänne](https://github.com/fullstack-hy2019/misc/blob/master/asennusohjeita.md).
 
 Noden myötä koneelle asentuu myös [npm](https://www.npmjs.com/get-npm) (alunperin lyhennelmä _Node Package Manager_ -nimelle), jota tulemme tarvitsemaan kurssin aikana aktiivisesti. Tuoreen Noden kera asentuu myös [npx](https://www.npmjs.com/package/npx), jota tarvitaan myös muutaman kerran.
 
