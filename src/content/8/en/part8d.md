@@ -202,7 +202,7 @@ npm install --save apollo-link apollo-link-context
 ```
 
 
-_client_ is now configured using [ApolloClient](https://www.apollographql.com/docs/react/api/apollo-client.html#apollo-client) constructorfunction of [apollo-link](https://www.apollographql.com/docs/link/index.html). It has two parameters, _link_ and _cache_. The latter defines, that the application now uses a cache operating in the main memory [InMemoryCache](https://www.apollographql.com/docs/react/advanced/caching.html#smooth-scroll-top).
+_client_ is now configured using [ApolloClient](https://www.apollographql.com/docs/react/api/apollo-client.html#apollo-client) constructor function of [apollo-link](https://www.apollographql.com/docs/link/index.html). It has two parameters, _link_ and _cache_. The latter defines, that the application now uses a cache operating in the main memory [InMemoryCache](https://www.apollographql.com/docs/react/advanced/caching.html#smooth-scroll-top).
 
 
 The first parameter _link_ defines how the clients contacts the server. The communication is based on [httpLink](https://www.apollographql.com/docs/link/links/http.htm), a normal connection over HTTP with the addition that a token from localStorage is set as the value of the <i>authorization</i> [header](https://www.apollographql.com/docs/react/recipes/authentication.html#Header) if it exists. 
