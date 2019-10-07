@@ -804,7 +804,7 @@ The application prints the data that we sent in the request to the console:
 ![](../../images/3/16.png)
 
 
-Similarly, it is useful to check the console for making sure that the backend behaves like we expect it in different situations, like when we send data with an HTTP POST request. Naturally, it's a good idea to add lots of <em>console.log</em> commands to the code when the application is still being developed.
+Similarly, it is useful to check the console for making sure that the backend behaves like we expect it to in different situations, like when we send data with an HTTP POST request. Naturally, it's a good idea to add lots of <em>console.log</em> commands to the code when the application is still being developed.
 
 
 A potential cause for issues is an incorrectly set <i>Content-Type</i> header in requests. This can happen with Postman if the type of body is not defined correctly:
