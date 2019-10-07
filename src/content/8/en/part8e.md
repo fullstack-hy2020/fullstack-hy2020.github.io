@@ -463,7 +463,7 @@ Person: {
 ```
 
 
-The parameter _root_ is the person object whichs friends list is being created, so we search from all _User_ objects the ones which have root._id in their friends list: 
+The parameter _root_ is the person object which friends list is being created, so we search from all _User_ objects the ones which have root._id in their friends list: 
 
 ```js
   Person: {
