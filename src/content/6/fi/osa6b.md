@@ -477,7 +477,7 @@ Connect voi olla aluksi haastava sisäistää, mutta hieman vaivaa kannattaa ehd
 npm install --save react-redux
 ```
 
-Edellytyksenä kirjaston tarjoaman _connect_-funktion käytölle on se, että sovellus on määritelty React redux kirjaston tarjoaman [Provider](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store)-komponentin lapsena ja että sovelluksen käyttämä store on annettu Provider-komponentin attribuutiksi <i>store</i>. 
+Edellytyksenä kirjaston tarjoaman _connect_-funktion käytölle on se, että sovellus on määritelty React redux -kirjaston tarjoaman [Provider](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store)-komponentin lapsena ja että sovelluksen käyttämä store on annettu Provider-komponentin attribuutiksi <i>store</i>. 
 
 Eli tiedosto <i>index.js</i> tulee muuttaa seuraavaan muotoon
 
