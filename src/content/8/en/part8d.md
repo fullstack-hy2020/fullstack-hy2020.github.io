@@ -8,7 +8,7 @@ lang: en
 <div class="content">
 
 
-The frontend of our application shows the phone directory just fine with the updated server. However if we want to add new persons, we have to add log in functionality to the backend. 
+The frontend of our application shows the phone directory just fine with the updated server. However if we want to add new persons, we have to add login functionality to the backend. 
 
 ### User log in
 
@@ -56,9 +56,9 @@ const App = () => {
 }
 ```
 
-If the login operation fails, error message is shown in the <i>App</i> component thanks to the _onError_ handler set to the login mutation.
+If the login operation fails, an error message is shown in the <i>App</i> component thanks to the _onError_ handler set to the login mutation.
 
-If login is successfull, the <i>token</i> it returns is saved to the state of the <i>App</i> component. The token is also saved to <i>local storage</i>. This way it is easier to access when we want to add it to the <i>Authorization</i>-header of a request.
+If login is successful, the <i>token</i> it returns is saved to the state of the <i>App</i> component. The token is also saved to <i>local storage</i>. This way it is easier to access when we want to add it to the <i>Authorization</i>-header of a request.
 
 ```js
 import React, { useState } from 'react'
@@ -109,7 +109,7 @@ export default LoginForm
 
 Let's also add a button which enables logged in user to log out. The buttons onClick handler sets the _token_ state to null, removes the token from local storage and resets the cache of the Apollo client. 
 
-The last is [important](https://www.apollographql.com/docs/react/recipes/authentication.html#login-logout), because some queries might have fetced data to cache, which only logged in users should have access to. 
+The last is [important](https://www.apollographql.com/docs/react/recipes/authentication.html#login-logout), because some queries might have fetched data to cache, which only logged in users should have access to. 
 
 
 ```js
@@ -132,7 +132,7 @@ The current code of the application can be found from [github](https://github.co
 
 ### Adding a token to a header
 
-After the backend changes creating new persons requires, that a valid user token is sent with the request. In order to send the token, we have to change the way we define the _ApolloClient_-object in <i>index.js</i> a little. 
+After the backend changes, creating new persons requires that a valid user token is sent with the request. In order to send the token, we have to change the way we define the _ApolloClient_-object in <i>index.js</i> a little. 
 
 ```js
 import React from 'react'
@@ -208,7 +208,7 @@ _client_ is now configured using [ApolloClient](https://www.apollographql.com/do
 The first parameter _link_ defines how the clients contacts the server. The communication is based on [httpLink](https://www.apollographql.com/docs/link/links/http.htm), a normal connection over HTTP with the addition that a token from localStorage is set as the value of the <i>authorization</i> [header](https://www.apollographql.com/docs/react/recipes/authentication.html#Header) if it exists. 
 
 
-Creating new persons and changing numbers works again. There is however one remaining problem. If we try to add a person without a phonenumber, it is not possible. 
+Creating new persons and changing numbers works again. There is however one remaining problem. If we try to add a person without a phone number, it is not possible. 
 
 ![](../../images/8/25e.png)
 
@@ -216,7 +216,7 @@ Creating new persons and changing numbers works again. There is however one rema
 Validation fails, because frontend sends an empty string as the value of _phone_.
 
 
-Let's change the function creating new persons so, that it sets _phone_ to null if user has not given a value. 
+Let's change the function creating new persons so that it sets _phone_ to null if user has not given a value. 
 
 ```js
 const PersonForm = (props) => {
@@ -289,7 +289,7 @@ const App = () => {
 ```
 
 
-The callback function is given a reference to the cache and the data returned by the mutation as parameters. For example in our case this would be the created person. 
+The callback function is given a reference to the cache and the data returned by the mutation as parameters. For example, in our case this would be the created person. 
 
 
 The code reads the cached state of <em>ALL\_PERSONS</em> query using [readQuery](https://www.apollographql.com/docs/react/advanced/caching.html#readquery) function and updates the cache with [writeQuery](https://www.apollographql.com/docs/react/advanced/caching.html#writequery-and-writefragment) function adding the new person to the cached data. 
@@ -301,7 +301,7 @@ There are some situations where the only good way to keep the cache up to date i
 When necessary it is possible to disable cache for the whole application or single queries by setting the field managing the use of cache, [fetchPolicy](https://www.apollographql.com/docs/react/api/react-apollo.html#query-props) as <em>no-cache</em>.
 
 
-We could declare, that the address details of a single person are not saved to cache:
+We could declare that the address details of a single person are not saved to cache:
 
 ```js 
 const Persons = ({ result }) => {
@@ -348,13 +348,13 @@ After the backend changes the list of books does not work anymore. Fix it.
 Adding new books and changing the birth year of an author do not work, because they require user to be logged in. 
 
 
-Implement log in functionality and fix the mutations. 
+Implement login functionality and fix the mutations. 
 
 
 It is not necessary yet to handle validation errors. 
 
 
-You can decide how the log in looks on the user interface. One possible solution is to make the log in form into a separate view which can be accessed through a navigation menu: 
+You can decide how the log in looks on the user interface. One possible solution is to make the login form into a separate view which can be accessed through a navigation menu: 
 
 ![](../../images/8/26.png)
 
