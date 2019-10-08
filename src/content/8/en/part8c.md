@@ -118,7 +118,7 @@ const resolvers = {
 The changes are pretty straightforward. However there are a few noteworthy things. As we remember, in Mongo the identifying field of an object is called <i>_id</i> and we previously had to parse the name of the field to <i>id</i> ourselves. Now GraphQL can do this automatically. 
 
 
-Another noteworthy thing is, that the resolver functions now return a <i>promise</i>, when they previously returned normal objects. When a resolver returns a promise, Apollo server [sends back](https://www.apollographql.com/docs/apollo-server/essentials/data.html#result) the value which the promise resolves to. 
+Another noteworthy thing is that the resolver functions now return a <i>promise</i>, when they previously returned normal objects. When a resolver returns a promise, Apollo server [sends back](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-results) the value which the promise resolves to. 
 
 
 
@@ -163,7 +163,7 @@ Person.find({ phone: { $exists: true }})
 ```
 
 
-is returned, so the objects whichs field _phone_ has a value. If the parameter has the value <i>NO</i>, the query returns the objects whichs _phone_ field has no value: 
+is returned, so the objects in which the field _phone_ has a value. If the parameter has the value <i>NO</i>, the query returns the objects in which the _phone_ field has no value: 
 
 ```js
 Person.find({ phone: { $exists: false }})
@@ -172,7 +172,7 @@ Person.find({ phone: { $exists: false }})
 ### Validation
 
 
-As well as in GraphQL, the input is now validated using the validations defined in the mongoose-schema. For handling possible validation errors in the schema, we must add an error handling _try/catch_-block to the save _save_-method. When we end up in the catch, we throw a suitable exception: 
+As well as in GraphQL, the input is now validated using the validations defined in the mongoose-schema. For handling possible validation errors in the schema, we must add an error handling _try/catch_-block to the _save_-method. When we end up in the catch, we throw a suitable exception: 
 
 ```js
 Mutation: {
@@ -210,7 +210,7 @@ The finished code of the backend can be found from [github](https://github.com/f
 ### User and log in
 
 
-Let's add user management to our application. For simplicitys sake, let's assume that all users have the same password which is hardcoded to the system. It would be straightforward to save individual passwords for all users following the principles from [part 4](/en/part4/user_administration), but because our focus is on GraphQL, we will leave out all that extra hassle this time. 
+Let's add user management to our application. For simplicity's sake, let's assume that all users have the same password which is hardcoded to the system. It would be straightforward to save individual passwords for all users following the principles from [part 4](/en/part4/user_administration), but because our focus is on GraphQL, we will leave out all that extra hassle this time. 
 
 
 The user schema is as follows: 
@@ -325,7 +325,7 @@ In the GraphQL-playground the header is added to a query like so
 ![](../../images/8/24.png)
 
 
-Let's now expand the definition of the _server_ object by adding a third parameter [context](https://www.apollographql.com/docs/apollo-server/essentials/data.html#context) to the constructor call:
+Let's now expand the definition of the _server_ object by adding a third parameter [context](https://www.apollographql.com/docs/apollo-server/data/data/#context-argument) to the constructor call:
 
 ```js
 const server = new ApolloServer({
@@ -371,10 +371,10 @@ Query: {
 Let's complete the applications backend so that adding and editing persons requires logging in, and added persons are automatically added to the friends list of the user. 
 
 
-Let's first remove all persons not in anyones friends list from the database. 
+Let's first remove all persons not in anyone's friends list from the database. 
 
 
-_AddPerson_  mutation changes like so:
+_addPerson_ mutation changes like so:
 
 ```js
 Mutation: {
@@ -406,7 +406,7 @@ Mutation: {
 If a logged in user cannot be found from the context, an _AuthenticationError_ is thrown. Creating new persons is now done with _async/await_ syntax, because if the operation is successful, the created person is added to the friends list of the user. 
 
 
-Let's also add functionality for adding and existing user to your friends list. The mutation is as follows: 
+Let's also add functionality for adding an existing user to your friends list. The mutation is as follows: 
 
 ```js
 type Mutation {
@@ -499,7 +499,7 @@ The following things do <i>not</i> have to work just yet
 
 #### 8.14: Database, part 2
 
-Complete the program so, that all queries (except _allBooks_ with the parameter _author_  ) and mutations work. 
+Complete the program so that all queries (except _allBooks_ with the parameter _author_ ) and mutations work. 
 
 You might find this [useful](https://docs.mongodb.com/manual/reference/operator/query/in/).
 
@@ -548,6 +548,6 @@ Create resolvers for query _me_ and the new mutations _createUser_ and
 _login_. Like in the course material, you can assume all users have the same, hardcoded, password. 
 
 
-Make mutations _addBook_  and  _editAuthor_ possible only, if the request includes a valid token. 
+Make the mutations _addBook_ and _editAuthor_ possible only if the request includes a valid token. 
 
 </div>
