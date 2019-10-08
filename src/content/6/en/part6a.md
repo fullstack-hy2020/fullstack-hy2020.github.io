@@ -204,7 +204,7 @@ would cause the following to be printed
 
 
 
-The code of our counter application is the following. All of the code has been written in the same file, so <i>store</i> is straight available for the React-code. We will get to know better ways to sturcture React/Redux-code later.
+The code of our counter application is the following. All of the code has been written in the same file, so <i>store</i> is straight available for the React-code. We will get to know better ways to structure React/Redux-code later.
 
 ```js
 import React from 'react'
@@ -264,7 +264,7 @@ There are a few notable things in the code.
 <i>App</i> renders the value of the counter by asking it from the store with the method _store.getState()_. The actionhandlers of the buttons <i>dispatch</i> the right actions to the store. 
 
 
-When the state in the store is changed, React is not able to automatically rerender the application. Thus we have registered a function _renderApp_, which renders the whole app, to listen for changes in the store with the  _store.subscribe_ method. Note, that we have to immediately call the _renderApp_ method. Without the call the first rendering of the app would never happen. 
+When the state in the store is changed, React is not able to automatically rerender the application. Thus we have registered a function _renderApp_, which renders the whole app, to listen for changes in the store with the  _store.subscribe_ method. Note that we have to immediately call the _renderApp_ method. Without the call the first rendering of the app would never happen. 
 
 ### Redux-notes
 
@@ -336,7 +336,7 @@ Now the actions have a type and a field <i>data</i>, which contains the note to 
 }
 ```
 
-### pure functions, immutable
+### Pure functions, immutable
 
 The initial version of reducer is very simple:
 
@@ -539,7 +539,7 @@ state.map(note =>
 )
 ```
 
-### Array spread -syntax
+### Array spread syntax
 
 
 Because we now have quite good tests for the reducer, we can refactor the code safely. 
@@ -730,10 +730,10 @@ Now implement the actual functionality of the application.
 
 <div class="content">
 
-### uncontrolled form
+### Uncontrolled form
 
 
-Let's add functionality for adding new notes and changing their importance: 
+Let's add the functionality for adding new notes and changing their importance: 
 
 ```js
 const generateId = () =>
@@ -831,10 +831,10 @@ toggleImportance = (id) => {
 }
 ```
 
-### action creators
+### Action creators
 
 
-We begin to notice, that even in applications as simple as ours, using Redux can simplify the frontend code. However, we can do a lot better. 
+We begin to notice that, even in applications as simple as ours, using Redux can simplify the frontend code. However, we can do a lot better. 
 
 
 It is actually not necessary for React-components to know the Redux action types and forms. 
@@ -884,7 +884,7 @@ const App = () => {
 }
 ```
 
-### passing the state using props
+### Passing the state using props
 
 
 Aside from the reducer, our application is in one file. This is of course not sensible, and we should separate <i>App</i> into its own module. 
@@ -1103,7 +1103,7 @@ const App = (props) => {
 
 
 
-<i>Note</i>, responsible for rendering a single note, is very simple, and is not aware that the event handler it gets as props dispatches an action. These kind of componets are called [presentational](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) in React terminology. 
+<i>Note</i>, responsible for rendering a single note, is very simple, and is not aware that the event handler it gets as props dispatches an action. These kind of components are called [presentational](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) in React terminology. 
 
 
 <i>Notes</i>, on the other hand, is a [container](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) component, as it contains some application logic: it defines what the event handlers of the <i>Note</i> components do and coordinates the configuration of <i>presentational</i> components, that is, the <i>Note</i>s.
@@ -1128,7 +1128,7 @@ The code of the Redux application can be found in [github](https://github.com/fu
 Let's make a new version of the anecdote voting application from part 1. Take the project from this repository https://github.com/fullstackopen-2019/redux-anecdotes to base your solution on.  
 
 
-If you clone the project in to an existing git-repository, <i>remove the git-configuration of the cloned application:</i> 
+If you clone the project into an existing git-repository, <i>remove the git-configuration of the cloned application:</i> 
 
 ```bash
 cd redux-anecdotes  // go to the cloned repository
@@ -1151,12 +1151,12 @@ After completing these exercises, your application should look like this
 #### 6.3: anecdotes, step1
 
 
-Implement functionality for voting anecdotes. The amount of votes must be saved to a Redux-store.
+Implement the functionality for voting anecdotes. The amount of votes must be saved to a Redux-store.
 
 #### 6.4: anecdotes, step2
 
 
-Implement functionality for adding new anecdotes. 
+Implement the functionality for adding new anecdotes. 
 
 
 You can keep the form uncontrolled, like we did [earlier](/en/part6/flux_architecture_and_redux#uncontrolled-form).
@@ -1164,7 +1164,7 @@ You can keep the form uncontrolled, like we did [earlier](/en/part6/flux_archite
 #### 6.5*: anecdotes, step3
 
 
-Make sure, that the anecdotes are oredered by the number of votes. 
+Make sure that the anecdotes are ordered by the number of votes. 
 
 #### 6.6: anecdotes, step4
 
