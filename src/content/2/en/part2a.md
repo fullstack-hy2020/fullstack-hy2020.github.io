@@ -11,7 +11,7 @@ Before starting a new topic, let's recap some of the topics that proved difficul
 
 ### console.log
 
-***What's the difference between an experienced JavaScript programmer and a rookie? The experienced one uses console.log 10-100 times more***
+***What's the difference between an experienced JavaScript programmer and a rookie? The experienced one uses console.log 10-100 times more.***
 
 Paradoxically, this seems to be true even though a rookie programmer would need console.log (or any debugging method) more than an experienced one.
 
@@ -40,7 +40,7 @@ If necessary, read more about debugging React-applications [here](/en/part1/a_mo
 
 ### Protip: Visual Studio Code snippets
 
-With Visual studio code it's easy to create 'snippets', i.e. shortcuts for quickly generating commonly re-used portions of code, much like 'sout' works in Netbeans. 
+With Visual studio code it's easy to create 'snippets', i.e. shortcuts for quickly generating commonly re-used portions of code, much like how 'sout' works in Netbeans. 
 Instructions for creating snippets can be found [here](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets).
 
 Useful, ready-made snippets can also be found as VS Code plugins, for example [here](https://marketplace.visualstudio.com/items?itemName=xabikos.ReactSnippets).
@@ -62,7 +62,7 @@ The most important snippet is the one for the <em>console.log()</em> command, fo
 
 From here on out, we will be using the functional programming methods of the JavaScript [array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array), such as  _find_, _filter_, and _map_ - all of the time. They operate on the same general principles as streams do in Java 8, which have been used during the last few years in both the 'Ohjelmoinnin perusteet' and 'Ohjelmoinnin jatkokurssi' courses at the university's department of Computer Science, and also in the programming MOOC. 
 
-If functional programming with arrays feels foreign to you, it is worth watching at least the three first parts of the YouTube video series [Functional Programming in JavaScript](https://www.youtube.com/playlist?list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84):
+If functional programming with arrays feels foreign to you, it is worth watching at least the first three parts of the YouTube video series [Functional Programming in JavaScript](https://www.youtube.com/playlist?list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84):
 
 - [Higher-order functions](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84)
 - [Map](https://www.youtube.com/watch?v=bCqtb-Z5YGQ&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84&index=2)
@@ -371,7 +371,7 @@ const App = ({ notes }) => { // highlight-line
 ```
 
 
-If you have forgotten what destructuring means and how it works, revise [this](/en/part1/component_state_event_handlers#destructuring).
+If you have forgotten what destructuring means and how it works, review [this](/en/part1/component_state_event_handlers#destructuring).
 
 
 We'll separate displaying a single note into its own component <i>Note</i>: 
@@ -408,23 +408,23 @@ const App = ({ notes }) => {
 
 Note, that the <i>key</i> attribute must now be defined for the <i>Note</i> components, and not for the <i>li</i> tags like before. 
 
-A whole React application can be written on a single file. Although that is, of course, not very practical. Common practice is to declare each component in their own file as a <i>ES6-module</i>.
+A whole React application can be written on a single file. Although that is, of course, not very practical. Common practice is to declare each component in their own file as an <i>ES6-module</i>.
 
-We have been using modules the whole time. The first few lines of a file
+We have been using modules the whole time. The first few lines of the file:
 
 ```js
 import React from 'react'
 import ReactDOM from 'react-dom'
 ```
 
-[Imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) two modules, enabling them to be used in the code. The <i>react</i> module is placed into a variable called _React_ and <i>react-dom</i> to variable _ReactDOM_.
+[imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) two modules, enabling them to be used in the code. The <i>react</i> module is placed into a variable called _React_ and <i>react-dom</i> to variable _ReactDOM_.
 
 
 Let's move our <i>Note</i> component into its own module. 
 
 In smaller applications, components are usually placed in a directory called <i>components</i> , which is in turn placed within the <i>src</i> directory. The convention is to name the file after the component. 
 
-Now we'll create a directory called <i>components</i> to our application and place a file <i>Note.js</i> there. 
+Now we'll create a directory called <i>components</i> for our application and place a file named <i>Note.js</i> inside. 
 The contents of the Note.js file are as follows: 
 
 ```js
@@ -512,7 +512,7 @@ ReactDOM.render(
 Modules have plenty of other uses other than enabling component declarations to be separated into their own files. We will get back into them later in this course. 
 
 
-The current code of the application can be found on [github](https://github.com/fullstackopen-2019/part2-notes/tree/part2-1).
+The current code of the application can be found on [GitHub](https://github.com/fullstackopen-2019/part2-notes/tree/part2-1).
 
 
 Note that the master branch of the repository contains the code for a later version of the application. The current code is in the branch [part2-1](https://github.com/fullstackopen-2019/part2-notes/tree/part2-1):
@@ -612,7 +612,7 @@ const Course = (props) => { // highlight-line
 }
 ```
 
-If the problem has still not been resolved, there really isn't much to do apart from continuing to bug-hunt by sprinkling more console.log statements around your code. 
+If the problem has still not been resolved, there really isn't much to do apart from continuing to bug-hunt by sprinkling more _console.log_ statements around your code. 
 
 I added this chapter to the material after the model answer for the next question exploded completely (due to props being of the wrong type), and I had to debug it using console.log.
 
