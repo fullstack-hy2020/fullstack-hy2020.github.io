@@ -85,7 +85,7 @@ Let's wait for the cluster to be ready for use. This will take approximately 10 
 
 **NB** do not continue before the cluster is ready.
 
-Let's use the <i>security</i> tab for creating user credentials for the database. Please note that these are not the same credentials you use for logging into MongoDB Atlas.
+Let's use the <i>database access</i> tab for creating user credentials for the database. Please note that these are not the same credentials you use for logging into MongoDB Atlas.
 
 ![](../../images/3/59.png)
 
