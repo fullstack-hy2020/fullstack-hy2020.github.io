@@ -109,7 +109,7 @@ export default LoginForm
 
 Let's also add a button which enables logged in user to log out. The buttons onClick handler sets the _token_ state to null, removes the token from local storage and resets the cache of the Apollo client. 
 
-The last is [important](https://www.apollographql.com/docs/react/recipes/authentication.html#login-logout), because some queries might have fetched data to cache, which only logged in users should have access to. 
+The last is [important](https://www.apollographql.com/docs/react/v2.5/recipes/authentication/#reset-store-on-logout), because some queries might have fetched data to cache, which only logged in users should have access to. 
 
 
 ```js
@@ -202,10 +202,10 @@ npm install --save apollo-link apollo-link-context
 ```
 
 
-_client_ is now configured using [ApolloClient](https://www.apollographql.com/docs/react/api/apollo-client.html#apollo-client) constructor function of [apollo-link](https://www.apollographql.com/docs/link/index.html). It has two parameters, _link_ and _cache_. The latter defines, that the application now uses a cache operating in the main memory [InMemoryCache](https://www.apollographql.com/docs/react/advanced/caching.html#smooth-scroll-top).
+_client_ is now configured using [ApolloClient](https://www.apollographql.com/docs/react/api/apollo-client/#apollo-client) constructor function of [apollo-link](https://www.apollographql.com/docs/link/). It has two parameters, _link_ and _cache_. The latter defines, that the application now uses a cache operating in the main memory [InMemoryCache](https://www.apollographql.com/docs/react/v2.5/advanced/caching/#inmemorycache).
 
 
-The first parameter _link_ defines how the clients contacts the server. The communication is based on [httpLink](https://www.apollographql.com/docs/link/links/http.htm), a normal connection over HTTP with the addition that a token from localStorage is set as the value of the <i>authorization</i> [header](https://www.apollographql.com/docs/react/recipes/authentication.html#Header) if it exists. 
+The first parameter _link_ defines how the clients contacts the server. The communication is based on [httpLink](https://www.apollographql.com/docs/link/links/http/), a normal connection over HTTP with the addition that a token from localStorage is set as the value of the <i>authorization</i> [header](https://www.apollographql.com/docs/react/v2.5/recipes/authentication/#header) if it exists. 
 
 
 Creating new persons and changing numbers works again. There is however one remaining problem. If we try to add a person without a phone number, it is not possible. 
@@ -243,7 +243,7 @@ Current application code can be found from [github](https://github.com/fullstack
 
 ### Updating cache, revisited
 
-When adding new persons, we must declare that the cache of Apollo client has to be [updated](/osa8/react_ja_graph_ql#valimuistin-paivitys). The cache can be updated by using the option _refetchQueries_ on the mutation to force <em>ALL\_PERSONS</em> query to be rerun. 
+When adding new persons, we must declare that the cache of Apollo client has to be [updated](/en/part8/react_and_graph_ql#updating-the-cache). The cache can be updated by using the option _refetchQueries_ on the mutation to force <em>ALL\_PERSONS</em> query to be rerun. 
 
 
 ```js 
@@ -263,7 +263,7 @@ const App = () => {
 This approach is pretty good, the drawback being that the query is always rerun with any updates. 
 
 
-It is possible to optimize the solution by handling updating the cache ourselves. This is done by defining a suitable [update](https://www.apollographql.com/docs/react/advanced/caching.html#after-mutations)-callback for the mutation, which Apollo runs after the mutation:
+It is possible to optimize the solution by handling updating the cache ourselves. This is done by defining a suitable [update](https://www.apollographql.com/docs/react/v2.5/advanced/caching/#updating-after-a-mutation)-callback for the mutation, which Apollo runs after the mutation:
 
 
 ```js 
@@ -292,13 +292,13 @@ const App = () => {
 The callback function is given a reference to the cache and the data returned by the mutation as parameters. For example, in our case this would be the created person. 
 
 
-The code reads the cached state of <em>ALL\_PERSONS</em> query using [readQuery](https://www.apollographql.com/docs/react/advanced/caching.html#readquery) function and updates the cache with [writeQuery](https://www.apollographql.com/docs/react/advanced/caching.html#writequery-and-writefragment) function adding the new person to the cached data. 
+The code reads the cached state of <em>ALL\_PERSONS</em> query using [readQuery](https://www.apollographql.com/docs/react/v2.5/advanced/caching/#readquery) function and updates the cache with [writeQuery](https://www.apollographql.com/docs/react/v2.5/advanced/caching/#writequery-and-writefragment) function adding the new person to the cached data. 
 
 
 There are some situations where the only good way to keep the cache up to date is using _update_ -callbacks. 
 
 
-When necessary it is possible to disable cache for the whole application or single queries by setting the field managing the use of cache, [fetchPolicy](https://www.apollographql.com/docs/react/api/react-apollo.html#query-props) as <em>no-cache</em>.
+When necessary it is possible to disable cache for the whole application or single queries by setting the field managing the use of cache, [fetchPolicy](https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy) as <em>no-cache</em>.
 
 
 We could declare that the address details of a single person are not saved to cache:
@@ -345,7 +345,7 @@ After the backend changes the list of books does not work anymore. Fix it.
 #### 8.18 Log in
 
 
-Adding new books and changing the birth year of an author do not work, because they require user to be logged in. 
+Adding new books and changing the birth year of an author do not work because they require user to be logged in. 
 
 
 Implement login functionality and fix the mutations. 
@@ -380,7 +380,7 @@ In this exercise the filtering can be done using just React.
 #### 8.20 Books by genre, part 2
 
 
-Implement a view, which shows the logged in user all books in their favourite genre.
+Implement a view which shows the logged in user all books in their favourite genre.
 
 ![](../../images/8/29.png)
 
@@ -403,6 +403,6 @@ Some tips
 
 If you fetch the book recommendations with GraphQL, ensure somehow that the books view is kept up to date. So when a new book is added, the books view is updated **at least** when a genre selection button is pressed. 
 
-<i>iWhen new genre selection is not done, the view does not have to be updated. </>
+<i>When new genre selection is not done, the view does not have to be updated. </i>
 
 </div>
