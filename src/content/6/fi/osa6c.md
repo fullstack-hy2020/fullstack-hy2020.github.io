@@ -478,11 +478,11 @@ Muuta redux-storen alustus tapahtumaan <i>redux-thunk</i>-kirjaston avulla toteu
 Muuta myös uuden anekdootin luominen tapahtumaan <i>redux-thunk</i>-kirjaston avulla toteutettuihin asynkronisiin actioneihin.
 
 
-#### 6.20 anekdootit ja backend, step3
+#### 6.20 anekdootit ja backend, step6
 
 Äänestäminen ei vielä talleta muutoksia backendiin. Korjaa tilanne <i>redux-thunk</i>-kirjastoa hyödyntäen.
 
-#### 6.21 anekdootit ja backend, step6
+#### 6.21 anekdootit ja backend, step7
 
 Notifikaatioiden tekeminen on nyt hieman ikävää, sillä se edellyttää kahden actionin tekemistä ja _setTimeout_-funktion käyttöä:
 
