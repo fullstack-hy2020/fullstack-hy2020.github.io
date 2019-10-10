@@ -1011,7 +1011,7 @@ import noteReducer from './reducers/noteReducer'
 A module can have only <i>one default export</i>, but multiple "normal" exports
 
 ```js
-export const noteCreation = content => {
+export const createNote = (content) => {
   // ...
 }
 
@@ -1024,7 +1024,7 @@ export const toggleImportanceOf = (id) => {
 Normally (not as defaults) exported functions can be imported with the curly brace syntax:
 
 ```js
-import { noteCreation } from './../reducers/noteReducer'
+import { createNote } from './../reducers/noteReducer'
 ```
 
 Let's separate creating new notes into its own component. 
