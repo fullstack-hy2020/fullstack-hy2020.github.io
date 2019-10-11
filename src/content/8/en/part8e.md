@@ -7,7 +7,7 @@ lang: en
 <div class="content">
 
 
-We are approaching the end of the course. Let's finish by having a look at few more details of GraphQL. 
+We are approaching the end of the course. Let's finish by having a look at a few more details of GraphQL. 
 
 ### fragments
 
@@ -81,7 +81,7 @@ query {
 The fragments <i><strong>are not</strong></i> defined in the GraphQL schema, but in the client. The fragments must be declared when the client uses them for queries. 
 
 
-In princible we could declare the fragment with each query like so:
+In principle, we could declare the fragment with each query like so:
 
 ```js
 const ALL_PERSONS = gql`
@@ -120,7 +120,7 @@ const PERSON_DETAILS = gql`
 ```
 
 
-Declared like this the fragment can be placed to any query or mutation with the "precentcurlybrace"-operator:
+Declared like this, the fragment can be placed to any query or mutation with the "precentcurlybrace"-operator:
 
 ```js
 const ALL_PERSONS = gql`
@@ -164,7 +164,7 @@ type Subscription {
 So when a new person is added, all of it's details are sent to all subscribers. 
 
 
-The subscription _personAdded_ needs a resolver. The _addPerson_ resolver also has to be modified so, that is sends a notification to subscribers. 
+The subscription _personAdded_ needs a resolver. The _addPerson_ resolver also has to be modified so that is sends a notification to subscribers. 
 
 
 The required changes are as follows:
@@ -362,7 +362,7 @@ const App = () => {
 ```
 
 
-When a new person is now added to the phonebook, no matter where it's done, the details of the new person are printed to the clients console: 
+When a new person is now added to the phonebook, no matter where it's done, the details of the new person are printed to the client’s console: 
 
 ![](../../images/8/32e.png)
 
@@ -371,7 +371,7 @@ When a new person is added, the server sends a notification to the client, and t
 
 Let's extend our solution so that when the details of a new person are received, the person is added to the Apollo cache, so it is rendered to the screen immediately. 
 
-However we have to keep in mind, that when our application creates a new person, it should not be added to the cache twice: 
+However, we have to keep in mind that when our application creates a new person, it should not be added to the cache twice: 
 
 ```js
 const App = () => {
@@ -416,7 +416,7 @@ The final code of the client can be found from [github](https://github.com/fulls
 
 ### n+1-problem
 
-Let's add some things to the backend. Let's modify the schema so, that a <i>Person</i> type has a _friendOf_ field, which tells whose firends list the person is on. 
+Let's add some things to the backend. Let's modify the schema so that a <i>Person</i> type has a _friendOf_ field, which tells whose friends list the person is on. 
 
 ```js
 type Person {
@@ -576,7 +576,7 @@ Query: {
 After the change we would not need a separate resolver for the _friendOf_ field. 
 
 
-The allPersons query <i>does not cause</i> a n+1 problem, if we i.e only  fetch the name and the phonenumber: 
+The allPersons query <i>does not cause</i> an n+1 problem, if we i.e only  fetch the name and the phone number: 
 
 ```js
 query {
@@ -588,7 +588,7 @@ query {
 ```
 
 
-If we modify _allPersons_ to do a join query because it sometimes causes n+1 problem, it becomes heavier also when we don't need the information on related persons. By using the [fourth parameter](https://www.apollographql.com/docs/apollo-server/essentials/data.html#type-signature) of resolver functions we could optimize the query even further. The fourth parameter can be used to inspect the query itself, so we could do the join query only in cases with predicted threat for n+1 problem. However we should not jump into this level of optimization before we are sure it's worth it. 
+If we modify _allPersons_ to do a join query because it sometimes causes n+1 problem, it becomes heavier when we don't need the information on related persons. By using the [fourth parameter](https://www.apollographql.com/docs/apollo-server/essentials/data.html#type-signature) of resolver functions we could optimize the query even further. The fourth parameter can be used to inspect the query itself, so we could do the join query only in cases with predicted threat for n+1 problem. However, we should not jump into this level of optimization before we are sure it's worth it. 
 
 [In the words of Donald Knuth](https://en.wikiquote.org/wiki/Donald_Knuth):
 
@@ -596,18 +596,18 @@ If we modify _allPersons_ to do a join query because it sometimes causes n+1 pro
 
 
 
-[Dataloader](https://github.com/facebook/dataloader)-library by Facebook offers a good solution for the n+1 problem among other issues.
-More about using dataloader with Apollo server  [here](https://www.robinwieruch.de/graphql-apollo-server-tutorial/#graphql-server-data-loader-caching-batching) and [here](http://www.petecorey.com/blog/2017/08/14/batching-graphql-queries-with-dataloader/).
+[DataLoader](https://github.com/facebook/dataloader)-library by Facebook offers a good solution for the n+1 problem among other issues.
+More about using DataLoader with Apollo server  [here](https://www.robinwieruch.de/graphql-apollo-server-tutorial/#graphql-server-data-loader-caching-batching) and [here](http://www.petecorey.com/blog/2017/08/14/batching-graphql-queries-with-dataloader/).
 
-### Epiloque
+### Epilogue
 
 
 
-The application we created in this part is not optimally structured: the schema, queries and the muatations should at least be moved outside of the application code. Examples for better structuring of GraphQL applications can be found from the internet, for example for the server
+The application we created in this part is not optimally structured: the schema, queries and the mutations should at least be moved outside of the application code. Examples for better structuring of GraphQL applications can be found from the internet, for example for the server
 [here](https://blog.apollographql.com/modularizing-your-graphql-schema-code-d7f71d5ed5f2) and the client [here](https://medium.com/@peterpme/thoughts-on-structuring-your-apollo-queries-mutations-939ba4746cd8).
 
 
-GraphQL is already pretty old technology, being used by Facebook since 2012, so we can see it as "battle tested" already. Since Facebook published GraphQL in 2015 it has slowly gotten more and more attention, and might in the near future threaten the dominance of REST. The death of REST has also already been [predicted](https://www.stridenyc.com/podcasts/52-is-2018-the-year-graphql-kills-rest). Even thought that will not happen quite yet, GraphQL is absolutely worth [learning](https://blog.graphqleditor.com/javascript-predictions-for-2019-by-npm/).
+GraphQL is already pretty old technology, being used by Facebook since 2012, so we can see it as "battle tested" already. Since Facebook published GraphQL in 2015 it has slowly gotten more and more attention, and might in the near future threaten the dominance of REST. The death of REST has also already been [predicted](https://www.stridenyc.com/podcasts/52-is-2018-the-year-graphql-kills-rest). Even though that will not happen quite yet, GraphQL is absolutely worth [learning](https://blog.graphqleditor.com/javascript-predictions-for-2019-by-npm/).
 
 </div>
 
@@ -642,3 +642,5 @@ query {
 ```
 
 </div>
+
+This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/fullstackopen2019).
