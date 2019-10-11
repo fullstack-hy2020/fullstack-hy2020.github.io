@@ -136,7 +136,7 @@ const ALL_PERSONS = gql`
 ### Subscriptions
 
 
-Along with query- and mutation types, GraphQL offers a third operation type, [subscription](https://www.apollographql.com/docs/react/advanced/subscriptions.html). With subscriptions clients can <i>subscribe to</i> updates about changes in the server. 
+Along with query- and mutation types, GraphQL offers a third operation type, [subscription](https://www.apollographql.com/docs/react/data/subscriptions/). With subscriptions clients can <i>subscribe to</i> updates about changes in the server. 
 
 
 Subscriptions are radically different from anything we have seen in this course so far. Until now all interaction between browser and the server has been React application in the browser making HTTP-requests to the server. GraphQL queries and mutations have also been done this way. 
@@ -207,10 +207,10 @@ const pubsub = new PubSub() // highlight-line
 ```
 
 
-With subscriptions the communication happens using the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern)-princible utilizing an object which realizes a [PubSub](https://www.apollographql.com/docs/graphql-subscriptions/setup.html#setup) interface. Adding a new person <i>publishes</i> a notification about the operation to all subscribers with PubSubs method _publish_.
+With subscriptions the communication happens using the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern)-princible utilizing an object which realizes a [PubSub](https://www.apollographql.com/docs/graphql-subscriptions/setup/#setup) interface. Adding a new person <i>publishes</i> a notification about the operation to all subscribers with PubSubs method _publish_.
 
 
-_PersonAdded_ subscriptions resolver registers all of the subscribers by returning them a suitable [iterator object](https://www.apollographql.com/docs/graphql-subscriptions/subscriptions-to-schema.html).
+_PersonAdded_ subscriptions resolver registers all of the subscribers by returning them a suitable [iterator object](https://www.apollographql.com/docs/graphql-subscriptions/subscriptions-to-schema/).
 
 
 Let's do the following changes to the code which starts the server
@@ -248,7 +248,7 @@ The backend code can be found from [github](https://github.com/fullstackopen-201
 ### Subscriptions on the client
 
 
-In order to use subscriptions in our React application, we have to do some changes, especially on its [configurations](https://www.apollographql.com/docs/react/advanced/subscriptions.html#subscriptions-client).
+In order to use subscriptions in our React application, we have to do some changes, especially on its [configurations](https://www.apollographql.com/docs/react/data/subscriptions/#client-setup).
 The configurations in <i>index.js</i> have to be modified like so: 
 
 ```js
@@ -328,7 +328,7 @@ const httpLink = createHttpLink({
 })
 ```
 
-The subscriptions are done using the [Subscription](https://www.apollographql.com/docs/react/advanced/subscriptions.html#subscription-component) component or _useSubscription_ hook that is available in Apollo Client 3.0. We will use the hook based solution.
+The subscriptions are done using the [Subscription](https://www.apollographql.com/docs/react/v2.5/advanced/subscriptions/#subscription-component) component or _useSubscription_ hook that is available in Apollo Client 3.0. We will use the hook based solution.
 
 Let's modify the code like so:
 
@@ -588,7 +588,7 @@ query {
 ```
 
 
-If we modify _allPersons_ to do a join query because it sometimes causes n+1 problem, it becomes heavier when we don't need the information on related persons. By using the [fourth parameter](https://www.apollographql.com/docs/apollo-server/essentials/data.html#type-signature) of resolver functions we could optimize the query even further. The fourth parameter can be used to inspect the query itself, so we could do the join query only in cases with predicted threat for n+1 problem. However, we should not jump into this level of optimization before we are sure it's worth it. 
+If we modify _allPersons_ to do a join query because it sometimes causes n+1 problem, it becomes heavier when we don't need the information on related persons. By using the [fourth parameter](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-type-signature) of resolver functions we could optimize the query even further. The fourth parameter can be used to inspect the query itself, so we could do the join query only in cases with predicted threat for n+1 problem. However, we should not jump into this level of optimization before we are sure it's worth it. 
 
 [In the words of Donald Knuth](https://en.wikiquote.org/wiki/Donald_Knuth):
 
@@ -596,8 +596,8 @@ If we modify _allPersons_ to do a join query because it sometimes causes n+1 pro
 
 
 
-[DataLoader](https://github.com/facebook/dataloader)-library by Facebook offers a good solution for the n+1 problem among other issues.
-More about using DataLoader with Apollo server  [here](https://www.robinwieruch.de/graphql-apollo-server-tutorial/#graphql-server-data-loader-caching-batching) and [here](http://www.petecorey.com/blog/2017/08/14/batching-graphql-queries-with-dataloader/).
+Facebook's [DataLoader](https://github.com/facebook/dataloader) library offers a good solution for the n+1 problem among other issues.
+More about using DataLoader with Apollo server [here](https://www.robinwieruch.de/graphql-apollo-server-tutorial/#graphql-server-data-loader-caching-batching) and [here](http://www.petecorey.com/blog/2017/08/14/batching-graphql-queries-with-dataloader/).
 
 ### Epilogue
 
