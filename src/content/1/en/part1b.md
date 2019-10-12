@@ -436,11 +436,11 @@ const arto = {
 
 arto.doAddition(1, 4)        // 5 is printed
 
-const referenceToAdditon = arto.doAddition
-referenceToAdditon(10, 15)   // 25 is printed
+const referenceToAddition = arto.doAddition
+referenceToAddition(10, 15)   // 25 is printed
 ```
 
-Now the object has the method _doAddition_ which calculates the sum of numbers given to it as parameters. The method is called in the usual way using the object <em>arto.doAddition(1, 4)</em> or by storing a <i>method reference</i> in a variable and calling the method through the variable <em>referenceToAdditon(10, 15)</em>.
+Now the object has the method _doAddition_ which calculates the sum of numbers given to it as parameters. The method is called in the usual way using the object <em>arto.doAddition(1, 4)</em> or by storing a <i>method reference</i> in a variable and calling the method through the variable <em>referenceToAddition(10, 15)</em>.
 
 If we try to do the same with the method _greet_ we run into an issue:
 
