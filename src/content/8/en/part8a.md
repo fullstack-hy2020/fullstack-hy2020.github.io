@@ -133,7 +133,7 @@ The second type is a [Query](https://graphql.org/learn/schema/#the-query-and-mut
 The phonebook describes three different queries. _PersonCount_ returns an integer, _allPersons_ returns a list of <i>Person</i> objects and <i>findPerson</i> is given a string parameter and it returns a <i>Person</i> object. 
 
 
-Again exclamation marks are used to mark which return values and parameters are <i>Non-Null</i>. _PersonCount_ will, for sure, return a string. The query _findPerson_ must be given a string as a parameter. The query returns a <i>Person</i>-object or <i>null</i>. _AllPersons_ returns a list of <i>Person</i> objects, and the list does not contain any <i>null</i>-values. 
+Again exclamation marks are used to mark which return values and parameters are <i>Non-Null</i>. _PersonCount_ will, for sure, return an int. The query _findPerson_ must be given a string as a parameter. The query returns a <i>Person</i>-object or <i>null</i>. _AllPersons_ returns a list of <i>Person</i> objects, and the list does not contain any <i>null</i>-values. 
 
 
 So the schema describes what queries the client can send to the server, what kind of parameters the queries can have, and what kind of data the queries return. 
