@@ -11,7 +11,6 @@ import Footer from '../components/Footer/Footer';
 import Layout from '../components/layout';
 import Parser from 'html-react-parser';
 import PrevNext from '../components/PrevNext/PrevNext';
-import ReturnInfo from '../components/ReturnInfo/ReturnInfo';
 import SEO from '../components/seo';
 import ScrollNavigation from '../components/ScrollNavigation/ScrollNavigation';
 import { SubHeader } from '../components/SubHeader/SubHeader';
@@ -235,8 +234,6 @@ export default class ContentTemplate extends Component {
 
             {Parser(html, parserOptions)}
           </Element>
-
-          {false && <ReturnInfo />}
 
           <EditLink part={part} letter={letter} lang={lang} />
 

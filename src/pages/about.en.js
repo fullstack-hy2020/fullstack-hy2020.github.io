@@ -1,4 +1,3 @@
-import Accordion from '../components/Accordion/Accordion';
 import { Banner } from '../components/Banner/Banner';
 import { BodyText } from '../components/BodyText/BodyText';
 import Element from '../components/Element/Element';
@@ -14,7 +13,7 @@ import mainSEOdescription from '../content/seo/mainSEOdescription';
 import mainSEOtags from '../content/seo/mainSEOtags';
 
 const About = () => {
-  const { intro, info } = content.en;
+  const { intro } = content.en;
 
   return (
     <Layout>
@@ -71,11 +70,6 @@ const About = () => {
           </Element>
         </Element>
       </Element>
-
-      {false &&
-        info.map(item => (
-          <Accordion key={item} title={item.title} content={item.content} />
-        ))}
 
       <PartBanner lang="en" />
       <Footer lang="en" />
