@@ -143,7 +143,7 @@ app.post('/api/notes', (request, response) => {
 })
 ```
 
-Esimerkkimme tapauksessa promisejen ketjutuksesta ei ole suurta hyötyä. Tilanne alkaa muuttua, jos joudumme tekemään useita peräkkäisiä asynkronisia operaatiota. Emme kuitenkaan mene asiaan sen tarkemmin. Tutustumme seuraavassa osassa Javascriptin <i>async/await</i>-syntaksiin, jota käyttämällä peräkkäisten asynkronisten operaatioiden tekeminen helpottuu olellisesti.
+Esimerkkimme tapauksessa promisejen ketjutuksesta ei ole suurta hyötyä. Tilanne alkaa muuttua, jos joudumme tekemään useita peräkkäisiä asynkronisia operaatiota. Emme kuitenkaan mene asiaan sen tarkemmin. Tutustumme seuraavassa osassa Javascriptin <i>async/await</i>-syntaksiin, jota käyttämällä peräkkäisten asynkronisten operaatioiden tekeminen helpottuu oleellisesti.
 
 ### Tietokantaa käyttävän version vieminen tuotantoon
 
