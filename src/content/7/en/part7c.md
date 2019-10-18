@@ -388,7 +388,7 @@ You can test the bundled application by opening the <i>build/index.html</i> file
 It's worth noting that if the bundled application's source code uses <i>async/await</i>, the browser will not render anything on some browsers. [Googling the error message in the console](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) will shed some light on the issue. We have to install one more missing dependency, that is [@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill):
 
 ```
-npm install --save-dev @babel/polyfill
+npm install --save @babel/polyfill
 ```
 
 
