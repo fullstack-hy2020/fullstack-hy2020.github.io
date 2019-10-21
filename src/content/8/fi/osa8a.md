@@ -242,7 +242,7 @@ Nimestään huolimatta GraphQL:llä ei itseasiassa ole mitään tekemistä tieto
 
 Toteuteaan nyt GraphQL-palvelin tämän hetken johtavaa kirjastoa [Apollo -serveriä](https://www.apollographql.com/docs/apollo-server/) käyttäen. 
 
-Luodaan uusi npm-projekti komennolla _npm init_ ja asennetaan tarvittavat riippuvuuet
+Luodaan uusi npm-projekti komennolla _npm init_ ja asennetaan tarvittavat riippuvuudet
 
 ```js
 npm install --save apollo-server graphql
