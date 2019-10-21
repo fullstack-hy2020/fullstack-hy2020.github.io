@@ -27,7 +27,7 @@ Because our server is in localhost port 3001, and our frontend in localhost port
 
 Keep in mind, that [same origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) and CORS are not specific to React or Node. They are in fact universal principles of the operation of web applications. 
 
-We can allow for requests from other <i>origins</i> by using Nodes [cors](https://github.com/expressjs/cors)-middleware.
+We can allow requests from other <i>origins</i> by using Node's [cors](https://github.com/expressjs/cors) middleware.
 
 Install <i>cors</i> with the command
 
