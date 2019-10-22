@@ -202,7 +202,7 @@ Voit näyttää frontendissa käyttäjälle Mongoosen validoinnin oletusarvoisen
 
 #### 3.21 tietokantaa käyttävä versio internettiin
 
-Generoi päivitetystä sovelluksesta "full stack"-versio, eli tee frontendista uusi production build ja kopioi se backendin repositorioon. Varmista että kaikki toimii paikallisesti käyttämällä koko sovellusta backendin osoitteesta <https://localhost:3001>.
+Generoi päivitetystä sovelluksesta "full stack"-versio, eli tee frontendista uusi production build ja kopioi se backendin repositorioon. Varmista että kaikki toimii paikallisesti käyttämällä koko sovellusta backendin osoitteesta <http://localhost:3001>.
 
 Pushaa uusi versio Herokuun ja varmista, että kaikki toimii myös siellä.
 
