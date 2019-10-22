@@ -20,7 +20,7 @@ The principles of token based authentication are depicted in the following seque
 - This causes the React code to send the username and the password to the server address <i>/api/login</i> as a HTTP POST request. 
 - If the username and the password are correct, the server generates a <i>token</i> which somehow identifies the logged in user. 
     - The token is signed digitally, making it impossible to falsify (with cryptographic means)
-- The backend responds with a statuscode indicating the operation was successfull, and returns the token with the response.
+- The backend responds with a statuscode indicating the operation was successful, and returns the token with the response.
 - The browser saves the token, for example to the state of a React application. 
 - When the user creates a new note (or does some other operation requiring identification), the React code sends the token to the server with the request.
 - The server uses the token to identify the user
@@ -71,15 +71,15 @@ module.exports = loginRouter
 
 The code starts by searching for the user from the database by the <i>username</i> attached to the request. 
 Next, it checks the <i>password</i>, also attached to the request. 
-Because the passwords themselves are not saved to the database, but <i>hashes</i> calculated from the passwords, _bcrypt.compare_ method is used to check if the password is correct: 
+Because the passwords themselves are not saved to the database, but <i>hashes</i> calculated from the passwords, the _bcrypt.compare_ method is used to check if the password is correct: 
 
 ```js
 await bcrypt.compare(body.password, user.passwordHash)
 ```
 
-If the user is not found, or the password is incorrect, the request is responded with statuscode [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2). The reason for the failure is explained in the response body. 
+If the user is not found, or the password is incorrect, the request is responded to with the statuscode [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2). The reason for the failure is explained in the response body. 
 
-If the password is correct, a token is created with method  _jwt.sign_. The token contains the username and the user id in a digitally signed form. 
+If the password is correct, a token is created with the method  _jwt.sign_. The token contains the username and the user id in a digitally signed form. 
 
 ```js
 const userForToken = {
@@ -91,10 +91,10 @@ const token = jwt.sign(userForToken, process.env.SECRET)
 ```
 
 The token has been digitally signed using a string from the environment variable <i>SECRET</i> as the <i>secret</i>.
-Digital signature ensures, that only parties who know the secret can generate a valid token. 
-Value for the environment variable must be set in the <i>.env</i> file. 
+The digital signature ensures that only parties who know the secret can generate a valid token. 
+The value for the environment variable must be set in the <i>.env</i> file. 
 
-Successful request is responded with the statuscode <i>200 OK</i>. The generated token and the username of the user are sent back in the response body. 
+A successful request is responded to with the statuscode <i>200 OK</i>. The generated token and the username of the user are sent back in the response body. 
 
 Now the code for login just has to be added to the application by adding the new router to <i>app.js</i>. 
 
@@ -121,11 +121,11 @@ It does not work. The following is printed to console:
 
 The command _jwt.sign(userForToken, process.env.SECRET)_ fails. We forgot to set a value to the environment variable <i>SECRET</i>. It can be any string. When we set the value in file <i>.env</i>, the login works. 
 
-Successful login returns the user details and the token: 
+A successful login returns the user details and the token: 
 
 ![](../../images/4/18e.png)
 
-Wrong username or password returns an error message and the proper statuscode
+A wrong username or password returns an error message and the proper statuscode:
 
 ![](../../images/4/19e.png)
 
@@ -194,13 +194,13 @@ notesRouter.post('/', async (request, response, next) => {
 })
 ```
 
-Helper function _getTokenFrom_ isolates the token from the <i>authorization</i> header. The validity of the token is checked with _jwt.verify_. The method also decodes the token, or returns the Object which the token was based on: 
+The helper function _getTokenFrom_ isolates the token from the <i>authorization</i> header. The validity of the token is checked with _jwt.verify_. The method also decodes the token, or returns the Object which the token was based on: 
 
 ```js
 const decodedToken = jwt.verify(token, process.env.SECRET)
 ```
 
-The object decoded from the token contains fields <i>username</i> and <i>id</i>, so it tells the server who made the request. 
+The object decoded from the token contains the <i>username</i> and <i>id</i> fields, which tells the server who made the request. 
 
 If there is no token, or the object decoded from the token does not contain the users identity (_decodedToken.id_ is undefined), error statuscode [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) is returned and the reason for the failure is explained in the response body. 
 
@@ -270,9 +270,9 @@ If the application has multiple interfaces requiring identification, JWTs valida
 
 ### End notes
 
-There has been many changes to the code, which has caused a typical problem for a fast phased software project: most of the tests have broken. Because this part of the course is already jammed with new information, we will leave fixing the tests to a non compulsory exercise. 
+There have been many changes to the code, which has caused a typical problem for a fast phased software project: most of the tests have broken. Because this part of the course is already jammed with new information, we will leave fixing the tests to a non compulsory exercise. 
 
-Usernames, passwords and applications using token authentication must always be used over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). We could use a Node [HTTPS](https://nodejs.org/api/https.html) server in our application instead of the [HTTP](https://nodejs.org/docs/latest-v8.x/api/http.html) server (it requires more configurations). On the other hand, the production version of our application is in Heroku, so our applications stays secure: Heroku routes all traffic between a browser and the Heroku server over HTTPS. 
+Usernames, passwords and applications using token authentication must always be used over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). We could use a Node [HTTPS](https://nodejs.org/api/https.html) server in our application instead of the [HTTP](https://nodejs.org/docs/latest-v8.x/api/http.html) server (it requires more configuration). On the other hand, the production version of our application is in Heroku, so our applications stays secure: Heroku routes all traffic between a browser and the Heroku server over HTTPS. 
 
 We will implement login to the frontend in the [next part](/en/part5).
 
