@@ -416,7 +416,7 @@ The final code of the client can be found from [github](https://github.com/fulls
 
 ### n+1-problem
 
-Let's add some things to the backend. Let's modify the schema so, that a <i>Person</i> type has a _friendOf_ field, which tells whose firends list the person is on. 
+Let's add some things to the backend. Let's modify the schema so, that a <i>Person</i> type has a _friendOf_ field, which tells whose friends list the person is on. 
 
 ```js
 type Person {
