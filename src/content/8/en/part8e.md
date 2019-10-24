@@ -603,7 +603,7 @@ More about using dataloader with Apollo server  [here](https://www.robinwieruch.
 
 
 
-The application we created in this part is not optimally structured: the schema, queries and the muatations should at least be moved outside of the application code. Examples for better structuring of GraphQL applications can be found from the internet, for example for the server
+The application we created in this part is not optimally structured: the schema, queries and the mutations should at least be moved outside of the application code. Examples for better structuring of GraphQL applications can be found from the internet, for example for the server
 [here](https://blog.apollographql.com/modularizing-your-graphql-schema-code-d7f71d5ed5f2) and the client [here](https://medium.com/@peterpme/thoughts-on-structuring-your-apollo-queries-mutations-939ba4746cd8).
 
 
