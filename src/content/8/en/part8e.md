@@ -7,7 +7,7 @@ lang: en
 <div class="content">
 
 
-We are approaching the end of the course. Let's finish by having a look at few more details of GraphQL. 
+We are approaching the end of the course. Let's finish by having a look at a few more details of GraphQL. 
 
 ### fragments
 
@@ -81,7 +81,7 @@ query {
 The fragments <i><strong>are not</strong></i> defined in the GraphQL schema, but in the client. The fragments must be declared when the client uses them for queries. 
 
 
-In princible we could declare the fragment with each query like so:
+In principle, we could declare the fragment with each query like so:
 
 ```js
 const ALL_PERSONS = gql`
@@ -120,7 +120,7 @@ const PERSON_DETAILS = gql`
 ```
 
 
-Declared like this the fragment can be placed to any query or mutation with the "precentcurlybrace"-operator:
+Declared like this, the fragment can be placed to any query or mutation with the "precentcurlybrace"-operator:
 
 ```js
 const ALL_PERSONS = gql`
@@ -136,7 +136,7 @@ const ALL_PERSONS = gql`
 ### Subscriptions
 
 
-Along with query- and mutation types, GraphQL offers a third operation type, [subscription](https://www.apollographql.com/docs/react/advanced/subscriptions.html). With subscriptions clients can <i>subscribe to</i> updates about changes in the server. 
+Along with query- and mutation types, GraphQL offers a third operation type: [subscriptions](https://www.apollographql.com/docs/react/data/subscriptions/). With subscriptions clients can <i>subscribe to</i> updates about changes in the server. 
 
 
 Subscriptions are radically different from anything we have seen in this course so far. Until now all interaction between browser and the server has been React application in the browser making HTTP-requests to the server. GraphQL queries and mutations have also been done this way. 
@@ -161,10 +161,10 @@ type Subscription {
 }    
 ```
 
-So when a new person is added, all of it's details are sent to all subscribers. 
+So when a new person is added, all of its details are sent to all subscribers. 
 
 
-The subscription _personAdded_ needs a resolver. The _addPerson_ resolver also has to be modified so, that is sends a notification to subscribers. 
+The subscription _personAdded_ needs a resolver. The _addPerson_ resolver also has to be modified so that it sends a notification to subscribers. 
 
 
 The required changes are as follows:
@@ -207,10 +207,10 @@ const pubsub = new PubSub() // highlight-line
 ```
 
 
-With subscriptions the communication happens using the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern)-princible utilizing an object which realizes a [PubSub](https://www.apollographql.com/docs/graphql-subscriptions/setup.html#setup) interface. Adding a new person <i>publishes</i> a notification about the operation to all subscribers with PubSubs method _publish_.
+With subscriptions, the communication happens using the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern)-principle utilizing an object which realizes a [PubSub](https://www.apollographql.com/docs/graphql-subscriptions/setup/#setup) interface. Adding a new person <i>publishes</i> a notification about the operation to all subscribers with PubSubs method _publish_.
 
 
-_PersonAdded_ subscriptions resolver registers all of the subscribers by returning them a suitable [iterator object](https://www.apollographql.com/docs/graphql-subscriptions/subscriptions-to-schema.html).
+_PersonAdded_ subscriptions resolver registers all of the subscribers by returning them a suitable [iterator object](https://www.apollographql.com/docs/graphql-subscriptions/subscriptions-to-schema/).
 
 
 Let's do the following changes to the code which starts the server
@@ -248,7 +248,7 @@ The backend code can be found from [github](https://github.com/fullstackopen-201
 ### Subscriptions on the client
 
 
-In order to use subscriptions in our React application, we have to do some changes, especially on its [configurations](https://www.apollographql.com/docs/react/advanced/subscriptions.html#subscriptions-client).
+In order to use subscriptions in our React application, we have to do some changes, especially on its [configurations](https://www.apollographql.com/docs/react/data/subscriptions/#client-setup).
 The configurations in <i>index.js</i> have to be modified like so: 
 
 ```js
@@ -328,7 +328,7 @@ const httpLink = createHttpLink({
 })
 ```
 
-The subscriptions are done using the [Subscription](https://www.apollographql.com/docs/react/advanced/subscriptions.html#subscription-component) component or _useSubscription_ hook that is available in Apollo Client 3.0. We will use the hook based solution.
+The subscriptions are done using either the [Subscription](https://www.apollographql.com/docs/react/v2.5/advanced/subscriptions/#subscription-component) component or the [useSubscription](https://www.apollographql.com/docs/react/data/subscriptions/#usesubscription-hook) hook that is available in Apollo Client 3.0. We will use the hook based solution.
 
 Let's modify the code like so:
 
@@ -362,7 +362,7 @@ const App = () => {
 ```
 
 
-When a new person is now added to the phonebook, no matter where it's done, the details of the new person are printed to the clients console: 
+When a new person is now added to the phonebook, no matter where it's done, the details of the new person are printed to the client’s console: 
 
 ![](../../images/8/32e.png)
 
@@ -371,7 +371,7 @@ When a new person is added, the server sends a notification to the client, and t
 
 Let's extend our solution so that when the details of a new person are received, the person is added to the Apollo cache, so it is rendered to the screen immediately. 
 
-However we have to keep in mind, that when our application creates a new person, it should not be added to the cache twice: 
+However, we have to keep in mind that when our application creates a new person, it should not be added to the cache twice: 
 
 ```js
 const App = () => {
@@ -416,7 +416,7 @@ The final code of the client can be found from [github](https://github.com/fulls
 
 ### n+1-problem
 
-Let's add some things to the backend. Let's modify the schema so, that a <i>Person</i> type has a _friendOf_ field, which tells whose firends list the person is on. 
+Let's add some things to the backend. Let's modify the schema so that a <i>Person</i> type has a _friendOf_ field, which tells whose friends list the person is on. 
 
 ```js
 type Person {
@@ -576,7 +576,7 @@ Query: {
 After the change we would not need a separate resolver for the _friendOf_ field. 
 
 
-The allPersons query <i>does not cause</i> a n+1 problem, if we i.e only  fetch the name and the phonenumber: 
+The allPersons query <i>does not cause</i> an n+1 problem, if we i.e only  fetch the name and the phone number: 
 
 ```js
 query {
@@ -588,7 +588,7 @@ query {
 ```
 
 
-If we modify _allPersons_ to do a join query because it sometimes causes n+1 problem, it becomes heavier also when we don't need the information on related persons. By using the [fourth parameter](https://www.apollographql.com/docs/apollo-server/essentials/data.html#type-signature) of resolver functions we could optimize the query even further. The fourth parameter can be used to inspect the query itself, so we could do the join query only in cases with predicted threat for n+1 problem. However we should not jump into this level of optimization before we are sure it's worth it. 
+If we modify _allPersons_ to do a join query because it sometimes causes n+1 problem, it becomes heavier when we don't need the information on related persons. By using the [fourth parameter](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-type-signature) of resolver functions we could optimize the query even further. The fourth parameter can be used to inspect the query itself, so we could do the join query only in cases with predicted threat for n+1 problem. However, we should not jump into this level of optimization before we are sure it's worth it. 
 
 [In the words of Donald Knuth](https://en.wikiquote.org/wiki/Donald_Knuth):
 
@@ -596,18 +596,18 @@ If we modify _allPersons_ to do a join query because it sometimes causes n+1 pro
 
 
 
-[Dataloader](https://github.com/facebook/dataloader)-library by Facebook offers a good solution for the n+1 problem among other issues.
-More about using dataloader with Apollo server  [here](https://www.robinwieruch.de/graphql-apollo-server-tutorial/#graphql-server-data-loader-caching-batching) and [here](http://www.petecorey.com/blog/2017/08/14/batching-graphql-queries-with-dataloader/).
+Facebook's [DataLoader](https://github.com/facebook/dataloader) library offers a good solution for the n+1 problem among other issues.
+More about using DataLoader with Apollo server [here](https://www.robinwieruch.de/graphql-apollo-server-tutorial/#graphql-server-data-loader-caching-batching) and [here](http://www.petecorey.com/blog/2017/08/14/batching-graphql-queries-with-dataloader/).
 
-### Epiloque
+### Epilogue
 
 
 
-The application we created in this part is not optimally structured: the schema, queries and the muatations should at least be moved outside of the application code. Examples for better structuring of GraphQL applications can be found from the internet, for example for the server
+The application we created in this part is not optimally structured: the schema, queries and the mutations should at least be moved outside of the application code. Examples for better structuring of GraphQL applications can be found from the internet, for example for the server
 [here](https://blog.apollographql.com/modularizing-your-graphql-schema-code-d7f71d5ed5f2) and the client [here](https://medium.com/@peterpme/thoughts-on-structuring-your-apollo-queries-mutations-939ba4746cd8).
 
 
-GraphQL is already pretty old technology, being used by Facebook since 2012, so we can see it as "battle tested" already. Since Facebook published GraphQL in 2015 it has slowly gotten more and more attention, and might in the near future threaten the dominance of REST. The death of REST has also already been [predicted](https://www.stridenyc.com/podcasts/52-is-2018-the-year-graphql-kills-rest). Even thought that will not happen quite yet, GraphQL is absolutely worth [learning](https://blog.graphqleditor.com/javascript-predictions-for-2019-by-npm/).
+GraphQL is already pretty old technology, having been used by Facebook since 2012, so we can see it as "battle tested" already. Since Facebook published GraphQL in 2015, it has slowly gotten more and more attention, and might in the near future threaten the dominance of REST. The death of REST has also already been [predicted](https://www.stridenyc.com/podcasts/52-is-2018-the-year-graphql-kills-rest). Even though that will not happen quite yet, GraphQL is absolutely worth [learning](https://blog.graphqleditor.com/javascript-predictions-for-2019-by-npm/).
 
 </div>
 
@@ -622,11 +622,11 @@ Do a backend implementation for subscription _bookAdded_, which returns the deta
 
 #### 8.24: Subscriptions - client, part 1
 
-Start using subscriptions in the client, and subscribe to _bookAdded_. When new books are added, notify the user. Any method works, you can use for example the [window.alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) function. 
+Start using subscriptions in the client, and subscribe to _bookAdded_. When new books are added, notify the user. Any method works. For example, you can use the [window.alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) function. 
 
 #### 8.25: Subscriptions - client, part 2
 
-Keep the applications view updated, when the server notifies about new books. 
+Keep the application's view updated when the server notifies about new books. 
 
 #### 8.26: n+1
 
@@ -640,5 +640,8 @@ query {
   }
 }
 ```
+
+
+This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/fullstackopen2019).
 
 </div>

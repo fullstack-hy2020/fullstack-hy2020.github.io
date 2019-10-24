@@ -132,9 +132,7 @@ The second type is a [Query](https://graphql.org/learn/schema/#the-query-and-mut
 
 The phonebook describes three different queries. _PersonCount_ returns an integer, _allPersons_ returns a list of <i>Person</i> objects and <i>findPerson</i> is given a string parameter and it returns a <i>Person</i> object. 
 
-
 Again exclamation marks are used to mark which return values and parameters are <i>Non-Null</i>. _PersonCount_ will, for sure, return an integer. The query _findPerson_ must be given a string as a parameter. The query returns a <i>Person</i>-object or <i>null</i>. _AllPersons_ returns a list of <i>Person</i> objects, and the list does not contain any <i>null</i>-values. 
-
 
 So the schema describes what queries the client can send to the server, what kind of parameters the queries can have, and what kind of data the queries return. 
 
@@ -147,7 +145,6 @@ query {
 }
 ```
 
-
 Assuming our applications has saved the information of three people, the response would look like this: 
 
 ```js
@@ -157,7 +154,6 @@ Assuming our applications has saved the information of three people, the respons
   }
 }
 ```
-
 
 The query fetching the information of all of the people, _allPersons_, is a bit more complicated. Because the query returns a list of <i>Person</i>-objects, the query must describe 
 <i>which fields</i> of the objects the query [returns](https://graphql.org/learn/queries/#fields):
@@ -170,9 +166,7 @@ query {
 }
 ```
 
-
 The response could look like this: 
-
 
 ```js
 {
@@ -195,7 +189,6 @@ The response could look like this:
 }
 ```
 
-
 A query can be made to return any field described in the schema. For example the following would also be possible: 
 
 ```js
@@ -207,7 +200,6 @@ query {
   }
 }
 ```
-
 
 The last example shows a query which requires a parameter, and returns the details of one person. 
 
@@ -222,9 +214,7 @@ query {
 }
 ```
 
-
 So first the parameter is described in round brackets, and then the fields of the return value object are listed in curly brackets. 
-
 
 The response is like this: 
 
@@ -241,7 +231,6 @@ The response is like this:
 }
 ```
 
-
 The return value was not marked as non-Null, so if we search for the details of an unknown
 
 ```js
@@ -252,7 +241,6 @@ query {
 }
 ```
 
-
 the return value is <i>null</i>.
 
 ```js
@@ -262,7 +250,6 @@ the return value is <i>null</i>.
   }
 }
 ```
-
 
 As you can see, there is a direct link between a GraphQR query and  the returned JSON object. One can think that the query describes what kind of data it wants as a response. 
 The difference to REST queries is stark. With REST, the URL and the type of the request have nothing to do with the form of the return data. 
@@ -276,16 +263,13 @@ The data a GraphQL API uses can be saved into a relational database, document da
 
 ### Apollo server
 
-
 Let's implement a GraphQL-server with today's leading library [Apollo -server](https://www.apollographql.com/docs/apollo-server/).
-
 
 Create a new npm-project with _npm init_ and install the required dependencies.
 
 ```js
 npm install --save apollo-server graphql
 ```
-
 
 The initial code is as follows: 
 
@@ -350,7 +334,6 @@ server.listen().then(({ url }) => {
 })
 ```
 
-
 The heart of the code is an _ApolloServer_, which is given two parameters
 
 ```js
@@ -360,12 +343,9 @@ const server = new ApolloServer({
 })
 ```
 
-
 The first parameter, _typeDefs_, contains the GraphQL schema. 
 
-
 The second parameter is an object, which contains the [resolvers](https://www.apollographql.com/docs/apollo-server/essentials/data.html#resolver-map) of the server. These are the code, which defines <i>how</i> GraphQL queries are responded to. 
-
 
 The code of the resolvers is the following: 
 
@@ -380,7 +360,6 @@ const resolvers = {
 }
 ```
 
-
 As you can see, the resolvers correspond to the queries described in the schema. 
 
 ```js
@@ -391,9 +370,7 @@ type Query {
 }
 ```
 
-
 So there is a field under <i>Query</i> for every query described in the schema. 
-
 
 The query 
 
@@ -403,16 +380,13 @@ query {
 }
 ```
 
-
 Has the resolver
 
 ```js
 () => persons.length
 ```
 
-
 So the response to the query is the length of the array _persons_.
-
 
 The query which fetches all persons
 
@@ -424,7 +398,6 @@ query {
 }
 ```
 
-
 has a resolver which returns <i>all</i> objects from the _persons_ array. 
 
 ```js
@@ -433,30 +406,23 @@ has a resolver which returns <i>all</i> objects from the _persons_ array.
 
 ### GraphQL-playground
 
-
 When Apollo-server is run on development mode (_node filename.js_), it starts a [GraphQL-playground](https://www.apollographql.com/docs/apollo-server/testing/graphql-playground/) to address [http://localhost:4000/graphql](http://localhost:4000/graphql). This is very useful for a developer, and can be used to make queries to the server. 
-
 
 Let's try it out
 
 ![](../../images/8/1.png)
 
-
 Sometimes the Playground requires you to be quite pedantic. If the syntax of a query is wrong, the error message is quite unnoticeable and nothing happens when you press go. 
 
 ![](../../images/8/2.png)
 
-
 The result from the previous query stays visible on the right side of the playground even when the current query is faulty. 
-
 
 By pointing at the right place on the line with the errors, you can see the error message
 
 ![](../../images/8/3.png)
 
-
 If the playground seems to be stuck, refreshing the page usually helps. 
-
 
 By clicking the text <i>DOCS</i> on the right, the playground shows the GraphQL schema of the server. 
 

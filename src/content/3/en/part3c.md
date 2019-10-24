@@ -19,7 +19,7 @@ The Visual Studio Code debugger can be useful in some situations. You can launch
 
 ![](../../images/3/35.png)
 
-Notice that the application shouldn't be running in another console, otherwise the port will already be in use.
+Note that the application shouldn't be running in another console, otherwise the port will already be in use.
 
 Below you can see a screenshot where the code execution has been paused in the middle of saving a new note:
 
@@ -67,7 +67,7 @@ In order to store our saved notes indefinitely, we need a database. Most of the 
 
 Document databases differ from relational databases in how they organize data as well as the query languages they support. Document databases are usually categorized under the [NoSQL](https://en.wikipedia.org/wiki/NoSQL) umbrella term.
 
-You can read more about document databases and NoSQL from the course material for [week 7](https://tikape-s18.mooc.fi/part7/) from the introduction to databases course. Unfortunately the material is currently only available in Finnish. 
+You can read more about document databases and NoSQL from the course material for [week 7](https://tikape-s18.mooc.fi/part7/) of the Introduction to Databases course. Unfortunately the material is currently only available in Finnish. 
 
 Read now the chapters on [collections](https://docs.mongodb.com/manual/core/databases-and-collections/) and [documents](https://docs.mongodb.com/manual/core/document/) from the MongoDB manual to get a basic idea on how a document database stores the data.
 
@@ -600,7 +600,7 @@ It's probably a good idea to integrate the frontend and backend one functionalit
 
 Once we introduce a database into the mix, it is useful to inspect the state persisted in the database, e.g. from the control panel in MongoDB Atlas. Quite often little Node helper programs like the <i>mongo.js</i> program we wrote earlier can be very helpful during development.
 
-You can find the code for our current application in its entirety in the <i>part3-3</i> branch of [this github repository](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part3-3).
+You can find the code for our current application in its entirety in the <i>part3-3</i> branch of [this Github repository](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part3-3).
 
 </div>
 
@@ -616,7 +616,7 @@ Change the fetching of all phonebook entries so that the data is <i>fetched from
 
 Verify that the frontend works after the changes have been made.
 
-In the following exercises, write all Mongoose-specific code into its own module, just like we did in the chapter [Database configuration into its own module](/en/part3/saving_data_to_mongo_db#database-configuration-into-its-own-module)
+In the following exercises, write all Mongoose-specific code into its own module, just like we did in the chapter [Database configuration into its own module](/en/part3/saving_data_to_mongo_db#database-configuration-into-its-own-module).
 
 #### 3.14: Phonebook database, step2
 

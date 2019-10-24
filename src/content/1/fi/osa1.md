@@ -6,6 +6,6 @@ lang: fi
 
 <div class="intro">
 
-Aloitame tässä osassa tutustumaan React-kirjastoon, jolla siis teemme sovelluksen selaimessa suoritettavan koodin. Käymme samalla myös nopean katsauksen Javascriptin Reactin kannalta oleellisimpiin ominaisuuksiin.
+Alamme tässä osassa tutustua React-kirjastoon, jolla siis teemme sovelluksen selaimessa suoritettavan koodin. Teemme samalla myös nopean katsauksen Javascriptin Reactin kannalta oleellisimpiin ominaisuuksiin.
 
 </div>

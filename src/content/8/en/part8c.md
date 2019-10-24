@@ -444,7 +444,7 @@ And the mutations resolver:
 Note how the resolver <i>destructures</i> the logged in user from the context. So instead of saving _currentUser_ to a separate variable in a function
 
 ```js
-addAsFriend: async (root, args, { currentUser }) => {
+addAsFriend: async (root, args, context) => {
   const currentUser = context.currentUser
 ```
 
