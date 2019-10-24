@@ -87,7 +87,7 @@ Sovelluslogiikka säilyy yksinkertaisena ja selaimen koodi saa täsmälleen halu
 
 ### Skeema ja kyselyt
 
-Tutustutaan GraphQL:n peruskäsitteistöön toteuttamalla GraphQL-version osien 2 ja 3 puhelinluettelosovelluksesta.
+Tutustutaan GraphQL:n peruskäsitteistöön toteuttamalla GraphQL-versio osien 2 ja 3 puhelinluettelosovelluksesta.
 
 Jokaisen GraphQL-sovelluksen ytimessä on [skeema](https://graphql.org/learn/schema/), joka määrittelee minkä muotoista dataa sovelluksessa vaihdetaan clientin ja palvelimen välillä. Puhelinluettelon alustava skeema on seuraavassa:
 
