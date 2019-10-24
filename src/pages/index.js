@@ -1,4 +1,3 @@
-import { Banner } from './../components/Banner/Banner';
 import { BodyText } from '../components/BodyText/BodyText';
 import { CompaniesBanner } from '../components/CompaniesBanner/CompaniesBanner';
 import Element from '../components/Element/Element';
@@ -10,8 +9,6 @@ import SEO from '../components/seo';
 import { Some } from '../components/Some/Some';
 import { SubHeader } from '../components/SubHeader/SubHeader';
 import { TripleBorder } from '../components/TripleBorder/TripleBorder';
-import announcement from '../images/ic_announcement_48px.svg';
-import calendarIcon from '../images/calendar-60.svg';
 import cc from '../images/cc.svg';
 import colors from '../colors';
 import content from '../content/pages/main.json';
@@ -21,24 +18,13 @@ import licenceIcon from '../images/cc-logo.svg';
 import mainSEOdescription from '../content/seo/mainSEOdescription';
 import mainSEOtags from '../content/seo/mainSEOtags';
 import news from '../images/noun_news_1248039.svg';
-import starIcon from '../images/ic_stars_48px.svg';
-import telegramIcon from '../images/telegram-logo-png-open-2000.png';
-import timerIcon from '../images/ic_timer_48px.svg';
 import yliopistoLogo from '../images/company_logos/uoh_centre.svg';
-
-const thingsToKnow = [
-  { icon: timerIcon, text: '5-20 tuntia / osa' },
-  { icon: calendarIcon, text: 'Deadline 15.12.2018' },
-  { icon: starIcon, text: 'Get started' },
-];
 
 const IndexPage = () => {
   const {
     mainTitle,
     intro,
-    telegram,
     current,
-    notice,
     licence,
     university,
     houston,
@@ -98,44 +84,6 @@ const IndexPage = () => {
         </Element>
       </div>
 
-      {false && (
-        <Banner>
-          <Element flex spaceBetween className="container">
-            <BodyText
-              className="col-10 centered"
-              heading={{ title: 'Things to Know', level: 'h2' }}
-              headingFontSize="1.777rem"
-            />
-
-            <Element
-              className="col-8 push-right-1 col-10--mobile"
-              flex
-              spaceAround
-            >
-              {thingsToKnow.map(item => {
-                return (
-                  <Element
-                    key={item.text}
-                    centeredInDesktop
-                    flex
-                    dirColumn
-                    className="col-1 col-3--mobile"
-                  >
-                    <Image contain fullWidth src={item.icon} />
-                    <BodyText
-                      className="link"
-                      centered
-                      style={{ paddingTop: '1.666rem' }}
-                      text={item.text}
-                    />
-                  </Element>
-                );
-              })}
-            </Element>
-          </Element>
-        </Banner>
-      )}
-
       <Element className="container spacing spacing--after">
         <Element className="push-right-1 push-left-1" spaceBetween flex>
           <Element flex horizontalHalf flexStart>
@@ -154,35 +102,6 @@ const IndexPage = () => {
               headingFont
               text={current}
             />
-
-            {false && (
-              <Element flex spaceBetween className="col-10">
-                <Image
-                  contain
-                  extraSmall
-                  src={telegramIcon}
-                  className="col-1--mobile"
-                />
-
-                <BodyText
-                  className="col-8 col-8--mobile link"
-                  text={telegram}
-                />
-              </Element>
-            )}
-
-            {false && (
-              <Element flex spaceBetween className="col-10 spacing--small">
-                <Image
-                  contain
-                  extraSmall
-                  src={announcement}
-                  className="col-1--mobile"
-                />
-
-                <BodyText className="col-8 col-8--mobile link" text={notice} />
-              </Element>
-            )}
           </Element>
 
           <Element flex horizontalHalf flexStart>

@@ -1178,7 +1178,7 @@ Change the <i>AnecdoteList</i> component so that the voting for anecdotes works 
 Remove the redundant passing of the store's state via props by simplifying the <i>App</i> component into the following form:
 
 ```js
-const = () => {
+const App = () => {
   return (
     <div>
       <h1>Programming anecdotes</h1>

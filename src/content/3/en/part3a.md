@@ -812,7 +812,7 @@ A potential cause for issues is an incorrectly set <i>Content-Type</i> header in
 ![](../../images/3/17e.png)
 
 
-The <i>Contept-Type</i> header is set to <i>text/plain</i>:
+The <i>Content-Type</i> header is set to <i>text/plain</i>:
 
 ![](../../images/3/18e.png)
 

@@ -91,6 +91,10 @@ const inChallenge = [
   'Netyourself',
   'Vincit',
   'Vero',
+  'Hiq',
+  'Resilient E',
+  'Neemia',
+  'Bubblin',
 ];
 
 export const CompaniesBanner = ({ isFrontPage, lang }) => (

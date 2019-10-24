@@ -783,7 +783,7 @@ This and the next exercise are a little bit more challenging. Finishing these tw
 Finishing this exercise can be done without the use of additional libraries. However, this exercise is a great opportunity to learn how to use the [Lodash](https://lodash.com/) library.
 
 
-Define a function called _mostBlogs_ that receives an array of blogs as a parameter. The function return the <i>author</i> who has the largest amount of blogs. The return value also contains the number of blogs the top author has:
+Define a function called _mostBlogs_ that receives an array of blogs as a parameter. The function returns the <i>author</i> who has the largest amount of blogs. The return value also contains the number of blogs the top author has:
 
 ```js
 {

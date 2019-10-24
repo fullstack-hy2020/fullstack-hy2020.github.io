@@ -151,11 +151,11 @@ The visibility of the component is defined by giving the component an [inline](/
 const hideWhenVisible = { display: loginVisible ? 'none' : '' }
 const showWhenVisible = { display: loginVisible ? '' : 'none' }
 
-<div style="{hideWhenVisible}">
+<div style={hideWhenVisible}>
   // button
 </div>
 
-<div style="{showWhenVisible}">
+<div style={showWhenVisible}>
   // button
 </div>
 ```
