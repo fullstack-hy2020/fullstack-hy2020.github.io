@@ -409,7 +409,7 @@ Mutaation toteuttava resolveri:
 Huomaa miten resolveri <i>destrukturoi</i> kirjautuneen käyttäjän kontekstista, eli sen sijaan että _currentUser_ otettaisiin erilliseen muuttujaan funktiossa
 
 ```js
-addAsFriend: async (root, args, { currentUser }) => {
+addAsFriend: async (root, args, context) => {
   const currentUser = context.currentUser
 ```
 
