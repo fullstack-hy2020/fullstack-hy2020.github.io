@@ -467,7 +467,7 @@ Before we write more tests let's take a look at the _async_ and _await_ keywords
 The async/await syntax that was introduced in ES7 makes it possible to use <i>asynchronous functions that return a promise</i> in a way that makes the code look synchronous.
 
 
-As an example, the fetching notes from the database with promises looks like this:
+As an example, the fetching of notes from the database with promises looks like this:
 
 ```js
 Note.find({}).then(notes => {
@@ -570,7 +570,7 @@ notesRouter.get('/', async (request, response) => {
 We can verify that our refactoring was successful by testing the endpoint through the browser and by running the tests that we wrote earlier.
 
 
-You can find the code for our current application in its entirety in the <i>part4-3</i> branch of [this github repository](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part4-3).
+You can find the code for our current application in its entirety in the <i>part4-3</i> branch of [this Github repository](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part4-3).
 
 
 ### More tests and refactoring the backend
@@ -992,7 +992,7 @@ beforeEach(async () => {
 ```
 
 
-The solution is quite advanced despite its compact appearance. The _noteObject_ variable is assigned to an array of Mongoose objects that are created with the _Note_ constructor for each of the notes in the _helper.initialNotes_ array. The next line of code creates a new array that <i>consists of promises</i>, that are created by calling the _save_ method of each item in the _noteObjects_ array. In other words, it is an array of promises for saving each of the items to the database.
+The solution is quite advanced despite its compact appearance. The _noteObjects_ variable is assigned to an array of Mongoose objects that are created with the _Note_ constructor for each of the notes in the _helper.initialNotes_ array. The next line of code creates a new array that <i>consists of promises</i>, that are created by calling the _save_ method of each item in the _noteObjects_ array. In other words, it is an array of promises for saving each of the items to the database.
 
 
 The [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) method can be used for transforming an array of promises into a single promise, that will be <i>fulfilled</i> once every promise in the array passed to it as a parameter is resolved. The last line of code <em>await Promise.all(promiseArray)</em> waits that every promise for saving a note is finished, meaning that the database has been initialized.
@@ -1065,7 +1065,7 @@ module.exports = {
 #### 4.9*: Blog list tests, step2
 
 
-Write a test that verifies that the unique identifier property of the blog posts is named <i>id</i>, by default the database names the property <i>_id</i>. Verifying the existence of a property is easily done with Jest's [toBeDefined](https://jestjs.io/docs/en/expect#tobedefined) matcher:
+Write a test that verifies that the unique identifier property of the blog posts is named <i>id</i>, by default the database names the property <i>_id</i>. Verifying the existence of a property is easily done with Jest's [toBeDefined](https://jestjs.io/docs/en/expect#tobedefined) matcher.
 
 
 Make the required changes to the code so that it passes the test. The [toJSON](/en/part3/saving_data_to_mongo_db#backend-connected-to-a-database) method discussed in part 3 is an appropriate place for defining the <i>id</i> parameter.
@@ -1104,7 +1104,7 @@ Make the required changes to the code so that it passes the test.
 
 ### Refactoring tests
 
-Our test coverage is currently lacking. Some requests like <i>GET /api/notes/:id</i> and <i>DELETE /api/notes/:id</i> aren't tested when the request is sent with an invalid id. The grouping and organization of tests could also use some improvement, as all tests exist on the same "top level" in the test file. The readability of the test would improve, if we grouped related tests with <i>describe</i> blocks.
+Our test coverage is currently lacking. Some requests like <i>GET /api/notes/:id</i> and <i>DELETE /api/notes/:id</i> aren't tested when the request is sent with an invalid id. The grouping and organization of tests could also use some improvement, as all tests exist on the same "top level" in the test file. The readability of the test would improve if we group related tests with <i>describe</i> blocks.
 
 
 Below is an example of the test file after making some minor improvements:
@@ -1261,7 +1261,7 @@ There is still room for improvement, but it is time to move forward.
 This way of testing the API, by making HTTP requests and inspecting the database with Mongoose, is by no means the only nor the best way of conducting API-level integration tests for server applications. There is no universal best way of writing tests, as it all depends on the application being tested and available resources.
 
 
-You can find the code for our current application in its entirety in the <i>part4-5</i> branch of [this github repository](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part4-5).
+You can find the code for our current application in its entirety in the <i>part4-5</i> branch of [this Github repository](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part4-5).
 
 </div>
 
