@@ -190,7 +190,7 @@ You can assume that the state of the database is suitable for your tests in this
 It is recommended to spend some time reading through the documentation for Cypress. The [best practices](https://docs.cypress.io/guides/references/best-practices.html) page in particular contains a lot of valuable tips that are good to keep in mind when writing your tests.
 
 
-#### 7.17 End to end testing, step2
+#### 7.18 End to end testing, step2
 
 
 Expand your E2E tests so that the tests [initialize the state of the database](/en/part7/class_components_e_2_e_testing#controlling-the-state-of-the-database) always before the tests are executed. Write one at least one test that modifies the application's database e.g. by creating a new blog post.
