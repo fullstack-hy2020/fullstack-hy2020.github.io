@@ -451,7 +451,7 @@ Voit olettaa tässä tehtävässä, että käyttäjä ei yritä luoda virheellis
 Seuraavien asioiden ei vielä tässä tehtävässä tarvitse toimia.
 
 - queryn _allBooks_ parametrilliset versiot
-- kirjailijoiden kenttä <i>bookCount</i>
+- kirjailijoiden kenttä _bookCount_
 - kirjojen kenttä _author_
 - mutaatio _editAuthor_
 
