@@ -8,7 +8,7 @@ lang: en
 <div class="content">
 
 
-Let's expand the application, such that the notes are stored to the backend. We'll use [json-server](/en/part2/getting_data_from_server) familiar from part 2.
+Let's expand the application, such that the notes are stored to the backend. We'll use [json-server](/en/part2/getting_data_from_server), familiar from part 2.
 
 
 The initial state of the database is stored into the file <i>db.json</i>, which is placed in the root of the project:
@@ -40,7 +40,7 @@ npm install json-server --save
 
 
 
-and add the following line to <i>scripts</i> part of the file <i>package.json</i>
+and add the following line to the <i>scripts</i> part of the file <i>package.json</i>
 
 ```js
 "scripts": {
@@ -157,11 +157,11 @@ noteService.getAll().then(notes =>
 > **NB:** why didn't we use await in place of promises and event handlers (registered to _then_-methods)?
 >
 
-> Await only works inside <i>async</i> functions, and the code in <i>index.js</i> is not inside a function, so due to the simple nature of operation, we'll abstain from using <i>async</i> this time.
+> Await only works inside <i>async</i> functions, and the code in <i>index.js</i> is not inside a function, so due to the simple nature of the operation, we'll abstain from using <i>async</i> this time.
 
 
 
-We do, however, decide to move the initialization of the notes into the <i>App</i> component, and as usual when fetching data from a server, we'll use the <i>effect hook</i>. 
+We do, however, decide to move the initialization of the notes into the <i>App</i> component, and, as usual when fetching data from a server, we'll use the <i>effect hook</i>. 
 
 
 
@@ -254,7 +254,7 @@ export default connect(null, { createNote } )(NewNote)
 
 
 
-Because the backend generates ids for the notes, we'll change the action creator _noteCreation_
+Because the backend generates ids for the notes, we'll change the action creator _createNote_
 
 ```js
 export const createNote = (data) => {
@@ -346,7 +346,7 @@ npm install --save redux-thunk
 
 
 
-The redux-thunk-library is a so-called <i>redux-middleware</i>, which must be initialized along with the initialization of the store. While we're here, let's will extract the definition of the store into its own file <i>src/store.js</i>:
+The redux-thunk-library is a so-called <i>redux-middleware</i>, which must be initialized along with the initialization of the store. While we're here, let's extract the definition of the store into its own file <i>src/store.js</i>:
 
 ```js
 import { createStore, combineReducers, applyMiddleware } from 'redux'
@@ -409,7 +409,7 @@ In the inner function, meaning the <i>asynchronous action</i>, the operation fir
 
 
 
-The component <i>App</i> can now the defined as follows:
+The component <i>App</i> can now be defined as follows:
 
 ```js
 const App = (props) => {
@@ -472,7 +472,7 @@ const NewNote = (props) => {
   return (
     <form onSubmit={addNote}>
       <input name="note" />
-      <button type="submit">lisää</button>
+      <button type="submit">add</button>
     </form>
   )
 }
@@ -491,7 +491,7 @@ The current state of the code for the application can be found on [github](https
 
 
 
-There is an extension [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) that can be installed on Chrome, in which the state of Redux-store and the action that change it can be monitored from the console of the browser.
+There is an extension [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) that can be installed on Chrome, in which the state of the Redux-store and the action that changes it can be monitored from the console of the browser.
 
 
 
@@ -541,7 +541,7 @@ It's also possible to dispatch actions to the store using the console
 
 ### Redux and component state
 
-We have come a long way in this course and, finally, we have come to the point at which we are using React "the right way", meaning React only focuses on generating the views and the application state is separated completely from the React components and passed on to Redux, its actions, and its reducers.
+We have come a long way in this course and, finally, we have come to the point at which we are using React "the right way", meaning React only focuses on generating the views, and the application state is separated completely from the React components and passed on to Redux, its actions, and its reducers.
 
 What about the _useState_-hook, which provides components with their own state? Does it have any role if an application is using Redux or some other external state management solution? If the application has more complicated forms, it may be beneficial to implement their local state using the state provided by the _useState_ function. One can, of course, have Redux manage the state of the forms, however, if the state of the form is only relevant when filling the form (e.g. for validation) it may be wise to leave the management of state to the component responsible for the form.
 
