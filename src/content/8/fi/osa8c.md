@@ -108,9 +108,9 @@ const resolvers = {
 }
 ```
 
-Muutokset ovat melko suoraviivaisia. Huomio kiinnittyy pariin seikkaan. Kuten muistamme Mongossa olioiden identifioiva kenttä on nimeltääm <i>_id</i> ja jouduimme aiemmin muuttamaan itse kentän nimen alaviivattomaan muotoon <i>id</i>. GraphQL osaa tehdä tämän muutoksen automaattisesti.
+Muutokset ovat melko suoraviivaisia. Huomio kiinnittyy pariin seikkaan. Kuten muistamme, Mongossa olioiden identifioiva kenttä on nimeltääm <i>_id</i> ja jouduimme aiemmin muuttamaan itse kentän nimen alaviivattomaan muotoon <i>id</i>. GraphQL osaa tehdä tämän muutoksen automaattisesti.
 
-Toinen huomionarvoinen seikka on se, että resolverifunktiot palauttavat nyt <i>promisen</i>, aiemmihan ne palauttivat aina normaaleja oliota. Kun resolveri palauttaa promisen Apollo server [osaa lähettää vastaukseksi](https://www.apollographql.com/docs/apollo-server/essentials/data.html#result) sen arvon mihin promise resolvoituu.
+Toinen huomionarvoinen seikka on se, että resolverifunktiot palauttavat nyt <i>promisen</i>, aiemminhan ne palauttivat aina normaaleja oliota. Kun resolveri palauttaa promisen, Apollo server [osaa lähettää vastaukseksi](https://www.apollographql.com/docs/apollo-server/essentials/data.html#result) sen arvon mihin promise resolvoituu.
 
 
 Eli esimerkiksi jos seuraava resolverifunktio suoritetaan,
