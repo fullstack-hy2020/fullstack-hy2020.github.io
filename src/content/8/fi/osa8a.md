@@ -688,7 +688,7 @@ Jos yritämme luoda uuden henkilön, mutta parametrit eivät vastaa skeemassa m�
 
 ![](../../images/8/5.png)
 
-GraphQL:n [validoinnin](https://graphql.org/learn/validation/) avulla pystytään siis jo automaattisesi hoitamaan osa virheenkäsittelyä. 
+GraphQL:n [validoinnin](https://graphql.org/learn/validation/) avulla pystytään siis jo automaattisesti hoitamaan osa virheenkäsittelyä. 
 
 Kaikkea GraphQL ei kuitenkaan pysty hoitamaan automaattisesti. Esimerkiksi tarkemmat säännöt mutaatiolla lisättävän datan kenttien muodolle on lisättävä itse. Niistä aiheutuvat virheet tulee hoitaa [GraphQL:n poikkeuskäsittelymekanismilla](https://www.apollographql.com/docs/apollo-server/features/errors.html).
 
@@ -1151,7 +1151,7 @@ palauttaa
 
 #### 8.7: Kirjailijan syntymävuoden päivitys
 
-Toteuta mutaatio _editAuthor_ jonka avulla on mahdollista asettaa kirjailijalle syntymävuosi. Mutaatiota käytetään seuraavasti
+Toteuta mutaatio _editAuthor_, jonka avulla on mahdollista asettaa kirjailijalle syntymävuosi. Mutaatiota käytetään seuraavasti
 
 ```js
 mutation {
