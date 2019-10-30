@@ -69,7 +69,7 @@ const App = () => {
   // ...
 
   return (
-    <div class="container"> // highlight-line
+    <div className="container"> // highlight-line
       // ...
     </div>
   )
