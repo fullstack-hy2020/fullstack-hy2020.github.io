@@ -69,7 +69,7 @@ const App = () => {
   // ...
 
   return (
-    <div class="container"> // highlight-line
+    <div className="container"> // highlight-line
       // ...
     </div>
   )
@@ -436,7 +436,7 @@ And let's render the notification by using Semantic's [Message](https://react.se
     </Message>
   )}
   // ...
-</Conteiner>
+</Container>
 ```
 
 
