@@ -395,7 +395,7 @@ export default { getAll, create, update, setToken } // highlight-line
 ```
 
 
-The noteService module contains a private variable _token_. Its value can be changed with a function _setToken_, which is exported by the module. _create_, now with async/await syntax, sets the token to the <i>Authorization</i>header. The header is given to axios as the third parameter of the <i>post</i> method. 
+The noteService module contains a private variable _token_. Its value can be changed with a function _setToken_, which is exported by the module. _create_, now with async/await syntax, sets the token to the <i>Authorization</i> header. The header is given to axios as the third parameter of the <i>post</i> method. 
 
 
 The event handler responsible for log in must be changed to call the method <code>noteService.setToken(user.token)</code> with a successful log in: 
