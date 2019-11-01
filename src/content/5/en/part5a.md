@@ -598,7 +598,7 @@ npm start
 ```
 
 
-Implement login functionality to the frontend. The token returned with a successfull login is saved to the application's state <i>user</i>.
+Implement login functionality to the frontend. The token returned with a successful login is saved to the application's state <i>user</i>.
 
 
 If a user is not logged in, <i>only</i> the login form is visible. 
