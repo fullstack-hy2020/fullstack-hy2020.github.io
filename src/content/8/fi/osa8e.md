@@ -45,7 +45,7 @@ query {
 
 palauttavat molemmat henkilöitä. Valitessaan palautettavia kenttiä, molemmat kyselyt joutuvat määrittelemään täsmälleen samat kentät. 
 
-Tälläisiä tilanteita voidaan yksinkertaistaa [fragmenttien](https://graphql.org/learn/queries/#fragments) avulla. Määritellään kaikki henkilön tiedot valitseva fragmentti:
+Tällaisia tilanteita voidaan yksinkertaistaa [fragmenttien](https://graphql.org/learn/queries/#fragments) avulla. Määritellään kaikki henkilön tiedot valitseva fragmentti:
 
 ```js
 fragment PersonDetails on Person {
@@ -58,7 +58,7 @@ fragment PersonDetails on Person {
 }
 ```
 
-Kyselyt voidan nyt tehdä fragmenttien avulla kompaktimmassa muodossa:
+Kyselyt voidaan nyt tehdä fragmenttien avulla kompaktimmassa muodossa:
 
 ```js
 query {
