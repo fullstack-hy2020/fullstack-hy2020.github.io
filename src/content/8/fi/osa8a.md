@@ -322,7 +322,7 @@ const server = new ApolloServer({
 
 parametreista ensimmäinen _typeDefs_ sisältää sovelluksen käyttämän GraphQL-skeeman. 
 
-Toinen parametri on olio, joka sisältää palvelimen [resolverit](https://www.apollographql.com/docs/apollo-server/essentials/data.html#resolver-map), eli käytännössä koodin, joka määrittelee <i>miten</i> GraphQL-kyselyihin vastataan.
+Toinen parametri on olio, joka sisältää palvelimen [resolverit](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-map), eli käytännössä koodin, joka määrittelee <i>miten</i> GraphQL-kyselyihin vastataan.
 
 Resolverien koodi on seuraavassa:
 
@@ -383,7 +383,7 @@ resolveri on funktio, joka palauttaa <i>kaikki</i> taulukon _persons_ oliot
 
 ### GraphQL-playground
 
-Kun Apollo -serveriä suoritetaan sovelluskehitysmoodissa, käynnistää se osoitteeseen [http://localhost:4000/graphql](http://localhost:4000/graphql) sovelluskehittäjälle erittäin hyödyllisen [GraphQL-playground](https://www.apollographql.com/docs/apollo-server/features/graphql-playground.html)-näkymän, joka avulla on mahdollista tehdä kyselyjä palvelimelle.
+Kun Apollo -serveriä suoritetaan sovelluskehitysmoodissa, käynnistää se osoitteeseen [http://localhost:4000/graphql](http://localhost:4000/graphql) sovelluskehittäjälle erittäin hyödyllisen [GraphQL-playground](https://www.apollographql.com/docs/apollo-server/testing/graphql-playground/)-näkymän, joka avulla on mahdollista tehdä kyselyjä palvelimelle.
 
 Kokeillaan 
 
@@ -690,7 +690,7 @@ Jos yritämme luoda uuden henkilön, mutta parametrit eivät vastaa skeemassa m�
 
 GraphQL:n [validoinnin](https://graphql.org/learn/validation/) avulla pystytään siis jo automaattisesti hoitamaan osa virheenkäsittelyä. 
 
-Kaikkea GraphQL ei kuitenkaan pysty hoitamaan automaattisesti. Esimerkiksi tarkemmat säännöt mutaatiolla lisättävän datan kenttien muodolle on lisättävä itse. Niistä aiheutuvat virheet tulee hoitaa [GraphQL:n poikkeuskäsittelymekanismilla](https://www.apollographql.com/docs/apollo-server/features/errors.html).
+Kaikkea GraphQL ei kuitenkaan pysty hoitamaan automaattisesti. Esimerkiksi tarkemmat säännöt mutaatiolla lisättävän datan kenttien muodolle on lisättävä itse. Niistä aiheutuvat virheet tulee hoitaa [GraphQL:n poikkeuskäsittelymekanismilla](https://www.apollographql.com/docs/apollo-server/data/errors/).
 
 Estetään saman nimen lisääminen puhelinluetteloon useampaan kertaan:
 
