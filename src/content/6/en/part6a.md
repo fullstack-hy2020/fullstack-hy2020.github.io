@@ -1179,7 +1179,7 @@ Separate the creation of new anecdotes into its own component called <i>Anecdote
 #### 6.8: anecdotes, step6
 
 
-Separate the rendering of the anecdote list into its own component called <i>AnecdoteList</i>. Move all logic related to voting for a anecdote to this new component. 
+Separate the rendering of the anecdote list into its own component called <i>AnecdoteList</i>. Move all logic related to voting for an anecdote to this new component. 
 
 
 Now the <i>App</i> component should look like this: 
