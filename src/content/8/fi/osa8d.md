@@ -108,7 +108,7 @@ const LoginForm = (props) => {
 export default LoginForm
 ```
 
-Lisätään sovellukselle myös nappi, jonka avulla kirjautunut käyttäjä voi kirjautua ulos. Napin klikkauskäsittelijässä asetetaan  _token_ tilaan null, poistetaan token local storagesta ja resetoidaan Apollo clientin välimuisti. Tämä on [tärkeää](https://www.apollographql.com/docs/react/recipes/authentication.html#login-logout), sillä joissain kyselyissä välimuistiin on saatettu hakea dataa, johon vain kirjaantuneella käyttäjällä on oikeus päästä käsiksi.
+Lisätään sovellukselle myös nappi, jonka avulla kirjautunut käyttäjä voi kirjautua ulos. Napin klikkauskäsittelijässä asetetaan  _token_ tilaan null, poistetaan token local storagesta ja resetoidaan Apollo clientin välimuisti. Tämä on [tärkeää](https://www.apollographql.com/docs/react/v2.5/recipes/authentication/#reset-store-on-logout), sillä joissain kyselyissä välimuistiin on saatettu hakea dataa, johon vain kirjaantuneella käyttäjällä on oikeus päästä käsiksi.
 
 
 ```js
@@ -197,9 +197,9 @@ Konfiguraatio edellyttää kahden kirjaston asentamista:
 npm install --save apollo-link apollo-link-context
 ```
 
-_client_ muodostetaan nyt kirjaston [apollo-link](https://www.apollographql.com/docs/link/index.html) tarjoamalla konstruktorifunktiolla [ApolloClient](https://www.apollographql.com/docs/react/api/apollo-client.html#apollo-client). Parametreja on kaksi, _link_ ja _cache_. Näistä jälkimmäinen määrittelee, että sovelluksen käyttöön tulee keskusmuistissa toimiva välimuisti [InMemoryCache](https://www.apollographql.com/docs/react/advanced/caching.html#smooth-scroll-top). 
+_client_ muodostetaan nyt kirjaston [apollo-link](https://www.apollographql.com/docs/link/index.html) tarjoamalla konstruktorifunktiolla [ApolloClient](https://www.apollographql.com/docs/react/api/apollo-client.html#apollo-client). Parametreja on kaksi, _link_ ja _cache_. Näistä jälkimmäinen määrittelee, että sovelluksen käyttöön tulee keskusmuistissa toimiva välimuisti [InMemoryCache](https://www.apollographql.com/docs/react/v2.5/advanced/caching/#inmemorycache). 
 
-Ensimmäinen parametri _link_ määrittelee sen, miten client ottaa yhteyttä palvelimeen, jonka pohjalla on [httpLink](https://www.apollographql.com/docs/link/links/http.htm), eli normaali HTTP:n yli tapahtuva yhteys, jota on höystetty siten, että pyyntöjen mukaan [asetetaan headerille](https://www.apollographql.com/docs/react/recipes/authentication.html#Header) <i>authorization</i> arvoksi localStoragessa mahdollisesti oleva token.
+Ensimmäinen parametri _link_ määrittelee sen, miten client ottaa yhteyttä palvelimeen, jonka pohjalla on [httpLink](https://www.apollographql.com/docs/link/links/http.htm), eli normaali HTTP:n yli tapahtuva yhteys, jota on höystetty siten, että pyyntöjen mukaan [asetetaan headerille](https://www.apollographql.com/docs/react/v2.5/recipes/authentication/#header) <i>authorization</i> arvoksi localStoragessa mahdollisesti oleva token.
 
 Uusien henkilöiden lisäys ja numeroiden muuttaminen toimii taas. Sovellukseen jää kuitenkin yksi ongelma. Jos yritämme lisätä puhelinnumerotonta henkilöä, se ei onnistu.
 
@@ -252,7 +252,7 @@ const App = () => {
 
 Lähestymistapa on kohtuullisen toimiva, ikävänä puolena on toki se, että päivityksen yhteydessä suoritetaan aina myös kysely. 
 
-Ratkaisua on mahdollista optimoida hoitamalla välimuistin päivitys itse. Tämä tapahtuu määrittelemällä mutaatiolle sopiva [update](https://www.apollographql.com/docs/react/advanced/caching.html#after-mutations)-callback, jonka Apollo suorittaa mutaation päätteeksi: 
+Ratkaisua on mahdollista optimoida hoitamalla välimuistin päivitys itse. Tämä tapahtuu määrittelemällä mutaatiolle sopiva [update](https://www.apollographql.com/docs/react/v2.5/advanced/caching/#updating-after-a-mutation)-callback, jonka Apollo suorittaa mutaation päätteeksi: 
 
 
 ```js 
@@ -279,11 +279,11 @@ const App = () => {
 
 Callback-funktio saa parametriksi viitteen välimuistiin sekä mutaation mukana palautetun datan, eli esimerkkimme tapauksessa lisätyn käyttäjän.
 
-Koodi lukee funktion [readQuery](https://www.apollographql.com/docs/react/advanced/caching.html#readquery) avulla kyselyn <em>ALL\_PERSONS</em> välimuistiin talletetun tilan ja päivittää välimuistin funktion [writeQuery](https://www.apollographql.com/docs/react/advanced/caching.html#writequery-and-writefragment) avulla lisäten henkilöiden joukkoon mutaation lisäämän henkilön.
+Koodi lukee funktion [readQuery](https://www.apollographql.com/docs/react/v2.5/advanced/caching/#readquery) avulla kyselyn <em>ALL\_PERSONS</em> välimuistiin talletetun tilan ja päivittää välimuistin funktion [writeQuery](https://www.apollographql.com/docs/react/v2.5/advanced/caching/#writequery-and-writefragment) avulla lisäten henkilöiden joukkoon mutaation lisäämän henkilön.
 
 On myös olemassa tilanteita, joissa ainoa järkevä tapa saada välimuisti pidettyä ajantasaisena on _update_-callbackillä tehtävä päivitys. 
 
-Tarvittaessa välimuisti on mahdollista kytkeä pois päältä joko koko sovelluksesta tai yksittäisiltä kyselyiltä määrittelemällä välimuistin käyttöä kontrolloivalle [fetchPolicy](https://www.apollographql.com/docs/react/api/react-apollo.html#query-props):lle arvo <em>no-cache</em>. 
+Tarvittaessa välimuisti on mahdollista kytkeä pois päältä joko koko sovelluksesta tai yksittäisiltä kyselyiltä määrittelemällä välimuistin käyttöä kontrolloivalle [fetchPolicy](https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy):lle arvo <em>no-cache</em>. 
 
 Voisimme määritellä, että yksittäisen henkilön osoitetietoja ei tallenneta välimuistiin:
 
@@ -359,7 +359,8 @@ Tee sovellukseen näkymä, joka näyttää kirjautuneelle käyttäjälle käytt�
 Tietyn genren kirjoihin rajoittamisen voi tehdä kokonaan React-sovelluksen puolella. Voit merkitä tämän tehtävän, jos rajaat näytettävät kirjat tehtävässä 8.5 palvelimelle toteutetun suoran GraphQL-kyselyn avulla. 
 
 Tämä **tehtävä on haastava** ja niin kurssin tässä vaiheessa jo kuuluukin olla. Muutama vihje
-- Komponetin <i>Query</i> tai hookin <i>useQuery</i> käytön sijaan saattaa olla parempi tehdä kyselyitä suoraan _client_-oliolla, johon päästään käsiksi komponentin [ApolloConsumer](https://www.apollographql.com/docs/react/essentials/queries.html#manual-query) tai hookilla [useApolloClient](https://github.com/trojanowski/react-apollo-hooks#useapolloclient), katso lisää [täältä](/osa8/react_ja_graph_ql#nimetyt-kyselyt-ja-muuttujat).
+
+- Komponentin <i>Query</i> tai hookin <i>useQuery</i> käytön sijaan saattaa olla parempi tehdä kyselyitä suoraan _client_-oliolla, jonhon päästään käsiksi komponentin [ApolloConsumer](https://www.apollographql.com/docs/react/essentials/queries.html#manual-query) tai hookilla [useApolloClient](https://github.com/trojanowski/react-apollo-hooks#useapolloclient), katso lisää [täältä](/osa8/react_ja_graph_ql#nimetyt-kyselyt-ja-muuttujat).
 - GraphQL-kyselyjen tuloksia kannattaa joskus tallentaa komponentin tilaan.
 - Huomaa, että voit tehdä GraphQL-kyselyjä <i>useEffect</i>-hookissa.
 - <i>useEffect</i>-hookin [toisesta parametrista](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) voi olla tehtävässä apua, se tosin riippuu käyttämästäsi lähestymistavasta.

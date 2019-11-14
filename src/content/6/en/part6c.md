@@ -555,28 +555,28 @@ The final version of the code for the application can be found on [github](https
 ### Exercises
 
 
-#### 6.18 Anecdotes and the backend, step4
+#### 6.18 Anecdotes and the backend, step3
 
 
 
 Modify the initialization of redux-store to happen using asynchronous action creators, which are made possible by the <i>redux-thunk</i>-library.
 
 
-#### 6.19 Anecdotes and the backend, step5
+#### 6.19 Anecdotes and the backend, step4
 
 
 
 Also modify the creation of a new anecdote to happen using asynchronous action creators, made possible by the <i>redux-thunk</i>-library.
 
 
-#### 6.20 Anecdotes and the backend, step6
+#### 6.20 Anecdotes and the backend, step5
 
 
 
 Voting does not yet save changes to the backend. Fix the situation with the help of the <i>redux-thunk</i>-library.
 
 
-#### 6.21 Anecdotes and the backend, step7
+#### 6.21 Anecdotes and the backend, step6
 
 
 

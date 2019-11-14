@@ -20,7 +20,7 @@ Voisimmekin hoitaa React-sovelluksen ja GraphQL:n kommunikoinnin Axiosilla. Täm
 
 ### Apollo client
 
-Luodaan uusi React-sovellus ja asennetaan siihen [Apollo clientin](https://www.apollographql.com/docs/react/essentials/get-started.html#installation) vaatimat riippuvuudet.
+Luodaan uusi React-sovellus ja asennetaan siihen [Apollo clientin](https://www.apollographql.com/docs/react/get-started/#installation) vaatimat riippuvuudet.
 
 ```js
 npm install apollo-boost react-apollo graphql --save
@@ -66,7 +66,7 @@ const App = () => {
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-Koodi aloittaa luomalla [client](https://www.apollographql.com/docs/react/essentials/get-started.html#creating-client)-olion, jonka avulla se lähettää kyselyn palvelimelle:
+Koodi aloittaa luomalla [client](https://www.apollographql.com/docs/react/get-started/#create-a-client)-olion, jonka avulla se lähettää kyselyn palvelimelle:
 
 ```js
 client.query({ query })
@@ -79,7 +79,7 @@ Palvelimen palauttama vastaus tulostuu konsoliin:
 
 ![](../../images/8/9a.png)
 
-Sovellus pystyy siis kommunikoimaan GraphQL-palvelimen kanssa olion _client_ välityksellä. Client saadaan sovelluksen kaikkien komponenttien saataville käärimällä komponenttti <i>App</i> komponentin [ApolloProvider](https://www.apollographql.com/docs/react/essentials/get-started.html#creating-provider) lapseksi:
+Sovellus pystyy siis kommunikoimaan GraphQL-palvelimen kanssa olion _client_ välityksellä. Client saadaan sovelluksen kaikkien komponenttien saataville käärimällä komponenttti <i>App</i> komponentin [ApolloProvider](https://www.apollographql.com/docs/react/get-started/#connect-your-client-to-react) lapseksi:
 
 ```js
 import React from 'react'
@@ -107,7 +107,7 @@ ReactDOM.render(
 Olemme valmiina toteuttamaan sovelluksen päänäkymän, joka listaa kaikkien henkilöiden puhelinnumerot. 
 
 Apollo Client tarjoaa muutaman vaihtoehtoisen tavan kyselyjen tekemiselle.
-Tämän hetken (tämä osa on editoitu viimeksi 22.6.2019) vallitseva käytäntö on komponentin [Query](https://www.apollographql.com/docs/react/essentials/queries.html) käyttäminen.
+Tämän hetken (tämä osa on editoitu viimeksi 22.6.2019) vallitseva käytäntö on komponentin [Query](https://www.apollographql.com/docs/react/v2.5/essentials/queries/) käyttäminen.
 
 Kyselyn tekevän komponentin <i>App</i> koodi näyttää seuraavalta:
 
@@ -146,7 +146,7 @@ export default App
 
 Koodi vaikuttaa hieman sekavalta. Koodin ytimessä on komponentti <i>Query</i>, joka saa parametrina <i>query</i> suoritettavan kyselyn joka on muuttujassa <em>ALL\_PERSONS</em>. Komponentin <i>Query</i> tagien sisällä on <i>funktio</i>, joka palauttaa varsinaisen renderöitävän JSX:n. Funktion parametri _result_ sisältää GraphQL-kyselyn tuloksen.
 
-Tuloksella eli parametrissa _result_ olevalla oliolla on [useita kenttiä](https://www.apollographql.com/docs/react/essentials/queries.html#render-prop). Kenttä <i>loading</i> on arvoltaan tosi, jos kyselyyn ei ole saatu vielä vastausta. Tässä tilanteessa renderöitävä koodi on 
+Tuloksella eli parametrissa _result_ olevalla oliolla on [useita kenttiä](https://www.apollographql.com/docs/react/v2.5/essentials/queries/#render-prop-function). Kenttä <i>loading</i> on arvoltaan tosi, jos kyselyyn ei ole saatu vielä vastausta. Tässä tilanteessa renderöitävä koodi on 
 
 ```js
 if ( result.loading ) {
@@ -241,7 +241,7 @@ Myös GraphQL Playground mahdollistaa muuttujia sisältävän kyselyjen tekemise
 
 Äsken käyttämämme komponentti <i>Query</i> ei sovellu optimaalisella tavalla tarkoitukseen, sillä haluaisimme tehdä kyselyn vasta siinä vaiheessa kun käyttäjä haluaa nähdä jonkin henkilön tiedot. 
 
-Eräs tapa on käyttää suoraan <i>client</i> -olion metodia <i>query</i>. Sovelluksen komponentit pääsevät käsiksi query-olioon komponentin [ApolloConsumer](https://www.apollographql.com/docs/react/essentials/queries.html#manual-query) avulla.
+Eräs tapa on käyttää suoraan <i>client</i> -olion metodia <i>query</i>. Sovelluksen komponentit pääsevät käsiksi query-olioon komponentin [ApolloConsumer](https://www.apollographql.com/docs/react/v2.5/essentials/queries/#manually-firing-a-query) avulla.
 
 Muutetaan komponenttia <i>App</i> siten, että se hakee <i>ApolloConsumerin</i> avulla viitteen _query_-olioon ja välittää sen komponentille <i>Persons</i>.
 
@@ -361,7 +361,7 @@ Kun haemme monta kertaa esim. Arto Hellaksen tiedot, huomaamme mielenkiintoisen 
 
 ![](../../images/8/12.png)
 
-Apollo client tallettaa kyselyjen tulokset cacheen eli [välimuistiin](https://www.apollographql.com/docs/react/advanced/caching.html) ja optimoi suoritusta siten, että jos kyselyn vastaus on jo välimuistissa, ei kyselyä lähetetä ollenkaan palvelimelle.
+Apollo client tallettaa kyselyjen tulokset cacheen eli [välimuistiin](https://www.apollographql.com/docs/react/v2.5/essentials/local-state/) ja optimoi suoritusta siten, että jos kyselyn vastaus on jo välimuistissa, ei kyselyä lähetetä ollenkaan palvelimelle.
 
 Chromeen on mahdollista asentaa lisäosa [Apollo Client devtools](https://chrome.google.com/webstore/detail/apollo-client-developer-t/jdkknkkbebbapilgoeccciglkfbmbnfm/related), jonka avulla voidaan tarkastella mm. välimuistin tilaa
 
@@ -371,7 +371,7 @@ Tieto on organisoitu välimuistiin kyselykohtaisesti. Koska <i>Person</i>-tyypin
 
 ### Mutation-komponentti
 
-Toteutetaan sovellukseen mahdollisuus uusien henkilöiden lisäämiseen. Sopivan toiminnallisuuden tarjoaa komponentti [mutation](https://www.apollographql.com/docs/react/essentials/mutations.html#basic). Edellisessä luvussa kovakoodasimme mutaatioiden parametrit. Tarvitsemme nyt [muuttujia](https://graphql.org/learn/queries/#variables) käyttävän version henkilön lisäävästä mutaatiosta:
+Toteutetaan sovellukseen mahdollisuus uusien henkilöiden lisäämiseen. Sopivan toiminnallisuuden tarjoaa komponentti [mutation](https://www.apollographql.com/docs/react/v2.5/essentials/mutations/#the-mutation-component). Edellisessä luvussa kovakoodasimme mutaatioiden parametrit. Tarvitsemme nyt [muuttujia](https://graphql.org/learn/queries/#variables) käyttävän version henkilön lisäävästä mutaatiosta:
 
 ```js
 const CREATE_PERSON = gql`
@@ -485,7 +485,7 @@ Lisäys kyllä toimii, mutta sovelluksen näkymä ei päivity. Syynä tälle on 
 
 ### Välimuistin päivitys
 
-Ongelma voidaan ratkaista muutamallakin eri tavalla. Eräs tapa on määritellä kaikki henkilöt hakeva kysely [pollaamaan](https://www.apollographql.com/docs/react/essentials/queries.html#refetching) palvelinta, eli suorittamaan kysely palvelimelle toistuvasti tietyin väliajoin. 
+Ongelma voidaan ratkaista muutamallakin eri tavalla. Eräs tapa on määritellä kaikki henkilöt hakeva kysely [pollaamaan](https://www.apollographql.com/docs/react/v2.5/essentials/queries/#polling-and-refetching) palvelinta, eli suorittamaan kysely palvelimelle toistuvasti tietyin väliajoin. 
 
 Muutos on pieni, määritellään pollausväliksi kaksi sekuntia:
 
@@ -520,7 +520,7 @@ Yksinkertaisuuden lisäksi ratkaisun hyvä puoli on se, että aina kun joku käy
 
 Ikävänä puolena pollauksessa on tietenkin sen aiheuttama turha verkkoliikenne.
 
-Toinen helppo tapa välimuistin synkronoimiseen on määritellä <i>Mutation</i>-komponentin [refetchQueries](https://www.apollographql.com/docs/react/essentials/mutations.html#props)-propsin avulla että kysely <i>ALL_PERSONS</i> tulee suorittaa uudelleen henkilön lisäyksen yhteydessä:
+Toinen helppo tapa välimuistin synkronoimiseen on määritellä <i>Mutation</i>-komponentin [refetchQueries](https://www.apollographql.com/docs/react/v2.5/essentials/mutations/#props)-propsin avulla että kysely <i>ALL_PERSONS</i> tulee suorittaa uudelleen henkilön lisäyksen yhteydessä:
 
 ```js
 const App = () => {
@@ -566,7 +566,7 @@ Jos yritämme luoda epävalidia henkilöä, seurauksena on poikkeus.
 
 ![](../../images/8/14e.png)
 
-Poikkeus on syytä käsitellä. Eräs tapa poikkeusten käsittelyyn on rekisteröidä mutaatiolle poikkeuksenkäsittelijä [onError](https://www.apollographql.com/docs/react/essentials/mutations.html#props)-propsin avulla:
+Poikkeus on syytä käsitellä. Eräs tapa poikkeusten käsittelyyn on rekisteröidä mutaatiolle poikkeuksenkäsittelijä [onError](https://www.apollographql.com/docs/react/v2.5/essentials/mutations/#props)-propsin avulla:
 
 ```js
 const App = () => {
@@ -730,7 +730,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 Esimerkissämme sovelluksen tilan käsittely on siirtynyt suurimmaksi osaksi Apollo Clientin vastuulle. Tämä onkin melko tyypillinen ratkaisu GraphQL-sovelluksissa. Esimerkkimme käyttää Reactin komponenttien tilaa ainoastaan lomakkeen tilan hallintaan sekä virhetilanteesta kertovan notifikaation näyttämiseen. GraphQL:ää käytettäessä voikin olla, että ei ole enää kovin perusteltuja syitä siirtää sovelluksen tilaa ollenkaan Reduxiin. 
 
-Apollo mahdollistaa tarvittaessa myös sovelluksen paikallisen tilan tallettamisen [Apollon välimuistiin](https://www.apollographql.com/docs/react/essentials/local-state.html).
+Apollo mahdollistaa tarvittaessa myös sovelluksen paikallisen tilan tallettamisen [Apollon välimuistiin](https://www.apollographql.com/docs/react/v2.5/essentials/local-state/).
 
 ### Render props
 
