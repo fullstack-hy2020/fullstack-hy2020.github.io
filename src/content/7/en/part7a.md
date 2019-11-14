@@ -24,7 +24,7 @@ Following part 6 we return to React without Redux.
 
 
 
-It is very common for web-applications to have a navigation bar, which enables switching the view of application. 
+It is very common for web-applications to have a navigation bar, which enables switching the view of the application. 
 
 ![](../../images/7/1b.png)
 
@@ -68,7 +68,7 @@ const Users = () => (
 const App = () => {
   const [page, setPage] = useState('home')
 
- const  toPage = (page) => (event) => {
+ const toPage = (page) => (event) => {
     event.preventDefault()
     setPage(page)
   }
@@ -115,7 +115,7 @@ So each view is implemented as its own component and we store the information fo
 
 
 
-However, the method is not very optimal. As we can see from the pictures, the address stays the same even though at times we are in different views. Each view should preferably have its own address, e.g to make bookmarking possible. The <i>back</i>-button doesn't work as expected for our application either, meaning that <i>back</i> doesn't move you to the previously displayed view of the application, but somewhere completely different. If the application were to grow even bigger and we wanted to e.g add their separate views for each user and note, then this self made <i>routing</i>, meaning the navigation management of the application, would get overly complicated.
+However, the method is not very optimal. As we can see from the pictures, the address stays the same even though at times we are in different views. Each view should preferably have its own address, e.g. to make bookmarking possible. The <i>back</i>-button doesn't work as expected for our application either, meaning that <i>back</i> doesn't move you to the previously displayed view of the application, but somewhere completely different. If the application were to grow even bigger and we wanted to e.g. add their separate views for each user and note, then this self made <i>routing</i>, meaning the navigation management of the application, would get overly complicated.
 
 
 
@@ -164,11 +164,11 @@ const App = () => {
 
 
 
-Routing, or the conditional rendering of components <i>based on the url</i> in the browser is used by placing components as children of the <i>Router</i> component, meaning inside <i>Router</i>-tags.
+Routing, or the conditional rendering of components <i>based on the url</i> in the browser, is used by placing components as children of the <i>Router</i> component, meaning inside <i>Router</i>-tags.
 
 
 
-Notice, that even though the component is referred to by the name <i>Router</i> we are in fact talking about [BrowserRouter](https://reacttraining.com/react-router/web/api/BrowserRouter), because here the import happens by renaming the imported object:
+Notice that, even though the component is referred to by the name <i>Router</i>, we are in fact talking about [BrowserRouter](https://reacttraining.com/react-router/web/api/BrowserRouter), because here the import happens by renaming the imported object:
 
 ```js
 import {
@@ -185,7 +185,7 @@ According to the manual
 
 
 
-Normally the browser loads a new page when the url in the address bar changes. However, with the help of the [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/) <i>BrowserRouter</i> enables us to use the url in the address bar of the browser for internal "routing" in a React-application. So even if the url in the address bar changes, the content of the page is only manipulated using Javascript, and the browser doesn't load new content form the server. Using the back- and forward-actions, as well as the making bookmarks, is still logical like on a traditional web page.
+Normally the browser loads a new page when the url in the address bar changes. However, with the help of the [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/) <i>BrowserRouter</i> enables us to use the url in the address bar of the browser for internal "routing" in a React-application. So, even if the url in the address bar changes, the content of the page is only manipulated using Javascript, and the browser doesn't load new content form the server. Using the back and forward actions, as well as making bookmarks, is still logical like on a traditional web page.
 
 
 
@@ -232,7 +232,7 @@ Let's examine the slightly modified version from the previous example. The code 
 
 
 
-The application now contains five different views, the display of which is controlled by the router. In addition to the components <i>Home</i>, <i>Notes</i> and <i>Users</i> familiar from the previous example we have <i>Login</i> representing the login view and <i>Note</i> representing the view of a single note.
+The application now contains five different views, the display of which is controlled by the router. In addition to the components <i>Home</i>, <i>Notes</i> and <i>Users</i>, familiar from the previous example, we have <i>Login</i> representing the login view and <i>Note</i> representing the view of a single note.
 
 
 
@@ -508,7 +508,7 @@ const App = () => {
 
 
 
-We define an element common for modern web apps called <i>footer</i>, which defines the part at the bottom of the screen, outside of the <i>Router</i> so that it is shown regardless of the component shown in the routed part of the application.
+We define an element common for modern web apps called <i>footer</i>, which defines the part at the bottom of the screen, outside of the <i>Router</i>, so that it is shown regardless of the component shown in the routed part of the application.
 
 </div>
 <div class="tasks">

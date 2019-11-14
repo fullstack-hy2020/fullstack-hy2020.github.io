@@ -374,7 +374,7 @@ const noteReducer = (state = [], action) => {
 ```
 
 
-A reducer state must be compiled of [immutable](https://en.wikipedia.org/wiki/Immutable_object) objects. If there is a change in the state, the old object is not changed, but it is <i>replaced with a new, changed, object</i>. This is exactly what we did with the new reducer: the old array is replaced with the new. 
+A reducer state must be composed of [immutable](https://en.wikipedia.org/wiki/Immutable_object) objects. If there is a change in the state, the old object is not changed, but it is <i>replaced with a new, changed, object</i>. This is exactly what we did with the new reducer: the old array is replaced with the new. 
 
 
 Let's expand our reducer so that it can handle the change of a notes importance: 
@@ -707,7 +707,7 @@ describe('unicafe reducer', () => {
 ```
 
 
-**Implement the reducer and it's tests.**
+**Implement the reducer and its tests.**
 
 
 In the tests, make sure that the reducer is an <i>immutable function</i> with the <i>deep-freeze</i>-library. 
@@ -890,7 +890,7 @@ const App = () => {
 Aside from the reducer, our application is in one file. This is of course not sensible, and we should separate <i>App</i> into its own module. 
 
 
-Now the question is, how can the <i>App</i> access the store after the move? And more broadly, when a component is compiled of many smaller components, there must be a way for all of the components to access the store. 
+Now the question is, how can the <i>App</i> access the store after the move? And more broadly, when a component is composed of many smaller components, there must be a way for all of the components to access the store. 
 
 
 There are a few ways to achieve this. The simplest way is to forward the store using props. The starting point of the application <i>index.js</i> becomes 
@@ -1052,7 +1052,7 @@ const NewNote = (props) => {
 ```
 
 
-Unlike in the React code we did without Redux, the event handler for changing the state of the app (which now lives in Redux) has been moved away from the <i>App</i> to a child component. The logic for changing the state is still neatly in Redux separated from the whole React part of the application. 
+Unlike in the React code we did without Redux, the event handler for changing the state of the app (which now lives in Redux) has been moved away from the <i>App</i> to a child component. The logic for changing the state in Redux is still neatly separated from the whole React part of the application. 
 
 Let's separate (1) the list of notes and (2) the showing of a single note into their own components: 
 
@@ -1116,7 +1116,7 @@ Forwarding the <i>store</i> to all components as props is not the best solution.
 In a bit we will have a solution to this problem. 
 
 
-The code of the Redux application can be found in [github](https://github.com/fullstackopen-2019/redux-notes/tree/part6-1), branch <i>part6-1</i>.
+The code of the Redux application can be found on [Github](https://github.com/fullstackopen-2019/redux-notes/tree/part6-1), branch <i>part6-1</i>.
 
 </div>
 
@@ -1179,7 +1179,7 @@ Separate the creation of new anecdotes into its own component called <i>Anecdote
 #### 6.8: anecdotes, step6
 
 
-Separate the rendering of the anecdote list into its own component called <i>AnecdoteList</i>. Move all logic related to voting for a anecdote to this new component. 
+Separate the rendering of the anecdote list into its own component called <i>AnecdoteList</i>. Move all logic related to voting for an anecdote to this new component. 
 
 
 Now the <i>App</i> component should look like this: 

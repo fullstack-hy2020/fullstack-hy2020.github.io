@@ -20,7 +20,7 @@ The principles of token based authentication are depicted in the following seque
 - This causes the React code to send the username and the password to the server address <i>/api/login</i> as a HTTP POST request. 
 - If the username and the password are correct, the server generates a <i>token</i> which somehow identifies the logged in user. 
     - The token is signed digitally, making it impossible to falsify (with cryptographic means)
-- The backend responds with a statuscode indicating the operation was successful, and returns the token with the response.
+- The backend responds with a status code indicating the operation was successful, and returns the token with the response.
 - The browser saves the token, for example to the state of a React application. 
 - When the user creates a new note (or does some other operation requiring identification), the React code sends the token to the server with the request.
 - The server uses the token to identify the user
@@ -77,7 +77,7 @@ Because the passwords themselves are not saved to the database, but <i>hashes</i
 await bcrypt.compare(body.password, user.passwordHash)
 ```
 
-If the user is not found, or the password is incorrect, the request is responded to with the statuscode [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2). The reason for the failure is explained in the response body. 
+If the user is not found, or the password is incorrect, the request is responded to with the status code [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2). The reason for the failure is explained in the response body. 
 
 If the password is correct, a token is created with the method  _jwt.sign_. The token contains the username and the user id in a digitally signed form. 
 
@@ -94,7 +94,7 @@ The token has been digitally signed using a string from the environment variable
 The digital signature ensures that only parties who know the secret can generate a valid token. 
 The value for the environment variable must be set in the <i>.env</i> file. 
 
-A successful request is responded to with the statuscode <i>200 OK</i>. The generated token and the username of the user are sent back in the response body. 
+A successful request is responded to with the status code <i>200 OK</i>. The generated token and the username of the user are sent back in the response body. 
 
 Now the code for login just has to be added to the application by adding the new router to <i>app.js</i>. 
 
@@ -125,7 +125,7 @@ A successful login returns the user details and the token:
 
 ![](../../images/4/18e.png)
 
-A wrong username or password returns an error message and the proper statuscode:
+A wrong username or password returns an error message and the proper status code:
 
 ![](../../images/4/19e.png)
 
@@ -134,12 +134,12 @@ A wrong username or password returns an error message and the proper statuscode:
 Let's change creating new notes so that it is only possible if the post request has a valid token attached. 
 The note is then saved to the notes list of the user identified by the token. 
 
-There are several ways for sending the token from the browser to the server. We will use the [Authorization](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization) header. The header also tells which [authentication schema](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#Authentication_schemes) is used. This can be necessary if the server offers multiple ways to authenticate. 
+There are several ways of sending the token from the browser to the server. We will use the [Authorization](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization) header. The header also tells which [authentication schema](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#Authentication_schemes) is used. This can be necessary if the server offers multiple ways to authenticate. 
 Identifying the schema tells the server how the attached credentials should be interpreted. 
 
-The <i>Bearer</i>-schema is suitable for our needs. 
+The <i>Bearer</i> schema is suitable to our needs. 
 
-In practice this means, that if the token is, for example, the string <i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i>, the Authorization header will have the value: 
+In practice, this means that if the token is for example, the string <i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i>, the Authorization header will have the value: 
 
 <pre>
 Bearer eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW
@@ -202,7 +202,7 @@ const decodedToken = jwt.verify(token, process.env.SECRET)
 
 The object decoded from the token contains the <i>username</i> and <i>id</i> fields, which tells the server who made the request. 
 
-If there is no token, or the object decoded from the token does not contain the users identity (_decodedToken.id_ is undefined), error statuscode [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) is returned and the reason for the failure is explained in the response body. 
+If there is no token, or the object decoded from the token does not contain the users identity (_decodedToken.id_ is undefined), error status code [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) is returned and the reason for the failure is explained in the response body. 
 
 ```js
 if (!token || !decodedToken.id) {
@@ -264,13 +264,13 @@ const errorHandler = (error, request, response, next) => {
 }
 ```
 
-Current application code can be found from [github](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part4-8), branch <i>part4-8</i>.
+Current application code can be found on [Github](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part4-8), branch <i>part4-8</i>.
 
-If the application has multiple interfaces requiring identification, JWTs validation should be separated into its own middleware. Some existing library, like [express-jwt](https://www.npmjs.com/package/express-jwt), could also be used. 
+If the application has multiple interfaces requiring identification, JWT's validation should be separated into its own middleware. Some existing library like [express-jwt](https://www.npmjs.com/package/express-jwt) could also be used. 
 
 ### End notes
 
-There have been many changes to the code, which has caused a typical problem for a fast phased software project: most of the tests have broken. Because this part of the course is already jammed with new information, we will leave fixing the tests to a non compulsory exercise. 
+There have been many changes to the code which have caused a typical problem for a fast-paced software project: most of the tests have broken. Because this part of the course is already jammed with new information, we will leave fixing the tests to a non compulsory exercise. 
 
 Usernames, passwords and applications using token authentication must always be used over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). We could use a Node [HTTPS](https://nodejs.org/api/https.html) server in our application instead of the [HTTP](https://nodejs.org/docs/latest-v8.x/api/http.html) server (it requires more configuration). On the other hand, the production version of our application is in Heroku, so our applications stays secure: Heroku routes all traffic between a browser and the Heroku server over HTTPS. 
 
@@ -291,9 +291,9 @@ In the next exercises, basics of user management will be implemented for the Blo
 Implement a way to create new users by doing a HTTP POST-request to address <i>api/users</i>. Users have <i>username
 , password and name</i>.
 
-Do not save passwords to the database as clear text, but use <i>bcrypt</i>-library like we did in part 4 chapter [Creating new users](/en/part4/user_administration#creating-users)
+Do not save passwords to the database as clear text, but use the <i>bcrypt</i> library like we did in part 4 chapter [Creating new users](/en/part4/user_administration#creating-users).
 
-**NB** some Windows users have had problems with <i>bcrypt</i>. If you run into problems, remove the library with command 
+**NB** Some Windows users have had problems with <i>bcrypt</i>. If you run into problems, remove the library with command 
 
 ```bash
 npm uninstall bcrypt --save 
@@ -301,9 +301,9 @@ npm uninstall bcrypt --save
 
 and install [bcryptjs](https://www.npmjs.com/package/bcryptjs) instead. 
 
-Implement a way to see the details of all users by doing a suitable HTTP-request. 
+Implement a way to see the details of all users by doing a suitable HTTP request. 
 
-List of users can, for example, look as follows: 
+List of users can for example, look as follows: 
 
 ![](../../images/4/22.png)
 
@@ -311,30 +311,30 @@ List of users can, for example, look as follows:
 
 Add a feature which adds the following restrictions to creating new users: Both username and password must be given. Both username and password must be at least 3 characters long. The username must be unique. 
 
-The operation must respond with a suitable statuscode and some kind of an error message if invalid user is created. 
+The operation must respond with a suitable status code and some kind of an error message if invalid user is created. 
 
 **NB** Do not test password restrictions with Mongoose validations. It is not a good idea because the password received by the backend and the password hash saved to the database are not the same thing. The password length should be validated in the controller like we did in [part 3](/en/part3/validation_and_es_lint) before using Mongoose validation. 
 
-Implement also tests which test that invalid users are not created and invalid add user operation returns a suitable statuscode and an error message. 
+Also, implement tests which check that invalid users are not created and invalid add user operation returns a suitable status code and error message. 
 
 #### 4.17: bloglist expansion, step6
 
 Expand blogs so that each blog contains information on the creator of the blog. 
 
-Modify adding new blogs so, that when a new blog is created,  <i>any</i> user from the database is designated as it's creator (for example the one found first). Implement this according to part 4 chapter [populate](/en/part4/user_administration#populate).
+Modify adding new blogs so that when a new blog is created,  <i>any</i> user from the database is designated as its creator (for example the one found first). Implement this according to part 4 chapter [populate](/en/part4/user_administration#populate).
 Which user is designated as the creator does not matter just yet. The functionality is finished in exercise 4.19. 
 
-Modify listing all blogs so that the creators user information is displayed with the blog: 
+Modify listing all blogs so that the creator's user information is displayed with the blog: 
 
 ![](../../images/4/23e.png)
 
-and listing users so that the blogs user has created are listed with the user: 
+and listing all users also displays the blogs created by each user: 
 
 ![](../../images/4/24e.png)
 
 #### 4.18: bloglist expansion, step7
 
-Implement token-based authentication according to part 4 chapter [Token authentication](/en/part4/token_authentication)
+Implement token-based authentication according to part 4 chapter [Token authentication](/en/part4/token_authentication).
 
 #### 4.19: bloglist expansion, step8
 
@@ -342,9 +342,9 @@ Modify adding new blogs so that it is only possible if a valid token is sent wit
 
 #### 4.20*: bloglist expansion, step9
 
-[This example](/en/part4/token_authentication) from part 4 shows taking the token from the header with the _getTokenFrom_ helperfunction.
+[This example](/en/part4/token_authentication) from part 4 shows taking the token from the header with the _getTokenFrom_ helper function.
 
-If you used the same solution, refactor taking the token to a [middleware](/en/part3/node_js_and_express#middleware). The middleware should take the token from the <i>Authorization</i>-header and place it to <i>token</i> field of the <i>request</i> object. 
+If you used the same solution, refactor taking the token to a [middleware](/en/part3/node_js_and_express#middleware). The middleware should take the token from the <i>Authorization</i> header and place it to the <i>token</i> field of the <i>request</i> object. 
 
 In other words, if you register this middleware in the <i>app.js</i> file before all routes
 
@@ -363,11 +363,11 @@ blogsRouter.post('/', async (request, response) => {
 
 #### 4.21*: bloglist expansion, step10
 
-Change the delete blog operation so, that a blog can be deleted only by the user who added the blog. Therefore, deleting a blog is possible only if the token sent with the request is the same than that of the blog's creator. 
+Change the delete blog operation so that a blog can be deleted only by the user who added the blog. Therefore, deleting a blog is possible only if the token sent with the request is the same as that of the blog's creator. 
 
-If deleting a blog is attempted without a token or by a wrong user, the operation should return a suitable statuscode. 
+If deleting a blog is attempted without a token or by a wrong user, the operation should return a suitable status code. 
 
-Note, that if you fetch a blog from the database
+Note that if you fetch a blog from the database,
 
 ```js
 const blog = await Blog.findById(...)
@@ -379,7 +379,7 @@ the field <i>blog.user</i> does not contain a string, but an Object. So if you w
 if ( blog.user.toString() === userid.toString() ) ...
 ```
 
-This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/fullstackopen2019).
+This is the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/fullstackopen2019).
 
 <!---
 note left of user
