@@ -110,7 +110,7 @@ const resolvers = {
 
 Muutokset ovat melko suoraviivaisia. Huomio kiinnittyy pariin seikkaan. Kuten muistamme, Mongossa olioiden identifioiva kenttä on nimeltään <i>_id</i> ja jouduimme aiemmin muuttamaan itse kentän nimen alaviivattomaan muotoon <i>id</i>. GraphQL osaa tehdä tämän muutoksen automaattisesti.
 
-Toinen huomionarvoinen seikka on se, että resolverifunktiot palauttavat nyt <i>promisen</i>, aiemminhan ne palauttivat aina normaaleja oliota. Kun resolveri palauttaa promisen, Apollo server [osaa lähettää vastaukseksi](https://www.apollographql.com/docs/apollo-server/essentials/data.html#result) sen arvon mihin promise resolvoituu.
+Toinen huomionarvoinen seikka on se, että resolverifunktiot palauttavat nyt <i>promisen</i>, aiemminhan ne palauttivat aina normaaleja oliota. Kun resolveri palauttaa promisen, Apollo server [osaa lähettää vastaukseksi](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-results) sen arvon mihin promise resolvoituu.
 
 
 Eli esimerkiksi jos seuraava resolverifunktio suoritetaan,
@@ -300,7 +300,7 @@ GraphQL-playgroundissa headerin liittäminen pyyntöön tapahtuu seuraavasti
 
 ![](../../images/8/24.png)
 
-Laajennetaan sitten sovelluksen olion _server_ määrittelyä lisäämällä konstruktorikutsuun kolmas parametri [context](https://www.apollographql.com/docs/apollo-server/essentials/data.html#context):
+Laajennetaan sitten sovelluksen olion _server_ määrittelyä lisäämällä konstruktorikutsuun kolmas parametri [context](https://www.apollographql.com/docs/apollo-server/data/data/#context-argument):
 
 ```js
 const server = new ApolloServer({

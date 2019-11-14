@@ -114,7 +114,7 @@ CI=true npm test
 **NB:** the console may issue a warning if you have not installed Watchman. Watchman is an application developed by Facebook that watches for changes that are made to files. The program speeds up the execution of tests and at least starting from macOS Sierra, running tests in watch mode issues some warnings to the console, that can be gotten rid of by installing Watchman.
 
 
-Instructions for installing Watchman on different operating systems can be found from the official Watchman website: https://facebook.github.io/watchman/
+Instructions for installing Watchman on different operating systems can be found on the official Watchman website: https://facebook.github.io/watchman/
 
 
 ### Test file location
@@ -171,7 +171,7 @@ The first way searches for a matching text from the entire HTML code rendered by
 The second way uses the [getByText](https://testing-library.com/docs/dom-testing-library/api-queries#bytext) method of the object returned by the render method. The method returns the element that contains the given text. An exception occurs if no such element exists. For this reason, we would technically not need to specify any additional expectation.
 
 
-The third way is to search for a specific element that is rendered by the component with the [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) method that receives a [CSS-selector](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) as its parameter.
+The third way is to search for a specific element that is rendered by the component with the [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) method that receives a [CSS selector](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) as its parameter.
 
 
 ### Debugging tests
@@ -219,7 +219,7 @@ console.log node_modules/@testing-library/react/dist/index.js:90
 ```
 
 
-It is also possible to search for a smaller part of the component and print its HTML code. In order to do this we need the _prettyDOM_ method, that can be imported from the <i>@testing-library/dom</i> package that is automatically installed with react-testing-library:
+It is also possible to search for a smaller part of the component and print its HTML code. In order to do this, we need the _prettyDOM_ method that can be imported from the <i>@testing-library/dom</i> package that is automatically installed with react-testing-library:
 
 ```js
 import React from 'react'
@@ -477,10 +477,10 @@ test('toggled content can be closed', () => {
 ```
 
 
-The _getByText_ method that we used, is just one of the many [queries](https://testing-library.com/docs/api-queries#queries) <i>react-testing-library</i> offers.
+The _getByText_ method that we used is just one of the many [queries](https://testing-library.com/docs/api-queries#queries) <i>react-testing-library</i> offers.
 
 
-You can find the code for our current application in its entirety in the <i>part5-7</i> branch of [this github repository](https://github.com/fullstackopen-2019/part2-notes/tree/part5-7).
+You can find the code for our current application in its entirety in the <i>part5-7</i> branch of [this Github repository](https://github.com/fullstackopen-2019/part2-notes/tree/part5-7).
 </div>
 
 <div class="tasks">
@@ -652,7 +652,7 @@ So far all of our tests for the frontend have been unit tests that have validate
 Next, let's write a single integration test for the application. Writing integration tests is considerably more difficult than writing unit tests for individual components. There are two challenges specific to our application: the application fetches the notes from the backend <i>and</i> the application uses local storage for storing information about the user who is logged in.
 
 
-Local storage is not available to our tests by default, as it is functionality provided by the browser and our tests are not running in the browser. It is quite easy to overcome this challenge by defining a <i>mock</i> that mimics the functionality of the local storage. There are  [many](https://stackoverflow.com/questions/32911630/how-do-i-deal-with-localstorage-in-jest-tests) ways to accomplish this.
+Local storage is not available to our tests by default, as its functionality is provided by the browser and our tests are not running in the browser. It is quite easy to overcome this challenge by defining a <i>mock</i> that mimics the functionality of the local storage. There are  [many](https://stackoverflow.com/questions/32911630/how-do-i-deal-with-localstorage-in-jest-tests) ways to accomplish this.
 
 
 As our tests do not rely on any actual local storage functionality, we will write a very simple mock in the [src/setupTests.js](https://github.com/facebookincubator/create-react-app/blob/ed5c48c81b2139b4414810e1efe917e04c96ee8d/packages/react-scripts/template/README.md#initializing-test-environment) file:
@@ -818,7 +818,7 @@ As we can see, there is a lot of room for improvement.
 
 ### Warning in running tests
 
-If you have React version 16.8.6 (the most recent at the time of writing 11th June) or older, you could get the following warning despite the tests pass
+If you have React version 16.8.6 (the most recent at the time of writing 11th June) or older, you could get the following warning despite the tests passing:
 
 ![](../../images/5/23e.png)
 
@@ -842,7 +842,7 @@ afterAll(() => {
 }) 
 ```
 
-You can find the code for our current application in its entirety in the <i>part5-8</i> branch of [this github repository](https://github.com/fullstackopen-2019/part2-notes/tree/part5-8).
+You can find the code for our current application in its entirety in the <i>part5-8</i> branch of [this Github repository](https://github.com/fullstackopen-2019/part2-notes/tree/part5-8).
 
 
 
@@ -888,13 +888,13 @@ describe('<App />', () => {
 ```
 
 
-**WARNING** when I was piloting this exercise, there were occasional instabilities related to _waitForElement_ or any other method intended for waiting for asynchronous operations to finish.
+**WARNING**: When I was piloting this exercise, there were occasional instabilities related to _waitForElement_ or any other method intended for waiting for asynchronous operations to finish.
 
 
 #### 5.17*: Blog list tests, step5
 
 
-Writer another test that verifies that when the user is logged in, the blog posts are rendered to the page.
+Write another test that verifies that when the user is logged in, the blog posts are rendered to the page.
 
 
 **Hint:**
@@ -932,7 +932,7 @@ If the snapshot notices some change in the HTML defined by the component, then e
 ### End-to-end tests
 
 
-We have written integration tests for testing the entire component for both the frontend and the backend. We have not yet taken a look at another important category of tests, that test [the entire system](https://en.wikipedia.org/wiki/System_testing) with "end-to-end" (E2E) tests.
+We have written integration tests for testing the entire component for both the frontend and the backend. We have not yet taken a look at another important category of tests that tests [the entire system](https://en.wikipedia.org/wiki/System_testing) with "end-to-end" (E2E) tests.
 
 
 The E2E testing of web applications happens by simulating a browser with a library like [Selenium](http://www.seleniumhq.org). Another alternative is to use a so-called [headless browser](https://en.wikipedia.org/wiki/Headless_browser), that is a browser without a graphical user interface. It's even possible to use Chrome in Headless mode.
