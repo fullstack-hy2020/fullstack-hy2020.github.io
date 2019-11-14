@@ -589,7 +589,7 @@ Jos ehdon täyttäviä maita on liikaa (yli 10), kehoitetaan tarkentamaan hakueh
 
 ![](../../images/2/19b1.png)
 
-Jos maita on alle kymmenen, mutta yli 1 näytetään hakuehdon täyttävät maat:
+Jos maita on kymmenen tai alle, mutta yli 1 näytetään hakuehdon täyttävät maat:
 
 ![](../../images/2/19b2.png)
 
