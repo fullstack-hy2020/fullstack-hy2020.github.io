@@ -185,7 +185,7 @@ According to the manual
 
 
 
-Normally the browser loads a new page when the url in the address bar changes. However, with the help of the [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/) <i>BrowserRouter</i> enables us to use the url in the address bar of the browser for internal "routing" in a React-application. So, even if the url in the address bar changes, the content of the page is only manipulated using Javascript, and the browser doesn't load new content form the server. Using the back and forward actions, as well as making bookmarks, is still logical like on a traditional web page.
+Normally the browser loads a new page when the url in the address bar changes. However, with the help of the [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/) <i>BrowserRouter</i> enables us to use the url in the address bar of the browser for internal "routing" in a React-application. So, even if the url in the address bar changes, the content of the page is only manipulated using Javascript, and the browser doesn't load new content from the server. Using the back and forward actions, as well as making bookmarks, is still logical like on a traditional web page.
 
 
 
