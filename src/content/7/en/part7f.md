@@ -193,7 +193,7 @@ It is recommended to spend some time reading through the documentation for Cypre
 #### 7.18 End to end testing, step2
 
 
-Expand your E2E tests so that the tests [initialize the state of the database](/en/part7/class_components_e_2_e_testing#controlling-the-state-of-the-database) always before the tests are executed. Write one at least one test that modifies the application's database e.g. by creating a new blog post.
+Expand your E2E tests so that the tests [initialize the state of the database](/en/part7/class_components_e_2_e_testing#controlling-the-state-of-the-database) always before the tests are executed. Write at least one test that modifies the application's database e.g. by creating a new blog post.
 
 
 #### 7.19 End to end testing, step3
