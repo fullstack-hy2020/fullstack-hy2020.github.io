@@ -94,7 +94,7 @@ Document databases do not demand the foreign key to be stored in the note resour
   {
     username: 'hellas',
     _id: 141414,
-    notes: [141414],
+    notes: [221244],
   },
 ]
 ```
