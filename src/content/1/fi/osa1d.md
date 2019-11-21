@@ -225,7 +225,7 @@ Kuten jo aiemmin mainittiin, Javascriptissa on myös mahdollista lisätä tauluk
 ```js
 const handleLeftClick = () => {
   allClicks.push('L')
-  setAll(allClick)
+  setAll(allClicks)
   setLeft(left + 1)
 }
 ```
