@@ -405,7 +405,7 @@ Our configuration contains nearly everything that we need for React development.
 ### Transpilers
 
 
-The process of transforming code from one form of JavaScript to another is called [transpiling](https://en.wiktionary.org/wiki/transpile). The general definition of the term is to compile source code code by transforming it from one language to another.
+The process of transforming code from one form of JavaScript to another is called [transpiling](https://en.wiktionary.org/wiki/transpile). The general definition of the term is to compile source code by transforming it from one language to another.
 
 
 By using the configuration from the previous section we are <i>transpiling</i> the code containing JSX into regular JavaScript with the help of [babel](https://babeljs.io/) which is currently the most popular tool for the job.
