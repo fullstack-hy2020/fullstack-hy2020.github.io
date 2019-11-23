@@ -153,7 +153,7 @@ In this case, we make the decision to store the ids of the notes created by the 
 ```js
 const mongoose = require('mongoose')
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
   username: String,
   name: String,
   passwordHash: String,
@@ -398,7 +398,7 @@ We must make the following changes to the schema defined in the <i>models/user.j
 const mongoose = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator') // highlight-line
 
-const userSchema = mongoose.Schema({
+const userSchema = new mongoose.Schema({
   username: {
     type: String,
     unique: true  // highlight-line
