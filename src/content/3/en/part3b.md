@@ -280,7 +280,7 @@ If the project was created with create-react-app, this problem is easy to solve.
 }
 ```
 
-After a restart, the React development environment will work as a [proxy](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#proxying-api-requests-in-development). If the React code does an HTTP request to a server address at <i>http://localhost:3000</i> not managed by the React application itself (i.e when requests are not about fetching the CSS or JavaScript of the application), the request will be redirected to the server at <i>http://localhost:3001</i>. 
+After a restart, the React development environment will work as a [proxy](https://create-react-app.dev/docs/proxying-api-requests-in-development/). If the React code does an HTTP request to a server address at <i>http://localhost:3000</i> not managed by the React application itself (i.e when requests are not about fetching the CSS or JavaScript of the application), the request will be redirected to the server at <i>http://localhost:3001</i>. 
 
 Now the frontend is also fine, working with the server both in development- and production mode. 
 
