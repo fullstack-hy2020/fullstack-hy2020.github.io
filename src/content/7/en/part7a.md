@@ -9,37 +9,37 @@ lang: en
 
 
 
-The exercises in the seventh part of the course differ a bit from the ones before. In this chapter there is, as usual, [three exercises related to the theory in this chapter](/en/part7/react_router#exercises).
+The exercises in this seventh part of the course differ a bit from the ones before. In this chapter there is, as usual, [three exercises related to the theory in this chapter](/en/part7/react_router#exercises).
 
 
 
-In addition to the exercises in this chapter there is a series of exercises, that revise what we've learned and apply some of the theory in this part, in which we expand the Bloglist-application we worked on in parts 4 and 5.
+In addition to the exercises in this chapter, there is a series of exercises which revise what we've learned, and where the theory in this part is applied. In this part, we expand the Bloglist application which we worked on during parts 4 and 5.
 
 
-### The navigation structure of the application
-
-
-
-Following part 6 we return to React without Redux.
+### Application navigation structure
 
 
 
-It is very common for web-applications to have a navigation bar, which enables switching the view of the application. 
+Following part 6, we return to React without Redux.
+
+
+
+It is very common for web-applications to have a navigation bar, which enables switching the view of the application.
 
 ![](../../images/7/1b.png)
 
 
-and separate pages for showing the information of notes and users:
+and separate pages for showing information on notes and users:
 
 ![](../../images/7/2ae.png)
 
 
 
-In an [old school web app](/en/part0/fundamentals_of_web_apps#traditional-web-applications) changing the page shown by the application would be accomplished by the browser making a HTTP GET request to the server and rendering the HTML representing the view that was returned.
+In an [old school web app](/en/part0/fundamentals_of_web_apps#traditional-web-applications), changing the page shown by the application would be accomplished by the browser making a HTTP GET request to the server and rendering the HTML representing the view that was returned.
 
 
 
-In single page apps we are, in reality, always on the same page, and the Javascript code run by the browser creates an illusion of different "pages". If HTTP requests are made when switching view it is only for fetching JSON formatted data, which the new view might require for it to be shown.
+In single page apps, we are, in reality, always on the same page. The Javascript code run by the browser creates an illusion of different "pages". If HTTP requests are made when switching view, they are only for fetching JSON formatted data, which the new view might require for it to be shown.
 
 
 
@@ -111,19 +111,19 @@ ReactDOM.render(<App />, document.getElementById('root'))
 
 
 
-So each view is implemented as its own component and we store the information for which component representing a view should be shown below the menu bar in the application state called <i>page</i>.
+Each view is implemented as its own component. We store the view component information in the application state called <i>page</i>. This information tells us which component, representing a view, should be shown below the menu bar.
 
 
 
-However, the method is not very optimal. As we can see from the pictures, the address stays the same even though at times we are in different views. Each view should preferably have its own address, e.g. to make bookmarking possible. The <i>back</i>-button doesn't work as expected for our application either, meaning that <i>back</i> doesn't move you to the previously displayed view of the application, but somewhere completely different. If the application were to grow even bigger and we wanted to e.g. add their separate views for each user and note, then this self made <i>routing</i>, meaning the navigation management of the application, would get overly complicated.
+However, the method is not very optimal. As we can see from the pictures, the address stays the same even though at times we are in different views. Each view should preferably have its own address, e.g. to make bookmarking possible. The <i>back</i>-button doesn't work as expected for our application either, meaning that <i>back</i> doesn't move you to the previously displayed view of the application, but somewhere completely different. If the application were to grow even bigger and we wanted to, for example, add separate views for each user and note, then this self made <i>routing</i>, which means the navigation management of the application, would get overly complicated.
 
 
 
-Luckily, in React there exists a component [React router](https://github.com/ReactTraining/react-router), which provides an excellent solution to the navigation management of a React-application.
+Luckily, there exists a component [React router](https://github.com/ReactTraining/react-router), which provides an excellent solution to the navigation management of a React application.
 
 
 
-Let's change the above application to use React router. First we install React router with the command
+Let's change the above application to use React router. First, we install React router with the command
 
 ```js
 npm install --save react-router-dom
@@ -185,11 +185,11 @@ According to the manual
 
 
 
-Normally the browser loads a new page when the url in the address bar changes. However, with the help of the [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/) <i>BrowserRouter</i> enables us to use the url in the address bar of the browser for internal "routing" in a React-application. So, even if the url in the address bar changes, the content of the page is only manipulated using Javascript, and the browser doesn't load new content form the server. Using the back and forward actions, as well as making bookmarks, is still logical like on a traditional web page.
+Normally the browser loads a new page when the URL in the address bar changes. However, with the help of the [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/) <i>BrowserRouter</i> enables us to use the URL in the address bar of the browser for internal "routing" in a React-application. So, even if the URL in the address bar changes, the content of the page is only manipulated using Javascript, and the browser will not load new content form the server. Using the back and forward actions, as well as making bookmarks, is still logical like on a traditional web page.
 
 
 
-Inside the router we define <i>links</i> that modify the address bar with the help of the [Link](https://reacttraining.com/react-router/web/api/Link) component. E.g.
+Inside the router we define <i>links</i> that modify the address bar with the help of the [Link](https://reacttraining.com/react-router/web/api/Link) component. For example,
 
 ```js
 <Link to="/notes">notes</Link>
@@ -197,11 +197,11 @@ Inside the router we define <i>links</i> that modify the address bar with the he
 
 
 
-creates a link in the application with the text <i>notes</i>, which when clicked changes the url in the address bar to <i>/notes</i>.
+creates a link in the application with the text <i>notes</i>, which when clicked changes the URL in the address bar to <i>/notes</i>.
 
 
 
-Components rendered based on the url of the browser are defined with the help of the component [Route](https://reacttraining.com/react-router/web/api/Route). E.g.
+Components rendered based on the URL of the browser are defined with the help of the component [Route](https://reacttraining.com/react-router/web/api/Route). For example, 
 
 ```js
 <Route path="/notes" render={() => <Notes />} />
@@ -221,18 +221,18 @@ The root of the application, or the address <code>/</code>, is defined to render
 
 
 
-we have to use the modifier <i>exact</i> in front of the <i>path</i> attribute of the route. Otherwise <i>Home</i> is also rendered on all other paths, since the root <code>/</code> is included at the <i>start</i> of all other paths.
+We have to use the modifier <i>exact</i> in front of the <i>path</i> attribute of the route. Otherwise <i>Home</i> is also rendered on all other paths, since the root <code>/</code> is included at the <i>start</i> of all other paths.
 
 
 ### Parameterized route
 
 
 
-Let's examine the slightly modified version from the previous example. The code for the example can be found in full over [here](https://github.com/fullstackopen-2019/misc/blob/master/router-app.js).
+Let's examine the slightly modified version from the previous example. The complete code for the example can be found [here](https://github.com/fullstackopen-2019/misc/blob/master/router-app.js).
 
 
 
-The application now contains five different views, the display of which is controlled by the router. In addition to the components <i>Home</i>, <i>Notes</i> and <i>Users</i>, familiar from the previous example, we have <i>Login</i> representing the login view and <i>Note</i> representing the view of a single note.
+The application now contains five different views, the display of which is controlled by the router. In addition to the components from the previous example (<i>Home</i>, <i>Notes</i> and <i>Users</i>), we have <i>Login</i> representing the login view and <i>Note</i> representing the view of a single note.
 
 
 
@@ -242,7 +242,7 @@ The application now contains five different views, the display of which is contr
 
 
 
-The ability to click a name is implemented with the component <i>Link</i>, and e.g. clicking the name of a note, whose id is 3 would trigger an event causing the address of the browser to turn into <i>notes/3</i>:
+The ability to click a name is implemented with the component <i>Link</i>, and clicking the name of a note whose id is 3 would trigger an event that changes the address of the browser into <i>notes/3</i>:
 
 ```js
 const Notes = (props) => (
@@ -261,7 +261,7 @@ const Notes = (props) => (
 
 
 
-When the browser transitions to the address singling out the specific note, e.g. <i>notes/3</i>, the component <i>Note</i> is rendered:
+When the browser transitions to the address singling out the specific note, such as <i>notes/3</i>, the component <i>Note</i> is rendered:
 
 ```js
 const Note = ({ note }) => (
@@ -303,7 +303,7 @@ This happens by expanding the routing in the <i>App</i> component as follows:
 
 
 
-A modifier <i>exact path="/notes"</i> has been added to the route rendering all notes, because otherwise it would also be rendered for a path with the shape <i>/notes/3</i>.
+A modifier <i>exact path="/notes"</i> has been added to the route rendering all notes, because otherwise it would also be rendered for all paths that are in the form <i>/notes/3</i>.
 
 
 
@@ -333,14 +333,14 @@ const noteById = (id) =>
 
 
 
-and finally the <i>Note</i>-component being rendered gets the note singled out by the unique part of the url as one of its props.
+and finally the <i>Note</i>-component being rendered gets the note singled out by the unique part of the URL as one of its props.
 
 
 ### withRouter and history
 
 
 
-We have also implemented a very simple login feature. If one is logged into the application we store the information about this user in the <i>App</i>'s state <i>user</i>
+We have also implemented a very simple login feature. If a user is logged into the application, we store the information about this user in the <i>App</i>'s state <i>user</i>
 
 
 
@@ -409,7 +409,7 @@ const Login = withRouter(LoginNoHistory) // highlight-line
 
 
 
-There are a few notable things about the implementation of the form. When logging in we call the function _onSubmit_, which calls a method called _push_ of the [history](https://reacttraining.com/react-router/web/api/history)-object received by the component as a prop. The command _props.history.push('/')_ results in the address bar of the browser changing its address to <code>/</code> and thereby makes the application render the respective component, which in this case is <i>Home</i>.
+There are a few notable things about the implementation of the form. When logging in, we call the function _onSubmit_, which calls a method called _push_ of the [history](https://reacttraining.com/react-router/web/api/history)-object received by the component as a prop. The command _props.history.push('/')_ results in the address bar of the browser changing its address to <code>/</code> thereby making the application render the respective component, which in this case is <i>Home</i>.
 
 
 
@@ -429,7 +429,7 @@ There is one more interesting detail about the <i>Users</i> route:
 
 
 
-If a user isn't logged in the <i>Users</i> is not rendered. Instead the user is <i>redirected</i> using the <i>Redirect</i>-component to the login view
+If a user isn't logged in, the <i>Users</i> component is not rendered. Instead the user is <i>redirected</i> using the <i>Redirect</i>-component to the login view
 
 ```js
 <Redirect to="/login" />
@@ -596,7 +596,7 @@ Navigating to the page showing the single anecdote is done by clicking the name 
 
 
 
-The default functionality of the creation form is quite confusing, because after creating a new anecdote using the form nothing seems to be happening.
+The default functionality of the creation form is quite confusing, because nothing seems to be happening after creating a new anecdote using the form.
 
 
 
