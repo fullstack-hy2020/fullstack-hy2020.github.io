@@ -8,11 +8,11 @@ lang: en
 <div class="content">
 
 
-The frontend of our application shows the phone directory just fine with the updated server. However if we want to add new persons, we have to add login functionality to the backend. 
+The frontend of our application shows the phone directory just fine with the updated server. However if we want to add new persons, we have to add login functionality to the frontend. 
 
 ### User log in
 
-Let's add variable _token_ to the applications state. It saves the token when user has logged in. If _token_ is undefined, we show the component responsible for logging in, <i>LoginForm</i>. It is given the function responsible for the mutation, _login_, as a parameter:
+Let's add variable _token_ to the application's state. It saves the token when user has logged in. If _token_ is undefined, we show the component responsible for logging in, <i>LoginForm</i>. It is given the function responsible for the mutation, _login_, as a parameter:
 
 ```js
 const LOGIN = gql`
@@ -128,7 +128,7 @@ const App = () => {
 }
 ```
 
-The current code of the application can be found from [github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-6), branch <i>part8-6</i>.
+The current code of the application can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-6), branch <i>part8-6</i>.
 
 ### Adding a token to a header
 
@@ -156,12 +156,12 @@ ReactDOM.render(
 ```
 
 
-The new definition uses [apollo-boost](https://github.com/apollographql/apollo-client/tree/master/packages/apollo-boost)-library. According to its documentation
+The new definition uses [apollo-boost](https://github.com/apollographql/apollo-client/tree/master/packages/apollo-boost)-library. According to its documentation:
 
 > <i>Apollo Boost is a zero-config way to start using Apollo Client. It includes some sensible defaults, such as our recommended InMemoryCache and HttpLink, which come configured for you with our recommended settings.</i>
 
 
-so apollo-boost offers an easy way to configure _ApolloClient_ with settings suitable for most situations. 
+So apollo-boost offers an easy way to configure _ApolloClient_ with settings suitable for most situations. 
 
 
 Even though it would be possible to also configure the request headers with apollo-boost, we will now abandon it and do the configuration ourselves. 
@@ -239,7 +239,7 @@ const PersonForm = (props) => {
 ```
 
 
-Current application code can be found from [github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-7), branch <i>part8-7</i>.
+Current application code can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-7), branch <i>part8-7</i>.
 
 ### Updating cache, revisited
 
@@ -323,13 +323,13 @@ const Persons = ({ result }) => {
 We will however leave the code as is. 
 
 
-Be diligent with the cache. Old data in cache can cause hard to find bugs. As we know, keeping the cache up to date is very challenging. According to a coder proverb
+Be diligent with the cache. Old data in cache can cause hard to find bugs. As we know, keeping the cache up to date is very challenging. According to a coder proverb:
 
 > <i>There are only two hard things in Computer Science: cache invalidation and naming things.</i> Read more [here](https://www.google.com/search?q=two+hard+things+in+Computer+Science&oq=two+hard+things+in+Computer+Science).
 
 
 
-The current code of the application can be found from [github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-8), branch <i>part8-8</i>.
+The current code of the application can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-8), branch <i>part8-8</i>.
 
 </div>
 
@@ -359,12 +359,12 @@ You can decide how the log in looks on the user interface. One possible solution
 ![](../../images/8/26.png)
 
 
-The login form
+The login form:
 
 ![](../../images/8/27.png)
 
 
-When a user is logged in, the navigation changes to show the functionalities which can only be done by a logged in user
+When a user is logged in, the navigation changes to show the functionalities which can only be done by a logged in user:
 
 ![](../../images/8/28.png)
 
@@ -380,7 +380,7 @@ In this exercise the filtering can be done using just React.
 #### 8.20 Books by genre, part 2
 
 
-Implement a view which shows the logged in user all books in their favourite genre.
+Implement a view which shows all the books based on the logged in user's favourite genre.
 
 ![](../../images/8/29.png)
 
