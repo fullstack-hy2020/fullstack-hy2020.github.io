@@ -240,7 +240,7 @@ module.exports = mongoose.model('User', schema)
 Every user is connected to a bunch of other persons in the system through the _friends_ field. The idea is that when a user, i.e <i>mluukkai</i>, adds a person, i.e <i>Arto Hellas</i>, to the list, the person is added to their _friends_ list. This way logged in users can have their own, personalized, view in the application. 
 
 
-Log in and identifying the user are handled the same way we used in [part 4](/en/part4/token_authentication) when we used REST, so by using tokens. 
+Logging in and identifying the user are handled the same way we used in [part 4](/en/part4/token_authentication) when we used REST, by using tokens. 
 
 
 Let's extend the schema like so: 
