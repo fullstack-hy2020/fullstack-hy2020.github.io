@@ -545,7 +545,7 @@ type Mutation {
 
 
 Create resolvers for query _me_ and the new mutations _createUser_ and 
-_login_. Like in the course material, you can assume all users have the same, hardcoded, password. 
+_login_. Like in the course material, you can assume all users have the same hardcoded password. 
 
 
 Make the mutations _addBook_ and _editAuthor_ possible only if the request includes a valid token. 
