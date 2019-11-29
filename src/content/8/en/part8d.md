@@ -205,7 +205,7 @@ npm install --save apollo-link apollo-link-context
 _client_ is now configured using [ApolloClient](https://www.apollographql.com/docs/react/api/apollo-client/#apollo-client) constructor function of [apollo-link](https://www.apollographql.com/docs/link/). It has two parameters, _link_ and _cache_. The latter defines, that the application now uses a cache operating in the main memory [InMemoryCache](https://www.apollographql.com/docs/react/v2.5/advanced/caching/#inmemorycache).
 
 
-The first parameter _link_ defines how the clients contacts the server. The communication is based on [httpLink](https://www.apollographql.com/docs/link/links/http/), a normal connection over HTTP with the addition that a token from localStorage is set as the value of the <i>authorization</i> [header](https://www.apollographql.com/docs/react/v2.5/recipes/authentication/#header) if it exists. 
+The first parameter _link_ defines how the client contacts the server. The communication is based on [httpLink](https://www.apollographql.com/docs/link/links/http/), a normal connection over HTTP with the addition that a token from localStorage is set as the value of the <i>authorization</i> [header](https://www.apollographql.com/docs/react/v2.5/recipes/authentication/#header) if it exists. 
 
 
 Creating new persons and changing numbers works again. There is however one remaining problem. If we try to add a person without a phone number, it is not possible. 
