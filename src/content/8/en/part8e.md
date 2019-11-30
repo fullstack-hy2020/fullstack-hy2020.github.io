@@ -103,7 +103,7 @@ const ALL_PERSONS = gql`
 ```
 
 
-however it is much better to declare the fragment once and save it to a variable. 
+However, it is much better to declare the fragment once and save it to a variable. 
 
 ```js
 const PERSON_DETAILS = gql`
