@@ -120,7 +120,7 @@ const PERSON_DETAILS = gql`
 ```
 
 
-Declared like this, the fragment can be placed to any query or mutation with the "precentcurlybrace"-operator:
+Declared like this, the fragment can be placed to any query or mutation using a [dollar sign and curly braces](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals):
 
 ```js
 const ALL_PERSONS = gql`
@@ -207,10 +207,10 @@ const pubsub = new PubSub() // highlight-line
 ```
 
 
-With subscriptions, the communication happens using the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern)-principle utilizing an object which realizes a [PubSub](https://www.apollographql.com/docs/graphql-subscriptions/setup/#setup) interface. Adding a new person <i>publishes</i> a notification about the operation to all subscribers with PubSubs method _publish_.
+With subscriptions, the communication happens using the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) principle utilizing an object using a [PubSub](https://www.apollographql.com/docs/graphql-subscriptions/setup/#setup) interface. Adding a new person <i>publishes</i> a notification about the operation to all subscribers with PubSub's method _publish_.
 
 
-_PersonAdded_ subscriptions resolver registers all of the subscribers by returning them a suitable [iterator object](https://www.apollographql.com/docs/graphql-subscriptions/subscriptions-to-schema/).
+_personAdded_ subscriptions resolver registers all of the subscribers by returning them a suitable [iterator object](https://www.apollographql.com/docs/graphql-subscriptions/subscriptions-to-schema/).
 
 
 Let's do the following changes to the code which starts the server
@@ -240,16 +240,16 @@ It's possible to test the subscriptions with the GraphQL playground like this:
 ![](../../images/8/31.png)
 
 
-When you press "play" on a subscription, the playground waits for notifications to the subscription. 
+When you press "play" on a subscription, the playground waits for notifications from the subscription. 
 
 
-The backend code can be found from [github](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-6), branch <i>part8-6</i>.
+The backend code can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-6), branch <i>part8-6</i>.
 
 ### Subscriptions on the client
 
 
-In order to use subscriptions in our React application, we have to do some changes, especially on its [configurations](https://www.apollographql.com/docs/react/data/subscriptions/#client-setup).
-The configurations in <i>index.js</i> have to be modified like so: 
+In order to use subscriptions in our React application, we have to do some changes, especially on its [configuration](https://www.apollographql.com/docs/react/data/subscriptions/#client-setup).
+The configuration in <i>index.js</i> have to be modified like so: 
 
 ```js
 import React from 'react'
@@ -315,7 +315,7 @@ For this to work, we have to install some dependencies:
 npm install --save subscriptions-transport-ws apollo-link-ws
 ```
 
-The new configurations is due to the fact that the application must have HTTP-connection as well as websocket-connection to the GraphQL server.
+The new configuration is due to the fact that the application must have an HTTP connection as well as a WebSocket connection to the GraphQL server.
 
 ```js
 const wsLink = new WebSocketLink({
@@ -328,7 +328,7 @@ const httpLink = createHttpLink({
 })
 ```
 
-The subscriptions are done using either the [Subscription](https://www.apollographql.com/docs/react/v2.5/advanced/subscriptions/#subscription-component) component or the [useSubscription](https://www.apollographql.com/docs/react/data/subscriptions/#usesubscription-hook) hook that is available in Apollo Client 3.0. We will use the hook based solution.
+The subscriptions are done using either the [Subscription](https://www.apollographql.com/docs/react/v2.5/advanced/subscriptions/#subscription-component) component or the [useSubscription](https://www.apollographql.com/docs/react/data/subscriptions/#usesubscription-hook) hook that is available in Apollo Client 3.0. We will use the hook-based solution.
 
 Let's modify the code like so:
 
@@ -410,9 +410,7 @@ const App = () => {
 }
 ```
 
-There is 
-
-The final code of the client can be found from [github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-9), branch <i>part8-9</i>.
+The final code of the client can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-9), branch <i>part8-9</i>.
 
 ### n+1-problem
 
@@ -429,7 +427,7 @@ type Person {
 ```
 
 
-The application should support i.e the following query: 
+The application should support the following query: 
 
 ```js
 query {
@@ -576,7 +574,7 @@ Query: {
 After the change we would not need a separate resolver for the _friendOf_ field. 
 
 
-The allPersons query <i>does not cause</i> an n+1 problem, if we i.e only  fetch the name and the phone number: 
+The allPersons query <i>does not cause</i> an n+1 problem, if we only  fetch the name and the phone number: 
 
 ```js
 query {
@@ -603,11 +601,11 @@ More about using DataLoader with Apollo server [here](https://www.robinwieruch.d
 
 
 
-The application we created in this part is not optimally structured: the schema, queries and the mutations should at least be moved outside of the application code. Examples for better structuring of GraphQL applications can be found from the internet, for example for the server
+The application we created in this part is not optimally structured: the schema, queries and the mutations should at least be moved outside of the application code. Examples for better structuring of GraphQL applications can be found on the internet. For example, for the server
 [here](https://blog.apollographql.com/modularizing-your-graphql-schema-code-d7f71d5ed5f2) and the client [here](https://medium.com/@peterpme/thoughts-on-structuring-your-apollo-queries-mutations-939ba4746cd8).
 
 
-GraphQL is already pretty old technology, having been used by Facebook since 2012, so we can see it as "battle tested" already. Since Facebook published GraphQL in 2015, it has slowly gotten more and more attention, and might in the near future threaten the dominance of REST. The death of REST has also already been [predicted](https://www.stridenyc.com/podcasts/52-is-2018-the-year-graphql-kills-rest). Even though that will not happen quite yet, GraphQL is absolutely worth [learning](https://blog.graphqleditor.com/javascript-predictions-for-2019-by-npm/).
+GraphQL is already a pretty old technology, having been used by Facebook since 2012, so we can see it as "battle tested" already. Since Facebook published GraphQL in 2015, it has slowly gotten more and more attention, and might in the near future threaten the dominance of REST. The death of REST has also already been [predicted](https://www.stridenyc.com/podcasts/52-is-2018-the-year-graphql-kills-rest). Even though that will not happen quite yet, GraphQL is absolutely worth [learning](https://blog.graphqleditor.com/javascript-predictions-for-2019-by-npm/).
 
 </div>
 
