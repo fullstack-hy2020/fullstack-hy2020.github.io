@@ -249,7 +249,7 @@ The backend code can be found on [Github](https://github.com/fullstackopen-2019/
 
 
 In order to use subscriptions in our React application, we have to do some changes, especially on its [configuration](https://www.apollographql.com/docs/react/data/subscriptions/#client-setup).
-The configuration in <i>index.js</i> have to be modified like so: 
+The configuration in <i>index.js</i> has to be modified like so: 
 
 ```js
 import React from 'react'
