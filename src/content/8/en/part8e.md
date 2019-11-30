@@ -333,7 +333,7 @@ The subscriptions are done using either the [Subscription](https://www.apollogra
 Let's modify the code like so:
 
 ```js
-import { useQuery, useMutation, useSubscription ,useApolloClient } from '@apollo/react-hooks'// highlight-line
+import { useQuery, useMutation, useSubscription, useApolloClient } from '@apollo/react-hooks'// highlight-line
 
 // ...
 
