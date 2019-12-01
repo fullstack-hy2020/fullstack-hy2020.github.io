@@ -20,10 +20,10 @@ One approach to defining styles for an application is to use a ready-made "UI fr
 One of the first widely popular UI frameworks was the [Bootstrap](https://getbootstrap.com/) toolkit created by Twitter, that may still be the most popular framework. Recently there has been an explosion in the number of new UI frameworks that have entered the arena. In fact, the selection is so vast that there is little hope of creating an exhaustive list of options.
 
 
-Many UI frameworks provide developers of web applications with ready-made themes and "components" like buttons, menus, and tables. We write components in quotes as in this context we are not talking about React components. Usually UI frameworks are used by including the CSS stylesheets and JavaScript code of the framework with the application.
+Many UI frameworks provide developers of web applications with ready-made themes and "components" like buttons, menus, and tables. We write components in quotes, because in this context we are not talking about React components. Usually UI frameworks are used by including the CSS stylesheets and JavaScript code of the framework in the application.
 
 
-There are React-friendly versions available of many UI frameworks, where the framework's "components" have been transformed into React components. There are a few different React versions of Bootstrap like [reactstrap](http://reactstrap.github.io/) and [react-bootstrap](https://react-bootstrap.github.io/).
+There are many UI frameworks that have React-friendly versions, where the framework's "components" have been transformed into React components. There are a few different React versions of Bootstrap like [reactstrap](http://reactstrap.github.io/) and [react-bootstrap](https://react-bootstrap.github.io/).
 
 
 Next we will take a closer look at two UI frameworks, Bootstrap and [Semantic UI](https://semantic-ui.com/). We will use both frameworks to add similar styles to the application we made in the [React-router](/en/part7/react_router) section of the course material.
@@ -57,12 +57,11 @@ Then let's add a link for loading the CSS stylesheet for Bootstrap inside of the
 ```
 
 
-When we reload the application we notice that it already looks a bit more stylish:
+When we reload the application, we notice that it already looks a bit more stylish:
 
 ![](../../images/7/5.png)
 
-
-In Bootstrap, all of the content of the application is typically rendered inside of a [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers). In practice this is accomplished by giving the root _div_ element of the application the  _container_ class attribute:
+In Bootstrap, all of the contents of the application are typically rendered inside of a [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers). In practice this is accomplished by giving the root _div_ element of the application the  _container_ class attribute:
 
 ```js
 const App = () => {
@@ -82,7 +81,7 @@ We notice that this already has an effect on the appearance of the application. 
 ![](../../images/7/6.png)
 
 
-Next, let's make some changes to the <i>Notes</i> component so that it renders the list of notes as a [table](https://getbootstrap.com/docs/4.1/content/tables/). React Bootstrap provides a built-in [Table](https://react-bootstrap.github.io/components/table/) component for this purpose, so there is no need to define CSS classes separately.
+Next, let's make some changes to the <i>Notes</i> component, so that it renders the list of notes as a [table](https://getbootstrap.com/docs/4.1/content/tables/). React Bootstrap provides a built-in [Table](https://react-bootstrap.github.io/components/table/) component for this purpose, so there is no need to define CSS classes separately.
 
 ```js
 const Notes = (props) => (
@@ -243,7 +242,7 @@ Lastly, let's alter the application's navigation menu to use Bootstrap's [Navbar
           ? <em>{user} logged in</em>
           : <Link to="/login">login</Link>
         }
-    </Nav.Link>
+      </Nav.Link>
     </Nav>
   </Navbar.Collapse>
 </Navbar>
@@ -304,12 +303,12 @@ Then let's add the link to the CSS stylesheet for Semantic UI inside the head ta
 We render all of the application's content inside of Semantic's [Container](https://react.semantic-ui.com/elements/container) component.
 
 
-The documentation for Semantic UI contains several code examples for each component that makes it easy to see how each component is used in practice:
+The documentation for Semantic UI contains several code examples for each component. This makes it easy to see how each component is used in practice:
 
 ![](../../images/7/13.png)
 
 
-Let's swap the out root <i>div</i> element of App for a <i>Container</i> component:
+Let's swap out the root <i>div</i> element of App for a <i>Container</i> component:
 
 ```js
 import { Container } from 'semantic-ui-react'
@@ -482,10 +481,10 @@ You can find the complete code for the application [here](https://github.com/ful
 ### Closing thoughts
 
 
-The difference between React-Bootstrap and Semantic-UI-React is not that big. Determining which one produces more aesthetically pleasing results comes down to a matter of taste. After years of using Bootstrap, the reasons that made me switch over to Semantic UI were its seamless integration with React, its wider selection of built-in components, and its overall better documentation. There has been some [uncertainty](https://github.com/Semantic-Org/Semantic-UI/issues/6109) regarding the future of Semantic UI, and it's recommended to keep your ear on the ground.
+The difference between React-Bootstrap and Semantic-UI-React is not that big. Determining which one produces more aesthetically pleasing results comes down to a matter of taste. After years of using Bootstrap, the reasons that made me switch over to Semantic UI were its seamless integration with React, its wider selection of built-in components, and its overall better documentation. There has been some [uncertainty](https://github.com/Semantic-Org/Semantic-UI/issues/6109) regarding the future of Semantic UI, so it's recommended to keep your ear on the ground.
 
 
-In the two previous examples we used the UI frameworks with the help of React-integration libraries.
+In the two previous examples, we used the UI frameworks with the help of React-integration libraries.
 
 
 Instead of using the [React Bootstrap](https://react-bootstrap.github.io/) library, we could have just as well used Bootstrap directly by defining CSS classes to our application's HTML elements. Instead of defining the table with the <i>Table</i> component:
