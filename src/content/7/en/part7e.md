@@ -105,7 +105,7 @@ In the material we may not have put enough emphasis on the fact that React is pr
 
 
 
-In small applications data handled by the application is being stored in the state of the React-components, so in this scenario the state of the components can be thought of as <i>models</i> of a MVC-architecture.
+In small applications data handled by the application is being stored in the state of the React-components, so in this scenario the state of the components can be thought of as <i>models</i> of an MVC-architecture.
 
 
 
@@ -187,7 +187,7 @@ since React [takes care of sanitizing data in variables](https://reactjs.org/doc
 
 
 
-One needs to remain vigilant when using libraries; if there are security updates to those libraries, it is advised to update those libraries in ones own applications. Security updates for Express are found in the [library's documentation](https://expressjs.com/en/advanced/security-updates.html) and ones for Node are found in [this blog](https://nodejs.org/en/blog/).
+One needs to remain vigilant when using libraries; if there are security updates to those libraries, it is advisable to update those libraries in one's own applications. Security updates for Express are found in the [library's documentation](https://expressjs.com/en/advanced/security-updates.html) and the ones for Node are found in [this blog](https://nodejs.org/en/blog/).
 
 
 
@@ -294,7 +294,7 @@ Using the ESlint [security-plugin](https://github.com/nodesecurity/eslint-plugin
 
 
 
-Finally, let's take a look at some of technology of tomorrow (or actually already today), and directions Web development is heading.
+Finally, let's take a look at some technology of tomorrow (or actually already today), and directions Web development is heading.
 
 
 #### Typed versions of JavaScript
@@ -323,7 +323,7 @@ const sum = (n: number, m: number): number => {
 
 
 
-Calling the function with parameters of the wrong type, the wrong amount of parameters, or trying to assign the returned value into a variable of the wrong type does not work. Visual Studio Code does the type checking while code is written and immediately prompts the user is the code contains any operations in conflict with the types:
+Calling the function with parameters of the wrong type, the wrong amount of parameters, or trying to assign the returned value into a variable of the wrong type does not work. Visual Studio Code does the type checking while code is written and immediately prompts the user if the code contains any operations in conflict with the types:
 
 ![](../../images/7/35.png)
 
@@ -374,7 +374,7 @@ Lately people have started using the term [progressive web app](https://develope
 
 
 
-In short, we are talking about web-applications, working as well as possible on every platform taking advantage of the best parts of those platforms. The smaller screen of mobile device must not hamper the usability of the application. PWA:s should also work flawlessly in offline-mode or with a slow internet connection. On mobile devices they must be installable just like any other application. All the network traffic in a PWA:s should be encrypted.
+In short, we are talking about web-applications, working as well as possible on every platform taking advantage of the best parts of those platforms. The smaller screen of mobile devices must not hamper the usability of the application. PWAs should also work flawlessly in offline-mode or with a slow internet connection. On mobile devices they must be installable just like any other application. All the network traffic in a PWA should be encrypted.
 
 
 
@@ -385,7 +385,7 @@ Applications created using create-react-app are [progressive](https://github.com
 
 
 
-During this course we have only scratched the surface of the server end of things. In our applications we had <i>monolithic</i> backend, meaning one application making up a whole and running on a single server, serving only a few API-endpoints.
+During this course we have only scratched the surface of the server end of things. In our applications we had a <i>monolithic</i> backend, meaning one application making up a whole and running on a single server, serving only a few API-endpoints.
 
 
 
@@ -407,7 +407,7 @@ The image below visualizes the difference between the structure of an applicatio
 
 
 
-The role of the frontend (enclosed by a square in the picture) is does not differ much between the two models. There is often a so-called [API gateway](http://microservices.io/patterns/apigateway) between the microservices and the frontend, which provides an illusion of a more traditional "everything on the same server"-API. [Netflix](https://medium.com/netflix-techblog/optimizing-the-netflix-api-5c9ac715cf19), among others, uses this type of approach.
+The role of the frontend (enclosed by a square in the picture) does not differ much between the two models. There is often a so-called [API gateway](http://microservices.io/patterns/apigateway) between the microservices and the frontend, which provides an illusion of a more traditional "everything on the same server"-API. [Netflix](https://medium.com/netflix-techblog/optimizing-the-netflix-api-5c9ac715cf19), among others, uses this type of approach.
 
 
 
@@ -445,7 +445,7 @@ After the release of Amazon's [lambda](https://aws.amazon.com/lambda/)-service a
 
 
 
-The main thing about lambda, and nowadays also Google's [Cloud functions](https://cloud.google.com/functions/) as well as [similar functionality in Azure](https://azure.microsoft.com/en-us/services/functions/), is that it enables <i>the execution of individual functions</i> in the cloud. Before, the smallest executable unit in the cloud was a single <i>process</i>, e.g. A runtime environment running a Node backend.
+The main thing about lambda, and nowadays also Google's [Cloud functions](https://cloud.google.com/functions/) as well as [similar functionality in Azure](https://azure.microsoft.com/en-us/services/functions/), is that it enables <i>the execution of individual functions</i> in the cloud. Before, the smallest executable unit in the cloud was a single <i>process</i>, e.g. a runtime environment running a Node backend.
 
 
 
@@ -460,7 +460,7 @@ Serverless is not about there not being a server in applications, but about how 
 
 
 
-The [immutable.js](https://github.com/facebook/immutable-js/)-library maintained by Facebook provides, as the name suggests, immutable implementations of some data structures. The library could be of use when using Redux, since as we [remember](/en/part6/flux_architecture_and_redux#pure-functions-immutable) from part 6: reducers must be pure functions, meaning they must not modify the store's state but instead have replace it with a new one when a change occurs. Over the past year some of the popularity of Immutable.js has been taken over by [Immer](https://github.com/mweststrate/immer), which provides similar functionality but in a somewhat easier package.
+The [immutable.js](https://github.com/facebook/immutable-js/)-library maintained by Facebook provides, as the name suggests, immutable implementations of some data structures. The library could be of use when using Redux, since as we [remember](/en/part6/flux_architecture_and_redux#pure-functions-immutable) from part 6: reducers must be pure functions, meaning they must not modify the store's state but instead have to replace it with a new one when a change occurs. Over the past year some of the popularity of Immutable.js has been taken over by [Immer](https://github.com/mweststrate/immer), which provides similar functionality but in a somewhat easier package.
 
 
 
