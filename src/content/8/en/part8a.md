@@ -251,7 +251,7 @@ the return value is <i>null</i>.
 }
 ```
 
-As you can see, there is a direct link between a GraphQR query and  the returned JSON object. One can think that the query describes what kind of data it wants as a response. 
+As you can see, there is a direct link between a GraphQL query and  the returned JSON object. One can think that the query describes what kind of data it wants as a response. 
 The difference to REST queries is stark. With REST, the URL and the type of the request have nothing to do with the form of the return data. 
 
 
@@ -604,7 +604,7 @@ let persons = [
 So the person-objects saved in the server are not exactly the same as GraphQL type <i>Person</i> objects described in the schema. 
 
 
-Contrary to the type <i>Person</i>, the <i>Address</i> type does not have a <i>id</i>-field, because they are not saved into their own data structure in the server. 
+Contrary to the type <i>Person</i>, the <i>Address</i> type does not have an <i>id</i> field, because they are not saved into their own data structure in the server. 
 
 
 Because the objects saved in the array do not have a field <i>address</i>, the default resolver is not sufficient enough. 
@@ -635,7 +635,7 @@ const resolvers = {
 So every time a <i>Person</i> object is returned, the fields <i>name</i>, <i>phone</i> and <i>id</i> are returned using their default resolvers, but the field <i>address</i> is formed by using a self defined resolver. The parameter _root_ of the resolver function is the person-object, so the street and the city of the address can be taken from its fields. 
 
 
-The current code of the application can be found from [ github](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-1), branch <i>part8-1</i>.
+The current code of the application can be found on [ Github](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-1), branch <i>part8-1</i>.
 
 ### Mutations
 
@@ -750,7 +750,7 @@ If we try to create a new person, but the parameters do not correspond with the 
 ![](../../images/8/5.png)
 
 
-So some of the error handling can be automatically with GraphQL [validation](https://graphql.org/learn/validation/).
+So some of the error handling can be automatically done with GraphQL [validation](https://graphql.org/learn/validation/).
 
 
 However GraphQL cannot handle everything automatically. For example stricter rules for data sent to a Mutation have to be added manually.
@@ -790,7 +790,7 @@ So if the name to be added already exists in the phonebook, throw _UserInputErro
 ![](../../images/8/6.png)
 
 
-The current code of the application can be found from [ github](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-2), branch <i>part8-2</i>.
+The current code of the application can be found on [ Github](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-2), branch <i>part8-2</i>.
 
 ### Enum
 
@@ -807,7 +807,7 @@ query {
 ```
 
 
-or persons without a phonenumber 
+or persons without a phone number 
 
 ```js
 query {
@@ -839,7 +839,7 @@ type Query {
 The type <i>YesNo</i> is GraphQL [enum](https://graphql.org/learn/schema/#enumeration-types), or an enumerable, with two possible values <i>YES</i> or <i>NO</i>. In the query _allPersons_ the parameter _phone_  has the type <i>YesNo</i>, but is not non-null. 
 
 
-the resolver changes like so
+The resolver changes like so:
 
 ```js
 Query: {
@@ -861,10 +861,10 @@ Query: {
 },
 ```
 
-### Changing a phonenumber
+### Changing a phone number
 
 
-Let's add a mutation for changing the phonenumber of a person. The schema of this mutation looks as follows
+Let's add a mutation for changing the phone number of a person. The schema of this mutation looks as follows:
 
 ```js
 type Mutation {
@@ -905,7 +905,7 @@ Mutation: {
 
 The mutation finds the person to be updated person by the field <i>name</i>.
 
-The current code of the application can be found from [github](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>.
+The current code of the application can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>.
 
 ### More on queries
 
@@ -995,7 +995,7 @@ If there are multiple queries, Playground asks you to choose which of them to ru
 ### Exercises
 
 
-Through the exercises we implement a GraphQL backend for a small library. 
+Through the exercises, we will implement a GraphQL backend for a small library. 
 Start with [this file](https://github.com/fullstackopen-2019/misc/blob/master/library-backend.js). Remember _npm init_ and to install dependencies!
 
 #### 8.1: The number of books and authors
@@ -1030,7 +1030,7 @@ should return
 Implement query _allBooks_, which returns the details of all books. 
 
 
-In the end user should be able to do the following query
+In the end, user should be able to do the following query:
 
 ```js
 query {
@@ -1128,7 +1128,7 @@ should return
 #### 8.5: Books by genre
 
 
-Modify the query _allBooks_ so, that user can give optional parameter <i>genre</i>. The response should include only books of that genre. 
+Modify the query _allBooks_ so that a user can give an optional parameter <i>genre</i>. The response should include only books of that genre. 
 
 
 For example query

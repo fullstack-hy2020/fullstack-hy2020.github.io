@@ -24,7 +24,7 @@ Following part 6 we return to React without Redux.
 
 
 
-It is very common for web-applications to have a navigation bar, which enables switching the view of the application. 
+It is very common for web-applications to have a navigation bar, which enables switching the view of the application
 
 ![](../../images/7/1b.png)
 
@@ -35,7 +35,7 @@ and separate pages for showing the information of notes and users:
 
 
 
-In an [old school web app](/en/part0/fundamentals_of_web_apps#traditional-web-applications) changing the page shown by the application would be accomplished by the browser making a HTTP GET request to the server and rendering the HTML representing the view that was returned.
+In an [old school web app](/en/part0/fundamentals_of_web_apps#traditional-web-applications) changing the page shown by the application would be accomplished by the browser making an HTTP GET request to the server and rendering the HTML representing the view that was returned.
 
 
 
@@ -119,11 +119,11 @@ However, the method is not very optimal. As we can see from the pictures, the ad
 
 
 
-Luckily, in React there exists a component [React router](https://github.com/ReactTraining/react-router), which provides an excellent solution to the navigation management of a React-application.
+Luckily, in React there exists a component named [React Router](https://github.com/ReactTraining/react-router), which provides an excellent solution to the navigation management of a React-application.
 
 
 
-Let's change the above application to use React router. First we install React router with the command
+Let's change the above application to use React Router. First we install React Router with the command
 
 ```js
 npm install --save react-router-dom
@@ -131,7 +131,7 @@ npm install --save react-router-dom
 
 
 
-The routing provided by React router is enabled by changing the application as follows:
+The routing provided by React Router is enabled by changing the application as follows:
 
 ```js
 import {
@@ -185,7 +185,7 @@ According to the manual
 
 
 
-Normally the browser loads a new page when the url in the address bar changes. However, with the help of the [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/) <i>BrowserRouter</i> enables us to use the url in the address bar of the browser for internal "routing" in a React-application. So, even if the url in the address bar changes, the content of the page is only manipulated using Javascript, and the browser doesn't load new content form the server. Using the back and forward actions, as well as making bookmarks, is still logical like on a traditional web page.
+Normally the browser loads a new page when the url in the address bar changes. However, with the help of the [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/) <i>BrowserRouter</i> enables us to use the url in the address bar of the browser for internal "routing" in a React-application. So, even if the url in the address bar changes, the content of the page is only manipulated using Javascript, and the browser doesn't load new content from the server. Using the back and forward actions, as well as making bookmarks, is still logical like on a traditional web page.
 
 
 
@@ -221,7 +221,7 @@ The root of the application, or the address <code>/</code>, is defined to render
 
 
 
-we have to use the modifier <i>exact</i> in front of the <i>path</i> attribute of the route. Otherwise <i>Home</i> is also rendered on all other paths, since the root <code>/</code> is included at the <i>start</i> of all other paths.
+We have to use the modifier <i>exact</i> in front of the <i>path</i> attribute of the route. Otherwise <i>Home</i> is also rendered on all other paths, since the root <code>/</code> is included at the <i>start</i> of all other paths.
 
 
 ### Parameterized route
@@ -340,11 +340,11 @@ and finally the <i>Note</i>-component being rendered gets the note singled out b
 
 
 
-We have also implemented a very simple login feature. If one is logged into the application we store the information about this user in the <i>App</i>'s state <i>user</i>
+We have also implemented a very simple login feature. If one is logged into the application we store the information about this user in the <i>App</i>'s state <i>user</i>.
 
 
 
-The option to navigate to the <i>Login</i>-view is rendered conditionally in the menu
+The option to navigate to the <i>Login</i>-view is rendered conditionally in the menu.
 
 ```js
 <Router>
@@ -367,7 +367,7 @@ The option to navigate to the <i>Login</i>-view is rendered conditionally in the
 
 
 
-so if the user is already logged in, instead of displaying the link <i>Login</i> we show the username of the user:
+So if the user is already logged in, instead of displaying the link <i>Login</i> we show the username of the user:
 
 ![](../../images/7/4a.png)
 
@@ -429,7 +429,7 @@ There is one more interesting detail about the <i>Users</i> route:
 
 
 
-If a user isn't logged in the <i>Users</i> is not rendered. Instead the user is <i>redirected</i> using the <i>Redirect</i>-component to the login view
+If a user isn't logged in, the <i>Users</i> component is not rendered. Instead the user is <i>redirected</i> using the <i>Redirect</i>-component to the login view
 
 ```js
 <Redirect to="/login" />
@@ -562,7 +562,7 @@ The creation of a new anecdote should happen e.g. in the path <i>create</i>:
 
 
 
-NB: if you get the following error message
+NB: If you get the following error message:
 
 ![](../../assets/teht/39.png)
 
