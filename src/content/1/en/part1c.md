@@ -695,6 +695,8 @@ const App = (props) => {
 }
 ```
 
+Note that we no longer need the double arrow function.
+
 Everything still works. When the buttons are clicked and the <i>App</i> gets re-rendered, all of its children including the <i>Display</i> component are also re-rendered.
 
 Next, let's make a <i>Button</i> component for the buttons of our application. We have to pass the event handler as well as the title of the button through the component's props:

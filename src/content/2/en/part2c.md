@@ -621,7 +621,7 @@ In this exercise it is also enough that your application works for most of the c
 
 **There is still a lot to do in this part, so don't get stuck on this exercise!**
 
-Add to the view showing the data of a single country the weather report for the capital of that country. There are dozens of providers for weather data. I used [https://www.apixu.com](https://www.apixu.com).
+Add to the view showing the data of a single country the weather report for the capital of that country. There are dozens of providers for weather data. I used [https://www.apixu.com](https://www.apixu.com). Don't forget to [hide your API key](https://medium.com/better-programming/how-to-hide-your-api-keys-c2b952bc07e6).
 
 ![](../../images/2/19b5.png)
 

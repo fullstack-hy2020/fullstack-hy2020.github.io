@@ -99,7 +99,7 @@ const handleLeftClick = () => {
 }
 ```
 
-uudeksi tilaksi siis aseteaan seuraava olio
+uudeksi tilaksi siis asetetaan seuraava olio
 
 ```js
 {
@@ -110,7 +110,7 @@ uudeksi tilaksi siis aseteaan seuraava olio
 
 eli kentän <i>left</i> arvo on sama kuin alkuperäisen tilan kentän <i>left + 1</i> ja kentän <i>right</i> arvo on sama kuin alkuperäisen tilan kenttä <i>right</i>.
 
-Uuden tilan määrittelevän olion modostaminen onnistuu hieman tyylikkäämmin hyödyntämällä kesällä 2018 kieleen tuotua [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) -syntaksia:
+Uuden tilan määrittelevän olion muodostaminen onnistuu hieman tyylikkäämmin hyödyntämällä kesällä 2018 kieleen tuotua [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) -syntaksia:
 
 ```js
 const handleLeftClick = () => {
@@ -167,7 +167,7 @@ On kuitenkin tilanteita, joissa jokin osa tilaa kannattaa pitää monimutkaisemm
 
 ### Taulukon käsittelyä
 
-Tehdään sovellukseen vielä laajennus, lisätään sovelluksen tilaan taulukko _allClicks_ joka muistaa kaikki näppäimenpainallukset.
+Tehdään sovellukseen vielä laajennus, lisätään sovelluksen tilaan taulukko _allClicks_, joka muistaa kaikki näppäimenpainallukset.
 
 ```js
 const App = (props) => {
@@ -225,7 +225,7 @@ Kuten jo aiemmin mainittiin, Javascriptissa on myös mahdollista lisätä tauluk
 ```js
 const handleLeftClick = () => {
   allClicks.push('L')
-  setAll(allClick)
+  setAll(allClicks)
   setLeft(left + 1)
 }
 ```

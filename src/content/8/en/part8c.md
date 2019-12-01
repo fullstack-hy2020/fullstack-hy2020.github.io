@@ -204,7 +204,7 @@ Mutation: {
 }
 ```
 
-The finished code of the backend can be found from [github](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-4), branch <i>part8-4</i>.
+The finished code of the backend can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-4), branch <i>part8-4</i>.
 
 
 ### User and log in
@@ -240,7 +240,7 @@ module.exports = mongoose.model('User', schema)
 Every user is connected to a bunch of other persons in the system through the _friends_ field. The idea is that when a user, i.e <i>mluukkai</i>, adds a person, i.e <i>Arto Hellas</i>, to the list, the person is added to their _friends_ list. This way logged in users can have their own, personalized, view in the application. 
 
 
-Log in and identifying the user are handled the same way we used in [part 4](/en/part4/token_authentication) when we used REST, so by using tokens. 
+Logging in and identifying the user are handled the same way we used in [part 4](/en/part4/token_authentication) when we used REST, by using tokens. 
 
 
 Let's extend the schema like so: 
@@ -314,10 +314,10 @@ Mutation: {
 ```
 
 
-The new user mutation is straightforward. The log in mutation checks if the username/password pair is valid, and if it is returns a jwt-token familiar from [part 4](/en/part4/token_authentication).
+The new user mutation is straightforward. The log in mutation checks if the username/password pair is valid. And if it is indeed valid, it returns a jwt-token familiar from [part 4](/en/part4/token_authentication).
 
 
-Just like in the previous case with REST, the idea now is that a logged in user adds a token they recieve when logging in to all of their requests. And just like with REST, the token is added to GraphQL queries using the <i>Authorization</i> header.
+Just like in the previous case with REST, the idea now is that a logged in user adds a token they receive upon log in to all of their requests. And just like with REST, the token is added to GraphQL queries using the <i>Authorization</i> header.
 
 
 In the GraphQL-playground the header is added to a query like so
@@ -368,7 +368,7 @@ Query: {
 ### Friends list
 
 
-Let's complete the applications backend so that adding and editing persons requires logging in, and added persons are automatically added to the friends list of the user. 
+Let's complete the application's backend so that adding and editing persons requires logging in, and added persons are automatically added to the friends list of the user. 
 
 
 Let's first remove all persons not in anyone's friends list from the database. 
@@ -456,7 +456,7 @@ addAsFriend: async (root, args, { currentUser }) => {
 ```
 
 
-The code of the backend can be found from [github](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-5) branch <i>part8-5</i>.
+The code of the backend can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-5) branch <i>part8-5</i>.
 
 
 </div>
@@ -484,7 +484,7 @@ type Book {
 ```  
 
 
-so that instead of just the authors name the book object contains all the details of the author. 
+so that instead of just the author's name, the book object contains all the details of the author. 
 
 
 You can assume that the user will not try to add faulty books or authors, so you don't have to care about validation errors. 
@@ -506,7 +506,7 @@ You might find this [useful](https://docs.mongodb.com/manual/reference/operator/
 #### 8.15 Database, part 3
 
 
-Complete the program so, that database validation errors (eg. too short book title or author name) are handled sensibly. This means that they cause _UserInputError_ with a suitable error message to be thrown. 
+Complete the program so that database validation errors (e.g. too short book title or author name) are handled sensibly. This means that they cause _UserInputError_ with a suitable error message to be thrown. 
 
 
 #### 8.16 user and logging in
@@ -545,7 +545,7 @@ type Mutation {
 
 
 Create resolvers for query _me_ and the new mutations _createUser_ and 
-_login_. Like in the course material, you can assume all users have the same, hardcoded, password. 
+_login_. Like in the course material, you can assume all users have the same hardcoded password. 
 
 
 Make the mutations _addBook_ and _editAuthor_ possible only if the request includes a valid token. 

@@ -65,7 +65,7 @@ As we can see from the example application that was created with create-react-ap
 In practice, bundling is done so that we define an entry point for the application, which typically is the <i>index.js</i> file. When webpack bundles the code, it includes all of the code that the entry point imports, and the code that its imports import, and so on.
 
 
-Since part of imported files are packages like React, Redux, and Axios; the bundled JavaScript file will also contain the contents of each of these libraries.
+Since part of the imported files are packages like React, Redux, and Axios, the bundled JavaScript file will also contain the contents of each of these libraries.
 
 
 > The old way of dividing the application's code into multiple files was based on the fact that the <i>index.html</i> file loaded all of the separate JavaScript files of the application with the help of script tags. This resulted in  decreased performance, since the loading of each separate file results in some overhead. For this reason, these days the preferred method is to bundle the code into a single file.
@@ -210,7 +210,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _App
 ### Configuration file
 
 
-Let's take a closer at the contents of our current <i>webpack.config.js</i> file:
+Let's take a closer look at the contents of our current <i>webpack.config.js</i> file:
 
 ```js
 const path = require('path')
@@ -405,10 +405,10 @@ Our configuration contains nearly everything that we need for React development.
 ### Transpilers
 
 
-The process of transforming code from one form of JavaScript to another is called [transpiling](https://en.wiktionary.org/wiki/transpile). The general definition of the term is to compile source code code by transforming it from one language to another.
+The process of transforming code from one form of JavaScript to another is called [transpiling](https://en.wiktionary.org/wiki/transpile). The general definition of the term is to compile source code by transforming it from one language to another.
 
 
-By using the configuration from the previous section we are <i>transpiling</i> the code containing JSX into regular JavaScript with the help of [babel](https://babeljs.io/) which is currently the most popular tool for the job.
+By using the configuration from the previous section we are <i>transpiling</i> the code containing JSX into regular JavaScript with the help of [babel](https://babeljs.io/), which is currently the most popular tool for the job.
 
 
 As mentioned in part 1, most browsers do not support the latest features that were introduced in ES6 and ES7, and for this reason the code is usually transpiled to a version of JavaScript that implements the ES5 standard.
@@ -787,7 +787,7 @@ Let's store the following content in the <i>db.json</i> file:
 ```
 
 
-Our goal is to configure the application with webpack in such a way, that when used locally the application uses the json-server available in port 3001 as its backend.
+Our goal is to configure the application with webpack in such a way that, when used locally, the application uses the json-server available in port 3001 as its backend.
 
 
 The bundled file will then be configured to use the backend available at the <https://radiant-plateau-25399.herokuapp.com/api/notes> url.

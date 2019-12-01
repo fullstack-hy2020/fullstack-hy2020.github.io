@@ -301,7 +301,7 @@ const httpLink = createHttpLink({
 ```
 
 Tilaukset tehdään komponentin 
-[Subscription](https://www.apollographql.com/docs/react/v2.5/advanced/subscriptions/#subscription-component) tai  Apollo Client 3.0:n tarjoaman  hookin _useSubscription_ avulla. Käytämme jälleen hookeja.
+[Subscription](https://www.apollographql.com/docs/react/data/subscriptions/#client-setup) tai  Apollo Client 3.0:n tarjoaman  hookin _useSubscription_ avulla. Käytämme jälleen hookeja.
 
 Tehdään koodiin seuraavat muutokset:
 

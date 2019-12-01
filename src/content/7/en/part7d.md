@@ -264,7 +264,7 @@ npm install --save-dev cypress
 
 
 
-and then we define a npm-script for starting the tests.
+and then we define an npm-script for starting the tests.
 
 ```js
 {
@@ -287,7 +287,7 @@ Cypress-tests expect the system that is being tested to be running when running 
 
 
 
-We make a npm-script for the backend so we can run it such that <i>NODE\_ENV</i> gets the value <i>test</i>
+We make an npm-script for the backend so we can run it such that <i>NODE\_ENV</i> gets the value <i>test</i>
 
 ```js
 {
@@ -613,7 +613,7 @@ module.exports = app
 
 
 
-so after the modification a HTTP POST request to the backend endpoint <i>/api/testing/reset</i> empties the database.
+so after the modification an HTTP POST request to the backend endpoint <i>/api/testing/reset</i> empties the database.
 
 
 
