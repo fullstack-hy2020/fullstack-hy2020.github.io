@@ -10,7 +10,7 @@ lang: en
 
 We will next implement a React-app which uses the GraphQL server we created.
 
-The current code of the server can be found from [github](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>.
+The current code of the server can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>.
 
 
 In theory, we can use GraphQL with HTTP POST -requests. The following shows an example of this with Postman. 
@@ -367,7 +367,7 @@ const Persons = ({ result, client }) => {
 ```
 
 
-If the button next to persons details is pressed, the component makes a GraphQL query for the persons details and saves the response to the component state <i>person</i>:
+If the button next to person's details is pressed, the component makes a GraphQL query for the person's details and saves the response to the component state <i>person</i>:
 
 ```js
 const showPerson = async (name) => {
@@ -389,7 +389,7 @@ If the state _person_ has a value, instead of showing a list of all persons, onl
 The solution is not the neatest possible, but it is good enough for us. 
 
 
-The current code of the application can be found from [github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-1) branch <i>part8-1</i>.
+The current code of the application can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-1) branch <i>part8-1</i>.
 
 ### Cache
 
@@ -610,7 +610,7 @@ There are other ways to update the cache. More about those later in this part.
 **NB** Apollo Client devtools seems to have some bugs. At some point it stops updating the state of the cache. If you encounter this issue, open the application in a new tab. 
 
 
-The current code of the application can be found from [github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-2) branch <i>part8-2</i>.
+The current code of the application can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-2) branch <i>part8-2</i>.
 
 ### Handling mutation error messages
 
@@ -638,7 +638,7 @@ const App = () => {
   return (
     <div>
     // highlight-start
-      {errorMessage&&
+      {errorMessage &&
         <div style={{color: 'red'}}>
           {errorMessage}
         </div>
@@ -671,7 +671,7 @@ Now the user is informed about an error with a simple notification.
 ![](../../images/8/15.png)
 
 
-The current code of the application can be found from [github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-3) branch <i>part8-3</i>.
+The current code of the application can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-3) branch <i>part8-3</i>.
 
 ### Updating a phone number
 
@@ -788,7 +788,7 @@ If we try to change the phone number of a nonexisting name, nothing seems to hap
 ![](../../images/8/23.png)
 
 
-The current code of the application can be found from [github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-4) branch <i>part8-4</i>
+The current code of the application can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-4) branch <i>part8-4</i>
 
 ### Apollo Client and the applications state
 
@@ -802,7 +802,7 @@ When necessary Apollo enables saving the applications local state to [Apollo cac
 ### Render props
 
 
-GraphQLs components <i>Query</i>, <i>Mutation</i> and <i>ApolloConsumer</i> follow the so called [render props](https://reactjs.org/docs/render-props.html) principle. A component following this principle is given, as props or as a child between its tags (which technically is also a props), a <i>function</i> which defines how the component is rendered. With the render props -principle it is possible to move data or function references to the component responsible for rendering. 
+GraphQL components <i>Query</i>, <i>Mutation</i> and <i>ApolloConsumer</i> follow the so called [render props](https://reactjs.org/docs/render-props.html) principle. A component following this principle is given, as props or as a child between its tags (which technically is also a props), a <i>function</i> which defines how the component is rendered. With the render props -principle it is possible to move data or function references to the component responsible for rendering. 
 
 
 The Render props -principle has been quite popular. For example [react router](/en/part7/react_router) we used in part 7 uses it.  Using the component <i>Route</i> of the React router it is defined what the application renders when the browser is in a certain url. 
@@ -848,7 +848,7 @@ More generally the trend is to replace the need for render props with hooks.
 
 ### Apollo with hooks
 
-There is already [a beta release](https://www.npmjs.com/package/react-apollo/v/3.0.0-beta.2) available for Apollo Client 3.0. that has the hook support. Let us try it out.
+There is already [a beta release](https://www.npmjs.com/package/react-apollo/v/3.0.0-beta.2) available for Apollo Client 3.0.0 that has the hook support. Let us try it out.
 
 ```js
 npm install --save react-apollo@3.0.0-beta.2
@@ -1003,7 +1003,7 @@ Note that the hook _useMutation_ returns an array. The first value in that array
 
 The final result is really so much cleaner than the mess using the render props -components. We can join Ryan Florence in the opinion he stated in React Conf 2018 [90% Cleaner React With Hooks](https://www.youtube.com/watch?v=wXLf18DsV-I). 
 
-The code of the application which uses hooks can be found from [github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-5) branch <i>part8-5</i>.
+The code of the application which uses hooks can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-5) branch <i>part8-5</i>.
 
 </div>
 
@@ -1020,14 +1020,14 @@ You can implement your application either using the render prop -components <i>Q
 
 #### 8.8: Authors view
 
-Implement an Authors view, so show the details of all authors on a page i.e as follows: 
+Implement an Authors view to show the details of all authors on a page as follows: 
 
 ![](../../images/8/16.png)
 
 #### 8.9: Books view
 
 
-Implement a Books view, so show on a page all other details of all books except their genres. 
+Implement a Books view to show on a page all other details of all books except their genres. 
 
 ![](../../images/8/17.png)
 
