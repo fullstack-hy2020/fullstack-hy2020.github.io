@@ -61,8 +61,7 @@ When we reload the application, we notice that it already looks a bit more styli
 
 ![](../../images/7/5.png)
 
-
-In Bootstrap, all of the content of the application is typically rendered inside a [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers). In practice, this is accomplished by giving the root _div_ element of the application the  _container_ class attribute:
+In Bootstrap, all of the contents of the application are typically rendered inside of a [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers). In practice this is accomplished by giving the root _div_ element of the application the  _container_ class attribute:
 
 ```js
 const App = () => {
@@ -243,7 +242,7 @@ Lastly, let's alter the application's navigation menu to use Bootstrap's [Navbar
           ? <em>{user} logged in</em>
           : <Link to="/login">login</Link>
         }
-    </Nav.Link>
+      </Nav.Link>
     </Nav>
   </Navbar.Collapse>
 </Navbar>
