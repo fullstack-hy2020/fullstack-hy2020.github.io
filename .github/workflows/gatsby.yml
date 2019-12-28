@@ -7,12 +7,9 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1 
-      - uses: xmflsct/action-publish-gatsby@v1 # Uses this action to run further steps
+      - uses: actions/checkout@v1
+      - uses: enriikke/gatsby-gh-pages-action@v2
         with:
-          publishBranch: 'master' # Not required, default publishing branch is master
-          token: ${{ secrets.mluukkai }} # Your personal access token of GitHub, read more below of how to obtain one and keep it safe
-          name: 'Matti Luukkainen' # Not required, default to action's maintainer
-          email: 'mluukkai@iki.fi' # Not required, default to action's maintainer
+          access-token: ${{ secrets.ACCESS_TOKEN }}
