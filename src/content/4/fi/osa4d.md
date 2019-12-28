@@ -13,7 +13,7 @@ Toteutamme nyt backendiin tuen [token-perustaiselle](https://scotch.io/tutorials
 
 Token-autentikaation periaatetta kuvaa seuraava sekvenssikaavio:
 
-![](../../images/4/16.png)
+![](../../images/4/16e.png)
 
 - Alussa käyttäjä kirjautuu Reactilla toteutettua kirjautumislomaketta käyttäen
   - lisäämme kirjautumislomakkeen frontendiin [osassa 5](/osa5)

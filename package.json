@@ -1,6 +1,6 @@
 {
-  "name": "fullstackopen-2019",
-  "description": "Full stack open 2019",
+  "name": "fullstackhy-2020",
+  "description": "Full stack websovelluskehitys 2020",
   "version": "1.0.0",
   "author": "Houston Inc. Consulting Oy",
   "dependencies": {
@@ -65,6 +65,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/fullstackopen-2019/fullstackopen-2019.github.io"
+    "url": "https://github.com/fullstack-hy2020/fullstack-hy2020.github.io"
   }
 }
