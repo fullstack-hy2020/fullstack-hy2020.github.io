@@ -24,4 +24,6 @@ jobs:
           npm install
       - name: build
         run: |
+          git config --global user.email "mluukkai@iki.fi"
+          git config --global user.name "Matti Luukkainen"
           npm run deploy
