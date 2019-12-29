@@ -17,8 +17,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '10.x'
-      - name: test
+      - name: install
         run: |
           pwd
           ls -la
-          npm install 
+          npm install
+      - name: build
+        run: |
+          npm run deploy
