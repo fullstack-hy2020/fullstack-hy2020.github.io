@@ -28,9 +28,9 @@ jobs:
           cd public 
           pwd
           ls -la
-      - name: push
-        uses: mluukkai/github-push-action@master
+      - uses: xmflsct/action-publish-gatsby@v1 
         with:
-          force: true
-          branch: master
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publishBranch: 'master' 
+          token: ${{ secrets.SEKRED }}
+          name: 'Matti Luukkainen'
+          email: 'mluukkai@iki.fi'
