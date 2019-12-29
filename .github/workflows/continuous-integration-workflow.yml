@@ -28,7 +28,8 @@ jobs:
           cd public 
           pwd
           ls -la
-      - name: vat
-        run: |
-          node_modules/.bin/gh-pages -u 'Matti Luukkainen <mluukkai@iki.fi>' ${{ secrets.SEKRED }} -d public -b master
+      - name: wtf
+        uses: enriikke/gatsby-gh-pages-action@v2
+        with:
+          access-token: ${{ secrets.SEKRED }}
  
