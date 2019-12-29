@@ -25,7 +25,7 @@ jobs:
           git status          
       - name: working dir
         run: |
-          cd public
+          cd public 
           pwd
           ls -la
       - name: push
