@@ -24,6 +24,9 @@ jobs:
           npm install
       - name: build
         run: |
+          npm run build
+      - name: push
+        run: |
           git config --global user.email "mluukkai@iki.fi"
           git config --global user.name "Matti Luukkainen"
-          npm run deploy
+          npm run publish
