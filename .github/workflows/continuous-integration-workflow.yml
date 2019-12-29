@@ -28,9 +28,7 @@ jobs:
           cd public 
           pwd
           ls -la
-      - uses: xmflsct/action-publish-gatsby 
-        with:
-          publishBranch: 'master' 
-          token: ${{ secrets.SEKRED }}
-          name: 'Matti Luukkainen'
-          email: 'mluukkai@iki.fi'
+      - name: vat
+        run: |
+          gh-pages -u 'Matti Luukkainen <mluukkai@iki.fi>' ${{ secrets.SEKRED }} -d public -b master
+ 
