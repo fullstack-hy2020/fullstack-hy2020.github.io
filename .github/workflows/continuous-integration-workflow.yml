@@ -9,22 +9,22 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: working dir
-        run: |
-          pwd
-          ls -la
       - uses: actions/checkout@v1
       - uses: actions/setup-node@v1
         with:
           node-version: '10.x'
       - name: install
         run: |
-          pwd
-          ls -la
           npm install
       - name: build
         run: |
+          ls -la
           npm run build
+          git status
+      - name: working dir
+        run: |
+          pwd
+          ls -la
       - name: push
         uses: ad-m/github-push-action@master
         with:
