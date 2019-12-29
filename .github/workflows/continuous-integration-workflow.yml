@@ -29,9 +29,8 @@ jobs:
           pwd
           ls -la
       - name: push
-        uses: ad-m/github-push-action@master
+        uses: mluukkai/github-push-action@master
         with:
-          directory: public
           force: true
           branch: master
           github_token: ${{ secrets.GITHUB_TOKEN }}
