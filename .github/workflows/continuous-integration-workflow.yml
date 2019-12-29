@@ -34,7 +34,3 @@ jobs:
           force: true
           branch: master
           github_token: ${{ secrets.GITHUB_TOKEN }}
-      - name: working dir after
-        run: |
-          pwd
-          ls -la          
