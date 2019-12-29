@@ -20,9 +20,12 @@ jobs:
         run: |
           ls -la
           npm run build
-          git status
+      - name: git status
+        run: |
+          git status          
       - name: working dir
         run: |
+          cd public
           pwd
           ls -la
       - name: push
@@ -30,7 +33,7 @@ jobs:
         with:
           directory: public
           force: true
-          branch: lol
+          branch: master
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: working dir after
         run: |
