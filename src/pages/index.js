@@ -55,7 +55,7 @@ const IndexPage = () => {
 
           <SubHeader
             className="col-10"
-            text="Full Stack Open 2019"
+            text="Full Stack -websovelluskehitys 2020"
             headingLevel="h2"
           />
 
