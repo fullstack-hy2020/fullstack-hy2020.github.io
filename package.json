@@ -48,6 +48,7 @@
   "license": "Creative Commons BY-NC-SA 3.0",
   "scripts": {
     "build": "gatsby build",
+    "gatsby": "gatsby build",
     "develop": "gatsby develop",
     "start": "npm run develop",
     "format": "prettier --write \"src/**/*.js\"",
