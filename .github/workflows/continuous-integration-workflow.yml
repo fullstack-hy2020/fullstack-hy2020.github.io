@@ -1,21 +1,24 @@
-name: deploy
+name: build and deploy
 
 on:
   push:
     branches:
-      - source
+      - master
 jobs:
   build:
-    name: Greeting
-    # This job runs on Linux
+    name: deploy
     runs-on: ubuntu-latest
     steps:
-      # This step uses GitHub's hello-world-javascript-action: https://github.com/actions/hello-world-javascript-action
-      - name: deploy
-        uses: actions/hello-world-javascript-action@v1
+      - name: working dir
+        run: |
+          pwd
+          ls -la
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
         with:
-          who-to-greet: 'GitHub'
-        id: hello
-      # This step prints an output (time) from the previous step's action.
-      - name: Echo the greeting's time
-        run: echo 'The time was ${{ steps.hello.outputs.time }}.'
+          node-version: '10.x'
+      - name: test
+        run: |
+          pwd
+          ls -la
+          npm install 
