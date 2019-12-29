@@ -26,7 +26,8 @@ jobs:
         run: |
           npm run build
       - name: push
-        run: |
-          git config --global user.email "mluukkai@iki.fi"
-          git config --global user.name "Matti Luukkainen"
-          npm run publish
+        uses: ad-m/github-push-action@master
+        with:
+          directory: public
+          force: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}          
