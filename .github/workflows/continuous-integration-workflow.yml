@@ -30,4 +30,9 @@ jobs:
         with:
           directory: public
           force: true
-          github_token: ${{ secrets.GITHUB_TOKEN }}          
+          branch: lol
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: working dir after
+        run: |
+          pwd
+          ls -la          
