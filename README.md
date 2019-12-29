@@ -1,4 +1,4 @@
-# Full stack -websovelluskehitys 2019
+# Full stack -websovelluskehitys 2020
 
 <https://fullstackopen.com/>
 
