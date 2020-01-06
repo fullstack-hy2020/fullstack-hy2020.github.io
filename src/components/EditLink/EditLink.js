@@ -12,7 +12,7 @@ const EditLink = ({ part, letter, lang }) => {
       <a
         className="edit-link"
         target="__BLANK"
-        href={`https://github.com/fullstackopen-2019/fullstackopen-2019.github.io/edit/source/src/content/${part}/${lang}/${link}${letter}.md`}
+        href={`https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/edit/source/src/content/${part}/${lang}/${link}${letter}.md`}
       >
         <span>
           {lang === 'en'

@@ -1,36 +1,6 @@
 {
   "fi": [
     {
-      "title": "Ilmestyykö kurssista uusi versio 2020?",
-      "text": [
-        "Kyllä, uusi versio ilmestyy 15.3.2020.<br><br>Uusi versio ei tule poikkeamaan radikaalisti nykyisestä. Suurin ero tulee osaan 5, integraatiotestaus poistuu ja korjaantuu Cypres.io:lla tapahtuvalla E2E-testauksella. <br><br>Kurssin on myös tulossa uusi Typescriptiä käsittelevä osa. <br><br>Vuoden 2019 versiota voi laajentaa 2020 versiossa <a href='/osa0/yleista#aiemmin-suoritetun-kurssin-taydentaminen'>tämän</a> ohjeen mukaisesti."
-      ]
-    },
-    {
-      "title": "Miten kurssille ilmoittaudutaan?",
-      "text": [
-        "Kurssille ei tarvitse varsinaisesti ilmoittautua ennen kuin haluat tehdä kurssin kokeen. Koe tehdään Avoimen yliopiston Moodle-järjestelmään. Katso lisää <a href='/osa0/yleista#arvosteluperusteet'>täältä</a>."
-      ]
-    },
-    {
-      "title": "Mikä on kurssin laajuus?",
-      "text": [
-        "Kurssin laajuus on <a href='osa0/yleista#arvosteluperusteet'>riippuen tekemiesi tehtävien määrästä</a>  3-8 opintopistettä. Suoritettuasi kurssin voit jatkaa aihepiiriin syventymistä 1-10 opintopisteen laajuisen <a href='/osa0/yleista#full-stack-harjoitustyo'>Full stack -harjoitustyön</a> parissa."
-      ]
-    },
-    {
-      "title": "Milloin on tehtävien ja kokeen deadline?",
-      "text": [
-        "Etenemisnopeus on vapaa, kurssilla on ainoastaan yksi deadline sekä tehtäville että kokeelle, 10.1.2020 klo 23.59.59. Kannattaa kuitenkin huomata, että kurssille on ilmoittauduttava viimeistään deadlinea edeltävänä päivänä 9.1.2020."
-      ]
-    },
-    {
-      "title": "Miten tehtävät palautetaan?",
-      "text": [
-        "Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät palautussovellukseen, lue lisää <a href='/osa0/yleista#tehtavien-palauttaminen'>täältä</a>."
-      ]
-    },
-    {
       "title": "Pitääkö jokainen osa palauttaa omaan repositorioon?",
       "text": [
         "Ei. Voit käyttää yhtä tai useampaa repositoriota, tärkeintä on, että asiat repositorion sisällä ovat selkeästi nimettyjä."
@@ -43,29 +13,17 @@
       ]
     },
     {
-      "title": "Milloin ja miten saan kurssilta suoritusmerkinnän?",
-      "text": [
-        "Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi valmis kurssin suorituksen kanssa. Viimeinen mahdollinen suorituspäivä on 10.1.2020. Lue lisää <a href='/osa0/yleista#arvosteluperusteet'>täältä</a>."
-      ]
-    },
-    {
       "title": "Voinko laajentaa aiempaa kurssisuoritustani?",
       "text": [
         "Voit, lue lisää <a href='/osa0/yleista#aiemmin-suoritetun-kurssin-taydentaminen'>täältä</a>"
       ]
     },
     {
-      "title": "Suoritin kurssin viime vuonna. Miten opin käyttämään React hookeja?",
+      "title": "Minulla ei ole opinto-oikeutta Helsingin Yliopistoon. Voinko suorittaa kurssin?",
       "text": [
-        "State hookia, eli tapaa määritellä tila funktionaalisille komponenteille käsitellään <a href='/osa1/komponentin_tila_ja_tapahtumankasittely/#tilallinen-komponentti'>osassa 1</a>. Lifecycle-metodien roolia hoitavia effect hookeja käsitellään <a href='/osa2/palvelimella_olevan_datan_hakeminen#effect-hookit'>osassa 2</a>. Custom hookeista puhutaan <a href='/osa5/custom_hookit'>osassa 5</a>"
+        "Voit! Tosin suoritusmerkinnän voit saada vasta 15.3. alkavassa MOOC:issa, et myöskään voi palauttaa tehtäviä vielä. MOOCin ja kampuskurssin sisältö on sama, joten nyt tehty työ ei mene hukkaan."
       ]
-    },
-    {
-      "title": "Kuulin että suorittamalla kurssin on mahdollista päästä työhaastatteluun",
-      "text": [
-        "Pitää paikkansa, jos suoritat täydellä laajuudella kurssin ja siihen liittyvän 10 op:n laajuisen harjoitustyön, pääset yhteistyökumppaniemme työhaastatteluun, lue lisää <a href='/osa0/yleista#haastattelulupaus'>täältä</a>."
-      ]
-    }
+    }   
   ],
   "en": [
     {

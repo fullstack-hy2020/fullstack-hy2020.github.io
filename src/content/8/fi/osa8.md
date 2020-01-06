@@ -10,4 +10,5 @@ Kurssin uudessa osassa käsitellään GraphQL:ää, eli Facebookin kehittämää
 
 Katso <a target="_BLANK" href='https://www.youtube.com/watch?v=R7bXa7g6YuQ&list=PLumQiZ25uijis31zaRL7rhzLalSwLqUtm&index=4&t=0s'>täältä</a> Houston Inc:n Niko Salmisen GraphQL:ää käsittelevä vierailuluento.
 
+**Tämän osan tehtävien deadline on sunnuntaina 14.3. klo 23:59**
 </div>

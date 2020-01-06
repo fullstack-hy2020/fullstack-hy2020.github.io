@@ -10,4 +10,5 @@ Kurssin seitsemäs osa käsittelee montaa teemaa. Ensin tutustutaan React router
 
 Kurssin seitsemännen osan teemoihin liittyvät myös useat yhteistyökumppaniemme asiantuntijoiden vierailuluennoista, jotka löydät <a href='https://www.youtube.com/playlist?list=PLumQiZ25uijis31zaRL7rhzLalSwLqUtm'><span style='text-decoration: underline;'>täältä</span></span></a>.
   
+**Tämän osan tehtävien deadline on sunnuntaina 14.3. klo 23:59**
 </div>
