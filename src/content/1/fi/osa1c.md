@@ -523,13 +523,13 @@ Tälläkin kertaa tapahtumankäsittelijät on määritelty oikein, sillä <i>onC
 
 Reactissa suositaan pieniä komponentteja, joita on mahdollista uusiokäyttää monessa osissa sovellusta ja jopa useissa eri sovelluksissa. Refaktoroidaan koodiamme vielä siten, että yhden komponentin sijaan koostamme laskurin näytöstä ja kahdesta painikkeesta.
 
-Tehdään ensin näytöstä vastaava komponentti <i>Display</i>.
+Tehdään ensin laskurin tilan näyttämisestä vastaava komponentti <i>Display</i>.
 
 Reactissa pidetään hyvänä käytänteenä sijoittaa tila [riittävän ylös](https://reactjs.org/docs/lifting-state-up.html) komponenttihierarkiassa. Reactin dokumentaatio toteaa seuraavasti
 
 > <i>Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.</i> 
 
-Jätetään tätä neuvoa seuraten sovelluksen tila, eli laskimen arvo komponenttiin <i>App</i> ja välitetään tila <i>propsien</i> avulla komponentille <i>Display</i>:
+Jätetään tätä neuvoa seuraten sovelluksen tila, eli laskimen arvo komponenttiin <i>App</i> ja välitetään tila eli laskurin arvo <i>propsien</i> avulla komponentille <i>Display</i>:
 
 ```js
 const Display = (props) => {
@@ -583,7 +583,7 @@ const App = (props) => {
   const [ counter, setCounter ] = useState(0)
 
   const increaseByOne = () => setCounter(counter + 1)
-  const idecreaseByOne = () => setCounter(counter - 1)
+  const decreaseByOne = () => setCounter(counter - 1)
   const setToZero = () => setCounter(0)
 
   return (
@@ -599,7 +599,7 @@ const App = (props) => {
         text='zero'
       />     
       <Button
-        handleClick={idecreaseByOne}
+        handleClick={decreaseByOne}
         text='minus'
       />           
       // highlight-end
@@ -608,7 +608,7 @@ const App = (props) => {
 }
 ```
 
-Koska meillä on nyt uudelleenkäytettävä nappi, sovellukselle on lisätty uutena toiminnallisuutena nappi, jolla laskurin arvoa voi vähentää.
+Koska meillä on nyt uudelleenkäytettävä komponentti <i>Button</i>, sovellukselle on lisätty uutena toiminnallisuutena nappi, jolla laskurin arvoa voi vähentää.
 
 Tapahtumankäsittelijä välitetään napeille propsin _handleClick_ välityksellä. Propsin nimellä ei ole sinänsä merkitystä, mutta valinta ei ollut täysin sattumanvarainen, esim. Reactin [tutoriaali](https://reactjs.org/tutorial/tutorial.html) suosittelee tätä konventiota.
 
@@ -618,7 +618,7 @@ Kerrataan vielä sovelluksen toiminnan pääperiaatteet.
 
 Kun sovellus käynnistyy, suoritetaan komponentin _App_-koodi, joka luo [useState](https://reactjs.org/docs/hooks-reference.html#usestate)-hookin avulla sovellukselle laskurin tilan _counter_. Komponentti renderöi laskimen alkuarvon 0 näyttävän komponentin _Display_ sekä kolme _Button_-komponenttia, joille se asettaa laskurin tilaa muuttavat tapahtumankäsittelijät.
 
-Kun jotain napeista painetaan, suoritetaan vastaava tapahtumankäsittelijä. Tapahtumankäsittelijä muuttaa komponentin _App_ tilaa funktion _setCounter_ avulla. **Tilaa muuttavan funktion kutsuminen aiheuttaa aina komponentin uudelleenrenderöitymisen.** 
+Kun jotain napeista painetaan, suoritetaan vastaava tapahtumankäsittelijä. Tapahtumankäsittelijä muuttaa komponentin _App_ tilaa funktion _setCounter_ avulla. **Tilaa muuttavan funktion kutsuminen aiheuttaa komponentin uudelleenrenderöitymisen.** 
 
 Eli jos painetaan nappia <i>plus</i>, muuttaa napin tapahtumankäsittelijä tilan _counter_ arvoksi 1 ja komponentti _App_ renderöidään uudelleen. Komponentin uudelleenrenderöinti aiheuttaa sen "alikomponentteina" olevien _Display_- ja _Button_-komponenttien uudelleenrenderöitymisen. _Display_ saa propsin arvoksi laskurin uuden arvon 1 ja _Button_-komponentit saavat propseina tilaa sopivasti muuttavat tapahtumankäsittelijät.
 
