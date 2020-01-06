@@ -394,7 +394,7 @@ Nyt käännös menee läpi ja Reactin generoimaan DOM:iin ei tule ylimääräist
 </div>
 
 <div class="tasks">
-  <h3>Tehtäviä </h3>
+  <h3>Tehtävät 1.1-1.2</h3>
 
 Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/fullstackopen2019/).
 

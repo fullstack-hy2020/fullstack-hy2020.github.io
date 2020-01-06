@@ -9,13 +9,13 @@ lang: fi
 
 Kurssin aikana on websovelluskehityksen rinnalla tavoite ja tarve oppia riittävässä määrin Javascriptiä.
 
-Javascript on kehittynyt viime vuosina nopeaan tahtiin, ja käytämme kurssilla kielen uusimpien versioiden piirteitä. Javascript-standardin virallinen nimi on [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). Tämän hetken tuorein versio on kesäkuussa 2017 julkaistu [ES9](https://www.ecma-international.org/ecma-262/9.0/index.html), toiselta nimeltään ECMAScript 2018.
+Javascript on kehittynyt viime vuosina nopeaan tahtiin, ja käytämme kurssilla kielen uusimpien versioiden piirteitä. Javascript-standardin virallinen nimi on [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). Tämän hetken tuorein versio on kesäkuussa 2019 julkaistu [ES10](https://www.ecma-international.org/ecma-262/10.0/index.html), toiselta nimeltään ECMAScript 2019.
 
 Selaimet eivät vielä osaa kaikkia Javascriptin uusimpien versioiden ominaisuuksia. Tämän takia selaimessa suoritetaan useimmiten koodia joka on käännetty (englanniksi <i>transpiled</i>) uudemmasta Javascriptin versiosta johonkin vanhempaan, laajemmin tuettuun versioon.
 
 Tällä hetkellä johtava tapa tehdä transpilointi on [Babel](https://babeljs.io/). Create-react-app:in avulla luoduissa React-sovelluksissa on valmiiksi konfiguroitu automaattinen transpilaus. Katsomme kurssin [osassa 7](/osa7) tarkemmin miten transpiloinnin konfigurointi tapahtuu.
 
-[Node.js](https://nodejs.org/en/) on melkein missä vaan, mm. palvelimilla toimiva, Googlen [chrome V8](https://developers.google.com/v8/)-javascriptmoottoriin perustuva Javascript-suoritusympäristö. Harjoitellaan hieman Javascriptiä Nodella. Tässä oletetaan, että koneellasi on Node.js:stä vähintään versio <i>v8.10.0</i>. Noden tuoreet versiot osaavat suoraan Javascriptin uusia versioita, joten koodin transpilaus ei ole tarpeen.
+[Node.js](https://nodejs.org/en/) on melkein missä vaan, mm. palvelimilla toimiva, Googlen [chrome V8](https://developers.google.com/v8/)-javascriptmoottoriin perustuva Javascript-suoritusympäristö. Harjoitellaan hieman Javascriptiä Nodella. Tässä oletetaan, että koneellasi on Node.js:stä vähintään versio <i>10.18.0</i>. Noden tuoreet versiot osaavat suoraan Javascriptin kohtuullisen uusia versioita, joten koodin transpilaus ei ole tarpeen.
 
 Koodi kirjoitetaan <i>.js</i>-päätteiseen tiedostoon, ja suoritetaan komennolla <em>node tiedosto.js</em>
 
@@ -43,7 +43,7 @@ x = 4               // aiheuttaa virheen
 
 [const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) ei oikeastaan määrittele muuttujaa vaan <i>vakion</i>, jonka arvoa ei voi enää muuttaa. [let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let) taas määrittelee normaalin muuttujan.
 
-Esimerkistä näemme myös, että muuttujan tallettaman tiedon tyyppi voi vaihtaa tyyppiä suorituksen aikana, _y_ tallettaa aluksi luvun ja lopulta merkkijonon.
+Esimerkistä näemme myös, että muuttujan tallettaman tiedon tyyppi voi vaihtua suorituksen aikana, _y_ tallettaa aluksi luvun ja lopulta merkkijonon.
 
 Javascriptissa on myös mahdollista määritellä muuttujia avainsanan [var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var) avulla. Var oli pitkään ainoa tapa muuttujien määrittelyyn, const ja let tulivat kieleen mukaan vasta versiossa ES6. Var toimii tietyissä tilanteissa [eri](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f) [tavalla](http://www.jstips.co/en/javascript/keyword-var-vs-let/) kuin useimpien muiden kielien muuttujien määrittely. Tällä kurssilla varin käyttö ei ole suositeltavaa eli käytä aina const:ia tai let:iä!
 
@@ -66,7 +66,7 @@ t.forEach(value => {
 })                    
 ```
 
-Huomattavaa esimerkissä on se, että taulukon sisältöä voi muuttaa, vaikka se on määritelty _const_:ksi. Koska taulukko on olio, viittaa muuttuja koko ajan samaan olioon. Olion sisältö muuttuu sitä mukaa kuin taulukkoon lisätään uusia alkioita.
+Huomattavaa esimerkissä on se, että taulukon sisältöä voi muuttaa, vaikka se on määritelty _const_:ksi. Koska taulukko on olio, viittaa muuttuja koko ajan samaan olioon, jonka sisältö muuttuu sitä mukaa kuin taulukkoon lisätään uusia alkioita.
 
 Eräs tapa käydä taulukon alkiot läpi on esimerkissä käytetty _forEach_, joka saa parametrikseen nuolisyntaksilla määritellyn <i>funktion</i>
 
@@ -76,7 +76,7 @@ value => {
 }
 ```
 
-forEach kutsuu funktiota <i>jokaiselle taulukon alkiolle</i> antaen taulukon yksittäisen alkion aina parametrina. forEachin parametrina oleva funktio voi saada myös [muita parametreja](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach).
+forEach kutsuu funktiota <i>jokaiselle taulukon alkiolle</i>, antaen taulukon yksittäisen alkion yksi kerrallaan funktiolle parametrina. forEachin parametrina oleva funktio voi saada myös [muita parametreja](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach).
 
 Edellisessä esimerkissä taulukkoon lisättiin uusi alkio metodilla [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push). Reactin yhteydessä sovelletaan usein funktionaalisen ohjelmoinnin tekniikoita, jonka eräs piirre on käyttää <i>muuttumattomia</i> (engl. [immutable](https://en.wikipedia.org/wiki/Immutable_object)) tietorakenteita. React-koodissa kannattaakin mieluummin käyttää metodia [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka ei lisää alkiota taulukkoon vaan luo uuden taulukon, jossa on lisättävä alkio sekä vanhan taulukon sisältö:
 
@@ -120,7 +120,7 @@ const t = [1, 2, 3, 4, 5]
 const [first, second, ...rest] = t
 
 console.log(first, second)  // tulostuu 1, 2
-console.log(rest)           // tulostuu [3, 4 ,5]
+console.log(rest)          // tulostuu [3, 4 ,5]
 ```
 
 Eli muuttujiin _first_ ja _second_ tulee sijoituksen ansiosta taulukon kaksi ensimmäistä lukua. Muuttujaan _rest_ "kerätään" sijoituksesta jäljellejääneet luvut omaksi taulukoksi.
@@ -159,7 +159,7 @@ Olioiden kenttiin viitataan pistenotaatiolla, tai hakasulkeilla:
 ```js
 console.log(object1.name)         // tulostuu Arto Hellas
 const fieldName = 'age' 
-console.log(object1[fieldName])   // tulostuu 35
+console.log(object1[fieldName])    // tulostuu 35
 ```
 
 Olioille voidaan lisätä kenttiä myös lennossa joko pistenotaation tai hakasulkeiden avulla:
@@ -244,7 +244,7 @@ Määrittelemme tällä kurssilla kaikki funktiot nuolisyntaksin avulla.
 </div>
 
 <div class="tasks">
-  <h3>Tehtäviä</h3>
+  <h3>Tehtävät 1.3-1.5</h3>
 
 <i>Jatkamme edellisissä tehtävissä aloitetun ohjelman rakentamista, voit siis tehdä koodin samaan projektiin, palautuksessa ollaan kiinnostuneita ainoastaan ohjelman lopullisesta versiosta.</i>
 
@@ -431,10 +431,10 @@ const arto = {
   // highlight-end
 }
 
-arto.doAddition(1, 4) // tulostuu 5
+arto.doAddition(1, 4)        // tulostuu 5
 
 const referenceToAddition = arto.doAddition
-referenceToAddition(10, 15) // tulostuu 25
+referenceToAddition(10, 15)  // tulostuu 25
 ```
 
 Oliolla on nyt metodi _doAddition_, joka osaa laskea parametrina annettujen lukujen summan. Metodia voidaan kutsua normaaliin tapaan olion kautta <em>arto.doAddition(1, 4)</em> tai tallettamalla <i>metodiviite</i> muuttujaan ja kutsumalla metodia muuttujan kautta <em>referenceToAddition(10, 15)</em>.
@@ -445,7 +445,7 @@ Jos yritämme samaa metodille _greet_, aiheutuu ongelmia:
 arto.greet()       // tulostuu hello, my name is Arto Hellas
 
 const referenceToGreet = arto.greet
-referenceToGreet() // konsoliin tulostuu virheilmoitus
+referenceToGreet() // tulostuu ainoastaan hello, my name is
 ```
 
 Kutsuttaessa metodia viitteen kautta, on metodi kadottanut tiedon siitä mikä oli alkuperäinen _this_. Toisin kuin melkein kaikissa muissa kielissä, Javascriptissa [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this):n arvo määrittyy sen mukaan <i>miten metodia on kutsuttu</i>. Kutsuttaessa metodia viitteen kautta, _this_:in arvoksi tulee ns. [globaali objekti](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) ja lopputulos ei ole yleensä ollenkaan se, mitä sovelluskehittäjä olettaa.
@@ -463,6 +463,7 @@ const arto = {
 }
 
 setTimeout(arto.greet, 1000)  // highlight-line
+// sekunnin päästä tulostuu hello, my name is
 ```
 
 Javascriptissa this:in arvo siis määräytyy siitä miten metodia on kutsuttu. setTimeoutia käytettäessä metodia kutsuu Javascript-moottori ja this viittaa Timeout-olioon.
@@ -471,11 +472,12 @@ On useita mekanismeja, joiden avulla alkuperäinen _this_ voidaan säilyttää, 
 
 ```js
 setTimeout(arto.greet.bind(arto), 1000)
+// sekunnin päästä tulostuu hello, my name is Arto Hellas
 ```
 
 Komento <em>arto.greet.bind(arto)</em> luo uuden funktion, missä se on sitonut _this_:in tarkoittamaan Artoa riippumatta siitä missä ja miten metodia kutsutaan.
 
-[Nuolifunktioiden](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) avulla on mahdollista ratkaista eräitä this:iin liittyviä ongelmia. Olioiden metodeina niitä ei kuitenkaan kannata käyttää, sillä silloin _this_ ei toimi ollenkaan. Palaamme nuolifunktioiden this:in käyttäytymiseen myöhemmin.
+[Nuolifunktioiden](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) avulla on mahdollista ratkaista eräitä this:iin liittyviä ongelmia. Olioiden metodeina niitä ei kuitenkaan kannata käyttää, sillä silloin _this_ ei toimi ollenkaan.
 
 Jos haluat ymmärtää paremmin javascriptin _this_:in toimintaa, löytyy internetistä runsaasti materiaalia aiheesta. Esim. [egghead.io](https://egghead.io):n 20 minuutin screencastsarja [Understand JavaScript's this Keyword in Depth](https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth) on erittäin suositeltava!
 
