@@ -1022,7 +1022,7 @@ Seuraavassa muutamia linkkejä:
 </div>
 
 <div class="tasks">
-  <h3>Tehtäviä</h3>
+  <h3>Tehtävät 1.6-1.14</h3>
 
 Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/fullstackopen2019/).
 
