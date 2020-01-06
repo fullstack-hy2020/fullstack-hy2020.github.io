@@ -2,9 +2,7 @@ module.exports = {
   fi: {
     '0': {
       a: 'Yleistä',
-      /*
       b: 'Web-sovelluksen toimintaperiaatteita',
-      */
     },
     '1': {
       /*
