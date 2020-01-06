@@ -2,7 +2,9 @@ module.exports = {
   fi: {
     '0': {
       a: 'Yleistä',
+      /*
       b: 'Web-sovelluksen toimintaperiaatteita',
+      */
     },
     '1': {
       /*
@@ -74,8 +76,10 @@ module.exports = {
   },
   en: {
     '0': {
+      /*
       a: 'General info',
       b: 'Fundamentals of Web apps',
+      */
     },
     '1': {
       /*

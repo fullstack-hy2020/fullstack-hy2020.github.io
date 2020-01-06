@@ -19,7 +19,6 @@ export const navigation = {
     { text: 'Kurssin sisältö', path: '#course-contents' },
     { text: 'FAQ', path: '/faq' },
     { text: 'Kurssilla mukana', path: '/companies' },
-    { text: 'Haaste', path: '/challenge' },
   ],
 };
 
@@ -59,8 +58,6 @@ class Navigation extends Component {
             {navigation[this.props.lang].map(i => (
               <NavigationItem key={i.path} {...i} onClick={handleCloseMenu} />
             ))}
-
-            <LanguageSwitcher lang={this.props.lang} />
           </ul>
         </nav>
       </div>

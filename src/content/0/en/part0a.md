@@ -103,7 +103,6 @@ Exercises in part 8 do not count towards the grade for the 5-7 credit course.
 
 Even if you do not register to Open university course and take the exam, you can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/fullstackopen2019) once you have completed enough exercises for a passing grade. For getting the certificate, a Finnish social security number is not needed.
 
-![](../../images/0/29.png)
 
 ### Expanding a previously completed course
 
