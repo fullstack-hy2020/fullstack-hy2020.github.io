@@ -29,7 +29,7 @@ const App = () => {
   return (
     <div>
       <h1>Greetings</h1>
-      <Hello name="Arto" age={26 + 10} />
+      <Hello name="Maya" age={26 + 10} />
       <Hello name={nimi} age={ika} />
     </div>
   )
@@ -76,8 +76,8 @@ Koska <i>props</i> on nyt olio
 
 ```js
 props = {
-  name: 'Arto Hellas',
-  age: 35,
+  name: 'Maya',
+  age: 36,
 }
 ```
 
@@ -90,7 +90,7 @@ const Hello = (props) => {
   const age = props.age
   // highlight-end
 
-  const bornYear = () => new Date().getFullYear() - age
+  const bornYear = () => new Date().getFullYear() - age // highlight-line
 
   return (
     <div>
@@ -113,7 +113,7 @@ const bornYear = () => {
 }
 ```
 
-Destrukturointi tekee apumuuttujien määrittelyn vielä helpommaksi, sen avulla voimme "kerätä" olion oliomuuttujien arvot suoraan omiin yksittäisiin muuttujiin:
+[Destrukturointi](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) tekee apumuuttujien määrittelyn vielä helpommaksi, sen avulla voimme "kerätä" olion oliomuuttujien arvot suoraan omiin yksittäisiin muuttujiin:
 
 ```js
 const Hello = (props) => {
@@ -135,12 +135,12 @@ Eli koska
 
 ```js
 props = {
-  name: 'Arto Hellas',
-  age: 35,
+  name: 'Maya',
+  age: 36,
 }
 ```
 
-saa <em>const { name, age } = props</em> aikaan sen, että muuttuja _name_ saa arvon 'Arto Hellas' ja muuttuja _age_ arvon 35.
+saa <em>const { name, age } = props</em> aikaan sen, että muuttuja _name_ saa arvon 'Maya' ja muuttuja _age_ arvon 36.
 
 Voimme viedä destrukturoinnin vielä askeleen verran pidemmälle
 
@@ -196,7 +196,7 @@ ReactDOM.render(
 )
 ```
 
-Sovelluksen juurikomponentille siis annetaan propsiksi laskuriin _counter_ arvo. Juurikomponentti renderöi arvon ruudulle. Entä laskurin arvon muuttuessa? Jos lisäämme ohjelmaan esim. komennon
+Sovelluksen juurikomponentille siis annetaan propsiksi laskurin _counter_ arvo. Juurikomponentti renderöi arvon ruudulle. Entä laskurin arvon muuttuessa? Jos lisäämme ohjelmaan esim. komennon
 
 ```js
 counter += 1
@@ -226,9 +226,9 @@ counter += 1
 refresh()
 ```
 
-Copypastea vähentämään on komponentin renderöinti kääritty funktioon _refresh_.
+Copypasten vähentämisen takia on komponentin renderöinti kääritty funktioon _refresh_.
 
-Nyt komponentti <i>renderöityy kolme kertaa</i>, saaden ensin arvon 1, sitten 2 ja lopulta 3. 1 ja 2 tosin ovat ruudulla niin vähän aikaa, että niitä ei ehdi havaita.
+Nyt komponentti <i>renderöityy kolme kertaa</i>, saaden ensin arvon 1, sitten 2 ja lopulta 3. Luvut 1 ja 2 tosin ovat ruudulla niin vähän aikaa, että niitä ei ehdi havaita.
 
 Hieman mielenkiintoisempaan toiminnallisuuteen pääsemme tekemällä renderöinnin ja laskurin kasvatuksen toistuvasti sekunnin välein käyttäen [SetInterval](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval):
 
@@ -286,7 +286,7 @@ Komponentin määrittelevä funktio alkaa metodikutsulla
 const [ counter, setCounter ] = useState(0)
 ```
 
-Kutsu saa aikaan sen, että komponentille luodaan <i>tila</i>, joka saa alkuarvokseen nollan. Metodi palauttaa taulukon, jolla on kaksi alkiota. Alkiot otetaan taulukon destrukturointisyntaksilla talteen muuttujiin _counter_ ja _setCounter_.
+Kutsu saa aikaan sen, että komponentille luodaan <i>tila</i>, joka saa alkuarvokseen nollan. Metodi palauttaa taulukon, jossa on kaksi alkiota. Alkiot otetaan taulukon destrukturointisyntaksilla talteen muuttujiin _counter_ ja _setCounter_.
 
 Muuttuja _counter_ pitää sisällään <i>tilan arvon</i> joka on siis aluksi nolla. Muuttuja _setCounter_ taas on viite funktioon, jonka avulla <i>tilaa voidaan muuttaa</i>.
 
@@ -316,7 +316,7 @@ Kun tilaa muuttavaa funktiota _setCounter_ kutsutaan, <i>renderöi React kompone
 }
 ```
 
-kun koodi suoritetaan toista kertaa, funktion _useState_ kutsuminen palauttaa komponentin jo olemassaolevan tilan arvon, joka on nyt 1. Komponentin suoritus määrittelee jälleen laskuria kasvatettavaksi yhdellä sekunnin päästä ja renderöi ruudulle laskurin nykyisen arvon, joka on 1.
+kun koodi suoritetaan toista kertaa, funktion _useState_ kutsuminen palauttaa komponentin <i>jo olemassaolevan tilan arvon</i>, joka on nyt 1. Komponentin suoritus määrittelee jälleen laskuria kasvatettavaksi yhdellä sekunnin päästä ja renderöi ruudulle laskurin nykyisen arvon, joka on 1.
 
 Sekunnin päästä siis suoritetaan funktion _setTimeout_ parametrina ollut koodi
 
@@ -332,7 +332,7 @@ ja koska muuttujan _counter_ arvo on 1, on koodi oleellisesti sama kuin tilan _c
 
 Ja tämä saa jälleen aikaan sen, että komponentti renderöidään uudelleen. Tilan arvo kasvaa sekunnin päästä yhdellä ja sama jatkuu niin kauan kun sovellus on toiminnassa.
 
-Jos komponentti ei renderöidy vaikka sen omasta mielestä pitäisi, tai se renderöityy "väärään aikaan", debuggaamista auttaa joskus komponentin määrittelevään funktioon lisätty konsoliin tulostus. Esim. jos lisäämme koodiin seuraavan,
+Jos komponentti ei renderöidy vaikka sen omasta mielestä pitäisi, tai se renderöityy "väärään aikaan", debuggaamista auttaa joskus komponentin määrittelevään funktioon lisätty konsoliin tulostus. Esim. jos lisäämme koodiin seuraavan tulostuksen
 
 ```js
 const App = (props) => {
@@ -351,7 +351,7 @@ const App = (props) => {
 }
 ```
 
-on konsolista helppo seurata metodin _render_ kutsuja:
+voidaan konsolista seurata metodin _render_ kutsuja:
 
 ![](../../images/1/4e.png)
 
@@ -417,7 +417,7 @@ Muuttamalla tapahtumankäsittelijä seuraavaan muotoon
 </button>
 ```
 
-saamme halutun toiminnallisuuden, eli tilan _counter_ arvo kasvaa yhdellä <i>ja</i> komponentti renderöityy uudelleen.
+saamme aikaan halutun toiminnallisuuden, eli nappia painettaessa tilan _counter_ arvo kasvaa yhdellä <i>ja</i> komponentti renderöityy uudelleen.
 
 Lisätään sovellukseen myös nappi laskurin nollaamiseen:
 
@@ -443,18 +443,58 @@ const App = (props) => {
 
 Sovelluksemme on valmis!
 
-Tapahtumankäsittelijöiden määrittely suoraan JSX-templatejen sisällä ei useimmiten ole kovin viisasta. Eriytetään vielä nappien tapahtumankäsittelijät omiksi komponentin sisäisiksi apufunktioikseen:
+### Tapahtumankäsittelijä on funktio
+
+Nappien tapahtumankäsittelijät on siis määritelty suoraan <i>onClick</i>-attribuuttien määrittelyn yhteydessä seuraavasti:
+
+```js
+<button onClick={() => setCounter(counter + 1)}> 
+  plus
+</button>
+```
+
+Entä jos yritämme määritellä tapahtumankäsittelijän hieman yksinkertaisemmassa muodossa:
+
+```js
+<button onClick={setCounter(counter + 1)}> 
+  plus
+</button>
+```
+
+Tämä muutos kuitenkin hajottaa sovelluksemme täysin:
+
+![](../../images/1/5b.png)
+
+Mistä on kyse? Tapahtumankäsittelijäksi on tarkoitus määritellä joko <i>funktio</i> tai <i>viite funktioon</i>. Kun koodissa on
+
+```js
+<button onClick={setCounter(counter + 1)}>
+```
+
+tapahtumankäsittelijäksi tulee määriteltyä <i>funktiokutsu</i>. Sekin on monissa tilanteissa ok, mutta ei nyt. Kun React renderöi metodin ensimmäistä kertaa ja muuttujan <i>counter</i> arvo on 0, se suorittaa kutsun <em>setCounter(0 + 1)</em>, eli muuttaa komponentin tilan arvoksi 1. Tämä taas aiheuttaa komponentin uudelleenrenderöitymisen. Ja sama toistuu uudelleen...
+
+Palautetaan siis tapahtumankäsittelijä alkuperäiseen muotoonsa
+
+```js
+<button onClick={() => setCounter(counter + 1)}> 
+  plus
+</button>
+```
+
+Nyt napin tapahtumankäsittelijän määrittelevä attribuutti <i>onClick</i> saa arvokseen funktion _() => setCounter(counter + 1)_, ja funktiota kutsutaan siinä vaiheessa kun sovelluksen käyttäjä painaa nappia. 
+
+Tapahtumankäsittelijöiden määrittely suoraan JSX-templatejen sisällä ei useimmiten ole kovin viisasta. Tässä tapauksessa se tosin on ok, koska tapahtumankäsittelijät ovat niin yksinkertaisia. 
+
+Eriytetään kuitenkin nappien tapahtumankäsittelijät omiksi komponentin sisäisiksi apufunktioikseen:
 
 ```js
 const App = (props) => {
   const [ counter, setCounter ] = useState(0)
 
 // highlight-start
-  const increaseByOne = () =>
-    setCounter(counter + 1)
+  const increaseByOne = () => setCounter(counter + 1)
   
-  const setToZero = () =>
-    setCounter(0)
+  const setToZero = () => setCounter(0)
   // highlight-end
 
   return (
@@ -471,178 +511,13 @@ const App = (props) => {
 }
 ```
 
-### Tapahtumankäsittelijä on funktio
-
-Metodit _increaseByOne_ ja _setToZero_ toimivat melkein samalla tavalla, ne asettavat uuden arvon laskurille. Tehdään koodiin yksittäinen funktio, joka sopii molempiin käyttötarkoituksiin:
+Tälläkin kertaa tapahtumankäsittelijät on määritelty oikein, sillä <i>onClick</i>-attribuutit saavat arvokseen muuttujan, joka tallettaa viitteen funktioon:
 
 ```js
-const App = (props) => {
-  const [ counter, setCounter ] = useState(0)
-
-  const setToValue = (value) => setCounter(value) // highlight-line
-
-  return (
-    <div>
-      <div>{counter}</div>
-      <button onClick={setToValue(counter + 1)}> // highlight-line
-        plus
-      </button>
-      <button onClick={setToValue(0)}> // highlight-line
-        zero
-      </button>
-    </div>
-  )
-}
-
+<button onClick={increaseByOne}> 
+  plus
+</button>
 ```
-
-Huomaamme kuitenkin että muutos hajottaa sovelluksemme täysin:
-
-![](../../images/1/5a.png)
-
-Mistä on kyse? Tapahtumankäsittelijäksi on tarkoitus määritellä <i>viite funktioon</i>. Kun koodissa on
-
-```js
-<button onClick={setToValue(0)}>
-```
-
-tapahtumankäsittelijäksi tulee määriteltyä <i>funktiokutsu</i>. Sekin on monissa tilanteissa ok, mutta ei nyt, nimittäin kun React renderöi metodin, se suorittaa kutsun <em>setToValue(0)</em>. Kutsu aiheuttaa komponentin tilan päivittävän funktion _setCounter_ kutsumisen. Tämä taas aiheuttaa komponentin uudelleenrenderöitymisen. Ja sama toistuu uudelleen...
-
-Tilanteeseen on kaksi ratkaisua. Ratkaisuista yksinkertaisempi on muuttaa tapahtumankäsittelyä seuraavasti
-
-```js
-const App = (props) => {
-  const [ counter, setCounter ] = useState(0)
-
-  const setToValue = (value) => setCounter(value)
-
-  return (
-    <div>
-      <div>{counter}</div>
-      <button onClick={() => setToValue(counter + 1)}> // highlight-line
-        plus
-      </button>
-      <button onClick={() => setToValue(0)}> // highlight-line
-        zero
-      </button>
-    </div>
-  )
-}
-```
-
-eli tapahtumankäsittelijä on määritelty <i>funktio</i>, joka kutsuu funktiota _setToValue_ sopivalla parametrilla:
-
-```js
-<button onClick={() => setToValue(counter + 1)}>
-```
-
-### Funktio joka palauttaa funktion
-
-Toinen vaihtoehto on käyttää yleistä Javascriptin ja yleisemminkin funktionaalisen ohjelmoinnin kikkaa, eli määritellä <i>funktio joka palauttaa funktion</i>:
-
-```js
-const App = (props) => {
-  const [ counter, setCounter ] = useState(0)
-
-// highlight-start
-  const setToValue = (value) => {
-    return () => {
-      setCounter(value)
-    }
-  }
-// highlight-end  
-
-  return (
-    <div>
-      <div>{counter}</div>
-      <button onClick={setToValue(counter + 1)}> // highlight-line
-        plus
-      </button>
-      <button onClick={setToValue(0)}> // highlight-line
-        zero
-      </button>
-    </div>
-  )
-}
-```
-
-Jos et ole aiemmin törmännyt tekniikkaan, siihen totutteluun voi mennä tovi.
-
-Olemme siis määritelleet tapahtumankäsittelijäfunktion _setToValue_ seuraavasti:
-
-```js
-const setToValue = (value) => {
-  return () => {
-    setCounter(value)
-  }
-}
-```
-
-Kun komponentissa määritellään tapahtumankäsittelijä kutsumalla <em>setToValue(0)</em> on lopputuloksena funktio
-
-```js
-() => {
-  setCounter(0)
-}
-```
-
-eli juuri oikeanlainen tilan nollaamisen aiheuttava funktio!
-
-Plus-napin tapahtumankäsittelijä määritellään kutsumalla <em>setToValue(counter + 1)</em>. Kun komponentti renderöidään ensimmäisen kerran, _counter_ on saanut alkuarvon 0, eli plus-napin tapahtumankäsittelijäksi tulee funktiokutsun <em>setToValue(1)</em> tulos, eli funktio
-
-```js
-() => {
-  setCounter(1)
-}
-```
-
-Vastaavasti, kun laskurin tila on esim 41, tulee plus-napin tapahtumakuuntelijaksi
-
-```js
-() => {
-  setCounter(42)
-}
-```
-
-Tarkastellaan vielä hieman funktiota _setToValue_:
-
-```js
-const setToValue = (value) => {
-  return () => {
-    setCounter(value)
-  }
-}
-```
-
-Koska metodi itse sisältää ainoastaan yhden komennon, eli <i>returnin</i>, joka palauttaa funktion, voidaan hyödyntää nuolifunktion tiiviimpää muotoa:
-
-```js
-const setToValue = (value) => () => {
-  setCounter(value)
-}
-```
-
-Usein tälläisissä tilanteissa kaikki kirjoitetaan samalle riville, jolloin tuloksena on "kaksi nuolta sisältävä funktio":
-
-```js
-const setToValue = (value) => () => setCounter(value)
-```
-
-Kaksinuolisen funktion voi ajatella funktiona, jota lopullisen tuloksen saadakseen täytyy kutsua kaksi kertaa.
-
-Ensimmäisellä kutsulla "konfiguroidaan" varsinainen funktio, sijoittamalla osalle parametreista arvo. Eli kutsu <em>setToValue(5)</em> sitoo muuttujaan _value_ arvon 5 ja funktiosta "jää jäljelle" seuraava funktio:
-
-```js
-() => setCounter(5)
-```
-
-Tässä näytetty tapa soveltaa funktioita palauttavia funktioita on oleellisesti sama asia mistä funktionaalisessa ohjelmoinnissa käytetään termiä [currying](https://medium.com/javascript-scene/curry-and-function-composition-2c208d774983). Termi currying ei ole lähtöisin funktionaalisen ohjelmoinnin piiristä vaan sillä on juuret [syvällä matematiikassa](https://en.wikipedia.org/wiki/Currying).
-
-Jo muutamaan kertaan mainittu termi <i>funktionaalinen ohjelmointi</i> ei ole välttämättä kaikille tässä vaiheessa tuttu. Asiaa avataan hiukan kurssin kuluessa, sillä React tukee ja osin edellyttää funktionaalisen tyylin käyttöä.
-
-**HUOM:** muutos, missä korvasimme metodit _increaseByOne_ ja _setToZero_ metodilla _setToValue_ ei välttämättä ole järkevä, sillä erikoistuneemmat metodit ovat paremmin nimettyjä. Teimme muutoksen oikeastaan ainoastaan demonstroidaksemme _currying_-tekniikan soveltamista.
-
-**HUOM2:** et välttämättä tarvitse tämän osan, etkä kenties kurssin muissakaan tehtävissä funktioita palauttavia funktioita, joten älä sekoita päätäsi asialla turhaan.
 
 ### Tilan vieminen alikomponenttiin
 
@@ -650,9 +525,11 @@ Reactissa suositaan pieniä komponentteja, joita on mahdollista uusiokäyttää 
 
 Tehdään ensin näytöstä vastaava komponentti <i>Display</i>.
 
-Reactissa parhaana käytänteenä on sijoittaa tila [mahdollisimman ylös](https://reactjs.org/docs/lifting-state-up.html) komponenttihierarkiassa, mielellään sovelluksen juurikomponenttiin <i>App</i>.
+Reactissa pidetään hyvänä käytänteenä sijoittaa tila [riittävän ylös](https://reactjs.org/docs/lifting-state-up.html) komponenttihierarkiassa. Reactin dokumentaatio toteaa seuraavasti
 
-Jätetään sovelluksen tila, eli laskimen arvo komponenttiin <i>App</i> ja välitetään tila <i>propsien</i> avulla komponentille <i>Display</i>:
+> <i>Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.</i> 
+
+Jätetään tätä neuvoa seuraten sovelluksen tila, eli laskimen arvo komponenttiin <i>App</i> ja välitetään tila <i>propsien</i> avulla komponentille <i>Display</i>:
 
 ```js
 const Display = (props) => {
@@ -662,36 +539,22 @@ const Display = (props) => {
 }
 ```
 
-Voimme hyödyntää aiemmin mainittua [destrukturointia](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) myös metodien parametreissa. Eli koska olemme kiinnostuneita <i>propsin</i> kentästä _counter_, on edellinen mahdollista yksinkertaistaa seuraavaan muotoon:
-
-```js
-const Display = ({ counter }) => {
-  return (
-    <div>{counter}</div>
-  )
-}
-```
-
-Koska komponentin määrittelevä metodi ei sisällä muuta kuin returnin, voimme ilmaista sen hyödyntäen nuolifunktioiden tiiviimpää ilmaisumuotoa
-
-```js
-const Display = ({ counter }) => <div>{counter}</div>
-```
-
 Komponentin käyttö on suoraviivaista, riittää että sille välitetään laskurin tila eli _counter_:
 
 ```js
 const App = (props) => {
-  const [counter, setCounter] = useState(0)
-  const setToValue = (value) => setCounter(value)
+  const [ counter, setCounter ] = useState(0)
+
+  const increaseByOne = () => setCounter(counter + 1)
+  const setToZero = () => setCounter(0)
 
   return (
     <div>
       <Display counter={counter}/> // highlight-line
-      <button onClick={() => setToValue(counter + 1)}>
+      <button onClick={increaseByOne}>
         plus
       </button>
-      <button onClick={() => setToValue(0)}>
+      <button onClick={setToZero}> 
         zero
       </button>
     </div>
@@ -704,21 +567,13 @@ Kaikki toimii edelleen. Kun nappeja painetaan ja <i>App</i> renderöityy uudelle
 Tehdään seuraavaksi napeille tarkoitettu komponentti <i>Button</i>. Napille on välitettävä propsien avulla tapahtumankäsittelijä sekä napin teksti:
 
 ```js
-const Button = (props) => (
-  <button onClick={props.onClick}>
-    {props.text}
-  </button>
-)
-```
-
-ja hyödynnetään taas destrukturointia ottamaan <i>props</i>:in tarpeelliset kentät suoraan:
-
-```js
-const Button = ({ onClick, text }) => (
-  <button onClick={onClick}>
-    {text}
-  </button>
-)
+const Button = (props) => {
+  return (
+    <button onClick={props.handleClick}>
+      {props.text}
+    </button>
+  )
+}
 ```
 
 Komponentti <i>App</i> muuttuu nyt muotoon:
@@ -726,25 +581,27 @@ Komponentti <i>App</i> muuttuu nyt muotoon:
 ```js
 const App = (props) => {
   const [ counter, setCounter ] = useState(0)
-  const setToValue = (value) => setCounter(value)
 
+  const increaseByOne = () => setCounter(counter + 1)
+  const idecreaseByOne = () => setCounter(counter - 1)
+  const setToZero = () => setCounter(0)
 
   return (
     <div>
       <Display counter={counter}/>
       // highlight-start
       <Button
-        onClick={() => setToValue(counter + 1)}
+        handleClick={increaseByOne}
         text='plus'
       />
       <Button
-        onClick={() => setToValue(counter - 1)}
-        text='minus'
-      />
-      <Button
-        onClick={() => setToValue(0)}
+        handleClick={setToZero}
         text='zero'
-      />
+      />     
+      <Button
+        handleClick={idecreaseByOne}
+        text='minus'
+      />           
       // highlight-end
     </div>
   )
@@ -753,6 +610,56 @@ const App = (props) => {
 
 Koska meillä on nyt uudelleenkäytettävä nappi, sovellukselle on lisätty uutena toiminnallisuutena nappi, jolla laskurin arvoa voi vähentää.
 
-Tapahtumankäsittelijä välitetään napeille propsin _onClick_ välityksellä. Propsin nimellä ei ole sinänsä merkitystä, mutta valinta ei ollut täysin sattumanvarainen, esim. Reactin [tutoriaali](https://reactjs.org/tutorial/tutorial.html) suosittelee tätä konventiota.
+Tapahtumankäsittelijä välitetään napeille propsin _handleClick_ välityksellä. Propsin nimellä ei ole sinänsä merkitystä, mutta valinta ei ollut täysin sattumanvarainen, esim. Reactin [tutoriaali](https://reactjs.org/tutorial/tutorial.html) suosittelee tätä konventiota.
+
+### Komponenttien refaktorointi
+
+Laskimen arvon näyttävä komponentti on siis seuraava
+
+```js
+const Display = (props) => {
+  return (
+    <div>{props.counter}</div>
+  )
+}
+```
+
+Komponentti tarvitsee ainoastaan <i>propsin</i> kenttää _counter_, joten se voidaan yksinkertaistaa [destrukturoinnin](/osa1/komponentin_tila_ja_tapahtumankasittely#destrukturointi) avulla seuraavaan muotoon:
+
+```js
+const Display = ({ counter }) => {
+  return (
+    <div>{counter}</div>
+  )
+}
+```
+
+Koska komponentin määrittelevä metodi ei sisällä muuta kuin returnin, voimme määritellä sen hyödyntäen nuolifunktioiden tiiviimpää ilmaisumuotoa
+
+```js
+const Display = ({ counter }) => <div>{counter}</div>
+```
+
+Vastaava suoraviivaistus voidaan tehdä myös nappia edustavalle komponentille
+
+```js
+const Button = (props) => {
+  return (
+    <button onClick={props.handleClick}>
+      {props.text}
+    </button>
+  )
+}
+```
+
+Eli destrukturoidaan <i>props</i>:ista tarpeelliset kentät ja käytetään nuolifunktioiden tiiviimpää muotoa 
+
+```js
+const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>
+    {text}
+  </button>
+)
+```
 
 </div>

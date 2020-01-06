@@ -6,9 +6,9 @@ module.exports = {
     },
     '1': {
       a: 'Reactin alkeet',
-      b: 'Javascriptiä',
-            /*      
+      b: 'Javascriptiä',    
       c: 'Komponentin tila ja tapahtumankäsittely',
+                  /*  
       d: 'Monimutkaisempi tila, Reactin debuggaus',
       */
     },
