@@ -612,7 +612,7 @@ Koska meillä on nyt uudelleenkäytettävä komponentti <i>Button</i>, sovelluks
 
 Tapahtumankäsittelijä välitetään napeille propsin _handleClick_ välityksellä. Propsin nimellä ei ole sinänsä merkitystä, mutta valinta ei ollut täysin sattumanvarainen, esim. Reactin [tutoriaali](https://reactjs.org/tutorial/tutorial.html) suosittelee tätä konventiota.
 
-### Tilan muutos aiheuttaa uudeelleenrenderöitymisen
+### Tilan muutos aiheuttaa uudelleenrenderöitymisen
 
 Kerrataan vielä sovelluksen toiminnan pääperiaatteet. 
 

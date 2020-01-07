@@ -132,7 +132,7 @@ const handleRightClick = () => {
 
 Merkintä vaikuttaa hieman erikoiselta. Käytännössä <em>{ ...clicks }</em> luo olion, jolla on kenttinään kopiot olion _clicks_ kenttien arvoista. Kun aaltosulkeisiin lisätään asioita, esim. <em>{ ...clicks, right: 1 }</em>, tulee uuden olion kenttä _right_ saamaan arvon 1.
 
-Esimerkissämme siis
+Esimerkissä siis
 
 ```js
 { ...clicks, right: clicks.right + 1 }
@@ -203,7 +203,7 @@ const App = (props) => {
 }
 ```
 
-Kaikki klikkaukset siis talletetaan omaan tilan osaansa _allClicks_, joka alustetaan tyhjäksi taulukoksi
+Kaikki klikkaukset siis talletetaan omaan tilaan _allClicks_, joka alustetaan tyhjäksi taulukoksi
 
 ```js
 const [allClicks, setAll] = useState([])
@@ -218,7 +218,7 @@ const handleLeftClick = () => {
 }
 ```
 
-Tilan osa _allClicks_ saa nyt arvokseen taulukon, missä on entisen taulukon alkiot ja <i>L</i>. Uuden alkion liittäminen on tehty metodilla [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka toimii siten, että se ei muuta olemassaolevaa taulukkoa vaan luo <i>uuden taulukon</i>, mihin uusi alkio on lisätty.
+Tilaa _allClicks_ saa nyt arvokseen taulukon, missä on entisen taulukon alkiot ja <i>L</i>. Uuden alkion liittäminen on tehty metodilla [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka toimii siten, että se ei muuta olemassaolevaa taulukkoa vaan luo <i>uuden taulukon</i>, mihin uusi alkio on lisätty.
 
 Kuten jo aiemmin mainittiin, Javascriptissa on myös mahdollista lisätä taulukkoon metodilla [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) ja sovellus näyttäisi tässä tilanteessa toimivan myös jos lisäys hoidettaisiin siten että _allClicks_-tilaa muuteaan pushaamalla siihen alkio ja sitten päivitetään tila:
 
@@ -256,7 +256,7 @@ Taulukolle _allClicks_ kutsutaan metodia [join](https://developer.mozilla.org/en
 
 ### Ehdollinen renderöinti
 
-Muutetaan sovellusta siten, että näppäilyhistorian renderöinnistä vastaa komponentti <i>History</i>:
+Muutetaan sovellusta siten, että näppäilyhistorian renderöinnistä vastaa komponentti _History_:
 
 ```js
 const History = (props) => {
@@ -306,7 +306,7 @@ ja muussa tapauksessa näppäilyhistorian:
 </div>
 ```
 
-Komponentin <i>History</i> ulkoasun muodostamat React-elementit siis ovat erilaisia riippuen sovelluksen tilasta, eli komponentissa on <i>ehdollista renderöintiä</i>.
+Komponentin _History_ ulkoasun muodostamat React-elementit siis ovat erilaisia riippuen sovelluksen tilasta, eli komponentissa on <i>ehdollista renderöintiä</i>.
 
 Reactissa on monia muitakin tapoja [ehdolliseen renderöintiin](https://reactjs.org/docs/conditional-rendering.html). Katsotaan niitä tarkemmin [seuraavassa osassa](/osa2).
 
@@ -370,11 +370,11 @@ const App = (props) => {
 
 ### Vanha React
 
-Tällä kurssilla käyttämämme tapa React-komponenttien tilan määrittelyyn, eli [state hook](https://reactjs.org/docs/hooks-state.html) on siis uutta Reactia ja käytettävissä versiosta [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) lähtien. Ennen hookeja Javascript-funktioina määriteltyihin React-komponentteihin ei ollut mahdollista saada tilaa ollenkaan, tilaa edellyttävät komponentit oli pakko määritellä [Class](https://reactjs.org/docs/react-component.html)-komponentteina Javascriptin luokkasyntaksia hyödyntäen.
+Tällä kurssilla käyttämämme tapa React-komponenttien tilan määrittelyyn, eli [state hook](https://reactjs.org/docs/hooks-state.html) on siis uutta Reactia ja käytettävissä alkuvuodesta 2019 ilmestynestä versiosta [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) lähtien. Ennen hookeja Javascript-funktioina määriteltyihin React-komponentteihin ei ollut mahdollista saada tilaa ollenkaan, tilaa edellyttävät komponentit oli pakko määritellä [Class](https://reactjs.org/docs/react-component.html)-komponentteina Javascriptin luokkasyntaksia hyödyntäen.
 
 Olemme tällä kurssilla tehneet hieman radikaalinkin ratkaisun käyttää pelkästään hookeja ja näin ollen opetella heti alusta asti ohjelmoimaan "huomisen" Reactia. Luokkasyntaksin hallitseminen on kuitenkin sikäli tärkeää, että vaikka funktiona määriteltävät komponentit ovat Reactin tulevaisuus, on maailmassa miljardeja rivejä vanhaa Reactia, jota kenties sinäkin joudut jonain päivänä ylläpitämään. Dokumentaation ja internetistä löytyvien esimerkkien suhteen tilanne on sama, törmäät class-komponentteihin välittömästi.
 
-Tutustummekin riittävällä tasolla class-komponentteihin hieman myöhemmin kurssilla.
+Tutustummekin riittävällä tasolla class-komponentteihin kurssin [seitsemännessä](/osa7) osassa.
 
 ### React-sovellusten debuggaus
 
@@ -388,7 +388,7 @@ Muistutetaan vielä tärkeimmästä web-sovelluskehitykseen liittyvästä asiast
 
 >  **Pidä selaimen developer-konsoli koko ajan auki.**
 >
-> Välilehdistä tulee olla auki nimenomaan <i>Console</i> jollei ole erityistä syytä käyttää jotain muuta välilehteä.
+> Välilehdistä tulee olla auki nimenomaan <i>Console</i>, jollei ole erityistä syytä käyttää jotain muuta välilehteä.
 
 Pidä myös koodi ja web-sivu **koko ajan** molemmat yhtä aikaa näkyvillä.
 
@@ -462,17 +462,11 @@ Debuggeriin pääsee myös ilman komentoa _debugger_, lisäämällä <i>Sources<
 
 ![](../../images/1/9a.png)
 
-Chromeen kannattaa ehdottomasti asentaa [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) -lisäosa, joka tuo konsoliin uuden tabin _React_:
+Chromeen kannattaa ehdottomasti asentaa [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) -lisäosa, joka tuo konsoliin uuden tabin _Components_. Uuden konsolitabin avulla voidaan tarkkailla sovelluksen React-komponentteja ja niiden tilaa ja propseja:
 
-![](../../images/1/10e.png)
+![](../../images/1/10ea.png)
 
-Uuden konsolitabin avulla voidaan tarkkailla sovelluksen React-elementtejä ja niiden tilaa ja propseja.
-
-React developer tools ei osaa toistaiseksi näyttää hookeilla muodostettua tilaa kovin hyvin.
-
-![](../../images/1/11e.png)
-
-Komponentin tila on määritelty seuraavasti:
+Komponentin _App_ tila on määritelty seuraavasti:
 
 ```js
 const [left, setLeft] = useState(0)
@@ -480,13 +474,11 @@ const [right, setRight] = useState(0)
 const [allClicks, setAll] = useState([])
 ```
 
-Dev tools näyttää hookien tilan siinä järjestyksessä kun ne on määritelty koodissa. Hookien _left_ ja _right_ tila näkyy hyvin, mutta valitettavasti dev tools ei tässä vaiheessa osaa näyttää taulukkotyyppistä hookia _allClicks_ kunnolla.
+React dev tools näyttää hookeilla luodut tilan osat siinä järjestyksessä kun ne on määritelty koodissa: 
 
-Dev toolsin hookien toteutusta käsitellään [tässä issuessa](https://github.com/facebook/react-devtools/issues/1215).
+![](../../images/1/11ea.png)
 
-Dev toolsin hookeja tukevasta versiosta on jo tehty epävirallinen [beta-julkaisu](https://github.com/bvaughn/react-devtools-experimental). En saanut itse Chrome-versiota toimimaan, mutta Firefox-versio toimii ja näyttää hookatun taulukkomuotoisen tilan hyvin
-
-![](../../images/1/11be.png)
+Ylimpänä oleva <i>State</i> siis vastaa tilan <i>left</i> arvoa, seuraava tilan <i>right</i> arvoa ja alimpana on taulukko <i>allClicks</i>.
 
 ### Hookien säännöt
 
@@ -503,17 +495,17 @@ const App = (props) => {
   const [name, setName] = useState('Juha Tauriainen')
 
   if ( age > 10 ) {
-    // ei näin!
+    // ei ehtolauseessa
     const [foobar, setFoobar] = useState(null)
   }
 
   for ( let i = 0; i < age; i++ ) {
-    // eikä näin!
+    // eikä myöskään loopissa
     const [rightWay, setRightWay] = useState(false)
   }
 
   const notGood = () => {
-    // eikä myöskään näin
+    // ei muiden kuin komponentin määrittelevän funktion sisällä
     const [x, setX] = useState(-1000)
   }
 
