@@ -307,6 +307,6 @@ Korjaa ongelma osan 2 esimerkin [promise ja virheet](/osa2/palvelimella_olevan_d
 
 ![](../../images/2/28e.png)
 
-Tämä oli osan viimeinen tehtävä ja on aika pushata koodi githubiin merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/fullstackopen2019/).
+Tämä oli osan viimeinen tehtävä ja on aika pushata koodi githubiin merkata tehdyt tehtävät [palautussovellukseen](https://study.cs.helsinki.fi/stats/courses/fullstack2020).
 
 </div>

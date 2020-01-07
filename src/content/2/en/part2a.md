@@ -628,7 +628,7 @@ I added this chapter to the material after the model answer for the next questio
 
 
 
-The exercises are submitted via GitHub, and by marking the exercises as done in the [submission system](https://studies.cs.helsinki.fi/fullstackopen2019/).
+The exercises are submitted via GitHub, and by marking the exercises as done in the [submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2020).
 
 You can submit all of the exercises into the same repository, or use multiple different repositories. If you submit exercises from different parts into the same repository, name your directories well.
 

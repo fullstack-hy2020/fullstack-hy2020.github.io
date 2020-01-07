@@ -517,7 +517,7 @@ const App = (props) => {
 
 ### Tapahtumankäsittely revisited
 
-Edellisen vuoden kurssin perusteella tapahtumankäsittely on osoittautunut monelle haastavaksi.
+Edellisten vuosien kurssin perusteella tapahtumankäsittely on osoittautunut monelle tässä vaiheessa haastavaksi aiheeksi.
 
 Tarkastellaan asiaa vielä uudelleen.
 
@@ -670,7 +670,10 @@ const App = (props) => {
 }
 ```
 
-Mennään lopuksi <i>funktion palauttavaan funktioon</i>. Kuten aiemmin jo mainittiin, et tarvitse ainakaan tämän osan, et kenties koko kurssin tehtävissä funktiota palauttavia funktioita, joten voit melko huoletta hypätä seuraavan ohi jos asia tuntuu nyt hankalalta.
+###  Funktio joka palauttaa funktion
+
+Näytetään vielä eräs tapa määritellä tapahtumankäsittelijöitä: <i>funktion palauttava funktio</i>.
+Tällä kurssilla ei tätä tyyliä tulla käyttämään, joten **voit huoletta hypätä seuraavan ohi** jos asia tuntuu nyt hankalalta. Funktioita palauttavat funktiot ovat kuitenkin melko yleisiä funktionaalista ohjelmointityyliä käytettäessä, joten tarkastellaan tekniikkaa hieman vaikka selviämmekin kurssilla ilman sitä.
 
 Muutetaan koodia seuraavasti
 
@@ -840,7 +843,9 @@ const hello = (who) => () => {
 Voimme käyttää samaa kikkaa myös muodostamaan tapahtumankäsittelijöitä, jotka asettavat komponentin tilalle halutun arvon. Muutetaan koodi muotoon:
 
 ```js
-render() {
+const App = (props) => {
+  const [value, setValue] = useState(10)
+
   const setToValue = (newValue) => () => {
     setValue(newValue)
   }
@@ -917,7 +922,7 @@ Voimme nyt määritellä tapahtumankäsittelijän funktioksi, joka kutsuu funkti
 <button onClick={() => setToValue(0)}>reset</button>
 ```
 
-On aikalailla makuasia käyttääkö tapahtumankäsittelijänä funktioita palauttavia funktioita vai nuolifunktioita.
+On makuasia käyttääkö tapahtumankäsittelijänä funktioita palauttavia funktioita vai nuolifunktioita. Tällä kurssilla emme kuitenkaan selvyyden vuoksi käytä funktioita palauttavia funktioita.
 
 ### Tapahtumankäsittelijän vieminen alikomponenttiin
 
@@ -972,7 +977,7 @@ const App = props => {
 }
 ```
 
-Kaikki näyttää toimivan. Mutta **älä tee koskaan näin!**, eli määrittele komponenttia toisen komponentin sisällä. Tapa on hyödytön ja johtaa useissa tilanteissa ikäviin ongelmiin. Siirretäänkin komponentin <i>Display</i> määrittely oikeaan paikkaan, eli komponentin <i>App</i> määrittelevän funktion ulkopuolelle:
+Kaikki näyttää toimivan. Mutta **älä tee koskaan näin**, eli määrittele komponenttia toisen komponentin sisällä. Tapa on hyödytön ja johtaa useissa tilanteissa ikäviin ongelmiin. Siirretäänkin komponentin <i>Display</i> määrittely oikeaan paikkaan, eli komponentin <i>App</i> määrittelevän funktion ulkopuolelle:
 
 ```js
 const Display = props => <div>{props.value}</div>
@@ -1003,11 +1008,11 @@ const App = props => {
 
 ### Hyödyllistä materiaalia
 
-Internetissä on todella paljon Reactiin liittyvää materiaalia. Tällä hetkellä ongelman muodostaa kuitenkin se, että käytämme kurssilla niin uutta Reactia, että suurin osa internetistä löytyvästä tavarasta on meidän kannaltamme vanhentunutta.
+Internetissä on todella paljon Reactiin liittyvää materiaalia. Tällä hetkellä ongelman muodostaa kuitenkin se, että käytämme kurssilla niin uutta Reactia, että melko suuri osa internetistä löytyvästä tavarasta on meidän kannaltamme vanhentunutta ja käyttää <i>Class</i>-syntaksia komponenttien määrittelyyn.
 
 Seuraavassa muutamia linkkejä:
 
-- Reactin [docs](https://reactjs.org/docs/hello-world.html) kannattaa ehdottomasti käydä jossain vaiheessa läpi, ei välttämättä kaikkea nyt, osa on ajankohtaista vasta kurssin myöhemmissä osissa ja kaikki Class-komponentteihin liittyvä on kurssin kannalta epärelevanttia
+- Reactin [dokumentaatio](https://reactjs.org/docs/getting-started.html) kannattaa ehdottomasti käydä jossain vaiheessa läpi, ei välttämättä kaikkea nyt, osa on ajankohtaista vasta kurssin myöhemmissä osissa ja kaikki Class-komponentteihin liittyvä on kurssin kannalta epärelevanttia
 - Reactin sivuilla oleva [tutoriaali](https://reactjs.org/tutorial/tutorial.html) sen sijaan on aika huono
 - [Egghead.io](https://egghead.io):n kursseista [Start learning React](https://egghead.io/courses/start-learning-react) on laadukas, ja hieman uudempi [The Beginner's guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) on myös kohtuullisen hyvä; molemmat sisältävät myös asioita jotka tulevat tällä kurssilla vasta myöhemmissä osissa. Molemmissa toki se ongelma, että ne käyttävät Class-komponentteja
 
@@ -1016,7 +1021,7 @@ Seuraavassa muutamia linkkejä:
 <div class="tasks">
   <h3>Tehtävät 1.6-1.14</h3>
 
-Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/fullstackopen2019/).
+Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät [palautussovellukseen](https://study.cs.helsinki.fi/stats/courses/fullstack2020).
 
 Tehtävät palautetaan **yksi osa kerrallaan**. Kun olet palauttanut osan tehtävät, et voi enää palauttaa saman osan tekemättä jättämiäsi tehtäviä.
 

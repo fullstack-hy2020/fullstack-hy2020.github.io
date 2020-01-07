@@ -409,6 +409,6 @@ Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://git
 
 Ota sovellukseesi käyttöön ESlint.
 
-Tämä oli osan viimeinen tehtävä, joten on aika pushata koodi Githubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/fullstackopen2019/).
+Tämä oli osan viimeinen tehtävä, joten on aika pushata koodi Githubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://study.cs.helsinki.fi/stats/courses/fullstack2020).
 
 </div>
