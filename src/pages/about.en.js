@@ -19,7 +19,7 @@ const About = () => {
     <Layout>
       <SEO
         lang="en"
-        title="About the course | Full Stack Open 2019"
+        title="About the course | Full stack -websovelluskehitys"
         description={mainSEOdescription['en']}
         keywords={[
           ...mainSEOtags,

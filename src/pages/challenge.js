@@ -15,7 +15,7 @@ const Challenge = () => (
   <Layout>
     <SEO
       lang="fi"
-      title="Full stack -haaste | Full Stack Open 2019"
+      title="Full stack -haaste | Full stack -websovelluskehitys"
       description="Helsingin yliopisto, Houston Inc ja kumppaniyrityksemme haastavat niin koodarit kuin yritykset kasvattamaan osaamistaan tätä kurssia suorittamalla. Haaste on tarkoitettu jokaiselle sovelluskehitysalan osaajalle ja sellaiseksi haluavalle."
       keywords={[
         ...mainSEOtags,

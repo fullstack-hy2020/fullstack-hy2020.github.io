@@ -36,7 +36,7 @@ const IndexPage = () => {
     <Layout>
       <SEO
         lang="fi"
-        title="Full Stack Open 2019"
+        title="Full stack -websovelluskehitys"
         description={mainSEOdescription['fi']}
         keywords={[...mainSEOtags]}
       />

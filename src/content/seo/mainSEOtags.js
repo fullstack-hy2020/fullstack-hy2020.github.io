@@ -1,6 +1,6 @@
 module.exports = [
   'fullstack',
-  'full stack open 2019',
+  'Full stack -websovelluskehitys',
   'course',
   'helsingin yliopisto',
   'tietojenkäsittelytieteen osasto',

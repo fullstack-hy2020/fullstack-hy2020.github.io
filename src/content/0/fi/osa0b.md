@@ -519,7 +519,7 @@ Pyyntöön liitetty headeri <i>Content-Type</i> kertoo palvelimelle, että pyynn
 
 ![](../../images/0/27e.png)
 
-Ilman headeria palvelin ei osaisi parsia pyynnön mukana tulevaa dataa oiken.
+Ilman headeria palvelin ei osaisi parsia pyynnön mukana tulevaa dataa oikein.
 
 Palvelin vastaa kyselyyn statuskoodilla [201 created](https://httpstatuses.com/201). Tällä kertaa palvelin ei pyydä uudelleenohjausta kuten aiemmassa versiossamme. Selain pysyy samalla sivulla ja muita HTTP-pyyntöjä ei suoriteta.
 
