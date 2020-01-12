@@ -672,7 +672,11 @@ const App = (props) => {
 }
 ```
 
-Finally, let us revisit <i>functions that return functions</i>. As mentioned previously, you probably won't need to use functions that return functions in any of the exercises in this course.  If the topic seems particularly confusing, you may skip over this section for now and return to it later.
+### Function that returns a function
+
+Another way to define a event handler is to use <i>function that returns a function</i>.
+
+You probably won't need to use functions that return functions in any of the exercises in this course.  If the topic seems particularly confusing, you may skip over this section for now and return to it later.
 
 Let's make the following changes to our code:
 
