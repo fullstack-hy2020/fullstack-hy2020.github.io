@@ -15,7 +15,7 @@ Browsers do not yet support all of Javascript's newest features. Due to this fac
 
 Today, the most popular way to do the transpiling is using [Babel](https://babeljs.io/). Transpilation is automatically configured in React applications created with create-react-app. We will take a closer look at the configuration of the transpilation in [part 7](/part7) of this course.
 
-[Node.js](https://nodejs.org/en/) is a Javascript runtime environment based on Google's [chrome V8](https://developers.google.com/v8/) Javascript engine and works practically anywhere - from servers to mobile phones. Let's practice writing some Javascript using Node. It is expected that the version of Node.js installed on your machine is at least version <i>v8.10.0</i>. The latest versions of Node already understand the latest versions of Javascript, so the code does not need to be transpiled.
+[Node.js](https://nodejs.org/en/) is a Javascript runtime environment based on Google's [chrome V8](https://developers.google.com/v8/) Javascript engine and works practically anywhere - from servers to mobile phones. Let's practice writing some Javascript using Node. It is expected that the version of Node.js installed on your machine is at least version <i>10.18.0.</i>. The latest versions of Node already understand the latest versions of Javascript, so the code does not need to be transpiled.
 
 The code is written into files ending with <i>.js</i> and are run by issuing the command <em>node name\_of\_file.js</em>
 
@@ -246,7 +246,7 @@ During this course we will define all functions using the arrow syntax.
 </div>
 
 <div class="tasks">
-  <h3>Exercises</h3>
+  <h3>Exercises 1.3.-1.5.</h3>
 
 <i>We continue building the application that we started working on in the previous exercises. You can write the code into the same project, since we are only interested in the final state of the submitted application.</i>
 

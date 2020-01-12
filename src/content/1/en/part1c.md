@@ -439,18 +439,59 @@ const App = (props) => {
 
 Our application is now ready!
 
-Defining event handlers directly inside JSX-templates is usually not a wise move. Let's extract the event handler functions into their own separate helper functions:
+
+### Tapahtumankäsittelijä on funktio
+
+Nappien tapahtumankäsittelijät on siis määritelty suoraan <i>onClick</i>-attribuuttien määrittelyn yhteydessä seuraavasti:
+
+```js
+<button onClick={() => setCounter(counter + 1)}> 
+  plus
+</button>
+```
+
+Entä jos yritämme määritellä tapahtumankäsittelijän hieman yksinkertaisemmassa muodossa:
+
+```js
+<button onClick={setCounter(counter + 1)}> 
+  plus
+</button>
+```
+
+Tämä muutos kuitenkin hajottaa sovelluksemme täysin:
+
+![](../../images/1/5b.png)
+
+Mistä on kyse? Tapahtumankäsittelijäksi on tarkoitus määritellä joko <i>funktio</i> tai <i>viite funktioon</i>. Kun koodissa on
+
+```js
+<button onClick={setCounter(counter + 1)}>
+```
+
+tapahtumankäsittelijäksi tulee määriteltyä <i>funktiokutsu</i>. Sekin on monissa tilanteissa ok, mutta ei nyt. Kun React renderöi metodin ensimmäistä kertaa ja muuttujan <i>counter</i> arvo on 0, se suorittaa kutsun <em>setCounter(0 + 1)</em>, eli muuttaa komponentin tilan arvoksi 1. Tämä taas aiheuttaa komponentin uudelleenrenderöitymisen. Ja sama toistuu uudelleen...
+
+Palautetaan siis tapahtumankäsittelijä alkuperäiseen muotoonsa
+
+```js
+<button onClick={() => setCounter(counter + 1)}> 
+  plus
+</button>
+```
+
+Nyt napin tapahtumankäsittelijän määrittelevä attribuutti <i>onClick</i> saa arvokseen funktion _() => setCounter(counter + 1)_, ja funktiota kutsutaan siinä vaiheessa kun sovelluksen käyttäjä painaa nappia. 
+
+Tapahtumankäsittelijöiden määrittely suoraan JSX-templatejen sisällä ei useimmiten ole kovin viisasta. Tässä tapauksessa se tosin on ok, koska tapahtumankäsittelijät ovat niin yksinkertaisia. 
+
+Eriytetään kuitenkin nappien tapahtumankäsittelijät omiksi komponentin sisäisiksi apufunktioikseen:
 
 ```js
 const App = (props) => {
   const [ counter, setCounter ] = useState(0)
 
 // highlight-start
-  const increaseByOne = () =>
-    setCounter(counter + 1)
+  const increaseByOne = () => setCounter(counter + 1)
   
-  const setToZero = () =>
-    setCounter(0)
+  const setToZero = () => setCounter(0)
   // highlight-end
 
   return (
@@ -467,178 +508,13 @@ const App = (props) => {
 }
 ```
 
-### Event handlers are functions
-
-The functions _increaseByOne_ and _setToZero_ work almost exactly the same way, they just set a new value for the counter. Let's write a new function that serves both cases.
+Tälläkin kertaa tapahtumankäsittelijät on määritelty oikein, sillä <i>onClick</i>-attribuutit saavat arvokseen muuttujan, joka tallettaa viitteen funktioon:
 
 ```js
-const App = (props) => {
-  const [ counter, setCounter ] = useState(0)
-
-  const setToValue = (value) => setCounter(value) // highlight-line
-
-  return (
-    <div>
-      <div>{counter}</div>
-      <button onClick={setToValue(counter + 1)}> // highlight-line
-        plus
-      </button>
-      <button onClick={setToValue(0)}> // highlight-line
-        zero
-      </button>
-    </div>
-  )
-}
-
+<button onClick={increaseByOne}> 
+  plus
+</button>
 ```
-
-We realize, however, that this change breaks our application entirely:
-
-![](../../images/1/5a.png)
-
-What's causing the application to break? The event handler is supposed to define a <i>reference to a function</i>. However, in our code we have defined:
-
-```js
-<button onClick={setToValue(0)}>
-```
-
-meaning that the event handler is actually a <i>function call</i>, not a reference to the function. As a general rule, there is nothing wrong with this, but in this particular case the <em>setToValue(0)</em> function is called when React renders the component. This function then makes a call to the _setCounter_ function, which in turn causes the component to be re-rendered. And this cycle goes on and on...
-
-There are two potential solutions to this problem. The simpler solution is to change the event handlers into the form shown below:
-
-```js
-const App = (props) => {
-  const [ counter, setCounter ] = useState(0)
-
-  const setToValue = (value) => setCounter(value)
-
-  return (
-    <div>
-      <div>{counter}</div>
-      <button onClick={() => setToValue(counter + 1)}> // highlight-line
-        plus
-      </button>
-      <button onClick={() => setToValue(0)}> // highlight-line
-        zero
-      </button>
-    </div>
-  )
-}
-```
-
-The event handler is now a <i>function</i> that calls the _setToValue_ function with the appropriate parameter:
-
-```js
-<button onClick={() => setToValue(counter + 1)}>
-```
-
-### Function that returns a function
-
-Another solution is to use a common trick often seen in JavaScript and functional programming at large. The trick is to define <i>a function that returns a function</i>:
-
-```js
-const App = (props) => {
-  const [ counter, setCounter ] = useState(0)
-
-// highlight-start
-  const setToValue = (value) => {
-    return () => {
-      setCounter(value)
-    }
-  }
-// highlight-end  
-
-  return (
-    <div>
-      <div>{counter}</div>
-      <button onClick={setToValue(counter + 1)}> // highlight-line
-        plus
-      </button>
-      <button onClick={setToValue(0)}> // highlight-line
-        zero
-      </button>
-    </div>
-  )
-}
-```
-
-Getting comfortable with this technique may take some time if this is your first time using it.
-
-We have defined the following _setToValue_ event handler function:
-
-```js
-const setToValue = (value) => {
-  return () => {
-    setCounter(value)
-  }
-}
-```
-
-Defining the event handler by calling <em>setToValue(0)</em> results in the function
-
-```js
-() => {
-  setCounter(0)
-}
-```
-
-which is exactly the desired function for resetting the state!
-
-The event handler for the plus button is defined by calling <em>setToValue(counter + 1)</em>. When the component is rendered for the first time, the _counter_ will have the initial value 0, meaning that the event handler for the plus-button will be the result of <em>setToValue(1)</em>:
-
-```js
-() => {
-  setCounter(1)
-}
-```
-
-Likewise, when the state of the counter is 41 the event handler for the plus-button will be:
-
-```js
-() => {
-  setCounter(42)
-}
-```
-
-Let's take a closer look at the _setToValue_ function:
-
-```js
-const setToValue = (value) => {
-  return () => {
-    setCounter(value)
-  }
-}
-```
-
-Because the function body only contains a single command, we can once again utilize the more compact arrow function syntax:
-
-```js
-const setToValue = (value) => () => {
-  setCounter(value)
-}
-```
-
-In these situations it's common to write everything onto one line, resulting in a "double arrow" function: 
-
-```js
-const setToValue = (value) => () => setCounter(value)
-```
-
-Double arrow functions can be thought of as functions that have to be called twice in order to get the final result.
-
-The first function call is used to "configure" the second function, by defining some of its parameters. By calling <em>setToValue(5)</em> we assign the value 5 to _value_ and we're left with the following function:
-
-```js
-() => setCounter(5)
-```
-
-This way of utilizing functions that return functions is effectively the same thing as [currying](https://web.archive.org/web/20170919010057/http://www.datchley.name/currying-vs-partial-application/) in functional programming. The term currying does not originate from functional programming, rather the term is deeply rooted in [mathematics](https://en.wikipedia.org/wiki/Currying).
-
-We've mentioned <i>functional programming</i> a few times now, which may not be familiar to everyone. We will explore some aspects of functional programming throughout the course, as React supports and partially requires the use of some of the styles of functional programming.
-
-**NB** the change where we replaced the functions _increaseByOne_ and _setToZero_ with the function _setToValue_ is not necessarily an improvement, since specialized functions have more descriptive names. The reason we made the change was mostly to demonstrate the usage of the _currying_-technique.
-
-**NB** You don't necessarily need to use functions that return functions in any of the exercises, so don't worry too much about understanding this technique if the topic seems particularly confusing.
 
 ### Passing state to child components
 
@@ -668,26 +544,22 @@ const Display = ({ counter }) => {
 }
 ```
 
-Since the component function only consists of a single command we can also use the compact syntax for arrow functions:
-
-```js
-const Display = ({ counter }) => <div>{counter}</div>
-```
-
 Using the component is straightforward, as we only need to pass the state of the _counter_ to component:
 
 ```js
 const App = (props) => {
-  const [counter, setCounter] = useState(0)
-  const setToValue = (value) => setCounter(value)
+  const [ counter, setCounter ] = useState(0)
+
+  const increaseByOne = () => setCounter(counter + 1)
+  const setToZero = () => setCounter(0)
 
   return (
     <div>
       <Display counter={counter}/> // highlight-line
-      <button onClick={() => setToValue(counter + 1)}>
+      <button onClick={increaseByOne}>
         plus
       </button>
-      <button onClick={() => setToValue(0)}>
+      <button onClick={setToZero}> 
         zero
       </button>
     </div>
@@ -695,28 +567,18 @@ const App = (props) => {
 }
 ```
 
-Note that we no longer need the double arrow function.
-
 Everything still works. When the buttons are clicked and the <i>App</i> gets re-rendered, all of its children including the <i>Display</i> component are also re-rendered.
 
 Next, let's make a <i>Button</i> component for the buttons of our application. We have to pass the event handler as well as the title of the button through the component's props:
 
 ```js
-const Button = (props) => (
-  <button onClick={props.onClick}>
-    {props.text}
-  </button>
-)
-```
-
-and let's utilize destructuring again to unpack and assign the needed properties from the props object to variables:
-
-```js
-const Button = ({ onClick, text }) => (
-  <button onClick={onClick}>
-    {text}
-  </button>
-)
+const Button = (props) => {
+  return (
+    <button onClick={props.handleClick}>
+      {props.text}
+    </button>
+  )
+}
 ```
 
 Our <i>App</i> component now looks like this:
@@ -724,25 +586,27 @@ Our <i>App</i> component now looks like this:
 ```js
 const App = (props) => {
   const [ counter, setCounter ] = useState(0)
-  const setToValue = (value) => setCounter(value)
 
+  const increaseByOne = () => setCounter(counter + 1)
+  const decreaseByOne = () => setCounter(counter - 1)
+  const setToZero = () => setCounter(0)
 
   return (
     <div>
       <Display counter={counter}/>
       // highlight-start
       <Button
-        onClick={() => setToValue(counter + 1)}
+        handleClick={increaseByOne}
         text='plus'
       />
       <Button
-        onClick={() => setToValue(counter - 1)}
-        text='minus'
-      />
-      <Button
-        onClick={() => setToValue(0)}
+        handleClick={setToZero}
         text='zero'
-      />
+      />     
+      <Button
+        handleClick={decreaseByOne}
+        text='minus'
+      />           
       // highlight-end
     </div>
   )
@@ -752,4 +616,65 @@ const App = (props) => {
 Since we now have an easily reusable <i>Button</i> component, we've also implemented new functionality into our application by adding a button that can be used to decrement the counter.
 
 The event handler is passed to the <i>Button</i> component through the _onClick_ prop. The name of the prop itself is not that significant, but our naming choice wasn't completely random, e.g. React's own official [tutorial](https://reactjs.org/tutorial/tutorial.html) suggests this convention.
+
+### Tilan muutos aiheuttaa uudelleenrenderöitymisen
+
+Kerrataan vielä sovelluksen toiminnan pääperiaatteet. 
+
+Kun sovellus käynnistyy, suoritetaan komponentin _App_-koodi, joka luo [useState](https://reactjs.org/docs/hooks-reference.html#usestate)-hookin avulla sovellukselle laskurin tilan _counter_. Komponentti renderöi laskimen alkuarvon 0 näyttävän komponentin _Display_ sekä kolme _Button_-komponenttia, joille se asettaa laskurin tilaa muuttavat tapahtumankäsittelijät.
+
+Kun jotain napeista painetaan, suoritetaan vastaava tapahtumankäsittelijä. Tapahtumankäsittelijä muuttaa komponentin _App_ tilaa funktion _setCounter_ avulla. **Tilaa muuttavan funktion kutsuminen aiheuttaa komponentin uudelleenrenderöitymisen.** 
+
+Eli jos painetaan nappia <i>plus</i>, muuttaa napin tapahtumankäsittelijä tilan _counter_ arvoksi 1 ja komponentti _App_ renderöidään uudelleen. Komponentin uudelleenrenderöinti aiheuttaa sen "alikomponentteina" olevien _Display_- ja _Button_-komponenttien uudelleenrenderöitymisen. _Display_ saa propsin arvoksi laskurin uuden arvon 1 ja _Button_-komponentit saavat propseina tilaa sopivasti muuttavat tapahtumankäsittelijät.
+
+### Komponenttien refaktorointi
+
+Laskimen arvon näyttävä komponentti on siis seuraava
+
+```js
+const Display = (props) => {
+  return (
+    <div>{props.counter}</div>
+  )
+}
+```
+
+Komponentti tarvitsee ainoastaan <i>propsin</i> kenttää _counter_, joten se voidaan yksinkertaistaa [destrukturoinnin](/osa1/komponentin_tila_ja_tapahtumankasittely#destrukturointi) avulla seuraavaan muotoon:
+
+```js
+const Display = ({ counter }) => {
+  return (
+    <div>{counter}</div>
+  )
+}
+```
+
+Koska komponentin määrittelevä metodi ei sisällä muuta kuin returnin, voimme määritellä sen hyödyntäen nuolifunktioiden tiiviimpää ilmaisumuotoa
+
+```js
+const Display = ({ counter }) => <div>{counter}</div>
+```
+
+Vastaava suoraviivaistus voidaan tehdä myös nappia edustavalle komponentille
+
+```js
+const Button = (props) => {
+  return (
+    <button onClick={props.handleClick}>
+      {props.text}
+    </button>
+  )
+}
+```
+
+Eli destrukturoidaan <i>props</i>:ista tarpeelliset kentät ja käytetään nuolifunktioiden tiiviimpää muotoa 
+
+```js
+const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>
+    {text}
+  </button>
+)
+```
+
 </div>

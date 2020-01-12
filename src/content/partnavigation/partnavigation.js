@@ -72,18 +72,14 @@ module.exports = {
   },
   en: {
     '0': {
-      /*
       a: 'General info',
       b: 'Fundamentals of Web apps',
-      */
     },
     '1': {
-      /*
       a: 'Introduction to React',
       b: 'Javascript',
       c: 'Component state, event handlers',
       d: 'A more complex state, debugging React apps',
-      */
     },
     '2': {
       /*

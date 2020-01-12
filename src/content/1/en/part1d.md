@@ -1022,7 +1022,7 @@ You may find the following links useful:
 </div>
 
 <div class="tasks">
-  <h3>Exercises</h3>
+  <h3>Exercises  1.6.-1.14.</h3>
 
 Submit your solutions to the exercises by first pushing your code to GitHub and then marking the completed exercises into the [exercise submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2020).
 

@@ -1019,7 +1019,7 @@ Seuraavassa muutamia linkkejä:
 </div>
 
 <div class="tasks">
-  <h3>Tehtävät 1.6-1.14</h3>
+  <h3>Tehtävät 1.6.-1.14.</h3>
 
 Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät [palautussovellukseen](https://study.cs.helsinki.fi/stats/courses/fullstack2020).
 
