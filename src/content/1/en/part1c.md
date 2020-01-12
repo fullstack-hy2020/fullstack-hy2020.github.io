@@ -522,9 +522,11 @@ It's recommended to write React components that are small and reusable across th
 
 Let's first implement a <i>Display</i> component that's responsible for displaying the value of the counter.
 
-One best practice in React is to [lift the state up](https://reactjs.org/docs/lifting-state-up.html) as high as possible in the component hierarchy, preferably to the <i>App</i> root component.
+One best practice in React is to [lift the state up](https://reactjs.org/docs/lifting-state-up.html) high enough in the component hierarchy. The documentation says:
 
-Let's place the application's state in the <i>App</i> component and pass it down to the <i>Display</i> component through <i>props</i>:
+> <i>Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.</i>
+
+So let's place the application's state in the <i>App</i> component and pass it down to the <i>Display</i> component through <i>props</i>:
 
 ```js
 const Display = (props) => {
