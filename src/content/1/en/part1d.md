@@ -1207,7 +1207,7 @@ Expand your application so that you can vote for the displayed anecdote.
 
 ![](../../images/1/19a.png)
 
-**NB** if you decide to store the votes of each anecdote into an array or object in the component's state, you should refer to the material to see the correct way of updating state stored in complex data structures like objects and arrays.
+**NB** store the votes of each anecdote into an array or object in the component's state. Remember that the correct way of updating state stored in complex data structures like objects and arrays is to make a copy of the state.
 
 You can create a copy of an object like this:
 
