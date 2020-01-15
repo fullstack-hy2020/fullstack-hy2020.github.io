@@ -53,11 +53,11 @@ Kurssin oletusarvoinen laajuus on 5 opintopistettä. Arvosana määräytyy kaikk
 
 Koe pidetään keskiviikkona 4.3. klo 9 saleissa A111 ja B123. Kokeeseen on ilmoittauduttava viimeistään 10 päivää ennen koetta
 
-Kurssilta on mahdollisuus ansaita lisäopintopisteitä. Jos teet 87.5% kurssin tehtävistä, saat yhden lisäopintopisteen. Tekemällä 95% tehtävistä saat 2 lisäopintopistettä.
+Kurssilta on mahdollisuus ansaita lisäopintopisteitä. Jos teet 87.5% kurssin tehtävistä, saat yhden lisäopintopisteen. Tekemällä 95% tehtävistä saat 2 lisäopintopistettä. 
 
-### Arvosanarajat, 5-7 opintopisteen suoritus
+### Arvosanarajat: 5-7 opintopisteen suoritus
 
-Tarkat arvosanarajat ilmestyvät kun kurssin kokonaistehtävämäärä on selvillä-
+Tarkat arvosanarajat ilmestyvät kun kurssin kokonaistehtävämäärä on selvillä.
 
 Suoritukseen edellytetään tehtävien lisäksi hyväksytysti suoritettu koe.
 

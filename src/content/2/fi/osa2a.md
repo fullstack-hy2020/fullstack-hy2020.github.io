@@ -92,19 +92,19 @@ const notes = [
   {
     id: 1,
     content: 'HTML is easy',
-    date: '2019-05-30T17:30:31.098Z',
+    date: '2020-01-10T17:30:31.098Z',
     important: true
   },
   {
     id: 2,
     content: 'Browser can execute only Javascript',
-    date: '2019-05-30T18:39:34.091Z',
+    date: '2020-01-10T18:39:34.091Z',
     important: false
   },
   {
     id: 3,
     content: 'GET and POST are the most important methods of HTTP protocol',
-    date: '2019-05-30T19:20:14.298Z',
+    date: '2020-01-10T19:20:14.298Z',
     important: true
   }
 ]
@@ -175,22 +175,23 @@ const App = (props) => {
 
 Koska <i>li</i>-tagit generoiva koodi on Javascriptia, tulee se sijoittaa JSX-templatessa aaltosulkujen sisälle kaiken muun Javascript-koodin tapaan.
 
-Usein vastaavissa tilanteissa dynaamisesti generoitava sisältö eristetään omaan metodiin, jota JSX-template kutsuu:
+Parannetaan koodin luetteloa vielä jakamalla nuolifunktion määrittely useammalle riville:
 
 ```js
 const App = (props) => {
   const { notes } = props
 
-// highlight-start
-  const rows = () =>
-    notes.map(note => <li>{note.content}</li>)
-// highlight-end
-
   return (
     <div>
       <h1>Notes</h1>
       <ul>
-        {rows()} // highlight-line
+        {notes.map(note => 
+        // highlight-start
+          <li>
+            {note.content}
+          </li>
+        // highlight-end   
+        )}
       </ul>
     </div>
   )
@@ -211,16 +212,17 @@ Lisätään avaimet:
 const App = (props) => {
   const { notes } = props
 
-// highlight-start
-  const rows = () =>
-    notes.map(note => <li key={note.id}>{note.content}</li>)
-// highlight-end
-
   return (
     <div>
       <h1>Notes</h1>
       <ul>
-        {rows()}
+        {notes.map(note => 
+        // highlight-start
+          <li key={note.id}>
+            {note.content}
+          </li>
+          // highlight-end
+        )}
       </ul>
     </div>
   )
@@ -242,19 +244,19 @@ const notes = [
   {
     id: 1,
     content: 'HTML is easy',
-    date: '2019-05-30T17:30:31.098Z',
+    date: '2020-01-10T17:30:31.098Z',
     important: true
   },
   {
     id: 2,
     content: 'Browser can execute only Javascript',
-    date: '2019-05-30T18:39:34.091Z',
+    date: '2020-01-10T18:39:34.091Z',
     important: false
   },
   {
     id: 3,
     content: 'GET and POST are the most important methods of HTTP protocol',
-    date: '2019-05-30T19:20:14.298Z',
+    date: '2020-01-10T19:20:14.298Z',
     important: true
   }
 ]
@@ -298,7 +300,11 @@ tuloksena on taulukko, joka koostuu muistiinpanojen sisällöistä.
 Tämä on jo lähellä käyttämäämme React-koodia:
 
 ```js
-notes.map(note => <li key={note.id}>{note.content}</li>)
+notes.map(note =>
+  <li key={note.id}>
+    {note.content}
+  </li>
+)
 ```
 
 joka muodostaa jokaista muistiinpano-olioa vastaavan <i>li</i>-tagin, jonka sisään tulee muistiinpanon sisältö.
@@ -309,19 +315,11 @@ Koska metodin _map_ parametrina olevan funktion
 note => <li key={note.id}>{note.content}</li>
 ```
 
-käyttötarkoitus on näkymäelementtien muodostaminen, tulee muuttujan arvo renderöidä aaltosulkeiden sisällä. Kokeile mitä koodi tekee, jos poistat aaltosulkeet.
+käyttötarkoitus on näkymäelementtien muodostaminen, tulee muuttujan <i>note.content arvo</i> renderöidä aaltosulkeiden sisällä. Kokeile mitä koodi tekee, jos poistat aaltosulkeet.
 
 Aaltosulkeiden käyttö tulee varmaan aiheuttamaan alussa pientä päänvaivaa, mutta totut niihin pian. Reactin antama visuaalinen feedback on välitön.
 
 Parempi muotoilu ohjelmamme muistiinpanorivit tuottavalle apufunktiolle saattaakin olla seuraava useille riveille jaoteltu versio:
-
-```js
-const rows = () => notes.map(note =>
-  <li key={note.id}>
-    {note.content}
-  </li>
-)
-```
 
 Kyse on kuitenkin edelleen yhden komennon sisältävästä nuolifunktiosta, komento vain sattuu olemaan hieman monimutkaisempi.
 
@@ -335,14 +333,16 @@ notes.map((note, i) => ...)
 
 näin kutsuttaessa _i_ saa arvokseen sen paikan indeksin taulukossa, missä <i>Note</i> sijaitsee.
 
-Eli eräs virhettä aiheuttamaton tapa määritellä rivien generointi on
+Eli eräs konsoliin tulostuvaa virheilmoitusta aiheuttamaton tapa määritellä rivien generointi olisi
 
 ```js
-const rows = () => notes.map((note, i) => 
-  <li key={i}>
-    {note.content}
-  </li>
-)
+<ul>
+  {notes.map((note, i) => 
+    <li key={i}>
+      {note.content}
+    </li>
+  )}
+</ul>
 ```
 
 Tämä **ei kuitenkaan ole suositeltavaa** ja voi näennäisestä toimimisestaan aiheuttaa joissakin tilanteissa pahoja ongelmia. Lue lisää esimerkiksi [täältä](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318).
@@ -352,14 +352,16 @@ Tämä **ei kuitenkaan ole suositeltavaa** ja voi näennäisestä toimimisestaan
 Siistitään koodia hiukan. Koska olemme kiinnostuneita ainoastaan propsien kentästä _notes_, otetaan se vastaan suoraan [destrukturointia](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) hyödyntäen:
 
 ```js
-const App = ({ notes }) => { // highlight-line
-  // ...
-
+const App = ({ notes }) => { //highlight-line
   return (
     <div>
       <h1>Notes</h1>
       <ul>
-        {rows()}
+        {notes.map((note, i) => 
+          <li key={i}>
+            {note.content}
+          </li>
+        )}
       </ul>
     </div>
   )
@@ -379,21 +381,16 @@ const Note = ({ note }) => {
 }
 // highlight-end
 
-const App = ({ notes }) => {
-  const rows = () => notes.map(note =>
-  // highlight-start
-    <Note 
-      key={note.id}
-      note={note}
-    />
-    // highlight-end
-  )
-
+const App = ({ notes }) => 
   return (
     <div>
       <h1>Notes</h1>
       <ul>
-        {rows()}
+        // highlight-start
+        {notes.map((note, i) => 
+          <Note key={i} note={note} />
+        )}
+         // highlight-end
       </ul>
     </div>
   )
@@ -464,22 +461,22 @@ import React from 'react'
 import Note from './components/Note'
 
 const App = ({ notes }) => {
-  const rows = () => notes.map(note =>
-    <Note
-      key={note.id}
-      note={note}
-    />
-  )
-
   return (
     <div>
       <h1>Notes</h1>
       <ul>
-        {rows()}
+        {notes.map((note, i) => 
+          <Note key={i} note={note} />
+        )}
       </ul>
     </div>
   )
 }
+
+ReactDOM.render(
+  <App notes={notes} />,
+  document.getElementById('root')
+)
 
 export default App // highlight-line
 ```
@@ -503,9 +500,9 @@ ReactDOM.render(
 
 Moduuleilla on paljon muutakin käyttöä kuin mahdollistaa komponenttien määritteleminen omissa tiedostoissaan, palaamme moduuleihin tarkemmin myöhemmin kurssilla.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/part2-notes/tree/part2-1)
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1)
 
-Huomaa, että repositorion master-haarassa on myöhemmän vaiheen koodi, tämän hetken koodi on branchissa [part2-1](https://github.com/fullstackopen-2019/part2-notes/tree/part2-1):
+Huomaa, että repositorion master-haarassa on myöhemmän vaiheen koodi, tämän hetken koodi on branchissa [part2-1](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1):
 
 ![](../../images/2/2b.png)
 
