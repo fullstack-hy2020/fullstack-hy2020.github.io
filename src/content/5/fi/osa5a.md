@@ -87,7 +87,7 @@ export default App
 
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/part2-notes/tree/part5-1), branchissa <i>part5-1</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-1), branchissa <i>part5-1</i>.
 
 Kirjautumislomakkeen käsittely noudattaa samaa periaatetta kuin [osassa 2](/osa2#lomakkeet). Lomakkeen kenttiä varten on lisätty komponentin tilaan  <i>username</i> ja <i>password</i>. Molemmille kentille on määritelty muutoksenkäsittelijä, joka synkronoi kenttään tehdyt muutokset komponentin <i>App</i> tilaan. Muutoksenkäsittelijä on yksinkertainen, se destrukturoi parametrina tulevasta oliosta kentän <i>target</i> ja asettaa sen arvon vastaavaan tilaan:
 
@@ -309,7 +309,7 @@ Ratkaisu näyttää hieman rumalta, mutta jätämme sen koodiin toistaiseksi.
 Sovelluksemme pääkomponentti <i>App</i> on tällä hetkellä jo aivan liian laaja ja nyt tekemämme muutokset ovat ilmeinen signaali siitä, että lomakkeet olisi syytä refaktoroida omiksi komponenteikseen. Jätämme sen kuitenkin vapaaehtoiseksi harjoitustehtäväksi.
 
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/part2-notes/tree/part5-2), branchissa <i>part5-2</i>. 
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-2), branchissa <i>part5-2</i>. 
 
 
 ### Muistiinpanojen luominen
@@ -509,7 +509,7 @@ tai local storagen tilan kokonaan nollaavan komennon
 window.localStorage.clear()
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa]https://github.com/fullstackopen-2019/part2-notes/tree/part5-3), branchissa <i>part5-3</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa]https://github.com/fullstack-hy2020/part2-notes/tree/part5-3), branchissa <i>part5-3</i>.
 
 </div>
 
@@ -517,7 +517,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa]https://githu
 
 ### Tehtäviä
 
-Teemme nyt edellisen osan tehtävissä tehtyä bloglist-backendia käyttävän frontendin. Voit ottaa tehtävien pohjaksi [Githubista](https://github.com/fullstackopen-2019/bloglist-frontend) olevan sovellusrungon. Sovellus olettaa, että backend on käynnissä koneesi portissa 3003.
+Teemme nyt edellisen osan tehtävissä tehtyä bloglist-backendia käyttävän frontendin. Voit ottaa tehtävien pohjaksi [Githubista](https://github.com/fullstack-hy2020/bloglist-frontend) olevan sovellusrungon. Sovellus olettaa, että backend on käynnissä koneesi portissa 3003.
 
 Lopullisen version palauttaminen riittää, voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.
 
@@ -529,10 +529,10 @@ Muista tehtäviä tehdessäsi kaikki debuggaukseen liittyvät käytänteet, erit
 
 #### 5.1: blogilistan frontend, step1
 
-Ota tehtävien pohjaksi [Githubissa](https://github.com/fullstackopen-2019/bloglist-frontend) olevan sovellusrunko kloonaamalla se sopivaan paikkaan komennolla
+Ota tehtävien pohjaksi [Githubissa](https://github.com/fullstack-hy2020/bloglist-frontend) olevan sovellusrunko kloonaamalla se sopivaan paikkaan komennolla
 
 ```bash
-git clone https://github.com/fullstackopen-2019/bloglist-frontend
+git clone https://github.com/fullstack-hy2020/bloglist-frontend
 ```
 
 <i>Poista kloonatun sovelluksen git-konfiguraatio</i>

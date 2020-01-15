@@ -388,7 +388,7 @@ const filter = store.getState().filter
 ```
 
 
-You can find the code for our current application in its entirety in the <i>part6-2</i> branch of [this Github repository](https://github.com/fullstackopen-2019/redux-notes/tree/part6-2).
+You can find the code for our current application in its entirety in the <i>part6-2</i> branch of [this Github repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-2).
 
 
 There is a slight cosmetic flaw in our application. Even though the filter is set to <i>ALL</i> by default, the associated radio button is not selected. Naturally this issue can be fixed, but since this is an unpleasant but ultimately harmless bug we will save the fix for later. 
@@ -806,7 +806,7 @@ export default connect(
 Since the component does not need to access the store's state, we can simply pass <i>null</i> as the first parameter to _connect_. 
 
 
-You can find the code for our current application in its entirety in the <i>part6-3</i> branch of [this Github repository](https://github.com/fullstackopen-2019/redux-notes/tree/part6-3).
+You can find the code for our current application in its entirety in the <i>part6-3</i> branch of [this Github repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3).
 
 
 ### Referencing action creators passed as props
@@ -1125,7 +1125,7 @@ High order components, or HOCs, are a way of defining generic functionality that
 HOCs are in fact a generalization of the [High Order Function](https://en.wikipedia.org/wiki/Higher-order_function) (HOF) concept. HOFs are functions that either accept functions as parameters or return functions. We have actually been using HOFs throughout the course, e.g. all of the methods used for dealing with arrays like _map, filter and find_ are HOFs. 
 
 
-You can find the code for our current application in its entirety in the <i>part6-4</i> branch of [this Github repository](https://github.com/fullstackopen-2019/redux-notes/tree/part6-4). 
+You can find the code for our current application in its entirety in the <i>part6-4</i> branch of [this Github repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-4). 
 
 Note the changes in the <i>VisibilityFilter</i> component and removal of all the props in the <i>App</i> component.
 

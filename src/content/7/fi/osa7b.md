@@ -237,7 +237,7 @@ Chromen developer-konsolin avulla on mahdollista simuloida sovelluksen käyttö�
 ![](../../images/7/12.png)
 
 
-Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/fullstackopen-2019/misc/blob/master/notes-bootstrap.js)
+Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/fullstack-hy2020/misc/blob/master/notes-bootstrap.js)
 
 ### Semantic UI
 
@@ -422,7 +422,7 @@ Lopputulos näyttää seuraavalta:
 
 ![](../../images/7/17.png)
 
-Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/fullstackopen-2019/misc/blob/master/notes-semantic.js).
+Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/fullstack-hy2020/misc/blob/master/notes-semantic.js).
 
 ### Loppuhuomioita
 

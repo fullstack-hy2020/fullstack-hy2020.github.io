@@ -187,7 +187,7 @@ We have to use the modifier <i>exact</i> in front of the <i>path</i> attribute o
 
 ### Parameterized route
 
-Let's examine the slightly modified version from the previous example. The complete code for the example can be found [here](https://github.com/fullstackopen-2019/misc/blob/master/router-app.js).
+Let's examine the slightly modified version from the previous example. The complete code for the example can be found [here](https://github.com/fullstack-hy2020/misc/blob/master/router-app.js).
 
 The application now contains five different views, the display of which is controlled by the router. In addition to the components from the previous example (<i>Home</i>, <i>Notes</i> and <i>Users</i>), we have <i>Login</i> representing the login view and <i>Note</i> representing the view of a single note.
 
@@ -437,7 +437,7 @@ We define an element common for modern web apps called <i>footer</i>, which defi
 
 ### Exercises
 
-Let's return to working with anecdotes. Use the redux-free anecdote app found in the repository <https://github.com/fullstackopen-2019/routed-anecdotes> as the starting point for the exercises.
+Let's return to working with anecdotes. Use the redux-free anecdote app found in the repository <https://github.com/fullstack-hy2020/routed-anecdotes> as the starting point for the exercises.
 
 If you clone the project into an existing git repository remember to <i>delete the git configuration of the cloned application:</i>
 

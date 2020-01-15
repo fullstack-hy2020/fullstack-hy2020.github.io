@@ -610,7 +610,7 @@ console.log(rest)     // prints [3, 4, 5, 6]
 Let's make a simplified version of the unicafe-exercise from part 1. Let's handle the state management with Redux. 
 
 
-You can take the project from this repository https://github.com/fullstackopen-2019/unicafe-redux for the base of your project. 
+You can take the project from this repository https://github.com/fullstack-hy2020/unicafe-redux for the base of your project. 
 
 
 <i>Start by removing the git-configuration of the cloned repository, and by installing dependencies</i>
@@ -1116,7 +1116,7 @@ Forwarding the <i>store</i> to all components as props is not the best solution.
 In a bit we will have a solution to this problem. 
 
 
-The code of the Redux application can be found on [Github](https://github.com/fullstackopen-2019/redux-notes/tree/part6-1), branch <i>part6-1</i>.
+The code of the Redux application can be found on [Github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-1), branch <i>part6-1</i>.
 
 </div>
 
@@ -1125,7 +1125,7 @@ The code of the Redux application can be found on [Github](https://github.com/fu
 ### Exercises
 
 
-Let's make a new version of the anecdote voting application from part 1. Take the project from this repository https://github.com/fullstackopen-2019/redux-anecdotes to base your solution on.  
+Let's make a new version of the anecdote voting application from part 1. Take the project from this repository https://github.com/fullstack-hy2020/redux-anecdotes to base your solution on.  
 
 
 If you clone the project into an existing git-repository, <i>remove the git-configuration of the cloned application:</i> 

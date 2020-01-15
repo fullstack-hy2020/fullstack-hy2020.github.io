@@ -480,7 +480,7 @@ test('toggled content can be closed', () => {
 The _getByText_ method that we used is just one of the many [queries](https://testing-library.com/docs/api-queries#queries) <i>react-testing-library</i> offers.
 
 
-You can find the code for our current application in its entirety in the <i>part5-7</i> branch of [this Github repository](https://github.com/fullstackopen-2019/part2-notes/tree/part5-7).
+You can find the code for our current application in its entirety in the <i>part5-7</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7).
 </div>
 
 <div class="tasks">
@@ -842,7 +842,7 @@ afterAll(() => {
 }) 
 ```
 
-You can find the code for our current application in its entirety in the <i>part5-8</i> branch of [this Github repository](https://github.com/fullstackopen-2019/part2-notes/tree/part5-8).
+You can find the code for our current application in its entirety in the <i>part5-8</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-8).
 
 
 

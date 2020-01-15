@@ -161,7 +161,7 @@ Sovelluksen pitäisi nyt toimia. Aina kaikki ei kuitenkaan mene suunnitelmien mu
 
 eli tietokannan osoite olikin jostain syystä määrittelemätön. Komento <i>heroku config</i> paljasti että olin vahingossa määritellyt ympäristömuuttujan <em>MONGO\_URL</em> kun koodi oletti sen olevan nimeltään <em>MONGODB\_URI</em>.
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part3-5), branchissä <i>part3-5</i>.
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5), branchissä <i>part3-5</i>.
 
 </div>
 
@@ -397,7 +397,7 @@ Jos konfiguraatiossa on jotain vikaa, voi editorin lint-plugin näyttää mitä 
 
 Monissa yrityksissä on tapana määritellä yrityksen laajuiset koodausstandardit ja näiden käyttöä valvova ESlint-konfiguraatio. Pyörää ei kannata välttämättä keksiä uudelleen ja voi olla hyvä idea ottaa omaan projektiin käyttöön joku jossain muualla hyväksi havaittu konfiguraatio. Viime aikoina monissa projekteissa on omaksuttu AirBnB:n [Javascript](https://github.com/airbnb/javascript)-tyyliohjeet ottamalla käyttöön firman määrittelemä [ESLint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb)-konfiguraatio.
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part3-6), branchissa <i>part3-6</i>.
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-6), branchissa <i>part3-6</i>.
 
 </div>
 

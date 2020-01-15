@@ -177,7 +177,7 @@ joudumme käyttämään routen <i>path</i> attribuutin edessä määrettä <i>ex
 
 ### Parametroitu route
 
-Tarkastellaan sitten hieman modifioitua versiota edellisestä esimerkistä. Esimerkin koodi kokonaisuudessaan on [täällä](https://github.com/fullstackopen-2019/misc/blob/master/router-app.js).
+Tarkastellaan sitten hieman modifioitua versiota edellisestä esimerkistä. Esimerkin koodi kokonaisuudessaan on [täällä](https://github.com/fullstack-hy2020/misc/blob/master/router-app.js).
 
 Sovellus sisältää nyt viisi eri näkymää, joiden näkyvyyttä kontrolloidaan routerin avulla. Edellisestä esimerkistä tuttujen komponenttien <i>Home</i>, <i>Notes</i> ja <i>Users</i> lisäksi mukana on kirjautumisnäkymää vastaava <i>Login</i> ja yksittäisen muistiinpanon näkymää vastaava <i>Note</i>.
 
@@ -421,7 +421,7 @@ Komponentin sisällössä määritellään myös kokonaan <i>Router</i>:in ulkop
 
 ### Tehtäviä
 
-Jatketaan anekdoottien parissa. Ota seuraaviin tehtäviin pohjaksi repositoriossa <https://github.com/fullstackopen-2019/routed-anecdotes> oleva reduxiton anekdoottisovellus.
+Jatketaan anekdoottien parissa. Ota seuraaviin tehtäviin pohjaksi repositoriossa <https://github.com/fullstack-hy2020/routed-anecdotes> oleva reduxiton anekdoottisovellus.
 
 Jos kloonaat projektin olemassaolevan git-reposition sisälle, <i>poista kloonatun sovelluksen git-konfiguraatio:</i>
 

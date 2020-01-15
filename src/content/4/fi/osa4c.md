@@ -394,7 +394,7 @@ Lista näyttää seuraavalta
 
 ![](../../images/4/9.png)
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part4-6), branchissä <i>part4-6</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-6), branchissä <i>part4-6</i>.
 
 ### Muistiinpanon luominen
 
@@ -526,6 +526,6 @@ const noteSchema = new mongoose.Schema({
 })
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part4-7), branchissä <i>part4-7</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-7), branchissä <i>part4-7</i>.
 
 </div>

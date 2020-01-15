@@ -435,7 +435,7 @@ Huomaamme, että koodi ei itseasiassa välitä ollenkaan siitä että se käsitt
 
 Eristä kommunikoiva koodi hookiksi _useResource_. Riittää, että kaikkien olioiden haku ja uuden olion luominen onnistuvat.
 
-Voit tehdä tehtävän repositoriosta https://github.com/fullstackopen-2019/custom-hooks löytyvään projektiin. Projektin komponentti <i>App</i> on seuraavassa:
+Voit tehdä tehtävän repositoriosta https://github.com/fullstack-hy2020/custom-hooks löytyvään projektiin. Projektin komponentti <i>App</i> on seuraavassa:
 
 ```js
 const App = () => {

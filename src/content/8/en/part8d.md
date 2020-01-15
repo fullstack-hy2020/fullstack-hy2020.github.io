@@ -128,7 +128,7 @@ const App = () => {
 }
 ```
 
-The current code of the application can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-6), branch <i>part8-6</i>.
+The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6), branch <i>part8-6</i>.
 
 ### Adding a token to a header
 
@@ -239,7 +239,7 @@ const PersonForm = (props) => {
 ```
 
 
-Current application code can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-7), branch <i>part8-7</i>.
+Current application code can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-7), branch <i>part8-7</i>.
 
 ### Updating cache, revisited
 
@@ -329,7 +329,7 @@ Be diligent with the cache. Old data in cache can cause hard to find bugs. As we
 
 
 
-The current code of the application can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-8), branch <i>part8-8</i>.
+The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-8), branch <i>part8-8</i>.
 
 </div>
 

@@ -300,7 +300,7 @@ Jos sovellus on pieni, ei rakenteella ole kovin suurta merkitystä. Sovelluksen 
 
 Express-sovelluksien rakenteelle, eli hakemistojen ja tiedostojen nimennälle ei ole olemassa mitään yleismaailmallista standardia samaan tapaan kuin esim. Ruby on Railsissa. Tässä käyttämämme malli noudattaa eräitä internetissä vastaan tulevia hyviä käytäntöjä.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part4-1), branchissa <i>part4-1</i>:
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-1), branchissa <i>part4-1</i>:
 
 Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnistämistä eli komentoa _npm start_.
 
@@ -666,7 +666,7 @@ describe('total likes', () => {
 })
 ```
 
-Jos et viitsi itse määritellä testisyötteenä käytettäviä blogeja, saat valmiin listan [täältä.](https://github.com/fullstackopen-2019/misc/blob/master/blogs_for_test.md)
+Jos et viitsi itse määritellä testisyötteenä käytettäviä blogeja, saat valmiin listan [täältä.](https://github.com/fullstack-hy2020/misc/blob/master/blogs_for_test.md)
 
 Törmäät varmasti testien tekemisen yhteydessä erinäisiin ongelmiin. Pidä mielessä osassa 3 käsitellyt [debuggaukseen](osa3/tietojen_tallettaminen_mongo_db_tietokantaan#node-sovellusten-debuggaaminen) liittyvät asiat, voit testejäkin suorittaessasi printtailla konsoliin komennolla _console.log_. Myös debuggerin käyttö testejä suorittaessa on mahdollista, ohje [täällä](https://jestjs.io/docs/en/troubleshooting).
 

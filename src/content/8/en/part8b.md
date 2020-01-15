@@ -10,7 +10,7 @@ lang: en
 
 We will next implement a React-app which uses the GraphQL server we created.
 
-The current code of the server can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>.
+The current code of the server can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>.
 
 
 In theory, we can use GraphQL with HTTP POST -requests. The following shows an example of this with Postman. 
@@ -389,7 +389,7 @@ If the state _person_ has a value, instead of showing a list of all persons, onl
 The solution is not the neatest possible, but it is good enough for us. 
 
 
-The current code of the application can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-1) branch <i>part8-1</i>.
+The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-1) branch <i>part8-1</i>.
 
 ### Cache
 
@@ -610,7 +610,7 @@ There are other ways to update the cache. More about those later in this part.
 **NB** Apollo Client devtools seems to have some bugs. At some point it stops updating the state of the cache. If you encounter this issue, open the application in a new tab. 
 
 
-The current code of the application can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-2) branch <i>part8-2</i>.
+The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-2) branch <i>part8-2</i>.
 
 ### Handling mutation error messages
 
@@ -671,7 +671,7 @@ Now the user is informed about an error with a simple notification.
 ![](../../images/8/15.png)
 
 
-The current code of the application can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-3) branch <i>part8-3</i>.
+The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-3) branch <i>part8-3</i>.
 
 ### Updating a phone number
 
@@ -788,7 +788,7 @@ If we try to change the phone number of a nonexisting name, nothing seems to hap
 ![](../../images/8/23.png)
 
 
-The current code of the application can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-4) branch <i>part8-4</i>
+The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4) branch <i>part8-4</i>
 
 ### Apollo Client and the applications state
 
@@ -1003,7 +1003,7 @@ Note that the hook _useMutation_ returns an array. The first value in that array
 
 The final result is really so much cleaner than the mess using the render props -components. We can join Ryan Florence in the opinion he stated in React Conf 2018 [90% Cleaner React With Hooks](https://www.youtube.com/watch?v=wXLf18DsV-I). 
 
-The code of the application which uses hooks can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-5) branch <i>part8-5</i>.
+The code of the application which uses hooks can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5) branch <i>part8-5</i>.
 
 </div>
 
@@ -1014,7 +1014,7 @@ The code of the application which uses hooks can be found on [Github](https://gi
 
 Through these exercises we'll implement a frontend for the GraphQL-library. 
 
-Take [this project](https://github.com/fullstackopen-2019/library-frontend) for a start of your application. 
+Take [this project](https://github.com/fullstack-hy2020/library-frontend) for a start of your application. 
 
 You can implement your application either using the render prop -components <i>Query</i> and <i>Mutation</i> of the Apollo Client, or using the hooks provided by Apollo client 3.0 beta version. 
 

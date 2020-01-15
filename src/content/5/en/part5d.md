@@ -481,7 +481,7 @@ We notice that the code is in no way specific to the fact that our application d
 Extract the code for communicating with the backend into its own _useResource_ hook. It is sufficient to implement fetching all resources and creating a new resource.
 
 
-You can do the exercise for the project found in the https://github.com/fullstackopen-2019/custom-hooks repository. The <i>App</i> component for the project is the following:
+You can do the exercise for the project found in the https://github.com/fullstack-hy2020/custom-hooks repository. The <i>App</i> component for the project is the following:
 
 ```js
 const App = () => {

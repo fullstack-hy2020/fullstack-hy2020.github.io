@@ -268,7 +268,7 @@ Chrome developer tools makes it possible to simulate using our application in th
 
 
 
-You can find the complete code for the application [here](https://github.com/fullstackopen-2019/misc/blob/master/notes-bootstrap.js).
+You can find the complete code for the application [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-bootstrap.js).
 
 ### Semantic UI
 
@@ -475,7 +475,7 @@ The result looks like this:
 ![](../../images/7/17.png)
 
 
-You can find the complete code for the application [here](https://github.com/fullstackopen-2019/misc/blob/master/notes-semantic.js).
+You can find the complete code for the application [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-semantic.js).
 
 
 ### Closing thoughts

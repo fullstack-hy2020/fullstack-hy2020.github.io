@@ -218,7 +218,7 @@ Tilauksia on mahdollista testata GraphQL-playgroundin avulla seuraavasti:
 
 Kun tilauksen "play"-painiketta painetaan, jää playground odottamaan tilaukseen tulevia vastauksia. 
 
-Backendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-6), branchissa <i>part8-6</i>.
+Backendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-6), branchissa <i>part8-6</i>.
 
 ### Tilaukset clientissä
 
@@ -378,7 +378,7 @@ const App = () => {
 }
 ```
 
-Clientin lopullinen koodi [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-9), branchissa <i>part8-9</i>.
+Clientin lopullinen koodi [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-9), branchissa <i>part8-9</i>.
 
 ### n+1-ongelma
 

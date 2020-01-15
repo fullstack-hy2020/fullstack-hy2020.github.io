@@ -600,7 +600,7 @@ It's probably a good idea to integrate the frontend and backend one functionalit
 
 Once we introduce a database into the mix, it is useful to inspect the state persisted in the database, e.g. from the control panel in MongoDB Atlas. Quite often little Node helper programs like the <i>mongo.js</i> program we wrote earlier can be very helpful during development.
 
-You can find the code for our current application in its entirety in the <i>part3-3</i> branch of [this Github repository](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part3-3).
+You can find the code for our current application in its entirety in the <i>part3-3</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3).
 
 </div>
 
@@ -897,7 +897,7 @@ mongoose.set('useFindAndModify', false) // highlight-line
 module.exports = mongoose.model('Note', noteSchema) 
 ```
 
-You can find the code for our current application in its entirety in the <i>part3-4</i> branch of [this github repository](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part3-4).
+You can find the code for our current application in its entirety in the <i>part3-4</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4).
 
 </div>
 

@@ -7,9 +7,7 @@ lang: en
 
 <div class="content">
 
-
 Let's continue expanding our application by allowing users to add new notes. 
-
 
 In order to get our page to update when new notes are added it's best to store the notes in the <i>App</i> component's state. Let's import the [useState](https://reactjs.org/docs/hooks-state.html) function and use it to define a piece of state that gets initialized with the initial notes array passed in the props. 
 
@@ -20,26 +18,20 @@ import Note from './components/Note'
 const App = (props) => { // highlight-line
   const [notes, setNotes] = useState(props.notes) // highlight-line
 
-  const rows = () => notes.map(note =>
-    <Note
-      key={note.id}
-      note={note}
-    />
-  )
-
   return (
     <div>
       <h1>Notes</h1>
       <ul>
-        {rows()}
+        {notes.map((note, i) => 
+          <Note key={i} note={note} />
+        )}
       </ul>
     </div>
   )
 }
 
-export default App
+export default App 
 ```
-
 
 The component uses the <em>useState</em> function to initialize the piece of state stored in <em>notes</em> with the array of notes passed in the props:
 
@@ -70,37 +62,35 @@ Next, let's add an HTML [form](https://developer.mozilla.org/en-US/docs/Learn/HT
 
 ```js
 const App = (props) => {
-  const [notes, setNotes] = useState(props.notes) 
-
-  const rows = () => // ...
+  const [notes, setNotes] = useState(props.notes)
 
 // highlight-start 
   const addNote = (event) => {
     event.preventDefault()
     console.log('button clicked', event.target)
   }
- // highlight-end  
+  // highlight-end   
 
   return (
     <div>
       <h1>Notes</h1>
       <ul>
-        {rows()}
+        {notes.map((note, i) => 
+          <Note key={i} note={note} />
+        )}
       </ul>
-// highlight-start    
+      // highlight-start 
       <form onSubmit={addNote}>
         <input />
         <button type="submit">save</button>
       </form>   
-// highlight-end       
+      // highlight-end   
     </div>
   )
 }
 ```
 
-
 We have added the _addNote_ function as an event handler to the form element that will be called when the form is submitted by clicking the submit button.
-
 
 We use the method discussed in [part 1](/en/part1/component_state_event_handlers#event-handling) for defining our event handler:
 
@@ -110,7 +100,6 @@ const addNote = (event) => {
   console.log('button clicked', event.target)
 }
 ```
-
 
 The <em>event</em> parameter is the [event](https://reactjs.org/docs/handling-events.html) that triggers the call to the event handler function: 
 
@@ -134,29 +123,34 @@ Let's add a new piece of state called <em>newNote</em> for storing the user subm
 
 ```js
 const App = (props) => {
-  const [notes, setNotes] = useState(props.notes) 
+  const [notes, setNotes] = useState(props.notes)
   // highlight-start
   const [newNote, setNewNote] = useState(
     'a new note...'
   ) 
   // highlight-end
-  // ...
+
+  const addNote = (event) => {
+    event.preventDefault()
+    console.log('button clicked', event.target)
+  }
 
   return (
     <div>
       <h1>Notes</h1>
       <ul>
-        {rows()}
+        {notes.map((note, i) => 
+          <Note key={i} note={note} />
+        )}
       </ul>
       <form onSubmit={addNote}>
-        <input value={newNote} /> // highlight-line
+        <input value={newNote} /> //highlight-line
         <button type="submit">save</button>
-      </form>      
+      </form>   
     </div>
   )
 }
 ```
-
 
 The placeholder text stored as the initial value of the <em>newNote</em> state appears in the <i>input</i> element, but the input text can't be edited. The console displays a warning that gives us a clue as to what might be wrong:
 
@@ -168,12 +162,13 @@ In order to enable editing of the input element, we have to register an <i>event
 
 ```js
 const App = (props) => {
-  const [notes, setNotes] = useState(props.notes) 
+  const [notes, setNotes] = useState(props.notes)
   const [newNote, setNewNote] = useState(
     'a new note...'
-  )
+  ) 
 
   // ...
+
 // highlight-start
   const handleNoteChange = (event) => {
     console.log(event.target.value)
@@ -185,7 +180,9 @@ const App = (props) => {
     <div>
       <h1>Notes</h1>
       <ul>
-        {rows()}
+        {notes.map((note, i) => 
+          <Note key={i} note={note} />
+        )}
       </ul>
       <form onSubmit={addNote}>
         <input
@@ -193,7 +190,7 @@ const App = (props) => {
           onChange={handleNoteChange} // highlight-line
         />
         <button type="submit">save</button>
-      </form>      
+      </form>   
     </div>
   )
 }
@@ -227,8 +224,7 @@ You can follow along in the console to see how the event handler is called:
 
 You did remember to install [React devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi), right? Good. You can directly view how the state changes from the React Devtools tab:
 
-![](../../images/2/9e.png)
-
+![](../../images/2/9ea.png)
 
 Now the <i>App</i> component's <em>newNote</em> state reflects the current value of the input, which means that we can complete the <em>addNote</em> function for creating new notes:
 
@@ -263,7 +259,7 @@ The event handler also resets the value of the controlled input element by calli
 setNewNote('')
 ```
 
-You can find the code for our current application in its entirety in the <i>part2-2</i> branch of [this github repository](https://github.com/fullstackopen-2019/part2-notes/tree/part2-2).
+You can find the code for our current application in its entirety in the <i>part2-2</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part2-2).
 
 ### Filtering Displayed Elements
 
@@ -281,12 +277,18 @@ const App = (props) => {
 }
 ```
 
-
 Let's change the component so that it stores a list of all the notes to be displayed in the <em>notesToShow</em> variable. The items of the list depends on the state of the component:
 
 ```js
+import React, { useState } from 'react'
+import Note from './components/Note'
+
 const App = (props) => {
-  // ..
+  const [notes, setNotes] = useState(props.notes)
+  const [newNote, setNewNote] = useState('') 
+  const [showAll, setShowAll] = useState(true)
+
+  // ...
 
 // highlight-start
   const notesToShow = showAll
@@ -294,15 +296,18 @@ const App = (props) => {
     : notes.filter(note => note.important === true)
 // highlight-end
 
-  const rows = () => notesToShow.map(note => // highlight-line
-    <Note
-      key={note.id}
-      note={note}
-    />
+  return (
+    <div>
+      <h1>Notes</h1>
+      <ul>
+        {notesToShow.map((note, i) => // highlight-line
+          <Note key={i} note={note} />
+        )}
+      </ul>
+      // ...
+    </div>
   )
-
-  // ...
-}  
+}
 ```
 
 The definition of the <em>notesToShow</em> variable is rather compact
@@ -392,7 +397,7 @@ The text of the button depends on the value of the <em>showAll</em> state:
 show {showAll ? 'important' : 'all'}
 ```
 
-You can find the code for our current application in its entirety in the <i>part2-3</i> branch of [this github repository](https://github.com/fullstackopen-2019/part2-notes/tree/part2-3).
+You can find the code for our current application in its entirety in the <i>part2-3</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part2-3).
 </div>
 
 <div class="tasks">

@@ -92,7 +92,7 @@ export default App
 ```
 
 
-Current application code can be found on [Github](https://github.com/fullstackopen-2019/part2-notes/tree/part5-1), branch <i>part5-1</i>.
+Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-1), branch <i>part5-1</i>.
 
 
 The login form is handled the same way we handled forms in 
@@ -330,7 +330,7 @@ The solution looks a bit ugly, but we'll leave it for now.
 Our main component <i>App</i> is at the moment way too large. The changes we did now are a clear sign that the forms should be refactored into their own components. However, we will leave that for an optional excercise. 
 
 
-Current application code can be found on [Github](https://github.com/fullstackopen-2019/part2-notes/tree/part5-2), branch <i>part5-2</i>.
+Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-2), branch <i>part5-2</i>.
 
 ### Creating new notes
 
@@ -550,7 +550,7 @@ window.localStorage.clear()
 ```
 
 
-Current application code can be found on [Github](https://github.com/fullstackopen-2019/part2-notes/tree/part5-3), branch <i>part5-3</i>.
+Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-3), branch <i>part5-3</i>.
 
 </div>
 
@@ -559,7 +559,7 @@ Current application code can be found on [Github](https://github.com/fullstackop
 ### Exercises
 
 
-We will now create a frontend for the bloglist backend we created in the last part. You can use [this application](https://github.com/fullstackopen-2019/bloglist-frontend) from GitHub as the base of your solution. The application expects your backend to be running on port 3003. 
+We will now create a frontend for the bloglist backend we created in the last part. You can use [this application](https://github.com/fullstack-hy2020/bloglist-frontend) from GitHub as the base of your solution. The application expects your backend to be running on port 3003. 
 
 It is enough to submit your finished solution. You can do a commit after each exercise, but that is not necessary. 
 
@@ -575,10 +575,10 @@ While doing the exercises, remember all of the debugging methods we have talked 
 #### 5.1: bloglist frontend, step1
 
 
-Clone the application from [Github](https://github.com/fullstackopen-2019/bloglist-frontend) with the command: 
+Clone the application from [Github](https://github.com/fullstack-hy2020/bloglist-frontend) with the command: 
 
 ```bash
-git clone https://github.com/fullstackopen-2019/bloglist-frontend
+git clone https://github.com/fullstack-hy2020/bloglist-frontend
 ```
 
 

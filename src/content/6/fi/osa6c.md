@@ -235,7 +235,7 @@ export const createNote = (data) => {
 
 Muistiinpanojen tärkeyden muuttaminen olisi mahdollista toteuttaa samalla periaatteella, eli tehdä palvelimelle ensin asynkroninen metodikutsu ja sen jälkeen dispatchata sopiva action.
 
-Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstackopen-2019/redux-notes/tree/part6-5) branchissa <i>part6-5</i>.
+Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5) branchissa <i>part6-5</i>.
 
 </div>
 
@@ -247,7 +247,7 @@ Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstackop
 
 Hae sovelluksen käynnistyessä anekdootit json-serverillä toteutetusta backendistä.
 
-Backendin alustavan sisällön saat esim. [täältä](https://github.com/fullstackopen-2019/misc/blob/master/anecdotes.json).
+Backendin alustavan sisällön saat esim. [täältä](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json).
 
 #### 6.17 anekdootit ja backend, step2
 
@@ -409,7 +409,7 @@ export default connect(
 )(NewNote)
 ```
 
-Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstackopen-2019/redux-notes/tree/part6-6) branchissa <i>part6-6</i>.
+Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-6) branchissa <i>part6-6</i>.
 
 ### Redux DevTools
 

@@ -127,7 +127,7 @@ The _config_ module that we have implemented slightly resembles the [node-config
 These are the only changes we need to make to our application's code.
 
 
-You can find the code for our current application in its entirety in the <i>part4-2</i> branch of [this github repository](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part4-2).
+You can find the code for our current application in its entirety in the <i>part4-2</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-2).
 
 
 
@@ -570,7 +570,7 @@ notesRouter.get('/', async (request, response) => {
 We can verify that our refactoring was successful by testing the endpoint through the browser and by running the tests that we wrote earlier.
 
 
-You can find the code for our current application in its entirety in the <i>part4-3</i> branch of [this Github repository](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part4-3).
+You can find the code for our current application in its entirety in the <i>part4-3</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-3).
 
 
 ### More tests and refactoring the backend
@@ -912,7 +912,7 @@ This begs the question, would it be possible to refactor the repeated <i>catch</
 Not everyone is convinced that the async/await syntax is a good addition to JavaScript. To provide an example, you can read [ES7 async functions - a step in the wrong direction](https://spion.github.io/posts/es7-async-await-step-in-the-wrong-direction.html).
 
 
-You can find the code for our current application in its entirety in the <i>part4-4</i> branch of [this github repository](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part4-4). The same branch also contains a slightly improved version of tests from the next part of the course material.
+You can find the code for our current application in its entirety in the <i>part4-4</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4). The same branch also contains a slightly improved version of tests from the next part of the course material.
 
 
 ### Optimizing the beforeEach function
@@ -1261,7 +1261,7 @@ There is still room for improvement, but it is time to move forward.
 This way of testing the API, by making HTTP requests and inspecting the database with Mongoose, is by no means the only nor the best way of conducting API-level integration tests for server applications. There is no universal best way of writing tests, as it all depends on the application being tested and available resources.
 
 
-You can find the code for our current application in its entirety in the <i>part4-5</i> branch of [this Github repository](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part4-5).
+You can find the code for our current application in its entirety in the <i>part4-5</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5).
 
 </div>
 

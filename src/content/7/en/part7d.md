@@ -20,7 +20,7 @@ It is beneficial to at least be familiar with Class Components to some extent, s
 
 
 
-Let's get to know the main features of Class Components by producing yet another very familiar anecdote application. We store the anecdotes in the file <i>db.json</i> using <i>json-server</i>. The contents of the file are lifted from [here](https://github.com/fullstackopen-2019/misc/blob/master/anecdotes.json).
+Let's get to know the main features of Class Components by producing yet another very familiar anecdote application. We store the anecdotes in the file <i>db.json</i> using <i>json-server</i>. The contents of the file are lifted from [here](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json).
 
 
 
@@ -617,7 +617,7 @@ so after the modification an HTTP POST request to the backend endpoint <i>/api/t
 
 
 
-The code for the modified backend can be found in full on [github](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part7-1), in the branch <i>part7-1</i>.
+The code for the modified backend can be found in full on [github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part7-1), in the branch <i>part7-1</i>.
 
 
 
@@ -741,7 +741,7 @@ describe('Note app', function() {
 
 
 
-The tests and the code for the frontend can be found in full on [github](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part7-1), in the branch <i>part7-1</i>.
+The tests and the code for the frontend can be found in full on [github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part7-1), in the branch <i>part7-1</i>.
 
 
 

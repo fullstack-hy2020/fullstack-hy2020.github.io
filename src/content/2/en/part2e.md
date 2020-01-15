@@ -239,7 +239,7 @@ The result looks like this:
 ![](../../images/2/26e.png)
 
 
-The code for the current state of our application can be found in the  <i>part2-7</i> branch on [github](https://github.com/fullstackopen-2019/part2-notes/tree/part2-7).
+The code for the current state of our application can be found in the  <i>part2-7</i> branch on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-7).
 
 
 ### Inline styles

@@ -635,7 +635,7 @@ const resolvers = {
 So every time a <i>Person</i> object is returned, the fields <i>name</i>, <i>phone</i> and <i>id</i> are returned using their default resolvers, but the field <i>address</i> is formed by using a self defined resolver. The parameter _root_ of the resolver function is the person-object, so the street and the city of the address can be taken from its fields. 
 
 
-The current code of the application can be found on [ Github](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-1), branch <i>part8-1</i>.
+The current code of the application can be found on [ Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-1), branch <i>part8-1</i>.
 
 ### Mutations
 
@@ -790,7 +790,7 @@ So if the name to be added already exists in the phonebook, throw _UserInputErro
 ![](../../images/8/6.png)
 
 
-The current code of the application can be found on [ Github](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-2), branch <i>part8-2</i>.
+The current code of the application can be found on [ Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-2), branch <i>part8-2</i>.
 
 ### Enum
 
@@ -905,7 +905,7 @@ Mutation: {
 
 The mutation finds the person to be updated person by the field <i>name</i>.
 
-The current code of the application can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>.
+The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>.
 
 ### More on queries
 
@@ -996,7 +996,7 @@ If there are multiple queries, Playground asks you to choose which of them to ru
 
 
 Through the exercises, we will implement a GraphQL backend for a small library. 
-Start with [this file](https://github.com/fullstackopen-2019/misc/blob/master/library-backend.js). Remember _npm init_ and to install dependencies!
+Start with [this file](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js). Remember _npm init_ and to install dependencies!
 
 #### 8.1: The number of books and authors
 

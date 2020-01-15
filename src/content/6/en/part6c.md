@@ -271,7 +271,7 @@ Changing the importance of notes could be implemented using the same principle, 
 
 
 
-The current state of the code for the application can be found on [github](https://github.com/fullstackopen-2019/redux-notes/tree/part6-5) in the branch <i>part6-5</i>.
+The current state of the code for the application can be found on [github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5) in the branch <i>part6-5</i>.
 
 </div>
 
@@ -288,7 +288,7 @@ When the application launches, fetch the anecdotes from the backend implemented 
 
 
 
-As the initial backend data, you can use, e.g. [this](https://github.com/fullstackopen-2019/misc/blob/master/anecdotes.json).
+As the initial backend data, you can use, e.g. [this](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json).
 
 
 #### 6.17 Anecdotes and the backend, step2
@@ -484,7 +484,7 @@ export default connect(
 
 
 
-The current state of the code for the application can be found on [github](https://github.com/fullstackopen-2019/redux-notes/tree/part6-6) in the branch <i>part6-6</i>.
+The current state of the code for the application can be found on [github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-6) in the branch <i>part6-6</i>.
 
 
 ### Redux DevTools
@@ -545,7 +545,7 @@ We have come a long way in this course and, finally, we have come to the point a
 
 What about the _useState_-hook, which provides components with their own state? Does it have any role if an application is using Redux or some other external state management solution? If the application has more complicated forms, it may be beneficial to implement their local state using the state provided by the _useState_ function. One can, of course, have Redux manage the state of the forms, however, if the state of the form is only relevant when filling the form (e.g. for validation) it may be wise to leave the management of state to the component responsible for the form.
 
-The final version of the code for the application can be found on [github](https://github.com/fullstackopen-2019/redux-notes/tree/part6-7) in the branch <i>part6-7</i>.
+The final version of the code for the application can be found on [github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-7) in the branch <i>part6-7</i>.
 
 </div>
 

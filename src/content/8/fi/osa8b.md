@@ -7,7 +7,7 @@ lang: fi
 
 <div class="content">
 
-Toteutetaan seuraavaksi React-sovellus, joka käyttää toteuttamaamme GraphQL-palvelinta. Palvelimen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-3), branchissa <i>part8-3</i>.
+Toteutetaan seuraavaksi React-sovellus, joka käyttää toteuttamaamme GraphQL-palvelinta. Palvelimen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branchissa <i>part8-3</i>.
 
 GraphQL:ää on periaatteessa mahdollista käyttää HTTP POST -pyyntöjen avulla. Seuraavassa esimerkki Postmanilla tehdystä kyselystä.
 
@@ -353,7 +353,7 @@ Jos tilalla _person_ on arvo, näytetään kaikkien henkilöiden sijaan yhden he
 
 Ratkaisu ei ole siistein mahdollinen mutta saa kelvata meille.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-1), branchissa <i>part8-1</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-1), branchissa <i>part8-1</i>.
 
 ### Välimuisti
 
@@ -558,7 +558,7 @@ Muitakin tapoja välimuistin tilan päivittämiseksi on, niistä lisää myöhem
 
 **HUOM** Apollo Client devtools vaikuttaa olevan hieman buginen, se lopettaa jossain vaiheessa välimuistin tilan päivittämisen. Jos törmäät ongelmaan, avaa sovellus uudessa välilehdessä.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-2), branchissa <i>part8-2</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-2), branchissa <i>part8-2</i>.
 
 #### Mutaatioiden virheiden käsittely
 
@@ -615,7 +615,7 @@ Poikkeuksesta tiedotetaan nyt käyttäjälle yksinkertaisella notifikaatiolla.
 
 ![](../../images/8/15.png)
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-3), branchissa <i>part8-3</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-3), branchissa <i>part8-3</i>.
 
 ### Puhelinnumeron päivitys
 
@@ -724,7 +724,7 @@ Jos yritämme vaihtaa olemattomaan nimeen liittyvän puhelinnumeron, ei mitään
 
 ![](../../images/8/23.png)
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-4), branchissa <i>part8-4</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4), branchissa <i>part8-4</i>.
 
 ### Apollo Client ja sovelluksen tila
 
@@ -928,7 +928,7 @@ Huomaa, että _useMutation_ palauttaa taulukon, jonka ensimmäinen elementti on 
 
 Lopputulos on todellakin monin verroin selkeämpi kuin render props -komponentteja käyttävä sotku. Voimme yhtyä Ryan Florencen React Confissa 2018 esittämään mielipiteeseen [90% Cleaner React With Hooks](https://www.youtube.com/watch?v=wXLf18DsV-I).
 
-Sovelluksen kirjastoa react-apollo-hooks käyttävä koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-5), branchissa <i>part8-5</i>.
+Sovelluksen kirjastoa react-apollo-hooks käyttävä koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5), branchissa <i>part8-5</i>.
 
 
 </div>
@@ -939,7 +939,7 @@ Sovelluksen kirjastoa react-apollo-hooks käyttävä koodi on kokonaisuudessaan 
 
 Tehtävissä toteutetaan edellisen osan tehtävissä tehdylle backendille frontend.
 
-Ota sovelluksesi lähtökohdaksi [tämä projekti](https://github.com/fullstackopen-2019/library-frontend).
+Ota sovelluksesi lähtökohdaksi [tämä projekti](https://github.com/fullstack-hy2020/library-frontend).
 
 Voit tehdä sovelluksesi joko käyttäen Apollo Clientin render prop -komponentteja <i>Query</i> ja <i>Mutation</i> tai Apollo client 3.0 beta-version tarjoamien hookien avulla.
 

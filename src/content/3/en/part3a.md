@@ -934,10 +934,10 @@ If the data saved in the _body_ variable has the <i>important</i> property, the 
 > To be exact, when the <i>important</i> property is <i>false</i>, then the <em>body.important || false</em> expression will in fact return the <i>false</i> from the right-hand side...
 
 
-You can find the code for our current application in its entirety in the <i>part3-1</i> branch of [this github repository](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part3-1).
+You can find the code for our current application in its entirety in the <i>part3-1</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1).
 
 
-Notice that the master branch of the repository contains the code from a later version of the application. The code for the current state of the application is specifically in branch [part3-1](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part3-1).
+Notice that the master branch of the repository contains the code from a later version of the application. The code for the current state of the application is specifically in branch [part3-1](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1).
 
 ![](../../images/3/21.png)
 
@@ -1151,7 +1151,7 @@ app.use(unknownEndpoint)
 ```
 
 
-You can find the code for our current application in its entirety in the <i>part3-2</i> branch of [this github repository](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part3-2).
+You can find the code for our current application in its entirety in the <i>part3-2</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2).
 
 </div>
 

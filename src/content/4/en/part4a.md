@@ -325,7 +325,7 @@ For smaller applications the structure does not matter that much. Once the appli
 
 There is no strict directory structure or file naming convention that is required for Express applications. To contrast this, Ruby on Rails does require a specific structure. Our current structure simply follows some of the best practices you can come across on the internet.
 
-You can find the code for our current application in its entirety in the <i>part4-1</i> branch of [this Github repository](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part4-1).
+You can find the code for our current application in its entirety in the <i>part4-1</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-1).
 
 If you clone the project for yourself, run the _npm install_ command before starting the application with _npm start_.
 
@@ -736,7 +736,7 @@ describe('total likes', () => {
 ```
 
 
-If defining your own test input list of blogs is too much work, you can use the ready-made list [here](https://github.com/fullstackopen-2019/misc/blob/master/blogs_for_test.md).
+If defining your own test input list of blogs is too much work, you can use the ready-made list [here](https://github.com/fullstack-hy2020/misc/blob/master/blogs_for_test.md).
 
 
 You are bound to run into problems while writing tests. Remember the things that we learned about [debugging](/en/part3/saving_data_to_mongo_db#debugging-node-applications) in part 3. You can print things to the console with _console.log_ even during test execution. It is even possible to use the debugger while running tests, you can find instructions for that [here](https://jestjs.io/docs/en/troubleshooting).

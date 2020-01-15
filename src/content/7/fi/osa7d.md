@@ -13,7 +13,7 @@ Class-, eli luokkakomponentit on syytä tuntea ainakin jossain määrin, sillä 
 
 ### Luokkakomponentit
 
-Tutustutaan nyt luokkakomponenttien tärkeimpiin ominaisuuksiin toteuttamalla jälleen kerran jo niin tuttu anekdoottisovellus. Talletetaan anekdootit <i>json-serveriä</i> hyödyntäen tiedostoon <i>db.json</i>. Tiedoston sisältö otetaan [täältä](https://github.com/fullstackopen-2019/misc/blob/master/anecdotes.json).
+Tutustutaan nyt luokkakomponenttien tärkeimpiin ominaisuuksiin toteuttamalla jälleen kerran jo niin tuttu anekdoottisovellus. Talletetaan anekdootit <i>json-serveriä</i> hyödyntäen tiedostoon <i>db.json</i>. Tiedoston sisältö otetaan [täältä](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json).
 
 Luokkakomponentin ensimmäinen versio näyttää seuraavalta
 
@@ -515,7 +515,7 @@ module.exports = app
 
 eli lisäyksen jälkeen HTTP POST -operaatio backendin endpointiin <i>/api/testing/reset</i> tyhjentää tietokannan.
 
-Backendin testejä varten muokattu koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/part3-notes-backend/tree/part7-1), branchissä <i>part7-1</i>.
+Backendin testejä varten muokattu koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part7-1), branchissä <i>part7-1</i>.
 
 Tällä hetkellä sovelluksen käyttöliittymän ei ole mahdollista luoda käyttäjiä järjestelmään. Testien alustuksessa on siis suoraan luotava testikäyttäjä backendiin.
 
@@ -631,7 +631,7 @@ describe('Note app', function() {
 })
 ```
 
-Testit ja frontendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/part2-notes/tree/part7-1), branchissa <i>part7-1</i>.
+Testit ja frontendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part7-1), branchissa <i>part7-1</i>.
 
 Cypress tarjoaa melko hyvät mahdollisuudet testien [debuggaamiseen](https://docs.cypress.io/guides/getting-started/writing-your-first-test.html#Debugging). Testin kunkin vaiheen aikaista sovelluksen DOM:in tilaa on erittäin helppo tarkastella:
 

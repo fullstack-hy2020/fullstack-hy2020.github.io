@@ -299,7 +299,7 @@ Next let's define the form component inside of a <i>Togglable</i> component:
 ```
 
 
-You can find the code for our current application in its entirety in the <i>part5-4</i> branch of [this github repository](https://github.com/fullstackopen-2019/part2-notes/tree/part5-4).
+You can find the code for our current application in its entirety in the <i>part5-4</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-4).
 
 
 ### References to components with ref
@@ -410,7 +410,7 @@ This trick works for changing the state of a component, but it looks a bit unple
 
 There are also [other use cases](https://reactjs.org/docs/refs-and-the-dom.html) for refs than accessing React components.
 
-You can find the code for our current application in its entirety in the <i>part5-5</i> branch of [this github repository](https://github.com/fullstackopen-2019/part2-notes/tree/part5-5).
+You can find the code for our current application in its entirety in the <i>part5-5</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5).
 
 ### One point about components
 
@@ -750,7 +750,7 @@ Let us also create a npm script to run the lint:
 }
 ```
 
-You can find the code for our current application in its entirety in the <i>part5-6</i> branch of [this github repository](https://github.com/fullstackopen-2019/part2-notes/tree/part5-6).
+You can find the code for our current application in its entirety in the <i>part5-6</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-6).
 
 </div>
 

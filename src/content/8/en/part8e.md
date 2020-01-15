@@ -243,7 +243,7 @@ It's possible to test the subscriptions with the GraphQL playground like this:
 When you press "play" on a subscription, the playground waits for notifications from the subscription. 
 
 
-The backend code can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-6), branch <i>part8-6</i>.
+The backend code can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-6), branch <i>part8-6</i>.
 
 ### Subscriptions on the client
 
@@ -410,7 +410,7 @@ const App = () => {
 }
 ```
 
-The final code of the client can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-frontend/tree/part8-9), branch <i>part8-9</i>.
+The final code of the client can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-9), branch <i>part8-9</i>.
 
 ### n+1-problem
 

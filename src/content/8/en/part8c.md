@@ -204,7 +204,7 @@ Mutation: {
 }
 ```
 
-The finished code of the backend can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-4), branch <i>part8-4</i>.
+The finished code of the backend can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4), branch <i>part8-4</i>.
 
 
 ### User and log in
@@ -456,7 +456,7 @@ addAsFriend: async (root, args, { currentUser }) => {
 ```
 
 
-The code of the backend can be found on [Github](https://github.com/fullstackopen-2019/graphql-phonebook-backend/tree/part8-5) branch <i>part8-5</i>.
+The code of the backend can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-5) branch <i>part8-5</i>.
 
 
 </div>
@@ -468,7 +468,7 @@ The code of the backend can be found on [Github](https://github.com/fullstackope
 #### 8.13: Database, part 1
 
 
-Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstackopen-2019/misc/blob/master/library-schema.md).
+Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstack-hy2020/misc/blob/master/library-schema.md).
 
 
 Let's change the book graphql schema a little

@@ -18,24 +18,19 @@ import Note from './components/Note'
 const App = (props) => { // highlight-line
   const [notes, setNotes] = useState(props.notes) // highlight-line
 
-  const rows = () => notes.map(note =>
-    <Note
-      key={note.id}
-      note={note}
-    />
-  )
-
   return (
     <div>
       <h1>Notes</h1>
       <ul>
-        {rows()}
+        {notes.map((note, i) => 
+          <Note key={i} note={note} />
+        )}
       </ul>
     </div>
   )
 }
 
-export default App
+export default App 
 ```
 
 Komponentti siis alustaa funktion <em>useState</em> avulla tilan  <em>notes</em> arvoksi propseina välitettävän alustavan muistiinpanojen listan:
@@ -64,29 +59,29 @@ Lisätään seuraavaksi komponenttiin lomake eli HTML [form](https://developer.m
 
 ```js
 const App = (props) => {
-  const [notes, setNotes] = useState(props.notes) 
-
-  const rows = () => // ...
+  const [notes, setNotes] = useState(props.notes)
 
 // highlight-start 
   const addNote = (event) => {
     event.preventDefault()
     console.log('button clicked', event.target)
   }
- // highlight-end  
+  // highlight-end   
 
   return (
     <div>
       <h1>Notes</h1>
       <ul>
-        {rows()}
+        {notes.map((note, i) => 
+          <Note key={i} note={note} />
+        )}
       </ul>
-// highlight-start    
+      // highlight-start 
       <form onSubmit={addNote}>
         <input />
         <button type="submit">save</button>
       </form>   
-// highlight-end       
+      // highlight-end   
     </div>
   )
 }
@@ -121,24 +116,30 @@ Lisätään komponentille <i>App</i> tila <em>newNote</em> lomakkeen syötettä 
 
 ```js
 const App = (props) => {
-  const [notes, setNotes] = useState(props.notes) 
+  const [notes, setNotes] = useState(props.notes)
   // highlight-start
   const [newNote, setNewNote] = useState(
     'a new note...'
   ) 
   // highlight-end
-  // ...
+
+  const addNote = (event) => {
+    event.preventDefault()
+    console.log('button clicked', event.target)
+  }
 
   return (
     <div>
       <h1>Notes</h1>
       <ul>
-        {rows()}
+        {notes.map((note, i) => 
+          <Note key={i} note={note} />
+        )}
       </ul>
       <form onSubmit={addNote}>
-        <input value={newNote} /> // highlight-line
+        <input value={newNote} /> //highlight-line
         <button type="submit">save</button>
-      </form>      
+      </form>   
     </div>
   )
 }
@@ -154,12 +155,13 @@ Jotta kontrolloidun syötekomponentin editoiminen olisi mahdollista, täytyy sil
 
 ```js
 const App = (props) => {
-  const [notes, setNotes] = useState(props.notes) 
+  const [notes, setNotes] = useState(props.notes)
   const [newNote, setNewNote] = useState(
     'a new note...'
-  )
+  ) 
 
   // ...
+
 // highlight-start
   const handleNoteChange = (event) => {
     console.log(event.target.value)
@@ -171,7 +173,9 @@ const App = (props) => {
     <div>
       <h1>Notes</h1>
       <ul>
-        {rows()}
+        {notes.map((note, i) => 
+          <Note key={i} note={note} />
+        )}
       </ul>
       <form onSubmit={addNote}>
         <input
@@ -179,7 +183,7 @@ const App = (props) => {
           onChange={handleNoteChange} // highlight-line
         />
         <button type="submit">save</button>
-      </form>      
+      </form>   
     </div>
   )
 }
@@ -213,7 +217,7 @@ Voit seurata konsolista miten tapahtumankäsittelijää kutsutaan:
 
 Muistithan jo asentaa [React devtoolsin](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)? Devtoolsista näet, miten tila muuttuu syötekenttään kirjoitettaessa:
 
-![](../../images/2/9e.png)
+![](../../images/2/9ea.png)
 
 Nyt komponentin <i>App</i> tila <em>newNote</em> heijastaa koko ajan syötekentän arvoa, joten voimme viimeistellä uuden muistiinpanon lisäämisestä huolehtivan metodin <em>addNote</em>:
 
@@ -248,7 +252,7 @@ Tapahtumankäsittelijä tyhjentää myös syötekenttää kontrolloivan tilan <e
 setNewNote('')
 ```
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/part2-notes/tree/part2-2), branchissä <i>part2-2</i>.
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part2-2), branchissä <i>part2-2</i>.
 
 ### Näytettävien elementtien filtteröinti
 
@@ -269,8 +273,15 @@ const App = (props) => {
 Muutetaan komponenttia siten, että se tallettaa muuttujaan <em>notesToShow</em> näytettävien muistiinpanojen listan riippuen siitä tuleeko näyttää kaikki vai vain tärkeät:
 
 ```js
+import React, { useState } from 'react'
+import Note from './components/Note'
+
 const App = (props) => {
-  // ..
+  const [notes, setNotes] = useState(props.notes)
+  const [newNote, setNewNote] = useState('') 
+  const [showAll, setShowAll] = useState(true)
+
+  // ...
 
 // highlight-start
   const notesToShow = showAll
@@ -278,15 +289,18 @@ const App = (props) => {
     : notes.filter(note => note.important === true)
 // highlight-end
 
-  const rows = () => notesToShow.map(note => // highlight-line
-    <Note
-      key={note.id}
-      note={note}
-    />
+  return (
+    <div>
+      <h1>Notes</h1>
+      <ul>
+        {notesToShow.map((note, i) => // highlight-line
+          <Note key={i} note={note} />
+        )}
+      </ul>
+      // ...
+    </div>
   )
-
-  // ...
-}  
+}
 ```
 
 Muuttujan <em>notesToShow</em> määrittely on melko kompakti
@@ -338,26 +352,26 @@ const App = (props) => {
 
   // ...
 
+  const notesToShow = showAll
+    ? notes
+    : notes.filter(note => note.important)
+
   return (
     <div>
       <h1>Notes</h1>
-// highlight-start      
+      // highlight-start  
       <div>
         <button onClick={() => setShowAll(!showAll)}>
           show {showAll ? 'important' : 'all' }
         </button>
-      </div>
-// highlight-end            
+      </div>      
+      // highlight-end  
       <ul>
-        {rows()}
+        {notesToShow.map((note, i) => // highlight-line
+          <Note key={i} note={note} />
+        )}
       </ul>
-      <form onSubmit={addNote}>
-        <input
-          value={newNote}
-          onChange={handleNoteChange}
-        />
-        <button type="submit">save</button>
-      </form>      
+      // ...
     </div>
   )
 }
@@ -375,7 +389,7 @@ Napin teksti riippuu tilan <em>showAll</em> arvosta:
 show {showAll ? 'important' : 'all' }
 ```
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstackopen-2019/part2-notes/tree/part2-3), branchissa <i>part2-3</i>.
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part2-3), branchissa <i>part2-3</i>.
 
 </div>
 
