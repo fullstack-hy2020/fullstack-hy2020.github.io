@@ -19,19 +19,19 @@ Tehdään projektin juurihakemistoon tiedosto <i>db.json</i>, jolla on seuraava 
     {
       "id": 1,
       "content": "HTML is easy",
-      "date": "2019-05-30T17:30:31.098Z",
+      "date": "2020-01-10T17:30:31.098Z",
       "important": true
     },
     {
       "id": 2,
       "content": "Browser can execute only Javascript",
-      "date": "2019-05-30T18:39:34.091Z",
+      "date": "2020-01-10T18:39:34.091Z",
       "important": false
     },
     {
       "id": 3,
       "content": "GET and POST are the most important methods of HTTP protocol",
-      "date": "2019-05-30T19:20:14.298Z",
+      "date": "2020-01-10T19:20:14.298Z",
       "important": true
     }
   ]
@@ -50,7 +50,7 @@ Oletusarvoisesti <i>json-server</i> käynnistyy porttiin 3000, mutta create-reac
 
 Mennään selaimella osoitteeseen <http://localhost:3001/notes>. Kuten huomaamme, <i>json-server</i> tarjoaa osoitteessa tiedostoon tallentamamme muistiinpanot JSON-muodossa:
 
-![](../../images/2/14e.png)
+![](../../images/2/14ea.png)
 
 Jos selaimesi ei osaa näyttää JSON-muotoista dataa formatoituna, asenna jokin sopiva plugin, esim. [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc)
 helpottamaan elämääsi.
@@ -147,9 +147,12 @@ Nykyään lähes kaikki Javascript-projektit määritellään node "pakkausmanag
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.0",
+    "@testing-library/user-event": "^7.2.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-scripts": "3.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -160,12 +163,18 @@ Nykyään lähes kaikki Javascript-projektit määritellään node "pakkausmanag
   "eslintConfig": {
     "extends": "react-app"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
 ```
 
@@ -184,14 +193,16 @@ Nyt axios on mukana riippuvuuksien joukossa:
 ```json
 {
   "dependencies": {
-    "axios": "^0.19.0", // highlight-line
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.0",
+    "@testing-library/user-event": "^7.2.1",
+    "axios": "^0.19.1", // highlight-line
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-scripts": "3.3.0"
   },
   // ...
 }
-
 ```
 
 Sen lisäksi, että komento <em>npm install</em> lisäsi axiosin riippuvuuksien joukkoon, se myös <i>latasi</i> kirjaston koodin. Koodi löytyy muiden riippuvuuksien tapaan projektin juuren hakemistosta <i>node_modules</i>, mikä kuten huomata saattaa sisältääkin runsaasti kaikenlaista.
@@ -210,10 +221,10 @@ ja tehdään tiedoston <i>package.json</i> osaan <i>scripts</i> pieni lisäys
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server -p3001 db.json"  // highlight-line
-  }
+    "server": "json-server -p3001 --watch db.json" // highlight-line
+  },
 }
 ```
 
@@ -319,8 +330,6 @@ axios
     console.log(notes)
   })
 ```
-
-näin jo nopea, ruudun vasempaan laitaan kohdistunut vilkaisu kertoo mistä on kyse.
 
 Palvelimen palauttama data on pelkkää tekstiä, käytännössä yksi iso merkkijono. 
 Axios-kirjasto osaa kuitenkin parsia datan Javascript-taulukoksi, sillä palvelin on kertonut headerin <i>content-type</i> avulla että datan muoto on <i>application/json; charset=utf-8</i> (ks. edellinen kuva).
@@ -433,7 +442,7 @@ response => {
 
 Siinä vaiheessa kun data saapuu palvelimelta, Javascriptin runtime kutsuu rekisteröityä tapahtumankäsittelijäfunktiota, joka tulostaa konsoliin <i>promise fulfilled</i> sekä tallettaa tilaan palvelimen palauttamat muistiinpanot funktiolla <em>setNotes(response.data)</em>.
 
-Kuten aina, tilan päivittävän funktion kutsu aiheuttaa komponentin uudelleen renderöitymisen. Tämän seurauksena konsoliin tulostuu <i>render 3 notes</i> ja palvelimelta haetut muistiinpanot renderöityvät ruudulle.
+Kuten aina, <i>tilan päivittävän funktion kutsu aiheuttaa komponentin uudelleen renderöitymisen</i>. Tämän seurauksena konsoliin tulostuu <i>render 3 notes</i> ja palvelimelta haetut muistiinpanot renderöityvät ruudulle.
 
 Tarkastellaan vielä efektihookin määrittelyä kokonaisuudessaan
 
@@ -516,11 +525,11 @@ Sovelluksemme kokonaisuuden konfiguraatiosta on pikkuhiljaa muodostunut melko mo
 
 ![](../../images/2/18e.png)
 
-React-sovelluksen muodostavaa Javascript-koodia siis suoritetaan selaimessa. Selain hakee Javascriptin <i>React dev serveriltä</i>, joka on se ohjelma, mikä käynnistyy kun suoritetaan komento <em>npm start</em>. Dev-serveri muokkaa sovelluksen Javascriptin selainta varten sopivaan muotoon, se mm. yhdistelee eri tiedostoissa olevan Javascript-koodin yhdeksi tiedostoksi. Puhumme enemmän dev-serveristä kurssin osassa 7.
+React-sovelluksen muodostavaa Javascript-koodia siis suoritetaan selaimessa. Selain hakee Javascriptin <i>React dev serveriltä</i>, joka on se ohjelma, mikä käynnistyy kun suoritetaan komento <em>npm start</em>. Dev-serveri muokkaa sovelluksen Javascriptin selainta varten sopivaan muotoon, se mm. yhdistelee eri tiedostoissa olevan Javascript-koodin yhdeksi tiedostoksi. Puhumme enemmän dev-serveristä kurssin [osassa 7](/osa7).
 
 JSON-muodossa olevan datan selaimessa pyörivä React-sovellus siis hakee koneella portissa 3001 käynnissä olevalta <i>json-serveriltä</i>, joka taas saa JSON-datan tiedostosta <i>db.json</i>.
 
-Kaikki sovelluksen osat ovat näin sovelluskehitysvaiheessa ohjelmoijan koneella eli <i>localhostissa</i>. Tilanne muuttuu sitten kun sovellus viedään internettiin. Teemme näin osassa 3.
+Kaikki sovelluksen osat ovat näin sovelluskehitysvaiheessa ohjelmoijan koneella eli <i>localhostissa</i>. Tilanne muuttuu sitten kun sovellus viedään internettiin. Teemme näin [osassa 3](/osa3).
 
 </div>
 

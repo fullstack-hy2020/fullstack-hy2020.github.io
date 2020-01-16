@@ -147,9 +147,12 @@ Nowadays, practically all JavaScript projects are defined using the node package
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.0",
+    "@testing-library/user-event": "^7.2.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-scripts": "3.3.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -160,12 +163,18 @@ Nowadays, practically all JavaScript projects are defined using the node package
   "eslintConfig": {
     "extends": "react-app"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
 ```
 
@@ -185,10 +194,13 @@ Axios is now included among the other dependencies:
 ```json
 {
   "dependencies": {
-    "axios": "^0.19.0", // highlight-line
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1"
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.0",
+    "@testing-library/user-event": "^7.2.1",
+    "axios": "^0.19.1", // highlight-line
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-scripts": "3.3.0"
   },
   // ...
 }
@@ -210,10 +222,10 @@ and making a small addition to the <i>scripts</i> part of the <i>package.json</i
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server -p3001 db.json"  // highlight-line
-  }
+    "server": "json-server -p3001 --watch db.json" // highlight-line
+  },
 }
 ```
 
@@ -322,8 +334,6 @@ axios
     console.log(notes)
   })
 ```
-
-this way a quick glance at the left side of the screen gives a decent picture of what's going on.
 
 The data returned by the server is plain text, basically just one long string. The axios library is still able to parse the data into a Javascript array, since the server has specified that the data format is <i>application/json; charset=utf-8</i> (see previous image) using the <i>content-type</i> header.
 
