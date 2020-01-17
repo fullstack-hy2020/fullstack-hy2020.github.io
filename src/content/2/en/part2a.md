@@ -612,20 +612,13 @@ I added this chapter to the material after the model answer for the next questio
 
 <h3>Exercises</h3>
 
-
-
-
-
-
 The exercises are submitted via GitHub, and by marking the exercises as done in the [submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2020).
 
 You can submit all of the exercises into the same repository, or use multiple different repositories. If you submit exercises from different parts into the same repository, name your directories well.
 
 The exercises are submitted **One part at a time**. When you have submitted the exercises for a part, you can no longer submit any missed exercises for that part.
 
-
 Note that this part has more exercises than the ones before, so <i>do not submit</i> before you have done all exercises from this part you want to submit. 
-
 
 **WARNING** create-react-app makes the project automatically into a git-repository, if the project is not created inside of an already existing repository. You probably **do not** want the project to become a repository, so run the command  _rm -rf .git_ from its root. 
 
@@ -644,6 +637,7 @@ Let's change the <i>App</i> component like so:
 ```js
 const App = () => {
   const course = {
+    id: 1,
     name: 'Half Stack application development',
     parts: [
       {

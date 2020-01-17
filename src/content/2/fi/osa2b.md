@@ -405,6 +405,8 @@ Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://git
 
 Toteutetaan yksinkertainen puhelinluettelo. <i>**Aluksi luetteloon lisätään vaan nimiä.**</i>
 
+Toteutetaan tässä tehtävässä henkilön lisäys puhelinluetteloon.
+
 Voit ottaa sovelluksesi komponentin <i>App</i> pohjaksi seuraavan:
 
 ```js
@@ -449,7 +451,7 @@ Muista myös osan 1 luku [React-sovellusten debuggaus](/osa1/monimutkaisempi_til
 
 Sovellus voi näyttää tässä vaiheessa seuraavalta:
 
-![](../../images/2/10e.png)
+![](../../images/2/10ea.png)
 
 Huomaa, React developer toolsin käyttö!
 
@@ -500,7 +502,7 @@ Lisää sovellukseen mahdollisuus antaa henkilöille puhelinnumero. Tarvitset si
 
 Sovellus voi näyttää tässä vaiheessa seuraavalta. Kuvassa myös [react developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi):in tarjoama näkymä komponentin <i>App</i> tilaan:
 
-![](../../images/2/12e.png)
+![](../../images/2/12ea.png)
 
 <h4>2.9*: puhelinluettelo step4</h4>
 
@@ -558,5 +560,7 @@ const App = () => {
   )
 }
 ```
+
+**HUOM**: saatat törmätä ongelmiin tässä tehtävässä, jos määrittelet komponentteja "väärässä paikassa", nyt kannattaakin ehdottomasti kerrata edellisen osan luku [älä määrittele komponenttia komponentin sisällä](/osa1/monimutkaisempi_tila_reactin_debuggaus#ala-maarittele-komponenttia-komponentin-sisalla).
 
 </div>

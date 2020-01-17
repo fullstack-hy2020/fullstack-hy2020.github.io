@@ -406,15 +406,13 @@ You can find the code for our current application in its entirety in the <i>part
 
 In the first exercise, we will start working on an application that will be further developed in the later exercises. In related sets of exercises it is sufficient to return the final version of your application. You may also make a separate commit after you have finished each part of the exercise set, but doing so is not required.
 
-
 **WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. It's likely that you **do not want** your project to be a repository, so simply run the _rm -rf .git_ command at the root of your application.
-
 
 <h4>2.6: The Phonebook Step1</h4>
 
-
 Let's create a simple phonebook. <i>**In this part we will only be adding names to the phonebook.**</i>
 
+Let us start with implementing the addition of a person to phonebook.
 
 You can use the code below as a starting point for the <i>App</i> component of your application:
 
@@ -571,5 +569,8 @@ const App = () => {
   )
 }
 ```
+
+**HUOM**: saatat törmätä ongelmiin tässä tehtävässä, jos määrittelet komponentteja "väärässä paikassa", nyt kannattaakin ehdottomasti kerrata edellisen osan luku [älä määrittele komponenttia komponentin sisällä](/osa1/monimutkaisempi_tila_reactin_debuggaus#ala-maarittele-komponenttia-komponentin-sisalla).
+
 
 </div>

@@ -627,6 +627,7 @@ Muutetaan komponenttia <i>App</i> seuraavasti:
 const App = () => {
   const course = {
     name: 'Half Stack application development',
+    id: 1,
     parts: [
       {
         name: 'Fundamentals of React',
@@ -726,6 +727,7 @@ const App = () => {
   const courses = [
     {
       name: 'Half Stack application development',
+      id: 1,
       parts: [
         {
           name: 'Fundamentals of React',
@@ -751,6 +753,7 @@ const App = () => {
     }, 
     {
       name: 'Node.js',
+      id: 2,
       parts: [
         {
           name: 'Routing',
