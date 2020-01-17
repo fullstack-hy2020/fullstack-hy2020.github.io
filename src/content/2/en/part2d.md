@@ -145,23 +145,32 @@ const App = () => {
   // ...
 
   // highlight-start
-  const toggleImportanceOf = id => {
-    console.log(
-      'importance of ' + id + ' needs to be toggled'
-    )
+  const toggleImportanceOf = (id) => {
+    console.log('importance of ' + id + ' needs to be toggled')
   }
   // highlight-end
 
-  const rows = () => notesToShow.map(note =>
-    <Note
-      key={note.id}
-      note={note}
-      toggleImportance={() => toggleImportanceOf(note.id)} // highlight-line
-    />
-  )
+  // ...
 
   return (
-    // ...
+    <div>
+      <h1>Notes</h1>
+      <div>
+        <button onClick={() => setShowAll(!showAll)}>
+          show {showAll ? 'important' : 'all' }
+        </button>
+      </div>      
+      <ul>
+        {notesToShow.map((note, i) => 
+          <Note
+            key={i}
+            note={note} 
+            toggleImportance={() => toggleImportanceOf(note.id)} // highlight-line
+          />
+        )}
+      </ul>
+      // ...
+    </div>
   )
 }
 ```
@@ -214,15 +223,14 @@ Almost every line of code in the function body contains important details. The f
 The array [find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) method is used to find the note we want to modify, and we then assign it to the _note_ variable.
 
 
-After this we create a <i>new object</i> that is an exact copy of the old note, apart from the important property. The code for creating the new object may seem a bit strange:
+After this we create a <i>new object</i> that is an exact copy of the old note, apart from the important property. 
+
+The code for creating the new object that uses the [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax 
+may seem a bit strange:
 
 ```js
 const changedNote = { ...note, important: !note.important }
 ```
-
-
-Here the [object spread](https://github.com/tc39/proposal-object-rest-spread) syntax is being used, which hasn't yet been standardized as a part of JavaScript's language specification.
-
 
 In practice <em>{ ...note }</em> creates a new object with copies of all the properties from the _note_ object. When we add properties inside the curly braces after the spreaded object, e.g. <em>{ ...note, important: true }</em>, then the value of the _important_ property of the new object will be _true_. In our example the <em>important</em> property gets the negation of its previous value in the original object.
 

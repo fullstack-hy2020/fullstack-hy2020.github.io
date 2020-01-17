@@ -112,7 +112,7 @@ app.get('/', (req, res) => {
 ```
 You don't have to understand the code just yet. 
 
-The content of the HTML page has been saved as a template string, or a string which allows for evaluating, for example, variables in the midst of it. The dynamically changing part of the homepage, the amount of saved notes (in the code <em>noteCount</em>), is replaced by the current amount of notes (in the code <em>notes.length</em>) in the template string.
+The content of the HTML page has been saved as a template string, or a string which allows for evaluating, for example, variables in the midst of it. The dynamically changing part of the homepage, the number of saved notes (in the code <em>noteCount</em>), is replaced by the current number of notes (in the code <em>notes.length</em>) in the template string.
 
 Writing HTML in the midst of the code is of course not smart, but for old-school PHP-programmers it was a normal practice.
 

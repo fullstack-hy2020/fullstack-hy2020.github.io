@@ -46,7 +46,7 @@ Statistics on the time used for exercises which have already been submitted on d
 
 The course can be taken as a shorter course worth 3 credits, or as the full course worth 5-8 credits depending on the number of submitted exercises.
 
-The amount of credits and the grade are determined by the number of submitted exercises, so also the exercises without stars count towards your final grade. There is also a course exam, which must be passed. The exam does not count towards your grade. 
+The number of credits and the grade are determined by the number of submitted exercises, so also the exercises without stars count towards your final grade. There is also a course exam, which must be passed. The exam does not count towards your grade. 
 
 If you want university credits, save your student ID number to the "my submissions" view in the [submission system](https://github.com/fullstack-hy2020). To register for university credits that are provided by [Open university](https://courses.helsinki.fi/en/aytkt21009en/130942194), you must have a Finnish social security number. 
 
@@ -85,7 +85,7 @@ Credits and grades are calculated as follows:
 
 For university credits the 5-7 credit course also requires passing the course exam. The exam is done on Moodle. You can access Moodle through [the course page of the open university](https://courses.helsinki.fi/en/aytkt21009en/130942194). The last possible date for taking the exam is 10th January 2020 <b>Note that you must sign up for the exam on 9th January 2020 at the latest.</b>
 
-You can take the exam only after submitting enough exercises for 5 credits. In practice it is not wise to take the course exam immediately after the critical amount of exercises has been submitted. The exam is the same for 5-7 credits. The exam does not count towards your grade.
+You can take the exam only after submitting enough exercises for 5 credits. In practice it is not wise to take the course exam immediately after the critical number of exercises has been submitted. The exam is the same for 5-7 credits. The exam does not count towards your grade.
 
 Exam results can be found from the "my submissions" tab of the submission system not later than 4 weeks after taking the exam (exams might be marked slower during July).
 Remember to save your student number to the submission system.

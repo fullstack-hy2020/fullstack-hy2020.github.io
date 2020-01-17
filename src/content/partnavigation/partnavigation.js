@@ -14,10 +14,8 @@ module.exports = {
       a: 'Kokoelmien renderöinti ja moduulit',
       b: 'Lomakkeiden käsittely',
       c: 'Palvelimella olevan datan hakeminen',
-    /*
       d: 'Palvelimella olevan datan muokkaaminen',
       e: 'Tyylien lisääminen React-sovellukseen',
-      */
     },
     '3': {
     /*

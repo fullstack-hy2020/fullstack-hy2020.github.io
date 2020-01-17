@@ -137,23 +137,32 @@ const App = () => {
   // ...
 
   // highlight-start
-  const toggleImportanceOf = id => {
-    console.log(
-      'importance of ' + id + ' needs to be toggled'
-    )
+  const toggleImportanceOf = (id) => {
+    console.log('importance of ' + id + ' needs to be toggled')
   }
   // highlight-end
 
-  const rows = () => notesToShow.map(note =>
-    <Note
-      key={note.id}
-      note={note}
-      toggleImportance={() => toggleImportanceOf(note.id)} // highlight-line
-    />
-  )
+  // ...
 
   return (
-    // ...
+    <div>
+      <h1>Notes</h1>
+      <div>
+        <button onClick={() => setShowAll(!showAll)}>
+          show {showAll ? 'important' : 'all' }
+        </button>
+      </div>      
+      <ul>
+        {notesToShow.map((note, i) => 
+          <Note
+            key={i}
+            note={note} 
+            toggleImportance={() => toggleImportanceOf(note.id)} // highlight-line
+          />
+        )}
+      </ul>
+      // ...
+    </div>
   )
 }
 ```
@@ -202,13 +211,13 @@ Melkein jokaiselle riville sisältyy tärkeitä yksityiskohtia. Ensimmäinen riv
 
 Taulukon metodilla [find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) etsitään muutettava muistiinpano ja talletetaan muuttujaan _note_ viite siihen.
 
-Sen jälkeen luodaan <i>uusi olio</i>, jonka sisältö on sama kuin vanhan olion sisältö poislukien kenttä important. Luominen näyttää hieman erikoiselta:
+Sen jälkeen luodaan <i>uusi olio</i>, jonka sisältö on sama kuin vanhan olion sisältö poislukien kenttä important. 
+
+Niin sanottua [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) -syntaksia hyödyntävä uuden olion luominen näyttää hieman erikoiselta:
 
 ```js
 const changedNote = { ...note, important: !note.important }
 ```
-
-Kyseessä on vielä standardoimattoman [object spread](https://github.com/tc39/proposal-object-rest-spread) -operaation soveltaminen.
 
 Käytännössä <em>{ ... note}</em> luo olion, jolla on kenttinään kopiot olion _note_ kenttien arvoista. Kun aaltosulkeisiin lisätään asioita, esim. <em>{ ...note, important: true }</em>, tulee uuden olion kenttä _important_ saamaan arvon _true_. Eli esimerkissämme <em>important</em> saa uudessa oliossa vanhan arvonsa käänteisarvon.
 
@@ -685,7 +694,7 @@ Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://git
 
 <div class="tasks">
 
-<h3>Tehtäviä</h3>
+<h3>Tehtävät 2.15.-2.18.</h3>
 
 <h4>2.15: puhelinluettelo step7</h4>
 

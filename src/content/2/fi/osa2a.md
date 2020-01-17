@@ -603,7 +603,7 @@ Lisäsin tämän luvun materiaaliin, kun seuraavan tehtävän mallivastauksen ko
 
 <div class="tasks">
 
-<h3>Tehtäviä</h3>
+<h3>Tehtävät 2.1.-2.5.</h3>
 
 Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät [palautussovellukseen](https://study.cs.helsinki.fi/stats/courses/fullstack2020).
 

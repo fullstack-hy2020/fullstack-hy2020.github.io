@@ -1046,7 +1046,7 @@ rm -rf node_modules/ && npm i
 
 Like most companies, [Unicafe](https://www.unicafe.fi/#/9/4) collects feedback from its customers. Your task is to implement a web application for collecting customer feedback. There are only three options for feedback: <i>good</i>, <i>neutral</i>, and <i>bad</i>.
 
-The application must display the total amount of collected feedback for each category. Your final application could look like this:
+The application must display the total number of collected feedback for each category. Your final application could look like this:
 
 ![](../../images/1/13e.png)
 

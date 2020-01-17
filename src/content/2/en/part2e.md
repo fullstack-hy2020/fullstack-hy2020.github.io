@@ -165,30 +165,17 @@ const App = () => {
   return (
     <div>
       <h1>Notes</h1>
-
       <Notification message={errorMessage} /> // highlight-line
-      
       <div>
         <button onClick={() => setShowAll(!showAll)}>
-          show {showAll ? 'important' : 'all'}
+          show {showAll ? 'important' : 'all' }
         </button>
-      </div>
-      <ul>
-        {rows()}
-      </ul>
-
-      <form onSubmit={addNote}>
-        <input
-          value={newNote}
-          onChange={handleNoteChange}
-        />
-        <button type="submit">show</button>
-      </form>      
+      </div>      
+      // ...
     </div>
   )
 }
 ```
-
 
 Then let's add a style rule that suits an error message:
 
@@ -289,7 +276,7 @@ const Footer = () => {
   return (
     <div style={footerStyle}>
       <br />
-      <em>Note app, Department of Computer Science, University of Helsinki 2019</em>
+      <em>Note app, Department of Computer Science, University of Helsinki 2020</em>
     </div> 
   )
 }
@@ -311,9 +298,7 @@ const App = () => {
 }
 ```
 
-
 Inline styles come with certain limitations. For instance, so-called [pseudo-classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes) can't be used straightforwardly.
-
 
 Inline styles and some of the other ways of adding styles to React components go completely against the grain of old conventions. Traditionally, it has been considered the best practice to entirely separate CSS from the content (HTML) and functionality (JavaScript). According to this older school of thought, the goal was to write CSS, HTML, and JavaScript into their separate files.
 
@@ -323,6 +308,8 @@ The philosophy of React is, in fact, the polar opposite of this. Since the separ
 
 The structural units that make up the application's functional entities are React components. A React component defines the HTML for structuring the content, the JavaScript functions for determining functionality, and also the component's styling; all in one place. This is to create individual components that are as independent and reusable as possible.
 
+The code of the final version of our application can be found in the  <i>part2-8</i> branch on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-8).
+
 </div>
 
 <div class="tasks">
@@ -330,7 +317,6 @@ The structural units that make up the application's functional entities are Reac
 <h3>Exercises</h3>
 
 <h4>2.19: Phonebook step11</h4>
-
 
 Use the [improved error message](/en/part2/adding_styles_to_react_app#improved-error-message) example from part 2 as a guide to show a notification that lasts for a few seconds after a successful operation is executed (a person is added or a number is changed): 
 

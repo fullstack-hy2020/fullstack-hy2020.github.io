@@ -535,7 +535,7 @@ Kaikki sovelluksen osat ovat näin sovelluskehitysvaiheessa ohjelmoijan koneella
 
 <div class="tasks">
 
-<h3>Tehtäviä</h3>
+<h3>Tehtävät 2.11.-2.14.</h3>
 
 <h4>2.11: puhelinluettelo step6</h4>
 
