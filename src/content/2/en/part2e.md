@@ -346,6 +346,6 @@ Fix the issue according to the example shown in [promise and errors](/en/part2/a
 
 ![](../../images/2/28e.png)
 
-This was the last exercise of this part of the course. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/fullstackopen2019).
+This was the last exercise of this part of the course. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://github.com/fullstack-hy2020).
 
 </div>

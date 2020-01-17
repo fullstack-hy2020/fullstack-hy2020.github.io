@@ -379,7 +379,7 @@ the field <i>blog.user</i> does not contain a string, but an Object. So if you w
 if ( blog.user.toString() === userid.toString() ) ...
 ```
 
-This is the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/fullstackopen2019).
+This is the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://github.com/fullstack-hy2020).
 
 <!---
 note left of user

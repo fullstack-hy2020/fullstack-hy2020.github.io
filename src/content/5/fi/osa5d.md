@@ -483,5 +483,5 @@ Jos toteutit hookin oikein, mahdollistaa sovellus blogien ja puhelinnumeroiden y
 
 ![](../../images/5/21e.png)
 
-Tämä oli osan viimeinen tehtävä ja on aika pushata koodi githubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/fullstackopen2019).
+Tämä oli osan viimeinen tehtävä ja on aika pushata koodi githubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://github.com/fullstack-hy2020).
 </div>

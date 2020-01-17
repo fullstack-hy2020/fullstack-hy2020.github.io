@@ -207,6 +207,6 @@ Expand the coverage of your E2E tests. You can mark this exercise as finished if
 
 How did we do? Give us some feedback for the course in Moodle!
 
-This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/fullstackopen2019).
+This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://github.com/fullstack-hy2020).
 
 </div>

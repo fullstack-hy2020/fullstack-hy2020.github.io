@@ -40,7 +40,7 @@ You are expected to do <i>at least</i> all of the exercises that are not marked 
 
 The speed of completing the course is quite free, and the exercises can be submitted up until 23:59 10th January 2020. 
 
-Statistics on the time used for exercises which have already been submitted on different parts of this course can be found from [the submission system](https://studies.cs.helsinki.fi/fullstackopen2019).
+Statistics on the time used for exercises which have already been submitted on different parts of this course can be found from [the submission system](https://github.com/fullstack-hy2020).
 
 ### Grading
 
@@ -48,9 +48,9 @@ The course can be taken as a shorter course worth 3 credits, or as the full cour
 
 The amount of credits and the grade are determined by the number of submitted exercises, so also the exercises without stars count towards your final grade. There is also a course exam, which must be passed. The exam does not count towards your grade. 
 
-If you want university credits, save your student ID number to the "my submissions" view in the [submission system](https://studies.cs.helsinki.fi/fullstackopen2019). To register for university credits that are provided by [Open university](https://courses.helsinki.fi/en/aytkt21009en/130942194), you must have a Finnish social security number. 
+If you want university credits, save your student ID number to the "my submissions" view in the [submission system](https://github.com/fullstack-hy2020). To register for university credits that are provided by [Open university](https://courses.helsinki.fi/en/aytkt21009en/130942194), you must have a Finnish social security number. 
 
-You can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/fullstackopen2019) once you have completed enough exercises for a passing grade. For getting the course certificate, a Finnish social security number is not needed.
+You can download the course certificate from the [submission system](https://github.com/fullstack-hy2020) once you have completed enough exercises for a passing grade. For getting the course certificate, a Finnish social security number is not needed.
 
 #### 3 credits
 
@@ -101,7 +101,7 @@ Exercises in part 8 do not count towards the grade for the 5-7 credit course.
 
 ### Course certificate
 
-Even if you do not register to Open university course and take the exam, you can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/fullstackopen2019) once you have completed enough exercises for a passing grade. For getting the certificate, a Finnish social security number is not needed.
+Even if you do not register to Open university course and take the exam, you can download the course certificate from the [submission system](https://github.com/fullstack-hy2020) once you have completed enough exercises for a passing grade. For getting the certificate, a Finnish social security number is not needed.
 
 
 ### Expanding a previously completed course
@@ -114,13 +114,13 @@ You can only substitute parts in sequence, so you cannot for example substitute 
 
 You can only substitute whole parts. For example, if you have previously done 50% of the exercises for a part, you cannot substitute those exercises but need to start over that part on this course. 
 
-"Credit transfer" of previously completed parts happens in the <i>my submissions</i> tab of the [submission system](https://studies.cs.helsinki.fi/fullstackopen2019).
+"Credit transfer" of previously completed parts happens in the <i>my submissions</i> tab of the [submission system](https://github.com/fullstack-hy2020).
 
 If you have previously passed the course exam (excluding the exam for 3-credit course) and you are now expanding your course, you do not have to do the exam again. 
 
 ### Submitting exercises
 
-The exercises are submitted through GitHub and marking the exercises as done on the [submission system](https://studies.cs.helsinki.fi/fullstackopen2019).
+The exercises are submitted through GitHub and marking the exercises as done on the [submission system](https://github.com/fullstack-hy2020).
 
 If you are submitting exercises from different parts to the same repository, use some sensible system for naming your directories. You can of course create a new repository for each part. If you are using a private repository, add _mluukkai_ as a collaborator. 
 
