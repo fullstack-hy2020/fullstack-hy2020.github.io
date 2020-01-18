@@ -297,6 +297,8 @@ Korjaa ongelma osan 2 esimerkin [promise ja virheet](/osa2/palvelimella_olevan_d
 
 ![](../../images/2/28e.png)
 
+**HUOM** vaikka käsittelet poikkeuksen koodissa, virheilmoitus tulostuu silti konsoliin.
+
 Tämä oli osan viimeinen tehtävä ja on aika pushata koodi githubiin merkata tehdyt tehtävät [palautussovellukseen](https://study.cs.helsinki.fi/stats/courses/fullstack2020).
 
 </div>
