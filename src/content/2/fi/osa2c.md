@@ -646,6 +646,4 @@ const api_key = process.env.REACT_APP_API_KEY
 // muuttujassa api_key on nyt käynnistyksessä annettu api-avaimen arvo
 ```
 
-
-
 </div>
