@@ -606,7 +606,10 @@ Kun ehdon täyttäviä maita on enää yksi, näytetään maan perustiedot, lipp
 
 ![](../../images/2/19b3.png)
 
-**Huom:** riittää että sovelluksesi toimii suurimmalle osalle maista. Jotkut maat kuten <i>Sudan</i> voivat tuottaa ongelmia, sillä maan nimi on toisen maan <i>South Sudan</i> osa. Näistä corner caseista ei tarvitse välittää.
+**Huom1:** riittää että sovelluksesi toimii suurimmalle osalle maista. Jotkut maat kuten <i>Sudan</i> voivat tuottaa ongelmia, sillä maan nimi on toisen maan <i>South Sudan</i> osa. Näistä corner caseista ei tarvitse välittää.
+
+**Huom2:**: saatat törmätä ongelmiin tässä tehtävässä, jos määrittelet komponentteja "väärässä paikassa", nyt kannattaakin ehdottomasti kerrata edellisen osan luku [älä määrittele komponenttia komponentin sisällä](/osa1/monimutkaisempi_tila_reactin_debuggaus#ala-maarittele-komponenttia-komponentin-sisalla).
+
 
 **VAROITUS** create-react-app tekee projektista automaattisesti git-repositorion, ellei sovellusta luoda jo olemassaolevan repositorion sisälle. Todennäköisesti **et halua** että projektista tulee repositorio, joten suorita projektin juuressa komento _rm -rf .git_.
 
@@ -624,8 +627,25 @@ Tässäkin tehtävässä riittää, että ohjelmasi toimii suurella osalla maita
 
 **Tässä osassa on vielä paljon tekemistä, joten älä juutu tähän tehtävään!**
 
-Lisää yksittäisen maan näkymään pääkaupungin säätiedotus. Säätiedotuksen tarjoavia palveluita on kymmeniä. Itse käytin [https://www.apixu.com](https://www.apixu.com):ia. 
+Lisää yksittäisen maan näkymään pääkaupungin säätiedotus. Säätiedotuksen tarjoavia palveluita on kymmeniä. Itse käytin [https://weatherstack.com/](https://weatherstack.com/):ia. 
 
-![](../../images/2/19b5.png)
+![](../../images/2/19ba.png)
+
+**Huom:** tarvitset melkein kaikkia säätietoja tarjoavia palveluja käyttääksesi api-avaimen. Älä talleta avainta versionhallintaan, eli älä kirjoita avainta suoraan koodiin.  Avaimen arvo kannattaa määritellä ns. [ympäristömuuttujana](https://create-react-app.dev/docs/adding-custom-environment-variables/).
+
+Oletetaan että api-avaimen arvo on <i>54l41n3n4v41m34rv0</i>. Kun ohjelma käynnistetään seuraavasti
+
+```bash
+REACT_APP_API_KEY=54l41n3n4v41m34rv0 npm start
+```
+
+koodista päästään avaimen arvoon käsiksi olion _process.env_ kautta:
+
+```js
+const api_key = process.env.REACT_APP_API_KEY
+// muuttujassa api_key on nyt käynnistyksessä annettu api-avaimen arvo
+```
+
+
 
 </div>

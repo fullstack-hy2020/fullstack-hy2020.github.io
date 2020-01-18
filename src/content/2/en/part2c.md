@@ -631,8 +631,22 @@ In this exercise it is also enough that your application works for most of the c
 
 **There is still a lot to do in this part, so don't get stuck on this exercise!**
 
-Add to the view showing the data of a single country the weather report for the capital of that country. There are dozens of providers for weather data. I used [https://www.apixu.com](https://www.apixu.com). Don't forget to [hide your API key](https://medium.com/better-programming/how-to-hide-your-api-keys-c2b952bc07e6).
+Add to the view showing the data of a single country the weather report for the capital of that country. There are dozens of providers for weather data. I used [https://weatherstack.com/](https://weatherstack.com/).
 
-![](../../images/2/19b5.png)
+![](../../images/2/19ba.png)
 
+**Huom:** tarvitset melkein kaikkia säätietoja tarjoavia palveluja käyttääksesi api-avaimen. Älä talleta avainta versionhallintaan, eli älä kirjoita avainta suoraan koodiin.  Avaimen arvo kannattaa määritellä ns. [ympäristömuuttujana](https://create-react-app.dev/docs/adding-custom-environment-variables/).
+
+Oletetaan että api-avaimen arvo on <i>t0p53cr3t4p1k3yv4lu3</i>. Kun ohjelma käynnistetään seuraavasti
+
+```bash
+REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start
+```
+
+koodista päästään avaimen arvoon käsiksi olion _process.env_ kautta:
+
+```js
+const api_key = process.env.REACT_APP_API_KEY
+// variable api_key has now the value set in startup
+```
 </div>
