@@ -494,6 +494,10 @@ The site <https://reactpatterns.com/> provides a concise list of best practices 
 
 
 
+[Reactiflux](https://www.reactiflux.com/) is a big chat community of React developers on Discord. It could be one possible place to get support after the course has concluded. For example numerous libraries have their own channels.
+
+
+
 If you know some recommendable links or libraries, make a pull request!
 
 </div>

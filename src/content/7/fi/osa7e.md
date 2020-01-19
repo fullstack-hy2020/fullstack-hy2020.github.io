@@ -324,6 +324,8 @@ Hipsterien suurin into työkalukehitykseen näytti pysähtyneen webpackin vallat
 
 Sivu <https://reactpatterns.com/> tarjoaa tiiviissä muodossa listan parhaita react-käytänteitä, joista osa on jo tältäkin kurssilta tuttuja. Toinen samankaltainen lista on [react bits](https://vasanthk.gitbooks.io/react-bits/).
 
+[Reactiflux](https://www.reactiflux.com/) taas on suuri englanninkielinen React-kehittäjien keskusteluyhteisö Discordissa. Se voi olla yksi mahdollinen paikka saada tukea kurssin päättymisen jälkeen. Esimerkiksi useille kirjastoille löytyyy kokonaan omat keskustelukanavat.
+
 Jos tiedät jotain suositeltavia linkkejä tai kirjastoja, tee pull request!
 
 </div>
