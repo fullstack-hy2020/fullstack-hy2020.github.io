@@ -11,9 +11,9 @@ Siirrämme tässä osassa fokuksen backendiin, eli palvelimella olevaan toiminna
 
 Backendin toteutusympäristönä käytämme [Node.js](https://nodejs.org/en/):ää, joka on melkein missä vaan, erityisesti palvelimilla ja omalla koneellasikin toimiva, Googlen [chrome V8](https://developers.google.com/v8/) -Javascriptmoottoriin perustuva Javascriptin suoritusympäristö.
 
-Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v8.10.0</i>. Huolehdi että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
+Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v10.18.0</i>. Huolehdi että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
 
-Kuten [osassa 1](/osa1/javascriptia) todettiin, selaimet eivät vielä osaa uusimpia Javascriptin ominaisuuksia ja siksi selainpuolen koodi täytyy kääntää eli <i>transpiloida</i> esim [babel](https://babeljs.io/):illa. Backendissa tilanne on kuitenkin toinen, uusin Node hallitsee riittävissä määrin myös Javascriptin uusia versioita, joten suoritamme Nodella suoraan kirjoittamaamme koodia ilman transpilointivaihetta.
+Kuten [osassa 1](/osa1/javascriptia) todettiin, selaimet eivät vielä osaa kaikkia uusimpia Javascriptin ominaisuuksia ja siksi selainpuolen koodi täytyy kääntää eli <i>transpiloida</i> esim [babel](https://babeljs.io/):illa. Backendissa tilanne on kuitenkin toinen, uusin Node hallitsee riittävissä määrin myös Javascriptin uusia versioita, joten suoritamme Nodella suoraan kirjoittamaamme koodia ilman transpilointivaihetta.
 
 Tavoitteenamme on tehdä [osan 2](/osa2) muistiinpanosovellukseen sopiva backend. Aloitetaan kuitenkin ensin perusteiden läpikäyminen toteuttamalla perinteinen "hello world"-sovellus.
 
@@ -123,18 +123,16 @@ Palvelin toimii itseasiassa täsmälleen samalla tavalla riippumatta urlin loppu
 **HUOM** jos koneesi portti 3001 on jo jonkun sovelluksen käytössä, aiheuttaa käynnistäminen virheen:
 
 ```bash
-➜  hello npm start
-
-> hello@1.0.0 start /Users/mluukkai/opetus/_2019fullstack-koodit/osa3/hello
+> notes-backend@1.0.0 start /Users/mluukkai/opetus/_koodi_fs/3/luento/notes-backend
 > node index.js
 
 Server running on port 3001
-events.js:167
+events.js:174
       throw er; // Unhandled 'error' event
       ^
 
-Error: listen EADDRINUSE :::3001
-    at Server.setupListenHandle [as _listen2] (net.js:1330:14)
+Error: listen EADDRINUSE: address already in use :::3001
+    at Server.setupListenHandle [as _listen2] (net.js:1280:14)
     at listenInCluster (net.js:1378:12)
 ```
 
@@ -189,19 +187,19 @@ let notes = [
   {
     id: 1,
     content: "HTML is easy",
-    date: "2019-05-30T17:30:31.098Z",
+    date: "2020-01-10T17:30:31.098Z",
     important: true
   },
   {
     id: 2,
     content: "Browser can execute only Javascript",
-    date: "2019-05-30T18:39:34.091Z",
+    date: "2020-01-10T18:39:34.091Z",
     important: false
   },
   {
     id: 3,
     content: "GET and POST are the most important methods of HTTP protocol",
-    date: "2019-05-30T19:20:14.298Z",
+    date: "2020-01-10T19:20:14.298Z",
     important: true
   }
 ]
@@ -249,7 +247,7 @@ Riippuvuus tulee nyt määritellyksi tiedostoon <i>package.json</i>:
 {
   // ...
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.17.1"
   }
 }
 
@@ -261,15 +259,15 @@ Riippuvuuden koodi asentuu kaikkien projektin riippuvuuksien tapaan projektin ju
 
 Kyseessä ovat expressin riippuvuudet ja niiden riippuvuudet ym... eli projektimme [transitiiviset riippuvuudet](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/).
 
-Projektiin asentui expressin versio 4.16.4. Mitä tarkoittaa </i>package.json:issa</i> versiomerkinnän edessä oleva väkänen, eli miksi muoto on
+Projektiin asentui expressin versio 4.17.1. Mitä tarkoittaa </i>package.json:issa</i> versiomerkinnän edessä oleva väkänen, eli miksi muoto on
 
 ```json
-"express": "^4.16.4"
+"express": "^4.17.1"
 ```
 
 npm:n yhteydessä käytetään ns. [semanttista versiointia](https://docs.npmjs.com/getting-started/semantic-versioning).
 
-Merkintä <i>^4.16.4</i> tarkoittaa, että jos/kun projektin riippuvuudet päivitetään, asennetaan expressistä versio, joka on vähintään <i>4.16.4</i>, mutta asennetuksi voi tulla versio, jonka <i>patch</i> eli viimeinen numero tai <i>minor</i> eli keskimmäinen numero voi olla suurempi. Pääversio eli <i>major</i> täytyy kuitenkin olla edelleen sama.
+Merkintä <i>^4.17.1</i> tarkoittaa, että jos/kun projektin riippuvuudet päivitetään, asennetaan expressistä versio, joka on vähintään <i>4.17.1</i>, mutta asennetuksi voi tulla versio, jonka <i>patch</i> eli viimeinen numero tai <i>minor</i> eli keskimmäinen numero voi olla suurempi. Pääversio eli <i>major</i> täytyy kuitenkin olla edelleen sama.
 
 Voimme päivittää projektin riippuvuudet komennolla
 
@@ -301,7 +299,7 @@ app.get('/', (req, res) => {
   res.send('<h1>Hello World!</h1>')
 })
 
-app.get('/notes', (req, res) => {
+app.get('/api/notes', (req, res) => {
   res.json(notes)
 })
 
@@ -337,17 +335,17 @@ Network</i>
 
 ![](../../images/3/5.png)
 
-Routeista toinen määrittelee tapahtumankäsittelijän, joka hoitaa sovelluksen polkuun <i>notes</i> tulevia HTTP GET -pyyntöjä:
+Routeista toinen määrittelee tapahtumankäsittelijän, joka hoitaa sovelluksen polkuun <i>/api/notes</i> tulevia HTTP GET -pyyntöjä:
 
 ```js
-app.get('/notes', (request, response) => {
+app.get('/api/notes', (request, response) => {
   response.json(notes)
 })
 ```
 
 Pyyntöön vastataan _response_-olion metodilla [json](http://expressjs.com/en/4x/api.html#res.json), joka lähettää HTTP-pyynnön vastaukseksi parametrina olevaa Javascript-olioa eli taulukkoa _notes_ vastaavan JSON-muotoisen merkkijonon. Express asettaa headerin <i>Content-type</i> arvoksi <i>application/json</i>.
 
-![](../../images/3/6e.png)
+![](../../images/3/6ea.png)
 
 Pieni huomio JSON-muodossa palautettavasta datasta.
 
@@ -387,10 +385,10 @@ Tiedoston <i>package.json</i> sisältö muuttuu seuraavasti:
 {
   //...
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.17.1",
   },
   "devDependencies": {
-    "nodemon": "^1.18.9"
+    "nodemon": "^2.0.2"
   }
 }
 ```
@@ -416,7 +414,7 @@ Komento on ikävä, joten määritellään sitä varten <i>npm-skripti</i> tiedo
   // ..
   "scripts": {
     "start": "node index.js",
-    "watch": "nodemon index.js",
+    "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   // ..
@@ -428,7 +426,7 @@ Skriptissä ei ole tarvetta käyttää nodemonin polusta sen täydellistä muoto
 Voimme nyt käynnistää palvelimen sovelluskehitysmoodissa komennolla
 
 ```bash
-npm run watch
+npm run dev
 ```
 
 Toisin kuin skriptejä <i>start</i> tai <i>test</i> suoritettaessa, joudumme sanomaan myös <i>run</i>.
@@ -442,7 +440,7 @@ Representational State Transfer eli REST on Roy Fieldingin vuonna 2000 ilmestyne
 
 Emme nyt rupea määrittelemään REST:iä Fieldingiläisittäin tai rupea väittämään mitä REST on tai mitä se ei ole vaan otamme hieman [kapeamman näkökulman](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services), miten REST tai RESTful API:t yleensä tulkitaan Web-sovelluksissa. Alkuperäinen REST-periaate ei edes sinänsä rajoitu Web-sovelluksiin.
 
-Mainitsimme jo [edellisessä osassa](/osa2/#rest-apin-käyttö), että yksittäisiä asioita, meidän tapauksessamme muistiinpanoja kutsutaan RESTful-ajattelussa <i>resursseiksi</i>. Jokaisella resurssilla on URL eli sen yksilöivä osoite.
+Mainitsimme jo [edellisessä osassa](/osa2/palvelimella_olevan_datan_muokkaaminen#rest), että yksittäisiä asioita, meidän tapauksessamme muistiinpanoja kutsutaan RESTful-ajattelussa <i>resursseiksi</i>. Jokaisella resurssilla on URL eli sen yksilöivä osoite.
 
 Erittäin yleinen konventio on muodostaa resurssien yksilöivät URLit liittäen resurssityypin nimi ja resurssin yksilöivä tunniste.
 
@@ -474,19 +472,19 @@ Joissain yhteyksissä (ks. esim. [Richardson, Ruby: RESTful Web Services](http:/
 
 Laajennetaan nyt sovellusta siten, että se tarjoaa muistiinpanojen operointiin REST-rajapinnan. Tehdään ensin [route](http://expressjs.com/en/guide/routing.html) yksittäisen resurssin katsomista varten.
 
-Yksittäisen muistiinpanon identifioi URL, joka on muotoa <i>notes/10</i>, missä lopussa oleva numero vastaa resurssin muistiinpanon id:tä.
+Yksittäisen muistiinpanon identifioi URL, joka on muotoa <i>/api/notes/10</i>, missä lopussa oleva numero vastaa resurssin muistiinpanon id:tä.
 
 Voimme määritellä expressin routejen poluille [parametreja](http://expressjs.com/en/guide/routing.html) käyttämällä kaksoispistesyntaksia:
 
 ```js
-app.get('/notes/:id', (request, response) => {
+app.get('/api/notes/:id', (request, response) => {
   const id = request.params.id
   const note = notes.find(note => note.id === id)
   response.json(note)
 })
 ```
 
-Nyt <code>app.get('/notes/:id', ...)</code> käsittelee kaikki HTTP GET -pyynnöt, jotka ovat muotoa <i>note/JOTAIN</i>, missä <i>JOTAIN</i> on mielivaltainen merkkijono.
+Nyt <code>app.get('/api/notes/:id', ...)</code> käsittelee kaikki HTTP GET -pyynnöt, jotka ovat muotoa <i>/api/notes/JOTAIN</i>, missä <i>JOTAIN</i> on mielivaltainen merkkijono.
 
 Polun parametrin <i>id</i> arvoon päästään käsiksi pyynnön tiedot kertovan olion [request](http://expressjs.com/en/api.html#req) kautta:
 
@@ -496,12 +494,12 @@ const id = request.params.id
 
 Jo tutuksi tulleella taulukon _find_-metodilla haetaan taulukosta parametria vastaava muistiinpano ja palautetaan se pyynnön tekijälle.
 
-Kun sovellusta testataan menemällä selaimella osoitteeseen <http://localhost:3001/notes/1>, havaitaan että se ei toimi, selain näyttää tyhjältä. Tämä on tietenkin softadevaajan arkipäivää, ja on ruvettava debuggaamaan.
+Kun sovellusta testataan menemällä selaimella osoitteeseen <http://localhost:3001/api/notes/1>, havaitaan että se ei toimi, selain näyttää tyhjältä. Tämä on tietenkin softadevaajan arkipäivää, ja on ruvettava debuggaamaan.
 
 Vanha hyvä keino on alkaa lisäillä koodiin _console.log_-komentoja:
 
 ```js
-app.get('/notes/:id', (request, response) => {
+app.get('/api/notes/:id', (request, response) => {
   const id = request.params.id
   console.log(id)
   const note = notes.find(note => note.id === id)
@@ -510,7 +508,7 @@ app.get('/notes/:id', (request, response) => {
 })
 ```
 
-Kun selaimella mennään jälleen osoitteeseen <http://localhost:3001/notes/1> konsoliin, eli siihen terminaaliin, mihin sovellus on käynnistetty tulostuu
+Kun selaimella mennään jälleen osoitteeseen <http://localhost:3001/api/notes/1> konsoliin, eli siihen terminaaliin, mihin sovellus on käynnistetty tulostuu
 
 ![](../../images/3/8.png)
 
@@ -519,7 +517,7 @@ eli halutun muistiinpanon id välittyy sovellukseen aivan oikein, mutta _find_ k
 Päätetään tulostella konsoliin myös _find_-komennon sisällä olevasta vertailijafunktiosta, joka onnistuu helposti kun tiiviissä muodossa oleva funktio <em>note => note.id === id</em> kirjoitetaan eksplisiittisen returnin sisältävässä muodossa:
 
 ```js
-app.get('/notes/:id', (request, response) => {
+app.get('/api/notes/:id', (request, response) => {
   const id = request.params.id
   const note = notes.find(note => {
     console.log(note.id, typeof note.id, id, typeof id, note.id === id)
@@ -543,7 +541,7 @@ ongelman syy selviää: muuttujassa _id_ on tallennettuna merkkijono '1' kun taa
 Korjataan ongelma, muuttamalla parametrina oleva merkkijonomuotoinen id [numeroksi](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number):
 
 ```js
-app.get('/notes/:id', (request, response) => {
+app.get('/api/notes/:id', (request, response) => {
   const id = Number(request.params.id)
   const note = notes.find(note => note.id === id)
   response.json(note)
@@ -552,13 +550,13 @@ app.get('/notes/:id', (request, response) => {
 
 ja nyt yksittäisen resurssin hakeminen toimii.
 
-![](../../images/3/9e.png)
+![](../../images/3/9ea.png)
 
 Toiminnallisuuteen jää kuitenkin pieni ongelma.
 
 Jos haemme muistiinpanoa sellaisella indeksillä, mitä vastaavaa muistiinpanoa ei ole olemassa, vastaa palvelin seuraavasti
 
-![](../../images/3/10.png)
+![](../../images/3/10ea.png)
 
 HTTP-statuskoodi on onnistumisesta kertova 200. Vastaukseen ei liity dataa, sillä headerin <i>content-length</i> arvo on 0, ja samaa todistaa selain: mitään ei näy.
 
@@ -567,7 +565,7 @@ Syynä tälle käyttäytymiselle on se, että muuttujan _note_ arvoksi tulee _un
 Tehdään koodiin muutos
 
 ```js
-app.get('/notes/:id', (request, response) => {
+app.get('/api/notes/:id', (request, response) => {
   const id = Number(request.params.id)
   const note = notes.find(note => note.id === id)
   
@@ -592,7 +590,7 @@ Nyt sovellus toimii, eli palauttaa oikean virhekoodin. Sovellus ei kuitenkaan pa
 Toteutetaan seuraavaksi resurssin poistava route. Poisto tapahtuu tekemällä HTTP DELETE -pyyntö resurssin urliin:
 
 ```js
-app.delete('/notes/:id', (request, response) => {
+app.delete('/api/notes/:id', (request, response) => {
   const id = Number(request.params.id)
   notes = notes.filter(note => note.id !== id)
 
@@ -614,11 +612,11 @@ Käytetään nyt kuitenkin [postman](https://www.getpostman.com/)-nimistä sovel
 
 Asennetaan postman ja kokeillaan
 
-![](../../images/3/11.png)
+![](../../images/3/11ea.png)
 
 Postmanin käyttö on tässä tilanteessa suhteellisen yksinkertaista, riittää määritellä url ja valita oikea pyyntötyyppi.
 
-Palvelin näyttää vastaavan oikein. Tekemällä HTTP GET osoitteeseen <http://localhost:3001/notes> selviää että poisto-operaatio oli onnistunut, muistiinpanoa, jonka id on 2 ei ole enää listalla.
+Palvelin näyttää vastaavan oikein. Tekemällä HTTP GET osoitteeseen <http://localhost:3001/api/notes> selviää että poisto-operaatio oli onnistunut, muistiinpanoa, jonka id on 2 ei ole enää listalla.
 
 Koska muistiinpanot on talletettu palvelimen muistiin, uudelleenkäynnistys palauttaa tilanteen ennalleen.
 
@@ -631,15 +629,15 @@ Kun plugin on asennettu, on sen käyttö erittäin helppoa. Tehdään projektin 
 
 Luodaan kaikki muistiinpanot hakevan pyynnön määrittelevä tiedosto <i>get\_all\_notes.rest</i>
 
-![](../../images/3/12.png)
+![](../../images/3/12ea.png)
 
 Klikkaamalla tekstiä <i>Send Request</i>, REST client suorittaa määritellyn HTTP-pyynnön ja palvelimen vastaus avautuu editoriin:
 
-![](../../images/3/13e.png)
+![](../../images/3/13ea.png)
 
 ### Datan vastaanottaminen
 
-Toteutetaan seuraavana uusien muistiinpanojen lisäys, joka siis tapahtuu tekemällä HTTP POST -pyyntö osoitteeseen http://localhost:3001/notes ja liittämällä pyynnön mukaan eli [bodyyn](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) luotavan muistiinpanon tiedot JSON-muodossa.
+Toteutetaan seuraavana uusien muistiinpanojen lisäys, joka siis tapahtuu tekemällä HTTP POST -pyyntö osoitteeseen http://localhost:3001/api/notes ja liittämällä pyynnön mukaan eli [bodyyn](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) luotavan muistiinpanon tiedot JSON-muodossa.
 
 Jotta pääsisimme pyynnön mukana lähetettyyn dataan helposti käsiksi, tarvitsemme [body-parser](https://github.com/expressjs/body-parser)-kirjaston apua.
 
@@ -654,7 +652,7 @@ app.use(bodyParser.json())
 
 //...
 
-app.post('/notes', (request, response) => {
+app.post('/api/notes', (request, response) => {
   const note = request.body
   console.log(note)
 
@@ -670,7 +668,7 @@ Toistaiseksi sovellus ei vielä tee vastaanotetulle datalle mitään muuta kuin 
 
 Ennen toimintalogiikan viimeistelyä varmistetaan ensin postmanilla, että lähetetty tieto menee varmasti perille. Pyyntötyypin ja urlin lisäksi on määriteltävä myös pyynnön mukana menevä data eli <i>body</i>:
 
-![](../../images/3/14e.png)
+![](../../images/3/14ea.png)
 
 Sovellus tulostaa lähetetyn vastaanottamansa datan terminaaliin:
 
@@ -698,7 +696,7 @@ Ilman oikeaa headerin arvoa palvelin ei osaa parsia dataa oikeaan muotoon. Se ei
 
 Jos käytät VS Codea niin edellisessä luvussa esitelty REST client kannattaa asentaa viimeistään <i>nyt</i>. POST-pyyntö tehdään REST clientillä seuraavasti:
 
-![](../../images/3/20e.png)
+![](../../images/3/20eb.png)
 
 Eli pyyntöä varten on luotu oma tiedosto <i>create\_note.rest</i>. Pyyntö on muotoiltu [dokumentaation ohjetta](https://github.com/Huachao/vscode-restclient/blob/master/README.md#usage) noudatellen.
 
@@ -715,7 +713,7 @@ REST clientin eräs suuri etu Postmaniin verrattuna on se, että pyynnöt saa k�
 Palataan taas sovelluksen pariin. Kun tiedämme, että sovellus vastaanottaa tiedon oikein, voimme viimeistellä sovelluslogiikan:
 
 ```js
-app.post('/notes', (request, response) => {
+app.post('/api/notes', (request, response) => {
   const maxId = notes.length > 0
     ? Math.max(...notes.map(n => n.id)) 
     : 0
@@ -741,7 +739,7 @@ const generateId = () => {
   return maxId + 1
 }
 
-app.post('/notes', (request, response) => {
+app.post('/api/notes', (request, response) => {
   const body = request.body
 
   if (!body.content) {
@@ -795,7 +793,7 @@ Huomaa, että repositorion master-haarassa on myöhemmän vaiheen koodi. Tämän
 
 ![](../../images/3/21.png)
 
-Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnistämistä eli komentoa _npm start_ tai _npm run watch_.
+Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnistämistä eli komentoa _npm start_ tai _npm run dev_.
 
 Vielä pieni huomio ennen tehtäviä. Uuden id:n generoiva funktio näyttää seuraavalta
 
@@ -839,7 +837,7 @@ Huomaa, että Noden routejen määrittelyssä merkkijonon <i>api/persons</i> vin
 
 Sovellus pitää pystyä käynnistämään komennolla _npm start_.
 
-Komennolla _npm run watch_ käynnistettäessa sovelluksen tulee käynnistyä uudelleen, kun koodiin tehdään muutoksia.
+Komennolla _npm run dev_ käynnistettäessa sovelluksen tulee käynnistyä uudelleen, kun koodiin tehdään muutoksia.
 
 #### 3.2: puhelinluettelon backend step2
 
