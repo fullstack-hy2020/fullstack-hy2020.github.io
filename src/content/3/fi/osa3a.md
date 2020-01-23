@@ -223,12 +223,6 @@ Kun avaamme selaimen, on tulostusasu sama kuin [osassa 2](/osa2#datan-haku-palve
 
 ![](../../images/3/2e.png)
 
-Voimme jo melkein ruveta käyttämään uutta backendiämme osan 2 muistiinpano-frontendin kanssa. Mutta vain _melkein_, sillä kun käynnistämme frontendin, tulee konsoliin virheilmoitus
-
-![](../../assets/3/3.png)
-
-Syy virheelle selviää pian, parantelemme kuitenkin ensin koodia muilta osin.
-
 ### Express
 
 Palvelimen koodin tekeminen suoraan Noden sisäänrakennetun web-palvelimen [http](https://nodejs.org/docs/latest-v8.x/api/http.html):n päälle on mahdollista, mutta työlästä, erityisesti jos sovellus kasvaa hieman isommaksi.
@@ -901,11 +895,11 @@ HTTP-pyynnöistä muiden paitsi POST:in tulisi olla <i>idempotentteja</i>:
 
 Eli jos pyynnöllä on sivuvaikutuksia, lopputulos on sama suoritettaessa pyyntö yhden tai useamman kerran.
 
-Esim. jos tehdään HTTP PUT -pyyntö osoitteeseen <i>/notes/10</i> ja pyynnön mukana on <em>{ content: "ei sivuvaikutuksia", important: true }</em>, on lopputulos sama riippumatta siitä, kuinka monta kertaa pyyntö suoritetaan.
+Esim. jos tehdään HTTP PUT -pyyntö osoitteeseen <i>/api/notes/10</i> ja pyynnön mukana on <em>{ content: "ei sivuvaikutuksia", important: true }</em>, on lopputulos sama riippumatta siitä, kuinka monta kertaa pyyntö suoritetaan.
 
 Kuten metodin GET <i>safety</i> myös <i>idempotence</i> on HTTP-standardin suositus palvelimien toteuttajille. RESTful-periaatetta noudattaessa GET-, HEAD-, PUT- ja DELETE-pyyntöjä käytetäänkin aina siten, että ne ovat idempotentteja.
 
-HTTP-pyyntötyypeistä POST on ainoa, joka ei ole <i>safe</i> eikä <i>idempotent</i>. Jos tehdään 5 kertaa HTTP POST -pyyntö osoitteeseen <i>/notes</i> siten että pyynnön mukana on <em>{ content: "monta samaa", important: true }</em>, tulee palvelimelle 5 saman sisältöistä muistiinpanoa.
+HTTP-pyyntötyypeistä POST on ainoa, joka ei ole <i>safe</i> eikä <i>idempotent</i>. Jos tehdään 5 kertaa HTTP POST -pyyntö osoitteeseen <i>/api/notes</i> siten että pyynnön mukana on <em>{ content: "monta samaa", important: true }</em>, tulee palvelimelle 5 saman sisältöistä muistiinpanoa.
 
 ### Middlewaret
 
@@ -943,7 +937,7 @@ Middlewaret suoritetaan siinä järjestyksessä, jossa ne on otettu käyttöön 
 
 Middlewaret tulee ottaa käyttöön ennen routeja, jos ne halutaan suorittaa ennen niitä. On myös eräitä tapauksia, joissa middleware tulee määritellä vasta routejen jälkeen. Käytännössä tällöin on kyse middlewareista, joita suoritetaan vain, jos mikään route ei käsittele HTTP-pyyntöä.
 
-Lisätään routejen jälkeen seuraava middleware, jonka ansiosta saadaan routejen käsittelemättömistä virhetilanteista JSON-muotoinen virheilmoitus:
+Lisätään <i>routejen jälkeen</i> seuraava middleware, jonka ansiosta saadaan routejen käsittelemättömistä virhetilanteista JSON-muotoinen virheilmoitus:
 
 ```js
 const unknownEndpoint = (request, response) => {

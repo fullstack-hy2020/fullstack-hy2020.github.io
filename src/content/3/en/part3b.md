@@ -7,12 +7,29 @@ lang: en
 
 <div class="content">
 
-Let's continue with our efforts to use the new backend with the React-frontend from [part 2](/en/part2).
-Our last attempt failed with the following error message:
+Yhdistetään seuraavaksi [osassa 2](/osa2) tekemämme frontend omaan backendiimme. 
 
-![](../../assets/3/3.png)
+Edellisessä osassa backendinä toiminut json-server tarjosi muistiinpanojen listan osoitteessa http://localhost:3001/notes fronendin käyttöön. Backendimme urlien rakenne on hieman erilainen, muistiinpanot löytyvät osoitteesta http://localhost:3001/api/notes, eli muutetaan frontendin tiedostossa <i>src/services/notes.js</i> määriteltyä muuttujaa _baseUrl_ seuraavasti:
 
-For some reason, the GET-request sent by the frontend to the address <http://localhost:3001/notes> is not working. Why is that? The backend works just fine in the browser and with Postman. 
+```js
+import axios from 'axios'
+const baseUrl = 'http://localhost:3001/api/notes' //highlight-line
+
+const getAll = () => {
+  const request = axios.get(baseUrl)
+  return request.then(response => response.data)
+}
+
+// ...
+
+export default { getAll, create, update }
+```
+
+Frontendin tekemä GET-pyyntö osoitteeseen <http://localhost:3001/api/notes> ei jostain syystä toimi:
+
+![](../../images/3/3ae.png)
+
+Mistä on kyse? Backend toimii kuitenkin selaimesta ja postmanista käytettäessä ilman ongelmaa.
 
 ### Same origin policy and CORS
 
@@ -81,7 +98,7 @@ Create a Heroku application with the command <i>heroku create</i>, create a Git 
 
 If everything went well, the application works:
 
-![](../../images/3/25e.png)
+![](../../images/3/25ea.png)
 
 If not, the issue can be found by reading heroku logs with command <i>heroku logs</i>.
 
@@ -121,7 +138,7 @@ cp -r build ../../../osa3/notes-backend
 
 The backend directory should now look as follows:
 
-![](../../images/3/27.png)
+![](../../images/3/27ea.png)
 
 To make express show <i>static content</i>, the page <i>index.html</i> and the JavaScript etc. it fetches, we need a built-in middleware from express called [static](http://expressjs.com/en/starter/static-files.html).
 
@@ -176,13 +193,13 @@ The file contains instructions to fetch a CSS stylesheet defining the styles of 
 
 The React code fetches notes from the server address <http://localhost:3001/notes> and renders them to the screen. The communications between the server and the browser can be seen in the <i>Network</i> tab of the developer console:
 
-![](../../images/3/29e.png)
+![](../../images/3/29ea.png)
 
 After ensuring that the production version of the application works locally, commit the production build of the frontend to the backend repository, and push the code to Heroku again. 
 
 [The application](https://vast-oasis-81447.herokuapp.com/) works perfectly, except we haven't added the functionality for changing the importance of a note to the backend yet. 
 
-![](../../images/3/30e.png)
+![](../../images/3/30ea.png)
 
 Our application saves the notes to a variable. If the application crashes or is restarted, all of the data will disappear. 
 
@@ -211,52 +228,11 @@ There is also a script _npm run logs:prod_ to show the heroku logs.
 
 Note that the directory paths in the script <i>build:ui</i> depend on the location of repositories in the file system.
 
-### Backend URLs
-
-Our backend's API for handling the notes is currently at the application's root URL <https://vast-oasis-81447.herokuapp.com/>. This means that <https://vast-oasis-81447.herokuapp.com/notes> is the list of all notes and so on. The role of the backend is to offer a machine readable interface or an API to the frontend. It might be better to name the API addresses more clearly, for example by starting all of them with the word _api_.
-
-Let's change **all backend routes** by hand: 
-
-```js
-//...
-app.get('/api/notes', (request, response) => {
-  response.json(notes)
-})
-//...
-```
-
-Frontend code only requires the following change: 
-
-```js
-import axios from 'axios'
-const baseUrl = '/api/notes'  // highlight-line
-
-const getAll = () => {
-  const request = axios.get(baseUrl)
-  return request.then(response => response.data)
-}
-
-// ...
-```
-
-After these changes, the API endpoint for all notes is <https://vast-oasis-81447.herokuapp.com/api/notes>.
-
-![](../../images/3/31e.png)
-
-Frontend is still at the root of the application at <https://vast-oasis-81447.herokuapp.com/>. 
-
->Sidenote: **API versions**
->
->Sometimes API URLs also show the version of the API. Different versions might be needed if the API is extended over time and the changes could break existing parts of the programs. With versioning, new slightly different versions of the API can be used alongside older versions. 
->
->Not everyone thinks expressing the API version on the URL is a good idea, even though it is done quite often. The right way of versioning APIs is debated [all over the internet](https://stackoverflow.com/questions/389169/best-practices-for-api-versioning).
-
-
 ### Proxy
 
 Changes on the frontend have caused it to no longer work in development mode (when started with command _npm start_), as the connection to the backend does not work. 
 
-![](../../images/3/32e.png)
+![](../../images/3/32ea.png)
 
 This is due to changing the backend address to a relative URL: 
 
