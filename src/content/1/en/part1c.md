@@ -440,9 +440,12 @@ const App = (props) => {
 Our application is now ready!
 
 
-### Tapahtumankäsittelijä on funktio
+<!-- ### Tapahtumankäsittelijä on funktio -->
 
-Nappien tapahtumankäsittelijät on siis määritelty suoraan <i>onClick</i>-attribuuttien määrittelyn yhteydessä seuraavasti:
+### Event handler is a function
+
+<!-- Nappien tapahtumankäsittelijät on siis määritelty suoraan <i>onClick</i>-attribuuttien määrittelyn yhteydessä seuraavasti: -->
+We define the event handlers for our buttons where we declare their <i>onClick</i> attributes:
 
 ```js
 <button onClick={() => setCounter(counter + 1)}> 
@@ -450,7 +453,8 @@ Nappien tapahtumankäsittelijät on siis määritelty suoraan <i>onClick</i>-att
 </button>
 ```
 
-Entä jos yritämme määritellä tapahtumankäsittelijän hieman yksinkertaisemmassa muodossa:
+<!-- Entä jos yritämme määritellä tapahtumankäsittelijän hieman yksinkertaisemmassa muodossa: -->
+What if we'd try to define the event handlers in a simpler form?
 
 ```js
 <button onClick={setCounter(counter + 1)}> 
@@ -458,19 +462,24 @@ Entä jos yritämme määritellä tapahtumankäsittelijän hieman yksinkertaisem
 </button>
 ```
 
-Tämä muutos kuitenkin hajottaa sovelluksemme täysin:
+<!-- Tämä muutos kuitenkin hajottaa sovelluksemme täysin: -->
+This would completely break our application:
 
 ![](../../images/1/5b.png)
 
-Mistä on kyse? Tapahtumankäsittelijäksi on tarkoitus määritellä joko <i>funktio</i> tai <i>viite funktioon</i>. Kun koodissa on
+<!-- Mistä on kyse? Tapahtumankäsittelijäksi on tarkoitus määritellä joko <i>funktio</i> tai <i>viite funktioon</i>. Kun koodissa on -->
+What's going on? An event handler is supposed to be either a <i>function</i> or a <i>function reference</i>, and when we write
 
 ```js
 <button onClick={setCounter(counter + 1)}>
 ```
 
-tapahtumankäsittelijäksi tulee määriteltyä <i>funktiokutsu</i>. Sekin on monissa tilanteissa ok, mutta ei nyt. Kun React renderöi metodin ensimmäistä kertaa ja muuttujan <i>counter</i> arvo on 0, se suorittaa kutsun <em>setCounter(0 + 1)</em>, eli muuttaa komponentin tilan arvoksi 1. Tämä taas aiheuttaa komponentin uudelleenrenderöitymisen. Ja sama toistuu uudelleen...
+<!-- tapahtumankäsittelijäksi tulee määriteltyä <i>funktiokutsu</i>. Sekin on monissa tilanteissa ok, mutta ei nyt. Kun React renderöi metodin ensimmäistä kertaa ja muuttujan <i>counter</i> arvo on 0, se suorittaa kutsun <em>setCounter(0 + 1)</em>, eli muuttaa komponentin tilan arvoksi 1. Tämä taas aiheuttaa komponentin uudelleenrenderöitymisen. Ja sama toistuu uudelleen... -->
+the event handler is actually a <i>function call</i>. In many situations this is ok, but not in this particular situation. In the beginning the value of the <i>counter</i> variable is 0. When React renders the method for the first time, it exectues the function call <em>setCounter(0+1)</em>, and changes the value of the component's state to 1. 
+This will cause the component to be rerendered, react will execute the setCounter function call again, and the state will change leading to another rerender...
 
-Palautetaan siis tapahtumankäsittelijä alkuperäiseen muotoonsa
+<!-- Palautetaan siis tapahtumankäsittelijä alkuperäiseen muotoonsa -->
+Let's define the event handlers like we did before
 
 ```js
 <button onClick={() => setCounter(counter + 1)}> 
@@ -478,11 +487,16 @@ Palautetaan siis tapahtumankäsittelijä alkuperäiseen muotoonsa
 </button>
 ```
 
-Nyt napin tapahtumankäsittelijän määrittelevä attribuutti <i>onClick</i> saa arvokseen funktion _() => setCounter(counter + 1)_, ja funktiota kutsutaan siinä vaiheessa kun sovelluksen käyttäjä painaa nappia. 
+<!-- Nyt napin tapahtumankäsittelijän määrittelevä attribuutti <i>onClick</i> saa arvokseen funktion _() => setCounter(counter + 1)_, ja funktiota kutsutaan siinä vaiheessa kun sovelluksen käyttäjä painaa nappia.  -->
+Now the button's attribute which defines what happens when the button is clicked, <i>onClick</i>, has the value _() => setCounter(counter +1)_.
+The setCounter function is called only when a user clicks the button. 
 
-Tapahtumankäsittelijöiden määrittely suoraan JSX-templatejen sisällä ei useimmiten ole kovin viisasta. Tässä tapauksessa se tosin on ok, koska tapahtumankäsittelijät ovat niin yksinkertaisia. 
+<!-- Tapahtumankäsittelijöiden määrittely suoraan JSX-templatejen sisällä ei useimmiten ole kovin viisasta. Tässä tapauksessa se tosin on ok, koska tapahtumankäsittelijät ovat niin yksinkertaisia.  -->
+Usually defining event handlers within JSX-templates is not a good idea. 
+Here it's ok, because our event handlers are so simple. 
 
-Eriytetään kuitenkin nappien tapahtumankäsittelijät omiksi komponentin sisäisiksi apufunktioikseen:
+<!-- Eriytetään kuitenkin nappien tapahtumankäsittelijät omiksi komponentin sisäisiksi apufunktioikseen: -->
+Let's separate the event handlers into separate functions anyway: 
 
 ```js
 const App = (props) => {
@@ -508,7 +522,8 @@ const App = (props) => {
 }
 ```
 
-Tälläkin kertaa tapahtumankäsittelijät on määritelty oikein, sillä <i>onClick</i>-attribuutit saavat arvokseen muuttujan, joka tallettaa viitteen funktioon:
+<!-- Tälläkin kertaa tapahtumankäsittelijät on määritelty oikein, sillä <i>onClick</i>-attribuutit saavat arvokseen muuttujan, joka tallettaa viitteen funktioon: -->
+Here the event handlers have been defined correctly. The value of the <i>onClick</i> attribute is a variable containing a reference to a function:
 
 ```js
 <button onClick={increaseByOne}> 
@@ -619,19 +634,28 @@ Since we now have an easily reusable <i>Button</i> component, we've also impleme
 
 The event handler is passed to the <i>Button</i> component through the _onClick_ prop. The name of the prop itself is not that significant, but our naming choice wasn't completely random, e.g. React's own official [tutorial](https://reactjs.org/tutorial/tutorial.html) suggests this convention.
 
-### Tilan muutos aiheuttaa uudelleenrenderöitymisen
+### Changes in state cause rerendering
 
-Kerrataan vielä sovelluksen toiminnan pääperiaatteet. 
+<!-- Kerrataan vielä sovelluksen toiminnan pääperiaatteet.  -->
+Let's go over the main princibles of how an application works once more.
 
-Kun sovellus käynnistyy, suoritetaan komponentin _App_-koodi, joka luo [useState](https://reactjs.org/docs/hooks-reference.html#usestate)-hookin avulla sovellukselle laskurin tilan _counter_. Komponentti renderöi laskimen alkuarvon 0 näyttävän komponentin _Display_ sekä kolme _Button_-komponenttia, joille se asettaa laskurin tilaa muuttavat tapahtumankäsittelijät.
+<!-- Kun sovellus käynnistyy, suoritetaan komponentin _App_-koodi, joka luo [useState](https://reactjs.org/docs/hooks-reference.html#usestate)-hookin avulla sovellukselle laskurin tilan _counter_. Komponentti renderöi laskimen alkuarvon 0 näyttävän komponentin _Display_ sekä kolme _Button_-komponenttia, joille se asettaa laskurin tilaa muuttavat tapahtumankäsittelijät. -->
+When the application starts, the code in _App_ is executed. This code uses an [useState](https://reactjs.org/docs/hooks-reference.html#usestate) - hook to create the application state - value of the counter _counter_.
+The component renders the _Display_ component. It displays the counter's value (0), and three _Button_ components. The buttons have event handlers, which are used to change the state of the counter.
 
-Kun jotain napeista painetaan, suoritetaan vastaava tapahtumankäsittelijä. Tapahtumankäsittelijä muuttaa komponentin _App_ tilaa funktion _setCounter_ avulla. **Tilaa muuttavan funktion kutsuminen aiheuttaa komponentin uudelleenrenderöitymisen.** 
+<!-- Kun jotain napeista painetaan, suoritetaan vastaava tapahtumankäsittelijä. Tapahtumankäsittelijä muuttaa komponentin _App_ tilaa funktion _setCounter_ avulla. **Tilaa muuttavan funktion kutsuminen aiheuttaa komponentin uudelleenrenderöitymisen.**  -->
+When one of the buttons is clicked, the event handler is executed. The event handler changes the state of the _App_ component with the _setCounter_ function. 
+**Calling a function which changes the state causes the component to rerender.**
 
-Eli jos painetaan nappia <i>plus</i>, muuttaa napin tapahtumankäsittelijä tilan _counter_ arvoksi 1 ja komponentti _App_ renderöidään uudelleen. Komponentin uudelleenrenderöinti aiheuttaa sen "alikomponentteina" olevien _Display_- ja _Button_-komponenttien uudelleenrenderöitymisen. _Display_ saa propsin arvoksi laskurin uuden arvon 1 ja _Button_-komponentit saavat propseina tilaa sopivasti muuttavat tapahtumankäsittelijät.
+<!-- Eli jos painetaan nappia <i>plus</i>, muuttaa napin tapahtumankäsittelijä tilan _counter_ arvoksi 1 ja komponentti _App_ renderöidään uudelleen. Komponentin uudelleenrenderöinti aiheuttaa sen "alikomponentteina" olevien _Display_- ja _Button_-komponenttien uudelleenrenderöitymisen. _Display_ saa propsin arvoksi laskurin uuden arvon 1 ja _Button_-komponentit saavat propseina tilaa sopivasti muuttavat tapahtumankäsittelijät. -->
+So, if a user clicks the <i>plus</i> button, the button's event handler changes the value of _counter_ to 1, and the _App_ component is rerendered. 
+This causes its subcomponents _Display_ and _Button_ to also be rerendered. 
+_Display_ receives the new value of the counter, 1, as props. The _Button_ components receive event handlers which can be used to change the state of the counter.
 
-### Komponenttien refaktorointi
+### Refactoring the components
 
-Laskimen arvon näyttävä komponentti on siis seuraava
+<!-- Laskimen arvon näyttävä komponentti on siis seuraava -->
+The component displaying the value of the counter is as follows:
 
 ```js
 const Display = (props) => {
@@ -641,7 +665,9 @@ const Display = (props) => {
 }
 ```
 
-Komponentti tarvitsee ainoastaan <i>propsin</i> kenttää _counter_, joten se voidaan yksinkertaistaa [destrukturoinnin](/osa1/komponentin_tila_ja_tapahtumankasittely#destrukturointi) avulla seuraavaan muotoon:
+<!-- Komponentti tarvitsee ainoastaan <i>propsin</i> kenttää _counter_, joten se voidaan yksinkertaistaa [destrukturoinnin](/osa1/komponentin_tila_ja_tapahtumankasittely#destrukturointi) avulla seuraavaan muotoon: -->
+The component only uses the _counter_ field of its <i>props</i>. 
+This means we can simplify the component by using [destructuring](/osa1/komponentin_tila_ja_tapahtumankasittely#destrukturointi) like so:
 
 ```js
 const Display = ({ counter }) => {
@@ -651,13 +677,16 @@ const Display = ({ counter }) => {
 }
 ```
 
-Koska komponentin määrittelevä metodi ei sisällä muuta kuin returnin, voimme määritellä sen hyödyntäen nuolifunktioiden tiiviimpää ilmaisumuotoa
+<!-- Koska komponentin määrittelevä metodi ei sisällä muuta kuin returnin, voimme määritellä sen hyödyntäen nuolifunktioiden tiiviimpää ilmaisumuotoa -->
+The method defining the component contains only the return statement, so
+we can define the method using the more compact form of arrow functions:
 
 ```js
 const Display = ({ counter }) => <div>{counter}</div>
 ```
 
-Vastaava suoraviivaistus voidaan tehdä myös nappia edustavalle komponentille
+<!-- Vastaava suoraviivaistus voidaan tehdä myös nappia edustavalle komponentille -->
+We can simplify the Button component as well.
 
 ```js
 const Button = (props) => {
@@ -669,7 +698,8 @@ const Button = (props) => {
 }
 ```
 
-Eli destrukturoidaan <i>props</i>:ista tarpeelliset kentät ja käytetään nuolifunktioiden tiiviimpää muotoa 
+<!-- Eli destrukturoidaan <i>props</i>:ista tarpeelliset kentät ja käytetään nuolifunktioiden tiiviimpää muotoa  -->
+We can use destructuring to get only the required fields from <i>props</i>, and use the more compact form of arrow functions:
 
 ```js
 const Button = ({ handleClick, text }) => (
