@@ -424,7 +424,7 @@ Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://git
 
 #### 3.22: lint-konfiguraatio
 
-Ota sovellukseesi käyttöön ESlint.
+Ota sovellukseesi käyttöön ESlint, ja korjaa kaikki tyylivirheet.
 
 Tämä oli osan viimeinen tehtävä, joten on aika pushata koodi Githubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://study.cs.helsinki.fi/stats/courses/fullstack2020).
 
