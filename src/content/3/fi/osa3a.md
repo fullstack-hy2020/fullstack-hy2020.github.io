@@ -837,7 +837,7 @@ Komennolla _npm run dev_ käynnistettäessa sovelluksen tulee käynnistyä uudel
 
 Tee sovelluksen osoitteeseen <http://localhost:3001/info> suunnilleen seuraavanlainen sivu
 
-![](../../images/3/23e.png)
+![](../../images/3/23ea.png)
 
 eli sivu kertoo pyynnön tekohetken sekä sen, kuinka monta puhelinluettelotietoa sovelluksen muistissa olevassa taulukossa on.
 

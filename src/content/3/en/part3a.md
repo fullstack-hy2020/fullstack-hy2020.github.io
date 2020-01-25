@@ -972,7 +972,7 @@ The application must also offer an _npm run dev_ command that will run the appli
 
 Implement a page at the address <http://localhost:3001/info> that looks roughly like this:
 
-![](../../images/3/23e.png)
+![](../../images/3/23ea.png)
 
 
 The page has to show the time that the request was received and how many entries are in the phonebook at the time of processing the request.

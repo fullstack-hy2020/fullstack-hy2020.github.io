@@ -334,7 +334,7 @@ Saat selville ohjelman komentoriviparametrit muuttujasta [process.argv](https://
 ```js
 Person
   .find({})
-  .then(persons=> {
+  .then(persons => {
     // ...
   })
 
@@ -348,7 +348,7 @@ Oikea paikka tietokantayhteyden sulkemiselle on takaisinkutsufunktion loppu:
 ```js
 Person
   .find({})
-  .then(persons=> {
+  .then(persons => {
     // ...
     mongoose.connection.close()
   })
@@ -917,6 +917,8 @@ Varmista, että frontend toimii muutosten jälkeen.
 #### 3.16: puhelinluettelo ja tietokanta, step4
 
 Keskitä sovelluksen virheidenkäsittely middlewareen.
+
+Muista, että virheitä heittävät routejen metodit tarvitsevat myös kolmannen parametrin <i>next</i>
 
 #### 3.17*: puhelinluettelo ja tietokanta, step5
 
