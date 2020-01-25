@@ -52,7 +52,7 @@ Esimerkissä käytetyt validaattorit <i>minlength</i> ja <i>required</i> ovat Mo
 Jos tietokantaan yritetään tallettaa validointisäännön rikkova olio, heittää tallennusoperaatio poikkeuksen. Muutetaan uuden muistiinpanon luomisesta huolehtivaa käsittelijää siten, että se välittää mahdollisen poikkeuksen virheenkäsittelijämiddlewaren huolehdittavaksi:  
 
 ```js
-app.post('/api/notes', (request, response, next) => {
+app.post('/api/notes', (request, response, next) => { // highlight-line
   const body = request.body
 
   const note = new Note({
@@ -152,7 +152,13 @@ Sovelluksen pitäisi toimia tuotannossa, eli Herokussa lähes sellaisenaan. Fron
 Huomaa, että vaikka määrittelimme sovelluskehitystä varten ympäristömuuttujille arvot tiedostossa <i>.env</i>, tietokantaurlin kertovan ympäristömuuttujan arvo asetetaan Herokuun komentorivillä komennolla _heroku config:set_
 
 ```bash
-heroku config:set MONGODB_URI=mongodb+srv://fullstack:secret@cluster0-ostce.mongodb.net/note-app?retryWrites=true
+heroku config:set MONGODB_URI=mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true
+```
+
+HUOM: jos komento antaa virheilmoituksen, anna MONGODB_URI:n arvo hipsuissa
+
+```bash
+heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
 ```
 
 Sovelluksen pitäisi nyt toimia. Aina kaikki ei kuitenkaan mene suunnitelmien mukaan. Jos ongelmia ilmenee, <i>heroku logs</i> auttaa. Oma sovellukseni ei toiminut muutoksen jälkeen. Loki kertoi seuraavaa
@@ -161,13 +167,13 @@ Sovelluksen pitäisi nyt toimia. Aina kaikki ei kuitenkaan mene suunnitelmien mu
 
 eli tietokannan osoite olikin jostain syystä määrittelemätön. Komento <i>heroku config</i> paljasti että olin vahingossa määritellyt ympäristömuuttujan <em>MONGO\_URL</em> kun koodi oletti sen olevan nimeltään <em>MONGODB\_URI</em>.
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5), branchissä <i>part3-5</i>.
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-6), branchissä <i>part3-6</i>.
 
 </div>
 
 <div class="tasks">
 
-### Tehtäviä
+### Tehtävät 3.19.-3.21.
 
 #### 3.19: puhelinluettelo ja tietokanta, step7
 
@@ -234,7 +240,7 @@ node_modules/.bin/eslint --init
 
 Vastaillaan kysymyksiin:
 
-![](../../images/3/52ae.png)
+![](../../images/3/52be.png)
 
 Konfiguraatiot tallentuvat tiedostoon _.eslintrc.js_:
 
@@ -296,7 +302,8 @@ Kannattaa ehkä tehdä linttaustakin varten _npm-skripti_:
   // ...
   "scripts": {
     "start": "node index.js",
-    "watch": "nodemon index.js",
+    "dev": "nodemon index.js",
+    // ...
     "lint": "eslint ."
   },
   // ...
@@ -315,11 +322,11 @@ Näin koko hakemiston <em>build</em> sisältö jätetään huomioimatta linttauk
 
 Lintillä on jonkin verran huomautettavaa koodistamme:
 
-![](../../images/3/53e.png)
+![](../../images/3/53ea.png)
 
 Ei kuitenkaan korjata ongelmia vielä.
 
-Parempi vaihtoehto kuin linttauksen suorittaminen komentoriviltä on konfiguroida editorille _lint-plugin_, joka suorittaa linttausta koko ajan. Näin pääset korjaamaan pienet virheet välittömästi. Tietoja esim. Visual Studion ESlint-pluginsta [täällä](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
+Parempi vaihtoehto kuin linttauksen suorittaminen komentoriviltä on konfiguroida editorille <i>eslint-plugin</i>, joka suorittaa linttausta koko ajan. Näin pääset korjaamaan pienet virheet välittömästi. Tietoja esim. Visual Studion ESlint-pluginsta [täällä](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
 
 VS Coden ESlint-plugin alleviivaa tyylisääntöjä rikkovat kohdat punaisella:
 
@@ -331,12 +338,12 @@ ESlintille on määritelty suuri määrä [sääntöjä](https://eslint.org/docs
 
 Otetaan käyttöön sääntö [eqeqeq](https://eslint.org/docs/rules/eqeqeq) joka varoittaa, jos koodissa yhtäsuuruutta verrataan muuten kuin käyttämällä kolmea = -merkkiä. Sääntö lisätään konfiguraatiotiedostoon kentän <i>rules</i> alle.
 
-```json
+```js
 {
   // ...
-  "rules": {
+  'rules': {
     // ...
-    "eqeqeq": "error"
+   'eqeqeq': 'error',
   },
 }
 ```
@@ -345,18 +352,18 @@ Tehdään samalla muutama muukin muutos tarkastettaviin sääntöihin.
 
 Estetään rivien lopussa olevat [turhat välilyönnit](https://eslint.org/docs/rules/no-trailing-spaces), vaaditaan että [aaltosulkeiden edessä/jälkeen on aina välilyönti](https://eslint.org/docs/rules/object-curly-spacing) ja vaaditaan myös konsistenttia välilyöntien käyttöä [nuolifunktioiden parametrien suhteen](https://eslint.org/docs/rules/arrow-spacing):
 
-```json
+```js
 {
   // ...
-  "rules": {
+'rules': {
     // ...
-    "eqeqeq": "error",
-    "no-trailing-spaces": "error",
-    "object-curly-spacing": [
-        "error", "always"
+    'eqeqeq': 'error',
+    'no-trailing-spaces': 'error',
+    'object-curly-spacing': [
+        'error', 'always'
     ],
-    "arrow-spacing": [
-        "error", { "before": true, "after": true }
+    'arrow-spacing': [
+        'error', { 'before': true, 'after': true }
     ]
   },
 }
@@ -365,26 +372,27 @@ Estetään rivien lopussa olevat [turhat välilyönnit](https://eslint.org/docs/
 Oletusarvoinen konfiguraatiomme ottaa käyttöön joukon valmiiksi määriteltyjä sääntöjä <i>eslint:recommended</i>
 
 ```bash
-"extends": "eslint:recommended",
+'extends': 'eslint:recommended',
 ```
 
 Mukana on myös _console.log_-komennoista varoittava sääntö.
 Yksittäisen sääntö on helppo kytkeä [pois päältä](https://eslint.org/docs/user-guide/configuring#configuring-rules) määrittelemällä sen "arvoksi" konfiguraatiossa 0. Tehdään toistaiseksi näin säännölle <i>no-console</i>.
 
-```json
+```js
 {
   // ...
-  "rules": {
-    // ...
-    "eqeqeq": "error",
-    "no-trailing-spaces": "error",
-    "object-curly-spacing": [
-        "error", "always"
-    ],
-    "arrow-spacing": [
-        "error", { "before": true, "after": true }
-    ],
-    "no-console": 0 // highlight-line
+  'rules': {
+      // ...
+      'eqeqeq': 'error',
+      'no-trailing-spaces': 'error',
+      'object-curly-spacing': [
+          'error', 'always'
+      ],
+      'arrow-spacing': [
+          'error', { 'before': true, 'after': true }
+      ]
+    },
+    'no-console': 0 // highlight-line
   },
 }
 ```
@@ -397,13 +405,13 @@ Jos konfiguraatiossa on jotain vikaa, voi editorin lint-plugin näyttää mitä 
 
 Monissa yrityksissä on tapana määritellä yrityksen laajuiset koodausstandardit ja näiden käyttöä valvova ESlint-konfiguraatio. Pyörää ei kannata välttämättä keksiä uudelleen ja voi olla hyvä idea ottaa omaan projektiin käyttöön joku jossain muualla hyväksi havaittu konfiguraatio. Viime aikoina monissa projekteissa on omaksuttu AirBnB:n [Javascript](https://github.com/airbnb/javascript)-tyyliohjeet ottamalla käyttöön firman määrittelemä [ESLint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb)-konfiguraatio.
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-6), branchissa <i>part3-6</i>.
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-7), branchissa <i>part3-7</i>.
 
 </div>
 
 <div class="tasks">
 
-### Tehtäviä
+### Tehtävä 3.22.
 
 #### 3.22: lint-konfiguraatio
 

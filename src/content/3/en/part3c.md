@@ -23,9 +23,9 @@ Note that the application shouldn't be running in another console, otherwise the
 
 Below you can see a screenshot where the code execution has been paused in the middle of saving a new note:
 
-![](../../images/3/36a.png)
+![](../../images/3/36e.png)
 
-The execution has stopped at the <i>breakpoint</i> pointed to by the arrow. In the console you can see the value of the <i>note</i> variable. In the top left window you can see other things related to the state of the application.
+The execution has stopped at the <i>breakpoint</i> in line 63. In the console you can see the value of the <i>note</i> variable. In the top left window you can see other things related to the state of the application.
 
 The arrows at the top can be used for controlling the flow of the debugger.
 
@@ -45,11 +45,11 @@ You can access the debugger by clicking the green icon that appears in the Chrom
 
 The debugging view works the same way as it did with React applications. The <i>Sources</i> tab can be used for setting breakpoints where the execution of the code will be paused.
 
-![](../../images/3/38e.png)
+![](../../images/3/38eb.png)
 
 All of the application's console.log messages will appear in the <i>Console</i> tab of the debugger. You can also inspect values of variables and execute your own JavaScript code.
 
-![](../../images/3/39e.png)
+![](../../images/3/39ea.png)
 
 #### Question everything
 
@@ -97,16 +97,19 @@ Let's grant the user with permissions to read and write to the databases.
 
 Next we have to define the IP addresses that are allowed access to the database.
 
-![](../../images/3/61.png)
+![](../../images/3/61ea.png)
 
 For the sake of simplicity we will allow access from all IP addresses:
 
 ![](../../images/3/62.png)
 
-Finally we are ready to connect to our database. Let's choose <i>Connect your application</i> <i>Short SRV connection string</i>
+Finally we are ready to connect to our database. Start by clicking <i>connect</i>
 
-![](../../images/3/64.png)
+![](../../images/3/63ea.png)
 
+and the choose <i>Connect your application</i>:
+
+![](../../images/3/64ea.png)
 
 The view displays the <i>MongoDB URI</i>, which is the address of the database that we will supply to the MongoDB client library we will add to our application.
 
@@ -143,7 +146,7 @@ const password = process.argv[2]
 const url =
   `mongodb+srv://fullstack:${password}@cluster0-ostce.mongodb.net/test?retryWrites=true`
 
-mongoose.connect(url, { useNewUrlParser: true })
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
 
 const noteSchema = new mongoose.Schema({
   content: String,
@@ -264,7 +267,9 @@ Note.find({}).then(result => {
 })
 ```
 
-When the code is executed, the program prints all the notes stored in the database.
+When the code is executed, the program prints all the notes stored in the database:
+
+![](../../images/3/70ea.png)
 
 The objects are retrieved from the database with the [find](https://mongoosejs.com/docs/api.html#model_Model.find) method of the _Note_ model. The parameter of the method is an object expressing search conditions. Since the parameter is an empty object<code>{}</code>, we get all of the notes stored in the  _notes_ collection.
 
@@ -371,7 +376,7 @@ const mongoose = require('mongoose')
 const url =
   'mongodb+srv://fullstack:sekred@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
 
-mongoose.connect(url, { useNewUrlParser: true })
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
 
 const noteSchema = new mongoose.Schema({
   content: String,
@@ -394,7 +399,7 @@ app.get('/api/notes', (request, response) => {
 
 We can verify in the browser that the backend works for displaying all of the documents:
 
-![](../../images/3/44e.png)
+![](../../images/3/44ea.png)
 
 The application works almost perfectly. The frontend assumes that every object has a unique id in the <i>id</i> field. We also don't want to return the mongo versioning field <i>\_\_v</i> to the frontend.
 
@@ -437,7 +442,7 @@ const url = process.env.MONGODB_URI // highlight-line
 
 console.log('connecting to', url) // highlight-line
 
-mongoose.connect(url, { useNewUrlParser: true })
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
 // highlight-start
   .then(result => {
     console.log('connected to MongoDB')
@@ -483,7 +488,7 @@ const url = process.env.MONGODB_URI
 
 console.log('connecting to', url)
 
-mongoose.connect(url, { useNewUrlParser: true })
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(result => {
     console.log('connected to MongoDB')
   })
@@ -600,7 +605,7 @@ It's probably a good idea to integrate the frontend and backend one functionalit
 
 Once we introduce a database into the mix, it is useful to inspect the state persisted in the database, e.g. from the control panel in MongoDB Atlas. Quite often little Node helper programs like the <i>mongo.js</i> program we wrote earlier can be very helpful during development.
 
-You can find the code for our current application in its entirety in the <i>part3-3</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3).
+You can find the code for our current application in its entirety in the <i>part3-4</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4).
 
 </div>
 
@@ -737,7 +742,7 @@ We have written the code for the error handler among the rest of our code. This 
 Let's change the handler for the <i>/api/notes/:id</i> route, so that it passes the error forward with the <em>next</em> function. The next function is passed to the handler as the third parameter:
 
 ```js
-app.get('/api/notes/:id', (request, response, next) => {
+app.get('/api/notes/:id', (request, response, next) => { // highlight-line
   Note.findById(request.params.id)
     .then(note => {
       if (note) {
@@ -746,7 +751,7 @@ app.get('/api/notes/:id', (request, response, next) => {
         response.status(404).end()
       }
     })
-    .catch(error => next(error))
+    .catch(error => next(error)) // highlight-line
 })
 ```
 
@@ -897,7 +902,7 @@ mongoose.set('useFindAndModify', false) // highlight-line
 module.exports = mongoose.model('Note', noteSchema) 
 ```
 
-You can find the code for our current application in its entirety in the <i>part3-4</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4).
+You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).
 
 </div>
 

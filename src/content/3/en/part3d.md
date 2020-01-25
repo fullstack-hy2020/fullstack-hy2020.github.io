@@ -59,7 +59,7 @@ The <i>minlength</i> and <i>required</i> validators are [built-in](https://mongo
 If we try to store an object in the database that breaks one of the constraints, the operation will throw an exception. Let's change our handler for creating a new note so that it passes any potential exceptions to the error handler middleware:
 
 ```js
-app.post('/api/notes', (request, response, next) => {
+app.post('/api/notes', (request, response, next) => { // highlight-line
   const body = request.body
 
   const note = new Note({
@@ -98,9 +98,7 @@ When validating an object fails, we return the following default error message f
 
 ![](../../images/3/50.png)
 
-
 ### Promise chaining
-
 
 Many of the route handlers changed the response data into the right format by calling the _toJSON_ method. When we created a new note, the _toJSON_ method was called for the object passed as a parameter to _then_:
 
@@ -115,7 +113,6 @@ app.post('/api/notes', (request, response, next) => {
     .catch(error => next(error)) 
 })
 ```
-
 
 We can accomplish the same functionality in a much cleaner way with [promise chaining](https://javascript.info/promise-chaining):
 
@@ -140,7 +137,6 @@ app.post('/api/notes', (request, response) => {
 
 In the first _then_ we receive _savedNote_ object returned by Mongoose and format it. The result of the operation is returned. Then as [we discussed earlier](/en/part2/altering_data_in_server#extracting-communication-with-the-backend-into-a-separate-module), the _then_ method of a promise also returns a promise. This means that when we return _savedNote.toJSON()_ from the callback function, we are actually creating a promise that receives the formatted note as its value. We can access the formatted note by registering a new callback function with the _then_ method.
 
-
 We can clean up our code even more by using the more compact syntax for arrow functions:
 
 ```js
@@ -157,24 +153,23 @@ app.post('/api/notes', (request, response) => {
 })
 ```
 
-
 In this example, Promise chaining does not provide much of a benefit. The situation would change if there were many asynchronous operations that had to be done in sequence. We will not delve further into the topic. In the next part of the course we will learn about the <i>async/await</i> syntax in JavaScript, that will make writing subsequent asynchronous operations a lot easier.
-
 
 ### Deploying the database backend to production
 
-
 The application should work almost as-is in Heroku. We do have to generate a new production build of the frontend due to the changes that we have made to our frontend. 
-
-
 
 The environment variables defined in dotenv will only be used when the backend is not in <i>production mode</i>, i.e. Heroku.
 
-
 We defined the environment variables for development in file <i>.env</i>, but the environment variable that defines the database URL in production should be set to Heroku with the _heroku config:set_ command.
 
+heroku config:set MONGODB_URI=mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true
+```
+
+HUOM: if the command causes an error, give the value of MONGODB_URI in apostrophes:
+
 ```bash
-heroku config:set MONGODB_URI=mongodb+srv://fullstack:secred@cluster0-ostce.mongodb.net/note-app?retryWrites=true
+heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
 ```
 
 The application should now work. Sometimes things don't go according to plan. If there are problems, <i>heroku logs</i> will be there to help. My own application did not work after making the changes. The logs showed the following:
@@ -275,7 +270,7 @@ node_modules/.bin/eslint --init
 
 We will answer all of the questions:
 
-![](../../images/3/52ae.png)
+![](../../images/3/52be.png)
 
 
 The configuration will be saved in the _.eslintrc.js_ file:
@@ -340,7 +335,8 @@ It is recommended to create a separate _npm script_ for linting:
   // ...
   "scripts": {
     "start": "node index.js",
-    "watch": "nodemon index.js",
+    "dev": "nodemon index.js",
+    // ...
     "lint": "eslint ."
   },
   // ...
@@ -357,19 +353,15 @@ Also the files in the <em>build</em> directory get checked when the command is r
 build
 ```
 
-
 This causes the entire <em>build</em> directory to not be checked by ESlint.
-
 
 Lint has quite a lot to say about our code:
 
-![](../../images/3/53e.png)
-
+![](../../images/3/53ea.png)
 
 Let's not fix these issues just yet.
 
-
-A better alternative to executing the linter from the command line is to configure a _lint plugin_ to the editor, that runs the linter continuously. By using the plugin you will see errors in your code immediately. You can find more information about the Visual Studio ESLint plugin [here](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
+A better alternative to executing the linter from the command line is to configure a  <i>eslint-plugin</i> to the editor, that runs the linter continuously. By using the plugin you will see errors in your code immediately. You can find more information about the Visual Studio ESLint plugin [here](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
 
 
 The VS Code ESlint plugin will underline style violations with a red line:
@@ -385,34 +377,32 @@ ESlint has a vast array of [rules](https://eslint.org/docs/rules/) that are easy
 
 Let's add the [eqeqeq](https://eslint.org/docs/rules/eqeqeq) rule that warns us, if equality is checked with anything but the the triple equals operator. The rule is added under the <i>rules</i> field in the configuration file.
 
-```json
+```js
 {
   // ...
-  "rules": {
+  'rules': {
     // ...
-    "eqeqeq": "error"
+   'eqeqeq': 'error',
   },
 }
 ```
 
-
 While we're at it, let's make a few other changes to the rules.
-
 
 Let's prevent unnecessary [trailing spaces](https://eslint.org/docs/rules/no-trailing-spaces) at the ends of lines, let's require that [there is always a space before and after curly braces](https://eslint.org/docs/rules/object-curly-spacing), and let's also demand a consistent use of whitespaces in the function parameters of arrow functions.
 
-```json
+```js
 {
   // ...
-  "rules": {
+  'rules': {
     // ...
-    "eqeqeq": "error",
-    "no-trailing-spaces": "error",
-    "object-curly-spacing": [
-        "error", "always"
+    'eqeqeq': 'error',
+    'no-trailing-spaces': 'error',
+    'object-curly-spacing': [
+        'error', 'always'
     ],
-    "arrow-spacing": [
-        "error", { "before": true, "after": true }
+    'arrow-spacing': [
+        'error', { 'before': true, 'after': true }
     ]
   },
 }
@@ -422,30 +412,30 @@ Let's prevent unnecessary [trailing spaces](https://eslint.org/docs/rules/no-tra
 Our default configuration takes a bunch of predetermined rules into use from <i>eslint:recommended</i>:
 
 ```bash
-"extends": "eslint:recommended",
+'extends': 'eslint:recommended',
 ```
 
 
 This includes a rule that warns about _console.log_ commands. [Disabling](https://eslint.org/docs/user-guide/configuring#configuring-rules) a rule can be accomplished by defining its "value" as 0 in the configuration file. Let's do this for the <i>no-console</i> rule in the meantime.
 
-```json
+```js
 {
   // ...
-  "rules": {
-    // ...
-    "eqeqeq": "error",
-    "no-trailing-spaces": "error",
-    "object-curly-spacing": [
-        "error", "always"
-    ],
-    "arrow-spacing": [
-        "error", { "before": true, "after": true }
-    ],
-    "no-console": 0 // highlight-line
+  'rules': {
+      // ...
+      'eqeqeq': 'error',
+      'no-trailing-spaces': 'error',
+      'object-curly-spacing': [
+          'error', 'always'
+      ],
+      'arrow-spacing': [
+          'error', { 'before': true, 'after': true }
+      ]
+    },
+    'no-console': 0 // highlight-line
   },
 }
 ```
-
 
 **NB** when you make changes to the <i>.eslintrc.js</i> file, it is recommended to run the linter from the command line. This will verify that the configuration file is correctly formatted:
 

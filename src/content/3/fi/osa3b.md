@@ -262,11 +262,13 @@ Myös frontendin koodin deployaaminen omana sovelluksenaan voi joissain tilantei
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3), branchissa <i>part3-3</i>.
 
+Frontendin koodiin tehdyt muutokset ovat the [frontendin repositorion](https://github.com/fullstack-hy2020/part2-notes/tree/part3-1) branchissa <i>part3-1</i>.
+
 </div>
 
 <div class="tasks">
 
-### Tehtäviä
+### Tehtävät 3.9.-3.11.
 
 Seuraavissa tehtävissä koodia ei tarvita montaa riviä. Tehtävät ovat kuitenkin haastavia, sillä nyt on tarkalleen hallittava, missä tapahtuu mitäkin, ja kaikki konfiguraatiot on tehtävä täsmälleen oikein. 
 

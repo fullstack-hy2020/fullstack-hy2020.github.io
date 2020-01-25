@@ -812,7 +812,7 @@ Mitä rivillä tapahtuu? <em>notes.map(n => n.id)</em> muodostaa taulukon, joka 
 
 <div class="tasks">
 
-### Tehtäviä 
+### Tehtävät 3.1.-3.6.
 
 **HUOM:** tämän osan tehtäväsarja kannattaa tehdä omaan git-repositorioon, suoraan repositorion juureen! Jos et tee näin, joudut ongelmiin tehtävässä 3.10
 
@@ -953,7 +953,7 @@ Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://git
 
 <div class="tasks">
 
-### Tehtäviä
+### Tehtävät 3.7.-3.8.
 
 #### 3.7: puhelinluettelon backend step7
 
