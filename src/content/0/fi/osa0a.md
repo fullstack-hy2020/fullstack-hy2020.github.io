@@ -103,8 +103,6 @@ Harjoitustyö on mahdollista tehdä myös pari- tai ryhmätyönä.
 
 Lisää tietoa harjoitustyöstä avoimen yliopiston [sivulla](https://courses.helsinki.fi/fi/aytkt21010).
 
-Linkin takana oleva 
-
 ### Alkutoimet
 
 Tällä kurssilla suositellaan Chrome-selaimen käyttöä, sillä se tarjoaa parhaan välineistön web-sovelluskehitystä ajatellen.
