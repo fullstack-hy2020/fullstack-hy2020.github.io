@@ -126,18 +126,15 @@ app.listen(port)
 console.log(`Server running on port ${port}`)
 ```
 
-
 Once the application is running, the following message is printed in the console:
 
 ```bash
 Server running on port 3001
 ```
 
-
 We can open our humble application in the browser by visiting the address <http://localhost:3001>:
 
 ![](../../images/3/1.png)
-
 
 In fact, the server works the same way regardless of the latter part of the URL. Also the address <http://localhost:3001/foo/bar> will display the same content.
 
@@ -163,14 +160,11 @@ Error: listen EADDRINUSE :::3001
 
 You have two options. Either shutdown the application using the port 3001 (the json-server in the last part of the material was using the port 3001), or use a different port for this application.
 
-
 Let's take a closer look at the first line of the code:
 
 ```js
 const http = require('http')
 ```
-
-
 
 In the first row, the application imports Node's built-in [web server](https://nodejs.org/docs/latest-v8.x/api/http.html) module. This is practically what we have already been doing in our browser-side code, but with a slightly different syntax:
 
@@ -178,15 +172,11 @@ In the first row, the application imports Node's built-in [web server](https://n
 import http from 'http'
 ```
 
-
 These days, code that runs in the browser uses ES6 modules. Modules are defined with an [export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) and taken into use with an [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import).
-
 
 However, Node.js uses so-called [CommonJS](https://en.wikipedia.org/wiki/CommonJS) modules. The reason for this is that the Node ecosystem had a need for modules long before JavaScript supported them in the language specification. At the time of writing this material, Node does not support ES6 modules, but support for them [is coming](https://nodejs.org/api/esm.html) somewhere down the road.
 
-
 CommonJS modules function almost exactly like ES6 modules, at least as far as our needs in this course are concerned.
-
 
 The next chunk in our code looks like this:
 
@@ -257,12 +247,6 @@ The <i>application/json</i> value in the <i>Content-Type</i> header informs the 
 When we open the browser, the displayed format is exactly the same as in [part 2](/en/part2/getting_data_from_server/) where we used [json-server](https://github.com/typicode/json-server) to serve the list of notes:
 
 ![](../../images/3/2e.png)
-
-We're nearly ready to start using our new backend with the notes application frontend from part 2. Nearly, but not quite. When we fire up the frontend, we see the following error message in the console:
-
-![](../../assets/3/3.png)
-
-We will look into this error soon, but first we will improve our code in other ways.
 
 ### Express
 
@@ -988,7 +972,7 @@ The application must also offer an _npm run dev_ command that will run the appli
 
 Implement a page at the address <http://localhost:3001/info> that looks roughly like this:
 
-![](../../images/3/23e.png)
+![](../../images/3/23ea.png)
 
 
 The page has to show the time that the request was received and how many entries are in the phonebook at the time of processing the request.
@@ -1068,13 +1052,13 @@ All HTTP requests except POST should be <i>idempotent</i>:
 This means that if a request has side-effects, then the result should be same regardless of how many times the request is sent.
 
 
-If we make an HTTP PUT request to the url <i>/notes/10</i> and with the request we send the data <em>{ content: "no side effects!", important: true }</em>, the result is the same regardless of many times the request is sent.
+If we make an HTTP PUT request to the url <i>/api/notes/10</i> and with the request we send the data <em>{ content: "no side effects!", important: true }</em>, the result is the same regardless of many times the request is sent.
 
 
 Like <i>safety</i> for the GET request, <i>idempotence</i> is also just a recommendation in the HTTP standard and not something that can be guaranteed simply based on the request type. However, when our API adheres to RESTful principles, then GET, HEAD, PUT, and DELETE requests are used in such a way that they are idempotent.
 
 
-POST is the only HTTP request type that is neither <i>safe</i> nor <i>idempotent</i>. If we send 5 different HTTP POST requests to <i>/notes</i> with a body of <em>{content: "many same", important: true}</em>, the resulting 5 notes on the server will all have the same content.
+POST is the only HTTP request type that is neither <i>safe</i> nor <i>idempotent</i>. If we send 5 different HTTP POST requests to <i>/api/notes</i> with a body of <em>{content: "many same", important: true}</em>, the resulting 5 notes on the server will all have the same content.
 
 
 ### Middleware

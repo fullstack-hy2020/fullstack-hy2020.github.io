@@ -19,11 +19,9 @@ module.exports = {
     },
     '3': {
       a: 'Node.js ja Express',
-    /*
       b: 'Sovellus internetiin',
       c: 'Tietojen tallettaminen MongoDB-tietokantaan',
       d: 'Validointi ja ESLint',
-      */
     },
     '4': {
     /*

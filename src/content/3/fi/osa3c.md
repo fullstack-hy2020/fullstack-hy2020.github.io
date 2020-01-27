@@ -23,9 +23,9 @@ Huomaa, että sovellus ei saa olla samalla käynnissä "normaalisti" konsolista,
 
 Seuraavassa screenshot, missä koodi on pysäytetty kesken uuden muistiinpanon lisäyksen
 
-![](../../images/3/36a.png)
+![](../../images/3/36e.png)
 
-Koodi on pysähtynyt nuolen osoittaman <i>breakpointin</i> kohdalle ja konsoliin on evaluoitu muuttujan <i>note</i> arvo. Vasemmalla olevassa ikkunassa on nähtävillä myös muuta ohjelman tilaan liittyvää.
+Koodi on pysähtynyt rivillä 63 olevan <i>breakpointin</i> kohdalle ja konsoliin on evaluoitu muuttujan <i>note</i> arvo. Vasemmalla olevassa ikkunassa on nähtävillä myös kaikki ohjelman muuttujien arvot.
 
 Ylhäällä olevista nuolista yms. voidaan kontrolloida debuggauksen etenemistä.
 
@@ -45,14 +45,13 @@ Debuggeriin pääsee käsiksi klikkaamalla chromen devloper-konsoliin ilmestynee
 
 Debuggausnäkymä toimii kuten React-koodia debugattaessa, <i>Sources</i>-välilehdelle voidaan esim. asettaa breakpointeja, eli kohtia joihin suoritus pysähtyy:
 
-![](../../images/3/38e.png)
+![](../../images/3/38eb.png)
 
-Huomaa, että tällä hetkellä eräs debuggeriin liittyvä [bugi](https://github.com/nodejs/node/issues/23693) aiheuttaa sen, että breakpointit toimivat ainoastaan jos koodissa käytetään koodin pysäyttävää _debugger_-komentoa. 
-
+Ohjelman muuttujien arvoja voi evaluoida oikealla olevaan <i>watch</i>-ikkunaan. 
 
 Kaikki sovelluksen console.log-tulostukset tulevat debuggerin <i>Console</i>-välilehdelle. Voit myös tutkia siellä muuttujien arvoja ja suorittaa mielivaltaista Javascript-koodia:
 
-![](../../images/3/39e.png)
+![](../../images/3/39ea.png)
 
 #### Epäile kaikkea
 
@@ -68,9 +67,9 @@ Virheiden ilmaantuessa <i>ylivoimaisesti huonoin strategia</i> on jatkaa koodin 
 
 Jotta saisimme talletettua muistiinpanot pysyvästi, tarvitsemme tietokannan. Useimmilla laitoksen kursseilla on käytetty relaatiotietokantoja. Tällä kurssilla käytämme [MongoDB](https://www.mongodb.com/):tä, joka on ns. [dokumenttitietokanta](https://en.wikipedia.org/wiki/Document-oriented_database).
 
-Dokumenttitietokannat poikkeavat jossain määrin relaatiotietokannoista niin datan organisointitapansa kuin kyselykielensäkin suhteen. Dokumenttitietokantojen ajatellaan kuuluvan sateenvarjotermin [NoSQL](https://en.wikipedia.org/wiki/NoSQL) alle. Lisää dokumenttitietokannoista ja NoSQL:stä Tietokantojen perusteiden [viikon 7 materiaalista](https://tikape-s18.mooc.fi/part7/).
+Dokumenttitietokannat poikkeavat jossain määrin relaatiotietokannoista niin datan organisointitapansa kuin kyselykielensäkin suhteen. Dokumenttitietokantojen ajatellaan kuuluvan sateenvarjotermin [NoSQL](https://en.wikipedia.org/wiki/NoSQL) alle. Lyhyt johdanto dokumenttitietokannoihin lyöytyy [täällä](https://github.com/fullstack-hy2020/misc/blob/master/dokumenttitietokannat.MD).
 
-**Lue nyt Tietokantojen perusteiden dokumenttitietokantoja kuvaava osuus.** Jatkossa oletetaan, että hallitset käsitteet <i>dokumentti</i> ja <i>kokoelma</i> (collection).
+Lue nyt linkitetty [johdanto](https://github.com/fullstack-hy2020/misc/blob/master/dokumenttitietokannat.MD). Jatkossa oletetaan, että hallitset käsitteet <i>dokumentti</i> ja <i>kokoelma</i> (collection).
 
 MongoDB:n voi luonnollisesti asentaa omalle koneelle. Internetistä löytyy kuitenkin myös palveluna toimivia Mongoja, joista tämän hetken paras valinta on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 
@@ -98,15 +97,19 @@ annetaan käyttäjälle luku- ja kirjoitustoikeus kaikkiin tietokantoihin
 
 Seuraavaksi tulee määritellä ne ip-osoitteet, joista tietokantaan pääsee käsiksi
 
-![](../../images/3/61.png)
+![](../../images/3/61ea.png)
 
 Sallitaan yksinkertaisuuden vuoksi yhteydet kaikkialta:
 
 ![](../../images/3/62.png)
 
-Lopultakin ollaan valmiina ottamaan tietokantayhteyden. Valitaan <i>Connect your application</i> ja <i>Short SRV connection string</i>
+Lopultakin ollaan valmiina ottamaan tietokantayhteyden. Klikataan <i>connect</i>
 
-![](../../images/3/64.png)
+![](../../images/3/63ea.png)
+
+Valitaan <i>Connect your application</i>:
+
+![](../../images/3/64ea.png)
 
 
 Näkymä kertoo <i>MongoDB URI:n</i> eli osoitteen, jonka avulla sovelluksemme käyttämä MongoDB-kirjasto saa yhteyden kantaan.
@@ -114,7 +117,7 @@ Näkymä kertoo <i>MongoDB URI:n</i> eli osoitteen, jonka avulla sovelluksemme k
 Osoite näyttää seuraavalta:
 
 ```bash
-mongodb+srv://fullstack:<PASSWORD>@cluster0-ostce.mongodb.net/test?retryWrites=true
+mongodb+srv://fullstack:<password>@cluster0-ostce.mongodb.net/test?retryWrites=true&w=majority
 ```
 
 Olemme nyt valmiina kannan käyttöön.
@@ -145,7 +148,7 @@ const password = process.argv[2]
 const url =
   `mongodb+srv://fullstack:${password}@cluster0-ostce.mongodb.net/test?retryWrites=true`
 
-mongoose.connect(url, { useNewUrlParser: true })
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
 
 const noteSchema = new mongoose.Schema({
   content: String,
@@ -183,11 +186,7 @@ Kuten näkymä kertoo, on muistiinpanoa vastaava <i>dokumentti</i> lisätty tiet
 
 ![](../../images/3/66a.png)
 
-Tietokanta lienee loogisempaa nimetä paremmin. Kuten dokumentaatio sanoo, kontrolloidaan kannan nimeä tietokanta-URI:in perusteella
-
-![](../../images/3/67.png)
-
-eli tuhotaan kanta <i>test</i>. Päätetään käyttää tietokannasta nimeä <i>note-app</i> muutetaan siis tietokanta-URI muotoon
+Tuhotaan kanta <i>test</i>. Päätetään käyttää tietokannasta nimeä <i>note-app</i> muutetaan siis tietokanta-URI muotoon
 
 ```bash
 mongodb+srv://fullstack:<PASSWORD>@cluster0-ostce.mongodb.net/note-app?retryWrites=true
@@ -223,11 +222,11 @@ Mongoosea käytettäessä periaatteena on kuitenkin se, että tietokantaan talle
 
 ### Olioiden luominen ja tallettaminen
 
-Seuraavaksi sovellus luo muistiinpanoa vastaavan [model](http://mongoosejs.com/docs/models.html):in avulla muistiinpano-olion:
+Seuraavaksi tiedoston <i>mongo.js</i> sovellus luo muistiinpanoa vastaavan [model](http://mongoosejs.com/docs/models.html):in avulla muistiinpano-olion:
 
 ```js
 const note = new Note({
-  content: 'Browser can execute only Javascript',
+  content: 'HTML is Easy',
   date: new Date(),
   important: false,
 })
@@ -250,7 +249,7 @@ Tallennusoperaation tulos on takaisinkutsun parametrissa _result_. Yhtä olioa t
 
 Talletetaan kantaan myös pari muuta muistiinpanoa muokkaamalla dataa koodista ja suorittamalla ohjelma uudelleen.
 
-**HUOM.** Valitettavasti Mongoosen dokumentaatiossa käytetään joka paikassa takaisinkutsufunktioita, joten sieltä ei kannata suoraan copypasteta koodia, sillä promisejen ja vanhanaikaisten callbackien sotkeminen samaan koodiin ei ole kovin järkevää.
+**HUOM:** Valitettavasti Mongoosen dokumentaatiossa käytetään joka paikassa promisejen _then_-metodien sijaan takaisinkutsufunktioita, joten sieltä ei kannata suoraan copypasteta koodia, sillä promisejen ja vanhanaikaisten callbackien sotkeminen samaan koodiin ei ole kovin järkevää.
 
 ### Olioiden hakeminen tietokannasta
 
@@ -265,7 +264,9 @@ Note.find({}).then(result => {
 })
 ```
 
-Kun koodi suoritetaan, kantaan talletetut muistiinpanot tulostuvat.
+Kun koodi suoritetaan, kantaan talletetut muistiinpanot tulostuvat:
+
+![](../../images/3/70ea.png)
 
 Oliot haetaan kannasta _Note_-modelin metodilla [find](http://mongoosejs.com/docs/api.html#find_find). Metodin parametrina on hakuehto. Koska hakuehtona on tyhjä olio <code>{}</code>, saimme kannasta kaikki _notes_-kokoelmaan talletetut oliot.
 
@@ -283,7 +284,7 @@ Note.find({ important: true }).then(result => {
 
 <div class="tasks">
 
-### Tehtäviä
+### Tehtävä 3.12
 
 #### 3.12: tietokanta komentoriviltä
 
@@ -333,7 +334,7 @@ Saat selville ohjelman komentoriviparametrit muuttujasta [process.argv](https://
 ```js
 Person
   .find({})
-  .then(persons=> {
+  .then(persons => {
     // ...
   })
 
@@ -347,7 +348,7 @@ Oikea paikka tietokantayhteyden sulkemiselle on takaisinkutsufunktion loppu:
 ```js
 Person
   .find({})
-  .then(persons=> {
+  .then(persons => {
     // ...
     mongoose.connection.close()
   })
@@ -372,7 +373,7 @@ const mongoose = require('mongoose')
 const url =
   'mongodb+srv://fullstack:sekred@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
 
-mongoose.connect(url, { useNewUrlParser: true })
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
 
 const noteSchema = new mongoose.Schema({
   content: String,
@@ -395,7 +396,7 @@ app.get('/api/notes', (request, response) => {
 
 Voimme todeta selaimella, että backend toimii kaikkien dokumenttien näyttämisen osalta:
 
-![](../../images/3/44e.png)
+![](../../images/3/44ea.png)
 
 Toiminnallisuus on muuten kunnossa, mutta frontend olettaa, että olioiden yksikäsitteinen tunniste on kentässä <i>id</i>. Emme myöskään halua näyttää frontendille mongon versiointiin käyttämää kenttää <i>\_\_v</i>. 
 
@@ -437,8 +438,7 @@ const mongoose = require('mongoose')
 const url = process.env.MONGODB_URI // highlight-line
 
 console.log('connecting to', url) // highlight-line
-
-mongoose.connect(url, { useNewUrlParser: true })
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
 // highlight-start
   .then(result => {
     console.log('connected to MongoDB')
@@ -484,7 +484,7 @@ const url = process.env.MONGODB_URI
 
 console.log('connecting to', url)
 
-mongoose.connect(url, { useNewUrlParser: true })
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(result => {
     console.log('connected to MongoDB')
   })
@@ -602,13 +602,13 @@ Todennäköisesti voi olla kannattavaa edetä frontin ja backin integroinnissa t
 
 Kun kuvioissa on mukana tietokanta, on tietokannan tilan tarkastelu MongoDB Atlasin hallintanäkymästä varsin hyödyllistä, usein myös suoraan tietokantaa käyttävät Node-apuohjelmat, kuten tiedostoon <i>mongo.js</i> kirjoittamamme koodi auttavat sovelluskehityksen edetessä.
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3), branchissa <i>part3-3</i>.
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4), branchissa <i>part3-4</i>.
 
 </div>
 
 <div class="tasks">
 
-### Tehtäviä
+### Tehtävät 3.13.-3.14.
 
 Seuraavat tehtävät saattavat olla melko suoraviivaisia, tosin jos frontend-koodissasi sattuu olemaan bugeja tai epäyhteensopivuutta backendin kanssa, voi seurauksena olla myös mielenkiintoisia bugeja.
 
@@ -708,7 +708,7 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-Jos kannasta ei löydy haettua olioa, muuttujan _note_ arvo on _undefined_ ja koodi ajautuu _else_-haaraan. Siellä vastataan kyselyyn <i>404 not found_</i>
+Jos kannasta ei löydy haettua olioa, muuttujan _note_ arvo on _undefined_ ja koodi ajautuu _else_-haaraan. Siellä vastataan kyselyyn <i>404 not found</i>
 
 Jos id ei ole hyväksyttävässä muodossa, ajaudutaan _catch_:in avulla määriteltyyn virheidenkäsittelijään. Sopiva statuskoodi on [400 bad request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1) koska kyse on juuri siitä:
 
@@ -740,7 +740,7 @@ Olemme kirjoittaneet poikkeuksen aiheuttavan virhetilanteen käsittelevän koodi
 Muutetaan routen <i>/api/notes/:id</i> käsittelijää siten, että se <i>siirtää virhetilanteen käsittelyn eteenpäin</i> funktiolla <em>next</em>, jonka se saa <i>kolmantena</i> parametrina:
 
 ```js
-app.get('/api/notes/:id', (request, response, next) => {
+app.get('/api/notes/:id', (request, response, next) => { // highlight-line
   Note.findById(request.params.id)
     .then(note => {
       if (note) {
@@ -749,7 +749,7 @@ app.get('/api/notes/:id', (request, response, next) => {
         response.status(404).end()
       }
     })
-    .catch(error => next(error))
+    .catch(error => next(error)) // highlight-line
 })
 ```
 
@@ -900,13 +900,13 @@ mongoose.set('useFindAndModify', false) // highlight-line
 module.exports = mongoose.model('Note', noteSchema) 
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4), branchissa <i>part3-4</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5), branchissa <i>part3-5</i>.
 
 </div>
 
 <div class="tasks">
 
-### Tehtäviä
+### Tehtävät 3.15.-3.18.
 
 #### 3.15: puhelinluettelo ja tietokanta, step3
 
@@ -917,6 +917,8 @@ Varmista, että frontend toimii muutosten jälkeen.
 #### 3.16: puhelinluettelo ja tietokanta, step4
 
 Keskitä sovelluksen virheidenkäsittely middlewareen.
+
+Muista, että virheitä heittävät routejen metodit tarvitsevat myös kolmannen parametrin <i>next</i>
 
 #### 3.17*: puhelinluettelo ja tietokanta, step5
 

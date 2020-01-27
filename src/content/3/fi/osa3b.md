@@ -7,11 +7,29 @@ lang: fi
 
 <div class="content">
 
-Palataan yritykseemme käyttää nyt tehtyä backendiä [osassa 2](/osa2) tehdyllä React-frontendillä. Aiempi yritys lopahti seuraavaan virheilmoitukseen
+Yhdistetään seuraavaksi [osassa 2](/osa2) tekemämme frontend omaan backendiimme. 
 
-![](../../assets/3/3.png)
+Edellisessä osassa backendinä toiminut json-server tarjosi muistiinpanojen listan osoitteessa http://localhost:3001/notes fronendin käyttöön. Backendimme urlien rakenne on hieman erilainen, muistiinpanot löytyvät osoitteesta http://localhost:3001/api/notes, eli muutetaan frontendin tiedostossa <i>src/services/notes.js</i> määriteltyä muuttujaa _baseUrl_ seuraavasti:
 
-Frontendin tekemä GET-pyyntö osoitteeseen <http://localhost:3001/notes> ei jostain syystä toimi. Mistä on kyse? Backend toimii kuitenkin selaimesta ja postmanista käytettäessä ilman ongelmaa.
+```js
+import axios from 'axios'
+const baseUrl = 'http://localhost:3001/api/notes' //highlight-line
+
+const getAll = () => {
+  const request = axios.get(baseUrl)
+  return request.then(response => response.data)
+}
+
+// ...
+
+export default { getAll, create, update }
+```
+
+Frontendin tekemä GET-pyyntö osoitteeseen <http://localhost:3001/api/notes> ei jostain syystä toimi:
+
+![](../../images/3/3ae.png)
+
+Mistä on kyse? Backend toimii kuitenkin selaimesta ja postmanista käytettäessä ilman ongelmaa.
 
 ### Same origin policy ja CORS
 
@@ -25,7 +43,7 @@ Korostetaan vielä, että [same origin policy](https://developer.mozilla.org/en-
 
 Voimme sallia muista <i>origineista</i> tulevat pyynnöt käyttämällä Noden [cors](https://github.com/expressjs/cors)-middlewarea.
 
-Asennetaan <i>cors</i> komennolla
+Asennetaan backendiin <i>cors</i> komennolla
 
 ```bash
 npm install cors --save
@@ -49,7 +67,7 @@ Kun koko "stäkki" on saatu vihdoin kuntoon, siirretään sovellus internettiin.
 
 > <i>Jos et ole koskaan käyttänyt herokua, löydät käyttöohjeita kurssin [Tietokantasovellus](https://materiaalit.github.io/tsoha-18/viikko1/)-materiaalista ja Googlaamalla...</i>
 
-Lisätään projektin juureen tiedosto <i>Procfile</i>, joka kertoo Herokulle, miten sovellus käynnistetään
+Lisätään backendin projektin juureen tiedosto <i>Procfile</i>, joka kertoo Herokulle, miten sovellus käynnistetään
 
 ```bash
 web: node index.js
@@ -76,7 +94,7 @@ Luodaan heroku-sovellus komennolla _heroku create_, tehdään sovelluksen hakemi
 
 Jos kaikki meni hyvin, sovellus toimii:
 
-![](../../images/3/25e.png)
+![](../../images/3/25ea.png)
 
 Jos ei, vikaa voi selvittää herokun lokeja lukemalla, eli komennolla _heroku logs_.
 
@@ -112,12 +130,12 @@ Eräs mahdollisuus frontendin tuotantoon viemiseen on kopioida tuotantokoodi, el
 Aloitetaan kopioimalla frontendin tuotantokoodi backendin alle, projektin juureen. Omalla koneellani kopiointi tapahtuu frontendin hakemistosta käsin komennolla
 
 ```bash
-cp -r build ../../../osa3/notes-backend
+cp -r build ../../../3/luento/notes-backend
 ```
 
 Backendin sisältävän hakemiston tulee nyt näyttää seuraavalta:
 
-![](../../images/3/27.png)
+![](../../images/3/27ea.png)
 
 Jotta saamme expressin näyttämään <i>staattista sisältöä</i> eli sivun <i>index.html</i> ja sen lataaman Javascriptin ym. tarvitsemme expressiin sisäänrakennettua middlewarea [static](http://expressjs.com/en/starter/static-files.html).
 
@@ -131,11 +149,11 @@ tarkastaa Express GET-tyyppisten HTTP-pyyntöjen yhteydessä ensin löytyykö py
 
 Nyt HTTP GET -pyyntö osoitteeseen <i>www.palvelimenosoite.com/index.html</i> tai <i>www.palvelimenosoite.com</i> näyttää Reactilla tehdyn frontendin. GET-pyynnön esim. osoitteeseen <i>www.palvelimenosoite.com/notes</i> hoitaa backendin koodi.
 
-Koska tässä tapauksessa sekä frontend että backend toimivat samassa osoitteessa, voidaan React-sovelluksessa tapahtuva backendin _baseUrl_ määritellä [suhteellisena](https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2) URL:ina, eli ilman palvelinta yksilöivää osaa:
+Koska tässä tapauksessa sekä frontend että backend toimivat samassa osoitteessa, voidaan React-sovelluksessa oleva backendin _baseUrl_ määritellä [suhteellisena](https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2) URL:ina, eli ilman palvelinta yksilöivää osaa:
 
 ```js
 import axios from 'axios'
-const baseUrl = '/notes' // highlight-line
+const baseUrl = '/api/notes' // highlight-line
 
 const getAll = () => {
   const request = axios.get(baseUrl)
@@ -173,13 +191,13 @@ Sivu sisältää ohjeen ladata sovelluksen tyylit määrittelevän CSS-tiedoston
 
 React-koodi hakee palvelimelta muistiinpanot osoitteesta <http://localhost:3001/notes> ja renderöi ne ruudulle. Selaimen ja palvelimen kommunikaatio selviää tuttuun tapaan konsolin välilehdeltä <i>Network</i>:
 
-![](../../images/3/29e.png)
+![](../../images/3/29ea.png)
 
 Kun sovelluksen "internettiin vietävä" tuotantoversio todetaan toimivan paikallisesti, commitoidaan frontendin tuotantoversio backendin repositorioon ja pushataan koodi uudelleen herokuun.
 
 [Sovellus](https://vast-oasis-81447.herokuapp.com/) toimii moitteettomasti lukuunottamatta vielä backendiin toteuttamatonta muistiinpanon tärkeyden muuttamista:
 
-![](../../images/3/30e.png)
+![](../../images/3/30ea.png)
 
 Sovelluksemme tallettama tieto ei ole ikuisesti pysyvää, sillä sovellus tallettaa muistiinpanot muuttujaan. Jos sovellus kaatuu tai se uudelleenkäynnistetään, kaikki tiedot katoavat.
 
@@ -204,51 +222,11 @@ _npm run deploy:full_ yhdistää nuo molemmat sekä lisää vaadittavat <i>git</
 
 Huomaa, että skriptissä <i>build:ui</i> olevat polut riippuvat repositorioiden sijainnista.
 
-### Backendin URL:it
-
-Backendin tarjoama muistiinpanojen käsittelyn rajapinta on nyt suoraan sovelluksen URL:in <https://vast-oasis-81447.herokuapp.com/> alla. Eli <https://vast-oasis-81447.herokuapp.com/notes> on kaikkien mustiinpanojen lista ym. Koska backendin roolina on tarjota frontendille koneluettava rajapinta, eli API, olisi ehkä parempi erottaa API:n tarjoama osoitteisto selkeämmin, esim. aloittamalla kaikki sanalla _api_.
-
-Tehdään muutos ensin muuttamalla käsin **kaikki backendin routet**:
-
-```js
-//...
-app.get('/api/notes', (request, response) => {
-  response.json(notes)
-});
-//...
-```
-
-Frontendin koodiin riittää seuraava muutos
-
-```js
-import axios from 'axios'
-const baseUrl = '/api/notes'  // highlight-line
-
-const getAll = () => {
-  const request = axios.get(baseUrl)
-  return request.then(response => response.data)
-}
-
-// ...
-```
-
-Muutosten jälkeen esim. kaikki muistiinpanot tarjoavan API-endpointin osoite on <https://vast-oasis-81447.herokuapp.com/api/notes>
-
-![](../../images/3/31e.png)
-
-Frontend on edelleen sovelluksen juuressa eli osoitteessa <https://vast-oasis-81447.herokuapp.com/>.
-
-> Sivuhuomautus: **API:en versiointi**
->
-> Joskus API:n urleissa ilmaistaan myös API:n versio. Eri versioita saatetaan tarvita, jos aikojen kuluessa API:in tehdään laajennuksia, jotka ilman versiointia hajoittaisivat olemassaolevia osia ohjelmista. Versioinnin avulla voidaan tuoda vanhojen rinnalle uusia, hieman eri tavalla toimivia versioita API:sta.
->
-> API:n version ilmaiseminen URL:issa ei kuitenkaan ole välttämättä, ainakaan kaikkien mielestä järkevää vaikka tapaa paljon käytetäänkin. Oikeasta tavasta API:n versiointiin [kiistellään ympäri internettiä](https://stackoverflow.com/questions/389169/best-practices-for-api-versioning).
-
 ### Proxy
 
 Frontendiin tehtyjen muutosten seurauksena on nyt se, että kun suoritamme frontendiä sovelluskehitysmoodissa, eli käynnistämällä sen komennolla _npm start_, yhteys backendiin ei toimi:
 
-![](../../images/3/32e.png)
+![](../../images/3/32ea.png)
 
 Syynä tälle on se, että backendin osoite muutettiin suhteellisesti määritellyksi:
 
@@ -284,11 +262,13 @@ Myös frontendin koodin deployaaminen omana sovelluksenaan voi joissain tilantei
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3), branchissa <i>part3-3</i>.
 
+Frontendin koodiin tehdyt muutokset ovat the [frontendin repositorion](https://github.com/fullstack-hy2020/part2-notes/tree/part3-1) branchissa <i>part3-1</i>.
+
 </div>
 
 <div class="tasks">
 
-### Tehtäviä
+### Tehtävät 3.9.-3.11.
 
 Seuraavissa tehtävissä koodia ei tarvita montaa riviä. Tehtävät ovat kuitenkin haastavia, sillä nyt on tarkalleen hallittava, missä tapahtuu mitäkin, ja kaikki konfiguraatiot on tehtävä täsmälleen oikein. 
 
