@@ -16,7 +16,6 @@ Let's continue our work on the backend of the notes application we started in [p
 
 Before we move into the topic of testing, we will modify the structure of our project to adhere to Node.js best practices.
 
-
 After making the changes to the directory structure of our project, we end up with the following structure:
 
 ```bash
@@ -32,27 +31,46 @@ After making the changes to the directory structure of our project, we end up wi
 ├── package.json
 ├── utils
 │   ├── config.js
+│   ├── logger.js
 │   └── middleware.js  
 ```
 
+Olemme toistaiseksi tulostelleet koodista erilaista logaustietoa komennoilla  <i>console.log</i> ja <i>console.error</i>, tämä ei ole kovin järkevä käytäntö. Eristetään kaikki konsoliin tulostelu omaan moduliinsa <i>utils/logger.js</i>:
+
+```js
+const info = (...params) => {
+  console.log(...params)
+}
+
+const error = (...params) => {
+  console.error(...params)
+}
+
+module.exports = {
+  info, error
+}
+```
+
+Loggeri tarjoaa kaksi funktiota, normaalien logiviesteihin tarkoitetun funktion _info_ sekä virhetilanteisiin tarkoitetun funktion _error_.
+
+Extracting logging into its own module is a good idea in more ways than one. If we wanted to start writing logs to a file or send them to an external logging service like [graylog](https://www.graylog.org/) or [papertrail](https://papertrailapp.com) we would only have to make changes in one place.
 
 The contents of the <i>index.js</i> file used for starting the application gets simplified as follows:
 
 ```js
-const app = require('./app') // the actual Express app
+const app = require('./app') // varsinainen Express-sovellus
 const http = require('http')
 const config = require('./utils/config')
+const logger = require('./utils/logger')
 
 const server = http.createServer(app)
 
 server.listen(config.PORT, () => {
-  console.log(`Server running on port ${config.PORT}`)
+  logger.info(`Server running on port ${config.PORT}`)
 })
 ```
 
-
-The <i>index.js</i> file only imports the actual application from the <i>app.js</i> file and then starts the application.
-
+The <i>index.js</i> file only imports the actual application from the <i>app.js</i> file and then starts the application. The function _info_ of the logger-module is used for the console printout telling that the application is running.
 
 The handling of environment variables is extracted into a separate <i>utils/config.js</i> file:
 
@@ -68,7 +86,6 @@ module.exports = {
 }
 ```
 
-
 The other parts of the application can access the environment variables by importing the configuration module:
 
 ```js
@@ -77,9 +94,7 @@ const config = require('./utils/config')
 console.log(`Server running on port ${config.PORT}`)
 ```
 
-
 The route handlers have also been moved into a dedicated module. The event handlers of routes are commonly referred to as <i>controllers</i>, and for this reason we have created a new <i>controllers</i> directory. All of the routes related to notes are now in the <i>notes.js</i> module under the <i>controllers</i> directory.
-
 
 The contents of the <i>notes.js</i> module are the following:
 
@@ -147,9 +162,7 @@ notesRouter.put('/:id', (request, response, next) => {
 module.exports = notesRouter
 ```
 
-
 This is almost an exact copy-paste of our previous <i>index.js</i> file.
-
 
 However, there are a few significant changes. At the very beginning of the file we create a new [router](http://expressjs.com/en/api.html#router) object:
 
@@ -160,7 +173,6 @@ const notesRouter = require('express').Router()
 
 module.exports = notesRouter
 ```
-
 
 The module exports the router to be available for all consumers of the module.
 
@@ -174,21 +186,17 @@ It's worth noting that the paths in the route handlers have shortened. In the pr
 app.delete('/api/notes/:id', (request, response) => {
 ```
 
-
 And in the current version, we have:
 
 ```js
 notesRouter.delete('/:id', (request, response) => {
 ```
 
-
 So what are these router objects exactly? The Express manual provides the following explanation:
 
 > <i>A router object is an isolated instance of middleware and routes. You can think of it as a “mini-application,” capable only of performing middleware and routing functions. Every Express application has a built-in app router.</i>
 
-
 The router is in fact a <i>middleware</i>, that can be used for defining "related routes" in a single place, that is typically placed in its own module.
-
 
 The <i>app.js</i> file that creates the actual application, takes the router into use as shown below:
 
@@ -196,7 +204,6 @@ The <i>app.js</i> file that creates the actual application, takes the router int
 const notesRouter = require('./controllers/notes')
 app.use('/api/notes', notesRouter)
 ```
-
 
 The router we defined earlier is used <i>if</i> the URL of the request starts with <i>/api/notes</i>. For this reason, the notesRouter object must only define the relative parts of the routes, i.e. the empty path <i>/</i> or just the parameter <i>/:id</i>.
 
@@ -211,16 +218,17 @@ const app = express()
 const cors = require('cors')
 const notesRouter = require('./controllers/notes')
 const middleware = require('./utils/middleware')
+const logger = require('./utils/logger')
 const mongoose = require('mongoose')
 
-console.log('connecting to', config.MONGODB_URI)
+logger.info('connecting to', config.MONGODB_URI)
 
-mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true })
+mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    console.log('connected to MongoDB')
+    logger.info('connected to MongoDB')
   })
   .catch((error) => {
-    console.log('error connection to MongoDB:', error.message)
+    logger.error('error connection to MongoDB:', error.message)
   })
 
 app.use(cors())
@@ -236,18 +244,18 @@ app.use(middleware.errorHandler)
 module.exports = app
 ```
 
-
 The file takes different middleware into use, and one of these is the <i>notesRouter</i> that is attached to the <i>/api/notes</i> route.
-
 
 Our custom middleware has been moved to a new <i>utils/middleware.js</i> module:
 
 ```js
+const logger = require('./logger')
+
 const requestLogger = (request, response, next) => {
-  console.log('Method:', request.method)
-  console.log('Path:  ', request.path)
-  console.log('Body:  ', request.body)
-  console.log('---')
+  logger.info('Method:', request.method)
+  logger.info('Path:  ', request.path)
+  logger.info('Body:  ', request.body)
+  logger.info('---')
   next()
 }
 
@@ -256,7 +264,7 @@ const unknownEndpoint = (request, response) => {
 }
 
 const errorHandler = (error, request, response, next) => {
-  console.error(error.message)
+  logger.error(error.message)
 
   if (error.name === 'CastError' && error.kind === 'ObjectId') {
     return response.status(400).send({ error: 'malformatted id' })
@@ -273,7 +281,6 @@ module.exports = {
   errorHandler
 }
 ```
-
 
 The responsibility of establishing the connection to the database has been given to the  <i>app.js</i> module. The <i>note.js</i> file under the <i>models</i> directory only defines the Mongoose schema for notes.
 
@@ -317,9 +324,9 @@ To recap, the directory structure looks like this after the changes have been ma
 ├── package.json
 ├── utils
 │   ├── config.js
+│   ├── logger.js
 │   └── middleware.js  
 ```
-
 
 For smaller applications the structure does not matter that much. Once the application starts to grow in size, you are going to have to establish some kind of structure, and separate the different responsibilities of the application into separate modules. This will make developing the application much easier.
 
@@ -333,15 +340,11 @@ If you clone the project for yourself, run the _npm install_ command before star
 
 <div class="tasks">
 
-
 ### Exercises
-
 
 In the exercises for this part we will be building a <i>blog list application</i>, that allows users to save information about interesting blogs they have stumbled across on the internet. For each listed blog we will save the author, title, url, and amount of upvotes from users of the application.
 
-
 #### 4.1 Blog list, step1
-
 
 Let's imagine a situation, where you receive an email that contains the following application body:
 
@@ -363,7 +366,7 @@ const blogSchema = mongoose.Schema({
 const Blog = mongoose.model('Blog', blogSchema)
 
 const mongoUrl = 'mongodb://localhost/bloglist'
-mongoose.connect(mongoUrl, { useNewUrlParser: true })
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
 
 app.use(cors())
 app.use(bodyParser.json())
@@ -392,15 +395,11 @@ app.listen(PORT, () => {
 })
 ```
 
-
 Turn the application into a functioning <i>npm</i> project. In order to keep your development productive, configure the application to be executed with <i>nodemon</i>. You can create a new database for your application with MongoDB Atlas, or use the same database from the previous part's exercises.
-
 
 Verify that it is possible to add blogs to list with Postman or the VS Code REST client and that the application returns the added blogs at the correct endpoint.
 
-
 #### 4.2 Blog list, step2
-
 
 Refactor the application into separate modules as shown earlier in this part of the course material.
 
@@ -409,7 +408,6 @@ Refactor the application into separate modules as shown earlier in this part of 
 
 
 One best practice is to commit your code every time it is in a stable state. This makes it easy to rollback to a situation where the application still works.
-
 
 </div>
 
@@ -425,14 +423,14 @@ We have completely neglected one essential area of software development, and tha
 Let's start our testing journey by looking at unit tests. The logic of our application is so simple, that there is not much that makes sense to test with unit tests. Let's create a new file <i>utils/for_testing.js</i> and write a couple of simple functions that we can use for test writing practice:
 
 ```js
-const palindrome = string => {
+const palindrome = (string) => {
   return string
     .split('')
     .reverse()
     .join('')
 }
 
-const average = array => {
+const average = (array) => {
   const reducer = (sum, item) => {
     return sum + item
   }
@@ -471,8 +469,8 @@ Let's define the <i>npm script _test_</i> to execute tests with Jest and to repo
   //...
   "scripts": {
     "start": "node index.js",
-    "watch": "nodemon index.js",
-    "build:ui": "rm -rf build && cd ../../osa2/notes/ && npm run build --prod && cp -r build ../../osa3/backend/",
+    "dev": "nodemon index.js",
+    "build:ui": "rm -rf build && cd ../../../2/luento/notes && npm run build && cp -r build ../../../3/luento/notes-backend",
     "deploy": "git push heroku master",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
     "logs:prod": "heroku logs --tail",
@@ -483,8 +481,7 @@ Let's define the <i>npm script _test_</i> to execute tests with Jest and to repo
 }
 ```
 
-
-In newer versions of Jest, there appears to be the need to specify that the execution environment is Node. This can be done by adding the following to the end of <i>package.json</i>:
+Jest requires one to specify that the execution environment is Node. This can be done by adding the following to the end of <i>package.json</i>:
 
 ```js
 {
@@ -495,7 +492,6 @@ In newer versions of Jest, there appears to be the need to specify that the exec
 }
 ```
 
-
 Alternatively, Jest can look for a configuration file with the default name <i>jest.config.js</i>, where we can define the execution environment like this:
 
 ```js
@@ -503,7 +499,6 @@ module.exports = {
   testEnvironment: 'node',
 };
 ```
-
 
 Let's create a separate directory for our tests called <i>tests</i> and create a new file called <i>palindrome.test.js</i> with the following contents:
 
@@ -626,8 +621,9 @@ const average = array => {
   const reducer = (sum, item) => {
     return sum + item
   }
+
   return array.length === 0
-    ? 0 
+    ? 0
     : array.reduce(reducer, 0) / array.length
 }
 ```

@@ -24,8 +24,8 @@ module.exports = {
       d: 'Validointi ja ESLint',
     },
     '4': {
-    /*
       a: 'Sovelluksen rakenne ja testauksen alkeet',
+/*
       b: 'Backendin testaaminen',
       c: 'Käyttäjien hallinta',
       d: 'Token-perustainen kirjautuminen',

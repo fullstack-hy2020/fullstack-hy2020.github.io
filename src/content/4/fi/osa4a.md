@@ -27,9 +27,30 @@ Seuraavassa läpikäytävien muutosten jälkeen sovelluksemme hakemistorakenne n
 ├── package-lock.json
 ├── package.json
 ├── utils
+│   ├── logger.js
 │   ├── config.js
 │   └── middleware.js  
 ```
+
+Olemme toistaiseksi tulostelleet koodista erilaista logaustietoa komennoilla <i>console.log</i> ja <i>console.error</i>, tämä ei ole kovin järkevä käytäntö. Eristetään kaikki konsoliin tulostelu omaan moduliinsa <i>utils/logger.js</i>:
+
+```js
+const info = (...params) => {
+  console.log(...params)
+}
+
+const error = (...params) => {
+  console.error(...params)
+}
+
+module.exports = {
+  info, error
+}
+```
+
+Loggeri tarjoaa kaksi funktiota, normaalien logiviesteihin tarkoitetun funktion _info_ sekä virhetilanteisiin tarkoitetun funktion _error_.
+
+Logauksen eristäminen omaan moduulinsa vastuulle on monellakin tapaa järkevää. Jos esim. päätämme ruveta kirjoittamaan logeja tiedostoon tai keräämään ne johonkin ulkoiseen palveuun kuten [graylog](https://www.graylog.org/) tai [papertrail](https://papertrailapp.com), on muutos helppo tehdä yhteen paikkaan.
 
 Sovelluksen käynnistystiedosto <i>index.js</i> pelkistyy seuraavaan muotoon:
 
@@ -37,15 +58,16 @@ Sovelluksen käynnistystiedosto <i>index.js</i> pelkistyy seuraavaan muotoon:
 const app = require('./app') // varsinainen Express-sovellus
 const http = require('http')
 const config = require('./utils/config')
+const logger = require('./utils/logger')
 
 const server = http.createServer(app)
 
 server.listen(config.PORT, () => {
-  console.log(`Server running on port ${config.PORT}`)
+  logger.info(`Server running on port ${config.PORT}`)
 })
 ```
 
-<i>index.js</i> ainoastaan importaa tiedostossa <i>app.js</i> olevan varsinaisen sovelluksen ja käynnistää sen. Sovelluksen käynnistäminen tapahtuu nyt <em>server</em>-muuttujassa olevan olion kautta. 
+<i>index.js</i> ainoastaan importaa tiedostossa <i>app.js</i> olevan varsinaisen sovelluksen ja käynnistää sen. Sovelluksen käynnistäminen tapahtuu nyt <em>server</em>-muuttujassa olevan olion kautta. Käynnistymisestä kertova konsolitulostus tehtään logger-moduulin funktion _info_ avulla.
 
 Ympäristömuuttujien käsittely on eriytetty moduulin <i>utils/config.js</i> vastuulle:
 
@@ -137,7 +159,7 @@ notesRouter.put('/:id', (request, response, next) => {
 module.exports = notesRouter
 ```
 
-Kyseessä on käytännössä melkein suora copypaste tiedostosta <i>index.js</i>.
+Kyseessä on käytännössä melkein suora copypaste edellisen osan materiaalin tiedostosta <i>index.js</i>.
 
 Muutoksia on muutama. Tiedoston alussa luodaan [router](http://expressjs.com/en/api.html#router)-olio:
 
@@ -190,16 +212,17 @@ const app = express()
 const cors = require('cors')
 const notesRouter = require('./controllers/notes')
 const middleware = require('./utils/middleware')
+const logger = require('./utils/logger')
 const mongoose = require('mongoose')
 
-console.log('connecting to', config.MONGODB_URI)
+logger.info('connecting to', config.MONGODB_URI)
 
-mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true })
+mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    console.log('connected to MongoDB')
+    logger.info('connected to MongoDB')
   })
   .catch((error) => {
-    console.log('error connection to MongoDB:', error.message)
+    logger.error('error connection to MongoDB:', error.message)
   })
 
 app.use(cors())
@@ -220,11 +243,13 @@ Tiedostossa siis otetaan käyttöön joukko middlewareja, näistä yksi on polku
 Itse toteutettujen middlewarejen määritelty on siirretty tiedostoon <i>utils/middleware.js</i>:
 
 ```js
+const logger = require('./logger')
+
 const requestLogger = (request, response, next) => {
-  console.log('Method:', request.method)
-  console.log('Path:  ', request.path)
-  console.log('Body:  ', request.body)
-  console.log('---')
+  logger.info('Method:', request.method)
+  logger.info('Path:  ', request.path)
+  logger.info('Body:  ', request.body)
+  logger.info('---')
   next()
 }
 
@@ -233,7 +258,7 @@ const unknownEndpoint = (request, response) => {
 }
 
 const errorHandler = (error, request, response, next) => {
-  console.error(error.message)
+  logger.error(error.message)
 
   if (error.name === 'CastError' && error.kind === 'ObjectId') {
     return response.status(400).send({ error: 'malformatted id' })
@@ -243,7 +268,6 @@ const errorHandler = (error, request, response, next) => {
 
   next(error)
 }
-
 
 module.exports = {
   requestLogger,
@@ -293,6 +317,7 @@ Sovelluksen hakemistorakenne siis näyttää refaktoroinnin jälkeen seuraavalta
 ├── package.json
 ├── utils
 │   ├── config.js
+│   └── logger.js  
 │   └── middleware.js  
 ```
 
@@ -335,7 +360,7 @@ const blogSchema = mongoose.Schema({
 const Blog = mongoose.model('Blog', blogSchema)
 
 const mongoUrl = 'mongodb://localhost/bloglist'
-mongoose.connect(mongoUrl, { useNewUrlParser: true })
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true})
 
 app.use(cors())
 app.use(bodyParser.json())
@@ -388,14 +413,14 @@ Olemme laiminlyöneet ikävästi yhtä oleellista ohjelmistokehityksen osa-aluet
 Aloitamme yksikkötestauksesta. Sovelluksemme logiikka on sen verran yksinkertaista, että siinä ei ole juurikaan mielekästä yksikkötestattavaa. Luodaan tiedosto <i>utils/for_testing.js</i> ja määritellään sinne pari yksinkertaista funktiota testattavaksi:
 
 ```js
-const palindrome = string => {
+const palindrome = (string) => {
   return string
     .split('')
     .reverse()
     .join('')
 }
 
-const average = array => {
+const average = (array) => {
   const reducer = (sum, item) => {
     return sum + item
   }
@@ -430,8 +455,8 @@ määritellään npm-skripti <i>test</i> suorittamaan testaus jestillä ja rapor
   //...
   "scripts": {
     "start": "node index.js",
-    "watch": "nodemon index.js",
-    "build:ui": "rm -rf build && cd ../../osa2/notes/ && npm run build --prod && cp -r build ../../osa3/backend/",
+    "dev": "nodemon index.js",
+    "build:ui": "rm -rf build && cd ../../../2/luento/notes && npm run build && cp -r build ../../../3/luento/notes-backend",
     "deploy": "git push heroku master",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
     "logs:prod": "heroku logs --tail",
@@ -442,7 +467,7 @@ määritellään npm-skripti <i>test</i> suorittamaan testaus jestillä ja rapor
 }
 ```
 
-Jestin uudemmissa versioissa näyttäisi olevan tarve kertoa, että suoritusympäristönä on käytössä Node. Tämä tapahtuu esim. lisäämällä <i>package.json</i> tiedoston loppuun:
+Jestille pitää vielä kertoa, että suoritusympäristönä on käytössä Node. Tämä tapahtuu esim. lisäämällä <i>package.json</i> tiedoston loppuun:
 
 ```js
 {
