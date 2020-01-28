@@ -25,14 +25,14 @@ Määritellään nyt tiedostossa <i>package.json</i>, että testejä suoritettae
 {
   // ...
   "scripts": {
-    "start": "NODE_ENV=production node index.js", // highlight-line
-    "watch": "NODE_ENV=development nodemon index.js", // highlight-line
-    "build:ui": "rm -rf build && cd ../../osa2/notes/ && npm run build --prod && cp -r build ../../osa3/backend/",
+    "start": "NODE_ENV=production node index.js",// highlight-line
+    "dev": "NODE_ENV=development nodemon index.js",// highlight-line
+    "build:ui": "rm -rf build && cd ../../../2/luento/notes && npm run build && cp -r build ../../../3/luento/notes-backend",
     "deploy": "git push heroku master",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
     "logs:prod": "heroku logs --tail",
     "lint": "eslint .",
-    "test": "NODE_ENV=test jest --verbose --runInBand" // highlight-line
+    "test": "NODE_ENV=test jest --verbose --runInBand"// highlight-line
   },
   // ...
 }
@@ -40,7 +40,7 @@ Määritellään nyt tiedostossa <i>package.json</i>, että testejä suoritettae
 
 Lisäsimme testit suorittavaan npm-skriptiin myös määreen [runInBand](https://jestjs.io/docs/en/cli.html#runinband), joka estää testien rinnakkaisen suorituksen. Tämä tarkennus on viisainta tehdä sitten, kun testimme tulevat käyttämään tietokantaa.
 
-Samalla määriteltiin, että suoritettaessa sovellusta komennolla _npm run watch_ eli nodemonin avulla, on sovelluksen moodi <i>development</i>. Jos sovellusta suoritetaan normaalisti Nodella, on moodiksi määritelty <i>production</i>.
+Samalla määriteltiin, että suoritettaessa sovellusta komennolla _npm run dev_ eli nodemonin avulla, on sovelluksen moodi <i>development</i>. Jos sovellusta suoritetaan normaalisti Nodella, on moodiksi määritelty <i>production</i>.
 
 Määrittelyssämme on kuitenkin pieni ongelma: se ei toimi Windowsilla. Tilanne korjautuu asentamalla kirjasto [cross-env](https://www.npmjs.com/package/cross-env) komennolla
 
@@ -55,7 +55,7 @@ ja muuttamalla <i>package.json</i> kaikilla käyttöjärjestelmillä toimivaan m
   // ...
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
-    "watch": "cross-env NODE_ENV=development nodemon index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
     // ...
     "test": "cross-env NODE_ENV=test jest --verbose --runInBand",
   },
@@ -89,8 +89,6 @@ module.exports = {
 }
 ```
 
-Koodi siis lataa ympäristömuuttujat tiedostosta <i>.env</i> jos se <i>ei ole</i> tuotantomoodissa. Tuotantomoodissa käytetään Herokuun asetettuja ympäristömuuttujia.
-
 Tiedostossa <i>.env</i> on nyt määritelty <i>erikseen</i> sekä sovelluskehitysympäristön että testausympäristön tietokannan osoite (esimerkissä molemmat ovat sovelluskehityskoneen lokaaleja mongo-kantoja):
 
 ```bash
@@ -98,7 +96,7 @@ MONGODB_URI=mongodb+srv://fullstack:secret@cluster0-ostce.mongodb.net/note-app?r
 PORT=3001
 
 // highlight-start
-TEST_MONGODB_URI=mongodb+srv://fullstack:fullstack@cluster0-ostce.mongodb.net/note-app-test?retryWrites=true
+TEST_MONGODB_URI=mongodb+srv://fullstack:secret@cluster0-ostce.mongodb.net/note-app-test?retryWrites=true
 // highlight-end
 ```
 
@@ -171,11 +169,12 @@ Pieni mutta tärkeä huomio: eristimme tämän osan [alussa](/osa4/sovelluksen_r
 const app = require('./app') // varsinainen Express-sovellus
 const http = require('http')
 const config = require('./utils/config')
+const logger = require('./utils/logger')
 
 const server = http.createServer(app)
 
 server.listen(config.PORT, () => {
-  console.log(`Server running on port ${config.PORT}`)
+  logger.info(`Server running on port ${config.PORT}`)
 })
 ```
 
@@ -199,10 +198,10 @@ eli Supertest huolehtii testattavan sovelluksen käynnistämisestä sisäisesti 
 Tehdään pari testiä lisää:
 
 ```js
-test('there are five notes', async () => {
+test('there are two notes', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body.length).toBe(4)
+  expect(response.body.length).toBe(2)
 })
 
 test('the first note is about HTTP methods', async () => {
@@ -221,18 +220,18 @@ const response = await api.get('/api/notes')
 
 // tänne tullaan vasta kun edellinen komento eli HTTP-pyyntö on suoritettu
 // muuttujassa response on nyt HTTP-pyynnön tulos
-expect(response.body.length).toBe(3)
+expect(response.body.length).toBe(2)
 ```
 
-### Loggeri
-
-HTTP-pyyntöjen tiedot konsoliin kirjoittava middleware häiritsee hiukan testien tulostusta. Konsoliin tulostaminen onkin viisainta estää silloin kuin sovellus on testausmoodissa. Eristetään samalla kaikki konsoliin tulostelu omaan moduliinsa <i>utils/logger.js</i>:
+HTTP-pyyntöjen tiedot konsoliin kirjoittava middleware häiritsee hiukan testien tulostusta. Muutetaan loggeria siten, että testausmoodissa lokiviestit eivät tulostu konsoliin:
 
 ```js
 const info = (...params) => {
-  if (process.env.NODE_ENV !== 'test') {
+  // highlight-start
+  if (process.env.NODE_ENV !== 'test') { 
     console.log(...params)
   }
+  // highlight-end
 }
 
 const error = (...params) => {
@@ -243,67 +242,6 @@ module.exports = {
   info, error
 }
 ```
-
-Loggeri tarjoaa kaksi funktiota, joista _info_ ei tulosta mitään sovelluksen ollessa testausmoodissa. Virhetilanteisiin tarkoitettu funktio _error_ tulostaa konsoliin myös testausmoodissa.
-
-Otetaan loggeri käyttöön muualla sovelluksessa. Muutoksia tulee middlewaret määrittelevään tiedostoon
-
-```js
-const logger = require('./logger') // highlight-line
-
-const requestLogger = (request, response, next) => {
-  // highlight-start
-  logger.info('Method:', request.method)
-  logger.info('Path:  ', request.path)
-  logger.info('Body:  ', request.body)
-  logger.info('---')
-  // highlight-end
-  next()
-}
-
-const unknownEndpoint = (request, response) => {
-  response.status(404).send({ error: 'unknown endpoint' })
-}
-
-const errorHandler = (error, request, response, next) => {
-  logger.error(error.message) // highlight-line
-
-  if (error.name === 'CastError' && error.kind === 'ObjectId') {
-    return response.status(400).send({ error: 'malformatted id' })
-  } else if (error.name === 'ValidationError') {
-    return response.status(400).json({ error: error.message })
-  }
-
-  next(error)
-}
-
-module.exports = {
-  requestLogger,
-  unknownEndpoint,
-  errorHandler
-}
-```
-
-ja express-sovelluksen määrittelevään tiedostoon <i>app.js</i>:
-
-```js 
-// ...
-const logger = require('./utils/logger') // highlight-line
-
-logger.info('connecting to', config.MONGODB_URI) // highlight-line
-
-mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true })
-  .then(() => {
-    logger.info('connected to MongoDB') // highlight-line
-  })
-  .catch((error) => {
-    logger.error('error connection to MongoDB:', error.message) // highlight-line
-  })
-
-// ...
-```
-
-Logauksen eristäminen omaan moduulinsa vastuulle on monellakin tapaa järkevää. Jos esim. päätämme ruveta kirjoittamaan logeja tiedostoon tai keräämään ne johonkin ulkoiseen palveuun kuten [graylog](https://www.graylog.org/) tai [papertrail](https://papertrailapp.com), on muutos helppo tehdä yhteen paikkaan.
 
 ### Tietokannan alustaminen ennen testejä
 
@@ -369,41 +307,25 @@ Huomaa jälkimmäisen testin ekspektaatio. Komennolla <code>response.body.map(r 
 
 Komento _npm test_ suorittaa projektin kaikki testit. Kun olemme vasta tekemässä testejä, on useimmiten järkevämpää suorittaa kerrallaan ainoastaan yhtä tai muutamaa testiä. Jest tarjoaa tähän muutamia vaihtoehtoja. Eräs näistä on komennon [only](https://jestjs.io/docs/en/api#testonlyname-fn-timeout) käyttö. Jos testit on kirjoitettu useaan tiedostoon, ei menetelmä ole kovin hyvä.
 
-Parempi vaihtoehto on käyttää jestiä suoraan, ilman npm:ää. Tällöin on mahdollista määritellä tarkasti mitä testejä jest suorittaa. Seuraava komento suorittaa ainoastaan tiedostossa <i>tests/note_api.test.js</i> olevat testit
+Parempi vaihtoehto on määritellä komennon <i>npm test</i> yhteydessä minkä tiedoston testit halutaan suoritta. Seuraava komento suorittaa ainoastaan tiedostossa <i>tests/note_api.test.js</i> olevat testit
 
 ```js
-npx jest tests/note_api.test.js --runInBand
+npm test -- tests/note_api.test.js
 ```
 
 Parametrin <i>-t</i> avulla voidaan suorittaa testejä nimen perusteella:
 
 ```js
-npx jest -t 'a specific note is within the returned notes'
+npm test -- -t 'a specific note is within the returned notes'
 ```
 
 Parametri voi viitata testin tai describe-lohkon nimeen. Parametrina voidaan antaa myös nimen osa. Seuraava komento suorittaisi kaikki testit, joiden nimessä on sana <i>notes</i>:
 
 ```js
-npx jest -t 'notes' --runInBand
+npm test -- -t 'notes'
 ```
 
-Jos asennat koneellesi jestin <i>globaalisti</i>, eli komennolla
-
-```js
-npm install -g jest
-```
-
-testien suoritus onnistuu suoraan komennolla _jest_. Globaaliin asennukseen tarvitset pääkäyttäjän oikeudet.
-
-On huomattava, että yksittäisiä testejä ajettaessa -t haulla saattaa mongoose-yhteys valitettavasti jäädä auki, mikäli yhtään yhteyttä hyödyntävää testiä ei ajeta. Ongelma seurannee siitä, että supertest alustaa yhteyden, mutta jest ei suorita afterAll-osiota.
-
-Yllä olevat testit on mahdollista ilman muutoksia suorittaa myös npm:n avulla hyödyntämällä package.json-tiedostossa määriteltyä test-skriptiä. Tämän tavan hyvä puoli on se, että testaus suoritetaan aina samoin parametrein.
-
-```js
-npm t -- tests/note_api.test.js
-npm t -- -t 'a specific note is within the returned notes'
-npm t -- -t 'notes'
-```
+*HUOM*: yksittäisiä testejä suoritettaessa saattaa mongoose-yhteys jäädä auki, mikäli yhtään yhteyttä hyödyntävää testiä ei ajeta. Ongelma seurannee siitä, että supertest alustaa yhteyden, mutta jest ei suorita afterAll-osiota.
 
 ### async/await
 
@@ -680,7 +602,7 @@ afterAll(() => {
 
 Promiseja käyttävä koodi toimii nyt ja testitkin menevät läpi. Olemme valmiit muuttamaan koodin käyttämään async/await-syntaksia.
 
-Koodi muuttuu seuraavasti (huomaa, että käsittelijän alkuun on laitettava määre _async_):
+Uuden muistiinpanon lisäämisestä huolehtiva koodi muuttuu seuraavasti (huomaa, että käsittelijän alkuun on laitettava määre _async_):
 
 ```js
 notesRouter.post('/', async (request, response, next) => {
@@ -801,7 +723,11 @@ notesRouter.delete('/:id', async (request, response, next) => {
 })
 ```
 
-Async/await ehkä selkeyttää koodia jossain määrin, mutta saavutettava hyöty ei ole sovelluksessamme vielä niin iso mitä se tulee olemaan jos asynkronisia kutsuja on tehtävä useampia. Async/awaitin 'hinta' on poikkeusten käsittelyn edellyttämä iso <i>try/catch</i>-rakenne. Kaikki routejen käsittelijät noudattavatkin samaa kaavaa
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4), haarassa <i>part4-4</i>. 
+
+### Try-catchin eliminointi
+
+Async/await selkeyttää koodia jossain määrin, mutta sen 'hinta' on poikkeusten käsittelyn edellyttämä <i>try/catch</i>-rakenne. Kaikki routejen käsittelijät noudattavat samaa kaavaa
 
 ```js
 try {
@@ -811,12 +737,86 @@ try {
 }
 ```
 
-Mieleen herää kysymys, olisiko koodia mahdollista refaktoroida siten, että <i>catch</i> saataisiin refaktoroitua ulos metodeista? Siihen on olemassa eräitä ratkaisuja mutta koska ne muuttavat koodia kompleksisemmaksi, jätämme sen ennalleen.
+Mieleen herää kysymys, olisiko koodia mahdollista refaktoroida siten, että <i>catch</i> saataisiin refaktoroitua ulos metodeista? 
 
-Kaikki eivät ole vakuuttuneita siitä, että async/await on hyvä lisä Javascriptiin, lue esim. [ES7 async functions - a step in the wrong direction](https://spion.github.io/posts/es7-async-await-step-in-the-wrong-direction.html)
+Kirjasto [express-async-errors](https://github.com/davidbanham/express-async-errors) tuo tilanteeseen helpotuksen.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4), haarassa <i>part4-4</i>. Samassa on "vahingossa" mukana testeistä seuraavan luvun jälkeinen paranneltu versio.
+Asennetaan kirjasto
 
+```bash
+npm install express-async-errors --save
+```
+
+Kirjaston käyttö on <i>todella</i> helppoa. Kirjaston koodi otetaan käyttöön tiedostossa <i>src/app.js</i>:
+
+```js
+const config = require('./utils/config')
+const express = require('express')
+require('express-async-errors') // highlight-line
+const bodyParser = require('body-parser')
+const app = express()
+const cors = require('cors')
+const notesRouter = require('./controllers/notes')
+const middleware = require('./utils/middleware')
+const logger = require('./utils/logger')
+const mongoose = require('mongoose')
+
+// ...
+
+module.exports = app
+```
+
+Kirjaston koodiin sisällyttämän "magian" ansiosta pääsemme kokonaan eroon try-catch-lauseista. Muistiinpanon poistamisesta huolehtiva route
+
+```js
+notesRouter.delete('/:id', async (request, response, next) => {
+  try {
+    await Note.findByIdAndRemove(request.params.id)
+    response.status(204).end()
+  } catch (exception) {
+    next(exception)
+  }
+})
+```
+
+muuttuu muotoon
+
+```js
+notesRouter.delete('/:id', async (request, response) => {
+  await Note.findByIdAndRemove(request.params.id)
+  response.status(204).end()
+})
+```
+
+Kirjaston ansiosta kutsua _next(exception)_ ei siis enää tarvita, kirjasto hoitaa asian konepellin alla, eli jos <i>async</i>-funktiona määritellyn routen sisällä syntyy poikkeus, siirtyy suoritus automaattisesti virheenkäsittelijämiddlewareen.
+
+Muut routet yksinkertaistuvat seuraavasti:
+
+```js
+notesRouter.post('/', async (request, response) => {
+  const body = request.body
+
+  const note = new Note({
+    content: body.content,
+    important: body.important === undefined ? false : body.important,
+    date: new Date(),
+  })
+
+  const savedNote = await note.save()
+  response.json(savedNote.toJSON())
+})
+
+notesRouter.get('/:id', async (request, response) => {
+  const note = await Note.findById(request.params.id)
+  if (note) {
+    response.json(note.toJSON())
+  } else {
+    response.status(404).end()
+  }
+})
+```
+
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), haarassa <i>part4-5</i>. 
 
 ### Testin beforeEach-metodin optimointi
 
@@ -855,15 +855,6 @@ test('notes are returned as json', async () => {
 }
 ```
 
-Helpoimmalla kuitenkin päästään, kun hyödynnetään mongoosen valmista metodia insertMany:
-
-```js
-beforeEach(async () => {
-  await Note.deleteMany({})
-  await Note.insertMany(helper.initialNotes)
-})
-```
-
 Talletamme siis taulukossa olevat muistiinpanot tietokantaan _forEach_-loopissa. Testeissä kuitenkin ilmenee jotain häikkää, ja sitä varten koodin sisään on lisätty aputulosteita.
 
 Konsoliin tulostuu
@@ -886,7 +877,7 @@ Toimiva ratkaisu tilanteessa on odottaa asynkronisten talletusoperaatioiden valm
 
 ```js
 beforeEach(async () => {
-  await Note.remove({})
+  await Note.deleteMany({})
 
   const noteObjects = helper.initialNotes
     .map(note => new Note(note))
@@ -906,7 +897,7 @@ Promise.all suorittaa kaikkia syötteenä saamiaan promiseja rinnakkain. Jos ope
 
 ```js
 beforeEach(async () => {
-  await Note.remove({})
+  await Note.deleteMany({})
 
   for (let note of initialNotes) {
     let noteObject = new Note(note)
@@ -916,6 +907,15 @@ beforeEach(async () => {
 ```
 
 Javascriptin asynkroninen suoritusmalli aiheuttaakin siis helposti yllätyksiä ja myös async/await-syntaksin kanssa pitää olla koko ajan tarkkana. Vaikka async/await peittää monia promisejen käsittelyyn liittyviä seikkoja, promisejen toiminta on syytä tuntea mahdollisimman hyvin!
+
+Kaikkein helpoimmalla tilanteesta selvitään hyödyntämällä mongoosen valmista metodia _insertMany_:
+
+```js
+beforeEach(async () => {
+  await Note.deleteMany({})
+  await Note.insertMany(helper.initialNotes) // highlight-line
+})
+```
 
 </div>
 
@@ -1020,7 +1020,7 @@ describe('when there is initially some notes saved', () => {
 
     const contents = response.body.map(r => r.content)
     expect(contents).toContain(
-      'HTTP-protokollan tärkeimmät metodit ovat GET ja POST'
+      'Browser can execute only Javascript'
     )
   })
 
@@ -1132,7 +1132,7 @@ Testeihin jää vielä parannettavaa mutta on jo aika siirtyä eteenpäin.
 
 Käytetty tapa API:n testaamiseen, eli HTTP-pyyntöinä tehtävät operaatiot ja tietokannan tilan tarkastelu Mongoosen kautta ei ole suinkaan ainoa tai välttämättä edes paras tapa tehdä API-tason integraatiotestausta. Universaalisti parasta tapaa testien tekoon ei ole, vaan kaikki on aina suhteessa käytettäviin resursseihin ja testattavaan ohjelmistoon.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), branchissa <i>part4-5</i>
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-6), branchissa <i>part4-6</i>
 
 </div>
 
