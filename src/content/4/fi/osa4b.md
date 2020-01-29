@@ -921,7 +921,7 @@ beforeEach(async () => {
 
 <div class="tasks">
 
-### Tehtäviä
+### Tehtävät 4.8.-4.12.
 
 **Huom:** materiaalissa käytetään muutamaan kertaan matcheria [toContain](https://facebook.github.io/jest/docs/en/expect.html#tocontainitem) tarkastettaessa, että jokin arvo on taulukossa. Kannattaa huomata, että metodi käyttää samuuden vertailuun ===-operaattoria ja olioiden kohdalla tämä ei ole useinkaan se mitä halutaan ja parempi vaihtoehto onkin [toContainEqual](https://facebook.github.io/jest/docs/en/expect.html#tocontainequalitem). Tosin mallivastauksissa ei vertailla kertaakaan olioita matcherien avulla, joten ilmankin selviää varsin hyvin.
 
@@ -1138,7 +1138,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 <div class="tasks">
 
-### Tehtäviä
+### Tehtävät 4.13.-4.14.
 
 #### 4.13 blogilistan laajennus, step1
 

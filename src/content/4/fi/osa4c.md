@@ -9,7 +9,7 @@ lang: fi
 
 Haluamme toteuttaa sovellukseemme käyttäjien hallinnan. Käyttäjät tulee tallettaa tietokantaan ja jokaisesta muistiinpanosta tulee tietää sen luonut käyttäjä. Muistiinpanojen poisto ja editointi tulee olla sallittua ainoastaan muistiinpanot tehneelle käyttäjälle.
 
-Aloitetaan lisäämällä tietokantaan tieto käyttäjistä. Käyttäjän (<i>User</i>) ja muistiinpanojen (<i>Note</i>) välillä on yhden suhde moneen -yhteys:
+Aloitetaan lisäämällä tietokantaan tieto käyttäjistä. Käyttäjän <i>User</i> ja muistiinpanojen <i>Note</i> välillä on yhden suhde moneen -yhteys:
 
 ![](https://yuml.me/a187045b.png)
 
@@ -21,7 +21,7 @@ Olemassaoleva ratkaisumme tallentaa jokaisen luodun muistiinpanon tietokantaan <
 
 Mongossa voidaan kaikkien dokumenttitietokantojen tapaan käyttää olioiden id:itä viittaamaan muissa kokoelmissa talletettaviin dokumentteihin, vastaavasti kuten viiteavaimia käytetään relaatiotietokannoissa.
 
-Dokumenttitietokannat kuten Mongo eivät kuitenkaan tue relaatiotietokantojen <i>liitoskyselyitä</i> vastaavaa toiminnallisuutta, joka mahdollistaisi useaan kokoelmaan kohdistuvan tietokantahaun. Tämä ei tarkalleen ottaen enää välttämättä pidä paikkaansa, sillä versiosta 3.2. alkaen Mongo on tukenut useampaan kokoelmaan kohdistuvia [lookup-aggregaattikyselyitä](https://docs.mongodb.com/manual/reference/operator/aggregation/lookup/). Emme kuitenkaan käsittele niitä kurssilla.
+Dokumenttitietokannat kuten Mongo eivät kuitenkaan tue relaatiotietokantojen <i>liitoskyselyitä</i> vastaavaa toiminnallisuutta, joka mahdollistaisi useaan kokoelmaan kohdistuvan tietokantahaun. Tämä ei tarkalleen ottaen enää pidä paikkaansa, sillä versiosta 3.2. alkaen Mongo on tukenut useampaan kokoelmaan kohdistuvia [lookup-aggregaattikyselyitä](https://docs.mongodb.com/manual/reference/operator/aggregation/lookup/). Emme kuitenkaan käsittele niitä kurssilla.
 
 Jos tarvitsemme liitoskyselyitä vastaavaa toiminnallisuutta, tulee se toteuttaa sovelluksen tasolla, eli käytännössä tekemällä tietokantaan useita kyselyitä. Tietyissä tilanteissa mongoose-kirjasto osaa hoitaa liitosten tekemisen, jolloin kysely näyttää mongoosen käyttäjälle toimivan liitoskyselyn tapaan. Mongoose tekee kuitenkin näissä tapauksissa taustalla useamman kyselyn tietokantaan.
 
@@ -222,25 +222,21 @@ const bcrypt = require('bcrypt')
 const usersRouter = require('express').Router()
 const User = require('../models/user')
 
-usersRouter.post('/', async (request, response, next) => {
-  try {
-    const body = request.body
+usersRouter.post('/', async (request, response) => {
+  const body = request.body
 
-    const saltRounds = 10
-    const passwordHash = await bcrypt.hash(body.password, saltRounds)
+  const saltRounds = 10
+  const passwordHash = await bcrypt.hash(body.password, saltRounds)
 
-    const user = new User({
-      username: body.username,
-      name: body.name,
-      passwordHash,
-    })
+  const user = new User({
+    username: body.username,
+    name: body.name,
+    passwordHash,
+  })
 
-    const savedUser = await user.save()
+  const savedUser = await user.save()
 
-    response.json(savedUser)
-  } catch (exception) {
-    next(exception)
-  }
+  response.json(savedUser)
 })
 
 module.exports = usersRouter
@@ -345,7 +341,7 @@ describe('when there is initially one user at db', () => {
 
 Testi ei tietenkään mene läpi tässä vaiheessa. Toimimme nyt oleellisesti [TDD:n eli test driven developmentin](https://en.wikipedia.org/wiki/Test-driven_development) hengessä, uuden ominaisuuden testi on kirjoitettu ennen ominaisuuden ohjelmointia.
 
-Hoidetaan uniikkiuden tarkastaminen Mongoosen validoinnin avulla. Kuten edellisen osan tehtävässä [3.19](/osa3/validointi_ja_es_lint#tehtavia) mainittiin, Mongoose ei tarjoa valmista validaattoria kentän uniikkiuden tarkastamiseen. Tilanteeseen ratkaisun tarjoaa npm-pakettina asennettava
+Hoidetaan uniikkiuden tarkastaminen Mongoosen validoinnin avulla. Kuten edellisen osan tehtävässä [3.19](/osa3/validointi_ja_es_lint#tehtavat-3-19-3-21) mainittiin, Mongoose ei tarjoa valmista validaattoria kentän uniikkiuden tarkastamiseen. Tilanteeseen ratkaisun tarjoaa npm-pakettina asennettava
 [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator). Suoritetaan asennus
 
 ```bash
@@ -419,14 +415,11 @@ notesRouter.post('/', async (request, response, next) => {
     user: user._id //highlight-line
   })
 
-  try {
-    const savedNote = await note.save()
-    user.notes = user.notes.concat(savedNote._id) //highlight-line
-    await user.save()  //highlight-line
-    response.json(savedNote.toJSON())
-  } catch(exception) {
-    next(exception)
-  }
+  const savedNote = await note.save()
+  user.notes = user.notes.concat(savedNote._id) //highlight-line
+  await user.save()  //highlight-line
+
+  response.json(savedNote.toJSON())
 })
 ```
 
@@ -434,6 +427,8 @@ Huomionarvoista on nyt se, että myös <i>user</i>-olio muuttuu. Sen kenttään 
 
 ```js
 const user = User.findById(userId)
+
+// ...
 
 user.notes = user.notes.concat(savedNote._id)
 await user.save()
@@ -470,11 +465,11 @@ usersRouter.get('/', async (request, response) => {
 })
 ```
 
-Funktion [populate](http://mongoosejs.com/docs/populate.html) kutsu siis ketjutetaan kyselyä vastaavan metodikutsun (tässä tapauksessa <i>find_</i> perään. Populaten parametri määrittelee, että <i>user</i>-dokumenttien <i>notes</i>-kentässä olevat <i>note</i>-olioihin viittaavat <i>id</i>:t korvataan niitä vastaavilla dokumenteilla.
+Funktion [populate](http://mongoosejs.com/docs/populate.html) kutsu siis ketjutetaan kyselyä vastaavan metodikutsun (tässä tapauksessa <i>find</i> perään. Populaten parametri määrittelee, että <i>user</i>-dokumenttien <i>notes</i>-kentässä olevat <i>note</i>-olioihin viittaavat <i>id</i>:t korvataan niitä vastaavilla dokumenteilla.
 
 Lopputulos on jo melkein haluamamme kaltainen:
 
-![](../../images/4/13e.png)
+![](../../images/4/13ea.png)
 
 Populaten yhteydessä on myös mahdollista rajata mitä kenttiä sisällytettävistä dokumenteista otetaan mukaan. Rajaus tapahtuu Mongon [syntaksilla](https://docs.mongodb.com/manual/tutorial/project-fields-from-query-results/#return-the-specified-fields-and-the-id-field-only):
 
@@ -489,7 +484,7 @@ usersRouter.get('/', async (request, response) => {
 
 Tulos on täsmälleen sellainen kuin haluamme
 
-![](../../images/4/14e.png)
+![](../../images/4/14ea.png)
 
 Lisätään sopiva käyttäjän tietojen populointi muistiinpanojen yhteyteen:
 
@@ -504,7 +499,7 @@ notesRouter.get('/', async (request, response) => {
 
 Nyt käyttäjän tiedot tulevat muistiinpanon kenttään <i>user</i>.
 
-![](../../images/4/15e.png)
+![](../../images/4/15ea.png)
 
 Korostetaan vielä, että tietokannan tasolla ei siis ole mitään määrittelyä siitä, että esim. muistiinpanojen kenttään <i>user</i> talletetut id:t viittaavat käyttäjä-kokoelman dokumentteihin.
 

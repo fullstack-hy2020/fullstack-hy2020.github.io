@@ -252,25 +252,21 @@ const bcrypt = require('bcrypt')
 const usersRouter = require('express').Router()
 const User = require('../models/user')
 
-usersRouter.post('/', async (request, response, next) => {
-  try {
-    const body = request.body
+usersRouter.post('/', async (request, response) => {
+  const body = request.body
 
-    const saltRounds = 10
-    const passwordHash = await bcrypt.hash(body.password, saltRounds)
+  const saltRounds = 10
+  const passwordHash = await bcrypt.hash(body.password, saltRounds)
 
-    const user = new User({
-      username: body.username,
-      name: body.name,
-      passwordHash,
-    })
+  const user = new User({
+    username: body.username,
+    name: body.name,
+    passwordHash,
+  })
 
-    const savedUser = await user.save()
+  const savedUser = await user.save()
 
-    response.json(savedUser)
-  } catch (exception) {
-    next(exception)
-  }
+  response.json(savedUser)
 })
 
 module.exports = usersRouter
@@ -418,7 +414,6 @@ userSchema.plugin(uniqueValidator) // highlight-line
 // ...
 ```
 
-
 We could also implement other validations into the user creation. We could check that the username is long enough, that the username only consists of permitted characters, or that the password is strong enough. Implementing these functionalities is left as an optional exercise.
 
 
@@ -431,7 +426,6 @@ usersRouter.get('/', async (request, response) => {
 })
 ```
 
-
 The list looks like this:
 
 ![](../../images/4/9.png)
@@ -439,12 +433,9 @@ The list looks like this:
 
 You can find the code for our current application in its entirety in the <i>part4-7</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-7).
 
-
 ### Creating a new note
 
-
 The code for creating a new note has to be updated so that the note is assigned to the user who created it.
-
 
 Let's expand our current implementation so, that the information about the user who created a note is sent in the <i>userId</i> field of the request body:
 
@@ -465,14 +456,11 @@ notesRouter.post('/', async (request, response, next) => {
     user: user._id //highlight-line
   })
 
-  try {
-    const savedNote = await note.save()
-    user.notes = user.notes.concat(savedNote._id) //highlight-line
-    await user.save()  //highlight-line
-    response.json(savedNote.toJSON())
-  } catch(exception) {
-    next(exception)
-  }
+  const savedNote = await note.save()
+  user.notes = user.notes.concat(savedNote._id) //highlight-line
+  await user.save()  //highlight-line
+  
+  response.json(savedNote.toJSON())
 })
 ```
 
@@ -481,34 +469,29 @@ It's worth noting that the <i>user</i> object also changes. The <i>id</i> of the
 ```js
 const user = User.findById(userId)
 
+// ...
+
 user.notes = user.notes.concat(savedNote._id)
 await user.save()
 ```
-
 
 Let's try to create a new note
 
 ![](../../images/4/10e.png)
 
-
 The operation appears to work. Let's add one more note and then visit the route for fetching all users:
 
 ![](../../images/4/11e.png)
 
-
 We can see that the user has two notes. 
-
 
 Likewise, the ids of the users who created the notes can be seen when we visit the route for fetching all notes:
 
 ![](../../images/4/12e.png)
 
-
 ### Populate
 
-
 We would like our API to work in such a way, that when an HTTP GET request is made to the <i>/api/users</i> route, the user objects would also contain the contents of the user's notes, and not just their id. In a relational database, this functionality would be implemented with a <i>join query</i>.
-
 
 As previously mentioned, document databases do not properly support join queries between collections, but the Mongoose library can do some of these joins for us. Mongoose accomplishes the join by doing multiple queries, which is different from join queries in relational databases which are <i>transactional</i>, meaning that the state of the database does not change during the time that the query is made. With join queries in Mongoose, nothing can guarantee that the state between the collections being joined is consistent, meaning that if we make a query that joins the user and notes collections, the state of the collections may change during the query.
 
@@ -527,11 +510,9 @@ usersRouter.get('/', async (request, response) => {
 
 The [populate](http://mongoosejs.com/docs/populate.html) method is chained after the <i>find</i> method making the initial query. The parameter given to the populate method defines that the <i>ids</i> referencing <i>note</i> objects in the <i>notes</i> field of the <i>user</i> document will be replaced by the referenced <i>note</i> documents.
 
-
 The result is almost exactly what we wanted:
 
-![](../../images/4/13e.png)
-
+![](../../images/4/13ea.png)
 
 We can use the populate parameter for choosing the fields we want to include from the documents. The selection of fields is done with the Mongo [syntax](https://docs.mongodb.com/manual/tutorial/project-fields-from-query-results/#return-the-specified-fields-and-the-id-field-only):
 
@@ -544,11 +525,9 @@ usersRouter.get('/', async (request, response) => {
 });
 ```
 
-
 The result is now exactly like we want it to be:
 
-![](../../images/4/14e.png)
-
+![](../../images/4/14ea.png)
 
 Let's also add a suitable population of user information to notes:
 
@@ -564,11 +543,10 @@ notesRouter.get('/', async (request, response) => {
 
 Now the user's information is added to the <i>user</i> field of note objects.
 
-![](../../images/4/15e.png)
+![](../../images/4/15ea.png)
 
 
 It's important to understand that the database does not actually know that the ids stored in the <i>user</i> field of notes reference documents in the user collection.
-
 
 The functionality of the <i>populate</i> method of Mongoose is based on the fact that we have defined "types" to the references in the Mongoose schema with the <i>ref</i> option:
 
