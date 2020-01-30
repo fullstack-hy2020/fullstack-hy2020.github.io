@@ -207,7 +207,6 @@ Sovelluksen määrittelevä <i>app.js</i> näyttää muutosten jälkeen seuraava
 ```js
 const config = require('./utils/config')
 const express = require('express')
-const bodyParser = require('body-parser')
 const app = express()
 const cors = require('cors')
 const notesRouter = require('./controllers/notes')
@@ -227,7 +226,7 @@ mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology
 
 app.use(cors())
 app.use(express.static('build'))
-app.use(bodyParser.json())
+app.use(express.json())
 app.use(middleware.requestLogger)
 
 app.use('/api/notes', notesRouter)
@@ -346,7 +345,6 @@ Kuvitellaan tilanne, jossa saat sähköpostitse seuraavan, yhteen tiedostoon koo
 const http = require('http')
 const express = require('express')
 const app = express()
-const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
 
@@ -363,7 +361,7 @@ const mongoUrl = 'mongodb://localhost/bloglist'
 mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true})
 
 app.use(cors())
-app.use(bodyParser.json())
+app.use(express.json())
 
 app.get('/api/blogs', (request, response) => {
   Blog

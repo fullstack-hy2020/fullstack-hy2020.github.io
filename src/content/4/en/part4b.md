@@ -782,7 +782,6 @@ Kirjaston käyttö on <i>todella</i> helppoa. Kirjaston koodi otetaan käyttöö
 const config = require('./utils/config')
 const express = require('express')
 require('express-async-errors') // highlight-line
-const bodyParser = require('body-parser')
 const app = express()
 const cors = require('cors')
 const notesRouter = require('./controllers/notes')

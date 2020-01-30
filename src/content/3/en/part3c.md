@@ -535,7 +535,6 @@ Let's change the <i>index.js</i> file in the following way:
 ```js
 require('dotenv').config() // highlight-line
 const express = require('express')
-const bodyParser = require('body-parser') 
 const app = express()
 const Note = require('./models/note') // highlight-line
 
@@ -783,7 +782,7 @@ The correct order is the following:
 
 ```js
 app.use(express.static('build'))
-app.use(bodyParser.json())
+app.use(express.json())
 app.use(logger)
 
 app.post('/api/notes', (request, response) => {
@@ -806,7 +805,7 @@ const errorHandler = (error, request, response, next) => {
 app.use(errorHandler)
 ```
 
-The _bodyParser_ middleware should be among the very first middleware loaded into Express. If the order was the following:
+The json-parser middleware should be among the very first middleware loaded into Express. If the order was the following:
 
 ```js
 app.use(logger) // request.body is empty!

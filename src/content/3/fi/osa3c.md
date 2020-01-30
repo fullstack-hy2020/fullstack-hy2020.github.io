@@ -532,7 +532,6 @@ Muutetaan nyt tiedostoa <i>index.js</i> seuraavasti
 ```js
 require('dotenv').config() // highlight-line
 const express = require('express')
-const bodyParser = require('body-parser') 
 const app = express()
 const Note = require('./models/note') // highlight-line
 
@@ -781,7 +780,7 @@ Oikeaoppinen järjestys seuraavassa:
 
 ```js
 app.use(express.static('build'))
-app.use(bodyParser.json())
+app.use(express.json())
 app.use(logger)
 
 app.post('/api/notes', (request, response) => {
@@ -804,7 +803,7 @@ const errorHandler = (error, request, response, next) => {
 app.use(errorHandler)
 ```
 
-_bodyParser_ on syytä ottaa käyttöön melkeimpä ensimmäisenä. Jos järjestys olisi seuraava
+Json-parseri on syytä ottaa käyttöön melkeimpä ensimmäisenä. Jos järjestys olisi seuraava
 
 ```js
 app.use(logger) // request.body on tyhjä
@@ -815,7 +814,7 @@ app.post('/api/notes', (request, response) => {
   // ...
 })
 
-app.use(bodyParser.json())
+app.use(express.json())
 ```
 
 ei HTTP-pyynnön mukana oleva data olisi loggerin eikä POST-pyynnön käsittelyn aikana käytettävissä, kentässä _request.body_ olisi tyhjä olio.

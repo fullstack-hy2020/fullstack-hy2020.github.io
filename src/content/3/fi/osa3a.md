@@ -633,16 +633,15 @@ Klikkaamalla tekstiä <i>Send Request</i>, REST client suorittaa määritellyn H
 
 Toteutetaan seuraavana uusien muistiinpanojen lisäys, joka siis tapahtuu tekemällä HTTP POST -pyyntö osoitteeseen http://localhost:3001/api/notes ja liittämällä pyynnön mukaan eli [bodyyn](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) luotavan muistiinpanon tiedot JSON-muodossa.
 
-Jotta pääsisimme pyynnön mukana lähetettyyn dataan helposti käsiksi, tarvitsemme [body-parser](https://github.com/expressjs/body-parser)-kirjaston apua.
+Jotta pääsisimme pyynnön mukana lähetettyyn dataan helposti käsiksi, tarvitsemme expressin tarjoaman [json-parserin](https://expressjs.com/en/api.html) apua. Tämä tapahtuu lisäämällä koodiin komento _app.use(express.json())_.
 
-Otetaan body-parser käyttöön ja luodaan alustava määrittely HTTP POST -pyynnön käsittelyyn
+Otetaan json-parseri käyttöön ja luodaan alustava määrittely HTTP POST -pyynnön käsittelyyn:
 
 ```js
 const express = require('express')
 const app = express()
-const bodyParser = require('body-parser')
 
-app.use(bodyParser.json())
+app.use(express.json()) 
 
 //...
 
@@ -656,7 +655,7 @@ app.post('/api/notes', (request, response) => {
 
 Tapahtumankäsittelijäfunktio pääsee dataan käsiksi olion _request_ kentän <i>body</i> avulla.
 
-Ilman body-parser-käyttöönottoa pyynnön kentän <i>body</i> arvo olisi ollut määrittelemätön. body-parserin toimintaperiaatteena on, että se ottaa pyynnön mukana olevan JSON-muotoisen datan, muuttaa sen Javascript-olioksi ja sijoittaa _request_-olion kenttään <i>body</i> ennen kuin routen käsittelijää kutsutaan.
+Ilman json-parserin lisäämistä eli komentoa _app.use(express.json())_ pyynnön kentän <i>body</i> arvo olisi ollut määrittelemätön. json-parserin toimintaperiaatteena on, että se ottaa pyynnön mukana olevan JSON-muotoisen datan, muuttaa sen Javascript-olioksi ja sijoittaa _request_-olion kenttään <i>body</i> ennen kuin routen käsittelijää kutsutaan.
 
 Toistaiseksi sovellus ei vielä tee vastaanotetulle datalle mitään muuta kuin tulostaa sen konsoliin ja palauttaa sen pyynnön vastauksessa.
 
@@ -903,11 +902,11 @@ HTTP-pyyntötyypeistä POST on ainoa, joka ei ole <i>safe</i> eikä <i>idempoten
 
 ### Middlewaret
 
-Äsken käyttöönottamamme [body-parser](https://github.com/expressjs/body-parser) on terminologiassa niin sanottu [middleware](http://expressjs.com/en/guide/using-middleware.html).
+Äsken käyttöönottamamme expressin [json-parseri](https://expressjs.com/en/api.html) on terminologiassa niin sanottu [middleware](http://expressjs.com/en/guide/using-middleware.html).
 
 Middlewaret ovat funktioita, joiden avulla voidaan käsitellä _request_- ja _response_-olioita.
 
-Esim. body-parser ottaa pyynnön mukana tulevan raakadatan _request_-oliosta, parsii sen Javascript-olioksi ja sijoittaa olion _request_:in kenttään <i>body</i>
+Esim. json-parseri ottaa pyynnön mukana tulevan raakadatan _request_-oliosta, parsii sen Javascript-olioksi ja sijoittaa olion _request_:in kenttään <i>body</i>
 
 Middlewareja voi olla käytössä useita, jolloin ne suoritetaan peräkkäin siinä järjestyksessä, kuin ne on otettu koodissa käyttöön.
 
@@ -933,7 +932,7 @@ Middleware otetaan käyttöön seuraavasti:
 app.use(requestLogger)
 ```
 
-Middlewaret suoritetaan siinä järjestyksessä, jossa ne on otettu käyttöön sovellusolion metodilla _use_. Huomaa, että _bodyParser_ tulee ottaa käyttöön ennen middlewarea _requestLogger_, muuten <i>request.body</i> ei ole vielä alustettu loggeria suoritettaessa!
+Middlewaret suoritetaan siinä järjestyksessä, jossa ne on otettu käyttöön sovellusolion metodilla _use_. Huomaa, että json-parseri tulee ottaa käyttöön ennen middlewarea _requestLogger_, muuten <i>request.body</i> ei ole vielä alustettu loggeria suoritettaessa!
 
 Middlewaret tulee ottaa käyttöön ennen routeja, jos ne halutaan suorittaa ennen niitä. On myös eräitä tapauksia, joissa middleware tulee määritellä vasta routejen jälkeen. Käytännössä tällöin on kyse middlewareista, joita suoritetaan vain, jos mikään route ei käsittele HTTP-pyyntöä.
 

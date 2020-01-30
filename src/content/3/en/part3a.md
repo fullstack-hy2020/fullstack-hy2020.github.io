@@ -725,18 +725,15 @@ By clicking the <i>Send Request</i> text, the REST client will execute the HTTP 
 
 Next, let's make it possible to add new notes to the server. Adding a note happens by making an HTTP POST request to the address http://localhost:3001/api/notes, and by sending all the information for the new note in the request [body](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) in the JSON format.
 
+In order to access the data easily, we need the help of the express [json-parser](https://expressjs.com/en/api.html), that is taken to use with command _app.use(express.json())_.
 
-In order to access the data easily, we need the help of the [body-parser](https://github.com/expressjs/body-parser) library.
-
-
-Let's import body-parser and implement an initial handler for dealing with the HTTP POST requests:
+Let's activate the json-parser and implement an initial handler for dealing with the HTTP POST requests:
 
 ```js
 const express = require('express')
 const app = express()
-const bodyParser = require('body-parser')
 
-app.use(bodyParser.json())
+app.use(express.json())
 
 //...
 
@@ -752,7 +749,7 @@ app.post('/api/notes', (request, response) => {
 The event handler function can access the data from the <i>body</i> property of the _request_ object.
 
 
-Without a body-parser, the <i>body</i> property would be undefined. The body-parser functions so that it takes the JSON data of a request, transforms it into a JavaScript object and then attaches it to the <i>body</i> property of the _request_ object before the route handler is called.
+Without a the json-parser, the <i>body</i> property would be undefined. The json-parser functions so that it takes the JSON data of a request, transforms it into a JavaScript object and then attaches it to the <i>body</i> property of the _request_ object before the route handler is called.
 
 
 For the time being, the application does not do anything with the received data besides printing it to the console and sending it back in the response.
@@ -1063,14 +1060,12 @@ POST is the only HTTP request type that is neither <i>safe</i> nor <i>idempotent
 
 ### Middleware
 
-
-The [body-parser](https://github.com/expressjs/body-parser) we took into use earlier is a so-called [middleware](http://expressjs.com/en/guide/using-middleware.html).
+The express [json-parser](https://expressjs.com/en/api.html) we took into use earlier is a so-called [middleware](http://expressjs.com/en/guide/using-middleware.html).
 
 
 Middleware are functions that can be used for handling _request_ and _response_ objects.
 
-
-The body-parser we used earlier takes the raw data from the requests that's stored in the _request_ object, parses it into a JavaScript object and assigns it to the _request_ object as a new property <i>body</i>.
+The json-parser we used earlier takes the raw data from the requests that's stored in the _request_ object, parses it into a JavaScript object and assigns it to the _request_ object as a new property <i>body</i>.
 
 
 In practice, you can use several middleware at the same time. When you have more than one, they're executed one by one in the order that they were taken into use in express.
@@ -1091,9 +1086,7 @@ const requestLogger = (request, response, next) => {
 }
 ```
 
-
 At the end of the function body the _next_ function that was passed as a parameter is called. The _next_ function yields control to the next middleware.
-
 
 Middleware are taken into use like this:
 
@@ -1101,8 +1094,7 @@ Middleware are taken into use like this:
 app.use(requestLogger)
 ```
 
-
-Middleware functions are called in the order that they're taken into use with the express server object's _use_ method. Notice that _bodyParser_ is taken into use before the _requestLogger_ middleware, because otherwise <i>request.body</i> will not be initialized when the logger is executed!
+Middleware functions are called in the order that they're taken into use with the express server object's _use_ method. Notice that json-parser is taken into use before the _requestLogger_ middleware, because otherwise <i>request.body</i> will not be initialized when the logger is executed!
 
 
 Middleware functions have to be taken into use before routes if we want them to be executed before the route event handlers are called. There are also situations where we want to define middleware functions after routes. In practice, this means that we are defining middleware functions that are only called if no route handles the HTTP request.
