@@ -741,18 +741,15 @@ You are bound to run into problems while writing tests. Remember the things that
 **NB:** if some test is failing, then it is recommended to only run that test while you are fixing the issue. You can run a single test with the [only](https://facebook.github.io/jest/docs/en/api.html#testonlyname-fn-timeout) method.
 
 
-Another way of running a single test (or describe block) is to run Jest from the command line and to specify the name of the test to be run with the [-t](https://jestjs.io/docs/en/cli.html) flag:
+Another way of running a single test (or describe block) is to specify the name of the test to be run with the [-t](https://jestjs.io/docs/en/cli.html) flag:
 
 ```js
-npx jest -t 'when list has only one blog equals the likes of that'
+npm test -- -t 'when list has only one blog, equals the likes of that'
 ```
-
 
 #### 4.5*: helper functions and unit tests, step3
 
-
 Define a new _favoriteBlog_ function that receives a list of blogs as a parameter. The function finds out which blog has most likes. If there are many top favorites, it is enough to return one of them.
-
 
 The value returned by the function could be in the following format:
 
@@ -764,20 +761,15 @@ The value returned by the function could be in the following format:
 }
 ```
 
-
 **NB** when you are comparing objects, the [toEqual](https://jestjs.io/docs/en/expect#toequalvalue) method is probably what you want to use, since the [toBe](https://jestjs.io/docs/en/expect#tobevalue) tries to verify that the two values are the same value, and not just that they contain the same properties.
-
 
 Write the tests for this exercise inside of a new <i>describe</i> block. Do the same for the remaining exercises as well.
 
 #### 4.6*: helper functions and unit tests, step4
 
-
 This and the next exercise are a little bit more challenging. Finishing these two exercises is not required in order to advance in the course material, so it may be a good idea to return to these once you're done going through the material for this part in its entirety.
 
-
 Finishing this exercise can be done without the use of additional libraries. However, this exercise is a great opportunity to learn how to use the [Lodash](https://lodash.com/) library.
-
 
 Define a function called _mostBlogs_ that receives an array of blogs as a parameter. The function returns the <i>author</i> who has the largest amount of blogs. The return value also contains the number of blogs the top author has:
 

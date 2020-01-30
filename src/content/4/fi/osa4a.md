@@ -333,7 +333,7 @@ Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnist�
 
 <div class="tasks">
 
-### Tehtävät 4.1.-4.7.
+### Tehtävät 4.1.-4.2.
 
 Rakennamme tämän osan tehtävissä <i>blogilistasovellusta</i>, jonka avulla käyttäjien on mahdollista tallettaa tietoja internetistä löytämistään mielenkiintoisista blogeista. Kustakin blogista talletetaan sen kirjoittaja (author), aihe (title), url sekä blogilistasovelluksen käyttäjien antamien äänien määrä.
 
@@ -400,7 +400,6 @@ Jaa sovelluksen koodi tämän osan alun tapaan useaan moduuliin.
 **HUOM** etene todella pienin askelin, varmistaen että kaikki toimii koko ajan. Jos yrität "oikaista" tekemällä monta asiaa kerralla, on [Murphyn lain](https://fi.wikipedia.org/wiki/Murphyn_laki) perusteella käytännössä varmaa, että jokin menee pahasti pieleen ja "oikotien" takia maaliin päästään paljon myöhemmin kuin systemaattisin pienin askelin.
 
 Paras käytänne on commitoida koodi aina stabiilissa tilanteessa, tällöin on helppo palata aina toimivaan tilanteeseen jos koodi menee liian solmuun.
-
 
 </div>
 
@@ -630,7 +629,7 @@ test('of empty array is zero', () => {
 
 <div class="tasks">
 
-### Tehtäviä
+### Tehtävät 4.3.-4.7.
 
 Tehdään joukko blogilistan käsittelyyn tarkoitettuja apufunktioita. Tee funktiot esim. tiedostoon <i>utils/list_helper.js</i>. Tee testit sopivasti nimettyyn tiedostoon hakemistoon <i>tests</i>.
 
@@ -697,10 +696,10 @@ Törmäät varmasti testien tekemisen yhteydessä erinäisiin ongelmiin. Pidä m
 
 **HUOM:** jos jokin testi ei mene läpi, ei ongelmaa korjatessa kannata suorittaa kaikkia testejä, vaan ainoastaan rikkinäistä testiä hyödyntäen [only](https://facebook.github.io/jest/docs/en/api.html#testonlyname-fn-timeout)-metodia. 
 
-Toinen tapa suorittaa yksittäinen testi (tai describe-lohko) on kutsua jestiä suoraan ja määritellä sille suoritettava testi argumentin [-t](https://jestjs.io/docs/en/cli.html) avulla:
+Toinen tapa suorittaa yksittäinen testi (tai describe-lohko) on määritellä suoritettava testi argumentin [-t](https://jestjs.io/docs/en/cli.html) avulla:
 
 ```js
-npx jest -t 'when list has only one blog equals the likes of that'
+npm test -- -t 'when list has only one blog, equals the likes of that'
 ```
 
 #### 4.5*: apufunktioita ja yksikkötestejä, step3
