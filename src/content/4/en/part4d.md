@@ -123,11 +123,11 @@ The command _jwt.sign(userForToken, process.env.SECRET)_ fails. We forgot to set
 
 A successful login returns the user details and the token: 
 
-![](../../images/4/18e.png)
+![](../../images/4/18ea.png)
 
 A wrong username or password returns an error message and the proper status code:
 
-![](../../images/4/19e.png)
+![](../../images/4/19ea.png)
 
 ### Limiting creating new notes to logged in users
 
@@ -161,36 +161,31 @@ const getTokenFrom = request => {
 }
   //highlight-end
 
-notesRouter.post('/', async (request, response, next) => {
+notesRouter.post('/', async (request, response) => {
   const body = request.body
-
   const token = getTokenFrom(request)
 
 //highlight-start
-  try {
-    const decodedToken = jwt.verify(token, process.env.SECRET)
+  const decodedToken = jwt.verify(token, process.env.SECRET)
+  if (!token || !decodedToken.id) {
+    return response.status(401).json({ error: 'token missing or invalid' })
+  }
 
-    if (!token || !decodedToken.id) {
-      return response.status(401).json({ error: 'token missing or invalid' })
-    }
+  const user = await User.findById(decodedToken.id)
 //highlight-end
 
-    const user = await User.findById(decodedToken.id)
+  const note = new Note({
+    content: body.content,
+    important: body.important === undefined ? false : body.important,
+    date: new Date(),
+    user: user._id
+  })
 
-    const note = new Note({
-      content: body.content,
-      important: body.important === undefined ? false : body.important,
-      date: new Date(),
-      user: user._id
-    })
+  const savedNote = await note.save()
+  user.notes = user.notes.concat(savedNote._id)
+  await user.save()
 
-    const savedNote = await note.save()
-    user.notes = user.notes.concat(savedNote._id) //highlight-line
-    await user.save()  //highlight-line
-    response.json(savedNote.toJSON())
-  } catch(exception) {
-    next(exception)
-  }
+  response.json(savedNote.toJSON())
 })
 ```
 

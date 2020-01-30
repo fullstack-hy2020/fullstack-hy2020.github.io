@@ -20,7 +20,7 @@ Token-autentikaation periaatetta kuvaa seuraava sekvenssikaavio:
 - Tämän seurauksena selaimen React-koodi lähettää käyttäjätunnuksen ja salasanan HTTP POST -pyynnöllä palvelimen osoitteeseen <i>/api/login</i>
 - Jos käyttäjätunnus ja salasana ovat oikein, generoi palvelin <i>tokenin</i>, joka yksilöi jollain tavalla kirjautumisen tehneen käyttäjän
   - token on digitaalisesti allekirjoitettu, joten sen väärentäminen on (kryptografisesti) mahdotonta
-- backend vastaa selaimelle onnistumisesta kertovalla statuskoodilla ja palauttaa tokenin vastauksen mukana
+- Backend vastaa selaimelle onnistumisesta kertovalla statuskoodilla ja palauttaa tokenin vastauksen mukana
 - Selain tallentaa tokenin esimerkiksi React-sovelluksen tilaan
 - Kun käyttäjä luo uuden muistiinpanon (tai tekee jonkin operaation, joka edellyttää tunnistautumista), lähettää React-koodi tokenin pyynnön mukana palvelimelle
 - Palvelin tunnistaa pyynnön tekijän tokenin perusteella
@@ -118,11 +118,11 @@ Ongelman aiheuttaa komento _jwt.sign(userForToken, process.env.SECRET)_ sillä y
 
 Onnistunut kirjautuminen palauttaa kirjautuneen käyttäjän tiedot ja tokenin:
 
-![](../../images/4/18e.png)
+![](../../images/4/18ea.png)
 
 Virheellisellä käyttäjätunnuksella tai salasanalla kirjautuessa annetaan asianmukaisella statuskoodilla varustettu virheilmoitus
 
-![](../../images/4/19e.png)
+![](../../images/4/19ea.png)
 
 ### Muistiinpanojen luominen vain kirjautuneille
 
@@ -153,36 +153,31 @@ const getTokenFrom = request => {
 }
   //highlight-end
 
-notesRouter.post('/', async (request, response, next) => {
+notesRouter.post('/', async (request, response) => {
   const body = request.body
+  const token = getTokenFrom(request)
 
 //highlight-start
-  const token = getTokenFrom(request)
-  
-  try {
-    const decodedToken = jwt.verify(token, process.env.SECRET)
+  const decodedToken = jwt.verify(token, process.env.SECRET)
+  if (!token || !decodedToken.id) {
+    return response.status(401).json({ error: 'token missing or invalid' })
+  }
 
-    if (!token || !decodedToken.id) {
-      return response.status(401).json({ error: 'token missing or invalid' })
-    }
+  const user = await User.findById(decodedToken.id)
 //highlight-end
 
-    const user = await User.findById(decodedToken.id) //highlight-line
+  const note = new Note({
+    content: body.content,
+    important: body.important === undefined ? false : body.important,
+    date: new Date(),
+    user: user._id
+  })
 
-    const note = new Note({
-      content: body.content,
-      important: body.important === undefined ? false : body.important,
-      date: new Date(),
-      user: user._id
-    })
+  const savedNote = await note.save()
+  user.notes = user.notes.concat(savedNote._id)
+  await user.save()
 
-    const savedNote = await note.save()
-    user.notes = user.notes.concat(savedNote._id) //highlight-line
-    await user.save()  //highlight-line
-    response.json(savedNote.toJSON())
-  } catch(exception) {
-    next(exception)
-  }
+  response.json(savedNote.toJSON())
 })
 ```
 
@@ -214,7 +209,7 @@ Postmanilla luominen näyttää seuraavalta
 
 ja Visual Studio Coden REST clientillä
 
-![](../../images/4/21e.png)
+![](../../images/4/21ea.png)
 
 ### Poikkeusten käsittely
 
@@ -272,7 +267,7 @@ Toteutamme kirjautumisen frontendin puolelle kurssin [seuraavassa osassa](/osa5)
 
 <div class="tasks">
 
-### Tehtäviä
+### Tehtävät 4.15.-4.21.
 
 Seuraavien tehtävien myötä Blogilistalle luodaan käyttäjienhallinnan perusteet. Varminta on seurata melko tarkkaan osan 4 luvusta [Käyttäjien hallinta](/osa4/kayttajien_hallinta) ja [Token-perustainen kirjautuminen](/osa4/token_perustainen_kirjautuminen) etenevää tarinaa. Toki luovuus on sallittua.
 
