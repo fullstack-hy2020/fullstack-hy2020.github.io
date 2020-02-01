@@ -267,7 +267,7 @@ Toteutamme kirjautumisen frontendin puolelle kurssin [seuraavassa osassa](/osa5)
 
 <div class="tasks">
 
-### Tehtävät 4.15.-4.21.
+### Tehtävät 4.15.-4.22.
 
 Seuraavien tehtävien myötä Blogilistalle luodaan käyttäjienhallinnan perusteet. Varminta on seurata melko tarkkaan osan 4 luvusta [Käyttäjien hallinta](/osa4/kayttajien_hallinta) ja [Token-perustainen kirjautuminen](/osa4/token_perustainen_kirjautuminen) etenevää tarinaa. Toki luovuus on sallittua.
 
@@ -394,7 +394,12 @@ backend -> selain: 201 created
 kayttaja -> kayttaja:
 -->
 
-Tämä oli osan viimeinen tehtävä ja on aika pushata koodi githubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://github.com/fullstack-hy2020).
+#### 4.22*: blogilistan laajennus, step11
 
+Token-kirjautumisen lisääminen valitettavasti hajotti blogien lisäämiseen liittyvät testit. Korjaa testit. 
+
+Tarvitset luultavasti [tätä](https://github.com/visionmedia/supertest/issues/398) tietoa tehtävää tehdessä.
+
+Tämä oli osan viimeinen tehtävä ja on aika pushata koodi githubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://github.com/fullstack-hy2020).
 
 </div>
