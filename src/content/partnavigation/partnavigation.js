@@ -30,9 +30,9 @@ module.exports = {
       d: 'Token-perustainen kirjautuminen',
     },
     '5': {
-    /*
       a: 'Kirjautuminen frontendissä',
       b: 'props.children ja proptypet',
+                /*
       c: 'React-sovellusten testaaminen',
       d: 'Custom hookit',
       */
@@ -89,46 +89,36 @@ module.exports = {
       d: 'Validation and ESLint',
     },
     '4': {
-      /*
       a: 'Structure of backend application, introduction to testing',
       b: 'Testing the backend',
       c: 'User administration',
       d: 'Token authentication'
-      */
     },
     '5': {
-      /*
       a: 'Login in frontend',
       b: 'props.children and proptypes',
       c: 'Testing React apps',
       d: 'Custom hooks'
-      */
     },
     '6': {
-      /*
       a: 'Flux-architecture and Redux',
       b: 'Many reducers, connect',
       c: 'Communicating with server in a redux application',
-      */
     },
     '7': {
-      /*
       a: 'React-router',
       b: 'More about styles',
       c: 'Webpack',
       d: 'Class components, E2E-testing',
       e: 'Miscellaneous',
       f: 'Exercises: extending the bloglist',     
-      */
     },
     '8': {
-      /*
       a: 'GraphQL-server',
       b: 'React and GraphQL',
       c: 'Database and user administration',
       d: 'Login and updating the cache',
       e: 'Fragments and subscriptions'
-      */
     },
   },
 };

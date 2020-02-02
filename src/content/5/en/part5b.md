@@ -302,6 +302,85 @@ Next let's define the form component inside of a <i>Togglable</i> component:
 You can find the code for our current application in its entirety in the <i>part5-4</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-4).
 
 
+### Lomakkeiden tila
+
+Koko sovelluksen tila on nyt sijoitettu komponenttiin _App_. 
+
+Reactin dokumentaatio antaa seuraavan [ohjeen](https://reactjs.org/docs/lifting-state-up.html) tilan sijoittamisesta:
+
+> <i>Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.</i>
+
+Jos mietitään lomakkeiden tilaa, eli esimerkiksi uuden muistiinpanon sisältöä sillä hetkellä kun muistiinpanoa ei vielä ole luotu, ei komponentti _App_ oikeastaan tarvitse niitä mihinkään, ja voisimme aivan hyvin siirtää tilan lomakkeisiin liittyvän tilan niitä vastaaviin komponentteihin.
+
+Muistiinpanosta huolehtiva komponentti muuttuu seuraavasti:
+
+```js
+import React, {useState} from 'react' 
+
+const NoteForm = ({ createNote }) => {
+  const [newNote, setNewNote] = useState('') 
+
+  const handleChange = (event) => {
+    setNewNote(event.target.value)
+  }
+
+  const addNote = (event) => {
+    event.preventDefault()
+    createNote({
+      content: newNote,
+      important: Math.random() > 0.5,
+    })
+
+    setNewNote('')
+  }
+
+  return (
+    <div>
+      <h2>Create a new note</h2>
+
+      <form onSubmit={addNote}>
+        <input
+          value={newNote}
+          onChange={handleChange}
+        />
+        <button type="submit">save</button>
+      </form>
+    </div>
+  )
+}
+```
+
+Tilan muuttuja <i>newNote</i> ja sen muutokseta huolehtiva tapahtumankäsittelijä on siirretty komponentista _App_ lomakkeesta huolehtivaan komponenttiin.
+
+Propseja on enää yksi, funktio _createNote_, jota lomake kutsuu kun uusi muistiinpano luodaan.
+
+Komponentti _App_ yksintertaistuu, tilasta <i>newNote</i> ja sen käsittelijäfunktiosta on päästy eroon. Uuden muistiinpanon luomisesta huolehtiva funktio _addNote_ saa suoraan parametriksi uuden muistiinpanon ja funktio on ainoa props, joka välitetään lomakkeelle:
+
+```js
+const App = () => {
+  // ...
+  const addNote = (noteObject) => {
+    noteService
+      .create(noteObject)
+      .then(returnedNote => {
+        setNotes(notes.concat(returnedNote))
+      })
+  }
+  // ...
+  const noteForm = () => (
+    <Togglable buttonLabel='new note'>
+      <NoteForm createNote={addNote} />
+    </Togglable>
+  )
+
+  // ...
+}
+```
+
+Vastaava muutos voitaisiin tehdä myös kirjautumislomakkeelle, mutta jätämme sen vapaaehtoiseksi harjoitustehtäväksi.
+
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5), branchissa <i>part5-5</i>.
+
 ### References to components with ref
 
 Our current implementation is quite good, it has one aspect that could be improved.
@@ -318,12 +397,8 @@ const App = () => {
   const noteFormRef = React.createRef() // highlight-line
 
   const noteForm = () => (
-    <Togglable buttonLabel="new note" ref={noteFormRef}> // highlight-line
-      <NoteForm
-        onSubmit={addNote}
-        value={newNote}
-        handleChange={handleNoteChange}
-      />
+    <Togglable buttonLabel='new note' ref={noteFormRef}>  // highlight-line
+      <NoteForm createNote={addNote} />
     </Togglable>
   )
 
@@ -384,33 +459,25 @@ We can now hide the form by calling <i>noteFormRef.current.toggleVisibility()</i
 ```js
 const App = () => {
   // ...
-  const addNote = (event) => {
-    event.preventDefault()
+  const addNote = (noteObject) => {
     noteFormRef.current.toggleVisibility() // highlight-line
-    const noteObject = {
-      content: newNote,
-      date: new Date().toISOString(),
-      important: Math.random() > 0.5
-    }
-
     noteService
-      .create(noteObject).then(returnedNote => {
+      .create(noteObject)
+      .then(returnedNote => {     
         setNotes(notes.concat(returnedNote))
-        setNewNote('')
       })
   }
   // ...
 }
 ```
 
-
 To recap, the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) function is a React hook, that is used for defining functions in a component which can be invoked from outside of the component.
 
-This trick works for changing the state of a component, but it looks a bit unpleasant. We could have accomplished the same functionality with slightly cleaner code using "old React" class-based components. We will take a look at these class components at the end of this part of the course material. So far this is the only situation where using React hooks leads to code that is not cleaner than with class components.
+This trick works for changing the state of a component, but it looks a bit unpleasant. We could have accomplished the same functionality with slightly cleaner code using "old React" class-based components. We will take a look at these class components at the part 7 of the course material. So far this is the only situation where using React hooks leads to code that is not cleaner than with class components.
 
 There are also [other use cases](https://reactjs.org/docs/refs-and-the-dom.html) for refs than accessing React components.
 
-You can find the code for our current application in its entirety in the <i>part5-5</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5).
+You can find the code for our current application in its entirety in the <i>part5-6</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-6).
 
 ### One point about components
 
@@ -645,8 +712,6 @@ LoginForm.propTypes = {
 }
 ```
 
-Prop types for functional components are defined the same way as for class components.
-
 If the type of a passed prop is wrong, e.g. if we try to define the <i>handleSubmit</i> prop as a string, then this will result in the following warning:
 
 ![](../../images/5/16.png)
@@ -657,7 +722,7 @@ In part 3 we configured the [ESlint](/en/part3/validation_and_es_lint#lint) code
 
 Create-react-app has installed ESlint to the project by default, so all that's left for us to do is to define our desired configuration in the <i>.eslintrc.js</i> file. 
 
-*NB:* do not run the npm init command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
+*NB:* do not run the _eslint --init_ command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
 
 Next, we will start testing the frontend and in order to avoid undesired and irrelevant linter errors we will install the [eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest) package:
 
@@ -720,7 +785,7 @@ module.exports = {
       "react/prop-types": 0
       // highlight-end
   }
-};
+}
 ```
 
 Let's create [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) file with the following contents to the repository root
@@ -750,7 +815,30 @@ Let us also create a npm script to run the lint:
 }
 ```
 
-You can find the code for our current application in its entirety in the <i>part5-6</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-6).
+Compomnent _Togglable_ causesa a nasty looking warning <i>Component definition is missing display name</i>: 
+
+![](../../images/5/25ea.png)
+
+The react-devtools also reveals that the component does not have name:
+
+![](../../images/5/25ea.png)
+
+Fortunately this is easy to fix
+
+```js
+import React, { useState, useImperativeHandle } from 'react'
+import PropTypes from 'prop-types'
+
+const Togglable = React.forwardRef((props, ref) => {
+  // ...
+})
+
+Togglable.displayName = 'Togglable' // highlight-line
+
+export default Togglable
+```
+
+You can find the code for our current application in its entirety in the <i>part5-7</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7).
 
 </div>
 
@@ -760,9 +848,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 #### 5.11: Blog list frontend, step11
 
-
 Define PropTypes for one of the components of your application.
-
 
 #### 5.12: Blog list frontend, step12
 

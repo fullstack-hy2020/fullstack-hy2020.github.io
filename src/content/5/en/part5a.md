@@ -236,8 +236,6 @@ const App = () => {
 
       <Notification message={errorMessage} />
 
-      <h2>Login</h2>
-
       {user === null && loginForm()} // highlight-line
       {user !== null && noteForm()} // highlight-line
 
@@ -247,14 +245,19 @@ const App = () => {
         </button>
       </div>
       <ul>
-        {rows()}
+        {notesToShow.map((note, i) => 
+          <Note
+            key={i}
+            note={note} 
+            toggleImportance={() => toggleImportanceOf(note.id)}
+          />
+        )}
       </ul>
 
       <Footer />
     </div>
   )
 }
-
 ```
 
 A slightly odd looking, but commonly used [React trick](https://reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator) is used to render the forms conditionally: 
@@ -276,8 +279,6 @@ return (
     <h1>Notes</h1>
 
     <Notification message={errorMessage}/>
-
-    <h2>Login</h2>
 
     {user === null ?
       loginForm() :
@@ -304,8 +305,6 @@ return (
     <h1>Notes</h1>
 
     <Notification message={errorMessage} />
-
-    <h2>Login</h2>
 
     {user === null ?
       loginForm() :

@@ -220,8 +220,6 @@ const App = () => {
 
       <Notification message={errorMessage} />
 
-      <h2>login</h2>
-
       {user === null && loginForm()} // highlight-line
       {user !== null && noteForm()} // highlight-line
 
@@ -231,14 +229,19 @@ const App = () => {
         </button>
       </div>
       <ul>
-        {rows()}
+        {notesToShow.map((note, i) => 
+          <Note
+            key={i}
+            note={note} 
+            toggleImportance={() => toggleImportanceOf(note.id)}
+          />
+        )}
       </ul>
 
       <Footer />
     </div>
   )
 }
-
 ```
 
 Lomakkeiden ehdolliseen renderöintiin käytetään hyväksi aluksi hieman erikoiselta näyttävää, mutta Reactin yhteydessä [yleisesti käytettyä kikkaa](https://reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator):
@@ -259,8 +262,6 @@ return (
     <h1>Notes</h1>
 
     <Notification message={errorMessage}/>
-
-    <h2>Login</h2>
 
     {user === null ?
       loginForm() :
@@ -285,8 +286,6 @@ return (
     <h1>Notes</h1>
 
     <Notification message={errorMessage} />
-
-    <h2>Login</h2>
 
     {user === null ?
       loginForm() :
@@ -509,13 +508,13 @@ tai local storagen tilan kokonaan nollaavan komennon
 window.localStorage.clear()
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa]https://github.com/fullstack-hy2020/part2-notes/tree/part5-3), branchissa <i>part5-3</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-3), branchissa <i>part5-3</i>.
 
 </div>
 
 <div class="tasks">
 
-### Tehtäviä
+### Tehtävät 5.1.-5.4.
 
 Teemme nyt edellisen osan tehtävissä tehtyä bloglist-backendia käyttävän frontendin. Voit ottaa tehtävien pohjaksi [Githubista](https://github.com/fullstack-hy2020/bloglist-frontend) olevan sovellusrungon. Sovellus olettaa, että backend on käynnissä koneesi portissa 3003.
 

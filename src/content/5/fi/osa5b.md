@@ -148,7 +148,7 @@ const showWhenVisible = { display: loginVisible ? '' : 'none' }
 </div>
 ```
 
-Käytössä on taas kysymysmerkkioperaattori, eli jos _loginVisible_ on <i>true</i>, tulee napin CSS-määrittelyksi
+Käytössä on kysymysmerkkioperaattori, eli jos _loginVisible_ on <i>true</i>, tulee napin CSS-määrittelyksi
 
 ```css
 display: 'none';
@@ -206,7 +206,7 @@ const Togglable = (props) => {
         <button onClick={toggleVisibility}>{props.buttonLabel}</button>
       </div>
       <div style={showWhenVisible}>
-        {props.children}
+        {props.children} //highlight-line
         <button onClick={toggleVisibility}>cancel</button>
       </div>
     </div>
@@ -275,6 +275,85 @@ ja määritellään lomakkeen näyttävä koodi komponentin <i>Togglable</i> sis
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-4), branchissa <i>part5-4</i>.
 
+### Lomakkeiden tila
+
+Koko sovelluksen tila on nyt sijoitettu komponenttiin _App_. 
+
+Reactin dokumentaatio antaa seuraavan [ohjeen](https://reactjs.org/docs/lifting-state-up.html) tilan sijoittamisesta:
+
+> <i>Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.</i>
+
+Jos mietitään lomakkeiden tilaa, eli esimerkiksi uuden muistiinpanon sisältöä sillä hetkellä kun muistiinpanoa ei vielä ole luotu, ei komponentti _App_ oikeastaan tarvitse niitä mihinkään, ja voisimme aivan hyvin siirtää tilan lomakkeisiin liittyvän tilan niitä vastaaviin komponentteihin.
+
+Muistiinpanosta huolehtiva komponentti muuttuu seuraavasti:
+
+```js
+import React, {useState} from 'react' 
+
+const NoteForm = ({ createNote }) => {
+  const [newNote, setNewNote] = useState('') 
+
+  const handleChange = (event) => {
+    setNewNote(event.target.value)
+  }
+
+  const addNote = (event) => {
+    event.preventDefault()
+    createNote({
+      content: newNote,
+      important: Math.random() > 0.5,
+    })
+
+    setNewNote('')
+  }
+
+  return (
+    <div>
+      <h2>Create a new note</h2>
+
+      <form onSubmit={addNote}>
+        <input
+          value={newNote}
+          onChange={handleChange}
+        />
+        <button type="submit">save</button>
+      </form>
+    </div>
+  )
+}
+```
+
+Tilan muuttuja <i>newNote</i> ja sen muutokseta huolehtiva tapahtumankäsittelijä on siirretty komponentista _App_ lomakkeesta huolehtivaan komponenttiin.
+
+Propseja on enää yksi, funktio _createNote_, jota lomake kutsuu kun uusi muistiinpano luodaan.
+
+Komponentti _App_ yksintertaistuu, tilasta <i>newNote</i> ja sen käsittelijäfunktiosta on päästy eroon. Uuden muistiinpanon luomisesta huolehtiva funktio _addNote_ saa suoraan parametriksi uuden muistiinpanon ja funktio on ainoa props, joka välitetään lomakkeelle:
+
+```js
+const App = () => {
+  // ...
+  const addNote = (noteObject) => {
+    noteService
+      .create(noteObject)
+      .then(returnedNote => {
+        setNotes(notes.concat(returnedNote))
+      })
+  }
+  // ...
+  const noteForm = () => (
+    <Togglable buttonLabel='new note'>
+      <NoteForm createNote={addNote} />
+    </Togglable>
+  )
+
+  // ...
+}
+```
+
+Vastaava muutos voitaisiin tehdä myös kirjautumislomakkeelle, mutta jätämme sen vapaaehtoiseksi harjoitustehtäväksi.
+
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5), branchissa <i>part5-5</i>.
+
 ### ref eli viite komponenttiin
 
 Ratkaisu on melko hyvä, haluaisimme kuitenkin parantaa sitä erään seikan osalta.
@@ -292,15 +371,10 @@ const App = () => {
   const noteFormRef = React.createRef() // highlight-line
 
   const noteForm = () => (
-    <Togglable buttonLabel="new note" ref={noteFormRef}> // highlight-line
-      <NoteForm
-        onSubmit={addNote}
-        value={newNote}
-        handleChange={handleNoteChange}
-      />
+    <Togglable buttonLabel='new note' ref={noteFormRef}>  // highlight-line
+      <NoteForm createNote={addNote} />
     </Togglable>
   )
-
   // ...
 }
 ```
@@ -341,7 +415,7 @@ const Togglable = React.forwardRef((props, ref) => { // highlight-line
       </div>
     </div>
   )
-})
+})  // highlight-line
 
 export default Togglable
 ```
@@ -356,19 +430,12 @@ Voimme nyt piilottaa lomakkeen kutsumalla <i>noteFormRef.current.toggleVisibilit
 ```js
 const App = () => {
   // ...
-  const addNote = (event) => {
-    event.preventDefault()
+  const addNote = (noteObject) => {
     noteFormRef.current.toggleVisibility() // highlight-line
-    const noteObject = {
-      content: newNote,
-      date: new Date().toISOString(),
-      important: Math.random() > 0.5
-    }
-
     noteService
-      .create(noteObject).then(returnedNote => {
+      .create(noteObject)
+      .then(returnedNote => {     
         setNotes(notes.concat(returnedNote))
-        setNewNote('')
       })
   }
   // ...
@@ -378,11 +445,11 @@ const App = () => {
 Käyttämämme [useImperativeHandle
 ](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) on siis React hook, jonka avulla funktiona määritellylle komponentille voidaan määrittää funktioita, joita on mahdollista kutsua sen ulkopuolelta.
 
-Käyttämämme kikka komponentin tilan muuttamikseksi toimii, mutta se vaikuttaa hieman ikävältä. Saman olisi saanut aavistuksen siistimmin toteutettua "vanhan Reactin" class-perustaisilla komponenteilla, joihin tutustumme tämän osan lopussa. Tämä on toistaiseksi ainoa tapaus, jossa Reactin hook-syntaksiin nojaava ratkaisu on aavistuksen likaisemman oloinen kuin class-komponenttien tarjoama ratkaisu.
+Käyttämämme kikka komponentin tilan muuttamikseksi toimii, mutta se vaikuttaa hieman ikävältä. Saman olisi saanut aavistuksen siistimmin toteutettua "vanhan Reactin" class-perustaisilla komponenteilla, joihin tutustumme tosassa 7. Tämä on toistaiseksi ainoa tapaus, jossa Reactin hook-syntaksiin nojaava ratkaisu on aavistuksen likaisemman oloinen kuin class-komponenttien tarjoama ratkaisu.
 
 Refeille on myös [muita käyttötarkoituksia](https://reactjs.org/docs/refs-and-the-dom.html) kuin React-komponentteihin käsiksi pääseminen.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5), branchissa <i>part5-5</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-6), branchissa <i>part5-6</i>.
 
 ### Huomio komponenteista
 
@@ -422,7 +489,7 @@ syntyy <i>kolme erillistä komponenttiolioa</i>, joilla on kaikilla oma tilansa:
 
 <div class="tasks">
 
-### Tehtäviä
+### Tehtävät 5.5.-5.10.
 
 #### 5.5 blogilistan frontend, step5
 
@@ -594,8 +661,6 @@ LoginForm.propTypes = {
 }
 ```
 
-Funktionaalisen komponentin proptypejen määrittely tapahtuu samalla tavalla kuin luokkaperustaisten.
-
 Jos propsin tyyppi on väärä, esim. yritetään määritellä propsiksi <i>handleSubmit</i> merkkijono, seurauksena on varoitus:
 
 ![](../../images/5/16.png)
@@ -606,7 +671,7 @@ Konfiguroimme osassa 3 koodin tyylistä huolehtivan [ESlintin](/osa3/validointi_
 
 Create-react-app on asentanut projektille eslintin valmiiksi, joten ei tarvita muuta kuin sopiva konfiguraatio tiedostoon <i>.eslintrc.js</i>.
 
-**HUOM:** älä suorita komentoa _npm init_. Se asentaa uuden version eslintistä joka on epäsopiva create-react-app:in konfiguraatioiden kanssa!
+**HUOM:** älä suorita komentoa _eslint --init_. Se asentaa uuden version eslintistä joka on epäsopiva create-react-app:in konfiguraatioiden kanssa!
 
 Aloitamme seuraavaksi testaamisen, ja jotta pääsemme eroon testeissä olevista turhista huomautuksista asennetaan plugin [eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest)
 
@@ -618,58 +683,54 @@ Luodaan tiedosto <i>.eslintrc.js</i> ja kopioidaan sinne seuraava sisältö:
 
 ```js
 module.exports = {
-    "env": {
-        "browser": true,
-        "es6": true,
-        "jest/globals": true // highlight-line
-    },
-    // highlight-start
-    "extends": [ 
-        "eslint:recommended",
-        "plugin:react/recommended"
-    ],
-    // highlight-end
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 2018,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react", "jest" // highlight-line
-    ],
-    "rules": {
-        "indent": [
-            "error",
-            2  // highlight-line
-        ],
-        "linebreak-style": [
-            "error",
-            "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "never"
-        ],
-        // highlight-start
-        "eqeqeq": "error",
-        "no-trailing-spaces": "error",
-        "object-curly-spacing": [
-            "error", "always"
-        ],
-        "arrow-spacing": [
-            "error", { "before": true, "after": true }
-        ],
-        "no-console": 0,
-        "react/prop-types": 0
-        // highlight-end
-    }
-};
+  "env": {
+      "browser": true,
+      "es6": true,
+      "jest/globals": true 
+  },
+  "extends": [ 
+      "eslint:recommended",
+      "plugin:react/recommended"
+  ],
+  "parserOptions": {
+      "ecmaFeatures": {
+          "jsx": true
+      },
+      "ecmaVersion": 2018,
+      "sourceType": "module"
+  },
+  "plugins": [
+      "react", "jest"
+  ],
+  "rules": {
+      "indent": [
+          "error",
+          2  
+      ],
+      "linebreak-style": [
+          "error",
+          "unix"
+      ],
+      "quotes": [
+          "error",
+          "single"
+      ],
+      "semi": [
+          "error",
+          "never"
+      ],
+      "eqeqeq": "error",
+      "no-trailing-spaces": "error",
+      "object-curly-spacing": [
+          "error", "always"
+      ],
+      "arrow-spacing": [
+          "error", { "before": true, "after": true }
+      ],
+      "no-console": 0,
+      "react/prop-types": 0
+  }
+}
 ```
 
 Tehdään projektin juureen tiedosto [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) ja sille seuraava sisältö
@@ -699,13 +760,36 @@ Tehdään lintausta varten npm-skripti:
 }
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-6, branchissa <i>part5-6</i>.
+Komponentti _Togglable_ aiheuttaa ikävän näköisen varoituksen <i>Component definition is missing display name</i>: 
+
+![](../../images/5/25ea.png)
+
+Komponentin "nimettöämyys" käy ilmi myös react-devtoolsilla:
+
+![](../../images/5/25ea.png)
+
+Korjaus on onneksi hyvin helppo tehdä
+
+```js
+import React, { useState, useImperativeHandle } from 'react'
+import PropTypes from 'prop-types'
+
+const Togglable = React.forwardRef((props, ref) => {
+  // ...
+})
+
+Togglable.displayName = 'Togglable' // highlight-line
+
+export default Togglable
+```
+
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7), branchissa <i>part5-7</i>.
 
 </div>
 
 <div class="tasks">
 
-### Tehtäviä
+### Tehtävät 5.11.-5.12.
 
 #### 5.11: blogilistan frontend, step11
 
