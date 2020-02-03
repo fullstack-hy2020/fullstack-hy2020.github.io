@@ -11,7 +11,9 @@ Reactilla tehtyjen frontendien testaamiseen on monia tapoja. Aloitetaan niihin t
 
 Testit tehdään samaan tapaan kuin edellisessä osassa eli Facebookin [Jest](http://jestjs.io/)-kirjastolla. Jest onkin valmiiksi konfiguroitu create-react-app:illa luotuihin projekteihin.
 
-Tarvitsemme Jestin lisäksi testaamiseen apukirjaston, jonka avulla React-komponentteja voidaan renderöidä testejä varten. Tähän tarkoitukseen ehdottomasti paras vaihtoehto vielä viime syksyyn asti oli AirBnB:n kehittämä [enzyme](https://github.com/airbnb/enzyme)-kirjasto. Enzyme ei kuitenkaan tue kunnolla Reactin hookeja, joten käytämme Enzymen sijaan viime aikoina nopeasti suosiota kasvattanutta kirjastoa [react-testing-library](https://github.com/testing-library/react-testing-library). Jestin ilmaisuvoimaa kannattaa myös laajentaa kirjastolla [jest-dom](https://www.npmjs.com/package/jest-dom).
+Tarvitsemme Jestin lisäksi testaamiseen apukirjaston, jonka avulla React-komponentteja voidaan renderöidä testejä varten. 
+
+Tähän tarkoitukseen ehdottomasti paras vaihtoehto on [react-testing-library](https://github.com/testing-library/react-testing-library). Jestin ilmaisuvoimaa kannattaa myös laajentaa kirjastolla [jest-dom](https://github.com/testing-library/jest-dom).
 
 Asennetaan kirjastot komennolla:
 
@@ -48,10 +50,8 @@ Ensimmäinen testi varmistaa, että komponentti renderöi muistiinpanon sisäll�
 ```js
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
-import { render, cleanup } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import Note from './Note'
-
-afterEach(cleanup)
 
 test('renders content', () => {
   const note = {
@@ -79,7 +79,7 @@ const component = render(
 
 Normaalisti React-komponentit renderöityvät <i>DOM</i>:iin. Nyt kuitenkin renderöimme komponentteja testeille sopivaan muotoon laittamatta niitä DOM:iin. 
 
-_render_ palauttaa olion, jolla on useita kenttiä. Yksi kentistä on <i>container</i>, se sisältää koko komponentin renderöimän HTML:n.
+_render_ palauttaa olion, jolla on useita [kenttiä](https://testing-library.com/docs/react-testing-library/api#render-result). Yksi kentistä on <i>container</i>, se sisältää koko komponentin renderöimän HTML:n.
 
 Ekspektaatiossa varmistamme, että komponenttiin on renderöitynyt oikea teksti, eli muistiinpanon sisältö:
 
@@ -146,17 +146,19 @@ test('renders content', () => {
 })
 ```
 
-Ensimmäinen tapa siis etsii tiettyä tekstiä koko komponentin renderöimästä HTML-koodista. 
+Ensimmäinen tapa eli metodi <i>toHaveTextContent</i> siis etsii tiettyä tekstiä koko komponentin renderöimästä HTML:stä. <i>toHaveTextContent</i> on eräs monista [jest-dom](https://github.com/testing-library/jest-dom#tohavetextcontent)-kirjaston tarjoamista "matcher"-metodeista.
 
-Toisena käytimme render-metodin palauttamaan olioon liitettyä [getByText](https://testing-library.com/docs/dom-testing-library/api-queries#bytext)-metodia, joka palauttaa sen elementin, jolla on määritelty teksti. Jos elementtiä ei ole, tapahtuu poikkeus. Eli mitään ekspektaatiota ei välttämättä edes tarvittaisi.
+Toisena käytimme render-metodin palauttamaan olioon liittyvää [getByText](https://testing-library.com/docs/dom-testing-library/api-queries#bytext)-metodia, joka palauttaa sen elementin, jolla on parametrina määritelty teksti. Jos elementtiä ei ole, tapahtuu poikkeus. Eli mitään ekspektaatiota ei välttämättä edes tarvittaisi.
 
 Kolmas tapa on etsiä komponentin sisältä tietty elementti metodilla [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector), joka saa parametrikseen [CSS-selektorin](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors).
+
+Kaksi viimeistä tapaa siis hakevat metodien <i>getByText</i> ja <i>querySelector</i> avulla renderöidystä komponentista jonkin ehdon täyttävän elementin. Vastaavalla periaatteella toimivia "query"-metodeja, on tarjolla [lukuisia](https://testing-library.com/docs/dom-testing-library/api-queries).
 
 ### Testien debuggaaminen
 
 Testejä tehdessä törmäämme tyypillisesti erittäin moniin ongelmiin. 
 
-Renderin palauttaman olion metodilla [debug](https://testing-library.com/docs/react-testing-library/api#debug) voimme tulostaa komponentin tuottaman HTML:n konsoliin, eli kun muutamme testiä seuraavasti,
+Renderin palauttaman olion metodilla [debug](https://testing-library.com/docs/react-testing-library/api#debug) voimme tulostaa komponentin tuottaman HTML:n konsoliin, eli kun muutamme testiä seuraavasti:
 
 ```js
 test('renders content', () => {
@@ -198,7 +200,7 @@ On myös mahdollista etsiä komponentista pienempi osa, ja tulostaa sen HTML-koo
 ```js
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
-import { render, cleanup } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { prettyDOM } from '@testing-library/dom' // highlight-line
 import Note from './Note'
 
@@ -229,42 +231,6 @@ console.log src/components/Note.test.js:21
       make not important
     </button>
   </li>
-```
-
-### setup
-
-react-testing-library:n manuaali kehoittaa kutsumaan jokaisen testin jälkeen metodia
-[cleanup](https://testing-library.com/docs/react-testing-library/api#cleanup). Hoidimme asian lisäämällä testitiedostoon [afterEach](https://jestjs.io/docs/en/setup-teardown)-määreen, joka kutsuu metodia:
-
-```js 
-import React from 'react'
-import '@testing-library/jest-dom/extend-expect' // highlight-line
-import { render, cleanup } from '@testing-library/react'
-import { prettyDOM } from '@testing-library/dom' 
-import Note from './Note'
-
-afterEach(cleanup)  // highlight-line
-```
-
-Voisimme toistaa saman kaikkiin testitiedostoihin. Parempi vaihtoehto on kuitenkin [konfiguroida](https://testing-library.com/docs/react-testing-library/setup) cleanup tapahtumaan automaattisesti. Tehdään konfiguraatiota varten tiedosto <i>src/setupTests.js</i> jolla on seuraava sisältö:
-
-```js
-import '@testing-library/jest-dom/extend-expect'
-import '@testing-library/react/cleanup-after-each'
-```
-
-Nyt pääsemme eroon molemmista ylläolevan testikoodin korostetuista riveistä.
-
-**HUOM** mikäli testejä suoritettaessa ei löydetä tiedostossa <i>src/setupTests.js</i> tehtyjä konfiguraatioita, auttaa seuraavan asetuksen lisääminen tiedostoon package.json:
-
-```
-  "jest": {
-    ...
-    "setupFiles": [
-      "<rootDir>/src/setupTests.js"
-    ],
-    ...
-  }
 ```
 
 ### Nappien painelu testeissä
@@ -353,6 +319,7 @@ Testit ovat seuraavassa
 
 ```js
 import React from 'react'
+import '@testing-library/jest-dom/extend-expect'
 import { render, fireEvent } from '@testing-library/react'
 import Togglable from './Togglable'
 
@@ -368,7 +335,9 @@ describe('<Togglable />', () => {
   })
 
   test('renders its children', () => {
-    component.container.querySelector('.testDiv')
+    expect(
+      component.container.querySelector('.testDiv')
+    ).toBeDefined()
   })
 
   test('at start the children are not displayed', () => {
@@ -436,13 +405,114 @@ test('toggled content can be closed', () => {
 
 Käyttämämme _getByText_ on vain yksi monista [queryistä](https://testing-library.com/docs/api-queries#queries), joita <i>react-testing-library</i> tarjoaa.
 
+### Lomakkeiden testaus
+
+Käytimme jo edellisissä testeissä [fireEvent](https://testing-library.com/docs/api-events#fireevent)-funktiota nappien klikkaamiseen:
+
+```js
+const button = component.getByText('show...')
+fireEvent.click(button)
+```
+
+Käytännössä siis loimme <i>fireEventin</i> avulla tapahtuman <i>click</i> nappia vastaavalle komponentille. Voimme myös simuloida lomakkeisiin kirjoittamista <i>fireEventin</i> avulla.
+
+Tehdään testi komponentille <i>NoteForm</i>. Lomakkeen koodi näyttää seuraavalta
+
+```js
+import React, { useState } from 'react'
+
+const NoteForm = ({ createNote }) => {
+  const [newNote, setNewNote] = useState('')
+
+  const handleChange = (event) => {
+    setNewNote(event.target.value)
+  }
+
+  const addNote = (event) => {
+    event.preventDefault()
+    createNote({
+      content: newNote,
+      important: Math.random() > 0.5,
+    })
+
+    setNewNote('')
+  }
+
+  return (
+    <div className="formDiv">
+      <h2>Create a new note</h2>
+
+      <form onSubmit={addNote}>
+        <input
+          value={newNote}
+          onChange={handleChange}
+        />
+        <button type="submit">save</button>
+      </form>
+    </div>
+  )
+}
+
+export default NoteForm
+```
+
+Lomakkeen toimintaperiaatteena on kutsua sille propsina välitettyä funktiota _createNote_ uuden muistiinpanon tiedot parametrina.
+
+Testi on seuraavassa:
+
+```js
+import React from 'react'
+import { render, fireEvent } from '@testing-library/react'
+import '@testing-library/jest-dom/extend-expect'
+import NoteForm from './NoteForm'
+
+test('<NoteForm /> updates parent state and calls onSubmit', () => {
+  const createNote = jest.fn()
+
+  const component = render(
+    <NoteForm createNote={createNote} />
+  )
+
+  const input = component.container.querySelector('input')
+  const form = component.container.querySelector('form')
+
+  fireEvent.change(input, { 
+    target: { value: 'testing of forms could be easier' } 
+  })
+  fireEvent.submit(form)
+
+  expect(createNote.mock.calls.length).toBe(1)
+  expect(createNote.mock.calls[0][0].content).toBe('testing of forms could be easier' )
+})
+```
+
+Syötekenttään <i>input</i> kirjoittamista simuloidaan tekemällä syötekenttään tapahtuma <i>change</i> ja määrittelemällä sopiva olio, joka määrittelee syötekenttään 'kirjoitetun' sisällön.
+
+Lomake lähetetään simuloimalla tapahtuma <i>submit</i> lomakkeelle.
+
+Testin ensimmäinen ekspektaatio varmistaa, että lomakkeen lähetys on aikaansaanut tapahtumankäsittelijän _createNote_ kutsumisen. Toinen ekspektaatio tarkistaa, että tapahtumankäsittelijää kutsutaan oikealla parametrilla, eli että luoduksi tulee saman sisältöinen muistiinpano kuin lomakkeelle kirjoitetaan.
+
+### Testauskattavuus
+
+[Testauskattavuus](https://github.com/facebookincubator/create-react-app/blob/ed5c48c81b2139b4414810e1efe917e04c96ee8d/packages/react-scripts/template/README.md#coverage-reporting) saadaan helposti selville suorittamalla testit komennolla
+
+```js
+CI=true npm test -- --coverage
+```
+
+![](../../images/5/18ea.png)
+
+Melko primitiivinen HTML-muotoinen raportti generoituu hakemistoon <i>coverage/lcov-report</i>. HTML-muotoinen raportti kertoo mm. yksittäisen komponenttien testaamattomat koodirivit:
+
+![](../../images/5/19ea.png)
+
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-8), branchissa <i>part5-8</i>.
 
 </div>
 
 <div class="tasks">
 
-### Tehtäviä
+### Tehtävät 5.13.-5.15.
 
 #### 5.13: blogilistan testit, step1
 
@@ -482,347 +552,13 @@ Tee oman sovelluksesi komponentille <i>Blog</i> testit, jotka varmistavat, että
 
 <div class="content">
 
-### Lomakkeiden testaus
-
-Käytimme jo edellisissä testeissä [fireEvent](https://testing-library.com/docs/api-events#fireevent)-funktiota nappien klikkaamiseen:
-
-```js
-const button = component.getByText('show...')
-fireEvent.click(button)
-```
-
-Käytännössä siis loimme <i>fireEventin</i> avulla tapahtuman <i>click</i> nappia vastaavalle komponentille. Voimme myös simuloida lomakkeisiin kirjoittamista <i>fireEventin</i> avulla.
-
-Tehdään testi komponentille <i>NoteForm</i>. Lomakkeen koodi näyttää seuraavalta
-
-```js
-const NoteForm = ({ onSubmit, handleChange, value }) => {
-  return (
-    <div>
-      <h2>Luo uusi muistiinpano</h2>
-
-      <form onSubmit={onSubmit}>
-        <input
-          value={value}
-          onChange={handleChange}
-        />
-        <button type="submit">save</button>
-      </form>
-    </div>
-  )
-}
-```
-
-Lomakkeen toimintaperiaatteena on synkronoida syötekentän tila sen ulkopuolella olevan React-komponentin tilaan. Lomakettamme on jossain määrin vaikea testata yksistään.
-
-Teemmekin testejä varten apukomponentin <i>Wrapper</i>, joka renderöi <i>NoteForm</i>:in ja hallitsee lomakkeen tilaa parametrinaan saamansa propsin <i>state</i> avulla:
-
-```js
-const Wrapper = (props) => {
-
-  const onChange = (event) => {
-    props.state.value = event.target.value
-  }
-
-  return (
-    <NoteForm
-      value={props.state.value}
-      onSubmit={props.onSubmit}
-      handleChange={onChange}
-    />
-  )
-} 
-
-```
-
-Testi on seuraavassa:
-
-```js
-import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
-import NoteForm from './NoteForm'
-
-const Wrapper = (props) => {
-  // ...
-}
-
-test('<NoteForm /> updates parent state and calls onSubmit', () => {
-  const onSubmit = jest.fn()
-  const state = {
-    value: ''
-  }
-
-  const component = render(
-    <Wrapper onSubmit={onSubmit} state={state} />
-  )
-
-  const input = component.container.querySelector('input')
-  const form = component.container.querySelector('form')
-
-  fireEvent.change(input, { target: { value: 'testing of forms could be easier' } })
-  fireEvent.submit(form)
-
-  expect(onSubmit.mock.calls.length).toBe(1)
-  expect(state.value).toBe('testing of forms could be easier')  
-})
-```
-
-Testi luo <i>Wrapper</i>-komponentin, jolle se välittää propseina mockatun funktion _onSubmit_ sekä tilaa edustavan olion <i>state</i>.
-
-Wrapper välittää funktion edelleen <i>NoteFormille</i> tapahtuman <i>onSubmit</i> käsittelijäksi ja saamansa propsin <i>state</i> kentän <i>value</i> syötekentän <i>input</i> arvoksi. 
-
-Syötekenttään <i>input</i> kirjoittamista simuloidaan tekemällä syötekenttään tapahtuma <i>change</i> ja määrittelemällä sopiva olio, joka määrittelee syötekenttään 'kirjoitetun' sisällön.
-
-Lomake lähetetään simuloimalla tapahtuma <i>submit</i> lomakkeelle.
-
-Testin ensimmäinen ekspektaatio varmistaa, että lomakkeen lähetys on aikaansaanut tapahtumankäsittelijän kutsumisen. Toinen ekspektaatio tutkii komponentille <i>Wrapper</i> propsina välitettyä muuttujaa <i>state</i>, ja varmistaa, että lomakkeelle kirjoitettu teksti on siirtynyt tilaan. 
-
 ### Frontendin integraatiotestaus
 
 Suoritimme edellisessä osassa backendille integraatiotestejä, jotka testasivat backendin tarjoaman API:n läpi backendia ja tietokantaa. Backendin testauksessa tehtiin tietoinen päätös olla kirjoittamatta yksikkötestejä sillä backendin koodi on melko suoraviivaista ja ongelmat tulevatkin esiin todennäköisemmin juuri monimutkaisemmissa skenaarioissa, joita integraatiotestit testaavat hyvin.
 
 Toistaiseksi kaikki frontendiin tekemämme testit ovat olleet yksittäisten komponenttien oikeellisuutta valvovia yksikkötestejä. Yksikkötestaus on toki välillä hyödyllistä, mutta kattavinkaan yksikkötestaus ei riitä antamaan riittävää luotettavuutta sille, että järjestelmä toimii kokonaisuudessaan.
 
-Tehdään nyt sovellukselle yksi integraatiotesti. Integraatiotestaus on huomattavasti komponenttien yksikkötestausta hankalampaa. Erityisesti sovelluksemme kohdalla ongelmia aiheuttaa kaksi seikkaa: sovellus hakee näytettävät muistiinpanot palvelimelta <i>ja</i> sovellus käyttää local storagea kirjautuneen käyttäjän tietojen tallettamiseen.
-
-Local storage ei ole oletusarvoiseti käytettävissä testejä suorittaessa, sillä kyseessä on selaimen tarjoama toiminnallisuus ja testit ajetaan selaimen ulkopuolella. Ongelma on helppo korjata määrittelemällä testien suorituksen ajaksi <i>mock</i> joka matkii local storagea. Tapoja tähän on [monia](https://stackoverflow.com/questions/32911630/how-do-i-deal-with-localstorage-in-jest-tests).
-
-Koska testimme ei edellytä local storagelta juuri mitään toiminnallisuutta, teemme tiedostoon [src/setupTests.js](https://github.com/facebookincubator/create-react-app/blob/ed5c48c81b2139b4414810e1efe917e04c96ee8d/packages/react-scripts/template/README.md#initializing-test-environment) hyvin yksinkertaisen mockin
-
-```js
-let savedItems = {}
-
-const localStorageMock = {
-  setItem: (key, item) => {
-    savedItems[key] = item
-  },
-  getItem: (key) => savedItems[key],
-  clear: savedItems = {}
-}
-
-Object.defineProperty(window, 'localStorage', { value: localStorageMock })
-```
-
-Toinen ongelmistamme on se, että sovellus hakee näytettävät muistiinpanot palvelimelta. Muistiinpanojen haku tapahtuu heti komponentin <i>App</i> luomisen jälkeen suoritettavassa effect hookissa:
-
-
-```js
-const App = () => {
-  // ...
-
-  useEffect(() => {
-    noteService
-      .getAll().then(initialNotes => {
-        setNotes(initialNotes)
-      })
-  }, [])
-
-// ...
-}
-```
-
-Jestin [manual mock](https://facebook.github.io/jest/docs/en/manual-mocks.html#content) -konsepti tarjoaa tilanteeseen hyvän ratkaisun. Manual mockien avulla voidaan kokonainen moduuli, tässä tapauksessa _noteService_ korvata testien ajaksi vaihtoehtoisella esim. kovakoodattua dataa tarjoavalla toiminnallisuudella.
-
-Luodaan Jestin ohjeiden mukaisesti hakemistoon <i>src/services</i> alihakemisto <i>\_\_mocks\_\_</i> (alussa ja lopussa kaksi alaviivaa) ja sinne tiedosto <i>notes.js</i> jonka määrittelemä metodi <i>getAll</i> palauttaa kovakoodatun listan muistiinpanoja:
-
-```js
-const notes = [
-  {
-    id: '5a451df7571c224a31b5c8ce',
-    content: 'HTML is easy',
-    date: '2019-06-11T16:38:15.541Z',
-    important: false,
-    user: {
-      _id: '5a437a9e514ab7f168ddf138',
-      username: 'mluukkai',
-      name: 'Matti Luukkainen'
-    }
-  },
-  {
-    id: '5a451e21e0b8b04a45638211',
-    content: 'Browser can execute only javascript',
-    date: '2019-06-11T16:38:57.694Z',
-    important: true,
-    user: {
-      _id: '5a437a9e514ab7f168ddf138',
-      username: 'mluukkai',
-      name: 'Matti Luukkainen'
-    }
-  },
-  {
-    id: '5a451e30b5ffd44a58fa79ab',
-    content: 'The most important methods of HTTP are GET and POST',
-    date: '2019-06-11T16:39:12.713Z',
-    important: true,
-    user: {
-      _id: '5a437a9e514ab7f168ddf138',
-      username: 'mluukkai',
-      name: 'Matti Luukkainen'
-    }
-  }
-]
-
-const getAll = () => {
-  return Promise.resolve(notes)
-}
-
-export default { getAll }
-```
-
-Määritelty metodi _getAll_ palauttaa muistiinpanojen listan käärittynä promiseksi metodin [Promise.resolve](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/resolve) avulla sillä käytettäessä metodia, oletetaan sen paluuarvon olevan promise:
-
-
-Olemme valmiina määrittelemään testin. Koska kyseessä on koko sovellusta koskeva testi, tehdään se tiedostoon <i>App.test.js</i>:
-
-```js
-import React from 'react'
-import { render,  waitForElement } from '@testing-library/react'
-jest.mock('./services/notes')
-import App from './App'
-
-describe('<App />', () => {
-  test('renders all notes it gets from backend', async () => {
-    const component = render(
-      <App />
-    )
-    component.rerender(<App />)
-    await waitForElement(
-      () => component.container.querySelector('.note')
-    )
-
-    const notes = component.container.querySelectorAll('.note')
-    expect(notes.length).toBe(3) 
-
-    expect(component.container).toHaveTextContent(
-      'HTML is easy'
-    )
-    expect(component.container).toHaveTextContent(
-      'Browser can execute only javascript'
-    )
-    expect(component.container).toHaveTextContent(
-      'The most important methods of HTTP are GET and POST'
-    )
-  })
-})
-```
-
-Komennolla <i>jest.mock('./services/notes')</i> otetaan juuri määritelty mock käyttöön. Loogisempi paikka komennolle olisi kenties testien määrittelyt tekevä tiedosto <i>src/setupTests.js</i>.
-
-Testi aloittaa renderöimällä komponentin uudelleen `component.rerender(<App />)`, näin varmistetaan että kaikki efektit suoritetaan. Voi kyllä olla, että komento ei ole enää tarpeen uusimpien Reactin versioiden kanssa.
-
-Koska efektin käynnistämä muistiinpanojen haku palvelimelta on [asynkroninen](https://testing-library.com/docs/api-async) tapahtuma, varmistamme funktion [waitForElement](https://testing-library.com/docs/api-async#waitforelement) avulla, että <i>App</i> ehtii renderöidä muistiinpanot
-
-```js
-await waitForElement(() => component.container.querySelector('.note'))
-```
-
-Tämän jälkeen teemme varsinaiset expektaatiot, eli varmistetaan että sovelluksessa on kolme CSS-luokalla <i>note</i> merkittyä elementtiä, ja että kaikkien muistiinpanojen sisältö on renderöity.
-
-### Testauskattavuus
-
-[Testauskattavuus](https://github.com/facebookincubator/create-react-app/blob/ed5c48c81b2139b4414810e1efe917e04c96ee8d/packages/react-scripts/template/README.md#coverage-reporting) saadaan helposti selville suorittamalla testit komennolla
-
-```js
-CI=true npm test -- --coverage
-```
-
-![](../../images/5/18.png)
-
-Melko primitiivinen HTML-muotoinen raportti generoituu hakemistoon <i>coverage/lcov-report</i>. HTML-muotoinen raportti kertoo mm. yksittäisen komponenttien testaamattomat koodirivit:
-
-![](../../images/5/19.png)
-
-Huomaamme, että parannettavaa jäi vielä runsaasti.
-
-### Warning testejä suoritettaessa 
-
-Jos käytössäsi on Reactin version 16.8.6  tai aiempi, saatat saada testien läpimenosta huolimatta seuraavan varoituksen
-
-![](../../images/5/23e.png)
-
-Kuten [täällä](https://github.com/facebook/react/issues/14769), kerrotaan the varoitus on aiheeton. Varoituksen aiheuttama ongelma korjataan Reactin versiossa 16.9.0 joka julkaistaan kesän aikana.
-
-VAroituksen saa vaiennettua lisäämällä seuraavan koodin tiedostoon <i>src/setupTests.js</i>
-
-```js
-const originalError = console.error
-beforeAll(() => {
-  console.error = (...args) => {
-    if (/Warning.*not wrapped in act/.test(args[0])) {
-      return
-    }
-    originalError.call(console, ...args)
-  }
-})
-
-afterAll(() => {
-  console.error = originalError
-}) 
-```
-
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9), branchissa <i>part5-9</i>.
-
-</div>
-
-<div class="tasks">
-
-### Tehtäviä
-
-#### 5.16*: blogilistan testit, step4
-
-Tee sovelluksesi integraatiotesti, joka varmistaa, että jos käyttäjä ei ole kirjautunut järjestelmään, näyttää sovellus ainoastaan kirjautumislomakkeen, eli yhtään blogia ei vielä renderöidä.
-
-Testi voi odottaa komponentin sisällön renderöitymistä funktiolla _waitForElement_
-
-```js
-import React from 'react'
-import { 
-  render, waitForElement 
-} from '@testing-library/react' // highlight-line
-jest.mock('./services/blogs')
-import App from './App'
-
-describe('<App />', () => {
-  test('if no user logged, notes are not rendered', async () => {
-    const component = render(
-      <App />
-    )
-    component.rerender(<App />)
-
-// highlight-start
-    await waitForElement(
-      () => component.getByText('login')
-    ) 
-    // highlight-end
-
-    // expectations here
-  })
-})
-```
-
-**VAROITUS** kun tein tehtävää, esiintyi testeissä ajoittain epästabiiliutta sen suhteen, toimiko _waitForElement_ tai joku sitä vastaavista asynkronisten operaatioiden odottamiseen tarkoitetuista metodeista.
-
-#### 5.17*: blogilistan testit, step5
-
-Tee myös testi, joka varmistaa, että kun käyttäjä on kirjautuneena, blogit renderöityvät sivulle.
-
-**Vihje:**
-
-Kirjautuminen kannattaa toteuttaa manipuloimalla testeissä local storagea. Jos määrittelet testeille mock-localstoragen ylläolevaa materiaalia seuraten, voit käyttää testikoodissa local storagea seuraavasti:
-
-```js
-const user = {
-  username: 'tester',
-  token: '1231231214',
-  name: 'Donald Tester'
-}
-
-localStorage.setItem('loggedBlogAppUser', JSON.stringify(user))
-```
-
-</div>
-
-<div class="content">
+Voisimme tehdä myös frontendille useiden komponenttien yhteistoiminnallisuutta testaavia integraatiotestejä, mutta se on oleellisesti yksikkötestausta hankalampaa, sillä itegraatiotesteissä jouduttaisiin ottamaan kantaa mm. palvelimelta haettavan datan mockaamiseen. Päätämmekin keskittyä koko sovellusta testaavien end to end -testien tekemiseen, jonka parissa jatkamme tämän osan viimeisessä jaksossa.
 
 ### Snapshot-testaus
 
@@ -832,16 +568,6 @@ Periaatteena on verrata komponenttien määrittelemää HTML:ää aina koodin mu
 
 Jos snapshot-testi huomaa muutoksen komponenttien määrittelemässä HTML:ssä, voi kyseessä joko olla haluttu muutos tai vahingossa aiheutettu "bugi". Snapshot-testi huomauttaa sovelluskehittäjälle, jos komponentin määrittelemä HTML muuttuu. Sovelluskehittäjä kertoo muutosten yhteydessä, oliko muutos haluttu. Jos muutos tuli yllätyksenä, eli kyseessä oli bugi, sovelluskehittäjä huomaa sen snapshot-testauksen ansiosta nopeasti.
 
-### End to end -testaus
-
-Olemme tehneet sekä backendille että frontendille hieman niitä kokonaisuutena testaavia integraatiotestejä. Eräs tärkeä testauksen kategoria on vielä käsittelemättä, [järjestelmää kokonaisuutena](https://en.wikipedia.org/wiki/System_testing) testaavat "end to end" (eli E2E) -testit.
-
-Web-sovellusten E2E-testaus tapahtuu simuloidun selaimen avulla esimerkiksi [Selenium](http://www.seleniumhq.org)-kirjastoa käyttäen. Toinen vaihtoehto on käyttää ns. [headless browseria](https://en.wikipedia.org/wiki/Headless_browser) eli selainta, jolla ei ole ollenkaan graafista käyttöliittymää. Esim. Chromea on mahdollista suorittaa Headless-moodissa.
-
-E2E testit ovat potentiaalisesti kaikkein hyödyllisin testikategoria, sillä ne tutkivat järjestelmää saman rajapinnan kautta kuin todelliset käyttäjät.
-
-E2E-testeihin liittyy myös ikäviä puolia. Niiden konfigurointi on haastavampaa kuin yksikkö- ja integraatiotestien. E2E-testit ovat tyypillisesti myös melko hitaita ja isommassa ohjelmistossa niiden suoritusaika voi helposti nousta minuutteihin, tai jopa tunteihin. Tämä on ikävää sovelluskehityksen kannalta, sillä sovellusta koodatessa on erittäin hyödyllistä pystyä ajamaan testejä mahdollisimman usein koodin regressioiden varalta.
-
-Palaamme end to end -testeihin kurssin viimeisessä, eli seitsemännessä osassa.
+Emme kuitenkaan käytä tällä kurssilla snapshot-testausta.
 
 </div>

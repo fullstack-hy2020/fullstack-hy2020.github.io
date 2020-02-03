@@ -737,14 +737,12 @@ module.exports = {
   "env": {
       "browser": true,
       "es6": true,
-      "jest/globals": true // highlight-line
+      "jest/globals": true 
   },
-  // highlight-start
   "extends": [ 
       "eslint:recommended",
       "plugin:react/recommended"
   ],
-  // highlight-end
   "parserOptions": {
       "ecmaFeatures": {
           "jsx": true
@@ -753,12 +751,12 @@ module.exports = {
       "sourceType": "module"
   },
   "plugins": [
-      "react", "jest" // highlight-line
+      "react", "jest"
   ],
   "rules": {
       "indent": [
           "error",
-          2  // highlight-line
+          2  
       ],
       "linebreak-style": [
           "error",
@@ -772,7 +770,6 @@ module.exports = {
           "error",
           "never"
       ],
-      // highlight-start
       "eqeqeq": "error",
       "no-trailing-spaces": "error",
       "object-curly-spacing": [
@@ -783,7 +780,6 @@ module.exports = {
       ],
       "no-console": 0,
       "react/prop-types": 0
-      // highlight-end
   }
 }
 ```

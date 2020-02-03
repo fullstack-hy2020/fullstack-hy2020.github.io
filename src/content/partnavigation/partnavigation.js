@@ -32,8 +32,8 @@ module.exports = {
     '5': {
       a: 'Kirjautuminen frontendissä',
       b: 'props.children ja proptypet',
-                /*
       c: 'React-sovellusten testaaminen',
+      /*
       d: 'Custom hookit',
       */
     },
@@ -98,7 +98,9 @@ module.exports = {
       a: 'Login in frontend',
       b: 'props.children and proptypes',
       c: 'Testing React apps',
+      /*
       d: 'Custom hooks'
+      */
     },
     '6': {
       a: 'Flux-architecture and Redux',
