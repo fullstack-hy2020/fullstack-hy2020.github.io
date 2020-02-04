@@ -21,8 +21,8 @@ export const PartBanner = ({ lang }) => {
                   'Communicating with server',
                   'Programming a server with NodeJS and Express',
                   'Testing Express servers, user administration',
-                  'Testing React apps, custom hooks',
-                  'State management with Redux',
+                  'Testing React apps',
+                  'State management with Redux, custom hooks',
                   'React router, styling app with CSS and webpack',
                   'GraphQL'
                 ]
@@ -32,8 +32,8 @@ export const PartBanner = ({ lang }) => {
                   'Palvelimen kanssa tapahtuva kommunikointi',
                   'Palvelimen ohjelmointi NodeJS:n Express-kirjastolla',
                   'Express-sovellusten testaaminen, käyttäjänhallinta',
-                  'React-sovelluksen testaaminen, custom hookit',
-                  'Sovelluksen tilan hallinta Redux-kirjastolla',
+                  'React-sovelluksen testaaminen',
+                  'Sovelluksen tilan hallinta Redux-kirjastolla, custom hookit',
                   'React router, tyylikirjastot ja webpack',
                   'GraphQL',
                 ];

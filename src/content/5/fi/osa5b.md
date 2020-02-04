@@ -503,13 +503,23 @@ Klikkaamalla nappia <i>new note</i> lomake aukeaa
 
 ![](../../images/5/13be.png)
 
-#### 5.6* blogilistan frontend, step6
+Lomakkeen tulee sulkeutua kun uusi blogi luodaan.
 
-Laajenna blogien listausta siten, että klikkaamalla blogin nimeä, sen täydelliset tiedot aukeavat
+#### 5.6 blogilistan frontend, step6
 
-![](../../images/5/13e.png)
+Eriytä uuden blogin luomisesta huolehtiva lomake omaan komponenttiinsa (jos et jo ole niin tehnyt), ja siirrä kaikki uuden blogin luomiseen liittyvä tila komponentin vastuulle. 
 
-Uusi klikkaus blogin nimeen pienentää näkymän.
+Komponentin tulee siis toimia samaan tapaan kuin tämän osan [materiaalin](http://localhost:8000/osa5/props_children_ja_proptypet#lomakkeiden-tila) komponentin <i>NewNote</i>.
+
+#### 5.7* blogilistan frontend, step7
+
+Lisää yksittäiselle blogille nappi, jonka avulla voi kontrolloida näytetäänkö kaikki blogiin liittyvät tiedot.
+
+Klikkaamalla nappia sen täydelliset tiedot aukeavat.
+
+![](../../images/5/13ea.png)
+
+Uusi napin klikkaus pienentää näkymän.
 
 Napin <i>like</i> ei tässä vaiheessa tarvitse tehdä mitään.
 
@@ -541,7 +551,7 @@ const Blog = ({ blog }) => {
 
 **Huom2:** vaikka tämän tehtävän toiminnallisuus on melkein samanlainen kuin komponentin <i>Togglable</i> tarjoama toiminnallisuus, ei Togglable kuitenkaan sovi tarkoitukseen sellaisenaan. Helpoin ratkaisu lienee lisätä blogille tila, joka kontrolloi sitä missä muodossa blogi näytetään.
 
-#### 5.7*: blogilistan frontend, step7
+#### 5.8*: blogilistan frontend, step8
 
 Toteuta like-painikkeen toiminnallisuus. Like lisätään backendiin blogin yksilöivään urliin tapahtuvalla _PUT_-pyynnöllä.
 
@@ -576,11 +586,11 @@ tulee palvelimelle tehdä PUT-pyyntö osoitteeseen <i>/api/blogs/5a43fde2cbd20b1
 
 **Varoitus vielä kerran:** jos huomaat kirjoittavasi sekaisin async/awaitia ja _then_-kutsuja, on 99.9% varmaa, että teet jotain väärin. Käytä siis jompaa kumpaa tapaa, älä missään tapauksessa "varalta" molempia.
 
-#### 5.8*: blogilistan frontend, step8
+#### 5.9*: blogilistan frontend, step9
 
 Järjestä sovellus näyttämään blogit <i>likejen</i> mukaisessa suuruusjärjestyksessä. Järjestäminen onnistuu taulukon metodilla [sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
 
-#### 5.9*: blogilistan frontend, step9
+#### 5.10*: blogilistan frontend, step10
 
 Lisää nappi blogin poistamiselle. Toteuta myös poiston tekevä logiikka.
 
@@ -590,8 +600,6 @@ Ohjelmasi voi näyttää esim. seuraavalta:
 
 Kuvassa näkyvä poiston varmistus on helppo toteuttaa funktiolla
 [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm).
-
-#### 5.10*: blogilistan frontend, step10
 
 Näytä poistonappi ainoastaan jos kyseessä on kirjautuneen käyttäjän lisäämä blogi.
 
@@ -789,18 +797,18 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 <div class="tasks">
 
-### Tehtävät 5.11.-5.12.
+### Tehtävät 5.10.-5.11.
 
-#### 5.11: blogilistan frontend, step11
+#### 5.10: blogilistan frontend, step11
 
 Määrittele joillekin sovelluksesi komponenteille PropTypet.
 
-#### 5.12: blogilistan frontend, step12
+#### 5.11: blogilistan frontend, step12
 
 Ota projektiin käyttöön ESlint. Määrittele haluamasi kaltainen konfiguraatio. Korjaa kaikki lint-virheet.
 
 Create-react-app on asentanut projektille eslintin valmiiksi, joten ei tarvita muuta kun sopiva konfiguraatio tiedoston <i>.eslintrc.js</i>.
 
-**HUOM:** älä suorita komentoa _npm init_. Se asentaa uuden version eslintistä joka on epäsopiva create-react-app:in konfiguraatioiden kanssa!
+**HUOM:** älä suorita komentoa _eslint --init_. Se asentaa uuden version eslintistä joka on epäsopiva create-react-app:in konfiguraatioiden kanssa!
 
 </div>

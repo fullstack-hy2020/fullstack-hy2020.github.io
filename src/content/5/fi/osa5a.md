@@ -516,7 +516,9 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 ### Tehtävät 5.1.-5.4.
 
-Teemme nyt edellisen osan tehtävissä tehtyä bloglist-backendia käyttävän frontendin. Voit ottaa tehtävien pohjaksi [Githubista](https://github.com/fullstack-hy2020/bloglist-frontend) olevan sovellusrungon. Sovellus olettaa, että backend on käynnissä koneesi portissa 3003.
+Teemme nyt edellisen osan tehtävissä tehtyä bloglist-backendia käyttävän frontendin. 
+
+Voit ottaa tehtävien pohjaksi [Githubista](https://github.com/fullstack-hy2020/bloglist-frontend) olevan sovellusrungon. Sovellus olettaa, että backend on käynnissä koneesi portissa 3001.
 
 Lopullisen version palauttaminen riittää, voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.
 
@@ -548,7 +550,9 @@ npm install
 npm start
 ```
 
-Toteuta frontendiin kirjautumisen mahdollistava toiminnallisuus. Kirjautumisen yhteydessä backendin palauttama <i>token</i> tallennetaan sovelluksen tilaan <i>user</i>.
+**Toteuta frontendiin kirjautumisen mahdollistava toiminnallisuus.**
+
+Kirjautumisen yhteydessä backendin palauttama <i>token</i> tallennetaan sovelluksen tilaan <i>user</i>.
 
 Jos käyttäjä ei ole kirjautunut, sivulla näytetään <i>pelkästään</i> kirjautumislomake:
 
@@ -598,8 +602,6 @@ Uloskirjautumisen jälkeen selain ei saa muistaa kirjautunutta käyttäjää rel
 Laajenna sovellusta siten, että kirjautunut käyttäjä voi luoda uusia blogeja:
 
 ![](../../images/5/7e.png)
-
-Bloginluomislomakkeesta voi tehdä oman komponenttinsa, joka hallitsee lomakkeen kenttien sisältöä tilansa avulla. Kaiken blogin luomiseen liittyvän tilan voi toki tallettaa myös <i>App</i>-komponenttiin.
 
 #### 5.4*: blogilistan frontend, step4
 

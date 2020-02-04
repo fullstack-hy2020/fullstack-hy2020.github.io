@@ -527,7 +527,6 @@ The <i>ref</i> attribute is used for assigning a reference to each of the compon
 
 #### 5.5 Blog list frontend, step5
 
-
 Change the form for creating blog posts so that it is only displayed when appropriate. Use functionality similar to what was shown [earlier in this part of the course material](/en/part5/props_children_and_proptypes#displaying-the-login-form-only-when-appropriate). If you wish to do so, you can use the <i>Togglable</i> component defined in part 5.
 
 By default the form is not visible
@@ -538,22 +537,27 @@ It expands when button <i>new note</i> is clicked
 
 ![](../../images/5/13be.png)
 
-#### 5.6* Blog list frontend, step6
+The form closes when a new blog is created.
 
+#### 5.6 Blog list frontend, step6
 
-Modify the blog list so that all of the information about a blog post is  displayed when its name is clicked:
+Eriytä uuden blogin luomisesta huolehtiva lomake omaan komponenttiinsa (jos et jo ole niin tehnyt), ja siirrä kaikki uuden blogin luomiseen liittyvä tila komponentin vastuulle. 
 
-![](../../images/5/13e.png)
+Komponentin tulee siis toimia samaan tapaan kuin tämän osan [materiaalin](http://localhost:8000/osa5/props_children_ja_proptypet#lomakkeiden-tila) komponentin <i>NewNote</i>.
 
+#### 5.7* Blog list frontend, step7
 
-Clicking the name of an expanded blog post should hide the additional information.
+Lisää yksittäiselle blogille nappi, jonka avulla voi kontrolloida näytetäänkö kaikki blogiin liittyvät tiedot.
 
+Klikkaamalla nappia sen täydelliset tiedot aukeavat.
+
+![](../../images/5/13ea.png)
+
+Uusi napin klikkaus pienentää näkymän.
 
 At this point the <i>like</i> button does not need to do anything.
 
-
 The application shown in the picture has a bit of additional CSS to improve its appearance.
-
 
 It is easy to add styles to the application as shown in part 2 using [inline](/en/part2/adding_styles_to_react_app#inline-styles) styles:
 
@@ -577,19 +581,14 @@ const Blog = ({ blog }) => {
 )}
 ```
 
-
-
 **NB1:** you can make the name of a blog post click-able as shown in the part of the code that is highlighted.
 
 
 **NB2:** even though the functionality implemented in this part is almost identical to the functionality provided by the <i>Togglable</i> component, the component can not be used directly to achieve the desired behavior. The easiest solution will be to add state to the blog post that controls the displayed form of the blog post.
 
-
-#### 5.7*: Blog list frontend, step7
-
+#### 5.8*: Blog list frontend, step7
 
 Implement the functionality for the like button. Likes are increased by making an HTTP _PUT_ request to the unique address of the blog post in the backend.
-
 
 Since the backend operation replaces the entire blog post, you will have to send all of its fields  in the request body. If you wanted to add a like to the following blog post:
 
@@ -608,7 +607,6 @@ Since the backend operation replaces the entire blog post, you will have to send
 },
 ```
 
-
 You would have to make an HTTP PUT request to the address <i>/api/blogs/5a43fde2cbd20b12a2c34e91</i> with the following request data:
 
 ```js
@@ -621,16 +619,13 @@ You would have to make an HTTP PUT request to the address <i>/api/blogs/5a43fde2
 }
 ```
 
-
 **One last warning:** if you notice that you are using async/await and the _then_-method in the same code, it is almost certain that you are doing something wrong. Stick to using one or the other, and never use both at the same time "just in case". 
 
-
-#### 5.8*: Blog list frontend, step8
-
+#### 5.9*: Blog list frontend, step8
 
 Modify the application to list the blog posts by the number of <i>likes</i>. Sorting the blog posts can be done with the array [sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) method.
 
-#### 5.9*: Blog list frontend, step9
+#### 5.10*: Blog list frontend, step9
 
 Add a new button for deleting blog posts. Also implement the logic for deleting blog posts in the backend.
 
@@ -640,8 +635,6 @@ Your application could look something like this:
 
 The confirmation dialog for deleting a blog post is easy to implement with the [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) function.
 
-#### 5.10*: Blog list frontend, step10
-
 Show the button for deleting a blog post only if the blog post was added by the user.
 
 </div>
@@ -649,7 +642,6 @@ Show the button for deleting a blog post only if the blog post was added by the 
 <div class="content">
 
 ### PropTypes
-
 
 The <i>Togglable</i> component assumes that it is given the text for the button via the <i>buttonLabel</i> prop. If we forget to define it to the component:
 
@@ -848,12 +840,10 @@ Define PropTypes for one of the components of your application.
 
 #### 5.12: Blog list frontend, step12
 
-
 Add ESlint to the project. Define the configuration according to your liking. Fix all of the linter errors.
 
 Create-react-app has installed ESlint to the project by default, so all that's left for you to do is to define your desired configuration in the <i>.eslintrc.js</i> file. 
 
-*NB:* do not run the npm init command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
-
+*NB:* do not run the _eslint --init_ command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
 
 </div>

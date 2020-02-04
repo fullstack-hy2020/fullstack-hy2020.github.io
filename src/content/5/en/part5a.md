@@ -558,7 +558,7 @@ Current application code can be found on [Github](https://github.com/fullstack-h
 ### Exercises
 
 
-We will now create a frontend for the bloglist backend we created in the last part. You can use [this application](https://github.com/fullstack-hy2020/bloglist-frontend) from GitHub as the base of your solution. The application expects your backend to be running on port 3003. 
+We will now create a frontend for the bloglist backend we created in the last part. You can use [this application](https://github.com/fullstack-hy2020/bloglist-frontend) from GitHub as the base of your solution. The application expects your backend to be running on port 3001. 
 
 It is enough to submit your finished solution. You can do a commit after each exercise, but that is not necessary. 
 
@@ -655,10 +655,7 @@ Expand your application to allow  a logged in user to add new blogs:
 ![](../../images/5/7e.png)
 
 
-Form for adding blogs can be its own component which manages the input from the form fields with its state. All the state related to adding blogs can of course also be in the <i>App</i> component. 
-
 #### 5.4*: bloglist frontend, step4
-
 
 Implement notifications which inform the user about successful and unsuccessful operations at the top of the page. For example, when a new blog is added, the following notification can be shown: 
 
