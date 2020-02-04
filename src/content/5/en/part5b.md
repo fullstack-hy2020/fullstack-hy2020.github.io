@@ -572,8 +572,8 @@ const Blog = ({ blog }) => {
   }
 
   return (
-    <div style={blogStyle}>
-      <div onClick={() => console.log('clicked')}>  // highlight-line
+    <div style={blogStyle}> // highlight-line
+      <div>
         {blog.title} {blog.author}
       </div>
       // ...
@@ -631,7 +631,7 @@ Add a new button for deleting blog posts. Also implement the logic for deleting 
 
 Your application could look something like this:
 
-![](../../images/5/14e.png)
+![](../../images/5/14ea.png)
 
 The confirmation dialog for deleting a blog post is easy to implement with the [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) function.
 

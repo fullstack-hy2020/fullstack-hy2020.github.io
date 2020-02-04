@@ -255,11 +255,11 @@ test('clicking the button calls event handler once', async () => {
 
   const mockHandler = jest.fn()
 
-  const { getByText } = render(
+  const component = render(
     <Note note={note} toggleImportance={mockHandler} />
   )
 
-  const button = getByText('make not important')
+  const button = component.getByText('make not important')
   fireEvent.click(button)
 
   expect(mockHandler.mock.calls.length).toBe(1)
@@ -512,41 +512,41 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 <div class="tasks">
 
-### Tehtävät 5.13.-5.15.
+### Tehtävät 5.13.-5.16.
 
 #### 5.13: blogilistan testit, step1
 
-Lisää sovellukseesi tilapäisesti seuraava komponentti
+Tee testi, joka varmistaa että blogin näyttävä komponentti renderöi blogin titlen, authorin mutta ei renderöi oletusarvoisesti urlia eikä likejen määrää.
 
-```js
-import React from 'react'
+#### 5.14: blogilistan testit, step1
 
-const SimpleBlog = ({ blog, onClick }) => (
-  <div>
-    <div>
-      {blog.title} {blog.author}
-    </div>
-    <div>
-      blog has {blog.likes} likes
-      <button onClick={onClick}>like</button>
-    </div>
-  </div>
-)
+Tee testi, joka varmistaa että myös url ja likejen määrä näytetään kun blogin kaikki tiedot näyttävää nappia on painettu.
 
-export default SimpleBlog
-```
-
-Tee testi, joka varmistaa, että komponentti renderöi blogin titlen, authorin ja likejen määrän.
-
-Lisää komponenttiin tarvittaessa testausta helpottavia CSS-luokkia.
-
-#### 5.14: blogilistan testit, step2
+#### 5.15: blogilistan testit, step2
 
 Tee testi, joka varmistaa, että jos komponentin <i>like</i>-nappia painetaan kahdesti, komponentin propsina saamaa tapahtumankäsittelijäfunktiota kutsutaan kaksi kertaa.
 
-#### 5.15*: blogilistan testit, step3
+#### 5.16*: blogilistan testit, step3
 
-Tee oman sovelluksesi komponentille <i>Blog</i> testit, jotka varmistavat, että oletusarvoisesti blogista on näkyvissä ainoastaan nimi ja kirjoittaja, ja että klikkaamalla niitä saadaan näkyviin myös muut osat blogin tiedoista.
+Tee uuden blogin luomisesta huolehtivalle lomakkelle testi, joka varmistaa, että lomake kutsuu propseina saamaansa takaisinkutsufunktiota oikeilla tiedoilla siinä vaiheessa kun blogi luodaan.
+
+Lisää komponenttiin tarvittaessa testausta helpottavia CSS-luokkia tai id:itä.
+
+Jos esim. määrittelet <i>input</i>-elementille id:n 'author':
+
+```js
+<input
+  id='author'
+  value={author}
+  onChange={() => {}}
+/>
+```
+
+saat haettua kentän testissä seuraavasti
+
+```js
+const author = component.container.querySelector('#author')
+```
 
 </div>
 

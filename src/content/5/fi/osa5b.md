@@ -538,8 +538,8 @@ const Blog = ({ blog }) => {
   }
 
   return (
-    <div style={blogStyle}> 
-      <div onClick={() => console.log('clicked')}>  // highlight-line
+    <div style={blogStyle}>  // highlight-line
+      <div> 
         {blog.title} {blog.author}
       </div>
       // ...
@@ -596,7 +596,7 @@ Lisää nappi blogin poistamiselle. Toteuta myös poiston tekevä logiikka.
 
 Ohjelmasi voi näyttää esim. seuraavalta:
 
-![](../../images/5/14e.png)
+![](../../images/5/14ea.png)
 
 Kuvassa näkyvä poiston varmistus on helppo toteuttaa funktiolla
 [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm).

@@ -278,11 +278,11 @@ test('clicking the button calls event handler once', () => {
 
   const mockHandler = jest.fn()
 
-  const { getByText } = render(
+  const component = render(
     <Note note={note} toggleImportance={mockHandler} />
   )
 
-  const button = getByText('make not important')
+  const button = component.getByText('make not important')
   fireEvent.click(button)
 
   expect(mockHandler.mock.calls.length).toBe(1)
@@ -556,37 +556,37 @@ You can find the code for our current application in its entirety in the <i>part
 
 #### 5.13: Blog list tests, step1
 
-Add the following component temporarily to your application:
+Tee testi, joka varmistaa että blogin näyttävä komponentti renderöi blogin titlen, authorin mutta ei renderöi oletusarvoisesti urlia eikä likejen määrää.
+
+Lisää komponenttiin tarvittaessa testausta helpottavia CSS-luokkia.
+
+#### 5.14: Blog list tests, step1
+
+Tee testi, joka varmistaa että myös url ja likejen määrä näytetään kun blogin kaikki tiedot näyttävää nappia on painettu.
+
+#### 5.15: Blog list tests, step2
+
+Tee testi, joka varmistaa, että jos komponentin <i>like</i>-nappia painetaan kahdesti, komponentin propsina saamaa tapahtumankäsittelijäfunktiota kutsutaan kaksi kertaa.
+
+#### 5.16*: Blog list tests, step3
+
+Tee uuden blogin luomisesta huolehtivalle lomakkelle testi, joka varmistaa, että lomake kutsuu propseina saamaansa takaisinkutsufunktiota oikeilla tiedoilla siinä vaiheessa kun blogi luodaan.
+
+Jos esim. määrittelet <i>input</i>-elementille id:n 'author':
 
 ```js
-import React from 'react'
-
-const SimpleBlog = ({ blog, onClick }) => (
-  <div>
-    <div>
-      {blog.title} {blog.author}
-    </div>
-    <div>
-      blog has {blog.likes} likes
-      <button onClick={onClick}>like</button>
-    </div>
-  </div>
-)
-
-export default SimpleBlog
+<input
+  id='author'
+  value={author}
+  onChange={() => {}}
+/>
 ```
 
-Write a test that verifies that the component renders the title, author and amount of likes for the blog post.
+saat haettua kentän testissä seuraavasti
 
-If necessary, add CSS classes to the component for making testing easier.
-
-#### 5.14: Blog list tests, step2
-
-Write a test that verifies that if the <i>like</i> button of a component is pressed twice, the event handler function passed in the component's props is called twice.
-
-#### 5.15*: Blog list tests, step3
-
-Write tests for the <i>Blog</i> component of your application that verify that only the name and author of the blog post are shown by default. Also verify that when the blog post is clicked, the other information of the blog post becomes visible.
+```js
+const author = component.container.querySelector('#author')
+```
 
 </div>
 
@@ -594,11 +594,9 @@ Write tests for the <i>Blog</i> component of your application that verify that o
 
 ### Frontend integration tests
 
-
 In the previous part of the course material, we wrote integration tests for the backend that tested its logic and connected database through the API provided by the backend. When writing these tests, we made the conscious decision not to write unit tests, as the code for that backend is fairly simple, and it is likely that bugs in our application occur in more complicated scenarios that integration tests are well suited for.
 
 So far all of our tests for the frontend have been unit tests that have validated the correct functioning of individual components. Unit testing is useful at times, but even a comprehensive suite of unit tests is not enough to validate that the application works as a whole.
-
 
 Voisimme tehdä myös frontendille useiden komponenttien yhteistoiminnallisuutta testaavia integraatiotestejä, mutta se on oleellisesti yksikkötestausta hankalampaa, sillä itegraatiotesteissä jouduttaisiin ottamaan kantaa mm. palvelimelta haettavan datan mockaamiseen. Päätämmekin keskittyä koko sovellusta testaavien end to end -testien tekemiseen, jonka parissa jatkamme tämän osan viimeisessä jaksossa.
 
