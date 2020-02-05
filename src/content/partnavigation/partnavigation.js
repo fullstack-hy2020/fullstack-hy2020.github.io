@@ -33,9 +33,7 @@ module.exports = {
       a: 'Kirjautuminen frontendissä',
       b: 'props.children ja proptypet',
       c: 'React-sovellusten testaaminen',
-      /*
-      d: 'Custom hookit',
-      */
+      d: 'End to end -testaus',
     },
     '6': {
     /*

@@ -1,6 +1,6 @@
 ---
 mainImage: ../../../images/part-5.svg
-part: 5
+part: 6
 letter: d
 lang: fi
 ---
@@ -9,7 +9,7 @@ lang: fi
 
 React tarjoaa yhteensä 10 erilaista [valmista hookia](https://reactjs.org/docs/hooks-reference.html), näistä ylivoimaisesti eniten käytetyt ovat meillekin jo tutut [useState](https://reactjs.org/docs/hooks-reference.html#usestate) ja [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect). 
 
-### Custom hookit
+### Custom vitun hookit
 
 React tarjoaa mahdollisuuden myös omien eli [custom](https://reactjs.org/docs/hooks-custom.html)-hookien määrittelyyn. Customhookien pääasiallinen tarkoitus on Reactin dokumentaation mukaan mahdollistaa komponenttien logiikan uusiokäyttö.
 
