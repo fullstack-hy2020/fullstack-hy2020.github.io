@@ -11,22 +11,24 @@ Olemme tehneet backendille sitä apin tasolla kokonaisuutena testaavia integraat
 
 Katsotaan nyt erästä tapaa tehdä [järjestelmää kokonaisuutena](https://en.wikipedia.org/wiki/System_testing) tutkivia <i>End to End (E2E) -testejä</i>.
 
-Web-sovellusten E2E-testaus tapahtuu käyttäen selainta jonkin kirjaston avulla. Ratkaisuja on tarjolla useita, esim. [Selenium](http://www.seleniumhq.org/), joka mahdollistaa testien automatisoinnin lähes mitä tahansa selainta käyttäen.
+Web-sovellusten E2E-testaus tapahtuu käyttäen selainta jonkin kirjaston avulla. Ratkaisuja on tarjolla useita, esimerkiksi [Selenium](http://www.seleniumhq.org/), joka mahdollistaa testien automatisoinnin lähes minkä tahansa selaimen automatisoinnin.
 Toinen vaihtoehto on käyttää ns. [headless browseria](https://en.wikipedia.org/wiki/Headless_browser) eli selainta, jolla ei ole ollenkaan graafista käyttöliittymää. Esim. Chromea on mahdollista suorittaa Headless-moodissa.
 
 E2E testit ovat potentiaalisesti kaikkein hyödyllisin testikategoria, sillä ne tutkivat järjestelmää saman rajapinnan kautta kuin todelliset käyttäjät.
 
-E2E-testeihin liittyy myös ikäviä puolia. Niiden konfigurointi on haastavampaa kuin yksikkö- ja integraatiotestien. E2E-testit ovat tyypillisesti myös melko hitaita ja isommassa ohjelmistossa niiden suoritusaika voi helposti nousta minuutteihin, tai jopa tunteihin. Tämä on ikävää sovelluskehityksen kannalta, sillä sovellusta koodatessa on erittäin hyödyllistä pystyä ajamaan testejä mahdollisimman usein koodin regressioiden varalta. 
+E2E-testeihin liittyy myös ikäviä puolia. Niiden konfigurointi on haastavampaa kuin yksikkö- ja integraatiotestien. E2E-testit ovat tyypillisesti myös melko hitaita ja isommassa ohjelmistossa niiden suoritusaika voi helposti nousta minuutteihin, tai jopa tunteihin. Tämä on ikävää sovelluskehityksen kannalta, sillä sovellusta koodatessa on erittäin hyödyllistä pystyä suorittamaan testejä mahdollisimman usein koodin [regressioiden](https://en.wikipedia.org/wiki/Regression_testing) varalta. 
 
 Ongelmana on  usein myös se, että käyttöliittymän kautta tehtävät testit saattavat olla epäluotettavia eli englanniksi [flaky](https://hackernoon.com/flaky-tests-a-war-that-never-ends-9aa32fdef359), osa testeistä menee välillä läpi ja välillä ei, vaikka koodissa ei muuttuisi mikään.
 
 
 ### Cypress
 
-Vuoden 2018 aikana [Cypress](https://www.cypress.io/)-niminen kirjasto on nopeasti kasvattanut suosiotaan E2E-testauksessa. Cypress on poikkeuksellisen helppokäyttöinen, tunkkaamisen määrä esim. Seleniumin käyttöön verrattuna on lähes olematon. Cypressin toimintaperiaate poikkeaa radikaalisti useimmista E2E-testaukseen sopivista kirjastoista, sillä Cypress-testit ajetaan kokonaisuudessaan selaimen sisällä. Muissa lähestymistavoissa testit suoritetaan Node-prosessissa, joka on yhteydessä selaimeen sen tarjoamien ohjelmointirajapintojen kautta.
+[Cypress](https://www.cypress.io/)-niminen E2E-testaukseen soveltuva kirjasto on kasvattanut nopeasti nopeasti suosiotaan viimeisen reilun vuoden aikana. Cypress on poikkeuksellisen helppokäyttöinen, kaikenlaisen säätämisen ja tunkkaamisen määrä esim. Seleniumin käyttöön verrattuna on lähes olematon. Cypressin toimintaperiaate poikkeaa radikaalisti useimmista E2E-testaukseen sopivista kirjastoista, sillä Cypress-testit ajetaan kokonaisuudessaan selaimen sisällä. Muissa lähestymistavoissa testit suoritetaan Node-prosessissa, joka on yhteydessä selaimeen  ohjelmointirajapintojen kautta.
 
 
-Tehdään muutamia testejä muistiinpanosovellukselle. Aloitetaan asentamalla Cypress <i>frontendin</i> kehitysaikaiseksi riippuvuudeksi
+Tehdään tämän osan lopuksi muutamia end to end -testejä muistiinpanosovellukselle. 
+
+Aloitetaan asentamalla Cypress <i>frontendin</i> kehitysaikaiseksi riippuvuudeksi
 
 ```js
 npm install --save-dev cypress
@@ -49,9 +51,11 @@ ja määritellään npm-skripti käynnistämistä varten.
 }
 ```
 
-Cypress-testit olettavat että testattava järjestelmä on käynnissä kun testit suoritetaan.
+Toisin kuin esim. frontendin yksikkötestit, Cypress-testit voidaan sijoittaa joko frontendin tai backendin repositorioon, tai vaikka kokonaan omaan repositorioonsa. 
 
-Tehdään backendille npm-skripti, jonka avulla se saadaan käynnistettyä siten, että <i>NODE\_ENV</i> saa arvon <i>test</i>
+Cypress-testit olettavat että testattava järjestelmä on käynnissä kun testit suoritetaan, eli toisin kuin esim. backendin integraatiotestit, Cypress-testit <i>eivät käynnistä</i> testattavaa järjestelmää testauksen yhteydessä.
+
+Tehdään <i>backendille</i> npm-skripti, jonka avulla se saadaan käynnistettyä testausmoodissa, eli siten, että <i>NODE\_ENV</i> saa arvon <i>test</i>.
 
 ```js
 {
@@ -73,12 +77,11 @@ Tehdään backendille npm-skripti, jonka avulla se saadaan käynnistettyä siten
 
 Kun backend ja frontend ovat käynnissä, voidaan käynnistää Cypress komennolla
 
-
 ```js
 npm run cypress:open
 ```
 
-Sovellukselle tulee hakemisto <i>cypress</i> jonka alihakemistoon <i>integrations</i> on tarkoitus sijoittaa testit. Cypress luo valmiiksi joukon esimerkkitestejä, poistetaan ne ja luodaan ensimmäinen oma testi tiedostoon <i>note\_app.spec.js</i>:
+Ensimmäisen käynnistyksen yhteydessä sovellukselle syntyy hakemisto <i>cypress</i>, jonka alihakemistoon <i>integrations</i> on tarkoitus sijoittaa testit. Cypress luo valmiiksi joukon esimerkkitestejä, poistetaan ne ja luodaan ensimmäinen oma testi tiedostoon <i>note\_app.spec.js</i>:
 
 ```js
 describe('Note ', function() {
@@ -90,13 +93,17 @@ describe('Note ', function() {
 })
 ```
 
+Testit suoritus käynnistetään avautuneesta ikkunasta:
+
+![](../../images/5/40ea.png)
+
 Testin suoritus avaa selaimen ja näyttää miten sovellus käyttäytyy testin edetessä:
 
 ![](../../images/5/32ae.png)
 
-Testi näyttää rakenteen puolesta melko tutulta. <i>describe</i>-lohkoja käytetään samaan tapaan kuin Jestissä ryhmittelemään yksittäisiä testitapauksia, jotka on määritelty <i>it</i>-metodin avulla. Nämä osat Cypress on lainannut sisäisesti käyttämältään [Mocha](https://mochajs.org/)-testikirjastolta. Mocha oli testikirjastojen vanha hallitsija, se on edelleen suosittu, mutta Jest on mennyt selvästi edelle. [visit](https://docs.cypress.io/api/commands/visit.html#Syntax) ja[contains](https://docs.cypress.io/api/commands/contains.html#Syntax) taas ovat Cypressin komentoja, joiden merkitys on aika ilmeinen.
+Testi näyttää rakenteeltaan melko tutulta. <i>describe</i>-lohkoja käytetään samaan tapaan kuin Jestissä ryhmittelemään yksittäisiä testitapauksia, jotka on määritelty <i>it</i>-metodin avulla. Nämä osat Cypress on lainannut sisäisesti käyttämältään [Mocha](https://mochajs.org/)-testikirjastolta.  
 
-Testin käyttämät komennot ovat aika ilmeisiä [cy.visit](https://docs.cypress.io/api/commands/visit.html#Syntax) avaa testin käyttämään selaimeen parametrina määritellyn sivun. [cy.contains](https://docs.cypress.io/api/commands/contains.html#Syntax) etsii sivun sisältä parametrina olevan tekstin. 
+[cy.visit](https://docs.cypress.io/api/commands/visit.html) ja [cy.contains](https://docs.cypress.io/api/commands/contains.html) taas ovat Cypressin komentoja, joiden merkitys on aika ilmeinen. [cy.visit](https://docs.cypress.io/api/commands/visit.html) avaa testin käyttämään selaimeen parametrina määritellyn osoitteen ja [cy.contains](https://docs.cypress.io/api/commands/contains.html) etsii sivun sisältä parametrina annetun tekstin. 
 
 Olisimme voineet määritellä testin myös käyttäen nuolifunktioita
 
@@ -112,7 +119,7 @@ describe('Note app', () => { // highlight-line
 
 Mochan dokumentaatio kuitenkin [suosittelee](https://mochajs.org/#arrow-functions) että nuolifunktioita ei käytetä, ne saattavat aiheuttaa ongelmia joissain tilanteissa.
 
-Jos contains ei löydä sivulta etsimäänsä tekstiä, testi ei mene läpi. Eli jos lisäämme seuraavan testin
+Jos komento <i>cy.contains</i> ei löydä sivulta etsimäänsä tekstiä, testi ei mene läpi. Eli jos laajennamme testiä seuraavasti
 
 ```js
 describe('Note app', function() {
@@ -135,9 +142,11 @@ havaitsee Cypress ongelman
 
 ![](../../images/5/33ea.png)
 
+Poistetaan virheeseen johtanut testi koodista.
+
 ### Lomakkeelle kirjoittaminen
 
-Laajennetaan testiä siten, että testi yrittää kirjautua sovellukseen. Oletetaan että tietokantaan on tallennettu käyttäjä, jonka käyttäjätunnus on <i>mluukkai</i> ja salasana <i>salainen</i>.
+Laajennetaan testejä siten, että testi yrittää kirjautua sovellukseen. Oletetaan että backendin tietokantaan on tallennettu käyttäjä, jonka käyttäjätunnus on <i>mluukkai</i> ja salasana <i>salainen</i>. 
 
 Aloitetaan kirjautumislomakkeen avaamisella.
 
@@ -147,13 +156,12 @@ describe('Note app',  function() {
 
   it('login form can be opened', function() {
     cy.visit('http://localhost:3000')
-    cy.contains('login')
-      .click()
+    cy.contains('login').click()
   })
 })
 ```
 
-Testi hakee ensin napin sen sisällön perusteella ja klikaa nappia komennolla [cy.click](https://docs.cypress.io/api/commands/click.html#Syntax).
+Testi hakee ensin napin sen tekstin perusteella ja klikaa nappia komennolla [cy.click](https://docs.cypress.io/api/commands/click.html#Syntax).
 
 Koska molemmat testit aloittavat samalla tavalla, eli avaamalla sivun <i>http://localhost:3000</i>, kannattaa yhteinen osa eristää ennen jokaista testiä suoritettavaan <i>beforeEach</i>-lohkoon:
 
@@ -167,11 +175,11 @@ describe('Note app', function() {
 
   it('front page can be opened', function() {
     cy.contains('Notes')
+    cy.contains('Note app, Department of Computer Science, University of Helsinki 2020')
   })
 
   it('login form can be opened', function() {
-    cy.contains('login')
-      .click()
+    cy.contains('login').click()
   })
 })
 ```
@@ -184,16 +192,13 @@ Voimme hakea lomakkeen ensimmäisen ja viimeisen input-kentän ja kirjoittaa nii
 
 ```js
 it('user can login', function () {
-  cy.contains('login')
-    .click()
-  cy.get('input:first')
-    .type('mluukkai')
-  cy.get('input:last')
-    .type('salainen')
+  cy.contains('login').click()
+  cy.get('input:first').type('mluukkai')
+  cy.get('input:last').type('salainen')
 })  
 ```
 
-Testi toimii mutta on kuitenkin sikäli ongelmallinen, että jos sovellukseen tulee jossain vaiheessa lisää input-kenttiä, testi saattaa hajota, sillä se luottaa tarvitsemiensa kenttien olevan ensimmäisenä ja viimeisenä.
+Testi toimii mutta on kuitenkin sikäli ongelmallinen, että jos sovellukseen tulee jossain vaiheessa lisää input-kenttiä, testi saattaa hajota, sillä se luottaa tarvitsemiensa kenttien olevan sivulla ensimmäisenä ja viimeisenä.
 
 Parempi ratkaisu on määritellä kentille yksilöivät <i>id</i>-attribuutit ja hakea kentät testeissä niiden perusteella. Eli laajennetaan kirjautumislomaketta seuraavasti
 
@@ -236,15 +241,11 @@ Testi muuttuu muotoon
 ```js
 describe('Note app',  function() {
   // ..
-  it('user can login', function() {
-    cy.contains('login')
-      .click()
-    cy.get('#username')  // highlight-line
-      .type('mluukkai')
-    cy.get('#password')  // highlight-line
-      .type('salainen')
-    cy.get('#login-button')  // highlight-line
-      .click() // highlight-line
+  it('user can log in', function() {
+    cy.contains('login').click()
+    cy.get('#username').type('mluukkai')  // highlight-line    
+    cy.get('#password').type('salainen')  // highlight-line
+    cy.get('#login-button').click()  // highlight-line
 
     cy.contains('Matti Luukkainen logged in') // highlight-line
   })
@@ -252,6 +253,8 @@ describe('Note app',  function() {
 ```
 
 Viimeinen rivi varmistaa, että kirjautuminen on onnistunut. 
+
+Huomaa, että CSS:n [id-selektori](https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors) on risuaita, eli jos koodista etsitään elementtiä, jolla on id <i>username</i> on sitä vastaava CSS-selektori <i>#username</i>.
 
 ### Muutama huomio
 
@@ -316,23 +319,19 @@ describe('Note app', function() {
   // highlight-start
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('login')
-        .click()
-      cy.get('input:first')
-        .type('mluukkai')
-      cy.get('input:last')
-        .type('salainen')
-      cy.get('#login-button')
-        .click()
+      cy.contains('login').click()
+      cy.get('input:first').type('mluukkai')
+      cy.get('input:last').type('salainen')
+      cy.get('#login-button').click()
     })
+    // highlight-end
 
+    // highlight-start
     it('a new note can be created', function() {
-      cy.contains('new note')
-        .click()
-      cy.get('input')
-        .type('a note created by cypress')
-      cy.contains('save')
-        .click()
+      cy.contains('new note').click()
+      cy.get('input').type('a note created by cypress')
+      cy.contains('save').click()
+
       cy.contains('a note created by cypress')
     })
   })
@@ -348,19 +347,51 @@ Testi luottaa siihen, että uutta muistiinpanoa luotaessa sivulla on ainoastaan 
 cy.get('input')
 ```
 
-jos kenttiä on useampia, testi hajoaa
+jos kenttiä olisi useampia, testi hajoaisi
 
 ![](../../images/5/31ea.png)
 
 Tämän takia olisi jälleen parempi lisätä lomakkeen kentälle <i>id</i> ja hakea kenttä testissä id:n perusteella.
 
+Testien rakenne näyttää seuraavalta:
+
+```js
+describe('Note app', function() {
+  // ...
+
+  it('user can log in', function() {
+    cy.contains('login').click()
+    cy.get('#username').type('mluukkai')
+    cy.get('#password').type('salainen')
+    cy.get('#login-button').click()
+
+    cy.contains('Matti Luukkainen logged in')
+  })
+
+  describe('when logged in', function() {
+    beforeEach(function() {
+      cy.contains('login').click()
+      cy.get('input:first').type('mluukkai')
+      cy.get('input:last').type('salainen')
+      cy.get('#login-button').click()
+    })
+
+    it('a new note can be created', function() {
+      // ...
+    })
+  })
+})
+```
+
+Cypress suorittaa testit siinä järjestyksessä, missä ne ovat testikoodissa. Eli ensin suoritetaan testi <i>user can log in</i>, missä käyttäjä kirjautuu sovellukseen, ja tämän jälkeen suoritetaan testi <i>a new note can be created</i>, jonka <i>beforeEach</i>-lohkossa myös suoritetaan kirjautuminen. Miksi näin tehdään, eikö käyttäjä jo ole kirjaantuneena aiemman testin ansiosta? Ei, sillä <i>jokaisen</i> testin suoritus alkaa selaimen kannalta "nollatilanteesta", kaikki edellisten testien selaimen tilaan tekemät muutokset nollaantuvat.
+
 ### Tietokannan tilan kontrollointi
 
-Jos testatessa on tarvetta muokata tietokantaa, muuttuu tilanne heti haastavammaksi. Ideaalitilanteessa testauksen tulee aina lähteä liikkeelle samasta alkutilasta, jotta testeistä saadaan luotettavia ja helposti toistettavia.
+Jos testatessa on tarvetta muokata palvelimen tietokantaa, muuttuu tilanne heti haastavammaksi. Ideaalitilanteessa testauksen tulee aina lähteä liikkeelle palvelimen tietokannan suhteen samasta alkutilanteesta, jotta testeistä saadaan luotettavia ja helposti toistettavia.
 
-Yleinen ratkaisu on nollata tietokanta ja mahdollisesti alustaa se sopivasti aina ennen testien suorittamista. E2E-testauksessa lisähaasteen luo se, että testeistä ei ole mahdollista päästä suoraan käsiksi tietokantaan.
+Kuten yksikkö- integraatiotesteissä, on myös E2E-testeissä paras ratkaisu nollata tietokanta ja mahdollisesti alustaa se sopivasti aina ennen testien suorittamista. E2E-testauksessa lisähaasteen tuo se, että testeistä ei ole mahdollista päästä suoraan käsiksi tietokantaan.
 
-Ratkaistaan ongelma luomalla backendiin testejä varten API endpoint, jonka avulla testit voivat tarvittaessa nollata kannan. Tehdään testejä varten oma <i>router</i>
+Ratkaistaan ongelma luomalla backendiin testejä varten API-endpoint, jonka avulla testit voivat tarvittaessa nollata kannan. Tehdään testejä varten oma <i>router</i>
 
 ```js
 const router = require('express').Router()
@@ -403,7 +434,9 @@ eli lisäyksen jälkeen HTTP POST -operaatio backendin endpointiin <i>/api/testi
 
 Backendin testejä varten muokattu koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1), branchissä <i>part5-1</i>.
 
-Tällä hetkellä sovelluksen käyttöliittymän ei ole mahdollista luoda käyttäjiä järjestelmään. Testien alustuksessa on siis suoraan luotava testikäyttäjä backendiin.
+Muutetaan nyt testien <i>beforeEach</i>-alustuslohkoa siten, että se nollaa palvelimen tietokannan aina ennen testien suorittamista.
+
+Tällä hetkellä sovelluksen käyttöliittymän kautta ei ole mahdollista luoda käyttäjiä, luodaankin testien alustuksessa testikäyttäjä suoraan backendiin.
 
 ```js
 describe('Note app', function() {
@@ -436,7 +469,7 @@ describe('Note app', function() {
 
 Testi tekee alustuksen aikana HTTP-pyyntöjä backendiin komennolla [cy.request](https://docs.cypress.io/api/commands/request.html). 
 
-Toisin kuin aiemmin, nyt testaus alkaa aina samasta tilasta, eli tietokannassa on yksi käyttäjä ja ei yhtään muistinpanoa.
+Toisin kuin aiemmin, nyt testaus alkaa nyt myös backendin suhteen aina hallitusti samasta tilanteesta, eli tietokannassa on yksi käyttäjä ja ei yhtään muistinpanoa.
 
 Tehdään vielä testi, joka tarkastaa että muistiinpanojen tärkeyttä voi muuttaa.  Muutetaan ensin sovelluksen frontendia siten, että uusi muistiinpano on oletusarvoisesti epätärkeä, eli kenttä <i>important</i> saa arvon <i>false</i>:
 
@@ -468,13 +501,9 @@ describe('Note app', function() {
 
     describe('and a note exists', function () {
       beforeEach(function () {
-        cy.contains('new note')
-          .click()
-        cy.get('input')
-          .type('another note cypress')
-
-        cy.contains('save')
-          .click()
+        cy.contains('new note').click()
+        cy.get('input').type('another note cypress')
+        cy.contains('save').click()
       })
 
       it('it can be made important', function () {
@@ -490,13 +519,17 @@ describe('Note app', function() {
 })
 ```
 
+Ensimmäinen komento etsii ensin kompinentin, missä on teksti <i>another note cypress</i> ja sen sisältä painikkeen <i>make important</i> ja klikkaa sitä. 
+
+Toinen komento varmistaa, että saman napin teksti on vaihtut muotoon <i>make not important</i>.
+
 Testit ja frontendin tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9), branchissa <i>part5-9</i>.
 
 ### Epäonnistuneen kirjautumisen testi
 
-Tehdään nyt testi joka varmistaa, että kirjautumisyritys epäonnistuu jos salasa na on väärä.
+Tehdään nyt testi joka varmistaa, että kirjautumisyritys epäonnistuu jos salasana on väärä.
 
-Cypress suorittaa oletusarvoisesti aina kaikki testit, ja testien määrän kasvaessa se alkaa olla aikaavievää. Uutta testiä kehitellessä tai rikkinäistä testiä debugatessa voidaan määritellä testi komennon _it_ sijaan komennolla _it.only_, jolloin Cypress suorittaa ainoastaan sen testin. Kun testi on valmiina, voidaan <i>only</i> poistaa.
+Cypress suorittaa oletusarvoisesti aina kaikki testit, ja testien määrän kasvaessa se alkaa olla aikaavievää. Uutta testiä kehitellessä tai rikkinäistä testiä debugatessa voidaan määritellä testi komennon <i>it</i> sijaan komennolla <i>it.only</i>, jolloin Cypress suorittaa ainoastaan sen testin. Kun testi on valmiina, voidaan <i>only</i> poistaa.
 
 Testin ensimmäinen versio näyttää seuraavalta:
 
@@ -505,16 +538,12 @@ describe('Note app', function() {
   // ...
 
   it.only('login fails with wrong password', function() {
-    cy.contains('login')
-      .click()
-    cy.get('#username')
-      .type('mluukkai')
-    cy.get('#password')
-      .type('wrong')
-    cy.get('#login-button')
-      .click()
+    cy.contains('login').click()
+    cy.get('#username').type('mluukkai')
+    cy.get('#password').type('wrong')
+    cy.get('#login-button').click()
 
-    cy.contains(('wrong credentials')
+    cy.contains('wrong credentials')
   })
 
   // ...
@@ -532,14 +561,14 @@ const Notification = ({ message }) => {
   }
 
   return (
-    <div className="error">
+    <div className="error"> // highlight-line
       {message}
     </div>
   )
 }
 ```
 
-Voisimmekin tarkentaa testiä varmistamaan, että virheilmoitus tulostuu nimenomaan oikeaan paikkaan:
+Voisimmekin tarkentaa testiä varmistamaan, että virheilmoitus tulostuu nimenomaan oikeaan paikkaan, eli CSS-luokan <i>error</i> sisältävään elementtiin:
 
 
 ```js
@@ -550,7 +579,7 @@ it('login fails with wrong password', function() {
 })
 ```
 
-Eli ensin etsitään komennolla [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) CSS-luokan <i>error</i> sisältävä komponentti ja sen jälkeen varmistetaan että virheiloitus löytyy sen sisältä. 
+Eli ensin etsitään komennolla [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) CSS-luokan <i>error</i> sisältävä komponentti ja sen jälkeen varmistetaan että virheiloitus löytyy sen sisältä. Huomaa, että [luokan CSS-selektori](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) alkaa pisteellä, eli luokan <i>error</i> selektori on <i>.error</i>.
 
 Voisimme tehdä saman myös käyttäen [should](https://docs.cypress.io/api/commands/should.html)-syntaksia:
 
@@ -562,9 +591,9 @@ it('login fails with wrong password', function() {
 })
 ```
 
-Shouldin käyttä on jonkin verran "hankalampaa" kuin komennon <i>contains</i>, mutta se mahdollistaa huomattavasti monipuolisemmat testit kuin pelkän pelkän tekstisisällön perutella toimiva <i>contains</i>. 
+Shouldin käyttö on jonkin verran "hankalampaa" kuin komennon <i>contains</i>, mutta se mahdollistaa huomattavasti monipuolisemmat testit kuin pelkän pelkän tekstisisällön perutella toimiva <i>contains</i>. 
 
-Listä yleisimmistä shouldin kanssa käytettävistä assertioista on [täällä](https://docs.cypress.io/guides/references/assertions.html#Common-Assertions).
+Lista yleisimmistä shouldin kanssa käytettävistä assertioista on [täällä](https://docs.cypress.io/guides/references/assertions.html#Common-Assertions).
 
 Voimme esim. varmistaa, että virheilmoituksen väri on punainen, ja että sen ympärillä on border:
 
@@ -596,14 +625,10 @@ Viimeistellään testi vielä siten, että se varmistaa myös, että sovellus ei
 
 ```js
 it.only('login fails with wrong password', function() {
-  cy.contains('login')
-    .click()
-  cy.get('#username')
-    .type('mluukkai')
-  cy.get('#password')
-    .type('wrong')
-  cy.get('#login-button')
-    .click()
+  cy.contains('login').click()
+  cy.get('#username').type('mluukkai')
+  cy.get('#password').type('wrong')
+  cy.get('#login-button').click()
 
   cy.get('.error')
     .should('contain', 'wrong credentials')
@@ -614,7 +639,7 @@ it.only('login fails with wrong password', function() {
 })
 ```
 
-Komentoa should käytetään aina ketjutettuna komennon _get_ (tai muun vastaavan ketjutettavissa olevan komennon) perään. Testissä käytetty _cy.get('html')_ tarkoittaa käytännössä koko sovelluksen näkyvillä olevaa sisältöä.
+Komentoa <i>should</i> käytetään aina ketjutettuna komennon <i>get</i> (tai muun vastaavan ketjutettavissa olevan komennon) perään. Testissä käytetty <i>cy.get('html')</i> tarkoittaa käytännössä koko sovelluksen näkyvillä olevaa sisältöä.
 
 ### Operaatioiden tekeminen käyttöliittymän "ohi"
 
@@ -623,14 +648,10 @@ Sovelluksemme testit näyttävät tällä hetkellä seuraavalta:
 ```js 
 describe('Note app', function() {
   it('user can login', function() {
-    cy.contains('login')
-      .click()
-    cy.get('#username')
-      .type('mluukkai')
-    cy.get('#password')
-      .type('salainen')
-    cy.get('#login-button')
-      .click()
+    cy.contains('login').click()
+    cy.get('#username').type('mluukkai')
+    cy.get('#password').type('salainen')
+    cy.get('#login-button').click()
 
     cy.contains('Matti Luukkainen logged in')
   })
@@ -641,14 +662,10 @@ describe('Note app', function() {
 
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('login')
-        .click()
-      cy.get('input:first')
-        .type('mluukkai')
-      cy.get('input:last')
-        .type('salainen')
-      cy.get('#login-button')
-        .click()
+      cy.contains('login').click()
+      cy.get('input:first').type('mluukkai')
+      cy.get('input:last').type('salainen')
+      cy.get('#login-button').click()
     })
 
     it('a new note can be created', function() {
@@ -659,9 +676,11 @@ describe('Note app', function() {
 })
 ```
 
-Ensin siis testataan kirjautumistoimintoa, tämän jälkeen omassa describe-lohkossa on joukko testejä, jotka olettavat että käyttäjä on kirjaanuteena, kirjaantuminen hoidetaan <i>beforeEach</i>-lohkon sisällä. Huomaa, että jokainen testi suoritetaan lähtien sovelluksen alkutilasta, eli vaikka testi on koodissa alempana, se ei aloita samasta tilasta mihin ylempänä koodissa olevat testit ovat jääneet!  
+Ensin siis testataan kirjautumistoimintoa. Tämän jälkeen omassa describe-lohkossa on joukko testejä, jotka olettavat että käyttäjä on kirjaanuteena, kirjaantuminen hoidetaan alustuksen tekevän <i>beforeEach</i>-lohkon sisällä. 
 
-Cypressin dokumentaatio neuvoo meitä seuraavasti: [Fully test the login flow – but only once!](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Logging-in). Eli sen sijaan että että tekisimme <i>beforeEach</i>-lohkossa kirjaantumisen lomaketta käyttäen, suosittelee Cypress että kirjaantuminen tehdään [UI:n ohi](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI), tekemällä suoraan backendiin kirjaantumista vastaava HTTP-operaatio.
+Kuten aiemmin jo todettiin, jokainen testi suoritetaan alkutilasta, eli vaikka testi on koodissa alempana, se ei aloita samasta tilasta mihin ylempänä koodissa olevat testit ovat jääneet!  
+
+Cypressin dokumentaatio neuvoo meitä seuraavasti: [Fully test the login flow – but only once!](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Logging-in). Eli sen sijaan että että tekisimme <i>beforeEach</i>-lohkossa kirjaantumisen lomaketta käyttäen, suosittelee Cypress että kirjaantuminen tehdään [UI:n ohi](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI), tekemällä suoraan backendiin kirjaantumista vastaava HTTP-operaatio. Syynä tälle on se, että suoraan backendiin tehtynä kirjautuminen on huomattavasti nopeampi kuin lomakkeen täyttämällä. 
 
 Tilanteemme on hieman monimutkaisempi kuin Cypressin dokumentaation esimerkissä, sillä kirjautumisen yhteydessä sovelluksemme tallettaa kirjautuneen käyttäjän tiedot localStorageen. Sekin toki onnistuu. Koodi on seuraavassa
 
@@ -686,7 +705,7 @@ describe('when logged in', function() {
 })
 ```
 
-Komennon [cy.request](https://docs.cypress.io/api/commands/request.html) tulokseen päästään käsiksi _then_-metodin avulla, sisäiseltä toteutukseltaan komento kuten kaikki muutkin Cypressin komennot ovat eräänlaisia promiseja. Käsittelijäfunktio tallettaa kirjautuneen käyttäjän tiedot localStorageen ja lataa sivun uudelleen. Tämän jälkeen käyttäjä on kirjautuneena sovellukseen samalla tavalla kuin olisi tapahtunut täyttämällä kirjautumislomake.
+Komennon [cy.request](https://docs.cypress.io/api/commands/request.html) tulokseen päästään käsiksi _then_-metodin avulla sillä sisäiseltä toteutukseltaan <i>cy.request</i> kuten muutkin Cypressin komennot ovat [eräänlaisia promiseja](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Commands-Are-Promises). Käsittelijäfunktio tallettaa kirjautuneen käyttäjän tiedot localStorageen ja lataa sivun uudelleen. Tämän jälkeen käyttäjä on kirjautuneena sovellukseen samalla tavalla kuin jos kirjautuminen olisi tapahtunut kirjautumislomakkeen täyttämällä.
 
 Jos ja kun sovellukselle kirjoitetaan lisää testejä, joudutaan kirjautumisen hoitavaa koodia soveltamaan useassa paikassa. Koodi kannattaakin eristää itse määritellyksi [komennoksi](https://docs.cypress.io/api/cypress-api/custom-commands.html).
 
@@ -721,7 +740,7 @@ describe('when logged in', function() {
 })
 ```
 
-Sama tilanne oikeastaan koskee myös uuden muistiinpanon luomista. Sitä varten on olemassa testi, joka luo muistiinpanon lomakkeen avulla. Muistiinpanon tärkeyden muuttamista testaavan testin <i>beforeEach</i>-alustuslohkossa luodaan muistiinpano myös lomakkeen avulla: 
+Sama koskee oikeastaan myös uuden muistiinpanon luomista. Sitä varten on olemassa testi, joka luo muistiinpanon lomakkeen avulla. Myös muistiinpanon tärkeyden muuttamista testaavan testin <i>beforeEach</i>-alustuslohkossa luodaan muistiinpano lomakkeen avulla: 
 
 ```js
 describe('Note app', function() {
@@ -729,24 +748,18 @@ describe('Note app', function() {
 
   describe('when logged in', function() {
     it('a new note can be created', function() {
-      cy.contains('new note')
-        .click()
-      cy.get('input')
-        .type('a note created by cypress')
-      cy.contains('save')
-        .click()
+      cy.contains('new note').click()
+      cy.get('input').type('a note created by cypress')
+      cy.contains('save').click()
 
       cy.contains('a note created by cypress')
     })
 
     describe('and a note exists', function () {
       beforeEach(function () {
-        cy.contains('new note')
-          .click()
-        cy.get('input')
-          .type('another note cypress')
-        cy.contains('save')
-          .click()
+        cy.contains('new note').click()
+        cy.get('input').type('another note cypress')
+        cy.contains('save').click()
       })
 
       it('it can be made important', function () {
@@ -789,7 +802,7 @@ describe('Note app', function() {
 
     describe('and a note exists', function () {
       beforeEach(function () {
-        // highlight-line
+        // highlight-start
         cy.createNote({
           content: 'another note cypress',
           important: false
@@ -815,7 +828,7 @@ Tarkastellaan vielä aiemmin tekemäämme testiä, joka varmistaa että muistiin
 describe('when logged in', function() {
   describe('and several notes exist', function () {
     beforeEach(function () {
-      // highlight-line
+      // highlight-start
       cy.createNote({ content: 'first note', important: false })
       cy.createNote({ content: 'second note', important: false })
       cy.createNote({ content: 'third note', important: false })
@@ -836,7 +849,7 @@ describe('when logged in', function() {
 
 Miten komento [cy.contains](https://docs.cypress.io/api/commands/contains.html) tarkalleen ottaen toimii?
 
-Kun klikkaamme komentoa _cy.contains('second note')_ Cypressin [test runnerista](https://docs.cypress.io/guides/core-concepts/test-runner.htm) nähdään että komento löytää elementin, jonka sisällä on teksti <i>second note</i>:
+Kun klikkaamme komentoa _cy.contains('second note')_ Cypressin [test runnerista](https://docs.cypress.io/guides/core-concepts/test-runner.htm) nähdään, että komento löytää elementin, jonka sisällä on teksti <i>second note</i>:
 
 ![](../../images/5/34ea.png)
 
@@ -846,7 +859,7 @@ Klikkaamalla seuraavaa riviä _.contains('make important')_, nähdään että l�
 
 ![](../../images/5/35ea.png)
 
-Peräkkäin ketjutettuna toisena oleva<i>contains</i>-komento siis <i>jatkaa</i> hakua ensimmäisen komennon löytämän komponentin sisältä.
+Peräkkäin ketjutettuna toisena oleva <i>contains</i>-komento siis <i>jatkaa</i> hakua ensimmäisen komennon löytämän komponentin sisältä.
 
 Jos emme ketjuttaisi komentoja, eli olisimme kirjoittaneet 
 
@@ -861,7 +874,7 @@ tulos olisi ollut aivan erilainen, toinen rivi painaisi väärän muistiinpanon 
 
 Testejä tehdessä kannattaa siis ehdottomasti varmistaa test runnerista, että testit etsivät niitä elementtejä, joita niiden on tarkoitus tutkia!
 
-Muutetaan komponenttia _Note_ siten, että muistiinpanon teksti renderöitään <i>div</i>-komponentin sisälle
+Muutetaan komponenttia _Note_ siten, että muistiinpanon teksti renderöitään <i>span</i>-komponentin sisälle
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -877,11 +890,26 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-Testit hajoavat! Kuten test runner paljastaa komento _cy.contains('second note')_ palauttaakin nyt ainoastaan tekstin sisältävän komponentin, ja nappi on sen ulkopuolella:
+Testit hajoavat! Kuten test runner paljastaa, komento _cy.contains('second note')_ palauttaakin nyt ainoastaan tekstin sisältävän komponentin, ja nappi on sen ulkopuolella:
 
 ![](../../images/5/37ea.png)
 
 Eräs tapa korjata ongelma on seuraavassa:
+
+```js
+it('other of those can be made important', function () {
+  cy.contains('second note').parent().find('button').click()
+  cy.contains('second note').parent().find('button')
+    .should('contain', 'make not important')
+})
+```
+
+Ensimmäisellä rivillä etsitään komennon [parent](https://docs.cypress.io/api/commands/parent.htm) tekstin <i>second note</i> sisältävän elementin vanhemman alla oleva nappi ja painetaan sitä. Toinen rivi varmistaa, että napin teksti muuttuu.
+
+Huomaa, että napin etsimiseen käytetään komentoa [find](https://docs.cypress.io/api/commands/find.html#Syntax). Komento [cy.get](https://docs.cypress.io/api/commands/get.html) ei sovellu tähän tilanteeseen, sillä se etsii elementtejä aina <i>koko</i> sivulta ja palauttaisi nyt kaikki sovelluksen viisi nappia.
+
+Testissä on ikävästi copypastea, rivien alku eli napin etsivä koodi on sama. 
+Tälläisissä tilanteissa on mahdollista hyödyntää komentoa [as](https://docs.cypress.io/api/commands/as.html): 
 
 ```js
 it.only('other of those can be made important', function () {
@@ -891,13 +919,13 @@ it.only('other of those can be made important', function () {
 })
 ```
 
-Ensimmäisellä rivillä etsitään tekstin <i>second note</i> sisältävän elementin vanhemman alla olevan napin ja tallettaa sen [as](https://docs.cypress.io/api/commands/as.html) komennon avulla nimellä <i>theButton</i>. Seuraava rivi klikkaa talletettua nappia ja kolmas rivi varmistaa, että napin teksti on vaihtunut muotoon <i>make not important</i>.
+Nyt ensimmäinen rivi etsii oikean napin, ja tallentaa sen komennon <i>as</i> avulla nimellä <i>theButton</i>. Seuraavat rivit pääsevät nimettyyn elementtiin käsiksi komennolla<i>cy.get('@theButton')</i>.
 
 ### Testien suoritus ja debuggaaminen
 
-Vielä osan lopuksi muutamia huomiooita Cypressin toimintaperiaatteesta sekä testien debuggaamisesta.
+Vielä osan lopuksi muutamia huomioita Cypressin toimintaperiaatteesta sekä testien debuggaamisesta.
 
-Cypressissä testien kirjoitusasu antaa vaikutelman, että testit ovat normaalia javascript-koodia, ja että voisimme esim. seuraavaa:
+Cypressissä testien kirjoitusasu antaa vaikutelman, että testit ovat normaalia javascript-koodia, ja että voisimme esim. yrittää seuraavaa:
 
 ```js
 const button = cy.contains('login')
@@ -906,9 +934,20 @@ debugger()
 cy.contains('logout').click()
 ```
 
-Näin kirjoitettu koodi ei kuitenkaan toimi. Kun Cypress suorittaa testin, se lisää jokaisen _cy_-komennon suoroitusjonoon, ja suorittaa komennot sen jälkeen yksi kerrallaan kun testin koodi on suoritettu loppuun. Cypressin komennot palauttavat aina _undefined_, eli yllä olevassa koodissa komento _button.click()_ aiheuttaisi virheen ja yritys käynnistää debuggeri ei pysäyttäisi koodia Cypress-komentojen suorituksen välissä, vaan ennen kuin yhtään Cypress-komentoa olisi suoritettu.
+Näin kirjoitettu koodi ei kuitenkaan toimi. Kun Cypress suorittaa testin, se lisää jokaisen _cy_-komennon suoroitusjonoon. Kun testimetodin koodi on suoritettu loppuun, suorittaa Cypress yksi kerrallaan suoritusjonoon lisätyt _cy_-komennot.
 
-Cypress-komennot ovat <i>promisen kaltaisia</i>, joten jos niiden paluauttamia arvoja halutaan käsitellä, se tulee tehdä komennon [then](https://docs.cypress.io/api/commands/then.html) avulla. 
+Cypressin komennot palauttavat aina _undefined_, eli yllä olevassa koodissa komento _button.click()_ aiheuttaisi virheen ja yritys käynnistää debuggeri ei pysäyttäisi koodia Cypress-komentojen suorituksen välissä, vaan jo ennen kuin yhtään Cypress-komentoa olisi suoritettu.
+
+Cypress-komennot ovat <i>promisen kaltaisia</i>, joten jos niiden paluauttamia arvoja halutaan käsitellä, se tulee tehdä komennon [then](https://docs.cypress.io/api/commands/then.html) avulla. Esim. seuraava testi tulostaisi sovelluksen <i>kaikkien</i> nappien lukumäärän ja klikkaisi napeista ensimmäistä:
+
+```js
+it('then example', function() {
+  cy.get('button').then( buttons => {
+    console.log('number of buttons', buttons.length)
+    cy.wrap(buttons[0]).click()
+  })
+})
+```
 
 Myös testien suorituksen pysäyttäminen debuggeriin on [mahdollista](https://docs.cypress.io/api/commands/debug.html). Debuggeri käynnistyy vain jos Cypress test runnerin developer konsoli on auki. 
 
@@ -916,7 +955,7 @@ Developer konsoli on monin tavoin hyödyllinen testejä debugatessa. Network-tab
 
 ![](../../images/5/38ea.png)
 
-Olemme toistaiseksi suorittaneet Cypress-testejä ainoastaan grafisen test runnerin kautta. Testit on luonnollisesti mahdollista suorittaa myös [komentoriviltä](https://docs.cypress.io/guides/guides/command-line.html). Lisätään vielä sovellukselle npm-skripti Cypress-testien suorittamiseen
+Olemme toistaiseksi suorittaneet Cypress-testejä ainoastaan grafisen test runnerin kautta. Testit on luonnollisesti mahdollista suorittaa myös [komentoriviltä](https://docs.cypress.io/guides/guides/command-line.html). Lisätään vielä sovellukselle npm-skripti tätä tarkoistusta varten
 
 ```js
   "scripts": {
@@ -934,25 +973,114 @@ Nyt siis voimme suorittaa komennolla Cypress-testit komentoriviltä komennolla <
 
 ![](../../images/5/39ea.png)
 
+Huomaa, että testien suorituksesta tallentuu video hakemistoon <i>cypress/videos/</i>, hakemisto lienee syytä gitignoroida.
+
 Testien ja frontendin koodin lopullinen versio on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11), branchissa <i>part5-11</i>.
 
 </div>
 
 <div class="tasks">
 
-### Tehtävät 5.17.-5.21.
+### Tehtävät 5.17.-5.22.
 
+Tehdään osan lopuksi muutamia e2e-testejä blogisovellukseen. Ylläolevan materiaalion pitäisi riittää ainakin suurimmaksi osaksi tehtävien tekemiseen. Cypressin [dokumentaatiota](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell) kannattaa ehdottomasti myös lueskella, kyseessä on ehkä paras dokumentaatio, mitä olen koskaan missään open source -projektissa nähnyt. 
 
-This is the single most important guide for understanding how to test with Cypress. Read it. Understand it.
+Erityisensti kannattaa lukea luku [Introduction to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes), joka toteaa
 
-[Introduction to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes)
-
+> <i>This is the single most important guide for understanding how to test with Cypress. Read it. Understand it.</i>
 
 #### 5.17: blogilistan end2end-testit, step1
+
+Konfigutoi Cypress projektiisi. Tee testi, joka varmistaa, että sovellus näyttää oletusarvoisesati kirjautumislomakkeen.
+
+Testin rungon tulee olla seuraavanlainen
+
+```js 
+describe('Blog app', function() {
+  beforeEach(function() {
+    cy.request('POST', 'http://localhost:3001/api/testing/reset')
+    cy.visit('http://localhost:3000')
+  })
+
+  it('Login from is shown', function() {
+    // ...
+  })
+})
+```
+
+Testin <i>beforeEach</i>-alustuslohkon tulee nollata tietokannan tilanne, esim. 
+[materiaalissa](/osa5/end_to_end_testaus#tietokannan-tilan-kontrollointi) esitetyllä tavalla.
+
 #### 5.18: blogilistan end2end-testit, step2
+
+Tee testit kirjautumiselle, testaa sekä onnistunut että epäonnistunut kirjautuminen.
+Luo testejä varten käyttäjä <i>beforeEach</i>-lohkossa. 
+
+Testien runko laajenee seuraavasti
+
+```js 
+describe('Blog app', function() {
+  beforeEach(function() {
+    cy.request('POST', 'http://localhost:3001/api/testing/reset')
+    // create here a user to backend
+    cy.visit('http://localhost:3000')
+  })
+
+  it('Login from is shown', function() {
+    // ...
+  })
+
+  describe('Login',function() {
+    it('succeeds with correct credentials', function() {
+      // ...
+    })
+
+    it('fails with wrong credentials', function() {
+      // ...
+    })
+  })
+})
+```
+
+Bonustehtävä: varmista, että epäonnistuneeseen kirjautumiseen liittyvä notifikaatio näytetään punaisella. 
+
 #### 5.19: blogilistan end2end-testit, step3
+
+Tee testi, joka varmistaa, että kirjautunut käyttäjä pystyy luomaan blogin.
+
+describe('Blog app', function() {
+  // ...
+
+  describe.only('When logged in', function() {
+    beforeEach(function() {
+      // log in user here
+    })
+
+    it('A blog can be created', function() {
+      // ...
+    })
+  })
+
+})
+
+Testin tulee varmistaa, että luotu blogi tulee näkyville kaikkien blogien listalle.
+
 #### 5.20: blogilistan end2end-testit, step4
+
+Tee testi, joka varmistaa, että blogia voi likettää.
+
 #### 5.21: blogilistan end2end-testit, step5
 
+Tee testi, joka varmistaa että blogin lisännyt käyttäjä voi poistaa blogin.
+
 Tämä oli osan viimeinen tehtävä ja on aika pushata koodi githubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://github.com/fullstack-hy2020).
+
+Bonus: varmista myös että poisto ei onnistu muilta kuin blogin lisääjältä.
+
+#### 5.22: blogilistan end2end-testit, step5
+
+Tee testi, joka varmistaa, että blogit järjestetään likejen mukaiseen järjestykseen (eniten likejä saanut blogi ensin).
+
+Tämä tehtävä saattaa olla hieman edeltäviä haasteellisempi. Eräs ratkaisutapa on etsiä kaikki blogit ja tarkastella tulosta [then](https://docs.cypress.io/api/commands/then.html#DOM-element)-komennon avulla.
+
 </div>
