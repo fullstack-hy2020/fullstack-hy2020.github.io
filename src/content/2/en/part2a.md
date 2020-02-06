@@ -175,7 +175,8 @@ const App = (props) => {
 
 Because the code generating the <i>li</i> tags is JavaScript, it must be wrapped in curly braces in a JSX template just like all other JavaScript code. 
 
-Parannetaan koodin luetteloa vielä jakamalla nuolifunktion määrittely useammalle riville:
+<!-- Parannetaan koodin luetteloa vielä jakamalla nuolifunktion määrittely useammalle riville: -->
+We will also make the code more readable by separating the arrow function's declaration across multiple lines:
 
 ```js
 const App = (props) => {

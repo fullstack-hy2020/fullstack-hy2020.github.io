@@ -635,15 +635,18 @@ Add to the view showing the data of a single country the weather report for the 
 
 ![](../../images/2/19ba.png)
 
-**Huom:** tarvitset melkein kaikkia säätietoja tarjoavia palveluja käyttääksesi api-avaimen. Älä talleta avainta versionhallintaan, eli älä kirjoita avainta suoraan koodiin.  Avaimen arvo kannattaa määritellä ns. [ympäristömuuttujana](https://create-react-app.dev/docs/adding-custom-environment-variables/).
+<!-- **Huom:** tarvitset melkein kaikkia säätietoja tarjoavia palveluja käyttääksesi api-avaimen. Älä talleta avainta versionhallintaan, eli älä kirjoita avainta suoraan koodiin.  Avaimen arvo kannattaa määritellä ns. [ympäristömuuttujana](https://create-react-app.dev/docs/adding-custom-environment-variables/). -->
+**NB:** You need an api-key to use almost every weather service. Do not save the api-key to source control! Nor hardcode the api-key to your source code. Instead use an [environment variable](https://create-react-app.dev/docs/adding-custom-environment-variables/) to save the key.
 
-Oletetaan että api-avaimen arvo on <i>t0p53cr3t4p1k3yv4lu3</i>. Kun ohjelma käynnistetään seuraavasti
+<!-- Oletetaan että api-avaimen arvo on <i>t0p53cr3t4p1k3yv4lu3</i>. Kun ohjelma käynnistetään seuraavasti -->
+Assuming the api-key is <i>t0p53cr3t4p1k3yv4lu3</i>, when the application is started like so:
 
 ```bash
 REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start
 ```
 
-koodista päästään avaimen arvoon käsiksi olion _process.env_ kautta:
+<!-- koodista päästään avaimen arvoon käsiksi olion _process.env_ kautta: -->
+you can access the value of the key from the _process.env_ object:
 
 ```js
 const api_key = process.env.REACT_APP_API_KEY
