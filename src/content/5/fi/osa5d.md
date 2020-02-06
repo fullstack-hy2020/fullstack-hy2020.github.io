@@ -983,13 +983,13 @@ Testien ja frontendin koodin lopullinen versio on kokonaisuudessaan [githubissa]
 
 ### Tehtävät 5.17.-5.22.
 
-Tehdään osan lopuksi muutamia e2e-testejä blogisovellukseen. Ylläolevan materiaalion pitäisi riittää ainakin suurimmaksi osaksi tehtävien tekemiseen. Cypressin [dokumentaatiota](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell) kannattaa ehdottomasti myös lueskella, kyseessä on ehkä paras dokumentaatio, mitä olen koskaan missään open source -projektissa nähnyt. 
+Tehdään osan lopuksi muutamia E2E-testejä blogisovellukseen. Ylläolevan materiaalion pitäisi riittää ainakin suurimmaksi osaksi tehtävien tekemiseen. Cypressin [dokumentaatiota](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell) kannattaa ehdottomasti myös lueskella, kyseessä on ehkä paras dokumentaatio, mitä olen koskaan open source -projektissa nähnyt. 
 
 Erityisensti kannattaa lukea luku [Introduction to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes), joka toteaa
 
 > <i>This is the single most important guide for understanding how to test with Cypress. Read it. Understand it.</i>
 
-#### 5.17: blogilistan end2end-testit, step1
+#### 5.17: blogilistan end to end -testit, step1
 
 Konfigutoi Cypress projektiisi. Tee testi, joka varmistaa, että sovellus näyttää oletusarvoisesati kirjautumislomakkeen.
 
@@ -1008,10 +1008,10 @@ describe('Blog app', function() {
 })
 ```
 
-Testin <i>beforeEach</i>-alustuslohkon tulee nollata tietokannan tilanne, esim. 
-[materiaalissa](/osa5/end_to_end_testaus#tietokannan-tilan-kontrollointi) esitetyllä tavalla.
+Testin <i>beforeEach</i>-alustuslohkon tulee nollata tietokannan tilanne esim. 
+[materiaalissa](/osa5/end_to_end_testaus#tietokannan-tilan-kontrollointi) näytetyllä tavalla.
 
-#### 5.18: blogilistan end2end-testit, step2
+#### 5.18: blogilistan end to end -testit, step2
 
 Tee testit kirjautumiselle, testaa sekä onnistunut että epäonnistunut kirjautuminen.
 Luo testejä varten käyttäjä <i>beforeEach</i>-lohkossa. 
@@ -1042,12 +1042,13 @@ describe('Blog app', function() {
 })
 ```
 
-Bonustehtävä: varmista, että epäonnistuneeseen kirjautumiseen liittyvä notifikaatio näytetään punaisella. 
+<i>Vapaaehtoinen bonustehtävä:</i> varmista, että epäonnistuneeseen kirjautumiseen liittyvä notifikaatio näytetään punaisella. 
 
-#### 5.19: blogilistan end2end-testit, step3
+#### 5.19: blogilistan end to end -testit, step3
 
-Tee testi, joka varmistaa, että kirjautunut käyttäjä pystyy luomaan blogin.
+Tee testi, joka varmistaa, että kirjaantunut käyttäjä pystyy luomaan blogin. Testin runko voi näyttää seuraavalta
 
+```js 
 describe('Blog app', function() {
   // ...
 
@@ -1062,25 +1063,26 @@ describe('Blog app', function() {
   })
 
 })
+```
 
-Testin tulee varmistaa, että luotu blogi tulee näkyville kaikkien blogien listalle.
+Testin tulee varmistaa, että luotu blogi tulee näkyville blogien listalle.
 
-#### 5.20: blogilistan end2end-testit, step4
+#### 5.20: blogilistan end to end -testit, step4
 
 Tee testi, joka varmistaa, että blogia voi likettää.
 
-#### 5.21: blogilistan end2end-testit, step5
+#### 5.21: blogilistan end to end -testit, step5
 
-Tee testi, joka varmistaa että blogin lisännyt käyttäjä voi poistaa blogin.
+Tee testi, joka varmistaa, että blogin lisännyt käyttäjä voi poistaa blogin.
+
+<i>Vapaaehtoinen bonustehtävä:</i> varmista myös että poisto ei onnistu muilta kuin blogin lisänneeltä käyttäjältä.
+
+#### 5.22: blogilistan end to end -testit, step5
+
+Tee testi, joka varmistaa, että blogit järjestetään likejen mukaiseen järjestykseen, eniten likejä saanut blogi ensin.
+
+Tämä tehtävä saattaa olla hieman edeltäviä haastavampi. Eräs ratkaisutapa on etsiä kaikki blogit ja tarkastella tulosta [then](https://docs.cypress.io/api/commands/then.html#DOM-element)-komennon takaisinkutsufunktiossa.
 
 Tämä oli osan viimeinen tehtävä ja on aika pushata koodi githubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://github.com/fullstack-hy2020).
-
-Bonus: varmista myös että poisto ei onnistu muilta kuin blogin lisääjältä.
-
-#### 5.22: blogilistan end2end-testit, step5
-
-Tee testi, joka varmistaa, että blogit järjestetään likejen mukaiseen järjestykseen (eniten likejä saanut blogi ensin).
-
-Tämä tehtävä saattaa olla hieman edeltäviä haasteellisempi. Eräs ratkaisutapa on etsiä kaikki blogit ja tarkastella tulosta [then](https://docs.cypress.io/api/commands/then.html#DOM-element)-komennon avulla.
 
 </div>
