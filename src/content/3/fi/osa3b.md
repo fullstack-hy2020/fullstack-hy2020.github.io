@@ -149,7 +149,7 @@ tarkastaa Express GET-tyyppisten HTTP-pyyntöjen yhteydessä ensin löytyykö py
 
 Nyt HTTP GET -pyyntö osoitteeseen <i>www.palvelimenosoite.com/index.html</i> tai <i>www.palvelimenosoite.com</i> näyttää Reactilla tehdyn frontendin. GET-pyynnön esim. osoitteeseen <i>www.palvelimenosoite.com/notes</i> hoitaa backendin koodi.
 
-Koska tässä tapauksessa sekä frontend että backend toimivat samassa osoitteessa, voidaan React-sovelluksessa oleva backendin _baseUrl_ määritellä [suhteellisena](https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2) URL:ina, eli ilman palvelinta yksilöivää osaa:
+Koska tässä tapauksessa sekä frontend että backend toimivat samassa osoitteessa, voidaan React-sovelluksessa eli fronendin koodissa oleva palvelimen _baseUrl_ määritellä [suhteellisena](https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2) URL:ina, eli ilman palvelinta yksilöivää osaa:
 
 ```js
 import axios from 'axios'
@@ -163,7 +163,7 @@ const getAll = () => {
 // ...
 ```
 
-Muutoksen jälkeen on luotava uusi production build ja kopioitava se backendin repositorion juureen.
+Muutoksen jälkeen frontendistä on luotava uusi production build ja kopioitava se backendin repositorion juureen.
 
 Sovellusta voidaan käyttää nyt <i>backendin</i> osoitteesta <http://localhost:3001>:
 
@@ -205,10 +205,11 @@ Tarvitsemme sovelluksellemme tietokannan. Ennen tietokannan käyttöönottoa kat
 
 ### Frontendin deployauksen suoraviivaistus
 
-Jotta uuden frontendin version generointi onnistuisi jatkossa ilman turhia manuaalisia askelia, luodaan uusia skriptejä <i>package.json</i>-tiedostoon
+Jotta uuden frontendin version generointi onnistuisi jatkossa ilman turhia manuaalisia askelia, lisätään uusia skriptejä backendin <i>package.json</i>-tiedostoon
 ```json
 {
   "scripts": {
+    // ...
     "build:ui": "rm -rf build && cd ../../osa2/materiaali/notes-new && npm run build --prod && cp -r build ../../../osa3/notes-backend/",
     "deploy": "git push heroku master",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",    

@@ -7,7 +7,7 @@ lang: fi
 
 <div class="content">
 
-Olemme noudattaneet sovelluksen tilan hallinnassa Reactin suosittelemaa käytäntöä määritellä tila ja sitä käsittelevät metodit [sovelluksen juurikomponentissa](https://reactjs.org/docs/lifting-state-up.html). Tilaa ja sitä käsitteleviä funktioita on välitetty propsien avulla niitä tarvitseville komponenteille. Tämä toimii johonkin pisteeseen saakka, mutta kun sovellusten koko kasvaa, muuttuu tilan hallinta haasteelliseksi.
+Olemme noudattaneet sovelluksen tilan hallinnassa Reactin suosittelemaa käytäntöä määritellä useiden komponenttien tarvitsema tila ja sitä käsittelevät metodit [sovelluksen juurikomponentissa](https://reactjs.org/docs/lifting-state-up.html). Tilaa ja sitä käsitteleviä funktioita on välitetty propsien avulla niitä tarvitseville komponenteille. Tämä toimii johonkin pisteeseen saakka, mutta sovelluksen kasvaessa, muuttuu tilan hallinta haasteelliseksi.
 
 ### Flux-arkkitehtuuri
 
@@ -73,7 +73,7 @@ const counterReducer = (state, action) => {
 Ensimmäinen parametri on siis storessa oleva <i>tila</i>. Reducer palauttaa <i>uuden tilan</i> actionin tyypin mukaan.
 
 Muutetaan koodia vielä hiukan. Reducereissa on tapana käyttää if:ien sijaan [switch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch)-komentoa.
-Määritellään myös parametrille <i>state</i> [oletusarvoksi](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters) 0. Näin reducer toimii vaikka store -tilaa ei olisi vielä alustettu.
+Määritellään myös parametrille <i>state</i> [oletusarvoksi](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters) 0. Näin reducer toimii vaikka storen tilaa ei olisi vielä alustettu.
 
 ```js
 const counterReducer = (state = 0, action) => {
@@ -173,7 +173,7 @@ aiheuttaisi tulostuksen
 </pre>
 
 
-Laskurisovelluksemme koodi on seuraavassa. Kaikki koodi on kirjoitettu samaan tiedostoon, jolloin <i>store</i> on suoraan React-koodin käytettävissä. Tutustumme React/Redux-koodin parempiin strukturointitapoihin myöhemmin.
+Laskurisovelluksemme koodi on seuraavassa. Kaikki koodi on kirjoitettu samaan tiedostoon, joten <i>store</i> on suoraan React-koodin käytettävissä. Tutustumme React/Redux-koodin parempiin strukturointitapoihin myöhemmin.
 
 ```js
 import React from 'react'
@@ -379,6 +379,8 @@ describe('noteReducer', () => {
 })
 ```
 
+Testi siis varmistaa, että reducerin palauttama uusi tila taulukko, joka sisältää yhden elementin, joka on sama kun actionin kentän <i>data</i> sisältävä olio.
+
 Komento <i>deepFreeze(state)</i> varmistaa, että reducer ei muuta parametrina olevaa storen tilaa. Jos reduceri käyttää state:n manipulointiin komentoa _push_, testi ei mene läpi
 
 ![](../../images/6/2.png)
@@ -538,11 +540,11 @@ console.log(loput)  // tulostuu [3, 4, 5, 6]
 
 <div class="tasks">
 
-### Tehtäviä
+### Tehtävät 6.1.-6.2.
 
 Tehdään hieman yksinkertaistettu versio osan 1 unicafe-tehtävästä. Hoidetaan sovelluksen tilan käsittely Reduxin avulla.
 
-Voit ottaa sovelluksesi pohjaksi repositoriossa https://github.com/fullstack-hy2019/unicafe-redux olevan projektin.
+Voit ottaa sovelluksesi pohjaksi repositoriossa https://github.com/fullstack-hy2020/unicafe-redux  olevan projektin.
 
 <i>Aloita poistamalla kloonatun sovelluksen git-konfiguraatio ja asentamalla riippuvuudet</i>
 
@@ -1017,7 +1019,7 @@ Redux-sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https:
 
 <div class="tasks">
 
-### Tehtäviä
+### Tehtävät 6.3.-6.8.
 
 Toteutetaan nyt versio toisesta ensimmäisen osan anekdoottien äänestyssovelluksesta. Ota ratkaisusi pohjaksi repositoriossa https://github.com/fullstack-hy2020/redux-anecdotes oleva projekti.
 

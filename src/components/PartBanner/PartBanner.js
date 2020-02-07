@@ -33,8 +33,8 @@ export const PartBanner = ({ lang }) => {
                   'Palvelimen ohjelmointi NodeJS:n Express-kirjastolla',
                   'Express-sovellusten testaaminen, käyttäjänhallinta',
                   'React-sovelluksen testaaminen',
-                  'Sovelluksen tilan hallinta Redux-kirjastolla, custom hookit',
-                  'React router, tyylikirjastot ja webpack',
+                  'Sovelluksen tilan hallinta Redux-kirjastolla',
+                  'React router, custom-hookit, tyylikirjastot ja webpack',
                   'GraphQL',
                 ];
 
