@@ -96,9 +96,6 @@ module.exports = {
       a: 'Login in frontend',
       b: 'props.children and proptypes',
       c: 'Testing React apps',
-      /*
-      d: 'Custom hooks'
-      */
     },
     '6': {
       a: 'Flux-architecture and Redux',

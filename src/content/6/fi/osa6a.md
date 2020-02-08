@@ -645,7 +645,7 @@ Reducerin toteutuksessa kannattaa ottaa mallia ylläolevasta [redux-muistiinpano
 
 #### 6.2: unicafe revisited, step2
 
-Toteuta sitten sovelluksen koko sen varsinainen toiminnallisuus. 
+Toteuta sitten sovellukseen koko sen varsinainen toiminnallisuus. 
 
 </div>
 
@@ -674,12 +674,13 @@ const App = () => {
     event.target.note.value = ''
   }
 
-  const toggleImportance = (id) => () => {
+  const toggleImportance = (id) => {
     store.dispatch({
       type: 'TOGGLE_IMPORTANCE',
       data: { id }
     })
   }
+
 
   return (
     <div>
@@ -691,7 +692,7 @@ const App = () => {
         {store.getState().map(note =>
           <li
             key={note.id} 
-            onClick={toggleImportance(note.id)}
+            onClick={() => toggleImportance(note.id)}
           >
             {note.content} <strong>{note.important ? 'important' : ''}</strong>
           </li>
@@ -713,6 +714,7 @@ Muistiinpanon lisäämisen käsittelevä metodi on yksinkertainen, se ainoastaan
 addNote = (event) => {
   event.preventDefault()
   const content = event.target.note.value  // highlight-line
+  event.target.note.value = ''
   store.dispatch({
     type: 'NEW_NOTE',
     data: {
@@ -721,7 +723,6 @@ addNote = (event) => {
       id: generateId()
     }
   })
-  event.target.note.value = ''
 }
 ```
 
@@ -782,11 +783,11 @@ const App = () => {
   const addNote = (event) => {
     event.preventDefault()
     const content = event.target.note.value
-    store.dispatch(createNote(content)) // highlight-line
     event.target.note.value = ''
+    store.dispatch(createNote(content)) // highlight-line 
   }
   
-  const toggleImportance = (id) => () => {
+  const toggleImportance = (id) => {
     store.dispatch(toggleImportanceOf(id))// highlight-line
   }
 
@@ -794,86 +795,43 @@ const App = () => {
 }
 ```
 
-### staten välittäminen propseissa
+### Redux-storen välittäminen eri komponenteille
 
-Sovelluksemme on reduceria lukuunottamatta tehty samaan tiedostoon. Kyseessä ei tietenkään ole järkevä käytäntö, eli on syytä eriyttää <i>App</i> omaan moduuliinsa.
+Koko sovellus on toistaiseksi kirjoitettu yhteen tiedostoon ja sen ansiosta joka puolelta sovellusta on päästy käsiksi redux-storeen. Entä jos haluamme jakaa sovelluksen useisiin, omiin komponentteihin sijoitettuihin tiedostoihin? 
 
-Herää kuitenkin kysymys miten <i>App</i> pääsee muutoksen jälkeen käsiksi <i>storeen</i>? Ja yleisemminkin, kun komponentti koostuu suuresta määrästä komponentteja, tulee olla jokin mekanismi, minkä avulla komponentit pääsevät käsiksi storeen.
+Tapoja välittää redux-store sovelluksen komponenteille on useita, tutustutaan ensin ehä uusimpaan ja helpoimpaan tapaan [react-redux](https://react-redux.js.org/)-kirjaston tarjoamaan [hooks](https://react-redux.js.org/api/hooks)-rajapintaan.
 
-Tapoja on muutama. Yksinkertaisin vaihtoehto on välittää store propsien avulla. Sovelluksen käynnistyspiste <i>index.js</i> typistyy seuraavasti
+Asennetaan react-redux
 
 ```js
+npm install --save react-redux
+```
 
+Eriytetään komponentti _App_ omaan tiedostoon _App.js_. Tarkastellaan ensin mitä sovelluksen muiden tiedostojen sisällöksi tulee.
+
+Tiedosto _index.js_ näyttää seuraavalta
+
+```js
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore } from 'redux'
+import { Provider } from 'react-redux' // highlight-line
 import App from './App'
 import noteReducer from './reducers/noteReducer'
 
 const store = createStore(noteReducer)
 
-const renderApp = () => {
-  ReactDOM.render(
-    <App store={store}/>,
-    document.getElementById('root')
-  )
-}
-
-renderApp()
-store.subscribe(renderApp)
+ReactDOM.render(
+  <Provider store={store}>  // highlight-line
+    <App />
+  </Provider>,  // highlight-line
+  document.getElementById('root')
+)
 ```
 
-Muutos omaan moduuliinsa eriytettyyn komponenttiin <i>App</i> on pieni, storeen viitataan <i>propsien</i> kautta <code>props.store</code>:
+Uutta tässä on se, että sovellus on määritelty react redux -kirjaston tarjoaman [Provider](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store)-komponentin lapsena ja että sovelluksen käyttämä store on annettu Provider-komponentin attribuutiksi <i>store</i>. 
 
-```js
-import React from 'react'
-// highlight-start
-import { 
-  createNote, toggleImportanceOf
-} from './reducers/noteReducer' 
-// highlight-end
-
-const App = (props) => {
-  const store = props.store // highlight-line
-
-  const addNote = (event) => {
-    event.preventDefault()
-    store.dispatch(
-      createNote(event.target.note.value)
-    )
-    event.target.note.value = ''
-  }
-
-  const toggleImportance = (id) => {
-    store.dispatch(
-      toggleImportanceOf(id)
-    )
-  }
-
-  return (
-    <div>
-      <form onSubmit={addNote}>
-        <input name="note" />
-        <button type="submit">add</button>
-      </form>
-      <ul>
-        {store.getState().map(note =>
-          <li
-            key={note.id}
-            onClick={() => toggleImportance(note.id)}
-          >
-            {note.content} <strong>{note.important ? 'important' : ''}</strong>
-          </li>
-        )}
-      </ul>
-    </div>
-  )
-}
-
-export default App
-```
-
-Action creator -funktioiden määrittely on siirretty reducerin kanssa samaan tiedostoon 
+Action creator -funktioiden määrittely on siirretty reducerin kanssa samaan tiedostoon <i>reducers/noteReducer.js</i> joka näyttää seuraavalta
 
 ```js
 const noteReducer = (state = [], action) => {
@@ -904,8 +862,6 @@ export const toggleImportanceOf = (id) => { // highlight-line
 export default noteReducer
 ```
 
-Jos sovelluksessa on enemmän storea tarvitsevia komponentteja, tulee <i>App</i>-komponentin välittää <i>store</i> propseina kaikille sitä tarvitseville komponenteille.
-
 Moduulissa on nyt useita [export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)-komentoja.
 
 Reducer-funktio palautetaan edelleen komennolla <i>export default</i>. Tämän ansiosta reducer importataan tuttuun tapaan:
@@ -917,7 +873,7 @@ import noteReducer from './reducers/noteReducer'
 Moduulilla voi olla vain <i>yksi default export</i>, mutta useita "normaaleja" exporteja
 
 ```js
-export const noteCreation = content => {
+export const noteCreation = (content) => {
   // ...
 }
 
@@ -932,19 +888,133 @@ Normaalisti (eli ei defaultina) exportattujen funktioiden käyttöönotto tapaht
 import { noteCreation } from './../reducers/noteReducer'
 ```
 
-Eriytetään uuden muistiinpanon luominen omaksi komponentiksi. 
+Komponentin <i>App</i> koodi 
 
 ```js
-import { createNote } from '../reducers/noteReducer' // highlight-line
+import React from 'react'
+import { 
+  createNote, toggleImportanceOf
+} from './reducers/noteReducer' 
+import { useSelector, useDispatch } from 'react-redux'  // highlight-line
 
-const NewNote = (props) => {
+
+const App = () => {
+  const dispatch = useDispatch()  // highlight-line
+  const notes = useSelector(state => state)  // highlight-line
+
   const addNote = (event) => {
     event.preventDefault()
     const content = event.target.note.value
     event.target.note.value = ''
-    props.store.dispatch(
-      createNote(content)
-    )
+    dispatch(createNote(content))  // highlight-line
+  }
+
+  const toggleImportance = (id) => {
+    dispatch(toggleImportanceOf(id)) // highlight-line
+  }
+
+  return (
+    <div>
+      <form onSubmit={addNote}>
+        <input name="note" /> 
+        <button type="submit">add</button>
+      </form>
+      <ul>
+        {notes.map(note =>  // highlight-line
+          <li
+            key={note.id} 
+            onClick={() => toggleImportance(note.id)}
+          >
+            {note.content} <strong>{note.important ? 'important' : ''}</strong>
+          </li>
+        )}
+      </ul>
+    </div>
+  )
+}
+
+export default App
+```
+
+Komponentin koodissa on muutama mielenkiintoinen seikka. Aiemmin koodi hoiti actioinen dispatchaamisen kutsumalla redux-storen metodia dispatch:
+
+```js
+store.dispatch({
+  type: 'TOGGLE_IMPORTANCE',
+  data: { id }
+})
+```
+
+Nyt sama tapahtuu [useDispatch](https://react-redux.js.org/api/hooks#usedispatch)-hookin avulla saatavan <i>dispatch</i>-funktion avulla:
+
+```js
+import { useSelector, useDispatch } from 'react-redux'  // highlight-line
+
+const App = () => {
+  const dispatch = useDispatch()  // highlight-line
+  // ...
+
+  const toggleImportance = (id) => {
+    dispatch(toggleImportanceOf(id)) // highlight-line
+  }
+
+  // ...
+}
+```
+
+React-redux-kirjaston tarjoama <i>useDispatch</i>-hook siis tarjoaa mille tahansa React-komponentille pääsyn tiedostossa <i>index.js</i> määritellyn redux-storen dispatch-funktioon, jonka avulla komponentti pääsee tekemään muutoksia redux-storen tilaan.
+
+Storeen talletettuihin muistiinpanoihin komponentti pääsee käsiksi react-redux-kirjaston [useSelector](https://react-redux.js.org/api/hooks#useselector)-hookin kautta:
+
+
+```js
+import { useSelector, useDispatch } from 'react-redux'  // highlight-line
+
+const App = () => {
+  // ...
+  const notes = useSelector(state => state)  // highlight-line
+  // ...
+}
+```
+
+<i>useSelector</i> saa parametrikseen funktion, joka hakee tai valitsee (engl. select) tarvittavan datan redux-storesta. Tarvitsemme nyt kaikki muistiinpanot, eli selektorifunktiomme palauttaa koko staten, eli on muotoa 
+
+
+```js
+state => state
+```
+
+joka siis tarkoittaa samaa kuin
+
+```js
+(state) => {
+  return state
+}
+```
+
+Yleensä selektorifunktiot ovat mielenkiinoisempia, ja valitsevat vain osan redux-storen sisällöstä. Voisimme esimerkiksi hakea storesta ainoastaan tärkeät muistiinpanot seuraavasti
+
+```js
+const importantNotes = useSelector(state => state.filter(note => note.important))  
+```
+
+### Lisää komponentteja
+
+Eriytetään uuden muistiinpanon luominen omaksi komponentiksi. 
+
+```js
+import React from 'react'
+import { useDispatch } from 'react-redux' // highlight-line
+import { createNote } from '../reducers/noteReducer' // highlight-line
+
+const NewNote = (props) => {
+  const dispatch = useDispatch() // highlight-line
+
+  const addNote = (event) => {
+    event.preventDefault()
+    const content = event.target.note.value
+    event.target.note.value = ''
+    dispatch(createNote(content)) // highlight-line
   }
 
   return (
@@ -954,14 +1024,19 @@ const NewNote = (props) => {
     </form>
   )
 }
+
+export default NewNote
 ```
 
 Toisin kuin aiemmin ilman Reduxia tekemässämme React-koodissa, sovelluksen tilaa (joka on nyt siis reduxissa) muuttava tapahtumankäsittelijä on siirretty pois <i>App</i>-komponentista, alikomponentin vastuulle. Itse tilaa muuttava logiikka on kuitenkin siististi reduxissa eristettynä koko sovelluksen React-osuudesta.
 
-
-Eriytetään vielä muistiinpanojen lista ja yksittäisen muistiinpanon esittäminen omiksi komponenteikseen:
+Eriytetään vielä muistiinpanojen lista ja yksittäisen muistiinpanon esittäminen omiksi komponenteikseen (jotka molemmat sijoitetaan tiedostoon <i>Notes.js</i>):
 
 ```js
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux' // highlight-line
+import { toggleImportanceOf } from '../reducers/noteReducer' // highlight-line
+
 const Note = ({ note, handleClick }) => {
   return(
     <li onClick={handleClick}>
@@ -971,21 +1046,26 @@ const Note = ({ note, handleClick }) => {
   )
 }
 
-const Notes = ({ store }) => {
+const Notes = () => {
+  const dispatch = useDispatch() // highlight-line
+  const notes = useSelector(state => state) // highlight-line
+
   return(
     <ul>
-      {store.getState().map(note =>
+      {notes.map(note =>
         <Note
           key={note.id}
           note={note}
           handleClick={() => 
-            store.dispatch(toggleImportanceOf(note.id))
+            dispatch(toggleImportanceOf(note.id))
           }
         />
       )}
     </ul>
   )
 }
+
+export default Notes
 ```
 
 Muistiinpanon tärkeyttä muuttava logiikka on nyt muistiinpanojen listaa hallinnoivalla komponentilla.
@@ -993,25 +1073,22 @@ Muistiinpanon tärkeyttä muuttava logiikka on nyt muistiinpanojen listaa hallin
 Komponenttiin <i>App</i> ei jää enää paljoa koodia:
 
 ```js
-const App = (props) => {
+const App = () => {
 
   return (
     <div>
-      <NewNote store={props.store}/>
-      <Notes store={props.store} />
+      <NewNote />
+      <Notes  />
     </div>
   )
 }
 ```
-
 
 Yksittäisen muistiinpanon renderöinnistä huolehtiva <i>Note</i> on erittäin yksinkertainen, eikä ole tietoinen siitä, että sen propsina saama tapahtumankäsittelijä dispatchaa actionin. Tällaisia komponentteja kutsutaan Reactin terminologiassa [presentational](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)-komponenteiksi.
 
 <i>Notes</i> taas on sellainen mitä kutsutaan [container](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)-komponenteiksi, se sisältää sovelluslogiikkaa, eli määrittelee mitä <i>Note</i>-komponenttien tapahtumankäsittelijät tekevät ja koordinoi <i>presentational</i>-komponenttien, eli <i>Notejen</i> konfigurointia.
 
 Palaamme presentational/container-jakoon tarkemmin myöhemmin tässä osassa.
-
-<i>storen</i> välittäminen sitä tarvitseviin komponentteihin propsien avulla on melko ikävää. Vaikka <i>App</i> ei itse tarvitse storea, sen on otettava store vastaan, pystyäkseen välittämään sen edelleen komponenteille <i>NewNote</i> ja <i>Notes</i>. Tähän on kuitenkin tulossa parannus hetken päästä.
 
 Redux-sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-1), branchissa <i>part6-1</i>.
 

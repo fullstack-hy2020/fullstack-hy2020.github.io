@@ -19,19 +19,16 @@ State in the store is not changed directly, but with different <i>actions</i>.
 
 When an action changes the state of the store, the views are rerendered: 
 
-![](https://facebook.github.io/flux/img/overview/flux-simple-f8-diagram-explained-1300w.png)
-
+![](https://facebook.github.io/flux/img/overview/flux-simple-f8-diagram-1300w.png)
 
 If some action on the application, for example pushing a button, causes the need to change the state, the change is made with an action. 
 This causes rerendering the view again: 
 
 ![](https://facebook.github.io/flux/img/overview/flux-simple-f8-diagram-with-client-action-1300w.png)
 
-
 Flux offers a standard way for how and where the application's state is kept and how it is modified. 
 
 ### Redux
-
 
 Facebook has an implementation for Flux, but we will be using the [Redux](https://redux.js.org) - library. It works with the same principle, but is a bit simpler. Facebook also uses Redux now instead of their original Flux. 
 
@@ -754,7 +751,7 @@ const App = () => {
     event.target.note.value = ''
   }
 
-  const toggleImportance = (id) => () => {
+  const toggleImportance = (id) => {
     store.dispatch({
       type: 'TOGGLE_IMPORTANCE',
       data: { id }
@@ -771,7 +768,7 @@ const App = () => {
         {store.getState().map(note =>
           <li
             key={note.id} 
-            onClick={toggleImportance(note.id)}
+            onClick={() => toggleImportance(note.id)}
           >
             {note.content} <strong>{note.important ? 'important' : ''}</strong>
           </li>
@@ -797,6 +794,7 @@ The method handling adding new notes is simple, it just dispatches the action fo
 addNote = (event) => {
   event.preventDefault()
   const content = event.target.note.value  // highlight-line
+  event.target.note.value = ''
   store.dispatch({
     type: 'NEW_NOTE',
     data: {
@@ -805,7 +803,6 @@ addNote = (event) => {
       id: generateId()
     }
   })
-  event.target.note.value = ''
 }
 ```
 
@@ -833,9 +830,7 @@ toggleImportance = (id) => {
 
 ### Action creators
 
-
 We begin to notice that, even in applications as simple as ours, using Redux can simplify the frontend code. However, we can do a lot better. 
-
 
 It is actually not necessary for React-components to know the Redux action types and forms. 
 Let's separate creating actions into their own functions: 
@@ -860,10 +855,7 @@ const toggleImportanceOf = (id) => {
 }
 ```
 
-
 Functions that create actions are called [action creators](https://redux.js.org/advanced/async-actions#synchronous-action-creators).
-
-
 
 The <i>App</i> component does not have to know anything about the inner representation of the actions anymore, it just gets the right action by calling the creator-function: 
 
@@ -872,11 +864,12 @@ const App = () => {
   const addNote = (event) => {
     event.preventDefault()
     const content = event.target.note.value
-    store.dispatch(createNote(content)) // highlight-line
     event.target.note.value = ''
+    store.dispatch(createNote(content)) // highlight-line
+    
   }
   
-  const toggleImportance = (id) => () => {
+  const toggleImportance = (id) => {
     store.dispatch(toggleImportanceOf(id))// highlight-line
   }
 
@@ -884,89 +877,46 @@ const App = () => {
 }
 ```
 
-### Passing the state using props
 
+### Redux-storen välittäminen eri komponenteille
 
 Aside from the reducer, our application is in one file. This is of course not sensible, and we should separate <i>App</i> into its own module. 
 
-
 Now the question is, how can the <i>App</i> access the store after the move? And more broadly, when a component is composed of many smaller components, there must be a way for all of the components to access the store. 
 
+Tapoja välittää redux-store sovelluksen komponenteille on useita, tutustutaan ensin ehä uusimpaan ja helpoimpaan tapaan [react-redux](https://react-redux.js.org/)-kirjaston tarjoamaan [hooks](https://react-redux.js.org/api/hooks)-rajapintaan.
 
-There are a few ways to achieve this. The simplest way is to forward the store using props. The starting point of the application <i>index.js</i> becomes 
+Asennetaan react-redux
+
+```js
+npm install --save react-redux
+```
+
+Eriytetään komponentti _App_ omaan tiedostoon _App.js_. Tarkastellaan ensin mitä sovelluksen muiden tiedostojen sisällöksi tulee.
+
+Tiedosto _index.js_ näyttää seuraavalta
 
 ```js
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore } from 'redux'
+import { Provider } from 'react-redux' // highlight-line
 import App from './App'
 import noteReducer from './reducers/noteReducer'
 
 const store = createStore(noteReducer)
 
-const renderApp = () => {
-  ReactDOM.render(
-    <App store={store}/>,
-    document.getElementById('root')
-  )
-}
-
-renderApp()
-store.subscribe(renderApp)
+ReactDOM.render(
+  <Provider store={store}>  // highlight-line
+    <App />
+  </Provider>,  // highlight-line
+  document.getElementById('root')
+)
 ```
 
-The change to the <i>App</i> component is small. The store can now be accessed via <i>props</i> with <code>props.store</code>:
+Uutta tässä on se, että sovellus on määritelty react redux -kirjaston tarjoaman [Provider](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store)-komponentin lapsena ja että sovelluksen käyttämä store on annettu Provider-komponentin attribuutiksi <i>store</i>. 
 
-```js
-import React from 'react'
-// highlight-start
-import { 
-  createNote, toggleImportanceOf
-} from './reducers/noteReducer' 
-// highlight-end
-
-const App = (props) => {
-  const store = props.store // highlight-line
-
-  const addNote = (event) => {
-    event.preventDefault()
-    store.dispatch(
-      createNote(event.target.note.value)
-    )
-    event.target.note.value = ''
-  }
-
-  const toggleImportance = (id) => {
-    store.dispatch(
-      toggleImportanceOf(id)
-    )
-  }
-
-  return (
-    <div>
-      <form onSubmit={addNote}>
-        <input name="note" />
-        <button type="submit">add</button>
-      </form>
-      <ul>
-        {store.getState().map(note =>
-          <li
-            key={note.id}
-            onClick={() => toggleImportance(note.id)}
-          >
-            {note.content} <strong>{note.important ? 'important' : ''}</strong>
-          </li>
-        )}
-      </ul>
-    </div>
-  )
-}
-
-export default App
-```
-
-
-Defining the action creators has been moved to the reducer file
+Defining the action creators has been moved to the file <i>reducers/noteReducer.js</i> where the reducer is defined. File looks like this:
 
 ```js
 const noteReducer = (state = [], action) => {
@@ -1001,7 +951,6 @@ If the application has many components which need the store, the <i>App</i>-comp
 
 The module now has multiple [export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) commands. 
 
-
 The reducer function is still returned with the <i>export default</i> command, so the reducer can be imported the usual way: 
 
 ```js
@@ -1027,19 +976,133 @@ Normally (not as defaults) exported functions can be imported with the curly bra
 import { createNote } from './../reducers/noteReducer'
 ```
 
-Let's separate creating new notes into its own component. 
+Komponentin <i>App</i> koodi 
 
 ```js
-import { createNote } from '../reducers/noteReducer' // highlight-line
+import React from 'react'
+import { 
+  createNote, toggleImportanceOf
+} from './reducers/noteReducer' 
+import { useSelector, useDispatch } from 'react-redux'  // highlight-line
 
-const NewNote = (props) => {
+
+const App = () => {
+  const dispatch = useDispatch()  // highlight-line
+  const notes = useSelector(state => state)  // highlight-line
+
   const addNote = (event) => {
     event.preventDefault()
     const content = event.target.note.value
     event.target.note.value = ''
-    props.store.dispatch(
-      createNote(content)
-    )
+    dispatch(createNote(content))  // highlight-line
+  }
+
+  const toggleImportance = (id) => {
+    dispatch(toggleImportanceOf(id)) // highlight-line
+  }
+
+  return (
+    <div>
+      <form onSubmit={addNote}>
+        <input name="note" /> 
+        <button type="submit">add</button>
+      </form>
+      <ul>
+        {notes.map(note =>  // highlight-line
+          <li
+            key={note.id} 
+            onClick={() => toggleImportance(note.id)}
+          >
+            {note.content} <strong>{note.important ? 'important' : ''}</strong>
+          </li>
+        )}
+      </ul>
+    </div>
+  )
+}
+
+export default App
+```
+
+Komponentin koodissa on muutama mielenkiintoinen seikka. Aiemmin koodi hoiti actioinen dispatchaamisen kutsumalla redux-storen metodia dispatch:
+
+```js
+store.dispatch({
+  type: 'TOGGLE_IMPORTANCE',
+  data: { id }
+})
+```
+
+Nyt sama tapahtuu [useDispatch](https://react-redux.js.org/api/hooks#usedispatch)-hookin avulla saatavan <i>dispatch</i>-funktion avulla:
+
+```js
+import { useSelector, useDispatch } from 'react-redux'  // highlight-line
+
+const App = () => {
+  const dispatch = useDispatch()  // highlight-line
+  // ...
+
+  const toggleImportance = (id) => {
+    dispatch(toggleImportanceOf(id)) // highlight-line
+  }
+
+  // ...
+}
+```
+
+React-redux-kirjaston tarjoama <i>useDispatch</i>-hook siis tarjoaa mille tahansa React-komponentille pääsyn tiedostossa <i>index.js</i> määritellyn redux-storen dispatch-funktioon, jonka avulla komponentti pääsee tekemään muutoksia redux-storen tilaan.
+
+Storeen talletettuihin muistiinpanoihin komponentti pääsee käsiksi react-redux-kirjaston [useSelector](https://react-redux.js.org/api/hooks#useselector)-hookin kautta:
+
+
+```js
+import { useSelector, useDispatch } from 'react-redux'  // highlight-line
+
+const App = () => {
+  // ...
+  const notes = useSelector(state => state)  // highlight-line
+  // ...
+}
+```
+
+<i>useSelector</i> saa parametrikseen funktion, joka hakee tai valitsee (engl. select) tarvittavan datan redux-storesta. Tarvitsemme nyt kaikki muistiinpanot, eli selektorifunktiomme palauttaa koko staten, eli on muotoa 
+
+
+```js
+state => state
+```
+
+joka siis tarkoittaa samaa kuin
+
+```js
+(state) => {
+  return state
+}
+```
+
+Yleensä selektorifunktiot ovat mielenkiinoisempia, ja valitsevat vain osan redux-storen sisällöstä. Voisimme esimerkiksi hakea storesta ainoastaan tärkeät muistiinpanot seuraavasti
+
+```js
+const importantNotes = useSelector(state => state.filter(note => note.important))  
+```
+
+### Lisää komponentteja
+
+Eriytetään uuden muistiinpanon luominen omaksi komponentiksi. 
+
+```js
+import React from 'react'
+import { useDispatch } from 'react-redux' // highlight-line
+import { createNote } from '../reducers/noteReducer' // highlight-line
+
+const NewNote = (props) => {
+  const dispatch = useDispatch() // highlight-line
+
+  const addNote = (event) => {
+    event.preventDefault()
+    const content = event.target.note.value
+    event.target.note.value = ''
+    dispatch(createNote(content)) // highlight-line
   }
 
   return (
@@ -1049,14 +1112,19 @@ const NewNote = (props) => {
     </form>
   )
 }
-```
 
+export default NewNote
+```
 
 Unlike in the React code we did without Redux, the event handler for changing the state of the app (which now lives in Redux) has been moved away from the <i>App</i> to a child component. The logic for changing the state in Redux is still neatly separated from the whole React part of the application. 
 
-Let's separate (1) the list of notes and (2) the showing of a single note into their own components: 
+Eriytetään vielä muistiinpanojen lista ja yksittäisen muistiinpanon esittäminen omiksi komponenteikseen (jotka molemmat sijoitetaan tiedostoon <i>Notes.js</i>):
 
 ```js
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux' // highlight-line
+import { toggleImportanceOf } from '../reducers/noteReducer' // highlight-line
+
 const Note = ({ note, handleClick }) => {
   return(
     <li onClick={handleClick}>
@@ -1066,23 +1134,27 @@ const Note = ({ note, handleClick }) => {
   )
 }
 
-const Notes = ({ store }) => {
+const Notes = () => {
+  const dispatch = useDispatch() // highlight-line
+  const notes = useSelector(state => state) // highlight-line
+
   return(
     <ul>
-      {store.getState().map(note =>
+      {notes.map(note =>
         <Note
           key={note.id}
           note={note}
           handleClick={() => 
-            store.dispatch(toggleImportanceOf(note.id))
+            dispatch(toggleImportanceOf(note.id))
           }
         />
       )}
     </ul>
   )
 }
-```
 
+export default Notes
+```
 
 The logic for changing the importance of a note is now in the component managing the list of notes. 
 
@@ -1090,18 +1162,16 @@ The logic for changing the importance of a note is now in the component managing
 There is not much code left in <i>App</i>:
 
 ```js
-const App = (props) => {
+const App = () => {
 
   return (
     <div>
-      <NewNote store={props.store}/>
-      <Notes store={props.store} />
+      <NewNote />
+      <Notes  />
     </div>
   )
 }
 ```
-
-
 
 <i>Note</i>, responsible for rendering a single note, is very simple, and is not aware that the event handler it gets as props dispatches an action. These kind of components are called [presentational](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) in React terminology. 
 
@@ -1110,11 +1180,6 @@ const App = (props) => {
 
 
 We will return to the presentational/container division later in this part. 
-
-
-Forwarding the <i>store</i> to all components as props is not the best solution. Even though the <i>App</i> does not need the store, it has to receive it in order to forward it to <i>NewNote</i> and <i>Notes</i>.
-In a bit we will have a solution to this problem. 
-
 
 The code of the Redux application can be found on [Github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-1), branch <i>part6-1</i>.
 
