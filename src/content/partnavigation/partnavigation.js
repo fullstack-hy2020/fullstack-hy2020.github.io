@@ -37,10 +37,9 @@ module.exports = {
     },
     '6': {
       a: 'Flux-arkkitehtuuri ja Redux',
-          /*
-      b: 'Monta reduseria, connect',
+      b: 'Monta reduseria',
       c: 'Redux-sovelluksen kommunikointi palvelimen kanssa',
-      */
+      d: 'connect'
     },
     '7': {
     /*
@@ -99,8 +98,9 @@ module.exports = {
     },
     '6': {
       a: 'Flux-architecture and Redux',
-      b: 'Many reducers, connect',
+      b: 'Many reducers',
       c: 'Communicating with server in a redux application',
+      d: 'connect'
     },
     '7': {
       a: 'React-router',

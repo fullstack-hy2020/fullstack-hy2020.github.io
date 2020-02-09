@@ -38,7 +38,7 @@ ja lisätään tiedoston <i>package.json</i> osaan <i>scripts</i> rivi
 
 ```js
 "scripts": {
-  "server": "json-server -p3001 db.json",
+  "server": "json-server -p3001 --watch db.json",
   // ...
 }
 ```
@@ -138,26 +138,25 @@ noteService.getAll().then(notes =>
 >
 > await toimii ainoastaan <i>async</i>-funktioiden sisällä, ja <i>index.js</i>:ssä oleva koodi ei ole funktiossa, joten päädyimme tilanteen yksinkertaisuuden takia tällä kertaa jättämään <i>async</i>:in käyttämättä.
 
-Päätetään kuitenkin siirtää muistiinpanojen alustus <i>App</i>-komponentiin, eli kuten yleensä dataa palvelimelta haettaessa, käytetään <i>effect hookia</i>.
-
-Jotta saamme action creatorin <i>initializeNotes</i> käyttöön komponentissa <i>App</i> tarvitsemme jälleen _connect_-metodin apua:
+Päätetään kuitenkin siirtää muistiinpanojen alustus <i>App</i>-komponentiin, eli kuten yleensä dataa palvelimelta haettaessa, käytetään <i>effect hookia</i>:
 
 ```js
-import React, { useEffect } from 'react' // highlight-line
-import { connect } from 'react-redux'  // highlight-line
-import NewNote from './components/NewNote'
+import React, {useEffect} from 'react' // highlight-line
+import NewNote from './components/NowNote'
 import Notes from './components/Notes'
 import VisibilityFilter from './components/VisibilityFilter'
 import noteService from './services/notes'
-import { initializeNotes } from './reducers/noteReducer'
+import { initializeNotes } from './reducers/noteReducer' // highlight-line
+import { useDispatch } from 'react-redux' // highlight-line
 
-const App = (props) => {
-// highlight-start
+const App = () => {
+  const dispatch = useDispatch()
+  // highlight-start
   useEffect(() => {
     noteService
-      .getAll().then(notes => props.initializeNotes(notes))
-  },[])
-// highlight-end
+      .getAll().then(notes => dispatch(initializeNotes(notes)))
+  }, [])
+  // highlight-end
 
   return (
     <div>
@@ -168,25 +167,64 @@ const App = (props) => {
   )
 }
 
-export default connect(null, { initializeNotes })(App) // highlight-line
+export default App
 ```
 
-Näin funktio <i>initializeNotes</i> tulee komponentin <i>App</i> propsiksi <i>props.initializeNotes</i> ja sen kutsumiseen ei tarvita _dispatch_-metodia koska _connect_ hoitaa asian puolestamme.
+Hookin useEffect käyttö aiheuttaa eslint-varoituksen:
+
+![](../../images/6/26ea.png)
+
+Pääsemme varoituksesta eroon seuraavasti:
+
+```js
+const App = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    noteService
+      .getAll().then(notes => dispatch(initializeNotes(notes)))
+  }, [dispatch]) // highlight-line
+
+  // ...
+}
+```
+
+Nyt komponentin _App_ sisällä määritelty muuttuja <i>dispatch</i> eli käytännössä redux-storen dispatch-funktio on lisätty useEffectille parametrina annettuun taulukkoon. **Jos** dispatch-muuttujan sisältö muuttuisi ohjelman suoritusaikana, suoritettaisiin efekti uudelleen, näin ei kuitenkaan ole, eli varoitus on tässä tilanteessa oikeastaan aiheeton.
+
+Toinen tapa päästä eroon varoituksesta olisi disabloida se kyseisen rivin kohdalta:
+
+```js
+const App = () => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    noteService
+      .getAll().then(notes => dispatch(initializeNotes(notes)))   
+      // highlight-start
+  },[]) // eslint-disable-line react-hooks/exhaustive-deps  
+  // highlight-end
+
+  // ...
+}
+```
+
+Yleisesti ottaen eslint-virheiden disabloiminen ei ole hyvä idea, joten vaikka kyseisen eslint-säännön tarpeellisuus onkin aiheuttanut [kiistelyä](https://github.com/facebook/create-react-app/issues/6880), pitäydytään ylemmässä ratkaisussa. 
+
+Lisää hookien riippuvuuksien määrittelyn tarpeesta [reactin dokumentaatiossa](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies).
+
 
 Voimme toimia samoin myös uuden muistiinpanon luomisen suhteen. Laajennetaan palvelimen kanssa kommunikoivaa koodia:
 
 ```js
-const url = 'http://localhost:3001/notes'
+const baseUrl = 'http://localhost:3001/notes'
 
 const getAll = async () => {
-  const response = await axios.get(url)
+  const response = await axios.get(baseUrl)
   return response.data
 }
 
 // highlight-start
 const createNew = async (content) => {
   const object = { content, important: false }
-  const response = await axios.post(url, object)
+  const response = await axios.post(baseUrl, object)
   return response.data
 }
 // highlight-end
@@ -201,25 +239,30 @@ Komponentin <i>NewNote</i> metodi _addNote_ muuttuu hiukan:
 
 ```js
 import React from 'react'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { createNote } from '../reducers/noteReducer'
-import noteService from '../services/notes'  // highlight-line
+import noteService from '../services/notes' // highlight-line
 
 const NewNote = (props) => {
+  const dispatch = useDispatch()
+  
   const addNote = async (event) => {
     event.preventDefault()
-    const content = event.target.note.value // highlight-line
-    event.target.note.value = '' //highlight-line
+    const content = event.target.note.value
+    event.target.note.value = ''
     const newNote = await noteService.createNew(content) // highlight-line
-    props.createNote(newNote) // highlight-line
+    dispatch(createNote(newNote)) // highlight-line
   }
 
   return (
-    // ...
+    <form onSubmit={addNote}>
+      <input name="note" />
+      <button type="submit">add</button>
+    </form>
   )
 }
 
-export default connect(null, { createNote } )(NewNote)
+export default NewNote
 ```
 
 Koska backend generoi muistiinpanoille id:t, muutetaan action creator _createNote_ muotoon
@@ -235,21 +278,21 @@ export const createNote = (data) => {
 
 Muistiinpanojen tärkeyden muuttaminen olisi mahdollista toteuttaa samalla periaatteella, eli tehdä palvelimelle ensin asynkroninen metodikutsu ja sen jälkeen dispatchata sopiva action.
 
-Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5) branchissa <i>part6-5</i>.
+Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3) branchissa <i>part6-3</i>.
 
 </div>
 
 <div class="tasks">
 
-### Tehtäviä
+### Tehtävät 6.13.-6.14.
 
-#### 6.16 anekdootit ja backend, step1
+#### 6.13 anekdootit ja backend, step1
 
 Hae sovelluksen käynnistyessä anekdootit json-serverillä toteutetusta backendistä.
 
 Backendin alustavan sisällön saat esim. [täältä](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json).
 
-#### 6.17 anekdootit ja backend, step2
+#### 6.14 anekdootit ja backend, step2
 
 Muuta uusien anekdoottien luomista siten, että anekdootit talletetaan backendiin.
 
@@ -262,11 +305,13 @@ Muuta uusien anekdoottien luomista siten, että anekdootit talletetaan backendii
 Lähestymistapamme on ok, mutta siinä mielessä ikävä, että palvelimen kanssa kommunikointi tapahtuu komponenttien funktioissa. Olisi parempi, jos kommunikointi voitaisiin abstrahoida komponenteilta siten, että niiden ei tarvitsisi kuin kutsua sopivaa <i>action creatoria</i>, esim. <i>App</i> alustaisi sovelluksen tilan seuraavasti:
 
 ```js
-const App = (props) => {
+const App = () => {
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    props.initializeNotes(notes)
-  },[])
+    dispatch(initializeNotes(notes)))  
+  },[dispatch]) 
+  
   // ...
 }
 ```
@@ -274,16 +319,21 @@ const App = (props) => {
 ja <i>NoteForm</i> loisi uuden muistiinpanon seuraavasti:
 
 ```js
-const NewNote = (props) => {
-  const addNote = (event) => {
+const NewNote = () => {
+  const dispatch = useDispatch()
+  
+  const addNote = async (event) => {
     event.preventDefault()
     const content = event.target.note.value
-    props.createNote(content)
     event.target.note.value = ''
+    dispatch(createNote(content))
   }
+
+  // ...
+}
 ```
 
-Molemmat komponentit käyttäisivät ainoastaan propsina saamaansa funktiota, välittämättä siitä että taustalla tapahtuu todellisuudessa palvelimen kanssa tapahtuvaa kommunikointia.
+Molemmat komponentit dispatchaisivat ainoastaan actionin, välittämättä siitä että taustalla tapahtuu todellisuudessa palvelimen kanssa tapahtuvaa kommunikointia.
 
 Asennetaan nyt [redux-thunk](https://github.com/gaearon/redux-thunk)-kirjasto, joka mahdollistaa <i>asynkronisten actionien</i> luomisen. Asennus tapahtuu komennolla:
 
@@ -295,7 +345,8 @@ redux-thunk-kirjasto on ns. <i>redux-middleware</i> joka täytyy ottaa käyttö�
 
 ```js
 import { createStore, combineReducers, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk';
+import thunk from 'redux-thunk'
+import { composeWithDevTools } from 'redux-devtools-extension'
 
 import noteReducer from './reducers/noteReducer'
 import filterReducer from './reducers/filterReducer'
@@ -305,7 +356,12 @@ const reducer = combineReducers({
   filter: filterReducer,
 })
 
-const store = createStore(reducer, applyMiddleware(thunk))
+const store = createStore(
+  reducer,
+  composeWithDevTools(
+    applyMiddleware(thunk)
+  )
+)
 
 export default store
 ```
@@ -315,15 +371,16 @@ Tiedosto <i>src/index.js</i> on muutoksen jälkeen seuraava
 ```js
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
+import { Provider } from 'react-redux' 
+import store from './store' // highlight-line
 import App from './App'
-import store from './store'
 
 ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-document.getElementById('root'))
+  document.getElementById('root')
+)
 ```
 
 redux-thunkin ansiosta on mahdollista määritellä <i>action creatoreja</i> siten, että ne palauttavat funktion, jonka parametrina on redux-storen <i>dispatch</i>-metodi. Tämän ansiosta on mahdollista tehdä asynkronisia action creatoreja, jotka ensin odottavat jonkin toimenpiteen valmistumista ja vasta sen jälkeen dispatchaavat varsinaisen actionin.
@@ -347,11 +404,14 @@ Sisemmässä funktiossaan, eli <i>asynkronisessa actionissa</i> operaatio hakee 
 Komponentti <i>App</i> voidaan nyt määritellä seuraavasti:
 
 ```js
-const App = (props) => {
+const App = () => {
+  const dispatch = useDispatch()
 
+  // highlight-start
   useEffect(() => {
-    props.initializeNotes()
-  },[])
+    dispatch(initializeNotes()) 
+  },[dispatch]) 
+  // highlight-end
 
   return (
     <div>
@@ -361,10 +421,6 @@ const App = (props) => {
     </div>
   )
 }
-
-export default connect(
-  null, { initializeNotes }
-)(App)
 ```
 
 Ratkaisu on elegantti, muistiinpanojen alustuslogiikka on eriytetty kokonaan React-komponenttien ulkopuolelle.
@@ -388,12 +444,14 @@ Periaate on jälleen sama, ensin suoritetaan asynkroninen operaatio, ja sen valm
 Komponentti <i>NewNote</i> muuttuu seuraavasti:
 
 ```js
-const NewNote = (props) => {
+const NewNote = () => {
+  const dispatch = useDispatch()
+  
   const addNote = async (event) => {
     event.preventDefault()
     const content = event.target.note.value
     event.target.note.value = ''
-    props.createNote(content)
+    dispatch(createNote(content)) //highlight-line
   }
 
   return (
@@ -403,105 +461,48 @@ const NewNote = (props) => {
     </form>
   )
 }
-
-export default connect(
-  null, { createNote }
-)(NewNote)
 ```
 
-Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-6) branchissa <i>part6-6</i>.
-
-### Redux DevTools
-
-Chromeen on asennettavissa [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd), jonka avulla Redux-storen tilaa ja sitä muuttavia actioneja on mahdollisuus seurata selaimen konsolista.
-
-Selaimen lisäosan lisäksi debugatessa tarvitaan kirjastoa [redux-devtools-extension](https://www.npmjs.com/package/redux-devtools-extension). Asennetaan se komennolla
-
-```js
-npm install --save redux-devtools-extension
-```
-
-Storen luomistapaa täytyy hieman muuttaa, että kirjasto saadaan käyttöön:
-
-```js
-// ...
-import { createStore, combineReducers, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
-import { composeWithDevTools } from 'redux-devtools-extension' // highlight-line
-
-import noteReducer from './reducers/noteReducer'
-import filterReducer from './reducers/filterReducer'
-
-const reducer = combineReducers({
-  notes: noteReducer,
-  filter: filterReducer
-})
-
-const store = createStore(
-  reducer,
-  // highlight-start
-  composeWithDevTools(
-    applyMiddleware(thunk)
-  )
-  // highlight-end
-)
-
-export default store
-```
-
-Kun nyt avaat konsolin, välilehti <i>redux</i> näyttää seuraavalta:
-
-![](../../images/6/11e.png)
-
-Konsolin avulla on myös mahdollista dispatchata actioneja storeen
-
-![](../../images/6/12e.png)
-
-### Redux ja komponenttien tila
-
-Kurssi on ehtinyt pitkälle, ja olemme vihdoin päässeet siihen pisteeseen missä käytämme Reactia "oikein", eli React keskittyy pelkästään näkymien muodostamiseen ja sovelluksen tila sekä sovelluslogiikka on eristetty kokonaan React-komponenttien ulkopuolelle, Reduxiin ja action reducereihin.
-
-Entä _useState_-hookilla saatava komponenttien oma tila, onko sillä roolia jos sovellus käyttää Reduxia tai muuta komponenttien ulkoista tilanhallintaratkaisua? Jos sovelluksessa on monimutkaisempia lomakkeita, saattaa niiden lokaali tila olla edelleen järkevä toteuttaa funktiolla _useState_ saatavan tilan avulla. Lomakkeidenkin tilan voi toki tallettaa myös reduxiin, mutta jos lomakkeen tila on oleellinen ainoastaan lomakkeen täyttövaiheessa (esim. syötteen muodon validoinnin kannalta), voi olla viisaampi jättää tilan hallinta suoraan lomakkeesta huolehtivan komponentin vastuulle.
+Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part4) branchissa <i>part6-4</i>.
 
 </div>
 
 <div class="tasks">
 
-### tehtäviä
+### Tehtävät 6.15.-6.18.
 
-#### 6.18 anekdootit ja backend, step4
+#### 6.15 anekdootit ja backend, step3
 
 Muuta redux-storen alustus tapahtumaan <i>redux-thunk</i>-kirjaston avulla toteutettuun asynkroniseen actioniin.
 
-#### 6.19 anekdootit ja backend, step5
+#### 6.16 anekdootit ja backend, step4
 
 Muuta myös uuden anekdootin luominen tapahtumaan <i>redux-thunk</i>-kirjaston avulla toteutettuihin asynkronisiin actioneihin.
 
 
-#### 6.20 anekdootit ja backend, step6
+#### 6.17 anekdootit ja backend, step5
 
 Äänestäminen ei vielä talleta muutoksia backendiin. Korjaa tilanne <i>redux-thunk</i>-kirjastoa hyödyntäen.
 
-#### 6.21 anekdootit ja backend, step7
+#### 6.18 anekdootit ja backend, step6
 
 Notifikaatioiden tekeminen on nyt hieman ikävää, sillä se edellyttää kahden actionin tekemistä ja _setTimeout_-funktion käyttöä:
 
 ```js
-props.setNotification(`you voted '${anecdote.content}'`)
+dispatch(setNotification(`new anecdote '${content}'`))
 setTimeout(() => {
-  props.clearNotification()
+  dispatch(clearNotification())
 }, 5000)
 ```
 
 Tee asynkroninen action creator, joka mahdollistaa notifikaation antamisen seuraavasti:
 
 ```js
-props.setNotification(`you voted '${anecdote.content}'`, 10)
+dispatch(setNotification(`you voted '${anecdote.content}'`, 10))
 ```
 
 eli ensimmäisenä parametrina on renderöitävä teksti ja toisena notifikaation näyttöaika sekunneissa.
 
 Ota paranneltu notifikaatiotapa käyttöön sovelluksessasi.
 
-Tämä oli osan viimeinen tehtävä ja on aika pushata koodi githubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://github.com/fullstack-hy2020).
 </div>

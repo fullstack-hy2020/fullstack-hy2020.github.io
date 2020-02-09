@@ -663,6 +663,7 @@ const App = () => {
   const addNote = (event) => {
     event.preventDefault()
     const content = event.target.note.value
+    event.target.note.value = ''
     store.dispatch({
       type: 'NEW_NOTE',
       data: {
@@ -671,7 +672,6 @@ const App = () => {
         id: generateId()
       }
     })
-    event.target.note.value = ''
   }
 
   const toggleImportance = (id) => {
@@ -1151,12 +1151,12 @@ import React from 'react'
 import AnecdoteForm from './components/AnecdoteForm'
 import AnecdoteList from './components/AnecdoteList'
 
-const App = (props) => {
+const App = () => {
   return (
     <div>
       <h2>Anecdotes</h2>
-      <AnecdoteForm store={props.store} />
-      <AnecdoteList store={props.store} />
+      <AnecdoteForm />
+      <AnecdoteList />
     </div>
   )
 }

@@ -5,483 +5,671 @@ letter: d
 lang: fi
 ---
 
+
 <div class="content">
 
-React tarjoaa yhteensä 10 erilaista [valmista hookia](https://reactjs.org/docs/hooks-reference.html), näistä ylivoimaisesti eniten käytetyt ovat meillekin jo tutut [useState](https://reactjs.org/docs/hooks-reference.html#usestate) ja [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect). 
+### Connect
 
-### Custom vitun hookit
+Reduxin käytön ansiosta sovelluksen rakenne alkaa jo olla mukavan modulaarinen. Pystymme kuitenkin vielä parempaan.
 
-React tarjoaa mahdollisuuden myös omien eli [custom](https://reactjs.org/docs/hooks-custom.html)-hookien määrittelyyn. Customhookien pääasiallinen tarkoitus on Reactin dokumentaation mukaan mahdollistaa komponenttien logiikan uusiokäyttö.
-
-> <i>Building your own Hooks lets you extract component logic into reusable functions.</i>
-
-Custom hookit ovat tavallisia Javascript-funktioita, jotka voivat kutsua mitä tahansa muita hookeja kunhan vain toimivat [hookien sääntöjen](osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot) puitteissa. Custom hookin nimen täytyy alkaa sanalla _use_.
-
-Teimme [osassa 1](/osa1/komponentin_tila_ja_tapahtumankasittely#tapahtumankasittely) laskurin, jonka arvoa voi kasvattaa, vähentää ja nollata. Sovelluksen koodi on seuraava
-
-```js  
-import React, { useState } from 'react'
-const App = (props) => {
-  const [counter, setCounter] = useState(0)
-
-  return (
-    <div>
-      <div>{counter}</div>
-      <button onClick={() => setCounter(counter + 1)}>
-        plus
-      </button>
-      <button onClick={() => setCounter(counter - 1)}>
-        minus
-      </button>      
-      <button onClick={() => setCounter(0)}>
-        zero
-      </button>
-    </div>
-  )
-}
-```
-
-Eriytetään laskurilogiikka custom hookiksi. Hookin koodi on seuraavassa
-
-```js
-const useCounter = () => {
-  const [value, setValue] = useState(0)
-
-  const increase = () => {
-    setValue(value + 1)
-  }
-
-  const decrease = () => {
-    setValue(value - 1)
-  }
-
-  const zero = () => {
-    setValue(0)
-  }
-
-  return {
-    value, 
-    increase,
-    decrease,
-    zero
-  }
-}
-```
-
-Hook siis käyttää sisäisesti _useState_-hookia luomaan itselleen tilan. Hook palauttaa olion, joka sisältää kenttinään hookin tilan arvon sekä funktiot hookin tallettaman arvon muuttamiseen.
-
-React-komponentti käyttää hookia seuraavaan tapaan:
+Eräs tämänhetkisen ratkaisun ikävistä puolista on se, että Redux-store täytyy välittää propseina kaikille sitä tarvitseville komponenteille. <i>App</i> ei itse tarvitse ollenkaan Reduxia, mutta joutuu silti välittämään sen eteenpäin lapsikomponenteille: 
 
 ```js
 const App = (props) => {
-  const counter = useCounter()
+  const store = props.store
 
   return (
     <div>
-      <div>{counter.value}</div>
-      <button onClick={counter.increase}>
-        plus
-      </button>
-      <button onClick={counter.decrease}>
-        minus
-      </button>      
-      <button onClick={counter.zero}>
-        zero
-      </button>
+      <NewNote store={store}/>  
+      <VisibilityFilter store={store} />    
+      <Notes store={store} />
     </div>
   )
 }
 ```
 
-Näin komponentin _App_ tila ja sen manipulointi on siirretty kokonaisuudessaan hookin _useCounter_ vastuulle. 
+Otetaan nyt käyttöön
+[React Redux](https://github.com/reactjs/react-redux) -kirjaston määrittelemä funktio [connect](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options), joka on tämän hetken defacto-ratkaisu sille, miten Redux-store saadaan välitettyä React-componenteille.
 
-Samaa hookia voitaisiin <i>uusiokäyttää</i> sovelluksessa joka laski vasemman ja oikean napin painalluksia:
+Connect voi olla aluksi haastava sisäistää, mutta hieman vaivaa kannattaa ehdottomasti nähdä. Tutustutaan nyt connectin käyttöön. 
 
 ```js
-
-const App = () => {
-  const left = useCounter()
-  const right = useCounter()
-
-  return (
-    <div>
-      {left.value}
-      <button onClick={left.increase}>
-        left
-      </button>
-      <button onClick={right.increase}>
-        right
-      </button>
-      {right.value}
-    </div>
-  )
-}
+npm install --save react-redux
 ```
 
-Nyt sovellus luo <i>kaksi</i> erillistä laskuria, toisen käsittelyfunktioineen se tallentaa muuttujaan _left_ ja toisen muuttujaan _right_. 
+Edellytyksenä kirjaston tarjoaman _connect_-funktion käytölle on se, että sovellus on määritelty React redux -kirjaston tarjoaman [Provider](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store)-komponentin lapsena ja että sovelluksen käyttämä store on annettu Provider-komponentin attribuutiksi <i>store</i>. 
 
-Lomakkeiden käsittely on Reactissa jokseenkin vaivalloista. Seuraavassa sovellus, joka pyytää lomakkeella käyttäjän nimen, syntymäajan ja pituuden:
+Eli tiedosto <i>index.js</i> tulee muuttaa seuraavaan muotoon
 
 ```js
-const App = () => {
-  const [name, setName] = useState('')
-  const [born, setBorn] = useState('')
-  const [height, setHeight] = useState('')
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { createStore, combineReducers } from 'redux'
+import { Provider } from 'react-redux' // highlight-line
+import App from './App'
+import noteReducer from './reducers/noteReducer'
+import filterReducer from './reducers/filterReducer'
 
-  return (
-    <div>
-      <form>
-        name: 
-        <input
-          type='text'
-          value={name}
-          onChange={(event) => setName(event.target.value)} 
-        /> 
-        <br/> 
-        birthdate:
-        <input
-          type='date'
-          value={born}
-          onChange={(event) => setBorn(event.target.value)}
-        />
-        <br /> 
-        height:
-        <input
-          type='number'
-          value={height}
-          onChange={(event) => setheight(event.target.value)}
-        />
-      </form>
-      <div>
-        {name} {born} {height} 
-      </div>
-    </div>
-  )
-}
+const reducer = combineReducers({
+  notes: noteReducer,
+  filter: filterReducer
+})
+
+const store = createStore(reducer)
+
+ReactDOM.render(
+  // highlight-start
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  // highlight-end
+  document.getElementById('root')
+)
 ```
 
-Jokaista lomakkeen kenttää varten on oma tilansa. Jotta tila pysyy synkroonissa lomakkeelle syötettyjen tietojen kanssa, on jokaiselle <i>input</i>-elementille rekisteröity sopiva <i>onChange</i>-käsittelijä.
+Tutkitaan ensin komponenttia <i>Notes</i>. Funktiota _connect_ käyttämällä "normaaleista" React-komponenteista saadaan muodostettua komponentteja, joiden <i>propseihin</i> on "mäpätty" eli yhdistetty haluttuja osia storen määrittelemästä tilasta.
 
-Määritellään custom hook _useField_, joka yksinkertaistaa lomakkeen tilan hallintaa:
+Muodostetaan ensin komponentista <i>Notes</i> connectin avulla <i>yhdistetty komponentti</i>:
 
 ```js
-const useField = (type) => {
-  const [value, setValue] = useState('')
+import React from 'react'
+import { connect } from 'react-redux' // highlight-line
+import Note from './Note'
+import { toggleImportanceOf } from '../reducers/noteReducer'
 
-  const onChange = (event) => {
-    setValue(event.target.value)
-  }
+const Notes = ({ store }) => {
+  // ...
+}
 
+const ConnectedNotes = connect()(Notes) // highlight-line
+export default ConnectedNotes           // highlight-line
+```
+
+Moduuli eksporttaa nyt alkuperäisen komponentin sijaan <i>yhdistetyn komponentin</i>, joka toimii toistaiseksi täsmälleen alkuperäisen komponentin kaltaisesti.
+
+Komponentti tarvitsee storesta sekä muistiinpanojen listan, että filtterin arvon. Funktion _connect_ ensimmäisenä parametrina voidaan määritellä funktio [mapStateToProps](https://github.com/reactjs/react-redux/blob/master/docs/api.md#arguments), joka liittää joitakin storen tilan perusteella määriteltyjä asioita connectilla muodostetun <i>yhdistetyn komponentin</i> propseiksi.
+
+Jos määritellään:
+
+```js
+const Notes = (props) => {
+  // ...
+}
+
+const mapStateToProps = (state) => {
   return {
-    type,
-    value,
-    onChange
+    notes: state.notes,
+    filter: state.filter,
   }
 }
+
+const ConnectedNotes = connect(mapStateToProps)(Notes)
+
+export default ConnectedNotes
 ```
 
-Hook-funktio saa parametrina kentän tyypin. Funktio palauttaa kaikki <i>input</i>-kentän tarvitsemat attribuutit eli tyypin, kentän arvon sekä onChange-tapahtumankäsittelijän.
+on komponentin <i>Notes</i> sisällä mahdollista viitata storen tilaan, esim. muistiinpanoihin suoraan propsin kautta <i>props.notes</i> sen sijaan, että käytettäisiin suoraan propseina saatua storea muodossa <i>props.store.getState().notes</i>. Vastaavasti <i>props.filter</i> viittaa storessa olevaan filter-kentän tilaan.
 
-Hookia voidaan käyttää seuraavalla tavalla:
+Komponentti muuttuu seuraavasti
 
 ```js
-const App = () => {
-  const name = useField('text')
-  // ...
+const Notes = (props) => {  // highlight-line
+  const notesToShow = () => {
+    if ( props.filter === 'ALL' ) { // highlight-line
+      return props.notes // highlight-line
+    }
 
-  return (
-    <div>
-      <form>
-        <input
-          type={name.type}
-          value={name.value}
-          onChange={name.onChange} 
-        /> 
-        // ...
-      </form>
-    </div>
+    return props.filter === 'IMPORTANT' // highlight-line
+      ? props.notes.filter(note => note.important) // highlight-line
+      : props.notes.filter(note => !note.important) // highlight-line
+  }
+
+  return(
+    <ul>
+      {notesToShow().map(note =>
+        <Note
+          key={note.id}
+          note={note}
+          onClick={() =>
+            props.store.dispatch(toggleImportanceOf(note.id))
+          }
+        />
+      )}
+    </ul>
   )
 }
 ```
 
-### Spread-attribuutit
+Connect-komennolla ja <i>mapStateToProps</i>-määrittelyllä aikaan saatua tilannetta voidaan visualisoida seuraavasti:
 
-Pääsemme itseasiassa helpommalla. Koska oliolla _name_ on nyt täsmälleen ne kentät, mitä <i>input</i>-komponentti odottaa saavansa propsina, voimme välittää propsit hyödyntäen [spread-syntaksia](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes), seuraavasti:
+![](../../images/6/24c.png)
+
+eli komponentin <i>Notes</i> sisältä on propsien <i>props.notes</i> ja <i>props.filter</i> kautta "suora pääsy" tarkastelemaan Redux storen sisällä olevaa tilaa.
+
+<i>Notes</i> viittaa edelleen propsien avulla saamaansa funktioon _dispatch_, jota se käyttää muuttamaan Reduxin tilaa:
 
 ```js
-<input {...name} /> 
+<Note
+  key={note.id}
+  note={note}
+  onClick={() =>
+    props.store.dispatch(toggleImportanceOf(note.id)) // highlight-line
+  }
+/>
 ```
 
-Eli kuten Reactin dokumentaation [esimerkki](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) sanoo, seuraavat kaksi tapaa välittää propseja komponentille tuottavat saman lopputuloksen:
 
+Propsia <i>store</i> ei kuitenkaan ole enää olemassa, joten tilan muutos ei tällä hetkellä toimi.
+
+Connect-funktion toisena parametrina voidaan määritellä [mapDispatchToProps](https://github.com/reactjs/react-redux/blob/master/docs/api.md#arguments) eli joukko <i>action creator</i> -funktioita, jotka välitetään yhdistetylle komponentille propseina. Laajennetaan connectausta seuraavasti
 
 ```js
-<Greeting firstName='Arto' lastName='Hellas' />
-
-const person = {
-  firstName: 'Arto',
-  lastName: 'Hellas'
+const mapStateToProps = (state) => {
+  return {
+    notes: state.notes,
+    filter: state.filter,
+  }
 }
 
-<Greeting {...person} />
+// highlight-start
+const mapDispatchToProps = {
+  toggleImportanceOf,
+}
+// highlight-end
+
+const ConnectedNotes = connect(
+  mapStateToProps,
+  mapDispatchToProps // highlight-line
+)(Notes)
 ```
 
-Sovellus pelkistyy muotoon
+Nyt komponentti voi dispatchata suoraan action creatorin _toggleImportanceOf_ määrittelemän actionin kutsumalla propsien kautta saamaansa funktiota koodissa:
 
 ```js
-const App = () => {
-  const name = useField('text')
-  const born = useField('date')
-  const height = useField('number')
+<Note
+  key={note.id}
+  note={note}
+  onClick={() => props.toggleImportanceOf(note.id)} // highlight-line
+/>
+```
+
+Eli se sijaan että kutsuttaisiin
+
+```js
+props.store.dispatch(toggleImportanceOf(note.id))
+```
+
+_connect_-metodia käytettäessä actionin dispatchaamiseen riittää
+
+```js
+props.toggleImportanceOf(note.id)
+```
+
+Storen _dispatch_-funktiota ei enää tarvitse kutsua, sillä _connect_ on muokannut action creatorin _toggleImportanceOf_ sellaiseen muotoon, joka sisältää dispatchauksen.
+
+_mapDispatchToProps_ lienee aluksi hieman haastava ymmärtää, etenkin sen kohta käsiteltävä [vaihtoehtoinen käyttötapa](/osa6/monta_reduseria_connect#map-dispatch-to-propsin-vaihtoehtoinen-kayttotapa).
+
+Connectin aikaansaamaa tilannetta voidaan havainnollistaa seuraavasti:
+
+![](../../images/6/25b.png)
+
+eli sen lisäksi että <i>Notes</i> pääsee storen tilaan propsien <i>props.notes</i> ja <i>props.filter</i> kautta, se viittaa <i>props.toggleImportanceOf</i>:lla funktioon, jonka avulla storeen saadaan dispatchattua <i>TOGGLE\_IMPORTANCE</i>-tyyppisiä actioneja.
+
+Connectia käyttämään refaktoroitu komponentti <i>Notes</i> on kokonaisuudessaan seuraava:
+
+```js
+import React from 'react'
+import { connect } from 'react-redux'
+import Note from './Note'
+import { toggleImportanceOf } from '../reducers/noteReducer'
+
+const Notes = (props) => {
+  const notesToShow = () => {
+    if ( props.filter === 'ALL' ) {
+      return props.notes
+    }
+
+    return props.filter === 'IMPORTANT'
+      ? props.notes.filter(note => note.important)
+      : props.notes.filter(note => !note.important)
+  }
+
+  return(
+    <ul>
+      {notesToShow().map(note =>
+        <Note
+          key={note.id}
+          note={note}
+          onClick={() => props.toggleImportanceOf(note.id)}
+        />
+      )}
+    </ul>
+  )
+}
+
+const mapStateToProps = (state) => {
+  return {
+    notes: state.notes,
+    filter: state.filter,
+  }
+}
+
+const mapDispatchToProps = {
+  toggleImportanceOf,
+}
+
+// eksportoidaan suoraan connectin palauttama komponentti
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Notes)
+```
+
+Otetaan _connect_ käyttöön myös uuden muistiinpanon luomisessa:
+
+```js
+import React from 'react'
+import { connect } from 'react-redux'
+import { createNote } from '../reducers/noteReducer'
+
+const NewNote = (props) => {
+  const addNote = (event) => {
+    event.preventDefault()
+    const content = event.target.note.value
+    event.target.note.value = ''
+    props.createNote(content)
+  }
 
   return (
-    <div>
-      <form>
-        name: 
-        <input  {...name} /> 
-        <br/> 
-        birthdate:
-        <input {...born} />
-        <br /> 
-        height:
-        <input {...height} />
-      </form>
-      <div>
-        {name.value} {born.value} {height.value}
-      </div>
-    </div>
+    <form onSubmit={addNote}>
+      <input name="note" />
+      <button type="submit">add</button>
+    </form>
+  )
+}
+
+export default connect(
+  null,
+  { createNote }
+)(NewNote)
+```
+
+Koska komponentti ei tarvitse storen tilasta mitään, on funktion _connect_ ensimmäinen parametri <i>null</i>.
+
+Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstackopen-2019/redux-notes/tree/part6-3) branchissa <i>part6-3</i>.
+
+### Huomio propsina välitettyyn action creatoriin viittaamisesta
+
+Tarkastellaan vielä erästä mielenkiintoista seikkaa komponentista <i>NewNote</i>:
+
+```js
+import React from 'react'
+import { connect } from 'react-redux'
+import { createNote } from '../reducers/noteReducer' // highlight-line
+
+const NewNote = (props) => {
+
+  const addNote = (event) => {
+    event.preventDefault()
+    props.createNote(event.target.note.value) // highlight-line
+    event.target.note.value = ''
+  }
+  // ...
+}
+
+export default connect(
+  null,
+  { createNote }
+)(NewNote)
+```
+
+Aloittelevalle connectin käyttäjälle aiheuttaa joskus ihmetystä se, että action creatorista <i>createNote</i> on komponentin sisällä käytettävissä <i>kaksi eri versiota</i>.
+
+Funktioon tulee viitata propsien kautta, eli <i>props.createNote</i>, tällöin kyseessä on _connectin_ muotoilema, <i>dispatchauksen sisältävä</i> versio funktiosta.
+
+Moduulissa olevan import-lauseen
+
+```js
+import { createNote } from './../reducers/noteReducer'
+```
+
+ansiosta komponentin sisältä on mahdollista viitata funktioon myös suoraan, eli _createNote_. Näin ei kuitenkaan tule tehdä, sillä silloin on kyseessä alkuperäinen action creator joka <i>ei sisällä dispatchausta</i>.
+
+Jos tulostamme funktiot koodin sisällä (emme olekaan vielä käyttäneet kurssilla tätä erittäin hyödyllistä debug-kikkaa)
+
+```js
+const NewNote = (props) => {
+  console.log(createNote)
+  console.log(props.createNote)
+
+  const addNote = (event) => {
+    event.preventDefault()
+    props.createNote(event.target.note.value)
+    event.target.note.value = ''
+  }
+
+  // ...
+}
+```
+
+näemme eron:
+
+![](../../images/6/10.png)
+
+Ensimmäinen funktioista siis on normaali <i>action creator</i>, toinen taas connectin muotoilema funktio, joka sisältää storen metodin dispatch-kutsun.
+
+Connect on erittäin kätevä työkalu, mutta abstraktiutensa takia se voi aluksi tuntua hankalalta.
+
+### mapDispatchToPropsin vaihtoehtoinen käyttötapa
+
+Määrittelimme siis connectin komponentille <i>NewNote</i> antamat actioneja dispatchaavan funktion seuraavasti:
+
+```js
+const NewNote = () => {
+  // ...
+}
+
+export default connect(
+  null,
+  { createNote }
+)(NewNote)
+```
+
+Eli määrittelyn ansiosta komponentti dispatchaa uuden muistiinpanon lisäyksen suorittavan actionin suoraan komennolla <code>props.createNote('uusi muistiinpano')</code>.
+
+Parametrin <i>mapDispatchToProps</i> kenttinä ei voi antaa mitä tahansa funktiota, vaan funktion on oltava <i>action creator</i>, eli Redux-actionin palauttava funktio.
+
+Kannattaa huomata, että parametri <i>mapDispatchToProps</i> on nyt <i>olio</i>, sillä määrittely
+
+```js
+{
+  createNote
+}
+```
+
+on lyhempi tapa määritellä olioliteraali
+
+```js
+{
+  createNote: createNote
+}
+```
+
+eli olio, jonka ainoan kentän <i>createNote</i> arvona on funktio <i>createNote</i>.
+
+Voimme määritellä saman myös "pitemmän kaavan" kautta, antamalla _connectin_ toisena parametrina seuraavanlaisen <i>funktion</i>:
+
+```js
+const NewNote = (props) => {
+  // ...
+}
+
+// highlight-start
+const mapDispatchToProps = dispatch => {
+  return {
+    createNote: value => {
+      dispatch(createNote(value))
+    },
+  }
+}
+// highlight-end
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(NewNote)
+```
+
+Tässä vaihtoehtoisessa tavassa <i>mapDispatchToProps</i> on funktio, jota _connect_ kutsuu antaen sille parametriksi storen _dispatch_-funktion. Funktion paluuarvona on olio, joka määrittelee joukon funktioita, jotka annetaan connectoitavalle komponentille propsiksi. Esimerkkimme määrittelee propsin <i>createNote</i> olevan funktion
+
+```js
+value => {
+  dispatch(createNote(value))
+}
+```
+
+eli action creatorilla luodun actionin dispatchaus.
+
+Komponentti siis viittaa funktioon propsin <i>props.createNote</i> kautta:
+
+```js
+const NewNote = (props) => {
+
+  const addNote = (event) => {
+    event.preventDefault()
+    props.createNote(event.target.note.value)
+    event.target.note.value = ''
+  }
+
+  return (
+    <form onSubmit={addNote}>
+      <input name="note" />
+      <button type="submit">add</button>
+    </form>
   )
 }
 ```
 
-Lomakkeiden käsittely yksinkertaistuu huomattavasti kun ikävät tilan synkronoimiseen liittyvät detaljit on kapseloitu custom hookin vastuulle.
+Konsepti on hiukan monimutkainen ja sen selittäminen sanallisesti on haastavaa. Useimmissa tapauksissa onneksi riittää <i>mapDispatchToProps</i>:in yksinkertaisempi muoto. On kuitenkin tilanteita, joissa monimutkaisempi muoto on tarpeen, esim. jos määriteltäessä propseiksi mäpättyjä <i>dispatchattavia actioneja</i> on [viitattava komponentin omiin propseihin](https://github.com/gaearon/redux-devtools/issues/250#issuecomment-186429931).
 
-Custom hookit eivät selvästikään ole pelkkä uusiokäytön väline, ne mahdollistavat myös entistä paremman tavan jakaa koodia pienempiin, modulaarisiin osiin.
+Egghead.io:sta löytyy Reduxin kehittäjän Dan Abramovin loistava tutoriaali [Getting started with Redux](https://egghead.io/courses/getting-started-with-redux), jonka katsomista voin suositella kaikille. Neljässä viimeisessä videossa käsitellään _connect_-metodia ja nimenomaan sen "hankalampaa" käyttötapaa.
 
-### Hookien säännöt revisited
+### Presentational/Container revisited
 
-Kuten [osassa 1](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot)  mainittiin, on hookeja käytettävä tiettyjä [rajoituksia](https://reactjs.org/docs/hooks-rules.html) noudattaen. Seuraavassa vielä hookien käytön säännöt suoraan Reactin dokumentaatiosta kopioituna:
-
-**Don’t call Hooks inside loops, conditions, or nested functions.** Instead, always use Hooks at the top level of your React function. 
-
-**Don’t call Hooks from regular JavaScript functions.** Instead, you can:
-
-- Call Hooks from React function components.
-- Call Hooks from custom Hooks
-
-On olemassa [ESlint](https://www.npmjs.com/package/eslint-plugin-react-hooks)-sääntö, jonka avulla voidaa varmistaa, että sovellus käyttää hookeja oikein. 
-
-Kun sääntö [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks) on asennettu, se saadaan käyttöön muuttamalla tiedostoa _.eslintrc.js_ seuraavasti:
+Komponentti <i>Notes</i> käyttää apumetodia <i>notesToShow</i>, joka päättelee filtterin perusteella näytettävien muistiinpanojen listan:
 
 ```js
-module.exports = {
-  // ...
-  "plugins": [
-    // ...
-    "react-hooks" // highlight-line
-  ],
-  "rules": {
-    "react-hooks/rules-of-hooks": "error", // highlight-line
-    // ...
+const Notes = (props) => {
+  const notesToShow = () => {
+    if ( props.filter === 'ALL' ) {
+      return props.notes
+    }
+
+    return props.filter === 'IMPORTANT'
+      ? props.notes.filter(note => note.important)
+      : props.notes.filter(note => !note.important)
   }
-}; 
+
+  // ...
+}
 ```
 
-Lint valittaa nyt jos hookeja käytetään kielletyllä tavalla:
+Komponentin on tarpeetonta sisältää kaikkea tätä logiikkaa. Eriytetään se komponentin ulkopuolelle _connect_-metodin parametrin <i>mapStateToProps</i> yhteyteen:
 
-![](../../images/5/24e.png)
+```js
+import React from 'react'
+import { connect } from 'react-redux'
+import Note from './Note'
+import { toggleImportanceOf } from '../reducers/noteReducer'
 
-### Lisää hookeista
+const Notes = (props) => {
+  return(
+    <ul>
+      {props.visibleNotes.map(note => // highlight-line
+        <Note
+          key={note.id}
+          note={note}
+          onClick={() => props.toggleImportanceOf(note.id)}
+        />
+      )}
+    </ul>
+  )
+}
 
-Internetistä alkaa löytyä yhä enenevissä määrin hyödyllistä hookeihin liittyvä materiaalia, esim. seuraavia kannattaa vilkaista
+const notesToShow = ({ notes, filter }) => { // highlight-line
+  if (filter === 'ALL') {
+    return notes
+  }
+  return filter === 'IMPORTANT'
+    ? notes.filter(note => note.important)
+    : notes.filter(note => !note.important)
+}
 
-* [Awesome React Hooks Resouces](https://github.com/rehooks/awesome-react-hooks)
-* [Why Do React Hooks Rely on Call Order?](https://overreacted.io/why-do-hooks-rely-on-call-order/)
-* [Easy to understand React Hook recipes by Gabe Ragland](https://usehooks.com/)
+const mapStateToProps = (state) => {
+  return {
+    visibleNotes: notesToShow(state), // highlight-line
+  }
+}
+
+
+const mapDispatchToProps = {
+  toggleImportanceOf,
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Notes)
+
+```
+
+<i>mapStateToProps</i> ei siis tällä kertaa mäppää propsiksi suoraan storessa olevaa asiaa, vaan storen tilasta funktion _notesToShow_ avulla muodostetun sopivasti filtteröidyn datan. Uusi versio funktiosta _notesToShow_ siis saa parametriksi koko tilan ja <i>valitsee</i> siitä sopivan osajoukon välitettäväksi komponentille. Tämänkaltaisia funktioita kutsutaan [selektoreiksi](https://medium.com/@pearlmcphee/selectors-react-redux-reselect-9ab984688dd4).
+
+Uudistettu <i>Notes</i> keskittyy lähes ainoastaan muistiinpanojen renderöimiseen, se on hyvin lähellä sitä minkä sanotaan olevan [presentational](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)-komponentti, joita Dan Abramovin [sanoin](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) kuvaillaan seuraavasti:
+
+- Are concerned with how things look.
+- May contain both presentational and container components inside, and usually have some DOM markup and styles of their own.
+- Often allow containment via props.children.
+- Have no dependencies on the rest of the app, such Redux actions or stores.
+- Don’t specify how the data is loaded or mutated.
+- Receive data and callbacks exclusively via props.
+- Rarely have their own state (when they do, it’s UI state rather than data).
+- Are written as functional components unless they need state, lifecycle hooks, or performance optimizations.
+
+Connect-metodin avulla muodostettu _yhdistetty komponentti_
+
+```js
+const notesToShow = ({notes, filter}) => {
+  // ...
+}
+
+const mapStateToProps = (state) => {
+  return {
+    visibleNotes: notesToShow(state),
+  }
+}
+
+const mapDispatchToProps = {
+  toggleImportanceOf,
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Notes)
+```
+
+taas on selkeästi <i>container</i>-komponentti, joita Dan Abramov [luonnehtii](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) seuraavasti:
+
+- Are concerned with how things work.
+- May contain both presentational and container components inside but usually don’t have any DOM markup of their own except for some wrapping divs, and never have any styles.
+- Provide the data and behavior to presentational or other container components.
+- Call Redux actions and provide these as callbacks to the presentational components.
+- Are often stateful, as they tend to serve as data sources.
+- Are usually generated using higher order components such as connect from React Redux, rather than written by hand.
+
+Komponenttien presentational vs. container -jaottelu on eräs hyväksi havaittu tapa strukturoida React-sovelluksia. Jako voi olla toimiva tai sitten ei, kaikki riippuu kontekstista.
+
+Abramov mainitsee jaon [eduiksi](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) muunmuassa seuraavat
+
+- Better separation of concerns. You understand your app and your UI better by writing components this way.
+- Better reusability. You can use the same presentational component with completely different state sources, and turn those into separate container components that can be further reused.
+- Presentational components are essentially your app’s “palette”. You can put them on a single page and let the designer tweak all their variations without touching the app’s logic. You can run screenshot regression tests on that page.
+
+Abramov mainitsee termin [high order component](https://reactjs.org/docs/higher-order-components.html). Esim. <i>Notes</i> on normaali komponentti, React-reduxin _connect_ metodi taas on <i>high order komponentti</i>, eli käytännössä funktio, joka haluaa parametrikseen komponentin muuttuakseen "normaaliksi" komponentiksi.
+
+High order componentit eli HOC:t ovatkin yleinen tapa määritellä geneeristä toiminnallisuutta, joka sitten erikoistetaan esim. renderöitymisen määrittelyn suhteen parametrina annettavan komponentin avulla. Kyseessä on funktionaalisen ohjelmoinnin etäisesti olio-ohjelmoinnin perintää muistuttava käsite.
+
+HOC:it ovat oikeastaan käsitteen [High Order Function](https://en.wikipedia.org/wiki/Higher-order_function) (HOF) yleistys. HOF:eja ovat sellaiset funkiot, jotka joko ottavat parametrikseen funktioita tai palauttavat funkioita. Olemme oikeastaan käyttäneet HOF:eja läpi kurssin, esim. lähes kaikki taulukoiden käsittelyyn tarkoitetut metodit, kuten _map, filter ja find_ ovat HOF:eja.
+
+Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstackopen-2019/redux-notes/tree/part6-4) branchissa <i>part6-4</i>.
+
+Huomaa muutokset kompnenteissa <i>VisibilityFilter</i> ja <i>App</i>
+
+### Redux ja komponenttien tila
+
+Kurssi on ehtinyt pitkälle, ja olemme vihdoin päässeet siihen pisteeseen missä käytämme Reactia "oikein", eli React keskittyy pelkästään näkymien muodostamiseen ja sovelluksen tila sekä sovelluslogiikka on eristetty kokonaan React-komponenttien ulkopuolelle, Reduxiin ja action reducereihin.
+
+Entä _useState_-hookilla saatava komponenttien oma tila, onko sillä roolia jos sovellus käyttää Reduxia tai muuta komponenttien ulkoista tilanhallintaratkaisua? Jos sovelluksessa on monimutkaisempia lomakkeita, saattaa niiden lokaali tila olla edelleen järkevä toteuttaa funktiolla _useState_ saatavan tilan avulla. Lomakkeidenkin tilan voi toki tallettaa myös reduxiin, mutta jos lomakkeen tila on oleellinen ainoastaan lomakkeen täyttövaiheessa (esim. syötteen muodon validoinnin kannalta), voi olla viisaampi jättää tilan hallinta suoraan lomakkeesta huolehtivan komponentin vastuulle.
 
 </div>
 
 <div class="tasks">
 
-### Tehtäviä
+#### 6.13 paremmat anekdootit, step11
 
-#### 5.18: blogilista ja hookit step1
+Sovelluksessa välitetään <i>redux store</i> tällä hetkellä kaikille komponenteille propseina.
 
-Yksinkertaista sovelluksesi kirjautumislomakkeen käyttöä äsken määritellyn _useField_ custom hookin avulla.
+Ota käyttöön kirjasto [react-redux](https://github.com/reactjs/react-redux) ja muuta komponenttia <i>AnecdoteList</i> niin, että se pääsee käsiksi tilaan _connect_-funktion välityksellä. 
 
-Luonteva paikka tallentaa hook on tiedosto <i>/src/hooks/index.js</i>. 
+Anekdoottien äänestyksen ja uusien anekdoottien luomisen **ei tarvitse vielä toimia** tämän tehtävän jälkeen.
 
-Jos käytät normaalisti käyttämämme default exportin sijaan [nimettyä exportia](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description)
+Tehtävässä tarvitsemasi <i>mapStateToProps</i> on suunnilleen seuraavanlainen
 
 ```js
-import { useState } from 'react'
-
-export const useField = (type) => { // highlight-line
-  const [value, setValue] = useState('')
-
-  const onChange = (event) => {
-    setValue(event.target.value)
-  }
-
+const mapStateToProps = (state) => {
+  // joskus on hyödyllistä tulostaa mapStateToProps:ista...
+  console.log(state)
   return {
-    type,
-    value,
-    onChange
+    anecdotes: state.anecdotes,
+    filter: state.filter
   }
 }
-
-// moduulissa voi olla monta nimettyä eksportia
-export const useAnotherHook = () => { // highlight-line
-  // ...
-}
 ```
 
-[importtaus](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) tapahtuu seuraavasti
+#### 6.14 paremmat anekdootit, step12
+
+Tee sama komponentille  <i>Filter</i> ja <i>AnecdoteForm</i>.
+
+#### 6.15 paremmat anekdootit, step13
+
+Muuta komponenttia <i>AnecdoteList</i> siten, että anekdoottien äänestys taas onnistuu ja muuta myös <i>Notification</i> käyttämään connectia.
+
+Poista turhaksi staten propseina tapahtuva välittäminen, eli pelkistä <i>App</i> muotoon:
 
 ```js
-import  { useField } from './hooks'
-
-const App = () => {
-  // ...
-  const username = useField('text')
-  // ...
-}
-```
-
-#### 5.19: blogilista ja hookit step2
-
-<i>useField</i>-hookissa on pieni epäkohta. Se ei mahdollista lomakkeen syötekentän tyhjentämistä. Laajenna hookia siten, että se tarjoaa operaation <i>reset</i> kentän tyhjentämiseen. Ota hook käyttöön myös uuden blogin luovassa formissa.
-
-Lisäyksen jälkeen lomakkeet toimivat edelleen, mutta riippuen ratkaisustasi konsoliin saattaa ilmestyä ikävä varoitus:
-
-![](../../images/5/22.png)
-
-Ei välitetä virheestä vielä tässä tehtävässä.
-
-#### 5.20: blogilista ja hookit step3
-
-Jos ratkaisusi ei aiheuttanut warningia, ei sinun tarvitse tehdä tässä tehtävässä mitään.
-
-Muussa tapauksessa tee sovellukseen korjaus, joka poistaa varoituksen `Invalid value for prop reset' on <input> tag`. 
-
-Warningin syynä on siis se, että edellisen tehtävän laajennuksen jälkeen seuraava
-
-```js
-<input {...username}/>
-```
-
-tarkoittaa samaa kuin
-
-```js
-<input
-  value={username.value} 
-  type={username.type}
-  onChange={username.onChange}
-  reset={username.reset} // highlight-line
-/>
-```
-
-Elementille <i>input</i> ei kuitenkaan kuuluisi antaa propsia <i>reset</i>
-
-Yksinkertainen korjaus olisi tietysti olla käyttämättä spread-syntaksia ja kirjoittaa kaikki lomakkeet seuraavasti
-
-```js
-<input
-  value={username.value} 
-  type={username.type}
-  onChange={username.onChange}
-/>
-```
-
-Tällöin menettäisimme suurelta osin <i>useField</i>-hookin edut. Eli keksi tähän tehtävään spread-syntaksia edelleen käyttävä helppokäyttöinen ratkaisu ongelman kiertämiseen.
-
-#### 5.21*: ultimate hooks
-
-Tämän osan materiaalissa jatkokehitetyn muistiinpanosovelluksen palvelimen kanssa keskusteleva koodi näyttää seuraavalta:
-
-```js
-import axios from 'axios'
-const baseUrl = '/api/notes'
-
-let token = null
-
-const setToken = newToken => {
-  token = `bearer ${newToken}`
-}
-
-const getAll = () => {
-  const request = axios.get(baseUrl)
-  return request.then(response => response.data)
-}
-
-const create = async newObject => {
-  const config = {
-    headers: { Authorization: token },
-  }
-
-  const response = await axios.post(baseUrl, newObject, config)
-  return response.data
-}
-
-const update = (id, newObject) => {
-  const request = axios.put(`${ baseUrl } /${id}`, newObject)
-  return request.then(response => response.data)
-}
-
-export default { getAll, create, update, setToken }
-```
-
-Huomaamme, että koodi ei itseasiassa välitä ollenkaan siitä että se käsittelee nimenomaan muistiinpanoja. Muuttujan _baseUrl_ arvoa lukuunottamatta käytännössä sama koodi voi hoitaa blogisovelluksen frontendin ja backendin kommunikointia. 
-
-Eristä kommunikoiva koodi hookiksi _useResource_. Riittää, että kaikkien olioiden haku ja uuden olion luominen onnistuvat.
-
-Voit tehdä tehtävän repositoriosta https://github.com/fullstack-hy2020/custom-hooks löytyvään projektiin. Projektin komponentti <i>App</i> on seuraavassa:
-
-```js
-const App = () => {
-  const content = useField('text')
-  const name = useField('text')
-  const number = useField('text')
-
-  const [notes, noteService] = useResource('http://localhost:3005/notes')
-  const [persons, personService] = useResource('http://localhost:3005/persons')
-
-  const handleNoteSubmit = (event) => {
-    event.preventDefault()
-    noteService.create({ content: content.value })
-  }
- 
-  const handlePersonSubmit = (event) => {
-    event.preventDefault()
-    personService.create({ name: name.value, number: number.value})
-  }
-
+const = () => {
   return (
     <div>
-      <h2>notes</h2>
-      <form onSubmit={handleNoteSubmit}>
-        <input {...content} />
-        <button>create</button>
-      </form>
-      {notes.map(n => <p key={n.id}>{n.content}</p>)}
-
-      <h2>persons</h2>
-      <form onSubmit={handlePersonSubmit}>
-        name <input {...name} /> <br/>
-        number <input {...number} />
-        <button>create</button>
-      </form>
-      {persons.map(n => <p key={n.id}>{n.name} {n.number}</p>)}
+      <h1>Programming anecdotes</h1>
+      <Notification />
+      <AnecdoteForm />
+      <AnecdoteList />
     </div>
   )
 }
 ```
 
-Custom hook _useResource_ siis palauttaa (tilahookien tapaan) kaksialkioisen taulukon. Taulukon ensimmäinen alkio sisältää resurssin kaikki oliot ja toisena alkiona on olio, jonka kautta resurssia on mahdollista manipuloida, mm lisäämällä uusia olioita. 
+#### 6.16* paremmat anekdootit, step14
 
-Jos toteutit hookin oikein, mahdollistaa sovellus blogien ja puhelinnumeroiden yhtäaikaisen käsittelyn (käynnistä backend porttiin 3005 komennolla _npm run server_)
+Välitä komponentille <i>AnecdoteList</i> connectin avulla ainoastaan yksi stateen liittyvä propsi, filtterin tilan perusteella näytettävät anekdootit samaan tapaan kuin materiaalin luvussa [Presentational/Container revisited](/osa6/monta_reduseria_connect#presentational-container-revisited).
 
-![](../../images/5/21e.png)
+Komponentti <i>AnecdoteList</i> siis typistyy suunnilleen seuraavaan muotoon
+
+```js
+const AnecdoteList = (props) => {
+  const vote = (id) => {
+    // ...
+  }
+
+  return (
+    <div>
+      {props.anecdotesToShow.map(anecdote => // highlight-line
+        <div key={anecdote.id}>
+          <div>
+            {anecdote.content}
+          </div>
+          <div>
+            has {anecdote.votes}
+            <button onClick={() => vote(anecdote.id)}>vote</button>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+```
 
 Tämä oli osan viimeinen tehtävä ja on aika pushata koodi githubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://github.com/fullstack-hy2020).
+
 </div>

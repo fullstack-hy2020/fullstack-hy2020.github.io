@@ -51,32 +51,27 @@ import React from 'react'
 import NewNote from './components/NewNote'
 import Notes from './components/Notes'
 
-const App = (props) => {
-  const store = props.store
-
+const App = () => {
 //highlight-start
-  const filterSelected = (value) => () => {
+  const filterSelected = (value) => {
     console.log(value)
   }
 //highlight-end
 
   return (
     <div>
-      <NewNote store={store}/>
-      <div>
-        <div>
+      <NewNote />
         //highlight-start
-          all          <input type="radio" name="filter"
-            onChange={filterSelected('ALL')} />
-          important    <input type="radio" name="filter"
-            onChange={filterSelected('IMPORTANT')} />
-          nonimportant <input type="radio" name="filter"
-            onChange={filterSelected('NONIMPORTANT')} />
-          //highlight-end
-        </div>
+      <div>
+        all          <input type="radio" name="filter"
+          onChange={() => filterSelected('ALL')} />
+        important    <input type="radio" name="filter"
+          onChange={() => filterSelected('IMPORTANT')} />
+        nonimportant <input type="radio" name="filter"
+          onChange={() => filterSelected('NONIMPORTANT')} />
       </div>
-      
-      <Notes store={store} />
+      //highlight-end
+      <Notes />
     </div>
   )
 }
@@ -158,9 +153,11 @@ Let's define the combined reducer in the <i>index.js</i> file:
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, combineReducers } from 'redux' // highlight-line
+import { Provider } from 'react-redux' 
 import App from './App'
+
 import noteReducer from './reducers/noteReducer'
-import filterReducer from './reducers/filterReducer'  // highlight-line
+import filterReducer from './reducers/filterReducer' // highlight-line
 
  // highlight-start
 const reducer = combineReducers({
@@ -169,16 +166,20 @@ const reducer = combineReducers({
 })
  // highlight-end
 
-const store = createStore(reducer)  // highlight-line
+const store = createStore(reducer)
 
 console.log(store.getState())
 
 ReactDOM.render(
-  <div></div>,  // highlight-line
+  /*
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  */
+  <div />,
   document.getElementById('root')
 )
 ```
-
 
 Since our application breaks completely at this point, we render an empty <i>div</i> element instead of the <i>App</i> component.
 
@@ -246,33 +247,51 @@ Let's finish the application so that it uses the combined reducer. We start by c
 
 ```js
 ReactDOM.render(
-  <App store={store} />,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 )
 ```
 
-
 Next, let's fix a bug that is caused by the code expecting the application store to be an array of notes:
 
-![](../../images/6/7.png)
+![](../../images/6/7ea.png)
 
 
-There is an easy fix for this. We simply have to change the reference to the array of notes from <i>store.getState()</i> to <i>store.getState()</i>.notes:
+Korjaus on helppo. Koska muistiinpanot ovat nyt storen kentässä <i>notes</i>, riittää pieni muutos selektorifunktioon:
 
 ```js
-const Notes = ({ store }) => {
+const Notes = () => {
+  const dispatch = useDispatch()
+  const notes = useSelector(state => state.notes) // highlight-line
+
   return(
     <ul>
-      {store.getState().notes.map(note => // highlight-line
+      {notes.map(note =>
         <Note
           key={note.id}
           note={note}
-          handleClick={() => store.dispatch(toggleImportanceOf(note.id))}
+          handleClick={() => 
+            dispatch(toggleImportanceOf(note.id))
+          }
         />
       )}
     </ul>
   )
 }
+```
+
+Aiemminhan selektorifunktio palautti koko storen tilan:
+
+```js
+const notes = useSelector(state => state)
+```
+
+Nyt siis palautetaan tilasta ainoastaan sen kenttä <i>notes</i>
+
+```js
+const notes = useSelector(state => state.notes)
 ```
 
 
@@ -281,12 +300,10 @@ Let's extract the visibility filter into its own <i>src/components/VisibilityFil
 ```js
 import React from 'react'
 import { filterChange } from '../reducers/filterReducer'
+import { useDispatch } from 'react-redux'
 
 const VisibilityFilter = (props) => {
-
-  const filterClicked = (value) => {
-    props.store.dispatch(filterChange(value))
-  }
+  const dispatch = useDispatch()
 
   return (
     <div>
@@ -294,19 +311,19 @@ const VisibilityFilter = (props) => {
       <input 
         type="radio" 
         name="filter" 
-        onChange={() => filterClicked('ALL')}
+        onChange={() => dispatch(filterChange('ALL'))}
       />
       important   
       <input
         type="radio"
         name="filter"
-        onChange={() => filterClicked('IMPORTANT')}
+        onChange={() => dispatch(filterChange('IMPORTANT'))}
       />
       nonimportant 
       <input
         type="radio"
         name="filter"
-        onChange={() => filterClicked('NONIMPORTANT')}
+        onChange={() => dispatch(filterChange('NONIMPORTANT'))}
       />
     </div>
   )
@@ -323,14 +340,12 @@ import Notes from './components/Notes'
 import NewNote from './components/NewNote'
 import VisibilityFilter from './components/VisibilityFilter'
 
-const App = (props) => {
-  const store = props.store
-
+const App = () => {
   return (
     <div>
-      <NewNote store={store} />
-      <VisibilityFilter store={store} />
-      <Notes store={store} />
+      <NewNote />
+      <VisibilityFilter />
+      <Notes />
     </div>
   )
 }
@@ -340,58 +355,106 @@ export default App
 
 The implementation is rather straightforward. Clicking the different radio buttons changes the state of the store's <i>filter</i> property.
 
-
 Let's change the <i>Notes</i> component to incorporate the filter:
 
 ```js
-const Notes = ({ store }) => {
+const Notes = () => {
+  const dispatch = useDispatch()
   // highlight-start
-  const { notes, filter } = store.getState()
-  const notesToShow = () => {
-    if ( filter === 'ALL' ) {
-      return notes
+  const notes = useSelector(state => {
+    if ( state.filter === 'ALL' ) {
+      return state.notes
     }
-
-    return filter === 'IMPORTANT'
-      ? notes.filter(note => note.important)
-      : notes.filter(note => !note.important)
-  }
+    return state.filter  === 'IMPORTANT' 
+      ? state.notes.filter(note => note.important)
+      : state.notes.filter(note => !note.important)
+  })
   // highlight-end
 
   return(
     <ul>
-      {notesToShow().map(note => // highlight-line
+      {notes.map(note =>
         <Note
           key={note.id}
           note={note}
-          handleClick={() => store.dispatch(toggleImportanceOf(note.id))}
+          handleClick={() => 
+            dispatch(toggleImportanceOf(note.id))
+          }
         />
       )}
     </ul>
   )
-}
 ```
 
-
-Notice how the properties of the store are assigned to helper variables with the destructuring syntax:
+Muutos kohdistuu siis ainoastaan selektorifunktioon, joka oli aiemmnin muotoa
 
 ```js
-const { notes, filter } = store.getState()
+useSelector(state => state.notes)
 ```
 
-
-The syntax above is the same as if we were to write:
+Yksinkertaistetaan vielä selektoria destrukturoimalla parametrina olevasta tilasta sen kentät erilleen:
 
 ```js
-const notes = store.getState().notes
-const filter = store.getState().filter
+const notes = useSelector(({ filter, notes }) => {
+  if ( filter === 'ALL' ) {
+    return notes
+  }
+  return filter  === 'IMPORTANT' 
+    ? notes.filter(note => note.important)
+    : notes.filter(note => !note.important)
+})
 ```
-
-
-You can find the code for our current application in its entirety in the <i>part6-2</i> branch of [this Github repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-2).
-
 
 There is a slight cosmetic flaw in our application. Even though the filter is set to <i>ALL</i> by default, the associated radio button is not selected. Naturally this issue can be fixed, but since this is an unpleasant but ultimately harmless bug we will save the fix for later. 
+
+### Redux DevTools
+
+There is an extension [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) that can be installed on Chrome, in which the state of the Redux-store and the action that changes it can be monitored from the console of the browser.
+
+When debugging, in addition to the browser extension we also have the software library [redux-devtools-extension](https://www.npmjs.com/package/redux-devtools-extension). Let's install it using the command:
+
+```js
+npm install --save redux-devtools-extension
+```
+
+We'll have to slightly change the definition of the store to get the library up and running:
+
+```js
+// ...
+import { createStore, combineReducers } from 'redux'
+import { composeWithDevTools } from 'redux-devtools-extension' // highlight-line
+
+import noteReducer from './reducers/noteReducer'
+import filterReducer from './reducers/filterReducer'
+
+const reducer = combineReducers({
+  notes: noteReducer,
+  filter: filterReducer
+})
+
+const store = createStore(
+  reducer,
+  // highlight-start
+  composeWithDevTools()
+  // highlight-end
+)
+
+export default store
+```
+
+Now when you open the console, the <i>redux</i> tab looks like this:
+
+![](../../images/6/11ea.png)
+
+The effect of each to the store can be easily observed 
+
+![](../../images/6/12ea.png)
+
+It's also possible to dispatch actions to the store using the console
+
+![](../../images/6/13ea.png)
+
+You can find the code for our current application in its entirety in the <i>part6-2</i> branch of [this Github repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-2).
 
 </div>
 
@@ -406,6 +469,9 @@ Let's continue working on the anecdote application using redux that we started i
 
 #### 6.9 Better anecdotes, step7
 
+Ota sovelluksessasi käyttöön React dev tools. Siirrä Redux-storen määrittely omaan tiedostoon <i>store.js</i>.
+
+#### 6.10 Better anecdotes, step8
 
 The application has a ready-made body for the <i>Notification</i> component:
 
@@ -432,37 +498,44 @@ export default Notification
 Extend the component so that it renders the message stored in the redux store, making the component to take the form:
 
 ```js
-return (
-  <div style={style}>
-    {props.store.getState()...}
-  </div>
-)
-```
+import React from 'react'
+import { useSelector } from 'react-redux' // highlight-line
 
+const Notification = () => {
+  const notification = useSelector(/*s omething here */) // highlight-line
+  const style = {
+    border: 'solid',
+    padding: 10,
+    borderWidth: 1
+  }
+  return (
+    <div style={style}>
+      {notification} // highlight-line
+    </div>
+  )
+}
+```
 
 You will have to make changes to the application's existing reducer. Create a separate reducer for the new functionality and refactor the application so that it uses a combined reducer as shown in this part of the course material.
 
-
 The application does not have to use the <i>Notification</i> component in any intelligent way at this point in the exercises. It is enough for the application to display the initial value set for the message in the <i>notificationReducer</i>.
 
-
-#### 6.10 Better anecdotes, step8
-
+#### 6.11 Better anecdotes, step9
 
 Extend the application so that it uses the <i>Notification</i> component to display a message for the duration of five seconds when the user votes for an anecdote or creates a new anecdote:
 
-![](../../images/6/8.png)
+![](../../images/6/8ea.png)
 
 
 It's recommended to create separate [action creators](https://redux.js.org/basics/actions#action-creators) for setting and removing notifications.
 
 
-#### 6.11* Better anecdotes, step9
+#### 6.12* Better anecdotes, step10
 
 
 Implement filtering for the anecdotes that are displayed to the user.
 
-![](../../images/6/9.png)
+![](../../images/6/9ea.png)
 
 
 Store the state of the filter in the redux store. It is recommended to create a new reducer and action creators for this purpose.
@@ -473,7 +546,7 @@ Create a new <i>Filter</i> component for displaying the filter. You can use the 
 ```js
 import React from 'react'
 
-const Filter = (props) => {
+const Filter = () => {
   const handleChange = (event) => {
     // input-field value is in variable event.target.value
   }
@@ -489,738 +562,6 @@ const Filter = (props) => {
 }
 
 export default Filter
-```
-
-</div>
-
-<div class="content">
-
-### Connect
-
-The structure of our current application is quite modular thanks to Redux. Naturally, there's still room for improvement.
-
-
-One unpleasant aspect of our current implementation is that the Redux store has to be passed via props to all of the components that use it. The <i>App</i> component does not actually need Redux for any other purpose than passing it to its children:
-
-```js
-const App = (props) => {
-  const store = props.store
-
-  return (
-    <div>
-      <NewNote store={store}/>  
-      <VisibilityFilter store={store} />    
-      <Notes store={store} />
-    </div>
-  )
-}
-```
-
-
-To get rid of this unpleasantness we will use the [connect](https://react-redux.js.org/api/connect) function provided by the [React Redux](https://github.com/reactjs/react-redux) library. This is currently the de facto solution for passing the Redux store to React components.
-
-
-It takes some time to wrap your head around how connect works, but your efforts will be rewarded. Next, let's take a look at how connect is used in practice.
-
-```js
-npm install --save react-redux
-```
-
-In order to use the _connect_ function we have to define our application as the child of the [Provider](https://github.com/reduxjs/react-redux/blob/master/docs/api/Provider.md#provider) component that is provided by the React Redux library. Additionally, the <i>Provider</i> component must receive the Redux store of the application as its <i>store</i> attribute.
-
-Let's make these changes to the <i>index.js</i> file of our application:
-
-```js
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { createStore, combineReducers } from 'redux'
-import { Provider } from 'react-redux' // highlight-line
-import App from './App'
-import noteReducer from './reducers/noteReducer'
-import filterReducer from './reducers/filterReducer'
-
-const reducer = combineReducers({
-  notes: noteReducer,
-  filter: filterReducer
-})
-
-const store = createStore(reducer)
-
-ReactDOM.render(
-  // highlight-start
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  // highlight-end
-  document.getElementById('root')
-)
-```
-
-
-Let's start by taking a closer look at the <i>Notes</i> component. The _connect_ function can be used for transforming "regular" React components so that the state of the Redux store can be "mapped" into the component's props.
-
-
-Let's first use the connect function to transform our <i>Notes</i> component into a <i>connected component</i>:
-
-```js
-import React from 'react'
-import { connect } from 'react-redux' // highlight-line
-import Note from './Note'
-import { toggleImportanceOf } from '../reducers/noteReducer'
-
-const Notes = ({ store }) => {
-  // ...
-}
-
-const ConnectedNotes = connect()(Notes) // highlight-line
-export default ConnectedNotes           // highlight-line
-```
-
-
-The module exports the <i>connected component</i> that works exactly like the previous regular component for now.
-
-
-The component needs the list of notes and the value of the filter from the Redux store. The _connect_ function accepts a so-called [mapStateToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapstatetoprops-state-ownprops--object) function as its first parameter. The function can be used for defining the props of the <i>connected component</i> that are based on the state of the Redux store.
-
-
-If we define:
-
-```js
-const Notes = (props) => {
-  // ...
-}
-
-const mapStateToProps = (state) => {
-  return {
-    notes: state.notes,
-    filter: state.filter,
-  }
-}
-
-const ConnectedNotes = connect(mapStateToProps)(Notes)
-
-export default ConnectedNotes
-```
-
-
-The <i>Notes</i> component can access the state of the store directly, e.g. through <i>props.notes</i> that contains the list of notes. Contrast this to the previous <i>props.store.getState().notes</i> implementation that accessed the notes directly from the store. Similarly, <i>props.filter</i> references the value of the filter.
-
-
-The component changes in the following way:
-
-```js
-const Notes = (props) => {  // highlight-line
-  const notesToShow = () => {
-    if ( props.filter === 'ALL' ) { // highlight-line
-      return props.notes // highlight-line
-    }
-
-    return props.filter === 'IMPORTANT' // highlight-line
-      ? props.notes.filter(note => note.important) // highlight-line
-      : props.notes.filter(note => !note.important) // highlight-line
-  }
-
-  return(
-    <ul>
-      {notesToShow().map(note =>
-        <Note
-          key={note.id}
-          note={note}
-          handleClick={() =>
-            props.store.dispatch(toggleImportanceOf(note.id))
-          }
-        />
-      )}
-    </ul>
-  )
-}
-```
-
-
-The situation that results from using <i>connect</i> with the <i>mapStateToProps</i> function we defined can be visualized like this:
-
-![](../../images/6/24c.png)
-
-
-The <i>Notes</i> component has "direct access" via <i>props.notes</i> and <i>props.filter</i> for inspecting the state of the Redux store.
-
-
-The <i>Notes</i> component still uses the _dispatch_ function that it receives through its props to modify the state of the Redux store:
-
-```js
-<Note
-  key={note.id}
-  note={note}
-  handleClick={() =>
-    props.store.dispatch(toggleImportanceOf(note.id)) // highlight-line
-  }
-/>
-```
-
-The <i>store</i> prop no longer exists, so altering the state through the function is currently broken.
-
-
-The second parameter of the _connect_ function can be used for defining [mapDispatchToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapdispatchtoprops-object--dispatch-ownprops--object) which is a group of <i>action creator</i> functions passed to the connected component as props. Let's make the following changes to our existing connect operation:
-
-```js
-const mapStateToProps = (state) => {
-  return {
-    notes: state.notes,
-    filter: state.filter,
-  }
-}
-
-// highlight-start
-const mapDispatchToProps = {
-  toggleImportanceOf,
-}
-// highlight-end
-
-const ConnectedNotes = connect(
-  mapStateToProps,
-  mapDispatchToProps // highlight-line
-)(Notes)
-```
-
-
-Now the component can directly dispatch the action defined by the _toggleImportanceOf_ action creator by calling the function through its props:
-
-```js
-<Note
-  key={note.id}
-  note={note}
-  handleClick={() => props.toggleImportanceOf(note.id)} // highlight-line
-/>
-```
-
-
-This means that instead of dispatching the action like this:
-
-```js
-props.store.dispatch(toggleImportanceOf(note.id))
-```
-
-
-When using _connect_ we can simply do this:
-
-```js
-props.toggleImportanceOf(note.id)
-```
-
-
-There is no need to call the _dispatch_ function separately since _connect_ has already modified the _toggleImportanceOf_ action creator into a form that contains the dispatch.
-
-
-It can take some to time to wrap your head around how _mapDispatchToProps_ works, especially once we take a look at an [alternative way of using it](/en/part6/many_reducers_connect#alternative-way-of-using-map-dispatch-to-props).
-
-
-The resulting situation from using _connect_ can be visualized like this:
-
-![](../../images/6/25b.png)
-
-
-In addition to accessing the store's state via <i>props.notes</i> and <i>props.filter</i>, the component also references a function that can be used for dispatching <i>TOGGLE\_IMPORTANCE</i>-type actions via its <i>toggleImportanceOf</i> prop.
-
-
-The code for the newly refactored <i>Notes</i> component looks like this:
-
-```js
-import React from 'react'
-import { connect } from 'react-redux'
-import Note from './Note'
-import { toggleImportanceOf } from '../reducers/noteReducer'
-
-const Notes = (props) => {
-  const notesToShow = () => {
-    if ( props.filter === 'ALL' ) {
-      return props.notes
-    }
-
-    return props.filter === 'IMPORTANT'
-      ? props.notes.filter(note => note.important)
-      : props.notes.filter(note => !note.important)
-  }
-
-  return(
-    <ul>
-      {notesToShow().map(note =>
-        <Note
-          key={note.id}
-          note={note}
-          handleClick={() => props.toggleImportanceOf(note.id)}
-        />
-      )}
-    </ul>
-  )
-}
-
-const mapStateToProps = (state) => {
-  return {
-    notes: state.notes,
-    filter: state.filter,
-  }
-}
-
-const mapDispatchToProps = {
-  toggleImportanceOf,
-}
-
-// we can export directly the component returned by connect
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Notes)
-```
-
-
-Let's also use _connect_ to create new notes:
-
-```js
-import React from 'react'
-import { connect } from 'react-redux'
-import { createNote } from '../reducers/noteReducer'
-
-const NewNote = (props) => {
-  const addNote = (event) => {
-    event.preventDefault()
-    const content = event.target.note.value
-    event.target.note.value = ''
-    props.createNote(content)
-  }
-
-  return (
-    <form onSubmit={addNote}>
-      <input name="note" />
-      <button type="submit">add</button>
-    </form>
-  )
-}
-
-export default connect(
-  null,
-  { createNote }
-)(NewNote)
-```
-
-
-Since the component does not need to access the store's state, we can simply pass <i>null</i> as the first parameter to _connect_. 
-
-
-You can find the code for our current application in its entirety in the <i>part6-3</i> branch of [this Github repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3).
-
-
-### Referencing action creators passed as props
-
-
-Let's direct our attention to one interesting detail in the <i>NewNote</i> component:
-
-```js
-import React from 'react'
-import { connect } from 'react-redux'
-import { createNote } from '../reducers/noteReducer' // highlight-line
-
-const NewNote = (props) => {
-
-  const addNote = (event) => {
-    event.preventDefault()
-    props.createNote(event.target.note.value) // highlight-line
-    event.target.note.value = ''
-  }
-  // ...
-}
-
-export default connect(
-  null,
-  { createNote }
-)(NewNote)
-```
-
-
-Developers who are new to connect may find it puzzling that there are two versions of the <i>createNote</i> action creator in the component.
-
-
-The function must be referenced as <i>props.createNote</i> through the component's props, as this is the version that <i>contains the automatic dispatch</i> added by _connect_.
-
-
-Due to the way that the action creator is imported:
-
-```js
-import { createNote } from './../reducers/noteReducer'
-```
-
-
-The action creator can also be referenced directly by calling _createNote_. You should not do this, since this is the unmodified version of the action creator that does not contain the added automatic dispatch.
-
-
-
-If we print the functions to the console from the code (we have not yet looked at this useful debugging trick): 
-
-```js
-const NewNote = (props) => {
-  console.log(createNote)
-  console.log(props.createNote)
-
-  const addNote = (event) => {
-    event.preventDefault()
-    props.createNote(event.target.note.value)
-    event.target.note.value = ''
-  }
-
-  // ...
-}
-```
-
-
-We can see the difference between the two functions:
-
-![](../../images/6/10.png)
-
-
-The first function is a regular <i>action creator</i> whereas the second function contains the additional dispatch to the store that was added by connect.
-
-
-Connect is an incredibly useful tool although it may seem difficult at first due to its level of abstraction.
-
-
-### Alternative way of using mapDispatchToProps
-
-
-We defined the function for dispatching actions from the connected <i>NewNote</i> component in the following way:
-
-```js
-const NewNote = () => {
-  // ...
-}
-
-export default connect(
-  null,
-  { createNote }
-)(NewNote)
-```
-
-
-The connect expression above enables the component to dispatch actions for creating new notes with the <code>props.createNote('a new note')</code> command.
-
-
-The functions passed in <i>mapDispatchToProps</i> must be <i>action creators</i>, that is, functions that return Redux actions.
-
-
-It is worth noting that the <i>mapDispatchToProps</i> parameter is a <i>JavaScript object</i>, as the definition:
-
-```js
-{
-  createNote
-}
-```
-
-
-Is just shorthand for defining the object literal:
-
-```js
-{
-  createNote: createNote
-}
-```
-
-
-Which is an object that has a single <i>createNote</i> property with the <i>createNote</i> function as its value.
-
-
-Alternatively, we could pass the following <i>function</i> definition as the second parameter to _connect_:
-
-```js
-const NewNote = (props) => {
-  // ...
-}
-
-// highlight-start
-const mapDispatchToProps = dispatch => {
-  return {
-    createNote: value => {
-      dispatch(createNote(value))
-    },
-  }
-}
-// highlight-end
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(NewNote)
-```
-
-
-In this alternative definition, <i>mapDispatchToProps</i> is a function that _connect_ will invoke by passing it the _dispatch_-function as its parameter. The return value of the function is an object that defines a group of functions that get passed to the connected component as props. Our example defines the function passed as the <i>createNote</i> prop:
-
-```js
-value => {
-  dispatch(createNote(value))
-}
-```
-
-
-Which simply dispatches the action created with the <i>createNote</i> action creator.
-
-
-The component then references the function through its props by calling <i>props.createNote</i>:
-
-```js
-const NewNote = (props) => {
-  const addNote = (event) => {
-    event.preventDefault()
-    const content = event.target.note.value
-    event.target.note.value = ''
-    props.createNote(content)
-  }
-
-  return (
-    <form onSubmit={addNote}>
-      <input name="note" />
-      <button type="submit">add</button>
-    </form>
-  )
-}
-```
-
-
-The concept is quite complex and describing it through text is challenging. In most cases it is sufficient to use the simpler form of <i>mapDispatchToProps</i>. However, there are situations where the more complicated definition is necessary, like if the <i>dispatched actions</i> need to reference [the props of the component](https://github.com/gaearon/redux-devtools/issues/250#issuecomment-186429931).
-
-
-The creator of Redux Dan Abramov has created a wonderful tutorial called [Getting started with Redux](https://egghead.io/courses/getting-started-with-redux) that you can find on Egghead.io. I highly recommend the tutorial to everyone. The last four videos discuss the _connect_ method, particularly the more "complicated" way of using it.
-
-### Presentational/Container revisited
-
-The <i>Notes</i> component uses the <i>notesToShow</i> helper method to construct the list of notes that are shown based on the selected filter:
-
-```js
-const Notes = (props) => {
-  const notesToShow = () => {
-    if ( props.filter === 'ALL' ) {
-      return props.notes
-    }
-
-    return props.filter === 'IMPORTANT'
-      ? props.notes.filter(note => note.important)
-      : props.notes.filter(note => !note.important)
-  }
-
-  // ...
-}
-```
-
-
-It is unnecessary for the component to contain all of this logic. Let's extract it outside of the component so that it is handled in <i>mapStateToProps</i>:
-
-```js
-import React from 'react'
-import { connect } from 'react-redux'
-import Note from './Note'
-import { toggleImportanceOf } from '../reducers/noteReducer'
-
-const Notes = (props) => {
-  return(
-    <ul>
-      {props.visibleNotes.map(note => // highlight-line
-        <Note
-          key={note.id}
-          note={note}
-          handleClick={() => props.toggleImportanceOf(note.id)}
-        />
-      )}
-    </ul>
-  )
-}
-
-const notesToShow = ({ notes, filter }) => { // highlight-line
-  if (filter === 'ALL') {
-    return notes
-  }
-  return filter === 'IMPORTANT'
-    ? notes.filter(note => note.important)
-    : notes.filter(note => !note.important)
-}
-
-const mapStateToProps = (state) => {
-  return {
-    visibleNotes: notesToShow(state), // highlight-line
-  }
-}
-
-const mapDispatchToProps = {
-  toggleImportanceOf,
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Notes)
-```
-
-
-Previously <i>mapStateToProps</i> was simply used for selecting pieces of state from the store, but in this case we are also using the _notesToShow_ function to map the state into the desired filtered list of notes. The new version of _notesToShow_ receives the store's state in its entirety, and <i>selects</i> an appropriate piece of the store that is passed to the component. Functions like this are called [selectors](https://medium.com/@pearlmcphee/selectors-react-redux-reselect-9ab984688dd4).
-
-
-Our new <i>Notes</i> component is almost entirely focused on rendering notes and is quite close to being a so-called [presentational component](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0). According to the [description](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) provided by Dan Abramov, presentation components:
-
-- Are concerned with how things look.
-- May contain both presentational and container components inside, and usually have some DOM markup and styles of their own.
-- Often allow containment via props.children.
-- Have no dependencies on the rest of the app, such as Redux actions or stores.
-- Don’t specify how the data is loaded or mutated.
-- Receive data and callbacks exclusively via props.
-- Rarely have their own state (when they do, it’s UI state rather than data).
-- Are written as functional components unless they need state, lifecycle hooks, or performance optimizations.
-
-
-The _connected component_ that is created with the _connect_ function:
-
-```js
-const notesToShow = ({notes, filter}) => {
-  // ...
-}
-
-const mapStateToProps = (state) => {
-  return {
-    visibleNotes: notesToShow(state),
-  }
-}
-
-const mapDispatchToProps = {
-  toggleImportanceOf,
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Notes)
-```
-
-
-Fits the description of a <i>container</i> component. According to the [description](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) provided by Dan Abramov, container components:
-
-- Are concerned with how things work.
-- May contain both presentational and container components inside but usually don’t have any DOM markup of their own except for some wrapping divs, and never have any styles.
-- Provide the data and behavior to presentational or other container components.
-- Call Redux actions and provide these as callbacks to the presentational components.
-- Are often stateful, as they tend to serve as data sources.
-- Are usually generated using higher order components such as connect from React Redux, rather than written by hand.
-
-
-Dividing the application into presentational and container components is one way of structuring React applications that has been deemed beneficial. The division may be a good design choice or it may not, it depends on the context.
-
-
-Abramov attributes the following [benefits](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) to the division:
-
-- Better separation of concerns. You understand your app and your UI better by writing components this way.
-- Better reusability. You can use the same presentational component with completely different state sources, and turn those into separate container components that can be further reused.
-- Presentational components are essentially your app’s “palette”. You can put them on a single page and let the designer tweak all their variations without touching the app’s logic. You can run screenshot regression tests on that page.
-
-
-Abramov mentions the term [high order component](https://reactjs.org/docs/higher-order-components.html). The <i>Notes</i> component is an example of a regular component, whereas the <i>connect</i> method provided by React-Redux is an example of a <i>high order component</i>. Essentially, a high order component is a function that accept a "regular" component as its parameter, that then returns a new "regular" component as its return value.
-
-
-High order components, or HOCs, are a way of defining generic functionality that can be applied to components. This is a concept from functional programming that very slightly resembles inheritance in object oriented programming.
-
-
-HOCs are in fact a generalization of the [High Order Function](https://en.wikipedia.org/wiki/Higher-order_function) (HOF) concept. HOFs are functions that either accept functions as parameters or return functions. We have actually been using HOFs throughout the course, e.g. all of the methods used for dealing with arrays like _map, filter and find_ are HOFs. 
-
-
-You can find the code for our current application in its entirety in the <i>part6-4</i> branch of [this Github repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-4). 
-
-Note the changes in the <i>VisibilityFilter</i> component and removal of all the props in the <i>App</i> component.
-
-</div>
-
-<div class="tasks">
-
-
-### Exercises
-
-
-#### 6.12 Better anecdotes, step10
-
-
-The <i>redux store</i> is currently passed to all of the components through props.
-
-
-Add the [react-redux](https://github.com/reactjs/react-redux) package to your application, and modify the <i>AnecdoteList</i> so that it accesses the store's state with the help of the _connect_ function.
-
-
-Voting for and creating new anecdotes **does not need to work** after this exercise.
-
-
-The <i>mapStateToProps</i> function you will need in this exercise is approximately the following:
-
-```js
-const mapStateToProps = (state) => {
-  // sometimes it is useful to console log from mapStateToProps
-  console.log(state)
-  return {
-    anecdotes: state.anecdotes,
-    filter: state.filter
-  }
-}
-```
-
-
-#### 6.13 Better anecdotes, step11
-
-
-Do the same for the <i>Filter</i> and <i>AnecdoteForm</i> components.
-
-
-#### 6.14 Better anecdotes, step12.
-
-
-Change the <i>AnecdoteList</i> component so that the voting for anecdotes works again, and also refactor the <i>Notification</i> component to use connect.
-
-
-Remove the redundant passing of the store's state via props by simplifying the <i>App</i> component into the following form:
-
-```js
-const App = () => {
-  return (
-    <div>
-      <h1>Programming anecdotes</h1>
-      <Notification />
-      <AnecdoteForm />
-      <AnecdoteList />
-    </div>
-  )
-}
-```
-
-
-#### 6.15* Better anecdotes, step13
-
-
-Change your application so that the <i>AnecdoteList</i> component only receives a single prop based on the store's state. Construct the filtered list of anecdotes as shown in the [Presentational/Container revisited](/en/part6/many_reducers_connect#presentational-container-revisited) section in this part of the course material.
-
-
-As a result, the <i>AnecdoteList</i> component should get simplified into the following form:
-
-```js
-const AnecdoteList = (props) => {
-  const vote = (id) => {
-    // ...
-  }
-
-  return (
-    <div>
-      {props.anecdotesToShow.map(anecdote => // highlight-line
-        <div key={anecdote.id}>
-          <div>
-            {anecdote.content}
-          </div>
-          <div>
-            has {anecdote.votes}
-            <button onClick={() => vote(anecdote.id)}>vote</button>
-          </div>
-        </div>
-      )}
-    </div>
-  )
-}
 ```
 
 </div>
