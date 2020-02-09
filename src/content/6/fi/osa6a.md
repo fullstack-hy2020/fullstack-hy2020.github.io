@@ -799,7 +799,7 @@ const App = () => {
 
 Koko sovellus on toistaiseksi kirjoitettu yhteen tiedostoon ja sen ansiosta joka puolelta sovellusta on päästy käsiksi redux-storeen. Entä jos haluamme jakaa sovelluksen useisiin, omiin komponentteihin sijoitettuihin tiedostoihin? 
 
-Tapoja välittää redux-store sovelluksen komponenteille on useita, tutustutaan ensin ehä uusimpaan ja helpoimpaan tapaan [react-redux](https://react-redux.js.org/)-kirjaston tarjoamaan [hooks](https://react-redux.js.org/api/hooks)-rajapintaan.
+Tapoja välittää redux-store sovelluksen komponenteille on useita, tutustutaan ensin ehkä uusimpaan ja helpoimpaan tapaan [react-redux](https://react-redux.js.org/)-kirjaston tarjoamaan [hooks](https://react-redux.js.org/api/hooks)-rajapintaan.
 
 Asennetaan react-redux
 
@@ -992,7 +992,7 @@ joka siis tarkoittaa samaa kuin
 }
 ```
 
-Yleensä selektorifunktiot ovat mielenkiinoisempia, ja valitsevat vain osan redux-storen sisällöstä. Voisimme esimerkiksi hakea storesta ainoastaan tärkeät muistiinpanot seuraavasti
+Yleensä selektorifunktiot ovat mielenkiintoisempia, ja valitsevat vain osan redux-storen sisällöstä. Voisimme esimerkiksi hakea storesta ainoastaan tärkeät muistiinpanot seuraavasti
 
 ```js
 const importantNotes = useSelector(state => state.filter(note => note.important))  
