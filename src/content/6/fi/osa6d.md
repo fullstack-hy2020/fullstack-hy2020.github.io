@@ -171,7 +171,7 @@ export default ConnectedNotes
 
 ### mapDispatchToProps
 
-Olemme nyt pääseet eroon hookista _useSelector_, mutta <i>Notes</i> kääyttää edelleen hookia _useDispatch_ ja sen palauttavaa funktiota _dispatch_:
+Olemme nyt päässeet eroon hookista _useSelector_, mutta <i>Notes</i> käyttää edelleen hookia _useDispatch_ ja sen palauttavaa funktiota _dispatch_:
 
 ```js
 const Notes = (props) => {
@@ -408,7 +408,7 @@ näemme eron:
 
 Ensimmäinen funktioista siis on normaali <i>action creator</i>, toinen taas connectin muotoilema funktio, joka sisältää storen metodin dispatch-kutsun.
 
-Connect on erittäin kätevä työkalu, mutta abstraktiutensa takia se voi aluksi tuntua hankalalta.
+Connect on erittäin kätevä työkalu, mutta abstraktiuutensa takia se voi aluksi tuntua hankalalta.
 
 ### mapDispatchToPropsin vaihtoehtoinen käyttötapa
 
@@ -557,7 +557,7 @@ taas on selkeästi <i>container</i>-komponentti, joita Dan Abramov [luonnehtii](
 
 Komponenttien presentational vs. container -jaottelu on eräs hyväksi havaittu tapa strukturoida React-sovelluksia. Jako voi olla toimiva tai sitten ei, kaikki riippuu kontekstista.
 
-Abramov mainitsee jaon [eduiksi](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) muunmuassa seuraavat
+Abramov mainitsee jaon [eduiksi](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) muun muassa seuraavat
 
 - Better separation of concerns. You understand your app and your UI better by writing components this way.
 - Better reusability. You can use the same presentational component with completely different state sources, and turn those into separate container components that can be further reused.
@@ -569,7 +569,7 @@ High order componentit eli HOC:t ovat yleinen tapa määritellä geneeristä toi
 
 HOC:it ovat oikeastaan käsitteen [High Order Function](https://en.wikipedia.org/wiki/Higher-order_function) (HOF) yleistys. HOF:eja ovat sellaiset funkiot, jotka joko ottavat parametrikseen funktioita tai palauttavat funkioita. Olemme oikeastaan käyttäneet HOF:eja läpi kurssin, esim. lähes kaikki taulukoiden käsittelyyn tarkoitetut metodit, kuten _map, filter ja find_ ovat HOF:eja.
 
-Reactin hook-apin ilmestymisen jälkeen HOC:ien suosio on kääntynyt laskuun, ja melkein kaikki kirjastot, joiden käyttö on aiemmin perustunut HOC:eihin on saanut hook-perustaisen apin. Useimmiten , kuten myös reduxin kohdalla, hook-perustaiset apit ovat HOC-apeja huomattavasti yksinkertaisempia.
+Reactin hook-apin ilmestymisen jälkeen HOC:ien suosio on kääntynyt laskuun, ja melkein kaikki kirjastot, joiden käyttö on aiemmin perustunut HOC:eihin, ovat saaneet hook-perustaisen apin. Useimmiten, kuten myös reduxin kohdalla, hook-perustaiset apit ovat HOC-apeja huomattavasti yksinkertaisempia.
 
 ### Redux ja komponenttien tila
 
