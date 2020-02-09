@@ -22,8 +22,8 @@ export const PartBanner = ({ lang }) => {
                   'Programming a server with NodeJS and Express',
                   'Testing Express servers, user administration',
                   'Testing React apps',
-                  'State management with Redux, custom hooks',
-                  'React router, styling app with CSS and webpack',
+                  'State management with Redux',
+                  'React router, custom hooks, styling app with CSS and webpack',
                   'GraphQL'
                 ]
               : [
