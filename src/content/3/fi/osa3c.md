@@ -39,7 +39,7 @@ Debuggaus onnisuu myös Chromen developer-konsolilla, käynnistämällä sovellu
 node --inspect index.js
 ```
 
-Debuggeriin pääsee käsiksi klikkaamalla chromen devloper-konsoliin ilmestyneestä vihreästä ikonista
+Debuggeriin pääsee käsiksi klikkaamalla chromen developer-konsoliin ilmestyneestä vihreästä ikonista
 
 ![](../../images/3/37.png)
 
