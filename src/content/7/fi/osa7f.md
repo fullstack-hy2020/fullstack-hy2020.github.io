@@ -136,23 +136,6 @@ Konfiguroi frontend käyttämään ESLintiä
 
 Tee sovellukselle sopiva webpack-konfiguraatio
 
-#### 7.17 End to end -testaus, step1
-
-Tee sovellukselle ainakin kaksi E2E-testiä [Cypress-kirjaston](/osa7/luokkakomponentit_e_2_e_testaus#sovelluksen-end-to-end-testaus) avulla. Sopiva testattava asia on esim. käyttäjän kirjautuminen sovellukseen.
-
-Tämän tehtävän testeissä voit olettaa, että tietokannan tila on testien kannalta sopiva, eli että tietokannassa on olemassa ainakin yksi käyttäjä. 
-
-Kannattanee käyttää hetki aikaa Cypressin dokumentaation silmäilemiseen, erityisesti 
-[best practices](https://docs.cypress.io/guides/references/best-practices.html) sisältää monia asioita, joita on hyvä pitää mielessä testejä kirjoittaessa.
-
-#### 7.18 End to end -testaus, step2
-
-Laajenna E2E-testejä siten, että testit [alustavat tietokannan](/osa7/luokkakomponentit_e_2_e_testaus#tietokannan-tilan-kontrollointi) aina ennen testien suorittamista. Tee myös ainakin yksi testi, joka muokkaa sovelluksen tietokantaa, esim. lisää sovellukseen blogin.
-
-#### 7.19 End to end -testaus, step3
-
-Laajenna vielä E2E-testejäsi. Voit merkitä tehtävän, jos käytät laajentamiseen vähintään 30 minuuttia aikaa.
-
 #### 7.20 Kurssipalaute
 
 Anna kurssille palautetta Moodlessa.

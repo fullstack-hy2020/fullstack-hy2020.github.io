@@ -42,12 +42,12 @@ module.exports = {
       d: 'connect'
     },
     '7': {
-    /*
       a: 'React-router',
+          /*
+      b: 'custom-hookit'
       b: 'Lisää tyyleistä',
       c: 'Webpack',
-      d: 'Luokkakomponentit, E2E-testaus',
-      e: 'Sekalaista',
+      e: 'Luokkakomponentit, Sekalaista',
       f: 'Tehtäviä: blogilistan laajennus',
       */
     },
