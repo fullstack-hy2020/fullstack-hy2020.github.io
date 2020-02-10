@@ -357,7 +357,7 @@ const Notes = () => {
   )
 ```
 
-Muutos kohdistuu siis ainoastaan selektorifunktioon, joka oli aiemmnin muotoa
+Muutos kohdistuu siis ainoastaan selektorifunktioon, joka oli aiemmin muotoa
 
 ```js
 useSelector(state => state.notes)
