@@ -4,999 +4,650 @@ part: 7
 letter: c
 lang: en
 ---
+
 <div class="content">
 
+In part 2 we examined two different ways of adding styles to our application: the old-school [single CSS](/en/part2/adding_styles_to_react_app) file and [inline-styles](/en/part2/adding_styles_to_react_app#inline-styles). In this part we will take a look at a few other ways. 
 
-Developing with React was notorious for requiring tools that were very difficult to configure. These days, getting started with React development is almost painless thanks to [create-react-app](https://github.com/facebookincubator/create-react-app). A better development workflow has probably never existed for browser-side JavaScript development.
+### Ready-made UI libraries
 
+One approach to defining styles for an application is to use a ready-made "UI framework".
 
-We can not rely on the black magic of create-react-app forever and it's time for us to take a look under the hood. One of the key players in making React applications functional is a tool called [webpack](https://webpack.js.org/).
+One of the first widely popular UI frameworks was the [Bootstrap](https://getbootstrap.com/) toolkit created by Twitter, that may still be the most popular framework. Recently there has been an explosion in the number of new UI frameworks that have entered the arena. In fact, the selection is so vast that there is little hope of creating an exhaustive list of options.
 
+Many UI frameworks provide developers of web applications with ready-made themes and "components" like buttons, menus, and tables. We write components in quotes, because in this context we are not talking about React components. Usually UI frameworks are used by including the CSS stylesheets and JavaScript code of the framework in the application.
 
-### Bundling
+There are many UI frameworks that have React-friendly versions, where the framework's "components" have been transformed into React components. There are a few different React versions of Bootstrap like [reactstrap](http://reactstrap.github.io/) and [react-bootstrap](https://react-bootstrap.github.io/).
 
+Next we will take a closer look at two UI frameworks, Bootstrap and [Semantic UI](https://semantic-ui.com/). We will use both frameworks to add similar styles to the application we made in the [React-router](/en/part7/react_router) section of the course material.
 
-We have implemented our applications by dividing our code into separate modules that have been <i>imported</i> to places that require them. Even though ES6 modules are defined in the ECMAScript standard, no browser actually knows how to handle code that is divided into modules.
+### React Bootstrap
 
+Let's start by taking a look at Bootstrap with the help of the [react-bootstrap](https://react-bootstrap.github.io/) package.
 
-For this reason, code that is divided into modules must be <i>bundled</i> for browsers, meaning that all of the source code files are transformed into a single file that contains all of the application code. When we deployed our React frontend to production in [part 3](/en/part3/deploying_app_to_internet), we performed the bundling of our application with the _npm run build_ command. Under the hood, the npm script bundles the source code using webpack which produces the following collection of files in the <i>build</i> directory:
+Let's install the package with the command:
 
-<pre>
-├── asset-manifest.json
-├── favicon.ico
-├── index.html
-├── manifest.json
-├── precache-manifest.8082e70dbf004a0fe961fc1f317b2683.js
-├── service-worker.js
-└── static
-    ├── css
-    │   ├── main.f9a47af2.chunk.css
-    │   └── main.f9a47af2.chunk.css.map
-    └── js
-        ├── 1.578f4ea1.chunk.js
-        ├── 1.578f4ea1.chunk.js.map
-        ├── main.8209a8f2.chunk.js
-        ├── main.8209a8f2.chunk.js.map
-        ├── runtime~main.229c360f.js
-        └── runtime~main.229c360f.js.map
-</pre>
+```js
+npm install --save react-bootstrap
+```
 
 
-The <i>index.html</i> file located at the root of the build directory is the "main file" of the application, that loads the bundled JavaScript file with a <i>script</i> tag (in fact there are two bundled JavaScript files):
+Then let's add a link for loading the CSS stylesheet for Bootstrap inside of the <i>head</i> tag in the <i>public/index.html</i> file of the application:
 
-```html
-<!doctype html><html lang="en">
+```js
 <head>
-  <meta charset="utf-8"/>
-  <title>React App</title>
-  <link href="/static/css/main.f9a47af2.chunk.css" rel="stylesheet"></head>
-<body>
-  <div id="root"></div>
-  <script src="/static/js/1.578f4ea1.chunk.js"></script>
-  <script src="/static/js/main.8209a8f2.chunk.js"></script>
-</body>
-</html>
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+  crossorigin="anonymous"
+/>
+  // ...
+</head>
 ```
 
 
-As we can see from the example application that was created with create-react-app, the build script also bundles the application's CSS files into a single <i>/static/css/main.f9a47af2.chunk.css</i> file.
+When we reload the application, we notice that it already looks a bit more stylish:
 
+![](../../images/7/5.png)
 
-In practice, bundling is done so that we define an entry point for the application, which typically is the <i>index.js</i> file. When webpack bundles the code, it includes all of the code that the entry point imports, and the code that its imports import, and so on.
-
-
-Since part of the imported files are packages like React, Redux, and Axios, the bundled JavaScript file will also contain the contents of each of these libraries.
-
-
-> The old way of dividing the application's code into multiple files was based on the fact that the <i>index.html</i> file loaded all of the separate JavaScript files of the application with the help of script tags. This resulted in  decreased performance, since the loading of each separate file results in some overhead. For this reason, these days the preferred method is to bundle the code into a single file.
-
-
-Next, we will create a suitable webpack configuration for a React application by hand from scratch.
-
-
-Let's create a new directory for the project with the following subdirectories (<i>build</i> and <i>src</i>) and files:
-
-<pre>
-├── build
-├── package.json
-├── src
-│   └── index.js
-└── webpack.config.js
-</pre>
-
-
-The contents of the <i>package.json</i> file can e.g. be the following:
-
-```json
-{
-  "name": "webpack-part7",
-  "version": "0.0.1",
-  "description": "practising webpack",
-  "scripts": {},
-  "license": "MIT"
-}
-```
-
-
-Let's install webpack with the command:
-
-```js
-npm install --save-dev webpack webpack-cli
-```
-
-
-We define the functionality of webpack in the <i>webpack.config.js</i> file, which we initialize with the following content:
-
-```js
-const path = require('path')
-
-const config = {
-  entry: './src/index.js',
-  output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'main.js'
-  }
-}
-module.exports = config
-```
-
-
-We will then define a new npm script called <i>build</i> that will execute the bundling with webpack:
-
-```js
-// ...
-"scripts": {
-  "build": "webpack --mode=development"
-},
-// ...
-```
-
-
-Let's add some more code to the <i>src/index.js</i> file:
-
-```js
-const hello = name => {
-  console.log(`hello ${name}`)
-}
-```
-
-
-When we execute the _npm run build_ command our application code will be bundled by webpack. The operation will produce a new <i>main.js</i> file that is added under the <i>build</i> directory:
-
-![](../../images/7/19.png)
-
-
-The file contains a lot of stuff that looks quite interesting. We can also see the code we wrote earlier at the end of the file.
-
-
-Let's add a <i>App.js</i> file under the <i>src</i> directory with the following content:
+In Bootstrap, all of the contents of the application are typically rendered inside of a [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers). In practice this is accomplished by giving the root _div_ element of the application the  _container_ class attribute:
 
 ```js
 const App = () => {
-  return null
+  // ...
+
+  return (
+    <div className="container"> // highlight-line
+      // ...
+    </div>
+  )
 }
-
-export default App
 ```
 
 
-Let's import and use the <i>App</i> module in the <i>index.js</i> file:
+We notice that this already has an effect on the appearance of the application. The content is no longer as close to the edges of the browser as it was earlier:
+
+![](../../images/7/6.png)
+
+
+Next, let's make some changes to the <i>Notes</i> component, so that it renders the list of notes as a [table](https://getbootstrap.com/docs/4.1/content/tables/). React Bootstrap provides a built-in [Table](https://react-bootstrap.github.io/components/table/) component for this purpose, so there is no need to define CSS classes separately.
 
 ```js
-import App from './App';
-
-const hello = name => {
-  console.log(`hello ${name}`)
-}
-
-App()
-```
-
-
-When we bundle the application again with the _npm run build_ command, we notice that webpack has acknowledged both files:
-
-![](../../images/7/20.png)
-
-
-Our application code can be found at the end of the bundle file in a rather obscure format:
-
-```js
-/***/ "./src/App.js":
-/*!********************!*\
-  !*** ./src/App.js ***!
-  \********************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nconst App = () => {\n  return null\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (App);\n\n//# sourceURL=webpack:///./src/App.js?");
-
-/***/ }),
-
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App */ \"./src/App.js\");\n\n\nconst hello = name => {\n  console.log(`hello ${name}`)\n};\n\nObject(_App__WEBPACK_IMPORTED_MODULE_0__[\"default\"])()\n\n//# sourceURL=webpack:///./src/index.js?");
-
-/***/ })
-```
-
-
-### Configuration file
-
-
-Let's take a closer look at the contents of our current <i>webpack.config.js</i> file:
-
-```js
-const path = require('path')
-
-const config = {
-  entry: './src/index.js',
-  output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'main.js'
-  }
-}
-
-module.exports = config
-```
-
-
-The configuration file has been written in JavaScript and the configuration object is exported by using Node's module syntax. 
-
-
-Our minimal configuration definition almost explains itself. The [entry](https://webpack.js.org/concepts/#entry) property of the configuration object specifies the file that will serve as the entry point for bundling the application.
-
-
-The [output](https://webpack.js.org/concepts/#output) property defines the location where the bundled code will be stored. The target directory must be defined as an <i>absolute path</i> which is easy to create with the [path.resolve](https://nodejs.org/docs/latest-v8.x/api/path.html#path_path_resolve_paths) method. We also use [\_\_dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) which is a global variable in Node that stores the path to the current directory.
-
-
-### Bundling React
-
-
-Next, let's transform our application into a minimal React application. Let's install the required libraries:
-
-```js
-npm install --save react react-dom
-```
-
-
-And let's turn our application into a React application by adding the familiar definitions in the <i>index.js</i> file:
-
-```js
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
-
-ReactDOM.render(<App />, document.getElementById('root'))
-```
-
-
-We will also make the following changes to the <i>App.js</i> file:
-
-```js
-import React from 'react'
-
-const App = () => (
-  <div>hello webpack</div>
+const Notes = (props) => (
+  <div>
+    <h2>Notes</h2>
+    <Table striped>
+      <tbody>
+        {props.notes.map(note =>
+          <tr key={note.id}>
+            <td>
+              <Link to={`/notes/${note.id}`}>
+                {note.content}
+              </Link>
+            </td>
+            <td>
+              {note.user}
+            </td>
+          </tr>
+        )}
+      </tbody>
+    </Table>
+  </div>
 )
-
-export default App
 ```
 
 
-We still need the <i>build/index.html</i> file  that will serve as the "main page" of our application that will load our bundled JavaScript code with a <i>script</i> tag:
+The appearance of the application is quite stylish:
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>React App</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="text/javascript" src="./main.js"></script>
-  </body>
-</html>
-```
+![](../../images/7/7e.png)
 
 
-When we bundle our application, we run into the following problem:
-
-![](../../images/7/21.png)
-
-
-### Loaders
-
-
-The error message from webpack states that we may need an appropriate <i>loader</i> to bundle the <i>App.js</i> file correctly. By default, webpack only knows how to deal with plain JavaScript. Although we may have become unaware of it, we are actually using [JSX](https://facebook.github.io/jsx/) for rendering our views in React. To illustrate this, the following code is not regular JavaScript:
+Notice that the React Bootstrap components have to be imported separately from the library as shown below:
 
 ```js
-const App = () => {
-  return <div>hello webpack</div>
-}
+import { Table } from 'react-bootstrap'
 ```
 
 
-The syntax used above comes from JSX and it provides us with an alternative way of defining a React element for an html <i>div</i> tag.
+#### Forms
 
 
-We can use [loaders](https://webpack.js.org/concepts/loaders/) to inform webpack of the files that need to be processed before they are bundled.
+Let's improve the form in the <i>Login</i> view with the help of Bootstrap [forms](https://getbootstrap.com/docs/4.1/components/forms/).
 
 
-Let's configure a loader to our application that transforms the JSX code into regular JavaScript:
+React Bootstrap provides built-in [components](https://react-bootstrap.github.io/components/forms/) for creating forms (although the documentation for them is slightly lacking):
 
 ```js
-const config = {
-  entry: './src/index.js',
-  output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'main.js',
-  },
-  // highlight-start
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['@babel/preset-react'],
-        },
-      },
-    ],
-  },
-  // highlight-end
-}
-```
-
-
-Loaders are defined under the <i>module</i> property in the <i>rules</i> array.
-
-
-The definition for a single loader consists of three parts:
-
-```js
-{
-  test: /\.js$/,
-  loader: 'babel-loader',
-  query: {
-    presets: ['@babel/preset-react']
-  }
-}
-```
-
-
-The <i>test</i> property specifies that the loader is for files that have names ending with <i>.js</i>. The <i>loader</i> property specifies that the processing for those files will be done with [babel-loader](https://github.com/babel/babel-loader). The <i>query</i> property is used for specifying parameters for the loader, that configure its functionality.
-
-
-Let's install the loader and its required packages as a <i>development dependency</i>:
-
-```js
-npm install @babel/core babel-loader @babel/preset-react --save-dev
-```
-
-
-Bundling the application will now succeed.
-
-
-If we make some changes to the <i>App</i> component and take a look at the bundled code, we notice that the bundled version of the component looks like this:
-
-```js
-const App = () =>
-  react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
-    'div',
-    null,
-    'hello webpack'
-  )
-```
-
-
-As we can see from the example above, the React elements that were written in JSX are now created with regular JavaScript by using React's [createElement](https://reactjs.org/docs/react-without-jsx.html) function.
-
-
-You can test the bundled application by opening the <i>build/index.html</i> file with the <i>open file</i> functionality of your browser:
-
-![](../../images/7/22.png)
-
-
-It's worth noting that if the bundled application's source code uses <i>async/await</i>, the browser will not render anything on some browsers. [Googling the error message in the console](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) will shed some light on the issue. We have to install one more missing dependency, that is [@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill):
-
-```
-npm install --save @babel/polyfill
-```
-
-
-Let's make the following changes to the <i>entry</i> property of the webpack configuration object in the <i>webpack.config.js</i> file:
-
-```js
-  entry: ['@babel/polyfill', './src/index.js']
-```
-
-
-Our configuration contains nearly everything that we need for React development.
-
-
-### Transpilers
-
-
-The process of transforming code from one form of JavaScript to another is called [transpiling](https://en.wiktionary.org/wiki/transpile). The general definition of the term is to compile source code by transforming it from one language to another.
-
-
-By using the configuration from the previous section we are <i>transpiling</i> the code containing JSX into regular JavaScript with the help of [babel](https://babeljs.io/), which is currently the most popular tool for the job.
-
-
-As mentioned in part 1, most browsers do not support the latest features that were introduced in ES6 and ES7, and for this reason the code is usually transpiled to a version of JavaScript that implements the ES5 standard.
-
-
-The transpilation process that is executed by Babel is defined with <i>plugins</i>. In practice, most developers use ready-made [presets](https://babeljs.io/docs/plugins/) that are groups of pre-configured plugins.
-
-
-Currently we are using the [@babel/preset-react](https://babeljs.io/docs/plugins/preset-react/) preset for transpiling the source code of our application:
-
-```js
-{
-  test: /\.js$/,
-  loader: 'babel-loader',
-  query: {
-    presets: ['@babel/preset-react']
-  }
-}
-```
-
-
-Let's add the [@babel/preset-env](https://babeljs.io/docs/plugins/preset-env/) plugin that contains everything needed to take code using all of the latest features and transpile it to code that is compatible with the ES5 standard:
-
-```js
-{
-  test: /\.js$/,
-  loader: 'babel-loader',
-  query: {
-    presets: ['@babel/preset-env', '@babel/preset-react'] // highlight-line
-  }
-}
-```
-
-
-Let's install the preset with the command:
-
-```js
-npm install @babel/preset-env --save-dev
-```
-
-
-When we transpile the code it gets transformed into old-school JavaScript. The definition of the transformed <i>App</i> component looks like this:
-
-```js
-var App = function App() {
-  return _react2.default.createElement('div', null, 'hello webpack')
-};
-```
-
-
-As we can see, variables are declared with the _var_ keyword as ES5 JavaScript does not understand the _const_ keyword. Arrow functions are also not used, which is why the function definition used the _function_ keyword.
-
-### CSS
-
-
-Let's add some CSS to our application. Let's create a new <i>src/index.css</i> file:
-
-```css
-.container {
-  margin: 10;
-  background-color: #dee8e4;
-}
-```
-
-
-Then let's use the style in the <i>App</i> component:
-
-```js
-const App = () => {
+let Login = (props) => {
+  // ...
   return (
-    <div className="container">
-      hello webpack
+    <div>
+      <h2>login</h2>
+      <Form onSubmit={onSubmit}>
+        <Form.Group>
+          <Form.Label>username:</Form.Label>
+          <Form.Control
+            type="text"
+            name="username"
+          />
+          <Form.Label>password:</Form.Label>
+          <Form.Control
+            type="password"
+          />
+          <Button variant="primary" type="submit">
+            login
+          </Button>
+        </Form.Group>
+      </Form>
     </div>
-  )
-}
+)}
 ```
 
 
-And we import the style in the <i>index.js</i> file:
+The number of components we need to import increases:
 
 ```js
-import './index.css'
+import { Table, Form, Button } from 'react-bootstrap'
 ```
 
 
-This will cause the transpilation process to break:
+After switching over to the Bootstrap form, our improved application looks like this:
 
-![](../../images/7/23.png)
+![](../../images/7/8.png)
 
 
-When using CSS, we have to use [css](https://webpack.js.org/loaders/css-loader/) and [style](https://webpack.js.org/loaders/style-loader/) loaders:
+#### Notification
+
+
+Now that the login form is in better shape, let's take a look at improving our application's notifications:
+
+![](../../images/7/9.png)
+
+
+Let's add a message for the notification when a user logs in to the application. We will store it in the _message_ variable in the <i>App</i> component's state:
 
 ```js
-{
-  rules: [
-    {
-      test: /\.js$/,
-      loader: 'babel-loader',
-      query: {
-        presets: ['@babel/preset-react', '@babel/preset-env'],
-      },
-    },
+const App = () => {
+  const [notes, setNotes] = useState([
+    // ...
+  ])
+
+  const [user, setUser] = useState(null)
+  const [message, setMessage] = useState(null) // highlight-line
+
+  const login = (user) => {
+    setUser(user)
     // highlight-start
-    {
-      test: /\.css$/,
-      loaders: ['style-loader', 'css-loader'],
-    },
-    // highlight-end
-  ];
-}
-```
-
-
-The job of the [css loader](https://webpack.js.org/loaders/css-loader/) is to load the <i>CSS</i> files and the job of the [style loader](https://webpack.js.org/loaders/style-loader/) is to generate and inject a <i>style</i> element that contains all of the styles of the application.
-
-
-With this configuration the CSS definitions are included in the <i>main.js</i> file of the application. For this reason there is no need to separately import the <i>CSS</i> styles in the main <i>index.html</i> file of the application.
-
-
-If needed, the application's CSS can also be generated into its own separate file by using the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin).
-
-
-When we install the loaders:
-
-```js
-npm install style-loader css-loader --save-dev
-```
-
-
-The bundling will succeed once again and the application gets new styles. 
-
-### Webpack-dev-server
-
-
-The current configuration makes it possible to develop our application but the workflow is awful (to the point where it resembles the development workflow with Java). Every time we make a change to the code we have to bundle it and refresh the browser in order to test the code.
-
-
-The [webpack-dev-server](https://webpack.js.org/guides/development/#using-webpack-dev-server) offers a solution to our problems. Let's install it with the command:
-
-```js
-npm install --save-dev webpack-dev-server
-```
-
-
-Let's define an npm script for starting the dev-server:
-
-```js
-{
-  // ...
-  "scripts": {
-    "build": "webpack --mode=development",
-    "start": "webpack-dev-server --mode=development" // highlight-line
-  },
-  // ...
-}
-```
-
-
-Let's also add a new <i>devServer</i> property to the configuration object in the <i>webpack.config.js</i> file:
-
-```js
-const config = {
-  entry: './src/index.js',
-  output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'main.js',
-  },
-  // highlight-start
-  devServer: {
-    contentBase: path.resolve(__dirname, 'build'),
-    compress: true,
-    port: 3000,
-  },
-  // highlight-end
-  // ...
-};
-```
-
-
-The _npm start_ command will now start the dev-server at the port 3000, meaning that our application will be available by visiting <http://localhost:3000> in the browser. When we make changes to the code, the browser will automatically refresh the page.
-
-
-The process for updating the code is fast. When we use the dev-server, the code is not bundled the usual way into the <i>main.js</i> file. The result of the bundling exists only in memory.
-
-
-Let's extend the code by changing the definition of the <i>App</i> component as shown below:
-
-```js
-import React, {useState} from 'react'
-
-const App = () => {
-  const [counter, setCounter] = useState(0)
-
-  return (
-    <div className="container">
-      hello webpack {counter} clicks
-      <button onClick={() => setCounter(counter + 1)} >press</button>
-    </div>
-  )
-}
-
-export default App
-```
-
-
-It's worth noticing that the error messages don't show up the same way as they did with our applications that were made using create-react-app. For this reason we have to pay more attention to the console:
-
-![](../../images/7/24.png)
-
-
-The application works nicely and the development workflow is quite smooth.
-
-
-### Source maps
-
-
-Let's extract the click handler into its own function and store the previous value of the counter into its own <i>values</i> state:
-
-```js
-const App = () => {
-  const [counter, setCounter] = useState(0)
-  const [values, setValues] = useState() // highlight-line
-
-  const handleClick = () => {
-    setCounter(counter + 1)
-    setValues(values.concat(counter)) // highlight-line
-  }
-
-  return (
-    <div className="container">
-      hello webpack {counter} clicks
-      <button onClick={handleClick} >press</button>
-    </div>
-  )
-}
-```
-
-
-The application no longer works and the console will display the following error:
-
-![](../../images/7/25.png)
-
-
-We know that the error is in the onClick method, but if the application was any larger the error message would be quite difficult to track down:
-
-<pre>
-App.js:27 Uncaught TypeError: Cannot read property 'concat' of undefined
-    at handleClick (App.js:27)
-</pre>
-
-
-The location of the error indicated in the message does not match the actual location of the error in our source code. If we click the error message, we notice that the displayed source code does not resemble our application code:
-
-![](../../images/7/26.png)
-
-
-Of course, we want to see our actual source code in the error message.
-
-
-Luckily fixing the error message in this respect is quite easy. We will ask webpack to generate a so-called [source map](https://webpack.js.org/configuration/devtool/) for the bundle, that makes it possible to <i>map errors</i> that occur during the execution of the bundle to the corresponding part in the original source code.
-
-
-The source map can be generated by adding a new <i>devtool</i> property to the configuration object with the value 'source-map':
-
-```js
-const config = {
-  entry: './src/index.js',
-  output: {
-    // ...
-  },
-  devServer: {
-    // ...
-  },
-  devtool: 'source-map', // highlight-line
-  // ..
-};
-```
-
-
-Webpack has to be restarted when we make changes to its configuration. It is also possible to make webpack watch for changes made to itself but we will not do that this time.
-
-
-The error message is now a lot better:
-
-![](../../images/7/27.png)
-
-
-Generating the source map also makes it possible to use the Chrome debugger:
-
-![](../../images/7/28.png)
-
-
-Let's fix the bug by initializing the state of <i>values</i> as an empty array:
-
-```js
-const App = () => {
-  const [counter, setCounter] = useState(0)
-  const [values, setValues] = useState([])
-  // ...
-}
-```
-
-
-### Minifying the code
-
-
-When we deploy the application to production, we are using the <i>main.js</i> code bundle that is generated by webpack. The size of the <i>main.js</i> file is 1281572 bytes even though our application only contains a few lines of our own code. The large file size is due to the fact that the bundle also contains the source code for the entire React library. The size of the bundled code matters since the browser has to load the code when the application is first used. With high-speed internet connections 1281572 bytes is not an issue, but if we were to keep adding more external dependencies, loading speeds could become an issue particularly for mobile users.
-
-
-If we inspect the contents of the bundle file, we notice that it could be greatly optimized in terms of file size by removing all of the comments. There's no point in manually optimizing these files, as there are many existing tools for the job.
-
-
-The optimization process for JavaScript files is called <i>minification</i>. One of the leading tools intended for this purpose is [UglifyJS](http://lisperator.net/uglifyjs/).
-
-
-Starting from version 4 of webpack, the minification plugin does not require additional configuration to be used. It is enough to modify the npm script in the <i>package.json</i> file to specify that webpack will execute the bundling of the code in <i>production</i> mode:
-
-```json
-{
-  "name": "webpack-part7",
-  "version": "0.0.1",
-  "description": "practising webpack",
-  "scripts": {
-    "build": "webpack --mode=production", // highlight-line
-    "start": "webpack-dev-server --mode=development"
-  },
-  "license": "MIT",
-  "dependencies": {
-    // ...
-  },
-  "devDependencies": {
-    // ...
-  }
-}
-```
-
-
-When we bundle the application again, the size of the resulting <i>main.js</i> decreases substantially:
-
-```js
-$ build ls -l main.js
--rw-r--r--  1 mluukkai  984178727  217450 Jun 21 20:18 main.js
-```
-
-
-The output of the minification process resembles old-school C code; all of the comments and even unnecessary whitespace and newline characters have been removed, and variable names have been replaced with a single character.
-
-```js
-function h(){if(!d){var e=u(p);d=!0;for(var t=c.length;t;){for(s=c,c=[];++f<t;)s&&s[f].run();f=-1,t=c.length}s=null,d=!1,function(e){if(o===clearTimeout)return clearTimeout(e);if((o===l||!o)&&clearTimeout)return o=clearTimeout,clearTimeout(e);try{o(e)}catch(t){try{return o.call(null,e)}catch(t){return o.call(this,e)}}}(e)}}a.nextTick=function(e){var t=new Array(arguments.length-1);if(arguments.length>1)
-```
-
-
-### Development and production configuration
-
-
-Next, let's add a backend to our application and by repurposing the now-familiar note application backend.
-
-
-Let's store the following content in the <i>db.json</i> file:
-
-```json
-{
-  "notes": [
-    {
-      "important": true,
-      "content": "HTML is easy",
-      "id": "5a3b8481bb01f9cb00ccb4a9"
-    },
-    {
-      "important": false,
-      "content": "Mongo can save js objects",
-      "id": "5a3b920a61e8c8d3f484bdd0"
-    }
-  ]
-}
-```
-
-
-Our goal is to configure the application with webpack in such a way that, when used locally, the application uses the json-server available in port 3001 as its backend.
-
-
-The bundled file will then be configured to use the backend available at the <https://radiant-plateau-25399.herokuapp.com/api/notes> url.
-
-We will install <i>axios</i>, start the json-server, and then make the necessary changes to the application. For the sake of changing things up, we will fetch the notes from the backend with our [custom hook](/en/part5/custom_hooks) called _useNotes_:
-
-```js
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-
-// highlight-start
-const useNotes = (url) => {
-  const [notes, setNotes] = useState([])
-
-  useEffect(() => {
-    axios.get(url).then(response => {
-      setNotes(response.data)
-    })
-  }, [url])
-
-  return notes
-}
-// highlight-end
-
-const App = () => {
-  const [counter, setCounter] = useState(0)
-  const [values, setValues] = useState([])
-  const url = 'http://localhost:3001/notes'
-  const notes = useNotes(url) // highlight-line
-
-  const handleClick = () => {
-    setCounter(counter + 1)
-    setValues(values.concat(counter))
-  }
-
-  return (
-    <div className="container">
-      hello webpack {counter} clicks
-      <button onClick={handleClick} >press</button>
-      <div>{notes.length} notes on server {url}</div> // highlight-line
-    </div>
-  )
-}
-
-export default App
-```
-
-
-The address of the backend server is currently hardcoded in the application code. How can we change the address in a controlled fashion to point to the production backend server when the code is bundled for production?
-
-
-Let's change the configuration object in the <i>webpack.config.js</i> file to be a function instead of an object:
-
-```js
-const path = require('path');
-
-const config = (env, argv) => {
-  return {
-    entry: './src/index.js',
-    output: {
-      // ...
-    },
-    devServer: {
-      // ...
-    },
-    devtool: 'source-map',
-    module: {
-      // ...
-    },
-    plugins: [
-      // ...
-    ],
-  }
-}
-
-module.exports = config
-```
-
-
-The definition remains almost exactly the same, except for the fact that the configuration object is now returned by the function. The function receives the two parameters, <i>env</i> and <i>argv</i>, the second of which can be used for accessing the <i>mode</i> that is defined in the npm script. 
-
-
-We can also use webpack's [DefinePlugin](https://webpack.js.org/plugins/define-plugin/) for defining <i>global default constants</i> that can be used in the bundled code. Let's define a new global constant <i>BACKEND\_URL</i>, that gets a different value depending on the environment that the code is being bundled for:
-
-```js
-const path = require('path')
-const webpack = require('webpack') // highlight-line
-
-const config = (env, argv) => {
-  console.log('argv', argv.mode)
-
-  // highlight-start
-  const backend_url = argv.mode === 'production'
-    ? 'https://radiant-plateau-25399.herokuapp.com/api/notes'
-    : 'http://localhost:3001/notes'
-  // highlight-end
-
-  return {
-    entry: './src/index.js',
-    output: {
-      path: path.resolve(__dirname, 'build'),
-      filename: 'main.js'
-    },
-    devServer: {
-      contentBase: path.resolve(__dirname, 'build'),
-      compress: true,
-      port: 3000,
-    },
-    devtool: 'source-map',
-    module: {
-      // ...
-    },
-    // highlight-start
-    plugins: [
-      new webpack.DefinePlugin({
-        BACKEND_URL: JSON.stringify(backend_url)
-      })
-    ]
+    setMessage(`welcome ${user}`)
+    setTimeout(() => {
+      setMessage(null)
+    }, 10000)
     // highlight-end
   }
+  // ...
 }
-
-module.exports = config
 ```
 
 
-The global constant is used in the following way in the code:
+We will render the message as a Bootstrap [Alert](https://getbootstrap.com/docs/4.1/components/alerts/) component. Once again, the React Bootstrap library provides us with a matching [React component](https://react-bootstrap.github.io/components/alerts/): 
+
+```js
+<div className="container">
+  <Router>
+    <div>
+    // highlight-start
+      {(message &&
+        <Alert variant="success">
+          {message}
+        </Alert>
+      )}
+      // highlight-end
+    //...
+)}
+```
+
+
+#### Navigation structure
+
+
+Lastly, let's alter the application's navigation menu to use Bootstrap's [Navbar](https://getbootstrap.com/docs/4.1/components/navbar/) component. The React Bootstrap library provides us with [matching built-in components](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly). Through trial and error, we end up with a working solution in spite of the cryptic documentation:
+
+```js
+<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+  <Navbar.Collapse id="responsive-navbar-nav">
+    <Nav className="mr-auto">
+      <Nav.Link href="#" as="span">
+        <Link style={padding} to="/">home</Link>
+      </Nav.Link>
+      <Nav.Link href="#" as="span">
+        <Link style={padding} to="/notes">notes</Link>
+      </Nav.Link>
+      <Nav.Link href="#" as="span">
+        <Link style={padding} to="/users">users</Link>
+      </Nav.Link>
+      <Nav.Link href="#" as="span">
+        {user
+          ? <em>{user} logged in</em>
+          : <Link to="/login">login</Link>
+        }
+      </Nav.Link>
+    </Nav>
+  </Navbar.Collapse>
+</Navbar>
+```
+
+
+The resulting layout has a very clean and pleasing appearance:
+
+![](../../images/7/10.png)
+
+
+If the viewport of the browser is narrowed, we notice that the menu "collapses" and it can be expanded by clicking the "hamburger" button:
+
+![](../../images/7/11e.png)
+
+
+Bootstrap and a large majority of existing UI frameworks produce [responsive](https://en.wikipedia.org/wiki/Responsive_web_design) designs, meaning that the resulting applications render well on a variety of different screen sizes.
+
+
+Chrome developer tools makes it possible to simulate using our application in the browser of different mobile clients:
+
+![](../../images/7/12.png)
+
+
+
+You can find the complete code for the application [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-bootstrap.js).
+
+### Semantic UI
+
+
+I have used Bootstrap for years but approximately a year ago I switched over to using [Semantic UI](https://semantic-ui.com/). The [exercise submission system](https://studies.cs.helsinki.fi/courses) that is used in this course has been made with Semantic and my experience has been reassuring. The [support for React](https://react.semantic-ui.com) is world class and the documentation is leagues above Bootstrap.
+
+
+Let's continue working with the [React-router](/en/part7/react_router) example application we just styled with Bootstrap, but this time style it with Semantic UI.
+
+
+We will start by installing the [semantic-ui-react](https://react.semantic-ui.com) package:
+
+```js
+npm install --save semantic-ui-react
+```
+
+
+
+Then let's add the link to the CSS stylesheet for Semantic UI inside the head tag of the application's <i>public/index.html</i> file (the link can be found [here](https://react.semantic-ui.com/usage#content-delivery-network-cdn)):
+
+```js
+<head>
+  <link
+    rel="stylesheet"
+    href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"
+  />
+  // ...
+</head>
+```
+
+
+We render all of the application's content inside of Semantic's [Container](https://react.semantic-ui.com/elements/container) component.
+
+
+The documentation for Semantic UI contains several code examples for each component. This makes it easy to see how each component is used in practice:
+
+![](../../images/7/13.png)
+
+
+Let's swap out the root <i>div</i> element of App for a <i>Container</i> component:
+
+```js
+import { Container } from 'semantic-ui-react'
+
+// ...
+
+const App = () => {
+  // ...
+  return (
+    <Container>
+      // ...
+    </Container>
+  )
+}
+```
+
+
+The content of the application is no longer attached to the edges of the browser.
+
+
+Just like we did with Bootstrap, let's render the notes as a table with Semantic's [Table](https://react.semantic-ui.com/collections/table) component. The resulting code looks like this:
+
+```js
+import { Table } from 'semantic-ui-react'
+
+const Notes = (props) => (
+  <div>
+    <h2>Notes</h2>
+    <Table striped celled>
+      <Table.Body>
+        {props.notes.map(note =>
+          <Table.Row key={note.id}>
+            <Table.Cell>
+              <Link to={`/notes/${note.id}`}>
+                {note.content}
+              </Link>
+            </Table.Cell>
+            <Table.Cell>
+              {note.user}
+            </Table.Cell>
+          </Table.Row>
+        )}
+      </Table.Body>
+    </Table>
+  </div>
+```
+
+
+After making these changes, the list of notes looks like this:
+
+![](../../images/7/14e.png)
+
+
+#### Form
+
+
+Let's use Semantic's [Form](https://react.semantic-ui.com/collections/form) component in the login view of the application:
+
+```js
+import { Form, Button } from 'semantic-ui-react'
+
+let Login = (props) => {
+  const onSubmit = (event) => {
+    // ...
+  }
+
+  return (
+    <Form onSubmit={onSubmit}>
+      <Form.Field>
+        <label>username</label>
+        <input name='username' />
+      </Form.Field>
+      <Form.Field>
+        <label>password</label>
+        <input type='password' />
+      </Form.Field>
+      <Button type='submit'>login</Button>
+    </Form>
+  )
+}
+```
+
+
+The appearance of the new login view looks like this:
+
+![](../../images/7/15.png)
+
+
+#### Notification
+
+
+Just like we did with the Bootstrap version, let's implement a styled <i>notification</i> that is displayed after a user logs in to the application:
+
+![](../../images/7/6.png)
+
+
+As we did previously, let's store the message of the notification in the _message_ variable in the <i>App</i> component's state:
 
 ```js
 const App = () => {
-  const [counter, setCounter] = useState(0)
-  const [values, setValues] = useState([])
-  const notes = useNotes(BACKEND_URL) // highlight-line
+  // ...
+  const [message, setMessage] = useState(null)
+
+  const login = (user) => {
+    setUser(user)
+    setMessage(`welcome ${user}`)
+    setTimeout(() => {
+      setMessage(null)
+    }, 10000)
+  }
 
   // ...
+}
+```
+
+
+And let's render the notification by using Semantic's [Message](https://react.semantic-ui.com/collections/message) component:
+
+```js
+<Container>
+  {(message &&
+    <Message success>
+      {message}
+    </Message>
+  )}
+  // ...
+</Container>
+```
+
+
+#### Navigation structure
+
+
+The navigation bar of the application will be implemented with Semantic's [Menu](https://react.semantic-ui.com/collections/menu) component:
+
+```js
+<Router>
+  <div>
+    <Menu inverted>
+      <Menu.Item link>
+        <Link to="/">home</Link>
+      </Menu.Item>
+      <Menu.Item link>
+        <Link to="/notes">notes</Link>
+      </Menu.Item>
+      <Menu.Item link>
+        <Link to="/users">users</Link>
+      </Menu.Item>
+      <Menu.Item link>
+        {user
+          ? <em>{user} logged in</em>
+          : <Link to="/login">login</Link>
+        }
+      </Menu.Item>
+    </Menu>
+    // ...
+  </div>
+</Router>
+```
+
+
+The result looks like this:
+
+![](../../images/7/17.png)
+
+
+You can find the complete code for the application [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-semantic.js).
+
+
+### Closing thoughts
+
+
+The difference between React-Bootstrap and Semantic-UI-React is not that big. Determining which one produces more aesthetically pleasing results comes down to a matter of taste. After years of using Bootstrap, the reasons that made me switch over to Semantic UI were its seamless integration with React, its wider selection of built-in components, and its overall better documentation. There has been some [uncertainty](https://github.com/Semantic-Org/Semantic-UI/issues/6109) regarding the future of Semantic UI, so it's recommended to keep your ear on the ground.
+
+
+In the two previous examples, we used the UI frameworks with the help of React-integration libraries.
+
+
+Instead of using the [React Bootstrap](https://react-bootstrap.github.io/) library, we could have just as well used Bootstrap directly by defining CSS classes to our application's HTML elements. Instead of defining the table with the <i>Table</i> component:
+
+```js
+<Table striped>
+  // ...
+</Table>
+```
+
+
+We could have used a regular HTML <i>table</i> and added the required CSS class:
+
+```js
+<table className="table striped">
+  // ...
+</table>
+```
+
+
+The benefit of using the React Bootstrap library is not that evident from this example.
+
+
+In addition to making the frontend code more compact and readable, another benefit of using React UI framework libraries is that they include the JavaScript that is needed to make specific components work. Some Bootstrap components require a few unpleasant [JavaScript dependencies](https://getbootstrap.com/docs/4.1/getting-started/introduction/#js) that we would prefer not to include in our React applications.
+
+
+Some potential downsides to using UI frameworks through integration libraries instead of using them "directly", are that integration libraries may have unstable API's and poor documentation. The situation with [Semantic UI React](https://react.semantic-ui.com) is a lot better than with many other UI frameworks, as it is an official React integration library.
+
+
+There is also the question of whether or not UI framework libraries should be used in the first place. It is up to everyone to form their own opinion, but for people lacking knowledge in CSS and web design they are very useful tools.
+
+
+### Other UI frameworks
+
+
+Here are some other UI frameworks for your consideration. If you do not see your favorite UI framework in the list, please make a pull request to the course material.
+
+- <http://www.material-ui.com/>
+- <https://bulma.io/>
+- <https://ant.design/>
+- <https://foundation.zurb.com/>
+
+### Styled components
+
+
+There are also [other ways](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b) of styling React applications that we have not yet taken a look at.
+
+
+The [styled components](https://www.styled-components.com/) library offers an interesting approach for defining styles through [tagged template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) that were introduced in ES6.
+
+
+Let's make a few changes to the styles of our application with the help of styled components. First, let's define two components for defining styles:
+
+```js
+import styled from 'styled-components'
+
+const Button = styled.button`
+  background: Bisque;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid Chocolate;
+  border-radius: 3px;
+`
+
+const Input = styled.input`
+  margin: 0.25em;
+`
+```
+
+
+The code above creates styled versions of the <i>button</i> and <i>input</i> HTML elements and then assigns them to the <i>Button</i> and <i>Input</i> variables.
+
+
+The syntax for defining the styles is quite interesting, as the CSS rules are defined inside of backticks.
+
+
+The styled components that we defined work exactly like regular <i>button</i> and <i>input</i> elements, and they can be used the same way:
+
+```js
+const Login = (props) => {
+  // ...
   return (
-    <div className="container">
-      hello webpack {counter} clicks
-      <button onClick={handleClick} >press</button>
-      <div>{notes.length} notes on server {BACKEND_URL}</div> // highlight-line
+    <div>
+      <h2>login</h2>
+      <form onSubmit={onSubmit}>
+        <div>
+          username:
+          <Input /> // highlight-line
+        </div>
+        <div>
+          password:
+          <Input type='password' /> // highlight-line
+        </div>
+        <Button type="submit" primary=''>login</Button> // highlight-line
+      </form>
     </div>
   )
 }
 ```
 
 
-If the configuration for development and production differs a lot, it may be a good idea to [separate the configuration](https://webpack.js.org/guides/production/) of the two into their own files.
-
-
-We can inspect the bundled production version of the application locally by executing the following command in the <i>build</i> directory:
+Let's create a few more components for styling that application, that are styled versions of <i>div</i> elements:
 
 ```js
-npx static-server
+const Page = styled.div`
+  padding: 1em;
+  background: papayawhip;
+`
+
+const Navigation = styled.div`
+  background: BurlyWood;
+  padding: 1em;
+`
+
+const Footer = styled.div`
+  background: Chocolate;
+  padding: 1em;
+  margin-top: 1em;
+`
 ```
 
 
-By default the bundled application will be available at <http://localhost:9080>.
-
-### Polyfill
-
-
-Our application is finished and works with all relatively recent versions of modern browsers, with the exception of Internet Explorer. The reason for this is that because of _axios_ our code uses [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), and no existing version of IE supports them:
-
-![](../../images/7/29.png)
-
-
-There are many other things in the standard that IE does not support. Something as harmless as the [find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) method of JavaScript arrays exceeds the capabilities of IE:
-
-![](../../images/7/30.png)
-
-
-In these situations it is not enough to transpile the code, as transpilation simply transforms the code from a newer version of JavaScript to an older one with wider browser support. IE understands Promises syntactically but it simply has not implemented their functionality. The _find_ property of arrays in IE is simply <i>undefined</i>.
-
-
-If we want the application to be IE-compatible we need to add a [polyfill](https://remysharp.com/2010/10/08/what-is-a-polyfill), which is code that adds the missing functionality to older browsers.
-
-
-Polyfills can be added with the help of [webpack and Babel](https://babeljs.io/docs/usage/polyfill/) or by installing one of many existing polyfill libraries.
-
-
-The polyfill provided by the [promise-polyfill](https://www.npmjs.com/package/promise-polyfill) library is easy to use, we simply have to add the following to our existing application code:
+Let's use the components in our application:
 
 ```js
-import PromisePolyfill from 'promise-polyfill'
+const App = () => {
+  // ...
 
-if (!window.Promise) {
-  window.Promise = PromisePolyfill
+  return (
+    <Page> // highlight-line
+      <Router>
+        <div>
+          <Navigation> // highlight-line
+            <Link style={padding} to="/">home</Link>
+            <Link style={padding} to="/notes">notes</Link>
+            <Link style={padding} to="/users">users</Link>
+            {user
+              ? <em>{user} logged in</em>
+              : <Link to="/login">login</Link>
+            }
+          </Navigation>
+
+          <Route exact path="/" render={() => <Home />} />
+          <Route exact path="/notes" render={() =>
+            <Notes notes={notes} />}
+          />
+          <Route exact path="/notes/:id" render={({ match }) =>
+            <Note note={noteById(match.params.id)} />}
+          />
+          <Route path="/users" render={() =>
+            user ? <Users /> : <Redirect to="/login" />
+          } />
+          <Route path="/login" render={() =>
+            <Login onLogin={login} />}
+          />
+        </div>
+      </Router>
+      <Footer> // highlight-line
+        <em>Note app, Department of Computer Science 2019</em>
+      </Footer>
+    </Page>
+  )
 }
 ```
 
 
-If the global _Promise_ object does not exist, meaning that the browser does not support Promises, the polyfilled Promise is stored in the global variable. If the polyfilled Promise is implemented well enough, the rest of the code should work without issues.
+The appearance of the resulting application is shown below:
+
+![](../../images/7/18.png)
 
 
-One exhaustive list of existing polyfills can be found [here](https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills).
-
-
-The browser compatibility of different API's can be checked by visiting [https://caniuse.com](https://caniuse.com) or [Mozilla's website](https://developer.mozilla.org/en-US/).
-
-### Eject
-
-
-The create-react-app tool uses webpack behind the scenes. If the default configuration is not enough, it is possible to [eject](https://github.com/facebook/create-react-app/blob/master/packages/react-sscripts/template/README.md#npm-run-eject) the project which will get rid of all of the black magic, and the default configuration files will be stored in the <i>config</i> directory and in a modified <i>package.json</i> file.
-
-
-If you eject an application created with create-react-app, there is no return and all of the configuration will have to be maintained manually. The default configuration is not trivial, and instead of ejecting from a create-react-app application, a better alternative may be to write your own webpack configuration from the get-go.
-
-
-Going through and reading the configuration files of an ejected application is still recommended and extremely educational.
+Styled components have seen a consistent growth in popularity in recent times, and quite a lot of people consider it to be the best way of defining styles to React applications.
 
 </div>
 
@@ -1006,7 +657,8 @@ Going through and reading the configuration files of an ejected application is s
 ### Exercises
 
 
-One exercise related to the topics presented here, can be found at the end of this course material section in the exercise set [for extending the blog list application](/en/part7/exercises_extending_the_bloglist).
-
+The exercises related to the topics presented here, can be found at the end of this course material section in the exercise set [for extending the blog list application](/en/part7/exercises_extending_the_bloglist).
 
 </div>
+
+

@@ -8,14 +8,229 @@ lang: en
 <div class="content">
 
 
+During the course we have only used React components having been defined as Javascript functions. This was not possible without the [hook](https://reactjs.org/docs/hooks-intro.html)-functionality that came with version 16.8 of React. Before, when defining a component that uses state one had to define it using Javascript's [Class](https://reactjs.org/docs/state-and-lifecycle.html#converting-a-function-to-a-class)-syntax.
+
+
+
+It is beneficial to at least be familiar with Class Components to some extent, since the world contains a lot of old React code, which will probably never be completely rewritten using the updated syntax.
+
+
+### Class Components
+
+
+
+Let's get to know the main features of Class Components by producing yet another very familiar anecdote application. We store the anecdotes in the file <i>db.json</i> using <i>json-server</i>. The contents of the file are lifted from [here](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json).
+
+
+
+The initial version of the Class Component look like this
+
+```js
+import React from 'react'
+
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>anecdote of the day</h1>
+      </div>
+    )
+  }
+}
+
+export default App
+```
+
+
+
+The component now has a [constructor](https://reactjs.org/docs/react-component.html#constructor), in which nothing happens at the moment, and contains the method [render](https://reactjs.org/docs/react-component.html#render). As one might guess, render defines how and what is rendered to the screen.
+
+
+
+Let's define a state for the list of anecdotes and the currently visible anecdote. In contrast to when using the [useState](https://reactjs.org/docs/hooks-state.html)-hook Class Components only contain one state. So if the state is made up of multiple "parts" they should be stored as properties of the state. The state is initialized in the constructor:
+
+```js
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+
+    // highlight-start
+    this.state = {
+      anecdotes: [],
+      current: 0
+    }
+    // highlight-end
+  }
+
+  render() {
+    if (this.state.anecdotes.length == 0 ) { // highlight-line
+      return <div>no anecdotes...</div>
+    }
+
+    return (
+      <div>
+        <h1>anecdote of the day</h1>
+        <div>
+          {this.state.anecdotes[this.state.current].content} // highlight-line
+        </div>
+        <button>next</button>
+      </div>
+    )
+  }
+}
+```
+
+
+
+The component state is in the instance variable _this.state_. The state is an object having two properties. <i>this.state.anecdotes</i> is the list of anecdotes and <i>this.state.current</i> is the index of the currently shown anecdote.
+
+
+
+In Functional components the right place for fetching data from a server is inside an [effect hook](https://reactjs.org/docs/hooks-effect.html), which is executed when a component renders or less frequently if necessary, e.g. only in combination with the first render.
+
+
+
+The [lifecycle-methods](https://reactjs.org/docs/state-and-lifecycle.html#adding-lifecycle-methods-to-a-class) of Class Components offer corresponding functionality. The correct place to trigger the fetching of data from a server is inside the lifecycle-method [componentDidMount](https://reactjs.org/docs/react-component.html#componentdidmount), which is executed once right after the first time a component renders:
+
+```js
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      anecdotes: [],
+      current: 0
+    }
+  }
+
+  // highlight-start
+  componentDidMount = () => {
+    axios.get('http://localhost:3001/anecdotes').then(response => {
+      this.setState({ anecdotes: response.data })
+    })
+  }
+  // highlight-end
+
+  // ...
+}
+```
+
+
+
+The callback function of the HTTP request updates the component state using the method [setState](https://reactjs.org/docs/react-component.html#setstate). The method only touches the keys that have been defined in the object passed to the method as an argument. The value for the key <i>current</i> remains unchanged.
+
+
+
+Calling the method setState always trigger the rerender of the Class Component, i.e. calling the method _render_.
+
+
+
+We'll finish off the the component with the ability to change the shown anecdote. The following is the code for the entire component with the addition highlighted:
+
+```js
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      anecdotes: [],
+      current: 0
+    }
+  }
+
+  componentDidMount = () => {
+    axios.get('http://localhost:3001/anecdotes').then(response => {
+      this.setState({ anecdotes: response.data })
+    })
+  }
+
+  // highlight-start
+  handleClick = () => {
+    const current = Math.round(
+      Math.random() * this.state.anecdotes.length
+    )
+    this.setState({ current })
+  }
+  // highlight-end
+
+  render() {
+    if (this.state.anecdotes.length === 0 ) {
+      return <div>no anecdotes...</div>
+    }
+
+    return (
+      <div>
+        <h1>anecdote of the day</h1>
+        <div>{this.state.anecdotes[this.state.current].content}</div>
+        <button onClick={this.handleClick}>next</button> // highlight-line
+      </div>
+    )
+  }
+}
+```
+
+
+
+For comparison here is the same application as a Functional component:
+
+```js
+const App = () => {
+  const [anecdotes, setAnecdotes] = useState([])
+  const [current, setCurrent] = useState(0)
+
+  useEffect(() =>{
+    axios.get('http://localhost:3001/anecdotes').then(response => {
+      setAnecdotes(response.data)
+    })
+  },[])
+
+  const handleClick = () => {
+    setCurrent(Math.round(Math.random() * anecdotes.length))
+  }
+
+  if (anecdotes.length === 0) {
+    return <div>no anecdotes...</div>
+  }
+
+  return (
+    <div>
+      <h1>anecdote of the day</h1>
+      <div>{anecdotes[current].content}</div>
+      <button onClick={handleClick}>next</button>
+    </div>
+  )
+}
+```
+
+
+
+In the case of our example the differences were minor. The biggest difference between Functional components and Class components is mainly that the state of a Class component is a single object, and that the state is updated using the method _setState_, while in Functional components the state can consist of multiple different variables, with all of them having their own update function.
+
+
+
+In some more advanced use cases the effect hook offers a considerably better mechanism for controlling side effects compared to the lifecycle-methods of Class Components.
+
+
+
+A notable benefit of using Functional components is not having to deal with the self referencing _this_-reference of the Javascript class.
+
+
+
+In my opinion, and the opinion of many others, Class Components offer basically no benefits over Functional components enhanced with hooks, with the exception of the so-called [error boundary](https://reactjs.org/docs/error-boundaries.html) mechanism, which currently (21.6.2019) isn't yet in use by functional components.
+
+
+
+When writing fresh code [there is no rational reason to use Class Components](https://reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both) if the project is using React with a version number 16.8 or greater. On the other hand, [there is currently no need to rewrite all old React code](https://reactjs.org/docs/hooks-faq.html#do-i-need-to-rewrite-all-my-class-components) as Functional components.
+
 
 The course is beginning to wrap up. Nevertheless, let's take a look at some noteworthy things relating to the organization and security of React-/Node-applications.
 
 
 ### Organization of code in React application
-
-
-
 
 In most applications we followed the principle, by which components were placed in the directory <i>components</i>, reducers were placed in the the directory <i>reducers</i>, and the code responsible for communicating with the server was placed in the directory <i>services</i>. This way of organizing fits a smaller application just fine, but as the amount of components increase, better solutions are needed. There is no one correct way to organize a project. The article [The 100% correct way to structure a React app (or why there’s no such thing)](https://hackernoon.com/the-100-correct-way-to-structure-a-react-app-or-why-theres-no-such-thing-3ede534ef1ed) provides some perspective on the issue.
 

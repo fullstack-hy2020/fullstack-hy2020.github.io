@@ -7,21 +7,42 @@ lang: fi
 
 <div class="content">
 
-Kurssin seitsemännen osan tehtävät poikkeavat jossain määrin. Edellisessä ja tässä luvussa on normaaliin tapaan [luvun teoriaan liittyviä tehtäviä](/osa7/react_router#tehtavia).
+Kurssin seitsemännen osan tehtävät poikkeavat jossain määrin. Edellisessä ja tässä luvussa on normaaliin tapaan [luvun teoriaan liittyviä tehtäviä](/osa7/custom_hookit#tehtavat-7-4-7-6).
 
 Tämän ja seuraavan luvun tehtävien lisäksi seitsemäs osa sisältää kertaavan ja soveltavan [tehtäväsarjan](/osa7/tehtavia_blogilistan_laajennus), jossa laajennetaan osissa 4 ja 5 tehtyä Bloglist-sovellusta.
 
 ### Hookit
 
-React tarjoaa yhteensä 10 erilaista [valmista hookia](https://reactjs.org/docs/hooks-reference.html), näistä ylivoimaisesti eniten käytetyt ovat meillekin jo tutut [useState](https://reactjs.org/docs/hooks-reference.html#usestate) ja [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect). 
+React tarjoaa yhteensä 10 erilaista [valmista hookia](https://reactjs.org/docs/hooks-reference.html), näistä ylivoimaisesti eniten käytetyt ovat meillekin jo tutut [useState](https://reactjs.org/docs/hooks-reference.html#usestate) ja [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect)
 
-### Custom hookit
+Käytimme [osassa 5](http://localhost:8000/osa5/props_children_ja_proptypet#ref-eli-viite-komponenttiin) hookia
+[useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle), jonka avulla komponentin sisäinen funktio pystyttiin tarjoamaan näkyville komponentin ulkopuolelle.
 
-React tarjoaa mahdollisuuden myös omien eli [custom](https://reactjs.org/docs/hooks-custom.html)-hookien määrittelyyn. Customhookien pääasiallinen tarkoitus on Reactin dokumentaation mukaan mahdollistaa komponenttien logiikan uusiokäyttö.
+Viimeisen vuoden aikana moni Reactin apukirjasto on ruvennut tarjoamaan hook-perustaisen rajapinnan. [Osassa 6](http://localhost:8000/osa6/flux_arkkitehtuuri_ja_redux#redux-storen-valittaminen-eri-komponenteille)
+käytimme react-redux-kirjaston hookeja [useSelector](https://react-redux.js.org/api/hooks#useselector) ja [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) välittämään redux-storen ja dispatch-funktion niitä tarvitseville komponenteille. Reduxin hook-perustainen api onkin huomattavasti helpompi käyttää kuin vanhempi, mutta edelleen käytössä oleva [connect](http://localhost:8000/osa6/connect)-api.
+
+Myös edellisessä [luvussa](http://localhost:8000/osa7/react_router/) käsitelyn [react-routerin](https://reacttraining.com/react-router/web/guides) api perustuu osin [hookeihin](https://reacttraining.com/react-router/web/api/Hooks), joiden avulla päästiin käsiksi routejen parametroituun osaan, sekä history-olioon, joka mahdollistaa selaimen osoiterivin manipuloinnin koodista.
+
+Kuten [osassa 1](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot)  mainittiin, hookit eivät ole mitä tahansa funktiota, niitä käytettävä tiettyjä [sääntöjä](https://reactjs.org/docs/hooks-rules.html) noudattaen. Seuraavassa vielä hookien käytön säännöt suoraan Reactin dokumentaatiosta kopioituna:
+
+**Don’t call Hooks inside loops, conditions, or nested functions.** Instead, always use Hooks at the top level of your React function. 
+
+**Don’t call Hooks from regular JavaScript functions.** Instead, you can:
+
+- Call Hooks from React function components.
+- Call Hooks from custom Hooks
+
+On olemassa [ESlint](https://www.npmjs.com/package/eslint-plugin-react-hooks)-sääntö, jonka avulla voidaa varmistaa, että sovellus käyttää hookeja oikein. Create-react-appiin valmiiksi asennettu säätö [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks) varoittaa heti jos yrität käyttää hookia väärin:
+
+![](../../images/7/60ea.png)
+
+### Custom-hookit
+
+React tarjoaa mahdollisuuden myös omien eli [custom](https://reactjs.org/docs/hooks-custom.html)-hookien määrittelyyn. Custom-hookien pääasiallinen tarkoitus on Reactin dokumentaation mukaan mahdollistaa komponenttien logiikan uusiokäyttö:
 
 > <i>Building your own Hooks lets you extract component logic into reusable functions.</i>
 
-Custom hookit ovat tavallisia Javascript-funktioita, jotka voivat kutsua mitä tahansa muita hookeja kunhan vain toimivat [hookien sääntöjen](osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot) puitteissa. Custom hookin nimen täytyy alkaa sanalla _use_.
+Custom-hookit ovat tavallisia Javascript-funktioita, jotka voivat kutsua mitä tahansa muita hookeja kunhan vain toimivat hookien sääntöjen puitteissa. Custom-hookin nimen täytyy alkaa sanalla _use_.
 
 Teimme [osassa 1](/osa1/komponentin_tila_ja_tapahtumankasittely#tapahtumankasittely) laskurin, jonka arvoa voi kasvattaa, vähentää ja nollata. Sovelluksen koodi on seuraava
 
@@ -47,7 +68,7 @@ const App = (props) => {
 }
 ```
 
-Eriytetään laskurilogiikka custom hookiksi. Hookin koodi on seuraavassa
+Eriytetään laskurilogiikka custom-hookiksi. Hookin koodi on seuraavassa
 
 ```js
 const useCounter = () => {
@@ -155,7 +176,7 @@ const App = () => {
         <input
           type='number'
           value={height}
-          onChange={(event) => setheight(event.target.value)}
+          onChange={(event) => setHeight(event.target.value)}
         />
       </form>
       <div>
@@ -168,7 +189,7 @@ const App = () => {
 
 Jokaista lomakkeen kenttää varten on oma tilansa. Jotta tila pysyy synkroonissa lomakkeelle syötettyjen tietojen kanssa, on jokaiselle <i>input</i>-elementille rekisteröity sopiva <i>onChange</i>-käsittelijä.
 
-Määritellään custom hook _useField_, joka yksinkertaistaa lomakkeen tilan hallintaa:
+Määritellään custom-hook _useField_, joka yksinkertaistaa lomakkeen tilan hallintaa:
 
 ```js
 const useField = (type) => {
@@ -260,50 +281,17 @@ const App = () => {
 }
 ```
 
-Lomakkeiden käsittely yksinkertaistuu huomattavasti kun ikävät tilan synkronoimiseen liittyvät detaljit on kapseloitu custom hookin vastuulle.
+Lomakkeiden käsittely yksinkertaistuu huomattavasti kun ikävät tilan synkronoimiseen liittyvät detaljit on kapseloitu custom-hookin vastuulle.
 
-Custom hookit eivät selvästikään ole pelkkä uusiokäytön väline, ne mahdollistavat myös entistä paremman tavan jakaa koodia pienempiin, modulaarisiin osiin.
+Custom-hookit eivät selvästikään ole pelkkä uusiokäytön väline, ne mahdollistavat myös entistä paremman tavan jakaa koodia pienempiin, modulaarisiin osiin.
 
-### Hookien säännöt revisited
-
-Kuten [osassa 1](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot)  mainittiin, on hookeja käytettävä tiettyjä [rajoituksia](https://reactjs.org/docs/hooks-rules.html) noudattaen. Seuraavassa vielä hookien käytön säännöt suoraan Reactin dokumentaatiosta kopioituna:
-
-**Don’t call Hooks inside loops, conditions, or nested functions.** Instead, always use Hooks at the top level of your React function. 
-
-**Don’t call Hooks from regular JavaScript functions.** Instead, you can:
-
-- Call Hooks from React function components.
-- Call Hooks from custom Hooks
-
-On olemassa [ESlint](https://www.npmjs.com/package/eslint-plugin-react-hooks)-sääntö, jonka avulla voidaa varmistaa, että sovellus käyttää hookeja oikein. 
-
-Kun sääntö [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks) on asennettu, se saadaan käyttöön muuttamalla tiedostoa _.eslintrc.js_ seuraavasti:
-
-```js
-module.exports = {
-  // ...
-  "plugins": [
-    // ...
-    "react-hooks" // highlight-line
-  ],
-  "rules": {
-    "react-hooks/rules-of-hooks": "error", // highlight-line
-    // ...
-  }
-}; 
-```
-
-Lint valittaa nyt jos hookeja käytetään kielletyllä tavalla:
-
-![](../../images/5/24e.png)
+Internetistä alkaa löytyä yhä enenevissä määrin valmiita hookeja sekä muuta hookeihin liittyvä hyödyllistä materiaalia, esim. seuraavia kannattaa vilkaista
 
 ### Lisää hookeista
 
-Internetistä alkaa löytyä yhä enenevissä määrin hyödyllistä hookeihin liittyvä materiaalia, esim. seuraavia kannattaa vilkaista
-
 * [Awesome React Hooks Resouces](https://github.com/rehooks/awesome-react-hooks)
-* [Why Do React Hooks Rely on Call Order?](https://overreacted.io/why-do-hooks-rely-on-call-order/)
 * [Easy to understand React Hook recipes by Gabe Ragland](https://usehooks.com/)
+* [Why Do React Hooks Rely on Call Order?](https://overreacted.io/why-do-hooks-rely-on-call-order/)
 
 </div>
 
@@ -311,11 +299,13 @@ Internetistä alkaa löytyä yhä enenevissä määrin hyödyllistä hookeihin l
 
 ### Tehtävät 7.4.-7.6.
 
-#### 7.4: blogilista ja hookit step1
+#### 7.4: anekdoottisovellus ja hookit step1
 
-Yksinkertaista sovelluksesi kirjautumislomakkeen käyttöä äsken määritellyn _useField_ custom hookin avulla.
+Jatketaan luvun react-router [tehtävien](/osa7/custom_hookit#tehtavat-7-4-7-6) sovelluksen parissa.
 
-Luonteva paikka tallentaa hook on tiedosto <i>/src/hooks/index.js</i>. 
+Yksinkertaista sovelluksen uuden anekdootin luomiseen käytettävän lomakkeen käyttöä äsken määritellyn _useField_ custom-hookin avulla.
+
+Talleta hook on tiedostoo <i>/src/hooks/index.js</i>. 
 
 Jos käytät normaalisti käyttämämme default exportin sijaan [nimettyä exportia](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description)
 
@@ -354,17 +344,21 @@ const App = () => {
 }
 ```
 
-#### 7.5: blogilista ja hookit step2
+#### 7.5: anekdoottisovellus ja hookit step2
 
-<i>useField</i>-hookissa on pieni epäkohta. Se ei mahdollista lomakkeen syötekentän tyhjentämistä. Laajenna hookia siten, että se tarjoaa operaation <i>reset</i> kentän tyhjentämiseen. Ota hook käyttöön myös uuden blogin luovassa formissa.
+Lisää lomakkeeseen nappi, joka mahdollistaa syötekenttien tyhjentämisen.
 
-Lisäyksen jälkeen lomakkeet toimivat edelleen, mutta riippuen ratkaisustasi konsoliin saattaa ilmestyä ikävä varoitus:
+![](../../images/7/61ea.png)
 
-![](../../images/5/22.png)
+Laajenna hookia siten, että se tarjoaa operaation <i>reset</i> kentän tyhjentämiseen. 
+
+Lisäyksen jälkeen konsoliin saattaa ilmestyä ikävä varoitus:
+
+![](../../images/7/62ea.png)
 
 Ei välitetä virheestä vielä tässä tehtävässä.
 
-#### 7.6: blogilista ja hookit step3
+#### 7.6: anekdoottisovellus ja hookit step3
 
 Jos ratkaisusi ei aiheuttanut warningia, ei sinun tarvitse tehdä tässä tehtävässä mitään.
 
@@ -373,17 +367,17 @@ Muussa tapauksessa tee sovellukseen korjaus, joka poistaa varoituksen `Invalid v
 Warningin syynä on siis se, että edellisen tehtävän laajennuksen jälkeen seuraava
 
 ```js
-<input {...username}/>
+<input {...content}/>
 ```
 
 tarkoittaa samaa kuin
 
 ```js
 <input
-  value={username.value} 
-  type={username.type}
-  onChange={username.onChange}
-  reset={username.reset} // highlight-line
+  value={content.value} 
+  type={content.type}
+  onChange={content.onChange}
+  reset={content.reset} // highlight-line
 />
 ```
 
@@ -403,7 +397,7 @@ Tällöin menettäisimme suurelta osin <i>useField</i>-hookin edut. Eli keksi t�
 
 #### 7.7*: ultimate hooks
 
-Tämän osan materiaalissa jatkokehitetyn muistiinpanosovelluksen palvelimen kanssa keskusteleva koodi näyttää seuraavalta:
+Aiempien osaien materiaalissa kehitetyn muistiinpanosovelluksen palvelimen kanssa keskusteleva koodi näyttää seuraavalta:
 
 ```js
 import axios from 'axios'
@@ -441,7 +435,7 @@ Huomaamme, että koodi ei itseasiassa välitä ollenkaan siitä että se käsitt
 
 Eristä kommunikoiva koodi hookiksi _useResource_. Riittää, että kaikkien olioiden haku ja uuden olion luominen onnistuvat.
 
-Voit tehdä tehtävän repositoriosta https://github.com/fullstack-hy2020/custom-hooks löytyvään projektiin. Projektin komponentti <i>App</i> on seuraavassa:
+Voit tehdä tehtävän repositoriosta https://github.com/fullstack-hy2020/ultimate-hooks löytyvään projektiin. Projektin komponentti <i>App</i> on seuraavassa:
 
 ```js
 const App = () => {
@@ -483,7 +477,7 @@ const App = () => {
 }
 ```
 
-Custom hook _useResource_ siis palauttaa (tilahookien tapaan) kaksialkioisen taulukon. Taulukon ensimmäinen alkio sisältää resurssin kaikki oliot ja toisena alkiona on olio, jonka kautta resurssia on mahdollista manipuloida, mm lisäämällä uusia olioita. 
+Custom-hook _useResource_ siis palauttaa (tilahookien tapaan) kaksialkioisen taulukon. Taulukon ensimmäinen alkio sisältää resurssin kaikki oliot ja toisena alkiona on olio, jonka kautta resurssia on mahdollista manipuloida, mm lisäämällä uusia olioita. 
 
 Jos toteutit hookin oikein, mahdollistaa sovellus blogien ja puhelinnumeroiden yhtäaikaisen käsittelyn (käynnistä backend porttiin 3005 komennolla _npm run server_)
 

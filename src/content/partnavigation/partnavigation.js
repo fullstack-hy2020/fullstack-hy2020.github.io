@@ -43,10 +43,10 @@ module.exports = {
     },
     '7': {
       a: 'React-router',
-          /*
       b: 'custom-hookit'
-      b: 'Lisää tyyleistä',
-      c: 'Webpack',
+                /*
+      c: 'Lisää tyyleistä',
+      d: 'Webpack',
       e: 'Luokkakomponentit, Sekalaista',
       f: 'Tehtäviä: blogilistan laajennus',
       */
@@ -104,10 +104,10 @@ module.exports = {
     },
     '7': {
       a: 'React-router',
-      b: 'More about styles',
-      c: 'Webpack',
-      d: 'Class components, E2E-testing',
-      e: 'Miscellaneous',
+      b: 'Custom hooks',
+      c: 'More about styles',
+      d: 'Webpack',
+      e: 'Class components, Miscellaneous',
       f: 'Exercises: extending the bloglist',     
     },
     '8': {
