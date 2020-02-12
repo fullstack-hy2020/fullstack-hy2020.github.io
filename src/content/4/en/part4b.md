@@ -244,7 +244,7 @@ const res = await api.get('/api/notes')
 expect(res.body.length).toBe(2)
 ```
 
-HTTP-pyyntöjen tiedot konsoliin kirjoittava middleware häiritsee hiukan testien tulostusta. Muutetaan loggeria siten, että testausmoodissa lokiviestit eivät tulostu konsoliin:
+<!-- HTTP-pyyntöjen tiedot konsoliin kirjoittava middleware häiritsee hiukan testien tulostusta. Muutetaan loggeria siten, että testausmoodissa lokiviestit eivät tulostu konsoliin: -->
 
 The middleware that outputs information about the HTTP requests is obstructing the test execution output. Let us modify the logger so that it does not print to console in test mode:
 
@@ -354,7 +354,9 @@ The provided parameter can refer to the name of the test or the describe block. 
 npm test -- -t 'notes'
 ```
 
-*HUOM*: yksittäisiä testejä suoritettaessa saattaa mongoose-yhteys  jäädä auki, mikäli yhtään yhteyttä hyödyntävää testiä ei ajeta. Ongelma seurannee siitä, että supertest alustaa yhteyden, mutta jest ei suorita afterAll-osiota.
+<!-- *HUOM*: yksittäisiä testejä suoritettaessa saattaa mongoose-yhteys  jäädä auki, mikäli yhtään yhteyttä hyödyntävää testiä ei ajeta. Ongelma seurannee siitä, että supertest alustaa yhteyden, mutta jest ei suorita afterAll-osiota. -->
+**NB**: When running a single test, the mongoose connection might stay open if no tests using the connection are run. 
+The problem might be due to the fact that supertest primes the connection, but jest does not run the afterAll portion of the code. 
 
 ### async/await
 
@@ -754,9 +756,11 @@ notesRouter.delete('/:id', async (request, response, next) => {
 
 You can find the code for our current application in its entirety in the <i>part4-4</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4).
 
-### Try-catchin eliminointi
+### Eliminating the try-catch
 
-Async/await selkeyttää koodia jossain määrin, mutta sen 'hinta' on poikkeusten käsittelyn edellyttämä <i>try/catch</i>-rakenne. Kaikki routejen käsittelijät noudattavat samaa kaavaa
+<!-- Async/await selkeyttää koodia jossain määrin, mutta sen 'hinta' on poikkeusten käsittelyn edellyttämä <i>try/catch</i>-rakenne. Kaikki routejen käsittelijät noudattavat samaa kaavaa -->
+Async/await unclutters the code a bit, but the 'price' is the <i>try/catch</i> structure required for catching exceptions. 
+All of the route handlers follow the same structure
 
 ```js
 try {
@@ -766,17 +770,23 @@ try {
 }
 ```
 
-Mieleen herää kysymys, olisiko koodia mahdollista refaktoroida siten, että <i>catch</i> saataisiin refaktoroitua ulos metodeista? 
+<!-- Mieleen herää kysymys, olisiko koodia mahdollista refaktoroida siten, että <i>catch</i> saataisiin refaktoroitua ulos metodeista?  -->
+One starts to wonder, if it would be possible to refactor the code to eliminate the <i>catch</i> from the methods?
 
-Kirjasto [express-async-errors](https://github.com/davidbanham/express-async-errors) tuo tilanteeseen helpotuksen.
+<!-- Kirjasto [express-async-errors](https://github.com/davidbanham/express-async-errors) tuo tilanteeseen helpotuksen. -->
+The [express-async-errors](https://github.com/davidbanham/express-async-errors) library has a solution for this. 
 
-Asennetaan kirjasto
+<!-- Asennetaan kirjasto -->
+Let's install the library
 
 ```bash
 npm install express-async-errors --save
 ```
 
-Kirjaston käyttö on <i>todella</i> helppoa. Kirjaston koodi otetaan käyttöön tiedostossa <i>src/app.js</i>:
+<!-- Kirjaston käyttö on <i>todella</i> helppoa.
+ Kirjaston koodi otetaan käyttöön tiedostossa <i>src/app.js</i>: -->
+Using the library is <i>very</i> easy. 
+You introduce the library in <i>src/app.js</i>:
 
 ```js
 const config = require('./utils/config')
@@ -794,7 +804,9 @@ const mongoose = require('mongoose')
 module.exports = app
 ```
 
-Kirjaston koodiin sisällyttämän "magian" ansiosta pääsemme kokonaan eroon try-catch-lauseista. Muistiinpanon poistamisesta huolehtiva route
+<!-- Kirjaston koodiin sisällyttämän "magian" ansiosta pääsemme kokonaan eroon try-catch-lauseista. Muistiinpanon poistamisesta huolehtiva route -->
+The 'magic' of the library allows us to eliminate the try-catch blocks completely. 
+For example the route for deleting a note
 
 ```js
 notesRouter.delete('/:id', async (request, response, next) => {
@@ -807,7 +819,8 @@ notesRouter.delete('/:id', async (request, response, next) => {
 })
 ```
 
-muuttuu muotoon
+<!-- muuttuu muotoon -->
+becomes
 
 ```js
 notesRouter.delete('/:id', async (request, response) => {
@@ -816,9 +829,12 @@ notesRouter.delete('/:id', async (request, response) => {
 })
 ```
 
-Kirjaston ansiosta kutsua _next(exception)_ ei siis enää tarvita, kirjasto hoitaa asian konepellin alla, eli jos <i>async</i>-funktiona määritellyn routen sisällä syntyy poikkeus, siirtyy suoritus automaattisesti virheenkäsittelijämiddlewareen.
+<!-- Kirjaston ansiosta kutsua _next(exception)_ ei siis enää tarvita, kirjasto hoitaa asian konepellin alla, eli jos <i>async</i>-funktiona määritellyn routen sisällä syntyy poikkeus, siirtyy suoritus automaattisesti virheenkäsittelijämiddlewareen. -->
+Because of the library, we do not need the _next(exception)_ call anymore. 
+The library handles everything under the hood. If an exception occurs in a <i>async</i> route, the execution is automatically passed to the error handling middleware.
 
-Muut routet yksinkertaistuvat seuraavasti:
+<!-- Muut routet yksinkertaistuvat seuraavasti: -->
+The other routes become:
 
 ```js
 notesRouter.post('/', async (request, response) => {
@@ -844,7 +860,8 @@ notesRouter.get('/:id', async (request, response) => {
 })
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), haarassa <i>part4-5</i>. 
+<!-- Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), haarassa <i>part4-5</i>.  -->
+The code for our application can be found from [github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), branch <i>part4-5</i>.
 
 ### Optimizing the beforeEach function
 
