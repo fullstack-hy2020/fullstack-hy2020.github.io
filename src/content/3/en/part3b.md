@@ -7,9 +7,13 @@ lang: en
 
 <div class="content">
 
-Yhdistetään seuraavaksi [osassa 2](/osa2) tekemämme frontend omaan backendiimme. 
+<!-- Yhdistetään seuraavaksi [osassa 2](/osa2) tekemämme frontend omaan backendiimme.  -->
+Next let's connect the frontend we made in [part 2](/part2) to our own backend.
 
-Edellisessä osassa backendinä toiminut json-server tarjosi muistiinpanojen listan osoitteessa http://localhost:3001/notes fronendin käyttöön. Backendimme urlien rakenne on hieman erilainen, muistiinpanot löytyvät osoitteesta http://localhost:3001/api/notes, eli muutetaan frontendin tiedostossa <i>src/services/notes.js</i> määriteltyä muuttujaa _baseUrl_ seuraavasti:
+<!-- Edellisessä osassa backendinä toiminut json-server tarjosi muistiinpanojen listan osoitteessa http://localhost:3001/notes fronendin käyttöön. Backendimme urlien rakenne on hieman erilainen, muistiinpanot löytyvät osoitteesta http://localhost:3001/api/notes, eli muutetaan frontendin tiedostossa <i>src/services/notes.js</i> määriteltyä muuttujaa _baseUrl_ seuraavasti: -->
+In the previous part, the frontend could ask for the list of notes from the json-server we had as a backend at from the address http://localhost:3001/notes.
+Our backend has a bit different url structure, and the notes can be found from http//localhost:3001/api/notes. 
+Let's change the attribute __baseUrl__ in the <i>src/services/notes.js</i> like so:
 
 ```js
 import axios from 'axios'
@@ -25,11 +29,13 @@ const getAll = () => {
 export default { getAll, create, update }
 ```
 
-Frontendin tekemä GET-pyyntö osoitteeseen <http://localhost:3001/api/notes> ei jostain syystä toimi:
+<!-- Frontendin tekemä GET-pyyntö osoitteeseen <http://localhost:3001/api/notes> ei jostain syystä toimi: -->
+Now frontend's GET request to <http://localhost:3001/api/notes> does not work for some reason:
 
 ![](../../images/3/3ae.png)
 
-Mistä on kyse? Backend toimii kuitenkin selaimesta ja postmanista käytettäessä ilman ongelmaa.
+<!-- Mistä on kyse? Backend toimii kuitenkin selaimesta ja postmanista käytettäessä ilman ongelmaa. -->
+What's going on here? We can access the backend from a browser and from postman without any problems.
 
 ### Same origin policy and CORS
 
