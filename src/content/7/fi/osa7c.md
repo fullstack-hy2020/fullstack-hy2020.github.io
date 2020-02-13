@@ -17,10 +17,9 @@ Ensimmäinen laajaa kuuluisuutta saanut UI framework oli Twitterin kehittämä [
 
 Monet UI-frameworkit sisältävät web-sovellusten käyttöön valmiiksi määriteltyjä teemoja sekä "komponentteja", kuten painikkeita, menuja, taulukkoja. Termi komponentti on edellä kirjotettu hipsuissa sillä kyse ei ole samasta asiasta kuin React-komponentti. Useimmiten UI-frameworkeja käytetään sisällyttämällä sovellukseen frameworkin määrittelemät CSS-tyylitiedostot sekä Javascript-koodi.
 
-Monesta UI-frameworkista on tehty React-ystävällisiä versiota, joissa UI-frameworkin avulla määritellyistä "komponenteista" on tehty React-komponentteja. Esim. Bootstrapista on olemassa parikin React-versiota [reactstrap](http://reactstrap.github.io/) ja [react-bootstrap](https://react-bootstrap.github.io/).
+Monesta UI-frameworkista on tehty React-ystävällisiä versiota, joissa UI-frameworkin avulla määritellyistä "komponenteista" on tehty React-komponentteja. Esim. Bootstrapista on olemassa parikin React-versiota joista suosituin on [react-bootstrap](https://react-bootstrap.github.io/).
 
-Katsotaan seuraavaksi kahta UI-framworkia bootstrapia ja [semantic ui](https://semantic-ui.com/):ta.
-Lisätään molempien avulla samantapaiset tyylit luvun [React-router](/osa7/react_router) sovellukseen.
+Katsotaan seuraavaksi kahta UI-framworkia bootstrapia ja [material ui](https://material-ui.com/):ta. Lisätään molempien avulla samantapaiset tyylit luvun [React-router](/osa7/react_router) sovellukseen.
 
 ### react bootstrap
 
@@ -36,19 +35,19 @@ Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head
 
 ```js
 <head>
-<link
-  rel="stylesheet"
-  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-  crossorigin="anonymous"
-/>
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous"
+  />
   // ...
 </head>
 ```
 
 Kun sovellus ladataan uudelleen, näyttää se jo aavistuksen tyylikkäämmältä:
 
-![](../../images/7/5.png)
+![](../../images/7/5ea.png)
 
 Bootstrapissa koko sivun sisältö renderöidään yleensä [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers):ina, eli käytännössä koko sovelluksen ympäröivä _div_-elementti merkitään luokalla _container_:
 
@@ -66,7 +65,7 @@ const App = () => {
 
 Sovelluksen ulkoasu muuttuu siten, että sisältö ei ole enää yhtä kiinni selaimen reunoissa:
 
-![](../../images/7/6.png)
+![](../../images/7/6ea.png)
 
 Muutetaan seuraavaksi komponenttia <i>Notes</i> siten, että se renderöi muistiinpanojen listan [taulukkona](https://getbootstrap.com/docs/4.1/content/tables/). React bootstrap tarjoaa valmiin komponentin [Table](https://react-bootstrap.github.io/components/table/), joten CSS-luokan käyttöön ei ole tarvetta.
 
@@ -144,13 +143,13 @@ import { Table, Form, Button } from 'react-bootstrap'
 
 Lomake näyttää parantelun jälkeen seuraavalta:
 
-![](../../images/7/8.png)
+![](../../images/7/8ea.png)
 
 #### Notifikaatio
 
 Toteutetaan sovellukseen kirjautumisen jälkeinen <i>notifikaatio</i>:
 
-![](../../images/7/9.png)
+![](../../images/7/9ea.png)
 
 Asetetaan notifikaatio kirjautumisen yhteydessä komponentin <i>App</i> tilan muuttujaan _message_:
 
@@ -180,17 +179,14 @@ ja renderöidään viesti Bootstrapin [Alert](https://getbootstrap.com/docs/4.1/
 
 ```js
 <div className="container">
-  <Router>
-    <div>
-    // highlight-start
-      {(message &&
-        <Alert variant="success">
-          {message}
-        </Alert>
-      )}
-      // highlight-end
-    //...
-)}
+// highlight-start
+  {(message &&
+    <Alert variant="success">
+      {message}
+    </Alert>
+  )}
+// highlight-end
+</div>
 ```
 
 #### Navigaatiorakenne
@@ -224,57 +220,45 @@ Muutetaan vielä lopuksi sovelluksen navigaatiomenu käyttämään Bootstrapin [
 
 Ulkoasu on varsin tyylikäs
 
-![](../../images/7/10.png)
+![](../../images/7/10ea.png)
 
 Jos selaimen kokoa kaventaa, huomaamme että menu "kollapsoituu" ja sen saa näkyville vain klikkaamalla:
 
-![](../../images/7/11e.png)
+![](../../images/7/11ea.png)
 
 Bootstrap ja valtaosa tarjolla olevista UI-frameworkeista tuottavat [responsiivisia](https://en.wikipedia.org/wiki/Responsive_web_design) näkymiä, eli sellaisia jotka renderöityvät vähintään kohtuullisesti monen kokoisilla näytöillä.
 
 Chromen developer-konsolin avulla on mahdollista simuloida sovelluksen käyttöä erilaisilla mobiilipäätteillä
 
-![](../../images/7/12.png)
-
+![](../../images/7/12ea.png)
 
 Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/fullstack-hy2020/misc/blob/master/notes-bootstrap.js)
 
-### Semantic UI
+### Material UI
 
-Olen käyttänyt bootstrapia vuosia, mutta reilu vuosi sitten siirryin [Semantic UI](https://semantic-ui.com/):n käyttäjäksi. Kurssin tehtävien [palautusovellus](https://studies.cs.helsinki.fi/courses) on tehty Semanticilla ja kokemukset ovat olleet rohkaisevia, erityisesti semanticin [React-tuki](https://react.semantic-ui.com) on ensiluokkainen ja dokumentaatiokin huomattavasti parempi kuin bootstrapissa.
+Tarkastellaan toisena esimerkkinä Googlen kehittämän "muotokielen" [Material designin](https://material.io/) toteuttavaa React-kirjastoa [MaterialUI](https://material-ui.com/). 
 
-Lisätään nyt [React-router](/osa6/#react-router)-sovellukselle edellisen luvun tapaan tyylit semanticilla.
-
-Aloitetaan asentamalla [semantic-ui-react](https://react.semantic-ui.com)-kirjasto:
+Asennetaan kirjasto suorittamalla komento
 
 ```js
-npm install --save semantic-ui-react
+npm install --save @material-ui/core
 ```
 
-Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> head-tagin sisään semanticin css-määrittelyt lataava rivi (joka löytyy [tästä](https://react.semantic-ui.com/usage#content-delivery-network-cdn)):
+Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään bootstrapin css-määrittelyt lataava rivi:
 
 ```js
 <head>
-  <link
-    rel="stylesheet"
-    href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"
-  />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
   // ...
 </head>
 ```
 
-Sijoitetaan koko sovelluksen renderöimä sisältö Semanticin komponentin [Container](https://react.semantic-ui.com/elements/container) sisälle.
+Tehdään nyt MaterialUI:n avulla koodiin suunilleen samat muutokset, mitä teimme bootstarpilla.
 
-Semanticin dokumentaatio sisältää jokaisesta komponentista useita esimerkkikoodinpätkiä, joiden avulla komponenttien käytön periaatteet on helppo omaksua:
-
-![](../../images/7/13.png)
-
-Muutetaan komponentin App uloin <i>div</i>-elementti komponentiksi <i>Container</i>:
+Renderöidään koko sovelluksen sisältö komponentin [Container](https://material-ui.com/components/container/) sisälle:
 
 ```js
-import { Container } from 'semantic-ui-react'
-
-// ...
+import Container from '@material-ui/core/Container'
 
 const App = () => {
   // ...
@@ -286,151 +270,208 @@ const App = () => {
 }
 ```
 
-Sivun sisältö ei ole enää reunoissa kiinni.
-
-Edellisen luvun tapaan, renderöidään muistiinpanot taulukkona, komponentin [Table](https://react.semantic-ui.com/collections/table) avulla. Koodi näyttää seuraavalta
+Aloitetaan komponentista <i>Notes</i> ja renderöidään muistiinpanojen lista [taulukkona](https://material-ui.com/components/tables/#simple-table):
 
 ```js
-import { Table } from 'semantic-ui-react'
-
-const Notes = (props) => (
+const Notes = ({notes}) => (
   <div>
     <h2>Notes</h2>
-    <Table striped celled>
-      <Table.Body>
-        {props.notes.map(note =>
-          <Table.Row key={note.id}>
-            <Table.Cell>
-              <Link to={`/notes/${note.id}`}>
-                {note.content}
-              </Link>
-            </Table.Cell>
-            <Table.Cell>
-              {note.user}
-            </Table.Cell>
-          </Table.Row>
-        )}
-      </Table.Body>
-    </Table>
+
+    <TableContainer component={Paper}>
+      <Table>
+        <TableBody>
+          {notes.map(note => (
+            <TableRow key={note.id}>
+              <TableCell>
+                <Link to={`/notes/${note.id}`}>{note.content}</Link>
+              </TableCell>
+              <TableCell>
+                {note.name}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   </div>
+)
 ```
 
-Muistiinpanojen lista näyttää seuraavalta:
+Taulukko näyttää seuraavalta:
 
-![](../../images/7/14e.png)
+![](../../images/7/63eb.png)
+
+Hienoinen ikävä piirre Material UI:ssa on se, että jokainen komponentti on importattava erikseen, muistiinpanojen sivun import-lista on aika pitkä:
+
+```js
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableContainer from '@material-ui/core/TableContainer'
+import TableRow from '@material-ui/core/TableRow'
+import Paper from '@material-ui/core/Paper'
+```
 
 #### Lomake
 
-Otetaan kirjautumissivulla käyttöön Semanticin [Form](https://react.semantic-ui.com/collections/form)-komponentti:
+Parannellaan seuraavaksi näkymän <i>Login</i> kirjautumislomaketta käyttäen komponentteja [TextField](https://material-ui.com/components/text-fields/) ja [Button](https://material-ui.com/api/button/):
 
-```js
-import { Form, Button } from 'semantic-ui-react'
+```js 
+const Login = (props) => {
+  const history = useHistory()
 
-let Login = (props) => {
   const onSubmit = (event) => {
-    // ...
+    event.preventDefault()
+    props.onLogin('mluukkai')
+    history.push('/')
   }
 
   return (
-    <Form onSubmit={onSubmit}>
-      <Form.Field>
-        <label>username</label>
-        <input name='username' />
-      </Form.Field>
-      <Form.Field>
-        <label>password</label>
-        <input type='password' />
-      </Form.Field>
-      <Button type='submit'>login</Button>
-    </Form>
+    <div>
+      <h2>login</h2>
+      <form onSubmit={onSubmit}>
+        <div>
+          <TextField label="username" />
+        </div>
+        <div>
+          <TextField  label="password" type='password' />
+        </div>
+        <div>
+          <Button variant="contained" color="primary" type="submit">
+            login
+          </Button>
+        </div>
+      </form>
+    </div>
   )
 }
 ```
 
-Ulkoasu näyttää seuraavalta:
+Lopputulos on:
 
-![](../../images/7/15.png)
+![](../../images/7/64ea.png)
+
+Bootstrapiin verrattuna pieni ero on nyt se, että MaterialUI ei tarjoa erillistä komponenttia itse lomakkeelle, lomake tehdään normaaliin tapaan HTML:n [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form)-elementtinä.
+
+Lomakkeen käyttämät komponentit on luonnollisesti importattava koodissa. 
 
 #### Notifikaatio
 
-Edellisen luvun tapaan, toteutetaan sovellukseen kirjautumisen jälkeinen <i>notifikaatio</i>:
-
-![](../../images/7/6.png)
-
-Kuten edellisessä luvussa, asetetaan notifikaatio kirjautumisen yhteydessä komponentin <i>App</i> tilan muuttujaan _message_:
+Kirjautumisen jälkeisen notifikaation näyttämiseen sopii komponenetti Alert](https://material-ui.com/components/alert/), joka on lähes samanlainen kuin bootstrapin vastaava komponentti: 
 
 ```js
-const App = () => {
-  // ...
-  const [message, setMessage] = useState(null)
-
-  const login = (user) => {
-    setUser(user)
-    setMessage(`welcome ${user}`)
-    setTimeout(() => {
-      setMessage(null)
-    }, 10000)
-  }
-
-  // ...
-}
-```
-
-ja renderöidään viesti käyttäen komponenttia [Message](https://react.semantic-ui.com/collections/message):
-
-```js
-<Container>
+<div>
+// highlight-start
   {(message &&
-    <Message success>
+    <Alert severity="success">
       {message}
-    </Message>
+    </Alert>
   )}
-  // ...
-</Conteiner>
+// highlight-end
+</div>
 ```
+
+Alert-komponentti ei ole vielä mukana MaterialUI:n core-pakkauksessa, ja komponentin sisältävä pakkaus [lab](https://material-ui.com/components/about-the-lab/) tulee asentaa sovellukseen:
+
+```js 
+npm install --save @material-ui/lab
+```
+
+Komponentti importataan seuraavasti
+
+```js 
+import Alert from '@material-ui/lab/Alert'
+```
+
+Alert on ulkoasultaan tyylikäs:
+
+![](../../images/7/65ea.png)
+
 
 #### Navigaatiorakenne
 
-Navigaatiorakenne toteutetaan komponentin [Menu](https://react.semantic-ui.com/collections/menu) avulla:
+Navigaatiorakenne toteutetaan komponentin [AppBar](https://material-ui.com/components/app-bar/) avulla
+
+Jos sovelletaan suoraan dokumentaation esimerkkiä  
 
 ```js
-<Router>
-  <div>
-    <Menu inverted>
-      <Menu.Item link>
-        <Link to="/">home</Link>
-      </Menu.Item>
-      <Menu.Item link>
-        <Link to="/notes">notes</Link>
-      </Menu.Item>
-      <Menu.Item link>
-        <Link to="/users">users</Link>
-      </Menu.Item>
-      <Menu.Item link>
-        {user
-          ? <em>{user} logged in</em>
-          : <Link to="/login">login</Link>
-        }
-      </Menu.Item>
-    </Menu>
-    // ...
-  </div>
-</Router>
+<AppBar position="static">
+  <Toolbar>
+    <IconButton edge="start" color="inherit" aria-label="menu">
+    </IconButton>
+    <Button color="inherit">
+      <Link to="/">home</Link>
+    </Button>
+    <Button color="inherit">
+      <Link to="/notes">notes</Link>
+    </Button>
+    <Button color="inherit">
+      <Link to="/users">users</Link>
+    </Button>  
+    <Button color="inherit">
+      {user
+        ? <em>{user} logged in</em>
+        : <Link to="/login">login</Link>
+      }
+    </Button>                
+  </Toolbar>
+</AppBar>
 ```
 
-Lopputulos näyttää seuraavalta:
+saadaan kyllä toimiva ratkaisu, mutta sen ulkonäkö ei ole paras mahdollinen
 
-![](../../images/7/17.png)
+![](../../images/7/66ea.png)
 
-Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/fullstack-hy2020/misc/blob/master/notes-semantic.js).
+Lueskelemalla [dokumentaatiota](https://material-ui.com/guides/composition/#routing-libraries), löytyy parempi tapa eli [component props](https://material-ui.com/guides/composition/#component-prop), jonka avulla voidaan muuttaa se miten komponenti n juurielementti renderöityy.
+
+Määrittelemällä
+
+```js
+<Button color="inherit" component={Link} to="/">
+  home
+</Button>
+```
+
+renderöidään komponentti _Button_, siten että sen juurikomponenttina onkin react-redux-kirjaston komponentti _Link_, jolle siirtyy polun kertova props _to_.  
+
+Navigaatiopalkin koodi kokonaisuudessaan on seuraava
+
+```js
+<AppBar position="static">
+  <Toolbar>
+    <Button color="inherit" component={Link} to="/">
+      home
+    </Button>
+    <Button color="inherit" component={Link} to="/notes">
+      notes
+    </Button>
+    <Button color="inherit" component={Link} to="/users">
+      users
+    </Button>   
+    {user
+      ? <em>{user} logged in</em>
+      : <Button color="inherit" component={Link} to="/login">
+          LINK
+        </Button>
+    }                              
+  </Toolbar>
+</AppBar>
+```
+
+ja lopputulos on haluammamme kaltainen
+
+![](../../images/7/67ea.png)
+
 
 ### Loppuhuomioita
 
-Ero react-bootstrapin ja semantic-ui-reactin välillä ei ole suuri. On makuasia kummalla tuotettu ulkoasu on tyylikkäämpi. Oma vuosia kestäneen bootstrapin käytön jälkeinen siirtymiseni semanticiin johtuu semanticin saumattomammasta React-tuesta, laajemmasta valmiiden komponenttien valikoimasta ja paremmasta sekä selkeämmästä dokumentaatiosta. Semantic UI projektin kehitystyön jatkuvuuden suhteen on kuitenkin viime aikoina ollut ilmoilla muutamia [kysymysmerkkejä](https://github.com/Semantic-Org/Semantic-UI/issues/6109), ja tilannetta kannattaakin seurata.
+Ero react-bootstrapin ja MaterialUI:n välillä ei ole suuri. On makuasia kummalla tuotettu ulkoasu on tyylikkäämpi. Eri npm-kirjastojen lautausmääriä vertailevan sivuston https://www.npmtrends.com/ mukaan Material UI ohitti react-boostrapin suosiossa vuoden 2018 loppupuolella:
 
-Esimerkissä käytettiin UI-frameworkeja niiden React-integraatiot tarjoavien kirjastojen kautta.
+![](../../images/7/68ea.png)
 
-Sen sijaan että käytimme kirjastoa [React bootstrap](https://react-bootstrap.github.io/), olisimme voineet aivan yhtä hyvin käyttää Bootstrapia suoraan, liittämällä HTML-elementteihin CSS-luokkia. Eli sen sijaan että määrittelimme esim. taulukon komponentin <i>Table</i> avulla
+Esimerkeissä käytettiin UI-frameworkeja niiden React-integraatiot tarjoavien kirjastojen kautta.
+
+Sen sijaan että käytimme kirjastoa [react bootstrap](https://react-bootstrap.github.io/), olisimme voineet aivan yhtä hyvin käyttää Bootstrapia suoraan, liittämällä HTML-elementteihin CSS-luokkia. Eli sen sijaan että määrittelimme esim. taulukon komponentin <i>Table</i> avulla
 
 ```js
 <Table striped>
@@ -450,7 +491,7 @@ Taulukon määrittelyssä React bootstrapin tuoma etu ei ole suuri.
 
 Tiiviimmän ja ehkä paremmin luettavissa olevan kirjoitusasun lisäksi toinen etu React-kirjastoina olevissa UI-frameworkeissa on se, että kirjastojen mahdollisesti käyttämä Javascript-koodi on sisällytetty React-komponentteihin. Esim. osa Bootstrapin komponenteista edellyttää toimiakseen muutamaakin ikävää [Javascript-riippuvuutta](https://getbootstrap.com/docs/4.1/getting-started/introduction/#js) joita emme mielellään halua React-sovelluksiin sisällyttää.
 
-React-kirjastoina tarjottavien UI-frameworkkien ikävä puoli verrattuna frameworkin "suoraan käyttöön" on React-kirjastojen API:n mahdollinen epästabiilius ja osittain huono dokumentaatio. Tosin [react-semanticin](https://react.semantic-ui.com) suhteen tilanne on paljon parempi kuin monien muiden UI-frameworkien sillä kyseessä on virallinen React-integraatio.
+React-kirjastoina tarjottavien UI-frameworkkien ikävä puoli verrattuna frameworkin "suoraan käyttöön" on React-kirjastojen API:n mahdollinen epästabiilius ja osittain huono dokumentaatio. 
 
 Kokonaan toinen kysymys on se kannattaako UI-frameworkkeja ylipäätän käyttää. Kukin muodostakoon oman mielipiteensä, mutta CSS:ää taitamattomalle ja puutteellisilla design-taidoilla varustetulle ne ovat varsin käyttökelpoisia työkaluja.
 
@@ -458,7 +499,6 @@ Kokonaan toinen kysymys on se kannattaako UI-frameworkkeja ylipäätän käyttä
 
 Luetellaan tässä kaikesta huolimatta muitakin UI-frameworkeja. Jos oma suosikkisi ei ole mukana, tee pull request
 
-- <http://www.material-ui.com/>
 - <https://bulma.io/>
 - <https://ant.design/>
 - <https://foundation.zurb.com/>
