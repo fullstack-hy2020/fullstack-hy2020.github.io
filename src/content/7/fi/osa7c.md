@@ -422,7 +422,7 @@ saadaan kyllä toimiva ratkaisu, mutta sen ulkonäkö ei ole paras mahdollinen
 
 ![](../../images/7/66ea.png)
 
-Lueskelemalla [dokumentaatiota](https://material-ui.com/guides/composition/#routing-libraries), löytyy parempi tapa eli [component props](https://material-ui.com/guides/composition/#component-prop), jonka avulla voidaan muuttaa se miten komponenti n juurielementti renderöityy.
+Lueskelemalla [dokumentaatiota](https://material-ui.com/guides/composition/#routing-libraries), löytyy parempi tapa eli [component props](https://material-ui.com/guides/composition/#component-prop), jonka avulla voidaan muuttaa se miten MaterialUI-komponentin juurielementti renderöityy.
 
 Määrittelemällä
 
@@ -462,16 +462,17 @@ ja lopputulos on haluammamme kaltainen
 
 ![](../../images/7/67ea.png)
 
+Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/fullstack-hy2020/misc/blob/master/material.js)
 
 ### Loppuhuomioita
 
-Ero react-bootstrapin ja MaterialUI:n välillä ei ole suuri. On makuasia kummalla tuotettu ulkoasu on tyylikkäämpi. Eri npm-kirjastojen lautausmääriä vertailevan sivuston https://www.npmtrends.com/ mukaan Material UI ohitti react-boostrapin suosiossa vuoden 2018 loppupuolella:
+Ero react-bootstrapin ja MaterialUI:n välillä ei ole suuri. On makuasia kummalla tuotettu ulkoasu on tyylikkäämpi. En ole itse käyttänut MaterialUI:ta kovin paljoa, mutta ensikosketus on positiivinen. Dokumentaatio vaikuttaa aavistuksen react-bootstrapin dokumentaatiota selkeältä. Eri npm-kirjastojen lautausmääriä vertailevan sivuston https://www.npmtrends.com/ mukaan MaterialUI ohitti react-boostrapin suosiossa vuoden 2018 loppupuolella:
 
 ![](../../images/7/68ea.png)
 
 Esimerkeissä käytettiin UI-frameworkeja niiden React-integraatiot tarjoavien kirjastojen kautta.
 
-Sen sijaan että käytimme kirjastoa [react bootstrap](https://react-bootstrap.github.io/), olisimme voineet aivan yhtä hyvin käyttää Bootstrapia suoraan, liittämällä HTML-elementteihin CSS-luokkia. Eli sen sijaan että määrittelimme esim. taulukon komponentin <i>Table</i> avulla
+Sen sijaan että käytämme kirjastoa [react bootstrap](https://react-bootstrap.github.io/), olisimme voineet aivan yhtä hyvin käyttää [Bootstrapia](https://getbootstrap.com/) suoraan, liittämällä HTML-elementteihin CSS-luokkia. Eli sen sijaan että määrittelimme esim. taulukon komponentin <i>Table</i> avulla
 
 ```js
 <Table striped>
@@ -479,7 +480,7 @@ Sen sijaan että käytimme kirjastoa [react bootstrap](https://react-bootstrap.g
 </Table>
 ```
 
-olisimme voineet käyttää normaalia HTML:n taulukkoa <i>table</i> ja CSS-luokkaa
+olisimme voineet käyttää normaalia HTML:n taulukkoa <i>table</i> ja Bootstrapin [määrittelemää](https://getbootstrap.com/docs/4.4/content/tables/) CSS-luokkaa
 
 ```js
 <table className="table striped">
@@ -489,7 +490,7 @@ olisimme voineet käyttää normaalia HTML:n taulukkoa <i>table</i> ja CSS-luokk
 
 Taulukon määrittelyssä React bootstrapin tuoma etu ei ole suuri.
 
-Tiiviimmän ja ehkä paremmin luettavissa olevan kirjoitusasun lisäksi toinen etu React-kirjastoina olevissa UI-frameworkeissa on se, että kirjastojen mahdollisesti käyttämä Javascript-koodi on sisällytetty React-komponentteihin. Esim. osa Bootstrapin komponenteista edellyttää toimiakseen muutamaakin ikävää [Javascript-riippuvuutta](https://getbootstrap.com/docs/4.1/getting-started/introduction/#js) joita emme mielellään halua React-sovelluksiin sisällyttää.
+Tiiviimmän ja ehkä paremmin luettavissa olevan kirjoitusasun lisäksi toinen etu React-kirjastoina olevissa UI-frameworkeissa on se, että kirjastojen mahdollisesti käyttämä Javascript-koodi on sisällytetty React-komponentteihin. Esim. osa Bootstrapin komponenteista edellyttää toimiakseen muutamaakin ikävää [Javascript-riippuvuutta](https://getbootstrap.com/docs/4.1/getting-started/introduction/#js), joita emme mielellään halua React-sovelluksiin sisällyttää.
 
 React-kirjastoina tarjottavien UI-frameworkkien ikävä puoli verrattuna frameworkin "suoraan käyttöön" on React-kirjastojen API:n mahdollinen epästabiilius ja osittain huono dokumentaatio. 
 
