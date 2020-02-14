@@ -45,8 +45,8 @@ module.exports = {
       a: 'React-router',
       b: 'custom-hookit',
       c: 'Lisää tyyleistä',
-      /*
       d: 'Webpack',
+      /*
       e: 'Luokkakomponentit, Sekalaista',
       f: 'Tehtäviä: blogilistan laajennus',
       */
