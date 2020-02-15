@@ -347,6 +347,16 @@ blogsRouter.post('/', async (request, response) => {
 })
 ```
 
+Muista, että normaali  [middleware](/osa3/node_js_ja_express#middlewaret) on funktio, jolla on kolme parametria, ja joka kutsuu lopuksi parametrina next olevaa funktiota:
+
+```js
+const tokenExtractor = (request, response, next) => {
+  // tokenin ekstraktoiva koodi
+
+  next()
+}
+```
+
 #### 4.21*: blogilistan laajennus, step10
 
 Muuta blogin poistavaa operaatiota siten, että poisto onnistuu ainoastaan jos poisto-operaation tekijä (eli se kenen token on pyynnön mukana) on sama kuin blogin lisääjä.

@@ -356,6 +356,16 @@ blogsRouter.post('/', async (request, response) => {
 })
 ```
 
+Remember that a normal [middleware](/en/part3/node_js_and_express#middleware) is a function with three parameters, that at the end calls the last parameter <i>next</i> in order to move the control to next middleware:
+
+```js
+const tokenExtractor = (request, response, next) => {
+  // code that extracts the token
+
+  next()
+}
+```
+
 #### 4.21*: bloglist expansion, step10
 
 Change the delete blog operation so that a blog can be deleted only by the user who added the blog. Therefore, deleting a blog is possible only if the token sent with the request is the same as that of the blog's creator. 
