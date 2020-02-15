@@ -180,7 +180,7 @@ Selaimen urliin perustuen renderöitävät komponentit määritellään komponen
 
 määrittelee, että jos selaimen osoiteena on <i>/notes</i>, renderöidään komponentti <i>Notes</i>.
 
-Urliin perustuen renderöitävät komponentit on sijoitettu [Swithch](https://reacttraining.com/react-router/web/api/Switch)-komponentin lapsiksi
+Urliin perustuen renderöitävät komponentit on sijoitettu [Switch](https://reacttraining.com/react-router/web/api/Switch)-komponentin lapsiksi
 
 ```js 
 <Switch>
@@ -198,7 +198,7 @@ Urliin perustuen renderöitävät komponentit on sijoitettu [Swithch](https://re
 
 Switch saa aikaan sen, että renderöitävä komponentti on ensimmäinen, jonka <i>path</i> vastaa osoiterivin polkua.
 
-Huomaa, että komponenttien järjestys on tärkeä. Jos laittaisimme ensimmäiseksi komponentin <i>Home</i>, jonka polku on <i> path="/"</i>, ei mitää muuta komponenttia koskaan renderöitäisi, sillä "olematon" polku on minkä tahansa polun alkuosa:
+Huomaa, että komponenttien järjestys on tärkeä. Jos laittaisimme ensimmäiseksi komponentin <i>Home</i>, jonka polku on <i> path="/"</i>, ei mitään muuta komponenttia koskaan renderöitäisi, sillä "olematon" polku on minkä tahansa polun alkuosa:
 
 ```js 
 <Switch>
