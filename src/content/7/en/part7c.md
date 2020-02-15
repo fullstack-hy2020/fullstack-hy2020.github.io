@@ -19,7 +19,7 @@ Many UI frameworks provide developers of web applications with ready-made themes
 
 There are many UI frameworks that have React-friendly versions, where the framework's "components" have been transformed into React components. There are a few different React versions of Bootstrap like [reactstrap](http://reactstrap.github.io/) and [react-bootstrap](https://react-bootstrap.github.io/).
 
-Next we will take a closer look at two UI frameworks, Bootstrap and [Semantic UI](https://semantic-ui.com/). We will use both frameworks to add similar styles to the application we made in the [React-router](/en/part7/react_router) section of the course material.
+Next we will take a closer look at two UI frameworks, Bootstrap and [MaterialUI](https://material-ui.com/). We will use both frameworks to add similar styles to the application we made in the [React-router](/en/part7/react_router) section of the course material.
 
 ### React Bootstrap
 
@@ -31,25 +31,22 @@ Let's install the package with the command:
 npm install --save react-bootstrap
 ```
 
-
 Then let's add a link for loading the CSS stylesheet for Bootstrap inside of the <i>head</i> tag in the <i>public/index.html</i> file of the application:
 
 ```js
 <head>
-<link
-  rel="stylesheet"
-  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-  crossorigin="anonymous"
-/>
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous"
+  />
   // ...
 </head>
 ```
-
-
 When we reload the application, we notice that it already looks a bit more stylish:
 
-![](../../images/7/5.png)
+![](../../images/7/5ea.png)
 
 In Bootstrap, all of the contents of the application are typically rendered inside of a [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers). In practice this is accomplished by giving the root _div_ element of the application the  _container_ class attribute:
 
@@ -68,7 +65,7 @@ const App = () => {
 
 We notice that this already has an effect on the appearance of the application. The content is no longer as close to the edges of the browser as it was earlier:
 
-![](../../images/7/6.png)
+![](../../images/7/6ea.png)
 
 
 Next, let's make some changes to the <i>Notes</i> component, so that it renders the list of notes as a [table](https://getbootstrap.com/docs/4.1/content/tables/). React Bootstrap provides a built-in [Table](https://react-bootstrap.github.io/components/table/) component for this purpose, so there is no need to define CSS classes separately.
@@ -77,7 +74,7 @@ Next, let's make some changes to the <i>Notes</i> component, so that it renders 
 const Notes = (props) => (
   <div>
     <h2>Notes</h2>
-    <Table striped>
+    <Table striped> // highlight-line
       <tbody>
         {props.notes.map(note =>
           <tr key={note.id}>
@@ -97,11 +94,9 @@ const Notes = (props) => (
 )
 ```
 
-
 The appearance of the application is quite stylish:
 
 ![](../../images/7/7e.png)
-
 
 Notice that the React Bootstrap components have to be imported separately from the library as shown below:
 
@@ -109,12 +104,9 @@ Notice that the React Bootstrap components have to be imported separately from t
 import { Table } from 'react-bootstrap'
 ```
 
-
 #### Forms
 
-
 Let's improve the form in the <i>Login</i> view with the help of Bootstrap [forms](https://getbootstrap.com/docs/4.1/components/forms/).
-
 
 React Bootstrap provides built-in [components](https://react-bootstrap.github.io/components/forms/) for creating forms (although the documentation for them is slightly lacking):
 
@@ -144,26 +136,21 @@ let Login = (props) => {
 )}
 ```
 
-
 The number of components we need to import increases:
 
 ```js
 import { Table, Form, Button } from 'react-bootstrap'
 ```
 
-
 After switching over to the Bootstrap form, our improved application looks like this:
 
-![](../../images/7/8.png)
-
+![](../../images/7/8ea.png)
 
 #### Notification
 
-
 Now that the login form is in better shape, let's take a look at improving our application's notifications:
 
-![](../../images/7/9.png)
-
+![](../../images/7/9ea.png)
 
 Let's add a message for the notification when a user logs in to the application. We will store it in the _message_ variable in the <i>App</i> component's state:
 
@@ -194,22 +181,18 @@ We will render the message as a Bootstrap [Alert](https://getbootstrap.com/docs/
 
 ```js
 <div className="container">
-  <Router>
-    <div>
-    // highlight-start
-      {(message &&
-        <Alert variant="success">
-          {message}
-        </Alert>
-      )}
-      // highlight-end
-    //...
-)}
+// highlight-start
+  {(message &&
+    <Alert variant="success">
+      {message}
+    </Alert>
+  )}
+// highlight-end
+  // ...
+</div>
 ```
 
-
 #### Navigation structure
-
 
 Lastly, let's alter the application's navigation menu to use Bootstrap's [Navbar](https://getbootstrap.com/docs/4.1/components/navbar/) component. The React Bootstrap library provides us with [matching built-in components](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly). Through trial and error, we end up with a working solution in spite of the cryptic documentation:
 
@@ -232,78 +215,55 @@ Lastly, let's alter the application's navigation menu to use Bootstrap's [Navbar
           ? <em>{user} logged in</em>
           : <Link to="/login">login</Link>
         }
-      </Nav.Link>
+    </Nav.Link>
     </Nav>
   </Navbar.Collapse>
 </Navbar>
 ```
 
-
 The resulting layout has a very clean and pleasing appearance:
 
-![](../../images/7/10.png)
+![](../../images/7/10ea.png)
 
 
 If the viewport of the browser is narrowed, we notice that the menu "collapses" and it can be expanded by clicking the "hamburger" button:
 
-![](../../images/7/11e.png)
+![](../../images/7/11ea.png)
 
 
 Bootstrap and a large majority of existing UI frameworks produce [responsive](https://en.wikipedia.org/wiki/Responsive_web_design) designs, meaning that the resulting applications render well on a variety of different screen sizes.
 
-
 Chrome developer tools makes it possible to simulate using our application in the browser of different mobile clients:
 
-![](../../images/7/12.png)
-
-
+![](../../images/7/12ea.png)
 
 You can find the complete code for the application [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-bootstrap.js).
 
-### Semantic UI
+### Material UI
 
+Tarkastellaan toisena esimerkkinä Googlen kehittämän "muotokielen" [Material designin](https://material.io/) toteuttavaa React-kirjastoa [MaterialUI](https://material-ui.com/). 
 
-I have used Bootstrap for years but approximately a year ago I switched over to using [Semantic UI](https://semantic-ui.com/). The [exercise submission system](https://studies.cs.helsinki.fi/courses) that is used in this course has been made with Semantic and my experience has been reassuring. The [support for React](https://react.semantic-ui.com) is world class and the documentation is leagues above Bootstrap.
-
-
-Let's continue working with the [React-router](/en/part7/react_router) example application we just styled with Bootstrap, but this time style it with Semantic UI.
-
-
-We will start by installing the [semantic-ui-react](https://react.semantic-ui.com) package:
+Asennetaan kirjasto suorittamalla komento
 
 ```js
-npm install --save semantic-ui-react
+npm install --save @material-ui/core
 ```
 
-
-
-Then let's add the link to the CSS stylesheet for Semantic UI inside the head tag of the application's <i>public/index.html</i> file (the link can be found [here](https://react.semantic-ui.com/usage#content-delivery-network-cdn)):
+Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään bootstrapin css-määrittelyt lataava rivi:
 
 ```js
 <head>
-  <link
-    rel="stylesheet"
-    href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"
-  />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
   // ...
 </head>
 ```
 
+Tehdään nyt MaterialUI:n avulla koodiin suunilleen samat muutokset, mitä teimme bootstarpilla.
 
-We render all of the application's content inside of Semantic's [Container](https://react.semantic-ui.com/elements/container) component.
-
-
-The documentation for Semantic UI contains several code examples for each component. This makes it easy to see how each component is used in practice:
-
-![](../../images/7/13.png)
-
-
-Let's swap out the root <i>div</i> element of App for a <i>Container</i> component:
+Renderöidään koko sovelluksen sisältö komponentin [Container](https://material-ui.com/components/container/) sisälle:
 
 ```js
-import { Container } from 'semantic-ui-react'
-
-// ...
+import Container from '@material-ui/core/Container'
 
 const App = () => {
   // ...
@@ -315,167 +275,209 @@ const App = () => {
 }
 ```
 
-
-The content of the application is no longer attached to the edges of the browser.
-
-
-Just like we did with Bootstrap, let's render the notes as a table with Semantic's [Table](https://react.semantic-ui.com/collections/table) component. The resulting code looks like this:
+Aloitetaan komponentista <i>Notes</i> ja renderöidään muistiinpanojen lista [taulukkona](https://material-ui.com/components/tables/#simple-table):
 
 ```js
-import { Table } from 'semantic-ui-react'
-
-const Notes = (props) => (
+const Notes = ({notes}) => (
   <div>
     <h2>Notes</h2>
-    <Table striped celled>
-      <Table.Body>
-        {props.notes.map(note =>
-          <Table.Row key={note.id}>
-            <Table.Cell>
-              <Link to={`/notes/${note.id}`}>
-                {note.content}
-              </Link>
-            </Table.Cell>
-            <Table.Cell>
-              {note.user}
-            </Table.Cell>
-          </Table.Row>
-        )}
-      </Table.Body>
-    </Table>
+
+    <TableContainer component={Paper}>
+      <Table>
+        <TableBody>
+          {notes.map(note => (
+            <TableRow key={note.id}>
+              <TableCell>
+                <Link to={`/notes/${note.id}`}>{note.content}</Link>
+              </TableCell>
+              <TableCell>
+                {note.name}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   </div>
+)
 ```
 
+Taulukko näyttää seuraavalta:
 
-After making these changes, the list of notes looks like this:
+![](../../images/7/63eb.png)
 
-![](../../images/7/14e.png)
-
-
-#### Form
-
-
-Let's use Semantic's [Form](https://react.semantic-ui.com/collections/form) component in the login view of the application:
+Hienoinen ikävä piirre Material UI:ssa on se, että jokainen komponentti on importattava erikseen, muistiinpanojen sivun import-lista on aika pitkä:
 
 ```js
-import { Form, Button } from 'semantic-ui-react'
+import {
+  Container,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  Paper,
+} from '@material-ui/core'
+```
 
-let Login = (props) => {
+#### Lomake
+
+Parannellaan seuraavaksi näkymän <i>Login</i> kirjautumislomaketta käyttäen komponentteja [TextField](https://material-ui.com/components/text-fields/) ja [Button](https://material-ui.com/api/button/):
+
+```js 
+const Login = (props) => {
+  const history = useHistory()
+
   const onSubmit = (event) => {
-    // ...
+    event.preventDefault()
+    props.onLogin('mluukkai')
+    history.push('/')
   }
 
   return (
-    <Form onSubmit={onSubmit}>
-      <Form.Field>
-        <label>username</label>
-        <input name='username' />
-      </Form.Field>
-      <Form.Field>
-        <label>password</label>
-        <input type='password' />
-      </Form.Field>
-      <Button type='submit'>login</Button>
-    </Form>
+    <div>
+      <h2>login</h2>
+      <form onSubmit={onSubmit}>
+        <div>
+          <TextField label="username" />
+        </div>
+        <div>
+          <TextField  label="password" type='password' />
+        </div>
+        <div>
+          <Button variant="contained" color="primary" type="submit">
+            login
+          </Button>
+        </div>
+      </form>
+    </div>
   )
 }
 ```
 
+Lopputulos on:
 
-The appearance of the new login view looks like this:
+![](../../images/7/64ea.png)
 
-![](../../images/7/15.png)
+Bootstrapiin verrattuna pieni ero on nyt se, että MaterialUI ei tarjoa erillistä komponenttia itse lomakkeelle, lomake tehdään normaaliin tapaan HTML:n [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form)-elementtinä.
 
+Lomakkeen käyttämät komponentit on luonnollisesti importattava koodissa. 
 
-#### Notification
+#### Notifikaatio
 
-
-Just like we did with the Bootstrap version, let's implement a styled <i>notification</i> that is displayed after a user logs in to the application:
-
-![](../../images/7/6.png)
-
-
-As we did previously, let's store the message of the notification in the _message_ variable in the <i>App</i> component's state:
+Kirjautumisen jälkeisen notifikaation näyttämiseen sopii komponenetti Alert](https://material-ui.com/components/alert/), joka on lähes samanlainen kuin bootstrapin vastaava komponentti: 
 
 ```js
-const App = () => {
-  // ...
-  const [message, setMessage] = useState(null)
-
-  const login = (user) => {
-    setUser(user)
-    setMessage(`welcome ${user}`)
-    setTimeout(() => {
-      setMessage(null)
-    }, 10000)
-  }
-
-  // ...
-}
-```
-
-
-And let's render the notification by using Semantic's [Message](https://react.semantic-ui.com/collections/message) component:
-
-```js
-<Container>
+<div>
+// highlight-start
   {(message &&
-    <Message success>
+    <Alert severity="success">
       {message}
-    </Message>
+    </Alert>
   )}
-  // ...
-</Container>
+// highlight-end
+</div>
 ```
 
+Alert-komponentti ei ole vielä mukana MaterialUI:n core-pakkauksessa, ja komponentin sisältävä pakkaus [lab](https://material-ui.com/components/about-the-lab/) tulee asentaa sovellukseen:
 
-#### Navigation structure
+```js 
+npm install --save @material-ui/lab
+```
 
+Komponentti importataan seuraavasti
 
-The navigation bar of the application will be implemented with Semantic's [Menu](https://react.semantic-ui.com/collections/menu) component:
+```js 
+import { Alert } from '@material-ui/lab'
+```
+
+Alert on ulkoasultaan tyylikäs:
+
+![](../../images/7/65ea.png)
+
+#### Navigaatiorakenne
+
+Navigaatiorakenne toteutetaan komponentin [AppBar](https://material-ui.com/components/app-bar/) avulla
+
+Jos sovelletaan suoraan dokumentaation esimerkkiä  
 
 ```js
-<Router>
-  <div>
-    <Menu inverted>
-      <Menu.Item link>
-        <Link to="/">home</Link>
-      </Menu.Item>
-      <Menu.Item link>
-        <Link to="/notes">notes</Link>
-      </Menu.Item>
-      <Menu.Item link>
-        <Link to="/users">users</Link>
-      </Menu.Item>
-      <Menu.Item link>
-        {user
-          ? <em>{user} logged in</em>
-          : <Link to="/login">login</Link>
-        }
-      </Menu.Item>
-    </Menu>
-    // ...
-  </div>
-</Router>
+<AppBar position="static">
+  <Toolbar>
+    <IconButton edge="start" color="inherit" aria-label="menu">
+    </IconButton>
+    <Button color="inherit">
+      <Link to="/">home</Link>
+    </Button>
+    <Button color="inherit">
+      <Link to="/notes">notes</Link>
+    </Button>
+    <Button color="inherit">
+      <Link to="/users">users</Link>
+    </Button>  
+    <Button color="inherit">
+      {user
+        ? <em>{user} logged in</em>
+        : <Link to="/login">login</Link>
+      }
+    </Button>                
+  </Toolbar>
+</AppBar>
 ```
 
+saadaan kyllä toimiva ratkaisu, mutta sen ulkonäkö ei ole paras mahdollinen
 
-The result looks like this:
+![](../../images/7/66ea.png)
 
-![](../../images/7/17.png)
+Lueskelemalla [dokumentaatiota](https://material-ui.com/guides/composition/#routing-libraries), löytyy parempi tapa eli [component props](https://material-ui.com/guides/composition/#component-prop), jonka avulla voidaan muuttaa se miten MaterialUI-komponentin juurielementti renderöityy.
 
+Määrittelemällä
 
-You can find the complete code for the application [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-semantic.js).
+```js
+<Button color="inherit" component={Link} to="/">
+  home
+</Button>
+```
 
+renderöidään komponentti _Button_, siten että sen juurikomponenttina onkin react-redux-kirjaston komponentti _Link_, jolle siirtyy polun kertova props _to_.  
+
+Navigaatiopalkin koodi kokonaisuudessaan on seuraava
+
+```js
+<AppBar position="static">
+  <Toolbar>
+    <Button color="inherit" component={Link} to="/">
+      home
+    </Button>
+    <Button color="inherit" component={Link} to="/notes">
+      notes
+    </Button>
+    <Button color="inherit" component={Link} to="/users">
+      users
+    </Button>   
+    {user
+      ? <em>{user} logged in</em>
+      : <Button color="inherit" component={Link} to="/login">
+          LINK
+        </Button>
+    }                              
+  </Toolbar>
+</AppBar>
+```
+
+ja lopputulos on haluammamme kaltainen
+
+![](../../images/7/67ea.png)
+
+Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js)
 
 ### Closing thoughts
 
+Ero react-bootstrapin ja MaterialUI:n välillä ei ole suuri. On makuasia kummalla tuotettu ulkoasu on tyylikkäämpi. En ole itse käyttänut MaterialUI:ta kovin paljoa, mutta ensikosketus on positiivinen. Dokumentaatio vaikuttaa aavistuksen react-bootstrapin dokumentaatiota selkeältä. Eri npm-kirjastojen lautausmääriä vertailevan sivuston https://www.npmtrends.com/ mukaan MaterialUI ohitti react-boostrapin suosiossa vuoden 2018 loppupuolella:
 
-The difference between React-Bootstrap and Semantic-UI-React is not that big. Determining which one produces more aesthetically pleasing results comes down to a matter of taste. After years of using Bootstrap, the reasons that made me switch over to Semantic UI were its seamless integration with React, its wider selection of built-in components, and its overall better documentation. There has been some [uncertainty](https://github.com/Semantic-Org/Semantic-UI/issues/6109) regarding the future of Semantic UI, so it's recommended to keep your ear on the ground.
-
+![](../../images/7/68ea.png)
 
 In the two previous examples, we used the UI frameworks with the help of React-integration libraries.
-
 
 Instead of using the [React Bootstrap](https://react-bootstrap.github.io/) library, we could have just as well used Bootstrap directly by defining CSS classes to our application's HTML elements. Instead of defining the table with the <i>Table</i> component:
 
@@ -485,7 +487,6 @@ Instead of using the [React Bootstrap](https://react-bootstrap.github.io/) libra
 </Table>
 ```
 
-
 We could have used a regular HTML <i>table</i> and added the required CSS class:
 
 ```js
@@ -494,12 +495,9 @@ We could have used a regular HTML <i>table</i> and added the required CSS class:
 </table>
 ```
 
-
 The benefit of using the React Bootstrap library is not that evident from this example.
 
-
 In addition to making the frontend code more compact and readable, another benefit of using React UI framework libraries is that they include the JavaScript that is needed to make specific components work. Some Bootstrap components require a few unpleasant [JavaScript dependencies](https://getbootstrap.com/docs/4.1/getting-started/introduction/#js) that we would prefer not to include in our React applications.
-
 
 Some potential downsides to using UI frameworks through integration libraries instead of using them "directly", are that integration libraries may have unstable API's and poor documentation. The situation with [Semantic UI React](https://react.semantic-ui.com) is a lot better than with many other UI frameworks, as it is an official React integration library.
 
@@ -512,21 +510,20 @@ There is also the question of whether or not UI framework libraries should be us
 
 Here are some other UI frameworks for your consideration. If you do not see your favorite UI framework in the list, please make a pull request to the course material.
 
-- <http://www.material-ui.com/>
 - <https://bulma.io/>
 - <https://ant.design/>
-- <https://foundation.zurb.com/>
+- <https://get.foundation/>
+- <https://chakra-ui.com/>
+- <https://tailwindcss.com/>
 
 ### Styled components
-
 
 There are also [other ways](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b) of styling React applications that we have not yet taken a look at.
 
 
 The [styled components](https://www.styled-components.com/) library offers an interesting approach for defining styles through [tagged template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) that were introduced in ES6.
 
-
-Let's make a few changes to the styles of our application with the help of styled components. First, let's define two components for defining styles:
+Let's make a few changes to the styles of our application with the help of styled components. First, let's define two components with styles:
 
 ```js
 import styled from 'styled-components'
@@ -545,9 +542,7 @@ const Input = styled.input`
 `
 ```
 
-
 The code above creates styled versions of the <i>button</i> and <i>input</i> HTML elements and then assigns them to the <i>Button</i> and <i>Input</i> variables.
-
 
 The syntax for defining the styles is quite interesting, as the CSS rules are defined inside of backticks.
 
@@ -576,7 +571,6 @@ const Login = (props) => {
 }
 ```
 
-
 Let's create a few more components for styling that application, that are styled versions of <i>div</i> elements:
 
 ```js
@@ -597,7 +591,6 @@ const Footer = styled.div`
 `
 ```
 
-
 Let's use the components in our application:
 
 ```js
@@ -606,46 +599,45 @@ const App = () => {
 
   return (
     <Page> // highlight-line
-      <Router>
-        <div>
-          <Navigation> // highlight-line
-            <Link style={padding} to="/">home</Link>
-            <Link style={padding} to="/notes">notes</Link>
-            <Link style={padding} to="/users">users</Link>
-            {user
-              ? <em>{user} logged in</em>
-              : <Link to="/login">login</Link>
-            }
-          </Navigation>
+      <Navigation> // highlight-line
+        <Link style={padding} to="/">home</Link>
+        <Link style={padding} to="/notes">notes</Link>
+        <Link style={padding} to="/users">users</Link>
+        {user
+          ? <em>{user} logged in</em>
+          : <Link style={padding} to="/login">login</Link>
+        }
+      </Navigation> // highlight-line
 
-          <Route exact path="/" render={() => <Home />} />
-          <Route exact path="/notes" render={() =>
-            <Notes notes={notes} />}
-          />
-          <Route exact path="/notes/:id" render={({ match }) =>
-            <Note note={noteById(match.params.id)} />}
-          />
-          <Route path="/users" render={() =>
-            user ? <Users /> : <Redirect to="/login" />
-          } />
-          <Route path="/login" render={() =>
-            <Login onLogin={login} />}
-          />
-        </div>
-      </Router>
+      <Switch>
+        <Route path="/notes/:id">
+          <Note note={note} />
+        </Route>
+        <Route path="/notes">
+          <Notes notes={notes} />
+        </Route>
+        <Route path="/users">
+          {user ? <Users /> : <Redirect to="/login" />}
+        </Route>
+        <Route path="/login">
+          <Login onLogin={login} />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+      
       <Footer> // highlight-line
-        <em>Note app, Department of Computer Science 2019</em>
-      </Footer>
-    </Page>
+        <em>Note app, Department of Computer Science 2020</em>
+      </Footer> // highlight-line
+    </Page> // highlight-line
   )
 }
 ```
 
-
 The appearance of the resulting application is shown below:
 
-![](../../images/7/18.png)
-
+![](../../images/7/18ea.png)
 
 Styled components have seen a consistent growth in popularity in recent times, and quite a lot of people consider it to be the best way of defining styles to React applications.
 

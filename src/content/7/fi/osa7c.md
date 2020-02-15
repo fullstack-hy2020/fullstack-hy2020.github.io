@@ -19,7 +19,7 @@ Monet UI-frameworkit sisältävät web-sovellusten käyttöön valmiiksi määri
 
 Monesta UI-frameworkista on tehty React-ystävällisiä versiota, joissa UI-frameworkin avulla määritellyistä "komponenteista" on tehty React-komponentteja. Esim. Bootstrapista on olemassa parikin React-versiota joista suosituin on [react-bootstrap](https://react-bootstrap.github.io/).
 
-Katsotaan seuraavaksi kahta UI-framworkia bootstrapia ja [material ui](https://material-ui.com/):ta. Lisätään molempien avulla samantapaiset tyylit luvun [React-router](/osa7/react_router) sovellukseen.
+Katsotaan seuraavaksi kahta UI-framworkia bootstrapia ja [MaterialUI](https://material-ui.com/):ta. Lisätään molempien avulla samantapaiset tyylit luvun [React-router](/osa7/react_router) sovellukseen.
 
 ### react bootstrap
 
@@ -73,7 +73,7 @@ Muutetaan seuraavaksi komponenttia <i>Notes</i> siten, että se renderöi muisti
 const Notes = (props) => (
   <div>
     <h2>Notes</h2>
-    <Table striped>
+    <Table striped> // highlight-line
       <tbody>
         {props.notes.map(note =>
           <tr key={note.id}>
@@ -186,6 +186,7 @@ ja renderöidään viesti Bootstrapin [Alert](https://getbootstrap.com/docs/4.1/
     </Alert>
   )}
 // highlight-end
+  // ...
 </div>
 ```
 
@@ -304,12 +305,15 @@ Taulukko näyttää seuraavalta:
 Hienoinen ikävä piirre Material UI:ssa on se, että jokainen komponentti on importattava erikseen, muistiinpanojen sivun import-lista on aika pitkä:
 
 ```js
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableContainer from '@material-ui/core/TableContainer'
-import TableRow from '@material-ui/core/TableRow'
-import Paper from '@material-ui/core/Paper'
+import {
+  Container,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  Paper,
+} from '@material-ui/core'
 ```
 
 #### Lomake
@@ -380,13 +384,12 @@ npm install --save @material-ui/lab
 Komponentti importataan seuraavasti
 
 ```js 
-import Alert from '@material-ui/lab/Alert'
+import { Alert } from '@material-ui/lab'
 ```
 
 Alert on ulkoasultaan tyylikäs:
 
 ![](../../images/7/65ea.png)
-
 
 #### Navigaatiorakenne
 
@@ -462,7 +465,7 @@ ja lopputulos on haluammamme kaltainen
 
 ![](../../images/7/67ea.png)
 
-Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/fullstack-hy2020/misc/blob/master/material.js)
+Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js)
 
 ### Loppuhuomioita
 
