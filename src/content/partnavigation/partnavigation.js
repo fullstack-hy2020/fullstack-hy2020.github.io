@@ -46,7 +46,7 @@ module.exports = {
       b: 'custom-hookit',
       c: 'Lisää tyyleistä',
       d: 'Webpack',
-      e: 'Sekalaista',
+      e: 'Luokkakomponentit, Sekalaista',
       f: 'Tehtäviä: blogilistan laajennus',
     },
     '8': {
@@ -105,7 +105,7 @@ module.exports = {
       b: 'Custom hooks',
       c: 'More about styles',
       d: 'Webpack',
-      e: 'Miscellaneous',
+      e: 'Class components, Miscellaneous',
       f: 'Exercises: extending the bloglist',     
     },
     '8': {
