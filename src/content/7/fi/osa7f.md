@@ -7,7 +7,7 @@ lang: fi
 
 <div class="content">
 
-Kurssin seitsemännessä osassa on luvun [React router](/osa7/react_router) kolmen tehtävän lisäksi 17 tehtävää, joissa jatketaan osissa 4 ja 5 tehtyä Bloglist-sovellusta.  Osa seuraavassa olevista tehtävistä on toisistaan riippumattomia "featureita", eli tehtäviä ei tarvitse tehdä järjestyksessä, voit jättää osan aivan hyvin toteuttamatta.
+Kurssin seitsemännessä osassa on lukujen [React-router](/osa7/react_router) ja [custom-hookit](/osa7/custom_hookit) kuuden tehtävän lisäksi 14 tehtävää, joissa jatketaan osissa 4 ja 5 tehtyä Bloglist-sovellusta.  Osa seuraavassa olevista tehtävistä on toisistaan riippumattomia "featureita", eli tehtäviä ei tarvitse tehdä järjestyksessä, voit jättää osan aivan hyvin toteuttamatta.
 
 Voit ottaa pohjaksi oman sovelluksesi sijaan myös mallivastauksen koodin.
 
@@ -19,15 +19,15 @@ Hyvä neuvo niin refaktorointiin kuin uudenkin koodin kirjoittamiseen on <i>pien
 
 <div class="tasks">
 
-### Tehtäviä
+### Tehtävät 7.7.-7.20
 
-#### 7.4: redux, step1
+#### 7.7: redux, step1
 
 Siirry käyttämään React-komponenttien tilan sijaan Reduxia sovelluksen tilan hallintaan.
 
 Muuta tässä tehtävässä notifikaatio käyttämään Reduxia.
 
-#### 7.5 redux, step2
+#### 7.8 redux, step2
 
 Siirrä blogien tietojen talletus Reduxiin.
 
