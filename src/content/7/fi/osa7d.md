@@ -104,6 +104,7 @@ const config = {
     filename: 'main.js'
   }
 }
+
 module.exports = config
 ```
 
@@ -127,9 +128,11 @@ const hello = name => {
 
 Kun nyt suoritamme komennon _npm run build_ webpack bundlaa koodin. Tuloksena on hakemistoon <i>build</i> sijoitettava tiedosto <i>main.js</i>:
 
-![](../../images/7/19.png)
+![](../../images/7/19ea.png)
 
-Tiedostossa on paljon erikoisen näköistä tavaraa. Lopussa on mukana myös kirjoittamamme koodi.
+Tiedostossa on paljon erikoisen näköistä tavaraa. Lopussa on mukana myös kirjoittamamme koodi:
+
+![](../../images/7/19eb.png)
 
 Lisätään hakemistoon <i>src</i> tiedosto <i>App.js</i> ja sille sisältö
 
@@ -155,7 +158,7 @@ App()
 
 Kun nyt suoritamme bundlauksen komennolla _npm run build_ huomaamme webpackin havainneen molemmat tiedostot:
 
-![](../../images/7/20.png)
+![](../../images/7/20ea.png)
 
 Kirjoittamamme koodi löytyy erittäin kryptisesti muotoiltuna bundlen lopusta:
 
@@ -370,7 +373,7 @@ Tällä hetkellä sovelluksemme transpiloinnissa käytetään presetiä [@babel/
   test: /\.js$/,
   loader: 'babel-loader',
   query: {
-    presets: ['@babel/preset-react']
+    presets: ['@babel/preset-react'] // highlight-line
   }
 }
 ```
@@ -530,7 +533,9 @@ const App = () => {
   return (
     <div className="container">
       hello webpack {counter} clicks
-      <button onClick={() => setCounter(counter + 1)} >press</button>
+      <button onClick={() => setCounter(counter + 1)}>
+        press
+      </button>
     </div>
   )
 }
@@ -561,7 +566,9 @@ const App = () => {
   return (
     <div className="container">
       hello webpack {counter} clicks
-      <button onClick={handleClick} >press</button>
+      <button onClick={handleClick}>
+        press
+      </button>
     </div>
   )
 }
@@ -604,9 +611,13 @@ const config = {
 
 Konfiguraatioiden muuttuessa webpack tulee käynnistää uudelleen, on tosin mahdollista konfiguroida webpack tarkkailemaan konfiguraatioiden muutoksia, mutta emme tee sitä.
 
-Nyt virheilmoitus on hyvä
+Nyt virheilmoitus on hyvä 
 
 ![](../../images/7/27.png)
+
+sillä se viittaa itse kirjoittamaamme koodiin
+
+![](../../images/7/27eb.png)
 
 Source mapin käyttö mahdollistaa myös chromen debuggerin luontevan käytön
 
@@ -624,7 +635,7 @@ const App = () => {
 
 ### Koodin minifiointi
 
-Kun sovellus viedään tuotantoon, on siis käytössä tiedostoon <i>main.js</i> webpackin generoima koodi. Vaikka sovelluksemme sisältää omaa koodia vain muutaman rivin, on tiedoston <i>main.js</i> koko 1281572 tavua, sillä se sisältää myös kaiken React-kirjaston koodin. Tiedoston koollahan on sikäli väliä, että selain joutuu lataamaan tiedoston kun sovellusta aletaan käyttämään. Nopeilla internetyhteyksillä 1281572 tavua ei sinänsä ole ongelma, mutta jos mukaan sisällytetään enemmän kirjastoja, alkaa sovelluksen lataaminen pikkuhiljaa hidastua etenkin mobiilikäytössä.
+Kun sovellus viedään tuotantoon, on siis käytössä tiedostoon <i>main.js</i> webpackin generoima koodi. Vaikka sovelluksemme sisältää omaa koodia vain muutaman rivin, on tiedoston <i>main.js</i> koko 974473 tavua, sillä se sisältää myös kaiken React-kirjaston koodin. Tiedoston koollahan on sikäli väliä, että selain joutuu lataamaan tiedoston kun sovellusta aletaan käyttämään. Nopeilla internetyhteyksillä 974473 tavua ei sinänsä ole ongelma, mutta jos mukaan sisällytetään enemmän kirjastoja, alkaa sovelluksen lataaminen pikkuhiljaa hidastua etenkin mobiilikäytössä.
 
 Jos tiedoston sisältöä tarkastelee, huomaa että sitä voisi optimoida huomattavasti koon suhteen esim. poistamalla kommentit. Tiedostoa ei kuitenkaan kannata lähteä optimoimaan käsin, sillä tarkoitusta varten on olemassa monia työkaluja.
 
@@ -654,8 +665,8 @@ Webpackin versiosta 4 alkaen pluginia ei ole tarvinnut konfiguroida erikseen, ri
 Kun sovellus bundlataan uudelleen, pienenee tuloksena oleva <i>main.js</i> mukavasti
 
 ```js
-$ build ls -l main.js
--rw-r--r--  1 mluukkai  984178727  217450 Jun 21 20:18 main.js
+$ ls -l build/main.js
+-rw-r--r--  1 mluukkai  984178727  132299 Feb 16 11:33 build/main.js
 ```
 
 Minifioinnin lopputulos on kuin vanhan liiton c-koodia, kommentit ja jopa turhat välilyönnit ja rivinvaihdot on poistettu ja muuttujanimet ovat yksikirjaimisia:
@@ -689,7 +700,7 @@ Talletetaan seuraava sisältö tiedostoon <i>db.json</i>
 
 Tarkoituksena on konfiguroida sovellus webpackin avulla siten, että paikallisesti sovellusta kehitettäessä käytetään backendina portissa 3001 toimivaa json-serveriä.
 
-Bundlattu tiedosto laitetaan sitten käyttämään todellista, osoitteessa <https://radiant-plateau-25399.herokuapp.com/api/notes> olevaa backendia.
+Bundlattu tiedosto laitetaan sitten käyttämään todellista, osoitteessa <https://blooming-atoll-75500.herokuapp.com/api/notes> olevaa backendia.
 
 Asennetaan <i>axios</i>, käynnistetään json-server ja tehdään tarvittavat lisäykset sovellukseen. Vaihtelun vuoksi muistiinpanojen hakeminen palvelimelta on toteutettu [custom hookin](/osa5/custom_hookit) _useNotes_ avulla:
 
@@ -714,7 +725,7 @@ const useNotes = (url) => {
 const App = () => {
   const [counter, setCounter] = useState(0)
   const [values, setValues] = useState([])
-  const url = 'http://localhost:3001/notes'
+  const url = 
   const notes = useNotes(url) // highlight-line
 
   const handleClick = () => {
@@ -776,7 +787,7 @@ const config = (env, argv) => {
 
   // highlight-start
   const backend_url = argv.mode === 'production'
-    ? 'https://radiant-plateau-25399.herokuapp.com/api/notes'
+    ? 'https://blooming-atoll-75500.herokuapp.com/api/notes'
     : 'http://localhost:3001/notes'
   // highlight-end
 
