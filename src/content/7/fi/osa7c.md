@@ -254,7 +254,7 @@ Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head
 </head>
 ```
 
-Tehdään nyt MaterialUI:n avulla koodiin suunilleen samat muutokset, mitä teimme bootstarpilla.
+Tehdään nyt MaterialUI:n avulla koodiin suunnilleen samat muutokset, mitä teimme bootstrapilla.
 
 Renderöidään koko sovelluksen sisältö komponentin [Container](https://material-ui.com/components/container/) sisälle:
 
@@ -361,7 +361,7 @@ Lomakkeen käyttämät komponentit on luonnollisesti importattava koodissa.
 
 #### Notifikaatio
 
-Kirjautumisen jälkeisen notifikaation näyttämiseen sopii komponenetti Alert](https://material-ui.com/components/alert/), joka on lähes samanlainen kuin bootstrapin vastaava komponentti: 
+Kirjautumisen jälkeisen notifikaation näyttämiseen sopii komponenetti [Alert](https://material-ui.com/components/alert/), joka on lähes samanlainen kuin bootstrapin vastaava komponentti: 
 
 ```js
 <div>
@@ -461,7 +461,7 @@ Navigaatiopalkin koodi kokonaisuudessaan on seuraava
 </AppBar>
 ```
 
-ja lopputulos on haluammamme kaltainen
+ja lopputulos on haluamamme kaltainen
 
 ![](../../images/7/67ea.png)
 
@@ -469,7 +469,7 @@ Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/ful
 
 ### Loppuhuomioita
 
-Ero react-bootstrapin ja MaterialUI:n välillä ei ole suuri. On makuasia kummalla tuotettu ulkoasu on tyylikkäämpi. En ole itse käyttänut MaterialUI:ta kovin paljoa, mutta ensikosketus on positiivinen. Dokumentaatio vaikuttaa aavistuksen react-bootstrapin dokumentaatiota selkeältä. Eri npm-kirjastojen lautausmääriä vertailevan sivuston https://www.npmtrends.com/ mukaan MaterialUI ohitti react-boostrapin suosiossa vuoden 2018 loppupuolella:
+Ero react-bootstrapin ja MaterialUI:n välillä ei ole suuri. On makuasia kummalla tuotettu ulkoasu on tyylikkäämpi. En ole itse käyttänut MaterialUI:ta kovin paljoa, mutta ensikosketus on positiivinen. Dokumentaatio vaikuttaa aavistuksen react-bootstrapin dokumentaatiota selkeämmältä. Eri npm-kirjastojen lautausmääriä vertailevan sivuston https://www.npmtrends.com/ mukaan MaterialUI ohitti react-boostrapin suosiossa vuoden 2018 loppupuolella:
 
 ![](../../images/7/68ea.png)
 
