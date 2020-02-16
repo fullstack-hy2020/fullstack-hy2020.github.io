@@ -18,7 +18,7 @@ React tarjoaa yhteensä 10 erilaista [valmista hookia](https://reactjs.org/docs/
 Käytimme [osassa 5](http://localhost:8000/osa5/props_children_ja_proptypet#ref-eli-viite-komponenttiin) hookia
 [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle), jonka avulla komponentin sisäinen funktio pystyttiin tarjoamaan näkyville komponentin ulkopuolelle.
 
-Viimeisen vuoden aikana moni Reactin apukirjasto on ruvennut tarjoamaan hook-perustaisen rajapinnan. [Osassa 6](http://localhost:8000/osa6/flux_arkkitehtuuri_ja_redux#redux-storen-valittaminen-eri-komponenteille)
+Viimeisen vuoden aikana moni Reactin apukirjasto on ruvennut tarjoamaan hook-perustaisen rajapinnan. [Osassa 6](https://fullstack-hy2020.github.io/osa6/flux_arkkitehtuuri_ja_redux#redux-storen-valittaminen-eri-komponenteille)
 käytimme react-redux-kirjaston hookeja [useSelector](https://react-redux.js.org/api/hooks#useselector) ja [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) välittämään redux-storen ja dispatch-funktion niitä tarvitseville komponenteille. Reduxin hook-perustainen api onkin huomattavasti helpompi käyttää kuin vanhempi, mutta edelleen käytössä oleva [connect](http://localhost:8000/osa6/connect)-api.
 
 Myös edellisessä [luvussa](http://localhost:8000/osa7/react_router/) käsitellyn [react-routerin](https://reacttraining.com/react-router/web/guides) api perustuu osin [hookeihin](https://reacttraining.com/react-router/web/api/Hooks), joiden avulla päästiin käsiksi routejen parametroituun osaan, sekä history-olioon, joka mahdollistaa selaimen osoiterivin manipuloinnin koodista.
