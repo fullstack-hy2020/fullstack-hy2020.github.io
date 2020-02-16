@@ -47,9 +47,7 @@ module.exports = {
       c: 'Lisää tyyleistä',
       d: 'Webpack',
       e: 'Sekalaista',
-      /*
       f: 'Tehtäviä: blogilistan laajennus',
-      */
     },
     '8': {
     /*
