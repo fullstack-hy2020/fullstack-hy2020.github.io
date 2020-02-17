@@ -7,7 +7,7 @@ lang: fi
 
 <div class="content">
 
-Kurssin seitsemännessä osassa on lukujen [React-router](/osa7/react_router) ja [custom-hookit](/osa7/custom_hookit) kuuden tehtävän lisäksi 14 tehtävää, joissa jatketaan osissa 4 ja 5 tehtyä Bloglist-sovellusta.  Osa seuraavassa olevista tehtävistä on toisistaan riippumattomia "featureita", eli tehtäviä ei tarvitse tehdä järjestyksessä, voit jättää osan aivan hyvin toteuttamatta.
+Kurssin seitsemännessä osassa on lukujen [React-router](/osa7/react_router) ja [custom-hookit](/osa7/custom_hookit) kahdeksan tehtävän lisäksi 12 tehtävää, joissa jatketaan osissa 4 ja 5 tehtyä Bloglist-sovellusta.  Osa seuraavassa olevista tehtävistä on toisistaan riippumattomia "featureita", eli tehtäviä ei tarvitse tehdä järjestyksessä, voit jättää osan aivan hyvin toteuttamatta.
 
 Voit ottaa pohjaksi oman sovelluksesi sijaan myös mallivastauksen koodin.
 
@@ -19,15 +19,15 @@ Hyvä neuvo niin refaktorointiin kuin uudenkin koodin kirjoittamiseen on <i>pien
 
 <div class="tasks">
 
-### Tehtävät 7.7.-7.20
+### Tehtävät 7.9.-7.21.
 
-#### 7.7: redux, step1
+#### 7.9: redux, step1
 
 Siirry käyttämään React-komponenttien tilan sijaan Reduxia sovelluksen tilan hallintaan.
 
 Muuta tässä tehtävässä notifikaatio käyttämään Reduxia.
 
-#### 7.8 redux, step2
+#### 7.10: redux, step2
 
 Siirrä blogien tietojen talletus Reduxiin.
 
@@ -35,17 +35,17 @@ Kirjautumisen ja uuden blogin luomisen lomakkeiden tilaa voit halutessasi hallit
 
 Tämä ja seuraava osa ovat kohtuullisen työläitä, mutta erittäin opettavaisia.
 
-#### 7.6 redux, step3
+#### 7.11: redux: redux redux, step3
 
 Siirrä myös kirjautuneen käyttäjän tietojen talletus Reduxiin.
 
-#### 7.7 käyttäjien näkymä
+#### 7.12: käyttäjien näkymä
 
 Tee sovellukseen näkymä, joka näyttää kaikkiin käyttäjiin liittyvät perustietot:
 
 ![](../../images/7/41.png)
 
-#### 7.8 yksittäisen käyttäjän näkymä
+#### 7.13: yksittäisen käyttäjän näkymä
 
 Tee sovellukseen yksittäisen käyttäjän näkymä, jolta selviää mm. käyttäjän lisäämät blogit
 
@@ -55,9 +55,7 @@ Näkymään päästään klikkaamalla nimeä kaikkien käyttäjien näkymästä
 
 ![](../../images/7/43.png)
 
-<i>**Huom1:**</i> jos sovelluksesi käyttää tilanhallintaan Reduxia, saattaa tässä tehtävässä olla hyödyksi käyttää funktion _mapStateToProps_ toista parametria [ownPropsia](https://react-redux.js.org/api/connect#mapstatetoprops-state-ownprops-object), joka on dokumentaation hienoisesta kryptisyydestä huolimatta aika [helppokäyttöinen](https://stackoverflow.com/questions/41198842/what-is-the-use-of-the-ownprops-arg-in-mapstatetoprops-and-mapdispatchtoprops).
-
-<i>**Huom2:**</i> törmäät tätä tehtävää tehdessäsi lähes varmasti seuraavaan virheeseen
+<i>**Huom:**</i> törmäät tätä tehtävää tehdessäsi lähes varmasti seuraavaan virheeseen
 
 ![](../../images/7/42a.png)
 
@@ -84,7 +82,7 @@ const User = (props) => {
 }
 ```
 
-#### 7.9 blogin näkymä
+#### 7.14: blogin näkymä
 
 Toteuta sovellukseen oma näkymä yksittäisille blogeille. Näkymä voi näyttää seuraavalta
 
@@ -96,13 +94,13 @@ Näkymään päästään klikkaamalla blogin nimeä kaikkien blogien näkymäst�
 
 Tämän tehtävän jälkeen tehtävässä 5.6 toteutettua toiminnallisuutta ei enää tarvita, eli kaikkien blogien näkymässä yksittäisten blogien detaljien ei enää tarvitse avautua klikattaessa.
 
-#### 7.10 navigointi
+#### 7.15: navigointi
 
 Tee sovellukseen navigaatiomenu
 
 ![](../../images/7/47.png)
 
-#### 7.11 kommentit, step1
+#### 7.16: kommentit, step1
 
 Tee sovellukseen mahdollisuus blogien kommentointiin:
 
@@ -114,30 +112,24 @@ Tässä tehtävässä riittää, että frontend osaa näyttää blogilla olevat 
 
 Sopiva rajapinta kommentin luomiseen on osoitteeseen <i>api/blogs/:id/comments</i> tapahtuva HTTP POST -pyyntö.
 
-#### 7.12 kommentit, step2
+#### 7.17: kommentit, step2
 
 Laajenna sovellusta siten, että kommentointi onnistuu frontendista käsin:
 
 ![](../../images/7/49.png)
 
-#### 7.13 tyylit, step1
+#### 7.18: tyylit, step1
 
 Tee sovelluksesi ulkoasusta tyylikkäämpi jotain kurssilla esiteltyä tapaa käyttäen
 
-#### 7.14 tyylit, step2
+#### 7.19: tyylit, step2
 
 Jos käytät tyylien lisäämiseen noin tunnin aikaa, merkkaa myös tämä tehtävä tehdyksi.
 
-#### 7.15 ESLint
+#### 7.20: Kurssipalaute
 
-Konfiguroi frontend käyttämään ESLintiä
+Anna kurssille palautetta weboodissa.
 
-#### 7.16 Webpack
-
-Tee sovellukselle sopiva webpack-konfiguraatio
-
-#### 7.20 Kurssipalaute
-
-Anna kurssille palautetta Moodlessa.
+Tämä oli osan viimeinen tehtävä ja on aika pushata koodi githubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://github.com/fullstack-hy2020).
 
 </div>

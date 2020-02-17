@@ -297,7 +297,7 @@ Internetistä alkaa löytyä yhä enenevissä määrin valmiita hookeja sekä mu
 
 <div class="tasks">
 
-### Tehtävät 7.4.-7.6.
+### Tehtävät 7.4.-7.8.
 
 #### 7.4: anekdoottisovellus ja hookit step1
 
@@ -395,7 +395,27 @@ Yksinkertainen korjaus olisi tietysti olla käyttämättä spread-syntaksia ja k
 
 Tällöin menettäisimme suurelta osin <i>useField</i>-hookin edut. Eli keksi tähän tehtävään spread-syntaksia edelleen käyttävä helppokäyttöinen ratkaisu ongelman kiertämiseen.
 
-#### 7.7*: ultimate hooks
+#### 7.7*: country hook
+
+Palataan hetkeksi tehtäväsarjan [2.12-14](/osa2/palvelimella_olevan_datan_hakeminen#tehtavat-2-11-2-14) tunnelmiin.
+
+Ota pohjaksi repositoriossa https://github.com/fullstack-hy2020/country-hook oleva koodi. 
+
+Sovelluksen avulla on mahdollista hakea maiden tietoja https://restcountries.eu/ rajapinnasta. Jos maa löytyy, näytetään maan perustiedot
+
+![](../../images/7/69ea.png)
+
+jos maata ei löydy, kerrotaan siitä käyttäjälle
+
+![](../../images/7/70ea.png)
+
+Sovellus on muuten valmiiksi toteutettu, mutta joudut tässä tehtävässä toteuttamaan custom hookin _useCountry_, jonka avulla haet hookin parametrina saaman nimisen maan tiedot.
+
+Maan tietojan hakeminen kannattaa hoitaa apin endpointin [full name](https://restcountries.eu/#api-endpoints-full-name) avulla, hookin sisällä olevassa _useEffect_-hookissa.
+
+Huomaa, että tässä tehtävässä on oleellista hyödyntää useEffectin [toisena parametrina](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) olevaa taulukkoa sen kontrolloimiseen milloin efektifunktio kannattaa suorittaa. 
+
+#### 7.8*: ultimate hooks
 
 Aiempien osaien materiaalissa kehitetyn muistiinpanosovelluksen palvelimen kanssa keskusteleva koodi näyttää seuraavalta:
 

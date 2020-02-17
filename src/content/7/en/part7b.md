@@ -421,7 +421,27 @@ One simple fix would be to not use the spread syntax and write all of the forms 
 
 If we were to do this we would lose much of the benefit provided by the <i>useField</i> hook. Instead, come up with a solution that fixes the issue, but is still easy to use with spread syntax.
 
-#### 7.7: ultimate hooks
+#### 7.7: country hook
+
+Palataan hetkeksi tehtäväsarjan [2.12-14](/osa2/palvelimella_olevan_datan_hakeminen#tehtavat-2-11-2-14) tunnelmiin.
+
+Ota pohjaksi repositoriossa https://github.com/fullstack-hy2020/country-hook oleva koodi. 
+
+Sovelluksen avulla on mahdollista hakea maiden tietoja https://restcountries.eu/ rajapinnasta. Jos maa löytyy, näytetään maan perustiedot
+
+![](../../images/7/69ea.png)
+
+jos maata ei löydy, kerrotaan siitä käyttäjälle
+
+![](../../images/7/70ea.png)
+
+Sovellus on muuten valmiiksi toteutettu, mutta joudut tässä tehtävässä toteuttamaan custom hookin _useCountry_, jonka avulla haet hookin parametrina saaman nimisen maan tiedot.
+
+Maan tietojan hakeminen kannattaa hoitaa apin endpointin [full name](https://restcountries.eu/#api-endpoints-full-name) avulla, hookin sisällä olevassa _useEffect_-hookissa.
+
+Huomaa, että tässä tehtävässä on oleellista hyödyntää useEffectin [toisena parametrina](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) olevaa taulukkoa sen kontrolloimiseen milloin efektifunktio kannattaa suorittaa. 
+
+#### 7.8: ultimate hooks
 
 The code of the application responsible for communicating with the backend of the note application of the previous parts looks like this:
 
