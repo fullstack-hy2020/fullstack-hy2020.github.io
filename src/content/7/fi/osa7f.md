@@ -19,7 +19,7 @@ Hyvä neuvo niin refaktorointiin kuin uudenkin koodin kirjoittamiseen on <i>pien
 
 <div class="tasks">
 
-### Tehtävät 7.9.-7.21.
+### Tehtävät 7.9.-7.20.
 
 #### 7.9: redux, step1
 
