@@ -378,7 +378,7 @@ found 416 vulnerabilities (65 low, 2 moderate, 348 high, 1 critical) in 20047 sc
 ```
 
 
-Reuilun vuoden ikäinen koodi on siis täynnä pieniä tietoturvauhkia, kriittisiä uhkia on onneksi ainoastaan 1. Suoritetaan raportin suosittelema operaatio _npm audit fix_:
+Reilun vuoden ikäinen koodi on siis täynnä pieniä tietoturvauhkia, kriittisiä uhkia on onneksi ainoastaan 1. Suoritetaan raportin suosittelema operaatio _npm audit fix_:
 
 ```js
 $ bloglist-backend npm audit fix
