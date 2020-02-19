@@ -347,6 +347,16 @@ blogsRouter.post('/', async (request, response) => {
 })
 ```
 
+Muista, että normaali  [middleware](/osa3/node_js_ja_express#middlewaret) on funktio, jolla on kolme parametria, ja joka kutsuu lopuksi parametrina next olevaa funktiota:
+
+```js
+const tokenExtractor = (request, response, next) => {
+  // tokenin ekstraktoiva koodi
+
+  next()
+}
+```
+
 #### 4.21*: blogilistan laajennus, step10
 
 Muuta blogin poistavaa operaatiota siten, että poisto onnistuu ainoastaan jos poisto-operaation tekijä (eli se kenen token on pyynnön mukana) on sama kuin blogin lisääjä.
@@ -400,6 +410,6 @@ Token-kirjautumisen lisääminen valitettavasti hajotti blogien lisäämiseen li
 
 Tarvitset luultavasti [tätä](https://github.com/visionmedia/supertest/issues/398) tietoa tehtävää tehdessä.
 
-Tämä oli osan viimeinen tehtävä ja on aika pushata koodi githubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://github.com/fullstack-hy2020).
+Tämä oli osan viimeinen tehtävä ja on aika pushata koodi githubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://study.cs.helsinki.fi/stats/courses/fullstack2020).
 
 </div>

@@ -42,14 +42,12 @@ module.exports = {
       d: 'connect'
     },
     '7': {
-    /*
       a: 'React-router',
-      b: 'Lisää tyyleistä',
-      c: 'Webpack',
-      d: 'Luokkakomponentit, E2E-testaus',
-      e: 'Sekalaista',
+      b: 'custom-hookit',
+      c: 'Lisää tyyleistä',
+      d: 'Webpack',
+      e: 'Luokkakomponentit, Sekalaista',
       f: 'Tehtäviä: blogilistan laajennus',
-      */
     },
     '8': {
     /*
@@ -104,10 +102,10 @@ module.exports = {
     },
     '7': {
       a: 'React-router',
-      b: 'More about styles',
-      c: 'Webpack',
-      d: 'Class components, E2E-testing',
-      e: 'Miscellaneous',
+      b: 'Custom hooks',
+      c: 'More about styles',
+      d: 'Webpack',
+      e: 'Class components, Miscellaneous',
       f: 'Exercises: extending the bloglist',     
     },
     '8': {

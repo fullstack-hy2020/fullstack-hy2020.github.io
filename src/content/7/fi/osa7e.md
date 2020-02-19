@@ -7,7 +7,188 @@ lang: fi
 
 <div class="content">
 
-Kurssi alkaa lähestyä loppuaan. Käydään lopuksi vielä läpi muutamia huomioita liittyen React/Node-sovellusten organisointiin ja tietoturvaan.
+### Luokkakomponentit
+
+Olemme käyttäneet kurssilla ainoastaan Javascript-funktioina määriteltyjä React-komponentteja. Tämä ei ollut mahdollista ennen Reactiin versiossa 16.8. tullutta [hook](https://reactjs.org/docs/hooks-intro.html)-toiminnallisuutta, tällöin esimerkiksi tilaa käyttävät komponentit oli pakko määritellä käyttäen Javascriptin [Class](https://reactjs.org/docs/state-and-lifecycle.html#converting-a-function-to-a-class)-syntaksia.
+
+Class-, eli luokkakomponentit on syytä tuntea ainakin jossain määrin, sillä maailmassa on suuri määrä vanhaa React-koodia, mitä ei varmaankaan koskaan tulla kokonaisuudessaan uudelleenkirjoittamaan uudella syntaksilla.
+
+Tutustutaan nyt luokkakomponenttien tärkeimpiin ominaisuuksiin toteuttamalla jälleen kerran jo niin tuttu anekdoottisovellus. Talletetaan anekdootit <i>json-serveriä</i> hyödyntäen tiedostoon <i>db.json</i>. Tiedoston sisältö otetaan [täältä](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json).
+
+Luokkakomponentin ensimmäinen versio näyttää seuraavalta
+
+```js
+import React from 'react'
+
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>anecdote of the day</h1>
+      </div>
+    )
+  }
+}
+
+export default App
+```
+
+Komponentilla on nyt [konstruktori](https://reactjs.org/docs/react-component.html#constructor) missä ei toistaiseksi tehdä mitään sekä metodi [render](https://reactjs.org/docs/react-component.html#render). Kuten arvata saattaa, _render_ määrittelee sen miten komponentti piirtyy ruudulle.
+
+Määritellään komponenttiin tila anekdoottien listalle sekä näkyvissä olevalle anekdootille. Toisin kuin [useState](https://reactjs.org/docs/hooks-state.html)-hookia käytettäessä, luokkakomponenteilla on ainoastaan yksi tila. Eli jos tila koostuu useista "osista", tulee osat tallettaa tilan kenttiin.  Tila alustetaan konstruktorissa:
+
+```js
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+
+    // highlight-start
+    this.state = {
+      anecdotes: [],
+      current: 0
+    }
+    // highlight-end
+  }
+
+  render() {
+    if (this.state.anecdotes.length === 0 ) { // highlight-line
+      return <div>no anecdotes...</div>
+    }
+
+    return (
+      <div>
+        <h1>anecdote of the day</h1>
+        <div>
+          {this.state.anecdotes[this.state.current].content} // highlight-line
+        </div>
+        <button>next</button>
+      </div>
+    )
+  }
+}
+```
+
+Komponentin tila on siis instanssimuuttujassa _this.state_. Tila on olio, jolla on kaksi kenttää. <i>this.state.anecdotes</i> on anekdoottien lista ja <i>this.state.current</i> on näytettävän anekdootin indeksi.
+
+Funktionaalisten komponenteille oikea paikka hakea palvelimella olevaa dataa ovat [effect hookit](https://reactjs.org/docs/hooks-effect.html), jotka suoritetaan aina komponentin renderöitymisen yhteydessä tai tarvittaessa harvemmin, esim. ainoastaan ensimmäisen renderöinnin yhteydessä.
+
+Luokkakomponenttien [elinkaarimetodit](https://reactjs.org/docs/state-and-lifecycle.html#adding-lifecycle-methods-to-a-class) tarjoavat vastaavan toiminnallisuuden. Oikea paikka käynnistää tietojen haku palvelimelta on  elinkaarimetodi [componentDidMount](https://reactjs.org/docs/react-component.html#componentdidmount), joka suoritetaan kertaalleen heti komponentin ensimmäisen renderöitymisen jälkeen:
+
+```js
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      anecdotes: [],
+      current: 0
+    }
+  }
+
+  // highlight-start
+  componentDidMount = () => {
+    axios.get('http://localhost:3001/anecdotes').then(response => {
+      this.setState({ anecdotes: response.data })
+    })
+  }
+  // highlight-end
+
+  // ...
+}
+```
+
+HTTP-pyynnön takaisinkutsufunktio päivittää komponentin tilaa metodilla [setState](https://reactjs.org/docs/react-component.html#setstate). Metodi toimii siten, että se koskee tilassa ainoastaan niihin avaimiin, mitä parametrina olevassa oliossa on määritelty. Avain <i>current</i> jää siis entiseen arvoonsa.
+
+Metodin setState kutsuminen aiheuttaa aina luokkakomponentin uudelleenrenderöinnin, eli metodin _render_ kutsun.
+
+Viimeistellään vielä komponentti siten, että näytettävä anekdootti on mahdollista vaihtaa. Seuraavassa koko komponentin koodi, lisäys korostettuna:
+
+```js
+class App extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      anecdotes: [],
+      current: 0
+    }
+  }
+
+  componentDidMount = () => {
+    axios.get('http://localhost:3001/anecdotes').then(response => {
+      this.setState({ anecdotes: response.data })
+    })
+  }
+
+  // highlight-start
+  handleClick = () => {
+    const current = Math.floor(
+      Math.random() * this.state.anecdotes.length
+    )
+    this.setState({ current })
+  }
+  // highlight-end
+
+  render() {
+    if (this.state.anecdotes.length === 0 ) {
+      return <div>no anecdotes...</div>
+    }
+
+    return (
+      <div>
+        <h1>anecdote of the day</h1>
+        <div>{this.state.anecdotes[this.state.current].content}</div>
+        <button onClick={this.handleClick}>next</button> // highlight-line
+      </div>
+    )
+  }
+}
+```
+
+Vertailun vuoksi sama sovellus funktionaalisena komponenttina:
+
+```js
+const App = () => {
+  const [anecdotes, setAnecdotes] = useState([])
+  const [current, setCurrent] = useState(0)
+
+  useEffect(() =>{
+    axios.get('http://localhost:3001/anecdotes').then(response => {
+      setAnecdotes(response.data)
+    })
+  },[])
+
+  const handleClick = () => {
+    setCurrent(Math.round(Math.random() * anecdotes.length))
+  }
+
+  if (anecdotes.length === 0) {
+    return <div>no anecdotes...</div>
+  }
+
+  return (
+    <div>
+      <h1>anecdote of the day</h1>
+      <div>{anecdotes[current].content}</div>
+      <button onClick={handleClick}>next</button>
+    </div>
+  )
+}
+```
+
+Esimerkkimme tapauksessa erot eivät ole suuret. Suurin ero funktionaalisissa ja luokkakompontenteissa lienee se, että luokkakomponentin tila on aina yksittäinen olio, ja tilaa muutetaan metodin _setState_ avulla kun taas funktionaalisessa komponentissa tila voi koostua useista muuttujista, joilla kaikilla on oma päivitysfunktio.
+
+Hieman edistyneemmissä käyttöskenaarioissa effect hookit tarjoavat huomattavasti paremman mekanismin sivuvaikutusten hallintaan verrattuna luokkakomponenttien elinkaarimetodeihin.
+
+Merkittävä etu funktionaalisille komponenttien käytössä on se, että paljon harmia tuottavaa Javascriptin olioon itseensä viittaavaa _this_-viitettä ei tarvite käsitellä ollenkaan.
+
+Oman ja suuren enemmistön mielestä luokkakomponenteilla ei ole oikeastaan mitään etuja hookeilla rikastettuihin funktionaalisiin komponentteihin verrattuna, poikkeuksen tähän muodostaa ns. [error boundary](https://reactjs.org/docs/error-boundaries.html) -mekanismi, joka ei ole toistaiseksi (16.2.2020) funktionaalisten komponenttien käytössä.
+
+Kun kirjoitat uutta koodia, [ei siis ole mitään rationaalista syytä käyttää luokkakomponentteja](https://reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both) jos projektissa on käytössä Reactista vähintään versio 16.8. Toisaalta kaikkea vanhaa Reactia [ei ole toistaiseksi mitään syytä uudelleenkirjoittaa](https://reactjs.org/docs/hooks-faq.html#do-i-need-to-rewrite-all-my-class-components) funktionaalisina komponentteina.
 
 ### React-sovelluksen koodin organisointi
 
@@ -20,7 +201,7 @@ Olemme kurssilla tehneet frontendin ja backendin omiin repositorioihinsa. Kysees
 
 Joskus voi kuitenkin olla tilanteita, missä koko sovellus halutaan samaan repositorioon. Tällöin yleinen ratkaisu on sijoittaa <i>package.json</i> ja <i>webpack.config.js</i> hakemiston juureen ja frontin sekä backendin koodi omiin hakemistoihinsa, esim. <i>client</i> ja <i>server</i>.
 
-Erään hyvän lähtökohdan yksirepositorioisen koodin organisoinnille antaa [MERN](http://mern.io/)-projektin ylläpitämä [MERN starter](https://github.com/Hashnode/mern-starter).
+Erään hyvän lähtökohdan yksirepositorioisen koodin organisoinnille antaa [täällä](https://github.com/fullstack-hy2020/create-app) oleva repositorio.
 
 ### Palvelimella tapahtuvat muutokset
 
@@ -32,9 +213,11 @@ Edistyneempi tapa on käyttää [WebSocketeja](https://developer.mozilla.org/en-
 
 WebSocketit ovat selaimen tarjoama rajapinta, jolla ei kuitenkaan ole kaikille selaimille vielä täyttä tukea:
 
-![](../../images/7/31.png)
+![](../../images/7/31ea.png)
 
 WebSocket API:n suoran käyttämisen sijaan onkin suositeltavaa käyttää [Socket.io](https://socket.io/)-kirjastoa, joka tarjoaa erilaisia automaattisia <i>fallback</i>-mahdollisuuksia, jos käytettävässä selaimessa ei ole täyttä WebSocket-tukea.
+
+[Osan 8](/osa8) aiheena GraphQL, joka tarjoaa valmiin toiminnallisuuden palvelimella tapahtuvien muutosten synkronoimiseksi muutoksista kiinnostuneihin frontendeihin.
 
 ### Virtual DOM
 
@@ -59,7 +242,7 @@ ReactDOM.render(
 )
 ```
 
-Kun sovelluksen tila muuttuu, määrittyy komponenttien render-metodien ansiosta <i>uusi virtuaalinen DOM</i>. Reactilla on edellinen versio virtual DOM:ista muistissa ja sensijaan että uusi virtuaalinen DOM renderöitäisiin suoraviivaisesti DOM API:n avulla, React laskee mikä on optimaalisin tapa tehdä DOM:iin muutoksia (eli poistaa, lisätä ja muokata DOM:issa olevia elementtejä) siten, että DOM saadaan vastaamaan uutta Virtual DOM:ia.
+Kun sovelluksen tila muuttuu, määrittyy komponenttien rendöinnin takia <i>uusi virtuaalinen DOM</i>. Reactilla on edellinen versio virtual DOM:ista muistissa ja sensijaan että uusi virtuaalinen DOM renderöitäisiin suoraviivaisesti DOM API:n avulla, React laskee mikä on optimaalisin tapa tehdä DOM:iin muutoksia (eli poistaa, lisätä ja muokata DOM:issa olevia elementtejä) siten, että DOM saadaan vastaamaan uutta Virtual DOM:ia.
 
 ### Reactin roolista sovelluksissa
 
@@ -71,13 +254,15 @@ React-sovellusten yhteydessä ei kuitenkaan yleensä puhuta MVC-arkkitehtuurista
 
 Koska sekä React että [Flux](https://facebook.github.io/flux/docs/in-depth-overview.html#content) ovat Facebookilla syntyneinä, voi ajatella, että Reactin pitäminen ainoastaan käyttöliittymästä huolehtivana kirjastona on sen oikeaoppista käyttöä. Flux-arkkitehtuurin noudattaminen tuo sovelluksiin tietyn overheadin ja jos on kyse pienestä sovelluksesta tai prototyypistä, saattaa Reactin "väärinkäyttäminen" olla järkevää, sillä myöskään [overengineering](https://en.wikipedia.org/wiki/Overengineering) ei yleensä johda optimaaliseen tulokseen.
 
+Kuten [osan 6](/osa6/connect#redux-ja-komponenttien-tila) lopussa mainittiin, Reactin [Context-api](https://reactjs.org/docs/context.html) tarjoaa erään vaihtoehtoisen tavan keskitetylle tilan hallinnalle ilman tarvetta ulkoisille kirjastoille kuten reduxille. Katso lisää esim. [täällä](https://www.simplethread.com/cant-replace-redux-with-hooks/) ja [täällä](https://hswolff.com/blog/how-to-usecontext-with-usereducer/).
+
 ### React/node-sovellusten tietoturva
 
 Emme ole vielä maininneet kurssilla sanaakaan tietoturvaan liittyen. Kovin paljon ei nytkään ole aikaa, ja onneksi laitoksella on MOOC-kurssi [Securing Software](https://cybersecuritybase.github.io/securing/) tähän tärkeään aihepiiriin.
 
 Katsotaan kuitenkin muutamaa kurssispesifistä seikkaa.
 
-The Open Web Application Security Project eli [OWASP](https://www.owasp.org) julkaisee vuosittain listan Websovellusten yleisimmistä turvallisuusuhista. Tuorein lista on [täällä](https://www.owasp.org/../images/7/72/OWASP_Top_10-2017_%28en%29.pdf.pdf). Samat uhat ovat listalla vuodesta toiseen.
+The Open Web Application Security Project eli [OWASP](https://www.owasp.org) julkaisee vuosittain listan Websovellusten yleisimmistä turvallisuusuhista. Tuorein lista on [täällä](https://owasp.org/www-project-top-ten/). Samat uhat ovat listalla vuodesta toiseen.
 
 Listaykkösenä on <i>injection</i>, joka tarkoittaa sitä, että sovellukseen esim. lomakkeen avulla lähetettävä teksti tulkitaankin aivan eri tavalla kun sovelluskehittäjä on tarkoittanut. Kuuluisin injektioiden muoto lienevät [SQL-injektiot](https://stackoverflow.com/questions/332365/how-does-the-sql-injection-from-the-bobby-tables-xkcd-comic-work).
 
@@ -127,67 +312,100 @@ npm outdated --depth 0
 
 Viime vuoden mallivastaus osan 4 tehtäväsarjaan sisältää jo aika paljon vanhentuneita riippuvuuksia:
 
-![](../../images/7/33.png)
+![](../../images/7/33ea.png)
 
 Riippuvuudet saa ajantasaistettua päivittämällä tiedostoa <i>package.json</i> ja suorittamalla komennon _npm install_. Riippuvuuksien vanhat versiot eivät tietenkään välttämättä ole tietoturvariski.
 
-Aiemmissa Noden ja npm:n versioissa [Node Security Platform](https://nodesecurity.io/) valvoi npm:ssä olevien riippuvuuksien turvallisuutta; Noden versiosta 10.0.0 ja npm:n versiosta 6.0.0 alkaen Node Security Platform [on osa npm:ää](https://medium.com/npm-inc/npm-acquires-lift-security-258e257ef639), eli riippuvuuksien turvallisuutta voidaan tarkistaa [audit](https://docs.npmjs.com/cli/audit)-komennolla (ja npm tarkistaa sitä automaattisesti kun sovellukselle asetetaan uusia pakkauksia).
+Riippuvuuksien turvallisuus voidaan tarkistaa npm:n [audit](https://docs.npmjs.com/cli/audit)-komennolla, joka vertaa käytettyjen riippuvuuksien versioita keskitetyssä virhetietokannassa listattuihin tietoturvauhan sisältäviin riippuvuuksien versioihin.
 
 Komennon _npm audit_ suorittaminen viime vuoden osan 4 mallivastaukselle antaa pitkän listan valituksia ja korjausehdotuksia. Seuraavassa osa raportista:
 
-```
+
+```js
+$ bloglist-backend npm audit
+
                        === npm audit security report ===
 
-# Run  npm install nodemon@1.18.9  to resolve 16 vulnerabilities
+# Run  npm install --save-dev jest@25.1.0  to resolve 62 vulnerabilities
+SEMVER WARNING: Recommended action is a potentially breaking change
 ┌───────────────┬──────────────────────────────────────────────────────────────┐
-│ Low           │ Prototype Pollution                                          │
+│ Low           │ Regular Expression Denial of Service                         │
 ├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Package       │ deep-extend                                                  │
+│ Package       │ braces                                                       │
 ├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Dependency of │ nodemon                                                      │
+│ Dependency of │ jest [dev]                                                   │
 ├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Path          │ nodemon > chokidar > fsevents > node-pre-gyp > rc >          │
-│               │ deep-extend                                                  │
+│ Path          │ jest > jest-cli > jest-config > babel-jest >                 │
+│               │ babel-plugin-istanbul > test-exclude > micromatch > braces   │
 ├───────────────┼──────────────────────────────────────────────────────────────┤
-│ More info     │ https://npmjs.com/advisories/612                             │
+│ More info     │ https://npmjs.com/advisories/786                             │
 └───────────────┴──────────────────────────────────────────────────────────────┘
 
+
 ┌───────────────┬──────────────────────────────────────────────────────────────┐
-│ High          │ Regular Expression Denial of Service                         │
+│ Low           │ Regular Expression Denial of Service                         │
 ├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Package       │ sshpk                                                        │
+│ Package       │ braces                                                       │
 ├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Dependency of │ nodemon [dev]                                                │
+│ Dependency of │ jest [dev]                                                   │
 ├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Path          │ nodemon > chokidar > fsevents > node-pre-gyp > request >     │
-│               │ http-signature > sshpk                                       │
+│ Path          │ jest > jest-cli > jest-runner > jest-config > babel-jest >   │
+│               │ babel-plugin-istanbul > test-exclude > micromatch > braces   │
 ├───────────────┼──────────────────────────────────────────────────────────────┤
-│ More info     │ https://npmjs.com/advisories/606                             │
+│ More info     │ https://npmjs.com/advisories/786                             │
+└───────────────┴──────────────────────────────────────────────────────────────┘
+
+
+┌───────────────┬──────────────────────────────────────────────────────────────┐
+│ Low           │ Regular Expression Denial of Service                         │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Package       │ braces                                                       │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Dependency of │ jest [dev]                                                   │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ Path          │ jest > jest-cli > jest-runner > jest-runtime > jest-config > │
+│               │ babel-jest > babel-plugin-istanbul > test-exclude >          │
+│               │ micromatch > braces                                          │
+├───────────────┼──────────────────────────────────────────────────────────────┤
+│ More info     │ https://npmjs.com/advisories/786                             │
 └───────────────┴──────────────────────────────────────────────────────────────┘
 
 ...
 
-# Run  npm update rc --depth 3  to resolve 1 vulnerability
-┌───────────────┬──────────────────────────────────────────────────────────────┐
-│ Low           │ Prototype Pollution                                          │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Package       │ deep-extend                                                  │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Dependency of │ bcrypt                                                       │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Path          │ bcrypt > node-pre-gyp > rc > deep-extend                     │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ More info     │ https://npmjs.com/advisories/612                             │
-└───────────────┴──────────────────────────────────────────────────────────────┘
-
-found 29 vulnerabilities (7 low, 18 moderate, 4 high) in 964 scanned packages
-  run `npm audit fix` to fix 27 of them.
-  2 vulnerabilities require semver-major dependency updates.
+found 416 vulnerabilities (65 low, 2 moderate, 348 high, 1 critical) in 20047 scanned packages
+  run `npm audit fix` to fix 354 of them.
+  62 vulnerabilities require semver-major dependency updates.
 ```
 
 
+Reilun vuoden ikäinen koodi on siis täynnä pieniä tietoturvauhkia, kriittisiä uhkia on onneksi ainoastaan 1. Suoritetaan raportin suosittelema operaatio _npm audit fix_:
 
-Toinen palvelu riippuvuuksien turvallisuuden tarkkailuun on [Snyk](https://snyk.io).
+```js
+$ bloglist-backend npm audit fix
+
++ mongoose@5.9.1
+added 19 packages from 8 contributors, removed 8 packages and updated 15 packages in 7.325s
+fixed 354 of 416 vulnerabilities in 20047 scanned packages
+  1 package update for 62 vulns involved breaking changes
+  (use `npm audit fix --force` to install breaking changes; or refer to `npm audit` for steps to fix these manually)
+```
+
+Haavoittuvuuksia jää vielä 62, sillä _audit fix_ ei tee oletusarvoisesti versiopäivitystä kirjastolle, jonka <i>major</i>-versionumero on kasvanut. Tälläisen riippuvuuden päivitys saattaa aiheuttaa sovelluksen hajoamisen. Ongelmat aiheuttaa testauskirjasto jestin versio, joka on sovelluksessa 23.6.0 kun taas turvallinen versio olisi 25.1.0. Koska jest on ainoastaan kehitysaikainen riippuvuus, ei vaaraa oikeastaan ole, mutta päivitetään myös se:
+
+```js
+npm install --save-dev jest@25.1.0 
+```
+
+Päivityksen jälkeen tilanne näyttää hyvältä
+
+```js
+ $ blogs-backend npm audit
+
+                       === npm audit security report ===
+
+found 0 vulnerabilities
+ in 1204443 scanned packages
+```                                                                    
 
 Eräs OWASP:in listan mainitsemista uhista on <i>Broken Authentication</i> ja siihen liittyvä <i>Broken Access Control</i>. Käyttämämme token-perustainen autentikointi on kohtuullisen robusti, jos sovellusta käytetään tietoliikenteen salaavalla HTTPS-protokollalla. Access Controlin eli pääsynhallinnan toteuttamisessa on aina syytä muistaa tehdä esim. käyttäjän identiteetin tarkastus selaimen lisäksi myös palvelimella. Huonoa tietoturvaa olisi estää jotkut toimenpiteet ainoastaan piilottamalla niiden suoritusmahdollisuus selaimessa olevasta koodista.
 
@@ -197,7 +415,7 @@ Mozillan MDN:n erittäin hyvä [Website security -guide](https://developer.mozil
 
 Expressin dokumentaatio sisältää tietoturvaa käsittelevän osan [Production Best Practices: Security](https://expressjs.com/en/advanced/best-practice-security.html) joka kannattaa lukea läpi. Erittäin suositeltavaa on ottaa backendissa käyttöön [Helmet](https://helmetjs.github.io/)-kirjasto, joka sisältää joukon Express-sovelluksista tunnettuja turvallisuusriskejä eliminoivia middlewareja.
 
-Myös ESlintin [security-plugininen](https://github.com/nodesecurity/eslint-plugin-security) käyttöönotto kannattaa.
+Myös ESlintin [security-pluginin](https://github.com/nodesecurity/eslint-plugin-security) käyttöönotto kannattaa.
 
 ### Tämän päivän trendejä
 
@@ -207,27 +425,7 @@ Katsotaan vielä lopuksi muutamaa huomisen tai oikeastaan jo tämän päivän te
 
 Javascriptin muuttujien [dynaaminen tyypitys](https://developer.mozilla.org/en-US/docs/Glossary/Dynamic_typing) aiheuttaa välillä ikäviä bugeja. Osassa 5 käsittelimme lyhyesti [PropTypejä](/osa5/props_children_ja_proptypet#prop-types), eli mekanismia, jonka avulla React-komponenteille välitettävile propseille on mahdollista tehdä tyyppitarkastuksia.
 
-Viime aikoina on ollut havaittavissa nousevaa kiinnostusta [staattiseen tyypitykseen](https://en.wikipedia.org/wiki/Type_system#Static_type_checking).
-
-Javascriptistä on olemassa useita staattisesti tyypitettyjä versioita, suosituimmat näistä ovat Facebookin kehittämä [flow](https://flow.org/) ja Microsofin [Typescript](https://www.typescriptlang.org/). Vaakakuppi näyttää kallistuneen selkeästi Typescriptin puolelle, mm sen tarjoaman hyvän VS Code -integraation takia.
-
-Typescriptissä voidaan esim. funktion parametreille ja paluuarvolle asettaa tyypit:
-
-```js
-const sum = (n: number, m: number): number => {
-  return n + m
-}
-```
-
-Funktion kutsuminen ei nyt onnistu väärän tyyppisillä parametreilla, väärällä parametrien määrällä tai jos vastaus yritetään sijoittaa väärän tyyppiseen muuttujaan. Visual Studio Code tekee tyypintarkastuksen jo siinä vaiheessa kun koodia kirjoitetaan, ja varottaa heti jos koodi sisältää tyyppien kanssa epäyhteensopivia operaatioita:
-
-![](../../images/7/35.png)
-
-Ero normaaliin Javascriptiin on suuri, tyypitys löytää monia potentiaalisia bugeja jo koodin kirjoitusvaiheessa.
-
-Jotta koodia voitaisiin suorittaa selaimessa tai Nodella, Typescriptillä tehty koodi on käänettävä normaaliksi Javascriptiksi Typescript-kääntäjällä. Käännösprosessi on luonnollisesti mahdollista automatisoida esim. Webpackin avulla siten, että ohjelmoijan workflow säilyy yhtä hyvänä kun normaalia Javascriptiä kirjoittaessa.
-
-Katso [täältä](https://www.youtube.com/watch?v=obZaI2rYkLU&list=PLumQiZ25uijis31zaRL7rhzLalSwLqUtm&index=2) Terveystalon Ilari Richardin ja Tuukka Peuraniemen vierailuluento Typescriptistä ja mobiilisovellusten kehittämisestä Reactilla.
+Viime aikoina on ollut havaittavissa nousevaa kiinnostusta [staattiseen tyypitykseen](https://en.wikipedia.org/wiki/Type_system#Static_type_checking). Tämän hetkein suosituin tapa Javascriptin tyypitetty versio on Microsofin kehittämä [Typescript](https://www.typescriptlang.org/). Huhtikuun alussa ilmestyvä [osa 9](/osa9) tulee käsittelemään Typescriptiä!
 
 #### Server side rendering, isomorfiset sovellukset ja universaali koodi
 
@@ -303,8 +501,16 @@ Serverlessissä ei siis ole kyse siitä että sovelluksissa ei olisi palvelinta,
 
 ### Hyödyllisiä kirjastoja ja mielenkiintoisia linkkejä
 
-Facebookin ylläpitämä kirjasto [immutable.js](https://github.com/facebook/immutable-js/) tarjoaa muutamista tietorakenteista nimensä mukaisia <i>muuttumattomia</i> toteutuksia. Kirjastosta voi olla hyötyä Reduxia käytettäessä, sillä kuten osasta 6 [muistamme](/osa6/flux_arkkitehtuuri_ja_redux#puhtaat-funktiot-immutable) reducerien on oltava puhtaita funktioita eli ne eivät saa muuttaa storen tilaa vaan niiden on korvattava se muutostilanteissa uudella. Kuluneen vuoden aikana Immutable.js:n suosiota on ruvennut syömään samankaltaisen toiminnallisuuden jossain määrin helpompikäyttöisessä muodossa tarjoava [Immer](https://github.com/mweststrate/immer).
+Javasciptin kehittäjäyhteisö on tuottanut valtavan määrän erilaisia hyödyllisiä kirjastoja ja jos olet koodaamssa
+ jotain vähänkin isompaa, kannattaa etsiä mitä valmista kalustoa on jo tarjolla. Eräs hyvä paikka kirjastojen etsimiseen on https://applibslist.xyz/. Seuraavassa listataan muutamia luotettavien tahojen hyväksi havaitsemia kirjastoja.
 
+Jos sovelluksessa on tarve operoida hieman monimutkaisemman datan kanssa, on jo [osassa 4]( http://localhost:8000/osa4/sovelluksen_rakenne_ja_testauksen_alkeet#tehtavat-4-3-4-7) suositeltu kirjasto [lodash](https://www.npmjs.com/package/lodash) hyvä lisä. Jos olet mieltynyt funktionaaliseen ohjelmointityyliin, kannattaa harkita [ramda](https://ramdajs.com/):n käyttöä.
+
+Jos sovelluksessa käsitellään aikaa, tarjoavat [moment](https://momentjs.com/) ja hieman uudempi [date-fns](https://github.com/date-fns/date-fns) siihen hyvän välineistön.
+
+Lomakkeiden käyttöä helpottavia kirjastoja ovat [Formik](https://www.npmjs.com/package/formik) ja [redux-form](https://redux-form.com/8.3.0/). Jos sovelluksessa tulee piirtää graafeja, on vaihtoehtoja lukuisia, sekä [recharts](http://recharts.org/en-US/) että [highcharts](https://github.com/highcharts/highcharts-react) ovat hyviksi havaittuja.
+
+[Immer](https://github.com/mweststrate/immer) tarjoaa muutamista tietorakenteista <i>muuttumattomia</i> toteutuksia. Kirjastosta voi olla hyötyä Reduxia käytettäessä, sillä kuten osasta 6 [muistamme](/osa6/flux_arkkitehtuuri_ja_redux#puhtaat-funktiot-immutable) reducerien on oltava puhtaita funktioita eli ne eivät saa muuttaa storen tilaa vaan niiden on korvattava se muutostilanteissa uudella. 
 
 [Redux-saga](https://redux-saga.js.org/) tarjoaa osassa 6 käsitellylle [redux thunkille](/osa6/redux_sovelluksen_kommunikointi_palvelimen_kanssa#asynkroniset-actionit-ja-redux-thunk) vaihtoehtoisen tavan tehdä asynkronisia actioneja. Jotkut hypettää ja tykkää, itse en.
 
@@ -320,7 +526,7 @@ Javascript-projektien projektinhallintaan ja bundlaamiseen käytettyjen työkalu
 - 2012-14 [Browserify](https://www.npmjs.com/package/browserify)
 - 2015- [Webpack](https://www.npmjs.com/package/webpack)
 
-Hipsterien suurin into työkalukehitykseen näytti pysähtyneen webpackin vallattua markkinat. Uusi tulokas [Parcel](https://parceljs.org) on kuitenkin saanut viime aikoina jossain määrin huomiota. Parcel markkinoi olevansa yksinkertainen, sitähän webpack ei missään nimessä ole, ja paljon nopeampi kuin webpack. Parcelin kehitystä kannattaa jäädä seuraamaan.
+Hipsterien suurin into työkalukehitykseen näytti pysähtyneen webpackin vallattua markkinat. Pari vuotta sitten markkinoille ilmestyi uusi tulokas [Parcel](https://parceljs.org), joka markkinoi olevansa yksinkertainen, sitähän Webpack ei missään nimessä ole, ja paljon nopeampi kuin Webpack. Lupaavan alun jälkeen Parcel ei kuitenkaan ole jatkanut nostettaan, ja vaikuttaa että siitä ei kuitenkaan ole Webpackin tappajaksi.
 
 Sivu <https://reactpatterns.com/> tarjoaa tiiviissä muodossa listan parhaita react-käytänteitä, joista osa on jo tältäkin kurssilta tuttuja. Toinen samankaltainen lista on [react bits](https://vasanthk.gitbooks.io/react-bits/).
 

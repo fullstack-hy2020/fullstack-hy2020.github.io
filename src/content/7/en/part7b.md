@@ -7,579 +7,237 @@ lang: en
 
 <div class="content">
 
+Kurssin seitsemännen osan tehtävät poikkeavat jossain määrin. Edellisessä ja tässä luvussa on normaaliin tapaan [luvun teoriaan liittyviä tehtäviä](/osa7/custom_hookit#tehtavat-7-4-7-6).
 
-In part 2 we examined two different ways of adding styles to our application: the old-school [single CSS](/en/part2/adding_styles_to_react_app) file and [inline-styles](/en/part2/adding_styles_to_react_app#inline-styles). In this part we will take a look at a few other ways. 
+Tämän ja seuraavan luvun tehtävien lisäksi seitsemäs osa sisältää kertaavan ja soveltavan [tehtäväsarjan](/osa7/tehtavia_blogilistan_laajennus), jossa laajennetaan osissa 4 ja 5 tehtyä Bloglist-sovellusta.
 
+### Hookit
 
-### Ready-made UI libraries
+React offers 10 different [built-in hooks](https://reactjs.org/docs/hooks-reference.html), of which the most popular ones are the [useState](https://reactjs.org/docs/hooks-reference.html#usestate) and [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect) hooks, that we have already been using extensively.
 
+Käytimme [osassa 5](http://localhost:8000/osa5/props_children_ja_proptypet#ref-eli-viite-komponenttiin) hookia
+[useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle), jonka avulla komponentin sisäinen funktio pystyttiin tarjoamaan näkyville komponentin ulkopuolelle.
 
-One approach to defining styles for an application is to use a ready-made "UI framework".
+Viimeisen vuoden aikana moni Reactin apukirjasto on ruvennut tarjoamaan hook-perustaisen rajapinnan. [Osassa 6](http://localhost:8000/osa6/flux_arkkitehtuuri_ja_redux#redux-storen-valittaminen-eri-komponenteille)
+käytimme react-redux-kirjaston hookeja [useSelector](https://react-redux.js.org/api/hooks#useselector) ja [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) välittämään redux-storen ja dispatch-funktion niitä tarvitseville komponenteille. Reduxin hook-perustainen api onkin huomattavasti helpompi käyttää kuin vanhempi, mutta edelleen käytössä oleva [connect](http://localhost:8000/osa6/connect)-api.
 
+Myös edellisessä [luvussa](http://localhost:8000/osa7/react_router/) käsitelyn [react-routerin](https://reacttraining.com/react-router/web/guides) api perustuu osin [hookeihin](https://reacttraining.com/react-router/web/api/Hooks), joiden avulla päästiin käsiksi routejen parametroituun osaan, sekä history-olioon, joka mahdollistaa selaimen osoiterivin manipuloinnin koodista.
 
-One of the first widely popular UI frameworks was the [Bootstrap](https://getbootstrap.com/) toolkit created by Twitter, that may still be the most popular framework. Recently there has been an explosion in the number of new UI frameworks that have entered the arena. In fact, the selection is so vast that there is little hope of creating an exhaustive list of options.
+As mentioned in [part 1](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks), hooks are not normal functions, and when using those we have to adhere to certain [rules or limitations](https://reactjs.org/docs/hooks-rules.html). Let's recap the rules of using hooks, copied verbatim from the official React documentation:
 
+**Don’t call Hooks inside loops, conditions, or nested functions.** Instead, always use Hooks at the top level of your React function. 
 
-Many UI frameworks provide developers of web applications with ready-made themes and "components" like buttons, menus, and tables. We write components in quotes, because in this context we are not talking about React components. Usually UI frameworks are used by including the CSS stylesheets and JavaScript code of the framework in the application.
+**Don’t call Hooks from regular JavaScript functions.** Instead, you can:
 
+- Call Hooks from React function components.
+- Call Hooks from custom Hooks
 
-There are many UI frameworks that have React-friendly versions, where the framework's "components" have been transformed into React components. There are a few different React versions of Bootstrap like [reactstrap](http://reactstrap.github.io/) and [react-bootstrap](https://react-bootstrap.github.io/).
+There's an existing [ESlint](https://www.npmjs.com/package/eslint-plugin-react-hooks) rule that can be used to verify that the application uses hooks correctly. 
 
+Create-react-app has readily configured rule [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks) that complains if hooks are used in illegal manner:
 
-Next we will take a closer look at two UI frameworks, Bootstrap and [Semantic UI](https://semantic-ui.com/). We will use both frameworks to add similar styles to the application we made in the [React-router](/en/part7/react_router) section of the course material.
+![](../../images/7/60ea.png)
 
+### Custom hooks
 
-### React Bootstrap
+React offers the option to create our own [custom](https://reactjs.org/docs/hooks-custom.html) hooks. According to React, the primary purpose of custom hooks is to facilitate the reuse of the logic used in components.
 
-
-Let's start by taking a look at Bootstrap with the help of the [react-bootstrap](https://react-bootstrap.github.io/) package.
-
-
-Let's install the package with the command:
-
-```js
-npm install --save react-bootstrap
-```
-
-
-Then let's add a link for loading the CSS stylesheet for Bootstrap inside of the <i>head</i> tag in the <i>public/index.html</i> file of the application:
-
-```js
-<head>
-<link
-  rel="stylesheet"
-  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-  crossorigin="anonymous"
-/>
-  // ...
-</head>
-```
+> <i>Building your own Hooks lets you extract component logic into reusable functions.</i>
 
 
-When we reload the application, we notice that it already looks a bit more stylish:
+Custom hooks are regular JavaScript functions that can use any other hooks, as long as they adhere to the [rules of hooks](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks). Additionally, the name of custom hooks must start with the word _use_.
 
-![](../../images/7/5.png)
 
-In Bootstrap, all of the contents of the application are typically rendered inside of a [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers). In practice this is accomplished by giving the root _div_ element of the application the  _container_ class attribute:
+We implemented a counter application in [part 1](/en/part1/component_state_event_handlers#event-handling), that can have its value incremented, decremented, or reset. The code of the application is as follows:
 
-```js
-const App = () => {
-  // ...
+```js  
+import React, { useState } from 'react'
+const App = (props) => {
+  const [counter, setCounter] = useState(0)
 
   return (
-    <div className="container"> // highlight-line
-      // ...
+    <div>
+      <div>{counter}</div>
+      <button onClick={() => setCounter(counter + 1)}>
+        plus
+      </button>
+      <button onClick={() => setCounter(counter - 1)}>
+        minus
+      </button>      
+      <button onClick={() => setCounter(0)}>
+        zero
+      </button>
+    </div>
+  )
+}
+```
+
+Let's extract the counter logic into its own custom hook. The code for the hook is as follows:
+
+```js
+const useCounter = () => {
+  const [value, setValue] = useState(0)
+
+  const increase = () => {
+    setValue(value + 1)
+  }
+
+  const decrease = () => {
+    setValue(value - 1)
+  }
+
+  const zero = () => {
+    setValue(0)
+  }
+
+  return {
+    value, 
+    increase,
+    decrease,
+    zero
+  }
+}
+```
+
+Our custom hook uses the _useState_ hook internally to create its own state. The hook returns an object, the properties of which include the value of the counter as well as functions for manipulating the value.
+
+
+React components can use the hook as shown below:
+
+```js
+const App = (props) => {
+  const counter = useCounter()
+
+  return (
+    <div>
+      <div>{counter.value}</div>
+      <button onClick={counter.increase}>
+        plus
+      </button>
+      <button onClick={counter.decrease}>
+        minus
+      </button>      
+      <button onClick={counter.zero}>
+        zero
+      </button>
     </div>
   )
 }
 ```
 
 
-We notice that this already has an effect on the appearance of the application. The content is no longer as close to the edges of the browser as it was earlier:
-
-![](../../images/7/6.png)
+By doing this we can extract the state of the _App_ component and its manipulation entirely into the _useCounter_ hook. Managing the counter state and logic is now the responsibility of the custom hook.
 
 
-Next, let's make some changes to the <i>Notes</i> component, so that it renders the list of notes as a [table](https://getbootstrap.com/docs/4.1/content/tables/). React Bootstrap provides a built-in [Table](https://react-bootstrap.github.io/components/table/) component for this purpose, so there is no need to define CSS classes separately.
+The same hook could be <i>reused</i> in the application that was keeping track of the amount of clicks made to the left and right buttons:
 
 ```js
-const Notes = (props) => (
-  <div>
-    <h2>Notes</h2>
-    <Table striped>
-      <tbody>
-        {props.notes.map(note =>
-          <tr key={note.id}>
-            <td>
-              <Link to={`/notes/${note.id}`}>
-                {note.content}
-              </Link>
-            </td>
-            <td>
-              {note.user}
-            </td>
-          </tr>
-        )}
-      </tbody>
-    </Table>
-  </div>
-)
-```
 
+const App = () => {
+  const left = useCounter()
+  const right = useCounter()
 
-The appearance of the application is quite stylish:
-
-![](../../images/7/7e.png)
-
-
-Notice that the React Bootstrap components have to be imported separately from the library as shown below:
-
-```js
-import { Table } from 'react-bootstrap'
-```
-
-
-#### Forms
-
-
-Let's improve the form in the <i>Login</i> view with the help of Bootstrap [forms](https://getbootstrap.com/docs/4.1/components/forms/).
-
-
-React Bootstrap provides built-in [components](https://react-bootstrap.github.io/components/forms/) for creating forms (although the documentation for them is slightly lacking):
-
-```js
-let Login = (props) => {
-  // ...
   return (
     <div>
-      <h2>login</h2>
-      <Form onSubmit={onSubmit}>
-        <Form.Group>
-          <Form.Label>username:</Form.Label>
-          <Form.Control
-            type="text"
-            name="username"
-          />
-          <Form.Label>password:</Form.Label>
-          <Form.Control
-            type="password"
-          />
-          <Button variant="primary" type="submit">
-            login
-          </Button>
-        </Form.Group>
-      </Form>
+      {left.value}
+      <button onClick={left.increase}>
+        left
+      </button>
+      <button onClick={right.increase}>
+        right
+      </button>
+      {right.value}
     </div>
-)}
-```
-
-
-The number of components we need to import increases:
-
-```js
-import { Table, Form, Button } from 'react-bootstrap'
-```
-
-
-After switching over to the Bootstrap form, our improved application looks like this:
-
-![](../../images/7/8.png)
-
-
-#### Notification
-
-
-Now that the login form is in better shape, let's take a look at improving our application's notifications:
-
-![](../../images/7/9.png)
-
-
-Let's add a message for the notification when a user logs in to the application. We will store it in the _message_ variable in the <i>App</i> component's state:
-
-```js
-const App = () => {
-  const [notes, setNotes] = useState([
-    // ...
-  ])
-
-  const [user, setUser] = useState(null)
-  const [message, setMessage] = useState(null) // highlight-line
-
-  const login = (user) => {
-    setUser(user)
-    // highlight-start
-    setMessage(`welcome ${user}`)
-    setTimeout(() => {
-      setMessage(null)
-    }, 10000)
-    // highlight-end
-  }
-  // ...
-}
-```
-
-
-We will render the message as a Bootstrap [Alert](https://getbootstrap.com/docs/4.1/components/alerts/) component. Once again, the React Bootstrap library provides us with a matching [React component](https://react-bootstrap.github.io/components/alerts/): 
-
-```js
-<div className="container">
-  <Router>
-    <div>
-    // highlight-start
-      {(message &&
-        <Alert variant="success">
-          {message}
-        </Alert>
-      )}
-      // highlight-end
-    //...
-)}
-```
-
-
-#### Navigation structure
-
-
-Lastly, let's alter the application's navigation menu to use Bootstrap's [Navbar](https://getbootstrap.com/docs/4.1/components/navbar/) component. The React Bootstrap library provides us with [matching built-in components](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly). Through trial and error, we end up with a working solution in spite of the cryptic documentation:
-
-```js
-<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-  <Navbar.Collapse id="responsive-navbar-nav">
-    <Nav className="mr-auto">
-      <Nav.Link href="#" as="span">
-        <Link style={padding} to="/">home</Link>
-      </Nav.Link>
-      <Nav.Link href="#" as="span">
-        <Link style={padding} to="/notes">notes</Link>
-      </Nav.Link>
-      <Nav.Link href="#" as="span">
-        <Link style={padding} to="/users">users</Link>
-      </Nav.Link>
-      <Nav.Link href="#" as="span">
-        {user
-          ? <em>{user} logged in</em>
-          : <Link to="/login">login</Link>
-        }
-      </Nav.Link>
-    </Nav>
-  </Navbar.Collapse>
-</Navbar>
-```
-
-
-The resulting layout has a very clean and pleasing appearance:
-
-![](../../images/7/10.png)
-
-
-If the viewport of the browser is narrowed, we notice that the menu "collapses" and it can be expanded by clicking the "hamburger" button:
-
-![](../../images/7/11e.png)
-
-
-Bootstrap and a large majority of existing UI frameworks produce [responsive](https://en.wikipedia.org/wiki/Responsive_web_design) designs, meaning that the resulting applications render well on a variety of different screen sizes.
-
-
-Chrome developer tools makes it possible to simulate using our application in the browser of different mobile clients:
-
-![](../../images/7/12.png)
-
-
-
-You can find the complete code for the application [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-bootstrap.js).
-
-### Semantic UI
-
-
-I have used Bootstrap for years but approximately a year ago I switched over to using [Semantic UI](https://semantic-ui.com/). The [exercise submission system](https://studies.cs.helsinki.fi/courses) that is used in this course has been made with Semantic and my experience has been reassuring. The [support for React](https://react.semantic-ui.com) is world class and the documentation is leagues above Bootstrap.
-
-
-Let's continue working with the [React-router](/en/part7/react_router) example application we just styled with Bootstrap, but this time style it with Semantic UI.
-
-
-We will start by installing the [semantic-ui-react](https://react.semantic-ui.com) package:
-
-```js
-npm install --save semantic-ui-react
-```
-
-
-
-Then let's add the link to the CSS stylesheet for Semantic UI inside the head tag of the application's <i>public/index.html</i> file (the link can be found [here](https://react.semantic-ui.com/usage#content-delivery-network-cdn)):
-
-```js
-<head>
-  <link
-    rel="stylesheet"
-    href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"
-  />
-  // ...
-</head>
-```
-
-
-We render all of the application's content inside of Semantic's [Container](https://react.semantic-ui.com/elements/container) component.
-
-
-The documentation for Semantic UI contains several code examples for each component. This makes it easy to see how each component is used in practice:
-
-![](../../images/7/13.png)
-
-
-Let's swap out the root <i>div</i> element of App for a <i>Container</i> component:
-
-```js
-import { Container } from 'semantic-ui-react'
-
-// ...
-
-const App = () => {
-  // ...
-  return (
-    <Container>
-      // ...
-    </Container>
   )
 }
 ```
 
 
-The content of the application is no longer attached to the edges of the browser.
+The application creates <i>two</i> completely separate counters. The first one is assigned to the variable _left_ and the other to the variable _right_.
 
 
-Just like we did with Bootstrap, let's render the notes as a table with Semantic's [Table](https://react.semantic-ui.com/collections/table) component. The resulting code looks like this:
-
-```js
-import { Table } from 'semantic-ui-react'
-
-const Notes = (props) => (
-  <div>
-    <h2>Notes</h2>
-    <Table striped celled>
-      <Table.Body>
-        {props.notes.map(note =>
-          <Table.Row key={note.id}>
-            <Table.Cell>
-              <Link to={`/notes/${note.id}`}>
-                {note.content}
-              </Link>
-            </Table.Cell>
-            <Table.Cell>
-              {note.user}
-            </Table.Cell>
-          </Table.Row>
-        )}
-      </Table.Body>
-    </Table>
-  </div>
-```
-
-
-After making these changes, the list of notes looks like this:
-
-![](../../images/7/14e.png)
-
-
-#### Form
-
-
-Let's use Semantic's [Form](https://react.semantic-ui.com/collections/form) component in the login view of the application:
+Dealing with forms in React is somewhat tricky. The following application presents the user with a form that requests the user to input their name, birthday, and height:
 
 ```js
-import { Form, Button } from 'semantic-ui-react'
-
-let Login = (props) => {
-  const onSubmit = (event) => {
-    // ...
-  }
+const App = () => {
+  const [name, setName] = useState('')
+  const [born, setBorn] = useState('')
+  const [height, setHeight] = useState('')
 
   return (
-    <Form onSubmit={onSubmit}>
-      <Form.Field>
-        <label>username</label>
-        <input name='username' />
-      </Form.Field>
-      <Form.Field>
-        <label>password</label>
-        <input type='password' />
-      </Form.Field>
-      <Button type='submit'>login</Button>
-    </Form>
+    <div>
+      <form>
+        name: 
+        <input
+          type='text'
+          value={name}
+          onChange={(event) => setName(event.target.value)} 
+        /> 
+        <br/> 
+        birthdate:
+        <input
+          type='date'
+          value={born}
+          onChange={(event) => setBorn(event.target.value)}
+        />
+        <br /> 
+        height:
+        <input
+          type='number'
+          value={height}
+          onChange={(event) => setHeight(event.target.value)}
+        />
+      </form>
+      <div>
+        {name} {born} {height} 
+      </div>
+    </div>
   )
 }
 ```
 
 
-The appearance of the new login view looks like this:
-
-![](../../images/7/15.png)
+Every field of the form has its own state. In order to keep the state of the form synchronized with the data provided by the user, we have to register an appropriate <i>onChange</i> handler for each of the <i>input</i> elements.
 
 
-#### Notification
-
-
-Just like we did with the Bootstrap version, let's implement a styled <i>notification</i> that is displayed after a user logs in to the application:
-
-![](../../images/7/6.png)
-
-
-As we did previously, let's store the message of the notification in the _message_ variable in the <i>App</i> component's state:
+Let's define our own custom _useField_ hook, that simplifies the state management of the form:
 
 ```js
-const App = () => {
-  // ...
-  const [message, setMessage] = useState(null)
+const useField = (type) => {
+  const [value, setValue] = useState('')
 
-  const login = (user) => {
-    setUser(user)
-    setMessage(`welcome ${user}`)
-    setTimeout(() => {
-      setMessage(null)
-    }, 10000)
+  const onChange = (event) => {
+    setValue(event.target.value)
   }
 
-  // ...
+  return {
+    type,
+    value,
+    onChange
+  }
 }
 ```
 
 
-And let's render the notification by using Semantic's [Message](https://react.semantic-ui.com/collections/message) component:
+The hook function receives the type of the input field as a parameter. The function returns all of the attributes required by the <i>input</i>: its type, value and the onChange handler.
+
+
+The hook can be used in the following way:
 
 ```js
-<Container>
-  {(message &&
-    <Message success>
-      {message}
-    </Message>
-  )}
+const App = () => {
+  const name = useField('text')
   // ...
-</Container>
-```
 
-
-#### Navigation structure
-
-
-The navigation bar of the application will be implemented with Semantic's [Menu](https://react.semantic-ui.com/collections/menu) component:
-
-```js
-<Router>
-  <div>
-    <Menu inverted>
-      <Menu.Item link>
-        <Link to="/">home</Link>
-      </Menu.Item>
-      <Menu.Item link>
-        <Link to="/notes">notes</Link>
-      </Menu.Item>
-      <Menu.Item link>
-        <Link to="/users">users</Link>
-      </Menu.Item>
-      <Menu.Item link>
-        {user
-          ? <em>{user} logged in</em>
-          : <Link to="/login">login</Link>
-        }
-      </Menu.Item>
-    </Menu>
-    // ...
-  </div>
-</Router>
-```
-
-
-The result looks like this:
-
-![](../../images/7/17.png)
-
-
-You can find the complete code for the application [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-semantic.js).
-
-
-### Closing thoughts
-
-
-The difference between React-Bootstrap and Semantic-UI-React is not that big. Determining which one produces more aesthetically pleasing results comes down to a matter of taste. After years of using Bootstrap, the reasons that made me switch over to Semantic UI were its seamless integration with React, its wider selection of built-in components, and its overall better documentation. There has been some [uncertainty](https://github.com/Semantic-Org/Semantic-UI/issues/6109) regarding the future of Semantic UI, so it's recommended to keep your ear on the ground.
-
-
-In the two previous examples, we used the UI frameworks with the help of React-integration libraries.
-
-
-Instead of using the [React Bootstrap](https://react-bootstrap.github.io/) library, we could have just as well used Bootstrap directly by defining CSS classes to our application's HTML elements. Instead of defining the table with the <i>Table</i> component:
-
-```js
-<Table striped>
-  // ...
-</Table>
-```
-
-
-We could have used a regular HTML <i>table</i> and added the required CSS class:
-
-```js
-<table className="table striped">
-  // ...
-</table>
-```
-
-
-The benefit of using the React Bootstrap library is not that evident from this example.
-
-
-In addition to making the frontend code more compact and readable, another benefit of using React UI framework libraries is that they include the JavaScript that is needed to make specific components work. Some Bootstrap components require a few unpleasant [JavaScript dependencies](https://getbootstrap.com/docs/4.1/getting-started/introduction/#js) that we would prefer not to include in our React applications.
-
-
-Some potential downsides to using UI frameworks through integration libraries instead of using them "directly", are that integration libraries may have unstable API's and poor documentation. The situation with [Semantic UI React](https://react.semantic-ui.com) is a lot better than with many other UI frameworks, as it is an official React integration library.
-
-
-There is also the question of whether or not UI framework libraries should be used in the first place. It is up to everyone to form their own opinion, but for people lacking knowledge in CSS and web design they are very useful tools.
-
-
-### Other UI frameworks
-
-
-Here are some other UI frameworks for your consideration. If you do not see your favorite UI framework in the list, please make a pull request to the course material.
-
-- <http://www.material-ui.com/>
-- <https://bulma.io/>
-- <https://ant.design/>
-- <https://foundation.zurb.com/>
-
-### Styled components
-
-
-There are also [other ways](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b) of styling React applications that we have not yet taken a look at.
-
-
-The [styled components](https://www.styled-components.com/) library offers an interesting approach for defining styles through [tagged template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) that were introduced in ES6.
-
-
-Let's make a few changes to the styles of our application with the help of styled components. First, let's define two components for defining styles:
-
-```js
-import styled from 'styled-components'
-
-const Button = styled.button`
-  background: Bisque;
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid Chocolate;
-  border-radius: 3px;
-`
-
-const Input = styled.input`
-  margin: 0.25em;
-`
-```
-
-
-The code above creates styled versions of the <i>button</i> and <i>input</i> HTML elements and then assigns them to the <i>Button</i> and <i>Input</i> variables.
-
-
-The syntax for defining the styles is quite interesting, as the CSS rules are defined inside of backticks.
-
-
-The styled components that we defined work exactly like regular <i>button</i> and <i>input</i> elements, and they can be used the same way:
-
-```js
-const Login = (props) => {
-  // ...
   return (
     <div>
-      <h2>login</h2>
-      <form onSubmit={onSubmit}>
-        <div>
-          username:
-          <Input /> // highlight-line
-        </div>
-        <div>
-          password:
-          <Input type='password' /> // highlight-line
-        </div>
-        <Button type="submit" primary=''>login</Button> // highlight-line
+      <form>
+        <input
+          type={name.type}
+          value={name.value}
+          onChange={name.onChange} 
+        /> 
+        // ...
       </form>
     </div>
   )
@@ -587,77 +245,71 @@ const Login = (props) => {
 ```
 
 
-Let's create a few more components for styling that application, that are styled versions of <i>div</i> elements:
+### Spread attributes
+
+
+We could simplify things a bit further. Since the _name_ object has exactly all of the attributes that the <i>input</i> element expects to receive as props, we can pass the props to the element using the [spread syntax](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) in the following way:
 
 ```js
-const Page = styled.div`
-  padding: 1em;
-  background: papayawhip;
-`
-
-const Navigation = styled.div`
-  background: BurlyWood;
-  padding: 1em;
-`
-
-const Footer = styled.div`
-  background: Chocolate;
-  padding: 1em;
-  margin-top: 1em;
-`
+<input {...name} /> 
 ```
 
 
-Let's use the components in our application:
+As the [example](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) in the React documentation states, the following two ways of passing props to a component achieve the exact same result:
+
+```js
+<Greeting firstName='Arto' lastName='Hellas' />
+
+const person = {
+  firstName: 'Arto',
+  lastName: 'Hellas'
+}
+
+<Greeting {...person} />
+```
+
+
+The application gets simplified into the following format:
 
 ```js
 const App = () => {
-  // ...
+  const name = useField('text')
+  const born = useField('date')
+  const height = useField('number')
 
   return (
-    <Page> // highlight-line
-      <Router>
-        <div>
-          <Navigation> // highlight-line
-            <Link style={padding} to="/">home</Link>
-            <Link style={padding} to="/notes">notes</Link>
-            <Link style={padding} to="/users">users</Link>
-            {user
-              ? <em>{user} logged in</em>
-              : <Link to="/login">login</Link>
-            }
-          </Navigation>
-
-          <Route exact path="/" render={() => <Home />} />
-          <Route exact path="/notes" render={() =>
-            <Notes notes={notes} />}
-          />
-          <Route exact path="/notes/:id" render={({ match }) =>
-            <Note note={noteById(match.params.id)} />}
-          />
-          <Route path="/users" render={() =>
-            user ? <Users /> : <Redirect to="/login" />
-          } />
-          <Route path="/login" render={() =>
-            <Login onLogin={login} />}
-          />
-        </div>
-      </Router>
-      <Footer> // highlight-line
-        <em>Note app, Department of Computer Science 2019</em>
-      </Footer>
-    </Page>
+    <div>
+      <form>
+        name: 
+        <input  {...name} /> 
+        <br/> 
+        birthdate:
+        <input {...born} />
+        <br /> 
+        height:
+        <input {...height} />
+      </form>
+      <div>
+        {name.value} {born.value} {height.value}
+      </div>
+    </div>
   )
 }
 ```
 
 
-The appearance of the resulting application is shown below:
-
-![](../../images/7/18.png)
+Dealing with forms is greatly simplified when the unpleasant nitty-gritty details related to synchronizing the state of the form is encapsulated inside of our custom hook.
 
 
-Styled components have seen a consistent growth in popularity in recent times, and quite a lot of people consider it to be the best way of defining styles to React applications.
+Custom hooks are clearly not only a tool for reuse, they also provide a better way for dividing our code into smaller modular parts.
+
+### More about hooks
+
+The internet is starting to fill up with more and more helpful material related to hooks. The following sources are worth checking out:
+
+* [Awesome React Hooks Resouces](https://github.com/rehooks/awesome-react-hooks)
+* [Easy to understand React Hook recipes by Gabe Ragland](https://usehooks.com/)
+* [Why Do React Hooks Rely on Call Order?](https://overreacted.io/why-do-hooks-rely-on-call-order/)
 
 </div>
 
@@ -666,9 +318,215 @@ Styled components have seen a consistent growth in popularity in recent times, a
 
 ### Exercises
 
+We'll continue with the app from [exercises](/osa7/custom_hookit#tehtavat-7-4-7-6) of the chapter [react router](http://localhost:8000/en/part7/react_router). 
 
-The exercises related to the topics presented here, can be found at the end of this course material section in the exercise set [for extending the blog list application](/en/part7/exercises_extending_the_bloglist).
+#### 7.4: anecdotes and hooks step1
+
+Simplify the anecdote creation form of your application with the _useField_ custom hook we defined earlier.
+
+One natural place to save the custom hooks of your application is in the <i>/src/hooks/index.js</i> file.
+
+
+If you use the [named export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description) instead of the default export:
+
+```js
+import { useState } from 'react'
+
+export const useField = (type) => { // highlight-line
+  const [value, setValue] = useState('')
+
+  const onChange = (event) => {
+    setValue(event.target.value)
+  }
+
+  return {
+    type,
+    value,
+    onChange
+  }
+}
+
+// module can have several named exports
+export const useAnotherHook = () => { // highlight-line
+  // ...
+}
+```
+
+
+Then [importing](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) happens in the following way:
+
+```js
+import  { useField } from './hooks'
+
+const App = () => {
+  // ...
+  const username = useField('text')
+  // ...
+}
+```
+
+
+#### 7.5: anecdotes and hooks step2
+
+Add a button to the form that you can use to clear all the input fields:
+
+![](../../images/7/61ea.png)
+
+Expand the functionality of the <i>useField</i> hook so that it offers a new <i>reset</i> operation for clearing the field. 
+
+Depending on your solution you may see the following warning in your console:
+
+![](../../images/7/62ea.png)
+
+We will return to this warning in the next exercise.
+
+#### 7.6: anecdotes and hooks step3
+
+If your solution did not cause a warning to appear in the console you have already finished this exercise.
+
+If you see the warning in the console, make the necessary changes to get rid of the `Invalid value for prop reset' on <input> tag` console warning. 
+
+The reason for this warning is that after making the changes to your application, the following expression:
+
+```js
+<input {...content}/>
+```
+
+
+Essentially, is the same as this:
+
+```js
+<input
+  value={content.value} 
+  type={content.type}
+  onChange={content.onChange}
+  reset={content.reset} // highlight-line
+/>
+```
+
+
+The <i>input</i> element should not be given a <i>reset</i> attribute.
+
+
+One simple fix would be to not use the spread syntax and write all of the forms like this:
+
+```js
+<input
+  value={username.value} 
+  type={username.type}
+  onChange={username.onChange}
+/>
+```
+
+
+If we were to do this we would lose much of the benefit provided by the <i>useField</i> hook. Instead, come up with a solution that fixes the issue, but is still easy to use with spread syntax.
+
+#### 7.7: country hook
+
+Palataan hetkeksi tehtäväsarjan [2.12-14](/osa2/palvelimella_olevan_datan_hakeminen#tehtavat-2-11-2-14) tunnelmiin.
+
+Ota pohjaksi repositoriossa https://github.com/fullstack-hy2020/country-hook oleva koodi. 
+
+Sovelluksen avulla on mahdollista hakea maiden tietoja https://restcountries.eu/ rajapinnasta. Jos maa löytyy, näytetään maan perustiedot
+
+![](../../images/7/69ea.png)
+
+jos maata ei löydy, kerrotaan siitä käyttäjälle
+
+![](../../images/7/70ea.png)
+
+Sovellus on muuten valmiiksi toteutettu, mutta joudut tässä tehtävässä toteuttamaan custom hookin _useCountry_, jonka avulla haet hookin parametrina saaman nimisen maan tiedot.
+
+Maan tietojan hakeminen kannattaa hoitaa apin endpointin [full name](https://restcountries.eu/#api-endpoints-full-name) avulla, hookin sisällä olevassa _useEffect_-hookissa.
+
+Huomaa, että tässä tehtävässä on oleellista hyödyntää useEffectin [toisena parametrina](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) olevaa taulukkoa sen kontrolloimiseen milloin efektifunktio kannattaa suorittaa. 
+
+#### 7.8: ultimate hooks
+
+The code of the application responsible for communicating with the backend of the note application of the previous parts looks like this:
+
+```js
+import axios from 'axios'
+const baseUrl = '/api/notes'
+
+let token = null
+
+const setToken = newToken => {
+  token = `bearer ${newToken}`
+}
+
+const getAll = () => {
+  const request = axios.get(baseUrl)
+  return request.then(response => response.data)
+}
+
+const create = async newObject => {
+  const config = {
+    headers: { Authorization: token },
+  }
+
+  const response = await axios.post(baseUrl, newObject, config)
+  return response.data
+}
+
+const update = (id, newObject) => {
+  const request = axios.put(`${ baseUrl } /${id}`, newObject)
+  return request.then(response => response.data)
+}
+
+export default { getAll, create, update, setToken }
+```
+
+We notice that the code is in no way specific to the fact that our application deals with notes. Excluding the value of the _baseUrl_ variable, the same code could be reused in the blog post application for dealing with the communication with the backend.
+
+Extract the code for communicating with the backend into its own _useResource_ hook. It is sufficient to implement fetching all resources and creating a new resource.
+
+You can do the exercise for the project found in the https://github.com/fullstack-hy2020/ultimate-hooks repository. The <i>App</i> component for the project is the following:
+
+```js
+const App = () => {
+  const content = useField('text')
+  const name = useField('text')
+  const number = useField('text')
+
+  const [notes, noteService] = useResource('http://localhost:3005/notes')
+  const [persons, personService] = useResource('http://localhost:3005/persons')
+
+  const handleNoteSubmit = (event) => {
+    event.preventDefault()
+    noteService.create({ content: content.value })
+  }
+ 
+  const handlePersonSubmit = (event) => {
+    event.preventDefault()
+    personService.create({ name: name.value, number: number.value})
+  }
+
+  return (
+    <div>
+      <h2>notes</h2>
+      <form onSubmit={handleNoteSubmit}>
+        <input {...content} />
+        <button>create</button>
+      </form>
+      {notes.map(n => <p key={n.id}>{n.content}</p>)}
+
+      <h2>persons</h2>
+      <form onSubmit={handlePersonSubmit}>
+        name <input {...name} /> <br/>
+        number <input {...number} />
+        <button>create</button>
+      </form>
+      {persons.map(n => <p key={n.id}>{n.name} {n.number}</p>)}
+    </div>
+  )
+}
+```
+
+The _useResource_ custom hook returns an array of two items just like the state hooks. The first item of the array contains all of the individual resources and the second item of the array is an object that can be used for manipulating the resource collection, like creating new ones.
+
+If you implement the hook correctly, it can be used for both notes and phone numbers (start the server with the _npm run server_ command at the port 3005).
+
+![](../../images/5/21e.png)
 
 </div>
-
-

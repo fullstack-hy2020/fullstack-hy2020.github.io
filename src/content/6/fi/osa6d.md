@@ -596,7 +596,7 @@ Muuta notifikaatioiden näyttämisestä huolehtiva komponentti käyttämään _u
 
 Tee sama komponentille <i>AnecdoteForm</i>.
 
-#### 6.21 anekdootit ja connect, step3
+#### 6.21 anekdootit, loppuhuipennus
 
 Sovellukseen on (todennäköisesti) jäänyt eräs hieman ikävä bugi. Jos vote-näppäintä painellaan useasti peräkkäin, notifikaatio näkyy ruudulla hieman miten sattuu. Esimerkiksi jos äänestetään kaksi kertaa kolmen sekunnin välein, näkyy jälkimmäinen notifikaatio ruudulla ainoastaan kahden sekunnin verran (olettaen että notifikaation näyttöaika on 5 sekuntia). Tämä johtuu siitä, että ensimmäisen äänestyksen notifikaation tyhjennys tyhjentääkin myöhemmän äänestyksen notifikaation.
 
