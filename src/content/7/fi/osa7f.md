@@ -7,7 +7,7 @@ lang: fi
 
 <div class="content">
 
-Kurssin seitsemännessä osassa on lukujen [React-router](/osa7/react_router) ja [custom-hookit](/osa7/custom_hookit) kahdeksan tehtävän lisäksi 12 tehtävää, joissa jatketaan osissa 4 ja 5 tehtyä Bloglist-sovellusta.  Osa seuraavassa olevista tehtävistä on toisistaan riippumattomia "featureita", eli tehtäviä ei tarvitse tehdä järjestyksessä, voit jättää osan aivan hyvin toteuttamatta.
+Kurssin seitsemännessä osassa on lukujen [React-router](/osa7/react_router) ja [custom-hookit](/osa7/custom_hookit) kahdeksan tehtävän lisäksi 13 tehtävää, joissa jatketaan osissa 4 ja 5 tehtyä Bloglist-sovellusta.  Osa seuraavassa olevista tehtävistä on toisistaan riippumattomia "featureita", eli tehtäviä ei tarvitse tehdä järjestyksessä, voit jättää osan aivan hyvin toteuttamatta.
 
 Voit ottaa pohjaksi oman sovelluksesi sijaan myös mallivastauksen koodin.
 
@@ -19,7 +19,7 @@ Hyvä neuvo niin refaktorointiin kuin uudenkin koodin kirjoittamiseen on <i>pien
 
 <div class="tasks">
 
-### Tehtävät 7.9.-7.20.
+### Tehtävät 7.9.-7.21.
 
 #### 7.9: redux, step1
 
@@ -29,23 +29,27 @@ Muuta tässä tehtävässä notifikaatio käyttämään Reduxia.
 
 #### 7.10: redux, step2
 
-Siirrä blogien tietojen talletus Reduxiin.
+<i>Tämä ja seuraava kaksi osaa ovat kohtuullisen työläitä, mutta erittäin opettavaisia.</i>
 
 Kirjautumisen ja uuden blogin luomisen lomakkeiden tilaa voit halutessasi hallita edelleen Reactin tilan avulla. 
 
-Tämä ja seuraava osa ovat kohtuullisen työläitä, mutta erittäin opettavaisia.
+Siirrä blogien tietojen talletus Reduxiin. Tässä tehtävässä riittää, että sovellus näyttää olemassa olevat blogit ja, että uuden blogien luominen onnistuu.
 
-#### 7.11: redux: redux redux, step3
+#### 7.11: redux, step3
+
+Laajenna ratkaisua siten, että blogien "liketys" ja poisto toimivat.
+
+#### 7.12: redux, step4
 
 Siirrä myös kirjautuneen käyttäjän tietojen talletus Reduxiin.
 
-#### 7.12: käyttäjien näkymä
+#### 7.13: käyttäjien näkymä
 
 Tee sovellukseen näkymä, joka näyttää kaikkiin käyttäjiin liittyvät perustietot:
 
 ![](../../images/7/41.png)
 
-#### 7.13: yksittäisen käyttäjän näkymä
+#### 7.14: yksittäisen käyttäjän näkymä
 
 Tee sovellukseen yksittäisen käyttäjän näkymä, jolta selviää mm. käyttäjän lisäämät blogit
 
@@ -57,32 +61,30 @@ Näkymään päästään klikkaamalla nimeä kaikkien käyttäjien näkymästä
 
 <i>**Huom:**</i> törmäät tätä tehtävää tehdessäsi lähes varmasti seuraavaan virheeseen
 
-![](../../images/7/42a.png)
+![](../../images/7/42ea.png)
 
 vika ilmenee jos uudelleenlataat sivun ollessasi yksittäisen käyttäjän sivulla. 
 
-Vian syynä on se, että jos mennään suoraan jonkin käyttäjän sivulle, eivät käyttäjien tiedot ole vielä ehtineet palvelimelta React-sovellukseen. Ongelman voi kiertää ehdollisella renderöinnillä esim. seuraavasti:
+Vian syynä on se, että jos mennään suoraan jonkin käyttäjän sivulle, eivät käyttäjien tiedot ole vielä ehtineet palvelimelta React-sovellukseen. Ongelman voi kiertää ehdollisella renderöinnillä:
 
 ```js
-const User = (props) => {
+const User = () => {
+  const user = ...
   // highlight-start
-  if ( props.user === undefined) { 
+  if (!user) {
     return null
   }
   // highlight-end
 
   return (
     <div>
-      <h2>{props.user.name}</h2>
-
-      <h3>added blogs</h3>
       // ...
     </div>
   )
 }
 ```
 
-#### 7.14: blogin näkymä
+#### 7.15: blogin näkymä
 
 Toteuta sovellukseen oma näkymä yksittäisille blogeille. Näkymä voi näyttää seuraavalta
 
@@ -94,13 +96,13 @@ Näkymään päästään klikkaamalla blogin nimeä kaikkien blogien näkymäst�
 
 Tämän tehtävän jälkeen tehtävässä 5.6 toteutettua toiminnallisuutta ei enää tarvita, eli kaikkien blogien näkymässä yksittäisten blogien detaljien ei enää tarvitse avautua klikattaessa.
 
-#### 7.15: navigointi
+#### 7.16: navigointi
 
 Tee sovellukseen navigaatiomenu
 
 ![](../../images/7/47.png)
 
-#### 7.16: kommentit, step1
+#### 7.17: kommentit, step1
 
 Tee sovellukseen mahdollisuus blogien kommentointiin:
 
@@ -112,21 +114,21 @@ Tässä tehtävässä riittää, että frontend osaa näyttää blogilla olevat 
 
 Sopiva rajapinta kommentin luomiseen on osoitteeseen <i>api/blogs/:id/comments</i> tapahtuva HTTP POST -pyyntö.
 
-#### 7.17: kommentit, step2
+#### 7.18: kommentit, step2
 
 Laajenna sovellusta siten, että kommentointi onnistuu frontendista käsin:
 
 ![](../../images/7/49.png)
 
-#### 7.18: tyylit, step1
+#### 7.19: tyylit, step1
 
 Tee sovelluksesi ulkoasusta tyylikkäämpi jotain kurssilla esiteltyä tapaa käyttäen
 
-#### 7.19: tyylit, step2
+#### 7.20: tyylit, step2
 
 Jos käytät tyylien lisäämiseen noin tunnin aikaa, merkkaa myös tämä tehtävä tehdyksi.
 
-#### 7.20: Kurssipalaute
+#### 7.21: Kurssipalaute
 
 Anna kurssille palautetta weboodissa.
 

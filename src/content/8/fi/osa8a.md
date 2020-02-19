@@ -21,7 +21,7 @@ Jos palvelin toteuttaisi REST API:n, joutuisimme todennäköisesti tekemään mo
 
 Jos kyseessä olisi usein käytetty toiminnallisuus, voitaisiin sitä varten toteuttaa oma REST-endpoint. Jos vastaavia skeaarioita olisi paljon, esim. kymmeniä, tulisi erittäin työlääksi toteuttaa kaikille toiminnallisuuksille oma REST-endpoint.
 
-GraphQL:n avulla toteutettava palvelin sopii tämänkaltaisiin tilanteisiin hyvin.
+GraphQL:n avulla toteutettu rajapinta sopii tämänkaltaisiin tilanteisiin hyvin.
 
 GraphQL:ssä periaatteena on, että selaimen koodi muodostaa <i>kyselyn</i>, joka kuvailee halutun datan ja lähettää sen API:lle HTTP POST -pyynnöllä. Toisin kuin REST:issä, GraphQL:ssä kaikki kyselyt kohdistetaan samaan osoitteeseen ja ovat POST-tyyppisiä.
 
@@ -63,7 +63,7 @@ Palvelimen vastaus pyyntöön olisi suunnilleen seuraavanlainen JSON-olio:
                       "title": "Goto considered harmful"
                     },
                     {
-                      "title": "End to End Testing with Puppeteer and Jest"
+                      "title": "End to End Testing with Cypress is most enjoyable"
                     },
                     {
                       "title": "Navigating your transition to GraphQL"
@@ -911,7 +911,7 @@ Jos kyselyitä on useita, pyytää Playground valitsemaan mikä niistä suoritet
 
 <div class="tasks">
 
-### Tehtäviä
+### Tehtävät 8.1.-8.7.
 
 Tehtävissä toteutetaan yksinkertaisen kirjaston GraphQL:ää tarjoava backend. Ota sovelluksesi lähtökohtaksi [tämä tiedosto](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js). Muista _npm init_ ja riippuvuuksien asentaminen!
 
