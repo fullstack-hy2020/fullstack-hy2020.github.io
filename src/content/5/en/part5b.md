@@ -302,17 +302,22 @@ Next let's define the form component inside of a <i>Togglable</i> component:
 You can find the code for our current application in its entirety in the <i>part5-4</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-4).
 
 
-### Lomakkeiden tila
+### State of the forms
 
-Koko sovelluksen tila on nyt sijoitettu komponenttiin _App_. 
+<!-- Koko sovelluksen tila on nyt sijoitettu komponenttiin _App_.  -->
+The state of the application currently is in the _App_ component.
 
-Reactin dokumentaatio antaa seuraavan [ohjeen](https://reactjs.org/docs/lifting-state-up.html) tilan sijoittamisesta:
+<!-- Reactin dokumentaatio antaa seuraavan [ohjeen](https://reactjs.org/docs/lifting-state-up.html) tilan sijoittamisesta: -->
+React documentation says the [following](https://reactjs.org/docs/lifting-state-up.html) about where to place the state:
 
 > <i>Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.</i>
 
-Jos mietitään lomakkeiden tilaa, eli esimerkiksi uuden muistiinpanon sisältöä sillä hetkellä kun muistiinpanoa ei vielä ole luotu, ei komponentti _App_ oikeastaan tarvitse niitä mihinkään, ja voisimme aivan hyvin siirtää tilan lomakkeisiin liittyvän tilan niitä vastaaviin komponentteihin.
+<!-- Jos mietitään lomakkeiden tilaa, eli esimerkiksi uuden muistiinpanon sisältöä sillä hetkellä kun muistiinpanoa ei vielä ole luotu, ei komponentti _App_ oikeastaan tarvitse niitä mihinkään, ja voisimme aivan hyvin siirtää tilan lomakkeisiin liittyvän tilan niitä vastaaviin komponentteihin. -->
+If we think about the state of the forms, so for example the contents of a new note before it has been created, the _App_ component does not actually need it for anything. 
+We could just as well move the state of the forms to the corresponding components. 
 
-Muistiinpanosta huolehtiva komponentti muuttuu seuraavasti:
+<!-- Muistiinpanosta huolehtiva komponentti muuttuu seuraavasti: -->
+The component for a note changes like so: 
 
 ```js
 import React, {useState} from 'react' 
@@ -350,11 +355,15 @@ const NoteForm = ({ createNote }) => {
 }
 ```
 
-Tilan muuttuja <i>newNote</i> ja sen muutokseta huolehtiva tapahtumankäsittelijä on siirretty komponentista _App_ lomakkeesta huolehtivaan komponenttiin.
+<!-- Tilan muuttuja <i>newNote</i> ja sen muutokseta huolehtiva tapahtumankäsittelijä on siirretty komponentista _App_ lomakkeesta huolehtivaan komponenttiin. -->
+The <i>newNote</i> state attribute and the event handler responsible for changing it have been moved from the _App_ component to the component responsible for the note form. 
 
-Propseja on enää yksi, funktio _createNote_, jota lomake kutsuu kun uusi muistiinpano luodaan.
+<!-- Propseja on enää yksi, funktio _createNote_, jota lomake kutsuu kun uusi muistiinpano luodaan. -->
+There is only one prop left, the _createNote_ function, which the form calls when a new note is created. 
 
-Komponentti _App_ yksintertaistuu, tilasta <i>newNote</i> ja sen käsittelijäfunktiosta on päästy eroon. Uuden muistiinpanon luomisesta huolehtiva funktio _addNote_ saa suoraan parametriksi uuden muistiinpanon ja funktio on ainoa props, joka välitetään lomakkeelle:
+<!-- Komponentti _App_ yksintertaistuu, tilasta <i>newNote</i> ja sen käsittelijäfunktiosta on päästy eroon. Uuden muistiinpanon luomisesta huolehtiva funktio _addNote_ saa suoraan parametriksi uuden muistiinpanon ja funktio on ainoa props, joka välitetään lomakkeelle: -->
+The _App_ component becomes simpler now that we have got rid of the <i>newNote</i> state and its event handler. 
+The _addNote_ function for creating new notes receives a new note as a parameter, and the function is the only prop we send to the form: 
 
 ```js
 const App = () => {
@@ -377,9 +386,12 @@ const App = () => {
 }
 ```
 
-Vastaava muutos voitaisiin tehdä myös kirjautumislomakkeelle, mutta jätämme sen vapaaehtoiseksi harjoitustehtäväksi.
+<!-- Vastaava muutos voitaisiin tehdä myös kirjautumislomakkeelle, mutta jätämme sen vapaaehtoiseksi harjoitustehtäväksi. -->
+We could do the same for the log in form, but we'll leave that for an optional exercise. 
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5), branchissa <i>part5-5</i>.
+<!-- Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5), branchissa <i>part5-5</i>. -->
+The application code can be found from [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5),
+branch <i>part5-5</i>.
 
 ### References to components with ref
 
@@ -541,19 +553,25 @@ The form closes when a new blog is created.
 
 #### 5.6 Blog list frontend, step6
 
-Eriytä uuden blogin luomisesta huolehtiva lomake omaan komponenttiinsa (jos et jo ole niin tehnyt), ja siirrä kaikki uuden blogin luomiseen liittyvä tila komponentin vastuulle. 
+<!-- Eriytä uuden blogin luomisesta huolehtiva lomake omaan komponenttiinsa (jos et jo ole niin tehnyt), ja siirrä kaikki uuden blogin luomiseen liittyvä tila komponentin vastuulle.  -->
+Separate the form for creating a new blog into its own component (if you have not already done so), and 
+move all the states required for creating a new blog to this component. 
 
-Komponentin tulee siis toimia samaan tapaan kuin tämän osan [materiaalin](http://localhost:8000/osa5/props_children_ja_proptypet#lomakkeiden-tila) komponentin <i>NewNote</i>.
+<!-- Komponentin tulee siis toimia samaan tapaan kuin tämän osan [materiaalin](http://localhost:8000/osa5/props_children_ja_proptypet#lomakkeiden-tila) komponentin <i>NewNote</i>. -->
+The component must work like the <i>NewNote</i> component from the [material](http://localhost:8000/osa5/props_children_ja_proptypet#lomakkeiden-tila) of this part.
 
 #### 5.7* Blog list frontend, step7
 
-Lisää yksittäiselle blogille nappi, jonka avulla voi kontrolloida näytetäänkö kaikki blogiin liittyvät tiedot.
+<!-- Lisää yksittäiselle blogille nappi, jonka avulla voi kontrolloida näytetäänkö kaikki blogiin liittyvät tiedot. -->
+Let's add each blog a button, which controls if all of the details about the blog are shown or not.
 
-Klikkaamalla nappia sen täydelliset tiedot aukeavat.
+<!-- Klikkaamalla nappia sen täydelliset tiedot aukeavat. -->
+Full details of the blog open when the button is clicked.
 
 ![](../../images/5/13ea.png)
 
-Uusi napin klikkaus pienentää näkymän.
+<!-- Uusi napin klikkaus pienentää näkymän. -->
+And the details are hidden when the button is clicked again. 
 
 At this point the <i>like</i> button does not need to do anything.
 
