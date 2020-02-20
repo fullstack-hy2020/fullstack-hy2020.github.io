@@ -74,7 +74,7 @@ The servers response would be about the following JSON-object:
                       "title": "Goto considered harmful"
                     },
                     {
-                      "title": "End to End Testing with Puppeteer and Jest"
+                      "title": "End to End Testing with Cypress is most enjoyable"
                     },
                     {
                       "title": "Navigating your transition to GraphQL"
@@ -474,13 +474,10 @@ query {
 }
 ```
 
-
 the server knows to send back exactly the fields required by the query. How does that happen?
-
 
 A GraphQL-server must define resolvers for <i>each</i> field of each  type in the schema. 
 We have so far only defined resolvers for fields of the type <i>Query</i>, so for each query of the application. 
-
 
 Because we did not define resolvers for the fields of the type <i>Person</i>, Apollo has defined [default resolvers](https://www.apollographql.com/docs/graphql-tools/resolvers.html#Default-resolver) for them. 
 They work like the one shown below: 
@@ -1141,7 +1138,6 @@ query {
   }
 }
 ```
-
 
 should return
 
