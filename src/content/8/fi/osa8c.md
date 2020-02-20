@@ -61,11 +61,11 @@ const Person = require('./models/person')
 
 mongoose.set('useFindAndModify', false)
 
-const MONGODB_URI = 'mongodb+srv://fullstack:fullstack@cluster0-ostce.mongodb.net/graphql?retryWrites=true'
+const MONGODB_URI = 'mongodb+srv://fullstack:sekred@cluster0-ostce.mongodb.net/graphql?retryWrites=true'
 
 console.log('connecting to', MONGODB_URI)
 
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('connected to MongoDB')
   })
@@ -87,7 +87,7 @@ const resolvers = {
     findPerson: (root, args) => Person.findOne({ name: args.name })
   },
   Person: {
-    address: root => {
+    address: (root) => {
       return {
         street: root.street,
         city: root.city
@@ -156,7 +156,7 @@ palauttamat henkilöt, eli ne joiden kentällä _phone_ on jokin arvo. Jos param
 Person.find({ phone: { $exists: false }})
 ```
 
-#### Validoinnit
+### Validoinnit
 
 GraphQL:n lisäksi syötteet validoidaan nyt mongoose-skeemassa määriteltyjä validointeja käyttäen. Skeemassa olevien validointivirheiden varalta _save_-metodeille täytyy lisätä virheen käsittelevä _try/catch_-lohko. Heitetään catchiin jouduttaessa vastaukseksi sopiva poikkeus:
 
@@ -172,6 +172,7 @@ Mutation: {
           invalidArgs: args,
         })
       }
+
       return person
   },
     editNumber: async (root, args) => {
@@ -185,12 +186,13 @@ Mutation: {
           invalidArgs: args,
         })
       }
+
       return person
     }
 }
 ```
 
-Backendin lopullinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4), branchissa <i>part8-4</i>.
+Backendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4), branchissa <i>part8-4</i>.
 
 
 ### Käyttäjä ja kirjautuminen
@@ -222,7 +224,7 @@ module.exports = mongoose.model('User', schema)
 
 Käyttäjään siis liittyy kentän _friends_ kautta joukko luettelossa olevia henkilöitä. Ideana on se, että kun käyttäjä, esim. <i>mluukkai</i> lisää henkilön, vaikkapa <i>Arto Hellas</i> luetteloon, liitetään henkilö käyttäjän _friends_-listaan. Näin kirjautuneilla henkilöillä on mahdollista saada sovellukseen oma personoitu näkymänsä.
 
-Kirjautuminen ja käyttäjän tunnistautuminen hoidetaan samoin kuten teimme [osassa 4](/osa4/token_perustainen_kirjautuminen) RESTin yhteydessä, eli käyttämällä tokeneita.
+Kirjautuminen ja käyttäjän tunnistautuminen hoidetaan samoin kuten teimme [osassa 4](/osa4/token_perustainen_kirjautuminen) REST:in yhteydessä, eli käyttämällä tokeneita.
 
 Laajennetaan skeemaa seuraavasti:
 
@@ -294,13 +296,11 @@ Mutation: {
 
 Käyttäjän luova mutaatio on suoraviivainen. Kirjautumisesta vastaava mutaatio tarkastaa onko käyttäjätunnus/salasana-pari validi ja jos on, palautetaan [osasta 4](/osa4/token_perustainen_kirjautuminen) tuttu jwt-token.
 
-Aivan kuten REST:in tapauksessa myös nyt ideana on, että kirjautunut käyttäjä liittää kirjautumisen yhteydessä saamansa tokenin kaikkiin pyyntöihinsä. REST:in tapaan token liitetään GraphQL-pyyntöihin headerin <i>Authorization</i> avulla.
-
-GraphQL-playgroundissa headerin liittäminen pyyntöön tapahtuu seuraavasti
+Aivan kuten REST:in tapauksessa myös nyt ideana on, että kirjautunut käyttäjä liittää kirjautumisen yhteydessä saamansa tokenin kaikkiin pyyntöihinsä. REST:in tapaan token liitetään GraphQL-pyyntöihin headerin <i>Authorization</i> avulla. GraphQL-playgroundissa headerin liittäminen pyyntöön tapahtuu seuraavasti
 
 ![](../../images/8/24.png)
 
-Laajennetaan sitten sovelluksen olion _server_ määrittelyä lisäämällä konstruktorikutsuun kolmas parametri [context](https://www.apollographql.com/docs/apollo-server/data/data/#context-argument):
+Laajennetaan sitten backendin olion _server_ määrittelyä lisäämällä konstruktorikutsuun kolmas parametri [context](https://www.apollographql.com/docs/apollo-server/data/data/#context-argument):
 
 ```js
 const server = new ApolloServer({
@@ -314,7 +314,9 @@ const server = new ApolloServer({
         auth.substring(7), JWT_SECRET
       )
 
-      const currentUser = await User.findById(decodedToken.id).populate('friends')
+      const currentUser = await User
+        .findById(decodedToken.id).populate('friends')
+
       return { currentUser }
     }
   }
@@ -347,18 +349,18 @@ Mutaatio _addPerson_ muuttuu seuraavasti:
 
 ```js
 Mutation: {
-  addPerson: async (root, args, context) => {
+  addPerson: async (root, args, context) => { // highlight-line
     const person = new Person({ ...args })
-    const currentUser = context.currentUser
+    const currentUser = context.currentUser // highlight-line
 
-    if (!currentUser) {
-      throw new AuthenticationError("not authenticated")
-    }
+    if (!currentUser) { // highlight-line
+      throw new AuthenticationError("not authenticated") // highlight-line
+    } // highlight-line
 
     try {
       await person.save()
-      currentUser.friends = currentUser.friends.concat(person)
-      await currentUser.save()
+      currentUser.friends = currentUser.friends.concat(person) // highlight-line
+      await currentUser.save() // highlight-line
     } catch (error) {
       throw new UserInputError(error.message, {
         invalidArgs: args,
@@ -426,7 +428,7 @@ Backendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-h
 
 <div class="tasks">
 
-### Tehtäviä
+### Tehtävät 8.13.-8.16.
 
 #### 8.13: Tietokanta, osa 1
 

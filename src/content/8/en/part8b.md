@@ -7,16 +7,13 @@ lang: en
 
 <div class="content">
 
-
 We will next implement a React-app which uses the GraphQL server we created.
 
 The current code of the server can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>.
 
-
-In theory, we can use GraphQL with HTTP POST -requests. The following shows an example of this with Postman. 
+In theory, we could use GraphQL with HTTP POST -requests. The following shows an example of this with Postman. 
 
 ![](../../images/8/8.png)
-
 
 The communication works by sending HTTP POST -requests to http://localhost:4000/graphql. The query itself is a string sent as the value of the key <i>query</i>.
 
@@ -26,27 +23,36 @@ At the moment there are two good options: [Relay](https://facebook.github.io/rel
 
 ### Apollo client
 
-Create a new React-app and install the dependencies required by [Apollo client](https://www.apollographql.com/docs/react/get-started/#installation).
+Käytetään kurssilla Apollo Clientin versiota [3.0-beta](https://www.apollographql.com/docs/react/v3.0-beta/), tällä hetkellä (20.2.2020) uusin virallisesti julkaisatu versio on 2.6. eli kun luet dokumentaatiota, muista vaihtaa näytettävän dokumentaation versio vastaamaan 3.0 betaa:
+
+![](../../images/8/40ea.png)
+
+Create a new React-app and install the dependencies required by [Apollo client]https://www.apollographql.com/docs/react/v3.0-beta/get-started/#installation).
+
+Luodaan uusi React-sovellus ja asennetaan siihen [Apollo clientin](https://www.apollographql.com/docs/react/get-started/#installation) vaatimat riippuvuudet.
 
 ```js
-npm install apollo-boost react-apollo graphql --save
+npm install --save @apollo/client graphql
 ```
-
 
 We'll start with the following code for our application. 
 
 ```js
 import React from 'react'
 import ReactDOM from 'react-dom'
+import App from './App'
 
-import ApolloClient, { gql } from 'apollo-boost'
+import { ApolloClient, HttpLink, InMemoryCache, gql } from '@apollo/client'
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql'
+  cache: new InMemoryCache(),
+  link: new HttpLink({
+    uri: 'http://localhost:4000',
+  })
 })
 
 const query = gql`
-{
+query {
   allPersons  {
     name,
     phone,
@@ -64,17 +70,11 @@ client.query({ query })
     console.log(response.data)
   })
 
-const App = () => {
-  return <div>
-    test
-  </div>
-}
-
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
+The beginning of the code creates a new [client](https://www.apollographql.com/docs/react/v3.0-beta/get-started/#create-a-client) - object, which is then used to send a query to the server: 
 
-The beginning of the code creates a new [client](https://www.apollographql.com/docs/react/get-started/#create-a-client) - object, which is then used to send a query to the server: 
 
 ```js
 client.query({ query })
@@ -87,50 +87,47 @@ The servers response is printed to the console:
 
 ![](../../images/8/9a.png)
 
-
-The application can communicate with a GraphQL server using the _client_ object. 
-The client can be made accessible for all components of the application by wrapping the <i>App</i> component with [ApolloProvider](https://www.apollographql.com/docs/react/get-started/#connect-your-client-to-react).
+The application can communicate with a GraphQL server using the _client_ object. The client can be made accessible for all components of the application by wrapping the <i>App</i> component with [ApolloProvider]https://www.apollographql.com/docs/react/v3.0-beta/get-started/#connect-your-client-to-react).
 
 ```js
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './App' // highlight-line
-import ApolloClient, { gql } from 'apollo-boost'
-import { ApolloProvider } from 'react-apollo' // highlight-line
+import App from './App'
+
+import { 
+  ApolloClient, ApolloProvider, HttpLink, InMemoryCache // highlight-line
+} from '@apollo/client' 
 
 const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql'
+  cache: new InMemoryCache(),
+  link: new HttpLink({
+    uri: 'http://localhost:4000',
+  })
 })
 
 ReactDOM.render(
-  // highlight-start
-  <ApolloProvider client={client} >
+  <ApolloProvider client={client}> // highlight-line
     <App />
-  </ApolloProvider>, 
-  // highlight-end
+  </ApolloProvider>, // highlight-line
   document.getElementById('root')
 )
 ```
 
-### Query-component
-
+### Kyselyjen tekeminen
 
 We are ready to implement the main view of the application, which shows a list of phone numbers. 
 
 
+Apollo Client tarjoaa muutaman vaihtoehtoisen tavan [kyselyjen](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/) tekemiselle. Tämän hetken vallitseva käytäntö on hook-funktion [useQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#usequery) käyttäminen.
 
-Apollo Client offers few alternative ways for making queries. At the moment (this part was translated 22.6.2019) the predominant way is to use a [Query](https://www.apollographql.com/docs/react/v2.5/essentials/queries/) component. 
-
-
-The code for the component <i>App</i>, which makes the query, is as follows: 
+Kyselyn tekevän komponentin <i>App</i> koodi näyttää seuraavalta:
 
 ```js
 import React from 'react'
-import { Query } from 'react-apollo'
-import { gql } from 'apollo-boost'
+import { gql, useQuery } from '@apollo/client';
 
 const ALL_PERSONS = gql`
-{
+query {
   allPersons  {
     name
     phone
@@ -140,30 +137,24 @@ const ALL_PERSONS = gql`
 `
 
 const App = () => {
-  return <Query query={ALL_PERSONS}>
-    {(result) => { 
-      if ( result.loading ) {
-        return <div>loading...</div>
-      }
-      return (
-        <div>
-          {result.data.allPersons.map(p => p.name).join(', ')}
-        </div>
-      )
-    }}
-  </Query>
+  const result = useQuery(ALL_PERSONS)
+
+  if (result.loading)  {
+    return <div>loading...</div>
+  }
+
+  return (
+    <div>
+      {result.data.allPersons.map(p => p.name).join(', ')}
+    </div>
+  )
 }
 
 export default App
 ```
 
-
-The code does seem a bit confusing. 
-The core of the code is the component <i>Query</i>. The query to be made is in the variable <em>ALL\_PERSONS</em>. The query is given to the Query component as a parameter. Within the tags of the <i>Query</i> component is a function, which returns the actual JSX to be rendered. A parameter of the function, <i>results</i>, contains the result of the GraphQL query. 
-
-
-The result, the object in parameter _results_, has multiple [fields](https://www.apollographql.com/docs/react/v2.5/essentials/queries/#render-prop-function).
-The field <i>loading</i> has the value true, if there is no response to the query yet. In this case the code to be rendered is
+Hook-funktion _useQuery_ kutsuminen suorittaa parametrina annetun kyselyn. Hookin kutsuminen palauttaa olion, joka
+jolla on [useita kenttiä](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#result). Kenttä <i>loading</i> on arvoltaan tosi, jos kyselyyn ei ole saatu vielä vastausta. Tässä tilanteessa renderöitävä koodi on 
 
 ```js
 if ( result.loading ) {
@@ -171,8 +162,7 @@ if ( result.loading ) {
 }
 ```
 
-
-When the result is ready, response to the query <i>allPersons</i> is taken from the field <i>data</i>, and the names in the phonebook are rendered to the screen.
+Kun tulos on valmis, otetaan tuloksen kentästä <i>data</i> kyselyn <i>allPersons</i> vastaus ja renderöidään luettelossa olevat nimet ruudulle.
 
 ```js
 <div>
@@ -180,30 +170,10 @@ When the result is ready, response to the query <i>allPersons</i> is taken from 
 </div>
 ```
 
-
-To clean the solution up a bit, let's separate rendering the list of persons into its own component <i>Persons</i>. The component <i>App</i> becomes:
-
-```js
-const App = () => {
-  return (
-    <Query query={ALL_PERSONS}>
-      {(result) => <Persons result={result} />}
-    </Query>
-  )
-}
-```
-
-
-So <i>App</i> sends the query results to the <i>Persons</i> component as props:
+Eriytetään henkilöiden näyttäminen omaan komponenttiin
 
 ```js
-const Persons = ({ result }) => {
-  if (result.loading) {
-    return <div>loading...</div>
-  }
-
-  const persons = result.data.allPersons 
-
+const Persons = ({ persons }) => {
   return (
     <div>
       <h2>Persons</h2>
@@ -217,11 +187,25 @@ const Persons = ({ result }) => {
 }
 ```
 
+Komponentti _App_ siis hoitaa edelleen kyselyn ja välittää tuloksen uuden komponentin renderöitäväksi:
+
+```js
+const App = () => {
+  const result = useQuery(ALL_PERSONS)
+
+  if (result.loading)  {
+    return <div>loading...</div>
+  }
+
+  return (
+    <Persons persons = {result.data.allPersons}/>
+  )
+}
+```
+
 ### Named queries and variables
 
-
 Let's implement functionality for viewing the address details of a person. The <i>findPerson</i> query is well suited for this. 
-
 
 The queries we did in the last chapter had the parameter hardcoded into the query:
 
@@ -236,14 +220,11 @@ query {
 }
 ```
 
-
 When we do queries programmatically, we must be able to give them parameters dynamically. 
-
 
 GraphQL [variables](https://graphql.org/learn/queries/#variables) are well suited for this. To be able to use variables, we must also name our queries. 
 
-
-
+Sopiva muoto kyselylle on seuraava:
 
 ```js
 query findPersonByName($nameToSearch: String!) {
@@ -258,46 +239,15 @@ query findPersonByName($nameToSearch: String!) {
 }
 ```
 
-
 The name of the query is <i>findPersonByName</i>, and it is given a string <i>$nameToSearch</i> as a parameter. 
-
 
 It is also possible to do queries with parameters with the GraphQL Playground. The parameters are given in <i>Query variables</i>:
 
 ![](../../images/8/10.png)
 
+Asken käyttämämme _useQuery_ toimii hyvin tilanteissa, joissa kysely on tarkoitus suorittaa heti komponentin renderöinnin yhteydessä. Nyt kuitenkin haluamme tehdä kyselyn vasta siinä vaiheessa kun käyttäjä haluaa nähdä jonkin henkilön tiedot, eli kysely tehdään vasta [sitä tarvittaessa](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#executing-queries-manually). 
 
-The component we just used,<i>Query</i>, is not optimal for our purposes, because we would like to make the query only when a user wants to see the details of a person.  
-
-
-One way would be to use the <i>query</i> method of the <i>client</i> object. 
-All components of the application can access the query object via the [ApolloConsumer](https://www.apollographql.com/docs/react/v2.5/essentials/queries/#manually-firing-a-query) component. 
-
-
-Let's modify the <i>App</i> component to fetch a reference to the _query_ object via <i>ApolloConsumer</i>, and pass it on to the <i>Persons</i> component. 
-
-```js
-import { Query, ApolloConsumer } from 'react-apollo' // highlight-line
-
-// ...
-
-const App = () => {
-  return (
-    <ApolloConsumer>
-      {(client => 
-        <Query query={ALL_PERSONS}>
-          {(result) => 
-            <Persons result={result} client={client} /> 
-          }
-        </Query> 
-      )}
-    </ApolloConsumer>
-  )
-}
-```
-
-
-Changes to the <i>Persons</i> component are as follows:
+Tähän tilanteeseen sopii hook-funktio [useLazyQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#uselazyquery). Komponentti <i>Persons</i> muuttuu seuraavasti:
 
 ```js
 // highlight-start
@@ -316,24 +266,25 @@ const FIND_PERSON = gql`
 `
 // highlight-end
 
-const Persons = ({ result, client }) => {
-// highlight-start
+const Persons = ({ persons }) => {
+  // highlight-start
+  const [getPerson, result] = useLazyQuery(FIND_PERSON) 
   const [person, setPerson] = useState(null)
 // highlight-end
 
-  if (result.loading) {
-    return <div>loading...</div>
+// highlight-start
+  const showPerson = (name) => {
+    getPerson({ variables: { nameToSearch: name } })
   }
+  // highlight-end
 
 // highlight-start
-  const showPerson = async (name) => {
-    const { data } = await client.query({
-      query: FIND_PERSON,
-      variables: { nameToSearch: name }
-    })
-    setPerson(data.findPerson)
-  }
-// highlight-end
+  useEffect(() => {
+    if (result.data) {
+      setPerson(result.data.findPerson)
+    }
+  }, [result.data])
+  // highlight-end
 
 // highlight-start
   if (person) {
@@ -346,12 +297,12 @@ const Persons = ({ result, client }) => {
       </div>
     )
   }
-// highlight-end
-
+  // highlight-end
+  
   return (
     <div>
       <h2>Persons</h2>
-      {result.data.allPersons.map(p =>
+      {persons.map(p =>
         <div key={p.name}>
           {p.name} {p.phone}
           // highlight-start
@@ -364,30 +315,48 @@ const Persons = ({ result, client }) => {
     </div>
   )
 }
+
+export default Persons
 ```
 
+Koodi on kasvanut paljon, ja kaikki lisäykset eivät ole täysin ilmeisiä.
 
-If the button next to person's details is pressed, the component makes a GraphQL query for the person's details and saves the response to the component state <i>person</i>:
+Jos henkilön yhteydessä olevaa nappia painetaan, suoritetaan klikkauksenkäsittelijä _showPerson_, joka tekee GraphQL-kyselyn henkilön tiedoista:
 
 ```js
-const showPerson = async (name) => {
-  const { data } = await client.query({
-    query: FIND_PERSON,
-    variables: { nameToSearch: name }
-  })
+const [getPerson, result] = useLazyQuery(FIND_PERSON) 
 
-  setPerson(data.findPerson)
+// ...
+
+const showPerson = (name) => {
+  getPerson({ variables: { nameToSearch: name } })
 }
 ```
+
+Kyselyn muuttujalle _nameToSearch_ määritellään arvo kutsuttaessa.
+
+Kyselyn vastaus tulee muuttujaan _result_, ja sen arvo sijoitetaan komponentin tilan muutujaan _person_. Sijoitus tehdään _useEffect_-hookissa:
+
+```js
+useEffect(() => {
+  if (result.data) {
+    setPerson(result.data.findPerson)
+  }
+}, [result.data])
+```
+
+Hookin toisena parametrina on _result.data_, tämä saa aikaan sen, että hookin ensimmäisenä parametrina oleva funktio suoritetaan <i>aina kun kyselyssä haetaan uuden henkilön tiedot</i>. Jos päivitystä ei hoidettaisi kontrolloidusti hookissa, seuraisi ongelmia sen jälkeen kun yksittäisen henkilön näkymästä palataan kaikkien henkilöiden näkymään.
 
 
 If the state _person_ has a value, instead of showing a list of all persons, only the details of one person are shown. 
 
 ![](../../images/8/11.png)
 
+Jos tilan muuttujalla _person_ on arvo, näytetään kaikkien henkilöiden sijaan yhden henkilön tarkemmat tiedot:
+
+Yksittäisen henkilön näkymästä palataan kaikkien henkilöiden näkymään sijoittamalla tilan muuttujan _person_ arvoksi _null_.
 
 The solution is not the neatest possible, but it is good enough for us. 
-
 
 The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-1) branch <i>part8-1</i>.
 
@@ -397,9 +366,7 @@ When we do multiple queries for example the address details of Arto Hellas, we n
 
 ![](../../images/8/12.png)
 
-
-Apollo client saves the responses of queries to [cache](https://www.apollographql.com/docs/react/v2.5/advanced/caching/). To optimize performance if the response to a query is already in the cache, the query is not sent to the server at all. 
-
+Apollo client saves the responses of queries to [cache](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-configuration/). To optimize performance if the response to a query is already in the cache, the query is not sent to the server at all. 
 
 It is possible to install [Apollo Client devtools](https://chrome.google.com/webstore/detail/apollo-client-developer-t/jdkknkkbebbapilgoeccciglkfbmbnfm/related) to Chrome to view the state of the cache. 
 
@@ -409,81 +376,59 @@ It is possible to install [Apollo Client devtools](https://chrome.google.com/web
 Data in the cache is organized by query. Because <i>Person</i> objects have an identifying field <i>id</i> which is type <i>ID</i>, if the same object is returned by multiple queries, Apollo is able to combine them into one. 
 Because of this, doing <i>findPerson</i> queries for the address details of Arto Hellas has updated the address details also for the query <i>allPersons</i>.
 
-### Mutation-component
+### Mutatioiden tekeminen
 
+Let's implement functionality for adding new persons. 
 
-Let's implement functionality for adding new persons. The [mutation](https://www.apollographql.com/docs/react/v2.5/essentials/mutations/#the-mutation-component) component offers suitable tools for this. In the previous chapter we hardcoded the parameters for mutations. Now we need a version of the addPerson mutation which uses [variables](https://graphql.org/learn/queries/#variables).
+ In the previous chapter we hardcoded the parameters for mutations. Now we need a version of the addPerson mutation which uses [variables](https://graphql.org/learn/queries/#variables):
 
 ```js
 const CREATE_PERSON = gql`
-  mutation createPerson($name: String!, $street: String!, $city: String!, $phone: String) {
-    addPerson(
-      name: $name,
-      street: $street,
-      city: $city,
-      phone: $phone
-    ) {
-      name
-      phone
-      id
-      address {
-        street
-        city
-      }
+mutation createPerson($name: String!, $street: String!, $city: String!, $phone: String) {
+  addPerson(
+    name: $name,
+    street: $street,
+    city: $city,
+    phone: $phone
+  ) {
+    name
+    phone
+    id
+    address {
+      street
+      city
     }
   }
+}
 `
 ```
 
+Mutaatioiden tekemiseen sopivan toiminnallisuuden tarjoaa hook-funktio [useMutation](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#usemutation). 
 
-The <i>App</i> component changes like so: 
-
-```js
-const App = () => {
-  return (
-    <div>
-      <ApolloConsumer>
-        {(client) => 
-          <Query query={ALL_PERSONS}>
-            {(result) => 
-              <Persons result={result} client={client} />
-            }
-          </Query> 
-        }
-      </ApolloConsumer>
-      // highlight-start
-      <h2>create new</h2>
-      <Mutation mutation={CREATE_PERSON}>
-        {(addPerson) =>
-          <PersonForm
-            addPerson={addPerson}
-          />
-        }
-      </Mutation>
-      // highlight-end
-    </div>
-  )
-}
-```
-
-
-Within the tags of the <i>Mutation</i> component is a <i>function</i>, which returns a <i>PersonForm</i> component. The parameter <i>addPerson</i> is a function, which does the mutation.  
-
-
-The component containing the form is nothing special. 
+Tehdään sovellukseen uusi komponentti uuden henkilön lisämiseen:
 
 ```js
-const PersonForm = (props) => {
+import React, { useState } from 'react'
+import { gql, useMutation } from '@apollo/client'
+
+const CREATE_PERSON = gql`
+  // ...
+`
+
+const PersonForm = () => {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
   const [street, setStreet] = useState('')
   const [city, setCity] = useState('')
 
-  const submit = async (e) => {
-    e.preventDefault()
-    await props.addPerson({
-      variables: { name, phone, street, city }
-    })
+  const [ createPerson ] = useMutation(CREATE_PERSON) // highlight-line
+
+  const submit = async (event) => {
+    event.preventDefault()
+
+    // highlight-start
+    createPerson({  variables: { name, phone, street, city } })
+    // highlight-end
 
     setName('')
     setPhone('')
@@ -493,28 +438,25 @@ const PersonForm = (props) => {
 
   return (
     <div>
+      <h2>create new</h2>
       <form onSubmit={submit}>
         <div>
-          name <input
-            value={name}
+          name <input value={name}
             onChange={({ target }) => setName(target.value)}
           />
         </div>
         <div>
-          phone <input
-            value={phone}
+          phone <input value={phone}
             onChange={({ target }) => setPhone(target.value)}
           />
         </div>
         <div>
-          street <input
-            value={street}
+          street <input value={street}
             onChange={({ target }) => setStreet(target.value)}
           />
         </div>
         <div>
-          city <input
-            value={city}
+          city <input value={city}
             onChange={({ target }) => setCity(target.value)}
           />
         </div>
@@ -523,112 +465,162 @@ const PersonForm = (props) => {
     </div>
   )
 }
+
+export default PersonForm
 ```
 
+Lomakkeen koodi on suoraviivainen, mielenkiintoiset rivit on korostettu. Mutaation suorittava funktio saadaan luotua _useMutation_-hookin avulla. Hook palauttaa kyselyfunktion <i>taulukon</i> ensimmäisenä alkiona:
+
+```js
+const [ createPerson ] = useMutation(CREATE_PERSON)
+```
+
+Kyselyä tehtäessä määritellään kyselyn muuttujille arvot:
+
+```js
+createPerson({  variables: { name, phone, street, city } })
+```
 
 New persons are added just fine, but the screen is not updated. The reason being that Apollo Client cannot automatically update the cache of an application, so it still contains the state from before the mutation. 
 We could update the screen by reloading the page, as the cache is emptied when the page is reloaded. However there must be a better way to do this. 
 
-### Updating the cache
 
-There are few different solutions for this. One way is to make the query for all persons [poll](https://www.apollographql.com/docs/react/v2.5/essentials/queries/#polling-and-refetching) the server, or make the query repeatedly. 
+### Välimuistin päivitys
+
+There are few different solutions for this. One way is to make the query for all persons [poll]((https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#polling) the server, or make the query repeatedly. 
 
 
 The change is small. Let's set the query to poll every two seconds: 
 
 ```js
 const App = () => {
+  const result = useQuery(ALL_PERSONS, {
+    pollInterval: 2000 // highlight-line
+  })
+
+  if (result.loading)  {
+    return <div>loading...</div>
+  }
+
   return (
     <div>
-      <ApolloConsumer>
-        {(client) => 
-          <Query query={ALL_PERSONS} pollInterval={2000}> // highlight-line
-            {(result) =>
-              <Persons result={result} client={client} />
-            }
-          </Query> 
-        }
-      </ApolloConsumer>
-
-      <h2>create new</h2>
-      <Mutation mutation={createPerson} >
-        {(addPerson) =>
-          <PersonForm
-            addPerson={addPerson}
-          />
-        }
-      </Mutation>
+      <Persons persons = {result.data.allPersons}/>
+      <PersonForm />
     </div>
   )
 }
-```
 
+export default App
+```
 
 The solution is simple, and every time a user adds a new person, it appears immediately on the screens of all users. 
 
 The bad side of the solution is all the pointless web traffic. 
 
-Another easy way to synchronize the cache is to declare, that the <i>ALL_PERSONS</i> query should be done again when a new person is added. This can be done with the [refetchQueries](https://www.apollographql.com/docs/react/v2.5/essentials/mutations/#props) props of the <i>Mutation</i> component:
+Toinen helppo tapa välimuistin synkronoimiseen on määritellä _useMutation_-hookin option [refetchQueries](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2) avulla, että kaikki henkilöt hakeva kysely tulee suorittaa mutaation yhteydessä uudelleen:
 
 ```js
-const App = () => {
-  return (
-    <div>
-      <ApolloConsumer>
-        {(client) => 
-          <Query query={allPersons}>
-            {(result) =>
-              <Persons result={result} client={client} 
-            />}
-          </Query> 
-        }
-      </ApolloConsumer>
+const ALL_PERSONS = gql`
+  query  {
+    allPersons  {
+      name
+      phone
+      id
+    }
+  }
+`
 
-      <h2>create new</h2>
-      <Mutation
-        mutation={CREATE_PERSON} 
-        refetchQueries={[{ query: ALL_PERSONS }]}  // highlight-line
-      >
-        {(addPerson) =>
-          <PersonForm
-            addPerson={addPerson}
-          />
-        }
-      </Mutation>
-    </div>
-  )
-}
+const PersonForm = (props) => {
+  // ...
+
+  const [ createPersom ] = useMutation(CREATE_PERSON, {
+    refetchQueries: [ { query: ALL_PERSONS } ] // highlight-line
+  })
 ```
-
 
 The pros and cons of this solution are almost opposite of the previous one. There is no extra web traffic, because queries are not done just in case.  However if one user now updates the state of the server, the changes do not show to other users immediately. 
 
-
 There are other ways to update the cache. More about those later in this part. 
 
+Sovellukseen on tällä hetkellä määritelty kyselyjä komponenttien koodin sekaan. Eriytetään kyselyjen määrittely omaan tiedostoonsa <i>queries.js</i>:
 
-**NB** Apollo Client devtools seems to have some bugs. At some point it stops updating the state of the cache. If you encounter this issue, open the application in a new tab. 
+```js 
+import { gql  } from '@apollo/client'
 
+export const ALL_PERSONS = gql`
+  query {
+    // ...
+  }
+`
+export const FIND_PERSON = gql`
+  query findPersonByName($nameToSearch: String!) {
+    // ...
+  }
+`
+
+export const CREATE_PERSON = gql`
+  mutation createPerson($name: String!, $street: String!, $city: String!, $phone: String) {
+    // ...
+  }
+`
+```
+
+Jokainen komponentti importtaa tarvitsemansa kyselyt:
+
+```js 
+import { ALL_PERSONS } from './queries'
+
+const App = () => {
+  const result = useQuery(ALL_PERSONS)
+  // ...
+}
+```
 
 The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-2) branch <i>part8-2</i>.
 
-### Handling mutation error messages
+#### Mutaatioiden virheiden käsittely
 
+Jos yritämme luoda epävalidia henkilöä, seurauksena on poikkeus ja koko sovellus hajoaa
 
-If we try to create an invalid person, it results in an error. 
+![](../../images/8/14ea.png)
 
-![](../../images/8/14e.png)
+Poikkeus on syytä käsitellä. _useMutation_-hookin [option](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2) _onError_ avulla on mahdollista rekisteröidä mutaatioille virheenkäsittelijäfunktio.
 
+Rekisteröidään mutaatiolle virheidenkäsittelijä, joka asettaa virheestä kertovan viestin propsina saaman funktion _setError_ avulla:
 
-The error should be handled. One way to do this is to register an errorhandler to the mutation using the [onError](https://www.apollographql.com/docs/react/v2.5/essentials/mutations/#props) props. 
+```js
+const PersonForm = ({ setError }) => {
+  // ... 
+
+  const [ createPersom ] = useMutation(CREATE_PERSON, {
+    refetchQueries: [  {query: ALL_PERSONS } ],
+    // highlight-start
+    onError: (error) => {
+      setError(error.graphQLErrors[0].message)
+    }
+    onError: props.onError 
+    // highlight-end
+  })
+
+  // ...
+}
+```
+
+Renderlöidään mahdollinen virheilmoitus näytölle
 
 ```js
 const App = () => {
-  // highlight-start
-  const [errorMessage, setErrorMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null) // highlight-line
 
-  const handleError = (error) => {
-    setErrorMessage(error.graphQLErrors[0].message)
+  const result = useQuery(ALL_PERSONS)
+
+  if (result.loading)  {
+    return <div>loading...</div>
+  }
+
+// highlight-start
+  const notify = (message) => {
+    setErrorMessage(message)
     setTimeout(() => {
       setErrorMessage(null)
     }, 10000)
@@ -637,39 +629,30 @@ const App = () => {
 
   return (
     <div>
-    // highlight-start
-      {errorMessage &&
-        <div style={{color: 'red'}}>
-          {errorMessage}
-        </div>
-      }
-      // highlight-end
-      <ApolloConsumer>
-        // ...
-      </ApolloConsumer>
-
-      <h2>create new</h2>
-      <Mutation
-        mutation={createPerson} 
-        refetchQueries={[{ query: allPersons }]}
-        onError={handleError} // highlight-line
-      >
-        {(addPerson) =>
-          <PersonForm
-            addPerson={addPerson}
-          />
-        }
-      </Mutation>
+      <Notify errorMessage={errorMessage} />
+      <Persons persons = {result.data.allPersons} />
+      <PersonForm setError={notify} />
     </div>
   )
 }
+
+// highlight-start
+const Notify = ({errorMessage}) => {
+  if ( !errorMessage ) {
+    return null
+  }
+
+  return (
+    <div style={{color: 'red'}}>
+    {errorMessage}
+    </div>
+  )
+}
+// highlight-end
 ```
-
-
 Now the user is informed about an error with a simple notification. 
 
 ![](../../images/8/15.png)
-
 
 The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-3) branch <i>part8-3</i>.
 
@@ -680,71 +663,43 @@ Let's add the possibility to change the phone numbers of persons to our applicat
 Again, the mutation requires parameters.
 
 ```js
-const EDIT_NUMBER = gql`
-mutation editNumber($name: String!, $phone: String!) {
-  editNumber(name: $name, phone: $phone)  {
-    name
-    phone
-    address {
-      street
-      city
+export const EDIT_NUMBER = gql`
+  mutation editNumber($name: String!, $phone: String!) {
+    editNumber(name: $name, phone: $phone)  {
+      name
+      phone
+      address {
+        street
+        city
+      }
+      id
     }
-    id
   }
-}
 `
 ```
 
-
-Let's add this to the <i>App</i>-component:
-
-```js
-
-const App = () => {
-  // ...
-  return (
-    <div>
-      {errorMessage && ... }
-      <ApolloConsumer>
-        // ...
-      </ApolloConsumer>
-      
-      <h2>create new</h2>
-      <Mutation mutation={CREATE_PERSON}>
-        // ...
-      </Mutation>
-
-      // highlight-start
-      <h2>change number</h2>
-      <Mutation
-        mutation={EDIT_NUMBER}
-      >
-        {(editNumber) =>
-          <PhoneForm
-            editNumber={editNumber}
-          />
-        }
-      </Mutation>   
-      // highlight-end    
-    </div>
-  )
-}
-```
-
-
-<i>PhoneForm</i>, the component executing the mutation, is straightforward. It asks for the name of a person using a form, and calls _editNumber_, the function doing the mutation:
+Muutoksen suorittava komponentti <i>PhoneForm</i> on suoraviivainen, se kysyy lomakkeen avulla henkilön nimeä ja uutta puhelinnumeroa, ja kutsuu _useMutation_-hookilla luotua mutaation suorittavaa funktiota _changeNumber_. Mielenkiintoiset osat koodia korostettuna:
 
 ```js
-const PhoneForm = (props) => {
+import React, { useState } from 'react'
+import { useMutation } from '@apollo/client'
+
+import { EDIT_NUMBER, ALL_PERSONS } from '../queries'
+
+const PhoneForm = () => {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')
 
-  const submit = async (e) => {
-    e.preventDefault()
+// highlight-start
+  const [ changeNumber ] = useMutation(EDIT_NUMBER)
+// highlight-end
 
-    await props.editNumber({
-      variables: { name, phone }
-    })
+  const submit = async (event) => {
+    event.preventDefault()
+
+// highlight-start
+    changeNumber({ variables: { name, phone } })
+    // highlight-end
 
     setName('')
     setPhone('')
@@ -752,6 +707,8 @@ const PhoneForm = (props) => {
 
   return (
     <div>
+      <h2>change number</h2>
+
       <form onSubmit={submit}>
         <div>
           name <input
@@ -770,242 +727,91 @@ const PhoneForm = (props) => {
     </div>
   )
 }
-```
 
+export default PhoneForm
+```
 
 It looks bleak, but it works: 
 
 ![](../../images/8/22a.png)
 
-
-When a number is changed, surprisingly the list of names and numbers rendered by the component <i>Persons</i> is also automatically updated. 
-This is due to two factors. First, because persons have identifying field type <i>ID</i>, the person is updated in the cache when the update operation is done. The second reason for the automatic update of the view is, that the data returned by a query done with the <i>Query</i> component notices the changes in the cache and updates itself automatically. 
-This is true only for the objects originally returned by the query, not for completely new objects added to the cache, which would be returned from a query done again. 
-
-
-If we try to change the phone number of a nonexisting name, nothing seems to happen. The reason for this is, that if a person corresponding to the name cannot be found, the response to the query is <i>null</i>:
-
-![](../../images/8/23.png)
-
+Kun numero muutetaan, päivittyy se hieman yllättäen automaattisesti komponentin <i>Persons</i> renderöimään nimien ja numeroiden listaan. Tämä johtuu siitä, että koska henkilöillä on identifioiva, tyyppiä <i>ID</i> oleva kenttä, päivittyy henkilö välimuistissa uusilla tiedoilla päivitysoperaation yhteydessä. 
 
 The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4) branch <i>part8-4</i>
 
-### Apollo Client and the applications state
+Sovelluksessa on  vielä pieni ongelma. Jos yritämme vaihtaa olemattomaan nimeen liittyvän puhelinnumeron, ei mitään näytä tapahtuvan. Syynä tälle on se, että jos nimeä vastaavaa henkilöä ei löydy, vastataan kyselyyn <i>null</i>:
 
+![](../../images/8/23ea.png)
+
+Koska kyseessä ei ole GraphQL:n kannalta virhetilanne, ei _onError_-virheenkäsittelijän rekisteröimisestä tässä tilanteessa hyötyä.
+
+Voimme generoida virheilmoituksen _useMutation_-hookin toisena parametrina palauttaman mutaation tuloksen kertovan olion _result_ avulla.
+
+```js 
+const PhoneForm = ({ setError }) => {
+  const [name, setName] = useState('')
+  const [phone, setPhone] = useState('')
+
+  const [ changeNumber, result ] = useMutation(EDIT_NUMBER) // highlight-line
+
+  const submit = async (event) => {
+    // ...
+  }
+
+  // highlight-start
+  useEffect(() => {
+    if (result.data && result.data.editNumber === null) {
+      setError('person not found')
+    }
+
+  }, [result.data])
+  // highlight-end
+
+  // ...
+}
+```
+
+Jos henkilöä ei löytynt, eli kyselyn tulos _result.data.editNumber_ on _null_, asettaa komponentti propseina saamansa callback-funktion avulla sopivan virheilmoituksen. Virheilmoituksen asettamista kontrolloidaan jälleen useEffect-hookin avulla, eli virheviesti halutaan asetaa ainoastaan jos mutaation tulos _result.data_ muuttuu.
+
+useEffect aiheuttaa ESLint-virheilmoituksen:
+
+![](../../images/8/41ea.png)
+
+Varoitus on aiheeton, ja pääsemme helpoimmalla ignoroimalla ESLint-säännön riviltä:
+
+```js
+useEffect(() => {
+  if ( result.data && !result.data.editNumber) {
+    notify('name not found')
+  }
+// highlight-start  
+}, [result.data])  // eslint-disable-line 
+// highlight-end
+```
+
+Voisimme yrittää päästä varoituksesta eroon lisäämällä funktion _notify_ useEffectin toisena parametrina olevaan taulukkoon:
+
+```js
+useEffect(() => {
+  if ( result.data && !result.data.editNumber) {
+    notify('name not found')
+  }
+// highlight-start  
+}, [result.data, notify])
+// highlight-end
+```
+
+Tämä ratkaisu ei kuitenkaan toimi, ellei _notify_-funktiota ole määritelty [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-funktioon käärittynä. Jos näin ei tehdä, seurauksena on ikuinen luuppi, sillä aina kun komponentti _App_ renderöidään uudelleen notifikaation poistamisen jälkeen, syntyy <i>uusi versio</i> funktiosta _notify_ ja se taas aiheuttaa efektifunktion uudelleensuorituksen ja taas uuden notifikaation...
+
+The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5) branch <i>part8-5</i>
+
+### Apollo Client and the applications state
 
 In our example, management of the applications state has mostly become the responsibility of Apollo Client. This is quite typical solution for GraphQL-applications. 
 Our example uses the state of the React components only to manage the state of a form and to show error notifications. When using GraphQL it can be, that there are no more justifiable reasons to move the management of the applications state to Redux at all. 
 
+When necessary Apollo enables saving the applications local state to [Apollo cache](https://www.apollographql.com/docs/react/v3.0-beta/data/local-state/).
 
-When necessary Apollo enables saving the applications local state to [Apollo cache](https://www.apollographql.com/docs/react/v2.5/essentials/local-state/).
-
-### Render props
-
-
-GraphQL components <i>Query</i>, <i>Mutation</i> and <i>ApolloConsumer</i> follow the so called [render props](https://reactjs.org/docs/render-props.html) principle. A component following this principle is given, as props or as a child between its tags (which technically is also a props), a <i>function</i> which defines how the component is rendered. With the render props -principle it is possible to move data or function references to the component responsible for rendering. 
-
-
-The Render props -principle has been quite popular. For example [react router](/en/part7/react_router) we used in part 7 uses it.  Using the component <i>Route</i> of the React router it is defined what the application renders when the browser is in a certain url. 
-The following defines, that if the url is <i>/notes</i>, the component <i>Notes</i> is rendered, and if the url is for example <i>/notes/10</i>, a <i>Note</i> component which has been given id 10 as a parameter is rendered. 
-
-```js
-<Router>
-  <div>
-    // ...
-    <Route exact path='/notes' render={() => 
-      <Notes notes={notes} />
-    } />    
-    <Route exact path='/notes/:id' render={({ match }) =>
-      <Note note={noteById(match.params.id)} />
-    } />
-  </div>
-</Router>
-```
-
-
-The component corresponding to the urls have been defined as render props. It is possible to pass on information to rendered component with the render props -function. For example the page of a single note gets the note corresponding to its url as props. 
-
-
-I myself am not a huge fan of render props. In connection to React router they suffice, but especially in connection to GraphQL using them feels really bad. 
-
-
-In our example we must, regrettably, wrap the <i>Persons</i> component to two render props -components: 
-
-```js
-<ApolloConsumer>
-  {(client) => 
-    <Query query={allPersons}>
-      {(result) => <Persons result={result} client={client} />}
-    </Query> 
-  }
-</ApolloConsumer>
-```
-
-Within a few weeks we can however expect some changes, and an API for using queries and mutations with [hooks](https://github.com/apollographql/react-apollo/pull/2892) will be added to Apollo.
-
-More generally the trend is to replace the need for render props with hooks. 
-
-
-### Apollo with hooks
-
-There is already [a beta release](https://www.npmjs.com/package/react-apollo/v/3.0.0-beta.2) available for Apollo Client 3.0.0 that has the hook support. Let us try it out.
-
-```js
-npm install --save react-apollo@3.0.0-beta.2
-```
-
-There is currently (22.6.2019) no documentation how to use Apollo hooks, [this blog](https://moonhighway.com/apollo-hooks) is one of the rare examples found by Google.
-
-A small change is needed to _index.js_ after the new version is installed:
-
-```js
-import React from 'react'
-import ReactDOM from 'react-dom'
-import ApolloClient from 'apollo-boost'
-import { ApolloProvider } from "@apollo/react-hooks" // highlight-line
-
-import App from './App'
-
-const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql'
-})
-
-ReactDOM.render(
-  <ApolloProvider client={client} >
-    <App />
-  </ApolloProvider>, 
-  document.getElementById('root')
-)
-```
-
-Let's change the <i>Persons</i> component so that it uses the _useApolloClient_-hook.
-
-```js
-import React,  { useState } from 'react'
-import { gql } from 'apollo-boost'
-import { useApolloClient } from '@apollo/react-hooks' // highlight-line
-
-// ...
-
-const Persons = ({ result }) => { // highlight-line
-  const client = useApolloClient() // highlight-line
-  // ...
-}
-```
-
-The <i>App</i> component is simplified, as we can remove the render props -component <i>ApolloConsumer</i>:
-
-```js
-const App = () => {
-
-  return(
-    <div>
-      {errorMessage &&
-        <div style={{ color: 'red' }}>
-          {errorMessage}
-        </div>
-      }
-      // highlight-start
-      <Query query={ALL_PERSONS}>
-        {(result) => <Persons result={result} />}
-      </Query> 
-      // highlight-end
-      // ...
-    </div>
-  )
-}
-```
-
-Let's get rid of the <i>Query</i> -component with the _useQuery_ hook. The <i>App</i> becomes simpler still: 
-
-```js
-import { useQuery } from '@apollo/react-hooks' // highlight-line
-
-const App = () => {
-  const persons = useQuery(ALL_PERSONS) // highlight-line
-
-  // ...
-
-  return (
-    <div>
-      {errorMessage &&
-        <div style={{ color: 'red' }}>
-          {errorMessage}
-        </div>
-      }
-
-      <Persons result={persons} /> // highlight-line
-
-      <Mutation
-        mutation={createPerson} 
-        refetchQueries={[{ query: allPersons }]}
-        onError={handleError}
-      >
-        {(addPerson) =>
-          <PersonForm
-            addPerson={addPerson}
-          />
-        }
-      </Mutation>
-      // ...
-    </div>
-  )
-}
-```
-
-
-We can replace the <i>Mutation</i> -components with the _useMutation_ hook. 
-The final form of the <i>App</i> -component is as follows: 
-
-```js
-import { useQuery, useMutation } from '@apollo/react-hooks' // highlight-line
-
-const App = () => {
-  const result = useQuery(ALL_PERSONS)
-
-  const [errorMessage, setErrorMessage] = useState(null)
-
-  const handleError = (error) => {
-    // ...
-  }
-
-  // highlight-start
-  const [addPerson] = useMutation(CREATE_PERSON, {
-    onError: handleError,
-    refetchQueries: [{ query: ALL_PERSONS }]
-  })
-  // highlight-end
-
-  // highlight-start
-  const [editNumber] = useMutation(EDIT_NUMBER)
-  // highlight-end
-
-  return (
-    <div>
-      {errorMessage &&
-        <div style={{ color: 'red' }}>
-          {errorMessage}
-        </div>
-      }
-      <Persons result={result} />
-
-      <h2>create new</h2>
-      <PersonForm addPerson={addPerson} /> // highlight-line
-
-      <h2>change number</h2>
-      <PhoneForm editNumber={editNumber} /> // highlight-line  
-    </div>
-  )
-}
-```
-
-Note that the hook _useMutation_ returns an array. The first value in that array is a function that we can use to trigger the mutation.  The second value of this array is an object that will give you the <i>loading</i> and <i> error</i>  state of the mutation, but we are currently not using those fields.
-
-The final result is really so much cleaner than the mess using the render props -components. We can join Ryan Florence in the opinion he stated in React Conf 2018 [90% Cleaner React With Hooks](https://www.youtube.com/watch?v=wXLf18DsV-I). 
-
-The code of the application which uses hooks can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5) branch <i>part8-5</i>.
-
-</div>
 
 <div class="tasks">
 

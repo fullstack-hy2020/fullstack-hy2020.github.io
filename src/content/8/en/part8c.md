@@ -67,7 +67,7 @@ const Person = require('./models/person')
 
 mongoose.set('useFindAndModify', false)
 
-const MONGODB_URI = 'mongodb+srv://fullstack:fullstack@cluster0-ostce.mongodb.net/graphql?retryWrites=true'
+const MONGODB_URI = 'mongodb+srv://fullstack:sekred@cluster0-ostce.mongodb.net/graphql?retryWrites=true'
 
 console.log('connecting to', MONGODB_URI)
 
@@ -204,14 +204,12 @@ Mutation: {
 }
 ```
 
-The finished code of the backend can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4), branch <i>part8-4</i>.
+The code of the backend can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4), branch <i>part8-4</i>.
 
 
 ### User and log in
 
-
 Let's add user management to our application. For simplicity's sake, let's assume that all users have the same password which is hardcoded to the system. It would be straightforward to save individual passwords for all users following the principles from [part 4](/en/part4/user_administration), but because our focus is on GraphQL, we will leave out all that extra hassle this time. 
-
 
 The user schema is as follows: 
 
