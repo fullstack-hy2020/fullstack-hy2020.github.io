@@ -7,8 +7,6 @@ lang: fi
 
 <div class="content">
 
-**HUOM** osan 8 sisältöä muutettiin Apollo hookien osalta 28.6. noin klo 21. Jos olet aloittanut osan 8 tekemisen tätä aiemmin tarkista [täältä](/osa8/react_ja_graph_ql#apollon-hookit) että konfiguraatiosi ovat oikeat!
-
 Kurssi lähestyy loppuaan. Katsotaan lopuksi vielä muutamaa GraphQL:ään liittyvää asiaa.
 
 ### fragmentit
@@ -79,20 +77,20 @@ Fragmentteja <i><strong>ei määritellä</strong></i> GraphQL:n skeemassa, vaan 
 Voisimme periaatteessa määritellä fragmentin jokaisen kyselyn yhteydessä seuraavasti:
 
 ```js
-const ALL_PERSONS = gql`
-{
-  allPersons  {
-    ...PersonDetails
+export const ALL_PERSONS = gql`
+  {
+    allPersons  {
+      ...PersonDetails
+    }
   }
-}
-fragment PersonDetails on Person {
-  name
-  phone 
-  address {
-    street 
-    city
+  fragment PersonDetails on Person {
+    name
+    phone 
+    address {
+      street 
+      city
+    }
   }
-}
 `
 ```
 
@@ -100,28 +98,28 @@ Huomattavasti järkevämpää on kuitenkin määritellä fragmentti kertaalleen 
 
 ```js
 const PERSON_DETAILS = gql`
-fragment PersonDetails on Person {
-  id
-  name
-  phone 
-  address {
-    street 
-    city
+  fragment PersonDetails on Person {
+    id
+    name
+    phone 
+    address {
+      street 
+      city
+    }
   }
-}
 `
 ```
 
 Näin määritelty fragmentti voidaan upottaa kaikkiin sitä tarvitseviin kyselyihin ja mutaatioihin "prosenttiaaltosulku"-operaatiolla:
 
 ```js
-const ALL_PERSONS = gql`
-{
-  allPersons  {
-    ...PersonDetails
+export const ALL_PERSONS = gql`
+  {
+    allPersons  {
+      ...PersonDetails
+    }
   }
-}
-${PERSON_DETAILS}  
+  ${PERSON_DETAILS}  
 `
 ```
 
@@ -216,7 +214,7 @@ Tilauksia on mahdollista testata GraphQL-playgroundin avulla seuraavasti:
 
 ![](../../images/8/31.png)
 
-Kun tilauksen "play"-painiketta painetaan, jää playground odottamaan tilaukseen tulevia vastauksia. 
+Kun tilauksen "play"-painiketta painetaan, jää playground odottamaan tilaukseen tulevia vastauksia. Aina kun sovellukseen lisätään uusia käyttäjiä, tulee tieto niistä playgroundin oikeanpuoleiseen ikkunaan.
 
 Backendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-6), branchissa <i>part8-6</i>.
 

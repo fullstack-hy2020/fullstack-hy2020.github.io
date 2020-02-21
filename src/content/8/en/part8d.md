@@ -12,39 +12,22 @@ The frontend of our application shows the phone directory just fine with the upd
 
 ### User log in
 
-Let's add variable _token_ to the application's state. It saves the token when user has logged in. If _token_ is undefined, we show the component responsible for logging in, <i>LoginForm</i>. It is given the function responsible for the mutation, _login_, as a parameter:
+Lisätään sovelluksen tilaan muuttuja _token_, joka tallettaa tokenin siinä vaiheessa kun käyttäjä on kirjautunut. Jos _token_ ei ole määritelty, näytetään kirjautumisesta huolehtiva komponentti <i>LoginForm</i>, joka saa parametriksi virheenkäsittelijän sekä funktion _setToken_:
 
 ```js
-const LOGIN = gql`
-  mutation login($username: String!, $password: String!) {
-    login(username: $username, password: $password)  {
-      value
-    }
-  }
-`
-
 const App = () => {
-  const [token, setToken] = useState(null)
+  const [token, setToken] = useState(null) // hightlight-line
 
   // ...
-
-  const [login] = useMutation(LOGIN, {
-    onError: handleError
-  })
-
-  const errorNotification = () => errorMessage &&
-    <div style={{ color: 'red' }}>
-      {errorMessage}
-    </div>
 
   if (!token) {
     return (
       <div>
-        {errorNotification()}
+        <Notify errorMessage={errorMessage} />
         <h2>Login</h2>
         <LoginForm
-          login={login}
-          setToken={(token) => setToken(token)}
+          setToken={setToken}
+          setError={notify}
         />
       </div>
     )
@@ -56,29 +39,49 @@ const App = () => {
 }
 ```
 
-If the login operation fails, an error message is shown in the <i>App</i> component thanks to the _onError_ handler set to the login mutation.
-
-If login is successful, the <i>token</i> it returns is saved to the state of the <i>App</i> component. The token is also saved to <i>local storage</i>. This way it is easier to access when we want to add it to the <i>Authorization</i>-header of a request.
+Määritellään kirjautumisen suorittava mutaatio
 
 ```js
-import React, { useState } from 'react'
+expoty const LOGIN = gql`
+  mutation login($username: String!, $password: String!) {
+    login(username: $username, password: $password)  {
+      value
+    }
+  }
+`
+```
 
-const LoginForm = (props) => {
+Kirjautumisesta huolehtiva komponentti _LoginForm_ toimii melko samalla tavalla kuin aiemmat mutaatioista huolehtivat komponentit. Mielenkiintoiset rivit on korostettu koodissa:
+
+```js
+import React, { useState, useEffect } from 'react'
+import { useMutation } from '@apollo/client'
+import { LOGIN } from '../queries'
+
+const LoginForm = ({ setError, setToken }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
+
+  const [ login, result ] = useMutation(LOGIN, { // highlight-line
+    onError: (error) => {
+      setError(error.graphQLErrors[0].message)
+    }
+  })
+
+// highlight-start
+  useEffect(() => {
+    if ( result.data ) {
+      const token = result.data.login.value
+      setToken(token)
+      localStorage.setItem('phonenumbers-user-token', token)
+    }
+  }, [result.data]) // eslint-disable-line
+// highlight-end
 
   const submit = async (event) => {
     event.preventDefault()
 
-    const result = await props.login({
-      variables: { username, password }
-    })
-
-    if (result) {
-      const token = result.data.login.value
-      props.setToken(token)
-      localStorage.setItem('phonenumbers-user-token', token)
-    }
+    login({ variables: { username, password } })
   }
 
   return (
@@ -106,25 +109,32 @@ const LoginForm = (props) => {
 export default LoginForm
 ```
 
+Käytössä on jälleen efektihookki, jonka avulla asetetaan tokenin arvo komponentin _App_ tilaan sekä local storageen siinä vaiheessa kun palvelin on vastannut mutaatioon. Efektihookki on tarpeen, jotta sovellus ei joutuisi ikuiseen renderöintilooppiin.
 
-Let's also add a button which enables logged in user to log out. The buttons onClick handler sets the _token_ state to null, removes the token from local storage and resets the cache of the Apollo client. 
+Let's also add a button which enables logged in user to log out. The buttons onClick handler sets the _token_ state to null, removes the token from local storage and resets the cache of the Apollo client. The last is [important](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout), because some queries might have fetched data to cache, which only logged in users should have access to. 
 
-The last is [important](https://www.apollographql.com/docs/react/v2.5/recipes/authentication/#reset-store-on-logout), because some queries might have fetched data to cache, which only logged in users should have access to. 
-
+Välimuistin nollaaminen tapahtuu Apollon _client_-objektin metodilla [resetStore](https://www.apollographql.com/docs/react/v3.0-beta/api/core/ApolloClient/#ApolloClient.resetStore), clientiin taas päästään käsiksi hookilla
+[useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useapolloclient):
 
 ```js
 const App = () => {
-  const client = useApolloClient()
+  const [token, setToken] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
+  const result = useQuery(ALL_PERSONS)
+  const client = useApolloClient() // highlight-line
 
-  // ...
+  if (result.loading)  {
+    return <div>loading...</div>
+  }
 
+  // highlight-start
   const logout = () => {
     setToken(null)
     localStorage.clear()
     client.resetStore()
   }
+  // highlight-end
 
-  // ...
 }
 ```
 
@@ -135,50 +145,9 @@ The current code of the application can be found on [Github](https://github.com/
 After the backend changes, creating new persons requires that a valid user token is sent with the request. In order to send the token, we have to change the way we define the _ApolloClient_-object in <i>index.js</i> a little. 
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom'
-import ApolloClient from 'apollo-boost' // highlight-line
-import { ApolloProvider } from "@apollo/react-hooks"
-import App from './App'
+import { setContext } from 'apollo-link-context' // highlight-line
 
 // highlight-start
-const client = new ApolloClient({
-  uri: 'http://localhost:4000/graphql'
-})
-// highlight-end
-
-ReactDOM.render(
-  <ApolloProvider client={client} >
-    <App />
-  </ApolloProvider>, 
-  document.getElementById('root')
-)
-```
-
-
-The new definition uses [apollo-boost](https://github.com/apollographql/apollo-client/tree/master/packages/apollo-boost)-library. According to its documentation:
-
-> <i>Apollo Boost is a zero-config way to start using Apollo Client. It includes some sensible defaults, such as our recommended InMemoryCache and HttpLink, which come configured for you with our recommended settings.</i>
-
-
-So apollo-boost offers an easy way to configure _ApolloClient_ with settings suitable for most situations. 
-
-
-Even though it would be possible to also configure the request headers with apollo-boost, we will now abandon it and do the configuration ourselves. 
-
-
-The configuration is as follows:
-
-```js
-import { ApolloClient } from 'apollo-client'
-import { createHttpLink } from 'apollo-link-http'
-import { InMemoryCache } from 'apollo-cache-inmemory'
-import { setContext } from 'apollo-link-context'
-
-const httpLink = createHttpLink({
-  uri: 'http://localhost:4000/graphql',
-})
-
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('phonenumbers-user-token')
   return {
@@ -188,47 +157,42 @@ const authLink = setContext((_, { headers }) => {
     }
   }
 })
+// highlight-end
+
+const httpLink = new HttpLink({ uri: 'http://localhost:4000' }) // highlight-line
 
 const client = new ApolloClient({
-  link: authLink.concat(httpLink),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+  link: authLink.concat(httpLink) // highlight-line
 })
 ```
 
-It requires installing two libraries:
+_client_-olion muodostamisen yhteydessä oleva toinen parametri _link_ määrittelee, miten apollo on yhteydessä palvelimeen. Nyt normaalia [httpLink](https://www.apollographql.com/docs/link/links/http.htm)-yhteyttä muokataan siten, että, että pyyntöjen mukaan [asetetaan headerille](https://www.apollographql.com/docs/react/networking/authentication/#header) <i>authorization</i> arvoksi localStoragessa mahdollisesti oleva token.
+
+Asennetaan vielä muutoksen tarvitsema kirjasto
 
 ```js
-npm install --save apollo-link apollo-link-context
+npm install --save apollo-link-context
 ```
-
-
-_client_ is now configured using [ApolloClient](https://www.apollographql.com/docs/react/api/apollo-client/#apollo-client) constructor function of [apollo-link](https://www.apollographql.com/docs/link/). It has two parameters, _link_ and _cache_. The latter defines, that the application now uses a cache operating in the main memory [InMemoryCache](https://www.apollographql.com/docs/react/v2.5/advanced/caching/#inmemorycache).
-
-
-The first parameter _link_ defines how the client contacts the server. The communication is based on [httpLink](https://www.apollographql.com/docs/link/links/http/), a normal connection over HTTP with the addition that a token from localStorage is set as the value of the <i>authorization</i> [header](https://www.apollographql.com/docs/react/v2.5/recipes/authentication/#header) if it exists. 
-
 
 Creating new persons and changing numbers works again. There is however one remaining problem. If we try to add a person without a phone number, it is not possible. 
 
 ![](../../images/8/25e.png)
 
-
 Validation fails, because frontend sends an empty string as the value of _phone_.
-
 
 Let's change the function creating new persons so that it sets _phone_ to null if user has not given a value. 
 
 ```js
-const PersonForm = (props) => {
+const PersonForm = ({ setError }) => {
   // ...
-  const submit = async (e) => {
-    e.preventDefault()
-
-    await props.addPerson({ 
+  const submit = async (event) => {
+    event.preventDefault()
+    createPerson({
       variables: { 
-        name, street, city, // highlight-line
-        phone: phone.length>0 ? phone : null // highlight-line
-      } 
+        name, street, city,  // highlight-line
+        phone: phone.length > 0 ? phone : null  // highlight-line
+      }
     })
 
   // ...
@@ -238,40 +202,37 @@ const PersonForm = (props) => {
 }
 ```
 
-
 Current application code can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-7), branch <i>part8-7</i>.
 
 ### Updating cache, revisited
 
-When adding new persons, we must declare that the cache of Apollo client has to be [updated](/en/part8/react_and_graph_ql#updating-the-cache). The cache can be updated by using the option _refetchQueries_ on the mutation to force <em>ALL\_PERSONS</em> query to be rerun. 
-
+Uusien henkilöiden lisäyksen yhteydessä on siis 
+[päivitettävä](/osa8/react_ja_graph_ql#valimuistin-paivitys) Apollo clientin välimuisti. Päivitys tapahtuu määrittelemällä mutaation yhteydessä option _refetchQueries_ avulla, että kysely <em>ALL\_PERSONS</em> on suoritettava uudelleen:
 
 ```js 
-const App = () => {
+const PersonForm = ({ setError }) => {
   // ...
 
-  const [addPerson] = useMutation(CREATE_PERSON, {
-    onError: handleError,
-    refetchQueries: [{ query: ALL_PERSONS }]
+  const [ createPerson ] = useMutation(CREATE_PERSON, {
+    refetchQueries: [  {query: ALL_PERSONS} ], // highlight-line
+    onError: (error) => {
+      setError(error.graphQLErrors[0].message)
+    }
   })
-
-  // ..
-}
 ```
-
 
 This approach is pretty good, the drawback being that the query is always rerun with any updates. 
 
-
-It is possible to optimize the solution by handling updating the cache ourselves. This is done by defining a suitable [update](https://www.apollographql.com/docs/react/v2.5/advanced/caching/#updating-after-a-mutation)-callback for the mutation, which Apollo runs after the mutation:
-
+It is possible to optimize the solution by handling updating the cache ourselves. This is done by defining a suitable [update](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#options-)-callback for the mutation, which Apollo runs after the mutation:
 
 ```js 
-const App = () => {
+const PersonForm = ({ setError }) => {
   // ...
 
-  const [addPerson] = useMutation(CREATE_PERSON, {
-    onError: handleError,
+  const [ createPerson ] = useMutation(CREATE_PERSON, {
+    onError: (error) => {
+      setError(error.graphQLErrors[0].message)
+    },
     // highlight-start
     update: (store, response) => {
       const dataInStore = store.readQuery({ query: ALL_PERSONS })
@@ -288,46 +249,19 @@ const App = () => {
 }  
 ```
 
-
 The callback function is given a reference to the cache and the data returned by the mutation as parameters. For example, in our case this would be the created person. 
 
+The code reads the cached state of <em>ALL\_PERSONS</em> query using [readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readquery) function and updates the cache with [writeQuery]https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writequery-and-writefragment) function adding the new person to the cached data. 
 
-The code reads the cached state of <em>ALL\_PERSONS</em> query using [readQuery](https://www.apollographql.com/docs/react/v2.5/advanced/caching/#readquery) function and updates the cache with [writeQuery](https://www.apollographql.com/docs/react/v2.5/advanced/caching/#writequery-and-writefragment) function adding the new person to the cached data. 
+There are actually some situations where the only good way to keep the cache up to date is using _update_ -callbacks. 
 
-
-There are some situations where the only good way to keep the cache up to date is using _update_ -callbacks. 
-
+On myös olemassa tilanteita, joissa ainoa järkevä tapa saada välimuisti pidettyä ajantasaisena on _update_-callbackillä tehtävä päivitys. 
 
 When necessary it is possible to disable cache for the whole application or single queries by setting the field managing the use of cache, [fetchPolicy](https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy) as <em>no-cache</em>.
-
-
-We could declare that the address details of a single person are not saved to cache:
-
-```js 
-const Persons = ({ result }) => {
-  // ...
-  const show = async (name) => {
-    const { data } = await client.query({
-      query: FIND_PERSON,
-      variables: { nameToSearch: name },
-      fetchPolicy: 'no-cache' // highlight-line
-    })
-    setPerson(data.findPerson)
-  }
-
-  // ...
-}
-``` 
-
-
-We will however leave the code as is. 
-
 
 Be diligent with the cache. Old data in cache can cause hard to find bugs. As we know, keeping the cache up to date is very challenging. According to a coder proverb:
 
 > <i>There are only two hard things in Computer Science: cache invalidation and naming things.</i> Read more [here](https://www.google.com/search?q=two+hard+things+in+Computer+Science&oq=two+hard+things+in+Computer+Science).
-
-
 
 The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-8), branch <i>part8-8</i>.
 
