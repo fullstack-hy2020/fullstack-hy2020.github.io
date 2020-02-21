@@ -35,7 +35,10 @@ After making the changes to the directory structure of our project, we end up wi
 │   └── middleware.js  
 ```
 
-Olemme toistaiseksi tulostelleet koodista erilaista logaustietoa komennoilla  <i>console.log</i> ja <i>console.error</i>, tämä ei ole kovin järkevä käytäntö. Eristetään kaikki konsoliin tulostelu omaan moduliinsa <i>utils/logger.js</i>:
+<!-- Olemme toistaiseksi tulostelleet koodista erilaista logaustietoa komennoilla  <i>console.log</i> ja <i>console.error</i>, tämä ei ole kovin järkevä käytäntö. Eristetään kaikki konsoliin tulostelu omaan moduliinsa <i>utils/logger.js</i>: -->
+So far we have been using <i>console.log</i> and <i>console.error</i> to print different information from the code. 
+However, this is not a very good way to do things. 
+Let's separate all printing to the console to it's own module <i>utils/logger.js</i>:
 
 ```js
 const info = (...params) => {
@@ -51,7 +54,8 @@ module.exports = {
 }
 ```
 
-Loggeri tarjoaa kaksi funktiota, normaalien logiviesteihin tarkoitetun funktion _info_ sekä virhetilanteisiin tarkoitetun funktion _error_.
+<!-- Loggeri tarjoaa kaksi funktiota, normaalien logiviesteihin tarkoitetun funktion _info_ sekä virhetilanteisiin tarkoitetun funktion _error_. -->
+The logger has two functions, __info__ for printing normal log messages, and __error__ for all error messages. 
 
 Extracting logging into its own module is a good idea in more ways than one. If we wanted to start writing logs to a file or send them to an external logging service like [graylog](https://www.graylog.org/) or [papertrail](https://papertrailapp.com) we would only have to make changes in one place.
 

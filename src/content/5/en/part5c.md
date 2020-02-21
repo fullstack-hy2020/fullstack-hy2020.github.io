@@ -162,7 +162,7 @@ test('renders content', () => {
 ```
 
 
-The first way uses method <i>toHaveTextContent</i> to searches for a matching text from the entire HTML code rendered by the component.   
+The first way uses method <i>toHaveTextContent</i> to search for a matching text from the entire HTML code rendered by the component.   
 <i>toHaveTextContent</i> is one of many "matcher"-methods that are provided by the  [jest-dom](https://github.com/testing-library/jest-dom#tohavetextcontent) library.
 
 
@@ -170,7 +170,9 @@ The second way uses the [getByText](https://testing-library.com/docs/dom-testing
 
 The third way is to search for a specific element that is rendered by the component with the [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) method that receives a [CSS selector](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) as its parameter.
 
-Kaksi viimeistä tapaa siis hakevat metodien <i>getByText</i> ja <i>querySelector</i> avulla renderöidystä komponentista jonkin ehdon täyttävän elementin. Vastaavalla periaatteella toimivia "query"-metodeja, on tarjolla [lukuisia](https://testing-library.com/docs/dom-testing-library/api-queries).
+<!-- Kaksi viimeistä tapaa siis hakevat metodien <i>getByText</i> ja <i>querySelector</i> avulla renderöidystä komponentista jonkin ehdon täyttävän elementin. Vastaavalla periaatteella toimivia "query"-metodeja, on tarjolla [lukuisia](https://testing-library.com/docs/dom-testing-library/api-queries). -->
+The last two methods use the methods <i>getByText</i> and <i>querySelector</i> to find an element matching some condition from the rendered component. 
+There are numerous similiar query methods [available](https://testing-library.com/docs/dom-testing-library/api-queries).
 
 ### Debugging tests
 
@@ -444,18 +446,22 @@ The _getByText_ method that we used is just one of the many [queries](https://te
 
 
 
-### Lomakkeiden testaus
+### Testing the forms
 
-Käytimme jo edellisissä testeissä [fireEvent](https://testing-library.com/docs/api-events#fireevent)-funktiota nappien klikkaamiseen:
+<!-- Käytimme jo edellisissä testeissä [fireEvent](https://testing-library.com/docs/api-events#fireevent)-funktiota nappien klikkaamiseen: -->
+We already used the [fireEvent](https://testing-library.com/docs/api-events#fireevent) function in our previous tests to click buttons.
 
 ```js
 const button = component.getByText('show...')
 fireEvent.click(button)
 ```
 
-Käytännössä siis loimme <i>fireEventin</i> avulla tapahtuman <i>click</i> nappia vastaavalle komponentille. Voimme myös simuloida lomakkeisiin kirjoittamista <i>fireEventin</i> avulla.
+<!-- Käytännössä siis loimme <i>fireEventin</i> avulla tapahtuman <i>click</i> nappia vastaavalle komponentille. Voimme myös simuloida lomakkeisiin kirjoittamista <i>fireEventin</i> avulla. -->
+In practice we used the <i>fireEvent</i> to create a <i>click</i> event for the button component. 
+We cal also simulate text input with <i>fireEvent</i>.
 
-Tehdään testi komponentille <i>NoteForm</i>. Lomakkeen koodi näyttää seuraavalta
+<!-- Tehdään testi komponentille <i>NoteForm</i>. Lomakkeen koodi näyttää seuraavalta -->
+Let's make a test for the <i>NoteForm</i> component. The code of the component is as follows
 
 ```js
 import React, { useState } from 'react'
@@ -495,9 +501,11 @@ const NoteForm = ({ createNote }) => {
 export default NoteForm
 ```
 
-Lomakkeen toimintaperiaatteena on kutsua sille propsina välitettyä funktiota _createNote_ uuden muistiinpanon tiedot parametrina.
+<!-- Lomakkeen toimintaperiaatteena on kutsua sille propsina välitettyä funktiota _createNote_ uuden muistiinpanon tiedot parametrina. -->
+The form works by calling the _createNote_ function it received as props with the details of the new note.
 
-Testi on seuraavassa:
+<!-- Testi on seuraavassa: -->
+The test is as follows:
 
 ```js
 import React from 'react'
@@ -525,15 +533,22 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
 })
 ```
 
-Syötekenttään <i>input</i> kirjoittamista simuloidaan tekemällä syötekenttään tapahtuma <i>change</i> ja määrittelemällä sopiva olio, joka määrittelee syötekenttään 'kirjoitetun' sisällön.
+<!-- Syötekenttään <i>input</i> kirjoittamista simuloidaan tekemällä syötekenttään tapahtuma <i>change</i> ja määrittelemällä sopiva olio, joka määrittelee syötekenttään 'kirjoitetun' sisällön. -->
+We can simulate writing to <i>input</i> fields by creating an <i>change</i> event to them, and defining an object, which contains the text 'written' to the field.
 
-Lomake lähetetään simuloimalla tapahtuma <i>submit</i> lomakkeelle.
+<!-- Lomake lähetetään simuloimalla tapahtuma <i>submit</i> lomakkeelle. -->
+The form is sent by simulating the <i>submit</i> event to the form.
 
-Testin ensimmäinen ekspektaatio varmistaa, että lomakkeen lähetys on aikaansaanut tapahtumankäsittelijän _createNote_ kutsumisen. Toinen ekspektaatio tarkistaa, että tapahtumankäsittelijää kutsutaan oikealla parametrilla, eli että luoduksi tulee saman sisältöinen muistiinpano kuin lomakkeelle kirjoitetaan.
+<!-- Testin ensimmäinen ekspektaatio varmistaa, että lomakkeen lähetys on aikaansaanut tapahtumankäsittelijän _createNote_ kutsumisen. Toinen ekspektaatio tarkistaa, että tapahtumankäsittelijää kutsutaan oikealla parametrilla, eli että luoduksi tulee saman sisältöinen muistiinpano kuin lomakkeelle kirjoitetaan. -->
+The first test expectation ensures, that submitting the form calls the _createNote_ method. 
+The second expectation checks, that the event handler is called with the right parameters - that a note with the correct content is created when the form is filled. 
 
-### Testauskattavuus
+### Test coverage
 
-[Testauskattavuus](https://github.com/facebookincubator/create-react-app/blob/ed5c48c81b2139b4414810e1efe917e04c96ee8d/packages/react-scripts/template/README.md#coverage-reporting) saadaan helposti selville suorittamalla testit komennolla
+<!-- [Testauskattavuus](https://github.com/facebookincubator/create-react-app/blob/ed5c48c81b2139b4414810e1efe917e04c96ee8d/packages/react-scripts/template/README.md#coverage-reporting) saadaan helposti selville suorittamalla testit komennolla -->
+We can easily find out the [coverage](https://github.com/facebookincubator/create-react-app/blob/ed5c48c81b2139b4414810e1efe917e04c96ee8d/packages/react-scripts/template/README.md#coverage-reporting)
+of our tests by running them with the command
+
 
 ```js
 CI=true npm test -- --coverage
@@ -541,7 +556,9 @@ CI=true npm test -- --coverage
 
 ![](../../images/5/18ea.png)
 
-Melko primitiivinen HTML-muotoinen raportti generoituu hakemistoon <i>coverage/lcov-report</i>. HTML-muotoinen raportti kertoo mm. yksittäisen komponenttien testaamattomat koodirivit:
+<!-- Melko primitiivinen HTML-muotoinen raportti generoituu hakemistoon <i>coverage/lcov-report</i>. HTML-muotoinen raportti kertoo mm. yksittäisen komponenttien testaamattomat koodirivit: -->
+Quite primitive HTML raport will be generated to the <i>coverage/lcov-report</i> directory. 
+The report will tell us i.e the lines of untested code in each component:
 
 ![](../../images/5/19ea.png)
 
@@ -556,23 +573,29 @@ You can find the code for our current application in its entirety in the <i>part
 
 #### 5.13: Blog list tests, step1
 
-Tee testi, joka varmistaa että blogin näyttävä komponentti renderöi blogin titlen, authorin mutta ei renderöi oletusarvoisesti urlia eikä likejen määrää.
+<!-- Tee testi, joka varmistaa että blogin näyttävä komponentti renderöi blogin titlen, authorin mutta ei renderöi oletusarvoisesti urlia eikä likejen määrää. -->
+Make a test, which checks that the component displaying a blog renders the blog's title and author, but does not render its url or number of likes by default
 
-Lisää komponenttiin tarvittaessa testausta helpottavia CSS-luokkia.
+<!-- Lisää komponenttiin tarvittaessa testausta helpottavia CSS-luokkia. -->
+Add CSS-classes to the component to help the testing as necessary. 
 
 #### 5.14: Blog list tests, step1
 
-Tee testi, joka varmistaa että myös url ja likejen määrä näytetään kun blogin kaikki tiedot näyttävää nappia on painettu.
+<!-- Tee testi, joka varmistaa että myös url ja likejen määrä näytetään kun blogin kaikki tiedot näyttävää nappia on painettu. -->
+Make a test, which checks that blog's url and number of likes are shown when the button controlling the shown details has been clicked. 
 
 #### 5.15: Blog list tests, step2
 
-Tee testi, joka varmistaa, että jos komponentin <i>like</i>-nappia painetaan kahdesti, komponentin propsina saamaa tapahtumankäsittelijäfunktiota kutsutaan kaksi kertaa.
+<!-- Tee testi, joka varmistaa, että jos komponentin <i>like</i>-nappia painetaan kahdesti, komponentin propsina saamaa tapahtumankäsittelijäfunktiota kutsutaan kaksi kertaa. -->
+Make a test which ensures that if the <i>like</i> button is clicked twice, the event handler the component received as props is called twice. 
 
 #### 5.16*: Blog list tests, step3
 
-Tee uuden blogin luomisesta huolehtivalle lomakkelle testi, joka varmistaa, että lomake kutsuu propseina saamaansa takaisinkutsufunktiota oikeilla tiedoilla siinä vaiheessa kun blogi luodaan.
+<!-- Tee uuden blogin luomisesta huolehtivalle lomakkelle testi, joka varmistaa, että lomake kutsuu propseina saamaansa takaisinkutsufunktiota oikeilla tiedoilla siinä vaiheessa kun blogi luodaan. -->
+Make a test for the new blog form. The test should check, that the form calls the event handler it received as props with the right details when a new blog is called. 
 
-Jos esim. määrittelet <i>input</i>-elementille id:n 'author':
+<!-- Jos esim. määrittelet <i>input</i>-elementille id:n 'author': -->
+If, for example, you give an <i>input</i> element id 'author':
 
 ```js
 <input
@@ -582,7 +605,8 @@ Jos esim. määrittelet <i>input</i>-elementille id:n 'author':
 />
 ```
 
-saat haettua kentän testissä seuraavasti
+<!-- saat haettua kentän testissä seuraavasti -->
+You can access the contents of the field with
 
 ```js
 const author = component.container.querySelector('#author')
