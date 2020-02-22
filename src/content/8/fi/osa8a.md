@@ -240,7 +240,7 @@ Nimestään huolimatta GraphQL:llä ei itseasiassa ole mitään tekemistä tieto
 
 ### Apollo server
 
-Toteutetaan nyt GraphQL-palvelin tämän hetken johtavaa kirjastoa [Apollo -serveriä](https://www.apollographql.com/docs/apollo-server/) käyttäen. 
+Toteutetaan nyt GraphQL-palvelin tämän hetken johtavaa kirjastoa [Apollo-serveriä](https://www.apollographql.com/docs/apollo-server/) käyttäen. 
 
 Luodaan uusi npm-projekti komennolla _npm init_ ja asennetaan tarvittavat riippuvuudet
 
@@ -383,7 +383,7 @@ resolveri on funktio, joka palauttaa <i>kaikki</i> taulukon _persons_ oliot
 
 ### GraphQL-playground
 
-Kun Apollo -serveriä suoritetaan sovelluskehitysmoodissa, käynnistää se osoitteeseen [http://localhost:4000/graphql](http://localhost:4000/graphql) sovelluskehittäjälle erittäin hyödyllisen [GraphQL-playground](https://www.apollographql.com/docs/apollo-server/testing/graphql-playground/)-näkymän, joka avulla on mahdollista tehdä kyselyjä palvelimelle.
+Kun Apollo-serveriä suoritetaan sovelluskehitysmoodissa, käynnistää se osoitteeseen [http://localhost:4000/graphql](http://localhost:4000/graphql) sovelluskehittäjälle erittäin hyödyllisen [GraphQL-playground](https://www.apollographql.com/docs/apollo-server/testing/graphql-playground/)-näkymän, joka avulla on mahdollista tehdä kyselyjä palvelimelle.
 
 Kokeillaan 
 
@@ -915,6 +915,8 @@ Jos kyselyitä on useita, pyytää Playground valitsemaan mikä niistä suoritet
 
 Tehtävissä toteutetaan yksinkertaisen kirjaston GraphQL:ää tarjoava backend. Ota sovelluksesi lähtökohtaksi [tämä tiedosto](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js). Muista _npm init_ ja riippuvuuksien asentaminen!
 
+Huomaa, että koodin käynnistäminen aihettaa alussa virheen, sillä skeeman määrittely on puutteellinen.
+
 #### 8.1: kirjojen ja kirjailijoiden määrä
 
 Toteuta kyselyt _bookCount_ ja _authorCount_ jotka palauttavat kirjojen ja kirjailijoiden lukumäärän.
@@ -1004,7 +1006,7 @@ vastauksen tulisi näyttää seuraavalta
 
 #### 8.4: kirjailijan kirjat
 
-Laajenna kyselyä _allBooks_ siten, että sille voi antaa optionaalisen parametrin <i>author</i>, joka rajoittaa kirjalistan niihin, joiden author on parametrina annettu kirjailija.
+Laajenna kyselyä _allBooks_ siten, että sille voi antaa optionaalisen parametrin <i>author</i>, joka rajoittaa kirjalistan niihin, joiden kirjoittaja on parametrina annettu kirjailija.
 
 Esim. kyselyn
 

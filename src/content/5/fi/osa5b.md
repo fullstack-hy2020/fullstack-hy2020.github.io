@@ -797,13 +797,13 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 <div class="tasks">
 
-### Tehtävät 5.10.-5.11.
+### Tehtävät 5.11.-5.12.
 
-#### 5.10: blogilistan frontend, step11
+#### 5.11: blogilistan frontend, step11
 
 Määrittele joillekin sovelluksesi komponenteille PropTypet.
 
-#### 5.11: blogilistan frontend, step12
+#### 5.12: blogilistan frontend, step12
 
 Ota projektiin käyttöön ESlint. Määrittele haluamasi kaltainen konfiguraatio. Korjaa kaikki lint-virheet.
 

@@ -47,17 +47,17 @@ const client = new ApolloClient({
 })
 
 const query = gql`
-query {
-  allPersons  {
-    name,
-    phone,
-    address {
-      street,
-      city
+  query {
+    allPersons  {
+      name,
+      phone,
+      address {
+        street,
+        city
+      }
+      id
     }
-    id
   }
-}
 `
 
 client.query({ query })
@@ -120,13 +120,13 @@ import React from 'react'
 import { gql, useQuery } from '@apollo/client';
 
 const ALL_PERSONS = gql`
-query {
-  allPersons  {
-    name
-    phone
-    id
+  query {
+    allPersons  {
+      name
+      phone
+      id
+    }
   }
-}
 `
 
 const App = () => {
@@ -369,22 +369,22 @@ Edellisessä luvussa kovakoodasimme mutaatioiden parametrit. Tarvitsemme nyt [mu
 
 ```js
 const CREATE_PERSON = gql`
-mutation createPerson($name: String!, $street: String!, $city: String!, $phone: String) {
-  addPerson(
-    name: $name,
-    street: $street,
-    city: $city,
-    phone: $phone
-  ) {
-    name
-    phone
-    id
-    address {
-      street
-      city
+  mutation createPerson($name: String!, $street: String!, $city: String!, $phone: String) {
+    addPerson(
+      name: $name,
+      street: $street,
+      city: $city,
+      phone: $phone
+    ) {
+      name
+      phone
+      id
+      address {
+        street
+        city
+      }
     }
   }
-}
 `
 ```
 
@@ -804,8 +804,6 @@ Apollo mahdollistaa tarvittaessa myös sovelluksen paikallisen tilan tallettamis
 Tehtävissä toteutetaan edellisen osan tehtävissä tehdylle backendille frontend.
 
 Ota sovelluksesi lähtökohdaksi [tämä projekti](https://github.com/fullstack-hy2020/library-frontend).
-
-Voit tehdä sovelluksesi joko käyttäen Apollo Clientin render prop -komponentteja <i>Query</i> ja <i>Mutation</i> tai Apollo client 3.0 beta-version tarjoamien hookien avulla.
 
 #### 8.8: Kirjailijoiden näkymä
 
