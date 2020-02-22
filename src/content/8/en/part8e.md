@@ -27,7 +27,6 @@ query {
 }
 ```
 
-
 and the query for all persons
 
 ```js
@@ -77,9 +76,7 @@ query {
 }
 ```
 
-
 The fragments <i><strong>are not</strong></i> defined in the GraphQL schema, but in the client. The fragments must be declared when the client uses them for queries. 
-
 
 In principle, we could declare the fragment with each query like so:
 
@@ -101,7 +98,6 @@ const ALL_PERSONS = gql`
   }
 `
 ```
-
 
 However, it is much better to declare the fragment once and save it to a variable. 
 
@@ -135,7 +131,6 @@ const ALL_PERSONS = gql`
 
 ### Subscriptions
 
-
 Along with query- and mutation types, GraphQL offers a third operation type: [subscriptions](https://www.apollographql.com/docs/react/data/subscriptions/). With subscriptions clients can <i>subscribe to</i> updates about changes in the server. 
 
 
@@ -149,9 +144,7 @@ Technically speaking the HTTP-protocol is not well suited for communication from
 
 ### Subscriptions on the server
 
-
 Let's implement subscriptions for subscribing for notifications about new persons added.
-
 
 There are not many changes to the server. The schema changes like so:
 
@@ -206,7 +199,6 @@ const pubsub = new PubSub() // highlight-line
   // highlight-end
 ```
 
-
 With subscriptions, the communication happens using the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) principle utilizing an object using a [PubSub](https://www.apollographql.com/docs/graphql-subscriptions/setup/#setup) interface. Adding a new person <i>publishes</i> a notification about the operation to all subscribers with PubSub's method _publish_.
 
 
@@ -248,33 +240,20 @@ The backend code can be found on [Github](https://github.com/fullstack-hy2020/gr
 ### Subscriptions on the client
 
 
-In order to use subscriptions in our React application, we have to do some changes, especially on its [configuration](https://www.apollographql.com/docs/react/data/subscriptions/#client-setup).
+In order to use subscriptions in our React application, we have to do some changes, especially on its [configuration]((https://www.apollographql.com/docs/react/v3.0-beta/data/subscriptions/).
 The configuration in <i>index.js</i> has to be modified like so: 
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
-
-import { ApolloProvider } from '@apollo/react-hooks'
-
-import { ApolloClient } from 'apollo-client'
-import { createHttpLink } from 'apollo-link-http'
-import { InMemoryCache } from 'apollo-cache-inmemory'
+import { 
+  ApolloClient, ApolloProvider, HttpLink, InMemoryCache, 
+  split  // highlight-line
+} from '@apollo/client'
 import { setContext } from 'apollo-link-context'
 
-import { split } from 'apollo-link'
-import { WebSocketLink } from 'apollo-link-ws'
-import { getMainDefinition } from 'apollo-utilities'
-
-const wsLink = new WebSocketLink({
-  uri: `ws://localhost:4000/graphql`,
-  options: { reconnect: true }
-})
-
-const httpLink = createHttpLink({
-  uri: 'http://localhost:4000/graphql',
-})
+// highlight-start
+import { getMainDefinition } from '@apollo/client/utilities'
+import { WebSocketLink } from '@apollo/link-ws'
+// highlight-end
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('phonenumbers-user-token')
@@ -286,33 +265,48 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
-const link = split(
+const httpLink = new HttpLink({
+  uri: 'http://localhost:4000',
+})
+
+// highlight-start
+const wsLink = new WebSocketLink({
+  uri: `ws://localhost:5000/`,
+  options: {
+    reconnect: true
+  }
+})
+
+const splitLink = split(
   ({ query }) => {
-    const { kind, operation } = getMainDefinition(query)
-    return kind === 'OperationDefinition' && operation === 'subscription'
+    const definition = getMainDefinition(query)
+    return (
+      definition.kind === 'OperationDefinition' &&
+      definition.operation === 'subscription'
+    );
   },
   wsLink,
   authLink.concat(httpLink),
 )
+// highlight-end
 
 const client = new ApolloClient({
-  link,
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+  link: splitLink // highlight-line
 })
 
 ReactDOM.render(
   <ApolloProvider client={client}>
     <App />
-  </ApolloProvider>,
+  </ApolloProvider>, 
   document.getElementById('root')
 )
 ```
 
-
 For this to work, we have to install some dependencies:
 
 ```js
-npm install --save subscriptions-transport-ws apollo-link-ws
+npm install --save @apollo/link-ws subscriptions-transport-ws
 ```
 
 The new configuration is due to the fact that the application must have an HTTP connection as well as a WebSocket connection to the GraphQL server.
@@ -324,21 +318,17 @@ const wsLink = new WebSocketLink({
 })
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:4000/graphql',
+  uri: 'http://localhost:4000',
 })
 ```
 
-The subscriptions are done using either the [Subscription](https://www.apollographql.com/docs/react/v2.5/advanced/subscriptions/#subscription-component) component or the [useSubscription](https://www.apollographql.com/docs/react/data/subscriptions/#usesubscription-hook) hook that is available in Apollo Client 3.0. We will use the hook-based solution.
+The subscriptions are done using the [useSubscription](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#usesubscription) hook function.
 
 Let's modify the code like so:
 
 ```js
-import { useQuery, useMutation, useSubscription, useApolloClient } from '@apollo/react-hooks'// highlight-line
-
-// ...
-
 // highlight-start
-const PERSON_ADDED = gql`
+export const PERSON_ADDED = gql`
   subscription {
     personAdded {
       ...PersonDetails
@@ -347,6 +337,8 @@ const PERSON_ADDED = gql`
   ${PERSON_DETAILS}
 `
 // highlight-end
+
+import { useQuery, useMutation, useSubscription ,useApolloClient } from '@apollo/react-hooks'// highlight-line
 
 const App = () => {
   // ...
@@ -373,6 +365,7 @@ Let's extend our solution so that when the details of a new person are received,
 
 However, we have to keep in mind that when our application creates a new person, it should not be added to the cache twice: 
 
+
 ```js
 const App = () => {
   // ...
@@ -383,10 +376,9 @@ const App = () => {
 
     const dataInStore = client.readQuery({ query: ALL_PERSONS })
     if (!includedIn(dataInStore.allPersons, addedPerson)) {
-      dataInStore.allPersons.push(addedPerson)
       client.writeQuery({
         query: ALL_PERSONS,
-        data: dataInStore
+        data: { allPersons : dataInStore.allPersons.concat(addedPerson) }
       })
     }   
   }
@@ -399,15 +391,27 @@ const App = () => {
     }
   })
 
-  const [addPerson] = useMutation(CREATE_PERSON, {
-    onError: handleError,
-    update: (store, response) => {
-      updateCacheWith(response.data.addPerson)
-    }
-  })
-
   // ...
 }
+```
+
+The function _updateCacheWith_ can also be used in _PersonForm_ for the cache update:
+
+```js
+const PersonForm = ({ setError, updateCacheWith }) => { // highlight-line
+  // ...
+
+  const [ createPerson ] = useMutation(CREATE_PERSON, {
+    onError: (error) => {
+      setError(error.graphQLErrors[0].message)
+    },
+    update: (store, response) => {
+      updateCacheWith(response.data.addPerson) // highlight-line
+    }
+  })
+   
+  // ..
+} 
 ```
 
 The final code of the client can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-9), branch <i>part8-9</i>.
@@ -426,7 +430,6 @@ type Person {
 }
 ```
 
-
 The application should support the following query: 
 
 ```js
@@ -438,7 +441,6 @@ query {
   }
 }
 ```
-
 
 Because _friendOf_ is not a field of <i>Person</i>-objects on the database, we have to create a resolver for it, which can solve this issue. Let's first create a resolver that returns an empty list: 
 

@@ -9,7 +9,7 @@ lang: fi
 
 Kurssi lähestyy loppuaan. Katsotaan lopuksi vielä muutamaa GraphQL:ään liittyvää asiaa.
 
-### fragmentit
+### Fragmentit
 
 GraphQL:ssä on suhteellisen yleistä, että eri kyselyt palauttavat samanlaisia vastauksia. Esim. puhelinluettelossa yhden henkilön hakeva kysely
 
@@ -220,32 +220,19 @@ Backendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-h
 
 ### Tilaukset clientissä
 
-Jotta saamme tilaukset käyttöön React-sovelluksessa, tarvitaan hieman enemmän muutoksia, erityisesti [konfiguraatioiden osalta](https://www.apollographql.com/docs/react/data/subscriptions/#client-setup). Tiedostossa <i>index.js</i> olevat konfiguraatiot on muokattava seuraavaan muotoon:
+Jotta saamme tilaukset käyttöön React-sovelluksessa, tarvitaan hieman enemmän muutoksia, erityisesti [konfiguraatioiden osalta](https://www.apollographql.com/docs/react/v3.0-beta/data/subscriptions/). Tiedostossa <i>index.js</i> olevat konfiguraatiot on muokattava seuraavaan muotoon:
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
-
-import { ApolloProvider } from '@apollo/react-hooks'
-
-import { ApolloClient } from 'apollo-client'
-import { createHttpLink } from 'apollo-link-http'
-import { InMemoryCache } from 'apollo-cache-inmemory'
+import { 
+  ApolloClient, ApolloProvider, HttpLink, InMemoryCache, 
+  split  // highlight-line
+} from '@apollo/client'
 import { setContext } from 'apollo-link-context'
 
-import { split } from 'apollo-link'
-import { WebSocketLink } from 'apollo-link-ws'
-import { getMainDefinition } from 'apollo-utilities'
-
-const wsLink = new WebSocketLink({
-  uri: `ws://localhost:4000/graphql`,
-  options: { reconnect: true }
-})
-
-const httpLink = createHttpLink({
-  uri: 'http://localhost:4000/graphql',
-})
+// highlight-start
+import { getMainDefinition } from '@apollo/client/utilities'
+import { WebSocketLink } from '@apollo/link-ws'
+// highlight-end
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('phonenumbers-user-token')
@@ -257,24 +244,40 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
-const link = split(
+const httpLink = new HttpLink({
+  uri: 'http://localhost:4000',
+})
+
+// highlight-start
+const wsLink = new WebSocketLink({
+  uri: `ws://localhost:5000/`,
+  options: {
+    reconnect: true
+  }
+})
+
+const splitLink = split(
   ({ query }) => {
-    const { kind, operation } = getMainDefinition(query)
-    return kind === 'OperationDefinition' && operation === 'subscription'
+    const definition = getMainDefinition(query)
+    return (
+      definition.kind === 'OperationDefinition' &&
+      definition.operation === 'subscription'
+    );
   },
   wsLink,
   authLink.concat(httpLink),
 )
+// highlight-end
 
 const client = new ApolloClient({
-  link,
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
+  link: splitLink // highlight-line
 })
 
 ReactDOM.render(
   <ApolloProvider client={client}>
     <App />
-  </ApolloProvider>,
+  </ApolloProvider>, 
   document.getElementById('root')
 )
 ```
@@ -282,14 +285,14 @@ ReactDOM.render(
 Jotta kaikki toimisi, on asennettava uusia riippuvuuksia:
 
 ```js
-npm install --save subscriptions-transport-ws apollo-link-ws
+npm install --save @apollo/link-ws subscriptions-transport-ws
 ```
 
 Uusi konfiguraatio johtuu siitä, että sovelluksella tulee nyt olla HTTP-yhteyden lisäksi websocket-yhteys GraphQL-palvelimelle:
 
 ```js
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:4000/graphql`,
+  uri: `ws://localhost:4000`,
   options: { reconnect: true }
 })
 
@@ -298,18 +301,13 @@ const httpLink = createHttpLink({
 })
 ```
 
-Tilaukset tehdään komponentin 
-[Subscription](https://www.apollographql.com/docs/react/data/subscriptions/#client-setup) tai  Apollo Client 3.0:n tarjoaman  hookin _useSubscription_ avulla. Käytämme jälleen hookeja.
+Tilaukset tehdään hook-funktion [useSubscription](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#usesubscription) avulla. 
 
 Tehdään koodiin seuraavat muutokset:
 
 ```js
-import { useQuery, useMutation, useSubscription ,useApolloClient } from '@apollo/react-hooks'// highlight-line
-
-// ...
-
 // highlight-start
-const PERSON_ADDED = gql`
+export const PERSON_ADDED = gql`
   subscription {
     personAdded {
       ...PersonDetails
@@ -318,6 +316,8 @@ const PERSON_ADDED = gql`
   ${PERSON_DETAILS}
 `
 // highlight-end
+
+import { useQuery, useMutation, useSubscription ,useApolloClient } from '@apollo/react-hooks'// highlight-line
 
 const App = () => {
   // ...
@@ -365,15 +365,27 @@ const App = () => {
     }
   })
 
-  const [addPerson] = useMutation(CREATE_PERSON, {
-    onError: handleError,
-    update: (store, response) => {
-      updateCacheWith(response.data.addPerson)
-    }
-  })
-
   // ...
 }
+```
+
+Funktiota _updateCacheWith_ voidaan hyödyntää myös uuden henkilön lisäyksen yhteydessä tapahtuvassa välimuistin päivityksessä:
+
+```js
+const PersonForm = ({ setError, updateCacheWith }) => { // highlight-line
+  // ...
+
+  const [ createPerson ] = useMutation(CREATE_PERSON, {
+    onError: (error) => {
+      setError(error.graphQLErrors[0].message)
+    },
+    update: (store, response) => {
+      updateCacheWith(response.data.addPerson) // highlight-line
+    }
+  })
+   
+  // ..
+} 
 ```
 
 Clientin lopullinen koodi [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-9), branchissa <i>part8-9</i>.
@@ -467,7 +479,7 @@ User.find
 User.find
 </pre>
 
-Eli vaikka pääasiallisesti tehdään ainoastaan yksi kysely, haetaan kaikki henkilöt, aiheuttaa jokainen henkilö yhden kyselyn omassa resolverissaan.
+Eli vaikka pääasiallisesti tehdään ainoastaan yksi kysely joka hakee kaikki henkilöt, aiheuttaa jokainen henkilö yhden kyselyn omassa resolverissaan.
 
 Kyseessä on ilmentymä kuuluisasta [n+1-ongelmasta](https://www.google.com/search?q=n%2B1+problem), joka ilmenee aika ajoin eri yhteyksissä, välillä salakavalastikin sovelluskehittäjän huomaamatta aluksi mitään.
 
@@ -558,7 +570,7 @@ GraphQL on jo melko iäkäs teknologia, se on ollut Facebookin sisäisessä käy
 
 <div class="tasks">
 
-### Tehtäviä
+### Tehtävät 8.23.-8.26.
 
 #### 8.23: Subscriptionit palvelin
 

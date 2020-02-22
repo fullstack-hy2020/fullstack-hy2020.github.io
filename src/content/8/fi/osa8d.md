@@ -270,7 +270,7 @@ Sovelluksen tämän vaiheen koodi [githubissa](https://github.com/fullstack-hy20
 
 <div class="tasks">
 
-### Tehtäviä
+### Tehtävät 8.17.-8.22.
 
 #### 8.17 Kirjojen lista
 
