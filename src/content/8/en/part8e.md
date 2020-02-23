@@ -271,7 +271,7 @@ const httpLink = new HttpLink({
 
 // highlight-start
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:5000/`,
+  uri: `ws://localhost:4000/graphql`,
   options: {
     reconnect: true
   }
@@ -338,7 +338,9 @@ export const PERSON_ADDED = gql`
 `
 // highlight-end
 
-import { useQuery, useMutation, useSubscription ,useApolloClient } from '@apollo/react-hooks'// highlight-line
+import {
+  useQuery, useMutation, useSubscription, useApolloClient // highlight-line
+} from '@apollo/client'
 
 const App = () => {
   // ...

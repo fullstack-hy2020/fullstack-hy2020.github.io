@@ -9,7 +9,7 @@ lang: fi
 
 Laajennetaan sovellusta käyttäjänhallinnalla. Siirrytään kuitenkin ensin käyttämään tietokantaa datan tallettamiseen.
 
-#### Mongoose ja Apollo
+### Mongoose ja Apollo
 
 Otetaan käyttöön mongoose ja mongoose-unique-validator:
 
@@ -158,7 +158,7 @@ Person.find({ phone: { $exists: false }})
 
 ### Validoinnit
 
-GraphQL:n lisäksi syötteet validoidaan nyt mongoose-skeemassa määriteltyjä validointeja käyttäen. Skeemassa olevien validointivirheiden varalta _save_-metodeille täytyy lisätä virheen käsittelevä _try/catch_-lohko. Heitetään catchiin jouduttaessa vastaukseksi sopiva poikkeus:
+GraphQL:n lisäksi syötteet validoidaan nyt mongoose-skeemassa määriteltyjä validointeja käyttäen. Skeemassa olevien validointivirheiden varalta _save_-metodeille täytyy lisätä virheen käsittelevä _try/catch_-lohko. Heitetään catchiin jouduttaessa vastaukseksi sopiva poikkeus, joka on tällä kertaa [UserInputError](https://www.apollographql.com/docs/apollo-server/data/errors/):
 
 ```js
 Mutation: {

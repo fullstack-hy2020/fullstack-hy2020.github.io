@@ -328,10 +328,10 @@ This and the next exercises are quite **challenging** like it should be this lat
 
 Some tips
 
- - Instead of using the <i>Query</i> component or the <i>useQuery</i> hook it might be better to do the queries with the _client_-object, which can be accessed with the [ApolloConsumer](https://www.apollographql.com/docs/react/essentials/queries.html#manual-query) component or _useApolloClient_ hook. See more [here](/en/part8/react_and_graph_ql#named-queries-and-variables).
- -  It is sometimes useful to save the results of a GraphQL query to the state of a component. 
- -  Note, that you can do GraphQL queries in a <i>useEffect</i>-hook.
- -  The [second parameter](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) of a <i>useEffect</i> - hook can become handy depending on your approach. 
+- Instead of using <i>useQuery</i> it is propably better to do the queries with the <i>useLazyQuery</i>-hook
+- It is sometimes useful to save the results of a GraphQL query to the state of a component. 
+- Note, that you can do GraphQL queries in a <i>useEffect</i>-hook.
+- The [second parameter](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) of a <i>useEffect</i> - hook can become handy depending on your approach. 
 
 #### 8.22 Up to date cache and book recommendations
 

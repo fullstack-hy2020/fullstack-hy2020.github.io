@@ -27,7 +27,7 @@ Käytetään kurssilla Apollo Clientin versiota [3.0-beta](https://www.apollogra
 
 ![](../../images/8/40ea.png)
 
-Create a new React-app and install the dependencies required by [Apollo client]https://www.apollographql.com/docs/react/v3.0-beta/get-started/#installation).
+Create a new React-app and install the dependencies required by [Apollo client](https://www.apollographql.com/docs/react/v3.0-beta/get-started/#installation).
 
 Luodaan uusi React-sovellus ja asennetaan siihen [Apollo clientin](https://www.apollographql.com/docs/react/get-started/#installation) vaatimat riippuvuudet.
 
@@ -817,7 +817,6 @@ When necessary Apollo enables saving the applications local state to [Apollo cac
 
 ### Exercises
 
-
 Through these exercises we'll implement a frontend for the GraphQL-library. 
 
 Take [this project](https://github.com/fullstack-hy2020/library-frontend) for a start of your application. 
@@ -832,20 +831,21 @@ Implement an Authors view to show the details of all authors on a page as follow
 
 #### 8.9: Books view
 
-
 Implement a Books view to show on a page all other details of all books except their genres. 
 
 ![](../../images/8/17.png)
 
 #### 8.10: Adding a book
 
-
 Implement a possibility to add new books to your application. The functionality can look like this: 
 
 ![](../../images/8/18.png)
 
-
 Make sure that the Authors and Books views are kept up to date after a new book is added. 
+
+In case of problems when making queries or mutations, checkfrom  developer console what the server response is:
+
+![](../../images/8/42ea.png)
 
 #### 8.11: Authors birth year
 
