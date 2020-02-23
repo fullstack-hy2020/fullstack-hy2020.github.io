@@ -360,7 +360,7 @@ Ratkaisu on melko hyvä, haluaisimme kuitenkin parantaa sitä erään seikan osa
 
 Kun uusi muistiinpano luodaan, olisi loogista jos luomislomake menisi piiloon. Nyt lomake pysyy näkyvillä. Lomakkeen piilottamiseen sisältyy kuitenkin pieni ongelma, sillä näkyvyyttä kontrolloidaan <i>Togglable</i>-komponentin tilassa olevalla muuttujalla <i>visible</i>. Miten pääsemme tilaan käsiksi komponentin ulkopuolelta?
 
-On useita erilaisia tapoja toteuttaa pääsy komponentin funktoihin sen ulkopuolelta, käytetään nyt 
+On useita erilaisia tapoja toteuttaa pääsy komponentin funktioihin sen ulkopuolelta, käytetään nyt 
 Reactin [ref](https://reactjs.org/docs/refs-and-the-dom.html)-mekanismia, joka tarjoaa eräänlaisen viitteen komponenttiin.
 
 Tehdään komponenttiin <i>App</i> seuraavat muutokset
@@ -509,7 +509,7 @@ Lomakkeen tulee sulkeutua kun uusi blogi luodaan.
 
 Eriytä uuden blogin luomisesta huolehtiva lomake omaan komponenttiinsa (jos et jo ole niin tehnyt), ja siirrä kaikki uuden blogin luomiseen liittyvä tila komponentin vastuulle. 
 
-Komponentin tulee siis toimia samaan tapaan kuin tämän osan [materiaalin](http://localhost:8000/osa5/props_children_ja_proptypet#lomakkeiden-tila) komponentin <i>NewNote</i>.
+Komponentin tulee siis toimia samaan tapaan kuin tämän osan [materiaalin](https://fullstack-hy2020.github.io/osa5/props_children_ja_proptypet#lomakkeiden-tila) komponentin <i>NewNote</i>.
 
 #### 5.7* blogilistan frontend, step7
 
