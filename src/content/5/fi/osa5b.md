@@ -509,7 +509,7 @@ Lomakkeen tulee sulkeutua kun uusi blogi luodaan.
 
 Eriytä uuden blogin luomisesta huolehtiva lomake omaan komponenttiinsa (jos et jo ole niin tehnyt), ja siirrä kaikki uuden blogin luomiseen liittyvä tila komponentin vastuulle. 
 
-Komponentin tulee siis toimia samaan tapaan kuin tämän osan [materiaalin](http://localhost:8000/osa5/props_children_ja_proptypet#lomakkeiden-tila) komponentin <i>NewNote</i>.
+Komponentin tulee siis toimia samaan tapaan kuin tämän osan [materiaalin](https://fullstack-hy2020.github.io/osa5/props_children_ja_proptypet#lomakkeiden-tila) komponentin <i>NewNote</i>.
 
 #### 5.7* blogilistan frontend, step7
 
