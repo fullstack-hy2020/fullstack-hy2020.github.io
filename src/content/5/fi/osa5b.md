@@ -360,7 +360,7 @@ Ratkaisu on melko hyvä, haluaisimme kuitenkin parantaa sitä erään seikan osa
 
 Kun uusi muistiinpano luodaan, olisi loogista jos luomislomake menisi piiloon. Nyt lomake pysyy näkyvillä. Lomakkeen piilottamiseen sisältyy kuitenkin pieni ongelma, sillä näkyvyyttä kontrolloidaan <i>Togglable</i>-komponentin tilassa olevalla muuttujalla <i>visible</i>. Miten pääsemme tilaan käsiksi komponentin ulkopuolelta?
 
-On useita erilaisia tapoja toteuttaa pääsy komponentin funktoihin sen ulkopuolelta, käytetään nyt 
+On useita erilaisia tapoja toteuttaa pääsy komponentin funktioihin sen ulkopuolelta, käytetään nyt 
 Reactin [ref](https://reactjs.org/docs/refs-and-the-dom.html)-mekanismia, joka tarjoaa eräänlaisen viitteen komponenttiin.
 
 Tehdään komponenttiin <i>App</i> seuraavat muutokset
