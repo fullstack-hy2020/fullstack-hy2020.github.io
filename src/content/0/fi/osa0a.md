@@ -51,7 +51,7 @@ Tämän kurssin eri osiin jo tehtyjen palautusten ajankäyttöstatistiikan näet
 
 Kurssin oletusarvoinen laajuus on 5 opintopistettä. Arvosana määräytyy kaikkien tehtyjen tehtävien perusteella, myös tähdellä merkityt "vapaavalintaiset" tehtävät siis vaikuttavat arvosanaan. Noin 50% deadlineen mennessä tehdyistä tehtävistä tuo arvosanan 1 ja 80% arvosanan 5. Kurssin lopussa on koe, joka on suoritettava hyväksytysti. Koe ei kuitenkaan vaikuta arvosanaan.
 
-Koe pidetään keskiviikkona 4.3. klo 9 saleissa A111 ja B123. Kokeeseen on ilmoittauduttava viimeistään 10 päivää ennen koetta
+Koe pidetään tiistaina 3.3. klo 9 saleissa A111 ja B123. Kokeeseen on ilmoittauduttava viimeistään 10 päivää ennen koetta
 
 Kurssilta on mahdollisuus ansaita lisäopintopisteitä. Jos teet 87.5% kurssin tehtävistä, saat yhden lisäopintopisteen. Tekemällä 95% tehtävistä saat 2 lisäopintopistettä. 
 
