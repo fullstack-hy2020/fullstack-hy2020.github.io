@@ -599,4 +599,7 @@ query {
 }
 ```
 
+Tämä oli osan viimeinen tehtävä ja on aika pushata koodi githubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://study.cs.helsinki.fi/stats/courses/fullstack2020).
+
+
 </div>
