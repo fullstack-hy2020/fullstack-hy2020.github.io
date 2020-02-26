@@ -637,7 +637,7 @@ The event handler is passed to the <i>Button</i> component through the _onClick_
 ### Changes in state cause rerendering
 
 <!-- Kerrataan vielä sovelluksen toiminnan pääperiaatteet.  -->
-Let's go over the main princibles of how an application works once more.
+Let's go over the main principles of how an application works once more.
 
 <!-- Kun sovellus käynnistyy, suoritetaan komponentin _App_-koodi, joka luo [useState](https://reactjs.org/docs/hooks-reference.html#usestate)-hookin avulla sovellukselle laskurin tilan _counter_. Komponentti renderöi laskimen alkuarvon 0 näyttävän komponentin _Display_ sekä kolme _Button_-komponenttia, joille se asettaa laskurin tilaa muuttavat tapahtumankäsittelijät. -->
 When the application starts, the code in _App_ is executed. This code uses an [useState](https://reactjs.org/docs/hooks-reference.html#usestate) - hook to create the application state - value of the counter _counter_.
