@@ -87,7 +87,7 @@ Käytännössä täydentäminen tapahtuu siten, että voit korvata tämän kurss
 
 Voit korvata ainoastaan kokonaisia osia, eli jos teit aiemmalla kurssilla esim. 50% jonkin osan tehtävistä, et voi tällä kurssilla jatkaa samaa osaa.
 
-Jos haluat hyväksilukea vanhan suorituksesi, lähetä emailia matti.luukkainen@helsinki.fi 
+Jos haluat hyväksilukea vanhan suorituksesi, lähetä emailia osoitteeseen matti.luukkainen@helsinki.fi 
 
 Jos olet tehnyt jo aiemmin kurssin kokeen (poislukien avoimen yliopiston 3 opintopisteen laajuuden koe) ja laajennat suoritustasi nyt, ei uusi kokeeseen osallistuminen enää ole tarpeen.
 
