@@ -114,6 +114,11 @@ module.exports = {
       d: 'Login and updating the cache',
       e: 'Fragments and subscriptions'
     },
+    '9': {
+      a: 'Introduction',
+      b: 'First steps',
+      c: 'Moar',
+    },    
   },
 };
 

@@ -24,7 +24,8 @@ export const PartBanner = ({ lang }) => {
                   'Testing React apps',
                   'State management with Redux',
                   'React router, custom hooks, styling app with CSS and webpack',
-                  'GraphQL'
+                  'GraphQL',
+                  'Typescript'
                 ]
               : [
                   'Web-sovellusten toiminnan perusteet',
@@ -35,7 +36,7 @@ export const PartBanner = ({ lang }) => {
                   'React-sovelluksen testaaminen',
                   'Sovelluksen tilan hallinta Redux-kirjastolla',
                   'React router, custom-hookit, tyylikirjastot ja webpack',
-                  'GraphQL',
+                  'GraphQL'
                 ];
 
           return (
