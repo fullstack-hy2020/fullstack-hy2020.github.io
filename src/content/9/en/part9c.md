@@ -280,7 +280,9 @@ Set up a build script to your <i>backend</i>, so that you can create a productio
 
 <div class="content">
 
-And now let's start developing the functionalities for the project! 
+### Implementing the functionality
+
+Finally we are ready to start writing some code.
 
 Let's start from basics. Ilari wants to keep track of his experiences on his flight journeys, so it's fairly simple to say that he wants to be able to read and write his experiences.
 
@@ -290,9 +292,29 @@ What he wants to be able to save, are diary entries that include:
 - Visibility (either good, ok or poor)
 - Free text entry of experience
 
-We already have some example data, which we will use as a guideline on how to develop further. The data is in json format and can be found [here](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json)
+We already have some example data, which we will use as a guideline on how to develop further. The data is in json format and can be found [here](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json).
 
-So, let's begin! 
+Data looks like the following 
+
+```json
+[
+  {
+    "id": 1,
+    "date": "2017-01-01",
+    "weather": "rainy",
+    "visibility": "poor",
+    "comment": "Pretty scary flight, I'm glad I'm alive"
+  },
+  {
+    "id": 2,
+    "date": "2017-04-01",
+    "weather": "sunny",
+    "visibility": "good",
+    "comment": "Everything went better than expected, I'm learning much"
+  },  
+  // ...
+]
+```
 
 Let's start by creating an endpoint that returns all flight diary entries. 
 
@@ -347,25 +369,26 @@ app.listen(PORT, () => {
 });
 ```
 
-
 And now when curling localhost:3000/api/diaries we should see the message <i>Fetching all diaries!</i>.
 
-Now let's add the data accessing diaryservice to the code! Let's create a folder _services_ and add a file called _diaryService.ts_ into the folder. Then, let's start implementing the two methods we need; _getAllDiaryEntries_ and _addDiaryEntry_. To get all entries, we of course need to access the data. Since we are not using a database, this means we will instad <i>import</i> the pre-defined JSON-file. The code looks like the following
+Now let's add the data accessing diaryservice to the code! Let's create a folder _services_ and add a file called _diaryService.ts_ into the folder. Then, let's start implementing the two methods we need; _getAllDiaryEntries_ and _addDiaryEntry_. To get all entries, we of course need to access the data. Since we are not using a database, this means we will instad <i>import</i> the pre-defined JSON-file. 
+
+Code looks like the following
 
 ```js
 import diaryData from '../../data/entries.json'
 
-const getAllDiaryEntries = () => {
+const getEntries = () => {
   return diaryData
 } 
 
-const addDiaryEntry = () => {
-  return []
+const addEntry = () => {
+  return null
 } 
 
 export default {
-  getAllDiaryEntries,
-  addDiaryEntry
+  getEntries,
+  addEntry
 }
 ```
 
@@ -392,24 +415,25 @@ The hint says we might want to use _resolveJsonModule_. Let's add it to our tsco
 }
 ```
 
-And now we're working allright!
+Problems are now gone.
 
-As before we've seen how the compiler can decide the type of a variable by the value it is being assignet to and in a similar way the compiler interprets larger data sets, objects and arrays. This is why the compiler actually can warn us if we are trying to do something suspicious to the Json data we are currently handling. If we're handling an array that includes specific types of objects and we're trying to add an object there that doesn't have all of the fields that the other objects have or is having type conflicts (for example a number where a string should be) the compiler can give us a warning. Even so excess fields are not prohibited and even though the compiler is pretty intelligent in order to be sure not to do anything unwanted it is safer to create the correct types to the data by yourself.
+As before we've seen how the compiler can decide the type of a variable by the value it is being assignet to and in a similar way the compiler interprets larger data sets, objects and arrays. This is why the compiler actually can warn us if we are trying to do something suspicious to the json data we are currently handling. If we're handling an array that includes specific types of objects and we're trying to add an object there that doesn't have all of the fields that the other objects have or is having type conflicts (for example a number where a string should be) the compiler can give us a warning. 
 
-Now we have a basic working TypeScript express app but there's barely any actual *typings* in the code. Since we now have a clear definition on what type of data should be accepted for the weather and visibility fields for the data there is no reason for us not to include also those types in the the code. Let's create our type-exclusive file _types.ts_ in which we'll put all our types in this project.
+Even though the compiler is pretty intelligent in order to be sure not to do anything unwanted it is safer to create the correct types to the data by yourself.
 
-First let's type the allowed _Weather_ and _Visibility_ values through a _Union_ type with allowed strings: 
+Now we have a basic working TypeScript express app but there's barely any actual <i>typings</i> in the code. Since we now have a clear definition on what type of data should be accepted for the weather and visibility fields for the data there is no reason for us not to include also those types in the the code. Let's create our type-exclusive file _types.ts_ in which we'll put all our types in this project.
+
+First let's type the allowed _Weather_ and _Visibility_ values through a [union type](https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types) with allowed strings: 
 
 
 ```js
-export type Weather = 'sunny' | 'rainy' | 'cloudy' | 'stormy';
+export type Weather = 'sunny' | 'rainy' | 'cloudy' | 'windy' | 'stormy';
 
 export type Visibility = 'great' | 'good' | 'ok' | 'poor';
-
 ```
 
 
-And from there we can continue easily to create our own simple DiaryEntry type:
+And from there we can continue to create our own simple DiaryEntry type:
 
 ```js
 export type DiaryEntry = {
@@ -421,27 +445,64 @@ export type DiaryEntry = {
 } 
 ```
 
-And now we can type our imported Json! But since the json already has its values declared, assigning a type for the dataset results in an error:
-
-![](../../images/9/19.png)
-
-Since the _weather_ (and _visibility`) fields both have been typed by us in the DiaryEntry type declaration and by the TypeScript compiler itseld a conflict arises. This can be surpassed if we are certain that we know what we are doing by *type assertion*. Let's assert the type of _DiaryEntry[]_ to the DiaryData object with the keyword _as_ and everything should work: 
-
+We can now try to type our imported json: 
 
 ```js
-const diaries = DiaryData as DiaryEntry[];
+import diaryData from '../../data/entries.json'
+
+import { Weather, Visibility, DiaryEntry } from '../types' // highlight-line
+
+const diaries : Array<DiaryEntry> = diaryData // highlight-line
+
+const getEntries = () : Array<DiaryEntry> => { // highlight-line
+  return diaries // highlight-line
+} 
+
+const addEntry = () => {
+  return null
+} 
+
+export default {
+  getEntries,
+  addEntry
+}
 ```
 
-Now everything just works!
+But since the json already has its values declared, assigning a type for the dataset results in an error:
 
-Still type assertion should not be used unless there's no other way to proceed since there's always the danger of asserting an unfit type to an object and then trusting the assreted type; While the compiler trusts you to know when using _as`, at the same time et leaves the intelligence of the whole TypeScript to manual interpretation. 
+![](../../images/9/19a.png)
 
-In this case we could change our data exportation method so that we can have the typing happen naturally within the variable declaration file. Since typings are not valid in a JSON-file, we should convert the json-file to a ts-file which exports the typed object-format data in the following way: 
+Since the _weather_ (and _visibility_) fields both have been typed by us in the _DiaryEntry_ type declaration and by the TypeScript compiler itself, a conflict arises. This can be surpassed if we are certain that we know what we are doing by [type assertion](). Let's assert the type of the variable _diaries_ to the DiaryData object with the keyword _as_ and everything should work: 
+
+```js
+import diaryData from '../../data/entries.json'
+
+import { Weather, Visibility, DiaryEntry } from '../types'
+
+const diaries = diaryData as Array<DiaryEntry>; // highlight-line
+
+const getEntries = () : Array<DiaryEntry> => {
+  return diaries
+} 
+
+const addEntry = () => {
+  return null
+} 
+
+export default {
+  getEntries,
+  addEntry
+}
+```
+
+Type assertion should not be used unless there's no other way to proceed since there's always the danger of asserting an unfit type to an object and then trusting the assreted type. While the compiler trusts you to know when using _as_, at the same time it leaves the intelligence of the whole TypeScript to manual interpretation. 
+
+In our case we could change our data exportation method so that we can have the typing happen naturally within the variable declaration file. Since typings are not valid in a JSON-file, we should convert the json-file to a ts-file which exports the typed object-format data in the following way: 
 
 ```js
 import { DiaryEntry } from "../src/types";
 
-const diaryEntries: DiaryEntry[] = [
+const diaryEntries: Array<DiaryEntry> = [
   {
     "id": 1,
     "date": "2017-01-01",
@@ -453,15 +514,31 @@ const diaryEntries: DiaryEntry[] = [
 ]
 
 export default diaryData;
-
 ```
 
-And now as we import the diaryData object, it is already intelligently interpreted so that even the _weather_ and _visibility_ fields are understood correctly.
+When we now import the array, it is already intelligently interpreted so that even the _weather_ and _visibility_ fields are understood correctly:
 
-Now we have pretty good support to create all the functionality we want to our project.
+```js
+import diaries from '../../data/entries.ts' // highlight-line
+
+import { Weather, Visibility, DiaryEntry } from '../types'
+
+const getEntries = () : Array<DiaryEntry> => {
+  return diaries // highlight-line
+} 
+
+const addEntry = () => {
+  return null
+} 
+
+export default {
+  getEntries,
+  addEntry
+}
+```
 
 
-BTW, if we wanted to reserve the opportunity to save also Entries without the field _comment`, we could set type field within the type to be optional by adding _?_ to the type declaration, like this: 
+Note that, if we want to reserve the opportunity to save also entries without a field, e.g. _comment_, we could set type field as optional by adding _?_ to the type declaration: 
 
 ```js
 type DiaryEntry = {
@@ -473,8 +550,151 @@ type DiaryEntry = {
 } 
 ```
 
-</div>
+### Utility Types
 
+Sometimes we end up in a situation where we want to use a specific modification of a type. For example consider using a general listing page for data that has some non-sensitive and some  sensitive data. In a common listing page we might want to be sure that no sensitive data is being used or shown so we might only <i>pick</i> the fields of a type we allow to be used in that situation. For that we use the utility type [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk).
+
+In our example we should consider that Ilari might want to create a frontend listing of all his diary entries excluding the comment field, since during a very scary flight he might end up writing there something he wouldn't necessarily want to show anyone else.
+
+The [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk) utility type allows us to choose what fields of a type we want to use of the existing type. Pick can be used in creating a completely new type or just in time when informing a function what it should return, as any other typings can be used. Utility types are special kinds of type tools, but they are used exactly as regular types are.
+
+In this case, we could just use the Pick in the function declaration:
+
+```js
+const getNonSensitiveEntries = 
+  (): Array<Pick<DiaryEntry, 'id' | 'date' | 'weather' | 'visibility'>> => {
+    // ...
+  }
+```
+
+and it would expect the function to return an array of the modification of DiaryEntry type which includes only the four declared fields. 
+
+Since [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk) requires the type it modifies to be given as a [type variable](http://www.typescriptlang.org/docs/handbook/generics.html#working-with-generic-type-variables), simillar as the Array, we have now two nested type variables and the syntax looks already a bit odd. We can improve the readability by using the [alternative](http://www.typescriptlang.org/docs/handbook/basic-types.html#array) syntax of arrays:
+
+```js
+const getNonSensitiveEntries = 
+  (): Pick<DiaryEntry, 'id' | 'date' | 'weather' | 'visibility'>[] => {
+    // ...
+  }
+```
+
+Even better in this case when we want to exclude only one field, would be to use the *Omit* utility type, for which you can declare what fields to exclude:
+
+```js
+const getNonSensitiveEntries = (): Omit<DiaryEntry, 'comment'>[] => {
+  // ...
+}
+```
+
+
+Another way would be to declare a completely new type for the _NonSensitiveDiaryEntry_:
+
+```js
+type NonSesitiveDiaryEntry = Omit<DiaryEntry, 'comment'>;
+```
+
+The code is now
+
+```js
+import diaries from '../../data/entries.js'
+
+import { NonSesitiveDiaryEntry, DiaryEntry } from '../types'
+
+const getEntries = () : DiaryEntry[] => {
+  return diaries
+} 
+
+const getNonSensitiveEntries = (): NonSesitiveDiaryEntry[] => {
+  return diaries
+}
+
+const addDiaryEntry = () => {
+  return []
+} 
+
+export default {
+  getEntries,
+  getNonSensitiveEntries,
+  addDiaryEntry
+}
+```
+
+One thing causes us a bit of concern. In there function _getNonSensitiveEntries_ we are returning the complete entries of diaries and <i>no error is given</i> despite typing!
+
+This is because TypeScript can only check whether we have all the wanted fields or not, but excess fields are not prohibited. In our case it means that it is <i>not prohibited</i> to return the DiaryEntry[] type object, but if we were to try to get a hold of the field <i>comment</i> where the diary is returned, it would not be restricted since it would be pointing to a field that TypeScript is unaware of even though it exists.
+
+Unfortunately this can lead to unwanted behaviour if you are not aware of what you are doing; this situation is valid in terms of TypeScript but is most likely allowing use that is not wanted. If we now return all of the diaryEntries from the function _getNonSensitiveEntries_ as they are to <i>frontend</i>, we are actually leaking the unwanted fields for the requesting browser even though our types imply otherwise!
+
+Because TypeScript doesn't modify the actual data but only types it, we need to implement the exclusion of the fields:
+
+```js
+import diaries from '../../data/entries.js'
+
+import { NonSesitiveDiaryEntry, DiaryEntry } from '../types'
+
+const getEntries = () : DiaryEntry[] => {
+  return diaries
+} 
+
+// highlight-start
+const getNonSensitiveEntries = () : NonSesitiveDiaryEntry [] => {
+  return diaries.map(({ id, date, weather, visibility }) => ({
+    id,
+    date,
+    weather,
+    visibility,
+  }))
+}
+// highlight-end
+
+const addDiaryEntry = () => {
+  return []
+} 
+
+export default {
+  getEntries,
+  getNonSensitiveEntries,
+  addDiaryEntry
+}
+```
+
+
+If we were to try returning this data with the basic _DiaryEntry_ type, that is, if we would type the function as follows
+
+```js
+const getNonSensitiveEntries = () : DiaryEntry[] => {
+```
+
+we would get the following error:
+
+![](../../images/9/22a.png)
+
+Utility types includes a large set of handy tools and it is definitely worthwhile to take some time studying [their documentation](https://www.typescriptlang.org/docs/handbook/utility-types.html).
+
+Finally we can complete the route that shows all diery entries:
+
+```js
+import express from 'express';
+import diaryService from '../services/diaryService'  // highlight-line
+
+const router = express.Router();
+
+router.get('/', (_req, res) => {
+  res.send(diaryService.getNonSensitiveEntries()); // highlight-line
+})
+
+router.post('/', (_req, res) => {
+    res.send('Saving a diary!');
+})
+
+export default router;
+```
+
+The response looks like as we expect
+
+![](../../images/9/26.png)
+
+</div>
 
 <div class="tasks">
 
@@ -484,96 +704,14 @@ Since this part already has lots of things to focus on, databases will not be on
 
 The data used in this part consists of two files: [diagnoses.json](https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.json) and [patientdata.json](https://github.com/fullstack-hy2020/misc/blob/master/patientdata.json). You should download the data and put it into a folder called _data_. All data modification can be done in runtime memory, so during this week it is *never necessary to write to a file*.
 
-
-#### 9.12  (2.4)
+#### 9.12
 
 Type the create data type _diagnose_ and set up a GET-endpoint for fetching all diagnoses. Check with curl, postman to make sure your endpoint is working.
 
 HINT! Notice how _diagnoses_ may or may not contain the _latin_ field. You might want to check out [optional properties](https://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties).
 
-</div>
 
-<div class="content">
-
-
-## Utility Types
-
-Sometimes we end up in a situation where we want to use a specific modification of a type. For example consider using a general listing page for data that has some non-sensitive and some very sensitive data. In a common listing page we might want to be sure that no sensitive data is being used or shown so we might only *Pick* the fields of a type we allow to be used in that situation. For that we use the utility type Pick<>.
-
-In this exact case we should consider that Ilari might want to create a frontend listing of all his diary entries excluding the comment field, since during a very scary flight he might end up writing there something he wouldn't necessarily want to show anyone else. In help comes type picking.
-
-The *Pick* utility type allows us to choose what fields of a type we want to use of the existing type. Pick can be used in creating a completely new type or just in time when informing a function what it should return, as any other typings can be used. Utility types are special kinds of type tools, but they are used exactly as regular types are.
-
-In this case, we could just use the Pick in the function declaration:
-
-```js
-const getAllNonSensitiveEntries = (): Pick<DiaryEntry, 'id' | 'date' | 'weather' | 'visibility'>[] => {
-...
-```
-
-and it would expect the function to return an array of the modification of DiaryEntry type which includes only the four declared fields. 
-
-Even better in this case when we want to exclude only one field, would be to use the *Omit* utility type, for which you can declare what fields to exclude:
-
-```js
-const getAllNonSensitiveEntries = (): Omit<DiaryEntry, 'comment'>[] => {
-...
-```
-
-
-Another way would be to declare a completely new type for the "NonSensitiveDiaryEntry":
-
-```js
-type NonSesitiveDiaryEntry = Omit<DiaryEntry, 'comment'>;
-
-```
-
-And once again the editor gives us great help, when hovering on the type, we see info on the result of the Omit:
-
-![](../../images/9/20.png)
-
-The field comment is not included, great!
-
-One issue still arises with this when we look deeper into the code:
-
-![](../../images/9/21.png)
-
-We are now still returning the complete entries of diaries and *no error is given*. This is because TypeScript can only check whether we have all the wanted fields or not, and excess fields are not prohibited. In this case it means that it is not prohibited to return the DiaryEntry[] type object, but if we were to try to get a hold of the field _comment_ where the diary is returned, it would not be restricted since it would be pointing to a field that TypeScript is unaware of even though it exists.
-
-Unfortunately this can lead to unwanted behaviour if you are not aware of what you are doing; this situation is valid in terms of TypeScript but is most likely allowing use that is not wanted. If we now return all of the diaryEntries from the function _getAllNonSensitiveEntries_ as they are through express, we are actually allowing the unwanted fields for the requesting source even though our types imply otherwise.
-
-Because TypeScript doesn't modify the actual data but only types it, we need to implement the exclusion of the fields. This can even simply be done by using the map method:
-
-```js
-const sensitiveDiaries = diaries.map(({ id, date, weather, visibility }) => ({
-  id,
-  date,
-  weather,
-  visibility,
-}))
-...
-```
-
-
-And now if we were to try returning this data with the basic _DiaryEntry_ type, we would get the following error:
-
-![](../../images/9/22.png)
-
-**Missing property!**
-
-Se we definitely need to use Pick or Omit here to succeed and then we are once again able to move forward. 
-
-Utility types includes a large set of handy tools and it is definitely worthwhile to take some time studying [their documentation](https://www.typescriptlang.org/docs/handbook/utility-types.html).
-
-
-</div>
-
-
-<div class="tasks">
-
-### Exercises
-
-#### 9.13 (2.5)
+#### 9.13
 
 Create data type _Patient_ and set up a GET-endpoint _/patients_ that returns all patients to the frontend excluding ssn. Use the Utility type you wish to make sure you are selecting and returning only the wanted.
 

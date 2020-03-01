@@ -115,9 +115,9 @@ module.exports = {
       e: 'Fragments and subscriptions'
     },
     '9': {
-      a: 'Introduction',
-      b: 'First steps',
-      c: 'Moar',
+      a: 'Background and ntroduction',
+      b: 'First steps with Typescript',
+      c: 'Types in backend',
     },    
   },
 };
