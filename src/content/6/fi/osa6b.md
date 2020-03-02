@@ -432,7 +432,7 @@ Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-h
 
 <div class="tasks">
 
-### Tehtävät 6.9.-6.15.
+### Tehtävät 6.9.-6.12.
 
 Jatketaan tehtävässä 6.3 aloitetun reduxia käyttävän anekdoottisovelluksen parissa.
 
