@@ -463,7 +463,7 @@ const NewNote = () => {
 }
 ```
 
-Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part4) branchissa <i>part6-4</i>.
+Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-4) branchissa <i>part6-4</i>.
 
 </div>
 
