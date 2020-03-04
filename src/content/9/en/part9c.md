@@ -722,41 +722,67 @@ After creating the endpoint, ensure that the <i>frontend</i> shows the list of p
 
 <div class="content">
 
-Now let's expand our backend to support fetching one specific entry: Let's create a GET /api/diaries/:id endpoint which should return a
-specific entry. 
+### Preventing an accidental undefined result
 
-As we regularly would we once again need to update our routes and the DiaryService to support the functionality. As we have before in this course, simple new endpoint needs to be created and the findById-function in the service:
+Let us expand the backend to support fetching one specific entry with a HTTP GET request to route _/api/diaries/:id_ e
+
+The DiaryService needs to be extended with  _findById_-function:
 
 ```js
+// ...
+
+// highlight-start
 const findById = (id: number): DiaryEntry => {
+  const entry = diaries.find(d => d.id === id);
+  return entry;
+}
+// highlight-end
+
+export default {
+  getEntries,
+  getNonSensitiveEntries,
+  addDiaryEntry,
+  findById // highlight-line
+}
+```
+
+But once again, a new problem comes to light:
+
+![](../../images/9/23e.png)
+
+The thing with this request is that it can also return undefined - there is no absolute guarantee that an entry with the specific id can be found. This is a great thing to come up, since without TypeScript there would be no indication of this possibility and in the worst case you might end up returning a result of an _undefined_ object instead of informing of a not found situation in a reasonable way.
+
+In cases like this we first of all need to decide what is the desired return value if an object is not found, and how to handle the case. The value _undefined_ that is returned by _find_-method of an array is fine for us if a result is not found so we could solve our problem by typing the return value as follows
+
+```js
+const findById = (id: number): DiaryEntry | undefined => { // highlight-line
   const entry = diaries.find(d => d.id === id);
   return entry;
 }
 ```
 
-But once again, new things come to light.
-
-![](../../images/9/23.png)
-
-The thing with this request is that it can also return undefined - there is no absolute guarantee that an entry with the specific id can be found. This is a great thing to come up, since without TypeScript there would be no indication of this possibility and in the worst case you might end up returning a result of an _undefined_ object instead of informing of a not found situation in a reasonable way.
-
-In cases like these we first of all need to decide what is the wanted return value if an object is not found and how to handle it in the endpoint. Since the _find_-method returns _undefined_ when a result is not found it works well for us since we can just add the possible return type to the functions typings:
+The route handler is the following
 
 ```js
-const findById = (id: number): DiaryEntry | undefined => {
-...
-```
+import express from 'express';
+import diaryService from '../services/diaryService'
 
-And through this we can set the route handling to determine and react on whether the entry was found or not:
-
-```js
 router.get('/:id', (req, res) => {
-    const diary = DiaryService.findById(Number(req.params.id));
-    diary ? res.send(diary) : res.sendStatus(404);
+  const diary = diaryService.findById(Number(req.params.id));
+
+  if (diary) {
+    res.send(diary);
+  } else {
+    res.sendStatus(404);
+  }
 })
+
+// ...
+
+export default router;
 ```
 
-Since we are certain that the _diary_ will be either undefined or an object, it is safe to use the _-- ? -- : --_ syntax and return the object as it is if it is found or then response with the corresponding statuscode _404_.
+### Adding a new diary
 
 Let's start building the _post_ endpoint where to add new flight diary entries to. The accepted values should confirm to the example data.
 
@@ -1035,23 +1061,20 @@ Enums are usually used when wanting a set of predetermined values that are not e
 
 And after giving _Visibility_ the same treatment whole thing just works!
 
-
 </div>
-
 
 <div class="tasks">
 
 ### Exercises
 
-#### 9.14 (2.6)
+#### 9.14
 
 Set up a POST-endpoint _/patients_ that adds a patient.
 
 After this the 'Add new patient' button in the frontpage should work.
 
-#### 9.15 (2.7)
+#### 9.15
 
 Set up safe parsing, validation and type guards to the post request. In this exercise you should refactor (if you still haven't) the _Patient_ types _Gender_ field to an _enum_ type as in the material. 
 
 </div>
-
