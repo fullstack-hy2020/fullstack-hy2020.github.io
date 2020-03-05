@@ -1044,7 +1044,7 @@ One thing to notice here is that we can't set the _str_ variable to be the _stri
 
 With these changes, one issue comes to light: our data does not conform anymore to our types.
 
-This is bacause *a string can't be assumed to be an enum*. 
+This is because *a string can't be assumed to be an enum*. 
 
 Since the example data we are loading is offering the _Weather_ and _Visibility_ values as strings, the union type of separate types of strings (_type  Weather = 'sunny' | 'rainy' ..._) can be compared to the values we are saving, whether the input string is one of the accepted strings or not. But when using _enums`, this is not anymore the case, because the values of an enum type are not parsed when comparing the values.
 
