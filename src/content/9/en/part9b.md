@@ -731,7 +731,8 @@ The _@typescript-eslint_ plugin has lots of TypeScript-only lint rules but also 
 {
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
   ],
   "plugins": ["@typescript-eslint"],
   "env": {
