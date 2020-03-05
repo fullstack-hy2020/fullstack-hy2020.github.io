@@ -7,15 +7,9 @@ lang: en
 
 <div class="content">
 
-TODO: Jotkut on saattanut kuulla Flowsta aiemmin, varsinkin jos puuhaillu vähänkin jotain Reactin kanssa. Tässä vois olla hyvä olla joku maininta siitä, ja miten typescript eroaa / ei eroa siitä.
-
 ## What is TypeScript?
 
-TypeScript is a programming language created by Microsoft, and is designed for the development of large JavaScript applications. For instance Microsoft has written both the _Azure Management Portal_ (1,2 million lines of code) and the _Visual Studio Code_ (300 000 lines of code) applications using TypeScript. As support for building large-scale JavaScript applications, TypeScript offers better design-time tooling, compile-time checking, and dynamic module loading at runtime.
-
-TODO: mitä on _design time tooling_? oisko development time tooling kuvaavampi?
-
-TODO: Onko näin? TypeScript ei tietääkseni tarjoo käytännössä mitään runtimen aikana.
+TypeScript is a programming language created by Microsoft, and is designed for the development of large JavaScript applications. For instance Microsoft has written both the _Azure Management Portal_ (1,2 million lines of code) and the _Visual Studio Code_ (300 000 lines of code) applications using TypeScript. As support for building large-scale JavaScript applications, TypeScript offers e.g. better development-time tooling, static code analysis, compile-time type checking and code level documentation.
 
 ### Main principle
 
@@ -65,10 +59,37 @@ TypeScript is a structurally typed language. In structural typing, an element is
 In TypeScript, the compiler can attempt to infer the type information if no explicit type has been specified. The inference is done based on the assigned value and it's usage.
 The type inference takes place when initializing variables and members, setting parameter default values, and determining function return types.
 
-TODO: esimerkki tyyppipäättelystä
+Below is an example of how type inference in TypeScript is done in a gradually more indirect way.
 
-```js
-example here...
+First the `add` function's return value is inferred by retracing the code back to the return expression. The return expression performs an addition of two numbers, which can bee seen from the types set for the function parameters, so the return type `number` is inferred in this case.
+
+Next there is declared an interface called `CallsFunction`, which consists of a function with one parameter, which in turn is a callback function accepting a string parameter and returns `any` value. The function `callsFunction` is set to be of type `CallsFunction`, so in the function it can be inferred that the callback function will only accept a string argument. To demonstrate this, there is also an example where the callback function is called with a numeric value, and that causes an error in TypeScript.
+
+Lastly, when `callsFunction` is called, we pass it an anonymous function and TypeScript can, based on the type of `callsFunction` and it's type, infer that the call will return a string.
+
+```ts
+const add = (a: number, b: number) => {
+  /* The return value is used to determine
+     the return type of the function */
+  return a + b;
+}
+
+interface CallsFunction {
+  (cb: (result: string) => any): void;
+}
+
+// The cb parameter is inferred to be a function accepting a string
+const callsFunction: CallsFunction = (cb) => {
+  cb('Done');
+  
+  // Error: Argument of type '1' is not assignable to parameter of type string
+  cb(1);
+}
+
+// The result parameter is inferred to be a string
+callsFunction((result) => {
+  return result;
+});
 ```
 
 ### Type erasure
@@ -113,15 +134,11 @@ Lastly, here are a few examples of what many regard as downsides with TypeScript
 
 #### Incomplete, invalid or missing types in external libraries
 
-TODO: Vois olla hyvä tarjoo vaikka joku linkki ohjeisiin miten tää tehdään.
-
-When using external libraries you may find that some libraries have either missing or in some way invalid type declarations. The reasons behind this is most often that the library has not been made with TypeScript and the types need to be declared manually, or someone has already done that, but hasn't done such a good job with it. These are occations when you may need to define type declarations yourself.
+When using external libraries you may find that some libraries have either missing or in some way invalid type declarations. The reasons behind this is most often that the library has not been made with TypeScript and the types need to be declared manually, or someone has already done that, but hasn't done such a good job with it. These are occations when you may need to define type declarations yourself. However, you should first check out (DefinitelyTyped)[https://definitelytyped.org/] or (their GitHub pages)[https://github.com/DefinitelyTyped/DefinitelyTyped], which are probably the most used sources for type declaration files and there is a good chance someone has already added typings for the package you are using. Otherwise you might want to start off by getting aquainted with TypeScript's own (documentation)[https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html] regarding type declarations.
 
 #### Sometimes type inference needs assistance
 
-The type inference in TypeScript is pretty good, but still not perfect. Sometimes you may feel like you have declared your types perfectly, but the compiler still tells you that the property does not exist or that that kind of usage is not allowed. These are occasions when you might need to help the compiler with doing e.g. an "extra" type check or something like that. But be careful with type casting and type guards, because in those cases you are practically giving your word to the compiler, that the value really is of the type that you declare.
-
-TODO: Tää saattaa olla ensimmäinen kerta kun lukia kuulee type castista ja type guardista. Vois olla hyvä linkkaa johonkin dokumentaatioon niistä?
+The type inference in TypeScript is pretty good, but still not perfect. Sometimes you may feel like you have declared your types perfectly, but the compiler still tells you that the property does not exist or that that kind of usage is not allowed. These are occasions when you might need to help the compiler with doing e.g. an "extra" type check or something like that. But be careful with type casting and type guards, because in those cases you are practically giving your word to the compiler, that the value really is of the type that you declare. You might want to check out TypeScript's documentation regarding [Type Assertions](https://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) and (Type Guards)[https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-guards-and-differentiating-types].
 
 #### Mysterious type errors
 

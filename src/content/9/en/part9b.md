@@ -725,30 +725,34 @@ And let's set up the _lint_ script to inspect the files with _.ts_ extension by 
 
 And now live code inspection should be working!
 
-The _@typescript-eslint_ plugin has lots of TypeScript-only lint rules but also all basic eslint rules are usable in TypeScript projects. We should probably for now just use the recommended settings and see where it takes us and modify our rules as we go, if we find something we want to behave differently. So let's set the _.eslintrc_ to include the following:
+The _@typescript-eslint_ plugin has lots of TypeScript-only lint rules but also all basic eslint rules are usable in TypeScript projects. We should probably for now just use the recommended settings and see where it takes us and modify our rules as we go, if we find something we want to behave differently. On top of the regular recommended settings we should already try to get familiar with coding styles we are using this week and _set the semicolon at the end of each line of code to required_. *So let's set the _.eslintrc_ to include the following:
 
 ```json
 {
-  "env": {
-    "browser": true,
-    "node": true
-  },
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaVersion": 11,
-    "sourceType": "module",
-    "project": "./tsconfig.json",
-    "createDefaultProgram": true
-  },
-  "plugins": ["@typescript-eslint"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-  ]
+    "plugin:@typescript-eslint/recommended-requiring-type-checking"
+  ],
+  "plugins": ["@typescript-eslint"],
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "rules": {
+    "@typescript-eslint/semi": ["error"],
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
+    "no-case-declarations": 0
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  }
 }
 ```
 
-And now let's fix everything thtat needs to be fixed!
+And now let's fix everything that needs to be fixed!
 
 </div>
 
@@ -758,7 +762,7 @@ And now let's fix everything thtat needs to be fixed!
 
 #### 9.7
 
-Add to your app an enpoint for the exercise calculator. It should be used by doing a HTTP POST request to endpoint _exercises_ with the input in the request body
+Add to your app an endpoint for the exercise calculator. It should be used by doing a HTTP POST request to endpoint _exercises_ with the input in the request body
 
 ```js
 {
@@ -767,7 +771,7 @@ Add to your app an enpoint for the exercise calculator. It should be used by doi
 }
 ```
 
-Respose is a json of the following form
+Response is a json of the following form
 
 ```js
 {

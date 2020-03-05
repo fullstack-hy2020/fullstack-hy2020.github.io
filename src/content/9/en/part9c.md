@@ -117,30 +117,28 @@ We should also create _.eslintrc_ with the following content:
 
 ```json
 {
-  "env": {
-    "browser": true,
-    "node": true
-  },
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaVersion": 11,
-    "sourceType": "module",
-    "project": "./tsconfig.json",
-    "createDefaultProgram": true
-  },
-  "plugins": ["@typescript-eslint"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking"
   ],
- "rules": {
+  "plugins": ["@typescript-eslint"],
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "rules": {
+    "@typescript-eslint/semi": ["error"],
     "@typescript-eslint/explicit-function-return-type": 0,
     "@typescript-eslint/no-unused-vars": [
         "error", { "argsIgnorePattern": "^_" }
     ],
      "@typescript-eslint/no-explicit-any": 1,
     "no-case-declarations": 0
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
   }
 }
 ```
@@ -239,7 +237,6 @@ and run _npm start_ and then try to curl our defined port:
 Now we have a minimal working pipeline, with which we can develop our project, with a lot of help from our compiler and eslint in maintaining a good code quality. With this base we can actually start creating an app which we could proudly deploy into a production environment. 
 
 </div>
-
 
 <div class="tasks">
 
@@ -427,13 +424,11 @@ Now we have a basic working TypeScript express app but there's barely any actual
 
 First let's type the allowed _Weather_ and _Visibility_ values through a [union type](https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types) with allowed strings: 
 
-
 ```js
 export type Weather = 'sunny' | 'rainy' | 'cloudy' | 'windy' | 'stormy';
 
 export type Visibility = 'great' | 'good' | 'ok' | 'poor';
 ```
-
 
 And from there we can continue to create our own simple DiaryEntry type:
 
@@ -538,7 +533,6 @@ export default {
   addEntry
 }
 ```
-
 
 Note that, if we want to reserve the opportunity to save also entries without a field, e.g. _comment_, we could set type field as optional by adding _?_ to the type declaration: 
 
@@ -659,7 +653,6 @@ export default {
   addDiaryEntry
 }
 ```
-
 
 If we were to try returning this data with the basic _DiaryEntry_ type, that is, if we would type the function as follows
 
@@ -941,104 +934,130 @@ However if we type the object to _any_, eslint gives us a complaint:
 
 ![](../../images/9/24e.png)
 
-The cause for the complaint is eslit-rule [no-explicit-any](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md) that prevents us form explicitly setting type to be any. Since this is in general a good rule to follow but just in our case undesired, it is better to allow using any now by disabling the eslint-rule from that line. This happens by adding the following at the previous line:
+The cause for the complaint is eslit-rule [no-explicit-any](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md) that prevents us form explicitly setting type to be any. Since this is in general a good rule to follow but just in this particular file undesired, it is better to allow using any now by disabling the eslint-rule in the file. This happens by adding the following line at the file:
 
 ```js
 /* eslint-disable @typescript-eslint/no-explicit-any */
 ```
 
-Let us start to create the parsers for each of the fields of the variable _object_.
+Let us start creating the parsers for each of the fields of _object_.
 
-To validate the _comment_ field we need to check that it exists, after which we should ensure that it is of the type _string_.
+To validate the _comment_ field we need to check that it exists, and to ensure that it is of the type _string_.
 
-The complete function should look something like this:
+The function should look something like this:
 
 ```js
 const parseComment = (comment: any): string => {
   if (comment || !isValidString(comment)) {
     throw new Error('Incorrect or missing comment: ' + comment);
   }
+
   return comment
 }
 ```
 
-Now we accept the the _date_ variable as _any_ type (as it is _any`) and we intend to return a verified _string_ type of variable from the function. We need to implement also the string and date validation functions in our code: 
+Function gets the parameter of the type _any_ type and returns it as type _string_ if it exists and is of the right type.
+
+The string validation function looks like this
 
 ```js
-const isValidString = (text: any): text is string => {
+const isString = (text: any): text is string => {
   return typeof text === 'string' || text instanceof String
 }
 ```
 
-The _isValidDate_ function contains no unclear content but in the _isValidString_ function we use a new keyword: _is_. With this kind of setting _variable is Type_ we are creating a [type guard*](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-guards-and-differentiating-types) with which we can use code to guarantee not only in the code that a variable is of a specific type but also the compiler. So when we run the variable through the type guard function _isValidString_ even the compiler knows afterwards that the variable in fact is of the type _string_.
-
-Let's look at an example: 
-
-If we were to return a _boolean_ from the _isValidString_ method like this: 
+The function is so called [type guard](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards), that is, a function that is returning a boolean <i>and</i> which has a <i>type predicate</i> as the return type. In our case the type predicate is
 
 ```js
-const isValidString = (text: any): boolean => {
-  return typeof text === 'string' || text instanceof String
+text is string
+```
+
+The general form of a type predicate is _parameterName is Type_ where the _parameterName_ is the name of the function parameter and _Type_ is the targetted type.
+
+If the type guard function returns true, the TypeScript compiler knows that the tested variable has the type that was defined in the type predicate. 
+
+Before the type guard is called, the actual type of the variable _comment_ is not known:
+
+![](../../images/9/28.png)
+
+But after the call, if the code proceeds past the exception (that is the type guard returned true), compiler knows that _comment_ is of the type _string_:
+
+![](../../images/9/29.png)
+
+Why do we have two conditions in the string type guard:
+
+```js
+const isString = (text: any): text is string => {
+  return typeof text === 'string' || text instanceof String // highlight-line
 }
 ```
 
-The compiler would still interpret the comment as type _any`:
-
-![](../../images/9/24.png)
-
-Which actually would not in this case cause any issues, since as before mentioned the casting of a return type of _any_ to a _string_ in this case is not exactly wrong but it's not entirely safe either. If we define the the function to return a _variable is Type_ boolean, we are actually confirming to the compiler that *the value definitely is of that type*:
-
-![](../../images/9/25.png)
-
-Wow, it's like looking directly at the sun and not being hurt in the eyes. 
-
-Now when the parsed comment variable is brought back to the original function, it is definitely of type _string_ or an error is thrown. First one down, three to go!
-
-Next let's take the _date_. Parsing and validating the date object is pretty similar, since TypeScript doesn't really know a type for date and we need to treat it as as _string_. We still definitely should use JavaScript level validation to check whether the date format should be accepted. 
-
-So let's add the following functions:
+would it not be enought to write the guard like this
 
 ```js
-const isValidDate = (date: string): boolean => {
-    return Boolean(Date.parse(date));
+const isString = (text: any): text is string => {
+  return typeof text === 'string'
+}
+```
+
+The more simple form is most likely good for all practical purposes. However if we want to be absolutely sure, both the conditions are needed, since there is two different means to create string objects in JavaScript and both of these work a bit differently with respect to operators _typeof_ and _instanceof_:
+
+```js
+const a = "I'm a string primitive";
+const b = new String("I'm a String Object");
+typeof a; --> returns 'string'
+typeof b; --> returns 'object'
+a instanceof String; --> returns false
+b instanceof String; --> returns true
+```
+
+It is however unlikely that anybody creates strings with a constructor function, so most likely the simpler version of the type guard would be just fine. 
+
+Next let us consider the field _date_. Parsing and validating the date object is pretty similar, since TypeScript doesn't really know a type for date, we need to treat it as as _string_. We still definitely should use JavaScript level validation to check whether the date format is acceptable. 
+
+We will add the following functions
+
+```js
+const isDate = (date: string): boolean => {
+  return Boolean(Date.parse(date));
 }
 
 const parseDate = (date: any): string => {
-    if (!date || !isValidString(date) || !isValidDate(date)) {
-        throw new Error('Incorrect or missing date: ' + date)
-    }
-    return date;
+  if (!date || !isString(date) || !isDate(date)) {
+      throw new Error('Incorrect or missing date: ' + date)
+  }
+  return date;
 }
 ```
 
-Nothing really special here, only thing is that we can't usea type guard since a date is in this case considered only a string. But notice how even though the _date_ variable is accepted as _any_, after checking the type  with _isValidString_ function the type is already a string which is why we are able to introduce the variable to the _isValidDate_ function with the type _string_ without any errors.
+Nothing really special here, only thing is that we can't use a type guard since a date is in this case considered only a _string_. Notice that even though the _date_ variable is accepted as _any_ by the _parseDate_ function, after checking the type with _isdString_ the type is already a string which is why we are able to give the variable to the function _isDate_ with the type _string_ without any errors.
 
-Let's move on to the more complex types: Weather and Visibility.
+Finally we are ready to move on to the last two types, Weather and Visibility.
 
-So what we'd want is the validation and parsing to work like this:
+We would like the validation and parsing to work as follows:
 
 ```js
 const parseWeather = (weather: any): Weather => {
-    if (!weather || !isValidString(weather) || !isValidWeather(weather)) {
-        throw new Error('Incorrect or missing weather: ' + weather)
-    } 
-    return weather;
+  if (!weather || !isString(weather) || !isWeather(weather)) {
+      throw new Error('Incorrect or missing weather: ' + weather)
+  } 
+  return weather;
 }
 ```
 
-So the question here is, how can we validate a string that should be of a specific form? We need a type guard so we can guarantee to the compiler that the variable is in fact the type _weather_ and we could implement it like this:
+The question now is, how can we validate that the string is of a specific form? One possible way of writing the type guard would be following:
 
 ```js
-const isValidWeather = (str: any): str is Weather => {
-    return ['sunny', 'rainy', 'cloudy', ...].includes(str)
+const isWeather = (str: any): str is Weather => {
+  return ['sunny', 'rainy', 'cloudy', 'stormy' ].includes(str)
 }
 ```
 
-This would work just fine but the problem is that this listing is not necessarily on the same page with the actual Weather type declaration. If there were to come more acceptable Weather conditions there would be a need to update both places which is not what we want.
+This would work just fine but the problem is that list of possible weathers does not necessarily stay in sync with the type definition if that is altered. This is most certainly not a nice thing since we would like to have just a single source for all possible weather types.
 
 A better solution for this question would be to improve the actual Weather type and instead of type declaration we should use a TypeScript [enum](https://www.typescriptlang.org/docs/handbook/enums.html) which allows us to use the actual values input there within the running code, not only in the compilation phase.
 
-Let's rewrite the _Weather_ type like this: 
+Let's redefine the type _Weather_ like this: 
 
 ```js
 export enum Weather {
@@ -1048,7 +1067,6 @@ export enum Weather {
     Stormy = 'stormy', 
     Windy = 'windy',
 }
-
 ```
 
 This allows us to handle _Weather_ types different varieties in  different ways, but most importantly in this case we now can check *whether a string confirms to the accepted values of the Weather enum type*. 
@@ -1056,8 +1074,8 @@ This allows us to handle _Weather_ types different varieties in  different ways,
 Now everything else can stay as they were and we can write a type guard for Weather checking in the following way:
 
 ```js
-const isValidWeather = (str: any): str is Weather => {
-    return Object.values(Weather).includes(str)
+const isWeather = (str: any): str is Weather => {
+  return Object.values(Weather).includes(str)
 }
 ```
 
@@ -1065,7 +1083,7 @@ One thing to notice here is that we can't set the _str_ variable to be the _stri
 
 With these changes, one issue comes to light: our data does not conform anymore to our types.
 
-This is bacause *a string can't be assumed to be an enum*. 
+This is because *a string can't be assumed to be an enum*. 
 
 Since the example data we are loading is offering the _Weather_ and _Visibility_ values as strings, the union type of separate types of strings (_type  Weather = 'sunny' | 'rainy' ..._) can be compared to the values we are saving, whether the input string is one of the accepted strings or not. But when using _enums`, this is not anymore the case, because the values of an enum type are not parsed when comparing the values.
 
