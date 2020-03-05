@@ -116,29 +116,25 @@ We should also create _.eslintrc_ with the following content:
 
 ```json
 {
-  "env": {
-    "browser": true,
-    "node": true
-  },
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaVersion": 11,
-    "sourceType": "module",
-    "project": "./tsconfig.json",
-    "createDefaultProgram": true
-  },
-  "plugins": ["@typescript-eslint"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking"
   ],
- "rules": {
+  "plugins": ["@typescript-eslint"],
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "rules": {
+    "@typescript-eslint/semi": ["error"],
     "@typescript-eslint/explicit-function-return-type": 0,
-    "@typescript-eslint/no-unused-vars": [
-        "error", { "argsIgnorePattern": "^_" }
-    ],
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
     "no-case-declarations": 0
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json"
   }
 }
 ```
