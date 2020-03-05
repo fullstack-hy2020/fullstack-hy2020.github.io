@@ -784,57 +784,59 @@ export default router;
 
 ### Adding a new diary
 
-Let's start building the _post_ endpoint where to add new flight diary entries to. The accepted values should confirm to the example data.
+Let's start building the _post_ endpoint for adding flight diary entries. The accepted values should confirm to the example data.
 
-Let's grow the _routes_ file to indclude the following content: 
+The code handling the response looks as follows
 
 ```js
 router.post('/', (req, res) => {
-    const { date, weather, visibility, comment } = req.body;
-    const newDiaryEntry = DiaryService.addEntry(
-        date,
-        weather,
-        visibility,
-        comment,
-    );
-    res.json(newDiaryEntry);
+  const { date, weather, visibility, comment } = req.body;
+  const newDiaryEntry = diaryService.addDiaryEntry(
+    date,
+    weather,
+    visibility,
+    comment,
+  );
+  res.json(newDiaryEntry);
 })
 ```
 
-and the _DiaryService_ to contain the addition of an entry:
+corresponding method in _diaryService_ looks like this
 
 ```js
-const addEntry = (date: string, weather: Weather, visibility: Visibility, comment: string): DiaryEntry => {
-    const newDiaryEntry = {
-        id: Math.max(...diaries.map(d => d.id)) + 1,
-        date,
-        weather,
-        visibility,
-        comment,
-    }
-    diaries.push(newDiaryEntry);
-    return newDiaryEntry;
+const addDiaryEntry = (
+    date: string, weather: Weather, visibility: Visibility, comment: string
+  ): DiaryEntry => {
+    
+  const newDiaryEntry = {
+    id: Math.max(...diaries.map(d => d.id)) + 1,
+    date,
+    weather,
+    visibility,
+    comment,
+  }
+  
+  diaries.push(newDiaryEntry);
+  return newDiaryEntry;
 }
 ```
 
-**Notice:** Since we are using here data not from a database, we are using _push_ here to add to the data. Obviously in a real case where a database is configured this wouldn't be the case and there would be an async function that saves the new DiaryEntry to the database and returns the created one. 
-
-As we can see the _addEntry_ function is growing to be pretty hard to read; when having this many separate parameters it might be better just to send the data as an object to the function. Let's reformat the function from both sides: 
+As we can see the _addDiaryEntry_ function is growing to be pretty hard to read, when having all the fields as separate parameters. It might be better to just send the data as an object to the function:
 
 ```js
 router.post('/', (req, res) => {
-    const { date, weather, visibility, comment } = req.body;
-    const newDiaryEntry = DiaryService.addEntry({
-        date,
-        weather,
-        visibility,
-        comment,
-    });
-    res.json(newDiaryEntry);
+  const { date, weather, visibility, comment } = req.body;
+  const newDiaryEntry = diaryService.addDiaryEntry({ // highlight-line
+    date,
+    weather,
+    visibility,
+    comment,
+  }); // highlight-line
+  res.json(newDiaryEntry);
 })
 ```
 
-But there's an obstacle! What is the type of this object? It is not exactly a DiaryEntry, since it is still missign the _id_ field. It could be useful for us just to create a new type _NewDiaryEntry_ which could work as a type for the not-yet saved Entry-object. Let's create the new type in our _types_-file using the existing _DiaryEntry_ object with the _Omit_ utility type:
+But wait, what is the type of this object? It is not exactly a DiaryEntry, since it is still missign the _id_ field. It could be useful for us just to create a new type _NewDiaryEntry_ which could work as a type for the not-yet saved Entry-object. Let us create the new type in our _types.ts_-file using the existing _DiaryEntry_ object with the _Omit_ utility type:
 
 ```js
 export type NewDiaryEntry = Omit<DiaryEntry, 'id'>
@@ -843,33 +845,45 @@ export type NewDiaryEntry = Omit<DiaryEntry, 'id'>
 And now we can use this type in our DiaryService and we can just destructure the whole new entry object when creating the entry to be saved: 
 
 ```js
-const addEntry = (entry: NewDiaryEntry): DiaryEntry => {
-    const newDiaryEntry = {
-        id: Math.max(...diaries.map(d => d.id)) + 1,
-        ...entry
-    }
-    diaries.push(newDiaryEntry);
-    return newDiaryEntry;
+import { NewDiaryEntry, NonSesitiveDiaryEntry, DiaryEntry } from '../types' // highlight-line
+
+// ...
+
+const addDiaryEntry = ( entry : NewDiaryEntry ): DiaryEntry => {  // highlight-line
+  const newDiaryEntry = {
+    id: Math.max(...diaries.map(d => d.id)) + 1,
+    ...entry  // highlight-line
+  }
+  
+  diaries.push(newDiaryEntry);
+  return newDiaryEntry;
 }
 ```
 
-Much cleaner and nicer!
+Now the code looks much cleaner! 
 
-Now in order to parse the incoming application/json data from an incoming we need to add the _json_ middleware to the express app we have created as early as possible in the application with the line:
+In order to parse the incoming data we must have the  _json_ middleware configured:
+ 
+``` js
+import express from 'express';
+import diaryRouter from './routes/diaries'; 
+const app = express();
+app.use(express.json()); // highlight-line
 
+const PORT = 3000;
 
+app.use('/api/diaries', diaryRouter);
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 ```
-app.use(express.json());
-```
 
-and now the application is ready to receive _post_ requests with the wanted fields. Awesome! 
-
-
-But these lines of code might still not be ready to face the public and before moving further we should take a closer look at what we have done an even more importantly what we have not done yet.
+and now the application is ready to receive HTTP POST requests for adding diaries with the desired fields!
 
 ### Proofing your requests
 
-There are a lot of things that can go wrong when accepting data from an outside source. Almost never applications work fully on their own and we are forced to live with the fact that sources outside of a single system cannot be fully trusted. And since the data is coming from an outside source, there's no way that it can be already typed when we receive it so we need to make decision on how to handle the uncertainty that comes with the data.
+There are a plenty of things that can go wrong when accepting data from an outside source. Almost never applications work fully on their own and we are forced to live with the fact that sources outside of a single system cannot be fully trusted. And since the data is coming from an outside source, there's no way that it can be already typed when we receive it so we need to make decision on how to handle the uncertainty that comes with the data.
 
 How express handles parameters parsed from a request is so that it asserts the type _any_ to all of the parameters. In our situation this doesn't come apparent in any way in the editor, but if we start looking at the variables more closely and hover on any of them, we can see that each of them are _any_ and the IDE doesn't complain on feeding the _addEntry_ function the values because _any_ is not *definitely* wrong. It might be the wanted type. But it is definitiely not safe to trust it. This is why we should check the incoming values (regardless whether we are using TypeScript or not).
 
