@@ -556,9 +556,9 @@ Sometimes we end up in a situation where we want to use a specific modification 
 
 In our example we should consider that Ilari might want to create a frontend listing of all his diary entries excluding the comment field, since during a very scary flight he might end up writing there something he wouldn't necessarily want to show anyone else.
 
-The [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk) utility type allows us to choose what fields of a type we want to use of the existing type. Pick can be used in creating a completely new type or just in time when informing a function what it should return, as any other typings can be used. Utility types are special kinds of type tools, but they are used exactly as regular types are.
+The [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk) utility type allows us to choose what fields of a type we want to use of the existing type. Pick can be used to construct a completely new type or just in time when informing a function what it should return, as any other typings can be used. Utility types are special kinds of type tools, but they are used exactly as regular types are.
 
-In this case, we could just use the Pick in the function declaration:
+In this case, in order to create this kind of "narrowed" version of the Entry type we could just use the Pick in the function declaration:
 
 ```js
 const getNonSensitiveEntries = 
