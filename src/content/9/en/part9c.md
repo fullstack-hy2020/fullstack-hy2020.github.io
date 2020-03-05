@@ -54,6 +54,7 @@ Right now the preferred settings we want right now are the following:
     "noUnusedLocals": true,
     "noUnusedParameters": true,       
     "noImplicitReturns": true,
+    "noImplicitAny": true,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true
      
@@ -138,6 +139,7 @@ We should also create _.eslintrc_ with the following content:
     "@typescript-eslint/no-unused-vars": [
         "error", { "argsIgnorePattern": "^_" }
     ],
+     "@typescript-eslint/no-explicit-any": 1,
     "no-case-declarations": 0
   }
 }
@@ -883,19 +885,29 @@ and now the application is ready to receive HTTP POST requests for adding diarie
 
 ### Proofing your requests
 
-There are a plenty of things that can go wrong when accepting data from an outside source. Almost never applications work fully on their own and we are forced to live with the fact that sources outside of a single system cannot be fully trusted. And since the data is coming from an outside source, there's no way that it can be already typed when we receive it so we need to make decision on how to handle the uncertainty that comes with the data.
+There are a plenty of things that can go wrong when accepting data from an outside source. Applications work rarely fully on their own and we are forced to live with the fact that data sources outside of a single system cannot be fully trusted. When the data is coming from an outside source, there's no way that it can be already typed when we receive it so we need to make decision on how to handle the uncertainty that comes with the data.
 
-How express handles parameters parsed from a request is so that it asserts the type _any_ to all of the parameters. In our situation this doesn't come apparent in any way in the editor, but if we start looking at the variables more closely and hover on any of them, we can see that each of them are _any_ and the IDE doesn't complain on feeding the _addEntry_ function the values because _any_ is not *definitely* wrong. It might be the wanted type. But it is definitiely not safe to trust it. This is why we should check the incoming values (regardless whether we are using TypeScript or not).
+The way express handles parsing the request body is that it asserts the type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) to all the body fields. In our situation this doesn't come apparent in any way in the editor, but if we start looking at the variables more closely and hover on any of them, we can see that each of them is [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) and the editor doesn't complain when giving them to _addDiaryEntry_ as arguments: 
 
-We could just start by adding simple exists and is-value-valid checks where the route is defined but since we also need to check whether the _Weather_ and _Visibility_ values are of the accepted form the code starts to take a lot of space and it might be better to do the request data parsing and validation in a place of its own. So let's create a file _utils.ts_ which should include the parsing of the request values and validation on whether the values are of the correct type. We'd like to see the definition of the _post_ request to be as simple as: 
+![](../../images/9/27.png)
+
+The value of type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#an) can be assigned to <i>any</i> type of variable since it <i>might be</i> the wanted type. This is definitiely not safe to trust so 
+check the incoming values (regardless whether we are using TypeScript or not).
+
+We could just add simple <i>exists</i> and <i>is-value-valid</i> checks to the function defining the route but since we also need to ensure that _Weather_ and _Visibility_ values are of the correct form, it is better to write the put the parsing and validation logic to a separate file _utils.ts_.
+
+Our intention is to define a function _toNewDiaryEntry_ that gets the request body as a parameter and returns a properly typed _NewDiaryEntry_. Route definition uses the function as follows
 
 ```js
+import toNewDiaryEntry from '../utils' // highlight-line
+
+// ...
+
 router.post('/', (req, res) => {
-  const { date, weather, visibility, comment } = req.body;
   try {
-    const newDiaryEntry = toNewDiaryEntry({ date, weather, visibility, comment });
-    
-    const addedEntry = DiaryService.addEntry(newDiaryEntry);
+    const newDiaryEntry = toNewDiaryEntry(req.body); // highlight-line
+      
+    const addedEntry = diaryService.addDiaryEntry(newDiaryEntry); // highlight-line
     res.json(addedEntry);
   } catch (e) {
     res.status(404).send(e.message); 
@@ -903,36 +915,41 @@ router.post('/', (req, res) => {
 })
 ```
 
-Where the _toNewDiaryEntry_ function does all necessary formatting for the request body and the DiaryService is only concerned whether the Service itself functions correctly. 
+Since we are now making trustworthy code and trying to make sure that we are getting exactly what we want from the requests we should get started with the goal of parsing and validating each field we are waiting for. 
 
-Since we are now making trustworthy code and trying to make sure that we are getting exactly what we want from the requests we should get started with the goal of parsing and validating each field we are waiting for. Se let's start with the root function we want to implement: 
+The skeleton of the function _addDiaryEntry_ looks like the following:
 
 ```js
-export const toNewDiaryEntry = (obj): NewDiaryEntry => {
-  const newDiaryEntry: NewDiaryEntry = {
- 
+import { NewDiaryEntry } from './types'
+
+const toNewDiaryEntry = (object) : NewDiaryEntry => {
+  const newEntry: NewDiaryEntry = {
+    // ...
   }
+  
+  return newEntry
+} 
+
+export default toNewDiaryEntry;
 ```
 
-We want to parse the each field and make sure that what we get out of it is exactly the type _NewDiaryEntry_ type which we created before. Thus we should check each field separately. 
+In the function we want to parse the each field and make sure that what we is returned is exactly the type _NewDiaryEntry_. Thus we should check each field separately. 
 
-Once again we have a typing issue: What is the _obj_ type? Since the _obj_ contains the untrustworthy express's requests _any_ type parameters, they in fact are _any_ type. And since within this file the whole idea is to map unknown types of variables to correct ones and check whether they work as expected, this might be the rare case where we actually *want to allow the _any_ type*. Still if we want to type the object to _any`, eslint wont leave us alone until we have allowed the use of the type. We can do this on three different levels: We could allow _any_ throughout the project and just remove that rule, but we definitely don't want this. We also could disable the rule checking either by line or through an entire file. Since this file is meant for exactly parsing the true types from _any_ type variables, disabling the rule for the whole file would do the thing.
+Once again we have a typing issue: what is the _object_ type? Since the _object_ is in fact the body of a request, express has typed it with _any_. Since within this file the whole idea is to map unknown types of fields to correct ones and check whether they are defined as expected, this might be the rare case where we actually <i>want to allow the _any_ type</i>. 
 
-To disable the rule we need to find the name of the rule. Once again the IDE comes to help:
+However if we type the object to _any_, eslint gives us a complaint:
 
-![](../../images/9/24.png)
+![](../../images/9/24e.png)
 
-So the rule is called _@typescript-eslint/no-explicit-any_. Let's add the following line to the file: 
+The cause for the complaint is eslit-rule [no-explicit-any](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md) that prevents us form explicitly setting type to be any. Since this is in general a good rule to follow but just in our case undesired, it is better to allow using any now by disabling the eslint-rule from that line. This happens by adding the following at the previous line:
 
 ```js
 /* eslint-disable @typescript-eslint/no-explicit-any */
 ```
 
-And now _any_ is allowed only for this file.
+Let us start to create the parsers for each of the fields of the variable _object_.
 
-Let's start one by one creating the parsers for each variable. 
-
-To validate the _comment_ variable we need to first check if it exists, after which we should check if is of the type _string_.
+To validate the _comment_ field we need to check that it exists, after which we should ensure that it is of the type _string_.
 
 The complete function should look something like this:
 
