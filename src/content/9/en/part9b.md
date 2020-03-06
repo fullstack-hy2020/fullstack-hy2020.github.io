@@ -135,7 +135,7 @@ Slightly too much weight
 <div class="content">
 
 
-## Creating your first own Types
+### Creating your first own Types
 
 Let's expand our multiplicator and create a little bit more useful calculator, that also supports addition and division. The calculator should accept three arguments: Two numbers and then the operation, which tells the calculator what to do with those numbers; either 'multiply', 'add' or 'divide'.
 
