@@ -328,7 +328,7 @@ npm install --save-dev ts-node typescript
 
 Now let's move the two scripts _multiplicator_ and _calculator_ and _tsconfig.json_ to the project folder and add scripts by which we can run them.
 
-Now the folder structure looks like this: [ADD IMAGE OF FOLDER STRUCTURE] and _package.json_ like this: 
+Now the _package.json_ looks like this: 
 
 ```json
 {

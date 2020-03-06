@@ -1055,60 +1055,78 @@ const isWeather = (str: any): str is Weather => {
 
 This would work just fine but the problem is that list of possible weathers does not necessarily stay in sync with the type definition if that is altered. This is most certainly not a nice thing since we would like to have just a single source for all possible weather types.
 
-A better solution for this question would be to improve the actual Weather type and instead of type declaration we should use a TypeScript [enum](https://www.typescriptlang.org/docs/handbook/enums.html) which allows us to use the actual values input there within the running code, not only in the compilation phase.
+A better solution in this case is to improve the actual Weather type and instead of type declaration use the TypeScript [enum](https://www.typescriptlang.org/docs/handbook/enums.html) which allows us to use the actual values in the running code, not only in the compilation phase.
 
-Let's redefine the type _Weather_ like this: 
+Let us redefine the type _Weather_ as follows: 
 
 ```js
 export enum Weather {
-    Sunny = 'sunny',
-    Rainy = 'rainy',
-    Cloudy = 'cloudy',
-    Stormy = 'stormy', 
-    Windy = 'windy',
+  Sunny = 'sunny',
+  Rainy = 'rainy',
+  Cloudy = 'cloudy',
+  Stormy = 'stormy', 
+  Windy = 'windy',
 }
 ```
 
-This allows us to handle _Weather_ types different varieties in  different ways, but most importantly in this case we now can check *whether a string confirms to the accepted values of the Weather enum type*. 
-
-Now everything else can stay as they were and we can write a type guard for Weather checking in the following way:
+This allows us to check that a string confirms to the accepted values of the Weather enum type and the type guard can be changed to following
 
 ```js
-const isWeather = (str: any): str is Weather => {
-  return Object.values(Weather).includes(str)
+const isWeather = (param: any): param is Weather => {
+  return Object.values(Weather).includes(param)
 }
 ```
 
-One thing to notice here is that we can't set the _str_ variable to be the _string_ type. This is because if we have to allow the type of the parameter to be anything so that we can create a function that determines whether it is of a specific type. And it makes since if you start to think about the reusability of the function; by allowing _any_ as a parameter, we can use the function with confidence knowing that whatever we might feed it it will answer always to the question of whether the variable is a valid Weather or not. 
+One thing to notice here is that we have changed the parameter type to _any_, if it would be string, the _includes_ check would not compile. The change makes sense also if you think about the reusability of the function, by allowing _any_ as a parameter, we can use the function with confidence knowing that whatever we might feed to it, the function answers always to the question of whether the variable is a valid weather or not. 
 
-With these changes, one issue comes to light: our data does not conform anymore to our types.
-
-This is because *a string can't be assumed to be an enum*. 
-
-Since the example data we are loading is offering the _Weather_ and _Visibility_ values as strings, the union type of separate types of strings (_type  Weather = 'sunny' | 'rainy' ..._) can be compared to the values we are saving, whether the input string is one of the accepted strings or not. But when using _enums`, this is not anymore the case, because the values of an enum type are not parsed when comparing the values.
-
-This is why if we want to set or access a value that is defined to be an enum, we need to access the value through the enum definition. So when we want to tell to the compiler that we are using in a DiaryEntry type of object the Weather field with the value _sunny`, we need to use it like this: 
+The function _parseWeather_ can be simplified a bit
 
 ```js
-import { DiaryEntry, Visibility, Weather } from "../src/types";
+const parseWeather = (weather: string): Weather => {
+  if (!weather || !isString(weather) || !isWeather(weather)) {
+      throw new Error('Incorrect or missing weather: ' + weather)
+  } 
+  return weather;
+}
+```
 
-const diaryEntries: DiaryEntry[] = [
+With these changes, one issue arises, our data does not conform anymore to our types:
+
+![](../../images/9/30.png)
+
+This is because a string can't be just assumed to be an enum. 
+
+The fix is to map the initial data elements to _DiaryEntry_ type with the _toNewDiaryEntry_ function:
+
+```js
+import { DiaryEntry } from "../src/types";
+import toNewDiaryEntry from "../src/utils";
+
+const data = [
   {
-    id: 1,
-    date: "2017-01-01",
-    weather: Weather.Rainy,
-    visibility: Visibility.Poor,
-    comment: "Pretty scary flight, I'm glad I'm alive"
+      "id": 1,
+      "date": "2017-01-01",
+      "weather": "rainy",
+      "visibility": "poor",
+      "comment": "Pretty scary flight, I'm glad I'm alive"
   },
   // ...
-]  
+]
+
+const diaryEntries: DiaryEntry [] = data.map(obj => {
+  const object = toNewDiaryEntry(obj) as DiaryEntry
+  object.id = obj.id
+  return object
+})
+
+export default diaryEntries
 ```
 
-And this is how we access String enums values.
+Note that since _toNewDiaryEntry_ returns object of the type _NewDiaryEntry_ we need to assert it to be _DiaryEntry_ with [as](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) opeator.
 
-Enums are usually used when wanting a set of predetermined values that are not expected to change in the future. Usually enums are used in much tighter unchanging values (for example weekdays, months, directions) but since they offer us a great way to validate our incoming values we might as well use them like this. 
+Enums are usually used when there is a set of predetermined values that are not expected to change in the future. Usually enums are used in much tighter unchanging values (for example weekdays, months, directions) but since they offer us a great way to validate our incoming values we might as well use them in our case. 
 
-And after giving _Visibility_ the same treatment whole thing just works!
+After giving _Visibility_ the same treatment our app is finally ready!
 
 </div>
 
@@ -1118,12 +1136,12 @@ And after giving _Visibility_ the same treatment whole thing just works!
 
 #### 9.14
 
-Set up a POST-endpoint _/patients_ that adds a patient.
-
-After this the 'Add new patient' button in the frontpage should work.
+Create a POST-endpoint _/api/patients_ for adding patients. Ensure that you can add patients also from the frontend.
 
 #### 9.15
 
-Set up safe parsing, validation and type guards to the post request. In this exercise you should refactor (if you still haven't) the _Patient_ types _Gender_ field to an _enum_ type as in the material. 
+Set up safe parsing, validation and type guards to the POST _/api/patients_request. 
+
+Refactor the _Gender_ field to use a _enum_ type.
 
 </div>
