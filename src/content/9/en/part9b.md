@@ -668,7 +668,7 @@ Do not copy the caclucator code to file _index.ts_, make it a [typescript module
 
 <div class="content">
 
-### THe horrors of _any_
+### The horrors of _any_
 
 Now that we have our first small endpoints done, one thing to notice is that in these minimal examples _barely any TypeScript is actually in the code_. When looking more closely at the code, we can see a few possibly dangerous things. Let's look at our endpoint _calculate_, that takes the familiar two integer values and an operation string.
 
