@@ -108,7 +108,7 @@ app.post('/api/notes', (request, response, next) => {
 Voisimme tehdä saman myös hieman tyylikkäämmin [promiseja ketjuttamalla](https://javascript.info/promise-chaining):
 
 ```js
-app.post('/api/notes', (request, response) => {
+app.post('/api/notes', (request, response, next) => {
   // ...
 
   note
@@ -130,7 +130,7 @@ Eli ensimmäisen _then_:in takaisinkutsussa otamme Mongoosen palauttaman olion _
 Selviämme vieläkin tiiviimmällä koodilla käyttämällä nuolifunktion lyhempää muotoa:
 
 ```js
-app.post('/api/notes', (request, response) => {
+app.post('/api/notes', (request, response, next) => {
   // ...
 
   note

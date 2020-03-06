@@ -117,7 +117,7 @@ app.post('/api/notes', (request, response, next) => {
 We can accomplish the same functionality in a much cleaner way with [promise chaining](https://javascript.info/promise-chaining):
 
 ```js
-app.post('/api/notes', (request, response) => {
+app.post('/api/notes', (request, response, next) => {
   // ...
 
   note
@@ -140,7 +140,7 @@ In the first _then_ we receive _savedNote_ object returned by Mongoose and forma
 We can clean up our code even more by using the more compact syntax for arrow functions:
 
 ```js
-app.post('/api/notes', (request, response) => {
+app.post('/api/notes', (request, response, next) => {
   // ...
 
   note

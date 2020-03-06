@@ -121,14 +121,14 @@ const store = createStore(counterReducer)
 ```
 
 
-The store now uses the reducer to handle <i>actions</i>, which are <i>dispatched</i> or 'sent' to the store with its [dispatch](https://redux.js.org/api-reference/store#dispatch-action)-method.
+The store now uses the reducer to handle <i>actions</i>, which are <i>dispatched</i> or 'sent' to the store with its [dispatch](https://redux.js.org/api/store#dispatchaction)-method.
 
 ```js
 store.dispatch({type: 'INCREMENT'})
 ```
 
 
-You can find out the state of the store using the method [getState](https://redux.js.org/api-reference/store#getstate).
+You can find out the state of the store using the method [getState](https://redux.js.org/api/store#getstate).
 
 
 For example the following code: 
@@ -158,7 +158,7 @@ would print the following to the console
 because at first the state of the store is 0. After three <i>INCREMENT</i>-actions the state is 3. In the end, after <i>ZERO</i> and <i>DECREMENT</i> actions, the state is -1.
 
 
-The third important method the store has is [subscribe](https://redux.js.org/api-reference/store#subscribe-listener), which is used to create recall functions the store calls when its state is changed. 
+The third important method the store has is [subscribe](https://redux.js.org/api/store#subscribelistener), which is used to create recall functions the store calls when its state is changed. 
 
 
 If, for example, we would add the following function to subscribe, <i>every change in the store</i> would be printed to the console.

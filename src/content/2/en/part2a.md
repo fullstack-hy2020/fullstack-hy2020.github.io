@@ -398,7 +398,7 @@ const App = ({ notes }) =>
 
 Note, that the <i>key</i> attribute must now be defined for the <i>Note</i> components, and not for the <i>li</i> tags like before. 
 
-A whole React application can be written on a single file. Although that is, of course, not very practical. Common practice is to declare each component in their own file as an <i>ES6-module</i>.
+A whole React application can be written in a single file. Although that is, of course, not very practical. Common practice is to declare each component in their own file as an <i>ES6-module</i>.
 
 We have been using modules the whole time. The first few lines of the file:
 
