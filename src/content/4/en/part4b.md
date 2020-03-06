@@ -103,7 +103,7 @@ module.exports = {
 }
 ```
 
-The <i>.env</i> file has <i>separate variables</i> for the database addresses of the development and test databases (the addresses shown in the example are for locally running databases):
+The <i>.env</i> file has <i>separate variables</i> for the database addresses of the development and test databases:
 
 ```bash
 MONGODB_URI=mongodb+srv://fullstack:secred@cluster0-ostce.mongodb.net/note-app?retryWrites=true

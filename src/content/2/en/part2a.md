@@ -322,7 +322,7 @@ The use of curly braces will cause some headache in the beginning, but you will 
 
 ### Anti-pattern: array indexes as keys
 
-We could have made the error message on our console disappear by using the array indexes as keys. The indexes can be retrieved by passing a second parameter to the map-method: 
+We could have made the error message on our console disappear by using the array indexes as keys. The indexes can be retrieved by passing a second parameter to the callback function of the map-method: 
 
 ```js
 notes.map((note, i) => ...)

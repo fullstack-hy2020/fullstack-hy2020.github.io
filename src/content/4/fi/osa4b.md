@@ -89,7 +89,7 @@ module.exports = {
 }
 ```
 
-Tiedostossa <i>.env</i> on nyt määritelty <i>erikseen</i> sekä sovelluskehitysympäristön että testausympäristön tietokannan osoite (esimerkissä molemmat ovat sovelluskehityskoneen lokaaleja mongo-kantoja):
+Tiedostossa <i>.env</i> on nyt määritelty <i>erikseen</i> sekä sovelluskehitysympäristön että testausympäristön tietokannan osoite:
 
 ```bash
 MONGODB_URI=mongodb+srv://fullstack:secret@cluster0-ostce.mongodb.net/note-app?retryWrites=true
