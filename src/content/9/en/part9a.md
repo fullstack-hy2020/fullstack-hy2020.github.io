@@ -31,11 +31,11 @@ The compiler also performs a static code analysis, so it can emit warnings or er
 
 **The language service** collects type information from the source code in such a format, that development tools can utilize it for providing intellisense, type hints and possible refactoring alternatives.
 
-## TypeScript key language features
+### TypeScript key language features
 
 Here are described some of the key features of the TypeScript language. This description is intended to provide you with some basic knowledge, that will help you understand more of what is to come during this course.
 
-### Type annotations
+#### Type annotations
 
 Type annotations in TypeScript are lightweight ways to record the intended contract of the function or variable. In the example below we have defined, that the `greeter` function will accept one argument of type string and one of type number. The function will return a string.
 
@@ -50,11 +50,11 @@ const age = 22;
 document.body.textContent = birthdayGreeter(birthdayHero, 22);
 ```
 
-### Structural typing
+#### Structural typing
 
 TypeScript is a structurally typed language. In structural typing, an element is considered to be compatible with another if, for each feature within the second element's type, a corresponding and identical feature exists in the first element's type. Two types are considered to be identical if each is compatible with the other.
 
-### Type inference
+#### Type inference
 
 In TypeScript, the compiler can attempt to infer the type information if no explicit type has been specified. The inference is done based on the assigned value and it's usage.
 The type inference takes place when initializing variables and members, setting parameter default values, and determining function return types.
@@ -92,7 +92,7 @@ callsFunction((result) => {
 });
 ```
 
-### Type erasure
+#### Type erasure
 
 TypeScript removes type annotations, interfaces, type aliases, and other type system constructs during compilation.
 
@@ -112,7 +112,7 @@ This means that at runtime, there is no information present that says that some 
 
 The lack of runtime type information can be surprising for programmers who are used to extensively using reflection or other metadata systems.
 
-## Why should one use TypeScript?
+### Why should one use TypeScript?
 
 On different forums, you may stumble upon a lot of different arguments either for or against TypeScript. The truth is probably as vague as: it depends on your need and use of the functions, that TypeScript offers. Anyway, here are explained some of our reasoning behind why we think that the use of TypeScript may have some advantages.
 
@@ -126,7 +126,7 @@ A third advantage with TypeScript is the more **specific and smarter intellisens
 
 All the advantages above are together extremely helpful when you have a need to refactor your code. The static code analysis emits warnings if you have any errors in your code and the intellisense can give you hints about available properties and even possible refactoring options. The code level documentation helps you understand the existing code, and with the help of TypeScript it is also very easy to start using the newest JavaScript language features at an early stage, by just altering the configuration.
 
-## What does TypeScript not fix?
+### What does TypeScript not fix?
 
 As mentioned before, TypeScript type annotations and type checking exist only at compile time and no longer at runtime, so even if the compiler does not give any errors, runtime errors are still possible. Especially when handling external input or if you use the dynamic type `any` in your code.
 
