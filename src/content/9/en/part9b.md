@@ -135,7 +135,7 @@ Slightly too much weight
 <div class="content">
 
 
-## Creating your first own Types
+### Creating your first own Types
 
 Let's expand our multiplicator and create a little bit more useful calculator, that also supports addition and division. The calculator should accept three arguments: Two numbers and then the operation, which tells the calculator what to do with those numbers; either 'multiply', 'add' or 'divide'.
 
@@ -702,7 +702,8 @@ Now let's set up our eslint by creating a file .eslintrc to follow the following
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint"],
-  "rules": {
+  
+  : {
     "@typescript-eslint/no-explicit-any": 2
   }
 }
@@ -741,6 +742,7 @@ The _@typescript-eslint_ plugin has lots of TypeScript-only lint rules but also 
   },
   "rules": {
     "@typescript-eslint/semi": ["error"],
+    "@typescript-eslint/no-explicit-any": 2,
     "@typescript-eslint/explicit-function-return-type": 0,
     "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
     "no-case-declarations": 0
