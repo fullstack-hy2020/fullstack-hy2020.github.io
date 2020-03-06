@@ -702,7 +702,8 @@ Now let's set up our eslint by creating a file .eslintrc to follow the following
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint"],
-  "rules": {
+  
+  : {
     "@typescript-eslint/no-explicit-any": 2
   }
 }
@@ -741,6 +742,7 @@ The _@typescript-eslint_ plugin has lots of TypeScript-only lint rules but also 
   },
   "rules": {
     "@typescript-eslint/semi": ["error"],
+    "@typescript-eslint/no-explicit-any": 2,
     "@typescript-eslint/explicit-function-return-type": 0,
     "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
     "no-case-declarations": 0
