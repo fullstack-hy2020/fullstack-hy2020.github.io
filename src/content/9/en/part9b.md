@@ -508,6 +508,8 @@ Then make sure you are able to run both scripts and fix every place of error.
 </div>
 
 <div class="content">
+  
+### Adding express to the mix
 
 Right now we are at a pretty good place, our project is set up and we have two runnable calculators there. But since we are studying fullstack development and not only doing funny little scripts, it might be time to put the scripts to respond to a HTTP-request, so let's set up Express.
 
@@ -556,7 +558,7 @@ import express from 'express';
 
 **Hint:** by clicking the _Quick fix..._ button VSCode offers you a possibility to fix the issue automatically. Keep your eyes open all the time for these helpers/quick fixes the IDE offers you; listening to your editor usually only makes your code better and easier to read and automatic fixes for issues can be a major time saver.
 
-Now we run into the another problem, complain in the newluy created import. Once again the editor is our biggest friend when trying to find out what the issue is about:
+Now we run into the another problem, complain in the newly created import. Once again the editor is our biggest friend when trying to find out what the issue is about:
 
 ![](../../images/9/7.png)
 
@@ -666,6 +668,8 @@ Do not copy the caclucator code to file _index.ts_, make it a [typescript module
 
 <div class="content">
 
+### THe horrors of _any_
+
 Now that we have our first small endpoints done, one thing to notice is that in these minimal examples _barely any TypeScript is actually in the code_. When looking more closely at the code, we can see a few possibly dangerous things. Let's look at our endpoint _calculate_, that takes the familiar two integer values and an operation string.
 
 When we hover on the _calculate_ function, we can see once again help from the IDE:
@@ -728,7 +732,7 @@ And let's set up the _lint_ script to inspect the files with _.ts_ extension by 
 
 And now live code inspection should be working!
 
-The _@typescript-eslint_ plugin has lots of TypeScript-only lint rules but also all basic eslint rules are usable in TypeScript projects. We should probably for now just use the recommended settings and see where it takes us and modify our rules as we go, if we find something we want to behave differently. On top of the regular recommended settings we should already try to get familiar with coding styles we are using this week and _set the semicolon at the end of each line of code to required_. *So let's set the _.eslintrc_ to include the following:
+The _@typescript-eslint_ plugin has lots of TypeScript-only lint rules but also all basic eslint rules are usable in TypeScript projects. We should probably for now just use the recommended settings and see where it takes us and modify our rules as we go, if we find something we want to behave differently. On top of the regular recommended settings we should already try to get familiar with coding styles we are using this week and _set the semicolon at the end of each line of code to required_. So let's set the _.eslintrc_ to include the following:
 
 ```json
 {
