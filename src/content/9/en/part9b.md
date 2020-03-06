@@ -7,6 +7,8 @@ lang: en
 
 <div class="content">
 
+### Setting things up
+
 First things first: Install TypeScript support to your IDE of choice. For [Visual Studio Code](https://code.visualstudio.com/)  you need the [typescript hero](https://marketplace.visualstudio.com/items?itemName=rbbit.typescript-hero) extension.
 
 As mentioned before, TypeScript code is not runnable by itself, but it first needs to be compiled into runnable JavaScript code. When TypeScript is compiled into JavaScript, the code becomes subject for type erasure. This means that type annotations, interfaces, type aliases, and other type system constructs are removed from the code and the result is pure ready-to-run JavaScript.
@@ -298,7 +300,7 @@ Let's return to the basic idea of TypeScript. TypeScript expects all globally us
 
 As in the world of npm, TypeScript also celebrates open source code and the community around it is active and continuously reacting to updates and changes in commonly used npm-packages. That is why the typings for npm-packages are almost always to be found, so that you won't be alone creating types for all of your thousands of dependencies.
 
-Generally, (since the release of TypeScript 2.0) types for existing packages can be found by under the _@types`-organization within npm, so that you can add the relevant types to your project by installing an npm package with the name of your package with a @types/ - prefix, for example: _npm install --save-dev @types/react_, @types/express, @types/lodash, @types/jest, @types/mongoose and the list goes on and on. The _@types/*_ are maintained by [Definitely typed](http://definitelytyped.org/), a community project with the goal to mainting types of everything in one place.
+Generally, (since the release of TypeScript 2.0) types for existing packages can be found by under the _@types_-organization within npm, so that you can add the relevant types to your project by installing an npm package with the name of your package with a @types/ - prefix, for example: _npm install --save-dev @types/react_, @types/express, @types/lodash, @types/jest, @types/mongoose and the list goes on and on. The _@types/*_ are maintained by [Definitely typed](http://definitelytyped.org/), a community project with the goal to mainting types of everything in one place.
 
 If you happen to run into a package that doesn't yet have their own typings it is fairly simple to add your own, but more on to that later this week.
 
