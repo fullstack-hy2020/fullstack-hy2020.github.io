@@ -3,7 +3,7 @@ module.exports = {
     title: 'Full Stack -websovelluskehitys 2020',
     description: '',
     author: 'Houston Inc. Consulting oy',
-    siteUrl: 'https://https://fullstack-hy2020.github.io/',
+    siteUrl: 'https://fullstack-hy2020.github.io/',
   },
   plugins: [
     {
