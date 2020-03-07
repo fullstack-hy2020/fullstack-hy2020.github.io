@@ -278,13 +278,13 @@ The program is working if:
 If you eg. would call the function with parameters _[1, 0, 2, 4.5, 0, 3, 1, 0, 4]_ and _2_ it could return
 
 ```js
-{ periodLength: 7,
-  trainingDays: 4, 
+{ periodLength: 9,
+  trainingDays: 6,
   success: false,
   rating: 2,
   ratingDescription: 'not too bad but could be better',
-  target: 1.5,
-  average: 1.2142857142857142 }
+  target: 2,
+  average: 1.7222222222222223 }
 ```
 </div>
 
