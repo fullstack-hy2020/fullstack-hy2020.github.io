@@ -1,5 +1,5 @@
 ---
-mainImage: ../../../images/part-8.svg
+mainImage: ../../../images/part-9.svg
 part: 9
 letter: a
 lang: en
