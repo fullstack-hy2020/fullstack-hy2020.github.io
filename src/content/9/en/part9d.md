@@ -815,7 +815,7 @@ to control what view is visible in the fronend. You might want to have a look on
 
 The result could look like the following:
 
-![](../../images/9/39.png)
+![](../../images/9/39a.png)
 
 The gender is shown with react-semantic-ui component [Icon](https://react.semantic-ui.com/elements/icon/#gendersicons-can-represent-genders-or-types-of-sexuality) 
 
@@ -939,21 +939,27 @@ export type Entry =
 
 #### 9.20: patientor, step3
 
-Define the types <i>OccupationalHealthCareEntry</i> and <i>HospitalEntry</i> so that those conform the example data. Ensure that your backend returns the entries properly when you go to individual patients route
+Define the types <i>OccupationalHealthCareEntry</i> and <i>HospitalEntry</i> so that those conform with the example data. Ensure that your backend returns the entries properly when you go to a individual patient route
 
 ![](../../images/9/40.png)
 
-Use the types properly in backend!
+Use types properly in the backend! For now there is no need to do a proper validation for all the fields if the entries in the backend, it is enough e.g. to check that the field <i>type</i> has a correct value.
 
 #### 9.21: patientor, step4
 
-Add the new types according to the material or checkout [this branch from the sample repo](https://github.com/TuukkaP/fsopen-frontend/tree/exercise-3.6-entries). Replace your patient data set with the [full patient data](https://github.com/fullstack-hy2020/misc/blob/master/patients.ts). Add the missing entry types and make it compile with all the entry types found in the full patient data set.
+Extend the patient page in the fronend to list the <i>data</i>, <i>description</i> and <i>diagnose codes</i> of patient's entries. 
 
-After it compiles make the frontend fetch the patient entries when entering the patient page. 
+You can use the same type definiton for <i>Entry</i> in the frontend. For these exercises it is enough just to copy/paste the definitions from backend to frontend.
+
+Your solution could look like this:
+
+![](../../images/9/41.png)
 
 #### 9.22: patientor, step5
 
-Fetch and add diagnoses to application state from <i>/api/diagnosis</i> endpoint. Use the new diagnosis data to show descriptions for patients diagnosis code.
+Fetch and add diagnoses to application state from <i>/api/diagnosis</i> endpoint. Use the new diagnosis data to show descriptions for patients diagnosis code:
+
+![](../../images/9/42.png)
 
 </div>
 
