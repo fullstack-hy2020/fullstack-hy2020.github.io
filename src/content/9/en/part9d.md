@@ -598,9 +598,9 @@ export const reducer = (state: State, action: Action): State => {
 };
 ```
 
-The main difference is now that the state is a dictionary instead of array that we used in [part 6](/en/part6).
+The main difference is now that the state is a dictionary (or object) instead of array that we used in [part 6](/en/part6).
 
-There is lots of things happening in the file <i>state.ts</i> that is taking care of setting up the contex. Firstly it creates a [context provider](https://reactjs.org/docs/context.html#contextprovider)
+There are lot of things happening in the file <i>state.ts</i> that is taking care of setting up the contex. Firstly it uses <i>useReducer</i> hook to create a [context provider](https://reactjs.org/docs/context.html#contextprovider)
 
 ```js
 export const StateProvider: React.FC<StateProviderProps> = ({
@@ -616,15 +616,15 @@ export const StateProvider: React.FC<StateProviderProps> = ({
 };
 ```
 
-That makes <i>state</i> and <i>dispatch</i> function available in all the compomnents, thanks to the setup in componment <i>App</i>:  
+Provider makes <i>state</i> and <i>dispatch</i> function available in all the compomnents, thanks to the setup in componment <i>App</i>:  
 
 ```js 
+import { reducer, StateProvider } from "./state"; // highlight-line
+
+// ...
+
 const App: React.FC = () => {
-  React.useEffect(() => {
-    axios.get<void>(
-      `${apiBaseUrl}/ping`
-    );
-  }, []);
+  // ...
 
   return (
     <StateProvider reducer={reducer}> // highlight-line
@@ -651,7 +651,7 @@ It also defines the <i>useStateValue</i> hook
 export const useStateValue = () => useContext(StateContext);
 ```
 
-and the components that deed to access the state or dispatcher use it to get hold of those:
+and the components that need to access the state or dispatcher use it to get hold of those:
 
 ```js 
 import { useStateValue } from "../state";
@@ -664,55 +664,166 @@ const PatientListPage: React.FC = () => {
 }
 ```
 
-Do not worry if this seems confusing, it surely is until you have studied the [context documentation](https://reactjs.org/docs/context.html) and its use as [state management](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe). You do not need to understand all this completely for completing the exercises! 
+Do not worry if this seems confusing, it surely is until you have studied the [context documentation](https://reactjs.org/docs/context.html) and its use in [state management](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe). You do not need to understand all this completely for doing the exercises! 
+
+It is actually quite typical that when you start working with a existing application, at the beginning you do not understand 100% what happens under the hood. If the app has been properly structured you can just trust that if you are making careful modifications, the app still works despite you did not understand all the internals. Over the time you can then get grasp of the more unfamiliar parts but it does not happen overnight when working with a large codebase.
 
 ### Patient listing page
 
-Let's go through the _PatientListPage/index.ts_ as you can take some notes there to help you fetch data from backend and update the applications state. _PatientListPage_ uses our custom hook for injecting state and dispatcher for updating the state. As we are listing patients we only need the _patients_ property from state. We also have some _useState_ hooks for managing modal visibility and forms error handling. Form walkthrough will be done in the upcoming parts.
+Let's go through the <i>PatientListPage/index.ts</i> as you can take inspiration from there to help you fetch data from backend and update the applications state. <i>PatientListPage</i> uses our custom hook for injecting state and dispatcher for updating the state.  As we are listing patients we only need the <i>patients</i> property from state:
+
+```js
+import { useStateValue } from "../state";
+
+const PatientListPage: React.FC = () => {
+  const [{ patients }, dispatch] = useStateValue();
+  // ...
+}
+```
+
+We also have some <i>useState</i> hooks for managing modal visibility and form error handling. Form walkthrough will be done in the upcoming parts.
 
 ```js
 const [modalOpen, setModalOpen] = React.useState<boolean>(false);
 const [error, setError] = React.useState<string | undefined>();
 ```
 
-We give _useState_ hook type parameter that is applied for the actual state. So _modalOpen_ is a _boolean_ and _error_ has type _string | undefined_ respectively both set functions given by _useState_ hook are functions that accept only arguments according to the type parameter given. Eg. the exact type for _setModalOpen_ function is _React.Dispatch<React.SetStateAction<boolean>>_. We have also _openModal`and _closeModal_ helper functions for better readability and convenience.
+We give <i>useState</i> hook type parameter that is applied for the actual state. So <i>modalOpen</i> is a <i>boolean</i> and <i>error</i> has type <i>string | undefined</i> respectively. Both set functions returned by <i>useState</i> hook are functions that accept only arguments according to the type parameter given. Eg. the exact type for <i>setModalOpen</i> function is <i>React.Dispatch<React.SetStateAction<boolean>></i>. We have also <i>openModal</i> and <i>closeModal</i> helper functions for better readability and convenience:
 
-Frontends types are based on what you have created when developing the backend in the previous part. Let's add a new type _Entry_ which represents a light weight patient journal entry. It consists of journal text ie. <i>description</i>, creation date, information regarding the specialist who created it and possible diagnosis codes. Diagnosis codes map to the ICD-10 codes returned from the _/diagnoses_ endpoint. Our naive implementation is that patient has an array of entries.
+```js
+const openModal = (): void => setModalOpen(true);
 
-We are fetching patient from the backend using axios and we are giving the _axios.get_ function a type parameter as to what is the type for the response data. **A word of warning!** Passing the type parameter for axios will not validate any data and is quite dangerous especially if you are using external APIs. You can create custom validation functions taking in the whole payload and returning the correct type or you can use type guard. Both are valid. There are also many libraries providing validation through different kind of schemas eg. [io-ts](https://github.com/gcanti/io-ts). For simplicity we will continue trusting our own work and trust that we will get _Patient[]_ from the backend.
+const closeModal = (): void => {
+  setModalOpen(false);
+  setError(undefined);
+};
+```
 
-As our app is quite small we will update the state by simply calling the _dispatch_ function provided to us by _useStateValue_ hook. As we have created type definition for our actions in the _state/reducer.ts_. Compiler helps make sure that we dispatch actions according to our _Action_ type with predefined type string and payload.
+Frontends types are based on what you have created when developing the backend in the previous part.
+
+We are fetching patient from the backend using [axios](https://github.com/axios/axios) and we are giving the <i>axios.get</i> function a type parameter as to what is the type for the response data:
+
+````js
+const fetchPatientList = React.useCallback(async () => {
+  const { data: patientListFromApi } = await axios.get<Patient[]>(
+    `${apiBaseUrl}/patients`
+  );
+
+  dispatch({ type: "SET_PATIENT_LIST", payload: patientListFromApi });
+}, [dispatch]);
+
+React.useEffect(() => {
+  try {
+    fetchPatientList(); 
+  } catch (e) {
+    console.error(e);
+  }
+}, [fetchPatientList]);
+````
+
+ **A word of warning!** Passing the type parameter for axios will not validate any data and is quite dangerous especially if you are using external APIs. You can create custom validation functions taking in the whole payload and returning the correct type or you can use type guard. Both are valid. There are also many libraries providing validation through different kind of schemas eg. [io-ts](https://github.com/gcanti/io-ts). For simplicity we will continue trusting our own work and trust that we will get data of the correct form from the backend.
+
+As our app is quite small we will update the state by simply calling the <i>dispatch</i> function provided to us by <i>useStateValue</i> hook. As we have created type definition for our actions in the <i>state/reducer.ts</i>. Compiler helps make sure that we dispatch actions according to our <i>Action</i> type with predefined type string and payload.
 
 ```js
 dispatch({ type: "SET_PATIENT_LIST", payload: patientListFromApi });
 ```
 
+Note how the code has wrapped the code of function <i>fetchPatientList</i> with [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback). This guarantees that the callback function is not recreated in with each render of the function. 
+
+If we would have defined the function as follows
+
+````js
+const fetchPatientList = async () => {
+  const { data: patientListFromApi } = await axios.get<Patient[]>(
+    `${apiBaseUrl}/patients`
+  );
+
+  dispatch({ type: "SET_PATIENT_LIST", payload: patientListFromApi });
+}
+````
+
+the effrect hook would be run in <i>every render</i> since the effect hook has includes the function in the dependency array.
+
+We could get rid of this "problem" by moving the definition of <i>fetchPatientList</i> inside the useEffect hook:
+
 ```js
-export type Action =
-  | {
-      type: "SET_PATIENT_LIST";
-      payload: Patient[];
-    }
-  | {
-      type: "ADD_PATIENT";
-      payload: Patient;
-    };
+React.useEffect(() => {
+  const fetchPatientList = async () => {
+    const { data: patientListFromApi } = await axios.get<Patient[]>(
+      `${apiBaseUrl}/patients`
+    );
+    dispatch({ type: "SET_PATIENT_LIST", payload: patientListFromApi });
+  }
+  try {
+    fetchPatientList();
+  } catch (e) {
+    console.error(e);
+  }
+}, [dispatch]);
 ```
+
 </div>
 
 <div class="tasks">
 
 ### Exercises 9.18.-9.19
 
-#### 9.18
+We will soon add new type <i>Entry</i> for our app that represents a light weight patient journal entry. It consists of journal text ie. <i>description</i>, creation date, information regarding the specialist who created it and possible diagnosis codes. Diagnosis codes map to the ICD-10 codes returned from the <i>/api/diagnoses</i> endpoint. Our naive implementation will be that patient has an array of entries.
 
-Create an endpoint _/patients/{id}_ which returns all of the patient information for one patient and create a page for showing the patient information.
+Before going to this, let us do some preparatory work.
+
+#### 9.18: patientor, step1
+
+Create an endpoint <i>/api/patients/{id}</i> to that returns all of the patient information for one patient, including also the array of patient entries that is still empty for all the patients. For the time being, expand the backend types as follows:
+
+```js
+export type Entry = {
+}
+
+export type Patient = {
+  id: string,
+  name: string,
+  dateOfBirth: string
+  ssn: string
+  occupation: string
+  gender: Gender
+  entries: Entry[] // highlight-line
+}
+
+export type PublicPatient = Omit<Patient, 'ssn' | 'entries' >  // highlight-line
+```
+
+Response should look as follows:
+
+![](../../images/9/38a.png)
+
+#### 9.19: patientor, step2
+
+Create a page for showing the patient information in the fronend.
 
 Patient information should be accessible when clicking eg. the patients name.
 
-#### 9.19
+After fetching the patient information from backend add the fetched information to the applications state. You can differentiate between which fields you get from the <i>/api/patients</i> and <i>/api/patients/{id}</i> endpoints. You do not need to fetch the information if it already is in the app state. This is a naive implementation disregarding the need to update without reloading the app.
 
-After fetching the patient information from backend add the fetched information to the applications state. You can differentiate between which fields you get from the _/patients_ and _/patients/{id}_ endpoints. You do not need to fetch the information if we already have the data in our state. This is a naive implementation disregarding the need to update without reloading the app.
+Since we have now the state in contex, you need a new action type for updating the indvidual patient's data.
+
+Application uses [Semantic UI React](https://react.semantic-ui.com/) for styling, that is quite simillar to [React Bootstrap](https://react-bootstrap.github.io/) and [MaterialUI](https://material-ui.com/) that we covered in [part 7](/en/part7/more_about_styles). You may also use it for the new components but that is up to you sincew the main focus is now in Typescript.
+
+Application also uses the [react router](https://reacttraining.com/react-router/web/guides/quick-start) 
+to control what view is visible in the fronend. You might want to have a look on [part 7](/en/part7/react_router) if you have not already have a grasp on how router works.
+
+The result could look like the following:
+
+![](../../images/9/39.png)
+
+The gender is shown with react-semantic-ui component [Icon](https://react.semantic-ui.com/elements/icon/#gendersicons-can-represent-genders-or-types-of-sexuality) 
+
+**Note** that in order to access the id in the url, you need to give [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) a proper type argument:
+
+```js
+const id = useParams<{ id: string }>().id
+```
 
 </div>
 
@@ -720,13 +831,13 @@ After fetching the patient information from backend add the fetched information 
 
 ### Full entries
 
-We implemented in the part 2 an endpoint which retreives the diagnoses but we still are not using that endpoint at all. That makes sense since our application currently consists only of listing patients and their information. Now it would be a great idea to expand our data by a bit; let's add possible _Entry_ data to our patient data so that each patient can have medical _Entries_ that include possible _Diagnoses_.
+We implemented in the [exercise 9.12.](http://localhost:8000/en/part9/typing_the_express_app#exercises-9-12-9-13) an endpoint for fetching the diagnoses but we still are not using that endpoint at all. That makes sense since our application currently consists only of listing patients and their information. Now it would be a great idea to expand our data by a bit; let's add possible <i>Entry</i> data to our patient data so that each patient can have medical entries that include possible diagnoses.
 
-Let's ditch our old patient data and start using [this expanded format](https://github.com/fullstack-hy2020/misc/blob/master/patients.ts).
+Let's ditch our old patient seed data from backend and start using [this expanded format](https://github.com/fullstack-hy2020/misc/blob/master/patients.ts).
 
-**Notice:** This time the data is not in .json but instead in the ready .ts format. You should already have the complete _Gender_ and _Patient_ types implemented so only correct the paths where they are imported from if needed.
+**Notice:** This time the data is not in .json but instead in the .ts-format. You should already have the complete <i>Gender</i> and <i>Patient</i> types implemented so only correct the paths where they are imported from if needed.
 
-Once we have replaced our old data with the new one we can see how the IDE immediately complains since the patient data has the extra _entries_ field. So let's just create an _Entry_ type based on the data we have.
+So us now create a proper <i>Entry</i> type based on the data we have.
 
 When looking at the data closer, we can see that the entries in the data differ actually quite a lot from each other. For example, let's take the first two entries we can see there:
 
@@ -761,11 +872,13 @@ When looking at the data closer, we can see that the entries in the data differ 
 }
 ```
 
-Immediately we can see that the first few fields are the same, but the first one only has the _discharge_ field and the second one only _employerName_ and _sickLeave_. So all the entries seem to have somethign in common but some are entry specific. When looking at the entries through the _type_ field we can see that there actually can be distinguished three separate kinds of _Entries_: _OccupationalHealthcare_, _Hospital_ and _HealthCheck_. This indicates the need for three separate kinds of _Types_ but since they all seem to have something in common we might just want to create a base enty interface that we could extend with the different fields in each type.
+Immediately we can see that the first few fields are the same, but the first one only has the <i>discharge</i> field and the second one only <i>employerName</i> and <i>sickLeave</i>. So all the entries seem to have somethign in common but some are entry specific. 
 
-When looking at the data, it seems that the fields _id_, <i>description</i>, _date_ and _specialist_ are something that can be found from each entry. On top of that, it seems that the _diagnosisCodes_ is only found in one _OccupationalHealthCare_ and one _Hospital_ type entry. Since it is not always used even in those types of entries, it is safe to assume that the field is _optional_ and we could consider it to be optional even in the _HealthCheck_ type entry, just not in use in these entries right here.
+When looking at the entries through the <i>type</i> field we can see that there actually is three separate kinds of entries: <i>OccupationalHealthcare</i>, <i>Hospital</i> and <i>HealthCheck</i>. This indicates the need for three separate kinds of types but since they all seem to have something in common we might just want to create a base entry interface that we could extend with the different fields in each type.
 
-So our _BaseEntry_ from which each type could be extended from with these definitions would be the following:
+When looking at the data, it seems that the fields <i>id</i>, <i>description</i>, <i>date</i> and <i>specialist</i> are something that can be found from each entry. On top of that, it seems that the <i>diagnosisCodes</i> is only found in one <i>OccupationalHealthCare</i> and one <i>Hospital</i> type entry. Since it is not always used even in those types of entries, it is safe to assume that the field is optional and we could consider it to be optional even in the <i>HealthCheck</i> type entry, just not in use in these entries right here.
+
+So our <i>BaseEntry</i> from which each type could be extended from with would be the following:
 
 ```js
 interface BaseEntry {
@@ -777,7 +890,7 @@ interface BaseEntry {
 }
 ```
 
-If we want to finetune it a little bit further, since we already have a _Diagnosis_ type defined in the backend, we might just want to refer to the _Diagnosis_ types code field directly, in case the type of it ever changes, like this:
+If we want to finetune it a little bit further, since we already have a <i>Diagnosis</i> type defined in the backend, we might just want to refer to the <i>Diagnosis</i> types code field directly, in case the type of it ever changes, like this:
 
 ```js
 interface BaseEntry {
@@ -785,25 +898,17 @@ interface BaseEntry {
   description: string;
   date: string;
   specialist: string;
-  diagnosisCodes?: DiagnosisCode[];
+  diagnosisCodes?: Array<Diagnose['code']>;
 }
 ```
 
-`Array<Type>_ is just a different way to say _Type[]_. In cases like this it is just much more clear to use the array convention since the other option would be to define the type by saying _Diagnosis['code'][]_ which starts to look a little bit strange.
+As you might remember <i>Array&lt;Type&gt;</i> is just an alternative way to say <i>Type[]</i>. In cases like this it is just much more clear to use the array convention since the other option would be to define the type by saying <i>Diagnosis['code'][]</i> which starts to look a little bit strange.
 
-Now that we have the _BaseEntry_ defined we can start creating the extended entry types we will actually use. Let's start by creating the _HealthCheckEntry_ type.
+Now that we have the <i>BaseEntry</i> defined we can start creating the extended entry types we will actually use. Let's start by creating the <i>HealthCheckEntry</i> type.
 
-The entries with the type _HealthCheck_ contain the field _HealthCheckRating_, which can be any of the integer values from 0 to 3, 0 meaning _Healthy_ and 3 informing of a _CriticalRisk_: the perfect case for an enum definition. With these specifications we could write a _HealthCheckEntry_ type definition like the following:
+The entries with the type <i>HealthCheck</i> contain the field <i>HealthCheckRating</i>, which can be any of the integer values from 0 to 3, 0 meaning <i>Healthy</i> and 3 informing of a <i>CriticalRisk</i>: the perfect case for an enum definition. With these specifications we could write a <i>HealthCheckEntry</i> type definition like the following:
 
 ```js
-interface BaseEntry {
-  id: string;
-  description: string;
-  date: string;
-  specialist: string;
-  diagnosisCodes?: Array<Diagnosis["code"]>;
-}
-
 export enum HealthCheckRating {
   "Healthy" = 0,
   "LowRisk" = 1,
@@ -817,7 +922,7 @@ interface HealthCheckEntry extends BaseEntry {
 }
 ```
 
-Now we only need to create the _OccupationalHealthCareEntry_ and _HospitalEntry_ types so we can combine and export them as the Entry type like this:
+Now we only need to create the <i>OccupationalHealthCareEntry</i> and <i>HospitalEntry</i> types so we can combine and export them as the Entry type like this:
 
 ```js
 export type Entry =
@@ -830,17 +935,25 @@ export type Entry =
 
 <div class="tasks">
 
-### Exercises 9.20.-9.21.
+### Exercises 9.20.-9.22.
 
-#### 9.20
+#### 9.20: patientor, step3
+
+Define the types <i>OccupationalHealthCareEntry</i> and <i>HospitalEntry</i> so that those conform the example data. Ensure that your backend returns the entries properly when you go to individual patients route
+
+![](../../images/9/40.png)
+
+Use the types properly in backend!
+
+#### 9.21: patientor, step4
 
 Add the new types according to the material or checkout [this branch from the sample repo](https://github.com/TuukkaP/fsopen-frontend/tree/exercise-3.6-entries). Replace your patient data set with the [full patient data](https://github.com/fullstack-hy2020/misc/blob/master/patients.ts). Add the missing entry types and make it compile with all the entry types found in the full patient data set.
 
-After it compiles make the frontend fetch the patient entries when entering the patient page. For simplicity you can return all entries from _/patients/{id}_ path as we want to show all of the patient related information on the same page. If we would have a lot of data to show and fetch this wouldn't be the optimal solution (a better one would be _/patients/{id}/entries`) but luckily we do not have to worry about it. Remember to update the state with new patient info.
+After it compiles make the frontend fetch the patient entries when entering the patient page. 
 
-#### 9.21
+#### 9.22: patientor, step5
 
-Fetch and add diagnoses to application state from _/diagnosis_ endpoint. Use the new diagnosis data to show descriptions for patients diagnosis code.
+Fetch and add diagnoses to application state from <i>/api/diagnosis</i> endpoint. Use the new diagnosis data to show descriptions for patients diagnosis code.
 
 </div>
 
@@ -1120,7 +1233,7 @@ With this material you should be able to complete the rest of this weeks exercis
 
 Exercises 9.22.-9.25.
 
-#### 9.22
+#### 9.22: patientor, step5
 
 Extend the Entry-listing in the patient page to include the Entry's details with a new component _EntryDetails_. _EntryDetails_ should show rest of the information of the patients entries distinguishing different types from each other. You can use the help from _Icons_ and _SemanticCOLORS_ from the _semantic-ui-react_ package. Refer to its [documentation](https://react.semantic-ui.com/) when searching for the appropriate visuals for the component.
 
@@ -1132,17 +1245,17 @@ The resulting entries in the listing should look something like this:
 
 ![](../../images/9/36.png)
 
-#### 9.23
+#### 9.23: patientor, step6
 
 So far we have established that the patients can have different types of entries, but we don't yet have any way of adding entries for our patients in our app, so it would at the moment be a pretty useless electronic medical record. So, your next task is to add an endpoint to your backend, through which you can post an entry for a patient. Remember that we have different kinds of entries in our app, so our backend should also support all those types and check that at least all required fields are given for each type.
 
-#### 9.24
+#### 9.24: patientor, step7
 
 Now that our backend supports adding of entries, we want to add the corresponding functionality the frontend. In this exercise you should add a form for adding an entry for a patient. An intuitive place for opening the form would be on the patient page. You should be able to choose the entry type for the new entry and the form should display an error if some required value is missing and you try to submit the form. Upon a successful submit the new entry should be added to the correct person and the patient's entries on the patient page should be updated to contain the new entry.
 
 If you like, you can re-use some of the code from the Add patient form for this exercise, but this is not a requirement.
 
-#### 9.25
+#### 9.25: patientor, step8
 
 Create a _HealthBar_ component that shows the health rating of a patient.
 

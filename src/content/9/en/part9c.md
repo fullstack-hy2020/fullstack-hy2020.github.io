@@ -255,7 +255,7 @@ The frontend has already been built by outsider experts and you're task is to cr
 
 **Note 3:** Code quality is extremely important, so take extra good care of that your code is _readable_ and that it can be _easily shared_ and by this, you need to end up with a result that is _production ready_, so that the built version of the project is working, and no extra dependencies are included in the end result.
 
-#### 9.10
+#### 9.10: Diagnoses backend, step1
 
 Initialise a buildable project template called _Diagnoses-backend_ that will be used by the frontend. Configure eslint and tsconfig with the same configurations that are used in the material. 
 
@@ -263,7 +263,7 @@ Set up a endpoint that responses to HTTP GET requests to route _/ping_.
 
 You should also configure auto-reloading.
 
-#### 9.11
+#### 9.11: Diagnoses backend, step2
 
 Fork and clone the project [patientor](git clone https://github.com/fullstack-hy2020/patientor). With the help of the README-file start the project. You should be able to use the frontend without a functioning backend.
 
@@ -697,7 +697,7 @@ The response looks like as we expect
 
 Simillarly to Ilari's flight service, we do not use a real database in our app but instead use hardcoded data, that is in the files [diagnoses.json](https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.json) and [patientdata.json](https://github.com/fullstack-hy2020/misc/blob/master/patientdata.json). Download the files and store those into a folder called _data_. All data modification can be done in runtime memory, so during this part it is <i>not necessary to write to a file</i>.
 
-#### 9.12
+#### 9.12: Diagnoses backend, step3
 
 Create a type _Diagnose_ and use it to create endpoint _/api/diagnoses_ for fetching all diagnoses with HTTP GET.
 
@@ -705,7 +705,7 @@ Structure your code properly by using meaninfully named directories and files.
 
 **Note** that _diagnoses_ may or may not contain the field _latin_. You might want to use [optional properties](https://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties) in the type definition.
 
-#### 9.13
+#### 9.13: Diagnoses backend, step4
 
 Create data type _Patient_ and set up a GET-endpoint _/api/patients_ that returns all patients to the frontend excluding field _ssn_. Use a [utility type](https://www.typescriptlang.org/docs/handbook/utility-types.html) to make sure you are selecting and returning only the wanted.
 
@@ -1134,11 +1134,11 @@ After giving _Visibility_ the same treatment our app is finally ready!
 
 ### Exercises 9.14.-9.15.
 
-#### 9.14
+#### 9.14: Diagnoses backend, step5
 
 Create a POST-endpoint _/api/patients_ for adding patients. Ensure that you can add patients also from the frontend.
 
-#### 9.15
+#### 9.15: Diagnoses backend, step6
 
 Set up safe parsing, validation and type guards to the POST _/api/patients_request. 
 
