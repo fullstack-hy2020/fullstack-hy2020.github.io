@@ -117,7 +117,7 @@ Kyselyn tekevän komponentin <i>App</i> koodi näyttää seuraavalta:
 
 ```js
 import React from 'react'
-import { gql, useQuery } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client'
 
 const ALL_PERSONS = gql`
   query {
@@ -275,7 +275,7 @@ const Persons = ({ persons }) => {
     if (result.data) {
       setPerson(result.data.findPerson)
     }
-  }, [result.data])
+  }, [result])
   // highlight-end
 
 // highlight-start
