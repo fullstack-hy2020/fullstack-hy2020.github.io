@@ -24,7 +24,7 @@ Käytetään kurssilla Apollo Clientin versiota [3.0-beta](https://www.apollogra
 
 ![](../../images/8/40ea.png)
 
-Luodaan uusi React-sovellus ja asennetaan siihen [Apollo clientin]https://www.apollographql.com/docs/react/v3.0-beta/get-started/#installation) vaatimat riippuvuudet.
+Luodaan uusi React-sovellus ja asennetaan siihen [Apollo clientin](https://www.apollographql.com/docs/react/v3.0-beta/get-started/#installation) vaatimat riippuvuudet.
 
 ```js
 npm install --save @apollo/client graphql
