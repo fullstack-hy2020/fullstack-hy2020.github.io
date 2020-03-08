@@ -240,7 +240,7 @@ Now we have a minimal working pipeline, with which we can develop our project, w
 
 <div class="tasks">
 
-### Exercises
+### Exercises 9.10.-9.11.
 
 **Before you start the exercises**
 
@@ -265,7 +265,7 @@ You should also configure auto-reloading.
 
 #### 9.11
 
-Fork and clone the project [Diagnoses-frontend](https://github.com/TuukkaP/fsopen-frontend). With the help of the README-file start the project. You should be able to use the frontend without a functioning backend.
+Fork and clone the project [patientor](git clone https://github.com/fullstack-hy2020/patientor). With the help of the README-file start the project. You should be able to use the frontend without a functioning backend.
 
 Ensure that backend answers to frontend's ping requests. Check developer tools to make sure it really works: 
 
@@ -693,9 +693,9 @@ The response looks like as we expect
 
 <div class="tasks">
 
-### Exercises
+### Exercises 9.12.-9.13.
 
-Simillarly to Ilari's flight service, we do not use a real database in our app but instead use hardcoded data, that is in the files [diagnoses.json](https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.json) and [patientdata.json](https://github.com/fullstack-hy2020/misc/blob/master/patientdata.json). Download the files and store those into a folder called _data_. All data modification can be done in runtime memory, so during this part it is *not necessary to write to a file*.
+Simillarly to Ilari's flight service, we do not use a real database in our app but instead use hardcoded data, that is in the files [diagnoses.json](https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.json) and [patientdata.json](https://github.com/fullstack-hy2020/misc/blob/master/patientdata.json). Download the files and store those into a folder called _data_. All data modification can be done in runtime memory, so during this part it is <i>not necessary to write to a file</i>.
 
 #### 9.12
 
@@ -1132,7 +1132,7 @@ After giving _Visibility_ the same treatment our app is finally ready!
 
 <div class="tasks">
 
-### Exercises
+### Exercises 9.14.-9.15.
 
 #### 9.14
 

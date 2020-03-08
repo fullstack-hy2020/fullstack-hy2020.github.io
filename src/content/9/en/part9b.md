@@ -508,7 +508,7 @@ Then make sure you are able to run both scripts and fix every place of error.
 </div>
 
 <div class="content">
-  
+
 ### Adding express to the mix
 
 Right now we are at a pretty good place, our project is set up and we have two runnable calculators there. But since we are studying fullstack development and not only doing funny little scripts, it might be time to put the scripts to respond to a HTTP-request, so let's set up Express.
@@ -562,7 +562,7 @@ Now we run into the another problem, complain in the newly created import. Once 
 
 ![](../../images/9/7.png)
 
-_We still haven't installed the types for the _express_ package_. Let's do what the suggestion says and run:
+We still haven't installed the types for <i>express</i>. Let's do what the suggestion says and run:
 
 ```
 npm install --save-dev @types/express
@@ -634,7 +634,7 @@ And now by running _npm run dev_ we have a working auto-reloading development en
 
 Use the same npm project base and add express to your dependecies and create an endpoint that answers 'Hello Full Stack!'
 
-The project should be served on command _npm start`
+The project should be served on command _npm start_
 
 #### 9.6
 
