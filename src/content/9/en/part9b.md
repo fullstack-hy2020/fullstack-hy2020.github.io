@@ -403,7 +403,7 @@ const multiplicator = (a: number, b: number, printText: string) => {
 }
 try {
   const { value1, value2 } = parseArguments(process.argv);
-  multiplicator(value1, value2, _Multplied ${value1} and ${value2}, the result is:`);
+  multiplicator(value1, value2, `Multiplied ${value1} and ${value2}, the result is:`);
 } catch (e) {
   console.log('Error, something bad happened, message: ', e.message);
 }
