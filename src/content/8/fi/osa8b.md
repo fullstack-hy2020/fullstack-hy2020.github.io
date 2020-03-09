@@ -516,7 +516,7 @@ const ALL_PERSONS = gql`
 const PersonForm = (props) => {
   // ...
 
-  const [ createPersom ] = useMutation(CREATE_PERSON, {
+  const [ createPerson ] = useMutation(CREATE_PERSON, {
     refetchQueries: [ { query: ALL_PERSONS } ] // highlight-line
   })
 ```
@@ -575,13 +575,12 @@ Rekisteröidään mutaatiolle virheidenkäsittelijä, joka asettaa virheestä ke
 const PersonForm = ({ setError }) => {
   // ... 
 
-  const [ createPersom ] = useMutation(CREATE_PERSON, {
+  const [ createPerson ] = useMutation(CREATE_PERSON, {
     refetchQueries: [  {query: ALL_PERSONS } ],
     // highlight-start
     onError: (error) => {
       setError(error.graphQLErrors[0].message)
     }
-    onError: props.onError 
     // highlight-end
   })
 
@@ -627,7 +626,7 @@ const Notify = ({errorMessage}) => {
 
   return (
     <div style={{color: 'red'}}>
-    {errorMessage}
+      {errorMessage}
     </div>
   )
 }
