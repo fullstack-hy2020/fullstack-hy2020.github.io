@@ -9,11 +9,11 @@ lang: en
 
 ## What is TypeScript?
 
-TypeScript is a programming language created by Microsoft, and is designed for the development of large JavaScript applications. For instance Microsoft has written both the _Azure Management Portal_ (1,2 million lines of code) and the _Visual Studio Code_ (300 000 lines of code) applications using TypeScript. As support for building large-scale JavaScript applications, TypeScript offers e.g. better development-time tooling, static code analysis, compile-time type checking and code level documentation.
+TypeScript is a programming language created by Microsoft, designed for the development of large JavaScript applications. For instance, Microsoft has written both the _Azure Management Portal_ (1,2 million lines of code) and the _Visual Studio Code_ (300 000 lines of code) applications using TypeScript. As support for building large-scale JavaScript applications, TypeScript offers e.g. better development-time tooling, static code analysis, compile-time type checking and code level documentation.
 
 ### Main principle
 
-TypeScript is a typed superset of JavaScript, which eventually gets compiled into plain JavaScript code. And the programmer is even able to decide the version of the generated code, as long as it's ECMAScript 3 or newer. That TypeScript is a superset of JavaScript means that it includes all the features of JavaScript and additional features moreover. In fact, all existing JavaScript code is actually valid TypeScript.
+TypeScript is a typed superset of JavaScript, which eventually gets compiled into plain JavaScript code. The programmer is even able to decide the version of the generated code, as long as it's ECMAScript 3 or newer. That TypeScript is a superset of JavaScript means that it includes all the features of JavaScript and additional features moreover. In fact, all existing JavaScript code is actually valid TypeScript.
 
 TypeScript consists of three separate, but mutually fulfilling parts:
 
