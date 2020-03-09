@@ -261,7 +261,7 @@ Write a function that calculates the averige time of input _daily exercise hours
   - the original target value
   - the calculated average time
 
-The daily exercise hours are given to the function as an [array](https://www.typescriptlang.org/docs/handbook/basic-types.html#array) that contains the number of exercise hours for each day in the training period. Eg. a week with 1 hours of training at Monday, none at Tuesday 2 hours at Wednesday and so on would be represented buy the following array:
+The daily exercise hours are given to the function as an [array](https://www.typescriptlang.org/docs/handbook/basic-types.html#array) that contains the number of exercise hours for each day in the training period. Eg. a week with 1 hours of training at Monday, none at Tuesday, 2 hours at Wednesday and so on would be represented by the following array:
 
 ```js
 [1, 0, 2, 0, 3, 0, 2.5]
