@@ -251,7 +251,7 @@ try {
 
 #### 9.2
 
-Write a function that calculates the average time of input _daily exercise hours_ and compares the to the value to the _target amount_ of daily hours and returns an object that includes the following values:
+Write a function that calculates the average time of input _daily exercise hours_ and compares it to the value to the _target amount_ of daily hours and returns an object that includes the following values:
 
   - the number of days
   - the number of training days
