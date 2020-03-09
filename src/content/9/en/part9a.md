@@ -37,7 +37,7 @@ Here are described some of the key features of the TypeScript language. This des
 
 #### Type annotations
 
-Type annotations in TypeScript are lightweight ways to record the intended contract of the function or variable. In the example below we have defined, that the `greeter` function will accept one argument of type string and one of type number. The function will return a string.
+Type annotations in TypeScript are lightweight ways to record the intended contract of the function or variable. In the example below, we have defined that the `greeter` function will accept one argument of type string and one of type number. The function will return a string.
 
 ```js
 const birthdayGreeter = (name: string, age: number): string => {
