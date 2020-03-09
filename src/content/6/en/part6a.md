@@ -884,17 +884,22 @@ Aside from the reducer, our application is in one file. This is of course not se
 
 Now the question is, how can the <i>App</i> access the store after the move? And more broadly, when a component is composed of many smaller components, there must be a way for all of the components to access the store. 
 
-Tapoja välittää redux-store sovelluksen komponenteille on useita, tutustutaan ensin ehä uusimpaan ja helpoimpaan tapaan [react-redux](https://react-redux.js.org/)-kirjaston tarjoamaan [hooks](https://react-redux.js.org/api/hooks)-rajapintaan.
+<!-- Tapoja välittää redux-store sovelluksen komponenteille on useita, tutustutaan ensin ehä uusimpaan ja helpoimpaan tapaan [react-redux](https://react-redux.js.org/)-kirjaston tarjoamaan [hooks](https://react-redux.js.org/api/hooks)-rajapintaan. -->
+There are multiple ways to share the redux-store with components. First we will look into the newest, and possibly the easiest way using the [hooks](https://react-redux.js.org/api/hooks)-api of the [react-redux](https://react-redux.js.org/) library.
 
-Asennetaan react-redux
+
+<!-- Asennetaan react-redux -->
+First we install react-redux
 
 ```js
 npm install --save react-redux
 ```
 
-Eriytetään komponentti _App_ omaan tiedostoon _App.js_. Tarkastellaan ensin mitä sovelluksen muiden tiedostojen sisällöksi tulee.
+<!-- Eriytetään komponentti _App_ omaan tiedostoon _App.js_. Tarkastellaan ensin mitä sovelluksen muiden tiedostojen sisällöksi tulee. -->
+Next we move the _App_ component into its own file _App.js_. Let's see how this effects the rest of the application files.
 
-Tiedosto _index.js_ näyttää seuraavalta
+<!-- Tiedosto _index.js_ näyttää seuraavalta -->
+_Index.js_ becomes:
 
 ```js
 import React from 'react'
@@ -914,7 +919,10 @@ ReactDOM.render(
 )
 ```
 
-Uutta tässä on se, että sovellus on määritelty react redux -kirjaston tarjoaman [Provider](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store)-komponentin lapsena ja että sovelluksen käyttämä store on annettu Provider-komponentin attribuutiksi <i>store</i>. 
+<!-- Uutta tässä on se, että sovellus on määritelty react redux -kirjaston tarjoaman [Provider](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store)-komponentin lapsena ja että sovelluksen käyttämä store on annettu Provider-komponentin attribuutiksi <i>store</i>.  -->
+Note, that the application is now defined as a child of a [Provider](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store) -component provided by the react redux library.
+The application's store is given to the Provider as its attribute <i> 
+store</i>.
 
 Defining the action creators has been moved to the file <i>reducers/noteReducer.js</i> where the reducer is defined. File looks like this:
 
@@ -976,7 +984,8 @@ Normally (not as defaults) exported functions can be imported with the curly bra
 import { createNote } from './../reducers/noteReducer'
 ```
 
-Komponentin <i>App</i> koodi 
+<!-- Komponentin <i>App</i> koodi  -->
+Code for the <i>App</i> component
 
 ```js
 import React from 'react'
@@ -1024,7 +1033,8 @@ const App = () => {
 export default App
 ```
 
-Komponentin koodissa on muutama mielenkiintoinen seikka. Aiemmin koodi hoiti actioinen dispatchaamisen kutsumalla redux-storen metodia dispatch:
+<!-- Komponentin koodissa on muutama mielenkiintoinen seikka. Aiemmin koodi hoiti actioinen dispatchaamisen kutsumalla redux-storen metodia dispatch: -->
+There are a few things to note in the code. Previously the code dispatched actions by calling the dispatch method of the redux-store:
 
 ```js
 store.dispatch({
@@ -1033,7 +1043,8 @@ store.dispatch({
 })
 ```
 
-Nyt sama tapahtuu [useDispatch](https://react-redux.js.org/api/hooks#usedispatch)-hookin avulla saatavan <i>dispatch</i>-funktion avulla:
+<!-- Nyt sama tapahtuu [useDispatch](https://react-redux.js.org/api/hooks#usedispatch)-hookin avulla saatavan <i>dispatch</i>-funktion avulla: -->
+Now it does it with the <i>dispatch</i>-function from the [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) -hook.
 
 ```js
 import { useSelector, useDispatch } from 'react-redux'  // highlight-line
@@ -1050,9 +1061,13 @@ const App = () => {
 }
 ```
 
-React-redux-kirjaston tarjoama <i>useDispatch</i>-hook siis tarjoaa mille tahansa React-komponentille pääsyn tiedostossa <i>index.js</i> määritellyn redux-storen dispatch-funktioon, jonka avulla komponentti pääsee tekemään muutoksia redux-storen tilaan.
+<!-- React-redux-kirjaston tarjoama <i>useDispatch</i>-hook siis tarjoaa mille tahansa React-komponentille pääsyn tiedostossa <i>index.js</i> määritellyn redux-storen dispatch-funktioon, jonka avulla komponentti pääsee tekemään muutoksia redux-storen tilaan. -->
+The <i>useDispatch</i>-hook provides any React component access to the dispatch-function of the redux-store defined in <i>index.js</i>.
+This allows all components to make changes to the state of the redux-store.
 
-Storeen talletettuihin muistiinpanoihin komponentti pääsee käsiksi react-redux-kirjaston [useSelector](https://react-redux.js.org/api/hooks#useselector)-hookin kautta:
+
+<!-- Storeen talletettuihin muistiinpanoihin komponentti pääsee käsiksi react-redux-kirjaston [useSelector](https://react-redux.js.org/api/hooks#useselector)-hookin kautta: -->
+The component can access the notes stored in the store with the [useSelector](https://react-redux.js.org/api/hooks#useselector)-hook of the react-redux library.
 
 
 ```js
@@ -1065,14 +1080,17 @@ const App = () => {
 }
 ```
 
-<i>useSelector</i> saa parametrikseen funktion, joka hakee tai valitsee (engl. select) tarvittavan datan redux-storesta. Tarvitsemme nyt kaikki muistiinpanot, eli selektorifunktiomme palauttaa koko staten, eli on muotoa 
+<!-- <i>useSelector</i> saa parametrikseen funktion, joka hakee tai valitsee (engl. select) tarvittavan datan redux-storesta. Tarvitsemme nyt kaikki muistiinpanot, eli selektorifunktiomme palauttaa koko staten, eli on muotoa  -->
+<i>useSelector</i> receives a function as a paramter. The function either either searches for or selectes data from the redux-store. 
+Here we need all of the notes, so our selector function returns the whole state:
 
 
 ```js
 state => state
 ```
 
-joka siis tarkoittaa samaa kuin
+<!-- joka siis tarkoittaa samaa kuin -->
+which is a shorthand for
 
 ```js
 (state) => {
@@ -1080,15 +1098,18 @@ joka siis tarkoittaa samaa kuin
 }
 ```
 
-Yleensä selektorifunktiot ovat mielenkiinoisempia, ja valitsevat vain osan redux-storen sisällöstä. Voisimme esimerkiksi hakea storesta ainoastaan tärkeät muistiinpanot seuraavasti
+<!-- Yleensä selektorifunktiot ovat mielenkiinoisempia, ja valitsevat vain osan redux-storen sisällöstä. Voisimme esimerkiksi hakea storesta ainoastaan tärkeät muistiinpanot seuraavasti -->
+Usually selector functions are a bit more interesting, and return only selected parts of the contents of the redux-store. 
+We could for example return only notes marked as important:
 
 ```js
 const importantNotes = useSelector(state => state.filter(note => note.important))  
 ```
 
-### Lisää komponentteja
+### More components
 
-Eriytetään uuden muistiinpanon luominen omaksi komponentiksi. 
+<!-- Eriytetään uuden muistiinpanon luominen omaksi komponentiksi.  -->
+Let's separate creating a new note into its own component.
 
 ```js
 import React from 'react'
@@ -1118,7 +1139,8 @@ export default NewNote
 
 Unlike in the React code we did without Redux, the event handler for changing the state of the app (which now lives in Redux) has been moved away from the <i>App</i> to a child component. The logic for changing the state in Redux is still neatly separated from the whole React part of the application. 
 
-Eriytetään vielä muistiinpanojen lista ja yksittäisen muistiinpanon esittäminen omiksi komponenteikseen (jotka molemmat sijoitetaan tiedostoon <i>Notes.js</i>):
+<!-- Eriytetään vielä muistiinpanojen lista ja yksittäisen muistiinpanon esittäminen omiksi komponenteikseen (jotka molemmat sijoitetaan tiedostoon <i>Notes.js</i>): -->
+We'll also separate the list of notes and displaying a single note into their own components (which will both be placed in the <i>Notes.js</i> file ):
 
 ```js
 import React from 'react'
