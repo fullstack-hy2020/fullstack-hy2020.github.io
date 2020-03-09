@@ -258,7 +258,7 @@ Kuten [osan 6](/osa6/connect#redux-ja-komponenttien-tila) lopussa mainittiin, Re
 
 ### React/node-sovellusten tietoturva
 
-Emme ole vielä maininneet kurssilla sanaakaan tietoturvaan liittyen. Kovin paljon ei nytkään ole aikaa, ja onneksi laitoksella on MOOC-kurssi [Securing Software](https://cybersecuritybase.github.io/securing/) tähän tärkeään aihepiiriin.
+Emme ole vielä maininneet kurssilla sanaakaan tietoturvaan liittyen. Kovin paljon ei nytkään ole aikaa, ja onneksi laitoksella on MOOC-kurssi [Securing Software](https://cybersecuritybase.mooc.fi/module-2.1) tähän tärkeään aihepiiriin.
 
 Katsotaan kuitenkin muutamaa kurssispesifistä seikkaa.
 
