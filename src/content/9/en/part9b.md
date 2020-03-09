@@ -143,7 +143,7 @@ Let's expand our multiplicator and create a little bit more useful calculator, t
 
 With basic JavaScript, this type of code, where trusting a string to be specific form, would require additional validation, but TypeScript offers us a way to define specific types for the inputs, which describes exactly what type of inputs to accept. On top of that, TypeScript can also show the info of the accepted values already on IDE level.
 
-To create our _type_ we use the TypeScript native keyword _type_ to describe what we want to accept. Let's describe our type _Operation`:
+To create our _type_ we use the TypeScript native keyword _type_ to describe what we want to accept. Let's describe our type _Operation_:
 
 ```js
 type Operation = 'multiply' | 'add' | 'divide';
