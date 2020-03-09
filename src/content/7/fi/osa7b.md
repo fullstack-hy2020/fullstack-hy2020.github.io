@@ -301,7 +301,7 @@ Internetistä alkaa löytyä yhä enenevissä määrin valmiita hookeja sekä mu
 
 #### 7.4: anekdoottisovellus ja hookit step1
 
-Jatketaan luvun react-router [tehtävien](/osa7/custom_hookit#tehtavat-7-4-7-6) sovelluksen parissa.
+Jatketaan luvun react-router [tehtävien](/osa7/react_router#tehtavat-7-1-7-3) sovelluksen parissa.
 
 Yksinkertaista sovelluksen uuden anekdootin luomiseen käytettävän lomakkeen käyttöä äsken määritellyn _useField_ custom-hookin avulla.
 
