@@ -903,7 +903,7 @@ router.post('/', (req, res) => {
     const addedEntry = diaryService.addDiaryEntry(newDiaryEntry); // highlight-line
     res.json(addedEntry);
   } catch (e) {
-    res.status(404).send(e.message); 
+    res.status(400).send(e.message); 
   }
 })
 ```
