@@ -558,7 +558,7 @@ Separate the form for creating a new blog into its own component (if you have no
 move all the states required for creating a new blog to this component. 
 
 <!-- Komponentin tulee siis toimia samaan tapaan kuin tämän osan [materiaalin](http://localhost:8000/osa5/props_children_ja_proptypet#lomakkeiden-tila) komponentin <i>NewNote</i>. -->
-The component must work like the <i>NewNote</i> component from the [material](http://localhost:8000/osa5/props_children_ja_proptypet#lomakkeiden-tila) of this part.
+The component must work like the <i>NewNote</i> component from the [material](/osa5/props_children_ja_proptypet#lomakkeiden-tila) of this part.
 
 #### 5.7* Blog list frontend, step7
 
