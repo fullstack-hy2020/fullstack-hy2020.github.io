@@ -117,7 +117,7 @@ app.post('/api/notes', (request, response, next) => {
 We can accomplish the same functionality in a much cleaner way with [promise chaining](https://javascript.info/promise-chaining):
 
 ```js
-app.post('/api/notes', (request, response) => {
+app.post('/api/notes', (request, response, next) => {
   // ...
 
   note
@@ -140,7 +140,7 @@ In the first _then_ we receive _savedNote_ object returned by Mongoose and forma
 We can clean up our code even more by using the more compact syntax for arrow functions:
 
 ```js
-app.post('/api/notes', (request, response) => {
+app.post('/api/notes', (request, response, next) => {
   // ...
 
   note
@@ -382,7 +382,7 @@ This makes errors easy to spot and fix right away.
 ESlint has a vast array of [rules](https://eslint.org/docs/rules/) that are easy to take into use by editing the <i>.eslintrc.js</i> file.
 
 
-Let's add the [eqeqeq](https://eslint.org/docs/rules/eqeqeq) rule that warns us, if equality is checked with anything but the the triple equals operator. The rule is added under the <i>rules</i> field in the configuration file.
+Let's add the [eqeqeq](https://eslint.org/docs/rules/eqeqeq) rule that warns us, if equality is checked with anything but the triple equals operator. The rule is added under the <i>rules</i> field in the configuration file.
 
 ```js
 {

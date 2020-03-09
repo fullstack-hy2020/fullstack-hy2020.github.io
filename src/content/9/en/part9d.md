@@ -780,7 +780,7 @@ const id = useParams<{ id: string }>().id
 
 ### Full entries
 
-We implemented in the [exercise 9.12.](http://localhost:8000/en/part9/typing_the_express_app#exercises-9-12-9-13) an endpoint for fetching the diagnoses but we still are not using that endpoint at all. That makes sense since our application currently consists only of listing patients and their information. Now it would be a great idea to expand our data by a bit; let's add possible <i>Entry</i> data to our patient data so that each patient can have medical entries that include possible diagnoses.
+We implemented in the [exercise 9.12.](/en/part9/typing_the_express_app#exercises-9-12-9-13) an endpoint for fetching the diagnoses but we still are not using that endpoint at all. That makes sense since our application currently consists only of listing patients and their information. Now it would be a great idea to expand our data by a bit; let's add possible <i>Entry</i> data to our patient data so that each patient can have medical entries that include possible diagnoses.
 
 Let's ditch our old patient seed data from backend and start using [this expanded format](https://github.com/fullstack-hy2020/misc/blob/master/patients.ts).
 

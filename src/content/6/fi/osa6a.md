@@ -102,13 +102,13 @@ const counterReducer = (state = 0, action) => {
 const store = createStore(counterReducer)
 ```
 
-Store käyttää nyt reduceria käsitelläkseen <i>actioneja</i>, jotka <i>dispatchataan</i> eli "lähetetään" storelle sen [dispatch](https://redux.js.org/api-reference/store#dispatch-action)-metodilla:
+Store käyttää nyt reduceria käsitelläkseen <i>actioneja</i>, jotka <i>dispatchataan</i> eli "lähetetään" storelle sen [dispatch](https://redux.js.org/api/store#dispatchaction)-metodilla:
 
 ```js
 store.dispatch({type: 'INCREMENT'})
 ```
 
-Storen tilan saa selville metodilla [getState](https://redux.js.org/api-reference/store#getstate).
+Storen tilan saa selville metodilla [getState](https://redux.js.org/api/store/#getstate).
 
 Esim. seuraava koodi
 
@@ -134,7 +134,7 @@ tulostaisi konsoliin
 
 sillä ensin storen tila on 0. Kolmen <i>INCREMENT</i>-actionin jälkeen tila on 3, ja lopulta actionien <i>ZERO</i> ja <i>DECREMENT</i> jälkeen -1.
 
-Kolmas tärkeä metodi storella on [subscribe](https://redux.js.org/api-reference/store#subscribe-listener), jonka avulla voidaan määritellä takaisinkutsufunktioita, joita store kutsuu sen tilan muuttumisen yhteydessä.
+Kolmas tärkeä metodi storella on [subscribe](https://redux.js.org/api/store#subscribelistener), jonka avulla voidaan määritellä takaisinkutsufunktioita, joita store kutsuu sen tilan muuttumisen yhteydessä.
 
 Jos esim. lisäisimme seuraavan funktion subscribe:lla, tulostuisi <i>jokainen storen muutos</i> konsoliin.
 

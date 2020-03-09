@@ -143,7 +143,7 @@ Let's expand our multiplicator and create a little bit more useful calculator, t
 
 With basic JavaScript, this type of code, where trusting a string to be specific form, would require additional validation, but TypeScript offers us a way to define specific types for the inputs, which describes exactly what type of inputs to accept. On top of that, TypeScript can also show the info of the accepted values already on IDE level.
 
-To create our _type_ we use the TypeScript native keyword _type_ to describe what we want to accept. Let's describe our type _Operation`:
+To create our _type_ we use the TypeScript native keyword _type_ to describe what we want to accept. Let's describe our type _Operation_:
 
 ```js
 type Operation = 'multiply' | 'add' | 'divide';
@@ -215,7 +215,7 @@ Is it <i>really</i> okay for the function to return a string?
 
 When you have written code that can actually end up in a situation where something is divided by 0 it probably means something has gone terribly wrong and in that case an error should probably be thrown and handled somewhere where the function was called. When you are deciding to return values you weren't originally planning, the warnings you see from TypeScript restrict you from making rushed decisions and help you to keep your code working as expected.
 
-One more thing to consider is that even though we have in our code defined what types of parameters to accept, the generated JavaScript that is used runtime doesn't anymore have these type checks. So, if for example the _operation`-parameter's value comes from an external interface, there is no definite guarantee that it will be one of the allowed values. Therefore it's still better to include error handling to be prepared for the unexpected to happen. In this case, when there are multiple possible accepted values and all unexcpeted ones should result in an error, the [switch...case](w3schools.com/js/js_switch.asp) statement suits better than if...else in our code. The resulting code of our calculator could actually look something like this:
+One more thing to consider is that even though we have in our code defined what types of parameters to accept, the generated JavaScript that is used runtime doesn't anymore have these type checks. So, if for example the `operation`-parameter's value comes from an external interface, there is no definite guarantee that it will be one of the allowed values. Therefore it's still better to include error handling to be prepared for the unexpected to happen. In this case, when there are multiple possible accepted values and all unexcpeted ones should result in an error, the [switch...case](w3schools.com/js/js_switch.asp) statement suits better than if...else in our code. The resulting code of our calculator could actually look something like this:
 
 ```js
 type Operation = 'multiply' | 'add' | 'divide';
@@ -251,17 +251,17 @@ try {
 
 #### 9.2
 
-Write a function that calculates the averige time of input _daily exercise hours_ and compares the to the value to the _target amount_ of daily hours and returns an object that includes the following values:
+Write a function that calculates the average time of input _daily exercise hours_ and compares the to the value to the _target amount_ of daily hours and returns an object that includes the following values:
 
   - the number of days
-  - the number of traing days
+  - the number of training days
   - boolean value on whether the hours have succeeded to reach the target
   - a rating between the numbers 1-3 that tells how well the hours are met. You can decide on the metric on your own.
-  - a text value explaining the rating,
+  - a text value explaining the rating
   - the original target value
   - the calculated average time
 
-The daily exercise hours are given to the function as an [array](https://www.typescriptlang.org/docs/handbook/basic-types.html#array) that contains the number of exercise hours for each day in the training period. Eg. a week with 1 hours of training at Monday, none at Tuesday 2 hours at Wednesday and so on would be represented buy the following array:
+The daily exercise hours are given to the function as an [array](https://www.typescriptlang.org/docs/handbook/basic-types.html#array) that contains the number of exercise hours for each day in the training period. Eg. a week with 1 hours of training at Monday, none at Tuesday, 2 hours at Wednesday and so on would be represented by the following array:
 
 ```js
 [1, 0, 2, 0, 3, 0, 2.5]
@@ -306,7 +306,7 @@ If you happen to run into a package that doesn't yet have their own typings it i
 
 Sometimes a npm package can also include its types within the code and of course in that case downloading of the corresponding _@types/*_ is not necessary.
 
-> **Notice:** Since the typings are only used before compilation, the typings are not needed in the production build and they should **always** be in the the devDependencies of the package.json.
+> **Notice:** Since the typings are only used before compilation, the typings are not needed in the production build and they should **always** be in the devDependencies of the package.json.
 
 ---
 

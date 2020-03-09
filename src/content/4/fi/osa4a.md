@@ -702,7 +702,7 @@ npm test -- -t 'when list has only one blog, equals the likes of that'
 
 #### 4.5*: apufunktioita ja yksikkötestejä, step3
 
-Määrittele funktio _favoriteBlog_ joka saa parametrikseen taulukollisen blogeja. Funktio selvittää millä blogilla on eniten likejä. Jos suosikkeja on monta, riittää että funktio palauttaa niistä jonkun.
+Määrittele funktio _favoriteBlog_ joka saa parametrikseen taulukollisen blogeja. Funktio selvittää millä blogilla on eniten tykkäyksiä. Jos suosikkeja on monta, riittää että funktio palauttaa niistä jonkun.
 
 Paluuarvo voi olla esim. seuraavassa muodossa:
 
@@ -737,7 +737,7 @@ Jos ennätysblogaajia on monta, riittää että funktio palauttaa niistä jonkun
 
 #### 4.7*: apufunktioita ja yksikkötestejä, step5
 
-Määrittele funktio _mostLikes_ joka saa parametrikseen taulukollisen blogeja. Funktio selvittää kirjoittajan, kenen blogeilla on eniten likejä. Funktion paluuarvo kertoo myös suosikkiblogaajan likejen yhteenlasketun määrän:
+Määrittele funktio _mostLikes_ joka saa parametrikseen taulukollisen blogeja. Funktio selvittää kirjoittajan, kenen blogeilla on eniten tykkäyksiä. Funktion paluuarvo kertoo myös suosikkiblogaajan likejen yhteenlasketun määrän:
 
 ```js
 {

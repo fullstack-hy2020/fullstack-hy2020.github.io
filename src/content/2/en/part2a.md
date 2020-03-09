@@ -322,7 +322,7 @@ The use of curly braces will cause some headache in the beginning, but you will 
 
 ### Anti-pattern: array indexes as keys
 
-We could have made the error message on our console disappear by using the array indexes as keys. The indexes can be retrieved by passing a second parameter to the map-method: 
+We could have made the error message on our console disappear by using the array indexes as keys. The indexes can be retrieved by passing a second parameter to the callback function of the map-method: 
 
 ```js
 notes.map((note, i) => ...)
@@ -398,7 +398,7 @@ const App = ({ notes }) =>
 
 Note, that the <i>key</i> attribute must now be defined for the <i>Note</i> components, and not for the <i>li</i> tags like before. 
 
-A whole React application can be written on a single file. Although that is, of course, not very practical. Common practice is to declare each component in their own file as an <i>ES6-module</i>.
+A whole React application can be written in a single file. Although that is, of course, not very practical. Common practice is to declare each component in their own file as an <i>ES6-module</i>.
 
 We have been using modules the whole time. The first few lines of the file:
 

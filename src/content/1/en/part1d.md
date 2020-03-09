@@ -478,10 +478,7 @@ const [right, setRight] = useState(0)
 const [allClicks, setAll] = useState([])
 ```
 
-Dev tools shows the state of hooks in the order of their definition.
-The state of hooks _left_ and _right_ shows nicely but the hook _allClicks_ that is of the type array is not shown properly. Hopefully this will be fixed soon. You can follow this [issue](https://github.com/facebook/react-devtools/issues/1215) to get an idea when the proper hook support will be available.
-
-The version of developer tools that supports hooks has already an unofficial [beta release](https://github.com/bvaughn/react-devtools-experimental). I could not get it to work with an up-to-date version of Chrome. With Firefox it seems to work and shows the hooked array state nicely:
+Dev tools shows the state of hooks in the order of their definition:
 
 ![](../../images/1/11be.png)
 

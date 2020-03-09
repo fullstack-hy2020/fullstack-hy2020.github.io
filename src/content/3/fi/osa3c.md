@@ -47,7 +47,7 @@ Debuggausnäkymä toimii kuten React-koodia debugattaessa, <i>Sources</i>-välil
 
 ![](../../images/3/38eb.png)
 
-Ohjelman muuttujien arvoja voi evaluoida oikealla olevaan <i>watch</i>-ikkunaan. 
+Ohjelman muuttujien arvoja voi evaluoida oikealla olevaan <i>watch</i>-ikkunaan.
 
 Kaikki sovelluksen console.log-tulostukset tulevat debuggerin <i>Console</i>-välilehdelle. Voit myös tutkia siellä muuttujien arvoja ja suorittaa mielivaltaista Javascript-koodia:
 
@@ -81,7 +81,7 @@ Valitaan <i>AWS</i> ja <i>Frankfurt</i> ja luodaan klusteri.
 
 ![](../../images/3/58.png)
 
-Odotetaan että klusteri on valmiina, tähän menee noin 10 minuuttia. 
+Odotetaan että klusteri on valmiina, tähän menee noin 10 minuuttia.
 
 **HUOM** älä jatka eteenpäin ennen kun klusteri on valmis!
 
@@ -111,7 +111,6 @@ Valitaan <i>Connect your application</i>:
 
 ![](../../images/3/64ea.png)
 
-
 Näkymä kertoo <i>MongoDB URI:n</i> eli osoitteen, jonka avulla sovelluksemme käyttämä MongoDB-kirjasto saa yhteyden kantaan.
 
 Osoite näyttää seuraavalta:
@@ -138,7 +137,7 @@ Ei lisätä mongoa käsittelevää koodia heti backendin koodin sekaan, vaan teh
 ```js
 const mongoose = require('mongoose')
 
-if ( process.argv.length<3 ) {
+if (process.argv.length<3) {
   console.log('give password as argument')
   process.exit(1)
 }
@@ -165,8 +164,8 @@ const note = new Note({
 })
 
 note.save().then(response => {
-  console.log('note saved!');
-  mongoose.connection.close();
+  console.log('note saved!')
+  mongoose.connection.close()
 })
 ```
 
@@ -398,7 +397,7 @@ Voimme todeta selaimella, että backend toimii kaikkien dokumenttien näyttämis
 
 ![](../../images/3/44ea.png)
 
-Toiminnallisuus on muuten kunnossa, mutta frontend olettaa, että olioiden yksikäsitteinen tunniste on kentässä <i>id</i>. Emme myöskään halua näyttää frontendille mongon versiointiin käyttämää kenttää <i>\_\_v</i>. 
+Toiminnallisuus on muuten kunnossa, mutta frontend olettaa, että olioiden yksikäsitteinen tunniste on kentässä <i>id</i>. Emme myöskään halua näyttää frontendille mongon versiointiin käyttämää kenttää <i>\_\_v</i>.
 
 Eräs tapa muotoilla Mongoosen palauttamat oliot haluttuun muotoon on [muokata](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id) kannasta haettavilla olioilla olevan _toJSON_-metodin palauttamaa muotoa. Metodin muokkaus onnistuu seuraavasti:
 
@@ -420,8 +419,8 @@ Palautetaan HTTP-pyynnön vastauksena _toJSON_-metodin avulla muotoiltuja oliota
 app.get('/api/notes', (request, response) => {
   Note.find({}).then(notes => {
     response.json(notes.map(note => note.toJSON()))
-  });
-});
+  })
+})
 ```
 
 Nyt siis muuttujassa _notes_ on taulukollinen mongon palauttamia olioita. Kun suoritamme operaation <em>notes.map(note => note.toJSON())</em> seurauksena on uusi taulukko, missä on jokaista alkuperäisen taulukon alkiota vastaava metodin _toJSON_ avulla muodostettu alkio.
@@ -439,7 +438,7 @@ const url = process.env.MONGODB_URI // highlight-line
 
 console.log('connecting to', url) // highlight-line
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
-// highlight-start
+  // highlight-start
   .then(result => {
     console.log('connected to MongoDB')
   })
@@ -493,7 +492,7 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
   })
 ```
 
-Tietokannan osoitetta ei kannata kirjoittaa koodiin, joten osoite annetaan sovellukselle ympäristömuuttujan <em>MONGODB_URI</em> välityksellä. 
+Tietokannan osoitetta ei kannata kirjoittaa koodiin, joten osoite annetaan sovellukselle ympäristömuuttujan <em>MONGODB_URI</em> välityksellä.
 
 Yhteyden muodostavalle metodille on nyt rekisteröity onnistuneen ja epäonnistuneen yhteydenmuodostuksen käsittelevät funktiot, jotka tulostavat konsoliin tiedon siitä, onnistuuko yhteyden muodostaminen:
 
@@ -545,7 +544,7 @@ app.listen(PORT, () => {
 
 On tärkeää, että <i>dotenv</i> otetaan käyttöön ennen modelin <i>note</i> importtaamista, tällöin varmistutaan siitä, että tiedostossa <i>.env</i> olevat ympäristömuuttujat ovat alustettuja kun moduulin koodia importoidaan.
 
-### Muut operaatiot
+### Tietokannan käyttö reittien käsittelijöissä
 
 Muutetaan nyt kaikki operaatiot tietokantaa käyttävään muotoon.
 
@@ -573,7 +572,7 @@ app.post('/api/notes', (request, response) => {
 
 Muistiinpano-oliot siis luodaan _Note_-konstruktorifunktiolla. Pyyntöön vastataan _save_-operaation takaisinkutsufunktion sisällä. Näin varmistutaan, että operaation vastaus tapahtuu vain jos operaatio on onnistunut. Palaamme virheiden käsittelyyn myöhemmin.
 
-Takaisinkutsufunktion parametrina oleva _savedNote_ on talletettu muistiinpano. HTTP-pyyntöön palautetaan kuitenkin siitä metodilla _toJSON_formatoitu muoto:
+Takaisinkutsufunktion parametrina oleva _savedNote_ on talletettu muistiinpano. HTTP-pyyntöön palautetaan kuitenkin siitä metodilla _toJSON_ formatoitu muoto:
 
 ```js
 response.json(savedNote.toJSON())
@@ -621,7 +620,7 @@ Tee tässä ja seuraavissa tehtävissä Mongoose-spesifinen koodi omaan moduulii
 
 #### 3.14: puhelinluettelo ja tietokanta, step2
 
-Muuta backendiä siten, että uudet numerot <i>tallennetaan tietokantaan</i>. 
+Muuta backendiä siten, että uudet numerot <i>tallennetaan tietokantaan</i>.
 Varmista, että frontend toimii muutosten jälkeen.
 
 <i>**Tässä vaiheessa voit olla välittämättä siitä, onko tietokannassa jo henkilöä jolla on sama nimi kuin lisättävällä.**</i>
@@ -649,7 +648,7 @@ app.get('/api/notes/:id', (request, response) => {
       response.json(note.toJSON())
     })
     .catch(error => {
-      console.log(error);
+      console.log(error)
       response.status(404).end()
     })
 })
@@ -696,7 +695,7 @@ app.get('/api/notes/:id', (request, response) => {
       if (note) {
         response.json(note.toJSON())
       } else {
-        response.status(404).end() 
+        response.status(404).end()
       }
       // highlight-end
     })
@@ -734,12 +733,13 @@ Aina kun ohjelmoit ja projektissa on mukana backend <i>**tulee ehdottomasti koko
 
 ### Virheidenkäsittelyn keskittäminen middlewareen
 
-Olemme kirjoittaneet poikkeuksen aiheuttavan virhetilanteen käsittelevän koodin muun koodin sekaan. Se on välillä ihan toimiva ratkaisu, mutta on myös tilanteita, joissa on järkevämpää keskittää virheiden käsittely yhteen paikkaan. Tästä on huomattava etu esim. jos virhetilanteiden yhteydessä virheen aiheuttaneen pyynnön tiedot logataan tai lähetetään johonkin virhediagnostiikkajärjestelmään, esim. [Sentryyn](https://sentry.io/welcome/). 
+Olemme kirjoittaneet poikkeuksen aiheuttavan virhetilanteen käsittelevän koodin muun koodin sekaan. Se on välillä ihan toimiva ratkaisu, mutta on myös tilanteita, joissa on järkevämpää keskittää virheiden käsittely yhteen paikkaan. Tästä on huomattava etu esim. jos virhetilanteiden yhteydessä virheen aiheuttaneen pyynnön tiedot logataan tai lähetetään johonkin virhediagnostiikkajärjestelmään, esim. [Sentryyn](https://sentry.io/welcome/).
 
 Muutetaan routen <i>/api/notes/:id</i> käsittelijää siten, että se <i>siirtää virhetilanteen käsittelyn eteenpäin</i> funktiolla <em>next</em>, jonka se saa <i>kolmantena</i> parametrina:
 
 ```js
-app.get('/api/notes/:id', (request, response, next) => { // highlight-line
+app.get('/api/notes/:id', (request, response, next) => {
+  // highlight-line
   Note.findById(request.params.id)
     .then(note => {
       if (note) {
@@ -762,7 +762,7 @@ const errorHandler = (error, request, response, next) => {
 
   if (error.name === 'CastError' && error.kind == 'ObjectId') {
     return response.status(400).send({ error: 'malformatted id' })
-  } 
+  }
 
   next(error)
 }
@@ -836,7 +836,7 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-Nyt olemattomien osoitteiden käsittely on sijoitettu <i>ennen HTTP GET -pyynnön käsittelyä</i>. Koska olemattomien osoitteiden käsittelijä vastaa kaikkiin pyyntöihin <i>404 unknown endpoint</i>, ei mihinkään sen jälkeen määriteltyyn reittiin tai middlewareen (poikkeuksena virheenkäsittelijä) enää mennä. 
+Nyt olemattomien osoitteiden käsittely on sijoitettu <i>ennen HTTP GET -pyynnön käsittelyä</i>. Koska olemattomien osoitteiden käsittelijä vastaa kaikkiin pyyntöihin <i>404 unknown endpoint</i>, ei mihinkään sen jälkeen määriteltyyn reittiin tai middlewareen (poikkeuksena virheenkäsittelijä) enää mennä.
 
 ### Muut operaatiot
 
@@ -856,7 +856,7 @@ app.delete('/api/notes/:id', (request, response, next) => {
 
 Vastauksena on statuskoodi <i>204 no content</i> molemmissa "onnistuneissa" tapauksissa, eli jos olio poistettiin tai olioa ei ollut mutta <i>id</i> oli periaatteessa oikea. Takaisinkutsun parametrin _result_ perusteella olisi mahdollisuus haarautua ja palauttaa tilanteissa eri statuskoodi, jos sille on tarvetta. Mahdollinen poikkeus siirretään jälleen virheenkäsittelijälle.
 
-Muistiinpanon tärkeyden muuttamisen mahdollistava olemassaolevan muistiinpanon päivitys onnistuu helposti metodilla [findByIdAndUpdate](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate). 
+Muistiinpanon tärkeyden muuttamisen mahdollistava olemassaolevan muistiinpanon päivitys onnistuu helposti metodilla [findByIdAndUpdate](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate).
 
 ```js
 app.put('/api/notes/:id', (request, response, next) => {
@@ -895,8 +895,8 @@ const mongoose = require('mongoose')
 mongoose.set('useFindAndModify', false) // highlight-line
 
 // ...
-  
-module.exports = mongoose.model('Note', noteSchema) 
+
+module.exports = mongoose.model('Note', noteSchema)
 ```
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5), branchissa <i>part3-5</i>.

@@ -45,7 +45,7 @@ Samalla määriteltiin, että suoritettaessa sovellusta komennolla _npm run dev_
 Määrittelyssämme on kuitenkin pieni ongelma: se ei toimi Windowsilla. Tilanne korjautuu asentamalla kirjasto [cross-env](https://www.npmjs.com/package/cross-env) komennolla
 
 ```bash
-npm install --save-dev cross-env
+npm install cross-env
 ```
 
 ja muuttamalla <i>package.json</i> kaikilla käyttöjärjestelmillä toimivaan muotoon
@@ -89,7 +89,7 @@ module.exports = {
 }
 ```
 
-Tiedostossa <i>.env</i> on nyt määritelty <i>erikseen</i> sekä sovelluskehitysympäristön että testausympäristön tietokannan osoite (esimerkissä molemmat ovat sovelluskehityskoneen lokaaleja mongo-kantoja):
+Tiedostossa <i>.env</i> on nyt määritelty <i>erikseen</i> sekä sovelluskehitysympäristön että testausympäristön tietokannan osoite:
 
 ```bash
 MONGODB_URI=mongodb+srv://fullstack:secret@cluster0-ostce.mongodb.net/note-app?retryWrites=true
@@ -260,10 +260,12 @@ const Note = require('../models/note')
 const initialNotes = [
   {
     content: 'HTML is easy',
+    date: new Date(),
     important: false,
   },
   {
     content: 'Browser can execute only Javascript',
+    date: new Date(),
     important: true,
   },
 ]
@@ -487,10 +489,12 @@ const Note = require('../models/note')
 const initialNotes = [
   {
     content: 'HTML is easy',
+    date: new Date(),
     important: false
   },
   {
     content: 'Browser can execute only Javascript',
+    date: new Date(),
     important: true
   }
 ]
