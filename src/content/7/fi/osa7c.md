@@ -245,7 +245,7 @@ Asennetaan kirjasto suorittamalla komento
 npm install --save @material-ui/core
 ```
 
-Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään bootstrapin css-määrittelyt lataava rivi:
+Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään MaterialUI:n css-määrittelyt lataava rivi:
 
 ```js
 <head>
