@@ -24,7 +24,7 @@ Käytetään kurssilla Apollo Clientin versiota [3.0-beta](https://www.apollogra
 
 ![](../../images/8/40ea.png)
 
-Luodaan uusi React-sovellus ja asennetaan siihen [Apollo clientin]https://www.apollographql.com/docs/react/v3.0-beta/get-started/#installation) vaatimat riippuvuudet.
+Luodaan uusi React-sovellus ja asennetaan siihen [Apollo clientin](https://www.apollographql.com/docs/react/v3.0-beta/get-started/#installation) vaatimat riippuvuudet.
 
 ```js
 npm install --save @apollo/client graphql
@@ -117,7 +117,7 @@ Kyselyn tekevän komponentin <i>App</i> koodi näyttää seuraavalta:
 
 ```js
 import React from 'react'
-import { gql, useQuery } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client'
 
 const ALL_PERSONS = gql`
   query {
@@ -275,7 +275,7 @@ const Persons = ({ persons }) => {
     if (result.data) {
       setPerson(result.data.findPerson)
     }
-  }, [result.data])
+  }, [result])
   // highlight-end
 
 // highlight-start
