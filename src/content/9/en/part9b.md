@@ -304,7 +304,7 @@ If you happen to run into a package that doesn't yet have their own typings it i
 
 Sometimes a npm package can also include its types within the code and of course in that case downloading of the corresponding _@types/*_ is not necessary.
 
-> **Notice:** Since the typings are only used before compilation, the typings are not needed in the production build and they should **always** be in the the devDependencies of the package.json.
+> **Notice:** Since the typings are only used before compilation, the typings are not needed in the production build and they should **always** be in the devDependencies of the package.json.
 
 ---
 

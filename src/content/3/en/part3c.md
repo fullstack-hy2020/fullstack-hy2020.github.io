@@ -548,7 +548,7 @@ app.listen(PORT, () => {
 
 It's important that <i>dotenv</i> gets imported before the <i>note</i> model is imported. This ensures that the environment variables from the <i>.env</i> file are available globally before the code from the other modules are imported.
 
-### Other operations
+### Using database in route handlers
 
 Next, let's change the rest of the backend functionality to use the database.
 
@@ -816,7 +816,7 @@ app.post('/api/notes', (request, response) => {
   // ...
 })
 
-app.use(bodyParser.json())
+app.use(express.json())
 ```
 
 Then the JSON data sent with the HTTP requests would not be available for the logger middleware or the POST route handler, since the _request.body_ would be an empty object.

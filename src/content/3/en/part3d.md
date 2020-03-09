@@ -382,7 +382,7 @@ This makes errors easy to spot and fix right away.
 ESlint has a vast array of [rules](https://eslint.org/docs/rules/) that are easy to take into use by editing the <i>.eslintrc.js</i> file.
 
 
-Let's add the [eqeqeq](https://eslint.org/docs/rules/eqeqeq) rule that warns us, if equality is checked with anything but the the triple equals operator. The rule is added under the <i>rules</i> field in the configuration file.
+Let's add the [eqeqeq](https://eslint.org/docs/rules/eqeqeq) rule that warns us, if equality is checked with anything but the triple equals operator. The rule is added under the <i>rules</i> field in the configuration file.
 
 ```js
 {

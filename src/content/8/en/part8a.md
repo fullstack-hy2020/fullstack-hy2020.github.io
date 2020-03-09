@@ -103,7 +103,7 @@ The application logic stays simple, and the code on the browser gets exactly the
 We will get to know the basics of GraphQL by implementing a GraphQL version of the phonebook application from parts 2 and 3. 
 
 
-In the heart of all GraphQL applications is a [schema](https://graphql.org/learn/schema/), which describes the data sent between client and the server. The initial schema for our phonebook is as follows: 
+In the heart of all GraphQL applications is a [schema](https://graphql.org/learn/schema/), which describes the data sent between the client and the server. The initial schema for our phonebook is as follows: 
 
 ```js
 type Person {
@@ -637,7 +637,7 @@ The current code of the application can be found on [ Github](https://github.com
 ### Mutations
 
 
-Let's add functionality for adding new persons to the phonebook. In GraphQL, all operations which cause a change are done with [mutations](https://graphql.org/learn/queries/#mutations). Mutations are described in the schema as the keys of type <i>Mutation</i>.
+Let's add a functionality for adding new persons to the phonebook. In GraphQL, all operations which cause a change are done with [mutations](https://graphql.org/learn/queries/#mutations). Mutations are described in the schema as the keys of type <i>Mutation</i>.
 
 
 The schema for a mutation for adding a new person looks as follows: 
@@ -900,7 +900,7 @@ Mutation: {
 ```
 
 
-The mutation finds the person to be updated person by the field <i>name</i>.
+The mutation finds the person to be by the field <i>name</i>.
 
 The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>.
 
@@ -978,7 +978,7 @@ The response looks like
 ```
 
 
-In some cases it might be beneficial to name the queries. This is the case especially when the queries or mutations have [parameters](https://graphql.org/learn/queries/#variables). We will go into parameters soon. 
+In some cases it might be beneficial to name the queries. This is the case especially when the queries or mutations have [parameters](https://graphql.org/learn/queries/#variables). We will get into parameters soon. 
 
 
 If there are multiple queries, Playground asks you to choose which of them to run:
@@ -993,7 +993,7 @@ If there are multiple queries, Playground asks you to choose which of them to ru
 
 
 Through the exercises, we will implement a GraphQL backend for a small library. 
-Start with [this file](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js). Remember _npm init_ and to install dependencies!
+Start with [this file](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js). Remember to _npm init_ and to install dependencies!
 
 Note that the code does not initially work since the schema definition is not complete.
 
@@ -1029,7 +1029,7 @@ should return
 Implement query _allBooks_, which returns the details of all books. 
 
 
-In the end, user should be able to do the following query:
+In the end, the user should be able to do the following query:
 
 ```js
 query {

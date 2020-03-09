@@ -420,7 +420,7 @@ As before we've seen how the compiler can decide the type of a variable by the v
 
 Even though the compiler is pretty intelligent in order to be sure not to do anything unwanted it is safer to create the correct types to the data by yourself.
 
-Now we have a basic working TypeScript express app but there's barely any actual <i>typings</i> in the code. Since we now have a clear definition on what type of data should be accepted for the weather and visibility fields for the data there is no reason for us not to include also those types in the the code. Let's create our type-exclusive file _types.ts_ in which we'll put all our types in this project.
+Now we have a basic working TypeScript express app but there's barely any actual <i>typings</i> in the code. Since we now have a clear definition on what type of data should be accepted for the weather and visibility fields for the data there is no reason for us not to include also those types in the code. Let's create our type-exclusive file _types.ts_ in which we'll put all our types in this project.
 
 First let's type the allowed _Weather_ and _Visibility_ values through a [union type](https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types) with allowed strings: 
 
