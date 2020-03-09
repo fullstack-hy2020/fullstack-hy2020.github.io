@@ -912,15 +912,19 @@ Fetch and add diagnoses to application state from <i>/api/diagnosis</i> endpoint
 
 #### 9.22: patientor, step5
 
-Extend the Entry-listing in the patient page to include the Entry's details with a new component _EntryDetails_. _EntryDetails_ should show rest of the information of the patients entries distinguishing different types from each other. You can use the help from _Icons_ and _SemanticCOLORS_ from the _semantic-ui-react_ package. Refer to its [documentation](https://react.semantic-ui.com/) when searching for the appropriate visuals for the component.
+Extend the entry-listing in the patient page to include the Entry's details with a new component that shows rest of the information of the patients entries distinguishing different types from each other. 
 
-You should use a _switch - case_ function to retreive a color for your HealthCheck rating based Icon (whatever that may be) using an _assertNever_ function as seen previously in the material, so that no cases can be forgotten. Like this:
+You could use eg. [Icon](https://react.semantic-ui.com/elements/icon/) or some other [SemanticUI](https://react.semantic-ui.com/) components the get appropriate visuals for your listing.
 
-![](../../images/9/35.png)
+You should use a _switch case_ based rendering and Use exhaustive type checking as seen previously in the material, so that no cases can be forgotten. 
 
-The resulting entries in the listing should look something like this:
+Like this:
 
-![](../../images/9/36.png)
+![](../../images/9/35a.png)
+
+The resulting entries in the listing <i>could</i> look something like this:
+
+![](../../images/9/36a.png)
 
 </div>
 
@@ -1213,7 +1217,11 @@ With this material you should be able to complete the rest of this part's exerci
 
 #### 9.23: patientor, step6
 
-So far we have established that the patients can have different types of entries, but we don't yet have any way of adding entries for our patients in our app, so it would at the moment be a pretty useless electronic medical record. So, your next task is to add an endpoint to your backend, through which you can post an entry for a patient. Remember that we have different kinds of entries in our app, so our backend should also support all those types and check that at least all required fields are given for each type.
+So far we have established that the patients can have different types of entries, but we don't yet have any way of adding entries for our patients in our app, so it would at the moment be a pretty useless electronic medical record. 
+
+Your next task is to add an endpoint <i>/api/patients/:id/entries</i> to your backend, through which you can POST an entry for a patient. 
+
+Remember that we have different kinds of entries in our app, so our backend should also support all those types and check that at least all required fields are given for each type.
 
 #### 9.24: patientor, step7
 
