@@ -8,4 +8,5 @@ export const partColors = {
   6: 'violet',
   7: 'light-blue',
   8: 'turquoise',
+  9: 'light-green'
 };
