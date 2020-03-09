@@ -254,10 +254,10 @@ try {
 Write a function that calculates the averige time of input _daily exercise hours_ and compares the to the value to the _target amount_ of daily hours and returns an object that includes the following values:
 
   - the number of days
-  - the number of traing days
+  - the number of training days
   - boolean value on whether the hours have succeeded to reach the target
   - a rating between the numbers 1-3 that tells how well the hours are met. You can decide on the metric on your own.
-  - a text value explaining the rating,
+  - a text value explaining the rating
   - the original target value
   - the calculated average time
 
