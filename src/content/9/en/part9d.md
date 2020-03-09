@@ -616,33 +616,17 @@ export const StateProvider: React.FC<StateProviderProps> = ({
 };
 ```
 
-Provider makes <i>state</i> and <i>dispatch</i> function available in all the compomnents, thanks to the setup in componment <i>App</i>:  
+Provider makes <i>state</i> and <i>dispatch</i> function available in all the components, thanks to the setup in <i>index.ts</i>:  
 
 ```js 
-import { reducer, StateProvider } from "./state"; // highlight-line
+import { reducer, StateProvider } from "./state";
 
-// ...
-
-const App: React.FC = () => {
-  // ...
-
-  return (
-    <StateProvider reducer={reducer}> // highlight-line
-      <div className="App">
-        <Router>
-          <Container>
-            <Header as="h1">Patientor</Header>
-            <Button as={Link} to="/" primary>
-              Home
-            </Button>
-            <Divider hidden />
-            <Route exact path="/" render={() => <PatientListPage />} />
-          </Container>
-        </Router>
-      </div>
-    </StateProvider>
-  );
-};
+ReactDOM.render(
+  <StateProvider reducer={reducer}>
+    <App />
+  </StateProvider>, 
+  document.getElementById('root')
+);
 ```
 
 It also defines the <i>useStateValue</i> hook
@@ -704,21 +688,20 @@ Frontends types are based on what you have created when developing the backend i
 We are fetching patient from the backend using [axios](https://github.com/axios/axios) and we are giving the <i>axios.get</i> function a type parameter as to what is the type for the response data:
 
 ````js
-const fetchPatientList = React.useCallback(async () => {
-  const { data: patientListFromApi } = await axios.get<Patient[]>(
-    `${apiBaseUrl}/patients`
-  );
-
-  dispatch({ type: "SET_PATIENT_LIST", payload: patientListFromApi });
-}, [dispatch]);
-
 React.useEffect(() => {
+  const fetchPatientList = async () => {
+    const { data: patientListFromApi } = await axios.get<Patient[]>(
+      `${apiBaseUrl}/patients`
+    );
+    dispatch({ type: "SET_PATIENT_LIST", payload: patientListFromApi });
+  };
+
   try {
-    fetchPatientList(); 
+    fetchPatientList();
   } catch (e) {
     console.error(e);
   }
-}, [fetchPatientList]);
+}, [dispatch]);
 ````
 
  **A word of warning!** Passing the type parameter for axios will not validate any data and is quite dangerous especially if you are using external APIs. You can create custom validation functions taking in the whole payload and returning the correct type or you can use type guard. Both are valid. There are also many libraries providing validation through different kind of schemas eg. [io-ts](https://github.com/gcanti/io-ts). For simplicity we will continue trusting our own work and trust that we will get data of the correct form from the backend.
@@ -727,40 +710,6 @@ As our app is quite small we will update the state by simply calling the <i>disp
 
 ```js
 dispatch({ type: "SET_PATIENT_LIST", payload: patientListFromApi });
-```
-
-Note how the code has wrapped the code of function <i>fetchPatientList</i> with [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback). This guarantees that the callback function is not recreated in with each render of the function. 
-
-If we would have defined the function as follows
-
-````js
-const fetchPatientList = async () => {
-  const { data: patientListFromApi } = await axios.get<Patient[]>(
-    `${apiBaseUrl}/patients`
-  );
-
-  dispatch({ type: "SET_PATIENT_LIST", payload: patientListFromApi });
-}
-````
-
-the effrect hook would be run in <i>every render</i> since the effect hook has includes the function in the dependency array.
-
-We could get rid of this "problem" by moving the definition of <i>fetchPatientList</i> inside the useEffect hook:
-
-```js
-React.useEffect(() => {
-  const fetchPatientList = async () => {
-    const { data: patientListFromApi } = await axios.get<Patient[]>(
-      `${apiBaseUrl}/patients`
-    );
-    dispatch({ type: "SET_PATIENT_LIST", payload: patientListFromApi });
-  }
-  try {
-    fetchPatientList();
-  } catch (e) {
-    console.error(e);
-  }
-}, [dispatch]);
 ```
 
 </div>
@@ -961,6 +910,18 @@ Fetch and add diagnoses to application state from <i>/api/diagnosis</i> endpoint
 
 ![](../../images/9/42.png)
 
+#### 9.22: patientor, step5
+
+Extend the Entry-listing in the patient page to include the Entry's details with a new component _EntryDetails_. _EntryDetails_ should show rest of the information of the patients entries distinguishing different types from each other. You can use the help from _Icons_ and _SemanticCOLORS_ from the _semantic-ui-react_ package. Refer to its [documentation](https://react.semantic-ui.com/) when searching for the appropriate visuals for the component.
+
+You should use a _switch - case_ function to retreive a color for your HealthCheck rating based Icon (whatever that may be) using an _assertNever_ function as seen previously in the material, so that no cases can be forgotten. Like this:
+
+![](../../images/9/35.png)
+
+The resulting entries in the listing should look something like this:
+
+![](../../images/9/36.png)
+
 </div>
 
 <div class="content">
@@ -969,15 +930,15 @@ Fetch and add diagnoses to application state from <i>/api/diagnosis</i> endpoint
 
 Form handling can sometimes be quite a nuisance in React. That's why we have decided to utilize the the [Formik](https://jaredpalmer.com/formik/docs/overview) package for our add patient form in our app. Here's a small intro from to Formiks's documentation:
 
-> _Formik is a small library that helps you with the 3 most annoying parts:_
+> Formik is a small library that helps you with the 3 most annoying parts:
 >
-> - _Getting values in and out of form state_
-> - _Validation and error messages_
-> - _Handling form submission_
+> - Getting values in and out of form state
+> - Validation and error messages
+> - Handling form submission
 >
-> _By colocating all of the above in one place, Formik will keep things organized--making testing, refactoring, and reasoning about your forms a breeze._
+> By colocating all of the above in one place, Formik will keep things organized - making testing, refactoring, and reasoning about your forms a breeze.
 
-The code for the form can be found in _src/AddPatientModal/AddPatientForm.tsx_ and some form field helpers can be found in _src/AddPatientModal/FormField.tsx_. In the beginning of _AddPatientForm.tsx_ you can see, that we have created a type for our form values, called simply _FormValues_. It is a narrowed down version of _Patient_, with the properties _id_ and _entries_ omitted, because we don't want the user to be able to submit then when creating a new patient. _id_ is created by the backend and _entries_ can only be added for existing patients.
+The code for the form can be found in <i>src/AddPatientModal/AddPatientForm.tsx</i> and some form field helpers can be found in <i>src/AddPatientModal/FormField.tsx</i>. In the beginning of <i>AddPatientForm.tsx</i> you can see, that we have created a type for our form values, called simply <i>FormValues</i>. It is a narrowed down version of <i>Patient</i>, with the properties <i>id</i> and <i>entries</i> omitted, because we don't want the user to be able to submit then when creating a new patient. <i>id</i> is created by the backend and <i>entries</i> can only be added for existing patients.
 
 ```js
 export type FormValues = Omit<Patient, "id" | "entries">;
@@ -992,17 +953,19 @@ interface Props {
 }
 ```
 
-There we can see that the component requires two props, _onSubmit_ and _onCancel_. Both are callback functions that return _void_, but as arguments _onSubmit_ should receive an object of our _FormValues_ type, so that the callback can handle our form values, and _onCancel_ should not expect any arguments.
+There we can see that the component requires two props, <i>onSubmit</i> and <i>onCancel</i>. Both are callback functions that return <i>void</i>. As arguments <i>onSubmit</i> should receive an object of our <i>FormValues</i> type, so that the callback can handle our form values. 
 
-When creating _AddPatientForm_ function component, you can see that we have bound _Props_ type as as our component's props, and are destructuring _onSubmit_ and _onCancel_ from those props.
+When creating <i>AddPatientForm</i> function component, you can see that we have bound <i>Props</i> type as as our component's props, and are destructuring <i>onSubmit</i> and <i>onCancel</i> from those props.
 
 ```js
-export const AddPatientForm: React.FC<Props> = ({ onSubmit, onCancel }) => {...
+export const AddPatientForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
+  // ...
+}
 ```
 
-Now, before we go any further, let's have a look at our form helpers in _FormField.tsx_. If you look at what is exported from the file, you will find the type _GenderOption_ and the function components _SelectField_ and _TextField_.
+Now, before we go any further, let's have a look at our form helpers in <i>FormField.tsx</i>. If you look at what is exported from the file, you will find the type <i>GenderOption</i> and the function components <i>SelectField</i> and <i>TextField</i>.
 
-Let's take a closer look at _SelectField_ and the types around it. First we create a generic type for each option object, that contains a value and a label for that value. These are the kind of option objects we want to allow on our form in the select field. Since the only options we want to allow are different genders, we set that the _value_ should be of type _Gender_.
+Let's take a closer look at <i>SelectField</i> and the types around it. First we create a generic type for each option object, that contains a value and a label for that value. These are the kind of option objects we want to allow on our form in the select field. Since the only options we want to allow are different genders, we set that the <i>value</i> should be of type <i>Gender</i>.
 
 ```js
 export type GenderOption = {
@@ -1011,7 +974,7 @@ export type GenderOption = {
 };
 ```
 
-In _AddPatientForm.tsx_ we use this type for the variable _genderOptions_, and declare that it will be an array containing objects of type _GenderOption_:
+In <i>AddPatientForm.tsx</i> we use this type for the variable <i>genderOptions</i>, and declare that it will be an array containing objects of type <i>GenderOption</i>:
 
 ```js
 const genderOptions: GenderOption[] = [
@@ -1021,7 +984,7 @@ const genderOptions: GenderOption[] = [
 ];
 ```
 
-Next look at the type _SelectFieldProps_. It defines the type for the props for our _SelectField_ component. There you can see that options is an array of _GenderOption_ types and the optional defaultValue is also of the same type.
+Next look at the type <i>SelectFieldProps</i>. It defines the type for the props for our <i>SelectField</i> component. There you can see that options is an array of <i>GenderOption</i> types and the optional defaultValue is also of the same type.
 
 ```js
 type SelectFieldProps = {
@@ -1032,7 +995,7 @@ type SelectFieldProps = {
 };
 ```
 
-The function component _SelectField_ in itself is pretty straight forward. It renders the label, a select element, and all given option elements, or actually their labels and values.
+The function component <i>SelectField</i> in itself is pretty straight forward. It renders the label, a select element, and all given option elements, or actually their labels and values.
 
 ```jsx
 export const SelectField: React.FC<SelectFieldProps> = ({
@@ -1055,7 +1018,7 @@ export const SelectField: React.FC<SelectFieldProps> = ({
 );
 ```
 
-Now let's move on to the _TextField_ component. It uses an intersection of SemanticUI's _InputProps_ and a type that consists of a string label and an optional error message as props. From the props <i>name</i>, _label_, _placeholder_ and _errorMessage_ are destructured into variables and used within the component. The component renders a SemanticUI form field with the given label and a Formik _Field_, to which <i>name</i>, _placeholder_ and a function component are given as props. The function component used as props is _TextInput_, which we have created ourselves. If the _errorMessage_ prop is truthy, then we will render the error message below the input element.
+Now let's move on to the <i>TextField</i> component. It uses an intersection of SemanticUI's <i>InputProps</i> and a type that consists of a string label and an optional error message as props. From the props <i>name</i>, <i>label</i>, <i>placeholder</i> and <i>errorMessage</i> are destructured into variables and used within the component. The component renders a SemanticUI [Form.Field](https://react.semantic-ui.com/collections/form/) with the given label and a Formik [Field](https://jaredpalmer.com/formik/docs/api/field), to which <i>name</i>, <i>placeholder</i> and a function component are given as props. The function component used as props is <i>TextInput</i>, which we have created ourselves. If the <i>errorMessage</i> prop is truthy, then we will render the error message below the input element.
 
 ```jsx
 export const TextField: React.FC<InputProps & {
@@ -1070,7 +1033,7 @@ export const TextField: React.FC<InputProps & {
 );
 ```
 
-`TextInput_ is a simple function component that accepts an intersection of SemanticUI's _InputProps_ and Formiks's _FieldProps_ as props and then renders an input element with the help of SemanticUI. The _placeholder_ props is passed down from _TextField`'s props and the rest of the values for the input element (_...field`) are generated by Formik's _Field_ where this component is used.
+<i>TextInput</i> is a simple component that accepts an intersection of SemanticUI <i>InputProps</i> and Formiks <i>FieldProps</i> as props and then renders a SemanticUI [Input](https://react.semantic-ui.com/elements/input/). The <i>placeholder</i> props is passed down from props of <i>TextField</i> and the rest of the values for the input element (<i>...field</i>) are generated by Formik's <i>Field</i> where this component is used.
 
 ```jsx
 const TextInput: React.FC<FieldProps & InputProps> = ({
@@ -1079,7 +1042,9 @@ const TextInput: React.FC<FieldProps & InputProps> = ({
 }) => <Input placeholder={placeholder} {...field} />;
 ```
 
-Now back to the actual form component in _AddPatientForm.tsx_. The function component _AddPatientForm_ renders a _Formik_ element, which is a wrapper that requires two props, which are quite self explanatory: _initialValues_ and _onSubmit_. The Formik wrapper keeps track of your form's state and then exposes it plus a few reusable methods and event handlers to your form via props. We are also using an optional _validate_ prop, that expects a validation function and returns an object containing possible errors. Here we only check that our text fields are not falsy, but it could easily contain e.g. some validation for the social security number format etc. First have a look at the entire component, we will later explain the different parts in more detail.
+Now back to the actual form component in <i>AddPatientForm.tsx</i>. The function component <i>AddPatientForm</i> renders a [Formik component](https://jaredpalmer.com/formik/docs/api/formik), which is a wrapper that requires two props, which are quite self explanatory: <i>initialValues</i> and <i>onSubmit</i>. The Formik wrapper keeps track of your form's state and then exposes it plus a few reusable methods and event handlers to your form via props.
+
+ We are also using an optional <i>validate</i> prop, that expects a validation function and returns an object containing possible errors. Here we only check that our text fields are not falsy, but it could easily contain e.g. some validation for the social security number format etc. First have a look at the entire component, we will later explain the different parts in more detail.
 
 ```jsx
 export const AddPatientForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
@@ -1123,6 +1088,7 @@ export const AddPatientForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
           touched[fieldName] && errors[fieldName]
             ? errors[fieldName]
             : undefined;
+        
         return (
           <Form className="form ui">
             <TextField
@@ -1175,26 +1141,32 @@ export const AddPatientForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
 };
 ```
 
-As a child for our Formik wrapper, we create a function that returns the form contents as we want them. We use formik's _Form_ to render the actual form element and inside that we use our _TextField_ and _SelectField_ components, that we created in _FormField.tsx_. Inside the function we can use Formik's _errors_ and _touched_ objects, that contain data about possible validation errors and of fields that have been touched. If a field has been touched and contains an error, we will pass that error to the _TextField_ component to be rendered there. If we look at our _TextField_ component, we can see that the type for the _errorMessage_ prop is an optional string. To avoid duplicating same logic for all form fields, we have created a helper function _getFieldErrorMessage_, which checks if the given field is truthy in both _touched_ and _errors_, and returns the value from the _errors_ object in that case. If either check was falsy, the function returns _undefined_. From the function signature we can see that the _fieldName_ argument has the followin type:
+As a child for our Formik wrapper, we create a <i>function</i> that returns the form contents as we want them. We use Formik's [Form](https://jaredpalmer.com/formik/docs/api/form) to render the actual form element and inside that we use our <i>TextField</i> and <i>SelectField</i> components, that we created in <i>FormField.tsx</i>.
+
+ Inside the function we can use Formik's <i>errors</i> and <i>touched</i> objects, that contain data about possible validation errors and of fields that have been touched. If a field has been touched and contains an error, we will pass that error to the <i>TextField</i> component to be rendered there. If we look at our <i>TextField</i> component, we can see that the type for the <i>errorMessage</i> prop is an optional string. To avoid duplicating same logic for all form fields, we have created a helper function <i>getFieldErrorMessage</i>:
+ 
+ ```js
+const getFieldErrorMessage = (fieldName: keyof FormValues) =>
+  touched[fieldName] && errors[fieldName]
+    ? errors[fieldName]
+    : undefined;
+ ```
+
+Function checks if the given field is <i>touched</i> and has <i>errors</i>, and returns the value from the <i>errors</i> object in that case. If either check was falsy, the function returns <i>undefined</i>. From the function signature we can see that the <i>fieldName</i> argument has the followin type:
 
 ```js
-keyof FormCalues
+fieldName: keyof FormCalues
 ```
 
-That means that the given argument has to be a key present in the _FormValues_ type. Basically it translates to the type:
+That means that the given argument has to be a key present in the <i>FormValues</i> type. Basically it translates to the type:
 
 ```js
 fieldName: "name" | "ssn" | "dateOfBirth" | "occupation" | "gender";
 ```
 
-But is less verbose. This type prevents us from calling the function with an invalid value and thus we will be notified if we misspell the name of a field or in some other way try to use the function in the wrong way. Here is the whole function:
+But is less verbose. This type prevents us from calling the function with an invalid value and thus we will be notified if we misspell the name of a field or in some other way try to use the function in the wrong way. 
 
-```js
-const getFieldErrorMessage = (fieldName: keyof FormValues) =>
-  touched[fieldName] && errors[fieldName] ? errors[fieldName] : undefined;
-```
-
-Lastly on the form, we create two buttons, one for cancelling the form submission, and one for submitting the form. The cancel button calls the _onCancel_ callback straight away, while the submit button triggers Formik's onSubmit event, which in turn uses the _onSubmit_ callback from the component's props. Submission is handled through Formik, because that way we can get it to call the validation function before performing the actual submission. If the validation function returns any errors, the submission is cancelled. The buttons are set inside a SemanticUI grid, to get them next to each other easily.
+Lastly on the form, we create two buttons, one for cancelling the form submission, and one for submitting the form. The cancel button calls the <i>onCancel</i> callback straight away, while the submit button triggers Formik's onSubmit event, which in turn uses the <i>onSubmit</i> callback from the component's props. Submission is handled through Formik, because that way we can get it to call the validation function before performing the actual submission. If the validation function returns any errors, the submission is cancelled. The buttons are set inside a SemanticUI [Grid](https://react.semantic-ui.com/collections/grid/), to get them next to each other easily.
 
 ```jsx
 <Grid>
@@ -1211,7 +1183,7 @@ Lastly on the form, we create two buttons, one for cancelling the form submissio
 </Grid>
 ```
 
-The _onSubmit_ callback has been passed down all the way from our patient list page. See async function _submitNewPatient_ in _src/PatientListPage/index.tsx_. It basically performs a post operation to our backend, adds the new returned patient to our state and closes the modal. If the backend returns an error, the error is displayed on the form.
+The <i>onSubmit</i> callback has been passed down all the way from our patient list page. It basically performs a post operation to our backend, adds the new returned patient to our state and closes the modal. If the backend returns an error, the error is displayed on the form.
 
 Here is our submit function:
 
@@ -1219,7 +1191,7 @@ Here is our submit function:
 const submitNewPatient = async (values: FormValues) => {
   try {
     const { data: newPatient } = await axios.post<Patient>(
-      _${apiBaseUrl}/patients_,
+      `${apiBaseUrl}/patients`,
       values
     );
     dispatch({ type: "ADD_PATIENT", payload: newPatient });
@@ -1231,25 +1203,13 @@ const submitNewPatient = async (values: FormValues) => {
 };
 ```
 
-With this material you should be able to complete the rest of this weeks exercises. Remember: When in doubt, try reading the existing code to find clues on how to proceed.
+With this material you should be able to complete the rest of this part's exercises. When in doubt, try reading the existing code to find clues on how to proceed!
 
 </div>
 
 <div class="tasks">
 
-Exercises 9.22.-9.25.
-
-#### 9.22: patientor, step5
-
-Extend the Entry-listing in the patient page to include the Entry's details with a new component _EntryDetails_. _EntryDetails_ should show rest of the information of the patients entries distinguishing different types from each other. You can use the help from _Icons_ and _SemanticCOLORS_ from the _semantic-ui-react_ package. Refer to its [documentation](https://react.semantic-ui.com/) when searching for the appropriate visuals for the component.
-
-You should use a _switch - case_ function to retreive a color for your HealthCheck rating based Icon (whatever that may be) using an _assertNever_ function as seen previously in the material, so that no cases can be forgotten. Like this:
-
-![](../../images/9/35.png)
-
-The resulting entries in the listing should look something like this:
-
-![](../../images/9/36.png)
+### Exercises 9.23.-9.25.
 
 #### 9.23: patientor, step6
 
