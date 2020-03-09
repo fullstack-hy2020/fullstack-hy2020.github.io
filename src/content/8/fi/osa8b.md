@@ -786,7 +786,7 @@ useEffect(() => {
 
 Tämä ratkaisu ei kuitenkaan toimi, ellei _notify_-funktiota ole määritelty [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-funktioon käärittynä. Jos näin ei tehdä, seurauksena on ikuinen luuppi, sillä aina kun komponentti _App_ renderöidään uudelleen notifikaation poistamisen jälkeen, syntyy <i>uusi versio</i> funktiosta _notify_ ja se taas aiheuttaa efektifunktion uudelleensuorituksen ja taas uuden notifikaation...
 
-Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-5), branchissa <i>part8-5</i>.
+Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5), branchissa <i>part8-5</i>.
 
 ### Apollo Client ja sovelluksen tila
 
