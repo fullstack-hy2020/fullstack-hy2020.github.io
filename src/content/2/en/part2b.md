@@ -214,7 +214,7 @@ const handleNoteChange = (event) => {
 }
 ```
 
-The <em>target</em> property of the event object now corresponds the controlled <i>input</i> element and <em>event.target.value</em> refers to the input value of that element.
+The <em>target</em> property of the event object now corresponds to the controlled <i>input</i> element and <em>event.target.value</em> refers to the input value of that element.
 
 Note that we did not need to call the _event.preventDefault()_ method like we did in the <i>onSubmit</i> event handler. This is because there is no default action that occurs on an input change, unlike on a form submission.
 
@@ -277,7 +277,7 @@ const App = (props) => {
 }
 ```
 
-Let's change the component so that it stores a list of all the notes to be displayed in the <em>notesToShow</em> variable. The items of the list depends on the state of the component:
+Let's change the component so that it stores a list of all the notes to be displayed in the <em>notesToShow</em> variable. The items of the list depend on the state of the component:
 
 ```js
 import React, { useState } from 'react'
@@ -310,7 +310,7 @@ const App = (props) => {
 }
 ```
 
-The definition of the <em>notesToShow</em> variable is rather compact
+The definition of the <em>notesToShow</em> variable is rather compact:
 
 ```js
 const notesToShow = showAll

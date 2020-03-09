@@ -291,6 +291,7 @@ It takes much less effort to write automated tests, and it will make the develop
 Our initial tests could look like this:
 
 ```js
+const bcrypt = require('bcrypt')
 const User = require('../models/user')
 
 //...
@@ -298,7 +299,10 @@ const User = require('../models/user')
 describe('when there is initially one user at db', () => {
   beforeEach(async () => {
     await User.deleteMany({})
-    const user = new User({ username: 'root', password: 'sekret' })
+
+    const passwordHash = await bcrypt.hash('sekret', 10)
+    const user = new User({ username: 'root', passwordHash })
+
     await user.save()
   })
 

@@ -157,7 +157,7 @@ xhttp.onreadystatechange = function() {
 
     document.getElementById('notes').appendChild(ul)
   }
-)
+}
 
 xhttp.open('GET', '/data.json', true)
 xhttp.send()

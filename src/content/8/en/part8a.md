@@ -103,7 +103,7 @@ The application logic stays simple, and the code on the browser gets exactly the
 We will get to know the basics of GraphQL by implementing a GraphQL version of the phonebook application from parts 2 and 3. 
 
 
-In the heart of all GraphQL applications is a [schema](https://graphql.org/learn/schema/), which describes the data sent between client and the server. The initial schema for our phonebook is as follows: 
+In the heart of all GraphQL applications is a [schema](https://graphql.org/learn/schema/), which describes the data sent between the client and the server. The initial schema for our phonebook is as follows: 
 
 ```js
 type Person {
@@ -130,9 +130,9 @@ All of the String fields, except <i>phone</i>, must be given a value. This is ma
 The second type is a [Query](https://graphql.org/learn/schema/#the-query-and-mutation-types). Practically every GraphQL schema describes a Query, which tells what kind of queries can be made to the API. 
 
 
-The phonebook describes three different queries. _PersonCount_ returns an integer, _allPersons_ returns a list of <i>Person</i> objects and <i>findPerson</i> is given a string parameter and it returns a <i>Person</i> object. 
+The phonebook describes three different queries. _personCount_ returns an integer, _allPersons_ returns a list of <i>Person</i> objects and <i>findPerson</i> is given a string parameter and it returns a <i>Person</i> object. 
 
-Again exclamation marks are used to mark which return values and parameters are <i>Non-Null</i>. _PersonCount_ will, for sure, return an integer. The query _findPerson_ must be given a string as a parameter. The query returns a <i>Person</i>-object or <i>null</i>. _AllPersons_ returns a list of <i>Person</i> objects, and the list does not contain any <i>null</i>-values. 
+Again exclamation marks are used to mark which return values and parameters are <i>Non-Null</i>. _personCount_ will, for sure, return an integer. The query _findPerson_ must be given a string as a parameter. The query returns a <i>Person</i>-object or <i>null</i>. _allPersons_ returns a list of <i>Person</i> objects, and the list does not contain any <i>null</i>-values. 
 
 So the schema describes what queries the client can send to the server, what kind of parameters the queries can have, and what kind of data the queries return. 
 
@@ -231,7 +231,7 @@ The response is like this:
 }
 ```
 
-The return value was not marked as non-Null, so if we search for the details of an unknown
+The return value was marked as nullable, so if we search for the details of an unknown
 
 ```js
 query {
@@ -637,7 +637,7 @@ The current code of the application can be found on [ Github](https://github.com
 ### Mutations
 
 
-Let's add functionality for adding new persons to the phonebook. In GraphQL, all operations which cause a change are done with [mutations](https://graphql.org/learn/queries/#mutations). Mutations are described in the schema as the keys of type <i>Mutation</i>.
+Let's add a functionality for adding new persons to the phonebook. In GraphQL, all operations which cause a change are done with [mutations](https://graphql.org/learn/queries/#mutations). Mutations are described in the schema as the keys of type <i>Mutation</i>.
 
 
 The schema for a mutation for adding a new person looks as follows: 
@@ -654,7 +654,7 @@ type Mutation {
 ```
 
 
-The Mutation is given the details of the person as parameters. The parameter <i>phone</i> is the only one which is not non-null. The Mutation also has a return value. The return value is type <i>Person</i>, the idea being that the details of the added person are returned is the operation is successful and if not, null. Value for the field <i>id</i> is not given as a parameter. Generating an id is better left for the server. 
+The Mutation is given the details of the person as parameters. The parameter <i>phone</i> is the only one which is nullable. The Mutation also has a return value. The return value is type <i>Person</i>, the idea being that the details of the added person are returned if the operation is successful and if not, null. Value for the field <i>id</i> is not given as a parameter. Generating an id is better left for the server. 
 
 
 Mutations also require a resolver: 
@@ -833,7 +833,7 @@ type Query {
 ```
 
 
-The type <i>YesNo</i> is GraphQL [enum](https://graphql.org/learn/schema/#enumeration-types), or an enumerable, with two possible values <i>YES</i> or <i>NO</i>. In the query _allPersons_ the parameter _phone_  has the type <i>YesNo</i>, but is not non-null. 
+The type <i>YesNo</i> is GraphQL [enum](https://graphql.org/learn/schema/#enumeration-types), or an enumerable, with two possible values <i>YES</i> or <i>NO</i>. In the query _allPersons_ the parameter _phone_  has the type <i>YesNo</i>, but is nullable. 
 
 
 The resolver changes like so:
@@ -900,7 +900,7 @@ Mutation: {
 ```
 
 
-The mutation finds the person to be updated person by the field <i>name</i>.
+The mutation finds the person to be by the field <i>name</i>.
 
 The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>.
 
@@ -978,7 +978,7 @@ The response looks like
 ```
 
 
-In some cases it might be beneficial to name the queries. This is the case especially when the queries or mutations have [parameters](https://graphql.org/learn/queries/#variables). We will go into parameters soon. 
+In some cases it might be beneficial to name the queries. This is the case especially when the queries or mutations have [parameters](https://graphql.org/learn/queries/#variables). We will get into parameters soon. 
 
 
 If there are multiple queries, Playground asks you to choose which of them to run:
@@ -993,7 +993,7 @@ If there are multiple queries, Playground asks you to choose which of them to ru
 
 
 Through the exercises, we will implement a GraphQL backend for a small library. 
-Start with [this file](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js). Remember _npm init_ and to install dependencies!
+Start with [this file](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js). Remember to _npm init_ and to install dependencies!
 
 Note that the code does not initially work since the schema definition is not complete.
 
@@ -1029,7 +1029,7 @@ should return
 Implement query _allBooks_, which returns the details of all books. 
 
 
-In the end, user should be able to do the following query:
+In the end, the user should be able to do the following query:
 
 ```js
 query {
@@ -1094,7 +1094,7 @@ should return
 #### 8.4: Books of an author
 
 
-Modify the _allBooks_ query so, that user can give an optional parameter <i>author</i>. The response should include only books written by that author. 
+Modify the _allBooks_ query so, that a user can give an optional parameter <i>author</i>. The response should include only books written by that author. 
 
 For example query
 

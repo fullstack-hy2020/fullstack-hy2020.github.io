@@ -399,7 +399,7 @@ Osoittamalla oikeaa kohtaa virheelliseltä riviltä saa virheilmoituksen näkyvi
 
 ![](../../images/8/3.png)
 
-Jos Playground vaikuttaa olevan jumissa, niin sivun reloadaaminen yleensä auttaa.
+Jos Playground vaikuttaa olevan jumissa, niin sivun päivittäminen yleensä auttaa.
 
 Klikkaamalla oikean reunan tekstiä <i>DOCS</i> näyttää Playground palvelimen GraphQL-skeeman.
 

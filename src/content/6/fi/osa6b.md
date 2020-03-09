@@ -131,7 +131,7 @@ export const filterChange = filter => {
 export default filterReducer
 ```
 
-Saamme nyt muodostettua varsinaisen reducerin yhdistämällä kaksi olemassaolevaa reduceria funktion [combineReducers](https://redux.js.org/api-reference/combinereducers) avulla.
+Saamme nyt muodostettua varsinaisen reducerin yhdistämällä kaksi olemassaolevaa reduceria funktion [combineReducers](https://redux.js.org/api/combinereducers) avulla.
 
 Määritellään yhdistetty reduceri tiedostossa <i>index.js</i>:
 

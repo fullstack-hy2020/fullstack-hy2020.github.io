@@ -325,7 +325,7 @@ Kyse on kuitenkin edelleen yhden komennon sisältävästä nuolifunktiosta, kome
 
 ### Antipattern: taulukon indeksit avaimina
 
-Olisimme saaneet konsolissa olevan varoituksen katoamaan myös käyttämällä avaimina taulukon indeksejä. Indeksit selviävät käyttämällä map-metodissa myös toista parametria:
+Olisimme saaneet konsolissa olevan varoituksen katoamaan myös käyttämällä avaimina taulukon indeksejä. Indeksit selviävät käyttämällä map-metodin callback-funktiossa myös toista parametria:
 
 ```js
 notes.map((note, i) => ...)

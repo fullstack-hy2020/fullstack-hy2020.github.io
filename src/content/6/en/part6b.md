@@ -144,7 +144,7 @@ export default filterReducer
 ```
 
 
-We can create the actual reducer for our application by combining the two existing reducers with the [combineReducers](https://redux.js.org/api-reference/combinereducers) function.
+We can create the actual reducer for our application by combining the two existing reducers with the [combineReducers](https://redux.js.org/api/combinereducers) function.
 
 
 Let's define the combined reducer in the <i>index.js</i> file:

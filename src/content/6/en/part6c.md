@@ -318,7 +318,7 @@ const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(initializeNotes(notes)))  
+    dispatch(initializeNotes()))  
   },[dispatch]) 
 
   // ...
