@@ -9,7 +9,7 @@ lang: en
 
 Now that we have a basic understanding of how TypeScript works and of how to create actual projects with it, it is time to start creating something actually useful. So now we're going to create a completely new project, with a bit more realistic use cases in mind.
 
-One major change from the previous part is that **we're not going to use ts-node anymore**. ts-node is a handy tool, with which it is very easy to get started, but in the long run it is suggested to use the official TypeScript compiler that comes with the _typescript_ npm-package. With this compiler the basic JavaScript files are generated and packaged from the .ts files so that the built <i>production version</i> of the project won't contain any TypeScript code. This is exactly what is aimed for in the end, since TypeScript in itself is not runnable by browsers or Node.
+One major change from the previous part is that **we're not going to use ts-node anymore**. ts-node is a handy tool, with which it is very easy to get started, but in the long run it is suggested to use the official TypeScript compiler that comes with the _typescript_ npm-package. With this compiler the basic JavaScript files are generated and packaged from the .ts files so that the built <i>production version</i> of the project won't contain any TypeScript code. This is exactly what we are aiming for in the end, since TypeScript in itself is not runnable by browsers or Node.
 
 ### Setting up the project
 
@@ -17,7 +17,7 @@ Our project is created for Ilari, who loves riding small planes but has a bit of
 
 Let's start creating our own first real project 'Ilari's flight diaries', as we usually would by running _npm init_ and by installing the _typescript_ package. 
 
-TypeScript's native _tsc_ compiler offers us help initialising our project with the command _tsc --init_. To be able to run this, we need to add the _tsc_ command to runnable scripts in the package.json file if we don't have _typescript_ installed globally. And even if you would have typescript installed globally, you should always include the package as a dev-dependency in your project.
+TypeScript's native _tsc_ compiler offers us help initialising our project with the command _tsc --init_. To be able to run this, we need to add the _tsc_ command to runnable scripts in the package.json file unless we have installed _typescript_ globally. And even if you would have installed typescript globally, you should always include the package as a dev-dependency in your project.
 
 ```json
 {
@@ -31,18 +31,18 @@ TypeScript's native _tsc_ compiler offers us help initialising our project with 
 
  Very often the bare _tsc_ command is set up in the project scripts for other scripts to use, so it is very common to see the  _tsc_ command set up within the project like this.
 
- Now we can init our tsconfig.json settings by running:
+ Now we can initialise our tsconfig.json settings by running:
 
 
 ```sh
  npm run tsc -- --init
 ```
 
- **Notice** the extra -- before the actual argument, arguments before the -- are interpreted for the command _npm_ abd after are for the command that is run throught the package.json scripts. 
+ **Notice** the extra -- before the actual argument, arguments before the -- are interpreted for the command _npm_ and ones after are for the command that is run throught the package.json scripts. 
 
-The created tsconfig.json contains a pretty big list of all of the possible configurations available to use with only a few uncommented ones. Studying the initial tsconfig.json file might be useful to find something you might be needing and it is completely okay to not delete the commented rows in the file just in case you might someday need to expand your configuration settings. 
+The created tsconfig.json contains a pretty big list of all of the possible configurations available to use with only a few uncommented ones. Studying the initial tsconfig.json file might be useful for finding some configuration options you might need. It is also completely okay to keep the commented rows in the file just in case you might someday need to expand your configuration settings. 
 
-Right now the preferred settings we want right now are the following:
+The preferred settings we want right now are the following:
 
 ```json
 {
@@ -57,14 +57,13 @@ Right now the preferred settings we want right now are the following:
     "noImplicitAny": true,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true
-     
   }
 }
 ```
 
 Let's go through each setting now: 
 
-The <i>target</i> parameter informs the compiler into which ECMAScript version the generated JavaScript should be generated into. ES6 is supported by most browsers and therefore is a good and pretty safe option.
+The <i>target</i> parameter tells the compiler which ECMAScript version the generated JavaScript should be generated into. ES6 is supported by most browsers and therefore is a good and pretty safe option.
 
 <i>outDir</i> tells where the compiled result should be placed.
 
@@ -73,7 +72,7 @@ The <i>target</i> parameter informs the compiler into which ECMAScript version t
 <i>strict</i> is actually a shorthand to include multiple separate options: 
 <i>noImplicitAny, noImplicitThis, alwaysStrict, strictBindCallApply, strictNullChecks, strictFunctionTypes and strictPropertyInitialization</i>. These all guide our coding style use TypeScript features more strictly, <i>noImplicitAny</i> restricts implicit setting for any, which happens for example if you don't type the expected variables of a function. The rest of the options can all be studied more closely on the [tsconfig documentation](https://www.typescriptlang.org/v2/en/tsconfig#strict). Using <i>strict</i> is suggested by the official documentation.
 
-<i>noUnusedLocals</i> gives an error if a local variable is unused and </i>noUnusedParameters</i> when on unused parameters. 
+<i>noUnusedLocals</i> gives an error if a local variable is unused and </i>noUnusedParameters</i> when a function has unused parameters. 
 
 <i>noFallthroughCasesInSwitch</i> gives an error if a _switch - case_ is used without a fallthrough possibility (falling to a case does not _return_ or _break_ the evaluation of the switch).
 
@@ -83,7 +82,7 @@ Now that we have our preferred configuration set, let's continue by installing _
 
 ```sh
 npm install express
-npm install --save-dev @types/express @typescript-eslint/eslint-plugin @typescript-eslint/parser
+npm install --save-dev eslint @types/express @typescript-eslint/eslint-plugin @typescript-eslint/parser
 ```
 
 Now our _package.json_ should look something like this: 
@@ -213,7 +212,7 @@ Now when we can see the happy _pong_, we should try creating our first productio
 
 Just like magic a native runnable JavaScript production build of the ping-pong express backend is created into the build folder.
 
-Now our eslint also tries to interpret the files in the _build_ folder, which we don't want, as this is compiler generated code. This can easily be prevented by creating a file _.eslintignore_ in your project's root with the content you want eslint to ignore, exactly as in _.gitignore_.
+Currently our eslint tries to interpret the files in the _build_ folder as well, which we don't want, as that is compiler generated code. We can easily prevent this by creating a file _.eslintignore_ in our project's root with the content we want eslint to ignore, similarly as in _.gitignore_.
 
 Let's try our project by creating production run command for the project:
 
@@ -230,11 +229,11 @@ Let's try our project by creating production run command for the project:
 
 ```
 
-and run _npm start_ and then try to curl our defined port:
+Then run _npm start_ and try to curl our defined port:
 
 ![](../../images/9/15.png)
 
-Now we have a minimal working pipeline, with which we can develop our project, with a lot of help from our compiler and eslint in maintaining a good code quality. With this base we can actually start creating an app which we could proudly deploy into a production environment. 
+Now we have a minimal working pipeline, with which we can develop our project, with a lot of help from our compiler and eslint in maintaining a good code quality. With this base we can actually start creating an app that we could proudly deploy into a production environment. 
 
 </div>
 
@@ -250,10 +249,9 @@ The [frontend](https://github.com/fullstack-hy2020/patientor) has already been b
 
 **Note:** From now on you will be working with existing codebase and sometimes it is expected that you use your own skills to find the relevant files and and configurations to proceed in the exercises.
 
-**Note 2:** You will be extending the frontend later on so it is suggested that you fork the repository already now.
+**Note 2:** You will be extending the frontend later on so it is suggested that you fork the repository already [from here](https://github.com/fullstack-hy2020/patientor).
 
-
-**Note 3:** Code quality is extremely important, so take extra good care of that your code is _readable_ and that it can be _easily shared_ and by this, you need to end up with a result that is _production ready_, so that the built version of the project is working, and no extra dependencies are included in the end result.
+**Note 3:** Code quality is extremely important, so take extra good care of that your code is _readable_ and that it can be _easily shared_, which means that you need to end up with a result that is _production ready_, so that the built version of the project is working, and no extra dependencies are included in the end result.
 
 #### 9.10: Diagnoses backend, step1
 
@@ -265,15 +263,15 @@ You should also configure auto-reloading.
 
 #### 9.11: Diagnoses backend, step2
 
-Fork and clone the project [patientor](https://github.com/fullstack-hy2020/patientor). With the help of the README-file start the project. You should be able to use the frontend without a functioning backend.
+Fork and clone the project [patientor](https://github.com/fullstack-hy2020/patientor). Start the project with the help of the README-file. You should be able to use the frontend without a functioning backend.
 
 Ensure that backend answers to frontend's ping requests. Check developer tools to make sure it really works: 
 
 ![](../../images/9/16.png)
 
-You might also want to have a look to tab <i>console</i>.
+You might also want to have a look at the tab <i>console</i>.
 
-Set up a build script to your <i>backend</i>, so that you can create a production version of the project and make sure that also it answers to the frontend's ping.
+Set up a build script to your <i>backend</i> so that you can create a production version of the project and make sure that it answers to the frontend's ping request.
 
 </div>
 
@@ -344,7 +342,7 @@ router.post('/', (_req, res) => {
 export default router;
 ```
 
-And then let's route all requests coming with the prefix _api/diaries/_ to that specific router in _index.ts`
+And then let's route all requests coming with the prefix _api/diaries/_ to that specific router in _index.ts_
 
 
 ```js
@@ -416,9 +414,9 @@ The hint says we might want to use _resolveJsonModule_. Let's add it to our tsco
 
 Problems are now gone.
 
-As before we've seen how the compiler can decide the type of a variable by the value it is being assignet to and in a similar way the compiler interprets larger data sets, objects and arrays. This is why the compiler actually can warn us if we are trying to do something suspicious to the json data we are currently handling. If we're handling an array that includes specific types of objects and we're trying to add an object there that doesn't have all of the fields that the other objects have or is having type conflicts (for example a number where a string should be) the compiler can give us a warning. 
+As before we've seen how the compiler can decide the type of a variable by the value it is being assigned to and in a similar way the compiler interprets larger data sets, objects and arrays. This is why the compiler actually can warn us if we are trying to do something suspicious to the json data we are currently handling. If we're handling an array that includes specific types of objects and we're trying to add an object there that doesn't have all of the fields that the other objects have or is having type conflicts (for example a number where a string should be) the compiler can give us a warning. 
 
-Even though the compiler is pretty intelligent in order to be sure not to do anything unwanted it is safer to create the correct types to the data by yourself.
+Even though the compiler is pretty intelligent in making sure to not to do anything unwanted, it is safer to create the correct types to the data by yourself.
 
 Now we have a basic working TypeScript express app but there's barely any actual <i>typings</i> in the code. Since we now have a clear definition on what type of data should be accepted for the weather and visibility fields for the data there is no reason for us not to include also those types in the code. Let's create our type-exclusive file _types.ts_ in which we'll put all our types in this project.
 
@@ -492,7 +490,7 @@ export default {
 }
 ```
 
-Type assertion should not be used unless there's no other way to proceed since there's always the danger of asserting an unfit type to an object and then trusting the assreted type. While the compiler trusts you to know when using _as_, at the same time it leaves the intelligence of the whole TypeScript to manual interpretation. 
+Type assertion should not be used unless there's no other way to proceed since there's always the danger of asserting an unfit type to an object and then trusting the asserted type. While the compiler trusts you to know when using _as_, at the same time it leaves the intelligence of the whole TypeScript to manual interpretation. 
 
 In our case we could change our data exportation method so that we can have the typing happen naturally within the variable declaration file. Since typings are not valid in a JSON-file, we should convert the json-file to a ts-file which exports the typed object-format data in the following way: 
 
@@ -552,7 +550,7 @@ Sometimes we end up in a situation where we want to use a specific modification 
 
 In our example we should consider that Ilari might want to create a frontend listing of all his diary entries excluding the comment field, since during a very scary flight he might end up writing there something he wouldn't necessarily want to show anyone else.
 
-The [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk) utility type allows us to choose what fields of a type we want to use of the existing type. Pick can be used to construct a completely new type or just in time when informing a function what it should return, as any other typings can be used. Utility types are special kinds of type tools, but they are used exactly as regular types are.
+The [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk) utility type allows us to choose what fields of a type we want to use of the existing type. Pick can be used to construct a completely new type or just in time when informing a function what it should return, as any other typings can be used. Utility types are special kinds of type tools, but they are used exactly as regular types.
 
 In this case, in order to create this kind of "narrowed" version of the Entry type we could just use the Pick in the function declaration:
 
@@ -615,7 +613,7 @@ export default {
 }
 ```
 
-One thing causes us a bit of concern. In there function _getNonSensitiveEntries_ we are returning the complete entries of diaries and <i>no error is given</i> despite typing!
+One thing causes a bit of concern. In the function _getNonSensitiveEntries_ we are returning the complete entries of diaries and <i>no error is given</i> despite typing!
 
 This is because TypeScript can only check whether we have all the wanted fields or not, but excess fields are not prohibited. In our case it means that it is <i>not prohibited</i> to return the DiaryEntry[] type object, but if we were to try to get a hold of the field <i>comment</i> where the diary is returned, it would not be restricted since it would be pointing to a field that TypeScript is unaware of even though it exists.
 
@@ -654,7 +652,7 @@ export default {
 }
 ```
 
-If we were to try returning this data with the basic _DiaryEntry_ type, that is, if we would type the function as follows
+If we tried to return this data with the basic _DiaryEntry_ type, i.e. if we would type the function as follows
 
 ```js
 const getNonSensitiveEntries = () : DiaryEntry[] => {
@@ -666,7 +664,7 @@ we would get the following error:
 
 Utility types includes a large set of handy tools and it is definitely worthwhile to take some time studying [their documentation](https://www.typescriptlang.org/docs/handbook/utility-types.html).
 
-Finally we can complete the route that shows all diery entries:
+Finally we can complete the route that returns all diary entries:
 
 ```js
 import express from 'express';
@@ -910,7 +908,7 @@ router.post('/', (req, res) => {
 
 Since we are now making trustworthy code and trying to make sure that we are getting exactly what we want from the requests we should get started with the goal of parsing and validating each field we are waiting for. 
 
-The skeleton of the function _addDiaryEntry_ looks like the following:
+The skeleton of the function _toNewDiaryEntry_ looks like the following:
 
 ```js
 import { NewDiaryEntry } from './types'
@@ -926,9 +924,9 @@ const toNewDiaryEntry = (object) : NewDiaryEntry => {
 export default toNewDiaryEntry;
 ```
 
-In the function we want to parse the each field and make sure that what we is returned is exactly the type _NewDiaryEntry_. Thus we should check each field separately. 
+In the function we want to parse each field and make sure that what is returned is exactly of type _NewDiaryEntry_. Thus we should check each field separately. 
 
-Once again we have a typing issue: what is the _object_ type? Since the _object_ is in fact the body of a request, express has typed it with _any_. Since within this file the whole idea is to map unknown types of fields to correct ones and check whether they are defined as expected, this might be the rare case where we actually <i>want to allow the _any_ type</i>. 
+Once again we have a typing issue: what is the _object_ type? Since the _object_ is in fact the body of a request, express has typed it with _any_. Since within this function the whole idea is to map unknown types of fields to correct ones and check whether they are defined as expected, this might be the rare case where we actually <i>want to allow the _any_ type</i>. 
 
 However if we type the object to _any_, eslint gives us a complaint:
 
@@ -940,7 +938,7 @@ The cause for the complaint is eslit-rule [no-explicit-any](https://github.com/t
 /* eslint-disable @typescript-eslint/no-explicit-any */
 ```
 
-Let us start creating the parsers for each of the fields of _object_.
+Lets start creating the parsers for each of the fields of _object_.
 
 To validate the _comment_ field we need to check that it exists, and to ensure that it is of the type _string_.
 
@@ -948,7 +946,7 @@ The function should look something like this:
 
 ```js
 const parseComment = (comment: any): string => {
-  if (comment || !isValidString(comment)) {
+  if (!comment || !isString(comment)) {
     throw new Error('Incorrect or missing comment: ' + comment);
   }
 
@@ -956,7 +954,7 @@ const parseComment = (comment: any): string => {
 }
 ```
 
-Function gets the parameter of the type _any_ type and returns it as type _string_ if it exists and is of the right type.
+The function gets the parameter of type _any_ and returns it as type _string_ if it exists and is of the right type.
 
 The string validation function looks like this
 
@@ -966,7 +964,7 @@ const isString = (text: any): text is string => {
 }
 ```
 
-The function is so called [type guard](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards), that is, a function that is returning a boolean <i>and</i> which has a <i>type predicate</i> as the return type. In our case the type predicate is
+The function is so called [type guard](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards), that is, a function that returns a boolean <i>and</i> which has a <i>type predicate</i> as the return type. In our case the type predicate is
 
 ```js
 text is string
@@ -1030,7 +1028,7 @@ const parseDate = (date: any): string => {
 }
 ```
 
-Nothing really special here, only thing is that we can't use a type guard since a date is in this case considered only a _string_. Notice that even though the _date_ variable is accepted as _any_ by the _parseDate_ function, after checking the type with _isdString_ the type is already a string which is why we are able to give the variable to the function _isDate_ with the type _string_ without any errors.
+Nothing really special here, only thing is that we can't use a type guard since a date is in this case considered only to be a _string_. Notice that even though the _date_ variable is accepted as _any_ by the _parseDate_ function, after checking the type with _isString_ the type is already a string which is why we are able to give the variable to the function _isDate_ with the type _string_ without any errors.
 
 Finally we are ready to move on to the last two types, Weather and Visibility.
 
@@ -1094,7 +1092,7 @@ With these changes, one issue arises, our data does not conform anymore to our t
 
 ![](../../images/9/30.png)
 
-This is because a string can't be just assumed to be an enum. 
+This is because a string can't just be assumed to be an enum. 
 
 The fix is to map the initial data elements to _DiaryEntry_ type with the _toNewDiaryEntry_ function:
 

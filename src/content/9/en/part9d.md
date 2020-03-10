@@ -27,16 +27,16 @@ npx create-react-app my-app --template typescript
 
 After running the command, you should have a complete basic react app, that uses TypeScript. The app can be started by simply running _npm start_ within the app root folder.
 
-If you browse through the files and folders, you will notice that the app is not that different from if you would have set up a purely JavaScript Create React App. Basically the only differences are that the _.js_ and _.jsx_ files are now renamed to _.ts_ and _.tsx_ files, they contains some type annotations, and the root folder also contains a _tsconfig.json_ file.
+If you browse through the files and folders, you will notice that the app is not that different from the one you would have initialised with pure JavaScript. Basically the only differences are that the _.js_ and _.jsx_ files are now renamed to _.ts_ and _.tsx_ files, they contain some type annotations, and the root folder also contains a _tsconfig.json_ file.
 
-Now, let's take a look at the _tsconfig.json_ file that has been created for us. Everything should be more or less fine within the file, except for that at the moment the configuration also allows JavaScript files to be compiled, because _allowJs_ is set to _true_. That would be fine if you have the need to use both TypeScript and JavaScript mixed (e.g. if you are in the middle of transforming a JS project into TS or any other reason), but we want our app to be purely TypeScript, so let's change that setting to _false_.
+Now, let's take a look at the _tsconfig.json_ file that has been created for us. Everything should be more or less fine within the file, except for that at the moment the configuration also allows JavaScript files to be compiled, because _allowJs_ is set to _true_. That would be fine if you need to mix TypeScript and JavaScript (e.g. if you are in the middle of transforming a JavaScript project into TypeScript or some other reason), but we want our app to be purely TypeScript, so let's change that setting to _false_.
 
-Earlier we added eslint to help us enforce coding style, so let's do the same to this app. Start by adding the necessary dependencies and then create the required _.eslintrc_ file as you did before, with the same contents. Then add the linting script to _package.json_.
+Earlier we added eslint to help us enforce coding style, so let's do the same with this app. Start by adding the necessary dependencies and then create the required _.eslintrc_ file as you did before, with the same contents. Then add the linting script to _package.json_.
 
-Now you might notice that eslint gives you all kinds of warnings, which we want to get rid of. This is because our eslint doesn't understand React at the moment. What you need to do is to add a new dependency _eslint-config-react_. And the create-react-app doesn't seem to include the type information for react and react DOM, so let's add those dependencies as well.
+Now you might notice that eslint gives you all kinds of warnings, which we want to get rid of. This is because our eslint doesn't understand React at the moment. What you need to do is to add a new dependency _eslint-config-react_:
 
 ```
-npm install --save-dev eslint-config-react @types/react @types/react-dom
+npm install --save-dev eslint-config-react
 ```
 
 Now we still need to setup eslint to understand react, so add react to used plugins and to extended configurations. The file _.eslintrc_ should now look like this:
@@ -61,7 +61,7 @@ Now we still need to setup eslint to understand react, so add react to used plug
 We also need to add a new _settings_ configuration for react linting into _.eslintrc_:
 
 ```js
-module.exports = {
+{
   // ...
   "settings": {
     "react": {
@@ -75,7 +75,7 @@ module.exports = {
 Since basically all React components return a _JSX.Element_ type or _null_, we will loosen the linting rules a bit, so that we don't need to explicitly write out function return types everywhere. This can be done by adding the following _rules_ configuration into _.eslintrc_:
 
 ```js
-module.exports = {
+{
   // ...
   "rules": {
     "@typescript-eslint/explicit-function-return-type": 0
@@ -93,9 +93,9 @@ If we now run _npm run lint_, we should still receive an error from eslint:
 
 ![](../../images/9/31a.png)
 
-Why is that? Well, as we can interpret from the error, the file _serviceWorker.ts_ doesn't seem to be compliant with our linting configurations at the moment, because the _register_ function uses other functions that are declared later in the same file and the rule _@typescript-eslint/no-use-before-define_ doesn't like that. To fix the error we need to move the _register_ function as the last function in the file.
+Why is that? Well, as we can interpret from the error, the file _serviceWorker.ts_ doesn't seem to be compliant with our linting configurations at the moment. This is because the _register_ function uses other functions that are declared later in the same file and the rule _@typescript-eslint/no-use-before-define_ doesn't like that. To fix the error we need to move the _register_ function as the last function in the file.
 
-If we now run _npm run lint_, we shouldn't get any errors anymore.
+If we now run _npm run lint_, we shouldn't get any errors.
 
 ### React components with TypeScript
 
@@ -117,13 +117,13 @@ const element = <Welcome name="Sara" />;
 ReactDOM.render(element, document.getElementById("root"));
 ```
 
-In the example we have a component called <i>Welcome</i>, to which we want to pass a <i>name</i> prop, that is then printed out. We know that the  <i>name</i> prop should be a string and we use the [prop-types](https://www.npmjs.com/package/prop-types) package familliar to us from [part 5](/en/part5/props_children_and_proptypes#prop-types) to be able to receive hints about the desired type and warnings for invalid type usage.
+In the example we have a component called <i>Welcome</i>, to which we want to pass a <i>name</i> prop, that is then printed out. We know that the  <i>name</i> prop should be a string and we use the [prop-types](https://www.npmjs.com/package/prop-types) package introduced in [part 5](/en/part5/props_children_and_proptypes#prop-types) to be able to receive hints about component's desired prop types and warnings for invalid prop types.
 
-With the help of TypeScript we don't need the <i>prop-types</i> package anymore to define prop types, because we can define the types with the help of TypeScript itself by using the type _FunctionComponent_ or it's shorter alias _FC_.
+With the help of TypeScript we don't need the <i>prop-types</i> package anymore to define prop types, because we can define the types with the help of TypeScript itself by using the _FunctionComponent_ type or it's shorter alias _FC_.
 
- When using TypeScript with React components, the type annotations look a bit different than with other TypeScript code. We basically add a type for the component variable, instead of the function and it's props. _React.FunctionComponent_ is a so called [Generics](https://www.typescriptlang.org/docs/handbook/generics.html) type, to which you can pass a type as a sort of argument, that it then uses in the final type.
+ When using TypeScript with React components, the type annotations look a bit different than with other TypeScript code. We basically add a type for the component variable, instead of the function and it's props. _React.FunctionComponent_ is a so called [generic](https://www.typescriptlang.org/docs/handbook/generics.html) type, to which you can pass a type as a sort of argument, that it then uses in the final type.
 
-The type declaration for _React.FC_ and _React.FunctionComponent_ look like the following:
+The type declaration for _React.FC_ and _React.FunctionComponent_ looks like the following:
 
 ```js
 type FC<P = {}> = FunctionComponent<P>;
@@ -137,7 +137,7 @@ interface FunctionComponent<P = {}> {
 }
 ```
 
-Firstly, you can see that _FC_ is simply an alias for the _FunctionComponent_ interface. They are both "Generics", which can easily be recognized by the angle bracket _<>_ after the type name. Inside the angle brackets there is <i>P = {}</i>. That means, that you can pass a type as an argument and inside the new type the passed type will go by the name <i>P</i> that is an empty object <i>{}</i> by default.
+Firstly, you can see that _FC_ is simply an alias for the _FunctionComponent_ interface. They are both generic, which can easily be recognized by the angle bracket _<>_ after the type name. Inside the angle brackets there is <i>P = {}</i>. That means, that you can pass a type as an argument and inside the new type the passed type will go by the name <i>P</i> that is an empty object <i>{}</i> by default.
 
 Now let's take a look at the first line inside _FunctionComponent_:
 
@@ -145,13 +145,13 @@ Now let's take a look at the first line inside _FunctionComponent_:
 (props: PropsWithChildren<P>, context?: any): ReactElement | null;
 ```
 
-There you can see that <i>props</i> is of type <i>PropsWithChildren</i>, which is also a Generic type, to which <i>P</i> is passed. The type <i>PropsWithChildren</i> in turn is a [intersection](http://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types) of <i>P</i> and the type <i>{ children?: ReactNode }</i>.
+There you can see that <i>props</i> is of type <i>PropsWithChildren</i>, which is also a generic type, to which <i>P</i> is passed. The type <i>PropsWithChildren</i> in turn is a [intersection](http://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types) of <i>P</i> and the type <i>{ children?: ReactNode }</i>.
 
 ```js
 type PropsWithChildren<P> = P | { children?: ReactNode };
 ```
 
-Well, that was complicated (or was it?). But basically all we need to know at the moment is that we can define a type that we pass to _FunctionComponent_ and the component's <i>props</i> then consist of the defined type and component's <i>children</i>.
+Well, that was complicated (or was it?). Basically all we need to know at the moment is that we can define a type that we pass to _FunctionComponent_ and the component's <i>props</i> then consist of the defined type and component's <i>children</i>.
 
 Now, lets return to our code exaple and see how we would define the type for the <i>Welcome</i> component's props in TypeScript.
 
@@ -174,7 +174,7 @@ We defined a new type _WelcomeProps_ and passed it to the added typing for the <
 const Welcome: React.FC<WelcomeProps>;
 ```
 
-You could also write the same thing using a less verbose syntax, in case you prefer that:
+You could also write the same thing using a less verbose syntax:
 
 ```jsx
 const Welcome: React.FC<{ name: string }> = ({ name }) => (
@@ -501,7 +501,7 @@ Remember that reading code is a skill itself and relax if you don't understand t
 
 It's time to get our hands dirty finalizing the frontend for the backend we built in [exercises 9.10.-9.15.](/en/part9/typing_the_express_app).
 
-Before diving into the code, let us start bot the fronend and the backend.
+Before diving into the code, let us start both the frontend and the backend.
 
 After a successful build your browser will open a new tab to http://localhost:3000/. You should see a patient listing page, which fetches a patient list from our backend and renders the list in a simple table, and a button for creating new patients to the backend. As we are not using a database, but mock data, the data will not persist, i.e. closing the backend forgets all the added data. UI has not clearly been the strong point of the creators of this app, so let's disregard the UI for now.
 
@@ -749,7 +749,7 @@ Response should look as follows:
 
 #### 9.19: patientor, step2
 
-Create a page for showing the patient information in the fronend.
+Create a page for showing the patient information in the frontend.
 
 Patient information should be accessible when clicking eg. the patients name.
 
@@ -760,7 +760,7 @@ Since we have now the state in contex, you need a new action type for updating t
 Application uses [Semantic UI React](https://react.semantic-ui.com/) for styling, that is quite simillar to [React Bootstrap](https://react-bootstrap.github.io/) and [MaterialUI](https://material-ui.com/) that we covered in [part 7](/en/part7/more_about_styles). You may also use it for the new components but that is up to you sincew the main focus is now in Typescript.
 
 Application also uses the [react router](https://reacttraining.com/react-router/web/guides/quick-start) 
-to control what view is visible in the fronend. You might want to have a look on [part 7](/en/part7/react_router) if you have not already have a grasp on how router works.
+to control what view is visible in the frontend. You might want to have a look on [part 7](/en/part7/react_router) if you have not already have a grasp on how router works.
 
 The result could look like the following:
 
@@ -896,7 +896,7 @@ Use types properly in the backend! For now there is no need to do a proper valid
 
 #### 9.21: patientor, step4
 
-Extend the patient page in the fronend to list the <i>data</i>, <i>description</i> and <i>diagnose codes</i> of patient's entries. 
+Extend the patient page in the frontend to list the <i>data</i>, <i>description</i> and <i>diagnose codes</i> of patient's entries. 
 
 You can use the same type definiton for <i>Entry</i> in the frontend. For these exercises it is enough just to copy/paste the definitions from backend to frontend.
 
