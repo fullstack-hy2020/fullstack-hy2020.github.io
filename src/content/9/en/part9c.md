@@ -57,7 +57,6 @@ The preferred settings we want right now are the following:
     "noImplicitAny": true,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true
-     
   }
 }
 ```
