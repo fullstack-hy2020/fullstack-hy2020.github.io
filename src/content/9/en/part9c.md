@@ -654,7 +654,7 @@ export default {
 }
 ```
 
-If we were to try returning this data with the basic _DiaryEntry_ type, that is, if we would type the function as follows
+If we tried to return this data with the basic _DiaryEntry_ type, i.e. if we would type the function as follows
 
 ```js
 const getNonSensitiveEntries = () : DiaryEntry[] => {
@@ -666,7 +666,7 @@ we would get the following error:
 
 Utility types includes a large set of handy tools and it is definitely worthwhile to take some time studying [their documentation](https://www.typescriptlang.org/docs/handbook/utility-types.html).
 
-Finally we can complete the route that shows all diery entries:
+Finally we can complete the route that returns all diary entries:
 
 ```js
 import express from 'express';
