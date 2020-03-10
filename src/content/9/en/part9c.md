@@ -9,7 +9,7 @@ lang: en
 
 Now that we have a basic understanding of how TypeScript works and of how to create actual projects with it, it is time to start creating something actually useful. So now we're going to create a completely new project, with a bit more realistic use cases in mind.
 
-One major change from the previous part is that **we're not going to use ts-node anymore**. ts-node is a handy tool, with which it is very easy to get started, but in the long run it is suggested to use the official TypeScript compiler that comes with the _typescript_ npm-package. With this compiler the basic JavaScript files are generated and packaged from the .ts files so that the built <i>production version</i> of the project won't contain any TypeScript code. This is exactly what is aimed for in the end, since TypeScript in itself is not runnable by browsers or Node.
+One major change from the previous part is that **we're not going to use ts-node anymore**. ts-node is a handy tool, with which it is very easy to get started, but in the long run it is suggested to use the official TypeScript compiler that comes with the _typescript_ npm-package. With this compiler the basic JavaScript files are generated and packaged from the .ts files so that the built <i>production version</i> of the project won't contain any TypeScript code. This is exactly what we are aiming for in the end, since TypeScript in itself is not runnable by browsers or Node.
 
 ### Setting up the project
 
@@ -17,7 +17,7 @@ Our project is created for Ilari, who loves riding small planes but has a bit of
 
 Let's start creating our own first real project 'Ilari's flight diaries', as we usually would by running _npm init_ and by installing the _typescript_ package. 
 
-TypeScript's native _tsc_ compiler offers us help initialising our project with the command _tsc --init_. To be able to run this, we need to add the _tsc_ command to runnable scripts in the package.json file if we don't have _typescript_ installed globally. And even if you would have typescript installed globally, you should always include the package as a dev-dependency in your project.
+TypeScript's native _tsc_ compiler offers us help initialising our project with the command _tsc --init_. To be able to run this, we need to add the _tsc_ command to runnable scripts in the package.json file unless we have installed _typescript_ globally. And even if you would have installed typescript globally, you should always include the package as a dev-dependency in your project.
 
 ```json
 {
@@ -31,18 +31,18 @@ TypeScript's native _tsc_ compiler offers us help initialising our project with 
 
  Very often the bare _tsc_ command is set up in the project scripts for other scripts to use, so it is very common to see the  _tsc_ command set up within the project like this.
 
- Now we can init our tsconfig.json settings by running:
+ Now we can initialise our tsconfig.json settings by running:
 
 
 ```sh
  npm run tsc -- --init
 ```
 
- **Notice** the extra -- before the actual argument, arguments before the -- are interpreted for the command _npm_ abd after are for the command that is run throught the package.json scripts. 
+ **Notice** the extra -- before the actual argument, arguments before the -- are interpreted for the command _npm_ and ones after are for the command that is run throught the package.json scripts. 
 
-The created tsconfig.json contains a pretty big list of all of the possible configurations available to use with only a few uncommented ones. Studying the initial tsconfig.json file might be useful to find something you might be needing and it is completely okay to not delete the commented rows in the file just in case you might someday need to expand your configuration settings. 
+The created tsconfig.json contains a pretty big list of all of the possible configurations available to use with only a few uncommented ones. Studying the initial tsconfig.json file might be useful for finding some configuration options you might need. It is also completely okay to keep the commented rows in the file just in case you might someday need to expand your configuration settings. 
 
-Right now the preferred settings we want right now are the following:
+The preferred settings we want right now are the following:
 
 ```json
 {
@@ -64,7 +64,7 @@ Right now the preferred settings we want right now are the following:
 
 Let's go through each setting now: 
 
-The <i>target</i> parameter informs the compiler into which ECMAScript version the generated JavaScript should be generated into. ES6 is supported by most browsers and therefore is a good and pretty safe option.
+The <i>target</i> parameter tells the compiler which ECMAScript version the generated JavaScript should be generated into. ES6 is supported by most browsers and therefore is a good and pretty safe option.
 
 <i>outDir</i> tells where the compiled result should be placed.
 
@@ -73,7 +73,7 @@ The <i>target</i> parameter informs the compiler into which ECMAScript version t
 <i>strict</i> is actually a shorthand to include multiple separate options: 
 <i>noImplicitAny, noImplicitThis, alwaysStrict, strictBindCallApply, strictNullChecks, strictFunctionTypes and strictPropertyInitialization</i>. These all guide our coding style use TypeScript features more strictly, <i>noImplicitAny</i> restricts implicit setting for any, which happens for example if you don't type the expected variables of a function. The rest of the options can all be studied more closely on the [tsconfig documentation](https://www.typescriptlang.org/v2/en/tsconfig#strict). Using <i>strict</i> is suggested by the official documentation.
 
-<i>noUnusedLocals</i> gives an error if a local variable is unused and </i>noUnusedParameters</i> when on unused parameters. 
+<i>noUnusedLocals</i> gives an error if a local variable is unused and </i>noUnusedParameters</i> when a function has unused parameters. 
 
 <i>noFallthroughCasesInSwitch</i> gives an error if a _switch - case_ is used without a fallthrough possibility (falling to a case does not _return_ or _break_ the evaluation of the switch).
 
