@@ -948,7 +948,7 @@ The function should look something like this:
 
 ```js
 const parseComment = (comment: any): string => {
-  if (comment || !isValidString(comment)) {
+  if (!comment || !isValidString(comment)) {
     throw new Error('Incorrect or missing comment: ' + comment);
   }
 
