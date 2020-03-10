@@ -492,7 +492,7 @@ export default {
 }
 ```
 
-Type assertion should not be used unless there's no other way to proceed since there's always the danger of asserting an unfit type to an object and then trusting the assreted type. While the compiler trusts you to know when using _as_, at the same time it leaves the intelligence of the whole TypeScript to manual interpretation. 
+Type assertion should not be used unless there's no other way to proceed since there's always the danger of asserting an unfit type to an object and then trusting the asserted type. While the compiler trusts you to know when using _as_, at the same time it leaves the intelligence of the whole TypeScript to manual interpretation. 
 
 In our case we could change our data exportation method so that we can have the typing happen naturally within the variable declaration file. Since typings are not valid in a JSON-file, we should convert the json-file to a ts-file which exports the typed object-format data in the following way: 
 
