@@ -926,9 +926,9 @@ const toNewDiaryEntry = (object) : NewDiaryEntry => {
 export default toNewDiaryEntry;
 ```
 
-In the function we want to parse the each field and make sure that what we is returned is exactly the type _NewDiaryEntry_. Thus we should check each field separately. 
+In the function we want to parse each field and make sure that what is returned is exactly of type _NewDiaryEntry_. Thus we should check each field separately. 
 
-Once again we have a typing issue: what is the _object_ type? Since the _object_ is in fact the body of a request, express has typed it with _any_. Since within this file the whole idea is to map unknown types of fields to correct ones and check whether they are defined as expected, this might be the rare case where we actually <i>want to allow the _any_ type</i>. 
+Once again we have a typing issue: what is the _object_ type? Since the _object_ is in fact the body of a request, express has typed it with _any_. Since within this function the whole idea is to map unknown types of fields to correct ones and check whether they are defined as expected, this might be the rare case where we actually <i>want to allow the _any_ type</i>. 
 
 However if we type the object to _any_, eslint gives us a complaint:
 
@@ -940,7 +940,7 @@ The cause for the complaint is eslit-rule [no-explicit-any](https://github.com/t
 /* eslint-disable @typescript-eslint/no-explicit-any */
 ```
 
-Let us start creating the parsers for each of the fields of _object_.
+Lets start creating the parsers for each of the fields of _object_.
 
 To validate the _comment_ field we need to check that it exists, and to ensure that it is of the type _string_.
 
@@ -956,7 +956,7 @@ const parseComment = (comment: any): string => {
 }
 ```
 
-Function gets the parameter of the type _any_ type and returns it as type _string_ if it exists and is of the right type.
+The function gets the parameter of type _any_ and returns it as type _string_ if it exists and is of the right type.
 
 The string validation function looks like this
 
