@@ -1235,15 +1235,14 @@ If you like, you can re-use some of the code from the <i>Add patient</i> form fo
 
 Upon a successful submit the new entry should be added to the correct person and the patient's entries on the patient page should be updated to contain the new entry.
 
-*Hint* the easiest (but not the most elegant) way to get this done is to have a separate form for each different type of entry. 
+**Hint** the easiest (but not the most elegant) way to do this exercise is to have a separate form for each different entry type. 
 
 If you use a single form then the [intersect type](https://www.typescriptlang.org/docs/handbook/advanced-types.html#intersection-types) may be helpful when defining the type of form values. See [here](https://codingblast.com/typescript-intersection-types/) another description of intersect type.
 
 #### 9.25: patientor, step8
 
-Extend your solution so that it supports <i>all the entry types</i> and displays error message if some required values are missing and you try to submit the form. 
+Extend your solution so that it supports <i>all the entry types</i> and displays error message if some required values are missing or formatted incorrectly and you try to submit the form. 
 
-You do not need to give meaningful error messages if some entries (such as dates) are formatted incorrectly.
 
 #### 9.26: patientor, step9
 
