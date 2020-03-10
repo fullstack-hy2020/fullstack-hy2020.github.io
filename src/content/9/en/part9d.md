@@ -61,7 +61,7 @@ Now we still need to setup eslint to understand react, so add react to used plug
 We also need to add a new _settings_ configuration for react linting into _.eslintrc_:
 
 ```js
-module.exports = {
+{
   // ...
   "settings": {
     "react": {
@@ -75,7 +75,7 @@ module.exports = {
 Since basically all React components return a _JSX.Element_ type or _null_, we will loosen the linting rules a bit, so that we don't need to explicitly write out function return types everywhere. This can be done by adding the following _rules_ configuration into _.eslintrc_:
 
 ```js
-module.exports = {
+{
   // ...
   "rules": {
     "@typescript-eslint/explicit-function-return-type": 0
