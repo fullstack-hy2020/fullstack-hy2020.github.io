@@ -124,9 +124,9 @@ A third advantage with TypeScript is the more **specific and smarter intellisens
 
 All the advantages above are together extremely helpful when you have a need to refactor your code. The static code analysis emits warnings if you have any errors in your code and the intellisense can give you hints about available properties and even possible refactoring options. The code level documentation helps you understand the existing code, and with the help of TypeScript it is also very easy to start using the newest JavaScript language features at an early stage, by just altering the configuration.
 
-### What type violations does TypeScript miss?
+### What does TypeScript not fix?
 
-TypeScript type annotations and type checking exist only at compile time and no longer at runtime, so even if the compiler does not give any errors, runtime errors are still possible. Especially when handling external input, such as data received from a network request, or if you use the `any` type in your code
+TypeScript type annotations and type checking exist only at compile time and no longer at runtime, so even if the compiler does not give any errors, runtime errors are still possible. These runtime errors are especially common when handling external input, such as data received from a network request, or if you use the `any` type in your code.
 
 Lastly, here are a few examples of what many regard as downsides with TypeScript, which might be good to be aware of:
 
