@@ -241,15 +241,18 @@ You can find the complete code for the application [here](https://github.com/ful
 
 ### Material UI
 
-Tarkastellaan toisena esimerkkinä Googlen kehittämän "muotokielen" [Material designin](https://material.io/) toteuttavaa React-kirjastoa [MaterialUI](https://material-ui.com/). 
+<!-- Tarkastellaan toisena esimerkkinä Googlen kehittämän "muotokielen" [Material designin](https://material.io/) toteuttavaa React-kirjastoa [MaterialUI](https://material-ui.com/).  -->
+As our second example we will look into the [MaterialUI](https://material-ui.com/) React library, which implements the [Material design](https://material.io/) visual language developed by Google.
 
-Asennetaan kirjasto suorittamalla komento
+<!-- Asennetaan kirjasto suorittamalla komento -->
+Install the library with the command
 
 ```js
 npm install --save @material-ui/core
 ```
 
-Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään bootstrapin css-määrittelyt lataava rivi:
+<!-- Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään bootstrapin css-määrittelyt lataava rivi: -->
+Then add the following line to the <i>head</i> tag in the <i>public/index.html</i> file. The line loads bootstrap's css-definitions.
 
 ```js
 <head>
@@ -258,9 +261,11 @@ Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head
 </head>
 ```
 
-Tehdään nyt MaterialUI:n avulla koodiin suunilleen samat muutokset, mitä teimme bootstarpilla.
+<!-- Tehdään nyt MaterialUI:n avulla koodiin suunilleen samat muutokset, mitä teimme bootstarpilla. -->
+Now let's use MaterialUI to do the same modifications to the code we did earlier with bootstrap.
 
-Renderöidään koko sovelluksen sisältö komponentin [Container](https://material-ui.com/components/container/) sisälle:
+<!-- Renderöidään koko sovelluksen sisältö komponentin [Container](https://material-ui.com/components/container/) sisälle: -->
+Render the contents of the whole application within a [Container](https://material-ui.com/components/container/):
 
 ```js
 import Container from '@material-ui/core/Container'
@@ -275,7 +280,8 @@ const App = () => {
 }
 ```
 
-Aloitetaan komponentista <i>Notes</i> ja renderöidään muistiinpanojen lista [taulukkona](https://material-ui.com/components/tables/#simple-table):
+<!-- Aloitetaan komponentista <i>Notes</i> ja renderöidään muistiinpanojen lista [taulukkona](https://material-ui.com/components/tables/#simple-table): -->
+Let's start with the <i>Notes</i> component. We'll render the list of notes as a [table](https://material-ui.com/components/tables/#simple-table):
 
 ```js
 const Notes = ({notes}) => (
@@ -302,11 +308,13 @@ const Notes = ({notes}) => (
 )
 ```
 
-Taulukko näyttää seuraavalta:
+<!-- Taulukko näyttää seuraavalta: -->
+The table looks like so:
 
 ![](../../images/7/63eb.png)
 
-Hienoinen ikävä piirre Material UI:ssa on se, että jokainen komponentti on importattava erikseen, muistiinpanojen sivun import-lista on aika pitkä:
+<!-- Hienoinen ikävä piirre Material UI:ssa on se, että jokainen komponentti on importattava erikseen, muistiinpanojen sivun import-lista on aika pitkä: -->
+One less pleasant feature of Material UI is, that each component has to be imported separately. The import list for the notes page is quite long:
 
 ```js
 import {
@@ -320,9 +328,10 @@ import {
 } from '@material-ui/core'
 ```
 
-#### Lomake
+#### Form
 
-Parannellaan seuraavaksi näkymän <i>Login</i> kirjautumislomaketta käyttäen komponentteja [TextField](https://material-ui.com/components/text-fields/) ja [Button](https://material-ui.com/api/button/):
+<!-- Parannellaan seuraavaksi näkymän <i>Login</i> kirjautumislomaketta käyttäen komponentteja [TextField](https://material-ui.com/components/text-fields/) ja [Button](https://material-ui.com/api/button/): -->
+Next let's make the login form in the <i>Login</i> view better using the [TextField](https://material-ui.com/components/text-fields/) and [Button](https://material-ui.com/api/button/) components:
 
 ```js 
 const Login = (props) => {
@@ -355,17 +364,21 @@ const Login = (props) => {
 }
 ```
 
-Lopputulos on:
+<!-- Lopputulos on: -->
+The end result is:
 
 ![](../../images/7/64ea.png)
 
-Bootstrapiin verrattuna pieni ero on nyt se, että MaterialUI ei tarjoa erillistä komponenttia itse lomakkeelle, lomake tehdään normaaliin tapaan HTML:n [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form)-elementtinä.
+<!-- Bootstrapiin verrattuna pieni ero on nyt se, että MaterialUI ei tarjoa erillistä komponenttia itse lomakkeelle, lomake tehdään normaaliin tapaan HTML:n [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form)-elementtinä. -->
+Difference to bootstrap is, that MaterialUI does not provide a component for the form itself. The form here an ordinary HTML [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) element.
 
-Lomakkeen käyttämät komponentit on luonnollisesti importattava koodissa. 
+<!-- Lomakkeen käyttämät komponentit on luonnollisesti importattava koodissa.  -->
+Remember to import all the components used in the form.
 
-#### Notifikaatio
+#### Notification
 
-Kirjautumisen jälkeisen notifikaation näyttämiseen sopii komponenetti Alert](https://material-ui.com/components/alert/), joka on lähes samanlainen kuin bootstrapin vastaava komponentti: 
+<!-- Kirjautumisen jälkeisen notifikaation näyttämiseen sopii komponenetti Alert](https://material-ui.com/components/alert/), joka on lähes samanlainen kuin bootstrapin vastaava komponentti:  -->
+The notification displayed on log in can be done using the [Alert](https://material-ui.com/components/alert/) component, which is quite similiar to bootstrap's equivalent component:
 
 ```js
 <div>
@@ -379,27 +392,32 @@ Kirjautumisen jälkeisen notifikaation näyttämiseen sopii komponenetti Alert](
 </div>
 ```
 
-Alert-komponentti ei ole vielä mukana MaterialUI:n core-pakkauksessa, ja komponentin sisältävä pakkaus [lab](https://material-ui.com/components/about-the-lab/) tulee asentaa sovellukseen:
+<!-- Alert-komponentti ei ole vielä mukana MaterialUI:n core-pakkauksessa, ja komponentin sisältävä pakkaus [lab](https://material-ui.com/components/about-the-lab/) tulee asentaa sovellukseen: -->
+The Alert component is not yet included in the MaterialUI core package, so we have to install the [lab](https://material-ui.com/components/about-the-lab/) package to use it:
 
 ```js 
 npm install --save @material-ui/lab
 ```
 
-Komponentti importataan seuraavasti
+<!-- Komponentti importataan seuraavasti -->
+Then we can import the component like so
 
 ```js 
 import { Alert } from '@material-ui/lab'
 ```
 
-Alert on ulkoasultaan tyylikäs:
+<!-- Alert on ulkoasultaan tyylikäs: -->
+Alert is quite stylish:
 
 ![](../../images/7/65ea.png)
 
-#### Navigaatiorakenne
+#### Navigaation structure
 
-Navigaatiorakenne toteutetaan komponentin [AppBar](https://material-ui.com/components/app-bar/) avulla
+<!-- Navigaatiorakenne toteutetaan komponentin [AppBar](https://material-ui.com/components/app-bar/) avulla -->
+We can implement navigation using the [AppBar](https://material-ui.com/components/app-bar/) component.
 
-Jos sovelletaan suoraan dokumentaation esimerkkiä  
+<!-- Jos sovelletaan suoraan dokumentaation esimerkkiä   -->
+If we use the example code from the documentation
 
 ```js
 <AppBar position="static">
@@ -425,13 +443,16 @@ Jos sovelletaan suoraan dokumentaation esimerkkiä
 </AppBar>
 ```
 
-saadaan kyllä toimiva ratkaisu, mutta sen ulkonäkö ei ole paras mahdollinen
+<!-- saadaan kyllä toimiva ratkaisu, mutta sen ulkonäkö ei ole paras mahdollinen -->
+we do get working navigation, but it could look better
 
 ![](../../images/7/66ea.png)
 
-Lueskelemalla [dokumentaatiota](https://material-ui.com/guides/composition/#routing-libraries), löytyy parempi tapa eli [component props](https://material-ui.com/guides/composition/#component-prop), jonka avulla voidaan muuttaa se miten MaterialUI-komponentin juurielementti renderöityy.
+<!-- Lueskelemalla [dokumentaatiota](https://material-ui.com/guides/composition/#routing-libraries), löytyy parempi tapa eli [component props](https://material-ui.com/guides/composition/#component-prop), jonka avulla voidaan muuttaa se miten MaterialUI-komponentin juurielementti renderöityy. -->
+We can find a better way from the [documentation](https://material-ui.com/guides/composition/#routing-libraries). We can use [component props](https://material-ui.com/guides/composition/#component-prop) to define how the root element of a MaterialUI component is rendered.
 
-Määrittelemällä
+<!-- Määrittelemällä -->
+By defining
 
 ```js
 <Button color="inherit" component={Link} to="/">
@@ -439,9 +460,11 @@ Määrittelemällä
 </Button>
 ```
 
-renderöidään komponentti _Button_, siten että sen juurikomponenttina onkin react-redux-kirjaston komponentti _Link_, jolle siirtyy polun kertova props _to_.  
+<!-- renderöidään komponentti _Button_, siten että sen juurikomponenttina onkin react-redux-kirjaston komponentti _Link_, jolle siirtyy polun kertova props _to_.   -->
+the _Button_ component is rendered so, that its root component is react-redux _Link_ which receives its path as prop field _to_.
 
-Navigaatiopalkin koodi kokonaisuudessaan on seuraava
+<!-- Navigaatiopalkin koodi kokonaisuudessaan on seuraava -->
+The code for the navigation bar is the following
 
 ```js
 <AppBar position="static">
@@ -465,15 +488,20 @@ Navigaatiopalkin koodi kokonaisuudessaan on seuraava
 </AppBar>
 ```
 
-ja lopputulos on haluammamme kaltainen
+<!-- ja lopputulos on haluammamme kaltainen -->
+and it looks like we want it to
 
 ![](../../images/7/67ea.png)
 
-Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js)
+<!-- Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js) -->
+The code of the application can be found from [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js).
 
 ### Closing thoughts
 
-Ero react-bootstrapin ja MaterialUI:n välillä ei ole suuri. On makuasia kummalla tuotettu ulkoasu on tyylikkäämpi. En ole itse käyttänut MaterialUI:ta kovin paljoa, mutta ensikosketus on positiivinen. Dokumentaatio vaikuttaa aavistuksen react-bootstrapin dokumentaatiota selkeältä. Eri npm-kirjastojen lautausmääriä vertailevan sivuston https://www.npmtrends.com/ mukaan MaterialUI ohitti react-boostrapin suosiossa vuoden 2018 loppupuolella:
+<!-- Ero react-bootstrapin ja MaterialUI:n välillä ei ole suuri. On makuasia kummalla tuotettu ulkoasu on tyylikkäämpi. En ole itse käyttänut MaterialUI:ta kovin paljoa, mutta ensikosketus on positiivinen. Dokumentaatio vaikuttaa aavistuksen react-bootstrapin dokumentaatiota selkeältä. Eri npm-kirjastojen lautausmääriä vertailevan sivuston https://www.npmtrends.com/ mukaan MaterialUI ohitti react-boostrapin suosiossa vuoden 2018 loppupuolella: -->
+The difference between react-bootstrap and MaterialUI is not big. It's up to you which one you find better looking. 
+I myself have not used MaterialUI a lot, but my first impressions are positive. Its documentation is a bit better than react-bootstrap's. 
+According to https://www.npmtrends.com/ which tracks the popularity of different npm-libraries MaterialUI passed react-bootstrap in popularity at the end of 2018:
 
 ![](../../images/7/68ea.png)
 
