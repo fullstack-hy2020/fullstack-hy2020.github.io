@@ -615,7 +615,7 @@ export default {
 }
 ```
 
-One thing causes us a bit of concern. In there function _getNonSensitiveEntries_ we are returning the complete entries of diaries and <i>no error is given</i> despite typing!
+One thing causes a bit of concern. In the function _getNonSensitiveEntries_ we are returning the complete entries of diaries and <i>no error is given</i> despite typing!
 
 This is because TypeScript can only check whether we have all the wanted fields or not, but excess fields are not prohibited. In our case it means that it is <i>not prohibited</i> to return the DiaryEntry[] type object, but if we were to try to get a hold of the field <i>comment</i> where the diary is returned, it would not be restricted since it would be pointing to a field that TypeScript is unaware of even though it exists.
 
