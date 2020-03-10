@@ -33,10 +33,10 @@ Now, let's take a look at the _tsconfig.json_ file that has been created for us.
 
 Earlier we added eslint to help us enforce coding style, so let's do the same to this app. Start by adding the necessary dependencies and then create the required _.eslintrc_ file as you did before, with the same contents. Then add the linting script to _package.json_.
 
-Now you might notice that eslint gives you all kinds of warnings, which we want to get rid of. This is because our eslint doesn't understand React at the moment. What you need to do is to add a new dependency _eslint-config-react_. And the create-react-app doesn't seem to include the type information for react and react DOM, so let's add those dependencies as well.
+Now you might notice that eslint gives you all kinds of warnings, which we want to get rid of. This is because our eslint doesn't understand React at the moment. What you need to do is to add a new dependency _eslint-config-react_:
 
 ```
-npm install --save-dev eslint-config-react @types/react @types/react-dom
+npm install --save-dev eslint-config-react
 ```
 
 Now we still need to setup eslint to understand react, so add react to used plugins and to extended configurations. The file _.eslintrc_ should now look like this:
