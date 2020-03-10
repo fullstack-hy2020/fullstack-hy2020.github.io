@@ -190,7 +190,7 @@ And since we haven't yet set up the development script that uses the ts-node-dev
 }
 ```
 
-Now we could run the _npm run dev_, but wait, a problem arises! 
+If we now run _npm run dev_, a problem arises 
 
 ```sh
 index.ts:7:19 - error TS6133: 'req' is declared but its value is never read.
@@ -200,11 +200,11 @@ index.ts:7:19 - error TS6133: 'req' is declared but its value is never read.
 Found 1 error.
 ```
 
-So our stricter than before tsconfig options don't allow us to keep unused variables within the code while making a production build. This comes problematic when we have library-wide predefined functions, that like in this case require declaring a variable, even though in the code it is not necessarily required to use at all. Fortunately this issue has already been solved on configuration level and once again hovering on the issue gives us a solution for the problem, this time by clicking the quick fix button: 
+So our stricter than before tsconfig options don't allow us to keep unused variables within the code while making a production build. This becomes problematic when we have library-wide predefined functions, that like in this case require declaring a variable, even though in the code it is not necessarily required to use at all. Fortunately this issue has already been solved on configuration level and once again hovering on the issue gives us a solution for the problem, this time by clicking the quick fix button: 
 
 ![](../../images/9/14.png)
 
-If it is absolutely impossible to get rid of an unused variable, you should prefix it with an underscore to inform the compiler that this has been taken into considearation and there is nothing we can do. Let's rename the _req_ variable to __req_ and we can continue with our development.
+If it is absolutely impossible to get rid of an unused variable, you should prefix it with an underscore to inform the compiler that this has been taken into consideration and there is nothing we can do about it. Let's rename the _req_ variable to __req_ and we can continue with our development.
 
 Now by running _npm run dev_ we should be able to run the app without errors and curl our _/ping_ endpoint.
 
