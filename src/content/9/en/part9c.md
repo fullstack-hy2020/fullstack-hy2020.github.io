@@ -265,15 +265,15 @@ You should also configure auto-reloading.
 
 #### 9.11: Diagnoses backend, step2
 
-Fork and clone the project [patientor](https://github.com/fullstack-hy2020/patientor). With the help of the README-file start the project. You should be able to use the frontend without a functioning backend.
+Fork and clone the project [patientor](https://github.com/fullstack-hy2020/patientor). Start the project with the help of the README-file. You should be able to use the frontend without a functioning backend.
 
 Ensure that backend answers to frontend's ping requests. Check developer tools to make sure it really works: 
 
 ![](../../images/9/16.png)
 
-You might also want to have a look to tab <i>console</i>.
+You might also want to have a look at the tab <i>console</i>.
 
-Set up a build script to your <i>backend</i>, so that you can create a production version of the project and make sure that also it answers to the frontend's ping.
+Set up a build script to your <i>backend</i> so that you can create a production version of the project and make sure that it answers to the frontend's ping request.
 
 </div>
 
