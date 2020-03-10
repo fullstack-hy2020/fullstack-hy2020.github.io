@@ -83,7 +83,7 @@ Now that we have our preferred configuration set, let's continue by installing _
 
 ```sh
 npm install express
-npm install --save-dev @types/express @typescript-eslint/eslint-plugin @typescript-eslint/parser
+npm install --save-dev eslint @types/express @typescript-eslint/eslint-plugin @typescript-eslint/parser
 ```
 
 Now our _package.json_ should look something like this: 
