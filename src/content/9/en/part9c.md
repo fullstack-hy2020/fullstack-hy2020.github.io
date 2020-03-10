@@ -416,7 +416,7 @@ The hint says we might want to use _resolveJsonModule_. Let's add it to our tsco
 
 Problems are now gone.
 
-As before we've seen how the compiler can decide the type of a variable by the value it is being assignet to and in a similar way the compiler interprets larger data sets, objects and arrays. This is why the compiler actually can warn us if we are trying to do something suspicious to the json data we are currently handling. If we're handling an array that includes specific types of objects and we're trying to add an object there that doesn't have all of the fields that the other objects have or is having type conflicts (for example a number where a string should be) the compiler can give us a warning. 
+As before we've seen how the compiler can decide the type of a variable by the value it is being assigned to and in a similar way the compiler interprets larger data sets, objects and arrays. This is why the compiler actually can warn us if we are trying to do something suspicious to the json data we are currently handling. If we're handling an array that includes specific types of objects and we're trying to add an object there that doesn't have all of the fields that the other objects have or is having type conflicts (for example a number where a string should be) the compiler can give us a warning. 
 
 Even though the compiler is pretty intelligent in order to be sure not to do anything unwanted it is safer to create the correct types to the data by yourself.
 
