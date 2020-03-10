@@ -180,11 +180,13 @@ const App = () => {
 export default App
 ```
 
-Hookin useEffect käyttö aiheuttaa eslint-varoituksen:
+<!-- Hookin useEffect käyttö aiheuttaa eslint-varoituksen: -->
+Using the useEffect hook causes an eslint-warning:
 
 ![](../../images/6/26ea.png)
 
-Pääsemme varoituksesta eroon seuraavasti:
+<!-- Pääsemme varoituksesta eroon seuraavasti: -->
+We can get rid of it by doing the following:
 
 ```js
 const App = () => {
@@ -198,9 +200,13 @@ const App = () => {
 }
 ```
 
-Nyt komponentin _App_ sisällä määritelty muuttuja <i>dispatch</i> eli käytännössä redux-storen dispatch-funktio on lisätty useEffectille parametrina annettuun taulukkoon. **Jos** dispatch-muuttujan sisältö muuttuisi ohjelman suoritusaikana, suoritettaisiin efekti uudelleen, näin ei kuitenkaan ole, eli varoitus on tässä tilanteessa oikeastaan aiheeton.
+<!-- Nyt komponentin _App_ sisällä määritelty muuttuja <i>dispatch</i> eli käytännössä redux-storen dispatch-funktio on lisätty useEffectille parametrina annettuun taulukkoon. **Jos** dispatch-muuttujan sisältö muuttuisi ohjelman suoritusaikana, suoritettaisiin efekti uudelleen, näin ei kuitenkaan ole, eli varoitus on tässä tilanteessa oikeastaan aiheeton. -->
+Now the variable <i>dispatch</i> we define in the _App_ component, which practically is the dispatch function of the redux-store, has been added to the array useEffect receives as a parameter.
+**If** the value of the dispatch-variable would change during runtime, 
+the effect would be executed again. This however cannot happen in our application, so the warning is unnecessary.
 
-Toinen tapa päästä eroon varoituksesta olisi disabloida se kyseisen rivin kohdalta:
+<!-- Toinen tapa päästä eroon varoituksesta olisi disabloida se kyseisen rivin kohdalta: -->
+Another way to get rid of the warning would be to disable eslint on that line:
 
 ```js
 const App = () => {
@@ -216,9 +222,11 @@ const App = () => {
 }
 ```
 
-Yleisesti ottaen eslint-virheiden disabloiminen ei ole hyvä idea, joten vaikka kyseisen eslint-säännön tarpeellisuus onkin aiheuttanut [kiistelyä](https://github.com/facebook/create-react-app/issues/6880), pitäydytään ylemmässä ratkaisussa. 
+<!-- Yleisesti ottaen eslint-virheiden disabloiminen ei ole hyvä idea, joten vaikka kyseisen eslint-säännön tarpeellisuus onkin aiheuttanut [kiistelyä](https://github.com/facebook/create-react-app/issues/6880), pitäydytään ylemmässä ratkaisussa.  -->
+Generally disabling eslint when it throws a warning is not a good idea. Even though the eslint rule in question has caused some [arguments](https://github.com/facebook/create-react-app/issues/6880), we will use the first solution.
 
-Lisää hookien riippuvuuksien määrittelyn tarpeesta [reactin dokumentaatiossa](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies).
+<!-- Lisää hookien riippuvuuksien määrittelyn tarpeesta [reactin dokumentaatiossa](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies). -->
+More about the need to define the hooks dependencies in [the react documentation](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies).
 
 We can do the same thing when it comes to creating a new note. Let's expand the code communicating with the server as follows:
 

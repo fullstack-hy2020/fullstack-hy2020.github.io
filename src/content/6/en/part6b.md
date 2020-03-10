@@ -259,7 +259,8 @@ Next, let's fix a bug that is caused by the code expecting the application store
 ![](../../images/6/7ea.png)
 
 
-Korjaus on helppo. Koska muistiinpanot ovat nyt storen kentässä <i>notes</i>, riittää pieni muutos selektorifunktioon:
+<!-- Korjaus on helppo. Koska muistiinpanot ovat nyt storen kentässä <i>notes</i>, riittää pieni muutos selektorifunktioon: -->
+It's an easy fix. Because the notes are in the store's field <i>notes</i>, we only have to make a little change to the selector function:
 
 ```js
 const Notes = () => {
@@ -282,13 +283,15 @@ const Notes = () => {
 }
 ```
 
-Aiemminhan selektorifunktio palautti koko storen tilan:
+<!-- Aiemminhan selektorifunktio palautti koko storen tilan: -->
+Previously the selector function returned the whole state of the store:
 
 ```js
 const notes = useSelector(state => state)
 ```
 
-Nyt siis palautetaan tilasta ainoastaan sen kenttä <i>notes</i>
+<!-- Nyt siis palautetaan tilasta ainoastaan sen kenttä <i>notes</i> -->
+And now it returns only its field <i>notes</i>
 
 ```js
 const notes = useSelector(state => state.notes)
@@ -386,13 +389,15 @@ const Notes = () => {
   )
 ```
 
-Muutos kohdistuu siis ainoastaan selektorifunktioon, joka oli aiemmnin muotoa
+<!-- Muutos kohdistuu siis ainoastaan selektorifunktioon, joka oli aiemmnin muotoa -->
+We only make changes to the selector function, which used to be
 
 ```js
 useSelector(state => state.notes)
 ```
 
-Yksinkertaistetaan vielä selektoria destrukturoimalla parametrina olevasta tilasta sen kentät erilleen:
+<!-- Yksinkertaistetaan vielä selektoria destrukturoimalla parametrina olevasta tilasta sen kentät erilleen: -->
+Let's simplify the selector by destructuring the fields from the state it receives as a parameter:
 
 ```js
 const notes = useSelector(({ filter, notes }) => {
@@ -469,7 +474,8 @@ Let's continue working on the anecdote application using redux that we started i
 
 #### 6.9 Better anecdotes, step7
 
-Ota sovelluksessasi käyttöön React dev tools. Siirrä Redux-storen määrittely omaan tiedostoon <i>store.js</i>.
+<!-- Ota sovelluksessasi käyttöön React dev tools. Siirrä Redux-storen määrittely omaan tiedostoon <i>store.js</i>. -->
+Start using React dev tools. Move defining the Redux-store into its own file <i>store.js</i>.
 
 #### 6.10 Better anecdotes, step8
 

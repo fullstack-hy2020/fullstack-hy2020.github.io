@@ -27,16 +27,16 @@ npx create-react-app my-app --template typescript
 
 After running the command, you should have a complete basic react app, that uses TypeScript. The app can be started by simply running _npm start_ within the app root folder.
 
-If you browse through the files and folders, you will notice that the app is not that different from if you would have set up a purely JavaScript Create React App. Basically the only differences are that the _.js_ and _.jsx_ files are now renamed to _.ts_ and _.tsx_ files, they contains some type annotations, and the root folder also contains a _tsconfig.json_ file.
+If you browse through the files and folders, you will notice that the app is not that different from if you would have set up a purely JavaScript Create React App. Basically the only differences are that the _.js_ and _.jsx_ files are now renamed to _.ts_ and _.tsx_ files, they contain some type annotations, and the root folder also contains a _tsconfig.json_ file.
 
 Now, let's take a look at the _tsconfig.json_ file that has been created for us. Everything should be more or less fine within the file, except for that at the moment the configuration also allows JavaScript files to be compiled, because _allowJs_ is set to _true_. That would be fine if you have the need to use both TypeScript and JavaScript mixed (e.g. if you are in the middle of transforming a JS project into TS or any other reason), but we want our app to be purely TypeScript, so let's change that setting to _false_.
 
 Earlier we added eslint to help us enforce coding style, so let's do the same to this app. Start by adding the necessary dependencies and then create the required _.eslintrc_ file as you did before, with the same contents. Then add the linting script to _package.json_.
 
-Now you might notice that eslint gives you all kinds of warnings, which we want to get rid of. This is because our eslint doesn't understand React at the moment. What you need to do is to add a new dependency _eslint-config-react_. And the create-react-app doesn't seem to include the type information for react and react DOM, so let's add those dependencies as well.
+Now you might notice that eslint gives you all kinds of warnings, which we want to get rid of. This is because our eslint doesn't understand React at the moment. What you need to do is to add a new dependency _eslint-config-react_:
 
 ```
-npm install --save-dev eslint-config-react @types/react @types/react-dom
+npm install --save-dev eslint-config-react
 ```
 
 Now we still need to setup eslint to understand react, so add react to used plugins and to extended configurations. The file _.eslintrc_ should now look like this:
@@ -501,7 +501,7 @@ Remember that reading code is a skill itself and relax if you don't understand t
 
 It's time to get our hands dirty finalizing the frontend for the backend we built in [exercises 9.10.-9.15.](/en/part9/typing_the_express_app).
 
-Before diving into the code, let us start bot the fronend and the backend.
+Before diving into the code, let us start both the frontend and the backend.
 
 After a successful build your browser will open a new tab to http://localhost:3000/. You should see a patient listing page, which fetches a patient list from our backend and renders the list in a simple table, and a button for creating new patients to the backend. As we are not using a database, but mock data, the data will not persist, i.e. closing the backend forgets all the added data. UI has not clearly been the strong point of the creators of this app, so let's disregard the UI for now.
 
@@ -749,7 +749,7 @@ Response should look as follows:
 
 #### 9.19: patientor, step2
 
-Create a page for showing the patient information in the fronend.
+Create a page for showing the patient information in the frontend.
 
 Patient information should be accessible when clicking eg. the patients name.
 
@@ -760,7 +760,7 @@ Since we have now the state in contex, you need a new action type for updating t
 Application uses [Semantic UI React](https://react.semantic-ui.com/) for styling, that is quite simillar to [React Bootstrap](https://react-bootstrap.github.io/) and [MaterialUI](https://material-ui.com/) that we covered in [part 7](/en/part7/more_about_styles). You may also use it for the new components but that is up to you sincew the main focus is now in Typescript.
 
 Application also uses the [react router](https://reacttraining.com/react-router/web/guides/quick-start) 
-to control what view is visible in the fronend. You might want to have a look on [part 7](/en/part7/react_router) if you have not already have a grasp on how router works.
+to control what view is visible in the frontend. You might want to have a look on [part 7](/en/part7/react_router) if you have not already have a grasp on how router works.
 
 The result could look like the following:
 
@@ -896,7 +896,7 @@ Use types properly in the backend! For now there is no need to do a proper valid
 
 #### 9.21: patientor, step4
 
-Extend the patient page in the fronend to list the <i>data</i>, <i>description</i> and <i>diagnose codes</i> of patient's entries. 
+Extend the patient page in the frontend to list the <i>data</i>, <i>description</i> and <i>diagnose codes</i> of patient's entries. 
 
 You can use the same type definiton for <i>Entry</i> in the frontend. For these exercises it is enough just to copy/paste the definitions from backend to frontend.
 
