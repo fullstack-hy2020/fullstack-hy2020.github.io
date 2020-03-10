@@ -212,7 +212,7 @@ Now when we can see the happy _pong_, we should try creating our first productio
 
 Just like magic a native runnable JavaScript production build of the ping-pong express backend is created into the build folder.
 
-Now our eslint also tries to interpret the files in the _build_ folder, which we don't want, as this is compiler generated code. This can easily be prevented by creating a file _.eslintignore_ in your project's root with the content you want eslint to ignore, exactly as in _.gitignore_.
+Currently our eslint tries to interpret the files in the _build_ folder as well, which we don't want, as that is compiler generated code. We can easily prevent this by creating a file _.eslintignore_ in our project's root with the content we want eslint to ignore, similarly as in _.gitignore_.
 
 Let's try our project by creating production run command for the project:
 
@@ -229,11 +229,11 @@ Let's try our project by creating production run command for the project:
 
 ```
 
-and run _npm start_ and then try to curl our defined port:
+Then run _npm start_ and try to curl our defined port:
 
 ![](../../images/9/15.png)
 
-Now we have a minimal working pipeline, with which we can develop our project, with a lot of help from our compiler and eslint in maintaining a good code quality. With this base we can actually start creating an app which we could proudly deploy into a production environment. 
+Now we have a minimal working pipeline, with which we can develop our project, with a lot of help from our compiler and eslint in maintaining a good code quality. With this base we can actually start creating an app that we could proudly deploy into a production environment. 
 
 </div>
 
