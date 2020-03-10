@@ -765,26 +765,26 @@ Varoitus on aiheeton, ja pääsemme helpoimmalla ignoroimalla ESLint-säännön 
 ```js
 useEffect(() => {
   if ( result.data && !result.data.editNumber) {
-    notify('name not found')
+    setError('name not found')
   }
 // highlight-start  
 }, [result.data])  // eslint-disable-line 
 // highlight-end
 ```
 
-Voisimme yrittää päästä varoituksesta eroon lisäämällä funktion _notify_ useEffectin toisena parametrina olevaan taulukkoon:
+Voisimme yrittää päästä varoituksesta eroon lisäämällä funktion _setError_ useEffectin toisena parametrina olevaan taulukkoon:
 
 ```js
 useEffect(() => {
   if ( result.data && !result.data.editNumber) {
-    notify('name not found')
+    setError('name not found')
   }
 // highlight-start  
-}, [result.data, notify])
+}, [result.data, setError])
 // highlight-end
 ```
 
-Tämä ratkaisu ei kuitenkaan toimi, ellei _notify_-funktiota ole määritelty [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-funktioon käärittynä. Jos näin ei tehdä, seurauksena on ikuinen luuppi, sillä aina kun komponentti _App_ renderöidään uudelleen notifikaation poistamisen jälkeen, syntyy <i>uusi versio</i> funktiosta _notify_ ja se taas aiheuttaa efektifunktion uudelleensuorituksen ja taas uuden notifikaation...
+Tämä ratkaisu ei kuitenkaan toimi, ellei _setError_-funktiota ole määritelty [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-funktioon käärittynä. Jos näin ei tehdä, seurauksena on ikuinen luuppi, sillä aina kun komponentti _App_ renderöidään uudelleen notifikaation poistamisen jälkeen, syntyy <i>uusi versio</i> funktiosta _setError_ ja se taas aiheuttaa efektifunktion uudelleensuorituksen ja taas uuden notifikaation...
 
 Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5), branchissa <i>part8-5</i>.
 
