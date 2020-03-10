@@ -27,7 +27,7 @@ npx create-react-app my-app --template typescript
 
 After running the command, you should have a complete basic react app, that uses TypeScript. The app can be started by simply running _npm start_ within the app root folder.
 
-If you browse through the files and folders, you will notice that the app is not that different from if you would have set up a purely JavaScript Create React App. Basically the only differences are that the _.js_ and _.jsx_ files are now renamed to _.ts_ and _.tsx_ files, they contains some type annotations, and the root folder also contains a _tsconfig.json_ file.
+If you browse through the files and folders, you will notice that the app is not that different from if you would have set up a purely JavaScript Create React App. Basically the only differences are that the _.js_ and _.jsx_ files are now renamed to _.ts_ and _.tsx_ files, they contain some type annotations, and the root folder also contains a _tsconfig.json_ file.
 
 Now, let's take a look at the _tsconfig.json_ file that has been created for us. Everything should be more or less fine within the file, except for that at the moment the configuration also allows JavaScript files to be compiled, because _allowJs_ is set to _true_. That would be fine if you have the need to use both TypeScript and JavaScript mixed (e.g. if you are in the middle of transforming a JS project into TS or any other reason), but we want our app to be purely TypeScript, so let's change that setting to _false_.
 
