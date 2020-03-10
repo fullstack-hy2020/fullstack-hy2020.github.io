@@ -389,7 +389,7 @@ In the example above TypeScript knows that <i>coursePart</i> has the type <i>Cou
 
 What about new types? If we were to add a new course part, wouldn't it be nice to know if we haven't yet implemented handling of that type in our code? With the example above, a new type would go to the <i>default</i> block and nothing would get printed for a new type. Sometimes this is of course totally acceptable, e.g. if you only want to handle specific (not all) cases of a type union, but in most cases it is recommended to handle all variations separately. 
 
-With TypeScript we can use a way of type checking, which is called exhaustive type checking. It's basic principle is that if we encounter an unexpected value, we call a function that accepts a value with the type [never](https://www.typescriptlang.org/docs/handbook/basic-types.html#never) and also has the return type <i>never</i>.
+With TypeScript we can use a way of type checking, which is called exhaustive type checking. Its basic principle is that if we encounter an unexpected value, we call a function that accepts a value with the type [never](https://www.typescriptlang.org/docs/handbook/basic-types.html#never) and also has the return type <i>never</i>.
 
 A straight forward version of the function could look like this:
 
