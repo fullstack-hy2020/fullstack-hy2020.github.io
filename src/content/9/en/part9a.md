@@ -116,9 +116,7 @@ The lack of runtime type information can be surprising for programmers who are u
 
 On different forums, you may stumble upon a lot of different arguments either for or against TypeScript. The truth is probably as vague as: it depends on your need and use of the functions, that TypeScript offers. Anyway, here are explained some of our reasoning behind why we think that the use of TypeScript may have some advantages.
 
-First of all, probably the most noticable feature with TypeScript is that it offers **type checking and static code analysis**. The ability to require values to be of a certain type and to have the compiler warn about wrongful usage can help reduce runtime errors and you might even be able to reduce the amount of required unit tests in a project, at least conserning pure type tests. The static code analysis doesn't only warn about wrongful type usage, but also if you for instance misspell a variable or function name or try to use a value beyond it's scope etc. With the help of a sufficient linter settings, it's hard to even think of runtime errors that you may be able to produce.
-
-_There is one excption though, if you use the type any or process external input in some way, then it's still easy to produce runtime errors, so TypeScript does not fix everyhing for you!!_
+First of all, probably the most noticable feature with TypeScript is that it offers **type checking and static code analysis**. The ability to require values to be of a certain type and to have the compiler warn about wrongful usage can help reduce runtime errors and you might even be able to reduce the amount of required unit tests in a project, at least conserning pure type tests. The static code analysis doesn't only warn about wrongful type usage, but also if you for instance misspell a variable or function name or try to use a value beyond it's scope etc.
 
 A second advantage with TypeScript is that the type annotations in the code can function as a type of **code level documentation**. It's easy to check from a function signature what kind of arguments the function can consume and what type of data it will produce. This type of type annotation bound documentation will always be up to date and it makes it easier for new programmers to start working on an existing project and it is also helpful when returning to earlier made code. Types may also be re-used all around the code base, so a change to one type automatically reflects as a change to all the locations where the type is used. One might argue that you can achieve similar code level documentation with e.g. [JSDoc](https://jsdoc.app/about-getting-started.html), but it is not connected to the code as tightly as TypeScript's types, and may thus get out of sync more easily and is also more verbose.
 
@@ -128,7 +126,7 @@ All the advantages above are together extremely helpful when you have a need to 
 
 ### What does TypeScript not fix?
 
-As mentioned before, TypeScript type annotations and type checking exist only at compile time and no longer at runtime, so even if the compiler does not give any errors, runtime errors are still possible. Especially when handling external input or if you use the dynamic type `any` in your code.
+TypeScript type annotations and type checking exist only at compile time and no longer at runtime, so even if the compiler does not give any errors, runtime errors are still possible. These runtime errors are especially common when handling external input, such as data received from a network request, or if you use the `any` type in your code.
 
 Lastly, here are a few examples of what many regard as downsides with TypeScript, which might be good to be aware of:
 
