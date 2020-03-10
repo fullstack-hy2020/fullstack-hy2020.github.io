@@ -1227,7 +1227,7 @@ Remember that we have different kinds of entries in our app, so our backend shou
 
 Now that our backend supports adding of entries, we want to add the corresponding functionality the frontend. In this exercise you should add a form for adding an entry for a patient. An intuitive place for opening the form would be on the patient page. You should be able to choose the entry type for the new entry and the form should display an error if some required value is missing and you try to submit the form. Upon a successful submit the new entry should be added to the correct person and the patient's entries on the patient page should be updated to contain the new entry.
 
-If you like, you can re-use some of the code from the Add patient form for this exercise, but this is not a requirement.
+If you like, you can re-use some of the code from the <i>Add patient</i> form for this exercise, but this is not a requirement.
 
 #### 9.25: patientor, step8
 

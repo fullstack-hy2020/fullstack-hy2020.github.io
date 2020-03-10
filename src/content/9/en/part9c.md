@@ -244,9 +244,9 @@ Now we have a minimal working pipeline, with which we can develop our project, w
 
 **Before you start the exercises**
 
-For this set of exercises you will be developing a backend for an existing project called <i>Diagnoses</i> which is a simple medical record application for the use doctors that handles patient information, diagnoses and basic health information of the patients.
+For this set of exercises you will be developing a backend for an existing project called <i>Patientor</i> which is a simple medical record application for the use doctors that handles patient information, diagnoses and basic health information of the patients.
 
-The frontend has already been built by outsider experts and you're task is to create a backend to support the existing code.
+The [frontend](https://github.com/fullstack-hy2020/patientor) has already been built by outsider experts and you're task is to create a backend to support the existing code.
 
 **Note:** From now on you will be working with existing codebase and sometimes it is expected that you use your own skills to find the relevant files and and configurations to proceed in the exercises.
 
