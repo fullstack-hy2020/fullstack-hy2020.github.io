@@ -1225,11 +1225,27 @@ Remember that we have different kinds of entries in our app, so our backend shou
 
 #### 9.24: patientor, step7
 
-Now that our backend supports adding of entries, we want to add the corresponding functionality the frontend. In this exercise you should add a form for adding an entry for a patient. An intuitive place for opening the form would be on the patient page. You should be able to choose the entry type for the new entry and the form should display an error if some required value is missing and you try to submit the form. Upon a successful submit the new entry should be added to the correct person and the patient's entries on the patient page should be updated to contain the new entry.
+Now that our backend supports adding of entries, we want to add the corresponding functionality the frontend. In this exercise you should add a form for adding an entry for a patient. An intuitive place for opening the form would be on the patient page. 
+
+In this exercise it is enough to support <i>two</i> entry types, and you do not have to handle the errors, it is enough if a entry can be created if the form is filled up with valid data.
+
+You may also simplify your solution so that only one diagnose code can be added to an entry.
 
 If you like, you can re-use some of the code from the <i>Add patient</i> form for this exercise, but this is not a requirement.
 
+Upon a successful submit the new entry should be added to the correct person and the patient's entries on the patient page should be updated to contain the new entry.
+
+*Hint* the easiest (but not the most elegant) way to get this done is to have a separate form for each different type of entry. 
+
+If you use a single form then the [intersect type](https://www.typescriptlang.org/docs/handbook/advanced-types.html#intersection-types) may be helpful when defining the type of form values. See [here](https://codingblast.com/typescript-intersection-types/) another description of intersect type.
+
 #### 9.25: patientor, step8
+
+Extend your solution so that it supports <i>all the entry types</i> and displays error message if some required values are missing and you try to submit the form. 
+
+You do not need to give meaningful error messages if some entries (such as dates) are formatted incorrectly.
+
+#### 9.26: patientor, step9
 
 Create a _HealthBar_ component that shows the health rating of a patient.
 
