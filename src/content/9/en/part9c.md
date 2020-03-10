@@ -206,9 +206,9 @@ So our stricter than before tsconfig options don't allow us to keep unused varia
 
 If it is absolutely impossible to get rid of an unused variable, you should prefix it with an underscore to inform the compiler that this has been taken into considearation and there is nothing we can do. Let's rename the _req_ variable to __req_ and we can continue with our development.
 
-Now by running _npm run dev_ we should be able to run and curl our _/ping_ endpoint.
+Now by running _npm run dev_ we should be able to run the app without errors and curl our _/ping_ endpoint.
 
-Now when we can see the happy _pong_, we should try creating our first production build. Now that we have defined the _outdir_ in our tsconfig.json, there's nothing else really to do, but running _npm run tsc_.
+Now that we can see the happy _pong_, we should try creating our first production build. Since we have defined the _outdir_ in our tsconfig.json, there's really nothing else to do, but run _npm run tsc_.
 
 Just like magic a native runnable JavaScript production build of the ping-pong express backend is created into the build folder.
 
