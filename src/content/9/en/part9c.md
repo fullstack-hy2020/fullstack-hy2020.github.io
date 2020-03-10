@@ -148,7 +148,7 @@ Now we only need to set up our development environment properly, and then we are
 npm install --save-dev ts-node-dev
 ```
 
-**Sidenote:** When deciding on what packages to use, a [npmtrends](https://npmtrends.com) is a good place to compare the popularity and growth of different npm packages. When [comparing](https://www.npmtrends.com/nodemon-vs-ts-node-dev-vs-ts-node) the use of _ts-node-dev_ and both _nodemon_ and _ts-node_  we can see that the popularity of ts-node-dev is not nearly as popular as using nodemon and ts-dev, so the safer choice might be to just go with the other choice. Now let's still give _ts-node-dev_ a chance and use it in these exercises.
+**Sidenote:** When deciding on what packages to use, [npmtrends](https://npmtrends.com) is a good place to compare the popularity and growth of different npm packages. When [comparing](https://www.npmtrends.com/nodemon-vs-ts-node-dev-vs-ts-node) the use of _ts-node-dev_ and both _nodemon_ and _ts-node_  we can see that the popularity of ts-node-dev is not nearly as popular as using nodemon and ts-dev, so the safer choice might be to just go with the other choice. Now let's still give _ts-node-dev_ a chance and use it in these exercises.
 
 
 There is a lot of stuff to go through before you can even start the actual coding. When working with a real project, careful preparations support your development process to a great length, so take the time to create a good setting for yourself and your team so that in the long run everything will be much smoother.
