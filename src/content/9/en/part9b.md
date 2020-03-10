@@ -775,7 +775,7 @@ Add to your app an endpoint for the exercise calculator. It should be used by do
 ```js
 {
   daily_exercises: [1, 0, 2, 0, 3, 0, 2.5], 
-  target: 2
+  target: 7
 }
 ```
 
