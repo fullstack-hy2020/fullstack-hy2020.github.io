@@ -344,7 +344,7 @@ router.post('/', (_req, res) => {
 export default router;
 ```
 
-And then let's route all requests coming with the prefix _api/diaries/_ to that specific router in _index.ts`
+And then let's route all requests coming with the prefix _api/diaries/_ to that specific router in _index.ts_
 
 
 ```js
