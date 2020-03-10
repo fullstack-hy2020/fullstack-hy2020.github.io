@@ -1030,7 +1030,7 @@ const parseDate = (date: any): string => {
 }
 ```
 
-Nothing really special here, only thing is that we can't use a type guard since a date is in this case considered only a _string_. Notice that even though the _date_ variable is accepted as _any_ by the _parseDate_ function, after checking the type with _isdString_ the type is already a string which is why we are able to give the variable to the function _isDate_ with the type _string_ without any errors.
+Nothing really special here, only thing is that we can't use a type guard since a date is in this case considered only to be a _string_. Notice that even though the _date_ variable is accepted as _any_ by the _parseDate_ function, after checking the type with _isString_ the type is already a string which is why we are able to give the variable to the function _isDate_ with the type _string_ without any errors.
 
 Finally we are ready to move on to the last two types, Weather and Visibility.
 
@@ -1094,7 +1094,7 @@ With these changes, one issue arises, our data does not conform anymore to our t
 
 ![](../../images/9/30.png)
 
-This is because a string can't be just assumed to be an enum. 
+This is because a string can't just be assumed to be an enum. 
 
 The fix is to map the initial data elements to _DiaryEntry_ type with the _toNewDiaryEntry_ function:
 
