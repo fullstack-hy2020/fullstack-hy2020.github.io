@@ -966,7 +966,7 @@ const isString = (text: any): text is string => {
 }
 ```
 
-The function is so called [type guard](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards), that is, a function that is returning a boolean <i>and</i> which has a <i>type predicate</i> as the return type. In our case the type predicate is
+The function is so called [type guard](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards), that is, a function that returns a boolean <i>and</i> which has a <i>type predicate</i> as the return type. In our case the type predicate is
 
 ```js
 text is string
