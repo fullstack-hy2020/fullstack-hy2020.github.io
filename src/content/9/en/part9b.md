@@ -770,7 +770,7 @@ And now let's fix everything that needs to be fixed!
 
 #### 9.7
 
-Add to your app an endpoint for the exercise calculator. It should be used by doing a HTTP POST request to endpoint _exercises_ with the input in the request body
+Add an endpoint to your app for the exercise calculator. It should be used by doing a HTTP POST request to endpoint _exercises_ with the input in the request body
 
 ```js
 {
@@ -793,7 +793,7 @@ Response is a json of the following form
 }
 ```
 
-If the body of the request is not of the right form, response with proper statuscode and error message is given. The error message is either
+If the body of the request is not of the right form, response with proper status code and error message is given. The error message is either
 
 ```js
 {
@@ -809,7 +809,7 @@ or
 }
 ```
 
-depending on the error, the later happens if the input values does not have the right type (are not numbers or convertable to numbers).
+depending on the error. The latter happens if the input values do not have the right type, i.e. they are not numbers or convertable to numbers.
 
 
 </div>
