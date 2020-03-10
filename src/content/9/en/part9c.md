@@ -910,7 +910,7 @@ router.post('/', (req, res) => {
 
 Since we are now making trustworthy code and trying to make sure that we are getting exactly what we want from the requests we should get started with the goal of parsing and validating each field we are waiting for. 
 
-The skeleton of the function _addDiaryEntry_ looks like the following:
+The skeleton of the function _toNewDiaryEntry_ looks like the following:
 
 ```js
 import { NewDiaryEntry } from './types'
