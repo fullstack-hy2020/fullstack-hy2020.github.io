@@ -501,7 +501,7 @@ Remember that reading code is a skill itself and relax if you don't understand t
 
 It's time to get our hands dirty finalizing the frontend for the backend we built in [exercises 9.10.-9.15.](/en/part9/typing_the_express_app).
 
-Before diving into the code, let us start bot the fronend and the backend.
+Before diving into the code, let us start both the frontend and the backend.
 
 After a successful build your browser will open a new tab to http://localhost:3000/. You should see a patient listing page, which fetches a patient list from our backend and renders the list in a simple table, and a button for creating new patients to the backend. As we are not using a database, but mock data, the data will not persist, i.e. closing the backend forgets all the added data. UI has not clearly been the strong point of the creators of this app, so let's disregard the UI for now.
 
@@ -749,7 +749,7 @@ Response should look as follows:
 
 #### 9.19: patientor, step2
 
-Create a page for showing the patient information in the fronend.
+Create a page for showing the patient information in the frontend.
 
 Patient information should be accessible when clicking eg. the patients name.
 
@@ -760,7 +760,7 @@ Since we have now the state in contex, you need a new action type for updating t
 Application uses [Semantic UI React](https://react.semantic-ui.com/) for styling, that is quite simillar to [React Bootstrap](https://react-bootstrap.github.io/) and [MaterialUI](https://material-ui.com/) that we covered in [part 7](/en/part7/more_about_styles). You may also use it for the new components but that is up to you sincew the main focus is now in Typescript.
 
 Application also uses the [react router](https://reacttraining.com/react-router/web/guides/quick-start) 
-to control what view is visible in the fronend. You might want to have a look on [part 7](/en/part7/react_router) if you have not already have a grasp on how router works.
+to control what view is visible in the frontend. You might want to have a look on [part 7](/en/part7/react_router) if you have not already have a grasp on how router works.
 
 The result could look like the following:
 
@@ -896,7 +896,7 @@ Use types properly in the backend! For now there is no need to do a proper valid
 
 #### 9.21: patientor, step4
 
-Extend the patient page in the fronend to list the <i>data</i>, <i>description</i> and <i>diagnose codes</i> of patient's entries. 
+Extend the patient page in the frontend to list the <i>data</i>, <i>description</i> and <i>diagnose codes</i> of patient's entries. 
 
 You can use the same type definiton for <i>Entry</i> in the frontend. For these exercises it is enough just to copy/paste the definitions from backend to frontend.
 
