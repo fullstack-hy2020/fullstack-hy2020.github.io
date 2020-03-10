@@ -275,7 +275,8 @@ However, MVC-architecture is not usually mentioned when talking about React-appl
 
 Because both React and [Flux](https://facebook.github.io/flux/docs/in-depth-overview.html#content) were created at Facebook one could say that using React only as a UI library is the intended use case. Following the Flux-architecture adds some overhead to the application, and if were talking about a small application or prototype it might be a good idea to use React "wrong", since [over-engineering](https://en.wikipedia.org/wiki/Overengineering) rarely yields an optimal result.
 
-Kuten [osan 6](/osa6/connect#redux-ja-komponenttien-tila) lopussa mainittiin, Reactin [Context-api](https://reactjs.org/docs/context.html) tarjoaa erään vaihtoehtoisen tavan keskitetylle tilan hallinnalle ilman tarvetta ulkoisille kirjastoille kuten reduxille. Katso lisää esim. [täällä](https://www.simplethread.com/cant-replace-redux-with-hooks/) ja [täällä](https://hswolff.com/blog/how-to-usecontext-with-usereducer/).
+<!-- Kuten [osan 6](/osa6/connect#redux-ja-komponenttien-tila) lopussa mainittiin, Reactin [Context-api](https://reactjs.org/docs/context.html) tarjoaa erään vaihtoehtoisen tavan keskitetylle tilan hallinnalle ilman tarvetta ulkoisille kirjastoille kuten reduxille. Katso lisää esim. [täällä](https://www.simplethread.com/cant-replace-redux-with-hooks/) ja [täällä](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). -->
+As I mentioned at the end of [part 6](/osa6/connect#redux-ja-komponenttien-tila), the React [Context-api](https://reactjs.org/docs/context.html) offers one alternative solution for centralized state menagement without the need for third party libraries such as redux. You can read more about this i.e [here](https://www.simplethread.com/cant-replace-redux-with-hooks/) and [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/).
 
 ### React/node-application security
 
@@ -349,9 +350,12 @@ Last year's model answer for the exercises in part 4 already have quite a few ou
 
 The dependencies can be brought up to date by updating the file <i>package.json</i> and running the command _npm install_. However, old versions of the dependencies are not necessarily a security risk. 
 
-Riippuvuuksien turvallisuus voidaan tarkistaa npm:n [audit](https://docs.npmjs.com/cli/audit)-komennolla, joka vertaa käytettyjen riippuvuuksien versioita keskitetyssä virhetietokannassa listattuihin tietoturvauhan sisältäviin riippuvuuksien versioihin.
+<!-- Riippuvuuksien turvallisuus voidaan tarkistaa npm:n [audit](https://docs.npmjs.com/cli/audit)-komennolla, joka vertaa käytettyjen riippuvuuksien versioita keskitetyssä virhetietokannassa listattuihin tietoturvauhan sisältäviin riippuvuuksien versioihin. -->
+The npm [audit](https://docs.npmjs.com/cli/audit) command can be used to check the security of debendencies. It compares the version numbers of the debendencies in your application to a list of the version numbers of debendencies containing known security threats in a centralized error database. 
 
-Komennon _npm audit_ suorittaminen viime vuoden osan 4 mallivastaukselle antaa pitkän listan valituksia ja korjausehdotuksia. Seuraavassa osa raportista:
+<!-- Komennon _npm audit_ suorittaminen viime vuoden osan 4 mallivastaukselle antaa pitkän listan valituksia ja korjausehdotuksia. Seuraavassa osa raportista: -->
+Running _npm audit_ on an exercise from part 4 of last year's course print a long list of complaints and suggested fixes. 
+Below is a part of the raport:
 
 ```js
 $ bloglist-backend npm audit
@@ -410,7 +414,9 @@ found 416 vulnerabilities (65 low, 2 moderate, 348 high, 1 critical) in 20047 sc
   62 vulnerabilities require semver-major dependency updates.
 ```
 
-Reuilun vuoden ikäinen koodi on siis täynnä pieniä tietoturvauhkia, kriittisiä uhkia on onneksi ainoastaan 1. Suoritetaan raportin suosittelema operaatio _npm audit fix_:
+<!-- Reuilun vuoden ikäinen koodi on siis täynnä pieniä tietoturvauhkia, kriittisiä uhkia on onneksi ainoastaan 1. Suoritetaan raportin suosittelema operaatio _npm audit fix_: -->
+After only one year the code is full of small security threats. Luckily there is only 1 critical threat. 
+Let's run _npm audit fix_ as the raport suggests:
 
 ```js
 $ bloglist-backend npm audit fix
@@ -422,13 +428,17 @@ fixed 354 of 416 vulnerabilities in 20047 scanned packages
   (use `npm audit fix --force` to install breaking changes; or refer to `npm audit` for steps to fix these manually)
 ```
 
-Haavoittuvuuksia jää vielä 62, sillä _audit fix_ ei tee oletusarvoisesti versiopäivitystä kirjastolle, jonka <i>major</i>-versionumero on kasvanut. Tälläisen riippuvuuden päivitys saattaa aiheuttaa sovelluksen hajoamisen. Ongelmat aiheuttaa testauskirjasto jestin versio, joka on sovelluksessa 23.6.0 kun taas turvallinen versio olisi 25.1.0. Koska jest on ainoastaan kehitysaikainen riippuvuus, ei vaaraa oikeastaan ole, mutta päivitetään myös se:
+<!-- Haavoittuvuuksia jää vielä 62, sillä _audit fix_ ei tee oletusarvoisesti versiopäivitystä kirjastolle, jonka <i>major</i>-versionumero on kasvanut. Tälläisen riippuvuuden päivitys saattaa aiheuttaa sovelluksen hajoamisen. Ongelmat aiheuttaa testauskirjasto jestin versio, joka on sovelluksessa 23.6.0 kun taas turvallinen versio olisi 25.1.0. Koska jest on ainoastaan kehitysaikainen riippuvuus, ei vaaraa oikeastaan ole, mutta päivitetään myös se: -->
+62 threats remain because by default _audit fix_  does not update debendencies if their <i>major</i> version number has increased. 
+Updating these debendencies could lead to the whole application breaking down. The remaining threats are caused by the testing debendency jest. Our application has the version 23.6.0 when the secure version is 25.0.1. 
+As jest is a development debendency the threat is actually nonexistent, but let's update it just to be safe:
 
 ```js
 npm install --save-dev jest@25.1.0 
 ```
 
-Päivityksen jälkeen tilanne näyttää hyvältä
+<!-- Päivityksen jälkeen tilanne näyttää hyvältä -->
+After the update the situation looks good
 
 ```js
  $ blogs-backend npm audit
@@ -531,13 +541,20 @@ Serverless is not about there not being a server in applications, but about how 
 
 ### Useful libraries and interesting links
 
-Javasciptin kehittäjäyhteisö on tuottanut valtavan määrän erilaisia hyödyllisiä kirjastoja ja jos olet koodaamassa jotain vähänkin isompaa, kannattaa etsiä mitä valmista kalustoa on jo tarjolla. Eräs hyvä paikka kirjastojen etsimiseen on https://applibslist.xyz/. Seuraavassa listataan muutamia luotettavien tahojen hyväksi havaitsemia kirjastoja.
+<!-- Javasciptin kehittäjäyhteisö on tuottanut valtavan määrän erilaisia hyödyllisiä kirjastoja ja jos olet koodaamassa jotain vähänkin isompaa, kannattaa etsiä mitä valmista kalustoa on jo tarjolla. Eräs hyvä paikka kirjastojen etsimiseen on https://applibslist.xyz/. Seuraavassa listataan muutamia luotettavien tahojen hyväksi havaitsemia kirjastoja. -->
+The JavaScript developer community has produced a large variety of useful libraries. If you are developing anything more substancial, it is worth it to check if existing solutions are already available. 
+One good place to find libraries is https://applibslist.xyz/.
+Below is listed some libraries recommended by trustworthy parties.
 
-Jos sovelluksessa on tarve operoida hieman monimutkaisemman datan kanssa, on jo [osassa 4](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet#tehtavat-4-3-4-7) suositeltu kirjasto [lodash](https://www.npmjs.com/package/lodash) hyvä lisä. Jos olet mieltynyt funktionaaliseen ohjelmointityyliin, kannattaa harkita [ramda](https://ramdajs.com/):n käyttöä.
+<!-- Jos sovelluksessa on tarve operoida hieman monimutkaisemman datan kanssa, on jo [osassa 4](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet#tehtavat-4-3-4-7) suositeltu kirjasto [lodash](https://www.npmjs.com/package/lodash) hyvä lisä. Jos olet mieltynyt funktionaaliseen ohjelmointityyliin, kannattaa harkita [ramda](https://ramdajs.com/):n käyttöä. -->
+If your application has to handle complicated data [lodash](https://www.npmjs.com/package/lodash), which we recommended in [part 4](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet#tehtavat-4-3-4-7), is a good library to use. If you prefer functional programming style, you might consider using [ramda](https://ramdajs.com/).
 
-Jos sovelluksessa käsitellään aikaa, tarjoavat [moment](https://momentjs.com/) ja hieman uudempi [date-fns](https://github.com/date-fns/date-fns) siihen hyvän välineistön.
+<!-- Jos sovelluksessa käsitellään aikaa, tarjoavat [moment](https://momentjs.com/) ja hieman uudempi [date-fns](https://github.com/date-fns/date-fns) siihen hyvän välineistön. -->
+If you are handling times and dates, [moment](https://momentjs.com/) and a new(er) release [date-fns](https://github.com/date-fns/date-fns) offer good tools for that.
 
-Lomakkeiden käyttöä helpottavia kirjastoja ovat [Formik](https://www.npmjs.com/package/formik) ja [redux-form](https://redux-form.com/8.3.0/). Jos sovelluksessa tulee piirtää graafeja, on vaihtoehtoja lukuisia, sekä [recharts](http://recharts.org/en-US/) että [highcharts](https://github.com/highcharts/highcharts-react) ovat hyviksi havaittuja.
+<!-- Lomakkeiden käyttöä helpottavia kirjastoja ovat [Formik](https://www.npmjs.com/package/formik) ja [redux-form](https://redux-form.com/8.3.0/). Jos sovelluksessa tulee piirtää graafeja, on vaihtoehtoja lukuisia, sekä [recharts](http://recharts.org/en-US/) että [highcharts](https://github.com/highcharts/highcharts-react) ovat hyviksi havaittuja. -->
+[Formik](https://www.npmjs.com/package/formik) and [redux-form](https://redux-form.com/8.3.0/) can be used to handle forms easier. 
+If your application displays graphs, there are multiple options to chose from. Both [recharts](http://recharts.org/en-US/) and [highcharts](https://github.com/highcharts/highcharts-react) are well recommended.
 
 The [immutable.js](https://github.com/facebook/immutable-js/)-library maintained by Facebook provides, as the name suggests, immutable implementations of some data structures. The library could be of use when using Redux, since as we [remember](/en/part6/flux_architecture_and_redux#pure-functions-immutable) from part 6: reducers must be pure functions, meaning they must not modify the store's state but instead have to replace it with a new one when a change occurs. Over the past year some of the popularity of Immutable.js has been taken over by [Immer](https://github.com/mweststrate/immer), which provides similar functionality but in a somewhat easier package.
 
@@ -555,7 +572,8 @@ When it comes to the tools used for the management and bundling of JavaScript pr
 - 2012-14 [Browserify](https://www.npmjs.com/package/browserify)
 - 2015- [Webpack](https://www.npmjs.com/package/webpack)
 
-Hipsterien suurin into työkalukehitykseen näytti pysähtyneen webpackin vallattua markkinat. Pari vuotta sitten markkinoille ilmestyi uusi tulokas [Parcel](https://parceljs.org), joka markkinoi olevansa yksinkertainen, sitähän Webpack ei missään nimessä ole, ja paljon nopeampi kuin Webpack. Lupaavan alun jälkeen Parcel ei kuitenkaan ole jatkanut nostettaan, ja vaikuttaa että siitä ei kuitenkaan ole Webpackin tappajaksi.
+<!-- Hipsterien suurin into työkalukehitykseen näytti pysähtyneen webpackin vallattua markkinat. Pari vuotta sitten markkinoille ilmestyi uusi tulokas [Parcel](https://parceljs.org), joka markkinoi olevansa yksinkertainen, sitähän Webpack ei missään nimessä ole, ja paljon nopeampi kuin Webpack. Lupaavan alun jälkeen Parcel ei kuitenkaan ole jatkanut nostettaan, ja vaikuttaa että siitä ei kuitenkaan ole Webpackin tappajaksi. -->
+Hipsters seem to have lost their interest in tool development after webpack started to dominate the markets. Few years ago [Parcel](https://parceljs.org) started to make the rounds marketing itself as simpe (which Webpack absolutely is not) and faster than Webpack. However after a promising start Parcel has not gathered any steam, and it's beginning to look like it will not be the end of Webpack. 
 
 The site <https://reactpatterns.com/> provides a concise list of best practices for React, some of which are already familiar from this course. Another similar list is [react bits](https://vasanthk.gitbooks.io/react-bits/).
 
