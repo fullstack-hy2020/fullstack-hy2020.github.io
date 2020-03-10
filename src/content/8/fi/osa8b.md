@@ -275,7 +275,7 @@ const Persons = ({ persons }) => {
     if (result.data) {
       setPerson(result.data.findPerson)
     }
-  }, [result.data])
+  }, [result])
   // highlight-end
 
 // highlight-start
@@ -334,7 +334,7 @@ useEffect(() => {
   if (result.data) {
     setPerson(result.data.findPerson)
   }
-}, [result.data])
+}, [result])
 ```
 
 Hookin toisena parametrina on _result.data_. Tämä saa aikaan sen, että hookin ensimmäisenä parametrina oleva funktio suoritetaan <i>aina kun kyselyssä haetaan uuden henkilön tiedot</i>. Jos päivitystä ei hoidettaisi kontrolloidusti hookissa, seuraisi ongelmia sen jälkeen kun yksittäisen henkilön näkymästä palataan kaikkien henkilöiden näkymään.
