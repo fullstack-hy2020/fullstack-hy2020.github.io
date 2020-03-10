@@ -250,7 +250,7 @@ The frontend has already been built by outsider experts and you're task is to cr
 
 **Note:** From now on you will be working with existing codebase and sometimes it is expected that you use your own skills to find the relevant files and and configurations to proceed in the exercises.
 
-**Note 2:** You will be extending the frontend later on so it is suggested that you fork the repository already now.
+**Note 2:** You will be extending the frontend later on so it is suggested that you fork the repository already [from here](https://github.com/fullstack-hy2020/patientor).
 
 
 **Note 3:** Code quality is extremely important, so take extra good care of that your code is _readable_ and that it can be _easily shared_ and by this, you need to end up with a result that is _production ready_, so that the built version of the project is working, and no extra dependencies are included in the end result.
