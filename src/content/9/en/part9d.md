@@ -1227,41 +1227,57 @@ Remember that we have different kinds of entries in our app, so our backend shou
 
 Now that our backend supports adding of entries, we want to add the corresponding functionality the frontend. In this exercise you should add a form for adding an entry for a patient. An intuitive place for opening the form would be on the patient page. 
 
-In this exercise it is enough to support <i>two</i> entry types, and you do not have to handle the errors, it is enough if a entry can be created if the form is filled up with valid data.
-
-You may also simplify your solution so that only one diagnose code can be added to an entry.
-
-If you like, you can re-use some of the code from the <i>Add patient</i> form for this exercise, but this is not a requirement.
+In this exercise it is enough to support <i>one</i> entry type, and you do not have to handle the errors, it is enough if a entry can be created if the form is filled up with valid data.
 
 Upon a successful submit the new entry should be added to the correct person and the patient's entries on the patient page should be updated to contain the new entry.
 
-**Hint** the easiest (but not the most elegant) way to do this exercise is to have a separate form for each different entry type. 
+If you like, you can re-use some of the code from the <i>Add patient</i> form for this exercise, but this is not a requirement.
 
-If you use a single form then the [intersect type](https://www.typescriptlang.org/docs/handbook/advanced-types.html#intersection-types) may be helpful when defining the type of form values. See [here](https://codingblast.com/typescript-intersection-types/) another description of intersect type.
+Note that the file [FormField.txt](https://github.com/fullstack-hy2020/patientor/blob/master/src/AddPatientModal/FormField.tsx#L58) has a redily made component _ArrayField_ that can be used for the array of diagnosis.
+
+It can be used as follows:
+
+```js
+const AddEntryForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
+  return (
+    <Formik
+      initialValues={{
+        // ...
+        diagnosisCodes: [] // highlight-line 
+      }}
+      onSubmit={onSubmit}
+    >
+      {({ errors, touched, values }) => {         // highlight-line 
+        return (
+          <Form className="form ui">
+            // ...
+            <ArrayField
+              label="DiagnosticCodes"
+              placeholder="Diagnostic code"
+              errorMessage={touched.diagnosisCodes && errors.diagnosisCodes}
+              diagnosisCodes={values.diagnosisCodes} // highlight-line
+            />
+            // ...
+          </Form>
+        )}
+      }
+    </Formik>
+  );
+}
+```
+
+Note the tree marked lines. The first sets initial value for the array, and using the second you get the object <i>values</i> where Formik keeps the form data, and the third line passes the diagnosis array to _ArrayField_ components that takes care of adding diagnosis to the array.
 
 #### 9.25: patientor, step8
 
-Extend your solution so that it supports <i>all the entry types</i> and displays error message if some required values are missing or formatted incorrectly and you try to submit the form. 
+Extend your solution to support <i>two</i> entry types, and you do not have to handle the errors, it is enough if a entry can be created if the form is filled up with valid data.
 
+The easiest (but not the most elegant) way to do this exercise is to have a separate form for each different entry type. 
+
+Getting the types to work properly might be a slight challenge if you use just a single form.
 
 #### 9.26: patientor, step9
 
-Create a _HealthBar_ component that shows the health rating of a patient.
-
-The HealthBar should consist of four shapes (stars, hearts, whatever) which are filled to the status of the patient; 4 for maximum health, 0 minimum, like this:
-
-![](../../images/9/37.png)
-
-For each patient the Health Rating should be based on either:
-
-- Latest HealthCheck rating or
-- The amount of diagnoses the patient has overall:
-  - If one diagnosis, 3 hearts
-  - If two diagnosis, 2 hearts
-  - etc.
-
-The component should be shown on each patients page.
-
-The rating for the _HealthBar_ component should be evaluated immediately when receiving the data for the patient, so rating for the component should be saved to the state in the reducer.
+Extend your solution so that it supports <i>all the entry types</i> and displays error message if some required values are missing or formatted incorrectly and you try to submit the form. 
 
 </div>
