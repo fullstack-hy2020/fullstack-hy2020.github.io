@@ -63,7 +63,6 @@ const multiplicator = (a, b, printText) => {
 }
 
 multiplicator(2, 4, 'Multiplied numbers 2 and 4, the result is:');
-
 ```
 
 As we can see, this is still ordinary basic JavaScript with no additional TS features and it compiles and runs nicely with <i>npm run ts-node -- multiplier.ts</i>, as it would with Node. But what happens if we end up passing wrong <i>types</i> of arguments to the multiplicator function?
