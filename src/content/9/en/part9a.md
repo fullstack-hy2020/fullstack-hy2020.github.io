@@ -37,7 +37,7 @@ Here are described some of the key features of the TypeScript language. This des
 
 #### Type annotations
 
-Type annotations in TypeScript are lightweight ways to record the intended contract of the function or variable. In the example below we have defined, that the `greeter` function will accept one argument of type string and one of type number. The function will return a string.
+Type annotations in TypeScript are lightweight ways to record the intended contract of the function or variable. In the example below, we have defined that the `greeter` function will accept one argument of type string and one of type number. The function will return a string.
 
 ```js
 const birthdayGreeter = (name: string, age: number): string => {
@@ -59,13 +59,32 @@ TypeScript is a structurally typed language. In structural typing, an element is
 In TypeScript, the compiler can attempt to infer the type information if no explicit type has been specified. The inference is done based on the assigned value and it's usage.
 The type inference takes place when initializing variables and members, setting parameter default values, and determining function return types.
 
-Below is an example of how type inference in TypeScript is done in a gradually more indirect way.
+Let's examine the code below step-by-step to see how type inference in Typescript is done in a more indirect way.
 
-First the `add` function's return value is inferred by retracing the code back to the return expression. The return expression performs an addition of two numbers, which can bee seen from the types set for the function parameters, so the return type `number` is inferred in this case.
+```js
+const add = (a: number, b: number) => {
+  return a + b;
+}
 
-Next there is declared an interface called `CallsFunction`, which consists of a function with one parameter, which in turn is a callback function accepting a string parameter and returns _any_ value. The function `callsFunction` is set to be of type `CallsFunction`, so in the function it can be inferred that the callback function will only accept a string argument. To demonstrate this, there is also an example where the callback function is called with a numeric value, and that causes an error in TypeScript.
+interface CallsFunction {
+  (cb: (result: string) => any): void;
+}
 
-Lastly, when `callsFunction` is called, we pass it an anonymous function and TypeScript can, based on the type of `callsFunction` and it's type, infer that the call will return a string.
+const callsFunction: CallsFunction = (cb) => {
+  cb('Done');
+  cb(1);
+}
+
+callsFunction((result) => {
+  return result;
+});
+```
+
+First, the `add` function's return value is inferred by tracing back the code to the return expression. The return expression performs an addition of two variables, which are known to be numbers from the types set for the function parameters, so the return type `number` is inferred in this case.
+
+Next, there is a declaration for an interface called `CallsFunction`, which consists of a function with one parameter, which in turn is a callback function accepting a string parameter and returning _any_ value. After that, the function `callsFunction` is set to be of type `CallsFunction`, so in the function it can be inferred that the callback function will only accept a string argument. To demonstrate this, there is also an example where the callback function is called with a numeric value, and that causes an error in TypeScript.
+
+Lastly, when `callsFunction` is called, we pass it an anonymous function. Based on the type of `callsFunction`, TypeScript infers that the call will return a string.
 
 ```js
 const add = (a: number, b: number) => {
