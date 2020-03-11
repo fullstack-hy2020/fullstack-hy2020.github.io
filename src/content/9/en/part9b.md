@@ -294,9 +294,9 @@ it "works" but gives us the answer
 Multplied 5 and NaN, the result is: NaN
 ```
 
-The reason for this is that the <i>Number('lol')</i> returns <i>NaN</i> which actually has the type <i>number</i>. 
+The reason for this is that the <i>Number('lol')</i> returns <i>NaN</i> which actually has the type <i>number</i> so TypeScript has no power to rescue from this kind of situation. 
 
-In order to save us from this kind of behavior, we have to validate the data that is given to us as in commandline. 
+In order to save us from this kind of behavior, we have to validate the data that is given to us as in command line. 
 
 Improved version of the multiplicator looks this:
 
@@ -344,7 +344,15 @@ we get a proper error message:
 Error, something bad happened, message:  Provided values were not numbers!
 ```
 
-Notice that return value of the function <i>parseArguments</i> is defined to have type <i>MultiplyValues</i>, that is defined as follows:
+Definition of the function <i>parseArguments</i> has couple of interesting things:
+
+```js
+const parseArguments = (args: Array<string>): MultiplyValues => {
+  // ...
+}
+```
+
+Firstly the parameter <i>args</i> is an [array](http://www.typescriptlang.org/docs/handbook/basic-types.html#array) of strings. The return value has type <i>MultiplyValues</i>, that is defined as follows:
 
 ```js
 interface MultiplyValues {
@@ -353,7 +361,7 @@ interface MultiplyValues {
 }
 ```
 
-TypeScript [Interface](http://www.typescriptlang.org/docs/handbook/interfaces.html) is one way of defining what "shape" an object should have. In our case it is quite obvious that return values of <i>parseArguments</i> should be objects that have properties <i>value1</i> and <i>value2</i> that both have type number.
+Definition utilizes TypeScript [Interface](http://www.typescriptlang.org/docs/handbook/interfaces.html) that is one way to define what "shape" an object should have. In our case it is quite obvious that return values should be objects that have properties <i>value1</i> and <i>value2</i> that both have type number.
 
 </div>
 
@@ -361,7 +369,9 @@ TypeScript [Interface](http://www.typescriptlang.org/docs/handbook/interfaces.ht
 
 ### Exercises 9.1.-9.3.
 
-**Before you start doing the exercises** create a file called tsconfig.json to the folder you will do the exercises in with the following content:
+#### setup
+
+Exercises 9.1.-9.7. will be all made to the same node project. Create the project in an empty directory with <i>npm init</i> and install ts-node and typescript packages. Create also the file <i>tsconfig.json</i> to the directory with the following content:
 
 ```json
 {
@@ -371,49 +381,51 @@ TypeScript [Interface](http://www.typescriptlang.org/docs/handbook/interfaces.ht
 }
 ```
 
-tsconfig.json can include various information for the TypeScript compiler on how to inpertret the code, how strictly should the compilator work and on what files to watch or ignore, and [much more](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html). Right now let's only use the compiler option "noImplicitAny", which makes it mandatory to have types for all variables used.
+<i>tsconfig.json</i> is used to define how TypeScript compiler should interpret the code, how strictly should the compilator work and on what files to watch or ignore, and [much more](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html). Right now we will only use the compiler option [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny), that makes it mandatory to have types for all variables used.
 
 #### 9.1
 
-Write your first TypeScript file that counts [BMI](https://en.wikipedia.org/wiki/Body_mass_index) based on given weight and height and then prints out a message that suits the results. The arguments can be hard-coded and command line arguments shouldn't be used in this exercise.
+Create the code of this exercise to file <i>bmiCalculator.ts</i>.
 
-The file should work by running _ts-node bmiCalculator.ts_, the calculation function and its accepted arguments should all be typed and necessary error cases should be handled appropriately.
+Write a function <i>calculateBmi</i> that counts [BMI](https://en.wikipedia.org/wiki/Body_mass_index) based on given weight (in kilograms) and height (in centimeters) and then returns a message that suits the results. 
 
-Example run: 
+Call the function in the same file with hard-coded parameters and print out the result. The code
+
+```js
+console.log(calculateBmi(180, 74))
+```
+
+should print the following message
 
 ```sh
-$ ts-node 01.01bmiCalculator.ts
-
-Slightly too much weight
+Normal (healthy weight)
 ```
+
+Create a npm script for running the program with command <i>npm run calculteBmi</i>
 
 #### 9.2
 
-Write a function that calculates the average time of input _daily exercise hours_ and compares it to the value to the _target amount_ of daily hours and returns an object that includes the following values:
+Create the code of this exercise to file <i>exerciseCalculator.ts</i>.
+
+Write a function <i>calculteExercises</i> that calculates the average time of <i>daily exercise hours</i> and compares it to the <i>target amount</i> of daily hours and returns an object that includes the following values:
 
   - the number of days
   - the number of training days
-  - boolean value on whether the hours have succeeded to reach the target
-  - a rating between the numbers 1-3 that tells how well the hours are met. You can decide on the metric on your own.
-  - a text value explaining the rating
   - the original target value
   - the calculated average time
+  - boolean value describing if the target was reached
+  - a rating between the numbers 1-3 that tells how well the hours are met. You can decide on the metric on your own.
+  - a text value explaining the rating
 
-The daily exercise hours are given to the function as an [array](https://www.typescriptlang.org/docs/handbook/basic-types.html#array) that contains the number of exercise hours for each day in the training period. Eg. a week with 1 hours of training at Monday, none at Tuesday, 2 hours at Wednesday and so on would be represented by the following array:
+The daily exercise hours are given to the function as an [array](https://www.typescriptlang.org/docs/handbook/basic-types.html#array) that contains the number of exercise hours for each day in the training period. Eg. a week with 1 hours of training at Monday, none at Tuesday, 2 hours at Wednesday, zero at Thursday and so on would be represented by the following array:
 
 ```js
 [1, 0, 2, 0, 3, 0, 2.5]
 ```
 
-For the Result object you should to create an [interface](https://www.typescriptlang.org/docs/handbook/interfaces.html) instead of a type since
+For the Result object you should to create an [interface](https://www.typescriptlang.org/docs/handbook/interfaces.html).
 
-The program is working if:
-- program can be run by inputting _ts-node exerciseCalculator.ts_,
-- The results are calculated correctly
-- Errors are handled appropriately
-- Everything is typed as tsconfig requires
-
-If you eg. would call the function with parameters _[1, 0, 2, 4.5, 0, 3, 1, 0, 4]_ and _2_ it could return
+If you would call the function with parameters <i>[1, 0, 2, 4.5, 0, 3, 1, 0, 4]</i> and <i>2</i> it could return
 
 ```js
 { periodLength: 9,
@@ -425,22 +437,24 @@ If you eg. would call the function with parameters _[1, 0, 2, 4.5, 0, 3, 1, 0, 4
   average: 1.7222222222222223 }
 ```
 
+Create a npm script <i>npm run calculteExercises</i> for calling the function with hard coded values.
+
 #### 9.3
 
-Create a npm project that includes both 1.1 and 1.2 scripts that can be run with command line arguments. Include also the tsconfig.json file and make sure the scripts run. Handle exeptions and errors appropriately. exerciseCalculator should accept inputs of varied length. Determine by yourself how you manage to collect all needed input.
+Change the previous exersises so that you can give the parameters of <i>bmiCalculator</i> and <i>exerciseCalculator</i> as command line arguments.
 
 Your program could work eg. as follows:
 
 ```sh
-$ npm run bmi 75 180
+$ npm run calculteBmi 180 91
 
-normal weight
+Overweight
 ```
 
 and
 
 ```sh
-$ npm run exercises 1 0 2 4.5 0 3 1 0 4 2
+$ npm run calculteExercises 1 0 2 4.5 0 3 1 0 4 2
 
 { periodLength: 9,
   trainingDays: 6,
@@ -452,6 +466,8 @@ $ npm run exercises 1 0 2 4.5 0 3 1 0 4 2
 ```
 
 In the example the last argument is the target value.
+
+Handle exeptions and errors appropriately. exerciseCalculator should accept inputs of varied length. Determine by yourself how you manage to collect all needed input.
 
 </div>
 
