@@ -1213,7 +1213,7 @@ With this material you should be able to complete the rest of this part's exerci
 
 <div class="tasks">
 
-### Exercises 9.23.-9.25.
+### Exercises 9.23.-9.26.
 
 #### 9.23: patientor, step6
 
