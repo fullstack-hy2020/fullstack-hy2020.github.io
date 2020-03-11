@@ -650,7 +650,7 @@ const PatientListPage: React.FC = () => {
 
 Do not worry if this seems confusing, it surely is until you have studied the [context documentation](https://reactjs.org/docs/context.html) and its use in [state management](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe). You do not need to understand all this completely for doing the exercises! 
 
-It is actually quite typical that when you start working with a existing application, at the beginning you do not understand 100% what happens under the hood. If the app has been properly structured you can just trust that if you are making careful modifications, the app still works despite you did not understand all the internals. Over the time you can then get grasp of the more unfamiliar parts but it does not happen overnight when working with a large codebase.
+It is actually quite typical that when you start working with an existing application, at the beginning you do not understand 100% of what happens under the hood. If the app has been properly structured you can trust that if you are making careful modifications, the app still works despite of the fact that you did not understand all the internals. Over the time you can then get a grasp of the more unfamiliar parts, but it does not happen overnight when working with a large codebase.
 
 ### Patient listing page
 
