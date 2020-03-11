@@ -116,69 +116,72 @@ To create our <i>type</i> we use the TypeScript native keyword  <i>type</i> to d
 type Operation = 'multiply' | 'add' | 'divide';
 ```
 
-Now the _Operation_ type accepts only three kinds of input; exactly the three wanted strings. With the OR operator _|_ we can define a variable to accept multiple values by creating a [union type](https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types). In this case we used exact strings but with unions you could also inform the compiler to accept for example both string and number _string | number_.
+Now the <i>Operation</i> type accepts only three kinds of input; exactly the three wanted strings. With the OR operator _|_ we can define a variable to accept multiple values by creating a [union type](https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types). In this case we used exact strings (that in technical terms are called [string literal types](http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types)) but with unions you could also inform the compiler to accept for example both string and number: _string | number_.
 
-In techincal terms the keyword _type_ creates [a type alias](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases), that is a new name for a type. Since the defined type is a union of three possible values, it is handy to give it an alias that has a representative name.
+In techincal terms the keyword <i>type</i> creates [a type alias](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases), that is a new name for a type. Since the defined type is a union of three possible values, it is handy to give it an alias that has a representative name.
 
 Let's look at our calculator now:
 
 ```js
 type Operation = 'multiply' | 'add' | 'divide';
 
-const calculator = (a: number, b: number, operation : Operation) => {
-  if (operation === 'multiply') {
+const calculator = (a: number, b: number, op : Operation) => {
+  if (op === 'multiply') {
     return a * b;
-  } else if (operation === 'add') {
+  } else if (op === 'add') {
     return a + b;
-  } else if (operation === 'divide') {
+  } else if (op === 'divide') {
     if (b === 0) return 'can\'t divide by 0!';
     return a / b;
   }
 }
 ```
 
-Now when we hover on top of the _Operation_ type in the calculator function, we can immediately see suggestions on what to do with it:
+Now when we hover on top of the <i>Operation</i> type in the calculator function, we can immediately see suggestions on what to do with it:
 
 ![](../../images/9/3.png)
 
-And if we try to use a value, that is not within the _Operation_ type, we get the familiar red warning signal and extra info from our IDE:
+And if we try to use a value, that is not within the <i>Operation</i> type, we get the familiar red warning signal and extra info from our editor:
 
 ![](../../images/9/4.png)
 
-This is already pretty nice, but one thing we haven't touched yet, is typing the return value of a function. Usually you want to know what a function returns and it would be nice to have some guarantee on it. Let's add a return value _number_ for the calculator function:
+This is already pretty nice, but one thing we haven't touched yet, is typing the return value of a function. Usually you want to know what a function returns and it would be nice to have some guarantee on it. Let's add a return value <i>number</i> for the calculator function:
 
 ```js
 type Operation = 'multiply' | 'add' | 'divide';
 
-const calculator = (a: number, b: number, operation: Operation): number => {
+const calculator = (a: number, b: number, op: Operation): number => {
 
-  if (operation === 'multiply') {
+  if (op === 'multiply') {
     return a * b;
-  } else if (operation === 'add') {
+  } else if (op === 'add') {
     return a + b;
-  } else if (operation === 'divide') {
+  } else if (op === 'divide') {
     if (b === 0) return 'this cannot be done';
     return a / b;
   }
 }
 ```
 
-We can straight away see that this produces an error, because now the function is not returning a number, but in some cases it returns a string. We can fix it in a couple of ways: We could extend the return type to allow also string values, like this:
+Compiler complains straight away abaout this since the function is not returning a number, but in some cases it returns a string. We can fix it in a couple of ways. We could extend the return type to allow also string values, like this:
 
 ```js
-const calculator = (a: number, b: number, operation: Operation) : number | string =>  {
-  ...
+const calculator = (a: number, b: number, op: Operation): number | string =>  {
+  // ...
+}
 ```
 
 We could also create a return type that includes the both possible values, much like the type Operation.
 
 ```js
 type Result = string | number
+
+const calculator = (a: number, b: number, op: Operation): Result =>  {
+  // ...
+}
 ```
 
-But now is time for the big question:
-
-Is it <i>really</i> okay for the function to return a string?
+But now is time for the question: is it <i>really</i> okay for the function to return a string?
 
 When you have written code that can actually end up in a situation where something is divided by 0 it probably means something has gone terribly wrong and in that case an error should probably be thrown and handled somewhere where the function was called. When you are deciding to return values you weren't originally planning, the warnings you see from TypeScript restrict you from making rushed decisions and help you to keep your code working as expected.
 
