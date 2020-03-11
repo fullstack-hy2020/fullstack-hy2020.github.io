@@ -517,7 +517,7 @@ So there are currently, as you would expect, two main components: <i>AddPatientM
 
 ### State handling
 
-Let's checkout the state handling a bit closer as a lot of stuff seems to be happening under the hood and it differs a bit from the methos used on the course so far. 
+Let's checkout the state handling a bit closer as a lot of stuff seems to be happening under the hood and it differs a bit from the methods used in the course so far. 
 
 Our state functionality is built using React Hooks [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) and [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer). This is one way of creating a stateful app when we know that the app we will build is small and we do not want to use <i>redux</i> or other libraries. It would be also perfectly fine to keep all of the state in the main component. There is a lot of good material eg. [this article](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe). 
 
