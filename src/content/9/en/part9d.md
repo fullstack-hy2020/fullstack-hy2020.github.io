@@ -910,7 +910,7 @@ Fetch and add diagnoses to application state from <i>/api/diagnosis</i> endpoint
 
 ![](../../images/9/42.png)
 
-#### 9.22: patientor, step5
+#### 9.23: patientor, step5
 
 Extend the entry-listing in the patient page to include the Entry's details with a new component that shows rest of the information of the patients entries distinguishing different types from each other. 
 
@@ -1213,9 +1213,9 @@ With this material you should be able to complete the rest of this part's exerci
 
 <div class="tasks">
 
-### Exercises 9.23.-9.25.
+### Exercises 9.24.-9.27.
 
-#### 9.23: patientor, step6
+#### 9.24: patientor, step6
 
 So far we have established that the patients can have different types of entries, but we don't yet have any way of adding entries for our patients in our app, so it would at the moment be a pretty useless electronic medical record. 
 
@@ -1223,7 +1223,7 @@ Your next task is to add an endpoint <i>/api/patients/:id/entries</i> to your ba
 
 Remember that we have different kinds of entries in our app, so our backend should also support all those types and check that at least all required fields are given for each type.
 
-#### 9.24: patientor, step7
+#### 9.25: patientor, step7
 
 Now that our backend supports adding of entries, we want to add the corresponding functionality the frontend. In this exercise you should add a form for adding an entry for a patient. An intuitive place for opening the form would be on the patient page. 
 
@@ -1268,7 +1268,7 @@ const AddEntryForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
 
 Note the tree marked lines. The first sets initial value for the array, and using the second you get the object <i>values</i> where Formik keeps the form data, and the third line passes the diagnosis array to _ArrayField_ components that takes care of adding diagnosis to the array.
 
-#### 9.25: patientor, step8
+#### 9.6: patientor, step8
 
 Extend your solution to support <i>two</i> entry types, and you do not have to handle the errors, it is enough if a entry can be created if the form is filled up with valid data.
 
@@ -1276,7 +1276,7 @@ The easiest (but not the most elegant) way to do this exercise is to have a sepa
 
 Getting the types to work properly might be a slight challenge if you use just a single form.
 
-#### 9.26: patientor, step9
+#### 9.27: patientor, step9
 
 Extend your solution so that it supports <i>all the entry types</i> and displays error message if some required values are missing or formatted incorrectly and you try to submit the form. 
 
