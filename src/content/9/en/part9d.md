@@ -539,7 +539,7 @@ export type State = {
 };
 ```
 
-Our state is an object with one key <i>patients</i>, which has a [dictionary](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types-and-index-signatures) or simply put an object with string keys and with a <i>Patient</i> object as value. Index can only be <i>string</i> or <i>number</i> as you can access the object values using those. This enforces that the state conforms in the way we want, and prevents developers from missusing the state. You can also think of a scenario where we may have state as a union. Eg. using states type as an indicator whether user has logged in:
+Our state is an object with one key <i>patients</i>, which has a [dictionary](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types-and-index-signatures) or simply put an object with string keys and with a <i>Patient</i> object as value. Index can only be <i>string</i> or <i>number</i> as you can access the object values using those. This enforces that the state conforms in the way we want, and prevents developers from misusing the state. You can also think of a scenario where we may have state as a union. Eg. using states type as an indicator whether user has logged in:
 
 ```js
 export type State =
