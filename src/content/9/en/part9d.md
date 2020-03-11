@@ -1159,7 +1159,7 @@ const getFieldErrorMessage = (fieldName: keyof FormValues) =>
 Function checks if the given field is <i>touched</i> and has <i>errors</i>, and returns the value from the <i>errors</i> object in that case. If either check was falsy, the function returns <i>undefined</i>. From the function signature we can see that the <i>fieldName</i> argument has the followin type:
 
 ```js
-fieldName: keyof FormCalues
+fieldName: keyof FormValues
 ```
 
 That means that the given argument has to be a key present in the <i>FormValues</i> type. Basically it translates to the type:
