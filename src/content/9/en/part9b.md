@@ -7,26 +7,29 @@ lang: en
 
 <div class="content">
 
+After the brief introduction on the main principles of TypeScript we are ready to start our journey towards a Fullstack TypeScript developer. This part will not give you a thorough introduction to all aspects of TypeScript, the goal is rather to have focus in most common issues that arise when developing express backends and React fronends with TypeScript. In addition to language features we will also have a strong emphasis in tooling.
+
 ### Setting things up
 
-First things first: Install TypeScript support to your IDE of choice. For [Visual Studio Code](https://code.visualstudio.com/)  you need the [typescript hero](https://marketplace.visualstudio.com/items?itemName=rbbit.typescript-hero) extension.
+Install TypeScript support to your IDE of choice. For [Visual Studio Code](https://code.visualstudio.com/) you need the [typescript hero](https://marketplace.visualstudio.com/items?itemName=rbbit.typescript-hero) extension.
 
 As mentioned before, TypeScript code is not runnable by itself, but it first needs to be compiled into runnable JavaScript code. When TypeScript is compiled into JavaScript, the code becomes subject for type erasure. This means that type annotations, interfaces, type aliases, and other type system constructs are removed from the code and the result is pure ready-to-run JavaScript.
 
-In a production environment this need for compilation often means that you need to setup a "build step", where all TypeScript code is compiled into JavaScript in a separate folder, and the production enviroment then runs the code from that folder. In a development environment it is often more handy to take use of real-time compilation and auto-reloading, in order to be able to see the resulting changes faster.
+In a production environment this need for compilation often means that you have to setup a "build step", where all TypeScript code is compiled into JavaScript in a separate folder, and the production enviroment then runs the code from that folder. In a development environment it is often more handy to take use of real-time compilation and auto-reloading, in order to be able to see the resulting changes faster.
 
 
 Let's start writing our first TypeScript-app. To keep things simple, let's start by using the npm package [ts-node](https://github.com/TypeStrong/ts-node), that compiles and executes the desired TypeScript file immediately, so that there is no need for the separate compilation step.
 
-To use _ts-node_ you need to install it globally with the official _typescript_ package by running _npm install -g ts-node typescript_ . 
+To use <i>ts-node</i> you need to install it globally with the official <i>typescript</i> package by running <i>npm install -g ts-node typescript</i>. 
 
-If you can't or don't want to install global packages you can also create an npm project that has the required dependencies and run your scripts in it. You can do this by running :`npm init_ to create an empty project and then run:
+If you can't or don't want to install global packages you can create an npm project that has the required dependencies and run your scripts in it. 
 
+As we remember from [part 3](/en/part3) a npm project is set by running running command <i>npm init</i> in an empty directory. Then we can install the dependencies by running 
 ```
 npm install ts-node typescript
 ```
 
-And set up _scripts_ within the package.json file to include: 
+and set up <i>scripts</i> within the package.json file to include: 
 
 ```json
 {
@@ -38,7 +41,7 @@ And set up _scripts_ within the package.json file to include:
 }
 ```
 
-and now within this package you can use _ts-node_ by running _npm run ts-node_. Notice that if you are using ts-node through package.json, all possible command line arguments for the script need to be prefixed with _--_. So if you want to run file.ts with _ts-node_, the whole command is:
+Now within this directory you can use <i>ts-node</i>by running <i>npm run ts-node</i>. Notice that if you are using ts-node through package.json, all possible command line arguments for the script need to be prefixed with <i>--</i>. So if you want to run file.ts with <i>ts-node</i>, the whole command is:
 
 ```sh
 npm run ts-node -- file.ts
@@ -48,20 +51,22 @@ It is worth mentioning, that TypeScript also provides an online playground, wher
 
 **Notice:** The playground might contain different tsconfig rules (which will be introduced later) than your local environment, which is why you might see different warnings there, compared to your local environment. The playgrounds tsconfig is modifiable through the config dropdown menu.
 
-> **Sidenote:** JavaScript in itself is a fairly loose language and things often can be done in multiple different ways, for example named vs anonymous functions, using const and let or var and the use of *semicolons*. In this part of the course by default semicolons will be used. It is not a TypeScript specific pattern but a general coding style decision when creating any kind of JavaScript. Whether to use them or not is usually in the hands of the programmer but since it is expected to adapt ones coding habits to the existing codebase, **in the exercises of this part it is expected to use semicolons and to adjust to the coding style of the part**.
+#### A note about the coding sytle
 
-Now, let's start by creating a simple Multiplier, exactly as you would in JavaScript.
+JavaScript in itself is a fairly loose language and things often can be done in multiple different ways, for example named vs anonymous functions, using const and let or var and the use of <i>semicolons</i>. This part of the course differs from the rest by using semicolons. It is not a TypeScript specific pattern but a general coding style decision when creating any kind of JavaScript. Whether to use them or not is usually in the hands of the programmer but since it is expected to adapt ones coding habits to the existing codebase, in the exercises of this part it is expected to use semicolons and to adjust to the coding style of the part. This part contains also some other coding style differences e.g. in the directory naming compared to the rest od the course.
+
+Let us start now by creating a simple Multiplier, exactly as you would in JavaScript.
 
 ```js
 const multiplicator = (a, b, printText) => {
   console.log(printText,  a * b);
 }
 
-multiplicator(1, 4, 'Multiplied numbers 1 and four, the result is:');
+multiplicator(2, 4, 'Multiplied numbers 2 and 4, the result is:');
 
 ```
 
-As we can see, this is still ordinary basic JavaScript with no additional TS features and it compiles and runs nicely with _ts-node multiplier.ts_ (or if using an npm package _npm run ts-node -- multiplier.ts`), as it would with Node. But what happens if we end up passing wrong _types_ of arguments to the multiplicator function?
+As we can see, this is still ordinary basic JavaScript with no additional TS features and it compiles and runs nicely with <i>npm run ts-node -- multiplier.ts</i>, as it would with Node. But what happens if we end up passing wrong <i>types</i> of arguments to the multiplicator function?
 
 Let's try it out!
 
@@ -70,80 +75,43 @@ const multiplicator = (a, b, printText) => {
   console.log(printText,  a * b);
 }
 
-multiplicator('can we multiply by a string?', 4, 'Multiplied a string and four, the result is:');
+multiplicator('how about a string?', 4, 'Multiplied a string and 4, the result is:');
 
 ```
 
-Now when running the code, both examples still produce the same output, which is now:
-`Multiplied a string and four, the result is: NaN_. Wouldn't it be nice if there was a way that the language itself could prevent us from ending up in situations like this?
+Now when running the code, the example still produce an output, which is now:
+<i>Multiplied a string and 4, the result is: NaN</i>. 
 
-This is where we get the first benefits of TypeScript into use. Let's add types to the parameters and see where it takes us.
+Wouldn't it be nice if there was a way that the language itself could prevent us from ending up in situations like this? This is where we get the first benefits of TypeScript into use. Let's add types to the parameters and see where it takes us.
 
-TypeScript natively supports multiple types including _number_, _string_, _Array_, _null_, _any_, _enum_, see the comprehensive list [here](https://www.typescriptlang.org/docs/handbook/basic-types.html).
+TypeScript natively supports multiple types including <i>number</i>, <i>string</i>, <i>Array</i> see the comprehensive list [here](https://www.typescriptlang.org/docs/handbook/basic-types.html). More complex custom types can also be created.
 
-More complex custom types can also be created and almost always, except maybe when your application is really tiny or a simple proof-of-concept, they are needed.
+The first two parameters of our function are of the type [number](http://www.typescriptlang.org/docs/handbook/basic-types.html#number) and the last is [string](http://www.typescriptlang.org/docs/handbook/basic-types.html#string):
 
 ```js
 const multiplicator = (a: number, b: number, printText: string) => {
   console.log(printText,  a * b);
 }
 
-multiplicator('can we multiply by a string?', 4,i 'Multplied a string and four, the result is:');
-
+multiplicator('how about a string?', 4, 'Multplied a string and 4, the result is:');
 ```
 
-Now the code is no longer valid JavaScript, but in fact TypeScript. Try running the code once again, and see what happens.
+Now the code is no longer valid JavaScript, but in fact TypeScript. When we try to run the code once, we notice that it does not compile:
 
-An error is immediately seen and the obviously faulty code can also be found straight away.
+![](../../images/9/2a.png)
 
-One of the best things in TypeScript's IDE support is that you don't necessarily need to even run the code to see the issues recognized by TypeScript. The VSCode plugin is so efficient, that it informs you immediately when you are trying to use an incorrect type, where another type is expected. There should be red underlining under the faulty input and when you hover your cursor on top of that, you should see the following error message:
+
+One of the best things in TypeScript's editor support is that you don't necessarily need to even run the code to see the issues recognized by TypeScript. The VSCode plugin is so efficient, that it informs you immediately when you are trying to use an incorrect type, where another type is expected:
 
 ![](../../images/9/2.png)
 
-</div>
+### Creating your first own types
 
-<div class="tasks">
+Let's expand our multiplicator and create a little bit more versatile calculator, that also supports addition and division. The calculator should accept three arguments: two numbers and then the operation, which tells the calculator what to do with those numbers; either <i>multiply</i>, <i>add</i> or <i>divide</i>.
 
-### Exercises
+With basic JavaScript, this type of code, where trusting a string to be of specific form, would require additional validation, but TypeScript offers us a way to define specific types for the inputs, which describes exactly what type of inputs are acceptable. On top of that, TypeScript can also show the info of the accepted values already on editor level.
 
-**Before you start doing the exercises** create a file called tsconfig.json to the folder you will do the exercises in with the following content:
-
-```json
-{
-  "compilerOptions": {
-    "noImplicitAny": true,
-  }
-}
-```
-
-tsconfig.json can include various information for the TypeScript compiler on how to inpertret the code, how strictly should the compilator work and on what files to watch or ignore, and [much more](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html). Right now let's only use the compiler option "noImplicitAny", which makes it mandatory to have types for all variables used.
-
-#### 9.1
-
-Write your first TypeScript file that counts [BMI](https://en.wikipedia.org/wiki/Body_mass_index) based on given weight and height and then prints out a message that suits the results. The arguments can be hard-coded and command line arguments shouldn't be used in this exercise.
-
-The file should work by running _ts-node bmiCalculator.ts_, the calculation function and its accepted arguments should all be typed and necessary error cases should be handled appropriately.
-
-Example run: 
-
-```sh
-$ ts-node 01.01bmiCalculator.ts
-
-Slightly too much weight
-```
-
-</div>
-
-<div class="content">
-
-
-### Creating your first own Types
-
-Let's expand our multiplicator and create a little bit more useful calculator, that also supports addition and division. The calculator should accept three arguments: Two numbers and then the operation, which tells the calculator what to do with those numbers; either 'multiply', 'add' or 'divide'.
-
-With basic JavaScript, this type of code, where trusting a string to be specific form, would require additional validation, but TypeScript offers us a way to define specific types for the inputs, which describes exactly what type of inputs to accept. On top of that, TypeScript can also show the info of the accepted values already on IDE level.
-
-To create our _type_ we use the TypeScript native keyword _type_ to describe what we want to accept. Let's describe our type _Operation_:
+To create our <i>type</i> we use the TypeScript native keyword  <i>type</i> to describe what we want to accept. Let's describe our type <i>Operation</i>:
 
 ```js
 type Operation = 'multiply' | 'add' | 'divide';
@@ -243,53 +211,6 @@ try {
 }
 ```
 
-</div>
-
-<div class="tasks">
-
-### Exercises
-
-#### 9.2
-
-Write a function that calculates the average time of input _daily exercise hours_ and compares it to the value to the _target amount_ of daily hours and returns an object that includes the following values:
-
-  - the number of days
-  - the number of training days
-  - boolean value on whether the hours have succeeded to reach the target
-  - a rating between the numbers 1-3 that tells how well the hours are met. You can decide on the metric on your own.
-  - a text value explaining the rating
-  - the original target value
-  - the calculated average time
-
-The daily exercise hours are given to the function as an [array](https://www.typescriptlang.org/docs/handbook/basic-types.html#array) that contains the number of exercise hours for each day in the training period. Eg. a week with 1 hours of training at Monday, none at Tuesday, 2 hours at Wednesday and so on would be represented by the following array:
-
-```js
-[1, 0, 2, 0, 3, 0, 2.5]
-```
-
-For the Result object you should to create an [interface](https://www.typescriptlang.org/docs/handbook/interfaces.html) instead of a type since
-
-The program is working if:
-- program can be run by inputting _ts-node exerciseCalculator.ts_,
-- The results are calculated correctly
-- Errors are handled appropriately
-- Everything is typed as tsconfig requires
-
-If you eg. would call the function with parameters _[1, 0, 2, 4.5, 0, 3, 1, 0, 4]_ and _2_ it could return
-
-```js
-{ periodLength: 9,
-  trainingDays: 6,
-  success: false,
-  rating: 2,
-  ratingDescription: 'not too bad but could be better',
-  target: 2,
-  average: 1.7222222222222223 }
-```
-</div>
-
-<div class="content">
-
 The programs we've written are alright, but it sure would be nice if there was a way to use command line arguments instead of always having to change the actual code. Let's try it out, as we would in a regular Node application, by accessing _process.argv_. But woah, hey, somethings wrong!
 
 ![](../../images/9/5.png)
@@ -320,13 +241,13 @@ Since writing scripts is not the best use of TypeScript, let's stop doing that r
 npm init
 ```
 
-Once the setup is done we also need to install _ts-node_ and _TypeScript_ as dependencies to the project.
+Once the setup is done we also need to install <i>ts-node</i>and _TypeScript_ as dependencies to the project.
 
 ```sh
 npm install --save-dev ts-node typescript
 ```
 
-> **Notice:** If you installed _ts-node_ and _TypeScript`globally, the scripts are still runnable even if you don't add the two dependencies to your project. But you should **always add all of the required dependencies to your package.json** for reusability and shareability. Incomplete dependencies equals bad code.
+> **Notice:** If you installed <i>ts-node</i>and _TypeScript`globally, the scripts are still runnable even if you don't add the two dependencies to your project. But you should **always add all of the required dependencies to your package.json** for reusability and shareability. Incomplete dependencies equals bad code.
 
 Now let's move the two scripts _multiplicator_ and _calculator_ and _tsconfig.json_ to the project folder and add scripts by which we can run them.
 
@@ -414,7 +335,72 @@ try {
 
 <div class="tasks">
 
-### Exercises
+### Exercises 9.1.-9.3.
+
+**Before you start doing the exercises** create a file called tsconfig.json to the folder you will do the exercises in with the following content:
+
+```json
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+  }
+}
+```
+
+tsconfig.json can include various information for the TypeScript compiler on how to inpertret the code, how strictly should the compilator work and on what files to watch or ignore, and [much more](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html). Right now let's only use the compiler option "noImplicitAny", which makes it mandatory to have types for all variables used.
+
+#### 9.1
+
+Write your first TypeScript file that counts [BMI](https://en.wikipedia.org/wiki/Body_mass_index) based on given weight and height and then prints out a message that suits the results. The arguments can be hard-coded and command line arguments shouldn't be used in this exercise.
+
+The file should work by running _ts-node bmiCalculator.ts_, the calculation function and its accepted arguments should all be typed and necessary error cases should be handled appropriately.
+
+Example run: 
+
+```sh
+$ ts-node 01.01bmiCalculator.ts
+
+Slightly too much weight
+```
+
+#### 9.2
+
+Write a function that calculates the average time of input _daily exercise hours_ and compares it to the value to the _target amount_ of daily hours and returns an object that includes the following values:
+
+  - the number of days
+  - the number of training days
+  - boolean value on whether the hours have succeeded to reach the target
+  - a rating between the numbers 1-3 that tells how well the hours are met. You can decide on the metric on your own.
+  - a text value explaining the rating
+  - the original target value
+  - the calculated average time
+
+The daily exercise hours are given to the function as an [array](https://www.typescriptlang.org/docs/handbook/basic-types.html#array) that contains the number of exercise hours for each day in the training period. Eg. a week with 1 hours of training at Monday, none at Tuesday, 2 hours at Wednesday and so on would be represented by the following array:
+
+```js
+[1, 0, 2, 0, 3, 0, 2.5]
+```
+
+For the Result object you should to create an [interface](https://www.typescriptlang.org/docs/handbook/interfaces.html) instead of a type since
+
+The program is working if:
+- program can be run by inputting _ts-node exerciseCalculator.ts_,
+- The results are calculated correctly
+- Errors are handled appropriately
+- Everything is typed as tsconfig requires
+
+If you eg. would call the function with parameters _[1, 0, 2, 4.5, 0, 3, 1, 0, 4]_ and _2_ it could return
+
+```js
+{ periodLength: 9,
+  trainingDays: 6,
+  success: false,
+  rating: 2,
+  ratingDescription: 'not too bad but could be better',
+  target: 2,
+  average: 1.7222222222222223 }
+```
+</div>
 
 #### 9.3
 
