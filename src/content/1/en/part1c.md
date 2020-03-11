@@ -667,7 +667,7 @@ const Display = (props) => {
 
 <!-- Komponentti tarvitsee ainoastaan <i>propsin</i> kenttää _counter_, joten se voidaan yksinkertaistaa [destrukturoinnin](/osa1/komponentin_tila_ja_tapahtumankasittely#destrukturointi) avulla seuraavaan muotoon: -->
 The component only uses the _counter_ field of its <i>props</i>. 
-This means we can simplify the component by using [destructuring](/osa1/komponentin_tila_ja_tapahtumankasittely#destrukturointi) like so:
+This means we can simplify the component by using [destructuring](/en/part1/component_state_event_handlers#destructuring) like so:
 
 ```js
 const Display = ({ counter }) => {
