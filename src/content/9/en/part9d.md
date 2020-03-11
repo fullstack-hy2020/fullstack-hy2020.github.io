@@ -757,7 +757,7 @@ After fetching the patient information from backend add the fetched information 
 
 Since we have now the state in contex, you need a new action type for updating the indvidual patient's data.
 
-Application uses [Semantic UI React](https://react.semantic-ui.com/) for styling, that is quite simillar to [React Bootstrap](https://react-bootstrap.github.io/) and [MaterialUI](https://material-ui.com/) that we covered in [part 7](/en/part7/more_about_styles). You may also use it for the new components but that is up to you sincew the main focus is now in Typescript.
+Application uses [Semantic UI React](https://react.semantic-ui.com/) for styling, that is quite simillar to [React Bootstrap](https://react-bootstrap.github.io/) and [MaterialUI](https://material-ui.com/) that we covered in [part 7](/en/part7/more_about_styles). You may also use it for the new components but that is up to you since the main focus is now in Typescript.
 
 Application also uses the [react router](https://reacttraining.com/react-router/web/guides/quick-start) 
 to control what view is visible in the frontend. You might want to have a look on [part 7](/en/part7/react_router) if you have not already have a grasp on how router works.
