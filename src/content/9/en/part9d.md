@@ -616,7 +616,7 @@ export const StateProvider: React.FC<StateProviderProps> = ({
 };
 ```
 
-Provider makes <i>state</i> and <i>dispatch</i> function available in all the components, thanks to the setup in <i>index.ts</i>:  
+Provider makes <i>state</i> and <i>dispatch</i> functions available in all of the components, thanks to the setup in <i>index.ts</i>:  
 
 ```js 
 import { reducer, StateProvider } from "./state";
