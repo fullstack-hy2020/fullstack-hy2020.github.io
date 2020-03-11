@@ -20,7 +20,7 @@ Let's start writing our first TypeScript-app. To keep things simple, let's start
 
 To use _ts-node_ you need to install it globally with the official _typescript_ package by running _npm install -g ts-node typescript_ . 
 
-If you can't or don't want to install global packages you can also create an npm project that has the required dependencies and run your scripts in it. You can do this by running :`npm init_ to create an empty project and then run:
+If you can't or don't want to install global packages you can also create an npm project that has the required dependencies and run your scripts in it. You can do this by running _npm init_ to create an empty project and then run:
 
 ```
 npm install ts-node typescript
@@ -61,7 +61,7 @@ multiplicator(1, 4, 'Multiplied numbers 1 and four, the result is:');
 
 ```
 
-As we can see, this is still ordinary basic JavaScript with no additional TS features and it compiles and runs nicely with _ts-node multiplier.ts_ (or if using an npm package _npm run ts-node -- multiplier.ts`), as it would with Node. But what happens if we end up passing wrong _types_ of arguments to the multiplicator function?
+As we can see, this is still ordinary basic JavaScript with no additional TS features and it compiles and runs nicely with _ts-node multiplier.ts_ (or if using an npm package _npm run ts-node -- multiplier.ts_), as it would with Node. But what happens if we end up passing wrong _types_ of arguments to the multiplicator function?
 
 Let's try it out!
 
