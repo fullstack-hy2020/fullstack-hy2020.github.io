@@ -258,6 +258,11 @@ type Mutation {
 
 Kysely _me_ palauttaa kirjautuneena olevan käyttäjän. Käyttäjät luodaan mutaatiolla _createUser_ ja kirjautuminen tapahtuu mutaatiolla _login_.
 
+Asennetaan jsonwebtoken-kirjasto:
+```js
+npm install jsonwebtoken --save
+```
+
 Mutaatioiden resolverit seuraavassa:
 
 ```js
