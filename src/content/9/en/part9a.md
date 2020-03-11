@@ -72,6 +72,37 @@ const add = (a: number, b: number) => {
 
 Function's return value is inferred by retracing the code back to the return expression. The return expression performs an addition of two numbers, which can be seen from the types  of the function's parameters. Thus, the return type <i>number</i> is inferred in this case.
 
+As a more complex example let us consider the code below. If you have not used TypeScript before this example might be a bit complex. But do not worry, you can safely skip this example for now. 
+
+```js
+interface CallsFunction {
+  (cb: (result: string) => any): void;
+}
+
+const funk: CallsFunction = (cb) => {
+  cb('done');
+  cb(1);
+}
+
+funk((result) => {
+  return result;
+});
+```
+
+There is a declaration for an [interface](https://www.typescriptlang.org/docs/handbook/interfaces.html#function-types) called <i>CallsFunction</i>, which consists of a function with one parameter. The parameter <i>cb</i> is of the type function that takes a string parameter and returns [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) value. As we will learn later in this part <i>any</i> is a kind of "wildcard" type that can represent any type.
+
+After that, the function <i>funk</i> of the type <i>CallsFunction</i> is defined. In <i>funk</i> it can be inferred that the parameter will only accept a string argument. To demonstrate this, there is also an example where the parameter function is called with a numeric value, and that causes an error in TypeScript.
+
+The last thing is that we call <i>func</i> by giving it the following function as parameter 
+
+```js
+(result) => {
+  return result;
+}
+```
+
+So despite not defining types for the parameter function, it is inferred from the calling context that the argument <i>result</i> is of the type string.
+
 #### Type erasure
 
 TypeScript removes all type system constructs during compilation.
