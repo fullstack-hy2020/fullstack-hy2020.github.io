@@ -11,7 +11,7 @@ After the brief introduction on the main principles of TypeScript we are ready t
 
 ### Setting things up
 
-Install TypeScript support to your IDE of choice. For [Visual Studio Code](https://code.visualstudio.com/) you need the [typescript hero](https://marketplace.visualstudio.com/items?itemName=rbbit.typescript-hero) extension.
+Install TypeScript support to your editor of choice. For [Visual Studio Code](https://code.visualstudio.com/) you need the [typescript hero](https://marketplace.visualstudio.com/items?itemName=rbbit.typescript-hero) extension.
 
 As mentioned before, TypeScript code is not runnable by itself, but it first needs to be compiled into runnable JavaScript code. When TypeScript is compiled into JavaScript, the code becomes subject for type erasure. This means that type annotations, interfaces, type aliases, and other type system constructs are removed from the code and the result is pure ready-to-run JavaScript.
 
@@ -454,7 +454,7 @@ Overweight
 and
 
 ```sh
-$ npm run calculteExercises 1 0 2 4.5 0 3 1 0 4 2
+$ npm run calculteExercises 2 1 0 2 4.5 0 3 1 0 4
 
 { periodLength: 9,
   trainingDays: 6,
@@ -465,7 +465,7 @@ $ npm run calculteExercises 1 0 2 4.5 0 3 1 0 4 2
   average: 1.7222222222222223 }
 ```
 
-In the example the last argument is the target value.
+In the example the <i>first argument</i> is the target value.
 
 Handle exeptions and errors appropriately. exerciseCalculator should accept inputs of varied length. Determine by yourself how you manage to collect all needed input.
 
@@ -475,11 +475,11 @@ Handle exeptions and errors appropriately. exerciseCalculator should accept inpu
 
 ### More about tsconfig
 
-For now we have been only using one tsconfig rule "noImplicitAny" which is a good place to start but now it is time to start looking into the file a little bit deeper.
+In the exercises we used only one tsconfig rule [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny) which is a good place to start but now it is time to start looking into the file a little bit deeper.
 
-[tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) includes all your core configurations on how you want your TypeScript to work. In tsconfig.json you can define how strictly you want the code to be inspected, what files to include, what files to exclude (node_modules is excluded by default), and where compiled files should be placed (more on this later). Tsconfig-files also support inheritance to handle separate configuration within a project in a different manner.
+[tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) includes all your core configurations on how you want TypeScript to work in your project. In tsconfig.json you can define how strictly you want the code to be inspected, what files to include, what files to exclude (<i>node_modules</i> is excluded by default), and where compiled files should be placed (more on this later). 
 
-Right now let's grow our _tsconfig.json_ to the following form:
+Let us now use <i>tsconfig.json</i> that has the following form:
 
 ```json
 {
@@ -495,29 +495,36 @@ Right now let's grow our _tsconfig.json_ to the following form:
 }
 ```
 
-Don't take too much time to worry about the compilerOptions selected here, they will be under closer inspection on part 2.
+Do not worry too much about the <i>compilerOptions</i> selected here, they will be under closer inspection on part 2.
 
-The explanations for each of the field can be found from TypeScripts documentation or the really handy although beta-stagen [tsconfig page](https://www.typescriptlang.org/v2/en/tsconfig) or in a little worse format but very thoroughly from tsconfig's [schema definition](http://json.schemastore.org/tsconfig).
+The explanations for each of the field can be found from TypeScript documentation or the really handy although beta-stage [tsconfig page](https://www.typescriptlang.org/v2/en/tsconfig) or in a little worse format in the tsconfig [schema definition](http://json.schemastore.org/tsconfig).
 
 ### Adding express to the mix
 
-Right now we are at a pretty good place, our project is set up and we have two runnable calculators there. But since we are studying fullstack development and not only doing funny little scripts, it might be time to put the scripts to respond to a HTTP-request, so let's set up Express.
+Right now we are at a pretty good place, our project is set up and we have two runnable calculators there. But since our aim is to learn fullstack development, it is time to start writing code that responds to HTTP-requests. 
 
-First, let's run
+Let us start by installing express:
 
 ```
 npm install express
 ```
 
-create file _index.ts_,
-
-set up the _start_ command to in package.json to be:
+add then add the <i>start</i> sript to in package.json to be:
 
 ```json
-"start": "ts-node index.ts",
+{
+  // ..
+  "scripts": {
+    "ts-node": "ts-node",
+    "multiply": "ts-node multiplier.ts",
+    "calculate": "ts-node calculator.ts",
+    "start": "ts-node index.ts" // highlight-line
+  },
+  // ..
+}
 ```
 
-and write the smallest possible ping endoint.
+Now we can create the file <i>index.ts</i>, and write the HTTP GET <i>ping</i> endpoint to it: 
 
 ```js
 const express = require('express');
@@ -534,19 +541,17 @@ app.listen(PORT, () => {
 });
 ```
 
-And woah, something is wrong once again.
-
-Everything else seems to be going nice but as you'd expect, the express-modules offered get method's _req_ and _res_ variables need typing. If we look really carefully VS Code is also complaining us about something in regards of the express importing, that is indicated by the short yellow line of dots under the _require_ Let's hover over the _require_ problem:
+Everything else seems to be going nice but as you'd expect, but the <i>req</i> and  <i>res</i> parameters of <i>app.get</i> need typing. If we look really carefully VS Code is also complaining us about something about the express importing, that is indicated by the short yellow line of dots under the <i>require</i>. Let's hover over the problem:
 
 ![](../../images/9/6.png)
 
-The complaint is 'Require may be converted to a import'. Let's try it out and rewrite the _require_ clause to _import_.
+The complaint is <i>'require' call may be converted to a import</i>. Let us follow the advice and write the import as follows
 
 ```js
 import express from 'express';
 ```
 
-**Hint:** by clicking the _Quick fix..._ button VSCode offers you a possibility to fix the issue automatically. Keep your eyes open all the time for these helpers/quick fixes the IDE offers you; listening to your editor usually only makes your code better and easier to read and automatic fixes for issues can be a major time saver.
+**Note that** by clicking the <i>Quick fix...</i> button VSCode offers you a possibility to fix the issue automatically. Keep your eyes open all the time for these helpers/quick fixes the editor offers you; listening to your editor usually only makes your code better and easier to read and automatic fixes for issues can be a major time saver.
 
 Now we run into the another problem, complain in the newly created import. Once again the editor is our biggest friend when trying to find out what the issue is about:
 
@@ -560,59 +565,73 @@ npm install --save-dev @types/express
 
 And now no errors are found anymore! Let's take an even deeper look into what changed here.
 
-With the _require_ clause, when hovering on the imported module _express_, we can see that the compiler interprets it to the type _any_.
+With the <i>require</i> clause, when hovering on the imported module <i>express</i>, we can see that the compiler interprets all express related to the type <i>any</i>.
 
-![](../../images/9/8.png)
+![](../../images/9/8a.png)
 
-Whereas when the _import_ version is used, we can see a whole new level of typings:
+Whereas when the <i>import</i> version is used, editor knows the actual types
 
-![](../../images/9/9.png)
+![](../../images/9/9a.png)
 
-And even the parameters _req_ and _res_ seem to be typed for use:
+What kind of import statement you should use, depends on the type of which exporting method is used in the imported package.
 
-![](../../images/9/10.png)
-
-This happens because when using the _import_ clause the whole // ELABORATE THIS
-
-What kind of import statement you should use, depends on the type of which _exporting method_ is used in the imported package.
-
-A good rule of thumb is to primarily start by trying to import a module with the _import ... from ..._ clause, that is the one we are always using in <i>frontend</i>. If it causes an error, try a combination of the both: _import ... = require('...')_.
+A good rule of thumb is to primarily start by trying to import a module with the <i>import</i> clause, that is the one we are always using in <i>frontend</i>. If it causes an error, try a combination of the both: <i>import ... = require('...')</i>.
 
 We strongly suggest to read more on TypeScript modules [here](https://www.typescriptlang.org/docs/handbook/modules.html).
 
-Now let's run the express application with Curl and check if it works:
+There is one more problem with the code
+
+![](../../images/9/9b.png)
+
+This is because we banned unused parameters in out <i>tsconfig.json</i>
+
+```js
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true, // highlight-line
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "esModuleInterop": true
+  }
+}
+```
+
+This configuration might create problems when we have library-wide predefined functions, that like in this case require declaring a variable, even though in the code it is not necessarily required to use at all. Fortunately this issue has already been solved on configuration level and once again hovering on the issue gives us a solution for the problem, this time by clicking the quick fix button: 
+
+![](../../images/9/14a.png)
+
+If it is absolutely impossible to get rid of an unused variable, you should prefix it with an underscore to inform the compiler that this has been taken into consideration and there is nothing we can do about it. 
+
+Let's rename the <i>req</i> variable to <i>_req</i>. Now we are finally ready to start up the application, and it seems to work fine:
+
+![](../../images/9/11a.png)
+
+
+Now to simplify the development we should enable <i>auto reloading</i> to improve our workflow. In this course you have already used <i>nodemon</i>, but ts-node has an alternative called <i>ts-node-dev</i> which is meant only for development environment that takes care of recompilation on every change so restarting the application won't be necessary.
+
+Let's install <i>ts-node-dev</i> to our development dependencies 
 
 ```
-curl localhost:3000/ping
+npm install --save-dev ts-node-dev
 ```
 
-![](../../images/9/11.png)
-
-Awesome!
-
-Now to simplify the development we should enable _auto reloading_ to improve our workflow. In this course you have already used _nodemon_, but ts-node has an alternative called _ts-node-dev_ which is meant only for development environment that takes care of recompilation on every change so restarting the application won't be necessary.
-
-Let's install _ts-node-dev_ to our dev-dependencies and add a script to _package.json_ which can be run with _npm run dev_ with which the _development version_ of the project is run.
-
-```
-npm install --save-dev  ts-node-dev
-```
-
-The scripts:
+add add a script to <i>package.json</i>
 
 ```json
 {
   // ...
   "scripts": {
-      "start": "ts-node index.ts",
+      // ...
       "dev": "ts-node-dev index.ts", // highlight-line
-      //  ...
   },
   // ...
 }
 ```
 
-And now by running _npm run dev_ we have a working auto-reloading development environment for our project!
+And now by running <i>npm run dev</i> we have a working auto-reloading development environment for our project!
 
 </div>
 
@@ -622,7 +641,7 @@ And now by running _npm run dev_ we have a working auto-reloading development en
 
 #### 9.4
 
-Replace your existing _tsconfig.json_ file with the  following content:
+Replace your existing <i>tsconfig.json</i> file with the  following content:
 
 ```json
 {
@@ -688,7 +707,7 @@ Do not copy the caclucator code to file _index.ts_, make it a [typescript module
 
 Now that we have our first small endpoints done, one thing to notice is that in these minimal examples _barely any TypeScript is actually in the code_. When looking more closely at the code, we can see a few possibly dangerous things. Let's look at our endpoint _calculate_, that takes the familiar two integer values and an operation string.
 
-When we hover on the _calculate_ function, we can see once again help from the IDE:
+When we hover on the _calculate_ function, we can see once again help from the editor:
 
 ![](../../images/9/12.png)
 
@@ -706,7 +725,7 @@ Implicit and explicit enforcing of the _any_ type onto a variable have a few dif
 
 In this situation we already have _noImplicitAny_ defined in our tsconfig. So why is _any_ approved here?
 
-That is because in this case the _query_ param of the _Request_ type of object within the express project is actually _explicitly_ typed as _any_. We can enforce (and probably should) enforce typings to know the form of our accepted request, but since the compiler or the IDE doesn't suggest that kind of behaviour, what's the point?
+That is because in this case the _query_ param of the _Request_ type of object within the express project is actually _explicitly_ typed as _any_. We can enforce (and probably should) enforce typings to know the form of our accepted request, but since the compiler or the editor doesn't suggest that kind of behaviour, what's the point?
 
 Fortunately TypeScript and tsConfig are not the only places to enforce coding style and what we should do is to take eslint into use to help us manage our code. Let's install eslint and a typescript extension for it called typescript-eslint and set up a rule to disallow _explicit _any_ typings_.
 
