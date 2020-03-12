@@ -7,17 +7,19 @@ lang: en
 
 <div class="content">
 
-Now that we have a basic understanding of how TypeScript works and of how to create actual projects with it, it is time to start creating something actually useful. So now we're going to create a completely new project, with a bit more realistic use cases in mind.
+Now that we have a basic understanding of how TypeScript works and how to create actual projects with it, it is time to start creating something actually useful. So now we're going to create a completely new project, with a bit more realistic use cases in mind.
 
-One major change from the previous part is that **we're not going to use ts-node anymore**. ts-node is a handy tool, with which it is very easy to get started, but in the long run it is suggested to use the official TypeScript compiler that comes with the _typescript_ npm-package. With this compiler the basic JavaScript files are generated and packaged from the .ts files so that the built <i>production version</i> of the project won't contain any TypeScript code. This is exactly what we are aiming for in the end, since TypeScript in itself is not runnable by browsers or Node.
+One major change from the previous part is that <i>we're not going to use ts-node anymore</i>. ts-node is a handy tool, with which it is very easy to get started, but in the long run it is suggested to use the official TypeScript compiler that comes with the <i>typescript</i> npm-package. With this compiler the basic JavaScript files are generated and packaged from the .ts files so that the built <i>production version</i> of the project won't contain any TypeScript code. This is exactly what we are aiming for in the end, since TypeScript in itself is not runnable by browsers or Node.
 
 ### Setting up the project
 
-Our project is created for Ilari, who loves riding small planes but has a bit of difficulties managing his flight history. He is quite the coder himself, so he doesn't necessarily need a user interface for his flight records, but he'd like to use the software with HTTP-requests so that the possibility to extend the application to also include a web-based user interface is maintained.
+Our project is created for Ilari, who loves riding small planes but has a bit of difficulties managing his flight history. He is quite the coder himself, so he doesn't necessarily need a user interface for his flight records, but he'd like to use the software with HTTP-requests so that the possibility to later extend the application to also include a web-based user interface would be possible.
 
-Let's start creating our own first real project 'Ilari's flight diaries', as we usually would by running _npm init_ and by installing the _typescript_ package. 
+Let's start creating our own first real project 'Ilari's flight diaries', as we usually would by running <i>npm init</i> and by installing the <i>typescript</i> package. 
 
-TypeScript's native _tsc_ compiler offers us help initialising our project with the command _tsc --init_. To be able to run this, we need to add the _tsc_ command to runnable scripts in the package.json file unless we have installed _typescript_ globally. And even if you would have installed typescript globally, you should always include the package as a dev-dependency in your project.
+TypeScript's native <i>tsc</i> compiler offers us help initialising our project with the command <i>tsc --init</i>. To be able to run this, we need to add the <i>tsc</i> command to runnable scripts in the package.json file unless we have installed <i>typescript</i> globally. And even if you would have installed typescript globally, you should always include the package as a dev-dependency in your project.
+
+The npm srcipt for running <i>tsc</i> is set as follows:
 
 ```json
 {
@@ -29,7 +31,7 @@ TypeScript's native _tsc_ compiler offers us help initialising our project with 
 }
 ```
 
- Very often the bare _tsc_ command is set up in the project scripts for other scripts to use, so it is very common to see the  _tsc_ command set up within the project like this.
+ Very often the bare <i>tsc</i> command is set up in the project scripts for other scripts to use, so it is very common to see the <i>tsc</i> command set up within the project like this.
 
  Now we can initialise our tsconfig.json settings by running:
 
@@ -38,9 +40,9 @@ TypeScript's native _tsc_ compiler offers us help initialising our project with 
  npm run tsc -- --init
 ```
 
- **Notice** the extra -- before the actual argument, arguments before the -- are interpreted for the command _npm_ and ones after are for the command that is run throught the package.json scripts. 
+ **Notice** the extra -- before the actual argument, arguments before the -- are interpreted for the command <i>npm</i> and ones after are for the command that is run throught the script. 
 
-The created tsconfig.json contains a pretty big list of all of the possible configurations available to use with only a few uncommented ones. Studying the initial tsconfig.json file might be useful for finding some configuration options you might need. It is also completely okay to keep the commented rows in the file just in case you might someday need to expand your configuration settings. 
+The created <i>tsconfig.json</i> contains a lengthy list of all of the possible configurations available to use, but  only a few of those are uncommented. Studying the initial <i>tsconfig.json</i> file might be useful for finding some configuration options you might need. It is also completely okay to keep the commented rows in the file just in case you might someday need to expand your configuration settings. 
 
 The preferred settings we want right now are the following:
 
@@ -54,7 +56,6 @@ The preferred settings we want right now are the following:
     "noUnusedLocals": true,
     "noUnusedParameters": true,       
     "noImplicitReturns": true,
-    "noImplicitAny": true,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true
   }
@@ -65,27 +66,27 @@ Let's go through each setting now:
 
 The <i>target</i> parameter tells the compiler which ECMAScript version the generated JavaScript should be generated into. ES6 is supported by most browsers and therefore is a good and pretty safe option.
 
-<i>outDir</i> tells where the compiled result should be placed.
+<i>outDir</i> tells where the compiled code should be placed.
 
 <i>module</i> tells the compiler that we want to use <i>commonjs</i> modules in compiled code, so the code uses _require_ instead of _import_ that is not supported in older Node.js versions such as the version 10. 
 
 <i>strict</i> is actually a shorthand to include multiple separate options: 
-<i>noImplicitAny, noImplicitThis, alwaysStrict, strictBindCallApply, strictNullChecks, strictFunctionTypes and strictPropertyInitialization</i>. These all guide our coding style use TypeScript features more strictly, <i>noImplicitAny</i> restricts implicit setting for any, which happens for example if you don't type the expected variables of a function. The rest of the options can all be studied more closely on the [tsconfig documentation](https://www.typescriptlang.org/v2/en/tsconfig#strict). Using <i>strict</i> is suggested by the official documentation.
+<i>noImplicitAny, noImplicitThis, alwaysStrict, strictBindCallApply, strictNullChecks, strictFunctionTypes and strictPropertyInitialization</i>. These all guide our coding style to use TypeScript features more strictly. The most important for us is perhaps the already familiar [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny) that restricts implicitly setting type <i>any</i>, which happens for example if you don't type the expected parameters of a function. The rest of the options can all be studied more closely on the [tsconfig documentation](https://www.typescriptlang.org/v2/en/tsconfig#strict). Using <i>strict</i> is suggested by the official documentation.
 
-<i>noUnusedLocals</i> gives an error if a local variable is unused and </i>noUnusedParameters</i> when a function has unused parameters. 
+<i>noUnusedLocals</i> gives an error if a local variable is unused and <i>noUnusedParameters</i> when a function has unused parameters. 
 
-<i>noFallthroughCasesInSwitch</i> gives an error if a _switch - case_ is used without a fallthrough possibility (falling to a case does not _return_ or _break_ the evaluation of the switch).
+<i>noFallthroughCasesInSwitch</i> ensures that in a _switch case_ each case ends to _return_ or _break_ statement.
 
 <i>esModuleInterop</i> allows interaperability between commonJS and ES Modules, see more [in documentation](https://www.typescriptlang.org/v2/en/tsconfig#esModuleInterop).
 
-Now that we have our preferred configuration set, let's continue by installing _express_ and of course also _@types/express_. Since this is a real project, which is intended to be grown over time, it might be useful to use eslint from the beginning, so that no extra refactoring or rewriting is needed later on if these are added afterwards. We should also put So let's also install _eslint_, _@typescript-eslint/eslint-plugin_ and _@typescript-eslint/parser_.
+Now that we have our preferred configuration set, let's continue by installing <i>express</i> and of course also <i>@types/express</i>. Since this is a real project, which is intended to be grown over time we will use eslint from thevery  beginning:
 
 ```sh
 npm install express
 npm install --save-dev eslint @types/express @typescript-eslint/eslint-plugin @typescript-eslint/parser
 ```
 
-Now our _package.json_ should look something like this: 
+Now our <i>package.json</i> should look something like this: 
 
 ```json
 {
@@ -112,7 +113,7 @@ Now our _package.json_ should look something like this:
 }
 ```
 
-We should also create _.eslintrc_ with the following content:
+We also create <i>.eslintrc</i> with the following content:
 
 ```json
 {
@@ -142,16 +143,27 @@ We should also create _.eslintrc_ with the following content:
 }
 ```
 
-Now we only need to set up our development environment properly, and then we are ready to start writing some serious code. There are many different options and we could use the familiar _nodemon_ with _ts-node_, but as we saw before, _ts-node-dev_ does the exact same thing and we can continue using it. So, let's install _ts-node-dev_ and we are ready to start developing. 
+Now we only need to set up our development environment properly, and then we are ready to start writing some serious code. There are many different options and we could use the familiar <i>nodemon</i> with <i>ts-node</i>, but as we saw before, </i>ts-node-dev</i> does the exact same thing and we can continue using it. So, let's install <i>ts-node-dev</i>
 
 ```sh
 npm install --save-dev ts-node-dev
 ```
 
-**Sidenote:** When deciding on what packages to use, [npmtrends](https://npmtrends.com) is a good place to compare the popularity and growth of different npm packages. When [comparing](https://www.npmtrends.com/nodemon-vs-ts-node-dev-vs-ts-node) the use of _ts-node-dev_ and both _nodemon_ and _ts-node_  we can see that the popularity of ts-node-dev is not nearly as popular as using nodemon and ts-dev, so the safer choice might be to just go with the other choice. Now let's still give _ts-node-dev_ a chance and use it in these exercises.
+And we are ready to start writing some code after defining still a coupe of more npm scripts:
 
+```json
+{
+  // ...
+  "scripts": {
+    "tsc": "tsc",
+    "dev": "ts-node-dev index.ts", // highlight-line
+    "lint": "eslint --ext .ts ." // highlight-line
+  },
+  // ...
+}
+```
 
-There is a lot of stuff to go through before you can even start the actual coding. When working with a real project, careful preparations support your development process to a great length, so take the time to create a good setting for yourself and your team so that in the long run everything will be much smoother.
+There is a lot of stuff to go through before you can even start the actual coding. When working with a real project, careful preparations support your development process to a great length, so take the time to create a good setting for yourself and your team so that in the long run everything runs smoothly.
 
 ### Let there be code
 
