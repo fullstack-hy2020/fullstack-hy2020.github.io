@@ -741,9 +741,9 @@ This is why the rule [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconf
 const a : any = /* no clue what the type will be! */.
 ```
 
-We have already <i>noImplicitAny</i> defined in our example code, so why does not the compiler compalain about <i>any</i> types?
+We have already <i>noImplicitAny</i> defined in our example code, so why does not the compiler complain about <i>any</i> types?
 
-The reason is that the field <i>query</i> of the express <i>Request</i> object is actually explicitly typed as <i>any</i>. We can enforce (and probably should) enforce typings to know the form of our accepted request, but since the compiler or the editor doesn't suggest that kind of behaviour, what's the point?
+The reason is that the field <i>query</i> of the express <i>Request</i> object is actually explicitly typed as <i>any</i>. 
 
 Fortunately <i>tsconfig.json</i> is not the only place to enforce coding style and what we should do is to take <i>eslint</i> into use to help us to manage our code. Let's install eslint and the typescript extensions:
 
