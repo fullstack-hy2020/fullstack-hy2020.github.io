@@ -776,7 +776,7 @@ Let us also set up the <i>lint</i> npm script to inspect the files with <i>.ts</
   "scripts": {
       "start": "ts-node index.ts",
       "dev": "ts-node-dev index.ts", 
-      "lint": "eslint --ext *.ts"// highlight-line
+      "lint": "eslint --ext .ts ." // highlight-line
       //  ...
   },
   // ...
@@ -788,9 +788,9 @@ Lint is now complaining if we try to define a variable of type <i>any</i>:
 ![](../../images/9/13b.png)
 
 
-The [@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) plugin has lots of TypeScript-only eslint rules but also all basic eslint rules are usable in TypeScript projects. We should probably for now just use the recommended settings and see where it takes us and modify our rules as we go, if we find something we want to behave differently. 
+The [@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) plugin has lots of TypeScript-only eslint rules but also all basic eslint rules are usable in TypeScript projects. We should probably for now just use the recommended settings and see where it takes us and modify the rules as we go, if we find something we want to behave differently. 
 
-On top of the regular recommended settings we should already try to get familiar with coding styles we are using in this part and <i>set the semicolon at the end of each line of code to required</i>. 
+On top of the regular recommended settings, we should already try to get familiar with coding style we are using in this part and <i>set the semicolon at the end of each line of code to required</i>. 
 
 So we will use the following <i>.eslintrc</i> 
 
@@ -828,11 +828,15 @@ And now let's fix everything that needs to be fixed!
 
 <div class="tasks">
 
-### Exercises
+### Exercises 9.6.-9.7.
 
-#### 9.7
+#### 9.6 Eslint
 
-Add an endpoint to your app for the exercise calculator. It should be used by doing a HTTP POST request to endpoint _exercises_ with the input in the request body
+Configure your project to use the above eslint settings and fix all the warnings.
+
+#### 9.7 WebExercises
+
+Add an endpoint to your app for the exercise calculator. It should be used by doing a HTTP POST request to endpoint <i>exercises</i> with the input in the request body
 
 ```js
 {
