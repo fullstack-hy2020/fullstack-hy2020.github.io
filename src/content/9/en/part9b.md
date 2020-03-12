@@ -383,7 +383,7 @@ Exercises 9.1.-9.7. will be all made to the same node project. Create the projec
 
 <i>tsconfig.json</i> is used to define how TypeScript compiler should interpret the code, how strictly should the compilator work and on what files to watch or ignore, and [much more](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html). Right now we will only use the compiler option [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny), that makes it mandatory to have types for all variables used.
 
-#### 9.1
+#### 9.1 Body mass index
 
 Create the code of this exercise to file <i>bmiCalculator.ts</i>
 
@@ -403,7 +403,7 @@ Normal (healthy weight)
 
 Create a npm script for running the program with command <i>npm run calculteBmi</i>
 
-#### 9.2
+#### 9.2 Exercise calculator
 
 Create the code of this exercise to file <i>exerciseCalculator.ts</i>
 
@@ -439,7 +439,7 @@ If you would call the function with parameters <i>[3, 0, 2, 4.5, 0, 3, 1, 0, 4]<
 
 Create a npm script <i>npm run calculteExercises</i> for calling the function with hard coded values.
 
-#### 9.3
+#### 9.3 Command line
 
 Change the previous exersises so that you can give the parameters of <i>bmiCalculator</i> and <i>exerciseCalculator</i> as command line arguments.
 
