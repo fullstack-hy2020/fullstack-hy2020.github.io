@@ -697,31 +697,55 @@ Do not copy the caclucator code to file <i>index.ts</i>, make it a [typescript m
 
 <div class="content">
 
-### The horrors of <i>any</a>
+### The horrors of <i>any</i>
 
-Now that we have our first small endpoints done, one thing to notice is that in these minimal examples _barely any TypeScript is actually in the code_. When looking more closely at the code, we can see a few possibly dangerous things. Let's look at our endpoint _calculate_, that takes the familiar two integer values and an operation string.
+Now that we have our first small endpoints done, one thing to notice is that in these minimal examples barely any TypeScript is actually in the code. When looking more closely at the code, we can see a few possibly dangerous things. 
 
-When we hover on the _calculate_ function, we can see once again help from the editor:
 
-![](../../images/9/12.png)
+Let's add an HTTP GET endpoint <i>calculate</i> to our app:
 
-Even though the file itself doesn't contain any typings, we can see the typing of the _calculator_ function, which expects (as it should) the correct types of arguments, and returns a number. Great!
+```js
+import { calculator } from './calculator'
 
-But when hovering to the parsed values from the request, issues arise:
+// ...
 
-![](../../images/9/13.png)
+app.get('/calculate', (req, res) => {
+  const { value1, value2, op } = req.query
 
-All of the values are typed as _any_. Well, that could be expected since no one has typed our expected values. There are a couple of ways to fix this, but first thing to consider is: Why is this accepted and where did the type _any_ come from?
+  const result = calculator(value1, value2, op)
+  res.send(result);
+});
+```
 
-In TypeScript every untyped variable, for which the type cannot be inferred, becomes _implicitly_ any because without typings the compiler doesn't know what types to expect and the _any_ type is enforced. The easiest place for this to happen is by forgetting to type functions. _Any_ can also be _explicitly_ put onto a variable as any other type. The only difference between these two is on how the code looks and the compiler is not affected from the difference.
 
-Implicit and explicit enforcing of the _any_ type onto a variable have a few different effects on how a programmer sees the code. Implicit typings of _any_ is usually considered directly problematic, since it usually is a matter of the coder simply not assigning types and basically not using TypeScript in their code at all. This is why the _noImplicitAny_ exists already on compiler level and it is suggested to keep it on at all times; if there comes a case where you seriously cannot know what the type of a variable will be, you should _explicitly_ state it in the code, _const a : any = ..._.
+When we hover on the <i>calculate</i> function, we can see the typing of the <i>calculator</i> even though the file itself doesn't contain any typings:
 
-In this situation we already have _noImplicitAny_ defined in our tsconfig. So why is _any_ approved here?
+![](../../images/9/12a.png)
 
-That is because in this case the _query_ param of the _Request_ type of object within the express project is actually _explicitly_ typed as _any_. We can enforce (and probably should) enforce typings to know the form of our accepted request, but since the compiler or the editor doesn't suggest that kind of behaviour, what's the point?
 
-Fortunately TypeScript and tsConfig are not the only places to enforce coding style and what we should do is to take eslint into use to help us manage our code. Let's install eslint and a typescript extension for it called typescript-eslint and set up a rule to disallow _explicit _any_ typings_.
+But when we hover over the parsed values from the request, ann issues arise:
+
+![](../../images/9/13a.png)
+
+All of the varialbes have type <i>any</i>. Well, it is not that surprising since no one has given those a type. There are a couple of ways to fix this, but first thing to consider is why is this accepted and where did the type <i>any</i> come from?
+
+In TypeScript every untyped variable, for which the type cannot be inferred, becomes implicitly [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any), which is a kind of "wild card" type that can literally stand for <i>whatever possible type</i>. This happens quite often when one forgets to type functions. 
+
+The type <i>any</i> can also be explicitly specified as any other type. The only difference between these two is how the code looks, the compiler is not affected from the difference.
+
+However, implicit <i>any</i> and explicit enforcing of the <i>any</i> type onto a variable affects how a programmer sees the code. Implicit typings of <i>any</i> are usually considered problematic, since it  is quite often a matter of the coder simply forgotting to assign types (or being too lazy to do that) and because of that not exploiting the full power TypeScript in the code. 
+
+This is why the rule [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny) exists already on compiler level and it is highly recommended to keep it on at all time. In the rare cases where you seriously cannot know what the type of a variable is, you should explicitly state it in the code 
+
+```js
+const a : any = /* no clue what the type will be! */.
+```
+
+We have already <i>noImplicitAny</i> defined in our example code, so why does not the compiler compalain about <i>any</i> types?
+
+The reason is that the field <i>query</i> of the express <i>Request</i> object is actually explicitly typed as <i>any</i>. We can enforce (and probably should) enforce typings to know the form of our accepted request, but since the compiler or the editor doesn't suggest that kind of behaviour, what's the point?
+
+Fortunately TypeScript and tsConfig are not the only places to enforce coding style and what we should do is to take eslint into use to help us manage our code. Let's install eslint and a typescript extension for it called typescript-eslint and set up a rule to disallow_explicit <i>any</i> typings_.
 
 ```
 npm install --save-dev eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser
@@ -744,7 +768,7 @@ Now let's set up our eslint by creating a file .eslintrc to follow the following
 }
 ```
 
-And let's set up the _lint_ script to inspect the files with _.ts_ extension by adding a script to the _package.json_ file:
+And let's set up the <i>lint</i> script to inspect the files with <i>.ts</i> extension by adding a script to the _package.json_ file:
 
 ```json
 {
@@ -761,7 +785,7 @@ And let's set up the _lint_ script to inspect the files with _.ts_ extension by 
 
 And now live code inspection should be working!
 
-The _@typescript-eslint_ plugin has lots of TypeScript-only lint rules but also all basic eslint rules are usable in TypeScript projects. We should probably for now just use the recommended settings and see where it takes us and modify our rules as we go, if we find something we want to behave differently. On top of the regular recommended settings we should already try to get familiar with coding styles we are using this week and _set the semicolon at the end of each line of code to required_. So let's set the _.eslintrc_ to include the following:
+The <i>@typescript-eslint</i> plugin has lots of TypeScript-only lint rules but also all basic eslint rules are usable in TypeScript projects. We should probably for now just use the recommended settings and see where it takes us and modify our rules as we go, if we find something we want to behave differently. On top of the regular recommended settings we should already try to get familiar with coding styles we are using this week and _set the semicolon at the end of each line of code to required_. So let's set the <i>.eslintrc</i> to include the following:
 
 ```json
 {
