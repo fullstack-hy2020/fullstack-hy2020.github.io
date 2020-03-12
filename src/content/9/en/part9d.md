@@ -201,9 +201,9 @@ To fix the error, we need to add a new linting rule to _.eslintrc_:
 
 <div class="tasks">
 
-### Exercise 9.16.
+### Exercise 9.14.
 
-#### 9.16
+#### 9.14.
 
 Create a new Create React App with TypeScript, setup linting using eslint.
 
