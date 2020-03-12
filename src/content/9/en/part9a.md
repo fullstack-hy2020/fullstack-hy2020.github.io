@@ -53,7 +53,7 @@ console.log(birthdayGreeter(birthdayHero, 22));
 
 #### Structural typing
 
-TypeScript is a structurally typed language. In structural typing, an element is considered to be compatible with another if, for each feature within the second element's type, a corresponding and identical feature exists in the first element's type. Two types are considered to be identical if both are compatible with each other.
+TypeScript is a structurally typed language. In structural typing, an element is considered to be compatible with another, if for each feature within the second element's type, a corresponding and identical feature exists in the first element's type. Two types are considered to be identical, if both are compatible with each other.
 
 #### Type inference
 
@@ -72,7 +72,7 @@ const add = (a: number, b: number) => {
 
 Function's return value is inferred by retracing the code back to the return expression. The return expression performs an addition of two numbers, which can be seen from the types  of the function's parameters. Thus, the return type <i>number</i> is inferred in this case.
 
-As a more complex example let us consider the code below. If you have not used TypeScript before this example might be a bit complex. But do not worry, you can safely skip this example for now. 
+As a more complex example let us consider the code below. If you have not used TypeScript before, this example might be a bit complex. But do not worry, you can safely skip this example for now. 
 
 ```js
 type CallsFunction = (callback: (result: string) => any) => void;
@@ -147,10 +147,10 @@ When using external libraries you may find that some libraries have either missi
 
 #### Sometimes type inference needs assistance
 
-The type inference in TypeScript is pretty good, but still not perfect. Sometimes you may feel like you have declared your types perfectly, but the compiler still tells you that the property does not exist or that that kind of usage is not allowed. These are occasions when you might need to help the compiler with doing e.g. an "extra" type check or something like that. But be careful with type casting with [type assertions]((https://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions)) and [type guards](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-guards-and-differentiating-types), because in those cases you are practically giving your word to the compiler, that the value really is of the type that you declare. Y
+The type inference in TypeScript is pretty good, but still not perfect. Sometimes you may feel like you have declared your types perfectly, but the compiler still tells you that the property does not exist or that that kind of usage is not allowed. These are occasions when you might need to help the compiler with doing e.g. an "extra" type check or something like that. But be careful with type casting with [type assertions]((https://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions)) and [type guards](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-guards-and-differentiating-types), because in those cases you are practically giving your word to the compiler, that the value really is of the type that you declare. 
 
 #### Mysterious type errors
 
-The errors given by the type system may sometimes be quite hard to understand, especially if you use complex types. As a general guideline it is helpful to keep in mind that TypeScript error messages usually contain the most useful content at the end of the message. So when running into long confusing messages, start reading them from the end.
+The errors given by the type system may sometimes be quite hard to understand, especially if you use complex types. As a general guideline it is helpful to keep in mind, that TypeScript error messages usually contain the most useful content at the end of the message. So when running into long confusing messages, start reading them from the end.
 
 </div>
