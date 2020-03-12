@@ -385,7 +385,7 @@ Exercises 9.1.-9.7. will be all made to the same node project. Create the projec
 
 #### 9.1
 
-Create the code of this exercise to file <i>bmiCalculator.ts</i>.
+Create the code of this exercise to file <i>bmiCalculator.ts</i>
 
 Write a function <i>calculateBmi</i> that counts [BMI](https://en.wikipedia.org/wiki/Body_mass_index) based on given weight (in kilograms) and height (in centimeters) and then returns a message that suits the results. 
 
@@ -405,7 +405,7 @@ Create a npm script for running the program with command <i>npm run calculteBmi<
 
 #### 9.2
 
-Create the code of this exercise to file <i>exerciseCalculator.ts</i>.
+Create the code of this exercise to file <i>exerciseCalculator.ts</i>
 
 Write a function <i>calculteExercises</i> that calculates the average time of <i>daily exercise hours</i> and compares it to the <i>target amount</i> of daily hours and returns an object that includes the following values:
 
@@ -417,24 +417,24 @@ Write a function <i>calculteExercises</i> that calculates the average time of <i
   - a rating between the numbers 1-3 that tells how well the hours are met. You can decide on the metric on your own.
   - a text value explaining the rating
 
-The daily exercise hours are given to the function as an [array](https://www.typescriptlang.org/docs/handbook/basic-types.html#array) that contains the number of exercise hours for each day in the training period. Eg. a week with 1 hours of training at Monday, none at Tuesday, 2 hours at Wednesday, zero at Thursday and so on would be represented by the following array:
+The daily exercise hours are given to the function as an [array](https://www.typescriptlang.org/docs/handbook/basic-types.html#array) that contains the number of exercise hours for each day in the training period. Eg. a week with 3 hours of training at Monday, none at Tuesday, 2 hours at Wednesday, 4.5 hours at Thursday and so on would be represented by the following array:
 
 ```js
-[1, 0, 2, 0, 3, 0, 2.5]
+[3, 0, 2, 4.5, 0, 3, 1, 0, 4]
 ```
 
 For the Result object you should to create an [interface](https://www.typescriptlang.org/docs/handbook/interfaces.html).
 
-If you would call the function with parameters <i>[1, 0, 2, 4.5, 0, 3, 1, 0, 4]</i> and <i>2</i> it could return
+If you would call the function with parameters <i>[3, 0, 2, 4.5, 0, 3, 1, 0, 4]</i> and <i>2</i> it could return
 
 ```js
-{ periodLength: 9,
-  trainingDays: 6,
+{ periodLength: 7,
+  trainingDays: 4,
   success: false,
   rating: 2,
   ratingDescription: 'not too bad but could be better',
   target: 2,
-  average: 1.7222222222222223 }
+  average: 1.5 }
 ```
 
 Create a npm script <i>npm run calculteExercises</i> for calling the function with hard coded values.
