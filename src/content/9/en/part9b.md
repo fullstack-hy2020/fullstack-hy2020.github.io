@@ -609,7 +609,6 @@ Let's rename the <i>req</i> variable to <i>_req</i>. Now we are finally ready to
 
 ![](../../images/9/11a.png)
 
-
 Now to simplify the development we should enable <i>auto reloading</i> to improve our workflow. In this course you have already used <i>nodemon</i>, but ts-node has an alternative called <i>ts-node-dev</i> which is meant only for development environment that takes care of recompilation on every change so restarting the application won't be necessary.
 
 Let's install <i>ts-node-dev</i> to our development dependencies 
@@ -741,11 +740,9 @@ This is why the rule [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconf
 const a : any = /* no clue what the type will be! */.
 ```
 
-We have already <i>noImplicitAny</i> defined in our example code, so why does not the compiler compalain about <i>any</i> types?
+We have already <i>noImplicitAny</i> defined in our example code, so why does not the compiler compalain about <i>any</i> types? The reason is that the field <i>query</i> of the express [Request](https://expressjs.com/en/5x/api.html#req) object is actually explicitly typed as <i>any</i>. Same is true if we post data to app, the <i>request.body</i> is explicitly typed as <i>any</i> by express.
 
-The reason is that the field <i>query</i> of the express <i>Request</i> object is actually explicitly typed as <i>any</i>. We can enforce (and probably should) enforce typings to know the form of our accepted request, but since the compiler or the editor doesn't suggest that kind of behaviour, what's the point?
-
-Fortunately <i>tsconfig.json</i> is not the only place to enforce coding style and what we should do is to take <i>eslint</i> into use to help us to manage our code. Let's install eslint and the typescript extensions:
+What if we would like to prevent the developers of using <i>any</i> type in the code? Fortunately <i>tsconfig.json</i> is not the only place to enforce coding style and what we should do is to take <i>eslint</i> into use to help us to manage our code. Let's install eslint and the typescript extensions:
 
 ```sh
 npm install --save-dev eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser
@@ -840,8 +837,8 @@ Add an endpoint to your app for the exercise calculator. It should be used by do
 
 ```js
 {
-  daily_exercises: [1, 0, 2, 0, 3, 0, 2.5], 
-  target: 7
+  "daily_exercises": [1, 0, 2, 0, 3, 0, 2.5], 
+  "target": 2.5
 }
 ```
 
@@ -854,7 +851,7 @@ Response is a json of the following form
     "success": false,
     "rating": 1,
     "ratingDescription": "bad",
-    "target": 7,
+    "target": 2.5,
     "average": 1.2142857142857142
 }
 ```
@@ -877,5 +874,12 @@ or
 
 depending on the error. The latter happens if the input values do not have the right type, i.e. they are not numbers or convertable to numbers.
 
+In this exercise you might find it beneficial to use the <i>explicit any</i> type when handling the data in the request body. Our eslint configuration is preventing this but you may unset this rule for a particular line by inserting the following comment as the previous line:
+
+```js
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+```
+
+Note that you need to have a correct setup in order to get hold to the request body, see [part 3](http://localhost:8000/en/part3/node_js_and_express#receiving-data).
 
 </div>
