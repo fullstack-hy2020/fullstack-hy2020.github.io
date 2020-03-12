@@ -637,11 +637,15 @@ And now by running <i>npm run dev</i> we have a working auto-reloading developme
 
 <div class="tasks">
 
-### Exercises 9.4.-9.6.
+### Exercises 9.4.-9.5.
 
-#### 9.4
+#### 9.4 Express
 
-Replace your existing <i>tsconfig.json</i> file with the  following content:
+Add express to your dependecies and create a HTTP GET endpoint <i>hello</i> that answers 'Hello Full Stack!'
+
+The web app should be started with command <i>npm start</i> in prduction mode and <i>npm run dev</i> in development mode that should use <i>ts-node-dev</i> to run the app.
+
+Replace also your existing <i>tsconfig.json</i> file with the  following content:
 
 ```json
 {
@@ -651,33 +655,23 @@ Replace your existing <i>tsconfig.json</i> file with the  following content:
     "strictNullChecks": true,
     "strictPropertyInitialization": true,
     "strictBindCallApply": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "noImplicitThis": true,
     "alwaysStrict": true,
     "esModuleInterop": true,
     "declaration": true,
-  },
-  "exclude": [
-    "node_modules",
-  ]
+  }
 }
 ```
 
-Then make sure you are able to run both scripts and fix every place of error.
+make sure there are not any errors!
 
+#### 9.5 WebBMI
 
-#### 9.5
+Add an enpoint for BMI-calculator that can be used by doing a HTTP GET request to endpoint <i>bmi</i> and specifying the input with [query string parameters](https://en.wikipedia.org/wiki/Query_string). For example to get bmi for person having heigth 180 and weigth 72, the url is http://localhost:3002/bmi?heigth=180&weight=72
 
-Use the same npm project base and add express to your dependecies and create an endpoint that answers 'Hello Full Stack!'
-
-The project should be served on command _npm start_
-
-#### 9.6
-
-Configure _ts-node-dev_ to your package to help your development workflow.
-
-Add an enpoint for BMI-calculator that can be used by doing a HTTP GET request to endpoint _bmi_ and specifying the input with [query string parameters](https://en.wikipedia.org/wiki/Query_string). Eg. to get bmi for person having heigth 180 and weigth 72, the url is http://localhost:3002/bmi?heigth=180&weight=72
-
-the response is a json of the form
+The response is a json of the form
 
 ```js
 {
@@ -697,13 +691,13 @@ If the query parameters of the request are of the wrong type or missing, respons
 }
 ```
 
-Do not copy the caclucator code to file _index.ts_, make it a [typescript module](https://www.typescriptlang.org/docs/handbook/modules.html) that can be imported in _index.ts_. You might need to change the BMI calculator of Exercise 1.1. to make it fit to this exercise.
+Do not copy the caclucator code to file <i>index.ts</i>, make it a [typescript module](https://www.typescriptlang.org/docs/handbook/modules.html) that can be imported in <i>index.ts</i>. 
 
 </div>
 
 <div class="content">
 
-### The horrors of _any_
+### The horrors of <i>any</a>
 
 Now that we have our first small endpoints done, one thing to notice is that in these minimal examples _barely any TypeScript is actually in the code_. When looking more closely at the code, we can see a few possibly dangerous things. Let's look at our endpoint _calculate_, that takes the familiar two integer values and an operation string.
 
