@@ -167,9 +167,9 @@ There is a lot of stuff to go through before you can even start the actual codin
 
 ### Let there be code
 
-Now we can finally start coding! As before, let's start out by creating our first ping-endpoint, just to make sure everything is working.
+Now we can finally start coding! As always, we will at start create a ping-endpoint, just to make sure everything is working.
 
-The contents of the root _index.ts_ file:
+The contents of the <i>index.ts</i> file:
 
 ```js
 import express from 'express';
@@ -178,55 +178,27 @@ app.use(express.json());
 
 const PORT = 3000;
 
-app.get('/ping', (req, res) => {
-    console.log('someone pinged here');
-    res.send('pong');
-  });
+app.get('/ping', (_req, res) => { 
+  console.log('someone pinged here');
+  res.send('pong');
+});
   
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
-
 ```
 
-And since we haven't yet set up the development script that uses the ts-node-dev, now is the correct time to add it:
+If we now run the app with <i>npm run dev</i> we can verify that a request to http://localhost:3000/ping gives response <i>pong</i>, so our configuration is set!
 
-```json
-{
-  // ..
-  "scripts": {
-    "tsc": "tsc",
-    "dev": "ts-node-dev index.ts" // highlight-line
-  },
-  // ..
-}
-```
+When starting the app with <i>npm run dev</i>, it is running in development mode, and for sure that is not suitable whenwe later on opera the app in production. 
 
-If we now run _npm run dev_, a problem arises 
+Let us now try to create the <i>production build</i> by running the TypeScript compiler. Since we have defined the <i>outdir</i> in our tsconfig.json, there's really nothing else to do, but run the script <i>npm run tsc</i>.
 
-```sh
-index.ts:7:19 - error TS6133: 'req' is declared but its value is never read.
+Just like magic a native runnable JavaScript production build of the express backend is created into the directory <i>build</i>.  
 
-7 app.get('/ping', (req, res) => {
-                    ~~~
-Found 1 error.
-```
+Currently if we run eslint it will also interpret the files in the <i>build</i> directory, which we don't want, since that is compiler generated code. We can prevent this by creating a file <i>.eslintignore</i> with the content we want eslint to ignore, similarly as in <i>gitignore</i>.
 
-So our stricter than before tsconfig options don't allow us to keep unused variables within the code while making a production build. This becomes problematic when we have library-wide predefined functions, that like in this case require declaring a variable, even though in the code it is not necessarily required to use at all. Fortunately this issue has already been solved on configuration level and once again hovering on the issue gives us a solution for the problem, this time by clicking the quick fix button: 
-
-![](../../images/9/14.png)
-
-If it is absolutely impossible to get rid of an unused variable, you should prefix it with an underscore to inform the compiler that this has been taken into consideration and there is nothing we can do about it. Let's rename the _req_ variable to __req_ and we can continue with our development.
-
-Now by running _npm run dev_ we should be able to run the app without errors and curl our _/ping_ endpoint.
-
-Now that we can see the happy _pong_, we should try creating our first production build. Since we have defined the _outdir_ in our tsconfig.json, there's really nothing else to do, but run _npm run tsc_.
-
-Just like magic a native runnable JavaScript production build of the ping-pong express backend is created into the build folder.
-
-Currently our eslint tries to interpret the files in the _build_ folder as well, which we don't want, as that is compiler generated code. We can easily prevent this by creating a file _.eslintignore_ in our project's root with the content we want eslint to ignore, similarly as in _.gitignore_.
-
-Let's try our project by creating production run command for the project:
+Let us add a npm script for running the application in production mode:
 
 ```json
 {
@@ -234,18 +206,19 @@ Let's try our project by creating production run command for the project:
   "scripts": {
     "tsc": "tsc",
     "dev": "ts-node-dev index.ts",
+    "lint": "eslint --ext .ts .",
     "start": "node build/index.js" // highlight-line
   },
   // ...
 }
-
 ```
 
-Then run _npm start_ and try to curl our defined port:
+Wen we run app with <i>npm start</i> we can verify that also the production build works
 
-![](../../images/9/15.png)
+![](../../images/9/15a.png)
 
-Now we have a minimal working pipeline, with which we can develop our project, with a lot of help from our compiler and eslint in maintaining a good code quality. With this base we can actually start creating an app that we could proudly deploy into a production environment. 
+
+Now we have a minimal working pipeline, with which we can develop our project, and with the help from our compiler and eslint also ensure that a good code quality is maintained. With this base we can actually start creating an app that we could later on deploy into a production environment. 
 
 </div>
 
@@ -255,35 +228,25 @@ Now we have a minimal working pipeline, with which we can develop our project, w
 
 **Before you start the exercises**
 
-For this set of exercises you will be developing a backend for an existing project called <i>Patientor</i> which is a simple medical record application for the use doctors that handles patient information, diagnoses and basic health information of the patients.
+For this set of exercises you will be developing a backend for an existing project called <i>Patientor</i> which is a simple medical record application for doctors that handle diagnoses and basic health information of the patients.
 
 The [frontend](https://github.com/fullstack-hy2020/patientor) has already been built by outsider experts and you're task is to create a backend to support the existing code.
 
-**Note:** From now on you will be working with existing codebase and sometimes it is expected that you use your own skills to find the relevant files and and configurations to proceed in the exercises.
+#### 9.10: Patientor backend, step1
 
-**Note 2:** You will be extending the frontend later on so it is suggested that you fork the repository already [from here](https://github.com/fullstack-hy2020/patientor).
+Initialise project that will be used by the frontend. Configure eslint and tsconfig with the same configurations that are used in the material. Define a endpoint that responses to HTTP GET requests to route <i>/ping</i>.   
 
-**Note 3:** Code quality is extremely important, so take extra good care of that your code is _readable_ and that it can be _easily shared_, which means that you need to end up with a result that is _production ready_, so that the built version of the project is working, and no extra dependencies are included in the end result.
+The project should be runnale with npm scripts both in development mode and as compiled code in production mode.
 
-#### 9.10: Diagnoses backend, step1
-
-Initialise a buildable project template called _Diagnoses-backend_ that will be used by the frontend. Configure eslint and tsconfig with the same configurations that are used in the material. 
-
-Set up a endpoint that responses to HTTP GET requests to route _/ping_.   
-
-You should also configure auto-reloading.
-
-#### 9.11: Diagnoses backend, step2
+#### 9.11: Patientor backend, step2
 
 Fork and clone the project [patientor](https://github.com/fullstack-hy2020/patientor). Start the project with the help of the README-file. You should be able to use the frontend without a functioning backend.
 
-Ensure that backend answers to frontend's ping requests. Check developer tools to make sure it really works: 
+Ensure that backend answers to the ping request that <i>fronend</i> is makes on startup. Check developer tool to make sure it really works: 
 
-![](../../images/9/16.png)
+![](../../images/9/16a.png)
 
-You might also want to have a look at the tab <i>console</i>.
-
-Set up a build script to your <i>backend</i> so that you can create a production version of the project and make sure that it answers to the frontend's ping request.
+You might also want to have a look at the tab <i>console</i>. If something fails is [part 3](/part3) of the course shows how the problem can be solved.
 
 </div>
 
