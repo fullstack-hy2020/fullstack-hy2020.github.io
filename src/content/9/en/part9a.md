@@ -75,9 +75,7 @@ Function's return value is inferred by retracing the code back to the return exp
 As a more complex example let us consider the code below. If you have not used TypeScript before this example might be a bit complex. But do not worry, you can safely skip this example for now. 
 
 ```js
-interface CallsFunction {
-  (cb: (result: string) => any): void;
-}
+type CallsFunction = (callback: (result: string) => any) => void;
 
 const funk: CallsFunction = (cb) => {
   cb('done');
@@ -89,7 +87,7 @@ funk((result) => {
 });
 ```
 
-There is a declaration for an [interface](https://www.typescriptlang.org/docs/handbook/interfaces.html#function-types) called <i>CallsFunction</i>, which consists of a function with one parameter. The parameter <i>cb</i> is of the type function that takes a string parameter and returns [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) value. As we will learn later in this part <i>any</i> is a kind of "wildcard" type that can represent any type.
+There is a declaration for a [type alias](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases) called <i>CallsFunction</i>, which is a function type with one parameter named <i>callback</i>. The parameter <i>callback</i> is of the type function that takes a string parameter and returns [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) value. As we will learn later in this part <i>any</i> is a kind of "wildcard" type that can represent any type.
 
 After that, the function <i>funk</i> of the type <i>CallsFunction</i> is defined. In <i>funk</i> it can be inferred that the parameter will only accept a string argument. To demonstrate this, there is also an example where the parameter function is called with a numeric value, and that causes an error in TypeScript.
 
