@@ -951,7 +951,7 @@ The browser compatibility of different API's can be checked by visiting [https:/
 ### Eject
 
 
-The create-react-app tool uses webpack behind the scenes. If the default configuration is not enough, it is possible to [eject](https://github.com/facebook/create-react-app/blob/master/packages/react-sscripts/template/README.md#npm-run-eject) the project which will get rid of all of the black magic, and the default configuration files will be stored in the <i>config</i> directory and in a modified <i>package.json</i> file.
+The create-react-app tool uses webpack behind the scenes. If the default configuration is not enough, it is possible to [eject](https://create-react-app.dev/docs/available-scripts/#npm-run-eject) the project which will get rid of all of the black magic, and the default configuration files will be stored in the <i>config</i> directory and in a modified <i>package.json</i> file.
 
 
 If you eject an application created with create-react-app, there is no return and all of the configuration will have to be maintained manually. The default configuration is not trivial, and instead of ejecting from a create-react-app application, a better alternative may be to write your own webpack configuration from the get-go.
