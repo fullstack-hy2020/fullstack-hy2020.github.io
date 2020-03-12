@@ -745,13 +745,13 @@ We have already <i>noImplicitAny</i> defined in our example code, so why does no
 
 The reason is that the field <i>query</i> of the express <i>Request</i> object is actually explicitly typed as <i>any</i>. We can enforce (and probably should) enforce typings to know the form of our accepted request, but since the compiler or the editor doesn't suggest that kind of behaviour, what's the point?
 
-Fortunately TypeScript and tsConfig are not the only places to enforce coding style and what we should do is to take eslint into use to help us manage our code. Let's install eslint and a typescript extension for it called typescript-eslint and set up a rule to disallow_explicit <i>any</i> typings_.
+Fortunately <i>tsconfig.json</i> is not the only place to enforce coding style and what we should do is to take <i>eslint</i> into use to help us to manage our code. Let's install eslint and the typescript extensions:
 
-```
+```sh
 npm install --save-dev eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser
 ```
 
-Now let's set up our eslint by creating a file .eslintrc to follow the following setting:
+We will configure eslint to [disallow explicit any]( https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md) by using the <i>.eslintrc</i> with following contents:
 
 ```json
 {
@@ -761,14 +761,14 @@ Now let's set up our eslint by creating a file .eslintrc to follow the following
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint"],
-  
-  : {
+  "rules": {
     "@typescript-eslint/no-explicit-any": 2
   }
 }
 ```
 
-And let's set up the <i>lint</i> script to inspect the files with <i>.ts</i> extension by adding a script to the _package.json_ file:
+
+Let us also set up the <i>lint</i> npm script to inspect the files with <i>.ts</i> extension by modifying <i>package.json</i> file:
 
 ```json
 {
@@ -783,9 +783,16 @@ And let's set up the <i>lint</i> script to inspect the files with <i>.ts</i> ext
 }
 ```
 
-And now live code inspection should be working!
+Lint is now complaining if we try to define a variable of type <i>any</i>:
 
-The <i>@typescript-eslint</i> plugin has lots of TypeScript-only lint rules but also all basic eslint rules are usable in TypeScript projects. We should probably for now just use the recommended settings and see where it takes us and modify our rules as we go, if we find something we want to behave differently. On top of the regular recommended settings we should already try to get familiar with coding styles we are using this week and _set the semicolon at the end of each line of code to required_. So let's set the <i>.eslintrc</i> to include the following:
+![](../../images/9/13b.png)
+
+
+The [@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) plugin has lots of TypeScript-only eslint rules but also all basic eslint rules are usable in TypeScript projects. We should probably for now just use the recommended settings and see where it takes us and modify our rules as we go, if we find something we want to behave differently. 
+
+On top of the regular recommended settings we should already try to get familiar with coding styles we are using in this part and <i>set the semicolon at the end of each line of code to required</i>. 
+
+So we will use the following <i>.eslintrc</i> 
 
 ```json
 {
@@ -796,7 +803,7 @@ The <i>@typescript-eslint</i> plugin has lots of TypeScript-only lint rules but 
   ],
   "plugins": ["@typescript-eslint"],
   "env": {
-    "browser": true,
+    "node": true,
     "es6": true
   },
   "rules": {
@@ -812,6 +819,8 @@ The <i>@typescript-eslint</i> plugin has lots of TypeScript-only lint rules but 
   }
 }
 ```
+
+There are quite a few missing semicolons but those are easy to add.
 
 And now let's fix everything that needs to be fixed!
 
