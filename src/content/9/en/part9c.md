@@ -621,14 +621,14 @@ const getNonSensitiveEntries = (): NonSesitiveDiaryEntry [] => {
 };
 // highlight-end
 
-const addDiaryEntry = () => {
+const addDiary = () => {
   return []
 } 
 
 export default {
   getEntries,
   getNonSensitiveEntries,
-  addDiaryEntry
+  addDiary
 }
 ```
 
@@ -716,24 +716,24 @@ The DiaryService needs to be extended with  <i>findById</i>-function:
 const findById = (id: number): DiaryEntry => {
   const entry = diaries.find(d => d.id === id);
   return entry;
-}
+};
 // highlight-end
 
 export default {
   getEntries,
   getNonSensitiveEntries,
-  addDiaryEntry,
+  addDiary,
   findById // highlight-line
 }
 ```
 
-But once again, a new problem comes to light:
+But once again, a new problem comes into light:
 
 ![](../../images/9/23e.png)
 
-The thing with this request is that it can also return undefined - there is no absolute guarantee that an entry with the specific id can be found. This is a great thing to come up, since without TypeScript there would be no indication of this possibility and in the worst case you might end up returning a result of an _undefined_ object instead of informing of a not found situation in a reasonable way.
+The issue now it that there is no guarantee that an entry with the specific id can be found. It is good that this potentially problematic issue surfaces already at compile phase, since without TypeScript there would be no indication of this possibility and in the worst case you might end up returning a result of an <i>undefined</i> object instead of informing about the nonexistense of searched item by other means.
 
-In cases like this we first of all need to decide what is the desired return value if an object is not found, and how to handle the case. The value _undefined_ that is returned by _find_-method of an array is fine for us if a result is not found so we could solve our problem by typing the return value as follows
+In cases like this we first of all need to decide <i>what is the desired return value</i> if an object is not found, and how to handle the case. The value <i>undefined</i> that is returned by <i>find</i>-method of an array is actually fine for us if a result is not found. Thus we could solve our problem by typing the return value as follows
 
 ```js
 const findById = (id: number): DiaryEntry | undefined => { // highlight-line
@@ -765,27 +765,33 @@ export default router;
 
 ### Adding a new diary
 
-Let's start building the _post_ endpoint for adding flight diary entries. The accepted values should confirm to the example data.
+Let's start building the HTTP POST endpoint for adding flight diary entries. The accepted values should confirm to the example data.
 
 The code handling the response looks as follows
 
 ```js
 router.post('/', (req, res) => {
   const { date, weather, visibility, comment } = req.body;
-  const newDiaryEntry = diaryService.addDiaryEntry(
+  const newDiaryEntry = diaryService.AddEntry(
     date,
     weather,
     visibility,
     comment,
   );
   res.json(newDiaryEntry);
-})
+});
 ```
 
-corresponding method in _diaryService_ looks like this
+corresponding method in <i>diaryService</i> looks like this
 
 ```js
-const addDiaryEntry = (
+import {
+  NonSesitiveDiaryEntry, DiaryEntry,
+  Visibility, Weather // highlight-line
+  } from '../types';
+
+
+const addEntry = (
     date: string, weather: Weather, visibility: Visibility, comment: string
   ): DiaryEntry => {
     
@@ -802,12 +808,12 @@ const addDiaryEntry = (
 }
 ```
 
-As we can see the _addDiaryEntry_ function is growing to be pretty hard to read, when having all the fields as separate parameters. It might be better to just send the data as an object to the function:
+As we can see the <i>addDiary</i> function is growing to be pretty hard to read, when having all the fields as separate parameters. It might be better to just send the data as an object to the function:
 
 ```js
 router.post('/', (req, res) => {
   const { date, weather, visibility, comment } = req.body;
-  const newDiaryEntry = diaryService.addDiaryEntry({ // highlight-line
+  const newDiaryEntry = diaryService.addDiary({ // highlight-line
     date,
     weather,
     visibility,
@@ -817,33 +823,33 @@ router.post('/', (req, res) => {
 })
 ```
 
-But wait, what is the type of this object? It is not exactly a DiaryEntry, since it is still missign the _id_ field. It could be useful for us just to create a new type _NewDiaryEntry_ which could work as a type for the not-yet saved Entry-object. Let us create the new type in our _types.ts_-file using the existing _DiaryEntry_ object with the _Omit_ utility type:
+But wait, what is the type of this object? It is not exactly a <i>DiaryEntry</i>, since it is still missign the <i>id</i> field. It could be useful for us just to create a new type <i>NewDiaryEntry</i> which could work as a type for the not-yet saved diary. Let us create that in <i>types.ts</i> using the existing <i>DiaryEntry</i> object with the [Omit](http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk) utility type:
 
 ```js
-export type NewDiaryEntry = Omit<DiaryEntry, 'id'>
+export type NewDiaryEntry = Omit<DiaryEntry, 'id'>;
 ```
 
 And now we can use this type in our DiaryService and we can just destructure the whole new entry object when creating the entry to be saved: 
 
 ```js
-import { NewDiaryEntry, NonSesitiveDiaryEntry, DiaryEntry } from '../types' // highlight-line
+import { NewDiaryEntry, NonSesitiveDiaryEntry, DiaryEntry } from '../types'; // highlight-line
 
 // ...
 
-const addDiaryEntry = ( entry : NewDiaryEntry ): DiaryEntry => {  // highlight-line
+const addDiary = ( entry: NewDiaryEntry ): DiaryEntry => {  // highlight-line
   const newDiaryEntry = {
     id: Math.max(...diaries.map(d => d.id)) + 1,
-    ...entry  // highlight-line
-  }
-  
+    ...entry // highlight-line
+  };
+
   diaries.push(newDiaryEntry);
   return newDiaryEntry;
-}
+};
 ```
 
 Now the code looks much cleaner! 
 
-In order to parse the incoming data we must have the  _json_ middleware configured:
+In order to parse the incoming data we must have the  <i>json</i> middleware configured:
  
 ``` js
 import express from 'express';
@@ -866,7 +872,7 @@ and now the application is ready to receive HTTP POST requests for adding diarie
 
 There are a plenty of things that can go wrong when accepting data from an outside source. Applications work rarely fully on their own and we are forced to live with the fact that data sources outside of a single system cannot be fully trusted. When the data is coming from an outside source, there's no way that it can be already typed when we receive it so we need to make decision on how to handle the uncertainty that comes with the data.
 
-The way express handles parsing the request body is that it asserts the type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) to all the body fields. In our situation this doesn't come apparent in any way in the editor, but if we start looking at the variables more closely and hover on any of them, we can see that each of them is [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) and the editor doesn't complain when giving them to _addDiaryEntry_ as arguments: 
+The way express handles parsing the request body is that it asserts the type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) to all the body fields. In our situation this doesn't come apparent in any way in the editor, but if we start looking at the variables more closely and hover on any of them, we can see that each of them is [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) and the editor doesn't complain when giving them to <i>addDiary</i> as arguments: 
 
 ![](../../images/9/27.png)
 
@@ -886,7 +892,7 @@ router.post('/', (req, res) => {
   try {
     const newDiaryEntry = toNewDiaryEntry(req.body); // highlight-line
       
-    const addedEntry = diaryService.addDiaryEntry(newDiaryEntry); // highlight-line
+    const addedEntry = diaryService.addDiary(newDiaryEntry); // highlight-line
     res.json(addedEntry);
   } catch (e) {
     res.status(400).send(e.message); 
