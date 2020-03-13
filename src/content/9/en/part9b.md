@@ -495,7 +495,7 @@ Let us now use <i>tsconfig.json</i> that has the following form:
 }
 ```
 
-Do not worry too much about the <i>compilerOptions</i> selected here, they will be under closer inspection on part 2.
+Do not worry too much about the <i>compilerOptions</i> selected here, they will be under closer inspection later on.
 
 The explanations for each of the field can be found from TypeScript documentation or the really handy although beta-stage [tsconfig page](https://www.typescriptlang.org/v2/en/tsconfig) or in a little worse format in the tsconfig [schema definition](http://json.schemastore.org/tsconfig).
 
@@ -787,7 +787,7 @@ Lint is now complaining if we try to define a variable of type <i>any</i>:
 
 The [@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) plugin has lots of TypeScript-only eslint rules but also all basic eslint rules are usable in TypeScript projects. We should probably for now just use the recommended settings and see where it takes us and modify the rules as we go, if we find something we want to behave differently. 
 
-On top of the regular recommended settings, we should already try to get familiar with coding style we are using in this part and <i>set the semicolon at the end of each line of code to required</i>. 
+On top of the regular recommended settings, we should already try to get familiar with coding style we are using in this and <i>set the semicolon at the end of each line of code to required</i>. 
 
 So we will use the following <i>.eslintrc</i> 
 

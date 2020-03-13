@@ -529,11 +529,11 @@ export interface DiaryEntry {
 
 Sometimes we end up in a situation where we want to use a specific modification of a type. For example consider using a general listing page for data that has some non-sensitive and some  sensitive data. In a common listing page we might want to be sure that no sensitive data is being used or shown so we might only <i>pick</i> the fields of a type we allow to be used in that situation. For that we use the utility type [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk).
 
-In our example we should consider that Ilari might want to create a frontend listing of all his diary entries excluding the comment field, since during a very scary flight he might end up writing there something he wouldn't necessarily want to show anyone else.
+In our example we should consider that Ilari might want to create a listing of all his diary entries <i>excluding</i> the comment field, since during a very scary flight he might end up writing there something he wouldn't necessarily want to show anyone else.
 
-The [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk) utility type allows us to choose what fields of a type we want to use of the existing type. Pick can be used to construct a completely new type or just in time when informing a function what it should return, as any other typings can be used. Utility types are special kinds of type tools, but they are used exactly as regular types.
+The [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk) utility type allows us to choose what fields of a type we want to use of an existing type. Pick can be used to construct a completely new type or just in time when informing a function what it should return. Utility types are special kinds of type tools, but they are used exactly as regular types.
 
-In this case, in order to create this kind of "narrowed" version of the Entry type we could just use the Pick in the function declaration:
+In our case, in order to create this kind of "narrowed" version of the <i>DiaryEntry</i> type we could just use the Pick in the function declaration:
 
 ```js
 const getNonSensitiveEntries = 
@@ -553,7 +553,7 @@ const getNonSensitiveEntries =
   }
 ```
 
-Even better in this case when we want to exclude only one field, would be to use the *Omit* utility type, for which you can declare what fields to exclude:
+Even better in this case when we want to exclude only one field, would be to use the [Omit](http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk) utility type, for which you can declare what fields to exclude:
 
 ```js
 const getNonSensitiveEntries = (): Omit<DiaryEntry, 'comment'>[] => {
@@ -562,43 +562,42 @@ const getNonSensitiveEntries = (): Omit<DiaryEntry, 'comment'>[] => {
 ```
 
 
-Another way would be to declare a completely new type for the _NonSensitiveDiaryEntry_:
+Another way would be to declare a completely new type for the <i>NonSensitiveDiaryEntry</i>:
 
 ```js
-type NonSesitiveDiaryEntry = Omit<DiaryEntry, 'comment'>;
+export type NonSesitiveDiaryEntry = Omit<DiaryEntry, 'comment'>;
 ```
 
-The code is now
+The code becomes now
 
 ```js
-import diaries from '../../data/entries.js'
+import diaries from '../../data/diaries';
+import { NonSesitiveDiaryEntry, DiaryEntry } from '../types'; // highlight-line
 
-import { NonSesitiveDiaryEntry, DiaryEntry } from '../types'
+const getEntries = (): DiaryEntry[] => {
+  return diaries;
+};
 
-const getEntries = () : DiaryEntry[] => {
-  return diaries
-} 
+const getNonSensitiveEntries = (): NonSesitiveDiaryEntry[] => { // highlight-line
+  return diaries;
+};
 
-const getNonSensitiveEntries = (): NonSesitiveDiaryEntry[] => {
-  return diaries
-}
-
-const addDiaryEntry = () => {
-  return []
-} 
+const addEntry = () => {
+  return null;
+};
 
 export default {
   getEntries,
-  getNonSensitiveEntries,
-  addDiaryEntry
-}
+  addEntry,
+  getNonSensitiveEntries // highlight-line
+};
 ```
 
-One thing causes a bit of concern. In the function _getNonSensitiveEntries_ we are returning the complete entries of diaries and <i>no error is given</i> despite typing!
+One thing causes a bit of concern. In the function <i>getNonSensitiveEntries</i> we are returning the complete entries of diaries and <i>no error is given</i> despite typing!
 
-This is because TypeScript can only check whether we have all the wanted fields or not, but excess fields are not prohibited. In our case it means that it is <i>not prohibited</i> to return the DiaryEntry[] type object, but if we were to try to get a hold of the field <i>comment</i> where the diary is returned, it would not be restricted since it would be pointing to a field that TypeScript is unaware of even though it exists.
+This is because [TypeScript only checks](http://www.typescriptlang.org/docs/handbook/type-compatibility.html) whether we have all the wanted fields or not, but excess fields are not prohibited. In our case it means that it is <i>not prohibited</i> to return the <i>DiaryEntry[]</i> type object, but if we were to try to get a hold of the field <i>comment</i> where the diary is returned, it would not be restricted since it would be pointing to a field that TypeScript is unaware of even though it exists.
 
-Unfortunately this can lead to unwanted behaviour if you are not aware of what you are doing; this situation is valid in terms of TypeScript but is most likely allowing use that is not wanted. If we now return all of the diaryEntries from the function _getNonSensitiveEntries_ as they are to <i>frontend</i>, we are actually leaking the unwanted fields for the requesting browser even though our types imply otherwise!
+Unfortunately this can lead to unwanted behaviour if you are not aware of what you are doing; this situation is valid in terms of TypeScript but is most likely allowing use that is not wanted. If we now return all of the diaryEntries from the function <i>getNonSensitiveEntries</i> as they are to <i>frontend</i>, we are actually leaking the unwanted fields for the requesting browser even though our types seem to imply otherwise!
 
 Because TypeScript doesn't modify the actual data but only types it, we need to implement the exclusion of the fields:
 
@@ -612,14 +611,14 @@ const getEntries = () : DiaryEntry[] => {
 } 
 
 // highlight-start
-const getNonSensitiveEntries = () : NonSesitiveDiaryEntry [] => {
+const getNonSensitiveEntries = (): NonSesitiveDiaryEntry [] => {
   return diaries.map(({ id, date, weather, visibility }) => ({
     id,
     date,
     weather,
     visibility,
-  }))
-}
+  }));
+};
 // highlight-end
 
 const addDiaryEntry = () => {
@@ -633,7 +632,7 @@ export default {
 }
 ```
 
-If we tried to return this data with the basic _DiaryEntry_ type, i.e. if we would type the function as follows
+If we nw would try to return this data with the basic <i>DiaryEntry</i> type, i.e. if we would type the function as follows
 
 ```js
 const getNonSensitiveEntries = () : DiaryEntry[] => {
@@ -641,30 +640,32 @@ const getNonSensitiveEntries = () : DiaryEntry[] => {
 
 we would get the following error:
 
-![](../../images/9/22a.png)
+![](../../images/9/22b.png)
 
-Utility types includes a large set of handy tools and it is definitely worthwhile to take some time studying [their documentation](https://www.typescriptlang.org/docs/handbook/utility-types.html).
+Again the last line of error message is the most helpful one. Let us now undo this undesired modification.
+
+Utility types include a large set of handy tools and it is definitely worthwhile to take some time studying [the documentation](https://www.typescriptlang.org/docs/handbook/utility-types.html).
 
 Finally we can complete the route that returns all diary entries:
 
 ```js
 import express from 'express';
-import diaryService from '../services/diaryService'  // highlight-line
+import diaryService from '../services/diaryService';  // highlight-line
 
 const router = express.Router();
 
 router.get('/', (_req, res) => {
   res.send(diaryService.getNonSensitiveEntries()); // highlight-line
-})
+});
 
 router.post('/', (_req, res) => {
     res.send('Saving a diary!');
-})
+});
 
 export default router;
 ```
 
-The response looks like as we expect
+The response is what we expect it to be
 
 ![](../../images/9/26.png)
 
