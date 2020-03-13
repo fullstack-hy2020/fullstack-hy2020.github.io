@@ -401,7 +401,7 @@ should print the following message
 Normal (healthy weight)
 ```
 
-Create a npm script for running the program with command <i>npm run calculateeBmi</i>
+Create a npm script for running the program with command <i>npm run calculateBmi</i>
 
 #### 9.2 Exercise calculator
 
