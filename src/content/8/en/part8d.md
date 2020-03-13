@@ -282,7 +282,7 @@ The current code of the application can be found on [Github](https://github.com/
 
 <div class="tasks">
 
-### Exercises
+### Exercises 8.17.-8.22.
 
 #### 8.17 Listing books
 

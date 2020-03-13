@@ -611,7 +611,7 @@ I added this chapter to the material after the model answer for the next questio
 
 <div class="tasks">
 
-<h3>Exercises</h3>
+<h3>Exercises 2.1.-2.5.</h3>
 
 The exercises are submitted via GitHub, and by marking the exercises as done in the [submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2020).
 

@@ -534,7 +534,7 @@ The <i>ref</i> attribute is used for assigning a reference to each of the compon
 <div class="tasks">
 
 
-### Exercises
+### Exercises 5.5.-5.10.
 
 
 #### 5.5 Blog list frontend, step5
@@ -850,7 +850,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 <div class="tasks">
 
-### Exercises
+### Exercises 5.11.-5.12.
 
 #### 5.11: Blog list frontend, step11
 

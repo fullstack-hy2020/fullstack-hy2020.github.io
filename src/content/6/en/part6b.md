@@ -466,7 +466,7 @@ You can find the code for our current application in its entirety in the <i>part
 <div class="tasks">
 
 
-### Exercises
+### Exercises 6.9.-6.12.
 
 
 Let's continue working on the anecdote application using redux that we started in exercise 6.3. 

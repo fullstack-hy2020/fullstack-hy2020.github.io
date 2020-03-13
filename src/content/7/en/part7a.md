@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-The exercises in this seventh part of the course differ a bit from the ones before. In this and the next chapter there is, as usual [exercises related to the theory in the chapter](/en/part7/react_router#exercises).
+The exercises in this seventh part of the course differ a bit from the ones before. In this and the next chapter there is, as usual [exercises related to the theory in the chapter](/en/part7/react_router#exercises-7-1-7-3).
 
 In addition to the exercises in this and the chapter, there is a series of exercises which revise what we've learned during the whole course by expanding the Bloglist application which we worked on during parts 4 and 5.
 
@@ -567,7 +567,7 @@ The completed code can be found from [here](https://github.com/fullstack-hy2020/
 </div>
 <div class="tasks">
 
-### Exercises
+### Exercises 7.1.7.3.
 
 Let's return to working with anecdotes. Use the redux-free anecdote app found in the repository <https://github.com/fullstack-hy2020/routed-anecdotes> as the starting point for the exercises.
 

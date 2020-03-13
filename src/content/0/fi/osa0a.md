@@ -42,8 +42,8 @@ Osien **deadlinet** ovat maanantaisin klo 23:59, poikkeuksena kaksi viimeistä o
 | osa 4          |        ma 17.2.       |
 | osa 5          |        ma 24.2.       |
 | osa 6          |        ma 2.3.        |
-| osa 7          |        la 14.3.       |
-| osa 8          |        la 14.3.       |
+| osa 7          |        su 15.3.       |
+| osa 8          |        su 15.3.       |
 
 Tämän kurssin eri osiin jo tehtyjen palautusten ajankäyttöstatistiikan näet [tehtävien palautussovelluksesta](https://study.cs.helsinki.fi/stats/courses/fullstack2020/).
 
