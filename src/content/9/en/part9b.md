@@ -54,7 +54,7 @@ It is worth mentioning, that TypeScript also provides an online playground, wher
 
 #### A note about the coding sytle
 
-JavaScript in itself is a fairly loose language and things often can be done in multiple different ways, for example named vs anonymous functions, using const and let or var and the use of <i>semicolons</i>. This part of the course differs from the rest by using semicolons. It is not a TypeScript specific pattern but a general coding style decision when creating any kind of JavaScript. Whether to use them or not is usually in the hands of the programmer but since it is expected to adapt ones coding habits to the existing codebase, in the exercises of this part it is expected to use semicolons and to adjust to the coding style of the part. This part contains also some other coding style differences e.g. in the directory naming compared to the rest od the course.
+JavaScript in itself is a fairly loose language and things often can be done in multiple different ways, for example named vs anonymous functions, using const and let or var and the use of <i>semicolons</i>. This part of the course differs from the rest by using semicolons. It is not a TypeScript specific pattern but a general coding style decision when creating any kind of JavaScript. Whether to use them or not is usually in the hands of the programmer but since it is expected to adapt ones coding habits to the existing codebase, in the exercises of this part it is expected to use semicolons and to adjust to the coding style of the part. This part contains also some other coding style differences e.g. in the directory naming compared to the rest of the course.
 
 Let us start now by creating a simple Multiplier, exactly as you would in JavaScript.
 
@@ -84,7 +84,7 @@ Now when running the code, the example still produce an output, which is now:
 
 Wouldn't it be nice if there was a way that the language itself could prevent us from ending up in situations like this? This is where we get the first benefits of TypeScript into use. Let's add types to the parameters and see where it takes us.
 
-TypeScript natively supports multiple types including <i>number</i>, <i>string</i>, <i>Array</i> see the comprehensive list [here](https://www.typescriptlang.org/docs/handbook/basic-types.html). More complex custom types can also be created.
+TypeScript natively supports multiple types including <i>number</i>, <i>string</i>, <i>Array</i>. See the comprehensive list [here](https://www.typescriptlang.org/docs/handbook/basic-types.html). More complex custom types can also be created.
 
 The first two parameters of our function are of the type [number](http://www.typescriptlang.org/docs/handbook/basic-types.html#number) and the last is [string](http://www.typescriptlang.org/docs/handbook/basic-types.html#string):
 
@@ -200,7 +200,7 @@ const calculator = (a: number, b: number, op : Operation) : Result => {
     case 'multiply':
       return a * b;
     case 'divide':
-      if( b === 0) throw new Error('can\'t divide by 0!');
+      if( b === 0) throw new Error('Can\'t divide by 0!');
       return a / b;
     case 'add':
       return a + b;
