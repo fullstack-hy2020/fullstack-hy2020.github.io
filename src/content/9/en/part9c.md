@@ -529,11 +529,11 @@ export interface DiaryEntry {
 
 Sometimes we end up in a situation where we want to use a specific modification of a type. For example consider using a general listing page for data that has some non-sensitive and some  sensitive data. In a common listing page we might want to be sure that no sensitive data is being used or shown so we might only <i>pick</i> the fields of a type we allow to be used in that situation. For that we use the utility type [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk).
 
-In our example we should consider that Ilari might want to create a frontend listing of all his diary entries excluding the comment field, since during a very scary flight he might end up writing there something he wouldn't necessarily want to show anyone else.
+In our example we should consider that Ilari might want to create a listing of all his diary entries <i>excluding</i> the comment field, since during a very scary flight he might end up writing there something he wouldn't necessarily want to show anyone else.
 
-The [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk) utility type allows us to choose what fields of a type we want to use of the existing type. Pick can be used to construct a completely new type or just in time when informing a function what it should return, as any other typings can be used. Utility types are special kinds of type tools, but they are used exactly as regular types.
+The [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk) utility type allows us to choose what fields of a type we want to use of an existing type. Pick can be used to construct a completely new type or just in time when informing a function what it should return. Utility types are special kinds of type tools, but they are used exactly as regular types.
 
-In this case, in order to create this kind of "narrowed" version of the Entry type we could just use the Pick in the function declaration:
+In our case, in order to create this kind of "narrowed" version of the <i>DiaryEntry</i> type we could just use the Pick in the function declaration:
 
 ```js
 const getNonSensitiveEntries = 
@@ -553,7 +553,7 @@ const getNonSensitiveEntries =
   }
 ```
 
-Even better in this case when we want to exclude only one field, would be to use the *Omit* utility type, for which you can declare what fields to exclude:
+Even better in this case when we want to exclude only one field, would be to use the [Omit](http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk) utility type, for which you can declare what fields to exclude:
 
 ```js
 const getNonSensitiveEntries = (): Omit<DiaryEntry, 'comment'>[] => {
@@ -562,43 +562,42 @@ const getNonSensitiveEntries = (): Omit<DiaryEntry, 'comment'>[] => {
 ```
 
 
-Another way would be to declare a completely new type for the _NonSensitiveDiaryEntry_:
+Another way would be to declare a completely new type for the <i>NonSensitiveDiaryEntry</i>:
 
 ```js
-type NonSesitiveDiaryEntry = Omit<DiaryEntry, 'comment'>;
+export type NonSesitiveDiaryEntry = Omit<DiaryEntry, 'comment'>;
 ```
 
-The code is now
+The code becomes now
 
 ```js
-import diaries from '../../data/entries.js'
+import diaries from '../../data/diaries';
+import { NonSesitiveDiaryEntry, DiaryEntry } from '../types'; // highlight-line
 
-import { NonSesitiveDiaryEntry, DiaryEntry } from '../types'
+const getEntries = (): DiaryEntry[] => {
+  return diaries;
+};
 
-const getEntries = () : DiaryEntry[] => {
-  return diaries
-} 
+const getNonSensitiveEntries = (): NonSesitiveDiaryEntry[] => { // highlight-line
+  return diaries;
+};
 
-const getNonSensitiveEntries = (): NonSesitiveDiaryEntry[] => {
-  return diaries
-}
-
-const addDiaryEntry = () => {
-  return []
-} 
+const addEntry = () => {
+  return null;
+};
 
 export default {
   getEntries,
-  getNonSensitiveEntries,
-  addDiaryEntry
-}
+  addEntry,
+  getNonSensitiveEntries // highlight-line
+};
 ```
 
-One thing causes a bit of concern. In the function _getNonSensitiveEntries_ we are returning the complete entries of diaries and <i>no error is given</i> despite typing!
+One thing causes a bit of concern. In the function <i>getNonSensitiveEntries</i> we are returning the complete entries of diaries and <i>no error is given</i> despite typing!
 
-This is because TypeScript can only check whether we have all the wanted fields or not, but excess fields are not prohibited. In our case it means that it is <i>not prohibited</i> to return the DiaryEntry[] type object, but if we were to try to get a hold of the field <i>comment</i> where the diary is returned, it would not be restricted since it would be pointing to a field that TypeScript is unaware of even though it exists.
+This is because [TypeScript only checks](http://www.typescriptlang.org/docs/handbook/type-compatibility.html) whether we have all the wanted fields or not, but excess fields are not prohibited. In our case it means that it is <i>not prohibited</i> to return the <i>DiaryEntry[]</i> type object, but if we were to try to get a hold of the field <i>comment</i> where the diary is returned, it would not be restricted since it would be pointing to a field that TypeScript is unaware of even though it exists.
 
-Unfortunately this can lead to unwanted behaviour if you are not aware of what you are doing; this situation is valid in terms of TypeScript but is most likely allowing use that is not wanted. If we now return all of the diaryEntries from the function _getNonSensitiveEntries_ as they are to <i>frontend</i>, we are actually leaking the unwanted fields for the requesting browser even though our types imply otherwise!
+Unfortunately this can lead to unwanted behaviour if you are not aware of what you are doing; this situation is valid in terms of TypeScript but is most likely allowing use that is not wanted. If we now return all of the diaryEntries from the function <i>getNonSensitiveEntries</i> as they are to <i>frontend</i>, we are actually leaking the unwanted fields for the requesting browser even though our types seem to imply otherwise!
 
 Because TypeScript doesn't modify the actual data but only types it, we need to implement the exclusion of the fields:
 
@@ -612,28 +611,28 @@ const getEntries = () : DiaryEntry[] => {
 } 
 
 // highlight-start
-const getNonSensitiveEntries = () : NonSesitiveDiaryEntry [] => {
+const getNonSensitiveEntries = (): NonSesitiveDiaryEntry [] => {
   return diaries.map(({ id, date, weather, visibility }) => ({
     id,
     date,
     weather,
     visibility,
-  }))
-}
+  }));
+};
 // highlight-end
 
-const addDiaryEntry = () => {
+const addDiary = () => {
   return []
 } 
 
 export default {
   getEntries,
   getNonSensitiveEntries,
-  addDiaryEntry
+  addDiary
 }
 ```
 
-If we tried to return this data with the basic _DiaryEntry_ type, i.e. if we would type the function as follows
+If we nw would try to return this data with the basic <i>DiaryEntry</i> type, i.e. if we would type the function as follows
 
 ```js
 const getNonSensitiveEntries = () : DiaryEntry[] => {
@@ -641,30 +640,32 @@ const getNonSensitiveEntries = () : DiaryEntry[] => {
 
 we would get the following error:
 
-![](../../images/9/22a.png)
+![](../../images/9/22b.png)
 
-Utility types includes a large set of handy tools and it is definitely worthwhile to take some time studying [their documentation](https://www.typescriptlang.org/docs/handbook/utility-types.html).
+Again the last line of error message is the most helpful one. Let us now undo this undesired modification.
+
+Utility types include a large set of handy tools and it is definitely worthwhile to take some time studying [the documentation](https://www.typescriptlang.org/docs/handbook/utility-types.html).
 
 Finally we can complete the route that returns all diary entries:
 
 ```js
 import express from 'express';
-import diaryService from '../services/diaryService'  // highlight-line
+import diaryService from '../services/diaryService';  // highlight-line
 
 const router = express.Router();
 
 router.get('/', (_req, res) => {
   res.send(diaryService.getNonSensitiveEntries()); // highlight-line
-})
+});
 
 router.post('/', (_req, res) => {
     res.send('Saving a diary!');
-})
+});
 
 export default router;
 ```
 
-The response looks like as we expect
+The response is what we expect it to be
 
 ![](../../images/9/26.png)
 
@@ -674,23 +675,29 @@ The response looks like as we expect
 
 ### Exercises 9.10.-9.11.
 
-Simillarly to Ilari's flight service, we do not use a real database in our app but instead use hardcoded data, that is in the files [diagnoses.json](https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.json) and [patientdata.json](https://github.com/fullstack-hy2020/misc/blob/master/patientdata.json). Download the files and store those into a folder called _data_. All data modification can be done in runtime memory, so during this part it is <i>not necessary to write to a file</i>.
+Simillarly to Ilari's flight service, we do not use a real database in our app but instead use hardcoded data, that is in the files [diagnoses.json](https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.json) and [patients.json](https://github.com/fullstack-hy2020/misc/blob/master/patients.json). Get the files and store those into a directory called <i>data</i> under your project. All data modification can be done in runtime memory, so during this part it is <i>not necessary to write to a file</i>.
 
 #### 9.10: Patientor backend, step3
 
-Create a type _Diagnose_ and use it to create endpoint _/api/diagnoses_ for fetching all diagnoses with HTTP GET.
+Create a type <i>Diagnose</i> and use it to create endpoint <i>/api/diagnoses</i> for fetching all diagnoses with HTTP GET.
 
 Structure your code properly by using meaninfully named directories and files.
 
-**Note** that _diagnoses_ may or may not contain the field _latin_. You might want to use [optional properties](https://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties) in the type definition.
+**Note** that <i>diagnoses</i> may or may not contain the field <i>latin</i>. You might want to use [optional properties](https://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties) in the type definition.
 
 #### 9.11: Patientor backend, step4
 
-Create data type _Patient_ and set up a GET-endpoint _/api/patients_ that returns all patients to the frontend excluding field _ssn_. Use a [utility type](https://www.typescriptlang.org/docs/handbook/utility-types.html) to make sure you are selecting and returning only the wanted.
+Create data type <i>Patient</i> and set up a GET-endpoint <i>/api/patients</i> that returns all patients to the frontend excluding field <i>ssn</i>. Use a [utility type](https://www.typescriptlang.org/docs/handbook/utility-types.html) to make sure you are selecting and returning only the wanted.
 
-Try the endpoint with browser and make sure that _ssn_ is not included in response.
+In this exercise you may assume that field <i>gender</i> has type <i>string</i>.
 
-After creating the endpoint, ensure that the <i>frontend</i> shows the list of patients.
+Try the endpoint with browser and to sure that <i>ssn</i> is not included in response:
+
+![](../../images/9/22g.png)
+
+After creating the endpoint, ensure that the <i>frontend</i> shows the list of patients:
+
+![](../../images/9/22h.png)
 
 </div>
 
@@ -698,9 +705,9 @@ After creating the endpoint, ensure that the <i>frontend</i> shows the list of p
 
 ### Preventing an accidental undefined result
 
-Let us expand the backend to support fetching one specific entry with a HTTP GET request to route _/api/diaries/:id_ e
+Let us expand the backend to support fetching one specific entry with a HTTP GET request to route <i>api/diaries/:id</i>
 
-The DiaryService needs to be extended with  _findById_-function:
+The DiaryService needs to be extended with  <i>findById</i>-function:
 
 ```js
 // ...
@@ -709,24 +716,24 @@ The DiaryService needs to be extended with  _findById_-function:
 const findById = (id: number): DiaryEntry => {
   const entry = diaries.find(d => d.id === id);
   return entry;
-}
+};
 // highlight-end
 
 export default {
   getEntries,
   getNonSensitiveEntries,
-  addDiaryEntry,
+  addDiary,
   findById // highlight-line
 }
 ```
 
-But once again, a new problem comes to light:
+But once again, a new problem comes into light:
 
 ![](../../images/9/23e.png)
 
-The thing with this request is that it can also return undefined - there is no absolute guarantee that an entry with the specific id can be found. This is a great thing to come up, since without TypeScript there would be no indication of this possibility and in the worst case you might end up returning a result of an _undefined_ object instead of informing of a not found situation in a reasonable way.
+The issue now it that there is no guarantee that an entry with the specific id can be found. It is good that this potentially problematic issue surfaces already at compile phase, since without TypeScript there would be no indication of this possibility and in the worst case you might end up returning a result of an <i>undefined</i> object instead of informing about the nonexistense of searched item by other means.
 
-In cases like this we first of all need to decide what is the desired return value if an object is not found, and how to handle the case. The value _undefined_ that is returned by _find_-method of an array is fine for us if a result is not found so we could solve our problem by typing the return value as follows
+In cases like this we first of all need to decide <i>what is the desired return value</i> if an object is not found, and how to handle the case. The value <i>undefined</i> that is returned by <i>find</i>-method of an array is actually fine for us if a result is not found. Thus we could solve our problem by typing the return value as follows
 
 ```js
 const findById = (id: number): DiaryEntry | undefined => { // highlight-line
@@ -758,27 +765,33 @@ export default router;
 
 ### Adding a new diary
 
-Let's start building the _post_ endpoint for adding flight diary entries. The accepted values should confirm to the example data.
+Let's start building the HTTP POST endpoint for adding flight diary entries. The accepted values should confirm to the example data.
 
 The code handling the response looks as follows
 
 ```js
 router.post('/', (req, res) => {
   const { date, weather, visibility, comment } = req.body;
-  const newDiaryEntry = diaryService.addDiaryEntry(
+  const newDiaryEntry = diaryService.AddEntry(
     date,
     weather,
     visibility,
     comment,
   );
   res.json(newDiaryEntry);
-})
+});
 ```
 
-corresponding method in _diaryService_ looks like this
+corresponding method in <i>diaryService</i> looks like this
 
 ```js
-const addDiaryEntry = (
+import {
+  NonSesitiveDiaryEntry, DiaryEntry,
+  Visibility, Weather // highlight-line
+  } from '../types';
+
+
+const addEntry = (
     date: string, weather: Weather, visibility: Visibility, comment: string
   ): DiaryEntry => {
     
@@ -795,12 +808,12 @@ const addDiaryEntry = (
 }
 ```
 
-As we can see the _addDiaryEntry_ function is growing to be pretty hard to read, when having all the fields as separate parameters. It might be better to just send the data as an object to the function:
+As we can see the <i>addDiary</i> function is growing to be pretty hard to read, when having all the fields as separate parameters. It might be better to just send the data as an object to the function:
 
 ```js
 router.post('/', (req, res) => {
   const { date, weather, visibility, comment } = req.body;
-  const newDiaryEntry = diaryService.addDiaryEntry({ // highlight-line
+  const newDiaryEntry = diaryService.addDiary({ // highlight-line
     date,
     weather,
     visibility,
@@ -810,33 +823,33 @@ router.post('/', (req, res) => {
 })
 ```
 
-But wait, what is the type of this object? It is not exactly a DiaryEntry, since it is still missign the _id_ field. It could be useful for us just to create a new type _NewDiaryEntry_ which could work as a type for the not-yet saved Entry-object. Let us create the new type in our _types.ts_-file using the existing _DiaryEntry_ object with the _Omit_ utility type:
+But wait, what is the type of this object? It is not exactly a <i>DiaryEntry</i>, since it is still missign the <i>id</i> field. It could be useful for us just to create a new type <i>NewDiaryEntry</i> which could work as a type for the not-yet saved diary. Let us create that in <i>types.ts</i> using the existing <i>DiaryEntry</i> object with the [Omit](http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk) utility type:
 
 ```js
-export type NewDiaryEntry = Omit<DiaryEntry, 'id'>
+export type NewDiaryEntry = Omit<DiaryEntry, 'id'>;
 ```
 
 And now we can use this type in our DiaryService and we can just destructure the whole new entry object when creating the entry to be saved: 
 
 ```js
-import { NewDiaryEntry, NonSesitiveDiaryEntry, DiaryEntry } from '../types' // highlight-line
+import { NewDiaryEntry, NonSesitiveDiaryEntry, DiaryEntry } from '../types'; // highlight-line
 
 // ...
 
-const addDiaryEntry = ( entry : NewDiaryEntry ): DiaryEntry => {  // highlight-line
+const addDiary = ( entry: NewDiaryEntry ): DiaryEntry => {  // highlight-line
   const newDiaryEntry = {
     id: Math.max(...diaries.map(d => d.id)) + 1,
-    ...entry  // highlight-line
-  }
-  
+    ...entry // highlight-line
+  };
+
   diaries.push(newDiaryEntry);
   return newDiaryEntry;
-}
+};
 ```
 
 Now the code looks much cleaner! 
 
-In order to parse the incoming data we must have the  _json_ middleware configured:
+In order to parse the incoming data we must have the  <i>json</i> middleware configured:
  
 ``` js
 import express from 'express';
@@ -859,7 +872,7 @@ and now the application is ready to receive HTTP POST requests for adding diarie
 
 There are a plenty of things that can go wrong when accepting data from an outside source. Applications work rarely fully on their own and we are forced to live with the fact that data sources outside of a single system cannot be fully trusted. When the data is coming from an outside source, there's no way that it can be already typed when we receive it so we need to make decision on how to handle the uncertainty that comes with the data.
 
-The way express handles parsing the request body is that it asserts the type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) to all the body fields. In our situation this doesn't come apparent in any way in the editor, but if we start looking at the variables more closely and hover on any of them, we can see that each of them is [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) and the editor doesn't complain when giving them to _addDiaryEntry_ as arguments: 
+The way express handles parsing the request body is that it asserts the type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) to all the body fields. In our situation this doesn't come apparent in any way in the editor, but if we start looking at the variables more closely and hover on any of them, we can see that each of them is [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) and the editor doesn't complain when giving them to <i>addDiary</i> as arguments: 
 
 ![](../../images/9/27.png)
 
@@ -879,7 +892,7 @@ router.post('/', (req, res) => {
   try {
     const newDiaryEntry = toNewDiaryEntry(req.body); // highlight-line
       
-    const addedEntry = diaryService.addDiaryEntry(newDiaryEntry); // highlight-line
+    const addedEntry = diaryService.addDiary(newDiaryEntry); // highlight-line
     res.json(addedEntry);
   } catch (e) {
     res.status(400).send(e.message); 

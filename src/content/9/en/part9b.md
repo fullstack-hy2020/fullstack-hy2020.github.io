@@ -552,8 +552,12 @@ Let's specify the following configurations in our <i>tsconfig.json</i> file:
 }
 ```
 
+<<<<<<< HEAD
 <!-- Do not worry too much about the <i>compilerOptions</i> selected here, they will be under closer inspection on part 2. -->
 Do not worry too much about the <i>compilerOptions</i>, they will be under closer inspection on part 2.
+=======
+Do not worry too much about the <i>compilerOptions</i> selected here, they will be under closer inspection later on.
+>>>>>>> e65c1cec73a7c17169c21bd8101cf97f0f991583
 
 <!-- The explanations for each of the field can be found from TypeScript documentation or the really handy although beta-stage [tsconfig page](https://www.typescriptlang.org/v2/en/tsconfig) or in a little worse format in the tsconfig [schema definition](http://json.schemastore.org/tsconfig). -->
 You can find explanations for each of the configurations from the TypeScript documentation, or the really handy although beta-stage [tsconfig page](https://www.typescriptlang.org/v2/en/tsconfig), or from the tsconfig [schema definition](http://json.schemastore.org/tsconfig), which unfortunately is formatted a little worse than the first two options. 
@@ -893,8 +897,12 @@ The [@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint)
 you can also use all basic eslint rules in TypeScript projects. 
 For now we should propably go with the recommended settings and modify the rules as we go along whenever we find something we want to behave differently. 
 
+<<<<<<< HEAD
 <!-- On top of the regular recommended settings, we should already try to get familiar with coding style we are using in this part and <i>set the semicolon at the end of each line of code to required</i>.  -->
 On top of the recommended settings, we should try to get familiar with the coding style required in this part and <i>set the semicolon at the end of each line of code to required</i>.
+=======
+On top of the regular recommended settings, we should already try to get familiar with coding style we are using in this and <i>set the semicolon at the end of each line of code to required</i>. 
+>>>>>>> e65c1cec73a7c17169c21bd8101cf97f0f991583
 
 So we will use the following <i>.eslintrc</i> 
 
