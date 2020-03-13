@@ -756,7 +756,7 @@ The code for the current state of our application can be found in the  <i>part2-
 
 <div class="tasks">
 
-<h3>Exercises</h3>
+<h3>Exercises 2.15.-2.18.</h3>
 
 <h4>2.15: Phonebook step7</h4>
 

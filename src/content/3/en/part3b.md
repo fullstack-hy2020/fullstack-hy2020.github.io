@@ -278,7 +278,7 @@ Current code of the backend can be found on [Github](https://github.com/fullstac
 
 <div class="tasks">
 
-### Exercises
+### Exercises 3.9.-3.11.
 
 The following exercises don't require many lines of code. They can however be challenging, because you must understand exactly what is happening and where, and the configurations must be just right. 
 

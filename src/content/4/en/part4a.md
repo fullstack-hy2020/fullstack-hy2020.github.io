@@ -343,7 +343,7 @@ If you clone the project for yourself, run the _npm install_ command before star
 
 <div class="tasks">
 
-### Exercises
+### Exercises 4.1.-4.2.
 
 In the exercises for this part we will be building a <i>blog list application</i>, that allows users to save information about interesting blogs they have stumbled across on the internet. For each listed blog we will save the author, title, url, and amount of upvotes from users of the application.
 
@@ -664,7 +664,7 @@ test('of empty array is zero', () => {
 <div class="tasks">
 
 
-### Exercises
+### Exercises 4.3.-4.7.
 
 
 Let's create a collection of helper functions that are meant to assist dealing with the blog list. Create the functions into a file called <i>utils/list_helper.js</i>. Write your tests into an appropriately named test file under the <i>tests</i> directory.

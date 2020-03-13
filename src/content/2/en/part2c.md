@@ -538,7 +538,7 @@ At this point in development, all the parts of the application happen to reside 
 <div class="tasks">
 
 
-<h3>Exercises</h3>
+<h3>Exercises 2.11.-2.14.</h3>
 
 
 <h4>2.11: The Phonebook Step6</h4>

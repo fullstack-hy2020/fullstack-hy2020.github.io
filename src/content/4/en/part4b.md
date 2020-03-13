@@ -965,7 +965,7 @@ The asynchronous nature of JavaScript can lead to surprising behavior, and for t
 <div class="tasks">
 
 
-### Exercises
+### Exercises 4.8.-4.12.
 
 
 **NB:** the material uses the [toContain](https://facebook.github.io/jest/docs/en/expect.html#tocontainitem) matcher in several places to verify that an array contains a specific element. It's worth noting that the method uses the === operator for comparing and matching elements, which means that it is often not well-suited for matching objects. In most cases, the appropriate method for verifying objects in arrays is the [toContainEqual](https://facebook.github.io/jest/docs/en/expect.html#tocontainequalitem) matcher. However, the model solutions don't check for objects in arrays with matchers, so using the method is not required for solving the exercises.
@@ -1210,7 +1210,7 @@ You can find the code for our current application in its entirety in the <i>part
 <div class="tasks">
 
 
-### Exercises
+### Exercises 4.13.-4.14.
 
 
 #### 4.13 Blog list expansions, step1

@@ -322,7 +322,7 @@ The internet is starting to fill up with more and more helpful material related 
 <div class="tasks">
 
 
-### Exercises
+### Exercises 7.4.-7.8.
 
 We'll continue with the app from [exercises](/osa7/custom_hookit#tehtavat-7-4-7-6) of the chapter [react router](/en/part7/react_router). 
 
