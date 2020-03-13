@@ -879,12 +879,12 @@ The way Express handles parsing the request body is that it asserts the type [an
 The value of type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#an) can be assigned to <i>any</i> type of variable since it <i>might be</i> the wanted type. This is definitiely not safe to trust so 
 check the incoming values (regardless whether we are using TypeScript or not).
 
-We could just add simple <i>exists</i> and <i>is-value-valid</i> checks to the function defining the route but since we also need to ensure that <i>Weather</i> and <i>Visibility</i> values are of the correct form, it is better to write the put the parsing and validation logic to a separate file <i>utils.ts</i>.
+We could just add simple <i>exists</i> and <i>is-value-valid</i> checks to the function defining the route but since we also need to ensure that <i>Weather</i> and <i>Visibility</i> values are of the correct form, it is better to write the parsing and validation logic to a separate file <i>utils.ts</i>.
 
 Our intention is to define a function <i>toNewDiaryEntry</i> that gets the request body as a parameter and returns a properly typed <i>NewDiaryEntry</i>. Route definition uses the function as follows
 
 ```js
-import toNewDiaryEntry from '../utils' // highlight-line
+import toNewDiaryEntry from '../utils'; // highlight-line
 
 // ...
 
@@ -905,14 +905,14 @@ Since we are now making trustworthy code and trying to make sure that we are get
 The skeleton of the function <i>toNewDiaryEntry</i> looks like the following:
 
 ```js
-import { NewDiaryEntry } from './types'
+import { NewDiaryEntry } from './types';
 
-const toNewDiaryEntry = (object) : NewDiaryEntry => {
+const toNewDiaryEntry = (object): NewDiaryEntry => {
   const newEntry: NewDiaryEntry = {
     // ...
   }
   
-  return newEntry
+  return newEntry;
 } 
 
 export default toNewDiaryEntry;
@@ -920,13 +920,13 @@ export default toNewDiaryEntry;
 
 In the function we want to parse each field and make sure that what is returned is exactly of type <i>NewDiaryEntry</i>. Thus we should check each field separately. 
 
-Once again we have a typing issue: what is the <i>object</i> type? Since the <i>object</i> is in fact the body of a request, express has typed it with <i>any</i>. Since within this function the whole idea is to map unknown types of fields to correct ones and check whether they are defined as expected, this might be the rare case where we actually <i>want to allow the <i>any</i> type</i>. 
+Once again we have a typing issue: what is the <i>object</i> type? Since the <i>object</i> is in fact the body of a request, Express has typed it with <i>any</i>. Since within this function the whole idea is to map unknown types of fields to correct ones and check whether they are defined as expected, this might be the rare case where we actually <i>want to allow the <i>any</i> type</i>. 
 
 However if we type the object to <i>any</i>, eslint gives us a complaint:
 
 ![](../../images/9/24e.png)
 
-The cause for the complaint is eslit-rule [no-explicit-any](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md) that prevents us form explicitly setting type to be any. Since this is in general a good rule to follow but just in this particular file undesired, it is better to allow using any now by disabling the eslint-rule in the file. This happens by adding the following line at the file:
+The cause for the complaint is the eslit-rule [no-explicit-any](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md) that prevents us form explicitly setting type to be <i>any</i>. Since this is in general a good rule to follow but just in this particular file undesired, it is better to allow using <i>any</i> now by disabling the eslint-rule in the file. This happens by adding the following line at the file:
 
 ```js
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -944,7 +944,7 @@ const parseComment = (comment: any): string => {
     throw new Error('Incorrect or missing comment: ' + comment);
   }
 
-  return comment
+  return comment;
 }
 ```
 
@@ -954,8 +954,8 @@ The string validation function looks like this
 
 ```js
 const isString = (text: any): text is string => {
-  return typeof text === 'string' || text instanceof String
-}
+  return typeof text === 'string' || text instanceof String;
+};
 ```
 
 The function is so called [type guard](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards), that is, a function that returns a boolean <i>and</i> which has a <i>type predicate</i> as the return type. In our case the type predicate is
@@ -964,7 +964,7 @@ The function is so called [type guard](https://www.typescriptlang.org/docs/handb
 text is string
 ```
 
-The general form of a type predicate is _parameterName is Type_ where the _parameterName_ is the name of the function parameter and <i>Type</i> is the targetted type.
+The general form of a type predicate is _parameterName is Type_ where the _parameterName_ is the name of the function parameter and _Type_ is the targetted type.
 
 If the type guard function returns true, the TypeScript compiler knows that the tested variable has the type that was defined in the type predicate. 
 
@@ -980,7 +980,7 @@ Why do we have two conditions in the string type guard:
 
 ```js
 const isString = (text: any): text is string => {
-  return typeof text === 'string' || text instanceof String // highlight-line
+  return typeof text === 'string' || text instanceof String; // highlight-line
 }
 ```
 
@@ -988,11 +988,11 @@ would it not be enought to write the guard like this
 
 ```js
 const isString = (text: any): text is string => {
-  return typeof text === 'string'
+  return typeof text === 'string';
 }
 ```
 
-The more simple form is most likely good for all practical purposes. However if we want to be absolutely sure, both the conditions are needed, since there is two different means to create string objects in JavaScript and both of these work a bit differently with respect to operators <i>typeof</i> and <i>instanceof</i>:
+The simpler form is most likely good for all practical purposes. However if we want to be absolutely sure, both the conditions are needed, since there are two different means to create string objects in JavaScript and both of these work a bit differently with respect to operators <i>typeof</i> and <i>instanceof</i>:
 
 ```js
 const a = "I'm a string primitive";
@@ -1012,14 +1012,14 @@ We will add the following functions
 ```js
 const isDate = (date: string): boolean => {
   return Boolean(Date.parse(date));
-}
+};
 
 const parseDate = (date: any): string => {
   if (!date || !isString(date) || !isDate(date)) {
-      throw new Error('Incorrect or missing date: ' + date)
+      throw new Error('Incorrect or missing date: ' + date);
   }
   return date;
-}
+};
 ```
 
 Nothing really special here, only thing is that we can't use a type guard since a date is in this case considered only to be a <i>string</i>. Notice that even though the <i>date</i> variable is accepted as <i>any</i> by the <i>parseDate</i> function, after checking the type with <i>isString</i> the type is already a string which is why we are able to give the variable to the function <i>isDate</i> with the type <i>string</i> without any errors.
@@ -1034,20 +1034,20 @@ const parseWeather = (weather: any): Weather => {
       throw new Error('Incorrect or missing weather: ' + weather)
   } 
   return weather;
-}
+};
 ```
 
 The question now is, how can we validate that the string is of a specific form? One possible way of writing the type guard would be following:
 
 ```js
 const isWeather = (str: any): str is Weather => {
-  return ['sunny', 'rainy', 'cloudy', 'stormy' ].includes(str)
-}
+  return ['sunny', 'rainy', 'cloudy', 'stormy' ].includes(str);
+};
 ```
 
 This would work just fine but the problem is that list of possible weathers does not necessarily stay in sync with the type definition if that is altered. This is most certainly not a nice thing since we would like to have just a single source for all possible weather types.
 
-A better solution in this case is to improve the actual Weather type and instead of type declaration use the TypeScript [enum](https://www.typescriptlang.org/docs/handbook/enums.html) which allows us to use the actual values in the running code, not only in the compilation phase.
+A better solution in this case is to improve the actual Weather type and instead of type alias use the TypeScript [enum](https://www.typescriptlang.org/docs/handbook/enums.html) which allows us to use the actual values in the running code, not only in the compilation phase.
 
 Let us redefine the type <i>Weather</i> as follows: 
 
@@ -1065,8 +1065,8 @@ This allows us to check that a string confirms to the accepted values of the Wea
 
 ```js
 const isWeather = (param: any): param is Weather => {
-  return Object.values(Weather).includes(param)
-}
+  return Object.values(Weather).includes(param);
+};
 ```
 
 One thing to notice here is that we have changed the parameter type to <i>any</i>, if it would be string, the <i>includes</i> check would not compile. The change makes sense also if you think about the reusability of the function, by allowing <i>any</i> as a parameter, we can use the function with confidence knowing that whatever we might feed to it, the function answers always to the question of whether the variable is a valid weather or not. 
@@ -1074,12 +1074,12 @@ One thing to notice here is that we have changed the parameter type to <i>any</i
 The function <i>parseWeather</i> can be simplified a bit
 
 ```js
-const parseWeather = (weather: string): Weather => {
-  if (!weather || !isString(weather) || !isWeather(weather)) {
-      throw new Error('Incorrect or missing weather: ' + weather)
+const parseWeather = (weather: any): Weather => {
+  if (!weather || !isWeather(weather)) { // highlight-line
+      throw new Error('Incorrect or missing weather: ' + weather);
   } 
   return weather;
-}
+};
 ```
 
 With these changes, one issue arises, our data does not conform anymore to our types:
@@ -1116,9 +1116,52 @@ export default diaryEntries
 
 Note that since <i>toNewDiaryEntry</i> returns object of the type <i>NewDiaryEntry</i> we need to assert it to be <i>DiaryEntry</i> with [as](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) opeator.
 
-Enums are usually used when there is a set of predetermined values that are not expected to change in the future. Usually enums are used in much tighter unchanging values (for example weekdays, months, directions) but since they offer us a great way to validate our incoming values we might as well use them in our case. 
+Enums are usually used when there is a set of predetermined values that are not expected to change in the future. Usually enums are used for much tighter unchanging values (for example weekdays, months, directions) but since they offer us a great way to validate our incoming values we might as well use them in our case. 
 
-After giving <i>Visibility</i> the same treatment our app is finally ready!
+We still need to give the same treatment to <i>visibility</i>. The enum looks following
+
+```js
+export enum Visibility {
+  Great = 'great',
+  Good = 'good',
+  Cloudy = 'ok',
+  Poor = 'poor', 
+}
+```
+
+Type guard and the parser are here
+
+```js
+const isVisibility = (param: any): param is Visibility => {
+  return Object.values(Visibility).includes(param);
+};
+
+const parseVisibility = (visibility: any): Visibility => {
+  if (!visibility || !isVisibility(visibility)) {
+      throw new Error('Incorrect or missing visibility: ' + visibility);
+  } 
+  return visibility;
+};
+```
+
+And finally we can finalize the function <i>toNewDiaryEntry</i> that takes care of validating and parsing the fields of the post data: 
+
+```js
+const toNewDiaryEntry = (object: any): NewDiaryEntry => {
+  return {
+    date: parseDate(object.date),
+    comment: parseComment(object.comment),
+    weather: parseWeather(object.weather),
+    visibility: parseVisibility(object.visibility)
+  };
+};
+```
+
+The first version of flight diary application is now completed! 
+
+If we now try to create a new diary with invalid or missing fields we are getting an appropriate error message
+
+![](../../images/9/30b.png)
 
 </div>
 
