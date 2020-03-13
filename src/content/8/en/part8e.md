@@ -615,7 +615,7 @@ GraphQL is already a pretty old technology, having been used by Facebook since 2
 
 <div class="tasks">
 
-### Exercises
+### Exercises 8.23.-8.26.
 
 #### 8.23: Subscriptions - server
 

@@ -989,7 +989,7 @@ If there are multiple queries, Playground asks you to choose which of them to ru
 
 <div class="tasks">
 
-### Exercises
+### Exercises 8.1.-8.7.
 
 
 Through the exercises, we will implement a GraphQL backend for a small library. 

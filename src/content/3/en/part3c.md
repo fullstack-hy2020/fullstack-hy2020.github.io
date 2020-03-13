@@ -287,7 +287,7 @@ Note.find({ important: true }).then(result => {
 
 <div class="tasks">
 
-### Exercises
+### Exercise 3.12.
 
 #### 3.12: Command-line database
 
@@ -610,7 +610,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 <div class="tasks">
 
-### Exercises
+### Exercises 3.13.-3.14.
 
 The following exercises are pretty straightforward, but if your frontend stops working with the backend, then finding and fixing the bugs can be quite interesting. 
 
@@ -907,7 +907,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 <div class="tasks">
 
-### Exercises
+### Exercises 3.15.-3.18.
 
 #### 3.15: Phonebook database, step3
 

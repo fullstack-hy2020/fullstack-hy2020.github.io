@@ -875,7 +875,7 @@ When necessary Apollo enables saving the applications local state to [Apollo cac
 
 <div class="tasks">
 
-### Exercises
+### Exercises 8.8.-8.12.
 
 Through these exercises we'll implement a frontend for the GraphQL-library. 
 
