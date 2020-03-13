@@ -675,23 +675,29 @@ The response is what we expect it to be
 
 ### Exercises 9.10.-9.11.
 
-Simillarly to Ilari's flight service, we do not use a real database in our app but instead use hardcoded data, that is in the files [diagnoses.json](https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.json) and [patientdata.json](https://github.com/fullstack-hy2020/misc/blob/master/patientdata.json). Download the files and store those into a folder called _data_. All data modification can be done in runtime memory, so during this part it is <i>not necessary to write to a file</i>.
+Simillarly to Ilari's flight service, we do not use a real database in our app but instead use hardcoded data, that is in the files [diagnoses.json](https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.json) and [patients.json](https://github.com/fullstack-hy2020/misc/blob/master/patients.json). Get the files and store those into a directory called <i>data</i> under your project. All data modification can be done in runtime memory, so during this part it is <i>not necessary to write to a file</i>.
 
 #### 9.10: Patientor backend, step3
 
-Create a type _Diagnose_ and use it to create endpoint _/api/diagnoses_ for fetching all diagnoses with HTTP GET.
+Create a type <i>Diagnose</i> and use it to create endpoint <i>/api/diagnoses</i> for fetching all diagnoses with HTTP GET.
 
 Structure your code properly by using meaninfully named directories and files.
 
-**Note** that _diagnoses_ may or may not contain the field _latin_. You might want to use [optional properties](https://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties) in the type definition.
+**Note** that <i>diagnoses</i> may or may not contain the field <i>latin</i>. You might want to use [optional properties](https://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties) in the type definition.
 
 #### 9.11: Patientor backend, step4
 
-Create data type _Patient_ and set up a GET-endpoint _/api/patients_ that returns all patients to the frontend excluding field _ssn_. Use a [utility type](https://www.typescriptlang.org/docs/handbook/utility-types.html) to make sure you are selecting and returning only the wanted.
+Create data type <i>Patient</i> and set up a GET-endpoint <i>/api/patients</i> that returns all patients to the frontend excluding field <i>ssn</i>. Use a [utility type](https://www.typescriptlang.org/docs/handbook/utility-types.html) to make sure you are selecting and returning only the wanted.
 
-Try the endpoint with browser and make sure that _ssn_ is not included in response.
+In this exercise you may assume that field <i>gender</i> has type <i>string</i>.
 
-After creating the endpoint, ensure that the <i>frontend</i> shows the list of patients.
+Try the endpoint with browser and to sure that <i>ssn</i> is not included in response:
+
+![](../../images/9/22g.png)
+
+After creating the endpoint, ensure that the <i>frontend</i> shows the list of patients:
+
+![](../../images/9/22h.png)
 
 </div>
 
@@ -699,9 +705,9 @@ After creating the endpoint, ensure that the <i>frontend</i> shows the list of p
 
 ### Preventing an accidental undefined result
 
-Let us expand the backend to support fetching one specific entry with a HTTP GET request to route _/api/diaries/:id_ e
+Let us expand the backend to support fetching one specific entry with a HTTP GET request to route <i>api/diaries/:id</i>
 
-The DiaryService needs to be extended with  _findById_-function:
+The DiaryService needs to be extended with  <i>findById</i>-function:
 
 ```js
 // ...
