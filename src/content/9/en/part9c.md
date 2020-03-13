@@ -7,17 +7,25 @@ lang: en
 
 <div class="content">
 
-Now that we have a basic understanding of how TypeScript works and how to create actual projects with it, it is time to start creating something actually useful. So now we're going to create a completely new project, with a bit more realistic use cases in mind.
+<!-- Now that we have a basic understanding of how TypeScript works and how to create actual projects with it, it is time to start creating something actually useful. So now we're going to create a completely new project, with a bit more realistic use cases in mind. -->
+Now that we have a basic understanding of how TypeScript works and how to create small projects with it, it's time to start creating something actually useful. We are now going to create a new project with a bit more realisting use cases in mind.
 
-One major change from the previous part is that <i>we're not going to use ts-node anymore</i>. ts-node is a handy tool, with which it is very easy to get started, but in the long run it is suggested to use the official TypeScript compiler that comes with the <i>typescript</i> npm-package. With this compiler the basic JavaScript files are generated and packaged from the .ts files so that the built <i>production version</i> of the project won't contain any TypeScript code. This is exactly what we are aiming for in the end, since TypeScript in itself is not runnable by browsers or Node.
+<!-- One major change from the previous part is that <i>we're not going to use ts-node anymore</i>. ts-node is a handy tool, with which it is very easy to get started, but in the long run it is suggested to use the official TypeScript compiler that comes with the <i>typescript</i> npm-package. With this compiler the basic JavaScript files are generated and packaged from the .ts files so that the built <i>production version</i> of the project won't contain any TypeScript code. This is exactly what we are aiming for in the end, since TypeScript in itself is not runnable by browsers or Node. -->
+One major change from the previous part is that <i>we're not going to use ts-node anymore</i>. It is a handy tool and helps you get started, but in the long run it is advicable to use the official TypeScript compiler that comes with the <i>typescript</i> npm-package. The official compiler generates and packages JavaScript files from the .ts files so that the built <i>production version</i> won't contain any TypeScript code anymore. This is the exact outcome we are aiming for, since TypeScript itself is not executable by browsers or Node. 
 
 ### Setting up the project
 
-Our project is created for Ilari, who loves riding small planes but has a bit of difficulties managing his flight history. He is quite the coder himself, so he doesn't necessarily need a user interface for his flight records, but he'd like to use the software with HTTP-requests so that the possibility to later extend the application to also include a web-based user interface would be possible.
+<!-- Our project is created for Ilari, who loves riding small planes but has a bit of difficulties managing his flight history. He is quite the coder himself, so he doesn't necessarily need a user interface for his flight records, but he'd like to use the software with HTTP-requests so that the possibility to later extend the application to also include a web-based user interface would be possible. -->
+We will create a project for Ilari, who loves flying small planes but has a difficult time managing his flight history. 
+He is quite the coder himself, so he does not necessarily need a  user interface for his flight records system. He would like to use the software with HTTP-requests, and  have the option to add a web-based user interface later. 
 
-Let's start creating our own first real project 'Ilari's flight diaries', as we usually would by running <i>npm init</i> and by installing the <i>typescript</i> package. 
+<!-- Let's start creating our own first real project 'Ilari's flight diaries', as we usually would by running <i>npm init</i> and by installing the <i>typescript</i> package.  -->
+Let's start by creating our first real project 'Ilari's flight diaries'. As usual run <i>npm init</i> and install the <i>typescript</i> package.
 
-TypeScript's native <i>tsc</i> compiler offers us help initialising our project with the command <i>tsc --init</i>. To be able to run this, we need to add the <i>tsc</i> command to runnable scripts in the package.json file unless we have installed <i>typescript</i> globally. And even if you would have installed typescript globally, you should always include the package as a dev-dependency in your project.
+<!-- TypeScript's native <i>tsc</i> compiler offers us help initialising our project with the command <i>tsc --init</i>. To be able to run this, we need to add the <i>tsc</i> command to runnable scripts in the package.json file unless we have installed <i>typescript</i> globally. And even if you would have installed typescript globally, you should always include the package as a dev-dependency in your project. -->
+TypeScript's native <i>tsc</i> compiler can help us to initialize our project with the command <i>tsc --init</i>.
+First we need to add the <i>tsc</i> command to the list of executable scripts in the package.json file (unless you have installed <i>typescript</i> globally ). 
+Even if you have installed TypeScript globally, you should always include it as a dev-dependency in your project. 
 
 The npm srcipt for running <i>tsc</i> is set as follows:
 
@@ -31,7 +39,8 @@ The npm srcipt for running <i>tsc</i> is set as follows:
 }
 ```
 
- Very often the bare <i>tsc</i> command is set up in the project scripts for other scripts to use, so it is very common to see the <i>tsc</i> command set up within the project like this.
+ <!-- Very often the bare <i>tsc</i> command is set up in the project scripts for other scripts to use, so it is very common to see the <i>tsc</i> command set up within the project like this. -->
+ Often the bare <i>tsc</i> command is added to the scripts for other scripts to use, so it is common to see the <i>tsc</i> command set up within the project like this.
 
  Now we can initialise our tsconfig.json settings by running:
 
@@ -40,11 +49,16 @@ The npm srcipt for running <i>tsc</i> is set as follows:
  npm run tsc -- --init
 ```
 
- **Notice** the extra -- before the actual argument, arguments before the -- are interpreted for the command <i>npm</i> and ones after are for the command that is run throught the script. 
+ <!-- **Notice** the extra -- before the actual argument, arguments before the -- are interpreted for the command <i>npm</i> and ones after are for the command that is run throught the script.  -->
+ **NB**: Note the extra -- before the actual argument. Arguments before the -- are interpreted to be for <i>npm</i>, and ones after it for the command executed by the script.
 
-The created <i>tsconfig.json</i> contains a lengthy list of all of the possible configurations available to use, but  only a few of those are uncommented. Studying the initial <i>tsconfig.json</i> file might be useful for finding some configuration options you might need. It is also completely okay to keep the commented rows in the file just in case you might someday need to expand your configuration settings. 
+<!-- The created <i>tsconfig.json</i> contains a lengthy list of all of the possible configurations available to use, but  only a few of those are uncommented. Studying the initial <i>tsconfig.json</i> file might be useful for finding some configuration options you might need. It is also completely okay to keep the commented rows in the file just in case you might someday need to expand your configuration settings.  -->
+Running the script creates an <i>tsconfig.json</i> file, which contains a lengthy list of every configuration available to us. However only a few have not been commented out. 
+Studying the initial <i>tsconfig.json</i> file might be useful for finding some configuration options you might need. 
+It is also completely okay to keep the commented rows in the file just in case you might someday need to expand your configuration settings.
 
-The preferred settings we want right now are the following:
+
+The settings we want right now are the following:
 
 ```json
 {
@@ -62,24 +76,35 @@ The preferred settings we want right now are the following:
 }
 ```
 
-Let's go through each setting now: 
+Let's go through each configuration: 
 
-The <i>target</i> parameter tells the compiler which ECMAScript version the generated JavaScript should be generated into. ES6 is supported by most browsers and therefore is a good and pretty safe option.
+<!-- The <i>target</i> parameter tells the compiler which ECMAScript version the generated JavaScript should be generated into. ES6 is supported by most browsers and therefore is a good and pretty safe option. -->
+The <i>target</i> configuration tells the compiler which ECMAScript version to use for the generated JavaScript. ES6 is supported by most browsers, and it is a good and pretty safe option.
 
 <i>outDir</i> tells where the compiled code should be placed.
 
-<i>module</i> tells the compiler that we want to use <i>commonjs</i> modules in compiled code, so the code uses _require_ instead of _import_ that is not supported in older Node.js versions such as the version 10. 
+<!-- <i>module</i> tells the compiler that we want to use <i>commonjs</i> modules in compiled code, so the code uses _require_ instead of _import_ that is not supported in older Node.js versions such as the version 10.  -->
+<i>module</i> tells the compiler we want to use <i>commonjs</i> modules in the compiled code. This means we can use _require_ instead of _import_, which is not supported in older Node.js versions such as the version 10. 
 
-<i>strict</i> is actually a shorthand to include multiple separate options: 
-<i>noImplicitAny, noImplicitThis, alwaysStrict, strictBindCallApply, strictNullChecks, strictFunctionTypes and strictPropertyInitialization</i>. These all guide our coding style to use TypeScript features more strictly. The most important for us is perhaps the already familiar [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny) that restricts implicitly setting type <i>any</i>, which happens for example if you don't type the expected parameters of a function. The rest of the options can all be studied more closely on the [tsconfig documentation](https://www.typescriptlang.org/v2/en/tsconfig#strict). Using <i>strict</i> is suggested by the official documentation.
+<i>strict</i> is actually a shorthand for multiple separate options: 
+<!-- <i>noImplicitAny, noImplicitThis, alwaysStrict, strictBindCallApply, strictNullChecks, strictFunctionTypes and strictPropertyInitialization</i>. These all guide our coding style to use TypeScript features more strictly. The most important for us is perhaps the already familiar [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny) that restricts implicitly setting type <i>any</i>, which happens for example if you don't type the expected parameters of a function. The rest of the options can all be studied more closely on the [tsconfig documentation](https://www.typescriptlang.org/v2/en/tsconfig#strict). Using <i>strict</i> is suggested by the official documentation. -->
+<i>noImplicitAny, noImplicitThis, alwaysStrict, strictBindCallApply, strictNullChecks, strictFunctionTypes and strictPropertyInitialization</i>.
+These guide our coding style to use the TypeScript features more strictly. 
+For us perhaps the most important is the already familiar [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny). It prevents implicitly setting type <i>any</i>, which can happen if you don't type the parameters of a function for example. 
+Details of the rest of the configurations can be found from the [tsconfig documentation](https://www.typescriptlang.org/v2/en/tsconfig#strict). 
+Using <i>strict</i> is suggested by the official documentation.
 
-<i>noUnusedLocals</i> gives an error if a local variable is unused and <i>noUnusedParameters</i> when a function has unused parameters. 
+<!-- <i>noUnusedLocals</i> gives an error if a local variable is unused and <i>noUnusedParameters</i> when a function has unused parameters.  -->
+<i>noUnusedLocals</i> prevents having unused local variables, and <i>noUnusedParameters</i> throws an error is a function has unused parameters.
 
-<i>noFallthroughCasesInSwitch</i> ensures that in a _switch case_ each case ends to _return_ or _break_ statement.
+<i>noFallthroughCasesInSwitch</i> ensures that in a _switch case_ each case ends with a  _return_ or a _break_ statement.
 
-<i>esModuleInterop</i> allows interaperability between commonJS and ES Modules, see more [in documentation](https://www.typescriptlang.org/v2/en/tsconfig#esModuleInterop).
+ <i>esModuleInterop</i> allows interaperability between commonJS and ES Modules, see more [in documentation](https://www.typescriptlang.org/v2/en/tsconfig#esModuleInterop). 
 
-Now that we have our preferred configuration set, let's continue by installing <i>express</i> and of course also <i>@types/express</i>. Since this is a real project, which is intended to be grown over time we will use eslint from thevery  beginning:
+<!-- Now that we have our preferred configuration set, let's continue by installing <i>express</i> and of course also <i>@types/express</i>. Since this is a real project, which is intended to be grown over time we will use eslint from thevery  beginning: -->
+Now that we have our configurations set, let's continue by installing 
+<i>express</i> and <i>@types/express</i>. 
+Since this is a real project, which is intended to be grown over time we will use eslint from thevery  beginning:
 
 ```sh
 npm install express
@@ -143,13 +168,17 @@ We also create <i>.eslintrc</i> with the following content:
 }
 ```
 
-Now we only need to set up our development environment properly, and then we are ready to start writing some serious code. There are many different options and we could use the familiar <i>nodemon</i> with <i>ts-node</i>, but as we saw before, </i>ts-node-dev</i> does the exact same thing and we can continue using it. So, let's install <i>ts-node-dev</i>
+<!-- Now we only need to set up our development environment properly, and then we are ready to start writing some serious code. There are many different options and we could use the familiar <i>nodemon</i> with <i>ts-node</i>, but as we saw before, </i>ts-node-dev</i> does the exact same thing and we can continue using it. So, let's install <i>ts-node-dev</i> --> 
+Now we just need to set up our development environment, and we are ready to start writing some serious code. 
+There are many different options for this. We could use the familiar <i>nodemon</i> with <i>ts-node</i>, but as we saw earlier, </i>ts-node-dev</i> does the exact same thing and we can continue using it.
+So, let's install <i>ts-node-dev</i>
 
 ```sh
 npm install --save-dev ts-node-dev
 ```
 
-And we are ready to start writing some code after defining still a coupe of more npm scripts:
+<!-- And we are ready to start writing some code after defining still a coupe of more npm scripts: -->
+And after defining a few more npm scripts we are ready to start writing some code:
 
 ```json
 {
@@ -163,11 +192,14 @@ And we are ready to start writing some code after defining still a coupe of more
 }
 ```
 
-There is a lot of stuff to go through before you can even start the actual coding. When working with a real project, careful preparations support your development process to a great length, so take the time to create a good setting for yourself and your team so that in the long run everything runs smoothly.
+<!-- There is a lot of stuff to go through before you can even start the actual coding. When working with a real project, careful preparations support your development process to a great length, so take the time to create a good setting for yourself and your team so that in the long run everything runs smoothly. -->
+There is a lot of stuff to go through before you can start actual coding. When you are working with a real project, careful preparations support your development process a great deal.
+Take the time to create a good setting for youself and your team so in the long run everything runs smoothly. 
 
 ### Let there be code
 
-Now we can finally start coding! As always, we will at start create a ping-endpoint, just to make sure everything is working.
+<!-- Now we can finally start coding! As always, we will at start create a ping-endpoint, just to make sure everything is working. -->
+Now we can finally start coding! As always, we start by creating a a ping-endpoint, just to make sure everything is working. 
 
 The contents of the <i>index.ts</i> file:
 
@@ -188,17 +220,23 @@ app.listen(PORT, () => {
 });
 ```
 
-If we now run the app with <i>npm run dev</i> we can verify that a request to http://localhost:3000/ping gives response <i>pong</i>, so our configuration is set!
+<!-- If we now run the app with <i>npm run dev</i> we can verify that a request to http://localhost:3000/ping gives response <i>pong</i>, so our configuration is set! -->
+If we now run the app with <i>npm run dev</i>, we can verify
+that a request to http://localhost:3000/ping gives the response <i>pong</i>. Our configuration is all set!
 
-When starting the app with <i>npm run dev</i>, it is running in development mode, and for sure that is not suitable whenwe later on opera the app in production. 
+<!-- When starting the app with <i>npm run dev</i>, it is running in development mode, and for sure that is not suitable whenwe later on opera the app in production.  -->
+When you start the app with <i>npm run dev</i>, it runs in development mode. The development mode is not suitable when we later open the app in production. 
 
-Let us now try to create the <i>production build</i> by running the TypeScript compiler. Since we have defined the <i>outdir</i> in our tsconfig.json, there's really nothing else to do, but run the script <i>npm run tsc</i>.
+<!-- Let us now try to create the <i>production build</i> by running the TypeScript compiler. Since we have defined the <i>outdir</i> in our tsconfig.json, there's really nothing else to do, but run the script <i>npm run tsc</i>. -->
+Let's try to create a <i>production build</i> by running the TypeScript compiler. Since we have defined the <i>outdir</i> in our tsconfig.json, there's really nothing else to do, but run the script <i>npm run tsc</i>.
 
 Just like magic a native runnable JavaScript production build of the express backend is created into the directory <i>build</i>.  
 
-Currently if we run eslint it will also interpret the files in the <i>build</i> directory, which we don't want, since that is compiler generated code. We can prevent this by creating a file <i>.eslintignore</i> with the content we want eslint to ignore, similarly as in <i>gitignore</i>.
+<!-- Currently if we run eslint it will also interpret the files in the <i>build</i> directory, which we don't want, since that is compiler generated code. We can prevent this by creating a file <i>.eslintignore</i> with the content we want eslint to ignore, similarly as in <i>gitignore</i>. -->
+Currently, it we run eslint it will also interpret the files in the <i>build</i> directory. We don't want that, since the code there is compiler generated. We can prevent this by creating a  <i>.eslintignore</i> file  which lists the content we want eslint to ignore, just like we do with git and <i>gitignore</i>.
 
-Let us add a npm script for running the application in production mode:
+<!-- Let us add a npm script for running the application in production mode: -->
+Let's add an npm script for running the application in production mode:
 
 ```json
 {
@@ -218,7 +256,9 @@ Wen we run app with <i>npm start</i> we can verify that also the production buil
 ![](../../images/9/15a.png)
 
 
-Now we have a minimal working pipeline, with which we can develop our project, and with the help from our compiler and eslint also ensure that a good code quality is maintained. With this base we can actually start creating an app that we could later on deploy into a production environment. 
+<!-- Now we have a minimal working pipeline, with which we can develop our project, and with the help from our compiler and eslint also ensure that a good code quality is maintained. With this base we can actually start creating an app that we could later on deploy into a production environment.  -->
+Now we have a minimal working pipeline for developing our project. 
+With the help of our compiler and eslint it also ensures that a good code quality is maintained. With this base we can actually start creating an app that we could later on deploy into a production environment.
 
 </div>
 
@@ -236,17 +276,17 @@ The [frontend](https://github.com/fullstack-hy2020/patientor) has already been b
 
 Initialise project that will be used by the frontend. Configure eslint and tsconfig with the same configurations that are used in the material. Define a endpoint that responses to HTTP GET requests to route <i>/ping</i>.   
 
-The project should be runnale with npm scripts both in development mode and as compiled code in production mode.
+The project should be runnable with npm scripts both in development mode and as compiled code in production mode.
 
 #### 9.9: Patientor backend, step2
 
 Fork and clone the project [patientor](https://github.com/fullstack-hy2020/patientor). Start the project with the help of the README-file. You should be able to use the frontend without a functioning backend.
 
-Ensure that backend answers to the ping request that <i>fronend</i> is makes on startup. Check developer tool to make sure it really works: 
+Ensure that the backend answers to the ping request that <i>fronend</i> is makes on startup. Check developer tool to make sure it really works: 
 
 ![](../../images/9/16a.png)
 
-You might also want to have a look at the tab <i>console</i>. If something fails is [part 3](/part3) of the course shows how the problem can be solved.
+You might also want to have a look at the tab <i>console</i>. If something fails [part 3](/part3) of the course shows how the problem can be solved.
 
 </div>
 
