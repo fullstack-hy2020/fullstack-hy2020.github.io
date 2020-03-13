@@ -173,6 +173,7 @@ The contents of the <i>index.ts</i> file:
 
 ```js
 import express from 'express';
+
 const app = express();
 app.use(express.json());
 
@@ -190,13 +191,13 @@ app.listen(PORT, () => {
 
 If we now run the app with <i>npm run dev</i> we can verify that a request to http://localhost:3000/ping gives response <i>pong</i>, so our configuration is set!
 
-When starting the app with <i>npm run dev</i>, it is running in development mode, and for sure that is not suitable whenwe later on opera the app in production. 
+When starting the app with <i>npm run dev</i>, it is running in development mode, and for sure that is not suitable whenwe later on open the app in production. 
 
 Let us now try to create the <i>production build</i> by running the TypeScript compiler. Since we have defined the <i>outdir</i> in our tsconfig.json, there's really nothing else to do, but run the script <i>npm run tsc</i>.
 
 Just like magic a native runnable JavaScript production build of the express backend is created into the directory <i>build</i>.  
 
-Currently if we run eslint it will also interpret the files in the <i>build</i> directory, which we don't want, since that is compiler generated code. We can prevent this by creating a file <i>.eslintignore</i> with the content we want eslint to ignore, similarly as in <i>gitignore</i>.
+Currently if we run eslint it will also interpret the files in the <i>build</i> directory, which we don't want, since that is compiler generated code. We can prevent this by creating a file <i>.eslintignore</i> with the content we want eslint to ignore, similarly as in <i>.gitignore</i>.
 
 Let us add a npm script for running the application in production mode:
 
@@ -320,6 +321,7 @@ route all requests to prefix <i>/api/diaries</i> to that specific router in _ind
 ```js
 import express from 'express';
 import diaryRouter from './routes/diaries'; // highlight-line
+
 const app = express();
 app.use(express.json());
 
@@ -473,7 +475,7 @@ export default {
 
 Type assertion should not be used unless there's no other way to proceed since there's always the danger of asserting an unfit type to an object and then perhaps causing a nasty runtime error. While the compiler trusts you to know when using <i>as</i>, at the same time it leaves the intelligence of the whole TypeScript to manual interpretation. 
 
-In our case we could change our data exportation method so that we could have the typing happen naturally within the file where the data resides. Since typings van not be used in a JSON-file, we should convert the json-file to a ts-file which exports the typed  data in the following way: 
+In our case we could change our data exportation method so that we could have the typing happen naturally within the file where the data resides. Since typings can not be used in a JSON-file, we should convert the json-file to a ts-file which exports the typed  data in the following way: 
 
 ```js
 import { DiaryEntry } from "../src/types";
@@ -841,6 +843,7 @@ In order to parse the incoming data we must have the  _json_ middleware configur
 ``` js
 import express from 'express';
 import diaryRouter from './routes/diaries'; 
+
 const app = express();
 app.use(express.json()); // highlight-line
 
