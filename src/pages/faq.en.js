@@ -12,7 +12,7 @@ const FAQ = () => (
   <Layout>
     <SEO
       lang="en"
-      title="FAQ | Full stack -websovelluskehitys"
+      title="FAQ | Full stack open"
       description="Frequently asked questions"
       keywords={[
         ...mainSEOtags,

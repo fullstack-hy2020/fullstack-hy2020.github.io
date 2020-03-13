@@ -15,7 +15,7 @@ const Challenge = () => (
   <Layout>
     <SEO
       lang="fi"
-      title="Full stack -haaste | Full stack -websovelluskehitys"
+      title="Full stack -haaste | Full stack open 2020"
       description="Helsingin yliopisto, Houston Inc ja kumppaniyrityksemme haastavat niin koodarit kuin yritykset kasvattamaan osaamistaan tätä kurssia suorittamalla. Haaste on tarkoitettu jokaiselle sovelluskehitysalan osaajalle ja sellaiseksi haluavalle."
       keywords={[
         ...mainSEOtags,
@@ -23,7 +23,7 @@ const Challenge = () => (
         'full stack haaste',
         'elisa',
         'terveystalo',
-        'sympa',
+        'smartly',
         'konecranes',
         'unity technologies',
         'täydennyskoulutus',

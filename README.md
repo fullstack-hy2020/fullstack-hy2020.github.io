@@ -1,4 +1,4 @@
-# Full stack -websovelluskehitys 2020
+# Full stack open 2020
 
 <https://fullstack-hy2020.github.io/>
 

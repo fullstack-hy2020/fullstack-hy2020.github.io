@@ -1,7 +1,7 @@
 {
   "fi": {
     "mainTitle": "Syväsukellus moderniin websovelluskehitykseen",
-    "intro": "Ota haltuusi React, Redux, Node.js, MongoDB ja GraphQL! Kurssilla tutustutaan JavaScriptilla tapahtuvaan moderniin websovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST-rajapinnoissa.",
+    "intro": "Ota haltuusi React, Redux, Node.js, MongoDB, GraphQL ja TypeScript! Kurssilla tutustutaan JavaScriptilla tapahtuvaan moderniin websovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST-rajapinnoissa.",
     "current": [
       "Osan 8 materiaali ja tehtävät julkaistu",
       "Kurssikoe tiistaina 3.3. klo 9 saleissa A111 ja B123.",
@@ -18,14 +18,14 @@
     "university": "Helsingin yliopisto on Suomen vanhin ja suurin tiedekorkeakoulu, yhteensä 40 000 henkilön kansainvälinen tiedeyhteisö. Tieteen voimalla yliopisto on rakentanut yhteiskuntaa, sivistystä ja hyvinvointia jo vuodesta 1640.",
     "houston": "Suomalainen Houston Inc. on vuonna 2003 perustettu ketterä softatalo. Suunnittelemme ja toteutamme asiakkaillemme räätälöityjä digitaalisia palveluita liiketoiminnan tarpeisiin.",
     "contacts": [
-      "Full stack -websovelluskehitys 2020",
+      "Full stack open 2020",
       "matti.luukkainen@helsinki.fi"
     ],
     "licenced": "Materiaali on lisensoitu Creative Commons BY-NC-SA 3.0 -lisenssillä."
   },
   "en": {
     "mainTitle": "Deep Dive Into Modern Web Development",
-    "intro": "Learn React, Redux, Node.js, MongoDB, and GraphQL in one go! This course will introduce you to modern JavaScript-based web development. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js.",
+    "intro": "Learn React, Redux, Node.js, MongoDB, GraphQL and TypeScript in one go! This course will introduce you to modern JavaScript-based web development. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js.",
     "current": [
       "You can discuss the course and related topics in our dedicated group on Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Please join the conversation!"
     ],
@@ -38,7 +38,7 @@
     "university": "The University of Helsinki is the oldest and largest science university in Finland, with an international scientific community of 40,000 people.",
     "houston": "The Finnish Houston Inc. is an agile software company founded in 2003. We design and implement customized digital services for our business.",
     "contacts": [
-      "Full stack -websovelluskehitys 2019",
+      "Full stack open 2020",
       "matti.luukkainen@helsinki.fi"
     ],
     "licenced": "The material is licensed under the Creative Commons BY-NC-SA 3.0 License."

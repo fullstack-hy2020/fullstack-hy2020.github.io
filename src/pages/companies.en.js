@@ -12,7 +12,7 @@ const Companies = () => (
   <Layout>
     <SEO
       lang="en"
-      title="Partner companies | Full stack -websovelluskehitys"
+      title="Partner companies | Full stack open"
       description="Full stack development in partner companies"
       keywords={[
         ...mainSEOtags,
