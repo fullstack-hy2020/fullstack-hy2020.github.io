@@ -690,7 +690,7 @@ If the query parameters of the request are of the wrong type or missing, respons
 }
 ```
 
-Do not copy the calcucator code to file <i>index.ts</i>, make it a [typescript module](https://www.typescriptlang.org/docs/handbook/modules.html) that can be imported in <i>index.ts</i>.
+Do not copy the calculator code to file <i>index.ts</i>, make it a [typescript module](https://www.typescriptlang.org/docs/handbook/modules.html) that can be imported in <i>index.ts</i>.
 
 </div>
 
