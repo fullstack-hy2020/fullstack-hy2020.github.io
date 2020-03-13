@@ -77,19 +77,19 @@ As a more complex example let us consider the code below. If you have not used T
 ```js
 type CallsFunction = (callback: (result: string) => any) => void;
 
-const funk: CallsFunction = (cb) => {
+const func: CallsFunction = (cb) => {
   cb('done');
   cb(1);
 }
 
-funk((result) => {
+func((result) => {
   return result;
 });
 ```
 
 There is a declaration for a [type alias](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases) called <i>CallsFunction</i>, which is a function type with one parameter named <i>callback</i>. The parameter <i>callback</i> is of the type function that takes a string parameter and returns [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) value. As we will learn later in this part <i>any</i> is a kind of "wildcard" type that can represent any type.
 
-After that, the function <i>funk</i> of the type <i>CallsFunction</i> is defined. In <i>funk</i> it can be inferred that the parameter will only accept a string argument. To demonstrate this, there is also an example where the parameter function is called with a numeric value, and that causes an error in TypeScript.
+After that, the function <i>func</i> of the type <i>CallsFunction</i> is defined. In <i>func</i> it can be inferred that the parameter will only accept a string argument. To demonstrate this, there is also an example where the parameter function is called with a numeric value, and that causes an error in TypeScript.
 
 The last thing is that we call <i>func</i> by giving it the following function as parameter 
 
@@ -125,7 +125,7 @@ The lack of runtime type information can be surprising for programmers who are u
 
 You may stumble upon a lot of different arguments either for or against TypeScript on different forums. The truth probably is as vague as: it depends on your need for the features that TypeScript offers. Nevertheless, here are explained some of the reasoning why the use of TypeScript may have some advantages.
 
-First of all, probably the most noticable feature with TypeScript is that it offers <i>type checking and static code analysis</i>. The ability to require values to be of a certain type and to have the compiler warn about wrongful usage can help reduce runtime errors and you might even be able to reduce the amount of required unit tests in a project, at least conserning pure type tests. The static code analysis doesn't only warn about wrongful type usage, but also if you for instance misspell a variable or function name or try to use a value beyond it's scope etc.
+First of all, probably the most noticable feature with TypeScript is that it offers <i>type checking and static code analysis</i>. The ability to require values to be of a certain type and to have the compiler warn about wrongful usage can help reduce runtime errors and you might even be able to reduce the amount of required unit tests in a project, at least concerning pure type tests. The static code analysis doesn't only warn about wrongful type usage, but also if you for instance misspell a variable or function name or try to use a value beyond its scope etc.
 
 A second advantage with TypeScript is that the type annotations in the code can function as a type of <i>code level documentation</i>. It's easy to check from a function signature what kind of arguments the function can consume and what type of data it will produce. The type annotation bound documentation will always be up to date and it makes it easier for new programmers to start working on an existing project and it is also helpful when returning to earlier made code. 
 
@@ -143,11 +143,11 @@ Lastly, here are a few examples of what many regard as downsides with TypeScript
 
 #### Incomplete, invalid or missing types in external libraries
 
-When using external libraries you may find that some libraries have either missing or in some way invalid type declarations. The reasons behind this is most often that the library has not been made with TypeScript and the types need to be declared manually, or someone has already done that, but hasn't done such a good job with it. These are occations when you may need to define type declarations yourself. However, you should first check out [DefinitelyTyped](https://definitelytyped.org/) or [their GitHub pages](https://github.com/DefinitelyTyped/DefinitelyTyped), which are probably the most used sources for type declaration files and there is a good chance someone has already added typings for the package you are using. Otherwise you might want to start off by getting aquainted with TypeScript's own [documentation](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html) regarding type declarations.
+When using external libraries you may find that some libraries have either missing or in some way invalid type declarations. The reasons behind this is most often that the library has not been made with TypeScript and the types need to be declared manually, or someone has already done that, but hasn't done such a good job with it. These are occasions when you may need to define type declarations yourself. However, you should first check out [DefinitelyTyped](https://definitelytyped.org/) or [their GitHub pages](https://github.com/DefinitelyTyped/DefinitelyTyped), which are probably the most used sources for type declaration files and there is a good chance someone has already added typings for the package you are using. Otherwise you might want to start off by getting acquainted with TypeScript's own [documentation](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html) regarding type declarations.
 
 #### Sometimes type inference needs assistance
 
-The type inference in TypeScript is pretty good, but still not perfect. Sometimes you may feel like you have declared your types perfectly, but the compiler still tells you that the property does not exist or that that kind of usage is not allowed. These are occasions when you might need to help the compiler with doing e.g. an "extra" type check or something like that. But be careful with type casting with [type assertions]((https://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions)) and [type guards](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-guards-and-differentiating-types), because in those cases you are practically giving your word to the compiler, that the value really is of the type that you declare. 
+The type inference in TypeScript is pretty good, but still not perfect. Sometimes you may feel like you have declared your types perfectly, but the compiler still tells you that the property does not exist or that that kind of usage is not allowed. These are occasions when you might need to help the compiler with doing e.g. an "extra" type check or something like that. But be careful with type casting with [type assertions](https://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) and [type guards](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-guards-and-differentiating-types), because in those cases you are practically giving your word to the compiler, that the value really is of the type that you declare. 
 
 #### Mysterious type errors
 
