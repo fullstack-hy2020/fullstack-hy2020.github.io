@@ -9,7 +9,7 @@ lang: en
 
 In addition to the eight exercises in the [React router](/en/part7/react_router) and [custom hooks]() sections of this seventh part of the course material, there are 13 exercises that continue our work on the Bloglist application that we worked on in parts four and five of the course material. Some of the following exercises are "features" that are independent of one another, meaning that there is no need to finish the exercises in any particular order. You are free to skip over a part of the exercises if you wish to do so.
 
-If you do not want to use your own Bloglist application, you are free to use the code from the model solution as a starting point for these exercises. 
+If you do not want to use your own Bloglist application, you are free to use the code from the model solution as a starting point for these exercises.
 
 Many of the exercises in this part of the course material will require the refactoring of existing code. This is a common reality of extending existing applications, meaning that refactoring is an important and necessary skill even if it may feel difficult and unpleasant at times.
 
@@ -19,7 +19,7 @@ One good piece of advice for both refactoring and writing new code is to take <i
 
 <div class="tasks">
 
-### Exercises
+### Exercises 7.9.-7.21.
 
 #### 7.9: redux, step1
 
@@ -29,9 +29,9 @@ Additionally, change the application's notifications to use Redux at this point 
 
 #### 7.10: redux, step2
 
-*Note* that this and the next two exercises are quite laborious but incredibly educational.
+_Note_ that this and the next two exercises are quite laborious but incredibly educational.
 
-Store the information about blog posts in the Redux store. In this exercise it is enought that you can see the blogs in backend and create a new blog. 
+Store the information about blog posts in the Redux store. In this exercise it is enought that you can see the blogs in backend and create a new blog.
 
 You are free to manage the state for logging in and creating new blog posts by using the internal state of React components.
 

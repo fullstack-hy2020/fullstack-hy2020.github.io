@@ -275,7 +275,7 @@ We will implement login to the frontend in the [next part](/en/part5).
 
 <div class="tasks">
 
-### Exercises
+### Exercises 4.15.-4.22.
 
 In the next exercises, basics of user management will be implemented for the Bloglist application. The safest way is to follow the story from part 4 chapter [User administration](/en/part4/user_administration) to the chapter [Token-based authentication](/en/part4/token_authentication). You can of course also use your creativity. 
 

@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-After the brief introduction on the main principles of TypeScript we are ready to start our journey towards a Fullstack TypeScript developer. This part will not give you a thorough introduction to all aspects of TypeScript, the goal is rather to have focus in most common issues that arise when developing express backends and React fronends with TypeScript. In addition to language features we will also have a strong emphasis in tooling.
+After the brief introduction on the main principles of TypeScript we are ready to start our journey towards a Fullstack TypeScript developer. This part will not give you a thorough introduction to all aspects of TypeScript, the goal is rather to have focus in most common issues that arise when developing express backends and React frontends with TypeScript. In addition to language features we will also have a strong emphasis in tooling.
 
 ### Setting things up
 
@@ -20,17 +20,17 @@ In a production environment this need for compilation often means that you have 
 
 Let's start writing our first TypeScript-app. To keep things simple, let's start by using the npm package [ts-node](https://github.com/TypeStrong/ts-node), that compiles and executes the desired TypeScript file immediately, so that there is no need for the separate compilation step.
 
-To use <i>ts-node</i> you could install it globally with the official <i>typescript</i> package by running <i>npm install -g ts-node typescript</i>. 
+To use <i>ts-node</i> you could install it globally with the official <i>typescript</i> package by running <i>npm install -g ts-node typescript</i>.
 
 If you can't or don't want to install global packages you can create an npm project that has the required dependencies and run your scripts in it. We shall also go with this approach.
 
-As we remember from [part 3](/en/part3) a npm project is set by running running command <i>npm init</i> in an empty directory. Then we can install the dependencies by running 
+As we remember from [part 3](/en/part3) a npm project is set by running running command <i>npm init</i> in an empty directory. Then we can install the dependencies by running
 
 ```
 npm install --save-dev ts-node typescript
 ```
 
-and set up <i>scripts</i> within the package.json file to include: 
+and set up <i>scripts</i> within the package.json file to include:
 
 ```json
 {
@@ -54,7 +54,7 @@ It is worth mentioning, that TypeScript also provides an online playground, wher
 
 #### A note about the coding style
 
-JavaScript in itself is a fairly loose language and things often can be done in multiple different ways, for example named vs anonymous functions, using const and let or var and the use of <i>semicolons</i>. This part of the course differs from the rest by using semicolons. It is not a TypeScript specific pattern but a general coding style decision when creating any kind of JavaScript. Whether to use them or not is usually in the hands of the programmer but since it is expected to adapt ones coding habits to the existing codebase, in the exercises of this part it is expected to use semicolons and to adjust to the coding style of the part. This part contains also some other coding style differences e.g. in the directory naming compared to the rest od the course.
+JavaScript in itself is a fairly loose language and things often can be done in multiple different ways, for example named vs anonymous functions, using const and let or var and the use of <i>semicolons</i>. This part of the course differs from the rest by using semicolons. It is not a TypeScript specific pattern but a general coding style decision when creating any kind of JavaScript. Whether to use them or not is usually in the hands of the programmer but since it is expected to adapt ones coding habits to the existing codebase, in the exercises of this part it is expected to use semicolons and to adjust to the coding style of the part. This part contains also some other coding style differences e.g. in the directory naming compared to the rest of the course.
 
 Let us start now by creating a simple Multiplier, exactly as you would in JavaScript.
 
@@ -84,7 +84,7 @@ Now when running the code, the example still produces an output, which is now:
 
 Wouldn't it be nice if there was a way that the language itself could prevent us from ending up in situations like this? This is where we get the first benefits of TypeScript into use. Let's add types to the parameters and see where it takes us.
 
-TypeScript natively supports multiple types including <i>number</i>, <i>string</i>, <i>Array</i> see the comprehensive list [here](https://www.typescriptlang.org/docs/handbook/basic-types.html). More complex custom types can also be created.
+TypeScript natively supports multiple types including <i>number</i>, <i>string</i>, <i>Array</i>. See the comprehensive list [here](https://www.typescriptlang.org/docs/handbook/basic-types.html). More complex custom types can also be created.
 
 The first two parameters of our function are of the type [number](http://www.typescriptlang.org/docs/handbook/basic-types.html#number) and the last is [string](http://www.typescriptlang.org/docs/handbook/basic-types.html#string):
 
@@ -186,7 +186,7 @@ But now is time for the question: is it <i>really</i> okay for the function to r
 
 When you have written code that can actually end up in a situation where something is divided by 0 it probably means something has gone terribly wrong and in that case an error should probably be thrown and handled somewhere where the function was called. When you are deciding to return values you weren't originally planning, the warnings you see from TypeScript restrict you from making rushed decisions and help you to keep your code working as expected.
 
-One more thing to consider is that even though we have in our code defined what types of parameters to accept, the generated JavaScript that is used runtime doesn't anymore have these type checks. So, if for example the <i>operation</i>-parameter's value comes from an external interface, there is no definite guarantee that it will be one of the allowed values. Therefore it's still better to include error handling to be prepared for the unexpected to happen. In this case, when there are multiple possible accepted values and all unexpected ones should result in an error, the [switch...case](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement suits better than if...else in our code. 
+One more thing to consider is that even though we have in our code defined what types of parameters to accept, the generated JavaScript that is used runtime doesn't anymore have these type checks. So, if for example the <i>operation</i>-parameter's value comes from an external interface, there is no definite guarantee that it will be one of the allowed values. Therefore it's still better to include error handling to be prepared for the unexpected to happen. In this case, when there are multiple possible accepted values and all unexpected ones should result in an error, the [switch...case](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement suits better than if...else in our code.
 
 The resulting code of our calculator could actually look something like this:
 
@@ -200,7 +200,7 @@ const calculator = (a: number, b: number, op : Operation) : Result => {
     case 'multiply':
       return a * b;
     case 'divide':
-      if( b === 0) throw new Error('can\'t divide by 0!');
+      if( b === 0) throw new Error('Can\'t divide by 0!');
       return a / b;
     case 'add':
       return a + b;
@@ -477,7 +477,7 @@ Handle exceptions and errors appropriately. exerciseCalculator should accept inp
 
 In the exercises we used only one tsconfig rule [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny) which is a good place to start but now it is time to start looking into the file a little bit deeper.
 
-[tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) includes all your core configurations on how you want TypeScript to work in your project. In tsconfig.json you can define how strictly you want the code to be inspected, what files to include, what files to exclude (<i>node_modules</i> is excluded by default), and where compiled files should be placed (more on this later). 
+[tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) includes all your core configurations on how you want TypeScript to work in your project. In tsconfig.json you can define how strictly you want the code to be inspected, what files to include, what files to exclude (<i>node_modules</i> is excluded by default), and where compiled files should be placed (more on this later).
 
 Let us now use <i>tsconfig.json</i> that has the following form:
 
@@ -487,7 +487,7 @@ Let us now use <i>tsconfig.json</i> that has the following form:
     "target": "ES2020",
     "strict": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true,       
+    "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true
@@ -495,7 +495,7 @@ Let us now use <i>tsconfig.json</i> that has the following form:
 }
 ```
 
-Do not worry too much about the <i>compilerOptions</i> selected here, they will be under closer inspection on part 2.
+Do not worry too much about the <i>compilerOptions</i> selected here, they will be under closer inspection later on.
 
 The explanations for each of the field can be found from TypeScript documentation or the really handy although beta-stage [tsconfig page](https://www.typescriptlang.org/v2/en/tsconfig) or in a little worse format in the tsconfig [schema definition](http://json.schemastore.org/tsconfig).
 
@@ -524,7 +524,7 @@ add then add the <i>start</i> script to in package.json to be:
 }
 ```
 
-Now we can create the file <i>index.ts</i>, and write the HTTP GET <i>ping</i> endpoint to it: 
+Now we can create the file <i>index.ts</i>, and write the HTTP GET <i>ping</i> endpoint to it:
 
 ```js
 const express = require('express');
@@ -599,11 +599,11 @@ This is because we banned unused parameters in out <i>tsconfig.json</i>
 }
 ```
 
-This configuration might create problems when we have library-wide predefined functions, that like in this case require declaring a variable, even though in the code it is not necessarily required to use at all. Fortunately this issue has already been solved on configuration level and once again hovering on the issue gives us a solution for the problem, this time by clicking the quick fix button: 
+This configuration might create problems when we have library-wide predefined functions, that like in this case require declaring a variable, even though in the code it is not necessarily required to use at all. Fortunately this issue has already been solved on configuration level and once again hovering on the issue gives us a solution for the problem, this time by clicking the quick fix button:
 
 ![](../../images/9/14a.png)
 
-If it is absolutely impossible to get rid of an unused variable, you should prefix it with an underscore to inform the compiler that this has been taken into consideration and there is nothing we can do about it. 
+If it is absolutely impossible to get rid of an unused variable, you should prefix it with an underscore to inform the compiler that this has been taken into consideration and there is nothing we can do about it.
 
 Let's rename the <i>req</i> variable to <i>_req</i>. Now we are finally ready to start up the application, and it seems to work fine:
 
@@ -611,7 +611,7 @@ Let's rename the <i>req</i> variable to <i>_req</i>. Now we are finally ready to
 
 Now to simplify the development we should enable <i>auto reloading</i> to improve our workflow. In this course you have already used <i>nodemon</i>, but ts-node has an alternative called <i>ts-node-dev</i> which is meant only for development environments that take care of recompilation on every change so restarting the application won't be necessary.
 
-Let's install <i>ts-node-dev</i> to our development dependencies 
+Let's install <i>ts-node-dev</i> to our development dependencies
 
 ```
 npm install --save-dev ts-node-dev
@@ -690,7 +690,7 @@ If the query parameters of the request are of the wrong type or missing, respons
 }
 ```
 
-Do not copy the calculator code to file <i>index.ts</i>, make it a [typescript module](https://www.typescriptlang.org/docs/handbook/modules.html) that can be imported in <i>index.ts</i>. 
+Do not copy the calculator code to file <i>index.ts</i>, make it a [typescript module](https://www.typescriptlang.org/docs/handbook/modules.html) that can be imported in <i>index.ts</i>.
 
 </div>
 
@@ -698,7 +698,7 @@ Do not copy the calculator code to file <i>index.ts</i>, make it a [typescript m
 
 ### The horrors of <i>any</i>
 
-Now that we have our first small endpoints done, one thing to notice is that in these minimal examples barely any TypeScript is actually in the code. When looking more closely at the code, we can see a few possibly dangerous things. 
+Now that we have our first small endpoints done, one thing to notice is that in these minimal examples barely any TypeScript is actually in the code. When looking more closely at the code, we can see a few possibly dangerous things.
 
 
 Let's add an HTTP GET endpoint <i>calculate</i> to our app:
@@ -728,13 +728,13 @@ But when we hover over the parsed values from the request, ann issues arise:
 
 All of the variables have type <i>any</i>. Well, it is not that surprising since no one has given those a type. There are a couple of ways to fix this, but first thing to consider is why is this accepted and where did the type <i>any</i> come from?
 
-In TypeScript every untyped variable, for which the type cannot be inferred, becomes implicitly [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any), which is a kind of "wild card" type that can literally stand for <i>whatever possible type</i>. This happens quite often when one forgets to type functions. 
+In TypeScript every untyped variable, for which the type cannot be inferred, becomes implicitly [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any), which is a kind of "wild card" type that can literally stand for <i>whatever possible type</i>. This happens quite often when one forgets to type functions.
 
 The type <i>any</i> can also be explicitly specified as any other type. The only difference between these two is how the code looks, the compiler is not affected from the difference.
 
-However, implicit <i>any</i> and explicit enforcing of the <i>any</i> type onto a variable affects how a programmer sees the code. Implicit typings of <i>any</i> are usually considered problematic, since it  is quite often a matter of the coder simply forgetting to assign types (or being too lazy to do that) and because of that not exploiting the full power TypeScript in the code. 
+However, implicit <i>any</i> and explicit enforcing of the <i>any</i> type onto a variable affects how a programmer sees the code. Implicit typings of <i>any</i> are usually considered problematic, since it  is quite often a matter of the coder simply forgotting to assign types (or being too lazy to do that) and because of that not exploiting the full power TypeScript in the code.
 
-This is why the rule [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny) exists already on compiler level and it is highly recommended to keep it on at all time. In the rare cases where you seriously cannot know what the type of a variable is, you should explicitly state it in the code 
+This is why the rule [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny) exists already on compiler level and it is highly recommended to keep it on at all time. In the rare cases where you seriously cannot know what the type of a variable is, you should explicitly state it in the code
 
 ```js
 const a : any = /* no clue what the type will be! */.
@@ -772,7 +772,7 @@ Let us also set up the <i>lint</i> npm script to inspect the files with <i>.ts</
   // ...
   "scripts": {
       "start": "ts-node index.ts",
-      "dev": "ts-node-dev index.ts", 
+      "dev": "ts-node-dev index.ts",
       "lint": "eslint --ext .ts ." // highlight-line
       //  ...
   },
@@ -785,11 +785,10 @@ Lint is now complaining if we try to define a variable of type <i>any</i>:
 ![](../../images/9/13b.png)
 
 
-The [@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) plugin has lots of TypeScript-only eslint rules but also all basic eslint rules are usable in TypeScript projects. We should probably for now just use the recommended settings and see where it takes us and modify the rules as we go, if we find something we want to behave differently. 
+The [@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) plugin has lots of TypeScript-only eslint rules but also all basic eslint rules are usable in TypeScript projects. We should probably for now just use the recommended settings and see where it takes us and modify the rules as we go, if we find something we want to behave differently.
 
 On top of the regular recommended settings, we should already try to get familiar with the coding style we are using in this part and <i>set the semicolon at the end of each line of code as required</i>. 
-
-So we will use the following <i>.eslintrc</i> 
+So we will use the following <i>.eslintrc</i>
 
 ```json
 {
@@ -837,7 +836,7 @@ Add an endpoint to your app for the exercise calculator. It should be used by do
 
 ```js
 {
-  "daily_exercises": [1, 0, 2, 0, 3, 0, 2.5], 
+  "daily_exercises": [1, 0, 2, 0, 3, 0, 2.5],
   "target": 2.5
 }
 ```
@@ -880,6 +879,6 @@ In this exercise you might find it beneficial to use the <i>explicit any</i> typ
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ```
 
-Note that you need to have a correct setup in order to get hold of the request body, see [part 3](http://localhost:8000/en/part3/node_js_and_express#receiving-data).
+Note that you need to have a correct setup in order to get hold to the request body, see [part 3](/en/part3/node_js_and_express#receiving-data).
 
 </div>

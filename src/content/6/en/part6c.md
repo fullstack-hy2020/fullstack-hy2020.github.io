@@ -301,7 +301,7 @@ The current state of the code for the application can be found on [github](https
 
 <div class="tasks">
 
-### Exercises
+### Exercises 6.13.-6.14.
 
 #### 6.13 Anecdotes and the backend, step1
 
@@ -489,7 +489,7 @@ The current state of the code for the application can be found on [github](https
 <div class="tasks">
 
 
-### Exercises
+### Exercises 6.15.-6.18.
 
 #### 6.15 Anecdotes and the backend, step3
 

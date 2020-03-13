@@ -402,7 +402,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 <div class="tasks">
 
-<h3>Exercises</h3>
+<h3>Exercises 2.6.-2.10.</h3>
 
 In the first exercise, we will start working on an application that will be further developed in the later exercises. In related sets of exercises it is sufficient to return the final version of your application. You may also make a separate commit after you have finished each part of the exercise set, but doing so is not required.
 
@@ -570,7 +570,9 @@ const App = () => {
 }
 ```
 
-**HUOM**: saatat törmätä ongelmiin tässä tehtävässä, jos määrittelet komponentteja "väärässä paikassa", nyt kannattaakin ehdottomasti kerrata edellisen osan luku [älä määrittele komponenttia komponentin sisällä](/osa1/monimutkaisempi_tila_reactin_debuggaus#ala-maarittele-komponenttia-komponentin-sisalla).
-
+<!-- **HUOM**: saatat törmätä ongelmiin tässä tehtävässä, jos määrittelet komponentteja "väärässä paikassa", nyt kannattaakin ehdottomasti kerrata edellisen osan luku [älä määrittele komponenttia komponentin sisällä](/osa1/monimutkaisempi_tila_reactin_debuggaus#ala-maarittele-komponenttia-komponentin-sisalla). -->
+**NB**: You might run into problems in this exercise if you define your components "in the wrong place". Now would be a good time to rehearse 
+the chapter [do not define a component in another component](/osa1/monimutkaisempi_tila_reactin_debuggaus#ala-maarittele-komponenttia-komponentin-sisalla)
+from last part.
 
 </div>
