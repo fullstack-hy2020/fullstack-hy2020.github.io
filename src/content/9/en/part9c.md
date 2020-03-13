@@ -868,20 +868,20 @@ app.listen(PORT, () => {
 
 and now the application is ready to receive HTTP POST requests for adding diaries with the desired fields!
 
-### Proofing your requests
+### Proofing requests
 
 There are a plenty of things that can go wrong when accepting data from an outside source. Applications work rarely fully on their own and we are forced to live with the fact that data sources outside of a single system cannot be fully trusted. When the data is coming from an outside source, there's no way that it can be already typed when we receive it so we need to make decision on how to handle the uncertainty that comes with the data.
 
-The way express handles parsing the request body is that it asserts the type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) to all the body fields. In our situation this doesn't come apparent in any way in the editor, but if we start looking at the variables more closely and hover on any of them, we can see that each of them is [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) and the editor doesn't complain when giving them to <i>addDiary</i> as arguments: 
+The way Express handles parsing the request body is that it asserts the type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) to all the body fields. In our situation this doesn't come apparent in any way in the editor, but if we start looking at the variables more closely and hover on any of them, we can see that each of them is indeed [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any).  Editor does not give us any complaints when we pass this data to <i>addDiary</i> as arguments: 
 
 ![](../../images/9/27.png)
 
 The value of type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#an) can be assigned to <i>any</i> type of variable since it <i>might be</i> the wanted type. This is definitiely not safe to trust so 
 check the incoming values (regardless whether we are using TypeScript or not).
 
-We could just add simple <i>exists</i> and <i>is-value-valid</i> checks to the function defining the route but since we also need to ensure that _Weather_ and _Visibility_ values are of the correct form, it is better to write the put the parsing and validation logic to a separate file _utils.ts_.
+We could just add simple <i>exists</i> and <i>is-value-valid</i> checks to the function defining the route but since we also need to ensure that <i>Weather</i> and <i>Visibility</i> values are of the correct form, it is better to write the put the parsing and validation logic to a separate file <i>utils.ts</i>.
 
-Our intention is to define a function _toNewDiaryEntry_ that gets the request body as a parameter and returns a properly typed _NewDiaryEntry_. Route definition uses the function as follows
+Our intention is to define a function <i>toNewDiaryEntry</i> that gets the request body as a parameter and returns a properly typed <i>NewDiaryEntry</i>. Route definition uses the function as follows
 
 ```js
 import toNewDiaryEntry from '../utils' // highlight-line
@@ -902,7 +902,7 @@ router.post('/', (req, res) => {
 
 Since we are now making trustworthy code and trying to make sure that we are getting exactly what we want from the requests we should get started with the goal of parsing and validating each field we are waiting for. 
 
-The skeleton of the function _toNewDiaryEntry_ looks like the following:
+The skeleton of the function <i>toNewDiaryEntry</i> looks like the following:
 
 ```js
 import { NewDiaryEntry } from './types'
@@ -918,11 +918,11 @@ const toNewDiaryEntry = (object) : NewDiaryEntry => {
 export default toNewDiaryEntry;
 ```
 
-In the function we want to parse each field and make sure that what is returned is exactly of type _NewDiaryEntry_. Thus we should check each field separately. 
+In the function we want to parse each field and make sure that what is returned is exactly of type <i>NewDiaryEntry</i>. Thus we should check each field separately. 
 
-Once again we have a typing issue: what is the _object_ type? Since the _object_ is in fact the body of a request, express has typed it with _any_. Since within this function the whole idea is to map unknown types of fields to correct ones and check whether they are defined as expected, this might be the rare case where we actually <i>want to allow the _any_ type</i>. 
+Once again we have a typing issue: what is the <i>object</i> type? Since the <i>object</i> is in fact the body of a request, express has typed it with <i>any</i>. Since within this function the whole idea is to map unknown types of fields to correct ones and check whether they are defined as expected, this might be the rare case where we actually <i>want to allow the <i>any</i> type</i>. 
 
-However if we type the object to _any_, eslint gives us a complaint:
+However if we type the object to <i>any</i>, eslint gives us a complaint:
 
 ![](../../images/9/24e.png)
 
@@ -932,9 +932,9 @@ The cause for the complaint is eslit-rule [no-explicit-any](https://github.com/t
 /* eslint-disable @typescript-eslint/no-explicit-any */
 ```
 
-Lets start creating the parsers for each of the fields of _object_.
+Lets start creating the parsers for each of the fields of <i>object</i>.
 
-To validate the _comment_ field we need to check that it exists, and to ensure that it is of the type _string_.
+To validate the <i>comment</i> field we need to check that it exists, and to ensure that it is of the type <i>string</i>.
 
 The function should look something like this:
 
@@ -948,7 +948,7 @@ const parseComment = (comment: any): string => {
 }
 ```
 
-The function gets the parameter of type _any_ and returns it as type _string_ if it exists and is of the right type.
+The function gets the parameter of type <i>any</i> and returns it as type <i>string</i> if it exists and is of the right type.
 
 The string validation function looks like this
 
@@ -964,15 +964,15 @@ The function is so called [type guard](https://www.typescriptlang.org/docs/handb
 text is string
 ```
 
-The general form of a type predicate is _parameterName is Type_ where the _parameterName_ is the name of the function parameter and _Type_ is the targetted type.
+The general form of a type predicate is _parameterName is Type_ where the _parameterName_ is the name of the function parameter and <i>Type</i> is the targetted type.
 
 If the type guard function returns true, the TypeScript compiler knows that the tested variable has the type that was defined in the type predicate. 
 
-Before the type guard is called, the actual type of the variable _comment_ is not known:
+Before the type guard is called, the actual type of the variable <i>comment</i> is not known:
 
 ![](../../images/9/28.png)
 
-But after the call, if the code proceeds past the exception (that is the type guard returned true), compiler knows that _comment_ is of the type _string_:
+But after the call, if the code proceeds past the exception (that is the type guard returned true), compiler knows that <i>comment</i> is of the type <i>string</i>:
 
 ![](../../images/9/29.png)
 
@@ -992,7 +992,7 @@ const isString = (text: any): text is string => {
 }
 ```
 
-The more simple form is most likely good for all practical purposes. However if we want to be absolutely sure, both the conditions are needed, since there is two different means to create string objects in JavaScript and both of these work a bit differently with respect to operators _typeof_ and _instanceof_:
+The more simple form is most likely good for all practical purposes. However if we want to be absolutely sure, both the conditions are needed, since there is two different means to create string objects in JavaScript and both of these work a bit differently with respect to operators <i>typeof</i> and <i>instanceof</i>:
 
 ```js
 const a = "I'm a string primitive";
@@ -1005,7 +1005,7 @@ b instanceof String; --> returns true
 
 It is however unlikely that anybody creates strings with a constructor function, so most likely the simpler version of the type guard would be just fine. 
 
-Next let us consider the field _date_. Parsing and validating the date object is pretty similar, since TypeScript doesn't really know a type for date, we need to treat it as as _string_. We still definitely should use JavaScript level validation to check whether the date format is acceptable. 
+Next let us consider the field <i>date</i>. Parsing and validating the date object is pretty similar, since TypeScript doesn't really know a type for date, we need to treat it as as <i>string</i>. We still definitely should use JavaScript level validation to check whether the date format is acceptable. 
 
 We will add the following functions
 
@@ -1022,7 +1022,7 @@ const parseDate = (date: any): string => {
 }
 ```
 
-Nothing really special here, only thing is that we can't use a type guard since a date is in this case considered only to be a _string_. Notice that even though the _date_ variable is accepted as _any_ by the _parseDate_ function, after checking the type with _isString_ the type is already a string which is why we are able to give the variable to the function _isDate_ with the type _string_ without any errors.
+Nothing really special here, only thing is that we can't use a type guard since a date is in this case considered only to be a <i>string</i>. Notice that even though the <i>date</i> variable is accepted as <i>any</i> by the <i>parseDate</i> function, after checking the type with <i>isString</i> the type is already a string which is why we are able to give the variable to the function <i>isDate</i> with the type <i>string</i> without any errors.
 
 Finally we are ready to move on to the last two types, Weather and Visibility.
 
@@ -1049,7 +1049,7 @@ This would work just fine but the problem is that list of possible weathers does
 
 A better solution in this case is to improve the actual Weather type and instead of type declaration use the TypeScript [enum](https://www.typescriptlang.org/docs/handbook/enums.html) which allows us to use the actual values in the running code, not only in the compilation phase.
 
-Let us redefine the type _Weather_ as follows: 
+Let us redefine the type <i>Weather</i> as follows: 
 
 ```js
 export enum Weather {
@@ -1069,9 +1069,9 @@ const isWeather = (param: any): param is Weather => {
 }
 ```
 
-One thing to notice here is that we have changed the parameter type to _any_, if it would be string, the _includes_ check would not compile. The change makes sense also if you think about the reusability of the function, by allowing _any_ as a parameter, we can use the function with confidence knowing that whatever we might feed to it, the function answers always to the question of whether the variable is a valid weather or not. 
+One thing to notice here is that we have changed the parameter type to <i>any</i>, if it would be string, the <i>includes</i> check would not compile. The change makes sense also if you think about the reusability of the function, by allowing <i>any</i> as a parameter, we can use the function with confidence knowing that whatever we might feed to it, the function answers always to the question of whether the variable is a valid weather or not. 
 
-The function _parseWeather_ can be simplified a bit
+The function <i>parseWeather</i> can be simplified a bit
 
 ```js
 const parseWeather = (weather: string): Weather => {
@@ -1088,7 +1088,7 @@ With these changes, one issue arises, our data does not conform anymore to our t
 
 This is because a string can't just be assumed to be an enum. 
 
-The fix is to map the initial data elements to _DiaryEntry_ type with the _toNewDiaryEntry_ function:
+The fix is to map the initial data elements to <i>DiaryEntry</i> type with the <i>toNewDiaryEntry</i> function:
 
 ```js
 import { DiaryEntry } from "../src/types";
@@ -1114,11 +1114,11 @@ const diaryEntries: DiaryEntry [] = data.map(obj => {
 export default diaryEntries
 ```
 
-Note that since _toNewDiaryEntry_ returns object of the type _NewDiaryEntry_ we need to assert it to be _DiaryEntry_ with [as](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) opeator.
+Note that since <i>toNewDiaryEntry</i> returns object of the type <i>NewDiaryEntry</i> we need to assert it to be <i>DiaryEntry</i> with [as](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) opeator.
 
 Enums are usually used when there is a set of predetermined values that are not expected to change in the future. Usually enums are used in much tighter unchanging values (for example weekdays, months, directions) but since they offer us a great way to validate our incoming values we might as well use them in our case. 
 
-After giving _Visibility_ the same treatment our app is finally ready!
+After giving <i>Visibility</i> the same treatment our app is finally ready!
 
 </div>
 
@@ -1128,12 +1128,12 @@ After giving _Visibility_ the same treatment our app is finally ready!
 
 #### 9.12: Patientor backend, step5
 
-Create a POST-endpoint _/api/patients_ for adding patients. Ensure that you can add patients also from the frontend.
+Create a POST-endpoint <i>/api/patients</i> for adding patients. Ensure that you can add patients also from the frontend.
 
 #### 9.13: Patientor backend, step6
 
-Set up safe parsing, validation and type guards to the POST _/api/patients_request. 
+Set up safe parsing, validation and type guards to the POST <i>/api/patients</i> request. 
 
-Refactor the _Gender_ field to use a _enum_ type.
+Refactor the <i>Gender</i> field to use a [enum](http://www.typescriptlang.org/docs/handbook/enums.html) type.
 
 </div>
