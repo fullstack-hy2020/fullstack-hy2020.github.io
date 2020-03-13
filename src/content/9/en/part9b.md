@@ -880,6 +880,6 @@ In this exercise you might find it beneficial to use the <i>explicit any</i> typ
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ```
 
-Note that you need to have a correct setup in order to get hold to the request body, see [part 3](http://localhost:8000/en/part3/node_js_and_express#receiving-data).
+Note that you need to have a correct setup in order to get hold to the request body, see [part 3](/en/part3/node_js_and_express#receiving-data).
 
 </div>
