@@ -22,14 +22,14 @@
           "Kurssi koostuu kahdeksasta osasta, joista ensimmäinen on historiallisista syistä numero nolla. Kunkin osan tekemiseen kannattaa varata aikaa noin 5-25 tuntia.",
           "Materiaalissa osasta n osaan n+1 eteneminen ei ole mielekästä ennen kuin riittävä osaaminen osan n asioista on saavutettu. Kurssilla sovelletaankin pedagogisin termein tavoiteoppimista, engl. mastery learning ja on tarkoitus, että etenet seuraavaan osaan vasta, kun riittävä määrä edellisen osan tehtävistä on tehty.",
           "Oletuksena on, että teet kunkin osan tehtävistä ainakin ne jotka eivät ole merkattu tähdellä. Myös tähdellä merkatut tehtävät vaikuttavat arvosteluun, mutta niiden tekemättäjättäminen ei aiheuta liian suuria esteitä seuraavan osan (tähdellä merkkaamattomien) tehtävien tekemiseen.",
-          "Etenemisnopeus kurssilla on vapaa, tehtäviä voi palauttaa 10.1.2020. klo 23:59 asti.",
+          "Etenemisnopeus kurssilla on vapaa, tehtäviä voi palauttaa 10.1.2021. klo 23:59 asti.",
           "Tämän kurssin eri osiin jo tehtyjen palautusten ajankäyttöstatistiikan näet tehtävien palautussivulta."
         ]
       },
       {
         "title": "Arvosteluperusteet",
         "content": [
-          "Kurssi voidaan suorittaa joko 3 tai 5-8 opintopisteen laajuisena.",
+          "Kurssi voidaan suorittaa joko 3 tai 5-9 opintopisteen laajuisena.",
           "Laajuus ja arvosana määräytyy kaikkien tehtyjen tehtävien perusteella, myös tähdellä merkityt tehtävät siis vaikuttavat arvosanaan. Kurssin lopussa on koe, joka on suoritettava hyväksytysti. Koe ei kuitenkaan vaikuta arvosanaan.",
           "Jos haluat kurssilta suorituksen, tallenna opiskelijanumerosi palautussovelluksen näkymään my submissions."
         ]
@@ -61,7 +61,7 @@
       "This course serves as an introduction to modern web application development with JavaScript. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js. The course also contains a section on GraphQL, a modern alternative to REST APIs.",
       "The course covers testing, configuration and environment management, and the use of MongoDB for storing the application’s data.",
       "This years edition of the course contains a new part on <a href='/osa9'>TypeScript</a>. Content of the part is provided by <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>",
-      "The course is worth 3-9 credits, and the content is the same as in the  <a href='https://fullstack-hy2020.github.io/'>Full stack course</a> held at the <a href='https://www.helsinki.fi/en/computer-science'>Department of Computer Science</a> at the University of Helsinki in Spring 2019. There is also an associated <a href='/osa0/yleista#full-stack-harjoitustyo'>project work</a> that is worth 1-10 credits.",
+      "The course is worth 3-9 credits, and the content is the same as in the  <a href='https://fullstack-hy2020.github.io/'>Full stack course</a> held at the <a href='https://www.helsinki.fi/en/computer-science'>Department of Computer Science</a> at the University of Helsinki in Spring 2020. There is also an associated <a href='/osa0/yleista#full-stack-harjoitustyo'>project work</a> that is worth 1-10 credits.",
       "Partners and affiliates of the course include <a href='https://www.houston-inc.com/'>Houston Inc</a>, <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>, <a href='https://elisa.fi/'>Elisa</a>, <a href='https://www.kesko.fi/'>K-ryhmä</a>, <a href='https://www.instagram.com/unitytechnologies/?hl=en'>Unity Technologies</a> and <a href='https://careers.konecranes.com/Konecranes/'>Konecranes</a>. See <a href='https://www.youtube.com/watch?v=BZexOyQZMMc&list=PLumQiZ25uijis31zaRL7rhzLalSwLqUtm'>here for guest lectures</a> on course-related topics given by various experts from our partners and affiliates."
     ],
     "info": [
@@ -93,7 +93,7 @@
       {
         "title": "Types of material",
         "content": [
-          "There is a lot of material in the course and it has been written very fast about the circumstances. Despite the beta testing and proofreading, the material has spelling mistakes. /fullstackopen-2019.github.iok in course material. ",
+          "There is a lot of material in the course and it has been written very fast about the circumstances. Despite the beta testing and proofreading, the material has spelling mistakes. /fullstackopen-2020.github.iok in course material. ",
           "Making pull request is easy. For example, if this page has typo, go to the \"source code\" page https://github.com/fullstack-hy2019/fullstack-hy2019.github.io/edit/source/src/content/pages/about.json click on the pen image to the right, make the changes and click a few times \"green\" according to the Danger course. "
         ]
       }

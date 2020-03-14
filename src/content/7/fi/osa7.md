@@ -11,5 +11,4 @@ Käymme myös katsauksen siitä miten voimme määritellä itse hook-funktiota.
 
 Kurssin seitsemännen osan teemoihin liittyvät myös useat yhteistyökumppaniemme asiantuntijoiden vierailuluennoista, jotka löydät <a href='https://www.youtube.com/playlist?list=PLumQiZ25uijis31zaRL7rhzLalSwLqUtm'><span style='text-decoration: underline;'>täältä</span></span></a>.
   
-**Tämän osan tehtävien deadline on sunnuntaina 15.3. klo 23:59**
 </div>

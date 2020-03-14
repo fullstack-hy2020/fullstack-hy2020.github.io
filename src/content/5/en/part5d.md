@@ -1262,7 +1262,7 @@ Make a test which checks, that the blogs are ordered according to likes with the
 
 This exercise might be a bit trickier. One solution is to find all of the blogs and then compare them in the callback function of a [then](https://docs.cypress.io/api/commands/then.html#DOM-element) command. 
 
-This was the last exercise of this part, and its time to push your code to github and mark the exercises you completed in the [exercise submission system](https://github.com/fullstack-hy2020).
+This was the last exercise of this part, and its time to push your code to github and mark the exercises you completed in the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 
 </div>

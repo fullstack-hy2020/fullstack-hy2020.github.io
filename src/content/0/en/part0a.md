@@ -99,6 +99,18 @@ By submitting at least xx/yy of the exercises for part 9 of the course, TypeScri
 
 Exercises in parts 8 and 9 do not count towards the grade for the 5-7 credit course. 
 
+
+### Suoritusmerkinnän pyytäminen
+
+Jos haluat kurssilta suorituksen, tallenna <b>Helsingin yliopiston</b> opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) näkymään <i>my submissions</i>. Jos et ole Helsingin yliopiston opiskelija, saat opiskelijanumeron ilmoittautumalla kurssille [Avoimen yliopiston](/osa0/yleista/#kokeeseen-ilmoittautuminen) kautta.
+
+Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi valmis kurssin suorituksen kanssa:
+
+![](../../images/0/28.png)
+
+Arvosana siirtyy Weboodiin neljän viikon sisällä suoritusmerkintäpyynnön jälkeen.
+
+
 ### Course certificate
 
 Even if you do not register to Open university for the exam, you can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) once you have completed enough exercises for a passing grade. <i>For getting the certificate, a Finnish social security number is not needed.</i>

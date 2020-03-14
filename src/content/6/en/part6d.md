@@ -136,7 +136,6 @@ The situation that results from using <i>connect</i> with the <i>mapStateToProps
 
 The <i>Notes</i> component has "direct access" via <i>props.notes</i> and <i>props.filter</i> for inspecting the state of the Redux store.
 
-<!-- Komponentti _NoteList_ ei oikeastaan tarvitse mihinkään tietoa siitä mikä filtteri on valittuna, eli filtteröintilogiikka voidaan siirtää kokonaan sen ulkopuolelle, ja palauttaa propsina _notes_ suoraan sopivalla tavalla filtteröidyt muistiinpanot: -->
 The _NoteList_ component actually does not need the information about which filter is selected, so we can move the filtering logic elsewhere.
 We just have to give it correctly filtered notes in the _notes_ prop:
 
@@ -182,7 +181,6 @@ export default ConnectedNotes
 
 ### mapDispatchToProps
 
-<!-- Olemme nyt pääseet eroon hookista _useSelector_, mutta <i>Notes</i> kääyttää edelleen hookia _useDispatch_ ja sen palauttavaa funktiota _dispatch_: -->
 Now we have gotten rid of _useSelector_, but <i>Notes</i> still uses the _useDispatch_ hook and the _dispatch_ function returning it:
 
 ```js
@@ -352,7 +350,7 @@ export default connect(
 Since the component does not need to access the store's state, we can simply pass <i>null</i> as the first parameter to _connect_. 
 
 
-You can find the code for our current application in its entirety in the <i>part6-5</i> branch of [this Github repository](https://github.com/fullstackopen-2019/redux-notes/tree/part6-5).
+You can find the code for our current application in its entirety in the <i>part6-5</i> branch of [this Github repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5).
 
 ### Referencing action creators passed as props
 
@@ -651,7 +649,6 @@ The [documentation](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWor
 
 <div class="tasks">
 
-This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://github.com/fullstack-hy2020).
-
+This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>
