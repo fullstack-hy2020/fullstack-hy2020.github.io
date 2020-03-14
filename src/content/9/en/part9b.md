@@ -24,7 +24,7 @@ To use <i>ts-node</i> you could install it globally with the official <i>typescr
 
 If you can't or don't want to install global packages you can create an npm project that has the required dependencies and run your scripts in it. We shall also go with this approach.
 
-As we remember from [part 3](/en/part3) a npm project is set by running running command <i>npm init</i> in an empty directory. Then we can install the dependencies by running
+As we remember from [part 3](/en/part3) a npm project is set by running command <i>npm init</i> in an empty directory. Then we can install the dependencies by running
 
 ```
 npm install --save-dev ts-node typescript
@@ -186,7 +186,7 @@ But now is time for the question: is it <i>really</i> okay for the function to r
 
 When you have written code that can actually end up in a situation where something is divided by 0 it probably means something has gone terribly wrong and in that case an error should probably be thrown and handled somewhere where the function was called. When you are deciding to return values you weren't originally planning, the warnings you see from TypeScript restrict you from making rushed decisions and help you to keep your code working as expected.
 
-One more thing to consider is that even though we have in our code defined what types of parameters to accept, the generated JavaScript that is used runtime doesn't anymore have these type checks. So, if for example the <i>operation</i>-parameter's value comes from an external interface, there is no definite guarantee that it will be one of the allowed values. Therefore it's still better to include error handling to be prepared for the unexpected to happen. In this case, when there are multiple possible accepted values and all unexpected ones should result in an error, the [switch...case](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement suits better than if...else in our code.
+One more thing to consider is that even though we have in our code defined what types of parameters to accept, the generated JavaScript that is used runtime doesn't have these type checks anymore. So, if for example the <i>operation</i>-parameter's value comes from an external interface, there is no definite guarantee that it will be one of the allowed values. Therefore it's still better to include error handling to be prepared for the unexpected to happen. In this case, when there are multiple possible accepted values and all unexpected ones should result in an error, the [switch...case](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement suits better than if...else in our code.
 
 The resulting code of our calculator could actually look something like this:
 
@@ -216,7 +216,7 @@ try {
 }
 ```
 
-The programs we've written are alright, but it sure would be better if there were a way to use command line arguments instead of always having to change the code to calculate different things. Let's try it out, as we would in a regular Node application, by accessing <i>process.argv</i>. But something is not right:
+The programs we've written are alright, but it sure would be better if there was a way to use command line arguments instead of always having to change the code to calculate different things. Let's try it out, as we would in a regular Node application, by accessing <i>process.argv</i>. But something is not right:
 
 ![](../../images/9/5.png)
 
@@ -276,7 +276,7 @@ const b: number = Number(process.argv[3])
 multiplicator(a, b, `Multiplied ${a} and ${b}, the result is:`);
 ```
 
-at it can be run as follows
+and it can be run as follows
 
 ```sh
 npm run multiply 5 2
@@ -298,7 +298,7 @@ The reason for this is that the <i>Number('lol')</i> returns <i>NaN</i> which ac
 
 In order to save us from this kind of behavior, we have to validate the data that is given to us as in command line. 
 
-Improved version of the multiplicator looks this:
+Improved version of the multiplicator looks like this:
 
 ```js
 interface MultiplyValues {
@@ -420,16 +420,16 @@ Write a function <i>calculateExercises</i> that calculates the average time of <
 The daily exercise hours are given to the function as an [array](https://www.typescriptlang.org/docs/handbook/basic-types.html#array) that contains the number of exercise hours for each day in the training period. Eg. a week with 3 hours of training at Monday, none at Tuesday, 2 hours at Wednesday, 4.5 hours at Thursday and so on would be represented by the following array:
 
 ```js
-[3, 0, 2, 4.5, 0, 3, 1, 0, 4]
+[3, 0, 2, 4.5, 0, 3, 1]
 ```
 
 For the Result object you should to create an [interface](https://www.typescriptlang.org/docs/handbook/interfaces.html).
 
-If you would call the function with parameters <i>[3, 0, 2, 4.5, 0, 3, 1, 0, 4]</i> and <i>2</i> it could return
+If you would call the function with parameters <i>[3, 0, 2, 4.5, 0, 3, 1]</i> and <i>2</i> it could return
 
 ```js
 { periodLength: 7,
-  trainingDays: 4,
+  trainingDays: 5,
   success: false,
   rating: 2,
   ratingDescription: 'not too bad but could be better',
@@ -456,8 +456,8 @@ and
 ```sh
 $ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
 
-{ periodLength: 9,
-  trainingDays: 6,
+{ periodLength: 10,
+  trainingDays: 7,
   success: false,
   rating: 2,
   ratingDescription: 'not too bad but could be better',
@@ -467,7 +467,7 @@ $ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
 
 In the example the <i>first argument</i> is the target value.
 
-Handle exceptions and errors appropriately. exerciseCalculator should accept inputs of varied length. Determine by yourself how you manage to collect all needed input.
+Handle exceptions and errors appropriately. exerciseCalculator should accept inputs of varied length. Determine how you manage to collect all needed input.
 
 </div>
 
