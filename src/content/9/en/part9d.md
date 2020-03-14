@@ -755,12 +755,12 @@ Patient information should be accessible when clicking eg. the patients name.
 
 After fetching the patient information from backend add the fetched information to the applications state. You can differentiate between which fields you get from the <i>/api/patients</i> and <i>/api/patients/{id}</i> endpoints. You do not need to fetch the information if it already is in the app state. This is a naive implementation disregarding the need to update without reloading the app.
 
-Since we have now the state in contex, you need a new action type for updating the indvidual patient's data.
+Since we now have the state in the context, you'll need to define a new action type for updating an individual patient's data.
 
-Application uses [Semantic UI React](https://react.semantic-ui.com/) for styling, that is quite simillar to [React Bootstrap](https://react-bootstrap.github.io/) and [MaterialUI](https://material-ui.com/) that we covered in [part 7](/en/part7/more_about_styles). You may also use it for the new components but that is up to you sincew the main focus is now in Typescript.
+The Application uses [Semantic UI React](https://react.semantic-ui.com/) for styling, which is quite similar to [React Bootstrap](https://react-bootstrap.github.io/) and [MaterialUI](https://material-ui.com/) that we covered in [part 7](/en/part7/more_about_styles). You may also use it for the new components but that is up to you sincew the main focus is now in Typescript.
 
-Application also uses the [react router](https://reacttraining.com/react-router/web/guides/quick-start) 
-to control what view is visible in the frontend. You might want to have a look on [part 7](/en/part7/react_router) if you have not already have a grasp on how router works.
+The Application also uses [react router](https://reacttraining.com/react-router/web/guides/quick-start) 
+to control what view is visible in the frontend. You might want to have a look on [part 7](/en/part7/react_router) if you don't yet have a grasp on how the router works.
 
 The result could look like the following:
 
