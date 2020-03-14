@@ -15,7 +15,7 @@ const Challenge = () => (
   <Layout>
     <SEO
       lang="en"
-      title="Full stack -challenge | Full stack open"
+      title="Full stack -challenge | Full stack open 2020"
       description="The University of Helsinki and Houston Inc. have partnered up to challenge both individual developers and companies alike to learn and build upon their expertise in true Full Stack development. The course is built by coders for coders, and offers something for both newcomers and seasoned industry veterans alike. "
       keywords={[
         ...mainSEOtags,

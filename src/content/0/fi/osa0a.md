@@ -63,13 +63,13 @@ Arvosana/opintopisterajat:
 
 | tehtäviä     | opintopisteitä | arvosana | 
 | ------------ | :------------: | :------: |
-| 139          |       7        | 5        |
-| 128          |       6        | 5        |
-| 117          |       5        | 5        |
-| 106          |       5        | 4        |
-| 95           |       5        | 3        |
-| 84           |       5        | 2        |
-| 73           |       5        | 1        |
+| 138          |       7        | 5        |
+| 127          |       6        | 5        |
+| 116          |       5        | 5        |
+| 105          |       5        | 4        |
+| 94           |       5        | 3        |
+| 83           |       5        | 2        |
+| 72           |       5        | 1        |
 
 Suoritukseen edellytetään tehtävien lisäksi hyväksytysti suoritettu koe.
 

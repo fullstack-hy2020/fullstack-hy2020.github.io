@@ -1,6 +1,30 @@
 {
   "fi": [
     {
+      "title": "Miten kurssille ilmoittaudutaan?",
+      "text": [
+        "Kurssille ei tarvitse varsinaisesti ilmoittautua ennen kuin haluat tehdä kurssin kokeen. Koe tehdään Avoimen yliopiston Moodle-järjestelmään. Katso lisää <a href='/osa0/yleista#arvosteluperusteet'>täältä</a>."
+      ]
+    },
+    {
+      "title": "Mikä on kurssin laajuus?",
+      "text": [
+        "Kurssin laajuus on <a href='osa0/yleista#arvosteluperusteet'>riippuen tekemiesi tehtävien määrästä</a> 3-9 opintopistettä. Suoritettuasi kurssin voit jatkaa aihepiiriin syventymistä 1-10 opintopisteen laajuisen <a href='/osa0/yleista#full-stack-harjoitustyo'>Full stack -harjoitustyön</a> parissa."
+      ]
+    },    
+    {
+      "title": "Milloin on tehtävien ja kokeen deadline?",
+      "text": [
+        "Etenemisnopeus on vapaa, kurssilla on ainoastaan yksi deadline sekä tehtäville että kokeelle, 10.1.2021 klo 23.59.59. Kannattaa kuitenkin huomata, että kurssille on ilmoittauduttava viimeistään deadlinea edeltävänä päivänä 9.1.2021."
+      ]
+    },
+    {
+      "title": "Miten tehtävät palautetaan?",
+      "text": [
+        "Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät palautussovellukseen, lue lisää <a href='/osa0/yleista#tehtavien-palauttaminen'>täältä</a>."
+      ]
+    },    
+    {
       "title": "Pitääkö jokainen osa palauttaa omaan repositorioon?",
       "text": [
         "Ei. Voit käyttää yhtä tai useampaa repositoriota, tärkeintä on, että asiat repositorion sisällä ovat selkeästi nimettyjä."
@@ -13,6 +37,12 @@
       ]
     },
     {
+      "title": "Milloin ja miten saan kurssilta suoritusmerkinnän?",
+      "text": [
+        "Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi valmis kurssin suorituksen kanssa. Viimeinen mahdollinen suorituspäivä on 10.1.2020. Lue lisää <a href='/osa0/yleista#arvosteluperusteet'>täältä</a>."
+      ]
+    },    
+    {
       "title": "Voinko laajentaa aiempaa kurssisuoritustani?",
       "text": [
         "Voit, lue lisää <a href='/osa0/yleista#aiemmin-suoritetun-kurssin-taydentaminen'>täältä</a>"
@@ -23,15 +53,15 @@
       "text": [
         "Voit! Tosin suoritusmerkinnän voit saada vasta 15.3. alkavassa MOOC:issa, et myöskään voi palauttaa tehtäviä vielä. MOOCin ja kampuskurssin sisältö on sama, joten nyt tehty työ ei mene hukkaan."
       ]
-    }   
+    },  
+    {
+      "title": "Kuulin että suorittamalla kurssin on mahdollista päästä työhaastatteluun",
+      "text": [
+        "Pitää paikkansa, jos suoritat täydellä laajuudella kurssin ja siihen liittyvän 10 op:n laajuisen harjoitustyön, pääset yhteistyökumppaniemme työhaastatteluun, lue lisää <a href='/osa0/yleista#haastattelulupaus'>täältä</a>."
+      ]
+    }
   ],
   "en": [
-    {
-      "title": "Will there be a new course 2020?",
-      "text": [
-        "Yes, the new version of the course will start 15.3.2020.<br><br>There won't be major changes in the course content. The greatest change shall be in part 5, where integration testing of frontend will be replaced by E2E testing using Cypres.io. <br><br>There will also be an entirely new part about Typescript.<br><br>The 2019 version can be expanded in the  2020 version, see more <a href='/part0/general_info#expanding-a-previously-completed-course'>here</a>. "
-      ]
-    },
     {
       "title": "How do I sign up for the course?",
       "text": [
@@ -41,13 +71,13 @@
     {
       "title": "How many credits is the course?",
       "text": [
-        "The course is 3-8 ECTS credits <a href='/en/part0/general_info#grading'>depending on the amount of returned exercises</a>. After completing the course you can continue to deepen your knowledge on the subject matter by doing the 1-10 ETCS credit <a href='/en/part0/general_info#full-stack-project'>Full Stack project</a>. Please note that only persons with Finnish social security number can get official ECTS credits. For the course certificate signup or Finnish social security number are not needed."
+        "The course is 3-9 ECTS credits <a href='/en/part0/general_info#grading'>depending on the amount of returned exercises</a>. After completing the course you can continue to deepen your knowledge on the subject matter by doing the 1-10 ETCS credit <a href='/en/part0/general_info#full-stack-project'>Full Stack project</a>. Please note that only persons with Finnish social security number can get official ECTS credits. For the course certificate signup or Finnish social security number are not needed."
       ]
     },
     {
       "title": "When is the deadline for the exercises and the exam?",
       "text": [
-        "You can complete the course at your own pace. The course has only one deadline for the exercises and the exams 10th January 2020 at 23.59.59. Do keep in mind that you have to sign up for the exam no later than the day before the deadline 9.1.2020."
+        "You can complete the course at your own pace. The course has only one deadline for the exercises and the exams 10th January 2021 at 23.59.59. Do keep in mind that you have to sign up for the exam no later than the day before the deadline 9.1.2021."
       ]
     },
     {
@@ -77,7 +107,7 @@
     {
       "title": "Do I get a certificate after completing the course?",
       "text": [
-        "Yes, certificate is available to all who pass the course by 10th January 2020. You can download the certificate after completing the course from the exercise submission system. For the course certificate signup to Open university and Finnish social security number are not needed."
+        "Yes, certificate is available to all who pass the course by 10th January 2021. You can download the certificate after completing the course from the exercise submission system. For the course certificate signup to Open university and Finnish social security number are not needed."
       ]
     },    
     {
