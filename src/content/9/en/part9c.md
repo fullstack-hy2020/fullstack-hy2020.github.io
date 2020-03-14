@@ -40,7 +40,7 @@ The npm srcipt for running <i>tsc</i> is set as follows:
  npm run tsc -- --init
 ```
 
- **Notice** the extra -- before the actual argument, arguments before the -- are interpreted for the command <i>npm</i> and ones after are for the command that is run throught the script. 
+ **Notice** the extra -- before the actual argument, arguments before the -- are interpreted for the command <i>npm</i> and ones after are for the command that is run through the script. 
 
 The created <i>tsconfig.json</i> contains a lengthy list of all of the possible configurations available to use, but  only a few of those are uncommented. Studying the initial <i>tsconfig.json</i> file might be useful for finding some configuration options you might need. It is also completely okay to keep the commented rows in the file just in case you might someday need to expand your configuration settings. 
 
@@ -77,9 +77,9 @@ The <i>target</i> parameter tells the compiler which ECMAScript version the gene
 
 <i>noFallthroughCasesInSwitch</i> ensures that in a _switch case_ each case ends to _return_ or _break_ statement.
 
-<i>esModuleInterop</i> allows interaperability between commonJS and ES Modules, see more [in documentation](https://www.typescriptlang.org/v2/en/tsconfig#esModuleInterop).
+<i>esModuleInterop</i> allows interoperability between commonJS and ES Modules, see more [in documentation](https://www.typescriptlang.org/v2/en/tsconfig#esModuleInterop).
 
-Now that we have our preferred configuration set, let's continue by installing <i>express</i> and of course also <i>@types/express</i>. Since this is a real project, which is intended to be grown over time we will use eslint from thevery  beginning:
+Now that we have our preferred configuration set, let's continue by installing <i>express</i> and of course also <i>@types/express</i>. Since this is a real project, which is intended to be grown over time we will use eslint from the very  beginning:
 
 ```sh
 npm install express
@@ -149,7 +149,7 @@ Now we only need to set up our development environment properly, and then we are
 npm install --save-dev ts-node-dev
 ```
 
-And we are ready to start writing some code after defining still a coupe of more npm scripts:
+And we are ready to start writing some code after defining still a couple of more npm scripts:
 
 ```json
 {
@@ -188,9 +188,9 @@ app.listen(PORT, () => {
 });
 ```
 
-If we now run the app with <i>npm run dev</i> we can verify that a request to http://localhost:3000/ping gives response <i>pong</i>, so our configuration is set!
+If we now run the app with <i>npm run dev</i> we can verify that a request to http://localhost:3000/ping gives a response <i>pong</i>, so our configuration is set!
 
-When starting the app with <i>npm run dev</i>, it is running in development mode, and for sure that is not suitable whenwe later on opera the app in production. 
+When starting the app with <i>npm run dev</i>, it is running in development mode, and for sure that is not suitable when we later on opera the app in production. 
 
 Let us now try to create the <i>production build</i> by running the TypeScript compiler. Since we have defined the <i>outdir</i> in our tsconfig.json, there's really nothing else to do, but run the script <i>npm run tsc</i>.
 
@@ -230,11 +230,11 @@ Now we have a minimal working pipeline, with which we can develop our project, a
 
 For this set of exercises you will be developing a backend for an existing project called <i>Patientor</i> which is a simple medical record application for doctors that handle diagnoses and basic health information of the patients.
 
-The [frontend](https://github.com/fullstack-hy2020/patientor) has already been built by outsider experts and you're task is to create a backend to support the existing code.
+The [frontend](https://github.com/fullstack-hy2020/patientor) has already been built by outsider experts and your task is to create a backend to support the existing code.
 
 #### 9.8: Patientor backend, step1
 
-Initialise project that will be used by the frontend. Configure eslint and tsconfig with the same configurations that are used in the material. Define a endpoint that responses to HTTP GET requests to route <i>/ping</i>.   
+Initialise project that will be used by the frontend. Configure eslint and tsconfig with the same configurations that are used in the material. Define an endpoint that responses to HTTP GET requests to route <i>/ping</i>.   
 
 The project should be runnale with npm scripts both in development mode and as compiled code in production mode.
 
@@ -242,7 +242,7 @@ The project should be runnale with npm scripts both in development mode and as c
 
 Fork and clone the project [patientor](https://github.com/fullstack-hy2020/patientor). Start the project with the help of the README-file. You should be able to use the frontend without a functioning backend.
 
-Ensure that backend answers to the ping request that <i>fronend</i> is makes on startup. Check developer tool to make sure it really works: 
+Ensure that backend answers to the ping request that <i>frontend</i> is made on startup. Check developer tool to make sure it really works: 
 
 ![](../../images/9/16a.png)
 
