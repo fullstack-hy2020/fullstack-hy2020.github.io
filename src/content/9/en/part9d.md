@@ -568,7 +568,7 @@ export type Action =
     };
 ```
 
-Recucer looks quite much like the ones we wrote in [part 6](/en/part6), it changes the state of each type of action: 
+Reducer looks quite much like the ones we wrote in [part 6](/en/part6), it changes the state for each type of action: 
 
 ```js
 export const reducer = (state: State, action: Action): State => {
