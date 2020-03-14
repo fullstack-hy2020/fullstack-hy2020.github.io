@@ -896,7 +896,7 @@ Use types properly in the backend! For now there is no need to do a proper valid
 
 #### 9.21: patientor, step4
 
-Extend the patient page in the frontend to list the <i>data</i>, <i>description</i> and <i>diagnose codes</i> of patient's entries. 
+Extend the patient page in the frontend to list the <i>date</i>, <i>description</i> and <i>diagnose codes</i> of patient's entries. 
 
 You can use the same type definiton for <i>Entry</i> in the frontend. For these exercises it is enough just to copy/paste the definitions from backend to frontend.
 
