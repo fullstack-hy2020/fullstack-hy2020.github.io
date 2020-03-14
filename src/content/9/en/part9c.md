@@ -289,10 +289,10 @@ Data looks like the following
 
 Let's start by creating an endpoint that returns all flight diary entries. 
 
-First we shall made some decision hot to structure our source code. It is better to put all the source code
+First we shall made some decision not to structure our source code. It is better to put all the source code
 under the directory <i>src</i>, so that the source  code is not mixed up with configuration files. We will move also <i>index.ts</i> there and make the corresponding changes to npm scripts.
 
-We'll decide to put all [routers](/en/part4/structure_of_backend_application_introduction_to_testing) that is the modules that take care of handling a set of specific resource such as <i>diaries</i> under the directory <i>src/routes</i>. This differs a bit from the convention of [part 4](/en/part4), where we used directory <i>src/controllers</i>.
+We'll decide to put all [routers](/en/part4/structure_of_backend_application_introduction_to_testing) that is the modules that take care of handling a set of specific resources such as <i>diaries</i> under the directory <i>src/routes</i>. This differs a bit from the convention of [part 4](/en/part4), where we used directory <i>src/controllers</i>.
 
 
 The routes taking care of diary endpoints in <i>src/routes/diaries.ts</i> looks like this:
@@ -342,7 +342,7 @@ And now when making a HTTP POST request to http://localhost:3000/api/diaries we 
 
 The next thing is to start serving the seed data (found [here](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json)) from the app. We shall fetch the data and save it to file <i>data/diaries.json</i>
 
-We will not write the code that does the actual data manipulation to router, but instead create a <i>service</i> that takes care of the data manipulation. It is quite a common pattern to separate the "business logic" from router code to own modules that are quite often called <i>services</i>. The name service originates from [Domain driven design](https://en.wikipedia.org/wiki/Domain-driven_design) and was made popular by the [Spring](https://spring.io/) framework.
+We will not write the code that does the actual data manipulation to the router, but instead create a <i>service</i> that takes care of the data manipulation. It is quite a common pattern to separate the "business logic" from router code to own modules that are quite often called <i>services</i>. The name service originates from [Domain driven design](https://en.wikipedia.org/wiki/Domain-driven_design) and was made popular by the [Spring](https://spring.io/) framework.
 
 Let us create directory <i>src/services</i> and inside it the file <i>diaryService.ts</i> with two functions that are needed in fetching and saving the diaries:
 
@@ -389,7 +389,7 @@ The hint says we might want to use <i>resolveJsonModule</i>. Let's add it to our
 
 Problems are now gone.
 
-> **Note** for some reason VC Code has many times complained that it does not find the file <i>../../data/diaries.json</i> in the service despite the file exists. That is a bug and the complaint goes away when editor is restarted. 
+> **Note** for some reason VC Code has many times complained that it does not find the file <i>../../data/diaries.json</i> in the service despite the file exists. That is a bug and the complaint goes away when the editor is restarted. 
 
 As before we've seen how the compiler can decide the type of a variable by the value it is being assigned to and in a similar way the compiler interprets larger data sets consisting of objects and arrays. This is why the compiler actually can warn us if we are trying to do something suspicious to the json data we are currently handling. If we're handling an array that includes specific types of objects and we're trying to add an object there that doesn't have all of the fields that the other objects have or is having type conflicts (for example a number where should be a string) the compiler can give us a warning. 
 
@@ -544,7 +544,7 @@ const getNonSensitiveEntries =
 
 and it would expect the function to return an array of the modification of DiaryEntry type which includes only the four declared fields. 
 
-Since [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk) requires the type it modifies to be given as a [type variable](http://www.typescriptlang.org/docs/handbook/generics.html#working-with-generic-type-variables), simillar as the Array, we have now two nested type variables and the syntax looks already a bit odd. We can improve the readability by using the [alternative](http://www.typescriptlang.org/docs/handbook/basic-types.html#array) syntax of arrays:
+Since [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk) requires the type it modifies to be given as a [type variable](http://www.typescriptlang.org/docs/handbook/generics.html#working-with-generic-type-variables), similar as the Array, we have now two nested type variables and the syntax looks already a bit odd. We can improve the readability by using the [alternative](http://www.typescriptlang.org/docs/handbook/basic-types.html#array) syntax of arrays:
 
 ```js
 const getNonSensitiveEntries = 
@@ -565,20 +565,20 @@ const getNonSensitiveEntries = (): Omit<DiaryEntry, 'comment'>[] => {
 Another way would be to declare a completely new type for the <i>NonSensitiveDiaryEntry</i>:
 
 ```js
-export type NonSesitiveDiaryEntry = Omit<DiaryEntry, 'comment'>;
+export type NonSensitiveDiaryEntry = Omit<DiaryEntry, 'comment'>;
 ```
 
 The code becomes now
 
 ```js
 import diaries from '../../data/diaries';
-import { NonSesitiveDiaryEntry, DiaryEntry } from '../types'; // highlight-line
+import { NonSensitiveDiaryEntry, DiaryEntry } from '../types'; // highlight-line
 
 const getEntries = (): DiaryEntry[] => {
   return diaries;
 };
 
-const getNonSensitiveEntries = (): NonSesitiveDiaryEntry[] => { // highlight-line
+const getNonSensitiveEntries = (): NonSensitiveDiaryEntry[] => { // highlight-line
   return diaries;
 };
 
@@ -604,14 +604,14 @@ Because TypeScript doesn't modify the actual data but only types it, we need to 
 ```js
 import diaries from '../../data/entries.js'
 
-import { NonSesitiveDiaryEntry, DiaryEntry } from '../types'
+import { NonSensitiveDiaryEntry, DiaryEntry } from '../types'
 
 const getEntries = () : DiaryEntry[] => {
   return diaries
 } 
 
 // highlight-start
-const getNonSensitiveEntries = (): NonSesitiveDiaryEntry [] => {
+const getNonSensitiveEntries = (): NonSensitiveDiaryEntry [] => {
   return diaries.map(({ id, date, weather, visibility }) => ({
     id,
     date,
@@ -675,13 +675,13 @@ The response is what we expect it to be
 
 ### Exercises 9.10.-9.11.
 
-Simillarly to Ilari's flight service, we do not use a real database in our app but instead use hardcoded data, that is in the files [diagnoses.json](https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.json) and [patients.json](https://github.com/fullstack-hy2020/misc/blob/master/patients.json). Get the files and store those into a directory called <i>data</i> under your project. All data modification can be done in runtime memory, so during this part it is <i>not necessary to write to a file</i>.
+Similarly to Ilari's flight service, we do not use a real database in our app but instead use hardcoded data, that is in the files [diagnoses.json](https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.json) and [patients.json](https://github.com/fullstack-hy2020/misc/blob/master/patients.json). Get the files and store those into a directory called <i>data</i> under your project. All data modification can be done in runtime memory, so during this part it is <i>not necessary to write to a file</i>.
 
 #### 9.10: Patientor backend, step3
 
 Create a type <i>Diagnose</i> and use it to create endpoint <i>/api/diagnoses</i> for fetching all diagnoses with HTTP GET.
 
-Structure your code properly by using meaninfully named directories and files.
+Structure your code properly by using meaningfully named directories and files.
 
 **Note** that <i>diagnoses</i> may or may not contain the field <i>latin</i>. You might want to use [optional properties](https://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties) in the type definition.
 
@@ -786,7 +786,7 @@ corresponding method in <i>diaryService</i> looks like this
 
 ```js
 import {
-  NonSesitiveDiaryEntry, DiaryEntry,
+  NonSensitiveDiaryEntry, DiaryEntry,
   Visibility, Weather // highlight-line
   } from '../types';
 
@@ -823,7 +823,7 @@ router.post('/', (req, res) => {
 })
 ```
 
-But wait, what is the type of this object? It is not exactly a <i>DiaryEntry</i>, since it is still missign the <i>id</i> field. It could be useful for us just to create a new type <i>NewDiaryEntry</i> which could work as a type for the not-yet saved diary. Let us create that in <i>types.ts</i> using the existing <i>DiaryEntry</i> object with the [Omit](http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk) utility type:
+But wait, what is the type of this object? It is not exactly a <i>DiaryEntry</i>, since it is still missing the <i>id</i> field. It could be useful for us just to create a new type <i>NewDiaryEntry</i> which could work as a type for the not-yet saved diary. Let us create that in <i>types.ts</i> using the existing <i>DiaryEntry</i> object with the [Omit](http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk) utility type:
 
 ```js
 export type NewDiaryEntry = Omit<DiaryEntry, 'id'>;
@@ -832,7 +832,7 @@ export type NewDiaryEntry = Omit<DiaryEntry, 'id'>;
 And now we can use this type in our DiaryService and we can just destructure the whole new entry object when creating the entry to be saved: 
 
 ```js
-import { NewDiaryEntry, NonSesitiveDiaryEntry, DiaryEntry } from '../types'; // highlight-line
+import { NewDiaryEntry, NonSensitiveDiaryEntry, DiaryEntry } from '../types'; // highlight-line
 
 // ...
 
@@ -870,13 +870,13 @@ and now the application is ready to receive HTTP POST requests for adding diarie
 
 ### Proofing requests
 
-There are a plenty of things that can go wrong when accepting data from an outside source. Applications work rarely fully on their own and we are forced to live with the fact that data sources outside of a single system cannot be fully trusted. When the data is coming from an outside source, there's no way that it can be already typed when we receive it so we need to make decision on how to handle the uncertainty that comes with the data.
+There are plenty of things that can go wrong when accepting data from an outside source. Applications work rarely fully on their own and we are forced to live with the fact that data sources outside of a single system cannot be fully trusted. When the data is coming from an outside source, there's no way that it can be already typed when we receive it so we need to make decisions on how to handle the uncertainty that comes with the data.
 
 The way Express handles parsing the request body is that it asserts the type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) to all the body fields. In our situation this doesn't come apparent in any way in the editor, but if we start looking at the variables more closely and hover on any of them, we can see that each of them is indeed [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any).  Editor does not give us any complaints when we pass this data to <i>addDiary</i> as arguments: 
 
 ![](../../images/9/27.png)
 
-The value of type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#an) can be assigned to <i>any</i> type of variable since it <i>might be</i> the wanted type. This is definitiely not safe to trust so 
+The value of type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#an) can be assigned to <i>any</i> type of variable since it <i>might be</i> the wanted type. This is definitely not safe to trust so 
 check the incoming values (regardless whether we are using TypeScript or not).
 
 We could just add simple <i>exists</i> and <i>is-value-valid</i> checks to the function defining the route but since we also need to ensure that <i>Weather</i> and <i>Visibility</i> values are of the correct form, it is better to write the parsing and validation logic to a separate file <i>utils.ts</i>.
@@ -926,13 +926,13 @@ However if we type the object to <i>any</i>, eslint gives us a complaint:
 
 ![](../../images/9/24e.png)
 
-The cause for the complaint is the eslit-rule [no-explicit-any](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md) that prevents us form explicitly setting type to be <i>any</i>. Since this is in general a good rule to follow but just in this particular file undesired, it is better to allow using <i>any</i> now by disabling the eslint-rule in the file. This happens by adding the following line at the file:
+The cause for the complaint is the eslint-rule [no-explicit-any](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md) that prevents us form explicitly setting type to be <i>any</i>. Since this is in general a good rule to follow but just in this particular file undesired, it is better to allow using <i>any</i> now by disabling the eslint-rule in the file. This happens by adding the following line at the file:
 
 ```js
 /* eslint-disable @typescript-eslint/no-explicit-any */
 ```
 
-Lets start creating the parsers for each of the fields of <i>object</i>.
+Let us start creating the parsers for each of the fields of <i>object</i>.
 
 To validate the <i>comment</i> field we need to check that it exists, and to ensure that it is of the type <i>string</i>.
 
@@ -964,7 +964,7 @@ The function is so called [type guard](https://www.typescriptlang.org/docs/handb
 text is string
 ```
 
-The general form of a type predicate is _parameterName is Type_ where the _parameterName_ is the name of the function parameter and _Type_ is the targetted type.
+The general form of a type predicate is _parameterName is Type_ where the _parameterName_ is the name of the function parameter and _Type_ is the targeted type.
 
 If the type guard function returns true, the TypeScript compiler knows that the tested variable has the type that was defined in the type predicate. 
 
@@ -984,7 +984,7 @@ const isString = (text: any): text is string => {
 }
 ```
 
-would it not be enought to write the guard like this
+would it not be enough to write the guard like this
 
 ```js
 const isString = (text: any): text is string => {
@@ -1114,7 +1114,7 @@ const diaryEntries: DiaryEntry [] = data.map(obj => {
 export default diaryEntries
 ```
 
-Note that since <i>toNewDiaryEntry</i> returns object of the type <i>NewDiaryEntry</i> we need to assert it to be <i>DiaryEntry</i> with [as](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) opeator.
+Note that since <i>toNewDiaryEntry</i> returns an object of the type <i>NewDiaryEntry</i> we need to assert it to be <i>DiaryEntry</i> with [as](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) operator.
 
 Enums are usually used when there is a set of predetermined values that are not expected to change in the future. Usually enums are used for much tighter unchanging values (for example weekdays, months, directions) but since they offer us a great way to validate our incoming values we might as well use them in our case. 
 
@@ -1177,6 +1177,6 @@ Create a POST-endpoint <i>/api/patients</i> for adding patients. Ensure that you
 
 Set up safe parsing, validation and type guards to the POST <i>/api/patients</i> request. 
 
-Refactor the <i>Gender</i> field to use a [enum](http://www.typescriptlang.org/docs/handbook/enums.html) type.
+Refactor the <i>Gender</i> field to use an [enum](http://www.typescriptlang.org/docs/handbook/enums.html) type.
 
 </div>

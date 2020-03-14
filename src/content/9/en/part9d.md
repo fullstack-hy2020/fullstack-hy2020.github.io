@@ -25,29 +25,21 @@ But let that be enough of reasoning for now, and let's start getting our hands d
 npx create-react-app my-app --template typescript
 ```
 
-After running the command, you should have a complete basic react app, that uses TypeScript. The app can be started by simply running _npm start_ within the app root folder.
+After running the command, you should have a complete basic react app, that uses TypeScript. The app can be started by simply running <i>npm start</i> within the app root folder.
 
-If you browse through the files and folders, you will notice that the app is not that different from the one you would have initialised with pure JavaScript. Basically the only differences are that the _.js_ and _.jsx_ files are now renamed to _.ts_ and _.tsx_ files, they contain some type annotations, and the root folder also contains a _tsconfig.json_ file.
+If you browse through the files and folders, you will notice that the app is not that different from the one you would have initialised with pure JavaScript. Basically the only differences are that the <i>.js</i> and <i>.jsx</i> files are now renamed to <i>.ts</i> and <i>.tsx</i> files, they contain some type annotations, and the root folder also contains a<i>tsconfig.json</i> file.
 
-Now, let's take a look at the _tsconfig.json_ file that has been created for us. Everything should be more or less fine within the file, except for that at the moment the configuration also allows JavaScript files to be compiled, because _allowJs_ is set to _true_. That would be fine if you need to mix TypeScript and JavaScript (e.g. if you are in the middle of transforming a JavaScript project into TypeScript or some other reason), but we want our app to be purely TypeScript, so let's change that setting to _false_.
+Now, let's take a look at the<i>tsconfig.json</i> file that has been created for us. Everything should be more or less fine within the file, except for that at the moment the configuration also allows JavaScript files to be compiled, because <i>allowJs</i> is set to <i>true</i>. That would be fine if you need to mix TypeScript and JavaScript (e.g. if you are in the middle of transforming a JavaScript project into TypeScript or some other reason), but we want our app to be purely TypeScript, so let's change that setting to <i>false</i>.
 
-Earlier we added eslint to help us enforce coding style, so let's do the same with this app. Start by adding the necessary dependencies and then create the required _.eslintrc_ file as you did before, with the same contents. Then add the linting script to _package.json_.
+Earlier we added eslint to help us enforce coding style in backend, so let's do the same with this app. We do not need to install any dependencies since create-react-app has taken care of that already.
 
-Now you might notice that eslint gives you all kinds of warnings, which we want to get rid of. This is because our eslint doesn't understand React at the moment. What you need to do is to add a new dependency _eslint-config-react_:
-
-```
-npm install --save-dev eslint-config-react
-```
-
-Now we still need to setup eslint to understand react, so add react to used plugins and to extended configurations. The file _.eslintrc_ should now look like this:
+We configure eslint in <i>.eslintrc</i> with following settings:
 
 ```js
 {
   "env": {
     "browser": true,
-    "jest": true,
-    "es6": true,
-    "node": true
+    "es6": true
   },
   "extends": [
     "eslint:recommended",
@@ -55,47 +47,41 @@ Now we still need to setup eslint to understand react, so add react to used plug
     "plugin:@typescript-eslint/recommended"
   ],
   "plugins": ["react", "@typescript-eslint"],
-}
-```
-
-We also need to add a new _settings_ configuration for react linting into _.eslintrc_:
-
-```js
-{
-  // ...
   "settings": {
     "react": {
       "pragma": "React",
       "version": "detect"
     }
   },
+  "rules": {}
 }
 ```
 
-Since basically all React components return a _JSX.Element_ type or _null_, we will loosen the linting rules a bit, so that we don't need to explicitly write out function return types everywhere. This can be done by adding the following _rules_ configuration into _.eslintrc_:
+Since basically all React components return a <i>JSX.Element</i> type or  <i>null</i>, we have loosen the default linting rules a bit by disabling the rule [explicit-function-return-type](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-function-return-type.md), so that we don't need to explicitly write out function return types everywhere.
 
-```js
-{
-  // ...
-  "rules": {
-    "@typescript-eslint/explicit-function-return-type": 0
-  },
-}
-```
-
-Now we need to get our linting script to parse _*.tsx_ files as well, which are the TypeScript equivalent of react's JSX files. We can do that by altering our lint command in _package.json_ to the following:
+Now we need to get our linting script to parse  <i>*.tsx </i> files as well, which are the TypeScript equivalent of react's JSX files. We can do that by altering our lint command in <i>.package.json</i> to the following:
 
 ```json
-"lint": "eslint './src/**/*.{ts,tsx}'"
+{
+  // ...
+    "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint './src/**/*.{ts,tsx}'" // highlight-line
+  },
+  // ...
+}
 ```
 
-If we now run _npm run lint_, we should still receive an error from eslint:
+If we now run <i>npm run lint</i>, we should still receive an error from eslint:
 
 ![](../../images/9/31a.png)
 
-Why is that? Well, as we can interpret from the error, the file _serviceWorker.ts_ doesn't seem to be compliant with our linting configurations at the moment. This is because the _register_ function uses other functions that are declared later in the same file and the rule _@typescript-eslint/no-use-before-define_ doesn't like that. To fix the error we need to move the _register_ function as the last function in the file.
+Why is that? as we can see from the error, the file  <i>serviceWorker.ts</i> doesn't seem to be compliant with our linting configurations at the moment. This is because the <i>register</i> function uses other functions that are declared later in the same file and the rule [@typescript-eslint/no-use-before-define](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-use-before-define.md) doesn't like that. To fix the error we need to move the  <i>register</i> function as the last function in the file.
 
-If we now run _npm run lint_, we shouldn't get any errors.
+If we now run <i>npm run lint</i>, we shouldn't get any errors. Actually the error does not matter since we do not need the file <i>serviceWorker.ts</i> anyway it is better to delete it altogether.
 
 ### React components with TypeScript
 
@@ -117,13 +103,13 @@ const element = <Welcome name="Sara" />;
 ReactDOM.render(element, document.getElementById("root"));
 ```
 
-In the example we have a component called <i>Welcome</i>, to which we want to pass a <i>name</i> prop, that is then printed out. We know that the  <i>name</i> prop should be a string and we use the [prop-types](https://www.npmjs.com/package/prop-types) package introduced in [part 5](/en/part5/props_children_and_proptypes#prop-types) to be able to receive hints about component's desired prop types and warnings for invalid prop types.
+In the example we have a component called <i>Welcome</i>, to which we want to pass a <i>name</i> prop, that is then rendered. We know that the  <i>name</i> prop should be a string and we use the [prop-types](https://www.npmjs.com/package/prop-types) package introduced in [part 5](/en/part5/props_children_and_proptypes#prop-types) to be able to receive hints about component's desired prop types and warnings for invalid prop types.
 
 With the help of TypeScript we don't need the <i>prop-types</i> package anymore to define prop types, because we can define the types with the help of TypeScript itself by using the _FunctionComponent_ type or it's shorter alias _FC_.
 
  When using TypeScript with React components, the type annotations look a bit different than with other TypeScript code. We basically add a type for the component variable, instead of the function and it's props. _React.FunctionComponent_ is a so called [generic](https://www.typescriptlang.org/docs/handbook/generics.html) type, to which you can pass a type as a sort of argument, that it then uses in the final type.
 
-The type declaration for _React.FC_ and _React.FunctionComponent_ looks like the following:
+The type declaration for _React.FC_ and _React.FunctionComponent_ look like the following:
 
 ```js
 type FC<P = {}> = FunctionComponent<P>;
@@ -156,9 +142,9 @@ Well, that was complicated (or was it?). Basically all we need to know at the mo
 Now, lets return to our code exaple and see how we would define the type for the <i>Welcome</i> component's props in TypeScript.
 
 ```jsx
-type WelcomeProps = {
+interface WelcomeProps {
   name: string;
-};
+}
 
 const Welcome: React.FC<WelcomeProps> = (props) => {
   return <h1>Hello, {props.name}</h1>;
@@ -184,13 +170,12 @@ const Welcome: React.FC<{ name: string }> = ({ name }) => (
 
 Now our editor knows that the <i>name</i> prop is a string, but for some reason eslint is not yet satisfied, and warns about that <i>'name' is missing in props validation</i>. This is because the react linting rules expect propTypes to be defined for all props, because it isn't aware of that we are already using TypeScript to define types for our props.
 
-To fix the error, we need to add a new linting rule to _.eslintrc_:
+To fix the error, we need to add a new linting rule to <i>.eslintrc</i>:
 
 ```json
 {
   // ...
   "rules": {
-    "@typescript-eslint/explicit-function-return-type": 0,
     "react/prop-types": 0, // highlight-line
   },  
   // ...
@@ -205,9 +190,9 @@ To fix the error, we need to add a new linting rule to _.eslintrc_:
 
 #### 9.14.
 
-Create a new Create React App with TypeScript, setup linting using eslint.
+Create a new Create React App with TypeScript, setup esint for the project similarly that we just did.
 
-This exercise is similar to the one you have already done in [Part 1](/en/part1/javascript#exercises-1-3-1-5) of the course, but with TypeScript added and some tweaks. Start off by modifying the contents of _index.tsx_ to the following:
+This exercise is similar to the one you have already done in [Part 1](/en/part1/javascript#exercises-1-3-1-5) of the course, but with TypeScript added and some tweaks. Start off by modifying the contents of <i>index.tsx</i> to the following:
 
 ```jsx
 import React from "react";
@@ -255,9 +240,11 @@ ReactDOM.render(<App />, document.getElementById("root"));
 
 and remove the unnecessary files.
 
-The whole app is now in one component, and that is not what we want, so refactor the code so that it consists of three new components: _Header_, _Content_ and _Total_. All data is still kept in the _App_ component, which passes all necessary data to each component as props. Be sure to add type declarations for the component's props. The _Header_ component should take care of rendering the name of the course, _Content_ should render the names of the different parts and the amount of exercises in that part, and _Total_ should render the total sum of exercises in all parts.
+The whole app is now in one component, and that is not what we want, so refactor the code so that it consists of three new components: <i>Header</i>,  <i>Content</i> and <i>Total</i>. All data is still kept in the <i>App</i> component, which passes all necessary data to each component as props. Be sure to add type declarations for the component's props! 
 
-The _App_ component should look somewhat like this:
+The <i>Header</i>, component should take care of rendering the name of the course, <i>Content</i> should render the names of the different parts and the amount of exercises in that part, and <i>Total</i> should render the total sum of exercises in all parts.
+
+The <i>App</i> component should look somewhat like this:
 
 ```jsx
 const App = () => {
@@ -308,35 +295,35 @@ Let's imagine that our application keeps on growing and we have the need to pass
 Let's start by defining types for our different course parts:
 
 ```js
-type CoursePartOne = {
+interface CoursePartOne {
   name: "Fundamentals";
   exerciseCount: number;
   description: string;
-};
+}
 
-type CoursePartTwo = {
+interface CoursePartTwo {
   name: "Using props to pass data";
   exerciseCount: number;
   groupProjectCount: number;
-};
+}
 
-type CoursePartThree = {
+interface CoursePartThree {
   name: "Deeper type usage";
   exerciseCount: number;
   description: string;
   exerciseSubmissionLink: string;
-};
+}
 ```
 
-Next we will create a type union of all these types, which we can use to define a type for our array, that should accept any of these course part types:
+Next we will create a type [union](http://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types) of all these types, which we can use to define a type for our array, that should accept any of these course part types:
 
 ```js
 type CoursePart = CoursePartOne | CoursePartTwo | CoursePartThree;
 ```
 
-Now we can set the type for our <i>courseParts</i> variable and after that our editor will automatically give an error if we use a wrong type for an attribute, use an extra attribute, or forget to set an expected attribute. You can test this by commenting out any attribute for any course part. Thanks to the <i>name</i> string literal TypeScript can identify which course part requires which additional attributes, even if the variable is defined to use the type union.
+Now we can set the type for our <i>courseParts</i> variable and after that our editor will automatically give an error if we use a wrong type for an attribute, use an extra attribute, or forget to set an expected attribute. You can test this by commenting out any attribute for any course part. Thanks to the <i>name</i> [string literal](http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types) TypeScript can identify which course part requires which additional attributes, even if the variable is defined to use the type union.
 
-But we're not satisfied yet! There is still a lot of duplication in the types that we have created, and that is something we want to avoid. We start off by identifying the attributes in common for all course parts and define a base type containing them, and then we will extend that base type to create our part specific types. We will also be changing our types to [interfaces](http://www.typescriptlang.org/docs/handbook/interfaces.html), because [extension](http://www.typescriptlang.org/docs/handbook/interfaces.html#extending-interfaces) syntax becomes somewhat clearer:
+But we're not satisfied yet! There is still a lot of duplication in the types that we have created, and that is something we want to avoid. We start off by identifying the attributes in common for all course parts and define a base type containing them, and then we will [extend](http://www.typescriptlang.org/docs/handbook/interfaces.html#extending-interfaces) that base type to create our part specific types:
 
 ```js
 interface CoursePartBase {
@@ -361,24 +348,6 @@ interface CoursePartThree extends CoursePartBase {
 }
 ```
 
-Here is the same for <i>CoursePartOne</i> using <i>type</i>, just for comparison:
-
-```js
-type CoursePartBase = {
-  name: string;
-  exerciseCount: number;
-};
-
-type CoursePartOne = CoursePartBase & {
-  name: "Fundamentals";
-  description: string;
-};
-```
-
-In most cases you can use either <i>type</i> or <i>interface</i>, which ever syntax you prefer, but there are still a few things to keep in mind. For instance if you define multiple interfaces with the same name, they will result in a merged interface, whereas if you try to create multiple types with the same name, it will result in an error stating that one with the same name is already declared. 
-
-Even if we're not using classes in this course, it might be good to know that classes can implement TypeScript interfaces, but not types. And lastly, if you have the need to define a type that is a union of other types, like our <i>CoursePart</i>, you need to use the keyword <i>type</i>, even if the different parts could be either <i>type</i> or <i>interface</i>.
-
 How should we now use these types in our components?
 
 One handy way to use these kind of types in TypeScript is by using _switch case_ expressions. Once you have either explicitly declared, or TypeScript has inferred that a variable holds a type union, and each type in the type union contains an attribute, that can be used as a type identifier, you can build your switch case around that attribute and TypeScript will then know which attributes are available within each case block.
@@ -389,7 +358,7 @@ In the example above TypeScript knows that <i>coursePart</i> has the type <i>Cou
 
 What about new types? If we were to add a new course part, wouldn't it be nice to know if we haven't yet implemented handling of that type in our code? With the example above, a new type would go to the <i>default</i> block and nothing would get printed for a new type. Sometimes this is of course totally acceptable, e.g. if you only want to handle specific (not all) cases of a type union, but in most cases it is recommended to handle all variations separately. 
 
-With TypeScript we can use a way of type checking, which is called exhaustive type checking. Its basic principle is that if we encounter an unexpected value, we call a function that accepts a value with the type [never](https://www.typescriptlang.org/docs/handbook/basic-types.html#never) and also has the return type <i>never</i>.
+With TypeScript we can use a method that is called <i>exhaustive type checking</i>. Its basic principle is that if we encounter an unexpected value, we call a function that accepts a value with the type [never](https://www.typescriptlang.org/docs/handbook/basic-types.html#never) and also has the return type <i>never</i>.
 
 A straight forward version of the function could look like this:
 
@@ -415,7 +384,7 @@ And would also comment out the <i>Deeper type usage</i> case block, we would see
 
 ![](../../images/9/33.png)
 
-The error description <i>Argument of type 'CoursePartThree' is not assignable to parameter of type 'never'</i> tells us that we are using a variable somwhere, where it should never be used, so we know that something needs to be fixed. When we remove the added comments from the <i>Deeper type usage</i> case block, you will see that the error goes away.
+The error description <i>Argument of type 'CoursePartThree' is not assignable to parameter of type 'never'</i> tells us that we are using a variable somewhere, where it should never be used, so we know that something needs to be fixed. When we remove the added comments from the <i>Deeper type usage</i> case block, you will see that the error goes away.
 
 </div>
 
@@ -425,7 +394,7 @@ The error description <i>Argument of type 'CoursePartThree' is not assignable to
 
 #### 9.17
 
-First add the new type information to _index.tsx_ and replace the variable _courseParts_ with the one from the example below.
+First add the new type information to <i>index.tsx</i> and replace the variable <i>courseParts</i> with the one from the example below.
 
 ```js
 // new types
@@ -475,15 +444,38 @@ const courseParts: CoursePart[] = [
 
 Now we know that both interfaces <i>CoursePartOne</i> and <i>CoursePartThree</i> share not only the base attributes, but also an attribute called <i>description</i>, which is a string in both interfaces. 
 
-Your first is to to declare a new interface, that includes the <i>description</i> attribute and extends the <i>CoursePartBase</i> interface. Then modify the code so that you can remove the <i>description</i> attribute from both <i>CoursePartOne</i> and <i>CoursePartThree</i>, without getting any errors.
+Your first task is to to declare a new interface, that includes the <i>description</i> attribute and extends the <i>CoursePartBase</i> interface. Then modify the code so that you can remove the <i>description</i> attribute from both <i>CoursePartOne</i> and <i>CoursePartThree</i>, without getting any errors.
 
-Then modify your <i>Content</i> component so, that it will render all attributes for each course part. Use exhaustive type checking!
+The create a component <i>Part</i> that renders all attributes opf each type of course part. Use switch case -based exhaustive type checking! Use the new component in component <i>Content</i>.
 
 Lastly, add your own course part interface with at least the following attributes: <i>name</i>, <i>exerciseCount</i> and <i>description</i>. Then add that interface to the type union <i>CoursePart</i> and add corresponding data to the <i>courseParts</i> variable. Now if you have modified your <i>Content</i> component correctly, you should get an error, because you have not yet added support for the fourth course part type. Do the necessary changes to <i>Content</i>, so that all attributes for the new course part also get rendered and that the compiler doesn't produce any errors.
 
 </div>
 
 <div class="content">
+
+### A note about defining object types
+
+We h
+
+Here is the same for <i>CoursePartOne</i> using <i>type</i>, just for comparison:
+
+```js
+type CoursePartBase = {
+  name: string;
+  exerciseCount: number;
+};
+
+type CoursePartOne = CoursePartBase & {
+  name: "Fundamentals";
+  description: string;
+};
+```
+
+In most cases you can use either <i>type</i> or <i>interface</i>, which ever syntax you prefer, but there are still a few things to keep in mind. For instance if you define multiple interfaces with the same name, they will result in a merged interface, whereas if you try to create multiple types with the same name, it will result in an error stating that one with the same name is already declared. 
+
+Even if we're not using classes in this course, it might be good to know that classes can implement TypeScript interfaces, but not types. And lastly, if you have the need to define a type that is a union of other types, like our <i>CoursePart</i>, you need to use the keyword <i>type</i>, even if the different parts could be either <i>type</i> or <i>interface</i>.
+
 
 ### Working with an existing codebase
 
