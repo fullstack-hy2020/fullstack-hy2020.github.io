@@ -988,14 +988,13 @@ const genderOptions: GenderOption[] = [
 ];
 ```
 
-Next look at the type <i>SelectFieldProps</i>. It defines the type for the props for our <i>SelectField</i> component. There you can see that options is an array of <i>GenderOption</i> types and the optional defaultValue is also of the same type.
+Next look at the type <i>SelectFieldProps</i>. It defines the type for the props for our <i>SelectField</i> component. There you can see that options is an array of <i>GenderOption</i> types.
 
 ```js
 type SelectFieldProps = {
   name: string;
   label: string;
   options: GenderOption[];
-  defaultValue?: Gender;
 };
 ```
 
@@ -1006,12 +1005,10 @@ export const SelectField: React.FC<SelectFieldProps> = ({
   name,
   label,
   options,
-  defaultValue
 }: SelectFieldProps) => (
   <Form.Field>
     <label>{label}</label>
     <Field as="select" name={name} className="ui dropdown">
-      {!defaultValue && <option value={defaultValue}>{defaultValue}</option>}
       {options.map(option => (
         <option key={option.value} value={option.value}>
           {option.label || option.value}
