@@ -541,7 +541,7 @@ app.listen(PORT, () => {
 });
 ```
 
-Everything else seems to be going nice but as you'd expect, but the <i>req</i> and  <i>res</i> parameters of <i>app.get</i> need typing. If we look really carefully VS Code is also complaining to us about something about the express importing, that is indicated by the short yellow line of dots under the <i>require</i>. Let's hover over the problem:
+Everything else seems to be going nice but as you'd expect, but the <i>req</i> and  <i>res</i> parameters of <i>app.get</i> need typing. If we look really carefully, VS Code is also complaining about the express importing, that is indicated by the short yellow line of dots under the <i>require</i>. Let's hover over the problem:
 
 ![](../../images/9/6.png)
 
