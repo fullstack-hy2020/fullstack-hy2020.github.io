@@ -654,7 +654,7 @@ It is actually quite typical that when you start working with a existing applica
 
 ### Patient listing page
 
-Let's go through the <i>PatientListPage/index.ts</i> as you can take inspiration from there to help you fetch data from backend and update the applications state. <i>PatientListPage</i> uses our custom hook for injecting state and dispatcher for updating the state.  As we are listing patients we only need the <i>patients</i> property from state:
+Let's go through the <i>PatientListPage/index.ts</i> as you can take inspiration from there to help you fetch data from backend and update the application's state. <i>PatientListPage</i> uses our custom hook for injecting state and dispatcher for updating the state.  As we are listing patients we only need the <i>patients</i> property from the state:
 
 ```js
 import { useStateValue } from "../state";
@@ -672,7 +672,7 @@ const [modalOpen, setModalOpen] = React.useState<boolean>(false);
 const [error, setError] = React.useState<string | undefined>();
 ```
 
-We give <i>useState</i> hook type parameter that is applied for the actual state. So <i>modalOpen</i> is a <i>boolean</i> and <i>error</i> has type <i>string | undefined</i> respectively. Both set functions returned by <i>useState</i> hook are functions that accept only arguments according to the type parameter given. Eg. the exact type for <i>setModalOpen</i> function is <i>React.Dispatch<React.SetStateAction<boolean>></i>. We have also <i>openModal</i> and <i>closeModal</i> helper functions for better readability and convenience:
+We give <i>useState</i> hook type parameter that is applied for the actual state. So <i>modalOpen</i> is a <i>boolean</i> and <i>error</i> has type <i>string | undefined</i> respectively. Both set functions returned by <i>useState</i> hook are functions that accept only arguments according to the type parameter given. Eg. the exact type for <i>setModalOpen</i> function is <i>React.Dispatch<React.SetStateAction<boolean>></i>. We also have <i>openModal</i> and <i>closeModal</i> helper functions for better readability and convenience:
 
 ```js
 const openModal = (): void => setModalOpen(true);
@@ -683,7 +683,7 @@ const closeModal = (): void => {
 };
 ```
 
-Frontends types are based on what you have created when developing the backend in the previous part.
+Frontend's types are based on what you have created when developing the backend in the previous part.
 
 We are fetching patient from the backend using [axios](https://github.com/axios/axios) and we are giving the <i>axios.get</i> function a type parameter as to what is the type for the response data:
 
@@ -704,9 +704,9 @@ React.useEffect(() => {
 }, [dispatch]);
 ````
 
- **A word of warning!** Passing the type parameter for axios will not validate any data and is quite dangerous especially if you are using external APIs. You can create custom validation functions taking in the whole payload and returning the correct type or you can use type guard. Both are valid. There are also many libraries providing validation through different kind of schemas eg. [io-ts](https://github.com/gcanti/io-ts). For simplicity we will continue trusting our own work and trust that we will get data of the correct form from the backend.
+ **A word of warning!** Passing the type parameter for axios will not validate any data and is quite dangerous especially if you are using external APIs. You can create custom validation functions taking in the whole payload and returning the correct type or you can use type guard. Both are valid. There are also many libraries that provide validation through different kind of schemas eg. [io-ts](https://github.com/gcanti/io-ts). For simplicity we will continue trusting our own work and trust that we will get data of the correct form from the backend.
 
-As our app is quite small we will update the state by simply calling the <i>dispatch</i> function provided to us by <i>useStateValue</i> hook. As we have created type definition for our actions in the <i>state/reducer.ts</i>. Compiler helps make sure that we dispatch actions according to our <i>Action</i> type with predefined type string and payload.
+As our app is quite small we will update the state by simply calling the <i>dispatch</i> function provided to us by <i>useStateValue</i> hook. As we have created type definition for our actions in the <i>state/reducer.ts</i>. Compiler helps to make sure that we dispatch actions according to our <i>Action</i> type with predefined type string and payload.
 
 ```js
 dispatch({ type: "SET_PATIENT_LIST", payload: patientListFromApi });
