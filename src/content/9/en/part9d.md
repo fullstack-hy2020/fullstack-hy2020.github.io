@@ -740,19 +740,20 @@ Before going to this, let us do some preparatory work.
 
 #### 9.16: patientor, step1
 
-Create an endpoint <i>/api/patients/{id}</i> to that returns all of the patient information for one patient, including also the array of patient entries that is still empty for all the patients. For the time being, expand the backend types as follows:
+Create an endpoint <i>/api/patients/:id</i> to that returns all of the patient information for one patient, including also the array of patient entries that is still empty for all the patients. For the time being, expand the backend types as follows:
 
 ```js
-export type Entry = {
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface Entry {
 }
 
-export type Patient = {
-  id: string,
-  name: string,
-  dateOfBirth: string
-  ssn: string
-  occupation: string
-  gender: Gender
+export interface Patient {
+  id: string;
+  name: string;
+  ssn: string;
+  occupation: string;
+  gender: Gender;
+  dateOfBirth: string;
   entries: Entry[] // highlight-line
 }
 
@@ -765,11 +766,11 @@ Response should look as follows:
 
 #### 9.17: patientor, step2
 
-Create a page for showing the patient information in the frontend.
+Create a page for showing the patient full information in the frontend.
 
 Patient information should be accessible when clicking eg. the patients name.
 
-After fetching the patient information from backend add the fetched information to the applications state. You can differentiate between which fields you get from the <i>/api/patients</i> and <i>/api/patients/{id}</i> endpoints. You do not need to fetch the information if it already is in the app state. This is a naive implementation disregarding the need to update without reloading the app.
+After fetching the patient information from backend, add the fetched information to the applications state.  Do not fetch the information if it already is in the app state, i.e. if you are visiting many times it the page of the same patient. 
 
 Since we now have the state in the context, you'll need to define a new action type for updating an individual patient's data.
 
@@ -787,7 +788,7 @@ The gender is shown with react-semantic-ui component [Icon](https://react.semant
 **Note** that in order to access the id in the url, you need to give [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) a proper type argument:
 
 ```js
-const id = useParams<{ id: string }>().id
+const { id } = useParams<{ id: string }>();
 ```
 
 </div>
