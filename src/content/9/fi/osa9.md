@@ -1,7 +1,7 @@
 ---
 mainImage: ../../../images/part-9.svg
 part: 9
-lang: en
+lang: fi
 ---
 
 <div class="intro">
@@ -10,5 +10,5 @@ Kurssin yhdeksäs, TypeScriptiä käsittelevä osa löytyy [englanninkielisestä
 
 Yhdeksännen osan ovat tehneet [Tuomo Torppa](https://www.linkedin.com/in/tuomotorppa), [Tuukka Peuraniemi](https://www.linkedin.com/in/tuukkapeuraniemi/) ja [Jani Rapo](https://www.linkedin.com/in/jani-rapo-5520817b/) jotka kaikki työskentelevät sovelluskehittäjinä [Terveystalolla](https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/). 
 
-Terveystalo on maamme suurin yksityisen sektorin terveyspalvelujen tarjoaja. Terveystalon koko maan laajuista yli 300 toimipisteen verkkoa laajentavat ympärivuorokautisesti toimivat digitaaliset palvelut.
+Terveystalo on Suomen suurin yksityisten terveyspalveluiden tarjoaja. Valtakunnallinen verkosto kattaa noin 300 toimipaikkaa eri puolilla Suomea. Toimipaikkaverkostoa täydentävät ympäri vuorokauden saatavilla olevat digitaaliset palvelut.
 </div>
