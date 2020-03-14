@@ -390,9 +390,9 @@ The error description <i>Argument of type 'CoursePartThree' is not assignable to
 
 <div class="tasks">
 
-### Exercise 9.17
+### Exercise 9.15
 
-#### 9.17
+#### 9.15
 
 First add the new type information to <i>index.tsx</i> and replace the variable <i>courseParts</i> with the one from the example below.
 
@@ -444,15 +444,9 @@ const courseParts: CoursePart[] = [
 
 Now we know that both interfaces <i>CoursePartOne</i> and <i>CoursePartThree</i> share not only the base attributes, but also an attribute called <i>description</i>, which is a string in both interfaces. 
 
-<<<<<<< HEAD
 Your first task is to to declare a new interface, that includes the <i>description</i> attribute and extends the <i>CoursePartBase</i> interface. Then modify the code so that you can remove the <i>description</i> attribute from both <i>CoursePartOne</i> and <i>CoursePartThree</i>, without getting any errors.
 
 The create a component <i>Part</i> that renders all attributes opf each type of course part. Use switch case -based exhaustive type checking! Use the new component in component <i>Content</i>.
-=======
-Your first task is to to declare a new interface, which includes the <i>description</i> attribute and extends the <i>CoursePartBase</i> interface. Then modify the code so that you can remove the <i>description</i> attribute from both <i>CoursePartOne</i> and <i>CoursePartThree</i>, without getting any errors.
-
-Then modify your <i>Content</i> component so that it will render all attributes for each course part. Use exhaustive type checking!
->>>>>>> ffd38efcc8f5bde85875cc3023684aa88a680008
 
 Lastly, add your own course part interface with at least the following attributes: <i>name</i>, <i>exerciseCount</i> and <i>description</i>. Then add that interface to the type union <i>CoursePart</i> and add corresponding data to the <i>courseParts</i> variable. Now if you have modified your <i>Content</i> component correctly, you should get an error, because you have not yet added support for the fourth course part type. Do the necessary changes to <i>Content</i>, so that all attributes for the new course part also get rendered and that the compiler doesn't produce any errors.
 
@@ -462,26 +456,42 @@ Lastly, add your own course part interface with at least the following attribute
 
 ### A note about defining object types
 
-We h
-
-Here is the same for <i>CoursePartOne</i> using <i>type</i>, just for comparison:
+We have used [interfaces](http://www.typescriptlang.org/docs/handbook/interfaces.html) to define object types, eg. diary entries in previous section
 
 ```js
-type CoursePartBase = {
+interface DiaryEntry {
+  id: number;
+  date: string;
+  weather: Weather;
+  visibility: Visibility;
+  comment?: string;
+} 
+```
+
+and course part in this section
+
+```js
+interface CoursePartBase {
   name: string;
   exerciseCount: number;
-};
+}
+```
 
-type CoursePartOne = CoursePartBase & {
-  name: "Fundamentals";
-  description: string;
-};
+We actually could have had the same effect by using a [type alias](http://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases)
+
+```js
+type DiaryEntry = {
+  id: number;
+  date: string;
+  weather: Weather;
+  visibility: Visibility;
+  comment?: string;
+} 
 ```
 
 In most cases you can use either <i>type</i> or <i>interface</i>, which ever syntax you prefer, but there are still a few things to keep in mind. For instance if you define multiple interfaces with the same name, they will result in a merged interface, whereas if you try to create multiple types with the same name, it will result in an error stating that one with the same name is already declared. 
 
-Even if we're not using classes in this course, it might be good to know that classes can implement TypeScript interfaces, but not types. And lastly, if you have the need to define a type that is a union of other types, like our <i>CoursePart</i>, you need to use the keyword <i>type</i>, even if the different parts could be either <i>type</i> or <i>interface</i>.
-
+TypeScript documentation [recommends to use interfaces](http://www.typescriptlang.org/docs/handbook/advanced-types.html#interfaces-vs-type-aliases) in most cases.
 
 ### Working with an existing codebase
 
@@ -489,19 +499,19 @@ When diving into the codebase for the first time it is good to get an overall vi
 
 You can also browse the folder structure to get insights about application functionality and/or the architecture used. This is not always clear and developers may have chosen way to organize code that might not be familliar to you. The [sample project](https://github.com/fullstack-hy2020/patientor) used in in the rest of this part is organized featurewise. You can see what different pages the application has and some general components eg. modals and state. Keep in mind that the features represented may have different scopes eg. modals are visible UI level components whereas the state is comparable to business logic and keeps the data organized under the hood for the rest of the app to use.
 
-Typescript provides you types which tell you what kind of data structures functions, components and state expect. You can try to look for <i>types.ts</i> or something similar to get you started. VSCode is a big help and just highlighting can help you. This all depends on how types are used in the project and how well are they integrated.
+TypeScript provides you types which tell you what kind of data structures functions, components and state to expect. You can try to look for <i>types.ts</i> or something similar to get you started. VSCode is a big help and just highlighting variables and parameters can give you quite much of insight. This all naturaally depends on how types are used in the project.
 
-If project has tests unit, functionality or end-to-end tests you can get more specific details regarding the functionality. Test cases are your most important tool when refactoring or creating new features to the application. You want to make sure not to break any existing features when hammering around the code. Typescript can also give you guidance with argument and return types when doing changes in the code.
+If project has tests unit, integration or end-to-end tests, reading those is most likely beneficial. Test cases are your most important tool when refactoring or creating new features to the application. You want to make sure not to break any existing features when hammering around the code. TypeScript can also give you guidance with argument and return types when doing changes in the code.
 
 Remember that reading code is a skill itself and relax if you don't understand the code on your first readthrough. Code may have a lot of corner cases and added logic through out its development cycle. It is hard to imagine what kind of troubles the previous developer has been wrestling with. Think of it all like [growth rings in trees](https://en.wikipedia.org/wiki/Dendrochronology#Growth_rings). Understanding all of it requires digging deep into the code and business domain requirements. The more code you read the better you're going to be at it. You will read more code than you're going to produce.
 
 ### Patientor frontend
 
-It's time to get our hands dirty finalizing the frontend for the backend we built in [exercises 9.10.-9.15.](/en/part9/typing_the_express_app).
+It's time to get our hands dirty finalizing the frontend for the backend we built in [exercises 9.8.-9.13.](/en/part9/typing_the_express_app).
 
 Before diving into the code, let us start both the frontend and the backend.
 
-After a successful build your browser will open a new tab to http://localhost:3000/. You should see a patient listing page, which fetches a patient list from our backend and renders the list in a simple table, and a button for creating new patients to the backend. As we are not using a database, but mock data, the data will not persist, i.e. closing the backend forgets all the added data. UI has not clearly been the strong point of the creators of this app, so let's disregard the UI for now.
+If all goes well you should see a patient listing page, which fetches a patient list from our backend and renders the list in a simple table, and a button for creating new patients to the backend. As we are not using a database, but mock data, the data will not persist, i.e. closing the backend forgets all the added data. UI has not clearly been the strong point of the creators of this app, so let's disregard the UI for now.
 
 After we have verified that everything is working, we start studying the code. All the interesting stuff resides in the <i>src/</i> folder. For convenience there is also a ready made <i>types.ts</i> file for basic types used in the app, which you will have to extend or refactor in the exercises. 
 
@@ -515,21 +525,17 @@ So there are currently, as you would expect, two main components: <i>AddPatientM
 
 ### State handling
 
-Let's checkout the state handling a bit closer as a lot of stuff seems to be happening under the hood and it differs a bit from the methods used in the course so far. 
+Let's study the state handling a bit closer as a lot of stuff seems to be happening under the hood and it differs a bit from the methods used in the course so far. 
 
-Our state functionality is built using React Hooks [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) and [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer). This is one way of creating a stateful app when we know that the app we will build is small and we do not want to use <i>redux</i> or other libraries. It would be also perfectly fine to keep all of the state in the main component. There is a lot of good material eg. [this article](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe). 
+The state management is built using React Hooks [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) and [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer). This is one quite a viable option of creating a stateful app when we know that the app we will be rather small and we do not want to use <i>redux</i> or other libraries for the state management.  There are a lot of good material eg. [this article](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe) describing the approach. 
 
 The approach taken in this app uses the React [context](https://reactjs.org/docs/context.html), that according to documentation
 
-> <i>Context is designed to share data that can be considered "global" for a tree of React components, such as the current authenticated user, theme, or preferred language.</i> 
+> <i>... is designed to share data that can be considered "global" for a tree of React components, such as the current authenticated user, theme, or preferred language.</i> 
 
-In our case the "global" shared data is the application state <i>and</i> the dispatch function that is used to make changes to data. In a way the approach works quite much like redux based state management that we used in [part 6](/en/part6) but is a more light weight since it does not require the use of a external library. This part assumes that you are at least familiar at the way how redux works, e.g. you should have covered at least [the first section](/en/part6/flux_architecture_and_redux) of part 6.
+In our case the "global" shared data is the application state <i>and</i> the dispatch function that is used to make changes to data. In a way the approach works quite a much like redux based state management that we used in [part 6](/en/part6) but is a more light weight since it does not require the use of any external libraries. This part assumes that you are at least familiar at the way how redux works, e.g. you should have covered at least [the first section](/en/part6/flux_architecture_and_redux) of part 6.
 
-We create a [context](https://reactjs.org/docs/context.html) which has a tuple of our apps state and dispatcher for changing the state of our app. This matches the arguments we receive from [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer). hook. Dispatch function takes as parameter objects with type <i>Action</i> which is defined in <i>reducer.ts</i> alongside the actual reducer function defining what the action does to the state returning a new state. 
-
-When in doubt on how to design state and its handling checkout the [redux guidelines](https://redux.js.org/style-guide/style-guide/). <i>useReducer</i> is the actual workhorse of our state handling giving us the actual state handling functionality according to the reducer function given to it.
-
-Disregarding how you do your state handling, it is good enforce your application's state with types. Our sample application's state is quite simple:
+The [context](https://reactjs.org/docs/context.html) of the application has a tuple of the app state and dispatcher for changing the state of our app. The application state is typed as follows:
 
 ```js
 export type State = {
@@ -537,7 +543,10 @@ export type State = {
 };
 ```
 
-Our state is an object with one key <i>patients</i>, which has a [dictionary](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types-and-index-signatures) or simply put an object with string keys and with a <i>Patient</i> object as value. Index can only be <i>string</i> or <i>number</i> as you can access the object values using those. This enforces that the state conforms in the way we want, and prevents developers from misusing the state. You can also think of a scenario where we may have state as a union. Eg. using states type as an indicator whether user has logged in:
+The state is an object with one key <i>patients</i>, which has a [dictionary](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types-and-index-signatures) or simply put an object with string keys and with a <i>Patient</i> object as value. Index can only be <i>string</i> or <i>number</i> as you can access the object values using those. This enforces that the state conforms in the way we want, and prevents developers from misusing the state. 
+
+<!--
+You can also think of a scenario where we may have state as a union. Eg. using states type as an indicator whether user has logged in:
 
 ```js
 export type State =
@@ -550,9 +559,15 @@ export type State =
     };
 ```
 
-This is one way of using typescript to help keeping the applications state under control. We know that if the state is in <i>type: "Authenticated"</i> we will have a <i>currentUser</i> field in state.
+This is one way of using TypeScript to help keeping the applications state under control. We know that if the state is in <i>type: "Authenticated"</i> we will have a <i>currentUser</i> field in state.
 
-The main principles of this are passing the state to our components through context and modifying the context using reducers. Reducers should be quite familiar if you have used redux before. Our reducers are in <i>reducer.ts</i> file where there is the reducer function and the type <i>Action</i> that looks as follows
+This matches the arguments that are received from [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer). hook. Dispatch function takes as parameter objects with of <i>Action</i> which is defined in <i>reducer.ts</i> alongside the actual reducer function defining what the action does to the state returning a new state. 
+
+The main principle in our state management approach is to pass the state to our components through the context and to modify the state using reducers. 
+
+-->
+
+Just as in the case of redux, all the state manipulation is done by the reducer that is defined in file <i>reducer.ts</i> together with the type <i>Action</i> that looks as follows
 
 ```js
 export type Action =
@@ -598,7 +613,7 @@ export const reducer = (state: State, action: Action): State => {
 
 The main difference is now that the state is a dictionary (or object) instead of array that we used in [part 6](/en/part6).
 
-There are lot of things happening in the file <i>state.ts</i> that is taking care of setting up the contex. Firstly it uses <i>useReducer</i> hook to create a [context provider](https://reactjs.org/docs/context.html#contextprovider)
+There are lot of things happening in the file <i>state.ts</i> that is taking care of setting up the contex. The main ingredient is that it uses [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook to create a the state and dispatch-function and passes those to the [context provider](https://reactjs.org/docs/context.html#contextprovider):
 
 ```js
 export const StateProvider: React.FC<StateProviderProps> = ({
@@ -652,7 +667,7 @@ It is actually quite typical that when you start working with an existing applic
 
 ### Patient listing page
 
-Let's go through the <i>PatientListPage/index.ts</i> as you can take inspiration from there to help you fetch data from backend and update the application's state. <i>PatientListPage</i> uses our custom hook for injecting state and dispatcher for updating the state.  As we are listing patients we only need the <i>patients</i> property from the state:
+Let's go through the <i>PatientListPage/index.ts</i> as you can take inspiration from there to help you fetch data from backend and update the application's state. <i>PatientListPage</i> uses our custom hook for injecting state and dispatcher for updating the state.  As we are listing patients we only need to destructure <i>patients</i> property from the state:
 
 ```js
 import { useStateValue } from "../state";
@@ -663,14 +678,16 @@ const PatientListPage: React.FC = () => {
 }
 ```
 
-We also have some <i>useState</i> hooks for managing modal visibility and form error handling. Form walkthrough will be done in the upcoming parts.
+We also use app state created with <i>useState</i> hook for managing modal visibility and form error handling:
 
 ```js
 const [modalOpen, setModalOpen] = React.useState<boolean>(false);
 const [error, setError] = React.useState<string | undefined>();
 ```
 
-We give <i>useState</i> hook type parameter that is applied for the actual state. So <i>modalOpen</i> is a <i>boolean</i> and <i>error</i> has type <i>string | undefined</i> respectively. Both set functions returned by <i>useState</i> hook are functions that accept only arguments according to the type parameter given. Eg. the exact type for <i>setModalOpen</i> function is <i>React.Dispatch<React.SetStateAction<boolean>></i>. We also have <i>openModal</i> and <i>closeModal</i> helper functions for better readability and convenience:
+We give <i>useState</i> hook type parameter that is applied for the actual state. So <i>modalOpen</i> is a <i>boolean</i> and <i>error</i> has type <i>string | undefined</i> respectively. Both set functions returned by <i>useState</i> hook are functions that accept only arguments according to the type parameter given, eg. the exact type for <i>setModalOpen</i> function is <i>React.Dispatch<React.SetStateAction&lt;boolean&gt;></i>.
+
+We also have <i>openModal</i> and <i>closeModal</i> helper functions for better readability and convenience:
 
 ```js
 const openModal = (): void => setModalOpen(true);
@@ -683,44 +700,45 @@ const closeModal = (): void => {
 
 Frontend's types are based on what you have created when developing the backend in the previous part.
 
-We are fetching patient from the backend using [axios](https://github.com/axios/axios) and we are giving the <i>axios.get</i> function a type parameter as to what is the type for the response data:
+When the component <i>App</i> mounts, it is fetching patients from the backend using [axios](https://github.com/axios/axios). Note how we are giving <i>axios.get</i> function a type parameter to describe what is the type for the response data:
 
 ````js
 React.useEffect(() => {
-  const fetchPatientList = async () => {
-    const { data: patientListFromApi } = await axios.get<Patient[]>(
-      `${apiBaseUrl}/patients`
-    );
-    dispatch({ type: "SET_PATIENT_LIST", payload: patientListFromApi });
-  };
+  axios.get<void>(`${apiBaseUrl}/ping`);
 
-  try {
-    fetchPatientList();
-  } catch (e) {
-    console.error(e);
-  }
+  const fetchPatientList = async () => {
+    try {
+      const { data: patients } = await axios.get<Patient[]>(
+        `${apiBaseUrl}/patients`
+      );
+      dispatch({ type: "SET_PATIENT_LIST", payload: patients });
+    } catch (e) {
+      console.error(e);
+    }
+  };
+  fetchPatientList();
 }, [dispatch]);
 ````
 
  **A word of warning!** Passing the type parameter for axios will not validate any data and is quite dangerous especially if you are using external APIs. You can create custom validation functions taking in the whole payload and returning the correct type or you can use type guard. Both are valid. There are also many libraries that provide validation through different kind of schemas eg. [io-ts](https://github.com/gcanti/io-ts). For simplicity we will continue trusting our own work and trust that we will get data of the correct form from the backend.
 
-As our app is quite small we will update the state by simply calling the <i>dispatch</i> function provided to us by <i>useStateValue</i> hook. As we have created type definition for our actions in the <i>state/reducer.ts</i>. Compiler helps to make sure that we dispatch actions according to our <i>Action</i> type with predefined type string and payload.
+As our app is quite small we will update the state by simply calling the <i>dispatch</i> function provided to us by <i>useStateValue</i> hook. Compiler helps to make sure that we dispatch actions according to our <i>Action</i> type with predefined type string and payload:
 
 ```js
-dispatch({ type: "SET_PATIENT_LIST", payload: patientListFromApi });
+dispatch({ type: "SET_PATIENT_LIST", payload: patients });
 ```
 
 </div>
 
 <div class="tasks">
 
-### Exercises 9.18.-9.19
+### Exercises 9.16.-9.17
 
 We will soon add new type <i>Entry</i> for our app that represents a light weight patient journal entry. It consists of journal text ie. <i>description</i>, creation date, information regarding the specialist who created it and possible diagnosis codes. Diagnosis codes map to the ICD-10 codes returned from the <i>/api/diagnoses</i> endpoint. Our naive implementation will be that patient has an array of entries.
 
 Before going to this, let us do some preparatory work.
 
-#### 9.18: patientor, step1
+#### 9.16: patientor, step1
 
 Create an endpoint <i>/api/patients/{id}</i> to that returns all of the patient information for one patient, including also the array of patient entries that is still empty for all the patients. For the time being, expand the backend types as follows:
 
@@ -745,7 +763,7 @@ Response should look as follows:
 
 ![](../../images/9/38a.png)
 
-#### 9.19: patientor, step2
+#### 9.17: patientor, step2
 
 Create a page for showing the patient information in the frontend.
 
@@ -882,9 +900,9 @@ export type Entry =
 
 <div class="tasks">
 
-### Exercises 9.20.-9.22.
+### Exercises 9.18.-9.21.
 
-#### 9.20: patientor, step3
+#### 9.18: patientor, step3
 
 Define the types <i>OccupationalHealthCareEntry</i> and <i>HospitalEntry</i> so that those conform with the example data. Ensure that your backend returns the entries properly when you go to a individual patient route
 
@@ -892,7 +910,7 @@ Define the types <i>OccupationalHealthCareEntry</i> and <i>HospitalEntry</i> so 
 
 Use types properly in the backend! For now there is no need to do a proper validation for all the fields if the entries in the backend, it is enough e.g. to check that the field <i>type</i> has a correct value.
 
-#### 9.21: patientor, step4
+#### 9.19: patientor, step4
 
 Extend the patient page in the frontend to list the <i>date</i>, <i>description</i> and <i>diagnose codes</i> of patient's entries. 
 
@@ -902,13 +920,13 @@ Your solution could look like this:
 
 ![](../../images/9/41.png)
 
-#### 9.22: patientor, step5
+#### 9.20: patientor, step5
 
 Fetch and add diagnoses to application state from <i>/api/diagnosis</i> endpoint. Use the new diagnosis data to show descriptions for patients diagnosis code:
 
 ![](../../images/9/42.png)
 
-#### 9.23: patientor, step5
+#### 9.21: patientor, step5
 
 Extend the entry-listing in the patient page to include the Entry's details with a new component that shows rest of the information of the patients entries distinguishing different types from each other. 
 
@@ -1211,7 +1229,7 @@ With this material you should be able to complete the rest of this part's exerci
 
 <div class="tasks">
 
-### Exercises 9.24.-9.27.
+### Exercises 9.22.-9.25.
 
 #### 9.24: patientor, step6
 
