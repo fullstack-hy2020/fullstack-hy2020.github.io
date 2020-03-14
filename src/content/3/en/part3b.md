@@ -161,7 +161,7 @@ Because on our situation, both the frontend and the backend are at the same addr
 
 ```js
 import axios from 'axios'
-const baseUrl = '/notes' // highlight-line
+const baseUrl = '/api/notes' // highlight-line
 
 const getAll = () => {
   const request = axios.get(baseUrl)
