@@ -786,7 +786,7 @@ Let's ditch our old patient seed data from backend and start using [this expande
 
 **Notice:** This time the data is not in .json but instead in the .ts-format. You should already have the complete <i>Gender</i> and <i>Patient</i> types implemented so only correct the paths where they are imported from if needed.
 
-So us now create a proper <i>Entry</i> type based on the data we have.
+Let us now create a proper <i>Entry</i> type based on the data we have.
 
 When looking at the data closer, we can see that the entries in the data differ actually quite a lot from each other. For example, let's take the first two entries we can see there:
 
