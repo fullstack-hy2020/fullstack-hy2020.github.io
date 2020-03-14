@@ -444,9 +444,15 @@ const courseParts: CoursePart[] = [
 
 Now we know that both interfaces <i>CoursePartOne</i> and <i>CoursePartThree</i> share not only the base attributes, but also an attribute called <i>description</i>, which is a string in both interfaces. 
 
+<<<<<<< HEAD
 Your first task is to to declare a new interface, that includes the <i>description</i> attribute and extends the <i>CoursePartBase</i> interface. Then modify the code so that you can remove the <i>description</i> attribute from both <i>CoursePartOne</i> and <i>CoursePartThree</i>, without getting any errors.
 
 The create a component <i>Part</i> that renders all attributes opf each type of course part. Use switch case -based exhaustive type checking! Use the new component in component <i>Content</i>.
+=======
+Your first task is to to declare a new interface, which includes the <i>description</i> attribute and extends the <i>CoursePartBase</i> interface. Then modify the code so that you can remove the <i>description</i> attribute from both <i>CoursePartOne</i> and <i>CoursePartThree</i>, without getting any errors.
+
+Then modify your <i>Content</i> component so that it will render all attributes for each course part. Use exhaustive type checking!
+>>>>>>> ffd38efcc8f5bde85875cc3023684aa88a680008
 
 Lastly, add your own course part interface with at least the following attributes: <i>name</i>, <i>exerciseCount</i> and <i>description</i>. Then add that interface to the type union <i>CoursePart</i> and add corresponding data to the <i>courseParts</i> variable. Now if you have modified your <i>Content</i> component correctly, you should get an error, because you have not yet added support for the fourth course part type. Do the necessary changes to <i>Content</i>, so that all attributes for the new course part also get rendered and that the compiler doesn't produce any errors.
 
@@ -487,7 +493,7 @@ Typescript provides you types which tell you what kind of data structures functi
 
 If project has tests unit, functionality or end-to-end tests you can get more specific details regarding the functionality. Test cases are your most important tool when refactoring or creating new features to the application. You want to make sure not to break any existing features when hammering around the code. Typescript can also give you guidance with argument and return types when doing changes in the code.
 
-Remember that reading code is a skill itself and relax if you don't understand the code on your first readthrough. Code may have a lot of corner cases and added logic through out its development cycle. It is hard to imagine what kind of troubles the previous developer has been wrestling with. Think of it all like [growth rings in trees](https://en.wikipedia.org/wiki/Dendrochronology#Growth_rings). Understanding all of it requires digging deep into the code and business domain requirements. The more code you read the better you're gonna be at it. You will read more code than you're gonna produce.
+Remember that reading code is a skill itself and relax if you don't understand the code on your first readthrough. Code may have a lot of corner cases and added logic through out its development cycle. It is hard to imagine what kind of troubles the previous developer has been wrestling with. Think of it all like [growth rings in trees](https://en.wikipedia.org/wiki/Dendrochronology#Growth_rings). Understanding all of it requires digging deep into the code and business domain requirements. The more code you read the better you're going to be at it. You will read more code than you're going to produce.
 
 ### Patientor frontend
 
@@ -509,7 +515,7 @@ So there are currently, as you would expect, two main components: <i>AddPatientM
 
 ### State handling
 
-Let's checkout the state handling a bit closer as a lot of stuff seems to be happening under the hood and it differs a bit from the methos used on the course so far. 
+Let's checkout the state handling a bit closer as a lot of stuff seems to be happening under the hood and it differs a bit from the methods used in the course so far. 
 
 Our state functionality is built using React Hooks [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) and [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer). This is one way of creating a stateful app when we know that the app we will build is small and we do not want to use <i>redux</i> or other libraries. It would be also perfectly fine to keep all of the state in the main component. There is a lot of good material eg. [this article](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe). 
 
@@ -560,7 +566,7 @@ export type Action =
     };
 ```
 
-Recucer looks quite much like the ones we wrote in [part 6](/en/part6), it changes the state of each type of action: 
+Reducer looks quite much like the ones we wrote in [part 6](/en/part6), it changes the state for each type of action: 
 
 ```js
 export const reducer = (state: State, action: Action): State => {
@@ -608,7 +614,7 @@ export const StateProvider: React.FC<StateProviderProps> = ({
 };
 ```
 
-Provider makes <i>state</i> and <i>dispatch</i> function available in all the components, thanks to the setup in <i>index.ts</i>:  
+Provider makes <i>state</i> and <i>dispatch</i> functions available in all of the components, thanks to the setup in <i>index.ts</i>:  
 
 ```js 
 import { reducer, StateProvider } from "./state";
@@ -642,11 +648,11 @@ const PatientListPage: React.FC = () => {
 
 Do not worry if this seems confusing, it surely is until you have studied the [context documentation](https://reactjs.org/docs/context.html) and its use in [state management](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe). You do not need to understand all this completely for doing the exercises! 
 
-It is actually quite typical that when you start working with a existing application, at the beginning you do not understand 100% what happens under the hood. If the app has been properly structured you can just trust that if you are making careful modifications, the app still works despite you did not understand all the internals. Over the time you can then get grasp of the more unfamiliar parts but it does not happen overnight when working with a large codebase.
+It is actually quite typical that when you start working with an existing application, at the beginning you do not understand 100% of what happens under the hood. If the app has been properly structured you can trust that if you are making careful modifications, the app still works despite of the fact that you did not understand all the internals. Over the time you can then get a grasp of the more unfamiliar parts, but it does not happen overnight when working with a large codebase.
 
 ### Patient listing page
 
-Let's go through the <i>PatientListPage/index.ts</i> as you can take inspiration from there to help you fetch data from backend and update the applications state. <i>PatientListPage</i> uses our custom hook for injecting state and dispatcher for updating the state.  As we are listing patients we only need the <i>patients</i> property from state:
+Let's go through the <i>PatientListPage/index.ts</i> as you can take inspiration from there to help you fetch data from backend and update the application's state. <i>PatientListPage</i> uses our custom hook for injecting state and dispatcher for updating the state.  As we are listing patients we only need the <i>patients</i> property from the state:
 
 ```js
 import { useStateValue } from "../state";
@@ -664,7 +670,7 @@ const [modalOpen, setModalOpen] = React.useState<boolean>(false);
 const [error, setError] = React.useState<string | undefined>();
 ```
 
-We give <i>useState</i> hook type parameter that is applied for the actual state. So <i>modalOpen</i> is a <i>boolean</i> and <i>error</i> has type <i>string | undefined</i> respectively. Both set functions returned by <i>useState</i> hook are functions that accept only arguments according to the type parameter given. Eg. the exact type for <i>setModalOpen</i> function is <i>React.Dispatch<React.SetStateAction<boolean>></i>. We have also <i>openModal</i> and <i>closeModal</i> helper functions for better readability and convenience:
+We give <i>useState</i> hook type parameter that is applied for the actual state. So <i>modalOpen</i> is a <i>boolean</i> and <i>error</i> has type <i>string | undefined</i> respectively. Both set functions returned by <i>useState</i> hook are functions that accept only arguments according to the type parameter given. Eg. the exact type for <i>setModalOpen</i> function is <i>React.Dispatch<React.SetStateAction<boolean>></i>. We also have <i>openModal</i> and <i>closeModal</i> helper functions for better readability and convenience:
 
 ```js
 const openModal = (): void => setModalOpen(true);
@@ -675,7 +681,7 @@ const closeModal = (): void => {
 };
 ```
 
-Frontends types are based on what you have created when developing the backend in the previous part.
+Frontend's types are based on what you have created when developing the backend in the previous part.
 
 We are fetching patient from the backend using [axios](https://github.com/axios/axios) and we are giving the <i>axios.get</i> function a type parameter as to what is the type for the response data:
 
@@ -696,9 +702,9 @@ React.useEffect(() => {
 }, [dispatch]);
 ````
 
- **A word of warning!** Passing the type parameter for axios will not validate any data and is quite dangerous especially if you are using external APIs. You can create custom validation functions taking in the whole payload and returning the correct type or you can use type guard. Both are valid. There are also many libraries providing validation through different kind of schemas eg. [io-ts](https://github.com/gcanti/io-ts). For simplicity we will continue trusting our own work and trust that we will get data of the correct form from the backend.
+ **A word of warning!** Passing the type parameter for axios will not validate any data and is quite dangerous especially if you are using external APIs. You can create custom validation functions taking in the whole payload and returning the correct type or you can use type guard. Both are valid. There are also many libraries that provide validation through different kind of schemas eg. [io-ts](https://github.com/gcanti/io-ts). For simplicity we will continue trusting our own work and trust that we will get data of the correct form from the backend.
 
-As our app is quite small we will update the state by simply calling the <i>dispatch</i> function provided to us by <i>useStateValue</i> hook. As we have created type definition for our actions in the <i>state/reducer.ts</i>. Compiler helps make sure that we dispatch actions according to our <i>Action</i> type with predefined type string and payload.
+As our app is quite small we will update the state by simply calling the <i>dispatch</i> function provided to us by <i>useStateValue</i> hook. As we have created type definition for our actions in the <i>state/reducer.ts</i>. Compiler helps to make sure that we dispatch actions according to our <i>Action</i> type with predefined type string and payload.
 
 ```js
 dispatch({ type: "SET_PATIENT_LIST", payload: patientListFromApi });
@@ -747,12 +753,12 @@ Patient information should be accessible when clicking eg. the patients name.
 
 After fetching the patient information from backend add the fetched information to the applications state. You can differentiate between which fields you get from the <i>/api/patients</i> and <i>/api/patients/{id}</i> endpoints. You do not need to fetch the information if it already is in the app state. This is a naive implementation disregarding the need to update without reloading the app.
 
-Since we have now the state in contex, you need a new action type for updating the indvidual patient's data.
+Since we now have the state in the context, you'll need to define a new action type for updating an individual patient's data.
 
-Application uses [Semantic UI React](https://react.semantic-ui.com/) for styling, that is quite simillar to [React Bootstrap](https://react-bootstrap.github.io/) and [MaterialUI](https://material-ui.com/) that we covered in [part 7](/en/part7/more_about_styles). You may also use it for the new components but that is up to you sincew the main focus is now in Typescript.
+The Application uses [Semantic UI React](https://react.semantic-ui.com/) for styling, which is quite similar to [React Bootstrap](https://react-bootstrap.github.io/) and [MaterialUI](https://material-ui.com/) that we covered in [part 7](/en/part7/more_about_styles). You may also use it for the new components but that is up to you sincew the main focus is now in Typescript.
 
-Application also uses the [react router](https://reacttraining.com/react-router/web/guides/quick-start) 
-to control what view is visible in the frontend. You might want to have a look on [part 7](/en/part7/react_router) if you have not already have a grasp on how router works.
+The Application also uses [react router](https://reacttraining.com/react-router/web/guides/quick-start) 
+to control what view is visible in the frontend. You might want to have a look on [part 7](/en/part7/react_router) if you don't yet have a grasp on how the router works.
 
 The result could look like the following:
 
@@ -778,7 +784,7 @@ Let's ditch our old patient seed data from backend and start using [this expande
 
 **Notice:** This time the data is not in .json but instead in the .ts-format. You should already have the complete <i>Gender</i> and <i>Patient</i> types implemented so only correct the paths where they are imported from if needed.
 
-So us now create a proper <i>Entry</i> type based on the data we have.
+Let us now create a proper <i>Entry</i> type based on the data we have.
 
 When looking at the data closer, we can see that the entries in the data differ actually quite a lot from each other. For example, let's take the first two entries we can see there:
 
@@ -888,7 +894,7 @@ Use types properly in the backend! For now there is no need to do a proper valid
 
 #### 9.21: patientor, step4
 
-Extend the patient page in the frontend to list the <i>data</i>, <i>description</i> and <i>diagnose codes</i> of patient's entries. 
+Extend the patient page in the frontend to list the <i>date</i>, <i>description</i> and <i>diagnose codes</i> of patient's entries. 
 
 You can use the same type definiton for <i>Entry</i> in the frontend. For these exercises it is enough just to copy/paste the definitions from backend to frontend.
 
@@ -1260,7 +1266,7 @@ const AddEntryForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
 
 Note the tree marked lines. The first sets initial value for the array, and using the second you get the object <i>values</i> where Formik keeps the form data, and the third line passes the diagnosis array to _ArrayField_ components that takes care of adding diagnosis to the array.
 
-#### 9.6: patientor, step8
+#### 9.26: patientor, step8
 
 Extend your solution to support <i>two</i> entry types, and you do not have to handle the errors, it is enough if a entry can be created if the form is filled up with valid data.
 
