@@ -1119,7 +1119,6 @@ export const AddPatientForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
             <SelectField
               label="Gender"
               name="gender"
-              defaultValue={Gender.Other}
               options={genderOptions}
             />
             <Grid>
