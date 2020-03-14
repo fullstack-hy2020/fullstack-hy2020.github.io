@@ -213,7 +213,7 @@ Let us add a npm script for running the application in production mode:
 }
 ```
 
-Wen we run app with <i>npm start</i> we can verify that also the production build works
+When we run app with <i>npm start</i> we can verify that also the production build works
 
 ![](../../images/9/15a.png)
 
@@ -236,11 +236,11 @@ The [frontend](https://github.com/fullstack-hy2020/patientor) has already been b
 
 Initialise project that will be used by the frontend. Configure eslint and tsconfig with the same configurations that are used in the material. Define an endpoint that responses to HTTP GET requests to route <i>/ping</i>.   
 
-The project should be runnale with npm scripts both in development mode and as compiled code in production mode.
+The project should be runnable with npm scripts both in development mode and as compiled code in production mode.
 
 #### 9.9: Patientor backend, step2
 
-Fork and clone the project [patientor](https://github.com/fullstack-hy2020/patientor). Start the project with the help of the README-file. You should be able to use the frontend without a functioning backend.
+Fork and clone the project [patientor](https://github.com/fullstack-hy2020/patientor). Start the project with the help of the README file. You should be able to use the frontend without a functioning backend.
 
 Ensure that backend answers to the ping request that <i>frontend</i> is made on startup. Check developer tool to make sure it really works: 
 
@@ -289,10 +289,10 @@ Data looks like the following
 
 Let's start by creating an endpoint that returns all flight diary entries. 
 
-First we shall made some decision hot to structure our source code. It is better to put all the source code
+First we shall make some decision on how to structure our source code. It is better to put all the source code
 under the directory <i>src</i>, so that the source  code is not mixed up with configuration files. We will move also <i>index.ts</i> there and make the corresponding changes to npm scripts.
 
-We'll decide to put all [routers](/en/part4/structure_of_backend_application_introduction_to_testing) that is the modules that take care of handling a set of specific resource such as <i>diaries</i> under the directory <i>src/routes</i>. This differs a bit from the convention of [part 4](/en/part4), where we used directory <i>src/controllers</i>.
+We'll decide to put all [routers],(/en/part4/structure_of_backend_application_introduction_to_testing) that is the modules that take care of handling a set of specific resource such as <i>diaries</i>, under the directory <i>src/routes</i>. This differs a bit from the convention of [part 4](/en/part4), where we used directory <i>src/controllers</i>.
 
 
 The routes taking care of diary endpoints in <i>src/routes/diaries.ts</i> looks like this:
@@ -393,7 +393,7 @@ Problems are now gone.
 
 As before we've seen how the compiler can decide the type of a variable by the value it is being assigned to and in a similar way the compiler interprets larger data sets consisting of objects and arrays. This is why the compiler actually can warn us if we are trying to do something suspicious to the json data we are currently handling. If we're handling an array that includes specific types of objects and we're trying to add an object there that doesn't have all of the fields that the other objects have or is having type conflicts (for example a number where should be a string) the compiler can give us a warning. 
 
-Even though the compiler is pretty intelligent in making sure to not to do anything unwanted, it is safer to create the correct types to the data by yourself.
+Even though the compiler is pretty intelligent in making sure to not to do anything unwanted, it is safer to create the correct types to the data yourself.
 
 Now we have a basic working TypeScript express app but there's barely any actual <i>typings</i> in the code. Since we now have a clear definition on what type of data should be accepted for the weather and visibility fields, there is no reason for us not to include also those types in the code.
 
@@ -442,7 +442,7 @@ export default {
 };
 ```
 
-But since the json already has its values declared, assigning a type for the dataset results in an error:
+But since the json already has its values declared, assigning a type for the data set results in an error:
 
 ![](../../images/9/19b.png)
 
