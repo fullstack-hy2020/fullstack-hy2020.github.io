@@ -1268,7 +1268,7 @@ const AddEntryForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
 
 Note the tree marked lines. The first sets initial value for the array, and using the second you get the object <i>values</i> where Formik keeps the form data, and the third line passes the diagnosis array to _ArrayField_ components that takes care of adding diagnosis to the array.
 
-#### 9.6: patientor, step8
+#### 9.26: patientor, step8
 
 Extend your solution to support <i>two</i> entry types, and you do not have to handle the errors, it is enough if a entry can be created if the form is filled up with valid data.
 
