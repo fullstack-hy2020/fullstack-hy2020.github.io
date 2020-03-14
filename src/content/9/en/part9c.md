@@ -13,7 +13,7 @@ One major change from the previous part is that <i>we're not going to use ts-nod
 
 ### Setting up the project
 
-Our project is created for Ilari, who loves riding small planes but has a bit of difficulties managing his flight history. He is quite the coder himself, so he doesn't necessarily need a user interface for his flight records, but he'd like to use the software with HTTP-requests so that the possibility to later extend the application to also include a web-based user interface would be possible.
+Our project is created for Ilari, who loves riding small planes but has a bit of difficulties managing his flight history. He is quite a coder himself, so he doesn't necessarily need a user interface for his flight records, but he'd like to use the software with HTTP-requests so that the possibility to later extend the application to also include a web-based user interface would be possible.
 
 Let's start creating our own first real project 'Ilari's flight diaries', as we usually would by running <i>npm init</i> and by installing the <i>typescript</i> package. 
 
@@ -40,7 +40,7 @@ The npm srcipt for running <i>tsc</i> is set as follows:
  npm run tsc -- --init
 ```
 
- **Notice** the extra -- before the actual argument, arguments before the -- are interpreted for the command <i>npm</i> and ones after are for the command that is run throught the script. 
+ **Notice** the extra -- before the actual argument! Arguments before the -- are interpreted for the command <i>npm</i> and ones after are for the command that is run throught the script. 
 
 The created <i>tsconfig.json</i> contains a lengthy list of all of the possible configurations available to use, but  only a few of those are uncommented. Studying the initial <i>tsconfig.json</i> file might be useful for finding some configuration options you might need. It is also completely okay to keep the commented rows in the file just in case you might someday need to expand your configuration settings. 
 
@@ -79,7 +79,7 @@ The <i>target</i> parameter tells the compiler which ECMAScript version the gene
 
 <i>esModuleInterop</i> allows interaperability between commonJS and ES Modules, see more [in documentation](https://www.typescriptlang.org/v2/en/tsconfig#esModuleInterop).
 
-Now that we have our preferred configuration set, let's continue by installing <i>express</i> and of course also <i>@types/express</i>. Since this is a real project, which is intended to be grown over time we will use eslint from thevery  beginning:
+Now that we have our preferred configuration set, let's continue by installing <i>express</i> and of course also <i>@types/express</i>. Since this is a real project, which is intended to be grown over time we will use eslint from the very  beginning.
 
 ```sh
 npm install express
@@ -190,7 +190,7 @@ app.listen(PORT, () => {
 
 If we now run the app with <i>npm run dev</i> we can verify that a request to http://localhost:3000/ping gives response <i>pong</i>, so our configuration is set!
 
-When starting the app with <i>npm run dev</i>, it is running in development mode, and for sure that is not suitable whenwe later on opera the app in production. 
+When starting the app with <i>npm run dev</i>, it is running in development mode, and for sure that is not suitable when we later on operate the app in production. 
 
 Let us now try to create the <i>production build</i> by running the TypeScript compiler. Since we have defined the <i>outdir</i> in our tsconfig.json, there's really nothing else to do, but run the script <i>npm run tsc</i>.
 
