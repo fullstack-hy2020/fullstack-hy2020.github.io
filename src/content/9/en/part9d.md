@@ -1255,52 +1255,58 @@ Remember that we have different kinds of entries in our app, so our backend shou
 
 Now that our backend supports adding of entries, we want to add the corresponding functionality the frontend. In this exercise you should add a form for adding an entry for a patient. An intuitive place for opening the form would be on the patient page. 
 
-In this exercise it is enough to support <i>one</i> entry type, and you do not have to handle the errors, it is enough if a entry can be created if the form is filled up with valid data.
+In this exercise it is enough to **support <i>one</i> entry type**, and you do not have to handle the errors, it is enough if a entry can be created if the form is filled up with valid data.
 
 Upon a successful submit the new entry should be added to the correct person and the patient's entries on the patient page should be updated to contain the new entry.
 
 If you like, you can re-use some of the code from the <i>Add patient</i> form for this exercise, but this is not a requirement.
 
-Note that the file [FormField.txt](https://github.com/fullstack-hy2020/patientor/blob/master/src/AddPatientModal/FormField.tsx#L58) has a redily made component _ArrayField_ that can be used for the array of diagnosis.
+Note that the file [FormField.tsx](https://github.com/fullstack-hy2020/patientor/blob/master/src/AddPatientModal/FormField.tsx#L58) has a redily made component _DiagnosisSelection_ that can be to for setting the field <i>diagnoses</i>:
 
 It can be used as follows:
 
 ```js
 const AddEntryForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
+  const [{ diagnoses }] = useStateValue() // highlight-line
+
   return (
     <Formik
-      initialValues={{
-        // ...
-        diagnosisCodes: [] // highlight-line 
-      }}
-      onSubmit={onSubmit}
-    >
-      {({ errors, touched, values }) => {         // highlight-line 
-        return (
-          <Form className="form ui">
-            // ...
-            <ArrayField
-              label="DiagnosticCodes"
-              placeholder="Diagnostic code"
-              errorMessage={touched.diagnosisCodes && errors.diagnosisCodes}
-              diagnosisCodes={values.diagnosisCodes} // highlight-line
-            />
-            // ...
-          </Form>
-        )}
-      }
-    </Formik>
-  );
-}
-```
+    initialValues={{
+      /// ...
+    }}
+    onSubmit={onSubmit}
+    validate={values => {
+      /// ...
+    }}
+  >
+    {({ isValid, dirty, setFieldValue, setFieldTouched }) => { // highlight-line
 
-Note the tree marked lines. The first sets initial value for the array, and using the second you get the object <i>values</i> where Formik keeps the form data, and the third line passes the diagnosis array to _ArrayField_ components that takes care of adding diagnosis to the array.
+      return (
+        <Form className="form ui">
+          // ...
+
+          // highlight-start
+          <DiagnosisSelection
+            setFieldValue={setFieldValue}
+            setFieldTouched={setFieldTouched}
+            diagnoses={Object.values(diagnoses)}
+          />    
+          // highlight-end
+
+          // ...
+        </Form>
+      );
+    }}
+  </Formik>
+  );
+};
+```
 
 #### 9.25: patientor, step10
 
-Extend your solution to support <i>two</i> entry types, and you do not have to handle the errors, it is enough if a entry can be created if the form is filled up with valid data.
+Extend your solution to support <i>two</i> entry types. You do not have to handle the errors, it is enough if a entry can be created if the form is filled up with valid data.
 
-The easiest (but not the most elegant) way to do this exercise is to have a separate form for each different entry type. 
+The easiest but surely not the most elegant way to do this exercise is to have a separate form for each different entry type. 
 
 Getting the types to work properly might be a slight challenge if you use just a single form.
 
