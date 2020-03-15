@@ -42,7 +42,7 @@ Other libraries run the tests in a Node-process, which is connected to the brosw
 Let's  make some end to end tests for our note application.
 
 <!-- Aloitetaan asentamalla Cypress <i>frontendin</i> kehitysaikaiseksi riippuvuudeksi -->
-We begin by installing Cypress to <i>the frontend</i> as development debendency
+We begin by installing Cypress to <i>the frontend</i> as development dependency
 
 ```js
 npm install --save-dev cypress
@@ -335,7 +335,7 @@ Now we notice, that the variable _cy_ our tests use gives us a nasty Eslint erro
 ![](../../images/5/30ea.png)
 
 <!-- Siitä päästään eroon asentamalla [eslint-plugin-cypress](https://github.com/cypress-io/eslint-plugin-cypress) kehitysaikaiseksi riippuvuudeksi -->
-We can get rid of it by installing [eslint-plugin-cypress](https://github.com/cypress-io/eslint-plugin-cypress) as a development debendency
+We can get rid of it by installing [eslint-plugin-cypress](https://github.com/cypress-io/eslint-plugin-cypress) as a development dependency
 
 ```js
 npm install eslint-plugin-cypress --save-dev
@@ -460,7 +460,7 @@ All changes to the browser's state are reversed after each test.
 If the tests need to be able to modify the server's database, the situation immediately becomes more complicated. Ideally, the server's database should be the same each time we run the tests, so our tests can be reliably and easily repeatable. 
 
 <!-- Kuten yksikkö- integraatiotesteissä, on myös E2E-testeissä paras ratkaisu nollata tietokanta ja mahdollisesti alustaa se sopivasti aina ennen testien suorittamista. E2E-testauksessa lisähaasteen tuo se, että testeistä ei ole mahdollista päästä suoraan käsiksi tietokantaan. -->
-As with unit- and integration tests, with E2E tests it is the best to empty the database and possibly format it before the tests are run. The challenge with E2E test sis, that they do not have access to the database. 
+As with unit- and integration tests, with E2E tests it is the best to empty the database and possibly format it before the tests are run. The challenge with E2E test is, that they do not have access to the database. 
 
 <!-- Ratkaistaan ongelma luomalla backendiin testejä varten API-endpoint, jonka avulla testit voivat tarvittaessa nollata kannan. Tehdään testejä varten oma <i>router</i> -->
 The solution is to create API endpoints to the backend for the test. 
@@ -603,11 +603,11 @@ describe('Note app', function() {
 })
 ```
 
-<!-- Ensimmäinen komento etsii ensin komponentin, missä on teksti <i>another note cypress</i> ja sen sisältä painikkeen <i>make important</i> ja klikkaa sitä.  -->(
+<!-- Ensimmäinen komento etsii ensin komponentin, missä on teksti <i>another note cypress</i> ja sen sisältä painikkeen <i>make important</i> ja klikkaa sitä.  -->
 The first command searches for a component containing the text <i>another note cypress</i>, and then for a <i>make important</i> button within it. It then clicks the button.
 
 <!-- Toinen komento varmistaa, että saman napin teksti on vaihtunut muotoon <i>make not important</i>. -->
-The second command checks, that the text on the button has changed to <i>make not important</i>.
+The second command checks that the text on the button has changed to <i>make not important</i>.
 
 <!-- Testit ja frontendin tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9), branchissa <i>part5-9</i>. -->
 The tests and the current frontend code can be found from [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9) branch <i>part5-9</i>.
@@ -619,7 +619,7 @@ Let's make a test to ensure that a login attempt fails if the password is wrong.
 
 <!-- Cypress suorittaa oletusarvoisesti aina kaikki testit, ja testien määrän kasvaessa se alkaa olla aikaavievää. Uutta testiä kehitellessä tai rikkinäistä testiä debugatessa voidaan määritellä testi komennon <i>it</i> sijaan komennolla <i>it.only</i>, jolloin Cypress suorittaa ainoastaan sen testin. Kun testi on valmiina, voidaan <i>only</i> poistaa. -->
 Cypress will run all tests each time by default, and as the number of tests increases it starts to become quite time consuming. 
-When developing a new tests or when debugging a broken test we can define the test with <i>it.only</i> instead of <i>it</i>, so Cypress will run only the required test.
+When developing a new test or when debugging a broken test, we can define the test with <i>it.only</i> instead of <i>it</i>, so that Cypress will only run the required test.
 When the test is working, we can remove <i>.only</i>.
 
 <!-- Testin ensimmäinen versio näyttää seuraavalta: -->
@@ -676,7 +676,7 @@ it('login fails with wrong password', function() {
 
 <!-- Eli ensin etsitään komennolla [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) CSS-luokan <i>error</i> sisältävä komponentti ja sen jälkeen varmistetaan että virheilmoitus löytyy sen sisältä. Huomaa, että [luokan CSS-selektori](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) alkaa pisteellä, eli luokan <i>error</i> selektori on <i>.error</i>. -->
 First we use [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) to search for a component with the CSS class <i>error</i>. Then we check that the error message can be found from this component. 
-Note, that the [CSS class selector](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) starts with a full stop, so the selector for class <i>error</i> is <i>.error</i>.
+Note that the [CSS class selector](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) starts with a full stop, so the selector for the class <i>error</i> is <i>.error</i>.
 
 <!-- Voisimme tehdä saman myös käyttäen [should](https://docs.cypress.io/api/commands/should.html)-syntaksia: -->
 We could do the same using the [should](https://docs.cypress.io/api/commands/should.html) syntax:
@@ -693,7 +693,7 @@ it('login fails with wrong password', function() {
 Using should is a bit trickier than using <i>contains</i>, but it allows for more diverse tests than <i>contains</i> which works based on text content only. 
 
 <!-- Lista yleisimmistä shouldin kanssa käytettävistä assertioista on [täällä](https://docs.cypress.io/guides/references/assertions.html#Common-Assertions). -->
-List of the most common assertions which can be used with should can be found from [here](https://docs.cypress.io/guides/references/assertions.html#Common-Assertions).
+List of the most common assertions which can be used with should can be found [here](https://docs.cypress.io/guides/references/assertions.html#Common-Assertions).
 
 <!-- Voimme esim. varmistaa, että virheilmoituksen väri on punainen, ja että sen ympärillä on border: -->
 We can, for example, make sure that the error message is red and it has a border:
@@ -744,7 +744,7 @@ it.only('login fails with wrong password', function() {
 ```
 
 <!-- Komentoa <i>should</i> käytetään aina ketjutettuna komennon <i>get</i> (tai muun vastaavan ketjutettavissa olevan komennon) perään. Testissä käytetty <i>cy.get('html')</i> tarkoittaa käytännössä koko sovelluksen näkyvillä olevaa sisältöä. -->
-<i>Should</i> should always be used chained with <i>get</i> (or another chainable command).
+<i>Should</i> should always be chained with <i>get</i> (or another chainable command).
 We used <i>cy.get('html')</i> to access the whole visible content of the application. 
 
 ### Bypassing the UI
@@ -795,7 +795,7 @@ So instead of logging in a user using the form in the <i>beforeEach</i> block, C
 
 
 <!-- Tilanteemme on hieman monimutkaisempi kuin Cypressin dokumentaation esimerkissä, sillä kirjautumisen yhteydessä sovelluksemme tallettaa kirjautuneen käyttäjän tiedot localStorageen. Sekin toki onnistuu. Koodi on seuraavassa -->
-Our situation is a bit more complicated than in the example in the Cypress documentation, because when user logs in our application saves their details to localStorage.
+Our situation is a bit more complicated than in the example in the Cypress documentation, because when user logs in, our application saves their details to the localStorage.
 However Cypress can handle that as well. 
 The code is the following
 
@@ -981,7 +981,7 @@ describe('when logged in', function() {
 How does the [cy.contains](https://docs.cypress.io/api/commands/contains.html) command actually work?
 
 <!-- Kun klikkaamme komentoa _cy.contains('second note')_ Cypressin [test runnerista](https://docs.cypress.io/guides/core-concepts/test-runner.htm) nähdään, että komento löytää elementin, jonka sisällä on teksti <i>second note</i>: -->
-When we click the _cy.contains('second note')_ command in Cypress [test runnerista](https://docs.cypress.io/guides/core-concepts/test-runner.htm), we see that the command searches for the element containing the text <i>second note</i>:
+When we click the _cy.contains('second note')_ command in Cypress [Test Runner](https://docs.cypress.io/guides/core-concepts/test-runner.html), we see that the command searches for the element containing the text <i>second note</i>:
 
 ![](../../images/5/34ea.png)
 
@@ -997,7 +997,7 @@ the 'make important' button corresponding to <i>second note</i>:
 When chained, the second <i>contains</i> command <i>continues</i> the search from within the component found by the first command. 
 
 <!-- Jos emme ketjuttaisi komentoja, eli olisimme kirjoittaneet  -->
-If we had not chained the commands, and wrote
+If we had not chained the commands, and instead wrote
 
 ```js
 cy.contains('second note')
@@ -1010,10 +1010,10 @@ the result would have been totally different. The second line of the test would 
 ![](../../images/5/36ea.png)
 
 <!-- Testejä tehdessä kannattaa siis ehdottomasti varmistaa test runnerista, että testit etsivät niitä elementtejä, joita niiden on tarkoitus tutkia! -->
-When coding tests you should check in the test runner that the tests use the right components!
+When coding tests, you should check in the test runner that the tests use the right components!
 
 <!-- Muutetaan komponenttia _Note_ siten, että muistiinpanon teksti renderöitään <i>span</i>-komponentin sisälle -->
-Let's change the _Note_ component so that the text of the note is renderer to a <i>span</i>.
+Let's change the _Note_ component so that the text of the note is rendered to a <i>span</i>.
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -1046,16 +1046,16 @@ it('other of those can be made important', function () {
 ```
 
 <!-- Ensimmäisellä rivillä etsitään komennon [parent](https://docs.cypress.io/api/commands/parent.htm) tekstin <i>second note</i> sisältävän elementin vanhemman alla oleva nappi ja painetaan sitä. Toinen rivi varmistaa, että napin teksti muuttuu. -->
-In the first line we use the [parent](https://docs.cypress.io/api/commands/parent.htm) command to access the parent element of the element containing <i>second note</i> and find the button from within it. 
+In the first line, we use the [parent](https://docs.cypress.io/api/commands/parent.htm) command to access the parent element of the element containing <i>second note</i> and find the button from within it. 
 Then we click the button, and check that the text on it changes. 
 
 <!-- Huomaa, että napin etsimiseen käytetään komentoa [find](https://docs.cypress.io/api/commands/find.html#Syntax). Komento [cy.get](https://docs.cypress.io/api/commands/get.html) ei sovellu tähän tilanteeseen, sillä se etsii elementtejä aina <i>koko</i> sivulta ja palauttaisi nyt kaikki sovelluksen viisi nappia. -->
 Note that we use the command [find](https://docs.cypress.io/api/commands/find.html#Syntax) to search for the button. We cannot use [cy.get](https://docs.cypress.io/api/commands/get.html) here, because it always searches from the <i>whole</i> page and would return all 5 buttons on the page. 
 
 <!-- Testissä on ikävästi copypastea, rivien alku eli napin etsivä koodi on sama.  -->
-Unfortunately we have some copypaste in the tests now, because the code for searching for the right button is always the same. 
+Unfortunately, we have some copypaste in the tests now, because the code for searching for the right button is always the same. 
 <!-- Tälläisissä tilanteissa on mahdollista hyödyntää komentoa [as](https://docs.cypress.io/api/commands/as.html):  -->
-In these kinds of situations it is possible to use the [as](https://docs.cypress.io/api/commands/as.html) command:
+In these kinds of situations, it is possible to use the [as](https://docs.cypress.io/api/commands/as.html) command:
 
 ```js
 it.only('other of those can be made important', function () {
@@ -1071,7 +1071,7 @@ Now the first line finds the right button, and uses <i>as</i> to save it as <i>t
 ### Running and debugging the tests
 
 <!-- Vielä osan lopuksi muutamia huomioita Cypressin toimintaperiaatteesta sekä testien debuggaamisesta. -->
-Lastly some notes on how Cypress works and debugging your tests.
+Finally, some notes on how Cypress works and debugging your tests.
 
 <!-- Cypressissä testien kirjoitusasu antaa vaikutelman, että testit ovat normaalia javascript-koodia, ja että voisimme esim. yrittää seuraavaa: -->
 The form of the Cypress tests gives the impression, that the tests are normal JavaScript code, and we could for example try this:
@@ -1091,8 +1091,8 @@ When the code of the test method has been executed, Cypres will execute each com
 Cypress commands always return _undefined_, so _button.click()_ in the above code would cause an error. An attempt to start the debugger would not stop the code between executing the commands, but before any commands have been executed. 
 
 <!-- Cypress-komennot ovat <i>promisen kaltaisia</i>, joten jos niiden palauttamia arvoja halutaan käsitellä, se tulee tehdä komennon [then](https://docs.cypress.io/api/commands/then.html) avulla. Esim. seuraava testi tulostaisi sovelluksen <i>kaikkien</i> nappien lukumäärän ja klikkaisi napeista ensimmäistä: -->
-Cypress commands are <i>like promises</i>, so if we want to access their return values we have to do it using the [then](https://docs.cypress.io/api/commands/then.html) command. 
-For example the following test would print the number of buttons in the application, and click the first button: 
+Cypress commands are <i>like promises</i>, so if we want to access their return values, we have to do it using the [then](https://docs.cypress.io/api/commands/then.html) command. 
+For example, the following test would print the number of buttons in the application, and click the first button: 
 
 ```js
 it('then example', function() {
@@ -1134,7 +1134,7 @@ Now we can run our tests from the command line with the command <i>npm run test:
 ![](../../images/5/39ea.png)
 
 <!-- Huomaa, että testien suorituksesta tallentuu video hakemistoon <i>cypress/videos/</i>, hakemisto lienee syytä gitignoroida. -->
-Note, that video of the test execution will be saved to <i>cypress/videos/</i>, so you should propably git ignore this directory. 
+Note that video of the test execution will be saved to <i>cypress/videos/</i>, so you should propably git ignore this directory. 
 
 <!-- Testien ja frontendin koodin lopullinen versio on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11), branchissa <i>part5-11</i>. -->
 The frontend- and the test code can be found from [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11) branch <i>part5-11</i>.
