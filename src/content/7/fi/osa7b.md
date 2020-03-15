@@ -305,7 +305,7 @@ Jatketaan luvun react-router [tehtävien](/osa7/react_router#tehtavat-7-1-7-3) s
 
 Yksinkertaista sovelluksen uuden anekdootin luomiseen käytettävän lomakkeen käyttöä äsken määritellyn _useField_ custom-hookin avulla.
 
-Talleta hook on tiedostoo <i>/src/hooks/index.js</i>. 
+Talleta hook tiedostoon <i>/src/hooks/index.js</i>. 
 
 Jos käytät normaalisti käyttämämme default exportin sijaan [nimettyä exportia](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description)
 
@@ -417,7 +417,7 @@ Huomaa, että tässä tehtävässä on oleellista hyödyntää useEffectin [tois
 
 #### 7.8*: ultimate hooks
 
-Aiempien osaien materiaalissa kehitetyn muistiinpanosovelluksen palvelimen kanssa keskusteleva koodi näyttää seuraavalta:
+Aiempien osien materiaalissa kehitetyn muistiinpanosovelluksen palvelimen kanssa keskusteleva koodi näyttää seuraavalta:
 
 ```js
 import axios from 'axios'
