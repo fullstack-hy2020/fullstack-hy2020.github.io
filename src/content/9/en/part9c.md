@@ -1124,7 +1124,7 @@ We still need to give the same treatment to <i>visibility</i>. The enum looks fo
 export enum Visibility {
   Great = 'great',
   Good = 'good',
-  Cloudy = 'ok',
+  Ok = 'ok',
   Poor = 'poor', 
 }
 ```
