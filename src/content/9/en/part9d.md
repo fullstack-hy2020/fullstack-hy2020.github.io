@@ -1316,14 +1316,18 @@ There is also redily made component _NumberField_ for the numeric values with a 
 
 #### 9.25: patientor, step10
 
-Extend your solution to support <i>two</i> entry types. You do not have to handle the errors, it is enough if a entry can be created if the form is filled up with valid data.
-
-The easiest but surely not the most elegant way to do this exercise is to have a separate form for each different entry type. 
-
-Getting the types to work properly might be a slight challenge if you use just a single form.
+Extend your solution so that it displays error message if some required values are missing or formatted incorrectly. 
 
 #### 9.26: patientor, step11
 
-Extend your solution so that it supports <i>all the entry types</i> and displays error message if some required values are missing or formatted incorrectly and you try to submit the form. 
+Extend your solution to support <i>two</i> entry types and displays error message if some required values are missing. You do not need to care about the possible errors in server response.
+
+The easiest but surely not the most elegant way to do this exercise is to have a separate form for each different entry type or formatted incorrectly. You do not need to care about the possible errors in server response.
+
+Getting the types to work properly might be a slight challenge if you use just a single form.
+
+#### 9.27: patientor, step12
+
+Extend your solution so that it supports <i>all the entry types</i> and displays error message if some required values are missing or formatted incorrectly. You do not need to care about the possible errors in server response.
 
 </div>
