@@ -1302,6 +1302,18 @@ const AddEntryForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
 };
 ```
 
+There is also redily made component _NumberField_ for the numeric values with a limited range
+
+```js
+<Field
+  label="healthCheckRating"
+  name="healthCheckRating"
+  component={NumberField}
+  min={0}
+  max={3}
+/>
+```
+
 #### 9.25: patientor, step10
 
 Extend your solution to support <i>two</i> entry types. You do not have to handle the errors, it is enough if a entry can be created if the form is filled up with valid data.
