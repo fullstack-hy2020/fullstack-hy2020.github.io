@@ -434,7 +434,7 @@ If you would call the function with parameters <i>[3, 0, 2, 4.5, 0, 3, 1]</i> an
   rating: 2,
   ratingDescription: 'not too bad but could be better',
   target: 2,
-  average: 1.5 }
+  average: 1.9285714285714286 }
 ```
 
 Create a npm script <i>npm run calculateExercises</i> for calling the function with hard coded values.
@@ -456,8 +456,8 @@ and
 ```sh
 $ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
 
-{ periodLength: 10,
-  trainingDays: 7,
+{ periodLength: 9,
+  trainingDays: 6,
   success: false,
   rating: 2,
   ratingDescription: 'not too bad but could be better',
