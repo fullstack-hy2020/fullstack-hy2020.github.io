@@ -473,7 +473,7 @@ export default {
 
 Type assertion should not be used unless there's no other way to proceed since there's always the danger of asserting an unfit type to an object and then perhaps causing a nasty runtime error. While the compiler trusts you to know when using <i>as</i>, at the same time it leaves the intelligence of the whole TypeScript to manual interpretation. 
 
-In our case we could change our data exportation method so that we could have the typing happen naturally within the file where the data resides. Since typings van not be used in a JSON-file, we should convert the json-file to a ts-file which exports the typed  data in the following way: 
+In our case we could change our data exportation method so that we could have the typing happen naturally within the file where the data resides. Since typings can not be used in a JSON-file, we should convert the json-file to a ts-file which exports the typed  data in the following way: 
 
 ```js
 import { DiaryEntry } from "../src/types";
@@ -632,7 +632,7 @@ export default {
 }
 ```
 
-If we nw would try to return this data with the basic <i>DiaryEntry</i> type, i.e. if we would type the function as follows
+If we now would try to return this data with the basic <i>DiaryEntry</i> type, i.e. if we would type the function as follows
 
 ```js
 const getNonSensitiveEntries = () : DiaryEntry[] => {
@@ -691,7 +691,7 @@ Create data type <i>Patient</i> and set up a GET-endpoint <i>/api/patients</i> t
 
 In this exercise you may assume that field <i>gender</i> has type <i>string</i>.
 
-Try the endpoint with browser and to sure that <i>ssn</i> is not included in response:
+Try the endpoint with browser and ensure that <i>ssn</i> is not included in response:
 
 ![](../../images/9/22g.png)
 
@@ -731,9 +731,9 @@ But once again, a new problem comes into light:
 
 ![](../../images/9/23e.png)
 
-The issue now it that there is no guarantee that an entry with the specific id can be found. It is good that this potentially problematic issue surfaces already at compile phase, since without TypeScript there would be no indication of this possibility and in the worst case you might end up returning a result of an <i>undefined</i> object instead of informing about the nonexistense of searched item by other means.
+The issue now is, that there is no guarantee that an entry with the specific id can be found. It is good that this potentially problematic issue surfaces already at compile phase, since without TypeScript there would be no indication of this possibility and in the worst case you might end up returning a result of an <i>undefined</i> object instead of informing about the nonexistense of searched item by other means.
 
-In cases like this we first of all need to decide <i>what is the desired return value</i> if an object is not found, and how to handle the case. The value <i>undefined</i> that is returned by <i>find</i>-method of an array is actually fine for us if a result is not found. Thus we could solve our problem by typing the return value as follows
+In cases like this we first of all need to decide <i>what is the desired return value</i> if an object is not found, and how to handle the case. The value <i>undefined</i> that is returned by <i>find</i> method of an array is actually fine for us if a result is not found. Thus we could solve our problem by typing the return value as follows
 
 ```js
 const findById = (id: number): DiaryEntry | undefined => { // highlight-line
@@ -767,7 +767,7 @@ export default router;
 
 Let's start building the HTTP POST endpoint for adding flight diary entries. The accepted values should confirm to the example data.
 
-The code handling the response looks as follows
+The code handling of the response looks as follows
 
 ```js
 router.post('/', (req, res) => {
@@ -823,7 +823,7 @@ router.post('/', (req, res) => {
 })
 ```
 
-But wait, what is the type of this object? It is not exactly a <i>DiaryEntry</i>, since it is still missing the <i>id</i> field. It could be useful for us just to create a new type <i>NewDiaryEntry</i> which could work as a type for the not-yet saved diary. Let us create that in <i>types.ts</i> using the existing <i>DiaryEntry</i> object with the [Omit](http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk) utility type:
+But wait, what is the type of this object? It is not exactly a <i>DiaryEntry</i>, since it is still missing the <i>id</i> field. It could be useful for us just to create a new type <i>NewDiaryEntry</i> which could work as a type for the not yet saved diary. Let us create that in <i>types.ts</i> using the existing <i>DiaryEntry</i> object with the [Omit](http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk) utility type:
 
 ```js
 export type NewDiaryEntry = Omit<DiaryEntry, 'id'>;
@@ -876,10 +876,10 @@ The way Express handles parsing the request body is that it asserts the type [an
 
 ![](../../images/9/27.png)
 
-The value of type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#an) can be assigned to <i>any</i> type of variable since it <i>might be</i> the wanted type. This is definitely not safe to trust so 
+The value of type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#an) can be assigned to <i>any</i> type of variable since it <i>might be</i> the wanted type. This is definitely not safe to trust, so 
 check the incoming values (regardless whether we are using TypeScript or not).
 
-We could just add simple <i>exists</i> and <i>is-value-valid</i> checks to the function defining the route but since we also need to ensure that <i>Weather</i> and <i>Visibility</i> values are of the correct form, it is better to write the parsing and validation logic to a separate file <i>utils.ts</i>.
+We could just add simple <i>exists</i> and <i>is-value-valid</i> checks to the function defining the route, but since we also need to ensure that <i>Weather</i> and <i>Visibility</i> values are of the correct form, it is better to write the parsing and validation logic to a separate file <i>utils.ts</i>.
 
 Our intention is to define a function <i>toNewDiaryEntry</i> that gets the request body as a parameter and returns a properly typed <i>NewDiaryEntry</i>. Route definition uses the function as follows
 
@@ -900,7 +900,7 @@ router.post('/', (req, res) => {
 })
 ```
 
-Since we are now making trustworthy code and trying to make sure that we are getting exactly what we want from the requests we should get started with the goal of parsing and validating each field we are waiting for. 
+Since we are now making trustworthy code and trying to make sure that we are getting exactly what we want from the requests, we should get started with the goal of parsing and validating each field we are waiting for. 
 
 The skeleton of the function <i>toNewDiaryEntry</i> looks like the following:
 
@@ -926,7 +926,7 @@ However if we type the object to <i>any</i>, eslint gives us a complaint:
 
 ![](../../images/9/24e.png)
 
-The cause for the complaint is the eslint-rule [no-explicit-any](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md) that prevents us form explicitly setting type to be <i>any</i>. Since this is in general a good rule to follow but just in this particular file undesired, it is better to allow using <i>any</i> now by disabling the eslint-rule in the file. This happens by adding the following line at the file:
+The cause for the complaint is the eslint-rule [no-explicit-any](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md) that prevents us from explicitly setting type to be <i>any</i>. Since this is in general a good rule to follow but just in this particular file undesired, it is better to allow using <i>any</i> now by disabling the eslint-rule in the file. This happens by adding the following line at the file:
 
 ```js
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -1005,7 +1005,7 @@ b instanceof String; --> returns true
 
 It is however unlikely that anybody creates strings with a constructor function, so most likely the simpler version of the type guard would be just fine. 
 
-Next let us consider the field <i>date</i>. Parsing and validating the date object is pretty similar, since TypeScript doesn't really know a type for date, we need to treat it as as <i>string</i>. We still definitely should use JavaScript level validation to check whether the date format is acceptable. 
+Next let us consider the field <i>date</i>. Parsing and validating the date object is pretty similar, since TypeScript doesn't really know a type for date, we need to treat it as <i>string</i>. We still definitely should use JavaScript level validation to check whether the date format is acceptable. 
 
 We will add the following functions
 
