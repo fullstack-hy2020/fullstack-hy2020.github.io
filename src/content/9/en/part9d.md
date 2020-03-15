@@ -982,22 +982,24 @@ Form handling can sometimes be quite a nuisance in React. That's why we have dec
 >
 > By colocating all of the above in one place, Formik will keep things organized - making testing, refactoring, and reasoning about your forms a breeze.
 
-The code for the form can be found in <i>src/AddPatientModal/AddPatientForm.tsx</i> and some form field helpers can be found in <i>src/AddPatientModal/FormField.tsx</i>. In the beginning of <i>AddPatientForm.tsx</i> you can see, that we have created a type for our form values, called simply <i>FormValues</i>. It is a narrowed down version of <i>Patient</i>, with the properties <i>id</i> and <i>entries</i> omitted, because we don't want the user to be able to submit then when creating a new patient. <i>id</i> is created by the backend and <i>entries</i> can only be added for existing patients.
+The code for the form can be found in <i>src/AddPatientModal/AddPatientForm.tsx</i> and some form field helpers can be found in <i>src/AddPatientModal/FormField.tsx</i>.
+
+In the beginning of <i>AddPatientForm.tsx</i> you can see, that we have created a type for our form values, called simply <i>PatientFormValues</i>. It is a narrowed down version of <i>Patient</i>, with the properties <i>id</i> and <i>entries</i> omitted, because we don't want the user to be able to submit then when creating a new patient. <i>id</i> is created by the backend and <i>entries</i> can only be added for existing patients.
 
 ```js
-export type FormValues = Omit<Patient, "id" | "entries">;
+export type PatientFormValues = Omit<Patient, "id" | "entries">;
 ```
 
 Next we declare the props for our form component:
 
 ```js
 interface Props {
-  onSubmit: (values: FormValues) => void;
+  onSubmit: (values: PatientFormValues) => void;
   onCancel: () => void;
 }
 ```
 
-There we can see that the component requires two props, <i>onSubmit</i> and <i>onCancel</i>. Both are callback functions that return <i>void</i>. As arguments <i>onSubmit</i> should receive an object of our <i>FormValues</i> type, so that the callback can handle our form values. 
+There we can see that the component requires two props, <i>onSubmit</i> and <i>onCancel</i>. Both are callback functions that return <i>void</i>. As arguments <i>onSubmit</i> should receive an object of our <i>PatientFormValues</i> type, so that the callback can handle our form values. 
 
 When creating <i>AddPatientForm</i> function component, you can see that we have bound <i>Props</i> type as as our component's props, and are destructuring <i>onSubmit</i> and <i>onCancel</i> from those props.
 
@@ -1044,7 +1046,7 @@ The function component <i>SelectField</i> in itself is pretty straight forward. 
 export const SelectField: React.FC<SelectFieldProps> = ({
   name,
   label,
-  options,
+  options
 }: SelectFieldProps) => (
   <Form.Field>
     <label>{label}</label>
@@ -1059,35 +1061,49 @@ export const SelectField: React.FC<SelectFieldProps> = ({
 );
 ```
 
-Now let's move on to the <i>TextField</i> component. It uses an intersection of SemanticUI's <i>InputProps</i> and a type that consists of a string label and an optional error message as props. From the props <i>name</i>, <i>label</i>, <i>placeholder</i> and <i>errorMessage</i> are destructured into variables and used within the component. The component renders a SemanticUI [Form.Field](https://react.semantic-ui.com/collections/form/) with the given label and a Formik [Field](https://jaredpalmer.com/formik/docs/api/field), to which <i>name</i>, <i>placeholder</i> and a function component are given as props. The function component used as props is <i>TextInput</i>, which we have created ourselves. If the <i>errorMessage</i> prop is truthy, then we will render the error message below the input element.
+Now let's move on to the <i>TextField</i> component. 
+The component renders a SemanticUI [Form.Field](https://react.semantic-ui.com/collections/form/) with the given label and a Formik [Field](https://jaredpalmer.com/formik/docs/api/field), to which <i>name</i> and <i>placeholder</i> are given as props. 
 
 ```jsx
-export const TextField: React.FC<InputProps & {
+interface TextProps extends FieldProps {
   label: string;
-  errorMessage?: string;
-}> = ({ name, label, placeholder, errorMessage }) => (
+  placeholder: string;
+}
+
+export const TextField: React.FC<TextProps> = ({ field, label, placeholder }) => (
   <Form.Field>
     <label>{label}</label>
-    <Field name={name} placeholder={placeholder} component={TextInput} />
-    {errorMessage && <Label color="red">{errorMessage}</Label>}
+    <Field placeholder={placeholder} {...field} />
+    <div style={{ color:'red' }}>
+      <ErrorMessage name={field.name} />
+    </div>
   </Form.Field>
 );
 ```
 
-<i>TextInput</i> is a simple component that accepts an intersection of SemanticUI <i>InputProps</i> and Formiks <i>FieldProps</i> as props and then renders a SemanticUI [Input](https://react.semantic-ui.com/elements/input/). The <i>placeholder</i> props is passed down from props of <i>TextField</i> and the rest of the values for the input element (<i>...field</i>) are generated by Formik's <i>Field</i> where this component is used.
+Note that the possible error message for the input is rendered with the Fromik component [ErrorMessage](https://jaredpalmer.com/formik/docs/api/errormessage) that does everything under the hood without a need to specify what it should do.
+
+It would also be possible to get hold of the error messages withinn the component by using the prop <i>form</i>: 
 
 ```jsx
-const TextInput: React.FC<FieldProps & InputProps> = ({
-  placeholder,
-  field
-}) => <Input placeholder={placeholder} {...field} />;
+export const TextField: React.FC<TextProps> = ({ field, label, placeholder, form }) => {
+  console.log(form.errors); 
+  // ...
+}
 ```
 
 Now back to the actual form component in <i>AddPatientForm.tsx</i>. The function component <i>AddPatientForm</i> renders a [Formik component](https://jaredpalmer.com/formik/docs/api/formik), which is a wrapper that requires two props, which are quite self explanatory: <i>initialValues</i> and <i>onSubmit</i>. The Formik wrapper keeps track of your form's state and then exposes it plus a few reusable methods and event handlers to your form via props.
 
- We are also using an optional <i>validate</i> prop, that expects a validation function and returns an object containing possible errors. Here we only check that our text fields are not falsy, but it could easily contain e.g. some validation for the social security number format etc. First have a look at the entire component, we will later explain the different parts in more detail.
+We are also using an optional <i>validate</i> prop, that expects a validation function and returns an object containing possible errors. Here we only check that our text fields are not falsy, but it could easily contain e.g. some validation for the social security number format etc. The error messages defined by this function are the ones that are then displayed along the corresponding field component's.
+ 
+First have a look at the entire component, we will later explain the different parts in more detail.
 
 ```jsx
+interface Props {
+  onSubmit: (values: PatientFormValues) => void;
+  onCancel: () => void;
+}
+
 export const AddPatientForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
   return (
     <Formik
@@ -1117,44 +1133,32 @@ export const AddPatientForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
         return errors;
       }}
     >
-      {({ errors, touched }) => {
-        /**
-         * Check if the given field contains an error and return it in that case.
-         * also require field to have been touched,
-         * so that no all fields won't display errors by default.
-         * If no error, return undefined (return type is inferred)
-         */
-
-        const getFieldErrorMessage = (fieldName: keyof FormValues) =>
-          touched[fieldName] && errors[fieldName]
-            ? errors[fieldName]
-            : undefined;
-        
+      {({ isValid, dirty }) => {
         return (
           <Form className="form ui">
-            <TextField
+            <Field
               label="Name"
-              name="name"
               placeholder="Name"
-              errorMessage={getFieldErrorMessage("name")}
+              name="name"
+              component={TextField}
             />
-            <TextField
+            <Field
               label="Social Security Number"
-              name="ssn"
               placeholder="SSN"
-              errorMessage={getFieldErrorMessage("ssn")}
+              name="ssn"
+              component={TextField}
             />
-            <TextField
+            <Field
               label="Date Of Birth"
-              name="dateOfBirth"
               placeholder="YYYY-MM-DD"
-              errorMessage={getFieldErrorMessage("dateOfBirth")}
+              name="dateOfBirth"
+              component={TextField}
             />
-            <TextField
+            <Field
               label="Occupation"
-              name="occupation"
               placeholder="Occupation"
-              errorMessage={getFieldErrorMessage("occupation")}
+              name="occupation"
+              component={TextField}
             />
             <SelectField
               label="Gender"
@@ -1168,7 +1172,12 @@ export const AddPatientForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
                 </Button>
               </Grid.Column>
               <Grid.Column floated="right" width={5}>
-                <Button type="submit" floated="right" color="green">
+                <Button
+                  type="submit"
+                  floated="right"
+                  color="green"
+                  disabled={!dirty || !isValid}
+                >
                   Add
                 </Button>
               </Grid.Column>
@@ -1179,34 +1188,17 @@ export const AddPatientForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
     </Formik>
   );
 };
+
+export default AddPatientForm;
 ```
 
-As a child for our Formik wrapper, we create a <i>function</i> that returns the form contents as we want them. We use Formik's [Form](https://jaredpalmer.com/formik/docs/api/form) to render the actual form element and inside that we use our <i>TextField</i> and <i>SelectField</i> components, that we created in <i>FormField.tsx</i>.
+As a child for our Formik wrapper, we create a <i>function</i> that returns the form content as we want them. We use Formik's [Form](https://jaredpalmer.com/formik/docs/api/form) to render the actual form element and inside that we use our <i>TextField</i> and <i>SelectField</i> components, that we created in <i>FormField.tsx</i>.
 
- Inside the function we can use Formik's <i>errors</i> and <i>touched</i> objects, that contain data about possible validation errors and of fields that have been touched. If a field has been touched and contains an error, we will pass that error to the <i>TextField</i> component to be rendered there. If we look at our <i>TextField</i> component, we can see that the type for the <i>errorMessage</i> prop is an optional string. To avoid duplicating same logic for all form fields, we have created a helper function <i>getFieldErrorMessage</i>:
- 
- ```js
-const getFieldErrorMessage = (fieldName: keyof FormValues) =>
-  touched[fieldName] && errors[fieldName]
-    ? errors[fieldName]
-    : undefined;
- ```
+Lastly on the form, we create two buttons, one for cancelling the form submission, and one for submitting the form. The cancel button calls the <i>onCancel</i> callback straight away, while the submit button triggers Formik's onSubmit event, which in turn uses the <i>onSubmit</i> callback from the component's props. Submit button is enabled only of the form is <i>valid</i> and <i>dirty</i>, which means that user has edited some of the fields.
 
-Function checks if the given field is <i>touched</i> and has <i>errors</i>, and returns the value from the <i>errors</i> object in that case. If either check was falsy, the function returns <i>undefined</i>. From the function signature we can see that the <i>fieldName</i> argument has the followin type:
+Submission is handled through Formik, because that way we can get it to call the validation function before performing the actual submission. If the validation function returns any errors, the submission is cancelled. 
 
-```js
-fieldName: keyof FormValues
-```
-
-That means that the given argument has to be a key present in the <i>FormValues</i> type. Basically it translates to the type:
-
-```js
-fieldName: "name" | "ssn" | "dateOfBirth" | "occupation" | "gender";
-```
-
-But is less verbose. This type prevents us from calling the function with an invalid value and thus we will be notified if we misspell the name of a field or in some other way try to use the function in the wrong way. 
-
-Lastly on the form, we create two buttons, one for cancelling the form submission, and one for submitting the form. The cancel button calls the <i>onCancel</i> callback straight away, while the submit button triggers Formik's onSubmit event, which in turn uses the <i>onSubmit</i> callback from the component's props. Submission is handled through Formik, because that way we can get it to call the validation function before performing the actual submission. If the validation function returns any errors, the submission is cancelled. The buttons are set inside a SemanticUI [Grid](https://react.semantic-ui.com/collections/grid/), to get them next to each other easily.
+The buttons are set inside a SemanticUI [Grid](https://react.semantic-ui.com/collections/grid/), to get them next to each other easily.
 
 ```jsx
 <Grid>
@@ -1223,7 +1215,7 @@ Lastly on the form, we create two buttons, one for cancelling the form submissio
 </Grid>
 ```
 
-The <i>onSubmit</i> callback has been passed down all the way from our patient list page. It basically performs a post operation to our backend, adds the new returned patient to our state and closes the modal. If the backend returns an error, the error is displayed on the form.
+The <i>onSubmit</i> callback has been passed down all the way from our patient list page. It basically performs a HTTP POST to our backend, adds the new returned patient to our state and closes the modal. If the backend returns an error, the error is displayed on the form.
 
 Here is our submit function:
 
