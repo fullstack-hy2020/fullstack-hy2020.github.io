@@ -766,11 +766,11 @@ Response should look as follows:
 
 #### 9.17: patientor, step2
 
-Create a page for showing the patient full information in the frontend.
+Create a page for showing the patient full information in the frontend. 
 
 Patient information should be accessible when clicking eg. the patients name.
 
-After fetching the patient information from backend, add the fetched information to the applications state.  Do not fetch the information if it already is in the app state, i.e. if you are visiting many times it the page of the same patient. 
+Fetch the data from the enpoint created on the provious exercise. After fetching the patient information from backend, add the fetched information to the applications state. Do not fetch the information if it already is in the app state, i.e. if you are visiting many times it the page of the same patient. 
 
 Since we now have the state in the context, you'll need to define a new action type for updating an individual patient's data.
 
@@ -791,13 +791,36 @@ The gender is shown with react-semantic-ui component [Icon](https://react.semant
 const { id } = useParams<{ id: string }>();
 ```
 
+#### 9.18: patientor, step3
+
+We are currently creating the <i>action</i> objects everywhere in the code when dispatching the action, e.g. component <i>App</i> has the following:
+
+```js
+dispatch({
+  type: "SET_PATIENT_LIST", payload: patientListFromApi
+});
+```
+
+Refactor the code to use [action creator](/en/part6/flux_architecture_and_redux#action-creators) functions that are all defined in the file <i>reducer.tsx</i>. 
+
+For example the <i>App</i> changes like this
+
+```js
+import { useStateValue, setPatientList } from "./state";
+
+// ...
+
+dispatch(setPatientList(patientListFromApi));
+```
+
+
 </div>
 
 <div class="content">
 
 ### Full entries
 
-We implemented in the [exercise 9.12.](/en/part9/typing_the_express_app#exercises-9-12-9-13) an endpoint for fetching the diagnoses but we still are not using that endpoint at all. That makes sense since our application currently consists only of listing patients and their information. Now it would be a great idea to expand our data by a bit; let's add possible <i>Entry</i> data to our patient data so that each patient can have medical entries that include possible diagnoses.
+In the [exercise 9.12.](/en/part9/typing_the_express_app#exercises-9-12-9-13) we implemented an endpoint for fetching the diagnoses but we still are not using that endpoint at all. Since we now have a page for viewing details of a single patient it would be a great idea to expand our data by a bit; let's add possible <i>Entry</i> data to our patient data so that each patient can have medical entries that include possible diagnoses.
 
 Let's ditch our old patient seed data from backend and start using [this expanded format](https://github.com/fullstack-hy2020/misc/blob/master/patients.ts).
 
@@ -838,7 +861,7 @@ When looking at the data closer, we can see that the entries in the data differ 
 }
 ```
 
-Immediately we can see that the first few fields are the same, but the first one only has the <i>discharge</i> field and the second one only <i>employerName</i> and <i>sickLeave</i>. So all the entries seem to have somethign in common but some are entry specific. 
+Immediately we can see that the first few fields are the same, but the first one only has the <i>discharge</i> field and the second one only <i>employerName</i> and <i>sickLeave</i>. So all the entries seem to have something in common but some are entry specific. 
 
 When looking at the entries through the <i>type</i> field we can see that there actually is three separate kinds of entries: <i>OccupationalHealthcare</i>, <i>Hospital</i> and <i>HealthCheck</i>. This indicates the need for three separate kinds of types but since they all seem to have something in common we might just want to create a base entry interface that we could extend with the different fields in each type.
 
@@ -864,15 +887,15 @@ interface BaseEntry {
   description: string;
   date: string;
   specialist: string;
-  diagnosisCodes?: Array<Diagnose['code']>;
+  diagnosisCodes?: Array<Diagnosis['code']>;
 }
 ```
 
-As you might remember <i>Array&lt;Type&gt;</i> is just an alternative way to say <i>Type[]</i>. In cases like this it is just much more clear to use the array convention since the other option would be to define the type by saying <i>Diagnosis['code'][]</i> which starts to look a little bit strange.
+As you might remember <i>Array&lt;Type&gt;</i> is just an alternative way to say <i>Type[]</i>. In cases like this it is just much more clear to use the array convention since the other option would be to define the type by saying <i>Diagnosis['code'][]</i> which starts to look a bit strange.
 
 Now that we have the <i>BaseEntry</i> defined we can start creating the extended entry types we will actually use. Let's start by creating the <i>HealthCheckEntry</i> type.
 
-The entries with the type <i>HealthCheck</i> contain the field <i>HealthCheckRating</i>, which can be any of the integer values from 0 to 3, 0 meaning <i>Healthy</i> and 3 informing of a <i>CriticalRisk</i>: the perfect case for an enum definition. With these specifications we could write a <i>HealthCheckEntry</i> type definition like the following:
+The entries with the type <i>HealthCheck</i> contain the field <i>HealthCheckRating</i>, which can be any of the integer values from 0 to 3, 0 meaning <i>Healthy</i> and 3 informing of a <i>CriticalRisk</i>, a perfect case for an enum definition. With these specifications we could write a <i>HealthCheckEntry</i> type definition like the following:
 
 ```js
 export enum HealthCheckRating {
@@ -901,17 +924,17 @@ export type Entry =
 
 <div class="tasks">
 
-### Exercises 9.18.-9.21.
+### Exercises 9.19.-9.22.
 
-#### 9.18: patientor, step3
+#### 9.19: patientor, step4
 
 Define the types <i>OccupationalHealthCareEntry</i> and <i>HospitalEntry</i> so that those conform with the example data. Ensure that your backend returns the entries properly when you go to a individual patient route
 
 ![](../../images/9/40.png)
 
-Use types properly in the backend! For now there is no need to do a proper validation for all the fields if the entries in the backend, it is enough e.g. to check that the field <i>type</i> has a correct value.
+Use types properly in the backend! For now there is no need to do a proper validation for all the fields of the entries in the backend, it is enough e.g. to check that the field <i>type</i> has a correct value.
 
-#### 9.19: patientor, step4
+#### 9.20: patientor, step5
 
 Extend the patient page in the frontend to list the <i>date</i>, <i>description</i> and <i>diagnose codes</i> of patient's entries. 
 
@@ -921,23 +944,23 @@ Your solution could look like this:
 
 ![](../../images/9/41.png)
 
-#### 9.20: patientor, step5
+#### 9.21: patientor, step6
 
 Fetch and add diagnoses to application state from <i>/api/diagnosis</i> endpoint. Use the new diagnosis data to show descriptions for patients diagnosis code:
 
 ![](../../images/9/42.png)
 
-#### 9.21: patientor, step5
+#### 9.22: patientor, step7
 
 Extend the entry-listing in the patient page to include the Entry's details with a new component that shows rest of the information of the patients entries distinguishing different types from each other. 
 
 You could use eg. [Icon](https://react.semantic-ui.com/elements/icon/) or some other [SemanticUI](https://react.semantic-ui.com/) components the get appropriate visuals for your listing.
 
-You should use a _switch case_ based rendering and Use exhaustive type checking as seen previously in the material, so that no cases can be forgotten. 
+You should use a _switch case_ based rendering and <i>exhaustive type checking</i> so that no cases can be forgotten. 
 
 Like this:
 
-![](../../images/9/35a.png)
+![](../../images/9/35c.png)
 
 The resulting entries in the listing <i>could</i> look something like this:
 
@@ -1226,9 +1249,9 @@ With this material you should be able to complete the rest of this part's exerci
 
 <div class="tasks">
 
-### Exercises 9.22.-9.25.
+### Exercises 9.23.-9.26.
 
-#### 9.24: patientor, step6
+#### 9.23: patientor, step8
 
 So far we have established that the patients can have different types of entries, but we don't yet have any way of adding entries for our patients in our app, so it would at the moment be a pretty useless electronic medical record. 
 
@@ -1236,7 +1259,7 @@ Your next task is to add an endpoint <i>/api/patients/:id/entries</i> to your ba
 
 Remember that we have different kinds of entries in our app, so our backend should also support all those types and check that at least all required fields are given for each type.
 
-#### 9.25: patientor, step7
+#### 9.24: patientor, step9
 
 Now that our backend supports adding of entries, we want to add the corresponding functionality the frontend. In this exercise you should add a form for adding an entry for a patient. An intuitive place for opening the form would be on the patient page. 
 
@@ -1281,7 +1304,7 @@ const AddEntryForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
 
 Note the tree marked lines. The first sets initial value for the array, and using the second you get the object <i>values</i> where Formik keeps the form data, and the third line passes the diagnosis array to _ArrayField_ components that takes care of adding diagnosis to the array.
 
-#### 9.26: patientor, step8
+#### 9.25: patientor, step10
 
 Extend your solution to support <i>two</i> entry types, and you do not have to handle the errors, it is enough if a entry can be created if the form is filled up with valid data.
 
@@ -1289,7 +1312,7 @@ The easiest (but not the most elegant) way to do this exercise is to have a sepa
 
 Getting the types to work properly might be a slight challenge if you use just a single form.
 
-#### 9.27: patientor, step9
+#### 9.26: patientor, step11
 
 Extend your solution so that it supports <i>all the entry types</i> and displays error message if some required values are missing or formatted incorrectly and you try to submit the form. 
 
