@@ -234,6 +234,8 @@ There is also a script _npm run logs:prod_ to show the heroku logs.
 
 Note that the directory paths in the script <i>build:ui</i> depend on the location of repositories in the file system.
 
+>**NB**  <i>build:ui</i> does not work on Windows, go to [Solution](https://github.com/fullstackopen-2019/fullstackopen-2019.github.io/issues/420)  
+
 ### Proxy
 
 Changes on the frontend have caused it to no longer work in development mode (when started with command _npm start_), as the connection to the backend does not work. 
