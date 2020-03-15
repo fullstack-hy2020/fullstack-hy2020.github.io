@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-Before we start delving into how you can use TypeScript together with React, we could first have a look at what we want to achieve. When everything works as it should, TypeScript will help us catching the following errors:
+Before we start delving into how you can use TypeScript together with React, we could first have a look at what we want to achieve. When everything works as it should, TypeScript will help us catch the following errors:
 
 - Trying to pass an extra/unwanted prop to a component
 - Forgetting to pass a required prop to a component
@@ -29,7 +29,7 @@ After running the command, you should have a complete basic react app, that uses
 
 If you browse through the files and folders, you will notice that the app is not that different from the one you would have initialised with pure JavaScript. Basically the only differences are that the <i>.js</i> and <i>.jsx</i> files are now renamed to <i>.ts</i> and <i>.tsx</i> files, they contain some type annotations, and the root folder also contains a<i>tsconfig.json</i> file.
 
-Now, let's take a look at the<i>tsconfig.json</i> file that has been created for us. Everything should be more or less fine within the file, except for that at the moment the configuration also allows JavaScript files to be compiled, because <i>allowJs</i> is set to <i>true</i>. That would be fine if you need to mix TypeScript and JavaScript (e.g. if you are in the middle of transforming a JavaScript project into TypeScript or some other reason), but we want our app to be purely TypeScript, so let's change that setting to <i>false</i>.
+Now, let's take a look at the <i>tsconfig.json</i> file that has been created for us. Everything should be more or less fine within the file, except for that at the moment the configuration also allows JavaScript files to be compiled, because <i>allowJs</i> is set to <i>true</i>. That would be fine if you need to mix TypeScript and JavaScript (e.g. if you are in the middle of transforming a JavaScript project into TypeScript or some other reason), but we want our app to be purely TypeScript, so let's change that setting to <i>false</i>.
 
 Earlier we added eslint to help us enforce coding style in backend, so let's do the same with this app. We do not need to install any dependencies since create-react-app has taken care of that already.
 
@@ -79,9 +79,9 @@ If we now run <i>npm run lint</i>, we should still receive an error from eslint:
 
 ![](../../images/9/31a.png)
 
-Why is that? as we can see from the error, the file  <i>serviceWorker.ts</i> doesn't seem to be compliant with our linting configurations at the moment. This is because the <i>register</i> function uses other functions that are declared later in the same file and the rule [@typescript-eslint/no-use-before-define](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-use-before-define.md) doesn't like that. To fix the error we need to move the  <i>register</i> function as the last function in the file.
+Why is that? As we can see from the error, the file  <i>serviceWorker.ts</i> doesn't seem to be compliant with our linting configurations at the moment. This is because the <i>register</i> function uses other functions that are declared later in the same file and the rule [@typescript-eslint/no-use-before-define](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-use-before-define.md) doesn't like that. To fix the error we need to move the  <i>register</i> function as the last function in the file.
 
-If we now run <i>npm run lint</i>, we shouldn't get any errors. Actually the error does not matter since we do not need the file <i>serviceWorker.ts</i> anyway it is better to delete it altogether.
+If we now run <i>npm run lint</i>, we shouldn't get any errors. Actually the error does not matter, since we do not need the file <i>serviceWorker.ts</i> anyway, it is better to delete it altogether.
 
 ### React components with TypeScript
 
@@ -139,7 +139,7 @@ type PropsWithChildren<P> = P | { children?: ReactNode };
 
 Well, that was complicated (or was it?). Basically all we need to know at the moment is that we can define a type that we pass to _FunctionComponent_ and the component's <i>props</i> then consist of the defined type and component's <i>children</i>.
 
-Now, lets return to our code exaple and see how we would define the type for the <i>Welcome</i> component's props in TypeScript.
+Now, lets return to our code example and see how we would define the type for the <i>Welcome</i> component's props in TypeScript.
 
 ```jsx
 interface WelcomeProps {
@@ -242,7 +242,7 @@ and remove the unnecessary files.
 
 The whole app is now in one component, and that is not what we want, so refactor the code so that it consists of three new components: <i>Header</i>,  <i>Content</i> and <i>Total</i>. All data is still kept in the <i>App</i> component, which passes all necessary data to each component as props. Be sure to add type declarations for the component's props! 
 
-The <i>Header</i>, component should take care of rendering the name of the course, <i>Content</i> should render the names of the different parts and the amount of exercises in that part, and <i>Total</i> should render the total sum of exercises in all parts.
+The <i>Header</i> component should take care of rendering the name of the course, <i>Content</i> should render the names of the different parts and the amount of exercises in that part, and <i>Total</i> should render the total sum of exercises in all parts.
 
 The <i>App</i> component should look somewhat like this:
 
