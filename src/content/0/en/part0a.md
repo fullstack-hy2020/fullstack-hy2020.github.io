@@ -95,7 +95,7 @@ Exam results can be found from the "my submissions" tab of the submission system
 
 By submitting at least 22/26 of the exercises for part 8 of the course, GraphQL, you can get one additional credit. Part 8 can be done any time after part 5, because its contents are independent from parts 6 and 7. 
 
-By submitting at least xx/yy of the exercises for part 9 of the course, TypeScript, you can get one additional credit. It is recommended that you complete parts 0-7 before taking part 9.
+By submitting at least 24/27 of the exercises for part 9 of the course, TypeScript, you can get one additional credit. It is recommended that you complete parts 0-7 before taking part 9.
 
 Exercises in parts 8 and 9 do not count towards the grade for the 5-7 credit course. 
 
