@@ -31,7 +31,7 @@ Materiaalissa osasta <i>n</i> osaan <i>n+1</i> eteneminen ei ole mielekästä en
 
 Oletuksena on, että teet kunkin osan tehtävistä <i>ainakin ne</i> jotka eivät ole merkattu tähdellä. Myös tähdellä merkatut tehtävät vaikuttavat arvosteluun, mutta niiden tekemättä jättäminen ei aiheuta liian suuria esteitä seuraavan osan (tähdellä merkkaamattomien) tehtävien tekemiseen.
 
-Etenemisnopeus kurssilla on vapaa, tehtäviä voi palauttaa 10.1.2010. klo 23:59 asti. Mahdollisen suoritusmerkinnän saat sen jälkeen kun olet suorittanut myös kurssiin liittyvän kokeen.
+Etenemisnopeus kurssilla on vapaa, tehtäviä voi palauttaa 10.1.2021. klo 23:59 asti. Mahdollisen suoritusmerkinnän saat sen jälkeen kun olet suorittanut myös kurssiin liittyvän kokeen.
 
 Tämän kurssin eri osiin jo tehtyjen palautusten ajankäyttöstatistiikan näet [tehtävien palautussovelluksesta](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
@@ -41,7 +41,7 @@ Kurssi voidaan suorittaa joko 3 tai 5-9 opintopisteen laajuisena.
 
 Laajuus ja arvosana määräytyy kaikkien tehtyjen tehtävien perusteella, myös tähdellä merkityt tehtävät siis vaikuttavat arvosanaan. 
 
-Jos haluat kurssiata virallisen suoritusmerkinnän, kuuluu kurssin myös koe. Hyväksytty suoritus edellyttää kokeen läpäisemistä, koe ei kuitenkaan vaikuta arvosanaan. Koe suoritetaan [Avoimen yliopiston](https://courses.helsinki.fi/fi/aytkt21009/129171256) Moodle-järjestelmässä, ohje kokeeseen ilmoittautumiseen [täällä](/osa0/yleista/#kokeeseen-ilmoittautuminen).
+Jos haluat kurssiata virallisen suoritusmerkinnän, kuuluu kurssiin myös koe. Hyväksytty suoritus edellyttää kokeen läpäisemistä, koe ei kuitenkaan vaikuta arvosanaan. Koe suoritetaan [Avoimen yliopiston](https://courses.helsinki.fi/fi/aytkt21009/129171256) Moodle-järjestelmässä, ohje kokeeseen ilmoittautumiseen [täällä](/osa0/yleista/#kokeeseen-ilmoittautuminen).
 
 #### Kolmen opintopisteen suoritus
 
