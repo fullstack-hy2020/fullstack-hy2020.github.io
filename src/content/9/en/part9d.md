@@ -444,9 +444,9 @@ const courseParts: CoursePart[] = [
 
 Now we know that both interfaces <i>CoursePartOne</i> and <i>CoursePartThree</i> share not only the base attributes, but also an attribute called <i>description</i>, which is a string in both interfaces. 
 
-Your first task is to to declare a new interface, that includes the <i>description</i> attribute and extends the <i>CoursePartBase</i> interface. Then modify the code so that you can remove the <i>description</i> attribute from both <i>CoursePartOne</i> and <i>CoursePartThree</i>, without getting any errors.
+Your first task is to declare a new interface, that includes the <i>description</i> attribute and extends the <i>CoursePartBase</i> interface. Then modify the code so that you can remove the <i>description</i> attribute from both <i>CoursePartOne</i> and <i>CoursePartThree</i>, without getting any errors.
 
-The create a component <i>Part</i> that renders all attributes opf each type of course part. Use switch case -based exhaustive type checking! Use the new component in component <i>Content</i>.
+The create a component <i>Part</i> that renders all attributes of each type of course part. Use switch case -based exhaustive type checking! Use the new component in component <i>Content</i>.
 
 Lastly, add your own course part interface with at least the following attributes: <i>name</i>, <i>exerciseCount</i> and <i>description</i>. Then add that interface to the type union <i>CoursePart</i> and add corresponding data to the <i>courseParts</i> variable. Now if you have modified your <i>Content</i> component correctly, you should get an error, because you have not yet added support for the fourth course part type. Do the necessary changes to <i>Content</i>, so that all attributes for the new course part also get rendered and that the compiler doesn't produce any errors.
 
@@ -499,7 +499,7 @@ When diving into the codebase for the first time it is good to get an overall vi
 
 You can also browse the folder structure to get insights about application functionality and/or the architecture used. This is not always clear and developers may have chosen way to organize code that might not be familliar to you. The [sample project](https://github.com/fullstack-hy2020/patientor) used in in the rest of this part is organized featurewise. You can see what different pages the application has and some general components eg. modals and state. Keep in mind that the features represented may have different scopes eg. modals are visible UI level components whereas the state is comparable to business logic and keeps the data organized under the hood for the rest of the app to use.
 
-TypeScript provides you types which tell you what kind of data structures functions, components and state to expect. You can try to look for <i>types.ts</i> or something similar to get you started. VSCode is a big help and just highlighting variables and parameters can give you quite much of insight. This all naturaally depends on how types are used in the project.
+TypeScript provides you types which tell you what kind of data structures functions, components and state to expect. You can try to look for <i>types.ts</i> or something similar to get you started. VSCode is a big help and just highlighting variables and parameters can give you quite much of insight. This all naturally depends on how types are used in the project.
 
 If project has tests unit, integration or end-to-end tests, reading those is most likely beneficial. Test cases are your most important tool when refactoring or creating new features to the application. You want to make sure not to break any existing features when hammering around the code. TypeScript can also give you guidance with argument and return types when doing changes in the code.
 
@@ -527,13 +527,13 @@ So there are currently, as you would expect, two main components: <i>AddPatientM
 
 Let's study the state handling a bit closer as a lot of stuff seems to be happening under the hood and it differs a bit from the methods used in the course so far. 
 
-The state management is built using React Hooks [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) and [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer). This is one quite a viable option of creating a stateful app when we know that the app we will be rather small and we do not want to use <i>redux</i> or other libraries for the state management.  There are a lot of good material eg. [this article](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe) describing the approach. 
+The state management is built using React Hooks [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) and [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer). This is one quite a viable option for creating a stateful app when we know that the app we will be rather small and we do not want to use <i>redux</i> or other libraries for the state management.  There are a lot of good material eg. [this article](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe) describing the approach. 
 
 The approach taken in this app uses the React [context](https://reactjs.org/docs/context.html), that according to documentation
 
 > <i>... is designed to share data that can be considered "global" for a tree of React components, such as the current authenticated user, theme, or preferred language.</i> 
 
-In our case the "global" shared data is the application state <i>and</i> the dispatch function that is used to make changes to data. In a way the approach works quite a much like redux based state management that we used in [part 6](/en/part6) but is a more light weight since it does not require the use of any external libraries. This part assumes that you are at least familiar at the way how redux works, e.g. you should have covered at least [the first section](/en/part6/flux_architecture_and_redux) of part 6.
+In our case the "global" shared data is the application state <i>and</i> the dispatch function that is used to make changes to data. In a way the approach works quite a much like redux based state management that we used in [part 6](/en/part6) but is a more light weight since it does not require the use of any external libraries. This part assumes that you are at least familiar with the way how redux works, e.g. you should have covered at least [the first section](/en/part6/flux_architecture_and_redux) of part 6.
 
 The [context](https://reactjs.org/docs/context.html) of the application has a tuple of the app state and dispatcher for changing the state of our app. The application state is typed as follows:
 
@@ -613,7 +613,7 @@ export const reducer = (state: State, action: Action): State => {
 
 The main difference is now that the state is a dictionary (or object) instead of array that we used in [part 6](/en/part6).
 
-There are lot of things happening in the file <i>state.ts</i> that is taking care of setting up the contex. The main ingredient is that it uses [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook to create a the state and dispatch-function and passes those to the [context provider](https://reactjs.org/docs/context.html#contextprovider):
+There are lot of things happening in the file <i>state.ts</i> that is taking care of setting up the contex. The main ingredient is that it uses [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook to create the state and dispatch function and passes those to the [context provider](https://reactjs.org/docs/context.html#contextprovider):
 
 ```js
 export const StateProvider: React.FC<StateProviderProps> = ({
@@ -722,7 +722,7 @@ React.useEffect(() => {
 
  **A word of warning!** Passing the type parameter for axios will not validate any data and is quite dangerous especially if you are using external APIs. You can create custom validation functions taking in the whole payload and returning the correct type or you can use type guard. Both are valid. There are also many libraries that provide validation through different kind of schemas eg. [io-ts](https://github.com/gcanti/io-ts). For simplicity we will continue trusting our own work and trust that we will get data of the correct form from the backend.
 
-As our app is quite small we will update the state by simply calling the <i>dispatch</i> function provided to us by <i>useStateValue</i> hook. Compiler helps to make sure that we dispatch actions according to our <i>Action</i> type with predefined type string and payload:
+As our app is quite small we will update the state by simply calling the <i>dispatch</i> function provided to us by <i>useStateValue</i> hook. Compiler helps making sure that we dispatch actions according to our <i>Action</i> type with predefined type string and payload:
 
 ```js
 dispatch({ type: "SET_PATIENT_LIST", payload: patients });
@@ -740,7 +740,7 @@ Before going to this, let us do some preparatory work.
 
 #### 9.16: patientor, step1
 
-Create an endpoint <i>/api/patients/:id</i> to that returns all of the patient information for one patient, including also the array of patient entries that is still empty for all the patients. For the time being, expand the backend types as follows:
+Create an endpoint <i>/api/patients/:id</i> to backend that returns all of the patient information for one patient, including also the array of patient entries that is still empty for all the patients. For the time being, expand the backend types as follows:
 
 ```js
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -770,11 +770,11 @@ Create a page for showing the patient full information in the frontend.
 
 Patient information should be accessible when clicking eg. the patients name.
 
-Fetch the data from the enpoint created on the provious exercise. After fetching the patient information from backend, add the fetched information to the applications state. Do not fetch the information if it already is in the app state, i.e. if you are visiting many times it the page of the same patient. 
+Fetch the data from the enpoint created on the previous exercise. After fetching the patient information from backend, add the fetched information to the applications state. Do not fetch the information if it already is in the app state, i.e. if you are visiting many times the page of the same patient. 
 
 Since we now have the state in the context, you'll need to define a new action type for updating an individual patient's data.
 
-The Application uses [Semantic UI React](https://react.semantic-ui.com/) for styling, which is quite similar to [React Bootstrap](https://react-bootstrap.github.io/) and [MaterialUI](https://material-ui.com/) that we covered in [part 7](/en/part7/more_about_styles). You may also use it for the new components but that is up to you sincew the main focus is now in Typescript.
+The Application uses [Semantic UI React](https://react.semantic-ui.com/) for styling, which is quite similar to [React Bootstrap](https://react-bootstrap.github.io/) and [MaterialUI](https://material-ui.com/) that we covered in [part 7](/en/part7/more_about_styles). You may also use it for the new components but that is up to you since the main focus is now in Typescript.
 
 The Application also uses [react router](https://reacttraining.com/react-router/web/guides/quick-start) 
 to control what view is visible in the frontend. You might want to have a look on [part 7](/en/part7/react_router) if you don't yet have a grasp on how the router works.
@@ -863,11 +863,11 @@ When looking at the data closer, we can see that the entries in the data differ 
 
 Immediately we can see that the first few fields are the same, but the first one only has the <i>discharge</i> field and the second one only <i>employerName</i> and <i>sickLeave</i>. So all the entries seem to have something in common but some are entry specific. 
 
-When looking at the entries through the <i>type</i> field we can see that there actually is three separate kinds of entries: <i>OccupationalHealthcare</i>, <i>Hospital</i> and <i>HealthCheck</i>. This indicates the need for three separate kinds of types but since they all seem to have something in common we might just want to create a base entry interface that we could extend with the different fields in each type.
+When looking at the entries through the <i>type</i> field we can see that there actually is three separate kinds of entries: <i>OccupationalHealthcare</i>, <i>Hospital</i> and <i>HealthCheck</i>. This indicates the need for three separate kinds of types, but since they all seem to have something in common, we might just want to create a base entry interface that we could extend with the different fields in each type.
 
 When looking at the data, it seems that the fields <i>id</i>, <i>description</i>, <i>date</i> and <i>specialist</i> are something that can be found from each entry. On top of that, it seems that the <i>diagnosisCodes</i> is only found in one <i>OccupationalHealthCare</i> and one <i>Hospital</i> type entry. Since it is not always used even in those types of entries, it is safe to assume that the field is optional and we could consider it to be optional even in the <i>HealthCheck</i> type entry, just not in use in these entries right here.
 
-So our <i>BaseEntry</i> from which each type could be extended from with would be the following:
+So our <i>BaseEntry</i> from which each type could be extended would be the following:
 
 ```js
 interface BaseEntry {
@@ -928,7 +928,7 @@ export type Entry =
 
 #### 9.19: patientor, step4
 
-Define the types <i>OccupationalHealthCareEntry</i> and <i>HospitalEntry</i> so that those conform with the example data. Ensure that your backend returns the entries properly when you go to a individual patient route
+Define the types <i>OccupationalHealthCareEntry</i> and <i>HospitalEntry</i> so that those conform with the example data. Ensure that your backend returns the entries properly when you go to an individual patient route
 
 ![](../../images/9/40.png)
 
@@ -952,7 +952,7 @@ Fetch and add diagnoses to application state from <i>/api/diagnosis</i> endpoint
 
 #### 9.22: patientor, step7
 
-Extend the entry-listing in the patient page to include the Entry's details with a new component that shows rest of the information of the patients entries distinguishing different types from each other. 
+Extend the entry listing in the patient page to include the Entry's details with a new component that shows rest of the information of the patients entries distinguishing different types from each other. 
 
 You could use eg. [Icon](https://react.semantic-ui.com/elements/icon/) or some other [SemanticUI](https://react.semantic-ui.com/) components the get appropriate visuals for your listing.
 
@@ -972,7 +972,7 @@ The resulting entries in the listing <i>could</i> look something like this:
 
 ### Add patient form
 
-Form handling can sometimes be quite a nuisance in React. That's why we have decided to utilize the the [Formik](https://jaredpalmer.com/formik/docs/overview) package for our add patient form in our app. Here's a small intro from to Formiks's documentation:
+Form handling can sometimes be quite a nuisance in React. That's why we have decided to utilize the [Formik](https://jaredpalmer.com/formik/docs/overview) package for our add patient form in our app. Here's a small intro to Formiks's documentation:
 
 > Formik is a small library that helps you with the 3 most annoying parts:
 >
@@ -982,7 +982,7 @@ Form handling can sometimes be quite a nuisance in React. That's why we have dec
 >
 > By colocating all of the above in one place, Formik will keep things organized - making testing, refactoring, and reasoning about your forms a breeze.
 
-The code for the form can be found in <i>src/AddPatientModal/AddPatientForm.tsx</i> and some form field helpers can be found in <i>src/AddPatientModal/FormField.tsx</i>. In the beginning of <i>AddPatientForm.tsx</i> you can see, that we have created a type for our form values, called simply <i>FormValues</i>. It is a narrowed down version of <i>Patient</i>, with the properties <i>id</i> and <i>entries</i> omitted, because we don't want the user to be able to submit then when creating a new patient. <i>id</i> is created by the backend and <i>entries</i> can only be added for existing patients.
+The code for the form can be found in <i>src/AddPatientModal/AddPatientForm.tsx</i> and some form field helpers can be found in <i>src/AddPatientModal/FormField.tsx</i>. In the beginning of <i>AddPatientForm.tsx</i> you can see, that we have created a type for our form values, called simply <i>FormValues</i>. It is a narrowed down version of <i>Patient</i>, with the properties <i>id</i> and <i>entries</i> omitted, because we don't want the user to be able to submit when creating a new patient. <i>id</i> is created by the backend and <i>entries</i> can only be added for existing patients.
 
 ```js
 export type FormValues = Omit<Patient, "id" | "entries">;
@@ -999,7 +999,7 @@ interface Props {
 
 There we can see that the component requires two props, <i>onSubmit</i> and <i>onCancel</i>. Both are callback functions that return <i>void</i>. As arguments <i>onSubmit</i> should receive an object of our <i>FormValues</i> type, so that the callback can handle our form values. 
 
-When creating <i>AddPatientForm</i> function component, you can see that we have bound <i>Props</i> type as as our component's props, and are destructuring <i>onSubmit</i> and <i>onCancel</i> from those props.
+When creating <i>AddPatientForm</i> function component, you can see that we have bound <i>Props</i> type as our component's props, and are destructuring <i>onSubmit</i> and <i>onCancel</i> from those props.
 
 ```js
 export const AddPatientForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
@@ -1204,7 +1204,7 @@ That means that the given argument has to be a key present in the <i>FormValues<
 fieldName: "name" | "ssn" | "dateOfBirth" | "occupation" | "gender";
 ```
 
-But is less verbose. This type prevents us from calling the function with an invalid value and thus we will be notified if we misspell the name of a field or in some other way try to use the function in the wrong way. 
+But is less verbose. This type prevents us from calling the function with an invalid value and thus we will be notified if we misspell the name of a field or in some other way try to use the function in a wrong way. 
 
 Lastly on the form, we create two buttons, one for cancelling the form submission, and one for submitting the form. The cancel button calls the <i>onCancel</i> callback straight away, while the submit button triggers Formik's onSubmit event, which in turn uses the <i>onSubmit</i> callback from the component's props. Submission is handled through Formik, because that way we can get it to call the validation function before performing the actual submission. If the validation function returns any errors, the submission is cancelled. The buttons are set inside a SemanticUI [Grid](https://react.semantic-ui.com/collections/grid/), to get them next to each other easily.
 
@@ -1261,15 +1261,15 @@ Remember that we have different kinds of entries in our app, so our backend shou
 
 #### 9.24: patientor, step9
 
-Now that our backend supports adding of entries, we want to add the corresponding functionality the frontend. In this exercise you should add a form for adding an entry for a patient. An intuitive place for opening the form would be on the patient page. 
+Now that our backend supports adding entries, we want to add the corresponding functionality the frontend. In this exercise you should add a form for adding an entry for a patient. An intuitive place for opening the form would be on the patient page. 
 
-In this exercise it is enough to support <i>one</i> entry type, and you do not have to handle the errors, it is enough if a entry can be created if the form is filled up with valid data.
+In this exercise it is enough to support <i>one</i> entry type, and you do not have to handle the errors. It is enough if an entry can be created, if the form is filled up with valid data.
 
 Upon a successful submit the new entry should be added to the correct person and the patient's entries on the patient page should be updated to contain the new entry.
 
 If you like, you can re-use some of the code from the <i>Add patient</i> form for this exercise, but this is not a requirement.
 
-Note that the file [FormField.txt](https://github.com/fullstack-hy2020/patientor/blob/master/src/AddPatientModal/FormField.tsx#L58) has a redily made component _ArrayField_ that can be used for the array of diagnosis.
+Note that the file [FormField.txt](https://github.com/fullstack-hy2020/patientor/blob/master/src/AddPatientModal/FormField.tsx#L58) has already component _ArrayField_ that can be used for the array of diagnosis.
 
 It can be used as follows:
 
@@ -1302,11 +1302,11 @@ const AddEntryForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
 }
 ```
 
-Note the tree marked lines. The first sets initial value for the array, and using the second you get the object <i>values</i> where Formik keeps the form data, and the third line passes the diagnosis array to _ArrayField_ components that takes care of adding diagnosis to the array.
+Note the three marked lines. The first sets initial value for the array, and using the second you get the object <i>values</i> where Formik keeps the form data, and the third line passes the diagnosis array to _ArrayField_ components that takes care of adding diagnosis to the array.
 
 #### 9.25: patientor, step10
 
-Extend your solution to support <i>two</i> entry types, and you do not have to handle the errors, it is enough if a entry can be created if the form is filled up with valid data.
+Extend your solution to support <i>two</i> entry types. You do not have to handle the errors, it is enough if a entry can be created, if the form is filled up with valid data.
 
 The easiest (but not the most elegant) way to do this exercise is to have a separate form for each different entry type. 
 
@@ -1314,6 +1314,6 @@ Getting the types to work properly might be a slight challenge if you use just a
 
 #### 9.26: patientor, step11
 
-Extend your solution so that it supports <i>all the entry types</i> and displays error message if some required values are missing or formatted incorrectly and you try to submit the form. 
+Extend your solution so that it supports <i>all the entry types</i> and displays error message, if some required values are missing or formatted incorrectly when submitting the form. 
 
 </div>
