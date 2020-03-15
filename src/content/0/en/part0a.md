@@ -147,7 +147,7 @@ Many of the exercises build a larger application bit by bit. In these cases, sub
 
 ### Sign up for the exam
 
-For official university gredits you need to pass the course exam that is done in Open university Moodle.
+For official university credits you need to pass the course exam that is done in Open university Moodle.
 Note that it is possible to register for exam only if you have a Finnish social security number!
 
 Follow the instructions below to gain access to the course’s Moodle space:
