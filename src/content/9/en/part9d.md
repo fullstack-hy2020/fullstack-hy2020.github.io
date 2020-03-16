@@ -984,7 +984,7 @@ Form handling can sometimes be quite a nuisance in React. That's why we have dec
 
 The code for the form can be found in <i>src/AddPatientModal/AddPatientForm.tsx</i> and some form field helpers can be found in <i>src/AddPatientModal/FormField.tsx</i>.
 
-In the beginning of <i>AddPatientForm.tsx</i> you can see, that we have created a type for our form values, called simply <i>PatientFormValues</i>. It is a narrowed down version of <i>Patient</i>, with the properties <i>id</i> and <i>entries</i> omitted, because we don't want the user to be able to submit then when creating a new patient. <i>id</i> is created by the backend and <i>entries</i> can only be added for existing patients.
+In the beginning of <i>AddPatientForm.tsx</i> you can see, that we have created a type for our form values, called simply <i>PatientFormValues</i>. It is a narrowed down version of <i>Patient</i>, with the properties <i>id</i> and <i>entries</i> omitted, because we don't want the user to be able to submit those when creating a new patient. <i>id</i> is created by the backend and <i>entries</i> can only be added for existing patients.
 
 ```js
 export type PatientFormValues = Omit<Patient, "id" | "entries">;
@@ -1255,7 +1255,7 @@ Remember that we have different kinds of entries in our app, so our backend shou
 
 Now that our backend supports adding of entries, we want to add the corresponding functionality the frontend. In this exercise you should add a form for adding an entry for a patient. An intuitive place for opening the form would be on the patient page. 
 
-In this exercise it is enough to **support <i>one</i> entry type**, and you do not have to handle the errors, it is enough if a entry can be created if the form is filled up with valid data.
+In this exercise it is enough to **support <i>one</i> entry type**, and you do not have to handle the errors, it is enough if an entry can be created if the form is filled up with valid data.
 
 Upon a successful submit the new entry should be added to the correct person and the patient's entries on the patient page should be updated to contain the new entry.
 
