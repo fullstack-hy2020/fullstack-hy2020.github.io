@@ -42,7 +42,7 @@ const partners = [
   {
     image: { name: 'smartly_io.svg', alt: 'Smartly' },
     url: 'https://www.smartly.io/careers/',
-  },  
+  },
 ];
 
 /* All logos must be in SVG format */
@@ -138,9 +138,11 @@ export const CompaniesBanner = ({ isFrontPage, lang }) => (
             centered
             className="col-4 spacing push-right-3 challenge-title"
             text={
-              lang === 'fi'
-                ? 'Full stack -haasteessa mukana'
-                : 'Taking part to Full stack challenge'
+              lang === 'en'
+                ? 'Taking part to Full stack challenge'
+                : (lang = 'zh'
+                    ? '参加全栈挑战'
+                    : 'Full stack -haasteessa mukana')
             }
           />
           <Element
@@ -166,9 +168,15 @@ export const CompaniesBanner = ({ isFrontPage, lang }) => (
         <Element flex spaceAround className="col-10 spacing">
           <Link
             className="about__challenge-button"
-            to={`${lang === 'en' ? '/en' : ''}/challenge`}
+            to={`${
+              lang === 'en' ? '/en' : lang === 'zh' ? '/zh' : ''
+            }/challenge`}
           >
-            {lang === 'en' ? 'More about challenge' : 'Lisätietoja haasteesta'}
+            {lang === 'en'
+              ? 'More about challenge'
+              : lang === 'zh'
+              ? '了解更多挑战信息'
+              : 'Lisätietoja haasteesta'}
           </Link>
         </Element>
       )}

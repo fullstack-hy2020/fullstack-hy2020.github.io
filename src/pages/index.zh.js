@@ -1,7 +1,7 @@
 import { BodyText } from '../components/BodyText/BodyText';
 import { CompaniesBanner } from '../components/CompaniesBanner/CompaniesBanner';
 import Element from '../components/Element/Element';
-import { Image } from './../components/Image/Image';
+import { Image } from '../components/Image/Image';
 import Layout from '../components/layout';
 import { PartBanner } from '../components/PartBanner/PartBanner';
 import React from 'react';
@@ -19,7 +19,6 @@ import mainSEOdescription from '../content/seo/mainSEOdescription';
 import mainSEOtags from '../content/seo/mainSEOtags';
 import news from '../images/noun_news_1248039.svg';
 import yliopistoLogo from '../images/company_logos/uoh_centre.svg';
-import {Link} from 'gatsby';
 
 const IndexPage = () => {
   const {
@@ -36,8 +35,8 @@ const IndexPage = () => {
   return (
     <Layout>
       <SEO
-        lang="en"
-        title="Full stack open 2020"
+        lang="zh"
+        title="全栈公开课2020"
         description={mainSEOdescription['en']}
         keywords={[...mainSEOtags]}
       />
@@ -60,10 +59,12 @@ const IndexPage = () => {
             headingLevel="h2"
           />
 
-          <div className="col-2 centered about__challenge-button spacing--after--mobile">
-            <Link to="/en/about"> Start course </Link>
-            </div>
-      
+          <a
+            className="col-2 centered about__challenge-button spacing--after--mobile"
+            href="/en/about"
+          >
+            Start course
+          </a>
 
           <div className="spacing--small" />
 
@@ -132,9 +133,9 @@ const IndexPage = () => {
         </Element>
       </Element>
 
-      <PartBanner lang="en" />
+      <PartBanner lang="zh" />
 
-      <CompaniesBanner lang="en" isFrontPage />
+      <CompaniesBanner lang="zh" isFrontPage />
 
       <Element flex spaceBetween className="container col-10 spacing--after">
         <TripleBorder

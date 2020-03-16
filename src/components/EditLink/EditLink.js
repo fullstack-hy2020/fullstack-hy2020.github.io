@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const EditLink = ({ part, letter, lang }) => {
-  const link = lang === 'en' ? `part${part}` : `osa${part}`;
+  const link = lang === 'en' ? `part${part}` : lang === 'zh' ? `part${part}` :`osa${part}`;
 
   return (
     <Element flex className="container spacing" centered>
@@ -17,6 +17,8 @@ const EditLink = ({ part, letter, lang }) => {
         <span>
           {lang === 'en'
             ? 'Propose changes to material'
+            :lang === 'zh'
+            ? '对讲课材料提出建议'
             : 'Ehdota muutosta materiaalin sisältöön'}
         </span>
       </a>

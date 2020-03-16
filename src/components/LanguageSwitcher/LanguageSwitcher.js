@@ -2,12 +2,17 @@ import './LanguageSwitcher.scss';
 
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Link } from 'gatsby';
 
 const Language = ({ language, active }) => {
   return language === active ? (
     <span className="language-switcher__active-language">{language}</span>
   ) : (
-    <a target="_self" className="language-switcher__language" href={active === 'en' ? '/' : '/en'}>{language}</a>
+    <div className="language-switcher__language">
+      <Link to={language === 'en' ? '/en' : language === 'zh' ? '/zh' : '/'}>
+        {language}
+      </Link>
+    </div>
   );
 };
 
@@ -17,6 +22,8 @@ const LanguageSwitcher = ({ lang }) => {
       <Language language="fi" active={lang} />
 
       <Language language="en" active={lang} />
+
+      <Language language="zh" active={lang} />
     </div>
   );
 };
