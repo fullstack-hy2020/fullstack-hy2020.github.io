@@ -8,7 +8,7 @@ lang: en
 <div class="content">
 
 <!-- Kurssin seitsemännen osan tehtävät poikkeavat jossain määrin. Edellisessä ja tässä luvussa on normaaliin tapaan [luvun teoriaan liittyviä tehtäviä](/osa7/custom_hookit#tehtavat-7-4-7-6). -->
-The exercises in this part are a bit different than the exercises in the previous parts. The exercises in the previous part and the of the exercises in this part [are bout the theory presented in this part](/osa7/custom_hookit#tehtavat-7-4-7-6).
+The exercises in this part are a bit different than the exercises in the previous parts. The exercises in the previous part and the exercises in this part [are about the theory presented in this part](/osa7/custom_hookit#tehtavat-7-4-7-6).
 
 <!-- Tämän ja seuraavan luvun tehtävien lisäksi seitsemäs osa sisältää kertaavan ja soveltavan [tehtäväsarjan](/osa7/tehtavia_blogilistan_laajennus), jossa laajennetaan osissa 4 ja 5 tehtyä Bloglist-sovellusta. -->
 This part also contains a [series of exercises](/osa7/tehtavia_blogilistan_laajennus) in which we modify the Bloglist application from parts 4 and 5 to rehearse and apply the skills we have learned.
@@ -40,7 +40,7 @@ As mentioned in [part 1](/en/part1/a_more_complex_state_debugging_react_apps#rul
 
 There's an existing [ESlint](https://www.npmjs.com/package/eslint-plugin-react-hooks) rule that can be used to verify that the application uses hooks correctly. 
 
-Create-react-app has readily configured rule [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks) that complains if hooks are used in illegal manner:
+Create-react-app has readily configured rule [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks) that complains if hooks are used in an illegal manner:
 
 ![](../../images/7/60ea.png)
 
@@ -352,7 +352,7 @@ export const useField = (type) => { // highlight-line
   }
 }
 
-// module can have several named exports
+// modules can have several named exports
 export const useAnotherHook = () => { // highlight-line
   // ...
 }
