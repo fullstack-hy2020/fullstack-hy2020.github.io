@@ -100,15 +100,20 @@ By submitting at least 24/27 of the exercises for part 9 of the course, TypeScri
 Exercises in parts 8 and 9 do not count towards the grade for the 5-7 credit course. 
 
 
-### Suoritusmerkinnän pyytäminen
+### How to get your credits
 
-Jos haluat kurssilta suorituksen, tallenna <b>Helsingin yliopiston</b> opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) näkymään <i>my submissions</i>. Jos et ole Helsingin yliopiston opiskelija, saat opiskelijanumeron ilmoittautumalla kurssille [Avoimen yliopiston](/osa0/yleista/#kokeeseen-ilmoittautuminen) kautta.
+<!-- Jos haluat kurssilta suorituksen, tallenna <b>Helsingin yliopiston</b> opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) näkymään <i>my submissions</i>. Jos et ole Helsingin yliopiston opiskelija, saat opiskelijanumeron ilmoittautumalla kurssille [Avoimen yliopiston](/osa0/yleista/#kokeeseen-ilmoittautuminen) kautta. -->
+If you want to receive credits, save your <b>University of Helsinki</b> student number to
+[the exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) in the 
+<i>my submissions</i> view. If you are not a student at the University of Helsinki, you can get a student number by registering for the course through the [Open university](/osa0/yleista/#kokeeseen-ilmoittautuminen).
 
-Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi valmis kurssin suorituksen kanssa:
+<!-- Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi valmis kurssin suorituksen kanssa: -->
+You will receive your credits after you have submitted enough exercise for a passing grade, passed the exam and let us know through the exercise submission system that you have completed the course:
 
 ![](../../images/0/28.png)
 
-Arvosana siirtyy Weboodiin neljän viikon sisällä suoritusmerkintäpyynnön jälkeen.
+<!-- Arvosana siirtyy Weboodiin neljän viikon sisällä suoritusmerkintäpyynnön jälkeen. -->
+You can view your grade in Weboodi approximately four weeks after notifying us.
 
 
 ### Course certificate
