@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Full Stack -websovelluskehitys 2020',
+    title: 'Full Stack open 2020',
     description: '',
     author: 'Houston Inc. Consulting oy',
     siteUrl: 'https://fullstack-hy2020.github.io/',

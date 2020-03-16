@@ -390,7 +390,7 @@ After adding token based authentication the tests for adding a new blog broke. d
 
 [This](https://github.com/visionmedia/supertest/issues/398) is most likely useful when doing the fix.
 
-This is the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://github.com/fullstack-hy2020).
+This is the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 <!---
 note left of user

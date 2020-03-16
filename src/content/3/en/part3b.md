@@ -161,7 +161,7 @@ Because on our situation, both the frontend and the backend are at the same addr
 
 ```js
 import axios from 'axios'
-const baseUrl = '/notes' // highlight-line
+const baseUrl = '/api/notes' // highlight-line
 
 const getAll = () => {
   const request = axios.get(baseUrl)
@@ -233,6 +233,8 @@ _npm run deploy:full_ combines these two and contains the necessary <i>git</i> c
 There is also a script _npm run logs:prod_ to show the heroku logs.
 
 Note that the directory paths in the script <i>build:ui</i> depend on the location of repositories in the file system.
+
+>**NB**  <i>build:ui</i> does not work on Windows, go to [Solution](https://github.com/fullstackopen-2019/fullstackopen-2019.github.io/issues/420)  
 
 ### Proxy
 

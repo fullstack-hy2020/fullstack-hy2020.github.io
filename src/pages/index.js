@@ -36,7 +36,7 @@ const IndexPage = () => {
     <Layout>
       <SEO
         lang="fi"
-        title="Full stack -websovelluskehitys"
+        title="Full stack open 2020"
         description={mainSEOdescription['fi']}
         keywords={[...mainSEOtags]}
       />
@@ -55,7 +55,7 @@ const IndexPage = () => {
 
           <SubHeader
             className="col-10"
-            text="Full Stack -websovelluskehitys 2020"
+            text="Full Stack open 2020"
             headingLevel="h2"
           />
 

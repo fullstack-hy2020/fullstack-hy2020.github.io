@@ -58,6 +58,8 @@ class Navigation extends Component {
             {navigation[this.props.lang].map(i => (
               <NavigationItem key={i.path} {...i} onClick={handleCloseMenu} />
             ))}
+
+            <LanguageSwitcher lang={this.props.lang} />
           </ul>
         </nav>
       </div>

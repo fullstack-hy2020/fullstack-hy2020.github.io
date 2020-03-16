@@ -8,6 +8,4 @@ lang: fi
 
 Alamme tässä osassa tutustua React-kirjastoon, jolla siis teemme sovelluksen selaimessa suoritettavan koodin. Teemme samalla myös nopean katsauksen Javascriptin Reactin kannalta oleellisimpiin ominaisuuksiin.
 
-**Tämän osan tehtävien deadline on maanantaina 27.1. klo 23:59**
-
 </div>

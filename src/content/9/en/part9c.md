@@ -15,9 +15,7 @@ One major change from the previous part is that <i>we're not going to use ts-nod
 
 ### Setting up the project
 
-<!-- Our project is created for Ilari, who loves riding small planes but has a bit of difficulties managing his flight history. He is quite the coder himself, so he doesn't necessarily need a user interface for his flight records, but he'd like to use the software with HTTP-requests so that the possibility to later extend the application to also include a web-based user interface would be possible. -->
-We will create a project for Ilari, who loves flying small planes but has a difficult time managing his flight history. 
-He is quite the coder himself, so he does not necessarily need a  user interface for his flight records system. He would like to use the software with HTTP-requests, and  have the option to add a web-based user interface later. 
+Our project is created for Ilari, who loves riding small planes but has a bit of difficulties managing his flight history. He is quite a coder himself, so he doesn't necessarily need a user interface for his flight records, but he'd like to use the software with HTTP-requests so that the possibility to later extend the application to also include a web-based user interface would be possible.
 
 <!-- Let's start creating our own first real project 'Ilari's flight diaries', as we usually would by running <i>npm init</i> and by installing the <i>typescript</i> package.  -->
 Let's start by creating our first real project 'Ilari's flight diaries'. As usual run <i>npm init</i> and install the <i>typescript</i> package.
@@ -49,8 +47,7 @@ The npm srcipt for running <i>tsc</i> is set as follows:
  npm run tsc -- --init
 ```
 
- <!-- **Notice** the extra -- before the actual argument, arguments before the -- are interpreted for the command <i>npm</i> and ones after are for the command that is run throught the script.  -->
- **NB**: Note the extra -- before the actual argument. Arguments before the -- are interpreted to be for <i>npm</i>, and ones after it for the command executed by the script.
+ **Notice** the extra -- before the actual argument! Arguments before the -- are interpreted for the command <i>npm</i> and ones after are for the command that is run throught the script. 
 
 <!-- The created <i>tsconfig.json</i> contains a lengthy list of all of the possible configurations available to use, but  only a few of those are uncommented. Studying the initial <i>tsconfig.json</i> file might be useful for finding some configuration options you might need. It is also completely okay to keep the commented rows in the file just in case you might someday need to expand your configuration settings.  -->
 Running the script creates an <i>tsconfig.json</i> file, which contains a lengthy list of every configuration available to us. However only a few have not been commented out. 
@@ -99,12 +96,9 @@ Using <i>strict</i> is suggested by the official documentation.
 
 <i>noFallthroughCasesInSwitch</i> ensures that in a _switch case_ each case ends with a  _return_ or a _break_ statement.
 
- <i>esModuleInterop</i> allows interaperability between commonJS and ES Modules, see more [in documentation](https://www.typescriptlang.org/v2/en/tsconfig#esModuleInterop). 
+<i>esModuleInterop</i> allows interoperability between commonJS and ES Modules, see more [in documentation](https://www.typescriptlang.org/v2/en/tsconfig#esModuleInterop).
 
-<!-- Now that we have our preferred configuration set, let's continue by installing <i>express</i> and of course also <i>@types/express</i>. Since this is a real project, which is intended to be grown over time we will use eslint from thevery  beginning: -->
-Now that we have our configurations set, let's continue by installing 
-<i>express</i> and <i>@types/express</i>. 
-Since this is a real project, which is intended to be grown over time we will use eslint from thevery  beginning:
+Now that we have our preferred configuration set, let's continue by installing <i>express</i> and of course also <i>@types/express</i>. Since this is a real project, which is intended to be grown over time we will use eslint from the very  beginning:
 
 ```sh
 npm install express
@@ -177,8 +171,7 @@ So, let's install <i>ts-node-dev</i>
 npm install --save-dev ts-node-dev
 ```
 
-<!-- And we are ready to start writing some code after defining still a coupe of more npm scripts: -->
-And after defining a few more npm scripts we are ready to start writing some code:
+And we are ready to start writing some code after defining still a couple of more npm scripts:
 
 ```json
 {
@@ -220,12 +213,9 @@ app.listen(PORT, () => {
 });
 ```
 
-<!-- If we now run the app with <i>npm run dev</i> we can verify that a request to http://localhost:3000/ping gives response <i>pong</i>, so our configuration is set! -->
-If we now run the app with <i>npm run dev</i>, we can verify
-that a request to http://localhost:3000/ping gives the response <i>pong</i>. Our configuration is all set!
+If we now run the app with <i>npm run dev</i> we can verify that a request to http://localhost:3000/ping gives a response <i>pong</i>, so our configuration is set!
 
-<!-- When starting the app with <i>npm run dev</i>, it is running in development mode, and for sure that is not suitable whenwe later on opera the app in production.  -->
-When you start the app with <i>npm run dev</i>, it runs in development mode. The development mode is not suitable when we later open the app in production. 
+When starting the app with <i>npm run dev</i>, it is running in development mode, and for sure that is not suitable when we later on operate the app in production. 
 
 <!-- Let us now try to create the <i>production build</i> by running the TypeScript compiler. Since we have defined the <i>outdir</i> in our tsconfig.json, there's really nothing else to do, but run the script <i>npm run tsc</i>. -->
 Let's try to create a <i>production build</i> by running the TypeScript compiler. Since we have defined the <i>outdir</i> in our tsconfig.json, there's really nothing else to do, but run the script <i>npm run tsc</i>.
@@ -251,7 +241,7 @@ Let's add an npm script for running the application in production mode:
 }
 ```
 
-Wen we run app with <i>npm start</i> we can verify that also the production build works
+When we run app with <i>npm start</i> we can verify that also the production build works
 
 ![](../../images/9/15a.png)
 
@@ -270,19 +260,19 @@ With the help of our compiler and eslint it also ensures that a good code qualit
 
 For this set of exercises you will be developing a backend for an existing project called <i>Patientor</i> which is a simple medical record application for doctors that handle diagnoses and basic health information of the patients.
 
-The [frontend](https://github.com/fullstack-hy2020/patientor) has already been built by outsider experts and you're task is to create a backend to support the existing code.
+The [frontend](https://github.com/fullstack-hy2020/patientor) has already been built by outsider experts and your task is to create a backend to support the existing code.
 
 #### 9.8: Patientor backend, step1
 
-Initialise project that will be used by the frontend. Configure eslint and tsconfig with the same configurations that are used in the material. Define a endpoint that responses to HTTP GET requests to route <i>/ping</i>.   
+Initialise project that will be used by the frontend. Configure eslint and tsconfig with the same configurations that are used in the material. Define an endpoint that responses to HTTP GET requests to route <i>/ping</i>.   
 
 The project should be runnable with npm scripts both in development mode and as compiled code in production mode.
 
 #### 9.9: Patientor backend, step2
 
-Fork and clone the project [patientor](https://github.com/fullstack-hy2020/patientor). Start the project with the help of the README-file. You should be able to use the frontend without a functioning backend.
+Fork and clone the project [patientor](https://github.com/fullstack-hy2020/patientor). Start the project with the help of the README file. You should be able to use the frontend without a functioning backend.
 
-Ensure that the backend answers to the ping request that <i>fronend</i> is makes on startup. Check developer tool to make sure it really works: 
+Ensure that backend answers to the ping request that <i>frontend</i> is made on startup. Check developer tool to make sure it really works: 
 
 ![](../../images/9/16a.png)
 
@@ -329,14 +319,14 @@ Data looks like the following
 
 Let's start by creating an endpoint that returns all flight diary entries. 
 
-First we shall made some decision hot to structure our source code. It is better to put all the source code
-under the directory <i>src</i>, so that the source  code is not mixed up with configuration files. We will move also <i>index.ts</i> there and make the corresponding changes to npm scripts.
+First we shall make some decision on how to structure our source code. It is better to put all the source code
+under the directory <i>src</i>, so that the source  code is not mixed up with configuration files. We will move also 
+<i>index.ts</i> there and make the corresponding changes to npm scripts.
 
-We'll decide to put all [routers](/en/part4/structure_of_backend_application_introduction_to_testing) that is the modules that take care of handling a set of specific resource such as <i>diaries</i> under the directory <i>src/routes</i>. This differs a bit from the convention of [part 4](/en/part4), where we used directory <i>src/controllers</i>.
-
+We'll decide to put all [routers](/en/part4/structure_of_backend_application_introduction_to_testing) that is the 
+modules that take care of handling a set of specific resources such as <i>diaries</i> under the directory <i>src/routes</i>. This differs a bit from the convention of [part 4](/en/part4), where we used directory <i>src/controllers</i>.
 
 The routes taking care of diary endpoints in <i>src/routes/diaries.ts</i> looks like this:
-
 
 ```js
 import express from 'express';
@@ -382,7 +372,7 @@ And now when making a HTTP POST request to http://localhost:3000/api/diaries we 
 
 The next thing is to start serving the seed data (found [here](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json)) from the app. We shall fetch the data and save it to file <i>data/diaries.json</i>
 
-We will not write the code that does the actual data manipulation to router, but instead create a <i>service</i> that takes care of the data manipulation. It is quite a common pattern to separate the "business logic" from router code to own modules that are quite often called <i>services</i>. The name service originates from [Domain driven design](https://en.wikipedia.org/wiki/Domain-driven_design) and was made popular by the [Spring](https://spring.io/) framework.
+We will not write the code that does the actual data manipulation to the router, but instead create a <i>service</i> that takes care of the data manipulation. It is quite a common pattern to separate the "business logic" from router code to own modules that are quite often called <i>services</i>. The name service originates from [Domain driven design](https://en.wikipedia.org/wiki/Domain-driven_design) and was made popular by the [Spring](https://spring.io/) framework.
 
 Let us create directory <i>src/services</i> and inside it the file <i>diaryService.ts</i> with two functions that are needed in fetching and saving the diaries:
 
@@ -429,11 +419,11 @@ The hint says we might want to use <i>resolveJsonModule</i>. Let's add it to our
 
 Problems are now gone.
 
-> **Note** for some reason VC Code has many times complained that it does not find the file <i>../../data/diaries.json</i> in the service despite the file exists. That is a bug and the complaint goes away when editor is restarted. 
+> **Note** for some reason VC Code has many times complained that it does not find the file <i>../../data/diaries.json</i> in the service despite the file exists. That is a bug and the complaint goes away when the editor is restarted. 
 
 As before we've seen how the compiler can decide the type of a variable by the value it is being assigned to and in a similar way the compiler interprets larger data sets consisting of objects and arrays. This is why the compiler actually can warn us if we are trying to do something suspicious to the json data we are currently handling. If we're handling an array that includes specific types of objects and we're trying to add an object there that doesn't have all of the fields that the other objects have or is having type conflicts (for example a number where should be a string) the compiler can give us a warning. 
 
-Even though the compiler is pretty intelligent in making sure to not to do anything unwanted, it is safer to create the correct types to the data by yourself.
+Even though the compiler is pretty intelligent in making sure to not to do anything unwanted, it is safer to create the correct types to the data yourself.
 
 Now we have a basic working TypeScript express app but there's barely any actual <i>typings</i> in the code. Since we now have a clear definition on what type of data should be accepted for the weather and visibility fields, there is no reason for us not to include also those types in the code.
 
@@ -482,7 +472,7 @@ export default {
 };
 ```
 
-But since the json already has its values declared, assigning a type for the dataset results in an error:
+But since the json already has its values declared, assigning a type for the data set results in an error:
 
 ![](../../images/9/19b.png)
 
@@ -513,7 +503,7 @@ export default {
 
 Type assertion should not be used unless there's no other way to proceed since there's always the danger of asserting an unfit type to an object and then perhaps causing a nasty runtime error. While the compiler trusts you to know when using <i>as</i>, at the same time it leaves the intelligence of the whole TypeScript to manual interpretation. 
 
-In our case we could change our data exportation method so that we could have the typing happen naturally within the file where the data resides. Since typings van not be used in a JSON-file, we should convert the json-file to a ts-file which exports the typed  data in the following way: 
+In our case we could change our data exportation method so that we could have the typing happen naturally within the file where the data resides. Since typings can not be used in a JSON-file, we should convert the json-file to a ts-file which exports the typed  data in the following way: 
 
 ```js
 import { DiaryEntry } from "../src/types";
@@ -584,7 +574,7 @@ const getNonSensitiveEntries =
 
 and it would expect the function to return an array of the modification of DiaryEntry type which includes only the four declared fields. 
 
-Since [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk) requires the type it modifies to be given as a [type variable](http://www.typescriptlang.org/docs/handbook/generics.html#working-with-generic-type-variables), simillar as the Array, we have now two nested type variables and the syntax looks already a bit odd. We can improve the readability by using the [alternative](http://www.typescriptlang.org/docs/handbook/basic-types.html#array) syntax of arrays:
+Since [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk) requires the type it modifies to be given as a [type variable](http://www.typescriptlang.org/docs/handbook/generics.html#working-with-generic-type-variables), similar as the Array, we have now two nested type variables and the syntax looks already a bit odd. We can improve the readability by using the [alternative](http://www.typescriptlang.org/docs/handbook/basic-types.html#array) syntax of arrays:
 
 ```js
 const getNonSensitiveEntries = 
@@ -605,20 +595,20 @@ const getNonSensitiveEntries = (): Omit<DiaryEntry, 'comment'>[] => {
 Another way would be to declare a completely new type for the <i>NonSensitiveDiaryEntry</i>:
 
 ```js
-export type NonSesitiveDiaryEntry = Omit<DiaryEntry, 'comment'>;
+export type NonSensitiveDiaryEntry = Omit<DiaryEntry, 'comment'>;
 ```
 
 The code becomes now
 
 ```js
 import diaries from '../../data/diaries';
-import { NonSesitiveDiaryEntry, DiaryEntry } from '../types'; // highlight-line
+import { NonSensitiveDiaryEntry, DiaryEntry } from '../types'; // highlight-line
 
 const getEntries = (): DiaryEntry[] => {
   return diaries;
 };
 
-const getNonSensitiveEntries = (): NonSesitiveDiaryEntry[] => { // highlight-line
+const getNonSensitiveEntries = (): NonSensitiveDiaryEntry[] => { // highlight-line
   return diaries;
 };
 
@@ -644,14 +634,14 @@ Because TypeScript doesn't modify the actual data but only types it, we need to 
 ```js
 import diaries from '../../data/entries.js'
 
-import { NonSesitiveDiaryEntry, DiaryEntry } from '../types'
+import { NonSensitiveDiaryEntry, DiaryEntry } from '../types'
 
 const getEntries = () : DiaryEntry[] => {
   return diaries
 } 
 
 // highlight-start
-const getNonSensitiveEntries = (): NonSesitiveDiaryEntry [] => {
+const getNonSensitiveEntries = (): NonSensitiveDiaryEntry [] => {
   return diaries.map(({ id, date, weather, visibility }) => ({
     id,
     date,
@@ -672,7 +662,7 @@ export default {
 }
 ```
 
-If we nw would try to return this data with the basic <i>DiaryEntry</i> type, i.e. if we would type the function as follows
+If we now would try to return this data with the basic <i>DiaryEntry</i> type, i.e. if we would type the function as follows
 
 ```js
 const getNonSensitiveEntries = () : DiaryEntry[] => {
@@ -715,13 +705,13 @@ The response is what we expect it to be
 
 ### Exercises 9.10.-9.11.
 
-Simillarly to Ilari's flight service, we do not use a real database in our app but instead use hardcoded data, that is in the files [diagnoses.json](https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.json) and [patients.json](https://github.com/fullstack-hy2020/misc/blob/master/patients.json). Get the files and store those into a directory called <i>data</i> under your project. All data modification can be done in runtime memory, so during this part it is <i>not necessary to write to a file</i>.
+Similarly to Ilari's flight service, we do not use a real database in our app but instead use hardcoded data, that is in the files [diagnoses.json](https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.json) and [patients.json](https://github.com/fullstack-hy2020/misc/blob/master/patients.json). Get the files and store those into a directory called <i>data</i> under your project. All data modification can be done in runtime memory, so during this part it is <i>not necessary to write to a file</i>.
 
 #### 9.10: Patientor backend, step3
 
 Create a type <i>Diagnose</i> and use it to create endpoint <i>/api/diagnoses</i> for fetching all diagnoses with HTTP GET.
 
-Structure your code properly by using meaninfully named directories and files.
+Structure your code properly by using meaningfully named directories and files.
 
 **Note** that <i>diagnoses</i> may or may not contain the field <i>latin</i>. You might want to use [optional properties](https://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties) in the type definition.
 
@@ -731,7 +721,7 @@ Create data type <i>Patient</i> and set up a GET-endpoint <i>/api/patients</i> t
 
 In this exercise you may assume that field <i>gender</i> has type <i>string</i>.
 
-Try the endpoint with browser and to sure that <i>ssn</i> is not included in response:
+Try the endpoint with browser and ensure that <i>ssn</i> is not included in response:
 
 ![](../../images/9/22g.png)
 
@@ -771,9 +761,9 @@ But once again, a new problem comes into light:
 
 ![](../../images/9/23e.png)
 
-The issue now it that there is no guarantee that an entry with the specific id can be found. It is good that this potentially problematic issue surfaces already at compile phase, since without TypeScript there would be no indication of this possibility and in the worst case you might end up returning a result of an <i>undefined</i> object instead of informing about the nonexistense of searched item by other means.
+The issue now is, that there is no guarantee that an entry with the specific id can be found. It is good that this potentially problematic issue surfaces already at compile phase, since without TypeScript there would be no indication of this possibility and in the worst case you might end up returning a result of an <i>undefined</i> object instead of informing about the nonexistense of searched item by other means.
 
-In cases like this we first of all need to decide <i>what is the desired return value</i> if an object is not found, and how to handle the case. The value <i>undefined</i> that is returned by <i>find</i>-method of an array is actually fine for us if a result is not found. Thus we could solve our problem by typing the return value as follows
+In cases like this we first of all need to decide <i>what is the desired return value</i> if an object is not found, and how to handle the case. The value <i>undefined</i> that is returned by <i>find</i> method of an array is actually fine for us if a result is not found. Thus we could solve our problem by typing the return value as follows
 
 ```js
 const findById = (id: number): DiaryEntry | undefined => { // highlight-line
@@ -807,7 +797,7 @@ export default router;
 
 Let's start building the HTTP POST endpoint for adding flight diary entries. The accepted values should confirm to the example data.
 
-The code handling the response looks as follows
+The code handling of the response looks as follows
 
 ```js
 router.post('/', (req, res) => {
@@ -826,7 +816,7 @@ corresponding method in <i>diaryService</i> looks like this
 
 ```js
 import {
-  NonSesitiveDiaryEntry, DiaryEntry,
+  NonSensitiveDiaryEntry, DiaryEntry,
   Visibility, Weather // highlight-line
   } from '../types';
 
@@ -863,7 +853,7 @@ router.post('/', (req, res) => {
 })
 ```
 
-But wait, what is the type of this object? It is not exactly a <i>DiaryEntry</i>, since it is still missign the <i>id</i> field. It could be useful for us just to create a new type <i>NewDiaryEntry</i> which could work as a type for the not-yet saved diary. Let us create that in <i>types.ts</i> using the existing <i>DiaryEntry</i> object with the [Omit](http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk) utility type:
+But wait, what is the type of this object? It is not exactly a <i>DiaryEntry</i>, since it is still missing the <i>id</i> field. It could be useful for us just to create a new type <i>NewDiaryEntry</i> which could work as a type for the not yet saved diary. Let us create that in <i>types.ts</i> using the existing <i>DiaryEntry</i> object with the [Omit](http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk) utility type:
 
 ```js
 export type NewDiaryEntry = Omit<DiaryEntry, 'id'>;
@@ -872,7 +862,7 @@ export type NewDiaryEntry = Omit<DiaryEntry, 'id'>;
 And now we can use this type in our DiaryService and we can just destructure the whole new entry object when creating the entry to be saved: 
 
 ```js
-import { NewDiaryEntry, NonSesitiveDiaryEntry, DiaryEntry } from '../types'; // highlight-line
+import { NewDiaryEntry, NonSensitiveDiaryEntry, DiaryEntry } from '../types'; // highlight-line
 
 // ...
 
@@ -908,23 +898,23 @@ app.listen(PORT, () => {
 
 and now the application is ready to receive HTTP POST requests for adding diaries with the desired fields!
 
-### Proofing your requests
+### Proofing requests
 
-There are a plenty of things that can go wrong when accepting data from an outside source. Applications work rarely fully on their own and we are forced to live with the fact that data sources outside of a single system cannot be fully trusted. When the data is coming from an outside source, there's no way that it can be already typed when we receive it so we need to make decision on how to handle the uncertainty that comes with the data.
+There are plenty of things that can go wrong when accepting data from an outside source. Applications work rarely fully on their own and we are forced to live with the fact that data sources outside of a single system cannot be fully trusted. When the data is coming from an outside source, there's no way that it can be already typed when we receive it so we need to make decisions on how to handle the uncertainty that comes with the data.
 
-The way express handles parsing the request body is that it asserts the type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) to all the body fields. In our situation this doesn't come apparent in any way in the editor, but if we start looking at the variables more closely and hover on any of them, we can see that each of them is [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) and the editor doesn't complain when giving them to <i>addDiary</i> as arguments: 
+The way Express handles parsing the request body is that it asserts the type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) to all the body fields. In our situation this doesn't come apparent in any way in the editor, but if we start looking at the variables more closely and hover on any of them, we can see that each of them is indeed [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any).  Editor does not give us any complaints when we pass this data to <i>addDiary</i> as arguments: 
 
 ![](../../images/9/27.png)
 
-The value of type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#an) can be assigned to <i>any</i> type of variable since it <i>might be</i> the wanted type. This is definitiely not safe to trust so 
+The value of type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#an) can be assigned to <i>any</i> type of variable since it <i>might be</i> the wanted type. This is definitely not safe to trust, so 
 check the incoming values (regardless whether we are using TypeScript or not).
 
-We could just add simple <i>exists</i> and <i>is-value-valid</i> checks to the function defining the route but since we also need to ensure that _Weather_ and _Visibility_ values are of the correct form, it is better to write the put the parsing and validation logic to a separate file _utils.ts_.
+We could just add simple <i>exists</i> and <i>is-value-valid</i> checks to the function defining the route, but since we also need to ensure that <i>Weather</i> and <i>Visibility</i> values are of the correct form, it is better to write the parsing and validation logic to a separate file <i>utils.ts</i>.
 
-Our intention is to define a function _toNewDiaryEntry_ that gets the request body as a parameter and returns a properly typed _NewDiaryEntry_. Route definition uses the function as follows
+Our intention is to define a function <i>toNewDiaryEntry</i> that gets the request body as a parameter and returns a properly typed <i>NewDiaryEntry</i>. Route definition uses the function as follows
 
 ```js
-import toNewDiaryEntry from '../utils' // highlight-line
+import toNewDiaryEntry from '../utils'; // highlight-line
 
 // ...
 
@@ -940,41 +930,41 @@ router.post('/', (req, res) => {
 })
 ```
 
-Since we are now making trustworthy code and trying to make sure that we are getting exactly what we want from the requests we should get started with the goal of parsing and validating each field we are waiting for. 
+Since we are now making trustworthy code and trying to make sure that we are getting exactly what we want from the requests, we should get started with the goal of parsing and validating each field we are waiting for. 
 
-The skeleton of the function _toNewDiaryEntry_ looks like the following:
+The skeleton of the function <i>toNewDiaryEntry</i> looks like the following:
 
 ```js
-import { NewDiaryEntry } from './types'
+import { NewDiaryEntry } from './types';
 
-const toNewDiaryEntry = (object) : NewDiaryEntry => {
+const toNewDiaryEntry = (object): NewDiaryEntry => {
   const newEntry: NewDiaryEntry = {
     // ...
   }
   
-  return newEntry
+  return newEntry;
 } 
 
 export default toNewDiaryEntry;
 ```
 
-In the function we want to parse each field and make sure that what is returned is exactly of type _NewDiaryEntry_. Thus we should check each field separately. 
+In the function we want to parse each field and make sure that what is returned is exactly of type <i>NewDiaryEntry</i>. Thus we should check each field separately. 
 
-Once again we have a typing issue: what is the _object_ type? Since the _object_ is in fact the body of a request, express has typed it with _any_. Since within this function the whole idea is to map unknown types of fields to correct ones and check whether they are defined as expected, this might be the rare case where we actually <i>want to allow the _any_ type</i>. 
+Once again we have a typing issue: what is the <i>object</i> type? Since the <i>object</i> is in fact the body of a request, Express has typed it with <i>any</i>. Since within this function the whole idea is to map unknown types of fields to correct ones and check whether they are defined as expected, this might be the rare case where we actually <i>want to allow the <i>any</i> type</i>. 
 
-However if we type the object to _any_, eslint gives us a complaint:
+However if we type the object to <i>any</i>, eslint gives us a complaint:
 
 ![](../../images/9/24e.png)
 
-The cause for the complaint is eslit-rule [no-explicit-any](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md) that prevents us form explicitly setting type to be any. Since this is in general a good rule to follow but just in this particular file undesired, it is better to allow using any now by disabling the eslint-rule in the file. This happens by adding the following line at the file:
+The cause for the complaint is the eslint-rule [no-explicit-any](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md) that prevents us from explicitly setting type to be <i>any</i>. Since this is in general a good rule to follow but just in this particular file undesired, it is better to allow using <i>any</i> now by disabling the eslint-rule in the file. This happens by adding the following line at the file:
 
 ```js
 /* eslint-disable @typescript-eslint/no-explicit-any */
 ```
 
-Lets start creating the parsers for each of the fields of _object_.
+Let us start creating the parsers for each of the fields of <i>object</i>.
 
-To validate the _comment_ field we need to check that it exists, and to ensure that it is of the type _string_.
+To validate the <i>comment</i> field we need to check that it exists, and to ensure that it is of the type <i>string</i>.
 
 The function should look something like this:
 
@@ -984,18 +974,18 @@ const parseComment = (comment: any): string => {
     throw new Error('Incorrect or missing comment: ' + comment);
   }
 
-  return comment
+  return comment;
 }
 ```
 
-The function gets the parameter of type _any_ and returns it as type _string_ if it exists and is of the right type.
+The function gets the parameter of type <i>any</i> and returns it as type <i>string</i> if it exists and is of the right type.
 
 The string validation function looks like this
 
 ```js
 const isString = (text: any): text is string => {
-  return typeof text === 'string' || text instanceof String
-}
+  return typeof text === 'string' || text instanceof String;
+};
 ```
 
 The function is so called [type guard](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards), that is, a function that returns a boolean <i>and</i> which has a <i>type predicate</i> as the return type. In our case the type predicate is
@@ -1004,15 +994,15 @@ The function is so called [type guard](https://www.typescriptlang.org/docs/handb
 text is string
 ```
 
-The general form of a type predicate is _parameterName is Type_ where the _parameterName_ is the name of the function parameter and _Type_ is the targetted type.
+The general form of a type predicate is _parameterName is Type_ where the _parameterName_ is the name of the function parameter and _Type_ is the targeted type.
 
 If the type guard function returns true, the TypeScript compiler knows that the tested variable has the type that was defined in the type predicate. 
 
-Before the type guard is called, the actual type of the variable _comment_ is not known:
+Before the type guard is called, the actual type of the variable <i>comment</i> is not known:
 
 ![](../../images/9/28.png)
 
-But after the call, if the code proceeds past the exception (that is the type guard returned true), compiler knows that _comment_ is of the type _string_:
+But after the call, if the code proceeds past the exception (that is the type guard returned true), compiler knows that <i>comment</i> is of the type <i>string</i>:
 
 ![](../../images/9/29.png)
 
@@ -1020,19 +1010,19 @@ Why do we have two conditions in the string type guard:
 
 ```js
 const isString = (text: any): text is string => {
-  return typeof text === 'string' || text instanceof String // highlight-line
+  return typeof text === 'string' || text instanceof String; // highlight-line
 }
 ```
 
-would it not be enought to write the guard like this
+would it not be enough to write the guard like this
 
 ```js
 const isString = (text: any): text is string => {
-  return typeof text === 'string'
+  return typeof text === 'string';
 }
 ```
 
-The more simple form is most likely good for all practical purposes. However if we want to be absolutely sure, both the conditions are needed, since there is two different means to create string objects in JavaScript and both of these work a bit differently with respect to operators _typeof_ and _instanceof_:
+The simpler form is most likely good for all practical purposes. However if we want to be absolutely sure, both the conditions are needed, since there are two different means to create string objects in JavaScript and both of these work a bit differently with respect to operators <i>typeof</i> and <i>instanceof</i>:
 
 ```js
 const a = "I'm a string primitive";
@@ -1045,24 +1035,24 @@ b instanceof String; --> returns true
 
 It is however unlikely that anybody creates strings with a constructor function, so most likely the simpler version of the type guard would be just fine. 
 
-Next let us consider the field _date_. Parsing and validating the date object is pretty similar, since TypeScript doesn't really know a type for date, we need to treat it as as _string_. We still definitely should use JavaScript level validation to check whether the date format is acceptable. 
+Next let us consider the field <i>date</i>. Parsing and validating the date object is pretty similar, since TypeScript doesn't really know a type for date, we need to treat it as <i>string</i>. We still definitely should use JavaScript level validation to check whether the date format is acceptable. 
 
 We will add the following functions
 
 ```js
 const isDate = (date: string): boolean => {
   return Boolean(Date.parse(date));
-}
+};
 
 const parseDate = (date: any): string => {
   if (!date || !isString(date) || !isDate(date)) {
-      throw new Error('Incorrect or missing date: ' + date)
+      throw new Error('Incorrect or missing date: ' + date);
   }
   return date;
-}
+};
 ```
 
-Nothing really special here, only thing is that we can't use a type guard since a date is in this case considered only to be a _string_. Notice that even though the _date_ variable is accepted as _any_ by the _parseDate_ function, after checking the type with _isString_ the type is already a string which is why we are able to give the variable to the function _isDate_ with the type _string_ without any errors.
+Nothing really special here, only thing is that we can't use a type guard since a date is in this case considered only to be a <i>string</i>. Notice that even though the <i>date</i> variable is accepted as <i>any</i> by the <i>parseDate</i> function, after checking the type with <i>isString</i> the type is already a string which is why we are able to give the variable to the function <i>isDate</i> with the type <i>string</i> without any errors.
 
 Finally we are ready to move on to the last two types, Weather and Visibility.
 
@@ -1074,22 +1064,22 @@ const parseWeather = (weather: any): Weather => {
       throw new Error('Incorrect or missing weather: ' + weather)
   } 
   return weather;
-}
+};
 ```
 
 The question now is, how can we validate that the string is of a specific form? One possible way of writing the type guard would be following:
 
 ```js
 const isWeather = (str: any): str is Weather => {
-  return ['sunny', 'rainy', 'cloudy', 'stormy' ].includes(str)
-}
+  return ['sunny', 'rainy', 'cloudy', 'stormy' ].includes(str);
+};
 ```
 
 This would work just fine but the problem is that list of possible weathers does not necessarily stay in sync with the type definition if that is altered. This is most certainly not a nice thing since we would like to have just a single source for all possible weather types.
 
-A better solution in this case is to improve the actual Weather type and instead of type declaration use the TypeScript [enum](https://www.typescriptlang.org/docs/handbook/enums.html) which allows us to use the actual values in the running code, not only in the compilation phase.
+A better solution in this case is to improve the actual Weather type and instead of type alias use the TypeScript [enum](https://www.typescriptlang.org/docs/handbook/enums.html) which allows us to use the actual values in the running code, not only in the compilation phase.
 
-Let us redefine the type _Weather_ as follows: 
+Let us redefine the type <i>Weather</i> as follows: 
 
 ```js
 export enum Weather {
@@ -1105,21 +1095,21 @@ This allows us to check that a string confirms to the accepted values of the Wea
 
 ```js
 const isWeather = (param: any): param is Weather => {
-  return Object.values(Weather).includes(param)
-}
+  return Object.values(Weather).includes(param);
+};
 ```
 
-One thing to notice here is that we have changed the parameter type to _any_, if it would be string, the _includes_ check would not compile. The change makes sense also if you think about the reusability of the function, by allowing _any_ as a parameter, we can use the function with confidence knowing that whatever we might feed to it, the function answers always to the question of whether the variable is a valid weather or not. 
+One thing to notice here is that we have changed the parameter type to <i>any</i>, if it would be string, the <i>includes</i> check would not compile. The change makes sense also if you think about the reusability of the function, by allowing <i>any</i> as a parameter, we can use the function with confidence knowing that whatever we might feed to it, the function answers always to the question of whether the variable is a valid weather or not. 
 
-The function _parseWeather_ can be simplified a bit
+The function <i>parseWeather</i> can be simplified a bit
 
 ```js
-const parseWeather = (weather: string): Weather => {
-  if (!weather || !isString(weather) || !isWeather(weather)) {
-      throw new Error('Incorrect or missing weather: ' + weather)
+const parseWeather = (weather: any): Weather => {
+  if (!weather || !isWeather(weather)) { // highlight-line
+      throw new Error('Incorrect or missing weather: ' + weather);
   } 
   return weather;
-}
+};
 ```
 
 With these changes, one issue arises, our data does not conform anymore to our types:
@@ -1128,7 +1118,7 @@ With these changes, one issue arises, our data does not conform anymore to our t
 
 This is because a string can't just be assumed to be an enum. 
 
-The fix is to map the initial data elements to _DiaryEntry_ type with the _toNewDiaryEntry_ function:
+The fix is to map the initial data elements to <i>DiaryEntry</i> type with the <i>toNewDiaryEntry</i> function:
 
 ```js
 import { DiaryEntry } from "../src/types";
@@ -1154,11 +1144,54 @@ const diaryEntries: DiaryEntry [] = data.map(obj => {
 export default diaryEntries
 ```
 
-Note that since _toNewDiaryEntry_ returns object of the type _NewDiaryEntry_ we need to assert it to be _DiaryEntry_ with [as](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) opeator.
+Note that since <i>toNewDiaryEntry</i> returns an object of the type <i>NewDiaryEntry</i> we need to assert it to be <i>DiaryEntry</i> with [as](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) operator.
 
-Enums are usually used when there is a set of predetermined values that are not expected to change in the future. Usually enums are used in much tighter unchanging values (for example weekdays, months, directions) but since they offer us a great way to validate our incoming values we might as well use them in our case. 
+Enums are usually used when there is a set of predetermined values that are not expected to change in the future. Usually enums are used for much tighter unchanging values (for example weekdays, months, directions) but since they offer us a great way to validate our incoming values we might as well use them in our case. 
 
-After giving _Visibility_ the same treatment our app is finally ready!
+We still need to give the same treatment to <i>visibility</i>. The enum looks following
+
+```js
+export enum Visibility {
+  Great = 'great',
+  Good = 'good',
+  Ok = 'ok',
+  Poor = 'poor', 
+}
+```
+
+Type guard and the parser are here
+
+```js
+const isVisibility = (param: any): param is Visibility => {
+  return Object.values(Visibility).includes(param);
+};
+
+const parseVisibility = (visibility: any): Visibility => {
+  if (!visibility || !isVisibility(visibility)) {
+      throw new Error('Incorrect or missing visibility: ' + visibility);
+  } 
+  return visibility;
+};
+```
+
+And finally we can finalize the function <i>toNewDiaryEntry</i> that takes care of validating and parsing the fields of the post data: 
+
+```js
+const toNewDiaryEntry = (object: any): NewDiaryEntry => {
+  return {
+    date: parseDate(object.date),
+    comment: parseComment(object.comment),
+    weather: parseWeather(object.weather),
+    visibility: parseVisibility(object.visibility)
+  };
+};
+```
+
+The first version of flight diary application is now completed! 
+
+If we now try to create a new diary with invalid or missing fields we are getting an appropriate error message
+
+![](../../images/9/30b.png)
 
 </div>
 
@@ -1168,12 +1201,12 @@ After giving _Visibility_ the same treatment our app is finally ready!
 
 #### 9.12: Patientor backend, step5
 
-Create a POST-endpoint _/api/patients_ for adding patients. Ensure that you can add patients also from the frontend.
+Create a POST-endpoint <i>/api/patients</i> for adding patients. Ensure that you can add patients also from the frontend.
 
 #### 9.13: Patientor backend, step6
 
-Set up safe parsing, validation and type guards to the POST _/api/patients_request. 
+Set up safe parsing, validation and type guards to the POST <i>/api/patients</i> request. 
 
-Refactor the _Gender_ field to use a _enum_ type.
+Refactor the <i>Gender</i> field to use an [enum](http://www.typescriptlang.org/docs/handbook/enums.html) type.
 
 </div>
