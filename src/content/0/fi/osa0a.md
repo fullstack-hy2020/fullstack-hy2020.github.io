@@ -153,7 +153,7 @@ HUOM!
 -	Ilmoittautuminen Avoimeen yliopiston on mahdollista 09.01.2021 saakka.
 -	Vain niiden opiskelijoiden opintosuoritukset voidaan kirjata Helsingin yliopiston opintorekisteriin, jotka ovat tehneet kurssi-ilmoittautumisen Avoimeen yliopistoon ja suorittaneet kurssin loppuun ohjeiden mukaisesti.
 
-Muista tallettaa opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) välilehdellä "my submissions" .
+Muista tallettaa opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) välilehdellä "my submissions".
 
 ### Full stack -harjoitustyö
 
