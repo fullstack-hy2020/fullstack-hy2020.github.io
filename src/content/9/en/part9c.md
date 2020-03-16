@@ -1168,7 +1168,7 @@ const parseDate = (date: any): string => {
 
 <!-- Nothing really special here, only thing is that we can't use a type guard since a date is in this case considered only to be a <i>string</i>. Notice that even though the <i>date</i> variable is accepted as <i>any</i> by the <i>parseDate</i> function, after checking the type with <i>isString</i> the type is already a string which is why we are able to give the variable to the function <i>isDate</i> with the type <i>string</i> without any errors. -->
 The code is really nothing special. The only thing is, that we can't use a type guard here since a date in this case is only considered to be a <i>string</i>.
-Note, that even though the 
+Note, that even though the <i>parseDate</i> function accepts the <i>date</i> variable as any, after we check the type with <i>isString</i> its type is set as string, which is why we can give the variable to the <i>isDate</i> function requiring a sting without any problems.
 
 Finally we are ready to move on to the last two types, Weather and Visibility.
 
@@ -1183,7 +1183,9 @@ const parseWeather = (weather: any): Weather => {
 };
 ```
 
-The question now is, how can we validate that the string is of a specific form? One possible way of writing the type guard would be following:
+<!-- The question now is, how can we validate that the string is of a specific form? One possible way of writing the type guard would be following: -->
+The question is, how can we validate that the string is of a specific form?
+One possible way to write the type guard would be this:
 
 ```js
 const isWeather = (str: any): str is Weather => {
@@ -1191,9 +1193,12 @@ const isWeather = (str: any): str is Weather => {
 };
 ```
 
-This would work just fine but the problem is that list of possible weathers does not necessarily stay in sync with the type definition if that is altered. This is most certainly not a nice thing since we would like to have just a single source for all possible weather types.
+<!-- This would work just fine but the problem is that list of possible weathers does not necessarily stay in sync with the type definition if that is altered. This is most certainly not a nice thing since we would like to have just a single source for all possible weather types. -->
+This would work just fine, but the problem is that the list of possible weathers does not necessarily stay in sync with the type definitions if the type is altered. 
+This is most certainly not good, since we would like to have just one source for all possible weather types.
 
-A better solution in this case is to improve the actual Weather type and instead of type alias use the TypeScript [enum](https://www.typescriptlang.org/docs/handbook/enums.html) which allows us to use the actual values in the running code, not only in the compilation phase.
+<!-- A better solution in this case is to improve the actual Weather type and instead of type alias use the TypeScript [enum](https://www.typescriptlang.org/docs/handbook/enums.html) which allows us to use the actual values in the running code, not only in the compilation phase. -->
+In our case a better solution would be to improve the actual Weather type. Instead of a type alias we should use the TypeScript [enum](https://www.typescriptlang.org/docs/handbook/enums.html), which allows us to use the actual values in our code in runtime, not only in the compilation phase.
 
 Let us redefine the type <i>Weather</i> as follows: 
 
@@ -1207,7 +1212,8 @@ export enum Weather {
 }
 ```
 
-This allows us to check that a string confirms to the accepted values of the Weather enum type and the type guard can be changed to following
+<!-- This allows us to check that a string confirms to the accepted values of the Weather enum type and the type guard can be changed to following -->
+Now we can check that a string is one of the accepted values, and the type guard can be written like this:
 
 ```js
 const isWeather = (param: any): param is Weather => {
@@ -1215,7 +1221,8 @@ const isWeather = (param: any): param is Weather => {
 };
 ```
 
-One thing to notice here is that we have changed the parameter type to <i>any</i>, if it would be string, the <i>includes</i> check would not compile. The change makes sense also if you think about the reusability of the function, by allowing <i>any</i> as a parameter, we can use the function with confidence knowing that whatever we might feed to it, the function answers always to the question of whether the variable is a valid weather or not. 
+<!-- One thing to notice here is that we have changed the parameter type to <i>any</i>, if it would be string, the <i>includes</i> check would not compile. The change makes sense also if you think about the reusability of the function, by allowing <i>any</i> as a parameter, we can use the function with confidence knowing that whatever we might feed to it, the function answers always to the question of whether the variable is a valid weather or not.  -->
+One thing to notice here is that we have changed the parameter type to <i>any</i>. If it would be string, the <i>includes</i> check would not compile. This makes sense also if you consider the resuability of the function. Allowing <i>any</i> as a parameter, the function can be used with confidence knowing that whatever we might feed to it, the function always tells us whether the variable is a valid weather or not. 
 
 The function <i>parseWeather</i> can be simplified a bit
 
@@ -1228,13 +1235,17 @@ const parseWeather = (weather: any): Weather => {
 };
 ```
 
-With these changes, one issue arises, our data does not conform anymore to our types:
+<!-- With these changes, one issue arises, our data does not conform anymore to our types: -->
+One issue arises after these changes. Our data does not conform to our types anymore:
 
 ![](../../images/9/30.png)
 
-This is because a string can't just be assumed to be an enum. 
+<!-- This is because a string can't just be assumed to be an enum.  -->
+This is because we cannot just assume a string is an enum.
 
-The fix is to map the initial data elements to <i>DiaryEntry</i> type with the <i>toNewDiaryEntry</i> function:
+<!-- The fix is to map the initial data elements to <i>DiaryEntry</i> type with the <i>toNewDiaryEntry</i> function: -->
+We can fix this by mapping the initial data elements to <i>DiaryEntry</i> type with the <i>toNewDiaryEntry</i> function:
+
 
 ```js
 import { DiaryEntry } from "../src/types";
@@ -1259,10 +1270,11 @@ const diaryEntries: DiaryEntry [] = data.map(obj => {
 
 export default diaryEntries
 ```
+Note that since <i>toNewDiaryEntry</i> returns an object of the type <i>NewDiaryEntry</i> we need to assert it to be <i>DiaryEntry</i> with the [as](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) operator.
 
-Note that since <i>toNewDiaryEntry</i> returns an object of the type <i>NewDiaryEntry</i> we need to assert it to be <i>DiaryEntry</i> with [as](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) operator.
 
-Enums are usually used when there is a set of predetermined values that are not expected to change in the future. Usually enums are used for much tighter unchanging values (for example weekdays, months, directions) but since they offer us a great way to validate our incoming values we might as well use them in our case. 
+<!-- Enums are usually used when there is a set of predetermined values that are not expected to change in the future. Usually enums are used for much tighter unchanging values (for example weekdays, months, directions) but since they offer us a great way to validate our incoming values we might as well use them in our case.  -->
+Enums are usually used when there is a set of predetermined values which are not expected to change in the future. Usually enums are used for much tighter unchanging values (for example weekdays, months, directions) but since they offer us a great way to validate our incoming values we might as well use them in our case.
 
 We still need to give the same treatment to <i>visibility</i>. The enum looks following
 
@@ -1275,7 +1287,7 @@ export enum Visibility {
 }
 ```
 
-Type guard and the parser are here
+The type guard and the parser are below
 
 ```js
 const isVisibility = (param: any): param is Visibility => {
@@ -1290,7 +1302,7 @@ const parseVisibility = (visibility: any): Visibility => {
 };
 ```
 
-And finally we can finalize the function <i>toNewDiaryEntry</i> that takes care of validating and parsing the fields of the post data: 
+And finally we can finalize the  <i>toNewDiaryEntry</i> function that takes care of validating and parsing the fields of the post data: 
 
 ```js
 const toNewDiaryEntry = (object: any): NewDiaryEntry => {
@@ -1303,9 +1315,9 @@ const toNewDiaryEntry = (object: any): NewDiaryEntry => {
 };
 ```
 
-The first version of flight diary application is now completed! 
+The first version of our flight diary application is now completed! 
 
-If we now try to create a new diary with invalid or missing fields we are getting an appropriate error message
+If we now try to create a new diary entry with invalid or missing fields we are getting an appropriate error message
 
 ![](../../images/9/30b.png)
 
