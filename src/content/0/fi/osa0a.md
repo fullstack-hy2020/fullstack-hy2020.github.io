@@ -149,7 +149,7 @@ Virallinen kurssisuoritus edellyttää että teet hyväksyttävästi kurssikokee
 -	Kirjaudu kurssin [Moodleen](https://moodle.helsinki.fi/course/view.php?id=33946) HY:n käyttäjätunnuksella ja kurssiavaimella.
 
 HUOM!
-- Odotithan 24 tuntia kuten ylläoleva ohje kehoittaa?
+- **Odotithan 24 tuntia** kuten ylläoleva ohje kehoittaa?
 -	Ilmoittautuminen Avoimeen yliopiston on mahdollista 09.01.2021 saakka.
 -	Vain niiden opiskelijoiden opintosuoritukset voidaan kirjata Helsingin yliopiston opintorekisteriin, jotka ovat tehneet kurssi-ilmoittautumisen Avoimeen yliopistoon ja suorittaneet kurssin loppuun ohjeiden mukaisesti.
 
