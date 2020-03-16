@@ -114,7 +114,8 @@ Jos olet jo suorittanut kurssin joko MOOC:ina tai Yliopiston kurssina, voit täy
 
 #### Full stack open 2019 -suorituksen täydentäminen
 
-Voit jatkaa siitä mihin jäit! Jos haluat tehdä kokonaan uudelleen jonkin osan tehtävät, ota yhteyttä kurssin henkilökuntaan.
+Voit jatkaa siitä mihin jäit! Jos haluat tehdä kokonaan uudelleen jonkin osan tehtävät, ota yhteyttä 
+email matti.luukkainen@helsinki.fi tai Telegram @mluukkai. Kerro github-tunnuksesi sekä mitkä osat palautuksista haluat poistettavan.
 
 #### Kurssin jonkin muun version täydentäminen
 
