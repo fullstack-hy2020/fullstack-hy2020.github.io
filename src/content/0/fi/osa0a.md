@@ -57,7 +57,7 @@ Suoritus rekisteröidään arvosanalla hyväksytty.
 
 Voit halutessasi laajentaa 3 op suorituksen myöhemmin laajempaan 5-8 op suoritukseen. Jos tähtäät suoraan laajempaan suoritukseen, 3 op:n koetta ei kannata suorittaa.
 
-### Arvosanarajat: 5-7 opintopisteen suoritus
+#### Arvosanarajat: 5-7 opintopisteen suoritus
 
 5-7 opintopisteen laajuisen suorituksen opintopistemäärä ja arvosana määräytyy kurssin <b>osien 0-7</b> kaikkien tehtyjen tehtävien (myös tähdellä merkittyjen) perusteella.
 
@@ -144,15 +144,16 @@ Suurin osa tehtävistä on moniosaisia, samaa ohjelmaa pala palalta rakentavia k
 Virallinen kurssisuoritus edellyttää että teet hyväksyttävästi kurssikokeen Avoimen yliopiston Moodle-järjestelmässä. Pääset Moodleen seuraavia ohjeita seuraamalla
 
 - Tee Avoimen yliopiston kurssi-ilmoittautuminenn [täällä](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=129171256)
-- Odota 24 tuntia ja aktivoi Helsingin yliopiston käyttäjätunnus. Saat ohjeet aktivointia varten ilmoittautumista seuraavana päivänä.
--	Kirjaudu [kurssisivulle](https://courses.helsinki.fi/fi/aytkt21009/129171256), josta saat kurssiavaimen Moodleen kirjautumista varten.
+- **Odota 24 tuntia** ja aktivoi Helsingin yliopiston käyttäjätunnus. Saat ohjeet aktivointia varten ilmoittautumista seuraavana päivänä.
+-	Kirjaudu [kurssisivulle](https://courses.helsinki.fi/fi/aytkt21009/129171256)  (**Kirjaudu-painike sivun oikeassa yläkulmassa**), josta saat kurssiavaimen Moodleen kirjautumista varten.
 -	Kirjaudu kurssin [Moodleen](https://moodle.helsinki.fi/course/view.php?id=33946) HY:n käyttäjätunnuksella ja kurssiavaimella.
 
 HUOM!
+- **Odotithan 24 tuntia** kuten ylläoleva ohje kehoittaa?
 -	Ilmoittautuminen Avoimeen yliopiston on mahdollista 09.01.2021 saakka.
 -	Vain niiden opiskelijoiden opintosuoritukset voidaan kirjata Helsingin yliopiston opintorekisteriin, jotka ovat tehneet kurssi-ilmoittautumisen Avoimeen yliopistoon ja suorittaneet kurssin loppuun ohjeiden mukaisesti.
 
-Muista tallettaa opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) välilehdellä "my submissions" .
+Muista tallettaa opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) välilehdellä "my submissions".
 
 ### Full stack -harjoitustyö
 
