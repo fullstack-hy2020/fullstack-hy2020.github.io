@@ -126,7 +126,7 @@ If you have already taken the course either as a MOOC or as a University Course,
 
 #### Expanding Full stack open 2019
 
-You can just pick up where you left! If you wish to resubmit a whole part, please contact the course personel with email matti.luukkainen@helsinki.fi or in Telegram @mluukkai. Tell your github acoount and which parts to delete from your submissions.
+You can just pick up where you left! If you wish to resubmit a whole part, please contact the course personel with email matti.luukkainen@helsinki.fi or in Telegram @mluukkai. Tell us your github account and which parts to delete from your submissions.
 
 #### Expanding other course instance
 
