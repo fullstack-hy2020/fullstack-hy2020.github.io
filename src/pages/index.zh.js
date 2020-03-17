@@ -19,6 +19,7 @@ import mainSEOdescription from '../content/seo/mainSEOdescription';
 import mainSEOtags from '../content/seo/mainSEOtags';
 import news from '../images/noun_news_1248039.svg';
 import yliopistoLogo from '../images/company_logos/uoh_centre.svg';
+import { Link } from 'gatsby';
 
 const IndexPage = () => {
   const {
@@ -30,7 +31,7 @@ const IndexPage = () => {
     houston,
     contacts,
     licenced,
-  } = content.en;
+  } = content.zh;
 
   return (
     <Layout>
@@ -55,16 +56,13 @@ const IndexPage = () => {
 
           <SubHeader
             className="col-10"
-            text="Full stack open 2020"
+            text="全栈公开课 2020"
             headingLevel="h2"
           />
 
-          <a
-            className="col-2 centered about__challenge-button spacing--after--mobile"
-            href="/en/about"
-          >
-            Start course
-          </a>
+          <div className="col-2 centered about__challenge-button spacing--after--mobile">
+            <Link to="/zh/about">开始课程</Link>
+          </div>
 
           <div className="spacing--small" />
 
@@ -93,7 +91,7 @@ const IndexPage = () => {
               <BodyText
                 className="col-7 col-8--mobile link"
                 style={{ marginRight: '2rem' }}
-                heading={{ title: 'Announcements', level: 'h3' }}
+                heading={{ title: '公告', level: 'h3' }}
               />
             </Element>
 
@@ -117,10 +115,7 @@ const IndexPage = () => {
                 headingFont
                 className="col-7 col-8--mobile"
                 style={{ marginRight: '2rem' }}
-                heading={{
-                  title: 'Authors and License',
-                  level: 'h3',
-                }}
+                heading={{ title: '著作权与版权', level: 'h3' }}
               />
             </Element>
 
