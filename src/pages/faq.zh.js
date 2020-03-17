@@ -11,8 +11,8 @@ import mainSEOtags from '../content/seo/mainSEOtags';
 const FAQ = () => (
   <Layout>
     <SEO
-      lang="en"
-      title="FAQ | Full stack open 2020"
+      lang="zh"
+      title="常见问题 | 全栈公开课2020"
       description="Frequently asked questions"
       keywords={[
         ...mainSEOtags,
@@ -27,9 +27,9 @@ const FAQ = () => (
       <SubHeader
         className="spacing--after-small"
         headingLevel="h1"
-        text="Frequently asked questions"
+        text="常见问题"
       />
-      {content.en.map(item => {
+      {content.zh.map(item => {
         return (
           <Accordion
             track
@@ -41,7 +41,7 @@ const FAQ = () => (
       })}
     </Element>
 
-    <Footer lang="en" />
+    <Footer lang="zh" />
   </Layout>
 );
 

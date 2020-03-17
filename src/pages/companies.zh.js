@@ -11,9 +11,9 @@ import stories from '../content/pages/stories';
 const Companies = () => (
   <Layout>
     <SEO
-      lang="en"
-      title="Partner companies | Full stack open 2020"
-      description="Full stack development in partner companies"
+      lang="zh"
+      title="合作伙伴 | 全栈公开课2020"
+      description="合作伙伴中的全栈工程师"
       keywords={[
         ...mainSEOtags,
         'houston',
@@ -40,19 +40,19 @@ const Companies = () => (
       <BodyText
         className="col-10 spacing"
         heading={{
-          title: 'Developer stories from our partners',
+          title: '来自合作伙伴中全栈开发的故事',
           level: 'h1',
         }}
       />
 
-      {stories.en.map(story => (
-        <DeveloperStory key={story.name} {...story} lang="en" />
+      {stories.zh.map(story => (
+        <DeveloperStory key={story.name} {...story} lang="zh" />
       ))}
 
       <Element className="spacing" />
     </Element>
 
-    <Footer lang="en" />
+    <Footer lang="zh" />
   </Layout>
 );
 
