@@ -436,7 +436,7 @@ const parseArguments = (args: Array<string>): MultiplyValues => {
 
   if (!isNaN(Number(args[2])) && !isNaN(Number(args[3]))) {
     return {
-      value1: Number(args[2])
+      value1: Number(args[2]),
       value2: Number(args[3])
     }
   } else {
