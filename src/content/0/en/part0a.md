@@ -158,12 +158,13 @@ Note that it is possible to register for exam only if you have a Finnish social 
 Follow the instructions below to gain access to the course’s Moodle space:
 
 -	Register for the course through the [Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=131840261)
--	Wait for 24 hours and activate your University of Helsinki user ID. You will receive instructions on the activation process the following day. 
+-	**Wait for 24 hours** and activate your University of Helsinki user ID. You will receive instructions on the activation process the following day. 
 -	Sign in on the Open universitu [course page](https://courses.helsinki.fi/fi/aytkt21009en/131840261), where you will find the enrolment key for the Moodle space
 -	Sign into the [Moodle space](https://moodle.helsinki.fi/login/index.php) with your University of Helsinki user ID and the enrolment key. 
 
 Please note!
 
+- **Did you wait 24 hours** as the above instructions say?
 - You need the Moodle access just for the exam, for the course certificate access is not needed!
 -	Registration for the exam through the Open University is possible until Jan 9, 2021. 
 - Credits for the course are only available to those students who have successfully registered for the course registration through the Open University and have completed the course according to the instructions.
