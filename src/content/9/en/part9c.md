@@ -519,7 +519,7 @@ TypeScript compiler had inferred its type to be <i>string</i>.
 
 <!-- This can be surpassed if we are certain that we know what we are doing by [type assertion](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions). When we assert the type of the variable <i>diaryData</i> to be <i>DiaryData</i> with the keyword <i>as</i>, everything should work:  -->
 We can fix the problem by doing [type assertion](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions). This should be done only if we are certain we know what we are doing. 
-If we assert the type of the variable <i>diaryData</i> to be <i>DiaryData</i> with the keyword <i>as</i>, everything should work:
+If we assert the type of the variable <i>diaryData</i> to be <i>DiaryEntry</i> with the keyword <i>as</i>, everything should work:
 
 ```js
 import diaryData from '../../data/entries.json'
