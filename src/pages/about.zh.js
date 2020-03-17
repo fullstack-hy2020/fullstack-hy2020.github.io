@@ -13,13 +13,13 @@ import mainSEOdescription from '../content/seo/mainSEOdescription';
 import mainSEOtags from '../content/seo/mainSEOtags';
 
 const About = () => {
-  const { intro } = content.en;
+  const { intro } = content.zh;
 
   return (
     <Layout>
       <SEO
-        lang="en"
-        title="About the course | Full stack open 2020"
+        lang="zh"
+        title="关于本课程 | 全栈公开课2020"
         description={mainSEOdescription['en']}
         keywords={[
           ...mainSEOtags,
@@ -50,7 +50,7 @@ const About = () => {
       <Element className="container spacing spacing--mobile--large">
         <Element className="col-8 push-right-1">
           <BodyText
-            heading={{ level: 'h1', title: 'General' }}
+            heading={{ level: 'h1', title: '课程简介' }}
             headingFontSize="2.3rem"
           />
 
@@ -62,8 +62,8 @@ const About = () => {
                 className="link"
                 headingFont
                 text={[
-                  'Participants are expected to have good programming skills, basic knowledge of web - programming and databases, and to know the basics of working with the Git version-control system. You are also expected to have perseverance and the ability for independent problem solving and information seeking.',
-                  'Part 0 of the course material goes through the content and conduct of the course in more detail. Make sure to read the material and instructions thoroughly.',
+                  '上课的同学需要具备良好的编程技能、基本的网络编程和数据库知识，并且了解使用 Git 这个版本控制系统的基础知识。 你还需要有坚持不懈的精神以及独立解决问题和搜索信息的能力',
+                  '课程的第0部分更详细地介绍了课程的内容和教学方法。 因此一定要仔细阅读材料和课程说明。',
                 ]}
               />
             </div>
@@ -71,8 +71,8 @@ const About = () => {
         </Element>
       </Element>
 
-      <PartBanner lang="en" />
-      <Footer lang="en" />
+      <PartBanner lang="zh" />
+      <Footer lang="zh" />
     </Layout>
   );
 };
