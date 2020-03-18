@@ -102,7 +102,7 @@ Exercises in parts 8 and 9 do not count towards the grade for the 5-7 credit cou
 
 ### How to get your credits
 
-Note that for getting university credits you need Finnish social security number.
+Note that for getting university credits you need a Finnish social security number.
 
 <!-- Jos haluat kurssilta suorituksen, tallenna <b>Helsingin yliopiston</b> opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) näkymään <i>my submissions</i>. Jos et ole Helsingin yliopiston opiskelija, saat opiskelijanumeron ilmoittautumalla kurssille [Avoimen yliopiston](/osa0/yleista/#kokeeseen-ilmoittautuminen) kautta. -->
 If you want to receive credits, save your <b>University of Helsinki</b> student number to

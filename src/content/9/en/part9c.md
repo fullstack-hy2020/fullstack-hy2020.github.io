@@ -1105,11 +1105,11 @@ If the type guard function returns true, the TypeScript compiler knows that the 
 
 Before the type guard is called, the actual type of the variable <i>comment</i> is not known:
 
-![](../../images/9/28.png)
+![](../../images/9/28e.png)
 
 But after the call, if the code proceeds past the exception (that is the type guard returned true), compiler knows that <i>comment</i> is of the type <i>string</i>:
 
-![](../../images/9/29.png)
+![](../../images/9/29e.png)
 
 Why do we have two conditions in the string type guard?
 
