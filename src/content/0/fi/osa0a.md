@@ -116,6 +116,17 @@ Riippumatta siitä ilmoittaudutko Avoimen yliopiston kurssille ja teetkö kurssi
 
 Jos olet jo suorittanut kurssin joko MOOC:ina tai Yliopiston kurssina, voit täydentää nyt suoritustasi.
 
+### Muutokset edellisen vuoden kurssilta
+
+Osissa 0-4 on ainoastaan vähäisiä muutoksia. Osa 5d eli Cypress.io-kirjastolla tapahtuva <i>end to end -testaus</i> on suurelta osin uusi. Custom hookien käsittely on siirretty osasta 5 hieman laajennettuna osaan 7. 
+
+Reduxia käsittelevä osa 6 keskittyy ensisijaisesti reduxin uuteen hook-perustaiseen apiin. Myös osassa 7 käsiteltävä react-router on uudistunut käyttämään hook-apia. Vähäiselle ylläpidolle jäänyt Semantic UI React -kirjasto on korvattu MaterialUI-kirjastolla. 
+
+GraphQL:ää käsittelevä osa 8 on kokenut paljon päivityksiä erityisesti Apollo Clientin osalta, jonka hook-perustaiset apit ovat vihdoin stabiloituneet. TypeScriptiin keskittyvä osa 9 on kokonaan uusi. 
+
+Viime vuoden kurssimateriaali on nähtävissä osoitteessa https://fullstackopen-2019.github.io/
+
+
 #### Full stack open 2019 -suorituksen täydentäminen
 
 Voit jatkaa siitä mihin jäit! Jos haluat tehdä kokonaan uudelleen jonkin osan tehtävät, ota yhteyttä 
