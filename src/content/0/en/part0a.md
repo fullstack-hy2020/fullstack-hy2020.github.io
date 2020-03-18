@@ -100,15 +100,20 @@ By submitting at least 24/27 of the exercises for part 9 of the course, TypeScri
 Exercises in parts 8 and 9 do not count towards the grade for the 5-7 credit course. 
 
 
-### Suoritusmerkinnän pyytäminen
+### How to get your credits
 
-Jos haluat kurssilta suorituksen, tallenna <b>Helsingin yliopiston</b> opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) näkymään <i>my submissions</i>. Jos et ole Helsingin yliopiston opiskelija, saat opiskelijanumeron ilmoittautumalla kurssille [Avoimen yliopiston](/osa0/yleista/#kokeeseen-ilmoittautuminen) kautta.
+<!-- Jos haluat kurssilta suorituksen, tallenna <b>Helsingin yliopiston</b> opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) näkymään <i>my submissions</i>. Jos et ole Helsingin yliopiston opiskelija, saat opiskelijanumeron ilmoittautumalla kurssille [Avoimen yliopiston](/osa0/yleista/#kokeeseen-ilmoittautuminen) kautta. -->
+If you want to receive credits, save your <b>University of Helsinki</b> student number to
+[the exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) in the 
+<i>my submissions</i> view. If you are not a student at the University of Helsinki, you can get a student number by registering for the course through the [Open university](/osa0/yleista/#kokeeseen-ilmoittautuminen).
 
-Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi valmis kurssin suorituksen kanssa:
+<!-- Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi valmis kurssin suorituksen kanssa: -->
+You will receive your credits after you have submitted enough exercise for a passing grade, passed the exam and let us know through the exercise submission system that you have completed the course:
 
 ![](../../images/0/28.png)
 
-Arvosana siirtyy Weboodiin neljän viikon sisällä suoritusmerkintäpyynnön jälkeen.
+<!-- Arvosana siirtyy Weboodiin neljän viikon sisällä suoritusmerkintäpyynnön jälkeen. -->
+You can view your grade in Weboodi approximately four weeks after notifying us.
 
 
 ### Course certificate
@@ -121,7 +126,7 @@ If you have already taken the course either as a MOOC or as a University Course,
 
 #### Expanding Full stack open 2019
 
-You can just pick up where you left! If you wish to resubmit a whole part, please contact the course personel.
+You can just pick up where you left! If you wish to resubmit a whole part, please contact the course personel with email matti.luukkainen@helsinki.fi or in Telegram @mluukkai. Tell us your github account and which parts to delete from your submissions.
 
 #### Expanding other course instance
 
@@ -153,12 +158,13 @@ Note that it is possible to register for exam only if you have a Finnish social 
 Follow the instructions below to gain access to the course’s Moodle space:
 
 -	Register for the course through the [Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=131840261)
--	Wait for 24 hours and activate your University of Helsinki user ID. You will receive instructions on the activation process the following day. 
+-	**Wait for 24 hours** and activate your University of Helsinki user ID. You will receive instructions on the activation process the following day. 
 -	Sign in on the Open universitu [course page](https://courses.helsinki.fi/fi/aytkt21009en/131840261), where you will find the enrolment key for the Moodle space
 -	Sign into the [Moodle space](https://moodle.helsinki.fi/login/index.php) with your University of Helsinki user ID and the enrolment key. 
 
 Please note!
 
+- **Did you wait 24 hours** as the above instructions say?
 - You need the Moodle access just for the exam, for the course certificate access is not needed!
 -	Registration for the exam through the Open University is possible until Jan 9, 2021. 
 - Credits for the course are only available to those students who have successfully registered for the course registration through the Open University and have completed the course according to the instructions.

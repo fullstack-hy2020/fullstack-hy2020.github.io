@@ -174,7 +174,7 @@ The last two lines define that the browser does a HTTP GET request to the server
 xhttp.open('GET', '/data.json', true)
 xhttp.send()
 ```
-This is the down-most request shown on the Network tab. 
+This is the bottom-most request shown on the Network tab. 
 
 We can try going to the address <https://fullstack-exampleapp.herokuapp.com/data.json> straight from the browser:
 

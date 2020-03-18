@@ -446,7 +446,7 @@ Now we know that both interfaces <i>CoursePartOne</i> and <i>CoursePartThree</i>
 
 Your first task is to to declare a new interface, that includes the <i>description</i> attribute and extends the <i>CoursePartBase</i> interface. Then modify the code so that you can remove the <i>description</i> attribute from both <i>CoursePartOne</i> and <i>CoursePartThree</i>, without getting any errors.
 
-The create a component <i>Part</i> that renders all attributes opf each type of course part. Use switch case -based exhaustive type checking! Use the new component in component <i>Content</i>.
+The create a component <i>Part</i> that renders all attributes of each type of course part. Use switch case -based exhaustive type checking! Use the new component in component <i>Content</i>.
 
 Lastly, add your own course part interface with at least the following attributes: <i>name</i>, <i>exerciseCount</i> and <i>description</i>. Then add that interface to the type union <i>CoursePart</i> and add corresponding data to the <i>courseParts</i> variable. Now if you have modified your <i>Content</i> component correctly, you should get an error, because you have not yet added support for the fourth course part type. Do the necessary changes to <i>Content</i>, so that all attributes for the new course part also get rendered and that the compiler doesn't produce any errors.
 
@@ -766,7 +766,7 @@ Response should look as follows:
 
 #### 9.17: patientor, step2
 
-Create a page for showing the patient full information in the frontend. 
+Create a page for showing a patient's full information in the frontend. 
 
 Patient information should be accessible when clicking eg. the patients name.
 
@@ -774,7 +774,7 @@ Fetch the data from the enpoint created on the provious exercise. After fetching
 
 Since we now have the state in the context, you'll need to define a new action type for updating an individual patient's data.
 
-The Application uses [Semantic UI React](https://react.semantic-ui.com/) for styling, which is quite similar to [React Bootstrap](https://react-bootstrap.github.io/) and [MaterialUI](https://material-ui.com/) that we covered in [part 7](/en/part7/more_about_styles). You may also use it for the new components but that is up to you sincew the main focus is now in Typescript.
+The Application uses [Semantic UI React](https://react.semantic-ui.com/) for styling, which is quite similar to [React Bootstrap](https://react-bootstrap.github.io/) and [MaterialUI](https://material-ui.com/) that we covered in [part 7](/en/part7/more_about_styles). You may also use it for the new components but that is up to you since the main focus is now in Typescript.
 
 The Application also uses [react router](https://reacttraining.com/react-router/web/guides/quick-start) 
 to control what view is visible in the frontend. You might want to have a look on [part 7](/en/part7/react_router) if you don't yet have a grasp on how the router works.
@@ -984,7 +984,7 @@ Form handling can sometimes be quite a nuisance in React. That's why we have dec
 
 The code for the form can be found in <i>src/AddPatientModal/AddPatientForm.tsx</i> and some form field helpers can be found in <i>src/AddPatientModal/FormField.tsx</i>.
 
-In the beginning of <i>AddPatientForm.tsx</i> you can see, that we have created a type for our form values, called simply <i>PatientFormValues</i>. It is a narrowed down version of <i>Patient</i>, with the properties <i>id</i> and <i>entries</i> omitted, because we don't want the user to be able to submit then when creating a new patient. <i>id</i> is created by the backend and <i>entries</i> can only be added for existing patients.
+In the beginning of <i>AddPatientForm.tsx</i> you can see, that we have created a type for our form values, called simply <i>PatientFormValues</i>. It is a narrowed down version of <i>Patient</i>, with the properties <i>id</i> and <i>entries</i> omitted, because we don't want the user to be able to submit those when creating a new patient. <i>id</i> is created by the backend and <i>entries</i> can only be added for existing patients.
 
 ```js
 export type PatientFormValues = Omit<Patient, "id" | "entries">;
@@ -1255,7 +1255,7 @@ Remember that we have different kinds of entries in our app, so our backend shou
 
 Now that our backend supports adding of entries, we want to add the corresponding functionality the frontend. In this exercise you should add a form for adding an entry for a patient. An intuitive place for opening the form would be on the patient page. 
 
-In this exercise it is enough to **support <i>one</i> entry type**, and you do not have to handle the errors, it is enough if a entry can be created if the form is filled up with valid data.
+In this exercise it is enough to **support <i>one</i> entry type**, and you do not have to handle the errors, it is enough if an entry can be created if the form is filled up with valid data.
 
 Upon a successful submit the new entry should be added to the correct person and the patient's entries on the patient page should be updated to contain the new entry.
 
