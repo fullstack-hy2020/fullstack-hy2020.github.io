@@ -1261,9 +1261,7 @@ Upon a successful submit the new entry should be added to the correct person and
 
 If you like, you can re-use some of the code from the <i>Add patient</i> form for this exercise, but this is not a requirement.
 
-Note that the file [FormField.tsx](https://github.com/fullstack-hy2020/patientor/blob/master/src/AddPatientModal/FormField.tsx#L58) has a redily made component _DiagnosisSelection_ that can be to for setting the field <i>diagnoses</i>:
-
-It can be used as follows:
+Note that the file [FormField.tsx](https://github.com/fullstack-hy2020/patientor/blob/master/src/AddPatientModal/FormField.tsx#L58) has a ready-made component _DiagnosisSelection_ that can be used for setting the field <i>diagnoses</i> as follows:
 
 ```js
 const AddEntryForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
@@ -1302,7 +1300,7 @@ const AddEntryForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
 };
 ```
 
-There is also redily made component _NumberField_ for the numeric values with a limited range
+There is also a ready-made component _NumberField_ for the numeric values with a limited range:
 
 ```js
 <Field
@@ -1316,18 +1314,16 @@ There is also redily made component _NumberField_ for the numeric values with a 
 
 #### 9.25: patientor, step10
 
-Extend your solution so that it displays error message if some required values are missing or formatted incorrectly. 
+Extend your solution so that it displays an error message if some required values are missing or formatted incorrectly. 
 
 #### 9.26: patientor, step11
 
-Extend your solution to support <i>two</i> entry types and displays error message if some required values are missing. You do not need to care about the possible errors in server response.
+Extend your solution so that it supports <i>two</i> entry types and displays an error message if some required values are missing or formatted incorrectly. You do not need to care about the possible errors in the server's response.
 
-The easiest but surely not the most elegant way to do this exercise is to have a separate form for each different entry type or formatted incorrectly. You do not need to care about the possible errors in server response.
-
-Getting the types to work properly might be a slight challenge if you use just a single form.
+The easiest but surely not the most elegant way to do this exercise is to have a separate form for each different entry type. Getting the types to work properly might be a slight challenge if you use just a single form.
 
 #### 9.27: patientor, step12
 
-Extend your solution so that it supports <i>all the entry types</i> and displays error message if some required values are missing or formatted incorrectly. You do not need to care about the possible errors in server response.
+Extend your solution so that it supports <i>all the entry types</i> and displays an error message if some required values are missing or formatted incorrectly. You do not need to care about the possible errors in the server's response.
 
 </div>
