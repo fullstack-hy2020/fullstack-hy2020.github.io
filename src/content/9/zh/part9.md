@@ -5,7 +5,7 @@ lang: zh
 ---
 
 <div class="intro">
-Div class“ intro”
+
 
 This part is all about TypeScript: and open-source typed superset of JavaScript developed by Microsoft that compiles to plain JavaScript.
 这一部分主要是关于打字脚本: 以及由微软开发的开源类型的 JavaScript 超集，这些 JavaScript 可以编译成普通的 JavaScript。

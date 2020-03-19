@@ -1177,7 +1177,7 @@ You may find the following links useful:
 - 一些关于[ Egghead.io ]( https://Egghead.io )的课程，如[开始学习反应]( https://Egghead.io/courses/Start-learning-React ) ，质量很高，稍新一点的[初学者反应指南]( https://Egghead.io/courses/The-Beginner-s-guide-to-reactjs )也相对不错; 这两门课程都介绍了一些概念，这些概念也将在本课程后面介绍。 然而，这两门课程都使用了 Class 组件，而不是本课程中使用的新函数组件。
 
 </div>
-/ div
+
 
 <div class="tasks">
   <h3>Exercises  1.6.-1.14.</h3>

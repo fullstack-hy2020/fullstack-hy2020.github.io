@@ -206,13 +206,13 @@ For some reason the URL of the database was undefined. The <i>heroku config</i> 
 You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this github repository](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-5).
 您可以在[ this github repository ]的 i part3-5 / i 分支中找到我们当前应用程序的全部代码，该分支位于 https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-5文件库中。
 </div>
-/ div
+
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 
 ### Exercises 3.19.-3.21.
@@ -288,7 +288,7 @@ Push the latest version to Heroku and verify that everything works there as well
 将最新版本推送到 Heroku，并验证那里的一切工作正常。
 
 </div>
-/ div
+
 
 <div class="content">
 
@@ -537,10 +537,10 @@ Many companies define coding standards that are enforced throughout the organiza
 You can find the code for our current application in its entirety in the <i>part3-6</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-6).
 您可以在[ this github repository ]的 i part3-6 / i 分支中找到我们当前应用程序的全部代码，该分支位于 https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-6文件库中。
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 
 ### Exercise 3.22.

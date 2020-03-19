@@ -537,10 +537,10 @@ In our case it is quite obvious that the return value should be an object with t
 在我们的示例中，很明显，返回值应该是一个具有两个属性 i value1 / i 和 i value2 / i 的对象，这两个属性都应该是 number 类型。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 9.1.-9.3.
 练习9.1- 9.3。
@@ -677,7 +677,7 @@ Handle exeptions and errors appropriately. The exerciseCalculator should accept 
 适当地处理引用和错误。 Exercisalculator 应该接受不同长度的输入。 自己决定如何收集所有需要的输入。
 
 </div>
-/ div
+
 
 <div class="content">
 
@@ -941,10 +941,10 @@ And now by running <i>npm run dev</i> we have a working, auto-reloading developm
 现在，通过运行 i npm 运行 dev / i，我们为我们的项目提供了一个工作的、自动重新加载的开发环境！
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 9.4.-9.5.
 练习9.4-9.5。
@@ -1015,7 +1015,7 @@ Do not copy the calculator code to file <i>index.ts</i>, make it a [typescript m
 不要将计算器代码复制到 i index.ts / i 文件中，将其设置为[打字稿模块]( https://www.typescriptlang.org/docs/handbook/modules.html ) ，可以导入 i index.ts / i。
 
 </div>
-/ div
+
 
 <div class="content">
 
@@ -1213,10 +1213,10 @@ And now let's fix everything that needs to be fixed!
 现在让我们来解决所有需要解决的问题！
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 9.6.-9.7.
 练习9.6-9.7。

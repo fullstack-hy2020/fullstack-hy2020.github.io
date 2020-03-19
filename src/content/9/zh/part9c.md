@@ -328,10 +328,10 @@ With the help of our compiler and eslint it also ensures that a good code qualit
 在我们的编译器和 eslint 的帮助下，它还确保了良好的代码质量得到了维护。 有了这个基础，我们实际上可以开始创建一个应用程序，稍后可以将它部署到生产环境中。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 9.8.-9.9.
 练习9.8-9.9。
@@ -370,7 +370,7 @@ You might also want to have a look at the tab <i>console</i>. If something fails
 您可能还需要查看 i console / i 的选项卡。 如果有什么东西失败了[课程的第三部分](/ 第三部分) ，那就说明了如何解决这个问题。
 
 </div>
-/ div
+
 
 <div class="content">
 
@@ -985,10 +985,10 @@ The response is what we expect it to be
 
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 9.10.-9.11.
 练习9.10-9.11。
@@ -1030,7 +1030,7 @@ After creating the endpoint, ensure that the <i>frontend</i> shows the list of p
 
 
 </div>
-/ div
+
 
 <div class="content">
 
@@ -1266,7 +1266,7 @@ When we receive data from an outside source, there is no way it can be already t
 当我们从外部来源接收数据时，我们不可能在接收数据时就已经输入了数据。 我们需要决定如何处理随之而来的不确定性。
 
 <!-- The way Express handles parsing the request body is that it asserts the type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) to all the body fields. In our situation this doesn't come apparent in any way in the editor, but if we start looking at the variables more closely and hover on any of them, we can see that each of them is indeed [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any).  Editor does not give us any complaints when we pass this data to <i>addDiary</i> as arguments:  -->
-<！ -- Express 处理请求正文解析的方式是，它为所有正文字段断言类型[ any ]( http://www.typescriptlang.org/docs/handbook/basic-types.html#any )。 在我们的情况下，这一点在编辑器中并不明显，但是如果我们开始更仔细地查看这些变量，并且在它们中的任何一个上面徘徊，我们可以看到它们中的每一个确实是[任何](任何 http://www.typescriptlang.org/docs/handbook/basic-types.html#any )。 当我们将这些数据作为参数传递给 i addDiary / i 时，编辑器不会给我们任何抱怨: -- 
+
 Express handles parsing the request body by asserting the type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) to all the body's fields.
 Express 通过断言类型[ any ]( http://www.typescriptlang.org/docs/handbook/basic-types.html#any )到主体的所有字段来处理请求主体的解析。
 In our case this is not apparent in the editor at all, but if we start looking at the variables more closely and hover over any of them, we can see that each of them is indeed type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any). The editor does not complain in any way when we pass this data to the <i>addDiary</i>  function as parameters:
@@ -1685,10 +1685,10 @@ If we now try to create a new diary entry with invalid or missing fields we are 
 
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 9.12.-9.13.
 练习9.12-9.13。

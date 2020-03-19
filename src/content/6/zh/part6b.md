@@ -522,10 +522,10 @@ You can find the code for our current application in its entirety in the <i>part
 您可以在[ this Github repository ]的 i / part6-2 / i 分支中找到我们当前应用程序的全部代码，该分支位于 https://Github.com/fullstack-hy2020/redux-notes/tree/part6-2。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 
 ### Exercises 6.9.-6.12.

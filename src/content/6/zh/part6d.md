@@ -16,7 +16,7 @@ Practically this has meant using the [useSelector](https://react-redux.js.org/ap
 实际上，这意味着使用[ useSelector ]( https://react-redux.js.org/api/hooks#useSelector )和[ useDispatch ]( https://react-redux.js.org/api/hooks#useDispatch )函数。
 
 <!-- Tarkastellaan tämän osan lopuksi toista, hieman vanhempaa ja jonkin verran monimutkaisempaa tapaa reduxin käyttöön, eli [react-redux](https://github.com/reactjs/react-redux) -kirjaston määrittelemää [connect](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)-funktiota. -->
-<！ -- Tarkastellaan t m osan lopuksi toista，hieman vanhempaa ja jonkin verran monimutkaisempaa tapaa reduxin k ytt n，eli [ react-redux ]( https://github.com/reactjs/react-redux )-kirjaston m rittelem [ connect ]( Https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options )-funktiota.  -->
+
 To finish this part we will look into another older and  more complicated way to use redux, the [connect](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)-function provided by react-redux.
 为了完成这一部分，我们将研究使用 redux 的另一种更古老、更复杂的方法，redux 提供的[ connect ]( https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options )-函数。
 
@@ -704,10 +704,10 @@ More about this [here](https://www.simplethread.com/cant-replace-redux-with-hook
 [第9部](/ tc / part9)。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 6.19.-6.21.
 练习6.19- 6.21。
@@ -748,7 +748,7 @@ Do the same for the <i>Filter</i> and <i>AnecdoteForm</i> components.
 6.21轶事，压轴大戏
 
 <!-- Sovellukseen on (todennäköisesti) jäänyt eräs hieman ikävä bugi. Jos vote-näppäintä painellaan useasti peräkkäin, notifikaatio näkyy ruudulla hieman miten sattuu. Esimerkiksi jos äänestetään kaksi kertaa kolmen sekunnin välein, näkyy jälkimmäinen notifikaatio ruudulla ainoastaan kahden sekunnin verran (olettaen että notifikaation näyttöaika on 5 sekuntia). Tämä johtuu siitä, että ensimmäisen äänestyksen notifikaation tyhjennys tyhjentääkin myöhemmän äänestyksen notifikaation. -->
-<！ -- Sovellukseen on (todenn k isesti) j nyt er’ s hieman v bugi。 何塞投票通过了总统选举，并通知总统。 在5点钟的时候，他们通过电话通知了他们的家人。 在我的办公室里，我的手机通知我，我的手机通知我。  -->
+
 You (propably) have one nasty bug in your application. If the user clicks the vote button multiple times in a row, the notification is displayed funnily. For example if a user votes twice in three seconds, 
 您(可能)在应用程序中有一个讨厌的 bug。 如果用户连续多次单击投票按钮，通知就会显示得非常有趣。 例如，如果一个用户在三秒内投票两次,
 the last notification is only displayed for two seconds (assuming the notification is normally shown for 5 seconds). This happens because removing the first notification accidentally removes the second notification. 
@@ -764,10 +764,10 @@ The [documentation](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWor
 Settimeout 函数的[ documentation ]( https://developer.mozilla.org/en-us/docs/web/api/windoworworkerglobalscope/setTimeout 文档)对此也很有用。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 这是本课程这一部分的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统]( https://studies.cs.helsinki.fi/stats/courses/fullstackopen )。

@@ -858,10 +858,10 @@ The code for the current state of our application can be found in the  <i>part2-
 我们应用程序当前状态的代码可以在[ github ]( https://github.com/fullstack-hy2020/part2-notes/tree/part2-6)上的 i part2-6 / i 分支中找到。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 <h3>Exercises 2.15.-2.18.</h3>
 练习2.15-2.18. / h3

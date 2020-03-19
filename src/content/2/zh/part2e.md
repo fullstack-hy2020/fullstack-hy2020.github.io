@@ -351,10 +351,10 @@ The code of the final version of our application can be found in the  <i>part2-8
 我们应用程序最终版本的代码可以在[ github ]( https://github.com/fullstack-hy2020/part2-notes/tree/part2-8)上的 i part2-8 / i 分支中找到。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 <h3>Exercises 2.19.-2.20.</h3>
 H3练习2.19-2.20. / h3

@@ -1111,10 +1111,10 @@ The asynchronous nature of JavaScript can lead to surprising behavior, and for t
 Javascript 的异步特性可能会导致令人惊讶的行为，因此，在使用 async / await 语法时需要特别注意。 尽管语法使得处理承诺更加容易，但是仍然有必要理解承诺是如何工作的！
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 
 ### Exercises 4.8.-4.12.
@@ -1216,7 +1216,7 @@ Make the required changes to the code so that it passes the test.
 对代码进行必要的更改，以便它通过测试。
 
 </div>
-/ div
+
 
 <div class="content">
 
@@ -1391,10 +1391,10 @@ You can find the code for our current application in its entirety in the <i>part
 您可以在[ this Github repository ]的 i part4-6 / i 分支中找到我们当前应用程序的全部代码，这是一个 https://Github.com/fullstack-hy2020/part3-notes-backend/tree/part4-6。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 
 ### Exercises 4.13.-4.14.

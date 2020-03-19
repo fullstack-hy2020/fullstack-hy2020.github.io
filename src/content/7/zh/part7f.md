@@ -21,10 +21,10 @@ One good piece of advice for both refactoring and writing new code is to take <i
 对于重构和编写新代码，一个很好的建议是采取初级步骤 / i。 如果在重构过程中让应用程序长时间处于完全崩溃的状态，那么几乎肯定会失去理智。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 7.9.-7.21.
 练习7.9-7.21。

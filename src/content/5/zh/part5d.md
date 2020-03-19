@@ -19,7 +19,7 @@ Next we will look into one way to test the [system as a whole](https://en.wikipe
 接下来，我们将研究一种使用 i End to End / i (E2E)测试[系统作为一个整体]( https://en.wikipedia.org/wiki/system_testing )的方法。
 
 <!-- Web-sovellusten E2E-testaus tapahtuu käyttäen selainta jonkin kirjaston avulla. Ratkaisuja on tarjolla useita, esimerkiksi [Selenium](http://www.seleniumhq.org/), joka mahdollistaa testien automatisoinnin lähes millä tahansa selaimella. Toinen vaihtoehto on käyttää ns. [headless browseria](https://en.wikipedia.org/wiki/Headless_browser) eli selainta, jolla ei ole ollenkaan graafista käyttöliittymää. Esim. Chromea on mahdollista suorittaa Headless-moodissa. -->
-<！ -- Web-sovellusten e2e-testus tapahtuu k ytt en selainta jonkin kirjaston avulla. 在塔霍拉乌西塔的 Ratkaisuja，esimerkiksi [ Selenium ]( http://www.seleniumhq.org/ ) ，joka mahdollistaa testimatisoinin in mill tahansa selaimella。 把你的手放在刀口上。 ( https://en.wikipedia.org/wiki/headless_browser ) eli selainta，jolla ei ole ollenkaan graafista k ytt liittym. 男名男子名。 无头苍蝇-无头苍蝇上的铬美亚。  -->
+
 We can do E2E testing of an web application using a browser and a testing library. There are multiple libraries available, for example [Selenium](http://www.seleniumhq.org/) which can be used with almost any browser. 
 我们可以使用浏览器和测试库对 web 应用程序进行 E2E 测试。 有多个库可用，例如[ Selenium ]( http://www.seleniumhq.org/ ) ，几乎可以用于任何浏览器。
 Another browser option are so called [headless browsers](https://en.wikipedia.org/wiki/Headless_browser), which are browsers with no graphical user interface. 
@@ -33,7 +33,7 @@ E2E tests are potentially the most useful category of tests, because they test t
 E2e 测试可能是最有用的一类测试，因为它们测试系统的界面与真实用户使用的界面相同。
 
 <!-- E2E-testeihin liittyy myös ikäviä puolia. Niiden konfigurointi on haastavampaa kuin yksikkö- ja integraatiotestien. E2E-testit ovat tyypillisesti myös melko hitaita ja isommassa ohjelmistossa niiden suoritusaika voi helposti nousta minuutteihin, tai jopa tunteihin. Tämä on ikävää sovelluskehityksen kannalta, sillä sovellusta koodatessa on erittäin hyödyllistä pystyä suorittamaan testejä mahdollisimman usein koodin [regressioiden](https://en.wikipedia.org/wiki/Regression_testing) varalta.  -->
-<！ -- E2E-testeihin liittyy my s ik vi puolia. 尼德孔菲格鲁提对 haastavampaa kuin ykkk-ja integraatitien。 2008年10月22日，我的妻子玛莎 · 伊索玛莎 · 奥耶尔米斯托萨 · 尼登 · 苏里塔 · 苏里塔 · 苏里塔 · 沃伊向我证明了她的能力。 在我们的网站 sovelluskehityksen kannalta 上，他们的网站 sovellusta koodatessa 在移动设备上，用户名为 pysty suorittamaan testej mahdollisimman usin koodin [ regressioiden ]( https://en.wikipedia.org/wiki/regression_testing ) varalta。   -->
+
 They do some drawbacks too. Configuring E2E tests is more challenging than unit- or integration tests. They also tend to be quite slow, and with a large system their execution time can be minutes, even hours. This is bad for development, because during coding it is beneficial to be able to run tests as often as possible in case of code [regressions](https://en.wikipedia.org/wiki/Regression_testing).
 它们也有一些缺点。 配置 E2E 测试比单元测试或集成测试更具挑战性。 它们也往往非常慢，对于一个大型系统，它们的执行时间可能是几分钟，甚至几小时。 这对开发是不利的，因为在编码期间，如果遇到代码[回归]( https://en.wikipedia.org/wiki/regression_testing ) ，能够尽可能多地运行测试是有益的。
 
@@ -996,7 +996,7 @@ As we said above, each test starts from zero! Tests do not start from the state 
 正如我们上面所说的，每个测试都是从零开始的！ 测试不是从以前状态结束的状态开始的。
 
 <!-- Cypressin dokumentaatio neuvoo meitä seuraavasti: [Fully test the login flow – but only once!](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Logging-in). Eli sen sijaan että tekisimme <i>beforeEach</i>-lohkossa kirjaantumisen lomaketta käyttäen, suosittelee Cypress että kirjaantuminen tehdään [UI:n ohi](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI), tekemällä suoraan backendiin kirjaantumista vastaava HTTP-operaatio. Syynä tälle on se, että suoraan backendiin tehtynä kirjautuminen on huomattavasti nopeampi kuin lomakkeen täyttämällä.  -->
-<！ -- Cypressin dokumentaatio neuvoo meit seuraavasti: [完全测试登录流程——但只有一次! ]( https://docs.cypress.io/guides/getting-started/testing-your-app.html#logging-in )。 在此之前，我们已经知道了一些关于 https://docs.Cypress.io/guides/getting-started/testing-your-app.html#bypassing-your-UI 的事情。 但是现在，科学家们发现，在这种情况下，人们不得不把这种方法应用到其他方面。 -->
+
 The Cypress documentation gives us the following advice: [Fully test the login flow – but only once!](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Logging-in). 
 Cypress 文档给了我们以下建议: [完全测试登录流程——但只有一次! ]( https://docs.Cypress.io/guides/getting-started/testing-your-app.html#logging-in )。
 So instead of logging in a user using the form in the <i>beforeEach</i> block, Cypress recommends that we [bypass the UI](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI) and do a HTTP request to the backend to log in. The reason for this is, that logging in with a HTTP request is much faster than filling a form. 
@@ -1445,16 +1445,16 @@ The frontend- and the test code can be found from [github](https://github.com/fu
 前端和测试代码可以在[ github ]( https://github.com/fullstack-hy2020/part2-notes/tree/part5-11)分支 i part5-11 / i 中找到。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 5.17.-5.22.
 练习5.17-5.22。
 
 <!-- Tehdään osan lopuksi muutamia E2E-testejä blogisovellukseen. Ylläolevan materiaalin pitäisi riittää ainakin suurimmaksi osaksi tehtävien tekemiseen. Cypressin [dokumentaatiota](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell) kannattaa ehdottomasti myös lueskella, kyseessä on ehkä paras dokumentaatio, mitä olen koskaan open source -projektissa nähnyt.  -->
-<！ -- tehd n osan lopuksi muutamia e2e-testej blogisovellukseen. 你们所有的材料都在这里被发现了。 ( https://docs.cypress.io/guides/overview/why-cypress.html#in-a-nutshell ) kannattaa ehtoasti my s lueskella，kyseess on ehk paras dokumentaatio，mit olen koskaan open source-projektissa n hnyt.   -->
+
 In the last exercises of this part we will do some E2E tests for our blog application. 
 在这一部分的最后练习中，我们将为我们的博客应用程序做一些 E2E 测试。
 The material of this part should be enough to complete the exercises. 

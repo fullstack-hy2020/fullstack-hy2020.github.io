@@ -803,10 +803,10 @@ Styled components have seen a consistent growth in popularity in recent times, a
 风格化的组件在最近一段时间内一直受到欢迎，很多人认为这是定义样式到 React 应用程序的最佳方式。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 
 ### Exercises
@@ -817,7 +817,7 @@ The exercises related to the topics presented here, can be found at the end of t
 与这里提到的主题相关的练习，可以在本课程材料部分的练习集[用于扩展博客列表应用程序](/ en / part7 / 练习扩展博客列表)的最后找到。
 
 </div>
-/ div
+
 
 
 =======END=======

@@ -322,7 +322,7 @@ Because both React and [Flux](https://facebook.github.io/flux/docs/in-depth-over
 因为 React 和[ Flux ]( https://Facebook.github.io/Flux/docs/in-depth-overview.html#content )都是在 Facebook 上创建的，可以说只把 React 用作 UI 库是预期的用例。 遵循 flux 架构会给应用程序增加一些开销，如果我们讨论的是一个小型应用程序或原型，那么使用 React“ wrong”可能是一个好主意，因为[过度设计]( https://en.wikipedia.org/wiki/overengineering )很少会产生最佳结果。
 
 <!-- Kuten [osan 6](/osa6/connect#redux-ja-komponenttien-tila) lopussa mainittiin, Reactin [Context-api](https://reactjs.org/docs/context.html) tarjoaa erään vaihtoehtoisen tavan keskitetylle tilan hallinnalle ilman tarvetta ulkoisille kirjastoille kuten reduxille. Katso lisää esim. [täällä](https://www.simplethread.com/cant-replace-redux-with-hooks/) ja [täällä](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). -->
-<！ -- Kuten [ osan 6](/ osa6 / connect # redux-ja-komponentien-tila) lopussa mainittiin，Reactin [ Context-api ]( https://reactjs.org/docs/context.html ) tarjoaa er n vaihtoehtoehtoisen takesetylle tilan hallinalle ilman tarvetta ulkoisille kirjastoille Kuten reduxille. Katso lis esim. [ https://www.simplethread.com/cant-replace-redux-with-hooks/ ]( https://hswolff.com/blog/how-to-usecontext-with-usereducer/ ).  -->
+
 As I mentioned at the end of [part 6](/osa6/connect#redux-ja-komponenttien-tila), the React [Context-api](https://reactjs.org/docs/context.html) offers one alternative solution for centralized state menagement without the need for third party libraries such as redux. You can read more about this i.e [here](https://www.simplethread.com/cant-replace-redux-with-hooks/) and [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/).
 正如我在[ part 6](/ osa6 / connect # redux-ja-komponenttien-tila)的结尾所提到的，React [ Context-api ]( https://reactjs.org/docs/context.html )为集中式国家管理提供了一种替代方案，无需 redux 之类的第三方库。 你可以阅读更多关于这个网站的 https://www.simplethread.com/cant-replace-redux-with-hooks/ 和 https://hswolff.com/blog/how-to-usecontext-with-usereducer/ 。
 
@@ -525,19 +525,13 @@ After the update the situation looks good
 更新后情况看起来不错
 
 ```js
-“ js
  $ blogs-backend npm audit
-博客-后端 npm 审计
 
                        === npm audit security report ===
-Npm 审计保安报告
 
 found 0 vulnerabilities
-找到了0个漏洞
  in 1204443 scanned packages
-在1204443个扫描包裹里
-```                                                                    
-```
+```   
 
 One of the threats mentioned in the list from OWASP is <i>Broken Authentication</i> and the related <i>Broken Access Control</i>. The token based authentication we have been using is fairly robust, if the application is being used on the traffic-encrypting HTTPS-protocol. When implementing access control one should e.g. remember to not only check a user's identity in the browser but also on the server. Bad security would be to prevent some actions to be taken only by hiding the execution options in the code of the browser.
 在 OWASP 列表中提到的威胁之一是 i Broken Authentication / i 和相关的 i Broken Access Control / i。 如果应用程序用于流量加密的 https 协议，那么我们使用的基于令牌的身份验证是相当健壮的。 在实施访问控制时，不仅要检查浏览器中的用户身份，还要检查服务器上的用户身份。 糟糕的安全性是仅通过在浏览器代码中隐藏执行选项来阻止某些操作。
@@ -684,7 +678,7 @@ Serverless is not about there not being a server in applications, but about how 
 # # # 有用的库和有趣的链接
 
 <!-- Javasciptin kehittäjäyhteisö on tuottanut valtavan määrän erilaisia hyödyllisiä kirjastoja ja jos olet koodaamassa jotain vähänkin isompaa, kannattaa etsiä mitä valmista kalustoa on jo tarjolla. Eräs hyvä paikka kirjastojen etsimiseen on https://applibslist.xyz/. Seuraavassa listataan muutamia luotettavien tahojen hyväksi havaitsemia kirjastoja. -->
-<！ -- Javasciptin kehitt j yhteis on tuottanut valtavan m n erilaisia hy dyllisi kirjastoja jos olet kodaamassa jotain v h nkin isompaa，kannattaa etsi mit valmista kalustoa on jo tarjolla. 他在 https://applibslist.xyz/ 广场看到了他的灵魂。 修罗阿瓦萨利斯塔坦穆塔米亚罗特塔维恩塔霍金希夫斯哈瓦特塞米亚克尔贾斯托亚。  -->
+
 The JavaScript developer community has produced a large variety of useful libraries. If you are developing anything more substancial, it is worth it to check if existing solutions are already available. 
 开发者社区已经产生了大量有用的库。 如果你正在开发更实质性的东西，那么检查一下现有的解决方案是否已经可用是值得的。
 One good place to find libraries is https://applibslist.xyz/.
@@ -703,7 +697,7 @@ If you are handling times and dates, [moment](https://momentjs.com/) and a new(e
 如果你正在处理时间和日期，[瞬间]( https://momentjs.com/ )和一个新版本[日期- https://github.com/date-fns/date-fns ](日期)提供了很好的工具。
 
 <!-- Lomakkeiden käyttöä helpottavia kirjastoja ovat [Formik](https://www.npmjs.com/package/formik) ja [redux-form](https://redux-form.com/8.3.0/). Jos sovelluksessa tulee piirtää graafeja, on vaihtoehtoja lukuisia, sekä [recharts](http://recharts.org/en-US/) että [highcharts](https://github.com/highcharts/highcharts-react) ovat hyviksi havaittuja. -->
-<！ -- lomakeiden k ytt helpottavia kirjastoja ovat [ Formik ]( https://www.npmjs.com/package/Formik ) ja [ redux-form ]( https://redux-form.com/8.3.0/ ). 我们的 http://recharts.org/en-us/ 是，我们的 https://github.com/highcharts/highcharts-react 是什么样的呢。  -->
+
 [Formik](https://www.npmjs.com/package/formik) and [redux-form](https://redux-form.com/8.3.0/) can be used to handle forms easier. 
 [ Formik ]( https://www.npmjs.com/package/Formik )和[ redux-form ]( https://redux-form.com/8.3.0/ )可以用来更容易地处理表单。
 If your application displays graphs, there are multiple options to chose from. Both [recharts](http://recharts.org/en-US/) and [highcharts](https://github.com/highcharts/highcharts-react) are well recommended.
@@ -736,7 +730,7 @@ When it comes to the tools used for the management and bundling of JavaScript pr
 - 2015年-[ Webpack ]( https://www.npmjs.com/package/Webpack )
 
 <!-- Hipsterien suurin into työkalukehitykseen näytti pysähtyneen webpackin vallattua markkinat. Pari vuotta sitten markkinoille ilmestyi uusi tulokas [Parcel](https://parceljs.org), joka markkinoi olevansa yksinkertainen, sitähän Webpack ei missään nimessä ole, ja paljon nopeampi kuin Webpack. Lupaavan alun jälkeen Parcel ei kuitenkaan ole jatkanut nostettaan, ja vaikuttaa että siitä ei kuitenkaan ole Webpackin tappajaksi. -->
-<！ -- Hipsterien suurin into ty kalukehitykseen n ytti pys htyneen webpackin vallattua markkinat. 包裹( https://parceljs.org ) ，joka markkinoi olevansa yksinkertainen，sit h n Webpack ei miss n nimess ole，ja paljon nopeampi kuin Webpack。 (西班牙语)(西班牙语)。  -->
+
 Hipsters seem to have lost their interest in tool development after webpack started to dominate the markets. Few years ago [Parcel](https://parceljs.org) started to make the rounds marketing itself as simpe (which Webpack absolutely is not) and faster than Webpack. However after a promising start Parcel has not gathered any steam, and it's beginning to look like it will not be the end of Webpack. 
 在 webpack 开始主导市场之后，赶时髦的人似乎对工具开发失去了兴趣。 几年前，[ Parcel ](Parcel) https://parceljs.org 开始以简单(Webpack 绝对不是)和快于 Webpack 的方式推销自己。 然而，在一个有希望的开始后，Parcel 并没有聚集任何动力，而且它开始看起来将不会是 Webpack 的结束。
 

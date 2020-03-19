@@ -652,9 +652,9 @@ The completed code can be found from [here](https://github.com/fullstack-hy2020/
 完成的代码可以在这里找到( https://github.com/fullstack-hy2020/misc/blob/master/router-app-v2.js )。
 
 </div>
-/ div
+
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 7.1.7.3.
 练习7.1.7.3。

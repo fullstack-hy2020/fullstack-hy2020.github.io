@@ -451,10 +451,10 @@ show {showAll ? 'important' : 'all'}
 You can find the code for our current application in its entirety in the <i>part2-3</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part2-3).
 您可以在[ this github repository ]的 i part2-3 / i 分支中找到我们当前应用程序的全部代码，该分支位于 https://github.com/fullstack-hy2020/part2-notes/tree/part2-3。
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 <h3>Exercises 2.6.-2.10.</h3>
 练习2.6-2.10. / h3

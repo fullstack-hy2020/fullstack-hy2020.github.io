@@ -365,10 +365,10 @@ Current code of the backend can be found on [Github](https://github.com/fullstac
 后端的当前代码可以在分支 i / part3-3 / i 中的[ Github ]( https://Github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3)上找到。 前端代码的更改位于[前端存储库]的 i / part3-1 / i 分支(前端 https://github.com/fullstack-hy2020/part2-notes/tree/part3-1)。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 3.9.-3.11.
 练习3.9-3.11。

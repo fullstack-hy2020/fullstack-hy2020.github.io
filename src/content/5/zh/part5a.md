@@ -608,10 +608,10 @@ Current application code can be found on [Github](https://github.com/fullstack-h
 当前的应用程序代码可以在[ Github ]( https://Github.com/fullstack-hy2020/part2-notes/tree/part5-3) ，branch i part5-3 / i 上找到。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 5.1.-5.4.
 练习5.1- 5.4。

@@ -652,11 +652,11 @@ The report will tell us i.e the lines of untested code in each component:
 You can find the code for our current application in its entirety in the <i>part5-8</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-8).
 您可以在[ this Github repository ]的 i part5-8 / i 分支中找到我们当前应用程序的全部代码，该分支位于 https://Github.com/fullstack-hy2020/part2-notes/tree/part5-8。
 </div>
-/ div
+
 
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 5.13.-5.16.
 练习5.13-5.16。
@@ -721,7 +721,7 @@ const author = component.container.querySelector('#author')
 ```
 
 </div>
-/ div
+
 
 <div class="content">
 

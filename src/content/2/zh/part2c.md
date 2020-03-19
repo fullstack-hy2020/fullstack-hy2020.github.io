@@ -649,10 +649,10 @@ At this point in development, all the parts of the application happen to reside 
 在开发的这个阶段，应用程序的所有部分都驻留在软件开发人员的机器上，也就是本地主机。 当应用程序被部署到互联网上时，情况发生了变化。 我们将在第三部分做这个。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 
 <h3>Exercises 2.11.-2.14.</h3>

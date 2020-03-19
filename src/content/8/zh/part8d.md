@@ -325,10 +325,10 @@ The current code of the application can be found on [Github](https://github.com/
 当前应用程序的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-8) ，branch i part8-8 / i 上找到。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 8.17.-8.22.
 练习8.17-8.22。

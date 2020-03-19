@@ -218,10 +218,10 @@ To fix the error, we need to add a new linting rule to <i>.eslintrc</i>:
 ```
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercise 9.14.
 练习9.14。
@@ -305,7 +305,7 @@ const App = () => {
 };
 ```
 </div>
-/ div
+
 
 <div class="content">
 
@@ -453,10 +453,10 @@ The error description <i>Argument of type 'CoursePartThree' is not assignable to
 类型“ coursepart3”的参数 i 的错误描述不能分配给“ never” / i 类型的参数，这告诉我们我们在某个地方使用了一个变量，而这个变量永远不应该被使用，因此我们知道有些东西需要修复。 当我们从 i Deeper 类型 usage / i case 块中删除添加的注释时，您将看到错误消失了。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercise 9.15
 # # 练习9.15
@@ -526,7 +526,7 @@ Lastly, add your own course part interface with at least the following attribute
 最后，添加您自己的课程部分接口，至少包含以下属性: i name / i、 i exerisecount / i 和 i description / i。 然后将该接口添加到类型 union i CoursePart / i，并将相应的数据添加到 i courseets / i 变量。 现在，如果您已经正确地修改了您的 i Content / i 组件，您应该会得到一个错误，因为您还没有添加对第四个课程部分类型的支持。 对 i Content / i 进行必要的更改，这样新课程部分的所有属性都会得到呈现，编译器也不会产生任何错误。
 
 </div>
-/ div
+
 
 <div class="content">
 
@@ -859,10 +859,10 @@ dispatch({ type: "SET_PATIENT_LIST", payload: patients });
 ```
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 9.16.-9.17
 练习9.16-9.17
@@ -970,7 +970,7 @@ dispatch(setPatientList(patientListFromApi));
 
 
 </div>
-/ div
+
 
 <div class="content">
 
@@ -1093,10 +1093,10 @@ export type Entry =
 ```
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 9.19.-9.22.
 练习9.19-9.22。
@@ -1162,7 +1162,7 @@ The resulting entries in the listing <i>could</i> look something like this:
 
 
 </div>
-/ div
+
 
 <div class="content">
 
@@ -1468,10 +1468,10 @@ With this material you should be able to complete the rest of this part's exerci
 有了这些材料，你应该能够完成这部分的练习的其余部分。 如果有疑问，试着阅读现有的代码，找到如何继续下去的线索！
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 9.23.-9.26.
 练习9.23-9.26。

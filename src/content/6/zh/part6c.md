@@ -334,10 +334,10 @@ The current state of the code for the application can be found on [github](https
 应用程序代码的当前状态可以在分支 i / part6-3 / i 中的[ github ]( https://github.com/fullstack-hy2020/redux-notes/tree/part6-3)上找到。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 6.13.-6.14.
 练习6.13-6.14。
@@ -358,7 +358,7 @@ Modify the creation of new anecdotes, such that the anecdotes are stored in the 
 修改新轶事的创建，以便将轶事存储在后端。
 
 </div>
-/ div
+
 
 <div class="content">
 
@@ -547,10 +547,10 @@ The current state of the code for the application can be found on [github](https
 应用程序代码的当前状态可以在分支 i / part6-4 / i 中的[ github ]( https://github.com/fullstack-hy2020/redux-notes/tree/part6-4)上找到。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 
 ### Exercises 6.15.-6.18.

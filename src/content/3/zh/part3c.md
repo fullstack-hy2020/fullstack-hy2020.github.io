@@ -376,10 +376,10 @@ Note.find({ important: true }).then(result => {
 ```
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercise 3.12.
 # # # 练习3.12。
@@ -475,7 +475,7 @@ Person
 * * NB2 * * 如果定义一个名为 i Person / i 的模型，mongoose 将自动将相关的集合命名为 i people / i。
 
 </div>
-/ div
+
 
 <div class="content">
 
@@ -768,10 +768,10 @@ You can find the code for our current application in its entirety in the <i>part
 您可以在[ this Github repository ]的 i part3-4 / i 分支中找到我们当前应用程序的全部代码，这是一个 https://Github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 3.13.-3.14.
 练习3.13-3.14。
@@ -801,7 +801,7 @@ At this point, you can choose to simply allow users to create all phonebook entr
 此时，您可以选择只允许用户创建所有电话簿条目。 在这个阶段，电话簿可以为同一个名字的人提供多个条目。
 
 </div>
-/ div
+
 
 <div class="content">
 
@@ -1143,10 +1143,10 @@ You can find the code for our current application in its entirety in the <i>part
 您可以在[ this github repository ]的 i part3-5 / i 分支中找到我们当前应用程序的全部代码，该分支位于 https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5文件库中。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 3.15.-3.18.
 练习3.15-3.18。

@@ -604,10 +604,10 @@ The <i>ref</i> attribute is used for assigning a reference to each of the compon
 I ref / i 属性用于为变量 i togglable1 / i、 i togglable2 / i 和 i togglable3 / i 中的每个组件分配一个引用。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 
 ### Exercises 5.5.-5.10.
@@ -772,7 +772,7 @@ Show the button for deleting a blog post only if the blog post was added by the 
 只有当用户添加了博客文章时，才显示删除博客文章的按钮。
 
 </div>
-/ div
+
 
 <div class="content">
 
@@ -992,10 +992,10 @@ You can find the code for our current application in its entirety in the <i>part
 您可以在[ this github repository ]的 i part5-7 / i 分支中找到我们当前应用程序的全部代码 https://github.com/fullstack-hy2020/part2-notes/tree/part5-7。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 5.11.-5.12.
 练习5.11-5.12。

@@ -378,10 +378,10 @@ If you clone the project for yourself, run the _npm install_ command before star
 如果您自己克隆项目，请在启动应用程序之前运行 npm install 命令。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 4.1.-4.2.
 练习4.1- 4.2。
@@ -462,7 +462,7 @@ One best practice is to commit your code every time it is in a stable state. Thi
 一个最佳实践是每次代码处于稳定状态时都提交它。 这样可以很容易地回滚到应用程序仍然可以工作的情况。
 
 </div>
-/ div
+
 
 <div class="content">
 
@@ -744,10 +744,10 @@ test('of empty array is zero', () => {
 ```
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 
 ### Exercises 4.3.-4.7.

@@ -690,10 +690,10 @@ GraphQL is already a pretty old technology, having been used by Facebook since 2
 Graphql 已经是一项相当古老的技术了，自2012年以来 Facebook 一直在使用它，所以我们可以把它看作是“经过战斗考验的”。 自从 Facebook 在2015年发布了 GraphQL 之后，它慢慢地得到了越来越多的关注，并且可能在不久的将来威胁到 REST 的统治地位。 Rest 的死亡也已经被[预测]( https://www.stridenyc.com/podcasts/52-is-2018-The-year-graphql-kills-REST )。 尽管这种情况还没有完全发生，但是 GraphQL 绝对值得学习( https://blog.graphqleditor.com/javascript-predictions-for-2019-by-npm/ )。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 8.23.-8.26.
 练习8.23-8.26。

@@ -1141,10 +1141,10 @@ What exactly is happening in that line of code? <em>notes.map(n => n.id)</em> cr
 这行代码中到底发生了什么？ Em notes.map (nn.id) / em 创建一个包含所有注释 id 的新数组。 [ Math.max ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/Math.max )返回传递给它的数的最大值。 然而，em notes.map (nn.id) / em 是一个 i 数组 / i，因此它不能直接作为 Math.max 的参数。 数组可以通过使用“ three dot”[ spread ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/operators/spread_syntax )语法 em... / em 转换为单独的数字。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 
 ### Exercises 3.1.-3.6.
@@ -1258,7 +1258,7 @@ Respond to requests like these with the appropriate status code, and also send b
 ```
 
 </div>
-/ div
+
 
 <div class="content">
 
@@ -1381,10 +1381,10 @@ You can find the code for our current application in its entirety in the <i>part
 您可以在[ this github repository ]的 i part3-2 / i 分支中找到我们当前应用程序的全部代码，该分支位于 https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2文件库中。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 3.7.-3.8.
 练习3.7-3.8。

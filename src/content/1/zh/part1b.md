@@ -291,10 +291,10 @@ During this course we will define all functions using the arrow syntax.
 在本课程中，我们将使用箭头语法定义所有函数。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
   <h3>Exercises 1.3.-1.5.</h3>
 练习1.3-1.5. / 
 
@@ -428,7 +428,7 @@ const App = () => {
 ```
 
 </div>
-/ div
+
 
 <div class="content">
 

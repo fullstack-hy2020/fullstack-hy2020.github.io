@@ -687,10 +687,10 @@ console.log(rest)     // prints [3, 4, 5, 6]
 ```
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 6.1.-6.2.
 练习6.1-6.2。
@@ -833,7 +833,7 @@ Now implement the actual functionality of the application.
 现在实现应用程序的实际功能。
 
 </div>
-/ div
+
 
 <div class="content">
 
@@ -1383,10 +1383,10 @@ The code of the Redux application can be found on [Github](https://github.com/fu
 Redux 应用程序的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/Redux-notes/tree/part6-1) ，branch i part6-1 / i 上找到。
 
 </div>
-/ div
+
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 6.3.-6.8.
 练习6.3-6.8。

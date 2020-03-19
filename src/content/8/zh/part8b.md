@@ -1021,7 +1021,7 @@ useEffect(() => {
 ```
 
 <!-- Tämä ratkaisu ei kuitenkaan toimi, ellei _notify_-funktiota ole määritelty [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-funktioon käärittynä. Jos näin ei tehdä, seurauksena on ikuinen luuppi, sillä aina kun komponentti _App_ renderöidään uudelleen notifikaation poistamisen jälkeen, syntyy <i>uusi versio</i> funktiosta _notify_ ja se taas aiheuttaa efektifunktion uudelleensuorituksen ja taas uuden notifikaation... -->
-<！ -- t m ratkaisu ei kuitenkaan toimi，ellei notify-funktiota ole m ritelty [ useCallback ]( https://reactjs.org/docs/hooks-reference.html#useCallback )-funktioon k rittyn. 在我们的网站上，他们可以通过应用程序在 uudelleen 上提供相关信息，同时通知相关机构，并通知相关机构。 . -->
+
 However this solution does not work is the _notify_-function is not wrapped to a [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-function.  If its not, this results to an endless loop. When the _App_ component is rerendered after a notification is removed, a <i>new version</i> of _notify_ gets created which causes the effect function to be executed which causes a new notification and so on an so on...
 但是这个解决方案不起作用，因为 notify-function 没有封装到[ useCallback ]( https://reactjs.org/docs/hooks-reference.html#useCallback )-function 中。 如果不是，这将导致一个无限循环。 当 App 组件在通知被删除后重新运行时，会创建一个 i new version / i of notify，这会导致 effect 函数被执行，从而导致一个新的通知等等..。
 
@@ -1041,7 +1041,7 @@ When necessary Apollo enables saving the applications local state to [Apollo cac
 
 
 <div class="tasks">
-Div 类”任务”
+
 
 ### Exercises 8.8.-8.12.
 练习8.8-8.12。
@@ -1120,7 +1120,7 @@ A solution using the react-select -library looks as follows:
 
 
 </div>
-/ div
+
 
 =======END=======
 完
