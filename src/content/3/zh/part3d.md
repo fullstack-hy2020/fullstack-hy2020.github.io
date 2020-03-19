@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-Div class"content"
+
 
 
 There are usually constraints that we want to apply to the data that is stored in our application's database. Our application shouldn't accept notes that have a missing or empty <i>content</i> property. The validity of the note is checked in the route handler:
@@ -107,7 +107,7 @@ When validating an object fails, we return the following default error message f
 当验证一个对象失败时，我们从 Mongoose 返回以下缺省错误消息:
 
 ![](../../images/3/50.png)
-! [](. . / . / images / 3 / 50.png)
+
 
 ### Promise chaining
 承诺锁链
@@ -198,7 +198,7 @@ The application should now work. Sometimes things don't go according to plan. If
 应用程序现在应该可以工作了。 有时事情不会按计划进行。 如果有什么问题，我会尽力帮忙的。 我自己的应用程序在进行更改后不工作。 这些日志显示了以下情况:
 
 ![](../../images/3/51a.png)
-! [](. . / . / images / 3 / 51a.png)
+
 
 For some reason the URL of the database was undefined. The <i>heroku config</i> command revealed that I had accidentally defined the URL to the <em>MONGO\_URL</em> environment variable, when the code expected it to be in <em>MONGODB\_URI</em>.
 由于某种原因，数据库的 URL 未定义。 I heroku config / i 命令显示，我不小心定义了 em MONGO  URL / em 环境变量的 URL，而代码希望它位于 em MONGODB  URI / em 中。
@@ -273,7 +273,7 @@ You can display the default error message returned by Mongoose, even though they
 你可以显示 Mongoose 返回的默认错误消息，即使它们并不具有可读性:
 
 ![](../../images/3/56e.png)
-! [](. . / . / images / 3 / 56e.png)
+
 
 
 #### 3.21 Deploying the database backend to production
@@ -291,7 +291,7 @@ Push the latest version to Heroku and verify that everything works there as well
 / div
 
 <div class="content">
-Div class"content"
+
 
 
 ### Lint
@@ -332,7 +332,7 @@ We will answer all of the questions:
 我们将回答所有问题:
 
 ![](../../images/3/52be.png)
-! [](. . / . / images / 3 / 52be.png)
+
 
 
 The configuration will be saved in the _.eslintrc.js_ file:
@@ -428,7 +428,7 @@ Lint has quite a lot to say about our code:
 Lint 对我们的代码有很多要说的:
 
 ![](../../images/3/53ea.png)
-! [](. . / . / images / 3 / 53ea.png)
+
 
 Let's not fix these issues just yet.
 让我们先不要解决这些问题。
@@ -441,7 +441,7 @@ The VS Code ESlint plugin will underline style violations with a red line:
 代码 ESlint 插件会用红线来强调风格的违反:
 
 ![](../../images/3/54a.png)
-! [](. . / . / images / 3 / 54a.png)
+
 
 
 This makes errors easy to spot and fix right away.
@@ -523,7 +523,7 @@ This includes a rule that warns about _console.log_ commands. [Disabling](https:
 当你修改 i。 在 eslintrc.js / i 文件中，建议从命令行运行 linter。 这将验证配置文件的格式是否正确:
 
 ![](../../images/3/55.png)
-! [](. . / . / images / 3 / 55. png)
+
 
 
 If there is something wrong in your configuration file, the lint plugin can behave quite erratically.

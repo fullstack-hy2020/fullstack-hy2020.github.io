@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-Div class"content"
+
 
 Let's go back to working with React.
 让我们回到工作与反应。
@@ -147,7 +147,7 @@ const Hello = (props) => {
 ```
 
 <!-- Eli koska -->
-! -- 伊莱 · 科斯卡 -- 
+
 If the object we are destructuring has the values
 如果我们要析构的对象具有值
 ```js
@@ -399,7 +399,7 @@ It's easy to follow and track the calls made to the _render_ function:
 很容易跟踪和跟踪调用的渲染函数:
 
 ![](../../images/1/4e.png)
-! [](. . / . / images / 1 / 4e.png)
+
 
 ### Event handling
 事件处理
@@ -502,13 +502,13 @@ Our application is now ready!
 
 
 <!-- ### Tapahtumankäsittelijä on funktio -->
-! -- # # # tapahtumank sittelij on funktio -- 
+
 
 ### Event handler is a function
 事件处理程序是一个函数
 
 <!-- Nappien tapahtumankäsittelijät on siis määritelty suoraan <i>onClick</i>-attribuuttien määrittelyn yhteydessä seuraavasti: -->
-! —— nappien tapahtumank sittelij t on siis m ritelty suoraan i onClick / i-attributetien m rittelyn yhteydess seuraavasti: ——
+
 We define the event handlers for our buttons where we declare their <i>onClick</i> attributes:
 我们为按钮定义事件处理程序，声明它们的 ionclick / i 属性:
 
@@ -535,10 +535,10 @@ This would completely break our application:
 这将完全破坏我们的应用程序:
 
 ![](../../images/1/5b.png)
-! [](. . / . / images / 1 / 5b.png)
+
 
 <!-- Mistä on kyse? Tapahtumankäsittelijäksi on tarkoitus määritellä joko <i>funktio</i> tai <i>viite funktioon</i>. Kun koodissa on -->
-! ——云雾笼罩着云雾? 塔帕图马克坐在塔尔克伊图里的塔尔 · 乔科，我的灵魂 / 我的灵魂 / 我
+
 What's going on? An event handler is supposed to be either a <i>function</i> or a <i>function reference</i>, and when we write
 怎么回事？ 事件处理程序应该是一个 i 函数 / i 或一个 i 函数引用 / i，当我们编写时
 
@@ -554,7 +554,7 @@ This will cause the component to be rerendered, react will execute the setCounte
 这将导致组件重新运行，react 将再次执行 setCounter 函数调用，并且状态将发生变化，从而导致另一个重新运行..。
 
 <!-- Palautetaan siis tapahtumankäsittelijä alkuperäiseen muotoonsa -->
-! ——帕拉特塔安 · 西斯塔帕 · 塔帕赫坦克斯特里耶 · 阿尔库佩尔 · 阿尔库佩尔 · 阿尔库佩尔 · 阿尔库托尼萨——
+
 Let's define the event handlers like we did before
 让我们像前面一样定义事件处理程序
 
@@ -565,21 +565,21 @@ Let's define the event handlers like we did before
 ```
 
 <!-- Nyt napin tapahtumankäsittelijän määrittelevä attribuutti <i>onClick</i> saa arvokseen funktion _() => setCounter(counter + 1)_, ja funktiota kutsutaan siinä vaiheessa kun sovelluksen käyttäjä painaa nappia.  -->
-—— nyt napin tapahtumank sittelij n m rittelev attributes i onClick / i saa arvokseen funktion () setCounter (counter + 1) ，ja funktiota kutsutaan siin vaiheessa kun sovelluksen k ytt j painaa napia。 -->
+
 Now the button's attribute which defines what happens when the button is clicked, <i>onClick</i>, has the value _() => setCounter(counter +1)_.
 现在，按钮的属性定义了单击按钮时发生的事情，i onClick / i 的值为() setCounter (counter + 1)。
 The setCounter function is called only when a user clicks the button. 
 只有当用户单击按钮时才调用 setCounter 函数。
 
 <!-- Tapahtumankäsittelijöiden määrittely suoraan JSX-templatejen sisällä ei useimmiten ole kovin viisasta. Tässä tapauksessa se tosin on ok, koska tapahtumankäsittelijät ovat niin yksinkertaisia.  -->
-! —— tapahtumank sittelij iden m rittely suoraan jsx templatejen is ll useimmiten ole kovin viisasta. t ss tapauksessa se tosin on ok，koska tapahank sitteliej t ovat niin yksinkertaisia. ——
+
 Usually defining event handlers within JSX-templates is not a good idea. 
 通常在 JSX-templates 中定义事件处理程序并不是一个好主意。
 Here it's ok, because our event handlers are so simple. 
 这里没问题，因为我们的事件处理程序非常简单。
 
 <!-- Eriytetään kuitenkin nappien tapahtumankäsittelijät omiksi komponentin sisäisiksi apufunktioikseen: -->
-! ——埃里泰特在餐桌上打了个盹，坐在椅子上看着电影: ——
+
 Let's separate the event handlers into separate functions anyway: 
 无论如何，让我们将事件处理程序分离成单独的函数:
 
@@ -608,7 +608,7 @@ const App = (props) => {
 ```
 
 <!-- Tälläkin kertaa tapahtumankäsittelijät on määritelty oikein, sillä <i>onClick</i>-attribuutit saavat arvokseen muuttujan, joka tallettaa viitteen funktioon: -->
-! -- t ll kin kertaa tapahtumank sitteliej t t on m ritelty oikein，i onClick / i-attributes saavat arvokseen muuttujan，joka tallettaa viitteen funktioon: --
+
 Here the event handlers have been defined correctly. The value of the <i>onClick</i> attribute is a variable containing a reference to a function:
 这里已经正确定义了事件处理程序。 I onClick / i 属性的值是一个包含函数引用的变量:
 
@@ -738,26 +738,26 @@ The event handler is passed to the <i>Button</i> component through the _onClick_
 状态的改变导致重新运行
 
 <!-- Kerrataan vielä sovelluksen toiminnan pääperiaatteet.  -->
-—— kerrataan viel sovelluksen to iminnan p periaatet. ——
+
 Let's go over the main principles of how an application works once more.
 让我们再次回顾一下应用程序如何工作的主要原则。
 
 <!-- Kun sovellus käynnistyy, suoritetaan komponentin _App_-koodi, joka luo [useState](https://reactjs.org/docs/hooks-reference.html#usestate)-hookin avulla sovellukselle laskurin tilan _counter_. Komponentti renderöi laskimen alkuarvon 0 näyttävän komponentin _Display_ sekä kolme _Button_-komponenttia, joille se asettaa laskurin tilaa muuttavat tapahtumankäsittelijät. -->
-<！ - Kun sovellus k ynnistyy，suoritetaan komponentin App-koodi，joka luo [ useState ]( https://reactjs.org/docs/hooks-reference.html#useState )-hookin avulla sovellukselle laskurin tilan counter. 显示各种按钮，按钮，按钮，按钮，按钮，按钮，按钮。  -->
+
 When the application starts, the code in _App_ is executed. This code uses an [useState](https://reactjs.org/docs/hooks-reference.html#usestate) - hook to create the application state - value of the counter _counter_.
 当应用程序启动时，执行 App 中的代码。 此代码使用[ useState ]( https://reactjs.org/docs/hooks-reference.html#useState )-hook 创建计数器的应用程序状态值。
 The component renders the _Display_ component. It displays the counter's value (0), and three _Button_ components. The buttons have event handlers, which are used to change the state of the counter.
 该组件呈现 Display 组件。 它显示计数器的值(0)和三个 Button 组件。 这些按钮具有用于更改计数器状态的事件处理程序。
 
 <!-- Kun jotain napeista painetaan, suoritetaan vastaava tapahtumankäsittelijä. Tapahtumankäsittelijä muuttaa komponentin _App_ tilaa funktion _setCounter_ avulla. **Tilaa muuttavan funktion kutsuminen aiheuttaa komponentin uudelleenrenderöitymisen.**  -->
-! -- kun jotain napeista painetaan，suoritetaan vastaava tapahtumank sittelij muuttaa komponentin app tilaa funktion counter avulla. * * tilaa muuttavan funktion kutsuminen aiheuttaa komentin ponudelleenrender itymisen. * * 
+
 When one of the buttons is clicked, the event handler is executed. The event handler changes the state of the _App_ component with the _setCounter_ function. 
 当单击其中一个按钮时，将执行事件处理程序。 事件处理程序使用 setCounter 函数更改 App 组件的状态。
 **Calling a function which changes the state causes the component to rerender.**
 * * 调用一个改变状态的函数会导致组件重新运行。 * * 
 
 <!-- Eli jos painetaan nappia <i>plus</i>, muuttaa napin tapahtumankäsittelijä tilan _counter_ arvoksi 1 ja komponentti _App_ renderöidään uudelleen. Komponentin uudelleenrenderöinti aiheuttaa sen "alikomponentteina" olevien _Display_- ja _Button_-komponenttien uudelleenrenderöitymisen. _Display_ saa propsin arvoksi laskurin uuden arvon 1 ja _Button_-komponentit saavat propseina tilaa sopivasti muuttavat tapahtumankäsittelijät. -->
-1 ja komponentti App render id n uudelleen! —— eli jos painetaan nappia i plus / i，muuttaa napin tapahtumank sittelij tilan counter arvoksi 1 ja komponentti App render id n uudelleen。 “ alikomponentteina” olevien Display-ja Button-komponenttien udellenrender inti aiheuttaa sen“ alikomponentteina”。 展示自己的作品时，你会看到一个按钮，一个按钮，一个按钮，一个按钮。 -->
+1 ja komponentti App render id n uudelleen
 So, if a user clicks the <i>plus</i> button, the button's event handler changes the value of _counter_ to 1, and the _App_ component is rerendered. 
 因此，如果用户单击 i plus / i 按钮，按钮的事件处理程序将 counter 的值更改为1，并重新运行 App 组件。
 This causes its subcomponents _Display_ and _Button_ to also be rerendered. 
@@ -769,7 +769,7 @@ _Display_ receives the new value of the counter, 1, as props. The _Button_ compo
 重构组件
 
 <!-- Laskimen arvon näyttävä komponentti on siis seuraava -->
-! ——拉斯基曼 · 阿尔文和科姆波内蒂在一起——
+
 The component displaying the value of the counter is as follows:
 显示计数器值的组件如下:
 
@@ -782,7 +782,7 @@ const Display = (props) => {
 ```
 
 <!-- Komponentti tarvitsee ainoastaan <i>propsin</i> kenttää _counter_, joten se voidaan yksinkertaistaa [destrukturoinnin](/osa1/komponentin_tila_ja_tapahtumankasittely#destrukturointi) avulla seuraavaan muotoon: -->
-! -- komponentti tarvitsee ainoastaan i propsin / i kentt counter，joten se voidan yksinkertaistaa [ destrukturoinnin ](/ osa1 / komponentin tila ja tapahtumankasittly # destrukturointi) avulla seuraavaan muotoon: --
+
 The component only uses the _counter_ field of its <i>props</i>. 
 该组件只使用其 i props / i 的计数字段。
 This means we can simplify the component by using [destructuring](/en/part1/component_state_event_handlers#destructuring) like so:
@@ -808,7 +808,7 @@ const Display = ({ counter }) => <div>{counter}</div>
 ```
 
 <!-- Vastaava suoraviivaistus voidaan tehdä myös nappia edustavalle komponentille -->
-! -- vastaava suoraviivastus voidahd 我的教育部门 -- 
+
 We can simplify the Button component as well.
 我们也可以简化 Button 组件。
 
@@ -823,7 +823,7 @@ const Button = (props) => {
 ```
 
 <!-- Eli destrukturoidaan <i>props</i>:ista tarpeelliset kentät ja käytetään nuolifunktioiden tiiviimpää muotoa  -->
-! -- eli destrukturoidan i props / i: ista tarpeelliset kent t t ja k tet n nuolifunktioiden tiiviimp muotoa -- 
+
 We can use destructuring to get only the required fields from <i>props</i>, and use the more compact form of arrow functions:
 我们可以使用 destructuring 只从 i props / i 获取所需的字段，并使用更紧凑的箭头函数:
 

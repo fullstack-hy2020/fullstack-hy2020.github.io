@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-Div class"content"
+
 
 
 REST, familiar to us from the previous parts of the course, has long been the most prevalent way to implement the interfaces servers offer for browsers, and in general the integration between different applications on the web. 
@@ -467,13 +467,13 @@ Let's try it out
 让我们试试看
 
 ![](../../images/8/1.png)
-! [](. . / . / images / 8 / 1.png)
+
 
 Sometimes the Playground requires you to be quite pedantic. If the syntax of a query is wrong, the error message is quite unnoticeable and nothing happens when you press go. 
 有时游乐场要求你相当迂腐。 如果查询的语法是错误的，那么错误消息是非常不明显的，当您按 go 时什么也不会发生。
 
 ![](../../images/8/2.png)
-! [](. . / . / images / 8 / 2. png)
+
 
 The result from the previous query stays visible on the right side of the playground even when the current query is faulty. 
 即使当前查询是错误的，前一个查询的结果仍然在操场的右侧可见。
@@ -482,7 +482,7 @@ By pointing at the right place on the line with the errors, you can see the erro
 通过指向带有错误的行上的正确位置，您可以看到错误消息
 
 ![](../../images/8/3.png)
-! [](. . / . / images / 8 / 3.png)
+
 
 If the playground seems to be stuck, refreshing the page usually helps. 
 如果操场似乎卡住了，刷新页面通常会有所帮助。
@@ -491,7 +491,7 @@ By clicking the text <i>DOCS</i> on the right, the playground shows the GraphQL 
 通过单击右侧的文本 i DOCS / i，playground 将显示服务器的 GraphQL 模式。
 
 ![](../../images/8/4e.png)
-! [](. . / . / images / 8 / 4e.png)
+
 
 ### Parameters of a resolver
 # # # 解析器的参数
@@ -853,7 +853,7 @@ If we try to create a new person, but the parameters do not correspond with the 
 如果我们尝试创建一个新人，但是参数不符合模式描述，服务器会给出一个错误消息:
 
 ![](../../images/8/5.png)
-! [](. . / . / images / 8 / 5.png)
+
 
 
 So some of the error handling can be automatically done with GraphQL [validation](https://graphql.org/learn/validation/).
@@ -899,7 +899,7 @@ So if the name to be added already exists in the phonebook, throw _UserInputErro
 因此，如果要添加的名称已经存在于电话簿中，则抛出 userinputterror 错误。
 
 ![](../../images/8/6.png)
-! [](. . / . / images / 8 / 6.png)
+
 
 
 The current code of the application can be found on [ Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-2), branch <i>part8-2</i>.
@@ -1118,7 +1118,7 @@ If there are multiple queries, Playground asks you to choose which of them to ru
 如果有多个查询，Playground 会让你选择运行哪个查询:
 
 ![](../../images/8/7.png)
-! [](. . / . / images / 8 / 7.png)
+
 
 </div>
 / div

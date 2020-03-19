@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-Div class"content"
+
 
 In addition to the eight exercises in the [React router](/en/part7/react_router) and [custom hooks]() sections of this seventh part of the course material, there are 13 exercises that continue our work on the Bloglist application that we worked on in parts four and five of the course material. Some of the following exercises are "features" that are independent of one another, meaning that there is no need to finish the exercises in any particular order. You are free to skip over a part of the exercises if you wish to do so.
 除了课程材料第七部分[ React router ](/ en / part7 / React router)和[ custom hooks ]()的八个练习之外，还有13个练习继续我们在课程材料第四部分和第五部分所做的 Bloglist 应用程序的工作。 下面的一些练习是相互独立的“特征” ，这意味着没有必要按照任何特定的顺序完成练习。 如果你愿意，你可以跳过这些练习的一部分。
@@ -72,7 +72,7 @@ Implement a view to the application that displays all of the basic information r
 实现应用程序的视图，该视图显示与用户相关的所有基本信息:
 
 ![](../../images/7/41.png)
-! [](. . / . / images / 7 / 41.png)
+
 
 #### 7.14: Individual user view
 7.14: 个人用户视图
@@ -81,19 +81,19 @@ Implement a view for individual users, that displays all of the blog posts added
 为个人用户实现一个视图，显示该用户添加的所有博客文章:
 
 ![](../../images/7/44.png)
-! [](. . / . / images / 7 / 44.png)
+
 
 You can access the view by clicking the name of the user in the view that lists all users:
 您可以通过单击列出所有用户的视图中的用户名来访问该视图:
 
 ![](../../images/7/43.png)
-! [](. . / . / images / 7 / 43. png)
+
 
 <i>**NB:**</i> you will almost certainly stumble across the following error message during this exercise:
 注意: 在这个练习中，你几乎肯定会发现以下错误消息:
 
 ![](../../images/7/42ea.png)
-! [](. . / . / images / 7 / 42ea.png)
+
 
 The error message will occur if you refresh the page for an individual user.
 如果为单个用户刷新页面，将出现错误消息。
@@ -126,13 +126,13 @@ Implement a separate view for blog posts. You can model the layout of your view 
 .
 .
 ![](../../images/7/45.png)
-! [](. . / . / images / 7 / 45. png)
+
 
 Users should be able to access the view by clicking the name of the blog post in the view that lists of all of the blog posts.
 用户应该能够通过单击视图中所有博客文章列表中的博客文章的名称来访问该视图。
 
 ![](../../images/7/46.png)
-! [](. . / . / images / 7 / 46.png)
+
 
 After you're done with this exercise, the functionality that was implemented in exercise 5.6 is no longer necessary. Clicking a blog post no longer needs to expand the item in the list and display the details of the blog post.
 完成这个练习之后，就不再需要练习5.6中实现的功能了。 单击博客文章不再需要展开列表中的项目并显示博客文章的详细信息。
@@ -144,7 +144,7 @@ Implement a navigation menu for the application:
 为应用程序实现一个导航菜单:
 
 ![](../../images/7/47.png)
-! [](. . / . / images / 7 / 47. png)
+
 
 #### 7.17: comments, step1
 7.17: 评论，第一步
@@ -153,7 +153,7 @@ Implement the functionality for commenting on blog posts:
 实现评论博客文章的功能:
 
 ![](../../images/7/48.png)
-! [](. . / . / images / 7 / 48. png)
+
 
 Comments should be anonymous, meaning that they are not associated to the user who left the comment.
 注释应该是匿名的，这意味着它们与留下注释的用户没有关联。
@@ -171,7 +171,7 @@ Extend your application so that users can add comments to blog posts from the fr
 扩展你的应用程序，让用户可以从前端向博客文章添加评论:
 
 ![](../../images/7/49.png)
-! [](. . / . / images / 7 / 49. png)
+
 
 #### 7.19: Styles, step1
 7.19: Styles，step1

@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-Div class"content"
+
 
 
 We will now add user management to our application, but let's first start using a database for storing data.
@@ -350,7 +350,7 @@ In the GraphQL-playground the header is added to a query like so
 在 graphql 操场中，头部被添加到查询中，如下所示
 
 ![](../../images/8/24.png)
-! [](. . / . / images / 8 / 24. png)
+
 
 
 Let's now expand the definition of the _server_ object by adding a third parameter [context](https://www.apollographql.com/docs/apollo-server/data/data/#context-argument) to the constructor call:

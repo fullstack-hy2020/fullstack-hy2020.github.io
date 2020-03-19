@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-div class"content"
+
 
 
 There are many different ways of testing React applications. Let's take a look at them next.
@@ -200,7 +200,7 @@ The third way is to search for a specific element that is rendered by the compon
 第三种方法是搜索由组件呈现的特定元素，该组件使用[ querySelector ]( https://developer.mozilla.org/en-us/docs/web/api/document/querySelector )方法，该方法接收[ CSS 选择器]( https://developer.mozilla.org/en-us/docs/web/CSS/css_selectors )作为其参数。
 
 <!-- Kaksi viimeistä tapaa siis hakevat metodien <i>getByText</i> ja <i>querySelector</i> avulla renderöidystä komponentista jonkin ehdon täyttävän elementin. Vastaavalla periaatteella toimivia "query"-metodeja, on tarjolla [lukuisia](https://testing-library.com/docs/dom-testing-library/api-queries). -->
-! —— kaksi viimist tapais sikevat metodien i getByText / i ja i querySelector / i avulla render idyst komponentista jonkin don’ t t ytt v n elementin。 Vastavalla periaatteella toimivia“ query”-metodeja，on tarjolla [ lukuisia ]( https://testing-library.com/docs/dom-testing-library/api-queries )。 -->
+
 The last two methods use the methods <i>getByText</i> and <i>querySelector</i> to find an element matching some condition from the rendered component. 
 最后两个方法使用 i getByText / i 和 i querySelector / i 方法从呈现的组件中查找匹配某些条件的元素。
 There are numerous similiar query methods [available](https://testing-library.com/docs/dom-testing-library/api-queries).
@@ -508,7 +508,7 @@ The _getByText_ method that we used is just one of the many [queries](https://te
 测试表格
 
 <!-- Käytimme jo edellisissä testeissä [fireEvent](https://testing-library.com/docs/api-events#fireevent)-funktiota nappien klikkaamiseen: -->
-! -- k ytimme jo edelliiss testeiss fireevent https: / / testing-library. com / docs / api-events # fireevent-funktiota nappien klikkamiseen: -- 
+
 We already used the [fireEvent](https://testing-library.com/docs/api-events#fireevent) function in our previous tests to click buttons.
 在前面的测试中，我们已经使用了[ fireEvent ]( https://testing-library.com/docs/api-events#fireEvent )函数来单击按钮。
 
@@ -518,14 +518,14 @@ fireEvent.click(button)
 ```
 
 <!-- Käytännössä siis loimme <i>fireEventin</i> avulla tapahtuman <i>click</i> nappia vastaavalle komponentille. Voimme myös simuloida lomakkeisiin kirjoittamista <i>fireEventin</i> avulla. -->
-—— k yt nn ss siis loimme i fireEventin / i avulla tapahtuman i click / i nappia vastavalle komponentille
+
 In practice we used the <i>fireEvent</i> to create a <i>click</i> event for the button component. 
 实际上，我们使用 i fireEvent / i 为按钮组件创建 i click / i 事件。
 We cal also simulate text input with <i>fireEvent</i>.
 我们还使用 i fireEvent / i 来模拟文本输入。
 
 <!-- Tehdään testi komponentille <i>NoteForm</i>. Lomakkeen koodi näyttää seuraavalta -->
-! ——测试我的笔记 / 表格
+
 Let's make a test for the <i>NoteForm</i> component. The code of the component is as follows
 让我们对 i NoteForm / i 组件进行测试
 
@@ -568,12 +568,12 @@ export default NoteForm
 ```
 
 <!-- Lomakkeen toimintaperiaatteena on kutsua sille propsina välitettyä funktiota _createNote_ uuden muistiinpanon tiedot parametrina. -->
-! —— lomackin toimintaperiatteena on kutsua sille propinsina v lietty funktiota createnote uuden muistiinpanon tiedot 急救中心——
+
 The form works by calling the _createNote_ function it received as props with the details of the new note.
 该表单通过调用作为道具接收的 createNote 函数以及新注释的细节来工作。
 
 <!-- Testi on seuraavassa: -->
-! -- 在修罗瓦萨上测试: -- 
+
 The test is as follows:
 测试内容如下:
 
@@ -604,12 +604,12 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
 ```
 
 <!-- Syötekenttään <i>input</i> kirjoittamista simuloidaan tekemällä syötekenttään tapahtuma <i>change</i> ja määrittelemällä sopiva olio, joka määrittelee syötekenttään 'kirjoitetun' sisällön. -->
-! —— sy tekentt n i kirjoittamista simuloidaan tekem ll sy tekentt n tapahtuma i change / i ja m rittelem ll sopiva olio，joka m rittelee tekentt n‘ kirjoitetun’ ll joitetun。——
+
 We can simulate writing to <i>input</i> fields by creating an <i>change</i> event to them, and defining an object, which contains the text 'written' to the field.
 我们可以通过为 i input / i 字段创建一个 i change / i 事件，并定义一个包含写入字段的文本的对象来模拟对 i input / i 字段的写入。
 
 <!-- Lomake lähetetään simuloimalla tapahtuma <i>submit</i> lomakkeelle. -->
-! ——洛马克，我向你提交同样的请求。——
+
 The form is sent by simulating the <i>submit</i> event to the form.
 表单通过模拟 i submit / i 事件发送到表单。
 
@@ -624,7 +624,7 @@ The second expectation checks, that the event handler is called with the right p
 测试覆盖范围
 
 <!-- [Testauskattavuus](https://github.com/facebookincubator/create-react-app/blob/ed5c48c81b2139b4414810e1efe917e04c96ee8d/packages/react-scripts/template/README.md#coverage-reporting) saadaan helposti selville suorittamalla testit komennolla -->
-! —— testauskattavuus https: / / github. com / facebook.com incubator / create-react-app / blob / ed5c48c81b2139b4414810e1efe917e04c96ee8d / packages / react-scripts / template / readme.md # coverage-reporting saadaan posti selville testitalla t komennoella ——
+
 We can easily find out the [coverage](https://github.com/facebookincubator/create-react-app/blob/ed5c48c81b2139b4414810e1efe917e04c96ee8d/packages/react-scripts/template/README.md#coverage-reporting)
 我们可以很容易地找到[覆盖 https://github.com/facebookincubator/create-react-app/blob/ed5c48c81b2139b4414810e1efe917e04c96ee8d/packages/react-scripts/template/readme.md#coverage-reporting ]
 of our tests by running them with the command
@@ -636,7 +636,7 @@ CI=true npm test -- --coverage
 ```
 
 ![](../../images/5/18ea.png)
-! [](. . / . / images / 5 / 18ea.png)
+
 
 <!-- Melko primitiivinen HTML-muotoinen raportti generoituu hakemistoon <i>coverage/lcov-report</i>. HTML-muotoinen raportti kertoo mm. yksittäisen komponenttien testaamattomat koodirivit: -->
 ——原始梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔
@@ -646,7 +646,7 @@ The report will tell us i.e the lines of untested code in each component:
 该报告将告诉我们，即每个组件中未经测试的代码行:
 
 ![](../../images/5/19ea.png)
-! [](. . / . / images / 5 / 19ea.png)
+
 
 
 You can find the code for our current application in its entirety in the <i>part5-8</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-8).
@@ -670,7 +670,7 @@ Make a test, which checks that the component displaying a blog renders the blog'
 做一个测试，检查显示博客的组件是否呈现了博客的标题和作者，但默认情况下不呈现其 url 或赞数
 
 <!-- Lisää komponenttiin tarvittaessa testausta helpottavia CSS-luokkia. -->
-! —— lis komponenttiin tarvittaessa testausta helpottavia csss-luokkia. ——
+
 Add CSS-classes to the component to help the testing as necessary. 
 向组件中添加 css 类以帮助进行必要的测试。
 
@@ -686,7 +686,7 @@ Make a test, which checks that blog's url and number of likes are shown when the
 5.15: 博客列表测试，第二步
 
 <!-- Tee testi, joka varmistaa, että jos komponentin <i>like</i>-nappia painetaan kahdesti, komponentin propsina saamaa tapahtumankäsittelijäfunktiota kutsutaan kaksi kertaa. -->
-! -- tee testi，joka varmistaga，ett jos komponentin i like / i-nappia painetaan kahdesti，komponentin sina propsaamaa tapahtumank sittelij funktiota kutaan kaksi kertaa. --
+
 Make a test which ensures that if the <i>like</i> button is clicked twice, the event handler the component received as props is called twice. 
 进行一个测试，确保如果单击 i like / i 按钮两次，那么作为道具接收的组件的事件处理程序将被调用两次。
 
@@ -694,12 +694,12 @@ Make a test which ensures that if the <i>like</i> button is clicked twice, the e
 5.16 * : 博客列表测试，第三步
 
 <!-- Tee uuden blogin luomisesta huolehtivalle lomakkelle testi, joka varmistaa, että lomake kutsuu propseina saamaansa takaisinkutsufunktiota oikeilla tiedoilla siinä vaiheessa kun blogi luodaan. -->
-! -- tee uuden blogin luomisesta huolehtivalle lomakkelle testi，joka varmistaga，ett lomake kutsuu propseina saamaaisinkutsufunktiota oiilla tiedoiilla siin vaiheessa kun blogi lodaan. --
+
 Make a test for the new blog form. The test should check, that the form calls the event handler it received as props with the right details when a new blog is called. 
 为新的博客表单做一个测试。 测试应该检查，当调用新博客时，表单是否使用正确的细节调用它作为道具接收的事件处理程序。
 
 <!-- Jos esim. määrittelet <i>input</i>-elementille id:n 'author': -->
-! -- jos esim.m rittelet i input / i-elementile id: n‘ author’ : -- 
+
 If, for example, you give an <i>input</i> element id 'author':
 例如，如果你给出一个 i input / i 元素 id‘ author’ :
 
@@ -712,7 +712,7 @@ If, for example, you give an <i>input</i> element id 'author':
 ```
 
 <!-- saat haettua kentän testissä seuraavasti -->
-! -- saat haettua kent n testiss seuraavasti -- 
+
 You can access the contents of the field with
 您可以使用以下命令访问字段的内容:
 
@@ -724,7 +724,7 @@ const author = component.container.querySelector('#author')
 / div
 
 <div class="content">
-div class"content"
+
 
 ### Frontend integration tests
 # # 前端集成测试

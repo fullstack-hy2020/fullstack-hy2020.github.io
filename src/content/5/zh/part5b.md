@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-div class"content"
+
 
 
 ### Displaying the login form only when appropriate
@@ -17,14 +17,14 @@ Let's modify the application so that the login form is not displayed by default:
 让我们修改应用程序，使登录表单在默认情况下不显示:
 
 ![](../../images/5/10e.png)
-! [](. . / . / images / 5 / 10e.png)
+
 
 
 The login form appears when the user presses the <i>login</i> button:
 当用户按下 i login / i 按钮时，登录表单就会出现:
 
 ![](../../images/5/11e.png)
-! [](. . / . / images / 5 / 11e.png)
+
 
 
 The user can close the login form by clicking the <i>cancel</i> button.
@@ -337,12 +337,12 @@ You can find the code for our current application in its entirety in the <i>part
 表格的状态
 
 <!-- Koko sovelluksen tila on nyt sijoitettu komponenttiin _App_.  -->
-! -- koko sovelluksen tila on nyt sijoitettu komponenttiin app. -- 
+
 The state of the application currently is in the _App_ component.
 应用程序的状态当前位于 App 组件中。
 
 <!-- Reactin dokumentaatio antaa seuraavan [ohjeen](https://reactjs.org/docs/lifting-state-up.html) tilan sijoittamisesta: -->
-! -- reactin dokumentaatio antaura seuraavan ohjeen https: / / reactjs. org / docs / lifting-state-up. html tilan sijoittamisesta: --
+
 React documentation says the [following](https://reactjs.org/docs/lifting-state-up.html) about where to place the state:
 反应文档说[以下]( https://reactjs.org/docs/lifting-state-up.html )关于在哪里放置国家:
 
@@ -350,14 +350,14 @@ React documentation says the [following](https://reactjs.org/docs/lifting-state-
 通常，几个组件需要反映相同的变化数据。 我们建议将共享状态提升到它们最接近的共同祖先。 我
 
 <!-- Jos mietitään lomakkeiden tilaa, eli esimerkiksi uuden muistiinpanon sisältöä sillä hetkellä kun muistiinpanoa ei vielä ole luotu, ei komponentti _App_ oikeastaan tarvitse niitä mihinkään, ja voisimme aivan hyvin siirtää tilan lomakkeisiin liittyvän tilan niitä vastaaviin komponentteihin. -->
-! —— jos mietid n lomakeiden tilaa，eli esimerkiksi uuuuuden muistiinpanon 依然是 hetkell kun muistiinoa ei viel luotu，ei komponentti app oikeastaan tarvitse niit mihink，ja voisimme aivan hyvin siirt tilan lomakein liittyv niit niit vastaivinkomponentteihinh ——
+
 If we think about the state of the forms, so for example the contents of a new note before it has been created, the _App_ component does not actually need it for anything. 
 如果我们考虑一下表单的状态，例如一个新笔记的内容在创建之前，App 组件实际上并不需要它做任何事情。
 We could just as well move the state of the forms to the corresponding components. 
 我们也可以将表单的状态移动到相应的组件中。
 
 <!-- Muistiinpanosta huolehtiva komponentti muuttuu seuraavasti: -->
-! —— muistiinpanosta huolehtiva komponentti muuttuu seuraavasti: -- 
+
 The component for a note changes like so: 
 音符的组件变化如下:
 
@@ -398,17 +398,17 @@ const NoteForm = ({ createNote }) => {
 ```
 
 <!-- Tilan muuttuja <i>newNote</i> ja sen muutokseta huolehtiva tapahtumankäsittelijä on siirretty komponentista _App_ lomakkeesta huolehtivaan komponenttiin. -->
-—— tilan muuttuja i newNote / i ja sen muutokseta huolehtiva tapahtumank sittelij on siirretty komponentista App lomakeesta huolehtivaan komponenttiin. ——
+
 The <i>newNote</i> state attribute and the event handler responsible for changing it have been moved from the _App_ component to the component responsible for the note form. 
 I newNote / i state 属性和负责更改它的事件处理程序已经从 App 组件移动到负责记录表单的组件。
 
 <!-- Propseja on enää yksi, funktio _createNote_, jota lomake kutsuu kun uusi muistiinpano luodaan. -->
-! -- prosseja on yksi，funktio createnote，jota lomake kutsuu kun uusi muistiinpano lodaan. -- 
+
 There is only one prop left, the _createNote_ function, which the form calls when a new note is created. 
 现在只剩下一个道具，即 createNote 函数，当创建新便条时，表单将调用该函数。
 
 <!-- Komponentti _App_ yksintertaistuu, tilasta <i>newNote</i> ja sen käsittelijäfunktiosta on päästy eroon. Uuden muistiinpanon luomisesta huolehtiva funktio _addNote_ saa suoraan parametriksi uuden muistiinpanon ja funktio on ainoa props, joka välitetään lomakkeelle: -->
-! -- komponentti app yksintertaistuu，tilasta i newNote / i ja sen k sittelij funktiosta on p sty eroon. 在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文
+
 The _App_ component becomes simpler now that we have got rid of the <i>newNote</i> state and its event handler. 
 既然我们已经摆脱了 i newNote / i 状态及其事件处理程序，那么 App 组件就变得更简单了。
 The _addNote_ function for creating new notes receives a new note as a parameter, and the function is the only prop we send to the form: 
@@ -436,12 +436,12 @@ const App = () => {
 ```
 
 <!-- Vastaava muutos voitaisiin tehdä myös kirjautumislomakkeelle, mutta jätämme sen vapaaehtoiseksi harjoitustehtäväksi. -->
-! —— vastaava muutos voitaisiidis 告诉我的女儿，必须让我的女儿 vastaehtoiseksi harjoitusteht v ksi. ——
+
 We could do the same for the log in form, but we'll leave that for an optional exercise. 
 我们可以对 log in 表单执行同样的操作，但是我们将把它留给一个可选练习。
 
 <!-- Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5), branchissa <i>part5-5</i>. -->
-! —— sovelluksen t m nhetkinen koodi on kokonaisuudessaan github https: / / fullstack-hy2020 / part2-notes / tree / part5-5，branchissa i part5-5 / i. ——
+
 The application code can be found from [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5),
 应用程序代码可以从[ github ]( https://github.com/fullstack-hy2020/part2-notes/tree/part5-5)中找到,
 branch <i>part5-5</i>.
@@ -597,7 +597,7 @@ We create <i>three separate instances of the component</i> that all have their o
 我们创建了三个独立的 component / i 实例，它们都有自己的独立状态:
 
 ![](../../images/5/12e.png)
-! [](. . / . / images / 5 / 12e.png)
+
 
 
 The <i>ref</i> attribute is used for assigning a reference to each of the components in the variables <i>togglable1</i>, <i>togglable2</i> and <i>togglable3</i>.
@@ -624,13 +624,13 @@ By default the form is not visible
 默认情况下，窗体不可见
 
 ![](../../images/5/13ae.png)
-! [](. . / . / images / 5 / 13ae.png)
+
 
 It expands when button <i>new note</i> is clicked
 当单击 i new note / i 按钮时，它会扩展
 
 ![](../../images/5/13be.png)
-! [](. . / . / images / 5 / 13be.png)
+
 
 The form closes when a new blog is created.
 当创建新博客时，表单将关闭。
@@ -639,14 +639,14 @@ The form closes when a new blog is created.
 5.6 Blog list frontend，step6
 
 <!-- Eriytä uuden blogin luomisesta huolehtiva lomake omaan komponenttiinsa (jos et jo ole niin tehnyt), ja siirrä kaikki uuden blogin luomiseen liittyvä tila komponentin vastuulle.  -->
-—— eryt uuuuuuden blogin luomisesta huolehtiva lomache lomaka komantiinsa jos et jo ole niin tehnyt，ja siirr kaikki uuden blogin luomiseen liittyv tila komponentin vastuulle. ——
+
 Separate the form for creating a new blog into its own component (if you have not already done so), and 
 将创建新 blog 的表单分离到它自己的组件中(如果您还没有这样做) ，并
 move all the states required for creating a new blog to this component. 
 将创建新博客所需的所有州移动到此组件。
 
 <!-- Komponentin tulee siis toimia samaan tapaan kuin tämän osan [materiaalin](http://localhost:8000/osa5/props_children_ja_proptypet#lomakkeiden-tila) komponentin <i>NewNote</i>. -->
-! —— komponentin tulee siis toimia samaan tapaan kumin t um san materialin http: / / localhost: 8000 / osa5 / proptypet / children ja proptypet # lomakkeiden-tila komponentin i NewNote / i. ——
+
 The component must work like the <i>NewNote</i> component from the [material](/osa5/props_children_ja_proptypet#lomakkeiden-tila) of this part.
 这个组件必须像这个部件的[ material ](/ osa5 / proptypet children ja # lomakkeiden-tila)中的 i / NewNote / i 组件那样工作。
 
@@ -659,15 +659,15 @@ Let's add each blog a button, which controls if all of the details about the blo
 让我们为每个博客添加一个按钮，用于控制是否显示博客的所有细节。
 
 <!-- Klikkaamalla nappia sen täydelliset tiedot aukeavat. -->
-! —— klikkaamalla nappia sen t ydelliset tiedot aukeavat. ——
+
 Full details of the blog open when the button is clicked.
 点击按钮时打开博客的详细信息。
 
 ![](../../images/5/13ea.png)
-! [](. . / . / images / 5 / 13ea.png)
+
 
 <!-- Uusi napin klikkaus pienentää näkymän. -->
-! -- uusi napin klikkaus pienent n kym -- 
+
 And the details are hidden when the button is clicked again. 
 当再次单击按钮时，细节将被隐藏。
 
@@ -763,7 +763,7 @@ Your application could look something like this:
 您的应用程序可以是这样的:
 
 ![](../../images/5/14ea.png)
-! [](. . / . / images / 5 / 14ea.png)
+
 
 The confirmation dialog for deleting a blog post is easy to implement with the [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) function.
 用于删除博客文章的确认对话框很容易通过[ window.confirm ]( https://developer.mozilla.org/en-us/docs/web/api/window/confirm )函数实现。
@@ -775,7 +775,7 @@ Show the button for deleting a blog post only if the blog post was added by the 
 / div
 
 <div class="content">
-div class"content"
+
 
 ### PropTypes
 # # PropTypes
@@ -819,7 +819,7 @@ The console will display the following error message if the prop is left undefin
 控制台将显示以下错误信息，如果道具没有定义:
 
 ![](../../images/5/15.png)
-! [](. . / . / images / 5 / 15. png)
+
 
 
 The application still works and nothing forces us to define props despite the PropTypes definitions. Mind you, it is extremely unprofessional to leave <i>any</i> red output to the browser console.
@@ -854,7 +854,7 @@ If the type of a passed prop is wrong, e.g. if we try to define the <i>handleSub
 如果传递的道具的类型是错误的，例如，如果我们试图将 i handleSubmit / i 道具定义为一个字符串，那么这将导致以下警告:
 
 ![](../../images/5/16.png)
-! [](. . / . / images / 5 / 16.png)
+
 
 ### ESlint
 埃斯林特
@@ -964,13 +964,13 @@ Compomnent _Togglable_ causesa a nasty looking warning <i>Component definition i
 组件定义缺少显示名 / i:
 
 ![](../../images/5/25ea.png)
-! [](. . / . / images / 5 / 25ea.png)
+
 
 The react-devtools also reveals that the component does not have name:
 React-devtools 还显示组件没有名称:
 
 ![](../../images/5/25ea.png)
-! [](. . / . / images / 5 / 25ea.png)
+
 
 Fortunately this is easy to fix
 幸运的是，这个问题很容易解决

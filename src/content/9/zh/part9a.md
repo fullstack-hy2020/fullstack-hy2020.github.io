@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-Div class"content"
+
 
 <!-- TypeScript is a programming language created by Microsoft, designed for the development of large JavaScript applications. For instance, Microsoft has written both the _Azure Management Portal_ (1,2 million lines of code) and the _Visual Studio Code_ (300 000 lines of code) applications using TypeScript. To support building large-scale JavaScript applications, TypeScript offers e.g. better development-time tooling, static code analysis, compile-time type checking and code level documentation. -->
 例如，微软已经使用 typest. 编写了 azure 管理门户1200万行代码和 visual studio 代码30万行代码应用程序。为了支持构建大规模的 javascript 应用程序，typescript 提供了更好的开发时间、静态代码分析、编译时类型检查和代码级文档等功能
@@ -36,17 +36,17 @@ TypeScript consists of three separate, but mutually fulfilling parts:
 - 语文服务
 
 ![](../../images/9/1.png)
-! [](. . / . / images / 9 / 1.png)
+
 
 <i>The language</i> concists of syntax, keywords and type annotations. The syntax is similar to but not the same as JavaScript syntax. From the three parts of TypeScript programmers have the most direct contact with the language. 
 I 语法、关键字和类型注释的语言 / i 协调。 语法类似于 JavaScript 语法，但不一样。 从打字稿的三个部分来看，程序员与这门语言有着最直接的接触。
 
 <!-- **The compiler** is responsible for type information erasure and the code transformations which enable TypeScript code to be transpiled into executable JavaScript-code. In other words, TypeScript isn't actually genuine statically typed code, because everything related to the types is removed at compile-time. -->
-! -- * * 编译器 * * 负责类型信息擦除和代码转换，这些代码转换使得 typescript 代码可以转换为可执行的 javascript 代码。换句话说，typescript 实际上并不是真正的静态类型代码，因为所有与类型相关的代码都会在编译时删除。 --
+
 <!-- Traditionally, when speaking of _compiling_, it means that code is transformed from a human readable format to a machine readable format. In TypeScript's case the human readable source code is transformed into another human readable source code, so the correct term to be used should be _transpiling_, but compiling has risen to the most commonly known term in this context, so we will continue using the same term. -->
 在打字稿的例子中，人类可读的源代码被转换成另一个人类可读的源代码，因此正确的术语应该是 transpiling，但是编译已经上升到这个上下文中最常见的术语，所以我们将继续使用相同的 term-- 
 <!-- The compiler also performs a static code analysis, so it can emit warnings or errors if it finds a reason to do so, and it can be set to perform additional tasks such as combining the generated code into a single file. -->
-! -- 编译器还执行静态代码分析，因此如果它找到这样做的原因，它可以发出警告或错误，并且可以设置它来执行其他任务，例如将生成的代码合并到单个文件中
+
 <i>The compiler</i> is responsible for type information erasure (i.e. removing the typing information) and the code transformations. The code transformations enable TypeScript code to be transpiled into executable JavaScript. Everything related to the types is removed at compile-time, so TypeScript isn't actually genuine statically typed code. 
 I 编译器 / i 负责类型信息擦除(即删除类型信息)和代码转换。 代码转换使得 TypeScript 代码可以转换成可执行的 JavaScript。 所有与类型相关的代码都在编译时删除，所以 TypeScript 实际上不是真正的静态类型代码。
 
@@ -66,7 +66,7 @@ I 语言服务 / i 从源代码中收集类型信息。 开发工具可以使用
 主要语言功能
 
 <!-- Here we described some of the key features of the TypeScript language. This description is intended to provide you with some basic knowledge that will help you understand more of what is to come during this course. -->
-! -- 这里我们描述了打字稿语言的一些关键特性。本文的目的是为您提供一些基本知识，帮助您更好地理解这个课程中将要发生的事情
+
 In this section we will describe some of the key features of the TypeScript language. The intent is to provide you with basic understanding of TypeScripts' 
 在本节中，我们将描述打字稿语言的一些关键特性。 目的是让你对打字稿有基本的了解
 key features to help you understand more of what is to come during this course.
@@ -100,7 +100,7 @@ console.log(birthdayGreeter(birthdayHero, 22));
 结构类型
 
 <!-- TypeScript is a structurally typed language. In structural typing, an element is considered to be compatible with another if  for each feature within the second element's type, a corresponding and identical feature exists in the first element's type. Two types are considered to be identical if each is compatible with the other. -->
-! -- typescript 是一种结构类型的语言。在结构类型中，一个元素被认为是与另一个元素兼容的，如果第二个元素的类型中的每个特征对应一个相同的特征存在于第一个元素的类型中
+
 TypeScript is a structurally typed language. In structural typing two elements are considered to be compatible with oneanother if for each feature within the type of the first element a corresponding and identical feature exists within the type of the second element. Two types are considered to be identical if they are compatible with each other.
 是一种结构类型化语言。 在结构类型中，如果第一个元素的类型中的每个特征在第二个元素的类型中存在对应的、相同的特征，则认为两个元素相互兼容。 如果两种类型彼此兼容，则认为它们是相同的。
 
@@ -108,14 +108,14 @@ TypeScript is a structurally typed language. In structural typing two elements a
 类型推断
 
 <!-- In TypeScript, the compiler can attempt to infer the type information if no explicit type has been specified. The inference is done based on the assigned value and it's usage. -->
-! -- 在打字稿中，如果没有指定显式类型，编译器可以尝试推断类型信息
+
 <!-- The type inference takes place when initializing variables and members, setting parameter default values, and determining function return types. -->
-! -- 类型推断发生在初始化变量和成员、设置参数默认值和确定函数返回类型时
+
 The TypeScript compiler can attempt to infer the type information if no type has been specified. Variable's type can be inferred based on its assigned value and its usage. The type inference take place when initializing variables and members, setting parameter default values, and determining function return types.
 如果没有指定类型，TypeScript 编译器可以尝试推断类型信息。 变量的类型可以根据它的赋值和用法来推断。 类型推断发生在初始化变量和成员、设置参数默认值和确定函数返回类型时。
 
 <!-- As an example consider the function <i>add</i> -->
-! -- 作为一个例子，考虑函数 i add / i -- 
+
 For example consider the function <i>add</i>
 例如，考虑函数 i add / i
 
@@ -133,7 +133,7 @@ The function's return value is inferred by retracing the code back to the return
 通过将代码回溯到返回表达式，可以推断函数的返回值。 返回表达式执行参数 a 和 b 的加法操作。 我们可以看到 a 和 b 是基于它们的类型的数字。 因此，我们可以推断返回值为 i number / i 类型。
 
 <!-- As a more complex example let us consider the code below. If you have not used TypeScript before, this example might be a bit complex. But do not worry, you can safely skip this example for now.  -->
-! ——作为一个更复杂的例子，让我们考虑下面的代码。如果您以前没有使用过打字稿，那么这个例子可能有点复杂。但是不用担心，您现在可以安全地跳过这个例子。 --
+
 As a more complex example let's consider the code below. If you have not used TypeScript before, this example might be a bit complex. But do not worry, you can safely skip this example for now.
 作为一个更复杂的示例，让我们考虑下面的代码。 如果您以前没有使用过打字稿，那么这个示例可能有点复杂。 但是不用担心，您现在可以安全地跳过这个例子。
 
@@ -151,19 +151,19 @@ func((result) => {
 ```
 
 <!-- There is a declaration for a [type alias](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases) called <i>CallsFunction</i>, which is a function type with one parameter named <i>callback</i>. The parameter <i>callback</i> is of the type function that takes a string parameter and returns [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) value. As we will learn later in this part <i>any</i> is a kind of "wildcard" type that can represent any type. -->
-! -- 类型别名 https: / / www.typescriptlang. org / docs / handbook / advanced-types. html # type-aliases called i CallsFunction / i，这是一个函数类型，其中一个参数名为 i callback / i。 参数 i callback / i 是类型函数，它接受一个字符串参数并返回[ any ]( http://www.typescriptlang.org/docs/handbook/basic-types.html#any )值。 正如我们将在本部分后面了解到的，i any / i 是一种可以表示任何类型的“通配符”类型。 -->
+
 First we have a declaration of a [type alias](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases) called <i>CallsFunction</i>.
 首先，我们有一个名为 i CallsFunction / i 的[ type alias ]( https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases )声明。
 CallsFunction is a function type with one parameter <i>callback</i>. The parameter <i>callback</i> is of type function which takes a string parameters and returns [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) value.  As we will learn later in this part <i>any</i> is a kind of "wildcard" type that can represent any type.
 Callsfunction 是带有一个参数 i callback / i 的函数类型。 参数 i callback / i 是一个类型为 function 的函数，它接受一个字符串参数并返回[ any ]( http://www.typescriptlang.org/docs/handbook/basic-types.html#any )值。 正如我们将在本部分后面了解到的，i any / i 是一种可以表示任何类型的“通配符”类型。
 
 <!-- After that, the function <i>func</i> of the type <i>CallsFunction</i> is defined. In <i>func</i> it can be inferred that the parameter will only accept a string argument. To demonstrate this, there is also an example where the parameter function is called with a numeric value, and that causes an error in TypeScript. -->
-! -- 之后，定义 i CallsFunction / i 类型的函数 i func / i。 在 i func / i 中，可以推断参数将只接受字符串参数。 为了演示这一点，还有一个示例，其中使用数值调用参数函数，这会在打字稿中导致错误。 -->
+
 Next we define the function <i>func</i> of  type <i>CallsFunction</i>. From the function's type we can infer that its parameter function cb will only accept a string argument. To demonstrate this, there is also an example where the parameter function is called with a numeric value, which will cause an error in TypeScript. 
 接下来我们定义类型为 i CallsFunction / i 的函数 i func / i。 从函数的类型我们可以推断出它的参数函数 cb 将只接受字符串参数。 为了演示这一点，还有一个示例，其中使用数值调用参数函数，这将在打字稿中导致错误。
 
 <!-- The last thing is that we call <i>func</i> by giving it the following function as parameter  -->
-! -- 最后一件事是，我们调用 i func / i，将下面的函数作为参数 -- 
+
 Lastly we call <i>func</i> giving it the following function as a parameter
 最后我们调用 i func / i，给它下面的函数作为参数
 
@@ -174,7 +174,7 @@ Lastly we call <i>func</i> giving it the following function as a parameter
 ```
 
 <!-- So despite not defining types for the parameter function, it is inferred from the calling context that the argument <i>result</i> is of the type string. -->
-! -- 因此，尽管没有为参数函数定义类型，但是从调用上下文中可以推断出参数 i result / i 的类型是 string。 -->
+
 Despite the types of the parameter function not being defined, we can infer from the calling context that the argument <i>result</i> is of the type string.
 尽管没有定义参数函数的类型，但是我们可以从调用上下文中推断出参数 i result / i 的类型是 string。
 
@@ -199,7 +199,7 @@ let x;
 ```
 
 <!-- This means that at runtime, there is no information present that says that some variable x was declared as being of type SomeInterface. -->
-! -- 这意味着在运行时，没有任何信息表明某个变量 x 被声明为 someinterface. -- 
+
 This means that no type information remains at runtime - nothing says that some variable x was declared as being of type <i>SomeType</i>.
 这意味着在运行时不会保留任何类型信息——没有任何信息表明某个变量 x 被声明为 i SomeType / i 类型。
 
@@ -214,7 +214,7 @@ On different forums you may stumble upon a lot of different arguments either for
 
 
 <!-- First of all, probably the most noticeable feature with TypeScript is that it offers **type checking and static code analysis**. The ability to require values to be of a certain type and to have the compiler warn about wrongful usage can help reduce runtime errors and you might even be able to reduce the amount of required unit tests in a project, at least concerning pure type tests. The static code analysis doesn't only warn about wrongful type usage, but also if you for instance misspell a variable or function name or try to use a value beyond it's scope etc. With the help of a sufficient linter settings, it's hard to even think of runtime errors that you may be able to produce. -->
-! ——首先，可能打字稿最引人注目的特点是它提供了 * * 类型检查和静态代码分析 * * 。要求值为某种类型并让编译器警告错误使用的能力可以帮助减少错误，甚至可以减少项目中所需的运行时单元测试数量，至少涉及纯类型测试
+
 First of all, TypeScript offers <i>type checking and static code analysis</i>. We can require values to be of a certain type, and have the compiler warn about using them wrong. This can reduce runtime errors and you might even be able to reduce the amount of required unit tests in a project, at least concerning pure type tests.
 首先，打字稿提供了 i 类型检查和静态程序分析 / i。 我们可以要求值具有某种类型，并让编译器警告不要使用错误的值。 这可以减少运行时错误，甚至可以减少项目中所需的单元测试数量，至少在涉及纯类型测试时是这样。
 The static code analysis doesn't only warn about wrongful type usage,but also other mistakes such as misspelling a variable or function name or trying to use a variable beyond its scope. 
@@ -233,7 +233,7 @@ Types can be reused all around the code base, and a change to a type definition 
 
 
 <!-- A third advantage with TypeScript is the more **specific and smarter intellisense**  that the IDE's can provide when they know exactly what types of data you are processing. -->
-! -- typescript 的第三个优势是，当 ide 知道您正在处理哪种类型的数据时，它可以提供更具体、更聪明的智能感知
+
 The third advantage of TypeScript is, that IDEs can provide more <i>specific and smarter intellisense</i> when they know exactly what types of data you are processing.
 打字稿的第三个优点是，当 ide 确切知道您正在处理的数据类型时，它们可以提供更具体、更智能的智能感知 / i。
 
@@ -249,14 +249,14 @@ With the help of TypeScript it is also very easy to start using the newest JavaS
 打字稿不能解决什么问题？
 
 <!-- As mentioned above, TypeScript type annotations and type checking exist only at compile time and no longer at runtime, so even if the compiler does not give any errors, runtime errors are still possible. Especially when handling external input or if you use the dynamic type `any` in your code. -->
-! ——如上所述，typescript 类型注释和类型检查只存在于编译时，而不再存在于运行时，因此即使编译器没有提供任何错误，运行时错误仍然是可能的
+
 As mentioned above, TypeScript type annotations and type checking exist only at compile time and no longer at runtime. Even if the compiler does not throw any errors, runtime errors are still possible.
 如上所述，TypeScript 类型注释和类型检查仅在编译时存在，在运行时不再存在。 即使编译器没有抛出任何错误，运行时错误仍然是可能的。
 These runtime errors are especially common when handling external input, such as data received from a network request.
 这些运行时错误在处理外部输入(如从网络请求接收的数据)时特别常见。
 
 <!-- Lastly, here are a few examples of what many regard as downsides with TypeScript, which might be good to be aware of: -->
-! ——最后，这里有一些例子说明很多人认为打字稿的缺点，最好注意一下: -- 
+
 Lastly, below we list some issues many have with TypeScript, which might be good to be aware of:
 最后，下面我们列举了一些打字稿中存在的问题，这些问题值得注意:
 
@@ -291,7 +291,7 @@ You might want to check out TypeScript's documentation regarding [Type Assertion
 神秘的打字错误
 
 <!-- The errors given by the type system may sometimes be quite hard to understand, especially if you use complex types. As a general guideline it is helpful to keep in mind that TypeScript error messages usually contain the most useful content at the end of the message.  When running into long confusing messages, start reading them from the end. -->
-! -- 类型系统给出的错误有时可能很难理解，特别是当你使用复杂的排版时。作为一般准则，记住打字稿错误消息通常在消息结尾包含最有用的内容是很有帮助的
+
 The errors given by the type system may sometimes be quite hard to understand, especially if you use complex types.
 类型系统给出的错误有时可能很难理解，特别是当您使用复杂类型时。
 As a rule of thumb, the TypeScript error messages have the most useful information at the end of the message. 

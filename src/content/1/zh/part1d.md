@@ -444,7 +444,7 @@ If and when your code fails to compile and your browser lights up like a Christm
 如果你的代码编译失败，你的浏览器就会像圣诞树一样亮起来:
 
 ![](../../images/1/6e.png)
-! [](. . / . / images / 1 / 6e.png)
+
 
 don't write more code but rather find and fix the problem **immediately**. There has yet to be a moment in the history of coding where code that fails to compile would miraculously start working after writing large amounts of additional code. I highly doubt that such an event will transpire during this course either.
 不要编写更多的代码，而是立即找到并修复问题。 在编码的历史上，还没有哪一次编译失败的代码在编写了大量额外的代码之后奇迹般地开始工作。 我高度怀疑这样的事件在这个过程中也会发生。
@@ -509,13 +509,13 @@ The execution will pause once it arrives at a point where the _debugger_ command
 一旦到达调试器命令执行的地方，执行就会暂停:
 
 ![](../../images/1/7a.png)
-! [](. . / . / images / 1 / 7a.png)
+
 
 By going to the <i>Console</i> tab, it is easy to inspect the current state of variables:
 通过访问 i Console / i 选项卡，可以很容易地检查变量的当前状态:
 
 ![](../../images/1/8a.png)
-! [](. . / . / images / 1 / 8a.png)
+
 
 Once the cause of the bug is discovered you can remove the _debugger_ command and refresh the page.
 一旦发现 bug 的原因，您可以删除调试器命令并刷新页面。
@@ -527,13 +527,13 @@ You can also access the debugger without the _debugger_ command by adding break 
 通过在 i Sources / i 选项卡中添加断点，您还可以在不使用调试器命令的情况下访问调试器。 检查组件变量的值可以在 Scope-section 中完成:
 
 ![](../../images/1/9a.png)
-! [](. . / . / images / 1 / 9a.png)
+
 
 It is highly recommended to add the [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension to Chrome. It adds a new _React_ tab to the developer tools:
 强烈建议在 Chrome 中添加[ React developer tools ]( https://Chrome.google.com/webstore/detail/React-developer-tools/fmkadmapgofadopljbjfkapdkoienihi  / 开发工具)扩展。 它为开发工具增加了一个新的 React 选项卡:
 
 ![](../../images/1/10e.png)
-! [](. . / . / images / 1 / 10e.png)
+
 
 The new _React_ developer tools tab can be used to inspect the different React elements in the application, along with their state and props.
 新的 React developer tools 选项卡可用于检查应用程序中的不同 React 元素，以及它们的状态和支持。
@@ -542,7 +542,7 @@ Unfortunately the current version of React developer tools leaves something to b
 不幸的是，当前版本的 React developer 工具在显示用 hooks 创建的组件状态时，有一些不足之处:
 
 ![](../../images/1/11e.png)
-! [](. . / . / images / 1 / 11e.png)
+
 
 The component state was defined like so:
 组件状态的定义如下:
@@ -557,7 +557,7 @@ Dev tools shows the state of hooks in the order of their definition:
 开发工具按照定义顺序显示钩子的状态:
 
 ![](../../images/1/11be.png)
-! [](. . / . / images / 1 / 11be.png)
+
 
 ### Rules of Hooks
 钩子的规则
@@ -1090,7 +1090,7 @@ Using the <i>Button</i> component is simple, although we have to make sure that 
 使用 i Button / i 组件很简单，尽管我们必须确保在向组件传递道具时使用正确的属性名。
 
 ![](../../images/1/12e.png)
-! [](. . / . / images / 1 / 12e.png)
+
 
 ### Do Not Define Components Within Components
 # # # 不要在组件中定义组件
@@ -1212,7 +1212,7 @@ The application must display the total number of collected feedback for each cat
 应用程序必须显示每个类别收集的反馈总数。最终的应用程序可以是这样的:
 
 ![](../../images/1/13e.png)
-! [](. . / . / images / 1 / 13e.png)
+
 
 Note that your application needs to work only during a single browser session. Once you refresh the page, the collected feedback is allowed to disappear.
 请注意，您的应用程序只需要在单个浏览器会话期间工作。 一旦刷新页面，收集到的反馈信息就会消失。
@@ -1249,7 +1249,7 @@ Expand your application so that it shows more statistics about the gathered feed
 扩展您的应用程序，以便它显示更多关于收集到的反馈的统计数据: 收集到的反馈总数、平均分数(好: 1，中性: 0，坏:-1)和正反馈的百分比。
 
 ![](../../images/1/14e.png)
-! [](. . / . / images / 1 / 14e.png)
+
 
 <h4>1.8: unicafe step3</h4>
 H41.8: unicafe step3 / h4
@@ -1289,7 +1289,7 @@ Change your application to display statistics only once feedback has been gather
 只有在收集到反馈之后，才能将应用程序更改为显示统计信息。
 
 ![](../../images/1/15e.png)
-! [](. . / . / images / 1 / 15. png)
+
 
 <h4>1.10: unicafe step5</h4>
 H41.10: unicafe step5 / h4
@@ -1330,13 +1330,13 @@ Display the statistics in an HTML [table](https://developer.mozilla.org/en-US/do
 在 HTML [表格]中显示统计信息( https://developer.mozilla.org/en-us/docs/learn/HTML/tables/basics ) ，这样你的应用程序看起来大致如下:
 
 ![](../../images/1/16e.png)
-! [](. . / . / images / 1 / 16e.png)
+
 
 Remember to keep your console open at all times. If you see this warning in your console:
 请记住始终打开控制台。如果在控制台中看到以下警告:
 
 ![](../../images/1/17a.png)
-! [](. . / . / images / 1 / 17a.png)
+
 
 Then perform the necessary actions to make the warning disappear. Try Googling the error message if you get stuck.
 然后执行必要的操作使警告消失。如果卡住了，尝试用谷歌搜索错误消息。
@@ -1392,7 +1392,7 @@ Your finished application could look something like this:
 你完成的应用程序可以是这样的:
 
 ![](../../images/1/18a.png)
-! [](. . / . / images / 1 / 18a.png)
+
 
 **WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your project to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application.
 * * 警告 * * create-react-app 将自动将您的项目转换为 git-repository，除非您在现有 git 存储库中创建应用程序。 * * 很可能您不希望每个项目都是单独的存储库，因此只需运行 rm-rf。 在应用程序的根目录下使用 git 命令。
@@ -1404,7 +1404,7 @@ Expand your application so that you can vote for the displayed anecdote.
 扩展您的应用程序，以便您可以为显示的奇闻轶事投票。
 
 ![](../../images/1/19a.png)
-! [](. . / . / images / 1 / 19a.png)
+
 
 **NB** store the votes of each anecdote into an array or object in the component's state. Remember that the correct way of updating state stored in complex data structures like objects and arrays is to make a copy of the state.
 * * 注意 * * 将每个轶事的投票存储到组件状态的数组或对象中。 记住，更新存储在对象和数组等复杂数据结构中的状态的正确方法是复制状态。
@@ -1441,7 +1441,7 @@ Now implement the final version of the application that displays the anecdote wi
 现在实现这个应用程序的最终版本，显示得票最多的奇闻轶事:
 
 ![](../../images/1/20a.png)
-! [](. . / . / images / 1 / 20a.png)
+
 
 If multiple anecdotes are tied for first place it is sufficient to just show one of them.
 如果有多个奇闻轶事并列第一，那么只要展示其中一个就足够了。

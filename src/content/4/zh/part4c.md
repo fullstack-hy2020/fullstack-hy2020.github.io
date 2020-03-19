@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-div class"content"
+
 
 
 We want to add user authentication and authorization to our application. Users should be stored in the database and every note should be linked to the user who created it. Deleting and editing a note should only be allowed for the user who created it.
@@ -479,7 +479,7 @@ The list looks like this:
 这个列表看起来像这样:
 
 ![](../../images/4/9.png)
-! [](. . / . / images / 4 / 9.png)
+
 
 
 You can find the code for our current application in its entirety in the <i>part4-7</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-7).
@@ -535,13 +535,13 @@ Let's try to create a new note
 让我们尝试创建一个新的音符
 
 ![](../../images/4/10e.png)
-! [](. . / . / images / 4 / 10e.png)
+
 
 The operation appears to work. Let's add one more note and then visit the route for fetching all users:
 这个操作看起来起作用了。让我们再添加一个注释，然后访问获取所有用户的路由:
 
 ![](../../images/4/11e.png)
-! [](. . / . / images / 4 / 11e.png)
+
 
 We can see that the user has two notes. 
 我们可以看到用户有两个注释。
@@ -550,7 +550,7 @@ Likewise, the ids of the users who created the notes can be seen when we visit t
 同样，当我们访问获取所有笔记的路径时，可以看到创建笔记的用户的 id:
 
 ![](../../images/4/12e.png)
-! [](. . / . / images / 4 / 12e.png)
+
 
 ### Populate
 填充
@@ -582,7 +582,7 @@ The result is almost exactly what we wanted:
 结果几乎正是我们想要的:
 
 ![](../../images/4/13ea.png)
-! [](. . / . / images / 4 / 13ea.png)
+
 
 We can use the populate parameter for choosing the fields we want to include from the documents. The selection of fields is done with the Mongo [syntax](https://docs.mongodb.com/manual/tutorial/project-fields-from-query-results/#return-the-specified-fields-and-the-id-field-only):
 我们可以使用 populate 参数从文档中选择我们想要包含的字段。 字段的选择是用 Mongo [语法]( https://docs.mongodb.com/manual/tutorial/project-fields-from-query-results/#return-The-specified-fields-and-The-id-field-only )来完成的:
@@ -600,7 +600,7 @@ The result is now exactly like we want it to be:
 现在的结果完全符合我们的期望:
 
 ![](../../images/4/14ea.png)
-! [](. . / . / images / 4 / 14ea.png)
+
 
 Let's also add a suitable population of user information to notes:
 我们还可以在备注中添加一组合适的用户信息:
@@ -619,7 +619,7 @@ Now the user's information is added to the <i>user</i> field of note objects.
 现在用户的信息被添加到注释对象的 i user / i 字段中。
 
 ![](../../images/4/15ea.png)
-! [](. . / . / images / 4 / 15ea.png)
+
 
 
 It's important to understand that the database does not actually know that the ids stored in the <i>user</i> field of notes reference documents in the user collection.

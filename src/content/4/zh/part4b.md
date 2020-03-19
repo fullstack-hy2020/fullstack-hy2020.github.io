@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-div class"content"
+
 
 
 We will now start writing tests for the backend. Since the backend does not contain any complicated logic, it doesn't make sense to write [unit tests](https://en.wikipedia.org/wiki/Unit_testing) for it. The only potential thing we could unit test is the _toJSON_ method that is used for formatting notes.
@@ -199,7 +199,7 @@ When running your tests you may run across the following console warning:
 在运行测试时，您可能会遇到以下控制台警告:
 
 ![](../../images/4/8.png)
-! [](. . / . / images / 4 / 8.png)
+
 
 
 If this occurs, let's follow the [instructions](https://mongoosejs.com/docs/jest.html) and add a <i>jest.config.js</i> file at the root of the project with the following content:
@@ -285,7 +285,7 @@ expect(res.body.length).toBe(2)
 ```
 
 <!-- HTTP-pyyntöjen tiedot konsoliin kirjoittava middleware häiritsee hiukan testien tulostusta. Muutetaan loggeria siten, että testausmoodissa lokiviestit eivät tulostu konsoliin: -->
-! -- http-pyynt jen tiedot konjoittava 中间件 iritsee hiukan testimen tulostu.muutetaan loggeria siten，ett teusmoodissa lokiviestie eiv t tulokonsoliin: --
+
 
 The middleware that outputs information about the HTTP requests is obstructing the test execution output. Let us modify the logger so that it does not print to console in test mode:
 输出 HTTP 请求信息的中间件阻碍了测试执行输出。 让我们修改日志记录器，使其不会在测试模式下打印到控制台:
@@ -410,7 +410,7 @@ npm test -- -t 'notes'
 ```
 
 <!-- *HUOM*: yksittäisiä testejä suoritettaessa saattaa mongoose-yhteys  jäädä auki, mikäli yhtään yhteyttä hyödyntävää testiä ei ajeta. Ongelma seurannee siitä, että supertest alustaa yhteyden, mutta jest ei suorita afterAll-osiota. -->
-! —— huom: yksitt isi testej suoritettaessa saattaa mongoose-yhteys j d auki，mik li yhtt hy dynt v testi ei ajetaei siit，ett supertest alustaa yhten，mutest ei suorita after all-osiota. ——
+
 **NB**: When running a single test, the mongoose connection might stay open if no tests using the connection are run. 
 * * 注意 * * : 当运行单个测试时，如果没有运行使用该连接的测试，则 mongoose 连接可能保持打开状态。
 The problem might be due to the fact that supertest primes the connection, but jest does not run the afterAll portion of the code. 
@@ -753,7 +753,7 @@ If there's an exception while handling the POST request we end up in a familiar 
 如果在处理 POST 请求时出现了异常，我们就会陷入熟悉的情况:
 
 ![](../../images/4/6.png)
-! [](. . / . / images / 4 / 6.png)
+
 
 In other words we end up with an unhandled promise rejection, and the request never receives a response.
 换句话说，我们最终得到的是一个未处理的承诺拒绝，而且请求从未收到响应。
@@ -880,17 +880,17 @@ try {
 ```
 
 <!-- Mieleen herää kysymys, olisiko koodia mahdollista refaktoroida siten, että <i>catch</i> saataisiin refaktoroitua ulos metodeista?  -->
-! —— mieleen，她的母亲 olisiko koodia mahdollista refaktoroida siten，ett i catch / i saataisiin refaktoroitua ulos metodeista? ——
+
 One starts to wonder, if it would be possible to refactor the code to eliminate the <i>catch</i> from the methods?
 人们开始怀疑，是否有可能重构代码以从方法中消除 i catch / i？
 
 <!-- Kirjasto [express-async-errors](https://github.com/davidbanham/express-async-errors) tuo tilanteeseen helpotuksen. -->
-! —— kirjasto express-async-errors https: / / github. com / davidbanham / express-async-errors tuo tilanteeseen helpotuksen. ——
+
 The [express-async-errors](https://github.com/davidbanham/express-async-errors) library has a solution for this. 
 [ express-async-errors ]( https://github.com/davidbanham/express-async-errors )库为此提供了一个解决方案。
 
 <!-- Asennetaan kirjasto -->
-! -- asennetaan kirjasto -- 
+
 Let's install the library
 我们来安装图书馆吧
 
@@ -899,7 +899,7 @@ npm install express-async-errors --save
 ```
 
 <!-- Kirjaston käyttö on <i>todella</i> helppoa.
-! -- 克雅斯顿 · 凯特在《我帮助一切》节目中说。
+
  Kirjaston koodi otetaan käyttöön tiedostossa <i>src/app.js</i>: -->
 Kirjaston koodi otetaan k ytt n tiedostossa i src / app. js / i: -- 
 Using the library is <i>very</i> easy. 
@@ -924,7 +924,7 @@ module.exports = app
 ```
 
 <!-- Kirjaston koodiin sisällyttämän "magian" ansiosta pääsemme kokonaan eroon try-catch-lauseista. Muistiinpanon poistamisesta huolehtiva route -->
-! -- kirjaston koodiin sis llytt m n"magian"ansiosta p semime kokonaan"try-catch-lauseista. muistiinpanon poistisesta huolehtiva 路线 -- 
+
 The 'magic' of the library allows us to eliminate the try-catch blocks completely. 
 库的“魔法”允许我们完全消除 try-catch 块。
 For example the route for deleting a note
@@ -942,7 +942,7 @@ notesRouter.delete('/:id', async (request, response, next) => {
 ```
 
 <!-- muuttuu muotoon -->
-! -- muuttuu muotoon -- 
+
 becomes
 变成
 
@@ -954,14 +954,14 @@ notesRouter.delete('/:id', async (request, response) => {
 ```
 
 <!-- Kirjaston ansiosta kutsua _next(exception)_ ei siis enää tarvita, kirjasto hoitaa asian konepellin alla, eli jos <i>async</i>-funktiona määritellyn routen sisällä syntyy poikkeus, siirtyy suoritus automaattisesti virheenkäsittelijämiddlewareen. -->
-—— kirjaston ansiosta kutsua 下一个例外: el siis en tarvita，kirjasto hoitaa asian konepellin alla，eli jos i async / i-funktiona m ritellyn routen sis ll syntyy poikkeus，siirtyy suoritus automatitsesti virtelij sittelij middlewaren。 -->
+
 Because of the library, we do not need the _next(exception)_ call anymore. 
 由于库的存在，我们不再需要下一个(异常)调用。
 The library handles everything under the hood. If an exception occurs in a <i>async</i> route, the execution is automatically passed to the error handling middleware.
 图书馆处理一切事务。 如果异常发生在 i / async / i 路由中，执行将自动传递到错误处理中间件。
 
 <!-- Muut routet yksinkertaistuvat seuraavasti: -->
-! -- muut routet yksinkertaistuvat seuraavasti: -- 
+
 The other routes become:
 其他的路线是:
 
@@ -990,7 +990,7 @@ notesRouter.get('/:id', async (request, response) => {
 ```
 
 <!-- Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), haarassa <i>part4-5</i>.  -->
-! —— sovelluksen t m nhetkinen koodi on kokonaisuudessaan github / fullstack-hy2020 / part3-notes-backend / tree / part4-5，haarassa i part4-5 / i. ——
+
 The code for our application can be found from [github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), branch <i>part4-5</i>.
 我们应用程序的代码可以在[ github ]( https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5) ，branch i part4-5 / i 中找到。
 
@@ -1149,7 +1149,7 @@ Notice that you will have to make similar changes to the code that were made [in
 注意: 当运行测试时，你可能会遇到以下警告:
 
 ![](../../images/4/8a.png)
-! [](. . / . / images / 4 / 8a.png)
+
 
 
 If this happens, follow the [instructions](https://mongoosejs.com/docs/jest.html) and create a new <i>jest.config.js</i> file at the root of the project with the following contents:
@@ -1219,7 +1219,7 @@ Make the required changes to the code so that it passes the test.
 / div
 
 <div class="content">
-div class"content"
+
 
 
 ### Refactoring tests
@@ -1377,7 +1377,7 @@ The test output is grouped according to the <i>describe</i> blocks:
 测试输出根据 i describe / i 块进行分组:
 
 ![](../../images/4/7.png)
-! [](. . / . / images / 4 / 7.png)
+
 
 
 There is still room for improvement, but it is time to move forward.

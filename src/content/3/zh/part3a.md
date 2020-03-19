@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-Div class"content"
+
 
 
 In this part our focus shifts towards the backend: that is, towards implementing functionality on the server side of the stack.
@@ -156,7 +156,7 @@ We can open our humble application in the browser by visiting the address <http:
 我们可以在浏览器中通过访问地址 /  http://localhost:3001打开我们的应用程序:
 
 ![](../../images/3/1.png)
-! [](. . / . / images / 3 / 1.png)
+
 
 In fact, the server works the same way regardless of the latter part of the URL. Also the address <http://localhost:3001/foo/bar> will display the same content.
 事实上，无论 URL 的后半部分是什么，服务器的工作方式都是相同的。 地址 /  http://localhost:3001/foo/bar 也会显示相同的内容。
@@ -285,7 +285,7 @@ When we open the browser, the displayed format is exactly the same as in [part 2
 当我们打开浏览器的时候，显示的格式和第2部分(/ en / part2 / 从服务器 / 获取数据)完全一样，我们使用[ json-server ]( https://github.com/typicode/json-server )来提供注释列表:
 
 ![](../../images/3/2e.png)
-! [](. . / . / images / 3 / 2e.png)
+
 
 ### Express
 快车
@@ -321,7 +321,7 @@ The source code for the dependency is installed to the <i>node\_modules</i> dire
 依赖项的源代码安装在项目根目录中的 i 节点 modules / i 目录中。 除了表达，你还可以在目录中找到大量的其他依赖项:
 
 ![](../../images/3/4.png)
-! [](. . / . / images / 3 / 4.png)
+
 
 
 These are in fact the dependencies of the express library, and the dependencies of all of its dependencies, and so forth. These are called the [transitive dependencies](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/) of our project.
@@ -425,7 +425,7 @@ We can verify this from the <i>Network</i> tab in developer tools:
 我们可以通过开发工具中的 i Network / i 选项卡来验证这一点:
 
 ![](../../images/3/5.png)
-! [](. . / . / images / 3 / 5.png)
+
 
 
 The second route defines an event handler, that handles HTTP GET requests made to the <i>notes</i> path of the application:
@@ -442,7 +442,7 @@ The request is responded to with the [json](http://expressjs.com/en/4x/api.html#
 请求用响应对象的[ json ]( http://expressjs.com/en/4x/api.html#res.json )方法进行响应。 调用该方法将发送作为 JSON 格式的字符串传递给它的 notes 数组。 Express 自动设置 i Content-Type / i 头文件，其值为 i application / json / i。
 
 ![](../../images/3/6ea.png)
-! [](. . / . / images / 3 / 6ea.png)
+
 
 Next, let's take a quick look at the data sent in the JSON format.
 接下来，让我们快速了解一下以 JSON 格式发送的数据。
@@ -467,7 +467,7 @@ The experiment shown below illustrates this point:
 下面的实验说明了这一点:
 
 ![](../../assets/3/5.png)
-! [](. . / . / assets / 3 / 5.png)
+
 
 
 The experiment above was done in the interactive [node-repl](https://nodejs.org/docs/latest-v8.x/api/repl.html). You can start the interactive node-repl by typing in _node_ in the command line. The repl is particularly useful for testing how commands work while you're writing application code. I highly recommend this!
@@ -697,7 +697,7 @@ When we visit <http://localhost:3001/api/notes/1> again in the browser, the cons
 当我们在浏览器中再次访问 http://localhost:3001/api/notes/1时，这个终端控制台将显示以下内容:
 
 ![](../../images/3/8.png)
-! [](. . / . / images / 3 / 8.png)
+
 
 
 The id parameter from the route is passed to our application but the _find_ method does not find a matching note.
@@ -755,7 +755,7 @@ Now fetching an individual resource works.
 现在获取单个资源可以工作了。
 
 ![](../../images/3/9ea.png)
-! [](. . / . / images / 3 / 9ea.png)
+
 
 
 However, there's another problem with our application.
@@ -766,7 +766,7 @@ If we search for a note with an id that does not exist, the server responds with
 如果我们搜索一个 id 不存在的便条，服务器会响应:
 
 ![](../../images/3/10ea.png)
-! [](. . / . / images / 3 / 10ea.png)
+
 
 
 The HTTP status code that is returned is 200, which means that the response succeeded. There is no data sent back with the response, since the value of the <i>content-length</i> header is 0, and the same can be verified from the browser. 
@@ -850,7 +850,7 @@ Let's install Postman and try it out:
 让我们安装 Postman 并尝试一下:
 
 ![](../../images/3/11ea.png)
-! [](. . / . / images / 3 / 11ea.png)
+
 
 Using Postman is quite easy in this situation. It's enough to define the url and then select the correct request type.
 使用邮递员在这种情况下是相当容易的。 定义 url 然后选择正确的请求类型就足够了。
@@ -874,13 +874,13 @@ Let's create a new <i>get\_all\_notes.rest</i> file and define the request that 
 让我们创建一个新的 i get  all  notes.rest / i 文件，并定义获取所有笔记的请求。
 
 ![](../../images/3/12ea.png)
-! [](. . / . / images / 3 / 12ea.png)
+
 
 By clicking the <i>Send Request</i> text, the REST client will execute the HTTP request and response from the server is opened in the editor.
 通过单击 i Send Request / i 文本，REST 客户机将执行 HTTP 请求，并在编辑器中打开来自服务器的响应。
 
 ![](../../images/3/13ea.png)
-! [](. . / . / images / 3 / 13ea.png)
+
 
 ### Receiving data
 正在接收数据
@@ -927,21 +927,21 @@ Before we implement the rest of the application logic, let's verify with Postman
 在实现应用程序逻辑的其余部分之前，让我们先与 Postman 验证服务器实际接收到的数据。 除了在 Postman 中定义 URL 和请求类型外，我们还必须定义在 i body / i 中发送的数据:
 
 ![](../../images/3/14ea.png)
-! [](. . / . / images / 3 / 14ea.png)
+
 
 
 The application prints the data that we sent in the request to the console:
 该应用程序将我们在请求中发送到控制台的数据打印出来:
 
 ![](../../images/3/15e.png)
-! [](. . / . / images / 3 / 15. png)
+
 
 
 **NB** <i>Keep the terminal running the application visible at all times</i> when you are working on the backend. Thanks to Nodemon any changes we make to the code will restart the application. If you pay attention to the console, you will immediately be able to pick up on errors that occur in the application:
 * * NB * * * 当你在后端工作时，让运行应用程序的终端始终可见 / i。 多亏了 Nodemon，我们对代码所做的任何更改都将重新启动应用程序。 如果你注意控制台，你会立即发现应用程序中出现的错误:
 
 ![](../../images/3/16.png)
-! [](. . / . / images / 3 / 16.png)
+
 
 
 Similarly, it is useful to check the console for making sure that the backend behaves like we expect it to in different situations, like when we send data with an HTTP POST request. Naturally, it's a good idea to add lots of <em>console.log</em> commands to the code while the application is still being developed.
@@ -952,21 +952,21 @@ A potential cause for issues is an incorrectly set <i>Content-Type</i> header in
 导致问题的一个潜在原因是在请求中错误地设置了 i Content-Type / i 标头。 如果身体类型没有正确定义，这种情况可能发生在 Postman 身上:
 
 ![](../../images/3/17e.png)
-! [](. . / . / images / 3 / 17e.png)
+
 
 
 The <i>Content-Type</i> header is set to <i>text/plain</i>:
 I Content-Type / i header 设置为 i text / plain / i:
 
 ![](../../images/3/18e.png)
-! [](. . / . / images / 3 / 18e.png)
+
 
 
 The server appears to only receive an empty object:
 服务器似乎只接收到一个空对象:
 
 ![](../../images/3/19.png)
-! [](. . / . / images / 3 / 19. png)
+
 
 
 The server will not be able to parse the data correctly without the correct value in the header. It won't even try to guess the format of the data, since there's a [massive amount](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) of potential <i>Content-Types</i>.
@@ -977,7 +977,7 @@ If you are using VS Code, then you should install the REST client from the previ
 如果您正在使用 VS 代码，那么您应该安装上一章 i 中的 REST 客户机，如果您还没有安装 / i。 Post 请求可以像这样通过 REST 客户端发送:
 
 ![](../../images/3/20eb.png)
-! [](. . / . / images / 3 / 20eb.png)
+
 
 
 We created a new <i>create\_note.rest</i> file for the request. The request is formatted according to the [instructions in the documentation](https://github.com/Huachao/vscode-restclient/blob/master/README.md#usage).
@@ -1110,7 +1110,7 @@ Notice that the master branch of the repository contains the code from a later v
 注意，存储库的主分支包含应用程序的后一个版本的代码。 应用程序当前状态的代码特别在 branch [ part3-1]( https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1)中。
 
 ![](../../images/3/21.png)
-! [](. . / . / images / 3 / 21.png)
+
 
 
 If you clone the project, run the _npm install_ command before starting the application with _npm start_ or _npm run dev_.
@@ -1170,7 +1170,7 @@ Implement a Node application that returns a hardcoded list of phonebook entries 
 实现一个 Node 应用程序，从地址 /  http://localhost:3001/api/persons 返回一个硬编码的电话簿条目列表:
 
 ![](../../images/3/22e.png)
-! [](. . / . / images / 3 / 22e.png)
+
 
 
 Notice that the forward slash in the route <i>api/persons</i> is not a special character, and is just like any other character in the string. 
@@ -1193,7 +1193,7 @@ Implement a page at the address <http://localhost:3001/info> that looks roughly 
 在地址 /  http://localhost:3001/info 实现一个页面，大致如下:
 
 ![](../../images/3/23ea.png)
-! [](. . / . / images / 3 / 23ea.png)
+
 
 
 The page has to show the time that the request was received and how many entries are in the phonebook at the time of processing the request.
@@ -1261,7 +1261,7 @@ Respond to requests like these with the appropriate status code, and also send b
 / div
 
 <div class="content">
-Div class"content"
+
 
 
 ### About HTTP request types
@@ -1411,7 +1411,7 @@ Configure morgan so that it also shows the data sent in HTTP POST requests:
 配置 morgan，让它同时显示 HTTP POST 请求中发送的数据:
 
 ![](../../images/3/24.png)
-! [](. . / . / images / 3 / 24. png)
+
 
 
 This exercise can be quite challenging, even though the solution does not require a lot of code.

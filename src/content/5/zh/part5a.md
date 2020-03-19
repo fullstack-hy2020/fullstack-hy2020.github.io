@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-div class"content"
+
 
 
 In the last two parts, we have mainly concentrated on the backend, and the frontend does not yet support the user management we implemented to the backend in part 4.
@@ -25,7 +25,7 @@ A login form has now been added to the top of the page. The form for adding new 
 登录表单现在已经添加到页面顶部。 添加新注释的表单也被移到了注释列表的顶部。
 
 ![](../../images/5/1e.png)
-! [](. . / . / images / 5 / 1e.png)
+
 
 
 The code of the <i>App</i> component now looks as follows: 
@@ -533,7 +533,7 @@ The details of a logged in user are now saved to the local storage, and they can
 登录用户的详细信息现在保存到本地存储中，可以在控制台上查看:
 
 ![](../../images/5/3e.png)
-! [](. . / . / images / 5 / 3e.png)
+
 
 
 We still have to modify our application so that when we enter the page, the application checks if user details of a logged in user can already be found from the local storage. If they can, the details are saved to the state of the application and to <i>noteService</i>.
@@ -674,14 +674,14 @@ If a user is not logged in, <i>only</i> the login form is visible.
 如果一个用户没有登录，那么登录表单中的 i / i 就是可见的。
 
 ![](../../images/5/4e.png)
-! [](. . / . / images / 5 / 4e.png)
+
 
 
 If user is logged in, the name of the user and a list of blogs is shown. 
 如果用户登录，则显示用户名和博客列表。
 
 ![](../../images/5/5e.png)
-! [](. . / . / images / 5 / 5e.png)
+
 
 
 User details of the logged in user do not have to be saved to the local storage yet. 
@@ -722,7 +722,7 @@ Make the login 'permanent' by using the local storage. Also implement a way to l
 使用本地存储使登录成为永久性的。同时实现一种注销的方法。
 
 ![](../../images/5/6e.png)
-! [](. . / . / images / 5 / 6e.png)
+
 
 Ensure the browser does not remember the details of the user after logging out. 
 确保浏览器在注销后不会记住用户的详细信息。
@@ -735,7 +735,7 @@ Expand your application to allow  a logged in user to add new blogs:
 展开你的应用程序，允许登录用户添加新的博客:
 
 ![](../../images/5/7e.png)
-! [](. . / . / images / 5 / 7e.png)
+
 
 
 #### 5.4*: bloglist frontend, step4
@@ -745,14 +745,14 @@ Implement notifications which inform the user about successful and unsuccessful 
 在页面顶部实现通知，告知用户成功和不成功的操作。 例如，当添加一个新博客时，可以显示以下通知:
 
 ![](../../images/5/8e.png)
-! [](. . / . / images / 5 / 8e.png)
+
 
 
 Failed login can show the following notification: 
 登录失败可显示以下通知:
 
 ![](../../images/5/9e.png)
-! [](. . / . / images / 5 / 9e.png)
+
 
 
 The notifications must be visible for a few seconds. It is not compulsory to add colors. 

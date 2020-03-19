@@ -259,7 +259,7 @@ It's possible to test the subscriptions with the GraphQL playground like this:
 可以使用 GraphQL 来测试订阅，如下所示:
 
 ![](../../images/8/31.png)
-! [](. . / . / images / 8 / 31.png)
+
 
 
 When you press "play" on a subscription, the playground waits for notifications from the subscription. 
@@ -399,7 +399,7 @@ When a new person is now added to the phonebook, no matter where it's done, the 
 当新用户添加到电话簿时，无论在哪里，新用户的详细信息都会打印到客户端的控制台上:
 
 ![](../../images/8/32e.png)
-! [](. . / . / images / 8 / 32e.png)
+
 
 
 When a new person is added, the server sends a notification to the client, and the callback-function defined in the _onSubscriptionData_ attribute is called and given the details of the new person as parameters. 

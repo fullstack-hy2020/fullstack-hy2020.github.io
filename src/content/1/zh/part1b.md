@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-Div class"content"
+
 
 During the course, we have a goal and a need to learn a sufficient amount of Javascript in addition to web development.
 在课程中，除了网页开发，我们还有一个目标和学习足够数量的 Javascript 的需要。
@@ -431,7 +431,7 @@ const App = () => {
 / div
 
 <div class="content">
-Div class"content"
+
 
 ### Object methods and "this"
 # # # Object methods and“ this”

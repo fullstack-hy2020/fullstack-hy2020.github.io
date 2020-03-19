@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-Div class"content"
+
 
 
 The appearance of our current application is quite modest. In [exercise 0.2](/en/part0/fundamentals_of_web_apps#exercises-0-1-0-6), the assignment was to go through Mozilla's [CSS tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).
@@ -250,7 +250,7 @@ The result looks like this:
 结果如下:
 
 ![](../../images/2/26e.png)
-! [](. . / . / images / 2 / 26e.png)
+
 
 
 The code for the current state of our application can be found in the  <i>part2-7</i> branch on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-7).
@@ -366,7 +366,7 @@ Use the [improved error message](/en/part2/adding_styles_to_react_app#improved-e
 使用第二部分中的[改进的错误消息](/ en / part2 / add styles to react app # improved-error-message)示例作为指导，显示一个在成功操作执行后持续几秒钟的通知(添加一个人或更改一个数字) :
 
 ![](../../images/2/27e.png)
-! [](. . / . / images / 2 / 27e.png)
+
 
 <h4>2.20*: Phonebook step12</h4>
 42.20 * : Phonebook step12 / h4
@@ -375,13 +375,13 @@ Open your application in two browsers. **If you delete a person in browser 1** a
 在两个浏览器中打开应用程序。 * * 如果你在浏览器1中删除一个人 * * 在我尝试在浏览器2中更改该人的电话号码 / i 之前，你会得到以下错误消息:
 
 ![](../../images/2/29b.png)
-! [](. . / . / images / 2 / 29b.png)
+
 
 Fix the issue according to the example shown in [promise and errors](/en/part2/altering_data_in_server#promises-and-errors) in part 2. Modify the example so that the user is shown a message when the operation does not succeed. The messages shown for successful and unsuccessful events should look different:
 根据第2部分中显示的[ promise and errors ](/ en / part2 / modify data in server # promises-and-errors)中的示例修复问题。 修改此示例，以便在操作不成功时向用户显示消息。 成功和不成功的事件所显示的信息应该看起来不同:
 
 ![](../../images/2/28e.png)
-! [](. . / . / images / 2 / 28e.png)
+
 
 **Note** that even if you handle the exception, the error message is printed to the console.
 * * 注意 * * 即使您处理异常，错误消息也会打印到控制台。

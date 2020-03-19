@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-Div class"content"
+
 
 
 The frontend of our application shows the phone directory just fine with the updated server. However if we want to add new persons, we have to add login functionality to the frontend. 
@@ -16,7 +16,7 @@ The frontend of our application shows the phone directory just fine with the upd
 # # # 用户登录
 
 <!-- Lisätään sovelluksen tilaan muuttuja _token_, joka tallettaa tokenin siinä vaiheessa kun käyttäjä on kirjautunut. Jos _token_ ei ole määritelty, näytetään kirjautumisesta huolehtiva komponentti <i>LoginForm</i>, joka saa parametriksi virheenkäsittelijän sekä funktion _setToken_: -->
-! ——这是一个多义词，joka tallettaa tokenin siin vaiheessa kun k ytt on kirjautunut.jos token ei ole m ritelty，n ytet kirjetumes esta huolehtiva komponentti loginti / i，joka saa parametric si virheenk sittelij n sek function token: ——
+
 Let's add variable _token_ to the application's state. It will contain user's token when a is logged in. If _token_ is undefined, we render the <i>LoginForm</i>-component responsible for user login. The component receives an error handler and the _setToken_-function as parameters:
 让我们将变量 token 添加到应用程序的状态。 当用户登录时，它将包含用户标记。 如果令牌未定义，我们将使 i LoginForm / i-component 负责用户登录。 组件接收一个错误处理程序和 setToken-function 作为参数:
 
@@ -46,7 +46,7 @@ const App = () => {
 ```
 
 <!-- Määritellään kirjautumisen suorittava mutaatio -->
-! -- m ritell n kirjetumisen suorittava mutaatio -- 
+
 Next we define a mutation for logging in
 接下来我们为登录定义一个变异
 
@@ -61,7 +61,7 @@ expoty const LOGIN = gql`
 ```
 
 <!-- Kirjautumisesta huolehtiva komponentti _LoginForm_ toimii melko samalla tavalla kuin aiemmat mutaatioista huolehtivat komponentit. Mielenkiintoiset rivit on korostettu koodissa: -->
-—— kirjetumisesta huolehtiva komponentti loginform toimii melko samalla tavalla kuin aiemmat mutaatioista huolehtivat komponentit. mielenkiintoitet rivit on korostettu koodissa: ——
+
 The _LoginForm_-component works pretty much just like all other components doing mutations we have previously created. 
 Loginform 组件的工作原理与我们之前创建的所有其他进行突变的组件非常相似。
 Interesting lines in the code have been highlighted:
@@ -124,7 +124,7 @@ export default LoginForm
 ```
 
 <!-- Käytössä on jälleen efektihookki, jonka avulla asetetaan tokenin arvo komponentin _App_ tilaan sekä local storageen siinä vaiheessa kun palvelin on vastannut mutaatioon. Efektihookki on tarpeen, jotta sovellus ei joutuisi ikuiseen renderöintilooppiin. -->
-—— k ss on j lleen efektihookki，jonka avulla aseetaan tokenin arvo komponentin app tilaan sek local storageen sieen sien in vaiheessa kun palvelin on vastannut mutaatioon.efektihookki on tarpeen，jotta sovellus ei joutuisi ikuiseen render intilooppiin. ——
+
 We are using an effect hook again. Here it's used to save the token's value to the state of the _App_ component the local storage after the server has responded to the mutation. 
 我们再次使用效果钩子。 在这里，它用于在服务器响应变异之后，将令牌的值保存到本地存储的 App 组件的状态。
 Use of the effect hook is necessary to avoind an endless rendering loop.
@@ -134,9 +134,9 @@ Let's also add a button which enables logged in user to log out. The buttons onC
 我们还要添加一个按钮，使登录用户能够注销。 Onclick 处理程序的按钮将令牌状态设置为 null，从本地存储中删除令牌并重置 Apollo 客户机的缓存。 最后一个是[重要的]( https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout ) ，因为有些查询可能已经将数据提取到缓存，只有登录的用户才能访问。
 
 <!-- Välimuistin nollaaminen tapahtuu Apollon _client_-objektin metodilla [resetStore](https://www.apollographql.com/docs/react/v3.0-beta/api/core/ApolloClient/#ApolloClient.resetStore), clientiin taas päästään käsiksi hookilla -->
-! -- v limuistin nollaaminen tapahtuu apollon client-objektin metodilla resetstore https: / / www.apollographql. com / docs / react / v3.0-beta / api / core / apolloclient / # apolloclient.resetstore，clientiin taas p st k sikilla --
+
 <!-- [useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useapolloclient): -->
-! -- use apolloclient https: / / www.apollographql. com / docs / react / api / react-hooks / # useapolloclient: --
+
 We can reset the cache using the [resetStore](https://www.apollographql.com/docs/react/v3.0-beta/api/core/ApolloClient/#ApolloClient.resetStore) method of an Apollo _client_ object. 
 我们可以使用 Apollo 客户机对象的[ resetStore ]( https://www.apollographql.com/docs/react/v3.0-beta/api/core/apolloclient/#apolloclient.resetStore )方法重置缓存。
 The client can be accessed with the [useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useapolloclient) hook:
@@ -202,7 +202,7 @@ The link parameter given to the _client_-object defines how apollo connects to t
 给定客户机对象的 link 参数定义了 apollo 如何连接到服务器。 在这里，正常的[ httpLink ]( https://www.apollographql.com/docs/link/links/http.htm )连接被修改，以便请求的 i authorization / i [ header ]( https://www.apollographql.com/docs/react/networking/authentication/#header )包含令牌(如果已经保存到 localStorage 的话)。
 
 <!-- Asennetaan vielä muutoksen tarvitsema kirjasto -->
-! -- asennetaan viel muutoksen tarvitsema kirjasto -- 
+
 We also need to install the library required by this modification
 我们还需要安装此修改所需的库
 
@@ -214,7 +214,7 @@ Creating new persons and changing numbers works again. There is however one rema
 创造新的人员和改变数字再次起作用。 然而，还有一个问题。 如果我们试图添加一个没有电话号码的人，这是不可能的。
 
 ![](../../images/8/25e.png)
-! [](. . / . / images / 8 / 25. png)
+
 
 Validation fails, because frontend sends an empty string as the value of _phone_.
 验证失败，因为前端会发送一个空字符串作为 phone 的值。
@@ -248,9 +248,9 @@ Current application code can be found on [Github](https://github.com/fullstack-h
 # # # 更新缓存，重新访问
 
 <!-- Uusien henkilöiden lisäyksen yhteydessä on siis  -->
-! ——我不知道他在说什么——
+
 <!-- [päivitettävä](/osa8/react_ja_graph_ql#valimuistin-paivitys) Apollo clientin välimuisti. Päivitys tapahtuu määrittelemällä mutaation yhteydessä option _refetchQueries_ avulla, että kysely <em>ALL\_PERSONS</em> on suoritettava uudelleen: -->
-—— p ivitett v / osa8 / react ja graph ql # valimuistin-paivitys apollo clientin v limuisti.p ivitys tapahtuu m rittelem ll mutation yhteydess option refetchqueries avulla，sely kyem ALL  PERSONS / em on suoritettava udelva udelleen: ——
+
 We have to [update](/osa8/react_ja_graph_ql#valimuistin-paivitys) the cache of the Apollo client on creating new persons. We can update it using the mutation's _refetchQueries_ option to define that the 
 我们必须[更新](/ osa8 / react ja graph ql # valimuistin-paivitys) Apollo 客户端的缓存，以创建新的人员。 我们可以使用变异的 refetchQueries 选项更新它来定义
 <em>ALL\_PERSONS</em> query is done again. 
@@ -308,7 +308,7 @@ There are actually some situations where the only good way to keep the cache up 
 实际上，在某些情况下，使缓存保持最新的唯一好方法是使用 update-callback。
 
 <!-- On myös olemassa tilanteita, joissa ainoa järkevä tapa saada välimuisti pidettyä ajantasaisena on _update_-callbackillä tehtävä päivitys.  -->
-! -- 在我的 s olemassa tilanteita 上，joissa ainoa j rkev tapa saada v limuisti pidetty ajantasaisse on update-callbackill teht v p ivitys. --
+
 In some situations the only sensible way to keep the cache up to date is using the _update_-callback.
 在某些情况下，使缓存保持最新的唯一合理方法是使用 update-callback。
 
@@ -360,21 +360,21 @@ You can decide how the log in looks on the user interface. One possible solution
 您可以决定登录在用户界面上的外观。 一个可能的解决方案是使登录表单成为一个单独的视图，可以通过导航菜单访问:
 
 ![](../../images/8/26.png)
-! [](. . / . / images / 8 / 26.png)
+
 
 
 The login form:
 登入表单:
 
 ![](../../images/8/27.png)
-! [](. . / . / images / 8 / 27. png)
+
 
 
 When a user is logged in, the navigation changes to show the functionalities which can only be done by a logged in user:
 当一个用户登录后，导航就会改变，以显示只有登录用户才能完成的功能:
 
 ![](../../images/8/28.png)
-! [](. . / . / images / 8 / 28. png)
+
 
 #### 8.19 Books by genre, part 1
 8.19图书类型，第一部分
@@ -384,7 +384,7 @@ Complete your application to filter the book list by genre. Your solution might 
 完成你的应用程序，按类型过滤书籍列表。你的解决方案可能是这样的:
 
 ![](../../images/8/30.png)
-! [](. . / . / images / 8 / 30.png)
+
 
 In this exercise the filtering can be done using just React.
 在这个练习中，过滤可以只使用 React 来完成。
@@ -397,7 +397,7 @@ Implement a view which shows all the books based on the logged in user's favouri
 实现一个视图，根据登录用户最喜欢的类型显示所有的书籍。
 
 ![](../../images/8/29.png)
-! [](. . / . / images / 8 / 29. png)
+
 
 #### 8.21 books by genre with GraphQL
 8.21 books by genre with GraphQL

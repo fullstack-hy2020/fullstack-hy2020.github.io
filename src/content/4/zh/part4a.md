@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-div class"content"
+
 
 
 Let's continue our work on the backend of the notes application we started in [part 3](/en/part3). 
@@ -41,7 +41,7 @@ After making the changes to the directory structure of our project, we end up wi
 ```
 
 <!-- Olemme toistaiseksi tulostelleet koodista erilaista logaustietoa komennoilla  <i>console.log</i> ja <i>console.error</i>, tämä ei ole kovin järkevä käytäntö. Eristetään kaikki konsoliin tulostelu omaan moduliinsa <i>utils/logger.js</i>: -->
-! -- olemme toistaiseksi tulostelleet kodista erilaista logaustietakomennoilla i console.log / i ja i console.error / i，t m ei ole kovin j rkev k nt. 使用日志记录器。 ——
+
 So far we have been using <i>console.log</i> and <i>console.error</i> to print different information from the code. 
 到目前为止，我们一直在使用 i console.log / i 和 i console.error / i 来打印代码中的不同信息。
 However, this is not a very good way to do things. 
@@ -64,7 +64,7 @@ module.exports = {
 ```
 
 <!-- Loggeri tarjoaa kaksi funktiota, normaalien logiviesteihin tarkoitetun funktion _info_ sekä virhetilanteisiin tarkoitetun funktion _error_. -->
-! -- loggeri tarjoaa kaksi funktiota，normaalilogieviesteihin tarkoitetun 功能信息 sek virhetilanteisiin tarkoitetun 功能错误
+
 The logger has two functions, __info__ for printing normal log messages, and __error__ for all error messages. 
 日志记录器有两个功能，信息用于打印正常的日志消息，错误用于所有错误消息。
 
@@ -465,7 +465,7 @@ One best practice is to commit your code every time it is in a stable state. Thi
 / div
 
 <div class="content">
-div class"content"
+
 
 
 ### Testing Node applications
@@ -638,7 +638,7 @@ As expected, all of the tests pass:
 正如所料，所有的测试都通过了:
 
 ![](../../images/4/1.png)
-! [](. . / . / images / 4 / 1.png)
+
 
 
 Jest expects by default that the names of test files contain <i>.test</i>. In this course, we will follow the convention of naming our tests files with the extension <i>.test.js</i>.
@@ -661,7 +661,7 @@ Running the tests above results in the following error message:
 运行上面的测试会产生以下错误消息:
 
 ![](../../images/4/2e.png)
-! [](. . / . / images / 4 / 2e.png)
+
 
 
 Let's add a few tests for the _average_ function, into a new file <i>tests/average.test.js</i>.
@@ -690,7 +690,7 @@ The test reveals that the function does not work correctly with an empty array (
 测试显示，该函数在空数组中不能正常工作(这是因为在 JavaScript 中，i NaN / i 的结果除以零) :
 
 ![](../../images/4/3.png)
-! [](. . / . / images / 4 / 3.png)
+
 
 
 Fixing the function is quite easy:
@@ -727,7 +727,7 @@ Describe blocks can be used for grouping tests into logical collections. The tes
 描述块可用于将测试分组为逻辑集合。 的测试输出也使用了 describe 块的名称:
 
 ![](../../images/4/4.png)
-! [](. . / . / images / 4 / 4.png)
+
 
 
 As we will see later on <i>describe</i> blocks are necessary when we want to run some shared setup or teardown operations for a group of tests.
@@ -803,7 +803,7 @@ Write appropriate tests for the function. It's recommended to put the tests insi
 为函数编写适当的测试。 建议将测试放在 i describe / i 块中，这样测试报告输出就可以很好地分组:
 
 ![](../../images/4/5.png)
-! [](. . / . / images / 4 / 5.png)
+
 
 
 Defining test inputs for the function can be done like this:

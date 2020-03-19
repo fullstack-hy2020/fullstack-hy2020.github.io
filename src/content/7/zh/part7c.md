@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-Div class"content"
+
 
 In part 2 we examined two different ways of adding styles to our application: the old-school [single CSS](/en/part2/adding_styles_to_react_app) file and [inline-styles](/en/part2/adding_styles_to_react_app#inline-styles). In this part we will take a look at a few other ways. 
 在第2部分中，我们研究了向应用程序添加样式的两种不同方式: 老式的[ single CSS ](/ en / part2 / add styles to react app)文件和[ inline-styles ](/ en / part2 / add styles to react app # inline-styles)。 在这一部分，我们将看看其他一些方法。
@@ -60,7 +60,7 @@ When we reload the application, we notice that it already looks a bit more styli
 当我们重新加载应用程序时，我们注意到它已经看起来有点时髦了:
 
 ![](../../images/7/5ea.png)
-! [](. . / . / images / 7 / 5ea.png)
+
 
 In Bootstrap, all of the contents of the application are typically rendered inside of a [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers). In practice this is accomplished by giving the root _div_ element of the application the  _container_ class attribute:
 在 Bootstrap 中，应用程序的所有内容通常都呈现在一个[容器]( https://getbootstrap.com/docs/4.1/layout/overview/#containers )中。 实际上，这是通过给应用程序的根 div 元素 container class 属性来实现的:
@@ -82,7 +82,7 @@ We notice that this already has an effect on the appearance of the application. 
 我们注意到，这已经对应用程序的外观产生了影响。 内容不再像以前那样接近浏览器的边缘:
 
 ![](../../images/7/6ea.png)
-! [](. . / . / images / 7 / 6ea.png)
+
 
 
 Next, let's make some changes to the <i>Notes</i> component, so that it renders the list of notes as a [table](https://getbootstrap.com/docs/4.1/content/tables/). React Bootstrap provides a built-in [Table](https://react-bootstrap.github.io/components/table/) component for this purpose, so there is no need to define CSS classes separately.
@@ -116,7 +116,7 @@ The appearance of the application is quite stylish:
 这个应用程序的外观非常时髦:
 
 ![](../../images/7/7e.png)
-! [](. . / . / images / 7 / 7e.png)
+
 
 Notice that the React Bootstrap components have to be imported separately from the library as shown below:
 请注意 React Bootstrap 组件必须与库分开导入，如下所示:
@@ -171,7 +171,7 @@ After switching over to the Bootstrap form, our improved application looks like 
 切换到 Bootstrap 表单后，我们改进的应用程序如下:
 
 ![](../../images/7/8ea.png)
-! [](. . / . / images / 7 / 8ea.png)
+
 
 #### Notification
 通知
@@ -180,7 +180,7 @@ Now that the login form is in better shape, let's take a look at improving our a
 现在登录表单已经更好了，让我们来看看如何改进应用程序的通知功能:
 
 ![](../../images/7/9ea.png)
-! [](. . / . / images / 7 / 9ea.png)
+
 
 Let's add a message for the notification when a user logs in to the application. We will store it in the _message_ variable in the <i>App</i> component's state:
 让我们在用户登录到应用程序时为通知添加一条消息。 我们将把它存储在 i App / i 组件状态的消息变量中:
@@ -259,14 +259,14 @@ The resulting layout has a very clean and pleasing appearance:
 最终的布局有一个非常干净和令人愉快的外观:
 
 ![](../../images/7/10ea.png)
-! [](. . / . / images / 7 / 10ea.png)
+
 
 
 If the viewport of the browser is narrowed, we notice that the menu "collapses" and it can be expanded by clicking the "hamburger" button:
 如果浏览器的视口变窄，我们会注意到菜单会“折叠” ，点击“汉堡包”按钮就可以展开:
 
 ![](../../images/7/11ea.png)
-! [](. . / . / images / 7 / 11ea.png)
+
 
 
 Bootstrap and a large majority of existing UI frameworks produce [responsive](https://en.wikipedia.org/wiki/Responsive_web_design) designs, meaning that the resulting applications render well on a variety of different screen sizes.
@@ -276,7 +276,7 @@ Chrome developer tools makes it possible to simulate using our application in th
 开发工具可以在不同移动客户端的浏览器中模拟使用我们的应用程序:
 
 ![](../../images/7/12ea.png)
-! [](. . / . / images / 7 / 12ea.png)
+
 
 You can find the complete code for the application [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-bootstrap.js).
 你可以在这里找到应用程序的完整代码[点击这里]( https://github.com/fullstack-hy2020/misc/blob/master/notes-bootstrap.js )。
@@ -285,12 +285,12 @@ You can find the complete code for the application [here](https://github.com/ful
 # # Material UI
 
 <!-- Tarkastellaan toisena esimerkkinä Googlen kehittämän "muotokielen" [Material designin](https://material.io/) toteuttavaa React-kirjastoa [MaterialUI](https://material-ui.com/).  -->
-! -- tarkastellaan toisena esimerkkin glen gookehitt m n"muotokielen"material designin https: / / material.io / toteuttavaa react-kirjastoa materialui something 1. --
+
 As our second example we will look into the [MaterialUI](https://material-ui.com/) React library, which implements the [Material design](https://material.io/) visual language developed by Google.
 作为我们的第二个例子，我们将研究[ MaterialUI ]( https://Material-ui.com/ )反应库，它实现了谷歌开发的[ Material design ]( https://Material.io/ )视觉语言。
 
 <!-- Asennetaan kirjasto suorittamalla komento -->
-! ——基尔雅斯托 · 索里塔马拉 · 科梅托——
+
 Install the library with the command
 使用以下命令安装库
 
@@ -311,12 +311,12 @@ Then add the following line to the <i>head</i> tag in the <i>public/index.html</
 ```
 
 <!-- Tehdään nyt MaterialUI:n avulla koodiin suunilleen samat muutokset, mitä teimme bootstarpilla. -->
-! —— tehd n nyt materialui: n avulla koodiin suunilleen samat muutokset，mit teimme bootstarpilla. ——
+
 Now let's use MaterialUI to do the same modifications to the code we did earlier with bootstrap.
 现在，让我们使用 MaterialUI 对前面使用 bootstrap 所做的代码进行相同的修改。
 
 <!-- Renderöidään koko sovelluksen sisältö komponentin [Container](https://material-ui.com/components/container/) sisälle: -->
-! -- 渲染 id n koko sovelluksen sis / komponentin container https: / / material-ui. com / components / container / sis lle: -- 
+
 Render the contents of the whole application within a [Container](https://material-ui.com/components/container/):
 在[货柜]( https://material-ui.com/components/Container/ )内呈现整个申请的内容:
 
@@ -334,7 +334,7 @@ const App = () => {
 ```
 
 <!-- Aloitetaan komponentista <i>Notes</i> ja renderöidään muistiinpanojen lista [taulukkona](https://material-ui.com/components/tables/#simple-table): -->
-! —— aloitetaan komponentista i Notes / i ja render id muistiinpanojen lista [ taulukona ]( https://material-ui.com/components/tables/#simple-table ) : -- 
+
 Let's start with the <i>Notes</i> component. We'll render the list of notes as a [table](https://material-ui.com/components/tables/#simple-table):
 让我们从 i Notes / i 组件开始，我们将音符列表呈现为一个[ table ]( https://material-ui.com/components/tables/#simple-table ) :
 
@@ -369,10 +369,10 @@ The table looks like so:
 桌子看起来是这样的:
 
 ![](../../images/7/63eb.png)
-! [](. . / . / images / 7 / 63eb.png)
+
 
 <!-- Hienoinen ikävä piirre Material UI:ssa on se, että jokainen komponentti on importattava erikseen, muistiinpanojen sivun import-lista on aika pitkä: -->
-! -- hienoinen ik v piirre material ui: ssa on se，ett jokainen komponentti on importattava erikseen，muistiinpanojen sivun import-lista on aika pitk: --
+
 One less pleasant feature of Material UI is, that each component has to be imported separately. The import list for the notes page is quite long:
 Material UI 的一个不那么令人愉快的特性是，每个组件都必须单独导入。 注释页面的导入列表非常长:
 
@@ -428,20 +428,20 @@ const Login = (props) => {
 ```
 
 <!-- Lopputulos on: -->
-! -- lopputulos on: -- 
+
 The end result is:
 最终的结果是:
 
 ![](../../images/7/64ea.png)
-! [](. . / . / images / 7 / 64ea.png)
+
 
 <!-- Bootstrapiin verrattuna pieni ero on nyt se, että MaterialUI ei tarjoa erillistä komponenttia itse lomakkeelle, lomake tehdään normaaliin tapaan HTML:n [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form)-elementtinä. -->
-! -- bootstrapiin verrattuna pieni ero on nyt se，ett materialui ei tarjoa erillist komponenttia itse lomakkeelle，lomakehd n normaaliin tapaan html: n form https: / / developerworks. mozilla. org / en-us / docs / web / html / element / form-elementtin. --
+
 Difference to bootstrap is, that MaterialUI does not provide a component for the form itself. The form here an ordinary HTML [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) element.
 与 bootstrap 不同的是，MaterialUI 并不为表单本身提供组件。 这里的表单是一个普通的 HTML [ form ]( https://developer.mozilla.org/en-us/docs/web/HTML/element/form )元素。
 
 <!-- Lomakkeen käyttämät komponentit on luonnollisesti importattava koodissa.  -->
-! ——洛马克金知道这对他来说很重要。——
+
 Remember to import all the components used in the form.
 请记住导入表单中使用的所有组件。
 
@@ -449,7 +449,7 @@ Remember to import all the components used in the form.
 通知
 
 <!-- Kirjautumisen jälkeisen notifikaation näyttämiseen sopii komponenetti Alert](https://material-ui.com/components/alert/), joka on lähes samanlainen kuin bootstrapin vastaava komponentti:  -->
-! —— kirjetumisen j lkeisen notifkaation n ytt miseen sopii komponenti alert https: / / material-ui. com / components / alert / ，joka on l he hes samanlainen kuin vastrapin vakomponentti: ——
+
 The notification displayed on log in can be done using the [Alert](https://material-ui.com/components/alert/) component, which is quite similiar to bootstrap's equivalent component:
 在登录中显示的通知可以通过使用[ Alert ]( https://material-ui.com/components/Alert/ 组件)来完成，这个组件与 bootstrap 的等价组件非常相似:
 
@@ -466,7 +466,7 @@ The notification displayed on log in can be done using the [Alert](https://mater
 ```
 
 <!-- Alert-komponentti ei ole vielä mukana MaterialUI:n core-pakkauksessa, ja komponentin sisältävä pakkaus [lab](https://material-ui.com/components/about-the-lab/) tulee asentaa sovellukseen: -->
-! -- alert-komponentti ei ole viel mukana materialui: n core-pakkauksessa，ja komponentin sis lt v pakkaus lab https: / / material-ui. com / components / about-the-lab / tulee asentaa sovellukseen: --
+
 The Alert component is not yet included in the MaterialUI core package, so we have to install the [lab](https://material-ui.com/components/about-the-lab/) package to use it:
 Alert 组件尚未包含在 MaterialUI 核心包中，因此我们必须安装[ lab ]( https://material-ui.com/components/about-The-lab/ )包才能使用它:
 
@@ -475,7 +475,7 @@ npm install --save @material-ui/lab
 ```
 
 <!-- Komponentti importataan seuraavasti -->
-! —— komponentti importataan seuraavasti ——
+
 Then we can import the component like so
 然后我们可以像这样导入组件
 
@@ -484,23 +484,23 @@ import { Alert } from '@material-ui/lab'
 ```
 
 <!-- Alert on ulkoasultaan tyylikäs: -->
-! -- 关于乌尔库苏塔安提利克的警告: -- 
+
 Alert is quite stylish:
 是相当时尚的:
 
 ![](../../images/7/65ea.png)
-! [](. . / . / images / 7 / 65ea.png)
+
 
 #### Navigaation structure
 导航结构
 
 <!-- Navigaatiorakenne toteutetaan komponentin [AppBar](https://material-ui.com/components/app-bar/) avulla -->
-! —— navigaatiorakenne toteutean komponentin appbar https: / / material-ui. com / components / app-bar / avulla -- 
+
 We can implement navigation using the [AppBar](https://material-ui.com/components/app-bar/) component.
 我们可以使用[ AppBar ]( https://material-ui.com/components/app-bar/ 组件来实现导航。
 
 <!-- Jos sovelletaan suoraan dokumentaation esimerkkiä   -->
-! -- jos sovelletaan suoraan dokumentaation esimerkki -- 
+
 If we use the example code from the documentation
 如果我们使用文档中的示例代码
 
@@ -529,20 +529,20 @@ If we use the example code from the documentation
 ```
 
 <!-- saadaan kyllä toimiva ratkaisu, mutta sen ulkonäkö ei ole paras mahdollinen -->
-! -- saadaan kyll toimiva ratkaisu，mutta sen ulkon kei ole ole mahdollinen --
+
 we do get working navigation, but it could look better
 我们的确有导航系统，但看起来更好
 
 ![](../../images/7/66ea.png)
-! [](. . / . / images / 7 / 66ea.png)
+
 
 <!-- Lueskelemalla [dokumentaatiota](https://material-ui.com/guides/composition/#routing-libraries), löytyy parempi tapa eli [component props](https://material-ui.com/guides/composition/#component-prop), jonka avulla voidaan muuttaa se miten MaterialUI-komponentin juurielementti renderöityy. -->
-! -- lueskelemalla dokumentaatiota https: / / material-ui. com / guides / composition / # routing-libraries，l ytyy parepapi tapa eli component props something 1，jonka avulla vodaan muuttaa se miten materialui-komponentin juurielementti render y. 
+
 We can find a better way from the [documentation](https://material-ui.com/guides/composition/#routing-libraries). We can use [component props](https://material-ui.com/guides/composition/#component-prop) to define how the root element of a MaterialUI component is rendered.
 我们可以从文档中找到一个更好的 https://material-ui.com/guides/composition/#routing-libraries。 我们可以使用[ component props ]( https://material-ui.com/guides/composition/#component-prop )来定义 MaterialUI 组件的根元素是如何呈现的。
 
 <!-- Määrittelemällä -->
-! -- m rittelem ll -- 
+
 By defining
 通过定义
 
@@ -558,7 +558,7 @@ the _Button_ component is rendered so, that its root component is react-redux _L
 Button 组件呈现为这样，它的根组件是 react-redux Link，它接收它的路径作为 prop 字段到。
 
 <!-- Navigaatiopalkin koodi kokonaisuudessaan on seuraava -->
-! —— navigaatiopalkin koodi kokonaisuudessaan on seuraava -- 
+
 The code for the navigation bar is the following
 导航条的代码如下
 
@@ -585,15 +585,15 @@ The code for the navigation bar is the following
 ```
 
 <!-- ja lopputulos on haluammamme kaltainen -->
-! -- ja lopputulos on haluammme kaltainen -- 
+
 and it looks like we want it to
 看起来我们也希望如此
 
 ![](../../images/7/67ea.png)
-! [](. . / . / images / 7 / 67ea.png)
+
 
 <!-- Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js) -->
-! -- esimerkin sovelluksen koodi kokonaisuudessaan t ll https: / / github. com / fullstack-hy2020 / misc / blob / master / notes-materialui.js -- 
+
 The code of the application can be found from [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js).
 这个应用程序的代码可以在这里找到( https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js 地图)。
 
@@ -601,7 +601,7 @@ The code of the application can be found from [here](https://github.com/fullstac
 封闭的思想
 
 <!-- Ero react-bootstrapin ja MaterialUI:n välillä ei ole suuri. On makuasia kummalla tuotettu ulkoasu on tyylikkäämpi. En ole itse käyttänut MaterialUI:ta kovin paljoa, mutta ensikosketus on positiivinen. Dokumentaatio vaikuttaa aavistuksen react-bootstrapin dokumentaatiota selkeältä. Eri npm-kirjastojen lautausmääriä vertailevan sivuston https://www.npmtrends.com/ mukaan MaterialUI ohitti react-boostrapin suosiossa vuoden 2018 loppupuolella: -->
-<！ ——自力更生—— bootstrapin ja MaterialUI: n v lill ei ole suuri。 基于 tyylikk mpi 的 makuasia kummalla tuotettu ulkoasu。 这是一种坚果的材料，可以用来烹饪，也可以用来烹饪。 本文介绍了一种新型的多功能多功能多功能多功能多功能多功能多功能多功能多功能多功能多功能多功能多功能多功能多功能多功能多功能多功能。 返回文章页面2018奥运会 https://www.npmtrends.com/  :
+<！ ——自力更生
 The difference between react-bootstrap and MaterialUI is not big. It's up to you which one you find better looking. 
 React-bootstrap 和 MaterialUI 之间的区别并不大，这取决于你觉得哪个更好看。
 I myself have not used MaterialUI a lot, but my first impressions are positive. Its documentation is a bit better than react-bootstrap's. 
@@ -610,7 +610,7 @@ According to https://www.npmtrends.com/ which tracks the popularity of different
 根据追踪不同 npm 流行程度的 https://www.npmtrends.com/ 数据库 MaterialUI 在2018年底通过了 react-bootstrap:
 
 ![](../../images/7/68ea.png)
-! [](. . / . / images / 7 / 68ea.png)
+
 
 In the two previous examples, we used the UI frameworks with the help of React-integration libraries.
 在前面的两个示例中，我们借助于 React-integration 库使用了 UI 框架。
@@ -797,7 +797,7 @@ The appearance of the resulting application is shown below:
 产生的应用程序的外观如下:
 
 ![](../../images/7/18ea.png)
-! [](. . / . / images / 7 / 18ea.png)
+
 
 Styled components have seen a consistent growth in popularity in recent times, and quite a lot of people consider it to be the best way of defining styles to React applications.
 风格化的组件在最近一段时间内一直受到欢迎，很多人认为这是定义样式到 React 应用程序的最佳方式。

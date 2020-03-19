@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-Div class"content"
+
 
 
 When creating notes in our application, we would naturally want to store them in some backend server. The [json-server](https://github.com/typicode/json-server) package claims to be a so-called REST or RESTful API in its documentation:
@@ -72,7 +72,7 @@ When we try to create a new note, the following output pops up in console:
 当我们尝试创建一个新的笔记时，控制台会弹出以下输出:
 
 ![](../../images/2/20e.png)
-! [](. . / . / images / 2 / 20e.png)
+
 
 The newly created note resource is stored in the value of the <i>data</i> property of the _response_ object.
 新创建的笔记资源存储在响应对象的 i data / i 属性的值中。
@@ -81,7 +81,7 @@ Sometimes it can be useful to inspect HTTP requests in the <i>Network</i> tab of
 有时在 Chrome 开发工具的 i Network / i 选项卡中检查 HTTP 请求是很有用的，这个选项卡在[ part 0](/ en / part0 / web 应用程序基础 # HTTP-get)开始时被大量使用:
 
 ![](../../images/2/21e.png)
-! [](. . / . / images / 2 / 21e.png)
+
 
 
 We can use the inspector to check that the headers sent in the POST request are what we expected them to be, and that their values are correct.
@@ -124,7 +124,7 @@ It's beneficial to inspect the state of the backend server e.g. through the brow
 通过浏览器检查后端服务器的状态是有益的:
 
 ![](../../images/2/22e.png)
-! [](. . / . / images / 2 / 22e.png)
+
 
 
 This makes it possible to verify that all the data we intended to send was actually received by the server.
@@ -746,7 +746,7 @@ When we try to change the importance of the hardcoded note, we see the following
 当我们试图更改硬编码说明的重要性时，我们在控制台中看到以下错误消息。 错误说明后端服务器用状态码404 i not found / i 响应了我们的 HTTP PUT 请求。
 
 ![](../../images/2/23e.png)
-! [](. . / . / images / 2 / 23e.png)
+
 
 The application should be able to handle these types of error situations gracefully. Users won't be able to tell that an error has actually occurred unless they happen to have their console open. The only way the error can be seen  in the application is that clicking the button has no effect on the importance of the note.
 应用程序应该能够很好地处理这些类型的错误情况。 除非用户碰巧打开了自己的控制台，否则他们无法判断错误确实发生了。 在应用程序中可以看到错误的唯一方式是单击按钮对注释的重要性没有影响。
@@ -889,7 +889,7 @@ Make it possible for users to delete entries from the phonebook. The deletion ca
 使用户可以从电话簿中删除条目。 删除可以通过电话簿列表中每个人的专用按钮来完成。 你可以通过使用[ window.confirm ]( https://developer.mozilla.org/en-us/docs/web/api/window/confirm )方法来确认用户的操作:
 
 ![](../../images/2/24e.png)
-! [](. . / . / images / 2 / 24e.png)
+
 
 The associated resource for a person in the backend can be deleted by making an HTTP DELETE request to the resource's URL. If we are deleting e.g. a person who has the <i>id</i> 2, we would have to make an HTTP DELETE request to the URL <i>localhost:3001/persons/2</i>. No data is sent with the request.
 通过对资源的 URL 发出 HTTP DELETE 请求，可以删除后端中人员的关联资源。 例如，如果我们要删除一个拥有 i id / i 2的人，我们必须向 URL i localhost: 3001 / persons / 2 / i 发出 HTTP DELETE 请求。 请求没有发送任何数据。
@@ -917,7 +917,7 @@ If the person's information is already in the phonebook, the application can con
 如果用户的信息已经在电话簿中，应用程序可以确认用户的操作:
 
 ![](../../images/teht/16e.png)
-! [](. . / . / images / teht / 16e.png)
+
 
 </div>
 

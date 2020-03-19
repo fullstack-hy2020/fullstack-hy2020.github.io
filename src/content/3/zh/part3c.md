@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-Div class"content"
+
 
 Before we move into the main topic of persisting data in a database, we will take a look at a few different ways of debugging Node applications.
 在讨论在数据库中保存数据的主题之前，我们将看一下调试 Node 应用程序的几种不同方法。
@@ -24,7 +24,7 @@ The Visual Studio Code debugger can be useful in some situations. You can launch
 Visualstudio 代码调试器在某些情况下可能很有用。 你可以像这样在调试模式下启动应用程序:
 
 ![](../../images/3/35.png)
-! [](. . / . / images / 3 / 35. png)
+
 
 Note that the application shouldn't be running in another console, otherwise the port will already be in use.
 注意，应用程序不应该在另一个控制台中运行，否则该端口将已经在使用中。
@@ -33,7 +33,7 @@ Below you can see a screenshot where the code execution has been paused in the m
 下面你可以看到一个屏幕截图，代码执行在保存新笔记的过程中被暂停:
 
 ![](../../images/3/36e.png)
-! [](. . / . / images / 3 / 36e.png)
+
 
 The execution has stopped at the <i>breakpoint</i> in line 63. In the console you can see the value of the <i>note</i> variable. In the top left window you can see other things related to the state of the application.
 执行在第63行的 i 断点 / i 处停止。 在控制台中，您可以看到 i note / i 变量的值。 在左上角的窗口中，您可以看到与应用程序状态相关的其他内容。
@@ -58,19 +58,19 @@ You can access the debugger by clicking the green icon that appears in the Chrom
 你可以通过点击 Chrome 开发者控制台中的绿色图标来进入调试器:
 
 ![](../../images/3/37.png)
-! [](. . / . / images / 3 / 37. png)
+
 
 The debugging view works the same way as it did with React applications. The <i>Sources</i> tab can be used for setting breakpoints where the execution of the code will be paused.
 调试视图的工作方式与 React 应用程序相同。 I Sources / i 选项卡可用于设置中断点，中断点将暂停代码的执行。
 
 ![](../../images/3/38eb.png)
-! [](. . / . / images / 3 / 38eb.png)
+
 
 All of the application's console.log messages will appear in the <i>Console</i> tab of the debugger. You can also inspect values of variables and execute your own JavaScript code.
 应用程序的所有 Console.log 消息都将出现在调试器的 i Console / i 选项卡中。 您还可以检查变量的值并执行自己的 JavaScript 代码。
 
 ![](../../images/3/39ea.png)
-! [](. . / . / images / 3 / 39ea.png)
+
 
 #### Question everything
 质疑一切
@@ -109,13 +109,13 @@ Once you've created and logged into your account, Atlas will recommend creating 
 一旦你创建并登录到你的账户，Atlas 会建议你创建一个集群:
 
 ![](../../images/3/57.png)
-! [](. . / . / images / 3 / 57. png)
+
 
 Let's choose <i>AWS</i> and <i>Frankfurt</i> and create a cluster.
 让我们选择 i AWS / i 和 i Frankfurt / i 并创建一个集群。
 
 ![](../../images/3/58.png)
-! [](. . / . / images / 3 / 58. png)
+
 
 Let's wait for the cluster to be ready for use. This will take approximately 10 minutes.
 让我们等待集群准备好可以使用。这大约需要10分钟。
@@ -127,13 +127,13 @@ Let's use the <i>database access</i> tab for creating user credentials for the d
 让我们使用 i database access / i 选项卡为数据库创建用户凭据。 请注意，这些不是您登录到 MongoDB Atlas 所使用的相同凭据。
 
 ![](../../images/3/59.png)
-! [](. . / . / images / 3 / 59. png)
+
 
 Let's grant the user with permissions to read and write to the databases.
 让我们授予用户读写数据库的权限。
 
 ![](../../images/3/60.png)
-! [](. . / . / images / 3 / 60.png)
+
 
 **NB** for some people the new user credentials have not worked immediately after creation. In some cases it has taken minutes before the credentials have worked.
 * * 注意 * * * 对于某些人来说，新的用户证书在创建后没有立即生效。 在某些情况下，这些凭证需要几分钟的时间才能生效。
@@ -142,25 +142,25 @@ Next we have to define the IP addresses that are allowed access to the database.
 接下来，我们必须定义允许访问数据库的 IP 地址。
 
 ![](../../images/3/61ea.png)
-! [](. . / . / images / 3 / 61ea.png)
+
 
 For the sake of simplicity we will allow access from all IP addresses:
 为了简单起见，我们将允许访问所有 IP 地址:
 
 ![](../../images/3/62.png)
-! [](. . / . / images / 3 / 62. png)
+
 
 Finally we are ready to connect to our database. Start by clicking <i>connect</i>
 最后，我们准备连接到我们的数据库
 
 ![](../../images/3/63ea.png)
-! [](. . / . / images / 3 / 63ea.png)
+
 
 and the choose <i>Connect your application</i>:
 选择 i Connect your application / i:
 
 ![](../../images/3/64ea.png)
-! [](. . / . / images / 3 / 64ea.png)
+
 
 The view displays the <i>MongoDB URI</i>, which is the address of the database that we will supply to the MongoDB client library we will add to our application.
 该视图显示 i MongoDB URI / i，这是我们将提供给我们将添加到应用程序的 MongoDB 客户机库的数据库地址。
@@ -242,19 +242,19 @@ in the Overview tab.
 在概览标签页。
 
 ![](../../images/3/65.png)
-! [](. . / . / images / 3 / 65. png)
+
 
 As the view states, the <i>document</i> matching the note has been added to the <i>notes</i> collection in the <i>test</i> database.
 正如视图所指出的那样，匹配注释的 i document / i 已经添加到 i test / i 数据库中的 i notes / i 集合中。
 
 ![](../../images/3/66a.png)
-! [](. . / . / images / 3 / 66a.png)
+
 
 We should give a better name to the database. Like the documentation says, we can change the name of the database from the URI:
 我们应该给这个数据库起个更好的名字。 正如文档所说，我们可以从 URI 改变数据库的名称:
 
 ![](../../images/3/67.png)
-! [](. . / . / images / 3 / 67. png)
+
 
 Let's destroy the <i>test</i> database. Let's change the name of database to <i>note-app</i> instead, by modifying the URI:
 让我们通过修改 URI，将数据库的名称更改为 i note-app / i:
@@ -267,7 +267,7 @@ Let's run our code again.
 让我们再次运行代码。
 
 ![](../../images/3/68.png)
-! [](. . / . / images / 3 / 68. png)
+
 
 The data is now stored in the right database. The view also offers the <i>create database</i> functionality, that can be used to create new databases from the website. Creating the database like this is not necessary, since MongoDB Atlas automatically creates a new database when an application tries to connect to a database that does not exist yet.
 数据现在存储在正确的数据库中。 该视图还提供了 i create database / i 功能，可用于从网站创建新的数据库。 这样创建数据库是不必要的，因为当应用程序试图连接到一个尚不存在的数据库时，MongoDB Atlas 会自动创建一个新的数据库。
@@ -358,7 +358,7 @@ When the code is executed, the program prints all the notes stored in the databa
 当代码执行时，程序会输出存储在数据库中的所有笔记:
 
 ![](../../images/3/70ea.png)
-! [](. . / . / images / 3 / 70ea.png)
+
 
 The objects are retrieved from the database with the [find](https://mongoosejs.com/docs/api.html#model_Model.find) method of the _Note_ model. The parameter of the method is an object expressing search conditions. Since the parameter is an empty object<code>{}</code>, we get all of the notes stored in the  _notes_ collection.
 这些对象是通过 Note 模型的[ find ]( https://mongoosejs.com/docs/api.html#model_model.find )方法从数据库中检索的。 该方法的参数是表示搜索条件的对象。 因为参数是一个空的对象代码{} / code，所以我们得到了存储在 notes 集合中的所有备注。
@@ -478,7 +478,7 @@ Person
 / div
 
 <div class="content">
-Div class"content"
+
 
 ### Backend connected to a database
 # # 后端连接到数据库
@@ -522,7 +522,7 @@ We can verify in the browser that the backend works for displaying all of the do
 我们可以在浏览器中验证后端是否可以显示所有文档:
 
 ![](../../images/3/44ea.png)
-! [](. . / . / images / 3 / 44ea.png)
+
 
 The application works almost perfectly. The frontend assumes that every object has a unique id in the <i>id</i> field. We also don't want to return the mongo versioning field <i>\_\_v</i> to the frontend.
 这个应用程序运行得几乎完美。 前端假设每个对象在 i id / i 字段中都有唯一的 id。 我们也不想将 mongo 版本控制字段 i  v / i 返回到前端。
@@ -640,7 +640,7 @@ The method for establishing the connection is now given functions for dealing wi
 建立连接的方法现在被赋予处理成功和失败的连接尝试的函数。 这两个函数都只是向控制台发送一条关于成功状态的消息:
 
 ![](../../images/3/45e.png)
-! [](. . / . / images / 3 / 45e.png)
+
 
 There are many ways to define the value of an environment variable. One way would be to define it when the application is started:
 有很多方法可以定义环境变量的价值。 一种方法是在应用程序启动时定义它:
@@ -671,7 +671,7 @@ We also added the hardcoded port of the server into the <em>PORT</em> environmen
 * * 应立即公布 i. env / i 文件，因为我们不希望在网上公开任何机密信息! * * 
 
 ![](../../images/3/45ae.png)
-! [](. . / . / images / 3 / 45ae.png)
+
 
 The environment variables defined in the dotenv file can be taken into use with the command <em>require('dotenv').config()</em> and you can reference them in your code just like you would reference normal environment variables, with the familiar <em>process.env.MONGODB_URI</em> syntax.
 可以使用 em require (‘ dotenv’)命令来使用 dotenv 文件中定义的环境变量。 Config () / em，您可以在代码中引用它们，就像引用普通环境变量一样，使用熟悉的 em process.env.MONGODB URI / em 语法。
@@ -753,7 +753,7 @@ When the backend gets expanded, it's a good idea to test the backend first with 
 当后端扩展时，最好先用 * * the browser，Postman 或者 VS Code REST 客户端 * * 来测试后端。 接下来，让我们尝试在使用数据库之后创建一个新的笔记:
 
 ![](../../images/3/46e.png)
-! [](. . / . / images / 3 / 46e.png)
+
 
 Only once everything has been verified to work in the backend, is it a good idea to test that the frontend works with the backend. It is highly inefficient to test things exclusively through the frontend.
 只有当所有的东西都被验证在后端工作时，测试前端是否与后端一起工作是一个好主意。 仅仅通过前端测试是非常低效的。
@@ -804,7 +804,7 @@ At this point, you can choose to simply allow users to create all phonebook entr
 / div
 
 <div class="content">
-Div class"content"
+
 
 ### Error handling
 错误处理
@@ -816,7 +816,7 @@ We can see the following error message appear in the logs for the backend:
 我们可以在后端的日志中看到以下错误消息:
 
 ![](../../images/3/47.png)
-! [](. . / . / images / 3 / 47. png)
+
 
 The request has failed and the associated Promise has been <i>rejected</i>. Since we don't handle the rejection of the promise, the request never gets a response. In part 2, we already acquainted ourselves with [handling errors in promises](/en/part2/altering_data_in_server#promises-and-errors).
 请求失败，相关的承诺已被拒绝。 因为我们不处理对承诺的拒绝，所以请求不会得到响应。 在第2部分中，我们已经了解了[处理许诺中的错误](/ en / part2 / modified data In server # promises-and-errors)。
@@ -944,7 +944,7 @@ Every time you're working on a project with a backend, <i>it is critical to keep
 每次您使用后端处理项目时，关注后端 / i 的控制台输出是至关重要的。 如果你在一个小屏幕上工作，只需要在背景中看到输出的一小部分就足够了。 任何错误消息都会引起你的注意，即使控制台远在后台:
 
 ![](../../images/3/15b.png)
-! [](. . / . / images / 3 / 15b.png)
+
 
 ### Moving error handling into middleware
 # # # 将错误处理移入中间件
@@ -1124,7 +1124,7 @@ When we toggle the importance of a note, we see the following worrisome error me
 当我们切换注意事项的重要性时，我们会在控制台中看到以下令人担忧的错误消息:
 
 ![](../../images/3/48.png)
-! [](. . / . / images / 3 / 48. png)
+
 
 Googling the error message will lead to [instructions](https://stackoverflow.com/questions/52572852/deprecationwarning-collection-findandmodify-is-deprecated-use-findoneandupdate) for fixing the problem. Following [the suggestion in the Mongoose documentation](https://mongoosejs.com/docs/deprecations.html), we add the following line to the <i>note.js</i> file:
 谷歌错误信息将导致[指示]( https://stackoverflow.com/questions/52572852/deprecationwarning-collection-findandmodify-is-deprecated-use-findoneandupdate )解决问题。 根据 Mongoose 文档中的建议，我们在 i note.js / i 文件中添加了以下 https://mongoosejs.com/docs/deprecations.html  :
@@ -1188,7 +1188,7 @@ Inspecting an individual phonebook entry from the browser should look like this:
 通过浏览器查看一个电话簿条目应该是这样的:
 
 ![](../../images/3/49.png)
-! [](. . / . / images / 3 / 49. png)
+
 
 </div>
 

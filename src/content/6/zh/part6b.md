@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-div class"content"
+
 
 
 Let's continue our work with the simplified [redux version](/en/part6/flux_architecture_and_redux#redux-notes) of our notes application.
@@ -47,7 +47,7 @@ Let's implement filtering for the notes that are displayed to the user. The user
 让我们实现对显示给用户的便笺的过滤。 用户界面的过滤器将实现[单选按钮]( https://developer.mozilla.org/en-us/docs/web/html/element/input/radio ) :
 
 ![](../../images/6/01e.png)
-! [](. . / . / images / 6 / 01e.png)
+
 
 
 Let's start with a very simple and straightforward implementation:
@@ -206,7 +206,7 @@ The state of the store gets printed to the console:
 存储的状态被打印到控制台:
 
 ![](../../images/6/4e.png)
-! [](. . / . / images / 6 / 4e.png)
+
 
 
 As we can see from the output, the store has the exact shape we wanted it to!
@@ -245,7 +245,7 @@ By simulating the creation of a note and changing the state of the filter in thi
 通过模拟创建一个注释，并以这种方式更改过滤器的状态，在对存储进行每次更改后，存储的状态都会被记录到控制台:
 
 ![](../../images/6/5e.png)
-! [](. . / . / images / 6 / 5e.png)
+
 
 
 At this point it is good to become aware of a tiny but important detail. If we add a console log statement <i>to the beginning of both reducers</i>:
@@ -263,7 +263,7 @@ Based on the console output one might get the impression that every action gets 
 基于控制台输出，你可能会得到这样的印象: 每个动作都被复制了:
 
 ![](../../images/6/6.png)
-! [](. . / . / images / 6 / 6.png)
+
 
 
 Is there a bug in our code? No. The combined reducer works in such a way that every <i>action</i> gets handled in <i>every</i> part of the combined reducer. Typically only one reducer is interested in any given action, but there are situations where multiple reducers change their respective parts of the state based on the same action.
@@ -290,7 +290,7 @@ Next, let's fix a bug that is caused by the code expecting the application store
 接下来，让我们修复一个错误，这个错误是由代码期望应用程序存储为一个注释数组而引起的:
 
 ![](../../images/6/7ea.png)
-! [](. . / . / images / 6 / 7ea.png)
+
 
 
 <!-- Korjaus on helppo. Koska muistiinpanot ovat nyt storen kentässä <i>notes</i>, riittää pieni muutos selektorifunktioon: -->
@@ -320,7 +320,7 @@ const Notes = () => {
 ```
 
 <!-- Aiemminhan selektorifunktio palautti koko storen tilan: -->
-! —— aiemminhan selektorifunktio palautti koko storen tilan: -- 
+
 Previously the selector function returned the whole state of the store:
 以前，selector 函数返回存储的整个状态:
 
@@ -329,7 +329,7 @@ const notes = useSelector(state => state)
 ```
 
 <!-- Nyt siis palautetaan tilasta ainoastaan sen kenttä <i>notes</i> -->
-! -- nyt siis palautetaan tilasta ainoastaan sen kentt i notes / i -- 
+
 And now it returns only its field <i>notes</i>
 现在它只返回字段 i notes / i
 
@@ -434,7 +434,7 @@ const Notes = () => {
 ```
 
 <!-- Muutos kohdistuu siis ainoastaan selektorifunktioon, joka oli aiemmnin muotoa -->
-! -- muutos kohdistuu siis ainoastaan selektorifunktioon，joka oli aiemmnin muotoa --
+
 We only make changes to the selector function, which used to be
 我们只对选择器函数进行更改，这个函数过去是
 
@@ -443,7 +443,7 @@ useSelector(state => state.notes)
 ```
 
 <!-- Yksinkertaistetaan vielä selektoria destrukturoimalla parametrina olevasta tilasta sen kentät erilleen: -->
-—— yksinkertaistan viel selektoria destrukturoimalla 医务人员 olevasta tista sen kent t erilleen: ——
+
 Let's simplify the selector by destructuring the fields from the state it receives as a parameter:
 让我们通过将字段作为参数从它接收的状态中析构来简化选择器:
 
@@ -504,19 +504,19 @@ Now when you open the console, the <i>redux</i> tab looks like this:
 现在当你打开控制台，i redux / i 标签看起来像这样:
 
 ![](../../images/6/11ea.png)
-! [](. . / . / images / 6 / 11ea.png)
+
 
 The effect of each to the store can be easily observed 
 每一种对商店的影响都可以很容易地观察到
 
 ![](../../images/6/12ea.png)
-! [](. . / . / images / 6 / 12ea.png)
+
 
 It's also possible to dispatch actions to the store using the console
 还可以使用控制台将操作分派到存储区
 
 ![](../../images/6/13ea.png)
-! [](. . / . / images / 6 / 13ea.png)
+
 
 You can find the code for our current application in its entirety in the <i>part6-2</i> branch of [this Github repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-2).
 您可以在[ this Github repository ]的 i / part6-2 / i 分支中找到我们当前应用程序的全部代码，该分支位于 https://Github.com/fullstack-hy2020/redux-notes/tree/part6-2。
@@ -540,7 +540,7 @@ Let's continue working on the anecdote application using redux that we started i
 6.9更好的轶事，第七步
 
 <!-- Ota sovelluksessasi käyttöön React dev tools. Siirrä Redux-storen määrittely omaan tiedostoon <i>store.js</i>. -->
-! —— ota sovelluksasi k ytt n 响应开发工具 siirr redux-storen m ritmely omaan tiedostoon i store.js / i. -- 
+
 Start using React dev tools. Move defining the Redux-store into its own file <i>store.js</i>.
 开始使用 React dev 工具，将 Redux-store 定义到它自己的文件 i store.js / i 中。
 
@@ -605,7 +605,7 @@ Extend the application so that it uses the <i>Notification</i> component to disp
 扩展应用程序，以便在用户投票支持一个轶事或创建一个新轶事时，使用 i Notification / i 组件显示一条消息，持续时间为5秒钟:
 
 ![](../../images/6/8ea.png)
-! [](. . / . / images / 6 / 8ea.png)
+
 
 
 It's recommended to create separate [action creators](https://redux.js.org/basics/actions#action-creators) for setting and removing notifications.
@@ -620,7 +620,7 @@ Implement filtering for the anecdotes that are displayed to the user.
 对显示给用户的奇闻异事进行筛选。
 
 ![](../../images/6/9ea.png)
-! [](. . / . / images / 6 / 9ea.png)
+
 
 
 Store the state of the filter in the redux store. It is recommended to create a new reducer and action creators for this purpose.

@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-div class"content"
+
 
 
 Let's expand the application, such that the notes are stored to the backend. We'll use [json-server](/en/part2/getting_data_from_server), familiar from part 2.
@@ -197,15 +197,15 @@ export default App
 ```
 
 <!-- Hookin useEffect käyttö aiheuttaa eslint-varoituksen: -->
-! -- hookin useeffect k ytt aiheuttaa eslint-varoituksen: -- 
+
 Using the useEffect hook causes an eslint-warning:
 使用 useEffect hook 会导致一个 eslint-warning:
 
 ![](../../images/6/26ea.png)
-! [](. . / . / images / 6 / 26ea.png)
+
 
 <!-- Pääsemme varoituksesta eroon seuraavasti: -->
-! -- p semme varoituksesta eroon seuraavasti: -- 
+
 We can get rid of it by doing the following:
 我们可以通过以下方法来摆脱它:
 
@@ -222,7 +222,7 @@ const App = () => {
 ```
 
 <!-- Nyt komponentin _App_ sisällä määritelty muuttuja <i>dispatch</i> eli käytännössä redux-storen dispatch-funktio on lisätty useEffectille parametrina annettuun taulukkoon. **Jos** dispatch-muuttujan sisältö muuttuisi ohjelman suoritusaikana, suoritettaisiin efekti uudelleen, näin ei kuitenkaan ole, eli varoitus on tässä tilanteessa oikeastaan aiheeton. -->
-———————————————————————————————————————————————— --。 * * Jos * * dispatch-muuttujan sis muuttuisi ohjelman suoritusaikana，suoritettaisiin efekti uudelleen，n in ei kuitenkaan ole，eli varoitus on the ss tilanteessa oikeastaan aiheeton. -->
+——————————————————————————————————————————————
 Now the variable <i>dispatch</i> we define in the _App_ component, which practically is the dispatch function of the redux-store, has been added to the array useEffect receives as a parameter.
 现在，我们在 App 组件中定义的变量 i dispatch / i (实际上是 redux-store 的 dispatch 函数)已经被添加到作为参数接收的数组 useEffect 中。
 **If** the value of the dispatch-variable would change during runtime, 
@@ -231,7 +231,7 @@ the effect would be executed again. This however cannot happen in our applicatio
 该效果将再次执行。但是，这不能在我们的应用程序中发生，所以警告是不必要的。
 
 <!-- Toinen tapa päästä eroon varoituksesta olisi disabloida se kyseisen rivin kohdalta: -->
-! -- toinen tapa p st eroon varoituksesta olisi disabloida se kyseisen rivin kohdalta: -- 
+
 Another way to get rid of the warning would be to disable eslint on that line:
 另一个消除警告的方法是禁用该行上的 eslint:
 
@@ -250,12 +250,12 @@ const App = () => {
 ```
 
 <!-- Yleisesti ottaen eslint-virheiden disabloiminen ei ole hyvä idea, joten vaikka kyseisen eslint-säännön tarpeellisuus onkin aiheuttanut [kiistelyä](https://github.com/facebook/create-react-app/issues/6880), pitäydytään ylemmässä ratkaisussa.  -->
-! —— yleesti ottaen eslint-virheiden disabloiminen ei ole hyv idea，joten vaikka kyseisen eslint-s nn tarpeellisuus onkin aiheuttanut 可选地 https: / / github / facebook / create-react-app / issues / 6880，pit ydyt n ylemm ss ratkaissa. ——
+
 Generally disabling eslint when it throws a warning is not a good idea. Even though the eslint rule in question has caused some [arguments](https://github.com/facebook/create-react-app/issues/6880), we will use the first solution.
 通常在 eslint 抛出警告时禁用它不是一个好主意。 尽管所讨论的 eslint 规则引起了一些[争论]( https://github.com/facebook/create-react-app/issues/6880) ，我们将使用第一个解决方案。
 
 <!-- Lisää hookien riippuvuuksien määrittelyn tarpeesta [reactin dokumentaatiossa](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies). -->
-! —— lis hookien riippuvuuksien m rittelyn tarpeesta reactin dokumentaatiossa https: / / reactjs. org / docs / hooks-faq. html # is-it-safe-to-omit-functions-from-the-list-of-dependencies. ——
+
 More about the need to define the hooks dependencies in [the react documentation](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies).
 更多关于需要在[反应文档]中定义钩子依赖关系的 https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies。
 
@@ -361,7 +361,7 @@ Modify the creation of new anecdotes, such that the anecdotes are stored in the 
 / div
 
 <div class="content">
-div class"content"
+
 
 ### Asynchronous actions and redux thunk
 异步操作和 redux thunk

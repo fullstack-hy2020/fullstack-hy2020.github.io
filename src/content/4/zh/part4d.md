@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-div class"content"
+
 
 Users must be able to log into our application, and when a user is logged in, their user information must automatically be attached to any new notes they create. 
 用户必须能够登录到我们的应用程序，当用户登录时，他们的用户信息必须自动附加到他们创建的任何新笔记上。
@@ -18,7 +18,7 @@ The principles of token based authentication are depicted in the following seque
 基于令牌的身份验证原理在下面的时序图中进行了描述:
 
 ![](../../images/4/16e.png)
-! [](. . / . / images / 4 / 16e.png)
+
 
 - User starts by logging in using a login form implemented with React 
 - User 首先使用 React 实现的登录表单登录
@@ -136,7 +136,7 @@ Let's try logging in using VS Code REST-client:
 让我们尝试使用 VS Code REST-client 登录:
 
 ![](../../images/4/17e.png)
-! [](. . / . / images / 4 / 17e.png)
+
 
 It does not work. The following is printed to console: 
 它不工作。以下是打印到控制台的:
@@ -155,13 +155,13 @@ A successful login returns the user details and the token:
 一个成功的登录将返回用户详细信息和令牌:
 
 ![](../../images/4/18ea.png)
-! [](. . / . / images / 4 / 18ea.png)
+
 
 A wrong username or password returns an error message and the proper status code:
 错误的用户名或密码会返回错误消息和正确的状态码:
 
 ![](../../images/4/19ea.png)
-! [](. . / . / images / 4 / 19ea.png)
+
 
 ### Limiting creating new notes to logged in users
 # # # 限制登录用户创建新笔记
@@ -265,13 +265,13 @@ Using Postman this looks as follows:
 使用 Postman 这看起来如下:
 
 ![](../../images/4/20e.png)
-! [](. . / . / images / 4 / 20e.png)
+
 
 and with Visual Studio Code REST client
 和 Visual Studio Code REST 客户端
 
 ![](../../images/4/21e.png)
-! [](. . / . / images / 4 / 21e.png)
+
 
 ### Error handling
 错误处理
@@ -377,7 +377,7 @@ List of users can for example, look as follows:
 例如，用户列表可以如下所示:
 
 ![](../../images/4/22.png)
-! [](. . / . / images / 4 / 22.png)
+
 
 #### 4.16*: bloglist expansion, step5
 4.16 * : bloglist expansion，step5
@@ -409,13 +409,13 @@ Modify listing all blogs so that the creator's user information is displayed wit
 修改所有博客列表，以便创建者的用户信息与博客一起显示:
 
 ![](../../images/4/23e.png)
-! [](. . / . / images / 4 / 23e.png)
+
 
 and listing all users also displays the blogs created by each user: 
 并列出所有用户，同时显示每个用户创建的博客:
 
 ![](../../images/4/24e.png)
-! [](. . / . / images / 4 / 24e.png)
+
 
 #### 4.18: bloglist expansion, step7
 4.18: bloglist expansion，step7

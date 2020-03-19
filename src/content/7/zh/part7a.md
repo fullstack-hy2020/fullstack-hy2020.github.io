@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-Div class"content"
+
 
 The exercises in this seventh part of the course differ a bit from the ones before. In this and the next chapter there is, as usual [exercises related to the theory in the chapter](/en/part7/react_router#exercises-7-1-7-3).
 本课程第七部分的练习与以前的有一点不同。 在本章和下一章中，像往常一样有[与本章理论相关的练习](/ en / part7 / react router # exercises-7-1-7-3)。
@@ -27,13 +27,13 @@ Our app could have a main page
 我们的应用程序可以有一个主页
 
 ![](../../images/7/1ea.png)
-! [](. . / . / images / 7 / 1ea.png)
+
 
 and separate pages for showing information on notes and users:
 以及显示备注及使用者资料的独立网页:
 
 ![](../../images/7/2ea.png)
-! [](. . / . / images / 7 / 2ea.png)
+
 
 In an [old school web app](/en/part0/fundamentals_of_web_apps#traditional-web-applications), changing the page shown by the application would be accomplished by the browser making a HTTP GET request to the server and rendering the HTML representing the view that was returned.
 在[老式 web 应用程序](/ en / part0 / web 应用程序基础 # traditional-web-applications)中，更改应用程序显示的页面将由浏览器向服务器发出 HTTP GET 请求并显示表示返回视图的 HTML 来完成。
@@ -114,7 +114,7 @@ However, the method is not very optimal. As we can see from the pictures, the ad
 然而，这种方法并不十分理想。 正如我们从图片中看到的，即使有时我们处于不同的视角，地址仍然保持不变。 每个视图最好都有自己的地址，例如使书签成为可能。 I back / i-button 对于我们的应用程序也不能正常工作，这意味着 i back / i 不会将您移动到以前显示的应用程序视图，而是移动到完全不同的位置。 如果应用程序变得更大，例如，我们希望为每个用户添加单独的视图和注释，那么这个自制的 i routing / i (这意味着应用程序的导航管理)将变得过于复杂。
 
 <!-- Reactissa on onneksi olemassa kirjasto [React router](https://github.com/ReactTraining/react-router) joka tarjoaa erinomaisen ratkaisun React-sovelluksen navigaation hallintaan. -->
-! -- reactissa on onneksi olemasa kirjasto react router https: / / github. com / reacttraining / react-router joka tarjoaa erinomaisen ratkaisun react-sovelluksen navigalation hallintaan. --
+
 Luckily React has the [React router](https://github.com/ReactTraining/react-router)-library, which provides an excellent solution for managing navigation in a React-application.
 幸运的是 React 有[ React router ]( https://github.com/reacttraining/React-router )-library，它为管理 React-application 中的导航提供了一个很好的解决方案。
 
@@ -210,12 +210,12 @@ Components rendered based on the URL of the browser are defined with the help of
 ```
 
 <!-- määrittelee, että jos selaimen osoiteena on <i>/notes</i>, renderöidään komponentti <i>Notes</i>. -->
-! -- m rittelee，ett jos selaimen osoiteena on i / Notes / i，render id n komponentti i Notes / i. --
+
 defines, that if the browser address is <i>/notes</i>, we render the <i>Notes</i> component.
 定义，如果浏览器地址是 i / Notes / i，则呈现 i Notes / i 组件。
 
 <!-- Urliin perustuen renderöitävät komponentit on sijoitettu [Swithch](https://reacttraining.com/react-router/web/api/Switch)-komponentin lapsiksi -->
-! -- urliin perustuen render it t komponentit on sijoitettu swithch https: / / reacttraining. com / react-router / web / api / switch-komponentin lapssi --
+
 We wrap the components to be rendered based on the url with a [Swithch](https://reacttraining.com/react-router/web/api/Switch)-component
 我们用一个[ Swithch ]( https://reacttraining.com/react-router/web/api/switch )-组件包装要基于 url 呈现的组件
 
@@ -239,7 +239,7 @@ The switch works so, that we render the first component which's <i>path</i> matc
 这个开关的工作原理是，我们呈现第一个组件，它的 i path / i 匹配浏览器地址栏中的 url。
 
 <!-- Huomaa, että komponenttien järjestys on tärkeä. Jos laittaisimme ensimmäiseksi komponentin <i>Home</i>, jonka polku on <i> path="/"</i>, ei mitää muuta komponenttia koskaan renderöitäisi, sillä "olematon" polku on minkä tahansa polun alkuosa: -->
-! ——霍玛，其他人在路上，乔斯 · 莱塔斯梅 · 恩西姆 · 伊斯梅 · 伊斯马丁在路上，琼卡 · 波尔库在路上，艾尔和穆乌塔 · 科斯卡在一起，希尔 · 奥列马顿在水貂塔汉萨 · 波伦 · 阿尔库萨的路上。——
+
 Note, that the order of the components is important. If we would put the <i>Home</i>-component, which's path is <i> path="/"</i>, first, nothing else would ever get rendered because the "non existing" path "/" is the start of every path:
 注意，组件的顺序很重要。 如果我们使用 i Home / i-component，它的路径是 i path” / ” / i，首先，没有其他东西会被渲染，因为“ non existing” path” / ”是每个路径的开始:
 
@@ -269,7 +269,7 @@ The application now contains five different views, the display of which is contr
 I Home / i 和 i Users / i 与上次练习相同。 I Notes / i 有点复杂。 它以这样一种方式呈现作为道具传递给它的音符列表，即每个音符的名称都是可点击的。
 
 ![](../../images/7/3ea.png)
-! [](. . / . / images / 7 / 3ea.png)
+
 
 The ability to click a name is implemented with the component <i>Link</i>, and clicking the name of a note whose id is 3 would trigger an event that changes the address of the browser into <i>notes/3</i>:
 单击名称的能力是通过组件 i Link / i 实现的，单击 id 为3的注释的名称将触发一个事件，该事件将浏览器地址更改为 i notes / 3 / i:
@@ -290,7 +290,7 @@ const Notes = ({notes}) => (
 ```
 
 <!-- Parametrisoitu url määritellään komponentissa <i>App</i> olevaan reititykseen seuraavasti: -->
-! ——医护人员网址 m ritell n komponentissa i App / i olevaan reititykseen seuraavasti: ——
+
 We define parametrized urls in the routing in <i>App</i>-component as follows:
 我们在 i App / i-component 的路由中定义参数化 url 如下:
 
@@ -321,7 +321,7 @@ We define parametrized urls in the routing in <i>App</i>-component as follows:
 ```
 
 <!-- Yksittäisen muistiinpanon näkymän renderöivä route siis määritellään "expressin tyyliin" merkkaamalla reitin parametrina oleva osa merkinnällä <i>:id</i> -->
-! -- yksitt isen muistiinpanon n kyn render iv route siis m ritell n“ expressin tyyliin” merkkaamalla reitin parametina oleva merkinn ll i: id / i --
+
 We define the route rendering a specific note "express style" by marking the parameter with a colon <i>:id</i>
 我们通过用冒号 i: id / i 标记参数来定义呈现特定注释的路由“ express style”
 
@@ -354,7 +354,7 @@ const Note = ({ notes }) => {
 ```
 
 <!-- Komponentti _Note_ saa parametrikseen kaikki muistiinpanot propsina <i>notes</i> ja se pääsee urlin yksilöivään osaan, eli näytettävän muistiinpanon id:hen käsiksi  react-routerin funktion [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) avulla.  -->
-! —— komponentti 注意到一位医护人员看到了 kaikki muistiinpanot propsani 笔记 / i ja se p see urlin yksil iv n osaan，eli n ytett v n muistiinpanon id: hen k siksi react-routerin funktion [ useParams ]( https://reacttraining.com/react-router/web/api/hooks/useParams ) avulla。 -->
+
 The _Note_ component receives all of the notes as props <i>notes</i>, and it can access the url parameter (the id of the note to be displayed) with the [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) function of the react-router.
 Note 组件接收所有的笔记作为 props i notes / i，它可以通过 react-router 的[ useParams ]( https://reacttraining.com/react-router/web/api/hooks/useParams )函数访问 url 参数(要显示的笔记的 id)。
 
@@ -362,7 +362,7 @@ Note 组件接收所有的笔记作为 props i notes / i，它可以通过 react
 使用历史
 
 <!-- Sovellukseen on myös toteutettu erittäin yksinkertainen kirjautumistoiminto. Jos sovellukseen ollaan kirjautuneena, talletetaan tieto kirjautuneesta käyttäjästä komponentin <i>App</i> tilaan <i>user</i>. -->
-! -- 在我的办公桌上，我看见乔斯 · 索维卢克在秋天的时候穿着雨衣，他穿着雨衣，穿着雨衣，穿着雨衣，穿着雨衣，穿着雨衣。 -->
+
 We have also implemented a simple log in function in our application. If a user is logged in, information about a logged in user is saved to the <i>user</i> field of the state of the <i>App</i> component.
 我们还在应用程序中实现了一个简单的登录函数。 如果用户登录，则关于登录用户的信息将保存到 i App / i 组件状态的 i user / i 字段中。
 
@@ -391,7 +391,7 @@ So if the user is already logged in, instead of displaying the link <i>Login</i>
 因此，如果用户已经登录，我们不显示链接 i Login / i，而是显示用户的用户名:
 
 ![](../../images/7/4a.png)
-! [](. . / . / images / 7 / 4a.png)
+
 
 The code of the component handling the login functionality is as follows 
 处理登录功能的组件代码如下
@@ -429,19 +429,19 @@ const Login = (props) => {
 ```
 
 <!-- Mielenkiinoista komponentissa on react-routerin funktion [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) käyttö. Funktion avulla komponentti pääsee käsiksi [history](https://reacttraining.com/react-router/web/api/history)-olioon, joka taas mahdollistaa mm. selaimen osoiterivin muokkaamisen ohjelmallisesti. -->
-! —— mielenkiinista komponentissa on react-routerin funktion usedhistory https: / / reacttraining. com / react-router / web / api / hooks / usehistory k ytt. funktion avulla komponentti p see k siksi history something 1-olioon，joka taas mahdollistaa mselaimen osoivin muokkaen ohmallistis. ——
+
 What is interesting about this component is the use of the [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) function of the react-router.
 这个组件的有趣之处在于它使用了反应路由器的[ useHistory ]( https://reacttraining.com/react-router/web/api/hooks/useHistory 路由器)功能。
 With this function the component can access a [history](https://reacttraining.com/react-router/web/api/history) object. The history object can be used to i.a modify the browser url programmatically.
 有了这个函数，组件就可以访问一个[ https://reacttraining.com/react-router/web/api/history ]对象。 历史记录对象可以用于 i.a 编程修改浏览器的 url。
 
 <!-- Kirjautumisen yhteydessä kutsutaan history-olion metodia push. Komento _history.push('/')_ saa aikaan sen, että selaimen osoiteriville tulee osoitteeksi _/_ ja sovellus renderöi osoitetta vastaavan komponentin <i>Home</i>. -->
-—— kirjetumisen yhtumyteeksi / ja sovellus render i osoitetta vastaavan komponi Home / i。 -->
+
 With user log in we call the push method of the history object. The  _history.push('/')_ call causes the browser url to change to _/_ and the application renders the corresponding component <i>Home</i>.
 对于用户登录，我们调用历史对象的 push 方法。 History.push (’ / ’)调用导致浏览器的 url 更改为 / ，应用程序呈现相应的组件 i Home / i。
 
 <!-- Käyttämämme react-router-kirjaston funktiot [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) ja [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) ovat molemmat hook-funktiota, samaan tapaan kuin esim. moneen kertaan käyttämämme useState ja useEffect. Kuten muistamme osasta 1, hook-funktioiden käyttöön liittyy tiettyjä [sääntöjä](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot). Create-react-app on konfiguroitu varoittamaan, jos hookien säännöt rikkoutuvat, esim. jos hook-funktiota yritetään kutsua ehtolauseen sisältä.  -->
-<！ - k ytt mme react-router-kirjaston funktiot [ useParams ](useHistory) ja [ useHistory ]( https://reacttraining.com/react-router/web/api/hooks/useParams ) ovat molemmat hook-funktiota，samaan tapaan kuin esim. Moneen kertaan k ytt m me useState ja useEffect. 1，hook-funktioiden k ytt n liittyy tiettyj [ s nt j ](/ osa1 / monimutkaisempi tila redebuggus # hookenen-saannot). 创建-反应-应用程序上 konfigroitu varoittamaan，何塞胡克林 s n rikkoutuvat，esim。 Jose hook-funktiota yriet n kutsua ehtolauseen sis.   -->
+
 Both [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) and [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) are hook-functions, just like useState and useEffect we have used many times now.  As you remember from part 1, there are some [rules](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot) to using hook-functions. Create-react-app has been configured to warn you, if you break these rules e.g by calling a hook-function from a conditional statement.
 Https://reacttraining.com/react-router/web/api/hooks/useParams 和 https://reacttraining.com/react-router/web/api/hooks/useHistory 都是钩子函数，就像我们已经多次使用的 useState 和 useEffect 一样。 正如您在第1部分中记得的，使用钩函数有一些[规则](/ osa1 / monimutkaisempi tila reactin debuggaus # hookenen-saannot)。 创建-反应-应用程序已经配置为警告你，如果你打破这些规则，例如通过调用一个钩子函数从一个 If判断语句。
 
@@ -531,7 +531,7 @@ We define an element common for modern web apps called <i>footer</i>, which defi
 # # # 重新访问参数化路线
 
 <!-- Sovelluksessa on eräs hieman ikävä seikka. Komponentti _Note_ saa propseina kaikki muistiinpanot, vaikka se näyttää niistä ainoastaan sen, jonka id vastaa urlin parametroitua osaa: -->
-—— sovelluksessa on er’s hieman ik v sekka. komponentti
+
 Our application has a flaw. The _Note_ component receives all of the notes, even though it only displays the one which's id matches the url parameter:
 我们的申请有一个缺陷。 组件接收所有的笔记，即使它只显示与 url 参数匹配的 id:
 
@@ -545,7 +545,7 @@ const Note = ({ notes }) => {
 ```
 
 <!-- Olisiko mahdollista muuttaa sovellusta siten, että _Note_ saisi propsina ainoastaan näytettävän komponentin: -->
-—— olisiko mahdollista muuttaa sovellusta siten，ett saisi propinsina ainoastan n ytett v n koponentin: ——
+
 Would it be possible to modify the application so, that _Note_ receives only the component it should display?
 是否有可能修改应用程序，使 Note 只接收它应该显示的组件？
 
@@ -562,12 +562,12 @@ const Note = ({ note }) => {
 ```
 
 <!-- Eräs tapa muuttaa sovellusta olisi selvittää näytettävän muistiinpanon _id_ komponentissa _App_ react-routerin hook-funktion [useRouteMatch](https://reacttraining.com/react-router/web/api/Hooks/useroutematch) avulla. -->
-! —— er s tapa muuttaa sovellusta olisi selvitt n ytett v n muistiinpanon id komponentissa app react-routerin hook-funktion useroutematch https: / / reacttraining. com / react-routers / web / api / useroutematch avulla. ——
+
 One way to do this would be to use react-router's [useRouteMatch](https://reacttraining.com/react-router/web/api/Hooks/useroutematch) hook to figure out the id of the note to be displayed in the _App_ component.
 一种方法是使用 react-router 的[ useRouteMatch ]( https://reacttraining.com/react-router/web/api/hooks/useRouteMatch )钩子来计算出应用程序组件中显示的注释的 id。
 
 <!-- <i>useRouteMatch</i>-hookin käyttö [ei ole](https://github.com/ReactTraining/react-router/issues/7015)  mahdollista samassa komponentissa, joka määrittelee sovelluksen reititettävän osan. Siirretäänkin _Router_-komponenttien käyttö komponentin _App_ ulkopuolelle: -->
-! ——我用户登录了[ el ole ]( https://github.com/reacttraining/react-router/issues/7015) mahdollista samassa komponentissa，joka m rittelee sovelluksen reitett v n osan。 Siirret nkin Router-komponentien k ytt komponentin App ulkopuolelle:-
+
 It is not possible to use <i>useRouteMatch</i>-hook in the component which defines the routed part of the application. Let's move the use of the _Router_ components from _App_:
 在定义应用程序路由部分的组件中不可能使用 i useRouteMatch / i-hook。 让我们把路由器组件的使用从 App 中移除:
 
@@ -581,7 +581,7 @@ ReactDOM.render(
 ```
 
 <!-- Komponentti _App_ muuttuu seuraavasti: -->
-! -- komponentti app muuttuu seuraavasti: -- 
+
 The _App_component becomes:
 应用程序组件变成:
 
@@ -627,7 +627,7 @@ const App = () => {
 ```
 
 <!-- Joka kerta kun komponentti renderöidään, eli käytännössä myös aina kun sovelluksen osoiterivillä oleva url, vaihtuu suoritetaan komento -->
-—— joka kerta kun komponenti render n，eli k yt ss my s aina kun sovelluksen osoiterivill oleva url，vaihtuu suoritetaan komento -- 
+
 Every time the component is rendered, so practically every time the browser url changes, the following command is executed
 每次呈现组件时，实际上每次浏览器 url 发生更改时，都会执行以下命令
 
@@ -636,7 +636,7 @@ const match = useRouteMatch('/notes/:id')
 ```
 
 <!-- Jos url on muotoa _/notes/:id_ eli vastaa yksittäisen muistiinpanon urlia, saa muuttuja _match_ arvokseen olion, jonka polun parametroitu osa, eli muistiinpanon id voidaan selvittää, ja näin saadaan haettua renderöitävä muistiinpano -->
-! -- jos 在 muotoa / notes / : id eli vastaa yksitt is en muistiinpanon urlia，saa muuttuja match arvokseen olion，jonka polun paramettroitu osa，eli muistiinpanon id voidan selvitt，ja in saadaan haettua render it v muistiinpano --
+
 If the url matches _/notes/:id_, the match variable will contain an object from which we can access the parametrized part of the path, the id of the note to be displayed, and we can then fetch the correct note to display
 如果 url 匹配 / notes / : id，match 变量将包含一个对象，我们可以从该对象访问路径的参数化部分，即要显示的注释的 id，然后我们可以获取要显示的正确注释
 
@@ -647,7 +647,7 @@ const note = match
 ```
 
 <!-- Lopullinen koodi on kokonaisuudessaan [täällä](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v2.js). -->
-! —— lopullinen koodi on kokonaisuudessaan t ll https: / / github. com / fullstack-hy2020 / misc / blob / master / router-app-v2.js. -- 
+
 The completed code can be found from [here](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v2.js).
 完成的代码可以在这里找到( https://github.com/fullstack-hy2020/misc/blob/master/router-app-v2.js )。
 
@@ -688,7 +688,7 @@ At the root of the application, meaning the path _/_, show the list of anecdotes
 在应用程序的根部，即路径 / ，显示奇闻异事列表:
 
 ![](../../assets/teht/40.png)
-! [](. . / . / assets / teht / 40.png)
+
 
 The <i>Footer</i>-component should always be visible at the bottom.
 I Footer / i-component 应该始终在底部可见。
@@ -697,7 +697,7 @@ The creation of a new anecdote should happen e.g. in the path <i>create</i>:
 一个新奇闻的创作应该发生在例如我创建 / i 的路径上:
 
 ![](../../assets/teht/41.png)
-! [](. . / . / assets / teht / 41.png)
+
 
 #### 7.2: routed anecdotes, step2
 7.2: 失败的奇闻轶事，第二步
@@ -706,13 +706,13 @@ Implement a view for showing a single anecdote:
 实现一个展示单一事件的视图:
 
 ![](../../assets/teht/42.png)
-! [](. . / . / assets / teht / 42.png)
+
 
 Navigating to the page showing the single anecdote is done by clicking the name of that anecdote
 导航到显示单个轶事的页面是通过单击该轶事的名称来完成的
 
 ![](../../assets/teht/43.png)
-! [](. . / . / assets / teht / 43.png)
+
 
 #### 7.3: routed anecdotes, step3
 7.3: 失败的奇闻轶事，第三步
@@ -724,7 +724,7 @@ Improve the functionality such that after creating a new anecdote the applicatio
 改进功能，比如在创建一个新的轶事后，应用程序会自动转换为显示所有轶事 i 和 / i 的视图，用户会看到一个通知，告诉他们在接下来的10秒内成功创建了这个视图:
 
 ![](../../assets/teht/44.png)
-! [](. . / . / assets / teht / 44.png)
+
 
 </i>
 我

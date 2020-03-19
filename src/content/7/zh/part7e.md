@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-Div class"content"
+
 
 ### Class Components
 # # # Class Components
@@ -266,7 +266,7 @@ WebSockets are an API provided by the browser, which is not yet fully supported 
 是由浏览器提供的 API，目前还不是所有的浏览器都支持它:
 
 ![](../../images/7/31ea.png)
-! [](. . / . / images / 7 / 31ea.png)
+
 
 Instead of directly using the WebSocket API it is advisable to use the [Socket.io](https://socket.io/)-library, which provides various <i>fallback</i>-options in case the browser does not have the full support for WebSockets. 
 与直接使用 WebSocket API 不同，建议使用[ Socket.io ]( https://Socket.io/ )-library，该库提供各种 i fallback / i-options，以防浏览器不完全支持 WebSocket。
@@ -396,7 +396,7 @@ the code is not executed, but is only rendered as 'text' on the page:
 代码不会被执行，只是在页面上呈现为文本:
 
 ![](../../images/7/32e.png)
-! [](. . / . / images / 7 / 32e.png)
+
 
 since React [takes care of sanitizing data in variables](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks). Some versions of React [have been vulnerable](https://medium.com/dailyjs/exploiting-script-injection-flaws-in-reactjs-883fb1fe36c1) to XSS-attacks. The security-holes have of course been patched, but there is no guarantee that there could be more.
 因为 React [处理变量中的消毒数据]( https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks )。 一些版本的 React [已经很容易受到 xss 攻击的攻击]( https://medium.com/dailyjs/exploiting-script-injection-flaws-in-reactjs-883fb1fe36c1)。 当然，安全漏洞已经得到修补，但不能保证还会有更多漏洞。
@@ -415,18 +415,18 @@ Last year's model answer for the exercises in part 4 already have quite a few ou
 去年对于第四部分练习的模型答案已经有不少过时的依据:
 
 ![](../../images/7/33ea.png)
-! [](. . / . / images / 7 / 33ea.png)
+
 
 The dependencies can be brought up to date by updating the file <i>package.json</i> and running the command _npm install_. However, old versions of the dependencies are not necessarily a security risk. 
 可以通过更新文件 i package.json / i 并运行命令 npm install 来更新依赖关系。 但是，依赖关系的旧版本不一定是安全风险。
 
 <!-- Riippuvuuksien turvallisuus voidaan tarkistaa npm:n [audit](https://docs.npmjs.com/cli/audit)-komennolla, joka vertaa käytettyjen riippuvuuksien versioita keskitetyssä virhetietokannassa listattuihin tietoturvauhan sisältäviin riippuvuuksien versioihin. -->
-! —— riippuuuksien turvallisuus voidaan tarkistaa npm: n audit https: / / docs.npmjs. com / cli / audit-komennolla，joka vertaa k yteetyjen riippuuuksien versiita keskitkitkesss virheheannassa listateintotototurturvauhan sis viin riippuuksien versiosien versihin--
+
 The npm [audit](https://docs.npmjs.com/cli/audit) command can be used to check the security of debendencies. It compares the version numbers of the debendencies in your application to a list of the version numbers of debendencies containing known security threats in a centralized error database. 
 Npm [ audit ]( https://docs.npmjs.com/cli/audit )命令可用于检查债务的安全性。 它将应用程序中的延迟的版本号与集中式错误数据库中包含已知安全威胁的延迟的版本号列表进行比较。
 
 <!-- Komennon _npm audit_ suorittaminen viime vuoden osan 4 mallivastaukselle antaa pitkän listan valituksia ja korjausehdotuksia. Seuraavassa osa raportista: -->
-—— komennon npm audit suorittaminen viime vuosan 4 mallivastaukselle antaa pitk n listan valituksia ja korjausehdotuksia. seuraavassa osa raportista: ——
+
 Running _npm audit_ on an exercise from part 4 of last year's course print a long list of complaints and suggested fixes. 
 对去年课程第四部分的练习进行 npm 审计时，打印一个长长的抱怨和建议修正列表。
 Below is a part of the raport:
@@ -490,7 +490,7 @@ found 416 vulnerabilities (65 low, 2 moderate, 348 high, 1 critical) in 20047 sc
 ```
 
 <!-- Reuilun vuoden ikäinen koodi on siis täynnä pieniä tietoturvauhkia, kriittisiä uhkia on onneksi ainoastaan 1. Suoritetaan raportin suosittelema operaatio _npm audit fix_: -->
-! —— reaionvuoden ik in en koodi on siis wynn pieni tietoturvauhkia，kriittisi uhkia on onneksi ainostaan 1. suoritetian raportin suosittelema operatio npm audit fix: --
+
 After only one year the code is full of small security threats. Luckily there is only 1 critical threat. 
 仅仅一年之后，代码就充满了小的安全威胁。幸运的是，只有一个关键的威胁。
 Let's run _npm audit fix_ as the raport suggests:
@@ -507,7 +507,7 @@ fixed 354 of 416 vulnerabilities in 20047 scanned packages
 ```
 
 <!-- Haavoittuvuuksia jää vielä 62, sillä _audit fix_ ei tee oletusarvoisesti versiopäivitystä kirjastolle, jonka <i>major</i>-versionumero on kasvanut. Tälläisen riippuvuuden päivitys saattaa aiheuttaa sovelluksen hajoamisen. Ongelmat aiheuttaa testauskirjasto jestin versio, joka on sovelluksessa 23.6.0 kun taas turvallinen versio olisi 25.1.0. Koska jest on ainoastaan kehitysaikainen riippuvuus, ei vaaraa oikeastaan ole, mutta päivitetään myös se: -->
-! -- haavoittuvuuksia j viel 62，lill audit fix ei tee oletusarvoisesti versionop ivityst kirjastolle，jonka i major / i-versionumero on kasvanut. 所有这一切都是为了生活而发生的。 23.6.0 kun taas turvallinen versionolisi 25.1.0. 科斯卡在爱诺斯塔安开了一家汽车旅馆，旅馆里有许多房间，还有许多其他的东西
+
 62 threats remain because by default _audit fix_  does not update debendencies if their <i>major</i> version number has increased. 
 62个威胁仍然存在，因为缺省情况下，如果它们的 i 主 / i 版本号增加，审计修复程序不会更新借记。
 Updating these debendencies could lead to the whole application breaking down. The remaining threats are caused by the testing debendency jest. Our application has the version 23.6.0 when the secure version is 25.0.1. 
@@ -520,7 +520,7 @@ npm install --save-dev jest@25.1.0
 ```
 
 <!-- Päivityksen jälkeen tilanne näyttää hyvältä -->
-! -- p ivityksen j lkeen tilanne n ytt hyv -- 
+
 After the update the situation looks good
 更新后情况看起来不错
 
@@ -546,7 +546,7 @@ On Mozilla's MDN there is a very good [Website security -guide](https://develope
 在 Mozilla 的 MDN 上有一个非常好的网站安全指南，这个 https://developer.Mozilla.org/en-us/docs/learn/server-side/first_steps/website_security 提出了一个非常重要的话题:
 
 ![](../../images/7/34.png)
-! [](. . / . / images / 7 / 34.png)
+
 
 The documentation for Express includes a section on security: [Production Best Practices: Security](https://expressjs.com/en/advanced/best-practice-security.html), which is worth a read through. It is also recommended to add a library called [Helmet](https://helmetjs.github.io/) to the backend. It includes a set of middlewares that eliminate some security vulnerabilities in Express applications.
 Express 的文档包括一个关于安全性的部分: [生产最佳实践: 安全性]( https://expressjs.com/en/advanced/Best-practice-Security.html ) ，这个部分值得一读。 还建议在后端添加一个名为[ Helmet ]( https://helmetjs.github.io/ )的库。 它包括一组中间件，用于消除 Express 应用程序中的一些安全漏洞。
@@ -621,10 +621,10 @@ The image below visualizes the difference between the structure of an applicatio
 下面的图片显示了基于微服务架构的应用程序和基于更传统单片结构的应用程序的结构差异:
 
 ![](../../images/7/36.png)
-! [](. . / . / images / 7 / 36.png)
+
 
 The role of the frontend (enclosed by a square in the picture) does not differ much between the two models. There is often a so-called [API gateway](http://microservices.io/patterns/apigateway) between the microservices and the frontend, which provides an illusion of a more traditional "everything on the same server"-API. [Netflix](https://medium.com/netflix-techblog/optimizing-the-netflix-api-5c9ac715cf19), among others, uses this type of approach.
-前面的角色(图片中被一个正方形包围)在两个模型之间没有太大的不同。 在微服务和前端之间通常有一个所谓的[ API 网关](API  http://microservices.io/patterns/apigateway ) ，它提供了一种更加传统的“同一服务器上的所有东西”的幻觉—— API。 [ Netflix ]( https://medium.com/Netflix-techblog/optimizing-the-Netflix-api-5c9ac715cf19) ，以及其他公司，使用这种方法。
+前面的角色(图片中被一个正方形包围)在两个模型之间没有太大的不同。 在微服务和前端之间通常有一个所谓的[ API 网关](API  http://microservices.io/patterns/apigateway ) ，它提供了一种更加传统的“同一服务器上的所有东西”的幻觉
 
 Microservice architectures emerged and evolved for the needs of large internet-scale applications. The trend was set by Amazon far before the appearance of the term microservice. The critical starting point was an email sent to all employees in 2002 by Amazon CEO Jeff Bezos:
 微服务体系结构的出现和发展是为了满足大规模互联网应用的需要。 这种趋势早在微服务这个词出现之前就由亚马逊设定了。 关键的起点是亚马逊 CEO 杰夫 · 贝索斯在2002年发给所有员工的一封电子邮件:
@@ -693,12 +693,12 @@ Below is listed some libraries recommended by trustworthy parties.
 下面列出了一些可信任方推荐的库。
 
 <!-- Jos sovelluksessa on tarve operoida hieman monimutkaisemman datan kanssa, on jo [osassa 4](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet#tehtavat-4-3-4-7) suositeltu kirjasto [lodash](https://www.npmjs.com/package/lodash) hyvä lisä. Jos olet mieltynyt funktionaaliseen ohjelmointityyliin, kannattaa harkita [ramda](https://ramdajs.com/):n käyttöä. -->
-<！ - Jos sovelluksessa on tarve operoida hieman monimutkaisemman datan kanssa on jo [ osassa 4](/ osa4 / sovelluksen rakenne ja testauksen alkeet # tehtawat-4-3-4-7) suossiteltu kirjasto [ lodash ]( https://www.npmjs.com/package/lodash ) hyv lis. Https://ramdajs.com/  : http: / / article.yeeyan.org / view / 140316 / 212012 / 2012 / 111111.  -->
+
 If your application has to handle complicated data [lodash](https://www.npmjs.com/package/lodash), which we recommended in [part 4](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet#tehtavat-4-3-4-7), is a good library to use. If you prefer functional programming style, you might consider using [ramda](https://ramdajs.com/).
 如果您的应用程序必须处理复杂的数据[ lodash ]( https://www.npmjs.com/package/lodash ) ，这是我们在[ part 4](/ osa4 / sovelluksen rakenne ja testauksen alkeet # tehtawatat-4-3-4-7)中推荐使用的一个很好的库。 如果您更喜欢函数式编程风格，您可以考虑使用[ ramda ]( https://ramdajs.com/ )。
 
 <!-- Jos sovelluksessa käsitellään aikaa, tarjoavat [moment](https://momentjs.com/) ja hieman uudempi [date-fns](https://github.com/date-fns/date-fns) siihen hyvän välineistön. -->
-! -- jos sovelluksessa k sitell n aikaa，tarjoavat moment https: / / momentjs. com / ja hieman uuuudempi date-fns something 1 siihen hyv n v lineist n. --
+
 If you are handling times and dates, [moment](https://momentjs.com/) and a new(er) release [date-fns](https://github.com/date-fns/date-fns) offer good tools for that.
 如果你正在处理时间和日期，[瞬间]( https://momentjs.com/ )和一个新版本[日期- https://github.com/date-fns/date-fns ](日期)提供了很好的工具。
 

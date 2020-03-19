@@ -38,7 +38,7 @@ Chrome should launch automatically. Open the browser console **immediately**. Al
 应该会自动启动。 立即打开浏览器控制台。 还可以打开一个文本编辑器，这样你就可以同时在屏幕上查看代码和网页:
 
 ![](../../images/1/1e.png)
-! [](. . / . / images / 1 / 1e.png)
+
 
 The code of the application resides in the <i>src</i> folder. Let's simplify the default code such that the contents of the file <i>index.js</i> look like:
 应用程序的代码位于 i src / i 文件夹中。 让我们简化默认代码，使文件 i index.js / i 的内容看起来像:
@@ -358,7 +358,7 @@ React has been configured to generate quite clear error messages. Despite this, 
 * * 控制台应该始终打开 * * 。 如果浏览器报告错误，那么继续编写更多代码，期待奇迹发生就不明智了。 相反，你应该试着理解错误的原因，例如，回到以前的工作状态:
 
 ![](../../images/1/2a.png)
-! [](. . / . / images / 1 / 2a.png)
+
 
 It is good to remember that in React it is possible and worthwhile to write <em>console.log()</em> commands (which print to the console) within your code.
 最好记住，在 React 中，在代码中编写 em console.log () / em 命令(打印到控制台)是可能的，也是值得的。
@@ -412,7 +412,7 @@ the result is an error message.
 结果是一个错误信息。
 
 ![](../../images/1/3e.png)
-! [](. . / . / images / 1 / 3e.png)
+
 
 Using a root element is not the only working option. An <i>array</i> of components is also a valid solution:
 使用根元素并不是唯一可行的选择，组件的 i 数组 / i 也是一个有效的解决方案:

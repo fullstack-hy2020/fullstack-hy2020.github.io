@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-Div class"content"
+
 
 Let's continue expanding our application by allowing users to add new notes. 
 让我们通过允许用户添加新注释来继续扩展我们的应用程序。
@@ -122,7 +122,7 @@ The target of the event stored in _event.target_ is logged to the console
 将 event.target 中存储的事件的目标记录到控制台
 
 ![](../../images/2/6e.png)
-! [](. . / . / images / 2 / 6e.png)
+
 
 
 The target in this case is the form that we have defined in our component.
@@ -173,7 +173,7 @@ The placeholder text stored as the initial value of the <em>newNote</em> state a
 作为 em newNote / em 状态初始值存储的占位符文本出现在 i input / i 元素中，但不能编辑输入文本。 控制台显示一个警告，告诉我们哪里可能出错了:
 
 ![](../../images/2/7e.png)
-! [](. . / . / images / 2 / 7e.png)
+
 
 Since we assigned a piece of the <i>App</i> component's state as the <i>value</i> attribute of the input element, the <i>App</i> component now [controls](https://reactjs.org/docs/forms.html#controlled-components) the behavior of the input element.
 由于我们将 i App / i 组件的一部分状态指定为 input 元素的 i value / i 属性，因此 i App / i 组件现在[控制]( https://reactjs.org/docs/forms.html#controlled-components ) input 元素的行为。
@@ -247,13 +247,13 @@ You can follow along in the console to see how the event handler is called:
 您可以在控制台中查看如何调用事件处理程序:
 
 ![](../../images/2/8e.png)
-! [](. . / . / images / 2 / 8e.png)
+
 
 You did remember to install [React devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi), right? Good. You can directly view how the state changes from the React Devtools tab:
 你确实记得安装了[ React devtools ]( https://chrome.google.com/webstore/detail/React-developer-tools/fmkadmapgofadopljbjfkapdkoienihi ) ，对吧？ 很好。 你可以直接从 React Devtools 选项卡查看状态的变化:
 
 ![](../../images/2/9ea.png)
-! [](. . / . / images / 2 / 9ea.png)
+
 
 Now the <i>App</i> component's <em>newNote</em> state reflects the current value of the input, which means that we can complete the <em>addNote</em> function for creating new notes:
 现在 i App / i 组件的 em newNote / em 状态反映了输入的当前值，这意味着我们可以完成 em addNote / em 函数来创建新的备注:
@@ -523,7 +523,7 @@ After finishing this exercise your application should look something like this:
 在完成这个练习之后，你的应用程序应该是这样的:
 
 ![](../../images/2/10e.png)
-! [](. . / . / images / 2 / 10e.png)
+
 
 Note the use of the React developer tools extension in the picture above!
 请注意上图中使用的 React developer 工具扩展！
@@ -547,7 +547,7 @@ Issue a warning with the [alert](https://developer.mozilla.org/en-US/docs/Web/AP
 尝试此类操作时，使用[ alert ]( https://developer.mozilla.org/en-us/docs/web/api/window/alert )命令发出警告:
 
 ![](../../images/2/11e.png)
-! [](. . / . / images / 2 / 11e.png)
+
 
 **Brief reminder from the previous part:** when you are forming strings that contain values from variables, it is recommended to use a [template string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals):
 * * 上一部分的简短提示: * * 当您构建包含变量值的字符串时，建议使用[模板字符串]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/template_literals ) :
@@ -592,7 +592,7 @@ At this point the application could look something like this. The image also dis
 此时，应用程序可以看起来像这样。 该图片还显示了应用程序的状态与帮助[ React developer tools ]( https://chrome.google.com/webstore/detail/React-developer-tools/fmkadmapgofadopljbjfkapdkoienihi 工具) :
 
 ![](../../images/2/12e.png)
-! [](. . / . / images / 2 / 12e.png)
+
 
 <h4>2.9*: The Phonebook Step4</h4>
 42.9 * : 电话簿步骤4 / h 4
@@ -601,7 +601,7 @@ Implement a search field that can be used to filter the list of people by name:
 实现一个搜索字段，该字段可用于按姓名筛选人员列表:
 
 ![](../../images/2/13e.png)
-! [](. . / . / images / 2 / 13. png)
+
 
 You can implement the search field as an <i>input</i> element that is placed outside the HTML form. The filtering logic shown in the image is <i>case insensitive</i>, meaning that the search term <i>arto</i> also returns results that contain Arto with an uppercase A.
 您可以将搜索字段实现为置于 HTML 表单之外的 i input / i 元素。 图片中显示的过滤逻辑是 i 不区分大小写的 / i，这意味着搜索项 i Arto / i 也返回包含大写 a 的 Arto 的结果。

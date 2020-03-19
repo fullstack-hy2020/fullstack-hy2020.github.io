@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-Div class"content"
+
 
 For a while now we have only been working on "frontend", i.e. client-side (browser) functionality. We will begin working on "backend", i.e. server-side functionality in the third part of this course. Nonetheless, we will now take a step in that direction by familiarizing ourselves with how code executing in the browser communicates with the backend.
 一段时间以来，我们只致力于“前端” ，即客户端(浏览器)功能。 我们将在本课程的第三部分开始研究“后端” ，即服务器端功能。 尽管如此，我们现在将向这个方向迈出一步，熟悉在浏览器中执行的代码如何与后端通信。
@@ -59,7 +59,7 @@ Let's navigate to the address <http://localhost:3001/notes> in the browser. We c
 让我们在浏览器中导航到地址 /  http://localhost:3001/notes。 我们可以看到 i JSON-server / i 以 JSON 格式提供了我们之前写给文件的笔记:
 
 ![](../../images/2/14e.png)
-! [](. . / . / images / 2 / 14e.png)
+
 
 If your browser doesn't have a way to format the display of JSON-data, then install an appropriate plugin, e.g. [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) to make your life easier.
 如果你的浏览器无法格式化 json 数据的显示，那么安装一个合适的插件，例如[ JSONView ]( https://chrome.google.com/webstore/detail/JSONView/chklaanhfefbnpoihckbnefhakgolnmc 文件夹) ，这样会让你的生活更加轻松。
@@ -285,7 +285,7 @@ We will get more familiar with the _npm_ tool in the [third part of the course](
 * * 注意 * * 以前启动的 json-server 在启动新服务器之前必须终止，否则会出现问题:
 
 ![](../../images/2/15b.png)
-! [](. . / . / images / 2 / 15b.png)
+
 
 The red print in the error message informs us about the issue:
 错误信息中的红色打印提示我们这个问题:
@@ -335,7 +335,7 @@ This should be printed to the console
 这应该打印到控制台
 
 ![](../../images/2/16b.png)
-! [](. . / . / images / 2 / 16b.png)
+
 
 Axios' method _get_ returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).
 Axios 的方法 get 返回一个[允诺]( https://developer.mozilla.org/en-us/docs/web/javascript/guide/using_promises )。
@@ -373,7 +373,7 @@ The following is printed to the console:
 下面的代码打印到控制台:
 
 ![](../../images/2/17e.png)
-! [](. . / . / images / 2 / 17e.png)
+
 
 The Javascript runtime environment calls the callback function registered by the <em>then</em> method providing it with a <em>response</em> object as a parameter. The <em>response</em> object contains all the essential data related to the response of an HTTP GET request, which would include the returned <i>data</i>, <i>status code</i>, and <i>headers</i>.
 Javascript 执行期函式库调用由 em then / em 方法注册的回调函数，并提供一个 em response / em 对象作为参数。 Em response / em 对象包含与 HTTP GET 请求响应相关的所有基本数据，其中包括返回的 i data / i、 i status code / i 和 i headers / i。
@@ -637,7 +637,7 @@ The configuration for the whole of our application has steadily grown more compl
 我们整个应用程序的配置已经逐渐变得更加复杂。 让我们回顾一下发生了什么，在哪里发生的。 下图描述了应用程序的组成
 
 ![](../../images/2/18e.png)
-! [](. . / . / images / 2 / 18e.png)
+
 
 The JavaScript code making up our React application is run in the browser. The browser gets the Javascript from the <i>React dev server</i>, which is the application that runs after running the command <em>npm start</em>. The dev-server transforms the JavaScript into a format understood by the browser. Among other things, it stitches together Javascript from different files into one file. We'll discuss the dev-server in more detail in part 7 of the course.
 构成我们的 React 应用程序的 JavaScript 代码在浏览器中运行。 浏览器从 i React dev server / i 获取 Javascript，这是运行 em npm start / em 命令后运行的应用程序。 Dev-server 将 JavaScript 转换成浏览器可以理解的格式。 除此之外，它还将来自不同文件的 Javascript 整合到一个文件中。 我们将在本课程的第7部分中更详细地讨论开发服务器。
@@ -733,19 +733,19 @@ If there are too many (over 10) countries that match the query, then the user is
 如果匹配查询的国家太多(超过10个) ，则提示用户使查询更加具体:
 
 ![](../../images/2/19b1.png)
-! [](. . / . / images / 2 / 19b1.png)
+
 
 If there are fewer than ten countries, but more than one, then all countries matching the query are shown:
 如果少于10个国家，但多于1个，则显示所有匹配查询的国家:
 
 ![](../../images/2/19b2.png)
-! [](. . / . / images / 2 / 19b2.png)
+
 
 When there is only one country matching the query, then the basic data of the country, its flag and the languages spoken in that country are shown:
 如果只有一个国家匹配查询，则显示该国的基本数据、国旗和该国使用的语言:
 
 ![](../../images/2/19b3.png)
-! [](. . / . / images / 2 / 19b3.png)
+
 
 **NB**: it is enough that your application works for most of the countries. Some countries, like <i>Sudan</i>, can cause trouble, since the name of the country is part of the name of another country, <i>South Sudan</i>. You need not worry about these edge cases.
 * * 注意: 你的应用程序在大多数国家都能工作就足够了。 有些国家，如苏丹 / 苏丹 / 苏丹，可能会制造麻烦，因为国名是另一个国家名称的一部分，即南苏丹 / 苏丹 / 苏丹。 你不必担心这些边缘情况。
@@ -763,7 +763,7 @@ Improve on the application in the previous exercise, such that when the names of
 改进前一项工作中的应用程序，例如，当页面上显示多个国家的名称时，在国家名称旁边有一个按钮，当按下该按钮时，显示该国的视图:
 
 ![](../../images/2/19b4.png)
-! [](. . / . / images / 2 / 19b4.png)
+
 
 In this exercise it is also enough that your application works for most of the countries. Countries whose name appears in the name of another country, like <i>Sudan</i> can be ignored.
 在这个练习中，您的应用程序能够在大多数国家工作就足够了。 以其他国家的名义出现的国家，如 i 苏丹 / i 可以被忽略。
@@ -778,7 +778,7 @@ Add to the view showing the data of a single country the weather report for the 
 在显示单个国家数据的视图中添加该国首都的天气报告。 有几十个天气数据提供商。 我用了[ https://weatherstack.com/ ]( https://weatherstack.com/ )。
 
 ![](../../images/2/19ba.png)
-! [](. . / . / images / 2 / 19ba.png)
+
 
 <!-- **Huom:** tarvitset melkein kaikkia säätietoja tarjoavia palveluja käyttääksesi api-avaimen. Älä talleta avainta versionhallintaan, eli älä kirjoita avainta suoraan koodiin.  Avaimen arvo kannattaa määritellä ns. [ympäristömuuttujana](https://create-react-app.dev/docs/adding-custom-environment-variables/). -->
 **NB:** You need an api-key to use almost every weather service. Do not save the api-key to source control! Nor hardcode the api-key to your source code. Instead use an [environment variable](https://create-react-app.dev/docs/adding-custom-environment-variables/) to save the key.

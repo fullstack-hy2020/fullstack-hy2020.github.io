@@ -6,15 +6,15 @@ lang: zh
 ---
 
 <div class="content">
-Div class"content"
+
 
 <!-- Yhdistetään seuraavaksi [osassa 2](/osa2) tekemämme frontend omaan backendiimme.  -->
-! -- yhdistet n seuraavaksi osassa 2 / osakem mme frontend omaan backendiimme. -- 
+
 Next let's connect the frontend we made in [part 2](/part2) to our own backend.
 接下来，让我们将[第2部分](/ 第2部分)中制作的前端连接到我们自己的后端。
 
 <!-- Edellisessä osassa backendinä toiminut json-server tarjosi muistiinpanojen listan osoitteessa http://localhost:3001/notes fronendin käyttöön. Backendimme urlien rakenne on hieman erilainen, muistiinpanot löytyvät osoitteesta http://localhost:3001/api/notes, eli muutetaan frontendin tiedostossa <i>src/services/notes.js</i> määriteltyä muuttujaa _baseUrl_ seuraavasti: -->
-! -- edellisess osassa 回到了 jiminut 服务器 tarjosi muistiinpanojen listan osoitteessa http: / / localhost: 3001 / notes fronendin k ytt n. backendimme urlien rakenne on hieman erilainen，muistiinpanot ttyv t osoitteesta something 1，eli muutetaan in tiedostossa i src / services / notes。 我是 ritelty muuttujaa baseUrl seuraavasti: -- 
+
 In the previous part, the frontend could ask for the list of notes from the json-server we had as a backend at from the address http://localhost:3001/notes.
 在前面的部分中，前端可以从作为后端的 json 服务器向地址 http://localhost:3001/notes 索取笔记列表。
 Our backend has a bit different url structure, and the notes can be found from http//localhost:3001/api/notes. 
@@ -37,15 +37,15 @@ export default { getAll, create, update }
 ```
 
 <!-- Frontendin tekemä GET-pyyntö osoitteeseen <http://localhost:3001/api/notes> ei jostain syystä toimi: -->
-! -- frontendin tekem get-pyynt osoitteeseen http: / / localhost: 3001 / api / notes ei jostain syyst toimi: -- 
+
 Now frontend's GET request to <http://localhost:3001/api/notes> does not work for some reason:
 现在前端的 GET 请求由于某些原因不能工作:  http://localhost:3001/api/notes:
 
 ![](../../images/3/3ae.png)
-! [](. . / . / images / 3 / 3ae.png)
+
 
 <!-- Mistä on kyse? Backend toimii kuitenkin selaimesta ja postmanista käytettäessä ilman ongelmaa. -->
-! -- 身上有雾吗? 后面跟着奎坦金，后面跟着一个疯子
+
 What's going on here? We can access the backend from a browser and from postman without any problems.
 这是怎么回事? 我们可以从浏览器和邮递员访问后端，没有任何问题。
 
@@ -139,7 +139,7 @@ If everything went well, the application works:
 如果一切顺利，应用程序就能正常工作:
 
 ![](../../images/3/25ea.png)
-! [](. . / . / images / 3 / 25ea.png)
+
 
 If not, the issue can be found by reading heroku logs with command <i>heroku logs</i>.
 如果没有，可以通过使用命令 i heroku logs / i 读取 heroku logs 来发现这个问题。
@@ -195,7 +195,7 @@ The backend directory should now look as follows:
 后端目录现在应该如下所示:
 
 ![](../../images/3/27ea.png)
-! [](. . / . / images / 3 / 27ea.png)
+
 
 To make express show <i>static content</i>, the page <i>index.html</i> and the JavaScript etc. it fetches, we need a built-in middleware from express called [static](http://expressjs.com/en/starter/static-files.html).
 为了让 express show i static content / i、 page i index.html / i 和它所获取的 JavaScript 等等，我们需要一个来自 express 的内置中间件，称为[ static ]( http://expressjs.com/en/starter/static-files.html )。
@@ -234,7 +234,7 @@ The application can now be used from the <i>backend</i> address <http://localhos
 该应用程序现在可以从 i 后端 / i 地址 http://localhost:3001中使用:
 
 ![](../../images/3/28e.png)
-! [](. . / . / images / 3 / 28e.png)
+
 
 Our application now works exactly like the [single-page app](/en/part0/fundamentals_of_web_apps#single-page-app) example application we studied in part 0. 
 我们的应用程序现在的工作方式与我们在第0部分中研究的[单页应用程序](/ en / part0 / web 应用程序的基本原理 # single-page-app)示例应用程序完全一样。
@@ -263,7 +263,7 @@ The React code fetches notes from the server address <http://localhost:3001/note
 反应代码从服务器地址 http://localhost:3001/notes 获取笔记并将它们呈现到屏幕上。 服务器和浏览器之间的通信可以在开发控制台的 i Network / i 选项卡中看到:
 
 ![](../../images/3/29ea.png)
-! [](. . / . / images / 3 / 29ea.png)
+
 
 After ensuring that the production version of the application works locally, commit the production build of the frontend to the backend repository, and push the code to Heroku again. 
 确保应用程序的生产版本在本地工作之后，将前端的生产构建提交到后端存储库，并将代码再次推送到 Heroku。
@@ -272,7 +272,7 @@ After ensuring that the production version of the application works locally, com
 除了我们还没有添加改变后端注释重要性的功能之外，[应用程序]( https://vast-oasis-81447.herokuapp.com/ )运行得非常好。
 
 ![](../../images/3/30ea.png)
-! [](. . / . / images / 3 / 30ea.png)
+
 
 Our application saves the notes to a variable. If the application crashes or is restarted, all of the data will disappear. 
 我们的应用程序将笔记保存到一个变量中。 如果应用程序崩溃或重新启动，所有数据都将消失。
@@ -319,7 +319,7 @@ Changes on the frontend have caused it to no longer work in development mode (wh
 前端上的更改导致它不再在开发模式下工作(当使用命令 npm start 启动时) ，因为到后端的连接不工作。
 
 ![](../../images/3/32ea.png)
-! [](. . / . / images / 3 / 32ea.png)
+
 
 This is due to changing the backend address to a relative URL: 
 这是由于将后端地址更改为一个相对 URL:
@@ -404,7 +404,7 @@ The following is a log about one typical problem. Heroku cannot find application
 下面是一个典型问题的日志。 Heroku 找不到 i express / i 表示的应用程序依赖项:
 
 ![](../../images/3/33.png)
-! [](. . / . / images / 3 / 33.png)
+
 
 The reason is that the option <i>--save</i> was forgotten when <i>express</i> was installed, so information about the dependency was not saved to the file <i>package.json</i>.
 原因是当我表示 / i 时，选项 i -- save / i 被忘记了，因此关于依赖项的信息没有保存到我 package.json / i 文件中。
@@ -413,7 +413,7 @@ Another typical problem is that the application is not configured to use the por
 另一个典型的问题是，应用程序没有配置为使用设置为环境变量 em PORT / em 的端口:
 
 ![](../../images/3/34.png)
-! [](. . / . / images / 3 / 34.png)
+
 
 Create a README.md at the root of your repository, and add a link to your online application to it. 
 在存储库的根部创建 README.md，并向其中添加一个指向在线应用程序的链接。

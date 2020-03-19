@@ -6,7 +6,7 @@ lang: zh
 ---
 
 <div class="content">
-Div class"content"
+
 
 Before we start delving into how you can use TypeScript together with React, we could first have a look at what we want to achieve. When everything works as it should, TypeScript will help us catch the following errors:
 在我们开始深入研究如何与 React 一起使用打字稿之前，我们可以先看看我们想要实现什么。 当一切正常运行时，TypeScript 将帮助我们捕捉以下错误:
@@ -95,7 +95,7 @@ If we now run <i>npm run lint</i>, we should still receive an error from eslint:
 如果我们现在运行 i npm 运行 lint / i，我们仍然会收到一个来自 eslint 的错误:
 
 ![](../../images/9/31a.png)
-! [](. . / . / images / 9 / 31a.png)
+
 
 Why is that? As we can see from the error, the file  <i>serviceWorker.ts</i> doesn't seem to be compliant with our linting configurations at the moment. This is because the <i>register</i> function uses other functions that are declared later in the same file and the rule [@typescript-eslint/no-use-before-define](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-use-before-define.md) doesn't like that. To fix the error we need to move the  <i>register</i> function as the last function in the file.
 为什么？ 正如我们从错误中看到的，文件 i serviceWorker.ts / i 目前似乎与我们的链接配置不兼容。 这是因为 i register / i 函数使用了稍后在同一文件中声明的其他函数，而规则[@typescript-eslint / no-use-before-define ]( https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-use-before-define.md )不喜欢这样。 为了修复这个错误，我们需要将 i register / i 函数作为文件中的最后一个函数移动。
@@ -308,7 +308,7 @@ const App = () => {
 / div
 
 <div class="content">
-Div class"content"
+
 
 ### Deeper type usage
 更深入的类型使用
@@ -410,7 +410,7 @@ One handy way to use these kind of types in TypeScript is by using _switch case_
 在打字稿中使用这些类型的一个简便方法是使用 switch case 表达式。 一旦你有了显式声明，或者 TypeScript 已经推断出一个变量包含一个类型联合，并且类型联合中的每个类型都包含一个属性，这个属性可以用作类型标识符，你就可以围绕这个属性建立开关案例，然后 TypeScript 就会知道每个案例块中有哪些属性可用。
 
 ![](../../images/9/32.png)
-! [](. . / . / images / 9 / 32.png)
+
 
 In the example above TypeScript knows that <i>coursePart</i> has the type <i>CoursePart</i>, so it can infer that <i>part</i> is of either type <i>CoursePartOne</i>, <i>CoursePartTwo</i> or <i>CoursePartThree</i>. Because <i>name</i> is distinct for each type, we can use it to identify each type and thus TypeScript can help to let us know which attributes are available in each case block and it will produce an error if you e.g. try to use the <i>part.description</i> within the <i>"Using props to pass data"</i> block.
 在上面的示例中，TypeScript 知道 i coursePart / i 具有 i coursePart / i 类型，因此它可以推断 i part / i 属于 i CoursePartOne / i，i coursepart2 / i 或 i coursepart3 / i 类型。 因为 i name / i 对于每个类型都是不同的，所以我们可以使用它来标识每个类型，因此 TypeScript 可以帮助我们知道每个 case 块中有哪些属性可用，如果您尝试在 i“ Using props to pass data” / i 块中使用 i part.description / i，那么它会产生错误。
@@ -447,7 +447,7 @@ And would also comment out the <i>Deeper type usage</i> case block, we would see
 并且注释掉 i Deeper 类型 usage / i case 块，我们会看到下面的错误:
 
 ![](../../images/9/33.png)
-! [](. . / . / images / 9 / 33. png)
+
 
 The error description <i>Argument of type 'CoursePartThree' is not assignable to parameter of type 'never'</i> tells us that we are using a variable somewhere, where it should never be used, so we know that something needs to be fixed. When we remove the added comments from the <i>Deeper type usage</i> case block, you will see that the error goes away.
 类型“ coursepart3”的参数 i 的错误描述不能分配给“ never” / i 类型的参数，这告诉我们我们在某个地方使用了一个变量，而这个变量永远不应该被使用，因此我们知道有些东西需要修复。 当我们从 i Deeper 类型 usage / i case 块中删除添加的注释时，您将看到错误消失了。
@@ -529,7 +529,7 @@ Lastly, add your own course part interface with at least the following attribute
 / div
 
 <div class="content">
-Div class"content"
+
 
 ### A note about defining object types
 关于定义对象类型的注意事项
@@ -616,7 +616,7 @@ The folder structure looks as follows:
 文件夹结构如下:
 
 ![](../../images/9/34a.png)
-! [](. . / . / images / 9 / 34a.png)
+
 
 So there are currently, as you would expect, two main components: <i>AddPatientModal</i> and <i>PatientListPage</i>. The <i>state/</i> folder contains state handling for the frontend. The main functionality it provides is keeping our data in one place, offering simple actions to alter the state of our app.
 因此，正如您所料，目前有两个主要组件: i addpatientmodali 和 i PatientListPage / i。 I state / / i 文件夹包含前端的状态处理。 它提供的主要功能是将我们的数据保存在一个地方，提供简单的操作来改变我们应用程序的状态。
@@ -901,7 +901,7 @@ Response should look as follows:
 答复应如下:
 
 ![](../../images/9/38a.png)
-! [](. . / . / images / 9 / 38a.png)
+
 
 #### 9.17: patientor, step2
 9.17: patientor，step2
@@ -930,7 +930,7 @@ The result could look like the following:
 结果可能如下:
 
 ![](../../images/9/39a.png)
-! [](. . / . / images / 9 / 39a.png)
+
 
 The gender is shown with react-semantic-ui component [Icon](https://react.semantic-ui.com/elements/icon/#gendersicons-can-represent-genders-or-types-of-sexuality) 
 性别以反应-语义-用户界面组件[图标]( https://react.semantic-ui.com/elements/Icon/#gendersicons-can-represent-genders-or-types-of-sexuality )显示
@@ -973,7 +973,7 @@ dispatch(setPatientList(patientListFromApi));
 / div
 
 <div class="content">
-Div class"content"
+
 
 ### Full entries
 全部记录
@@ -1108,7 +1108,7 @@ Define the types <i>OccupationalHealthCareEntry</i> and <i>HospitalEntry</i> so 
 定义类型 i occupationalhealthcarenentry / i 和 i HospitalEntry / i，以便这些类型与示例数据一致。 确保您的后端返回正确的条目时，您去一个单独的病人路线
 
 ![](../../images/9/40.png)
-! [](. . / . / images / 9 / 40.png)
+
 
 Use types properly in the backend! For now there is no need to do a proper validation for all the fields of the entries in the backend, it is enough e.g. to check that the field <i>type</i> has a correct value.
 在后端正确使用类型！ 现在不需要对后端中的条目的所有字段进行适当的验证，只需检查字段 i type / i 的值是否正确即可。
@@ -1126,7 +1126,7 @@ Your solution could look like this:
 你的解决方案可以是这样的:
 
 ![](../../images/9/41.png)
-! [](. . / . / images / 9 / 41.png)
+
 
 #### 9.21: patientor, step6
 9.21: patientor，step6
@@ -1135,7 +1135,7 @@ Fetch and add diagnoses to application state from <i>/api/diagnosis</i> endpoint
 从 i / api / diagnosis / i 端点获取诊断并将诊断添加到应用程序状态。 使用新的诊断数据显示病人诊断代码的描述:
 
 ![](../../images/9/42.png)
-! [](. . / . / images / 9 / 42.png)
+
 
 #### 9.22: patientor, step7
 9.22: patientor，step7
@@ -1153,19 +1153,19 @@ Like this:
 像这样:
 
 ![](../../images/9/35c.png)
-! [](. . / . / images / 9 / 35c.png)
+
 
 The resulting entries in the listing <i>could</i> look something like this:
 清单中的结果条目 i 可以 / i 看起来像这样:
 
 ![](../../images/9/36a.png)
-! [](. . / . / images / 9 / 36a.png)
+
 
 </div>
 / div
 
 <div class="content">
-Div class"content"
+
 
 ### Add patient form
 加上病人表格

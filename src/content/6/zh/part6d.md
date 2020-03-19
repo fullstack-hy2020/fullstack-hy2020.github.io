@@ -6,10 +6,10 @@ lang: zh
 ---
 
 <div class="content">
-div class"content"
+
 
 <!-- Olemme käyttäneet redux-storea react-redux-kirjaston [hook](https://react-redux.js.org/api/hooks)-apin, eli funktioiden [useSelector](https://react-redux.js.org/api/hooks#useselector) ja [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) avulla. -->
-! -- olemme k ytt neet redux-storea redux-storea redux-kirjaston hook https: / / redux.js. org / api / hooks-apin，eli funktioiden useselector something 1 ja usedpatch something 2 avulla. --
+
 So far we have used our redux-store with the help of the hook](https://react-redux.js.org/api/hooks)-api from react-redux.
 到目前为止，我们已经使用了 redux-store，借助于 redux 中的 hook ]( https://react-redux.js.org/api/hooks )-api。
 Practically this has meant using the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) functions.
@@ -21,7 +21,7 @@ To finish this part we will look into another older and  more complicated way to
 为了完成这一部分，我们将研究使用 redux 的另一种更古老、更复杂的方法，redux 提供的[ connect ]( https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options )-函数。
 
 <!-- Uusissa sovelluksissa kannattaa ehdottomasti käyttää hook-apia, mutta connectin tuntemisesta on hyötyä vanhempia reduxia käyttäviä projekteja ylläpidettävissä. -->
-! —— uusissa sovelluksissa kannattaa ehdottomasti k ytt hook-apia，mutta connectin tuntemisesta on hy vanhempia reduxia k ytt vi projekteja yll pidett viss. ——
+
 In new applications you should absolutely use the hook-api, but knowing how to use connect is useful when maintaining older projects using redux.
 在新的应用程序中，您绝对应该使用 hook-api，但是在使用 redux 维护老项目时，了解如何使用 connect 非常有用。
 
@@ -29,7 +29,7 @@ In new applications you should absolutely use the hook-api, but knowing how to u
 # # # 使用 connect-function 将 redux 存储共享给组件
 
 <!-- Muutetaan sovelluksen komponenttia <i>Notes</i>, siten että korvataan hook-apin eli funktioiden _useDispatch_ ja _useSelector_ käyttö funktioilla _connect_. Komponentin seuraavat osat tulee siis muuttaa: -->
-! —— muutetaan sovelluksen komponenttia i Notes / i，siten ett korvataan hook-apin eli funktioiden useDispatch ja useSelector k ytt funktioilla connect。 俄罗斯联邦贸易委员会: -- 
+
 Let's modify the <i>Notes</i> component so that instead of using the hook-api (the _useDispatch_ and  _useSelector_ functions ) it uses the _connect_-function. 
 让我们修改 i Notes / i 组件，以便使用 connect-function 而不是 hook-api (useDispatch 和 useSelector 函数)。
 We have to modify the following parts of the component:
@@ -151,7 +151,7 @@ The situation that results from using <i>connect</i> with the <i>mapStateToProps
 使用 i connect / i 和我们定义的 i mapStateToProps / i 函数的结果可以这样可视化:
 
 ![](../../images/6/24c.png)
-! [](. . / . / images / 6 / 24c.png)
+
 
 
 The <i>Notes</i> component has "direct access" via <i>props.notes</i> and <i>props.filter</i> for inspecting the state of the Redux store.
@@ -297,7 +297,7 @@ The resulting situation from using _connect_ can be visualized like this:
 使用连接产生的结果可以这样想象:
 
 ![](../../images/6/25b.png)
-! [](. . / . / images / 6 / 25b.png)
+
 
 In addition to accessing the store's state via <i>props.notes</i> and <i>props.filter</i>, the component also references a function that can be used for dispatching <i>TOGGLE\_IMPORTANCE</i>-type actions via its <i>toggleImportanceOf</i> prop.
 除了通过 i props.notes / i 和 i props.filter / i 访问存储的状态外，该组件还引用了一个函数，该函数可以通过其 i toggleimportof / i prop 用于分派 i TOGGLE  IMPORTANCE / i-type 操作。
@@ -464,7 +464,7 @@ We can see the difference between the two functions:
 我们可以看到这两个函数之间的区别:
 
 ![](../../images/6/10.png)
-! [](. . / . / images / 6 / 10.png)
+
 
 The first function is a regular <i>action creator</i> whereas the second function contains the additional dispatch to the store that was added by connect.
 第一个函数是一个常规的 i action creator / i，而第二个函数包含对由 connect 添加的存储的附加分派。
@@ -674,7 +674,7 @@ HOCs are in fact a generalization of the [High Order Function](https://en.wikipe
 Hoc 实际上是[高阶函数]( https://en.wikipedia.org/wiki/higher-order_function )(HOF)概念的推广。 Hofs 是接受函数作为参数或返回函数的函数。 实际上我们在整个课程中一直在使用 HOFs，例如，所有用于处理数组如 map、 filter 和 find 的方法都是 HOFs。
 
 <!-- Reactin hook-apin ilmestymisen jälkeen HOC:ien suosio on kääntynyt laskuun, ja melkein kaikki kirjastot, joiden käyttö on aiemmin perustunut HOC:eihin on saanut hook-perustaisen apin. Useimmiten , kuten myös reduxin kohdalla, hook-perustaiset apit ovat HOC-apeja huomattavasti yksinkertaisempia. -->
-—— reactin hook-apin ilmestymisen j lkeen hoc: ien suosio on k ntynyt laskuun，ja melkein kaikki kirjastot，joiden k ytt on aiemmin stunut peruut: eihin on saanut hook-perustaisen apin.useieen，kuten my’s reduxin koha，hook-staiset apit ovat hoc-apeja huomattai yksinkertavastisempia. ——
+
 After the React hook-api was published, HOCs have become less and less popular. Almost all libraries which used to be based on HOCs have now been modified to use hooks. Most of the time hook based apis are a lot simpler than HOC based ones, as is the case with redux as well. 
 React hook-api 发布之后，HOCs 变得越来越不受欢迎。 几乎所有过去基于 hoc 的库现在都被修改为使用钩子。 大多数基于钩子的 api 比基于 HOC 的 api 简单得多，redux 的情况也是如此。
 
@@ -688,14 +688,14 @@ What about the _useState_-hook, which provides components with their own state? 
 那么 useState-hook 呢? 它为组件提供它们自己的状态？ 如果应用程序正在使用 Redux 或其他外部状态管理解决方案，它是否有任何作用？ 如果应用程序具有更复杂的形式，那么使用 useState 函数提供的状态实现它们的本地状态可能有益。 当然，可以让 Redux 管理表单的状态，但是，如果表单的状态只在填写表单时有关(例如用于验证) ，那么将状态的管理留给负责表单的组件可能是明智的。
 
 <!-- Kannattaako reduxia käyttää aina? Tuskinpa. Reduxin kehittäjä Dan Abramov pohdiskelee asiaa artikkelissaan [You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367) -->
-! —— kannattaako reduxia k ytt aina? tuskinpa. reduxin kehitt j dan abramov pohdiskelee asiaa artikkelissaan you might not need redux https: / / medium. com /@dan abramov / you-might-not-need-redux-be46360cf367——
+
 Should we always use redux? Propably not. Dan Abramov, the developer of redux, discusses this in his article [You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367).
 我们应该一直使用 redux 吗？ 可能不是。 Redux 的开发者 Dan Abramov 在他的文章[你可能不需要 Redux ]中讨论了这个 https://medium.com/@dan_abramov/You-Might-Not-Need-Redux-be46360cf367。
 
 <!-- Reduxin kaltainen tilankäsittely on mahdollista toteuttaa nykyään myös ilman reduxia, käyttämällä Reactin [context](https://reactjs.org/docs/context.html)-apia ja  [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer)-hookia, lisää asiasta esim -->
-! -- reduxin kaltainen tilank sittly on mahdollista toteuttaa nyky n my s ilman reduxia，k ytt m ll reactin context https: / / reactjs. org / docs / context. html-pia ja educer something 1-hoopia，lis asiasta esim --
+
 <!-- [täällä](https://www.simplethread.com/cant-replace-redux-with-hooks/) ja [täällä](https://hswolff.com/blog/how-to-usecontext-with-usereducer/).  Tutustumme tähän tapaan myös kurssin [yhdeksännessä osassa](/en/part9). -->
-! -- t ll https: / / www.simplethread. com / cant-redux-with-hooks / ja t ll something 1. tutustumme t h h tapaan my s kurssin yhdeks nness osassa / en / part9. -- 
+
 Nowadays it is possible to implement redux-like state management without redux by using the React [context](https://reactjs.org/docs/context.html)-api and the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer)-hook. 
 现在，通过使用 React [ context ]( https://reactjs.org/docs/context.html )-api 和[ useReducer ]( https://reactjs.org/docs/hooks-reference.html#useReducer )-hook，不需要 redux 就可以实现类似 redux 的状态管理。
 More about this [here](https://www.simplethread.com/cant-replace-redux-with-hooks/) and [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). We will also practice this in 
@@ -755,7 +755,7 @@ the last notification is only displayed for two seconds (assuming the notificati
 最后一个通知只显示两秒钟(假设通知通常显示5秒钟)。 这是因为删除第一个通知时意外地删除了第二个通知。
 
 <!-- Korjaa bugi, siten että usean peräkkäisen äänestyksen viimeistä notifikaatiota näytetään aina viiden sekunnin ajan. Korjaus tapahtuu siten, että uuden notifikaation tullessa edellisen notifikaation nollaus tarvittaessa perutaan, ks. funktion setTimeout [dokumentaatio](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout). -->
-! -- korjaa bugi，siten ett usean per kk isen nestyksen viimeist notifkaatiota n ytet n aina viiden sekunnin korjaus tapahtuu siten，ett uden notifkaation tullessa edellisen notifkaation nollaus tarvittaessa perutaan，ksfunksettimeout dokumentaups: / developerworks / tc-us / docs / web / worworkerwindowscope / settimeout
+
 Fix the bug so that after multiple votes in a row, the notification for the last vote is displayed for five seconds.
 修正此 bug，以便在一行中进行多次投票后，最后一次投票的通知会显示5秒钟。
 This can be done by cancelling the removal of the previous notification when a new notification is displayed whenever necessary. 

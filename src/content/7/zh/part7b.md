@@ -6,10 +6,10 @@ lang: zh
 ---
 
 <div class="content">
-Div class"content"
+
 
 <!-- Kurssin seitsemännen osan tehtävät poikkeavat jossain määrin. Edellisessä ja tässä luvussa on normaaliin tapaan [luvun teoriaan liittyviä tehtäviä](/osa7/custom_hookit#tehtavat-7-4-7-6). -->
-! -- kurssin seitsem nnen osen san 对 poikkeavat jossain m rin.edellisses ja t ss luvussa 对 normaaliin tapaan luvun teoriaan liittyvi tevi / osa7 / custom hookit # tehtavat-7-4-7-6. --
+
 The exercises in this part are a bit different than the exercises in the previous parts. The exercises in the previous part and the exercises in this part [are about the theory presented in this part](/osa7/custom_hookit#tehtavat-7-4-7-6).
 这一部分的练习与前几部分的练习有点不同。 前一部分的练习和这一部分的练习是关于这一部分提出的理论。
 
@@ -25,23 +25,23 @@ React offers 10 different [built-in hooks](https://reactjs.org/docs/hooks-refere
 React 提供了10种不同的内置钩子，其中最受欢迎的是我们已经广泛使用的[ useState ]( https://reactjs.org/docs/hooks-reference.html  https://reactjs.org/docs/hooks-reference.html#useState )和[ useEffect ]( https://reactjs.org/docs/hooks-reference.html#useEffect )钩子。
 
 <!-- Käytimme [osassa 5](/osa5/props_children_ja_proptypet#ref-eli-viite-komponenttiin) hookia -->
-! -- k ytimme osassa 5 / osa5 / proptypet children ja # ref-eli-viite-komponenttiin hookia -- 
+
 <!-- [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle), jonka avulla komponentin sisäinen funktio pystyttiin tarjoamaan näkyville komponentin ulkopuolelle. -->
-! -- useimperativehandle https: / / reactjs. org / docs / hooks-reference. html # useimperativehandle，jonka avulla komponentin sis inen funktio pystytiin tarjoamaan n kyville komponentin ukopuolelle. ——
+
 In [part 5](/osa5/props_children_ja_proptypet#ref-eli-viite-komponenttiin) we used the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle)-hook which allows for components to provide their functions to other components.
 在[ part 5](/ osa5 / proptypet children ja # ref-eli-viite-komponenttiin)中，我们使用了[ useImperativeHandle ]( https://reactjs.org/docs/hooks-reference.html#useImperativeHandle )-hook，它允许组件为其他组件提供其功能。
 
 <!-- Viimeisen vuoden aikana moni Reactin apukirjasto on ruvennut tarjoamaan hook-perustaisen rajapinnan. [Osassa 6](/osa6/flux_arkkitehtuuri_ja_redux#redux-storen-valittaminen-eri-komponenteille) -->
-! -- viimeisen vuoden aikana moni reactin apukirjasto on ruvennut tarjoamaan hook-perustaisen rajapinnan.osassa 6 / osa6 / flux arkkitehtuuri ja redux # redux-storen-valittaminen-eri-komponenteille --
+
 Within the last year many React libraries have begun to offer hook based apis. [In part 6](/osa6/flux_arkkitehtuuri_ja_redux#redux-storen-valittaminen-eri-komponenteille)
 在过去的一年里，许多 React 库已经开始提供基于 hook 的 api
 <!-- käytimme react-redux-kirjaston hookeja [useSelector](https://react-redux.js.org/api/hooks#useselector) ja [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) välittämään redux-storen ja dispatch-funktion niitä tarvitseville komponenteille. Reduxin hook-perustainen api onkin huomattavasti helpompi käyttää kuin vanhempi, mutta edelleen käytössä oleva[connect](/osa6/connect)-api . -->
-<！ - k ytimme redux-kirjaston hookeja [ useSelector ](useSelector) ja [ https://react-redux.js.org/api/hooks#useSelector ]( https://react-redux.js.org/api/hooks#useDispatch ) v litt m n redux-storen ja dispatch-funktion niit tarvitseville komponenteille. Reduxin hook-peruduen staen api onkin huomattavasti helppi k ytt kuin vanhempi，mutta edelleen k yt ss oleva [ connect ](/ osa6 / connect)-api.  -->
+
 we used the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) hooks from the react-redux library to share our redux-store and dispatch function to our components. Redux's hook based api is a lot easier to use than its older, still available, [connect](/osa6/connect)-api.
 我们使用 react-redux 库中的[ useSelector ]( https://react-redux.js.org/api/hooks#useSelector )和[ useDispatch ]( https://react-redux.js.org/api/hooks#useDispatch )钩子来共享我们对组件的 redux-store 和 dispatch 函数。 Redux 的基于钩子的 api 比旧的、仍然可用的[ connect ](/ osa6 / connect)-api 更易于使用。
 
 <!-- Myös edellisessä [luvussa](/osa7/react_router/) käsitelyn [react-routerin](https://reacttraining.com/react-router/web/guides) api perustuu osin [hookeihin](https://reacttraining.com/react-router/web/api/Hooks), joiden avulla päästiin käsiksi routejen parametroituun osaan, sekä history-olioon, joka mahdollistaa selaimen osoiterivin manipuloinnin koodista. -->
-<！ - my s edellissa [ luvussa ](/ osa7 / react router /) k sitelyn [ react-routerin ](react-routerin) api perustuu osin [ hookeihin ]( https://reacttraining.com/react-router/web/guides ) ，joiden avulla p stiin k parameder si routejen troituan，sek history-olioon，joka mahdollistaa selaimen osoiterivin kodista.  -->
+
 [React-router's](https://reacttraining.com/react-router/web/guides) api we introduced in the [previous part](/osa7/react_router/) is also partially [hook](https://reacttraining.com/react-router/web/api/Hooks) based. Its hooks can be used to access url parameters and the history object, which allows for manipulating the browser url programmatically.
 我们在[上一部分](/ osa7 / react router /)中介绍的[ React-router 的]( https://reacttraining.com/React-router/web/guides ) api 也部分基于[ hook ]( https://reacttraining.com/React-router/web/api/hooks )。 它的钩子可以用来访问 url 参数和历史对象，这允许以编程方式操作浏览器的 url。
 
@@ -66,7 +66,7 @@ Create-react-app has readily configured rule [eslint-plugin-react-hooks](https:/
 创建-反应-应用程序已经很容易配置规则[ eslint-plugin-react-hooks ]( https://www.npmjs.com/package/eslint-plugin-react-hooks ) ，如果钩子被非法使用就会抱怨:
 
 ![](../../images/7/60ea.png)
-! [](. . / . / images / 7 / 60ea.png)
+
 
 ### Custom hooks
 定制钩子
@@ -439,7 +439,7 @@ Add a button to the form that you can use to clear all the input fields:
 在表单中添加一个按钮，你可以用它来清除所有的输入框:
 
 ![](../../images/7/61ea.png)
-! [](. . / . / images / 7 / 61ea.png)
+
 
 Expand the functionality of the <i>useField</i> hook so that it offers a new <i>reset</i> operation for clearing the field. 
 扩展 i useField / i 钩子的功能，以便它提供一个新的 i reset / i 操作来清除字段。
@@ -448,7 +448,7 @@ Depending on your solution you may see the following warning in your console:
 根据您的解决方案，您可能会在控制台中看到以下警告:
 
 ![](../../images/7/62ea.png)
-! [](. . / . / images / 7 / 62ea.png)
+
 
 We will return to this warning in the next exercise.
 我们将在下一个练习中回到这个警告。
@@ -506,43 +506,43 @@ If we were to do this we would lose much of the benefit provided by the <i>useFi
 7.7: country hook
 
 <!-- Palataan hetkeksi tehtäväsarjan [2.12-14](/osa2/palvelimella_olevan_datan_hakeminen#tehtavat-2-11-2-14) tunnelmiin. -->
-! -- palataan hetkeksi teht v sarjan 2.12-14 / osa2 / palvelimella olevan datan hakeminen # tehtawatvat-2-11-2-14 tunnelmiin. -- 
+
 Let's return to the exercises [2.12-14](/osa2/palvelimella_olevan_datan_hakeminen#tehtavat-2-11-2-14).
 让我们回到练习[2.12-14](/ osa2 / palvelimella olevan datan hakeminen # tehtawatat-2-11-2-14)。
 
 <!-- Ota pohjaksi repositoriossa https://github.com/fullstack-hy2020/country-hook oleva koodi.  -->
-! -- ota pohjaksi repositoriossa https: / / github. com / fullstack-hy2020 / country-hook oleva koodi. -- 
+
 Use the code from https://github.com/fullstack-hy2020/country-hook as your starting point.
 使用 https://github.com/fullstack-hy2020/country-hook 的代码作为你的起点。
 
 <!-- Sovelluksen avulla on mahdollista hakea maiden tietoja https://restcountries.eu/ rajapinnasta. Jos maa löytyy, näytetään maan perustiedot -->
-! —— sovelluksen avulla on mahdollista hakea makea maiden tietioja https: / / restcountries.eu / rajapinnathay.jos maa l ytyy，n ytet n maan perustiedot -- 
+
 The application can be used to search for country details from the https://restcountries.eu/ interface. If country is found, the details of the country are displayed
 该应用程序可以用来搜索国家的详细信息，从 https://restcountries.eu/ 的界面。 如果找到国家，则显示该国的详细信息
 
 ![](../../images/7/69ea.png)
-! [](. . / . / images / 7 / 69ea.png)
+
 
 <!-- jos maata ei löydy, kerrotaan siitä käyttäjälle -->
-! -- jos maata ei l ydy，kerrotaan siit k ytt j lle --
+
 If country is not found, message is displayed to the user
 如果找不到国家，则向用户显示消息
 
 ![](../../images/7/70ea.png)
-! [](. . / . / images / 7 / 70ea.png)
+
 
 <!-- Sovellus on muuten valmiiksi toteutettu, mutta joudut tässä tehtävässä toteuttamaan custom hookin _useCountry_, jonka avulla haet hookin parametrina saaman nimisen maan tiedot. -->
-! —— sovellus on muuten valmiiksi toteutettu，mutta joudutt t t t ss ss toteuttamaan custom hookin usecountry，jonka avulla haet hookin parameterina sanimisen maan tiedot ——
+
 The application is otherwise complete, but in this exercise you have to implement a custom hook _useCountry_, which can be used to search for the details of the country given to the hook as a parameter.
 除此之外，应用程序是完整的，但是在这个练习中，您必须实现一个自定义的 hook useCountry，它可以用来搜索作为参数提供给 hook 的国家的详细信息。
 
 <!-- Maan tietojan hakeminen kannattaa hoitaa apin endpointin [full name](https://restcountries.eu/#api-endpoints-full-name) avulla, hookin sisällä olevassa _useEffect_-hookissa. -->
-! -- maan tietojan hakeminen kannattaa hoitaa apin endpointin full name https: / / restcountries.eu / # api-endpoints-full-name avulla，hookin sis ll olevassa useeffect-hookissa. --
+
 Use the api endpoint [full name](https://restcountries.eu/#api-endpoints-full-name) to fetch country details in a _useEffect_-hook within your custom hook.
 使用 api 端点[全名]( https://restcountries.eu/#api-endpoints-full-name )在自定义钩子内的 useEffect-hook 中获取国家详细信息。
 
 <!-- Huomaa, että tässä tehtävässä on oleellista hyödyntää useEffectin [toisena parametrina](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) olevaa taulukkoa sen kontrolloimiseen milloin efektifunktio kannattaa suorittaa.  -->
-! —— huomaa，ett t t ss t t t t t t ss on oleellista hy dynt use effectin toisena parameterina https: / / reactjs. org / docs / hooks-reference. html # 条件放火-有效地控制住自己的欲望
+
 Note, that in this exercise it is essential to use useEffect's [second parameter](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) array to control when the effect function is executed.
 注意，在这个练习中，必须使用 useEffect 的[第二个参数]( https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect )数组来控制执行 effect 函数的时间。
 
@@ -640,7 +640,7 @@ If you implement the hook correctly, it can be used for both notes and phone num
 如果正确地实现了钩子，它可以同时用于备注和电话号码(在端口3005使用 npm run server 命令启动服务器)。
 
 ![](../../images/5/21e.png)
-! [](. . / . / images / 5 / 21e.png)
+
 
 </div>
 

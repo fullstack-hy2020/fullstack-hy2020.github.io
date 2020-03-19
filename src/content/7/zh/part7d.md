@@ -188,13 +188,13 @@ When we execute the _npm run build_ command our application code will be bundled
 当我们执行 npm run build 命令时，我们的应用程序代码将被 webpack 绑定。 该操作将生成一个新的 i main.js / i 文件，该文件添加在 i build / i 目录下:
 
 ![](../../images/7/19ea.png)
-! [](. . / . / images / 7 / 19ea.png)
+
 
 The file contains a lot of stuff that looks quite interesting. We can also see the code we wrote earlier at the end of the file:
 这个文件包含了很多看起来很有趣的东西。 我们还可以在文件末尾看到我们之前写的代码:
 
 ![](../../images/7/19eb.png)
-! [](. . / . / images / 7 / 19eb.png)
+
 
 Let's add a <i>App.js</i> file under the <i>src</i> directory with the following content:
 让我们在 i src / i 目录下添加一个 i App.js / i 文件，内容如下:
@@ -224,7 +224,7 @@ When we bundle the application again with the _npm run build_ command, we notice
 当我们再次将应用程序与 npm run build 命令捆绑在一起时，我们注意到 webpack 已经确认了这两个文件:
 
 ![](../../images/7/2ea.png)
-! [](. . / . / images / 7 / 2ea.png)
+
 
 Our application code can be found at the end of the bundle file in a rather obscure format:
 我们的应用程序代码可以在 bundle 文件的末尾找到，格式相当模糊:
@@ -344,7 +344,7 @@ When we bundle our application, we run into the following problem:
 当我们捆绑应用程序时，会遇到以下问题:
 
 ![](../../images/7/21.png)
-! [](. . / . / images / 7 / 21.png)
+
 
 ### Loaders
 # # # 装载机
@@ -444,7 +444,7 @@ You can test the bundled application by opening the <i>build/index.html</i> file
 你可以通过浏览器的 i open file / i 功能打开 i build / index. html / i 文件来测试捆绑的应用程序:
 
 ![](../../images/7/22.png)
-! [](. . / . / images / 7 / 22.png)
+
 
 
 It's worth noting that if the bundled application's source code uses <i>async/await</i>, the browser will not render anything on some browsers. [Googling the error message in the console](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) will shed some light on the issue. We have to install one more missing dependency, that is [@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill):
@@ -571,7 +571,7 @@ This will cause the transpilation process to break:
 这将导致蒸发过程中断:
 
 ![](../../images/7/23.png)
-! [](. . / . / images / 7 / 23. png)
+
 
 
 When using CSS, we have to use [css](https://webpack.js.org/loaders/css-loader/) and [style](https://webpack.js.org/loaders/style-loader/) loaders:
@@ -699,7 +699,7 @@ It's worth noticing that the error messages don't show up the same way as they d
 值得注意的是，错误消息的显示方式与使用 create-react-app 创建的应用程序不同。 出于这个原因，我们必须更加关注控制台:
 
 ![](../../images/7/24.png)
-! [](. . / . / images / 7 / 24.png)
+
 
 
 The application works nicely and the development workflow is quite smooth.
@@ -739,7 +739,7 @@ The application no longer works and the console will display the following error
 应用程序不再工作，控制台将显示以下错误:
 
 ![](../../images/7/25.png)
-! [](. . / . / images / 7 / 25. png)
+
 
 We know that the error is in the onClick method, but if the application was any larger the error message would be quite difficult to track down:
 我们知道错误在 onClick 方法中，但是如果应用程序再大一点，错误消息就很难追踪了:
@@ -757,7 +757,7 @@ The location of the error indicated in the message does not match the actual loc
 消息中指示的错误位置与源代码中错误的实际位置不匹配。 如果我们单击错误消息，我们会注意到显示的源代码与我们的应用程序代码不同:
 
 ![](../../images/7/26.png)
-! [](. . / . / images / 7 / 26.png)
+
 
 Of course, we want to see our actual source code in the error message.
 当然，我们希望在错误消息中看到实际的源代码。
@@ -791,19 +791,19 @@ The error message is now a lot better
 错误消息现在好多了
 
 ![](../../images/7/27.png)
-! [](. . / . / images / 7 / 27. png)
+
 
 since it refers to the code we wrote
 因为它指的是我们写的代码
 
 ![](../../images/7/27eb.png)
-! [](. . / . / images / 7 / 27eb.png)
+
 
 Generating the source map also makes it possible to use the Chrome debugger:
 生成源地图也使得使用 Chrome 调试器成为可能:
 
 ![](../../images/7/28.png)
-! [](. . / . / images / 7 / 28. png)
+
 
 Let's fix the bug by initializing the state of <i>values</i> as an empty array:
 让我们通过将 i values / i 的状态初始化为一个空数组来修复这个 bug:
@@ -1072,14 +1072,14 @@ Our application is finished and works with all relatively recent versions of mod
 我们的应用程序已经完成，并且可以与所有相对较新的现代版本的浏览器一起工作，除了 Internet Explorer 浏览器。 这是因为我们的代码使用了 axios [ Promises ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/promise ) ，并且现有的 IE 版本都不支持它们:
 
 ![](../../images/7/29.png)
-! [](. . / . / images / 7 / 29. png)
+
 
 
 There are many other things in the standard that IE does not support. Something as harmless as the [find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) method of JavaScript arrays exceeds the capabilities of IE:
 在标准中还有很多 IE 不支持的东西。 一些像 JavaScript 数组的[ find ]( https://developer.mozilla.org/en-us/docs/web/JavaScript/reference/global_objects/array/find )方法一样无害的东西超过了 IE 的能力:
 
 ![](../../images/7/30.png)
-! [](. . / . / images / 7 / 30.png)
+
 
 
 In these situations it is not enough to transpile the code, as transpilation simply transforms the code from a newer version of JavaScript to an older one with wider browser support. IE understands Promises syntactically but it simply has not implemented their functionality. The _find_ property of arrays in IE is simply <i>undefined</i>.
