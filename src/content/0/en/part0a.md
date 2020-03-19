@@ -145,6 +145,14 @@ You can only substitute whole parts. For example, if you have previously done 50
 
 If you have previously passed the course exam (excluding the exam for 3-credit course) and you are now expanding your course, you do not have to do the exam again. 
 
+### Changed since the last year
+
+There is only minor changes to parts 0-4. Part 5d, <i>end to end -testing</i> using the Cypress.io- library is almost completely new material.  Using custom hooks has been moved from part 5 to part 7 with some new content.
+
+Part 6, which is about Redux, concentrates on the new, hook-based, redux api. The material on react-router in part 7 has also been updated to use the hook-api. Semantic UI React has been replaced with the MaterialUI library due to lack of maintenance. <br><br> Part 8 on GraphQL has major updates especially on Apollo Client, which finally has stable hook based apis. Part 9 on TypeScript is completely new.
+
+Last year's course material can be found from https://fullstackopen-2019.github.io/
+
 ### Submitting exercises
 
 The exercises are submitted through GitHub and marking the exercises as done on the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
