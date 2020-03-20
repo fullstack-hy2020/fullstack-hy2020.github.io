@@ -10,7 +10,7 @@ lang: zh
 
 
 The frontend of our application shows the phone directory just fine with the updated server. However if we want to add new persons, we have to add login functionality to the frontend. 
-应用程序的前端显示的电话目录与更新后的服务器一致。 然而，如果我们想添加新的人员，我们必须添加登录功能的前端。
+应用的前端显示的电话目录与更新后的服务器一致。 然而，如果我们想添加新的人员，我们必须添加登录功能的前端。
 
 ### User log in
 # # # 用户登录
@@ -18,7 +18,7 @@ The frontend of our application shows the phone directory just fine with the upd
 <!-- Lisätään sovelluksen tilaan muuttuja _token_, joka tallettaa tokenin siinä vaiheessa kun käyttäjä on kirjautunut. Jos _token_ ei ole määritelty, näytetään kirjautumisesta huolehtiva komponentti <i>LoginForm</i>, joka saa parametriksi virheenkäsittelijän sekä funktion _setToken_: -->
 
 Let's add variable _token_ to the application's state. It will contain user's token when a is logged in. If _token_ is undefined, we render the <i>LoginForm</i>-component responsible for user login. The component receives an error handler and the _setToken_-function as parameters:
-让我们将变量 token 添加到应用程序的状态。 当用户登录时，它将包含用户标记。 如果令牌未定义，我们将使 i LoginForm / i-component 负责用户登录。 组件接收一个错误处理程序和 setToken-function 作为参数:
+让我们将变量 token 添加到应用的状态。 当用户登录时，它将包含用户标记。 如果令牌未定义，我们将使<i>LoginForm</i>-component 负责用户登录。 组件接收一个错误处理程序和 setToken-function 作为参数:
 
 ```js
 const App = () => {
@@ -165,13 +165,13 @@ const App = () => {
 ```
 
 The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6), branch <i>part8-6</i>.
-当前应用程序的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6) ，branch i part8-6 / i 上找到。
+当前应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6) ，branch<i>part8-6</i> 上找到。
 
 ### Adding a token to a header
 在头部添加一个标记
 
 After the backend changes, creating new persons requires that a valid user token is sent with the request. In order to send the token, we have to change the way we define the _ApolloClient_-object in <i>index.js</i> a little. 
-在后端更改之后，创建新的人员需要随请求一起发送一个有效的用户令牌。 为了发送令牌，我们必须稍微改变在 i index.js / i 中定义 ApolloClient-object 的方式。
+在后端更改之后，创建新的人员需要随请求一起发送一个有效的用户令牌。 为了发送令牌，我们必须稍微改变在<i>index.js</i> 中定义 ApolloClient-object 的方式。
 
 ```js
 import { setContext } from 'apollo-link-context' // highlight-line
@@ -197,9 +197,9 @@ const client = new ApolloClient({
 ```
 
 <!-- _client_-olion muodostamisen yhteydessä oleva toinen parametri _link_ määrittelee, miten apollo on yhteydessä palvelimeen. Nyt normaalia [httpLink](https://www.apollographql.com/docs/link/links/http.htm)-yhteyttä muokataan siten, että, että pyyntöjen mukaan [asetetaan headerille](https://www.apollographql.com/docs/react/networking/authentication/#header) <i>authorization</i> arvoksi localStoragessa mahdollisesti oleva token. -->
-<！ 客户多种多样的服务方式，包括医护人员，医护人员，和阿波罗医生。 ( https://www.apollographql.com/docs/link/links/http.htm )-yhtey t muokataan siten，ett，ett pyynt jen mukaan [ asetetaan headerille ]( https://www.apollographql.com/docs/react/networking/authentication/#header ) i authorization / i arvoksi localStoragessa mahisesti oleva token. -->
+<！ 客户多种多样的服务方式，包括医护人员，医护人员，和阿波罗医生。 ( https://www.apollographql.com/docs/link/links/http.htm )-yhtey t muokataan siten，ett，ett pyynt jen mukaan [ asetetaan headerille ]( https://www.apollographql.com/docs/react/networking/authentication/#header )<i>authorization</i> arvoksi localStoragessa mahisesti oleva token. -->
 The link parameter given to the _client_-object defines how apollo connects to the server. Here the normal [httpLink](https://www.apollographql.com/docs/link/links/http.htm) connection is modified so that the request's <i>authorization</i> [header](https://www.apollographql.com/docs/react/networking/authentication/#header) contains the token if one has been saved to the localStorage. 
-给定客户机对象的 link 参数定义了 apollo 如何连接到服务器。 在这里，正常的[ httpLink ]( https://www.apollographql.com/docs/link/links/http.htm )连接被修改，以便请求的 i authorization / i [ header ]( https://www.apollographql.com/docs/react/networking/authentication/#header )包含令牌(如果已经保存到 localStorage 的话)。
+给定客户机对象的 link 参数定义了 apollo 如何连接到服务器。 在这里，正常的[ httpLink ]( https://www.apollographql.com/docs/link/links/http.htm )连接被修改，以便请求的<i>authorization</i> [ header ]( https://www.apollographql.com/docs/react/networking/authentication/#header )包含令牌(如果已经保存到 localStorage 的话)。
 
 <!-- Asennetaan vielä muutoksen tarvitsema kirjasto -->
 
@@ -242,7 +242,7 @@ const PersonForm = ({ setError }) => {
 ```
 
 Current application code can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-7), branch <i>part8-7</i>.
-当前的应用程序代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-7) ，branch i part8-7 / i 上找到。
+当前的应用代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-7) ，branch<i>part8-7</i> 上找到。
 
 ### Updating cache, revisited
 # # # 更新缓存，重新访问
@@ -313,7 +313,7 @@ In some situations the only sensible way to keep the cache up to date is using t
 在某些情况下，使缓存保持最新的唯一合理方法是使用 update-callback。
 
 When necessary it is possible to disable cache for the whole application or single queries by setting the field managing the use of cache, [fetchPolicy](https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy) as <em>no-cache</em>.
-必要时，可以通过将管理 cache 使用的字段设置为 em no-cache / em 来禁用整个应用程序或单个查询的缓存，[ fetchPolicy ]( https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy )。
+必要时，可以通过将管理 cache 使用的字段设置为 em no-cache / em 来禁用整个应用或单个查询的缓存，[ fetchPolicy ]( https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy )。
 
 Be diligent with the cache. Old data in cache can cause hard to find bugs. As we know, keeping the cache up to date is very challenging. According to a coder proverb:
 勤于使用缓存。 缓存中的旧数据可能导致难以发现 bug。 众所周知，保持缓存最新是非常具有挑战性的。 根据一个编码器谚语:
@@ -322,7 +322,7 @@ Be diligent with the cache. Old data in cache can cause hard to find bugs. As we
 在计算机科学中只有两个难题: 缓存失效和命名。 / i Read more [ here ]( https://www.google.com/search?q=two+hard+things+in+Computer+Science&oq=two+hard+things+in+Computer+Science )。
 
 The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-8), branch <i>part8-8</i>.
-当前应用程序的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-8) ，branch i part8-8 / i 上找到。
+当前应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-8) ，branch<i>part8-8</i> 上找到。
 
 </div>
 
@@ -377,11 +377,11 @@ When a user is logged in, the navigation changes to show the functionalities whi
 
 
 #### 8.19 Books by genre, part 1
-8.19图书类型，第一部分
+8.19图书类型，第一章节
 
 
 Complete your application to filter the book list by genre. Your solution might look something like this:
-完成你的应用程序，按类型过滤书籍列表。你的解决方案可能是这样的:
+完成你的应用，按类型过滤书籍列表。你的解决方案可能是这样的:
 
 ![](../../images/8/30.png)
 
@@ -390,7 +390,7 @@ In this exercise the filtering can be done using just React.
 在这个练习中，过滤可以只使用 React 来完成。
 
 #### 8.20 Books by genre, part 2
-8.20图书类型第二部分
+8.20图书类型第二章节
 
 
 Implement a view which shows all the books based on the logged in user's favourite genre.
@@ -414,11 +414,11 @@ Some tips
 一些建议
 
 - Instead of using <i>useQuery</i> it is propably better to do the queries with the <i>useLazyQuery</i>-hook
-- 与使用 i useQuery / i 相比，使用 i useLazyQuery / i-hook 执行查询可能更好
+- 与使用<i>useQuery</i> 相比，使用<i>useLazyQuery</i>-hook 执行查询可能更好
 - It is sometimes useful to save the results of a GraphQL query to the state of a component. 
 - 将 GraphQL 查询的结果保存到组件的状态有时很有用。
 - Note, that you can do GraphQL queries in a <i>useEffect</i>-hook.
-- 注意，您可以在 i / useEffect / i-hook 中执行 GraphQL 查询。
+- 注意，您可以在<i>/ useEffect</i>-hook 中执行 GraphQL 查询。
 - The [second parameter](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) of a <i>useEffect</i> - hook can become handy depending on your approach. 
 根据您的方法，i / e / i-hook 的[第二个参数]( https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect )可以变得很方便。
 

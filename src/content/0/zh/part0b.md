@@ -87,7 +87,7 @@ The request and the server response have several [headers](https://en.wikipedia.
 
 The <i>Response headers</i> on top tell us e.g. the size of the response in bytes, and the exact time of the response. An important header [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) tells us that the response is a text file in [utf-8](https://en.wikipedia.org/wiki/UTF-8)-format, contents of which have been formatted with HTML. This way the browser knows the response to be a regular [HTML](https://en.wikipedia.org/wiki/HTML)-page, and to render it to the browser 'like a web page'.
 
-上面的 <i>Response headers</i>部告诉我们一些信息，例如，响应的大小(以字节为单位)和响应的具体时间。 有个重要的 header [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) 告诉我们，响应是[utf-8](https://en.wikipedia.org/wiki/UTF-8) 格式的文本文件，其内容已用 HTML 格式化。 通过这种方式，浏览器知道响应是一个常规的 html 页面，并将它“像一个网页”一样呈现给浏览器。
+上面的 <i>Response headers</i>部告诉我们一些信息，例如，响应的大小(以字节为单位)和响应的具体时间。 有个重要的 header [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) 告诉我们，响应是[utf-8](https://en.wikipedia.org/wiki/UTF-8) 格式的文本文件，其内容已用 HTML 格式化。 通过这种方式，浏览器知道响应是一个常规的 html 页面，并将它“像一个网页”一样渲染给浏览器。
 
 The <i>Response</i> tab shows the response data, a regular HTML-page. The <i>body</i> section determines the structure of the page rendered to the screen:
 
@@ -127,7 +127,7 @@ Even though it is difficult to notice, the HTML page begins to render before the
 
 The homepage of the example application works like a <i>traditional web application</i>. When entering the page, the browser fetches the HTML document detailing the structure and the textual content of the page from the server.
 
-示例应用的主页运作方式与传统的 web 应用程序类似。 当进入一个页面时，浏览器会从服务器获取 HTML 文档的详细页面结构，以及文本内容。
+示例应用的主页运作方式与传统的 web 应用类似。 当进入一个页面时，浏览器会从服务器获取 HTML 文档的详细页面结构，以及文本内容。
 
 The server has formed this document somehow. The document can be a <i>static</i> text file saved into the server's directory. The server can also form the HTML documents <i>dynamically</i> according to the application code, using, for example, data from a database.
 
@@ -287,7 +287,7 @@ So, the JavaScript code of the notes page above downloads the JSON-data containi
 
 This is done by the following code:
 
-这些是通过以下代码实现的:
+这些是通过如下代码实现的:
 
 ```js
 const data = JSON.parse(this.responseText);
@@ -438,7 +438,7 @@ The functioning of the browser is based on the idea of depicting HTML elements a
 
 Document Object Model, or [DOM](https://en.wikipedia.org/wiki/Document_Object_Model) is an Application Programming Interface, (an <i>API</i>), which enables programmatic modification of the <i>element trees</i> corresponding to web-pages.
 
-文档对象模型(Document Object Model，DOM)是一个应用程序编程接口(Application Programming Interface，API) ，它支持对 web 页面对应的元素树进行编程修改。
+文档对象模型(Document Object Model，DOM)是一个应用编程接口(Application Programming Interface，API) ，它支持对 web 页面对应的元素树进行编程修改。
 
 The JavaScript code introduced in the previous chapter used the DOM-API to add a list of notes to the page.
 
@@ -691,7 +691,7 @@ Note 对象包含两个字段: 包含 Note 实际内容的 content，以及包�
 
 The Notes page of the application follows an early-noughties style of web development and "uses Ajax". As such, it's on the crest of the wave of early 2000's web technology.
 
-应用程序的 Notes 页面遵循本世纪初的 web 开发风格，并且“使用了 Ajax”。 这在当时，2000 年初正处于 web 技术浪潮的顶峰。
+应用的 Notes 页面遵循本世纪初的 web 开发风格，并且“使用了 Ajax”。 这在当时，2000 年初正处于 web 技术浪潮的顶峰。
 
 [AJAX](<https://en.wikipedia.org/wiki/Ajax_(programming)>) (Asynchronous Javascript and XML) is a term introduced in February 2005 on the back of advancements in browser technology to describe a new revolutionary approach that enabled the fetching of content to webpages using JavaScript included within the HTML, without the need to rerender the page.
 
@@ -709,7 +709,7 @@ Notes 页面使用 AJAX 获取 Notes 数据。 提交表单仍然使用传统的
 The application URLs reflect the old, carefree times. JSON data is fetched from the url <https://fullstack-exampleapp.herokuapp.com/data.json> and new notes are sent to the url <https://fullstack-exampleapp.herokuapp.com/new_note>.  
 Nowadays urls like these would not be considered acceptable, as they don't follow the generally acknowledged conventions of [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) APIs, which we'll look into more in [part 3](/en/part3)
 
-应用程序的 url 反映了过去无忧无虑的时光。 数据从 url https://fullstack-exampleapp.herokuapp.com/data.JSON 中获取，新的 Note 被发送到 url https://fullstack-exampleapp.herokuapp.com/new_note。 如今，这样的 url 被认为是不可接受的，因为它们没有遵循公认的 RESTful api 约定，我们将在第三章中进一步研究
+应用的 url 反映了过去无忧无虑的时光。 数据从 url https://fullstack-exampleapp.herokuapp.com/data.JSON 中获取，新的 Note 被发送到 url https://fullstack-exampleapp.herokuapp.com/new_note。 如今，这样的 url 被认为是不可接受的，因为它们没有遵循公认的 RESTful api 约定，我们将在第三章中进一步研究
 
 The thing termed AJAX is now so commonplace that it's taken for granted. The term has faded into oblivion, and the new generation has not even heard of it.
 
@@ -719,7 +719,7 @@ The thing termed AJAX is now so commonplace that it's taken for granted. The ter
 
 In our example app, the home page works like a traditional web-page: All of the logic is on the server, and the browser only renders the HTML as instructed.
 
-在我们的示例应用程序中，主页的工作方式类似于传统的网页: 所有的逻辑都在服务器上，浏览器只按照指示渲染 HTML。
+在我们的示例应用中，主页的工作方式类似于传统的网页: 所有的逻辑都在服务器上，浏览器只按照指示渲染 HTML。
 
 The Notes page gives some of the responsibility, generating the HTML code for existing notes, to the browser. The browser tackles this task by executing the JavaScript code it fetched from the server. The code fetches the notes from the server as JSON-data and adds HTML elements for displaying the notes to the page using the [DOM-API](/en/part0/fundamentals_of_web_apps#document-object-model-or-dom).
 
@@ -727,17 +727,17 @@ Notes 页面为浏览器提供了一些职责，为现有的 Note 生成 HTML �
 
 In recent years, the [Single-page application](https://en.wikipedia.org/wiki/Single-page_application) (SPA) style of creating web-applications has emerged. SPA style websites don't fetch all of their pages separately from the server like our sample application does, but instead comprises of only one HTML page fetched from the server, the contents of which are manipulated with JavaScript that executes in the browser.
 
-近年来，创建网络应用程序的单页应用风格已经出现。SPA 类型的网站不会像我们的示例应用程序那样从服务器上单独获取所有页面，而是只包含从服务器获取的一个 HTML 页面，其内容由 JavaScript 在浏览器中执行操作。
+近年来，创建网络应用的单页应用风格已经出现。SPA 类型的网站不会像我们的示例应用那样从服务器上单独获取所有页面，而是只包含从服务器获取的一个 HTML 页面，其内容由 JavaScript 在浏览器中执行操作。
 
 The Notes page of our application bears some resemblance to SPA-style apps, but it's not quite there yet. Even though the logic for rendering the notes is run on the browser, the page still uses the traditional way of adding new notes. The data is sent to the server with form submit, and the server instructs the browser to reload the Notes page with a <i>redirect</i>.
 
-我们的应用程序的 Notes 页面与 SPA 风格的应用程序有一些相似之处，但它还没有完全到位。 尽管显示笔记的逻辑是在浏览器上运行的，但页面仍然使用传统的方式添加新笔记。 数据通过表单提交发送到服务器，服务器指示浏览器重新加载带有重定向的 Notes 页面。
+我们的应用的 Notes 页面与 SPA 风格的应用有一些相似之处，但它还没有完全到位。 尽管显示笔记的逻辑是在浏览器上运行的，但页面仍然使用传统的方式添加新笔记。 数据通过表单提交发送到服务器，服务器指示浏览器重新加载带有重定向的 Notes 页面。
 
 A single page app version of our example application can be found from <https://fullstack-exampleapp.herokuapp.com/spa>.
 At first glance, the application looks exactly the same as the previous one.
 The HTML code is almost identical, but the JavaScript file is different (<i>spa.js</i>) and there is a small change in how the form-tag is defined:
 
-我们的示例应用程序的单页应用程序版本可以在 https://fullstack-exampleapp.herokuapp.com/spa 中找到。 乍一看，这个应用程序看起来与前一个应用程序完全相同。 Html 代码几乎完全相同，但 JavaScript 文件不同(spa.js) ，form 标签的定义方式有一个小小的变化:
+我们的示例应用的单页应用版本可以在 https://fullstack-exampleapp.herokuapp.com/spa 中找到。 乍一看，这个应用看起来与前一个应用完全相同。 Html 代码几乎完全相同，但 JavaScript 文件不同(spa.js) ，form 标签的定义方式有一个小小的变化:
 
 ![](../../images/0/25e.png)
 
@@ -829,13 +829,13 @@ The code determines that the data is to be sent with an HTTP POST request and th
 The application code is available at <https://github.com/mluukkai/example_app>.
 It's worth remembering that the application is only meant to demonstrate the concepts of the course. The code follows a poor style of development in some measure, and should not be used as an example when creating your own applications. The same is true for the URLs used. The URL <i>new_note_spa</i>, which new notes are sent to, does not adhere to current best practices.
 
-应用程序代码可以在 https://github.com/mluukkai/example_app 上找到。 值得注意的是，这个应用程序只是用来演示课程的概念。 该代码在某种程度上遵循了糟糕的开发风格，不应该在创建自己的应用时作为示例使用。 使用的 url 也是如此。 发送新笔记的 URL 新建笔记的<i>new_note_spa</i>并不遵循当前的最佳实践。
+应用代码可以在 https://github.com/mluukkai/example_app 上找到。 值得注意的是，这个应用只是用来演示课程的概念。 该代码在某种程度上遵循了糟糕的开发风格，不应该在创建自己的应用时作为示例使用。 使用的 url 也是如此。 发送新笔记的 URL 新建笔记的<i>new_note_spa</i>并不遵循当前的最佳实践。
 
 ### Javascript-libraries Javascript 库
 
 The sample app is done with so called [vanilla Javascript](https://medium.freecodecamp.org/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34) using only the DOM-API and JavaScript to manipulate the structure of the pages.
 
-这个示例应用程序是通过所谓的[vanilla Javascript](https://medium.freecodecamp.org/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34) 来完成的，只使用了 DOM-API 和 Javascript 来操作页面的结构。
+这个示例应用是通过所谓的[vanilla Javascript](https://medium.freecodecamp.org/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34) 来完成的，只使用了 DOM-API 和 Javascript 来操作页面的结构。
 
 Instead of using JavaScript and the DOM-API only, different libraries containing tools that are easier to work with compared to the DOM-API are often used to manipulate pages. One of these libraries is the ever-so-popular [JQuery](https://jquery.com/).
 
@@ -857,7 +857,7 @@ Currently the most popular tool for implementing the browser-side logic of web-a
 
 During this course, we will get familiar with React and the [Redux](https://github.com/reactjs/redux)-library, which are frequently used together.
 
-目前，实现 web 应用程序浏览器端逻辑的最流行的工具是 Facebook 的 React-library。 在本课程中，我们将熟悉 React 和 redux 库，它们经常一起使用。
+目前，实现 web 应用浏览器端逻辑的最流行的工具是 Facebook 的 React-library。 在本课程中，我们将熟悉 React 和 redux 库，它们经常一起使用。
 
 The status of React seems strong, but the world of JavaScript is ever changing. For example, recently a newcomer [VueJS](https://vuejs.org/) has been capturing some interest.
 
@@ -879,7 +879,7 @@ Often, we also talk about the [frontend](https://en.wikipedia.org/wiki/Front_and
 
 In the context of this course, full stack web development means that we focus on all parts of the application: the frontend, the backend, and the database. Sometimes the software on the server and its operating system are seen as parts of the stack, but we won't go into those.
 
-在本课程的上下文中，全栈 web 开发意味着我们关注应用程序的所有部分: 前端、后端和数据库。 有时候，服务器上的软件及其操作系统会被看作是全栈的一部分，但我们不会深入讨论这些。
+在本课程的上下文中，全栈 web 开发意味着我们关注应用的所有部分: 前端、后端和数据库。 有时候，服务器上的软件及其操作系统会被看作是全栈的一部分，但我们不会深入讨论这些。
 
 We will code the backend with JavaScript, using [Node.js](https://nodejs.org/en/) runtime environment. Using the same programming language on multiple layers of the stack gives full stack web development a whole new dimension. However, it's not a requirement of full stack web development to use the same programming language (JavaScript) for all layers of the stack.
 
@@ -887,13 +887,13 @@ We will code the backend with JavaScript, using [Node.js](https://nodejs.org/en/
 
 It used to be more common for developers to specialize in one layer of the stack, for example the backend. Technologies on the backend and the frontend were quite different. With the Full stack trend, it has become common for developers to be proficient on all layers of the application and the database. Oftentimes, full stack developers must also have enough configuration and administration skills to operate their application, for example, in the cloud.
 
-过去，对于开发人员来说，更常见的做法是专注于全栈的某个层，例如后端。 后端和前端的技术完全不同。 随着全栈趋势的出现，对于开发人员来说，熟练掌握应用程序和数据库的所有层次已经变得非常普遍。 通常情况下，全栈开发人员还必须有足够的配置和管理技能来操作他们的应用程序，例如，上云。
+过去，对于开发人员来说，更常见的做法是专注于全栈的某个层，例如后端。 后端和前端的技术完全不同。 随着全栈趋势的出现，对于开发人员来说，熟练掌握应用和数据库的所有层次已经变得非常普遍。 通常情况下，全栈开发人员还必须有足够的配置和管理技能来操作他们的应用，例如，上云。
 
 ### Javascript fatigue Javascript 疲劳
 
 Full stack web development is challenging in many ways. Things are happening in many places at once, and debugging is quite a bit harder than with regular desktop applications. JavaScript does not always work as you'd expect it to (compared to many other languages), and the asynchronous way its runtime environments work causes all sorts of challenges. Communicating in the web requires knowledge of the HTTP-protocol. One must also handle databases and server administration and configuration. It would also be good to know enough CSS to make applications at least somewhat presentable.
 
-全栈 web 开发在许多方面都具有挑战性。 在许多地方会有突发情况，并且调试比普通桌面应用程序要困难得多。 Javascript 并不总是像你期望的那样工作(与许多其他语言相比) ，其运行时环境的异步工作方式带来了各种各样的挑战。 网络中的通信需要对 http 协议的了解。 还必须处理数据库、服务器管理和配置。 了解足够的 CSS 使应用至少在一定程度上能够呈现良好。
+全栈 web 开发在许多方面都具有挑战性。 在许多地方会有突发情况，并且调试比普通桌面应用要困难得多。 Javascript 并不总是像你期望的那样工作(与许多其他语言相比) ，其运行时环境的异步工作方式带来了各种各样的挑战。 网络中的通信需要对 http 协议的了解。 还必须处理数据库、服务器管理和配置。 了解足够的 CSS 使应用至少在一定程度上能够渲染良好。
 
 The world of JavaScript develops fast, which brings its own set of challenges. Tools, libraries and the language itself are under constant development. Some are starting to get tired of the constant change, and have coined a term for it: [Javascript](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4) [fatigue](https://auth0.com/blog/how-to-manage-javascript-fatigue/).
 
@@ -914,7 +914,7 @@ The exercises are submitted via GitHub, and by marking the exercises as done in 
 
 You can submit all of the exercises into the same repository, or use multiple different repositories. If you submit exercises from different parts into the same repository, name your directories well. If you use a private repository to submit the exercises, add _mluukkai_ as a collaborator to it.
 
-您可以将所有练习提交到同一个仓库，或者使用多个不同的仓库。 如果您将来自不同章节的练习提交到同一个仓库中，请为您的目录命好名。 如果您使用私有库进行提交练习，那么添加 mluukkai 作为 collaborator。
+您可以将本课程的所有练习提交到同一个仓库，或者使用多个不同的仓库。 如果您将来自不同章节的练习提交到同一个仓库中，请使用一个合理的目录命名方案。 如果您使用私有库进行提交练习，那么添加 mluukkai 作为 collaborator。
 
 One good way to name the directories in your submission repository is as follows:
 
@@ -1022,13 +1022,13 @@ The idea of these exercises is to read the text through once more, and to think 
 
 Create a diagram depicting the situation where the user goes to the [single page app](/en/part0/fundamentals_of_web_apps#single-page-app) version of the notes app at <https://fullstack-exampleapp.herokuapp.com/spa>.
 
-创建一个图表，描述用户在进入 https://fullstack-exampleapp.herokuapp.com/spa 这个 Note 应用程序的单页版本的情况。
+创建一个图表，描述用户在进入 https://fullstack-exampleapp.herokuapp.com/spa 这个 Note 应用的单页版本的情况。
 
   <h4>0.6: New note</h4>
 
 Create a diagram depicting the situation, where user creates a new note using the single page version of the app.
 
-创建一个图表描述以下情况，用户使用应用的 SPA 版本创建一个新的笔记。
+创建一个图表描述如下情况，用户使用应用的 SPA 版本创建一个新的笔记。
 
 This was the last exercise, and it's time to push your answers to GitHub and mark the exercises as done in the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 

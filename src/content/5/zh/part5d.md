@@ -16,12 +16,12 @@ So far we have tested the backend as a whole on an API level using integration t
 <!-- Katsotaan nyt erästä tapaa tehdä [järjestelmää kokonaisuutena](https://en.wikipedia.org/wiki/System_testing) tutkivia <i>End to End (E2E) -testejä</i>. -->
 
 Next we will look into one way to test the [system as a whole](https://en.wikipedia.org/wiki/System_testing) using <i>End to End</i> (E2E) tests.
-接下来，我们将研究一种使用 i End to End / i (E2E)测试[系统作为一个整体]( https://en.wikipedia.org/wiki/system_testing )的方法。
+接下来，我们将研究一种使用<i>End to End</i> (E2E)测试[系统作为一个整体]( https://en.wikipedia.org/wiki/system_testing )的方法。
 
 <!-- Web-sovellusten E2E-testaus tapahtuu käyttäen selainta jonkin kirjaston avulla. Ratkaisuja on tarjolla useita, esimerkiksi [Selenium](http://www.seleniumhq.org/), joka mahdollistaa testien automatisoinnin lähes millä tahansa selaimella. Toinen vaihtoehto on käyttää ns. [headless browseria](https://en.wikipedia.org/wiki/Headless_browser) eli selainta, jolla ei ole ollenkaan graafista käyttöliittymää. Esim. Chromea on mahdollista suorittaa Headless-moodissa. -->
 
 We can do E2E testing of an web application using a browser and a testing library. There are multiple libraries available, for example [Selenium](http://www.seleniumhq.org/) which can be used with almost any browser. 
-我们可以使用浏览器和测试库对 web 应用程序进行 E2E 测试。 有多个库可用，例如[ Selenium ]( http://www.seleniumhq.org/ ) ，几乎可以用于任何浏览器。
+我们可以使用浏览器和测试库对 web 应用进行 E2E 测试。 有多个库可用，例如[ Selenium ]( http://www.seleniumhq.org/ ) ，几乎可以用于任何浏览器。
 Another browser option are so called [headless browsers](https://en.wikipedia.org/wiki/Headless_browser), which are browsers with no graphical user interface. 
 另一个浏览器选项是所谓的[无头浏览器](headless browsers) ，这是一种没有 https://en.wikipedia.org/wiki/headless_browser 图形用户界面的浏览器。
 For example Chrome can be used in Headless-mode. 
@@ -62,12 +62,12 @@ Other libraries run the tests in a Node-process, which is connected to the brosw
 <!-- Tehdään tämän osan lopuksi muutamia end to end -testejä muistiinpanosovellukselle.  -->
 
 Let's  make some end to end tests for our note application.
-让我们为笔记应用程序做一些端到端的测试。
+让我们为笔记应用做一些端到端的测试。
 
 <!-- Aloitetaan asentamalla Cypress <i>frontendin</i> kehitysaikaiseksi riippuvuudeksi -->
 
 We begin by installing Cypress to <i>the frontend</i> as development dependency
-我们首先将 Cypress 安装到 i 的前端 / i 作为开发依赖项
+我们首先将 Cypress 安装到<i>的前端</i> 作为开发依赖项
 
 ```js
 npm install --save-dev cypress
@@ -101,12 +101,12 @@ Unlike frontend's unit tests, Cypress tests can be in the frontend or the backen
 <!-- Cypress-testit olettavat että testattava järjestelmä on käynnissä kun testit suoritetaan, eli toisin kuin esim. backendin integraatiotestit, Cypress-testit <i>eivät käynnistä</i> testattavaa järjestelmää testauksen yhteydessä. -->
 
 The tests require the tested system to be running. Unlike our backend integration tests, Cypress test <i>do not start</i> the system when they are run. 
-这些测试要求测试系统正常运行。 与我们的后端集成测试不同，Cypress test i 在系统运行时不启动 / i。
+这些测试要求测试系统正常运行。 与我们的后端集成测试不同，Cypress test<i>在系统运行时不启动</i>。
 
 <!-- Tehdään <i>backendille</i> npm-skripti, jonka avulla se saadaan käynnistettyä testausmoodissa, eli siten, että <i>NODE\_ENV</i> saa arvon <i>test</i>. -->
-!-tehd n i backendille / i npm-skripti，jonka avulla se saadaan k ynnistetty testausmoodissa，eli siten，ett i NODE  ENV / i saa arvon i test / i.-
+!-tehd n<i>backendille</i> npm-skripti，jonka avulla se saadaan k ynnistetty testausmoodissa，eli siten，ett<i>NODE  ENV</i> saa arvon<i>test</i>.-
 Let's add an npm-script to <i>the backend</i> which starts it in test mode, or so that <i>NODE\_ENV</i> is <i>test</i>.
-让我们在后端 / i 中添加一个 npm-script，在测试模式下启动它，或者使 i NODE  ENV / i 为 i test / i。
+让我们在后端 /<i>中添加一个 npm-script，在测试模式下启动它，或者使 i NODE  ENV</i> 为<i>test</i>。
 
 ```js
 {
@@ -138,7 +138,7 @@ npm run cypress:open
 <!-- Ensimmäisen käynnistyksen yhteydessä sovellukselle syntyy hakemisto <i>cypress</i>, jonka alihakemistoon <i>integrations</i> on tarkoitus sijoittaa testit. Cypress luo valmiiksi joukon esimerkkitestejä, poistetaan ne ja luodaan ensimmäinen oma testi tiedostoon <i>note\_app.spec.js</i>: -->
 
 When we first run Cypress, it creates a <i>cypress</i> directory. It contains a <i>integrations</i> subdirectory, where we will place our tests. Cypress creates a bunch of example tests for us, but we will delete all those and make our own test in file <i>note\_app.speck.js</i>:
-当我们第一次运行 Cypress 时，它会创建一个 i Cypress / i 目录。 它包含一个 i 集成 / i 子目录，我们将在其中放置测试。 Cypress 为我们创建了一系列测试示例，但是我们将删除所有这些并在文件 i note  app.speck.js / i 中创建我们自己的测试:
+当我们第一次运行 Cypress 时，它会创建一个<i>Cypress</i> 目录。 它包含一个<i>集成</i> 子目录，我们将在其中放置测试。 Cypress 为我们创建了一系列测试示例，但是我们将删除所有这些并在文件<i>note  app.speck.js</i> 中创建我们自己的测试:
 
 ```js
 describe('Note ', function() {
@@ -161,7 +161,7 @@ We start the test from the opened window:
 <!-- Testin suoritus avaa selaimen ja näyttää miten sovellus käyttäytyy testin edetessä: -->
 
 Running the test opens your browser and shows how the application behaves as the test is run:
-运行测试会打开你的浏览器，并显示应用程序在运行测试时的行为:
+运行测试会打开你的浏览器，并显示应用在运行测试时的行为:
 
 ![](../../images/5/32ae.png)
 
@@ -169,7 +169,7 @@ Running the test opens your browser and shows how the application behaves as the
 <!-- Testi näyttää rakenteeltaan melko tutulta. <i>describe</i>-lohkoja käytetään samaan tapaan kuin Jestissä ryhmittelemään yksittäisiä testitapauksia, jotka on määritelty <i>it</i>-metodin avulla. Nämä osat Cypress on lainannut sisäisesti käyttämältään [Mocha](https://mochajs.org/)-testikirjastolta.   -->
 
 The structure of the test should look faimiliar. They use <i>describe</i> blocks to group different test cases like Jest does. The test cases have been defined with the <i>it</i> method. 
-测试的结构应该看起来很模糊。 他们使用 i describe / i 块对不同的测试用例进行分组，就像 Jest 那样。 测试用例已经用 i it / i 方法定义了。
+测试的结构应该看起来很模糊。 他们使用<i>describe</i> 块对不同的测试用例进行分组，就像 Jest 那样。 测试用例已经用<i>it</i> 方法定义了。
 Cypress borrowed these parts from [Mocha](https://mochajs.org/) testing library it uses under the hood. 
 赛普拉斯从[摩卡]( https://mochajs.org/ )测试库中借用了这些部件，并在引擎盖下使用。
 
@@ -201,9 +201,9 @@ However, Mocha [recommends](https://mochajs.org/#arrow-functions) that arrow fun
 然而，Mocha [建议]( https://mochajs.org/#arrow-functions )不要使用箭头函数，因为它们在某些情况下可能会导致一些问题。
 
 <!-- Jos komento <i>cy.contains</i> ei löydä sivulta etsimäänsä tekstiä, testi ei mene läpi. Eli jos laajennamme testiä seuraavasti -->
--- jose komento i cy.contains / i ei yd sivulta etsim ns teksti，testi mene l pi
+-- jose komento<i>cy.contains</i> ei yd sivulta etsim ns teksti，testi mene l pi
 If <i>cy.contains</i> does not find the text is it searching for, the test does not pass. 
-如果 i cy.contains / i 没有找到正在搜索的文本，则测试不会通过。
+如果<i>cy.contains</i> 没有找到正在搜索的文本，则测试不会通过。
 So if we extend our test like so
 所以如果我们像这样扩展测试
 
@@ -241,11 +241,11 @@ Let's remove the failing code from the test.
 # # 写在表格上
 
 <!-- Laajennetaan testejä siten, että testi yrittää kirjautua sovellukseen. Oletetaan että backendin tietokantaan on tallennettu käyttäjä, jonka käyttäjätunnus on <i>mluukkai</i> ja salasana <i>salainen</i>.  -->
--- lajennettaan testej siten，ett testi yritt kirjautua sovellukseen.oletetan ett backendin titokantaan on tallennettu k ytt j，jonka k ytt tunus on i mluukkai / i ja salasana i salainen / i. -->
+-- lajennettaan testej siten，ett testi yritt kirjautua sovellukseen.oletetan ett backendin titokantaan on tallennettu k ytt j，jonka k ytt tunus on<i>mluukkai</i> ja salasana<i>salainen</i>. -->
 Let's extend our tests so, that the test tries to log in to our application. 
-让我们扩展测试，以便测试尝试登录到我们的应用程序。
+让我们扩展测试，以便测试尝试登录到我们的应用。
 We assume our backend contains a user with the username <i>mluukkai</i> and password <i>salainen</i>.
-我们假设后端包含一个用户名为 i mluukkai / i 和密码 i salainen / i 的用户。
+我们假设后端包含一个用户名为<i>mluukkai</i> 和密码<i>salainen</i> 的用户。
 
 <!-- Aloitetaan kirjautumislomakkeen avaamisella. -->
 ——阿勒泰塔安 · 克里斯托马克 · 阿瓦米塞拉——
@@ -271,9 +271,9 @@ The test first searches for the login button by its text, and clicks the button 
 <!-- Koska molemmat testit aloittavat samalla tavalla, eli avaamalla sivun <i>http://localhost:3000</i>, kannattaa yhteinen osa eristää ennen jokaista testiä suoritettavaan <i>beforeEach</i>-lohkoon: -->
 
 Both of our tests begin the same way, by opening the page <i>http://localhost:3000</i>, so we should 
-我们的两个测试都是以同样的方式开始的，都是通过打开 i /  http://localhost:3000 / i 页面，所以我们应该
+我们的两个测试都是以同样的方式开始的，都是通过打开<i>/  http://localhost:3000</i> 页面，所以我们应该
 separate the shared part into a <i>beforeEach</i> block run before each test:
-在每个测试之前，将共享部分分隔为 i beforeEach / i 块运行:
+在每个测试之前，将共享部分分隔为<i>beforeEach</i> 块运行:
 
 ```js
 describe('Note app', function() {
@@ -297,7 +297,7 @@ describe('Note app', function() {
 <!-- Ilmoittautumislomake sisältää kaksi <i>input</i>-kenttää, joihin testin tulisi kirjoittaa. -->
 
 The login field contains two <i>input</i> fields, which the test should write into. 
-登录字段包含两个 i input / i 字段，测试应该将这两个字段写入其中。
+登录字段包含两个<i>input</i> 字段，测试应该将这两个字段写入其中。
 
 <!-- Komento [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) mahdollistaa elementtien etsimisen CSS-selektorien avulla. -->
 
@@ -393,7 +393,7 @@ The last row ensures, that the login was successful.
 <!-- Huomaa, että CSS:n [id-selektori](https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors) on risuaita, eli jos koodista etsitään elementtiä, jolla on id <i>username</i> on sitä vastaava CSS-selektori <i>#username</i>. -->
 
 Note that the CSS [id-selector](https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors) is #, so if we want to search for an element with the id <i>username</i> the CSS selector is <i>#username</i>.
-注意 CSS [ id-selector ]( https://developer.mozilla.org/en-us/docs/web/CSS/id_selectors )是 # ，所以如果我们想搜索 id i username / i 的元素，CSS 选择器是 i # username / i。
+注意 CSS [ id-selector ]( https://developer.mozilla.org/en-us/docs/web/CSS/id_selectors )是 # ，所以如果我们想搜索 id<i>username</i> 的元素，CSS 选择器是<i># username</i>。
 
 ### Some things to note
 有些事情需要注意
@@ -419,9 +419,9 @@ cy.get('#login-button').click()
 <!-- Molemmissa napeissa on sama teksti <i>login</i>, mutta kyseessä on kaksi erillistä nappia. Molemmat napit ovat itse asiassa koko ajan sovelluksen DOM:issa, mutta niistä vain yksi kerrallaan on näkyvissä, sillä toiselle on lisätty tyylimääre <i>display: none</i>.  -->
 
 Both buttons have the text <i>login</i>, but they are two separate buttons. 
-两个按钮都有文本 i login / i，但它们是两个单独的按钮。
+两个按钮都有文本<i>login</i>，但它们是两个单独的按钮。
 Actually both buttons are in the application's DOM the whole time, but only one is visible at a time because of the <i>display:none</i> styling on one of them.
-实际上，这两个按钮一直都在应用程序的 DOM 中，但是由于 i 显示器，每次只有一个按钮可见: 其中一个按钮的 none / i 样式。
+实际上，这两个按钮一直都在应用的 DOM 中，但是由于<i>显示器，每次只有一个按钮可见: 其中一个按钮的 none</i> 样式。
 
 <!-- Jos haemme nappia tekstin perusteella, palauttaa komento [cy.contains](https://docs.cypress.io/api/commands/contains.html#Syntax) aina napeista ensimmäisen, eli lomakkeen avaavan napin. Näin tapahtuu siis vaikka nappi ei olisikaan näkyvillä. Tämän takia lomakkeen lähettävään nappiin on lisätty id <i>login-button</i>, jonka perusteella testi pääsee nappiin käsiksi. -->
 
@@ -430,7 +430,7 @@ If we search for a button by its text, [cy.contains](https://docs.cypress.io/api
 This will happen even if the button is not visible. 
 即使按钮不可见，也会发生这种情况。
 Because of this we gave the submit button id <i>login-button</i> we can use to access it.
-正因为如此，我们给出了提交按钮 id i login-button / i，我们可以用它来访问它。
+正因为如此，我们给出了提交按钮 id<i>login-button</i>，我们可以用它来访问它。
 
 <!-- Huomaamme, että testeissä käytetty muuttuja _cy_ aiheuttaa ikävän ESlint-virheen -->
 
@@ -514,9 +514,9 @@ describe('Note app', function() {
 <!-- Testi on määritelty omana <i>describe</i>-lohkonaan. Muistiinpanon luominen edellyttää että käyttäjä on kirjaantuneena, ja kirjautuminen hoidetaan <i>beforeEach</i>-lohkossa.  -->
 
 The test has been defined in its own <i>describe</i> block. 
-测试已经在它自己的 i describe / i 块中定义了。
+测试已经在它自己的<i>describe</i> 块中定义了。
 Only logged in users can create new notes, so we added logging in to the application to a <i>beforeEach</i> block. 
-只有登录的用户才能创建新的注释，因此我们将登录添加到应用程序的 i beforeEach / i 块中。
+只有登录的用户才能创建新的注释，因此我们将登录添加到应用的<i>beforeEach</i> 块中。
 
 <!-- Testi luottaa siihen, että uutta muistiinpanoa luotaessa sivulla on ainoastaan yksi input-kenttä, eli se hakee kentän seuraavasti -->
 
@@ -538,7 +538,7 @@ If the page contained more inputs, the test would break
 <!-- Tämän takia olisi jälleen parempi lisätä lomakkeen kentälle <i>id</i> ja hakea kenttä testissä id:n perusteella. -->
 ——这是一位老人和她的妻子，她的丈夫和她的妻子一起住在秘鲁。——
 Due to this it would again be better to give the input an <i>id</i> and search for it by it. 
-由于这一点，最好再给输入一个 i id / i，并通过它来搜索它。
+由于这一点，最好再给输入一个<i>id</i>，并通过它来搜索它。
 
 <!-- Testien rakenne näyttää seuraavalta: -->
 ——泰特恩 · 拉肯尼 · 西乌拉瓦拉塔: ——
@@ -576,7 +576,7 @@ describe('Note app', function() {
 <!-- Cypress suorittaa testit siinä järjestyksessä, missä ne ovat testikoodissa. Eli ensin suoritetaan testi <i>user can log in</i>, missä käyttäjä kirjautuu sovellukseen, ja tämän jälkeen suoritetaan testi <i>a new note can be created</i>, jonka <i>beforeEach</i>-lohkossa myös suoritetaan kirjautuminen. Miksi näin tehdään, eikö käyttäjä jo ole kirjaantuneena aiemman testin ansiosta? Ei, sillä <i>jokaisen</i> testin suoritus alkaa selaimen kannalta "nollatilanteesta", kaikki edellisten testien selaimen tilaan tekemät muutokset nollaantuvat. -->
 
 Cypress runs the tests in the order they are in the code. So first it runs <i>user can log in</i>, where the user logs in. Then cypress will run <i>a new note can be created</i> which's <i>beforeEach</i> block logs in as well. 
-Cypress 按照测试在代码中的顺序运行测试。 所以它首先运行 i user can log in / i，用户在这里登录。 然后 cypress 将运行 i，可以创建一个新的注释 / i，也就是 i beforeEach / i 阻塞日志。
+Cypress 按照测试在代码中的顺序运行测试。 所以它首先运行<i>user can log in</i>，用户在这里登录。 然后 cypress 将运行 i，可以创建一个新的注释 / i，也就是<i>beforeEach</i> 阻塞日志。
 Why do this? Is the user not logged in after the first test? 
 为什么这样做? 用户在第一次测试后没有登录吗？
 No, because <i>each</i> test starts from zero as far as the browser is concerned. 
@@ -604,7 +604,7 @@ The solution is to create API endpoints to the backend for the test.
 We can empty the database using these endpoints. 
 我们可以使用这些端点清空数据库。
 Let's create a new <i>router</i> for the tests
-让我们为测试创建一个新的 i 路由器 / i
+让我们为测试创建一个新的<i>路由器</i>
 
 ```js
 const router = require('express').Router()
@@ -624,7 +624,7 @@ module.exports = router
 <!-- ja lisätään se backendiin ainoastaan <i>jos sovellusta suoritetaan test-moodissa</i>: -->
 !-他们不会让我们失望的，我们不会让他们失望的
 and add it to the backend only <i>if the application is run on test-mode</i>:
-如果应用程序在 test-mode / i 上运行，则只将其添加到后端 i:
+如果应用在 test-mode / i 上运行，则只将其添加到后端 i:
 
 ```js
 // ...
@@ -649,17 +649,17 @@ module.exports = app
 <!-- eli lisäyksen jälkeen HTTP POST -operaatio backendin endpointiin <i>/api/testing/reset</i> tyhjentää tietokannan. -->
 
 after the changes a HTTP POST request to the <i>/api/testing/reset</i> endpoint empties the database.
-更改之后，对 i / api / testing / reset / i 端点的 HTTP POST 请求将清空数据库。
+更改之后，对<i>/ api / testing / reset</i> 端点的 HTTP POST 请求将清空数据库。
 
 <!-- Backendin testejä varten muokattu koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1), branchissä <i>part5-1</i>. -->
-!-backendin testej varten muokattu koodi on kokonaisuudessaan github https: / / fullstack-hy2020 / part3-notes-backend / tree / part5-1，branchiss i part5-1 / i. -
+!-backendin testej varten muokattu koodi on kokonaisuudessaan github https: / / fullstack-hy2020 / part3-notes-backend / tree / part5-1，branchiss<i>part5-1</i>. -
 The modified backend code can be found from [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1) branch <i>part5-1</i>.
-修改后的后端代码可以在[ github ]( https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1)分支 i part5-1 / i 中找到。
+修改后的后端代码可以在[ github ]( https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1)分支<i>part5-1</i> 中找到。
 
 <!-- Muutetaan nyt testien <i>beforeEach</i>-alustuslohkoa siten, että se nollaa palvelimen tietokannan aina ennen testien suorittamista. -->
 
 Next we will change the <i>beforeEach</i> block so, that it empties the server's database before tests are run. 
-接下来，我们将更改 i beforeEach / i 块，以便在运行测试之前清空服务器的数据库。
+接下来，我们将更改<i>beforeEach</i> 块，以便在运行测试之前清空服务器的数据库。
 
 <!-- Tällä hetkellä sovelluksen käyttöliittymän kautta ei ole mahdollista luoda käyttäjiä, luodaankin testien alustuksessa testikäyttäjä suoraan backendiin. -->
 
@@ -706,11 +706,11 @@ Unlike earlier, now the testing starts with the backend in the same state every 
 与以前不同的是，现在每次测试都以相同的状态从后端开始。 后端将包含一个用户，没有注释。
 
 <!-- Tehdään vielä testi, joka tarkastaa että muistiinpanojen tärkeyttä voi muuttaa.  Muutetaan ensin sovelluksen frontendia siten, että uusi muistiinpano on oletusarvoisesti epätärkeä, eli kenttä <i>important</i> saa arvon <i>false</i>: -->
-——在很多测试中，joka tarkastaa ett muistiinpanojen t rkeytt voi muuttaa. muutetan ensinsovelluksen frontendia siten，ett uusi muistiinpano on oletusarvoisesti ep t ke，eli kentt i important / i saa arvon i false / i: ——
+——在很多测试中，joka tarkastaa ett muistiinpanojen t rkeytt voi muuttaa. muutetan ensinsovelluksen frontendia siten，ett uusi muistiinpano on oletusarvoisesti ep t ke，eli kentt<i>important</i> saa arvon<i>false</i>: ——
 Let's add one more test for checking that we can change the importance of notes. 
 让我们再添加一个检查的测试，我们可以改变注释的重要性。
 First we change the frontend so that a new note is unimportant by default, or the <i>important</i> field is <i>false</i>:
-首先，我们改变前面的字符，这样一个新的注释默认是不重要的，或者 i important / i 字段是 i false / i:
+首先，我们改变前面的字符，这样一个新的注释默认是不重要的，或者<i>important</i> 字段是<i>false</i>:
 
 ```js
 const NoteForm = ({ createNote }) => {
@@ -732,7 +732,7 @@ const NoteForm = ({ createNote }) => {
 <!-- On useita eri tapoja testata asia. Seuraavassa etsitään ensin muistiinpano ja klikataan sen nappia <i>make important</i>. Tämän jälkeen tarkistetaan että muistiinpano sisältää napin <i>make not important</i>. -->
 1. a)【句意】我把重要的事情放在第一位。 在我看来，这并不重要。 -->
 There are multiple ways to test this. In the following example we first search for a note and click its <i>make important</i> button. Then we check that the note now contains a <i>make not important</i> button. 
-有多种方法可以测试这一点。 在下面的示例中，我们首先搜索一个注释，然后单击它的 i make important / i 按钮。 然后我们检查注释现在包含一个 i make not important / i 按钮。
+有多种方法可以测试这一点。 在下面的示例中，我们首先搜索一个注释，然后单击它的<i>make important</i> 按钮。 然后我们检查注释现在包含一个<i>make not important</i> 按钮。
 
 ```js
 describe('Note app', function() {
@@ -764,17 +764,17 @@ describe('Note app', function() {
 <!-- Ensimmäinen komento etsii ensin komponentin, missä on teksti <i>another note cypress</i> ja sen sisältä painikkeen <i>make important</i> ja klikkaa sitä.  -->
 ——安西姆在电子邮件中说: “我在电子邮件中写了一些重要的事情。”。 -->
 The first command searches for a component containing the text <i>another note cypress</i>, and then for a <i>make important</i> button within it. It then clicks the button.
-第一个命令搜索包含文本 i another note cypress / i 的组件，然后搜索其中的 i make important / i 按钮。 然后点击按钮。
+第一个命令搜索包含文本<i>another note cypress</i> 的组件，然后搜索其中的<i>make important</i> 按钮。 然后点击按钮。
 
 <!-- Toinen komento varmistaa, että saman napin teksti on vaihtunut muotoon <i>make not important</i>. -->
 1. 今天我要说的是，今天我要说的话并不重要
 The second command checks that the text on the button has changed to <i>make not important</i>.
-第二个命令检查按钮上的文本是否更改为 i make not important / i。
+第二个命令检查按钮上的文本是否更改为<i>make not important</i>。
 
 <!-- Testit ja frontendin tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9), branchissa <i>part5-9</i>. -->
 
 The tests and the current frontend code can be found from [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9) branch <i>part5-9</i>.
-测试和当前的前端代码可以从[ github ]( https://github.com/fullstack-hy2020/part2-notes/tree/part5-9)分支 i part5-9 / i 中找到。
+测试和当前的前端代码可以从[ github ]( https://github.com/fullstack-hy2020/part2-notes/tree/part5-9)分支<i>part5-9</i> 中找到。
 
 ### Failed login test
 # # # 登录测试失败
@@ -789,7 +789,7 @@ Let's make a test to ensure that a login attempt fails if the password is wrong.
 Cypress will run all tests each time by default, and as the number of tests increases it starts to become quite time consuming. 
 赛普拉斯默认情况下每次都会运行所有测试，并且随着测试数量的增加，它开始变得相当耗时。
 When developing a new test or when debugging a broken test, we can define the test with <i>it.only</i> instead of <i>it</i>, so that Cypress will only run the required test.
-当开发一个新的测试或者调试一个失败的测试时，我们可以用 i it.only / i 而不是 i it / i 来定义测试，这样 Cypress 就只能运行所需的测试。
+当开发一个新的测试或者调试一个失败的测试时，我们可以用<i>it.only</i> 而不是<i>it</i> 来定义测试，这样 Cypress 就只能运行所需的测试。
 When the test is working, we can remove <i>.only</i>.
 当测试工作时，我们可以删除 i. only / i。
 
@@ -818,12 +818,12 @@ describe('Note app', function() {
 <!-- Testi siis varmistaa komennon [cy.contains](https://docs.cypress.io/api/commands/contains.html#Syntax) avulla, että sovellus tulostaa virheilmoituksen. -->
 
 The test uses [cy.contains](https://docs.cypress.io/api/commands/contains.html#Syntax) to ensure that the application prints an error message. 
-该测试使用[ cy.contains ]( https://docs.cypress.io/api/commands/contains.html#syntax )来确保应用程序输出错误消息。
+该测试使用[ cy.contains ]( https://docs.cypress.io/api/commands/contains.html#syntax )来确保应用输出错误消息。
 
 <!-- Sovellus renderöi virheilmoituksen CSS-luokan <i>error</i> sisältävään elementtiin: -->
 
 The application renders the error message to a component with the CSS class <i>error</i>:
-应用程序将错误消息呈现给一个带有 CSS 类 i error / i 的组件:
+应用将错误消息渲染给一个带有 CSS 类<i>error</i> 的组件:
 
 ```js
 const Notification = ({ message }) => {
@@ -842,7 +842,7 @@ const Notification = ({ message }) => {
 <!-- Voisimmekin tarkentaa testiä varmistamaan, että virheilmoitus tulostuu nimenomaan oikeaan paikkaan, eli CSS-luokan <i>error</i> sisältävään elementtiin: -->
 
 We could make the test ensure, that the error message is rendered to the correct component, or the component with the CSS class <i>error</i>:
-我们可以让测试确保，错误消息被呈现给正确的组件，或者带有 CSS 类 i error / i 的组件:
+我们可以让测试确保，错误消息被渲染给正确的组件，或者带有 CSS 类<i>error</i> 的组件:
 
 
 ```js
@@ -856,9 +856,9 @@ it('login fails with wrong password', function() {
 <!-- Eli ensin etsitään komennolla [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) CSS-luokan <i>error</i> sisältävä komponentti ja sen jälkeen varmistetaan että virheilmoitus löytyy sen sisältä. Huomaa, että [luokan CSS-selektori](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) alkaa pisteellä, eli luokan <i>error</i> selektori on <i>.error</i>. -->
 
 First we use [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) to search for a component with the CSS class <i>error</i>. Then we check that the error message can be found from this component. 
-首先，我们使用[ cy.get ]( https://docs.cypress.io/api/commands/get.html#syntax )来搜索带有 CSS 类 i error / i 的组件。 然后我们检查是否可以从这个组件中找到错误消息。
+首先，我们使用[ cy.get ]( https://docs.cypress.io/api/commands/get.html#syntax )来搜索带有 CSS 类<i>error</i> 的组件。 然后我们检查是否可以从这个组件中找到错误消息。
 Note that the [CSS class selector](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) starts with a full stop, so the selector for the class <i>error</i> is <i>.error</i>.
-注意，[ CSS 类选择器]( https://developer.mozilla.org/en-us/docs/web/CSS/class_selectors )以句号开始，所以类 i error / i 的选择器是 i. error / i。
+注意，[ CSS 类选择器]( https://developer.mozilla.org/en-us/docs/web/CSS/class_selectors )以句号开始，所以类<i>error</i> 的选择器是 i. error / i。
 
 <!-- Voisimme tehdä saman myös käyttäen [should](https://docs.cypress.io/api/commands/should.html)-syntaksia: -->
 
@@ -876,7 +876,7 @@ it('login fails with wrong password', function() {
 <!-- Shouldin käyttö on jonkin verran "hankalampaa" kuin komennon <i>contains</i>, mutta se mahdollistaa huomattavasti monipuolisemmat testit kuin pelkän tekstisisällön perusteella toimiva <i>contains</i>.  -->
 
 Using should is a bit trickier than using <i>contains</i>, but it allows for more diverse tests than <i>contains</i> which works based on text content only. 
-使用 should 比使用 i contains / i 稍微复杂一些，但它允许比仅基于文本内容的 i contains / i 更多样化的测试。
+使用 should 比使用<i>contains</i> 稍微复杂一些，但它允许比仅基于文本内容的<i>contains</i> 更多样化的测试。
 
 <!-- Lista yleisimmistä shouldin kanssa käytettävistä assertioista on [täällä](https://docs.cypress.io/guides/references/assertions.html#Common-Assertions). -->
 
@@ -921,7 +921,7 @@ it('login fails with wrong password', function() {
 <!-- Viimeistellään testi vielä siten, että se varmistaa myös, että sovellus ei renderöi onnistuneesta kirjautumista kuvaavaa tekstiä <i>'Matti Luukkainen logged in'</i>: -->
 
 Let's finish the test so that it also checks that the application does not render the success message <i>'Matti Luukkainen logged in'</i>:
-让我们完成测试，这样它还可以检查应用程序是否没有呈现成功消息 i‘ Matti Luukkainen logged in’ / i:
+让我们完成测试，这样它还可以检查应用是否没有渲染成功消息 i‘ Matti Luukkainen logged in’ / i:
 
 ```js
 it.only('login fails with wrong password', function() {
@@ -942,9 +942,9 @@ it.only('login fails with wrong password', function() {
 <!-- Komentoa <i>should</i> käytetään aina ketjutettuna komennon <i>get</i> (tai muun vastaavan ketjutettavissa olevan komennon) perään. Testissä käytetty <i>cy.get('html')</i> tarkoittaa käytännössä koko sovelluksen näkyvillä olevaa sisältöä. -->
 
 <i>Should</i> should always be chained with <i>get</i> (or another chainable command).
-I Should / i Should Should always be chainwith i get / i (或另一个 chainable command)。
+I Should /<i>Should Should always be chainwith i get</i> (或另一个 chainable command)。
 We used <i>cy.get('html')</i> to access the whole visible content of the application. 
-我们使用 i cy.get (‘ html’) / i 访问应用程序的所有可见内容。
+我们使用<i>cy.get (‘ html’)</i> 访问应用的所有可见内容。
 
 ### Bypassing the UI
 绕过用户界面
@@ -952,7 +952,7 @@ We used <i>cy.get('html')</i> to access the whole visible content of the applica
 <!-- Sovelluksemme testit näyttävät tällä hetkellä seuraavalta: -->
 
 Currently we have the following tests:
-目前我们有以下测试:
+目前我们有如下测试:
 
 ```js 
 describe('Note app', function() {
@@ -988,7 +988,7 @@ describe('Note app', function() {
 <!-- Ensin siis testataan kirjautumistoimintoa. Tämän jälkeen omassa describe-lohkossa on joukko testejä, jotka olettavat että käyttäjä on kirjaantuneena, kirjaantuminen hoidetaan alustuksen tekevän <i>beforeEach</i>-lohkon sisällä.  -->
 这个词的意思是: “我们的祖先在克里斯托弗的故事中描述了一个故事
 First we test logging in. Then, in their own describe block, we have a bunch of tests which expect the user to be logged in. User is logged in in the <i>beforeEach</i> block. 
-首先我们测试登录。 然后，在他们自己的 describe 块中，我们有一系列测试，期望用户登录。 用户在 i beforeEach / i 块中登录。
+首先我们测试登录。 然后，在他们自己的 describe 块中，我们有一系列测试，期望用户登录。 用户在<i>beforeEach</i> 块中登录。
 
 <!-- Kuten aiemmin jo todettiin, jokainen testi suoritetaan alkutilasta, eli vaikka testi on koodissa alempana, se ei aloita samasta tilasta mihin ylempänä koodissa olevat testit ovat jääneet!   -->
 
@@ -998,15 +998,15 @@ As we said above, each test starts from zero! Tests do not start from the state 
 <!-- Cypressin dokumentaatio neuvoo meitä seuraavasti: [Fully test the login flow – but only once!](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Logging-in). Eli sen sijaan että tekisimme <i>beforeEach</i>-lohkossa kirjaantumisen lomaketta käyttäen, suosittelee Cypress että kirjaantuminen tehdään [UI:n ohi](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI), tekemällä suoraan backendiin kirjaantumista vastaava HTTP-operaatio. Syynä tälle on se, että suoraan backendiin tehtynä kirjautuminen on huomattavasti nopeampi kuin lomakkeen täyttämällä.  -->
 
 The Cypress documentation gives us the following advice: [Fully test the login flow – but only once!](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Logging-in). 
-Cypress 文档给了我们以下建议: [完全测试登录流程——但只有一次! ]( https://docs.Cypress.io/guides/getting-started/testing-your-app.html#logging-in )。
+Cypress 文档给了我们如下建议: [完全测试登录流程——但只有一次! ]( https://docs.Cypress.io/guides/getting-started/testing-your-app.html#logging-in )。
 So instead of logging in a user using the form in the <i>beforeEach</i> block, Cypress recommends that we [bypass the UI](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI) and do a HTTP request to the backend to log in. The reason for this is, that logging in with a HTTP request is much faster than filling a form. 
-因此，Cypress 建议我们不要使用 i beforeEach / i 块中的表单登录用户，而是[绕过 UI ]( https://docs.Cypress.io/guides/getting-started/testing-your-app.html#bypassing-your-UI ) ，对后端执行 HTTP 请求以登录。 原因是，使用 HTTP 请求登录要比填写表单快得多。
+因此，Cypress 建议我们不要使用<i>beforeEach</i> 块中的表单登录用户，而是[绕过 UI ]( https://docs.Cypress.io/guides/getting-started/testing-your-app.html#bypassing-your-UI ) ，对后端执行 HTTP 请求以登录。 原因是，使用 HTTP 请求登录要比填写表单快得多。
 
 
 <!-- Tilanteemme on hieman monimutkaisempi kuin Cypressin dokumentaation esimerkissä, sillä kirjautumisen yhteydessä sovelluksemme tallettaa kirjautuneen käyttäjän tiedot localStorageen. Sekin toki onnistuu. Koodi on seuraavassa -->
 
 Our situation is a bit more complicated than in the example in the Cypress documentation, because when user logs in, our application saves their details to the localStorage.
-我们的情况比 Cypress 文档中的示例要复杂一些，因为当用户登录时，我们的应用程序将其详细信息保存到 localStorage 中。
+我们的情况比 Cypress 文档中的示例要复杂一些，因为当用户登录时，我们的应用将其详细信息保存到 localStorage 中。
 However Cypress can handle that as well. 
 然而，赛普拉斯也可以处理这个问题。
 The code is the following
@@ -1045,14 +1045,14 @@ Now there is no difference to user logging in with the login form.
 <!-- Jos ja kun sovellukselle kirjoitetaan lisää testejä, joudutaan kirjautumisen hoitavaa koodia soveltamaan useassa paikassa. Koodi kannattaakin eristää itse määritellyksi [komennoksi](https://docs.cypress.io/api/cypress-api/custom-commands.html). -->
 
 If and when we write new tests to our application, we have to use the login code in multiple places.
-如果在应用程序中编写新的测试，我们必须在多个地方使用登录代码。
+如果在应用中编写新的测试，我们必须在多个地方使用登录代码。
 We should make it a [custom command](https://docs.cypress.io/api/cypress-api/custom-commands.html).
 我们应该使它成为一个[自定义命令]( https://docs.cypress.io/api/cypress-api/custom-commands.html 命令)。
 
 <!-- Komennot määritellään tiedostoon <i>cypress/support/commands.js</i>. Kirjautumisen tekevä komento näyttää seuraavalta: -->
 
 Custom commands are declared in <i>cypress/support/commands.js</i>.
-定制命令在 i cypress / support / commands. js / i 中声明。
+定制命令在<i>cypress / support / commands. js</i> 中声明。
 The code for logging in is as follows:
 登录的代码如下:
 
@@ -1091,7 +1091,7 @@ describe('when logged in', function() {
 <!-- Sama koskee oikeastaan myös uuden muistiinpanon luomista. Sitä varten on olemassa testi, joka luo muistiinpanon lomakkeen avulla. Myös muistiinpanon tärkeyden muuttamista testaavan testin <i>beforeEach</i>-alustuslohkossa luodaan muistiinpano lomakkeen avulla:  -->
 
 The same applies to creating a new note now that we think about it. We have a test which makes a new note using the form. We also make a new note in the <i>beforeEach</i> block of the test testing changing the importance of a note: 
-这同样适用于创建一个新的笔记，现在我们考虑它。 我们有一个测试，使用该表格制作一个新的笔记。 我们还在测试的 i beforeEach / i 块中做了一个新的注释，改变了注释的重要性:
+这同样适用于创建一个新的笔记，现在我们考虑它。 我们有一个测试，使用该表格制作一个新的笔记。 我们还在测试的<i>beforeEach</i> 块中做了一个新的注释，改变了注释的重要性:
 
 ```js
 describe('Note app', function() {
@@ -1181,7 +1181,7 @@ describe('Note app', function() {
 <!-- Testit ja frontendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-10), branchissa <i>part5-10</i>. -->
 
 The tests and the frontend code can be found from [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-10) branch <i>part5-10</i>.
-测试和前端代码可以从[ github ]( https://github.com/fullstack-hy2020/part2-notes/tree/part5-10)分支 i part5-10 / i 中找到。
+测试和前端代码可以从[ github ]( https://github.com/fullstack-hy2020/part2-notes/tree/part5-10)分支<i>part5-10</i> 中找到。
 
 ### Changing the importance of a note
 # # 改变纸条的重要性
@@ -1222,9 +1222,9 @@ How does the [cy.contains](https://docs.cypress.io/api/commands/contains.html) c
 (cy.contains)命令实际上是如何工作的？
 
 <!-- Kun klikkaamme komentoa _cy.contains('second note')_ Cypressin [test runnerista](https://docs.cypress.io/guides/core-concepts/test-runner.htm) nähdään, että komento löytää elementin, jonka sisällä on teksti <i>second note</i>: -->
-! kun klikkaamme kmentoa cy.contains’ second note’ cypressin test runnerista https: / / docs.cypress.io / guides / core-concepts / test-runner.htm n hd n，ett komento l yt elementin，jonka sis ll on teksti i second note / i: --
+! kun klikkaamme kmentoa cy.contains’ second note’ cypressin test runnerista https: / / docs.cypress.io / guides / core-concepts / test-runner.htm n hd n，ett komento l yt elementin，jonka sis ll on teksti<i>second note</i>: --
 When we click the _cy.contains('second note')_ command in Cypress [Test Runner](https://docs.cypress.io/guides/core-concepts/test-runner.html), we see that the command searches for the element containing the text <i>second note</i>:
-当我们在 Cypress [ Test Runner ]中单击 cy.contains (‘ second note’)命令时，我们会看到该命令搜索包含文本 i second note / i 的元素:
+当我们在 Cypress [ Test Runner ]中单击 cy.contains (‘ second note’)命令时，我们会看到该命令搜索包含文本<i>second note</i> 的元素:
 
 ![](../../images/5/34ea.png)
 
@@ -1237,7 +1237,7 @@ By clicking the next line _.contains('make important')_ we see that the test use
 <!-- <i>second note</i>:a vastaava tärkeyden muutoksen tekevä nappi: -->
 
 the 'make important' button corresponding to <i>second note</i>:
-“ make important”按钮对应于 i second note / i:
+“ make important”按钮对应于<i>second note</i>:
 
 ![](../../images/5/35ea.png)
 
@@ -1245,7 +1245,7 @@ the 'make important' button corresponding to <i>second note</i>:
 <!-- Peräkkäin ketjutettuna toisena oleva <i>contains</i>-komento siis <i>jatkaa</i> hakua ensimmäisen komennon löytämän komponentin sisältä. -->
 ——每公斤巧克力中含有我的心理现象，我的心理现象就是我的心理现象，我的心理现象就是我的心理现象。——
 When chained, the second <i>contains</i> command <i>continues</i> the search from within the component found by the first command. 
-链接时，第二个 i contains / i 命令 i 会从第一个命令找到的组件中继续 / i 搜索。
+链接时，第二个<i>contains</i> 命令<i>会从第一个命令找到的组件中继续</i> 搜索。
 
 <!-- Jos emme ketjuttaisi komentoja, eli olisimme kirjoittaneet  -->
 
@@ -1273,7 +1273,7 @@ When coding tests, you should check in the test runner that the tests use the ri
 <!-- Muutetaan komponenttia _Note_ siten, että muistiinpanon teksti renderöitään <i>span</i>-komponentin sisälle -->
 
 Let's change the _Note_ component so that the text of the note is rendered to a <i>span</i>.
-让我们更改 Note 组件，以便将 Note 的文本呈现为 i span / i。
+让我们更改 Note 组件，以便将 Note 的文本渲染为<i>span</i>。
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -1313,7 +1313,7 @@ it('other of those can be made important', function () {
 <!-- Ensimmäisellä rivillä etsitään komennon [parent](https://docs.cypress.io/api/commands/parent.htm) tekstin <i>second note</i> sisältävän elementin vanhemman alla oleva nappi ja painetaan sitä. Toinen rivi varmistaa, että napin teksti muuttuu. -->
 
 In the first line, we use the [parent](https://docs.cypress.io/api/commands/parent.htm) command to access the parent element of the element containing <i>second note</i> and find the button from within it. 
-在第一行中，我们使用[ parent ]( https://docs.cypress.io/api/commands/parent.htm )命令来访问包含 i second note / i 的元素的父元素，并在其中找到按钮。
+在第一行中，我们使用[ parent ]( https://docs.cypress.io/api/commands/parent.htm )命令来访问包含<i>second note</i> 的元素的父元素，并在其中找到按钮。
 Then we click the button, and check that the text on it changes. 
 然后我们点击按钮，检查上面的文本是否改变。
 
@@ -1342,7 +1342,7 @@ it.only('other of those can be made important', function () {
 <!-- Nyt ensimmäinen rivi etsii oikean napin, ja tallentaa sen komennon <i>as</i> avulla nimellä <i>theButton</i>. Seuraavat rivit pääsevät nimettyyn elementtiin käsiksi komennolla <i>cy.get('@theButton')</i>. -->
 (咒语)(咒语)(咒语)。 修拉瓦特提出了另一个问题，那就是我们知道了我们的存在。 get (’@the button’) / i。 -->
 Now the first line finds the right button, and uses <i>as</i> to save it as <i>theButton</i>. The followings lines can use the named element with <i>cy.get('@theButton')</i>.
-现在第一行找到右边的按钮，并使用 i 作为 / i 保存为 i 的 button / i。 下面的代码行可以使用命名元素和 i cy.get (’@thebutton’) / i。
+现在第一行找到右边的按钮，并使用<i>作为</i> 保存为<i>的 button</i>。 下面的代码行可以使用命名元素和<i>cy.get (’@thebutton’)</i>。
 
 ### Running and debugging the tests
 正在运行和调试测试
@@ -1379,9 +1379,9 @@ Cypress 命令总是返回未定义的值，因此上面代码中的 button.clic
 <!-- Cypress-komennot ovat <i>promisen kaltaisia</i>, joten jos niiden palauttamia arvoja halutaan käsitellä, se tulee tehdä komennon [then](https://docs.cypress.io/api/commands/then.html) avulla. Esim. seuraava testi tulostaisi sovelluksen <i>kaikkien</i> nappien lukumäärän ja klikkaisi napeista ensimmäistä: -->
 
 Cypress commands are <i>like promises</i>, so if we want to access their return values, we have to do it using the [then](https://docs.cypress.io/api/commands/then.html) command. 
-Cypress 命令是 i like promises / i，所以如果我们想访问它们的返回值，我们必须使用[ then ]( https://docs.Cypress.io/api/commands/then.html )命令。
+Cypress 命令是<i>like promises</i>，所以如果我们想访问它们的返回值，我们必须使用[ then ]( https://docs.Cypress.io/api/commands/then.html )命令。
 For example, the following test would print the number of buttons in the application, and click the first button: 
-例如，下面的测试将打印应用程序中的按钮数，然后单击第一个按钮:
+例如，下面的测试将打印应用中的按钮数，然后单击第一个按钮:
 
 ```js
 it('then example', function() {
@@ -1429,7 +1429,7 @@ It is also possible to run them [from the command line](https://docs.cypress.io/
 <!-- Nyt siis voimme suorittaa Cypress-testit komentoriviltä komennolla <i>npm run test:e2e</i> -->
 
 Now we can run our tests from the command line with the command <i>npm run test:e2e</i>
-现在，我们可以使用命令 i npm run test: e2e / i 从命令行运行测试
+现在，我们可以使用命令<i>npm run test: e2e</i> 从命令行运行测试
 
 ![](../../images/5/39ea.png)
 
@@ -1437,12 +1437,12 @@ Now we can run our tests from the command line with the command <i>npm run test:
 <!-- Huomaa, että testien suorituksesta tallentuu video hakemistoon <i>cypress/videos/</i>, hakemisto lienee syytä gitignoroida. -->
 
 Note that video of the test execution will be saved to <i>cypress/videos/</i>, so you should propably git ignore this directory. 
-注意，测试执行的视频将被保存到 i cypress / videos / / i 中，因此您可能应该忽略这个目录。
+注意，测试执行的视频将被保存到<i>cypress / videos /</i> 中，因此您可能应该忽略这个目录。
 
 <!-- Testien ja frontendin koodin lopullinen versio on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11), branchissa <i>part5-11</i>. -->
 
 The frontend- and the test code can be found from [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11) branch <i>part5-11</i>.
-前端和测试代码可以在[ github ]( https://github.com/fullstack-hy2020/part2-notes/tree/part5-11)分支 i part5-11 / i 中找到。
+前端和测试代码可以在[ github ]( https://github.com/fullstack-hy2020/part2-notes/tree/part5-11)分支<i>part5-11</i> 中找到。
 
 </div>
 
@@ -1456,7 +1456,7 @@ The frontend- and the test code can be found from [github](https://github.com/fu
 <!-- Tehdään osan lopuksi muutamia E2E-testejä blogisovellukseen. Ylläolevan materiaalin pitäisi riittää ainakin suurimmaksi osaksi tehtävien tekemiseen. Cypressin [dokumentaatiota](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell) kannattaa ehdottomasti myös lueskella, kyseessä on ehkä paras dokumentaatio, mitä olen koskaan open source -projektissa nähnyt.  -->
 
 In the last exercises of this part we will do some E2E tests for our blog application. 
-在这一部分的最后练习中，我们将为我们的博客应用程序做一些 E2E 测试。
+在这一部分的最后练习中，我们将为我们的博客应用做一些 E2E 测试。
 The material of this part should be enough to complete the exercises. 
 这部分的材料应该足以完成这些练习。
 You should absolutely also check out the Cypress [documentation](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell). It is propably the best documentation I have ever seen for an open source project. 
@@ -1476,7 +1476,7 @@ I especially recommend reading [Introduction to Cypress](https://docs.cypress.io
 <!-- Konfiguroi Cypress projektiisi. Tee testi, joka varmistaa, että sovellus näyttää oletusarvoisesati kirjautumislomakkeen. -->
 
 Configure Cypress to your project. Make a test for checking that the application displays the login form by default.
-在项目中配置 Cypress。做一个测试，检查应用程序是否默认显示登录表单。
+在项目中配置 Cypress。做一个测试，检查应用是否默认显示登录表单。
 
 <!-- Testin rungon tulee olla seuraavanlainen -->
 
@@ -1499,7 +1499,7 @@ describe('Blog app', function() {
 <!-- Testin <i>beforeEach</i>-alustuslohkon tulee nollata tietokannan tilanne esim.  -->
 
 The <i>beforeEach</i> formatting blog must empty the database using for example the method we used in the [material](/osa5/end_to_end_testaus#tietokannan-tilan-kontrollointi).
-格式化博客的 i beforeEach / i 必须清空数据库，例如使用[ material ](/ osa5 / end to end testaus # tokannan-tilan-kontrollointi)中使用的方法。
+格式化博客的<i>beforeEach</i> 必须清空数据库，例如使用[ material ](/ osa5 / end to end testaus # tokannan-tilan-kontrollointi)中使用的方法。
 
 
 #### 5.18: bloglist end to end testing, step2
@@ -1512,7 +1512,7 @@ Make tests for logging in. Test both successful and unsuccessful log in attempts
 <!-- Luo testejä varten käyttäjä <i>beforeEach</i>-lohkossa.  -->
 
 Make a new user in the <i>beforeEach</i> block for the tests.
-在 i beforeEach / i 块中为测试创建一个新用户。
+在<i>beforeEach</i> 块中为测试创建一个新用户。
 
 <!-- Testien runko laajenee seuraavasti -->
 
@@ -1544,7 +1544,7 @@ describe('Blog app', function() {
 ```
 
 <!-- <i>Vapaaehtoinen bonustehtävä:</i> varmista, että epäonnistuneeseen kirjautumiseen liittyvä notifikaatio näytetään punaisella.  -->
--- i Vapaaehtoinen bonusteht / i varmista，ett ep onnistuneeseen kirjiseen liittyv notiatio n punaisella
+--<i>Vapaaehtoinen bonusteht</i> varmista，ett ep onnistuneeseen kirjiseen liittyv notiatio n punaisella
 <i>Optional bonus exercise</i>: Check that the notification shown with unsuccessful login is displayed red. 
 I 可选的奖励练习 / i: 检查显示未成功登入的通知是否显示为红色。
 

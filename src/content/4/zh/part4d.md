@@ -9,7 +9,7 @@ lang: zh
 
 
 Users must be able to log into our application, and when a user is logged in, their user information must automatically be attached to any new notes they create. 
-用户必须能够登录到我们的应用程序，当用户登录时，他们的用户信息必须自动附加到他们创建的任何新笔记上。
+用户必须能够登录到我们的应用，当用户登录时，他们的用户信息必须自动附加到他们创建的任何新笔记上。
 
 We will now implement support for [token based authentication](https://scotch.io/tutorials/the-ins-and-outs-of-token-based-authentication#toc-how-token-based-works) to the backend. 
 我们现在将在后端实现对[基于令牌的认证]( https://scotch.io/tutorials/the-ins-and-outs-of-token-based-authentication#toc-how-token-based-works 认证)的支持。
@@ -23,17 +23,17 @@ The principles of token based authentication are depicted in the following seque
 - User starts by logging in using a login form implemented with React 
 - User 首先使用 React 实现的登录表单登录
     - We will add the login form to the frontend in [part 5](/en/part5) 
-- 我们会在[第5部分](/ tc / part5)的前端加入登入表格
+- 我们会在[第5章节](/zh/part5)的前端加入登入表格
 - This causes the React code to send the username and the password to the server address <i>/api/login</i> as a HTTP POST request. 
-- 这导致 React 代码将用户名和密码作为 HTTP POST 请求发送到服务器地址 i / api / login / i。
+- 这导致 React 代码将用户名和密码作为 HTTP POST 请求发送到服务器地址<i>/ api / login</i>。
 - If the username and the password are correct, the server generates a <i>token</i> which somehow identifies the logged in user. 
-- 如果用户名和密码是正确的，服务器生成一个 i 令牌 / i，它以某种方式识别登录的用户。
+- 如果用户名和密码是正确的，服务器生成一个<i>令牌</i>，它以某种方式识别登录的用户。
     - The token is signed digitally, making it impossible to falsify (with cryptographic means)
 - 令牌以数码方式签署，以防伪造(使用加密方法)
 - The backend responds with a status code indicating the operation was successful, and returns the token with the response.
 - 后端用指示操作成功的状态代码进行响应，并用响应返回令牌。
 - The browser saves the token, for example to the state of a React application. 
-- 浏览器将令牌保存为 React 应用程序的状态。
+- 浏览器将令牌保存为 React 应用的状态。
 - When the user creates a new note (or does some other operation requiring identification), the React code sends the token to the server with the request.
 - 当用户创建一个新的注释(或者做一些需要标识的其他操作)时，React 代码将该令牌与请求一起发送到服务器。
 - The server uses the token to identify the user
@@ -86,11 +86,11 @@ module.exports = loginRouter
 ```
 
 The code starts by searching for the user from the database by the <i>username</i> attached to the request. 
-代码首先从数据库中搜索该用户，搜索时使用附加在请求上的 i 用户名 / i。
+代码首先从数据库中搜索该用户，搜索时使用附加在请求上的<i>用户名</i>。
 Next, it checks the <i>password</i>, also attached to the request. 
-接下来，它检查 i password / i，也附加到请求。
+接下来，它检查<i>password</i>，也附加到请求。
 Because the passwords themselves are not saved to the database, but <i>hashes</i> calculated from the passwords, the _bcrypt.compare_ method is used to check if the password is correct: 
-因为密码本身并没有保存到数据库中，但是 i 哈希 / i 是从密码计算出来的，所以使用 bcrypt. com pare 方法来检查密码是否正确:
+因为密码本身并没有保存到数据库中，但是<i>哈希</i> 是从密码计算出来的，所以使用 bcrypt. com pare 方法来检查密码是否正确:
 
 ```js
 await bcrypt.compare(body.password, user.passwordHash)
@@ -112,7 +112,7 @@ const token = jwt.sign(userForToken, process.env.SECRET)
 ```
 
 The token has been digitally signed using a string from the environment variable <i>SECRET</i> as the <i>secret</i>.
-这个令牌已经使用环境变量的 i SECRET / i 字符串作为 i SECRET / i 进行了数字签名。
+这个令牌已经使用环境变量的<i>SECRET</i> 字符串作为<i>SECRET</i> 进行了数字签名。
 The digital signature ensures that only parties who know the secret can generate a valid token. 
 数字签名确保只有知道秘密的各方才能生成有效的令牌。
 The value for the environment variable must be set in the <i>.env</i> file. 
@@ -122,7 +122,7 @@ A successful request is responded to with the status code <i>200 OK</i>. The gen
 成功的请求用状态码 i200 OK / i 响应。 生成的令牌和用户的用户名将被发送回响应体。
 
 Now the code for login just has to be added to the application by adding the new router to <i>app.js</i>. 
-现在只需将新路由器添加到 i app.js / i 中，就可以将登录代码添加到应用程序中。
+现在只需将新路由器添加到<i>app.js</i> 中，就可以将登录代码添加到应用中。
 
 ```js
 const loginRouter = require('./controllers/login')
@@ -139,7 +139,7 @@ Let's try logging in using VS Code REST-client:
 
 
 It does not work. The following is printed to console: 
-它不工作。以下是打印到控制台的:
+它不工作。如下是打印到控制台的:
 
 ```bash
 (node:32911) UnhandledPromiseRejectionWarning: Error: secretOrPrivateKey must have a value
@@ -149,7 +149,7 @@ It does not work. The following is printed to console:
 ```
 
 The command _jwt.sign(userForToken, process.env.SECRET)_ fails. We forgot to set a value to the environment variable <i>SECRET</i>. It can be any string. When we set the value in file <i>.env</i>, the login works. 
-命令 jwt.sign (userForToken，process.env.SECRET)失败。 我们忘记设置环境变量的值 i SECRET / i。 它可以是任何字符串。 当我们设置文件 i 中的值时。 Env / i，登录工作。
+命令 jwt.sign (userForToken，process.env.SECRET)失败。 我们忘记设置环境变量的值<i>SECRET</i>。 它可以是任何字符串。 当我们设置文件<i>中的值时。 Env</i>，登录工作。
 
 A successful login returns the user details and the token: 
 一个成功的登录将返回用户详细信息和令牌:
@@ -180,7 +180,7 @@ The <i>Bearer</i> schema is suitable to our needs.
 I / Bearer / i 模式适合我们的需要。
 
 In practice, this means that if the token is for example, the string <i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i>, the Authorization header will have the value: 
-实际上，这意味着如果令牌是字符串 i eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW / i，授权头将具有以下值:
+实际上，这意味着如果令牌是字符串<i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i>，授权头将具有如下值:
 
 <pre>
 预
@@ -235,14 +235,14 @@ notesRouter.post('/', async (request, response) => {
 ```
 
 The helper function _getTokenFrom_ isolates the token from the <i>authorization</i> header. The validity of the token is checked with _jwt.verify_. The method also decodes the token, or returns the Object which the token was based on: 
-Helper 函数 getTokenFrom 将令牌与 i authorization / i 头隔离开来。 使用 jwt.verify 检查令牌的有效性。 该方法还对令牌进行解码，或者返回令牌所基于的 Object:
+Helper 函数 getTokenFrom 将令牌与<i>authorization</i> 头隔离开来。 使用 jwt.verify 检查令牌的有效性。 该方法还对令牌进行解码，或者返回令牌所基于的 Object:
 
 ```js
 const decodedToken = jwt.verify(token, process.env.SECRET)
 ```
 
 The object decoded from the token contains the <i>username</i> and <i>id</i> fields, which tells the server who made the request. 
-从令牌解码的对象包含 i 用户名 / i 和 i id / i 字段，它告诉服务器谁发出了请求。
+从令牌解码的对象包含<i>用户名</i> 和<i>id</i> 字段，它告诉服务器谁发出了请求。
 
 If there is no token, or the object decoded from the token does not contain the users identity (_decodedToken.id_ is undefined), error status code [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) is returned and the reason for the failure is explained in the response body. 
 如果没有令牌，或者从令牌解码的对象不包含用户标识(decodedToken.id 未定义) ，则返回错误状态代码[401 unauthorized ]( https://www.w3.org/protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) ，并在响应体中解释失败的原因。
@@ -259,7 +259,7 @@ When the identity of the maker of the request is resolved, the execution continu
 当请求的创建者的身份被解析时，执行仍然像以前一样继续。
 
 A new note can now be created using Postman if the <i>authorization</i> header is given the correct value, the string <i>bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ</i>, where the second value is the token returned by the <i>login</i> operation. 
-如果 i authorization / i 头被赋予了正确的值，那么现在可以使用 Postman 创建一个新的通知，该值是字符串 i bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ / i，其中第二个值是 i login / i 操作返回的令牌。
+如果<i>authorization</i> 头被赋予了正确的值，那么现在可以使用 Postman 创建一个新的通知，该值是字符串<i>bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ</i>，其中第二个值是<i>login</i> 操作返回的令牌。
 
 Using Postman this looks as follows: 
 使用 Postman 这看起来如下:
@@ -277,7 +277,7 @@ and with Visual Studio Code REST client
 错误处理
 
 Token verification can also cause a <i>JsonWebTokenError</i>. If we for example remove a few characters from the token and try creating a new note, this happens: 
-令牌验证还可能导致 i JsonWebTokenError / i。 例如，如果我们从标记中删除一些字符并尝试创建一个新的注释，就会发生以下情况:
+令牌验证还可能导致<i>JsonWebTokenError</i>。 例如，如果我们从标记中删除一些字符并尝试创建一个新的注释，就会发生如下情况:
 
 ```bash
 JsonWebTokenError: invalid signature
@@ -317,10 +317,10 @@ const errorHandler = (error, request, response, next) => {
 ```
 
 Current application code can be found on [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9), branch <i>part4-9</i>.
-当前的应用程序代码可以在[ Github ]( https://Github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9) ，branch i part4-9 / i 上找到。
+当前的应用代码可以在[ Github ]( https://Github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9) ，branch<i>part4-9</i> 上找到。
 
 If the application has multiple interfaces requiring identification, JWT's validation should be separated into its own middleware. Some existing library like [express-jwt](https://www.npmjs.com/package/express-jwt) could also be used. 
-如果应用程序有多个需要标识的接口，那么 JWT 的验证应该分离到它自己的中间件中。 还可以使用一些现有的库，如[ express-jwt ]( https://www.npmjs.com/package/express-jwt )。
+如果应用有多个需要标识的接口，那么 JWT 的验证应该分离到它自己的中间件中。 还可以使用一些现有的库，如[ express-jwt ]( https://www.npmjs.com/package/express-jwt )。
 
 ### End notes
 结束音符
@@ -329,7 +329,7 @@ There have been many changes to the code which have caused a typical problem for
 对于快节奏的软件项目来说，代码有很多变化，这些变化导致了一个典型的问题: 大多数测试都失败了。 因为这一部分的课程已经被新的信息塞满了，我们将把修改测试留给一个非强制性的练习。
 
 Usernames, passwords and applications using token authentication must always be used over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). We could use a Node [HTTPS](https://nodejs.org/api/https.html) server in our application instead of the [HTTP](https://nodejs.org/docs/latest-v8.x/api/http.html) server (it requires more configuration). On the other hand, the production version of our application is in Heroku, so our applications stays secure: Heroku routes all traffic between a browser and the Heroku server over HTTPS. 
-使用令牌认证的用户名、密码和应用程序必须始终在[ HTTPS ]( HTTPS://en.wikipedia.org/wiki/HTTPS )上使用。 我们可以在应用程序中使用 Node [ HTTPS ]( HTTPS://nodejs.org/api/HTTPS.html )服务器，而不是[ HTTP ]( HTTPS://nodejs.org/docs/latest-v8.x/api/HTTP.html )服务器(它需要更多的配置)。 另一方面，我们的应用程序的生产版本在 Heroku，所以我们的应用程序是安全的: Heroku 通过 HTTPS 在浏览器和 Heroku 服务器之间路由所有的流量。
+使用令牌认证的用户名、密码和应用必须始终在[ HTTPS ]( HTTPS://en.wikipedia.org/wiki/HTTPS )上使用。 我们可以在应用中使用 Node [ HTTPS ]( HTTPS://nodejs.org/api/HTTPS.html )服务器，而不是[ HTTP ]( HTTPS://nodejs.org/docs/latest-v8.x/api/HTTP.html )服务器(它需要更多的配置)。 另一方面，我们的应用的生产版本在 Heroku，所以我们的应用是安全的: Heroku 通过 HTTPS 在浏览器和 Heroku 服务器之间路由所有的流量。
 
 We will implement login to the frontend in the [next part](/en/part5).
 我们将在[下一部分](/ en / part5)中实现对前端的登录。
@@ -344,7 +344,7 @@ We will implement login to the frontend in the [next part](/en/part5).
 练习4.15-4.22。
 
 In the next exercises, basics of user management will be implemented for the Bloglist application. The safest way is to follow the story from part 4 chapter [User administration](/en/part4/user_administration) to the chapter [Token-based authentication](/en/part4/token_authentication). You can of course also use your creativity. 
-在接下来的练习中，我们将为 Bloglist 应用程序实现基本的用户管理。 最安全的方法是遵循第4章[用户管理](/ en / part4 / User administration)到[基于令牌的身份验证](/ en / part4 / token authentication)这一章的内容。 当然，你也可以运用你的创造力。
+在接下来的练习中，我们将为 Bloglist 应用实现基本的用户管理。 最安全的方法是遵循第4章[用户管理](/ en / part4 / User administration)到[基于令牌的身份验证](/ en / part4 / token authentication)这一章的内容。 当然，你也可以运用你的创造力。
 
 **One more warning:** If you notice you are mixing async/await and _then_ calls, it is 99% certain you are doing something wrong. Use either or, never both. 
 * * 还有一个警告: * * 如果你注意到你正在混合 async / await 然后调用，99% 肯定你做错了什么。 要么使用，要么使用，不要两者都使用。
@@ -353,15 +353,15 @@ In the next exercises, basics of user management will be implemented for the Blo
 4.15: bloglist expansion，step4
 
 Implement a way to create new users by doing a HTTP POST-request to address <i>api/users</i>. Users have <i>username
-通过执行 HTTP POST-request 来寻址 i api / Users / i，实现创建新用户的方法
+通过执行 HTTP POST-request 来寻址<i>api / Users</i>，实现创建新用户的方法
 , password and name</i>.
 、密码及名称 / i。
 
 Do not save passwords to the database as clear text, but use the <i>bcrypt</i> library like we did in part 4 chapter [Creating new users](/en/part4/user_administration#creating-users).
-不要将数据库的密码保存为明文，而是使用 i bcrypt / i 库，就像我们在第4章[创建新用户](/ en / part4 / user administration # Creating-users)中所做的那样。
+不要将数据库的密码保存为明文，而是使用<i>bcrypt</i> 库，就像我们在第4章[创建新用户](/ en / part4 / user administration # Creating-users)中所做的那样。
 
 **NB** Some Windows users have had problems with <i>bcrypt</i>. If you run into problems, remove the library with command 
-有些 Windows 用户在 i bcrypt / i 方面有问题。如果遇到问题，请使用命令删除该库
+有些 Windows 用户在<i>bcrypt</i> 方面有问题。如果遇到问题，请使用命令删除该库
 
 ```bash
 npm uninstall bcrypt --save 
@@ -383,7 +383,7 @@ List of users can for example, look as follows:
 4.16 * : bloglist expansion，step5
 
 Add a feature which adds the following restrictions to creating new users: Both username and password must be given. Both username and password must be at least 3 characters long. The username must be unique. 
-添加一个添加以下限制来创建新用户的特性: 必须同时给出用户名和密码。 用户名和密码必须至少3个字符长。 用户名必须是唯一的。
+添加一个添加如下限制来创建新用户的特性: 必须同时给出用户名和密码。 用户名和密码必须至少3个字符长。 用户名必须是唯一的。
 
 The operation must respond with a suitable status code and some kind of an error message if invalid user is created. 
 如果创建了无效用户，操作必须使用适当的状态代码和某种错误消息进行响应。
@@ -421,7 +421,7 @@ and listing all users also displays the blogs created by each user:
 4.18: bloglist expansion，step7
 
 Implement token-based authentication according to part 4 chapter [Token authentication](/en/part4/token_authentication).
-根据第4部分[令牌认证](/ en / part4 / 令牌认证)实现基于令牌的认证。
+根据第4章节[令牌认证](/ en / part4 / 令牌认证)实现基于令牌的认证。
 
 #### 4.19: bloglist expansion, step8
 4.19: bloglist expansion，step8
@@ -433,13 +433,13 @@ Modify adding new blogs so that it is only possible if a valid token is sent wit
 4.20 * : bloglist expansion，step9
 
 [This example](/en/part4/token_authentication) from part 4 shows taking the token from the header with the _getTokenFrom_ helper function.
-第4部分的[示例](/ en / part4 / token authentication)显示了使用 getTokenFrom helper 函数从头部获取令牌。
+第4章节的[示例](/ en / part4 / token authentication)显示了使用 getTokenFrom helper 函数从头部获取令牌。
 
 If you used the same solution, refactor taking the token to a [middleware](/en/part3/node_js_and_express#middleware). The middleware should take the token from the <i>Authorization</i> header and place it to the <i>token</i> field of the <i>request</i> object. 
-如果您使用相同的解决方案，重构将令牌带到[中间件](/ en / part3 / node js 和 express # 中间件)。 中间件应该从 i Authorization / i 标头获取令牌，并将其放置到 i request / i 对象的 i token / i 字段。
+如果您使用相同的解决方案，重构将令牌带到[中间件](/ en / part3 / node js 和 express # 中间件)。 中间件应该从<i>Authorization</i> 标头获取令牌，并将其放置到<i>request</i> 对象的<i>token</i> 字段。
 
 In other words, if you register this middleware in the <i>app.js</i> file before all routes
-换句话说，如果在所有路由之前在 i app.js / i 文件中注册这个中间件
+换句话说，如果在所有路由之前在<i>app.js</i> 文件中注册这个中间件
 
 ```js
 app.use(middleware.tokenExtractor)
@@ -456,7 +456,7 @@ blogsRouter.post('/', async (request, response) => {
 ```
 
 Remember that a normal [middleware](/en/part3/node_js_and_express#middleware) is a function with three parameters, that at the end calls the last parameter <i>next</i> in order to move the control to next middleware:
-请记住，普通的[中间件](/ en / part3 / node js 和 express # 中间件)是一个带有三个参数的函数，它在最后调用最后一个参数 i next / i，以便将控制移动到下一个中间件:
+请记住，普通的[中间件](/ en / part3 / node js 和 express # 中间件)是一个带有三个参数的函数，它在最后调用最后一个参数<i>next</i>，以便将控制移动到下一个中间件:
 
 ```js
 const tokenExtractor = (request, response, next) => {
@@ -483,7 +483,7 @@ const blog = await Blog.findById(...)
 ```
 
 the field <i>blog.user</i> does not contain a string, but an Object. So if you want to compare the id of the object fetched from the database and a string id, normal comparison operation does not work. The id fetched from the database must be parsed into a string first. 
-字段 i blog.user / i 不包含字符串，而是包含一个 Object。 因此，如果要比较从数据库获取的对象的 id 和字符串 id，通常的比较操作是不起作用的。 从数据库获取的 id 必须首先解析为字符串。
+字段<i>blog.user</i> 不包含字符串，而是包含一个 Object。 因此，如果要比较从数据库获取的对象的 id 和字符串 id，通常的比较操作是不起作用的。 从数据库获取的 id 必须首先解析为字符串。
 
 ```js
 if ( blog.user.toString() === userid.toString() ) ...
@@ -493,7 +493,7 @@ if ( blog.user.toString() === userid.toString() ) ...
 4.22 * : bloglist expansion，step11
 
 After adding token based authentication the tests for adding a new blog broke. down Fix now the tests. Write also a new test that ensures that adding a blog fails with proper status code <i>401 Unauthorized</i> it token is not provided.
-在添加了基于令牌的身份验证之后，添加新博客的测试中断了。 现在修复测试。 还要编写一个新的测试，以确保添加一个博客失败与适当的状态代码 i 401 Unauthorized / i it 令牌没有提供。
+在添加了基于令牌的身份验证之后，添加新博客的测试中断了。 现在修复测试。 还要编写一个新的测试，以确保添加一个博客失败与适当的状态代码<i>401 Unauthorized</i> it 令牌没有提供。
 
 [This](https://github.com/visionmedia/supertest/issues/398) is most likely useful when doing the fix.
 在进行修复时，[ This ]( https://github.com/visionmedia/supertest/issues/398)很可能是最有用的。

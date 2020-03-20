@@ -18,7 +18,7 @@ In some situations, it can be beneficial to implement some of the backend tests 
 
 
 Since our application's backend is still relatively simple, we will make the decision to test the entire application through its REST API, so that the database is also included. This kind of testing where multiple components of the system are being tested as a group, is called [integration testing](https://en.wikipedia.org/wiki/Integration_testing).
-由于我们的应用程序的后端仍然相对简单，因此我们将决定通过其 REST API 测试整个应用程序，以便数据库也包括在内。 这种将系统的多个组件作为一个整体进行测试的测试，称为[集成测试]( https://en.wikipedia.org/wiki/integration_testing )。
+由于我们的应用的后端仍然相对简单，因此我们将决定通过其 REST API 测试整个应用，以便数据库也包括在内。 这种将系统的多个组件作为一个整体进行测试的测试，称为[集成测试]( https://en.wikipedia.org/wiki/integration_testing )。
 
 
 ### Test environment
@@ -30,13 +30,13 @@ In one of the previous chapters of the course material, we mentioned that when y
 
 
 The convention in Node is to define the execution mode of the application with the <i>NODE\_ENV</i> environment variable. In our current application, we only load the environment variables defined in the <i>.env</i> file if the application is <i>not</i> in production mode.
-Node 中的约定是用 i Node  ENV / i 环境变量定义应用程序的执行模式。 在我们当前的应用程序中，我们只加载 i 中定义的环境变量。 如果应用程序在生产模式下不是 i / i，请提交 env / i 文件。
+Node 中的约定是用<i>Node  ENV</i> 环境变量定义应用的执行模式。 在我们当前的应用中，我们只加载<i>中定义的环境变量。 如果应用在生产模式下不是 i</i>，请提交 env / i 文件。
 
 It is common practice to define separate modes for development and testing.
 通常的做法是为开发和测试定义不同的模式。
 
 Next, let's change the scripts in our <i>package.json</i> so that when tests are run, <i>NODE\_ENV</i> gets the value <i>test</i>:
-接下来，让我们修改 i package.json / i 中的脚本，以便在运行测试时，i NODE  ENV / i 获得值 i test / i:
+接下来，让我们修改<i>package.json</i> 中的脚本，以便在运行测试时，i NODE  ENV /<i>获得值 i test</i>:
 
 ```json
 {
@@ -60,18 +60,18 @@ We also added the [runInBand](https://jestjs.io/docs/en/cli.html#runinband) opti
 
 
 We specified the mode of the application to be <i>development</i> in the _npm run dev_ script that uses nodemon. We also specified that the default _npm start_ command will define the mode as <i>production</i>.
-我们在使用 nodemon 的 npm 运行 dev 脚本中指定了应用程序的模式 be i development / i。 我们还指定了默认的 npm start 命令将模式定义为 i production / i。
+我们在使用 nodemon 的 npm 运行 dev 脚本中指定了应用的模式 be<i>development</i>。 我们还指定了默认的 npm start 命令将模式定义为<i>production</i>。
 
 
 There is a slight issue in the way that we have specified the mode of the application in our scripts: it will not work on Windows. We can correct this by installing the [cross-env](https://www.npmjs.com/package/cross-env) package with the command:
-我们在脚本中指定应用程序模式的方式有一个小问题: 它不能在 Windows 上工作。 我们可以通过以下命令安装[ cross-env ]( https://www.npmjs.com/package/cross-env )包来纠正这个问题:
+我们在脚本中指定应用模式的方式有一个小问题: 它不能在 Windows 上工作。 我们可以通过如下命令安装[ cross-env ]( https://www.npmjs.com/package/cross-env )包来纠正这个问题:
 
 ```bash
 npm install cross-env
 ```
 
 We can then achieve cross-platform compatibility by using the cross-env library in our npm scripts defined in <i>package.json</i>:
-然后，我们可以通过在 i package.json / i 中定义的 npm 脚本中使用跨平台兼容性的跨 env 库来实现:
+然后，我们可以通过在<i>package.json</i> 中定义的 npm 脚本中使用跨平台兼容性的跨 env 库来实现:
 
 ```json
 {
@@ -88,11 +88,11 @@ We can then achieve cross-platform compatibility by using the cross-env library 
 
 
 Now we can modify the way that our application runs in different modes. As an example of this, we could define the application to use a separate test database when it is running tests.
-现在我们可以修改应用程序在不同模式下运行的方式。 作为示例，我们可以定义应用程序在运行测试时使用单独的测试数据库。
+现在我们可以修改应用在不同模式下运行的方式。 作为示例，我们可以定义应用在运行测试时使用单独的测试数据库。
 
 
 We can create our separate test database in Mongo DB Atlas. This is not an optimal solution in situations where there are many people developing the same application. Test execution in particular typically requires that a single database instance is not used by tests that are running concurrently.
-我们可以在 Mongo DB Atlas 中创建单独的测试数据库。 在有很多人在开发同一个应用程序的情况下，这不是一个最佳解决方案。 特别是测试执行，通常要求并发运行的测试不使用单个数据库实例。
+我们可以在 Mongo DB Atlas 中创建单独的测试数据库。 在有很多人在开发同一个应用的情况下，这不是一个最佳解决方案。 特别是测试执行，通常要求并发运行的测试不使用单个数据库实例。
 
 
 It would be better to run our tests using a database that is installed and running in the developer's local machine. The optimal solution would be to have every test execution use its own separate database. This is "relatively simple" to achieve by [running Mongo in-memory](https://docs.mongodb.com/manual/core/inmemory/) or by using [Docker](https://www.docker.com) containers. We will not complicate things and will instead continue to use the MongoDB Atlas database.
@@ -100,7 +100,7 @@ It would be better to run our tests using a database that is installed and runni
 
 
 Let's make some changes to the module that defines the application's configuration:
-让我们对定义应用程序配置的模块进行一些修改:
+让我们对定义应用配置的模块进行一些修改:
 
 ```js
 require('dotenv').config()
@@ -121,7 +121,7 @@ module.exports = {
 ```
 
 The <i>.env</i> file has <i>separate variables</i> for the database addresses of the development and test databases:
-在 i. env / i 文件中，i 为开发和测试数据库的数据库地址分别设置了变量 / i:
+在 i. env /<i>文件中，i 为开发和测试数据库的数据库地址分别设置了变量</i>:
 
 ```bash
 MONGODB_URI=mongodb+srv://fullstack:secred@cluster0-ostce.mongodb.net/note-app?retryWrites=true
@@ -133,13 +133,13 @@ TEST_MONGODB_URI=mongodb+srv://fullstack:secret@cluster0-ostce.mongodb.net/note-
 ```
 
 The _config_ module that we have implemented slightly resembles the [node-config](https://github.com/lorenwest/node-config) package. Writing our own implementation is justified since our application is simple, and also because it teaches us valuable lessons.
-我们实现的配置模块有点类似于[ node-config ]( https://github.com/lorenwest/node-config )包。 编写我们自己的实现是合理的，因为我们的应用程序很简单，也因为它教会了我们宝贵的经验教训。
+我们实现的配置模块有点类似于[ node-config ]( https://github.com/lorenwest/node-config )包。 编写我们自己的实现是合理的，因为我们的应用很简单，也因为它教会了我们宝贵的经验教训。
 
 These are the only changes we need to make to our application's code.
-这些是我们需要对应用程序代码进行的惟一更改。
+这些是我们需要对应用代码进行的惟一更改。
 
 You can find the code for our current application in its entirety in the <i>part4-2</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-2).
-您可以在[ this github repository ]的 i part4-2 / i 分支中找到我们当前应用程序的全部代码，这是一个 https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-2。
+您可以在[ this github repository ]的<i>part4-2</i> 分支中找到我们当前应用的全部代码，这是一个 https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-2。
 
 
 ### supertest
@@ -156,7 +156,7 @@ npm install --save-dev supertest
 ```
 
 Let's write our first test in the <i>tests/note_api.test.js</i> file:
-让我们在 i tests / note api.test.js / i 文件中编写第一个测试:
+让我们在<i>tests / note api.test.js</i> 文件中编写第一个测试:
 
 ```js
 const mongoose = require('mongoose')
@@ -178,13 +178,13 @@ afterAll(() => {
 ```
 
 The test imports the Express application from the <i>app.js</i> module and wraps it with the <i>supertest</i> function into a so-called [superagent](https://github.com/visionmedia/superagent) object. This object is assigned to the <i>api</i> variable and tests can use it for making HTTP requests to the backend.
-测试从 i app.js / i 模块导入 Express 应用程序，并用 i supertest / i 函数将其包装成一个所谓的[ superagent ]( https://github.com/visionmedia/superagent )对象。 这个对象被分配给 i api / i 变量，测试可以使用它向后端发出 HTTP 请求。
+测试从<i>app.js</i> 模块导入 Express 应用，并用<i>supertest</i> 函数将其包装成一个所谓的[ superagent ]( https://github.com/visionmedia/superagent )对象。 这个对象被分配给<i>api</i> 变量，测试可以使用它向后端发出 HTTP 请求。
 
 Our test makes an HTTP GET request to the <i>api/notes</i> url and verifies that the request is responded to with the status code 200. The test also verifies that the <i>Content-Type</i> header is set to <i>application/json</i>, indicating that the data is in the desired format.
-我们的测试向 i api / notes / i url 发出 HTTP GET 请求，并验证请求是否用状态码200响应。 测试还验证 i Content-Type / i 头是否设置为 i application / json / i，表明数据是所需的格式。
+我们的测试向<i>api / notes</i> url 发出 HTTP GET 请求，并验证请求是否用状态码200响应。 测试还验证<i>Content-Type</i> 头是否设置为<i>application / json</i>，表明数据是所需的格式。
 
 The test contains some details that we will explore [a bit later on](/en/part4/testing_the_backend#async-await). The arrow function that defines the test is preceded by the <i>async</i> keyword and the method call for the <i>api</i> object is preceded by the <i>await</i> keyword. We will write a few tests and then take a closer look at this async/await magic. Do not concern yourself with them for now, just be assured that the example tests work correctly. The async/await syntax is related to the fact that making a request to the API is an <i>asynchronous</i> operation. The [Async/await syntax](https://facebook.github.io/jest/docs/en/asynchronous.html) can be used for writing asynchronous code with the appearance of synchronous code.
-该测试包含一些细节，我们将在[稍后讨论](/ en / part4 / 测试后端 # async-await)。 定义测试的箭头函数的前面是 i async / i 关键字，对 i api / i 对象的方法调用的前面是 i await / i 关键字。 我们将编写一些测试，然后仔细研究这个 async / await 魔术。 现在不要关心它们，只要确保示例测试正确工作就可以了。 Async / await 语法与向 API 发出请求是 i 异步 / i 操作这一事实相关。 异步 / 等待语法](async / await 语法)可以用于编写具有同步代码外观的异步代码 https://facebook.github.io/jest/docs/en/asynchronous.html。
+该测试包含一些细节，我们将在[稍后讨论](/ en / part4 / 测试后端 # async-await)。 定义测试的箭头函数的前面是<i>async</i> 关键字，对<i>api</i> 对象的方法调用的前面是<i>await</i> 关键字。 我们将编写一些测试，然后仔细研究这个 async / await 魔术。 现在不要关心它们，只要确保示例测试正确工作就可以了。 Async / await 语法与向 API 发出请求是<i>异步</i> 操作这一事实相关。 异步 / 等待语法](async / await 语法)可以用于编写具有同步代码外观的异步代码 https://facebook.github.io/jest/docs/en/asynchronous.html。
 
 Once all the tests (there is currently only one) have finished running we have to close the database connection used by Mongoose. This can be easily achieved with the [afterAll](https://facebook.github.io/jest/docs/en/api.html#afterallfn-timeout) method:
 一旦所有的测试(目前只有一个)已经完成运行，我们必须关闭数据库连接使用的 Mongoose。 这可以很容易地通过[ afterAll ]( https://facebook.github.io/jest/docs/en/api.html#afterallfn-timeout )方法来实现:
@@ -196,14 +196,14 @@ afterAll(() => {
 ```
 
 When running your tests you may run across the following console warning:
-在运行测试时，您可能会遇到以下控制台警告:
+在运行测试时，您可能会遇到如下控制台警告:
 
 ![](../../images/4/8.png)
 
 
 
 If this occurs, let's follow the [instructions](https://mongoosejs.com/docs/jest.html) and add a <i>jest.config.js</i> file at the root of the project with the following content:
-如果发生这种情况，让我们按照[指示]( https://mongoosejs.com/docs/jest.html ) ，在项目的根目录添加一个 i jest.config.js / i 文件，内容如下:
+如果发生这种情况，让我们按照[指示]( https://mongoosejs.com/docs/jest.html ) ，在项目的根目录添加一个<i>jest.config.js</i> 文件，内容如下:
 
 ```js
 module.exports = {
@@ -212,7 +212,7 @@ module.exports = {
 ```
 
 One tiny but important detail: at the [beginning](/en/part4/structure_of_backend_application_introduction_to_testing#project-structure) of this part we extracted the Express application into the <i>app.js</i> file, and the role of the <i>index.js</i> file was changed to launch the application at the specified port with Node's built-in <i>http</i> object:
-一个很小但很重要的细节是: 在这一部分的[开头](/ en / part4 / structure of backend application introduction to testing # project-structure)中，我们将 Express 应用程序提取到 i app.js / i 文件中，并且改变了 i index.js / i 文件的角色，使用 Node 的内置 i http / i 对象在指定端口启动应用程序:
+一个很小但很重要的细节是: 在这一部分的[开头](/ en / part4 / structure of backend application introduction to testing # project-structure)中，我们将 Express 应用提取到<i>app.js</i> 文件中，并且改变了<i>index.js</i> 文件的角色，使用 Node 的内置<i>http</i> 对象在指定端口启动应用:
 
 ```js
 const app = require('./app') // the actual Express app
@@ -228,7 +228,7 @@ server.listen(config.PORT, () => {
 ```
 
 The tests only use the express application defined in the <i>app.js</i> file:
-测试只使用 i app.js / i 文件中定义的快速应用程序:
+测试只使用<i>app.js</i> 文件中定义的快速应用:
 
 ```js
 const mongoose = require('mongoose')
@@ -249,7 +249,7 @@ The documentation for supertest says the following:
 
 
 In other words, supertest takes care that the application being tested is started at the port that it uses internally.
-换句话说，supertest 负责在内部使用的端口启动被测试的应用程序。
+换句话说，supertest 负责在内部使用的端口启动被测试的应用。
 
 
 Let's write a few more tests:
@@ -270,7 +270,7 @@ test('the first note is about HTTP methods', async () => {
 ```
 
 Both tests store the response of the request to the _response_ variable, and unlike the previous test that used the methods provided by _supertest_ for verifying the status code and headers, this time we are inspecting the response data stored in <i>response.body</i> property. Our tests verify the format and content of the response data with the [expect](https://facebook.github.io/jest/docs/en/expect.html#content) method of Jest.
-这两个测试都存储请求对响应变量的响应，并且与前面的测试不同，前面的测试使用 supertest 提供的方法来验证状态代码和报头，这次我们检查存储在 i response.body / i 属性中的响应数据。 我们的测试使用 Jest 的[ expect ]( https://facebook.github.io/Jest/docs/en/expect.html#content )方法验证响应数据的格式和内容。
+这两个测试都存储请求对响应变量的响应，并且与前面的测试不同，前面的测试使用 supertest 提供的方法来验证状态代码和报头，这次我们检查存储在<i>response.body</i> 属性中的响应数据。 我们的测试使用 Jest 的[ expect ]( https://facebook.github.io/Jest/docs/en/expect.html#content )方法验证响应数据的格式和内容。
 
 
 The benefit of using the async/await syntax is starting to become evident. Normally we would have to use callback functions to access the data returned by promises, but with the new syntax things are a lot more comfortable:
@@ -355,7 +355,7 @@ The database is cleared out at the beginning, and after that we save the two not
 在开始时清除数据库，然后将存储在 initialNotes 数组中的两个备注保存到数据库中。 这样做，我们可以确保在运行每个测试之前，数据库处于相同的状态。
 
 Let's also make the following changes to the last two tests:
-让我们对最后两个测试进行以下修改:
+让我们对最后两个测试进行如下修改:
 
 ```js
 test('all notes are returned', async () => {
@@ -383,13 +383,13 @@ Pay special attention to the expect in the latter test. The <code>response.body.
 
 
 The _npm test_ command executes all of the tests of the application. When we are writing tests, it is usually wise to only execute one or two tests. Jest offers a few different ways of accomplishing this, one of which is the [only](https://jestjs.io/docs/en/api#testonlyname-fn-timeout) method. If tests are written across many files, this method is not great.
-Npm test 命令执行应用程序的所有测试。 在编写测试时，通常明智的做法是只执行一个或两个测试。 Jest 提供了几种不同的方法来实现这一点，其中一种就是 https://jestjs.io/docs/en/api#testonlyname-fn-timeout 方法。 如果测试是跨多个文件编写的，那么这种方法不是很好。
+Npm test 命令执行应用的所有测试。 在编写测试时，通常明智的做法是只执行一个或两个测试。 Jest 提供了几种不同的方法来实现这一点，其中一种就是 https://jestjs.io/docs/en/api#testonlyname-fn-timeout 方法。 如果测试是跨多个文件编写的，那么这种方法不是很好。
 
 A better option is to specify the tests that need to be run as parameter of the  <i>npm test</i> command.
-一个更好的选择是指定需要运行的测试作为 i npm test / i 命令的参数。
+一个更好的选择是指定需要运行的测试作为<i>npm test</i> 命令的参数。
 
 The following command only runs the tests found in the <i>tests/note_api.test.js</i> file:
-下面的命令只运行 i tests / note api.test.js / i 文件中的测试:
+下面的命令只运行<i>tests / note api.test.js</i> 文件中的测试:
 
 ```js
 npm test -- tests/note_api.test.js
@@ -403,7 +403,7 @@ npm test -- -t 'a specific note is within the returned notes'
 ```
 
 The provided parameter can refer to the name of the test or the describe block. The parameter can also contain just a part of the name. The following command will run all of the tests that contain <i>notes</i> in their name:
-提供的参数可以引用测试或描述块的名称。 参数也可以只包含名称的一部分。 下面的命令将运行名称中包含 i notes / i 的所有测试:
+提供的参数可以引用测试或描述块的名称。 参数也可以只包含名称的一部分。 下面的命令将运行名称中包含<i>notes</i> 的所有测试:
 
 ```js
 npm test -- -t 'notes'
@@ -423,7 +423,7 @@ Before we write more tests let's take a look at the _async_ and _await_ keywords
 在我们编写更多的测试之前，让我们看一下异步并等待关键字。
 
 The async/await syntax that was introduced in ES7 makes it possible to use <i>asynchronous functions that return a promise</i> in a way that makes the code look synchronous.
-Es7中引入的 async / await 语法使得使用 i 异步函数来返回 promise / i 成为可能，这种方式使得代码看起来是同步的。
+Es7中引入的 async / await 语法使得使用<i>异步函数来返回 promise</i> 成为可能，这种方式使得代码看起来是同步的。
 
 As an example, the fetching of notes from the database with promises looks like this:
 例如，从数据库中获取带有许诺的注释如下所示:
@@ -473,7 +473,7 @@ console.log('operation returned the following notes', notes)
 ```
 
 The code looks exactly like synchronous code. The execution of code pauses at <em>const notes = await Note.find({})</em> and waits until the related promise is <i>fulfilled</i>, and then continues its execution to the next line. When the execution continues, the result of the operation that returned a promise is assigned to the _notes_ variable.
-该代码看起来与同步代码完全一样。 代码在 em const 注释处的执行等待 Note.find ({}) / em，并等待相关的承诺 i fulfilled / i，然后继续执行到下一行。 当执行继续时，将返回承诺的操作的结果分配给 notes 变量。
+该代码看起来与同步代码完全一样。 代码在 em const 注释处的执行等待 Note.find ({}) / em，并等待相关的承诺<i>fulfilled</i>，然后继续执行到下一行。 当执行继续时，将返回承诺的操作的结果分配给 notes 变量。
 
 The slightly complicated example presented above could be implemented by using await like this:
 上面提到的稍微复杂的例子可以通过使用下面的方法来实现:
@@ -532,7 +532,7 @@ We can verify that our refactoring was successful by testing the endpoint throug
 我们可以通过在浏览器中测试端点和运行前面编写的测试来验证重构是否成功。
 
 You can find the code for our current application in its entirety in the <i>part4-3</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-3).
-您可以在[ this Github repository ]的 i part4-3 / i 分支中找到我们当前应用程序的全部代码，这是一个 https://Github.com/fullstack-hy2020/part3-notes-backend/tree/part4-3。
+您可以在[ this Github repository ]的<i>part4-3</i> 分支中找到我们当前应用的全部代码，这是一个 https://Github.com/fullstack-hy2020/part3-notes-backend/tree/part4-3。
 
 ### More tests and refactoring the backend
 更多的测试和重构后端
@@ -591,14 +591,14 @@ test('note without content is not added', async () => {
 ```
 
 Both tests check the state stored in the database after the saving operation, by fetching all the notes of the application.  
-这两个测试都通过获取应用程序的所有注释来检查保存操作之后存储在数据库中的状态。
+这两个测试都通过获取应用的所有注释来检查保存操作之后存储在数据库中的状态。
 
 ```js
 const response = await api.get('/api/notes')
 ```
 
 The same verification steps will repeat in other tests later on, and it is a good idea to extract these steps into helper functions. Let's add the function into a new file called <i>tests/test_helper.js</i> that is in the same directory as the test file.
-相同的验证步骤将在稍后的其他测试中重复，最好将这些步骤提取到 helper 函数中。 让我们将该函数添加到一个名为 i tests / test helper.js / i 的新文件中，该文件与测试文件位于同一目录中。
+相同的验证步骤将在稍后的其他测试中重复，最好将这些步骤提取到 helper 函数中。 让我们将该函数添加到一个名为<i>tests / test helper.js</i> 的新文件中，该文件与测试文件位于同一目录中。
 
 ```js
 const Note = require('../models/note')
@@ -726,7 +726,7 @@ The code using promises works and the tests pass. We are ready to refactor our c
 使用 promises 的代码可以工作，并且测试通过。 我们已经准备好重构代码以使用 async / await 语法。
 
 We make the following changes to the code that takes care of adding a new note(notice that the route handler definition is preceded by the _async_ keyword):
-我们对负责添加新注释的代码进行以下更改(注意，路由处理程序定义前面有 async 关键字) :
+我们对负责添加新注释的代码进行如下更改(注意，路由处理程序定义前面有 async 关键字) :
 
 ```js
 notesRouter.post('/', async (request, response, next) => {
@@ -859,7 +859,7 @@ notesRouter.delete('/:id', async (request, response, next) => {
 ```
 
 You can find the code for our current application in its entirety in the <i>part4-4</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4).
-您可以在[ this Github repository ]的 i part4-4 / i 分支中找到我们当前应用程序的全部代码，这是一个 https://Github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4。
+您可以在[ this Github repository ]的<i>part4-4</i> 分支中找到我们当前应用的全部代码，这是一个 https://Github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4。
 
 ### Eliminating the try-catch
 消除尝试接球
@@ -867,7 +867,7 @@ You can find the code for our current application in its entirety in the <i>part
 <!-- Async/await selkeyttää koodia jossain määrin, mutta sen 'hinta' on poikkeusten käsittelyn edellyttämä <i>try/catch</i>-rakenne. Kaikki routejen käsittelijät noudattavat samaa kaavaa -->
 我试着 / 抓住 / 抓住 / 我-拉肯。 10. Kaikki routejen k sittelij t noudattavat samaa kaavaa-- 
 Async/await unclutters the code a bit, but the 'price' is the <i>try/catch</i> structure required for catching exceptions. 
-Async / await 稍微整理了一下代码，但是‘ price’是捕获异常所需的 i try / catch / i 结构。
+Async / await 稍微整理了一下代码，但是‘ price’是捕获异常所需的<i>try / catch</i> 结构。
 All of the route handlers follow the same structure
 所有的路由处理程序遵循相同的结构
 
@@ -882,7 +882,7 @@ try {
 <!-- Mieleen herää kysymys, olisiko koodia mahdollista refaktoroida siten, että <i>catch</i> saataisiin refaktoroitua ulos metodeista?  -->
 
 One starts to wonder, if it would be possible to refactor the code to eliminate the <i>catch</i> from the methods?
-人们开始怀疑，是否有可能重构代码以从方法中消除 i catch / i？
+人们开始怀疑，是否有可能重构代码以从方法中消除<i>catch</i>？
 
 <!-- Kirjasto [express-async-errors](https://github.com/davidbanham/express-async-errors) tuo tilanteeseen helpotuksen. -->
 
@@ -901,11 +901,11 @@ npm install express-async-errors --save
 <!-- Kirjaston käyttö on <i>todella</i> helppoa.
 
  Kirjaston koodi otetaan käyttöön tiedostossa <i>src/app.js</i>: -->
-Kirjaston koodi otetaan k ytt n tiedostossa i src / app. js / i: -- 
+Kirjaston koodi otetaan k ytt n tiedostossa<i>src / app. js</i>: -- 
 Using the library is <i>very</i> easy. 
 使用图书馆很容易。
 You introduce the library in <i>src/app.js</i>:
-在 i src / app. js / i 中引入库:
+在<i>src / app. js</i> 中引入库:
 
 ```js
 const config = require('./utils/config')
@@ -958,7 +958,7 @@ notesRouter.delete('/:id', async (request, response) => {
 Because of the library, we do not need the _next(exception)_ call anymore. 
 由于库的存在，我们不再需要下一个(异常)调用。
 The library handles everything under the hood. If an exception occurs in a <i>async</i> route, the execution is automatically passed to the error handling middleware.
-图书馆处理一切事务。 如果异常发生在 i / async / i 路由中，执行将自动传递到错误处理中间件。
+图书馆处理一切事务。 如果异常发生在<i>/ async</i> 路由中，执行将自动传递到错误处理中间件。
 
 <!-- Muut routet yksinkertaistuvat seuraavasti: -->
 
@@ -992,7 +992,7 @@ notesRouter.get('/:id', async (request, response) => {
 <!-- Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), haarassa <i>part4-5</i>.  -->
 
 The code for our application can be found from [github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), branch <i>part4-5</i>.
-我们应用程序的代码可以在[ github ]( https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5) ，branch i part4-5 / i 中找到。
+我们应用的代码可以在[ github ]( https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5) ，branch<i>part4-5</i> 中找到。
 
 ### Optimizing the beforeEach function
 # # 优化 beforeEach 函数
@@ -1038,7 +1038,7 @@ We save the notes stored in the array into the database inside of a _forEach_ lo
 我们将存储在数组中的备注保存到 forEach 循环中的数据库中。 然而，这些测试似乎并不能正常工作，因此我们添加了一些控制台日志来帮助我们找到问题所在。
 
 The console displays the following output:
-控制台显示以下输出:
+控制台显示如下输出:
 
 <pre>
 预
@@ -1126,7 +1126,7 @@ Javascript 的异步特性可能会导致令人惊讶的行为，因此，在使
 
 
 **Warning:** If you find yourself using async/await and <i>then</i> methods in the same code, it is almost guaranteed that you are doing something wrong. Use one or the other and don't mix the two.
-* * 警告: * * 如果您发现自己在同一代码中使用 async / await 和 i then / i 方法，那么几乎可以肯定您正在做一些错误的事情。 使用其中之一，不要混淆两者。
+* * 警告: * * 如果您发现自己在同一代码中使用 async / await 和<i>then</i> 方法，那么几乎可以肯定您正在做一些错误的事情。 使用其中之一，不要混淆两者。
 
 
 #### 4.8: Blog list tests, step1
@@ -1134,7 +1134,7 @@ Javascript 的异步特性可能会导致令人惊讶的行为，因此，在使
 
 
 Use the supertest package for writing a test that makes an HTTP GET request to the <i>/api/blogs</i> url. Verify that the blog list application returns the correct amount of blog posts in the JSON format.
-使用 supertest 包编写一个测试，该测试向 i / api / blogs / i url 发出 HTTP GET 请求。 验证 blog list 应用程序以 JSON 格式返回的 blog 文章数量是否正确。
+使用 supertest 包编写一个测试，该测试向<i>/ api / blogs</i> url 发出 HTTP GET 请求。 验证 blog list 应用以 JSON 格式返回的 blog 文章数量是否正确。
 
 
 Once the test is finished, refactor the route handler to use the async/await syntax instead of promises.
@@ -1146,14 +1146,14 @@ Notice that you will have to make similar changes to the code that were made [in
 
 
 **NB:** When running the tests, you may run into the following warning:
-注意: 当运行测试时，你可能会遇到以下警告:
+注意: 当运行测试时，你可能会遇到如下警告:
 
 ![](../../images/4/8a.png)
 
 
 
 If this happens, follow the [instructions](https://mongoosejs.com/docs/jest.html) and create a new <i>jest.config.js</i> file at the root of the project with the following contents:
-如果发生这种情况，请按照[指示]( https://mongoosejs.com/docs/jest.html 文件) ，在项目的根目录下创建一个新的 i jest.config.js / i 文件，内容如下:
+如果发生这种情况，请按照[指示]( https://mongoosejs.com/docs/jest.html 文件) ，在项目的根目录下创建一个新的<i>jest.config.js</i> 文件，内容如下:
 
 ```js
 module.exports = {
@@ -1173,11 +1173,11 @@ module.exports = {
 
 
 Write a test that verifies that the unique identifier property of the blog posts is named <i>id</i>, by default the database names the property <i>_id</i>. Verifying the existence of a property is easily done with Jest's [toBeDefined](https://jestjs.io/docs/en/expect#tobedefined) matcher.
-编写一个测试，验证博客文章的唯一标识符属性是否命名为 i id / i，默认情况下，数据库命名为属性 i id / i。 用 Jest 的[ toBeDefined ]( https://jestjs.io/docs/en/expect#toBeDefined ) matcher 可以很容易地验证一个属性的存在性。
+编写一个测试，验证博客文章的唯一标识符属性是否命名为<i>id</i>，默认情况下，数据库命名为属性<i>id</i>。 用 Jest 的[ toBeDefined ]( https://jestjs.io/docs/en/expect#toBeDefined ) matcher 可以很容易地验证一个属性的存在性。
 
 
 Make the required changes to the code so that it passes the test. The [toJSON](/en/part3/saving_data_to_mongo_db#backend-connected-to-a-database) method discussed in part 3 is an appropriate place for defining the <i>id</i> parameter.
-对代码进行必要的更改，以便它通过测试。 第3部分中讨论的[ toJSON ](/ en / part3 / saving data to mongo db # backend-connected-to-a-database)方法是定义 i id / i 参数的合适位置。
+对代码进行必要的更改，以便它通过测试。 第3章节中讨论的[ toJSON ](/ en / part3 / saving data to mongo db # backend-connected-to-a-database)方法是定义<i>id</i> 参数的合适位置。
 
 
 #### 4.10: Blog list tests, step3
@@ -1185,7 +1185,7 @@ Make the required changes to the code so that it passes the test. The [toJSON](/
 
 
 Write a test that verifies that making an HTTP POST request to the <i>/api/blogs</i> url successfully creates a new blog post. At the very least, verify that the total number of blogs in the system is increased by one. You can also verify that the content of the blog post is saved correctly to the database.
-编写一个测试，验证对 i / api / blogs / i url 发出 HTTP POST 请求是否成功地创建了一个新的 blog POST。 至少，验证系统中的博客总数是否增加了一个。 您还可以验证博客文章的内容是否正确地保存到数据库中。
+编写一个测试，验证对<i>/ api / blogs</i> url 发出 HTTP POST 请求是否成功地创建了一个新的 blog POST。 至少，验证系统中的博客总数是否增加了一个。 您还可以验证博客文章的内容是否正确地保存到数据库中。
 
 
 Once the test is finished, refactor the operation to use async/await instead of promises.
@@ -1197,7 +1197,7 @@ Once the test is finished, refactor the operation to use async/await instead of 
 
 
 Write a test that verifies that if the <i>likes</i> property is missing from the request, it will default to the value 0. Do not test the other properties of the created blogs yet.
-编写一个测试，验证如果请求中缺少 i like / i 属性，它将默认为值0。 不要测试已创建博客的其他属性。
+编写一个测试，验证如果请求中缺少<i>like</i> 属性，它将默认为值0。 不要测试已创建博客的其他属性。
 
 
 Make the required changes to the code so that it passes the test.
@@ -1209,7 +1209,7 @@ Make the required changes to the code so that it passes the test.
 
 
 Write a test related to creating new blogs via the <i>/api/blogs</i> endpoint, that verifies that if the <i>title</i> and <i>url</i> properties are missing from the request data, the backend responds to the request with the status code <i>400 Bad Request</i>.
-编写一个与通过 i / api / blogs / i 端点创建新博客相关的测试，该测试验证如果请求数据中缺少 i title / i 和 i url / i 属性，则后端用状态代码 i 400 Bad Request / i 响应该请求。
+编写一个与通过<i>/ api / blogs</i> 端点创建新博客相关的测试，该测试验证如果请求数据中缺少<i>title</i> 和<i>url</i> 属性，则后端用状态代码<i>400 Bad Request</i> 响应该请求。
 
 
 Make the required changes to the code so that it passes the test.
@@ -1226,7 +1226,7 @@ Make the required changes to the code so that it passes the test.
 重构测试
 
 Our test coverage is currently lacking. Some requests like <i>GET /api/notes/:id</i> and <i>DELETE /api/notes/:id</i> aren't tested when the request is sent with an invalid id. The grouping and organization of tests could also use some improvement, as all tests exist on the same "top level" in the test file. The readability of the test would improve if we group related tests with <i>describe</i> blocks.
-我们的测试覆盖率目前还不够。 有些请求，比如 i GET / api / notes / : id / i 和 i DELETE / api / notes / : id / i，在使用无效 id 发送请求时没有进行测试。 测试的分组和组织也可以使用一些改进，因为所有测试都存在于测试文件的同一“顶层”上。 如果我们将相关的测试与 i describe / i 块分组，测试的可读性将得到提高。
+我们的测试覆盖率目前还不够。 有些请求，比如<i>GET / api / notes / : id</i> 和<i>DELETE / api / notes / : id</i>，在使用无效 id 发送请求时没有进行测试。 测试的分组和组织也可以使用一些改进，因为所有测试都存在于测试文件的同一“顶层”上。 如果我们将相关的测试与<i>describe</i> 块分组，测试的可读性将得到提高。
 
 
 Below is an example of the test file after making some minor improvements:
@@ -1374,7 +1374,7 @@ afterAll(() => {
 
 
 The test output is grouped according to the <i>describe</i> blocks:
-测试输出根据 i describe / i 块进行分组:
+测试输出根据<i>describe</i> 块进行分组:
 
 ![](../../images/4/7.png)
 
@@ -1384,11 +1384,11 @@ There is still room for improvement, but it is time to move forward.
 仍有改进的余地，但现在是向前迈进的时候了。
 
 This way of testing the API, by making HTTP requests and inspecting the database with Mongoose, is by no means the only nor the best way of conducting API-level integration tests for server applications. There is no universal best way of writing tests, as it all depends on the application being tested and available resources.
-这种通过发出 HTTP 请求和用 Mongoose 检查数据库来测试 API 的方法，绝不是对服务器应用程序进行 API 级集成测试的唯一或最佳方法。 没有通用的编写测试的最佳方法，因为这完全取决于被测试的应用程序和可用资源。
+这种通过发出 HTTP 请求和用 Mongoose 检查数据库来测试 API 的方法，绝不是对服务器应用进行 API 级集成测试的唯一或最佳方法。 没有通用的编写测试的最佳方法，因为这完全取决于被测试的应用和可用资源。
 
 
 You can find the code for our current application in its entirety in the <i>part4-6</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-6).
-您可以在[ this Github repository ]的 i part4-6 / i 分支中找到我们当前应用程序的全部代码，这是一个 https://Github.com/fullstack-hy2020/part3-notes-backend/tree/part4-6。
+您可以在[ this Github repository ]的<i>part4-6</i> 分支中找到我们当前应用的全部代码，这是一个 https://Github.com/fullstack-hy2020/part3-notes-backend/tree/part4-6。
 
 </div>
 
@@ -1430,7 +1430,7 @@ Use async/await.
 
 
 The application mostly needs to update the amount of <i>likes</i> for a blog post. You can implement this functionality the same way that we implemented updating notes in [part 3](/en/part3/saving_data_to_mongo_db#other-operations).
-应用程序大多数情况下需要更新博客文章的 i like / i 数量。 您可以像在[ part 3](/ en / part3 / saving data to mongo db # other-operations)中实现更新说明那样实现这个功能。
+应用大多数情况下需要更新博客文章的<i>like</i> 数量。 您可以像在[ part 3](/ en / part3 / saving data to mongo db # other-operations)中实现更新说明那样实现这个功能。
 
 
 Feel free to implement tests for the functionality if you want to. Otherwise verify that the functionality works with Postman or some other tool.

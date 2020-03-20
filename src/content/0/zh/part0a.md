@@ -9,7 +9,7 @@ lang: zh
 
 This course is an introduction to modern web development with JavaScript. The main focus is on single page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. New for this year's course is a part on TypeScript.
 
-本课程的主要内容，是介绍如何使用 Javascript 进行现代 Web 应用的开发 。 主要议题是使用 React 实现单页应用程序，以及使用 Node.js 实现 RESTful 和 GraphQL web 服务，来支撑 React 应用。 今年还推出了一门全新的的课程——TypeScript。
+本课程的主要内容，是介绍如何使用 Javascript 进行现代 Web 应用的开发 。 主要议题是使用 React 实现单页应用，以及使用 Node.js 实现 RESTful 和 GraphQL web 服务，来支撑 React 应用。 今年还推出了一门全新的的课程——TypeScript。
 
 Other topics include debugging applications, configuration, managing runtime environments and NoSQL databases.
 
@@ -35,7 +35,7 @@ The material contains exercises, which are placed so that the preceeding materia
 
 In many parts of the course, the exercises build one larger application one small piece at a time. Some of the exercise applications are developed through multiple parts.
 
-课程的大部分练习是构建一个整体应用程序的一部分，一次只有一小块。但也有一些练习，是开发一个应用程序的多个模块。
+课程的大部分练习是构建一个整体应用的一部分，一次只有一小块。但也有一些练习，是开发一个应用的多个模块。
 
 The course material is based on incrementally expanding example applications, which change from part to part. It's probably best to follow the coding along, and independently make small modifications to the code. The code of the example applications for each step of each part can be found on GitHub.
 
@@ -278,7 +278,7 @@ A Full stack project worth 1-10 credits will be available through the Open Unive
 
 For the project, an application is implemented in React and/or Node. Implementing a mobile application in React Native is also possible.
 
-该项目是利用 React 和 / 或 Node 中实现一个应用程序。 在 React Native 中实现一个移动应用也是有可能的。
+该项目是利用 React 和 / 或 Node 中实现一个应用。 在 React Native 中实现一个移动应用也是有可能的。
 
 The number of credits is based on hours of work done. One credit is approximately 17.5 hours of work. The work is graded pass/fail.
 

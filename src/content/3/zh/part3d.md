@@ -10,7 +10,7 @@ lang: zh
 
 
 There are usually constraints that we want to apply to the data that is stored in our application's database. Our application shouldn't accept notes that have a missing or empty <i>content</i> property. The validity of the note is checked in the route handler:
-我们通常希望对存储在应用程序数据库中的数据应用一些约束。 我们的应用程序不应该接受缺少或空的 i content / i 属性的注释。 在路由处理程序中检查注释的有效性:
+我们通常希望对存储在应用数据库中的数据应用一些约束。 我们的应用不应该接受缺少或空的<i>content</i> 属性的注释。 在路由处理程序中检查注释的有效性:
 
 ```js
 app.post('/api/notes', (request, response) => {
@@ -27,7 +27,7 @@ app.post('/api/notes', (request, response) => {
 
 
 If the note does not have the <i>content</i> property, we respond to the request with the status code <i>400 bad request</i>.
-如果通知没有 i content / i 属性，我们将使用状态码 i 400 bad request / i 响应该请求。
+如果通知没有<i>content</i> 属性，我们将使用状态码<i>400 bad request</i> 响应该请求。
 
 
 One smarter way of validating the format of the data before it is stored in the database, is to use the [validation](https://mongoosejs.com/docs/validation.html) functionality available in Mongoose.
@@ -56,11 +56,11 @@ const noteSchema = new mongoose.Schema({
 
 
 The <i>content</i> field is now required to be at least five characters long. The <i>date</i> field is set as required, meaning that it can not be missing. The same constraint is also implicitly applied to the <i>content</i> field, since the minimum length constraint by default requires the field to not be missing. We have not added any constraints to the <i>important</i> field, so its definition in the schema has not changed.
-现在要求 i content / i 字段至少有五个字符长。 I date / i 字段被设置为必需的，这意味着它不能丢失。 同样的约束也隐式地应用于 i content / i 字段，因为缺省情况下最小长度约束要求字段不丢失。 我们没有向 i important / i 字段添加任何约束，因此模式中的定义没有更改。
+现在要求<i>content</i> 字段至少有五个字符长。<i>date</i> 字段被设置为必需的，这意味着它不能丢失。 同样的约束也隐式地应用于<i>content</i> 字段，因为缺省情况下最小长度约束要求字段不丢失。 我们没有向<i>important</i> 字段添加任何约束，因此模式中的定义没有更改。
 
 
 The <i>minlength</i> and <i>required</i> validators are [built-in](https://mongoosejs.com/docs/validation.html#built-in-validators) and provided by Mongoose. The Mongoose [custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) functionality allows us to create new validators, if none of the built-in ones cover our needs.
-I minlength / i 和 i required / i 验证器是[内置的]( https://mongoosejs.com/docs/validation.html#built-in-validators ) ，由 Mongoose 提供。 功能允许我们创建新的验证器，如果没有一个内置的验证器满足我们的需求的话。我们可以使用 https://mongoosejs.com/docs/validation.html#custom-validators 验证器。
+I minlength /<i>和 i required</i> 验证器是[内置的]( https://mongoosejs.com/docs/validation.html#built-in-validators ) ，由 Mongoose 提供。 功能允许我们创建新的验证器，如果没有一个内置的验证器满足我们的需求的话。我们可以使用 https://mongoosejs.com/docs/validation.html#custom-validators 验证器。
 
 
 If we try to store an object in the database that breaks one of the constraints, the operation will throw an exception. Let's change our handler for creating a new note so that it passes any potential exceptions to the error handler middleware:
@@ -104,7 +104,7 @@ const errorHandler = (error, request, response, next) => {
 
 
 When validating an object fails, we return the following default error message from Mongoose:
-当验证一个对象失败时，我们从 Mongoose 返回以下缺省错误消息:
+当验证一个对象失败时，我们从 Mongoose 返回如下缺省错误消息:
 
 ![](../../images/3/50.png)
 
@@ -170,16 +170,16 @@ app.post('/api/notes', (request, response, next) => {
 ```
 
 In this example, Promise chaining does not provide much of a benefit. The situation would change if there were many asynchronous operations that had to be done in sequence. We will not delve further into the topic. In the next part of the course we will learn about the <i>async/await</i> syntax in JavaScript, that will make writing subsequent asynchronous operations a lot easier.
-在这个例子中，承诺链接没有提供多少好处。 如果有许多必须按顺序进行的异步操作，情况就会发生变化。 我们不会进一步深入探讨这个主题。 在本课程的下一部分中，我们将学习 JavaScript 中的 i async / await / i 语法，这将使编写后续的异步操作变得容易得多。
+在这个例子中，承诺链接没有提供多少好处。 如果有许多必须按顺序进行的异步操作，情况就会发生变化。 我们不会进一步深入探讨这个主题。 在本课程的下一部分中，我们将学习 JavaScript 中的<i>async / await</i> 语法，这将使编写后续的异步操作变得容易得多。
 
 ### Deploying the database backend to production
 将数据库后端部署到生产环境
 
 The application should work almost as-is in Heroku. We do have to generate a new production build of the frontend due to the changes that we have made to our frontend. 
-该应用程序在 Heroku 的运行情况应该基本一样。 由于我们对前端进行了更改，我们必须生成一个新的前端生产版本。
+该应用在 Heroku 的运行情况应该基本一样。 由于我们对前端进行了更改，我们必须生成一个新的前端生产版本。
 
 The environment variables defined in dotenv will only be used when the backend is not in <i>production mode</i>, i.e. Heroku.
-Dotenv 中定义的环境变量仅在后端不处于 i 生产模式 / i (即 Heroku)时使用。
+Dotenv 中定义的环境变量仅在后端不处于<i>生产模式</i> (即 Heroku)时使用。
 
 We defined the environment variables for development in file <i>.env</i>, but the environment variable that defines the database URL in production should be set to Heroku with the _heroku config:set_ command.
 我们在文件 i 中定义了用于开发的环境变量。 但是在生产环境中定义数据库 URL 的环境变量应该使用 Heroku config: set 命令设置为 Heroku。
@@ -195,16 +195,16 @@ heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluste
 ```
 
 The application should now work. Sometimes things don't go according to plan. If there are problems, <i>heroku logs</i> will be there to help. My own application did not work after making the changes. The logs showed the following:
-应用程序现在应该可以工作了。 有时事情不会按计划进行。 如果有什么问题，我会尽力帮忙的。 我自己的应用程序在进行更改后不工作。 这些日志显示了以下情况:
+应用现在应该可以工作了。 有时事情不会按计划进行。 如果有什么问题，我会尽力帮忙的。 我自己的应用在进行更改后不工作。 这些日志显示了如下情况:
 
 ![](../../images/3/51a.png)
 
 
 For some reason the URL of the database was undefined. The <i>heroku config</i> command revealed that I had accidentally defined the URL to the <em>MONGO\_URL</em> environment variable, when the code expected it to be in <em>MONGODB\_URI</em>.
-由于某种原因，数据库的 URL 未定义。 I heroku config / i 命令显示，我不小心定义了 em MONGO  URL / em 环境变量的 URL，而代码希望它位于 em MONGODB  URI / em 中。
+由于某种原因，数据库的 URL 未定义。<i>heroku config</i> 命令显示，我不小心定义了 em MONGO  URL / em 环境变量的 URL，而代码希望它位于 em MONGODB  URI / em 中。
 
 You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this github repository](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-5).
-您可以在[ this github repository ]的 i part3-5 / i 分支中找到我们当前应用程序的全部代码，该分支位于 https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-5文件库中。
+您可以在[ this github repository ]的<i>part3-5</i> 分支中找到我们当前应用的全部代码，该分支位于 https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-5文件库中。
 </div>
 
 
@@ -224,7 +224,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 
 Add validation to your application, that will make sure that you can only add one number for a person in the phonebook. Our current frontend won't allow users to try and create duplicates, but we can attempt to create them directly with Postman or the VS Code REST client.
-为您的应用程序添加验证，这将确保您只能在电话簿中为某人添加一个号码。 我们当前的前端不允许用户尝试创建副本，但我们可以尝试直接使用邮递员或 VS Code REST 客户端创建副本。
+为您的应用添加验证，这将确保您只能在电话簿中为某人添加一个号码。 我们当前的前端不允许用户尝试创建副本，但我们可以尝试直接使用邮递员或 VS Code REST 客户端创建副本。
 
 
 Mongoose does not offer a built-in validator for this purpose. Install the [mongoose-unique-validator](https://github.com/blakehaswell/mongoose-unique-validator#readme) package with npm and use it instead.
@@ -281,7 +281,7 @@ You can display the default error message returned by Mongoose, even though they
 
 
 Generate a new "full stack" version of the application by creating a new production build of the frontend, and copy it to the backend repository. Verify that everything works locally by using the entire application from the address <https://localhost:3001>.
-通过创建前端的新生产版本，生成应用程序的新“完整堆栈”版本，并将其复制到后端存储库。 通过使用地址 https://localhost:3001的整个应用程序来验证所有的东西都能在本地工作。
+通过创建前端的新生产版本，生成应用的新“完整堆栈”版本，并将其复制到后端存储库。 通过使用地址 https://localhost:3001的整个应用来验证所有的东西都能在本地工作。
 
 
 Push the latest version to Heroku and verify that everything works there as well.
@@ -321,7 +321,7 @@ npm install eslint --save-dev
 
 
 After this we can initialize a default ESlint configuration with the command:
-在这之后，我们可以使用以下命令初始化默认的 ESlint 配置:
+在这之后，我们可以使用如下命令初始化默认的 ESlint 配置:
 
 ```bash
 node_modules/.bin/eslint --init
@@ -387,7 +387,7 @@ Let's immediately change the rule concerning indentation, so that the indentatio
 
 
 Inspecting and validating a file like _index.js_ can be done with the following command:
-检查和验证像 index.js 这样的文件可以通过以下命令完成:
+检查和验证像 index.js 这样的文件可以通过如下命令完成:
 
 ```bash
 node_modules/.bin/eslint index.js
@@ -434,7 +434,7 @@ Let's not fix these issues just yet.
 让我们先不要解决这些问题。
 
 A better alternative to executing the linter from the command line is to configure a  <i>eslint-plugin</i> to the editor, that runs the linter continuously. By using the plugin you will see errors in your code immediately. You can find more information about the Visual Studio ESLint plugin [here](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
-从命令行执行连接程序的一个更好的替代方法是为编辑器配置一个 i eslint-plugin / i，它可以连续运行连接程序。 通过使用该插件，您将立即看到代码中的错误。 你可以找到更多关于 Visual Studio ESLint 插件的信息[点击这里](google  https://marketplace.visualstudio.com/items?itemname=dbaeumer.vscode-ESLint )。
+从命令行执行连接程序的一个更好的替代方法是为编辑器配置一个<i>eslint-plugin</i>，它可以连续运行连接程序。 通过使用该插件，您将立即看到代码中的错误。 你可以找到更多关于 Visual Studio ESLint 插件的信息[点击这里](google  https://marketplace.visualstudio.com/items?itemname=dbaeumer.vscode-ESLint )。
 
 
 The VS Code ESlint plugin will underline style violations with a red line:
@@ -453,7 +453,7 @@ Eslint 有大量的[规则]( https://ESlint.org/docs/rules/ ) ，可以通过编
 
 
 Let's add the [eqeqeq](https://eslint.org/docs/rules/eqeqeq) rule that warns us, if equality is checked with anything but the triple equals operator. The rule is added under the <i>rules</i> field in the configuration file.
-让我们添加一个[ eqeqeq ]( https://eslint.org/docs/rules/eqeqeq )规则，它警告我们，如果除了三元组等于运算符之外，相等是被检查的。 该规则是在配置文件的 i rules / i 字段下添加的。
+让我们添加一个[ eqeqeq ]( https://eslint.org/docs/rules/eqeqeq )规则，它警告我们，如果除了三元组等于运算符之外，相等是被检查的。 该规则是在配置文件的<i>rules</i> 字段下添加的。
 
 ```js
 {
@@ -490,7 +490,7 @@ Let's prevent unnecessary [trailing spaces](https://eslint.org/docs/rules/no-tra
 
 
 Our default configuration takes a bunch of predetermined rules into use from <i>eslint:recommended</i>:
-我们的默认配置从 i eslint: recommended / i:
+我们的默认配置从<i>eslint: recommended</i>:
 
 ```bash
 'extends': 'eslint:recommended',
@@ -535,7 +535,7 @@ Many companies define coding standards that are enforced throughout the organiza
 
 
 You can find the code for our current application in its entirety in the <i>part3-6</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-6).
-您可以在[ this github repository ]的 i part3-6 / i 分支中找到我们当前应用程序的全部代码，该分支位于 https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-6文件库中。
+您可以在[ this github repository ]的<i>part3-6</i> 分支中找到我们当前应用的全部代码，该分支位于 https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-6文件库中。
 </div>
 
 
@@ -552,7 +552,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 
 Add ESlint to your application and fix all the warnings.
-向应用程序中添加 ESlint 并修复所有警告。
+向应用中添加 ESlint 并修复所有警告。
 
 This was the last exercise of this part of the course. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 这是本课程这一部分的最后练习。 现在是时候将你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统]( https://studies.cs.helsinki.fi/stats/courses/fullstackopen )。

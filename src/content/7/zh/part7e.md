@@ -18,7 +18,7 @@ It is beneficial to at least be familiar with Class Components to some extent, s
 至少在一定程度上熟悉类组件是有益的，因为这个世界包含了很多旧的 React 代码，这些代码可能永远不会使用更新的语法完全重写。
 
 Let's get to know the main features of Class Components by producing yet another very familiar anecdote application. We store the anecdotes in the file <i>db.json</i> using <i>json-server</i>. The contents of the file are lifted from [here](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json).
-让我们通过生成另一个非常熟悉的轶事应用程序来了解类组件的主要特性。 我们使用 i json-server / i 将轶事存储在文件 i db.json / i 中。 文件的内容是从[这里]( https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json )提取的。
+让我们通过生成另一个非常熟悉的轶事应用来了解类组件的主要特性。 我们使用<i>json-server</i> 将轶事存储在文件<i>db.json</i> 中。 文件的内容是从[这里]( https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json )提取的。
 
 
 The initial version of the Class Component look like this
@@ -88,17 +88,17 @@ class App extends React.Component {
 
 
 The component state is in the instance variable _this.state_. The state is an object having two properties. <i>this.state.anecdotes</i> is the list of anecdotes and <i>this.state.current</i> is the index of the currently shown anecdote.
-组件状态位于实例变量的 this.state 中。 状态是具有两个属性的对象。 I this.state.轶事 / i 是轶事列表，i this.state.current / i 是当前显示轶事的索引。
+组件状态位于实例变量的 this.state 中。 状态是具有两个属性的对象。<i>this.state.轶事</i> 是轶事列表，i this.state.current / i 是当前显示轶事的索引。
 
 
 
 In Functional components the right place for fetching data from a server is inside an [effect hook](https://reactjs.org/docs/hooks-effect.html), which is executed when a component renders or less frequently if necessary, e.g. only in combination with the first render.
-在 Functional 组件中，从服务器中获取数据的正确位置是在[ effect hook ]( https://reactjs.org/docs/hooks-effect.html )中，当一个组件呈现时执行，或者在必要的情况下降低频率，例如只在与第一次呈现结合时执行。
+在 Functional 组件中，从服务器中获取数据的正确位置是在[ effect hook ]( https://reactjs.org/docs/hooks-effect.html )中，当一个组件渲染时执行，或者在必要的情况下降低频率，例如只在与第一次渲染结合时执行。
 
 
 
 The [lifecycle-methods](https://reactjs.org/docs/state-and-lifecycle.html#adding-lifecycle-methods-to-a-class) of Class Components offer corresponding functionality. The correct place to trigger the fetching of data from a server is inside the lifecycle-method [componentDidMount](https://reactjs.org/docs/react-component.html#componentdidmount), which is executed once right after the first time a component renders:
-类组件的[生命周期方法]( https://reactjs.org/docs/state-and-lifecycle.html#adding-lifecycle-methods-to-a-Class )提供了相应的功能。 触发从服务器获取数据的正确位置在 lifecycle-method [ componentDidMount ]( https://reactjs.org/docs/react-component.html#componentDidMount )中，该方法在组件第一次呈现之后执行一次:
+类组件的[生命周期方法]( https://reactjs.org/docs/state-and-lifecycle.html#adding-lifecycle-methods-to-a-Class )提供了相应的功能。 触发从服务器获取数据的正确位置在 lifecycle-method [ componentDidMount ]( https://reactjs.org/docs/react-component.html#componentDidMount )中，该方法在组件第一次渲染之后执行一次:
 
 ```js
 class App extends React.Component {
@@ -126,7 +126,7 @@ class App extends React.Component {
 
 
 The callback function of the HTTP request updates the component state using the method [setState](https://reactjs.org/docs/react-component.html#setstate). The method only touches the keys that have been defined in the object passed to the method as an argument. The value for the key <i>current</i> remains unchanged.
-Http 请求的回调函数使用方法[ setState ]( https://reactjs.org/docs/react-component.html#setState )更新组件状态。 该方法只接触在作为参数传递给该方法的对象中定义的键。 键 i current / i 的值保持不变。
+Http 请求的回调函数使用方法[ setState ]( https://reactjs.org/docs/react-component.html#setState )更新组件状态。 该方法只接触在作为参数传递给该方法的对象中定义的键。 键<i>current</i> 的值保持不变。
 
 
 
@@ -183,7 +183,7 @@ class App extends React.Component {
 
 
 For comparison here is the same application as a Functional component:
-为了便于比较，这里的应用程序与一个函数组件是相同的:
+为了便于比较，这里的应用与一个函数组件是相同的:
 
 ```js
 const App = () => {
@@ -227,23 +227,23 @@ In my opinion, and the opinion of many others, Class Components offer basically 
 在我看来，以及其他许多人的看法中，类组件基本上没有比通过钩子增强的函数组件提供任何好处，除了所谓的[错误边界]( https://reactjs.org/docs/error-boundaries.html )机制，它目前(2020年2月16日)还没有被函数组件使用。
 
 When writing fresh code [there is no rational reason to use Class Components](https://reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both) if the project is using React with a version number 16.8 or greater. On the other hand, [there is currently no need to rewrite all old React code](https://reactjs.org/docs/hooks-faq.html#do-i-need-to-rewrite-all-my-class-components) as Functional components.
-在编写新代码时，如果项目使用的是 React with a version number 16.8或更多，那么没有理由使用 Class Components  https://reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both。 另一方面，[目前没有必要重写所有旧的反应代码]( https://reactjs.org/docs/hooks-faq.html#do-i-need-to-rewrite-all-my-class-components )作为功能组件。
+在编写新代码时，如果项目使用的是 React with a version number 16.8或更多，那么没有理由使用 Class Components  https://reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both。 另一方面，[目前没有必要重写所有旧的React代码]( https://reactjs.org/docs/hooks-faq.html#do-i-need-to-rewrite-all-my-class-components )作为功能组件。
 
 ### Organization of code in React application
 # # # 在 React application 中代码的组织
 
 In most applications we followed the principle, by which components were placed in the directory <i>components</i>, reducers were placed in the directory <i>reducers</i>, and the code responsible for communicating with the server was placed in the directory <i>services</i>. This way of organizing fits a smaller application just fine, but as the amount of components increase, better solutions are needed. There is no one correct way to organize a project. The article [The 100% correct way to structure a React app (or why there’s no such thing)](https://hackernoon.com/the-100-correct-way-to-structure-a-react-app-or-why-theres-no-such-thing-3ede534ef1ed) provides some perspective on the issue.
-在大多数应用程序中，我们遵循的原则是，将组件放在目录 i components / i 中，约简程序放在目录 i reducers / i 中，负责与服务器通信的代码放在目录 i services / i 中。 这种组织方式适合于较小的应用程序，但是随着组件数量的增加，需要更好的解决方案。 组织一个项目没有一种正确的方法。 这篇文章[100% 正确的方式构建一个 React 应用程序(或为什么没有这样的东西)]( https://hackernoon.com/The-100-correct-way-to-structure-a-React-app-or-why-theres-no-such-thing-3ede534ef1ed )提供了一些关于这个问题的观点。
+在大多数应用中，我们遵循的原则是，将组件放在目录<i>components</i> 中，约简程序放在目录<i>reducers</i> 中，负责与服务器通信的代码放在目录<i>services</i> 中。 这种组织方式适合于较小的应用，但是随着组件数量的增加，需要更好的解决方案。 组织一个项目没有一种正确的方法。 这篇文章[100% 正确的方式构建一个 React 应用(或为什么没有这样的东西)]( https://hackernoon.com/The-100-correct-way-to-structure-a-React-app-or-why-theres-no-such-thing-3ede534ef1ed )提供了一些关于这个问题的观点。
 
 
 ### Frontend and backend in the same repository
 # # # 前端和后端在同一个仓库
 
 During the course we have created the frontend and backend into separate repositories. This is a very typical approach. However, we did the deployment by [copying](/en/part3/deploying_app_to_internet#serving-static-files-from-the-backend) the bundled frontend code into the backend repository. A possibly better approach would have been to deploy the frontend code separately. Especially with applications created using create-react-app it is very straightforward thanks to the included [buildpack](https://github.com/mars/create-react-app-buildpack).
-在这个过程中，我们已经将前端和后端创建到单独的存储库中。 这是一个非常典型的方法。 然而，我们通过[复制](/ en / part3 / 将 app 部署到 internet # serving-static-files-from-the-backend)将绑定的前端代码复制到后端存储库中来完成部署。 一个可能更好的方法是单独部署前端代码。 特别是使用 create-react-app 创建的应用程序，它非常简单，这要归功于内置的[ buildpack ]( https://github.com/mars/create-react-app-buildpack 应用程序)。
+在这个过程中，我们已经将前端和后端创建到单独的存储库中。 这是一个非常典型的方法。 然而，我们通过[复制](/ en / part3 / 将 app 部署到 internet # serving-static-files-from-the-backend)将绑定的前端代码复制到后端存储库中来完成部署。 一个可能更好的方法是单独部署前端代码。 特别是使用 create-react-app 创建的应用，它非常简单，这要归功于内置的[ buildpack ]( https://github.com/mars/create-react-app-buildpack 应用)。
 
 Sometimes there may be a situation where the entire application is to be put into a single repository. In this case a common approach is to put the <i>package.json</i> and <i>webpack.config.js</i> in the root directory, as well as place the frontend and backend code into their own directories, e.g. <i>client</i> and <i>server</i>.
-有时可能会出现将整个应用程序放入单个存储库的情况。 在这种情况下，一种常见的方法是将 i package.json / i 和 i webpack.config.js / i 放在根目录中，并将前端和后端代码放到它们自己的目录中，例如 i client / i 和 i server / i。
+有时可能会出现将整个应用放入单个存储库的情况。 在这种情况下，一种常见的方法是将<i>package.json</i> 和<i>webpack.config.js</i> 放在根目录中，并将前端和后端代码放到它们自己的目录中，例如<i>client</i> 和<i>server</i>。
 
 [This repository]((https://github.com/fullstack-hy2020/create-app)) provides one possible starting point for the organization of "single-repository-code".
 [此存储库](( https://github.com/fullstack-hy2020/create-app ))为“单一存储库代码”的组织提供了一个可能的起点。
@@ -269,7 +269,7 @@ WebSockets are an API provided by the browser, which is not yet fully supported 
 
 
 Instead of directly using the WebSocket API it is advisable to use the [Socket.io](https://socket.io/)-library, which provides various <i>fallback</i>-options in case the browser does not have the full support for WebSockets. 
-与直接使用 WebSocket API 不同，建议使用[ Socket.io ]( https://Socket.io/ )-library，该库提供各种 i fallback / i-options，以防浏览器不完全支持 WebSocket。
+与直接使用 WebSocket API 不同，建议使用[ Socket.io ]( https://Socket.io/ )-library，该库提供各种<i>fallback</i>-options，以防浏览器不完全支持 WebSocket。
 
 In [part 8](/em/part8) our topic is GraphQL that provices a nice mechanism for notifying clients when there are changes in the backend data.
 在[ part 8](/ em / part8)中，我们的主题是 GraphQL，它为后端数据发生更改时通知客户端提供了一个很好的机制。
@@ -291,7 +291,7 @@ they are also just JavaScript based React-elements at their core.
 它们的核心也只是基于 JavaScript 的 React-elements。
 
 The React-elements defining the appearance of the components of the application make up the [Virtual DOM](https://reactjs.org/docs/faq-internals.html#what-is-the-virtual-dom), which is stored in system memory during runtime.
-定义应用程序组件外观的 React-elements 组成了[ Virtual DOM ]( https://reactjs.org/docs/faq-internals.html#what-is-The-Virtual-DOM ) ，它在运行时存储在系统内存中。
+定义应用组件外观的 React-elements 组成了[ Virtual DOM ]( https://reactjs.org/docs/faq-internals.html#what-is-The-Virtual-DOM ) ，它在运行时存储在系统内存中。
 
 With the help of the [ReactDOM](https://reactjs.org/docs/react-dom.html)-library the virtual DOM defined by the components is rendered to a real DOM that can be shown by the browser using the DOM API:
 在[ ReactDOM ](ReactDOM)库的帮助下，这些组件定义的虚拟 DOM 被渲染成一个真实的 DOM，浏览器可以使用 DOM API 显示这个 DOM:
@@ -304,22 +304,22 @@ ReactDOM.render(
 ```
 
 When the state of the application changes a <i>new virtual DOM</i> gets defined by the components. React has the previous version of the virtual DOM in memory and instead of directly rendering the new virtual DOM using the DOM API React computes the optimal way to update the DOM (remove, add or modify elements in the DOM) such that the DOM reflects the new virtual DOM.
-当应用程序的状态发生更改时，组件将定义一个新的虚拟 DOM / i。 React 在内存中使用以前版本的虚拟 DOM，而不是使用 DOM API 直接呈现新的虚拟 DOM React 计算更新 DOM 的最佳方式(删除、添加或修改 DOM 中的元素) ，使 DOM 反映新的虚拟 DOM。
+当应用的状态发生更改时，组件将定义一个新的虚拟 DOM / i。 React 在内存中使用以前版本的虚拟 DOM，而不是使用 DOM API 直接渲染新的虚拟 DOM React 计算更新 DOM 的最佳方式(删除、添加或修改 DOM 中的元素) ，使 DOM 反映新的虚拟 DOM。
 
 ### On the role of React in applications
-# # # 反应在应用程序中的作用
+# # # React在应用中的作用
 
 In the material we may not have put enough emphasis on the fact that React is primarily a library for managing the creation of views for an application. If we look at the traditional [Model View Controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) -pattern, then the domain of React would be <i>View</i>. React has a more narrow area of application than e.g. [Angular](https://angular.io/), which is an all-encompassing Frontend MVC-framework. Therefore React is not being called a <i>framework</i>, but a <i>library</i>.
-在这些材料中，我们可能没有充分强调 React 主要是一个管理应用程序视图创建的库。 如果我们看看传统的[模型视图控制器]( https://en.wikipedia.org/wiki/Model%e2%80%93view%e2%80%93controller )-模式，那么 React 的领域将 Be i View / i. React 的应用范围比较狭窄，例如[ Angular ]( https://Angular.io/ ) ，它是一个包含所有 Fronten 的应用 因此 React 不被称为 i framework / i，而是一个
+在这些材料中，我们可能没有充分强调 React 主要是一个管理应用视图创建的库。 如果我们看看传统的[模型视图控制器]( https://en.wikipedia.org/wiki/Model%e2%80%93view%e2%80%93controller )-模式，那么 React 的领域将 Be<i>View</i>. React 的应用范围比较狭窄，例如[ Angular ]( https://Angular.io/ ) ，它是一个包含所有 Fronten 的应用 因此 React 不被称为<i>framework</i>，而是一个
 
 In small applications data handled by the application is being stored in the state of the React-components, so in this scenario the state of the components can be thought of as <i>models</i> of an MVC-architecture.
-在小型应用程序中，应用程序处理的数据存储在 React-components 的状态中，因此在这个场景中，组件的状态可以被认为是 mvc 架构的 i 模型 / i。
+在小型应用中，应用处理的数据存储在 React-components 的状态中，因此在这个场景中，组件的状态可以被认为是 mvc 架构的<i>模型</i>。
 
 However, MVC-architecture is not usually mentioned when talking about React-applications. Furthermore, if we are using Redux, then the applications follow the [Flux](https://facebook.github.io/flux/docs/in-depth-overview.html#content)-architecture and the role of React is even more focused on creating the views. The business logic of the application is handled using the Redux state and action creators. If were using [redux thunk](/en/part6/communicating_with_server_in_a_redux_application#asynchronous-actions-and-redux-thunk) familiar from part 6, then the business logic can be almost completely separated from the React code.
-但是，在讨论 React-applications 时通常不会提到 mvc 架构。 此外，如果我们正在使用 Redux，那么应用程序遵循[ Flux ]( https://facebook.github.io/Flux/docs/in-depth-overview.html#content )-架构，React 的角色更专注于创建视图。 应用程序的业务逻辑使用 Redux 状态和操作创建者来处理。 如果在 redux 应用程序 # asynchronous-actions-and-redux-thunk 中使用[ redux thunk ](/ en / part6 / 与服务器通信)熟悉第6部分，那么业务逻辑几乎可以与 React 代码完全分离。
+但是，在讨论 React-applications 时通常不会提到 mvc 架构。 此外，如果我们正在使用 Redux，那么应用遵循[ Flux ]( https://facebook.github.io/Flux/docs/in-depth-overview.html#content )-架构，React 的角色更专注于创建视图。 应用的业务逻辑使用 Redux 状态和操作创建者来处理。 如果在 redux 应用 # asynchronous-actions-and-redux-thunk 中使用[ redux thunk ](/ en / part6 / 与服务器通信)熟悉第6章节，那么业务逻辑几乎可以与 React 代码完全分离。
 
 Because both React and [Flux](https://facebook.github.io/flux/docs/in-depth-overview.html#content) were created at Facebook one could say that using React only as a UI library is the intended use case. Following the Flux-architecture adds some overhead to the application, and if were talking about a small application or prototype it might be a good idea to use React "wrong", since [over-engineering](https://en.wikipedia.org/wiki/Overengineering) rarely yields an optimal result.
-因为 React 和[ Flux ]( https://Facebook.github.io/Flux/docs/in-depth-overview.html#content )都是在 Facebook 上创建的，可以说只把 React 用作 UI 库是预期的用例。 遵循 flux 架构会给应用程序增加一些开销，如果我们讨论的是一个小型应用程序或原型，那么使用 React“ wrong”可能是一个好主意，因为[过度设计]( https://en.wikipedia.org/wiki/overengineering )很少会产生最佳结果。
+因为 React 和[ Flux ]( https://Facebook.github.io/Flux/docs/in-depth-overview.html#content )都是在 Facebook 上创建的，可以说只把 React 用作 UI 库是预期的用例。 遵循 flux 架构会给应用增加一些开销，如果我们讨论的是一个小型应用或原型，那么使用 React“ wrong”可能是一个好主意，因为[过度设计]( https://en.wikipedia.org/wiki/overengineering )很少会产生最佳结果。
 
 <!-- Kuten [osan 6](/osa6/connect#redux-ja-komponenttien-tila) lopussa mainittiin, Reactin [Context-api](https://reactjs.org/docs/context.html) tarjoaa erään vaihtoehtoisen tavan keskitetylle tilan hallinnalle ilman tarvetta ulkoisille kirjastoille kuten reduxille. Katso lisää esim. [täällä](https://www.simplethread.com/cant-replace-redux-with-hooks/) ja [täällä](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). -->
 
@@ -336,15 +336,15 @@ We will, however, take a look at some things specific to this course.
 不过，我们还是要看一下这门课程的一些具体内容。
 
 The Open Web Application Security Project, otherwise known as [OWASP](https://www.owasp.org), publishes an annual list of the most common security risks in Web-applications. The most recent list can be found [here](https://owasp.org/www-project-top-ten/). The same risks can be found from one year to another.
-开放 Web 应用程序安全项目，又称为[ OWASP ]( https://www.OWASP.org ) ，每年发布一份 Web 应用程序中最常见安全风险的清单。 最近的名单可以在这里找到( https://owasp.org/www-project-top-ten/ )。 每年都可以发现同样的风险。
+开放 Web 应用安全项目，又称为[ OWASP ]( https://www.OWASP.org ) ，每年发布一份 Web 应用中最常见安全风险的清单。 最近的名单可以在这里找到( https://owasp.org/www-project-top-ten/ )。 每年都可以发现同样的风险。
 
 At the top of the list we find <i>injection</i>, which means that e.g. text sent using a form in an application is interpreted completely differently than the software developer had intended. The most famous type of injection is probably the [SQL-injection](https://stackoverflow.com/questions/332365/how-does-the-sql-injection-from-the-bobby-tables-xkcd-comic-work). 
-在列表的顶部，我们发现 i injection / i，这意味着例如，在应用程序中使用表单发送的文本被解释为与软件开发人员预期的完全不同。 最著名的注射类型可能是[ sql 注射]( https://stackoverflow.com/questions/332365/how-does-The-SQL-injection-from-The-bobby-tables-xkcd-comic-work 注射)。
+在列表的顶部，我们发现<i>injection</i>，这意味着例如，在应用中使用表单发送的文本被解释为与软件开发人员预期的完全不同。 最著名的注射类型可能是[ sql 注射]( https://stackoverflow.com/questions/332365/how-does-The-SQL-injection-from-The-bobby-tables-xkcd-comic-work 注射)。
 
 
 
 For example, if the following SQL-query would be executed in a vulnerable application:
-例如，如果下面的 sql 查询将在一个易受攻击的应用程序中执行:
+例如，如果下面的 sql 查询将在一个易受攻击的应用中执行:
 
 ```js
 let query = "SELECT * FROM Users WHERE name = '" + userName + "';"
@@ -353,7 +353,7 @@ let query = "SELECT * FROM Users WHERE name = '" + userName + "';"
 
 
 Now let's assume that a malicious user <i>Arto Hellas</i> would define their name as
-现在让我们假设一个恶意用户 i Arto Hellas / i 将它们的名称定义为
+现在让我们假设一个恶意用户<i>Arto Hellas</i> 将它们的名称定义为
 
 <pre>
 预
@@ -365,7 +365,7 @@ Arto Hell-as'; DROP TABLE Users; --
 
 
 so that the name would contain a single quote <code>'</code>, which is the beginning- and end-character of a SQL-string. As a result of this two SQL-operations would be executed, the second of which would  destroy the database table <i>Users</i>
-这样名称将包含一个单引号代码’ / code，它是一个 sql 字符串的开头和结尾字符。 作为执行这两个 sql 操作的结果，第二个操作将销毁数据库表 i Users / i
+这样名称将包含一个单引号代码’ / code，它是一个 sql 字符串的开头和结尾字符。 作为执行这两个 sql 操作的结果，第二个操作将销毁数据库表<i>Users</i>
 
 ```sql
 SELECT * FROM Users WHERE name = 'Arto Hell-as'; DROP TABLE Users; --'
@@ -384,7 +384,7 @@ Injection attacks are also possible in NoSQL-databases. However, mongoose preven
 
 
 <i>Cross-site scripting (XSS)</i> is an attack where it is possible to inject malicious JavaScript code into a legitimate web-application. The malicious code would then be executed in the browser of the victim. If we try to inject the following into e.g. the notes application
-I 跨网站脚本攻击(XSS) / i 是一种可以将恶意 JavaScript 代码注入合法 web 应用程序的攻击。 恶意程式码会在受害者的浏览器中执行。 如果我们尝试将以下内容注入 notes 应用程序
+I 跨网站脚本攻击(XSS) / i 是一种可以将恶意 JavaScript 代码注入合法 web 应用的攻击。 恶意程式码会在受害者的浏览器中执行。 如果我们尝试将如下内容注入 notes 应用
 
 ```html
 <script>
@@ -393,7 +393,7 @@ I 跨网站脚本攻击(XSS) / i 是一种可以将恶意 JavaScript 代码注�
 ```
 
 the code is not executed, but is only rendered as 'text' on the page:
-代码不会被执行，只是在页面上呈现为文本:
+代码不会被执行，只是在页面上渲染为文本:
 
 ![](../../images/7/32e.png)
 
@@ -402,7 +402,7 @@ since React [takes care of sanitizing data in variables](https://reactjs.org/doc
 因为 React [处理变量中的消毒数据]( https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks )。 一些版本的 React [已经很容易受到 xss 攻击的攻击]( https://medium.com/dailyjs/exploiting-script-injection-flaws-in-reactjs-883fb1fe36c1)。 当然，安全漏洞已经得到修补，但不能保证还会有更多漏洞。
 
 One needs to remain vigilant when using libraries; if there are security updates to those libraries, it is advisable to update those libraries in one's own applications. Security updates for Express are found in the [library's documentation](https://expressjs.com/en/advanced/security-updates.html) and the ones for Node are found in [this blog](https://nodejs.org/en/blog/).
-使用库时需要保持警惕; 如果这些库有安全更新，最好在自己的应用程序中更新这些库。 Express 的安全更新可以在[图书馆文档]中找到，Node 的安全更新可以在[本博客]( https://expressjs.com/en/advanced/Security-updates.html  https://nodejs.org/en/blog/ )中找到。
+使用库时需要保持警惕; 如果这些库有安全更新，最好在自己的应用中更新这些库。 Express 的安全更新可以在[图书馆文档]中找到，Node 的安全更新可以在[本博客]( https://expressjs.com/en/advanced/Security-updates.html  https://nodejs.org/en/blog/ )中找到。
 
 You can check how up to date your dependencies are using the command
 您可以使用该命令检查依赖项的最新情况
@@ -412,23 +412,23 @@ npm outdated --depth 0
 ```
 
 Last year's model answer for the exercises in part 4 already have quite a few outdated dependencies:
-去年对于第四部分练习的模型答案已经有不少过时的依据:
+去年对于第四章节练习的模型答案已经有不少过时的依据:
 
 ![](../../images/7/33ea.png)
 
 
 The dependencies can be brought up to date by updating the file <i>package.json</i> and running the command _npm install_. However, old versions of the dependencies are not necessarily a security risk. 
-可以通过更新文件 i package.json / i 并运行命令 npm install 来更新依赖关系。 但是，依赖关系的旧版本不一定是安全风险。
+可以通过更新文件<i>package.json</i> 并运行命令 npm install 来更新依赖关系。 但是，依赖关系的旧版本不一定是安全风险。
 
 <!-- Riippuvuuksien turvallisuus voidaan tarkistaa npm:n [audit](https://docs.npmjs.com/cli/audit)-komennolla, joka vertaa käytettyjen riippuvuuksien versioita keskitetyssä virhetietokannassa listattuihin tietoturvauhan sisältäviin riippuvuuksien versioihin. -->
 
 The npm [audit](https://docs.npmjs.com/cli/audit) command can be used to check the security of debendencies. It compares the version numbers of the debendencies in your application to a list of the version numbers of debendencies containing known security threats in a centralized error database. 
-Npm [ audit ]( https://docs.npmjs.com/cli/audit )命令可用于检查债务的安全性。 它将应用程序中的延迟的版本号与集中式错误数据库中包含已知安全威胁的延迟的版本号列表进行比较。
+Npm [ audit ]( https://docs.npmjs.com/cli/audit )命令可用于检查债务的安全性。 它将应用中的延迟的版本号与集中式错误数据库中包含已知安全威胁的延迟的版本号列表进行比较。
 
 <!-- Komennon _npm audit_ suorittaminen viime vuoden osan 4 mallivastaukselle antaa pitkän listan valituksia ja korjausehdotuksia. Seuraavassa osa raportista: -->
 
 Running _npm audit_ on an exercise from part 4 of last year's course print a long list of complaints and suggested fixes. 
-对去年课程第四部分的练习进行 npm 审计时，打印一个长长的抱怨和建议修正列表。
+对去年课程第四章节的练习进行 npm 审计时，打印一个长长的抱怨和建议修正列表。
 Below is a part of the raport:
 下面是拉波特的一部分:
 
@@ -509,9 +509,9 @@ fixed 354 of 416 vulnerabilities in 20047 scanned packages
 <!-- Haavoittuvuuksia jää vielä 62, sillä _audit fix_ ei tee oletusarvoisesti versiopäivitystä kirjastolle, jonka <i>major</i>-versionumero on kasvanut. Tälläisen riippuvuuden päivitys saattaa aiheuttaa sovelluksen hajoamisen. Ongelmat aiheuttaa testauskirjasto jestin versio, joka on sovelluksessa 23.6.0 kun taas turvallinen versio olisi 25.1.0. Koska jest on ainoastaan kehitysaikainen riippuvuus, ei vaaraa oikeastaan ole, mutta päivitetään myös se: -->
 
 62 threats remain because by default _audit fix_  does not update debendencies if their <i>major</i> version number has increased. 
-62个威胁仍然存在，因为缺省情况下，如果它们的 i 主 / i 版本号增加，审计修复程序不会更新借记。
+62个威胁仍然存在，因为缺省情况下，如果它们的<i>主</i> 版本号增加，审计修复程序不会更新借记。
 Updating these debendencies could lead to the whole application breaking down. The remaining threats are caused by the testing debendency jest. Our application has the version 23.6.0 when the secure version is 25.0.1. 
-更新这些延迟可能导致整个应用程序崩溃。 剩下的威胁是由试探性的玩笑造成的。 当安全版本为25.0.1时，我们的应用程序有23.6.0版本。
+更新这些延迟可能导致整个应用崩溃。 剩下的威胁是由试探性的玩笑造成的。 当安全版本为25.0.1时，我们的应用有23.6.0版本。
 As jest is a development debendency the threat is actually nonexistent, but let's update it just to be safe:
 因为开玩笑是一个开发的借口，所以威胁实际上是不存在的，但是为了安全起见，让我们更新一下:
 
@@ -534,7 +534,7 @@ found 0 vulnerabilities
 ```   
 
 One of the threats mentioned in the list from OWASP is <i>Broken Authentication</i> and the related <i>Broken Access Control</i>. The token based authentication we have been using is fairly robust, if the application is being used on the traffic-encrypting HTTPS-protocol. When implementing access control one should e.g. remember to not only check a user's identity in the browser but also on the server. Bad security would be to prevent some actions to be taken only by hiding the execution options in the code of the browser.
-在 OWASP 列表中提到的威胁之一是 i Broken Authentication / i 和相关的 i Broken Access Control / i。 如果应用程序用于流量加密的 https 协议，那么我们使用的基于令牌的身份验证是相当健壮的。 在实施访问控制时，不仅要检查浏览器中的用户身份，还要检查服务器上的用户身份。 糟糕的安全性是仅通过在浏览器代码中隐藏执行选项来阻止某些操作。
+在 OWASP 列表中提到的威胁之一是<i>Broken Authentication</i> 和相关的<i>Broken Access Control</i>。 如果应用用于流量加密的 https 协议，那么我们使用的基于令牌的身份验证是相当健壮的。 在实施访问控制时，不仅要检查浏览器中的用户身份，还要检查服务器上的用户身份。 糟糕的安全性是仅通过在浏览器代码中隐藏执行选项来阻止某些操作。
 
 On Mozilla's MDN there is a very good [Website security -guide](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security), which brings up this very important topic:
 在 Mozilla 的 MDN 上有一个非常好的网站安全指南，这个 https://developer.Mozilla.org/en-us/docs/learn/server-side/first_steps/website_security 提出了一个非常重要的话题:
@@ -543,7 +543,7 @@ On Mozilla's MDN there is a very good [Website security -guide](https://develope
 
 
 The documentation for Express includes a section on security: [Production Best Practices: Security](https://expressjs.com/en/advanced/best-practice-security.html), which is worth a read through. It is also recommended to add a library called [Helmet](https://helmetjs.github.io/) to the backend. It includes a set of middlewares that eliminate some security vulnerabilities in Express applications.
-Express 的文档包括一个关于安全性的部分: [生产最佳实践: 安全性]( https://expressjs.com/en/advanced/Best-practice-Security.html ) ，这个部分值得一读。 还建议在后端添加一个名为[ Helmet ]( https://helmetjs.github.io/ )的库。 它包括一组中间件，用于消除 Express 应用程序中的一些安全漏洞。
+Express 的文档包括一个关于安全性的部分: [生产最佳实践: 安全性]( https://expressjs.com/en/advanced/Best-practice-Security.html ) ，这个部分值得一读。 还建议在后端添加一个名为[ Helmet ]( https://helmetjs.github.io/ )的库。 它包括一组中间件，用于消除 Express 应用中的一些安全漏洞。
 
 Using the ESlint [security-plugin](https://github.com/nodesecurity/eslint-plugin-security) is also worth doing.
 使用 ESlint [安全插件]( https://github.com/nodesecurity/ESlint-plugin-security 安全插件)也是值得的。
@@ -558,16 +558,16 @@ Finally, let's take a look at some technology of tomorrow (or actually already t
 输入不同版本的 JavaScript
 
 Sometimes the [dynamic typing](https://developer.mozilla.org/en-US/docs/Glossary/Dynamic_typing) of JavaScript variables creates annoying bugs. In part 5 we talked briefly about [PropTypes](/en/part5/props_children_and_proptypes#prop-types): a mechanism which enables one to enforce type checking for props passed to React-components.
-有时候 JavaScript 变量的[动态类型]( https://developer.mozilla.org/en-us/docs/glossary/dynamic_typing )会产生令人讨厌的 bug。 在第5部分中，我们简要地讨论了[ PropTypes ](/ en / part5 / PropTypes children and PropTypes # proptype) : 这是一种机制，可以对传递给 React-components 的道具进行类型检查。
+有时候 JavaScript 变量的[动态类型]( https://developer.mozilla.org/en-us/docs/glossary/dynamic_typing )会产生令人讨厌的 bug。 在第5章节中，我们简要地讨论了[ PropTypes ](/ en / part5 / PropTypes children and PropTypes # proptype) : 这是一种机制，可以对传递给 React-components 的props进行类型检查。
 
 Lately there has been a notable uplift in the interest in [static type checking](https://en.wikipedia.org/wiki/Type_system#Static_type_checking). At the moment the most popular typed version of Javascript is the [Typescript](https://www.typescriptlang.org/) which has been developed by Microsof. Topic of the [part 9](/en/part9) that shall be released at the end of April will be Typesceript.
-最近，人们对[静态类型检查](static type checking)的兴趣有了明显的提升，这种兴趣可以追溯到20世纪90年代 https://en.wikipedia.org/wiki/type_system#static_type_checking。 目前最流行的 Javascript 类型版本是由 Microsof 开发的[ Typescript ]( https://www.typescriptlang.org/ )。 将于4月底发布的[第9部分](/ en / part9)的主题将是 Typesceript。
+最近，人们对[静态类型检查](static type checking)的兴趣有了明显的提升，这种兴趣可以追溯到20世纪90年代 https://en.wikipedia.org/wiki/type_system#static_type_checking。 目前最流行的 Javascript 类型版本是由 Microsof 开发的[ Typescript ]( https://www.typescriptlang.org/ )。 将于4月底发布的[第9章节](/zh/part9)的主题将是 Typesceript。
 
 #### Server side rendering, isomorphic applications and universal code
-# # # 服务器端渲染，同构应用程序和通用代码
+# # # 服务器端渲染，同构应用和通用代码
 
 The browser is not the only domain where components defined using React can be rendered. The rendering can also be done on the [server](https://reactjs.org/docs/react-dom-server.html). This kind of approach is increasingly being used, such that when accessing the application for the first time the server serves a pre-rendered page made with React. From here onwards the operation of the application continues as usual, meaning the browser executes React, which manipulates the DOM shown by the browser. The rendering that is done on the server goes by the name: <i>server side rendering</i>.
-浏览器并不是唯一可以呈现使用 React 定义的组件的域。 渲染也可以在[服务器]上完成( https://reactjs.org/docs/react-dom-server.html )。 这种方法正在越来越多地被使用，例如，当服务器第一次访问应用程序时，服务器服务于使用 React 生成的预渲染页面。 从这里开始，应用程序的操作继续像往常一样进行，这意味着浏览器执行 React，它操纵浏览器显示的 DOM。 在服务器上完成的呈现命名为: i server side rendering / i。
+浏览器并不是唯一可以渲染使用 React 定义的组件的域。 渲染也可以在[服务器]上完成( https://reactjs.org/docs/react-dom-server.html )。 这种方法正在越来越多地被使用，例如，当服务器第一次访问应用时，服务器服务于使用 React 生成的预渲染页面。 从这里开始，应用的操作继续像往常一样进行，这意味着浏览器执行 React，它操纵浏览器显示的 DOM。 在服务器上完成的渲染命名为:<i>server side rendering</i>。
 
 One motivation for server side rendering is Search Engine Optimization (SEO). Search engines have traditionally been very bad at recognizing JavaScript rendered content, however, the tide might be turning, e.g. take a look at [this](https://www.andrewhfarmer.com/react-seo/) and [this](https://medium.freecodecamp.org/seo-vs-react-is-it-neccessary-to-render-react-pages-in-the-backend-74ce5015c0c9).
 服务器端渲染的一个动机是搜索引擎优化搜索引擎优化。 搜索引擎一直以来都不擅长识别 JavaScript 渲染的内容，然而，这种趋势可能正在发生转变，例如，看看[ this ]( https://www.andrewhfarmer.com/react-seo/ 文档)和[ this ]( https://medium.freecodecamp.org/seo-vs-react-is-it-neccessary-to-render-react-pages-in-the-backend-74ce5015c0c9文档)。
@@ -576,43 +576,43 @@ Of course, server side rendering is not anything specific to React or even JavaS
 当然，服务器端渲染并不是 React 或者甚至是 JavaScript 所特有的。 理论上，在整个堆栈中使用相同的编程语言可以简化概念的执行，因为可以在前端和后端运行相同的代码。
 
 Along with server side rendering there has been talk of so-called <i>isomorphic applications</i> and <i>universal code</i>, although there has been some debate about their definitions. According to some [definitions](https://medium.com/@ghengeveld/isomorphism-vs-universal-javascript-4b47fb481beb) an isomorphic web application is one that performs rendering on both the front- and backend. On the other hand, universal code is code that can be executed in most environments, meaning both the frontend and the backend.
-除了服务器端渲染之外，还有所谓的 i 同构应用程序 / i 和 i 通用代码 / i 的讨论，尽管对它们的定义还存在一些争议。 根据一些[定义]( https://medium.com/@ghengeveld/isomorphism-vs-universal-javascript-4b47fb481beb )同构的 web 应用程序是同时在前端和后端执行渲染的应用程序。 另一方面，通用代码是可以在大多数环境中执行的代码，即前端和后端。
+除了服务器端渲染之外，还有所谓的<i>同构应用</i> 和<i>通用代码</i> 的讨论，尽管对它们的定义还存在一些争议。 根据一些[定义]( https://medium.com/@ghengeveld/isomorphism-vs-universal-javascript-4b47fb481beb )同构的 web 应用是同时在前端和后端执行渲染的应用。 另一方面，通用代码是可以在大多数环境中执行的代码，即前端和后端。
 
 React and Node provide a desirable option for implementing an isomorphic application as universal code.
-React 和 Node 为将同构应用程序实现为通用代码提供了一个理想的选择。
+React 和 Node 为将同构应用实现为通用代码提供了一个理想的选择。
 
 Writing universal code directly using React is currently still pretty cumbersome. Lately a library called [Next.js](https://github.com/zeit/next.js/), which is implemented on top of React, has garnered much attention and is a good option for making universal applications.
-直接使用 React 编写通用代码目前仍然相当繁琐。 最近在 React 上实现了一个名为[ Next.js ]( https://github.com/zeit/Next.js/ )的库，这个库吸引了很多关注，是开发通用应用程序的一个很好的选择。
+直接使用 React 编写通用代码目前仍然相当繁琐。 最近在 React 上实现了一个名为[ Next.js ]( https://github.com/zeit/Next.js/ )的库，这个库吸引了很多关注，是开发通用应用的一个很好的选择。
 
 #### Progressive web apps
 进步的网络应用
 
 Lately people have started using the term [progressive web app](https://developers.google.com/web/progressive-web-apps/) (PWA) launched by Google.
-最近人们开始使用 Google 推出的术语[渐进式网络应用程序]( https://developers.Google.com/web/progressive-web-apps/ 应用程序)(PWA)。
+最近人们开始使用 Google 推出的术语[渐进式网络应用]( https://developers.Google.com/web/progressive-web-apps/ 应用)(PWA)。
 
 In short, we are talking about web-applications, working as well as possible on every platform taking advantage of the best parts of those platforms. The smaller screen of mobile devices must not hamper the usability of the application. PWAs should also work flawlessly in offline-mode or with a slow internet connection. On mobile devices they must be installable just like any other application. All the network traffic in a PWA should be encrypted.
-简而言之，我们讨论的是 web 应用程序，尽可能在每个平台上利用这些平台中最好的部分。 移动设备的小屏幕不能妨碍应用程序的可用性。 Pwas 也应该在脱机模式下或缓慢的互联网连接下完美地工作。 在移动设备上，它们必须像其他应用程序一样可以安装。 Pwa 中的所有网络流量都应该加密。
+简而言之，我们讨论的是 web 应用，尽可能在每个平台上利用这些平台中最好的部分。 移动设备的小屏幕不能妨碍应用的可用性。 Pwas 也应该在脱机模式下或缓慢的互联网连接下完美地工作。 在移动设备上，它们必须像其他应用一样可以安装。 Pwa 中的所有网络流量都应该加密。
 
 Applications created using create-react-app are [progressive](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#making-a-progressive-web-app) by default. If the application uses data from a server, making it progressive takes work. The offline functionality is usually implemented with the help of [service workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API).
-使用 create-react-app 创建的应用程序在默认情况下是[渐进的]( https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/readme.md#making-a-progressive-web-app )。 如果应用程序使用来自服务器的数据，则使其逐步进行需要工作。 离线功能通常是在[服务工作者]( https://developer.mozilla.org/en-us/docs/web/api/service_worker_api )的帮助下实现的。
+使用 create-react-app 创建的应用在默认情况下是[渐进的]( https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/readme.md#making-a-progressive-web-app )。 如果应用使用来自服务器的数据，则使其逐步进行需要工作。 离线功能通常是在[服务工作者]( https://developer.mozilla.org/en-us/docs/web/api/service_worker_api )的帮助下实现的。
 
 #### Microservice architecture
 微服务架构
 
 During this course we have only scratched the surface of the server end of things. In our applications we had a <i>monolithic</i> backend, meaning one application making up a whole and running on a single server, serving only a few API-endpoints.
-在本课程中，我们仅仅触及了服务器端的皮毛。 在我们的应用程序中，我们有一个 i 单片 / i 后端，这意味着一个应用程序组成一个整体并在单个服务器上运行，只服务于几个 api 端点。
+在本课程中，我们仅仅触及了服务器端的皮毛。 在我们的应用中，我们有一个<i>单片</i> 后端，这意味着一个应用组成一个整体并在单个服务器上运行，只服务于几个 api 端点。
 
 As the application grows the monolithic backend approach starts turning problematic both in terms of performance and maintainability.
-随着应用程序的增长，整体后端方法开始在性能和可维护性方面出现问题。
+随着应用的增长，整体后端方法开始在性能和可维护性方面出现问题。
 
 A [microservice architecture](https://martinfowler.com/articles/microservices.html) (microservices) is a way of composing the backend of an application from many separate, independent services, which communicate with each other over the network. An individual microservice's purpose is to take care of a particular logical functional whole. In a pure microservice architecture the services do not use a shared database.
-[微服务体系结构](microservice architecture)(microservices)是一种将应用程序的后端与许多独立的服务组合在一起的方法，这些服务通过网络相互通信。 个人微服务的目的是照顾一个特定的逻辑功能整体。 在纯微服务体系结构中，服务不使用共享数据库。
+[微服务体系结构](microservice architecture)(microservices)是一种将应用的后端与许多独立的服务组合在一起的方法，这些服务通过网络相互通信。 个人微服务的目的是照顾一个特定的逻辑功能整体。 在纯微服务体系结构中，服务不使用共享数据库。
 
 For example, the bloglist application could consist of two services: one handling user and another taking care of the blogs. The responsibility of the user service would be user registration and user authentication, while the blog service would take care of operations related to the blogs.
-例如，bloglist 应用程序可以由两个服务组成: 一个处理用户，另一个处理 blog。 用户服务的职责是用户注册和用户身份验证，而博客服务将负责与博客相关的操作。
+例如，bloglist 应用可以由两个服务组成: 一个处理用户，另一个处理 blog。 用户服务的职责是用户注册和用户身份验证，而博客服务将负责与博客相关的操作。
 
 The image below visualizes the difference between the structure of an application based on a microservice architecture and one based on a more traditional monolithic structure:
-下面的图片显示了基于微服务架构的应用程序和基于更传统单片结构的应用程序的结构差异:
+下面的图片显示了基于微服务架构的应用和基于更传统单片结构的应用的结构差异:
 
 ![](../../images/7/36.png)
 
@@ -666,13 +666,13 @@ After the release of Amazon's [lambda](https://aws.amazon.com/lambda/)-service a
 在2014年底 Amazon 发布了[ lambda ]( https://aws.Amazon.com/lambda/ 服务)之后，web 应用开发中出现了一个新的趋势: [无服务器]( https://serverless.com/ 服务)。
 
 The main thing about lambda, and nowadays also Google's [Cloud functions](https://cloud.google.com/functions/) as well as [similar functionality in Azure](https://azure.microsoft.com/en-us/services/functions/), is that it enables <i>the execution of individual functions</i> in the cloud. Before, the smallest executable unit in the cloud was a single <i>process</i>, e.g. a runtime environment running a Node backend.
-Lambda 的主要特点是，它支持在云中执行单个函数 / i，如今 Google 的[ https://Cloud.Google.com/functions/ 函数](Cloud functions)以及[ Azure 中的类似功能]( https://Azure.microsoft.com/en-us/services/functions/ )也是如此。 以前，云中最小的可执行单元是一个 i 进程 / i，例如一个运行 Node 后端的执行期函式库。
+Lambda 的主要特点是，它支持在云中执行单个函数 / i，如今 Google 的[ https://Cloud.Google.com/functions/ 函数](Cloud functions)以及[ Azure 中的类似功能]( https://Azure.microsoft.com/en-us/services/functions/ )也是如此。 以前，云中最小的可执行单元是一个<i>进程</i>，例如一个运行 Node 后端的执行期函式库。
 
 E.g. Using Amazon's [API-gateway](https://aws.amazon.com/api-gateway/) it is possible to make serverless applications where the requests to the defined HTTP API get responses directly from cloud functions. Usually the functions already operate using stored data in the databases of the cloud service.
-例如，使用 Amazon 的[ API 网关](API /  https://aws.Amazon.com/API-gateway/ ) ，可以制作无服务器的应用程序，其中对定义的 HTTP API 的请求可以直接从云函数中获得响应。 通常，这些函数已经使用云服务数据库中存储的数据进行操作。
+例如，使用 Amazon 的[ API 网关](API /  https://aws.Amazon.com/API-gateway/ ) ，可以制作无服务器的应用，其中对定义的 HTTP API 的请求可以直接从云函数中获得响应。 通常，这些函数已经使用云服务数据库中存储的数据进行操作。
 
 Serverless is not about there not being a server in applications, but about how the server is defined. Software developer can shift their programming efforts to a higher level of abstraction as there is no longer a need to programmatically define the routing of HTTP-requests, database relations, etc., since the cloud infrastructure provides all of this. Cloud functions also lend themselves to creating well scaling system, e.g. Amazon's Lambda can execute a massive amount of cloud functions per second. All of this happens automatically through the infrastructure and there is no need to initiate new servers, etc.
-无服务器并不是说应用程序中没有服务器，而是说服务器是如何定义的。 软件开发人员可以将他们的编程工作转移到更高的抽象级别，因为不再需要通过编程方式定义 http 请求的路由、数据库关系等，因为云基础设施提供了所有这些。 云函数也有助于创建良好的扩展系统，例如亚马逊的 Lambda 每秒可以执行大量的云函数。 所有这些都是通过基础设施自动完成的，不需要启动新的服务器等等。
+无服务器并不是说应用中没有服务器，而是说服务器是如何定义的。 软件开发人员可以将他们的编程工作转移到更高的抽象级别，因为不再需要通过编程方式定义 http 请求的路由、数据库关系等，因为云基础设施提供了所有这些。 云函数也有助于创建良好的扩展系统，例如亚马逊的 Lambda 每秒可以执行大量的云函数。 所有这些都是通过基础设施自动完成的，不需要启动新的服务器等等。
 
 ### Useful libraries and interesting links
 # # # 有用的库和有趣的链接
@@ -689,7 +689,7 @@ Below is listed some libraries recommended by trustworthy parties.
 <!-- Jos sovelluksessa on tarve operoida hieman monimutkaisemman datan kanssa, on jo [osassa 4](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet#tehtavat-4-3-4-7) suositeltu kirjasto [lodash](https://www.npmjs.com/package/lodash) hyvä lisä. Jos olet mieltynyt funktionaaliseen ohjelmointityyliin, kannattaa harkita [ramda](https://ramdajs.com/):n käyttöä. -->
 
 If your application has to handle complicated data [lodash](https://www.npmjs.com/package/lodash), which we recommended in [part 4](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet#tehtavat-4-3-4-7), is a good library to use. If you prefer functional programming style, you might consider using [ramda](https://ramdajs.com/).
-如果您的应用程序必须处理复杂的数据[ lodash ]( https://www.npmjs.com/package/lodash ) ，这是我们在[ part 4](/ osa4 / sovelluksen rakenne ja testauksen alkeet # tehtawatat-4-3-4-7)中推荐使用的一个很好的库。 如果您更喜欢函数式编程风格，您可以考虑使用[ ramda ]( https://ramdajs.com/ )。
+如果您的应用必须处理复杂的数据[ lodash ]( https://www.npmjs.com/package/lodash ) ，这是我们在[ part 4](/ osa4 / sovelluksen rakenne ja testauksen alkeet # tehtawatat-4-3-4-7)中推荐使用的一个很好的库。 如果您更喜欢函数式编程风格，您可以考虑使用[ ramda ]( https://ramdajs.com/ )。
 
 <!-- Jos sovelluksessa käsitellään aikaa, tarjoavat [moment](https://momentjs.com/) ja hieman uudempi [date-fns](https://github.com/date-fns/date-fns) siihen hyvän välineistön. -->
 
@@ -701,19 +701,19 @@ If you are handling times and dates, [moment](https://momentjs.com/) and a new(e
 [Formik](https://www.npmjs.com/package/formik) and [redux-form](https://redux-form.com/8.3.0/) can be used to handle forms easier. 
 [ Formik ]( https://www.npmjs.com/package/Formik )和[ redux-form ]( https://redux-form.com/8.3.0/ )可以用来更容易地处理表单。
 If your application displays graphs, there are multiple options to chose from. Both [recharts](http://recharts.org/en-US/) and [highcharts](https://github.com/highcharts/highcharts-react) are well recommended.
-如果你的应用程序显示图表，你可以从多个选项中进行选择，推荐使用[ http://recharts.org/en-us/ 图表]和[ https://github.com/highcharts/highcharts-react 图表]。
+如果你的应用显示图表，你可以从多个选项中进行选择，推荐使用[ http://recharts.org/en-us/ 图表]和[ https://github.com/highcharts/highcharts-react 图表]。
 
 The [immutable.js](https://github.com/facebook/immutable-js/)-library maintained by Facebook provides, as the name suggests, immutable implementations of some data structures. The library could be of use when using Redux, since as we [remember](/en/part6/flux_architecture_and_redux#pure-functions-immutable) from part 6: reducers must be pure functions, meaning they must not modify the store's state but instead have to replace it with a new one when a change occurs. Over the past year some of the popularity of Immutable.js has been taken over by [Immer](https://github.com/mweststrate/immer), which provides similar functionality but in a somewhat easier package.
-由 Facebook 维护的[ immutable.js ]( https://github.com/Facebook/immutable-js/ )-library，顾名思义，提供了一些数据结构的不可变实现。 当我们使用 Redux 时，这个库可能是有用的，因为我们[记得](/ en / part6 / flux 架构和 Redux # pure-functions-immutable)来自第6部分: reducers 必须是纯函数，这意味着它们不能修改存储的状态，而是必须在发生变化时用一个新的状态替换它。 在过去的一年里，一些不可变的 js 的流行已经被[ Immer ](Immer) https://github.com/mweststrate/Immer 接管了，它提供了类似的功能，但是在一个相对简单的包中。
+由 Facebook 维护的[ immutable.js ]( https://github.com/Facebook/immutable-js/ )-library，顾名思义，提供了一些数据结构的不可变实现。 当我们使用 Redux 时，这个库可能是有用的，因为我们[记得](/ en / part6 / flux 架构和 Redux # pure-functions-immutable)来自第6章节: reducers 必须是纯函数，这意味着它们不能修改存储的状态，而是必须在发生变化时用一个新的状态替换它。 在过去的一年里，一些不可变的 js 的流行已经被[ Immer ](Immer) https://github.com/mweststrate/Immer 接管了，它提供了类似的功能，但是在一个相对简单的包中。
 
 [Redux-saga](https://redux-saga.js.org/) provides an alternative way to make asynchronous actions for [redux thunk](/en/part6/communicating_with_server_in_a_redux_application#asynchronous-actions-and-redux-thunk) familiar from part 6. Some embrace the hype and like it. I don't.
-[ Redux-saga ](Redux-saga)提供了另一种方法，用于为[ redux thunk ](/ en / part6 / 与服务器在 redux 应用程序中进行通信 # asynchronous-actions-and-redux-thunk)制作异步操作，类似于第6部分。 有些人欣然接受这种炒作，并且喜欢这种炒作。 我不知道。
+[ Redux-saga ](Redux-saga)提供了另一种方法，用于为[ redux thunk ](/ en / part6 / 与服务器在 redux 应用中进行通信 # asynchronous-actions-and-redux-thunk)制作异步操作，类似于第6章节。 有些人欣然接受这种炒作，并且喜欢这种炒作。 我不知道。
 
 For single page applications the gathering of analytics data on the interaction between the users and the page is [more challenging](https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications) than for traditional web-applications where the entire page is loaded. The [React Google Analytics](https://github.com/react-ga/react-ga) -library offers a solution.
-对于单页应用程序来说，收集用户和页面交互的分析数据比传统的加载整个页面的网页应用程序更具有挑战性( https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications )。 Https://github.com/React-ga/React-ga 数据库提供了一个解决方案。
+对于单页应用来说，收集用户和页面交互的分析数据比传统的加载整个页面的网页应用更具有挑战性( https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications )。 Https://github.com/React-ga/React-ga 数据库提供了一个解决方案。
 
 You can take advantage of your React know-how when developing mobile applications using Facebook's extremely popular [React Native](https://facebook.github.io/react-native/) -library.
-在使用 Facebook 非常流行的[ React Native ](React Native) https://Facebook.github.io/React-Native/ 库开发移动应用程序时，你可以利用你的 React know-how。
+在使用 Facebook 非常流行的[ React Native ](React Native) https://Facebook.github.io/React-Native/ 库开发移动应用时，你可以利用你的 React know-how。
 
 When it comes to the tools used for the management and bundling of JavaScript projects the community has been very fickle. Best practices have changed rapidly (the years are approximations, nobody remembers that far back in the past):
 当涉及到用于管理和捆绑 JavaScript 项目的工具时，社区变化很大。 最佳实践发生了迅速的变化(年份是近似值，没有人记得那么久以前) :
@@ -735,10 +735,10 @@ Hipsters seem to have lost their interest in tool development after webpack star
 在 webpack 开始主导市场之后，赶时髦的人似乎对工具开发失去了兴趣。 几年前，[ Parcel ](Parcel) https://parceljs.org 开始以简单(Webpack 绝对不是)和快于 Webpack 的方式推销自己。 然而，在一个有希望的开始后，Parcel 并没有聚集任何动力，而且它开始看起来将不会是 Webpack 的结束。
 
 The site <https://reactpatterns.com/> provides a concise list of best practices for React, some of which are already familiar from this course. Another similar list is [react bits](https://vasanthk.gitbooks.io/react-bits/).
-网站 https://reactpatterns.com/ 提供了一个简明的反应最佳实践列表，其中一些已经在本课程中熟悉了。 另一个类似的列表是[反应位]( https://vasanthk.gitbooks.io/react-bits/ )。
+网站 https://reactpatterns.com/ 提供了一个简明的React最佳实践列表，其中一些已经在本课程中熟悉了。 另一个类似的列表是[React位]( https://vasanthk.gitbooks.io/react-bits/ )。
 
 [Reactiflux](https://www.reactiflux.com/) is a big chat community of React developers on Discord. It could be one possible place to get support after the course has concluded. For example numerous libraries have their own channels.
-[ Reactiflux ](Reactiflux  https://www.Reactiflux.com/ )是一个很大的反应开发者不和谐的聊天社区。 在课程结束后，它可能是一个可能的获得支持的地方。 例如，许多库都有自己的频道。
+[ Reactiflux ](Reactiflux  https://www.Reactiflux.com/ )是一个很大的React开发者不和谐的聊天社区。 在课程结束后，它可能是一个可能的获得支持的地方。 例如，许多库都有自己的频道。
 
 If you know some recommendable links or libraries, make a pull request!
 如果您知道一些可推荐的链接或库，请提出拉请求！

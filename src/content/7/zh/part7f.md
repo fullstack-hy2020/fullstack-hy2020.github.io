@@ -9,16 +9,16 @@ lang: zh
 
 
 In addition to the eight exercises in the [React router](/en/part7/react_router) and [custom hooks]() sections of this seventh part of the course material, there are 13 exercises that continue our work on the Bloglist application that we worked on in parts four and five of the course material. Some of the following exercises are "features" that are independent of one another, meaning that there is no need to finish the exercises in any particular order. You are free to skip over a part of the exercises if you wish to do so.
-除了课程材料第七部分[ React router ](/ en / part7 / React router)和[ custom hooks ]()的八个练习之外，还有13个练习继续我们在课程材料第四部分和第五部分所做的 Bloglist 应用程序的工作。 下面的一些练习是相互独立的“特征” ，这意味着没有必要按照任何特定的顺序完成练习。 如果你愿意，你可以跳过这些练习的一部分。
+除了课程材料第七章节[ React router ](/ en / part7 / React router)和[ custom hooks ]()的八个练习之外，还有13个练习继续我们在课程材料第四章节和第五章节所做的 Bloglist 应用的工作。 下面的一些练习是相互独立的“特征” ，这意味着没有必要按照任何特定的顺序完成练习。 如果你愿意，你可以跳过这些练习的一部分。
 
 If you do not want to use your own Bloglist application, you are free to use the code from the model solution as a starting point for these exercises.
-如果您不想使用您自己的 Bloglist 应用程序，您可以自由地使用模型解决方案中的代码作为这些练习的起点。
+如果您不想使用您自己的 Bloglist 应用，您可以自由地使用模型解决方案中的代码作为这些练习的起点。
 
 Many of the exercises in this part of the course material will require the refactoring of existing code. This is a common reality of extending existing applications, meaning that refactoring is an important and necessary skill even if it may feel difficult and unpleasant at times.
-课程教材这一部分的许多练习将需要重构现有的代码。 这是扩展现有应用程序的一个普遍现实，这意味着重构是一项重要且必要的技能，即使有时可能会感到困难和不愉快。
+课程教材这一部分的许多练习将需要重构现有的代码。 这是扩展现有应用的一个普遍现实，这意味着重构是一项重要且必要的技能，即使有时可能会感到困难和不愉快。
 
 One good piece of advice for both refactoring and writing new code is to take <i> baby steps</i>. Losing your sanity is almost guaranteed if you leave the application in a completely broken state for long periods of time while refactoring.
-对于重构和编写新代码，一个很好的建议是采取初级步骤 / i。 如果在重构过程中让应用程序长时间处于完全崩溃的状态，那么几乎肯定会失去理智。
+对于重构和编写新代码，一个很好的建议是采取初级步骤 / i。 如果在重构过程中让应用长时间处于完全崩溃的状态，那么几乎肯定会失去理智。
 
 </div>
 
@@ -33,10 +33,10 @@ One good piece of advice for both refactoring and writing new code is to take <i
 7.9: redux，step1
 
 Refactor the application from using internal React component state to using Redux for the application's state management.
-将应用程序从使用内部 React 组件状态重构为使用 Redux 进行应用程序的状态管理。
+将应用从使用内部 React 组件状态重构为使用 Redux 进行应用的状态管理。
 
 Additionally, change the application's notifications to use Redux at this point of the exercise set.
-此外，在练习集的这一点上，更改应用程序的通知以使用 Redux。
+此外，在练习集的这一点上，更改应用的通知以使用 Redux。
 
 #### 7.10: redux, step2
 7.10: redux，step2
@@ -69,7 +69,7 @@ Store the information about the signed in user in the Redux store.
 7.13: 用户浏览
 
 Implement a view to the application that displays all of the basic information related to users:
-实现应用程序的视图，该视图显示与用户相关的所有基本信息:
+实现应用的视图，该视图显示与用户相关的所有基本信息:
 
 ![](../../images/7/41.png)
 
@@ -90,7 +90,7 @@ You can access the view by clicking the name of the user in the view that lists 
 
 
 <i>**NB:**</i> you will almost certainly stumble across the following error message during this exercise:
-注意: 在这个练习中，你几乎肯定会发现以下错误消息:
+注意: 在这个练习中，你几乎肯定会发现如下错误消息:
 
 ![](../../images/7/42ea.png)
 
@@ -99,7 +99,7 @@ The error message will occur if you refresh the page for an individual user.
 如果为单个用户刷新页面，将出现错误消息。
 
 The cause of the issue is that when we navigate directly to the page of an individual user, the React application has not yet received the data from the backend. One solution for fixing the problem is to use conditional rendering:
-问题的原因是，当我们直接导航到单个用户的页面时，React 应用程序尚未从后端接收数据。 解决这个问题的一个方法是使用条件渲染:
+问题的原因是，当我们直接导航到单个用户的页面时，React 应用尚未从后端接收数据。 解决这个问题的一个方法是使用条件渲染:
 
 ```js
 const User = () => {
@@ -141,7 +141,7 @@ After you're done with this exercise, the functionality that was implemented in 
 7.16: 导航
 
 Implement a navigation menu for the application:
-为应用程序实现一个导航菜单:
+为应用实现一个导航菜单:
 
 ![](../../images/7/47.png)
 
@@ -159,16 +159,16 @@ Comments should be anonymous, meaning that they are not associated to the user w
 注释应该是匿名的，这意味着它们与留下注释的用户没有关联。
 
 In this exercise it is enough for the frontend to only display the comments that the application receives from the backend.
-在这个练习中，前端只显示应用程序从后端接收到的注释就足够了。
+在这个练习中，前端只显示应用从后端接收到的注释就足够了。
 
 An appropriate mechanism for adding comments to a blog post would be an HTTP POST request to the <i>api/blogs/:id/comments</i> endpoint.
-向博客文章添加评论的适当机制是向 i api / blogs / : id / comments / i 端点发送 HTTP POST 请求。
+向博客文章添加评论的适当机制是向<i>api / blogs / : id / comments</i> 端点发送 HTTP POST 请求。
 
 #### 7.18: comments, step2
 7.18: 评论，第二步
 
 Extend your application so that users can add comments to blog posts from the frontend:
-扩展你的应用程序，让用户可以从前端向博客文章添加评论:
+扩展你的应用，让用户可以从前端向博客文章添加评论:
 
 ![](../../images/7/49.png)
 
@@ -177,13 +177,13 @@ Extend your application so that users can add comments to blog posts from the fr
 7.19: Styles，step1
 
 Improve the appearance of your application by applying one of the methods shown in the course material.
-通过应用课程材料中显示的方法之一来改善应用程序的外观。
+通过应用课程材料中显示的方法之一来改善应用的外观。
 
 #### 7.20: Styles, step2
 7.20: Styles，step2
 
 You can mark this exercise as finished if you use an hour or more for styling your application.
-如果您使用了一个小时或更多的时间来设计应用程序，则可以将此练习标记为已完成。
+如果您使用了一个小时或更多的时间来设计应用，则可以将此练习标记为已完成。
 
 #### 7.21: Course feedback
 7.21: 课程反馈

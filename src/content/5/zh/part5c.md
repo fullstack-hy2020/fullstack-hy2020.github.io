@@ -10,18 +10,18 @@ lang: zh
 
 
 There are many different ways of testing React applications. Let's take a look at them next.
-测试 React 应用程序有许多不同的方法。
+测试 React 应用有许多不同的方法。
 
 
 Tests will be implemented with the same [Jest](http://jestjs.io/) testing library developed by Facebook that was used in the previous part. Jest is actually configured by default to applications created with create-react-app.
-测试将使用与前一部分相同的由 Facebook 开发的[玩笑]( http://jestjs.io/ )测试库来实现。 Jest 实际上在默认情况下配置为使用 create-react-app 创建的应用程序。
+测试将使用与前一部分相同的由 Facebook 开发的[玩笑]( http://jestjs.io/ )测试库来实现。 Jest 实际上在默认情况下配置为使用 create-react-app 创建的应用。
 
 In addition to Jest, we also need another testing library that will help us render components for testing purposes. The current best option for this is[react-testing-library](https://github.com/testing-library/react-testing-library) which has seen rapid growth in popularity in recent times.
-除了 Jest 之外，我们还需要另一个测试库，它将帮助我们为测试目的呈现组件。 目前最好的选择是[反应测试库](react-testing-library) ，这个 https://github.com/testing-library/react-testing-library 在最近几年迅速流行起来。
+除了 Jest 之外，我们还需要另一个测试库，它将帮助我们为测试目的渲染组件。 目前最好的选择是[React测试库](react-testing-library) ，这个 https://github.com/testing-library/react-testing-library 在最近几年迅速流行起来。
 
 
 Let's install the library with the command:
-让我们用以下命令来安装这个库:
+让我们用如下命令来安装这个库:
 
 ```js
 npm install --save-dev @testing-library/react @testing-library/jest-dom
@@ -29,7 +29,7 @@ npm install --save-dev @testing-library/react @testing-library/jest-dom
 
 
 Let's first write tests for the component that is responsible for rendering a note:
-让我们首先为负责呈现注释的组件编写测试:
+让我们首先为负责渲染注释的组件编写测试:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -48,16 +48,16 @@ const Note = ({ note, toggleImportance }) => {
 
 
 Notice that the <i>li</i> element has the [CSS](https://reactjs.org/docs/dom-elements.html#classname) classname <i>note</i>, that is used to access the component in our tests.
-注意，i li / i 元素具有[ CSS ]( https://reactjs.org/docs/dom-elements.html#classname ) classname i note / i，用于访问我们测试中的组件。
+注意，i li /<i>元素具有[ CSS ]( https://reactjs.org/docs/dom-elements.html#classname ) classname i note</i>，用于访问我们测试中的组件。
 
 ### Rendering the component for tests
 # # # 渲染测试组件
 
 We will write our test in the <i>src/components/Note.test.js</i> file, which is in the same directory as the component itself.
-我们将在 i src / components / note. test.js / i 文件中编写测试，该文件与组件本身在同一目录中。
+我们将在<i>src / components / note. test.js</i> 文件中编写测试，该文件与组件本身在同一目录中。
 
 The first test verifies that the component renders the contents of the note:
-第一个测试验证组件是否呈现注释的内容:
+第一个测试验证组件是否渲染注释的内容:
 
 ```js
 import React from 'react'
@@ -83,7 +83,7 @@ test('renders content', () => {
 
 
 After the initial configuration, the test renders the component with the [render](https://testing-library.com/docs/react-testing-library/api#render) method provided by the react-testing-library:
-在初始配置之后，测试使用由 react-testing-library 提供的[ render ]( https://testing-library.com/docs/react-testing-library/api#render )方法呈现组件:
+在初始配置之后，测试使用由 react-testing-library 提供的[ render ]( https://testing-library.com/docs/react-testing-library/api#render )方法渲染组件:
 
 ```js
 const component = render(
@@ -92,15 +92,15 @@ const component = render(
 ```
 
 Normally React components are rendered to the <i>DOM</i>. The render method we used renders the components in a format that is suitable for tests without rendering them to the DOM.
-通常将 React 组件呈现给 i DOM / i。 我们使用的 render 方法以适合于测试的格式呈现组件，而不需要将它们呈现给 DOM。
+通常将 React 组件渲染给<i>DOM</i>。 我们使用的 render 方法以适合于测试的格式渲染组件，而不需要将它们渲染给 DOM。
 
 
 _render_ returns an object that has several [properties](https://testing-library.com/docs/react-testing-library/api#render-result). One of the properties is called <i>container</i>, and it contains all of the HTML rendered by the component.
-Render 返回一个具有多个[属性]( https://testing-library.com/docs/react-testing-library/api#render-result )的对象。 其中一个属性称为 i container / i，它包含由组件呈现的所有 HTML。
+Render 返回一个具有多个[属性]( https://testing-library.com/docs/react-testing-library/api#render-result )的对象。 其中一个属性称为<i>container</i>，它包含由组件渲染的所有 HTML。
 
 
 In the expectation, we verify that the component renders the correct text, which in this case is the content of the note:
-在期望中，我们验证组件是否呈现正确的文本，在这种情况下，该文本就是注释的内容:
+在期望中，我们验证组件是否渲染正确的文本，在这种情况下，该文本就是注释的内容:
 
 ```js
 expect(component.container).toHaveTextContent(
@@ -118,7 +118,7 @@ Create-react-app 默认情况下将测试配置为在观察模式下运行，这
 
 
 If you want to run tests "normally", you can do so with the command:
-如果你想“正常地”运行测试，你可以使用以下命令:
+如果你想“正常地”运行测试，你可以使用如下命令:
 
 ```js
 CI=true npm test
@@ -126,7 +126,7 @@ CI=true npm test
 
 
 **NB:** the console may issue a warning if you have not installed Watchman. Watchman is an application developed by Facebook that watches for changes that are made to files. The program speeds up the execution of tests and at least starting from macOS Sierra, running tests in watch mode issues some warnings to the console, that can be gotten rid of by installing Watchman.
-如果您没有安装 Watchman，控制台可能会发出警告。 是 Facebook 开发的一个应用程序，它可以监视文件的变化。 这个程序加快了测试的执行速度，至少从 macOS Sierra 开始，在监视模式下运行测试会向控制台发出一些警告，这些警告可以通过安装 Watchman 来消除。
+如果您没有安装 Watchman，控制台可能会发出警告。 是 Facebook 开发的一个应用，它可以监视文件的变化。 这个程序加快了测试的执行速度，至少从 macOS Sierra 开始，在监视模式下运行测试会向控制台发出一些警告，这些警告可以通过安装 Watchman 来消除。
 
 
 Instructions for installing Watchman on different operating systems can be found on the official Watchman website: https://facebook.github.io/watchman/
@@ -138,7 +138,7 @@ Instructions for installing Watchman on different operating systems can be found
 
 
 In React there are (at least) [two different conventions](https://medium.com/@JeffLombardJr/organizing-tests-in-jest-17fc431ff850) for the test file's location. We created our test files according to the current standard by placing them in the same directory as the component being tested.
-在反应中，测试文件的位置(至少)有[两个不同的约定]( https://medium.com/@jefflombardjr/organizing-tests-In-jest-17fc431ff850)。 我们根据当前标准创建了测试文件，将它们放在与被测试组件相同的目录中。
+在React中，测试文件的位置(至少)有[两个不同的约定]( https://medium.com/@jefflombardjr/organizing-tests-In-jest-17fc431ff850)。 我们根据当前标准创建了测试文件，将它们放在与被测试组件相同的目录中。
 
 
 The other convention is to store the test files "normally" in their own separate directory. Whichever convention we choose, it is almost guaranteed to be wrong according to someone's opinion.
@@ -146,7 +146,7 @@ The other convention is to store the test files "normally" in their own separate
 
 
 Personally, I do not like this way of storing tests and application code in the same directory. The reason we choose to follow this convention is that it is configured by default in applications created by create-react-app.
-就我个人而言，我不喜欢这种将测试和应用程序代码存储在同一个目录中的方式。 我们之所以选择遵循这个约定，是因为它是在创建-反应-应用程序创建的应用程序中默认配置的。
+就我个人而言，我不喜欢这种将测试和应用代码存储在同一个目录中的方式。 我们之所以选择遵循这个约定，是因为它是在创建-React-应用创建的应用中默认配置的。
 
 
 ### Searching for content in a component
@@ -154,7 +154,7 @@ Personally, I do not like this way of storing tests and application code in the 
 
 
 The react-testing-library package offers many different ways of investigating the content of the component being tested. Let's slightly expand our test:
-反应测试库包提供了许多不同的方法来研究被测试组件的内容。 让我们稍微扩展一下我们的测试:
+React测试库包提供了许多不同的方法来研究被测试组件的内容。 让我们稍微扩展一下我们的测试:
 
 ```js
 test('renders content', () => {
@@ -188,7 +188,7 @@ test('renders content', () => {
 
 
 The first way uses method <i>toHaveTextContent</i> to search for a matching text from the entire HTML code rendered by the component.   
-第一种方法使用方法 i toHaveTextContent / i 从组件呈现的整个 HTML 代码中搜索匹配的文本。
+第一种方法使用方法<i>toHaveTextContent</i> 从组件渲染的整个 HTML 代码中搜索匹配的文本。
 <i>toHaveTextContent</i> is one of many "matcher"-methods that are provided by the  [jest-dom](https://github.com/testing-library/jest-dom#tohavetextcontent) library.
 我必须有 textcontent / i 是许多“ matcher”方法之一，这些方法是由[ jest-dom ]( https://github.com/testing-library/jest-dom#toHaveTextContent )库提供的。
 
@@ -197,12 +197,12 @@ The second way uses the [getByText](https://testing-library.com/docs/dom-testing
 第二种方法使用 render 方法返回的对象的[ getByText ]( https://testing-library.com/docs/dom-testing-library/api-queries#bytext )方法。 该方法返回包含给定文本的元素。 如果不存在此类元素，则发生异常。 出于这个原因，我们在技术上不需要指定任何额外的期望。
 
 The third way is to search for a specific element that is rendered by the component with the [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) method that receives a [CSS selector](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) as its parameter.
-第三种方法是搜索由组件呈现的特定元素，该组件使用[ querySelector ]( https://developer.mozilla.org/en-us/docs/web/api/document/querySelector )方法，该方法接收[ CSS 选择器]( https://developer.mozilla.org/en-us/docs/web/CSS/css_selectors )作为其参数。
+第三种方法是搜索由组件渲染的特定元素，该组件使用[ querySelector ]( https://developer.mozilla.org/en-us/docs/web/api/document/querySelector )方法，该方法接收[ CSS 选择器]( https://developer.mozilla.org/en-us/docs/web/CSS/css_selectors )作为其参数。
 
 <!-- Kaksi viimeistä tapaa siis hakevat metodien <i>getByText</i> ja <i>querySelector</i> avulla renderöidystä komponentista jonkin ehdon täyttävän elementin. Vastaavalla periaatteella toimivia "query"-metodeja, on tarjolla [lukuisia](https://testing-library.com/docs/dom-testing-library/api-queries). -->
 
 The last two methods use the methods <i>getByText</i> and <i>querySelector</i> to find an element matching some condition from the rendered component. 
-最后两个方法使用 i getByText / i 和 i querySelector / i 方法从呈现的组件中查找匹配某些条件的元素。
+最后两个方法使用<i>getByText</i> 和<i>querySelector</i> 方法从渲染的组件中查找匹配某些条件的元素。
 There are numerous similiar query methods [available](https://testing-library.com/docs/dom-testing-library/api-queries).
 有许多类似的查询方法[可用]( https://testing-library.com/docs/dom-testing-library/api-queries )。
 
@@ -215,7 +215,7 @@ We typically run into many different kinds of problems when writing our tests.
 
 
 The object returned by the render method has a [debug](https://testing-library.com/docs/react-testing-library/api#debug) method that can be used to print the HTML rendered by the component to the console. Let's try this out by making the following changes to our code:
-渲染方法返回的对象具有一个[ debug ]( https://testing-library.com/docs/react-testing-library/api#debug )方法，该方法可用于将组件呈现的 HTML 打印到控制台。 让我们通过对代码进行以下更改来尝试一下:
+渲染方法返回的对象具有一个[ debug ]( https://testing-library.com/docs/react-testing-library/api#debug )方法，该方法可用于将组件渲染的 HTML 打印到控制台。 让我们通过对代码进行如下更改来尝试一下:
 
 ```js
 test('renders content', () => {
@@ -282,7 +282,7 @@ test('renders content', () => {
 
 
 We used the selector to find the <i>li</i> element inside of the component, and printed its HTML to the console:
-我们使用选择器查找组件内部的 i li / i 元素，并将其 HTML 输出到控制台:
+我们使用选择器查找组件内部的<i>li</i> 元素，并将其 HTML 输出到控制台:
 
 ```js
 console.log src/components/Note.test.js:21
@@ -340,7 +340,7 @@ const mockHandler = jest.fn()
 ```
 
 The test finds the button <i>based on the text</i> from the rendered component and clicks the element:
-测试基于呈现组件中的 text / i 找到 i 按钮，然后单击元素:
+测试基于渲染组件中的 text / i 找到 i 按钮，然后单击元素:
 
 ```js
 const button = getByText('make not important')
@@ -352,7 +352,7 @@ Clicking happens with the [fireEvent](https://testing-library.com/docs/api-event
 
 
 The expectation of the test verifies that the <i>mock function</i> has been called exactly once.
-测试的期望值验证 i mock 函数 / i 只被调用过一次。
+测试的期望值验证<i>mock 函数</i> 只被调用过一次。
 
 ```js
 expect(mockHandler.mock.calls.length).toBe(1)
@@ -368,10 +368,10 @@ In our example, the mock function is a perfect choice since it can be easily use
 
 
 ### Tests for the <i>Togglable</i> component
-# # # 测试 i Togglable / i 组件
+# # # 测试<i>Togglable</i> 组件
 
 Let's write a few tests for the <i>Togglable</i> component. Let's add the <i>togglableContent</i> CSS classname to the div that returns the child components.
-让我们为 i Togglable / i 组件编写一些测试。 让我们将 i togglableContent / i CSS 类名添加到返回子组件的 div 中。
+让我们为<i>Togglable</i> 组件编写一些测试。 让我们将<i>togglableContent</i> CSS 类名添加到返回子组件的 div 中。
 
 ```js
 const Togglable = React.forwardRef((props, ref) => {
@@ -439,15 +439,15 @@ describe('<Togglable />', () => {
 
 
 The _beforeEach_ function gets called before each test, which then renders the <i>Togglable</i> component into the _component_ variable 
-Beforeeach 函数在每个测试之前调用，然后将 i Togglable / i 组件呈现到组件变量中
+Beforeeach 函数在每个测试之前调用，然后将<i>Togglable</i> 组件渲染到组件变量中
 
 
 The first test verifies that the <i>Togglable</i> component renders its child component `<div className="testDiv" />`.
-第一个测试验证 i Togglable / i 组件是否呈现其子组件‘ div classname"testdiv"/ ’。
+第一个测试验证<i>Togglable</i> 组件是否渲染其子组件‘ div classname"testdiv"/ ’。
 
 
 The remaining tests use the [toHaveStyle](https://www.npmjs.com/package/@testing-library/jest-dom#tohavestyle) method to verify that the child component of the <i>Togglable</i> component is not visible initially, by checking that the style of the <i>div</i> element contains `{ display: 'none' }`. Another test verifies that when the button is pressed the component is visible, meaning that the style for hiding the component <i>is no longer</i> assigned to the component.
-其余的测试使用[ toHaveStyle ]( https://www.npmjs.com/package/@testing-library/jest-dom#toHaveStyle )方法来验证 i Togglable / i 组件的子组件最初是否可见，方法是检查 i div / i 元素的样式是否包含‘{ display: ‘ none’}’。 另一个测试验证按钮被按下时组件是可见的，这意味着隐藏组件 i 的样式不再是分配给组件的 / i。
+其余的测试使用[ toHaveStyle ]( https://www.npmjs.com/package/@testing-library/jest-dom#toHaveStyle )方法来验证<i>Togglable</i> 组件的子组件最初是否可见，方法是检查<i>div</i> 元素的样式是否包含‘{ display: ‘ none’}’。 另一个测试验证按钮被按下时组件是可见的，这意味着隐藏组件<i>的样式不再是分配给组件的</i>。
 
 
 The button is searched for once again based on the text that it contains. The button could have been located also with the help of a CSS selector:
@@ -459,7 +459,7 @@ const button = component.container.querySelector('button')
 
 
 The component contains two buttons, but since [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) returns the <i>first</i> matching button, we happen to get the button that we wanted.
-该组件包含两个按钮，但是由于[ querySelector ]( https://developer.mozilla.org/en-us/docs/web/api/document/querySelector )返回 i first / i 匹配按钮，我们碰巧得到了我们想要的按钮。
+该组件包含两个按钮，但是由于[ querySelector ]( https://developer.mozilla.org/en-us/docs/web/api/document/querySelector )返回<i>first</i> 匹配按钮，我们碰巧得到了我们想要的按钮。
 
 
 Let's also add a test that can be used to verify that the visible content can be hidden by clicking the second button of the component:
@@ -520,14 +520,14 @@ fireEvent.click(button)
 <!-- Käytännössä siis loimme <i>fireEventin</i> avulla tapahtuman <i>click</i> nappia vastaavalle komponentille. Voimme myös simuloida lomakkeisiin kirjoittamista <i>fireEventin</i> avulla. -->
 
 In practice we used the <i>fireEvent</i> to create a <i>click</i> event for the button component. 
-实际上，我们使用 i fireEvent / i 为按钮组件创建 i click / i 事件。
+实际上，我们使用<i>fireEvent</i> 为按钮组件创建<i>click</i> 事件。
 We cal also simulate text input with <i>fireEvent</i>.
-我们还使用 i fireEvent / i 来模拟文本输入。
+我们还使用<i>fireEvent</i> 来模拟文本输入。
 
 <!-- Tehdään testi komponentille <i>NoteForm</i>. Lomakkeen koodi näyttää seuraavalta -->
 
 Let's make a test for the <i>NoteForm</i> component. The code of the component is as follows
-让我们对 i NoteForm / i 组件进行测试
+让我们对<i>NoteForm</i> 组件进行测试
 
 ```js
 import React, { useState } from 'react'
@@ -570,7 +570,7 @@ export default NoteForm
 <!-- Lomakkeen toimintaperiaatteena on kutsua sille propsina välitettyä funktiota _createNote_ uuden muistiinpanon tiedot parametrina. -->
 
 The form works by calling the _createNote_ function it received as props with the details of the new note.
-该表单通过调用作为道具接收的 createNote 函数以及新注释的细节来工作。
+该表单通过调用作为props接收的 createNote 函数以及新注释的细节来工作。
 
 <!-- Testi on seuraavassa: -->
 
@@ -606,12 +606,12 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
 <!-- Syötekenttään <i>input</i> kirjoittamista simuloidaan tekemällä syötekenttään tapahtuma <i>change</i> ja määrittelemällä sopiva olio, joka määrittelee syötekenttään 'kirjoitetun' sisällön. -->
 
 We can simulate writing to <i>input</i> fields by creating an <i>change</i> event to them, and defining an object, which contains the text 'written' to the field.
-我们可以通过为 i input / i 字段创建一个 i change / i 事件，并定义一个包含写入字段的文本的对象来模拟对 i input / i 字段的写入。
+我们可以通过为<i>input</i> 字段创建一个<i>change</i> 事件，并定义一个包含写入字段的文本的对象来模拟对<i>input</i> 字段的写入。
 
 <!-- Lomake lähetetään simuloimalla tapahtuma <i>submit</i> lomakkeelle. -->
 
 The form is sent by simulating the <i>submit</i> event to the form.
-表单通过模拟 i submit / i 事件发送到表单。
+表单通过模拟<i>submit</i> 事件发送到表单。
 
 <!-- Testin ensimmäinen ekspektaatio varmistaa, että lomakkeen lähetys on aikaansaanut tapahtumankäsittelijän _createNote_ kutsumisen. Toinen ekspektaatio tarkistaa, että tapahtumankäsittelijää kutsutaan oikealla parametrilla, eli että luoduksi tulee saman sisältöinen muistiinpano kuin lomakkeelle kirjoitetaan. -->
 ——泰特 · 恩西姆在电影中的角色，伊特 · 洛马基在电影中的角色，伊特 · 洛马基在电影中的角色，伊特 · 洛马基在电影中的角色，伊特 · 洛马基在电影中的角色，伊特 · 洛马基在电影中的角色，伊特 · 洛马基在电影中的角色
@@ -641,7 +641,7 @@ CI=true npm test -- --coverage
 <!-- Melko primitiivinen HTML-muotoinen raportti generoituu hakemistoon <i>coverage/lcov-report</i>. HTML-muotoinen raportti kertoo mm. yksittäisen komponenttien testaamattomat koodirivit: -->
 ——原始梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔科 · 梅尔
 Quite primitive HTML raport will be generated to the <i>coverage/lcov-report</i> directory. 
-将为 i coverage / lcov-report / i 目录生成相当原始的 HTML raport。
+将为<i>coverage / lcov-report</i> 目录生成相当原始的 HTML raport。
 The report will tell us i.e the lines of untested code in each component:
 该报告将告诉我们，即每个组件中未经测试的代码行:
 
@@ -650,7 +650,7 @@ The report will tell us i.e the lines of untested code in each component:
 
 
 You can find the code for our current application in its entirety in the <i>part5-8</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-8).
-您可以在[ this Github repository ]的 i part5-8 / i 分支中找到我们当前应用程序的全部代码，该分支位于 https://Github.com/fullstack-hy2020/part2-notes/tree/part5-8。
+您可以在[ this Github repository ]的<i>part5-8</i> 分支中找到我们当前应用的全部代码，该分支位于 https://Github.com/fullstack-hy2020/part2-notes/tree/part5-8。
 </div>
 
 
@@ -667,7 +667,7 @@ You can find the code for our current application in its entirety in the <i>part
 <!-- Tee testi, joka varmistaa että blogin näyttävä komponentti renderöi blogin titlen, authorin mutta ei renderöi oletusarvoisesti urlia eikä likejen määrää. -->
 -- tee testi，joka varmistaga ett blogin n ytt v komponentti render i blogin titlen，authorin mutta ei render i oletusarvoisesti urlia eik like m r. -- 
 Make a test, which checks that the component displaying a blog renders the blog's title and author, but does not render its url or number of likes by default
-做一个测试，检查显示博客的组件是否呈现了博客的标题和作者，但默认情况下不呈现其 url 或赞数
+做一个测试，检查显示博客的组件是否渲染了博客的标题和作者，但默认情况下不渲染其 url 或赞数
 
 <!-- Lisää komponenttiin tarvittaessa testausta helpottavia CSS-luokkia. -->
 
@@ -688,7 +688,7 @@ Make a test, which checks that blog's url and number of likes are shown when the
 <!-- Tee testi, joka varmistaa, että jos komponentin <i>like</i>-nappia painetaan kahdesti, komponentin propsina saamaa tapahtumankäsittelijäfunktiota kutsutaan kaksi kertaa. -->
 
 Make a test which ensures that if the <i>like</i> button is clicked twice, the event handler the component received as props is called twice. 
-进行一个测试，确保如果单击 i like / i 按钮两次，那么作为道具接收的组件的事件处理程序将被调用两次。
+进行一个测试，确保如果单击<i>like</i> 按钮两次，那么作为props接收的组件的事件处理程序将被调用两次。
 
 #### 5.16*: Blog list tests, step3
 5.16 * : 博客列表测试，第三步
@@ -696,12 +696,12 @@ Make a test which ensures that if the <i>like</i> button is clicked twice, the e
 <!-- Tee uuden blogin luomisesta huolehtivalle lomakkelle testi, joka varmistaa, että lomake kutsuu propseina saamaansa takaisinkutsufunktiota oikeilla tiedoilla siinä vaiheessa kun blogi luodaan. -->
 
 Make a test for the new blog form. The test should check, that the form calls the event handler it received as props with the right details when a new blog is called. 
-为新的博客表单做一个测试。 测试应该检查，当调用新博客时，表单是否使用正确的细节调用它作为道具接收的事件处理程序。
+为新的博客表单做一个测试。 测试应该检查，当调用新博客时，表单是否使用正确的细节调用它作为props接收的事件处理程序。
 
 <!-- Jos esim. määrittelet <i>input</i>-elementille id:n 'author': -->
 
 If, for example, you give an <i>input</i> element id 'author':
-例如，如果你给出一个 i input / i 元素 id‘ author’ :
+例如，如果你给出一个<i>input</i> 元素 id‘ author’ :
 
 ```js
 <input
@@ -714,7 +714,7 @@ If, for example, you give an <i>input</i> element id 'author':
 <!-- saat haettua kentän testissä seuraavasti -->
 
 You can access the contents of the field with
-您可以使用以下命令访问字段的内容:
+您可以使用如下命令访问字段的内容:
 
 ```js
 const author = component.container.querySelector('#author')
@@ -730,10 +730,10 @@ const author = component.container.querySelector('#author')
 # # 前端集成测试
 
 In the previous part of the course material, we wrote integration tests for the backend that tested its logic and connected database through the API provided by the backend. When writing these tests, we made the conscious decision not to write unit tests, as the code for that backend is fairly simple, and it is likely that bugs in our application occur in more complicated scenarios that integration tests are well suited for.
-在课程教材的前面部分，我们为后端编写了集成测试，测试其逻辑并通过后端提供的 API 连接数据库。 在编写这些测试时，我们有意识地决定不编写单元测试，因为后端的代码相当简单，而且我们应用程序中的错误可能发生在更复杂的场景中，而集成测试非常适合这些场景。
+在课程教材的前面部分，我们为后端编写了集成测试，测试其逻辑并通过后端提供的 API 连接数据库。 在编写这些测试时，我们有意识地决定不编写单元测试，因为后端的代码相当简单，而且我们应用中的错误可能发生在更复杂的场景中，而集成测试非常适合这些场景。
 
 So far all of our tests for the frontend have been unit tests that have validated the correct functioning of individual components. Unit testing is useful at times, but even a comprehensive suite of unit tests is not enough to validate that the application works as a whole.
-到目前为止，我们对前端的所有测试都是单元测试，这些测试验证了单个组件的正确功能。 单元测试有时很有用，但即使是一套完整的单元测试套件也不足以验证应用程序作为一个整体是否工作。
+到目前为止，我们对前端的所有测试都是单元测试，这些测试验证了单个组件的正确功能。 单元测试有时很有用，但即使是一套完整的单元测试套件也不足以验证应用作为一个整体是否工作。
 
 Voisimme tehdä myös frontendille useiden komponenttien yhteistoiminnallisuutta testaavia integraatiotestejä, mutta se on oleellisesti yksikkötestausta hankalampaa, sillä itegraatiotesteissä jouduttaisiin ottamaan kantaa mm. palvelimelta haettavan datan mockaamiseen. Päätämmekin keskittyä koko sovellusta testaavien end to end -testien tekemiseen, jonka parissa jatkamme tämän osan viimeisessä jaksossa.
 这样，我的第一次约会就成功了，我的第二次约会就成功了，我的第二次约会就成功了。 Palvelimelta haettavan datan mockaamiseen. 最后一个是 keeskitty koko sovellusta testaavien，另一个是 jonka parissa jatkamme，她是 jaksossa 的妻子。

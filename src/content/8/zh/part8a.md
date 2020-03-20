@@ -10,15 +10,15 @@ lang: zh
 
 
 REST, familiar to us from the previous parts of the course, has long been the most prevalent way to implement the interfaces servers offer for browsers, and in general the integration between different applications on the web. 
-我们在课程的前几部分已经熟悉了 REST，它一直是实现服务器为浏览器提供的接口的最普遍的方式，并且通常是 web 上不同应用程序之间的集成。
+我们在课程的前几部分已经熟悉了 REST，它一直是实现服务器为浏览器提供的接口的最普遍的方式，并且通常是 web 上不同应用之间的集成。
 
 
 In the recent years [GraphQL](http://graphql.org/), developed by Facebook, has become popular for communication between web applications and servers. 
-最近几年，Facebook 开发的[ GraphQL ]( http://GraphQL.org/ )已经成为 web 应用程序和服务器之间通信的流行工具。
+最近几年，Facebook 开发的[ GraphQL ]( http://GraphQL.org/ )已经成为 web 应用和服务器之间通信的流行工具。
 
 
 The GraphQL philosophy is very different from REST. REST is <i>resource based</i>. Every resource, for example a <i>user</i> has its own address which identifies it, for example <i>/users/10</i>. All operations done to the resource are done with HTTP requests to its URL. The action depends on the used HTTP-method. 
-Graphql 哲学与 REST 非常不同。 Rest 是基于资源的 / i。 每个资源(例如 i user / i)都有自己的地址来标识它，例如 i / users / 10 / i。 对资源所做的所有操作都是通过对其 URL 的 HTTP 请求来完成的。 该操作取决于所使用的 http 方法。
+Graphql 哲学与 REST 非常不同。 Rest 是基于资源的 / i。 每个资源(例如<i>user</i>)都有自己的地址来标识它，例如<i>/ users / 10</i>。 对资源所做的所有操作都是通过对其 URL 的 HTTP 请求来完成的。 该操作取决于所使用的 http 方法。
 
 
 The resource basedness of REST works well in most situations. However, it can be a bit awkward sometimes. 
@@ -26,7 +26,7 @@ Rest 的资源基础性在大多数情况下都能很好地工作。
 
 
 Let's assume our bloglist application contains social media like functionality, and we would i.e want to show a list of all the blogs the users who have commented on the blogs we follow have added. 
-让我们假设我们的博客列表应用程序包含类似社会媒体的功能，并且我们想显示一个所有博客的列表，这些博客的用户已经在我们关注的博客上添加了评论。
+让我们假设我们的博客列表应用包含类似社会媒体的功能，并且我们想显示一个所有博客的列表，这些博客的用户已经在我们关注的博客上添加了评论。
 
 
 If the server implemented a REST API, we would probably have to do multiple HTTP-requests from the browser before we had all the data we wanted. The requests would also return a lot of unnecessary data, and the code on the browser would probably be quite complicated. 
@@ -42,11 +42,11 @@ Graphql 服务器非常适合这种情况。
 
 
 The main principle of GraphQL is, that the code on the browser forms a <i>query</i> describing the data wanted, and sends it to the API with an HTTP POST request. Unlike REST, all GraphQL queries are sent to the same address, and their type is POST. 
-Graphql 的主要原理是，浏览器上的代码形成一个 i query / i，描述需要的数据，并通过 HTTP POST 请求将其发送给 API。 与 REST 不同，所有 GraphQL 查询都发送到相同的地址，它们的类型是 POST。
+Graphql 的主要原理是，浏览器上的代码形成一个<i>query</i>，描述需要的数据，并通过 HTTP POST 请求将其发送给 API。 与 REST 不同，所有 GraphQL 查询都发送到相同的地址，它们的类型是 POST。
 
 
 The data described in the above scenario could be fetched with ( roughly ) the following query: 
-上述场景中描述的数据可以通过(大致)以下查询获取:
+上述场景中描述的数据可以通过(大致)如下查询获取:
 
 ```bash
 query FetchBlogsQuery {
@@ -69,7 +69,7 @@ query FetchBlogsQuery {
 
 
 The servers response would be about the following JSON-object: 
-服务器响应将是以下 json 对象:
+服务器响应将是如下 json 对象:
 
 ```bash
 {
@@ -108,18 +108,18 @@ The servers response would be about the following JSON-object:
 
 
 The application logic stays simple, and the code on the browser gets exactly the data it needs with a single query. 
-应用程序逻辑保持简单，浏览器上的代码通过一个查询就可以获得它所需要的数据。
+应用逻辑保持简单，浏览器上的代码通过一个查询就可以获得它所需要的数据。
 
 ### Schemas and queries
 # # # 架构和查询
 
 
 We will get to know the basics of GraphQL by implementing a GraphQL version of the phonebook application from parts 2 and 3. 
-通过从第2部分和第3部分实现电话簿应用程序的 GraphQL 版本，我们将了解 GraphQL 的基础知识。
+通过从第2章节和第3章节实现电话簿应用的 GraphQL 版本，我们将了解 GraphQL 的基础知识。
 
 
 In the heart of all GraphQL applications is a [schema](https://graphql.org/learn/schema/), which describes the data sent between the client and the server. The initial schema for our phonebook is as follows: 
-所有 GraphQL 应用程序的核心是一个[ schema ]( https://GraphQL.org/learn/schema/ ) ，它描述了客户机和服务器之间发送的数据。 我们电话簿的初始模式如下:
+所有 GraphQL 应用的核心是一个[ schema ]( https://GraphQL.org/learn/schema/ ) ，它描述了客户机和服务器之间发送的数据。 我们电话簿的初始模式如下:
 
 ```js
 type Person {
@@ -139,9 +139,9 @@ type Query {
 
 
 The schema describes two [types](https://graphql.org/learn/schema/#type-system). The first type, <i>Person</i>, determines that persons have five fields. Four of the fields are type  <i>String</i>, which is one of the [scalar types](https://graphql.org/learn/schema/#scalar-types) of GraphQL. 
-该模式描述了两种类型( https://graphql.org/learn/schema/#type-system 类型)。 第一种类型 i Person / i 确定 Person 有五个字段。 其中4个字段是类型 i String / i，它是 GraphQL 的[标量类型]( https://GraphQL.org/learn/schema/#scalar-types )之一。
+该模式描述了两种类型( https://graphql.org/learn/schema/#type-system 类型)。 第一种类型<i>Person</i> 确定 Person 有五个字段。 其中4个字段是类型<i>String</i>，它是 GraphQL 的[标量类型]( https://GraphQL.org/learn/schema/#scalar-types )之一。
 All of the String fields, except <i>phone</i>, must be given a value. This is marked by the exclamation mark on the schema. The type of the field <i>id</i> is <i>ID</i>. <i>ID</i> fields are strings, but GraphQL ensures they are unique.  
-除了 i phone / i 之外，所有 String 字段都必须给定一个值。 这是由模式上的叹号标记的。 I ID / i 的字段类型是 i ID / i。 I ID / i 字段是字符串，但 GraphQL 确保它们是唯一的。
+除了<i>phone</i> 之外，所有 String 字段都必须给定一个值。 这是由模式上的叹号标记的。<i>ID</i> 的字段类型是<i>ID</i>。<i>ID</i> 字段是字符串，但 GraphQL 确保它们是唯一的。
 
 
 
@@ -150,10 +150,10 @@ The second type is a [Query](https://graphql.org/learn/schema/#the-query-and-mut
 
 
 The phonebook describes three different queries. _personCount_ returns an integer, _allPersons_ returns a list of <i>Person</i> objects and <i>findPerson</i> is given a string parameter and it returns a <i>Person</i> object. 
-电话簿描述了三种不同的查询。 Personcount 返回一个整数，allPersons 返回一个 i Person / i 对象列表，给我一个字符串参数并返回一个 i Person / i 对象。
+电话簿描述了三种不同的查询。 Personcount 返回一个整数，allPersons 返回一个<i>Person</i> 对象列表，给我一个字符串参数并返回一个<i>Person</i> 对象。
 
 Again exclamation marks are used to mark which return values and parameters are <i>Non-Null</i>. _personCount_ will, for sure, return an integer. The query _findPerson_ must be given a string as a parameter. The query returns a <i>Person</i>-object or <i>null</i>. _allPersons_ returns a list of <i>Person</i> objects, and the list does not contain any <i>null</i>-values. 
-同样，感叹号用于标记返回值和参数为 i 非空 / i 的值。 Personcount 肯定会返回一个整数。 必须为查询 findPerson 提供一个字符串作为参数。 查询返回一个 i Person / i-object 或 i null / i。 Allpersons 返回一个 i Person / i 对象列表，该列表不包含任何 i null / i-value。
+同样，感叹号用于标记返回值和参数为<i>非空</i> 的值。 Personcount 肯定会返回一个整数。 必须为查询 findPerson 提供一个字符串作为参数。 查询返回一个<i>Person</i>-object 或<i>null</i>。 Allpersons 返回一个<i>Person</i> 对象列表，该列表不包含任何<i>null</i>-value。
 
 So the schema describes what queries the client can send to the server, what kind of parameters the queries can have, and what kind of data the queries return. 
 因此模式描述了客户机可以向服务器发送什么样的查询，查询可以有什么样的参数，以及查询返回什么样的数据。
@@ -169,7 +169,7 @@ query {
 ```
 
 Assuming our applications has saved the information of three people, the response would look like this: 
-假设我们的应用程序已经保存了三个人的信息，响应如下:
+假设我们的应用已经保存了三个人的信息，响应如下:
 
 ```js
 {
@@ -180,7 +180,7 @@ Assuming our applications has saved the information of three people, the respons
 ```
 
 The query fetching the information of all of the people, _allPersons_, is a bit more complicated. Because the query returns a list of <i>Person</i>-objects, the query must describe 
-获取所有人(allPersons)的信息的查询稍微复杂一些。 因为查询返回一个 i Person / i-objects 列表，所以查询必须描述
+获取所有人(allPersons)的信息的查询稍微复杂一些。 因为查询返回一个<i>Person</i>-objects 列表，所以查询必须描述
 <i>which fields</i> of the objects the query [returns](https://graphql.org/learn/queries/#fields):
 I 查询返回的对象的哪个字段 / i ( https://graphql.org/learn/queries/#fields ) :
 ```js
@@ -274,7 +274,7 @@ query {
 ```
 
 the return value is <i>null</i>.
-返回值为 i null / i。
+返回值为<i>null</i>。
 
 ```js
 {
@@ -418,7 +418,7 @@ type Query {
 ```
 
 So there is a field under <i>Query</i> for every query described in the schema. 
-因此，模式中描述的每个查询在 i Query / i 下都有一个字段。
+因此，模式中描述的每个查询在<i>Query</i> 下都有一个字段。
 
 The query 
 查询
@@ -488,7 +488,7 @@ If the playground seems to be stuck, refreshing the page usually helps.
 如果操场似乎卡住了，刷新页面通常会有所帮助。
 
 By clicking the text <i>DOCS</i> on the right, the playground shows the GraphQL schema of the server. 
-通过单击右侧的文本 i DOCS / i，playground 将显示服务器的 GraphQL 模式。
+通过单击右侧的文本<i>DOCS</i>，playground 将显示服务器的 GraphQL 模式。
 
 ![](../../images/8/4e.png)
 
@@ -512,7 +512,7 @@ query {
 
 
 has a resolver which differs from the previous ones because it is given <i>two parameters</i>:
-有一个不同于以前的解析器，因为它给出了 i 两个参数 / i:
+有一个不同于以前的解析器，因为它给出了<i>两个参数</i>:
 
 ```js
 (root, args) => persons.find(p => p.name === args.name)
@@ -522,7 +522,7 @@ has a resolver which differs from the previous ones because it is given <i>two p
 The second parameter, _args_, contains the parameters of the query. 
 第二个参数 args 包含查询的参数。
 The resolver then returns from the array _persons_ the person whose name is the same as the value of <i>args.name</i>. 
-然后，解析器从数组人员返回名称与 i args.name / i 值相同的人。
+然后，解析器从数组人员返回名称与<i>args.name</i> 值相同的人。
 The resolver does not need the first parameter _root_.
 冲突解决程序不需要第一个参数根。
 
@@ -552,12 +552,12 @@ the server knows to send back exactly the fields required by the query. How does
 服务器知道发送回查询所需的字段，这是如何发生的？
 
 A GraphQL-server must define resolvers for <i>each</i> field of each  type in the schema. 
-Graphql-server 必须为架构中每种类型的 i each / i 字段定义解析器。
+Graphql-server 必须为架构中每种类型的<i>each</i> 字段定义解析器。
 We have so far only defined resolvers for fields of the type <i>Query</i>, so for each query of the application. 
-到目前为止，我们只为类型为 i Query / i 的字段定义了解析器，因此应用程序的每个查询都是这样。
+到目前为止，我们只为类型为<i>Query</i> 的字段定义了解析器，因此应用的每个查询都是这样。
 
 Because we did not define resolvers for the fields of the type <i>Person</i>, Apollo has defined [default resolvers](https://www.apollographql.com/docs/graphql-tools/resolvers.html#Default-resolver) for them. 
-因为我们没有为 i Person / i 类型的字段定义解析器，Apollo 已经为它们定义了[默认解析器]( https://www.apollographql.com/docs/graphql-tools/resolvers.html#default-resolver )。
+因为我们没有为<i>Person</i> 类型的字段定义解析器，Apollo 已经为它们定义了[默认解析器]( https://www.apollographql.com/docs/graphql-tools/resolvers.html#default-resolver )。
 They work like the one shown below: 
 它们的工作原理如下图所示:
 
@@ -593,7 +593,7 @@ If the functionality of the default resolver is enough, you don't need to define
 We could for example define, that the address of all persons is 
 例如，我们可以定义，所有人的地址是
 <i>Manhattan New York</i> by hard coding the following to the resolvers of the street and city fields of the type <i>Person</i>.
-I Manhattan New York / i 通过将下面的代码硬编码到 i Person / i 类型的街道和城市字段的解析器中。
+I Manhattan New York /<i>通过将下面的代码硬编码到 i Person</i> 类型的街道和城市字段的解析器中。
 
 ```js
 Person: {
@@ -633,7 +633,7 @@ type Query {
 
 
 so a person now has a field with the type <i>Address</i>, which contains the street and the city. 
-所以一个人现在有一个 i Address / i 类型的字段，包含街道和城市。
+所以一个人现在有一个<i>Address</i> 类型的字段，包含街道和城市。
 
 
 The queries requiring the address change into
@@ -688,17 +688,17 @@ let persons = [
 
 
 So the person-objects saved in the server are not exactly the same as GraphQL type <i>Person</i> objects described in the schema. 
-因此，保存在服务器中的 Person-objects 与架构中描述的 GraphQL type i Person / i 对象并不完全相同。
+因此，保存在服务器中的 Person-objects 与架构中描述的 GraphQL type<i>Person</i> 对象并不完全相同。
 
 
 Contrary to the type <i>Person</i>, the <i>Address</i> type does not have an <i>id</i> field, because they are not saved into their own data structure in the server. 
-与 i Person / i 类型相反，i Address / i 类型没有 i id / i 字段，因为它们没有保存到服务器中自己的数据结构中。
+与<i>Person</i> 类型相反，i Address /<i>类型没有 i id</i> 字段，因为它们没有保存到服务器中自己的数据结构中。
 
 
 Because the objects saved in the array do not have a field <i>address</i>, the default resolver is not sufficient enough. 
-因为数组中保存的对象没有字段 i address / i，所以缺省解析程序是不够的。
+因为数组中保存的对象没有字段<i>address</i>，所以缺省解析程序是不够的。
 Let's add a resolver for the field <i>address</i> of type <i>Person</i>: 
-让我们为类型 i Person / i 的字段 i address / i 添加一个解析器:
+让我们为类型<i>Person</i> 的字段<i>address</i> 添加一个解析器:
 
 ```js
 const resolvers = {
@@ -723,18 +723,18 @@ const resolvers = {
 
 
 So every time a <i>Person</i> object is returned, the fields <i>name</i>, <i>phone</i> and <i>id</i> are returned using their default resolvers, but the field <i>address</i> is formed by using a self defined resolver. The parameter _root_ of the resolver function is the person-object, so the street and the city of the address can be taken from its fields. 
-因此，每次返回 i Person / i 对象时，都会使用默认解析器返回 i name / i、 i phone / i 和 i id / i 字段，但是 i address / i 字段是使用自定义解析器形成的。 解析器函数的参数根是人-对象，因此可以从字段中获取地址的街道和城市。
+因此，每次返回<i>Person</i> 对象时，都会使用默认解析器返回<i>name</i>、<i>phone</i> 和<i>id</i> 字段，但是<i>address</i> 字段是使用自定义解析器形成的。 解析器函数的参数根是人-对象，因此可以从字段中获取地址的街道和城市。
 
 
 The current code of the application can be found on [ Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-1), branch <i>part8-1</i>.
-当前应用程序的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-1) ，branch i part8-1 / i 上找到。
+当前应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-1) ，branch<i>part8-1</i> 上找到。
 
 ### Mutations
 突变
 
 
 Let's add a functionality for adding new persons to the phonebook. In GraphQL, all operations which cause a change are done with [mutations](https://graphql.org/learn/queries/#mutations). Mutations are described in the schema as the keys of type <i>Mutation</i>.
-让我们在电话簿中添加一个添加新用户的功能。 在 GraphQL 中，所有引起变更的操作都是通过[变异]( https://GraphQL.org/learn/queries/#mutations )来完成的。 突变在模式中被描述为 i 型突变 / i 的关键。
+让我们在电话簿中添加一个添加新用户的功能。 在 GraphQL 中，所有引起变更的操作都是通过[变异]( https://GraphQL.org/learn/queries/#mutations )来完成的。 突变在模式中被描述为<i>型突变</i> 的关键。
 
 
 The schema for a mutation for adding a new person looks as follows: 
@@ -753,7 +753,7 @@ type Mutation {
 
 
 The Mutation is given the details of the person as parameters. The parameter <i>phone</i> is the only one which is nullable. The Mutation also has a return value. The return value is type <i>Person</i>, the idea being that the details of the added person are returned if the operation is successful and if not, null. Value for the field <i>id</i> is not given as a parameter. Generating an id is better left for the server. 
-变异是以人的详细信息作为参数。 参数 i phone / i 是唯一可以为空的。 Mutation 还有一个返回值。 返回值是 i Person / i 类型，其思想是，如果操作成功，则返回所添加人员的详细信息，如果不成功，则返回 null。 字段 i id / i 的值不作为参数给出。 生成一个 id 最好留给服务器。
+变异是以人的详细信息作为参数。 参数<i>phone</i> 是唯一可以为空的。 Mutation 还有一个返回值。 返回值是<i>Person</i> 类型，其思想是，如果操作成功，则返回所添加人员的详细信息，如果不成功，则返回 null。 字段<i>id</i> 的值不作为参数给出。 生成一个 id 最好留给服务器。
 
 
 Mutations also require a resolver: 
@@ -782,7 +782,7 @@ The mutation adds the object given to it as a parameter _args_ to the array _per
 
 
 The <i>id</i> field is given a unique value using the [uuid](https://github.com/kelektiv/node-uuid#readme) library. 
-使用[ uuid ]( https://github.com/kelektiv/node-uuid#readme )库为 i id / i 字段赋予一个唯一值。
+使用[ uuid ]( https://github.com/kelektiv/node-uuid#readme )库为<i>id</i> 字段赋予一个唯一值。
 
 
 A new person can be added with the following mutation
@@ -823,7 +823,7 @@ Note, that the person is saved to the _persons_ array as
 
 
 But the response to the mutation is 
-但是对这种突变的反应是
+但是对这种突变的React是
 
 ```js
 {
@@ -843,7 +843,7 @@ But the response to the mutation is
 
 
 So the resolver of the <i>address</i> field of the <i>Person</i> type formats the response object to the right form. 
-因此，i Person / i 类型的 i address / i 字段的解析器将响应对象格式化为正确的形式。
+因此，i Person /<i>类型的 i address</i> 字段的解析器将响应对象格式化为正确的形式。
 
 ### Error handling
 错误处理
@@ -903,14 +903,14 @@ So if the name to be added already exists in the phonebook, throw _UserInputErro
 
 
 The current code of the application can be found on [ Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-2), branch <i>part8-2</i>.
-当前应用程序的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-2) ，branch i part8-2 / i 上找到。
+当前应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-2) ，branch<i>part8-2</i> 上找到。
 
 ### Enum
 # # Enum
 
 
 Let's add a possibility to filter the query returning all persons with the parameter <i>phone</i> so, that it returns only persons with a phone number
-让我们添加一种可能性来筛选返回所有带有参数 i phone / i 的人的查询，以便它只返回带有电话号码的人
+让我们添加一种可能性来筛选返回所有带有参数<i>phone</i> 的人的查询，以便它只返回带有电话号码的人
 
 ```js
 query {
@@ -954,7 +954,7 @@ type Query {
 
 
 The type <i>YesNo</i> is GraphQL [enum](https://graphql.org/learn/schema/#enumeration-types), or an enumerable, with two possible values <i>YES</i> or <i>NO</i>. In the query _allPersons_ the parameter _phone_  has the type <i>YesNo</i>, but is nullable. 
-类型 i YesNo / i 是 GraphQL [ enum ]( https://GraphQL.org/learn/schema/#enumeration-types ) ，或者可枚举，有两个可能的值 i YES / i 或 i NO / i。 在查询 allPersons 中，参数 phone 的类型为 i YesNo / i，但可为空。
+类型<i>YesNo</i> 是 GraphQL [ enum ]( https://GraphQL.org/learn/schema/#enumeration-types ) ，或者可枚举，有两个可能的值<i>YES</i> 或<i>NO</i>。 在查询 allPersons 中，参数 phone 的类型为<i>YesNo</i>，但可为空。
 
 
 The resolver changes like so:
@@ -1026,17 +1026,17 @@ Mutation: {
 
 
 The mutation finds the person to be by the field <i>name</i>.
-这个突变通过字段 i name / i 找到这个人。
+这个突变通过字段<i>name</i> 找到这个人。
 
 The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>.
-当前应用程序的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3) ，branch i part8-3 / i 上找到。
+当前应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3) ，branch<i>part8-3</i> 上找到。
 
 ### More on queries
 更多关于查询的信息
 
 
 With GraphQL it is possible to combine multiple fields of type <i>Query</i>, or "separate queries" into one query. For example the following query returns both the amount of persons in the phonebook and their names: 
-使用 GraphQL，可以将 i Query / i 类型的多个字段或“单独查询”组合到一个查询中。 例如，下面的查询返回电话簿中的人数和他们的姓名:
+使用 GraphQL，可以将<i>Query</i> 类型的多个字段或“单独查询”组合到一个查询中。 例如，下面的查询返回电话簿中的人数和他们的姓名:
 
 ```js
 query {
@@ -1087,7 +1087,7 @@ query {
 
 
 The response looks like
-这种反应看起来像是
+这种React看起来像是
 
 ```js
 {
@@ -1177,7 +1177,7 @@ Implement query _allBooks_, which returns the details of all books.
 
 
 In the end, the user should be able to do the following query:
-最后，用户应该能够进行以下查询:
+最后，用户应该能够进行如下查询:
 
 ```js
 query {
@@ -1248,7 +1248,7 @@ should return
 
 
 Modify the _allBooks_ query so, that a user can give an optional parameter <i>author</i>. The response should include only books written by that author. 
-修改 allBooks 查询，以便用户可以给出一个可选参数 i author / i。 回复中应该只包括该作者写的书。
+修改 allBooks 查询，以便用户可以给出一个可选参数<i>author</i>。 回复中应该只包括该作者写的书。
 
 For example query
 例如查询
@@ -1284,7 +1284,7 @@ should return
 8.5: 书籍的类型
 
 Modify the query _allBooks_ so that a user can give an optional parameter <i>genre</i>. The response should include only books of that genre. 
-修改查询 allBooks，以便用户可以给出一个可选参数 i genre / i。 回应应该只包括这种类型的书籍。
+修改查询 allBooks，以便用户可以给出一个可选参数<i>genre</i>。 回应应该只包括这种类型的书籍。
 
 
 For example query
@@ -1445,7 +1445,7 @@ If the correct author is found, the operation returns the edited author:
 
 
 If the author is not in the system, <i>null</i> is returned: 
-如果作者不在系统中，则返回 i null / i:
+如果作者不在系统中，则返回<i>null</i>:
 
 ```js
 {

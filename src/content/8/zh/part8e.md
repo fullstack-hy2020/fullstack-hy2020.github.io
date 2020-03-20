@@ -148,16 +148,16 @@ Along with query- and mutation types, GraphQL offers a third operation type: [su
 
 
 Subscriptions are radically different from anything we have seen in this course so far. Until now all interaction between browser and the server has been React application in the browser making HTTP-requests to the server. GraphQL queries and mutations have also been done this way. 
-到目前为止，订阅与我们在本课程中看到的任何内容都是截然不同的。 到目前为止，浏览器和服务器之间的所有交互都是在浏览器中的 React 应用程序向服务器发出 http 请求。 Graphql 查询和变异也以这种方式完成。
+到目前为止，订阅与我们在本课程中看到的任何内容都是截然不同的。 到目前为止，浏览器和服务器之间的所有交互都是在浏览器中的 React 应用向服务器发出 http 请求。 Graphql 查询和变异也以这种方式完成。
 With subscriptions the situation is the opposite. After an application has made a subscription, it starts to listen to the server. 
-订阅的情况恰恰相反。 在应用程序订阅之后，它开始侦听服务器。
+订阅的情况恰恰相反。 在应用订阅之后，它开始侦听服务器。
 When changes occur on the server, it sends a notification to all of its <i>subscribers</i>.
-当服务器上发生更改时，它向其所有 i 订阅者 / i 发送一个通知。
+当服务器上发生更改时，它向其所有<i>订阅者</i> 发送一个通知。
 
 
 
 Technically speaking the HTTP-protocol is not well suited for communication from the server to the browser, so under the hood Apollo uses [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) for server subscriber communication. 
-从技术上讲，http 协议并不适合于从服务器到浏览器的通信，因此 Apollo 在内部使用[ websocket ]( https://developer.mozilla.org/en-us/docs/web/api/websockets_api )进行服务器订户通信。
+严格来说，http 协议并不适合于从服务器到浏览器的通信，因此 Apollo 在内部使用[ websocket ]( https://developer.mozilla.org/en-us/docs/web/api/websockets_api )进行服务器订户通信。
 
 ### Subscriptions on the server
 # # # 服务器上的订阅
@@ -223,7 +223,7 @@ const pubsub = new PubSub() // highlight-line
 ```
 
 With subscriptions, the communication happens using the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) principle utilizing an object using a [PubSub](https://www.apollographql.com/docs/graphql-subscriptions/setup/#setup) interface. Adding a new person <i>publishes</i> a notification about the operation to all subscribers with PubSub's method _publish_.
-对于订阅，通信是使用[发布-订阅]( https://en.wikipedia.org/wiki/publish%e2%80%93subscribe_pattern )原则进行的，使用的对象是[ PubSub ]( https://www.apollographql.com/docs/graphql-subscriptions/setup/#setup ) 添加一个新用户 i 通过 PubSub 的方法 p 向所有订阅者发布 / i 关于操作的通知
+对于订阅，通信是使用[发布-订阅]( https://en.wikipedia.org/wiki/publish%e2%80%93subscribe_pattern )原则进行的，使用的对象是[ PubSub ]( https://www.apollographql.com/docs/graphql-subscriptions/setup/#setup ) 添加一个新用户<i>通过 PubSub 的方法 p 向所有订阅者发布</i> 关于操作的通知
 
 
 _personAdded_ subscriptions resolver registers all of the subscribers by returning them a suitable [iterator object](https://www.apollographql.com/docs/graphql-subscriptions/subscriptions-to-schema/).
@@ -231,7 +231,7 @@ Personadded 订阅解析器通过返回一个合适的[迭代器对象]来注册
 
 
 Let's do the following changes to the code which starts the server
-让我们对启动服务器的代码执行以下更改
+让我们对启动服务器的代码执行如下更改
 ```js
 // ...
 
@@ -267,14 +267,14 @@ When you press "play" on a subscription, the playground waits for notifications 
 
 
 The backend code can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-6), branch <i>part8-6</i>.
-后端代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-6) ，branch i part8-6 / i 上找到。
+后端代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-6) ，branch<i>part8-6</i> 上找到。
 
 ### Subscriptions on the client
 客户端的订阅
 
 
 In order to use subscriptions in our React application, we have to do some changes, especially on its [configuration]((https://www.apollographql.com/docs/react/v3.0-beta/data/subscriptions/).
-为了在我们的 React 应用程序中使用订阅，我们必须做一些更改，特别是在它的[配置](( https://www.apollographql.com/docs/React/v3.0-beta/data/subscriptions/ )上。
+为了在我们的 React 应用中使用订阅，我们必须做一些更改，特别是在它的[配置](( https://www.apollographql.com/docs/React/v3.0-beta/data/subscriptions/ )上。
 The configuration in <i>index.js</i> has to be modified like so: 
 I index.js / i 中的配置必须修改如下:
 
@@ -346,7 +346,7 @@ npm install --save @apollo/link-ws subscriptions-transport-ws
 ```
 
 The new configuration is due to the fact that the application must have an HTTP connection as well as a WebSocket connection to the GraphQL server.
-新的配置是由于应用程序必须有一个 HTTP 连接以及一个到 GraphQL 服务器的 WebSocket 连接。
+新的配置是由于应用必须有一个 HTTP 连接以及一个到 GraphQL 服务器的 WebSocket 连接。
 
 ```js
 const wsLink = new WebSocketLink({
@@ -406,10 +406,10 @@ When a new person is added, the server sends a notification to the client, and t
 添加新人时，服务器向客户端发送通知，并调用 onSubscriptionData 属性中定义的 callback-function，并将新人的详细信息作为参数提供。
 
 Let's extend our solution so that when the details of a new person are received, the person is added to the Apollo cache, so it is rendered to the screen immediately. 
-让我们扩展我们的解决方案，这样当接收到一个新用户的详细信息时，该用户将被添加到 Apollo 缓存中，因此它将立即呈现到屏幕上。
+让我们扩展我们的解决方案，这样当接收到一个新用户的详细信息时，该用户将被添加到 Apollo 缓存中，因此它将立即渲染到屏幕上。
 
 However, we have to keep in mind that when our application creates a new person, it should not be added to the cache twice: 
-然而，我们必须记住，当我们的应用程序创建一个新的用户时，它不应该被添加到缓存中两次:
+然而，我们必须记住，当我们的应用创建一个新的用户时，它不应该被添加到缓存中两次:
 
 
 ```js
@@ -462,13 +462,13 @@ const PersonForm = ({ setError, updateCacheWith }) => { // highlight-line
 ```
 
 The final code of the client can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-9), branch <i>part8-9</i>.
-客户机的最终代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-9) ，branch i part8-9 / i 上找到。
+客户机的最终代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-9) ，branch<i>part8-9</i> 上找到。
 
 ### n+1-problem
 # # n + 1-问题
 
 Let's add some things to the backend. Let's modify the schema so that a <i>Person</i> type has a _friendOf_ field, which tells whose friends list the person is on. 
-让我们在后端添加一些东西。 让我们修改模式，使 i Person / i 类型有一个 friendOf 字段，该字段告诉该人所在的好友列表。
+让我们在后端添加一些东西。 让我们修改模式，使<i>Person</i> 类型有一个 friendOf 字段，该字段告诉该人所在的好友列表。
 
 ```js
 type Person {
@@ -481,7 +481,7 @@ type Person {
 ```
 
 The application should support the following query: 
-应用程序应该支持以下查询:
+应用应该支持如下查询:
 
 ```js
 query {
@@ -494,7 +494,7 @@ query {
 ```
 
 Because _friendOf_ is not a field of <i>Person</i>-objects on the database, we have to create a resolver for it, which can solve this issue. Let's first create a resolver that returns an empty list: 
-因为 friendOf 不是数据库中的 i Person / i-objects 字段，所以我们必须为它创建一个解决程序，它可以解决这个问题。 让我们首先创建一个返回空列表的解析器:
+因为 friendOf 不是数据库中的<i>Person</i>-objects 字段，所以我们必须为它创建一个解决程序，它可以解决这个问题。 让我们首先创建一个返回空列表的解析器:
 
 ```js
 Person: {
@@ -535,7 +535,7 @@ The parameter _root_ is the person object which friends list is being created, s
 
 
 Now the application works. 
-现在这个应用程序可以工作了。
+现在这个应用可以工作了。
 
 
 We can immediately do even more complicated queries. It is possible for example to find the friends of all users:
@@ -647,7 +647,7 @@ After the change we would not need a separate resolver for the _friendOf_ field.
 
 
 The allPersons query <i>does not cause</i> an n+1 problem, if we only  fetch the name and the phone number: 
-如果我们只获取姓名和电话号码，allPersons 查询 i 不会导致 / i 出现 n + 1问题:
+如果我们只获取姓名和电话号码，allPersons 查询<i>不会导致</i> 出现 n + 1问题:
 
 ```js
 query {
@@ -681,7 +681,7 @@ More about using DataLoader with Apollo server [here](https://www.robinwieruch.d
 
 
 The application we created in this part is not optimally structured: the schema, queries and the mutations should at least be moved outside of the application code. Examples for better structuring of GraphQL applications can be found on the internet. For example, for the server
-我们在这一部分中创建的应用程序没有优化结构: 模式、查询和变异至少应该移到应用程序代码之外。 更好地构造 GraphQL 应用程序的示例可以在互联网上找到。 例如，对于服务器
+我们在这一部分中创建的应用没有优化结构: 模式、查询和变异至少应该移到应用代码之外。 更好地构造 GraphQL 应用的示例可以在互联网上找到。 例如，对于服务器
 [here](https://blog.apollographql.com/modularizing-your-graphql-schema-code-d7f71d5ed5f2) and the client [here](https://medium.com/@peterpme/thoughts-on-structuring-your-apollo-queries-mutations-939ba4746cd8).
 [这里]( https://blog.apollographql.com/modularizing-your-graphql-schema-code-d7f71d5ed5f2)和客户[这里]( https://medium.com/@peterpme/thoughts-on-structuring-your-apollo-queries-mutations-939ba4746cd8)。
 
@@ -706,22 +706,22 @@ Do a backend implementation for subscription _bookAdded_, which returns the deta
 为订阅 bookadd 做一个后端实现，它将所有新书的详细信息返回给订阅者。
 
 #### 8.24: Subscriptions - client, part 1
-8.24: 订阅-客户端，第一部分
+8.24: 订阅-客户端，第一章节
 
 Start using subscriptions in the client, and subscribe to _bookAdded_. When new books are added, notify the user. Any method works. For example, you can use the [window.alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) function. 
 开始在客户端使用订阅，并订阅 bookAdded。 添加新书时，通知用户。 任何方法都有效。 例如，您可以使用[ window.alert ]( https://developer.mozilla.org/en-us/docs/web/api/window/alert )函数。
 
 #### 8.25: Subscriptions - client, part 2
-8.25: 订阅-客户端，第二部分
+8.25: 订阅-客户端，第二章节
 
 Keep the application's view updated when the server notifies about new books. 
-当服务器通知有关新书时，保持应用程序视图更新。
+当服务器通知有关新书时，保持应用视图更新。
 
 #### 8.26: n+1
 8.26: n + 1
 
 Solve the n+1 problem of the following query using any method you like
-使用任何您喜欢的方法解决以下查询的 n + 1问题
+使用任何您喜欢的方法解决如下查询的 n + 1问题
 
 ```js
 query {

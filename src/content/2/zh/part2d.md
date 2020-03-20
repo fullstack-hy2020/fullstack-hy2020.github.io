@@ -10,7 +10,7 @@ lang: zh
 
 
 When creating notes in our application, we would naturally want to store them in some backend server. The [json-server](https://github.com/typicode/json-server) package claims to be a so-called REST or RESTful API in its documentation:
-在应用程序中创建笔记时，我们自然希望将它们存储在某个后端服务器中。 在文档中，[ json-server ]( https://github.com/typicode/json-server 服务器)包声称是所谓的 REST 或 RESTful API:
+在应用中创建笔记时，我们自然希望将它们存储在某个后端服务器中。 在文档中，[ json-server ]( https://github.com/typicode/json-server 服务器)包声称是所谓的 REST 或 RESTful API:
 
 > <i>Get a full fake REST API with zero coding in less than 30 seconds (seriously)</i>
 I 在不到30秒(严肃地) / i 的情况下得到一个完整的假 REST API，其中没有任何代码
@@ -25,22 +25,22 @@ We will take a closer look at REST in the [next part](/en/part3) of the course, 
 休息
 
 In REST terminology, we refer to individual data objects, such as the notes in our application, as <i>resources</i>. Every resource has a unique address associated with it - its URL. According to a general convention used by json-server, we would be able to locate an individual note at the resource URL <i>notes/3</i>, where 3 is the id of the resource. The <i>notes</i> url, on the other hand, would point to a resource collection containing all the notes.
-在 REST 术语中，我们将单个数据对象(如应用程序中的注释)称为 i resources / i。 每个资源都有一个唯一的地址——它的 URL。 根据 json-server 使用的一般约定，我们将能够在资源 URL i notes / 3 / i 上定位单个注释，其中3是资源的 id。 另一方面，i notes / i url 指向包含所有注释的资源集合。
+在 REST 术语中，我们将单个数据对象(如应用中的注释)称为<i>resources</i>。 每个资源都有一个唯一的地址——它的 URL。 根据 json-server 使用的一般约定，我们将能够在资源 URL<i>notes / 3</i> 上定位单个注释，其中3是资源的 id。 另一方面，i notes / i url 指向包含所有注释的资源集合。
 
 Resources are fetched from the server with HTTP GET requests. For instance, an HTTP GET request to the URL <i>notes/3</i> will return the note that has the id number 3. An HTTP GET request to the <i>notes</i> URL would return a list of all notes.
-通过 HTTP GET 请求从服务器获取资源。 例如，对 URL i notes / 3 / i 的 HTTP GET 请求将返回 id 为3的注释。 对 i notes / i URL 的 HTTP GET 请求将返回所有备注的列表。
+通过 HTTP GET 请求从服务器获取资源。 例如，对 URL<i>notes / 3</i> 的 HTTP GET 请求将返回 id 为3的注释。 对<i>notes</i> URL 的 HTTP GET 请求将返回所有备注的列表。
 
 Creating a new resource for storing a note is done by making an HTTP POST request to the <i>notes</i> URL according to the REST convention that the json-server adheres to. The data for the new note resource is sent in the <i>body</i> of the request.
-根据 json 服务器遵守的 REST 约定，通过向 i notes / i URL 发出 HTTP POST 请求来创建用于存储便笺的新资源。 新笔记资源的数据在请求的 i body / i 中发送。
+根据 json 服务器遵守的 REST 约定，通过向<i>notes</i> URL 发出 HTTP POST 请求来创建用于存储便笺的新资源。 新笔记资源的数据在请求的<i>body</i> 中发送。
 
 json-server requires all data to be sent in JSON format. What this means in practice is that the data must be a correctly formatted string, and that the request must contain the <i>Content-Type</i> request header with the value <i>application/json</i>.
-Json-server 要求以 JSON 格式发送所有数据。 实际上，这意味着数据必须是格式正确的字符串，并且请求必须包含值为 i application / json / i 的 i Content-Type / i 请求头。
+Json-server 要求以 JSON 格式发送所有数据。 实际上，这意味着数据必须是格式正确的字符串，并且请求必须包含值为<i>application / json</i> 的<i>Content-Type</i> 请求头。
 
 ### Sending Data to the Server
 # # # 发送数据到服务器
 
 Let's make the following changes to the event handler responsible for creating a new note:
-让我们对负责创建新笔记的事件处理程序进行以下更改:
+让我们对负责创建新笔记的事件处理程序进行如下更改:
 
 ```js
 addNote = event => {
@@ -63,22 +63,22 @@ addNote = event => {
 
 
 We create a new object for the note but omit the <i>id</i> property, since it's better to let the server generate ids for our resources!
-我们为笔记创建了一个新对象，但忽略了 i id / i 属性，因为最好让服务器为我们的资源生成 id！
+我们为笔记创建了一个新对象，但忽略了<i>id</i> 属性，因为最好让服务器为我们的资源生成 id！
 
 The object is sent to the server using the axios <em>post</em> method. The registered event handler logs the response that is sent back from the server to the console.
 使用 axios em post / em 方法将对象发送到服务器。 已注册的事件处理程序记录从服务器发送回控制台的响应。
 
 When we try to create a new note, the following output pops up in console:
-当我们尝试创建一个新的笔记时，控制台会弹出以下输出:
+当我们尝试创建一个新的笔记时，控制台会弹出如下输出:
 
 ![](../../images/2/20e.png)
 
 
 The newly created note resource is stored in the value of the <i>data</i> property of the _response_ object.
-新创建的笔记资源存储在响应对象的 i data / i 属性的值中。
+新创建的笔记资源存储在响应对象的<i>data</i> 属性的值中。
 
 Sometimes it can be useful to inspect HTTP requests in the <i>Network</i> tab of Chrome developer tools, which was used heavily at the beginning of [part 0](/en/part0/fundamentals_of_web_apps#http-get):
-有时在 Chrome 开发工具的 i Network / i 选项卡中检查 HTTP 请求是很有用的，这个选项卡在[ part 0](/ en / part0 / web 应用程序基础 # HTTP-get)开始时被大量使用:
+有时在 Chrome 开发工具的<i>Network</i> 选项卡中检查 HTTP 请求是很有用的，这个选项卡在[ part 0](/ en / part0 / web 应用基础 # HTTP-get)开始时被大量使用:
 
 ![](../../images/2/21e.png)
 
@@ -88,10 +88,10 @@ We can use the inspector to check that the headers sent in the POST request are 
 我们可以使用检查器来检查 POST 请求中发送的头文件是否符合我们的预期，以及它们的值是否正确。
 
 Since the data we sent in the POST request was a JavaScript object, axios automatically knew to set the appropriate <i>application/json</i> value for the <i>Content-Type</i> header.
-由于我们在 POST 请求中发送的数据是一个 JavaScript 对象，axios 自动知道为 i Content-Type / i 头设置适当的 i application / json / i 值。
+由于我们在 POST 请求中发送的数据是一个 JavaScript 对象，axios 自动知道为<i>Content-Type</i> 头设置适当的<i>application / json</i> 值。
 
 The new note is not rendered to the screen yet. This is because we did not update the state of the <i>App</i> component when we created the new note. Let's fix this:
-新的音符还没有呈现到屏幕上。 这是因为我们在创建新笔记时没有更新 i App / i 组件的状态。 让我们来解决这个问题:
+新的音符还没有渲染到屏幕上。 这是因为我们在创建新笔记时没有更新<i>App</i> 组件的状态。 让我们来解决这个问题:
 
 ```js
 addNote = event => {
@@ -114,11 +114,11 @@ addNote = event => {
 ```
 
 The new note returned by the backend server is added to the list of notes in our application's state in the customary way of using the <em>setNotes</em> function and then resetting the note creation form. An [important detail](/en/part1/a_more_complex_state_debugging_react_apps#handling-arrays) to remember is that the <em>concat</em> method does not change the component's original state, but instead creates a new copy of the list.
-后端服务器返回的新便笺将按照使用 em setNotes / em 函数然后重置便笺创建表单的惯常方式添加到应用程序状态的便笺列表中。 需要记住的一个[重要细节](/ en / part1 / a 更复杂的状态调试反应 apps # handling-array)是 em concat / em 方法不会改变组件的原始状态，而是创建列表的新副本。
+后端服务器返回的新便笺将按照使用 em setNotes / em 函数然后重置便笺创建表单的惯常方式添加到应用状态的便笺列表中。 需要记住的一个[重要细节](/ en / part1 / a 更复杂的状态调试React apps # handling-array)是 em concat / em 方法不会改变组件的原始状态，而是创建列表的新副本。
 
 
 Once the data returned by the server starts to have an effect on the behavior of our web applications, we are immediately faced with a whole new set of challenges arising from, for instance, the asynchronicity of communication. This necessitates new debugging strategies, console logging and other means of debugging become increasingly more important, and we must also develop a sufficient understanding of the principles of both the JavaScript runtime and React components. Guessing won't be enough.
-一旦服务器返回的数据开始影响我们 web 应用程序的行为，我们就会立即面临一系列全新的挑战，例如，通信的异步性。 这就需要新的调试策略，控制台日志和其他调试手段变得越来越重要，我们还必须对 JavaScript 运行时和 React 组件的原理有充分的理解。 光猜是不够的。
+一旦服务器返回的数据开始影响我们 web 应用的行为，我们就会立即面临一系列全新的挑战，例如，通信的异步性。 这就需要新的调试策略，控制台日志和其他调试手段变得越来越重要，我们还必须对 JavaScript 运行时和 React 组件的原理有充分的理解。 光猜是不够的。
 
 It's beneficial to inspect the state of the backend server e.g. through the browser:
 通过浏览器检查后端服务器的状态是有益的:
@@ -131,14 +131,14 @@ This makes it possible to verify that all the data we intended to send was actua
 这样就可以验证我们打算发送的所有数据是否实际上已经被服务器接收。
 
 In the next part of the course we will learn to implement our own logic in the backend. We will then take a closer look at tools like [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop) that help us to debug our server applications. However, inspecting the state of the json-server through the browser is sufficient for our current needs.
-在本课程的下一部分中，我们将学习如何在后端实现我们自己的逻辑。 然后，我们将进一步研究一些工具，如[邮递员]( https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop ) ，这些工具可以帮助我们调试服务器应用程序。 但是，通过浏览器检查 json-server 的状态就足以满足我们当前的需求。
+在本课程的下一部分中，我们将学习如何在后端实现我们自己的逻辑。 然后，我们将进一步研究一些工具，如[邮递员]( https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop ) ，这些工具可以帮助我们调试服务器应用。 但是，通过浏览器检查 json-server 的状态就足以满足我们当前的需求。
 
 > **NB:** In the current version of our application the browser adds the creation date property to the note. Since the clock of the machine running the browser can be wrongly configured, it's much wiser to let the backend server generate this timestamp for us. This is in fact what we will do in the next part of the course.
-注意: 在当前版本的应用程序中，浏览器在注释中添加了创建日期属性。 由于运行浏览器的机器的时钟可以被错误地配置，所以让后端服务器为我们生成这个时间戳要明智得多。 这实际上就是我们在下一部分课程中要做的。
+注意: 在当前版本的应用中，浏览器在注释中添加了创建日期属性。 由于运行浏览器的机器的时钟可以被错误地配置，所以让后端服务器为我们生成这个时间戳要明智得多。 这实际上就是我们在下一部分课程中要做的。
 
 
 The code for the current state of our application can be found in the  <i>part2-5</i> branch on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-5).
-我们应用程序当前状态的代码可以在[ github ]( https://github.com/fullstack-hy2020/part2-notes/tree/part2-5)上的 i part2-5 / i 分支中找到。
+我们应用当前状态的代码可以在[ github ]( https://github.com/fullstack-hy2020/part2-notes/tree/part2-5)上的<i>part2-5</i> 分支中找到。
 
 
 ### Changing the importance of notes
@@ -148,7 +148,7 @@ Let's add a button to every note that can be used for toggling its importance.
 让我们为每个音符添加一个按钮，用于切换它的重要性。
 
 We make the following changes to the <i>Note</i> component:
-我们对 i Note / i 组件进行以下更改:
+我们对<i>Note</i> 组件进行如下更改:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -169,7 +169,7 @@ We add a button to the component and assign its event handler as the <em>toggleI
 
 
 The <i>App</i> component defines an initial version of the <em>toggleImportanceOf</em> event handler function and passes it to every <i>Note</i> component:
-I App / i 组件定义了 em toggleimportance of / em 事件处理函数的初始版本，并将其传递给每个 i Note / i 组件:
+I App /<i>组件定义了 em toggleimportance of / em 事件处理函数的初始版本，并将其传递给每个 i Note</i> 组件:
 
 ```js
 const App = () => {
@@ -211,7 +211,7 @@ const App = () => {
 ```
 
 Notice how every note receives its own <i>unique</i> event handler function, since the <i>id</i> of every note is unique.
-注意每个音符是如何接收它自己唯一的 / i 事件处理函数的，因为每个音符的 i id / i 是唯一的。
+注意每个音符是如何接收它自己唯一的 /<i>事件处理函数的，因为每个音符的 i id</i> 是唯一的。
 
 
 E.g. if <i>note.id</i> is 3, the event handler function returned by _toggleImportance(note.id)_ will be:
@@ -268,7 +268,7 @@ Array [ find ]( https://developer.mozilla.org/en-us/docs/web/javascript/referenc
 
 
 After this we create a <i>new object</i> that is an exact copy of the old note, apart from the important property. 
-在此之后，我们创建一个 i new 对象 / i，它完全是旧注释的副本，除了重要属性。
+在此之后，我们创建一个<i>new 对象</i>，它完全是旧注释的副本，除了重要属性。
 
 The code for creating the new object that uses the [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax 
 使用[对象扩展]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/operators/spread_syntax )语法创建新对象的代码
@@ -342,7 +342,7 @@ The <i>App</i> component has become somewhat bloated after adding the code for c
 
 
 Let's create a <i>src/services</i> directory and add a file there called <i>notes.js</i>:
-让我们创建一个 i src / services / i 目录，并添加一个名为 i notes.js / i 的文件:
+让我们创建一个<i>src / services</i> 目录，并添加一个名为<i>notes.js</i> 的文件:
 
 ```js
 import axios from 'axios'
@@ -369,7 +369,7 @@ export default {
 
 
 The module returns an object that has three functions (<i>getAll</i>, <i>create</i>, and <i>update</i>) as its properties that deal with notes. The functions directly return the promises returned by the axios methods.
-该模块返回一个具有三个函数(i getAll / i、 i create / i 和 i update / i)的对象作为其处理注释的属性。 函数直接返回 axios 方法返回的允诺。
+该模块返回一个具有三个函数(i getAll / i、<i>create</i> 和<i>update</i>)的对象作为其处理注释的属性。 函数直接返回 axios 方法返回的允诺。
 
 The <i>App</i> component uses <em>import</em> to get access to the module:
 I App / i 组件使用 em import / em 访问模块:
@@ -436,7 +436,7 @@ export default App
 
 
 We could take our implementation a step further. When the <i>App</i> component uses the functions, it receives an object that contains the entire response for the HTTP request:
-我们可以将我们的实现更进一步。 当 i App / i 组件使用这些函数时，它接收到一个包含 HTTP 请求的整个响应的对象:
+我们可以将我们的实现更进一步。 当<i>App</i> 组件使用这些函数时，它接收到一个包含 HTTP 请求的整个响应的对象:
 
 ```js
 noteService
@@ -448,7 +448,7 @@ noteService
 
 
 The <i>App</i> component only uses the <i>response.data</i> property of the response object.
-I App / i 组件只使用响应对象的 i response.data / i 属性。
+I App /<i>组件只使用响应对象的 i response.data</i> 属性。
 
 
 The module would be much nicer to use if, instead of the entire HTTP response, we would only get the response data. Using the module would then look like this:
@@ -523,11 +523,11 @@ The modified <em>getAll</em> function still returns a promise, as the <em>then</
 
 
 After defining the parameter of the <em>then</em> method to directly return <i>response.data</i>, we have gotten the <em>getAll</em> function to work like we wanted it to. When the HTTP request is successful, the promise returns the data sent back in the response from the backend.
-在定义了 em then / em 方法的参数以直接返回 i response.data / i 之后，我们已经让 em getAll / em 函数按照我们希望的方式工作。 当 HTTP 请求成功时，承诺将返回从后端响应中发送回来的数据。
+在定义了 em then / em 方法的参数以直接返回<i>response.data</i> 之后，我们已经让 em getAll / em 函数按照我们希望的方式工作。 当 HTTP 请求成功时，承诺将返回从后端响应中发送回来的数据。
 
 
 We have to update the <i>App</i> component to work with the changes made to our module.  We have to fix the callback functions given as parameters to the <em>noteService</em> object's methods, so that they use the directly returned response data:
-我们必须更新 i App / i 组件来处理对模块所做的更改。 我们必须修复作为参数给予 em noteService / em 对象方法的回调函数，以便它们使用直接返回的响应数据:
+我们必须更新<i>App</i> 组件来处理对模块所做的更改。 我们必须修复作为参数给予 em noteService / em 对象方法的回调函数，以便它们使用直接返回的响应数据:
 
 ```js
 const App = () => {
@@ -596,7 +596,7 @@ Promises are central to modern JavaScript development and it is highly recommend
 
 
 The module defining note related services currently exports an object with the properties <i>getAll</i>, <i>create</i> and <i>update</i> that are assigned to functions for handling notes.
-定义注释相关服务的模块目前导出一个具有属性 i getAll / i、 i create / i 和 i update / i 的对象，这些属性分配给处理注释的函数。
+定义注释相关服务的模块目前导出一个具有属性<i>getAll</i>、<i>create</i> 和<i>update</i> 的对象，这些属性分配给处理注释的函数。
 
 
 The module definition was:
@@ -642,7 +642,7 @@ The module exports the following, rather peculiar looking, object:
 
 
 The labels to the left of the semi-colon in the object definition are the <i>keys</i> of the object, whereas the ones to the right of it are <i>variables</i> that are defined inside of the module.
-在对象定义中，分号左侧的标签是对象的 i 键 / i，而它右侧的标签是在模块内部定义的 i variables / i。
+在对象定义中，分号左侧的标签是对象的<i>键</i>，而它右侧的标签是在模块内部定义的<i>variables</i>。
 
 
 Since the names of the keys and the assigned variables are the same, we can write the object definition with more compact syntax:
@@ -658,7 +658,7 @@ Since the names of the keys and the assigned variables are the same, we can writ
 
 
 As a result the module definition gets simplified into the following form:
-因此，模块定义被简化为以下形式:
+因此，模块定义被简化为如下形式:
 
 ```js
 import axios from 'axios'
@@ -707,7 +707,7 @@ const person = {
 ```
 
 However, since both the property fields and the variable names in the object are the same, it's enough to simply write the following in ES6 JavaScript: 
-然而，由于对象中的属性字段和变量名称都是相同的，只需在 ES6 JavaScript 中写入以下内容就足够了:
+然而，由于对象中的属性字段和变量名称都是相同的，只需在 ES6 JavaScript 中写入如下内容就足够了:
 
 ```js 
 const person = { name, age }
@@ -715,7 +715,7 @@ const person = { name, age }
 
 
 The result is identical for both expressions. They both create an object with a <i>name</i> property with the value <i>Leevi</i> and an <i>age</i> property with the value <i>0</i>.
-两个表达式的结果是相同的。 它们都创建了一个值为 i Leevi / i 的 i name / i 属性和值为 i 0 / i 的 i age / i 属性的对象。
+两个表达式的结果是相同的。 它们都创建了一个值为<i>Leevi</i> 的<i>name</i> 属性和值为<i>0</i> 的<i>age</i> 属性的对象。
 
 
 ### Promises and errors
@@ -723,7 +723,7 @@ The result is identical for both expressions. They both create an object with a 
 
 
 If our application allowed users to delete notes, we could end up in a situation where a user tries to change the importance of a note that has already been deleted from the system.
-如果我们的应用程序允许用户删除备注，那么我们可能会出现这样的情况: 用户试图更改已经从系统中删除的备注的重要性。
+如果我们的应用允许用户删除备注，那么我们可能会出现这样的情况: 用户试图更改已经从系统中删除的备注的重要性。
 
 
 Let's simulate this situation by making the <em>getAll</em> function of the note service return a "hardcoded" note that does not actually exist in the backend server:
@@ -743,17 +743,17 @@ const getAll = () => {
 ```
 
 When we try to change the importance of the hardcoded note, we see the following error message in the console. The error says that the backend server responded to our HTTP PUT request with a status code 404 <i>not found</i>.
-当我们试图更改硬编码说明的重要性时，我们在控制台中看到以下错误消息。 错误说明后端服务器用状态码404 i not found / i 响应了我们的 HTTP PUT 请求。
+当我们试图更改硬编码说明的重要性时，我们在控制台中看到如下错误消息。 错误说明后端服务器用状态码404<i>not found</i> 响应了我们的 HTTP PUT 请求。
 
 ![](../../images/2/23e.png)
 
 
 The application should be able to handle these types of error situations gracefully. Users won't be able to tell that an error has actually occurred unless they happen to have their console open. The only way the error can be seen  in the application is that clicking the button has no effect on the importance of the note.
-应用程序应该能够很好地处理这些类型的错误情况。 除非用户碰巧打开了自己的控制台，否则他们无法判断错误确实发生了。 在应用程序中可以看到错误的唯一方式是单击按钮对注释的重要性没有影响。
+应用应该能够很好地处理这些类型的错误情况。 除非用户碰巧打开了自己的控制台，否则他们无法判断错误确实发生了。 在应用中可以看到错误的唯一方式是单击按钮对注释的重要性没有影响。
 
 
 We had [previously](/en/part2/getting_data_from_server#axios-and-promises) mentioned that a promise can be in one of three different states. When an HTTP request fails, the associated promise is <i>rejected</i>. Our current code does not handle this rejection in any way.
-我们[前面](/ en / part2 / getting data from server # axios-and-promises)提到，一个承诺可以处于三种不同的状态之一。 当 HTTP 请求失败时，相关的承诺是 i rejected / i。 我们当前的代码没有以任何方式处理这种拒绝。
+我们[前面](/ en / part2 / getting data from server # axios-and-promises)提到，一个承诺可以处于三种不同的状态之一。 当 HTTP 请求失败时，相关的承诺是<i>rejected</i>。 我们当前的代码没有以任何方式处理这种拒绝。
 
 
 The rejection of a promise is [handled](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) by providing the <em>then</em> method with a second callback function, which is called in the situation where the promise is rejected.
@@ -788,7 +788,7 @@ Em catch / em 方法通常是通过将其置于承诺链的更深处来使用的
 
 
 When our application makes an HTTP request, we are in fact creating a [promise chain](https://javascript.info/promise-chaining):
-当我们的应用程序发出一个 HTTP 请求时，我们实际上是在创建一个[承诺链]( https://javascript.info/promise-chaining ) :
+当我们的应用发出一个 HTTP 请求时，我们实际上是在创建一个[承诺链]( https://javascript.info/promise-chaining ) :
 
 ```js
 axios
@@ -801,7 +801,7 @@ axios
 
 
 The <em>catch</em> method can be used to define a handler function at the end of a promise chain, which is called once any promise in the chain throws an error and the promise becomes <i>rejected</i>. 
-Em catch / em 方法可用于在承诺链的末尾定义一个处理程序函数，一旦承诺链中的任何承诺抛出错误，承诺就变成 i rejected / i，就调用该函数。
+Em catch / em 方法可用于在承诺链的末尾定义一个处理程序函数，一旦承诺链中的任何承诺抛出错误，承诺就变成<i>rejected</i>，就调用该函数。
 
 ```js
 axios
@@ -817,7 +817,7 @@ axios
 
 
 Let's use this feature and register an error handler in the <i>App</i> component:
-让我们使用这个特性并在 i App / i 组件中注册一个错误处理程序:
+让我们使用这个特性并在<i>App</i> 组件中注册一个错误处理程序:
 
 ```js
 const toggleImportanceOf = id => {
@@ -845,17 +845,17 @@ The error message is displayed to the user with the trusty old [alert](https://d
 
 
 Removing an already deleted note from the application's state is done with the array [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method, which returns a new array comprising only of the items from the list for which the function that was passed as a parameter returns true for:
-从应用程序的状态中删除已经删除的注释是通过 array [ filter ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/filter )方法完成的，该方法返回一个新的数组，其中只包含列表中的项目，作为参数传递的函数返回 true 用于:
+从应用的状态中删除已经删除的注释是通过 array [ filter ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/filter )方法完成的，该方法返回一个新的数组，其中只包含列表中的项目，作为参数传递的函数返回 true 用于:
 
 ```js
 notes.filter(n => n.id !== id)
 ```
 
 It's probably not a good idea to use alert in more serious React applications. We will soon learn a more advanced way of displaying messages and notifications to users. There are situations, however, where a simple, battle-tested method like <em>alert</em> can function as a starting point. A more advanced method could always be added in later, given that there's time and energy for it.
-在更严肃的 React 应用程序中使用警报可能不是一个好主意。 我们很快就会学到一种更先进的向用户显示消息和通知的方式。 然而，在某些情况下，像 em alert / em 这样简单的、经过实战检验的方法可以作为一个起点。 如果有时间和精力的话，可以在以后添加一个更高级的方法。
+在更严肃的 React 应用中使用警报可能不是一个好主意。 我们很快就会学到一种更先进的向用户显示消息和通知的方式。 然而，在某些情况下，像 em alert / em 这样简单的、经过实战检验的方法可以作为一个起点。 如果有时间和精力的话，可以在以后添加一个更高级的方法。
 
 The code for the current state of our application can be found in the  <i>part2-6</i> branch on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-6).
-我们应用程序当前状态的代码可以在[ github ]( https://github.com/fullstack-hy2020/part2-notes/tree/part2-6)上的 i part2-6 / i 分支中找到。
+我们应用当前状态的代码可以在[ github ]( https://github.com/fullstack-hy2020/part2-notes/tree/part2-6)上的<i>part2-6</i> 分支中找到。
 
 </div>
 
@@ -870,7 +870,7 @@ The code for the current state of our application can be found in the  <i>part2-
 H42.15: 电话簿 step7 / h4
 
 Let's return to our phonebook application.
-让我们回到我们的电话簿应用程序。
+让我们回到我们的电话簿应用。
 
 Currently the numbers that are added to the phonebook are not saved to a backend server. Fix this situation.
 目前，添加到电话簿中的号码没有保存到后端服务器中。
@@ -892,7 +892,7 @@ Make it possible for users to delete entries from the phonebook. The deletion ca
 
 
 The associated resource for a person in the backend can be deleted by making an HTTP DELETE request to the resource's URL. If we are deleting e.g. a person who has the <i>id</i> 2, we would have to make an HTTP DELETE request to the URL <i>localhost:3001/persons/2</i>. No data is sent with the request.
-通过对资源的 URL 发出 HTTP DELETE 请求，可以删除后端中人员的关联资源。 例如，如果我们要删除一个拥有 i id / i 2的人，我们必须向 URL i localhost: 3001 / persons / 2 / i 发出 HTTP DELETE 请求。 请求没有发送任何数据。
+通过对资源的 URL 发出 HTTP DELETE 请求，可以删除后端中人员的关联资源。 例如，如果我们要删除一个拥有<i>id</i> 2的人，我们必须向 URL<i>localhost: 3001 / persons / 2</i> 发出 HTTP DELETE 请求。 请求没有发送任何数据。
 
 You can make an HTTP DELETE request with the [axios](https://github.com/axios/axios) library in the same way that we make all of the other requests.
 您可以使用[ axios ]( https://github.com/axios/axios )库发出 HTTP DELETE 请求，就像我们发出所有其他请求一样。
@@ -914,7 +914,7 @@ Change the functionality so that if a number is added to an already existing use
 更改功能，以便如果一个数字被添加到一个已经存在的用户，新的数字将取代旧的数字。 建议使用 HTTP PUT 方法更新电话号码。
 
 If the person's information is already in the phonebook, the application can confirm the action from the user:
-如果用户的信息已经在电话簿中，应用程序可以确认用户的操作:
+如果用户的信息已经在电话簿中，应用可以确认用户的操作:
 
 ![](../../images/teht/16e.png)
 

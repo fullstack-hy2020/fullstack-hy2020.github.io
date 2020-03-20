@@ -10,7 +10,7 @@ lang: zh
 
 
 We will now add user management to our application, but let's first start using a database for storing data.
-现在我们将向应用程序添加用户管理，但是首先让我们使用一个数据库来存储数据。
+现在我们将向应用添加用户管理，但是首先让我们使用一个数据库来存储数据。
 
 ### Mongoose and Apollo
 猫鼬和阿波罗
@@ -25,7 +25,7 @@ npm install mongoose mongoose-unique-validator --save
 
 
 We will imitate what we did in parts [3](/en/part3/saving_data_to_mongo_db) and [4](/en/part4/structure_of_backend_application_introduction_to_testing).
-我们将模仿我们在第[3]部分(/ en / part3 / saving data to mongo db)和第[4]部分(/ en / part4 / 后端应用程序结构介绍测试)中所做的。
+我们将模仿我们在第[3]部分(/ en / part3 / saving data to mongo db)和第[4]部分(/ en / part4 / 后端应用结构介绍测试)中所做的。
 
 
 The person schema has been defined as follows:
@@ -66,7 +66,7 @@ We also included a few validations. _required: true_, which ensures that value e
 
 
 We can get the application to mostly work with the following changes: 
-我们可以通过以下变化使应用程序基本工作:
+我们可以通过如下变化使应用基本工作:
 
 ```js
 const { ApolloServer, UserInputError, gql } = require('apollo-server')
@@ -124,16 +124,16 @@ const resolvers = {
 
 
 The changes are pretty straightforward. However there are a few noteworthy things. As we remember, in Mongo the identifying field of an object is called <i>_id</i> and we previously had to parse the name of the field to <i>id</i> ourselves. Now GraphQL can do this automatically. 
-这些改变是非常直接的。 然而，还是有一些值得注意的事情。 正如我们所记得的，在 Mongo 中，对象的标识字段称为 i id / i，我们以前必须将字段名解析为 i id / i ourselves。 现在，GraphQL 可以自动完成此操作。
+这些改变是非常直接的。 然而，还是有一些值得注意的事情。 正如我们所记得的，在 Mongo 中，对象的标识字段称为<i>id</i>，我们以前必须将字段名解析为<i>id</i> ourselves。 现在，GraphQL 可以自动完成此操作。
 
 
 Another noteworthy thing is that the resolver functions now return a <i>promise</i>, when they previously returned normal objects. When a resolver returns a promise, Apollo server [sends back](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-results) the value which the promise resolves to. 
-另一个值得注意的事情是，解析器函数现在返回 i promise / i，当它们以前返回普通对象时。 当解析器返回一个承诺时，Apollo 服务器[发送回]( https://www.apollographql.com/docs/Apollo-server/data/data/#resolver-results  / 值)该承诺解析为的值。
+另一个值得注意的事情是，解析器函数现在返回<i>promise</i>，当它们以前返回普通对象时。 当解析器返回一个承诺时，Apollo 服务器[发送回]( https://www.apollographql.com/docs/Apollo-server/data/data/#resolver-results  / 值)该承诺解析为的值。
 
 
 
 For example if the following resolver function is executed, 
-例如，如果执行以下冲突解决程序函数,
+例如，如果执行如下冲突解决程序函数,
 
 ```js
 allPersons: (root, args) => {
@@ -170,7 +170,7 @@ Query: {
 
 
 So if the query has not been given a parameter _phone_, all persons are returned. If the parameter has the value <i>YES</i>, the result of the query
-因此，如果查询没有给出参数电话，则返回所有人员。 如果参数值为 i YES / i，则为查询结果
+因此，如果查询没有给出参数电话，则返回所有人员。 如果参数值为<i>YES</i>，则为查询结果
 
 ```js
 Person.find({ phone: { $exists: true }})
@@ -178,7 +178,7 @@ Person.find({ phone: { $exists: true }})
 
 
 is returned, so the objects in which the field _phone_ has a value. If the parameter has the value <i>NO</i>, the query returns the objects in which the _phone_ field has no value: 
-因此字段电话在其中具有值的对象。 如果参数值为 i NO / i，查询将返回 phone 字段中没有值的对象:
+因此字段电话在其中具有值的对象。 如果参数值为<i>NO</i>，查询将返回 phone 字段中没有值的对象:
 
 ```js
 Person.find({ phone: { $exists: false }})
@@ -222,14 +222,14 @@ Mutation: {
 ```
 
 The code of the backend can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4), branch <i>part8-4</i>.
-后端的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4) ，branch i part8-4 / i 上找到。
+后端的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4) ，branch<i>part8-4</i> 上找到。
 
 
 ### User and log in
 # # # 用户登录
 
 Let's add user management to our application. For simplicity's sake, let's assume that all users have the same password which is hardcoded to the system. It would be straightforward to save individual passwords for all users following the principles from [part 4](/en/part4/user_administration), but because our focus is on GraphQL, we will leave out all that extra hassle this time. 
-让我们在应用程序中添加用户管理。 为了简单起见，让我们假设所有用户都有硬编码到系统的相同密码。 遵循[ part 4](/ en / part4 / user administration)的原则，为所有用户保存个人密码将非常简单，但由于我们的重点是 GraphQL，这次将省去所有额外的麻烦。
+让我们在应用中添加用户管理。 为了简单起见，让我们假设所有用户都有硬编码到系统的相同密码。 遵循[ part 4](/ en / part4 / user administration)的原则，为所有用户保存个人密码将非常简单，但由于我们的重点是 GraphQL，这次将省去所有额外的麻烦。
 
 The user schema is as follows: 
 用户模式如下:
@@ -257,7 +257,7 @@ module.exports = mongoose.model('User', schema)
 
 
 Every user is connected to a bunch of other persons in the system through the _friends_ field. The idea is that when a user, i.e <i>mluukkai</i>, adds a person, i.e <i>Arto Hellas</i>, to the list, the person is added to their _friends_ list. This way logged in users can have their own, personalized, view in the application. 
-每个用户都通过好友字段连接到系统中的一群其他人。 这个想法是，当一个用户(即 i mluukkai / i)将一个人(即 i Arto Hellas / i)添加到列表中时，这个人将被添加到他们的好友列表中。 通过这种方式登录的用户可以在应用程序中拥有自己的、个性化的视图。
+每个用户都通过好友字段连接到系统中的一群其他人。 这个想法是，当一个用户(即<i>mluukkai</i>)将一个人(即<i>Arto Hellas</i>)添加到列表中时，这个人将被添加到他们的好友列表中。 通过这种方式登录的用户可以在应用中拥有自己的、个性化的视图。
 
 
 Logging in and identifying the user are handled the same way we used in [part 4](/en/part4/token_authentication) when we used REST, by using tokens. 
@@ -343,7 +343,7 @@ The new user mutation is straightforward. The log in mutation checks if the user
 
 
 Just like in the previous case with REST, the idea now is that a logged in user adds a token they receive upon log in to all of their requests. And just like with REST, the token is added to GraphQL queries using the <i>Authorization</i> header.
-就像以前 REST 的情况一样，现在的想法是登录用户将他们在登录时收到的令牌添加到所有请求中。 就像使用 REST 一样，令牌使用 i Authorization / i 头被添加到 GraphQL 查询中。
+就像以前 REST 的情况一样，现在的想法是登录用户将他们在登录时收到的令牌添加到所有请求中。 就像使用 REST 一样，令牌使用<i>Authorization</i> 头被添加到 GraphQL 查询中。
 
 
 In the GraphQL-playground the header is added to a query like so
@@ -386,7 +386,7 @@ So our code sets the object corresponding to the user who made the request to th
 
 
 The resolver of the _me_ query is very simple, it just returns the logged in user it receives in the _currentUser_ field of the third parameter of the resolver, _context_. It's worth noting that if there is no logged in user, i.e there is no valid token in the header attached to the request, the query returns <i>null</i>:
-Me 查询的解析器非常简单，它只返回它在解析器的第三个参数 context 的 currentUser 字段中接收的登录用户。 值得注意的是，如果没有登录用户，即请求的头部没有有效的令牌，查询返回 i null / i:
+Me 查询的解析器非常简单，它只返回它在解析器的第三个参数 context 的 currentUser 字段中接收的登录用户。 值得注意的是，如果没有登录用户，即请求的头部没有有效的令牌，查询返回<i>null</i>:
 
 ```js
 Query: {
@@ -402,7 +402,7 @@ Query: {
 
 
 Let's complete the application's backend so that adding and editing persons requires logging in, and added persons are automatically added to the friends list of the user. 
-让我们完成应用程序的后端，以便添加和编辑人员需要登录，添加的人员将自动添加到用户的好友列表中。
+让我们完成应用的后端，以便添加和编辑人员需要登录，添加的人员将自动添加到用户的好友列表中。
 
 
 Let's first remove all persons not in anyone's friends list from the database. 
@@ -481,7 +481,7 @@ And the mutations resolver:
 
 
 Note how the resolver <i>destructures</i> the logged in user from the context. So instead of saving _currentUser_ to a separate variable in a function
-注意解析器 i 是如何从上下文中删除 / i 登录用户的。 因此，不要将 currentUser 保存到函数中的一个单独的变量中
+注意解析器<i>是如何从上下文中删除</i> 登录用户的。 因此，不要将 currentUser 保存到函数中的一个单独的变量中
 
 ```js
 addAsFriend: async (root, args, context) => {
@@ -498,7 +498,7 @@ addAsFriend: async (root, args, { currentUser }) => {
 
 
 The code of the backend can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-5) branch <i>part8-5</i>.
-后端的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-5)分支 i part8-5 / i 上找到。
+后端的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-5)分支<i>part8-5</i> 上找到。
 
 
 </div>
@@ -511,11 +511,11 @@ The code of the backend can be found on [Github](https://github.com/fullstack-hy
 练习8.13-8.16。
 
 #### 8.13: Database, part 1
-8.13: 数据库，第一部分
+8.13: 数据库，第一章节
 
 
 Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstack-hy2020/misc/blob/master/library-schema.md).
-更改库应用程序，以便将数据保存到数据库中。 你可以在这里找到书籍和作者的 i mongoose schema / i  https://github.com/fullstack-hy2020/misc/blob/master/library-schema.md。
+更改库应用，以便将数据保存到数据库中。 你可以在这里找到书籍和作者的<i>mongoose schema</i>  https://github.com/fullstack-hy2020/misc/blob/master/library-schema.md。
 
 
 Let's change the book graphql schema a little

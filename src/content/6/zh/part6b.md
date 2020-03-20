@@ -10,7 +10,7 @@ lang: zh
 
 
 Let's continue our work with the simplified [redux version](/en/part6/flux_architecture_and_redux#redux-notes) of our notes application.
-让我们继续使用 notes 应用程序的简化[ redux 版本](/ en / part6 / flux 架构和 redux # redux-notes)进行工作。
+让我们继续使用 notes 应用的简化[ redux 版本](/ en / part6 / flux 架构和 redux # redux-notes)进行工作。
 
 
 In order to ease our development, let's change our reducer so that the store gets initialized with a state that contains a couple of notes:
@@ -86,7 +86,7 @@ const App = () => {
 
 
 Since the <i>name</i> attribute of all the radio buttons is the same, they form a <i>button group</i> where only one option can be selected.
-由于所有单选按钮的 i name / i 属性都是相同的，所以它们形成了一个 i 按钮组 / i，其中只能选择一个选项。
+由于所有单选按钮的<i>name</i> 属性都是相同的，所以它们形成了一个<i>按钮组</i>，其中只能选择一个选项。
 
 
 The buttons have a change handler that currently only prints the string associated with the clicked button to the console.
@@ -94,7 +94,7 @@ The buttons have a change handler that currently only prints the string associat
 
 
 We decide to implement the filter functionality by storing <i>the value of the filter</i> in the redux store in addition to the notes themselves. The state of the store should look like this after making these changes:
-我们决定通过将 filter / i 的值存储在 redux 存储中来实现这个过滤器功能。 商店的状态在做了以下修改后应该是这样的:
+我们决定通过将 filter / i 的值存储在 redux 存储中来实现这个过滤器功能。 商店的状态在做了如下修改后应该是这样的:
 
 ```js
 {
@@ -108,7 +108,7 @@ We decide to implement the filter functionality by storing <i>the value of the f
 
 
 Only the array of notes is stored in the state of the current implementation of our application. In the new implementation the state object has two properties, <i>notes</i> that contains the array of notes and <i>filter</i> that contains a string indicating which notes should be displayed to the user.
-只有笔记数组存储在应用程序的当前实现的状态中。 在新的实现中，state 对象有两个属性，i notes / i 包含 notes 数组，i filter / i 包含一个字符串，指示应该向用户显示哪些备注。
+只有笔记数组存储在应用的当前实现的状态中。 在新的实现中，state 对象有两个属性，i notes /<i>包含 notes 数组，i filter</i> 包含一个字符串，指示应该向用户显示哪些备注。
 
 ### Combined reducers
 复合减速器
@@ -141,7 +141,7 @@ The actions for changing the state of the filter look like this:
 
 
 Let's also create a new _action creator_ function. We will write the code for the action creator in a new <i>src/reducers/filterReducer.js</i> module:
-我们还要创建一个新的动作创建函数。 我们将在一个新的 i src / reducers / filterreducer 中为动作创建器编写代码。 Js / i 模块:
+我们还要创建一个新的动作创建函数。 我们将在一个新的<i>src / reducers / filterreducer 中为动作创建器编写代码。 Js</i> 模块:
 
 ```js
 const filterReducer = (state = 'ALL', action) => {
@@ -160,11 +160,11 @@ export default filterReducer
 
 
 We can create the actual reducer for our application by combining the two existing reducers with the [combineReducers](https://redux.js.org/api/combinereducers) function.
-我们可以为我们的应用程序创建实际的减速器，通过结合现有的两个减速器和[ combineReducers ]( https://redux.js.org/api/combineReducers )函数。
+我们可以为我们的应用创建实际的减速器，通过结合现有的两个减速器和[ combineReducers ]( https://redux.js.org/api/combineReducers )函数。
 
 
 Let's define the combined reducer in the <i>index.js</i> file:
-让我们在 i index.js / i 文件中定义组合的 reducer:
+让我们在<i>index.js</i> 文件中定义组合的 reducer:
 
 ```js
 import React from 'react'
@@ -199,7 +199,7 @@ ReactDOM.render(
 ```
 
 Since our application breaks completely at this point, we render an empty <i>div</i> element instead of the <i>App</i> component.
-由于我们的应用程序在这一点上完全中断，因此我们呈现一个空的 i div / i 元素，而不是 i App / i 组件。
+由于我们的应用在这一点上完全中断，因此我们渲染一个空的<i>div</i> 元素，而不是<i>App</i> 组件。
 
 
 The state of the store gets printed to the console:
@@ -225,11 +225,11 @@ const reducer = combineReducers({
 
 
 The state of the store defined by the reducer above is an object with two properties: <i>notes</i> and <i>filter</i>. The value of the <i>notes</i> property is defined by the <i>noteReducer</i>, which does not have to deal with the other properties of the state. Likewise, the <i>filter</i> property is managed by the <i>filterReducer</i>.
-上面由 reducer 定义的存储状态是一个具有两个属性的对象: i notes / i 和 i filter / i。 I notes / i 属性的值由 i noteReducer / i 定义，它不必处理状态的其他属性。 类似地，i filter / i 属性由 i filterReducer / i 管理。
+上面由 reducer 定义的存储状态是一个具有两个属性的对象:<i>notes</i> 和<i>filter</i>。<i>notes</i> 属性的值由<i>noteReducer</i> 定义，它不必处理状态的其他属性。 类似地，i filter /<i>属性由 i filterReducer</i> 管理。
 
 
 Before we make more changes to the code, let's take a look at how different actions change the state of the store defined by the combined reducer. Let's add the following to the <i>index.js</i> file:
-在对代码进行更多更改之前，让我们看看不同的操作是如何更改由组合的 reducer 定义的存储状态的。 让我们在 i index.js / i 文件中添加以下内容:
+在对代码进行更多更改之前，让我们看看不同的操作是如何更改由组合的 reducer 定义的存储状态的。 让我们在<i>index.js</i> 文件中添加如下内容:
 
 ```js
 import { createNote } from './reducers/noteReducer'
@@ -267,7 +267,7 @@ Based on the console output one might get the impression that every action gets 
 
 
 Is there a bug in our code? No. The combined reducer works in such a way that every <i>action</i> gets handled in <i>every</i> part of the combined reducer. Typically only one reducer is interested in any given action, but there are situations where multiple reducers change their respective parts of the state based on the same action.
-我们的代码中有错误吗？ 没有。 组合减速器的工作方式使得每个 i 动作 / i 在组合减速器的每个 / i 部分都得到处理。 通常只有一个减速器对任何给定的动作感兴趣，但是在有些情况下，多个减速器根据相同的动作改变它们各自的状态部分。
+我们的代码中有错误吗？ 没有。 组合减速器的工作方式使得每个<i>动作</i> 在组合减速器的每个 / i 部分都得到处理。 通常只有一个减速器对任何给定的动作感兴趣，但是在有些情况下，多个减速器根据相同的动作改变它们各自的状态部分。
 
 
 ### Finishing the filters
@@ -275,7 +275,7 @@ Is there a bug in our code? No. The combined reducer works in such a way that ev
 
 
 Let's finish the application so that it uses the combined reducer. We start by changing the rendering of the application and hooking up the store to the application in the <i>index.js</i> file:
-让我们完成应用程序，使用组合减速器。 我们首先修改应用程序的呈现方式，并将存储区挂接到 i index.js / i 文件中的应用程序:
+让我们完成应用，使用组合减速器。 我们首先修改应用的渲染方式，并将存储区挂接到<i>index.js</i> 文件中的应用:
 
 ```js
 ReactDOM.render(
@@ -287,16 +287,16 @@ ReactDOM.render(
 ```
 
 Next, let's fix a bug that is caused by the code expecting the application store to be an array of notes:
-接下来，让我们修复一个错误，这个错误是由代码期望应用程序存储为一个注释数组而引起的:
+接下来，让我们修复一个错误，这个错误是由代码期望应用存储为一个注释数组而引起的:
 
 ![](../../images/6/7ea.png)
 
 
 
 <!-- Korjaus on helppo. Koska muistiinpanot ovat nyt storen kentässä <i>notes</i>, riittää pieni muutos selektorifunktioon: -->
--- korjaus on helppo.koska muistiinpanot ovat nyt storen kent ss / i notes / i，riitt pieni muutos selektorifunktioon: -- 
+-- korjaus on helppo.koska muistiinpanot ovat nyt storen kent ss /<i>notes</i>，riitt pieni muutos selektorifunktioon: -- 
 It's an easy fix. Because the notes are in the store's field <i>notes</i>, we only have to make a little change to the selector function:
-这是一个简单的解决办法。 因为注释在商店的字段 i notes / i 中，所以我们只需要对选择器函数做一个小小的修改:
+这是一个简单的解决办法。 因为注释在商店的字段<i>notes</i> 中，所以我们只需要对选择器函数做一个小小的修改:
 
 ```js
 const Notes = () => {
@@ -331,7 +331,7 @@ const notes = useSelector(state => state)
 <!-- Nyt siis palautetaan tilasta ainoastaan sen kenttä <i>notes</i> -->
 
 And now it returns only its field <i>notes</i>
-现在它只返回字段 i notes / i
+现在它只返回字段<i>notes</i>
 
 ```js
 const notes = useSelector(state => state.notes)
@@ -339,7 +339,7 @@ const notes = useSelector(state => state.notes)
 
 
 Let's extract the visibility filter into its own <i>src/components/VisibilityFilter.js</i> component:
-让我们将可见性过滤器提取到它自己的 i src / components / visibilityfilter. js / i 组件中:
+让我们将可见性过滤器提取到它自己的<i>src / components / visibilityfilter. js</i> 组件中:
 
 ```js
 import React from 'react'
@@ -377,7 +377,7 @@ export default VisibilityFilter
 ```
 
 With the new component <i>App</i> can be simplified as follows:
-使用新的组件 i App / i 可以简化如下:
+使用新的组件<i>App</i> 可以简化如下:
 
 ```js
 import React from 'react'
@@ -399,10 +399,10 @@ export default App
 ```
 
 The implementation is rather straightforward. Clicking the different radio buttons changes the state of the store's <i>filter</i> property.
-实现相当简单。单击不同的单选按钮会改变存储区的 i filter / i 属性的状态。
+实现相当简单。单击不同的单选按钮会改变存储区的<i>filter</i> 属性的状态。
 
 Let's change the <i>Notes</i> component to incorporate the filter:
-让我们改变 i Notes / i 组件来合并过滤器:
+让我们改变<i>Notes</i> 组件来合并过滤器:
 
 ```js
 const Notes = () => {
@@ -459,7 +459,7 @@ const notes = useSelector(({ filter, notes }) => {
 ```
 
 There is a slight cosmetic flaw in our application. Even though the filter is set to <i>ALL</i> by default, the associated radio button is not selected. Naturally this issue can be fixed, but since this is an unpleasant but ultimately harmless bug we will save the fix for later. 
-我们的应用程序中有一个小小的表面瑕疵。 即使在默认情况下将筛选器设置为 i ALL / i，也不会选择相关的单选按钮。 当然，这个问题是可以修复的，但是由于这是一个令人不快但是最终无害的错误，我们将把修复留到以后。
+我们的应用中有一个小小的表面瑕疵。 即使在默认情况下将筛选器设置为<i>ALL</i>，也不会选择相关的单选按钮。 当然，这个问题是可以修复的，但是由于这是一个令人不快但是最终无害的错误，我们将把修复留到以后。
 
 ### Redux DevTools
 # # Redux DevTools
@@ -468,7 +468,7 @@ There is an extension [Redux DevTools](https://chrome.google.com/webstore/detail
 有一个扩展[ Redux DevTools ]( https://Chrome.google.com/webstore/detail/Redux-DevTools/lmhkpmbekcpmknklioeibfkpmmfibljd )可以安装在 Chrome 上，其中 Redux-store 的状态和改变它的动作可以在浏览器的控制台上监视。
 
 When debugging, in addition to the browser extension we also have the software library [redux-devtools-extension](https://www.npmjs.com/package/redux-devtools-extension). Let's install it using the command:
-在调试时，除了浏览器扩展外，我们还有软件库[ redux-devtools-extension ]( https://www.npmjs.com/package/redux-devtools-extension 扩展)。 让我们使用以下命令来安装它:
+在调试时，除了浏览器扩展外，我们还有软件库[ redux-devtools-extension ]( https://www.npmjs.com/package/redux-devtools-extension 扩展)。 让我们使用如下命令来安装它:
 
 ```js
 npm install --save redux-devtools-extension
@@ -519,7 +519,7 @@ It's also possible to dispatch actions to the store using the console
 
 
 You can find the code for our current application in its entirety in the <i>part6-2</i> branch of [this Github repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-2).
-您可以在[ this Github repository ]的 i / part6-2 / i 分支中找到我们当前应用程序的全部代码，该分支位于 https://Github.com/fullstack-hy2020/redux-notes/tree/part6-2。
+您可以在[ this Github repository ]的<i>/ part6-2</i> 分支中找到我们当前应用的全部代码，该分支位于 https://Github.com/fullstack-hy2020/redux-notes/tree/part6-2。
 
 </div>
 
@@ -533,7 +533,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 
 Let's continue working on the anecdote application using redux that we started in exercise 6.3. 
-让我们继续使用我们在练习6.3中开始的 redux 来处理轶事应用程序。
+让我们继续使用我们在练习6.3中开始的 redux 来处理轶事应用。
 
 
 #### 6.9 Better anecdotes, step7
@@ -542,13 +542,13 @@ Let's continue working on the anecdote application using redux that we started i
 <!-- Ota sovelluksessasi käyttöön React dev tools. Siirrä Redux-storen määrittely omaan tiedostoon <i>store.js</i>. -->
 
 Start using React dev tools. Move defining the Redux-store into its own file <i>store.js</i>.
-开始使用 React dev 工具，将 Redux-store 定义到它自己的文件 i store.js / i 中。
+开始使用 React dev 工具，将 Redux-store 定义到它自己的文件<i>store.js</i> 中。
 
 #### 6.10 Better anecdotes, step8
 6.10更好的轶事，第八步
 
 The application has a ready-made body for the <i>Notification</i> component:
-应用程序的 i Notification / i 组件有一个现成的主体:
+应用的<i>Notification</i> 组件有一个现成的主体:
 
 ```js
 import React from 'react'
@@ -571,7 +571,7 @@ export default Notification
 
 
 Extend the component so that it renders the message stored in the redux store, making the component to take the form:
-扩展组件，使其呈现 redux 存储中存储的消息，使组件采用以下形式:
+扩展组件，使其渲染 redux 存储中存储的消息，使组件采用如下形式:
 
 ```js
 import React from 'react'
@@ -593,16 +593,16 @@ const Notification = () => {
 ```
 
 You will have to make changes to the application's existing reducer. Create a separate reducer for the new functionality and refactor the application so that it uses a combined reducer as shown in this part of the course material.
-您必须对应用程序现有的 reducer 进行更改。 为新的功能创建一个单独的减速器，并重构应用程序，以便它使用一个组合的减速器，如课程材料的这一部分所示。
+您必须对应用现有的 reducer 进行更改。 为新的功能创建一个单独的减速器，并重构应用，以便它使用一个组合的减速器，如课程材料的这一部分所示。
 
 The application does not have to use the <i>Notification</i> component in any intelligent way at this point in the exercises. It is enough for the application to display the initial value set for the message in the <i>notificationReducer</i>.
-在练习的这一点上，应用程序不必以任何智能方式使用 i Notification / i 组件。 应用程序只需在 i notificationReducer / i 中显示消息的初始值集即可。
+在练习的这一点上，应用不必以任何智能方式使用<i>Notification</i> 组件。 应用只需在<i>notificationReducer</i> 中显示消息的初始值集即可。
 
 #### 6.11 Better anecdotes, step9
 6.11更好的轶事，第九步
 
 Extend the application so that it uses the <i>Notification</i> component to display a message for the duration of five seconds when the user votes for an anecdote or creates a new anecdote:
-扩展应用程序，以便在用户投票支持一个轶事或创建一个新轶事时，使用 i Notification / i 组件显示一条消息，持续时间为5秒钟:
+扩展应用，以便在用户投票支持一个轶事或创建一个新轶事时，使用<i>Notification</i> 组件显示一条消息，持续时间为5秒钟:
 
 ![](../../images/6/8ea.png)
 
@@ -628,7 +628,7 @@ Store the state of the filter in the redux store. It is recommended to create a 
 
 
 Create a new <i>Filter</i> component for displaying the filter. You can use the following code as a template for the component:
-创建一个新的 i Filter / i 组件来显示过滤器。 您可以使用以下代码作为组件的模板:
+创建一个新的<i>Filter</i> 组件来显示过滤器。 您可以使用如下代码作为组件的模板:
 
 ```js
 import React from 'react'

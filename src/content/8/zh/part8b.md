@@ -12,7 +12,7 @@ We will next implement a React-app which uses the GraphQL server we created.
 接下来我们将实现一个 React-app，它使用我们创建的 GraphQL 服务器。
 
 The current code of the server can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>.
-服务器的当前代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3) ，branch i part8-3 / i 上找到。
+服务器的当前代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3) ，branch<i>part8-3</i> 上找到。
 
 In theory, we could use GraphQL with HTTP POST -requests. The following shows an example of this with Postman. 
 理论上，我们可以对 HTTP POST 请求使用 GraphQL。
@@ -21,7 +21,7 @@ In theory, we could use GraphQL with HTTP POST -requests. The following shows an
 
 
 The communication works by sending HTTP POST -requests to http://localhost:4000/graphql. The query itself is a string sent as the value of the key <i>query</i>.
-通信的工作原理是向 HTTP://localhost:4000/graphql 发送 HTTP POST 请求。 查询本身是一个字符串，作为 key i query / i 的值发送。
+通信的工作原理是向 HTTP://localhost:4000/graphql 发送 HTTP POST 请求。 查询本身是一个字符串，作为 key<i>query</i> 的值发送。
 
 We could take care of the communication between the React-app and GraphQl by using Axios. However most of the time it is not very sensible to do so. It is a better idea to use a higher order library capable of abstracting the unnecessary details of the communication. 
 我们可以使用 Axios 来处理 React-app 和 GraphQl 之间的通信。 然而，在大多数情况下，这样做是不明智的。 使用能够抽象出通信中不必要的细节的高阶库是一个更好的主意。
@@ -48,14 +48,14 @@ Create a new React-app and install the dependencies required by [Apollo client](
 <!-- Luodaan uusi React-sovellus ja asennetaan siihen [Apollo clientin](https://www.apollographql.com/docs/react/get-started/#installation) vaatimat riippuvuudet. -->
 
 We'll create a new React application and install the debendencies required by [Apollo client](https://www.apollographql.com/docs/react/get-started/#installation).
-我们将创建一个新的 React 应用程序，并安装[ Apollo 客户端]( https://www.apollographql.com/docs/React/get-started/#installation 应用程序)所要求的文档。
+我们将创建一个新的 React 应用，并安装[ Apollo 客户端]( https://www.apollographql.com/docs/React/get-started/#installation 应用)所要求的文档。
 
 ```js
 npm install --save @apollo/client graphql
 ```
 
 We'll start with the following code for our application. 
-我们将从下面的应用程序代码开始。
+我们将从下面的应用代码开始。
 
 ```js
 import React from 'react'
@@ -111,7 +111,7 @@ The servers response is printed to the console:
 
 
 The application can communicate with a GraphQL server using the _client_ object. The client can be made accessible for all components of the application by wrapping the <i>App</i> component with [ApolloProvider]https://www.apollographql.com/docs/react/v3.0-beta/get-started/#connect-your-client-to-react).
-应用程序可以使用客户机对象与 GraphQL 服务器通信。 通过用[ ApolloProvider ] https://www.apollographql.com/docs/react/v3.0-beta/get-started/#connect-your-client-to-react 包装 i App / i 组件，客户机可以被应用程序的所有组件访问。
+应用可以使用客户机对象与 GraphQL 服务器通信。 通过用[ ApolloProvider ] https://www.apollographql.com/docs/react/v3.0-beta/get-started/#connect-your-client-to-react 包装<i>App</i> 组件，客户机可以被应用的所有组件访问。
 
 ```js
 import React from 'react'
@@ -141,7 +141,7 @@ ReactDOM.render(
 # # # 提问
 
 We are ready to implement the main view of the application, which shows a list of phone numbers. 
-我们已经准备好实现应用程序的主视图，它显示了一个电话号码列表。
+我们已经准备好实现应用的主视图，它显示了一个电话号码列表。
 
 
 <!-- Apollo Client tarjoaa muutaman vaihtoehtoisen tavan [kyselyjen](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/) tekemiselle. Tämän hetken vallitseva käytäntö on hook-funktion [useQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#usequery) käyttäminen. -->
@@ -152,9 +152,9 @@ Currently the use of the hook-function [useQuery](https://www.apollographql.com/
 目前，钩子函数[ useQuery ]( https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#useQuery )的使用是主要的实践。
 
 <!-- Kyselyn tekevän komponentin <i>App</i> koodi näyttää seuraavalta: -->
-——凯瑟琳 · 泰科夫(kyselyn tekev n komponentin i App / i koodi n ytt seuraaveta)
+——凯瑟琳 · 泰科夫(kyselyn tekev n komponentin<i>App</i> koodi n ytt seuraaveta)
 The query is made by the <i>App</i> component, which's code is as follows:
-该查询由 i App / i 组件执行，其代码如下:
+该查询由<i>App</i> 组件执行，其代码如下:
 
 ```js
 import React from 'react'
@@ -196,9 +196,9 @@ When called, _useQuery_ makes the query it receives as a parameter.
 It returns an object with multiple [fields](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#result).
 它返回一个具有多个[字段]( https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#result )的对象。
 The field <i>loading</i> is true if the query has not received a response yet. 
-如果查询尚未收到响应，则字段 i loading / i 为 true。
+如果查询尚未收到响应，则字段<i>loading</i> 为 true。
 Then the following code gets rendered:
-然后呈现下面的代码:
+然后渲染下面的代码:
 
 ```js
 if ( result.loading ) {
@@ -209,7 +209,7 @@ if ( result.loading ) {
 <!-- Kun tulos on valmis, otetaan tuloksen kentästä <i>data</i> kyselyn <i>allPersons</i> vastaus ja renderöidään luettelossa olevat nimet ruudulle. -->
 
 When response is received, the result of the <i>allPersons</i> query can be found from the <i>data</i> field, and we can render the list of names to the screen.
-当收到响应时，可以在 i data / i 字段中找到 i allPersons / i 查询的结果，并将名称列表呈现到屏幕上。
+当收到响应时，可以在<i>data</i> 字段中找到<i>allPersons</i> 查询的结果，并将名称列表渲染到屏幕上。
 
 ```js
 <div>
@@ -240,7 +240,7 @@ const Persons = ({ persons }) => {
 <!-- Komponentti _App_ siis hoitaa edelleen kyselyn ja välittää tuloksen uuden komponentin renderöitäväksi: -->
 
 The _App_ component still makes the query, and passes the result to the new component to be rendered:
-组件仍然进行查询，并将结果传递给要呈现的新组件:
+组件仍然进行查询，并将结果传递给要渲染的新组件:
 
 ```js
 const App = () => {
@@ -301,10 +301,10 @@ query findPersonByName($nameToSearch: String!) {
 ```
 
 The name of the query is <i>findPersonByName</i>, and it is given a string <i>$nameToSearch</i> as a parameter. 
-查询的名称是 i findPersonByName / i，它被给予一个字符串 i $nameToSearch / i 作为参数。
+查询的名称是<i>findPersonByName</i>，它被给予一个字符串<i>$nameToSearch</i> 作为参数。
 
 It is also possible to do queries with parameters with the GraphQL Playground. The parameters are given in <i>Query variables</i>:
-也可以使用 GraphQL Playground 参数进行查询。参数在 i Query variables / i 中给出:
+也可以使用 GraphQL Playground 参数进行查询。参数在<i>Query variables</i> 中给出:
 
 ![](../../images/8/10.png)
 
@@ -312,7 +312,7 @@ It is also possible to do queries with parameters with the GraphQL Playground. T
 <!-- Asken käyttämämme _useQuery_ toimii hyvin tilanteissa, joissa kysely on tarkoitus suorittaa heti komponentin renderöinnin yhteydessä. Nyt kuitenkin haluamme tehdä kyselyn vasta siinä vaiheessa kun käyttäjä haluaa nähdä jonkin henkilön tiedot, eli kysely tehdään vasta [sitä tarvittaessa](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#executing-queries-manually).  -->
 <！ ——请记住我的话——每个人都有自己的生活方式，乔伊萨 · 凯斯利(joissa kysely)谈论自己的生活方式。 在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文。   -->
 The _useQuery_ hook is well suited for situations where the query is done when the component is rendered. 
-Usequery 钩子非常适合在呈现组件时进行查询的情况。
+Usequery 钩子非常适合在渲染组件时进行查询的情况。
 However now we want to make the query only when a user wants to see the details of a specific person, so the query is done only [as required](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#executing-queries-manually).
 然而，现在我们只希望在用户想要查看特定人员的详细信息时才进行查询，因此查询只能[根据需要]完成( https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#executing-queries-manually )。
 
@@ -452,7 +452,7 @@ If the state _person_ has a value, instead of showing a list of all persons, onl
 <!-- Jos tilan muuttujalla _person_ on arvo, näytetään kaikkien henkilöiden sijaan yhden henkilön tarkemmat tiedot: -->
 
 If the _person_ state has a value, instead of displaying a list of all persons we render the details of the specified person: 
-如果人的状态有一个值，我们不显示所有人的列表，而是呈现指定人的详细信息:
+如果人的状态有一个值，我们不显示所有人的列表，而是渲染指定人的详细信息:
 
 <!-- Yksittäisen henkilön näkymästä palataan kaikkien henkilöiden näkymään sijoittamalla tilan muuttujan _person_ arvoksi _null_. -->
 -- yksitt is en henkil n kym st palataan kaikkien henkil iden n kym n sijoittamalla tilan muuttujan person arvoksi null. -- 
@@ -463,7 +463,7 @@ The solution is not the neatest possible, but it is good enough for us.
 这个解决方案并不是最好的，但是对我们来说已经足够好了。
 
 The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-1) branch <i>part8-1</i>.
-当前应用程序的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-1分支 i part8-1 / i 上找到。
+当前应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-1分支<i>part8-1</i> 上找到。
 
 ### Cache
 # # 缓存 # 
@@ -485,9 +485,9 @@ It is possible to install [Apollo Client devtools](https://chrome.google.com/web
 
 
 Data in the cache is organized by query. Because <i>Person</i> objects have an identifying field <i>id</i> which is type <i>ID</i>, if the same object is returned by multiple queries, Apollo is able to combine them into one. 
-缓存中的数据按查询进行组织。 因为 i Person / i 对象有一个类型为 i ID / i 的标识字段 i ID / i，如果多个查询返回同一个对象，Apollo 可以将它们组合成一个。
+缓存中的数据按查询进行组织。 因为<i>Person</i> 对象有一个类型为<i>ID</i> 的标识字段<i>ID</i>，如果多个查询返回同一个对象，Apollo 可以将它们组合成一个。
 Because of this, doing <i>findPerson</i> queries for the address details of Arto Hellas has updated the address details also for the query <i>allPersons</i>.
-因此，执行 i findPerson / i 查询 Arto Hellas 的地址详细信息时，也更新了查询 i allPersons / i 的地址详细信息。
+因此，执行<i>findPerson</i> 查询 Arto Hellas 的地址详细信息时，也更新了查询<i>allPersons</i> 的地址详细信息。
 
 ### Doing mutations
 突变
@@ -598,7 +598,7 @@ The code of the form is straightforward and the interesting lines have been high
 We can define mutation function using the _useMutation_-hook.
 我们可以使用 useMutation-hook 来定义变异函数。
 The hook returns an <i>array</i>, first element of which contains the result of the mutation.
-钩子返回一个 i 数组 / i，其中第一个元素包含变异的结果。
+钩子返回一个<i>数组</i>，其中第一个元素包含变异的结果。
 
 ```js
 const [ createPerson ] = useMutation(CREATE_PERSON)
@@ -614,7 +614,7 @@ createPerson({  variables: { name, phone, street, city } })
 ```
 
 New persons are added just fine, but the screen is not updated. The reason being that Apollo Client cannot automatically update the cache of an application, so it still contains the state from before the mutation. 
-新的人员添加正常，但屏幕没有更新。 原因是 Apollo Client 不能自动更新应用程序的缓存，因此它仍然包含变更前的状态。
+新的人员添加正常，但屏幕没有更新。 原因是 Apollo Client 不能自动更新应用的缓存，因此它仍然包含变更前的状态。
 We could update the screen by reloading the page, as the cache is emptied when the page is reloaded. However there must be a better way to do this. 
 我们可以通过重新加载页面来更新屏幕，因为页面重新加载时缓存空了。 然而，必须有一个更好的方法来做到这一点。
 
@@ -691,7 +691,7 @@ There are other ways to update the cache. More about those later in this part.
 At the moment in our code queries and component are defined in the same place. 
 目前，在我们的代码查询和组件定义在同一个地方。
 Let's separate the query definitions into their own file <i>queries.js</i>:
-让我们将查询定义分离到它们自己的文件 i queries.js / i 中:
+让我们将查询定义分离到它们自己的文件<i>queries.js</i> 中:
 
 ```js 
 import { gql  } from '@apollo/client'
@@ -729,7 +729,7 @@ const App = () => {
 ```
 
 The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-2) branch <i>part8-2</i>.
-当前应用程序的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-2分支 i part8-2 / i 上找到。
+当前应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-2分支<i>part8-2</i> 上找到。
 
 #### Handling mutation errors
 处理突变错误
@@ -737,7 +737,7 @@ The current code of the application can be found on [Github](https://github.com/
 <!-- Jos yritämme luoda epävalidia henkilöä, seurauksena on poikkeus ja koko sovellus hajoaa -->
 
 Trying to create a person with invalid data causes an error, and the whole application breaks
-尝试用无效数据创建人员会导致错误，整个应用程序将中断
+尝试用无效数据创建人员会导致错误，整个应用将中断
 
 ![](../../images/8/14ea.png)
 
@@ -775,7 +775,7 @@ const PersonForm = ({ setError }) => {
 <!-- Renderlöidään mahdollinen virheilmoitus näytölle -->
 
 We can then render the error message on the screen as necessary
-然后，我们可以根据需要在屏幕上呈现错误消息
+然后，我们可以根据需要在屏幕上渲染错误消息
 
 ```js
 const App = () => {
@@ -826,13 +826,13 @@ Now the user is informed about an error with a simple notification.
 
 
 The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-3) branch <i>part8-3</i>.
-当前应用程序的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-3分支 i part8-3 / i 上找到。
+当前应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-3分支<i>part8-3</i> 上找到。
 
 ### Updating a phone number
 # # # 正在更新电话号码
 
 Let's add the possibility to change the phone numbers of persons to our application. The solutions is almost identical to the one we used for adding new persons. 
-让我们在应用程序中增加更改人员电话号码的可能性。 这些解决方案与我们用来增加新人员的方案几乎完全相同。
+让我们在应用中增加更改人员电话号码的可能性。 这些解决方案与我们用来增加新人员的方案几乎完全相同。
 
 Again, the mutation requires parameters.
 同样，突变需要参数。
@@ -856,7 +856,7 @@ export const EDIT_NUMBER = gql`
 <!-- Muutoksen suorittava komponentti <i>PhoneForm</i> on suoraviivainen, se kysyy lomakkeen avulla henkilön nimeä ja uutta puhelinnumeroa, ja kutsuu _useMutation_-hookilla luotua mutaation suorittavaa funktiota _changeNumber_. Mielenkiintoiset osat koodia korostettuna: -->
 
 The <i>PhoneForm</i> component responsible for the change is straightforward. The form has fields for the person's name and new phone number, and calls the _changeNumber_ function. The function is done using the _useMutation_-hook. 
-负责更改的 i PhoneForm / i 组件非常简单。 该表单具有用于个人姓名和新电话号码的字段，并调用“更改编号”函数。 该函数是使用 useMutation-hook 完成的。
+负责更改的<i>PhoneForm</i> 组件非常简单。 该表单具有用于个人姓名和新电话号码的字段，并调用“更改编号”函数。 该函数是使用 useMutation-hook 完成的。
 Interesting lines on the code have been hihglighed.
 有趣的代码行被隐藏了起来。
 
@@ -920,21 +920,21 @@ It looks bleak, but it works:
 <!-- Kun numero muutetaan, päivittyy se hieman yllättäen automaattisesti komponentin <i>Persons</i> renderöimään nimien ja numeroiden listaan. Tämä johtuu siitä, että koska henkilöillä on identifioiva, tyyppiä <i>ID</i> oleva kenttä, päivittyy henkilö välimuistissa uusilla tiedoilla päivitysoperaation yhteydessä.  -->
 ——昆士兰第一人，他的父亲，他的父亲，他的父亲，他的父亲，他的父亲，他的父亲，他的父亲，他的父亲。 我是约翰 · 斯图，我是科斯卡 · 亨克尔，我是肯特，我是肯特，我是尤西拉 · 提多利亚，我是维多利亚。 -->
 Surprisingly, when person's number is changed the new number automatically appears on the list of persons rendered by the <i>Persons</i> component. 
-令人惊讶的是，当人数改变时，新的数字会自动出现在由 i Persons / i 组件呈现的人员列表中。
+令人惊讶的是，当人数改变时，新的数字会自动出现在由<i>Persons</i> 组件渲染的人员列表中。
 This happens because each person has an identifying field of type <i>ID</i>, so the person's details saved to the cache update automatically when they are changed with the mutation. 
-这是因为每个人都有一个 i ID / i 类型的标识字段，所以当这个人的详细信息随着变异而更改时，会自动保存到缓存更新中。
+这是因为每个人都有一个<i>ID</i> 类型的标识字段，所以当这个人的详细信息随着变异而更改时，会自动保存到缓存更新中。
 
 The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4) branch <i>part8-4</i>
-当前应用程序的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4分支 i part8-4 / i 上找到
+当前应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4分支<i>part8-4</i> 上找到
 
 <!-- Sovelluksessa on  vielä pieni ongelma. Jos yritämme vaihtaa olemattomaan nimeen liittyvän puhelinnumeron, ei mitään näytä tapahtuvan. Syynä tälle on se, että jos nimeä vastaavaa henkilöä ei löydy, vastataan kyselyyn <i>null</i>: -->
 
 Our application still has one small flaw. If we try to change the phonenumber for a name which does not exist, nothing seems to happen. 
-我们的应用程序还有一个小缺陷。 如果我们试图改变一个不存在的名称的音素编号，似乎什么也不会发生。
+我们的应用还有一个小缺陷。 如果我们试图改变一个不存在的名称的音素编号，似乎什么也不会发生。
 This happens because if a person with the given name cannot be found, 
 这是因为如果一个人的名字找不到,
 the mutation response is <i>null</i>:
-变异反应为 i null / i:
+变异React为<i>null</i>:
 
 ![](../../images/8/23ea.png)
 
@@ -976,7 +976,7 @@ const PhoneForm = ({ setError }) => {
 <!-- Jos henkilöä ei löytynt, eli kyselyn tulos _result.data.editNumber_ on _null_, asettaa komponentti propseina saamansa callback-funktion avulla sopivan virheilmoituksen. Virheilmoituksen asettamista kontrolloidaan jälleen useEffect-hookin avulla, eli virheviesti halutaan asetaa ainoastaan jos mutaation tulos _result.data_ muuttuu. -->
 
 If a person cannot be found, or the _result.data.editNumber_ is _null_, the component uses the callback-function it received as props to set a suitable error message. 
-如果找不到某个人，或 result.data.editNumber 为空，则组件使用它作为道具接收的回调函数来设置合适的错误消息。
+如果找不到某个人，或 result.data.editNumber 为空，则组件使用它作为props接收的回调函数来设置合适的错误消息。
 We want to set the error message only when the result of the mutation 
 我们只希望在变异的结果出现时设置错误消息
 _result.data_ changes, so we use the useEffect-hook to control setting the error message. 
@@ -1023,21 +1023,21 @@ useEffect(() => {
 <!-- Tämä ratkaisu ei kuitenkaan toimi, ellei _notify_-funktiota ole määritelty [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-funktioon käärittynä. Jos näin ei tehdä, seurauksena on ikuinen luuppi, sillä aina kun komponentti _App_ renderöidään uudelleen notifikaation poistamisen jälkeen, syntyy <i>uusi versio</i> funktiosta _notify_ ja se taas aiheuttaa efektifunktion uudelleensuorituksen ja taas uuden notifikaation... -->
 
 However this solution does not work is the _notify_-function is not wrapped to a [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-function.  If its not, this results to an endless loop. When the _App_ component is rerendered after a notification is removed, a <i>new version</i> of _notify_ gets created which causes the effect function to be executed which causes a new notification and so on an so on...
-但是这个解决方案不起作用，因为 notify-function 没有封装到[ useCallback ]( https://reactjs.org/docs/hooks-reference.html#useCallback )-function 中。 如果不是，这将导致一个无限循环。 当 App 组件在通知被删除后重新运行时，会创建一个 i new version / i of notify，这会导致 effect 函数被执行，从而导致一个新的通知等等..。
+但是这个解决方案不起作用，因为 notify-function 没有封装到[ useCallback ]( https://reactjs.org/docs/hooks-reference.html#useCallback )-function 中。 如果不是，这将导致一个无限循环。 当 App 组件在通知被删除后重新运行时，会创建一个<i>new version</i> of notify，这会导致 effect 函数被执行，从而导致一个新的通知等等..。
 
 The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5) branch <i>part8-5</i>
-当前应用程序的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5分支 i part8-5 / i 上找到
+当前应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5分支<i>part8-5</i> 上找到
 
 ### Apollo Client and the applications state
 # # Apollo Client and the applications state
 
 In our example, management of the applications state has mostly become the responsibility of Apollo Client. This is quite typical solution for GraphQL-applications. 
-在我们的示例中，应用程序状态的管理主要由 Apollo Client 负责。 这是适用于 graphql 应用程序的典型解决方案。
+在我们的示例中，应用状态的管理主要由 Apollo Client 负责。 这是适用于 graphql 应用的典型解决方案。
 Our example uses the state of the React components only to manage the state of a form and to show error notifications. When using GraphQL it can be, that there are no more justifiable reasons to move the management of the applications state to Redux at all. 
-我们的示例只使用 React 组件的状态来管理表单的状态并显示错误通知。 当使用 GraphQL 时，根本没有理由将应用程序状态的管理转移到 Redux。
+我们的示例只使用 React 组件的状态来管理表单的状态并显示错误通知。 当使用 GraphQL 时，根本没有理由将应用状态的管理转移到 Redux。
 
 When necessary Apollo enables saving the applications local state to [Apollo cache](https://www.apollographql.com/docs/react/v3.0-beta/data/local-state/).
-必要时，Apollo 允许将应用程序保存到本地状态[ Apollo cache ]( https://www.apollographql.com/docs/react/v3.0-beta/data/local-state/ 缓存)。
+必要时，Apollo 允许将应用保存到本地状态[ Apollo cache ]( https://www.apollographql.com/docs/react/v3.0-beta/data/local-state/ 缓存)。
 
 
 <div class="tasks">
@@ -1053,7 +1053,7 @@ Take [this project](https://github.com/fullstack-hy2020/library-frontend) for a 
 以[这个项目]( https://github.com/fullstack-hy2020/library-frontend )作为你申请的开始。
 
 You can implement your application either using the render prop -components <i>Query</i> and <i>Mutation</i> of the Apollo Client, or using the hooks provided by Apollo client 3.0 beta version. 
-您可以使用 Apollo Client 的 render prop-components i Query / i 和 i Mutation / i 来实现应用程序，或者使用 Apollo Client 3.0 beta 版本提供的挂钩。
+您可以使用 Apollo Client 的 render prop-components<i>Query</i> 和<i>Mutation</i> 来实现应用，或者使用 Apollo Client 3.0 beta 版本提供的挂钩。
 
 #### 8.8: Authors view
 8.8: 作者观点
@@ -1077,7 +1077,7 @@ Implement a Books view to show on a page all other details of all books except t
 8.10: 添加一本书
 
 Implement a possibility to add new books to your application. The functionality can look like this: 
-实现在你的应用程序中添加新书的可能性，这个功能可以是这样的:
+实现在你的应用中添加新书的可能性，这个功能可以是这样的:
 
 ![](../../images/8/18.png)
 

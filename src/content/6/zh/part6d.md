@@ -23,7 +23,7 @@ To finish this part we will look into another older and  more complicated way to
 <!-- Uusissa sovelluksissa kannattaa ehdottomasti käyttää hook-apia, mutta connectin tuntemisesta on hyötyä vanhempia reduxia käyttäviä projekteja ylläpidettävissä. -->
 
 In new applications you should absolutely use the hook-api, but knowing how to use connect is useful when maintaining older projects using redux.
-在新的应用程序中，您绝对应该使用 hook-api，但是在使用 redux 维护老项目时，了解如何使用 connect 非常有用。
+在新的应用中，您绝对应该使用 hook-api，但是在使用 redux 维护老项目时，了解如何使用 connect 非常有用。
 
 ### Using the connect-function to share the redux store to components
 # # # 使用 connect-function 将 redux 存储共享给组件
@@ -31,9 +31,9 @@ In new applications you should absolutely use the hook-api, but knowing how to u
 <!-- Muutetaan sovelluksen komponenttia <i>Notes</i>, siten että korvataan hook-apin eli funktioiden _useDispatch_ ja _useSelector_ käyttö funktioilla _connect_. Komponentin seuraavat osat tulee siis muuttaa: -->
 
 Let's modify the <i>Notes</i> component so that instead of using the hook-api (the _useDispatch_ and  _useSelector_ functions ) it uses the _connect_-function. 
-让我们修改 i Notes / i 组件，以便使用 connect-function 而不是 hook-api (useDispatch 和 useSelector 函数)。
+让我们修改<i>Notes</i> 组件，以便使用 connect-function 而不是 hook-api (useDispatch 和 useSelector 函数)。
 We have to modify the following parts of the component:
-我们必须修改组件的以下部分:
+我们必须修改组件的如下部分:
 
 ````js
 import React from 'react'
@@ -72,10 +72,10 @@ export default Notes
 ````
 
 The _connect_ function can be used for transforming "regular" React components so that the state of the Redux store can be "mapped" into the component's props.
-Connect 函数可用于转换“常规” React 组件，以便将 Redux 存储的状态“映射”到组件的道具中。
+Connect 函数可用于转换“常规” React 组件，以便将 Redux 存储的状态“映射”到组件的props中。
 
 Let's first use the connect function to transform our <i>Notes</i> component into a <i>connected component</i>:
-让我们首先使用 connect 函数将 i Notes / i 组件转换为 i / 连接元件(图论) / i:
+让我们首先使用 connect 函数将<i>Notes</i> 组件转换为<i>/ 连接元件(图论)</i>:
 
 ```js
 import React from 'react'
@@ -91,10 +91,10 @@ export default ConnectedNotes           // highlight-line
 ```
 
 The module exports the <i>connected component</i> that works exactly like the previous regular component for now.
-该模块导出的 i / 连接元件(图论) / i 与之前的常规组件工作方式完全相同。
+该模块导出的<i>/ 连接元件(图论)</i> 与之前的常规组件工作方式完全相同。
 
 The component needs the list of notes and the value of the filter from the Redux store. The _connect_ function accepts a so-called [mapStateToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapstatetoprops-state-ownprops--object) function as its first parameter. The function can be used for defining the props of the <i>connected component</i> that are based on the state of the Redux store.
-组件需要 Redux 存储中的注释列表和筛选器的值。 Connect 函数接受所谓的[ mapStateToProps ]( https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapStateToProps-state-ownprops--object )函数作为它的第一个参数。 这个函数可以用来定义基于 Redux 存储状态的 i / 连接元件(图论) / i 的道具。
+组件需要 Redux 存储中的注释列表和筛选器的值。 Connect 函数接受所谓的[ mapStateToProps ]( https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapStateToProps-state-ownprops--object )函数作为它的第一个参数。 这个函数可以用来定义基于 Redux 存储状态的<i>/ 连接元件(图论)</i> 的props。
 
 If we define:
 如果我们定义:
@@ -145,22 +145,22 @@ export default ConnectedNotes
 
 
 The <i>Notes</i> component can access the state of the store directly, e.g. through <i>props.notes</i> that contains the list of notes.  Similarly, <i>props.filter</i> references the value of the filter.
-I Notes / i 组件可以直接访问存储的状态，例如通过包含注释列表的 i propss.Notes / i。 类似地，i props.filter / i 引用了过滤器的值。
+I Notes /<i>组件可以直接访问存储的状态，例如通过包含注释列表的 i propss.Notes</i>。 类似地，i props.filter / i 引用了过滤器的值。
 
 The situation that results from using <i>connect</i> with the <i>mapStateToProps</i> function we defined can be visualized like this:
-使用 i connect / i 和我们定义的 i mapStateToProps / i 函数的结果可以这样可视化:
+使用<i>connect</i> 和我们定义的<i>mapStateToProps</i> 函数的结果可以这样可视化:
 
 ![](../../images/6/24c.png)
 
 
 
 The <i>Notes</i> component has "direct access" via <i>props.notes</i> and <i>props.filter</i> for inspecting the state of the Redux store.
-I Notes / i 组件通过 i props.Notes / i 和 i props.filter / i 具有“直接访问”功能，用于检查 Redux 存储的状态。
+I Notes /<i>组件通过 i props.Notes</i> 和<i>props.filter</i> 具有“直接访问”功能，用于检查 Redux 存储的状态。
 
 The _NoteList_ component actually does not need the information about which filter is selected, so we can move the filtering logic elsewhere.
 Notelist 组件实际上不需要关于选择哪个过滤器的信息，因此我们可以将过滤逻辑移到其他位置。
 We just have to give it correctly filtered notes in the _notes_ prop:
-我们只需要在音符道具中给它正确过滤的音符:
+我们只需要在音符props中给它正确过滤的音符:
 
 ```js
 const Notes = (props) => { // highlight-line
@@ -206,7 +206,7 @@ export default ConnectedNotes
 # # mapDispatchToProps
 
 Now we have gotten rid of _useSelector_, but <i>Notes</i> still uses the _useDispatch_ hook and the _dispatch_ function returning it:
-现在我们已经摆脱了 useSelector，但是 i Notes / i 仍然使用 useDispatch 钩子和 dispatch 函数返回它:
+现在我们已经摆脱了 useSelector，但是<i>Notes</i> 仍然使用 useDispatch 钩子和 dispatch 函数返回它:
 
 ```js
 const Notes = (props) => {
@@ -229,7 +229,7 @@ const Notes = (props) => {
 ```
 
 The second parameter of the _connect_ function can be used for defining [mapDispatchToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapdispatchtoprops-object--dispatch-ownprops--object) which is a group of <i>action creator</i> functions passed to the connected component as props. Let's make the following changes to our existing connect operation:
-Connect 函数的第二个参数可用于定义[ mapDispatchToProps ]( https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapDispatchToProps-object--dispatch-ownprops--object ) ，它是一组作为道具传递给连接元件(图论)的 i / action creator / i 函数。 让我们对现有的连接操作进行以下更改:
+Connect 函数的第二个参数可用于定义[ mapDispatchToProps ]( https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapDispatchToProps-object--dispatch-ownprops--object ) ，它是一组作为props传递给连接元件(图论)的<i>/ action creator</i> 函数。 让我们对现有的连接操作进行如下更改:
 
 
 ```js
@@ -255,7 +255,7 @@ export default ConnectedNotes
 ```
 
 Now the component can directly dispatch the action defined by the _toggleImportanceOf_ action creator by calling the function through its props:
-现在这个组件可以通过它的道具调用函数直接调用 toggleimportance / action creator 定义的动作:
+现在这个组件可以通过它的props调用函数直接调用 toggleimportance / action creator 定义的动作:
 
 ```js
 const Notes = (props) => {
@@ -300,10 +300,10 @@ The resulting situation from using _connect_ can be visualized like this:
 
 
 In addition to accessing the store's state via <i>props.notes</i> and <i>props.filter</i>, the component also references a function that can be used for dispatching <i>TOGGLE\_IMPORTANCE</i>-type actions via its <i>toggleImportanceOf</i> prop.
-除了通过 i props.notes / i 和 i props.filter / i 访问存储的状态外，该组件还引用了一个函数，该函数可以通过其 i toggleimportof / i prop 用于分派 i TOGGLE  IMPORTANCE / i-type 操作。
+除了通过<i>props.notes</i> 和<i>props.filter</i> 访问存储的状态外，该组件还引用了一个函数，该函数可以通过其<i>toggleimportof</i> prop 用于分派<i>TOGGLE  IMPORTANCE</i>-type 操作。
 
 The code for the newly refactored <i>Notes</i> component looks like this:
-新重构的 i Notes / i 组件的代码如下:
+新重构的<i>Notes</i> 组件的代码如下:
 
 ```js
 import React from 'react'
@@ -384,14 +384,14 @@ export default connect(
 ```
 
 Since the component does not need to access the store's state, we can simply pass <i>null</i> as the first parameter to _connect_. 
-由于组件不需要访问存储的状态，我们可以简单地将 i null / i 作为连接的第一个参数。
+由于组件不需要访问存储的状态，我们可以简单地将<i>null</i> 作为连接的第一个参数。
 
 
 You can find the code for our current application in its entirety in the <i>part6-5</i> branch of [this Github repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5).
-您可以在[ this Github repository ]的 i part6-5 / i 分支中找到我们当前应用程序的全部代码，这个分支是[ this Github repository ]的 https://Github.com/fullstack-hy2020/redux-notes/tree/part6-5。
+您可以在[ this Github repository ]的<i>part6-5</i> 分支中找到我们当前应用的全部代码，这个分支是[ this Github repository ]的 https://Github.com/fullstack-hy2020/redux-notes/tree/part6-5。
 
 ### Referencing action creators passed as props
-# # # 引用动作创作者作为道具
+# # # 引用动作创作者作为props
 
 Let's direct our attention to one interesting detail in the <i>NewNote</i> component:
 让我们把注意力转移到 inewnote / i 组件中一个有趣的细节上:
@@ -425,11 +425,11 @@ export default connect(
 ```
 
 Developers who are new to connect may find it puzzling that there are two versions of the <i>createNote</i> action creator in the component.
-刚开始连接的开发人员可能会感到困惑，因为组件中有两个版本的 i creatote / i 动作创建器。
+刚开始连接的开发人员可能会感到困惑，因为组件中有两个版本的<i>creatote</i> 动作创建器。
 
 
 The function must be referenced as <i>props.createNote</i> through the component's props, as this is the version that <i>contains the automatic dispatch</i> added by _connect_.
-必须通过组件的 props.createNote / i 引用该函数，因为这是 i 包含由 connect 添加的自动分派 / i 的版本。
+必须通过组件的 props.createNote /<i>引用该函数，因为这是 i 包含由 connect 添加的自动分派</i> 的版本。
 
 
 Due to the way that the action creator is imported:
@@ -467,7 +467,7 @@ We can see the difference between the two functions:
 
 
 The first function is a regular <i>action creator</i> whereas the second function contains the additional dispatch to the store that was added by connect.
-第一个函数是一个常规的 i action creator / i，而第二个函数包含对由 connect 添加的存储的附加分派。
+第一个函数是一个常规的<i>action creator</i>，而第二个函数包含对由 connect 添加的存储的附加分派。
 
 Connect is an incredibly useful tool although it may seem difficult at first due to its level of abstraction.
 连接是一个非常有用的工具，尽管由于它的抽象级别，乍看起来可能很困难。
@@ -476,7 +476,7 @@ Connect is an incredibly useful tool although it may seem difficult at first due
 # # 使用 mapDispatchToProps 的另一种方式
 
 We defined the function for dispatching actions from the connected <i>NewNote</i> component in the following way:
-我们以下面的方式定义了从连接的 i NewNote / i 组件发送操作的函数:
+我们如下面的方式定义了从连接的<i>NewNote</i> 组件发送操作的函数:
 
 ```js
 const NewNote = () => {
@@ -495,11 +495,11 @@ The connect expression above enables the component to dispatch actions for creat
 
 
 The functions passed in <i>mapDispatchToProps</i> must be <i>action creators</i>, that is, functions that return Redux actions.
-在 i mapDispatchToProps / i 中传递的函数必须是 i action creators / i，即返回 Redux 操作的函数。
+在<i>mapDispatchToProps</i> 中传递的函数必须是<i>action creators</i>，即返回 Redux 操作的函数。
 
 
 It is worth noting that the <i>mapDispatchToProps</i> parameter is a <i>JavaScript object</i>, as the definition:
-值得注意的是，i mapDispatchToProps / i 参数是一个 i JavaScript object / i，作为定义:
+值得注意的是，i mapDispatchToProps /<i>参数是一个 i JavaScript object</i>，作为定义:
 
 ```js
 {
@@ -517,10 +517,10 @@ Is just shorthand for defining the object literal:
 ```
 
 Which is an object that has a single <i>createNote</i> property with the <i>createNote</i> function as its value.
-它是一个具有单个 i createNote / i 属性的对象，其值为 i createNote / i 函数。
+它是一个具有单个<i>createNote</i> 属性的对象，其值为<i>createNote</i> 函数。
 
 Alternatively, we could pass the following <i>function</i> definition as the second parameter to _connect_:
-或者，我们可以将下面的 i function / i 定义作为连接的第二个参数:
+或者，我们可以将下面的<i>function</i> 定义作为连接的第二个参数:
 
 ```js
 const NewNote = (props) => {
@@ -545,7 +545,7 @@ export default connect(
 
 
 In this alternative definition, <i>mapDispatchToProps</i> is a function that _connect_ will invoke by passing it the _dispatch_-function as its parameter. The return value of the function is an object that defines a group of functions that get passed to the connected component as props. Our example defines the function passed as the <i>createNote</i> prop:
-在这个替代定义中，i mapDispatchToProps / i 是一个函数，它通过将 dispatch-function 作为参数传递给它来调用它。 函数的返回值是一个对象，它定义了一组作为道具传递给连接元件(图论)的函数。 我们的示例将传递的函数定义为 i createNote / i prop:
+在这个替代定义中，i mapDispatchToProps /<i>是一个函数，它通过将 dispatch-function 作为参数传递给它来调用它。 函数的返回值是一个对象，它定义了一组作为props传递给连接元件(图论)的函数。 我们的示例将传递的函数定义为 i createNote</i> prop:
 
 ```js
 value => {
@@ -554,7 +554,7 @@ value => {
 ```
 
 Which simply dispatches the action created with the <i>createNote</i> action creator.
-它只是分发使用 i createNote / i 动作创建器创建的动作。
+它只是分发使用<i>createNote</i> 动作创建器创建的动作。
 
 The component then references the function through its props by calling <i>props.createNote</i>:
 然后，该组件通过其 props.createNote / i 引用该函数:
@@ -578,7 +578,7 @@ const NewNote = (props) => {
 ```
 
 The concept is quite complex and describing it through text is challenging. In most cases it is sufficient to use the simpler form of <i>mapDispatchToProps</i>. However, there are situations where the more complicated definition is necessary, like if the <i>dispatched actions</i> need to reference [the props of the component](https://github.com/gaearon/redux-devtools/issues/250#issuecomment-186429931).
-这个概念相当复杂，通过文本来描述它是具有挑战性的。 在大多数情况下，使用更简单的 i mapDispatchToProps / i 就足够了。 然而，在有些情况下，需要更复杂的定义，比如 i 分派的操作 / i 需要引用[组件的支持]( https://github.com/gaearon/redux-devtools/issues/250#issuecomment-186429931)。
+这个概念相当复杂，通过文本来描述它是具有挑战性的。 在大多数情况下，使用更简单的<i>mapDispatchToProps</i> 就足够了。 然而，在有些情况下，需要更复杂的定义，比如<i>分派的操作</i> 需要引用[组件的支持]( https://github.com/gaearon/redux-devtools/issues/250#issuecomment-186429931)。
 
 The creator of Redux Dan Abramov has created a wonderful tutorial called [Getting started with Redux](https://egghead.io/courses/getting-started-with-redux) that you can find on Egghead.io. I highly recommend the tutorial to everyone. The last four videos discuss the _connect_ method, particularly the more "complicated" way of using it.
 Redux Dan Abramov 的创建者创建了一个非常棒的教程，叫做[使用 Redux 入门] ，你可以在 Egghead.io 上找到这个 https://Egghead.io/courses/Getting-started-with-Redux。 我向每个人强烈推荐这个教程。 最后四个视频讨论了连接方法，特别是使用它的更“复杂”的方式。
@@ -587,7 +587,7 @@ Redux Dan Abramov 的创建者创建了一个非常棒的教程，叫做[使用 
 # # # 重温表象 / 容器
 
 The refactored <i>Notes</i> component is almost entirely focused on rendering notes and is quite close to being a so-called [presentational component](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0). According to the [description](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) provided by Dan Abramov, presentation components:
-重构的 i Notes / i 组件几乎完全集中在呈现注释上，并且非常接近于所谓的[表示组件]( https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0组件)。 根据 Dan Abramov 提供的 https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0，演示组件:
+重构的<i>Notes</i> 组件几乎完全集中在渲染注释上，并且非常接近于所谓的[表示组件]( https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0组件)。 根据 Dan Abramov 提供的 https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0，演示组件:
 
 - Are concerned with how things look.
 关心事物的外观。
@@ -596,11 +596,11 @@ The refactored <i>Notes</i> component is almost entirely focused on rendering no
 - Often allow containment via props.children.
 - 经常允许通过建筑物进行隔离。
 - Have no dependencies on the rest of the app, such as Redux actions or stores.
-- 不依赖于应用程序的其他部分，如 Redux 操作或商店。
+- 不依赖于应用的其他部分，如 Redux 操作或商店。
 - Don’t specify how the data is loaded or mutated.
 - 不要说明数据是如何加载或变异的。
 - Receive data and callbacks exclusively via props.
-- 只通过道具接收数据和回调。
+- 只通过props接收数据和回调。
 - Rarely have their own state (when they do, it’s UI state rather than data).
 - 很少有自己的状态(当他们这样做时，是 UI 状态而不是数据)。
 - Are written as functional components unless they need state, lifecycle hooks, or performance optimizations.
@@ -636,7 +636,7 @@ export default connect(
 ```
 
 Fits the description of a <i>container</i> component. According to the [description](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) provided by Dan Abramov, container components:
-符合 i 容器 / i 组件的描述，根据 Dan Abramov 提供的 https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0，容器组件:
+符合<i>容器</i> 组件的描述，根据 Dan Abramov 提供的 https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0，容器组件:
 
 - Are concerned with how things work.
 - 关心事物的运作方式。
@@ -652,20 +652,20 @@ Fits the description of a <i>container</i> component. According to the [descript
 - 通常使用高阶组件(如 React Redux 中的 connect)生成，而不是手写。
 
 Dividing the application into presentational and container components is one way of structuring React applications that has been deemed beneficial. The division may be a good design choice or it may not, it depends on the context.
-将应用程序划分为表示和容器组件是构造 React 应用程序的一种方法，这种方法被认为是有益的。 划分可能是一个很好的设计选择，也可能不是，这取决于上下文。
+将应用划分为表示和容器组件是构造 React 应用的一种方法，这种方法被认为是有益的。 划分可能是一个很好的设计选择，也可能不是，这取决于上下文。
 
 Abramov attributes the following [benefits](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) to the division:
-阿布拉莫夫将以下 https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0归功于这个部门:
+阿布拉莫夫将如下 https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0归功于这个部门:
 
 - Better separation of concerns. You understand your app and your UI better by writing components this way.
 - 更好的关注点分离。通过这种方式编写组件，你可以更好地理解你的应用和你的用户界面。
 - Better reusability. You can use the same presentational component with completely different state sources, and turn those into separate container components that can be further reused.
 - 更好的可重用性。 您可以使用具有完全不同状态源的相同表示组件，并将其转换为可以进一步重用的单独容器组件。
 - Presentational components are essentially your app’s “palette”. You can put them on a single page and let the designer tweak all their variations without touching the app’s logic. You can run screenshot regression tests on that page.
-- 表现组件本质上是你的应用程序的“调色板”。 你可以把它们放在一个页面上，让设计师在不触及应用逻辑的情况下调整它们的所有变化。 您可以在该页面上运行屏幕截图回归测试。
+- 表现组件本质上是你的应用的“调色板”。 你可以把它们放在一个页面上，让设计师在不触及应用逻辑的情况下调整它们的所有变化。 您可以在该页面上运行屏幕截图回归测试。
 
 Abramov mentions the term [high order component](https://reactjs.org/docs/higher-order-components.html). The <i>Notes</i> component is an example of a regular component, whereas the <i>connect</i> method provided by React-Redux is an example of a <i>high order component</i>. Essentially, a high order component is a function that accept a "regular" component as its parameter, that then returns a new "regular" component as its return value.
-阿布拉莫夫提到了术语[高阶成分]( https://reactjs.org/docs/higher-order-components.html )。 I Notes / i 组件是常规组件的一个例子，而 React-Redux 提供的 i connect / i 方法是 i 高阶组件 / i 的一个例子。 从本质上讲，高阶组件是接受“ regular”组件作为参数的函数，然后返回一个新的“ regular”组件作为其返回值。
+阿布拉莫夫提到了术语[高阶成分]( https://reactjs.org/docs/higher-order-components.html )。<i>Notes</i> 组件是常规组件的一个例子，而 React-Redux 提供的<i>connect</i> 方法是<i>高阶组件</i> 的一个例子。 从本质上讲，高阶组件是接受“ regular”组件作为参数的函数，然后返回一个新的“ regular”组件作为其返回值。
 
 High order components, or HOCs, are a way of defining generic functionality that can be applied to components. This is a concept from functional programming that very slightly resembles inheritance in object oriented programming.
 高阶组件(High order components，简称 hoc)是定义可应用于组件的通用功能的一种方法。 这是一个来自函数式编程的概念，非常类似于面向对象编程中的继承。
@@ -682,10 +682,10 @@ React hook-api 发布之后，HOCs 变得越来越不受欢迎。 几乎所有�
 # # Redux 和组件状态
 
 We have come a long way in this course and, finally, we have come to the point at which we are using React "the right way", meaning React only focuses on generating the views, and the application state is separated completely from the React components and passed on to Redux, its actions, and its reducers.
-我们在这个过程中已经走了很长的路，最后，我们已经到了我们使用 React“ the right way”的地步，意思是 React 只关注于生成视图，应用程序状态完全独立于 Redux 组件，并传递到 Redux、 Redux 的动作和 Redux 的还原器。
+我们在这个过程中已经走了很长的路，最后，我们已经到了我们使用 React“ the right way”的地步，意思是 React 只关注于生成视图，应用状态完全独立于 Redux 组件，并传递到 Redux、 Redux 的动作和 Redux 的还原器。
 
 What about the _useState_-hook, which provides components with their own state? Does it have any role if an application is using Redux or some other external state management solution? If the application has more complicated forms, it may be beneficial to implement their local state using the state provided by the _useState_ function. One can, of course, have Redux manage the state of the forms, however, if the state of the form is only relevant when filling the form (e.g. for validation) it may be wise to leave the management of state to the component responsible for the form.
-那么 useState-hook 呢? 它为组件提供它们自己的状态？ 如果应用程序正在使用 Redux 或其他外部状态管理解决方案，它是否有任何作用？ 如果应用程序具有更复杂的形式，那么使用 useState 函数提供的状态实现它们的本地状态可能有益。 当然，可以让 Redux 管理表单的状态，但是，如果表单的状态只在填写表单时有关(例如用于验证) ，那么将状态的管理留给负责表单的组件可能是明智的。
+那么 useState-hook 呢? 它为组件提供它们自己的状态？ 如果应用正在使用 Redux 或其他外部状态管理解决方案，它是否有任何作用？ 如果应用具有更复杂的形式，那么使用 useState 函数提供的状态实现它们的本地状态可能有益。 当然，可以让 Redux 管理表单的状态，但是，如果表单的状态只在填写表单时有关(例如用于验证) ，那么将状态的管理留给负责表单的组件可能是明智的。
 
 <!-- Kannattaako reduxia käyttää aina? Tuskinpa. Reduxin kehittäjä Dan Abramov pohdiskelee asiaa artikkelissaan [You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367) -->
 
@@ -716,16 +716,16 @@ More about this [here](https://www.simplethread.com/cant-replace-redux-with-hook
 6.19轶事和联系，第一步
 
 The <i>redux store</i> is currently passed to all of the components through props.
-I redux store / i 目前通过道具传递给所有组件。
+I redux store / i 目前通过props传递给所有组件。
 
 Add the [react-redux](https://github.com/reactjs/react-redux) package to your application, and modify the <i>AnecdoteList</i> so that it accesses the store's state with the help of the _connect_ function.
-添加[ react-redux ](google  https://github.com/reactjs/react-redux )包到您的应用程序中，并修改 i / 轶事列表 / i，以便它借助 connect 函数访问存储的状态。
+添加[ react-redux ](google  https://github.com/reactjs/react-redux )包到您的应用中，并修改<i>/ 轶事列表</i>，以便它借助 connect 函数访问存储的状态。
 
 Voting for and creating new anecdotes **does not need to work** after this exercise.
 在这个练习之后，投票选举和创造新的奇闻轶事就不需要工作了。
 
 The <i>mapStateToProps</i> function you will need in this exercise is approximately the following:
-在这个练习中，您需要的 i mapStateToProps / i 函数大致如下:
+在这个练习中，您需要的<i>mapStateToProps</i> 函数大致如下:
 
 ```js
 const mapStateToProps = (state) => {
@@ -742,7 +742,7 @@ const mapStateToProps = (state) => {
 6.20轶事和联系，第二步
 
 Do the same for the <i>Filter</i> and <i>AnecdoteForm</i> components.
-对 i Filter / i 和 i embarriteform / i 组件执行同样的操作。
+对<i>Filter</i> 和<i>embarriteform</i> 组件执行同样的操作。
 
 #### 6.21 anecdotes, the grand finale
 6.21轶事，压轴大戏
@@ -750,7 +750,7 @@ Do the same for the <i>Filter</i> and <i>AnecdoteForm</i> components.
 <!-- Sovellukseen on (todennäköisesti) jäänyt eräs hieman ikävä bugi. Jos vote-näppäintä painellaan useasti peräkkäin, notifikaatio näkyy ruudulla hieman miten sattuu. Esimerkiksi jos äänestetään kaksi kertaa kolmen sekunnin välein, näkyy jälkimmäinen notifikaatio ruudulla ainoastaan kahden sekunnin verran (olettaen että notifikaation näyttöaika on 5 sekuntia). Tämä johtuu siitä, että ensimmäisen äänestyksen notifikaation tyhjennys tyhjentääkin myöhemmän äänestyksen notifikaation. -->
 
 You (propably) have one nasty bug in your application. If the user clicks the vote button multiple times in a row, the notification is displayed funnily. For example if a user votes twice in three seconds, 
-您(可能)在应用程序中有一个讨厌的 bug。 如果用户连续多次单击投票按钮，通知就会显示得非常有趣。 例如，如果一个用户在三秒内投票两次,
+您(可能)在应用中有一个讨厌的 bug。 如果用户连续多次单击投票按钮，通知就会显示得非常有趣。 例如，如果一个用户在三秒内投票两次,
 the last notification is only displayed for two seconds (assuming the notification is normally shown for 5 seconds). This happens because removing the first notification accidentally removes the second notification. 
 最后一个通知只显示两秒钟(假设通知通常显示5秒钟)。 这是因为删除第一个通知时意外地删除了第二个通知。
 

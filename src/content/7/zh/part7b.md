@@ -16,7 +16,7 @@ The exercises in this part are a bit different than the exercises in the previou
 <!-- Tämän ja seuraavan luvun tehtävien lisäksi seitsemäs osa sisältää kertaavan ja soveltavan [tehtäväsarjan](/osa7/tehtavia_blogilistan_laajennus), jossa laajennetaan osissa 4 ja 5 tehtyä Bloglist-sovellusta. -->
 ——在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文
 This part also contains a [series of exercises](/osa7/tehtavia_blogilistan_laajennus) in which we modify the Bloglist application from parts 4 and 5 to rehearse and apply the skills we have learned.
-本部分还包含一系列练习(/ osa7 / tehtavia blogilistan laajennus) ，其中我们从第4部分和第5部分修改 Bloglist 应用程序，以排练和应用我们所学到的技能。
+本部分还包含一系列练习(/ osa7 / tehtavia blogilistan laajennus) ，其中我们从第4章节和第5章节修改 Bloglist 应用，以排练和应用我们所学到的技能。
 
 ### Hooks
 钩子
@@ -46,7 +46,7 @@ we used the [useSelector](https://react-redux.js.org/api/hooks#useselector) and 
 我们在[上一部分](/ osa7 / react router /)中介绍的[ React-router 的]( https://reacttraining.com/React-router/web/guides ) api 也部分基于[ hook ]( https://reacttraining.com/React-router/web/api/hooks )。 它的钩子可以用来访问 url 参数和历史对象，这允许以编程方式操作浏览器的 url。
 
 As mentioned in [part 1](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks), hooks are not normal functions, and when using those we have to adhere to certain [rules or limitations](https://reactjs.org/docs/hooks-rules.html). Let's recap the rules of using hooks, copied verbatim from the official React documentation:
-正如在[ part 1](/ en / part1 / a 更复杂的状态调试反应应用程序 # rules-of-hooks)中提到的，钩子不是正常的函数，在使用这些函数时，我们必须遵守某些[规则或限制]( https://reactjs.org/docs/hooks-rules.html )。 让我们回顾一下使用钩子的规则，一字不差地从官方的 React 文档中复制下来:
+正如在[ part 1](/ en / part1 / a 更复杂的状态调试React应用 # rules-of-hooks)中提到的，钩子不是正常的函数，在使用这些函数时，我们必须遵守某些[规则或限制]( https://reactjs.org/docs/hooks-rules.html )。 让我们回顾一下使用钩子的规则，一字不差地从官方的 React 文档中复制下来:
 
 **Don’t call Hooks inside loops, conditions, or nested functions.** Instead, always use Hooks at the top level of your React function. 
 * * 不要在循环、条件或嵌套函数中调用 Hooks。 * * 取而代之的是，始终在 React 函数的顶层使用 Hooks。
@@ -60,10 +60,10 @@ As mentioned in [part 1](/en/part1/a_more_complex_state_debugging_react_apps#rul
 - 从定制钩子调用钩子
 
 There's an existing [ESlint](https://www.npmjs.com/package/eslint-plugin-react-hooks) rule that can be used to verify that the application uses hooks correctly. 
-有一个现有的[ ESlint ]( https://www.npmjs.com/package/ESlint-plugin-react-hooks )规则可以用来验证应用程序是否正确地使用钩子。
+有一个现有的[ ESlint ]( https://www.npmjs.com/package/ESlint-plugin-react-hooks )规则可以用来验证应用是否正确地使用钩子。
 
 Create-react-app has readily configured rule [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks) that complains if hooks are used in an illegal manner:
-创建-反应-应用程序已经很容易配置规则[ eslint-plugin-react-hooks ]( https://www.npmjs.com/package/eslint-plugin-react-hooks ) ，如果钩子被非法使用就会抱怨:
+创建-React-应用已经很容易配置规则[ eslint-plugin-react-hooks ]( https://www.npmjs.com/package/eslint-plugin-react-hooks ) ，如果钩子被非法使用就会抱怨:
 
 ![](../../images/7/60ea.png)
 
@@ -79,11 +79,11 @@ I 构建自己的 hook 可以让您将组件逻辑提取到可重用的函数中
 
 
 Custom hooks are regular JavaScript functions that can use any other hooks, as long as they adhere to the [rules of hooks](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks). Additionally, the name of custom hooks must start with the word _use_.
-自定义钩子是常规的 JavaScript 函数，可以使用任何其他钩子，只要它们遵循[ hook 的规则](/ en / part1 / a 更复杂的状态调试反应应用 # rules-of-hooks)。 此外，自定义钩子的名称必须以单词 use 开头。
+自定义钩子是常规的 JavaScript 函数，可以使用任何其他钩子，只要它们遵循[ hook 的规则](/ en / part1 / a 更复杂的状态调试React应用 # rules-of-hooks)。 此外，自定义钩子的名称必须以单词 use 开头。
 
 
 We implemented a counter application in [part 1](/en/part1/component_state_event_handlers#event-handling), that can have its value incremented, decremented, or reset. The code of the application is as follows:
-我们在[ part 1](/ en / part1 / component state handlers # event-handling)中实现了一个计数器应用程序，它的值可以递增、递减或重置。 申请编号如下:
+我们在[ part 1](/ en / part1 / component state handlers # event-handling)中实现了一个计数器应用，它的值可以递增、递减或重置。 申请编号如下:
 
 ```js  
 import React, { useState } from 'react'
@@ -140,7 +140,7 @@ Our custom hook uses the _useState_ hook internally to create its own state. The
 
 
 React components can use the hook as shown below:
-反应组件可以使用如下所示的挂钩:
+React组件可以使用如下所示的挂钩:
 
 ```js
 const App = (props) => {
@@ -169,7 +169,7 @@ By doing this we can extract the state of the _App_ component and its manipulati
 
 
 The same hook could be <i>reused</i> in the application that was keeping track of the amount of clicks made to the left and right buttons:
-同样的钩子可以在记录左右按钮点击次数的应用程序中重用 / i:
+同样的钩子可以在记录左右按钮点击次数的应用中重用 / i:
 
 ```js
 
@@ -194,11 +194,11 @@ const App = () => {
 
 
 The application creates <i>two</i> completely separate counters. The first one is assigned to the variable _left_ and the other to the variable _right_.
-应用程序创建了两个完全独立的 i / i 计数器。 第一个分配给左边的变量，另一个分配给右边的变量。
+应用创建了两个完全独立的 i / i 计数器。 第一个分配给左边的变量，另一个分配给右边的变量。
 
 
 Dealing with forms in React is somewhat tricky. The following application presents the user with a form that requests the user to input their name, birthday, and height:
-在 React 中处理表单有点棘手。 下面的应用程序向用户提供一个表单，要求用户输入他们的姓名、生日和身高:
+在 React 中处理表单有点棘手。 下面的应用向用户提供一个表单，要求用户输入他们的姓名、生日和身高:
 
 ```js
 const App = () => {
@@ -240,7 +240,7 @@ const App = () => {
 
 
 Every field of the form has its own state. In order to keep the state of the form synchronized with the data provided by the user, we have to register an appropriate <i>onChange</i> handler for each of the <i>input</i> elements.
-形体的每个字段都有自己的状态。 为了使表单的状态与用户提供的数据保持同步，我们必须为每个 i input / i 元素注册一个适当的 i onChange / i 处理程序。
+形体的每个字段都有自己的状态。 为了使表单的状态与用户提供的数据保持同步，我们必须为每个<i>input</i> 元素注册一个适当的<i>onChange</i> 处理程序。
 
 
 Let's define our own custom _useField_ hook, that simplifies the state management of the form:
@@ -264,11 +264,11 @@ const useField = (type) => {
 
 
 The hook function receives the type of the input field as a parameter. The function returns all of the attributes required by the <i>input</i>: its type, value and the onChange handler.
-钩子函数接收输入字段的类型作为参数。 函数返回 i input / i 所需的所有属性: 它的类型、值和 onChange 处理程序。
+钩子函数接收输入字段的类型作为参数。 函数返回<i>input</i> 所需的所有属性: 它的类型、值和 onChange 处理程序。
 
 
 The hook can be used in the following way:
-钩子可以用以下方式使用:
+钩子可以用如下方式使用:
 
 ```js
 const App = () => {
@@ -296,7 +296,7 @@ const App = () => {
 
 
 We could simplify things a bit further. Since the _name_ object has exactly all of the attributes that the <i>input</i> element expects to receive as props, we can pass the props to the element using the [spread syntax](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) in the following way:
-我们可以进一步简化事情。 因为 name 对象具有 i input / i 元素期望作为道具接收的所有属性，所以我们可以使用[ spread syntax ]( https://reactjs.org/docs/jsx-in-depth.html#spread-attributes )以下面的方式将道具传递给元素:
+我们可以进一步简化事情。 因为 name 对象具有<i>input</i> 元素期望作为props接收的所有属性，所以我们可以使用[ spread syntax ]( https://reactjs.org/docs/jsx-in-depth.html#spread-attributes )如下面的方式将props传递给元素:
 
 ```js
 <input {...name} /> 
@@ -304,7 +304,7 @@ We could simplify things a bit further. Since the _name_ object has exactly all 
 
 
 As the [example](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) in the React documentation states, the following two ways of passing props to a component achieve the exact same result:
-正如 React 文档中的[示例]( https://reactjs.org/docs/jsx-in-depth.html#spread-attributes )所述，以下两种方法为组件传递道具可以得到完全相同的结果:
+正如 React 文档中的[示例]( https://reactjs.org/docs/jsx-in-depth.html#spread-attributes )所述，如下两种方法为组件传递props可以得到完全相同的结果:
 
 ```js
 <Greeting firstName='Arto' lastName='Hellas' />
@@ -319,7 +319,7 @@ const person = {
 
 
 The application gets simplified into the following format:
-申请将简化为以下格式:
+申请将简化为如下格式:
 
 ```js
 const App = () => {
@@ -359,14 +359,14 @@ Custom hooks are clearly not only a tool for reuse, they also provide a better w
 更多关于钩子
 
 The internet is starting to fill up with more and more helpful material related to hooks. The following sources are worth checking out:
-互联网上开始充斥着越来越多关于钩子的有用资料。 以下是值得一查的资料来源:
+互联网上开始充斥着越来越多关于钩子的有用资料。 如下是值得一查的资料来源:
 
 * [Awesome React Hooks Resouces](https://github.com/rehooks/awesome-react-hooks)
 * [ Awesome React Hooks Resouces ]( https://github.com/rehooks/Awesome-React-Hooks )
 * [Easy to understand React Hook recipes by Gabe Ragland](https://usehooks.com/)
-* [易于理解的反应钩食谱由 Gabe Ragland 提供]( https://usehooks.com/ )
+* [易于理解的React钩食谱由 Gabe Ragland 提供]( https://usehooks.com/ )
 * [Why Do React Hooks Rely on Call Order?](https://overreacted.io/why-do-hooks-rely-on-call-order/)
-* [为什么反应钩依赖于调用顺序? ]( https://overreacted.io/Why-Do-Hooks-Rely-on-Call-Order/ )
+* [为什么React钩依赖于调用顺序? ]( https://overreacted.io/Why-Do-Hooks-Rely-on-Call-Order/ )
 
 </div>
 
@@ -379,16 +379,16 @@ The internet is starting to fill up with more and more helpful material related 
 练习7.4-7.8。
 
 We'll continue with the app from [exercises](/osa7/custom_hookit#tehtavat-7-4-7-6) of the chapter [react router](/en/part7/react_router). 
-我们将继续使用[ exercises ](/ osa7 / custom hookit # tehtawat-7-4-7-6)中的应用程序[ react router ](/ en / part7 / react router)。
+我们将继续使用[ exercises ](/ osa7 / custom hookit # tehtawat-7-4-7-6)中的应用[ react router ](/ en / part7 / react router)。
 
 #### 7.4: anecdotes and hooks step1
 7.4: 轶事和胡克斯第一步
 
 Simplify the anecdote creation form of your application with the _useField_ custom hook we defined earlier.
-使用我们前面定义的 usefeld 自定义钩子简化应用程序的轶事创建形式。
+使用我们前面定义的 usefeld 自定义钩子简化应用的轶事创建形式。
 
 One natural place to save the custom hooks of your application is in the <i>/src/hooks/index.js</i> file.
-保存应用程序的自定义钩子的一个自然位置是 i / src / hooks / index. js / i 文件。
+保存应用的自定义钩子的一个自然位置是<i>/ src / hooks</i>ndex. js / i 文件。
 
 
 If you use the [named export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description) instead of the default export:
@@ -419,7 +419,7 @@ export const useAnotherHook = () => { // highlight-line
 
 
 Then [importing](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) happens in the following way:
-然后[导入]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/statements/import )以下面的方式发生:
+然后[导入]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/statements/import )如下面的方式发生:
 
 ```js
 import  { useField } from './hooks'
@@ -442,10 +442,10 @@ Add a button to the form that you can use to clear all the input fields:
 
 
 Expand the functionality of the <i>useField</i> hook so that it offers a new <i>reset</i> operation for clearing the field. 
-扩展 i useField / i 钩子的功能，以便它提供一个新的 i reset / i 操作来清除字段。
+扩展<i>useField</i> 钩子的功能，以便它提供一个新的<i>reset</i> 操作来清除字段。
 
 Depending on your solution you may see the following warning in your console:
-根据您的解决方案，您可能会在控制台中看到以下警告:
+根据您的解决方案，您可能会在控制台中看到如下警告:
 
 ![](../../images/7/62ea.png)
 
@@ -463,7 +463,7 @@ If you see the warning in the console, make the necessary changes to get rid of 
 如果你在控制台中看到警告，做出必要的修改，去掉输入标签控制台警告上的‘支柱复位无效值’。
 
 The reason for this warning is that after making the changes to your application, the following expression:
-发出此警告的原因是，在对应用程序进行更改之后，下面的表达式:
+发出此警告的原因是，在对应用进行更改之后，下面的表达式:
 
 ```js
 <input {...content}/>
@@ -484,7 +484,7 @@ Essentially, is the same as this:
 
 
 The <i>input</i> element should not be given a <i>reset</i> attribute.
-I input / i 元素不应该被赋予 i reset / i 属性。
+I input /<i>元素不应该被赋予 i reset</i> 属性。
 
 
 One simple fix would be to not use the spread syntax and write all of the forms like this:
@@ -500,7 +500,7 @@ One simple fix would be to not use the spread syntax and write all of the forms 
 
 
 If we were to do this we would lose much of the benefit provided by the <i>useField</i> hook. Instead, come up with a solution that fixes the issue, but is still easy to use with spread syntax.
-如果我们这样做，我们将失去很多由 i useField / i 钩子提供的好处。 相反，要想出一个解决方案来修复这个问题，但仍然易于使用传播语法。
+如果我们这样做，我们将失去很多由<i>useField</i> 钩子提供的好处。 相反，要想出一个解决方案来修复这个问题，但仍然易于使用传播语法。
 
 #### 7.7: country hook
 7.7: country hook
@@ -518,7 +518,7 @@ Use the code from https://github.com/fullstack-hy2020/country-hook as your start
 <!-- Sovelluksen avulla on mahdollista hakea maiden tietoja https://restcountries.eu/ rajapinnasta. Jos maa löytyy, näytetään maan perustiedot -->
 
 The application can be used to search for country details from the https://restcountries.eu/ interface. If country is found, the details of the country are displayed
-该应用程序可以用来搜索国家的详细信息，从 https://restcountries.eu/ 的界面。 如果找到国家，则显示该国的详细信息
+该应用可以用来搜索国家的详细信息，从 https://restcountries.eu/ 的界面。 如果找到国家，则显示该国的详细信息
 
 ![](../../images/7/69ea.png)
 
@@ -534,7 +534,7 @@ If country is not found, message is displayed to the user
 <!-- Sovellus on muuten valmiiksi toteutettu, mutta joudut tässä tehtävässä toteuttamaan custom hookin _useCountry_, jonka avulla haet hookin parametrina saaman nimisen maan tiedot. -->
 
 The application is otherwise complete, but in this exercise you have to implement a custom hook _useCountry_, which can be used to search for the details of the country given to the hook as a parameter.
-除此之外，应用程序是完整的，但是在这个练习中，您必须实现一个自定义的 hook useCountry，它可以用来搜索作为参数提供给 hook 的国家的详细信息。
+除此之外，应用是完整的，但是在这个练习中，您必须实现一个自定义的 hook useCountry，它可以用来搜索作为参数提供给 hook 的国家的详细信息。
 
 <!-- Maan tietojan hakeminen kannattaa hoitaa apin endpointin [full name](https://restcountries.eu/#api-endpoints-full-name) avulla, hookin sisällä olevassa _useEffect_-hookissa. -->
 
@@ -550,7 +550,7 @@ Note, that in this exercise it is essential to use useEffect's [second parameter
 7.8: 终极钩子
 
 The code of the application responsible for communicating with the backend of the note application of the previous parts looks like this:
-负责与前面部分的笔记应用程序后端通信的应用程序代码如下:
+负责与前面部分的笔记应用后端通信的应用代码如下:
 
 ```js
 import axios from 'axios'
@@ -585,13 +585,13 @@ export default { getAll, create, update, setToken }
 ```
 
 We notice that the code is in no way specific to the fact that our application deals with notes. Excluding the value of the _baseUrl_ variable, the same code could be reused in the blog post application for dealing with the communication with the backend.
-我们注意到，代码并不是特定于我们的应用程序处理注释的事实。 排除 baseUrl 变量的值，可以在 blog post 应用程序中重用相同的代码来处理与后端的通信。
+我们注意到，代码并不是特定于我们的应用处理注释的事实。 排除 baseUrl 变量的值，可以在 blog post 应用中重用相同的代码来处理与后端的通信。
 
 Extract the code for communicating with the backend into its own _useResource_ hook. It is sufficient to implement fetching all resources and creating a new resource.
 将用于与后端通信的代码提取到它自己的 useResource 钩子中。 只要实现获取所有资源并创建新资源就足够了。
 
 You can do the exercise for the project found in the https://github.com/fullstack-hy2020/ultimate-hooks repository. The <i>App</i> component for the project is the following:
-你可以在 https://github.com/fullstack-hy2020/ultimate-hooks 储存库中找到这个项目做练习。 该项目的 i App / i 组件如下:
+你可以在 https://github.com/fullstack-hy2020/ultimate-hooks 储存库中找到这个项目做练习。 该项目的<i>App</i> 组件如下:
 
 ```js
 const App = () => {

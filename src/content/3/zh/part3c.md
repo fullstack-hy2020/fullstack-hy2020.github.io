@@ -9,25 +9,25 @@ lang: zh
 
 
 Before we move into the main topic of persisting data in a database, we will take a look at a few different ways of debugging Node applications.
-在讨论在数据库中保存数据的主题之前，我们将看一下调试 Node 应用程序的几种不同方法。
+在讨论在数据库中保存数据的主题之前，我们将看一下调试 Node 应用的几种不同方法。
 
 ### Debugging Node applications
-# # 调试节点应用程序
+# # 调试节点应用
 
 Debugging Node applications is slightly more difficult than debugging JavaScript running in your browser. Printing to the console is a tried and true method, and it's always worth doing. There are people who think that more sophisticated methods should be used instead, but I disagree. Even the world's elite open source developers [use](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) this [method](https://swizec.com/blog/javascript-debugging-slightly-beyond-console-log/swizec/6633).
-调试 Node 应用程序比调试在浏览器中运行的 JavaScript 稍微困难一些。 将数据打印到控制台是一种可靠的方法，而且总是值得一试。 有些人认为应该用更复杂的方法来代替，但我不同意。 即使是世界上最顶尖的开源开发者也会使用这种方法， https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html  https://swizec.com/blog/javascript-debugging-slightly-beyond-console-log/swizec/6633。
+调试 Node 应用比调试在浏览器中运行的 JavaScript 稍微困难一些。 将数据打印到控制台是一种可靠的方法，而且总是值得一试。 有些人认为应该用更复杂的方法来代替，但我不同意。 即使是世界上最顶尖的开源开发者也会使用这种方法， https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html  https://swizec.com/blog/javascript-debugging-slightly-beyond-console-log/swizec/6633。
 
 #### Visual Studio Code
 # # # Visual Studio Code
 
 The Visual Studio Code debugger can be useful in some situations. You can launch the application in debugging mode like this:
-Visualstudio 代码调试器在某些情况下可能很有用。 你可以像这样在调试模式下启动应用程序:
+Visualstudio 代码调试器在某些情况下可能很有用。 你可以像这样在调试模式下启动应用:
 
 ![](../../images/3/35.png)
 
 
 Note that the application shouldn't be running in another console, otherwise the port will already be in use.
-注意，应用程序不应该在另一个控制台中运行，否则该端口将已经在使用中。
+注意，应用不应该在另一个控制台中运行，否则该端口将已经在使用中。
 
 Below you can see a screenshot where the code execution has been paused in the middle of saving a new note:
 下面你可以看到一个屏幕截图，代码执行在保存新笔记的过程中被暂停:
@@ -36,7 +36,7 @@ Below you can see a screenshot where the code execution has been paused in the m
 
 
 The execution has stopped at the <i>breakpoint</i> in line 63. In the console you can see the value of the <i>note</i> variable. In the top left window you can see other things related to the state of the application.
-执行在第63行的 i 断点 / i 处停止。 在控制台中，您可以看到 i note / i 变量的值。 在左上角的窗口中，您可以看到与应用程序状态相关的其他内容。
+执行在第63行的<i>断点</i> 处停止。 在控制台中，您可以看到<i>note</i> 变量的值。 在左上角的窗口中，您可以看到与应用状态相关的其他内容。
 
 The arrows at the top can be used for controlling the flow of the debugger.
 顶部的箭头可用于控制调试器的流。
@@ -48,7 +48,7 @@ For some reason, I don't use the Visual Studio Code debugger a whole lot.
 开发工具
 
 Debugging is also possible with the Chrome developer console by starting your application with the command:
-通过 Chrome 开发者控制台，通过以下命令启动应用程序，也可以进行调试:
+通过 Chrome 开发者控制台，通过如下命令启动应用，也可以进行调试:
 
 ```bash
 node --inspect index.js
@@ -61,13 +61,13 @@ You can access the debugger by clicking the green icon that appears in the Chrom
 
 
 The debugging view works the same way as it did with React applications. The <i>Sources</i> tab can be used for setting breakpoints where the execution of the code will be paused.
-调试视图的工作方式与 React 应用程序相同。 I Sources / i 选项卡可用于设置中断点，中断点将暂停代码的执行。
+调试视图的工作方式与 React 应用相同。<i>Sources</i> 选项卡可用于设置中断点，中断点将暂停代码的执行。
 
 ![](../../images/3/38eb.png)
 
 
 All of the application's console.log messages will appear in the <i>Console</i> tab of the debugger. You can also inspect values of variables and execute your own JavaScript code.
-应用程序的所有 Console.log 消息都将出现在调试器的 i Console / i 选项卡中。 您还可以检查变量的值并执行自己的 JavaScript 代码。
+应用的所有 Console.log 消息都将出现在调试器的<i>Console</i> 选项卡中。 您还可以检查变量的值并执行自己的 JavaScript 代码。
 
 ![](../../images/3/39ea.png)
 
@@ -76,10 +76,10 @@ All of the application's console.log messages will appear in the <i>Console</i> 
 质疑一切
 
 Debugging Full Stack applications may seem tricky at first. Soon our application will also have a database in addition to the frontend and backend, and there will be many potential areas for bugs in the application.
-调试完全堆栈应用程序起初可能看起来很棘手。 不久，我们的应用程序除了前端和后端之外，还将有一个数据库，并且应用程序中将有许多潜在的 bug。
+调试完全堆栈应用起初可能看起来很棘手。 不久，我们的应用除了前端和后端之外，还将有一个数据库，并且应用中将有许多潜在的 bug。
 
 When the application "does not work", we have to first figure out where the problem actually occurs. It's very common for the problem to exist in a place where you didn't expect it to, and it can take minutes, hours, or even days before you find the source of the problem.
-当应用程序“不工作”时，我们必须首先找出问题实际发生在哪里。 这个问题存在于一个你没有预料到的地方是很常见的，它可能需要几分钟，几个小时，甚至几天，你才能找到问题的根源。
+当应用“不工作”时，我们必须首先找出问题实际发生在哪里。 这个问题存在于一个你没有预料到的地方是很常见的，它可能需要几分钟，几个小时，甚至几天，你才能找到问题的根源。
 
 The key is to be systematic. Since the problem can exist anywhere, <i>you must question everything</i>, and eliminate all possibilities one by one. Logging to the console, Postman, debuggers, and experience will help.
 关键是要有系统性。 既然问题可以存在于任何地方，你就必须质疑每一件事，并逐一排除所有的可能性。 登录到控制台、邮递员、调试器和体验将有所帮助。
@@ -112,7 +112,7 @@ Once you've created and logged into your account, Atlas will recommend creating 
 
 
 Let's choose <i>AWS</i> and <i>Frankfurt</i> and create a cluster.
-让我们选择 i AWS / i 和 i Frankfurt / i 并创建一个集群。
+让我们选择<i>AWS</i> 和<i>Frankfurt</i> 并创建一个集群。
 
 ![](../../images/3/58.png)
 
@@ -124,7 +124,7 @@ Let's wait for the cluster to be ready for use. This will take approximately 10 
 * * 注意 * * 在集群准备好之前不要继续。
 
 Let's use the <i>database access</i> tab for creating user credentials for the database. Please note that these are not the same credentials you use for logging into MongoDB Atlas.
-让我们使用 i database access / i 选项卡为数据库创建用户凭据。 请注意，这些不是您登录到 MongoDB Atlas 所使用的相同凭据。
+让我们使用<i>database access</i> 选项卡为数据库创建用户凭据。 请注意，这些不是您登录到 MongoDB Atlas 所使用的相同凭据。
 
 ![](../../images/3/59.png)
 
@@ -157,13 +157,13 @@ Finally we are ready to connect to our database. Start by clicking <i>connect</i
 
 
 and the choose <i>Connect your application</i>:
-选择 i Connect your application / i:
+选择<i>Connect your application</i>:
 
 ![](../../images/3/64ea.png)
 
 
 The view displays the <i>MongoDB URI</i>, which is the address of the database that we will supply to the MongoDB client library we will add to our application.
-该视图显示 i MongoDB URI / i，这是我们将提供给我们将添加到应用程序的 MongoDB 客户机库的数据库地址。
+该视图显示<i>MongoDB URI</i>，这是我们将提供给我们将添加到应用的 MongoDB 客户机库的数据库地址。
 
 The address looks like this:
 地址是这样的:
@@ -179,7 +179,7 @@ We could use the database directly from our JavaScript code with the [official M
 我们可以通过官方的 MongoDb Node.js 驱动程序库直接从 JavaScript 代码中使用这个数据库，但是使用起来相当麻烦。 相反，我们将使用提供更高级别 API 的[ Mongoose ]( http://mongoosejs.com/index.html )库。
 
 Mongoose could be described as an <i>object document mapper</i> (ODM), and saving JavaScript objects as Mongo documents is straightforward with the library.
-Mongoose 可以被描述为 i object document mapper / i (ODM) ，并且将 JavaScript 对象保存为 Mongo 文档对于库来说很简单。
+Mongoose 可以被描述为<i>object document mapper</i> (ODM) ，并且将 JavaScript 对象保存为 Mongo 文档对于库来说很简单。
 
 Let's install Mongoose:
 让我们安装 Mongoose:
@@ -189,7 +189,7 @@ npm install mongoose --save
 ```
 
 Let's not add any code dealing with Mongo to our backend just yet. Instead, let's make a practice application into the file <i>mongo.js</i>:
-现在还不要在后端添加任何处理 Mongo 的代码。 相反，让我们在 i mongo.js / i 文件中创建一个实践应用程序:
+现在还不要在后端添加任何处理 Mongo 的代码。 相反，让我们在<i>mongo.js</i> 文件中创建一个实践应用:
 
 ```js
 const mongoose = require('mongoose')
@@ -234,10 +234,10 @@ const password = process.argv[2]
 ```
 
 When the code is run with the command <i>node mongo.js password</i>, Mongo will add a new document to the database.
-当使用命令 i node Mongo.js password / i 运行代码时，Mongo 将向数据库添加一个新文档。
+当使用命令<i>node Mongo.js password</i> 运行代码时，Mongo 将向数据库添加一个新文档。
 
 We can view the current state of the database from the MongoDB Atlas from <i>Collections</i>
-我们可以从 i Collections / i 中查看 MongoDB Atlas 中数据库的当前状态
+我们可以从<i>Collections</i> 中查看 MongoDB Atlas 中数据库的当前状态
 in the Overview tab.
 在概览标签页。
 
@@ -245,7 +245,7 @@ in the Overview tab.
 
 
 As the view states, the <i>document</i> matching the note has been added to the <i>notes</i> collection in the <i>test</i> database.
-正如视图所指出的那样，匹配注释的 i document / i 已经添加到 i test / i 数据库中的 i notes / i 集合中。
+正如视图所指出的那样，匹配注释的<i>document</i> 已经添加到<i>test</i> 数据库中的<i>notes</i> 集合中。
 
 ![](../../images/3/66a.png)
 
@@ -257,7 +257,7 @@ We should give a better name to the database. Like the documentation says, we ca
 
 
 Let's destroy the <i>test</i> database. Let's change the name of database to <i>note-app</i> instead, by modifying the URI:
-让我们通过修改 URI，将数据库的名称更改为 i note-app / i:
+让我们通过修改 URI，将数据库的名称更改为<i>note-app</i>:
 
 ```bash
 mongodb+srv://fullstack:<PASSWORD>@cluster0-ostce.mongodb.net/note-app?retryWrites=true
@@ -270,7 +270,7 @@ Let's run our code again.
 
 
 The data is now stored in the right database. The view also offers the <i>create database</i> functionality, that can be used to create new databases from the website. Creating the database like this is not necessary, since MongoDB Atlas automatically creates a new database when an application tries to connect to a database that does not exist yet.
-数据现在存储在正确的数据库中。 该视图还提供了 i create database / i 功能，可用于从网站创建新的数据库。 这样创建数据库是不必要的，因为当应用程序试图连接到一个尚不存在的数据库时，MongoDB Atlas 会自动创建一个新的数据库。
+数据现在存储在正确的数据库中。 该视图还提供了<i>create database</i> 功能，可用于从网站创建新的数据库。 这样创建数据库是不必要的，因为当应用试图连接到一个尚不存在的数据库时，MongoDB Atlas 会自动创建一个新的数据库。
 
 ### Schema
 # # 架构
@@ -292,10 +292,10 @@ First we define the [schema](http://mongoosejs.com/docs/guide.html) of a note th
 首先，我们定义了存储在 noteSchema 变量中的音符的[模式]( http://mongoosejs.com/docs/guide.html )。 模式告诉 Mongoose 如何将 note 对象存储在数据库中。
 
 In the _Note_ model definition, the first <i>"Note"</i> parameter is the singular name of the model. The name of the collection will be the lowercased plural <i>notes</i>, because the [Mongoose convention](http://mongoosejs.com/docs/models.html) is to automatically name collections as the plural (e.g. <i>notes</i>) when the schema refers to them in the singular (e.g. <i>Note</i>).
-在 Note 模型定义中，第一个 i“ Note” / i 参数是模型的单数名。 集合的名称将是小写的复数 i notes / i，因为[ Mongoose 约定]( http://mongoosejs.com/docs/models.html )是当模式以单数(例如 i notes / i)引用集合时自动将其命名为复数(例如 i notes / i)。
+在 Note 模型定义中，第一个 i“ Note” /<i>参数是模型的单数名。 集合的名称将是小写的复数 i notes</i>，因为[ Mongoose 约定]( http://mongoosejs.com/docs/models.html )是当模式以单数(例如<i>notes</i>)引用集合时自动将其命名为复数(例如<i>notes</i>)。
 
 Document databases like Mongo are <i>schemaless</i>, meaning that the database itself does not care about the structure of the data that is stored in the database. It is possible to store documents with completely different fields in the same collection.
-像 Mongo 这样的文档数据库是 i schemaaless / i，这意味着数据库本身并不关心存储在数据库中的数据的结构。 可以在同一集合中存储具有完全不同字段的文档。
+像 Mongo 这样的文档数据库是<i>schemaaless</i>，这意味着数据库本身并不关心存储在数据库中的数据的结构。 可以在同一集合中存储具有完全不同字段的文档。
 
 The idea behind Mongoose is that the data stored in the database is given a <i>schema at the level of the application</i> that defines the shape of the documents stored in any given collection.
 Mongoose 背后的思想是，存储在数据库中的数据在 application / i 级别上被赋予一个 i 模式，该模式定义了存储在任何给定集合中的文档的形状。
@@ -304,7 +304,7 @@ Mongoose 背后的思想是，存储在数据库中的数据在 application / i 
 创建和保存对象
 
 Next, the application creates a new note object with the help of the <i>Note</i> [model](http://mongoosejs.com/docs/models.html):
-接下来，应用程序在 i Note / i [ model ]( http://mongoosejs.com/docs/models.html )的帮助下创建一个新的 Note 对象:
+接下来，应用在<i>Note</i> [ model ]( http://mongoosejs.com/docs/models.html )的帮助下创建一个新的 Note 对象:
 
 ```js
 const note = new Note({
@@ -315,7 +315,7 @@ const note = new Note({
 ```
 
 Models are so-called <i>constructor functions</i> that create new JavaScript objects based on the provided parameters. Since the objects are created with the model's constructor function, they have all the properties of the model, which include methods for saving the object to the database.
-模型是所谓的 i constructor function / i，它根据提供的参数创建新的 JavaScript 对象。 由于对象是使用模型的构造函数创建的，因此它们具有模型的所有属性，其中包括将对象保存到数据库的方法。
+模型是所谓的<i>constructor function</i>，它根据提供的参数创建新的 JavaScript 对象。 由于对象是使用模型的构造函数创建的，因此它们具有模型的所有属性，其中包括将对象保存到数据库的方法。
 
 Saving the object to the database happens with the appropriately named _save_ method, that can be provided with an event handler with the _then_ method:
 将对象保存到数据库是通过适当命名的 save 方法实现的，可以通过 then 方法提供一个事件处理程序:
@@ -331,7 +331,7 @@ When the object is saved to the database, the event handler provided to _then_  
 当对象保存到数据库时，将调用提供给该对象的事件处理程序。 事件处理程序使用命令代码 mongoose.connection.close () / code 关闭数据库连接。 如果连接没有关闭，程序将永远不能完成它的执行。
 
 The result of the save operation is in the _result_ parameter of the event handler. The result is not that interesting when we're storing one object to the database. You can print the object to the console if you want to take a closer look at it while implementing your application or during debugging.
-保存操作的结果在事件处理程序的结果参数中。 当我们将一个对象存储到数据库时，结果并不那么有趣。 如果希望在实现应用程序或调试过程中仔细查看对象，可以将该对象打印到控制台。
+保存操作的结果在事件处理程序的结果参数中。 当我们将一个对象存储到数据库时，结果并不那么有趣。 如果希望在实现应用或调试过程中仔细查看对象，可以将该对象打印到控制台。
 
 Let's also save a few more notes by modifying the data in the code and by executing the program again.
 我们还可以通过修改代码中的数据和再次执行程序来保存更多的注释。
@@ -343,7 +343,7 @@ Let's also save a few more notes by modifying the data in the code and by execut
 # # # 从数据库中获取对象
 
 Let's comment out the code for generating new notes and replace it with the following:
-让我们注释掉生成新笔记的代码，并用以下代码替换它:
+让我们注释掉生成新笔记的代码，并用如下代码替换它:
 
 ```js
 Note.find({}).then(result => {
@@ -388,23 +388,23 @@ Note.find({ important: true }).then(result => {
 3.12: 命令行数据库
 
 Create a cloud-based MongoDB database for the phonebook application with MongoDB Atlas. 
-使用 MongoDB Atlas 为电话簿应用程序创建基于云的 MongoDB 数据库。
+使用 MongoDB Atlas 为电话簿应用创建基于云的 MongoDB 数据库。
 
 Create a <i>mongo.js</i> file in the project directory, that can be used for adding entries to the phonebook, and for listing all of the existing entries in the phonebook.
-在项目目录中创建一个 i mongo.js / i 文件，该文件可用于向电话簿添加条目，以及列出电话簿中的所有现有条目。
+在项目目录中创建一个<i>mongo.js</i> 文件，该文件可用于向电话簿添加条目，以及列出电话簿中的所有现有条目。
 
 **NB** Do not include the password in the file that you commit and push to GitHub! 
 不要在你提交的文件中包含密码并推送到 GitHub！
 
 The application should work as follows. You use the program by passing three command-line arguments (the first is the password), e.g.:
-应用程序的工作方式如下。 通过传递三个命令行参数(第一个是密码)来使用该程序，例如:
+应用的工作方式如下。 通过传递三个命令行参数(第一个是密码)来使用该程序，例如:
 
 ```bash
 node mongo.js yourpassword Anna 040-1234556
 ```
 
 As a result, the application will print:
-因此，应用程序将打印:
+因此，应用将打印:
 
 ```bash
 added Anna number 040-1234556 to phonebook
@@ -457,7 +457,7 @@ mongoose.connection.close()
 ```
 
 In the code above the <i>mongoose.connection.close()</i> command will get executed immediately after the <i>Person.find</i> operation is started. This means that the database connection will be closed immediately, and the execution will never get to the point where <i>Person.find</i> operation finishes and the <i>callback</i> function gets called.
-在上面的代码中，i mongoose.connection.close () / i 命令将在 i Person.find / i 操作启动后立即执行。 这意味着数据库连接将立即关闭，执行将永远不会到达 i Person.find / i 操作结束并调用 i 回调 / i 函数的地方。
+在上面的代码中，i mongoose.connection.close () /<i>命令将在 i Person.find</i> 操作启动后立即执行。 这意味着数据库连接将立即关闭，执行将永远不会到达<i>Person.find</i> 操作结束并调用<i>回调</i> 函数的地方。
 
 The correct place for closing the database connection is at the end of the callback function:
 关闭数据库连接的正确位置是在回调函数的末尾:
@@ -472,7 +472,7 @@ Person
 ```
 
 **NB2** if you define a model with the name <i>Person</i>, mongoose will automatically name the associated collection as <i>people</i>.
-* * NB2 * * 如果定义一个名为 i Person / i 的模型，mongoose 将自动将相关的集合命名为 i people / i。
+* * NB2 * * 如果定义一个名为<i>Person</i> 的模型，mongoose 将自动将相关的集合命名为<i>people</i>。
 
 </div>
 
@@ -484,10 +484,10 @@ Person
 # # 后端连接到数据库
 
 Now we have enough knowledge to start using Mongo in our application.
-现在我们有足够的知识开始在我们的应用程序中使用 Mongo。
+现在我们有足够的知识开始在我们的应用中使用 Mongo。
 
 Let's get a quick start by copy pasting the Mongoose definitions to the <i>index.js</i> file:
-让我们通过复制粘贴 Mongoose 定义到 i index.js / i 文件来快速开始:
+让我们通过复制粘贴 Mongoose 定义到<i>index.js</i> 文件来快速开始:
 
 ```js
 const mongoose = require('mongoose')
@@ -508,7 +508,7 @@ const Note = mongoose.model('Note', noteSchema)
 ```
 
 Let's change the handler for fetching all notes into the following form:
-让我们将获取所有笔记的处理程序更改为以下形式:
+让我们将获取所有笔记的处理程序更改为如下形式:
 
 ```js
 app.get('/api/notes', (request, response) => {
@@ -525,7 +525,7 @@ We can verify in the browser that the backend works for displaying all of the do
 
 
 The application works almost perfectly. The frontend assumes that every object has a unique id in the <i>id</i> field. We also don't want to return the mongo versioning field <i>\_\_v</i> to the frontend.
-这个应用程序运行得几乎完美。 前端假设每个对象在 i id / i 字段中都有唯一的 id。 我们也不想将 mongo 版本控制字段 i  v / i 返回到前端。
+这个应用运行得几乎完美。 前端假设每个对象在<i>id</i> 字段中都有唯一的 id。 我们也不想将 mongo 版本控制字段<i> v</i> 返回到前端。
 
 One way to format the objects returned by Mongoose is to [modify](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id) the _toJSON_ method of the objects. Modifying the method happens like this:
 格式化 Mongoose 返回的对象的一种方法是[修改]( https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id )对象的 toJSON 方法。 修改方法的过程如下:
@@ -541,7 +541,7 @@ noteSchema.set('toJSON', {
 ```
 
 Even though the <i>\_id</i> property of Mongoose objects looks like a string, it is in fact an object. The _toJSON_ method we defined transforms it into a string just to be safe. If we didn't make this change, it would cause more harm for us in the future once we start writing tests.
-尽管 Mongoose 对象的 i  id / i 属性看起来像一个字符串，但实际上它是一个对象。 为了安全起见，我们定义的 toJSON 方法将其转换为字符串。 如果我们不进行这个更改，那么一旦我们开始编写测试，它将在未来对我们造成更大的伤害。
+尽管 Mongoose 对象的<i> id</i> 属性看起来像一个字符串，但实际上它是一个对象。 为了安全起见，我们定义的 toJSON 方法将其转换为字符串。 如果我们不进行这个更改，那么一旦我们开始编写测试，它将在未来对我们造成更大的伤害。
 
 Let's respond to the HTTP request with a list of objects formatted with the _toJSON_ method:
 让我们用一个用 toJSON 方法格式化的对象列表来响应 HTTP 请求:
@@ -564,7 +564,7 @@ Before we refactor the rest of the backend to use the database, let's extract th
 在我们重构后端的其余部分以使用数据库之前，让我们将 Mongoose 特定的代码提取到它自己的模块中。
 
 Let's create a new directory for the module called <i>models</i>, and add a file called <i>note.js</i>:
-让我们为模块 i models / i 创建一个新目录，并添加一个名为 i note.js / i 的文件:
+让我们为模块<i>models</i> 创建一个新目录，并添加一个名为<i>note.js</i> 的文件:
 
 ```js
 const mongoose = require('mongoose')
@@ -601,13 +601,13 @@ module.exports = mongoose.model('Note', noteSchema) // highlight-line
 ```
 
 Defining Node [modules](https://nodejs.org/docs/latest-v8.x/api/modules.html) differs slightly from the way of defining [ES6 modules](/en/part2/rendering_a_collection_modules#refactoring-modules) in part 2.
-定义 Node [ modules ]( https://nodejs.org/docs/latest-v8.x/api/modules.html 模块)与第2部分中定义[ ES6模块](/ en / part2 / rendering a collection modules # refactoring-modules)的方式稍有不同。
+定义 Node [ modules ]( https://nodejs.org/docs/latest-v8.x/api/modules.html 模块)与第2章节中定义[ ES6模块](/ en / part2 / rendering a collection modules # refactoring-modules)的方式稍有不同。
 
 The public interface of the module is defined by setting a value to the _module.exports_ variable. We will set the value to be the <i>Note</i> model. The other things defined inside of the module, like the variables _mongoose_ and _url_ will not be accessible or visible to users of the module.
-模块的公共接口是通过将值设置为 module.exports 变量来定义的。 我们将该值设置为 i Note / i 模型。 模块内部定义的其他东西，比如变量 mongoose 和 url 对于模块的用户来说是不可访问的或者不可见的。
+模块的公共接口是通过将值设置为 module.exports 变量来定义的。 我们将该值设置为<i>Note</i> 模型。 模块内部定义的其他东西，比如变量 mongoose 和 url 对于模块的用户来说是不可访问的或者不可见的。
 
 Importing the module happens by adding the following line to <i>index.js</i>:
-导入模块的方法是在 i index.js / i 中添加以下代码行:
+导入模块的方法是在<i>index.js</i> 中添加如下代码行:
 
 ```js
 const Note = require('./models/note')
@@ -634,7 +634,7 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
 ```
 
 It's not a good idea to hardcode the address of the database into the code, so instead the address of the database is passed to the application via the <em>MONGODB_URI</em> environment variable.
-将数据库的地址硬编码到代码中并不是一个好主意，因此数据库的地址通过 em MONGODB uri / em 环境变量传递给应用程序。
+将数据库的地址硬编码到代码中并不是一个好主意，因此数据库的地址通过 em MONGODB uri / em 环境变量传递给应用。
 
 The method for establishing the connection is now given functions for dealing with a successful and unsuccessful connection attempt. Both functions just log a message to the console about the success status:
 建立连接的方法现在被赋予处理成功和失败的连接尝试的函数。 这两个函数都只是向控制台发送一条关于成功状态的消息:
@@ -643,14 +643,14 @@ The method for establishing the connection is now given functions for dealing wi
 
 
 There are many ways to define the value of an environment variable. One way would be to define it when the application is started:
-有很多方法可以定义环境变量的价值。 一种方法是在应用程序启动时定义它:
+有很多方法可以定义环境变量的价值。 一种方法是在应用启动时定义它:
 
 ```bash
 MONGODB_URI=address_here npm run watch
 ```
 
 A more sophisticated way is to use the [dotenv](https://github.com/motdotla/dotenv#readme) library. You can install the library with the command:
-一个更复杂的方法是使用[ dotenv ]( https://github.com/motdotla/dotenv#readme 库) ，你可以使用以下命令安装库:
+一个更复杂的方法是使用[ dotenv ]( https://github.com/motdotla/dotenv#readme 库) ，你可以使用如下命令安装库:
 
 ```bash
 npm install dotenv --save
@@ -677,7 +677,7 @@ The environment variables defined in the dotenv file can be taken into use with 
 可以使用 em require (‘ dotenv’)命令来使用 dotenv 文件中定义的环境变量。 Config () / em，您可以在代码中引用它们，就像引用普通环境变量一样，使用熟悉的 em process.env.MONGODB URI / em 语法。
 
 Let's change the <i>index.js</i> file in the following way:
-让我们以下面的方式更改 i index.js / i 文件:
+让我们如下面的方式更改<i>index.js</i> 文件:
 
 ```js
 require('dotenv').config() // highlight-line
@@ -694,7 +694,7 @@ app.listen(PORT, () => {
 ```
 
 It's important that <i>dotenv</i> gets imported before the <i>note</i> model is imported. This ensures that the environment variables from the <i>.env</i> file are available globally before the code from the other modules are imported.
-在导入 i note / i 模型之前导入 i dotenv / i 非常重要。 这样可以确保来自 i。 在导入其他模块的代码之前，env / i 文件是全局可用的。
+在导入<i>note</i> 模型之前导入<i>dotenv</i> 非常重要。 这样可以确保来自 i。 在导入其他模块的代码之前，env / i 文件是全局可用的。
 
 ### Using database in route handlers
 # # # 在路由处理程序中使用数据库
@@ -762,10 +762,10 @@ It's probably a good idea to integrate the frontend and backend one functionalit
 一次集成一个前端和后端功能可能是个好主意。 首先，我们可以实现从数据库中获取所有笔记，并通过浏览器中的后端端点对其进行测试。 在此之后，我们可以验证前端是否与新的后端一起工作。 一旦一切看起来正常，我们就会进入下一个特性。
 
 Once we introduce a database into the mix, it is useful to inspect the state persisted in the database, e.g. from the control panel in MongoDB Atlas. Quite often little Node helper programs like the <i>mongo.js</i> program we wrote earlier can be very helpful during development.
-一旦我们在混合中引入了一个数据库，检查数据库中持久存储的状态就很有用了，例如，通过 MongoDB Atlas 中的控制面板来检查。 很多时候，像我们前面编写的 i mongo.js / i 程序这样的小型 Node helper 程序在开发过程中会非常有用。
+一旦我们在混合中引入了一个数据库，检查数据库中持久存储的状态就很有用了，例如，通过 MongoDB Atlas 中的控制面板来检查。 很多时候，像我们前面编写的<i>mongo.js</i> 程序这样的小型 Node helper 程序在开发过程中会非常有用。
 
 You can find the code for our current application in its entirety in the <i>part3-4</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4).
-您可以在[ this Github repository ]的 i part3-4 / i 分支中找到我们当前应用程序的全部代码，这是一个 https://Github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4。
+您可以在[ this Github repository ]的<i>part3-4</i> 分支中找到我们当前应用的全部代码，这是一个 https://Github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4。
 
 </div>
 
@@ -795,7 +795,7 @@ In the following exercises, write all Mongoose-specific code into its own module
 3.14: 电话簿数据库，第二步
 
 Change the backend so that new numbers are <i>saved to the database</i>. Verify that your frontend still works after the changes.
-更改后端，以便将新数字 i 保存到数据库 / i。 确认您的前端在更改之后仍然可以工作。
+更改后端，以便将新数字<i>保存到数据库</i>。 确认您的前端在更改之后仍然可以工作。
 
 At this point, you can choose to simply allow users to create all phonebook entries. At this stage, the phonebook can have multiple entries for a person with the same name. 
 此时，您可以选择只允许用户创建所有电话簿条目。 在这个阶段，电话簿可以为同一个名字的人提供多个条目。
@@ -810,16 +810,16 @@ At this point, you can choose to simply allow users to create all phonebook entr
 错误处理
 
 If we try to visit the URL of a note with an id that does not actually exist e.g. <http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431> where <i>5a3b80015b6ec6f1bdf68d</i> is not an id stored in the database, then the browser will simply get "stuck" since the server never responds to the request.
-如果我们试图访问一个实际上并不存在的 id 的笔记的 URL，比如 http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431数据库，其中 i 5a3b80015b6ec6f1bdf68d / i 不是一个存储在数据库中的 id，那么浏览器将简单地“卡住” ，因为服务器从不响应请求。
+如果我们试图访问一个实际上并不存在的 id 的笔记的 URL，比如 http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431数据库，其中<i>5a3b80015b6ec6f1bdf68d</i> 不是一个存储在数据库中的 id，那么浏览器将简单地“卡住” ，因为服务器从不响应请求。
 
 We can see the following error message appear in the logs for the backend:
-我们可以在后端的日志中看到以下错误消息:
+我们可以在后端的日志中看到如下错误消息:
 
 ![](../../images/3/47.png)
 
 
 The request has failed and the associated Promise has been <i>rejected</i>. Since we don't handle the rejection of the promise, the request never gets a response. In part 2, we already acquainted ourselves with [handling errors in promises](/en/part2/altering_data_in_server#promises-and-errors).
-请求失败，相关的承诺已被拒绝。 因为我们不处理对承诺的拒绝，所以请求不会得到响应。 在第2部分中，我们已经了解了[处理许诺中的错误](/ en / part2 / modified data In server # promises-and-errors)。
+请求失败，相关的承诺已被拒绝。 因为我们不处理对承诺的拒绝，所以请求不会得到响应。 在第2章节中，我们已经了解了[处理许诺中的错误](/ en / part2 / modified data In server # promises-and-errors)。
 
 Let's add a simple error handler:
 让我们添加一个简单的错误处理程序:
@@ -844,7 +844,7 @@ There's actually two different types of error situations. In one of those situat
 实际上有两种不同类型的错误情况。 在其中一种情况下，我们试图获取一个带有错误类型的 id 的便条，这意味着一个与 mongo 标识符格式不匹配的 id。
 
 If we make the following request, we will get the error message shown below:
-如果我们提出以下请求，我们将得到如下所示的错误消息:
+如果我们提出如下请求，我们将得到如下所示的错误消息:
 
 <pre>
 预
@@ -891,7 +891,7 @@ We should distinguish between these two different types of error situations. The
 我们应该区分这两种不同类型的错误情况。 后者实际上是由我们自己的代码引起的错误。
 
 Let's change the code in the following way:
-让我们以下面的方式修改代码:
+让我们如下面的方式修改代码:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -953,7 +953,7 @@ We have written the code for the error handler among the rest of our code. This 
 我们在代码的其余部分中编写了错误处理程序的代码。 有时这可能是一个合理的解决方案，但在某些情况下，最好在单个位置实现所有错误处理。 如果我们以后想要将与错误相关的数据报告给外部的错误跟踪系统，比如[ Sentry ](Sentry) ，那么这个 https://Sentry.io/welcome/ 就特别有用。
 
 Let's change the handler for the <i>/api/notes/:id</i> route, so that it passes the error forward with the <em>next</em> function. The next function is passed to the handler as the third parameter:
-让我们更改 i / api / notes / : id / i 路由的处理程序，以便它使用 em next / em 函数向前传递错误。 下一个函数作为第三个参数传递给处理程序:
+让我们更改<i>/ api / notes / : id</i> 路由的处理程序，以便它使用 em next / em 函数向前传递错误。 下一个函数作为第三个参数传递给处理程序:
 
 ```js
 app.get('/api/notes/:id', (request, response, next) => { // highlight-line
@@ -970,10 +970,10 @@ app.get('/api/notes/:id', (request, response, next) => { // highlight-line
 ```
 
 The error that is passed forwards is given to the <em>next</em> function as a parameter. If <em>next</em> was called without a parameter, then the execution would simply move onto the next route or middleware. If the <em>next</em> function is called with a parameter, then the execution will continue to the <i>error handler middleware</i>.
-将向前传递的错误作为参数给 em next / em 函数。 如果在没有参数的情况下调用 em next / em，那么执行将简单地转移到下一个路由或中间件上。 如果使用参数调用 em next / em 函数，那么执行将继续到 i error 处理程序中间件 / i。
+将向前传递的错误作为参数给 em next / em 函数。 如果在没有参数的情况下调用 em next / em，那么执行将简单地转移到下一个路由或中间件上。 如果使用参数调用 em next / em 函数，那么执行将继续到<i>error 处理程序中间件</i>。
 
 Express [error handlers](https://expressjs.com/en/guide/error-handling.html) are middleware that are defined with a function that accepts <i>four parameters</i>. Our error handler looks like this:
-表达[错误处理程序]( https://expressjs.com/en/guide/error-handling.html )是一种中间件，它定义了一个接受 i 4个参数 / i 的函数。 我们的错误处理程序如下所示:
+表达[错误处理程序]( https://expressjs.com/en/guide/error-handling.html )是一种中间件，它定义了一个接受<i>4个参数</i> 的函数。 我们的错误处理程序如下所示:
 
 ```js
 const errorHandler = (error, request, response, next) => {
@@ -990,7 +990,7 @@ app.use(errorHandler)
 ```
 
 The error handler checks if the error is a <i>CastError</i> exception, in which case we know that the error was caused by an invalid object id for Mongo. In this situation the error handler will send a response to the browser with the response object passed as a parameter. In all other error situations, the middleware passes the error forward to the default Express error handler. 
-错误处理程序检查错误是否是 i CastError / i 异常，在这种情况下，我们知道错误是由 Mongo 的无效对象 id 引起的。 在这种情况下，错误处理程序将向浏览器发送响应，并将响应对象作为参数传递。 在所有其他错误情况下，中间件将错误转发给缺省的 Express 错误处理程序。
+错误处理程序检查错误是否是<i>CastError</i> 异常，在这种情况下，我们知道错误是由 Mongo 的无效对象 id 引起的。 在这种情况下，错误处理程序将向浏览器发送响应，并将响应对象作为参数传递。 在所有其他错误情况下，中间件将错误转发给缺省的 Express 错误处理程序。
 
 ### The order of middleware loading
 # # # 中间件加载顺序
@@ -1064,13 +1064,13 @@ app.get('/api/notes', (request, response) => {
 ```
 
 Now the handling of unknown endpoints is ordered <i>before the HTTP request handler</i>. Since the unknown endpoint handler responds to all requests with <i>404 unknown endpoint</i>, no routes or middleware will be called after the response has been sent by unknown endpoint middleware. The only exception to this is the error handler which needs to come at the very end, after the unknown endpoints handler.
-现在，对未知端点的处理先于 HTTP 请求处理程序 / i。 由于未知端点处理程序使用 i 404未知端点 / i 响应所有请求，在未知端点中间件发送响应之后，将不会调用任何路由或中间件。 唯一的例外是错误处理程序，它需要出现在未知的端点处理程序之后的最后一个端点。
+现在，对未知端点的处理先于 HTTP 请求处理程序 / i。 由于未知端点处理程序使用<i>404未知端点</i> 响应所有请求，在未知端点中间件发送响应之后，将不会调用任何路由或中间件。 唯一的例外是错误处理程序，它需要出现在未知的端点处理程序之后的最后一个端点。
 
 ### Other operations
 # # # 其他手术
 
 Let's add some missing functionality to our application, including deleting and updating an individual note.
-让我们为我们的应用程序添加一些缺失的功能，包括删除和更新单个注释。
+让我们为我们的应用添加一些缺失的功能，包括删除和更新单个注释。
 
 The easiest way to delete a note from the database is with the [findByIdAndRemove](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove) method:
 从数据库中删除笔记最简单的方法是使用[ findByIdAndRemove ]( https://mongoosejs.com/docs/api.html#model_model.findByIdAndRemove )方法:
@@ -1121,13 +1121,13 @@ After testing the backend directly with Postman and the VS Code REST client, we 
 在使用 Postman 和 VS Code REST 客户机直接测试后端之后，我们可以验证它似乎可以工作。 前端似乎也与使用数据库的后端一起工作。
 
 When we toggle the importance of a note, we see the following worrisome error message in the console:
-当我们切换注意事项的重要性时，我们会在控制台中看到以下令人担忧的错误消息:
+当我们切换注意事项的重要性时，我们会在控制台中看到如下令人担忧的错误消息:
 
 ![](../../images/3/48.png)
 
 
 Googling the error message will lead to [instructions](https://stackoverflow.com/questions/52572852/deprecationwarning-collection-findandmodify-is-deprecated-use-findoneandupdate) for fixing the problem. Following [the suggestion in the Mongoose documentation](https://mongoosejs.com/docs/deprecations.html), we add the following line to the <i>note.js</i> file:
-谷歌错误信息将导致[指示]( https://stackoverflow.com/questions/52572852/deprecationwarning-collection-findandmodify-is-deprecated-use-findoneandupdate )解决问题。 根据 Mongoose 文档中的建议，我们在 i note.js / i 文件中添加了以下 https://mongoosejs.com/docs/deprecations.html  :
+谷歌错误信息将导致[指示]( https://stackoverflow.com/questions/52572852/deprecationwarning-collection-findandmodify-is-deprecated-use-findoneandupdate )解决问题。 根据 Mongoose 文档中的建议，我们在<i>note.js</i> 文件中添加了如下 https://mongoosejs.com/docs/deprecations.html  :
 
 ```js
 const mongoose = require('mongoose')
@@ -1140,7 +1140,7 @@ module.exports = mongoose.model('Note', noteSchema)
 ```
 
 You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).
-您可以在[ this github repository ]的 i part3-5 / i 分支中找到我们当前应用程序的全部代码，该分支位于 https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5文件库中。
+您可以在[ this github repository ]的<i>part3-5</i> 分支中找到我们当前应用的全部代码，该分支位于 https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5文件库中。
 
 </div>
 
@@ -1164,7 +1164,7 @@ Verify that the frontend still works after making the changes.
 3.16: 电话簿数据库，第三步
 
 Move the error handling of the application to a new error handler middleware. 
-将应用程序的错误处理移动到新的错误处理程序中间件。
+将应用的错误处理移动到新的错误处理程序中间件。
 
 #### 3.17*: Phonebook database, step4
 3.17 * : 电话簿数据库，第四步
@@ -1182,7 +1182,7 @@ Verify that the frontend works after making your changes.
 3.18 * : 电话簿数据库 step5
 
 Also update the handling of the <i>api/persons/:id</i> and <i>info</i> routes to use the database, and verify that they work directly with the browser, Postman, or VS Code REST client.
-还要更新使用数据库的 i api / persons / : id / i 和 i info / i 路由的处理，并验证它们是否直接与浏览器、邮递员或 VS Code REST 客户端一起工作。
+还要更新使用数据库的<i>api / persons / : id</i> 和<i>info</i> 路由的处理，并验证它们是否直接与浏览器、邮递员或 VS Code REST 客户端一起工作。
 
 Inspecting an individual phonebook entry from the browser should look like this:
 通过浏览器查看一个电话簿条目应该是这样的:

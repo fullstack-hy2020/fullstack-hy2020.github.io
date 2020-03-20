@@ -18,7 +18,7 @@ Browsers do not yet support all of Javascript's newest features. Due to this fac
 浏览器还不能支持所有 Javascript 的最新特性。 由于这个事实，许多在浏览器中运行的代码已经从一个新版本的 Javascript 转移到了一个更旧、更兼容的版本。
 
 Today, the most popular way to do the transpiling is using [Babel](https://babeljs.io/). Transpilation is automatically configured in React applications created with create-react-app. We will take a closer look at the configuration of the transpilation in [part 7](/part7) of this course.
-今天，最流行的蒸腾方式是使用[巴别塔]( https://babeljs.io/ )。 Transpilation 在使用 create-React-app 创建的 React 应用程序中自动配置。 我们将在本课程的[第7部分](/ 第7部分)中仔细研究蒸发的结构。
+今天，最流行的蒸腾方式是使用[巴别塔]( https://babeljs.io/ )。 Transpilation 在使用 create-React-app 创建的 React 应用中自动配置。 我们将在本课程的[第7章节](/zh/part7)中仔细研究蒸发的结构。
 
 [Node.js](https://nodejs.org/en/) is a Javascript runtime environment based on Google's [chrome V8](https://developers.google.com/v8/) Javascript engine and works practically anywhere - from servers to mobile phones. Let's practice writing some Javascript using Node. It is expected that the version of Node.js installed on your machine is at least version <i>10.18.0.</i>. The latest versions of Node already understand the latest versions of Javascript, so the code does not need to be transpiled.
 是一个基于 Google 的 Javascript 引擎的 Javascript  https://nodejs.org/en/ 执行期函式库，可以在任何地方工作，从服务器到移动电话。 让我们练习使用 Node 编写一些 Javascript。 预计您机器上安装的 Node.js 版本至少是 i 10.18.0版本。 我。 最新版本的 Node 已经理解了 Javascript 的最新版本，所以代码不需要透露。
@@ -54,7 +54,7 @@ x = 4               // causes an error
 ```
 
 [const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) does not actually define a variable but a <i>constant</i> for which the value can no longer be changed. On the other hand [let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let) defines a normal variable.
-[ const ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/statements/const )实际上并没有定义一个变量，而是一个 i 常量 / i，其值不再能够更改。 另一方面，[ let ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/statements/let )定义了一个普通变量。
+[ const ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/statements/const )实际上并没有定义一个变量，而是一个<i>常量</i>，其值不再能够更改。 另一方面，[ let ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/statements/let )定义了一个普通变量。
 
 In the example, we also see that the type of the data assigned to the variable can change during execution. At the start _y_ stores an integer and at the end a string.
 在示例中，我们还看到分配给变量的数据类型在执行过程中可能发生更改。 在开头 y 存储一个整数，在结尾存储一个字符串。
@@ -88,7 +88,7 @@ Notable in this example is the fact that the contents of the array can be modifi
 在这个示例中值得注意的是，即使将数组定义为 const，也可以修改该数组的内容。 因为数组是一个对象，所以变量总是指向同一个对象。 当添加新项时，数组的内容将发生变化。
 
 One way of iterating through the items of the array is using _forEach_ as seen in the example. _forEach_ receives a <i>function</i> defined using the arrow syntax as a parameter.
-遍历数组项的一种方法是使用 forEach，如示例中所示。 Foreach 接收使用箭头语法作为参数定义的 i 函数 / i。
+遍历数组项的一种方法是使用 forEach，如示例中所示。 Foreach 接收使用箭头语法作为参数定义的<i>函数</i>。
 
 ```js
 value => {
@@ -100,7 +100,7 @@ forEach calls the function <i>for each of the items in the array</i>, always pas
 Foreach 为数组 / i 中的每个项调用函数 i，始终将单个项作为参数传递。 作为 forEach 参数的函数也可以接收[其他参数]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/forEach )。
 
 In the previous example, a new item was added to the array using the method [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push). When using React, techniques from functional programming are often used. One characteristic of the functional programming paradigm is the use of [immutable](https://en.wikipedia.org/wiki/Immutable_object) data structures. In React code, it is preferable to use the method [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), which does not add the item to the array, but creates a new array in which the content of the old array and the new item are both included.
-在前面的示例中，使用方法[ push ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/push )将一个新项添加到数组中。 在使用 React 时，经常使用函数式编程的技术。 函数编程范型的一个特点是使用[不可变的]( https://en.wikipedia.org/wiki/immutable_object )数据结构。 在反应代码中，最好使用方法[ concat ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/concat ) ，它不向数组中添加项，而是创建一个新数组，其中包含旧数组和新数组的内容。
+在前面的示例中，使用方法[ push ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/push )将一个新项添加到数组中。 在使用 React 时，经常使用函数式编程的技术。 函数编程范型的一个特点是使用[不可变的]( https://en.wikipedia.org/wiki/immutable_object )数据结构。 在React代码中，最好使用方法[ concat ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/concat ) ，它不向数组中添加项，而是创建一个新数组，其中包含旧数组和新数组的内容。
 
 ```js
 const t = [1, -1, 3]
@@ -125,7 +125,7 @@ console.log(m1)   // [2, 4, 6] is printed
 ```
 
 Based on the old array, map creates a <i>new array</i>, for which the function given as a parameter is used to create the items. In the case of this example the original value is multiplied by two.
-在旧数组的基础上，map 创建一个 i / new 数组 / i，用作参数的函数来创建项。 在这个例子中，原始值被乘以2。
+在旧数组的基础上，map 创建一个<i>/ new 数组</i>，用作参数的函数来创建项。 在这个例子中，原始值被乘以2。
 
 Map can also transform the array into something completely different:
 Map 还可以将数组转换为完全不同的内容:
@@ -210,7 +210,7 @@ Naturally, objects in Javascript can also have methods. However, during this cou
 当然，Javascript 中的对象也可以有方法。 然而，在这个过程中，我们不需要用它们自己的方法来定义任何对象。 这就是为什么只在课程中简单地讨论它们。
 
 Objects can also be defined using so-called constructor functions, which results in a mechanism reminiscent of many other programming languages', e.g. Java's classes. Despite this similarity Javascript does not have classes in the same sense as object-oriented programming languages. There has been, however, an addition of the <i>class syntax</i> starting from version ES6, which in some cases helps structure object-oriented classes.
-对象也可以使用所谓的构造函数来定义，这导致了一种类似于许多其他编程语言的机制，例如 Java 的类。 尽管有这些相似之处，Javascript 并没有类与面向对象程序设计语言有相同的含义。 但是，从 ES6版本开始，又增加了 i 类语法 / i，这在某些情况下有助于构造面向对象的类。
+对象也可以使用所谓的构造函数来定义，这导致了一种类似于许多其他编程语言的机制，例如 Java 的类。 尽管有这些相似之处，Javascript 并没有类与面向对象程序设计语言有相同的含义。 但是，从 ES6版本开始，又增加了<i>类语法</i>，这在某些情况下有助于构造面向对象的类。
 
 ### Functions
 # # # 功能
@@ -299,10 +299,10 @@ During this course we will define all functions using the arrow syntax.
 练习1.3-1.5. / 
 
 <i>We continue building the application that we started working on in the previous exercises. You can write the code into the same project, since we are only interested in the final state of the submitted application.</i>
-我们继续构建我们在前面的练习中开始的应用程序。 您可以将代码编写到同一个项目中，因为我们只关心提交的应用程序的最终状态。 我
+我们继续构建我们在前面的练习中开始的应用。 您可以将代码编写到同一个项目中，因为我们只关心提交的应用的最终状态。 我
 
 **Pro-tip:** you may run into issues when it comes to the structure of the <i>props</i> that components receive. A good way to make things more clear is by printing the props to the console, e.g. as follows:
-专业提示: 当涉及到组件接收的 i props / i 的结构时，您可能会遇到问题。 一个很好的方法就是把道具打印到控制台上，例如:
+专业提示: 当涉及到组件接收的<i>props</i> 的结构时，您可能会遇到问题。 一个很好的方法就是把props打印到控制台上，例如:
 
 ```js
 const Header = (props) => {
@@ -315,7 +315,7 @@ const Header = (props) => {
 H41.3: 课程信息，步骤3 / h4
 
 Let's move forward to using objects in our application. Modify the variable definitions of the <i>App</i> component as follows and also refactor the application so that it still works:
-让我们继续在应用程序中使用对象。 修改 i App / i 组件的变量定义如下，并重构应用程序，使其仍然可以工作:
+让我们继续在应用中使用对象。 修改<i>App</i> 组件的变量定义如下，并重构应用，使其仍然可以工作:
 
 ```js
 const App = () => {
@@ -345,7 +345,7 @@ const App = () => {
 H41.4: 课程信息，步骤4 / h4
 
 And then place the objects into an array. Modify the variable definitions of <i>App</i> into the following form and modify the other parts of the application accordingly:
-然后将对象放入一个数组中。 将 i App / i 的变量定义修改为以下格式，并相应地修改应用程序的其他部分:
+然后将对象放入一个数组中。 将<i>App</i> 的变量定义修改为如下格式，并相应地修改应用的其他部分:
 
 ```js
 const App = () => {
@@ -374,10 +374,10 @@ const App = () => {
 ```
 
 **NB** at this point <i>you can assume that there are always three items</i>, so there is no need to go through the arrays using loops. We will come back to the topic of rendering components based on items in arrays with a more thorough exploration in the [next part of the course](../part2).
-* * NB * * * 在这一点上，我可以假设总是有三个条目 / i，所以没有必要使用循环遍历数组。 我们将在[课程的下一部分]中进行更深入的探讨，回到基于数组中的项呈现组件的主题。 . / 第二部分)。
+* * NB * * * 在这一点上，我可以假设总是有三个条目 / i，所以没有必要使用循环遍历数组。 我们将在[课程的下一部分]中进行更深入的探讨，回到基于数组中的项渲染组件的主题。 . / 第二章节)。
 
 However, do not pass different objects as separate props from the <i>App</i> component to the components <i>Content</i> and <i>Total</i>. Instead, pass them directly as an array:
-但是，不要将不同的对象作为独立的道具从 i App / i 组件传递给组件 i Content / i 和 i Total / i。 相反，将它们直接作为数组传递:
+但是，不要将不同的对象作为独立的props从<i>App</i> 组件传递给组件<i>Content</i> 和<i>Total</i>。 相反，将它们直接作为数组传递:
 
 ```js
 const App = () => {
@@ -509,7 +509,7 @@ referenceToAddition(10, 15)   // 25 is printed
 ```
 
 Now the object has the method _doAddition_ which calculates the sum of numbers given to it as parameters. The method is called in the usual way using the object <em>arto.doAddition(1, 4)</em> or by storing a <i>method reference</i> in a variable and calling the method through the variable <em>referenceToAddition(10, 15)</em>.
-现在对象有了 doAddition 方法，该方法计算给它的数字之和作为参数。 该方法通常使用对象 em arto.doAddition (1,4) / em 来调用，或者在变量中存储 i 方法 reference / i，然后通过变量 em referenceToAddition (10,15) / em 来调用该方法。
+现在对象有了 doAddition 方法，该方法计算给它的数字之和作为参数。 该方法通常使用对象 em arto.doAddition (1,4) / em 来调用，或者在变量中存储<i>方法 reference</i>，然后通过变量 em referenceToAddition (10,15) / em 来调用该方法。
 
 If we try to do the same with the method _greet_ we run into an issue:
 如果我们尝试用同样的方法问候，我们就会遇到一个问题:
@@ -567,7 +567,7 @@ As mentioned previously, there is no class mechanism like the ones in object-ori
 正如前面提到的，没有类机制像面向对象程序设计语言中的类机制。 然而，Javascript 中的一些特性使得“模拟”面向对象[类]( https://developer.mozilla.org/en-us/docs/web/Javascript/reference/classes )成为可能。
 
 Let's take a quick look at the <i>class syntax</i> that was introduced into Javascript along with ES6, which substantially simplifies the definition of classes (or class-like things) in Javascript.
-让我们快速看一下与 ES6一起引入到 Javascript 中的 i 类语法 / i，它在很大程度上简化了 Javascript 中类(或类似类的东西)的定义。
+让我们快速看一下与 ES6一起引入到 Javascript 中的<i>类语法</i>，它在很大程度上简化了 Javascript 中类(或类似类的东西)的定义。
 
 In the following we have defined a "class" called Person and two Person objects.
 在下面的代码中，我们定义了一个名为 Person 的“类”和两个 Person 对象。
