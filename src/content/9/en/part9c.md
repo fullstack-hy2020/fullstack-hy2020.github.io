@@ -280,7 +280,7 @@ Ensure that backend answers to the ping request that <i>frontend</i> has made on
 
 ![](../../images/9/16a.png)
 
-You might also want to have a look at the tab <i>console</i>. If something fails [part 3](/part3) of the course shows how the problem can be solved.
+You might also want to have a look at the tab <i>console</i>. If something fails [part 3](/en/part3) of the course shows how the problem can be solved.
 
 </div>
 
