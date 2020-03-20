@@ -112,10 +112,6 @@ Riippumatta siitä ilmoittaudutko Avoimen yliopiston kurssille ja teetkö kurssi
 
 ![](../../images/0/29.png)
 
-### Aiemmin suoritetun kurssin täydentäminen
-
-Jos olet jo suorittanut kurssin joko MOOC:ina tai Yliopiston kurssina, voit täydentää nyt suoritustasi.
-
 ### Muutokset edellisen vuoden kurssilta
 
 Osissa 0-4 on ainoastaan vähäisiä muutoksia. Osa 5d eli Cypress.io-kirjastolla tapahtuva <i>end to end -testaus</i> on suurelta osin uusi. Custom hookien käsittely on siirretty osasta 5 hieman laajennettuna osaan 7. 
@@ -126,6 +122,10 @@ GraphQL:ää käsittelevä osa 8 on kokenut paljon päivityksiä erityisesti Apo
 
 Viime vuoden kurssimateriaali on nähtävissä osoitteessa https://fullstackopen-2019.github.io/
 
+
+### Aiemmin suoritetun kurssin täydentäminen
+
+Jos olet jo suorittanut kurssin joko MOOC:ina tai Yliopiston kurssina, voit täydentää nyt suoritustasi.
 
 #### Full stack open 2019 -suorituksen täydentäminen
 
