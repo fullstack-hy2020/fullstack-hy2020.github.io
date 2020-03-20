@@ -293,7 +293,7 @@ Next, let's fix a bug that is caused by the code expecting the application store
 
 
 
-<!-- Korjaus on helppo. Koska muistiinpanot ovat nyt storen kentässä <i>notes</i>, riittää pieni muutos selektorifunktioon: -->
+
 -- korjaus on helppo.koska muistiinpanot ovat nyt storen kent ss /<i>notes</i>，riitt pieni muutos selektorifunktioon: -- 
 It's an easy fix. Because the notes are in the store's field <i>notes</i>, we only have to make a little change to the selector function:
 这是一个简单的解决办法。 因为注释在商店的字段<i>notes</i> 中，所以我们只需要对选择器函数做一个小小的修改:
@@ -319,7 +319,7 @@ const Notes = () => {
 }
 ```
 
-<!-- Aiemminhan selektorifunktio palautti koko storen tilan: -->
+
 
 Previously the selector function returned the whole state of the store:
 以前，selector 函数返回存储的整个状态:
@@ -328,7 +328,7 @@ Previously the selector function returned the whole state of the store:
 const notes = useSelector(state => state)
 ```
 
-<!-- Nyt siis palautetaan tilasta ainoastaan sen kenttä <i>notes</i> -->
+
 
 And now it returns only its field <i>notes</i>
 现在它只返回字段<i>notes</i>
@@ -433,7 +433,7 @@ const Notes = () => {
   )
 ```
 
-<!-- Muutos kohdistuu siis ainoastaan selektorifunktioon, joka oli aiemmnin muotoa -->
+
 
 We only make changes to the selector function, which used to be
 我们只对选择器函数进行更改，这个函数过去是
@@ -442,10 +442,10 @@ We only make changes to the selector function, which used to be
 useSelector(state => state.notes)
 ```
 
-<!-- Yksinkertaistetaan vielä selektoria destrukturoimalla parametrina olevasta tilasta sen kentät erilleen: -->
+
 
 Let's simplify the selector by destructuring the fields from the state it receives as a parameter:
-让我们通过将字段作为参数从它接收的状态中析构来简化选择器:
+让我们通过将字段作为参数从它接收的状态中解构来简化选择器:
 
 ```js
 const notes = useSelector(({ filter, notes }) => {
@@ -539,7 +539,7 @@ Let's continue working on the anecdote application using redux that we started i
 #### 6.9 Better anecdotes, step7
 6.9更好的轶事，第七步
 
-<!-- Ota sovelluksessasi käyttöön React dev tools. Siirrä Redux-storen määrittely omaan tiedostoon <i>store.js</i>. -->
+
 
 Start using React dev tools. Move defining the Redux-store into its own file <i>store.js</i>.
 开始使用 React dev 工具，将 Redux-store 定义到它自己的文件<i>store.js</i> 中。

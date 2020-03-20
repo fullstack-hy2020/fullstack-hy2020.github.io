@@ -321,7 +321,7 @@ However, MVC-architecture is not usually mentioned when talking about React-appl
 Because both React and [Flux](https://facebook.github.io/flux/docs/in-depth-overview.html#content) were created at Facebook one could say that using React only as a UI library is the intended use case. Following the Flux-architecture adds some overhead to the application, and if were talking about a small application or prototype it might be a good idea to use React "wrong", since [over-engineering](https://en.wikipedia.org/wiki/Overengineering) rarely yields an optimal result.
 因为 React 和[ Flux ]( https://Facebook.github.io/Flux/docs/in-depth-overview.html#content )都是在 Facebook 上创建的，可以说只把 React 用作 UI 库是预期的用例。 遵循 flux 架构会给应用增加一些开销，如果我们讨论的是一个小型应用或原型，那么使用 React“ wrong”可能是一个好主意，因为[过度设计]( https://en.wikipedia.org/wiki/overengineering )很少会产生最佳结果。
 
-<!-- Kuten [osan 6](/osa6/connect#redux-ja-komponenttien-tila) lopussa mainittiin, Reactin [Context-api](https://reactjs.org/docs/context.html) tarjoaa erään vaihtoehtoisen tavan keskitetylle tilan hallinnalle ilman tarvetta ulkoisille kirjastoille kuten reduxille. Katso lisää esim. [täällä](https://www.simplethread.com/cant-replace-redux-with-hooks/) ja [täällä](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). -->
+
 
 As I mentioned at the end of [part 6](/osa6/connect#redux-ja-komponenttien-tila), the React [Context-api](https://reactjs.org/docs/context.html) offers one alternative solution for centralized state menagement without the need for third party libraries such as redux. You can read more about this i.e [here](https://www.simplethread.com/cant-replace-redux-with-hooks/) and [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/).
 正如我在[ part 6](/ osa6 / connect # redux-ja-komponenttien-tila)的结尾所提到的，React [ Context-api ]( https://reactjs.org/docs/context.html )为集中式国家管理提供了一种替代方案，无需 redux 之类的第三方库。 你可以阅读更多关于这个网站的 https://www.simplethread.com/cant-replace-redux-with-hooks/ 和 https://hswolff.com/blog/how-to-usecontext-with-usereducer/ 。
@@ -420,12 +420,12 @@ Last year's model answer for the exercises in part 4 already have quite a few ou
 The dependencies can be brought up to date by updating the file <i>package.json</i> and running the command _npm install_. However, old versions of the dependencies are not necessarily a security risk. 
 可以通过更新文件<i>package.json</i> 并运行命令 npm install 来更新依赖关系。 但是，依赖关系的旧版本不一定是安全风险。
 
-<!-- Riippuvuuksien turvallisuus voidaan tarkistaa npm:n [audit](https://docs.npmjs.com/cli/audit)-komennolla, joka vertaa käytettyjen riippuvuuksien versioita keskitetyssä virhetietokannassa listattuihin tietoturvauhan sisältäviin riippuvuuksien versioihin. -->
+
 
 The npm [audit](https://docs.npmjs.com/cli/audit) command can be used to check the security of debendencies. It compares the version numbers of the debendencies in your application to a list of the version numbers of debendencies containing known security threats in a centralized error database. 
 Npm [ audit ]( https://docs.npmjs.com/cli/audit )命令可用于检查债务的安全性。 它将应用中的延迟的版本号与集中式错误数据库中包含已知安全威胁的延迟的版本号列表进行比较。
 
-<!-- Komennon _npm audit_ suorittaminen viime vuoden osan 4 mallivastaukselle antaa pitkän listan valituksia ja korjausehdotuksia. Seuraavassa osa raportista: -->
+
 
 Running _npm audit_ on an exercise from part 4 of last year's course print a long list of complaints and suggested fixes. 
 对去年课程第四章节的练习进行 npm 审计时，打印一个长长的抱怨和建议修正列表。
@@ -489,7 +489,7 @@ found 416 vulnerabilities (65 low, 2 moderate, 348 high, 1 critical) in 20047 sc
   62 vulnerabilities require semver-major dependency updates.
 ```
 
-<!-- Reuilun vuoden ikäinen koodi on siis täynnä pieniä tietoturvauhkia, kriittisiä uhkia on onneksi ainoastaan 1. Suoritetaan raportin suosittelema operaatio _npm audit fix_: -->
+
 
 After only one year the code is full of small security threats. Luckily there is only 1 critical threat. 
 仅仅一年之后，代码就充满了小的安全威胁。幸运的是，只有一个关键的威胁。
@@ -506,7 +506,7 @@ fixed 354 of 416 vulnerabilities in 20047 scanned packages
   (use `npm audit fix --force` to install breaking changes; or refer to `npm audit` for steps to fix these manually)
 ```
 
-<!-- Haavoittuvuuksia jää vielä 62, sillä _audit fix_ ei tee oletusarvoisesti versiopäivitystä kirjastolle, jonka <i>major</i>-versionumero on kasvanut. Tälläisen riippuvuuden päivitys saattaa aiheuttaa sovelluksen hajoamisen. Ongelmat aiheuttaa testauskirjasto jestin versio, joka on sovelluksessa 23.6.0 kun taas turvallinen versio olisi 25.1.0. Koska jest on ainoastaan kehitysaikainen riippuvuus, ei vaaraa oikeastaan ole, mutta päivitetään myös se: -->
+
 
 62 threats remain because by default _audit fix_  does not update debendencies if their <i>major</i> version number has increased. 
 62个威胁仍然存在，因为缺省情况下，如果它们的<i>主</i> 版本号增加，审计修复程序不会更新借记。
@@ -519,7 +519,7 @@ As jest is a development debendency the threat is actually nonexistent, but let'
 npm install --save-dev jest@25.1.0 
 ```
 
-<!-- Päivityksen jälkeen tilanne näyttää hyvältä -->
+
 
 After the update the situation looks good
 更新后情况看起来不错
@@ -677,7 +677,7 @@ Serverless is not about there not being a server in applications, but about how 
 ### Useful libraries and interesting links
 # # # 有用的库和有趣的链接
 
-<!-- Javasciptin kehittäjäyhteisö on tuottanut valtavan määrän erilaisia hyödyllisiä kirjastoja ja jos olet koodaamassa jotain vähänkin isompaa, kannattaa etsiä mitä valmista kalustoa on jo tarjolla. Eräs hyvä paikka kirjastojen etsimiseen on https://applibslist.xyz/. Seuraavassa listataan muutamia luotettavien tahojen hyväksi havaitsemia kirjastoja. -->
+
 
 The JavaScript developer community has produced a large variety of useful libraries. If you are developing anything more substancial, it is worth it to check if existing solutions are already available. 
 开发者社区已经产生了大量有用的库。 如果你正在开发更实质性的东西，那么检查一下现有的解决方案是否已经可用是值得的。
@@ -686,17 +686,17 @@ One good place to find libraries is https://applibslist.xyz/.
 Below is listed some libraries recommended by trustworthy parties.
 下面列出了一些可信任方推荐的库。
 
-<!-- Jos sovelluksessa on tarve operoida hieman monimutkaisemman datan kanssa, on jo [osassa 4](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet#tehtavat-4-3-4-7) suositeltu kirjasto [lodash](https://www.npmjs.com/package/lodash) hyvä lisä. Jos olet mieltynyt funktionaaliseen ohjelmointityyliin, kannattaa harkita [ramda](https://ramdajs.com/):n käyttöä. -->
+
 
 If your application has to handle complicated data [lodash](https://www.npmjs.com/package/lodash), which we recommended in [part 4](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet#tehtavat-4-3-4-7), is a good library to use. If you prefer functional programming style, you might consider using [ramda](https://ramdajs.com/).
 如果您的应用必须处理复杂的数据[ lodash ]( https://www.npmjs.com/package/lodash ) ，这是我们在[ part 4](/ osa4 / sovelluksen rakenne ja testauksen alkeet # tehtawatat-4-3-4-7)中推荐使用的一个很好的库。 如果您更喜欢函数式编程风格，您可以考虑使用[ ramda ]( https://ramdajs.com/ )。
 
-<!-- Jos sovelluksessa käsitellään aikaa, tarjoavat [moment](https://momentjs.com/) ja hieman uudempi [date-fns](https://github.com/date-fns/date-fns) siihen hyvän välineistön. -->
+
 
 If you are handling times and dates, [moment](https://momentjs.com/) and a new(er) release [date-fns](https://github.com/date-fns/date-fns) offer good tools for that.
 如果你正在处理时间和日期，[瞬间]( https://momentjs.com/ )和一个新版本[日期- https://github.com/date-fns/date-fns ](日期)提供了很好的工具。
 
-<!-- Lomakkeiden käyttöä helpottavia kirjastoja ovat [Formik](https://www.npmjs.com/package/formik) ja [redux-form](https://redux-form.com/8.3.0/). Jos sovelluksessa tulee piirtää graafeja, on vaihtoehtoja lukuisia, sekä [recharts](http://recharts.org/en-US/) että [highcharts](https://github.com/highcharts/highcharts-react) ovat hyviksi havaittuja. -->
+
 
 [Formik](https://www.npmjs.com/package/formik) and [redux-form](https://redux-form.com/8.3.0/) can be used to handle forms easier. 
 [ Formik ]( https://www.npmjs.com/package/Formik )和[ redux-form ]( https://redux-form.com/8.3.0/ )可以用来更容易地处理表单。
@@ -729,7 +729,7 @@ When it comes to the tools used for the management and bundling of JavaScript pr
 - 2015- [Webpack](https://www.npmjs.com/package/webpack)
 - 2015年-[ Webpack ]( https://www.npmjs.com/package/Webpack )
 
-<!-- Hipsterien suurin into työkalukehitykseen näytti pysähtyneen webpackin vallattua markkinat. Pari vuotta sitten markkinoille ilmestyi uusi tulokas [Parcel](https://parceljs.org), joka markkinoi olevansa yksinkertainen, sitähän Webpack ei missään nimessä ole, ja paljon nopeampi kuin Webpack. Lupaavan alun jälkeen Parcel ei kuitenkaan ole jatkanut nostettaan, ja vaikuttaa että siitä ei kuitenkaan ole Webpackin tappajaksi. -->
+
 
 Hipsters seem to have lost their interest in tool development after webpack started to dominate the markets. Few years ago [Parcel](https://parceljs.org) started to make the rounds marketing itself as simpe (which Webpack absolutely is not) and faster than Webpack. However after a promising start Parcel has not gathered any steam, and it's beginning to look like it will not be the end of Webpack. 
 在 webpack 开始主导市场之后，赶时髦的人似乎对工具开发失去了兴趣。 几年前，[ Parcel ](Parcel) https://parceljs.org 开始以简单(Webpack 绝对不是)和快于 Webpack 的方式推销自己。 然而，在一个有希望的开始后，Parcel 并没有聚集任何动力，而且它开始看起来将不会是 Webpack 的结束。

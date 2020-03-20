@@ -8,12 +8,12 @@ lang: zh
 <div class="content">
 
 
-<!-- Yhdistetään seuraavaksi [osassa 2](/osa2) tekemämme frontend omaan backendiimme.  -->
+
 
 Next let's connect the frontend we made in [part 2](/part2) to our own backend.
 接下来，让我们将[第2章节](/zh/part2)中制作的前端连接到我们自己的后端。
 
-<!-- Edellisessä osassa backendinä toiminut json-server tarjosi muistiinpanojen listan osoitteessa http://localhost:3001/notes fronendin käyttöön. Backendimme urlien rakenne on hieman erilainen, muistiinpanot löytyvät osoitteesta http://localhost:3001/api/notes, eli muutetaan frontendin tiedostossa <i>src/services/notes.js</i> määriteltyä muuttujaa _baseUrl_ seuraavasti: -->
+
 
 In the previous part, the frontend could ask for the list of notes from the json-server we had as a backend at from the address http://localhost:3001/notes.
 在前面的部分中，前端可以从作为后端的 json 服务器向地址 http://localhost:3001/notes 索取笔记列表。
@@ -36,7 +36,7 @@ const getAll = () => {
 export default { getAll, create, update }
 ```
 
-<!-- Frontendin tekemä GET-pyyntö osoitteeseen <http://localhost:3001/api/notes> ei jostain syystä toimi: -->
+
 
 Now frontend's GET request to <http://localhost:3001/api/notes> does not work for some reason:
 现在前端的 GET 请求由于某些原因不能工作:  http://localhost:3001/api/notes:
@@ -44,7 +44,7 @@ Now frontend's GET request to <http://localhost:3001/api/notes> does not work fo
 ![](../../images/3/3ae.png)
 
 
-<!-- Mistä on kyse? Backend toimii kuitenkin selaimesta ja postmanista käytettäessä ilman ongelmaa. -->
+
 
 What's going on here? We can access the backend from a browser and from postman without any problems.
 这是怎么回事? 我们可以从浏览器和邮递员访问后端，没有任何问题。

@@ -662,7 +662,7 @@ const App = () => {
 }
 ```
 
-<!-- **HUOM**: saatat törmätä ongelmiin tässä tehtävässä, jos määrittelet komponentteja "väärässä paikassa", nyt kannattaakin ehdottomasti kerrata edellisen osan luku [älä määrittele komponenttia komponentin sisällä](/osa1/monimutkaisempi_tila_reactin_debuggaus#ala-maarittele-komponenttia-komponentin-sisalla). -->
+
 **NB**: You might run into problems in this exercise if you define your components "in the wrong place". Now would be a good time to rehearse 
 * * 注意 * * : 如果将组件定义在“错误的位置” ，则可能在本练习中遇到问题。 现在是排练的好时机
 the chapter [do not define a component in another component](/osa1/monimutkaisempi_tila_reactin_debuggaus#ala-maarittele-komponenttia-komponentin-sisalla)

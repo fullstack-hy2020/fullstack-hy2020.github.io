@@ -284,7 +284,7 @@ const res = await api.get('/api/notes')
 expect(res.body.length).toBe(2)
 ```
 
-<!-- HTTP-pyyntöjen tiedot konsoliin kirjoittava middleware häiritsee hiukan testien tulostusta. Muutetaan loggeria siten, että testausmoodissa lokiviestit eivät tulostu konsoliin: -->
+
 
 
 The middleware that outputs information about the HTTP requests is obstructing the test execution output. Let us modify the logger so that it does not print to console in test mode:
@@ -409,7 +409,7 @@ The provided parameter can refer to the name of the test or the describe block. 
 npm test -- -t 'notes'
 ```
 
-<!-- *HUOM*: yksittäisiä testejä suoritettaessa saattaa mongoose-yhteys  jäädä auki, mikäli yhtään yhteyttä hyödyntävää testiä ei ajeta. Ongelma seurannee siitä, että supertest alustaa yhteyden, mutta jest ei suorita afterAll-osiota. -->
+
 
 **NB**: When running a single test, the mongoose connection might stay open if no tests using the connection are run. 
 * * 注意 * * : 当运行单个测试时，如果没有运行使用该连接的测试，则 mongoose 连接可能保持打开状态。
@@ -864,7 +864,7 @@ You can find the code for our current application in its entirety in the <i>part
 ### Eliminating the try-catch
 消除尝试接球
 
-<!-- Async/await selkeyttää koodia jossain määrin, mutta sen 'hinta' on poikkeusten käsittelyn edellyttämä <i>try/catch</i>-rakenne. Kaikki routejen käsittelijät noudattavat samaa kaavaa -->
+
 我试着 / 抓住 / 抓住 / 我-拉肯。 10. Kaikki routejen k sittelij t noudattavat samaa kaavaa-- 
 Async/await unclutters the code a bit, but the 'price' is the <i>try/catch</i> structure required for catching exceptions. 
 Async / await 稍微整理了一下代码，但是‘ price’是捕获异常所需的<i>try / catch</i> 结构。
@@ -879,17 +879,17 @@ try {
 }
 ```
 
-<!-- Mieleen herää kysymys, olisiko koodia mahdollista refaktoroida siten, että <i>catch</i> saataisiin refaktoroitua ulos metodeista?  -->
+
 
 One starts to wonder, if it would be possible to refactor the code to eliminate the <i>catch</i> from the methods?
 人们开始怀疑，是否有可能重构代码以从方法中消除<i>catch</i>？
 
-<!-- Kirjasto [express-async-errors](https://github.com/davidbanham/express-async-errors) tuo tilanteeseen helpotuksen. -->
+
 
 The [express-async-errors](https://github.com/davidbanham/express-async-errors) library has a solution for this. 
 [ express-async-errors ]( https://github.com/davidbanham/express-async-errors )库为此提供了一个解决方案。
 
-<!-- Asennetaan kirjasto -->
+
 
 Let's install the library
 我们来安装图书馆吧
@@ -923,7 +923,7 @@ const mongoose = require('mongoose')
 module.exports = app
 ```
 
-<!-- Kirjaston koodiin sisällyttämän "magian" ansiosta pääsemme kokonaan eroon try-catch-lauseista. Muistiinpanon poistamisesta huolehtiva route -->
+
 
 The 'magic' of the library allows us to eliminate the try-catch blocks completely. 
 库的“魔法”允许我们完全消除 try-catch 块。
@@ -941,7 +941,7 @@ notesRouter.delete('/:id', async (request, response, next) => {
 })
 ```
 
-<!-- muuttuu muotoon -->
+
 
 becomes
 变成
@@ -953,14 +953,14 @@ notesRouter.delete('/:id', async (request, response) => {
 })
 ```
 
-<!-- Kirjaston ansiosta kutsua _next(exception)_ ei siis enää tarvita, kirjasto hoitaa asian konepellin alla, eli jos <i>async</i>-funktiona määritellyn routen sisällä syntyy poikkeus, siirtyy suoritus automaattisesti virheenkäsittelijämiddlewareen. -->
+
 
 Because of the library, we do not need the _next(exception)_ call anymore. 
 由于库的存在，我们不再需要下一个(异常)调用。
 The library handles everything under the hood. If an exception occurs in a <i>async</i> route, the execution is automatically passed to the error handling middleware.
 图书馆处理一切事务。 如果异常发生在<i>/ async</i> 路由中，执行将自动传递到错误处理中间件。
 
-<!-- Muut routet yksinkertaistuvat seuraavasti: -->
+
 
 The other routes become:
 其他的路线是:
@@ -989,7 +989,7 @@ notesRouter.get('/:id', async (request, response) => {
 })
 ```
 
-<!-- Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), haarassa <i>part4-5</i>.  -->
+
 
 The code for our application can be found from [github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), branch <i>part4-5</i>.
 我们应用的代码可以在[ github ]( https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5) ，branch<i>part4-5</i> 中找到。

@@ -40,7 +40,7 @@ After making the changes to the directory structure of our project, we end up wi
 │   └── middleware.js  
 ```
 
-<!-- Olemme toistaiseksi tulostelleet koodista erilaista logaustietoa komennoilla  <i>console.log</i> ja <i>console.error</i>, tämä ei ole kovin järkevä käytäntö. Eristetään kaikki konsoliin tulostelu omaan moduliinsa <i>utils/logger.js</i>: -->
+
 
 So far we have been using <i>console.log</i> and <i>console.error</i> to print different information from the code. 
 到目前为止，我们一直在使用<i>console.log</i> 和<i>console.error</i> 来打印代码中的不同信息。
@@ -63,7 +63,7 @@ module.exports = {
 }
 ```
 
-<!-- Loggeri tarjoaa kaksi funktiota, normaalien logiviesteihin tarkoitetun funktion _info_ sekä virhetilanteisiin tarkoitetun funktion _error_. -->
+
 
 The logger has two functions, __info__ for printing normal log messages, and __error__ for all error messages. 
 日志记录器有两个功能，信息用于打印正常的日志消息，错误用于所有错误消息。

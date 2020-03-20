@@ -7,11 +7,10 @@ lang: zh
 
 <div class="content">
 
-### Complex state
-复杂的状态
-
+### Complex state 复杂状态
 In our previous example the application state was simple as it was comprised of a single integer. What if our application requires a more complex state?
-在前面的示例中，应用状态很简单，因为它由单个整数组成。 如果我们的应用需要一个更复杂的状态怎么办？
+
+在之前的示例中，应用状态很简单，因为它仅由单个整数组成。 如果我们的应用需要一个更复杂的状态怎么办？
 
 In most cases the easiest and best way to accomplish this is by using the _useState_ function multiple times to create separate "pieces" of state.
 在大多数情况下，实现这一点的最简单和最好的方法是多次使用 useState 函数来创建单独的状态“片段”。

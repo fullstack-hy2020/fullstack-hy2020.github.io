@@ -336,12 +336,12 @@ You can find the code for our current application in its entirety in the <i>part
 ### State of the forms
 表格的状态
 
-<!-- Koko sovelluksen tila on nyt sijoitettu komponenttiin _App_.  -->
+
 
 The state of the application currently is in the _App_ component.
 应用的状态当前位于 App 组件中。
 
-<!-- Reactin dokumentaatio antaa seuraavan [ohjeen](https://reactjs.org/docs/lifting-state-up.html) tilan sijoittamisesta: -->
+
 
 React documentation says the [following](https://reactjs.org/docs/lifting-state-up.html) about where to place the state:
 React文档说[如下]( https://reactjs.org/docs/lifting-state-up.html )关于在哪里放置国家:
@@ -349,14 +349,14 @@ React文档说[如下]( https://reactjs.org/docs/lifting-state-up.html )关于�
 > <i>Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.</i>
 通常，几个组件需要反映相同的变化数据。 我们建议将共享状态提升到它们最接近的共同祖先。 我
 
-<!-- Jos mietitään lomakkeiden tilaa, eli esimerkiksi uuden muistiinpanon sisältöä sillä hetkellä kun muistiinpanoa ei vielä ole luotu, ei komponentti _App_ oikeastaan tarvitse niitä mihinkään, ja voisimme aivan hyvin siirtää tilan lomakkeisiin liittyvän tilan niitä vastaaviin komponentteihin. -->
+
 
 If we think about the state of the forms, so for example the contents of a new note before it has been created, the _App_ component does not actually need it for anything. 
 如果我们考虑一下表单的状态，例如一个新笔记的内容在创建之前，App 组件实际上并不需要它做任何事情。
 We could just as well move the state of the forms to the corresponding components. 
 我们也可以将表单的状态移动到相应的组件中。
 
-<!-- Muistiinpanosta huolehtiva komponentti muuttuu seuraavasti: -->
+
 
 The component for a note changes like so: 
 音符的组件变化如下:
@@ -397,17 +397,17 @@ const NoteForm = ({ createNote }) => {
 }
 ```
 
-<!-- Tilan muuttuja <i>newNote</i> ja sen muutokseta huolehtiva tapahtumankäsittelijä on siirretty komponentista _App_ lomakkeesta huolehtivaan komponenttiin. -->
+
 
 The <i>newNote</i> state attribute and the event handler responsible for changing it have been moved from the _App_ component to the component responsible for the note form. 
 I newNote / i state 属性和负责更改它的事件处理程序已经从 App 组件移动到负责记录表单的组件。
 
-<!-- Propseja on enää yksi, funktio _createNote_, jota lomake kutsuu kun uusi muistiinpano luodaan. -->
+
 
 There is only one prop left, the _createNote_ function, which the form calls when a new note is created. 
 现在只剩下一个props，即 createNote 函数，当创建新便条时，表单将调用该函数。
 
-<!-- Komponentti _App_ yksintertaistuu, tilasta <i>newNote</i> ja sen käsittelijäfunktiosta on päästy eroon. Uuden muistiinpanon luomisesta huolehtiva funktio _addNote_ saa suoraan parametriksi uuden muistiinpanon ja funktio on ainoa props, joka välitetään lomakkeelle: -->
+
 
 The _App_ component becomes simpler now that we have got rid of the <i>newNote</i> state and its event handler. 
 既然我们已经摆脱了<i>newNote</i> 状态及其事件处理程序，那么 App 组件就变得更简单了。
@@ -435,12 +435,12 @@ const App = () => {
 }
 ```
 
-<!-- Vastaava muutos voitaisiin tehdä myös kirjautumislomakkeelle, mutta jätämme sen vapaaehtoiseksi harjoitustehtäväksi. -->
+
 
 We could do the same for the log in form, but we'll leave that for an optional exercise. 
 我们可以对 log in 表单执行同样的操作，但是我们将把它留给一个可选练习。
 
-<!-- Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5), branchissa <i>part5-5</i>. -->
+
 
 The application code can be found from [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5),
 应用代码可以从[ github ]( https://github.com/fullstack-hy2020/part2-notes/tree/part5-5)中找到,
@@ -638,14 +638,14 @@ The form closes when a new blog is created.
 #### 5.6 Blog list frontend, step6
 5.6 Blog list frontend，step6
 
-<!-- Eriytä uuden blogin luomisesta huolehtiva lomake omaan komponenttiinsa (jos et jo ole niin tehnyt), ja siirrä kaikki uuden blogin luomiseen liittyvä tila komponentin vastuulle.  -->
+
 
 Separate the form for creating a new blog into its own component (if you have not already done so), and 
 将创建新 blog 的表单分离到它自己的组件中(如果您还没有这样做) ，并
 move all the states required for creating a new blog to this component. 
 将创建新博客所需的所有州移动到此组件。
 
-<!-- Komponentin tulee siis toimia samaan tapaan kuin tämän osan [materiaalin](http://localhost:8000/osa5/props_children_ja_proptypet#lomakkeiden-tila) komponentin <i>NewNote</i>. -->
+
 
 The component must work like the <i>NewNote</i> component from the [material](/osa5/props_children_ja_proptypet#lomakkeiden-tila) of this part.
 这个组件必须像这个部件的[ material ](/ osa5 / proptypet children ja # lomakkeiden-tila)中的<i>/ NewNote</i> 组件那样工作。
@@ -653,12 +653,12 @@ The component must work like the <i>NewNote</i> component from the [material](/o
 #### 5.7* Blog list frontend, step7
 5.7 * Blog list frontend，step7
 
-<!-- Lisää yksittäiselle blogille nappi, jonka avulla voi kontrolloida näytetäänkö kaikki blogiin liittyvät tiedot. -->
+
 ——伊塞尔 · 布洛基 · 纳皮，琼卡 · 阿乌拉 · 沃伊 · 罗德里格斯(jonka avulla voi kontrolloida n ytet nk kaikki blogiin liittyv t t tidot ——译注)
 Let's add each blog a button, which controls if all of the details about the blog are shown or not.
 让我们为每个博客添加一个按钮，用于控制是否显示博客的所有细节。
 
-<!-- Klikkaamalla nappia sen täydelliset tiedot aukeavat. -->
+
 
 Full details of the blog open when the button is clicked.
 点击按钮时打开博客的详细信息。
@@ -666,7 +666,7 @@ Full details of the blog open when the button is clicked.
 ![](../../images/5/13ea.png)
 
 
-<!-- Uusi napin klikkaus pienentää näkymän. -->
+
 
 And the details are hidden when the button is clicked again. 
 当再次单击按钮时，细节将被隐藏。

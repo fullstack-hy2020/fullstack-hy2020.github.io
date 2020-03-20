@@ -1212,7 +1212,7 @@ There we can see that the component requires two props, <i>onSubmit</i> and <i>o
 在这里我们可以看到组件需要两个props，i onSubmit /<i>和 i onCancel</i>。 两者都是返回<i>void</i> 的回调函数。 作为参数<i>onSubmit</i> 应该接收<i>PatientFormValues</i> 类型的对象，以便回调可以处理我们的表单值。
 
 When creating <i>AddPatientForm</i> function component, you can see that we have bound <i>Props</i> type as as our component's props, and are destructuring <i>onSubmit</i> and <i>onCancel</i> from those props.
-在创建<i>AddPatientForm</i> 函数组件时，您可以看到我们使用 bound<i>Props</i> 类型作为组件的props，并从这些props中析构<i>onSubmit</i> 和<i>onCancel</i>。
+在创建<i>AddPatientForm</i> 函数组件时，您可以看到我们使用 bound<i>Props</i> 类型作为组件的props，并从这些props中解构<i>onSubmit</i> 和<i>onCancel</i>。
 
 ```js
 export const AddPatientForm: React.FC<Props> = ({ onSubmit, onCancel }) => {

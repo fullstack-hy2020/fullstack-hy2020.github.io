@@ -32,7 +32,7 @@ At the moment there are two good options: [Relay](https://facebook.github.io/rel
 ### Apollo client
 阿波罗客户
 
-<!-- Käytetään kurssilla Apollo Clientin versiota [3.0-beta](https://www.apollographql.com/docs/react/v3.0-beta/), tällä hetkellä (20.2.2020) uusin virallisesti julkaisatu versio on 2.6. eli kun luet dokumentaatiota, muista vaihtaa näytettävän dokumentaation versio vastaamaan 3.0 betaa: -->
+
 
 In this course we will use the version [3.0-beta](https://www.apollographql.com/docs/react/v3.0-beta/) of Apollo Client. 
 在本课程中，我们将使用 Apollo Client 的版本[3.0-beta ]( https://www.apollographql.com/docs/react/v3.0-beta/ )。
@@ -45,7 +45,7 @@ At the moment (20.2.2020) 2.6 is the latest officially released version, so when
 Create a new React-app and install the dependencies required by [Apollo client](https://www.apollographql.com/docs/react/v3.0-beta/get-started/#installation).
 创建一个新的 React-app 并安装 Apollo 客户端所需的依赖 https://www.apollographql.com/docs/react/v3.0-beta/get-started/#installation。
 
-<!-- Luodaan uusi React-sovellus ja asennetaan siihen [Apollo clientin](https://www.apollographql.com/docs/react/get-started/#installation) vaatimat riippuvuudet. -->
+
 
 We'll create a new React application and install the debendencies required by [Apollo client](https://www.apollographql.com/docs/react/get-started/#installation).
 我们将创建一个新的 React 应用，并安装[ Apollo 客户端]( https://www.apollographql.com/docs/React/get-started/#installation 应用)所要求的文档。
@@ -144,14 +144,14 @@ We are ready to implement the main view of the application, which shows a list o
 我们已经准备好实现应用的主视图，它显示了一个电话号码列表。
 
 
-<!-- Apollo Client tarjoaa muutaman vaihtoehtoisen tavan [kyselyjen](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/) tekemiselle. Tämän hetken vallitseva käytäntö on hook-funktion [useQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#usequery) käyttäminen. -->
+
 
 Apollo Client offers a few alternatives for making [queries](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/). 
 阿波罗客户端提供了一些替代方案来进行[查询]( https://www.apollographql.com/docs/react/v3.0-beta/data/queries/ )。
 Currently the use of the hook-function [useQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#usequery) is the dominant practice.
 目前，钩子函数[ useQuery ]( https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#useQuery )的使用是主要的实践。
 
-<!-- Kyselyn tekevän komponentin <i>App</i> koodi näyttää seuraavalta: -->
+
 ——凯瑟琳 · 泰科夫(kyselyn tekev n komponentin<i>App</i> koodi n ytt seuraaveta)
 The query is made by the <i>App</i> component, which's code is as follows:
 该查询由<i>App</i> 组件执行，其代码如下:
@@ -187,9 +187,9 @@ const App = () => {
 export default App
 ```
 
-<!-- Hook-funktion _useQuery_ kutsuminen suorittaa parametrina annetun kyselyn. Hookin kutsuminen palauttaa olion, joka -->
 
-<!-- jolla on [useita kenttiä](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#result). Kenttä <i>loading</i> on arvoltaan tosi, jos kyselyyn ei ole saatu vielä vastausta. Tässä tilanteessa renderöitävä koodi on  -->
+
+
 
 When called, _useQuery_ makes the query it receives as a parameter.
 调用时，useQuery 将查询作为参数接收。
@@ -206,7 +206,7 @@ if ( result.loading ) {
 }
 ```
 
-<!-- Kun tulos on valmis, otetaan tuloksen kentästä <i>data</i> kyselyn <i>allPersons</i> vastaus ja renderöidään luettelossa olevat nimet ruudulle. -->
+
 
 When response is received, the result of the <i>allPersons</i> query can be found from the <i>data</i> field, and we can render the list of names to the screen.
 当收到响应时，可以在<i>data</i> 字段中找到<i>allPersons</i> 查询的结果，并将名称列表渲染到屏幕上。
@@ -217,7 +217,7 @@ When response is received, the result of the <i>allPersons</i> query can be foun
 </div>
 ```
 
-<!-- Eriytetään henkilöiden näyttäminen omaan komponenttiin -->
+
 
 Let's separate displaying the list of persons into its own component
 让我们将人员列表分离显示到它自己的组件中
@@ -237,7 +237,7 @@ const Persons = ({ persons }) => {
 }
 ```
 
-<!-- Komponentti _App_ siis hoitaa edelleen kyselyn ja välittää tuloksen uuden komponentin renderöitäväksi: -->
+
 
 The _App_ component still makes the query, and passes the result to the new component to be rendered:
 组件仍然进行查询，并将结果传递给要渲染的新组件:
@@ -282,7 +282,7 @@ When we do queries programmatically, we must be able to give them parameters dyn
 GraphQL [variables](https://graphql.org/learn/queries/#variables) are well suited for this. To be able to use variables, we must also name our queries. 
 Graphql [ variables ]( https://GraphQL.org/learn/queries/#variables )非常适合这一点，为了能够使用变量，我们还必须命名我们的查询。
 
-<!-- Sopiva muoto kyselylle on seuraava: -->
+
 
 A good format for the query is this:
 查询的一个好格式是:
@@ -309,7 +309,7 @@ It is also possible to do queries with parameters with the GraphQL Playground. T
 ![](../../images/8/10.png)
 
 
-<!-- Asken käyttämämme _useQuery_ toimii hyvin tilanteissa, joissa kysely on tarkoitus suorittaa heti komponentin renderöinnin yhteydessä. Nyt kuitenkin haluamme tehdä kyselyn vasta siinä vaiheessa kun käyttäjä haluaa nähdä jonkin henkilön tiedot, eli kysely tehdään vasta [sitä tarvittaessa](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#executing-queries-manually).  -->
+
 <！ ——请记住我的话——每个人都有自己的生活方式，乔伊萨 · 凯斯利(joissa kysely)谈论自己的生活方式。 在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文。   -->
 The _useQuery_ hook is well suited for situations where the query is done when the component is rendered. 
 Usequery 钩子非常适合在渲染组件时进行查询的情况。
@@ -317,7 +317,7 @@ However now we want to make the query only when a user wants to see the details 
 然而，现在我们只希望在用户想要查看特定人员的详细信息时才进行查询，因此查询只能[根据需要]完成( https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#executing-queries-manually )。
 
 
-<!-- Tähän tilanteeseen sopii hook-funktio [useLazyQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#uselazyquery). Komponentti <i>Persons</i> muuttuu seuraavasti: -->
+
 
 For this this situation the hook-function [useLazyQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#uselazyquery) is a good choice. 
 在这种情况下，钩子函数[ useLazyQuery ]( https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#useLazyQuery )是一个不错的选择。
@@ -394,13 +394,13 @@ const Persons = ({ persons }) => {
 export default Persons
 ```
 
-<!-- Koodi on kasvanut paljon, ja kaikki lisäykset eivät ole täysin ilmeisiä. -->
+
 
 The code has changed quite a lot, and all of the changes are not completely apparent. 
 代码已经改变了很多，并且所有的改变都不是很明显。
 
 
-<!-- Jos henkilön yhteydessä olevaa nappia painetaan, suoritetaan klikkauksenkäsittelijä _showPerson_, joka tekee GraphQL-kyselyn henkilön tiedoista: -->
+
 
 When a person's "show address" button is clicked, its event handler 
 单击用户的“ show address”按钮时，将单击其事件处理程序
@@ -417,12 +417,12 @@ const showPerson = (name) => {
 }
 ```
 
-<!-- Kyselyn muuttujalle _nameToSearch_ määritellään arvo kutsuttaessa. -->
+
 
 The query's _nameToSearch_ variable receives a value when the qury is run. 
 查询的 nameToSearch 变量在运行 qury 时接收一个值。
 
-<!-- Kyselyn vastaus tulee muuttujaan _result_, ja sen arvo sijoitetaan komponentin tilan muutujaan _person_. Sijoitus tehdään _useEffect_-hookissa: -->
+
 
 The query response is saved to the variable _result_, and its value is saved to the component's state _person_ in the _useEffect_ hook. 
 查询响应保存到变量 result，其值保存到 useEffect 钩子中组件的状态人员。
@@ -435,7 +435,7 @@ useEffect(() => {
 }, [result.data])
 ```
 
-<!-- Hookin toisena parametrina on _result.data_, tämä saa aikaan sen, että hookin ensimmäisenä parametrina oleva funktio suoritetaan <i>aina kun kyselyssä haetaan uuden henkilön tiedot</i>. Jos päivitystä ei hoidettaisi kontrolloidusti hookissa, seuraisi ongelmia sen jälkeen kun yksittäisen henkilön näkymästä palataan kaikkien henkilöiden näkymään. -->
+
 ——结果，数据显示，我是一名护理人员，我是一名护理人员，我是一名护理人员。 (西班牙语)(西班牙语)。 -->
 The hook's second parameter is _result.data_, so function given to the hook as its second parameter is executed <i>every time the query fetches the details of a different person</i>. 
 钩子的第二个参数是 result.data，因此每次查询获取不同 person / i 的详细信息时，作为钩子的第二个参数给定的函数都会被执行。
@@ -449,12 +449,12 @@ If the state _person_ has a value, instead of showing a list of all persons, onl
 ![](../../images/8/11.png)
 
 
-<!-- Jos tilan muuttujalla _person_ on arvo, näytetään kaikkien henkilöiden sijaan yhden henkilön tarkemmat tiedot: -->
+
 
 If the _person_ state has a value, instead of displaying a list of all persons we render the details of the specified person: 
 如果人的状态有一个值，我们不显示所有人的列表，而是渲染指定人的详细信息:
 
-<!-- Yksittäisen henkilön näkymästä palataan kaikkien henkilöiden näkymään sijoittamalla tilan muuttujan _person_ arvoksi _null_. -->
+
 -- yksitt is en henkil n kym st palataan kaikkien henkil iden n kym n sijoittamalla tilan muuttujan person arvoksi null. -- 
 When a user wants to return to the persons list, the _person_ state is set to _null_.
 当用户希望返回人员列表时，人员状态设置为 null。
@@ -519,12 +519,12 @@ mutation createPerson($name: String!, $street: String!, $city: String!, $phone: 
 `
 ```
 
-<!-- Mutaatioiden tekemiseen sopivan toiminnallisuuden tarjoaa hook-funktio [useMutation](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#usemutation).  -->
+
 
 The hook-function [useMutation](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#usemutation) provides the functionality for making mutations. 
 钩子函数[ useMutation ]( https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#useMutation )提供了进行变异的功能。
 
-<!-- Tehdään sovellukseen uusi komponentti uuden henkilön lisämiseen: -->
+
 
 Let's create a new component for adding a new person to the directory:
 让我们创建一个新的组件来添加一个新用户到目录中:
@@ -591,7 +591,7 @@ const PersonForm = () => {
 export default PersonForm
 ```
 
-<!-- Lomakkeen koodi on suoraviivainen, mielenkiintoiset rivit on korostettu. Mutaation suorittava funktio saadaan luotua _useMutation_-hookin avulla. Hook palauttaa kyselyfunktion <i>taulukon</i> ensimmäisenä alkiona: -->
+
 
 The code of the form is straightforward and the interesting lines have been highlighted. 
 表单的代码非常简单，并突出显示了有趣的行。
@@ -604,7 +604,7 @@ The hook returns an <i>array</i>, first element of which contains the result of 
 const [ createPerson ] = useMutation(CREATE_PERSON)
 ```
 
-<!-- Kyselyä tehtäessä määritellään kyselyn muuttujille arvot: -->
+
 !-kyselyn muuttujille arvot:-
 The query variables receive values when the query is made:
 查询变量在进行查询时接收值:
@@ -656,7 +656,7 @@ The solution is simple, and every time a user adds a new person, it appears imme
 The bad side of the solution is all the pointless web traffic. 
 这个解决方案的缺点是所有的网络流量都是毫无意义的。
 
-<!-- Toinen helppo tapa välimuistin synkronoimiseen on määritellä _useMutation_-hookin option [refetchQueries](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2) avulla, että kaikki henkilöt hakeva kysely tulee suorittaa mutaation yhteydessä uudelleen: -->
+
 
 Another easy way to keep the cache in sync is to use the _useMutation_-hook's [refetchQueries](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2) parameter to define, that the query fetching all persons is done again whenever a new person is created. 
 另一种保持缓存同步的简单方法是使用 useMutation-hook 的[ refetchQueries ](refetchQueries)参数来定义，即每当创建一个新的人员时，就会再次执行获取所有人员的查询 https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2。
@@ -686,7 +686,7 @@ The pros and cons of this solution are almost opposite of the previous one. Ther
 There are other ways to update the cache. More about those later in this part. 
 还有其他更新缓存的方法。本部分稍后将详细介绍。
 
-<!-- Sovellukseen on tällä hetkellä määritelty kyselyjä komponenttien koodin sekaan. Eriytetään kyselyjen määrittely omaan tiedostoonsa <i>queries.js</i>: -->
+
 
 At the moment in our code queries and component are defined in the same place. 
 目前，在我们的代码查询和组件定义在同一个地方。
@@ -714,7 +714,7 @@ export const CREATE_PERSON = gql`
 `
 ```
 
-<!-- Jokainen komponentti importtaa tarvitsemansa kyselyt: -->
+
 
 Each component then imports the queries it needs:
 然后每个组件导入它需要的查询:
@@ -734,7 +734,7 @@ The current code of the application can be found on [Github](https://github.com/
 #### Handling mutation errors
 处理突变错误
 
-<!-- Jos yritämme luoda epävalidia henkilöä, seurauksena on poikkeus ja koko sovellus hajoaa -->
+
 
 Trying to create a person with invalid data causes an error, and the whole application breaks
 尝试用无效数据创建人员会导致错误，整个应用将中断
@@ -742,12 +742,12 @@ Trying to create a person with invalid data causes an error, and the whole appli
 ![](../../images/8/14ea.png)
 
 
-<!-- Poikkeus on syytä käsitellä. _useMutation_-hookin [option](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2) _onError_ avulla on mahdollista rekisteröidä mutaatioille virheenkäsittelijäfunktio. -->
+
 
 We should handle the exception. We can register an error handler function to the mutation using _useMutation_-hook's _onError_ [option](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2).
 我们应该处理这个异常，我们可以使用 useMutation-hook 的 onError [ option ]( https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2)将一个错误处理函数注册到变异中。
 
-<!-- Rekisteröidään mutaatiolle virheidenkäsittelijä, joka asettaa virheestä kertovan viestin propsina saaman funktion _setError_ avulla: -->
+
 
 Let's register the mutation an error handler, which uses the _setError_
 让我们为变异注册一个错误处理程序，它使用 setError
@@ -772,7 +772,7 @@ const PersonForm = ({ setError }) => {
 }
 ```
 
-<!-- Renderlöidään mahdollinen virheilmoitus näytölle -->
+
 
 We can then render the error message on the screen as necessary
 然后，我们可以根据需要在屏幕上渲染错误消息
@@ -853,7 +853,7 @@ export const EDIT_NUMBER = gql`
 `
 ```
 
-<!-- Muutoksen suorittava komponentti <i>PhoneForm</i> on suoraviivainen, se kysyy lomakkeen avulla henkilön nimeä ja uutta puhelinnumeroa, ja kutsuu _useMutation_-hookilla luotua mutaation suorittavaa funktiota _changeNumber_. Mielenkiintoiset osat koodia korostettuna: -->
+
 
 The <i>PhoneForm</i> component responsible for the change is straightforward. The form has fields for the person's name and new phone number, and calls the _changeNumber_ function. The function is done using the _useMutation_-hook. 
 负责更改的<i>PhoneForm</i> 组件非常简单。 该表单具有用于个人姓名和新电话号码的字段，并调用“更改编号”函数。 该函数是使用 useMutation-hook 完成的。
@@ -917,7 +917,7 @@ It looks bleak, but it works:
 ![](../../images/8/22a.png)
 
 
-<!-- Kun numero muutetaan, päivittyy se hieman yllättäen automaattisesti komponentin <i>Persons</i> renderöimään nimien ja numeroiden listaan. Tämä johtuu siitä, että koska henkilöillä on identifioiva, tyyppiä <i>ID</i> oleva kenttä, päivittyy henkilö välimuistissa uusilla tiedoilla päivitysoperaation yhteydessä.  -->
+
 ——昆士兰第一人，他的父亲，他的父亲，他的父亲，他的父亲，他的父亲，他的父亲，他的父亲，他的父亲。 我是约翰 · 斯图，我是科斯卡 · 亨克尔，我是肯特，我是肯特，我是尤西拉 · 提多利亚，我是维多利亚。 -->
 Surprisingly, when person's number is changed the new number automatically appears on the list of persons rendered by the <i>Persons</i> component. 
 令人惊讶的是，当人数改变时，新的数字会自动出现在由<i>Persons</i> 组件渲染的人员列表中。
@@ -927,7 +927,7 @@ This happens because each person has an identifying field of type <i>ID</i>, so 
 The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4) branch <i>part8-4</i>
 当前应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4分支<i>part8-4</i> 上找到
 
-<!-- Sovelluksessa on  vielä pieni ongelma. Jos yritämme vaihtaa olemattomaan nimeen liittyvän puhelinnumeron, ei mitään näytä tapahtuvan. Syynä tälle on se, että jos nimeä vastaavaa henkilöä ei löydy, vastataan kyselyyn <i>null</i>: -->
+
 
 Our application still has one small flaw. If we try to change the phonenumber for a name which does not exist, nothing seems to happen. 
 我们的应用还有一个小缺陷。 如果我们试图改变一个不存在的名称的音素编号，似乎什么也不会发生。
@@ -939,12 +939,12 @@ the mutation response is <i>null</i>:
 ![](../../images/8/23ea.png)
 
 
-<!-- Koska kyseessä ei ole GraphQL:n kannalta virhetilanne, ei _onError_-virheenkäsittelijän rekisteröimisestä tässä tilanteessa hyötyä. -->
+
 
 For GraphQL this is not an error, so registering an _onError_ error handler is not useful. 
 对于 GraphQL，这不是一个错误，因此注册 onError 错误处理程序是没有用的。
 
-<!-- Voimme generoida virheilmoituksen _useMutation_-hookin toisena parametrina palauttaman mutaation tuloksen kertovan olion _result_ avulla. -->
+
 
 We can use the _result_ field returned by the _useMutation_-hook as its second parameter to generate an error message. 
 我们可以使用 useMutation-hook 返回的 result 字段作为其第二个参数来生成错误消息。
@@ -973,7 +973,7 @@ const PhoneForm = ({ setError }) => {
 }
 ```
 
-<!-- Jos henkilöä ei löytynt, eli kyselyn tulos _result.data.editNumber_ on _null_, asettaa komponentti propseina saamansa callback-funktion avulla sopivan virheilmoituksen. Virheilmoituksen asettamista kontrolloidaan jälleen useEffect-hookin avulla, eli virheviesti halutaan asetaa ainoastaan jos mutaation tulos _result.data_ muuttuu. -->
+
 
 If a person cannot be found, or the _result.data.editNumber_ is _null_, the component uses the callback-function it received as props to set a suitable error message. 
 如果找不到某个人，或 result.data.editNumber 为空，则组件使用它作为props接收的回调函数来设置合适的错误消息。
@@ -982,7 +982,7 @@ We want to set the error message only when the result of the mutation
 _result.data_ changes, so we use the useEffect-hook to control setting the error message. 
 因此，我们使用 useEffect-hook 来控制错误消息的设置。
 
-<!-- useEffect aiheuttaa ESLint-virheilmoituksen: -->
+
 
 Using useEffect causes an ESLint warning:
 使用 useEffect 会导致一个 ESLint 警告:
@@ -990,7 +990,7 @@ Using useEffect causes an ESLint warning:
 ![](../../images/8/41ea.png)
 
 
-<!-- Varoitus on aiheeton, ja pääsemme helpoimmalla ignoroimalla ESLint-säännön riviltä: -->
+
 
 The warning is pointless, and the easiest solution is to ignore the ESLint rule on the line:
 这个警告毫无意义，最简单的解决方案就是忽略 ESLint 规则:
@@ -1005,7 +1005,7 @@ useEffect(() => {
 // highlight-end
 ```
 
-<!-- Voisimme yrittää päästä varoituksesta eroon lisäämällä funktion _notify_ useEffectin toisena parametrina olevaan taulukkoon: -->
+
 ——请您务必注意他们的一切行为，并通知我们有效的护理人员: ——
 We could try to get rid of the warning by adding the _notify_ function to useEffect's second parameter array:
 我们可以通过在 useEffect 的第二个参数数组中添加 notify 函数来消除这个警告:
@@ -1020,7 +1020,7 @@ useEffect(() => {
 // highlight-end
 ```
 
-<!-- Tämä ratkaisu ei kuitenkaan toimi, ellei _notify_-funktiota ole määritelty [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-funktioon käärittynä. Jos näin ei tehdä, seurauksena on ikuinen luuppi, sillä aina kun komponentti _App_ renderöidään uudelleen notifikaation poistamisen jälkeen, syntyy <i>uusi versio</i> funktiosta _notify_ ja se taas aiheuttaa efektifunktion uudelleensuorituksen ja taas uuden notifikaation... -->
+
 
 However this solution does not work is the _notify_-function is not wrapped to a [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-function.  If its not, this results to an endless loop. When the _App_ component is rerendered after a notification is removed, a <i>new version</i> of _notify_ gets created which causes the effect function to be executed which causes a new notification and so on an so on...
 但是这个解决方案不起作用，因为 notify-function 没有封装到[ useCallback ]( https://reactjs.org/docs/hooks-reference.html#useCallback )-function 中。 如果不是，这将导致一个无限循环。 当 App 组件在通知被删除后重新运行时，会创建一个<i>new version</i> of notify，这会导致 effect 函数被执行，从而导致一个新的通知等等..。

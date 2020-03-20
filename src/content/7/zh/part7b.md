@@ -8,12 +8,12 @@ lang: zh
 <div class="content">
 
 
-<!-- Kurssin seitsemännen osan tehtävät poikkeavat jossain määrin. Edellisessä ja tässä luvussa on normaaliin tapaan [luvun teoriaan liittyviä tehtäviä](/osa7/custom_hookit#tehtavat-7-4-7-6). -->
+
 
 The exercises in this part are a bit different than the exercises in the previous parts. The exercises in the previous part and the exercises in this part [are about the theory presented in this part](/osa7/custom_hookit#tehtavat-7-4-7-6).
 这一部分的练习与前几部分的练习有点不同。 前一部分的练习和这一部分的练习是关于这一部分提出的理论。
 
-<!-- Tämän ja seuraavan luvun tehtävien lisäksi seitsemäs osa sisältää kertaavan ja soveltavan [tehtäväsarjan](/osa7/tehtavia_blogilistan_laajennus), jossa laajennetaan osissa 4 ja 5 tehtyä Bloglist-sovellusta. -->
+
 ——在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文在这里输入译文
 This part also contains a [series of exercises](/osa7/tehtavia_blogilistan_laajennus) in which we modify the Bloglist application from parts 4 and 5 to rehearse and apply the skills we have learned.
 本部分还包含一系列练习(/ osa7 / tehtavia blogilistan laajennus) ，其中我们从第4章节和第5章节修改 Bloglist 应用，以排练和应用我们所学到的技能。
@@ -24,23 +24,23 @@ This part also contains a [series of exercises](/osa7/tehtavia_blogilistan_laaje
 React offers 10 different [built-in hooks](https://reactjs.org/docs/hooks-reference.html), of which the most popular ones are the [useState](https://reactjs.org/docs/hooks-reference.html#usestate) and [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect) hooks, that we have already been using extensively.
 React 提供了10种不同的内置钩子，其中最受欢迎的是我们已经广泛使用的[ useState ]( https://reactjs.org/docs/hooks-reference.html  https://reactjs.org/docs/hooks-reference.html#useState )和[ useEffect ]( https://reactjs.org/docs/hooks-reference.html#useEffect )钩子。
 
-<!-- Käytimme [osassa 5](/osa5/props_children_ja_proptypet#ref-eli-viite-komponenttiin) hookia -->
 
-<!-- [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle), jonka avulla komponentin sisäinen funktio pystyttiin tarjoamaan näkyville komponentin ulkopuolelle. -->
+
+
 
 In [part 5](/osa5/props_children_ja_proptypet#ref-eli-viite-komponenttiin) we used the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle)-hook which allows for components to provide their functions to other components.
 在[ part 5](/ osa5 / proptypet children ja # ref-eli-viite-komponenttiin)中，我们使用了[ useImperativeHandle ]( https://reactjs.org/docs/hooks-reference.html#useImperativeHandle )-hook，它允许组件为其他组件提供其功能。
 
-<!-- Viimeisen vuoden aikana moni Reactin apukirjasto on ruvennut tarjoamaan hook-perustaisen rajapinnan. [Osassa 6](/osa6/flux_arkkitehtuuri_ja_redux#redux-storen-valittaminen-eri-komponenteille) -->
+
 
 Within the last year many React libraries have begun to offer hook based apis. [In part 6](/osa6/flux_arkkitehtuuri_ja_redux#redux-storen-valittaminen-eri-komponenteille)
 在过去的一年里，许多 React 库已经开始提供基于 hook 的 api
-<!-- käytimme react-redux-kirjaston hookeja [useSelector](https://react-redux.js.org/api/hooks#useselector) ja [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) välittämään redux-storen ja dispatch-funktion niitä tarvitseville komponenteille. Reduxin hook-perustainen api onkin huomattavasti helpompi käyttää kuin vanhempi, mutta edelleen käytössä oleva[connect](/osa6/connect)-api . -->
+
 
 we used the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) hooks from the react-redux library to share our redux-store and dispatch function to our components. Redux's hook based api is a lot easier to use than its older, still available, [connect](/osa6/connect)-api.
 我们使用 react-redux 库中的[ useSelector ]( https://react-redux.js.org/api/hooks#useSelector )和[ useDispatch ]( https://react-redux.js.org/api/hooks#useDispatch )钩子来共享我们对组件的 redux-store 和 dispatch 函数。 Redux 的基于钩子的 api 比旧的、仍然可用的[ connect ](/ osa6 / connect)-api 更易于使用。
 
-<!-- Myös edellisessä [luvussa](/osa7/react_router/) käsitelyn [react-routerin](https://reacttraining.com/react-router/web/guides) api perustuu osin [hookeihin](https://reacttraining.com/react-router/web/api/Hooks), joiden avulla päästiin käsiksi routejen parametroituun osaan, sekä history-olioon, joka mahdollistaa selaimen osoiterivin manipuloinnin koodista. -->
+
 
 [React-router's](https://reacttraining.com/react-router/web/guides) api we introduced in the [previous part](/osa7/react_router/) is also partially [hook](https://reacttraining.com/react-router/web/api/Hooks) based. Its hooks can be used to access url parameters and the history object, which allows for manipulating the browser url programmatically.
 我们在[上一部分](/ osa7 / react router /)中介绍的[ React-router 的]( https://reacttraining.com/React-router/web/guides ) api 也部分基于[ hook ]( https://reacttraining.com/React-router/web/api/hooks )。 它的钩子可以用来访问 url 参数和历史对象，这允许以编程方式操作浏览器的 url。
@@ -505,17 +505,17 @@ If we were to do this we would lose much of the benefit provided by the <i>useFi
 #### 7.7: country hook
 7.7: country hook
 
-<!-- Palataan hetkeksi tehtäväsarjan [2.12-14](/osa2/palvelimella_olevan_datan_hakeminen#tehtavat-2-11-2-14) tunnelmiin. -->
+
 
 Let's return to the exercises [2.12-14](/osa2/palvelimella_olevan_datan_hakeminen#tehtavat-2-11-2-14).
 让我们回到练习[2.12-14](/ osa2 / palvelimella olevan datan hakeminen # tehtawatat-2-11-2-14)。
 
-<!-- Ota pohjaksi repositoriossa https://github.com/fullstack-hy2020/country-hook oleva koodi.  -->
+
 
 Use the code from https://github.com/fullstack-hy2020/country-hook as your starting point.
 使用 https://github.com/fullstack-hy2020/country-hook 的代码作为你的起点。
 
-<!-- Sovelluksen avulla on mahdollista hakea maiden tietoja https://restcountries.eu/ rajapinnasta. Jos maa löytyy, näytetään maan perustiedot -->
+
 
 The application can be used to search for country details from the https://restcountries.eu/ interface. If country is found, the details of the country are displayed
 该应用可以用来搜索国家的详细信息，从 https://restcountries.eu/ 的界面。 如果找到国家，则显示该国的详细信息
@@ -523,7 +523,7 @@ The application can be used to search for country details from the https://restc
 ![](../../images/7/69ea.png)
 
 
-<!-- jos maata ei löydy, kerrotaan siitä käyttäjälle -->
+
 
 If country is not found, message is displayed to the user
 如果找不到国家，则向用户显示消息
@@ -531,17 +531,17 @@ If country is not found, message is displayed to the user
 ![](../../images/7/70ea.png)
 
 
-<!-- Sovellus on muuten valmiiksi toteutettu, mutta joudut tässä tehtävässä toteuttamaan custom hookin _useCountry_, jonka avulla haet hookin parametrina saaman nimisen maan tiedot. -->
+
 
 The application is otherwise complete, but in this exercise you have to implement a custom hook _useCountry_, which can be used to search for the details of the country given to the hook as a parameter.
 除此之外，应用是完整的，但是在这个练习中，您必须实现一个自定义的 hook useCountry，它可以用来搜索作为参数提供给 hook 的国家的详细信息。
 
-<!-- Maan tietojan hakeminen kannattaa hoitaa apin endpointin [full name](https://restcountries.eu/#api-endpoints-full-name) avulla, hookin sisällä olevassa _useEffect_-hookissa. -->
+
 
 Use the api endpoint [full name](https://restcountries.eu/#api-endpoints-full-name) to fetch country details in a _useEffect_-hook within your custom hook.
 使用 api 端点[全名]( https://restcountries.eu/#api-endpoints-full-name )在自定义钩子内的 useEffect-hook 中获取国家详细信息。
 
-<!-- Huomaa, että tässä tehtävässä on oleellista hyödyntää useEffectin [toisena parametrina](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) olevaa taulukkoa sen kontrolloimiseen milloin efektifunktio kannattaa suorittaa.  -->
+
 
 Note, that in this exercise it is essential to use useEffect's [second parameter](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) array to control when the effect function is executed.
 注意，在这个练习中，必须使用 useEffect 的[第二个参数]( https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect )数组来控制执行 effect 函数的时间。

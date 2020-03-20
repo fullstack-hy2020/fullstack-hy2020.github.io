@@ -211,7 +211,7 @@ const App = (props) => {
 Because the code generating the <i>li</i> tags is JavaScript, it must be wrapped in curly braces in a JSX template just like all other JavaScript code. 
 因为生成<i>li</i> 标记的代码是 JavaScript，所以必须像所有其他 JavaScript 代码一样，在 JSX 模板中使用花括号包装它。
 
-<!-- Parannetaan koodin luetteloa vielä jakamalla nuolifunktion määrittely useammalle riville: -->
+
 We will also make the code more readable by separating the arrow function's declaration across multiple lines:
 我们还将通过在多行中分隔箭头函数的声明来提高代码的可读性:
 
@@ -436,7 +436,7 @@ const App = ({ notes }) => { //highlight-line
 ```
 
 If you have forgotten what destructuring means and how it works, review [this](/en/part1/component_state_event_handlers#destructuring).
-如果您忘记了析构化的含义以及它是如何工作的，请查看[ this ](/ en / part1 / component state 事件处理程序 # destructuring)。
+如果您忘记了解构化的含义以及它是如何工作的，请查看[ this ](/ en / part1 / component state 事件处理程序 # destructuring)。
 
 
 We'll separate displaying a single note into its own component <i>Note</i>: 
@@ -692,7 +692,7 @@ const Course = ({ course }) => {
 ```
 
 Quite often the root of the problem is that the props are expected to be of a different type, or called with a different name than they actually are, and destructuring fails as a result. The problem often begins to solve itself when destructuring is removed and we see what the <em>props</em> actually contains. 
-通常，问题的根源在于，props应该是不同的类型，或者使用与实际名称不同的名称调用，结果析构失败。 问题通常开始解决自己时，销毁被删除，我们看到的 em props / em 实际上包含什么。
+通常，问题的根源在于，props应该是不同的类型，或者使用与实际名称不同的名称调用，结果解构失败。 问题通常开始解决自己时，销毁被删除，我们看到的 em props / em 实际上包含什么。
 
 ```js
 const Course = (props) => { // highlight-line

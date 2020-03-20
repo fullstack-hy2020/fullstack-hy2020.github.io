@@ -15,7 +15,7 @@ The frontend of our application shows the phone directory just fine with the upd
 ### User log in
 # # # 用户登录
 
-<!-- Lisätään sovelluksen tilaan muuttuja _token_, joka tallettaa tokenin siinä vaiheessa kun käyttäjä on kirjautunut. Jos _token_ ei ole määritelty, näytetään kirjautumisesta huolehtiva komponentti <i>LoginForm</i>, joka saa parametriksi virheenkäsittelijän sekä funktion _setToken_: -->
+
 
 Let's add variable _token_ to the application's state. It will contain user's token when a is logged in. If _token_ is undefined, we render the <i>LoginForm</i>-component responsible for user login. The component receives an error handler and the _setToken_-function as parameters:
 让我们将变量 token 添加到应用的状态。 当用户登录时，它将包含用户标记。 如果令牌未定义，我们将使<i>LoginForm</i>-component 负责用户登录。 组件接收一个错误处理程序和 setToken-function 作为参数:
@@ -45,7 +45,7 @@ const App = () => {
 }
 ```
 
-<!-- Määritellään kirjautumisen suorittava mutaatio -->
+
 
 Next we define a mutation for logging in
 接下来我们为登录定义一个变异
@@ -60,7 +60,7 @@ expoty const LOGIN = gql`
 `
 ```
 
-<!-- Kirjautumisesta huolehtiva komponentti _LoginForm_ toimii melko samalla tavalla kuin aiemmat mutaatioista huolehtivat komponentit. Mielenkiintoiset rivit on korostettu koodissa: -->
+
 
 The _LoginForm_-component works pretty much just like all other components doing mutations we have previously created. 
 Loginform 组件的工作原理与我们之前创建的所有其他进行突变的组件非常相似。
@@ -123,7 +123,7 @@ const LoginForm = ({ setError, setToken }) => {
 export default LoginForm
 ```
 
-<!-- Käytössä on jälleen efektihookki, jonka avulla asetetaan tokenin arvo komponentin _App_ tilaan sekä local storageen siinä vaiheessa kun palvelin on vastannut mutaatioon. Efektihookki on tarpeen, jotta sovellus ei joutuisi ikuiseen renderöintilooppiin. -->
+
 
 We are using an effect hook again. Here it's used to save the token's value to the state of the _App_ component the local storage after the server has responded to the mutation. 
 我们再次使用效果钩子。 在这里，它用于在服务器响应变异之后，将令牌的值保存到本地存储的 App 组件的状态。
@@ -133,9 +133,9 @@ Use of the effect hook is necessary to avoind an endless rendering loop.
 Let's also add a button which enables logged in user to log out. The buttons onClick handler sets the _token_ state to null, removes the token from local storage and resets the cache of the Apollo client. The last is [important](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout), because some queries might have fetched data to cache, which only logged in users should have access to. 
 我们还要添加一个按钮，使登录用户能够注销。 Onclick 处理程序的按钮将令牌状态设置为 null，从本地存储中删除令牌并重置 Apollo 客户机的缓存。 最后一个是[重要的]( https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout ) ，因为有些查询可能已经将数据提取到缓存，只有登录的用户才能访问。
 
-<!-- Välimuistin nollaaminen tapahtuu Apollon _client_-objektin metodilla [resetStore](https://www.apollographql.com/docs/react/v3.0-beta/api/core/ApolloClient/#ApolloClient.resetStore), clientiin taas päästään käsiksi hookilla -->
 
-<!-- [useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useapolloclient): -->
+
+
 
 We can reset the cache using the [resetStore](https://www.apollographql.com/docs/react/v3.0-beta/api/core/ApolloClient/#ApolloClient.resetStore) method of an Apollo _client_ object. 
 我们可以使用 Apollo 客户机对象的[ resetStore ]( https://www.apollographql.com/docs/react/v3.0-beta/api/core/apolloclient/#apolloclient.resetStore )方法重置缓存。
@@ -196,12 +196,12 @@ const client = new ApolloClient({
 })
 ```
 
-<!-- _client_-olion muodostamisen yhteydessä oleva toinen parametri _link_ määrittelee, miten apollo on yhteydessä palvelimeen. Nyt normaalia [httpLink](https://www.apollographql.com/docs/link/links/http.htm)-yhteyttä muokataan siten, että, että pyyntöjen mukaan [asetetaan headerille](https://www.apollographql.com/docs/react/networking/authentication/#header) <i>authorization</i> arvoksi localStoragessa mahdollisesti oleva token. -->
+
 <！ 客户多种多样的服务方式，包括医护人员，医护人员，和阿波罗医生。 ( https://www.apollographql.com/docs/link/links/http.htm )-yhtey t muokataan siten，ett，ett pyynt jen mukaan [ asetetaan headerille ]( https://www.apollographql.com/docs/react/networking/authentication/#header )<i>authorization</i> arvoksi localStoragessa mahisesti oleva token. -->
 The link parameter given to the _client_-object defines how apollo connects to the server. Here the normal [httpLink](https://www.apollographql.com/docs/link/links/http.htm) connection is modified so that the request's <i>authorization</i> [header](https://www.apollographql.com/docs/react/networking/authentication/#header) contains the token if one has been saved to the localStorage. 
 给定客户机对象的 link 参数定义了 apollo 如何连接到服务器。 在这里，正常的[ httpLink ]( https://www.apollographql.com/docs/link/links/http.htm )连接被修改，以便请求的<i>authorization</i> [ header ]( https://www.apollographql.com/docs/react/networking/authentication/#header )包含令牌(如果已经保存到 localStorage 的话)。
 
-<!-- Asennetaan vielä muutoksen tarvitsema kirjasto -->
+
 
 We also need to install the library required by this modification
 我们还需要安装此修改所需的库
@@ -247,9 +247,9 @@ Current application code can be found on [Github](https://github.com/fullstack-h
 ### Updating cache, revisited
 # # # 更新缓存，重新访问
 
-<!-- Uusien henkilöiden lisäyksen yhteydessä on siis  -->
 
-<!-- [päivitettävä](/osa8/react_ja_graph_ql#valimuistin-paivitys) Apollo clientin välimuisti. Päivitys tapahtuu määrittelemällä mutaation yhteydessä option _refetchQueries_ avulla, että kysely <em>ALL\_PERSONS</em> on suoritettava uudelleen: -->
+
+
 
 We have to [update](/osa8/react_ja_graph_ql#valimuistin-paivitys) the cache of the Apollo client on creating new persons. We can update it using the mutation's _refetchQueries_ option to define that the 
 我们必须[更新](/ osa8 / react ja graph ql # valimuistin-paivitys) Apollo 客户端的缓存，以创建新的人员。 我们可以使用变异的 refetchQueries 选项更新它来定义
@@ -307,7 +307,7 @@ The code reads the cached state of <em>ALL\_PERSONS</em> query using [readQuery]
 There are actually some situations where the only good way to keep the cache up to date is using _update_ -callbacks. 
 实际上，在某些情况下，使缓存保持最新的唯一好方法是使用 update-callback。
 
-<!-- On myös olemassa tilanteita, joissa ainoa järkevä tapa saada välimuisti pidettyä ajantasaisena on _update_-callbackillä tehtävä päivitys.  -->
+
 
 In some situations the only sensible way to keep the cache up to date is using the _update_-callback.
 在某些情况下，使缓存保持最新的唯一合理方法是使用 update-callback。

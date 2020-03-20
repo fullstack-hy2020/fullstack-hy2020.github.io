@@ -8,19 +8,19 @@ lang: zh
 <div class="content">
 
 
-<!-- Olemme käyttäneet redux-storea react-redux-kirjaston [hook](https://react-redux.js.org/api/hooks)-apin, eli funktioiden [useSelector](https://react-redux.js.org/api/hooks#useselector) ja [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) avulla. -->
+
 
 So far we have used our redux-store with the help of the hook](https://react-redux.js.org/api/hooks)-api from react-redux.
 到目前为止，我们已经使用了 redux-store，借助于 redux 中的 hook ]( https://react-redux.js.org/api/hooks )-api。
 Practically this has meant using the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) functions.
 实际上，这意味着使用[ useSelector ]( https://react-redux.js.org/api/hooks#useSelector )和[ useDispatch ]( https://react-redux.js.org/api/hooks#useDispatch )函数。
 
-<!-- Tarkastellaan tämän osan lopuksi toista, hieman vanhempaa ja jonkin verran monimutkaisempaa tapaa reduxin käyttöön, eli [react-redux](https://github.com/reactjs/react-redux) -kirjaston määrittelemää [connect](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)-funktiota. -->
+
 
 To finish this part we will look into another older and  more complicated way to use redux, the [connect](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)-function provided by react-redux.
 为了完成这一部分，我们将研究使用 redux 的另一种更古老、更复杂的方法，redux 提供的[ connect ]( https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options )-函数。
 
-<!-- Uusissa sovelluksissa kannattaa ehdottomasti käyttää hook-apia, mutta connectin tuntemisesta on hyötyä vanhempia reduxia käyttäviä projekteja ylläpidettävissä. -->
+
 
 In new applications you should absolutely use the hook-api, but knowing how to use connect is useful when maintaining older projects using redux.
 在新的应用中，您绝对应该使用 hook-api，但是在使用 redux 维护老项目时，了解如何使用 connect 非常有用。
@@ -28,7 +28,7 @@ In new applications you should absolutely use the hook-api, but knowing how to u
 ### Using the connect-function to share the redux store to components
 # # # 使用 connect-function 将 redux 存储共享给组件
 
-<!-- Muutetaan sovelluksen komponenttia <i>Notes</i>, siten että korvataan hook-apin eli funktioiden _useDispatch_ ja _useSelector_ käyttö funktioilla _connect_. Komponentin seuraavat osat tulee siis muuttaa: -->
+
 
 Let's modify the <i>Notes</i> component so that instead of using the hook-api (the _useDispatch_ and  _useSelector_ functions ) it uses the _connect_-function. 
 让我们修改<i>Notes</i> 组件，以便使用 connect-function 而不是 hook-api (useDispatch 和 useSelector 函数)。
@@ -673,7 +673,7 @@ High order components, or HOCs, are a way of defining generic functionality that
 HOCs are in fact a generalization of the [High Order Function](https://en.wikipedia.org/wiki/Higher-order_function) (HOF) concept. HOFs are functions that either accept functions as parameters or return functions. We have actually been using HOFs throughout the course, e.g. all of the methods used for dealing with arrays like _map, filter and find_ are HOFs. 
 Hoc 实际上是[高阶函数]( https://en.wikipedia.org/wiki/higher-order_function )(HOF)概念的推广。 Hofs 是接受函数作为参数或返回函数的函数。 实际上我们在整个课程中一直在使用 HOFs，例如，所有用于处理数组如 map、 filter 和 find 的方法都是 HOFs。
 
-<!-- Reactin hook-apin ilmestymisen jälkeen HOC:ien suosio on kääntynyt laskuun, ja melkein kaikki kirjastot, joiden käyttö on aiemmin perustunut HOC:eihin on saanut hook-perustaisen apin. Useimmiten , kuten myös reduxin kohdalla, hook-perustaiset apit ovat HOC-apeja huomattavasti yksinkertaisempia. -->
+
 
 After the React hook-api was published, HOCs have become less and less popular. Almost all libraries which used to be based on HOCs have now been modified to use hooks. Most of the time hook based apis are a lot simpler than HOC based ones, as is the case with redux as well. 
 React hook-api 发布之后，HOCs 变得越来越不受欢迎。 几乎所有过去基于 hoc 的库现在都被修改为使用钩子。 大多数基于钩子的 api 比基于 HOC 的 api 简单得多，redux 的情况也是如此。
@@ -687,14 +687,14 @@ We have come a long way in this course and, finally, we have come to the point a
 What about the _useState_-hook, which provides components with their own state? Does it have any role if an application is using Redux or some other external state management solution? If the application has more complicated forms, it may be beneficial to implement their local state using the state provided by the _useState_ function. One can, of course, have Redux manage the state of the forms, however, if the state of the form is only relevant when filling the form (e.g. for validation) it may be wise to leave the management of state to the component responsible for the form.
 那么 useState-hook 呢? 它为组件提供它们自己的状态？ 如果应用正在使用 Redux 或其他外部状态管理解决方案，它是否有任何作用？ 如果应用具有更复杂的形式，那么使用 useState 函数提供的状态实现它们的本地状态可能有益。 当然，可以让 Redux 管理表单的状态，但是，如果表单的状态只在填写表单时有关(例如用于验证) ，那么将状态的管理留给负责表单的组件可能是明智的。
 
-<!-- Kannattaako reduxia käyttää aina? Tuskinpa. Reduxin kehittäjä Dan Abramov pohdiskelee asiaa artikkelissaan [You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367) -->
+
 
 Should we always use redux? Propably not. Dan Abramov, the developer of redux, discusses this in his article [You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367).
 我们应该一直使用 redux 吗？ 可能不是。 Redux 的开发者 Dan Abramov 在他的文章[你可能不需要 Redux ]中讨论了这个 https://medium.com/@dan_abramov/You-Might-Not-Need-Redux-be46360cf367。
 
-<!-- Reduxin kaltainen tilankäsittely on mahdollista toteuttaa nykyään myös ilman reduxia, käyttämällä Reactin [context](https://reactjs.org/docs/context.html)-apia ja  [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer)-hookia, lisää asiasta esim -->
 
-<!-- [täällä](https://www.simplethread.com/cant-replace-redux-with-hooks/) ja [täällä](https://hswolff.com/blog/how-to-usecontext-with-usereducer/).  Tutustumme tähän tapaan myös kurssin [yhdeksännessä osassa](/en/part9). -->
+
+
 
 Nowadays it is possible to implement redux-like state management without redux by using the React [context](https://reactjs.org/docs/context.html)-api and the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer)-hook. 
 现在，通过使用 React [ context ]( https://reactjs.org/docs/context.html )-api 和[ useReducer ]( https://reactjs.org/docs/hooks-reference.html#useReducer )-hook，不需要 redux 就可以实现类似 redux 的状态管理。
@@ -747,14 +747,14 @@ Do the same for the <i>Filter</i> and <i>AnecdoteForm</i> components.
 #### 6.21 anecdotes, the grand finale
 6.21轶事，压轴大戏
 
-<!-- Sovellukseen on (todennäköisesti) jäänyt eräs hieman ikävä bugi. Jos vote-näppäintä painellaan useasti peräkkäin, notifikaatio näkyy ruudulla hieman miten sattuu. Esimerkiksi jos äänestetään kaksi kertaa kolmen sekunnin välein, näkyy jälkimmäinen notifikaatio ruudulla ainoastaan kahden sekunnin verran (olettaen että notifikaation näyttöaika on 5 sekuntia). Tämä johtuu siitä, että ensimmäisen äänestyksen notifikaation tyhjennys tyhjentääkin myöhemmän äänestyksen notifikaation. -->
+
 
 You (propably) have one nasty bug in your application. If the user clicks the vote button multiple times in a row, the notification is displayed funnily. For example if a user votes twice in three seconds, 
 您(可能)在应用中有一个讨厌的 bug。 如果用户连续多次单击投票按钮，通知就会显示得非常有趣。 例如，如果一个用户在三秒内投票两次,
 the last notification is only displayed for two seconds (assuming the notification is normally shown for 5 seconds). This happens because removing the first notification accidentally removes the second notification. 
 最后一个通知只显示两秒钟(假设通知通常显示5秒钟)。 这是因为删除第一个通知时意外地删除了第二个通知。
 
-<!-- Korjaa bugi, siten että usean peräkkäisen äänestyksen viimeistä notifikaatiota näytetään aina viiden sekunnin ajan. Korjaus tapahtuu siten, että uuden notifikaation tullessa edellisen notifikaation nollaus tarvittaessa perutaan, ks. funktion setTimeout [dokumentaatio](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout). -->
+
 
 Fix the bug so that after multiple votes in a row, the notification for the last vote is displayed for five seconds.
 修正此 bug，以便在一行中进行多次投票后，最后一次投票的通知会显示5秒钟。

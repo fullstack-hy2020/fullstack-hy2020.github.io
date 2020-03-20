@@ -780,11 +780,11 @@ Add to the view showing the data of a single country the weather report for the 
 ![](../../images/2/19ba.png)
 
 
-<!-- **Huom:** tarvitset melkein kaikkia säätietoja tarjoavia palveluja käyttääksesi api-avaimen. Älä talleta avainta versionhallintaan, eli älä kirjoita avainta suoraan koodiin.  Avaimen arvo kannattaa määritellä ns. [ympäristömuuttujana](https://create-react-app.dev/docs/adding-custom-environment-variables/). -->
+
 **NB:** You need an api-key to use almost every weather service. Do not save the api-key to source control! Nor hardcode the api-key to your source code. Instead use an [environment variable](https://create-react-app.dev/docs/adding-custom-environment-variables/) to save the key.
 注意: 使用几乎所有气象服务都需要 api-key。 不要将 api-key 保存到源代码管理中！ 也不能将 api-key 硬编码到源代码中。 取而代之的是使用[环境变量]( https://create-react-app.dev/docs/adding-custom-environment-variables/ )来保存密钥。
 
-<!-- Oletetaan että api-avaimen arvo on <i>t0p53cr3t4p1k3yv4lu3</i>. Kun ohjelma käynnistetään seuraavasti -->
+
 Assuming the api-key is <i>t0p53cr3t4p1k3yv4lu3</i>, when the application is started like so:
 假设 api-key 是<i>t0p53cr3t4p1k3yv4lu3</i>，当应用像下面这样启动时:
 
@@ -792,7 +792,7 @@ Assuming the api-key is <i>t0p53cr3t4p1k3yv4lu3</i>, when the application is sta
 REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start
 ```
 
-<!-- koodista päästään avaimen arvoon käsiksi olion _process.env_ kautta: -->
+
 you can access the value of the key from the _process.env_ object:
 您可以从 process.env 对象访问密钥的值:
 

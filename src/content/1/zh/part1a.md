@@ -6,12 +6,13 @@ lang: zh
 ---
 
 <div class="content">
+
 We will now start getting familiar with probably the most important topic of this course, namely the [React](https://reactjs.org/)-library. Let's start off with making a simple React application as well as getting to know the core concepts of React.
 我们即将开始学习本门课程中可能最重要的主题——[React](https://reactjs.org/)。 让我们从制作一个简单的 React 应用开始，同时了解一下 React 的核心概念。
 
 The easiest way to get started by far is using a tool called [create-react-app](https://github.com/facebookincubator/create-react-app). It is possible (but not necessary) to install <i>create-react-app</i> on your machine if the <i>npm</i> tool that was installed along with Node has a version number of at least <i>5.3</i>.
 
-目前来说，创建一个React应用最简单的方式是使用一个叫做[ create-react-app ]( https://github.com/facebookincubator/create-react-app) 的工具。 如果你随着node安装的npm工具版本号不小于5.3（也不是必须的），你就可以在机器上安装 <i>create-react-app</i> 了。
+目前来说，创建一个React应用最简单的方式是使用一个叫做[ create-react-app ]( https://github.com/facebookincubator/create-react-app) 的工具。 如果你随着node安装的npm工具版本号不小于5.3，你就可以在机器上安装 <i>create-react-app</i> 了（也不是必须的）。
 
 Let's create an application called <i>part1</i> and navigate to its directory.
 让我们创建一个名为 <i>part1</i> 的应用，并进入到它的目录。
@@ -501,7 +502,7 @@ Note that in this part, there are more exercises besides those found below. <i>D
 
 请注意，在这一部分，除了下面的练习，还有更多的练习。 直到完成了这章的所有练习，再提交你的 工作。
 
-  <h4>1.1: 步骤一，课程信息</h4>
+  <h4>1.1: 课程信息 步骤1</h4>
 
 <i>The application that we will start working on in this exercise will be further developed in a few of the following exercises. In this and other upcoming exercise sets in this course, it is enough to only submit the final state of the application. If desired, you may also create a commit for each exercise of the series, but this is entirely optional.</i>
 
@@ -571,7 +572,7 @@ const App = () => {
 
 **警告**： create-react-app 会自动使项目成为一个 git 仓库，除非应用是在已有仓库中创建的。 而您很可能不希望项目成为一个存储库，因此可以在项目的根目录中运行命令  _rm -rf .git_ 。 
 
-<h4>1.2: 步骤2，课程信息</h4>
+<h4>1.2: 课程信息 步骤2</h4>
 
 Refactor the <i>Content</i> component so that it does not render any names of parts or their number of exercises by itself. Instead it only renders three <i>Part</i> components of which each renders the name and number of exercises of one part.
 重构<i>Content</i> 组件，使它本身不渲染任何章节的名称或练习的数量。 而是让它只渲染三个<i>Part</i> 组件，每个组件渲染一个章节的名称和练习次数。

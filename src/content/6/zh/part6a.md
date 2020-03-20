@@ -1012,13 +1012,13 @@ Aside from the reducer, our application is in one file. This is of course not se
 Now the question is, how can the <i>App</i> access the store after the move? And more broadly, when a component is composed of many smaller components, there must be a way for all of the components to access the store. 
 现在的问题是，移动后<i>App</i> 如何访问商店？ 更广泛地说，当一个组件由许多较小的组件组成时，必须有一种方法让所有组件访问存储。
 
-<!-- Tapoja välittää redux-store sovelluksen komponenteille on useita, tutustutaan ensin ehä uusimpaan ja helpoimpaan tapaan [react-redux](https://react-redux.js.org/)-kirjaston tarjoamaan [hooks](https://react-redux.js.org/api/hooks)-rajapintaan. -->
+
 
 There are multiple ways to share the redux-store with components. First we will look into the newest, and possibly the easiest way using the [hooks](https://react-redux.js.org/api/hooks)-api of the [react-redux](https://react-redux.js.org/) library.
 有多种方法可以与组件共享 redux-store。 首先，我们将研究使用[ react-redux ](redux)库的[ hooks ]( https://react-redux.js.org/api/hooks )-api 的最新方法，也许是最简单的方法 https://react-redux.js.org/ 。
 
 
-<!-- Asennetaan react-redux -->
+
 
 First we install react-redux
 首先我们安装 react-redux
@@ -1027,12 +1027,12 @@ First we install react-redux
 npm install --save react-redux
 ```
 
-<!-- Eriytetään komponentti _App_ omaan tiedostoon _App.js_. Tarkastellaan ensin mitä sovelluksen muiden tiedostojen sisällöksi tulee. -->
+
 
 Next we move the _App_ component into its own file _App.js_. Let's see how this effects the rest of the application files.
 接下来，我们将 App 组件移动到它自己的文件 App.js 中。 让我们看看这将如何影响其余的应用文件。
 
-<!-- Tiedosto _index.js_ näyttää seuraavalta -->
+
 
 _Index.js_ becomes:
 变成:
@@ -1055,7 +1055,7 @@ ReactDOM.render(
 )
 ```
 
-<!-- Uutta tässä on se, että sovellus on määritelty react redux -kirjaston tarjoaman [Provider](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store)-komponentin lapsena ja että sovelluksen käyttämä store on annettu Provider-komponentin attribuutiksi <i>store</i>.  -->
+
 
 Note, that the application is now defined as a child of a [Provider](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store) -component provided by the react redux library.
 请注意，应用现在被定义为由 redux 库提供的[ Provider ]( https://github.com/reactjs/react-redux/blob/master/docs/api.md#Provider-store 组件)的子组件。
@@ -1130,7 +1130,7 @@ Normally (not as defaults) exported functions can be imported with the curly bra
 import { createNote } from './../reducers/noteReducer'
 ```
 
-<!-- Komponentin <i>App</i> koodi  -->
+
 
 Code for the <i>App</i> component
 I App / i 组件的代码
@@ -1181,7 +1181,7 @@ const App = () => {
 export default App
 ```
 
-<!-- Komponentin koodissa on muutama mielenkiintoinen seikka. Aiemmin koodi hoiti actioinen dispatchaamisen kutsumalla redux-storen metodia dispatch: -->
+
 
 There are a few things to note in the code. Previously the code dispatched actions by calling the dispatch method of the redux-store:
 在代码中有一些事情需要注意。 在此之前，代码通过调用 redux-store 的 dispatch 方法来分派操作:
@@ -1193,7 +1193,7 @@ store.dispatch({
 })
 ```
 
-<!-- Nyt sama tapahtuu [useDispatch](https://react-redux.js.org/api/hooks#usedispatch)-hookin avulla saatavan <i>dispatch</i>-funktion avulla: -->
+
 
 Now it does it with the <i>dispatch</i>-function from the [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) -hook.
 现在它使用[ useDispatch ]( https://react-redux.js.org/api/hooks#useDispatch )-hook 中的<i>dispatch</i>-函数来完成。
@@ -1213,7 +1213,7 @@ const App = () => {
 }
 ```
 
-<!-- React-redux-kirjaston tarjoama <i>useDispatch</i>-hook siis tarjoaa mille tahansa React-komponentille pääsyn tiedostossa <i>index.js</i> määritellyn redux-storen dispatch-funktioon, jonka avulla komponentti pääsee tekemään muutoksia redux-storen tilaan. -->
+
 -- redux-kirjaston tarjoama<i>usdispatch</i>-hook siis tarjoaa mille tahansa react-komponentile p syn tiedostossa<i>index.js</i> m ritellyn redux-storen dispatch-funktioon，jonka avulla komponentti p see tekem n muutoksia redux. -->
 The <i>useDispatch</i>-hook provides any React component access to the dispatch-function of the redux-store defined in <i>index.js</i>.
 I useDispatch / i-hook 提供了对<i>index.js</i> 中定义的 redux-store 的 dispatch-function 的所有 React 组件访问。
@@ -1221,7 +1221,7 @@ This allows all components to make changes to the state of the redux-store.
 这允许所有组件对 redux-store 的状态进行更改。
 
 
-<!-- Storeen talletettuihin muistiinpanoihin komponentti pääsee käsiksi react-redux-kirjaston [useSelector](https://react-redux.js.org/api/hooks#useselector)-hookin kautta: -->
+
 
 The component can access the notes stored in the store with the [useSelector](https://react-redux.js.org/api/hooks#useselector)-hook of the react-redux library.
 该组件可以通过 react-redux 库的[ useSelector ]( https://react-redux.js.org/api/hooks#useSelector )挂钩访问存储在商店中的笔记。
@@ -1237,7 +1237,7 @@ const App = () => {
 }
 ```
 
-<!-- <i>useSelector</i> saa parametrikseen funktion, joka hakee tai valitsee (engl. select) tarvittavan datan redux-storesta. Tarvitsemme nyt kaikki muistiinpanot, eli selektorifunktiomme palauttaa koko staten, eli on muotoa  -->
+
 
 <i>useSelector</i> receives a function as a paramter. The function either either searches for or selectes data from the redux-store. 
 I 使用 elector / i 接收一个函数作为参数，该函数可以搜索或选择来自 redux-store 的数据。
@@ -1249,7 +1249,7 @@ Here we need all of the notes, so our selector function returns the whole state:
 state => state
 ```
 
-<!-- joka siis tarkoittaa samaa kuin -->
+
 
 which is a shorthand for
 也就是
@@ -1260,7 +1260,7 @@ which is a shorthand for
 }
 ```
 
-<!-- Yleensä selektorifunktiot ovat mielenkiinoisempia, ja valitsevat vain osan redux-storen sisällöstä. Voisimme esimerkiksi hakea storesta ainoastaan tärkeät muistiinpanot seuraavasti -->
+
 
 Usually selector functions are a bit more interesting, and return only selected parts of the contents of the redux-store. 
 通常选择器函数比较有趣，只返回 redux-store 内容的选定部分。
@@ -1274,7 +1274,7 @@ const importantNotes = useSelector(state => state.filter(note => note.important)
 ### More components
 更多的组件
 
-<!-- Eriytetään uuden muistiinpanon luominen omaksi komponentiksi.  -->
+
 
 Let's separate creating a new note into its own component.
 让我们将创建新笔记分离到它自己的组件中。
@@ -1308,7 +1308,7 @@ export default NewNote
 Unlike in the React code we did without Redux, the event handler for changing the state of the app (which now lives in Redux) has been moved away from the <i>App</i> to a child component. The logic for changing the state in Redux is still neatly separated from the whole React part of the application. 
 与我们在没有 Redux 的情况下所做的 React 代码不同，用于更改应用状态(现在位于 Redux 中)的事件处理程序已经从<i>App</i> 移动到子组件。 在 Redux 中更改状态的逻辑仍然与应用的整个 React 部分完全分离。
 
-<!-- Eriytetään vielä muistiinpanojen lista ja yksittäisen muistiinpanon esittäminen omiksi komponenteikseen (jotka molemmat sijoitetaan tiedostoon <i>Notes.js</i>): -->
+
 
 We'll also separate the list of notes and displaying a single note into their own components (which will both be placed in the <i>Notes.js</i> file ):
 我们还将分离注释列表，并将一个注释显示到它们自己的组件中(这两个组件都将放在<i>Notes.js</i> 文件中) :

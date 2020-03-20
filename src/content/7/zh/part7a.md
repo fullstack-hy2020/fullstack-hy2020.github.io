@@ -113,7 +113,7 @@ Each view is implemented as its own component. We store the view component infor
 However, the method is not very optimal. As we can see from the pictures, the address stays the same even though at times we are in different views. Each view should preferably have its own address, e.g. to make bookmarking possible. The <i>back</i>-button doesn't work as expected for our application either, meaning that <i>back</i> doesn't move you to the previously displayed view of the application, but somewhere completely different. If the application were to grow even bigger and we wanted to, for example, add separate views for each user and note, then this self made <i>routing</i>, which means the navigation management of the application, would get overly complicated.
 然而，这种方法并不十分理想。 正如我们从图片中看到的，即使有时我们处于不同的视角，地址仍然保持不变。 每个视图最好都有自己的地址，例如使书签成为可能。<i>back</i>-button 对于我们的应用也不能正常工作，这意味着<i>back</i> 不会将您移动到以前显示的应用视图，而是移动到完全不同的位置。 如果应用变得更大，例如，我们希望为每个用户添加单独的视图和注释，那么这个自制的<i>routing</i> (这意味着应用的导航管理)将变得过于复杂。
 
-<!-- Reactissa on onneksi olemassa kirjasto [React router](https://github.com/ReactTraining/react-router) joka tarjoaa erinomaisen ratkaisun React-sovelluksen navigaation hallintaan. -->
+
 
 Luckily React has the [React router](https://github.com/ReactTraining/react-router)-library, which provides an excellent solution for managing navigation in a React-application.
 幸运的是 React 有[ React router ]( https://github.com/reacttraining/React-router )-library，它为管理 React-application 中的导航提供了一个很好的解决方案。
@@ -209,12 +209,12 @@ Components rendered based on the URL of the browser are defined with the help of
 </Route>
 ```
 
-<!-- määrittelee, että jos selaimen osoiteena on <i>/notes</i>, renderöidään komponentti <i>Notes</i>. -->
+
 
 defines, that if the browser address is <i>/notes</i>, we render the <i>Notes</i> component.
 定义，如果浏览器地址是<i>/ Notes</i>，则渲染<i>Notes</i> 组件。
 
-<!-- Urliin perustuen renderöitävät komponentit on sijoitettu [Swithch](https://reacttraining.com/react-router/web/api/Switch)-komponentin lapsiksi -->
+
 
 We wrap the components to be rendered based on the url with a [Swithch](https://reacttraining.com/react-router/web/api/Switch)-component
 我们用一个[ Swithch ]( https://reacttraining.com/react-router/web/api/switch )-组件包装要基于 url 渲染的组件
@@ -233,12 +233,12 @@ We wrap the components to be rendered based on the url with a [Swithch](https://
 </Switch>
 ```
 
-<!-- Switch saa aikaan sen, että renderöitävä komponentti on ensimmäinen, jonka <i>path</i> vastaa osoiterivin polkua. -->
+
 ——把 aikan sen 调换一下，让它在 ensimm inen，jonka<i>path</i> vastaa osoiterivin polkua 上显示出来
 The switch works so, that we render the first component which's <i>path</i> matches the url in the browser's address bar.
 这个开关的工作原理是，我们渲染第一个组件，它的<i>path</i> 匹配浏览器地址栏中的 url。
 
-<!-- Huomaa, että komponenttien järjestys on tärkeä. Jos laittaisimme ensimmäiseksi komponentin <i>Home</i>, jonka polku on <i> path="/"</i>, ei mitää muuta komponenttia koskaan renderöitäisi, sillä "olematon" polku on minkä tahansa polun alkuosa: -->
+
 
 Note, that the order of the components is important. If we would put the <i>Home</i>-component, which's path is <i> path="/"</i>, first, nothing else would ever get rendered because the "non existing" path "/" is the start of every path:
 注意，组件的顺序很重要。 如果我们使用<i>Home</i>-component，它的路径是<i>path” / ”</i>，首先，没有其他东西会被渲染，因为“ non existing” path” / ”是每个路径的开始:
@@ -289,7 +289,7 @@ const Notes = ({notes}) => (
 )
 ```
 
-<!-- Parametrisoitu url määritellään komponentissa <i>App</i> olevaan reititykseen seuraavasti: -->
+
 
 We define parametrized urls in the routing in <i>App</i>-component as follows:
 我们在<i>App</i>-component 的路由中定义参数化 url 如下:
@@ -320,7 +320,7 @@ We define parametrized urls in the routing in <i>App</i>-component as follows:
 </Router>
 ```
 
-<!-- Yksittäisen muistiinpanon näkymän renderöivä route siis määritellään "expressin tyyliin" merkkaamalla reitin parametrina oleva osa merkinnällä <i>:id</i> -->
+
 
 We define the route rendering a specific note "express style" by marking the parameter with a colon <i>:id</i>
 我们通过用冒号 i: id / i 标记参数来定义渲染特定注释的路由“ express style”
@@ -329,7 +329,7 @@ We define the route rendering a specific note "express style" by marking the par
 <Route path="/notes/:id">
 ```
 
-<!-- Kun selain siirtyy muistiinpanon yksilöivään osoitteeseen, esim. <i>/notes/3</i>, renderöidään komponentti <i>Note</i>: -->
+
 -- kun selain siirtyy muistiinpanon yksil iv n osoitteeseen，esim.<i>/ notes / 3</i>，render id n komponentti<i>Note</i>: --
 When a browser navigates to the url for a specific note, for example <i>/notes/3</i>, we render the <i>Note</i> component:
 当浏览器导航到特定笔记的 url 时，例如<i>/ notes / 3</i>，我们渲染<i>Note</i> 组件:
@@ -353,7 +353,7 @@ const Note = ({ notes }) => {
 }
 ```
 
-<!-- Komponentti _Note_ saa parametrikseen kaikki muistiinpanot propsina <i>notes</i> ja se pääsee urlin yksilöivään osaan, eli näytettävän muistiinpanon id:hen käsiksi  react-routerin funktion [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) avulla.  -->
+
 
 The _Note_ component receives all of the notes as props <i>notes</i>, and it can access the url parameter (the id of the note to be displayed) with the [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) function of the react-router.
 Note 组件接收所有的笔记作为 props<i>notes</i>，它可以通过 react-router 的[ useParams ]( https://reacttraining.com/react-router/web/api/hooks/useParams )函数访问 url 参数(要显示的笔记的 id)。
@@ -361,7 +361,7 @@ Note 组件接收所有的笔记作为 props<i>notes</i>，它可以通过 react
 ### useHistory
 使用历史
 
-<!-- Sovellukseen on myös toteutettu erittäin yksinkertainen kirjautumistoiminto. Jos sovellukseen ollaan kirjautuneena, talletetaan tieto kirjautuneesta käyttäjästä komponentin <i>App</i> tilaan <i>user</i>. -->
+
 
 We have also implemented a simple log in function in our application. If a user is logged in, information about a logged in user is saved to the <i>user</i> field of the state of the <i>App</i> component.
 我们还在应用中实现了一个简单的登录函数。 如果用户登录，则关于登录用户的信息将保存到<i>App</i> 组件状态的<i>user</i> 字段中。
@@ -428,19 +428,19 @@ const Login = (props) => {
 }
 ```
 
-<!-- Mielenkiinoista komponentissa on react-routerin funktion [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) käyttö. Funktion avulla komponentti pääsee käsiksi [history](https://reacttraining.com/react-router/web/api/history)-olioon, joka taas mahdollistaa mm. selaimen osoiterivin muokkaamisen ohjelmallisesti. -->
+
 
 What is interesting about this component is the use of the [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) function of the react-router.
 这个组件的有趣之处在于它使用了React路由器的[ useHistory ]( https://reacttraining.com/react-router/web/api/hooks/useHistory 路由器)功能。
 With this function the component can access a [history](https://reacttraining.com/react-router/web/api/history) object. The history object can be used to i.a modify the browser url programmatically.
 有了这个函数，组件就可以访问一个[ https://reacttraining.com/react-router/web/api/history ]对象。 历史记录对象可以用于 i.a 编程修改浏览器的 url。
 
-<!-- Kirjautumisen yhteydessä kutsutaan history-olion metodia push. Komento _history.push('/')_ saa aikaan sen, että selaimen osoiteriville tulee osoitteeksi _/_ ja sovellus renderöi osoitetta vastaavan komponentin <i>Home</i>. -->
+
 
 With user log in we call the push method of the history object. The  _history.push('/')_ call causes the browser url to change to _/_ and the application renders the corresponding component <i>Home</i>.
 对于用户登录，我们调用历史对象的 push 方法。 History.push (’ / ’)调用导致浏览器的 url 更改为 / ，应用渲染相应的组件<i>Home</i>。
 
-<!-- Käyttämämme react-router-kirjaston funktiot [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) ja [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) ovat molemmat hook-funktiota, samaan tapaan kuin esim. moneen kertaan käyttämämme useState ja useEffect. Kuten muistamme osasta 1, hook-funktioiden käyttöön liittyy tiettyjä [sääntöjä](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot). Create-react-app on konfiguroitu varoittamaan, jos hookien säännöt rikkoutuvat, esim. jos hook-funktiota yritetään kutsua ehtolauseen sisältä.  -->
+
 
 Both [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) and [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) are hook-functions, just like useState and useEffect we have used many times now.  As you remember from part 1, there are some [rules](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot) to using hook-functions. Create-react-app has been configured to warn you, if you break these rules e.g by calling a hook-function from a conditional statement.
 Https://reacttraining.com/react-router/web/api/hooks/useParams 和 https://reacttraining.com/react-router/web/api/hooks/useHistory 都是钩子函数，就像我们已经多次使用的 useState 和 useEffect 一样。 正如您在第1章节中记得的，使用钩函数有一些[规则](/ osa1 / monimutkaisempi tila reactin debuggaus # hookenen-saannot)。 创建-React-应用已经配置为警告你，如果你打破这些规则，例如通过调用一个钩子函数从一个 If判断语句。
@@ -530,7 +530,7 @@ We define an element common for modern web apps called <i>footer</i>, which defi
 ### Parameterized route revisited
 # # # 重新访问参数化路线
 
-<!-- Sovelluksessa on eräs hieman ikävä seikka. Komponentti _Note_ saa propseina kaikki muistiinpanot, vaikka se näyttää niistä ainoastaan sen, jonka id vastaa urlin parametroitua osaa: -->
+
 
 Our application has a flaw. The _Note_ component receives all of the notes, even though it only displays the one which's id matches the url parameter:
 我们的申请有一个缺陷。 组件接收所有的笔记，即使它只显示与 url 参数匹配的 id:
@@ -544,7 +544,7 @@ const Note = ({ notes }) => {
 }
 ```
 
-<!-- Olisiko mahdollista muuttaa sovellusta siten, että _Note_ saisi propsina ainoastaan näytettävän komponentin: -->
+
 
 Would it be possible to modify the application so, that _Note_ receives only the component it should display?
 是否有可能修改应用，使 Note 只接收它应该显示的组件？
@@ -561,12 +561,12 @@ const Note = ({ note }) => {
 }
 ```
 
-<!-- Eräs tapa muuttaa sovellusta olisi selvittää näytettävän muistiinpanon _id_ komponentissa _App_ react-routerin hook-funktion [useRouteMatch](https://reacttraining.com/react-router/web/api/Hooks/useroutematch) avulla. -->
+
 
 One way to do this would be to use react-router's [useRouteMatch](https://reacttraining.com/react-router/web/api/Hooks/useroutematch) hook to figure out the id of the note to be displayed in the _App_ component.
 一种方法是使用 react-router 的[ useRouteMatch ]( https://reacttraining.com/react-router/web/api/hooks/useRouteMatch )钩子来计算出应用组件中显示的注释的 id。
 
-<!-- <i>useRouteMatch</i>-hookin käyttö [ei ole](https://github.com/ReactTraining/react-router/issues/7015)  mahdollista samassa komponentissa, joka määrittelee sovelluksen reititettävän osan. Siirretäänkin _Router_-komponenttien käyttö komponentin _App_ ulkopuolelle: -->
+
 
 It is not possible to use <i>useRouteMatch</i>-hook in the component which defines the routed part of the application. Let's move the use of the _Router_ components from _App_:
 在定义应用路由部分的组件中不可能使用<i>useRouteMatch</i>-hook。 让我们把路由器组件的使用从 App 中移除:
@@ -580,7 +580,7 @@ ReactDOM.render(
 )
 ```
 
-<!-- Komponentti _App_ muuttuu seuraavasti: -->
+
 
 The _App_component becomes:
 应用组件变成:
@@ -626,7 +626,7 @@ const App = () => {
 }    
 ```
 
-<!-- Joka kerta kun komponentti renderöidään, eli käytännössä myös aina kun sovelluksen osoiterivillä oleva url, vaihtuu suoritetaan komento -->
+
 
 Every time the component is rendered, so practically every time the browser url changes, the following command is executed
 每次渲染组件时，实际上每次浏览器 url 发生更改时，都会执行如下命令
@@ -635,7 +635,7 @@ Every time the component is rendered, so practically every time the browser url 
 const match = useRouteMatch('/notes/:id')
 ```
 
-<!-- Jos url on muotoa _/notes/:id_ eli vastaa yksittäisen muistiinpanon urlia, saa muuttuja _match_ arvokseen olion, jonka polun parametroitu osa, eli muistiinpanon id voidaan selvittää, ja näin saadaan haettua renderöitävä muistiinpano -->
+
 
 If the url matches _/notes/:id_, the match variable will contain an object from which we can access the parametrized part of the path, the id of the note to be displayed, and we can then fetch the correct note to display
 如果 url 匹配 / notes / : id，match 变量将包含一个对象，我们可以从该对象访问路径的参数化部分，即要显示的注释的 id，然后我们可以获取要显示的正确注释
@@ -646,7 +646,7 @@ const note = match
   : null
 ```
 
-<!-- Lopullinen koodi on kokonaisuudessaan [täällä](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v2.js). -->
+
 
 The completed code can be found from [here](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v2.js).
 完成的代码可以在这里找到( https://github.com/fullstack-hy2020/misc/blob/master/router-app-v2.js )。

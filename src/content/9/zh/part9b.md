@@ -8,7 +8,7 @@ lang: zh
 <div class="content">
 
 
-<!-- After the brief introduction on the main principles of TypeScript we are ready to start our journey towards a Fullstack TypeScript developer. This part will not give you a thorough introduction to all aspects of TypeScript, the goal is rather to have focus in most common issues that arise when developing express backends and React fronends with TypeScript. In addition to language features we will also have a strong emphasis in tooling. -->
+
 在简要介绍了打字脚本的主要原理之后，我们准备开始我们的全堆栈打字脚本的开发之旅
 After the brief introduction to the main princibles of TypeScript, we are now ready to start our journey towards becoming FullStack TypeScript developers. 
 在简单介绍了打字稿的主要原理之后，我们现在准备开始我们的旅程，成为 FullStack 打字稿的开发者。
@@ -23,31 +23,31 @@ In addition to language features we will also have a strong emphasis in tooling.
 Install TypeScript support to your editor of choice. For [Visual Studio Code](https://code.visualstudio.com/) you need the [typescript hero](https://marketplace.visualstudio.com/items?itemName=rbbit.typescript-hero) extension. 
 在你选择的编辑器中安装 TypeScript 支持，对于[ Visual Studio Code ]( https://Code.visualstudio.com/ )你需要[ TypeScript hero ]( https://marketplace.visualstudio.com/items?itemname=rbbit.TypeScript-hero )扩展。
 
-<!-- As mentioned before, TypeScript code is not runnable by itself, but it first needs to be compiled into runnable JavaScript code. When TypeScript is compiled into JavaScript, the code becomes subject for type erasure. This means that type annotations, interfaces, type aliases, and other type system constructs are removed from the code and the result is pure ready-to-run JavaScript. -->
+
 
 As mentioned earlier, TypeScript code is not executable by itself but it has to be first compiled into executable JavaScript. 
 如前所述，TypeScript 代码本身不是可执行的，但必须首先编译成可执行的 JavaScript。
 When TypeScript is compiled into JavaScript, the code becomes subject for type erasure. This means that type annotations, interfaces, type aliases, and other type system constructs are removed from the code and the result is pure ready-to-run JavaScript. 
 当 TypeScript 被编译成 JavaScript 时，代码成为类型擦除的主题。 这意味着类型注释、接口、类型别名和其他类型系统构造从代码中删除，结果是纯准备运行的 JavaScript。
 
-<!-- In a production environment this need for compilation often means that you have to setup a "build step", where all TypeScript code is compiled into JavaScript in a separate folder, and the production enviroment then runs the code from that folder. In a development environment it is often more handy to take use of real-time compilation and auto-reloading, in order to be able to see the resulting changes faster. -->
+
 
 In a production environment the need for compilation often means that you have to setup a "build step". During the build step all TypeScript code is compiled into JavaScript in a separate folder, and the production enviroment then runs the code from that folder. In a development environment it is often more handy to make use of real-time compilation and auto-reloading in order to be able to see the resulting changes faster.
 在生产环境中，编译的需要通常意味着您必须设置一个“构建步骤”。 在构建过程中，所有的 TypeScript 代码都被编译到一个独立的文件夹中的 JavaScript 中，然后生产环境从该文件夹中运行代码。 在开发环境中，使用实时编译和自动重载通常更为方便，以便能够更快地查看所产生的更改。
 
-<!-- Let's start writing our first TypeScript-app. To keep things simple, let's start by using the npm package [ts-node](https://github.com/TypeStrong/ts-node), that compiles and executes the desired TypeScript file immediately, so that there is no need for the separate compilation step. -->
+
 
 Let's start writing our first TypeScript-app. To keep things simple, let's start by using the npm package [ts-node](https://github.com/TypeStrong/ts-node).
 让我们开始编写我们的第一个打字稿应用，为了保持简单，让我们从使用 npm 包[ ts-node ]( https://github.com/typestrong/ts-node )开始。
 It compiles and executes the specified TypeScript file immediately, so that there is no need for a separate compilation step.
 它立即编译并执行指定的 TypeScript 文件，因此不需要单独的编译步骤。
 
-<!-- To use <i>ts-node</i> you could install it globally with the official <i>typescript</i> package by running <i>npm install -g ts-node typescript</i>.  -->
+
 
 You can install both <i>ts-node</i> and the official <i>typescript</i> package globally by running <i>npm install -g ts-node typescript</i>.
 您可以通过运行<i>npm install-g ts-node 打字稿</i> 在全球范围内同时安装<i>ts-node</i> 和官方<i>打字稿</i> 包。
 
-<!-- If you can't or don't want to install global packages you can create an npm project that has the required dependencies and run your scripts in it. We shall also go with this approach. -->
+
 
 If you can't or don't want to install global packages, you can create an npm project which has the required dependencies and run your scripts in it. 
 如果您不能或不想安装全局包，您可以创建一个具有所需依赖项的 npm 项目，并在其中运行您的脚本。
@@ -74,7 +74,7 @@ and set up <i>scripts</i> within the package.json:
 }
 ```
 
-<!-- Now within this directory you can use <i>ts-node</i>by running <i>npm run ts-node</i>. Notice that if you are using ts-node through package.json, all possible command line arguments for the script need to be prefixed with <i>--</i>. So if you want to run file.ts with <i>ts-node</i>, the whole command is: -->
+
 
 Now within this directory you can use <i>ts-node</i>by running <i>npm run ts-node</i>. Note that if you are using ts-node through package.json, all  command line arguments for the script need to be prefixed with <i>--</i>. So if you want to run file.ts with <i>ts-node</i>, the whole command is: -->
 现在，在这个目录中，可以通过运行<i>npm run ts-node</i> 来使用<i>ts-node</i>。 注意，如果通过 package.json 使用 ts-node，脚本的所有命令行参数都需要以<i>--</i> 作为前缀。 因此，如果希望用<i>ts-node</i> 运行 file.ts，整个命令是: -- 
@@ -83,7 +83,7 @@ Now within this directory you can use <i>ts-node</i>by running <i>npm run ts-nod
 npm run ts-node -- file.ts
 ```
 
-<!-- It is worth mentioning, that TypeScript also provides an online playground, where you can quickly try out TypeScript code and also instantly see the resulting JavaScript code next to the TypeScript code, and also possible compilation errors. You can access TypeScript's official playground [here](https://www.typescriptlang.org/play/index.html). -->
+
 
 It is worth mentioning that TypeScript also provides an online playground, where you can quickly try out TypeScript code and instantly see the resulting JavaScript and possible compilation errors. You can access TypeScript's official playground [here](https://www.typescriptlang.org/play/index.html).
 值得一提的是，TypeScript 还提供了一个在线操场，在这里你可以快速尝试 TypeScript 代码，并立即看到结果的 JavaScript 和可能的编译错误。 你可以访问打字稿的官方 https://www.typescriptlang.org/play/index.html。
@@ -94,12 +94,12 @@ It is worth mentioning that TypeScript also provides an online playground, where
 #### A note about the coding style
 关于编码风格的注释
 
-<!-- JavaScript in itself is a fairly loose language and things often can be done in multiple different ways, for example named vs anonymous functions, using const and let or var and the use of <i>semicolons</i>. This part of the course differs from the rest by using semicolons. It is not a TypeScript specific pattern but a general coding style decision when creating any kind of JavaScript. Whether to use them or not is usually in the hands of the programmer but since it is expected to adapt ones coding habits to the existing codebase, in the exercises of this part it is expected to use semicolons and to adjust to the coding style of the part. This part contains also some other coding style differences e.g. in the directory naming compared to the rest od the course. -->
+
 
 JavaScript on itself is quite relaxed language, and things can often be done in multiple different ways. For example we have named vs anonymous functions, using const and let or var and the use of <i>semicolons</i>. This part of the course differs from the rest by using semicolons. It is not a TypeScript specific pattern but a general coding style decision when creating any kind of JavaScript. Whether to use them or not is usually in the hands of the programmer, but since it is expected to adapt ones coding habits to the existing codebase, in the exercises of this part it is expected to use semicolons and to adjust to the coding style of the part. This part has some other coding style differences compared to the rest of the course as well, e.g. in the directory naming.
 Javascript 本身是一种相当轻松的语言，事情通常可以用多种不同的方式来完成。 例如，我们使用 const 和 let 或 var 以及<i>分号</i> 命名了 vs 匿名函数。 本课程的这一部分与其他部分不同，使用了分号。 它不是一个特定于打字脚本的模式，而是创建任何类型的 JavaScript 时一个通用的编码风格决策。 是否使用它们通常掌握在程序员的手中，但是由于它被期望调整编码习惯以适应现有的代码库，在这一部分的练习中它被期望使用分号并调整以适应部分的编码风格。 与课程的其他部分相比，这一部分还有一些其他编码风格的差异，例如在目录命名方面。
 
-<!-- Let us start now by creating a simple Multiplier, exactly as you would in JavaScript. -->
+
 
 Let's start by creating a simple Multiplier. It looks exactly as it would in JavaScript.
 让我们从创建一个简单的 Multiplier 开始，它看起来和 JavaScript 一模一样。
@@ -112,7 +112,7 @@ const multiplicator = (a, b, printText) => {
 multiplicator(2, 4, 'Multiplied numbers 2 and 4, the result is:');
 ```
 
-<!-- As we can see, this is still ordinary basic JavaScript with no additional TS features and it compiles and runs nicely with <i>npm run ts-node -- multiplier.ts</i>, as it would with Node. But what happens if we end up passing wrong <i>types</i> of arguments to the multiplicator function? -->
+
 
 As you can see, this is still ordinary basic JavaScript with no additional TS features. It compiles and runs nicely with  <i>npm run ts-node -- multiplier.ts</i>, as it would with Node.
 如您所见，这仍然是普通的基本 JavaScript，没有任何附加的 TS 特性。 它可以很好地编译和运行<i>npm 运行 ts-Node -- multiplier.ts</i>，就像对 Node 一样。
@@ -131,14 +131,14 @@ multiplicator('how about a string?', 4, 'Multiplied a string and 4, the result i
 
 ```
 
-<!-- Now when running the code, the example still produce an output, which is now: -->
 
-<!-- <i>Multiplied a string and 4, the result is: NaN</i>.  -->
+
+
 
 Now when we run the code, the output is: <i>Multiplied a string and 4, the result is: NaN</i>.
 现在，当我们运行代码时，输出是:<i>乘以一个字符串和4，结果是: NaN</i>。
 
-<!-- Wouldn't it be nice if there was a way that the language itself could prevent us from ending up in situations like this? This is where we get the first benefits of TypeScript into use. Let's add types to the parameters and see where it takes us. -->
+
 
 Wouldn't it be nice it the language itself could prevent us from ending up in situations like this? 
 如果语言本身能够防止我们陷入这样的境地，那不是很好吗？
@@ -166,7 +166,7 @@ Now the code is no longer valid JavaScript, but in fact TypeScript. When we try 
 
 
 
-<!-- One of the best things in TypeScript's editor support is that you don't necessarily need to even run the code to see the issues recognized by TypeScript. The VSCode plugin is so efficient, that it informs you immediately when you are trying to use an incorrect type, where another type is expected: -->
+
 
 One of the best things in TypeScript's editor support is that you don't necessarily need to even run the code to see the issues. 
 的编辑器支持中最好的一点就是你甚至不需要运行代码来查看问题。
@@ -179,17 +179,17 @@ The VSCode plugin is so efficient, that it informs you immediately when you are 
 ### Creating your first own types
 创建你自己的第一个类型
 
-<!-- Let's expand our multiplicator and create a little bit more versatile calculator, that also supports addition and division. The calculator should accept three arguments: two numbers and then the operation, which tells the calculator what to do with those numbers; either <i>multiply</i>, <i>add</i> or <i>divide</i>. -->
+
 -- 让我们扩展乘法器，创建一个多用途的计算器，它也支持加法和除法。计算器应该接受三个参数: 两个数，然后是告诉计算器如何处理这些数的运算; 要么<i>multiply</i>，要么<i>add</i> 或<i>divide</i>。 -->
 Let's expand our multiplicator into a bit more versatile calculator that also supports addition and division. The calculator should accept three arguments: two numbers and the operation, either <i>multiply</i>, <i>add</i> or <i>divide</i>, which tells it what to do with the numbers 
 让我们扩展我们的乘数到一个更多用途的计算器，也支持加法和除法。 计算器应该接受三个参数: 两个数字和<i>/ i、 i</i> 或<i>/ 除</i>，它告诉计算器如何处理这些数字
 
-<!-- With basic JavaScript, this type of code, where trusting a string to be of specific form, would require additional validation, but TypeScript offers us a way to define specific types for the inputs, which describes exactly what type of inputs are acceptable. On top of that, TypeScript can also show the info of the accepted values already on editor level. -->
+
 对于基本的 javascript，这种类型的代码，将字符串信任为特定的形式，需要额外的验证，但是 typescript 提供了一种为输入定义特定类型的方法，它准确描述了什么类型的输入是可接受的
 In JavaScript the code would require additional validation to make sure the last argument is indeed a string. TypeScript offers a way to define specific types for inputs, which describe exactly what type of input is acceptable. On top of that, TypeScript can also show the info of the accepted values already on editor level. 
 在 JavaScript 中，代码需要额外的验证，以确保最后一个参数确实是一个字符串。 提供了一种为输入定义特定类型的方法，这种方法准确地描述了哪种类型的输入是可以接受的。 除此之外，打字稿还可以显示编辑器级别上已经接受的值的信息。
 
-<!-- To create our <i>type</i> we use the TypeScript native keyword  <i>type</i> to describe what we want to accept. Let's describe our type <i>Operation</i>: -->
+
 
 We can create a <i>type</i> using the TypeScript native keyword <i>type</i>. Let's describe our type <i>Operation</i>:
 我们可以使用 TypeScript native 关键字<i>type</i> 来创建<i>type</i>:
@@ -198,7 +198,7 @@ We can create a <i>type</i> using the TypeScript native keyword <i>type</i>. Let
 type Operation = 'multiply' | 'add' | 'divide';
 ```
 
-<!-- Now the <i>Operation</i> type accepts only three kinds of input; exactly the three wanted strings. With the OR operator _|_ we can define a variable to accept multiple values by creating a [union type](https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types). In this case we used exact strings (that in technical terms are called [string literal types](http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types)) but with unions you could also inform the compiler to accept for example both string and number: _string | number_. -->
+
 
 Now the <i>Operation</i> type accepts only three kinds of input; exactly the three strings we wanted. 
 现在<i>Operation</i> 类型只接受三种类型的输入; 正好是我们想要的三个字符串。
@@ -207,7 +207,7 @@ Using the OR operator _|_ we can define a variable to accept multiple values by 
 In this case we used exact strings (that in technical terms are called [string literal types](http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types)) but with unions you could also make the compiler to accept for example both string and number: _string | number_.
 在这种情况下，我们使用了精确的字符串(在技术术语中称为[ string literal types ]( http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types )) ，但是对于联合，你也可以让编译器同时接受字符串和 number: string | number。
 
-<!-- In techincal terms the keyword <i>type</i> creates [a type alias](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases), that is a new name for a type. Since the defined type is a union of three possible values, it is handy to give it an alias that has a representative name. -->
+
 !-在技术术语中，关键字<i>type</i> generates [ a type alias ]( https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases ) ，这是一个类型的新名称。 由于定义的类型是由三个可能的值组成的联合，因此给它一个具有代表性名称的别名非常方便。 -->
 The <i>type</i> keyword defines a new name for a type, [a type alias](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases). Since the defined type is a union of three possible values, it is handy to give it an alias that has a representative name.
 I type / i 关键字为类型定义了一个新名称，[ a type alias ]( https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases )。 由于定义的类型是由三个可能的值组成的联合，因此给它一个具有代表性名称的别名非常方便。
@@ -242,7 +242,7 @@ And if we try to use a value that is not within the <i>Operation</i> type, we ge
 ![](../../images/9/4.png)
 
 
-<!-- This is already pretty nice, but one thing we haven't touched yet is typing the return value of a function. Usually you want to know what a function returns and it would be nice to have some guarantee on it. Let's add a return value <i>number</i> for the calculator function: -->
+
 
 This is already pretty nice, but one thing we haven't touched yet is typing the return value of a function. Usually you want to know what a function returns, and it would be nice to have a guarantee that it actually returns what it says it does. Let's add a return value <i>number</i> to the calculator function:
 这已经很不错了，但是有一件事我们还没有涉及到，那就是输入函数的返回值。 通常你想知道一个函数返回什么，如果能保证它真的返回它所说的返回值，那就更好了。 让我们给计算器函数添加一个返回值<i>number</i>:
@@ -263,7 +263,7 @@ const calculator = (a: number, b: number, op: Operation): number => {
 }
 ```
 
-<!-- Compiler complains straight away abaout this since the function is not returning a number, but in some cases it returns a string. We can fix it in a couple of ways. We could extend the return type to allow also string values, like this: -->
+
 
 The compiler complains straight away, because in one case the function returns a string. There are couple of ways to fix this: 
 编译器直接报错，因为在某种情况下，函数返回一个字符串。 有几种方法可以解决这个问题:
@@ -276,7 +276,7 @@ const calculator = (a: number, b: number, op: Operation): number | string =>  {
 }
 ```
 
-<!-- We could also create a return type that includes the both possible values, much like the type Operation. -->
+
 
 or we could create a return type which includes both possible types, much like our Operation type
 或者我们可以创建一个返回类型，它包含两种可能的类型，非常类似于我们的 Operation 类型
@@ -289,19 +289,19 @@ const calculator = (a: number, b: number, op: Operation): Result =>  {
 }
 ```
 
-<!-- But now is time for the question: is it <i>really</i> okay for the function to return a string? -->
+
 
 But now  the question is if it's <i>really</i> okay for the function to return a string?
 但现在的问题是，如果函数返回一个字符串是<i>真的</i> 好吗？
 
-<!-- When you have written code that can actually end up in a situation where something is divided by 0 it probably means something has gone terribly wrong and in that case an error should probably be thrown and handled somewhere where the function was called. When you are deciding to return values you weren't originally planning, the warnings you see from TypeScript restrict you from making rushed decisions and help you to keep your code working as expected. -->
+
 当你编写的代码实际上可能出现被0除的情况时，这可能意味着某些地方出了严重的问题，在这种情况下，一个错误可能应该被抛出并处理在函数被调用的地方
 When your code can end up in a situation where something is divided by 0, something has probably gone terribly wrong and an error should be thrown and handled where the function was called.
 当您的代码可能最终出现某物除以0的情况时，可能出现了严重的错误，应该在调用函数的地方抛出并处理错误。
 When you are deciding to return values you weren't originally expecting, the warnings you see from TypeScript prevent you from making rushed decisions and help you to keep your code working as expected.
 当您决定返回您最初没有预料到的值时，您从打字稿中看到的警告会阻止您匆忙做出决定，并帮助您保持代码按预期工作。
 
-<!-- One more thing to consider is that even though we have in our code defined what types of parameters to accept, the generated JavaScript that is used runtime doesn't anymore have these type checks. So, if for example the <i>operation</i>-parameter's value comes from an external interface, there is no definite guarantee that it will be one of the allowed values. Therefore it's still better to include error handling to be prepared for the unexpected to happen. In this case, when there are multiple possible accepted values and all unexcpeted ones should result in an error, the [switch...case](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement suits better than if...else in our code.  -->
+
 
 One more thing to consider is, that even though we have defined types for our parameters, the generated JavaScript used at runtime does not contain the type checks.
 还有一件事需要考虑，即使我们已经为参数定义了类型，但是在运行时生成的 JavaScript 并不包含类型检查。
@@ -339,7 +339,7 @@ try {
 }
 ```
 
-<!-- The programs we've written are alright, but it sure would be better if there were a way to use command line arguments instead of always having to change the code to calculate different things. Let's try it out, as we would in a regular Node application, by accessing <i>process.argv</i>. But something is not right: -->
+
 
 The programs we have written are alright, but it sure would be better if we could use command line arguments instead of always having to change the code to calculate different things.  
 我们编写的程序是正确的，但是如果我们可以使用命令行参数，而不是总是需要改变代码来计算不同的东西，那肯定会更好。
@@ -357,14 +357,14 @@ But something is not right:
 Let's return to the basic idea of TypeScript. TypeScript expects all globally used code to be typed, as it does for your own code when your project has a reasonable configuration. The TypeScript library itself contains only typings for the code of the TypeScript package. It is possible to write your own typings for a library, but that is almost never needed - since the TypeScript community has done it for us!
 让我们回到打字稿的基本概念上来。 Typescript 希望所有全局使用的代码都被类型化，就像当您的项目具有合理的配置时为您自己的代码所做的那样。 库本身只包含 TypeScript 包代码的输入。 为库编写自己的输入是可能的，但这几乎从来不需要——因为打字稿社区已经为我们做到了！
 
-<!-- As in the world of npm, TypeScript also celebrates open source code and the community around it is active and continuously reacting to updates and changes in commonly used npm-packages. That is why the typings for npm-packages are almost always to be found, so that you won't be alone creating types for all of your thousands of dependencies. -->
+
 
 As with npm, the TypeScript world also celebrates open source code. The community is active and continuously reacting to updates and changes in commonly used npm-packages.  
 和 npm 一样，打字稿界也赞美开源代码。 该社区是积极的，不断React的更新和变化，在常用的 npm-软件包。
 You can almost always find the typings for npm-packages, so you don't have to create types for all of your thousands of dependencies alone.
 您几乎总是可以找到 npm-packages 的类型，因此您不必仅为数千个依赖项创建所有类型。
 
-<!-- Usually types for existing packages can be found by under the <i>@types</i>-organization within npm, so that you can add the relevant types to your project by installing an npm package with the name of your package with a @types/ - prefix, for example:<i>npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose</i> and the list goes on and on. The <i>@types/*</i> are maintained by [Definitely typed](http://definitelytyped.org/), a community project with the goal to mainting types of everything in one place. -->
+
 
 Usually types for existing packages can be found from the <i>@types</i>-organization within npm, and you can add the relevant types to your project by installing an npm package with the name of your package with @types/ - prefix. For example: <i>npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose</i> and so on and so on. The <i>@types/*</i> are maintained by [Definitely typed](http://definitelytyped.org/), a community project with the goal to mainting types of everything in one place.
 通常，现有包的类型可以在 npm 中的 i@types / i-organization 中找到，您可以通过安装一个名为@types /-prefix 的包的 npm 包将相关类型添加到项目中。 例如:<i>npm install -- save-dev@types / react@types / express@types / lodash@types / jest@types / mongoose</i> 等等。 I@types / * / i 由[ Definitely typed ]( http://definitelytyped.org/ )维护，这是一个社区项目，其目标是将所有的类型维护在一个地方。
@@ -388,7 +388,7 @@ After installing the types, our compiler does not complain about the variable <i
 ### Improving the project
 正在改进这个项目
 
-<!-- Let us now add npm scripts with which we can run our two programs <i>multiplier</i> and <i>calculator</i>: -->
+
 
 Next let's add npm scripts to run our two programs <i>multiplier</i> and <i>calculator</i>:
 接下来让我们添加 npm 脚本来运行两个程序<i>multiplier</i> 和<i>calculator</i>:
@@ -413,7 +413,7 @@ Next let's add npm scripts to run our two programs <i>multiplier</i> and <i>calc
 }
 ```
 
-<!-- We can now get the multipier to work with command line parameters with the following changes -->
+
 
 We can get the multiplier to work with command line parameters with the following changes
 我们可以通过如下更改使乘法器与命令行参数一起工作
@@ -449,14 +449,14 @@ it "works" but gives us the answer
 Multiplied 5 and NaN, the result is: NaN
 ```
 
-<!-- The reason for this is that the <i>Number('lol')</i> returns <i>NaN</i> which actually has the type <i>number</i> so TypeScript has no power to rescue from this kind of situation.  -->
+
 
 The reason for this is, that <i>Number('lol')</i> returns <i>NaN</i>, 
 原因是，i Number (‘ lol’) /<i>返回 i NaN</i>,
 which is actually type <i>number</i>, so TypeScript has no power to rescue  us from this kind of situation.
 实际上是 i / i 类型，所以打字稿没有能力把我们从这种情况中解救出来。
 
-<!-- In order to save us from this kind of behavior, we have to validate the data that is given to us as in command line.  -->
+
 
 In order to prevent this kind of behaviour, we have to validate the data given to us from the command line.
 为了防止这种行为，我们必须验证从命令行提供给我们的数据。
@@ -529,7 +529,7 @@ interface MultiplyValues {
 }
 ```
 
-<!-- Definition utilizes TypeScript [Interface](http://www.typescriptlang.org/docs/handbook/interfaces.html) that is one way to define what "shape" an object should have. In our case it is quite obvious that return values should be objects that have properties <i>value1</i> and <i>value2</i> that both have type number. -->
+
 
 The definition utilizes TypeScript's [Interface](http://www.typescriptlang.org/docs/handbook/interfaces.html) keyword, which is one way to define the "shape" an object should have. 
 这个定义使用了 TypeScript 的[ Interface ]( http://www.typescriptlang.org/docs/handbook/interfaces.html )关键字，这是定义对象应该具有的“形状”的一种方法。
@@ -685,19 +685,19 @@ Handle exeptions and errors appropriately. The exerciseCalculator should accept 
 ### More about tsconfig
 # # # 更多关于 tsconfig
 
-<!-- In the exercises we used only one tsconfig rule [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny) which is a good place to start but now it is time to start looking into the file a little bit deeper. -->
+
 
 In the exercises we used only one tsconfig rule [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny). It's a good place to start, but now it's time to look into the config file a little deeper.
 在练习中我们只使用了一个 tsconfig 规则[ noImplicitAny ]( https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny )。 这是一个很好的起点，但现在是时候更深入地研究配置文件了。
 
-<!-- [tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) includes all your core configurations on how you want TypeScript to work in your project. In tsconfig.json you can define how strictly you want the code to be inspected, what files to include, what files to exclude (<i>node_modules</i> is excluded by default), and where compiled files should be placed (more on this later).  -->
+
 
 The [tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) file contains all your core configurations on how you want TypeScript to work in your project. 
 文件[ tsconfig.json ]( https://www.typescriptlang.org/docs/handbook/tsconfig-json.html 文件)包含您希望 TypeScript 如何在项目中工作的所有核心配置。
 You can define how strictly you want the code to be inspected, what files to include and exclude (<i>node_modules</i> is excluded by default), and where compiled files should be placed (more on this later).
 您可以定义检查代码的严格程度，包括哪些文件和排除哪些文件(默认情况下排除<i>节点模块</i>) ，以及应该将已编译的文件放在哪里(稍后将详细介绍)。
 
-<!-- Let us now use <i>tsconfig.json</i> that has the following form: -->
+
 
 Let's specify the following configurations in our <i>tsconfig.json</i> file:
 让我们在<i>/ tsconfig.json</i> 文件中指定如下配置:
@@ -716,12 +716,12 @@ Let's specify the following configurations in our <i>tsconfig.json</i> file:
 }
 ```
 
-<!-- Do not worry too much about the <i>compilerOptions</i> selected here, they will be under closer inspection on part 2. -->
+
 
 Do not worry too much about the <i>compilerOptions</i>, they will be under closer inspection on part 2.
 不要过于担心<i>compilerOptions</i>，它们将在第2章节进行更仔细的检查。
 
-<!-- The explanations for each of the field can be found from TypeScript documentation or the really handy although beta-stage [tsconfig page](https://www.typescriptlang.org/v2/en/tsconfig) or in a little worse format in the tsconfig [schema definition](http://json.schemastore.org/tsconfig). -->
+
 
 You can find explanations for each of the configurations from the TypeScript documentation, or the really handy although beta-stage [tsconfig page](https://www.typescriptlang.org/v2/en/tsconfig), or from the tsconfig [schema definition](http://json.schemastore.org/tsconfig), which unfortunately is formatted a little worse than the first two options. 
 你可以从 TypeScript 文档中找到每种配置的解释，或者从 beta-stage [ tsconfig page ]( https://www.typescriptlang.org/v2/en/tsconfig 文档) ，或者从 tsconfig [ schema definition ]( http://json.schemastore.org/tsconfig 文档)中找到解释，不幸的是，它的格式比前两个选项要差一些。
@@ -729,7 +729,7 @@ You can find explanations for each of the configurations from the TypeScript doc
 ### Adding express to the mix
 加入了快车的元素
 
-<!-- Right now we are at a pretty good place, our project is set up and we have two runnable calculators there. But since our aim is to learn fullstack development, it is time to start writing code that responds to HTTP-requests.  -->
+
 
 Right now we are at a pretty good place. Our project is set up and we have two executable calculators in it. 
 现在我们处在一个非常好的位置。 我们的项目已经建立，我们有两个可执行的计算器。
@@ -777,7 +777,7 @@ app.listen(PORT, () => {
 });
 ```
 
-<!-- Everything else seems to be going nice but as you'd expect, but the <i>req</i> and  <i>res</i> parameters of <i>app.get</i> need typing. If we look really carefully VS Code is also complaining us about something about the express importing, that is indicated by the short yellow line of dots under the <i>require</i>. Let's hover over the problem: -->
+
 
 Everything else seems to be working just fine, but as you'd expect the <i>req</i> and  <i>res</i> parameters of <i>app.get</i> need typing.
 其他的一切看起来都正常工作，但是正如您所期望的<i>req</i> 和<i>res</i> 参数<i>app.get</i> 需要输入。
@@ -794,7 +794,7 @@ The complaint is that the <i>'require' call may be converted to an import</i>. L
 import express from 'express';
 ```
 
-<!-- **Note that** by clicking the <i>Quick fix...</i> button VSCode offers you a possibility to fix the issue automatically. Keep your eyes open all the time for these helpers/quick fixes the editor offers you; listening to your editor usually only makes your code better and easier to read and automatic fixes for issues can be a major time saver. -->
+
 注意，通过单击<i>Quick fix...</i> 按钮 VSCode，可以自动修复这个问题。 随时注意这些编辑器提供的帮助 / 快速修复程序; 倾听编辑器通常只会使代码更好、更容易阅读，自动修复问题可以大大节省时间。 -->
 **NB**: VSCode offers you a possibility to fix the issues automatically by clicking the <i>Quick fix...</i> button.
 * * 注意 * * : VSCode 为您提供了一种可能性，通过单击<i>Quick fix...</i> 按钮自动修复问题。
@@ -803,7 +803,7 @@ Keep your eyes open for these helpers/quick fixes; listening to your editor usua
 The automatic fixes for issues can be a major time saver as well. 
 自动修复的问题可以是一个主要的节省时间。
 
-<!-- Now we run into the another problem, complain in the newly created import. Once again the editor is our biggest friend when trying to find out what the issue is about: -->
+
 现在我们遇到了另一个问题，在新创建的文件中抱怨。在试图找出问题所在时，编辑再次成为我们最大的朋友
 Now we run into another problem - the compiler complains about the import statement. 
 现在我们遇到了另一个问题——编译器会报告 import 语句。
@@ -813,7 +813,7 @@ Once again the editor is our best friend when trying to find out what the issue 
 ![](../../images/9/7.png)
 
 
-<!-- We still haven't installed the types for <i>express</i>. Let's do what the suggestion says and run: -->
+
 
 We haven't installed types for <i>express</i>. 
 我们还没有为<i>express</i> 安装类型。
@@ -824,12 +824,12 @@ Let's do what the suggestion says and run:
 npm install --save-dev @types/express
 ```
 
-<!-- And now no errors are found anymore! Let's take an even deeper look into what changed here. -->
+
 现在再也找不到错误了! 让我们更深入地看看是什么改变了她
 And no more errors! Let's take a look at what changed.
 不要再犯错了! 让我们来看看是什么改变了。
 
-<!-- With the <i>require</i> clause, when hovering on the imported module <i>express</i>, we can see that the compiler interprets all express related to the type <i>any</i>. -->
+
 
 When we hover over the <i>require</i> statement, we can see the compiler interprets everything express related to be of type <i>any</i>.
 当我们将鼠标悬停在<i>require</i> 语句上时，我们可以看到编译器将所有表示相关的内容解释为<i>any</i> 类型。
@@ -837,7 +837,7 @@ When we hover over the <i>require</i> statement, we can see the compiler interpr
 ![](../../images/9/8a.png)
 
 
-<!-- Whereas when the <i>import</i> version is used, editor knows the actual types -->
+
 
 Whereas when we use <i>import</i>, the editor knows the actual types
 然而，当我们使用<i>import</i> 时，编辑器知道实际的类型
@@ -845,12 +845,12 @@ Whereas when we use <i>import</i>, the editor knows the actual types
 ![](../../images/9/9a.png)
 
 
-<!-- What kind of import statement you should use, depends on the type of which exporting method is used in the imported package. -->
+
 你应该使用什么样的进口报表，这取决于进口包装中使用的导出方法的类型
 Which import statement to use depends on the export method used in the imported package. 
 要使用哪个导入语句取决于导入包中使用的导出方法。
 
-<!-- A good rule of thumb is to primarily start by trying to import a module with the <i>import</i> clause, that is the one we are always using in <i>frontend</i>. If it causes an error, try a combination of the both: <i>import ... = require('...')</i>. -->
+
 
 A good rule of thumb is to try importing a module using the <i>import</i> statement first. We will always use this method in the <i>frontend</i>. 
 一个很好的经验法则是首先尝试使用<i>import</i> 语句导入模块。 我们总是在<i>前端</i> 中使用这个方法。
@@ -884,7 +884,7 @@ This is because we banned unused parameters in out <i>tsconfig.json</i>
 }
 ```
 
-<!-- This configuration might create problems when we have library-wide predefined functions, that like in this case require declaring a variable, even though in the code it is not necessarily required to use at all. Fortunately this issue has already been solved on configuration level and once again hovering on the issue gives us a solution for the problem, this time by clicking the quick fix button:  -->
+
 
 This configuration might create problems if you have library-wide predefined functions which require declaring a variable even if it's not used at all, as is the case here. 
 如果您有库范围内的预定义函数，即使变量根本没有被使用，也需要声明它，那么这种配置可能会产生问题，就像这里的情况一样。
@@ -896,14 +896,14 @@ Once again hovering over the issue gives us a solution. This time we can just cl
 ![](../../images/9/14a.png)
 
 
-<!-- If it is absolutely impossible to get rid of an unused variable, you should prefix it with an underscore to inform the compiler that this has been taken into consideration and there is nothing we can do about it.  -->
+
 
 If it absolutely impossible to get rid of an unused variable, you can prefix it with an underscore to inform the compiler you have thought about it and there is nothing you can do. 
 如果完全不可能删除一个未使用的变量，您可以在它前面加上一个下划线，告诉编译器您已经考虑过这个问题，但是您无能为力。
 
 Let's rename the <i>req</i> variable to <i>_req</i>.
 让我们将<i>req</i> 变量重命名为<i>req</i>。
- <!-- Now we are finally ready to start up the application, and it seems to work fine: -->
+ 
 
  Finally we are ready to start the application. It seems to work fine:
 最后，我们准备启动应用。它似乎工作得很好:
@@ -911,7 +911,7 @@ Let's rename the <i>req</i> variable to <i>_req</i>.
 ![](../../images/9/11a.png)
 
 
-<!-- Now to simplify the development we should enable <i>auto reloading</i> to improve our workflow. In this course you have already used <i>nodemon</i>, but ts-node has an alternative called <i>ts-node-dev</i> which is meant only for development environment that takes care of recompilation on every change so restarting the application won't be necessary. -->
+
 
 To simplify the development we should enable <i>auto reloading</i> to improve our workflow. In this course you have already used <i>nodemon</i>, but ts-node has an alternative called <i>ts-node-dev</i>. It is meant to be used only with a development environment which takes care of recompilation on every change, so restarting the application won't be necessary.
 为了简化开发，我们应该启用<i>auto reloading</i> 来改进我们的工作流。 在本课程中，您已经使用了<i>nodemon</i>，但是 ts-node 有一个替代方法叫做<i>ts-node-dev</i>。 它意味着只能与开发环境一起使用，该环境负责对每个更改进行重新编译，因此不需要重新启动应用。
@@ -1023,7 +1023,7 @@ Do not copy the calculator code to file <i>index.ts</i>, make it a [typescript m
 ### The horrors of <i>any</i>
 我的恐惧
 
-<!-- Now that we have our first small endpoints done, one thing to notice is that in these minimal examples barely any TypeScript is actually in the code. When looking more closely at the code, we can see a few possibly dangerous things.  -->
+
 
 Now that we have our first endpoints completed, you might notice we have used barely any TypeScript in these small examples. 
 现在我们已经完成了第一个端点，您可能会注意到在这些小例子中我们几乎没有使用任何打字稿。
@@ -1048,7 +1048,7 @@ app.get('/calculate', (req, res) => {
 ```
 
 
-<!-- When we hover on the <i>calculate</i> function, we can see the typing of the <i>calculator</i> even though the file itself doesn't contain any typings: -->
+
 
 When you hover over the <i>calculate</i> function, you can see the typing of the <i>calculator</i> even though the code itself does not contain any typings:
 当你把鼠标悬停在<i>calculate</i> 函数上时，你可以看到<i>calculator</i> 的输入，即使代码本身不包含任何输入:
@@ -1057,7 +1057,7 @@ When you hover over the <i>calculate</i> function, you can see the typing of the
 
 
 
-<!-- But when we hover over the parsed values from the request, ann issues arise: -->
+
 
 But if you hover over the values parsed from the request, an issue arises:
 但是如果你将鼠标悬停在从请求中分析出来的值上，就会出现一个问题:
@@ -1065,31 +1065,31 @@ But if you hover over the values parsed from the request, an issue arises:
 ![](../../images/9/13a.png)
 
 
-<!-- All of the varialbes have type <i>any</i>. Well, it is not that surprising since no one has given those a type. There are a couple of ways to fix this, but first thing to consider is why is this accepted and where did the type <i>any</i> come from? -->
+
 
 All of the variables have type <i>any</i>. It is not all that surprising, as no one has given them a type yet. There are a couple of ways to fix this, but the first we have to consider why this is accepted and where did the type <i>any</i> come from?
 所有的变量都有<i>/ i 类型。 这并不奇怪，因为还没有人给他们一个类型。 有几种方法可以解决这个问题，但首先我们必须考虑为什么这种方法被接受，以及 i any</i> 类型是从哪里来的？
 
-<!-- In TypeScript every untyped variable, for which the type cannot be inferred, becomes implicitly [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any), which is a kind of "wild card" type that can literally stand for <i>whatever possible type</i>. This happens quite often when one forgets to type functions.  -->
+
 
 In TypeScript every untyped variable which's type cannot be inferred, becomes implicitly [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) type. Any is a kind of a "wild card" type which literally stands for <i>whatever type</i>. 
 在打字稿中，每个类型不能被推断的非类型化变量都变成隐式的[任何]( http://www.typescriptlang.org/docs/handbook/basic-types.html#any )类型。 Any 是一种“通配符”类型，字面上代表<i>whatever type</i>。
 Things become implicitly any type quite often when one forgets to type functions. 
 当忘记输入函数时，任何类型的事物都会变得隐式化。
 
-<!-- The type <i>any</i> can also be explicitly specified as any other type. The only difference between these two is how the code looks, the compiler is not affected from the difference. -->
+
 
 We can also explicitly type things <i>any</i>. The only difference between implicit and explicit any type is how the code looks, the compiler does not care about the difference. 
 我们也可以显式地输入事物<i>/ any</i>。 隐式和显式任何类型之间的唯一区别是代码的外观，编译器不关心这个区别。
 
-<!-- However, implicit <i>any</i> and explicit enforcing of the <i>any</i> type onto a variable affects how a programmer sees the code. Implicit typings of <i>any</i> are usually considered problematic, since it  is quite often a matter of the coder simply forgotting to assign types (or being too lazy to do that) and because of that not exploiting the full power TypeScript in the code.  -->
+
 
 Programmers however see the code differently when any is explicitly enforced than when it implicitly inferred. 
 但是，当任何代码被显式强制执行时，程序员看待代码的方式与它被隐式推断时不同。
 Implicit <i>any</i> typings are usually considered problematic, since it is quite often due to the coder forgetting to assign types (or being too lazy to do it), and it also means that the full power of TypeScript is not properly exploited. 
 隐式 i / i 输入通常被认为是有问题的，因为经常是由于编码人员忘记分配类型(或者太懒于分配类型) ，这也意味着没有充分利用打字稿的全部能力。
 
-<!-- This is why the rule [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny) exists already on compiler level and it is highly recommended to keep it on at all time. In the rare cases where you seriously cannot know what the type of a variable is, you should explicitly state it in the code  -->
+
 
 This is why the configuration rule [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny) exists on compiler level, and it is highly recommended to keep it on at all times. 
 这就是为什么配置规则[ noImplicitAny ]( https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny )存在于编译器级别，并且强烈建议在任何时候都保持开启状态。
@@ -1100,14 +1100,14 @@ In the rare occasions you seriously cannot know what the type of a variable is, 
 const a : any = /* no clue what the type will be! */.
 ```
 
-<!-- We have already <i>noImplicitAny</i> defined in our example code, so why does not the compiler compalain about <i>any</i> types? The reason is that the field <i>query</i> of the express [Request](https://expressjs.com/en/5x/api.html#req) object is actually explicitly typed as <i>any</i>. Same is true if we post data to app, the <i>request.body</i> is explicitly typed as <i>any</i> by express. -->
+
 
 We already have <i>noImplicitAny</i> condifured in our example, so why does the compiler not complain about the implicit <i>any</i> types?
 在我们的示例中，我们已经有了<i>noImplicitAny</i> 调味品，那么为什么编译器不抱怨隐含的<i>any</i> 类型呢？
 The reason is, that the <i>query</i> field of an express [Request](https://expressjs.com/en/5x/api.html#req) object is explicitly typed <i>any</i>.  Same is true for the <i>request.body</i> field we use to post data to an app. 
 原因是，express [ Request ]( https://expressjs.com/en/5x/api.html#req )对象的<i>query</i> 字段是显式输入<i>any</i> 的。 我们用于将数据发布到应用的<i>request.body</i> 字段也是如此。
 
-<!-- What if we would like to prevent the developers of using <i>any</i> type in the code? Fortunately <i>tsconfig.json</i> is not the only place to enforce coding style and what we should do is to take <i>eslint</i> into use to help us to manage our code. Let's install eslint and the typescript extensions: -->
+
 
 What if we would like to prevent developers from using <i>any</i> type at all? Fortunately we have other methods than <i>tsconfig.json</i> to enforce coding style. What we can do is  use <i>eslint</i> to manage
 如果我们想要阻止开发人员使用<i>任何</i> 类型，该怎么办？ 幸运的是，除了<i>/ tsconfig.json</i> 之外，我们还有其他方法来强制执行编码样式。 我们能做的就是用<i>eslint</i> 来管理
@@ -1120,7 +1120,7 @@ Let's install eslint and its typescript extensions:
 npm install --save-dev eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser
 ```
 
-<!-- We will configure eslint to [disallow explicit any]( https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md) by using the <i>.eslintrc</i> with following contents: -->
+
 
 We will configure eslint to [disallow explicit any]( https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md). Write the following rules to <i>.eslintrc</i>:
 我们将 eslint 配置为[不允许显式任何]( https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md ):
@@ -1156,7 +1156,7 @@ Let us also set up a <i>lint</i> npm script to inspect the files with <i>.ts</i>
 }
 ```
 
-<!-- Lint is now complaining if we try to define a variable of type <i>any</i>: -->
+
 
 Now lint will complain if we try to define a variable of type <i>any</i>:
 现在，如果我们尝试定义类型为<i>any</i> 的变量，lint 将会抱怨:
@@ -1170,7 +1170,7 @@ The [@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint)
 For now we should propably go with the recommended settings and modify the rules as we go along whenever we find something we want to behave differently. 
 现在，我们应该按照推荐的设置进行操作，当我们发现一些需要改变的地方时，我们可以随时修改这些规则。
 
-<!-- On top of the regular recommended settings, we should already try to get familiar with coding style we are using in this part and <i>set the semicolon at the end of each line of code to required</i>.  -->
+
 
 On top of the recommended settings, we should try to get familiar with the coding style required in this part and <i>set the semicolon at the end of each line of code to required</i>.
 在推荐的设置之上，我们应该尝试熟悉这一部分所需的编码风格，并将每行代码末尾的分号设置为 required / i。
@@ -1204,7 +1204,7 @@ So we will use the following <i>.eslintrc</i>
 }
 ```
 
-<!-- There are quite a few missing semicolons but those are easy to add. -->
+
 
 There are quite a few semicolons missing, but those are easy to add.
 有相当多的分号缺失，但这些是很容易添加。
