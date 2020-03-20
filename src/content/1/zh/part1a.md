@@ -471,8 +471,6 @@ Exercises are submitted through GitHub and by marking completed exercises in the
 练习通过 GitHub 提交，并在[提交应用](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) 中标记练习为已完成。
 
 You may submit all the exercises of this course into the same repository, or use multiple repositories. If you submit exercises of different parts into the same repository, please use a sensible naming scheme for the directories.
-您可以将本课程的所有练习提交到同一个仓库中，或者使用多个存储库。 如果您将不同部分的练习提交到同一个存储库中，请使用一个合理的目录命名方案。
-
 您可以将本课程的所有练习提交到同一个仓库，或者使用多个不同的仓库。 如果您将来自不同章节的练习提交到同一个仓库中，请使用一个合理的目录命名方案。 
 
 One very functional file  structure for the submission repository is as follows:
