@@ -413,6 +413,8 @@ part2
   countries
 ```
 
+See [this](https://github.com/fullstack-hy2020/example-submission-repository)!
+
 For each part of the course there is a directory, which further branches into directories containing a series of exercises, like "unicafe" for part 1.
 
 For each web application for a series of exercises, it is recommended to submit all files relating to that application, except for the directory <i>node\_modules</i>.

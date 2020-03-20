@@ -102,15 +102,22 @@ Exercises in parts 8 and 9 do not count towards the grade for the 5-7 credit cou
 
 ### How to get your credits
 
+Note that for getting university credits you need a Finnish social security number.
+
 <!-- Jos haluat kurssilta suorituksen, tallenna <b>Helsingin yliopiston</b> opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) näkymään <i>my submissions</i>. Jos et ole Helsingin yliopiston opiskelija, saat opiskelijanumeron ilmoittautumalla kurssille [Avoimen yliopiston](/osa0/yleista/#kokeeseen-ilmoittautuminen) kautta. -->
 If you want to receive credits, save your <b>University of Helsinki</b> student number to
-[the exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) in the 
-<i>my submissions</i> view. If you are not a student at the University of Helsinki, you can get a student number by registering for the course through the [Open university](/osa0/yleista/#kokeeseen-ilmoittautuminen).
+[the exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) 
+
+![](../../images/0/28b.png)
+
+If you are not a student at the University of Helsinki, you can get a student number by registering for the course through the [Open university](/en/part0/general_info#sign-up-for-the-exam).
+
+
 
 <!-- Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi valmis kurssin suorituksen kanssa: -->
 You will receive your credits after you have submitted enough exercise for a passing grade, passed the exam and let us know through the exercise submission system that you have completed the course:
 
-![](../../images/0/28.png)
+![](../../images/0/28a.png)
 
 <!-- Arvosana siirtyy Weboodiin neljän viikon sisällä suoritusmerkintäpyynnön jälkeen. -->
 You can view your grade in Weboodi approximately four weeks after notifying us.
@@ -126,7 +133,7 @@ If you have already taken the course either as a MOOC or as a University Course,
 
 #### Expanding Full stack open 2019
 
-You can just pick up where you left! If you wish to resubmit a whole part, please contact the course personel with email matti.luukkainen@helsinki.fi or in Telegram @mluukkai. Tell your github acoount and which parts to delete from your submissions.
+You can just pick up where you left! If you wish to resubmit a whole part, please contact the course personel with email matti.luukkainen@helsinki.fi or in Telegram @mluukkai. Tell us your github account and which parts to delete from your submissions.
 
 #### Expanding other course instance
 
@@ -137,6 +144,14 @@ You can only substitute whole parts. For example, if you have previously done 50
 "Credit transfer" of previously completed parts happens in the <i>my submissions</i> tab of the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 If you have previously passed the course exam (excluding the exam for 3-credit course) and you are now expanding your course, you do not have to do the exam again. 
+
+### Changed since the last year
+
+There is only minor changes to parts 0-4. Part 5d, <i>end to end -testing</i> using the Cypress.io- library is almost completely new material.  Using custom hooks has been moved from part 5 to part 7 with some new content.
+
+Part 6, which is about Redux, concentrates on the new, hook-based, redux api. The material on react-router in part 7 has also been updated to use the hook-api. Semantic UI React has been replaced with the MaterialUI library due to lack of maintenance. <br><br> Part 8 on GraphQL has major updates especially on Apollo Client, which finally has stable hook based apis. Part 9 on TypeScript is completely new.
+
+Last year's course material can be found from https://fullstackopen-2019.github.io/
 
 ### Submitting exercises
 
@@ -158,12 +173,13 @@ Note that it is possible to register for exam only if you have a Finnish social 
 Follow the instructions below to gain access to the course’s Moodle space:
 
 -	Register for the course through the [Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=131840261)
--	Wait for 24 hours and activate your University of Helsinki user ID. You will receive instructions on the activation process the following day. 
--	Sign in on the Open universitu [course page](https://courses.helsinki.fi/fi/aytkt21009en/131840261), where you will find the enrolment key for the Moodle space
+-	**Wait for 24 hours** and activate your University of Helsinki user ID. You will receive instructions on the activation process the following day. 
+-	Sign in on the Open university [course page](https://courses.helsinki.fi/fi/aytkt21009en/131840261), where you will find the enrolment key for the Moodle space
 -	Sign into the [Moodle space](https://moodle.helsinki.fi/login/index.php) with your University of Helsinki user ID and the enrolment key. 
 
 Please note!
 
+- **Did you wait 24 hours** as the above instructions say?
 - You need the Moodle access just for the exam, for the course certificate access is not needed!
 -	Registration for the exam through the Open University is possible until Jan 9, 2021. 
 - Credits for the course are only available to those students who have successfully registered for the course registration through the Open University and have completed the course according to the instructions.

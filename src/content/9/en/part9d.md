@@ -664,11 +664,44 @@ export type State = {
 };
 ```
 
-<!-- The state is an object with one key <i>patients</i>, which has a [dictionary](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types-and-index-signatures) or simply put an object with string keys and with a <i>Patient</i> object as value. Index can only be <i>string</i> or <i>number</i> as you can access the object values using those. This enforces that the state conforms in the way we want, and prevents developers from misusing the state.  -->
-The state is an object with one key <i>patients</i>. <i>Patients</i> has a [dictionary](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types-and-index-signatures), 
-an object of key value pairs, with strings as keys and <i>Patient</i> objects as values.
-Index can only be either a <i>string</i> or a <i>number</i>, as you can only access the object values using those. 
-This enforces that the state conforms to the form we want, and prevents developers from misusing the state.
+The state is an object with one key <i>patients</i>, which has a [dictionary](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types-and-index-signatures) or simply put an object with string keys and with a <i>Patient</i> objects as values.The index can only be  a <i>string</i> or a <i>number</i> as you can access the object values using those. This enforces that the state conforms in the way we want, and prevents developers from misusing the state.
+
+But beware! when the type for <i>patients</i> is declared in the way that we have, TypeScript does not actually have any way of knowing if the key you are trying to access actually exists or not. So, if we were to try to access a patient by a non-existing id, the compiler would still think that the returned value is of type <i>Patient</i> and no error would arise when trying to access it's properties:
+
+```js
+const myPatient = state.patients['non-existing-id'];
+console.log(myPatient.name); // no error, TypeScript believes that myPatient is of type Patient
+```
+
+To fix this, we could define the type for patient values to be a union of <i>Patient</i> and <i>undefined</i> in the following way:
+
+```js
+export type State = {
+  patients: { [id: string]: Patient | undefined };
+};
+```
+
+That would cause the compiler to give the following warning:
+
+```js
+const myPatient = state.patients['non-existing-id'];
+console.log(myPatient.name); // error, Object is possibly 'undefined'
+```
+
+This type of additional type safety is always good to implement if you e.g. use data from external sources or use the value of a user input to access data in your code. But if you are sure that you only handle data that actually exists, then there is no one stopping you from using the first presented option.
+
+Even though we are not using them in this course part, it is good to mention that a more type strict way could be to use [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) objects, to which you can declare a type for both the key and the content. The Map's accessor function <i>get()</i> always returns a union of the declared value type and undefined, so TypeScript automatically requires you to perform validity checks on data retrieved from a map:
+
+```js
+interface State {
+  patients: Map<string, Patient>;
+}
+...
+const myPatient = state.patients.get('non-existing-id'); // type for myPatient is now Patient | undefined 
+console.log(myPatient.name); // error, Object is possibly 'undefined'
+
+console.log(myPatient?.name); // valid code, but will log 'undefined'
+```
 
 <!--
 You can also think of a scenario where we may have state as a union. Eg. using states type as an indicator whether user has logged in:
@@ -1457,7 +1490,7 @@ Upon a successful submit the new entry should be added to the correct patient an
 
 If you like, you can re-use some of the code from the <i>Add patient</i> form for this exercise, but this is not a requirement.
 
-Note that the file [FormField.tsx](https://github.com/fullstack-hy2020/patientor/blob/master/src/AddPatientModal/FormField.tsx#L58) has a redy made component _DiagnosisSelection_ that can be used for setting the field <i>diagnoses</i>:
+Note that the file [FormField.tsx](https://github.com/fullstack-hy2020/patientor/blob/master/src/AddPatientModal/FormField.tsx#L58) has a redy made component _DiagnosisSelection_ that can be used for setting the field <i>diagnoses</i>.
 
 It can be used as follows:
 
@@ -1516,14 +1549,14 @@ Extend your solution so that it displays an error message if some required value
 
 #### 9.26: patientor, step11
 
-Extend your solution to support <i>two</i> entry types and to display an error message if some required values are missing. You do not need to care about the possible errors in the server response.
+Extend your solution so that it supports <i>two</i> entry types and displays an error message if some required values are missing or formatted incorrectly. You do not need to care about the possible errors in the server's response.
 
-The easiest, but surely not the most elegant, way to do this exercise is to have a separate form for each different entry type. 
-
-Getting the types to work properly might be a slight challenge if you use just a single form.
+The easiest but surely not the most elegant way to do this exercise is to have a separate form for each different entry type. Getting the types to work properly might be a slight challenge if you use just a single form.
 
 #### 9.27: patientor, step12
 
-Extend your solution so that it supports <i>all the entry types</i> and displays error messages if some required values are missing or formatted incorrectly. You do not need to care about the possible errors in the server response.
+Extend your solution so that it supports <i>all the entry types</i> and displays an error message if some required values are missing or formatted incorrectly. You do not need to care about the possible errors in the server's response.
+
+This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>

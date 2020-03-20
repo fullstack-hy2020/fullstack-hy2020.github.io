@@ -448,7 +448,7 @@ If we try to do the same with the method _greet_ we run into an issue:
 arto.greet()       // hello, my name is Arto Hellas gets printed
 
 const referenceToGreet = arto.greet
-referenceToGreet() // error message is printed to console
+referenceToGreet() // prints only hello, my name is
 ```
 
 When calling the method through a reference the method has lost knowledge of what was the original _this_. Contrary to other languages, in Javascript the value of [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) is defined based on <i>how the method is called</i>. When calling the method through a reference the value of _this_ becomes the so-called [global object](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) and the end result is often not what the software developer had originally intended.
