@@ -122,7 +122,6 @@ GraphQL:ää käsittelevä osa 8 on kokenut paljon päivityksiä erityisesti Apo
 
 Viime vuoden kurssimateriaali on nähtävissä osoitteessa https://fullstackopen-2019.github.io/
 
-
 ### Aiemmin suoritetun kurssin täydentäminen
 
 Jos olet jo suorittanut kurssin joko MOOC:ina tai Yliopiston kurssina, voit täydentää nyt suoritustasi.
