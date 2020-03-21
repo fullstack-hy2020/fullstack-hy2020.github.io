@@ -21,7 +21,7 @@ Let's start by adding information about users to the database. There is a one-to
 
 
 If we were working with a relational database the implementation would be straightforward. Both resources would have their separate database tables, and the id of the user who created a note would be stored in the notes table as a foreign key.
-如果我们与关系数据库合作，那么实现起来会很简单。 这两个资源都有各自的数据库表，创建便条的用户的 id 将作为外键存储在便条表中。
+如果我们与关系数据库合作，那么实现起来会很简单。 这两个资源都有各自的数据库表，创建便笺的用户的 id 将作为外键存储在便笺表中。
 
 
 When working with document databases the situation is a bit different, as there are many different ways of modeling the situation.
@@ -219,7 +219,7 @@ The type of the field is <i>ObjectId</i> that references <i>note</i>-style docum
 
 
 Let's expand the schema of the note defined in the <i>model/note.js</i> file so that the note contains information about the user who created it:
-让我们展开在<i>模型 / 便笺中定义的便笺的模式。 Js</i> 文件，以便便条包含关于创建它的用户的信息:
+让我们展开在<i>模型 / 便笺中定义的便笺的模式。 Js</i> 文件，以便便笺包含关于创建它的用户的信息:
 
 ```js
 const noteSchema = new mongoose.Schema({
@@ -492,7 +492,7 @@ The code for creating a new note has to be updated so that the note is assigned 
 创建新便笺的代码必须更新，以便便笺分配给创建它的用户。
 
 Let's expand our current implementation so, that the information about the user who created a note is sent in the <i>userId</i> field of the request body:
-让我们展开当前的实现，以便在请求主体的<i>userId</i> 字段中发送关于创建便条的用户的信息:
+让我们展开当前的实现，以便在请求主体的<i>userId</i> 字段中发送关于创建便笺的用户的信息:
 
 ```js
 const User = require('../models/user')

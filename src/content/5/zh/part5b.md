@@ -405,7 +405,7 @@ I newNote / i state 属性和负责更改它的事件处理程序已经从 App �
 
 
 There is only one prop left, the _createNote_ function, which the form calls when a new note is created. 
-现在只剩下一个props，即 createNote 函数，当创建新便条时，表单将调用该函数。
+现在只剩下一个props，即 createNote 函数，当创建新便笺时，表单将调用该函数。
 
 
 

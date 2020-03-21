@@ -672,7 +672,7 @@ const id = request.params.id
 ```
 
 The now familiar _find_ method of arrays is used to find the note with an id that matches the parameter. The note is then returned to the sender of the request.
-现在熟悉的数组 find 方法用于查找具有与参数匹配的 id 的便笺。 然后，便条被退还给请求的发件人。
+现在熟悉的数组 find 方法用于查找具有与参数匹配的 id 的便笺。 然后，便笺被退还给请求的发件人。
 
 
 When we test our application by going to <http://localhost:3001/api/notes/1> in our browser, we notice that it does not appear to work, as the browser displays an empty page. This comes as no surprise to us as software developers, and it's time to debug.
@@ -763,7 +763,7 @@ However, there's another problem with our application.
 
 
 If we search for a note with an id that does not exist, the server responds with:
-如果我们搜索一个 id 不存在的便条，服务器会响应:
+如果我们搜索一个 id 不存在的便笺，服务器会响应:
 
 ![](../../images/3/10ea.png)
 
@@ -774,7 +774,7 @@ The HTTP status code that is returned is 200, which means that the response succ
 
 
 The reason for this behavior is that the _note_ variable is set to _undefined_ if no matching note is found. The situation needs to be handled on the server in a better way. If no note is found, the server should respond with the status code [404 not found](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5) instead of 200.
-出现此行为的原因是，如果没有找到匹配的便笺，则将便笺变量设置为未定义。 需要在服务器上以更好的方式处理这种情况。 如果没有发现任何提示，服务器应该用状态码[404 not found ]( https://www.w3.org/protocols/rfc2616/rfc2616-sec10.html#sec10.4.5)响应，而不是200。
+出现此行为的原因是，如果没有找到匹配的便笺，则将note变量设置为未定义。 需要在服务器上以更好的方式处理这种情况。 如果没有发现任何提示，服务器应该用状态码[404 not found ]( https://www.w3.org/protocols/rfc2616/rfc2616-sec10.html#sec10.4.5)响应，而不是200。
 
 
 Let's make the following change to our code:

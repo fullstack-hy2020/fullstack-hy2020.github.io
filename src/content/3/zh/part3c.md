@@ -841,7 +841,7 @@ Every request that leads to an error will be responded to with the HTTP status c
 每一个导致错误的请求都会在 HTTP状态码404没有找到的情况下被响应。 控制台显示有关错误的详细信息。
 
 There's actually two different types of error situations. In one of those situations, we are trying to fetch a note with a wrong kind of _id_, meaning an _id_ that doesn't match the mongo identifier format.
-实际上有两种不同类型的错误情况。 在其中一种情况下，我们试图获取一个带有错误类型的 id 的便条，这意味着一个与 mongo 标识符格式不匹配的 id。
+实际上有两种不同类型的错误情况。 在其中一种情况下，我们试图获取一个带有错误类型的 id 的便笺，这意味着一个与 mongo 标识符格式不匹配的 id。
 
 If we make the following request, we will get the error message shown below:
 如果我们提出如下请求，我们将得到如下所示的错误消息:
