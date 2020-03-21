@@ -10,7 +10,7 @@ lang: zh
 
 
 Let's expand the application, such that the notes are stored to the backend. We'll use [json-server](/en/part2/getting_data_from_server), familiar from part 2.
-让我们扩展应用，将笔记存储到后端。
+让我们扩展应用，将便笺存储到后端。
 
 
 The initial state of the database is stored into the file <i>db.json</i>, which is placed in the root of the project:
@@ -81,7 +81,7 @@ npm install axios --save
 ```
 
 We'll change the initialization of the state in <i>noteReducer</i>, such that by default there are no notes:
-我们将在<i>noteReducer</i> 中更改状态的初始化，这样默认情况下不存在注释:
+我们将在<i>noteReducer</i> 中更改状态的初始化，这样默认情况下不存在便笺:
 
 ```js
 const noteReducer = (state = [], action) => {
@@ -90,7 +90,7 @@ const noteReducer = (state = [], action) => {
 ```
 
 A quick way to initialize the state based on the data on the server is to fetch the notes in the file <i>index.js</i> and dispatch the action <i>NEW\_NOTE</i> for each of them:
-根据服务器上的数据初始化状态的一种快速方法是从文件<i>index.js</i> 中获取笔记，并为每个笔记分派操作<i>NEW  NOTE</i>:
+根据服务器上的数据初始化状态的一种快速方法是从文件<i>index.js</i> 中获取便笺，并为每个便笺分派操作<i>NEW  NOTE</i>:
 
 ```js
 // ...
@@ -164,7 +164,7 @@ noteService.getAll().then(notes =>
 Await 只在<i>async</i> 函数中工作，而<i>index.js</i> 中的代码不在函数中，因此由于操作的简单性质，这次我们不使用<i>async</i>。
 
 We do, however, decide to move the initialization of the notes into the <i>App</i> component, and, as usual when fetching data from a server, we'll use the <i>effect hook</i>. 
-但是，我们确实决定将笔记的初始化移动到<i>App</i> 组件中，并且，像往常一样，在从服务器获取数据时，我们将使用<i>effect hook</i>。
+但是，我们确实决定将便笺的初始化移动到<i>App</i> 组件中，并且，像往常一样，在从服务器获取数据时，我们将使用<i>effect hook</i>。
 
 ```js
 import React, {useEffect} from 'react' // highlight-line
@@ -260,7 +260,7 @@ More about the need to define the hooks dependencies in [the react documentation
 更多关于需要在[React文档]中定义钩子依赖关系的 https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies。
 
 We can do the same thing when it comes to creating a new note. Let's expand the code communicating with the server as follows:
-我们可以做同样的事情，当涉及到创建一个新的笔记。 让我们将与服务器通信的代码展开如下:
+我们可以做同样的事情，当涉及到创建一个新的便笺。 让我们将与服务器通信的代码展开如下:
 
 ```js
 const baseUrl = 'http://localhost:3001/notes'
@@ -316,7 +316,7 @@ export default NewNote
 ```
 
 Because the backend generates ids for the notes, we'll change the action creator _createNote_
-因为后端为笔记生成 id，所以我们将更改动作创建者 createNote
+因为后端为便笺生成 id，所以我们将更改动作创建者 createNote
 
 ```js
 export const createNote = (data) => {
@@ -328,7 +328,7 @@ export const createNote = (data) => {
 ```
 
 Changing the importance of notes could be implemented using the same principle, meaning making an asynchronous method call to the server and then dispatching an appropriate action.
-更改注释的重要性可以使用相同的原则实现，这意味着对服务器进行异步方法调用，然后调度适当的操作。
+更改便笺的重要性可以使用相同的原则实现，这意味着对服务器进行异步方法调用，然后调度适当的操作。
 
 The current state of the code for the application can be found on [github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3) in the branch <i>part6-3</i>.
 应用代码的当前状态可以在分支<i>/ part6-3</i> 中的[ github ]( https://github.com/fullstack-hy2020/redux-notes/tree/part6-3)上找到。
@@ -342,7 +342,7 @@ The current state of the code for the application can be found on [github](https
 ### Exercises 6.13.-6.14.
 练习6.13-6.14。
 
-#### 6.13 Anecdotes and the backend, step1
+#### 6.13 Anecdotes and the backend, 步骤1
 6.13奇闻轶事和后台，第一步
 
 When the application launches, fetch the anecdotes from the backend implemented using json-server.
@@ -351,7 +351,7 @@ When the application launches, fetch the anecdotes from the backend implemented 
 As the initial backend data, you can use, e.g. [this](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json).
 作为初始的后端数据，你可以使用，例如[ this ]( https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json )。
 
-#### 6.14 Anecdotes and the backend, step2
+#### 6.14 Anecdotes and the backend, 步骤2
 6.14奇闻轶事和后台，第二步
 
 Modify the creation of new anecdotes, such that the anecdotes are stored in the backend.
@@ -382,7 +382,7 @@ const App = () => {
 ```
 
 and <i>NoteForm</i> would create a new note as follows:
-我注意到 form / i 将创建一个新的注释如下:
+我注意到 form / i 将创建一个新的便笺如下:
 
 ```js
 const NewNote = () => {
@@ -459,7 +459,7 @@ Thanks to redux-thunk, it is possible to define <i>action creators</i> so that t
 
 
 Now we can define the action creator, <i>initializeNotes</i>, that initializes the state of the notes as follows:
-现在，我们可以定义操作创建器<i>initializeNotes</i>，它初始化笔记的状态如下:
+现在，我们可以定义操作创建器<i>initializeNotes</i>，它初始化便笺的状态如下:
 
 ```js
 export const initializeNotes = () => {
@@ -474,7 +474,7 @@ export const initializeNotes = () => {
 ```
 
 In the inner function, meaning the <i>asynchronous action</i>, the operation first fetches all the notes from the server and then <i>dispatches</i> the notes to the action, which adds them to the store.
-在内部函数(即<i>异步 action</i>)中，操作首先从服务器获取所有笔记，然后<i>将</i> 笔记分发到操作中，从而将它们添加到存储中。
+在内部函数(即<i>异步 action</i>)中，操作首先从服务器获取所有便笺，然后<i>将</i> 便笺分发到操作中，从而将它们添加到存储中。
 
 The component <i>App</i> can now be defined as follows:
 组件<i>App</i> 现在可以定义如下:
@@ -500,10 +500,10 @@ const App = () => {
 ```
 
 The solution is elegant. The initialization logic for the notes has been completely separated to outside the React component.
-这个解决方案非常优雅。注释的初始化逻辑已经完全分离到 React 组件之外。
+这个解决方案非常优雅。便笺的初始化逻辑已经完全分离到 React 组件之外。
 
 The action creator _createNew_, which adds a new note looks like this
-动作创作者 createNew 添加了一个新的注释，看起来像这样
+动作创作者 createNew 添加了一个新的便笺，看起来像这样
 
 ```js
 export const createNote = content => {
@@ -556,26 +556,26 @@ The current state of the code for the application can be found on [github](https
 ### Exercises 6.15.-6.18.
 练习6.15-6.18。
 
-#### 6.15 Anecdotes and the backend, step3
+#### 6.15 Anecdotes and the backend, 步骤3
 6.15奇闻轶事和后台，第三步
 
 Modify the initialization of redux-store to happen using asynchronous action creators, which are made possible by the <i>redux-thunk</i>-library.
 使用异步操作创建器修改 redux-store 的初始化，i redux-thunk / i-library 使异步操作创建器成为可能。
 
-#### 6.16 Anecdotes and the backend, step4
+#### 6.16 Anecdotes and the backend, 步骤4
 6.16奇闻轶事和后台，第四步
 
 Also modify the creation of a new anecdote to happen using asynchronous action creators, made possible by the <i>redux-thunk</i>-library.
 还可以使用异步动作创建器(由<i>redux-thunk</i>-library 提供)修改新轶事的创建。
 
 
-#### 6.17 Anecdotes and the backend, step5
+#### 6.17 Anecdotes and the backend, 步骤5
 6.17奇闻轶事和后台，第五步
 
 Voting does not yet save changes to the backend. Fix the situation with the help of the <i>redux-thunk</i>-library.
 投票还不能保存对后端的更改。请在<i>redux-thunk</i>-library 的帮助下修复这种情况。
 
-#### 6.18 Anecdotes and the backend, step6
+#### 6.18 Anecdotes and the backend, 步骤6
 6.18奇闻轶事和后台，第六步
 
 The creation of notifications is still a bit tedious, since one has to do two actions and use the _setTimeout_ function:

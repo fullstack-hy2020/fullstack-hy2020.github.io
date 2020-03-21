@@ -171,7 +171,7 @@ Any JavaScript code within the curly braces is evaluated and the result of this 
 ### JSX
 It seems like React components are returning HTML markup. However, this is not the case. The layout of React components is mostly written using [JSX](https://reactjs.org/docs/introducing-jsx.html). Although JSX looks like HTML, we are actually dealing with a way to write JavaScript. Under the hood, JSX returned by React components is compiled into JavaScript.
 
-看起来 React 组件返回的是 HTML 标记，但并不是这样。 React 组件的布局大部分是使用[ JSX ]( https://reactjs.org/docs/introducing-JSX.html )编写的。 尽管 JSX 看起来像 HTML，但我们实际上是在用一种特殊的方法写 JavaScript 。 实际上在底层，React 组件返回的 JSX 会被编译成 JavaScript。
+看起来 React 组件返回的是 HTML 标签，但并不是这样。 React 组件的布局大部分是使用[ JSX ]( https://reactjs.org/docs/introducing-JSX.html )编写的。 尽管 JSX 看起来像 HTML，但我们实际上是在用一种特殊的方法写 JavaScript 。 实际上在底层，React 组件返回的 JSX 会被编译成 JavaScript。
 
 After compiling, our application looks like this:
 编译后，我们的应用如下所示:

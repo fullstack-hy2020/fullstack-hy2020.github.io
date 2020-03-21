@@ -67,7 +67,7 @@ Something ーー1.578 f4ea1.chunk.js.map
 
 
 The <i>index.html</i> file located at the root of the build directory is the "main file" of the application, that loads the bundled JavaScript file with a <i>script</i> tag (in fact there are two bundled JavaScript files):
-位于 build 目录根目录的<i>index. html</i> 文件是应用的“ main file” ，它用<i>script</i> 标记加载绑定的 JavaScript 文件(实际上有两个绑定的 JavaScript 文件) :
+位于 build 目录根目录的<i>index. html</i> 文件是应用的“ main file” ，它用<i>script</i> 标签加载绑定的 JavaScript 文件(实际上有两个绑定的 JavaScript 文件) :
 
 ```html
 <!doctype html><html lang="en">
@@ -323,7 +323,7 @@ export default App
 ```
 
 We still need the <i>build/index.html</i> file  that will serve as the "main page" of our application that will load our bundled JavaScript code with a <i>script</i> tag:
-我们仍然需要<i>build</i>ndex. html /<i>文件，它将作为我们应用的“主页” ，用 i script</i> 标记加载我们打包的 JavaScript 代码:
+我们仍然需要<i>build</i>ndex. html /<i>文件，它将作为我们应用的“主页” ，用 i script</i> 标签加载我们打包的 JavaScript 代码:
 
 ```html
 <!DOCTYPE html>
@@ -360,7 +360,7 @@ const App = () => {
 
 
 The syntax used above comes from JSX and it provides us with an alternative way of defining a React element for an html <i>div</i> tag.
-上面使用的语法来自 JSX，它为我们提供了为 html<i>div</i> 标记定义 React 元素的替代方法。
+上面使用的语法来自 JSX，它为我们提供了为 html<i>div</i> 标签定义 React 元素的替代方法。
 
 
 We can use [loaders](https://webpack.js.org/concepts/loaders/) to inform webpack of the files that need to be processed before they are bundled.
@@ -754,7 +754,7 @@ App.js:27 Uncaught TypeError: Cannot read property 'concat' of undefined
 预备
 
 The location of the error indicated in the message does not match the actual location of the error in our source code. If we click the error message, we notice that the displayed source code does not resemble our application code:
-消息中指示的错误位置与源代码中错误的实际位置不匹配。 如果我们单击错误消息，我们会注意到显示的源代码与我们的应用代码不同:
+消息中说明的错误位置与源代码中错误的实际位置不匹配。 如果我们单击错误消息，我们会注意到显示的源代码与我们的应用代码不同:
 
 ![](../../images/7/26.png)
 
@@ -824,7 +824,7 @@ When we deploy the application to production, we are using the <i>main.js</i> co
 在将应用部署到生产环境时，我们使用的是 webpack 生成的<i>main.js</i> 代码包。 Js / i 文件的大小为974473字节，尽管我们的应用只包含几行我们自己的代码。 文件大小较大是因为 bundle 还包含整个 React 库的源代码。 捆绑代码的大小很重要，因为浏览器必须在第一次使用应用时加载代码。 对于高速互联网连接，974473字节不是问题，但是如果我们继续增加更多的外部依赖，加载速度可能会成为一个问题，特别是对于移动用户。
 
 If we inspect the contents of the bundle file, we notice that it could be greatly optimized in terms of file size by removing all of the comments. There's no point in manually optimizing these files, as there are many existing tools for the job.
-如果我们检查 bundle 文件的内容，我们注意到通过删除所有注释，可以在文件大小方面大大优化它。 手动优化这些文件是没有意义的，因为有许多现有的工具可以完成这项工作。
+如果我们检查 bundle 文件的内容，我们注意到通过删除所有便笺，可以在文件大小方面大大优化它。 手动优化这些文件是没有意义的，因为有许多现有的工具可以完成这项工作。
 
 The optimization process for JavaScript files is called <i>minification</i>. One of the leading tools intended for this purpose is [UglifyJS](http://lisperator.net/uglifyjs/).
 Javascript 文件的优化过程被称为<i>minification</i>，用于此目的的主要工具之一是[ UglifyJS ]( http://lisperator.net/UglifyJS/ )。
@@ -860,7 +860,7 @@ $ ls -l build/main.js
 ```
 
 The output of the minification process resembles old-school C code; all of the comments and even unnecessary whitespace and newline characters have been removed, and variable names have been replaced with a single character.
-缩小过程的输出类似于老式的 c 代码; 所有的注释、甚至不必要的空格和换行符都被删除了，变量名被单个字符替换。
+缩小过程的输出类似于老式的 c 代码; 所有的便笺、甚至不必要的空格和换行符都被删除了，变量名被单个字符替换。
 
 ```js
 function h(){if(!d){var e=u(p);d=!0;for(var t=c.length;t;){for(s=c,c=[];++f<t;)s&&s[f].run();f=-1,t=c.length}s=null,d=!1,function(e){if(o===clearTimeout)return clearTimeout(e);if((o===l||!o)&&clearTimeout)return o=clearTimeout,clearTimeout(e);try{o(e)}catch(t){try{return o.call(null,e)}catch(t){return o.call(this,e)}}}(e)}}a.nextTick=function(e){var t=new Array(arguments.length-1);if(arguments.length>1)
@@ -902,7 +902,7 @@ The bundled file will then be configured to use the backend available at the <ht
 然后将绑定的文件配置为使用 https://blooming-atoll-75500.herokuapp.com/api/notes 地址中可用的后端。
 
 We will install <i>axios</i>, start the json-server, and then make the necessary changes to the application. For the sake of changing things up, we will fetch the notes from the backend with our [custom hook](/en/part5/custom_hooks) called _useNotes_:
-我们将安装<i>axios</i>，启动 json-server，然后对应用进行必要的更改。 为了更改内容，我们将使用名为 useNotes 的[ custom hook ](/ en / part5 / custom hooks)从后端获取笔记:
+我们将安装<i>axios</i>，启动 json-server，然后对应用进行必要的更改。 为了更改内容，我们将使用名为 useNotes 的[ custom hook ](/ en / part5 / custom hooks)从后端获取便笺:
 
 ```js
 import React, { useState, useEffect } from 'react'

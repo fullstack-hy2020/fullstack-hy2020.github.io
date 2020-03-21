@@ -39,7 +39,7 @@ TypeScript consists of three separate, but mutually fulfilling parts:
 
 
 <i>The language</i> concists of syntax, keywords and type annotations. The syntax is similar to but not the same as JavaScript syntax. From the three parts of TypeScript programmers have the most direct contact with the language. 
-I 语法、关键字和类型注释的语言 / i 协调。 语法类似于 JavaScript 语法，但不一样。 从打字稿的三个部分来看，程序员与这门语言有着最直接的接触。
+I 语法、关键字和类型便笺的语言 / i 协调。 语法类似于 JavaScript 语法，但不一样。 从打字稿的三个部分来看，程序员与这门语言有着最直接的接触。
 
 
 
@@ -73,12 +73,12 @@ key features to help you understand more of what is to come during this course.
 主要特点，以帮助您了解更多的是什么来在这门课程。
 
 #### Type annotations
-# # # 键入注释
+# # # 键入便笺
 
 
 在下面的例子中，我们已经定义了，‘ birthdaygreeter’函数将接受一个类型为 string 的参数和一个类型为 number. 函数将返回一个 string. --
 Type annotations in TypeScript are a lightweight way to record the intended <i>contract</i> of a function or a variable. 
-Typescript 中的类型注释是一种轻量级的方法，用于记录函数或变量的预期<i>契约</i>。
+Typescript 中的类型便笺是一种轻量级的方法，用于记录函数或变量的预期<i>契约</i>。
 In the example below we have defined a function <i>birthdayGreeter</i> which accepts two arguments, one of type string and one of type number. 
 在下面的示例中，我们定义了一个函数<i>birthdayGreeter</i>，它接受两个参数，一个类型为 string，另一个类型为 number。
 The function will return a string.
@@ -224,9 +224,9 @@ The static code analysis doesn't only warn about wrongful type usage,but also ot
 
 
 The second advantage of TypeScript is that the type annotations in the code can function as a type of <i>code level documentation</i>. 
-打字稿的第二个优点是代码中的类型注释可以作为<i>代码级文档</i> 的类型发挥作用。
+打字稿的第二个优点是代码中的类型便笺可以作为<i>代码级文档</i> 的类型发挥作用。
 It's easy to check from a function signature what kind of arguments the function can consume and what type of data it will return. This type of type annotation bound documentation will always be up to date and it makes it easier for new programmers to start working on an existing project. It is also helpful when returning to an old project.
-通过函数签名可以很容易地检查函数可以使用哪种类型的参数，以及它将返回哪种类型的数据。 这种类型的类型注释绑定文档将始终是最新的，并且它使新的程序员更容易开始处理现有的项目。 当回到一个旧的项目时，这也是有帮助的。
+通过函数签名可以很容易地检查函数可以使用哪种类型的参数，以及它将返回哪种类型的数据。 这种类型的类型便笺绑定文档将始终是最新的，并且它使新的程序员更容易开始处理现有的项目。 当回到一个旧的项目时，这也是有帮助的。
 
 Types can be reused all around the code base, and a change to a type definition will automatically reflect everywhere the type is used. One might argue that you can achieve similar code level documentation with e.g. [JSDoc](https://jsdoc.app/about-getting-started.html), but it is not connected to the code as tightly as TypeScript's types, and may thus get out of sync more easily and is also more verbose.
 类型可以在整个代码基中重用，对类型定义的更改将自动反映所有使用该类型的地方。 有人可能会说，你可以用[ JSDoc ]( https://JSDoc.app/about-getting-started.html 文档)实现类似的代码级文档，但是它与代码的连接不像 TypeScript 的类型那样紧密，因此可能更容易脱离同步，而且也更加冗长。
@@ -251,7 +251,7 @@ With the help of TypeScript it is also very easy to start using the newest JavaS
 
 
 As mentioned above, TypeScript type annotations and type checking exist only at compile time and no longer at runtime. Even if the compiler does not throw any errors, runtime errors are still possible.
-如上所述，TypeScript 类型注释和类型检查仅在编译时存在，在运行时不再存在。 即使编译器没有抛出任何错误，运行时错误仍然是可能的。
+如上所述，TypeScript 类型便笺和类型检查仅在编译时存在，在运行时不再存在。 即使编译器没有抛出任何错误，运行时错误仍然是可能的。
 These runtime errors are especially common when handling external input, such as data received from a network request.
 这些运行时错误在处理外部输入(如从网络请求接收的数据)时特别常见。
 

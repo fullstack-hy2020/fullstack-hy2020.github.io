@@ -38,7 +38,7 @@ After running the command, you should have a complete basic react app, that uses
 在运行命令之后，你应该有一个完整的基本React应用，它使用打字稿。 只需在应用根文件夹中运行<i>npm start</i> 即可启动该应用。
 
 If you browse through the files and folders, you will notice that the app is not that different from the one you would have initialised with pure JavaScript. Basically the only differences are that the <i>.js</i> and <i>.jsx</i> files are now renamed to <i>.ts</i> and <i>.tsx</i> files, they contain some type annotations, and the root folder also contains a<i>tsconfig.json</i> file.
-如果你浏览这些文件和文件夹，你会发现这个应用和你用纯 JavaScript 初始化的应用没什么不同。 基本上，唯一的区别是 i。 我和我。 Jsx /<i>文件现在改名为 i。 Ts</i> 和我。 Tsx /<i>文件，它们包含一些类型注释，根文件夹也包含一个 i tsconfig.json</i> 文件。
+如果你浏览这些文件和文件夹，你会发现这个应用和你用纯 JavaScript 初始化的应用没什么不同。 基本上，唯一的区别是 i。 我和我。 Jsx /<i>文件现在改名为 i。 Ts</i> 和我。 Tsx /<i>文件，它们包含一些类型便笺，根文件夹也包含一个 i tsconfig.json</i> 文件。
 
 Now, let's take a look at the <i>tsconfig.json</i> file that has been created for us. Everything should be more or less fine within the file, except for that at the moment the configuration also allows JavaScript files to be compiled, because <i>allowJs</i> is set to <i>true</i>. That would be fine if you need to mix TypeScript and JavaScript (e.g. if you are in the middle of transforming a JavaScript project into TypeScript or some other reason), but we want our app to be purely TypeScript, so let's change that setting to <i>false</i>.
 现在，让我们看看为我们创建的<i>tsconfig.json</i> 文件。 文件中的所有内容都应该差不多正常，只是目前的配置还允许编译 JavaScript 文件，因为<i>allowJs</i> 被设置为<i>true</i>。 如果你需要混合使用打字脚本和 JavaScript (例如，如果你正在将一个 JavaScript 项目转换成打字脚本或者其他原因) ，那么这样做是可以的，但是我们希望我们的应用是纯粹的打字脚本，所以让我们把这个设置改为<i>false</i>。
@@ -132,7 +132,7 @@ With the help of TypeScript we don't need the <i>prop-types</i> package anymore 
 在 TypeScript 的帮助下，我们不再需要<i>prop-types</i> 包来定义 prop 类型，因为我们可以通过使用 FunctionComponent 类型或者更短的别名 FC，在 TypeScript 本身的帮助下定义类型。
 
  When using TypeScript with React components, the type annotations look a bit different than with other TypeScript code. We basically add a type for the component variable, instead of the function and it's props. _React.FunctionComponent_ is a so called [generic](https://www.typescriptlang.org/docs/handbook/generics.html) type, to which you can pass a type as a sort of argument, that it then uses in the final type.
-当使用 TypeScript 和 React 组件时，类型注释看起来与其他 TypeScript 代码有点不同。 我们基本上为组件变量添加一个类型，而不是函数和它的props。 做出React。 Functioncomponent 是一种所谓的[泛型](泛型)类型，您可以将类型作为参数传递给它，然后它在最后的类型中使用这个 https://www.typescriptlang.org/docs/handbook/generics.html。
+当使用 TypeScript 和 React 组件时，类型便笺看起来与其他 TypeScript 代码有点不同。 我们基本上为组件变量添加一个类型，而不是函数和它的props。 做出React。 Functioncomponent 是一种所谓的[泛型](泛型)类型，您可以将类型作为参数传递给它，然后它在最后的类型中使用这个 https://www.typescriptlang.org/docs/handbook/generics.html。
 
 The type declaration for _React.FC_ and _React.FunctionComponent_ look like the following:
 和 React. FunctionComponent 的类型声明如下所示:
@@ -375,7 +375,7 @@ type CoursePart = CoursePartOne | CoursePartTwo | CoursePartThree;
 ```
 
 Now we can set the type for our <i>courseParts</i> variable and after that our editor will automatically give an error if we use a wrong type for an attribute, use an extra attribute, or forget to set an expected attribute. You can test this by commenting out any attribute for any course part. Thanks to the <i>name</i> [string literal](http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types) TypeScript can identify which course part requires which additional attributes, even if the variable is defined to use the type union.
-现在我们可以为<i>courseParts</i> 变量设置类型，之后，如果我们对属性使用了错误的类型，或者使用了额外的属性，或者忘记设置预期的属性，我们的编辑器将自动给出一个错误。 您可以通过注释掉任何课程部分的任何属性来测试这一点。 多亏了<i>name</i> [ string literal ]( http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types ) TypeScript 可以识别哪个课程部分需要哪些附加属性，即使变量被定义为使用类型联合。
+现在我们可以为<i>courseParts</i> 变量设置类型，之后，如果我们对属性使用了错误的类型，或者使用了额外的属性，或者忘记设置预期的属性，我们的编辑器将自动给出一个错误。 您可以通过便笺掉任何课程部分的任何属性来测试这一点。 多亏了<i>name</i> [ string literal ]( http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types ) TypeScript 可以识别哪个课程部分需要哪些附加属性，即使变量被定义为使用类型联合。
 
 But we're not satisfied yet! There is still a lot of duplication in the types that we have created, and that is something we want to avoid. We start off by identifying the attributes in common for all course parts and define a base type containing them, and then we will [extend](http://www.typescriptlang.org/docs/handbook/interfaces.html#extending-interfaces) that base type to create our part specific types:
 但是我们还不满意！ 在我们创建的类型中仍然存在大量的重复，这是我们希望避免的。 我们首先确定所有课程部分的公共属性，并定义包含它们的基类型，然后我们将[扩展]( http://www.typescriptlang.org/docs/handbook/interfaces.html#extending-interfaces )这个基类型来创建我们的部分特定类型:
@@ -444,13 +444,13 @@ default:
 ```
 
 And would also comment out the <i>Deeper type usage</i> case block, we would see the following error:
-并且注释掉<i>Deeper 类型 usage</i> case 块，我们会看到下面的错误:
+并且便笺掉<i>Deeper 类型 usage</i> case 块，我们会看到下面的错误:
 
 ![](../../images/9/33.png)
 
 
 The error description <i>Argument of type 'CoursePartThree' is not assignable to parameter of type 'never'</i> tells us that we are using a variable somewhere, where it should never be used, so we know that something needs to be fixed. When we remove the added comments from the <i>Deeper type usage</i> case block, you will see that the error goes away.
-类型“ coursepart3”的参数<i>的错误描述不能分配给“ never”</i> 类型的参数，这告诉我们我们在某个地方使用了一个变量，而这个变量永远不应该被使用，因此我们知道有些东西需要修复。 当我们从<i>Deeper 类型 usage</i> case 块中删除添加的注释时，您将看到错误消失了。
+类型“ coursepart3”的参数<i>的错误描述不能分配给“ never”</i> 类型的参数，这告诉我们我们在某个地方使用了一个变量，而这个变量永远不应该被使用，因此我们知道有些东西需要修复。 当我们从<i>Deeper 类型 usage</i> case 块中删除添加的便笺时，您将看到错误消失了。
 
 </div>
 
@@ -654,7 +654,7 @@ The state is an object with one key <i>patients</i>, which has a [dictionary](ht
 <!--
 <!--
 You can also think of a scenario where we may have state as a union. Eg. using states type as an indicator whether user has logged in:
-你也可以想象一个场景，我们可以把州看作一个联盟。 例如。 使用状态类型作为用户是否登录的指示器:
+你也可以想象一个场景，我们可以把州看作一个联盟。 例如。 使用状态类型作为用户是否登录的说明器:
 
 ```js
 export type State =
@@ -873,8 +873,8 @@ We will soon add new type <i>Entry</i> for our app that represents a light weigh
 Before going to this, let us do some preparatory work.
 在此之前，让我们做一些准备工作。
 
-#### 9.16: patientor, step1
-9.16: patientor，step1
+#### 9.16: patientor, 步骤1
+9.16: patientor，步骤1
 
 Create an endpoint <i>/api/patients/:id</i> to that returns all of the patient information for one patient, including also the array of patient entries that is still empty for all the patients. For the time being, expand the backend types as follows:
 创建一个端点<i>/ api / patients / : id</i>，该端点返回一个患者的所有患者信息，还包括所有患者仍为空的患者条目数组。 目前，扩展后端类型如下:
@@ -903,8 +903,8 @@ Response should look as follows:
 ![](../../images/9/38a.png)
 
 
-#### 9.17: patientor, step2
-9.17: patientor，step2
+#### 9.17: patientor, 步骤2
+9.17: patientor，步骤2
 
 Create a page for showing a patient's full information in the frontend. 
 创建一个页面，在前端显示病人的全部信息。
@@ -942,8 +942,8 @@ The gender is shown with react-semantic-ui component [Icon](https://react.semant
 const { id } = useParams<{ id: string }>();
 ```
 
-#### 9.18: patientor, step3
-9.18: patientor，step3
+#### 9.18: patientor, 步骤3
+9.18: patientor，步骤3
 
 We are currently creating the <i>action</i> objects everywhere in the code when dispatching the action, e.g. component <i>App</i> has the following:
 当分派动作时，我们正在代码中随处创建<i>action</i> 对象，例如，component<i>App</i> 具有如下特性:
@@ -1101,8 +1101,8 @@ export type Entry =
 ### Exercises 9.19.-9.22.
 练习9.19-9.22。
 
-#### 9.19: patientor, step4
-9.19: patientor，step4
+#### 9.19: patientor, 步骤4
+9.19: patientor，步骤4
 
 Define the types <i>OccupationalHealthCareEntry</i> and <i>HospitalEntry</i> so that those conform with the example data. Ensure that your backend returns the entries properly when you go to a individual patient route
 定义类型<i>occupationalhealthcarenentry</i> 和<i>HospitalEntry</i>，以便这些类型与示例数据一致。 确保您的后端返回正确的条目时，您去一个单独的病人路线
@@ -1113,8 +1113,8 @@ Define the types <i>OccupationalHealthCareEntry</i> and <i>HospitalEntry</i> so 
 Use types properly in the backend! For now there is no need to do a proper validation for all the fields of the entries in the backend, it is enough e.g. to check that the field <i>type</i> has a correct value.
 在后端正确使用类型！ 现在不需要对后端中的条目的所有字段进行适当的验证，只需检查字段<i>type</i> 的值是否正确即可。
 
-#### 9.20: patientor, step5
-9.20: patientor，step5
+#### 9.20: patientor, 步骤5
+9.20: patientor，步骤5
 
 Extend the patient page in the frontend to list the <i>date</i>, <i>description</i> and <i>diagnose codes</i> of patient's entries. 
 扩展前端的患者页面，列出患者条目的<i>date</i>、<i>description</i> 和<i>诊断代码</i>。
@@ -1128,8 +1128,8 @@ Your solution could look like this:
 ![](../../images/9/41.png)
 
 
-#### 9.21: patientor, step6
-9.21: patientor，step6
+#### 9.21: patientor, 步骤6
+9.21: patientor，步骤6
 
 Fetch and add diagnoses to application state from <i>/api/diagnosis</i> endpoint. Use the new diagnosis data to show descriptions for patients diagnosis code:
 从<i>/ api / diagnosis</i> 端点获取诊断并将诊断添加到应用状态。 使用新的诊断数据显示病人诊断代码的描述:
@@ -1137,8 +1137,8 @@ Fetch and add diagnoses to application state from <i>/api/diagnosis</i> endpoint
 ![](../../images/9/42.png)
 
 
-#### 9.22: patientor, step7
-9.22: patientor，step7
+#### 9.22: patientor, 步骤7
+9.22: patientor，步骤7
 
 Extend the entry-listing in the patient page to include the Entry's details with a new component that shows rest of the information of the patients entries distinguishing different types from each other. 
 扩展患者页面中的条目列表，以包含条目的详细信息，并使用一个新组件显示患者条目的其余信息，以区分不同的类型。
@@ -1476,8 +1476,8 @@ With this material you should be able to complete the rest of this part's exerci
 ### Exercises 9.23.-9.26.
 练习9.23-9.26。
 
-#### 9.23: patientor, step8
-9.23: patientor，step8
+#### 9.23: patientor, 步骤8
+9.23: patientor，步骤8
 
 So far we have established that the patients can have different types of entries, but we don't yet have any way of adding entries for our patients in our app, so it would at the moment be a pretty useless electronic medical record. 
 到目前为止，我们已经确定病人可以有不同类型的条目，但是我们还没有任何方法在我们的应用中为我们的病人添加条目，所以目前它将是一个非常无用的电子医疗记录。
@@ -1488,8 +1488,8 @@ Your next task is to add an endpoint <i>/api/patients/:id/entries</i> to your ba
 Remember that we have different kinds of entries in our app, so our backend should also support all those types and check that at least all required fields are given for each type.
 请记住，我们的应用中有不同类型的条目，所以我们的后端也应该支持所有这些类型，并检查至少所有必需的字段都为每种类型提供了。
 
-#### 9.24: patientor, step9
-9.24: patientor，step9
+#### 9.24: patientor, 步骤9
+9.24: patientor，步骤9
 
 Now that our backend supports adding of entries, we want to add the corresponding functionality the frontend. In this exercise you should add a form for adding an entry for a patient. An intuitive place for opening the form would be on the patient page. 
 现在，我们的后端支持添加条目，我们希望添加相应的功能前端。 在这个练习中，您应该添加一个用于为病人添加条目的表单。 打开表单的一个直观位置是患者页面。
@@ -1559,14 +1559,14 @@ There is also redily made component _NumberField_ for the numeric values with a 
 />
 ```
 
-#### 9.25: patientor, step10
-9.25: patientor，step10
+#### 9.25: patientor, 步骤10
+9.25: patientor，步骤10
 
 Extend your solution so that it displays error message if some required values are missing or formatted incorrectly. 
 扩展解决方案，以便在缺少某些必需值或格式不正确时显示错误消息。
 
-#### 9.26: patientor, step11
-9.26: patientor，step11
+#### 9.26: patientor, 步骤11
+9.26: patientor，步骤11
 
 Extend your solution to support <i>two</i> entry types and displays error message if some required values are missing. You do not need to care about the possible errors in server response.
 扩展您的解决方案以支持<i>two</i> 条目类型，并在缺少某些必需值时显示错误消息。 您不需要关心服务器响应中可能出现的错误。
@@ -1577,8 +1577,8 @@ The easiest but surely not the most elegant way to do this exercise is to have a
 Getting the types to work properly might be a slight challenge if you use just a single form.
 如果只使用单个窗体，那么让类型正常工作可能是一个小小的挑战。
 
-#### 9.27: patientor, step12
-9.27: patientor，step12
+#### 9.27: patientor, 步骤12
+9.27: patientor，步骤12
 
 Extend your solution so that it supports <i>all the entry types</i> and displays error message if some required values are missing or formatted incorrectly. You do not need to care about the possible errors in server response.
 扩展您的解决方案，使其支持所有的条目类型 / i，并显示错误消息，如果一些必需的值丢失或格式不正确。 您不需要关心服务器响应中可能出现的错误。

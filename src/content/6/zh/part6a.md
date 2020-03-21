@@ -320,7 +320,7 @@ When the state in the store is changed, React is not able to automatically reren
 
 
 Our aim is to modify our note application to use Redux for state management. However, let's first cover a few key concepts through a simplified note application. 
-我们的目标是修改我们的笔记应用，使用 Redux 进行状态管理。 但是，让我们首先通过一个简化的笔记应用介绍一些关键概念。
+我们的目标是修改我们的便笺应用，使用 Redux 进行状态管理。 但是，让我们首先通过一个简化的便笺应用介绍一些关键概念。
 
 
 The first version of our application is the following
@@ -373,11 +373,11 @@ const App = () => {
 
 
 So far the application does not have the functionality for adding new notes, although it is possible to do so by dispatching <i>NEW\_NOTE</i> actions. 
-到目前为止，应用还没有添加新注释的功能，尽管可以通过分派<i>NEW  NOTE</i> 操作来实现。
+到目前为止，应用还没有添加新便笺的功能，尽管可以通过分派<i>NEW  NOTE</i> 操作来实现。
 
 
 Now the actions have a type and a field <i>data</i>, which contains the note to be added:
-现在这些操作有一个类型和一个字段<i>data</i>，其中包含要添加的注释:
+现在这些操作有一个类型和一个字段<i>data</i>，其中包含要添加的便笺:
 
 ```js
 {
@@ -409,7 +409,7 @@ const noteReducer = (state = [], action) => {
 
 
 The state is now an Array. <i>NEW\_NOTE</i>- type actions cause a new note to be added to the state with the [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) method. 
-该状态现在是一个数组。<i>NEW  NOTE</i>-type action 导致使用[ push ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/push )方法向状态添加一个新的注释。
+该状态现在是一个数组。<i>NEW  NOTE</i>-type action 导致使用[ push ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/push )方法向状态添加一个新的便笺。
 
 
 The application seems to be working, but the reducer we have declared is bad. It breaks the [basic assumption](https://github.com/reactjs/redux/blob/master/docs/basics/Reducers.md#handling-actions) of Redux reducer that reducers must be [pure functions](https://en.wikipedia.org/wiki/Pure_function).
@@ -597,7 +597,7 @@ const noteToChange = state.find(n => n.id === id)
 
 
 then we create a new object, which is a <i>copy</i> of the original note, only the value of the <i>important</i> field has been changed to the opposite of what it was: 
-然后我们创建一个新对象，它是原始音符的<i>复制</i>，只有<i>important</i> 字段的值被修改为相反的值:
+然后我们创建一个新对象，它是原始便笺的<i>复制</i>，只有<i>important</i> 字段的值被修改为相反的值:
 
 ```js
 const changedNote = { 
@@ -608,7 +608,7 @@ const changedNote = {
 
 
 A new state is then returned. We create it by taking all of the notes from the old state except for the desired note, which we replace with its slightly altered copy: 
-然后返回一个新状态。 我们从旧的状态中获取所有的笔记来创建它，除了需要的笔记，我们用稍微修改过的副本来替换它:
+然后返回一个新状态。 我们从旧的状态中获取所有的便笺来创建它，除了需要的便笺，我们用稍微修改过的副本来替换它:
 
 ```js
 state.map(note =>
@@ -625,7 +625,7 @@ Because we now have quite good tests for the reducer, we can refactor the code s
 
 
 Adding a new note creates the state it returns with Arrays _concat_-function. Let's take a look at how we can achieve the same by using the JavaScript [array spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) -syntax:
-添加新注释将创建它使用 Arrays concat-function 返回的状态。 让我们来看看我们如何通过使用 JavaScript [数组扩展]( https://developer.mozilla.org/en-us/docs/web/JavaScript/reference/operators/spread_operator )-语法来达到同样的目的:
+添加新便笺将创建它使用 Arrays concat-function 返回的状态。 让我们来看看我们如何通过使用 JavaScript [数组扩展]( https://developer.mozilla.org/en-us/docs/web/JavaScript/reference/operators/spread_operator )-语法来达到同样的目的:
 
 ```js
 const noteReducer = (state = [], action) => {
@@ -713,8 +713,8 @@ rm -rf .git
 npm install
 ```
 
-#### 6.1: unicafe revisited, step1
-6.1: unicafe revisited，step1
+#### 6.1: unicafe revisited, 步骤1
+6.1: unicafe revisited，步骤1
 
 
 Before implementing the functionality of the UI, let's implement the functionality required by the store. 
@@ -825,8 +825,8 @@ Redux-notes (/ en / part6 / flux 架构和 redux # pure-functions-immutable)是�
 example above. 
 上面的例子。
 
-#### 6.2: unicafe revisited, step2
-6.2: unicafe revisited，step2
+#### 6.2: unicafe revisited, 步骤2
+6.2: unicafe revisited，步骤2
 
 
 Now implement the actual functionality of the application. 
@@ -843,7 +843,7 @@ Now implement the actual functionality of the application.
 
 
 Let's add the functionality for adding new notes and changing their importance: 
-让我们添加添加新笔记和改变其重要性的功能:
+让我们添加添加新便笺和改变其重要性的功能:
 
 ```js
 const generateId = () =>
@@ -905,7 +905,7 @@ You can read more about uncontrolled forms [here](https://goshakkk.name/controll
 
 
 The method handling adding new notes is simple, it just dispatches the action for adding notes: 
-添加新笔记的方法很简单，它只是分派添加笔记的动作:
+添加新便笺的方法很简单，它只是分派添加便笺的动作:
 
 ```js
 addNote = (event) => {
@@ -936,7 +936,7 @@ We can get the content of the new note straight from the form field. Because the
 
 
 A note's importance can be changed by clicking its name. The event handler is very simple: 
-可以通过点击它的名字来改变注释的重要性。事件处理程序非常简单:
+可以通过点击它的名字来改变便笺的重要性。事件处理程序非常简单:
 
 ```js
 toggleImportance = (id) => {
@@ -1224,7 +1224,7 @@ This allows all components to make changes to the state of the redux-store.
 
 
 The component can access the notes stored in the store with the [useSelector](https://react-redux.js.org/api/hooks#useselector)-hook of the react-redux library.
-该组件可以通过 react-redux 库的[ useSelector ]( https://react-redux.js.org/api/hooks#useSelector )挂钩访问存储在商店中的笔记。
+该组件可以通过 react-redux 库的[ useSelector ]( https://react-redux.js.org/api/hooks#useSelector )挂钩访问存储在商店中的便笺。
 
 
 ```js
@@ -1242,7 +1242,7 @@ const App = () => {
 <i>useSelector</i> receives a function as a paramter. The function either either searches for or selectes data from the redux-store. 
 I 使用 elector / i 接收一个函数作为参数，该函数可以搜索或选择来自 redux-store 的数据。
 Here we need all of the notes, so our selector function returns the whole state:
-这里我们需要所有的注释，所以我们的 selector 函数返回整个状态:
+这里我们需要所有的便笺，所以我们的 selector 函数返回整个状态:
 
 
 ```js
@@ -1265,7 +1265,7 @@ which is a shorthand for
 Usually selector functions are a bit more interesting, and return only selected parts of the contents of the redux-store. 
 通常选择器函数比较有趣，只返回 redux-store 内容的选定部分。
 We could for example return only notes marked as important:
-例如，我们可以只返回标记为重要的注释:
+例如，我们可以只返回标记为重要的便笺:
 
 ```js
 const importantNotes = useSelector(state => state.filter(note => note.important))  
@@ -1277,7 +1277,7 @@ const importantNotes = useSelector(state => state.filter(note => note.important)
 
 
 Let's separate creating a new note into its own component.
-让我们将创建新笔记分离到它自己的组件中。
+让我们将创建新便笺分离到它自己的组件中。
 
 ```js
 import React from 'react'
@@ -1311,7 +1311,7 @@ Unlike in the React code we did without Redux, the event handler for changing th
 
 
 We'll also separate the list of notes and displaying a single note into their own components (which will both be placed in the <i>Notes.js</i> file ):
-我们还将分离注释列表，并将一个注释显示到它们自己的组件中(这两个组件都将放在<i>Notes.js</i> 文件中) :
+我们还将分离便笺列表，并将一个便笺显示到它们自己的组件中(这两个组件都将放在<i>Notes.js</i> 文件中) :
 
 ```js
 import React from 'react'
@@ -1350,7 +1350,7 @@ export default Notes
 ```
 
 The logic for changing the importance of a note is now in the component managing the list of notes. 
-改变注释重要性的逻辑现在在管理注释列表的组件中。
+改变便笺重要性的逻辑现在在管理便笺列表的组件中。
 
 
 There is not much code left in <i>App</i>:
@@ -1369,7 +1369,7 @@ const App = () => {
 ```
 
 <i>Note</i>, responsible for rendering a single note, is very simple, and is not aware that the event handler it gets as props dispatches an action. These kind of components are called [presentational](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) in React terminology. 
-I Note / i 负责渲染单个注释，它非常简单，并且不知道它获得的事件处理程序作为 props 分派动作。 在 React 术语中，这类组件被称为[表象]( https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)。
+I Note / i 负责渲染单个便笺，它非常简单，并且不知道它获得的事件处理程序作为 props 分派动作。 在 React 术语中，这类组件被称为[表象]( https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)。
 
 
 <i>Notes</i>, on the other hand, is a [container](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) component, as it contains some application logic: it defines what the event handlers of the <i>Note</i> components do and coordinates the configuration of <i>presentational</i> components, that is, the <i>Note</i>s.
@@ -1420,14 +1420,14 @@ After completing these exercises, your application should look like this
 ![](../../images/6/3.png)
 
 
-#### 6.3: anecdotes, step1
+#### 6.3: anecdotes, 步骤1
 6.3: 轶事，第一步
 
 
 Implement the functionality for voting anecdotes. The amount of votes must be saved to a Redux-store.
 实现投票趣闻的功能。投票数量必须保存到 redux 存储中。
 
-#### 6.4: anecdotes, step2
+#### 6.4: anecdotes, 步骤2
 6.4: 轶事，第二步
 
 
@@ -1438,28 +1438,28 @@ Implement the functionality for adding new anecdotes.
 You can keep the form uncontrolled, like we did [earlier](/en/part6/flux_architecture_and_redux#uncontrolled-form).
 您可以保持表单不受控制，就像我们[前面]所做的(/ en / part6 / flux 架构和 redux # uncontrolled-form)。
 
-#### 6.5*: anecdotes, step3
+#### 6.5*: anecdotes, 步骤3
 # # # # 6.5 # : 轶事，第三步
 
 
 Make sure that the anecdotes are ordered by the number of votes. 
 确保这些轶事是按票数排序的。
 
-#### 6.6: anecdotes, step4
+#### 6.6: anecdotes, 步骤4
 6.6: 轶事，第四步
 
 
 If you haven't done so already, separate the creation of action-objects to [action creator](https://redux.js.org/basics/actions#action-creators)-functions and place them in the <i>src/reducers/anecdoteReducer.js</i> file, so do like we have been doing since the chapter [action creators](/en/part6/flux_architecture_and_redux#action-creators).
 如果你还没有这样做，将动作对象的创建分离到[动作创建器]( https://redux.js.org/basics/actions#action-creators )-函数中，并将它们放在<i>src / reducers / 轶事教育器中。 Js</i> 文件，就像我们在[ action creators ]一章(/ en / part6 / flux architecture and redux # action-creators)中所做的那样。
 
-#### 6.7: anecdotes, step5
+#### 6.7: anecdotes, 步骤5
 6.7: 轶事，第五步
 
 
 Separate the creation of new anecdotes into its own component called <i>AnecdoteForm</i>. Move all logic for creating a new anecdote into this new component. 
 将新奇闻的创建分离到它自己的名为 i / 轶事 / 形式的组件中。 将创建一个新轶事的所有逻辑移动到这个新组件中。
 
-#### 6.8: anecdotes, step6
+#### 6.8: anecdotes, 步骤6
 6.8: 轶事，第六步
 
 

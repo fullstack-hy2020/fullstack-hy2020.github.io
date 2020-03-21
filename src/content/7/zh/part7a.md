@@ -30,7 +30,7 @@ Our app could have a main page
 
 
 and separate pages for showing information on notes and users:
-以及显示备注及使用者资料的独立网页:
+以及显示便笺及使用者资料的独立网页:
 
 ![](../../images/7/2ea.png)
 
@@ -111,7 +111,7 @@ Each view is implemented as its own component. We store the view component infor
 每个视图都作为自己的组件实现。 我们将视图组件信息存储在名为<i>page</i> 的应用状态中。 这个信息告诉我们，表示视图的哪个组件应该显示在菜单栏下面。
 
 However, the method is not very optimal. As we can see from the pictures, the address stays the same even though at times we are in different views. Each view should preferably have its own address, e.g. to make bookmarking possible. The <i>back</i>-button doesn't work as expected for our application either, meaning that <i>back</i> doesn't move you to the previously displayed view of the application, but somewhere completely different. If the application were to grow even bigger and we wanted to, for example, add separate views for each user and note, then this self made <i>routing</i>, which means the navigation management of the application, would get overly complicated.
-然而，这种方法并不十分理想。 正如我们从图片中看到的，即使有时我们处于不同的视角，地址仍然保持不变。 每个视图最好都有自己的地址，例如使书签成为可能。<i>back</i>-button 对于我们的应用也不能正常工作，这意味着<i>back</i> 不会将您移动到以前显示的应用视图，而是移动到完全不同的位置。 如果应用变得更大，例如，我们希望为每个用户添加单独的视图和注释，那么这个自制的<i>routing</i> (这意味着应用的导航管理)将变得过于复杂。
+然而，这种方法并不十分理想。 正如我们从图片中看到的，即使有时我们处于不同的视角，地址仍然保持不变。 每个视图最好都有自己的地址，例如使书签成为可能。<i>back</i>-button 对于我们的应用也不能正常工作，这意味着<i>back</i> 不会将您移动到以前显示的应用视图，而是移动到完全不同的位置。 如果应用变得更大，例如，我们希望为每个用户添加单独的视图和便笺，那么这个自制的<i>routing</i> (这意味着应用的导航管理)将变得过于复杂。
 
 
 
@@ -263,16 +263,16 @@ Let's examine the slightly modified version from the previous example. The compl
 让我们检查一下前一个例子中稍微修改过的版本，这个例子的完整代码可以在这里找到( https://github.com/fullstack-hy2020/misc/blob/master/router-app-v1.js )。
 
 The application now contains five different views, the display of which is controlled by the router. In addition to the components from the previous example (<i>Home</i>, <i>Notes</i> and <i>Users</i>), we have <i>Login</i> representing the login view and <i>Note</i> representing the view of a single note.
-应用现在包含五个不同的视图，其显示由路由器控制。 除了前面示例中的组件(i Home / i、<i>Notes</i> 和<i>Users</i>)外，我们还有<i>Login</i> 表示登录视图，i Note / i 表示单个注释的视图。
+应用现在包含五个不同的视图，其显示由路由器控制。 除了前面示例中的组件(i Home / i、<i>Notes</i> 和<i>Users</i>)外，我们还有<i>Login</i> 表示登录视图，i Note / i 表示单个便笺的视图。
 
 <i>Home</i> and <i>Users</i> are unchanged from the previous exercise.  <i>Notes</i> is a bit more complicated. It renders the list of notes passed to it as props in such a way that the name of each note is clickable.
-I Home /<i>和 i Users</i> 与上次练习相同。<i>Notes</i> 有点复杂。 它以这样一种方式渲染作为props传递给它的音符列表，即每个音符的名称都是可点击的。
+I Home /<i>和 i Users</i> 与上次练习相同。<i>Notes</i> 有点复杂。 它以这样一种方式渲染作为props传递给它的便笺列表，即每个便笺的名称都是可点击的。
 
 ![](../../images/7/3ea.png)
 
 
 The ability to click a name is implemented with the component <i>Link</i>, and clicking the name of a note whose id is 3 would trigger an event that changes the address of the browser into <i>notes/3</i>:
-单击名称的能力是通过组件<i>Link</i> 实现的，单击 id 为3的注释的名称将触发一个事件，该事件将浏览器地址更改为<i>notes / 3</i>:
+单击名称的能力是通过组件<i>Link</i> 实现的，单击 id 为3的便笺的名称将触发一个事件，该事件将浏览器地址更改为<i>notes / 3</i>:
 
 ```js
 const Notes = ({notes}) => (
@@ -323,7 +323,7 @@ We define parametrized urls in the routing in <i>App</i>-component as follows:
 
 
 We define the route rendering a specific note "express style" by marking the parameter with a colon <i>:id</i>
-我们通过用冒号 i: id / i 标记参数来定义渲染特定注释的路由“ express style”
+我们通过用冒号 i: id / i 标签参数来定义渲染特定便笺的路由“ express style”
 
 ```js
 <Route path="/notes/:id">
@@ -332,7 +332,7 @@ We define the route rendering a specific note "express style" by marking the par
 
 -- kun selain siirtyy muistiinpanon yksil iv n osoitteeseen，esim.<i>/ notes / 3</i>，render id n komponentti<i>Note</i>: --
 When a browser navigates to the url for a specific note, for example <i>/notes/3</i>, we render the <i>Note</i> component:
-当浏览器导航到特定笔记的 url 时，例如<i>/ notes / 3</i>，我们渲染<i>Note</i> 组件:
+当浏览器导航到特定便笺的 url 时，例如<i>/ notes / 3</i>，我们渲染<i>Note</i> 组件:
 
 ```js
 import {
@@ -356,7 +356,7 @@ const Note = ({ notes }) => {
 
 
 The _Note_ component receives all of the notes as props <i>notes</i>, and it can access the url parameter (the id of the note to be displayed) with the [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) function of the react-router.
-Note 组件接收所有的笔记作为 props<i>notes</i>，它可以通过 react-router 的[ useParams ]( https://reacttraining.com/react-router/web/api/hooks/useParams )函数访问 url 参数(要显示的笔记的 id)。
+Note 组件接收所有的便笺作为 props<i>notes</i>，它可以通过 react-router 的[ useParams ]( https://reacttraining.com/react-router/web/api/hooks/useParams )函数访问 url 参数(要显示的便笺的 id)。
 
 ### useHistory
 使用历史
@@ -533,7 +533,7 @@ We define an element common for modern web apps called <i>footer</i>, which defi
 
 
 Our application has a flaw. The _Note_ component receives all of the notes, even though it only displays the one which's id matches the url parameter:
-我们的申请有一个缺陷。 组件接收所有的笔记，即使它只显示与 url 参数匹配的 id:
+我们的申请有一个缺陷。 组件接收所有的便笺，即使它只显示与 url 参数匹配的 id:
 
 
 ```js
@@ -564,7 +564,7 @@ const Note = ({ note }) => {
 
 
 One way to do this would be to use react-router's [useRouteMatch](https://reacttraining.com/react-router/web/api/Hooks/useroutematch) hook to figure out the id of the note to be displayed in the _App_ component.
-一种方法是使用 react-router 的[ useRouteMatch ]( https://reacttraining.com/react-router/web/api/hooks/useRouteMatch )钩子来计算出应用组件中显示的注释的 id。
+一种方法是使用 react-router 的[ useRouteMatch ]( https://reacttraining.com/react-router/web/api/hooks/useRouteMatch )钩子来计算出应用组件中显示的便笺的 id。
 
 
 
@@ -638,7 +638,7 @@ const match = useRouteMatch('/notes/:id')
 
 
 If the url matches _/notes/:id_, the match variable will contain an object from which we can access the parametrized part of the path, the id of the note to be displayed, and we can then fetch the correct note to display
-如果 url 匹配 / notes / : id，match 变量将包含一个对象，我们可以从该对象访问路径的参数化部分，即要显示的注释的 id，然后我们可以获取要显示的正确注释
+如果 url 匹配 / notes / : id，match 变量将包含一个对象，我们可以从该对象访问路径的参数化部分，即要显示的便笺的 id，然后我们可以获取要显示的正确便笺
 
 ```js
 const note = match 
@@ -678,7 +678,7 @@ npm install
 npm start
 ```
 
-#### 7.1: routed anecdotes, step1
+#### 7.1: routed anecdotes, 步骤1
 7.1: 失败的奇闻轶事，第一步
 
 Add React Router to the application so that by clicking links in the <i>Menu</i>-component the view can be changed.
@@ -699,7 +699,7 @@ The creation of a new anecdote should happen e.g. in the path <i>create</i>:
 ![](../../assets/teht/41.png)
 
 
-#### 7.2: routed anecdotes, step2
+#### 7.2: routed anecdotes, 步骤2
 7.2: 失败的奇闻轶事，第二步
 
 Implement a view for showing a single anecdote:
@@ -714,7 +714,7 @@ Navigating to the page showing the single anecdote is done by clicking the name 
 ![](../../assets/teht/43.png)
 
 
-#### 7.3: routed anecdotes, step3
+#### 7.3: routed anecdotes, 步骤3
 7.3: 失败的奇闻轶事，第三步
 
 The default functionality of the creation form is quite confusing, because nothing seems to be happening after creating a new anecdote using the form.

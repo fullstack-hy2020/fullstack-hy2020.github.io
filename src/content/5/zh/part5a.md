@@ -14,7 +14,7 @@ In the last two parts, we have mainly concentrated on the backend, and the front
 
 
 At the moment the frontend shows existing notes, and lets users change the state of a note from important to not important and vice versa. New notes cannot be added anymore because of the changes made to the backend in part 4: the backend now expects that a token verifying a user's identity is sent with the new note. 
-目前前端显示现有的注释，并允许用户将注释的状态从重要变为不重要，反之亦然。 由于在第4章节中对后端进行了更改，因此不能再添加新的注释: 后端现在希望随新注释一起发送一个验证用户身份的令牌。
+目前前端显示现有的便笺，并允许用户将便笺的状态从重要变为不重要，反之亦然。 由于在第4章节中对后端进行了更改，因此不能再添加新的便笺: 后端现在希望随新便笺一起发送一个验证用户身份的令牌。
 
 
 We'll now implement a part of the required user management functionality to the frontend. Let's begin with user login. Throughout this part we will assume that new users will not be added from the frontend. 
@@ -22,7 +22,7 @@ We'll now implement a part of the required user management functionality to the 
 
 
 A login form has now been added to the top of the page. The form for adding new notes has also been moved to the top of the list of notes. 
-登录表单现在已经添加到页面顶部。 添加新注释的表单也被移到了注释列表的顶部。
+登录表单现在已经添加到页面顶部。 添加新便笺的表单也被移到了便笺列表的顶部。
 
 ![](../../images/5/1e.png)
 
@@ -183,7 +183,7 @@ If the login fails, or running the function _loginService.login_ results in an e
 
 
 User is not notified about a successful login in any way. Let's modify the application to show the login form only <i>if the user is not logged in</i> so _user === null_. The form for adding new notes is shown only if <i>user is logged in</i>, so <i>user</i> contains the user details. 
-不会以任何方式通知用户成功登录。 让我们修改应用，只有在用户没有登录 /<i>所以用户 null 时才显示登录表单 i。 只有当 i user 登录</i> 时才会显示添加新注释的表单，因此<i>user</i> 包含用户详细信息。
+不会以任何方式通知用户成功登录。 让我们修改应用，只有在用户没有登录 /<i>所以用户 null 时才显示登录表单 i。 只有当 i user 登录</i> 时才会显示添加新便笺的表单，因此<i>user</i> 包含用户详细信息。
 
 
 Let's add two helper functions to the <i>App</i> component for generating the forms: 
@@ -359,7 +359,7 @@ Current application code can be found on [Github](https://github.com/fullstack-h
 当前的应用代码可以在[ Github ]( https://Github.com/fullstack-hy2020/part2-notes/tree/part5-2) ，branch<i>part5-2</i> 上找到。
 
 ### Creating new notes
-创造新的音符
+创造新的便笺
 
 The token returned with a successful login is saved to the application state <i>user</i> field <i>token</i>:
 成功登录后返回的令牌保存为 application state<i>user</i> field<i>token</i>:
@@ -382,7 +382,7 @@ const handleLogin = async (event) => {
 ```
 
 Let's fix creating new notes to work with the backend. This means adding the token of the logged in user to the Authorization header of the HTTP request. 
-让我们修复创建新的备注来使用后端的问题。 这意味着将登录用户的令牌添加到 HTTP 请求的 Authorization 头。
+让我们修复创建新的便笺来使用后端的问题。 这意味着将登录用户的令牌添加到 HTTP 请求的 Authorization 头。
 
 
 The <i>noteService</i> module changes like so: 
@@ -452,14 +452,14 @@ const handleLogin = async (event) => {
 
 
 And now adding new notes works again!
-现在添加新的笔记又有用了！
+现在添加新的便笺又有用了！
 
 ### Saving the token to browsers local storage
 # # # 将令牌保存到浏览器本地存储
 
 
 Our application has a flaw: When the page is rerendered, information of the user's login dissappears. This also slows down development. For example when we test creating new notes, we have to login again every single time. 
-我们的应用有一个缺陷: 当页面重新运行时，用户的登录信息就会消失。 这也减缓了开发速度。 例如，当我们测试创建新笔记时，我们每次都必须重新登录。
+我们的应用有一个缺陷: 当页面重新运行时，用户的登录信息就会消失。 这也减缓了开发速度。 例如，当我们测试创建新便笺时，我们每次都必须重新登录。
 
 
 This problem is easily solved by saving the login details to [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage). Local Storage is a [key-value](https://en.wikipedia.org/wiki/Key-value_database) database in the browser. 
@@ -541,7 +541,7 @@ We still have to modify our application so that when we enter the page, the appl
 
 
 The right way to do this is with an [effect hook](https://reactjs.org/docs/hooks-effect.html): A mechanism we first encountered in [part 2](/en/part2/getting_data_from_server#effect-hooks), and used to fetch notes from the server to the frontend. 
-正确的方法是使用[ effect hook ]( https://reactjs.org/docs/hooks-effect.html ) : 这是我们在[ part 2]中第一次遇到的机制(/ en / part2 / 从服务器 # effect-hooks 获取数据) ，用于从服务器向前端获取笔记。
+正确的方法是使用[ effect hook ]( https://reactjs.org/docs/hooks-effect.html ) : 这是我们在[ part 2]中第一次遇到的机制(/ en / part2 / 从服务器 # effect-hooks 获取数据) ，用于从服务器向前端获取便笺。
 
 
 We can have multiple effect hooks, so let's create a second one to handle the first loading of the page:
@@ -636,8 +636,8 @@ While doing the exercises, remember all of the debugging methods we have talked 
 **Warning:** If you notice you are mixing async/await and _then_ commands, its 99.9%  certain you are doing something wrong. Use either or, never both. 
 * * 警告: * * 如果你注意到你正在混合 async / await 命令，它的99.9% 肯定你正在做错误的事情。 要么使用，要么使用，不要两者都使用。
 
-#### 5.1: bloglist frontend, step1
-5.1: bloglist frontend，step1
+#### 5.1: bloglist frontend, 步骤1
+5.1: bloglist frontend，步骤1
 
 
 Clone the application from [Github](https://github.com/fullstack-hy2020/bloglist-frontend) with the command: 
@@ -714,8 +714,8 @@ User details of the logged in user do not have to be saved to the local storage 
 }
 ```
 
-#### 5.2: bloglist frontend, step2
-5.2: bloglist frontend，step2
+#### 5.2: bloglist frontend, 步骤2
+5.2: bloglist frontend，步骤2
 
 
 Make the login 'permanent' by using the local storage. Also implement a way to log out. 
@@ -727,8 +727,8 @@ Make the login 'permanent' by using the local storage. Also implement a way to l
 Ensure the browser does not remember the details of the user after logging out. 
 确保浏览器在注销后不会记住用户的详细信息。
 
-#### 5.3: bloglist frontend, step3
-5.3: bloglist frontend，step3
+#### 5.3: bloglist frontend, 步骤3
+5.3: bloglist frontend，步骤3
 
 
 Expand your application to allow  a logged in user to add new blogs: 
@@ -738,8 +738,8 @@ Expand your application to allow  a logged in user to add new blogs:
 
 
 
-#### 5.4*: bloglist frontend, step4
-5.4 * : bloglist frontend，step4
+#### 5.4*: bloglist frontend, 步骤4
+5.4 * : bloglist frontend，步骤4
 
 Implement notifications which inform the user about successful and unsuccessful operations at the top of the page. For example, when a new blog is added, the following notification can be shown: 
 在页面顶部实现通知，告知用户成功和不成功的操作。 例如，当添加一个新博客时，可以显示如下通知:

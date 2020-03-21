@@ -251,7 +251,7 @@ Follow the instructions below to gain access to the course’s Moodle space:
 - Register for the course through the [Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=131840261)
 - 注册[开放大学](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=131840261)
 - Wait for 24 hours and activate your University of Helsinki user ID. You will receive instructions on the activation process the following day.
-- 等待 24 小时，激活你的赫尔辛基大学用户 ID。 您将在第二天收到关于激活流程的指示
+- 等待 24 小时，激活你的赫尔辛基大学用户 ID。 您将在第二天收到关于激活流程的说明
 - Sign in on the Open universitu [course page](https://courses.helsinki.fi/fi/aytkt21009en/131840261), where you will find the enrolment key for the Moodle space
 - 登录到公开大学的[课程导航页面](https://courses.helsinki.fi/fi/aytkt21009en/131840261)，你就可以找到 Moodle 系统的注册密钥
 - Sign into the [Moodle space](https://moodle.helsinki.fi/login/index.php) with your University of Helsinki user ID and the enrolment key.

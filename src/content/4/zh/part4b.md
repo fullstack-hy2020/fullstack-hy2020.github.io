@@ -10,7 +10,7 @@ lang: zh
 
 
 We will now start writing tests for the backend. Since the backend does not contain any complicated logic, it doesn't make sense to write [unit tests](https://en.wikipedia.org/wiki/Unit_testing) for it. The only potential thing we could unit test is the _toJSON_ method that is used for formatting notes.
-现在，我们将开始为后端编写测试。 由于后端不包含任何复杂的逻辑，因此为它编写[单元测试]( https://en.wikipedia.org/wiki/unit_testing )是没有意义的。 我们唯一可以进行单元测试的是用于格式化注释的 toJSON 方法。
+现在，我们将开始为后端编写测试。 由于后端不包含任何复杂的逻辑，因此为它编写[单元测试]( https://en.wikipedia.org/wiki/unit_testing )是没有意义的。 我们唯一可以进行单元测试的是用于格式化便笺的 toJSON 方法。
 
 
 In some situations, it can be beneficial to implement some of the backend tests by mocking the database instead of using a real database. One library that could be used for this is [mongo-mock](https://github.com/williamkapke/mongo-mock).
@@ -203,7 +203,7 @@ When running your tests you may run across the following console warning:
 
 
 If this occurs, let's follow the [instructions](https://mongoosejs.com/docs/jest.html) and add a <i>jest.config.js</i> file at the root of the project with the following content:
-如果发生这种情况，让我们按照[指示]( https://mongoosejs.com/docs/jest.html ) ，在项目的根目录添加一个<i>jest.config.js</i> 文件，内容如下:
+如果发生这种情况，让我们按照[说明]( https://mongoosejs.com/docs/jest.html ) ，在项目的根目录添加一个<i>jest.config.js</i> 文件，内容如下:
 
 ```js
 module.exports = {
@@ -352,7 +352,7 @@ beforeEach(async () => {
 ```
 
 The database is cleared out at the beginning, and after that we save the two notes stored in the _initialNotes_ array to the database. Doing this, we ensure that the database is in the same state before every test is run.
-在开始时清除数据库，然后将存储在 initialNotes 数组中的两个备注保存到数据库中。 这样做，我们可以确保在运行每个测试之前，数据库处于相同的状态。
+在开始时清除数据库，然后将存储在 initialNotes 数组中的两个便笺保存到数据库中。 这样做，我们可以确保在运行每个测试之前，数据库处于相同的状态。
 
 Let's also make the following changes to the last two tests:
 让我们对最后两个测试进行如下修改:
@@ -376,7 +376,7 @@ test('a specific note is within the returned notes', async () => {
 ```
 
 Pay special attention to the expect in the latter test. The <code>response.body.map(r => r.content)</code> command is used to create an array containing the content of every note returned by the API. The [toContain](https://facebook.github.io/jest/docs/en/expect.html#tocontainitem) method is used for checking that the note given to it as a parameter is in the list of notes returned by the API.
-在后一个测试中要特别注意期望。 代码 response.body.map (r r.content) / code 命令用于创建一个数组，该数组包含 API 返回的每个注释的内容。 方法用于检查作为参数给它的注释是否在 API 返回的注释列表中。
+在后一个测试中要特别注意期望。 代码 response.body.map (r r.content) / code 命令用于创建一个数组，该数组包含 API 返回的每个便笺的内容。 方法用于检查作为参数给它的便笺是否在 API 返回的便笺列表中。
 
 ### Running tests one by one
 一个接一个的测试
@@ -426,7 +426,7 @@ The async/await syntax that was introduced in ES7 makes it possible to use <i>as
 Es7中引入的 async / await 语法使得使用<i>异步函数来返回 promise</i> 成为可能，这种方式使得代码看起来是同步的。
 
 As an example, the fetching of notes from the database with promises looks like this:
-例如，从数据库中获取带有许诺的注释如下所示:
+例如，从数据库中获取带有许诺的便笺如下所示:
 
 ```js
 Note.find({}).then(notes => {
@@ -444,7 +444,7 @@ All of the code we want to execute once the operation finishes is written in the
 
 
 By [chaining promises](https://javascript.info/promise-chaining) we could keep the situation somewhat under control, and avoid callback hell by creating a fairly clean chain of _then_ method calls. We have seen a few of these during the course. To illustrate this, you can view an artificial example of a function that fetches all notes and then deletes the first one:
-通过[链接承诺]( https://javascript.info/promise-chaining ) ，我们可以在一定程度上控制局面，并通过创建一个相当干净的 then 方法调用链来避免糟糕的回调。 我们在课程中已经看到了一些这样的例子。 为了说明这一点，你可以查看一个人为的例子，这个例子提取了所有的笔记，然后删除了第一个:
+通过[链接承诺]( https://javascript.info/promise-chaining ) ，我们可以在一定程度上控制局面，并通过创建一个相当干净的 then 方法调用链来避免糟糕的回调。 我们在课程中已经看到了一些这样的例子。 为了说明这一点，你可以查看一个人为的例子，这个例子提取了所有的便笺，然后删除了第一个:
 
 ```js
 Note.find({})
@@ -464,7 +464,7 @@ The _async_ and _await_ keywords introduced in ES7 bring the same functionality 
 在 ES7中引入的 async 和 await 关键字带来了与生成器相同的功能，但是以一种可以理解的、语法上更清晰的方式提供给了 JavaScript 世界的所有公民。
 
 We could fetch all of the notes in the database by utilizing the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) operator like this:
-我们可以通过使用[等待]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/operators/await )操作符来获取数据库中的所有注释，如下所示:
+我们可以通过使用[等待]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/operators/await )操作符来获取数据库中的所有便笺，如下所示:
 
 ```js
 const notes = await Note.find({})
@@ -473,7 +473,7 @@ console.log('operation returned the following notes', notes)
 ```
 
 The code looks exactly like synchronous code. The execution of code pauses at <em>const notes = await Note.find({})</em> and waits until the related promise is <i>fulfilled</i>, and then continues its execution to the next line. When the execution continues, the result of the operation that returned a promise is assigned to the _notes_ variable.
-该代码看起来与同步代码完全一样。 代码在 em const 注释处的执行等待 Note.find ({}) / em，并等待相关的承诺<i>fulfilled</i>，然后继续执行到下一行。 当执行继续时，将返回承诺的操作的结果分配给 notes 变量。
+该代码看起来与同步代码完全一样。 代码在 em const 便笺处的执行等待 Note.find ({}) / em，并等待相关的承诺<i>fulfilled</i>，然后继续执行到下一行。 当执行继续时，将返回承诺的操作的结果分配给 notes 变量。
 
 The slightly complicated example presented above could be implemented by using await like this:
 上面提到的稍微复杂的例子可以通过使用下面的方法来实现:
@@ -519,7 +519,7 @@ Let's change the backend to async and await. As all of the asynchronous operatio
 让我们将后端更改为 async 并等待。 由于当前所有的异步操作都是在函数内部完成的，因此将路由处理函数更改为异步函数就足够了。
 
 The route for fetching all notes gets changed to the following:
-获取所有笔记的路径更改为:
+获取所有便笺的路径更改为:
 
 ```js
 notesRouter.get('/', async (request, response) => { 
@@ -541,7 +541,7 @@ When code gets refactored, there is always the risk of [regression](https://en.w
 当代码被重构时，总是有[回归]( https://en.wikipedia.org/wiki/regression_testing )的风险，这意味着现有的功能可能会中断。 让我们通过为 API 的每个路由编写测试来重构剩余的操作。
 
 Let's start with the operation for adding a new note. Let's write a test that adds a new note and verifies that the amount of notes returned by the API increases, and that the newly added note is in the list.
-让我们从添加新注释的操作开始。 让我们编写一个测试，添加一个新的注释，并验证 API 返回的注释数量是否增加，以及新添加的注释是否在列表中。
+让我们从添加新便笺的操作开始。 让我们编写一个测试，添加一个新的便笺，并验证 API 返回的便笺数量是否增加，以及新添加的便笺是否在列表中。
 
 ```js
 test('a valid note can be added ', async () => {
@@ -591,7 +591,7 @@ test('note without content is not added', async () => {
 ```
 
 Both tests check the state stored in the database after the saving operation, by fetching all the notes of the application.  
-这两个测试都通过获取应用的所有注释来检查保存操作之后存储在数据库中的状态。
+这两个测试都通过获取应用的所有便笺来检查保存操作之后存储在数据库中的状态。
 
 ```js
 const response = await api.get('/api/notes')
@@ -635,7 +635,7 @@ module.exports = {
 ```
 
 The module defines the _notesInDb_ function that can be used for checking the notes stored in the database. The _initialNotes_ array containing the initial database state is also in the module. We also define the _nonExistingId_ function ahead of time, that can be used for creating a database object ID that does not belong to any note object in the database.
-该模块定义了 notesInDb 函数，该函数可用于检查数据库中存储的便笺。 包含初始数据库状态的 initialNotes 数组也在模块中。 我们还提前定义了 nonExistingId 函数，该函数可用于创建不属于数据库中任何注释对象的数据库对象 ID。
+该模块定义了 notesInDb 函数，该函数可用于检查数据库中存储的便笺。 包含初始数据库状态的 initialNotes 数组也在模块中。 我们还提前定义了 nonExistingId 函数，该函数可用于创建不属于数据库中任何便笺对象的数据库对象 ID。
 
 Our tests can now use helper module and be changed like this:
 我们的测试现在可以使用 helper 模块，并且可以像下面这样修改:
@@ -726,7 +726,7 @@ The code using promises works and the tests pass. We are ready to refactor our c
 使用 promises 的代码可以工作，并且测试通过。 我们已经准备好重构代码以使用 async / await 语法。
 
 We make the following changes to the code that takes care of adding a new note(notice that the route handler definition is preceded by the _async_ keyword):
-我们对负责添加新注释的代码进行如下更改(注意，路由处理程序定义前面有 async 关键字) :
+我们对负责添加新便笺的代码进行如下更改(注意，路由处理程序定义前面有 async 关键字) :
 
 ```js
 notesRouter.post('/', async (request, response, next) => {
@@ -788,7 +788,7 @@ After making the change, all of our tests will pass once again.
 做出改变之后，我们所有的测试都将再次通过。
 
 Next, let's write tests for fetching and removing an individual note:
-接下来，让我们编写获取和删除单个笔记的测试:
+接下来，让我们编写获取和删除单个便笺的测试:
 
 ```js
 test('a specific note can be viewed', async () => {
@@ -829,7 +829,7 @@ test('a note can be deleted', async () => {
 ```
 
 Both tests share a similar structure. In the initialization phase they fetch a note from the database. After this, the tests call the actual operation being tested, which is highlighted in the code block. Lastly, the tests verify that the outcome of the operation is as expected.
-这两个测试有着相似的结构。 在初始化阶段，它们从数据库中获取一个注释。 在此之后，测试调用被测试的实际操作，该操作在代码块中突出显示。 最后，测试验证了操作的结果是预期的。
+这两个测试有着相似的结构。 在初始化阶段，它们从数据库中获取一个便笺。 在此之后，测试调用被测试的实际操作，该操作在代码块中突出显示。 最后，测试验证了操作的结果是预期的。
 
 The tests pass and we can safely refactor the tested routes to use async/await:
 测试通过了，我们可以安全地重构测试的路线，使用 async / await:
@@ -928,7 +928,7 @@ module.exports = app
 The 'magic' of the library allows us to eliminate the try-catch blocks completely. 
 库的“魔法”允许我们完全消除 try-catch 块。
 For example the route for deleting a note
-例如，删除备注的路由
+例如，删除便笺的路由
 
 ```js
 notesRouter.delete('/:id', async (request, response, next) => {
@@ -1013,7 +1013,7 @@ beforeEach(async () => {
 ```
 
 The function saves the first two notes from the   _helper.initialNotes_ array into the database with two separate operations. The solution is alright, but there's a better way of saving multiple objects to the database:
-函数使用两个单独的操作将前两个注释从 helper.initialNotes 数组保存到数据库中。 解决方案是好的，但是有一个更好的方法可以将多个对象保存到数据库中:
+函数使用两个单独的操作将前两个便笺从 helper.initialNotes 数组保存到数据库中。 解决方案是好的，但是有一个更好的方法可以将多个对象保存到数据库中:
 
 ```js
 beforeEach(async () => {
@@ -1035,7 +1035,7 @@ test('notes are returned as json', async () => {
 ```
 
 We save the notes stored in the array into the database inside of a _forEach_ loop. The tests don't quite seem to work however, so we have added some console logs to help us find the problem. 
-我们将存储在数组中的备注保存到 forEach 循环中的数据库中。 然而，这些测试似乎并不能正常工作，因此我们添加了一些控制台日志来帮助我们找到问题所在。
+我们将存储在数组中的便笺保存到 forEach 循环中的数据库中。 然而，这些测试似乎并不能正常工作，因此我们添加了一些控制台日志来帮助我们找到问题所在。
 
 The console displays the following output:
 控制台显示如下输出:
@@ -1081,11 +1081,11 @@ beforeEach(async () => {
 
 
 The solution is quite advanced despite its compact appearance. The _noteObjects_ variable is assigned to an array of Mongoose objects that are created with the _Note_ constructor for each of the notes in the _helper.initialNotes_ array. The next line of code creates a new array that <i>consists of promises</i>, that are created by calling the _save_ method of each item in the _noteObjects_ array. In other words, it is an array of promises for saving each of the items to the database.
-解决方案是相当先进的，尽管其紧凑的外观。 Noteobjects 变量分配给一个 Mongoose 对象数组，这些对象是用 helper.initialNotes 数组中的每个音符的 Note 构造函数创建的。 下一行代码创建一个由 promises / i 组成的新数组，这个数组是通过调用 noteObjects 数组中每个项的 save 方法创建的。 换句话说，它是将每个项保存到数据库的承诺数组。
+解决方案是相当先进的，尽管其紧凑的外观。 Noteobjects 变量分配给一个 Mongoose 对象数组，这些对象是用 helper.initialNotes 数组中的每个便笺的 Note 构造函数创建的。 下一行代码创建一个由 promises / i 组成的新数组，这个数组是通过调用 noteObjects 数组中每个项的 save 方法创建的。 换句话说，它是将每个项保存到数据库的承诺数组。
 
 
 The [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) method can be used for transforming an array of promises into a single promise, that will be <i>fulfilled</i> once every promise in the array passed to it as a parameter is resolved. The last line of code <em>await Promise.all(promiseArray)</em> waits that every promise for saving a note is finished, meaning that the database has been initialized.
-方法可以用于将一个数组的承诺转换为一个单一的承诺，一旦数组中的每个承诺作为参数被解析传递给它，它就会被 i / i 实现。 最后一行代码 em 等待着 Promise.all (promiseArray) / em 等待着每个保存注释的承诺都完成，这意味着数据库已经初始化。
+方法可以用于将一个数组的承诺转换为一个单一的承诺，一旦数组中的每个承诺作为参数被解析传递给它，它就会被 i / i 实现。 最后一行代码 em 等待着 Promise.all (promiseArray) / em 等待着每个保存便笺的承诺都完成，这意味着数据库已经初始化。
 
 
 > The returned values of each promise in the array can still be accessed when using the Promise.all method. If we wait for the promises to be resolved with the _await_ syntax <em>const results = await Promise.all(promiseArray)</em>, the operation will return an array that contains the resolved values for each promise in the _promiseArray_, and they appear in the same order as the promises in the array.
@@ -1129,7 +1129,7 @@ Javascript 的异步特性可能会导致令人惊讶的行为，因此，在使
 * * 警告: * * 如果您发现自己在同一代码中使用 async / await 和<i>then</i> 方法，那么几乎可以肯定您正在做一些错误的事情。 使用其中之一，不要混淆两者。
 
 
-#### 4.8: Blog list tests, step1
+#### 4.8: Blog list tests, 步骤1
 4.8: 博客列表测试，第一步
 
 
@@ -1153,7 +1153,7 @@ Notice that you will have to make similar changes to the code that were made [in
 
 
 If this happens, follow the [instructions](https://mongoosejs.com/docs/jest.html) and create a new <i>jest.config.js</i> file at the root of the project with the following contents:
-如果发生这种情况，请按照[指示]( https://mongoosejs.com/docs/jest.html 文件) ，在项目的根目录下创建一个新的<i>jest.config.js</i> 文件，内容如下:
+如果发生这种情况，请按照[说明]( https://mongoosejs.com/docs/jest.html 文件) ，在项目的根目录下创建一个新的<i>jest.config.js</i> 文件，内容如下:
 
 ```js
 module.exports = {
@@ -1168,8 +1168,8 @@ module.exports = {
 注意: 在编写测试时，最好不要执行所有的测试 / i * * ，只执行正在执行的测试。 阅读更多相关内容[ here ](/ en / part4 / testing the backend # running-tests-one-by-one)。
 
 
-#### 4.9*: Blog list tests, step2
-4.9 * : Blog list tests，step2
+#### 4.9*: Blog list tests, 步骤2
+4.9 * : Blog list tests，步骤2
 
 
 Write a test that verifies that the unique identifier property of the blog posts is named <i>id</i>, by default the database names the property <i>_id</i>. Verifying the existence of a property is easily done with Jest's [toBeDefined](https://jestjs.io/docs/en/expect#tobedefined) matcher.
@@ -1180,7 +1180,7 @@ Make the required changes to the code so that it passes the test. The [toJSON](/
 对代码进行必要的更改，以便它通过测试。 第3章节中讨论的[ toJSON ](/ en / part3 / saving data to mongo db # backend-connected-to-a-database)方法是定义<i>id</i> 参数的合适位置。
 
 
-#### 4.10: Blog list tests, step3
+#### 4.10: Blog list tests, 步骤3
 4.10: 博客列表测试，第三步
 
 
@@ -1192,8 +1192,8 @@ Once the test is finished, refactor the operation to use async/await instead of 
 一旦测试完成，重构操作以使用 async / await 而不是 promises。
 
 
-#### 4.11*: Blog list tests, step4
-4.11 * : Blog list tests，step4
+#### 4.11*: Blog list tests, 步骤4
+4.11 * : Blog list tests，步骤4
 
 
 Write a test that verifies that if the <i>likes</i> property is missing from the request, it will default to the value 0. Do not test the other properties of the created blogs yet.
@@ -1204,8 +1204,8 @@ Make the required changes to the code so that it passes the test.
 对代码进行必要的更改，以便它通过测试。
 
 
-#### 4.12*: Blog list tests, step5
-4.12 * : Blog list tests，step5
+#### 4.12*: Blog list tests, 步骤5
+4.12 * : Blog list tests，步骤5
 
 
 Write a test related to creating new blogs via the <i>/api/blogs</i> endpoint, that verifies that if the <i>title</i> and <i>url</i> properties are missing from the request data, the backend responds to the request with the status code <i>400 Bad Request</i>.
@@ -1401,8 +1401,8 @@ You can find the code for our current application in its entirety in the <i>part
 练习4.13-4.14。
 
 
-#### 4.13 Blog list expansions, step1
-4.13 Blog list expendations，step1
+#### 4.13 Blog list expansions, 步骤1
+4.13 Blog list expendations，步骤1
 
 
 Implement functionality for deleting a single blog post resource.
@@ -1417,8 +1417,8 @@ Feel free to implement tests for the functionality if you want to. Otherwise ver
 如果您愿意，可以自由地实现该功能的测试。 否则，请验证该功能是否与 Postman 或其他工具一起工作。
 
 
-#### 4.14 Blog list expansions, step2
-4.14 Blog list expendations，step2
+#### 4.14 Blog list expansions, 步骤2
+4.14 Blog list expendations，步骤2
 
 
 Implement functionality for updating the information of an individual blog post.

@@ -72,11 +72,11 @@ The npm srcipt for running <i>tsc</i> is set as follows:
 
 
 Running the script creates an <i>tsconfig.json</i> file, which contains a lengthy list of every configuration available to us. However only a few have not been commented out. 
-运行这个脚本将创建一个<i>/ tsconfig.json</i> 文件，其中包含一个冗长的列表，列出了我们可以使用的所有配置。 然而，只有少数没有被注释掉。
+运行这个脚本将创建一个<i>/ tsconfig.json</i> 文件，其中包含一个冗长的列表，列出了我们可以使用的所有配置。 然而，只有少数没有被便笺掉。
 Studying the initial <i>tsconfig.json</i> file might be useful for finding some configuration options you might need. 
 研究初始<i>/ tsconfig.json</i> 文件可能有助于找到您可能需要的一些配置选项。
 It is also completely okay to keep the commented rows in the file just in case you might someday need to expand your configuration settings.
-在文件中保留注释行也是完全可以的，以备将来需要扩展配置设置时使用。
+在文件中保留便笺行也是完全可以的，以备将来需要扩展配置设置时使用。
 
 
 The settings we want right now are the following:
@@ -345,8 +345,8 @@ For this set of exercises you will be developing a backend for an existing proje
 The [frontend](https://github.com/fullstack-hy2020/patientor) has already been built by outsider experts and your task is to create a backend to support the existing code.
 前端已经由外部专家构建，您的任务是创建一个后端来支持现有的代码 https://github.com/fullstack-hy2020/patientor。
 
-#### 9.8: Patientor backend, step1
-9.8: Patientor backend，step1
+#### 9.8: Patientor backend, 步骤1
+9.8: Patientor backend，步骤1
 
 Initialise project that will be used by the frontend. Configure eslint and tsconfig with the same configurations that are used in the material. Define an endpoint that responses to HTTP GET requests to route <i>/ping</i>.   
 初始化项目，将使用的前端。 使用材质中使用的相同配置配置 eslint 和 tsconfig。 定义一个端点，该端点响应 HTTP GET 请求路由<i>/ ping</i>。
@@ -354,8 +354,8 @@ Initialise project that will be used by the frontend. Configure eslint and tscon
 The project should be runnable with npm scripts both in development mode and as compiled code in production mode.
 项目应该在开发模式和生产模式下以编译代码的形式使用 npm 脚本运行。
 
-#### 9.9: Patientor backend, step2
-9.9: Patientor backend，step2
+#### 9.9: Patientor backend, 步骤2
+9.9: Patientor backend，步骤2
 
 Fork and clone the project [patientor](https://github.com/fullstack-hy2020/patientor). Start the project with the help of the README file. You should be able to use the frontend without a functioning backend.
 分叉和克隆项目[病人]( https://github.com/fullstack-hy2020/patientor )。 在 README 文件的帮助下启动项目。 您应该能够使用前端没有功能的后端。
@@ -996,8 +996,8 @@ The response is what we expect it to be
 Similarly to Ilari's flight service, we do not use a real database in our app but instead use hardcoded data, that is in the files [diagnoses.json](https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.json) and [patients.json](https://github.com/fullstack-hy2020/misc/blob/master/patients.json). Get the files and store those into a directory called <i>data</i> under your project. All data modification can be done in runtime memory, so during this part it is <i>not necessary to write to a file</i>.
 与 Ilari 的飞行服务类似，我们在应用中不使用真正的数据库，而是使用硬编码的数据，这些数据存在于文件[ diagnoses.json ]( https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.json )和[ patients.json ]( https://github.com/fullstack-hy2020/misc/blob/master/patients.json )中。 获取文件并将其存储到项目下名为<i>data</i> 的目录中。 所有的数据修改都可以在运行时内存中完成，因此在这一部分中不需要写入文件 / i。
 
-#### 9.10: Patientor backend, step3
-9.10: Patientor backend，step3
+#### 9.10: Patientor backend, 步骤3
+9.10: Patientor backend，步骤3
 
 Create a type <i>Diagnose</i> and use it to create endpoint <i>/api/diagnoses</i> for fetching all diagnoses with HTTP GET.
 创建一个类型<i>diagnosis</i>，并使用它创建端点<i>/ api / diagnosis</i>，以便使用 HTTP GET 获取所有诊断。
@@ -1008,8 +1008,8 @@ Structure your code properly by using meaningfully named directories and files.
 **Note** that <i>diagnoses</i> may or may not contain the field <i>latin</i>. You might want to use [optional properties](https://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties) in the type definition.
 * * 注意 * *<i>diagnosis</i> may or may not contain the field<i>latin</i>。 你可能想在类型定义中使用[可选属性]( https://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties 属性)。
 
-#### 9.11: Patientor backend, step4
-9.11: Patientor backend，step4
+#### 9.11: Patientor backend, 步骤4
+9.11: Patientor backend，步骤4
 
 Create data type <i>Patient</i> and set up a GET-endpoint <i>/api/patients</i> that returns all patients to the frontend excluding field <i>ssn</i>. Use a [utility type](https://www.typescriptlang.org/docs/handbook/utility-types.html) to make sure you are selecting and returning only the wanted fields.
 创建数据类型<i>Patient</i>，并设置一个 GET-endpoint<i>/ api / patients</i>，将所有患者返回到排除字段<i>ssn</i> 的前端。 使用[实用工具类型]( https://www.typescriptlang.org/docs/handbook/utility-types.html )来确保只选择和返回想要的字段。
@@ -1472,7 +1472,7 @@ Most likely the simpler version of the type guard would be just fine.
 Next, let's consider the <i>date</i> field. 
 接下来，让我们考虑<i>date</i> 字段。
 Parsing and validating the date object is pretty similar to what we did with comments. 
-解析和验证 date 对象与我们对注释所做的非常相似。
+解析和验证 date 对象与我们对便笺所做的非常相似。
 Since TypeScript doesn't really know a type for a date, we need to treat is as a <i>string</i>.
 由于 TypeScript 实际上并不知道某个日期的类型，因此我们需要将其视为<i>string</i>。
 We should however still use JavaScript level validation to check whether the date format is acceptable.
@@ -1693,14 +1693,14 @@ If we now try to create a new diary entry with invalid or missing fields we are 
 ### Exercises 9.12.-9.13.
 练习9.12-9.13。
 
-#### 9.12: Patientor backend, step5
-9.12: Patientor backend，step5
+#### 9.12: Patientor backend, 步骤5
+9.12: Patientor backend，步骤5
 
 Create a POST-endpoint <i>/api/patients</i> for adding patients. Ensure that you can add patients also from the frontend.
 创建一个 POST-endpoint<i>/ api / patients</i> 用于添加患者。
 
-#### 9.13: Patientor backend, step6
-9.13: Patientor backend，step6
+#### 9.13: Patientor backend, 步骤6
+9.13: Patientor backend，步骤6
 
 Set up safe parsing, validation and type guards to the POST <i>/api/patients</i> request. 
 为 POST<i>/ api / patients</i> 请求设置安全的解析、验证和类型保护。

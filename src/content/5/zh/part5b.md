@@ -276,7 +276,7 @@ This time the children are rendered in the code that is used for rendering the c
 
 
 Unlike the "normal" props we've seen before, <i>children</i> is automatically added by React and always exists. If a component is defined with an automatically closing _/>_ tag, like this:
-与我们之前见过的“正常”props不同，i children / i 是由 React 自动添加的，并且始终存在。 如果一个组件定义了一个自动关闭 / 标记，像这样:
+与我们之前见过的“正常”props不同，i children / i 是由 React 自动添加的，并且始终存在。 如果一个组件定义了一个自动关闭 / 标签，像这样:
 
 ```js
 <Note
@@ -292,11 +292,11 @@ Then <i>props.children</i> is an empty array.
 
 
 The <i>Togglable</i> component is reusable and we can use it to add similar visibility toggling functionality to the form that is used for creating new notes.
-I Togglable / i 组件是可重用的，我们可以使用它向用于创建新注释的表单添加类似的可见性切换功能。
+I Togglable / i 组件是可重用的，我们可以使用它向用于创建新便笺的表单添加类似的可见性切换功能。
 
 
 Before we do that, let's extract the form for creating notes into its own component:
-在此之前，让我们将创建笔记的表单提取到它自己的组件中:
+在此之前，让我们将创建便笺的表单提取到它自己的组件中:
 
 ```js
 const NoteForm = ({ onSubmit, handleChange, value}) => {
@@ -352,14 +352,14 @@ React文档说[如下]( https://reactjs.org/docs/lifting-state-up.html )关于�
 
 
 If we think about the state of the forms, so for example the contents of a new note before it has been created, the _App_ component does not actually need it for anything. 
-如果我们考虑一下表单的状态，例如一个新笔记的内容在创建之前，App 组件实际上并不需要它做任何事情。
+如果我们考虑一下表单的状态，例如一个新便笺的内容在创建之前，App 组件实际上并不需要它做任何事情。
 We could just as well move the state of the forms to the corresponding components. 
 我们也可以将表单的状态移动到相应的组件中。
 
 
 
 The component for a note changes like so: 
-音符的组件变化如下:
+便笺的组件变化如下:
 
 ```js
 import React, {useState} from 'react' 
@@ -412,7 +412,7 @@ There is only one prop left, the _createNote_ function, which the form calls whe
 The _App_ component becomes simpler now that we have got rid of the <i>newNote</i> state and its event handler. 
 既然我们已经摆脱了<i>newNote</i> 状态及其事件处理程序，那么 App 组件就变得更简单了。
 The _addNote_ function for creating new notes receives a new note as a parameter, and the function is the only prop we send to the form: 
-用于创建新笔记的 addNote 函数接收一个新笔记作为参数，该函数是我们发送到表单的唯一props:
+用于创建新便笺的 addNote 函数接收一个新便笺作为参数，该函数是我们发送到表单的唯一props:
 
 ```js
 const App = () => {
@@ -454,7 +454,7 @@ Our current implementation is quite good, it has one aspect that could be improv
 我们目前的实现是相当好的，它有一个方面可以改进。
 
 After a new note is created, it would make sense to hide the new note form. Currently the form stays visible. There is a slight problem with hiding the form. The visibility is controlled with the <i>visible</i> variable inside of the <i>Togglable</i> component. How can we access it outside of the component?
-在创建新笔记之后，隐藏新笔记表单是有意义的。 当前窗体仍然可见。 隐藏表单有一个小问题。 可见性是通过<i>Togglable</i> 组件内部的<i>visible</i> 变量控制的。 我们如何在组件之外访问它？
+在创建新便笺之后，隐藏新便笺表单是有意义的。 当前窗体仍然可见。 隐藏表单有一个小问题。 可见性是通过<i>Togglable</i> 组件内部的<i>visible</i> 变量控制的。 我们如何在组件之外访问它？
 
 There are many ways to implement closing the form from the parent component, but let's use the [ref](https://reactjs.org/docs/refs-and-the-dom.html) mechanism of React, which offers a reference to the component.
 有许多方法可以实现从父组件中关闭表单，但是让我们使用 React 的[ ref ]( https://reactjs.org/docs/refs-and-the-dom.html )机制，它提供了对组件的引用。
@@ -530,7 +530,7 @@ The component uses the [useImperativeHandle](https://reactjs.org/docs/hooks-refe
 这个组件使用了[ useImperativeHandle ]( https://reactjs.org/docs/hooks-reference.html#useImperativeHandle )挂钩来使它的<i>toggleVisibility</i> 函数在组件之外可用。
 
 We can now hide the form by calling <i>noteFormRef.current.toggleVisibility()</i> after a new note has been created:
-现在，我们可以在创建新注释之后，通过调用<i>noteFormRef.current.toggleVisibility ()</i> 来隐藏表单:
+现在，我们可以在创建新便笺之后，通过调用<i>noteFormRef.current.toggleVisibility ()</i> 来隐藏表单:
 
 ```js
 const App = () => {
@@ -614,8 +614,8 @@ I ref /<i>属性用于为变量 i togglable1</i>、<i>togglable2</i> 和<i>toggl
 练习5.5-5.10。
 
 
-#### 5.5 Blog list frontend, step5
-5.5 Blog list frontend，step5
+#### 5.5 Blog list frontend, 步骤5
+5.5 Blog list frontend，步骤5
 
 Change the form for creating blog posts so that it is only displayed when appropriate. Use functionality similar to what was shown [earlier in this part of the course material](/en/part5/props_children_and_proptypes#displaying-the-login-form-only-when-appropriate). If you wish to do so, you can use the <i>Togglable</i> component defined in part 5.
 更改用于创建博客文章的表单，使其只在适当的时候显示。 使用类似于课程材料前面所展示的功能(/ en / part5 / props children and proptypes # display-the-login-form-only-when-appropriate)。 如果您希望这样做，可以使用第5章节中定义的<i>Togglable</i> 组件。
@@ -635,8 +635,8 @@ It expands when button <i>new note</i> is clicked
 The form closes when a new blog is created.
 当创建新博客时，表单将关闭。
 
-#### 5.6 Blog list frontend, step6
-5.6 Blog list frontend，step6
+#### 5.6 Blog list frontend, 步骤6
+5.6 Blog list frontend，步骤6
 
 
 
@@ -650,8 +650,8 @@ move all the states required for creating a new blog to this component.
 The component must work like the <i>NewNote</i> component from the [material](/osa5/props_children_ja_proptypet#lomakkeiden-tila) of this part.
 这个组件必须像这个部件的[ material ](/ osa5 / proptypet children ja # lomakkeiden-tila)中的<i>/ NewNote</i> 组件那样工作。
 
-#### 5.7* Blog list frontend, step7
-5.7 * Blog list frontend，step7
+#### 5.7* Blog list frontend, 步骤7
+5.7 * Blog list frontend，步骤7
 
 
 ——伊塞尔 · 布洛基 · 纳皮，琼卡 · 阿乌拉 · 沃伊 · 罗德里格斯(jonka avulla voi kontrolloida n ytet nk kaikki blogiin liittyv t t tidot ——译注)
@@ -707,8 +707,8 @@ const Blog = ({ blog }) => {
 **NB2:** even though the functionality implemented in this part is almost identical to the functionality provided by the <i>Togglable</i> component, the component can not be used directly to achieve the desired behavior. The easiest solution will be to add state to the blog post that controls the displayed form of the blog post.
 * * NB2: 尽管该部分实现的功能与<i>Togglable</i> 组件提供的功能几乎完全相同，但该组件不能直接用于实现所需的行为。 最简单的解决方案是将状态添加到控制博客文章显示形式的博客文章中。
 
-#### 5.8*: Blog list frontend, step7
-5.8 * : Blog list frontend，step7
+#### 5.8*: Blog list frontend, 步骤7
+5.8 * : Blog list frontend，步骤7
 
 Implement the functionality for the like button. Likes are increased by making an HTTP _PUT_ request to the unique address of the blog post in the backend.
 实现 like 按钮的功能。 通过向后端中的博客文章的唯一地址发出 HTTP PUT 请求，可以增加喜欢。
@@ -747,14 +747,14 @@ You would have to make an HTTP PUT request to the address <i>/api/blogs/5a43fde2
 **One last warning:** if you notice that you are using async/await and the _then_-method in the same code, it is almost certain that you are doing something wrong. Stick to using one or the other, and never use both at the same time "just in case". 
 最后一个警告: 如果您注意到在同一段代码中使用了 async / await 和 then-method，那么几乎可以肯定您做错了什么。 坚持使用一种或另一种，永远不要同时使用两种，“以防万一”。
 
-#### 5.9*: Blog list frontend, step8
-5.9 * : Blog list frontend，step8
+#### 5.9*: Blog list frontend, 步骤8
+5.9 * : Blog list frontend，步骤8
 
 Modify the application to list the blog posts by the number of <i>likes</i>. Sorting the blog posts can be done with the array [sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) method.
 根据<i>like</i> 的数量修改应用以列出博客文章。 对博客文章进行排序可以使用数组[ sort ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/sort )方法。
 
-#### 5.10*: Blog list frontend, step9
-5.10 * : Blog list frontend，step9
+#### 5.10*: Blog list frontend, 步骤9
+5.10 * : Blog list frontend，步骤9
 
 Add a new button for deleting blog posts. Also implement the logic for deleting blog posts in the backend.
 添加一个新的按钮用于删除博客文章。还可以在后端实现删除博客文章的逻辑。
@@ -1000,14 +1000,14 @@ You can find the code for our current application in its entirety in the <i>part
 ### Exercises 5.11.-5.12.
 练习5.11-5.12。
 
-#### 5.11: Blog list frontend, step11
-5.11: Blog list frontend，step11
+#### 5.11: Blog list frontend, 步骤11
+5.11: Blog list frontend，步骤11
 
 Define PropTypes for one of the components of your application.
 为应用的一个组件定义 PropTypes。
 
-#### 5.12: Blog list frontend, step12
-5.12: Blog list frontend，step12
+#### 5.12: Blog list frontend, 步骤12
+5.12: Blog list frontend，步骤12
 
 Add ESlint to the project. Define the configuration according to your liking. Fix all of the linter errors.
 向项目中添加 ESlint。根据您的喜好定义配置。修复所有的连接错误。

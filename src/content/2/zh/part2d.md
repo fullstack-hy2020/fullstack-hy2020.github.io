@@ -10,7 +10,7 @@ lang: zh
 
 
 When creating notes in our application, we would naturally want to store them in some backend server. The [json-server](https://github.com/typicode/json-server) package claims to be a so-called REST or RESTful API in its documentation:
-在应用中创建笔记时，我们自然希望将它们存储在某个后端服务器中。 在文档中，[ json-server ]( https://github.com/typicode/json-server 服务器)包声称是所谓的 REST 或 RESTful API:
+在应用中创建便笺时，我们自然希望将它们存储在某个后端服务器中。 在文档中，[ json-server ]( https://github.com/typicode/json-server 服务器)包声称是所谓的 REST 或 RESTful API:
 
 > <i>Get a full fake REST API with zero coding in less than 30 seconds (seriously)</i>
 I 在不到30秒(严肃地) / i 的情况下得到一个完整的假 REST API，其中没有任何代码
@@ -25,13 +25,13 @@ We will take a closer look at REST in the [next part](/en/part3) of the course, 
 休息
 
 In REST terminology, we refer to individual data objects, such as the notes in our application, as <i>resources</i>. Every resource has a unique address associated with it - its URL. According to a general convention used by json-server, we would be able to locate an individual note at the resource URL <i>notes/3</i>, where 3 is the id of the resource. The <i>notes</i> url, on the other hand, would point to a resource collection containing all the notes.
-在 REST 术语中，我们将单个数据对象(如应用中的注释)称为<i>resources</i>。 每个资源都有一个唯一的地址——它的 URL。 根据 json-server 使用的一般约定，我们将能够在资源 URL<i>notes / 3</i> 上定位单个注释，其中3是资源的 id。 另一方面，i notes / i url 指向包含所有注释的资源集合。
+在 REST 术语中，我们将单个数据对象(如应用中的便笺)称为<i>resources</i>。 每个资源都有一个唯一的地址——它的 URL。 根据 json-server 使用的一般约定，我们将能够在资源 URL<i>notes / 3</i> 上定位单个便笺，其中3是资源的 id。 另一方面，i notes / i url 指向包含所有便笺的资源集合。
 
 Resources are fetched from the server with HTTP GET requests. For instance, an HTTP GET request to the URL <i>notes/3</i> will return the note that has the id number 3. An HTTP GET request to the <i>notes</i> URL would return a list of all notes.
-通过 HTTP GET 请求从服务器获取资源。 例如，对 URL<i>notes / 3</i> 的 HTTP GET 请求将返回 id 为3的注释。 对<i>notes</i> URL 的 HTTP GET 请求将返回所有备注的列表。
+通过 HTTP GET 请求从服务器获取资源。 例如，对 URL<i>notes / 3</i> 的 HTTP GET 请求将返回 id 为3的便笺。 对<i>notes</i> URL 的 HTTP GET 请求将返回所有便笺的列表。
 
 Creating a new resource for storing a note is done by making an HTTP POST request to the <i>notes</i> URL according to the REST convention that the json-server adheres to. The data for the new note resource is sent in the <i>body</i> of the request.
-根据 json 服务器遵守的 REST 约定，通过向<i>notes</i> URL 发出 HTTP POST 请求来创建用于存储便笺的新资源。 新笔记资源的数据在请求的<i>body</i> 中发送。
+根据 json 服务器遵守的 REST 约定，通过向<i>notes</i> URL 发出 HTTP POST 请求来创建用于存储便笺的新资源。 新便笺资源的数据在请求的<i>body</i> 中发送。
 
 json-server requires all data to be sent in JSON format. What this means in practice is that the data must be a correctly formatted string, and that the request must contain the <i>Content-Type</i> request header with the value <i>application/json</i>.
 Json-server 要求以 JSON 格式发送所有数据。 实际上，这意味着数据必须是格式正确的字符串，并且请求必须包含值为<i>application / json</i> 的<i>Content-Type</i> 请求头。
@@ -40,7 +40,7 @@ Json-server 要求以 JSON 格式发送所有数据。 实际上，这意味着�
 # # # 发送数据到服务器
 
 Let's make the following changes to the event handler responsible for creating a new note:
-让我们对负责创建新笔记的事件处理程序进行如下更改:
+让我们对负责创建新便笺的事件处理程序进行如下更改:
 
 ```js
 addNote = event => {
@@ -63,19 +63,19 @@ addNote = event => {
 
 
 We create a new object for the note but omit the <i>id</i> property, since it's better to let the server generate ids for our resources!
-我们为笔记创建了一个新对象，但忽略了<i>id</i> 属性，因为最好让服务器为我们的资源生成 id！
+我们为便笺创建了一个新对象，但忽略了<i>id</i> 属性，因为最好让服务器为我们的资源生成 id！
 
 The object is sent to the server using the axios <em>post</em> method. The registered event handler logs the response that is sent back from the server to the console.
 使用 axios em post / em 方法将对象发送到服务器。 已注册的事件处理程序记录从服务器发送回控制台的响应。
 
 When we try to create a new note, the following output pops up in console:
-当我们尝试创建一个新的笔记时，控制台会弹出如下输出:
+当我们尝试创建一个新的便笺时，控制台会弹出如下输出:
 
 ![](../../images/2/20e.png)
 
 
 The newly created note resource is stored in the value of the <i>data</i> property of the _response_ object.
-新创建的笔记资源存储在响应对象的<i>data</i> 属性的值中。
+新创建的便笺资源存储在响应对象的<i>data</i> 属性的值中。
 
 Sometimes it can be useful to inspect HTTP requests in the <i>Network</i> tab of Chrome developer tools, which was used heavily at the beginning of [part 0](/en/part0/fundamentals_of_web_apps#http-get):
 有时在 Chrome 开发工具的<i>Network</i> 选项卡中检查 HTTP 请求是很有用的，这个选项卡在[ part 0](/ en / part0 / web 应用基础 # HTTP-get)开始时被大量使用:
@@ -91,7 +91,7 @@ Since the data we sent in the POST request was a JavaScript object, axios automa
 由于我们在 POST 请求中发送的数据是一个 JavaScript 对象，axios 自动知道为<i>Content-Type</i> 头设置适当的<i>application / json</i> 值。
 
 The new note is not rendered to the screen yet. This is because we did not update the state of the <i>App</i> component when we created the new note. Let's fix this:
-新的音符还没有渲染到屏幕上。 这是因为我们在创建新笔记时没有更新<i>App</i> 组件的状态。 让我们来解决这个问题:
+新的便笺还没有渲染到屏幕上。 这是因为我们在创建新便笺时没有更新<i>App</i> 组件的状态。 让我们来解决这个问题:
 
 ```js
 addNote = event => {
@@ -134,7 +134,7 @@ In the next part of the course we will learn to implement our own logic in the b
 在本课程的下一部分中，我们将学习如何在后端实现我们自己的逻辑。 然后，我们将进一步研究一些工具，如[邮递员]( https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop ) ，这些工具可以帮助我们调试服务器应用。 但是，通过浏览器检查 json-server 的状态就足以满足我们当前的需求。
 
 > **NB:** In the current version of our application the browser adds the creation date property to the note. Since the clock of the machine running the browser can be wrongly configured, it's much wiser to let the backend server generate this timestamp for us. This is in fact what we will do in the next part of the course.
-注意: 在当前版本的应用中，浏览器在注释中添加了创建日期属性。 由于运行浏览器的机器的时钟可以被错误地配置，所以让后端服务器为我们生成这个时间戳要明智得多。 这实际上就是我们在下一部分课程中要做的。
+注意: 在当前版本的应用中，浏览器在便笺中添加了创建日期属性。 由于运行浏览器的机器的时钟可以被错误地配置，所以让后端服务器为我们生成这个时间戳要明智得多。 这实际上就是我们在下一部分课程中要做的。
 
 
 The code for the current state of our application can be found in the  <i>part2-5</i> branch on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-5).
@@ -142,10 +142,10 @@ The code for the current state of our application can be found in the  <i>part2-
 
 
 ### Changing the importance of notes
-# # # 改变笔记的重要性
+# # # 改变便笺的重要性
 
 Let's add a button to every note that can be used for toggling its importance.
-让我们为每个音符添加一个按钮，用于切换它的重要性。
+让我们为每个便笺添加一个按钮，用于切换它的重要性。
 
 We make the following changes to the <i>Note</i> component:
 我们对<i>Note</i> 组件进行如下更改:
@@ -211,7 +211,7 @@ const App = () => {
 ```
 
 Notice how every note receives its own <i>unique</i> event handler function, since the <i>id</i> of every note is unique.
-注意每个音符是如何接收它自己唯一的 /<i>事件处理函数的，因为每个音符的 i id</i> 是唯一的。
+注意每个便笺是如何接收它自己唯一的 /<i>事件处理函数的，因为每个便笺的 i id</i> 是唯一的。
 
 
 E.g. if <i>note.id</i> is 3, the event handler function returned by _toggleImportance(note.id)_ will be:
@@ -240,7 +240,7 @@ We can now use the "dollar-bracket"-syntax to add parts to the string that will 
 我们现在可以使用“ dollar-bracket”语法向字符串中添加部分来计算 JavaScript 表达式，例如变量的值。 注意，模板字符串中使用的引号与常规 JavaScript 字符串中使用的引号不同。
 
 Individual notes stored in the json-server backend can be modified in two different ways by making HTTP requests to the note's unique URL. We can either <i>replace</i> the entire note with an HTTP PUT request, or only change some of the note's properties with an HTTP PATCH request.
-存储在 json-server 后端中的各个笔记可以通过对笔记的唯一 URL 发出 HTTP 请求，以两种不同的方式进行修改。 我们可以用 HTTP PUT 请求替换 / i 整个笔记，或者只用 HTTP PATCH 请求更改笔记的一些属性。
+存储在 json-server 后端中的各个便笺可以通过对便笺的唯一 URL 发出 HTTP 请求，以两种不同的方式进行修改。 我们可以用 HTTP PUT 请求替换 / i 整个便笺，或者只用 HTTP PATCH 请求更改便笺的一些属性。
 
 
 The final form of the event handler function is the following:
@@ -260,15 +260,15 @@ const toggleImportanceOf = id => {
 
 
 Almost every line of code in the function body contains important details. The first line defines the unique url for each note resource based on its id.
-函数体中几乎每一行代码都包含重要的细节。 第一行根据每个笔记资源的 id 定义其唯一的 url。
+函数体中几乎每一行代码都包含重要的细节。 第一行根据每个便笺资源的 id 定义其唯一的 url。
 
 
 The array [find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) method is used to find the note we want to modify, and we then assign it to the _note_ variable.
-Array [ find ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/find )方法用于查找要修改的音符，然后将其分配给音符变量。
+Array [ find ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/find )方法用于查找要修改的便笺，然后将其分配给便笺变量。
 
 
 After this we create a <i>new object</i> that is an exact copy of the old note, apart from the important property. 
-在此之后，我们创建一个<i>new 对象</i>，它完全是旧注释的副本，除了重要属性。
+在此之后，我们创建一个<i>new 对象</i>，它完全是旧便笺的副本，除了重要属性。
 
 The code for creating the new object that uses the [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax 
 使用[对象扩展]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/operators/spread_syntax )语法创建新对象的代码
@@ -369,7 +369,7 @@ export default {
 
 
 The module returns an object that has three functions (<i>getAll</i>, <i>create</i>, and <i>update</i>) as its properties that deal with notes. The functions directly return the promises returned by the axios methods.
-该模块返回一个具有三个函数(i getAll / i、<i>create</i> 和<i>update</i>)的对象作为其处理注释的属性。 函数直接返回 axios 方法返回的允诺。
+该模块返回一个具有三个函数(i getAll / i、<i>create</i> 和<i>update</i>)的对象作为其处理便笺的属性。 函数直接返回 axios 方法返回的允诺。
 
 The <i>App</i> component uses <em>import</em> to get access to the module:
 I App / i 组件使用 em import / em 访问模块:
@@ -596,7 +596,7 @@ Promises are central to modern JavaScript development and it is highly recommend
 
 
 The module defining note related services currently exports an object with the properties <i>getAll</i>, <i>create</i> and <i>update</i> that are assigned to functions for handling notes.
-定义注释相关服务的模块目前导出一个具有属性<i>getAll</i>、<i>create</i> 和<i>update</i> 的对象，这些属性分配给处理注释的函数。
+定义便笺相关服务的模块目前导出一个具有属性<i>getAll</i>、<i>create</i> 和<i>update</i> 的对象，这些属性分配给处理便笺的函数。
 
 
 The module definition was:
@@ -723,11 +723,11 @@ The result is identical for both expressions. They both create an object with a 
 
 
 If our application allowed users to delete notes, we could end up in a situation where a user tries to change the importance of a note that has already been deleted from the system.
-如果我们的应用允许用户删除备注，那么我们可能会出现这样的情况: 用户试图更改已经从系统中删除的备注的重要性。
+如果我们的应用允许用户删除便笺，那么我们可能会出现这样的情况: 用户试图更改已经从系统中删除的便笺的重要性。
 
 
 Let's simulate this situation by making the <em>getAll</em> function of the note service return a "hardcoded" note that does not actually exist in the backend server:
-让我们通过使 note 服务的 em getAll / em 函数返回一个“硬编码”的注释来模拟这种情况，这个注释实际上并不存在于后端服务器中:
+让我们通过使 note 服务的 em getAll / em 函数返回一个“硬编码”的便笺来模拟这种情况，这个便笺实际上并不存在于后端服务器中:
 
 ```js
 const getAll = () => {
@@ -749,7 +749,7 @@ When we try to change the importance of the hardcoded note, we see the following
 
 
 The application should be able to handle these types of error situations gracefully. Users won't be able to tell that an error has actually occurred unless they happen to have their console open. The only way the error can be seen  in the application is that clicking the button has no effect on the importance of the note.
-应用应该能够很好地处理这些类型的错误情况。 除非用户碰巧打开了自己的控制台，否则他们无法判断错误确实发生了。 在应用中可以看到错误的唯一方式是单击按钮对注释的重要性没有影响。
+应用应该能够很好地处理这些类型的错误情况。 除非用户碰巧打开了自己的控制台，否则他们无法判断错误确实发生了。 在应用中可以看到错误的唯一方式是单击按钮对便笺的重要性没有影响。
 
 
 We had [previously](/en/part2/getting_data_from_server#axios-and-promises) mentioned that a promise can be in one of three different states. When an HTTP request fails, the associated promise is <i>rejected</i>. Our current code does not handle this rejection in any way.
@@ -845,7 +845,7 @@ The error message is displayed to the user with the trusty old [alert](https://d
 
 
 Removing an already deleted note from the application's state is done with the array [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method, which returns a new array comprising only of the items from the list for which the function that was passed as a parameter returns true for:
-从应用的状态中删除已经删除的注释是通过 array [ filter ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/filter )方法完成的，该方法返回一个新的数组，其中只包含列表中的项目，作为参数传递的函数返回 true 用于:
+从应用的状态中删除已经删除的便笺是通过 array [ filter ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/filter )方法完成的，该方法返回一个新的数组，其中只包含列表中的项目，作为参数传递的函数返回 true 用于:
 
 ```js
 notes.filter(n => n.id !== id)
@@ -866,8 +866,8 @@ The code for the current state of our application can be found in the  <i>part2-
 <h3>Exercises 2.15.-2.18.</h3>
 练习2.15-2.18. / h3
 
-<h4>2.15: Phonebook step7</h4>
-H42.15: 电话簿 step7 / h4
+<h4>2.15: Phonebook 步骤7</h4>
+H42.15: 电话簿 步骤7 / h4
 
 Let's return to our phonebook application.
 让我们回到我们的电话簿应用。
@@ -875,15 +875,15 @@ Let's return to our phonebook application.
 Currently the numbers that are added to the phonebook are not saved to a backend server. Fix this situation.
 目前，添加到电话簿中的号码没有保存到后端服务器中。
 
-<h4>2.16: Phonebook step8</h4>
-H42.16: 电话簿 step8 / h4
+<h4>2.16: Phonebook 步骤8</h4>
+H42.16: 电话簿 步骤8 / h4
 
 
 Extract the code that handles the communication with the backend into its own module by following the example shown earlier in this part of the course material.
 通过遵循课程教材本部分前面所示的示例，将处理与后端的通信的代码提取到它自己的模块中。
 
-<h4>2.17: Phonebook step9</h4>
-H42.17: 电话簿 step9 / h4
+<h4>2.17: Phonebook 步骤9</h4>
+H42.17: 电话簿 步骤9 / h4
 
 Make it possible for users to delete entries from the phonebook. The deletion can be done through a dedicated button for each person in the phonebook list. You can confirm the action from the user by using the [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) method:
 使用户可以从电话簿中删除条目。 删除可以通过电话簿列表中每个人的专用按钮来完成。 你可以通过使用[ window.confirm ]( https://developer.mozilla.org/en-us/docs/web/api/window/confirm )方法来确认用户的操作:
@@ -907,8 +907,8 @@ const delete = (id) => {
 }
 ```
 
-<h4>2.18*: Phonebook step10</h4>
-42.18 * : Phonebook step10 / h4
+<h4>2.18*: Phonebook 步骤10</h4>
+42.18 * : Phonebook 步骤10 / h4
 
 Change the functionality so that if a number is added to an already existing user, the new number will replace the old number. It's recommended to use the HTTP PUT method for updating the phone number. 
 更改功能，以便如果一个数字被添加到一个已经存在的用户，新的数字将取代旧的数字。 建议使用 HTTP PUT 方法更新电话号码。

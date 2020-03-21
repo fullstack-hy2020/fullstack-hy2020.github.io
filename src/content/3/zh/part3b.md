@@ -16,9 +16,9 @@ Next let's connect the frontend we made in [part 2](/part2) to our own backend.
 
 
 In the previous part, the frontend could ask for the list of notes from the json-server we had as a backend at from the address http://localhost:3001/notes.
-在前面的部分中，前端可以从作为后端的 json 服务器向地址 http://localhost:3001/notes 索取笔记列表。
+在前面的部分中，前端可以从作为后端的 json 服务器向地址 http://localhost:3001/notes 索取便笺列表。
 Our backend has a bit different url structure, and the notes can be found from http//localhost:3001/api/notes. 
-我们的后端有一个稍微不同的 url 结构，注释可以从 http / / localhost: 3001 / api / notes 中找到。
+我们的后端有一个稍微不同的 url 结构，便笺可以从 http / / localhost: 3001 / api / notes 中找到。
 Let's change the attribute __baseUrl__ in the <i>src/services/notes.js</i> like so:
 让我们像下面这样修改<i>src / services / notes. js</i> 中的属性 baseUrl:
 
@@ -89,7 +89,7 @@ app.use(cors())
 ```
 
 And the frontend works! However, the functionality for changing the importance of notes has not yet been implemented to the backend. 
-而且前端工作！ 但是，在后端还没有实现更改注释重要性的功能。
+而且前端工作！ 但是，在后端还没有实现更改便笺重要性的功能。
 
 You can read more about CORS from [Mozillas page](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
 你可以阅读更多关于 CORS 从[ Mozillas 页面]( https://developer.mozilla.org/en-us/docs/web/http/CORS )。
@@ -257,10 +257,10 @@ When we use a browser to go to the address <http://localhost:3001>, the server r
 ```
 
 The file contains instructions to fetch a CSS stylesheet defining the styles of the application, and two <i>script</i> tags which instruct the browser to fetch the JavaScript code of the application - the actual React application. 
-该文件包含一些指令，用于获取定义应用样式的 CSS 样式表，以及两个<i>script</i> 标记，这些标记指示浏览器获取应用的 JavaScript 代码——实际的 React 应用。
+该文件包含一些指令，用于获取定义应用样式的 CSS 样式表，以及两个<i>script</i> 标签，这些标记说明浏览器获取应用的 JavaScript 代码——实际的 React 应用。
 
 The React code fetches notes from the server address <http://localhost:3001/notes> and renders them to the screen. The communications between the server and the browser can be seen in the <i>Network</i> tab of the developer console:
-React代码从服务器地址 http://localhost:3001/notes 获取笔记并将它们渲染到屏幕上。 服务器和浏览器之间的通信可以在开发控制台的<i>Network</i> 选项卡中看到:
+React代码从服务器地址 http://localhost:3001/notes 获取便笺并将它们渲染到屏幕上。 服务器和浏览器之间的通信可以在开发控制台的<i>Network</i> 选项卡中看到:
 
 ![](../../images/3/29ea.png)
 
@@ -269,13 +269,13 @@ After ensuring that the production version of the application works locally, com
 确保应用的生产版本在本地工作之后，将前端的生产构建提交到后端存储库，并将代码再次推送到 Heroku。
 
 [The application](https://vast-oasis-81447.herokuapp.com/) works perfectly, except we haven't added the functionality for changing the importance of a note to the backend yet. 
-除了我们还没有添加改变后端注释重要性的功能之外，[应用]( https://vast-oasis-81447.herokuapp.com/ )运行得非常好。
+除了我们还没有添加改变后端便笺重要性的功能之外，[应用]( https://vast-oasis-81447.herokuapp.com/ )运行得非常好。
 
 ![](../../images/3/30ea.png)
 
 
 Our application saves the notes to a variable. If the application crashes or is restarted, all of the data will disappear. 
-我们的应用将笔记保存到一个变量中。 如果应用崩溃或重新启动，所有数据都将消失。
+我们的应用将便笺保存到一个变量中。 如果应用崩溃或重新启动，所有数据都将消失。
 
 The application needs a database. Before we introduce one, let's go through a few things. 
 应用需要一个数据库。
@@ -376,7 +376,7 @@ Current code of the backend can be found on [Github](https://github.com/fullstac
 The following exercises don't require many lines of code. They can however be challenging, because you must understand exactly what is happening and where, and the configurations must be just right. 
 下面的练习不需要很多行代码。 然而，它们可能是具有挑战性的，因为您必须准确地理解正在发生什么、在哪里发生，而且配置必须恰到好处。
 
-#### 3.9 phonebook backend step9
+#### 3.9 phonebook backend 步骤9
 3.9电话簿后台，第九步
 
 Make the backend work with the frontend from the previous part. Do not implement the functionality for making changes to the phone numbers yet, that will be implemented in exercise 3.17. 
@@ -385,14 +385,14 @@ Make the backend work with the frontend from the previous part. Do not implement
 You will probably have to do some small changes to the frontend, at least to the URLs for the backend. Remember to keep the developer console open in your browser. If some HTTP requests fail, you should check from the <i>Network</i>-tab what is going on. Keep an eye on the backend's console as well. If you did not do the previous exercise, it is worth it to print the request data or <i>request.body</i> to the console in the event handler responsible for POST requests. 
 您可能需要对前端做一些小的更改，至少对后端的 url 做一些更改。 记住，在浏览器中保持开发者控制台的打开状态。 如果一些 HTTP 请求失败，您应该从<i>Network</i>-tab 检查发生了什么。 同时也要注意后端的控制台。 如果您没有执行前面的练习，那么将请求数据或<i>request.body</i> 打印到负责 POST 请求的事件处理程序中的控制台是值得的。
 
-#### 3.10 phonebook backend step10
+#### 3.10 phonebook backend 步骤10
 3.10电话簿后台10
 
 Deploy the backend to the internet, for example to Heroku. 
 将后端部署到互联网，例如 Heroku。
 
 **NB** the command _heroku_ works on the department's computers and the freshman laptops. If for some reason you cannot [install](https://devcenter.heroku.com/articles/heroku-cli) Heroku to your computer, you can use the command [npx heroku-cli](https://www.npmjs.com/package/heroku-cli).
-命令 heroku 在部门的电脑和新生的笔记本电脑上工作。 如果由于某种原因你不能[安装]( https://devcenter.Heroku.com/articles/Heroku-cli ) Heroku 到你的计算机，你可以使用命令[ npx Heroku-cli ]( https://www.npmjs.com/package/Heroku-cli )。
+命令 heroku 在部门的电脑和新生的便笺本电脑上工作。 如果由于某种原因你不能[安装]( https://devcenter.Heroku.com/articles/Heroku-cli ) Heroku 到你的计算机，你可以使用命令[ npx Heroku-cli ]( https://www.npmjs.com/package/Heroku-cli )。
 
 Test the deployed backend with a browser and Postman or VS Code REST client to ensure it works. 
 使用浏览器和邮递员或 VS Code REST 客户端测试已部署的后端，以确保其工作正常。

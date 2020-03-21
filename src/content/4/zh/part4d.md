@@ -9,7 +9,7 @@ lang: zh
 
 
 Users must be able to log into our application, and when a user is logged in, their user information must automatically be attached to any new notes they create. 
-用户必须能够登录到我们的应用，当用户登录时，他们的用户信息必须自动附加到他们创建的任何新笔记上。
+用户必须能够登录到我们的应用，当用户登录时，他们的用户信息必须自动附加到他们创建的任何新便笺上。
 
 We will now implement support for [token based authentication](https://scotch.io/tutorials/the-ins-and-outs-of-token-based-authentication#toc-how-token-based-works) to the backend. 
 我们现在将在后端实现对[基于令牌的认证]( https://scotch.io/tutorials/the-ins-and-outs-of-token-based-authentication#toc-how-token-based-works 认证)的支持。
@@ -31,11 +31,11 @@ The principles of token based authentication are depicted in the following seque
     - The token is signed digitally, making it impossible to falsify (with cryptographic means)
 - 令牌以数码方式签署，以防伪造(使用加密方法)
 - The backend responds with a status code indicating the operation was successful, and returns the token with the response.
-- 后端用指示操作成功的状态代码进行响应，并用响应返回令牌。
+- 后端用说明操作成功的状态代码进行响应，并用响应返回令牌。
 - The browser saves the token, for example to the state of a React application. 
 - 浏览器将令牌保存为 React 应用的状态。
 - When the user creates a new note (or does some other operation requiring identification), the React code sends the token to the server with the request.
-- 当用户创建一个新的注释(或者做一些需要标识的其他操作)时，React 代码将该令牌与请求一起发送到服务器。
+- 当用户创建一个新的便笺(或者做一些需要标识的其他操作)时，React 代码将该令牌与请求一起发送到服务器。
 - The server uses the token to identify the user
 - 伺服器使用令牌识别使用者
 
@@ -164,10 +164,10 @@ A wrong username or password returns an error message and the proper status code
 
 
 ### Limiting creating new notes to logged in users
-# # # 限制登录用户创建新笔记
+# # # 限制登录用户创建新便笺
 
 Let's change creating new notes so that it is only possible if the post request has a valid token attached. 
-让我们更改创建新的注释，这样只有在 post 请求附加了一个有效的令牌时才有可能。
+让我们更改创建新的便笺，这样只有在 post 请求附加了一个有效的令牌时才有可能。
 The note is then saved to the notes list of the user identified by the token. 
 然后，便笺被保存到由该标记标识的用户的便笺列表中。
 
@@ -190,7 +190,7 @@ Bearer eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW
 预备
 
 Creating new notes will change like so: 
-创建新的笔记会像这样改变:
+创建新的便笺会像这样改变:
 
 ```js
 const jwt = require('jsonwebtoken') //highlight-line
@@ -277,7 +277,7 @@ and with Visual Studio Code REST client
 错误处理
 
 Token verification can also cause a <i>JsonWebTokenError</i>. If we for example remove a few characters from the token and try creating a new note, this happens: 
-令牌验证还可能导致<i>JsonWebTokenError</i>。 例如，如果我们从标记中删除一些字符并尝试创建一个新的注释，就会发生如下情况:
+令牌验证还可能导致<i>JsonWebTokenError</i>。 例如，如果我们从标记中删除一些字符并尝试创建一个新的便笺，就会发生如下情况:
 
 ```bash
 JsonWebTokenError: invalid signature
@@ -323,7 +323,7 @@ If the application has multiple interfaces requiring identification, JWT's valid
 如果应用有多个需要标识的接口，那么 JWT 的验证应该分离到它自己的中间件中。 还可以使用一些现有的库，如[ express-jwt ]( https://www.npmjs.com/package/express-jwt )。
 
 ### End notes
-结束音符
+结束便笺
 
 There have been many changes to the code which have caused a typical problem for a fast-paced software project: most of the tests have broken. Because this part of the course is already jammed with new information, we will leave fixing the tests to a non compulsory exercise. 
 对于快节奏的软件项目来说，代码有很多变化，这些变化导致了一个典型的问题: 大多数测试都失败了。 因为这一部分的课程已经被新的信息塞满了，我们将把修改测试留给一个非强制性的练习。
@@ -349,8 +349,8 @@ In the next exercises, basics of user management will be implemented for the Blo
 **One more warning:** If you notice you are mixing async/await and _then_ calls, it is 99% certain you are doing something wrong. Use either or, never both. 
 * * 还有一个警告: * * 如果你注意到你正在混合 async / await 然后调用，99% 肯定你做错了什么。 要么使用，要么使用，不要两者都使用。
 
-#### 4.15: bloglist expansion, step4
-4.15: bloglist expansion，step4
+#### 4.15: bloglist expansion, 步骤4
+4.15: bloglist expansion，步骤4
 
 Implement a way to create new users by doing a HTTP POST-request to address <i>api/users</i>. Users have <i>username
 通过执行 HTTP POST-request 来寻址<i>api / Users</i>，实现创建新用户的方法
@@ -379,8 +379,8 @@ List of users can for example, look as follows:
 ![](../../images/4/22.png)
 
 
-#### 4.16*: bloglist expansion, step5
-4.16 * : bloglist expansion，step5
+#### 4.16*: bloglist expansion, 步骤5
+4.16 * : bloglist expansion，步骤5
 
 Add a feature which adds the following restrictions to creating new users: Both username and password must be given. Both username and password must be at least 3 characters long. The username must be unique. 
 添加一个添加如下限制来创建新用户的特性: 必须同时给出用户名和密码。 用户名和密码必须至少3个字符长。 用户名必须是唯一的。
@@ -394,8 +394,8 @@ The operation must respond with a suitable status code and some kind of an error
 Also, implement tests which check that invalid users are not created and invalid add user operation returns a suitable status code and error message. 
 此外，实现检查无效用户未被创建和无效的添加用户操作返回合适的状态码和错误消息的测试。
 
-#### 4.17: bloglist expansion, step6
-4.17: bloglist expansion，step6
+#### 4.17: bloglist expansion, 步骤6
+4.17: bloglist expansion，步骤6
 
 Expand blogs so that each blog contains information on the creator of the blog. 
 扩展博客，使每个博客包含关于博客创建者的信息。
@@ -417,20 +417,20 @@ and listing all users also displays the blogs created by each user:
 ![](../../images/4/24e.png)
 
 
-#### 4.18: bloglist expansion, step7
-4.18: bloglist expansion，step7
+#### 4.18: bloglist expansion, 步骤7
+4.18: bloglist expansion，步骤7
 
 Implement token-based authentication according to part 4 chapter [Token authentication](/en/part4/token_authentication).
 根据第4章节[令牌认证](/ en / part4 / 令牌认证)实现基于令牌的认证。
 
-#### 4.19: bloglist expansion, step8
-4.19: bloglist expansion，step8
+#### 4.19: bloglist expansion, 步骤8
+4.19: bloglist expansion，步骤8
 
 Modify adding new blogs so that it is only possible if a valid token is sent with the HTTP POST request. The user identified by the token is designated as the creator of the blog. 
 修改添加新博客的内容，以便只有在使用 HTTP POST 请求发送有效令牌的情况下才可以添加新博客。 该令牌标识的用户被指定为博客的创建者。
 
-#### 4.20*: bloglist expansion, step9
-4.20 * : bloglist expansion，step9
+#### 4.20*: bloglist expansion, 步骤9
+4.20 * : bloglist expansion，步骤9
 
 [This example](/en/part4/token_authentication) from part 4 shows taking the token from the header with the _getTokenFrom_ helper function.
 第4章节的[示例](/ en / part4 / token authentication)显示了使用 getTokenFrom helper 函数从头部获取令牌。
@@ -466,8 +466,8 @@ const tokenExtractor = (request, response, next) => {
 }
 ```
 
-#### 4.21*: bloglist expansion, step10
-4.21 * : bloglist expansion，step10
+#### 4.21*: bloglist expansion, 步骤10
+4.21 * : bloglist expansion，步骤10
 
 Change the delete blog operation so that a blog can be deleted only by the user who added the blog. Therefore, deleting a blog is possible only if the token sent with the request is the same as that of the blog's creator. 
 更改删除博客操作，以便只有添加博客的用户才能删除博客。 因此，只有在请求中发送的令牌与博客创建者的令牌相同时，才可以删除博客。
@@ -489,8 +489,8 @@ the field <i>blog.user</i> does not contain a string, but an Object. So if you w
 if ( blog.user.toString() === userid.toString() ) ...
 ```
 
-#### 4.22*:  bloglist expansion, step11
-4.22 * : bloglist expansion，step11
+#### 4.22*:  bloglist expansion, 步骤11
+4.22 * : bloglist expansion，步骤11
 
 After adding token based authentication the tests for adding a new blog broke. down Fix now the tests. Write also a new test that ensures that adding a blog fails with proper status code <i>401 Unauthorized</i> it token is not provided.
 在添加了基于令牌的身份验证之后，添加新博客的测试中断了。 现在修复测试。 还要编写一个新的测试，以确保添加一个博客失败与适当的状态代码<i>401 Unauthorized</i> it 令牌没有提供。

@@ -30,7 +30,7 @@ Note that the application shouldn't be running in another console, otherwise the
 注意，应用不应该在另一个控制台中运行，否则该端口将已经在使用中。
 
 Below you can see a screenshot where the code execution has been paused in the middle of saving a new note:
-下面你可以看到一个屏幕截图，代码执行在保存新笔记的过程中被暂停:
+下面你可以看到一个屏幕截图，代码执行在保存新便笺的过程中被暂停:
 
 ![](../../images/3/36e.png)
 
@@ -91,7 +91,7 @@ When bugs occur, <i>the worst of all possible strategies</i> is to continue writ
 # # MongoDB
 
 In order to store our saved notes indefinitely, we need a database. Most of the courses taught at the University of Helsinki use relational databases. In this course we will use [MongoDB](https://www.mongodb.com/) which is a so-called [document database](https://en.wikipedia.org/wiki/Document-oriented_database).
-为了无限期地存储我们保存的笔记，我们需要一个数据库。 赫尔辛基大学教授的大多数课程都使用关系数据库。 在本课程中，我们将使用[ MongoDB ]( https://www.MongoDB.com/ 数据库) ，这是一个所谓的[文档数据库]( https://en.wikipedia.org/wiki/document-oriented_database 数据库)。
+为了无限期地存储我们保存的便笺，我们需要一个数据库。 赫尔辛基大学教授的大多数课程都使用关系数据库。 在本课程中，我们将使用[ MongoDB ]( https://www.MongoDB.com/ 数据库) ，这是一个所谓的[文档数据库]( https://en.wikipedia.org/wiki/document-oriented_database 数据库)。
 
 Document databases differ from relational databases in how they organize data as well as the query languages they support. Document databases are usually categorized under the [NoSQL](https://en.wikipedia.org/wiki/NoSQL) umbrella term.
 文档数据库在组织数据的方式以及它们所支持的查询语言方面不同于关系数据库。 文档数据库通常被归类为[ NoSQL ]( https://en.wikipedia.org/wiki/NoSQL  / 查询语句)的总括术语。
@@ -245,7 +245,7 @@ in the Overview tab.
 
 
 As the view states, the <i>document</i> matching the note has been added to the <i>notes</i> collection in the <i>test</i> database.
-正如视图所指出的那样，匹配注释的<i>document</i> 已经添加到<i>test</i> 数据库中的<i>notes</i> 集合中。
+正如视图所指出的那样，匹配便笺的<i>document</i> 已经添加到<i>test</i> 数据库中的<i>notes</i> 集合中。
 
 ![](../../images/3/66a.png)
 
@@ -276,7 +276,7 @@ The data is now stored in the right database. The view also offers the <i>create
 # # 架构
 
 After establishing the connection to the database, we define the [schema](http://mongoosejs.com/docs/guide.html) for a note and the matching [model](http://mongoosejs.com/docs/models.html):
-在建立到数据库的连接之后，我们为一个注释定义[模式]( http://mongoosejs.com/docs/guide.html )和匹配的[模型]( http://mongoosejs.com/docs/models.html ) :
+在建立到数据库的连接之后，我们为一个便笺定义[模式]( http://mongoosejs.com/docs/guide.html )和匹配的[模型]( http://mongoosejs.com/docs/models.html ) :
 
 ```js
 const noteSchema = new mongoose.Schema({
@@ -289,7 +289,7 @@ const Note = mongoose.model('Note', noteSchema)
 ```
 
 First we define the [schema](http://mongoosejs.com/docs/guide.html) of a note that is stored in the _noteSchema_ variable. The schema tells Mongoose how the note objects are to be stored in the database.
-首先，我们定义了存储在 noteSchema 变量中的音符的[模式]( http://mongoosejs.com/docs/guide.html )。 模式告诉 Mongoose 如何将 note 对象存储在数据库中。
+首先，我们定义了存储在 noteSchema 变量中的便笺的[模式]( http://mongoosejs.com/docs/guide.html )。 模式告诉 Mongoose 如何将 note 对象存储在数据库中。
 
 In the _Note_ model definition, the first <i>"Note"</i> parameter is the singular name of the model. The name of the collection will be the lowercased plural <i>notes</i>, because the [Mongoose convention](http://mongoosejs.com/docs/models.html) is to automatically name collections as the plural (e.g. <i>notes</i>) when the schema refers to them in the singular (e.g. <i>Note</i>).
 在 Note 模型定义中，第一个 i“ Note” /<i>参数是模型的单数名。 集合的名称将是小写的复数 i notes</i>，因为[ Mongoose 约定]( http://mongoosejs.com/docs/models.html )是当模式以单数(例如<i>notes</i>)引用集合时自动将其命名为复数(例如<i>notes</i>)。
@@ -334,7 +334,7 @@ The result of the save operation is in the _result_ parameter of the event handl
 保存操作的结果在事件处理程序的结果参数中。 当我们将一个对象存储到数据库时，结果并不那么有趣。 如果希望在实现应用或调试过程中仔细查看对象，可以将该对象打印到控制台。
 
 Let's also save a few more notes by modifying the data in the code and by executing the program again.
-我们还可以通过修改代码中的数据和再次执行程序来保存更多的注释。
+我们还可以通过修改代码中的数据和再次执行程序来保存更多的便笺。
 
 **NB** unfortunately the Mongoose documentation uses callbacks in its examples, so it is not recommended to copy paste code directly from there. Mixing promises with old-school callbacks in the same code is not recommended. 
 遗憾的是 Mongoose 文档在其示例中使用了回调函数，因此不建议直接从那里复制粘贴代码。 不建议在同一代码中将承诺与老式回调混合使用。
@@ -343,7 +343,7 @@ Let's also save a few more notes by modifying the data in the code and by execut
 # # # 从数据库中获取对象
 
 Let's comment out the code for generating new notes and replace it with the following:
-让我们注释掉生成新笔记的代码，并用如下代码替换它:
+让我们便笺掉生成新便笺的代码，并用如下代码替换它:
 
 ```js
 Note.find({}).then(result => {
@@ -355,13 +355,13 @@ Note.find({}).then(result => {
 ```
 
 When the code is executed, the program prints all the notes stored in the database:
-当代码执行时，程序会输出存储在数据库中的所有笔记:
+当代码执行时，程序会输出存储在数据库中的所有便笺:
 
 ![](../../images/3/70ea.png)
 
 
 The objects are retrieved from the database with the [find](https://mongoosejs.com/docs/api.html#model_Model.find) method of the _Note_ model. The parameter of the method is an object expressing search conditions. Since the parameter is an empty object<code>{}</code>, we get all of the notes stored in the  _notes_ collection.
-这些对象是通过 Note 模型的[ find ]( https://mongoosejs.com/docs/api.html#model_model.find )方法从数据库中检索的。 该方法的参数是表示搜索条件的对象。 因为参数是一个空的对象代码{} / code，所以我们得到了存储在 notes 集合中的所有备注。
+这些对象是通过 Note 模型的[ find ]( https://mongoosejs.com/docs/api.html#model_model.find )方法从数据库中检索的。 该方法的参数是表示搜索条件的对象。 因为参数是一个空的对象代码{} / code，所以我们得到了存储在 notes 集合中的所有便笺。
 
 The search conditions adhere to the Mongo search query [syntax](https://docs.mongodb.com/manual/reference/operator/).
 搜索条件遵循 Mongo 搜索查询[语法]( https://docs.mongodb.com/manual/reference/operator/ )。
@@ -508,7 +508,7 @@ const Note = mongoose.model('Note', noteSchema)
 ```
 
 Let's change the handler for fetching all notes into the following form:
-让我们将获取所有笔记的处理程序更改为如下形式:
+让我们将获取所有便笺的处理程序更改为如下形式:
 
 ```js
 app.get('/api/notes', (request, response) => {
@@ -703,7 +703,7 @@ Next, let's change the rest of the backend functionality to use the database.
 接下来，让我们更改后端功能的其余部分以使用数据库。
 
 Creating a new note is accomplished like this:
-创建一个新的笔记是这样完成的:
+创建一个新的便笺是这样完成的:
 
 ```js
 app.post('/api/notes', (request, response) => {
@@ -750,7 +750,7 @@ app.get('/api/notes/:id', (request, response) => {
 # # # 验证前端和后端集成
 
 When the backend gets expanded, it's a good idea to test the backend first with **the browser, Postman or the VS Code REST client**. Next, let's try creating a new note after taking the database into use:
-当后端扩展时，最好先用 * * the browser，Postman 或者 VS Code REST 客户端 * * 来测试后端。 接下来，让我们尝试在使用数据库之后创建一个新的笔记:
+当后端扩展时，最好先用 * * the browser，Postman 或者 VS Code REST 客户端 * * 来测试后端。 接下来，让我们尝试在使用数据库之后创建一个新的便笺:
 
 ![](../../images/3/46e.png)
 
@@ -759,7 +759,7 @@ Only once everything has been verified to work in the backend, is it a good idea
 只有当所有的东西都被验证在后端工作时，测试前端是否与后端一起工作是一个好主意。 仅仅通过前端测试是非常低效的。
 
 It's probably a good idea to integrate the frontend and backend one functionality at a time. First, we could implement fetching all of the notes from the database and test it through the backend endpoint in the browser. After this, we could verify that the frontend works with the new backend. Once everything seems to work, we would move onto the next feature.
-一次集成一个前端和后端功能可能是个好主意。 首先，我们可以实现从数据库中获取所有笔记，并通过浏览器中的后端端点对其进行测试。 在此之后，我们可以验证前端是否与新的后端一起工作。 一旦一切看起来正常，我们就会进入下一个特性。
+一次集成一个前端和后端功能可能是个好主意。 首先，我们可以实现从数据库中获取所有便笺，并通过浏览器中的后端端点对其进行测试。 在此之后，我们可以验证前端是否与新的后端一起工作。 一旦一切看起来正常，我们就会进入下一个特性。
 
 Once we introduce a database into the mix, it is useful to inspect the state persisted in the database, e.g. from the control panel in MongoDB Atlas. Quite often little Node helper programs like the <i>mongo.js</i> program we wrote earlier can be very helpful during development.
 一旦我们在混合中引入了一个数据库，检查数据库中持久存储的状态就很有用了，例如，通过 MongoDB Atlas 中的控制面板来检查。 很多时候，像我们前面编写的<i>mongo.js</i> 程序这样的小型 Node helper 程序在开发过程中会非常有用。
@@ -779,7 +779,7 @@ You can find the code for our current application in its entirety in the <i>part
 The following exercises are pretty straightforward, but if your frontend stops working with the backend, then finding and fixing the bugs can be quite interesting. 
 下面的练习非常简单，但是如果前端停止使用后端，那么查找和修复 bug 将会非常有趣。
 
-#### 3.13: Phonebook database, step1
+#### 3.13: Phonebook database, 步骤1
 3.13: 电话簿数据库，第一步
 
 Change the fetching of all phonebook entries so that the data is <i>fetched from the database</i>.
@@ -791,7 +791,7 @@ Verify that the frontend works after the changes have been made.
 In the following exercises, write all Mongoose-specific code into its own module, just like we did in the chapter [Database configuration into its own module](/en/part3/saving_data_to_mongo_db#database-configuration-into-its-own-module).
 在下面的练习中，将所有特定于 mongoose 的代码写入它自己的模块，就像我们在[ Database configuration into its own module ]一章中所做的那样(/ en / part3 / saving data to mongo db # Database-configuration-into-its-own-module)。
 
-#### 3.14: Phonebook database, step2
+#### 3.14: Phonebook database, 步骤2
 3.14: 电话簿数据库，第二步
 
 Change the backend so that new numbers are <i>saved to the database</i>. Verify that your frontend still works after the changes.
@@ -810,7 +810,7 @@ At this point, you can choose to simply allow users to create all phonebook entr
 错误处理
 
 If we try to visit the URL of a note with an id that does not actually exist e.g. <http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431> where <i>5a3b80015b6ec6f1bdf68d</i> is not an id stored in the database, then the browser will simply get "stuck" since the server never responds to the request.
-如果我们试图访问一个实际上并不存在的 id 的笔记的 URL，比如 http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431数据库，其中<i>5a3b80015b6ec6f1bdf68d</i> 不是一个存储在数据库中的 id，那么浏览器将简单地“卡住” ，因为服务器从不响应请求。
+如果我们试图访问一个实际上并不存在的 id 的便笺的 URL，比如 http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431数据库，其中<i>5a3b80015b6ec6f1bdf68d</i> 不是一个存储在数据库中的 id，那么浏览器将简单地“卡住” ，因为服务器从不响应请求。
 
 We can see the following error message appear in the logs for the backend:
 我们可以在后端的日志中看到如下错误消息:
@@ -867,7 +867,7 @@ Body:   {}
 预备
 
 The other error situation happens when the id is in the correct format, but no note is found in the database for that id.
-另一种错误情况发生在 id 格式正确，但在数据库中没有找到该 id 的注释时。
+另一种错误情况发生在 id 格式正确，但在数据库中没有找到该 id 的便笺时。
 
 <pre>
 预
@@ -1070,10 +1070,10 @@ Now the handling of unknown endpoints is ordered <i>before the HTTP request hand
 # # # 其他手术
 
 Let's add some missing functionality to our application, including deleting and updating an individual note.
-让我们为我们的应用添加一些缺失的功能，包括删除和更新单个注释。
+让我们为我们的应用添加一些缺失的功能，包括删除和更新单个便笺。
 
 The easiest way to delete a note from the database is with the [findByIdAndRemove](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove) method:
-从数据库中删除笔记最简单的方法是使用[ findByIdAndRemove ]( https://mongoosejs.com/docs/api.html#model_model.findByIdAndRemove )方法:
+从数据库中删除便笺最简单的方法是使用[ findByIdAndRemove ]( https://mongoosejs.com/docs/api.html#model_model.findByIdAndRemove )方法:
 
 ```js
 app.delete('/api/notes/:id', (request, response, next) => {
@@ -1086,10 +1086,10 @@ app.delete('/api/notes/:id', (request, response, next) => {
 ```
 
 In both of the "successful" cases of deleting a resource, the backend responds with the status code <i>204 no content</i>. The two different cases are deleting a note that exists, and deleting a note that does not exist in the database. The _result_ callback parameter could be used for checking if a resource actually was deleted, and we could use that information for returning different status codes for the two cases if we deemed it necessary. Any exception that occurs is passed onto the error handler.
-在删除资源的两个“成功”案例中，后端都使用状态码 i204 no content / i 进行响应。 两种不同的情况是删除已存在的注释，并删除数据库中不存在的注释。 结果回调参数可用于检查资源是否实际被删除，如果认为有必要，我们可以使用该信息为两种情况返回不同的状态代码。 发生的任何异常都会传递到错误处理程序上。
+在删除资源的两个“成功”案例中，后端都使用状态码 i204 no content / i 进行响应。 两种不同的情况是删除已存在的便笺，并删除数据库中不存在的便笺。 结果回调参数可用于检查资源是否实际被删除，如果认为有必要，我们可以使用该信息为两种情况返回不同的状态代码。 发生的任何异常都会传递到错误处理程序上。
 
 The toggling of the importance of a note can be easily accomplished with the [findByIdAndUpdate](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate) method.
-通过[ findbyidanddupdate ]( https://mongoosejs.com/docs/api.html#model_model.findByIdAndUpdate )方法可以轻松地切换注释的重要性。
+通过[ findbyidanddupdate ]( https://mongoosejs.com/docs/api.html#model_model.findByIdAndUpdate )方法可以轻松地切换便笺的重要性。
 
 ```js
 app.put('/api/notes/:id', (request, response, next) => {
@@ -1109,10 +1109,10 @@ app.put('/api/notes/:id', (request, response, next) => {
 ```
 
 In the code above, we also allow the content of the note to be edited. However, we will not support changing the creation date for obvious reasons.
-在上面的代码中，我们也允许编辑注释的内容。 然而，出于显而易见的原因，我们不支持更改创建日期。
+在上面的代码中，我们也允许编辑便笺的内容。 然而，出于显而易见的原因，我们不支持更改创建日期。
 
 Notice that the <em>findByIdAndUpdate</em> method receives a regular JavaScript object as its parameter, and not a new note object created with the <em>Note</em> constructor function.
-注意，em findbyidanddupdate / em 方法接收一个常规的 JavaScript 对象作为参数，而不是用 em Note / em 构造函数创建的新注释对象。
+注意，em findbyidanddupdate / em 方法接收一个常规的 JavaScript 对象作为参数，而不是用 em Note / em 构造函数创建的新便笺对象。
 
 There is one important detail regarding the use of the <em>findByIdAndUpdate</em> method. By default, the <em>updatedNote</em> parameter of the event handler receives the original document [without the modifications](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate). We added the optional <code>{ new: true }</code> parameter, which will cause our event handler to be called with the new modified document instead of the original.
 关于 em findbyidanddupdate / em 方法的使用有一个重要的细节。 默认情况下，事件处理程序的 em updatedNote / em 参数接收原始文档[无需修改]( https://mongoosejs.com/docs/api.html#model_model.findbyidandupdate )。 我们添加了可选的代码{ new: true } / code 参数，这将导致使用新修改的文档而不是原始文档调用事件处理程序。
@@ -1127,7 +1127,7 @@ When we toggle the importance of a note, we see the following worrisome error me
 
 
 Googling the error message will lead to [instructions](https://stackoverflow.com/questions/52572852/deprecationwarning-collection-findandmodify-is-deprecated-use-findoneandupdate) for fixing the problem. Following [the suggestion in the Mongoose documentation](https://mongoosejs.com/docs/deprecations.html), we add the following line to the <i>note.js</i> file:
-谷歌错误信息将导致[指示]( https://stackoverflow.com/questions/52572852/deprecationwarning-collection-findandmodify-is-deprecated-use-findoneandupdate )解决问题。 根据 Mongoose 文档中的建议，我们在<i>note.js</i> 文件中添加了如下 https://mongoosejs.com/docs/deprecations.html  :
+谷歌错误信息将导致[说明]( https://stackoverflow.com/questions/52572852/deprecationwarning-collection-findandmodify-is-deprecated-use-findoneandupdate )解决问题。 根据 Mongoose 文档中的建议，我们在<i>note.js</i> 文件中添加了如下 https://mongoosejs.com/docs/deprecations.html  :
 
 ```js
 const mongoose = require('mongoose')
@@ -1151,7 +1151,7 @@ You can find the code for our current application in its entirety in the <i>part
 ### Exercises 3.15.-3.18.
 练习3.15-3.18。
 
-#### 3.15: Phonebook database, step3
+#### 3.15: Phonebook database, 步骤3
 3.15: 电话簿数据库，第三步
 
 Change the backend so that deleting phonebook entries is reflected in the database.
@@ -1160,13 +1160,13 @@ Change the backend so that deleting phonebook entries is reflected in the databa
 Verify that the frontend still works after making the changes.
 验证前端在进行更改后是否仍然可用。
 
-#### 3.16: Phonebook database, step3
+#### 3.16: Phonebook database, 步骤3
 3.16: 电话簿数据库，第三步
 
 Move the error handling of the application to a new error handler middleware. 
 将应用的错误处理移动到新的错误处理程序中间件。
 
-#### 3.17*: Phonebook database, step4
+#### 3.17*: Phonebook database, 步骤4
 3.17 * : 电话簿数据库，第四步
 
 If the user tries to create a new phonebook entry for a person whose name is already in the phonebook, the frontend will try to update the phone number of the existing entry by making an HTTP PUT request to the entry's unique URL.
@@ -1178,8 +1178,8 @@ Modify the backend to support this request.
 Verify that the frontend works after making your changes.
 在进行更改后，验证前端是否工作正常。
 
-#### 3.18*: Phonebook database step5
-3.18 * : 电话簿数据库 step5
+#### 3.18*: Phonebook database 步骤5
+3.18 * : 电话簿数据库 步骤5
 
 Also update the handling of the <i>api/persons/:id</i> and <i>info</i> routes to use the database, and verify that they work directly with the browser, Postman, or VS Code REST client.
 还要更新使用数据库的<i>api / persons / : id</i> 和<i>info</i> 路由的处理，并验证它们是否直接与浏览器、邮递员或 VS Code REST 客户端一起工作。

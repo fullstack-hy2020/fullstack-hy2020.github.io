@@ -10,11 +10,11 @@ lang: zh
 
 
 We want to add user authentication and authorization to our application. Users should be stored in the database and every note should be linked to the user who created it. Deleting and editing a note should only be allowed for the user who created it.
-我们希望将用户身份验证和授权添加到应用中。 用户应该存储在数据库中，并且每个注释都应该链接到创建它的用户。 删除和编辑便笺应该只允许创建它的用户使用。
+我们希望将用户身份验证和授权添加到应用中。 用户应该存储在数据库中，并且每个便笺都应该链接到创建它的用户。 删除和编辑便笺应该只允许创建它的用户使用。
 
 
 Let's start by adding information about users to the database. There is a one-to-many relationship between the user (<i>User</i>) and notes (<i>Note</i>):
-让我们从向数据库添加有关用户的信息开始。 用户(i User / i)和备注(i Note / i)之间存在一对多的关系:
+让我们从向数据库添加有关用户的信息开始。 用户(i User / i)和便笺(i Note / i)之间存在一对多的关系:
 
 ![](https://yuml.me/a187045b.png)
 ! [ https://yuml.me/a187045b.png ]
@@ -29,7 +29,7 @@ When working with document databases the situation is a bit different, as there 
 
 
 The existing solution saves every note in the <i>notes collection</i> in the database. If we do not want to change this existing collection, then the natural choice is to save users in their own collection,  <i>users</i> for example.
-现有的解决方案将<i>notes collection</i> 中的所有注释保存到数据库中。 如果我们不想更改这个现有的集合，那么自然的选择是将用户保存到他们自己的集合中，例如<i>users</i>。
+现有的解决方案将<i>notes collection</i> 中的所有便笺保存到数据库中。 如果我们不想更改这个现有的集合，那么自然的选择是将用户保存到他们自己的集合中，例如<i>users</i>。
 
 
 Like with all document databases, we can use object id's in Mongo to reference documents in other collections. This is similar to using foreign keys in relational databases.
@@ -49,7 +49,7 @@ If we need a functionality similar to join queries, we will implement it in our 
 
 
 If we were using a relational database the note would contain a <i>reference key</i> to the user who created it. In document databases we can do the same thing. 
-如果我们使用的是关系数据库，那么注释中就会包含一个<i>reference key</i> 来指向创建它的用户。 在文档数据库中，我们可以做同样的事情。
+如果我们使用的是关系数据库，那么便笺中就会包含一个<i>reference key</i> 来指向创建它的用户。 在文档数据库中，我们可以做同样的事情。
 
 
 Let's assume that the <i>users</i> collection contains two users:
@@ -70,7 +70,7 @@ Let's assume that the <i>users</i> collection contains two users:
 
 
 The <i>notes</i> collection contains three notes that all have a <i>user</i> field that references a user in the <i>users</i> collection:
-I notes /<i>集合包含三个注释，它们都有一个 i user</i> 字段，引用<i>users</i> 集合中的一个用户:
+I notes /<i>集合包含三个便笺，它们都有一个 i user</i> 字段，引用<i>users</i> 集合中的一个用户:
 
 ```js
 [
@@ -97,7 +97,7 @@ I notes /<i>集合包含三个注释，它们都有一个 i user</i> 字段，�
 
 
 Document databases do not demand the foreign key to be stored in the note resources, it could <i>also</i> be stored in the users collection, or even both:
-文档数据库不要求外键存储在笔记资源中，也可以 i / i 存储在用户集合中，甚至两者都存储:
+文档数据库不要求外键存储在便笺资源中，也可以 i / i 存储在用户集合中，甚至两者都存储:
 
 ```js
 [
@@ -116,7 +116,7 @@ Document databases do not demand the foreign key to be stored in the note resour
 
 
 Since users can have many notes, the related ids are stored in an array in the <i>notes</i> field.
-因为用户可以有许多注释，所以相关的 id 存储在<i>notes</i> 字段中的数组中。
+因为用户可以有许多便笺，所以相关的 id 存储在<i>notes</i> 字段中的数组中。
 
 
 Document databases also offer a radically different way of organizing the data: In some situations it might be beneficial to nest the entire notes array as a part of the documents in the users collection:
@@ -154,7 +154,7 @@ Document databases also offer a radically different way of organizing the data: 
 
 
 In this schema notes would be tightly nested under users and the database would not generate ids for them.
-在这个模式中，笔记将紧密嵌套在用户之下，数据库不会为它们生成 id。
+在这个模式中，便笺将紧密嵌套在用户之下，数据库不会为它们生成 id。
 
 
 The structure and schema of the database is not as self-evident as it was with relational databases. The chosen schema must be one which supports the use cases of the application the best. This is not a simple design decision to make, as all use cases of the applications are not known when the design decision is made.
@@ -170,7 +170,7 @@ Paradoxically, schema-less databases like Mongo require developers to make far m
 
 
 In this case, we make the decision to store the ids of the notes created by the user in the user document. Let's define the model for representing a user in the <i>models/user.js</i> file:
-在这种情况下，我们决定将用户创建的笔记的 id 存储在用户文档中。 让我们定义在<i>模型 / 用户中表示用户的模型。 Js</i> 文件:
+在这种情况下，我们决定将用户创建的便笺的 id 存储在用户文档中。 让我们定义在<i>模型 / 用户中表示用户的模型。 Js</i> 文件:
 
 ```js
 const mongoose = require('mongoose')
@@ -204,7 +204,7 @@ module.exports = User
 
 
 The ids of the notes are stored within the user document as an array of Mongo ids. The definition is as follows:
-笔记的 id 作为 Mongo id 数组存储在用户文档中。 定义如下:
+便笺的 id 作为 Mongo id 数组存储在用户文档中。 定义如下:
 
 ```js
 {
@@ -215,11 +215,11 @@ The ids of the notes are stored within the user document as an array of Mongo id
 
 
 The type of the field is <i>ObjectId</i> that references <i>note</i>-style documents. Mongo does not inherently know that this is a field that references notes, the syntax is purely related to and defined by Mongoose.
-这个字段的类型是<i>ObjectId</i>，它引用<i>注释</i> 样式的文档。 本质上并不知道这是一个引用注释的字段，语法纯粹是与 Mongoose 相关并由 Mongoose 定义的。
+这个字段的类型是<i>ObjectId</i>，它引用<i>便笺</i> 样式的文档。 本质上并不知道这是一个引用便笺的字段，语法纯粹是与 Mongoose 相关并由 Mongoose 定义的。
 
 
 Let's expand the schema of the note defined in the <i>model/note.js</i> file so that the note contains information about the user who created it:
-让我们展开在<i>模型 / 注释中定义的注释的模式。 Js</i> 文件，以便便条包含关于创建它的用户的信息:
+让我们展开在<i>模型 / 便笺中定义的便笺的模式。 Js</i> 文件，以便便条包含关于创建它的用户的信息:
 
 ```js
 const noteSchema = new mongoose.Schema({
@@ -241,7 +241,7 @@ const noteSchema = new mongoose.Schema({
 
 
 In stark contrast to the conventions of relational databases, <i>references are now stored in both documents</i>: the note references the user who created it, and the user has an array of references to all of the notes created by them.
-与关系数据库的惯例形成鲜明对比的是，i 引用现在存储在两个 document / i 中: 注释引用创建它的用户，用户有一个对它们创建的所有注释的引用数组。
+与关系数据库的惯例形成鲜明对比的是，i 引用现在存储在两个 document / i 中: 便笺引用创建它的用户，用户有一个对它们创建的所有便笺的引用数组。
 
 
 ### Creating users
@@ -486,7 +486,7 @@ You can find the code for our current application in its entirety in the <i>part
 您可以在[ this github repository ]的<i>part4-7</i> 分支中找到我们当前应用的全部代码，该分支位于 https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-7文件库中。
 
 ### Creating a new note
-创造一个新的音符
+创造一个新的便笺
 
 The code for creating a new note has to be updated so that the note is assigned to the user who created it.
 创建新便笺的代码必须更新，以便便笺分配给创建它的用户。
@@ -532,22 +532,22 @@ await user.save()
 ```
 
 Let's try to create a new note
-让我们尝试创建一个新的音符
+让我们尝试创建一个新的便笺
 
 ![](../../images/4/10e.png)
 
 
 The operation appears to work. Let's add one more note and then visit the route for fetching all users:
-这个操作看起来起作用了。让我们再添加一个注释，然后访问获取所有用户的路由:
+这个操作看起来起作用了。让我们再添加一个便笺，然后访问获取所有用户的路由:
 
 ![](../../images/4/11e.png)
 
 
 We can see that the user has two notes. 
-我们可以看到用户有两个注释。
+我们可以看到用户有两个便笺。
 
 Likewise, the ids of the users who created the notes can be seen when we visit the route for fetching all notes:
-同样，当我们访问获取所有笔记的路径时，可以看到创建笔记的用户的 id:
+同样，当我们访问获取所有便笺的路径时，可以看到创建便笺的用户的 id:
 
 ![](../../images/4/12e.png)
 
@@ -556,10 +556,10 @@ Likewise, the ids of the users who created the notes can be seen when we visit t
 填充
 
 We would like our API to work in such a way, that when an HTTP GET request is made to the <i>/api/users</i> route, the user objects would also contain the contents of the user's notes, and not just their id. In a relational database, this functionality would be implemented with a <i>join query</i>.
-我们希望我们的 API 以这样的方式工作: 当向<i>/ API / users</i> 路由发出 HTTP GET 请求时，用户对象也将包含用户笔记的内容，而不仅仅是它们的 id。 在一个关系数据库中，这个功能将通过<i>join query</i> 来实现。
+我们希望我们的 API 以这样的方式工作: 当向<i>/ API / users</i> 路由发出 HTTP GET 请求时，用户对象也将包含用户便笺的内容，而不仅仅是它们的 id。 在一个关系数据库中，这个功能将通过<i>join query</i> 来实现。
 
 As previously mentioned, document databases do not properly support join queries between collections, but the Mongoose library can do some of these joins for us. Mongoose accomplishes the join by doing multiple queries, which is different from join queries in relational databases which are <i>transactional</i>, meaning that the state of the database does not change during the time that the query is made. With join queries in Mongoose, nothing can guarantee that the state between the collections being joined is consistent, meaning that if we make a query that joins the user and notes collections, the state of the collections may change during the query.
-正如前面提到的，文档数据库不能正确地支持集合之间的连接查询，但 Mongoose 库可以为我们做一些这样的连接。 Mongoose 通过执行多个查询来完成连接，这与关系数据库中的连接查询不同，后者是<i>transactional</i>，即在执行查询期间数据库的状态不会改变。 使用 Mongoose 中的连接查询，没有什么可以保证正在连接的集合之间的状态是一致的，这意味着如果我们进行连接用户和笔记集合的查询，集合的状态可能在查询期间发生变化。
+正如前面提到的，文档数据库不能正确地支持集合之间的连接查询，但 Mongoose 库可以为我们做一些这样的连接。 Mongoose 通过执行多个查询来完成连接，这与关系数据库中的连接查询不同，后者是<i>transactional</i>，即在执行查询期间数据库的状态不会改变。 使用 Mongoose 中的连接查询，没有什么可以保证正在连接的集合之间的状态是一致的，这意味着如果我们进行连接用户和便笺集合的查询，集合的状态可能在查询期间发生变化。
 
 
 The Mongoose join is done with the [populate](http://mongoosejs.com/docs/populate.html) method. Let's update the route that returns all users first:
@@ -603,7 +603,7 @@ The result is now exactly like we want it to be:
 
 
 Let's also add a suitable population of user information to notes:
-我们还可以在备注中添加一组合适的用户信息:
+我们还可以在便笺中添加一组合适的用户信息:
 
 ```js
 notesRouter.get('/', async (request, response) => {
@@ -616,7 +616,7 @@ notesRouter.get('/', async (request, response) => {
 
 
 Now the user's information is added to the <i>user</i> field of note objects.
-现在用户的信息被添加到注释对象的<i>user</i> 字段中。
+现在用户的信息被添加到便笺对象的<i>user</i> 字段中。
 
 ![](../../images/4/15ea.png)
 

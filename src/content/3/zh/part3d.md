@@ -10,7 +10,7 @@ lang: zh
 
 
 There are usually constraints that we want to apply to the data that is stored in our application's database. Our application shouldn't accept notes that have a missing or empty <i>content</i> property. The validity of the note is checked in the route handler:
-我们通常希望对存储在应用数据库中的数据应用一些约束。 我们的应用不应该接受缺少或空的<i>content</i> 属性的注释。 在路由处理程序中检查注释的有效性:
+我们通常希望对存储在应用数据库中的数据应用一些约束。 我们的应用不应该接受缺少或空的<i>content</i> 属性的便笺。 在路由处理程序中检查便笺的有效性:
 
 ```js
 app.post('/api/notes', (request, response) => {
@@ -64,7 +64,7 @@ I minlength /<i>和 i required</i> 验证器是[内置的]( https://mongoosejs.c
 
 
 If we try to store an object in the database that breaks one of the constraints, the operation will throw an exception. Let's change our handler for creating a new note so that it passes any potential exceptions to the error handler middleware:
-如果我们尝试在数据库中存储一个打破其中一个约束的对象，操作将引发异常。 让我们改变我们的处理程序来创建一个新的注释，这样它就可以将任何潜在的异常传递给错误处理中间件:
+如果我们尝试在数据库中存储一个打破其中一个约束的对象，操作将引发异常。 让我们改变我们的处理程序来创建一个新的便笺，这样它就可以将任何潜在的异常传递给错误处理中间件:
 
 ```js
 app.post('/api/notes', (request, response, next) => { // highlight-line
@@ -113,7 +113,7 @@ When validating an object fails, we return the following default error message f
 承诺锁链
 
 Many of the route handlers changed the response data into the right format by calling the _toJSON_ method. When we created a new note, the _toJSON_ method was called for the object passed as a parameter to _then_:
-许多路由处理程序通过调用 toJSON 方法将响应数据更改为正确的格式。 当我们创建一个新的笔记时，toJSON 方法被调用，作为参数传递给下面的对象:
+许多路由处理程序通过调用 toJSON 方法将响应数据更改为正确的格式。 当我们创建一个新的便笺时，toJSON 方法被调用，作为参数传递给下面的对象:
 
 ```js
 app.post('/api/notes', (request, response, next) => {
@@ -150,7 +150,7 @@ app.post('/api/notes', (request, response, next) => {
 
 
 In the first _then_ we receive _savedNote_ object returned by Mongoose and format it. The result of the operation is returned. Then as [we discussed earlier](/en/part2/altering_data_in_server#extracting-communication-with-the-backend-into-a-separate-module), the _then_ method of a promise also returns a promise. This means that when we return _savedNote.toJSON()_ from the callback function, we are actually creating a promise that receives the formatted note as its value. We can access the formatted note by registering a new callback function with the _then_ method.
-在第一，然后我们收到 savedNote 对象返回的 Mongoose 和格式化它。 返回操作的结果。 然后，正如[我们前面讨论过的](/ en / part2 / modified data in server # extraction-communication-with-the-backend-into-a-separate-module) ，Then 的方法也返回了一个承诺。 这意味着，当我们从回调函数返回 savedNote.toJSON ()时，我们实际上是在创建一个承诺，该承诺将接收格式化的音符作为其值。 我们可以通过使用 then 方法注册一个新的回调函数来访问带格式的便笺。
+在第一，然后我们收到 savedNote 对象返回的 Mongoose 和格式化它。 返回操作的结果。 然后，正如[我们前面讨论过的](/ en / part2 / modified data in server # extraction-communication-with-the-backend-into-a-separate-module) ，Then 的方法也返回了一个承诺。 这意味着，当我们从回调函数返回 savedNote.toJSON ()时，我们实际上是在创建一个承诺，该承诺将接收格式化的便笺作为其值。 我们可以通过使用 then 方法注册一个新的回调函数来访问带格式的便笺。
 
 We can clean up our code even more by using the more compact syntax for arrow functions:
 我们可以使用箭头函数的紧凑语法来清理我们的代码:
@@ -219,7 +219,7 @@ You can find the code for our current application in its entirety in the <i>part
 练习3.19- 3.21。
 
 
-#### 3.19: Phonebook database, step7
+#### 3.19: Phonebook database, 步骤7
 3.19: 电话簿数据库，第七步
 
 
@@ -245,8 +245,8 @@ connected to MongoDB
 Read the mongoose [documentation](https://mongoosejs.com/docs/deprecations.html) to find out how to get rid of the warning.
 阅读猫鼬[文档]( https://mongoosejs.com/docs/deprecations.html 文档) ，找出如何摆脱警告。
 
-#### 3.20*: Phonebook database, step8
-3.20 * : 电话簿数据库，step8
+#### 3.20*: Phonebook database, 步骤8
+3.20 * : 电话簿数据库，步骤8
 
 Expand the validation so that the name stored in the database has to be at least three characters long, and the phone number must have at least 8 digits.
 展开验证，以便存储在数据库中的名称必须至少有三个字符长，电话号码必须至少有8个数字。

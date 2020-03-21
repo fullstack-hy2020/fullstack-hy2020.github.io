@@ -29,8 +29,8 @@ One good piece of advice for both refactoring and writing new code is to take <i
 ### Exercises 7.9.-7.21.
 练习7.9-7.21。
 
-#### 7.9: redux, step1
-7.9: redux，step1
+#### 7.9: redux, 步骤1
+7.9: redux，步骤1
 
 Refactor the application from using internal React component state to using Redux for the application's state management.
 将应用从使用内部 React 组件状态重构为使用 Redux 进行应用的状态管理。
@@ -38,8 +38,8 @@ Refactor the application from using internal React component state to using Redu
 Additionally, change the application's notifications to use Redux at this point of the exercise set.
 此外，在练习集的这一点上，更改应用的通知以使用 Redux。
 
-#### 7.10: redux, step2
-7.10: redux，step2
+#### 7.10: redux, 步骤2
+7.10: redux，步骤2
 
 _Note_ that this and the next two exercises are quite laborious but incredibly educational.
 请注意，这个和接下来的两个练习相当费力，但令人难以置信的教育。
@@ -50,8 +50,8 @@ Store the information about blog posts in the Redux store. In this exercise it i
 You are free to manage the state for logging in and creating new blog posts by using the internal state of React components.
 通过使用 React 组件的内部状态，您可以自由地管理登录和创建新博客文章的状态。
 
-#### 7.11: redux, step3
-7.11: redux，step3
+#### 7.11: redux, 步骤3
+7.11: redux，步骤3
 
 Expand your solution so that it is again possible to like and delete a blog.
 展开您的解决方案，这样就可以再次喜欢和删除博客。
@@ -59,8 +59,8 @@ Expand your solution so that it is again possible to like and delete a blog.
 Laajenna ratkaisua siten, että blogien liketys ja poisto toimivat.
 这是一个很好的例子，这是一个很好的例子。
 
-#### 7.12: redux, step4
-7.12: redux，step4
+#### 7.12: redux, 步骤4
+7.12: redux，步骤4
 
 Store the information about the signed in user in the Redux store.
 在 Redux 存储中存储有关已签名用户的信息。
@@ -146,7 +146,7 @@ Implement a navigation menu for the application:
 ![](../../images/7/47.png)
 
 
-#### 7.17: comments, step1
+#### 7.17: comments, 步骤1
 7.17: 评论，第一步
 
 Implement the functionality for commenting on blog posts:
@@ -156,15 +156,15 @@ Implement the functionality for commenting on blog posts:
 
 
 Comments should be anonymous, meaning that they are not associated to the user who left the comment.
-注释应该是匿名的，这意味着它们与留下注释的用户没有关联。
+便笺应该是匿名的，这意味着它们与留下便笺的用户没有关联。
 
 In this exercise it is enough for the frontend to only display the comments that the application receives from the backend.
-在这个练习中，前端只显示应用从后端接收到的注释就足够了。
+在这个练习中，前端只显示应用从后端接收到的便笺就足够了。
 
 An appropriate mechanism for adding comments to a blog post would be an HTTP POST request to the <i>api/blogs/:id/comments</i> endpoint.
 向博客文章添加评论的适当机制是向<i>api / blogs / : id / comments</i> 端点发送 HTTP POST 请求。
 
-#### 7.18: comments, step2
+#### 7.18: comments, 步骤2
 7.18: 评论，第二步
 
 Extend your application so that users can add comments to blog posts from the frontend:
@@ -173,14 +173,14 @@ Extend your application so that users can add comments to blog posts from the fr
 ![](../../images/7/49.png)
 
 
-#### 7.19: Styles, step1
-7.19: Styles，step1
+#### 7.19: Styles, 步骤1
+7.19: Styles，步骤1
 
 Improve the appearance of your application by applying one of the methods shown in the course material.
 通过应用课程材料中显示的方法之一来改善应用的外观。
 
-#### 7.20: Styles, step2
-7.20: Styles，step2
+#### 7.20: Styles, 步骤2
+7.20: Styles，步骤2
 
 You can mark this exercise as finished if you use an hour or more for styling your application.
 如果您使用了一个小时或更多的时间来设计应用，则可以将此练习标记为已完成。

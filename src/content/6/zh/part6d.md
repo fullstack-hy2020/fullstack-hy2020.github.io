@@ -94,7 +94,7 @@ The module exports the <i>connected component</i> that works exactly like the pr
 该模块导出的<i>/ 连接元件(图论)</i> 与之前的常规组件工作方式完全相同。
 
 The component needs the list of notes and the value of the filter from the Redux store. The _connect_ function accepts a so-called [mapStateToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapstatetoprops-state-ownprops--object) function as its first parameter. The function can be used for defining the props of the <i>connected component</i> that are based on the state of the Redux store.
-组件需要 Redux 存储中的注释列表和筛选器的值。 Connect 函数接受所谓的[ mapStateToProps ]( https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapStateToProps-state-ownprops--object )函数作为它的第一个参数。 这个函数可以用来定义基于 Redux 存储状态的<i>/ 连接元件(图论)</i> 的props。
+组件需要 Redux 存储中的便笺列表和筛选器的值。 Connect 函数接受所谓的[ mapStateToProps ]( https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapStateToProps-state-ownprops--object )函数作为它的第一个参数。 这个函数可以用来定义基于 Redux 存储状态的<i>/ 连接元件(图论)</i> 的props。
 
 If we define:
 如果我们定义:
@@ -145,7 +145,7 @@ export default ConnectedNotes
 
 
 The <i>Notes</i> component can access the state of the store directly, e.g. through <i>props.notes</i> that contains the list of notes.  Similarly, <i>props.filter</i> references the value of the filter.
-I Notes /<i>组件可以直接访问存储的状态，例如通过包含注释列表的 i propss.Notes</i>。 类似地，i props.filter / i 引用了过滤器的值。
+I Notes /<i>组件可以直接访问存储的状态，例如通过包含便笺列表的 i propss.Notes</i>。 类似地，i props.filter / i 引用了过滤器的值。
 
 The situation that results from using <i>connect</i> with the <i>mapStateToProps</i> function we defined can be visualized like this:
 使用<i>connect</i> 和我们定义的<i>mapStateToProps</i> 函数的结果可以这样可视化:
@@ -160,7 +160,7 @@ I Notes /<i>组件通过 i props.Notes</i> 和<i>props.filter</i> 具有“直�
 The _NoteList_ component actually does not need the information about which filter is selected, so we can move the filtering logic elsewhere.
 Notelist 组件实际上不需要关于选择哪个过滤器的信息，因此我们可以将过滤逻辑移到其他位置。
 We just have to give it correctly filtered notes in the _notes_ prop:
-我们只需要在音符props中给它正确过滤的音符:
+我们只需要在便笺props中给它正确过滤的便笺:
 
 ```js
 const Notes = (props) => { // highlight-line
@@ -351,7 +351,7 @@ export default connect(
 ```
 
 Let's also use _connect_ to create new notes:
-我们也可以使用 connect 来创建新笔记:
+我们也可以使用 connect 来创建新便笺:
 
 ```js
 import React from 'react'
@@ -491,7 +491,7 @@ export default connect(
 
 
 The connect expression above enables the component to dispatch actions for creating new notes with the <code>props.createNote('a new note')</code> command.
-上面的 connect 表达式允许组件使用 props.createNote (‘ a new note’) / code 命令分派用于创建新笔记的操作。
+上面的 connect 表达式允许组件使用 props.createNote (‘ a new note’) / code 命令分派用于创建新便笺的操作。
 
 
 The functions passed in <i>mapDispatchToProps</i> must be <i>action creators</i>, that is, functions that return Redux actions.
@@ -587,12 +587,12 @@ Redux Dan Abramov 的创建者创建了一个非常棒的教程，叫做[使用 
 # # # 重温表象 / 容器
 
 The refactored <i>Notes</i> component is almost entirely focused on rendering notes and is quite close to being a so-called [presentational component](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0). According to the [description](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) provided by Dan Abramov, presentation components:
-重构的<i>Notes</i> 组件几乎完全集中在渲染注释上，并且非常接近于所谓的[表示组件]( https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0组件)。 根据 Dan Abramov 提供的 https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0，演示组件:
+重构的<i>Notes</i> 组件几乎完全集中在渲染便笺上，并且非常接近于所谓的[表示组件]( https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0组件)。 根据 Dan Abramov 提供的 https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0，演示组件:
 
 - Are concerned with how things look.
 关心事物的外观。
 - May contain both presentational and container components inside, and usually have some DOM markup and styles of their own.
-- 可能包含表示和容器组件，并且通常有一些 DOM 标记和它们自己的样式。
+- 可能包含表示和容器组件，并且通常有一些 DOM 标签和它们自己的样式。
 - Often allow containment via props.children.
 - 经常允许通过建筑物进行隔离。
 - Have no dependencies on the rest of the app, such as Redux actions or stores.
@@ -641,7 +641,7 @@ Fits the description of a <i>container</i> component. According to the [descript
 - Are concerned with how things work.
 - 关心事物的运作方式。
 - May contain both presentational and container components inside but usually don’t have any DOM markup of their own except for some wrapping divs, and never have any styles.
-- 内部可能包含表示和容器组件，但通常没有它们自己的 DOM 标记，除了一些包装的 div，并且从来没有任何样式。
+- 内部可能包含表示和容器组件，但通常没有它们自己的 DOM 标签，除了一些包装的 div，并且从来没有任何样式。
 - Provide the data and behavior to presentational or other container components.
 - 为表示或其他容器组件提供数据和行为。
 - Call Redux actions and provide these as callbacks to the presentational components.
@@ -712,7 +712,7 @@ More about this [here](https://www.simplethread.com/cant-replace-redux-with-hook
 ### Exercises 6.19.-6.21.
 练习6.19- 6.21。
 
-#### 6.19 anecdotes and connect, step1
+#### 6.19 anecdotes and connect, 步骤1
 6.19轶事和联系，第一步
 
 The <i>redux store</i> is currently passed to all of the components through props.
@@ -738,7 +738,7 @@ const mapStateToProps = (state) => {
 }
 ```
 
-#### 6.20 anecdotes and connect, step2
+#### 6.20 anecdotes and connect, 步骤2
 6.20轶事和联系，第二步
 
 Do the same for the <i>Filter</i> and <i>AnecdoteForm</i> components.

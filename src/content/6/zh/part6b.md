@@ -14,7 +14,7 @@ Let's continue our work with the simplified [redux version](/en/part6/flux_archi
 
 
 In order to ease our development, let's change our reducer so that the store gets initialized with a state that contains a couple of notes:
-为了简化我们的开发，让我们改变我们的 reducer，这样商店被初始化为一个包含两个注释的状态:
+为了简化我们的开发，让我们改变我们的 reducer，这样商店被初始化为一个包含两个便笺的状态:
 
 ```js
 const initialState = [
@@ -108,7 +108,7 @@ We decide to implement the filter functionality by storing <i>the value of the f
 
 
 Only the array of notes is stored in the state of the current implementation of our application. In the new implementation the state object has two properties, <i>notes</i> that contains the array of notes and <i>filter</i> that contains a string indicating which notes should be displayed to the user.
-只有笔记数组存储在应用的当前实现的状态中。 在新的实现中，state 对象有两个属性，i notes /<i>包含 notes 数组，i filter</i> 包含一个字符串，指示应该向用户显示哪些备注。
+只有便笺数组存储在应用的当前实现的状态中。 在新的实现中，state 对象有两个属性，i notes /<i>包含 notes 数组，i filter</i> 包含一个字符串，说明应该向用户显示哪些便笺。
 
 ### Combined reducers
 复合减速器
@@ -242,7 +242,7 @@ store.dispatch(createNote('combineReducers forms one reducer from many simple re
 
 
 By simulating the creation of a note and changing the state of the filter in this fashion, the state of the store gets logged to the console after every change that is made to the store:
-通过模拟创建一个注释，并以这种方式更改过滤器的状态，在对存储进行每次更改后，存储的状态都会被记录到控制台:
+通过模拟创建一个便笺，并以这种方式更改过滤器的状态，在对存储进行每次更改后，存储的状态都会被记录到控制台:
 
 ![](../../images/6/5e.png)
 
@@ -287,7 +287,7 @@ ReactDOM.render(
 ```
 
 Next, let's fix a bug that is caused by the code expecting the application store to be an array of notes:
-接下来，让我们修复一个错误，这个错误是由代码期望应用存储为一个注释数组而引起的:
+接下来，让我们修复一个错误，这个错误是由代码期望应用存储为一个便笺数组而引起的:
 
 ![](../../images/6/7ea.png)
 
@@ -296,7 +296,7 @@ Next, let's fix a bug that is caused by the code expecting the application store
 
 -- korjaus on helppo.koska muistiinpanot ovat nyt storen kent ss /<i>notes</i>，riitt pieni muutos selektorifunktioon: -- 
 It's an easy fix. Because the notes are in the store's field <i>notes</i>, we only have to make a little change to the selector function:
-这是一个简单的解决办法。 因为注释在商店的字段<i>notes</i> 中，所以我们只需要对选择器函数做一个小小的修改:
+这是一个简单的解决办法。 因为便笺在商店的字段<i>notes</i> 中，所以我们只需要对选择器函数做一个小小的修改:
 
 ```js
 const Notes = () => {
@@ -536,7 +536,7 @@ Let's continue working on the anecdote application using redux that we started i
 让我们继续使用我们在练习6.3中开始的 redux 来处理轶事应用。
 
 
-#### 6.9 Better anecdotes, step7
+#### 6.9 Better anecdotes, 步骤7
 6.9更好的轶事，第七步
 
 
@@ -544,7 +544,7 @@ Let's continue working on the anecdote application using redux that we started i
 Start using React dev tools. Move defining the Redux-store into its own file <i>store.js</i>.
 开始使用 React dev 工具，将 Redux-store 定义到它自己的文件<i>store.js</i> 中。
 
-#### 6.10 Better anecdotes, step8
+#### 6.10 Better anecdotes, 步骤8
 6.10更好的轶事，第八步
 
 The application has a ready-made body for the <i>Notification</i> component:
@@ -598,7 +598,7 @@ You will have to make changes to the application's existing reducer. Create a se
 The application does not have to use the <i>Notification</i> component in any intelligent way at this point in the exercises. It is enough for the application to display the initial value set for the message in the <i>notificationReducer</i>.
 在练习的这一点上，应用不必以任何智能方式使用<i>Notification</i> 组件。 应用只需在<i>notificationReducer</i> 中显示消息的初始值集即可。
 
-#### 6.11 Better anecdotes, step9
+#### 6.11 Better anecdotes, 步骤9
 6.11更好的轶事，第九步
 
 Extend the application so that it uses the <i>Notification</i> component to display a message for the duration of five seconds when the user votes for an anecdote or creates a new anecdote:
@@ -612,7 +612,7 @@ It's recommended to create separate [action creators](https://redux.js.org/basic
 建议创建单独的[动作创建器](动作创建器)来设置和删除通知 https://redux.js.org/basics/actions#action-creators。
 
 
-#### 6.12* Better anecdotes, step10
+#### 6.12* Better anecdotes, 步骤10
 6.12更好的轶事，第十步
 
 

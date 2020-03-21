@@ -1181,7 +1181,7 @@ You may find the following links useful:
 
 
 Submit your solutions to the exercises by first pushing your code to GitHub and then marking the completed exercises into the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
-提交你的解决方案，首先把你的代码推送到 GitHub，然后把[练习提交系统]( https://studies.cs.helsinki.fi/stats/courses/fullstackopen )完成的练习标记为已完成。。
+提交你的解决方案，首先把你的代码推送到 GitHub，然后把[练习提交系统]( https://studies.cs.helsinki.fi/stats/courses/fullstackopen )完成的练习标记为已完成。
 
 Remember, submit **all** the exercises of one part **in a single submission**. Once you have submitted your solutions for one part, **you cannot submit more exercises to that part any more**.
 记住，在一次提交中提交一章节的所有练习。 一旦你提交了一章节的解决方案，你就不能再向这个章节提交更多的练习了。
@@ -1202,7 +1202,7 @@ rm -rf node_modules/ && npm i
 
   <h4> 1.6: unicafe 步骤1</h4>
 
-H41.6: unicafe step1 / h4
+H41.6: unicafe 步骤1 / h4
 
 Like most companies, [Unicafe](https://www.unicafe.fi/#/9/4) collects feedback from its customers. Your task is to implement a web application for collecting customer feedback. There are only three options for feedback: <i>good</i>, <i>neutral</i>, and <i>bad</i>.
 像大多数公司一样， [Unicafe](https://www.unicafe.fi/#/9/4)收集来自客户的反馈。 您的任务是实现一个收集客户反馈的 web 应用。 反馈只有三种选择:<i>good</i>、<i>neutral</i> 和<i>bad</i>。
@@ -1391,7 +1391,7 @@ Your finished application could look something like this:
 
 **WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your project to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application.
 
-***\*警告\****： create-react-app 会自动使项目成为一个 git 仓库，除非应用是在已有仓库中创建的。 而您很可能不希望项目成为一个存储库，因此可以在项目的根目录中运行命令  *_rm -rf .git_* 。 
+**警告**： create-react-app 会自动使项目成为一个 git 仓库，除非应用是在已有仓库中创建的。 而您很可能不希望项目成为一个存储库，因此可以在项目的根目录中运行命令  *_rm -rf .git_* 。 
 
 <h4>1.13*: anecdotes 步骤2</h4>
 Expand your application so that you can vote for the displayed anecdote.

@@ -237,7 +237,7 @@ console.log(`Server running on port ${PORT}`)
 
 
 The primary purpose of the backend server in this course is to offer raw data in the JSON format to the frontend. For this reason, let's immediately change our server to return a hardcoded list of notes in the JSON format:
-本课程中后端服务器的主要目的是向前端提供 JSON 格式的原始数据。 基于这个原因，让我们立即改变我们的服务器，返回 JSON 格式的硬编码笔记列表:
+本课程中后端服务器的主要目的是向前端提供 JSON 格式的原始数据。 基于这个原因，让我们立即改变我们的服务器，返回 JSON 格式的硬编码便笺列表:
 
 ```js
 const http = require('http')
@@ -282,7 +282,7 @@ The <i>application/json</i> value in the <i>Content-Type</i> header informs the 
 I Content-Type /<i>头中的 i application / JSON</i> 值通知接收方数据为 JSON 格式。 使用 em JSON.stringify (notes) / em 方法将 notes 数组转换为 JSON。
 
 When we open the browser, the displayed format is exactly the same as in [part 2](/en/part2/getting_data_from_server/) where we used [json-server](https://github.com/typicode/json-server) to serve the list of notes:
-当我们打开浏览器的时候，显示的格式和第2章节(/ en / part2 / 从服务器 / 获取数据)完全一样，我们使用[ json-server ]( https://github.com/typicode/json-server )来提供注释列表:
+当我们打开浏览器的时候，显示的格式和第2章节(/ en / part2 / 从服务器 / 获取数据)完全一样，我们使用[ json-server ]( https://github.com/typicode/json-server )来提供便笺列表:
 
 ![](../../images/3/2e.png)
 
@@ -582,7 +582,7 @@ We are not going to dig into Fielding's definition of REST or spend time ponderi
 
 
 We mentioned in the [previous part](/en/part2/altering_data_in_server#rest) that singular things, like notes in the case of our application, are called <i>resources</i> in RESTful thinking. Every resource has an associated URL which is the resource's unique address.
-我们在[上一部分](/ en / part2 / modified data in server # rest)中提到过，在我们的应用中，像注释这样的奇异事物，在 RESTful thinking 中称为<i>resources</i>。 每个资源都有一个相关联的 URL，这个 URL 是资源的唯一地址。
+我们在[上一部分](/ en / part2 / modified data in server # rest)中提到过，在我们的应用中，像便笺这样的奇异事物，在 RESTful thinking 中称为<i>resources</i>。 每个资源都有一个相关联的 URL，这个 URL 是资源的唯一地址。
 
 
 One convention is to create the unique address for resources by combining the name of the resource type with the resource's unique identifier.
@@ -594,11 +594,11 @@ Let's assume that the root URL of our service is <i>www.example.com/api</i>.
 
 
 If we define the resource type of notes to be <i>note</i>, then the address of a note resource with the identifier 10, has the unique address <i>www.example.com/api/notes/10</i>.
-如果我们将注释的资源类型定义为<i>note</i>，那么标识为10的注释资源的地址就是唯一的地址<i>/  www.example.com/api/notes/10</i>。
+如果我们将便笺的资源类型定义为<i>note</i>，那么标识为10的便笺资源的地址就是唯一的地址<i>/  www.example.com/api/notes/10</i>。
 
 
 The URL for the entire collection of all note resources is <i>www.example.com/api/notes</i>.
-所有笔记资源的整个集合的 URL 是<i>/  www.example.com/api/notes </i>。
+所有便笺资源的整个集合的 URL 是<i>/  www.example.com/api/notes </i>。
 
 
 We can execute different operations on resources. The operation to be executed is defined by the HTTP <i>verb</i>:
@@ -641,7 +641,7 @@ In some places (see e.g. [Richardson, Ruby: RESTful Web Services](http://shop.or
 
 
 Let's expand our application so that it offers a REST interface for operating on individual notes. First let's create a [route](http://expressjs.com/en/guide/routing.html) for fetching a single resource.
-让我们扩展我们的应用，以便它提供一个 REST 接口，用于操作单个注释。 首先，让我们创建一个[ route ]( http://expressjs.com/en/guide/routing.html )来获取单个资源。
+让我们扩展我们的应用，以便它提供一个 REST 接口，用于操作单个便笺。 首先，让我们创建一个[ route ]( http://expressjs.com/en/guide/routing.html )来获取单个资源。
 
 
 The unique address we will use for an individual note is of the form <i>notes/10</i>, where the number at the end refers to the note's unique id number.
@@ -672,7 +672,7 @@ const id = request.params.id
 ```
 
 The now familiar _find_ method of arrays is used to find the note with an id that matches the parameter. The note is then returned to the sender of the request.
-现在熟悉的数组 find 方法用于查找具有与参数匹配的 id 的注释。 然后，便条被退还给请求的发件人。
+现在熟悉的数组 find 方法用于查找具有与参数匹配的 id 的便笺。 然后，便条被退还给请求的发件人。
 
 
 When we test our application by going to <http://localhost:3001/api/notes/1> in our browser, we notice that it does not appear to work, as the browser displays an empty page. This comes as no surprise to us as software developers, and it's time to debug.
@@ -701,7 +701,7 @@ When we visit <http://localhost:3001/api/notes/1> again in the browser, the cons
 
 
 The id parameter from the route is passed to our application but the _find_ method does not find a matching note.
-来自 route 的 id 参数被传递给我们的应用，但是 find 方法没有找到匹配的注释。
+来自 route 的 id 参数被传递给我们的应用，但是 find 方法没有找到匹配的便笺。
 
 
 To further our investigation, we also add a console log inside the comparison function passed to the _find_ method. In order to do this, we have to get rid of the compact arrow function syntax <em>note => note.id === id</em>, and use the syntax with an explicit return statement:
@@ -736,7 +736,7 @@ When we visit the URL again in the browser, each call to the comparison function
 
 
 The cause of the bug becomes clear. The _id_ variable contains a string '1', whereas the id's of notes are integers. In JavaScript, the "triple equals" comparison === considers all values of different types to not be equal by default, meaning that 1 is not '1'. 
-这个错误的原因变得很清楚。 Id 变量包含一个字符串“1” ，而笔记的 id 是整数。 在 JavaScript 中，“ triple equals”比较默认认为不同类型的所有值都不相等，这意味着1不是“1”。
+这个错误的原因变得很清楚。 Id 变量包含一个字符串“1” ，而便笺的 id 是整数。 在 JavaScript 中，“ triple equals”比较默认认为不同类型的所有值都不相等，这意味着1不是“1”。
 
 
 Let's fix the issue by changing the id parameter from a string into a [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number):
@@ -774,7 +774,7 @@ The HTTP status code that is returned is 200, which means that the response succ
 
 
 The reason for this behavior is that the _note_ variable is set to _undefined_ if no matching note is found. The situation needs to be handled on the server in a better way. If no note is found, the server should respond with the status code [404 not found](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5) instead of 200.
-出现此行为的原因是，如果没有找到匹配的注释，则将注释变量设置为未定义。 需要在服务器上以更好的方式处理这种情况。 如果没有发现任何提示，服务器应该用状态码[404 not found ]( https://www.w3.org/protocols/rfc2616/rfc2616-sec10.html#sec10.4.5)响应，而不是200。
+出现此行为的原因是，如果没有找到匹配的便笺，则将便笺变量设置为未定义。 需要在服务器上以更好的方式处理这种情况。 如果没有发现任何提示，服务器应该用状态码[404 not found ]( https://www.w3.org/protocols/rfc2616/rfc2616-sec10.html#sec10.4.5)响应，而不是200。
 
 
 Let's make the following change to our code:
@@ -805,7 +805,7 @@ If-condition 利用了这样一个事实，即所有的 JavaScript 对象都是[
 
 
 Our application works and sends the error status code if no note is found. However, the application doesn't return anything to show to the user, like web applications normally do when we visit a page that does not exist. We do not actually need to display anything in the browser because REST API's are interfaces that are intended for programmatic use, and the error status code is all that is needed.
-我们的应用正常工作，如果没有发现注释，则发送错误状态代码。 然而，应用不会返回任何东西显示给用户，就像 web 应用通常在我们访问一个不存在的页面时所做的那样。 我们实际上不需要在浏览器中显示任何内容，因为 REST API 是用于编程使用的接口，只需要错误状态代码。
+我们的应用正常工作，如果没有发现便笺，则发送错误状态代码。 然而，应用不会返回任何东西显示给用户，就像 web 应用通常在我们访问一个不存在的页面时所做的那样。 我们实际上不需要在浏览器中显示任何内容，因为 REST API 是用于编程使用的接口，只需要错误状态代码。
 
 
 ### Deleting resources
@@ -826,7 +826,7 @@ app.delete('/api/notes/:id', (request, response) => {
 
 
 If deleting the resource is successful, meaning that the note exists and it is removed, we respond to the request with the status code [204 no content](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.5) and return no data with the response.
-如果删除资源成功，这意味着注释存在并被删除，我们用状态码[204 no content ]( https://www.w3.org/protocols/rfc2616/rfc2616-sec10.html#sec10.2.5)响应请求，并返回没有数据的响应。
+如果删除资源成功，这意味着便笺存在并被删除，我们用状态码[204 no content ]( https://www.w3.org/protocols/rfc2616/rfc2616-sec10.html#sec10.2.5)响应请求，并返回没有数据的响应。
 
 
 There's no consensus on what status code should be returned to a DELETE request if the resource does not exist. Really, the only two options are 204 and 404. For the sake of simplicity our application will respond with 204 in both cases.
@@ -856,10 +856,10 @@ Using Postman is quite easy in this situation. It's enough to define the url and
 使用邮递员在这种情况下是相当容易的。 定义 url 然后选择正确的请求类型就足够了。
 
 The backend server appears to respond correctly. By making an HTTP GET request to <http://localhost:3001/api/notes> we see that the note with the id 2 is no longer in the list, which indicates that the deletion was successful. 
-后端服务器似乎响应正确。 通过向 HTTP://localhost:3001/api/notes 发出 HTTP GET 请求，我们可以看到 id 为2的注释已经不在列表中，这表明删除是成功的。
+后端服务器似乎响应正确。 通过向 HTTP://localhost:3001/api/notes 发出 HTTP GET 请求，我们可以看到 id 为2的便笺已经不在列表中，这表明删除是成功的。
 
 Because the notes in the application are only saved to memory, the list of notes will return to its original state when we restart the application.
-因为应用中的注释只保存到内存中，所以当我们重新启动应用时，注释列表将返回到原始状态。
+因为应用中的便笺只保存到内存中，所以当我们重新启动应用时，便笺列表将返回到原始状态。
 
 ### The Visual Studio Code REST client
 # # # The Visual Studio Code REST client
@@ -871,7 +871,7 @@ Once the plugin is installed, using it is very simple. We make a directory at th
 一旦插件安装完毕，使用起来非常简单。 我们在应用的根目录名为<i>requests</i>。 我们将目录中的所有 REST 客户机请求保存为以 i 结尾的文件。 休息 / 放松。
 
 Let's create a new <i>get\_all\_notes.rest</i> file and define the request that fetches all notes.
-让我们创建一个新的<i>get  all  notes.rest</i> 文件，并定义获取所有笔记的请求。
+让我们创建一个新的<i>get  all  notes.rest</i> 文件，并定义获取所有便笺的请求。
 
 ![](../../images/3/12ea.png)
 
@@ -886,7 +886,7 @@ By clicking the <i>Send Request</i> text, the REST client will execute the HTTP 
 正在接收数据
 
 Next, let's make it possible to add new notes to the server. Adding a note happens by making an HTTP POST request to the address http://localhost:3001/api/notes, and by sending all the information for the new note in the request [body](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) in the JSON format.
-接下来，让我们使向服务器添加新笔记成为可能。 通过向地址 HTTP://localhost:3001/api/notes 发送一个 HTTP POST 请求，并以 JSON 格式在请求[正文]( https://www.w3.org/protocols/rfc2616/rfc2616-sec7.html#sec7)中发送新通知的所有信息，就可以添加一个通知。
+接下来，让我们使向服务器添加新便笺成为可能。 通过向地址 HTTP://localhost:3001/api/notes 发送一个 HTTP POST 请求，并以 JSON 格式在请求[正文]( https://www.w3.org/protocols/rfc2616/rfc2616-sec7.html#sec7)中发送新通知的所有信息，就可以添加一个通知。
 
 In order to access the data easily, we need the help of the express [json-parser](https://expressjs.com/en/api.html), that is taken to use with command _app.use(express.json())_.
 为了方便地访问数据，我们需要 express [ json-parser ]( https://expressjs.com/en/api.html )的帮助，它与命令 app.use (express.json ())一起使用。
@@ -1063,7 +1063,7 @@ app.post('/api/notes', (request, response) => {
 
 
 The logic for generating the new id number for notes has been extracted into a separate _generateId_ function.
-为笔记生成新 id 号的逻辑已经提取到一个单独的 generateId 函数中。
+为便笺生成新 id 号的逻辑已经提取到一个单独的 generateId 函数中。
 
 
 If the received data is missing a value for the <i>content</i> property, the server will respond to the request with the status code [400 bad request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1):
@@ -1138,7 +1138,7 @@ Math.max(...notes.map(n => n.id))
 ```
 
 What exactly is happening in that line of code? <em>notes.map(n => n.id)</em> creates a new array that contains all the id's of the notes. [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) returns the maximum value of the numbers that are passed to it. However, <em>notes.map(n => n.id)</em> is an <i>array</i> so it can't directly be given as a parameter to _Math.max_. The array can be transformed into individual numbers by using the "three dot" [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax <em>...</em>.
-这行代码中到底发生了什么？ Em notes.map (nn.id) / em 创建一个包含所有注释 id 的新数组。 [ Math.max ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/Math.max )返回传递给它的数的最大值。 然而，em notes.map (nn.id) / em 是一个<i>数组</i>，因此它不能直接作为 Math.max 的参数。 数组可以通过使用“ three dot”[ spread ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/operators/spread_syntax )语法 em... / em 转换为单独的数字。
+这行代码中到底发生了什么？ Em notes.map (nn.id) / em 创建一个包含所有便笺 id 的新数组。 [ Math.max ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/Math.max )返回传递给它的数的最大值。 然而，em notes.map (nn.id) / em 是一个<i>数组</i>，因此它不能直接作为 Math.max 的参数。 数组可以通过使用“ three dot”[ spread ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/operators/spread_syntax )语法 em... / em 转换为单独的数字。
 
 </div>
 
@@ -1162,7 +1162,7 @@ What exactly is happening in that line of code? <em>notes.map(n => n.id)</em> cr
 * * 强烈建议: * * 当你在处理后端代码时，始终关注运行应用的终端中发生了什么。
 
 
-#### 3.1: Phonebook backend step1
+#### 3.1: Phonebook backend 步骤1
 3.1: 电话簿后台步骤1
 
 
@@ -1185,7 +1185,7 @@ The application must also offer an _npm run dev_ command that will run the appli
 应用还必须提供 npm run dev 命令，该命令将运行应用，并在进行更改并将更改保存到源代码中的文件时重新启动服务器。
 
 
-#### 3.2: Phonebook backend step2
+#### 3.2: Phonebook backend 步骤2
 3.2: 电话簿后端第二步
 
 
@@ -1200,7 +1200,7 @@ The page has to show the time that the request was received and how many entries
 该页面必须显示接收请求的时间，以及在处理请求时电话簿中有多少条目。
 
 
-#### 3.3: Phonebook backend step3
+#### 3.3: Phonebook backend 步骤3
 3.3: 电话簿后端第三步
 
 
@@ -1212,7 +1212,7 @@ If an entry for the given id is not found, the server has to respond with the ap
 如果没有找到给定 id 的条目，服务器必须使用适当的状态代码进行响应。
 
 
-#### 3.4: Phonebook backend step4
+#### 3.4: Phonebook backend 步骤4
 3.4: 电话簿后端第四步
 
 
@@ -1224,7 +1224,7 @@ Test that your functionality works with either Postman or the Visual Studio Code
 测试您的功能是否与邮递员或 visualstudio 代码 REST 客户端一起工作。
 
 
-#### 3.5: Phonebook backend step5
+#### 3.5: Phonebook backend 步骤5
 3.5: 电话簿后端第五步
 
 
@@ -1236,7 +1236,7 @@ Generate a new id for the phonebook entry with the [Math.random](https://develop
 使用[ Math.random ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/Math.random )函数为电话簿条目生成一个新 id。 使用一个足够大的范围为您的随机值，以便创建重复 id 的可能性是很小的。
 
 
-#### 3.6: Phonebook backend step6
+#### 3.6: Phonebook backend 步骤6
 3.6: 电话簿后台步骤6
 
 
@@ -1309,7 +1309,7 @@ Like <i>safety</i> for the GET request, <i>idempotence</i> is also just a recomm
 
 
 POST is the only HTTP request type that is neither <i>safe</i> nor <i>idempotent</i>. If we send 5 different HTTP POST requests to <i>/api/notes</i> with a body of <em>{content: "many same", important: true}</em>, the resulting 5 notes on the server will all have the same content.
-Post 是唯一既不是<i>safe</i> 也不是<i>幂等</i> 的 HTTP 请求类型。 如果我们向<i>/ api / notes</i> 发送5个不同的 HTTP POST 请求，其中包含 em { content: “ many same” ，important: true } / em，那么服务器上得到的5个备注将具有相同的内容。
+Post 是唯一既不是<i>safe</i> 也不是<i>幂等</i> 的 HTTP 请求类型。 如果我们向<i>/ api / notes</i> 发送5个不同的 HTTP POST 请求，其中包含 em { content: “ many same” ，important: true } / em，那么服务器上得到的5个便笺将具有相同的内容。
 
 
 ### Middleware
@@ -1389,7 +1389,7 @@ You can find the code for our current application in its entirety in the <i>part
 ### Exercises 3.7.-3.8.
 练习3.7-3.8。
 
-#### 3.7: Phonebook backend step7
+#### 3.7: Phonebook backend 步骤7
 3.7: 电话簿后台步骤7
 
 Add the [morgan](https://github.com/expressjs/morgan) middleware to your application for logging. Configure it to log messages to your console based on the <i>tiny</i> configuration.
@@ -1403,7 +1403,7 @@ Morgan is installed just like all other libraries with the _npm install_ command
 Morgan 的安装方式与使用 npminstall 命令的所有其他库一样。 使用 morgan 与使用 app.use 命令配置任何其他中间件一样。
 
 
-#### 3.8*: Phonebook backend step8
+#### 3.8*: Phonebook backend 步骤8
 3.8 * : 电话簿后端第八步
 
 

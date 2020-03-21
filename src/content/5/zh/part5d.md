@@ -62,7 +62,7 @@ Other libraries run the tests in a Node-process, which is connected to the brosw
 
 
 Let's  make some end to end tests for our note application.
-让我们为笔记应用做一些端到端的测试。
+让我们为便笺应用做一些端到端的测试。
 
 
 
@@ -483,7 +483,7 @@ module.exports = {
 
 
 Let's next add tests which test the new note functionality: 
-下面让我们添加测试来测试新笔记的功能:
+下面让我们添加测试来测试新便笺的功能:
 
 ```js
 describe('Note app', function() {
@@ -516,7 +516,7 @@ describe('Note app', function() {
 The test has been defined in its own <i>describe</i> block. 
 测试已经在它自己的<i>describe</i> 块中定义了。
 Only logged in users can create new notes, so we added logging in to the application to a <i>beforeEach</i> block. 
-只有登录的用户才能创建新的注释，因此我们将登录添加到应用的<i>beforeEach</i> 块中。
+只有登录的用户才能创建新的便笺，因此我们将登录添加到应用的<i>beforeEach</i> 块中。
 
 
 
@@ -576,7 +576,7 @@ describe('Note app', function() {
 
 
 Cypress runs the tests in the order they are in the code. So first it runs <i>user can log in</i>, where the user logs in. Then cypress will run <i>a new note can be created</i> which's <i>beforeEach</i> block logs in as well. 
-Cypress 按照测试在代码中的顺序运行测试。 所以它首先运行<i>user can log in</i>，用户在这里登录。 然后 cypress 将运行 i，可以创建一个新的注释 / i，也就是<i>beforeEach</i> 阻塞日志。
+Cypress 按照测试在代码中的顺序运行测试。 所以它首先运行<i>user can log in</i>，用户在这里登录。 然后 cypress 将运行 i，可以创建一个新的便笺 / i，也就是<i>beforeEach</i> 阻塞日志。
 Why do this? Is the user not logged in after the first test? 
 为什么这样做? 用户在第一次测试后没有登录吗？
 No, because <i>each</i> test starts from zero as far as the browser is concerned. 
@@ -703,14 +703,14 @@ During the formatting the test does HTTP requests to the backend with [cy.reques
 
 
 Unlike earlier, now the testing starts with the backend in the same state every time. The backend will contain one user and no notes. 
-与以前不同的是，现在每次测试都以相同的状态从后端开始。 后端将包含一个用户，没有注释。
+与以前不同的是，现在每次测试都以相同的状态从后端开始。 后端将包含一个用户，没有便笺。
 
 
 ——在很多测试中，joka tarkastaa ett muistiinpanojen t rkeytt voi muuttaa. muutetan ensinsovelluksen frontendia siten，ett uusi muistiinpano on oletusarvoisesti ep t ke，eli kentt<i>important</i> saa arvon<i>false</i>: ——
 Let's add one more test for checking that we can change the importance of notes. 
-让我们再添加一个检查的测试，我们可以改变注释的重要性。
+让我们再添加一个检查的测试，我们可以改变便笺的重要性。
 First we change the frontend so that a new note is unimportant by default, or the <i>important</i> field is <i>false</i>:
-首先，我们改变前面的字符，这样一个新的注释默认是不重要的，或者<i>important</i> 字段是<i>false</i>:
+首先，我们改变前面的字符，这样一个新的便笺默认是不重要的，或者<i>important</i> 字段是<i>false</i>:
 
 ```js
 const NoteForm = ({ createNote }) => {
@@ -732,7 +732,7 @@ const NoteForm = ({ createNote }) => {
 
 1. a)【句意】我把重要的事情放在第一位。 在我看来，这并不重要。 -->
 There are multiple ways to test this. In the following example we first search for a note and click its <i>make important</i> button. Then we check that the note now contains a <i>make not important</i> button. 
-有多种方法可以测试这一点。 在下面的示例中，我们首先搜索一个注释，然后单击它的<i>make important</i> 按钮。 然后我们检查注释现在包含一个<i>make not important</i> 按钮。
+有多种方法可以测试这一点。 在下面的示例中，我们首先搜索一个便笺，然后单击它的<i>make important</i> 按钮。 然后我们检查便笺现在包含一个<i>make not important</i> 按钮。
 
 ```js
 describe('Note app', function() {
@@ -1091,7 +1091,7 @@ describe('when logged in', function() {
 
 
 The same applies to creating a new note now that we think about it. We have a test which makes a new note using the form. We also make a new note in the <i>beforeEach</i> block of the test testing changing the importance of a note: 
-这同样适用于创建一个新的笔记，现在我们考虑它。 我们有一个测试，使用该表格制作一个新的笔记。 我们还在测试的<i>beforeEach</i> 块中做了一个新的注释，改变了注释的重要性:
+这同样适用于创建一个新的便笺，现在我们考虑它。 我们有一个测试，使用该表格制作一个新的便笺。 我们还在测试的<i>beforeEach</i> 块中做了一个新的便笺，改变了便笺的重要性:
 
 ```js
 describe('Note app', function() {
@@ -1124,7 +1124,7 @@ describe('Note app', function() {
 
 
 Let's make a new custom command for making a new note. The command will make a new note with a HTTP POST request: 
-让我们为制作新笔记创建一个新的自定义命令。 该命令将使用 HTTP POST 请求生成一个新的记录:
+让我们为制作新便笺创建一个新的自定义命令。 该命令将使用 HTTP POST 请求生成一个新的记录:
 
 ```js
 Cypress.Commands.add('createNote', ({ content, important }) => {
@@ -1189,9 +1189,9 @@ The tests and the frontend code can be found from [githubissa](https://github.co
 
 
 Lastly let's take a look at the test we did for changing the importance of a note. 
-最后，让我们看一下我们为改变笔记的重要性所做的测试。
+最后，让我们看一下我们为改变便笺的重要性所做的测试。
 First we'll change the formatting block so that it creates three notes instead of one:
-首先我们要改变格式块，让它创建三个注释而不是一个:
+首先我们要改变格式块，让它创建三个便笺而不是一个:
 
 ```js
 describe('when logged in', function() {
@@ -1260,7 +1260,7 @@ cy.contains('make important').click()
 
 !-tulos ollisi ollut aivan erilainen，toinen rivi painaisi v n muistiinpanon napia:-
 the result would have been totally different. The second line of the test would click the button of a wrong note:
-结果会完全不同。 测试的第二行会点击一个错误注释的按钮:
+结果会完全不同。 测试的第二行会点击一个错误便笺的按钮:
 
 ![](../../images/5/36ea.png)
 
@@ -1350,7 +1350,7 @@ Now the first line finds the right button, and uses <i>as</i> to save it as <i>t
 
 
 Finally, some notes on how Cypress works and debugging your tests.
-最后，还有一些关于 Cypress 如何工作和调试测试的注释。
+最后，还有一些关于 Cypress 如何工作和调试测试的便笺。
 
 
 
@@ -1470,8 +1470,8 @@ I especially recommend reading [Introduction to Cypress](https://docs.cypress.io
 > <i>This is the single most important guide for understanding how to test with Cypress. Read it. Understand it.</i>
 这是了解如何使用柏树进行测试的最重要的指南。读一读，理解一下
 
-#### 5.17: bloglist end to end testing, step1
-5.17: bloglist end to end testing，step1
+#### 5.17: bloglist end to end testing, 步骤1
+5.17: bloglist end to end testing，步骤1
 
 
 
@@ -1502,8 +1502,8 @@ The <i>beforeEach</i> formatting blog must empty the database using for example 
 格式化博客的<i>beforeEach</i> 必须清空数据库，例如使用[ material ](/ osa5 / end to end testaus # tokannan-tilan-kontrollointi)中使用的方法。
 
 
-#### 5.18: bloglist end to end testing, step2
-5.18: bloglist end to end testing，step2
+#### 5.18: bloglist end to end testing, 步骤2
+5.18: bloglist end to end testing，步骤2
 
 
 
@@ -1548,8 +1548,8 @@ describe('Blog app', function() {
 <i>Optional bonus exercise</i>: Check that the notification shown with unsuccessful login is displayed red. 
 I 可选的奖励练习 / i: 检查显示未成功登入的通知是否显示为红色。
 
-#### 5.19: bloglist end to end testing, step3
-5.19: bloglist end to end testing，step3
+#### 5.19: bloglist end to end testing, 步骤3
+5.19: bloglist end to end testing，步骤3
 
 
 -- t testi，joka varmistaga，ett kirjaantunut k ytt j pystyy luomaan blogin.testn runko voi n ytt seuraavalta -- 
@@ -1580,16 +1580,16 @@ describe('Blog app', function() {
 The test has to ensure, that a new blog is added to the list of all blogs. 
 这个测试必须确保，一个新的博客被添加到所有的博客列表中。
 
-#### 5.20: bloglist end to end testing, step4
-5.20: bloglist end to end testing，step4
+#### 5.20: bloglist end to end testing, 步骤4
+5.20: bloglist end to end testing，步骤4
 
 
 
 Make a test which checks that user can like a blog. 
 做一个测试，检查用户是否喜欢博客。
 
-#### 5.21: bloglist end to end testing, step5
-5.21: bloglist end to end testing，step5
+#### 5.21: bloglist end to end testing, 步骤5
+5.21: bloglist end to end testing，步骤5
 
 
 

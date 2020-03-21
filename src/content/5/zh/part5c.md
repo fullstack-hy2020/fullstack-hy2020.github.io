@@ -29,7 +29,7 @@ npm install --save-dev @testing-library/react @testing-library/jest-dom
 
 
 Let's first write tests for the component that is responsible for rendering a note:
-让我们首先为负责渲染注释的组件编写测试:
+让我们首先为负责渲染便笺的组件编写测试:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -57,7 +57,7 @@ We will write our test in the <i>src/components/Note.test.js</i> file, which is 
 我们将在<i>src / components / note. test.js</i> 文件中编写测试，该文件与组件本身在同一目录中。
 
 The first test verifies that the component renders the contents of the note:
-第一个测试验证组件是否渲染注释的内容:
+第一个测试验证组件是否渲染便笺的内容:
 
 ```js
 import React from 'react'
@@ -100,7 +100,7 @@ Render 返回一个具有多个[属性]( https://testing-library.com/docs/react-
 
 
 In the expectation, we verify that the component renders the correct text, which in this case is the content of the note:
-在期望中，我们验证组件是否渲染正确的文本，在这种情况下，该文本就是注释的内容:
+在期望中，我们验证组件是否渲染正确的文本，在这种情况下，该文本就是便笺的内容:
 
 ```js
 expect(component.container).toHaveTextContent(
@@ -570,7 +570,7 @@ export default NoteForm
 
 
 The form works by calling the _createNote_ function it received as props with the details of the new note.
-该表单通过调用作为props接收的 createNote 函数以及新注释的细节来工作。
+该表单通过调用作为props接收的 createNote 函数以及新便笺的细节来工作。
 
 
 
@@ -661,7 +661,7 @@ You can find the code for our current application in its entirety in the <i>part
 ### Exercises 5.13.-5.16.
 练习5.13-5.16。
 
-#### 5.13: Blog list tests, step1
+#### 5.13: Blog list tests, 步骤1
 5.13: 博客列表测试，第一步
 
 
@@ -674,7 +674,7 @@ Make a test, which checks that the component displaying a blog renders the blog'
 Add CSS-classes to the component to help the testing as necessary. 
 向组件中添加 css 类以帮助进行必要的测试。
 
-#### 5.14: Blog list tests, step1
+#### 5.14: Blog list tests, 步骤1
 5.14: 博客列表测试，第一步
 
 
@@ -682,7 +682,7 @@ Add CSS-classes to the component to help the testing as necessary.
 Make a test, which checks that blog's url and number of likes are shown when the button controlling the shown details has been clicked. 
 做一个测试，当点击控制显示的详细信息的按钮时，检查博客的网址和喜欢的数量。
 
-#### 5.15: Blog list tests, step2
+#### 5.15: Blog list tests, 步骤2
 5.15: 博客列表测试，第二步
 
 
@@ -690,7 +690,7 @@ Make a test, which checks that blog's url and number of likes are shown when the
 Make a test which ensures that if the <i>like</i> button is clicked twice, the event handler the component received as props is called twice. 
 进行一个测试，确保如果单击<i>like</i> 按钮两次，那么作为props接收的组件的事件处理程序将被调用两次。
 
-#### 5.16*: Blog list tests, step3
+#### 5.16*: Blog list tests, 步骤3
 5.16 * : 博客列表测试，第三步
 
 

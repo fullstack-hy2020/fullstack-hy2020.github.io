@@ -28,7 +28,7 @@ Install TypeScript support to your editor of choice. For [Visual Studio Code](ht
 As mentioned earlier, TypeScript code is not executable by itself but it has to be first compiled into executable JavaScript. 
 如前所述，TypeScript 代码本身不是可执行的，但必须首先编译成可执行的 JavaScript。
 When TypeScript is compiled into JavaScript, the code becomes subject for type erasure. This means that type annotations, interfaces, type aliases, and other type system constructs are removed from the code and the result is pure ready-to-run JavaScript. 
-当 TypeScript 被编译成 JavaScript 时，代码成为类型擦除的主题。 这意味着类型注释、接口、类型别名和其他类型系统构造从代码中删除，结果是纯准备运行的 JavaScript。
+当 TypeScript 被编译成 JavaScript 时，代码成为类型擦除的主题。 这意味着类型便笺、接口、类型别名和其他类型系统构造从代码中删除，结果是纯准备运行的 JavaScript。
 
 
 
@@ -92,7 +92,7 @@ It is worth mentioning that TypeScript also provides an online playground, where
 * * 注意: * * 游乐场可能包含不同的 tsconfig 规则(稍后将介绍) ，这就是为什么你可能会看到不同的警告与您的当地环境。 游乐场的 tsconfig 是可以通过配置下拉菜单修改的。
 
 #### A note about the coding style
-关于编码风格的注释
+关于编码风格的便笺
 
 
 
@@ -1277,7 +1277,7 @@ depending on the error. The latter happens if the input values do not have the r
 取决于错误。 如果输入值没有正确的类型，即它们不是数字或可转换为数字，则会发生后者。
 
 In this exercise you might find it beneficial to use the <i>explicit any</i> type when handling the data in the request body. Our eslint configuration is preventing this but you may unset this rule for a particular line by inserting the following comment as the previous line:
-在这个练习中，您可能会发现在处理请求正文中的数据时使用<i>显式 any</i> 类型是有益的。 我们的 eslint 配置可以防止这种情况，但是你可以通过在前一行插入下面的注释来取消这个规则:
+在这个练习中，您可能会发现在处理请求正文中的数据时使用<i>显式 any</i> 类型是有益的。 我们的 eslint 配置可以防止这种情况，但是你可以通过在前一行插入下面的便笺来取消这个规则:
 
 ```js
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

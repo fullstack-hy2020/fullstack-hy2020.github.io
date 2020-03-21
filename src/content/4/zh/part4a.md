@@ -10,7 +10,7 @@ lang: zh
 
 
 Let's continue our work on the backend of the notes application we started in [part 3](/en/part3). 
-让我们继续我们在[ part 3](/ en / part3)中开始的笔记应用后端的工作。
+让我们继续我们在[ part 3](/ en / part3)中开始的便笺应用后端的工作。
 
 
 ### Project structure
@@ -115,7 +115,7 @@ console.log(`Server running on port ${config.PORT}`)
 ```
 
 The route handlers have also been moved into a dedicated module. The event handlers of routes are commonly referred to as <i>controllers</i>, and for this reason we have created a new <i>controllers</i> directory. All of the routes related to notes are now in the <i>notes.js</i> module under the <i>controllers</i> directory.
-路由处理程序也被移动到一个专用的模块中。 路由的事件处理程序通常称为<i>controllers</i>，出于这个原因，我们创建了一个新的<i>controllers</i> 目录。 所有与笔记相关的路由现在都在<i>controllers</i> 目录下的<i>notes.js</i> 模块中。
+路由处理程序也被移动到一个专用的模块中。 路由的事件处理程序通常称为<i>controllers</i>，出于这个原因，我们创建了一个新的<i>controllers</i> 目录。 所有与便笺相关的路由现在都在<i>controllers</i> 目录下的<i>notes.js</i> 模块中。
 
 The contents of the <i>notes.js</i> module are the following:
 模块的内容如下:
@@ -389,8 +389,8 @@ If you clone the project for yourself, run the _npm install_ command before star
 In the exercises for this part we will be building a <i>blog list application</i>, that allows users to save information about interesting blogs they have stumbled across on the internet. For each listed blog we will save the author, title, url, and amount of upvotes from users of the application.
 在这一部分的练习中，我们将构建一个<i>blog list application</i>，它允许用户保存他们在互联网上偶然发现的有趣博客的信息。 对于每个列出的博客，我们将保存来自应用用户的作者、标题、 url 和升级票数。
 
-#### 4.1 Blog list, step1
-4.1 Blog list，step1
+#### 4.1 Blog list, 步骤1
+4.1 Blog list，步骤1
 
 Let's imagine a situation, where you receive an email that contains the following application body:
 让我们设想这样一种情况，您收到一封包含如下应用主体的电子邮件:
@@ -447,8 +447,8 @@ Turn the application into a functioning <i>npm</i> project. In order to keep you
 Verify that it is possible to add blogs to list with Postman or the VS Code REST client and that the application returns the added blogs at the correct endpoint.
 验证是否可以将 blog 添加到使用 Postman 或 VS Code REST 客户端的列表中，并验证应用是否在正确的端点返回添加的 blog。
 
-#### 4.2 Blog list, step2
-4.2 Blog list，step2
+#### 4.2 Blog list, 步骤2
+4.2 Blog list，步骤2
 
 Refactor the application into separate modules as shown earlier in this part of the course material.
 将应用重构为单独的模块，如本课程教材前面所示。
@@ -758,7 +758,7 @@ Let's create a collection of helper functions that are meant to assist dealing w
 让我们创建一个辅助函数的集合，这些函数用于帮助处理博客列表。 将函数创建到一个名为<i>utils / list helper.js</i> 的文件中。 将您的测试写入<i>tests</i> 目录下具有适当名称的测试文件中。
 
 
-#### 4.3: helper functions and unit tests, step1
+#### 4.3: helper functions and unit tests, 步骤1
 4.3: helper 函数和单元测试，第一步
 
 
@@ -791,8 +791,8 @@ test('dummy returns one', () => {
 ```
 
 
-#### 4.4: helper functions and unit tests, step2
-4.4: helper 函数和单元测试，step2
+#### 4.4: helper functions and unit tests, 步骤2
+4.4: helper 函数和单元测试，步骤2
 
 
 Define a new _totalLikes_ function that receives a list of blog posts as a parameter. The function returns the total sum of <i>likes</i> in all of the blog posts.
@@ -849,8 +849,8 @@ Another way of running a single test (or describe block) is to specify the name 
 npm test -- -t 'when list has only one blog, equals the likes of that'
 ```
 
-#### 4.5*: helper functions and unit tests, step3
-4.5 * : helper function and unit tests，step3
+#### 4.5*: helper functions and unit tests, 步骤3
+4.5 * : helper function and unit tests，步骤3
 
 Define a new _favoriteBlog_ function that receives a list of blogs as a parameter. The function finds out which blog has most likes. If there are many top favorites, it is enough to return one of them.
 定义一个新的 philiteblog 函数，该函数接收一个博客列表作为参数。 这个功能可以找出哪个博客有最多的喜欢。 如果有许多热门收藏，返回其中一个就足够了。
@@ -872,8 +872,8 @@ The value returned by the function could be in the following format:
 Write the tests for this exercise inside of a new <i>describe</i> block. Do the same for the remaining exercises as well.
 在一个新的<i>describe</i> 块中编写这个练习的测试。 对剩下的练习也做同样的动作。
 
-#### 4.6*: helper functions and unit tests, step4
-4.6 * : helper function and unit tests，step4
+#### 4.6*: helper functions and unit tests, 步骤4
+4.6 * : helper function and unit tests，步骤4
 
 This and the next exercise are a little bit more challenging. Finishing these two exercises is not required in order to advance in the course material, so it may be a good idea to return to these once you're done going through the material for this part in its entirety.
 这个练习和下一个练习更有挑战性。 完成这两个练习并不是为了提前学习课程材料，所以一旦你完成了这一部分的全部材料，回到这些练习可能是一个好主意。
@@ -896,8 +896,8 @@ If there are many top bloggers, then it is enough to return any one of them.
 如果有很多顶级博客，那么只要回复其中的任何一个就足够了。
 
 
-#### 4.7*: helper functions and unit tests, step5
-4.7 * : helper function and unit tests，step5
+#### 4.7*: helper functions and unit tests, 步骤5
+4.7 * : helper function and unit tests，步骤5
 
 
 Define a function called _mostLikes_ that receives an array of blogs as its parameter. The function returns the author, whose blog posts have the largest amount of likes. The return value also contains the total number of likes that the author has received:

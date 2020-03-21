@@ -43,7 +43,7 @@ npm install --save react-bootstrap
 ```
 
 Then let's add a link for loading the CSS stylesheet for Bootstrap inside of the <i>head</i> tag in the <i>public/index.html</i> file of the application:
-然后，我们在应用的<i>public</i>ndex. html /<i>文件中的 i head</i> 标记内部添加一个链接，用于加载 Bootstrap 的 CSS 样式表:
+然后，我们在应用的<i>public</i>ndex. html /<i>文件中的 i head</i> 标签内部添加一个链接，用于加载 Bootstrap 的 CSS 样式表:
 
 ```js
 <head>
@@ -86,7 +86,7 @@ We notice that this already has an effect on the appearance of the application. 
 
 
 Next, let's make some changes to the <i>Notes</i> component, so that it renders the list of notes as a [table](https://getbootstrap.com/docs/4.1/content/tables/). React Bootstrap provides a built-in [Table](https://react-bootstrap.github.io/components/table/) component for this purpose, so there is no need to define CSS classes separately.
-接下来，让我们对<i>Notes</i> 组件进行一些更改，以便它将注释列表渲染为[ table ]( https://getbootstrap.com/docs/4.1/content/tables/ )。 React Bootstrap 为此提供了一个内置的[ Table ]( https://React-Bootstrap.github.io/components/Table/ 组件)组件，因此不需要单独定义 CSS 类。
+接下来，让我们对<i>Notes</i> 组件进行一些更改，以便它将便笺列表渲染为[ table ]( https://getbootstrap.com/docs/4.1/content/tables/ )。 React Bootstrap 为此提供了一个内置的[ Table ]( https://React-Bootstrap.github.io/components/Table/ 组件)组件，因此不需要单独定义 CSS 类。
 
 ```js
 const Notes = (props) => (
@@ -301,7 +301,7 @@ npm install --save @material-ui/core
 
 1. -- lis t sitten sovelluksen tiedostoon<i>public</i>ndex. html /<i>tagin i head</i> sis n bootstrapin css-m rittelyt lataava rivi: --
 Then add the following line to the <i>head</i> tag in the <i>public/index.html</i> file. The line loads bootstrap's css-definitions.
-然后向<i>public</i>ndex. html /<i>文件中的 i head</i> 标记添加如下行。
+然后向<i>public</i>ndex. html /<i>文件中的 i head</i> 标签添加如下行。
 
 ```js
 <head>
@@ -336,7 +336,7 @@ const App = () => {
 
 
 Let's start with the <i>Notes</i> component. We'll render the list of notes as a [table](https://material-ui.com/components/tables/#simple-table):
-让我们从<i>Notes</i> 组件开始，我们将音符列表渲染为一个[ table ]( https://material-ui.com/components/tables/#simple-table ) :
+让我们从<i>Notes</i> 组件开始，我们将便笺列表渲染为一个[ table ]( https://material-ui.com/components/tables/#simple-table ) :
 
 ```js
 const Notes = ({notes}) => (
@@ -374,7 +374,7 @@ The table looks like so:
 
 
 One less pleasant feature of Material UI is, that each component has to be imported separately. The import list for the notes page is quite long:
-Material UI 的一个不那么令人愉快的特性是，每个组件都必须单独导入。 注释页面的导入列表非常长:
+Material UI 的一个不那么令人愉快的特性是，每个组件都必须单独导入。 便笺页面的导入列表非常长:
 
 ```js
 import {

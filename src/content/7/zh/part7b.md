@@ -381,7 +381,7 @@ The internet is starting to fill up with more and more helpful material related 
 We'll continue with the app from [exercises](/osa7/custom_hookit#tehtavat-7-4-7-6) of the chapter [react router](/en/part7/react_router). 
 我们将继续使用[ exercises ](/ osa7 / custom hookit # tehtawat-7-4-7-6)中的应用[ react router ](/ en / part7 / react router)。
 
-#### 7.4: anecdotes and hooks step1
+#### 7.4: anecdotes and hooks 步骤1
 7.4: 轶事和胡克斯第一步
 
 Simplify the anecdote creation form of your application with the _useField_ custom hook we defined earlier.
@@ -432,7 +432,7 @@ const App = () => {
 ```
 
 
-#### 7.5: anecdotes and hooks step2
+#### 7.5: anecdotes and hooks 步骤2
 7.5: 轶事和胡克斯第二步
 
 Add a button to the form that you can use to clear all the input fields:
@@ -453,7 +453,7 @@ Depending on your solution you may see the following warning in your console:
 We will return to this warning in the next exercise.
 我们将在下一个练习中回到这个警告。
 
-#### 7.6: anecdotes and hooks step3
+#### 7.6: anecdotes and hooks 步骤3
 7.6: 轶事和胡克斯第三步
 
 If your solution did not cause a warning to appear in the console you have already finished this exercise.
@@ -550,7 +550,7 @@ Note, that in this exercise it is essential to use useEffect's [second parameter
 7.8: 终极钩子
 
 The code of the application responsible for communicating with the backend of the note application of the previous parts looks like this:
-负责与前面部分的笔记应用后端通信的应用代码如下:
+负责与前面部分的便笺应用后端通信的应用代码如下:
 
 ```js
 import axios from 'axios'
@@ -585,7 +585,7 @@ export default { getAll, create, update, setToken }
 ```
 
 We notice that the code is in no way specific to the fact that our application deals with notes. Excluding the value of the _baseUrl_ variable, the same code could be reused in the blog post application for dealing with the communication with the backend.
-我们注意到，代码并不是特定于我们的应用处理注释的事实。 排除 baseUrl 变量的值，可以在 blog post 应用中重用相同的代码来处理与后端的通信。
+我们注意到，代码并不是特定于我们的应用处理便笺的事实。 排除 baseUrl 变量的值，可以在 blog post 应用中重用相同的代码来处理与后端的通信。
 
 Extract the code for communicating with the backend into its own _useResource_ hook. It is sufficient to implement fetching all resources and creating a new resource.
 将用于与后端通信的代码提取到它自己的 useResource 钩子中。 只要实现获取所有资源并创建新资源就足够了。
@@ -637,7 +637,7 @@ The _useResource_ custom hook returns an array of two items just like the state 
 Useresource 自定义钩子返回一个包含两个项的数组，就像状态钩子一样。 数组的第一项包含所有单独的资源，数组的第二项是一个可用于操作资源集合(如创建新资源)的对象。
 
 If you implement the hook correctly, it can be used for both notes and phone numbers (start the server with the _npm run server_ command at the port 3005).
-如果正确地实现了钩子，它可以同时用于备注和电话号码(在端口3005使用 npm run server 命令启动服务器)。
+如果正确地实现了钩子，它可以同时用于便笺和电话号码(在端口3005使用 npm run server 命令启动服务器)。
 
 ![](../../images/5/21e.png)
 

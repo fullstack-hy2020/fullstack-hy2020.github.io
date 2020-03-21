@@ -719,7 +719,7 @@ The thing termed AJAX is now so commonplace that it's taken for granted. The ter
 
 In our example app, the home page works like a traditional web-page: All of the logic is on the server, and the browser only renders the HTML as instructed.
 
-在我们的示例应用中，主页的工作方式类似于传统的网页: 所有的逻辑都在服务器上，浏览器只按照指示渲染 HTML。
+在我们的示例应用中，主页的工作方式类似于传统的网页: 所有的逻辑都在服务器上，浏览器只按照说明渲染 HTML。
 
 The Notes page gives some of the responsibility, generating the HTML code for existing notes, to the browser. The browser tackles this task by executing the JavaScript code it fetched from the server. The code fetches the notes from the server as JSON-data and adds HTML elements for displaying the notes to the page using the [DOM-API](/en/part0/fundamentals_of_web_apps#document-object-model-or-dom).
 
@@ -731,7 +731,7 @@ In recent years, the [Single-page application](https://en.wikipedia.org/wiki/Sin
 
 The Notes page of our application bears some resemblance to SPA-style apps, but it's not quite there yet. Even though the logic for rendering the notes is run on the browser, the page still uses the traditional way of adding new notes. The data is sent to the server with form submit, and the server instructs the browser to reload the Notes page with a <i>redirect</i>.
 
-我们的应用的 Notes 页面与 SPA 风格的应用有一些相似之处，但它还没有完全到位。 尽管显示笔记的逻辑是在浏览器上运行的，但页面仍然使用传统的方式添加新笔记。 数据通过表单提交发送到服务器，服务器指示浏览器重新加载带有重定向的 Notes 页面。
+我们的应用的 Notes 页面与 SPA 风格的应用有一些相似之处，但它还没有完全到位。 尽管显示便笺的逻辑是在浏览器上运行的，但页面仍然使用传统的方式添加新便笺。 数据通过表单提交发送到服务器，服务器说明浏览器重新加载带有重定向的 Notes 页面。
 
 A single page app version of our example application can be found from <https://fullstack-exampleapp.herokuapp.com/spa>.
 At first glance, the application looks exactly the same as the previous one.
@@ -747,7 +747,7 @@ The form has no <i>action</i> or <i>method</i> attributes to define how and wher
 
 Open the <i>Network</i>-tab and empty it by clicking the &empty; symbol. When you now create a new note, you'll notice that the browser sends only one request to the server.
 
-打开 Network-标签 并通过单击 &empty; 按钮清空它。 当您现在创建一个新的笔记时，您会注意到浏览器只向服务器发送一个请求。
+打开 Network-标签 并通过单击 &empty; 按钮清空它。 当您现在创建一个新的便笺时，您会注意到浏览器只向服务器发送一个请求。
 
 ![](../../images/0/26e.png)
 
@@ -801,7 +801,7 @@ form.onsubmit = function(e) {
 
 The command <em>document.getElementById('notes_form')</em> instructs the code to fetch the form-element from the page, and to register an <i>event handler</i> to handle the form submit event. The event handler immediately calls the method <em>e.preventDefault()</em> to prevent the default handling of form submit. The default method would send the data to server and cause a redirect, which we don't want to happen.
 
-命令 document.getElementById (‘ notes form’) 指示代码从页面中提取 form 元素，并注册一个事件处理程序来处理表单提交事件。 事件处理程序将立即调用方法 e.preventDefault () ，以防止对表单 submit 的默认处理。 默认方法会将数据发送到服务器并导致重定向，而这是我们不希望发生的。
+命令 document.getElementById (‘ notes form’) 说明代码从页面中提取 form 元素，并注册一个事件处理程序来处理表单提交事件。 事件处理程序将立即调用方法 e.preventDefault () ，以防止对表单 submit 的默认处理。 默认方法会将数据发送到服务器并导致重定向，而这是我们不希望发生的。
 
 Then the event handler creates a new note, adds it to the notes list with the command <em>notes.push(note)</em>, rerenders the note list on the page and sends the new note to the server.
 
@@ -829,7 +829,7 @@ The code determines that the data is to be sent with an HTTP POST request and th
 The application code is available at <https://github.com/mluukkai/example_app>.
 It's worth remembering that the application is only meant to demonstrate the concepts of the course. The code follows a poor style of development in some measure, and should not be used as an example when creating your own applications. The same is true for the URLs used. The URL <i>new_note_spa</i>, which new notes are sent to, does not adhere to current best practices.
 
-应用代码可以在 https://github.com/mluukkai/example_app 上找到。 值得注意的是，这个应用只是用来演示课程的概念。 该代码在某种程度上遵循了糟糕的开发风格，不应该在创建自己的应用时作为示例使用。 使用的 url 也是如此。 发送新笔记的 URL 新建笔记的<i>new_note_spa</i>并不遵循当前的最佳实践。
+应用代码可以在 https://github.com/mluukkai/example_app 上找到。 值得注意的是，这个应用只是用来演示课程的概念。 该代码在某种程度上遵循了糟糕的开发风格，不应该在创建自己的应用时作为示例使用。 使用的 url 也是如此。 发送新便笺的 URL 新建便笺的<i>new_note_spa</i>并不遵循当前的最佳实践。
 
 ### Javascript-libraries Javascript 库
 
@@ -1028,7 +1028,7 @@ Create a diagram depicting the situation where the user goes to the [single page
 
 Create a diagram depicting the situation, where user creates a new note using the single page version of the app.
 
-创建一个图表描述如下情况，用户使用应用的 SPA 版本创建一个新的笔记。
+创建一个图表描述如下情况，用户使用应用的 SPA 版本创建一个新的便笺。
 
 This was the last exercise, and it's time to push your answers to GitHub and mark the exercises as done in the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
