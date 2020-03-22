@@ -286,7 +286,7 @@ The number of credits is based on hours of work done. One credit is approximatel
 
 It is possible to complete the project as a pair or a group.
 
-通过结对编程来参与这个项目是可能的。
+通过结对编程来参与这个项目是可行的。
 
 For more information, see [the open university page](https://courses.helsinki.fi/fi/aytkt21010en/133171897).
 

@@ -849,7 +849,7 @@ React.useEffect(() => {
 ````
 
  **A word of warning!** Passing the type parameter for axios will not validate any data and is quite dangerous especially if you are using external APIs. You can create custom validation functions taking in the whole payload and returning the correct type or you can use type guard. Both are valid. There are also many libraries that provide validation through different kind of schemas eg. [io-ts](https://github.com/gcanti/io-ts). For simplicity we will continue trusting our own work and trust that we will get data of the correct form from the backend.
-* * 警告一句！ * * 为 axios 传递类型参数不会验证任何数据，并且非常危险，尤其是在使用外部 api 时。 您可以创建自定义验证函数，包含整个有效负载并返回正确的类型，或者您可以使用类型保护。 两者都是有效的。 还有许多库通过不同的模式提供验证，例如。 ( https://github.com/gcanti/io-ts ). 为了简单起见，我们将继续相信我们自己的工作，并相信我们将从后端获得正确形式的数据。
+**警告一句！ **为 axios 传递类型参数不会验证任何数据，并且非常危险，尤其是在使用外部 api 时。 您可以创建自定义验证函数，包含整个有效负载并返回正确的类型，或者您可以使用类型保护。 两者都是有效的。 还有许多库通过不同的模式提供验证，例如。 ( https://github.com/gcanti/io-ts ). 为了简单起见，我们将继续相信我们自己的工作，并相信我们将从后端获得正确形式的数据。
 
 As our app is quite small we will update the state by simply calling the <i>dispatch</i> function provided to us by <i>useStateValue</i> hook. The compiler helps to make sure that we dispatch actions according to our <i>Action</i> type with predefined type string and payload:
 由于我们的应用非常小，我们将通过调用<i>useStateValue</i> hook 提供的<i>dispatch</i> 函数来更新状态。 编译器有助于确保我们根据预定义类型字符串和有效负载的<i>Action</i> 类型分派操作:
@@ -936,7 +936,7 @@ The gender is shown with react-semantic-ui component [Icon](https://react.semant
 性别以React-语义-用户界面组件[图标]( https://react.semantic-ui.com/elements/Icon/#gendersicons-can-represent-genders-or-types-of-sexuality )显示
 
 **Note** that in order to access the id in the url, you need to give [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) a proper type argument:
-* * 注意 * * 为了访问 url 中的 id，需要给[ useParams ]( https://reacttraining.com/react-router/web/api/hooks/useParams )一个正确的类型参数:
+**注意 **为了访问 url 中的 id，需要给[ useParams ]( https://reacttraining.com/react-router/web/api/hooks/useParams )一个正确的类型参数:
 
 ```js
 const { id } = useParams<{ id: string }>();
@@ -985,7 +985,7 @@ Let's ditch our old patient seed data from backend and start using [this expande
 让我们从后端丢弃旧的病人种子数据，开始使用[这种扩展格式]( https://github.com/fullstack-hy2020/misc/blob/master/patients.ts )。
 
 **Notice:** This time the data is not in .json but instead in the .ts-format. You should already have the complete <i>Gender</i> and <i>Patient</i> types implemented so only correct the paths where they are imported from if needed.
-* * 注意: * * 这次数据不在。 而是在。 Ts-格式。 您应该已经实现了完整的<i>Gender</i> 和<i>Patient</i> 类型，以便只在需要时纠正导入它们的路径。
+**注意: **这次数据不在。 而是在。 Ts-格式。 您应该已经实现了完整的<i>Gender</i> 和<i>Patient</i> 类型，以便只在需要时纠正导入它们的路径。
 
 Let us now create a proper <i>Entry</i> type based on the data we have.
 现在，让我们根据已有的数据创建一个适当的<i>Entry</i> 类型。
@@ -1495,7 +1495,7 @@ Now that our backend supports adding of entries, we want to add the correspondin
 现在，我们的后端支持添加条目，我们希望添加相应的功能前端。 在这个练习中，您应该添加一个用于为病人添加条目的表单。 打开表单的一个直观位置是患者页面。
 
 In this exercise it is enough to **support <i>one</i> entry type**, and you do not have to handle the errors, it is enough if an entry can be created if the form is filled up with valid data.
-在这个练习中，只要 * * 支持<i>one</i> 条目类型 * * 就足够了，而且您不必处理这些错误，如果表单中填充了有效数据，那么创建条目就足够了。
+在这个练习中，只要 **支持<i>one</i> 条目类型 **就足够了，而且您不必处理这些错误，如果表单中填充了有效数据，那么创建条目就足够了。
 
 Upon a successful submit the new entry should be added to the correct person and the patient's entries on the patient page should be updated to contain the new entry.
 一旦成功提交，新的条目应该被添加到正确的人，病人页面上的条目应该被更新以包含新的条目。

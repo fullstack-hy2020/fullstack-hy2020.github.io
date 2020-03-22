@@ -589,7 +589,7 @@ Now a user stays logged in to the application forever. We should probably add a 
 
 
 It's possible to log out a user using the console, and that is enough for now. 
-使用控制台注销用户是可能的，这就足够了。
+使用控制台注销用户是可行的，这就足够了。
 You can log out with the command:
 您可以使用如下命令注销:
 
@@ -634,7 +634,7 @@ While doing the exercises, remember all of the debugging methods we have talked 
 
 
 **Warning:** If you notice you are mixing async/await and _then_ commands, its 99.9%  certain you are doing something wrong. Use either or, never both. 
-* * 警告: * * 如果你注意到你正在混合 async / await 命令，它的99.9% 肯定你正在做错误的事情。 要么使用，要么使用，不要两者都使用。
+**警告: **如果你注意到你正在混合 async / await 命令，它的99.9% 肯定你正在做错误的事情。 要么使用，要么使用，不要两者都使用。
 
 #### 5.1: bloglist frontend, 步骤1
 5.1: bloglist frontend，步骤1

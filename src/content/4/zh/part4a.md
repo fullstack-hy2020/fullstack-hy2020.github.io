@@ -455,7 +455,7 @@ Refactor the application into separate modules as shown earlier in this part of 
 
 
 **NB** refactor your application in baby steps and verify that the application works after every change you make. If you try to take a "shortcut" by refactoring many things at once, then [Murphy's law](https://en.wikipedia.org/wiki/Murphy%27s_law) will kick in and it is almost certain that something will break in your application. The "shortcut" will end up taking more time than moving forward slowly and systematically.
-* * 注意 * * 以初级步骤重构您的应用，并在每次更改后验证该应用是否工作。 如果你试图通过同时重构许多东西来走“捷径” ，那么[墨菲定律]( https://en.wikipedia.org/wiki/Murphy%27s_law )就会生效，而且几乎可以肯定，某些东西会在你的应用中中断 。“捷径”最终将花费更多的时间，而不是缓慢而系统地向前推进
+**注意 **以初级步骤重构您的应用，并在每次更改后验证该应用是否工作。 如果你试图通过同时重构许多东西来走“捷径” ，那么[墨菲定律]( https://en.wikipedia.org/wiki/Murphy%27s_law )就会生效，而且几乎可以肯定，某些东西会在你的应用中中断 。“捷径”最终将花费更多的时间，而不是缓慢而系统地向前推进
 
 
 One best practice is to commit your code every time it is in a stable state. This makes it easy to rollback to a situation where the application still works.
@@ -513,7 +513,7 @@ Jest is a natural choice for this course, as it works well for testing backends,
 
 
 > <i>**Windows users:**</i> Jest may not work if the path of the project directory contains a directory that has spaces in its name.
-I * * Windows 用户: 如果项目目录的路径包含名称中有空格的目录，* * / i Jest 可能无法工作。
+I **Windows 用户: 如果项目目录的路径包含名称中有空格的目录，**/ i Jest 可能无法工作。
 
 
 Since tests are only executed during the development of our application, we will install <i>jest</i> as a development dependency with the command:
@@ -867,7 +867,7 @@ The value returned by the function could be in the following format:
 ```
 
 **NB** when you are comparing objects, the [toEqual](https://jestjs.io/docs/en/expect#toequalvalue) method is probably what you want to use, since the [toBe](https://jestjs.io/docs/en/expect#tobevalue) tries to verify that the two values are the same value, and not just that they contain the same properties.
-* * NB * * 当您比较对象时，[ toEqual ]( https://jestjs.io/docs/en/expect#toequalvalue )方法可能是您想要使用的，因为[ toBe ]( https://jestjs.io/docs/en/expect#tobevalue )试图验证这两个值是否是相同的值，而不仅仅是它们包含相同的属性。
+** 注意 ** 当您比较对象时，[ toEqual ]( https://jestjs.io/docs/en/expect#toequalvalue )方法可能是您想要使用的，因为[ toBe ]( https://jestjs.io/docs/en/expect#tobevalue )试图验证这两个值是否是相同的值，而不仅仅是它们包含相同的属性。
 
 Write the tests for this exercise inside of a new <i>describe</i> block. Do the same for the remaining exercises as well.
 在一个新的<i>describe</i> 块中编写这个练习的测试。 对剩下的练习也做同样的动作。

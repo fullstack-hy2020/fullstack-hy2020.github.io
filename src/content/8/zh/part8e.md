@@ -84,7 +84,7 @@ query {
 ```
 
 The fragments <i><strong>are not</strong></i> defined in the GraphQL schema, but in the client. The fragments must be declared when the client uses them for queries. 
-I strong 片段不是在 GraphQL 模式中定义的 / strong / i，而是在客户机中定义的。 当客户端使用这些片段进行查询时，必须声明它们。
+I strong 片段不是在 GraphQL 模式中定义的 / strong / i，而是在客户端中定义的。 当客户端使用这些片段进行查询时，必须声明它们。
 
 In principle, we could declare the fragment with each query like so:
 原则上，我们可以像这样在每个查询中声明片段:
@@ -462,7 +462,7 @@ const PersonForm = ({ setError, updateCacheWith }) => { // highlight-line
 ```
 
 The final code of the client can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-9), branch <i>part8-9</i>.
-客户机的最终代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-9) ，branch<i>part8-9</i> 上找到。
+客户端的最终代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-9) ，branch<i>part8-9</i> 上找到。
 
 ### n+1-problem
 # # n + 1-问题

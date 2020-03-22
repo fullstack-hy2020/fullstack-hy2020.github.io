@@ -337,7 +337,7 @@ With the help of our compiler and eslint it also ensures that a good code qualit
 练习9.8-9.9。
 
 **Before you start the exercises**
-* * 在开始练习之前 * * 
+**在开始练习之前 **
 
 For this set of exercises you will be developing a backend for an existing project called <i>Patientor</i> which is a simple medical record application for doctors who handle diagnoses and basic health information of their patients.
 对于这套练习，你将开发一个现有项目的后端称为<i>Patientor</i>，这是一个简单的医疗记录应用的医生谁处理诊断和他们的病人的基本健康信息。
@@ -583,7 +583,7 @@ And our problem is solved.
 我们的问题就解决了。
 
 
-!-* * 注意 * * * 由于某种原因 VC 代码已经多次抱怨，它没有找到文件 i。 . /. . / 资料 / 日记。 尽管文件存在 json / i 仍在服务中。 这是一个 bug，当编辑器重新启动时，抱怨就消失了。 -->
+!-**注意 *** 由于某种原因 VC 代码已经多次抱怨，它没有找到文件 i。 . /. . / 资料 / 日记。 尽管文件存在 json / i 仍在服务中。 这是一个 bug，当编辑器重新启动时，抱怨就消失了。 -->
 > **NB**: For some reason VSCode tends to complain it cannot find the file <i>../../data/diaries.json</i> from the service despite the file existing. That is a bug in the editor, and goes away when the editor is restarted.
 出于某种原因，VSCode 倾向于抱怨它无法找到文件 i。 . /. . / 资料 / 日记。 尽管文件已经存在，但是我们还是从服务器中删除了 json / i。 这是编辑器中的一个 bug，并且在重新启动编辑器时消失。
 
@@ -1006,7 +1006,7 @@ Structure your code properly by using meaningfully named directories and files.
 通过使用有意义的命名目录和文件来合理地构造代码。
 
 **Note** that <i>diagnoses</i> may or may not contain the field <i>latin</i>. You might want to use [optional properties](https://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties) in the type definition.
-* * 注意 * *<i>diagnosis</i> may or may not contain the field<i>latin</i>。 你可能想在类型定义中使用[可选属性]( https://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties 属性)。
+**注意 * *<i>diagnosis</i> may or may not contain the field<i>latin</i>。 你可能想在类型定义中使用[可选属性]( https://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties 属性)。
 
 #### 9.11: Patientor backend, 步骤4
 9.11: Patientor backend，步骤4

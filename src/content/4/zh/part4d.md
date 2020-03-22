@@ -347,7 +347,7 @@ In the next exercises, basics of user management will be implemented for the Blo
 在接下来的练习中，我们将为 Bloglist 应用实现基本的用户管理。 最安全的方法是遵循第4章[用户管理](/ en / part4 / User administration)到[基于令牌的身份验证](/ en / part4 / token authentication)这一章的内容。 当然，你也可以运用你的创造力。
 
 **One more warning:** If you notice you are mixing async/await and _then_ calls, it is 99% certain you are doing something wrong. Use either or, never both. 
-* * 还有一个警告: * * 如果你注意到你正在混合 async / await 然后调用，99% 肯定你做错了什么。 要么使用，要么使用，不要两者都使用。
+**还有一个警告: **如果你注意到你正在混合 async / await 然后调用，99% 肯定你做错了什么。 要么使用，要么使用，不要两者都使用。
 
 #### 4.15: bloglist expansion, 步骤4
 4.15: bloglist expansion，步骤4
@@ -389,7 +389,7 @@ The operation must respond with a suitable status code and some kind of an error
 如果创建了无效用户，操作必须使用适当的状态代码和某种错误消息进行响应。
 
 **NB** Do not test password restrictions with Mongoose validations. It is not a good idea because the password received by the backend and the password hash saved to the database are not the same thing. The password length should be validated in the controller like we did in [part 3](/en/part3/validation_and_es_lint) before using Mongoose validation. 
-* * 注意 * * 不要用 Mongoose 验证测试密码限制。 这不是一个好主意，因为后端接收到的密码和保存到数据库的密码散列不是一回事。 在使用 Mongoose 验证之前，应该像在[ part 3](/ en / part3 / validation 和 es lint)中那样在控制器中验证密码长度。
+**注意 **不要用 Mongoose 验证测试密码限制。 这不是一个好主意，因为后端接收到的密码和保存到数据库的密码散列不是一回事。 在使用 Mongoose 验证之前，应该像在[ part 3](/ en / part3 / validation 和 es lint)中那样在控制器中验证密码长度。
 
 Also, implement tests which check that invalid users are not created and invalid add user operation returns a suitable status code and error message. 
 此外，实现检查无效用户未被创建和无效的添加用户操作返回合适的状态码和错误消息的测试。

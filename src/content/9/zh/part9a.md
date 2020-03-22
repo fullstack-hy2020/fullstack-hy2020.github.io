@@ -57,7 +57,7 @@ The compiler also performs a static code analysis. It can emit warnings or error
 编译器也会执行一个静态程序分析。 如果它找到了这样做的理由，它可以发出警告或错误，并且可以将它设置为执行其他任务，例如将生成的代码合并到单个文件中。
 
 
-!-* * 语言服务 * * 从源代码收集类型信息的格式，开发工具可以利用它来提供智能感知、类型提示和可能的重构
+!-**语言服务 **从源代码收集类型信息的格式，开发工具可以利用它来提供智能感知、类型提示和可能的重构
 <i>The language service</i> collects type information from the source code. Development tools can use the type information for providing intellisense, type hints and possible refactoring alternatives.
 I 语言服务 / i 从源代码中收集类型信息。 开发工具可以使用类型信息来提供智能感知、类型提示和可能的重构替代方案。
 
@@ -251,7 +251,7 @@ With the help of TypeScript it is also very easy to start using the newest JavaS
 
 
 As mentioned above, TypeScript type annotations and type checking exist only at compile time and no longer at runtime. Even if the compiler does not throw any errors, runtime errors are still possible.
-如上所述，TypeScript 类型便笺和类型检查仅在编译时存在，在运行时不再存在。 即使编译器没有抛出任何错误，运行时错误仍然是可能的。
+如上所述，TypeScript 类型便笺和类型检查仅在编译时存在，在运行时不再存在。 即使编译器没有抛出任何错误，运行时错误仍然是可行的。
 These runtime errors are especially common when handling external input, such as data received from a network request.
 这些运行时错误在处理外部输入(如从网络请求接收的数据)时特别常见。
 

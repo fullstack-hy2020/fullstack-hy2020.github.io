@@ -89,7 +89,7 @@ It is worth mentioning that TypeScript also provides an online playground, where
 值得一提的是，TypeScript 还提供了一个在线操场，在这里你可以快速尝试 TypeScript 代码，并立即看到结果的 JavaScript 和可能的编译错误。 你可以访问打字稿的官方 https://www.typescriptlang.org/play/index.html。
 
 **NB:** The playground might contain different tsconfig rules (which will be introduced later) than your local environment, which is why you might see different warnings there compared to your local environment. The playground's tsconfig is modifiable through the config dropdown menu.
-* * 注意: * * 游乐场可能包含不同的 tsconfig 规则(稍后将介绍) ，这就是为什么你可能会看到不同的警告与您的当地环境。 游乐场的 tsconfig 是可以通过配置下拉菜单修改的。
+**注意: **游乐场可能包含不同的 tsconfig 规则(稍后将介绍) ，这就是为什么你可能会看到不同的警告与您的当地环境。 游乐场的 tsconfig 是可以通过配置下拉菜单修改的。
 
 #### A note about the coding style
 关于编码风格的便笺
@@ -355,7 +355,7 @@ But something is not right:
 # # #@types / { npm package }
 
 Let's return to the basic idea of TypeScript. TypeScript expects all globally used code to be typed, as it does for your own code when your project has a reasonable configuration. The TypeScript library itself contains only typings for the code of the TypeScript package. It is possible to write your own typings for a library, but that is almost never needed - since the TypeScript community has done it for us!
-让我们回到打字稿的基本概念上来。 Typescript 希望所有全局使用的代码都被类型化，就像当您的项目具有合理的配置时为您自己的代码所做的那样。 库本身只包含 TypeScript 包代码的输入。 为库编写自己的输入是可能的，但这几乎从来不需要——因为打字稿社区已经为我们做到了！
+让我们回到打字稿的基本概念上来。 Typescript 希望所有全局使用的代码都被类型化，就像当您的项目具有合理的配置时为您自己的代码所做的那样。 库本身只包含 TypeScript 包代码的输入。 为库编写自己的输入是可行的，但这几乎从来不需要——因为打字稿社区已经为我们做到了！
 
 
 
@@ -373,7 +373,7 @@ Sometimes an npm package can also include its types within the code and in that 
 有时 npm 包也可以在代码中包含它的类型，在这种情况下，不需要安装相应的 i@types / * / i。
 
 > **NB:** Since the typings are only used before compilation, the typings are not needed in the production build and they should <i>always</i> be in the devDependencies of the package.json.
-* * NB: * * 由于输入只在编译之前使用，因此在生产构建中不需要输入，并且它们应该始终 / i 在 package.json 的 devDependencies 中。
+** 注意 ** 由于输入只在编译之前使用，因此在生产构建中不需要输入，并且它们应该始终 / i 在 package.json 的 devDependencies 中。
 
 Since the global variable <i>process</i> is defined by Node itself, we get its typings by intalling the package <i>@types/node</i>:
 由于全局变量<i>process</i> 是由 Node 本身定义的，所以我们可以通过缩放包 i@types / Node / i 来获得它的输出:
@@ -797,7 +797,7 @@ import express from 'express';
 
 注意，通过单击<i>Quick fix...</i> 按钮 VSCode，可以自动修复这个问题。 随时注意这些编辑器提供的帮助 / 快速修复程序; 倾听编辑器通常只会使代码更好、更容易阅读，自动修复问题可以大大节省时间。 -->
 **NB**: VSCode offers you a possibility to fix the issues automatically by clicking the <i>Quick fix...</i> button.
-* * 注意 * * : VSCode 为您提供了一种可能性，通过单击<i>Quick fix...</i> 按钮自动修复问题。
+**注意 **: VSCode 为您提供了一种可能性，通过单击<i>Quick fix...</i> 按钮自动修复问题。
 Keep your eyes open for these helpers/quick fixes; listening to your editor usually makes your code better and easier to read. 
 请密切注意这些帮助程序 / 快速修复程序; 倾听编辑器通常会使代码更好、更容易阅读。
 The automatic fixes for issues can be a major time saver as well. 

@@ -379,7 +379,7 @@ Sql-injections 可以通过[ sanitizing ]( https://security.stackexchange.com/qu
 
 
 Injection attacks are also possible in NoSQL-databases. However, mongoose prevents them by [sanitizing](https://zanon.io/posts/nosql-injection-in-mongodb) the queries. More on the topic can be found e.g. [here](https://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html).
-注射攻击在 NoSQL-databases 也是可能的。 然而，mongoose 通过[ sanitizing ]( https://zanon.io/posts/nosql-injection-in-mongodb )查询来阻止它们。 你可以在这里找到更多关于这个话题的 https://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html。
+注射攻击在 NoSQL-databases 也是可行的。 然而，mongoose 通过[ sanitizing ]( https://zanon.io/posts/nosql-injection-in-mongodb )查询来阻止它们。 你可以在这里找到更多关于这个话题的 https://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html。
 
 
 

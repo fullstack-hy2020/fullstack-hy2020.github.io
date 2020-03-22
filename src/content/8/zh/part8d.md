@@ -131,14 +131,14 @@ Use of the effect hook is necessary to avoind an endless rendering loop.
 使用效果钩子是必要的，以避免无休止的渲染循环。
 
 Let's also add a button which enables logged in user to log out. The buttons onClick handler sets the _token_ state to null, removes the token from local storage and resets the cache of the Apollo client. The last is [important](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout), because some queries might have fetched data to cache, which only logged in users should have access to. 
-我们还要添加一个按钮，使登录用户能够注销。 Onclick 处理程序的按钮将令牌状态设置为 null，从本地存储中删除令牌并重置 Apollo 客户机的缓存。 最后一个是[重要的]( https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout ) ，因为有些查询可能已经将数据提取到缓存，只有登录的用户才能访问。
+我们还要添加一个按钮，使登录用户能够注销。 Onclick 处理程序的按钮将令牌状态设置为 null，从本地存储中删除令牌并重置 Apollo 客户端的缓存。 最后一个是[重要的]( https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout ) ，因为有些查询可能已经将数据提取到缓存，只有登录的用户才能访问。
 
 
 
 
 
 We can reset the cache using the [resetStore](https://www.apollographql.com/docs/react/v3.0-beta/api/core/ApolloClient/#ApolloClient.resetStore) method of an Apollo _client_ object. 
-我们可以使用 Apollo 客户机对象的[ resetStore ]( https://www.apollographql.com/docs/react/v3.0-beta/api/core/apolloclient/#apolloclient.resetStore )方法重置缓存。
+我们可以使用 Apollo 客户端对象的[ resetStore ]( https://www.apollographql.com/docs/react/v3.0-beta/api/core/apolloclient/#apolloclient.resetStore )方法重置缓存。
 The client can be accessed with the [useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useapolloclient) hook:
 客户端可以通过[ useApolloClient ]( https://www.apollographql.com/docs/react/api/react-hooks/#useApolloClient )钩子访问:
 
@@ -199,7 +199,7 @@ const client = new ApolloClient({
 
 <！ 客户多种多样的服务方式，包括医护人员，医护人员，和阿波罗医生。 ( https://www.apollographql.com/docs/link/links/http.htm )-yhtey t muokataan siten，ett，ett pyynt jen mukaan [ asetetaan headerille ]( https://www.apollographql.com/docs/react/networking/authentication/#header )<i>authorization</i> arvoksi localStoragessa mahisesti oleva token. -->
 The link parameter given to the _client_-object defines how apollo connects to the server. Here the normal [httpLink](https://www.apollographql.com/docs/link/links/http.htm) connection is modified so that the request's <i>authorization</i> [header](https://www.apollographql.com/docs/react/networking/authentication/#header) contains the token if one has been saved to the localStorage. 
-给定客户机对象的 link 参数定义了 apollo 如何连接到服务器。 在这里，正常的[ httpLink ]( https://www.apollographql.com/docs/link/links/http.htm )连接被修改，以便请求的<i>authorization</i> [ header ]( https://www.apollographql.com/docs/react/networking/authentication/#header )包含令牌(如果已经保存到 localStorage 的话)。
+给定客户端对象的 link 参数定义了 apollo 如何连接到服务器。 在这里，正常的[ httpLink ]( https://www.apollographql.com/docs/link/links/http.htm )连接被修改，以便请求的<i>authorization</i> [ header ]( https://www.apollographql.com/docs/react/networking/authentication/#header )包含令牌(如果已经保存到 localStorage 的话)。
 
 
 
@@ -272,7 +272,7 @@ This approach is pretty good, the drawback being that the query is always rerun 
 这种方法非常好，缺点是查询总是随着任何更新而重新运行。
 
 It is possible to optimize the solution by handling updating the cache ourselves. This is done by defining a suitable [update](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#options-)-callback for the mutation, which Apollo runs after the mutation:
-通过处理自己更新缓存来优化解决方案是可能的。 这是通过为变异定义一个合适的[更新]( https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#options- )-回调来完成的，Apollo 在变异之后运行:
+通过处理自己更新缓存来优化解决方案是可行的。 这是通过为变异定义一个合适的[更新]( https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#options- )-回调来完成的，Apollo 在变异之后运行:
 
 ```js 
 const PersonForm = ({ setError }) => {

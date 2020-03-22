@@ -157,7 +157,7 @@ noteService.getAll().then(notes =>
 
 
 > **NB:** why didn't we use await in place of promises and event handlers (registered to _then_-methods)?
-* * NB: * * 为什么我们没有使用 await 来代替 promises 和事件处理程序(注册到 then-methods) ？
+** 注意 ** 为什么我们没有使用 await 来代替 promises 和事件处理程序(注册到 then-methods) ？
 >
 >
 > Await only works inside <i>async</i> functions, and the code in <i>index.js</i> is not inside a function, so due to the simple nature of the operation, we'll abstain from using <i>async</i> this time.
@@ -226,7 +226,7 @@ const App = () => {
 Now the variable <i>dispatch</i> we define in the _App_ component, which practically is the dispatch function of the redux-store, has been added to the array useEffect receives as a parameter.
 现在，我们在 App 组件中定义的变量<i>dispatch</i> (实际上是 redux-store 的 dispatch 函数)已经被添加到作为参数接收的数组 useEffect 中。
 **If** the value of the dispatch-variable would change during runtime, 
-* * 如果 dispatch-variable 的值在运行期间发生变化,
+**如果 dispatch-variable 的值在运行期间发生变化,
 the effect would be executed again. This however cannot happen in our application, so the warning is unnecessary.
 该效果将再次执行。但是，这不能在我们的应用中发生，所以警告是不必要的。
 

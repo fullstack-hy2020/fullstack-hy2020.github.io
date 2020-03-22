@@ -412,7 +412,7 @@ npm test -- -t 'notes'
 
 
 **NB**: When running a single test, the mongoose connection might stay open if no tests using the connection are run. 
-* * 注意 * * : 当运行单个测试时，如果没有运行使用该连接的测试，则 mongoose 连接可能保持打开状态。
+**注意 **: 当运行单个测试时，如果没有运行使用该连接的测试，则 mongoose 连接可能保持打开状态。
 The problem might be due to the fact that supertest primes the connection, but jest does not run the afterAll portion of the code. 
 这个问题可能是因为 supertest 为连接优先，但是 jest 并不运行代码的 afterAll 部分。
 
@@ -1122,11 +1122,11 @@ Javascript 的异步特性可能会导致令人惊讶的行为，因此，在使
 
 
 **NB:** the material uses the [toContain](https://facebook.github.io/jest/docs/en/expect.html#tocontainitem) matcher in several places to verify that an array contains a specific element. It's worth noting that the method uses the === operator for comparing and matching elements, which means that it is often not well-suited for matching objects. In most cases, the appropriate method for verifying objects in arrays is the [toContainEqual](https://facebook.github.io/jest/docs/en/expect.html#tocontainequalitem) matcher. However, the model solutions don't check for objects in arrays with matchers, so using the method is not required for solving the exercises.
-* * 注意: * * 材料在几个地方使用[ toContain ]( https://facebook.github.io/jest/docs/en/expect.html#tocontainitem )匹配器来验证数组是否包含特定元素。 值得注意的是，该方法使用运算符来比较和匹配元素，这意味着它通常不适合匹配对象。 在大多数情况下，验证数组中对象的合适方法是[ toContainEqual ]( https://facebook.github.io/jest/docs/en/expect.html#tocontainequalitem ) matcher。 然而，模型解决方案不检查数组中与匹配器有关的对象，因此不需要使用该方法来解决练习题。
+**注意: **材料在几个地方使用[ toContain ]( https://facebook.github.io/jest/docs/en/expect.html#tocontainitem )匹配器来验证数组是否包含特定元素。 值得注意的是，该方法使用运算符来比较和匹配元素，这意味着它通常不适合匹配对象。 在大多数情况下，验证数组中对象的合适方法是[ toContainEqual ]( https://facebook.github.io/jest/docs/en/expect.html#tocontainequalitem ) matcher。 然而，模型解决方案不检查数组中与匹配器有关的对象，因此不需要使用该方法来解决练习题。
 
 
 **Warning:** If you find yourself using async/await and <i>then</i> methods in the same code, it is almost guaranteed that you are doing something wrong. Use one or the other and don't mix the two.
-* * 警告: * * 如果您发现自己在同一代码中使用 async / await 和<i>then</i> 方法，那么几乎可以肯定您正在做一些错误的事情。 使用其中之一，不要混淆两者。
+**警告: **如果您发现自己在同一代码中使用 async / await 和<i>then</i> 方法，那么几乎可以肯定您正在做一些错误的事情。 使用其中之一，不要混淆两者。
 
 
 #### 4.8: Blog list tests, 步骤1
@@ -1165,7 +1165,7 @@ module.exports = {
 
 
 **NB:** when you are writing your tests **<i>it is better to not execute all of your tests</i>**, only execute the ones you are working on. Read more about this [here](/en/part4/testing_the_backend#running-tests-one-by-one).
-注意: 在编写测试时，最好不要执行所有的测试 / i * * ，只执行正在执行的测试。 阅读更多相关内容[ here ](/ en / part4 / testing the backend # running-tests-one-by-one)。
+注意: 在编写测试时，最好不要执行所有的测试 / i **，只执行正在执行的测试。 阅读更多相关内容[ here ](/ en / part4 / testing the backend # running-tests-one-by-one)。
 
 
 #### 4.9*: Blog list tests, 步骤2

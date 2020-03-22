@@ -49,7 +49,7 @@ As mentioned in [part 1](/en/part1/a_more_complex_state_debugging_react_apps#rul
 正如在[ part 1](/ en / part1 / a 更复杂的状态调试React应用 # rules-of-hooks)中提到的，钩子不是正常的函数，在使用这些函数时，我们必须遵守某些[规则或限制]( https://reactjs.org/docs/hooks-rules.html )。 让我们回顾一下使用钩子的规则，一字不差地从官方的 React 文档中复制下来:
 
 **Don’t call Hooks inside loops, conditions, or nested functions.** Instead, always use Hooks at the top level of your React function. 
-* * 不要在循环、条件或嵌套函数中调用 Hooks。 * * 取而代之的是，始终在 React 函数的顶层使用 Hooks。
+**不要在循环、条件或嵌套函数中调用 Hooks。 **取而代之的是，始终在 React 函数的顶层使用 Hooks。
 
 **Don’t call Hooks from regular JavaScript functions.** Instead, you can:
 不要从常规的 JavaScript 函数中调用 Hooks:

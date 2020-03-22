@@ -119,7 +119,7 @@ We will get to know the basics of GraphQL by implementing a GraphQL version of t
 
 
 In the heart of all GraphQL applications is a [schema](https://graphql.org/learn/schema/), which describes the data sent between the client and the server. The initial schema for our phonebook is as follows: 
-所有 GraphQL 应用的核心是一个[ schema ]( https://GraphQL.org/learn/schema/ ) ，它描述了客户机和服务器之间发送的数据。 我们电话簿的初始模式如下:
+所有 GraphQL 应用的核心是一个[ schema ]( https://GraphQL.org/learn/schema/ ) ，它描述了客户端和服务器之间发送的数据。 我们电话簿的初始模式如下:
 
 ```js
 type Person {
@@ -156,7 +156,7 @@ Again exclamation marks are used to mark which return values and parameters are 
 同样，感叹号用于标记返回值和参数为<i>非空</i> 的值。 Personcount 肯定会返回一个整数。 必须为查询 findPerson 提供一个字符串作为参数。 查询返回一个<i>Person</i>-object 或<i>null</i>。 Allpersons 返回一个<i>Person</i> 对象列表，该列表不包含任何<i>null</i>-value。
 
 So the schema describes what queries the client can send to the server, what kind of parameters the queries can have, and what kind of data the queries return. 
-因此模式描述了客户机可以向服务器发送什么样的查询，查询可以有什么样的参数，以及查询返回什么样的数据。
+因此模式描述了客户端可以向服务器发送什么样的查询，查询可以有什么样的参数，以及查询返回什么样的数据。
 
 
 The simplest of the queries, _personCount_, looks as follows: 
@@ -217,7 +217,7 @@ The response could look like this:
 ```
 
 A query can be made to return any field described in the schema. For example the following would also be possible: 
-可以进行查询以返回模式中描述的任何字段。 例如，下列情况也是可能的:
+可以进行查询以返回模式中描述的任何字段。 例如，下列情况也是可行的:
 
 ```js
 query {
@@ -291,7 +291,7 @@ The difference to REST queries is stark. With REST, the URL and the type of the 
 
 
 GraphQL query describes only the data moving between a server and the client. On the server the data can be organized and saved any way we like. 
-Graphql 查询只描述在服务器和客户机之间移动的数据。 在服务器上，数据可以按照我们喜欢的方式进行组织和保存。
+Graphql 查询只描述在服务器和客户端之间移动的数据。 在服务器上，数据可以按照我们喜欢的方式进行组织和保存。
 
 
 Despite its name, GraphQL does not actually have anything to do with databases. It does not care how the data is saved. 
@@ -843,7 +843,7 @@ But the response to the mutation is
 
 
 So the resolver of the <i>address</i> field of the <i>Person</i> type formats the response object to the right form. 
-因此，i Person /<i>类型的 i address</i> 字段的解析器将响应对象格式化为正确的形式。
+因此，i Person /<i>类型的 i address</i> 字段的解析器将response对象格式化为正确的形式。
 
 ### Error handling
 错误处理

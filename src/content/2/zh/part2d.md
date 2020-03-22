@@ -69,7 +69,7 @@ When we try to create a new note, the following output pops up in console:
 ![](../../images/2/20e.png)
 
 The newly created note resource is stored in the value of the <i>data</i> property of the _response_ object.
-新创建的便笺资源存储在响应对象的<i>data</i> 属性值中。
+新创建的便笺资源存储在response对象的<i>data</i> 属性值中。
 
 Sometimes it can be useful to inspect HTTP requests in the <i>Network</i> tab of Chrome developer tools, which was used heavily at the beginning of [part 0](/en/part0/fundamentals_of_web_apps#http-get):
 有时在 Chrome 开发工具的<i>Network</i> 选项卡中检查 HTTP 请求是很有用的，这个选项卡在[part 0](/en/part0/fundamentals_of_web_apps#http-get) 开始时被大量使用:
@@ -419,7 +419,7 @@ noteService
 ```
 
 The <i>App</i> component only uses the <i>response.data</i> property of the response object.
-<i>App</i> 组件只使用响应对象的  <i>response.data</i> 属性。
+<i>App</i> 组件只使用response对象的  <i>response.data</i> 属性。
 
 
 The module would be much nicer to use if, instead of the entire HTTP response, we would only get the response data. Using the module would then look like this:

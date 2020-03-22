@@ -111,7 +111,7 @@ The servers response is printed to the console:
 
 
 The application can communicate with a GraphQL server using the _client_ object. The client can be made accessible for all components of the application by wrapping the <i>App</i> component with [ApolloProvider]https://www.apollographql.com/docs/react/v3.0-beta/get-started/#connect-your-client-to-react).
-应用可以使用客户机对象与 GraphQL 服务器通信。 通过用[ ApolloProvider ] https://www.apollographql.com/docs/react/v3.0-beta/get-started/#connect-your-client-to-react 包装<i>App</i> 组件，客户机可以被应用的所有组件访问。
+应用可以使用客户端对象与 GraphQL 服务器通信。 通过用[ ApolloProvider ] https://www.apollographql.com/docs/react/v3.0-beta/get-started/#connect-your-client-to-react 包装<i>App</i> 组件，客户端可以被应用的所有组件访问。
 
 ```js
 import React from 'react'

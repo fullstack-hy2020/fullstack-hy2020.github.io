@@ -316,7 +316,7 @@ When the state in the store is changed, React is not able to automatically reren
 当存储区中的状态发生更改时，React 无法自动重新运行应用。 因此，我们注册了一个函数 renderApp，它渲染整个应用，用 store.subscribe 方法监听商店中的更改。 注意，我们必须立即调用 renderApp 方法。 没有这个调用，应用的第一次渲染将永远不会发生。
 
 ### Redux-notes
-还原纸币
+还原便笺
 
 
 Our aim is to modify our note application to use Redux for state management. However, let's first cover a few key concepts through a simplified note application. 
@@ -805,7 +805,7 @@ describe('unicafe reducer', () => {
 
 
 **Implement the reducer and its tests.**
-* * 实施减速器及其测试
+**实施减速器及其测试
 
 
 In the tests, make sure that the reducer is an <i>immutable function</i> with the <i>deep-freeze</i>-library. 
