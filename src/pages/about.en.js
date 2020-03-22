@@ -62,7 +62,7 @@ const About = () => {
                 className="link"
                 headingFont
                 text={[
-                  'Participants are expected to have good programming skills, basic knowledge of web - programming and databases, and to know the basics of working with the Git version-control system. You are also expected to have perseverance and the ability for independent problem solving and information seeking.',
+                  'Participants are expected to have good programming skills, basic knowledge of web programming and databases, and to know the basics of working with the Git version-control system. You are also expected to have perseverance and the ability for independent problem solving and information seeking.',
                   'Part 0 of the course material goes through the content and conduct of the course in more detail. Make sure to read the material and instructions thoroughly.',
                 ]}
               />
