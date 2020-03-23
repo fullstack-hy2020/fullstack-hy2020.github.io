@@ -15,6 +15,7 @@ So far, we have followed the state management conventions recommended by React. 
 
 Facebook developed the [Flux](https://facebook.github.io/flux/docs/in-depth-overview/)- architecture to make state management easier. In Flux, the state is separated completely from the React-components into its own <i>stores</i>.
 State in the store is not changed directly, but with different <i>actions</i>.
+
 Facebook 开发了 [Flux](https://facebook.github.io/flux/docs/in-depth-overview/) 架构，使状态管理更加容易。 在 Flux 中，状态完全从 React-components 分离到自己的存储中。 存储中的状态不会直接更改，而是使用不同的 <i>actions</i>进行更改。
 
 When an action changes the state of the store, the views are rerendered:
@@ -162,14 +163,11 @@ would print the following to the console
 3
 -1
 </pre>
-
 because at first the state of the store is 0. After three <i>INCREMENT</i>-actions the state is 3. In the end, after <i>ZERO</i> and <i>DECREMENT</i> actions, the state is -1.
 因为一开始 store 的状态是 0。 在三个 INCREMENT-actions 之后，状态是 3。 最后，在 ZERO 和 DECREMENT 操作之后，状态是 -1。
 
-
 The third important method the store has is [subscribe](https://redux.js.org/api/store#subscribelistener), which is used to create recall functions the store calls when its state is changed. 
-商店拥有的第三个重要方法是[订阅]( https://redux.js.org/api/store#subscribelistener ) ，它用于在商店状态改变时创建调用的回忆函数。
-
+store拥有的第三个重要方法是[订阅]( https://redux.js.org/api/store#subscribelistener ) ，它用于在store状态改变时创建调用的回调函数。
 
 If, for example, we would add the following function to subscribe, <i>every change in the store</i> would be printed to the console.
 例如，如果我们要添加以下函数来订阅，那么存储中的每次更改都将被打印到控制台。
@@ -209,7 +207,6 @@ would cause the following to be printed
 0
 -1
 </pre>
-
 The code of our counter application is the following. All of the code has been written in the same file, so <i>store</i> is straight available for the React-code. We will get to know better ways to structure React/Redux-code later.
 我们的计数器应用程序代码如下。 所有代码都是在同一个文件中编写的，因此 React-code 的 store 是直接可用的。 稍后我们将了解构造 redux 代码的更好方法。
 
@@ -327,7 +324,7 @@ const App = () => {
 ```
 
 So far the application does not have the functionality for adding new notes, although it is possible to do so by dispatching <i>NEW_NOTE</i> actions.
-到目前为止，应用程序还没有添加新 Note 的功能，尽管可以通过分派 <i>NEW_NOTE</i> action 来这样做。
+到目前为止，应用程序还没有添加新增 Note 的功能，尽管可以通过分派 <i>NEW_NOTE</i> action 来这样做。
 
 Now the actions have a type and a field <i>data</i>, which contains the note to be added:
 现在这些 action 有一个类型和一个<i>data</i>字段，其中包含要添加的 Note:
@@ -363,8 +360,7 @@ The state is now an Array. <i>NEW_NOTE</i>- type actions cause a new note to be 
 该状态现在是一个数组。 <i>NEW_NOTE</i> 类型的 action 将使用 [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) 方法向状态添加一个新的 Note。
 
 The application seems to be working, but the reducer we have declared is bad. It breaks the [basic assumption](https://github.com/reactjs/redux/blob/master/docs/basics/Reducers.md#handling-actions) of Redux reducer that reducers must be [pure functions](https://en.wikipedia.org/wiki/Pure_function).
-用程序似乎正在工作，但我们已经声明的 reducer 并不优雅的。 它打破了 Redux 的 reducer 必须是纯函数[pure functions](https://en.wikipedia.org/wiki/Pure_function)的基本假设
-[basic assumption](https://github.com/reactjs/redux/blob/master/docs/basics/Reducers.md#handling-actions)
+用程序似乎正在工作，但我们已经声明的 reducer 并不优雅的。 它打破了 Redux 的 reducer 必须是纯函数[pure functions](https://en.wikipedia.org/wiki/Pure_function)的基本假设[basic assumption](https://github.com/reactjs/redux/blob/master/docs/basics/Reducers.md#handling-actions)
 Pure functions are such, that they <i>do not cause any side effects</i> and they must always return the same response when called with the same parameters.
 纯函数是这样的，它们不会引起任何副作用，当使用相同的参数调用时，它们必须始终返回相同的响应。
 
@@ -620,19 +616,14 @@ console.log(rest)     // prints [3, 4, 5, 6]
 
 
 ### Exercises 6.1.-6.2.
-练习6.1-6.2。
-
-
 Let's make a simplified version of the unicafe-exercise from part 1. Let's handle the state management with Redux. 
 让我们从第1章节创建一个 uniafe-exercise 的简化版本。
 
-
 You can take the project from this repository https://github.com/fullstack-hy2020/unicafe-redux for the base of your project. 
-你可以把这个项目从这个存储库中的 https://github.com/fullstack-hy2020/unicafe-redux 作为你的项目的基础。
-
+你可以把这个项目从这个仓库中的 https://github.com/fullstack-hy2020/unicafe-redux 作为你的项目的基础。
 
 <i>Start by removing the git-configuration of the cloned repository, and by installing dependencies</i>
-I 首先删除克隆存储库的 git-configuration，然后安装 dependencies / i
+先删除git 配置，然后安装 dependencies 
 
 ```bash
 cd unicafe-redux   // go to the directory of cloned repository
@@ -641,15 +632,11 @@ npm install
 ```
 
 #### 6.1: unicafe revisited, 步骤1
-6.1: unicafe revisited，步骤1
-
-
 Before implementing the functionality of the UI, let's implement the functionality required by the store. 
 在实现 UI 的功能之前，让我们先实现存储所需的功能。
 
-
 We have to save the number of each kind of feedback to the store, so the form of the state in the store is: 
-我们必须保存每种反馈到商店的数量，因此商店中状态的形式是:
+我们必须保存每种反馈到store的数量，因此store中状态的形式是:
 
 ```js
 {
@@ -661,7 +648,7 @@ We have to save the number of each kind of feedback to the store, so the form of
 
 
 The project has the following base for a reducer: 
-该项目具有如下减速器的基础:
+该项目具有如下reducer的基础:
 
 ```js
 const initialState = {
@@ -688,9 +675,8 @@ const counterReducer = (state = initialState, action) => {
 export default counterReducer
 ```
 
-
 and a base for its tests
-还有一个测试基地
+还有一个测试基础：
 
 ```js
 import deepFreeze from 'deep-freeze'
@@ -730,32 +716,22 @@ describe('unicafe reducer', () => {
 })
 ```
 
-
 **Implement the reducer and its tests.**
-**实施减速器及其测试
-
+实现reducer及其测试
 
 In the tests, make sure that the reducer is an <i>immutable function</i> with the <i>deep-freeze</i>-library. 
-在测试中，确保 reducer 是一个<i>不可变的函数</i> 和<i>deep-freeze</i>-library。
+在测试中，利用<i>deep-freeze</i>-library，确保 reducer 是一个<i>不可变的函数</i> 。
 Ensure that the provided first test passes, because Redux expects that the reducer returns a sensible original state when it is called so that the first parameter <i>state</i>, which represents the previous state, is 
-确保提供的第一个测试通过，因为 Redux 希望在调用时，reducer 返回一个合理的初始状态，这样表示前一个状态的第一个参数<i>state</i> 就是
-<i>undefined</i>.
-I undefined / i.
-
+确保提供的第一个测试通过，因为 Redux 希望在调用时，reducer 返回一个合理的初始状态，这样表示前一个状态的第一个参数<i>state</i> 就是 <i>undefined</i>.
 
 Start by expanding the reducer so that both tests pass. Then add the rest of the tests, and finally the functionality which they are testing. 
-从扩大减速器开始，这样两个测试都能通过。 然后添加其余的测试，最后是它们正在测试的功能。
+从扩展reducer开始，这样两个测试都能通过。 然后添加其余的测试，最后是它们正在测试的功能。
 
+A good model for the reducer is the [redux-notes](/en/part6/flux_architecture_and_redux#pure-functions-immutable) example above. 
 
-A good model for the reducer is the [redux-notes](/en/part6/flux_architecture_and_redux#pure-functions-immutable)
-Redux-notes (/ en / part6 / flux 架构和 redux # pure-functions-immutable)是这个 reducer 的一个很好的模型
-example above. 
-上面的例子。
+这个reducer 一个很好的模型就是上述这个 [redux-notes](/en/part6/flux_architecture_and_redux#pure-functions-immutable) 例子。
 
 #### 6.2: unicafe revisited, 步骤2
-6.2: unicafe revisited，步骤2
-
-
 Now implement the actual functionality of the application. 
 现在实现应用的实际功能。
 
@@ -921,18 +897,16 @@ const App = () => {
 
 
 ### Redux-storen välittäminen eri komponenteille
-# # Redux-storen v litt minen eri komponenteille
-
 Aside from the reducer, our application is in one file. This is of course not sensible, and we should separate <i>App</i> into its own module. 
-除了减速器，我们的应用是在一个文件。 这当然是不明智的，我们应该将<i>App</i> 分离到它自己的模块中。
+除了reducer，我们的应用是在一个文件。 这当然是不明智的，我们应该将<i>App</i> 分离到它自己的模块中。
 
 Now the question is, how can the <i>App</i> access the store after the move? And more broadly, when a component is composed of many smaller components, there must be a way for all of the components to access the store. 
-现在的问题是，移动后<i>App</i> 如何访问商店？ 更广泛地说，当一个组件由许多较小的组件组成时，必须有一种方法让所有组件访问存储。
+现在的问题是，移动后<i>App</i> 如何访问store？ 更广泛地说，当一个组件由许多较小的组件组成时，必须有一种方法让所有组件访问存储。
 
 
 
 There are multiple ways to share the redux-store with components. First we will look into the newest, and possibly the easiest way using the [hooks](https://react-redux.js.org/api/hooks)-api of the [react-redux](https://react-redux.js.org/) library.
-有多种方法可以与组件共享 redux-store。 首先，我们将研究使用[ react-redux ](redux)库的[ hooks ]( https://react-redux.js.org/api/hooks )-api 的最新方法，也许是最简单的方法 https://react-redux.js.org/ 。
+有多种方法可以与组件共享 redux-store。 首先，我们将研究使用 [react-redux](https://react-redux.js.org/) ](redux)库的[ hooks ]( https://react-redux.js.org/api/hooks )-api 的最新方法，也许是最简单的方法 。
 
 
 
@@ -976,10 +950,8 @@ ReactDOM.render(
 
 Note, that the application is now defined as a child of a [Provider](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store) -component provided by the react redux library.
 请注意，应用现在被定义为由 redux 库提供的[ Provider ]( https://github.com/reactjs/react-redux/blob/master/docs/api.md#Provider-store 组件)的子组件。
-The application's store is given to the Provider as its attribute <i> 
-应用的存储作为其属性 i 提供给提供程序
-store</i>.
-商店 / 我。
+The application's store is given to the Provider as its attribute store.
+应用的存储作为其属性提供给提供程序存储
 
 Defining the action creators has been moved to the reducer file
 动作创建器的定义已经移到了 reducer 文件中
@@ -1049,7 +1021,7 @@ import { createNote } from './../reducers/noteReducer'
 
 
 Code for the <i>App</i> component
-I App / i 组件的代码
+ <i>App</i> 组件的代码
 
 ```js
 import React from 'react'
@@ -1130,17 +1102,15 @@ const App = () => {
 ```
 
 
--- redux-kirjaston tarjoama<i>usdispatch</i>-hook siis tarjoaa mille tahansa react-komponentile p syn tiedostossa<i>index.js</i> m ritellyn redux-storen dispatch-funktioon，jonka avulla komponentti p see tekem n muutoksia redux. -->
 The <i>useDispatch</i>-hook provides any React component access to the dispatch-function of the redux-store defined in <i>index.js</i>.
-I useDispatch / i-hook 提供了对<i>index.js</i> 中定义的 redux-store 的 dispatch-function 的所有 React 组件访问。
+ <i>useDispatch</i>-hook 提供了对<i>index.js</i> 中定义的 redux-store 的 dispatch-function 的所有 React 组件访问。
 This allows all components to make changes to the state of the redux-store.
 这允许所有组件对 redux-store 的状态进行更改。
 
 
 
-
 The component can access the notes stored in the store with the [useSelector](https://react-redux.js.org/api/hooks#useselector)-hook of the react-redux library.
-该组件可以通过 react-redux 库的[ useSelector ]( https://react-redux.js.org/api/hooks#useSelector )挂钩访问存储在商店中的便笺。
+该组件可以通过 react-redux 库的[ useSelector hook访问存储在store中的便笺。
 
 
 ```js
@@ -1156,7 +1126,7 @@ const App = () => {
 
 
 <i>useSelector</i> receives a function as a paramter. The function either either searches for or selectes data from the redux-store. 
-I 使用 elector / i 接收一个函数作为参数，该函数可以搜索或选择来自 redux-store 的数据。
+<i>useSelector</i>  接收一个函数作为参数，该函数可以搜索或选择来自 redux-store 的数据。
 Here we need all of the notes, so our selector function returns the whole state:
 这里我们需要所有的便笺，所以我们的 selector 函数返回整个状态:
 
@@ -1168,7 +1138,7 @@ state => state
 
 
 which is a shorthand for
-也就是
+也就是如下的简写
 
 ```js
 (state) => {
@@ -1284,7 +1254,7 @@ const App = () => {
 另一方面，Notes 是一个容器[container](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) 组件，因为它包含一些应用程序逻辑: 它定义 Note 组件的事件处理程序做什么，并协调表示组件的配置，即 Notes。
 
 We will return to the presentational/container division later in this part.
-我们将在本部分后面回到表象 / 容器部分。
+我们将在本部分后面回到表现层 / 容器部分。
 
 The code of the Redux application can be found on [Github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-1), branch <i>part6-1</i>.
 Redux 应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/Redux-notes/tree/part6-1) ，branch<i>part6-1</i> 上找到。
@@ -1295,21 +1265,16 @@ Redux 应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/Re
 
 
 ### Exercises 6.3.-6.8.
-练习6.3-6.8。
-
-
 Let's make a new version of the anecdote voting application from part 1. Take the project from this repository https://github.com/fullstack-hy2020/redux-anecdotes to base your solution on.  
-让我们从第1章节创建一个新版本的轶事投票应用。 把这个项目从这个资源库中 https://github.com/fullstack-hy2020/redux-anecdotes 一分钟，你的解决方案基于。
-
+让我们从第1章节创建一个新版本的轶事投票应用。 把这个项目从这个资源库中 https://github.com/fullstack-hy2020/redux-anecdotes 拉取，你的解决方案基于这个库。
 
 If you clone the project into an existing git-repository, <i>remove the git-configuration of the cloned application:</i> 
-如果您将该项目克隆到现有的 git-repository 中，我将删除克隆应用的 git-configuration: / i
+如果您将该项目克隆到现有的 git-repository 中，记得删除克隆应用的git 配置
 
 ```bash
 cd redux-anecdotes  // go to the cloned repository
 rm -rf .git
 ```
-
 
 The application can be started as usual, but you have to install the dependencies first: 
 应用可以像平常一样启动，但是你必须先安装依赖项:
@@ -1319,7 +1284,6 @@ npm install
 npm start
 ```
 
-
 After completing these exercises, your application should look like this
 完成这些练习后，您的应用应该是这样的
 
@@ -1327,50 +1291,32 @@ After completing these exercises, your application should look like this
 
 
 #### 6.3: anecdotes, 步骤1
-6.3: 轶事，第一步
-
-
 Implement the functionality for voting anecdotes. The amount of votes must be saved to a Redux-store.
 实现投票趣闻的功能。投票数量必须保存到 redux 存储中。
 
 #### 6.4: anecdotes, 步骤2
-6.4: 轶事，第二步
-
 
 Implement the functionality for adding new anecdotes. 
 实现添加新奇事的功能。
 
-
 You can keep the form uncontrolled, like we did [earlier](/en/part6/flux_architecture_and_redux#uncontrolled-form).
-您可以保持表单不受控制，就像我们[前面]所做的(/ en / part6 / flux 架构和 redux # uncontrolled-form)。
+您可以保持表单不受控制，就像我们 [earlier](/en/part6/flux_architecture_and_redux#uncontrolled-form)所做的。
 
 #### 6.5*: anecdotes, 步骤3
-# # # # 6.5 # : 轶事，第三步
-
-
 Make sure that the anecdotes are ordered by the number of votes. 
 确保这些轶事是按票数排序的。
 
 #### 6.6: anecdotes, 步骤4
-6.6: 轶事，第四步
-
-
 If you haven't done so already, separate the creation of action-objects to [action creator](https://redux.js.org/basics/actions#action-creators)-functions and place them in the <i>src/reducers/anecdoteReducer.js</i> file, so do like we have been doing since the chapter [action creators](/en/part6/flux_architecture_and_redux#action-creators).
-如果你还没有这样做，将动作对象的创建分离到[动作创建器]( https://redux.js.org/basics/actions#action-creators )-函数中，并将它们放在<i>src / reducers / 轶事教育器中。 Js</i> 文件，就像我们在[ action creators ]一章(/ en / part6 / flux architecture and redux # action-creators)中所做的那样。
+如果你还没有这样做，将动作对象的创建分离到[动作创建器]( https://redux.js.org/basics/actions#action-creators )-函数中，并将它们放在 <i>src/reducers/anecdoteReducer.js</i> 文件，就像我们在[动作创建器]( https://redux.js.org/basics/actions#action-creators )中所做的那样。
 
 #### 6.7: anecdotes, 步骤5
-6.7: 轶事，第五步
-
-
 Separate the creation of new anecdotes into its own component called <i>AnecdoteForm</i>. Move all logic for creating a new anecdote into this new component. 
-将新奇闻的创建分离到它自己的名为 i / 轶事 / 形式的组件中。 将创建一个新轶事的所有逻辑移动到这个新组件中。
+将新奇闻的创建分离到它自己的名为 <i>AnecdoteForm</i>的组件中。 将创建一个新轶事的所有逻辑移动到这个新组件中。
 
 #### 6.8: anecdotes, 步骤6
-6.8: 轶事，第六步
-
-
 Separate the rendering of the anecdote list into its own component called <i>AnecdoteList</i>. Move all logic related to voting for an anecdote to this new component. 
-将这个轶事列表的渲染分离到它自己的组件<i>/ 轶事列表</i> 中。 将所有与投票选举轶事相关的逻辑移动到这个新组件中。
+将这个轶事列表的渲染分离到它自己的<i>AnecdoteList</i>中。 将所有与投票选举轶事相关的逻辑移动到这个新组件中。
 
 
 Now the <i>App</i> component should look like this: 

@@ -322,7 +322,7 @@ However now we want to make the query only when a user wants to see the details 
 For this this situation the hook-function [useLazyQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#uselazyquery) is a good choice. 
 在这种情况下，钩子函数[ useLazyQuery ]( https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#useLazyQuery )是一个不错的选择。
 The <i>Persons</i> component becomes:
-I Persons / i 组件变为:
+<i>Persons</i> 组件变为:
 
 ```js
 // highlight-start

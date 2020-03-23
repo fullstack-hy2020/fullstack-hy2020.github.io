@@ -182,7 +182,7 @@ Assuming our applications has saved the information of three people, the respons
 The query fetching the information of all of the people, _allPersons_, is a bit more complicated. Because the query returns a list of <i>Person</i>-objects, the query must describe 
 获取所有人(allPersons)的信息的查询稍微复杂一些。 因为查询返回一个<i>Person</i>-objects 列表，所以查询必须描述
 <i>which fields</i> of the objects the query [returns](https://graphql.org/learn/queries/#fields):
-I 查询返回的对象的哪个字段 / i ( https://graphql.org/learn/queries/#fields ) :
+<i>查询返回的对象的哪个字段</i> ( https://graphql.org/learn/queries/#fields ) :
 ```js
 query {
   allPersons {

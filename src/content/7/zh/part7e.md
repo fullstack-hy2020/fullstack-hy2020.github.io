@@ -88,7 +88,7 @@ class App extends React.Component {
 
 
 The component state is in the instance variable _this.state_. The state is an object having two properties. <i>this.state.anecdotes</i> is the list of anecdotes and <i>this.state.current</i> is the index of the currently shown anecdote.
-组件状态位于实例变量的 this.state 中。 状态是具有两个属性的对象。<i>this.state.轶事</i> 是轶事列表，i this.state.current / i 是当前显示轶事的索引。
+组件状态位于实例变量的 this.state 中。 状态是具有两个属性的对象。<i>this.state.轶事</i> 是轶事列表，<i>this.state.current</i> 是当前显示轶事的索引。
 
 
 
@@ -384,7 +384,7 @@ Injection attacks are also possible in NoSQL-databases. However, mongoose preven
 
 
 <i>Cross-site scripting (XSS)</i> is an attack where it is possible to inject malicious JavaScript code into a legitimate web-application. The malicious code would then be executed in the browser of the victim. If we try to inject the following into e.g. the notes application
-I 跨网站脚本攻击(XSS) / i 是一种可以将恶意 JavaScript 代码注入合法 web 应用的攻击。 恶意程式码会在受害者的浏览器中执行。 如果我们尝试将如下内容注入 notes 应用
+<i>跨网站脚本攻击(XSS)</i> 是一种可以将恶意 JavaScript 代码注入合法 web 应用的攻击。 恶意程式码会在受害者的浏览器中执行。 如果我们尝试将如下内容注入 notes 应用
 
 ```html
 <script>

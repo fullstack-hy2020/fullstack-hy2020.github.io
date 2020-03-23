@@ -254,7 +254,7 @@ Axios 现在被包含在依赖中了:
 ```
 
 In addition to adding axios to the dependencies, the <em>npm install</em> command also <i>downloaded</i> the library code. As with other dependencies, the code can be found in the <i>node\_modules</i> directory located in the root. As one might have noticed, <i>node\_modules</i> contains a fair amount of interesting stuff.
-除了将 axios 添加到依赖项之外，em npm install / em 命令还下载了 /<i>库代码。 与其他依赖项一样，代码可以在根目录中的 i node  modules</i> 目录中找到。 人们可能已经注意到，i node  modules / i 包含了大量有趣的内容。
+除了将 axios 添加到依赖项之外，em npm install / em 命令还下载了 /<i>库代码。 与其他依赖项一样，代码可以在根目录中的  node  modules</i> 目录中找到。 人们可能已经注意到，<i>node  modules</i> 包含了大量有趣的内容。
 
 Let's make another addition. Install <i>json-server</i> as a development dependency (only used during development) by executing the command:
 让我们做另一个补充，通过执行如下命令将<i>json-server</i> 安装为开发依赖项(仅在开发过程中使用) :

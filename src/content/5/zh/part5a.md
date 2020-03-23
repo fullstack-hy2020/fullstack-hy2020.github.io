@@ -8,7 +8,6 @@ lang: zh
 <div class="content">
 
 
-
 In the last two parts, we have mainly concentrated on the backend, and the frontend does not yet support the user management we implemented to the backend in part 4.
 在上两部分中，我们主要关注于后端，但前端还不支持我们在第四部分中实现的后端用户管理。
 
@@ -96,7 +95,6 @@ const App = () => {
 export default App
 ```
 
-
 Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-1), branch <i>part5-1</i>.
 当前的应用代码可以在[ Github ]( https://Github.com/fullstack-hy2020/part2-notes/tree/part5-1) ，branch<i>part5-1</i> 上找到。
 
@@ -104,7 +102,7 @@ Current application code can be found on [Github](https://github.com/fullstack-h
 The login form is handled the same way we handled forms in
 [part 2](/en/part2/forms). The app state has fields for <i>username</i> and <i>password</i> to store the data from the form. The form fields have event handlers, which synchronizes changes in the field to the state of the <i>App</i> component. The event handlers are simple: An object is given to them as a parameter, and they destructure the field <i>target</i> from the object and save its value to the state.
 
-登录表单的处理方式与我们第二部分所将的处理方式相同。当前应用状态有<i>username</i> 和 <i>password</i> 都存储在表单中。表单有事件处理逻辑，与<i>App</i>组件的状态保持同步。事件处理逻辑也很简单：一个对象作为参数传递给它们，它们将<i>target</i> field 从对象里解构出来，将它的值保存为状态
+登录表单的处理方式与我们第二章所讲的处理方式相同。当前应用状态有<i>username</i> 和 <i>password</i> 都存储在表单中。表单有事件处理逻辑，与<i>App</i>组件的状态保持同步。事件处理逻辑也很简单：一个对象作为参数传递给它们，它们将<i>target</i> field 从对象里解构出来，将它的值保存为状态
 
 ```js
 ({ target }) => setUsername(target.value)
@@ -171,7 +169,7 @@ const App = () => {
 
 If the login is successful, the form fields are emptied <i>and</i> the server response (including a <i>token</i> and the user details) is saved to the <i>user</i> field of the application's state.
 
-如果登录成功，表单 field 被清空，并且服务器响应（包括 token 和用户信息）被存储到
+如果登录成功，表单 字段 被清空，并且服务器响应（包括 token 和用户信息）被存储到
 应用状态的<i>user</i> field 。
 
 If the login fails, or running the function _loginService.login_ results in an error, the user is notified.
@@ -527,7 +525,7 @@ We still have to modify our application so that when we enter the page, the appl
 
 The right way to do this is with an [effect hook](https://reactjs.org/docs/hooks-effect.html): A mechanism we first encountered in [part 2](/en/part2/getting_data_from_server#effect-hooks), and used to fetch notes from the server to the frontend.
 
-正确的方式是用一个事件钩子[effect hook](https://reactjs.org/docs/hooks-effect.html)： 这种机制我们在第二部分中见到过，当时是用来从服务器中获取所有 Note。
+正确的方式是用一个事件钩子[effect hook](https://reactjs.org/docs/hooks-effect.html)： 这种机制我们在第2章节 [part 2](/en/part2/getting_data_from_server#effect-hooks)分中见到过，当时是用来从服务器中获取所有 Note。
 
 We can have multiple effect hooks, so let's create a second one to handle the first loading of the page:
 我们可以有多个事件钩子，所以我们来创建一个来处理首次登录页面：
@@ -598,64 +596,53 @@ Current application code can be found on [Github](https://github.com/fullstack-h
 
 
 ### Exercises 5.1.-5.4.
-练习5.1- 5.4。
-
-
 We will now create a frontend for the bloglist backend we created in the last part. You can use [this application](https://github.com/fullstack-hy2020/bloglist-frontend) from GitHub as the base of your solution. The application expects your backend to be running on port 3001. 
-现在我们将为上一部分创建的博客列表后端创建一个前端。 你可以使用 GitHub 上的[ this application ]( https://GitHub.com/fullstack-hy2020/bloglist-frontend 应用)作为你的解决方案的基础。 应用期望您的后端在端口3001上运行。
+现在我们将为上一部分创建的博客列表后端创建一个前端。 你可以使用 GitHub 上的[ this application ]( https://GitHub.com/fullstack-hy2020/bloglist-frontend )作为你的解决方案的基础。 应用期望您的后端在端口3001上运行。
 
 It is enough to submit your finished solution. You can do a commit after each exercise, but that is not necessary. 
-只要提交完成的解决方案就足够了。 您可以在每次练习之后进行提交，但这是不必要的。
+只要提交完成的解决方案就足够了。 您可以在每次练习之后进行一次提交，但这不是必须的。
 
 The first few exercises revise everything we have learned about React so far. They can be challenging, especially if your backend is incomplete. 
-开始的几次练习修改了我们已经学到的关于React的所有知识。 他们可以是具有挑战性的，特别是如果你的后端是不完整的。
-It might be best to use the backend from model answers of part 4. 
-最好使用第4章节模型答案的后端。
+开始的几次练习修改了我们已经学到的关于React的所有知识。 他们可能是有挑战性的，特别是如果你的后端是不完整的。
 
+It might be best to use the backend from model answers of part 4. 
+最好使用第4章节 model answers 作为后端。
 
 While doing the exercises, remember all of the debugging methods we have talked about, especially keeping an eye on the console. 
 在做这些练习时，请记住我们讨论过的所有调试方法，尤其要密切关注控制台。
 
-
 **Warning:** If you notice you are mixing async/await and _then_ commands, its 99.9%  certain you are doing something wrong. Use either or, never both. 
-**警告: **如果你注意到你正在混合 async / await 命令，它的99.9% 肯定你正在做错误的事情。 要么使用，要么使用，不要两者都使用。
+**警告: **如果你注意到你正在混合 async / await 和_then_ 命令，99.9% 肯定你正在做错误的事情。 要么使用其中之一，不要两者都使用。
 
 #### 5.1: bloglist frontend, 步骤1
-5.1: bloglist frontend，步骤1
-
-
 Clone the application from [Github](https://github.com/fullstack-hy2020/bloglist-frontend) with the command: 
-使用如下命令从[ Github ]( https://Github.com/fullstack-hy2020/bloglist-frontend 文件)克隆应用:
+使用如下命令从[ Github ]( https://Github.com/fullstack-hy2020/bloglist-frontend )克隆应用:
 
 ```bash
 git clone https://github.com/fullstack-hy2020/bloglist-frontend
 ```
 
-
 <i>remove the git configuration of the cloned application</i>
-我删除了克隆应用 / i 的 git 配置
+删除了克隆应的 git 配置
 
 ```bash
 cd bloglist-frontend   // go to cloned repository
 rm -rf .git
 ```
 
-
 The application is started the usual way, but you have to install its dependencies first: 
-应用以通常的方式启动，但是你必须先安装它的依赖项:
+应用以常规的方式启动，但是你必须先安装它的依赖项:
 
 ```bash
 npm install
 npm start
 ```
 
-
 Implement login functionality to the frontend. The token returned with a successful login is saved to the application's state <i>user</i>.
 在前端实现登录功能。成功登录后返回的令牌保存到应用的状态<i>user</i>。
 
-
 If a user is not logged in, <i>only</i> the login form is visible. 
-如果一个用户没有登录，那么登录表单中的 i / i 就是可见的。
+如果一个用户没有登录，那么登录表单就是可见的。
 
 ![](../../images/5/4e.png)
 
@@ -670,7 +657,6 @@ If user is logged in, the name of the user and a list of blogs is shown.
 
 User details of the logged in user do not have to be saved to the local storage yet. 
 登录用户的用户详细信息不必保存到本地存储中。
-
 
 **NB** You can implement the conditional rendering of the login form like this for example: 
 你可以像这样实现登录表单的条件渲染，例如:
@@ -699,22 +685,15 @@ User details of the logged in user do not have to be saved to the local storage 
 ```
 
 #### 5.2: bloglist frontend, 步骤2
-5.2: bloglist frontend，步骤2
-
-
 Make the login 'permanent' by using the local storage. Also implement a way to log out. 
 使用本地存储使登录成为永久性的。同时实现一种注销的方法。
 
 ![](../../images/5/6e.png)
 
-
 Ensure the browser does not remember the details of the user after logging out. 
 确保浏览器在注销后不会记住用户的详细信息。
 
 #### 5.3: bloglist frontend, 步骤3
-5.3: bloglist frontend，步骤3
-
-
 Expand your application to allow  a logged in user to add new blogs: 
 展开你的应用，允许登录用户添加新的博客:
 
@@ -723,8 +702,6 @@ Expand your application to allow  a logged in user to add new blogs:
 
 
 #### 5.4*: bloglist frontend, 步骤4
-5.4 * : bloglist frontend，步骤4
-
 Implement notifications which inform the user about successful and unsuccessful operations at the top of the page. For example, when a new blog is added, the following notification can be shown: 
 在页面顶部实现通知，告知用户成功和不成功的操作。 例如，当添加一个新博客时，可以显示如下通知:
 

@@ -45,7 +45,7 @@ _Note_ that this and the next two exercises are quite laborious but incredibly e
 请注意，这个和接下来的两个练习相当费力，但令人难以置信的教育。
 
 Store the information about blog posts in the Redux store. In this exercise it is enought that you can see the blogs in backend and create a new blog.
-在 Redux 商店中存储有关博客文章的信息。 在这个练习中，你可以看到后台的博客，并创建一个新的博客。
+在 Redux store中存储有关博客文章的信息。 在这个练习中，你可以看到后台的博客，并创建一个新的博客。
 
 You are free to manage the state for logging in and creating new blog posts by using the internal state of React components.
 通过使用 React 组件的内部状态，您可以自由地管理登录和创建新博客文章的状态。

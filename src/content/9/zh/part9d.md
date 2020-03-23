@@ -286,10 +286,10 @@ The whole app is now in one component, and that is not what we want, so refactor
 整个应用现在在一个组件中，这不是我们想要的，因此重构代码，使其由三个新组件组成:<i>Header</i>、<i>Content</i> 和<i>Total</i>。 所有数据仍然保存在<i>App</i> 组件中，该组件将所有必要的数据作为props传递给每个组件。 一定要为组件的props添加类型声明！
 
 The <i>Header</i> component should take care of rendering the name of the course, <i>Content</i> should render the names of the different parts and the amount of exercises in that part, and <i>Total</i> should render the total sum of exercises in all parts.
-I Header /<i>组件应负责显示课程名称，i Content</i> 应显示不同部分的名称和该部分的练习量，i Total / i 应显示所有部分的练习总和。
+<i>Header /<i>组件应负责显示课程名称，i Content</i> 应显示不同部分的名称和该部分的练习量，i Total</i> 应显示所有部分的练习总和。
 
 The <i>App</i> component should look somewhat like this:
-I App / i 组件应该看起来像这样:
+<i>App</i> 组件应该看起来像这样:
 
 ```jsx
 const App = () => {
@@ -958,7 +958,7 @@ Refactor the code to use [action creator](/en/part6/flux_architecture_and_redux#
 重构代码以使用文件<i>reducer.tsx</i> 中定义的[ action creator ](/ en / part6 / flux 架构和 redux # action-creators)函数。
 
 For example the <i>App</i> changes like this
-例如，i App / i 的变化如下
+例如，<i>App</i> 的变化如下
 
 ```js
 import { useStateValue, setPatientList } from "./state";
@@ -1192,7 +1192,7 @@ The code for the form can be found in <i>src/AddPatientModal/AddPatientForm.tsx<
 表单的代码可以在<i>src / addpatientmodal / addpatientform. tsx</i> 中找到，一些表单字段助手可以在<i>src / addpatientmodal / formfield. tsx</i> 中找到。
 
 In the beginning of <i>AddPatientForm.tsx</i> you can see, that we have created a type for our form values, called simply <i>PatientFormValues</i>. It is a narrowed down version of <i>Patient</i>, with the properties <i>id</i> and <i>entries</i> omitted, because we don't want the user to be able to submit those when creating a new patient. <i>id</i> is created by the backend and <i>entries</i> can only be added for existing patients.
-在<i>AddPatientForm.tsx</i> 的开头，您可以看到，我们已经为我们的表单值创建了一个类型，简称为<i>PatientFormValues</i>。 它是<i>Patient</i> 的缩小版本，具有<i>id</i> 和<i>entry</i> 省略的属性，因为我们不希望用户在创建新病人时能够提交这些属性。<i>id</i> 由后端创建，i 条目 / i 只能为现有患者添加。
+在<i>AddPatientForm.tsx</i> 的开头，您可以看到，我们已经为我们的表单值创建了一个类型，简称为<i>PatientFormValues</i>。 它是<i>Patient</i> 的缩小版本，具有<i>id</i> 和<i>entry</i> 省略的属性，因为我们不希望用户在创建新病人时能够提交这些属性。<i>id</i> 由后端创建，<i>条目</i> 只能为现有患者添加。
 
 ```js
 export type PatientFormValues = Omit<Patient, "id" | "entries">;

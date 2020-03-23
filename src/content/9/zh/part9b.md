@@ -210,7 +210,7 @@ In this case we used exact strings (that in technical terms are called [string l
 
 !-在技术术语中，关键字<i>type</i> generates [ a type alias ]( https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases ) ，这是一个类型的新名称。 由于定义的类型是由三个可能的值组成的联合，因此给它一个具有代表性名称的别名非常方便。 -->
 The <i>type</i> keyword defines a new name for a type, [a type alias](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases). Since the defined type is a union of three possible values, it is handy to give it an alias that has a representative name.
-I type / i 关键字为类型定义了一个新名称，[ a type alias ]( https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases )。 由于定义的类型是由三个可能的值组成的联合，因此给它一个具有代表性名称的别名非常方便。
+<i>type</i> 关键字为类型定义了一个新名称，[ a type alias ]( https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases )。 由于定义的类型是由三个可能的值组成的联合，因此给它一个具有代表性名称的别名非常方便。
 
 Let's look at our calculator now:
 现在让我们看看我们的计算器:
@@ -671,7 +671,7 @@ $ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
 ```
 
 In the example the <i>first argument</i> is the target value.
-在这个示例中，i 的第一个参数 / i 是目标值。
+在这个示例中，<i>的第一个参数</i> 是目标值。
 
 Handle exeptions and errors appropriately. The exerciseCalculator should accept inputs of varied lengths. Determine by yourself how you manage to collect all needed input.
 适当地处理引用和错误。 Exercisalculator 应该接受不同长度的输入。 自己决定如何收集所有需要的输入。

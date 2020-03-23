@@ -9,7 +9,7 @@ lang: zh
 
 We want to add user authentication and authorization to our application. Users should be stored in the database and every note should be linked to the user who created it. Deleting and editing a note should only be allowed for the user who created it.
 
-我们想要为我们的应用增加用户认证和鉴权的功能。User 应当存储在数据库中，并且每一个 Note 应当被关联到创建它的 User。只有 Note 的创建者才拥有删除和编辑它的权利。
+我们想要为我们的应用增加用户认证和鉴权的功能。用户 应当存储在数据库中，并且每一个 便笺 应当被关联到创建它的 用户。只有 便笺 的创建者才拥有删除和编辑它的权利。
 
 Let's start by adding information about users to the database. There is a one-to-many relationship between the user (<i>User</i>) and notes (<i>Note</i>):
 
@@ -18,7 +18,7 @@ Let's start by adding information about users to the database. There is a one-to
 
 If we were working with a relational database the implementation would be straightforward. Both resources would have their separate database tables, and the id of the user who created a note would be stored in the notes table as a foreign key.
 
-如果我们用关系型数据库来实现会显得比较直白。每个资源都会有独立的数据库表，而创建 Note 的 User ID 会作为 Note 的外键进行存储。
+如果我们用关系型数据库来实现会显得比较直白。每个资源都会有独立的数据库表，而创建 便笺 的 用户 ID 会作为 便笺 的外键进行存储。
 
 When working with document databases the situation is a bit different, as there are many different ways of modeling the situation.
 
@@ -26,7 +26,7 @@ When working with document databases the situation is a bit different, as there 
 
 The existing solution saves every note in the <i>notes collection</i> in the database. If we do not want to change this existing collection, then the natural choice is to save users in their own collection, <i>users</i> for example.
 
-目前我们是将所有的 Note 存储在了数据库的 <i>notes collection</i> 中。如果我们不想改变现有的 collection， 最自然的选择是将 User 存储在另一个 collection 中， 比如<i>users</i> 这个 collection。
+目前我们是将所有的 便笺 存储在了数据库的 <i>notes collection</i> 中。如果我们不想改变现有的 collection， 最自然的选择是将 用户 存储在另一个 collection 中， 比如<i>users</i> 这个 collection。
 
 Like with all document databases, we can use object id's in Mongo to reference documents in other collections. This is similar to using foreign keys in relational databases.
 
@@ -38,7 +38,7 @@ Traditionally document databases like Mongo do not support <i>join queries</i> t
 
 If we need a functionality similar to join queries, we will implement it in our application code by making multiple queries. In certain situations Mongoose can take care of joining and aggregating data, which gives the appearance of a join query. However, even in these situations Mongoose makes multiple queries to the database in the background.
 
-如果我们需要一个类似 join queries 的功能，我们会在应用中利用 multiple queries 来实现这个需求。在特定的场景下，Mongoose 可以处理 join 和聚合数据，使它看起来像 join query 一样。但是 Mongoose 在这种情况下也是在数据库后台使用了 multiple query。
+如果我们需要一个类似 join queries 的功能，我们会在应用中利用 multiple queries 来实现这个需求。在特定的场景下，Mongoose 可以处理 join 和聚合数据，使它看起来像 join 查询 一样。但是 Mongoose 在这种情况下也是在数据库后台使用了 multiple query。
 
 ### References across collections 跨 collection 引用
 
@@ -206,7 +206,7 @@ Note 的 ID 以数组的形式存储在了 User 当中，定义如下：
 
 The type of the field is <i>ObjectId</i> that references <i>note</i>-style documents. Mongo does not inherently know that this is a field that references notes, the syntax is purely related to and defined by Mongoose.
 type filed 是<i>ObjectId</i>，引用了 <i>note</i> 的文档类型。Mongo
-本质上并不知道这是一个引用 Note 的 field，这种语法完全是于 Mongoose 的定义有关。
+本质上并不知道这是一个引用 Note 的 field，这种语法完全是与 Mongoose 的定义有关。
 
 Let's expand the schema of the note defined in the <i>model/note.js</i> file so that the note contains information about the user who created it:
 
@@ -249,7 +249,7 @@ npm install bcrypt --save
 
 Creating new users happens in compliance with the RESTful conventions discussed in [part 3](/en/part3/node_js_and_express#rest), by making an HTTP POST request to the <i>users</i> path.
 
-通过 HTTP 向<i>users</i>发送 POST 请求，按照[第三部分](/en/part3/node_js_and_express#rest)讨论的 RESTful 约定创建用户。
+通过 HTTP 向<i>users</i>发送 POST 请求，按照[第三章](/en/part3/node_js_and_express#rest)讨论的 RESTful 约定创建用户。
 
 Let's define a separate <i>router</i> for dealing with users in a new <i>controllers/users.js</i> file. Let's take the router into use in our application in the <i>app.js</i> file, so that it handles requests made to the <i>/api/users</i> url:
 
@@ -296,20 +296,17 @@ The password sent in the request is <i>not</i> stored in the database. We store 
 request 当中的密码并没有存储在数据库中。我们存储的是 _bcrypt.hash_ 函数生成的 hash 值
 
 The fundamentals of [storing passwords](https://codahale.com/how-to-safely-store-a-password/) is outside the scope of this course material. We will not discuss what the magic number 10 assigned to the [saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds) variable means, but you can read more about it in the linked material.
-[存储密码](https://codahale.com/how-to-safely-store-a-password/) 的基本原理超出了本课程的范围。我们也不会讨论赋值给[saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds) 的魔法值 10 代表什么，但你可以在相关文章中找到它。
 
+[存储密码](https://codahale.com/how-to-safely-store-a-password/) 的基本原理超出了本课程的范围。我们也不会讨论赋值给[saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds) 的魔法值 10 代表什么，但你可以在相关文章中找到它。
 
 Our current code does not contain any error handling or input validation for verifying that the username and password are in the desired format.
 我们的当前代码不包含任何用于验证用户名和密码的功能，如用户名和密码是否为所需格式的错误处理或输入校验。
 
-
 The new feature can and should initially be tested manually with a tool like Postman. However testing things manually will quickly become too cumbersome, especially once we implement functionality that enforces usernames to be unique.
 新特性可以并且应该首先使用 Postman 这样的工具进行手动测试。 然而，手动测试将很快变得过于繁琐，特别是一旦我们实现了强制用户名保持唯一的功能。
 
-
 It takes much less effort to write automated tests, and it will make the development of our application much easier.
 编写自动化测试所需的工作量要少得多，而且它将使应用的开发更加容易。
-
 
 Our initial tests could look like this:
 我们最初的测试可能是这样的:
@@ -540,7 +537,7 @@ We would like our API to work in such a way, that when an HTTP GET request is ma
 
 As previously mentioned, document databases do not properly support join queries between collections, but the Mongoose library can do some of these joins for us. Mongoose accomplishes the join by doing multiple queries, which is different from join queries in relational databases which are <i>transactional</i>, meaning that the state of the database does not change during the time that the query is made. With join queries in Mongoose, nothing can guarantee that the state between the collections being joined is consistent, meaning that if we make a query that joins the user and notes collections, the state of the collections may change during the query.
 
-如前所属，文档型数据库不能很好地支持 collection 之间的 join queries，但是 Mongoose 库可以做一些类似 join 的工作。Mongoose 是通过 multiple queries 来实现这种类 join 查询的，这于关系型数据库中的事务性 join 查询不同，也就是数据库的状态在查询执行期间并不改变。而使用 Mongoose 的 join 查询，并不能保证 collection 在 join 时的状态是一致的，也就是如果我们在进行 Note 和 User 的 join 查询后，在查询期间 collection 的状态可能发生变化。
+如前所述，文档型数据库不能很好地支持 collection 之间的 join queries，但是 Mongoose 库可以做一些类似 join 的工作。Mongoose 是通过 multiple queries 来实现这种类 join 查询的，这于关系型数据库中的事务性 join 查询不同，也就是数据库的状态在查询执行期间并不改变。而使用 Mongoose 的 join 查询，并不能保证 collection 在 join 时的状态是一致的，也就是如果我们在进行 Note 和 User 的 join 查询后，在查询期间 collection 的状态可能发生变化。
 
 The Mongoose join is done with the [populate](http://mongoosejs.com/docs/populate.html) method. Let's update the route that returns all users first:
 

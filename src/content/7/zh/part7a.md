@@ -263,7 +263,7 @@ Let's examine the slightly modified version from the previous example. The compl
 让我们检查一下前一个例子中稍微修改过的版本，这个例子的完整代码可以在这里找到( https://github.com/fullstack-hy2020/misc/blob/master/router-app-v1.js )。
 
 The application now contains five different views, the display of which is controlled by the router. In addition to the components from the previous example (<i>Home</i>, <i>Notes</i> and <i>Users</i>), we have <i>Login</i> representing the login view and <i>Note</i> representing the view of a single note.
-应用现在包含五个不同的视图，其显示由路由器控制。 除了前面示例中的组件(i Home / i、<i>Notes</i> 和<i>Users</i>)外，我们还有<i>Login</i> 表示登录视图，i Note / i 表示单个便笺的视图。
+应用现在包含五个不同的视图，其显示由路由器控制。 除了前面示例中的组件(<i>Home</i>、<i>Notes</i> 和<i>Users</i>)外，我们还有<i>Login</i> 表示登录视图，<i>Note</i> 表示单个便笺的视图。
 
 <i>Home</i> and <i>Users</i> are unchanged from the previous exercise.  <i>Notes</i> is a bit more complicated. It renders the list of notes passed to it as props in such a way that the name of each note is clickable.
 I Home /<i>和 i Users</i> 与上次练习相同。<i>Notes</i> 有点复杂。 它以这样一种方式渲染作为props传递给它的便笺列表，即每个便笺的名称都是可点击的。
@@ -691,7 +691,7 @@ At the root of the application, meaning the path _/_, show the list of anecdotes
 
 
 The <i>Footer</i>-component should always be visible at the bottom.
-I Footer / i-component 应该始终在底部可见。
+<i>Footer</i>-component 应该始终在底部可见。
 
 The creation of a new anecdote should happen e.g. in the path <i>create</i>:
 一个新奇闻的创作应该发生在例如我创建 / i 的路径上:

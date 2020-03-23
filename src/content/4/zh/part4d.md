@@ -9,7 +9,7 @@ lang: zh
 
 Users must be able to log into our application, and when a user is logged in, their user information must automatically be attached to any new notes they create.
 
-用户必须能够登录我们的应用，而当用户一旦登录，他们的用户信息必须能够自动地加到他们所创建的任何 Note 中
+用户必须能够登录我们的应用，而当用户一旦登录，他们的用户信息必须能够自动地加到他们所创建的任何便笺中
 
 We will now implement support for [token based authentication](https://scotch.io/tutorials/the-ins-and-outs-of-token-based-authentication#toc-how-token-based-works) to the backend.
 
@@ -25,15 +25,8 @@ The principles of token based authentication are depicted in the following seque
 
 - 用户首先在 React 中通过登录表单实现登录
 
-  - We will add the login form to the frontend in [part 5](/en/part5)
-    - We will add the login form to the frontend in [part 5](/en/part5) 
-  - We will add the login form to the frontend in [part 5](/en/part5)
-    - We will add the login form to the frontend in [part 5](/en/part5) 
-  - We will add the login form to the frontend in [part 5](/en/part5)
-    - We will add the login form to the frontend in [part 5](/en/part5) 
-  - We will add the login form to the frontend in [part 5](/en/part5)
-
-  - 我们将在[part 5](/en/part5) 在前台增加登录表单
+  - We will add the login form to the frontend in [part 5](/en/part5) 
+  - 我们将在[第5章](/en/part5) 在前台增加登录表单
 
 - This causes the React code to send the username and the password to the server address <i>/api/login</i> as a HTTP POST request.
 
@@ -215,7 +208,6 @@ In practice, this means that if the token is for example, the string <i>eyJhbGci
 <pre>
 Bearer eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW
 </pre>
-
 Creating new notes will change like so:
 将新建 Note 的代码修改如下：
 
@@ -370,34 +362,29 @@ We will implement login to the frontend in the [next part](/en/part5).
 
 
 ### Exercises 4.15.-4.22.
-练习4.15-4.22。
-
 In the next exercises, basics of user management will be implemented for the Bloglist application. The safest way is to follow the story from part 4 chapter [User administration](/en/part4/user_administration) to the chapter [Token-based authentication](/en/part4/token_authentication). You can of course also use your creativity. 
-在接下来的练习中，我们将为 Bloglist 应用实现基本的用户管理。 最安全的方法是遵循第4章[用户管理](/ en / part4 / User administration)到[基于令牌的身份验证](/ en / part4 / token authentication)这一章的内容。 当然，你也可以运用你的创造力。
+在接下来的练习中，我们将为 Bloglist 应用实现基本的用户管理。 最安全的方法是遵循第4章 [User administration](/en/part4/user_administration)到[Token-based authentication](/en/part4/token_authentication)这一章的内容。 当然，你也可以运用你的创造力。
 
 **One more warning:** If you notice you are mixing async/await and _then_ calls, it is 99% certain you are doing something wrong. Use either or, never both. 
-**还有一个警告: **如果你注意到你正在混合 async / await 然后调用，99% 肯定你做错了什么。 要么使用，要么使用，不要两者都使用。
+**还有一个警告: **如果你注意到你混用了 async/await 和 _then_ 调用，99% 肯定你做错了什么。 使用其中一种，不要两者都使用。
 
 #### 4.15: bloglist expansion, 步骤4
-4.15: bloglist expansion，步骤4
-
 Implement a way to create new users by doing a HTTP POST-request to address <i>api/users</i>. Users have <i>username
-通过执行 HTTP POST-request 来寻址<i>api / Users</i>，实现创建新用户的方法
-, password and name</i>.
-、密码及名称 / i。
+ password and name</i>.
+通过执行 HTTP POST-request 来访问 <i>api/users</i>，实现创建新用户的方法用户需要包含用户名、密码及名字。
 
 Do not save passwords to the database as clear text, but use the <i>bcrypt</i> library like we did in part 4 chapter [Creating new users](/en/part4/user_administration#creating-users).
-不要将数据库的密码保存为明文，而是使用<i>bcrypt</i> 库，就像我们在第4章[创建新用户](/ en / part4 / user administration # Creating-users)中所做的那样。
+不要将数据库的密码保存为明文，而是使用<i>bcrypt</i> 库，就像我们在第4章[Creating new users](/en/part4/user_administration#creating-users)中所做的那样。
 
 **NB** Some Windows users have had problems with <i>bcrypt</i>. If you run into problems, remove the library with command 
-有些 Windows 用户在<i>bcrypt</i> 方面有问题。如果遇到问题，请使用命令删除该库
+注意：有些 Windows 用户在<i>bcrypt</i> 方面有问题。如果遇到问题，请使用命令删除该库
 
 ```bash
 npm uninstall bcrypt --save 
 ```
 
 and install [bcryptjs](https://www.npmjs.com/package/bcryptjs) instead. 
-并安装[ bcryptjs ]( https://www.npmjs.com/package/bcryptjs )。
+并安装[ bcryptjs ]( https://www.npmjs.com/package/bcryptjs )来作为替代。
 
 Implement a way to see the details of all users by doing a suitable HTTP request. 
 通过执行合适的 HTTP 请求，实现查看所有用户详细信息的方法。
@@ -409,28 +396,24 @@ List of users can for example, look as follows:
 
 
 #### 4.16*: bloglist expansion, 步骤5
-4.16 * : bloglist expansion，步骤5
-
 Add a feature which adds the following restrictions to creating new users: Both username and password must be given. Both username and password must be at least 3 characters long. The username must be unique. 
-添加一个添加如下限制来创建新用户的特性: 必须同时给出用户名和密码。 用户名和密码必须至少3个字符长。 用户名必须是唯一的。
+添加一个创建新用户的特性，并添加如下限制: 必须同时给出用户名和密码。 用户名和密码必须至少3个字符长。 用户名必须是唯一的。
 
 The operation must respond with a suitable status code and some kind of an error message if invalid user is created. 
 如果创建了无效用户，操作必须使用适当的状态代码和某种错误消息进行响应。
 
 **NB** Do not test password restrictions with Mongoose validations. It is not a good idea because the password received by the backend and the password hash saved to the database are not the same thing. The password length should be validated in the controller like we did in [part 3](/en/part3/validation_and_es_lint) before using Mongoose validation. 
-**注意 **不要用 Mongoose 验证测试密码限制。 这不是一个好主意，因为后端接收到的密码和保存到数据库的密码散列不是一回事。 在使用 Mongoose 验证之前，应该像在[ part 3](/ en / part3 / validation 和 es lint)中那样在控制器中验证密码长度。
+**注意 **不要用 Mongoose 验证测试密码限制。 这不是一个好主意，因为后端接收到的密码和保存到数据库的密码散列不是一回事。 在使用 Mongoose 验证之前，应该像在 [part 3](/en/part3/validation_and_es_lint)中那样在控制器中验证密码长度。
 
 Also, implement tests which check that invalid users are not created and invalid add user operation returns a suitable status code and error message. 
-此外，实现检查无效用户未被创建和无效的添加用户操作返回合适的状态码和错误消息的测试。
+此外，实现一些测试，测试可以检查未被创建的无效用户，以及无效的添加用户操作，并返回合适的状态码和错误消息。
 
 #### 4.17: bloglist expansion, 步骤6
-4.17: bloglist expansion，步骤6
-
 Expand blogs so that each blog contains information on the creator of the blog. 
 扩展博客，使每个博客包含关于博客创建者的信息。
 
 Modify adding new blogs so that when a new blog is created,  <i>any</i> user from the database is designated as its creator (for example the one found first). Implement this according to part 4 chapter [populate](/en/part4/user_administration#populate).
-修改添加新博客，以便在创建新博客时，将数据库中的 i / i 用户指定为其创建者(例如首先找到的那个)。 根据第4章[ populate ](/ en / part4 / user administration # populate)实现这一点。
+修改添加新博客，以便在创建新博客时，将数据库中的任何 用户指定为其创建者(例如首先找到的那个)。 根据第4章 [populate](/en/part4/user_administration#populate).实现这一点。
 Which user is designated as the creator does not matter just yet. The functionality is finished in exercise 4.19. 
 哪个用户被指定为创建者还不重要。这个功能在练习4.19中完成。
 
@@ -439,7 +422,6 @@ Modify listing all blogs so that the creator's user information is displayed wit
 
 ![](../../images/4/23e.png)
 
-
 and listing all users also displays the blogs created by each user: 
 并列出所有用户，同时显示每个用户创建的博客:
 
@@ -447,25 +429,19 @@ and listing all users also displays the blogs created by each user:
 
 
 #### 4.18: bloglist expansion, 步骤7
-4.18: bloglist expansion，步骤7
-
 Implement token-based authentication according to part 4 chapter [Token authentication](/en/part4/token_authentication).
-根据第4章节[令牌认证](/ en / part4 / 令牌认证)实现基于令牌的认证。
+根据第4章节[Token authentication](/en/part4/token_authentication)实现基于令牌的认证。
 
 #### 4.19: bloglist expansion, 步骤8
-4.19: bloglist expansion，步骤8
-
 Modify adding new blogs so that it is only possible if a valid token is sent with the HTTP POST request. The user identified by the token is designated as the creator of the blog. 
 修改添加新博客的内容，以便只有在使用 HTTP POST 请求发送有效令牌的情况下才可以添加新博客。 该令牌标识的用户被指定为博客的创建者。
 
 #### 4.20*: bloglist expansion, 步骤9
-4.20 * : bloglist expansion，步骤9
-
 [This example](/en/part4/token_authentication) from part 4 shows taking the token from the header with the _getTokenFrom_ helper function.
 第4章节的[示例](/ en / part4 / token authentication)显示了使用 getTokenFrom helper 函数从头部获取令牌。
 
 If you used the same solution, refactor taking the token to a [middleware](/en/part3/node_js_and_express#middleware). The middleware should take the token from the <i>Authorization</i> header and place it to the <i>token</i> field of the <i>request</i> object. 
-如果您使用相同的解决方案，重构将令牌带到[中间件](/ en / part3 / node js 和 express # 中间件)。 中间件应该从<i>Authorization</i> 标头获取令牌，并将其放置到<i>request</i> 对象的<i>token</i> 字段。
+如果您使用相同的解决方案，重构将令牌移到[中间件](/ en / part3 / node js 和 express # 中间件)。 中间件应该从<i>Authorization</i> 标头获取令牌，并将其放置到<i>request</i> 对象的<i>token</i> 字段。
 
 In other words, if you register this middleware in the <i>app.js</i> file before all routes
 换句话说，如果在所有路由之前在<i>app.js</i> 文件中注册这个中间件
@@ -476,6 +452,7 @@ app.use(middleware.tokenExtractor)
 
 routes can access the token with _request.token_:
 路由可以使用 request.token 访问令牌:
+
 ```js
 blogsRouter.post('/', async (request, response) => {
   // ..
@@ -496,8 +473,6 @@ const tokenExtractor = (request, response, next) => {
 ```
 
 #### 4.21*: bloglist expansion, 步骤10
-4.21 * : bloglist expansion，步骤10
-
 Change the delete blog operation so that a blog can be deleted only by the user who added the blog. Therefore, deleting a blog is possible only if the token sent with the request is the same as that of the blog's creator. 
 更改删除博客操作，以便只有添加博客的用户才能删除博客。 因此，只有在请求中发送的令牌与博客创建者的令牌相同时，才可以删除博客。
 
@@ -519,16 +494,14 @@ if ( blog.user.toString() === userid.toString() ) ...
 ```
 
 #### 4.22*:  bloglist expansion, 步骤11
-4.22 * : bloglist expansion，步骤11
-
 After adding token based authentication the tests for adding a new blog broke. down Fix now the tests. Write also a new test that ensures that adding a blog fails with proper status code <i>401 Unauthorized</i> it token is not provided.
 在添加了基于令牌的身份验证之后，添加新博客的测试中断了。 现在修复测试。 还要编写一个新的测试，以确保添加一个博客失败与适当的状态代码<i>401 Unauthorized</i> it 令牌没有提供。
 
 [This](https://github.com/visionmedia/supertest/issues/398) is most likely useful when doing the fix.
-在进行修复时，[ This ]( https://github.com/visionmedia/supertest/issues/398)很可能是最有用的。
+在进行修复时，[这个](https://github.com/visionmedia/supertest/issues/398)很可能是最有用的。
 
 This is the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
-这是本课程这一部分的最后一个练习，是时候将你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统]( https://studies.cs.helsinki.fi/stats/courses/fullstackopen )。
+这是本课程这一部分的最后一个练习，是时候将你的代码推送到 GitHub，并将所有已完成的练习标记到[练习提交系统]( https://studies.cs.helsinki.fi/stats/courses/fullstackopen )。
 
 <!---
 note left of user

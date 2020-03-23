@@ -383,7 +383,7 @@ const NoteForm = ({ createNote }) => {
 
 
 The <i>newNote</i> state attribute and the event handler responsible for changing it have been moved from the _App_ component to the component responsible for the note form. 
-I newNote / i state 属性和负责更改它的事件处理程序已经从 App 组件移动到负责记录表单的组件。
+<i>newNote</i> state 属性和负责更改它的事件处理程序已经从 App 组件移动到负责记录表单的组件。
 
 
 
@@ -593,23 +593,18 @@ The <i>ref</i> attribute is used for assigning a reference to each of the compon
 
 
 ### Exercises 5.5.-5.10.
-练习5.5-5.10。
-
 
 #### 5.5 Blog list frontend, 步骤5
-5.5 Blog list frontend，步骤5
-
 Change the form for creating blog posts so that it is only displayed when appropriate. Use functionality similar to what was shown [earlier in this part of the course material](/en/part5/props_children_and_proptypes#displaying-the-login-form-only-when-appropriate). If you wish to do so, you can use the <i>Togglable</i> component defined in part 5.
-更改用于创建博客文章的表单，使其只在适当的时候显示。 使用类似于课程材料前面所展示的功能(/ en / part5 / props children and proptypes # display-the-login-form-only-when-appropriate)。 如果您希望这样做，可以使用第5章节中定义的<i>Togglable</i> 组件。
+更改用于创建博客文章的表单，使其只在适当的时候显示。 使用类似于课程材料前面所展示的功能[earlier in this part of the course material](/en/part5/props_children_and_proptypes#displaying-the-login-form-only-when-appropriate)。 如果您希望这样做，可以使用第5章节中定义的<i>Togglable</i> 组件。
 
 By default the form is not visible
 默认情况下，窗体不可见
 
 ![](../../images/5/13ae.png)
 
-
 It expands when button <i>new note</i> is clicked
-当单击<i>new note</i> 按钮时，它会扩展
+当单击<i>new note</i> 按钮时，它会展开
 
 ![](../../images/5/13be.png)
 
@@ -630,13 +625,10 @@ move all the states required for creating a new blog to this component.
 
 
 The component must work like the <i>NewNote</i> component from the [material](/osa5/props_children_ja_proptypet#lomakkeiden-tila) of this part.
-这个组件必须像这个部件的[ material ](/ osa5 / proptypet children ja # lomakkeiden-tila)中的<i>/ NewNote</i> 组件那样工作。
+这个组件必须像这个部件的[ material ](/ osa5 / proptypet children ja # lomakkeiden-tila)中的<i>NewNote</i> 组件那样工作。
 
 #### 5.7* Blog list frontend, 步骤7
-5.7 * Blog list frontend，步骤7
 
-
-——伊塞尔 · 布洛基 · 纳皮，琼卡 · 阿乌拉 · 沃伊 · 罗德里格斯(jonka avulla voi kontrolloida n ytet nk kaikki blogiin liittyv t t tidot ——译注)
 Let's add each blog a button, which controls if all of the details about the blog are shown or not.
 让我们为每个博客添加一个按钮，用于控制是否显示博客的所有细节。
 
@@ -649,18 +641,17 @@ Full details of the blog open when the button is clicked.
 
 
 
-
 And the details are hidden when the button is clicked again. 
 当再次单击按钮时，细节将被隐藏。
 
 At this point the <i>like</i> button does not need to do anything.
-此时，i like / i 按钮不需要做任何事情。
+此时， <i>like</i> 按钮不需要做任何事情。
 
 The application shown in the picture has a bit of additional CSS to improve its appearance.
 图中显示的应用使用了一些附加的 CSS 来改善其外观。
 
 It is easy to add styles to the application as shown in part 2 using [inline](/en/part2/adding_styles_to_react_app#inline-styles) styles:
-使用[ inline ](/ en / part2 / add styles to react app # inline-styles)样式向应用添加样式很容易，如第2章节所示:
+使用[ [inline](/en/part2/adding_styles_to_react_app#inline-styles)样式向应用添加样式很容易，如第2章节所示:
 
 ```js
 const Blog = ({ blog }) => {
@@ -683,11 +674,10 @@ const Blog = ({ blog }) => {
 ```
 
 **NB1:** you can make the name of a blog post click-able as shown in the part of the code that is highlighted.
-**NB1: 您可以使博客文章的名称可以点击，如代码中突出显示的部分所示。
-
+注意1： 您可以使博客文章的名称可以点击，如代码中突出显示的部分所示。
 
 **NB2:** even though the functionality implemented in this part is almost identical to the functionality provided by the <i>Togglable</i> component, the component can not be used directly to achieve the desired behavior. The easiest solution will be to add state to the blog post that controls the displayed form of the blog post.
-**NB2: 尽管该部分实现的功能与<i>Togglable</i> 组件提供的功能几乎完全相同，但该组件不能直接用于实现所需的行为。 最简单的解决方案是将状态添加到控制博客文章显示形式的博客文章中。
+注意2： 尽管该部分实现的功能与<i>Togglable</i> 组件提供的功能几乎完全相同，但该组件不能直接用于实现所需的行为。 最简单的解决方案是将状态添加到控制博客文章显示形式的博客文章中。
 
 #### 5.8*: Blog list frontend, 步骤7
 5.8 * : Blog list frontend，步骤7
@@ -714,7 +704,7 @@ Since the backend operation replaces the entire blog post, you will have to send
 ```
 
 You would have to make an HTTP PUT request to the address <i>/api/blogs/5a43fde2cbd20b12a2c34e91</i> with the following request data:
-您必须使用如下请求数据向地址<i>/ api / blogs / 5a43fde2cbd20b12a2c34e91</i> 发出 HTTP PUT 请求:
+您必须使用如下请求数据向地址 <i>/api/blogs/5a43fde2cbd20b12a2c34e91</i>发出 HTTP PUT 请求:
 
 ```js
 {
@@ -727,17 +717,13 @@ You would have to make an HTTP PUT request to the address <i>/api/blogs/5a43fde2
 ```
 
 **One last warning:** if you notice that you are using async/await and the _then_-method in the same code, it is almost certain that you are doing something wrong. Stick to using one or the other, and never use both at the same time "just in case". 
-最后一个警告: 如果您注意到在同一段代码中使用了 async / await 和 then-method，那么几乎可以肯定您做错了什么。 坚持使用一种或另一种，永远不要同时使用两种，“以防万一”。
+最后一个警告: 如果您注意到在同一段代码中使用了 async / await 和 then-方法，那么几乎可以肯定您做错了什么。 坚持使用一种或另一种，永远不要同时使用两种，“以防万一”。
 
 #### 5.9*: Blog list frontend, 步骤8
-5.9 * : Blog list frontend，步骤8
-
 Modify the application to list the blog posts by the number of <i>likes</i>. Sorting the blog posts can be done with the array [sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) method.
 根据<i>like</i> 的数量修改应用以列出博客文章。 对博客文章进行排序可以使用数组[ sort ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/sort )方法。
 
 #### 5.10*: Blog list frontend, 步骤9
-5.10 * : Blog list frontend，步骤9
-
 Add a new button for deleting blog posts. Also implement the logic for deleting blog posts in the backend.
 添加一个新的按钮用于删除博客文章。还可以在后端实现删除博客文章的逻辑。
 
@@ -745,7 +731,6 @@ Your application could look something like this:
 您的应用可以是这样的:
 
 ![](../../images/5/14ea.png)
-
 
 The confirmation dialog for deleting a blog post is easy to implement with the [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) function.
 用于删除博客文章的确认对话框很容易通过[ window.confirm ]( https://developer.mozilla.org/en-us/docs/web/api/window/confirm )函数实现。
@@ -966,7 +951,7 @@ export default Togglable
 ```
 
 You can find the code for our current application in its entirety in the <i>part5-7</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7).
-您可以在[ this github repository ]的<i>part5-7</i> 分支中找到我们当前应用的全部代码 https://github.com/fullstack-hy2020/part2-notes/tree/part5-7。
+您可以在[this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7)的<i>part5-7</i> 分支中找到我们当前应用的全部代码。
 
 </div>
 
@@ -974,22 +959,16 @@ You can find the code for our current application in its entirety in the <i>part
 
 
 ### Exercises 5.11.-5.12.
-练习5.11-5.12。
-
 #### 5.11: Blog list frontend, 步骤11
-5.11: Blog list frontend，步骤11
-
 Define PropTypes for one of the components of your application.
 为应用的一个组件定义 PropTypes。
 
 #### 5.12: Blog list frontend, 步骤12
-5.12: Blog list frontend，步骤12
-
 Add ESlint to the project. Define the configuration according to your liking. Fix all of the linter errors.
-向项目中添加 ESlint。根据您的喜好定义配置。修复所有的连接错误。
+向项目中添加 ESlint。根据您的喜好定义配置。修复所有的lint错误。
 
 Create-react-app has installed ESlint to the project by default, so all that's left for you to do is to define your desired configuration in the <i>.eslintrc.js</i> file. 
-Create-react-app 默认已经在项目中安装了 ESlint，所以剩下要做的就是在<i>中定义你想要的配置。</i> 文件。
+Create-react-app 默认已经在项目中安装了 ESlint，所以剩下要做的就是在<i>中定义你想要的 <i>.eslintrc.js</i> 文件。
 
 *NB:* do not run the _eslint --init_ command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
 注意: 不要运行 eslint-- init 命令。 它将安装与 create-react-app 创建的配置文件不兼容的最新版本的 ESlint！

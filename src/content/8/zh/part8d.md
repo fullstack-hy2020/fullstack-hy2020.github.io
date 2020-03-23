@@ -420,7 +420,7 @@ Some tips
 - Note, that you can do GraphQL queries in a <i>useEffect</i>-hook.
 - 注意，您可以在<i>/ useEffect</i>-hook 中执行 GraphQL 查询。
 - The [second parameter](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) of a <i>useEffect</i> - hook can become handy depending on your approach. 
-根据您的方法，i / e / i-hook 的[第二个参数]( https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect )可以变得很方便。
+根据您的方法，<i>/ e</i>-hook 的[第二个参数]( https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect )可以变得很方便。
 
 #### 8.22 Up to date cache and book recommendations
 8.22更新缓存和预订推荐

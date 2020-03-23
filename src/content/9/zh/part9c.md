@@ -104,10 +104,10 @@ Let's go through each configuration:
 
 
 The <i>target</i> configuration tells the compiler which ECMAScript version to use for the generated JavaScript. ES6 is supported by most browsers, and it is a good, pretty safe option.
-I target / i 配置告诉编译器为生成的 JavaScript 使用哪个 ECMAScript 版本。 大多数浏览器都支持 ES6，这是一个很好的、相当安全的选择。
+<i>target</i> 配置告诉编译器为生成的 JavaScript 使用哪个 ECMAScript 版本。 大多数浏览器都支持 ES6，这是一个很好的、相当安全的选择。
 
 <i>outDir</i> tells where the compiled code should be placed.
-I outDir / i 告诉编译后的代码应该放在哪里。
+<i>outDir</i> 告诉编译后的代码应该放在哪里。
 
 
 
@@ -115,11 +115,11 @@ I outDir / i 告诉编译后的代码应该放在哪里。
 I module /<i>告诉编译器我们要在编译的代码中使用 i commonjs</i> 模块。 这意味着我们可以使用 require 而不是 import，这在旧的 Node.js 版本中是不被支持的，比如10版本。
 
 <i>strict</i> is actually a shorthand for multiple separate options: 
-I strict / i 实际上是多个独立选项的简写:
+<i>strict</i> 实际上是多个独立选项的简写:
 
 
 <i>noImplicitAny, noImplicitThis, alwaysStrict, strictBindCallApply, strictNullChecks, strictFunctionTypes and strictPropertyInitialization</i>.
-I noImplicitAny，noImplicitThis，alwaysStrict，strictBindCallApply，strictNullChecks，strictFunctionTypes and strictPropertyInitialization / i.
+<i>noImplicitAny，noImplicitThis，alwaysStrict，strictBindCallApply，strictNullChecks，strictFunctionTypes and strictPropertyInitialization</i>.
 These guide our coding style to use the TypeScript features more strictly. 
 这些指导我们的编码风格更严格地使用打字稿的特性。
 For us perhaps the most important is the already familiar [noImplicitAny](https://www.typescriptlang.org/en/tsconfig#noImplicitAny). It prevents implicitly setting type <i>any</i>, which can happen if you don't type the parameters of a function for example. 
@@ -135,10 +135,10 @@ Using <i>strict</i> is suggested by the official documentation.
 我使用 locals /<i>避免使用未使用的局部变量，如果函数有未使用的参数，我使用未使用的参数</i> 将抛出错误。
 
 <i>noFallthroughCasesInSwitch</i> ensures that in a _switch case_ each case ends with a  _return_ or a _break_ statement.
-I noFallthroughCasesInSwitch / i 确保在开关情况下，每个情况都以一个 return 或 break 语句结束。
+<i>noFallthroughCasesInSwitch</i> 确保在开关情况下，每个情况都以一个 return 或 break 语句结束。
 
 <i>esModuleInterop</i> allows interoperability between commonJS and ES Modules, see more [in documentation](https://www.typescriptlang.org/en/tsconfig#esModuleInterop).
-I esModuleInterop / i 允许 commonJS 和 ES 模块之间的互操作性，详见文档中的 https://www.typescriptlang.org/en/tsconfig#esModuleInterop。
+<i>esModuleInterop</i> 允许 commonJS 和 ES 模块之间的互操作性，详见文档中的 https://www.typescriptlang.org/en/tsconfig#esModuleInterop。
 
 Now that we have our preferred configuration set, let's continue by installing <i>express</i> and of course also <i>@types/express</i>. Since this is a real project, which is intended to be grown over time, we will use eslint from the very  beginning:
 现在我们已经有了首选的配置集，让我们继续安装<i>express</i>，当然还有 i@types / express / i。 由于这是一个真正的项目，并打算随着时间的推移而成长，我们将从一开始就使用 eslint:
@@ -251,7 +251,7 @@ Now we can finally start coding! As always, we start by creating a a ping-endpoi
 现在我们终于可以开始编码了！ 像往常一样，我们首先创建一个 ping 端点，以确保一切正常工作。
 
 The contents of the <i>index.ts</i> file:
-i index.ts / i 文件的内容:
+<i>index.ts</i> 文件的内容:
 
 ```js
 import express from 'express';
@@ -994,7 +994,7 @@ The response is what we expect it to be
 练习9.10-9.11。
 
 Similarly to Ilari's flight service, we do not use a real database in our app but instead use hardcoded data, that is in the files [diagnoses.json](https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.json) and [patients.json](https://github.com/fullstack-hy2020/misc/blob/master/patients.json). Get the files and store those into a directory called <i>data</i> under your project. All data modification can be done in runtime memory, so during this part it is <i>not necessary to write to a file</i>.
-与 Ilari 的飞行服务类似，我们在应用中不使用真正的数据库，而是使用硬编码的数据，这些数据存在于文件[ diagnoses.json ]( https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.json )和[ patients.json ]( https://github.com/fullstack-hy2020/misc/blob/master/patients.json )中。 获取文件并将其存储到项目下名为<i>data</i> 的目录中。 所有的数据修改都可以在运行时内存中完成，因此在这一部分中不需要写入文件 / i。
+与 Ilar<i>的飞行服务类似，我们在应用中不使用真正的数据库，而是使用硬编码的数据，这些数据存在于文件[ diagnoses.json ]( https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.json )和[ patients.json ]( https://github.com/fullstack-hy2020/misc/blob/master/patients.json )中。 获取文件并将其存储到项目下名为<i>data</i> 的目录中。 所有的数据修改都可以在运行时内存中完成，因此在这一部分中不需要写入文件</i>。
 
 #### 9.10: Patientor backend, 步骤3
 9.10: Patientor backend，步骤3
@@ -1082,7 +1082,7 @@ It is good that we are made aware of this potential problem already at compile p
 
 
 First of all in cases like this we need to decide what the <i>return value</i> should be if an object is not found, and how the case should be handled. 
-首先，在这种情况下，我们需要决定如果没有找到对象，i 返回值 / i 应该是什么，以及如何处理这种情况。
+首先，在这种情况下，我们需要决定如果没有找到对象，<i>返回值</i> 应该是什么，以及如何处理这种情况。
 The <i>find</i> method of an array returns <i>undefined</i> if the object is not found, and this is actually fine with us. 
 如果没有找到对象，数组的<i>find</i> 方法将返回<i>undefined</i>，这对我们来说实际上没有问题。
 We can solve our problem by typing the return value as follows
@@ -1144,7 +1144,7 @@ router.post('/', (req, res) => {
 ```
 
 corresponding method in <i>diaryService</i> looks like this
-I diaryService / i 中的对应方法如下所示
+<i>diaryService</i> 中的对应方法如下所示
 
 ```js
 import {
@@ -1173,7 +1173,7 @@ const addEntry = (
 
 
 As you can see, the <i>addDiary</i> function is becoming quite hard to read now that we have all the fields as separate parameters. 
-正如您所看到的，i addDiary / i 函数变得非常难以阅读，因为我们已经将所有字段作为单独的参数。
+正如您所看到的，<i>addDiary</i> 函数变得非常难以阅读，因为我们已经将所有字段作为单独的参数。
 It might be better to just send the data as an object to the function:
 将数据作为对象发送到函数可能会更好:
 
@@ -1195,7 +1195,7 @@ router.post('/', (req, res) => {
 But wait, what is the type of this object? It is not exactly a <i>DiaryEntry</i>, since it is still missing the <i>id</i> field.
 但是，等等，这个对象的类型是什么？ 它不完全是<i>DiaryEntry</i>，因为它仍然缺少<i>id</i> 字段。
 It could be useful to create a new type, <i>NewDiaryEntry</i>, for a not yet saved entry. 
-对于尚未保存的条目，创建一个新类型(i NewDiaryEntry / i)可能很有用。
+对于尚未保存的条目，创建一个新类型(<i>NewDiaryEntry</i>)可能很有用。
 Let's create that in <i>types.ts</i> using the existing <i>DiaryEntry</i> type and the [Omit](http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk) utility type:
 让我们使用现有的<i>DiaryEntry</i> 类型和[ Omit ]( http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk )实用程序类型在<i>types.ts</i> 中创建它:
 
@@ -1571,7 +1571,7 @@ One thing to notice here is that we have changed the parameter type to <i>any</i
 这里需要注意的一点是，我们将参数类型改为<i>any</i>。 如果它是字符串，那么<i>includes</i> 检查将不能编译。 如果考虑函数的可重用性，这也是有意义的。 允许 i / i 作为参数，这个函数可以自信地使用，因为我们知道无论我们给它提供什么，函数总是告诉我们变量是否是一个有效的天气。
 
 The function <i>parseWeather</i> can be simplified a bit
-I parseWeather / i 函数可以简化一些
+<i>parseWeather</i> 函数可以简化一些
 
 ```js
 const parseWeather = (weather: any): Weather => {

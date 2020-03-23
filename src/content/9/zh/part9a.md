@@ -39,7 +39,7 @@ TypeScript consists of three separate, but mutually fulfilling parts:
 
 
 <i>The language</i> concists of syntax, keywords and type annotations. The syntax is similar to but not the same as JavaScript syntax. From the three parts of TypeScript programmers have the most direct contact with the language. 
-I 语法、关键字和类型便笺的语言 / i 协调。 语法类似于 JavaScript 语法，但不一样。 从打字稿的三个部分来看，程序员与这门语言有着最直接的接触。
+<i>语法、关键字和类型便笺的语言</i> 协调。 语法类似于 JavaScript 语法，但不一样。 从打字稿的三个部分来看，程序员与这门语言有着最直接的接触。
 
 
 
@@ -48,7 +48,7 @@ I 语法、关键字和类型便笺的语言 / i 协调。 语法类似于 JavaS
 
 
 <i>The compiler</i> is responsible for type information erasure (i.e. removing the typing information) and the code transformations. The code transformations enable TypeScript code to be transpiled into executable JavaScript. Everything related to the types is removed at compile-time, so TypeScript isn't actually genuine statically typed code. 
-I 编译器 / i 负责类型信息擦除(即删除类型信息)和代码转换。 代码转换使得 TypeScript 代码可以转换成可执行的 JavaScript。 所有与类型相关的代码都在编译时删除，所以 TypeScript 实际上不是真正的静态类型代码。
+<i>编译器</i> 负责类型信息擦除(即删除类型信息)和代码转换。 代码转换使得 TypeScript 代码可以转换成可执行的 JavaScript。 所有与类型相关的代码都在编译时删除，所以 TypeScript 实际上不是真正的静态类型代码。
 
 Traditionally  <i>compiling</i>  means that code is transformed from a human readable format to a machine readable format. In TypeScript human readable source code is transformed into another human readable source code, so the correct term would actually be <i>transpiling</i>. However compiling has been the most commonly used term in this context, so we will continue to use it. 
 传统上，i 编译 /<i>意味着代码从人类可读的格式转换为机器可读的格式。 在打字稿中，人类可读的源代码被转换成另一种人类可读的源代码，因此正确的术语应该是 i transpiling</i>。 然而，编译是这个上下文中最常用的术语，因此我们将继续使用它。
@@ -59,7 +59,7 @@ The compiler also performs a static code analysis. It can emit warnings or error
 
 !-**语言服务 **从源代码收集类型信息的格式，开发工具可以利用它来提供智能感知、类型提示和可能的重构
 <i>The language service</i> collects type information from the source code. Development tools can use the type information for providing intellisense, type hints and possible refactoring alternatives.
-I 语言服务 / i 从源代码中收集类型信息。 开发工具可以使用类型信息来提供智能感知、类型提示和可能的重构替代方案。
+<i>语言服务</i> 从源代码中收集类型信息。 开发工具可以使用类型信息来提供智能感知、类型提示和可能的重构替代方案。
 
 
 ### TypeScript key language features
@@ -155,7 +155,7 @@ func((result) => {
 First we have a declaration of a [type alias](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases) called <i>CallsFunction</i>.
 首先，我们有一个名为<i>CallsFunction</i> 的[ type alias ]( https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases )声明。
 CallsFunction is a function type with one parameter <i>callback</i>. The parameter <i>callback</i> is of type function which takes a string parameters and returns [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) value.  As we will learn later in this part <i>any</i> is a kind of "wildcard" type that can represent any type.
-Callsfunction 是带有一个参数<i>callback</i> 的函数类型。 参数<i>callback</i> 是一个类型为 function 的函数，它接受一个字符串参数并返回[ any ]( http://www.typescriptlang.org/docs/handbook/basic-types.html#any )值。 正如我们将在本部分后面了解到的，i any / i 是一种可以表示任何类型的“通配符”类型。
+Callsfunction 是带有一个参数<i>callback</i> 的函数类型。 参数<i>callback</i> 是一个类型为 function 的函数，它接受一个字符串参数并返回[ any ]( http://www.typescriptlang.org/docs/handbook/basic-types.html#any )值。 正如我们将在本部分后面了解到的，<i>any</i> 是一种可以表示任何类型的“通配符”类型。
 
 
 

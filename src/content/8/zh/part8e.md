@@ -84,7 +84,7 @@ query {
 ```
 
 The fragments <i><strong>are not</strong></i> defined in the GraphQL schema, but in the client. The fragments must be declared when the client uses them for queries. 
-I strong 片段不是在 GraphQL 模式中定义的 / strong / i，而是在客户端中定义的。 当客户端使用这些片段进行查询时，必须声明它们。
+<i>strong 片段不是在 GraphQL 模式中定义的 / strong</i>，而是在客户端中定义的。 当客户端使用这些片段进行查询时，必须声明它们。
 
 In principle, we could declare the fragment with each query like so:
 原则上，我们可以像这样在每个查询中声明片段:
@@ -276,7 +276,7 @@ The backend code can be found on [Github](https://github.com/fullstack-hy2020/gr
 In order to use subscriptions in our React application, we have to do some changes, especially on its [configuration]((https://www.apollographql.com/docs/react/v3.0-beta/data/subscriptions/).
 为了在我们的 React 应用中使用订阅，我们必须做一些更改，特别是在它的[配置](( https://www.apollographql.com/docs/React/v3.0-beta/data/subscriptions/ )上。
 The configuration in <i>index.js</i> has to be modified like so: 
-I index.js / i 中的配置必须修改如下:
+<i>index.js</i> 中的配置必须修改如下:
 
 ```js
 import { 
