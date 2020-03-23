@@ -7,32 +7,25 @@ lang: zh
 
 <div class="content">
 
-
-
 ### Displaying the login form only when appropriate
-# # # 只在适当的时候显示登入表单
 
+在合适的时候展示登录表单
 
 Let's modify the application so that the login form is not displayed by default:
-让我们修改应用，使登录表单在默认情况下不显示:
+让我们修改应用，让登录表单在默认情况下不显示
 
 ![](../../images/5/10e.png)
 
-
-
 The login form appears when the user presses the <i>login</i> button:
-当用户按下<i>login</i> 按钮时，登录表单就会出现:
+而当用户点击登录按钮时，登录表单再出现
 
 ![](../../images/5/11e.png)
 
-
-
 The user can close the login form by clicking the <i>cancel</i> button.
-用户可以通过单击<i>cancel</i> 按钮来关闭登录表单。
-
+用户可以通过单击 cancel 按钮关闭登录表单
 
 Let's start by extracting the login form into its own component:
-让我们从将登录表单提取到它自己的组件开始:
+我们首先将登录组件解耦出来：
 
 ```js
 import React from 'react'
@@ -73,13 +66,13 @@ const LoginForm = ({
 export default LoginForm
 ```
 
-
 The state and all the functions related to it are defined outside of the component and are passed to the component as props.
-状态和与之相关的所有函数都在组件之外定义，并作为props传递给组件。
 
+状态以及所有相关的函数都在组件外进行定义，并作为属性传递给组件。
 
 Notice that the props are assigned to variables through <i>destructuring</i>, which means that instead of writing:
-注意，props是通过<i>destructuring</i> 分配给变量的，这意味着不写:
+
+注意，属性是通过变量解构出来的，这意味着不是如下这种方式编写：
 
 ```js
 const LoginForm = (props) => {
@@ -103,13 +96,13 @@ const LoginForm = (props) => {
 }
 ```
 
-
 where the properties of the _props_ object are accessed through e.g. _props.handleSubmit_, the properties are assigned directly to their own variables.
-当 props.handleSubmit 访问 props 对象的属性时，属性被直接赋值给它们自己的变量。
 
+例如当访问 _props_ 对象的 _props.handleSubmit_ 属性时，属性被直接赋值给它们自己的变量。
 
 One fast way of implementing the functionality is to change the _loginForm_ function of the <i>App</i> component like so:
-实现这个功能的一个快速方法是更改<i>App</i> 组件的 loginForm 函数，如下所示:
+
+一个快速的实现方式是改变 <i>App</i> 组件的 loginForm 函数，如下所示:
 
 ```js
 const App = () => {
@@ -144,13 +137,11 @@ const App = () => {
 }
 ```
 
-
 The <i>App</i> components state now contains the boolean <i>loginVisible</i>, that defines if the login form should be shown to the user or not.
-I App /<i>组件状态现在包含布尔值 i loginVisible</i>，它定义登录表单是否应该显示给用户。
-
+<i>App</i> 组件状态当前包含了 <i>loginVisible</i> 这个布尔值，定义了登录表单是否应当展示给用户。
 
 The value of loginVisible is toggled with two buttons. Both buttons have their event handlers defined directly in the component:
-使用两个按钮来切换 loginVisible 的值。两个按钮都直接在组件中定义了事件处理程序:
+loginVisible 可以通过两个按钮切换，每个按钮都有自己的事件处理函数，这些函数直接定义在组件中。
 
 ```js
 <button onClick={() => setLoginVisible(true)}>log in</button>
@@ -158,9 +149,9 @@ The value of loginVisible is toggled with two buttons. Both buttons have their e
 <button onClick={() => setLoginVisible(false)}>cancel</button>
 ```
 
-
 The visibility of the component is defined by giving the component an [inline](/en/part2/adding_styles_to_react_app#inline-styles) style rule, where the value of the [display](https://developer.mozilla.org/en-US/docs/Web/CSS/display) property is <i>none</i> if we do not want the component to be displayed:
-组件的可见性是通过给组件一个[ inline ](/ en / part2 / add styles to react app # inline-styles)样式规则来定义的，如果我们不想显示组件，那么[ display ]( https://developer.mozilla.org/en-us/docs/web/css/display )属性的值为<i>none</i>:
+
+组件是否可见被定义在了一个内联样式中[inline](/en/part2/adding_styles_to_react_app#inline-styles) ，即[display](https://developer.mozilla.org/en-US/docs/Web/CSS/display) 属性值是 <i>none</i>的时候，组件就看不到了：
 
 ```js
 const hideWhenVisible = { display: loginVisible ? 'none' : '' }
@@ -175,29 +166,27 @@ const showWhenVisible = { display: loginVisible ? '' : 'none' }
 </div>
 ```
 
-
 We are once again using the "question mark" ternary operator. If _loginVisible_ is <i>true</i>, then the CSS rule of the component will be:
-我们再次使用“问号”三元操作符。 如果 loginVisible 是<i>true</i>，那么组件的 CSS 规则是:
+我们再次使用三元运算符。如果 _loginVisible_ 是 <i>true</i>，组件的 CSS 规则为：
 
 ```css
 display: 'none';
 ```
 
+If _loginVisible_ is <i>false</i>, then <i>display</i> will not receive any value related to the visibility of the component.
 
-If _loginVisible_ is <i>false</i>, then <i>display</i>  will not receive any value related to the visibility of the component.
-如果 loginVisible 是<i>false</i>，那么我显示 / i 将不会收到任何与组件可见性相关的值。
-
+如果 _loginVisible_ 是 <i>false</i>， <i>display</i> 不会接受任何与组件可见性相关的值。
 
 ### The components children, aka. props.children
-组成部分孩子们，又名 props.children
 
+组件的 children，又叫 props.children
 
 The code related to managing the visibility of the login form could be considered to be its own logical entity, and for this reason it would be good to extract it from the <i>App</i> component into its own separate component.
-与管理登录表单的可见性相关的代码可以被认为是它自己的逻辑实体，因此最好将它从<i>App</i> 组件提取到它自己的单独组件中。
 
+用于控制登录表单是否可见的代码，应当被视作它自己的逻辑实体，出于这个原因，它最好从 <i>App</i> 组件中解耦到自己的组件中。
 
 Our goal is to implement a new <i>Togglable</i> component that can be used in the following way:
-我们的目标是实现一个新的<i>Togglable</i> 组件，它可以用如下方式使用:
+我们的目标是实现一个新的 <i>Togglable</i> 组件，按照如下方式进行使用：
 
 ```js
 <Togglable buttonLabel='login'>
@@ -211,13 +200,12 @@ Our goal is to implement a new <i>Togglable</i> component that can be used in th
 </Togglable>
 ```
 
-
 The way that the component is used is slightly different from our previous components. The component has both an opening and a closing tags which surround a <i>LoginForm</i> component. In React terminology <i>LoginForm</i> is a child component of <i>Togglable</i>.
-组件的使用方式与前面的组件稍有不同。 这个组件有一个开始标记和一个结束标记，它们围绕着一个<i>LoginForm</i> 组件。 在 React 术语中，i LoginForm /<i>是 i Togglable</i> 的子组件。
 
+这与我们之前的组件使用方法有一些不同。包含打开和关闭标签的组件将 <i>LoginForm</i> 包含在了里面。用 React 的术语来说， <i>LoginForm</i> 组件是 <i>Togglable</i> 的子组件。
 
 We can add any React elements we want between the opening and closing tags of <i>Togglable</i>, like this for example:
-我们可以在<i>Togglable</i> 的开始和结束标签之间添加任何 React 元素，例如:
+任何我们想要打开或关闭的组件都可以通过 <i>Togglable</i> 进行包裹，例如：
 
 ```js
 <Togglable buttonLabel="reveal">
@@ -226,9 +214,8 @@ We can add any React elements we want between the opening and closing tags of <i
 </Togglable>
 ```
 
-
 The code for the <i>Togglable</i> component is shown below:
-I Togglable / i 组件的代码如下:
+<i>Togglable</i> 组件的代码如下：
 
 ```js
 import React, { useState } from 'react'
@@ -259,13 +246,12 @@ const Togglable = (props) => {
 export default Togglable
 ```
 
-
 The new and interesting part of the code is [props.children](https://reactjs.org/docs/glossary.html#propschildren), that is used for referencing the child components of the component. The child components are the React elements that we define between the opening and closing tags of a component.
-代码中新的和有趣的部分是[ props.children ]( https://reactjs.org/docs/glossary.html#propschildren ) ，它用于引用组件的子组件。 子组件是我们在组件的开始和结束标记之间定义的 React 元素。
 
+这个新的且比较有趣的代码就是 [props.children](https://reactjs.org/docs/glossary.html#propschildren)， 它用来引用组件的自组件。自组件就是我们想要控制开启和关闭的 React 组件。
 
 This time the children are rendered in the code that is used for rendering the component itself:
-这一次，子元素被渲染在用于渲染组件本身的代码中:
+这一次，子元素被渲染到了用于渲染组件本身的代码中：
 
 ```js
 <div style={showWhenVisible}>
@@ -274,9 +260,8 @@ This time the children are rendered in the code that is used for rendering the c
 </div>
 ```
 
-
 Unlike the "normal" props we've seen before, <i>children</i> is automatically added by React and always exists. If a component is defined with an automatically closing _/>_ tag, like this:
-与我们之前见过的“正常”props不同，i children / i 是由 React 自动添加的，并且始终存在。 如果一个组件定义了一个自动关闭 / 标签，像这样:
+并不像之前我们见到的使用的普通属性， <i>children</i>被 React 自动添加了，并始终存在，只要这个组件定义了关闭标签 _/>_
 
 ```js
 <Note
@@ -286,17 +271,14 @@ Unlike the "normal" props we've seen before, <i>children</i> is automatically ad
 />
 ```
 
-
 Then <i>props.children</i> is an empty array.
-然后，i props.children / i 是一个空数组。
-
+这时 <i>props.children</i> 是一个空的数组。
 
 The <i>Togglable</i> component is reusable and we can use it to add similar visibility toggling functionality to the form that is used for creating new notes.
-I Togglable / i 组件是可重用的，我们可以使用它向用于创建新便笺的表单添加类似的可见性切换功能。
-
+<i>Togglable</i> 组件可被重用，我们可以用它创建新的的 Note 的表单添加类似的切换功能。
 
 Before we do that, let's extract the form for creating notes into its own component:
-在此之前，让我们将创建便笺的表单提取到它自己的组件中:
+在这之前，我们把创建 Note 的表单解耦到自己的组件中。
 
 ```js
 const NoteForm = ({ onSubmit, handleChange, value}) => {
@@ -315,8 +297,9 @@ const NoteForm = ({ onSubmit, handleChange, value}) => {
   )
 }
 ```
+
 Next let's define the form component inside of a <i>Togglable</i> component:
-接下来让我们定义<i>Togglable</i> 组件中的表单组件:
+下面让我们把组件定义在 <i>Togglable</i> 组件中
 
 ```js
 <Togglable buttonLabel="new note">
@@ -448,19 +431,23 @@ branch <i>part5-5</i>.
 分支<i>第5-5</i> 部分。
 
 ### References to components with ref
-# # # 引用带 ref 的组件
+
+引用具有 ref 的组件
 
 Our current implementation is quite good, it has one aspect that could be improved.
-我们目前的实现是相当好的，它有一个方面可以改进。
+
+我们当前的实现还不错，但有个地方可以改进
 
 After a new note is created, it would make sense to hide the new note form. Currently the form stays visible. There is a slight problem with hiding the form. The visibility is controlled with the <i>visible</i> variable inside of the <i>Togglable</i> component. How can we access it outside of the component?
-在创建新便笺之后，隐藏新便笺表单是有意义的。 当前窗体仍然可见。 隐藏表单有一个小问题。 可见性是通过<i>Togglable</i> 组件内部的<i>visible</i> 变量控制的。 我们如何在组件之外访问它？
+
+当我们创建了一个新的 Note，我们应当隐藏新建 Note 的表单。当前这个表单会持续可见，但隐藏这个表单有个小问题。可见性是透过<i>Togglable</i> 组件的<i>visible</i> 变量来控制的，我们怎么从外部进行访问呢？
 
 There are many ways to implement closing the form from the parent component, but let's use the [ref](https://reactjs.org/docs/refs-and-the-dom.html) mechanism of React, which offers a reference to the component.
-有许多方法可以实现从父组件中关闭表单，但是让我们使用 React 的[ ref ]( https://reactjs.org/docs/refs-and-the-dom.html )机制，它提供了对组件的引用。
+实际上从父组件来关闭这个表单有许多方法，我们来使用 React 的 [ref](https://reactjs.org/docs/refs-and-the-dom.html)机制，它提供了一个组件的引用。
 
 Let's make the following changes to the <i>App</i> component:
-让我们对<i>App</i> 组件进行如下更改:
+我们把 <i>App</i> 组件按如下修改：
+
 
 ```js
 const App = () => {
@@ -477,13 +464,12 @@ const App = () => {
 }
 ```
 
-
 The [createRef](https://reactjs.org/docs/react-api.html#reactcreateref) method is used to create a <i>noteFormRef</i> ref, that is assigned to the <i>Togglable</i> component containing the creation note form. The <i>noteFormRef</i> variable acts as a reference to the component.
-方法用于创建一个<i>noteFormRef</i> ref，该 https://reactjs.org/docs/react-api.html#reactcreateref 被分配给包含创建通知表单的<i>Togglable</i> 组件。<i>noteFormRef</i> 变量充当对组件的引用。
 
+[createRef](https://reactjs.org/docs/react-api.html#reactcreateref) 方法就是用来创建 <i>noteFormRef</i> 引用，它被加到了能够控制表单创建的 <i>Togglable</i> 组件， <i>noteFormRef</i> 变量就代表了组件的引用。
 
 We also make the following changes to the <i>Togglable</i> component:
-我们还对<i>Togglable</i> 组件进行了如下更改:
+我们同样要修改 <i>Togglable</i> 组件：
 
 ```js
 import React, { useState, useImperativeHandle } from 'react' // highlight-line
@@ -522,15 +508,16 @@ const Togglable = React.forwardRef((props, ref) => { // highlight-line
 export default Togglable
 ```
 
-
 The function that creates the component is wrapped inside of a [forwardRef](https://reactjs.org/docs/react-api.html#reactforwardref) function call. This way the component can access the ref that is assigned to it.
-创建组件的函数包装在一个[ forwardRef ]( https://reactjs.org/docs/react-api.html#reactforwardref )函数调用中。 这样，组件就可以访问分配给它的 ref。
+
+创建组件的函数被包裹在了[forwardRef](https://reactjs.org/docs/react-api.html#reactforwardref) 函数调用。利用这种方式可以访问赋给它的引用。
 
 The component uses the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) hook to make its <i>toggleVisibility</i> function available outside of the component.
-这个组件使用了[ useImperativeHandle ]( https://reactjs.org/docs/hooks-reference.html#useImperativeHandle )挂钩来使它的<i>toggleVisibility</i> 函数在组件之外可用。
+
+组件利用[useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) 钩子来将<i>toggleVisibility</i> 函数能够被外部组件访问到。
 
 We can now hide the form by calling <i>noteFormRef.current.toggleVisibility()</i> after a new note has been created:
-现在，我们可以在创建新便笺之后，通过调用<i>noteFormRef.current.toggleVisibility ()</i> 来隐藏表单:
+我们现在可以在 Note 创建后，通过调用 <i>noteFormRef.current.toggleVisibility()</i> 控制表单的可见性了
 
 ```js
 const App = () => {
@@ -560,11 +547,11 @@ You can find the code for our current application in its entirety in the <i>part
 您可以在[ this github repository ]的<i>part5-6</i> 分支中找到我们当前应用的全部代码，该分支是 https://github.com/fullstack-hy2020/part2-notes/tree/part5-6文件库。
 
 ### One point about components
-关于组件的一点
 
+关于组件的一个点
 
 When we define a component in React:
-当我们在 React 中定义一个组件时:
+当我们在 React 定义一个组件：
 
 ```js
 const Togglable = () => ...
@@ -572,9 +559,8 @@ const Togglable = () => ...
 }
 ```
 
-
 And use it like this:
-像这样使用它:
+并按如下方式进行使用：
 
 ```js
 <div>
@@ -592,19 +578,15 @@ And use it like this:
 </div>
 ```
 
-
 We create <i>three separate instances of the component</i> that all have their own separate state:
-我们创建了三个独立的 component / i 实例，它们都有自己的独立状态:
+我们创建了三个单独的组件，并且都有自己的状态：
 
 ![](../../images/5/12e.png)
 
-
-
 The <i>ref</i> attribute is used for assigning a reference to each of the components in the variables <i>togglable1</i>, <i>togglable2</i> and <i>togglable3</i>.
-I ref /<i>属性用于为变量 i togglable1</i>、<i>togglable2</i> 和<i>togglable3</i> 中的每个组件分配一个引用。
+<i>ref</i> 属性用于为变量 togglable1、 togglable2 和 togglable3 中的每个组件分配一个引用。
 
 </div>
-
 
 <div class="tasks">
 
@@ -776,32 +758,31 @@ Show the button for deleting a blog post only if the blog post was added by the 
 
 <div class="content">
 
-
 ### PropTypes
-# # PropTypes
 
 The <i>Togglable</i> component assumes that it is given the text for the button via the <i>buttonLabel</i> prop. If we forget to define it to the component:
-I Togglable /<i>组件假设它通过 i buttonLabel</i> prop 获得按钮的文本。 如果我们忘记给组件定义它:
+<i>Togglable</i> 组件假定使用者会通过 <i>buttonLabel</i> 属性获传递按钮的文本。 如果我们忘记给组件定义:
 
 ```js
 <Togglable> buttonLabel forgotten... </Togglable>
 ```
 
 The application works, but the browser renders a button that that has no label text.
-应用可以运行，但浏览器渲染的按钮没有标签文本。
+
+应用会运行正常，但浏览器呈现一个没有 label text 的按钮。
 
 We would like to enforce that when the <i>Togglable</i> component is used, the button label text prop must be given a value.
-我们希望强制在使用<i>Togglable</i> 组件时，必须为按钮标签文本支撑赋值。
+如果我们希望使用 <i>Togglable</i> 组件时，强制给按钮一个 label text 属性值。
 
 The expected and required props of a component can be defined with the [prop-types](https://github.com/facebook/prop-types) package. Let's install the package:
-一个组件需要的props可以通过[ prop-types ](prop-types)包来定义，让我们来安装这个包:
+这个需求可以通过 [prop-types](https://github.com/facebook/prop-types) 包来定义，我们来安装一下：
 
 ```js
 npm install --save prop-types
 ```
 
 We can define the <i>buttonLabel</i> prop as a mandatory or <i>required</i> string-type prop as shown below:
-我们可以将<i>buttonLabel</i> prop 定义为一个强制的或者<i>required</i> string-type prop，如下所示:
+我们可以定义 <i>buttonLabel</i> 属性定义为 mandatory，或按如下加入<i>required</i> 这种字符串类型的属性：
 
 ```js
 import PropTypes from 'prop-types'
@@ -816,17 +797,15 @@ Togglable.propTypes = {
 ```
 
 The console will display the following error message if the prop is left undefined:
-控制台将显示如下错误信息，如果props没有定义:
+如果这时属性是 undefined，控制台就会展示如下的错误信息
 
 ![](../../images/5/15.png)
 
-
-
 The application still works and nothing forces us to define props despite the PropTypes definitions. Mind you, it is extremely unprofessional to leave <i>any</i> red output to the browser console.
-应用仍然可以工作，尽管 PropTypes 定义了 PropTypes，但没有任何东西强迫我们定义 PropTypes。 请注意，将 i / i 红色输出留给浏览器控制台是非常不专业的。
+虽然应用程序仍然可以工作，没有任何东西强迫我们定义 PropTypes。 但它可以通过控制台飙红来提醒我们，因为不处理红色警告是非常不专业的做法。
 
 Let's also define PropTypes to the <i>LoginForm</i> component:
-让我们也为<i>LoginForm</i> 组件定义 PropTypes:
+让我们给 <i>LoginForm</i> 组件同样定义一个 PropTypes。
 
 ```js
 import PropTypes from 'prop-types'
@@ -851,32 +830,30 @@ LoginForm.propTypes = {
 ```
 
 If the type of a passed prop is wrong, e.g. if we try to define the <i>handleSubmit</i> prop as a string, then this will result in the following warning:
-如果传递的props的类型是错误的，例如，如果我们试图将<i>handleSubmit</i> props定义为一个字符串，那么这将导致如下警告:
+如果传递给 prop 的类型是错误的。例如，如果我们尝试定义 <i>handleSubmit</i> 成 string，那结果会出现如下警告：
 
 ![](../../images/5/16.png)
 
-
 ### ESlint
-埃斯林特
 
 In part 3 we configured the [ESlint](/en/part3/validation_and_es_lint#lint) code style tool to the backend. Let's take ESlint to use in the frontend as well.
-在第3章节中，我们将[ ESlint ](/ en / part3 / validation 和 es lint # lint)代码样式工具配置到后端。 让我们在前端也使用 ESlint。
+在第三部分中我们配置了[ESlint](/en/part3/validation_and_es_lint#lint) ，为后台代码控制了代码样式。让我们同样加到前台代码中。
 
-Create-react-app has installed ESlint to the project by default, so all that's left for us to do is to define our desired configuration in the <i>.eslintrc.js</i> file. 
-Create-react-app 默认已经在项目中安装了 ESlint，所以我们要做的就是在<i>中定义我们想要的配置。</i> 文件。
+Create-react-app has installed ESlint to the project by default, so all that's left for us to do is to define our desired configuration in the <i>.eslintrc.js</i> file.
+Create-react-app 已经默认为项目安装好了 ESlint， 所以我们需要做的就是定义自己的<i>.eslintrc.js</i> 文件
 
 *NB:* do not run the _eslint --init_ command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
 注意: 不要运行 eslint-- init 命令。 它将安装与 create-react-app 创建的配置文件不兼容的最新版本的 ESlint！
 
 Next, we will start testing the frontend and in order to avoid undesired and irrelevant linter errors we will install the [eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest) package:
-接下来，我们将开始测试前端，为了避免不希望出现的和不相关的连接错误，我们将安装[ eslint-jest-plugin ]( https://www.npmjs.com/package/eslint-plugin-jest )包:
+下面，我们将开始测试前端，以避免不想要和不相关的 lint 错误，我们先安装[eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest) 库：
 
 ```js
 npm add --save-dev eslint-plugin-jest
 ```
 
 Let's create a <i>.eslintrc.js</i> file with the following contents:
-让我们创建一个包含如下内容的 i. eslintrc.js / i 文件:
+让我们为 <i>.eslintrc.js</i> 添加如下内容
 
 ```js
 module.exports = {
@@ -931,7 +908,7 @@ module.exports = {
 ```
 
 Let's create [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) file with the following contents to the repository root
-让我们创建一个包含如下内容的[ . eslintignore ]( https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories 文件)文件到存储库根目录
+让我们创建一个 [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) 添加如下内容：
 
 ```bash
 node_modules
@@ -939,10 +916,10 @@ build
 ```
 
 Now the directories <em>build</em> and <em>node_modules</em> will be skipped when linting.
-现在，当进行 linting 时，将跳过目录 em build / em 和 em 节点模块 / em。
+现在 <em>build</em> 和 <em>node_modules</em> 这两个文件夹就不会被 lint 到了
 
 Let us also create a npm script to run the lint:
-让我们也创建一个 npm 脚本来运行 lint:
+同样让我们为 lint 创建一个 npm 脚本：
 
 ```js
 {
@@ -992,7 +969,6 @@ You can find the code for our current application in its entirety in the <i>part
 您可以在[ this github repository ]的<i>part5-7</i> 分支中找到我们当前应用的全部代码 https://github.com/fullstack-hy2020/part2-notes/tree/part5-7。
 
 </div>
-
 
 <div class="tasks">
 

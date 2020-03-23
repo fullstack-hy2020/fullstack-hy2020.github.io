@@ -10,26 +10,24 @@ lang: zh
 
 
 In the last two parts, we have mainly concentrated on the backend, and the frontend does not yet support the user management we implemented to the backend in part 4.
-在后两部分中，我们主要集中在后端，前端还不支持我们在第4章节中实现的后端用户管理。
+在上两部分中，我们主要关注于后端，但前端还不支持我们在第四部分中实现的后端用户管理。
 
+At the moment the frontend shows existing notes, and lets users change the state of a note from important to not important and vice versa. New notes cannot be added anymore because of the changes made to the backend in part 4: the backend now expects that a token verifying a user's identity is sent with the new note.
 
-At the moment the frontend shows existing notes, and lets users change the state of a note from important to not important and vice versa. New notes cannot be added anymore because of the changes made to the backend in part 4: the backend now expects that a token verifying a user's identity is sent with the new note. 
-目前前端显示现有的便笺，并允许用户将便笺的状态从重要变为不重要，反之亦然。 由于在第4章节中对后端进行了更改，因此不能再添加新的便笺: 后端现在希望随新便笺一起发送一个验证用户身份的令牌。
+目前前端能够展示已经存在的 Note，并且允许用户切换 Note 的重要程度。由于我们在第四部分的修改，新的 Note 不能再添加了：因为在新建 Note 前，后端现在需要 token 来验证用户。
 
+We'll now implement a part of the required user management functionality to the frontend. Let's begin with user login. Throughout this part we will assume that new users will not be added from the frontend.
 
-We'll now implement a part of the required user management functionality to the frontend. Let's begin with user login. Throughout this part we will assume that new users will not be added from the frontend. 
-现在，我们将在前端实现所需的用户管理功能的一部分。 让我们从用户登录开始。 在这一部分中，我们将假设不会从前端添加新用户。
+我们现在将实现前台的用户管理功能的一部分。首先从用户登录开始，在这一部分中，我们假设还不会从前端来添加用户。
 
+A login form has now been added to the top of the page. The form for adding new notes has also been moved to the top of the list of notes.
 
-A login form has now been added to the top of the page. The form for adding new notes has also been moved to the top of the list of notes. 
-登录表单现在已经添加到页面顶部。 添加新便笺的表单也被移到了便笺列表的顶部。
+登录表单已经添加到了页面顶端。添加 Note 的表单也已经移到了 Note 列表的顶部。
 
 ![](../../images/5/1e.png)
 
-
-
-The code of the <i>App</i> component now looks as follows: 
-I App / i 组件的代码现在如下:
+The code of the <i>App</i> component now looks as follows:
+<i>App</i> 组件的代码如下：
 
 ```js
 const App = () => {
@@ -103,26 +101,25 @@ Current application code can be found on [Github](https://github.com/fullstack-h
 当前的应用代码可以在[ Github ]( https://Github.com/fullstack-hy2020/part2-notes/tree/part5-1) ，branch<i>part5-1</i> 上找到。
 
 
-The login form is handled the same way we handled forms in 
-登录表单的处理方式与
-[part 2](/en/part2/forms). The app state has fields for  <i>username</i> and <i>password</i> to store the data from the form. The form fields have event handlers, which sychronize changes in the field to the state of the <i>App</i> component. The event handlers are simple: An object is given to them as a parameter, and they destructure the field <i>target</i> from the object and save its value to the state.
-[第2章节](/zh/part2)。 应用状态有用于<i>username</i> 和<i>password</i> 的字段，用于存储表单中的数据。 表单字段具有事件处理程序，这些事件处理程序将字段中的更改同步到<i>App</i> 组件的状态。 事件处理程序非常简单: 将一个对象作为参数提供给它们，它们从对象中重构字段<i>target</i>，并将其值保存为状态。
+The login form is handled the same way we handled forms in
+[part 2](/en/part2/forms). The app state has fields for <i>username</i> and <i>password</i> to store the data from the form. The form fields have event handlers, which synchronizes changes in the field to the state of the <i>App</i> component. The event handlers are simple: An object is given to them as a parameter, and they destructure the field <i>target</i> from the object and save its value to the state.
+
+登录表单的处理方式与我们第二部分所将的处理方式相同。当前应用状态有<i>username</i> 和 <i>password</i> 都存储在表单中。表单有事件处理逻辑，与<i>App</i>组件的状态保持同步。事件处理逻辑也很简单：一个对象作为参数传递给它们，它们将<i>target</i> field 从对象里解构出来，将它的值保存为状态
 
 ```js
 ({ target }) => setUsername(target.value)
 ```
 
-
-The method _handleLogin_, which is  responsible for sending the form, does not yet do anything. 
-负责发送表单的 handleLogin 方法尚未执行任何操作。
-
+The method _handleLogin_, which is responsible for sending the form, does not yet do anything.
+_handleLogin_ 方法负责发送表单，不做其他逻辑处理。
 
 Logging in is done by sending an HTTP POST request to server address <i>api/login</i>. Let's separate the code responsible for this request to its own module, to file <i>services/login.js</i>.
-登录是通过向服务器地址<i>api / login</i> 发送 HTTP POST 请求来完成的。 让我们将负责此请求的代码分离到它自己的模块中，以便将<i>services / login 文件归档。 Js</i>.
 
+通过<i>api/login</i>这个 HTTP POST 请求完成登录。让我们将它解耦到自己的 <i>services/login.js</i> 模块中
 
-We'll use <i>async/await</i> syntax instead of promises for the HTTP request: 
-对于 HTTP 请求，我们将使用<i>async / await</i> 语法而不是 promises:
+We'll use <i>async/await</i> syntax instead of promises for the HTTP request:
+
+我们会使用<i>async/await</i> 语法而不再使用 promises，代码如下：
 
 ```js
 import axios from 'axios'
@@ -136,9 +133,8 @@ const login = async credentials => {
 export default { login }
 ```
 
-
-The method for handling the login can be implemented as follows: 
-处理登录的方法可以实现如下:
+The method for handling the login can be implemented as follows:
+处理登录的方法可以按如下方式实现：
 
 ```js
 import loginService from './services/login' 
@@ -173,21 +169,20 @@ const App = () => {
 }
 ```
 
-
 If the login is successful, the form fields are emptied <i>and</i> the server response (including a <i>token</i> and the user details) is saved to the <i>user</i> field of the application's state.
-如果登录成功，表单字段将清空 i，服务器响应(包括<i>token</i> 和用户详细信息)将保存到应用状态的<i>user</i> 字段。
 
+如果登录成功，表单 field 被清空，并且服务器响应（包括 token 和用户信息）被存储到
+应用状态的<i>user</i> field 。
 
-If the login fails, or running the function _loginService.login_ results in an error, the user is notified. 
-如果登录失败，或者运行 loginService.login 函数导致错误，则会通知用户。
+If the login fails, or running the function _loginService.login_ results in an error, the user is notified.
+如果登录失败，或者执行 _loginService.login_ 产生了错误，则会通知用户。
 
+User is not notified about a successful login in any way. Let's modify the application to show the login form only <i>if the user is not logged in</i> so _user === null_. The form for adding new notes is shown only if <i>user is logged in</i>, so <i>user</i> contains the user details.
 
-User is not notified about a successful login in any way. Let's modify the application to show the login form only <i>if the user is not logged in</i> so _user === null_. The form for adding new notes is shown only if <i>user is logged in</i>, so <i>user</i> contains the user details. 
-不会以任何方式通知用户成功登录。 让我们修改应用，只有在用户没有登录 /<i>所以用户 null 时才显示登录表单 i。 只有当 i user 登录</i> 时才会显示添加新便笺的表单，因此<i>user</i> 包含用户详细信息。
+总之用户登录成功是不会通知用户的。让我们将应用修改为，只有当用户没有登录时才显示登录表单，即 _user === null_ 只有当用户登录成功后才会显示添加新的 Note，这样 <i>user</i> 状态才会包含信息
 
-
-Let's add two helper functions to the <i>App</i> component for generating the forms: 
-让我们在<i>App</i> 组件中添加两个 helper 函数来生成表单:
+Let's add two helper functions to the <i>App</i> component for generating the forms:
+让我们增加两个 helper 函数给 <i>App</i> 组件来生成表单。
 
 ```js
 const App = () => {
@@ -233,9 +228,8 @@ const App = () => {
 }
 ```
 
-
 and conditionally render them:
-有条件地提供给他们:
+并按照条件来渲染它们：
 
 ```js
 const App = () => {
@@ -279,8 +273,8 @@ const App = () => {
 }
 ```
 
-A slightly odd looking, but commonly used [React trick](https://reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator) is used to render the forms conditionally: 
-一个看起来有点奇怪，但是常用的[ React trick ]( https://reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator )被用来有条件地渲染表单:
+A slightly odd looking, but commonly used [React trick](https://reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator) is used to render the forms conditionally:
+虽然看起来有点古怪，但在 React 中十分常见的一个[React trick](https://reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator) ，即按条件渲染表单：
 
 ```js
 {
@@ -288,12 +282,11 @@ A slightly odd looking, but commonly used [React trick](https://reactjs.org/docs
 }
 ```
 
-
-If the first statement evaluates false, or is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy), the second statement ( generating the form ) is not executed at all. 
-如果第一个语句计算为 false，或者是[ falsy ]( https://developer.mozilla.org/en-us/docs/glossary/falsy ) ，那么根本不执行第二个语句(生成表单)。
+If the first statement evaluates false, or is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy), the second statement ( generating the form ) is not executed at all.
+如果第一个表达式计算为 false 或[falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy)， 则不会执行第二个语句（生成表单）
 
 We can make this even more straightforward by using the [conditional operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator):
-我们可以通过使用条件运算符 https://developer.mozilla.org/en-us/docs/web/javascript/reference/operators/conditional_operator 来使这个问题变得更加简单:
+我们可以使用条件运算[conditional operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator)来让这个逻辑表达:得更直白一些：
 
 ```js
 return (
@@ -315,13 +308,12 @@ return (
 )
 ```
 
-
 If _user === null_ is [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), _loginForm()_ is executed. If not, _noteForm()_.
-如果用户 null 为[ truthy ]( https://developer.mozilla.org/en-us/docs/glossary/truthy ) ，将执行 loginForm ()。
 
+如果 _user === null_ 是 [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) _loginForm()_ 就会执行。如果不是，就执行 _noteForm()_.
 
-Let's do one more modification. If user is logged in, their name is shown on the screen: 
-让我们再做一个修改，如果用户登录，他们的名字会显示在屏幕上:
+Let's do one more modification. If user is logged in, their name is shown on the screen:
+让我们再多做一点修改：如果用户登录，它们的名字就会展示在屏幕上：
 
 ```js
 return (
@@ -346,23 +338,22 @@ return (
 )
 ```
 
+The solution looks a bit ugly, but we'll leave it for now.
+这种解决方案看起来有点丑，但我们先这么放在这。
 
-The solution looks a bit ugly, but we'll leave it for now. 
-这个解决方案看起来有点丑陋，但是我们暂时不讨论它。
-
-
-Our main component <i>App</i> is at the moment way too large. The changes we did now are a clear sign that the forms should be refactored into their own components. However, we will leave that for an optional excercise. 
-我们的主要组件<i>App</i> 目前太大了。 我们现在所做的更改是一个明确的信号，表单应该重构到它们自己的组件中。 但是，我们将把它留给一个可选的练习。
+Our main component <i>App</i> is at the moment way too large. The changes we did now are a clear sign that the forms should be refactored into their own components. However, we will leave that for an optional excercise.
+我们的主组件 <i>App</i> 现在看起来十分臃肿。我们现在做的修改暗示着，表单应该重构到它自己的组件中。但我们把这个作为可选的练习放到课后。
 
 
 Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-2), branch <i>part5-2</i>.
 当前的应用代码可以在[ Github ]( https://Github.com/fullstack-hy2020/part2-notes/tree/part5-2) ，branch<i>part5-2</i> 上找到。
 
 ### Creating new notes
-创造新的便笺
+
+创建新的 Note
 
 The token returned with a successful login is saved to the application state <i>user</i> field <i>token</i>:
-成功登录后返回的令牌保存为 application state<i>user</i> field<i>token</i>:
+成功登录后，token 被返回并存储到了 <i>user</i> 的 <i>token</i> 状态中
 
 ```js
 const handleLogin = async (event) => {
@@ -381,12 +372,11 @@ const handleLogin = async (event) => {
 }
 ```
 
-Let's fix creating new notes to work with the backend. This means adding the token of the logged in user to the Authorization header of the HTTP request. 
-让我们修复创建新的便笺来使用后端的问题。 这意味着将登录用户的令牌添加到 HTTP 请求的 Authorization 头。
+Let's fix creating new notes to work with the backend. This means adding the token of the logged in user to the Authorization header of the HTTP request.
+让我们修复创建新 Note 的代码来和后台对接好。也就是说把登录成功用户的 token 放到 HTTP 请求的认证头中。
 
-
-The <i>noteService</i> module changes like so: 
-I noteService / i 模块的变化如下:
+The <i>noteService</i> module changes like so:
+<i>noteService</i> 模块修改如下：
 
 ```js
 import axios from 'axios'
@@ -424,13 +414,13 @@ const update = (id, newObject) => {
 export default { getAll, create, update, setToken } // highlight-line
 ```
 
+The noteService module contains a private variable _token_. Its value can be changed with a function _setToken_, which is exported by the module. _create_, now with async/await syntax, sets the token to the <i>Authorization</i> header. The header is given to axios as the third parameter of the <i>post</i> method.
 
-The noteService module contains a private variable _token_. Its value can be changed with a function _setToken_, which is exported by the module. _create_, now with async/await syntax, sets the token to the <i>Authorization</i> header. The header is given to axios as the third parameter of the <i>post</i> method. 
-Noteservice 模块包含一个私有变量 token。 它的值可以通过一个函数 setToken 进行更改，该函数由模块导出。 Create，现在使用 async / await 语法，将标记设置为<i>Authorization</i> 头。 头部给出了公理作为<i>post</i> 方法的第三个参数。
+noteService 模块包含一个私有变量 _token_。它的值可以通过 _setToken_ 函数来改变，这个函数通过模块对外开放。 _create_ 方法现在利用 async/await 语法，在 token 塞到了认证头中。头信息作为第三个入参数放到了 axios 的 <i>post</i> 方法中。
 
+The event handler responsible for log in must be changed to call the method <code>noteService.setToken(user.token)</code> with a successful log in:
 
-The event handler responsible for log in must be changed to call the method <code>noteService.setToken(user.token)</code> with a successful log in: 
-必须更改负责登录的事件处理程序，以调用成功登录的方法代码 noteService.setToken (user.token) / 代码:
+登录的事件处理改为，对登录成功的用户必须执行 <code>noteService.setToken(user.token)</code>
 
 ```js
 const handleLogin = async (event) => {
@@ -450,60 +440,59 @@ const handleLogin = async (event) => {
 }
 ```
 
-
 And now adding new notes works again!
-现在添加新的便笺又有用了！
+现在添加新的 Note 又可以正常工作了
 
 ### Saving the token to browsers local storage
-# # # 将令牌保存到浏览器本地存储
 
+将 token 保存到浏览器的本地存储中
 
-Our application has a flaw: When the page is rerendered, information of the user's login dissappears. This also slows down development. For example when we test creating new notes, we have to login again every single time. 
-我们的应用有一个缺陷: 当页面重新运行时，用户的登录信息就会消失。 这也减缓了开发速度。 例如，当我们测试创建新便笺时，我们每次都必须重新登录。
+Our application has a flaw: When the page is rerendered, information of the user's login dissappears. This also slows down development. For example when we test creating new notes, we have to login again every single time.
 
+我们的应用有一个缺陷，就是当页面重新渲染时，user 的登录信息就没了。这同样会降低开发速度。比如当我们想要测试创建一个新的 Note，我们每次都要重新登录。
 
-This problem is easily solved by saving the login details to [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage). Local Storage is a [key-value](https://en.wikipedia.org/wiki/Key-value_database) database in the browser. 
-这个问题很容易解决，只需要将登录信息保存到[本地存储](本地 https://developer.mozilla.org/en-us/docs/web/api/storage )。 本地存储是浏览器中的一个[键值]( https://en.wikipedia.org/wiki/key-value_database )数据库。
+This problem is easily solved by saving the login details to [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage). Local Storage is a [key-value](https://en.wikipedia.org/wiki/Key-value_database) database in the browser.
 
+通过将登录信息存储到一个本地浏览器的 [key-value](https://en.wikipedia.org/wiki/Key-value_database) 数据库中，问题就能够被简单地解决掉了。
 
-It is very easy to use. A <i>value</i> corresponding to a certain <i>key</i> is saved to the database with method [setItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem). For example: 
-它非常容易使用。 对应于某个<i>键</i> 的<i>value</i> 通过方法[ setItem ]( https://developer.mozilla.org/en-us/docs/web/api/storage/setItem )保存到数据库中。 例如:
+It is very easy to use. A <i>value</i> corresponding to a certain <i>key</i> is saved to the database with method [setItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem). For example:
+
+它的使用十分简单。一个值对应一个存储在数据库中的特定的键，通过 [setItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem)方法进行保存，例如：
 
 ```js
 window.localStorage.setItem('name', 'juha tauriainen')
 ```
 
-
-saves the string given as the second parameter as the value of key <i>name</i>. 
-将作为第二个参数给定的字符串保存为 key<i>name</i> 的值。
-
+saves the string given as the second parameter as the value of key <i>name</i>.
+将字符串作为第二个参数，存储到了以<i>name</i>为键的键值对中。
 
 The value of a key can be found with method [getItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem):
-密钥的值可以通过方法[ getItem ]( https://developer.mozilla.org/en-us/docs/web/api/storage/getItem )找到:
+
+该键的值可以通过[getItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/getItem)方法获得。
 
 ```js
 window.localStorage.getItem('name')
 ```
 
+and [removeItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/removeItem) removes a key.
 
-and [removeItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/removeItem) removes a key. 
-和[ removeItem ]( https://developer.mozilla.org/en-us/docs/web/api/storage/removeItem )移除一个密钥。
+[removeItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/removeItem) 可以删除一个键
 
+Values in the storage stay even when the page is rerendered. The storage is [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin)-specific so each web application has its own storage.
 
-Values in the storage stay even when the page is rerendered. The storage is [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin)-specific so each web application has its own storage. 
-即使页重新运行，存储中的值也会保持不变。 存储是[ origin ]( https://developer.mozilla.org/en-us/docs/glossary/origin )特定的，因此每个 web 应用都有自己的存储空间。
+即使页面刷新，存储中的值也会保留。这个存储是原生指定[origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin)的，所以每个 web 应用都有自己的存储空间。
 
+Let's extend our application so that it saves the details of a logged in user to the local storage.
 
-Let's extend our application so that it saves the details of a logged in user to the local storage. 
-让我们扩展应用，以便将登录用户的详细信息保存到本地存储中。
-
+让我们将我们的应用扩展来将用户的登录信息存储到本地存储中。
 
 Values saved to the storage are [DOMstrings](https://developer.mozilla.org/en-US/docs/Web/API/DOMString), so we cannot save a JavaScript object as is. The object has to be first parsed to JSON with the method _JSON.stringify_. Correspondigly, when a JSON object is read from the local storage, it has to be parsed back to JavaScript with _JSON.parse_.
-保存到存储中的值是[ DOMstrings ]( https://developer.mozilla.org/en-us/docs/web/api/domstring ) ，因此我们不能保存 JavaScript 对象。 必须首先使用 JSON.stringify 方法将对象解析为 JSON。 相应地，当从本地存储读取 JSON 对象时，必须使用 JSON.parse 将其解析回 JavaScript。
 
+存储到本地存储的值称为[DOMstrings](https://developer.mozilla.org/en-US/docs/Web/API/DOMString)，所以我们不能存储一个 Javascript 对象。对象首先要通过
+_JSON.stringify_ 方法转换成 JSON。相应的，当从本地存储读取 JSON 对象时，还要使用 _JSON.parse_ 来将其解析回 Javascript。
 
-Changes to the login method are as follows: 
-登录方法的更改如下:
+Changes to the login method are as follows:
+我们将登录方法改为如下方式：
 
 ```js
   const handleLogin = async (event) => {
@@ -528,24 +517,20 @@ Changes to the login method are as follows:
   }
 ```
 
-
-The details of a logged in user are now saved to the local storage, and they can be viewed on the console: 
-登录用户的详细信息现在保存到本地存储中，可以在控制台上查看:
+The details of a logged in user are now saved to the local storage, and they can be viewed on the console:
+现在用户的详细信息被存储到本地存储了，并且能够在控制台看到。
 
 ![](../../images/5/3e.png)
 
-
-
 We still have to modify our application so that when we enter the page, the application checks if user details of a logged in user can already be found from the local storage. If they can, the details are saved to the state of the application and to <i>noteService</i>.
-我们仍然需要修改我们的应用，以便当我们进入页面时，应用检查是否已经在本地存储中找到登录用户的用户详细信息。 如果可以，详细信息将保存到应用的状态和<i>noteService</i>。
+我们仍然需要修改我们的应用，以便当我们进入页面时，应用会检查是否能在本地存储中找到登录用户的详细信息，如果可以九江信息保存到应用的状态中，以及<i>noteService</i>中
 
+The right way to do this is with an [effect hook](https://reactjs.org/docs/hooks-effect.html): A mechanism we first encountered in [part 2](/en/part2/getting_data_from_server#effect-hooks), and used to fetch notes from the server to the frontend.
 
-The right way to do this is with an [effect hook](https://reactjs.org/docs/hooks-effect.html): A mechanism we first encountered in [part 2](/en/part2/getting_data_from_server#effect-hooks), and used to fetch notes from the server to the frontend. 
-正确的方法是使用[ effect hook ]( https://reactjs.org/docs/hooks-effect.html ) : 这是我们在[ part 2]中第一次遇到的机制(/ en / part2 / 从服务器 # effect-hooks 获取数据) ，用于从服务器向前端获取便笺。
-
+正确的方式是用一个事件钩子[effect hook](https://reactjs.org/docs/hooks-effect.html)： 这种机制我们在第二部分中见到过，当时是用来从服务器中获取所有 Note。
 
 We can have multiple effect hooks, so let's create a second one to handle the first loading of the page:
-我们可以有多个效果钩子，所以让我们创建第二个来处理页面的第一次加载:
+我们可以有多个事件钩子，所以我们来创建一个来处理首次登录页面：
 
 ```js
 const App = () => {
@@ -579,25 +564,25 @@ const App = () => {
 }
 ```
 
-
 The empty array as the parameter of the effect ensures that the effect is executed only when the component is rendered [for the first time](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect).
-作为效果参数的空数组确保只有当组件[第一次]渲染时才执行效果( https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect )。
 
+这个作为事件参数的空数组确保在第组件渲染完成后被执行。
 
-Now a user stays logged in to the application forever. We should probably add a <i>logout</i> functionality which removes the login details from the local storage. We will however leave it for an exercise. 
-现在，一个用户将永远保持对应用的登录。 我们可能应该添加一个<i>logout</i> 功能，从本地存储中删除登录详细信息。 然而，我们将把它留给一个练习。
+Now a user stays logged in to the application forever. We should probably add a <i>logout</i> functionality which removes the login details from the local storage. We will however leave it for an exercise.
 
+现在用户可以永久地保持登录状态了，我们应该实现一个登出功能来删除登录信息。同样我们把这个作为一个课后作业。
 
-It's possible to log out a user using the console, and that is enough for now. 
-使用控制台注销用户是可行的，这就足够了。
+It's possible to log out a user using the console, and that is enough for now.
 You can log out with the command:
-您可以使用如下命令注销:
+
+我们也可以通过控制台来登出用户，现在我们就用这种方法，执行以下命令来登出：
 
 ```js
 window.localStorage.removeItem('loggedNoteappUser')
 ```
-or with the command which empties localstorage completely: 
-或者完全清空本地存储的命令:
+
+or with the command which empties localstorage completely:
+或者完全清空本地存储：
 
 ```js
 window.localStorage.clear()
@@ -608,7 +593,6 @@ Current application code can be found on [Github](https://github.com/fullstack-h
 当前的应用代码可以在[ Github ]( https://Github.com/fullstack-hy2020/part2-notes/tree/part5-3) ，branch<i>part5-3</i> 上找到。
 
 </div>
-
 
 <div class="tasks">
 
