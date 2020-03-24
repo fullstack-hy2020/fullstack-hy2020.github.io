@@ -380,7 +380,7 @@ const Note = ({ note }) => {
 }
 // highlight-end
 
-const App = ({ notes }) => 
+const App = ({ notes }) => {
   return (
     <div>
       <h1>Notes</h1>
