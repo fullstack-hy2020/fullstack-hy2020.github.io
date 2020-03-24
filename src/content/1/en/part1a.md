@@ -482,7 +482,7 @@ const App = () => {
 }
 ```
 
-**WARNING** create-react-app automatically makes the project a git repository unless the application is created within an already existing repository. Most likely you **do not want** the project becoming a repository, so run the command _rm -rf .git_ in the root of the project.
+**WARNING** create-react-app automatically makes the project a git repository unless the application is created within an already existing repository. Most likely you **do not want** the project becoming a repository, so run the command _rm -rf .git_ in the root of the project. You might have to use the command _npm start_ after that to run the server file again.
 
 <h4>1.2: course information, step2</h4>
 
