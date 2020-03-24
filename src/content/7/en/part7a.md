@@ -204,7 +204,6 @@ We wrap the components to be rendered based on the url with a [Switch](https://r
 <!-- Switch saa aikaan sen, että renderöitävä komponentti on ensimmäinen, jonka <i>path</i> vastaa osoiterivin polkua. -->
 The switch works by rendering the first component whose <i>path</i> matches the url in the browser's address bar.
 
-<!-- Huomaa, että komponenttien järjestys on tärkeä. Jos laittaisimme ensimmäiseksi komponentin <i>Home</i>, jonka polku on <i> path="/"</i>, ei mitää muuta komponenttia koskaan renderöitäisi, sillä "olematon" polku on minkä tahansa polun alkuosa: -->
 Note that the order of the components is important. If we would put the <i>Home</i>-component, whose path is <i> path="/"</i>, first, nothing else would ever get rendered because the "nonexistent" path "/" is the start of every path:
 
 ```js 
@@ -276,7 +275,6 @@ We define parametrized urls in the routing in <i>App</i>-component as follows:
 </Router>
 ```
 
-<!-- Yksittäisen muistiinpanon näkymän renderöivä route siis määritellään "expressin tyyliin" merkkaamalla reitin parametrina oleva osa merkinnällä <i>:id</i> -->
 We define the route rendering a specific note "express style" by marking the parameter with a colon <i>:id</i>
 
 ```js
@@ -305,7 +303,6 @@ const Note = ({ notes }) => {
 }
 ```
 
-<!-- Komponentti _Note_ saa parametrikseen kaikki muistiinpanot propsina <i>notes</i> ja se pääsee urlin yksilöivään osaan, eli näytettävän muistiinpanon id:hen käsiksi  react-routerin funktion [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) avulla.  -->
 The _Note_ component receives all of the notes as props <i>notes</i>, and it can access the url parameter (the id of the note to be displayed) with the [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) function of the react-router.
 
 ### useHistory
@@ -378,8 +375,8 @@ With this function, the component can access a [history](https://reacttraining.c
 <!-- Kirjautumisen yhteydessä kutsutaan history-olion metodia push. Komento _history.push('/')_ saa aikaan sen, että selaimen osoiteriville tulee osoitteeksi _/_ ja sovellus renderöi osoitetta vastaavan komponentin <i>Home</i>. -->
 With user log in, we call the push method of the history object. The  _history.push('/')_ call causes the browser's url to change to _/_ and the application renders the corresponding component <i>Home</i>.
 
-<!-- Käyttämämme react-router-kirjaston funktiot [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) ja [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) ovat molemmat hook-funktiota, samaan tapaan kuin esim. moneen kertaan käyttämämme useState ja useEffect. Kuten muistamme osasta 1, hook-funktioiden käyttöön liittyy tiettyjä [sääntöjä](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot). Create-react-app on konfiguroitu varoittamaan, jos hookien säännöt rikkoutuvat, esim. jos hook-funktiota yritetään kutsua ehtolauseen sisältä.  -->
-Both [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) and [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) are hook-functions, just like useState and useEffect which we have used many times now.  As you remember from part 1, there are some [rules](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot) to using hook-functions. Create-react-app has been configured to warn you if you break these rules, for example, by calling a hook-function from a conditional statement.
+
+Both [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) and [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) are hook-functions, just like useState and useEffect which we have used many times now.  As you remember from part 1, there are some [rules](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks) to using hook-functions. Create-react-app has been configured to warn you if you break these rules, for example, by calling a hook-function from a conditional statement.
 
 ### redirect
 
@@ -459,7 +456,6 @@ We define an element common for modern web apps called <i>footer</i>, which defi
 
 ### Parameterized route revisited
 
-<!-- Sovelluksessa on eräs hieman ikävä seikka. Komponentti _Note_ saa propseina kaikki muistiinpanot, vaikka se näyttää niistä ainoastaan sen, jonka id vastaa urlin parametroitua osaa: -->
 Our application has a flaw. The _Note_ component receives all of the notes, even though it only displays the one whose id matches the url parameter:
 
 
@@ -486,10 +482,8 @@ const Note = ({ note }) => {
 }
 ```
 
-<!-- Eräs tapa muuttaa sovellusta olisi selvittää näytettävän muistiinpanon _id_ komponentissa _App_ react-routerin hook-funktion [useRouteMatch](https://reacttraining.com/react-router/web/api/Hooks/useroutematch) avulla. -->
 One way to do this would be to use react-router's [useRouteMatch](https://reacttraining.com/react-router/web/api/Hooks/useroutematch) hook to figure out the id of the note to be displayed in the _App_ component.
 
-<!-- <i>useRouteMatch</i>-hookin käyttö [ei ole](https://github.com/ReactTraining/react-router/issues/7015)  mahdollista samassa komponentissa, joka määrittelee sovelluksen reititettävän osan. Siirretäänkin _Router_-komponenttien käyttö komponentin _App_ ulkopuolelle: -->
 It is not possible to use <i>useRouteMatch</i>-hook in the component which defines the routed part of the application. Let's move the use of the _Router_ components from _App_:
 
 ```js
@@ -552,7 +546,6 @@ Every time the component is rendered, so practically every time the browser's ur
 const match = useRouteMatch('/notes/:id')
 ```
 
-<!-- Jos url on muotoa _/notes/:id_ eli vastaa yksittäisen muistiinpanon urlia, saa muuttuja _match_ arvokseen olion, jonka polun parametroitu osa, eli muistiinpanon id voidaan selvittää, ja näin saadaan haettua renderöitävä muistiinpano -->
 If the url matches _/notes/:id_, the match variable will contain an object from which we can access the parametrized part of the path, the id of the note to be displayed, and we can then fetch the correct note to display.
 
 ```js

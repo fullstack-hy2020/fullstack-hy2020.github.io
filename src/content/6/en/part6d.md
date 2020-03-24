@@ -11,7 +11,6 @@ lang: en
 So far we have used our redux-store with the help of the hook](https://react-redux.js.org/api/hooks)-api from react-redux.
 Practically this has meant using the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) functions.
 
-<!-- Tarkastellaan tämän osan lopuksi toista, hieman vanhempaa ja jonkin verran monimutkaisempaa tapaa reduxin käyttöön, eli [react-redux](https://github.com/reactjs/react-redux) -kirjaston määrittelemää [connect](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)-funktiota. -->
 To finish this part we will look into another older and  more complicated way to use redux, the [connect](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)-function provided by react-redux.
 
 <!-- Uusissa sovelluksissa kannattaa ehdottomasti käyttää hook-apia, mutta connectin tuntemisesta on hyötyä vanhempia reduxia käyttäviä projekteja ylläpidettävissä. -->
@@ -19,7 +18,6 @@ In new applications you should absolutely use the hook-api, but knowing how to u
 
 ### Using the connect-function to share the redux store to components
 
-<!-- Muutetaan sovelluksen komponenttia <i>Notes</i>, siten että korvataan hook-apin eli funktioiden _useDispatch_ ja _useSelector_ käyttö funktioilla _connect_. Komponentin seuraavat osat tulee siis muuttaa: -->
 Let's modify the <i>Notes</i> component so that instead of using the hook-api (the _useDispatch_ and  _useSelector_ functions ) it uses the _connect_-function. 
 We have to modify the following parts of the component:
 
@@ -597,8 +595,6 @@ What about the _useState_-hook, which provides components with their own state? 
 <!-- Kannattaako reduxia käyttää aina? Tuskinpa. Reduxin kehittäjä Dan Abramov pohdiskelee asiaa artikkelissaan [You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367) -->
 Should we always use redux? Propably not. Dan Abramov, the developer of redux, discusses this in his article [You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367).
 
-<!-- Reduxin kaltainen tilankäsittely on mahdollista toteuttaa nykyään myös ilman reduxia, käyttämällä Reactin [context](https://reactjs.org/docs/context.html)-apia ja  [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer)-hookia, lisää asiasta esim -->
-<!-- [täällä](https://www.simplethread.com/cant-replace-redux-with-hooks/) ja [täällä](https://hswolff.com/blog/how-to-usecontext-with-usereducer/).  Tutustumme tähän tapaan myös kurssin [yhdeksännessä osassa](/en/part9). -->
 Nowadays it is possible to implement redux-like state management without redux by using the React [context](https://reactjs.org/docs/context.html)-api and the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer)-hook. 
 More about this [here](https://www.simplethread.com/cant-replace-redux-with-hooks/) and [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). We will also practice this in 
 [part 9](/en/part9).

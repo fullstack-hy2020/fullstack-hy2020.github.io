@@ -1098,7 +1098,6 @@ which is a shorthand for
 }
 ```
 
-<!-- Yleensä selektorifunktiot ovat mielenkiinoisempia, ja valitsevat vain osan redux-storen sisällöstä. Voisimme esimerkiksi hakea storesta ainoastaan tärkeät muistiinpanot seuraavasti -->
 Usually selector functions are a bit more interesting, and return only selected parts of the contents of the redux-store. 
 We could for example return only notes marked as important:
 
