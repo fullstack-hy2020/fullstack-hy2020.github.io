@@ -533,7 +533,7 @@ Koska olion kenttien nimet ovat samat kuin niiden arvon määrittelevien muuttuj
 }
 ```
 
-Eli moduulin määrittely yksinkertaisuu seuraavaan muotoon 
+Eli moduulin määrittely yksinkertaistuu seuraavaan muotoon 
 
 ```js
 import axios from 'axios'
