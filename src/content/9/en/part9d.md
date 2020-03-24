@@ -1183,7 +1183,7 @@ Form handling can sometimes be quite a nuisance in React. That's why we have dec
 The code for the form can be found from <i>src/AddPatientModal/AddPatientForm.tsx</i> and some form field helpers can be found from <i>src/AddPatientModal/FormField.tsx</i>.
 
 <!-- In the beginning of <i>AddPatientForm.tsx</i> you can see, that we have created a type for our form values, called simply <i>PatientFormValues</i>. It is a narrowed down version of <i>Patient</i>, with the properties <i>id</i> and <i>entries</i> omitted, because we don't want the user to be able to submit those when creating a new patient. <i>id</i> is created by the backend and <i>entries</i> can only be added for existing patients. -->
-Looking at the top of the <i>AddPatientForm.tsx</i> you can see we have created a type for our form values, called simply <i>PatientFormValues</i>. The type is a modified version of the <i>Patient</i> type, with the <i>id</i> and <i>entries</i> properties omitted. We don't weant the user to be able to submit those when creating a new patient. The <i>id</i> is created by the backend and <i>entries</i> can only be added for existing patients.
+Looking at the top of the <i>AddPatientForm.tsx</i> you can see we have created a type for our form values, called simply <i>PatientFormValues</i>. The type is a modified version of the <i>Patient</i> type, with the <i>id</i> and <i>entries</i> properties omitted. We don't want the user to be able to submit those when creating a new patient. The <i>id</i> is created by the backend and <i>entries</i> can only be added for existing patients.
 
 ```js
 export type PatientFormValues = Omit<Patient, "id" | "entries">;
