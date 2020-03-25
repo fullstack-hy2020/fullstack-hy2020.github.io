@@ -275,8 +275,7 @@ However, MVC-architecture is not usually mentioned when talking about React-appl
 
 Because both React and [Flux](https://facebook.github.io/flux/docs/in-depth-overview.html#content) were created at Facebook one could say that using React only as a UI library is the intended use case. Following the Flux-architecture adds some overhead to the application, and if were talking about a small application or prototype it might be a good idea to use React "wrong", since [over-engineering](https://en.wikipedia.org/wiki/Overengineering) rarely yields an optimal result.
 
-<!-- Kuten [osan 6](/osa6/connect#redux-ja-komponenttien-tila) lopussa mainittiin, Reactin [Context-api](https://reactjs.org/docs/context.html) tarjoaa erään vaihtoehtoisen tavan keskitetylle tilan hallinnalle ilman tarvetta ulkoisille kirjastoille kuten reduxille. Katso lisää esim. [täällä](https://www.simplethread.com/cant-replace-redux-with-hooks/) ja [täällä](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). -->
-As I mentioned at the end of [part 6](/osa6/connect#redux-ja-komponenttien-tila), the React [Context-api](https://reactjs.org/docs/context.html) offers one alternative solution for centralized state menagement without the need for third party libraries such as redux. You can read more about this i.e [here](https://www.simplethread.com/cant-replace-redux-with-hooks/) and [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/).
+As I mentioned at the end of [part 6](/en/part6/connect#redux-and-the-component-state), the React [Context-api](https://reactjs.org/docs/context.html) offers one alternative solution for centralized state menagement without the need for third party libraries such as redux. You can read more about this i.e [here](https://www.simplethread.com/cant-replace-redux-with-hooks/) and [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/).
 
 ### React/node-application security
 
@@ -353,7 +352,6 @@ The dependencies can be brought up to date by updating the file <i>package.json<
 <!-- Riippuvuuksien turvallisuus voidaan tarkistaa npm:n [audit](https://docs.npmjs.com/cli/audit)-komennolla, joka vertaa käytettyjen riippuvuuksien versioita keskitetyssä virhetietokannassa listattuihin tietoturvauhan sisältäviin riippuvuuksien versioihin. -->
 The npm [audit](https://docs.npmjs.com/cli/audit) command can be used to check the security of debendencies. It compares the version numbers of the debendencies in your application to a list of the version numbers of debendencies containing known security threats in a centralized error database. 
 
-<!-- Komennon _npm audit_ suorittaminen viime vuoden osan 4 mallivastaukselle antaa pitkän listan valituksia ja korjausehdotuksia. Seuraavassa osa raportista: -->
 Running _npm audit_ on an exercise from part 4 of last year's course print a long list of complaints and suggested fixes. 
 Below is a part of the raport:
 
@@ -546,8 +544,7 @@ The JavaScript developer community has produced a large variety of useful librar
 One good place to find libraries is https://applibslist.xyz/.
 Below is listed some libraries recommended by trustworthy parties.
 
-<!-- Jos sovelluksessa on tarve operoida hieman monimutkaisemman datan kanssa, on jo [osassa 4](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet#tehtavat-4-3-4-7) suositeltu kirjasto [lodash](https://www.npmjs.com/package/lodash) hyvä lisä. Jos olet mieltynyt funktionaaliseen ohjelmointityyliin, kannattaa harkita [ramda](https://ramdajs.com/):n käyttöä. -->
-If your application has to handle complicated data [lodash](https://www.npmjs.com/package/lodash), which we recommended in [part 4](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet#tehtavat-4-3-4-7), is a good library to use. If you prefer functional programming style, you might consider using [ramda](https://ramdajs.com/).
+If your application has to handle complicated data [lodash](https://www.npmjs.com/package/lodash), which we recommended in [part 4](/en/part4/structure_of_backend_application_introduction_to_testing#exercises-4-3-4-7), is a good library to use. If you prefer functional programming style, you might consider using [ramda](https://ramdajs.com/).
 
 <!-- Jos sovelluksessa käsitellään aikaa, tarjoavat [moment](https://momentjs.com/) ja hieman uudempi [date-fns](https://github.com/date-fns/date-fns) siihen hyvän välineistön. -->
 If you are handling times and dates, [moment](https://momentjs.com/) and a new(er) release [date-fns](https://github.com/date-fns/date-fns) offer good tools for that.

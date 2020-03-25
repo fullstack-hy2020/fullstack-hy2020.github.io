@@ -807,7 +807,7 @@ Määrittele joillekin sovelluksesi komponenteille PropTypet.
 
 Ota projektiin käyttöön ESlint. Määrittele haluamasi kaltainen konfiguraatio. Korjaa kaikki lint-virheet.
 
-Create-react-app on asentanut projektille eslintin valmiiksi, joten ei tarvita muuta kun sopiva konfiguraatio tiedoston <i>.eslintrc.js</i>.
+Create-react-app on asentanut projektille eslintin valmiiksi, joten ei tarvita muuta kun sopiva konfiguraatio tiedostoon <i>.eslintrc.js</i>.
 
 **HUOM:** älä suorita komentoa _eslint --init_. Se asentaa uuden version eslintistä joka on epäsopiva create-react-app:in konfiguraatioiden kanssa!
 

@@ -878,7 +878,7 @@ const App = () => {
 ```
 
 
-### Redux-storen välittäminen eri komponenteille
+### Forwarding Redux-Store to various components
 
 Aside from the reducer, our application is in one file. This is of course not sensible, and we should separate <i>App</i> into its own module. 
 
@@ -920,7 +920,7 @@ ReactDOM.render(
 ```
 
 <!-- Uutta tässä on se, että sovellus on määritelty react redux -kirjaston tarjoaman [Provider](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store)-komponentin lapsena ja että sovelluksen käyttämä store on annettu Provider-komponentin attribuutiksi <i>store</i>.  -->
-Note, that the application is now defined as a child of a [Provider](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store) -component provided by the react redux library.
+Note, that the application is now defined as a child of a [Provider](https://react-redux.js.org/api/provider) -component provided by the react redux library.
 The application's store is given to the Provider as its attribute <i> 
 store</i>.
 
@@ -1081,7 +1081,7 @@ const App = () => {
 ```
 
 <!-- <i>useSelector</i> saa parametrikseen funktion, joka hakee tai valitsee (engl. select) tarvittavan datan redux-storesta. Tarvitsemme nyt kaikki muistiinpanot, eli selektorifunktiomme palauttaa koko staten, eli on muotoa  -->
-<i>useSelector</i> receives a function as a paramter. The function either either searches for or selectes data from the redux-store. 
+<i>useSelector</i> receives a function as a paramter. The function either searches for or selects data from the redux-store. 
 Here we need all of the notes, so our selector function returns the whole state:
 
 
@@ -1098,7 +1098,6 @@ which is a shorthand for
 }
 ```
 
-<!-- Yleensä selektorifunktiot ovat mielenkiinoisempia, ja valitsevat vain osan redux-storen sisällöstä. Voisimme esimerkiksi hakea storesta ainoastaan tärkeät muistiinpanot seuraavasti -->
 Usually selector functions are a bit more interesting, and return only selected parts of the contents of the redux-store. 
 We could for example return only notes marked as important:
 
@@ -1231,7 +1230,7 @@ npm start
 ```
 
 
-After completing these exercises, your application should look like this
+After completing these exercises, your application should look like this:
 
 ![](../../images/6/3.png)
 

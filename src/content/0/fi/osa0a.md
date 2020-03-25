@@ -94,11 +94,15 @@ Suorittamalla vähintään 24/27 tehtävää kurssin yhdeksännestä, TypeScript
 
 ### Suoritusmerkinnän pyytäminen
 
-Jos haluat kurssilta suorituksen, tallenna <b>Helsingin yliopiston</b> opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) näkymään <i>my submissions</i>. Jos et ole Helsingin yliopiston opiskelija, saat opiskelijanumeron ilmoittautumalla kurssille [Avoimen yliopiston](/osa0/yleista/#kokeeseen-ilmoittautuminen) kautta.
+Jos haluat kurssilta virallisen suorituksen, tallenna <b>Helsingin yliopiston</b> opiskelijanumerosi [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen): 
+
+![](../../images/0/28b.png)
+
+Jos et ole Helsingin yliopiston opiskelija, saat opiskelijanumeron ilmoittautumalla kurssille [Avoimen yliopiston](/osa0/yleista/#kokeeseen-ilmoittautuminen) kautta.
 
 Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi valmis kurssin suorituksen kanssa:
 
-![](../../images/0/28.png)
+![](../../images/0/28a.png)
 
 Arvosana siirtyy Weboodiin neljän viikon sisällä suoritusmerkintäpyynnön jälkeen.
 
@@ -107,6 +111,16 @@ Arvosana siirtyy Weboodiin neljän viikon sisällä suoritusmerkintäpyynnön j�
 Riippumatta siitä ilmoittaudutko Avoimen yliopiston kurssille ja teetkö kurssikokeen, saat ladattua kurssitodistuksen palautussovelluksesta siinä vaiheessa kun tekemiesi tehtävien lukumäärä oikeuttaisi kurssisuoritukseen.
 
 ![](../../images/0/29.png)
+
+### Muutokset edellisen vuoden kurssilta
+
+Osissa 0-4 on ainoastaan vähäisiä muutoksia. Osa 5d eli Cypress.io-kirjastolla tapahtuva <i>end to end -testaus</i> on suurelta osin uusi. Custom hookien käsittely on siirretty osasta 5 hieman laajennettuna osaan 7. 
+
+Reduxia käsittelevä osa 6 keskittyy ensisijaisesti reduxin uuteen hook-perustaiseen apiin. Myös osassa 7 käsiteltävä react-router on uudistunut käyttämään hook-apia. Vähäiselle ylläpidolle jäänyt Semantic UI React -kirjasto on korvattu MaterialUI-kirjastolla. 
+
+GraphQL:ää käsittelevä osa 8 on kokenut paljon päivityksiä erityisesti Apollo Clientin osalta, jonka hook-perustaiset apit ovat vihdoin stabiloituneet. TypeScriptiin keskittyvä osa 9 on kokonaan uusi. 
+
+Viime vuoden kurssimateriaali on nähtävissä osoitteessa https://fullstackopen-2019.github.io/
 
 ### Aiemmin suoritetun kurssin täydentäminen
 

@@ -1,5 +1,5 @@
 {
-  "fi": [
+  "fi": [   
     {
       "title": "Miten kurssille ilmoittaudutaan?",
       "text": [
@@ -41,19 +41,19 @@
       "text": [
         "Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi valmis kurssin suorituksen kanssa. Viimeinen mahdollinen suorituspäivä on 10.1.2021. Lue lisää <a href='/osa0/yleista#arvosteluperusteet'>täältä</a>."
       ]
-    },    
+    },  
+    {
+      "title": "Mikä kurssilla on muuttunut edellisestä vuodesta?",
+      "text": [
+        "Osiossa 0-4 on ainoastaan vähäisiä muutoksia. Osa 5d eli Cypress.io-kirjastolla tapahtuva <i>end to end -testaus</i> on suurelta osin uusi. Custom hookien käsittely on siirretty osasta 5 hieman laajennettuna osaan 7. <br><br>Reduxia käsittelevä osa 6 keskittyy ensisijaisesti reduxin uuteen hook-perustaiseen apiin. Myös osassa 7 käsiteltävä react-router on uudistunut käyttämään hook-apia. Vähäiselle ylläpidolle jäänyt Semantic UI React -kirjasto on korvattu MaterialUI-kirjastolla. <br><br>GraphQL:ää käsittelevä osa 8 on kokenut paljon päivityksiä erityisesti Apollo Clientin osalta, jonka hook-perustaiset apit ovat vihdoin stabiloituneet. TypeScriptiin keskittyvä osa 9 on kokonaan uusi. <br><br> Viime vuoden kurssimateriaali on nähtävissä osoitteessa <a href='https://fullstackopen-2019.github.io/'>https://fullstackopen-2019.github.io/</a>"
+      ]
+    },        
     {
       "title": "Voinko laajentaa aiempaa kurssisuoritustani?",
       "text": [
         "Voit, lue lisää <a href='/osa0/yleista#aiemmin-suoritetun-kurssin-taydentaminen'>täältä</a>"
       ]
     },
-    {
-      "title": "Minulla ei ole opinto-oikeutta Helsingin Yliopistoon. Voinko suorittaa kurssin?",
-      "text": [
-        "Voit! Tosin suoritusmerkinnän voit saada vasta 15.3. alkavassa MOOC:issa, et myöskään voi palauttaa tehtäviä vielä. MOOCin ja kampuskurssin sisältö on sama, joten nyt tehty työ ei mene hukkaan."
-      ]
-    },  
     {
       "title": "Kuulin että suorittamalla kurssin on mahdollista päästä työhaastatteluun",
       "text": [
@@ -101,7 +101,7 @@
     {
       "title": "When and how can I get my credits?",
       "text": [
-        "You can get your credits after submitting enough exercises for passing the course, passing the course exam and letting us know through the exercise submission system that you are ready with the course. The deadline is 10th January 2020. Read more <a href='/en/part0/general_info/#grading'>here</a>. Please note that only persons with Finnish social security number can get official ECTS credits. For the course certificate signup or Finnish social security number are not needed."
+        "You can get your credits after submitting enough exercises for passing the course, passing the course exam and letting us know through the exercise submission system that you are ready with the course. The deadline is 10th January 2021. Read more <a href='/en/part0/general_info/#grading'>here</a>. Please note that only persons with Finnish social security number can get official ECTS credits. For the course certificate signup or Finnish social security number are not needed."
       ]
     },
     {
@@ -122,6 +122,18 @@
         "For the course certificate signup to Open University is not needed. You can download the certificate after completing the course from the exercise submission system."
       ]
     },
+    {
+      "title": "What has changes since the last year?",
+      "text": [
+        "There is only minor changes to parts 0-4. Part 5d, <i>end to end -testing</i> using the Cypress.io- library is almost completely new material.  Using custom hooks has been moved from part 5 to part 7 with some new content. <br><br> Part 6, which is about Redux, concentrates on the new, hook-based, redux api. The material on react-router in part 7 has also been updated to use the hook-api. Semantic UI React has been replaced with the MaterialUI library due to lack of maintenance. <br><br> Part 8 on GraphQL has major updates especially on Apollo Client, which finally has stable hook based apis. Part 9 on TypeScript is completely new. <br><br> Last year's course material can be found from <a href='https://fullstackopen-2019.github.io/'>https://fullstackopen-2019.github.io/</a>."
+      ]
+    },        
+    {
+      "title": "I started the course last year, how should I continue?",
+      "text": [
+        "Read more from <a href='/en/part0/general_info#expanding-a-previously-completed-course'>here</a>"
+      ]
+    },    
     {
       "title": "I heard that I could get a job interview by completing the course.",
       "text": [

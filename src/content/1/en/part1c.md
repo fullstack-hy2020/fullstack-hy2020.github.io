@@ -475,7 +475,7 @@ What's going on? An event handler is supposed to be either a <i>function</i> or 
 ```
 
 <!-- tapahtumankäsittelijäksi tulee määriteltyä <i>funktiokutsu</i>. Sekin on monissa tilanteissa ok, mutta ei nyt. Kun React renderöi metodin ensimmäistä kertaa ja muuttujan <i>counter</i> arvo on 0, se suorittaa kutsun <em>setCounter(0 + 1)</em>, eli muuttaa komponentin tilan arvoksi 1. Tämä taas aiheuttaa komponentin uudelleenrenderöitymisen. Ja sama toistuu uudelleen... -->
-the event handler is actually a <i>function call</i>. In many situations this is ok, but not in this particular situation. In the beginning the value of the <i>counter</i> variable is 0. When React renders the method for the first time, it exectues the function call <em>setCounter(0+1)</em>, and changes the value of the component's state to 1. 
+the event handler is actually a <i>function call</i>. In many situations this is ok, but not in this particular situation. In the beginning the value of the <i>counter</i> variable is 0. When React renders the method for the first time, it executes the function call <em>setCounter(0+1)</em>, and changes the value of the component's state to 1. 
 This will cause the component to be rerendered, react will execute the setCounter function call again, and the state will change leading to another rerender...
 
 <!-- Palautetaan siis tapahtumankäsittelijä alkuperäiseen muotoonsa -->
@@ -640,7 +640,7 @@ The event handler is passed to the <i>Button</i> component through the _onClick_
 Let's go over the main principles of how an application works once more.
 
 <!-- Kun sovellus käynnistyy, suoritetaan komponentin _App_-koodi, joka luo [useState](https://reactjs.org/docs/hooks-reference.html#usestate)-hookin avulla sovellukselle laskurin tilan _counter_. Komponentti renderöi laskimen alkuarvon 0 näyttävän komponentin _Display_ sekä kolme _Button_-komponenttia, joille se asettaa laskurin tilaa muuttavat tapahtumankäsittelijät. -->
-When the application starts, the code in _App_ is executed. This code uses an [useState](https://reactjs.org/docs/hooks-reference.html#usestate) - hook to create the application state - value of the counter _counter_.
+When the application starts, the code in _App_ is executed. This code uses a [useState](https://reactjs.org/docs/hooks-reference.html#usestate) - hook to create the application state - value of the counter _counter_.
 The component renders the _Display_ component. It displays the counter's value (0), and three _Button_ components. The buttons have event handlers, which are used to change the state of the counter.
 
 <!-- Kun jotain napeista painetaan, suoritetaan vastaava tapahtumankäsittelijä. Tapahtumankäsittelijä muuttaa komponentin _App_ tilaa funktion _setCounter_ avulla. **Tilaa muuttavan funktion kutsuminen aiheuttaa komponentin uudelleenrenderöitymisen.**  -->

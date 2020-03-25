@@ -8,7 +8,7 @@ lang: en
 <div class="content">
 
 <!-- Now that we have a basic understanding of how TypeScript works and how to create actual projects with it, it is time to start creating something actually useful. So now we're going to create a completely new project, with a bit more realistic use cases in mind. -->
-Now that we have a basic understanding of how TypeScript works and how to create small projects with it, it's time to start creating something actually useful. We are now going to create a new project with a bit more realisting use cases in mind.
+Now that we have a basic understanding of how TypeScript works and how to create small projects with it, it's time to start creating something actually useful. We are now going to create a new project with a bit more realistic use cases in mind.
 
 <!-- One major change from the previous part is that <i>we're not going to use ts-node anymore</i>. ts-node is a handy tool, with which it is very easy to get started, but in the long run it is suggested to use the official TypeScript compiler that comes with the <i>typescript</i> npm-package. With this compiler the basic JavaScript files are generated and packaged from the .ts files so that the built <i>production version</i> of the project won't contain any TypeScript code. This is exactly what we are aiming for in the end, since TypeScript in itself is not runnable by browsers or Node. -->
 One major change from the previous part is that <i>we're not going to use ts-node anymore</i>. It is a handy tool and helps you get started, but in the long run it is advicable to use the official TypeScript compiler that comes with the <i>typescript</i> npm-package. The official compiler generates and packages JavaScript files from the .ts files so that the built <i>production version</i> won't contain any TypeScript code anymore. This is the exact outcome we are aiming for, since TypeScript itself is not executable by browsers or Node. 
@@ -26,7 +26,7 @@ TypeScript's native <i>tsc</i> compiler can help us to initialize our project wi
 First we need to add the <i>tsc</i> command to the list of executable scripts in the package.json file (unless you have installed <i>typescript</i> globally ). 
 Even if you have installed TypeScript globally, you should always include it as a dev-dependency in your project. 
 
-The npm srcipt for running <i>tsc</i> is set as follows:
+The npm script for running <i>tsc</i> is set as follows:
 
 ```json
 {
@@ -48,7 +48,7 @@ The npm srcipt for running <i>tsc</i> is set as follows:
  npm run tsc -- --init
 ```
 
- **Notice** the extra -- before the actual argument! Arguments before the -- are interpreted for the command <i>npm</i> and ones after are for the command that is run throught the script. 
+ **Notice** the extra -- before the actual argument! Arguments before the -- are interpreted for the command <i>npm</i> and ones after are for the command that is run through the script. 
 
 <!-- The created <i>tsconfig.json</i> contains a lengthy list of all of the possible configurations available to use, but  only a few of those are uncommented. Studying the initial <i>tsconfig.json</i> file might be useful for finding some configuration options you might need. It is also completely okay to keep the commented rows in the file just in case you might someday need to expand your configuration settings.  -->
 Running the script creates an <i>tsconfig.json</i> file, which contains a lengthy list of every configuration available to us. However only a few have not been commented out. 
@@ -188,7 +188,7 @@ And we are ready to start writing some code after defining still a couple of mor
 
 <!-- There is a lot of stuff to go through before you can even start the actual coding. When working with a real project, careful preparations support your development process to a great length, so take the time to create a good setting for yourself and your team so that in the long run everything runs smoothly. -->
 There is a lot of stuff to go through before you can start actual coding. When you are working with a real project, careful preparations support your development process a great deal.
-Take the time to create a good setting for youself and your team so in the long run everything runs smoothly. 
+Take the time to create a good setting for yourself and your team so in the long run everything runs smoothly. 
 
 ### Let there be code
 
@@ -280,7 +280,7 @@ Ensure that backend answers to the ping request that <i>frontend</i> has made on
 
 ![](../../images/9/16a.png)
 
-You might also want to have a look at the tab <i>console</i>. If something fails [part 3](/part3) of the course shows how the problem can be solved.
+You might also want to have a look at the tab <i>console</i>. If something fails [part 3](/en/part3) of the course shows how the problem can be solved.
 
 </div>
 
@@ -738,10 +738,10 @@ we would get the following error:
 ![](../../images/9/22b.png)
 
 <!-- Again the last line of error message is the most helpful one. Let us now undo this undesired modification. -->
-Again the last line of the error message is the most helpful one. Let's undo this undesider modification.
+Again the last line of the error message is the most helpful one. Let's undo this undesired modification.
 
 <!-- Utility types include a large set of handy tools and it is definitely worthwhile to take some time studying [the documentation](https://www.typescriptlang.org/docs/handbook/utility-types.html). -->
-Utility types include many handy tools, and it is definetely worth it to take some time to study [the documentation](https://www.typescriptlang.org/docs/handbook/utility-types.html).
+Utility types include many handy tools, and it is definitely worth it to take some time to study [the documentation](https://www.typescriptlang.org/docs/handbook/utility-types.html).
 
 <!-- Finally we can complete the route that returns all diary entries: -->
 Finally, we can complete the route which returns all diary entries:
@@ -833,7 +833,7 @@ But once again, a new problem emerges:
 
 <!-- The issue now is, that there is no guarantee that an entry with the specific id can be found. It is good that this potentially problematic issue surfaces already at compile phase, since without TypeScript there would be no indication of this possibility and in the worst case you might end up returning a result of an <i>undefined</i> object instead of informing about the nonexistense of searched item by other means. -->
 The issue is, that there is no guarantee that an entry with the specified id can be found. 
-It is good that we are made aware of this potential problem already at compile phase. Without TypeScript we would not be warned about this problem, and in the worst case scenration we could have ended up returning an <i>undefined</i> object instead of informing the user about the specified entry not being found. 
+It is good that we are made aware of this potential problem already at compile phase. Without TypeScript we would not be warned about this problem, and in the worst case scenario we could have ended up returning an <i>undefined</i> object instead of informing the user about the specified entry not being found. 
 
 <!-- In cases like this we first of all need to decide <i>what is the desired return value</i> if an object is not found, and how to handle the case. The value <i>undefined</i> that is returned by <i>find</i> method of an array is actually fine for us if a result is not found. Thus we could solve our problem by typing the return value as follows -->
 First of all in cases like this we need to decide what the <i>return value</i> should be if an object is not found, and how the case should be handled. 
@@ -999,7 +999,7 @@ In our case this is not apparent in the editor at all, but if we start looking a
 
 <!-- The value of type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#an) can be assigned to <i>any</i> type of variable since it <i>might be</i> the wanted type. This is definitely not safe to trust, so  -->
 <!-- check the incoming values (regardless whether we are using TypeScript or not). -->
-The value of type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#an) can be assigned to <i>any</i> type of variable since it <i>might be</i> the wanted type. It's definetely not safe to trust this, so 
+The value of type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#an) can be assigned to <i>any</i> type of variable since it <i>might be</i> the wanted type. It's definitely not safe to trust this, so 
 always check the incoming values (regardless of whether we are using TypeScript or not).
 
 <!-- We could just add simple <i>exists</i> and <i>is-value-valid</i> checks to the function defining the route, but since we also need to ensure that <i>Weather</i> and <i>Visibility</i> values are of the correct form, it is better to write the parsing and validation logic to a separate file <i>utils.ts</i>. -->
@@ -1027,7 +1027,7 @@ router.post('/', (req, res) => {
 ```
 
 <!-- Since we are now making trustworthy code and trying to make sure that we are getting exactly what we want from the requests, we should get started with the goal of parsing and validating each field we are waiting for.  -->
-Since we are now making secure code and trying to ensure that we are getting exactly the data we want from the requests, we should get started with partsing and validating each field we are expecting to receive.
+Since we are now making secure code and trying to ensure that we are getting exactly the data we want from the requests, we should get started with parsing and validating each field we are expecting to receive.
 
 The skeleton of the function <i>toNewDiaryEntry</i> looks like the following:
 
@@ -1105,11 +1105,11 @@ If the type guard function returns true, the TypeScript compiler knows that the 
 
 Before the type guard is called, the actual type of the variable <i>comment</i> is not known:
 
-![](../../images/9/28.png)
+![](../../images/9/28e.png)
 
 But after the call, if the code proceeds past the exception (that is the type guard returned true), compiler knows that <i>comment</i> is of the type <i>string</i>:
 
-![](../../images/9/29.png)
+![](../../images/9/29e.png)
 
 Why do we have two conditions in the string type guard?
 
@@ -1222,7 +1222,7 @@ const isWeather = (param: any): param is Weather => {
 ```
 
 <!-- One thing to notice here is that we have changed the parameter type to <i>any</i>, if it would be string, the <i>includes</i> check would not compile. The change makes sense also if you think about the reusability of the function, by allowing <i>any</i> as a parameter, we can use the function with confidence knowing that whatever we might feed to it, the function answers always to the question of whether the variable is a valid weather or not.  -->
-One thing to notice here is that we have changed the parameter type to <i>any</i>. If it would be string, the <i>includes</i> check would not compile. This makes sense also if you consider the resuability of the function. Allowing <i>any</i> as a parameter, the function can be used with confidence knowing that whatever we might feed to it, the function always tells us whether the variable is a valid weather or not. 
+One thing to notice here is that we have changed the parameter type to <i>any</i>. If it would be string, the <i>includes</i> check would not compile. This makes sense also if you consider the reusability of the function. Allowing <i>any</i> as a parameter, the function can be used with confidence knowing that whatever we might feed to it, the function always tells us whether the variable is a valid weather or not. 
 
 The function <i>parseWeather</i> can be simplified a bit
 

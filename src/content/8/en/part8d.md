@@ -216,9 +216,7 @@ Current application code can be found on [Github](https://github.com/fullstack-h
 
 ### Updating cache, revisited
 
-<!-- Uusien henkilöiden lisäyksen yhteydessä on siis  -->
-<!-- [päivitettävä](/osa8/react_ja_graph_ql#valimuistin-paivitys) Apollo clientin välimuisti. Päivitys tapahtuu määrittelemällä mutaation yhteydessä option _refetchQueries_ avulla, että kysely <em>ALL\_PERSONS</em> on suoritettava uudelleen: -->
-We have to [update](/osa8/react_ja_graph_ql#valimuistin-paivitys) the cache of the Apollo client on creating new persons. We can update it using the mutation's _refetchQueries_ option to define that the 
+We have to [update](/en/part8/react_and_graph_ql#updating-the-cache) the cache of the Apollo client on creating new persons. We can update it using the mutation's _refetchQueries_ option to define that the 
 <em>ALL\_PERSONS</em> query is done again. 
 
 ```js 
