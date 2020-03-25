@@ -6,10 +6,10 @@ lang: zh
 ---
 
 <div class="content">
-Before we start programming, we will go through some principles of web development by examining an example application at <https://fullstack-exampleapp.herokuapp.com/>.
-A Finnish language version of the application can be found at <https://fullstack-example.now.sh>. You are free to use either one.
+<!-- Before we start programming, we will go through some principles of web development by examining an example application at <https://fullstack-exampleapp.herokuapp.com/>. -->
+<!-- A Finnish language version of the application can be found at <https://fullstack-example.now.sh>. You are free to use either one. -->
 
-在我们正式开始编程之前，我们先简单看一个样例应用 https://fullstack-exampleapp.herokuapp.com/，了解 一些 web 开发的基本原则。 该应用的芬兰语版本可以在 https://fullstack-example.now.sh 网站上找到。 你可以使用任何一种。
+在我们正式开始编程之前，我们先简单看一个样例应用<https://fullstack-exampleapp.herokuapp.com/>，了解 一些 web 开发的基本原则。 该应用的芬兰语版本可以在 <https://fullstack-example.now.sh> 网站上找到。 你可以使用任何一种。
 
 The applications exist only to demonstrate some basic concepts of the course, and are by no means examples of <i>how</i> web applications should be made.
 On the contrary, they demonstrate some old techniques of web development, which can even be seen as <i>bad practice</i> nowadays.
@@ -22,7 +22,7 @@ Coding in the recommended style begins in [part 1](/en/part1).
 
 Use the Chrome browser <i>now and for the rest of the course</i>.
 
-从现在就使用 Chrome 浏览器，直到课程结束。
+现在以及接下来的课程都使用 Chrome 浏览器。
 
 Open the [example application](https://fullstack-exampleapp.herokuapp.com/) on your browser. Sometimes this takes a while.
 
@@ -31,13 +31,14 @@ Open the [example application](https://fullstack-exampleapp.herokuapp.com/) on y
 **The 1st rule of web development**: Always keep the developer console open on your browser. On macOS, open the console by pressing `F12` or `alt-cmd-i` simultaneously.
 On Windows, open the console by pressing `F12` or `ctrl-shift-i` simultaneously.
 
-Web 开发规则一: 始终在浏览器上打开你的开发者控制台。 在 macOS 上，按 `F12` 或者 `alt-cmd-i` 打开控制台。 在 Windows 上，按 `F12` 或 `ctrl-shift-i`打开控制台。
+Web 开发第一规则: 始终在浏览器上打开你的开发者控制台。 在 macOS 上，按 `F12` 或者 `alt-cmd-i` 打开控制台。 在 Windows 上，按 `F12` 或 `ctrl-shift-i`打开控制台。
 
 Before continuing, find out how to open the developer console on your computer (google if necessary) and remember to <i>always</i> keep it open when developing web applications.
 
-在继续课程之前，搞清楚如何在你的电脑上打开开发者控制台(如果必要的话请谷歌) ，并记得在开发 web 应用时始终保持它是开着的。
+在继续课程之前，确保搞清楚如何在你的电脑上打开开发者控制台(如果必要的话请谷歌) ，并记得在开发 web 应用时始终保持它是开着的。
 
-The console looks like this: 开发者控制台长这样：
+The console looks like this: 
+开发者控制台长这样：
 ![](../../images/0/1e.png)
 
 Make sure that the <i>Network</i> tab is open, and check the <i>Disable cache</i> option as shown. <i>Preserve log</i> can also be useful: it saves the logs printed by the application when the page is reloaded.
