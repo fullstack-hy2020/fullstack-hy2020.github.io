@@ -195,10 +195,10 @@ module.exports = notesRouter
 ```
 
 The module exports the router to be available for all consumers of the module.
-该模块将路由器导出为，该模块的所有消费者可用。
+该模块将路由导出为，该模块的所有消费者可用。
 
 All routes are now defined for the router object, in a similar fashion to what we had previously done with the object representing the entire application.
-现在已经为路由器对象定义了所有路由，这与我们之前对代表整个应用的对象所做的工作类似。
+现在已经为路由对象定义了所有路由，这与我们之前对代表整个应用的对象所做的工作类似。
 
 It's worth noting that the paths in the route handlers have shortened. In the previous version, we had:
 值得注意的是，路由处理程序中的路径已经缩短:
@@ -215,16 +215,16 @@ notesRouter.delete('/:id', (request, response) => {
 ```
 
 So what are these router objects exactly? The Express manual provides the following explanation:
-那么这些路由器对象到底是什么呢? Express手册提供了如下解释:
+那么这些路由对象到底是什么呢? Express手册提供了如下解释:
 
 > <i>A router object is an isolated instance of middleware and routes. You can think of it as a “mini-application,” capable only of performing middleware and routing functions. Every Express application has a built-in app router.</i>
-路由器对象是中间件和路由的独立实例。 您可以把它看作是一个“迷你应用” ，只能执行中间件和路由功能。 每个 Express 应用都有一个内置的应用路由器。 
+路由对象是中间件和路由的独立实例。 您可以把它看作是一个“迷你应用” ，只能执行中间件和路由功能。 每个 Express 应用都有一个内置的应用路由。 
 
 The router is in fact a <i>middleware</i>, that can be used for defining "related routes" in a single place, that is typically placed in its own module.
-路由器实际上是一个<i>中间件</i>，可用于在单个位置定义“相关路由” ，通常放置在自己的模块中。
+路由实际上是一个<i>中间件</i>，可用于在单个位置定义“相关路由” ，通常放置在自己的模块中。
 
 The <i>app.js</i> file that creates the actual application, takes the router into use as shown below:
-创建实际应用的<i>app.js</i> 文件，使路由器投入使用，如下所示:
+创建实际应用的<i>app.js</i> 文件，使路由投入使用，如下所示:
 
 ```js
 const notesRouter = require('./controllers/notes')
@@ -232,7 +232,7 @@ app.use('/api/notes', notesRouter)
 ```
 
 The router we defined earlier is used <i>if</i> the URL of the request starts with <i>/api/notes</i>. For this reason, the notesRouter object must only define the relative parts of the routes, i.e. the empty path <i>/</i> or just the parameter <i>/:id</i>.
-如果请求的 URL 以 <i>/api/notes</i>开头，则使用前面定义的路由器。 由于这个原因，notesRouter 对象必须只定义路由的相对部分，即空路径<i>/</i> 或仅仅定义参数<i>/:id</i>。
+如果请求的 URL 以 <i>/api/notes</i>开头，则使用前面定义的路由。 由于这个原因，notesRouter 对象必须只定义路由的相对部分，即空路径<i>/</i> 或仅仅定义参数<i>/:id</i>。
 
 
 After making these changes, our <i>app.js</i> file looks like this:
@@ -569,7 +569,7 @@ test('palindrome of releveler', () => {
 ```
 
 The ESLint configuration we added to the project in the previous part complains about the _test_ and _expect_ commands in our test file, since the configuration does not allow <i>globals</i>. Let's get rid of the complaints by adding <i>"jest": true</i> to the <i>env</i> property in the <i>.eslintrc.js</i> file.
-我们在上一部分中添加到项目中的 ESLint 配置会在我们的测试文件中提示测试和期望命令，因为配置不允许<i>globals</i>。 让我们通过在<i>.eslintrc.js</i> 文件的env 属性中添加<i>"jest": true</i> <i>来消除这些提示。</i> 
+我们在上一章节中添加到项目中的 ESLint 配置会在我们的测试文件中提示测试和期望命令，因为配置不允许<i>globals</i>。 让我们通过在<i>.eslintrc.js</i> 文件的env 属性中添加<i>"jest": true</i> <i>来消除这些提示。</i> 
 
 ```js
 module.exports = {
@@ -825,7 +825,7 @@ Write the tests for this exercise inside of a new <i>describe</i> block. Do the 
 
 #### 4.6*: helper functions and unit tests, 步骤4
 This and the next exercise are a little bit more challenging. Finishing these two exercises is not required in order to advance in the course material, so it may be a good idea to return to these once you're done going through the material for this part in its entirety.
-这个练习和下一个练习更有挑战性。 完成这两个练习并不是为了提前学习课程材料，所以一旦你完成了这一部分的全部材料，回到这些练习可能是一个好主意。
+这个练习和下一个练习更有挑战性。 完成这两个练习并不是为了提前学习课程材料，所以一旦你完成了这一章节的全部材料，回到这些练习可能是一个好主意。
 
 Finishing this exercise can be done without the use of additional libraries. However, this exercise is a great opportunity to learn how to use the [Lodash](https://lodash.com/) library.
 可以在不使用其他库的情况下完成这个练习。 然而，这个练习是一个很好的机会来学习如何使用[Lodash](https://lodash.com/)。

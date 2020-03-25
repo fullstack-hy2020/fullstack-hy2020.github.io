@@ -47,7 +47,7 @@ The component gets access to the functions _setLeft_ and _setRight_ that it can 
 
 The component's state or a piece of its state can be of any type. We could implement the same functionality by saving the click count of both the <i>left</i> and <i>right</i> buttons into a single object:
 
-组件的状态或其状态的一部分可以是任何类型。 我们可以通过将<i>left</i> 和<i>right</i> 按钮的单击次数保存到一个对象中来实现相同的功能:
+组件的状态或其状态的一章节可以是任何类型。 我们可以通过将<i>left</i> 和<i>right</i> 按钮的单击次数保存到一个对象中来实现相同的功能:
 
 ```js
 {
@@ -413,11 +413,11 @@ const App = (props) => {
 ### Old React 老版本的React
 In this course we use the [state hook](https://reactjs.org/docs/hooks-state.html) to add state to our React components, which is part of the newer versions of React and is available from version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) onwards. Before the addition of hooks, there was no way to add state to React functional components. Components that required state had to be defined as React [class](https://reactjs.org/docs/react-component.html) components using the JavaScript class syntax.
 
-在这个过程中，我们使用了状态挂钩 [state hook](https://reactjs.org/docs/hooks-state.html) 来添加状态到我们的 React 组件，这是 React 的新版本的一部分，可以从版本[16.8.0]( https://www.npmjs.com/package/React/v/16.8.0)开始使用。 在添加挂钩之前，没有办法将状态添加到 React 函数组件。 需要状态的组件必须使用 JavaScript 类语法定义为 React [class](https://reactjs.org/docs/react-component.html) 组件。
+在这个过程中，我们使用了状态Hook [state hook](https://reactjs.org/docs/hooks-state.html) 来添加状态到我们的 React 组件，这是 React 的新版本的一章节，可以从版本[16.8.0]( https://www.npmjs.com/package/React/v/16.8.0)开始使用。 在添加Hook之前，没有办法将状态添加到 React 函数组件。 需要状态的组件必须使用 JavaScript 类语法定义为 React [class](https://reactjs.org/docs/react-component.html) 组件。
 
 In this course we have made the slightly radical decision to use hooks exclusively from day one, to ensure that we are learning the future style of React. Even though functional components are the future of React, it is still important to learn the class syntax, as there are billions of lines of old React code that you might end up maintaining some day. The same applies to documentation and examples of React that you may stumble across on the internet.
 
-在这个课程中，我们做了一个稍微激进的决定，从第一天开始就完全使用钩子，以确保我们正在学习未来的React风格。 尽管函数式组件是 React 的未来，但学习类语法仍然很重要，因为有数十亿行旧的 React 代码可能会在某一天需要维护。 同样的道理，你可能在互联网上偶然发现React的文档和例子也使用了这些旧代码。
+在这个课程中，我们做了一个稍微激进的决定，从第一天开始就完全使用Hook，以确保我们正在学习未来的React风格。 尽管函数式组件是 React 的未来，但学习类语法仍然很重要，因为有数十亿行旧的 React 代码可能会在某一天需要维护。 同样的道理，你可能在互联网上偶然发现React的文档和例子也使用了这些旧代码。
 
 We will learn more about React class components later on in the course.
 我们将在稍后的课程中学习更多关于 React 类组件的知识。
@@ -571,7 +571,7 @@ There are a few limitations and rules we have to follow to ensure that our appli
 为了确保应用正确地使用基于Hook的状态函数，我们必须遵循一些限制和规则。
 
 The _useState_ function (as well as the _useEffect_ function introduced later on in the course) <i>must not be called</i> from inside of a loop, a conditional expression, or any place that is not a function defining a component. This must be done to ensure that the hooks are always called in the same order, and if this isn't the case the application will behave erratically.
-不能从循环、条件表达式或任何不是定义组件的函数的地方调用 _useState_ （同样的还有 _useEffect_ 函数，将在后面的课程中介绍）。 这样做是为了确保钩子总是以相同的顺序调用，如果不是这样，应用的行为就会不规则。
+不能从循环、条件表达式或任何不是定义组件的函数的地方调用 _useState_ （同样的还有 _useEffect_ 函数，将在后面的课程中介绍）。 这样做是为了确保Hook总是以相同的顺序调用，如果不是这样，应用的行为就会不规则。
 
 To recap, hooks may only be called from the inside of a function body that defines a React component:
 回顾一下，hook 只能从定义 React component 的函数体内部调用:
@@ -786,7 +786,7 @@ Another way to define a event handler is to use <i>function that returns a funct
 定义事件处理程序的另一种方法是使用返回函数的函数。
 
 You probably won't need to use functions that return functions in any of the exercises in this course.  If the topic seems particularly confusing, you may skip over this section for now and return to it later.
-在本课程的任何练习中，您可能不需要使用返回函数的函数。 如果这个主题看起来特别令人困惑，您可以跳过这一部分，稍后再回过头看它。
+在本课程的任何练习中，您可能不需要使用返回函数的函数。 如果这个主题看起来特别令人困惑，您可以跳过这一章节，稍后再回过头看它。
 
 Let's make the following changes to our code:
 让我们对我们的代码进行如下修改:

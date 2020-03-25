@@ -171,7 +171,7 @@ The placeholder text stored as the initial value of the <em>newNote</em> state a
 ![](../../images/2/7e.png)
 
 Since we assigned a piece of the <i>App</i> component's state as the <i>value</i> attribute of the input element, the <i>App</i> component now [controls](https://reactjs.org/docs/forms.html#controlled-components) the behavior of the input element.
-由于我们将<i>App</i> 组件状态的一部分指定为 input 元素的<i>value</i> 属性，因此<i>App</i> 组件现在[控制]( https://reactjs.org/docs/forms.html#controlled-components ) 了input 元素的行为。
+由于我们将<i>App</i> 组件状态的一章节指定为 input 元素的<i>value</i> 属性，因此<i>App</i> 组件现在[控制]( https://reactjs.org/docs/forms.html#controlled-components ) 了input 元素的行为。
 
 In order to enable editing of the input element, we have to register an <i>event handler</i> that synchronizes the changes made to the input with the component's state:
 为了能够编辑 input 元素，我们必须注册一个<i>事件处理</i> 来同步对 input 所做的更改和组件的状态:
@@ -554,7 +554,7 @@ Issue a warning with the [alert](https://developer.mozilla.org/en-US/docs/Web/AP
 
 **Brief reminder from the previous part:** when you are forming strings that contain values from variables, it is recommended to use a [template string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals):
 
-**上一部分的简短提示** 当您构建包含变量值的字符串时，建议使用[模板字符串]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/template_literals ) :
+**上一章节的简短提示** 当您构建包含变量值的字符串时，建议使用[模板字符串]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/template_literals ) :
 
 ```js
 `${newName} is already added to phonebook`

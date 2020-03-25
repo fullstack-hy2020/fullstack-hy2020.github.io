@@ -398,7 +398,7 @@ const App = () => {
 ```
 
 **NB** at this point <i>you can assume that there are always three items</i>, so there is no need to go through the arrays using loops. We will come back to the topic of rendering components based on items in arrays with a more thorough exploration in the [next part of the course](../part2).
-**注意** 在这里，我假定它总是有三个元素，所以没有必要使用循环遍历数组。 我们将在[课程的下一部分](/zh/part2)，即“基于数组中的元素渲染组件”这一主题中进行更深入的讨论。
+**注意** 在这里，我假定它总是有三个元素，所以没有必要使用循环遍历数组。 我们将在[课程的下一章节](/zh/part2)，即“基于数组中的元素渲染组件”这一主题中进行更深入的讨论。
 
 However, do not pass different objects as separate props from the <i>App</i> component to the components <i>Content</i> and <i>Total</i>. Instead, pass them directly as an array:
 

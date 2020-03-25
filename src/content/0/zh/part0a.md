@@ -35,7 +35,7 @@ The material contains exercises, which are placed so that the preceeding materia
 
 In many parts of the course, the exercises build one larger application one small piece at a time. Some of the exercise applications are developed through multiple parts.
 
-课程的大部分练习是构建一个整体应用的一部分，一次只有一小块。但也有一些练习，是开发一个应用的多个模块。
+课程的大部分练习是构建一个整体应用的一章节，一次只有一小块。但也有一些练习，是开发一个应用的多个模块。
 
 The course material is based on incrementally expanding example applications, which change from part to part. It's probably best to follow the coding along, and independently make small modifications to the code. The code of the example applications for each step of each part can be found on GitHub.
 

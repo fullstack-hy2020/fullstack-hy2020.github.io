@@ -315,7 +315,7 @@ npm install json-server --save-dev
 
 
 There is a fine difference in the parameters. <i>axios</i> is installed as a runtime dependency (_--save_) of the application, because the execution of the program requires the existence of the library. On the other hand, <i>json-server</i> was installed as a development dependency (_--save-dev_), since the program itself doesn't require it. It is used for assistance during software development. There will be more on different dependencies in the next part of the course.
-参数之间有细微的差别。<i>axios</i> 被安装为应用的运行时依赖项(-- save) ，因为程序的执行需要库的存在。 而另一个， <i>json-server</i> 是作为开发依赖项(-- save-dev)安装的，因为程序本身并不需要它。 它用于在软件开发过程中提供帮助。 在课程的下一部分将会有更多关于不同依赖的内容。
+参数之间有细微的差别。<i>axios</i> 被安装为应用的运行时依赖项(-- save) ，因为程序的执行需要库的存在。 而另一个， <i>json-server</i> 是作为开发依赖项(-- save-dev)安装的，因为程序本身并不需要它。 它用于在软件开发过程中提供帮助。 在课程的下一章节将会有更多关于不同依赖的内容。
 
 ### Axios and promises Axios 与 promises
 Now we are ready to use axios. Going forward, json-server is assumed to be running on port 3001.
@@ -592,7 +592,7 @@ The second parameter of <em>useEffect</em> is used to [specify how often the eff
 <em>useEffect</em>的第二个参数用于[指定effect运行的频率]( https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect )。 如果第二个参数是一个空数组 <em>[]</em>，那么这个effect只在组件的第一次渲染时运行。
 
 There are many possible use cases for effect hook other than fetching data from the server. This suffices us for now.
-除了从服务器获取数据之外，效果钩子还有许多用例。 目前我们只了解到这。
+除了从服务器获取数据之外，效果Hook还有许多用例。 目前我们只了解到这。
 
 Think back to the sequence of events we just discussed. Which parts of the code are run? In what order? How often? Understanding the order of events is critical!
 回想一下我们刚才讨论的事件顺序。 代码的哪些部分是运行的？ 按什么顺序？ 多久一次？ 理解事件的顺序是至关重要的！
@@ -747,7 +747,7 @@ When there is only one country matching the query, then the basic data of the co
 
 **NB**: it is enough that your application works for most of the countries. Some countries, like <i>Sudan</i>, can cause trouble, since the name of the country is part of the name of another country, <i>South Sudan</i>. You need not worry about these edge cases.
 
-注意: 你的应用在大多数国家能好用就可以了。 有些国家，如苏丹，可能会有些麻烦，因为国名是另一个国家名称的一部分，即南苏丹。 你不必担心这些边缘情况edge cases。
+注意: 你的应用在大多数国家能好用就可以了。 有些国家，如苏丹，可能会有些麻烦，因为国名是另一个国家名称的一章节，即南苏丹。 你不必担心这些边缘情况edge cases。
 
 **WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application.
 

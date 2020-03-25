@@ -514,7 +514,7 @@ The function that creates the component is wrapped inside of a [forwardRef](http
 
 The component uses the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) hook to make its <i>toggleVisibility</i> function available outside of the component.
 
-组件利用[useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) 钩子来将<i>toggleVisibility</i> 函数能够被外部组件访问到。
+组件利用[useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) Hook来将<i>toggleVisibility</i> 函数能够被外部组件访问到。
 
 We can now hide the form by calling <i>noteFormRef.current.toggleVisibility()</i> after a new note has been created:
 我们现在可以在 Note 创建后，通过调用 <i>noteFormRef.current.toggleVisibility()</i> 控制表单的可见性了

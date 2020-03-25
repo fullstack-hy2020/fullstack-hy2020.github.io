@@ -11,37 +11,35 @@ lang: zh
 
 
 Now that we have a basic understanding of how TypeScript works and how to create small projects with it, it's time to start creating something actually useful. We are now going to create a new project with a bit more realisting use cases in mind.
-现在我们已经基本了解了打字稿的工作原理以及如何使用它来创建小型项目，是时候开始创建一些真正有用的东西了。 我们现在要创建一个新的项目，其中包含一些更加实用的用例。
+现在我们已经基本了解了TypeScript的工作原理以及如何使用它来创建小型项目，是时候开始创建一些真正有用的东西了。 我们现在要创建一个新的项目，其中包含一些更加实用的用例。
 
 
 
 One major change from the previous part is that <i>we're not going to use ts-node anymore</i>. It is a handy tool and helps you get started, but in the long run it is advicable to use the official TypeScript compiler that comes with the <i>typescript</i> npm-package. The official compiler generates and packages JavaScript files from the .ts files so that the built <i>production version</i> won't contain any TypeScript code anymore. This is the exact outcome we are aiming for, since TypeScript itself is not executable by browsers or Node. 
-与前一部分相比的一个主要变化是<i>我们不再使用 ts-node</i>。 这是一个方便的工具，可以帮助您入门，但是从长远来看，使用<i>打印脚本</i> npm-package 附带的官方打印脚本编译器是一个很好的选择。 官方编译器生成和打包 JavaScript 文件。 这样，构建的<i>产品版本</i> 就不会再包含任何打字稿代码了。 这正是我们想要的结果，因为打字稿本身不能被浏览器或 Node 执行。
+与前一章节相比的一个主要变化是<i>我们不再使用 ts-node</i>。 这是一个方便的工具，可以帮助您入门，但是从长远来看，使用<i>typescript</i> npm-package 附带的官方TypeScript编译器是一个很好的选择。 官方编译器从 .ts文件生成和打包 JavaScript 文件。 这样，构建的<i>生产版本</i> 就不会再包含任何TypeScript代码了。 这正是我们想要的结果，因为TypeScript本身不能被浏览器或 Node 执行。
 
-### Setting up the project
-正在安排计划
+### Setting up the project 搭建项目
 
-
-——我们的项目是为伊拉里设计的，他喜欢乘坐小型飞机，但在管理他的飞行历史方面遇到了一些困难。他自己也是一个很好的程序员，所以他不一定需要一个用户界面来管理他的飞行记录，但是他希望使用这个软件来管理 http 请求，这样以后就有可能扩展这个应用，同时也包括一个基于网络的用户界面
 We will be creating a project for Ilari, who loves flying small planes but has a difficult time managing his flight history. He is quite the coder himself, so he doesn't necessarily need a user interface, but he'd like to use the software with HTTP-requests and retain the possibility to later add a web-based user interface to the application.
-我们将为伊拉里创建一个项目，他喜欢驾驶小型飞机，但很难管理自己的飞行历史。 他本身就是一个编码高手，所以他不一定需要用户界面，但他希望使用软件来处理 http 请求，并保留以后向应用添加基于 web 的用户界面的可能性。
+我们将为Ilari创建一个项目，他喜欢驾驶小型飞机，但很难管理自己的飞行历史。 他本身就是一个编码高手，所以他不一定需要用户界面，但他希望使用软件来处理 http 请求，并保留以后向应用添加基于 web 的用户界面的可能性。
 
 
 
 Let's start by creating our first real project 'Ilari's flight diaries'. As usual run <i>npm init</i> and install the <i>typescript</i> package.
-让我们开始创建我们的第一个真正的项目“伊拉里的飞行日记”。 像往常一样运行<i>npm init</i> 并安装<i>打印脚本</i> 包。
+让我们开始创建我们的第一个真正的项目“伊拉里的飞行日记”。 像往常一样运行<i>npm init</i> 并安装<i>typescript</i> 包。
 
 
 
 TypeScript's native <i>tsc</i> compiler can help us to initialize our project with the command <i>tsc --init</i>.
-打字稿的原生<i>tsc</i> 编译器可以帮助我们使用命令<i>tsc -- init</i> 初始化我们的项目。
+TypeScript的原生<i>tsc</i> 编译器可以帮助我们使用命令<i>tsc -- init</i> 初始化我们的项目。
+
 First we need to add the <i>tsc</i> command to the list of executable scripts in the package.json file (unless you have installed <i>typescript</i> globally ). 
 首先，我们需要将<i>tsc</i> 命令添加到 package.json 文件中的可执行脚本列表中(除非您在全局范围内安装了<i>typescript</i>)。
 Even if you have installed TypeScript globally, you should always include it as a dev-dependency in your project. 
-即使您已经在全球范围内安装了 TypeScript，您也应该始终将其作为开发依赖项包含在项目中。
+即使您已经在全局范围内安装了 TypeScript，您也应该始终将其作为开发依赖项包含在项目中。
 
 The npm srcipt for running <i>tsc</i> is set as follows:
-运行<i>tsc</i> 的 npm cipt 设置如下:
+运行<i>tsc</i> 的 npm srcipt 设置如下:
 
 ```json
 {
@@ -67,16 +65,17 @@ The npm srcipt for running <i>tsc</i> is set as follows:
 ```
 
  **Notice** the extra -- before the actual argument! Arguments before the -- are interpreted for the command <i>npm</i> and ones after are for the command that is run throught the script. 
-注意多余的部分---- 在实际的争论之前！ -- 之前的参数解释为命令<i>npm</i>，之后的参数解释为通过脚本运行的命令。
+注意多余的部分---- 在实际的参数之前！ -- 之前的参数解释为命令<i>npm</i>，之后的参数解释为通过脚本运行的命令。
 
 
 
 Running the script creates an <i>tsconfig.json</i> file, which contains a lengthy list of every configuration available to us. However only a few have not been commented out. 
-运行这个脚本将创建一个<i>/ tsconfig.json</i> 文件，其中包含一个冗长的列表，列出了我们可以使用的所有配置。 然而，只有少数没有被便笺掉。
+运行这个脚本将创建一个<i>tsconfig.json</i> 文件，其中包含一个冗长的列表，列出了我们可以使用的所有配置。 然而，只有少数没有被注释掉。
+
 Studying the initial <i>tsconfig.json</i> file might be useful for finding some configuration options you might need. 
-研究初始<i>/ tsconfig.json</i> 文件可能有助于找到您可能需要的一些配置选项。
+研究初始的<i>tsconfig.json</i> 文件可能有助于找到您可能需要的一些配置选项。
 It is also completely okay to keep the commented rows in the file just in case you might someday need to expand your configuration settings.
-在文件中保留便笺行也是完全可以的，以备将来需要扩展配置设置时使用。
+在文件中保留注释行也是完全可以的，以备将来需要扩展配置设置时使用。
 
 
 The settings we want right now are the following:
@@ -112,18 +111,17 @@ The <i>target</i> configuration tells the compiler which ECMAScript version to u
 
 
 <i>module</i> tells the compiler we want to use <i>commonjs</i> modules in the compiled code. This means we can use _require_ instead of _import_, which is not supported in older Node.js versions such as the version 10. 
-I module /<i>告诉编译器我们要在编译的代码中使用 i commonjs</i> 模块。 这意味着我们可以使用 require 而不是 import，这在旧的 Node.js 版本中是不被支持的，比如10版本。
+<i>module</i>告诉编译器我们要在编译的代码中使用 <i>commonjs</i>模块。 这意味着我们可以使用 require 而不是 import，这在旧的 Node.js 版本中是不被支持的，比如10版本。
 
 <i>strict</i> is actually a shorthand for multiple separate options: 
 <i>strict</i> 实际上是多个独立选项的简写:
 
-
 <i>noImplicitAny, noImplicitThis, alwaysStrict, strictBindCallApply, strictNullChecks, strictFunctionTypes and strictPropertyInitialization</i>.
 <i>noImplicitAny，noImplicitThis，alwaysStrict，strictBindCallApply，strictNullChecks，strictFunctionTypes and strictPropertyInitialization</i>.
 These guide our coding style to use the TypeScript features more strictly. 
-这些指导我们的编码风格更严格地使用打字稿的特性。
+这些指导我们的编码风格更严格地使用TypeScript的特性。
 For us perhaps the most important is the already familiar [noImplicitAny](https://www.typescriptlang.org/en/tsconfig#noImplicitAny). It prevents implicitly setting type <i>any</i>, which can happen if you don't type the parameters of a function for example. 
-对我们来说，最重要的可能是已经熟悉的[ noImplicitAny ]( https://www.typescriptlang.org/en/tsconfig#noImplicitAny )。 它可以防止隐式设置类型<i>any</i>，例如，如果您不键入函数的参数，就可能发生这种情况。
+对我们来说，最重要的可能是已经熟悉的[ noImplicitAny ]( https://www.typescriptlang.org/en/tsconfig#noImplicitAny )。 它可以防止隐式设置类型<i>any</i>，例如，如果您不键入函数的参数，就可能发生警告。
 Details of the rest of the configurations can be found from the [tsconfig documentation](https://www.typescriptlang.org/en/tsconfig#strict). 
 其余配置的详细信息可以从[ tsconfig 文档]( https://www.typescriptlang.org/en/tsconfig#strict )中找到。
 Using <i>strict</i> is suggested by the official documentation.
@@ -132,16 +130,16 @@ Using <i>strict</i> is suggested by the official documentation.
 
 
 <i>noUnusedLocals</i> prevents having unused local variables, and <i>noUnusedParameters</i> throws an error if a function has unused parameters.
-我使用 locals /<i>避免使用未使用的局部变量，如果函数有未使用的参数，我使用未使用的参数</i> 将抛出错误。
+使用<i>noUnusedLocals</i> 避免有未使用的局部变量，如果函数有未使用的参数，<i>noUnusedParameters</i> 将抛出错误。
 
 <i>noFallthroughCasesInSwitch</i> ensures that in a _switch case_ each case ends with a  _return_ or a _break_ statement.
-<i>noFallthroughCasesInSwitch</i> 确保在开关情况下，每个情况都以一个 return 或 break 语句结束。
+<i>noFallthroughCasesInSwitch</i> 确保在_switch情况下，每个case都以一个 return 或 break 语句结束。
 
 <i>esModuleInterop</i> allows interoperability between commonJS and ES Modules, see more [in documentation](https://www.typescriptlang.org/en/tsconfig#esModuleInterop).
-<i>esModuleInterop</i> 允许 commonJS 和 ES 模块之间的互操作性，详见文档中的 https://www.typescriptlang.org/en/tsconfig#esModuleInterop。
+<i>esModuleInterop</i> 允许 commonJS 和 ES 模块之间的互操作性，详见文档中 [这部分](https://www.typescriptlang.org/en/tsconfig#esModuleInterop)。
 
 Now that we have our preferred configuration set, let's continue by installing <i>express</i> and of course also <i>@types/express</i>. Since this is a real project, which is intended to be grown over time, we will use eslint from the very  beginning:
-现在我们已经有了首选的配置集，让我们继续安装<i>express</i>，当然还有 i@types / express / i。 由于这是一个真正的项目，并打算随着时间的推移而成长，我们将从一开始就使用 eslint:
+现在我们已经有了首选的配置集，让我们继续安装<i>express</i>，当然还有<i>@types/express</i>.。 由于这是一个真正的项目，并打算随着时间的推移而成长，我们将从一开始就使用 eslint:
 
 ```sh
 npm install express
@@ -177,7 +175,7 @@ Now our <i>package.json</i> should look something like this:
 ```
 
 We also create <i>.eslintrc</i> with the following content:
-我们还使用如下内容创建 i. eslintrc / i:
+我们还使用如下内容创建 <i>.eslintrc</i> :
 
 ```json
 {
@@ -211,8 +209,9 @@ We also create <i>.eslintrc</i> with the following content:
 
 Now we just need to set up our development environment, and we are ready to start writing some serious code. 
 现在我们只需要设置我们的开发环境，并且我们已经准备好开始编写一些重要的代码。
+
 There are many different options for this. We could use the familiar <i>nodemon</i> with <i>ts-node</i>, but as we saw earlier, </i>ts-node-dev</i> does the exact same thing and we can continue using it.
-对此有很多不同的选择。 我们可以在<i>ts-node</i> 中使用熟悉的<i>nodemon</i>，但是正如我们前面看到的，/<i>ts-node-dev</i> 做完全相同的事情，我们可以继续使用它。
+这里有很多不同的选择。 我们可以在<i>ts-node</i> 中使用熟悉的<i>nodemon</i>，但是正如我们前面看到的，<i>ts-node-dev</i> 可以做完全相同的事情，我们也可以继续使用它。
 So, let's install <i>ts-node-dev</i>
 因此，让我们安装<i>ts-node-dev</i>
 
@@ -236,15 +235,12 @@ And we are ready to start writing some code after defining still a couple of mor
 ```
 
 
-——在你开始真正的项目之前，还有很多事情要做。当你在做一个真正的项目的时候，仔细的准备工作可以很大程度上支持你的开发过程，所以花点时间为你自己和你的团队创造一个良好的环境，这样从长远来看，一切都会顺利进行
 There is a lot of stuff to go through before you can start actual coding. When you are working with a real project, careful preparations support your development process a great deal.
 在开始实际编码之前，还有很多事情要做。 当您正在处理一个真正的项目时，仔细的准备工作对您的开发过程提供了很大的支持。
 Take the time to create a good setting for youself and your team so in the long run everything runs smoothly. 
 花点时间为你自己和你的团队创造一个良好的环境，这样从长远来看，一切都会顺利进行。
 
-### Let there be code
-# # 让我们有代码吧
-
+### Let there be code 让我们编码吧
 
 
 Now we can finally start coding! As always, we start by creating a a ping-endpoint, just to make sure everything is working. 
@@ -273,19 +269,20 @@ app.listen(PORT, () => {
 
 
 Now if we run the app with <i>npm run dev</i> we can verify that a request to http://localhost:3000/ping gives a response <i>pong</i>, so our configuration is set!
-现在，如果我们用<i>npm 运行 dev</i> 来运行这个应用，我们就可以验证一个请求是否会响应<i>pong</i>，这样我们的配置就设置好了！
+现在，如果我们用<i>npm run dev</i>  来运行这个应用，我们就可以验证一个请求是否会响应<i>pong</i>，这样一来我们的配置就设置好了！
 
 
 
 When starting the app with <i>npm run dev</i>, it runs in development mode. 
 当用<i>npm 运行 dev</i> 启动应用时，它会在开发模式下运行。
+
 The development mode is not suitable at all when we later operate the app in production. 
 这种开发模式在以后的生产操作中根本不适用。
 
 
 
 Let's try to create a <i>production build</i> by running the TypeScript compiler. Since we have defined the <i>outdir</i> in our tsconfig.json, there's really nothing else to do but run the script <i>npm run tsc</i>.
-让我们通过运行 TypeScript 编译器来尝试创建<i>产品 build</i>。 因为我们已经在 tsconfig.json 中定义了<i>outdir</i>，所以除了运行脚本<i>npm run tsc</i> 之外真的没有什么可做的了。
+让我们通过运行 TypeScript 编译器来尝试创建<i>生产 build</i>。 因为我们已经在 tsconfig.json 中定义了<i>outdir</i>，所以除了运行脚本<i>npm run tsc</i> 之外真的没有什么可做的了。
 
 Just like magic a native runnable JavaScript production build of the express backend is created into the directory <i>build</i>.  
 就像魔术一样，express 后端的原生可运行的 JavaScript 生产构建被创建到<i>build</i> 目录中。
@@ -293,7 +290,7 @@ Just like magic a native runnable JavaScript production build of the express bac
 
 
 Currently, if we run eslint it will also interpret the files in the <i>build</i> directory. We don't want that, since the code there is compiler generated. We can prevent this by creating a  <i>.eslintignore</i> file  which lists the content we want eslint to ignore, just like we do with git and <i>gitignore</i>.
-目前，如果我们运行 eslint，它也会解释<i>build</i> 目录中的文件。 我们不希望这样，因为那里的代码是编译器生成的。 我们可以通过创建一个<i>来避免这个问题。 Eslintignore</i> 文件，其中列出了我们希望 eslint 忽略的内容，就像我们对 git 和<i>gitignore</i> 所做的那样。
+目前，如果我们运行 eslint，它也会解释<i>build</i> 目录中的文件。但我们不希望这样，因为那里的代码是编译器生成的。 我们可以通过创建一个 <i>.eslintignore</i> 文件来避免这个问题，其中列出了我们希望 eslint 忽略的内容，就像我们对 git 和<i>gitignore</i> 所做的那样。
 
 
 
@@ -324,6 +321,7 @@ When we run app with <i>npm start</i> we can verify that also the production bui
 
 Now we have a minimal working pipeline for developing our project. 
 现在我们有一个最小的工作管道来开发我们的项目。
+
 With the help of our compiler and eslint it also ensures that a good code quality is maintained. With this base we can actually start creating an app that we could later on deploy into a production environment.
 在我们的编译器和 eslint 的帮助下，它还确保了良好的代码质量得到了维护。 有了这个基础，我们实际上可以开始创建一个应用，稍后可以将它部署到生产环境中。
 
@@ -334,40 +332,35 @@ With the help of our compiler and eslint it also ensures that a good code qualit
 
 
 ### Exercises 9.8.-9.9.
-练习9.8-9.9。
-
 **Before you start the exercises**
 **在开始练习之前 **
 
 For this set of exercises you will be developing a backend for an existing project called <i>Patientor</i> which is a simple medical record application for doctors who handle diagnoses and basic health information of their patients.
-对于这套练习，你将开发一个现有项目的后端称为<i>Patientor</i>，这是一个简单的医疗记录应用的医生谁处理诊断和他们的病人的基本健康信息。
+对于这套练习，你将开发一个现有项目的后端称为<i>Patientor</i>，这是一个为医生开发的简单的医疗记录应用，医生处理诊断和他们的病人的基本健康信息。
 
 The [frontend](https://github.com/fullstack-hy2020/patientor) has already been built by outsider experts and your task is to create a backend to support the existing code.
-前端已经由外部专家构建，您的任务是创建一个后端来支持现有的代码 https://github.com/fullstack-hy2020/patientor。
+[前端]( https://github.com/fullstack-hy2020/patientor)已经由外部专家构建，您的任务是创建一个后端来支持现有的代码。
 
 #### 9.8: Patientor backend, 步骤1
-9.8: Patientor backend，步骤1
-
 Initialise project that will be used by the frontend. Configure eslint and tsconfig with the same configurations that are used in the material. Define an endpoint that responses to HTTP GET requests to route <i>/ping</i>.   
-初始化项目，将使用的前端。 使用材质中使用的相同配置配置 eslint 和 tsconfig。 定义一个端点，该端点响应 HTTP GET 请求路由<i>/ ping</i>。
+初始化将使用的前端项目。 使用教材中使用的相同配置配置 eslint 和 tsconfig。 定义一个端点，该端点响应 HTTP GET 请求路由<i>/ping</i>。
 
 The project should be runnable with npm scripts both in development mode and as compiled code in production mode.
-项目应该在开发模式和生产模式下以编译代码的形式使用 npm 脚本运行。
+项目应该在开发模式和生产模式下以编译代码的形式通过npm 脚本运行。
 
 #### 9.9: Patientor backend, 步骤2
-9.9: Patientor backend，步骤2
-
 Fork and clone the project [patientor](https://github.com/fullstack-hy2020/patientor). Start the project with the help of the README file. You should be able to use the frontend without a functioning backend.
-分叉和克隆项目[病人]( https://github.com/fullstack-hy2020/patientor )。 在 README 文件的帮助下启动项目。 您应该能够使用前端没有功能的后端。
+Fork和clone项目[patientor](https://github.com/fullstack-hy2020/patientor)。 在 README 文件的帮助下启动项目。 您应该能够使用没有后端功能的前端。
+
+
 
 Ensure that backend answers to the ping request that <i>frontend</i> has made on startup. Check developer tool to make sure it really works: 
-确保后端应答前端 / i 在启动时发出的 ping 请求。 检查开发者工具，确保它真正工作:
+确保后端应答前端在启动时发出的 ping 请求。 检查开发者工具，确保它真正工作良好:
 
 ![](../../images/9/16a.png)
 
-
 You might also want to have a look at the tab <i>console</i>. If something fails [part 3](/part3) of the course shows how the problem can be solved.
-您可能还需要查看<i>console</i> 的选项卡。 如果有什么东西失败了[课程的第三章节](/ 第三章节) ，那就说明了如何解决这个问题。
+您可能还需要查看<i>console</i> 的选项卡。 如果有什么东西失败了，[课程的第三章节](/ 第三章节) 说明了如何解决这个问题。
 
 </div>
 
@@ -375,43 +368,33 @@ You might also want to have a look at the tab <i>console</i>. If something fails
 <div class="content">
 
 
-### Implementing the functionality
-# # # 实现功能
-
+### Implementing the functionality 实现功能
 Finally we are ready to start writing some code.
 最后，我们准备开始编写一些代码。
 
-
-让我们从最基本的开始。伊拉里想要记录他的飞行经历
 Let's start from the basics. Ilari wants to be able to keep track of his experiences on his flight journeys. 
 让我们从最基本的开始。伊拉里希望能够记录下他在旅途中的经历。
 
 
 
-
-
-
-
-!-能见度要么好，要么差 -- 
-
-!-免费文本输入的经验-
 He wants to be able to save </i>diary entries</i> which contain:
-他希望能够保存 /<i>日记条目</i>，其中包含:
+他希望能够保存 <i>日记条目</i>，其中包含:
+
 - The date of the entry
-- 参赛日期
+- 日期
 - Weather conditions (good, windy, rainy or stormy)
 - 天气状况(良好、多风、多雨或暴风雨)
 - Visibility (good, ok or poor)
 - 能见度(良好、正常或欠佳)
 - Free text detailing the experience
-- 详细介绍经验的免费文字
+- 自由的文本记录的详细介绍经验
 
 
 
 We have obtained some sample data, which we will use as a base to build on.
 我们已经获得了一些样本数据，我们将以此为基础进行构建。
 The data is saved in json format, and can be found from [here](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json).
-这些数据以 json 格式保存，可以在[ here ]中找到( https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json 地图)。
+这些数据以 json 格式保存，可以在 [here](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json).中找到
 
 The data looks like the following
 数据如下所示
@@ -441,10 +424,6 @@ Let's start by creating an endpoint which returns all flight diary entries.
 
 
 
-
-
-
-
 First we need to make some decisions on how to structure our source code. It is better to place all source code under <i>src</i> directory, so source code is not mixed with configuration files. 
 首先，我们需要对如何构造源代码做出一些决定。 最好将所有源代码放在<i>src</i> 目录下，这样源代码就不会与配置文件混在一起。
 We will move <i>index.ts</i> there and make the necessary changes to the npm scripts. 
@@ -452,17 +431,15 @@ We will move <i>index.ts</i> there and make the necessary changes to the npm scr
 
 
 
-
-
 We will place all [routers](/en/part4/structure_of_backend_application_introduction_to_testing), modules which are responsible for handling a set of specific resources such as <i>diaries</i>, under the directory <i>src/routes</i>. 
-我们将把所有的路由器(/ en / part4 / structure of backend application introduction to testing) ，这些模块负责处理一组特定的资源，如<i>diaries</i>，放在目录<i>src / routes</i> 下。
+我们将把所有的路由 [routers](/en/part4/structure_of_backend_application_introduction_to_testing) ，这些模块负责处理一组特定的资源，如<i>diaries</i>，放在<i>src/routes</i>目录下。
 This is a bit different than what we did  in [part 4](/en/part4), where we used directory <i>src/controllers</i>.
-这与我们在[ part 4](/ en / part4)中使用的目录<i>src / controllers</i> 有些不同。
+这与我们在 [part 4](/en/part4),中使用的目录<i>src / controllers</i> 有些不同。
 
 
 
 The router taking care of all diary endpoints is in <i>src/routes/diaries.ts</i> and looks like this:
-处理所有日志端点的路由器位于<i>src / routes / diaries. ts</i> 中，如下所示:
+处理所有日志端点的路由位于<i>src/routes/diaries.ts</i> 中，如下所示:
 
 ```js
 import express from 'express';
@@ -481,7 +458,7 @@ export default router;
 ```
 
 We'll route all requests to prefix <i>/api/diaries</i> to that specific router in _index.ts_
-我们将把所有请求路由到 index.ts 中的特定路由器的前缀<i>/ api / diaries</i>
+我们将把所有请求路由到 index.ts 中的特定路由的前缀 <i>/api/diaries</i>
 
 
 ```js
@@ -513,21 +490,21 @@ And now if we make a HTTP GET request to http://localhost:3000/api/diaries we sh
 
 
 Next wee need to start serving the seed data (found [here](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json)) from the app. We will fetch the data and save it to <i>data/diaries.json</i>.
-接下来我们需要开始提供应用的种子数据(点击这里找到 https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json )。 我们将获取数据并将其保存到<i>数据 / 日记中。 Json</i>.
+接下来我们需要开始提供应用的种子数据(点击 [here](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json) )。 我们将获取数据并将其保存到<i>data/diaries.json</i>中。
 
 
 
 We won't be writing the code for the actual data manipulations on the router. We will create a <i>service</i> which takes care of the data manipulation instead. 
-我们不会在路由器上编写实际数据操作的代码。 我们将创建一个<i>service</i> 来处理数据操作。
+我们不会在路由上编写实际数据操作的代码。 我们将创建一个<i>service</i> 来处理数据操作。
 It is quite common practice to separate the "business logic" from the router code into its own modules, which are quite often called <i>services</i>. 
-将“业务逻辑”从路由器代码分离到自己的模块(通常称为<i>services</i>)是非常常见的做法。
+将“业务逻辑”从路由代码分离到自己的模块(通常称为<i>services</i>)是非常常见的做法。
 The name service originates from [Domain driven design](https://en.wikipedia.org/wiki/Domain-driven_design) and was made popular by the [Spring](https://spring.io/) framework.
-名称服务起源于[域名驱动设计]( https://en.wikipedia.org/wiki/Domain-driven_design 设计) ，并由[ Spring ]( https://Spring.io/ 设计)框架流行起来。
+名称service服务起源于[域名驱动设计]( https://en.wikipedia.org/wiki/Domain-driven_design) ，并由[ Spring ]( https://Spring.io/ 设计)框架流行起来。
 
 
 
 Let's create a <i>src/services</i> directory and 
-让我们创建一个<i>src / services</i> 目录并
+让我们创建一个<i>src/services</i> 目录并
 place the <i>diaryService.ts</i> file in it.
 将<i>diaryService.ts</i> 文件放入其中。
 The file contains two functions for fetching and saving diary entries:
@@ -556,9 +533,8 @@ But something is not right
 
 ![](../../images/9/17c.png)
 
-
 The hint says we might want to use <i>resolveJsonModule</i>. Let's add it to our tsconfig:  
-提示说我们可能想使用<i>resolveJsonModule</i>:
+提示说我们可能想使用<i>resolveJsonModule</i>，让我们把它加入到我们的tsconfig:
 
 ```json
 {
@@ -583,12 +559,12 @@ And our problem is solved.
 我们的问题就解决了。
 
 
-!-**注意 *** 由于某种原因 VC 代码已经多次抱怨，它没有找到文件 i。 . /. . / 资料 / 日记。 尽管文件存在 json / i 仍在服务中。 这是一个 bug，当编辑器重新启动时，抱怨就消失了。 -->
+
 > **NB**: For some reason VSCode tends to complain it cannot find the file <i>../../data/diaries.json</i> from the service despite the file existing. That is a bug in the editor, and goes away when the editor is restarted.
-出于某种原因，VSCode 倾向于抱怨它无法找到文件 i。 . /. . / 资料 / 日记。 尽管文件已经存在，但是我们还是从服务器中删除了 json / i。 这是编辑器中的一个 bug，并且在重新启动编辑器时消失。
+出于某种原因，VSCode 倾向于产生警告它无法找到文件 <i>../../data/diaries.json</i>。 尽管文件已经存在， 这是编辑器中的一个 bug，并且在重新启动编辑器时消失。
 
 
-如果我们正在处理一个包含特定类型对象的数组，并且我们正在尝试添加一个没有其他对象所有字段或者类型冲突的对象，这就是为什么编译器实际上可以警告我们，如果我们正在试图对我们正在处理的 json 数据做可疑的事情
+
 Earlier we saw how the compiler can decide the type of a variable by the value it is assigned.
 前面我们看到编译器如何通过赋值来决定变量的类型。
 Similarly the compiler can interpret large data sets consisting of objects and arrays.
@@ -606,14 +582,15 @@ Even though the compiler is pretty good at making sure we don't do anything unwa
 
 
 Currently we have a basic working TypeScript express app, but there are barely any actual <i>typings</i> in the code. 
-目前我们有一个基本的工作打字稿快速应用，但在代码中几乎没有任何实际的<i>输入</i>。
+目前我们有一个基本的可工作TypeScript express应用，但在代码中几乎没有任何实际的<i>类型</i>。
+
 Since we know what type of data should be accepted for the weather and visibility fields, there is no reason for us not to include their types to the code.
 因为我们知道天气和能见度字段应该接受哪种类型的数据，所以我们没有理由不在代码中包含它们的类型。
 
 
 
 Let's create a file for our types, <i>types.ts</i>, where we'll define all our types for this project. 
-让我们为我们的类型<i>types.ts</i> 创建一个文件，我们将在其中定义这个项目的所有类型。
+让我们为我们的类型创建一个文件<i>types.ts</i> ，我们将在其中定义这个项目的所有类型。
 
 
 
@@ -672,16 +649,16 @@ But since the json already has its values declared, assigning a type for the dat
 
 
 
-
 The end of the error message reveals the problem: the <i>weather</i> fields are incompatible. In <i>DiaryEntry</i> we specified that its type is  <i>Weather</i>, but 
 错误消息的结尾揭示了问题所在:<i>weather</i> 字段不兼容。 在<i>DiaryEntry</i> 中，我们指定它的类型为<i>Weather</i>，但是
 TypeScript compiler had inferred its type to be <i>string</i>.
-编译器将其类型推断为<i>string</i>。
+TypeScript 编译器将其类型推断为<i>string</i>。
 
 
 
 We can fix the problem by doing [type assertion](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions). This should be done only if we are certain we know what we are doing. 
-我们可以通过执行[类型断言](type assertion)来修复这个问题，这是一个 http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions。 只有在我们确信自己知道自己在做什么的情况下，才应该这样做。
+我们可以通过执行[类型断言](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions)来修复这个问题，这是一个。 只有在我们确信自己知道自己在做什么的情况下，才能这样做。
+
 If we assert the type of the variable <i>diaryData</i> to be <i>DiaryEntry</i> with the keyword <i>as</i>, everything should work:
 如果我们将变量<i>diaryData</i> 的类型断言为<i>DiaryEntry</i>，并使用关键字<i>as</i>，那么一切应该正常:
 
@@ -710,15 +687,16 @@ export default {
 
 We should never use type assertion unless there is no other way to proceed, as there is always the danger we assert an unfit type to an object and cause a nasty runtime error.
 除非没有其他方法，否则我们永远不应该使用类型断言，因为我们总是有可能断言对象的类型不合适，从而导致严重的运行时错误。
+
 While the compiler trusts you to know what you are doing when using <i>as</i>, doing this we are not using the full power of TypeScript but relying on the coder to secure the code. 
-虽然编译器相信您知道在使用<i>作为</i> 时要做什么，但是这样做并不是使用打字稿的全部功能，而是依赖于编码器来保护代码。
+虽然编译器相信您知道在使用<i>as</i> 时要做什么，但是这样做并不是使用TypeScript的全部功能，而是依赖于编码器来保护代码。
 
 
 
 In our case we could change how we export our data so we can type it within the data file. 
 在本例中，我们可以更改导出数据的方式，以便在数据文件中键入数据。
 Since we cannot use typings in a JSON-file, we should convert the json-file to a ts-file which exports the typed data like so:
-因为我们不能在 json 文件中使用输入，所以我们应该将 json 文件转换为一个 ts 文件，该文件导出输入的数据，如下所示:
+因为我们不能在 json 文件中使用类型，所以我们应该将 json 文件转换为一个 ts 文件，该文件导出输入的数据，如下所示:
 
 ```js
 import { DiaryEntry } from "../src/types";
@@ -765,7 +743,7 @@ export default {
 
 
 Note, that if we want to be able to save entries without a certain field,  e.g. <i>comment</i>, we could set the type of the field as [optional](http://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties) by adding <i>?</i> to the type declaration:
-注意，如果我们希望能够保存没有特定字段的条目，例如<i>comment</i>，我们可以通过添加<i>来将字段的类型设置为[可选的]( http://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties ) ？</i> 类型声明:
+注意，如果我们希望能够保存没有特定字段的条目，例如<i>comment</i>，我们可以通过添加<i> ？</i>来将字段的类型设置为[可选的]( http://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties ) 类型声明:
 
 ```js
 export interface DiaryEntry {
@@ -777,36 +755,37 @@ export interface DiaryEntry {
 } 
 ```
 
-### Utility Types
-# # # 实用类型
-
-
-例如，考虑使用一个通用的列表页面来显示具有一些非敏感数据和一些敏感数据的数据。在一个通用的列表页面中，我们可能希望确保没有使用或显示敏感数据，因此我们可能只选择 / i 在这种情况下允许使用的类型的字段。 为此，我们使用工具类型[ Pick ]( http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk )。 -->
+### Utility Types 工具类型
 Sometimes we might want to use a specific modification of a type. 
 有时我们可能希望使用某种类型的特定修改。
+
 For example, consider a page for listing some data, some of which is sensitive and some of which is non-sensitive.
-例如，考虑一个用于列出某些数据的页面，其中一些数据是敏感的，另一些则是非敏感的。
+例如，考虑一个用于列出某些数据的页面，其中一些数据是敏感的，而另一些则是非敏感的。
+
 We might want to be sure that no sensitive data is used or displayed. We could <i>pick</i> the fields of a type we allow to be used to enforce this. 
-我们可能希望确保没有使用或显示任何敏感数据。 我们可以选择我们允许用来强制执行的类型的字段。
+我们可能希望确保没有任何敏感数据被使用或显示。 我们可以选择我们允许用来强制做这种隐藏的类型的字段。
+
 We can do that by using the utility type [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk).
 我们可以通过使用工具类型[ Pick ]( http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk )来做到这一点。
 
 In our project we should consider that Ilari might want to create a listing of all his diary entries <i>excluding</i> the comment field, since during a very scary flight he might end up writing something he wouldn't necessarily want to show anyone else. 
-在我们的项目中，我们应该考虑伊拉里可能想要创建一个他所有日记条目的列表，但不包括评论栏，因为在一次非常可怕的飞行中，他可能最终会写一些他不一定想给其他人看的东西。
+在我们的项目中，我们应该考虑伊拉里可能想要创建一个他所有日记条目的列表，但不包括评论栏，因为在一次非常可怕的飞行中，他可能最终会写一些不一定想给其他人看的东西。
 
 
 
 The [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk) utility type allows us to choose which fields of an existing type we want to use. 
-[拾取](拾取 http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk )实用程序类型允许我们选择要使用的现有类型的字段。
+[Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk)工具类型允许我们选择要使用的现有类型的字段。
+
 Pick can be used to either construct a completely new type, or to inform a function what it should return on runtime. 
 Pick 既可以用来构造一个全新的类型，也可以用来告诉函数在运行时应该返回什么。
+
 Utility types are a special kinds of type tools, but they can be used just like regular types.
-实用程序类型是一种特殊的类型工具，但是它们可以像普通类型一样使用。
+工具类型是一种特殊的类型工具，但是它们可以像普通类型一样使用。
 
 
 
 In our case, in order to create a "censored" version of the  <i>DiaryEntry</i> for public displays, we can use Pick in the function declaration:
-在我们的例子中，为了创建用于公共显示的“审查”版本的<i>DiaryEntry</i>，我们可以在函数声明中使用 Pick:
+在我们的例子中，为了创建用于公开显示的“审查”版本的<i>DiaryEntry</i>，我们可以在函数声明中使用 Pick:
 
 ```js
 const getNonSensitiveEntries = 
@@ -823,9 +802,10 @@ and the compiler would expect the function to return an array of values of the m
 
 
 Since [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk) requires the type it modifies to be given as a [type variable](http://www.typescriptlang.org/docs/handbook/generics.html#working-with-generic-type-variables), just like Array does, we now have two nested type variables and the syntax is starting to look a bit odd. 
-由于[ Pick ]( http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk )要求它修改的类型作为[ type variable ]( http://www.typescriptlang.org/docs/handbook/generics.html#working-with-generic-type-variables )给出，就像 Array 一样，我们现在有两个嵌套的类型变量，语法开始看起来有点奇怪。
+由于[ Pick ]( http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk )要求它修改的类型作为[ type 变量 ]( http://www.typescriptlang.org/docs/handbook/generics.html#working-with-generic-type-variables )给出，就像 Array 一样，我们现在有两个嵌套的类型变量，语法开始看起来有点奇怪。
+
 We can improve the code's readability by using the [alternative](http://www.typescriptlang.org/docs/handbook/basic-types.html#array) array syntax:
-我们可以通过使用[另类]( http://www.typescriptlang.org/docs/handbook/basic-types.html#array )数组语法来提高代码的可读性:
+我们可以通过使用[alternative](http://www.typescriptlang.org/docs/handbook/basic-types.html#array)数组语法来提高代码的可读性:
 
 ```js
 const getNonSensitiveEntries = 
@@ -838,8 +818,9 @@ const getNonSensitiveEntries =
 
 In this case we want to exclude only one field, 
 在这种情况下，我们只想排除一个字段,
+
 so even better would be to use the [Omit](http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk) utility type, which we can use to declare which fields to exclude:
-所以更好的方法是使用[ Omit ]( http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk )实用程序类型，我们可以使用它来声明要排除哪些字段:
+所以更好的方法是使用[ Omit ]( http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk )工具类型，我们可以使用它来声明要排除哪些字段:
 
 ```js
 const getNonSensitiveEntries = (): Omit<DiaryEntry, 'comment'>[] => {
@@ -847,7 +828,7 @@ const getNonSensitiveEntries = (): Omit<DiaryEntry, 'comment'>[] => {
 }
 ```
  Another way would be to declare a completely new type for the <i>NonSensitiveDiaryEntry</i>: 
-另一种方法是为<i>nonsensitive diaryentry</i> 声明一个全新的类型:
+另一种方法是为<i>NonSensitiveDiaryEntry</i>声明一个全新的类型:
 
 ```js
 export type NonSensitiveDiaryEntry = Omit<DiaryEntry, 'comment'>;
@@ -880,21 +861,19 @@ export default {
 ```
 
 
-有一件事引起了一些关注，在函数 i 中我们返回了完整的日记条目，尽管输入了 i，但没有给出任何错误！ -->
 One thing in our application is a cause for concern. In the <i>getNonSensitiveEntries</i> we are returning the complete diary entries, and <i>no error is given</i> despite typing!
-在我们的应用中有一件事值得关注。 在<i>getnonsensitiveentry</i> 中，我们返回完整的日记条目，尽管输入了 i，但没有给出任何错误 / i！
+在我们的应用中有一件事值得关注。 在<i>getNonSensitiveEntries</i> 中，尽管有类型，我们还是返回完整的日记条目，而且没有给出任何error！
 
 
 
 This happens because [TypeScript only checks](http://www.typescriptlang.org/docs/handbook/type-compatibility.html) whether we have all of the required fields or not, but excess fields are not prohibited. In our case this means that is is <i>not prohibited</i> to return an object of type <i>DiaryEntry[]</i>, but if we were to try to access the <i>comment</i> field, it would not be possible because we would be accessing a field that TypeScript is unaware of even though it exists.
-发生这种情况是因为[打字稿只检查]( http://www.typescriptlang.org/docs/handbook/type-compatibility.html )我们是否有所有必需的字段，但是多余的字段是不被禁止的。 在我们的例子中，这意味着<i>没有禁止</i> 返回<i>DiaryEntry []</i> 类型的对象，但是如果我们试图访问<i>comment</i> 字段，这将是不可能的，因为我们将访问一个 TypeScript 不知道的字段，即使它存在。
+发生这种情况是因为[TypeScript只检查]( http://www.typescriptlang.org/docs/handbook/type-compatibility.html )我们是否有所有必需的字段，但是多余的字段是不被禁止的。 在我们的例子中，这意味着<i>没有禁止</i> 返回<i>DiaryEntry []</i> 类型的对象，但是如果我们试图访问<i>comment</i> 字段，这将是不可能的，因为我们将访问一个 TypeScript 不知道的字段，即使它存在。
 
-
-如果我们现在从<i>getNonSensitiveEntries</i> 函数返回所有 diaryentry / i，因为它们是<i>frontend</i> 函数，我们实际上泄漏了请求浏览器不需要的字段，尽管我们的类型似乎暗示了不需要的字段！ -->
 Unfortunately this can lead to unwanted behaviour if you are not aware of what you are doing; the situation is valid as long as TypeScript is concerned, but you are most likely allowing use that is not wanted. 
 不幸的是，如果你不知道自己在做什么，这可能会导致不必要的行为; 只要 TypeScript 关注，这种情况就是有效的，但是你很可能允许不需要的使用。
+
 If we were now to return all of the diaryEntries from the <i>getNonSensitiveEntries</i> function to the <i>frontend</i>, we would actually be leaking the unwanted fields to the requesting browser even thought our types seem to imply otherwise!
-如果我们现在将所有来自<i>getnonsensitiveentry</i> 函数的 diaryentry 返回到<i>前端</i>，我们实际上将把不需要的字段泄露给请求的浏览器，即使我们的类型看起来不是这样！
+如果我们现在将所有来自<i>getNonSensitiveEntries</i> 函数的 diaryentry 返回到<i>前端</i>，我们实际上将把不需要的字段泄露给请求的浏览器，即使我们的类型看起来不是这样！
 
 
 
@@ -947,16 +926,13 @@ we would get the following error:
 
 
 
-
 Again the last line of the error message is the most helpful one. Let's undo this undesider modification.
 同样，错误消息的最后一行是最有帮助的。
 
 
 
 Utility types include many handy tools, and it is definetely worth it to take some time to study [the documentation](https://www.typescriptlang.org/docs/handbook/utility-types.html).
-实用类型包括许多方便的工具，花些时间研究[文档]( https://www.typescriptlang.org/docs/handbook/Utility-types.html )当然是值得的。
-
-
+工具类型包括许多方便的工具，花些时间研究[文档]( https://www.typescriptlang.org/docs/handbook/Utility-types.html )当然是值得的。
 
 Finally, we can complete the route which returns all diary entries:
 最后，我们可以完成返回所有日记条目的路线:
@@ -979,7 +955,7 @@ export default router;
 ```
 
 The response is what we expect it to be
-这种React正是我们所期望的
+这种反应正是我们所期望的
 
 ![](../../images/9/26.png)
 
@@ -991,28 +967,25 @@ The response is what we expect it to be
 
 
 ### Exercises 9.10.-9.11.
-练习9.10-9.11。
-
 Similarly to Ilari's flight service, we do not use a real database in our app but instead use hardcoded data, that is in the files [diagnoses.json](https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.json) and [patients.json](https://github.com/fullstack-hy2020/misc/blob/master/patients.json). Get the files and store those into a directory called <i>data</i> under your project. All data modification can be done in runtime memory, so during this part it is <i>not necessary to write to a file</i>.
-与 Ilar<i>的飞行服务类似，我们在应用中不使用真正的数据库，而是使用硬编码的数据，这些数据存在于文件[ diagnoses.json ]( https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.json )和[ patients.json ]( https://github.com/fullstack-hy2020/misc/blob/master/patients.json )中。 获取文件并将其存储到项目下名为<i>data</i> 的目录中。 所有的数据修改都可以在运行时内存中完成，因此在这一部分中不需要写入文件</i>。
+
+与 Ilari 的飞行服务类似，我们在应用中不使用真正的数据库，而是使用硬编码的数据，这些数据存在于文件[ diagnoses.json ]( https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.json )和[ patients.json ]( https://github.com/fullstack-hy2020/misc/blob/master/patients.json )中。 获取文件并将其存储到项目下名为<i>data</i> 的目录中。 所有的数据修改都可以在运行时内存中完成，因此在这一章节中<i>不需要写入文件</i>。
 
 #### 9.10: Patientor backend, 步骤3
-9.10: Patientor backend，步骤3
-
 Create a type <i>Diagnose</i> and use it to create endpoint <i>/api/diagnoses</i> for fetching all diagnoses with HTTP GET.
-创建一个类型<i>diagnosis</i>，并使用它创建端点<i>/ api / diagnosis</i>，以便使用 HTTP GET 获取所有诊断。
+创建一个类型<i>Diagnose</i>，并使用它创建端点 <i>/api/diagnoses</i> ，以便使用 HTTP GET 获取所有诊断。
 
 Structure your code properly by using meaningfully named directories and files.
 通过使用有意义的命名目录和文件来合理地构造代码。
 
 **Note** that <i>diagnoses</i> may or may not contain the field <i>latin</i>. You might want to use [optional properties](https://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties) in the type definition.
-**注意 * *<i>diagnosis</i> may or may not contain the field<i>latin</i>。 你可能想在类型定义中使用[可选属性]( https://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties 属性)。
+**注意** <i>诊断</i> 可能包含也可能不包含字段<i>latin</i>。 你可能想在类型定义中使用[可选属性]( https://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties 属性)。
 
 #### 9.11: Patientor backend, 步骤4
-9.11: Patientor backend，步骤4
+
 
 Create data type <i>Patient</i> and set up a GET-endpoint <i>/api/patients</i> that returns all patients to the frontend excluding field <i>ssn</i>. Use a [utility type](https://www.typescriptlang.org/docs/handbook/utility-types.html) to make sure you are selecting and returning only the wanted fields.
-创建数据类型<i>Patient</i>，并设置一个 GET-endpoint<i>/ api / patients</i>，将所有患者返回到排除字段<i>ssn</i> 的前端。 使用[实用工具类型]( https://www.typescriptlang.org/docs/handbook/utility-types.html )来确保只选择和返回想要的字段。
+创建数据类型<i>Patient</i>，并设置一个 GET-端点 <i>/ api / patients</i>，将所有患者返回到排除字段<i>ssn</i> 的前端。 使用[工具类型]( https://www.typescriptlang.org/docs/handbook/utility-types.html )来确保只选择和返回想要的字段。
 
 In this exercise you may assume that field <i>gender</i> has type <i>string</i>.
 在这个练习中，您可以假设字段<i>gender</i> 具有类型<i>string</i>。
@@ -1021,7 +994,6 @@ Try the endpoint with browser and ensure that <i>ssn</i> is not included in the 
 使用浏览器尝试端点，并确保响应中不包含<i>ssn</i>:
 
 ![](../../images/9/22g.png)
-
 
 After creating the endpoint, ensure that the <i>frontend</i> shows the list of patients:
 创建端点后，确保<i>前端</i> 显示患者列表:
@@ -1035,16 +1007,12 @@ After creating the endpoint, ensure that the <i>frontend</i> shows the list of p
 <div class="content">
 
 
-### Preventing an accidental undefined result
-# # # 防止意外的未定义结果
-
-
-
+### Preventing an accidental undefined result 防止意外的未定义结果
 Let's extend the backend to support fetching one specific entry with a HTTP GET request to route <i>api/diaries/:id</i>.
-让我们通过 HTTP GET 请求将后端扩展为路由<i>api / diaries / : id</i> 来支持获取一个特定条目。
+让我们通过 HTTP GET 请求将后端扩展为路由 <i>api/diaries/:id</i>来支持获取一个特定条目。
 
 The DiaryService needs to be extended with  <i>findById</i>-function:
-Diaryservice 需要通过<i>findById</i>-function 进行扩展:
+Diaryservice 需要通过<i>findById</i>-函数 进行扩展:
 
 ```js
 // ...
@@ -1065,17 +1033,14 @@ export default {
 ```
 
 
-但是，一个新的问题又一次出现了:
 But once again, a new problem emerges:
 但是，又一次出现了一个新问题:
 
 ![](../../images/9/23e.png)
 
-
-
-现在的问题是，不能保证具有特定 id 的条目可以被找到。这个潜在的问题在编译阶段就出现了，这是件好事，因为没有打字稿就不会有这种可能性的迹象，而且在最坏的情况下，你可能最终返回一个<i>未定义</i> 对象的结果，而不是通过其他方式告知搜索项的不存在性。 -->
 The issue is, that there is no guarantee that an entry with the specified id can be found. 
 问题是，不能保证能够找到具有指定 id 的条目。
+
 It is good that we are made aware of this potential problem already at compile phase. Without TypeScript we would not be warned about this problem, and in the worst case scenration we could have ended up returning an <i>undefined</i> object instead of informing the user about the specified entry not being found. 
 很高兴我们在编译阶段就意识到了这个潜在的问题。 没有 TypeScript，我们不会被警告这个问题，在最坏的情况下，我们可能会返回一个<i>undefined</i> 对象，而不是通知用户指定的条目没有被找到。
 
@@ -1117,13 +1082,11 @@ router.get('/:id', (req, res) => {
 export default router;
 ```
 
-### Adding a new diary
-添加新日记
-
+### Adding a new diary 添加新日记
 
 
 Let's start building the HTTP POST endpoint for adding new flight diary entries.
-让我们开始构建用于添加新航班日志条目的 httppost 端点。
+让我们开始构建用于添加新飞行日志条目的HTTP POST 端点。
 The new entries should have the same type as the existing data.
 新条目应该与现有数据具有相同的类型。
 
@@ -1197,7 +1160,7 @@ But wait, what is the type of this object? It is not exactly a <i>DiaryEntry</i>
 It could be useful to create a new type, <i>NewDiaryEntry</i>, for a not yet saved entry. 
 对于尚未保存的条目，创建一个新类型(<i>NewDiaryEntry</i>)可能很有用。
 Let's create that in <i>types.ts</i> using the existing <i>DiaryEntry</i> type and the [Omit](http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk) utility type:
-让我们使用现有的<i>DiaryEntry</i> 类型和[ Omit ]( http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk )实用程序类型在<i>types.ts</i> 中创建它:
+让我们使用现有的<i>DiaryEntry</i> 类型和[ Omit ]( http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk )工具类型在<i>types.ts</i> 中创建它:
 
 ```js
 export type NewDiaryEntry = Omit<DiaryEntry, 'id'>;
@@ -1253,24 +1216,22 @@ app.listen(PORT, () => {
 Now the application is ready to receive HTTP POST requests for new diary entries of the correct type!
 现在应用已经准备好接收 HTTP POST 请求，以获得正确类型的新日记条目！
 
-### Proofing requests
-# # # 校对请求
-
-
-应用很少能够完全独立工作，我们不得不接受这样一个事实，即单个系统之外的数据源不能完全可靠。当数据来自外部来源时，我们在接收数据时不可能已经输入了它，因此我们需要决定如何处理数据带来的不确定性
+### Proofing requests 校对请求
 There are plenty of things which can go wrong when we accept data from outside sources.
-当我们接受来自外部来源的数据时，有很多事情可能会出错。
+当我们接受来自外部来源的数据时，有很多可能会出错的情况。
+
 Applications rarely work completely on their own, and we are forced to live with the fact that data from sources outside of our system cannot be fully trusted.
 应用很少能够完全独立工作，我们不得不接受这样一个事实，即来自系统外部的数据不能完全受到信任。
 When we receive data from an outside source, there is no way it can be already typed when we receive it. We need to make decisions on how to handle the uncertainty that comes with this.
-当我们从外部来源接收数据时，我们不可能在接收数据时就已经输入了数据。 我们需要决定如何处理随之而来的不确定性。
+当我们从外部来源接收数据时，我们不可能在接收数据时就已经指定了数据类型。 我们需要决定如何处理随之而来的不确定性。
 
 
 
 Express handles parsing the request body by asserting the type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) to all the body's fields.
 Express 通过断言类型[ any ]( http://www.typescriptlang.org/docs/handbook/basic-types.html#any )到主体的所有字段来处理请求主体的解析。
+
 In our case this is not apparent in the editor at all, but if we start looking at the variables more closely and hover over any of them, we can see that each of them is indeed type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any). The editor does not complain in any way when we pass this data to the <i>addDiary</i>  function as parameters:
-在我们的例子中，这在编辑器中是不明显的，但是如果我们开始更仔细地查看这些变量，并且将鼠标悬停在其中的任何一个上面，我们可以看到它们中的每一个都确实是类型[ any ](任何 http://www.typescriptlang.org/docs/handbook/basic-types.html#any )。 当我们将这些数据作为参数传递给<i>addDiary</i> 函数时，编辑器不会以任何方式抱怨:
+在我们的例子中，这在编辑器中是不明显的，但是如果我们开始更仔细地查看这些变量，并且将鼠标悬停在其中的任何一个上面，我们可以看到它们中的每一个确实都是[ any ](http://www.typescriptlang.org/docs/handbook/basic-types.html#any )类型。 当我们将这些数据作为参数传递给<i>addDiary</i> 函数时，编辑器不会以任何方式产生警告:
 
 ![](../../images/9/27.png)
 
@@ -1278,11 +1239,10 @@ In our case this is not apparent in the editor at all, but if we start looking a
 
 
 
-
 The value of type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#an) can be assigned to <i>any</i> type of variable since it <i>might be</i> the wanted type. It's definetely not safe to trust this, so 
-Type [ any ]( http://www.typescriptlang.org/docs/handbook/basic-types.html#an )的值可以分配给<i>any</i> 类型的变量，因为它可能是 / i 想要的类型。 相信这个是绝对不安全的，所以
+ [ any ]( http://www.typescriptlang.org/docs/handbook/basic-types.html#an )类型的值可以分配给<i>any</i> 类型的变量，因为它可能是<i>任何</i>想要的类型。 相信这个是绝对不安全的，所以
 always check the incoming values (regardless of whether we are using TypeScript or not).
-总是检查输入值(不管我们是否使用打字稿)。
+总是检查输入值(不管我们是否使用TypeScript)。
 
 
 
@@ -1293,6 +1253,7 @@ We could just add simple <i>exists</i> and <i>is-value-valid</i> checks to the f
 
 We need to define a function <i>toNewDiaryEntry</i> that receives the request body as a parameter and returns a properly typed <i>NewDiaryEntry</i> object. 
 我们需要定义一个函数<i>toNewDiaryEntry</i>，该函数接收请求正文作为参数，并返回一个键入正确的<i>NewDiaryEntry</i> 对象。
+
 The route definition uses the function as follows
 路由定义使用如下函数
 
@@ -1345,10 +1306,10 @@ The function should parse each field and make sure that the return value is exac
 Once again we have a type issue: what is the <i>object</i> type? Since the <i>object</i> is in fact the body of a request, Express has typed it as <i>any</i>. 
 我们再次遇到类型问题:<i>object</i> 类型是什么？ 因为<i>object</i> 实际上是请求的主体，所以 Express 将其输入为<i>any</i>。
 Since the idea of this function is to map fields of unknown type to fields of the correct type and check whether they are defined as expected, this might be the rare case where we actually <i>want to allow the <i>any</i> type</i>.
-由于这个函数的思想是将未知类型的字段映射到正确类型的字段，并检查它们是否按预期定义，这可能是我们实际上希望允许<i>any</i> type / i 的罕见情况。
+由于这个函数的思想是将未知类型的字段映射到正确类型的字段，并检查它们是否按预期定义，这可能是我们实际上希望允许<i>any</i> 类型的罕见情况。
 
 However if we type the object as <i>any</i>, eslint gives us a complaint:
-然而，如果我们像<i>any</i> 一样输入对象，eslint 会给我们一个抱怨:
+然而，如果我们像<i>any</i> 一样输入对象，eslint 会给我们一个产生警告:
 
 ![](../../images/9/24e.png)
 
@@ -1356,7 +1317,7 @@ However if we type the object as <i>any</i>, eslint gives us a complaint:
 
 
 This is due to the eslint-rule  [no-explicit-any](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md) which prevents us from explicitly setting type to be <i>any</i>. 
-这是由于 eslint-rule [ no-explicit-any ]( https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md )阻止我们显式地将 type 设置为<i>any</i>。
+这是由于 eslint-规则 [ no-explicit-any ]( https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md )阻止我们显式地将 type 设置为<i>any</i>。
 In general this is a good rule, and undesired just in this particular file. We can allow using <i>any</i> in this file by disabling the eslint-rule in the file. This happens by adding the following line to the file:
 一般来说，这是一个很好的规则，只是在这个特定的文件中不受欢迎。 我们可以通过禁用文件中的 eslint-rule 来允许在该文件中使用<i>any</i>。 这是通过在文件中添加如下行来实现的:
 
@@ -1367,10 +1328,8 @@ In general this is a good rule, and undesired just in this particular file. We c
 Let us start creating the parsers for each of the fields of <i>object</i>. 
 让我们开始为<i>object</i> 的每个字段创建解析器。
 
-
 To validate the <i>comment</i> field we need to check that it exists, and to ensure that it is of the type <i>string</i>.
 为了验证<i>comment</i> 字段，我们需要检查它是否存在，并确保它是<i>string</i> 类型。
-
 
 The function should look something like this:
 这个函数应该是这样的:
@@ -1400,14 +1359,14 @@ const isString = (text: any): text is string => {
 
 
 The function is a so called [type guard](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards). That means it is a function which returns a boolean <i>and</i> which has a <i>type predicate</i> as the return type. In our case the type predicate is
-这个函数是一个所谓的[类型保护]( https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards )。 这意味着它是一个返回布尔型<i>和</i> 的函数，它的返回类型是<i>类型谓词</i>。 在我们的示例中，类型谓词是
+这个函数是一个所谓的[类型保护]( https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards )。 这意味着它是一个返回布尔型的函数，它的返回类型是<i>类型谓词</i>。 在我们的示例中，类型谓词是
 
 ```js
 text is string
 ```
 
 The general form of a type predicate is _parameterName is Type_ where the _parameterName_ is the name of the function parameter and _Type_ is the targeted type.
-类型谓词的一般形式是 parameterName 是 Type，其中 parameterName 是函数参数的名称，Type 是目标类型。
+类型谓词的一般形式是  _parameterName is Type_，其中 parameterName 是函数参数的名称，Type 是目标类型。
 
 If the type guard function returns true, the TypeScript compiler knows that the tested variable has the type that was defined in the type predicate. 
 如果类型保护函数返回 true，则 TypeScript 编译器知道被测变量具有在类型谓词中定义的类型。
@@ -1417,12 +1376,10 @@ Before the type guard is called, the actual type of the variable <i>comment</i> 
 
 ![](../../images/9/28.png)
 
-
 But after the call, if the code proceeds past the exception (that is the type guard returned true), compiler knows that <i>comment</i> is of the type <i>string</i>:
 但是在调用之后，如果代码继续执行异常(即返回的类型保护为 true) ，编译器就会知道<i>comment</i> 的类型是<i>string</i>:
 
 ![](../../images/9/29.png)
-
 
 Why do we have two conditions in the string type guard?
 为什么我们在字符串类型保护中有两个条件？
@@ -1434,7 +1391,7 @@ const isString = (text: any): text is string => {
 ```
 
 would it not be enough to write the guard like this
-这样写信给警卫还不够吗
+这样写守卫还不够吗
 
 ```js
 const isString = (text: any): text is string => {
@@ -1472,7 +1429,7 @@ Most likely the simpler version of the type guard would be just fine.
 Next, let's consider the <i>date</i> field. 
 接下来，让我们考虑<i>date</i> 字段。
 Parsing and validating the date object is pretty similar to what we did with comments. 
-解析和验证 date 对象与我们对便笺所做的非常相似。
+解析和验证 date 对象与我们对评论所做的非常相似。
 Since TypeScript doesn't really know a type for a date, we need to treat is as a <i>string</i>.
 由于 TypeScript 实际上并不知道某个日期的类型，因此我们需要将其视为<i>string</i>。
 We should however still use JavaScript level validation to check whether the date format is acceptable.
@@ -1502,7 +1459,7 @@ Note, that even though the <i>parseDate</i> function accepts the <i>date</i> var
 注意，即使<i>parseDate</i> 函数接受<i>date</i> 变量，在我们用<i>isString</i> 检查类型之后，它的类型被设置为字符串，这就是为什么我们可以将变量赋给<i>isDate</i> 函数，而不会有任何问题。
 
 Finally we are ready to move on to the last two types, Weather and Visibility.
-最后，我们准备进入最后两个类型，天气和能见度。
+最后，我们准备讨论最后两个类型，天气和能见度。
 
 We would like the validation and parsing to work as follows:
 我们希望验证和解析工作如下:
@@ -1530,11 +1487,10 @@ const isWeather = (str: any): str is Weather => {
 ```
 
 
-这当然不是一件好事，因为我们希望所有可能的天气类型只有一个来源
 This would work just fine, but the problem is that the list of possible weathers does not necessarily stay in sync with the type definitions if the type is altered. 
-这样就可以了，但问题是，如果类型被改变了，那么可能的编织方式列表并不一定与类型定义保持同步。
+这样就可以了，但问题是，如果类型被改变了，那么可能的天气列表并不一定与类型定义保持同步。
 This is most certainly not good, since we would like to have just one source for all possible weather types.
-这当然是不好的，因为我们希望只有一个来源的所有可能的天气类型。
+这当然是不好的，因为我们希望只有单一来源的所有可能的天气类型。
 
 
 
@@ -1568,7 +1524,7 @@ const isWeather = (param: any): param is Weather => {
 
 
 One thing to notice here is that we have changed the parameter type to <i>any</i>. If it would be string, the <i>includes</i> check would not compile. This makes sense also if you consider the resuability of the function. Allowing <i>any</i> as a parameter, the function can be used with confidence knowing that whatever we might feed to it, the function always tells us whether the variable is a valid weather or not. 
-这里需要注意的一点是，我们将参数类型改为<i>any</i>。 如果它是字符串，那么<i>includes</i> 检查将不能编译。 如果考虑函数的可重用性，这也是有意义的。 允许 i / i 作为参数，这个函数可以自信地使用，因为我们知道无论我们给它提供什么，函数总是告诉我们变量是否是一个有效的天气。
+这里需要注意的一点是，我们将参数类型改为<i>any</i>。 如果它是字符串，那么<i>includes</i> 检查将不能编译。 如果考虑函数的可重用性，这也是有意义的。 允许 <i>any</i> 作为参数，这个函数可以无顾虑地使用，因为我们知道无论我们给它提供什么，函数总是告诉我们变量是否是一个有效的天气。
 
 The function <i>parseWeather</i> can be simplified a bit
 <i>parseWeather</i> 函数可以简化一些
@@ -1588,7 +1544,6 @@ One issue arises after these changes. Our data does not conform to our types any
 在这些变化之后出现了一个问题，我们的数据不再符合我们的类型:
 
 ![](../../images/9/30.png)
-
 
 
 
@@ -1626,7 +1581,6 @@ export default diaryEntries
 ```
 Note that since <i>toNewDiaryEntry</i> returns an object of the type <i>NewDiaryEntry</i> we need to assert it to be <i>DiaryEntry</i> with the [as](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) operator.
 注意，由于<i>toNewDiaryEntry</i> 返回类型为<i>NewDiaryEntry</i> 的对象，我们需要用[ as ]( http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions )操作符断言它是<i>DiaryEntry</i>。
-
 
 
 
@@ -1691,19 +1645,17 @@ If we now try to create a new diary entry with invalid or missing fields we are 
 
 
 ### Exercises 9.12.-9.13.
-练习9.12-9.13。
+
 
 #### 9.12: Patientor backend, 步骤5
-9.12: Patientor backend，步骤5
+
 
 Create a POST-endpoint <i>/api/patients</i> for adding patients. Ensure that you can add patients also from the frontend.
-创建一个 POST-endpoint<i>/ api / patients</i> 用于添加患者。
+创建一个 POST-endpoint <i>/api/patients</i> 用于添加患者。
 
 #### 9.13: Patientor backend, 步骤6
-9.13: Patientor backend，步骤6
-
 Set up safe parsing, validation and type guards to the POST <i>/api/patients</i> request. 
-为 POST<i>/ api / patients</i> 请求设置安全的解析、验证和类型保护。
+为 POST <i>/api/patients</i>请求设置安全的解析、验证和类型保护。
 
 Refactor the <i>Gender</i> field to use an [enum](http://www.typescriptlang.org/docs/handbook/enums.html) type.
 重构<i>Gender</i> 字段以使用[枚举]( http://www.typescriptlang.org/docs/handbook/enums.html )类型。

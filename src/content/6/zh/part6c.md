@@ -251,7 +251,7 @@ Generally disabling eslint when it throws a warning is not a good idea. Even tho
 
 
 More about the need to define the hooks dependencies in [the react documentation](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies).
-更多关于需要在[the react documentation](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies)中定义钩子依赖关系。
+更多关于需要在[the react documentation](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies)中定义Hook依赖关系。
 
 We can do the same thing when it comes to creating a new note. Let's expand the code communicating with the server as follows:
 我们可以做同样的事情，当涉及到创建一个新的便笺。 让我们将与服务器通信的代码展开如下:

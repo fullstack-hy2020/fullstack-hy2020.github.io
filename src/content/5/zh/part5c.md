@@ -10,7 +10,7 @@ There are many different ways of testing React applications. Let's take a look a
 测试 React 应用程序有许多不同的方法。 接下来让我们看看它们。
 
 Tests will be implemented with the same [Jest](http://jestjs.io/) testing library developed by Facebook that was used in the previous part. Jest is actually configured by default to applications created with create-react-app.
-测试将使用与前一部分相同的由 Facebook 开发的 Jest 测试库来实现。create-react-app 默认添加了 Jest 。
+测试将使用与前一章节相同的由 Facebook 开发的 Jest 测试库来实现。create-react-app 默认添加了 Jest 。
 
 In addition to Jest, we also need another testing library that will help us render components for testing purposes. The current best option for this is[react-testing-library](https://github.com/testing-library/react-testing-library) which has seen rapid growth in popularity in recent times.
 

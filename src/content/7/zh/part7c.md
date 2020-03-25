@@ -9,16 +9,14 @@ lang: zh
 
 
 In part 2 we examined two different ways of adding styles to our application: the old-school [single CSS](/en/part2/adding_styles_to_react_app) file and [inline-styles](/en/part2/adding_styles_to_react_app#inline-styles). In this part we will take a look at a few other ways. 
-在第2章节中，我们研究了向应用添加样式的两种不同方式: 老式的[ single CSS ](/ en / part2 / add styles to react app)文件和[ inline-styles ](/ en / part2 / add styles to react app # inline-styles)。 在这一部分，我们将看看其他一些方法。
+在第2章节中，我们研究了向应用添加样式的两种不同方式: 老式的[ single CSS ](/ en / part2 / add styles to react app)文件和[ inline-styles ](/ en / part2 / add styles to react app # inline-styles)。 在这一章节，我们将看看其他一些方法。
 
-### Ready-made UI libraries
-# # # 现成的 UI 库
-
+### Ready-made UI libraries 现成的 UI 库
 One approach to defining styles for an application is to use a ready-made "UI framework".
 为应用定义样式的一种方法是使用现成的“ UI 框架”。
 
 One of the first widely popular UI frameworks was the [Bootstrap](https://getbootstrap.com/) toolkit created by Twitter, that may still be the most popular framework. Recently there has been an explosion in the number of new UI frameworks that have entered the arena. In fact, the selection is so vast that there is little hope of creating an exhaustive list of options.
-第一个广泛流行的 UI 框架是由 Twitter 创建的[ Bootstrap ]( https://getbootstrap.com/ 工具包) ，它可能仍然是最流行的框架。 最近，进入这个领域的新 UI 框架数量激增。 事实上，选择的范围是如此之广，以至于几乎没有希望创建一个详尽的选项清单。
+一个广泛流行的 UI 框架是由 Twitter 创建的[ Bootstrap ]( https://getbootstrap.com/ 工具包) ，它可能仍然是最流行的框架。 最近，进入这个领域的新 UI 框架数量激增。 事实上，选择的范围是如此之广，以至于几乎没有希望创建一个详尽的选项清单。
 
 Many UI frameworks provide developers of web applications with ready-made themes and "components" like buttons, menus, and tables. We write components in quotes, because in this context we are not talking about React components. Usually UI frameworks are used by including the CSS stylesheets and JavaScript code of the framework in the application.
 许多 UI 框架为 web 应用开发人员提供现成的主题和“组件” ，如按钮、菜单和表格。 我们将组件写在引号中，因为在这里我们不讨论 React 组件。 通常，UI 框架是通过在应用中包含 CSS 样式表和框架的 JavaScript 代码来使用的。
@@ -30,7 +28,7 @@ Next we will take a closer look at two UI frameworks, Bootstrap and [MaterialUI]
 接下来我们将仔细研究两个 UI 框架，Bootstrap 和[ MaterialUI ]( https://material-UI.com/ )。 我们将使用这两个框架来为我们在课程教材的[ React-router ](/ en / part7 / react router)部分中创建的应用添加类似的样式。
 
 ### React Bootstrap
-# # React鞋带
+
 
 Let's start by taking a look at Bootstrap with the help of the [react-bootstrap](https://react-bootstrap.github.io/) package.
 让我们首先来看一下通过[ react-Bootstrap ]( https://react-Bootstrap.github.io/ )包的帮助引导程序。
@@ -43,7 +41,7 @@ npm install --save react-bootstrap
 ```
 
 Then let's add a link for loading the CSS stylesheet for Bootstrap inside of the <i>head</i> tag in the <i>public/index.html</i> file of the application:
-然后，我们在应用的<i>public</i>ndex. html /<i>文件中的 i head</i> 标签内部添加一个链接，用于加载 Bootstrap 的 CSS 样式表:
+然后，我们在应用的 <i>public/index.html</i>文件中的 <i>head</i> 标签内部添加一个链接，用于加载 Bootstrap 的 CSS 样式表:
 
 ```js
 <head>
@@ -61,7 +59,6 @@ When we reload the application, we notice that it already looks a bit more styli
 
 ![](../../images/7/5ea.png)
 
-
 In Bootstrap, all of the contents of the application are typically rendered inside of a [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers). In practice this is accomplished by giving the root _div_ element of the application the  _container_ class attribute:
 在 Bootstrap 中，应用的所有内容通常都渲染在一个[容器]( https://getbootstrap.com/docs/4.1/layout/overview/#containers )中。 实际上，这是通过给应用的根 div 元素 container class 属性来实现的:
 
@@ -76,7 +73,6 @@ const App = () => {
   )
 }
 ```
-
 
 We notice that this already has an effect on the appearance of the application. The content is no longer as close to the edges of the browser as it was earlier:
 我们注意到，这已经对应用的外观产生了影响。 内容不再像以前那样接近浏览器的边缘:
@@ -117,7 +113,6 @@ The appearance of the application is quite stylish:
 
 ![](../../images/7/7e.png)
 
-
 Notice that the React Bootstrap components have to be imported separately from the library as shown below:
 请注意 React Bootstrap 组件必须与库分开导入，如下所示:
 
@@ -125,9 +120,7 @@ Notice that the React Bootstrap components have to be imported separately from t
 import { Table } from 'react-bootstrap'
 ```
 
-#### Forms
-表格
-
+#### Forms表单
 Let's improve the form in the <i>Login</i> view with the help of Bootstrap [forms](https://getbootstrap.com/docs/4.1/components/forms/).
 让我们在 Bootstrap [ forms ]( https://getbootstrap.com/docs/4.1/components/forms/ )的帮助下改进<i>Login</i> 视图中的表单。
 
@@ -174,13 +167,10 @@ After switching over to the Bootstrap form, our improved application looks like 
 
 
 #### Notification
-通知
-
 Now that the login form is in better shape, let's take a look at improving our application's notifications:
 现在登录表单已经更好了，让我们来看看如何改进应用的通知功能:
 
 ![](../../images/7/9ea.png)
-
 
 Let's add a message for the notification when a user logs in to the application. We will store it in the _message_ variable in the <i>App</i> component's state:
 让我们在用户登录到应用时为通知添加一条消息。 我们将把它存储在<i>App</i> 组件状态的消息变量中:
@@ -207,9 +197,8 @@ const App = () => {
 }
 ```
 
-
 We will render the message as a Bootstrap [Alert](https://getbootstrap.com/docs/4.1/components/alerts/) component. Once again, the React Bootstrap library provides us with a matching [React component](https://react-bootstrap.github.io/components/alerts/): 
-我们将把消息作为 Bootstrap [ Alert ]( https://getbootstrap.com/docs/4.1/components/alerts/ 组件来渲染。 再一次，React Bootstrap 库为我们提供了一个匹配的[ React component ](React component) https://React-Bootstrap.github.io/components/alerts/  :
+我们将把消息作为 Bootstrap [Alert](https://getbootstrap.com/docs/4.1/components/alerts/) 组件来渲染。 再一次，React Bootstrap 库为我们提供了一个匹配的[React component](https://react-bootstrap.github.io/components/alerts/) :
 
 ```js
 <div className="container">
@@ -224,9 +213,7 @@ We will render the message as a Bootstrap [Alert](https://getbootstrap.com/docs/
 </div>
 ```
 
-#### Navigation structure
-导航结构
-
+#### Navigation structure 导航结构
 Lastly, let's alter the application's navigation menu to use Bootstrap's [Navbar](https://getbootstrap.com/docs/4.1/components/navbar/) component. The React Bootstrap library provides us with [matching built-in components](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly). Through trial and error, we end up with a working solution in spite of the cryptic documentation:
 最后，让我们改变应用的导航菜单，使用 Bootstrap 的[导航栏]( https://getbootstrap.com/docs/4.1/components/Navbar/  / 导航栏)组件。 React Bootstrap 库为我们提供了[匹配内置组件]( https://React-Bootstrap.github.io/components/navbar/#navbars-mobile-friendly )。 通过反复试验，我们最终得到了一个可行的解决方案，尽管文档晦涩难懂:
 
@@ -277,7 +264,6 @@ Chrome developer tools makes it possible to simulate using our application in th
 
 ![](../../images/7/12ea.png)
 
-
 You can find the complete code for the application [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-bootstrap.js).
 你可以在这里找到应用的完整代码[点击这里]( https://github.com/fullstack-hy2020/misc/blob/master/notes-bootstrap.js )。
 
@@ -298,10 +284,8 @@ Install the library with the command
 npm install --save @material-ui/core
 ```
 
-
-1. -- lis t sitten sovelluksen tiedostoon<i>public</i>ndex. html /<i>tagin i head</i> sis n bootstrapin css-m rittelyt lataava rivi: --
 Then add the following line to the <i>head</i> tag in the <i>public/index.html</i> file. The line loads bootstrap's css-definitions.
-然后向<i>public</i>ndex. html /<i>文件中的 i head</i> 标签添加如下行。
+然后向 <i>public/index.html</i><i>文件中的 <i>head</i> 标签添加如下行。
 
 ```js
 <head>
@@ -318,7 +302,7 @@ Now let's use MaterialUI to do the same modifications to the code we did earlier
 
 
 Render the contents of the whole application within a [Container](https://material-ui.com/components/container/):
-在[货柜]( https://material-ui.com/components/Container/ )内渲染整个申请的内容:
+在[Container](https://material-ui.com/components/container/)内渲染整个应用的内容:
 
 ```js
 import Container from '@material-ui/core/Container'
@@ -364,12 +348,10 @@ const Notes = ({notes}) => (
 ```
 
 
-——《修拉阿瓦拉塔》 : ——
 The table looks like so:
-桌子看起来是这样的:
+表格看起来是这样的:
 
 ![](../../images/7/63eb.png)
-
 
 
 
@@ -388,9 +370,7 @@ import {
 } from '@material-ui/core'
 ```
 
-#### Form
-表格
-
+#### Form 表单
 
 !-parannellaan seuraavaksi n kym n<i>Login</i> kirjetumislomaketta k ytt en komponentteja [ TextField ]( https://material-ui.com/components/text-fields/ ) ja [ Button ]( https://material-ui.com/api/Button/ ) : -
 Next let's make the login form in the <i>Login</i> view better using the [TextField](https://material-ui.com/components/text-fields/) and [Button](https://material-ui.com/api/button/) components:
@@ -436,7 +416,6 @@ The end result is:
 
 
 
-
 Difference to bootstrap is, that MaterialUI does not provide a component for the form itself. The form here an ordinary HTML [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) element.
 与 bootstrap 不同的是，MaterialUI 并不为表单本身提供组件。 这里的表单是一个普通的 HTML [ form ]( https://developer.mozilla.org/en-us/docs/web/HTML/element/form )元素。
 
@@ -446,10 +425,6 @@ Remember to import all the components used in the form.
 请记住导入表单中使用的所有组件。
 
 #### Notification
-通知
-
-
-
 The notification displayed on log in can be done using the [Alert](https://material-ui.com/components/alert/) component, which is quite similiar to bootstrap's equivalent component:
 在登录中显示的通知可以通过使用[ Alert ]( https://material-ui.com/components/Alert/ 组件)来完成，这个组件与 bootstrap 的等价组件非常相似:
 
@@ -491,15 +466,11 @@ Alert is quite stylish:
 ![](../../images/7/65ea.png)
 
 
-#### Navigaation structure
-导航结构
-
+#### Navigaation structure 导航结构
 
 
 We can implement navigation using the [AppBar](https://material-ui.com/components/app-bar/) component.
-我们可以使用[ AppBar ]( https://material-ui.com/components/app-bar/ 组件来实现导航。
-
-
+我们可以使用 [AppBar](https://material-ui.com/components/app-bar/) 组件来实现导航。
 
 If we use the example code from the documentation
 如果我们使用文档中的示例代码
@@ -537,9 +508,8 @@ we do get working navigation, but it could look better
 
 
 
-
 We can find a better way from the [documentation](https://material-ui.com/guides/composition/#routing-libraries). We can use [component props](https://material-ui.com/guides/composition/#component-prop) to define how the root element of a MaterialUI component is rendered.
-我们可以从文档中找到一个更好的 https://material-ui.com/guides/composition/#routing-libraries。 我们可以使用[ component props ]( https://material-ui.com/guides/composition/#component-prop )来定义 MaterialUI 组件的根元素是如何渲染的。
+我们可以从文档中[documentation](https://material-ui.com/guides/composition/#routing-libraries)找到一个更好的 。 我们可以使用[ component props ]( https://material-ui.com/guides/composition/#component-prop )来定义 MaterialUI 组件的根元素是如何渲染的。
 
 
 
@@ -553,7 +523,6 @@ By defining
 ```
 
 
-——翻译公司按钮，siten sen juurikomponenttina onkin React-redux-kirjaston komponentti link，jolle siirtypolun kertova props。——
 the _Button_ component is rendered so, that its root component is react-redux _Link_ which receives its path as prop field _to_.
 Button 组件渲染为这样，它的根组件是 react-redux Link，它接收它的路径作为 prop 字段到。
 
@@ -593,24 +562,21 @@ and it looks like we want it to
 
 
 
-
 The code of the application can be found from [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js).
-这个应用的代码可以在这里找到( https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js 地图)。
+这个应用的代码可以在这里[here](https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js)找到。
 
 ### Closing thoughts
 封闭的思想
 
 
-<！ ——自力更生
 The difference between react-bootstrap and MaterialUI is not big. It's up to you which one you find better looking. 
 React-bootstrap 和 MaterialUI 之间的区别并不大，这取决于你觉得哪个更好看。
 I myself have not used MaterialUI a lot, but my first impressions are positive. Its documentation is a bit better than react-bootstrap's. 
-我自己并没有使用很多材料，但我的第一印象是积极的。 它的文档比起React引导程序要好一点。
+我自己并没有使用很多MaterialUI，但我的第一印象是积极的。 它的文档比起React引导程序要好一点。
 According to https://www.npmtrends.com/ which tracks the popularity of different npm-libraries MaterialUI passed react-bootstrap in popularity at the end of 2018:
 根据追踪不同 npm 流行程度的 https://www.npmtrends.com/ 数据库 MaterialUI 在2018年底通过了 react-bootstrap:
 
 ![](../../images/7/68ea.png)
-
 
 In the two previous examples, we used the UI frameworks with the help of React-integration libraries.
 在前面的两个示例中，我们借助于 React-integration 库使用了 UI 框架。
@@ -637,40 +603,28 @@ The benefit of using the React Bootstrap library is not that evident from this e
 从这个例子来看，使用 React Bootstrap 库的好处并不明显。
 
 In addition to making the frontend code more compact and readable, another benefit of using React UI framework libraries is that they include the JavaScript that is needed to make specific components work. Some Bootstrap components require a few unpleasant [JavaScript dependencies](https://getbootstrap.com/docs/4.1/getting-started/introduction/#js) that we would prefer not to include in our React applications.
-除了使前端代码更加紧凑和可读，使用 React UI 框架库的另一个好处是它们包含了使特定组件工作所需的 JavaScript。 一些引导程序组件需要一些讨厌的依赖项(JavaScript 依赖项) ，我们不希望在 React 应用中包含这些 https://getbootstrap.com/docs/4.1/getting-started/introduction/#js。
+除了使前端代码更加紧凑和可读，使用 React UI 框架库的另一个好处是它们包含了使特定组件工作所需的 JavaScript。 一些引导程序组件需要一些讨厌的依赖项(JavaScript 依赖项 [JavaScript dependencies](https://getbootstrap.com/docs/4.1/getting-started/introduction/#js)) ，我们不希望在 React 应用中包含这些。
 
 Some potential downsides to using UI frameworks through integration libraries instead of using them "directly", are that integration libraries may have unstable API's and poor documentation. The situation with [Semantic UI React](https://react.semantic-ui.com) is a lot better than with many other UI frameworks, as it is an official React integration library.
 通过集成库而不是“直接”使用 UI 框架的一些潜在缺点是，集成库可能具有不稳定的 API 和糟糕的文档。 与其他 UI 框架相比，[ Semantic UI React ]( https://React.Semantic-UI.com )的情况要好得多，因为它是一个官方的 React 集成库。
-
 
 There is also the question of whether or not UI framework libraries should be used in the first place. It is up to everyone to form their own opinion, but for people lacking knowledge in CSS and web design they are very useful tools.
 还有一个问题是，首先是否应该使用 UI 框架库。 这取决于每个人形成自己的意见，但对于缺乏 CSS 和网页设计知识的人来说，他们是非常有用的工具。
 
 
-### Other UI frameworks
-其他 UI 框架
-
-
+### Other UI frameworks 其他 UI 框架
 Here are some other UI frameworks for your consideration. If you do not see your favorite UI framework in the list, please make a pull request to the course material.
 这里有一些其他的 UI 框架供您考虑。 如果您没有在列表中看到您最喜欢的 UI 框架，请对课程材料提出拉取请求。
 
 - <https://bulma.io/>
--  https://bulma.io/ 
 - <https://ant.design/>
--  https://ant.design/ 
 - <https://get.foundation/>
--  https://get.foundation/ 
 - <https://chakra-ui.com/>
--  https://chakra-ui.com/ 
 - <https://tailwindcss.com/>
--  https://tailwindcss.com/ 
 
-### Styled components
-# # 风格化的组件
-
+### Styled components 风格化的组件
 There are also [other ways](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b) of styling React applications that we have not yet taken a look at.
-还有一些我们还没有看过的应用的样式 https://blog.bitsrc.io/5-ways-to-style-React-components-in-2019-30f1ccc2b5b。
-
+还有一些我们还没有看过的应用的样式[other ways](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b)。
 
 The [styled components](https://www.styled-components.com/) library offers an interesting approach for defining styles through [tagged template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) that were introduced in ES6.
 [样式化组件]( https://www.styled-components.com/ )库提供了一种有趣的方法，可以通过在 ES6中引入的[带标记的模板文字]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/template_literals )定义样式。
@@ -699,8 +653,7 @@ The code above creates styled versions of the <i>button</i> and <i>input</i> HTM
 上面的代码创建了<i>Button</i> 和<i>Input</i> HTML 元素的样式版本，然后将它们赋值给<i>Button</i> 和<i>Input</i> 变量。
 
 The syntax for defining the styles is quite interesting, as the CSS rules are defined inside of backticks.
-定义样式的语法非常有趣，因为 CSS 规则是在回标中定义的。
-
+定义样式的语法非常有趣，因为 CSS 规则是在backticks中定义的。
 
 The styled components that we defined work exactly like regular <i>button</i> and <i>input</i> elements, and they can be used the same way:
 我们定义的样式化组件与常规的<i>button</i> 和<i>input</i> 元素工作方式完全相同，它们可以以相同的方式使用:
@@ -798,7 +751,6 @@ The appearance of the resulting application is shown below:
 
 ![](../../images/7/18ea.png)
 
-
 Styled components have seen a consistent growth in popularity in recent times, and quite a lot of people consider it to be the best way of defining styles to React applications.
 风格化的组件在最近一段时间内一直受到欢迎，很多人认为这是定义样式到 React 应用的最佳方式。
 
@@ -817,8 +769,3 @@ The exercises related to the topics presented here, can be found at the end of t
 与这里提到的主题相关的练习，可以在本课程材料部分的练习集[用于扩展博客列表应用](/ en / part7 / 练习扩展博客列表)的最后找到。
 
 </div>
-
-
-
-=======END=======
-完

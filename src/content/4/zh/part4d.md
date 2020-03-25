@@ -354,7 +354,7 @@ Usernames, passwords and applications using token authentication must always be 
 使用 token 认证的用户名、密码以及应用应当始终在 [HTTPS](https://en.wikipedia.org/wiki/HTTPS)上使用。我们可以使用 Node [HTTPS](https://nodejs.org/api/https.html) 服务器来替换我们的 [HTTP](https://nodejs.org/docs/latest-v8.x/api/http.html)服务器，（HTTPS 需要更多配置）。从另一方面来说，我们应用的生产版本在 Heroku 中，所以我们的应用才能十分安全：Heroku 通过 HTTPS 在浏览器和 Heroku 服务器之间路由了所有的流量
 
 We will implement login to the frontend in the [next part](/en/part5).
-我们将在下一部分实现对前端的登录。
+我们将在下一章节实现对前端的登录。
 
 </div>
 
@@ -501,7 +501,7 @@ After adding token based authentication the tests for adding a new blog broke. d
 在进行修复时，[这个](https://github.com/visionmedia/supertest/issues/398)很可能是最有用的。
 
 This is the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
-这是本课程这一部分的最后一个练习，是时候将你的代码推送到 GitHub，并将所有已完成的练习标记到[练习提交系统]( https://studies.cs.helsinki.fi/stats/courses/fullstackopen )。
+这是本课程这一章节的最后一个练习，是时候将你的代码推送到 GitHub，并将所有已完成的练习标记到[练习提交系统]( https://studies.cs.helsinki.fi/stats/courses/fullstackopen )。
 
 <!---
 note left of user

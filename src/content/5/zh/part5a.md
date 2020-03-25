@@ -17,7 +17,7 @@ At the moment the frontend shows existing notes, and lets users change the state
 
 We'll now implement a part of the required user management functionality to the frontend. Let's begin with user login. Throughout this part we will assume that new users will not be added from the frontend.
 
-我们现在将实现前台的用户管理功能的一部分。首先从用户登录开始，在这一部分中，我们假设还不会从前端来添加用户。
+我们现在将实现前台的用户管理功能的一章节。首先从用户登录开始，在这一章节中，我们假设还不会从前端来添加用户。
 
 A login form has now been added to the top of the page. The form for adding new notes has also been moved to the top of the list of notes.
 
@@ -525,10 +525,10 @@ We still have to modify our application so that when we enter the page, the appl
 
 The right way to do this is with an [effect hook](https://reactjs.org/docs/hooks-effect.html): A mechanism we first encountered in [part 2](/en/part2/getting_data_from_server#effect-hooks), and used to fetch notes from the server to the frontend.
 
-正确的方式是用一个事件钩子[effect hook](https://reactjs.org/docs/hooks-effect.html)： 这种机制我们在第2章节 [part 2](/en/part2/getting_data_from_server#effect-hooks)分中见到过，当时是用来从服务器中获取所有 Note。
+正确的方式是用一个事件Hook[effect hook](https://reactjs.org/docs/hooks-effect.html)： 这种机制我们在第2章节 [part 2](/en/part2/getting_data_from_server#effect-hooks)分中见到过，当时是用来从服务器中获取所有 Note。
 
 We can have multiple effect hooks, so let's create a second one to handle the first loading of the page:
-我们可以有多个事件钩子，所以我们来创建一个来处理首次登录页面：
+我们可以有多个事件Hook，所以我们来创建一个来处理首次登录页面：
 
 ```js
 const App = () => {
@@ -597,7 +597,7 @@ Current application code can be found on [Github](https://github.com/fullstack-h
 
 ### Exercises 5.1.-5.4.
 We will now create a frontend for the bloglist backend we created in the last part. You can use [this application](https://github.com/fullstack-hy2020/bloglist-frontend) from GitHub as the base of your solution. The application expects your backend to be running on port 3001. 
-现在我们将为上一部分创建的博客列表后端创建一个前端。 你可以使用 GitHub 上的[ this application ]( https://GitHub.com/fullstack-hy2020/bloglist-frontend )作为你的解决方案的基础。 应用期望您的后端在端口3001上运行。
+现在我们将为上一章节创建的博客列表后端创建一个前端。 你可以使用 GitHub 上的[ this application ]( https://GitHub.com/fullstack-hy2020/bloglist-frontend )作为你的解决方案的基础。 应用期望您的后端在端口3001上运行。
 
 It is enough to submit your finished solution. You can do a commit after each exercise, but that is not necessary. 
 只要提交完成的解决方案就足够了。 您可以在每次练习之后进行一次提交，但这不是必须的。

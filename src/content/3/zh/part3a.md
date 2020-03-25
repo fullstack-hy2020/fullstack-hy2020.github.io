@@ -169,7 +169,7 @@ Error: listen EADDRINUSE :::3001
 ```
 
 You have two options. Either shutdown the application using the port 3001 (the json-server in the last part of the material was using the port 3001), or use a different port for this application.
-你有两个选择。 要么关闭使用端口3001应用(教材上一章最后一部分的 json-server 使用端口3001) ，要么为此应用使用不同的端口。
+你有两个选择。 要么关闭使用端口3001应用(教材上一章最后一章节的 json-server 使用端口3001) ，要么为此应用使用不同的端口。
 
 Let's take a closer look at the first line of the code:
 让我们仔细看看代码的第一行:
@@ -1045,11 +1045,11 @@ What exactly is happening in that line of code? <em>notes.map(n => n.id)</em> cr
 练习3.1- 3.6。
 
 **NB:** It's recommended to do all of the exercises from this part into a new dedicated git repository, and place your source code right at the root of the repository. Otherwise you will run into problems in exercise 3.10.
-注意: 建议将本部分的所有练习放到一个新的专用 git 存储库中，并将源代码放在仓库的根部。 否则你会在练习3.10中遇到问题。
+注意: 建议将本章节的所有练习放到一个新的专用 git 存储库中，并将源代码放在仓库的根部。 否则你会在练习3.10中遇到问题。
 
 **NB:** Because this is not a frontend project and we are not working with React, the application <strong>is not created</strong> with create-react-app. You initialize this project with the <em>npm init</em> command that was demonstrated earlier in this part of the material.
 
-注意： 因为这不是一个前端项目，我们没有使用 React，所以应用没有用 create-react-app创建。 您可以使用 <em>npm init</em> 命令初始化这个项目，该命令在本部分的前面已经演示过了。
+注意： 因为这不是一个前端项目，我们没有使用 React，所以应用没有用 create-react-app创建。 您可以使用 <em>npm init</em> 命令初始化这个项目，该命令在本章节的前面已经演示过了。
 
 **Strong recommendation:** When you are working on backend code, always keep an eye on what's going on in the terminal that is running your application.
 

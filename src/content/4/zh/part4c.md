@@ -114,7 +114,7 @@ Since users can have many notes, the related ids are stored in an array in the <
 
 Document databases also offer a radically different way of organizing the data: In some situations it might be beneficial to nest the entire notes array as a part of the documents in the users collection:
 
-文档型数据库还提供了一个完全不同的方式组织数据：在某些情况下，这可能收益更大，那就是将所有的 note 以数组的形式作为每个文档的一部分嵌套在 user collection 中。
+文档型数据库还提供了一个完全不同的方式组织数据：在某些情况下，这可能收益更大，那就是将所有的 note 以数组的形式作为每个文档的一章节嵌套在 user collection 中。
 
 ```js
 [

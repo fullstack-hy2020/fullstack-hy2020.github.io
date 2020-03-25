@@ -1254,7 +1254,7 @@ const App = () => {
 另一方面，Notes 是一个容器[container](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) 组件，因为它包含一些应用程序逻辑: 它定义 Note 组件的事件处理程序做什么，并协调表示组件的配置，即 Notes。
 
 We will return to the presentational/container division later in this part.
-我们将在本部分后面回到表现层 / 容器部分。
+我们将在本章节后面回到表现层 / 容器部分。
 
 The code of the Redux application can be found on [Github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-1), branch <i>part6-1</i>.
 Redux 应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/Redux-notes/tree/part6-1) ，branch<i>part6-1</i> 上找到。

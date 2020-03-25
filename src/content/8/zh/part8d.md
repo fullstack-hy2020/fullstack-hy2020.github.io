@@ -8,13 +8,10 @@ lang: zh
 <div class="content">
 
 
-
 The frontend of our application shows the phone directory just fine with the updated server. However if we want to add new persons, we have to add login functionality to the frontend. 
 应用的前端显示的电话目录与更新后的服务器一致。 然而，如果我们想添加新的人员，我们必须添加登录功能的前端。
 
-### User log in
-# # # 用户登录
-
+### User log in 用户登录
 
 
 Let's add variable _token_ to the application's state. It will contain user's token when a is logged in. If _token_ is undefined, we render the <i>LoginForm</i>-component responsible for user login. The component receives an error handler and the _setToken_-function as parameters:
@@ -64,6 +61,7 @@ expoty const LOGIN = gql`
 
 The _LoginForm_-component works pretty much just like all other components doing mutations we have previously created. 
 Loginform 组件的工作原理与我们之前创建的所有其他进行突变的组件非常相似。
+
 Interesting lines in the code have been highlighted:
 代码中有趣的行被高亮显示:
 
@@ -126,9 +124,9 @@ export default LoginForm
 
 
 We are using an effect hook again. Here it's used to save the token's value to the state of the _App_ component the local storage after the server has responded to the mutation. 
-我们再次使用效果钩子。 在这里，它用于在服务器响应变异之后，将令牌的值保存到本地存储的 App 组件的状态。
+我们再次使用效果Hook。 在这里，它用于在服务器响应变异之后，将令牌的值保存到本地存储的 App 组件的状态。
 Use of the effect hook is necessary to avoind an endless rendering loop.
-使用效果钩子是必要的，以避免无休止的渲染循环。
+使用效果Hook是必要的，以避免无休止的渲染循环。
 
 Let's also add a button which enables logged in user to log out. The buttons onClick handler sets the _token_ state to null, removes the token from local storage and resets the cache of the Apollo client. The last is [important](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout), because some queries might have fetched data to cache, which only logged in users should have access to. 
 我们还要添加一个按钮，使登录用户能够注销。 Onclick 处理程序的按钮将令牌状态设置为 null，从本地存储中删除令牌并重置 Apollo 客户端的缓存。 最后一个是[重要的]( https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout ) ，因为有些查询可能已经将数据提取到缓存，只有登录的用户才能访问。
@@ -140,7 +138,7 @@ Let's also add a button which enables logged in user to log out. The buttons onC
 We can reset the cache using the [resetStore](https://www.apollographql.com/docs/react/v3.0-beta/api/core/ApolloClient/#ApolloClient.resetStore) method of an Apollo _client_ object. 
 我们可以使用 Apollo 客户端对象的[ resetStore ]( https://www.apollographql.com/docs/react/v3.0-beta/api/core/apolloclient/#apolloclient.resetStore )方法重置缓存。
 The client can be accessed with the [useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useapolloclient) hook:
-客户端可以通过[ useApolloClient ]( https://www.apollographql.com/docs/react/api/react-hooks/#useApolloClient )钩子访问:
+客户端可以通过[ useApolloClient ]( https://www.apollographql.com/docs/react/api/react-hooks/#useApolloClient )Hook访问:
 
 ```js
 const App = () => {
@@ -167,9 +165,7 @@ const App = () => {
 The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6), branch <i>part8-6</i>.
 当前应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6) ，branch<i>part8-6</i> 上找到。
 
-### Adding a token to a header
-在头部添加一个标记
-
+### Adding a token to a header 在头部添加一个标记
 After the backend changes, creating new persons requires that a valid user token is sent with the request. In order to send the token, we have to change the way we define the _ApolloClient_-object in <i>index.js</i> a little. 
 在后端更改之后，创建新的人员需要随请求一起发送一个有效的用户令牌。 为了发送令牌，我们必须稍微改变在<i>index.js</i> 中定义 ApolloClient-object 的方式。
 
@@ -197,7 +193,6 @@ const client = new ApolloClient({
 ```
 
 
-<！ 客户多种多样的服务方式，包括医护人员，医护人员，和阿波罗医生。 ( https://www.apollographql.com/docs/link/links/http.htm )-yhtey t muokataan siten，ett，ett pyynt jen mukaan [ asetetaan headerille ]( https://www.apollographql.com/docs/react/networking/authentication/#header )<i>authorization</i> arvoksi localStoragessa mahisesti oleva token. -->
 The link parameter given to the _client_-object defines how apollo connects to the server. Here the normal [httpLink](https://www.apollographql.com/docs/link/links/http.htm) connection is modified so that the request's <i>authorization</i> [header](https://www.apollographql.com/docs/react/networking/authentication/#header) contains the token if one has been saved to the localStorage. 
 给定客户端对象的 link 参数定义了 apollo 如何连接到服务器。 在这里，正常的[ httpLink ]( https://www.apollographql.com/docs/link/links/http.htm )连接被修改，以便请求的<i>authorization</i> [ header ]( https://www.apollographql.com/docs/react/networking/authentication/#header )包含令牌(如果已经保存到 localStorage 的话)。
 
@@ -214,7 +209,6 @@ Creating new persons and changing numbers works again. There is however one rema
 创造新的人员和改变数字再次起作用。 然而，还有一个问题。 如果我们试图添加一个没有电话号码的人，这是不可能的。
 
 ![](../../images/8/25e.png)
-
 
 Validation fails, because frontend sends an empty string as the value of _phone_.
 验证失败，因为前端会发送一个空字符串作为 phone 的值。
@@ -244,17 +238,11 @@ const PersonForm = ({ setError }) => {
 Current application code can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-7), branch <i>part8-7</i>.
 当前的应用代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-7) ，branch<i>part8-7</i> 上找到。
 
-### Updating cache, revisited
-# # # 更新缓存，重新访问
-
-
-
-
-
+### Updating cache, revisited 更新缓存，复习
 We have to [update](/osa8/react_ja_graph_ql#valimuistin-paivitys) the cache of the Apollo client on creating new persons. We can update it using the mutation's _refetchQueries_ option to define that the 
 我们必须[更新](/ osa8 / react ja graph ql # valimuistin-paivitys) Apollo 客户端的缓存，以创建新的人员。 我们可以使用变异的 refetchQueries 选项更新它来定义
 <em>ALL\_PERSONS</em> query is done again. 
-Em ALL  PERSONS / em 查询再次执行。
+ ALL  PERSONS 查询再次执行。
 
 ```js 
 const PersonForm = ({ setError }) => {
@@ -313,13 +301,13 @@ In some situations the only sensible way to keep the cache up to date is using t
 在某些情况下，使缓存保持最新的唯一合理方法是使用 update-callback。
 
 When necessary it is possible to disable cache for the whole application or single queries by setting the field managing the use of cache, [fetchPolicy](https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy) as <em>no-cache</em>.
-必要时，可以通过将管理 cache 使用的字段设置为 em no-cache / em 来禁用整个应用或单个查询的缓存，[ fetchPolicy ]( https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy )。
+必要时，可以通过将管理 cache 使用的字段设置为 <em>no-cache</em> 来禁用整个应用或单个查询的缓存，[ fetchPolicy ]( https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy )。
 
 Be diligent with the cache. Old data in cache can cause hard to find bugs. As we know, keeping the cache up to date is very challenging. According to a coder proverb:
 勤于使用缓存。 缓存中的旧数据可能导致难以发现 bug。 众所周知，保持缓存最新是非常具有挑战性的。 根据一个编码器谚语:
 
 > <i>There are only two hard things in Computer Science: cache invalidation and naming things.</i> Read more [here](https://www.google.com/search?q=two+hard+things+in+Computer+Science&oq=two+hard+things+in+Computer+Science).
-在计算机科学中只有两个难题: 缓存失效和命名。 / i Read more [ here ]( https://www.google.com/search?q=two+hard+things+in+Computer+Science&oq=two+hard+things+in+Computer+Science )。
+在计算机科学中只有两个难题: 缓存失效和命名。Read more [ here ]( https://www.google.com/search?q=two+hard+things+in+Computer+Science&oq=two+hard+things+in+Computer+Science )。
 
 The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-8), branch <i>part8-8</i>.
 当前应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-8) ，branch<i>part8-8</i> 上找到。
@@ -331,30 +319,20 @@ The current code of the application can be found on [Github](https://github.com/
 
 
 ### Exercises 8.17.-8.22.
-练习8.17-8.22。
-
 #### 8.17 Listing books
-8.17列出书籍
-
 
 After the backend changes the list of books does not work anymore. Fix it. 
 后端更改后，图书列表不再工作。修复它。
 
 #### 8.18 Log in
-8.18登录
-
-
 Adding new books and changing the birth year of an author do not work because they require user to be logged in. 
 添加新书和更改作者的出生年份都不起作用，因为它们要求用户登录。
-
 
 Implement login functionality and fix the mutations. 
 实现登录功能并修复变异。
 
-
 It is not necessary yet to handle validation errors. 
 还没有必要处理验证错误。
-
 
 You can decide how the log in looks on the user interface. One possible solution is to make the login form into a separate view which can be accessed through a navigation menu: 
 您可以决定登录在用户界面上的外观。 一个可能的解决方案是使登录表单成为一个单独的视图，可以通过导航菜单访问:
@@ -379,20 +357,15 @@ When a user is logged in, the navigation changes to show the functionalities whi
 #### 8.19 Books by genre, part 1
 8.19图书类型，第一章节
 
-
 Complete your application to filter the book list by genre. Your solution might look something like this:
 完成你的应用，按类型过滤书籍列表。你的解决方案可能是这样的:
 
 ![](../../images/8/30.png)
 
-
 In this exercise the filtering can be done using just React.
 在这个练习中，过滤可以只使用 React 来完成。
 
 #### 8.20 Books by genre, part 2
-8.20图书类型第二章节
-
-
 Implement a view which shows all the books based on the logged in user's favourite genre.
 实现一个视图，根据登录用户最喜欢的类型显示所有的书籍。
 
@@ -400,15 +373,11 @@ Implement a view which shows all the books based on the logged in user's favouri
 
 
 #### 8.21 books by genre with GraphQL
-8.21 books by genre with GraphQL
-
-
 The filtering can be done using just React. You can mark this exercise as completed if you filter the books using a GraphQL query to the server in exercise 8.5. 
 过滤可以用 React 来完成。 如果您在练习8.5中使用 GraphQL 查询过滤图书到服务器，那么您可以将这个练习标记为已完成。
 
-
 This and the next exercises are quite **challenging** like it should be this late in the course. You might want to complete first the easier ones in [next part](/en/part8/fragments_and_subscriptions).
-这个和接下来的练习是相当具有挑战性的。 您可能希望首先完成[下一部分](/ en / part8 / fragments and subscription)中较容易的部分。
+这个和接下来的练习是相当具有挑战性的。 您可能希望首先完成[下一章节](/ en / part8 / fragments and subscription)中较容易的部分。
 
 Some tips
 一些建议
@@ -420,7 +389,7 @@ Some tips
 - Note, that you can do GraphQL queries in a <i>useEffect</i>-hook.
 - 注意，您可以在<i>/ useEffect</i>-hook 中执行 GraphQL 查询。
 - The [second parameter](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) of a <i>useEffect</i> - hook can become handy depending on your approach. 
-根据您的方法，<i>/ e</i>-hook 的[第二个参数]( https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect )可以变得很方便。
+根据您的方法，<i>useEffect</i>  的[第二个参数]( https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect )可以变得很方便。
 
 #### 8.22 Up to date cache and book recommendations
 8.22更新缓存和预订推荐

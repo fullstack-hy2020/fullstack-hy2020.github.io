@@ -245,7 +245,7 @@ xhttp.send();
 
 The details of the code are not important right now, but some code has been included to spice up the images and the text. We will properly start coding in [part 1](/en/part1). The sample code in this part is actually not relevant at all to the coding techniques of this course.
 
-代码的细节现在并不重要，穿插一些代码，是为了增加图片和文本的趣味性。我们将在第 1 章正式地开始编码。 本部分的示例代码实际上与本课程所要讲的编码技术毫无关系。
+代码的细节现在并不重要，穿插一些代码，是为了增加图片和文本的趣味性。我们将在第 1 章正式地开始编码。 本章节的示例代码实际上与本课程所要讲的编码技术毫无关系。
 
 > Some might wonder why xhttp-object is used instead of the modern fetch. This is due to not wanting to go into promises at all yet, and the code having a secondary role in this part. We will return to modern ways to make requests to the server in part 2.
 >
@@ -879,7 +879,7 @@ Often, we also talk about the [frontend](https://en.wikipedia.org/wiki/Front_and
 
 In the context of this course, full stack web development means that we focus on all parts of the application: the frontend, the backend, and the database. Sometimes the software on the server and its operating system are seen as parts of the stack, but we won't go into those.
 
-在本课程的上下文中，全栈 web 开发意味着我们关注应用的所有部分: 前端、后端和数据库。 有时候，服务器上的软件及其操作系统会被看作是全栈的一部分，但我们不会深入讨论这些。
+在本课程的上下文中，全栈 web 开发意味着我们关注应用的所有部分: 前端、后端和数据库。 有时候，服务器上的软件及其操作系统会被看作是全栈的一章节，但我们不会深入讨论这些。
 
 We will code the backend with JavaScript, using [Node.js](https://nodejs.org/en/) runtime environment. Using the same programming language on multiple layers of the stack gives full stack web development a whole new dimension. However, it's not a requirement of full stack web development to use the same programming language (JavaScript) for all layers of the stack.
 

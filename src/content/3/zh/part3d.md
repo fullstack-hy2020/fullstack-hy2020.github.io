@@ -158,7 +158,7 @@ app.post('/api/notes', (request, response, next) => {
 ```
 
 In this example, Promise chaining does not provide much of a benefit. The situation would change if there were many asynchronous operations that had to be done in sequence. We will not delve further into the topic. In the next part of the course we will learn about the <i>async/await</i> syntax in JavaScript, that will make writing subsequent asynchronous operations a lot easier.
-在这个例子中，承诺链没有提供多少好处。 如果有许多必须按顺序进行的异步操作，情况就会发生变化。 我们不会进一步深入探讨这个主题。 在本课程的下一部分中，我们将学习 JavaScript 中的<i>async / await</i> 语法，这将使编写后续的异步操作变得容易得多。
+在这个例子中，承诺链没有提供多少好处。 如果有许多必须按顺序进行的异步操作，情况就会发生变化。 我们不会进一步深入探讨这个主题。 在本课程的下一章节中，我们将学习 JavaScript 中的<i>async / await</i> 语法，这将使编写后续的异步操作变得容易得多。
 
 ### Deploying the database backend to production 将数据库后端部署到生产环境
 The application should work almost as-is in Heroku. We do have to generate a new production build of the frontend due to the changes that we have made to our frontend. 
@@ -272,7 +272,7 @@ Push the latest version to Heroku and verify that everything works there as well
 
 
 Before we move onto the next part, we will take a look at an important tool called [lint](<https://en.wikipedia.org/wiki/Lint_(software)>). Wikipedia says the following about lint:
-在我们进入下一部分之前，我们将看看一个重要的工具，叫做[ lint ]( https://en.wikipedia.org/wiki/lint_(software))。 关于 lint，维基百科是这么说的:
+在我们进入下一章节之前，我们将看看一个重要的工具，叫做[ lint ]( https://en.wikipedia.org/wiki/lint_(software))。 关于 lint，维基百科是这么说的:
 
 > <i>Generically, lint or a linter is any tool that detects and flags errors in programming languages, including stylistic errors. The term lint-like behavior is sometimes applied to the process of flagging suspicious language usage. Lint-like tools generally perform static analysis of source code.</i>
 通常，lint 或 linter 是检测和标记编程语言中的错误，包括文本错误的一种工具。 lint-like 这个术语有时用于标记可疑的语言使用情况。 类似 lint 的工具通常对源代码执行静态分析。 

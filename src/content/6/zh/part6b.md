@@ -549,7 +549,7 @@ const Notification = () => {
 ```
 
 You will have to make changes to the application's existing reducer. Create a separate reducer for the new functionality and refactor the application so that it uses a combined reducer as shown in this part of the course material.
-您必须对应用现有的 reducer 进行更改。 为新的功能创建一个单独的reducer，并重构应用，以便它使用一个组合的reducer，如课程材料的这一部分所示。
+您必须对应用现有的 reducer 进行更改。 为新的功能创建一个单独的reducer，并重构应用，以便它使用一个组合的reducer，如课程材料的这一章节所示。
 
 The application does not have to use the <i>Notification</i> component in any intelligent way at this point in the exercises. It is enough for the application to display the initial value set for the message in the <i>notificationReducer</i>.
 在练习的这一点上，应用不必以任何智能方式使用<i>Notification</i> 组件。 应用只需在<i>notificationReducer</i> 中显示消息的初始值集即可。

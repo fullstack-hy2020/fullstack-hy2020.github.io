@@ -18,7 +18,7 @@ Practically this has meant using the [useSelector](https://react-redux.js.org/ap
 
 
 To finish this part we will look into another older and  more complicated way to use redux, the [connect](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)-function provided by react-redux.
-为了完成这一部分，我们将研究使用 redux 的另一种更古老、更复杂的方法，redux 提供的[ connect ]( https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options )-函数。
+为了完成这一章节，我们将研究使用 redux 的另一种更古老、更复杂的方法，redux 提供的[ connect ]( https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options )-函数。
 
 
 
@@ -204,7 +204,7 @@ export default ConnectedNotes
 
 
 Now we have gotten rid of _useSelector_, but <i>Notes</i> still uses the _useDispatch_ hook and the _dispatch_ function returning it:
-现在我们已经摆脱了 useSelector，但是<i>Notes</i> 仍然使用 useDispatch 钩子和 dispatch 函数返回它:
+现在我们已经摆脱了 useSelector，但是<i>Notes</i> 仍然使用 useDispatch Hook和 dispatch 函数返回它:
 
 ```js
 const Notes = (props) => {
@@ -587,7 +587,7 @@ The refactored <i>Notes</i> component is almost entirely focused on rendering no
 - Rarely have their own state (when they do, it’s UI state rather than data).
 - 很少有自己的状态(当他们这样做时，是 UI 状态而不是数据)。
 - Are written as functional components unless they need state, lifecycle hooks, or performance optimizations.
-除非需要状态、生命周期挂钩或性能优化，否则被编写为功能组件。
+除非需要状态、生命周期Hook或性能优化，否则被编写为功能组件。
 
 The _connected component_ that is created with the _connect_ function:
 使用 connect 函数创建的连接组件 :
@@ -659,7 +659,7 @@ Hoc 实际上是[高阶函数]( https://en.wikipedia.org/wiki/higher-order_funct
 
 
 After the React hook-api was published, HOCs have become less and less popular. Almost all libraries which used to be based on HOCs have now been modified to use hooks. Most of the time hook based apis are a lot simpler than HOC based ones, as is the case with redux as well. 
-React hook-api 发布之后，HOCs 变得越来越不受欢迎。 几乎所有过去基于 hoc 的库现在都被修改为使用钩子。 大多数基于钩子的 api 比基于 HOC 的 api 简单得多，redux 的情况也是如此。
+React hook-api 发布之后，HOCs 变得越来越不受欢迎。 几乎所有过去基于 hoc 的库现在都被修改为使用Hook。 大多数基于Hook的 api 比基于 HOC 的 api 简单得多，redux 的情况也是如此。
 
 ### Redux and the component stateRedux 和组件状态
 We have come a long way in this course and, finally, we have come to the point at which we are using React "the right way", meaning React only focuses on generating the views, and the application state is separated completely from the React components and passed on to Redux, its actions, and its reducers.
@@ -741,6 +741,6 @@ Settimeout 函数的[ documentation ]( https://developer.mozilla.org/en-us/docs/
 
 <div class="tasks">
 This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
-这是本课程这一部分的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统]( https://studies.cs.helsinki.fi/stats/courses/fullstackopen )。
+这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统]( https://studies.cs.helsinki.fi/stats/courses/fullstackopen )。
 
 </div>

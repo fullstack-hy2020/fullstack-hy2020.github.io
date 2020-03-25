@@ -97,7 +97,7 @@ Based on last year's course, event handling has proven to be difficult.
 基于去年的课程，事件处理证明是比较难的内容。
 It's worth reading the revision chapter at the end of the previous part [event handlers revisited](/en/part1/a_more_complex_state_debugging_react_apps#event-handling-revisited), if it feels like your own knowledge on the topic needs some brushing up. 
 
-如果你觉得自己关于这个主题的知识需要复习一下，那么应该阅读上一部分结尾的复习章节 [事件处理复习](/en/part1/a_more_complex_state_debugging_react_apps#event-handling-revisited)。
+如果你觉得自己关于这个主题的知识需要复习一下，那么应该阅读上一章节结尾的复习章节 [事件处理复习](/en/part1/a_more_complex_state_debugging_react_apps#event-handling-revisited)。
 
 Passing event handlers to the child components of the <i>App</i> component has raised some questions. A small revision on the topic can be found [here](/en/part1/a_more_complex_state_debugging_react_apps#passing-event-handlers-to-child-components).
 将事件处理程序传递给<i>App</i> 组件的子组件引发了一些问题。 关于这个主题的一个小复习[在这里](/en/part1/a_more_complex_state_debugging_react_apps#passing-event-handlers-to-child-components)。

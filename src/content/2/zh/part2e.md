@@ -13,7 +13,7 @@ The appearance of our current application is quite modest. In [exercise 0.2](/en
 我们当前应用的外观是相当克制的。 在 [exercise 0.2](/en/part0/fundamentals_of_web_apps#exercises-0-1-0-6)中，作业是浏览 Mozilla 的[ CSS 教程]( https://developer.Mozilla.org/en-us/docs/learn/getting_started_with_the_web/css_basics )。
 
 Before we move onto the next part, let's take a look at how we can add styles to a React application. There are several different ways of doing this and we will take a look at the other methods later on. At first, we will add CSS to our application the old-school way; in a single file without using a [CSS preprocessor](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) (although this is not entirely true as we will learn later on). 
-在进入下一部分之前，让我们先看看如何向 React 应用添加样式。 有几种不同的方法可以做到这一点，我们将在稍后介绍其他的方法。 首先，我们将以传统的方式将 CSS 放在一个单独的文件中来添加到我们的应用中; 先不使用[CSS preprocessor](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) 尽管这并不完全正确，我们将在后面来学习)。
+在进入下一章节之前，让我们先看看如何向 React 应用添加样式。 有几种不同的方法可以做到这一点，我们将在稍后介绍其他的方法。 首先，我们将以传统的方式将 CSS 放在一个单独的文件中来添加到我们的应用中; 先不使用[CSS preprocessor](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) 尽管这并不完全正确，我们将在后面来学习)。
 
 
 

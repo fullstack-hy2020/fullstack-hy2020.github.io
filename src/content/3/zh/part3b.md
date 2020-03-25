@@ -401,7 +401,7 @@ Create a README.md at the root of your repository, and add a link to your online
 
 #### 3.11 phonebook full stack
 Generate a production build of your frontend, and add it to the internet application using the method introduced in this part. 
-生成前端的生产构建，并使用本部分介绍的方法将其添加到 internet 应用中。
+生成前端的生产构建，并使用本章节介绍的方法将其添加到 internet 应用中。
 
 **NB** Make sure the directory <i>build</i> is not gitignored
 **注意 **确保我构建的 <i>build</i> 目录没有放到gitignored文件中。

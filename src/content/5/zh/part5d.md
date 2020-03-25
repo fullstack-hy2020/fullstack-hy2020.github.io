@@ -562,7 +562,7 @@ The solution is to create API endpoints to the backend for the test.
 We can empty the database using these endpoints. 
 我们可以使用这些端点清空数据库。
 Let's create a new <i>router</i> for the tests
-让我们为测试创建一个新的<i>路由器</i>
+让我们为测试创建一个新的<i>路由</i>
 
 ```js
 const router = require('express').Router()
@@ -1379,7 +1379,7 @@ The frontend- and the test code can be found from [github](https://github.com/fu
 
 
 In the last exercises of this part we will do some E2E tests for our blog application. 
-在这一部分的最后练习中，我们将为我们的博客应用做一些 E2E 测试。
+在这一章节的最后练习中，我们将为我们的博客应用做一些 E2E 测试。
 The material of this part should be enough to complete the exercises. 
 这部分的材料应该足以完成这些练习。
 You should absolutely also check out the Cypress [documentation](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell). It is propably the best documentation I have ever seen for an open source project. 
@@ -1510,7 +1510,7 @@ This exercise might be a bit trickier. One solution is to find all of the blogs 
 这项工作可能有点棘手。 一个解决方案是找到所有的博客，然后在[ then ]( https://docs.cypress.io/api/commands/then.html#dom-element )命令的回调函数中对它们进行比较。
 
 This was the last exercise of this part, and its time to push your code to github and mark the exercises you completed in the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
-这是本部分的最后一个练习，是时候将您的代码推送到 github，并标记您在[exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中完成的练习。
+这是本章节的最后一个练习，是时候将您的代码推送到 github，并标记您在[exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中完成的练习。
 
 
 </div>

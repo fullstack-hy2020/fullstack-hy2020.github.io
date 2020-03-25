@@ -498,7 +498,7 @@ The exercises are submitted **one part at a time**. When you have submitted the 
 
 Note that in this part, there are more exercises besides those found below. <i>Do not submit your work</i> until you have completed all of the exercises you want to submit for the part.
 
-请注意，在这一部分，除了下面的练习，还有更多的练习。 直到完成了这章的所有练习，再提交你的 工作。
+请注意，在这一章节，除了下面的练习，还有更多的练习。 直到完成了这章的所有练习，再提交你的 工作。
 
   <h4>1.1: 课程信息 步骤1</h4>
 

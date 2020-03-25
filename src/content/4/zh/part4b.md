@@ -196,7 +196,7 @@ module.exports = {
 ```
 
 One tiny but important detail: at the [beginning](/en/part4/structure_of_backend_application_introduction_to_testing#project-structure) of this part we extracted the Express application into the <i>app.js</i> file, and the role of the <i>index.js</i> file was changed to launch the application at the specified port with Node's built-in <i>http</i> object:
-一个很小但很重要的细节是: 在这一部分的 [beginning](/en/part4/structure_of_backend_application_introduction_to_testing#project-structure) 中，我们将 Express 应用提取到<i>app.js</i> 文件中，并且改变了<i>index.js</i> 文件的角色，使用 Node 的内置<i>http</i> 对象在指定端口启动应用:
+一个很小但很重要的细节是: 在这一章节的 [beginning](/en/part4/structure_of_backend_application_introduction_to_testing#project-structure) 中，我们将 Express 应用提取到<i>app.js</i> 文件中，并且改变了<i>index.js</i> 文件的角色，使用 Node 的内置<i>http</i> 对象在指定端口启动应用:
 
 ```js
 const app = require('./app') // the actual Express app
@@ -377,7 +377,7 @@ npm test -- -t 'a specific note is within the returned notes'
 ```
 
 The provided parameter can refer to the name of the test or the describe block. The parameter can also contain just a part of the name. The following command will run all of the tests that contain <i>notes</i> in their name:
-提供的参数可以引用测试或描述块的名称。 参数也可以只包含名称的一部分。 下面的命令将运行名称中包含<i>notes</i> 的所有测试:
+提供的参数可以引用测试或描述块的名称。 参数也可以只包含名称的一章节。 下面的命令将运行名称中包含<i>notes</i> 的所有测试:
 
 ```js
 npm test -- -t 'notes'
