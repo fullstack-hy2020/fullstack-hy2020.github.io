@@ -124,7 +124,8 @@ Response 标签页展示了响应数据，这是一个常规的 html 页面。 <
 
 尽管很难观察到，但 HTML 页面在从服务器获取图像之前就已经开始渲染了。
 
-### Traditional web applications 传统的网络应用
+<!-- ### Traditional web applications 传统的网络应用 -->
+### 传统的网络应用
 
 <!-- The homepage of the example application works like a <i>traditional web application</i>. When entering the page, the browser fetches the HTML document detailing the structure and the textual content of the page from the server. -->
 
@@ -191,7 +192,8 @@ Html 页面的内容被保存为 template 模板字符串，或者说是一个�
 
 本课程都将会使用 Node.js 和 Express 来创建 Web 服务器。
 
-### Running application logic on the browser 在浏览器上运行应用逻辑
+<!-- ### Running application logic on the browser 在浏览器上运行应用逻辑 -->
+### 在浏览器上运行应用逻辑
 
 <!-- Keep the developer console open. Empty the console by clicking the &empty; symbol. -->
 
@@ -357,7 +359,8 @@ console.log(data);
 
 在整个课程中，你会经常用到 Console 选项卡和 Console.log 命令。
 
-### Event handlers and Callback functions 事件处理和回调函数
+<!-- ### Event handlers and Callback functions 事件处理和回调函数 -->
+### 事件处理和回调函数
 
 <!-- The structure of this code is a bit odd: -->
 
@@ -402,7 +405,8 @@ xhttp.onreadystatechange = function() {
 
 这种调用事件处理程序的机制在 JavaScript 中非常常见。 事件处理函数被称为回调函数（[callback](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function) functions）。 应用代码并不直接调用函数本身，而是运行时环境（浏览器）会在事件发生时的适当时间调用函数。
 
-### Document Object Model or DOM
+<!-- ### Document Object Model or DOM -->
+### Document Object Model 或叫 DOM
 
 <!-- We can think of HTML-pages as implicit tree structures. -->
 
@@ -467,7 +471,8 @@ data.forEach(function(note) {
 document.getElementById('notes').appendChild(ul);
 ```
 
-### Manipulating the document-object from console 从控制台中操作文档对象
+<!-- ### Manipulating the document-object from console 从控制台中操作文档对象 -->
+### 从控制台中操作文档对象
 
 <!-- The topmost node of the DOM tree of a HTML document is called the <em>document</em> object. We can perform various operations on a web-page using the DOM-API. You can access the <em>document</em> object by typing <em>document</em> into the Console-tab: -->
 
@@ -600,7 +605,8 @@ Html 元素也可以有 class 以外的其他属性。 包含 Note 的 div 元�
 <!-- - When the data has been fetched, the browser executes an <i>event handler</i>, which renders the notes to the page using the DOM-API. -->
 - 获取数据后，浏览器执行一个*event handler 事件处理程序*, 使用 DOM-API 将 Note 渲染到页面
 
-### Forms and HTTP POST 表单与 HTTP POST
+<!-- ### Forms and HTTP POST 表单与 HTTP POST -->
+### 表单与 HTTP POST
 
 <!-- Next let's examine how adding a new note is done. -->
 
@@ -715,7 +721,8 @@ Notes 页面使用了 AJAX 获取 Notes 数据。 提交表单仍然使用传统
 
 现在 AJAX 这个术语是如此普遍，以至于人们认为它是理所当然的。 但这个词已经逐渐被遗忘，“新时代的我们”甚至没有听说过它。
 
-### Single page app 单页面应用
+<!-- ### Single page app 单页面应用 -->
+### 单页面应用
 
 <!-- In our example app, the home page works like a traditional web-page: All of the logic is on the server, and the browser only renders the HTML as instructed. -->
 
@@ -831,7 +838,8 @@ var sendToServer = function(note) {
 
 应用代码可以在 https://github.com/mluukkai/example_app 上找到。 值得注意的是，这个应用只是用来演示课程的概念。 该代码在某种程度上遵循了糟糕的开发风格，不应该在创建自己的应用时作为示例使用。 使用的 url 也是如此。 发送新Note 的 URL 新建Note 的<i>new_note_spa</i>并不遵循当前的最佳实践。
 
-### Javascript-libraries Javascript 库
+<!-- ### Javascript-libraries Javascript 库 -->
+### Javascript 库
 
 <!-- The sample app is done with so called [vanilla Javascript](https://medium.freecodecamp.org/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34) using only the DOM-API and JavaScript to manipulate the structure of the pages. -->
 
@@ -863,7 +871,8 @@ var sendToServer = function(note) {
 
 React 的势头看起来很猛，但是 JavaScript 的世界是不断变化的。 例如，最近的一个新秀 [VueJS](https://vuejs.org/) 已经引起了一些兴趣。
 
-### Full stack -web development 全栈-web 开发
+<!-- ### Full stack -web development 全栈-web 开发 -->
+### 全栈-web 开发
 
 <!-- What does the name of the course, <i>Full stack web development</i>, mean? Full stack is a buzzword that everyone talks about, while no one really knows what it means. Or at least, there is no agreed-upon definition for the term. -->
 
@@ -889,7 +898,8 @@ React 的势头看起来很猛，但是 JavaScript 的世界是不断变化的�
 
 过去，对于开发人员来说，更常见的做法是专注于全栈的某个层，例如后端。 后端和前端的技术栈完全不同。 随着全栈趋势的出现，对于开发人员来说，熟练掌握应用和数据库的全栈内容已经变得非常普遍。 通常情况下，全栈开发人员还必须有足够的配置和管理技能来操作他们的应用，例如，上云。
 
-### Javascript fatigue Javascript 疲劳
+<!-- ### Javascript fatigue Javascript 疲劳 -->
+### Javascript 疲劳
 
 <!-- Full stack web development is challenging in many ways. Things are happening in many places at once, and debugging is quite a bit harder than with regular desktop applications. JavaScript does not always work as you'd expect it to (compared to many other languages), and the asynchronous way its runtime environments work causes all sorts of challenges. Communicating in the web requires knowledge of the HTTP-protocol. One must also handle databases and server administration and configuration. It would also be good to know enough CSS to make applications at least somewhat presentable. -->
 
