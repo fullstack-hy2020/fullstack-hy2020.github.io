@@ -75,7 +75,18 @@ Merge made by the 'recursive' strategy.
  create mode 100644 src/content/images/9/29e.png
  ```
  英文开头的行：
- ^[A-Z,a-z].*
+^[A-Z,a-z].*
 
 还原代码行：
- ```([\w\W]+?)```\n
+```([\w\W]+?)```\n
+
+注释：
+(^(\*\*)[A-Z,a-z].+)
+(^(_)[A-Z,a-z].+)
+(^(\[)[A-Z,a-z].+)
+
+解注释：
+<pre>([\w\W]+?)
+
+解注释：包含中文，但被注释了。
+<!-- (.*[\u4e00-\u9fa5].*)-->
