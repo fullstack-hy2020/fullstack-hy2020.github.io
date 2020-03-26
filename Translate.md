@@ -74,3 +74,5 @@ Merge made by the 'recursive' strategy.
  create mode 100644 src/content/images/9/28e.png
  create mode 100644 src/content/images/9/29e.png
  ```
+ 英文开头的行：
+ ^[A-Z,a-z].*
