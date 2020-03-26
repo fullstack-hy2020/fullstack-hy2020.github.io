@@ -291,7 +291,7 @@ Do not save passwords to the database as clear text, but use the <i>bcrypt</i> l
 **NB** Some Windows users have had problems with <i>bcrypt</i>. If you run into problems, remove the library with command 
 
 ```bash
-npm uninstall bcrypt --save 
+npm install bcrypt --save 
 ```
 
 and install [bcryptjs](https://www.npmjs.com/package/bcryptjs) instead. 
