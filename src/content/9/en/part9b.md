@@ -55,7 +55,7 @@ and set up <i>scripts</i> within the package.json:
 <!-- Now within this directory you can use <i>ts-node</i>by running <i>npm run ts-node</i>. Notice that if you are using ts-node through package.json, all possible command line arguments for the script need to be prefixed with <i>--</i>. So if you want to run file.ts with <i>ts-node</i>, the whole command is: -->
 Now within this directory you can use <i>ts-node</i>by running <i>npm run ts-node</i>. Note that if you are using ts-node through package.json, all  command line arguments for the script need to be prefixed with <i>--</i>. So if you want to run file.ts with <i>ts-node</i>, the whole command is: -->
 
-```sh
+```shell
 npm run ts-node -- file.ts
 ```
 
@@ -278,7 +278,7 @@ Sometimes an npm package can also include its types within the code and in that 
 
 Since the global variable <i>process</i> is defined by Node itself, we get its typings by intalling the package <i>@types/node</i>:
 
-```sh
+```shell
 npm install --save-dev @types/node
 ```
 
@@ -324,19 +324,19 @@ multiplicator(a, b, `Multiplied ${a} and ${b}, the result is:`);
 
 and we can run it with
 
-```sh
+```shell
 npm run multiply 5 2
 ```
 
 if the program is run with parameters that are not of the right type, e.g.
 
-```sh
+```shell
 npm run multiply 5 lol
 ```
 
 it "works" but gives us the answer
 
-```sh
+```shell
 Multiplied 5 and NaN, the result is: NaN
 ```
 
@@ -383,13 +383,13 @@ try {
 
 When we now run the program 
 
-```sh
+```shell
 npm run multiply 1 lol
 ```
 
 we get a proper error message:
 
-```sh
+```shell
 Error, something bad happened, message:  Provided values were not numbers!
 ```
 
@@ -449,7 +449,7 @@ console.log(calculateBmi(180, 74))
 
 should print the following message
 
-```sh
+```shell
 Normal (healthy weight)
 ```
 
@@ -497,7 +497,7 @@ Change the previous exercises so that you can give the parameters of <i>bmiCalcu
 
 Your program could work eg. as follows:
 
-```sh
+```shell
 $ npm run calculateBmi 180 91
 
 Overweight
@@ -505,7 +505,7 @@ Overweight
 
 and
 
-```sh
+```shell
 $ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
 
 { periodLength: 9,
@@ -844,7 +844,7 @@ What if we would like to prevent developers from using <i>any</i> type at all? F
 our code. 
 Let's install eslint and its typescript extensions:
 
-```sh
+```shell
 npm install --save-dev eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser
 ```
 

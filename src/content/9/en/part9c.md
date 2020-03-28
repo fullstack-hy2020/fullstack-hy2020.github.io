@@ -44,7 +44,7 @@ The npm script for running <i>tsc</i> is set as follows:
  Now we can initialise our tsconfig.json settings by running:
 
 
-```sh
+```shell
  npm run tsc -- --init
 ```
 
@@ -101,7 +101,7 @@ Using <i>strict</i> is suggested by the official documentation.
 
 Now that we have our preferred configuration set, let's continue by installing <i>express</i> and of course also <i>@types/express</i>. Since this is a real project, which is intended to be grown over time, we will use eslint from the very  beginning:
 
-```sh
+```shell
 npm install express
 npm install --save-dev eslint @types/express @typescript-eslint/eslint-plugin @typescript-eslint/parser
 ```
@@ -168,7 +168,7 @@ Now we just need to set up our development environment, and we are ready to star
 There are many different options for this. We could use the familiar <i>nodemon</i> with <i>ts-node</i>, but as we saw earlier, </i>ts-node-dev</i> does the exact same thing and we can continue using it.
 So, let's install <i>ts-node-dev</i>
 
-```sh
+```shell
 npm install --save-dev ts-node-dev
 ```
 
