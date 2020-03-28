@@ -49,7 +49,7 @@ In our previous project we used eslint to help us enforce coding style, and we'l
 
 We configure eslint in <i>.eslintrc</i> with following settings:
 
-```js
+```ts
 {
   "env": {
     "browser": true,
@@ -146,7 +146,7 @@ _React.FunctionComponent_ is a so called [generic](https://www.typescriptlang.or
 
 The type declarations for _React.FC_ and _React.FunctionComponent_ look like the following:
 
-```js
+```ts
 type FC<P = {}> = FunctionComponent<P>;
 
 interface FunctionComponent<P = {}> {
@@ -165,7 +165,7 @@ Inside the angle brackets we have <i>P = {}</i>. That means you can pass a type 
 
 Now let's take a look at the first line inside _FunctionComponent_:
 
-```js
+```ts
 (props: PropsWithChildren<P>, context?: any): ReactElement | null;
 ```
 
@@ -173,7 +173,7 @@ Now let's take a look at the first line inside _FunctionComponent_:
 Here you can see that <i>props</i> is of type <i>PropsWithChildren</i>, which is also a generic type to which <i>P</i> is passed.
 The type <i>PropsWithChildren</i> in turn is a [intersection](http://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types) of <i>P</i> and the type <i>{ children?: ReactNode }</i>.
 
-```js
+```ts
 type PropsWithChildren<P> = P | { children?: ReactNode };
 ```
 
@@ -200,7 +200,7 @@ ReactDOM.render(element, document.getElementById("root"));
 <!-- We defined a new type _WelcomeProps_ and passed it to the added typing for the <i>Welcome</i> component: -->
 We defined a new type _WelcomeProps_ and paased to the <i>Welcome</i> component in its type declaration: 
 
-```js
+```ts
 const Welcome: React.FC<WelcomeProps>;
 ```
 
@@ -314,7 +314,7 @@ const App = () => {
 
 In the previous exercise we had three parts of a course, and all parts had the same attributes <i>name</i> and <i>exerciseCount</i>. But what if we had the need for additional attributes for the parts and each part would have the need for different attributes? How would this look codewise? Let's consider the following example:
 
-```js
+```ts
 const courseParts = [
   {
     name: "Fundamentals",
@@ -348,7 +348,7 @@ How can we know that our code is capable of handling all the different types of 
 
 Let's start by defining types for our different course parts:
 
-```js
+```ts
 interface CoursePartOne {
   name: "Fundamentals";
   exerciseCount: number;
@@ -373,7 +373,7 @@ interface CoursePartThree {
 Next we will create a type [union](http://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types) of all these types. 
 We can then use it to define a type for our array, which should accept any of these course part types:
 
-```js
+```ts
 type CoursePart = CoursePartOne | CoursePartTwo | CoursePartThree;
 ```
 
@@ -388,7 +388,7 @@ But we're not satisfied yet! There is still a lot of duplication in our types, a
 We start off by identifying the attributes all course parts have in common, and defining a base type which contains them.
 Then we will [extend](http://www.typescriptlang.org/docs/handbook/interfaces.html#extending-interfaces) that base type to create our part specific types:
 
-```js
+```ts
 interface CoursePartBase {
   name: string;
   exerciseCount: number;
@@ -435,7 +435,7 @@ With TypeScript we can use a method called <i>exhaustive type checking</i>. Its 
 
 A straight forward version of the function could look like this:
 
-```js
+```ts
 /**
  * Helper function for exhaustive type checking
  */
@@ -448,7 +448,7 @@ const assertNever = (value: never): never => {
 
 If we now were to replace the contents of our <i>default</i> block to:
 
-```js
+```ts
 default:
   return assertNever(part);
 ```
@@ -471,7 +471,7 @@ When we remove the comments from the <i>Deeper type usage</i> case block, you wi
 
 First add the type information to <i>index.tsx</i> and replace the variable <i>courseParts</i> with the one from the example below.
 
-```js
+```ts
 // new types
 interface CoursePartBase {
   name: string;
@@ -533,7 +533,7 @@ Lastly, add your own course part interface with at least the following attribute
 
 We have used [interfaces](http://www.typescriptlang.org/docs/handbook/interfaces.html) to define object types, e.g. diary entries, in previous section
 
-```js
+```ts
 interface DiaryEntry {
   id: number;
   date: string;
@@ -545,7 +545,7 @@ interface DiaryEntry {
 
 and course part in this section
 
-```js
+```ts
 interface CoursePartBase {
   name: string;
   exerciseCount: number;
@@ -554,7 +554,7 @@ interface CoursePartBase {
 
 We actually could have had the same effect by using a [type alias](http://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases)
 
-```js
+```ts
 type DiaryEntry = {
   id: number;
   date: string;
@@ -658,7 +658,7 @@ This part assumes that you are at least familiar with the way redux works, e.g. 
 The [context](https://reactjs.org/docs/context.html) of our application has a tuple containing the app state and the dispatcher for changing the state. 
 The application state is typed as follows:
 
-```js
+```ts
 export type State = {
   patients: { [id: string]: Patient };
 };
@@ -670,14 +670,14 @@ The state is an object with one key <i>patients</i>, which has a [dictionary](ht
 But be aware of one thing! When a type is delared like the type for <i>patients</i>, TypeScript does not actually have any way of knowing if the key you are trying to access actually ecists or not.
 So if we were to try to access a patient by a non-existing id, the compiler would think that the returned value is of type <i>Patient</i> and no error would be thrown when trying to access its properties:
 
-```js
+```ts
 const myPatient = state.patients['non-existing-id'];
 console.log(myPatient.name); // no error, TypeScript believes that myPatient is of type Patient
 ```
 
 To fix this, we could define the type for patient values to be a union of <i>Patient</i> and <i>undefined</i> in the following way:
 
-```js
+```ts
 export type State = {
   patients: { [id: string]: Patient | undefined };
 };
@@ -685,7 +685,7 @@ export type State = {
 
 That would cause the compiler to give the following warning:
 
-```js
+```ts
 const myPatient = state.patients['non-existing-id'];
 console.log(myPatient.name); // error, Object is possibly 'undefined'
 ```
@@ -694,7 +694,7 @@ This type of additional type security is always good to implement if you e.g. us
 
 Even though we are not using them in this course part, it is good to mention that a more type strict way would be to use [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) objects, to which you can declare a type for both the key and the content. The Map's accessor function <i>get()</i> always returns a union of the declared value type and undefined, so TypeScript automatically requires you to perform validity checks on data retrieved from a map:
 
-```js
+```ts
 interface State {
   patients: Map<string, Patient>;
 }
@@ -708,7 +708,7 @@ console.log(myPatient?.name); // valid code, but will log 'undefined'
 <!--
 You can also think of a scenario where we may have state as a union. Eg. using states type as an indicator whether user has logged in:
 
-```js
+```ts
 export type State =
   | {
       type: "Unauthenticated";
@@ -730,7 +730,7 @@ The main principle in our state management approach is to pass the state to our 
 <!-- Just as in the case of redux, all the state manipulation is done by the reducer that is defined in file <i>reducer.ts</i> together with the type <i>Action</i> that looks as follows -->
 Just like with redux, all state manipulation is done by a reducer. It is defined in the file <i>reducer.ts</i> along with the type <i>Action</i> that looks as follows
 
-```js
+```ts
 export type Action =
   | {
       type: "SET_PATIENT_LIST";
@@ -746,7 +746,7 @@ export type Action =
 The reducer looks quite similiar to the ones we wrote in [part 6](/en/part6). 
 It changes the state for each type of action:
 
-```js
+```ts
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "SET_PATIENT_LIST":
@@ -781,7 +781,7 @@ There are a lot of things happening in the file <i>state.ts</i>, which takes car
 The main ingredient is the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook
 used to create the state and the dispatch-function, and pass them on to the [context provider](https://reactjs.org/docs/context.html#contextprovider):
 
-```js
+```ts
 export const StateProvider: React.FC<StateProviderProps> = ({
   reducer,
   children
@@ -843,7 +843,7 @@ Let's go through the <i>PatientListPage/index.ts</i> as you can take inspiration
 <i>PatientListPage</i> uses our custom hook to inject the state, and the dispatcher for updating it. 
 When we list the patients, we only need to destructure the <i>patients</i> property from the state:
 
-```js
+```ts
 import { useStateValue } from "../state";
 
 const PatientListPage: React.FC = () => {
@@ -855,7 +855,7 @@ const PatientListPage: React.FC = () => {
 We also use the app state created with the <i>useState</i> hook for managing modal visibility and form error handling:
 
 
-```js
+```ts
 const [modalOpen, setModalOpen] = React.useState<boolean>(false);
 const [error, setError] = React.useState<string | undefined>();
 ```
@@ -865,7 +865,7 @@ Both set functions returned by the <i>useState</i> hook are functions that accep
 
 We also have <i>openModal</i> and <i>closeModal</i> helper functions for better readability and convenience:
 
-```js
+```ts
 const openModal = (): void => setModalOpen(true);
 
 const closeModal = (): void => {
@@ -878,7 +878,7 @@ The frontend's types are based on what you have created when developing the back
 
 When the component <i>App</i> mounts, it fetches patients from the backend using [axios](https://github.com/axios/axios). Note how we are giving the <i>axios.get</i> function a type parameter to describe the type of the response data:
 
-````js
+````ts
 React.useEffect(() => {
   axios.get<void>(`${apiBaseUrl}/ping`);
 
@@ -906,7 +906,7 @@ React.useEffect(() => {
 As our app is quite small, we will update the state by simply calling the <i>dispatch</i> function provided to us by the <i>useStateValue</i> hook.
 The compiler helps by making sure that we dispatch actions according to our <i>Action</i> type with predefined type string and payload:
 
-```js
+```ts
 dispatch({ type: "SET_PATIENT_LIST", payload: patients });
 ```
 
@@ -924,7 +924,7 @@ Before going into this, let us do some preparatory work.
 
 Create an endpoint <i>/api/patients/:id</i>  that returns all of the patient information for one patient, including the array of patient entries that is still empty for all the patients. For the time being, expand the backend types as follows:
 
-```js
+```ts
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface Entry {
 }
@@ -970,7 +970,7 @@ The gender is shown with react-semantic-ui component [Icon](https://react.semant
 
 **Note** that in order to access the id in the url, you need to give [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) a proper type argument:
 
-```js
+```ts
 const { id } = useParams<{ id: string }>();
 ```
 
@@ -979,7 +979,7 @@ const { id } = useParams<{ id: string }>();
 <!-- We are currently creating the <i>action</i> objects everywhere in the code  dispatching the action, e.g. component <i>App</i> has the following: -->
 Currently we create the <i>action</i> objects wherever we dispatch the actions, e.g. component <i>App</i> has the following:
 
-```js
+```ts
 dispatch({
   type: "SET_PATIENT_LIST", payload: patientListFromApi
 });
@@ -989,7 +989,7 @@ Refactor the code to use [action creator](/en/part6/flux_architecture_and_redux#
 
 For example the <i>App</i> changes like this
 
-```js
+```ts
 import { useStateValue, setPatientList } from "./state";
 
 // ...
@@ -1018,7 +1018,7 @@ Let us now create a proper <i>Entry</i> type based on the data we have.
 <!-- When looking at the data closer, we can see that the entries in the data differ actually quite a lot from each other. For example, let's take the first two entries we can see there: -->
 If we take a closer look at the data, we can see that the entries are actually quite different from one another. For example, let's take a look at the first two entries:
 
-```js
+```ts
 {
   id: 'd811e46d-70b3-4d90-b090-4535c7cf8fb1',
   date: '2015-01-02',
@@ -1063,7 +1063,7 @@ since it might just not be used in these specific entries.
 
 So our <i>BaseEntry</i> from which each type could be extended from would be the following:
 
-```js
+```ts
 interface BaseEntry {
   id: string;
   description: string;
@@ -1077,7 +1077,7 @@ interface BaseEntry {
 If we want to finetune it a bit further, since we already have a <i>Diagnosis</i> type defined in the backend, we might just want to refer to the code field of the <i>Diagnosis</i> type directly in case its type ever changes. 
 We can do that like so:
 
-```js
+```ts
 interface BaseEntry {
   id: string;
   description: string;
@@ -1095,7 +1095,7 @@ Now that we have the <i>BaseEntry</i> defined, we can start creating the extende
 Entries of type <i>HealthCheck</i> contain the field <i>HealthCheckRating</i>, which is an integer from 0 to 3, zero meaning <i>Healthy</i> and 3 meaning <i>CriticalRisk</i>. This is a perfect case for an enum definition. 
 With these specifications we could write a <i>HealthCheckEntry</i> type definition like so:
 
-```js
+```ts
 export enum HealthCheckRating {
   "Healthy" = 0,
   "LowRisk" = 1,
@@ -1111,7 +1111,7 @@ interface HealthCheckEntry extends BaseEntry {
 
 Now we only need to create the <i>OccupationalHealthCareEntry</i> and <i>HospitalEntry</i> types so we can combine and export them as an Entry type like this:
 
-```js
+```ts
 export type Entry =
   | HospitalEntry
   | OccupationalHealthcareEntry
@@ -1185,13 +1185,13 @@ The code for the form can be found from <i>src/AddPatientModal/AddPatientForm.ts
 <!-- In the beginning of <i>AddPatientForm.tsx</i> you can see, that we have created a type for our form values, called simply <i>PatientFormValues</i>. It is a narrowed down version of <i>Patient</i>, with the properties <i>id</i> and <i>entries</i> omitted, because we don't want the user to be able to submit those when creating a new patient. <i>id</i> is created by the backend and <i>entries</i> can only be added for existing patients. -->
 Looking at the top of the <i>AddPatientForm.tsx</i> you can see we have created a type for our form values, called simply <i>PatientFormValues</i>. The type is a modified version of the <i>Patient</i> type, with the <i>id</i> and <i>entries</i> properties omitted. We don't want the user to be able to submit those when creating a new patient. The <i>id</i> is created by the backend and <i>entries</i> can only be added for existing patients.
 
-```js
+```ts
 export type PatientFormValues = Omit<Patient, "id" | "entries">;
 ```
 
 Next we declare the props for our form component:
 
-```js
+```ts
 interface Props {
   onSubmit: (values: PatientFormValues) => void;
   onCancel: () => void;
@@ -1206,7 +1206,7 @@ object of type <i>PatientFormValues</i> as an argument, so that the callback can
 <!-- When creating <i>AddPatientForm</i> function component, you can see that we have bound <i>Props</i> type as as our component's props, and are destructuring <i>onSubmit</i> and <i>onCancel</i> from those props. -->
 Looking at the <i>AddPatientForm</i> function component, you can see we have bound the <i>Props</i> as our component's props, and we destructure <i>onSubmit</i> and <i>onCancel</i> from those props.
 
-```js
+```ts
 export const AddPatientForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
   // ...
 }
@@ -1221,7 +1221,7 @@ Let's take a closer look at <i>SelectField</i> and the types around it.
 First we create a generic type for each option object, that contains a value and a label for that value. These are the kind of option objects we want to allow on our form in the select field.
 Since the only options we want to allow are different genders, we set that the <i>value</i> should be of type <i>Gender</i>.
 
-```js
+```ts
 export type GenderOption = {
   value: Gender;
   label: string;
@@ -1231,7 +1231,7 @@ export type GenderOption = {
 <!-- In <i>AddPatientForm.tsx</i> we use this type for the variable <i>genderOptions</i>, and declare that it will be an array containing objects of type <i>GenderOption</i>: -->
 In <i>AddPatientForm.tsx</i> we use the <i>GenderOption</i> type for the <i>genderOptions</i> variable, declaring it to be an array containing objects of type <i>GenderOption</i>:
 
-```js
+```ts
 const genderOptions: GenderOption[] = [
   { value: Gender.Male, label: "Male" },
   { value: Gender.Female, label: "Female" },
@@ -1242,7 +1242,7 @@ const genderOptions: GenderOption[] = [
 <!-- Next look at the type <i>SelectFieldProps</i>. It defines the type for the props for our <i>SelectField</i> component. There you can see that options is an array of <i>GenderOption</i> types. -->
 Next look at the type <i>SelectFieldProps</i>. It defines the type for the props for our <i>SelectField</i> component. There you can see that options is an array of <i>GenderOption</i> types.
 
-```js
+```ts
 type SelectFieldProps = {
   name: string;
   label: string;
@@ -1449,7 +1449,7 @@ If the backend returns an error, the error is displayed on the form.
 
 Here is our submit function:
 
-```js
+```ts
 const submitNewPatient = async (values: FormValues) => {
   try {
     const { data: newPatient } = await axios.post<Patient>(
@@ -1496,7 +1496,7 @@ Note that the file [FormField.tsx](https://github.com/fullstack-hy2020/patientor
 
 It can be used as follows:
 
-```js
+```ts
 const AddEntryForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
   const [{ diagnoses }] = useStateValue() // highlight-line
 
@@ -1535,7 +1535,7 @@ const AddEntryForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
 
 There is also redy made component _NumberField_ for the numeric values with a limited range
 
-```js
+```ts
 <Field
   label="healthCheckRating"
   name="healthCheckRating"

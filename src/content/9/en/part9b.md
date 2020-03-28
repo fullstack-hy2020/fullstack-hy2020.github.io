@@ -72,7 +72,7 @@ JavaScript on itself is quite relaxed language, and things can often be done in 
 <!-- Let us start now by creating a simple Multiplier, exactly as you would in JavaScript. -->
 Let's start by creating a simple Multiplier. It looks exactly as it would in JavaScript.
 
-```js
+```ts
 const multiplicator = (a, b, printText) => {
   console.log(printText,  a * b);
 }
@@ -86,7 +86,7 @@ But what happens if we end up passing wrong <i>types</i> of arguments to the mul
 
 Let's try it out!
 
-```js
+```ts
 const multiplicator = (a, b, printText) => {
   console.log(printText,  a * b);
 }
@@ -107,7 +107,7 @@ TypeScript natively supports multiple types including <i>number</i>, <i>string</
 
 The first two parameters of our function are of the type [number](http://www.typescriptlang.org/docs/handbook/basic-types.html#number) and the last is a [string](http://www.typescriptlang.org/docs/handbook/basic-types.html#string):
 
-```js
+```ts
 const multiplicator = (a: number, b: number, printText: string) => {
   console.log(printText,  a * b);
 }
@@ -137,7 +137,7 @@ In JavaScript the code would require additional validation to make sure the last
 <!-- To create our <i>type</i> we use the TypeScript native keyword  <i>type</i> to describe what we want to accept. Let's describe our type <i>Operation</i>: -->
 We can create a <i>type</i> using the TypeScript native keyword <i>type</i>. Let's describe our type <i>Operation</i>:
 
-```js
+```ts
 type Operation = 'multiply' | 'add' | 'divide';
 ```
 
@@ -151,7 +151,7 @@ The <i>type</i> keyword defines a new name for a type, [a type alias](https://ww
 
 Let's look at our calculator now:
 
-```js
+```ts
 type Operation = 'multiply' | 'add' | 'divide';
 
 const calculator = (a: number, b: number, op : Operation) => {
@@ -177,7 +177,7 @@ And if we try to use a value that is not within the <i>Operation</i> type, we ge
 <!-- This is already pretty nice, but one thing we haven't touched yet is typing the return value of a function. Usually you want to know what a function returns and it would be nice to have some guarantee on it. Let's add a return value <i>number</i> for the calculator function: -->
 This is already pretty nice, but one thing we haven't touched yet is typing the return value of a function. Usually you want to know what a function returns, and it would be nice to have a guarantee that it actually returns what it says it does. Let's add a return value <i>number</i> to the calculator function:
 
-```js
+```ts
 type Operation = 'multiply' | 'add' | 'divide';
 
 const calculator = (a: number, b: number, op: Operation): number => {
@@ -197,7 +197,7 @@ const calculator = (a: number, b: number, op: Operation): number => {
 The compiler complains straight away, because in one case the function returns a string. There are couple of ways to fix this: 
 we could extend the return type to allow string values, like so
 
-```js
+```ts
 const calculator = (a: number, b: number, op: Operation): number | string =>  {
   // ...
 }
@@ -206,7 +206,7 @@ const calculator = (a: number, b: number, op: Operation): number | string =>  {
 <!-- We could also create a return type that includes the both possible values, much like the type Operation. -->
 or we could create a return type which includes both possible types, much like our Operation type
 
-```js
+```ts
 type Result = string | number
 
 const calculator = (a: number, b: number, op: Operation): Result =>  {
@@ -228,7 +228,7 @@ In this case, when there are multiple possible accepted values and all unexcpete
 
 The code of our calculator should actually look something like this:
 
-```js
+```ts
 type Operation = 'multiply' | 'add' | 'divide';
 
 type Result = number;
@@ -312,7 +312,7 @@ Next let's add npm scripts to run our two programs <i>multiplier</i> and <i>calc
 <!-- We can now get the multipier to work with command line parameters with the following changes -->
 We can get the multiplier to work with command line parameters with the following changes
 
-```js
+```ts
 const multiplicator = (a: number, b: number, printText: string) => {
   console.log(printText,  a * b);
 }
@@ -349,7 +349,7 @@ In order to prevent this kind of behaviour, we have to validate the data given t
 
 Improved version of the multiplicator looks like this:
 
-```js
+```ts
 interface MultiplyValues {
   value1: number;
   value2: number;
@@ -395,7 +395,7 @@ Error, something bad happened, message:  Provided values were not numbers!
 
 Definition of the function <i>parseArguments</i> has a couple of interesting things:
 
-```js
+```ts
 const parseArguments = (args: Array<string>): MultiplyValues => {
   // ...
 }
@@ -403,7 +403,7 @@ const parseArguments = (args: Array<string>): MultiplyValues => {
 
 Firstly,  the parameter <i>args</i> is an [array](http://www.typescriptlang.org/docs/handbook/basic-types.html#array) of strings. The return value has the type <i>MultiplyValues</i>, which is defined as follows:
 
-```js
+```ts
 interface MultiplyValues {
   value1: number;
   value2: number;
@@ -443,7 +443,7 @@ Write a function <i>calculateBmi</i> that counts [BMI](https://en.wikipedia.org/
 
 Call the function in the same file with hard-coded parameters and print out the result. The code
 
-```js
+```ts
 console.log(calculateBmi(180, 74))
 ```
 
@@ -471,7 +471,7 @@ Write a function <i>calculateExercises</i> that calculates the average time of <
 
 The daily exercise hours are given to the function as an [array](https://www.typescriptlang.org/docs/handbook/basic-types.html#array) that contains the number of exercise hours for each day in the training period. Eg. a week with 3 hours of training at Monday, none at Tuesday, 2 hours at Wednesday, 4.5 hours at Thursday and so on would be represented by the following array:
 
-```js
+```ts
 [3, 0, 2, 4.5, 0, 3, 1]
 ```
 
@@ -586,7 +586,7 @@ add then add the <i>start</i> sript to package.json:
 
 Now we can create the file <i>index.ts</i>, and write the HTTP GET <i>ping</i> endpoint to it:
 
-```js
+```ts
 const express = require('express');
 const app = express();
 
@@ -609,7 +609,7 @@ If you look carefully, VSCode is also complaining something about importing expr
 
 The complaint is that the <i>'require' call may be converted to an import</i>. Let us follow the advice and write the import as follows
 
-```js
+```ts
 import express from 'express';
 ```
 
@@ -661,7 +661,7 @@ There is one more problem with the code
 
 This is because we banned unused parameters in out <i>tsconfig.json</i>
 
-```js
+```ts
 {
   "compilerOptions": {
     "target": "ES2020",
@@ -755,7 +755,7 @@ Add an endpoint for BMI-calculator that can be used by doing a HTTP GET request 
 
 The response is a json of the form
 
-```js
+```ts
 {
   weight: 72,
   height: 180,
@@ -767,7 +767,7 @@ See the [express documentation](http://expressjs.com/en/5x/api.html#req.query) f
 
 If the query parameters of the request are of the wrong type or missing, response with proper status code and error message are given
 
-```js
+```ts
 {
   error: "malformatted parameters"
 }
@@ -788,7 +788,7 @@ When examining the code a bit closer, we can see a few dangers lurking there.
 
 Let's add an HTTP GET endpoint <i>calculate</i> to our app:
 
-```js
+```ts
 import { calculator } from './calculator'
 
 // ...
@@ -831,7 +831,7 @@ Implicit <i>any</i> typings are usually considered problematic, since it is quit
 This is why the configuration rule [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny) exists on compiler level, and it is highly recommended to keep it on at all times. 
 In the rare occasions you seriously cannot know what the type of a variable is, you should explicitly state that in the code
 
-```js
+```ts
 const a : any = /* no clue what the type will be! */.
 ```
 
@@ -940,7 +940,7 @@ Configure your project to use the above eslint settings and fix all the warnings
 
 Add an endpoint to your app for the exercise calculator. It should be used by doing a HTTP POST request to endpoint <i>exercises</i> with the input in the request body
 
-```js
+```ts
 {
   "daily_exercises": [1, 0, 2, 0, 3, 0, 2.5],
   "target": 2.5
@@ -949,7 +949,7 @@ Add an endpoint to your app for the exercise calculator. It should be used by do
 
 Response is a json of the following form
 
-```js
+```ts
 {
     "periodLength": 7,
     "trainingDays": 4,
@@ -963,7 +963,7 @@ Response is a json of the following form
 
 If the body of the request is not of the right form, response with proper status code and error message is given. The error message is either
 
-```js
+```ts
 {
   error: "parameters missing"
 }
@@ -971,7 +971,7 @@ If the body of the request is not of the right form, response with proper status
 
 or
 
-```js
+```ts
 {
   error: "malformatted parameters"
 }
@@ -981,7 +981,7 @@ depending on the error. The latter happens if the input values do not have the r
 
 In this exercise you might find it beneficial to use the <i>explicit any</i> type when handling the data in the request body. Our eslint configuration is preventing this but you may unset this rule for a particular line by inserting the following comment as the previous line:
 
-```js
+```ts
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ```
 

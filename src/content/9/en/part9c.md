@@ -197,7 +197,7 @@ Now we can finally start coding! As always, we start by creating a a ping-endpoi
 
 The contents of the <i>index.ts</i> file:
 
-```js
+```ts
 import express from 'express';
 const app = express();
 app.use(express.json());
@@ -345,7 +345,7 @@ This is a bit different than what we did  in [part 4](/en/part4), where we used 
 <!-- The routes taking care of diary endpoints in <i>src/routes/diaries.ts</i> looks like this: -->
 The router taking care of all diary endpoints is in <i>src/routes/diaries.ts</i> and looks like this:
 
-```js
+```ts
 import express from 'express';
 
 const router = express.Router();
@@ -364,7 +364,7 @@ export default router;
 We'll route all requests to prefix <i>/api/diaries</i> to that specific router in _index.ts_
 
 
-```js
+```ts
 import express from 'express';
 import diaryRouter from './routes/diaries'; // highlight-line
 const app = express();
@@ -402,7 +402,7 @@ place the <i>diaryService.ts</i> file in it.
 The file contains two functions for fetching and saving diary entries:
 
 
-```js
+```ts
 import diaryData from '../../data/diaries.json'
 
 const getEntries = () => {
@@ -467,7 +467,7 @@ Let's create a file for our types, <i>types.ts</i>, where we'll define all our t
 <!-- First let's type the allowed <i>Weather</i> and <i>Visibility</i> values through a [union type](https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types) with allowed strings:  -->
 First, let's type the <i>Weather</i> and <i>Visibility</i> values using a [union type](https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types) of the allowed strings:
 
-```js
+```ts
 export type Weather = 'sunny' | 'rainy' | 'cloudy' | 'windy' | 'stormy';
 
 export type Visibility = 'great' | 'good' | 'ok' | 'poor';
@@ -476,7 +476,7 @@ export type Visibility = 'great' | 'good' | 'ok' | 'poor';
 <!-- And from there we can continue to create our own simple DiaryEntry type as [interface](http://www.typescriptlang.org/docs/handbook/interfaces.html): -->
 And from there we can continue by creating a DiaryEntry type, which will be an [interface](http://www.typescriptlang.org/docs/handbook/interfaces.html):
 
-```js
+```ts
 export interface DiaryEntry {
   id: number;
   date: string;
@@ -488,7 +488,7 @@ export interface DiaryEntry {
 
 We can now try to type our imported json: 
 
-```js
+```ts
 import diaryData from '../../data/diaries.json';
 
 import { DiaryEntry } from '../types'; // highlight-line
@@ -521,7 +521,7 @@ TypeScript compiler had inferred its type to be <i>string</i>.
 We can fix the problem by doing [type assertion](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions). This should be done only if we are certain we know what we are doing. 
 If we assert the type of the variable <i>diaryData</i> to be <i>DiaryEntry</i> with the keyword <i>as</i>, everything should work:
 
-```js
+```ts
 import diaryData from '../../data/entries.json'
 
 import { Weather, Visibility, DiaryEntry } from '../types'
@@ -550,7 +550,7 @@ While the compiler trusts you to know what you are doing when using <i>as</i>, d
 In our case we could change how we export our data so we can type it within the data file. 
 Since we cannot use typings in a JSON-file, we should convert the json-file to a ts-file which exports the typed data like so:
 
-```js
+```ts
 import { DiaryEntry } from "../src/types";
 
 const diaryEntries: Array<DiaryEntry> = [
@@ -571,7 +571,7 @@ export default diaryEntries;
 Now when we import the array, the compiler interprets it correctly and the <i>weather</i> and <i>visibility</i> fields are understood right:
 
 
-```js
+```ts
 import diaries from '../../data/diaries'; // highlight-line
 
 import { DiaryEntry } from '../types';
@@ -593,7 +593,7 @@ export default {
 <!-- Note that, if we want to reserve the opportunity to save also entries without a field, e.g. <i>comment</i>, we could set type field as [optional](http://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties) by adding <i>?</i> to the type declaration:  -->
 Note, that if we want to be able to save entries without a certain field,  e.g. <i>comment</i>, we could set the type of the field as [optional](http://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties) by adding <i>?</i> to the type declaration:
 
-```js
+```ts
 export interface DiaryEntry {
   id: number;
   date: string;
@@ -621,7 +621,7 @@ Utility types are a special kinds of type tools, but they can be used just like 
 <!-- In our case, in order to create this kind of "narrowed" version of the <i>DiaryEntry</i> type we could just use the Pick in the function declaration: -->
 In our case, in order to create a "censored" version of the  <i>DiaryEntry</i> for public displays, we can use Pick in the function declaration:
 
-```js
+```ts
 const getNonSensitiveEntries = 
   (): Array<Pick<DiaryEntry, 'id' | 'date' | 'weather' | 'visibility'>> => {
     // ...
@@ -635,7 +635,7 @@ and the compiler would expect the function to return an array of values of the m
 Since [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk) requires the type it modifies to be given as a [type variable](http://www.typescriptlang.org/docs/handbook/generics.html#working-with-generic-type-variables), just like Array does, we now have two nested type variables and the syntax is starting to look a bit odd. 
 We can improve the code's readability by using the [alternative](http://www.typescriptlang.org/docs/handbook/basic-types.html#array) array syntax:
 
-```js
+```ts
 const getNonSensitiveEntries = 
   (): Pick<DiaryEntry, 'id' | 'date' | 'weather' | 'visibility'>[] => {
     // ...
@@ -646,20 +646,20 @@ const getNonSensitiveEntries =
 In this case we want to exclude only one field, 
 so even better would be to use the [Omit](http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk) utility type, which we can use to declare which fields to exclude:
 
-```js
+```ts
 const getNonSensitiveEntries = (): Omit<DiaryEntry, 'comment'>[] => {
   // ...
 }
 ```
  Another way would be to declare a completely new type for the <i>NonSensitiveDiaryEntry</i>: 
 
-```js
+```ts
 export type NonSensitiveDiaryEntry = Omit<DiaryEntry, 'comment'>;
 ```
 
 The code now becames
 
-```js
+```ts
 import diaries from '../../data/diaries';
 import { NonSensitiveDiaryEntry, DiaryEntry } from '../types'; // highlight-line
 
@@ -695,7 +695,7 @@ If we were now to return all of the diaryEntries from the <i>getNonSensitiveEntr
 <!-- Because TypeScript doesn't modify the actual data but only types it, we need to implement the exclusion of the fields: -->
 Because TypeScript doesn't modify the actual data but only its type, we need to exclude the fields ourselves:
 
-```js
+```ts
 import diaries from '../../data/entries.js'
 
 import { NonSensitiveDiaryEntry, DiaryEntry } from '../types'
@@ -729,7 +729,7 @@ export default {
 If we now would try to return this data with the basic <i>DiaryEntry</i> type, i.e. if we would type the function as follows 
 
 
-```js
+```ts
 const getNonSensitiveEntries = () : DiaryEntry[] => {
 ```
 
@@ -746,7 +746,7 @@ Utility types include many handy tools, and it is definitely worth it to take so
 <!-- Finally we can complete the route that returns all diary entries: -->
 Finally, we can complete the route which returns all diary entries:
 
-```js
+```ts
 import express from 'express';
 import diaryService from '../services/diaryService';  // highlight-line
 
@@ -808,7 +808,7 @@ Let's extend the backend to support fetching one specific entry with a HTTP GET 
 
 The DiaryService needs to be extended with  <i>findById</i>-function:
 
-```js
+```ts
 // ...
 
 // highlight-start
@@ -840,7 +840,7 @@ First of all in cases like this we need to decide what the <i>return value</i> s
 The <i>find</i> method of an array returns <i>undefined</i> if the object is not found, and this is actually fine with us. 
 We can solve our problem by typing the return value as follows
 
-```js
+```ts
 const findById = (id: number): DiaryEntry | undefined => { // highlight-line
   const entry = diaries.find(d => d.id === id);
   return entry;
@@ -849,7 +849,7 @@ const findById = (id: number): DiaryEntry | undefined => { // highlight-line
 
 The route handler is the following
 
-```js
+```ts
 import express from 'express';
 import diaryService from '../services/diaryService'
 
@@ -876,7 +876,7 @@ The new entries should have the same type as the existing data.
 
 The code handling of the response looks as follows
 
-```js
+```ts
 router.post('/', (req, res) => {
   const { date, weather, visibility, comment } = req.body;
   const newDiaryEntry = diaryService.AddEntry(
@@ -891,7 +891,7 @@ router.post('/', (req, res) => {
 
 corresponding method in <i>diaryService</i> looks like this
 
-```js
+```ts
 import {
   NonSensitiveDiaryEntry, DiaryEntry,
   Visibility, Weather // highlight-line
@@ -919,7 +919,7 @@ const addEntry = (
 As you can see, the <i>addDiary</i> function is becoming quite hard to read now that we have all the fields as separate parameters. 
 It might be better to just send the data as an object to the function:
 
-```js
+```ts
 router.post('/', (req, res) => {
   const { date, weather, visibility, comment } = req.body;
   const newDiaryEntry = diaryService.addDiary({ // highlight-line
@@ -937,7 +937,7 @@ But wait, what is the type of this object? It is not exactly a <i>DiaryEntry</i>
 It could be useful to create a new type, <i>NewDiaryEntry</i>, for a not yet saved entry. 
 Let's create that in <i>types.ts</i> using the existing <i>DiaryEntry</i> type and the [Omit](http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk) utility type:
 
-```js
+```ts
 export type NewDiaryEntry = Omit<DiaryEntry, 'id'>;
 ```
 
@@ -945,7 +945,7 @@ export type NewDiaryEntry = Omit<DiaryEntry, 'id'>;
 Now we can use the new type in our DiaryService, 
 and destructure the new entry object when creating an entry to be saved:
 
-```js
+```ts
 import { NewDiaryEntry, NonSensitiveDiaryEntry, DiaryEntry } from '../types'; // highlight-line
 
 // ...
@@ -1009,7 +1009,7 @@ We could just add simple <i>exists</i> and <i>is-value-valid</i> checks to the f
 We need to define a function <i>toNewDiaryEntry</i> that receives the request body as a parameter and returns a properly typed <i>NewDiaryEntry</i> object. 
 The route definition uses the function as follows
 
-```js
+```ts
 import toNewDiaryEntry from '../utils'; // highlight-line
 
 // ...
@@ -1031,7 +1031,7 @@ Since we are now making secure code and trying to ensure that we are getting exa
 
 The skeleton of the function <i>toNewDiaryEntry</i> looks like the following:
 
-```js
+```ts
 import { NewDiaryEntry } from './types';
 
 const toNewDiaryEntry = (object): NewDiaryEntry => {
@@ -1060,7 +1060,7 @@ However if we type the object as <i>any</i>, eslint gives us a complaint:
 This is due to the eslint-rule  [no-explicit-any](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md) which prevents us from explicitly setting type to be <i>any</i>. 
 In general this is a good rule, and undesired just in this particular file. We can allow using <i>any</i> in this file by disabling the eslint-rule in the file. This happens by adding the following line to the file:
 
-```js
+```ts
 /* eslint-disable @typescript-eslint/no-explicit-any */
 ```
 
@@ -1072,7 +1072,7 @@ To validate the <i>comment</i> field we need to check that it exists, and to ens
 
 The function should look something like this:
 
-```js
+```ts
 const parseComment = (comment: any): string => {
   if (!comment || !isString(comment)) {
     throw new Error('Incorrect or missing comment: ' + comment);
@@ -1086,7 +1086,7 @@ The function gets a parameter of type <i>any</i> and returns it as type <i>strin
 
 The string validation function looks like this
 
-```js
+```ts
 const isString = (text: any): text is string => {
   return typeof text === 'string' || text instanceof String;
 };
@@ -1095,7 +1095,7 @@ const isString = (text: any): text is string => {
 <!-- The function is so called [type guard](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards), that is, a function that returns a boolean <i>and</i> which has a <i>type predicate</i> as the return type. In our case the type predicate is -->
 The function is a so called [type guard](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards). That means it is a function which returns a boolean <i>and</i> which has a <i>type predicate</i> as the return type. In our case the type predicate is
 
-```js
+```ts
 text is string
 ```
 
@@ -1113,7 +1113,7 @@ But after the call, if the code proceeds past the exception (that is the type gu
 
 Why do we have two conditions in the string type guard?
 
-```js
+```ts
 const isString = (text: any): text is string => {
   return typeof text === 'string' || text instanceof String; // highlight-line
 }
@@ -1121,7 +1121,7 @@ const isString = (text: any): text is string => {
 
 would it not be enough to write the guard like this
 
-```js
+```ts
 const isString = (text: any): text is string => {
   return typeof text === 'string';
 }
@@ -1132,7 +1132,7 @@ Most likely the simpler form is good enough for all practical purposes.
 However, if we want to be absolutely sure, both conditions are needed. 
 There are two different ways to create string objects in JavaScript which both work a bit differently with respect to the <i>typeof</i> and <i>instanceof</i> operators:
 
-```js
+```ts
 const a = "I'm a string primitive";
 const b = new String("I'm a String Object");
 typeof a; --> returns 'string'
@@ -1153,7 +1153,7 @@ We should however still use JavaScript level validation to check whether the dat
 
 We will add the following functions
 
-```js
+```ts
 const isDate = (date: string): boolean => {
   return Boolean(Date.parse(date));
 };
@@ -1174,7 +1174,7 @@ Finally we are ready to move on to the last two types, Weather and Visibility.
 
 We would like the validation and parsing to work as follows:
 
-```js
+```ts
 const parseWeather = (weather: any): Weather => {
   if (!weather || !isString(weather) || !isWeather(weather)) {
       throw new Error('Incorrect or missing weather: ' + weather)
@@ -1187,7 +1187,7 @@ const parseWeather = (weather: any): Weather => {
 The question is, how can we validate that the string is of a specific form?
 One possible way to write the type guard would be this:
 
-```js
+```ts
 const isWeather = (str: any): str is Weather => {
   return ['sunny', 'rainy', 'cloudy', 'stormy' ].includes(str);
 };
@@ -1202,7 +1202,7 @@ In our case a better solution would be to improve the actual Weather type. Inste
 
 Let us redefine the type <i>Weather</i> as follows: 
 
-```js
+```ts
 export enum Weather {
   Sunny = 'sunny',
   Rainy = 'rainy',
@@ -1215,7 +1215,7 @@ export enum Weather {
 <!-- This allows us to check that a string confirms to the accepted values of the Weather enum type and the type guard can be changed to following -->
 Now we can check that a string is one of the accepted values, and the type guard can be written like this:
 
-```js
+```ts
 const isWeather = (param: any): param is Weather => {
   return Object.values(Weather).includes(param);
 };
@@ -1226,7 +1226,7 @@ One thing to notice here is that we have changed the parameter type to <i>any</i
 
 The function <i>parseWeather</i> can be simplified a bit
 
-```js
+```ts
 const parseWeather = (weather: any): Weather => {
   if (!weather || !isWeather(weather)) { // highlight-line
       throw new Error('Incorrect or missing weather: ' + weather);
@@ -1247,7 +1247,7 @@ This is because we cannot just assume a string is an enum.
 We can fix this by mapping the initial data elements to <i>DiaryEntry</i> type with the <i>toNewDiaryEntry</i> function:
 
 
-```js
+```ts
 import { DiaryEntry } from "../src/types";
 import toNewDiaryEntry from "../src/utils";
 
@@ -1278,7 +1278,7 @@ Enums are usually used when there is a set of predetermined values which are not
 
 We still need to give the same treatment to <i>visibility</i>. The enum looks following
 
-```js
+```ts
 export enum Visibility {
   Great = 'great',
   Good = 'good',
@@ -1289,7 +1289,7 @@ export enum Visibility {
 
 The type guard and the parser are below
 
-```js
+```ts
 const isVisibility = (param: any): param is Visibility => {
   return Object.values(Visibility).includes(param);
 };
@@ -1304,7 +1304,7 @@ const parseVisibility = (visibility: any): Visibility => {
 
 And finally we can finalize the  <i>toNewDiaryEntry</i> function that takes care of validating and parsing the fields of the post data: 
 
-```js
+```ts
 const toNewDiaryEntry = (object: any): NewDiaryEntry => {
   return {
     date: parseDate(object.date),

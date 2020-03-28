@@ -55,7 +55,7 @@ In the example below we have defined a function <i>birthdayGreeter</i> which acc
 The function will return a string.
 
 
-```js
+```ts
 const birthdayGreeter = (name: string, age: number): string => {
   return `Happy birthday ${name}, you are now ${age} years old!`;
 };
@@ -80,7 +80,7 @@ The TypeScript compiler can attempt to infer the type information if no type has
 <!-- As an example consider the function <i>add</i> -->
 For example consider the function <i>add</i>
 
-```js
+```ts
 const add = (a: number, b: number) => {
   /* The return value is used to determine
      the return type of the function */
@@ -94,7 +94,7 @@ The function's return value is inferred by retracing the code back to the return
 <!-- As a more complex example let us consider the code below. If you have not used TypeScript before, this example might be a bit complex. But do not worry, you can safely skip this example for now.  -->
 As a more complex example let's consider the code below. If you have not used TypeScript before, this example might be a bit complex. But do not worry, you can safely skip this example for now.
 
-```js
+```ts
 type CallsFunction = (callback: (result: string) => any) => void;
 
 const func: CallsFunction = (cb) => {
@@ -117,7 +117,7 @@ Next we define the function <i>func</i> of  type <i>CallsFunction</i>. From the 
 <!-- The last thing is that we call <i>func</i> by giving it the following function as parameter  -->
 Lastly we call <i>func</i> giving it the following function as a parameter
 
-```js
+```ts
 (result) => {
   return result;
 }
@@ -132,13 +132,13 @@ TypeScript removes all type system constructs during compilation.
 
 Input:
 
-```js
+```ts
 let x: SomeType;
 ```
 
 Output:
 
-```js
+```ts
 let x;
 ```
 
