@@ -507,14 +507,14 @@ The URL for the entire collection of all note resources is <i>www.example.com/ap
 
 We can execute different operations on resources. The operation to be executed is defined by the HTTP <i>verb</i>:
 
-| URL                   | verb               | functionality                                                  |
-| --------------------- | ------------------- | ---------------------------------------------------------------- |
-| notes/10 &nbsp;&nbsp; | GET                 | fetches a single resource                                      |
-| notes                 | GET                 | fetches all resources in the collection                                 |
-| notes                 | POST                | creates a new resource based on the request data              |
-| notes/10              | DELETE &nbsp;&nbsp; | removes the identified resource                                     |
-| notes/10              | PUT                 | replaces the entire identified resource with the request data
-| notes/10              | PATCH               | replaces a part of the identified resource with the request data
+| URL                   | verb                | functionality                                                    |
+| --------------------- | ------------------- | -----------------------------------------------------------------|
+| notes/10 &nbsp;&nbsp; | GET                 | fetches a single resource                                        |
+| notes                 | GET                 | fetches all resources in the collection                          |
+| notes                 | POST                | creates a new resource based on the request data                 |
+| notes/10              | DELETE &nbsp;&nbsp; | removes the identified resource                                  |
+| notes/10              | PUT                 | replaces the entire identified resource with the request data    |
+| notes/10              | PATCH               | replaces a part of the identified resource with the request data |
 |                       |                     |                                                                  |
 
 
@@ -701,7 +701,7 @@ Let's install Postman and try it out:
 
 ![](../../images/3/11ea.png)
 
-Using Postman is quite easy in this situation. It's enough to define the url and then select the correct request type.
+Using Postman is quite easy in this situation. It's enough to define the url and then select the correct request type (DELETE).
 
 The backend server appears to respond correctly. By making an HTTP GET request to <http://localhost:3001/api/notes> we see that the note with the id 2 is no longer in the list, which indicates that the deletion was successful. 
 
