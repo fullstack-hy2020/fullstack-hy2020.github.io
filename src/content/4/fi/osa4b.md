@@ -201,7 +201,7 @@ Tehdään pari testiä lisää:
 test('there are two notes', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body.length).toBe(2)
+  expect(response.body).toHaveLength(2)
 })
 
 test('the first note is about HTTP methods', async () => {
@@ -220,7 +220,7 @@ const response = await api.get('/api/notes')
 
 // tänne tullaan vasta kun edellinen komento eli HTTP-pyyntö on suoritettu
 // muuttujassa response on nyt HTTP-pyynnön tulos
-expect(response.body.length).toBe(2)
+expect(response.body).toHaveLength(2)
 ```
 
 HTTP-pyyntöjen tiedot konsoliin kirjoittava middleware häiritsee hiukan testien tulostusta. Muutetaan loggeria siten, että testausmoodissa lokiviestit eivät tulostu konsoliin:
@@ -289,7 +289,7 @@ Muutetaan kahta jälkimmäistä testiä vielä seuraavasti:
 test('all notes are returned', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body.length).toBe(initialNotes.length) // highlight-line
+  expect(response.body).toHaveLength(initialNotes.length) // highlight-line
 })
 
 test('a specific note is within the returned notes', async () => {
@@ -447,7 +447,7 @@ test('a valid note can be added ', async () => {
 
   const contents = response.body.map(r => r.content)
 
-  expect(response.body.length).toBe(initialNotes.length + 1)
+  expect(response.body).toHaveLength(initialNotes.length + 1)
   expect(contents).toContain(
     'async/await simplifies making async calls'
   )
@@ -471,7 +471,7 @@ test('note without content is not added', async () => {
 
   const response = await api.get('/api/notes')
 
-  expect(response.body.length).toBe(initialNotes.length)
+  expect(response.body).toHaveLength(initialNotes.length)
 })
 ```
 
@@ -550,7 +550,7 @@ test('notes are returned as json', async () => {
 test('all notes are returned', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body.length).toBe(helper.initialNotes.length) // highlight-line
+  expect(response.body).toHaveLength(helper.initialNotes.length) // highlight-line
 })
 
 test('a specific note is within the returned notes', async () => {
@@ -576,7 +576,7 @@ test('a valid note can be added ', async () => {
 
 
   const notesAtEnd = await helper.notesInDb() // highlight-line
-  expect(notesAtEnd.length).toBe(helper.initialNotes.length + 1) // highlight-line
+  expect(notesAtEnd).toHaveLength(helper.initialNotes.length + 1) // highlight-line
 
   const contents = notesAtEnd.map(n => n.content) // highlight-line
   expect(contents).toContain(
@@ -596,7 +596,7 @@ test('note without content is not added', async () => {
 
   const notesAtEnd = await helper.notesInDb() // highlight-line
 
-  expect(notesAtEnd.length).toBe(helper.initialNotes.length) // highlight-line
+  expect(notesAtEnd).toHaveLength(helper.initialNotes.length) // highlight-line
 })
 
 afterAll(() => {
@@ -689,7 +689,7 @@ test('a note can be deleted', async () => {
 
   const notesAtEnd = await helper.notesInDb()
 
-  expect(notesAtEnd.length).toBe(
+  expect(notesAtEnd).toHaveLength(
     helper.initialNotes.length - 1
   )
 
@@ -1015,7 +1015,7 @@ describe('when there is initially some notes saved', () => {
   test('all notes are returned', async () => {
     const response = await api.get('/api/notes')
 
-    expect(response.body.length).toBe(helper.initialNotes.length)
+    expect(response.body).toHaveLength(helper.initialNotes.length)
   })
 
   test('a specific note is within the returned notes', async () => {
@@ -1076,7 +1076,7 @@ describe('when there is initially some notes saved', () => {
 
 
       const notesAtEnd = await helper.notesInDb()
-      expect(notesAtEnd.length).toBe(helper.initialNotes.length + 1)
+      expect(notesAtEnd).toHaveLength(helper.initialNotes.length + 1)
 
       const contents = notesAtEnd.map(n => n.content)
       expect(contents).toContain(
@@ -1096,7 +1096,7 @@ describe('when there is initially some notes saved', () => {
 
       const notesAtEnd = await helper.notesInDb()
 
-      expect(notesAtEnd.length).toBe(helper.initialNotes.length)
+      expect(notesAtEnd).toHaveLength(helper.initialNotes.length)
     })
   })
 
@@ -1111,7 +1111,7 @@ describe('when there is initially some notes saved', () => {
 
       const notesAtEnd = await helper.notesInDb()
 
-      expect(notesAtEnd.length).toBe(
+      expect(notesAtEnd).toHaveLength(
         helper.initialNotes.length - 1
       )
 

@@ -262,7 +262,7 @@ test('clicking the button calls event handler once', async () => {
   const button = component.getByText('make not important')
   fireEvent.click(button)
 
-  expect(mockHandler.mock.calls.length).toBe(1)
+  expect(mockHandler.mock.calls).toHaveLength(1)
 })
 ```
 
@@ -284,7 +284,7 @@ Klikkaaminen tapahtuu metodin [fireEvent](https://testing-library.com/docs/api-e
 Testin ekspektaatio varmistaa, että <i>mock-funktiota</i> on kutsuttu täsmälleen kerran:
 
 ```js
-expect(mockHandler.mock.calls.length).toBe(1)
+expect(mockHandler.mock.calls).toHaveLength(1)
 ```
 
 [Mockoliot ja -funktiot](https://en.wikipedia.org/wiki/Mock_object) ovat testauksessa yleisesti käytettyjä valekomponentteja, joiden avulla korvataan testattavien komponenttien riippuvuuksia, eli niiden tarvitsemia muita komponentteja. Mockit mahdollistavat mm. kovakoodattujen syötteiden palauttamisen sekä niiden metodikutsujen lukumäärän sekä parametrien testauksen aikaisen tarkkailun.
@@ -481,7 +481,7 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
   })
   fireEvent.submit(form)
 
-  expect(createNote.mock.calls.length).toBe(1)
+  expect(createNote.mock.calls).toHaveLength(1)
   expect(createNote.mock.calls[0][0].content).toBe('testing of forms could be easier' )
 })
 ```

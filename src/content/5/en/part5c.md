@@ -287,7 +287,7 @@ test('clicking the button calls event handler once', () => {
   const button = component.getByText('make not important')
   fireEvent.click(button)
 
-  expect(mockHandler.mock.calls.length).toBe(1)
+  expect(mockHandler.mock.calls).toHaveLength(1)
 })
 ```
 
@@ -310,7 +310,7 @@ Clicking happens with the [fireEvent](https://testing-library.com/docs/api-event
 The expectation of the test verifies that the <i>mock function</i> has been called exactly once.
 
 ```js
-expect(mockHandler.mock.calls.length).toBe(1)
+expect(mockHandler.mock.calls).toHaveLength(1)
 ```
 
 
@@ -528,7 +528,7 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
   })
   fireEvent.submit(form)
 
-  expect(createNote.mock.calls.length).toBe(1)
+  expect(createNote.mock.calls).toHaveLength(1)
   expect(createNote.mock.calls[0][0].content).toBe('testing of forms could be easier' )
 })
 ```
