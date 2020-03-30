@@ -13,7 +13,7 @@ Sovelluksen frontend toimii puhelinluettelon näyttämisen osalta päivitetyn pa
 
 Lisätään sovelluksen tilaan muuttuja _token_, joka tallettaa tokenin siinä vaiheessa kun käyttäjä on kirjautunut. Jos _token_ ei ole määritelty, näytetään kirjautumisesta huolehtiva komponentti <i>LoginForm</i>, joka saa parametriksi virheenkäsittelijän sekä funktion _setToken_:
 
-```js
+```jsx
 const App = () => {
   const [token, setToken] = useState(null) // highlight-line
 
@@ -52,7 +52,7 @@ export const LOGIN = gql`
 
 Kirjautumisesta huolehtiva komponentti _LoginForm_ toimii melko samalla tavalla kuin aiemmat mutaatioista huolehtivat komponentit. Mielenkiintoiset rivit on korostettu koodissa:
 
-```js
+```jsx
 import React, { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/client'
 import { LOGIN } from '../queries'
@@ -115,7 +115,7 @@ Lisätään sovellukselle myös nappi, jonka avulla kirjautunut käyttäjä voi 
 Välimuistin nollaaminen tapahtuu Apollon _client_-objektin metodilla [resetStore](https://www.apollographql.com/docs/react/v3.0-beta/api/core/ApolloClient/#ApolloClient.resetStore), clientiin taas päästään käsiksi hookilla
 [useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useapolloclient):
 
-```js
+```jsx
 const App = () => {
   const [token, setToken] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
@@ -172,7 +172,7 @@ _client_-olion muodostamisen yhteydessä oleva toinen parametri _link_ määritt
 
 Asennetaan vielä muutoksen tarvitsema kirjasto
 
-```js
+```bash
 npm install --save apollo-link-context
 ```
 

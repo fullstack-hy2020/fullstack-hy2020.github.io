@@ -15,7 +15,7 @@ The frontend of our application shows the phone directory just fine with the upd
 <!-- Lisätään sovelluksen tilaan muuttuja _token_, joka tallettaa tokenin siinä vaiheessa kun käyttäjä on kirjautunut. Jos _token_ ei ole määritelty, näytetään kirjautumisesta huolehtiva komponentti <i>LoginForm</i>, joka saa parametriksi virheenkäsittelijän sekä funktion _setToken_: -->
 Let's add variable _token_ to the application's state. It will contain user's token when a is logged in. If _token_ is undefined, we render the <i>LoginForm</i>-component responsible for user login. The component receives an error handler and the _setToken_-function as parameters:
 
-```js
+```jsx
 const App = () => {
   const [token, setToken] = useState(null) // hightlight-line
 
@@ -44,7 +44,7 @@ const App = () => {
 Next we define a mutation for logging in
 
 ```js
-expoty const LOGIN = gql`
+export const LOGIN = gql`
   mutation login($username: String!, $password: String!) {
     login(username: $username, password: $password)  {
       value
@@ -57,7 +57,7 @@ expoty const LOGIN = gql`
 The _LoginForm_-component works pretty much just like all other components doing mutations we have previously created. 
 Interesting lines in the code have been highlighted:
 
-```js
+```jsx
 import React, { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/client'
 import { LOGIN } from '../queries'
@@ -181,7 +181,7 @@ The link parameter given to the _client_-object defines how apollo connects to t
 <!-- Asennetaan vielä muutoksen tarvitsema kirjasto -->
 We also need to install the library required by this modification
 
-```js
+```bash
 npm install --save apollo-link-context
 ```
 
@@ -235,7 +235,7 @@ This approach is pretty good, the drawback being that the query is always rerun 
 
 It is possible to optimize the solution by handling updating the cache ourselves. This is done by defining a suitable [update](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#options-)-callback for the mutation, which Apollo runs after the mutation:
 
-```js 
+```js
 const PersonForm = ({ setError }) => {
   // ...
 

@@ -40,7 +40,7 @@ npm install --save @apollo/client graphql
 
 We'll start with the following code for our application. 
 
-```js
+```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
@@ -92,7 +92,7 @@ The servers response is printed to the console:
 
 The application can communicate with a GraphQL server using the _client_ object. The client can be made accessible for all components of the application by wrapping the <i>App</i> component with [ApolloProvider]https://www.apollographql.com/docs/react/v3.0-beta/get-started/#connect-your-client-to-react).
 
-```js
+```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
@@ -128,7 +128,7 @@ Currently the use of the hook-function [useQuery](https://www.apollographql.com/
 <!-- Kyselyn tekevän komponentin <i>App</i> koodi näyttää seuraavalta: -->
 The query is made by the <i>App</i> component, which's code is as follows:
 
-```js
+```jsx
 import React from 'react'
 import { gql, useQuery } from '@apollo/client';
 
@@ -166,7 +166,7 @@ It returns an object with multiple [fields](https://www.apollographql.com/docs/r
 The field <i>loading</i> is true if the query has not received a response yet. 
 Then the following code gets rendered:
 
-```js
+```jsx
 if ( result.loading ) {
   return <div>loading...</div>
 }
@@ -175,7 +175,7 @@ if ( result.loading ) {
 <!-- Kun tulos on valmis, otetaan tuloksen kentästä <i>data</i> kyselyn <i>allPersons</i> vastaus ja renderöidään luettelossa olevat nimet ruudulle. -->
 When response is received, the result of the <i>allPersons</i> query can be found from the <i>data</i> field, and we can render the list of names to the screen.
 
-```js
+```jsx
 <div>
   {result.data.allPersons.map(p => p.name).join(', ')}
 </div>
@@ -184,7 +184,7 @@ When response is received, the result of the <i>allPersons</i> query can be foun
 <!-- Eriytetään henkilöiden näyttäminen omaan komponenttiin -->
 Let's separate displaying the list of persons into its own component
 
-```js
+```jsx
 const Persons = ({ persons }) => {
   return (
     <div>
@@ -202,7 +202,7 @@ const Persons = ({ persons }) => {
 <!-- Komponentti _App_ siis hoitaa edelleen kyselyn ja välittää tuloksen uuden komponentin renderöitäväksi: -->
 The _App_ component still makes the query, and passes the result to the new component to be rendered:
 
-```js
+```jsx
 const App = () => {
   const result = useQuery(ALL_PERSONS)
 
@@ -222,7 +222,7 @@ Let's implement functionality for viewing the address details of a person. The <
 
 The queries we did in the last chapter had the parameter hardcoded into the query:
 
-```js
+```graphql
 query {
   findPerson(name: "Arto Hellas") {
     phone 
@@ -240,7 +240,7 @@ GraphQL [variables](https://graphql.org/learn/queries/#variables) are well suite
 <!-- Sopiva muoto kyselylle on seuraava: -->
 A good format for the query is this:
 
-```js
+```graphql
 query findPersonByName($nameToSearch: String!) {
   findPerson(name: $nameToSearch) {
     name
@@ -268,7 +268,7 @@ However now we want to make the query only when a user wants to see the details 
 For this this situation the hook-function [useLazyQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#uselazyquery) is a good choice. 
 The <i>Persons</i> component becomes:
 
-```js
+```jsx
 // highlight-start
 const FIND_PERSON = gql`
   query findPersonByName($nameToSearch: String!) {
@@ -438,7 +438,7 @@ The hook-function [useMutation](https://www.apollographql.com/docs/react/v3.0-be
 <!-- Tehdään sovellukseen uusi komponentti uuden henkilön lisämiseen: -->
 Let's create a new component for adding a new person to the directory:
 
-```js
+```jsx
 import React, { useState } from 'react'
 import { gql, useMutation } from '@apollo/client'
 
@@ -527,7 +527,7 @@ There are few different solutions for this. One way is to make the query for all
 
 The change is small. Let's set the query to poll every two seconds: 
 
-```js
+```jsx
 const App = () => {
   const result = useQuery(ALL_PERSONS, {
     pollInterval: 2000 // highlight-line
@@ -652,7 +652,7 @@ const PersonForm = ({ setError }) => {
 <!-- Renderlöidään mahdollinen virheilmoitus näytölle -->
 We can then render the error message on the screen as necessary
 
-```js
+```jsx
 const App = () => {
   const [errorMessage, setErrorMessage] = useState(null) // highlight-line
 
@@ -725,7 +725,7 @@ export const EDIT_NUMBER = gql`
 The <i>PhoneForm</i> component responsible for the change is straightforward. The form has fields for the person's name and new phone number, and calls the _changeNumber_ function. The function is done using the _useMutation_-hook. 
 Interesting lines on the code have been hihglighed.
 
-```js
+```jsx
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 
@@ -799,7 +799,7 @@ For GraphQL this is not an error, so registering an _onError_ error handler is n
 <!-- Voimme generoida virheilmoituksen _useMutation_-hookin toisena parametrina palauttaman mutaation tuloksen kertovan olion _result_ avulla. -->
 We can use the _result_ field returned by the _useMutation_-hook as its second parameter to generate an error message. 
 
-```js 
+```js
 const PhoneForm = ({ setError }) => {
   const [name, setName] = useState('')
   const [phone, setPhone] = useState('')

@@ -13,7 +13,7 @@ Laajennetaan sovellusta käyttäjänhallinnalla. Siirrytään kuitenkin ensin k�
 
 Otetaan käyttöön mongoose ja mongoose-unique-validator:
 
-```js
+```graphql
 npm install mongoose mongoose-unique-validator --save
 ```
 
@@ -228,7 +228,7 @@ Kirjautuminen ja käyttäjän tunnistautuminen hoidetaan samoin kuten teimme [os
 
 Laajennetaan skeemaa seuraavasti:
 
-```js
+```graphql
 type User {
   username: String!
   friends: [Person!]!
@@ -240,12 +240,12 @@ type Token {
 }
 
 type Query {
-  // ..
+  # ..
   me: User
 }
 
 type Mutation {
-  // ...
+  # ...
   createUser(
     username: String!
   ): User
@@ -259,7 +259,7 @@ type Mutation {
 Kysely _me_ palauttaa kirjautuneena olevan käyttäjän. Käyttäjät luodaan mutaatiolla _createUser_ ja kirjautuminen tapahtuu mutaatiolla _login_.
 
 Asennetaan jsonwebtoken-kirjasto:
-```js
+```bash
 npm install jsonwebtoken --save
 ```
 
@@ -382,9 +382,9 @@ Jos kirjautunutta käyttäjää ei löydy kontekstista, heitetään poikkeus _Au
 
 Lisätään sovellukseen vielä mahdollisuus liittää jokin henkilö omalle tuttavalistalle. Mutaatio seuraavassa:
 
-```js
+```graphql
 type Mutation {
-  // ...
+  # ...
   addAsFriend(
     name: String!
   ): User
@@ -441,7 +441,7 @@ Muuta kirjastosovellusta siten, että se tallettaa tiedot tietokantaan. Kirjojen
 
 Muutetaan myös graphql-skeemaa hiukan kirjan osalta
 
-```js
+```graphql
 type Book {
   title: String!
   published: Int!
@@ -476,7 +476,7 @@ Täydennä sovellusta siten, että tietokannan validointivirheet (esim. liian ly
 
 Lisää järjestelmään käyttäjienhallinta. Laajenna skeemaa seuraavasti:
 
-```js
+```graphql
 type User {
   username: String!
   favoriteGenre: String!
@@ -488,12 +488,12 @@ type Token {
 }
 
 type Query {
-  // ..
+  # ..
   me: User
 }
 
 type Mutation {
-  // ...
+  # ...
   createUser(
     username: String!
     favoriteGenre: String!

@@ -15,7 +15,7 @@ We will now add user management to our application, but let's first start using 
 
 Install mongoose and mongoose-unique-validator:
 
-```js
+```bash
 npm install mongoose mongoose-unique-validator --save
 ```
 
@@ -243,7 +243,7 @@ Logging in and identifying the user are handled the same way we used in [part 4]
 
 Let's extend the schema like so: 
 
-```js
+```graphql
 type User {
   username: String!
   friends: [Person!]!
@@ -255,12 +255,12 @@ type Token {
 }
 
 type Query {
-  // ..
+  # ..
   me: User
 }
 
 type Mutation {
-  // ...
+  # ...
   createUser(
     username: String!
   ): User
@@ -406,9 +406,9 @@ If a logged in user cannot be found from the context, an _AuthenticationError_ i
 
 Let's also add functionality for adding an existing user to your friends list. The mutation is as follows: 
 
-```js
+```graphql
 type Mutation {
-  // ...
+  # ...
   addAsFriend(
     name: String!
   ): User
@@ -471,7 +471,7 @@ Change the library application so that it saves the data to a database. You can 
 
 Let's change the book graphql schema a little
 
-```js
+```graphql
 type Book {
   title: String!
   published: Int!
@@ -512,7 +512,7 @@ Complete the program so that database validation errors (e.g. too short book tit
 
 Add user management to your application. Expand the schema like so:
 
-```js
+```graphql
 type User {
   username: String!
   favoriteGenre: String!
@@ -524,12 +524,12 @@ type Token {
 }
 
 type Query {
-  // ..
+  # ..
   me: User
 }
 
 type Mutation {
-  // ...
+  # ...
   createUser(
     username: String!
     favoriteGenre: String!

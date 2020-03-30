@@ -13,7 +13,7 @@ Kurssi lähestyy loppuaan. Katsotaan lopuksi vielä muutamaa GraphQL:ään liitt
 
 GraphQL:ssä on suhteellisen yleistä, että eri kyselyt palauttavat samanlaisia vastauksia. Esim. puhelinluettelossa yhden henkilön hakeva kysely
 
-```js
+```graphql
 query {
   findPerson(name: "Pekka Mikkola") {
     name
@@ -28,7 +28,7 @@ query {
 
 ja kaikki henkilöt hakeva kysely
 
-```js
+```graphql
 query {
   allPersons {
     name
@@ -45,7 +45,7 @@ palauttavat molemmat henkilöitä. Valitessaan palautettavia kenttiä, molemmat 
 
 Tällaisia tilanteita voidaan yksinkertaistaa [fragmenttien](https://graphql.org/learn/queries/#fragments) avulla. Määritellään kaikki henkilön tiedot valitseva fragmentti:
 
-```js
+```graphql
 fragment PersonDetails on Person {
   name
   phone 
@@ -58,7 +58,7 @@ fragment PersonDetails on Person {
 
 Kyselyt voidaan nyt tehdä fragmenttien avulla kompaktimmassa muodossa:
 
-```js
+```graphql
 query {
   allPersons {
     ...PersonDetails // highlight-line
@@ -137,7 +137,7 @@ Toteutetaan nyt sovellukseemme subscriptiot, joiden avulla palvelimelta on mahdo
 
 Palvelimella ei ole tarvetta kovin monille muutoksille. Skeemaan tarvitaan seuraava lisäys:
 
-```js
+```graphql
 type Subscription {
   personAdded: Person!
 }    
@@ -194,7 +194,6 @@ Muutetaan palvelimen käynnistävää koodia seuraavasti
 
 ```js
 // ...
-
 server.listen().then(({ url, subscriptionsUrl }) => { // highlight-line
   console.log(`Server ready at ${url}`)
   console.log(`Subscriptions ready at ${subscriptionsUrl}`) // highlight-line
@@ -203,7 +202,7 @@ server.listen().then(({ url, subscriptionsUrl }) => { // highlight-line
 
 Nyt näemme, että palvelin kuuntelee subscriptioita osoitteessa _ws://localhost:4000/graphql_
 
-```js
+```
 Server ready at http://localhost:4000/
 Subscriptions ready at ws://localhost:4000/graphql
 ```
@@ -222,7 +221,7 @@ Backendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-h
 
 Jotta saamme tilaukset käyttöön React-sovelluksessa, tarvitaan hieman enemmän muutoksia, erityisesti [konfiguraatioiden osalta](https://www.apollographql.com/docs/react/v3.0-beta/data/subscriptions/). Tiedostossa <i>index.js</i> olevat konfiguraatiot on muokattava seuraavaan muotoon:
 
-```js
+```jsx
 import { 
   ApolloClient, ApolloProvider, HttpLink, InMemoryCache, 
   split  // highlight-line
@@ -284,7 +283,7 @@ ReactDOM.render(
 
 Jotta kaikki toimisi, on asennettava uusia riippuvuuksia:
 
-```js
+```bash
 npm install --save @apollo/link-ws subscriptions-transport-ws
 ```
 
@@ -396,7 +395,7 @@ Clientin lopullinen koodi [githubissa](https://github.com/fullstack-hy2020/graph
 
 Laajennetaan vielä backendia hieman. Muutetaan skeemaa siten, että tyypille <i>Person</i> tulee kenttä _friendOf_, joka kertoo kenen kaikkien käyttäjien tuttavalistalla ko henkilö on.
 
-```js
+```graphql
 type Person {
   name: String!
   phone: String
@@ -408,7 +407,7 @@ type Person {
 
 Sovellukseen tulisi siis saada tuki esim. seuraavalle kyselylle:
 
-```js
+```graphql
 query {
   findPerson(name: "Leevi Hellas") {
     friendOf{
@@ -459,7 +458,7 @@ Sovellus toimii nyt.
 
 Voimme samantien tehdä monimutkaisempiakin kyselyitä. On mahdollista selvittää esim. kaikkien henkilöiden tuttavat:
 
-```js
+```graphql
 query {
   allPersons {
     name
@@ -543,7 +542,7 @@ Muutoksen jälkeen erilliselle _friendOf_-kentän resolverille ei enää olisi t
 
 Kaikkien henkilöiden kysely <i>ei aiheuta</i> n+1-ongelmaa, jos kyselyssä pyydetään esim. ainoastaan nimi ja puhelinnumero:
 
-```js
+```graphql
 query {
   allPersons {
     name
@@ -590,7 +589,7 @@ Pidä sovelluksen käyttöliittymä ajantasaisena, kun palvelin tiedottaa uusist
 
 Ratkaise haluamallasi menetelmällä seuraavaa kyselyä vaivaava n+1-ongelma:
 
-```js
+```graphql
 query {
   allAuthors {
     name 

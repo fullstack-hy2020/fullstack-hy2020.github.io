@@ -37,7 +37,7 @@ The main principle of GraphQL is, that the code on the browser forms a <i>query<
 
 The data described in the above scenario could be fetched with ( roughly ) the following query: 
 
-```bash
+```graphql
 query FetchBlogsQuery {
   user(username: "mluukkai") {
     followedUsers {
@@ -59,7 +59,7 @@ query FetchBlogsQuery {
 
 The servers response would be about the following JSON-object: 
 
-```bash
+```json
 {
   "data": {
     "followedUsers": [
@@ -105,7 +105,7 @@ We will get to know the basics of GraphQL by implementing a GraphQL version of t
 
 In the heart of all GraphQL applications is a [schema](https://graphql.org/learn/schema/), which describes the data sent between the client and the server. The initial schema for our phonebook is as follows: 
 
-```js
+```graphql
 type Person {
   name: String!
   phone: String
@@ -139,7 +139,7 @@ So the schema describes what queries the client can send to the server, what kin
 
 The simplest of the queries, _personCount_, looks as follows: 
 
-```js
+```graphql
 query {
   personCount
 }
@@ -147,7 +147,7 @@ query {
 
 Assuming our applications has saved the information of three people, the response would look like this: 
 
-```js
+```json
 {
   "data": {
     "personCount": 3
@@ -157,7 +157,7 @@ Assuming our applications has saved the information of three people, the respons
 
 The query fetching the information of all of the people, _allPersons_, is a bit more complicated. Because the query returns a list of <i>Person</i>-objects, the query must describe 
 <i>which fields</i> of the objects the query [returns](https://graphql.org/learn/queries/#fields):
-```js
+```graphql
 query {
   allPersons {
     name
@@ -168,7 +168,7 @@ query {
 
 The response could look like this: 
 
-```js
+```json
 {
   "data": {
     "allPersons": [
@@ -191,7 +191,7 @@ The response could look like this:
 
 A query can be made to return any field described in the schema. For example the following would also be possible: 
 
-```js
+```graphql
 query {
   allPersons{
     name
@@ -203,7 +203,7 @@ query {
 
 The last example shows a query which requires a parameter, and returns the details of one person. 
 
-```js
+```graphql
 query {
   findPerson(name: "Arto Hellas") {
     phone 
@@ -218,7 +218,7 @@ So first the parameter is described in round brackets, and then the fields of th
 
 The response is like this: 
 
-```js
+```json
 {
   "data": {
     "findPerson": {
@@ -233,7 +233,7 @@ The response is like this:
 
 The return value was marked as nullable, so if we search for the details of an unknown
 
-```js
+```graphql
 query {
   findPerson(name: "Donald Trump") {
     phone 
@@ -243,7 +243,7 @@ query {
 
 the return value is <i>null</i>.
 
-```js
+```json
 {
   "data": {
     "findPerson": null
@@ -267,7 +267,7 @@ Let's implement a GraphQL-server with today's leading library [Apollo -server](h
 
 Create a new npm-project with _npm init_ and install the required dependencies.
 
-```js
+```bash
 npm install --save apollo-server graphql
 ```
 
@@ -362,7 +362,7 @@ const resolvers = {
 
 As you can see, the resolvers correspond to the queries described in the schema. 
 
-```js
+```graphql
 type Query {
   personCount: Int!
   allPersons: [Person!]!
@@ -374,7 +374,7 @@ So there is a field under <i>Query</i> for every query described in the schema.
 
 The query 
 
-```js
+```graphql
 query {
   personCount
 }
@@ -390,7 +390,7 @@ So the response to the query is the length of the array _persons_.
 
 The query which fetches all persons
 
-```js
+```graphql
 query {
   allPersons {
     name
@@ -433,7 +433,7 @@ By clicking the text <i>DOCS</i> on the right, the playground shows the GraphQL 
 
 The query fetching a single person
 
-```js
+```graphql
 query {
   findPerson(name: "Arto Hellas") {
     phone 
@@ -464,7 +464,7 @@ The resolver does not need the first parameter _root_.
 
 When we do a query, for example
 
-```js
+```graphql
 query {
   findPerson(name: "Arto Hellas") {
     phone 
@@ -524,7 +524,7 @@ Person: {
 
 Let's modify the scheme a bit
 
-```js
+```graphql
   // highlight-start
 type Address {
   street: String!
@@ -552,7 +552,7 @@ so a person now has a field with the type <i>Address</i>, which contains the str
 
 The queries requiring the address change into
 
-```js
+```graphql
 query {
   findPerson(name: "Arto Hellas") {
     phone 
@@ -567,7 +567,7 @@ query {
 
 and the response now is a person object, which <i>contains</i> an address object. 
 
-```js
+```json
 {
   "data": {
     "findPerson": {
@@ -642,7 +642,7 @@ Let's add a functionality for adding new persons to the phonebook. In GraphQL, a
 
 The schema for a mutation for adding a new person looks as follows: 
 
-```js
+```graphql
 type Mutation {
   addPerson(
     name: String!
@@ -685,7 +685,7 @@ The <i>id</i> field is given a unique value using the [uuid](https://github.com/
 
 A new person can be added with the following mutation
 
-```js
+```graphql
 mutation {
   addPerson(
     name: "Pekka Mikkola"
@@ -720,7 +720,7 @@ Note, that the person is saved to the _persons_ array as
 
 But the response to the mutation is 
 
-```js
+```json
 {
   "data": {
     "addPerson": {
@@ -794,7 +794,7 @@ The current code of the application can be found on [ Github](https://github.com
 
 Let's add a possibility to filter the query returning all persons with the parameter <i>phone</i> so, that it returns only persons with a phone number
 
-```js
+```graphql
 query {
   allPersons(phone: YES) {
     name
@@ -806,7 +806,7 @@ query {
 
 or persons without a phone number 
 
-```js
+```graphql
 query {
   allPersons(phone: NO) {
     name
@@ -817,7 +817,7 @@ query {
 
 The schema changes like so: 
 
-```js
+```graphql
 // highlight-start
 enum YesNo {
   YES
@@ -863,7 +863,7 @@ Query: {
 
 Let's add a mutation for changing the phone number of a person. The schema of this mutation looks as follows:
 
-```js
+```graphql
 type Mutation {
   addPerson(
     name: String!
@@ -909,7 +909,7 @@ The current code of the application can be found on [Github](https://github.com/
 
 With GraphQL it is possible to combine multiple fields of type <i>Query</i>, or "separate queries" into one query. For example the following query returns both the amount of persons in the phonebook and their names: 
 
-```js
+```graphql
 query {
   personCount
   allPersons {
@@ -921,7 +921,7 @@ query {
 
 The response looks as follows
 
-```js
+```json
 {
   "data": {
     "personCount": 3,
@@ -943,7 +943,7 @@ The response looks as follows
 
 Combined query can also use the same query multiple times. You must however give the queries alternative names like so
 
-```js
+```graphql
 query {
   havePhone: allPersons(phone: YES){
     name
@@ -957,7 +957,7 @@ query {
 
 The response looks like
 
-```js
+```json
 {
   "data": {
     "havePhone": [
@@ -1004,7 +1004,7 @@ Implement queries _bookCount_ and _authorCount_ which return the number of books
 
 The query 
 
-```js
+```graphql
 query {
   bookCount
   authorCount
@@ -1014,7 +1014,7 @@ query {
 
 should return
 
-```js
+```json
 {
   "data": {
     "bookCount": 7,
@@ -1031,7 +1031,7 @@ Implement query _allBooks_, which returns the details of all books.
 
 In the end, the user should be able to do the following query:
 
-```js
+```graphql
 query {
   allBooks { 
     title 
@@ -1050,7 +1050,7 @@ Implement query _allAuthors_, which returns the details of all authors. The resp
 
 For example the query
 
-```js
+```graphql
 query {
   allAuthors {
     name
@@ -1062,7 +1062,7 @@ query {
 
 should return
 
-```js
+```json
 {
   "data": {
     "allAuthors": [
@@ -1098,7 +1098,7 @@ Modify the _allBooks_ query so, that a user can give an optional parameter <i>au
 
 For example query
 
-```js
+```graphql
 query {
   allBooks(author: "Robert Martin") {
     title
@@ -1109,7 +1109,7 @@ query {
 
 should return
 
-```js
+```json
 {
   "data": {
     "allBooks": [
@@ -1131,7 +1131,7 @@ Modify the query _allBooks_ so that a user can give an optional parameter <i>gen
 
 For example query
 
-```js
+```graphql
 query {
   allBooks(genre: "refactoring") {
     title
@@ -1142,7 +1142,7 @@ query {
 
 should return
 
-```js
+```json
 {
   "data": {
     "allBooks": [
@@ -1170,7 +1170,7 @@ should return
 
 The query must work when both optional parameters are given: 
 
-```js
+```graphql
 query {
   allBooks(author: "Robert Martin", genre: "refactoring") {
     title
@@ -1184,7 +1184,7 @@ query {
 
 Implement mutation _addBook_, which can be used like this:
 
-```js
+```graphql
 mutation {
   addBook(
     title: "NoSQL Distilled",
@@ -1201,7 +1201,7 @@ mutation {
 
 The mutation works even if the author is not already saved to the server:
 
-```js
+```graphql
 mutation {
   addBook(
     title: "Pimeyden tango",
@@ -1218,7 +1218,7 @@ mutation {
 
 If the author is not yet saved to the server, a new author is added to the system. The birth years of authors are not saved to the server yet, so the query
 
-```js
+```graphql
 query {
   allAuthors {
     name
@@ -1231,7 +1231,7 @@ query {
 
 returns
 
-```js
+```json
 {
   "data": {
     "allAuthors": [
@@ -1251,7 +1251,7 @@ returns
 
 Implement mutation _editAuthor_, which can be used to set a birth year for an author. The mutation is used like so
 
-```js
+```graphql
 mutation {
   editAuthor(name: "Reijo Mäki", setBornTo: 1958) {
     name
@@ -1263,7 +1263,7 @@ mutation {
 
 If the correct author is found, the operation returns the edited author:
 
-```js
+```json
 {
   "data": {
     "editAuthor": {
@@ -1277,7 +1277,7 @@ If the correct author is found, the operation returns the edited author:
 
 If the author is not in the system, <i>null</i> is returned: 
 
-```js
+```json
 {
   "data": {
     "editAuthor": null

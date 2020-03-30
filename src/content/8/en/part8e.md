@@ -14,7 +14,7 @@ We are approaching the end of the course. Let's finish by having a look at a few
 
 It is pretty common in GraphQL that multiple queries return similar results. For example the query for the details of a person
 
-```js
+```graphql
 query {
   findPerson(name: "Pekka Mikkola") {
     name
@@ -29,7 +29,7 @@ query {
 
 and the query for all persons
 
-```js
+```graphql
 query {
   allPersons {
     name
@@ -48,7 +48,7 @@ both return persons. When choosing the fields to return, both queries have to de
 
 These kinds of situations can be simplified with the use of [fragments](https://graphql.org/learn/queries/#fragments). Let's declare a fragment for selecting all fields of a person: 
 
-```js
+```graphql
 fragment PersonDetails on Person {
   name
   phone 
@@ -62,7 +62,7 @@ fragment PersonDetails on Person {
 
 With the fragment we can do the queries in a compact form:
 
-```js
+```graphql
 query {
   allPersons {
     ...PersonDetails // highlight-line
@@ -148,7 +148,7 @@ Let's implement subscriptions for subscribing for notifications about new person
 
 There are not many changes to the server. The schema changes like so:
 
-```js
+```graphql
 type Subscription {
   personAdded: Person!
 }    
@@ -208,7 +208,6 @@ _personAdded_ subscriptions resolver registers all of the subscribers by returni
 Let's do the following changes to the code which starts the server
 ```js
 // ...
-
 server.listen().then(({ url, subscriptionsUrl }) => { // highlight-line
   console.log(`Server ready at ${url}`)
   console.log(`Subscriptions ready at ${subscriptionsUrl}`) // highlight-line
@@ -218,7 +217,7 @@ server.listen().then(({ url, subscriptionsUrl }) => { // highlight-line
 
 We see, that the server listens for subscriptions in the address _ws://localhost:4000/graphql_
 
-```js
+```
 Server ready at http://localhost:4000/
 Subscriptions ready at ws://localhost:4000/graphql
 ```
@@ -243,7 +242,7 @@ The backend code can be found on [Github](https://github.com/fullstack-hy2020/gr
 In order to use subscriptions in our React application, we have to do some changes, especially on its [configuration]((https://www.apollographql.com/docs/react/v3.0-beta/data/subscriptions/).
 The configuration in <i>index.js</i> has to be modified like so: 
 
-```js
+```jsx
 import { 
   ApolloClient, ApolloProvider, HttpLink, InMemoryCache, 
   split  // highlight-line
@@ -305,7 +304,7 @@ ReactDOM.render(
 
 For this to work, we have to install some dependencies:
 
-```js
+```bash
 npm install --save @apollo/link-ws subscriptions-transport-ws
 ```
 
@@ -422,7 +421,7 @@ The final code of the client can be found on [Github](https://github.com/fullsta
 
 Let's add some things to the backend. Let's modify the schema so that a <i>Person</i> type has a _friendOf_ field, which tells whose friends list the person is on. 
 
-```js
+```graphql
 type Person {
   name: String!
   phone: String
@@ -434,7 +433,7 @@ type Person {
 
 The application should support the following query: 
 
-```js
+```graphql
 query {
   findPerson(name: "Leevi Hellas") {
     friendOf{
@@ -488,7 +487,7 @@ Now the application works.
 
 We can immediately do even more complicated queries. It is possible for example to find the friends of all users:
 
-```js
+```graphql
 query {
   allPersons {
     name
@@ -580,7 +579,7 @@ After the change we would not need a separate resolver for the _friendOf_ field.
 
 The allPersons query <i>does not cause</i> an n+1 problem, if we only  fetch the name and the phone number: 
 
-```js
+```graphql
 query {
   allPersons {
     name
@@ -634,7 +633,7 @@ Keep the application's view updated when the server notifies about new books.
 
 Solve the n+1 problem of the following query using any method you like
 
-```js
+```graphql
 query {
   allAuthors {
     name 

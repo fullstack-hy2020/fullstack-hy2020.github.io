@@ -27,7 +27,7 @@ GraphQL:ssä periaatteena on, että selaimen koodi muodostaa <i>kyselyn</i>, jok
 
 Edellä kuvatun skenaarion data saataisiin haettua (suurinpiirtein) seuraavan kaltaisella kyselyllä:
 
-```bash
+```graphql
 query FetchBlogsQuery {
   user(username: "mluukkai") {
     followedUsers {
@@ -48,7 +48,7 @@ query FetchBlogsQuery {
 
 Palvelimen vastaus pyyntöön olisi suunnilleen seuraavanlainen JSON-olio:
 
-```bash
+```json
 {
   "data": {
     "followedUsers": [
@@ -91,7 +91,7 @@ Tutustutaan GraphQL:n peruskäsitteistöön toteuttamalla GraphQL-versio osien 2
 
 Jokaisen GraphQL-sovelluksen ytimessä on [skeema](https://graphql.org/learn/schema/), joka määrittelee minkä muotoista dataa sovelluksessa vaihdetaan clientin ja palvelimen välillä. Puhelinluettelon alustava skeema on seuraavassa:
 
-```js
+```graphql
 type Person {
   name: String!
   phone: String
@@ -119,7 +119,7 @@ Skeema siis määrittelee mitä kyselyjä client pystyy palvelimelta tekemään,
 
 Kyselyistä yksinkertaisin _personCount_ näyttää seuraavalta
 
-```js
+```graphql
 query {
   personCount
 }
@@ -127,7 +127,7 @@ query {
 
 Olettaen että sovellukseen olisi talletettu kolmen henkilön tiedot, vastaus kyselyyn näyttäisi seuraavalta:
 
-```js
+```json
 {
   "data": {
     "personCount": 3
@@ -137,7 +137,7 @@ Olettaen että sovellukseen olisi talletettu kolmen henkilön tiedot, vastaus ky
 
 Kaikkien henkilöiden tiedot hakeva _allPersons_ on hieman monimutkaisempi. Koska kysely palauttaa listan <i>Person</i>-olioita, on kyselyn yhteydessä määriteltävä <i>mitkä kentät</i> kyselyn [halutaan palauttavan](https://graphql.org/learn/queries/#fields): 
 
-```js
+```graphql
 query {
   allPersons {
     name
@@ -149,7 +149,7 @@ query {
 Vastaus voisi näyttää seuraavalta:
 
 
-```js
+```json
 {
   "data": {
     "allPersons": [
@@ -172,7 +172,7 @@ Vastaus voisi näyttää seuraavalta:
 
 Kysely voi määritellä palautettavaksi mitkä tahansa skeemassa mainitut kentät, esim. seuraava olisi myös mahdollista:
 
-```js
+```graphql
 query {
   allPersons{
     name
@@ -184,7 +184,7 @@ query {
 
 Vielä esimerkki parametria edellyttävästä kyselystä, joka hakee yksittäisen henkilön tiedot palauttavasta kyselystä.
 
-```js
+```graphql
 query {
   findPerson(name: "Arto Hellas") {
     phone 
@@ -199,7 +199,7 @@ Kyselyn parametri siis annetaan suluissa, ja sen jälkeen määritellään aalto
 
 Vastaus on muotoa:
 
-```js
+```json
 {
   "data": {
     "findPerson": {
@@ -214,7 +214,7 @@ Vastaus on muotoa:
 
 Kyselyn paluuarvoa ei oltu merkitty pakolliseksi, eli jos etsitään tuntematonta henkilöä
 
-```js
+```graphql
 query {
   findPerson(name: "Donald Trump") {
     phone 
@@ -224,7 +224,7 @@ query {
 
 vastaus on <i>null</i>
 
-```js
+```json
 {
   "data": {
     "findPerson": null
@@ -244,7 +244,7 @@ Toteutetaan nyt GraphQL-palvelin tämän hetken johtavaa kirjastoa [Apollo-serve
 
 Luodaan uusi npm-projekti komennolla _npm init_ ja asennetaan tarvittavat riippuvuudet
 
-```js
+```bash
 npm install --save apollo-server graphql
 ```
 
@@ -339,7 +339,7 @@ const resolvers = {
 
 kuten huomataan, vastaavat resolverit rakenteeltaan skeemassa määriteltyjä kyselyitä:
 
-```js
+```graphql
 type Query {
   personCount: Int!
   allPersons: [Person!]!
@@ -351,7 +351,7 @@ eli jokaista skeemassa määriteltyä kyselyä kohti on määritelty oma kentän
 
 Kyselyn 
 
-```js
+```graphql
 query {
   personCount
 }
@@ -367,7 +367,7 @@ eli kyselyyn palautetaan vastauksena henkilöt tallentavan taulukon _persons_ pi
 
 Kaikki luettelossa olevat henkilöt hakevan kyselyn 
 
-```js
+```graphql
 query {
   allPersons {
     name
@@ -409,7 +409,7 @@ Klikkaamalla oikean reunan tekstiä <i>DOCS</i> näyttää Playground palvelimen
 
 Yksittäisen henkilön hakevan kyselyn
 
-```js
+```graphql
 query {
   findPerson(name: "Arto Hellas") {
     phone 
@@ -434,7 +434,7 @@ Itse asiassa kaikki resolverifunktiot saavat [neljä parametria](https://www.apo
 
 Kun teemme kyselyn, esim
 
-```js
+```graphql
 query {
   findPerson(name: "Arto Hellas") {
     phone 
@@ -487,7 +487,7 @@ Person: {
 
 Muutetaan skeemaa hiukan
 
-```js
+```graphql
   // highlight-start
 type Address {
   street: String!
@@ -527,7 +527,7 @@ query {
 
 vastauksena on henkilö-olio, joka <i>sisältää</i> osoite-olion:
 
-```js
+```json
 {
   "data": {
     "findPerson": {
@@ -593,7 +593,7 @@ Laajennetaan sovellusta siten, että puhelinluetteloon on mahdollista lisätä u
 
 Käyttäjän lisäävä mutaation skeema näyttää seuraavalta
 
-```js
+```graphql
 type Mutation {
   addPerson(
     name: String!
@@ -631,7 +631,7 @@ Kentälle <i>id</i> saadaan luotua uniikki tunniste kirjaston [uuid](https://git
 
 Uusi henkilö voidaan lisätä seuraavalla mutaatiolla
 
-```js
+```graphql
 mutation {
   addPerson(
     name: "Pekka Mikkola"
@@ -664,7 +664,7 @@ Kannattaa huomata, että lisättävä henkilö talletetaan taulukkoon _persons_ 
 
 Vastaus mutaatioon on kuitenkin
 
-```js
+```json
 {
   "data": {
     "addPerson": {
@@ -729,7 +729,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 Tehdään sovellukseen vielä sellainen lisäys, että kaikki henkilöt palauttavaa kyselyä voidaan säädellä parametrilla <i>phone</i> siten, että kysely palauttaa vain henkilöt, joilla on puhelinnumero
 
-```js
+```graphql
 query {
   allPersons(phone: YES) {
     name
@@ -740,7 +740,7 @@ query {
 
 tai henkilöt, joilla ei ole puhelinnumeroa
 
-```js
+```graphql
 query {
   allPersons(phone: NO) {
     name
@@ -750,7 +750,7 @@ query {
 
 Skeema laajenee seuraavasti:
 
-```js
+```graphql
 // highlight-start
 enum YesNo {
   YES
@@ -793,7 +793,7 @@ Query: {
 
 Tehdään sovellukseen myös mutaatio, joka mahdollistaa henkilön puhelinnumeron muuttamisen. Mutaation skeema näyttää seuraavalta
 
-```js
+```graphql
 type Mutation {
   addPerson(
     name: String!
@@ -836,7 +836,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 GraphQL:ssä on yhteen kyselyyn mahdollista yhdistää monia tyypin <i>Query</i> kenttiä, eli "yksittäisiä kyselyitä". Esim. seuraava kysely palauttaa puhelinluettelon henkilöiden lukumäärän sekä nimet:
 
-```js
+```graphql
 query {
   personCount
   allPersons {
@@ -847,7 +847,7 @@ query {
 
 Vastaus näyttää seuraavalta
 
-```js
+```json
 {
   "data": {
     "personCount": 3,
@@ -868,7 +868,7 @@ Vastaus näyttää seuraavalta
 
 Yhdistetty kysely voi myös viitata useampaan kertaan samaan kyselyyn. Tällöin erillisille kyselyille on kuitenkin annettava vaihtoehtoiset nimet kaksoispistesyntaksilla
 
-```js
+```graphql
 query {
   havePhone: allPersons(phone: YES){
     name
@@ -881,7 +881,7 @@ query {
 
 Vastaus on muotoa
 
-```js
+```json
 {
   "data": {
     "havePhone": [
@@ -923,7 +923,7 @@ Toteuta kyselyt _bookCount_ ja _authorCount_ jotka palauttavat kirjojen ja kirja
 
 Kyselyn 
 
-```js
+```graphql
 query {
   bookCount
   authorCount
@@ -932,7 +932,7 @@ query {
 
 pitäisi alustavalla datalla tuottaa vastaus
 
-```js
+```json
 {
   "data": {
     "bookCount": 7,
@@ -947,7 +947,7 @@ Toteuta kysely _allBooks_, joka palauttaa kaikki kirjat.
 
 Seuraava kysely siis pitäisi pystyä tekemään
 
-```js
+```graphql
 query {
   allBooks { 
     title 
@@ -964,7 +964,7 @@ Toteuta kysely _allAuthors_ joka palauttaa kaikki kirjailijat. Kyselyn vastaukse
 
 Esim. kyselyn
 
-```js
+```graphql
 query {
   allAuthors {
     name
@@ -975,7 +975,7 @@ query {
 
 vastauksen tulisi näyttää seuraavalta
 
-```js
+```json
 {
   "data": {
     "allAuthors": [
@@ -1010,7 +1010,7 @@ Laajenna kyselyä _allBooks_ siten, että sille voi antaa optionaalisen parametr
 
 Esim. kyselyn
 
-```js
+```graphql
 query {
   allBooks(author: "Robert Martin") {
     title
@@ -1020,7 +1020,7 @@ query {
 
 tulisi palauttaa
 
-```js
+```json
 {
   "data": {
     "allBooks": [
@@ -1041,7 +1041,7 @@ Laajenna kyselyä _allBooks_ siten, että sille voi antaa optionaalisen parametr
 
 Esim. kyselyn
 
-```js
+```graphql
 query {
   allBooks(genre: "refactoring") {
     title
@@ -1052,7 +1052,7 @@ query {
 
 tulisi palauttaa
 
-```js
+```json
 {
   "data": {
     "allBooks": [
@@ -1079,7 +1079,7 @@ tulisi palauttaa
 
 Kyselyn pitää toimia myös siinä tapauksessa, että se saa molemmat optionaaliset parametrit:
 
-```js
+```graphql
 query {
   allBooks(author: "Robert Martin", genre: "refactoring") {
     title
@@ -1092,7 +1092,7 @@ query {
 
 Toteuta mutaatio _addBook_, jota voi käyttää seuraavasti
 
-```js
+```graphql
 mutation {
   addBook(
     title: "NoSQL Distilled",
@@ -1108,7 +1108,7 @@ mutation {
 
 Mutaatio toimii myös niissä tilanteissa, joissa kirjoittaja ei ole ennestään palvelimen tiedossa:
 
-```js
+```graphql
 mutation {
   addBook(
     title: "Pimeyden tango",
@@ -1124,7 +1124,7 @@ mutation {
 
 Jos näin on, lisätään uusi kirjailija järjestelmään. Kirjailijan syntymävuodesta ei ole tässä vaiheessa tietoa, eli kysely
 
-```js
+```graphql
 query {
   allAuthors {
     name
@@ -1136,7 +1136,7 @@ query {
 
 palauttaa
 
-```js
+```json
 {
   "data": {
     "allAuthors": [
@@ -1155,7 +1155,7 @@ palauttaa
 
 Toteuta mutaatio _editAuthor_, jonka avulla on mahdollista asettaa kirjailijalle syntymävuosi. Mutaatiota käytetään seuraavasti
 
-```js
+```graphql
 mutation {
   editAuthor(name: "Reijo Mäki", setBornTo: 1958) {
     name
@@ -1166,7 +1166,7 @@ mutation {
 
 Jos kirjailija löytyy, palauttaa operaatio editoidun kirjailijan:
 
-```js
+```json
 {
   "data": {
     "editAuthor": {
@@ -1179,7 +1179,7 @@ Jos kirjailija löytyy, palauttaa operaatio editoidun kirjailijan:
 
 Olemattoman kirjailijan syntymävuoden editointiin reagoidaan palauttamalla <i>null</i>:
 
-```js
+```json
 {
   "data": {
     "editAuthor": null
