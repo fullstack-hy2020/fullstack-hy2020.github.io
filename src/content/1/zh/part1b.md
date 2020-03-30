@@ -152,7 +152,7 @@ console.log(m2)
 // [ '<li>1</li>', '<li>2</li>', '<li>3</li>' ] is printed
 ```
 
-<!-- Here an array filled with integer values is transformed into an array containing strings of HTML using the map method. In [part2](/en/part2) of this course, we will see that map is used quite frequently in React. -->
+<!-- Here an array filled with integer values is transformed into an array containing strings of HTML using the map method. In [part2](/zh/part2) of this course, we will see that map is used quite frequently in React. -->
 
 这个例子使用 map 方法将整数值的数组转换为了包含 HTML 字符串的数组。 在本课程的[ 第二章](/zh/ part2)中，我们将看到 map 在 React 中使用得相当频繁。
 

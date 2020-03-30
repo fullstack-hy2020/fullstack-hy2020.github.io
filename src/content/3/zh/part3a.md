@@ -17,18 +17,18 @@ lang: zh
 <!-- This course material was written with the version <i>v10.18.0</i> of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running _node -v_ in the command line). -->
 本课程材料是使用 Node.js 的<i>v10.18.0</i> 版本编写的。 请确保您的 Node 版本不低于材料中使用的版本(您可以通过在命令行中运行 _node -v_ 来检查版本)。
 
-<!-- As mentioned in [part 1](/en/part1/javascript), browsers don't yet support the newest features of JavaScript, and that is why the code running in the browser must be <i>transpiled</i> with e.g. [babel](https://babeljs.io/). The situation with JavaScript running in the backend is different. The newest version of Node supports a large majority of the latest features of JavaScript, so we can use the latest features without having to transpile our code. -->
-正如在 [第一章](/en/part1/javascript)中提到的，浏览器还不支持 JavaScript 的最新特性，这就是为什么在浏览器中运行的代码必须是[babel](https://babeljs.io/)转译过的。而在后端运行 JavaScript 的情况是不同的。 最新版本的 Node 支持大部分最新的 JavaScript 特性，因此我们可以使用最新的特性而不必转译我们的代码。
+<!-- As mentioned in [part 1](/zh/part1/javascript), browsers don't yet support the newest features of JavaScript, and that is why the code running in the browser must be <i>transpiled</i> with e.g. [babel](https://babeljs.io/). The situation with JavaScript running in the backend is different. The newest version of Node supports a large majority of the latest features of JavaScript, so we can use the latest features without having to transpile our code. -->
+正如在 [第一章](/zh/part1/javascript)中提到的，浏览器还不支持 JavaScript 的最新特性，这就是为什么在浏览器中运行的代码必须是[babel](https://babeljs.io/)转译过的。而在后端运行 JavaScript 的情况是不同的。 最新版本的 Node 支持大部分最新的 JavaScript 特性，因此我们可以使用最新的特性而不必转译我们的代码。
 
-<!-- Our goal is to implement a backend that will work with the notes application from [part 2](/en/part2/). However, let's start with the basics by implementing a classic "hello world" application. -->
-我们的目标是实现一个后端，它将与 [第2章](/en/part2/)中的 notes 应用一起工作。 但还是让我们从实现经典的“ hello world”应用的基础开始。
+<!-- Our goal is to implement a backend that will work with the notes application from [part 2](/zh/part2/). However, let's start with the basics by implementing a classic "hello world" application. -->
+我们的目标是实现一个后端，它将与 [第2章](/zh/part2/)中的 notes 应用一起工作。 但还是让我们从实现经典的“ hello world”应用的基础开始。
 
 <!-- **Notice** that the applications and exercises in this part are not all React applications, and we will not use the <i>create-react-app</i> utility for initializing the project for this application. -->
 
 注意：本章中的应用和练习并不都是 React 应用，我们不会使用<i>create-react-app</i>工具程序为此应用初始化项目。
 
 
-<!-- We had already mentioned [npm](/en/part2/getting_data_from_server#npm) back in part 2, which is a tool used for managing JavaScript packages. In fact, npm originates from the Node ecosystem. -->
+<!-- We had already mentioned [npm](/zh/part2/getting_data_from_server#npm) back in part 2, which is a tool used for managing JavaScript packages. In fact, npm originates from the Node ecosystem. -->
 在第2章节中，我们已经提到了[ npm ](/ en / part2 / getting data from server # npm) ，这是一个用于管理 JavaScript 包的工具。 事实上，npm 来源于 Node 生态系统。
 
 <!-- Let's navigate to an appropriate directory, and create a new template for our application with the _npm init_ command. We will answer the questions presented by the utility, and the result will be an automatically generated <i>package.json</i> file at the root of the project, that contains information about the project. -->
@@ -264,8 +264,8 @@ console.log(`Server running on port ${port}`)
 <!-- The <i>application/json</i> value in the <i>Content-Type</i> header informs the receiver that the data is in the JSON format. The _notes_ array gets transformed into JSON with the <em>JSON.stringify(notes)</em> method. -->
  <i>Content-Type</i> 头中的 <i>application/json</i> 值通知接收方数据为 JSON 格式。 使用  <em>JSON.stringify(notes)</em>  方法将 _notes_ 数组转换为 JSON。
 
-<!-- When we open the browser, the displayed format is exactly the same as in [part 2](/en/part2/getting_data_from_server/) where we used [json-server](https://github.com/typicode/json-server) to serve the list of notes: -->
-当我们打开浏览器的时候，显示的格式和第2章节 [part 2](/en/part2/getting_data_from_server/) 完全一样，在那里我们使用 [json-server](https://github.com/typicode/json-server) 来提供便笺列表:
+<!-- When we open the browser, the displayed format is exactly the same as in [part 2](/zh/part2/getting_data_from_server/) where we used [json-server](https://github.com/typicode/json-server) to serve the list of notes: -->
+当我们打开浏览器的时候，显示的格式和第2章节 [part 2](/zh/part2/getting_data_from_server/) 完全一样，在那里我们使用 [json-server](https://github.com/typicode/json-server) 来提供便笺列表:
 
 ![](../../images/3/2e.png)
 
@@ -531,8 +531,8 @@ Representational State Transfer，又名REST， 是在2000年 Roy Fielding 的[�
 <!-- We are not going to dig into Fielding's definition of REST or spend time pondering about what is and isn't RESTful. Instead, we take a more [narrow view](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) by only concerning ourselves with how RESTful API's are typically understood in web applications. The original definition of REST is in fact not even limited to web applications. -->
 我们不会深入探究 Fielding 对 REST 的定义，也不会花时间思考什么是 RESTful，什么不是 RESTful。 相反，我们只关注web应用对 RESTful API 的典型理解，从而采取了一种更为狭隘的视角 [narrow view](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services)。 Rest 的最初定义实际上并不局限于 web 应用。
 
-<!-- We mentioned in the [previous part](/en/part2/altering_data_in_server#rest) that singular things, like notes in the case of our application, are called <i>resources</i> in RESTful thinking. Every resource has an associated URL which is the resource's unique address. -->
-我们在 [上一章节](/en/part2/altering_data_in_server#rest) 中提到过，在我们的应用中，像便笺这样的单数实体，在 RESTful thinking 中称为<i>resource</i>。 每个resource都有一个相关联的 URL，这个 URL 是资源的唯一地址。
+<!-- We mentioned in the [previous part](/zh/part2/altering_data_in_server#rest) that singular things, like notes in the case of our application, are called <i>resources</i> in RESTful thinking. Every resource has an associated URL which is the resource's unique address. -->
+我们在 [上一章节](/zh/part2/altering_data_in_server#rest) 中提到过，在我们的应用中，像便笺这样的单数实体，在 RESTful thinking 中称为<i>resource</i>。 每个resource都有一个相关联的 URL，这个 URL 是资源的唯一地址。
 
 <!-- One convention is to create the unique address for resources by combining the name of the resource type with the resource's unique identifier. -->
 一个约定是结合resource 类型名称和resource的唯一标识符来创建resource唯一的地址。

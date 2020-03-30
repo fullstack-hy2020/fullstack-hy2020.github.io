@@ -203,7 +203,7 @@ ReactDOM.render(
 )
 ```
 
-<!-- The compiling is handled by [Babel](https://babeljs.io/repl/). Projects created with *create-react-app* are configured to compile automatically. We will learn more about this topic in [part 7](/en/part7) of this course. -->
+<!-- The compiling is handled by [Babel](https://babeljs.io/repl/). Projects created with *create-react-app* are configured to compile automatically. We will learn more about this topic in [part 7](/zh/part7) of this course. -->
 编译是由[ Babel ]( https://babeljs.io/repl/ )处理的。 使用 *create-react-app* 创建的项目会配置为自动编译。 我们将在本课程的[第7章节](/zh/part7)中学习更多关于这个议题的知识。
 
 <!-- It is also possible to write React as "pure JavaScript" without using JSX. Although, nobody with a sound mind would actually do so. -->
@@ -279,7 +279,7 @@ const App = () => {
 
 使用 React 编写组件很容易，通过组合组件，甚至可以使相当复杂的应用保持很好的可维护性。 实际上，React 的核心理念，就是将许多定制化的、可重用的组件组合成应用。
 
-<!-- Another strong convention is the idea of a <i>root component</i> called <i>App</i> at the top of the component tree of the application. Nevertheless, as we will learn in [part 6](/en/part6), there are situations where the component <i>App</i> is not exactly the root, but is wrapped within an appropriate utility component. -->
+<!-- Another strong convention is the idea of a <i>root component</i> called <i>App</i> at the top of the component tree of the application. Nevertheless, as we will learn in [part 6](/zh/part6), there are situations where the component <i>App</i> is not exactly the root, but is wrapped within an appropriate utility component. -->
 
 还有一个约定，就是应用的组件树顶部都要有一个<i>root 组件</i> 叫做<i>App</i>。 然而，正如我们将在[第6章](/zh/ part6)将要讲到的，在某些情况下，组件的根并不一定是<i>App</i> ，而是包装在了一些工具组件中。
 

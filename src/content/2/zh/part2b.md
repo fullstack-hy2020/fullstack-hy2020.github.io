@@ -99,8 +99,8 @@ const App = (props) => {
 <!-- We have added the _addNote_ function as an event handler to the form element that will be called when the form is submitted by clicking the submit button. -->
 我们已经将 _addNote_ 函数作为事件处理函数添加到表单元素中，该元素将在单击 submit 按钮提交表单时被调用。
 
-<!-- We use the method discussed in [part 1](/en/part1/component_state_event_handlers#event-handling) for defining our event handler: -->
-我们使用 [第1章](/en/part1/component_state_event_handlers#event-handling) 中讨论的方法来定义事件处理 :
+<!-- We use the method discussed in [part 1](/zh/part1/component_state_event_handlers#event-handling) for defining our event handler: -->
+我们使用 [第1章](/zh/part1/component_state_event_handlers#event-handling) 中讨论的方法来定义事件处理 :
 
 ```js
 const addNote = (event) => {
@@ -275,8 +275,8 @@ const addNote = (event) => {
 <!-- First we create a new object for the note called <em>noteObject</em> that will receive its content from the component's <em>newNote</em> state. The unique identifier <i>id</i> is generated based on the total number of notes. This method works for our application since notes are never deleted. With the help of the <em>Math.random()</em> command, our note has a 50% chance of being marked as important. -->
 首先，我们为名为<em>noteObject</em> 的便笺创建一个新对象，该对象将从组件的<em>newNote</em>状态接收其内容。 唯一标识符  <i>id</i> 是根据便笺的总数生成的。 此方法适用于我们的应用，因为便笺永远不会被删除。 在 <em>Math.random()</em> 命令的帮助下，我们的便笺有50% 的可能被标记为重要。
 
-<!-- The new note is added to the list of notes using the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) array method introduced in [part 1](/en/part1/javascript#arrays): -->
-使用数组的 [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) 方法添加新便笺到便笺列表中，如 [第一章](/en/part1/javascript#arrays) 讲的那样:
+<!-- The new note is added to the list of notes using the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) array method introduced in [part 1](/zh/part1/javascript#arrays): -->
+使用数组的 [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) 方法添加新便笺到便笺列表中，如 [第一章](/zh/part1/javascript#arrays) 讲的那样:
 
 ```js
 setNotes(notes.concat(noteObject))
@@ -519,9 +519,9 @@ export default App
 <div>debug: {newName}</div>
 ```
 
-<!-- It's also important to put what we learned in the [debugging React applications](/en/part1/a_more_complex_state_debugging_react_apps) chapter of part one into good use. The [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension especially, is incredibly useful for tracking changes that occur in the application's state. -->
+<!-- It's also important to put what we learned in the [debugging React applications](/zh/part1/a_more_complex_state_debugging_react_apps) chapter of part one into good use. The [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension especially, is incredibly useful for tracking changes that occur in the application's state. -->
 
-把我们在第一章节 [调试 React 应用](/en/part1/a_more_complex_state_debugging_react_apps) 一章中学到的东西好好利用也很重要。 特别是[ React developer tools ]( https://chrome.google.com/webstore/detail/React-developer-tools/fmkadmapgofadopljbjfkapdkoienihi 开发工具)扩展，对于跟踪应用状态中发生的变化非常有用。
+把我们在第一章节 [调试 React 应用](/zh/part1/a_more_complex_state_debugging_react_apps) 一章中学到的东西好好利用也很重要。 特别是[ React developer tools ]( https://chrome.google.com/webstore/detail/React-developer-tools/fmkadmapgofadopljbjfkapdkoienihi 开发工具)扩展，对于跟踪应用状态中发生的变化非常有用。
 
 <!-- After finishing this exercise your application should look something like this: -->
 在完成这个练习之后，你的应用应该是这样的:

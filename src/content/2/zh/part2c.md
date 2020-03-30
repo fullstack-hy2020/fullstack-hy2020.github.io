@@ -77,7 +77,7 @@ npx json-server --port 3001 --watch db.json
 <!-- json-server stores all the data in the <i>db.json</i> file, which resides on the server. In the real world, data would be stored in some kind of database. However, json-server is a handy tool that enables the use of server-side functionality in the development phase without the need to program any of it. -->
 Json-server 将所有数据存储在服务器上的<i>db.json</i> 文件中。 在现实世界中，数据会存储在某种数据库中。 然而，json-server 是一个方便的工具，可以在开发阶段使用服务器端功能，而不需要编写任何程序。 
 
-<!-- We will get familiar with the principles of implementing server-side functionality in more detail in [part 3](/en/part3) of this course. -->
+<!-- We will get familiar with the principles of implementing server-side functionality in more detail in [part 3](/zh/part3) of this course. -->
 在本课程的[第3章节](/zh/part3)中，我们将更详细地了解如何实现服务器端的功能。
 
 ### The browser as a runtime environment 
@@ -85,8 +85,8 @@ Json-server 将所有数据存储在服务器上的<i>db.json</i> 文件中。 �
 <!-- Our first task is fetching the already existing notes to our React application from the address <http://localhost:3001/notes>. -->
 我们的第一个任务是从地址 http://localhost:3001/notes 获取已经存在的便笺到 React 应用。
 
-<!-- In the part0 [example project](/en/part0/fundamentals_of_web_apps#running-application-logic-on-the-browser) we already learned a way to fetch data from a server using JavaScript. The code in the example was fetching the data using [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), otherwise known as an HTTP request made using an XHR object. This is a technique introduced in 1999, which every browser has supported for a good while now. -->
-在 part0[示例 project](/en/part0/fundamentals_of_web_apps#running-application-logic-on-the-browser)中，我们已经学到了一种使用 JavaScript 从服务器获取数据的方法。 示例中的代码使用[ XMLHttpRequest ]( https://developer.mozilla.org/en-us/docs/web/api/XMLHttpRequest )获取数据，也称为使用 XHR 对象发出的 HTTP 请求。 这是1999年引入的一项技术，现在每个浏览器都已经支持很长时间了。
+<!-- In the part0 [example project](/zh/part0/fundamentals_of_web_apps#running-application-logic-on-the-browser) we already learned a way to fetch data from a server using JavaScript. The code in the example was fetching the data using [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), otherwise known as an HTTP request made using an XHR object. This is a technique introduced in 1999, which every browser has supported for a good while now. -->
+在 part0[示例 project](/zh/part0/fundamentals_of_web_apps#running-application-logic-on-the-browser)中，我们已经学到了一种使用 JavaScript 从服务器获取数据的方法。 示例中的代码使用[ XMLHttpRequest ]( https://developer.mozilla.org/en-us/docs/web/api/XMLHttpRequest )获取数据，也称为使用 XHR 对象发出的 HTTP 请求。 这是1999年引入的一项技术，现在每个浏览器都已经支持很长时间了。
 
 <!-- The use of XHR is no longer recommended, and browsers already widely support the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) method, which is based on so-called [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), instead of the event-driven model used by XHR. -->
 使用 XHR已经不再推荐了，而且浏览器已经广泛支持基于所谓的[promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)的[fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch)方法，而不是 XHR 使用的事件驱动模型。
@@ -287,7 +287,7 @@ npm install json-server --save-dev
 npm run server
 ```
 
-<!-- We will get more familiar with the _npm_ tool in the [third part of the course](/en/part3). -->
+<!-- We will get more familiar with the _npm_ tool in the [third part of the course](/zh/part3). -->
 我们将在[课程的第三章节](/zh/part3)中更加熟悉 npm 工具。
 
 <!-- **NB** The previously started json-server must be terminated before starting a new one, otherwise there will be trouble: -->

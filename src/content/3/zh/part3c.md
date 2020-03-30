@@ -563,7 +563,7 @@ noteSchema.set('toJSON', {
 module.exports = mongoose.model('Note', noteSchema) // highlight-line
 ```
 
-<!-- Defining Node [modules](https://nodejs.org/docs/latest-v8.x/api/modules.html) differs slightly from the way of defining [ES6 modules](/en/part2/rendering_a_collection_modules#refactoring-modules) in part 2. -->
+<!-- Defining Node [modules](https://nodejs.org/docs/latest-v8.x/api/modules.html) differs slightly from the way of defining [ES6 modules](/zh/part2/rendering_a_collection_modules#refactoring-modules) in part 2. -->
 定义 Node [ modules ]( https://nodejs.org/docs/latest-v8.x/api/modules.html)与第2章节中定义[ ES6模块](/ en / part2 / rendering a collection modules # refactoring-modules)的方式稍有不同。
 
 <!-- The public interface of the module is defined by setting a value to the _module.exports_ variable. We will set the value to be the <i>Note</i> model. The other things defined inside of the module, like the variables _mongoose_ and _url_ will not be accessible or visible to users of the module. -->
@@ -740,8 +740,8 @@ app.get('/api/notes/:id', (request, response) => {
 <!-- Verify that the frontend works after the changes have been made. -->
 验证前端是否在更改之后仍能正常工作。
 
-<!-- In the following exercises, write all Mongoose-specific code into its own module, just like we did in the chapter [Database configuration into its own module](/en/part3/saving_data_to_mongo_db#database-configuration-into-its-own-module). -->
-在下面的练习中，将所有特定于 mongoose 的代码写入它自己的模块，就像我们在[Database configuration into its own module](/en/part3/saving_data_to_mongo_db#database-configuration-into-its-own-module)一章中所做的那样.
+<!-- In the following exercises, write all Mongoose-specific code into its own module, just like we did in the chapter [Database configuration into its own module](/zh/part3/saving_data_to_mongo_db#database-configuration-into-its-own-module). -->
+在下面的练习中，将所有特定于 mongoose 的代码写入它自己的模块，就像我们在[Database configuration into its own module](/zh/part3/saving_data_to_mongo_db#database-configuration-into-its-own-module)一章中所做的那样.
 
 #### 3.14: Phonebook database, 步骤2
 3.14: 电话簿数据库，第二步
@@ -768,8 +768,8 @@ app.get('/api/notes/:id', (request, response) => {
 
 ![](../../images/3/47.png)
 
-<!-- The request has failed and the associated Promise has been <i>rejected</i>. Since we don't handle the rejection of the promise, the request never gets a response. In part 2, we already acquainted ourselves with [handling errors in promises](/en/part2/altering_data_in_server#promises-and-errors). -->
-请求失败，相关的承诺已被拒绝。 因为我们不处理承诺的拒绝，所以请求不会得到响应。 在第2章节中，我们已经了解了[handling errors in promises](/en/part2/altering_data_in_server#promises-and-errors).
+<!-- The request has failed and the associated Promise has been <i>rejected</i>. Since we don't handle the rejection of the promise, the request never gets a response. In part 2, we already acquainted ourselves with [handling errors in promises](/zh/part2/altering_data_in_server#promises-and-errors). -->
+请求失败，相关的承诺已被拒绝。 因为我们不处理承诺的拒绝，所以请求不会得到响应。 在第2章节中，我们已经了解了[handling errors in promises](/zh/part2/altering_data_in_server#promises-and-errors).
 
 <!-- Let's add a simple error handler: -->
 让我们添加一个简单的错误处理程序:

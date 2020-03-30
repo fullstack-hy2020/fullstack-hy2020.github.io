@@ -405,7 +405,7 @@ const App = (props) => {
 
 ### Event handling
 【事件处理】
-<!-- We have already mentioned <i>event handlers</i> a few times in [part 0](/en/part0), that are registered to be called when specific events occur. E.g. a user's interaction with the different elements of a web page can cause a collection of various different kinds of events to be triggered. -->
+<!-- We have already mentioned <i>event handlers</i> a few times in [part 0](/zh/part0), that are registered to be called when specific events occur. E.g. a user's interaction with the different elements of a web page can cause a collection of various different kinds of events to be triggered. -->
 我们已经在[第0章](/zh/part0)中多次提到<i>事件处理程序</i>，它们（被注册为）在特定事件发生时进行调用。 例如，用户与一个网页的不同元素的交互可能会触发一系列不同类型的事件。
 
 <!-- Let's change the application so that increasing the counter happens when a user clicks a button, which is implemented with the [button](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button)-element. -->
@@ -777,7 +777,7 @@ const Display = (props) => {
 
 <!-- The component only uses the _counter_ field of its <i>props</i>.  -->
 该组件只使用其<i>props</i> 的 _counter_ 字段。
-<!-- This means we can simplify the component by using [destructuring](/en/part1/component_state_event_handlers#destructuring) like so: -->
+<!-- This means we can simplify the component by using [destructuring](/zh/part1/component_state_event_handlers#destructuring) like so: -->
 这意味着我们可以使用[ 解构 ](/zh/part1/)简化组件，如下所示:
 
 ```js

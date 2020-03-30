@@ -100,7 +100,7 @@ export default App
 
 
 <!-- The login form is handled the same way we handled forms in -->
-<!-- [part 2](/en/part2/forms). The app state has fields for <i>username</i> and <i>password</i> to store the data from the form. The form fields have event handlers, which synchronizes changes in the field to the state of the <i>App</i> component. The event handlers are simple: An object is given to them as a parameter, and they destructure the field <i>target</i> from the object and save its value to the state. -->
+<!-- [part 2](/zh/part2/forms). The app state has fields for <i>username</i> and <i>password</i> to store the data from the form. The form fields have event handlers, which synchronizes changes in the field to the state of the <i>App</i> component. The event handlers are simple: An object is given to them as a parameter, and they destructure the field <i>target</i> from the object and save its value to the state. -->
 
 登录表单的处理方式与我们第二章所讲的处理方式相同。当前应用状态有<i>username</i> 和 <i>password</i> 都存储在表单中。表单有事件处理逻辑，与<i>App</i>组件的状态保持同步。事件处理逻辑也很简单：一个对象作为参数传递给它们，它们将<i>target</i> field 从对象里解构出来，将它的值保存为状态
 
@@ -523,9 +523,9 @@ _JSON.stringify_ 方法转换成 JSON。相应的，当从本地存储读取 JSO
 <!-- We still have to modify our application so that when we enter the page, the application checks if user details of a logged in user can already be found from the local storage. If they can, the details are saved to the state of the application and to <i>noteService</i>. -->
 我们仍然需要修改我们的应用，以便当我们进入页面时，应用会检查是否能在本地存储中找到登录用户的详细信息，如果可以将信息保存到应用的状态中，以及<i>noteService</i>中
 
-<!-- The right way to do this is with an [effect hook](https://reactjs.org/docs/hooks-effect.html): A mechanism we first encountered in [part 2](/en/part2/getting_data_from_server#effect-hooks), and used to fetch notes from the server to the frontend. -->
+<!-- The right way to do this is with an [effect hook](https://reactjs.org/docs/hooks-effect.html): A mechanism we first encountered in [part 2](/zh/part2/getting_data_from_server#effect-hooks), and used to fetch notes from the server to the frontend. -->
 
-正确的方式是用一个事件Hook [effect hook](https://reactjs.org/docs/hooks-effect.html)： 这种机制我们在第2章节 [part 2](/en/part2/getting_data_from_server#effect-hooks)分中见到过，当时是用来从服务器中获取所有 Note。
+正确的方式是用一个事件Hook [effect hook](https://reactjs.org/docs/hooks-effect.html)： 这种机制我们在第2章节 [part 2](/zh/part2/getting_data_from_server#effect-hooks)分中见到过，当时是用来从服务器中获取所有 Note。
 
 <!-- We can have multiple effect hooks, so let's create a second one to handle the first loading of the page: -->
 我们可以有多个事件Hook，所以我们来创建一个来处理首次登录页面：

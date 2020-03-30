@@ -8,7 +8,7 @@ lang: zh
 <div class="content">
 
 
-<!-- The exercises in this seventh part of the course differ a bit from the ones before. In this and the next chapter there is, as usual [exercises related to the theory in the chapter](/en/part7/react_router#exercises-7-1-7-3). -->
+<!-- The exercises in this seventh part of the course differ a bit from the ones before. In this and the next chapter there is, as usual [exercises related to the theory in the chapter](/zh/part7/react_router#exercises-7-1-7-3). -->
 本课程第七章节的练习与以前的有一点不同。 在本章和下一章中，像往常一样有[与本章理论相关的练习](/ en / part7 / react router # exercises-7-1-7-3)。
 
 <!-- In addition to the exercises in this and the chapter, there is a series of exercises which revise what we've learned during the whole course by expanding the Bloglist application which we worked on during parts 4 and 5. -->
@@ -32,8 +32,8 @@ lang: zh
 
 ![](../../images/7/2ea.png)
 
-<!-- In an [old school web app](/en/part0/fundamentals_of_web_apps#traditional-web-applications), changing the page shown by the application would be accomplished by the browser making a HTTP GET request to the server and rendering the HTML representing the view that was returned. -->
-在[old school web app](/en/part0/fundamentals_of_web_apps#traditional-web-applications)中，更改应用显示的页面将由浏览器向服务器发出 HTTP GET 请求并显示表示返回视图的 HTML 来完成。
+<!-- In an [old school web app](/zh/part0/fundamentals_of_web_apps#traditional-web-applications), changing the page shown by the application would be accomplished by the browser making a HTTP GET request to the server and rendering the HTML representing the view that was returned. -->
+在[old school web app](/zh/part0/fundamentals_of_web_apps#traditional-web-applications)中，更改应用显示的页面将由浏览器向服务器发出 HTTP GET 请求并显示表示返回视图的 HTML 来完成。
 
 <!-- In single page apps, we are, in reality, always on the same page. The Javascript code run by the browser creates an illusion of different "pages". If HTTP requests are made when switching view, they are only for fetching JSON formatted data, which the new view might require for it to be shown. -->
 在单页应用中，我们实际上总是在同一页上。 浏览器运行的 Javascript 代码会产生不同“页面”的错觉。 如果 HTTP 请求是在切换视图时发出的，那么它们只用于获取 JSON 格式的数据，新视图可能需要这些数据才能显示出来。

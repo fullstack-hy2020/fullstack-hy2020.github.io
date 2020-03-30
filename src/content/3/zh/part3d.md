@@ -138,8 +138,8 @@ app.post('/api/notes', (request, response, next) => {
 })
 ```
 
-<!-- In the first _then_ we receive _savedNote_ object returned by Mongoose and format it. The result of the operation is returned. Then as [we discussed earlier](/en/part2/altering_data_in_server#extracting-communication-with-the-backend-into-a-separate-module), the _then_ method of a promise also returns a promise. This means that when we return _savedNote.toJSON()_ from the callback function, we are actually creating a promise that receives the formatted note as its value. We can access the formatted note by registering a new callback function with the _then_ method. -->
-在第一个 _then_ ，我们收到 savedNote 对象返回的 Mongoose 和格式化它。 返回操作的结果。 然后，正如[我们之前讨论的](/en/part2/altering_data_in_server#extracting-communication-with-the-backend-into-a-separate-module) ，then 的方法也返回了一个承诺。 这意味着，当我们从回调函数返回_savedNote.toJSON()_ 时，我们实际上是在创建一个承诺，该承诺将接收格式化的便笺作为其值。 我们可以通过使用 then 方法注册一个新的回调函数来访问带格式的便笺。
+<!-- In the first _then_ we receive _savedNote_ object returned by Mongoose and format it. The result of the operation is returned. Then as [we discussed earlier](/zh/part2/altering_data_in_server#extracting-communication-with-the-backend-into-a-separate-module), the _then_ method of a promise also returns a promise. This means that when we return _savedNote.toJSON()_ from the callback function, we are actually creating a promise that receives the formatted note as its value. We can access the formatted note by registering a new callback function with the _then_ method. -->
+在第一个 _then_ ，我们收到 savedNote 对象返回的 Mongoose 和格式化它。 返回操作的结果。 然后，正如[我们之前讨论的](/zh/part2/altering_data_in_server#extracting-communication-with-the-backend-into-a-separate-module) ，then 的方法也返回了一个承诺。 这意味着，当我们从回调函数返回_savedNote.toJSON()_ 时，我们实际上是在创建一个承诺，该承诺将接收格式化的便笺作为其值。 我们可以通过使用 then 方法注册一个新的回调函数来访问带格式的便笺。
 
 <!-- We can clean up our code even more by using the more compact syntax for arrow functions: -->
 我们可以使用箭头函数的紧凑语法来清理我们的代码:

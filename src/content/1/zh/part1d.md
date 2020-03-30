@@ -349,7 +349,7 @@ const App = (props) => {
 <!-- The <i>History</i> component renders completely different React-elements depending on the state of the application. This is called <i>conditional rendering</i>. -->
  <i>History</i> 组件根据应用的状态渲染完全不同的 React-元素。
 
-<!-- React also offers many other ways of doing [conditional rendering](https://reactjs.org/docs/conditional-rendering.html). We will take a closer look at this in [part 2](/en/part2). -->
+<!-- React also offers many other ways of doing [conditional rendering](https://reactjs.org/docs/conditional-rendering.html). We will take a closer look at this in [part 2](/zh/part2). -->
 React 还提供了许多其他的方法来实现[条件渲染]( https://reactjs.org/docs/conditional-rendering.html )。 我们将在[第2章节](/zh/part2)中进一步研究这个问题。 
 
 <!-- Let's make one last modification to our application by refactoring it to use the _Button_ component that we defined earlier on: -->

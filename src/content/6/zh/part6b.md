@@ -9,7 +9,7 @@ lang: zh
 
 
 
-<!-- Let's continue our work with the simplified [redux version](/en/part6/flux_architecture_and_redux#redux-notes) of our notes application. -->
+<!-- Let's continue our work with the simplified [redux version](/zh/part6/flux_architecture_and_redux#redux-notes) of our notes application. -->
 让我们继续使用 notes 应用的简化[ redux 版本](/ en / part6 / flux 架构和 redux # redux-notes)进行工作。
 
 <!-- In order to ease our development, let's change our reducer so that the store gets initialized with a state that contains a couple of notes: -->

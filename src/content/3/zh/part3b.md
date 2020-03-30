@@ -230,7 +230,7 @@ const getAll = () => {
 
 ![](../../images/3/28e.png)
 
-<!-- Our application now works exactly like the [single-page app](/en/part0/fundamentals_of_web_apps#single-page-app) example application we studied in part 0.  -->
+<!-- Our application now works exactly like the [single-page app](/zh/part0/fundamentals_of_web_apps#single-page-app) example application we studied in part 0.  -->
 我们的应用现在的工作方式与我们在第0章节中研究的[单页应用](/ en / part0 / web 应用的基本原理 # single-page-app)示例应用完全一样。
 
 <!-- When we use a browser to go to the address <http://localhost:3001>, the server returns the <i>index.html</i> file from the <i>build</i> repository. Summarized contents of the file are as follows:  -->

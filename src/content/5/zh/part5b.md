@@ -148,9 +148,9 @@ loginVisible 可以通过两个按钮切换，每个按钮都有自己的事件�
 <button onClick={() => setLoginVisible(false)}>cancel</button>
 ```
 
-<!-- The visibility of the component is defined by giving the component an [inline](/en/part2/adding_styles_to_react_app#inline-styles) style rule, where the value of the [display](https://developer.mozilla.org/en-US/docs/Web/CSS/display) property is <i>none</i> if we do not want the component to be displayed: -->
+<!-- The visibility of the component is defined by giving the component an [inline](/zh/part2/adding_styles_to_react_app#inline-styles) style rule, where the value of the [display](https://developer.mozilla.org/en-US/docs/Web/CSS/display) property is <i>none</i> if we do not want the component to be displayed: -->
 
-组件是否可见被定义在了一个内联样式中[inline](/en/part2/adding_styles_to_react_app#inline-styles) ，即[display](https://developer.mozilla.org/en-US/docs/Web/CSS/display) 属性值是 <i>none</i>的时候，组件就看不到了：
+组件是否可见被定义在了一个内联样式中[inline](/zh/part2/adding_styles_to_react_app#inline-styles) ，即[display](https://developer.mozilla.org/en-US/docs/Web/CSS/display) 属性值是 <i>none</i>的时候，组件就看不到了：
 
 ```js
 const hideWhenVisible = { display: loginVisible ? 'none' : '' }
@@ -588,8 +588,8 @@ const Togglable = () => ...
 ### Exercises 5.5.-5.10.
 
 #### 5.5 Blog list frontend, 步骤5
-<!-- Change the form for creating blog posts so that it is only displayed when appropriate. Use functionality similar to what was shown [earlier in this part of the course material](/en/part5/props_children_and_proptypes#displaying-the-login-form-only-when-appropriate). If you wish to do so, you can use the <i>Togglable</i> component defined in part 5. -->
-更改用于创建博客文章的表单，使其只在适当的时候显示。 使用类似于课程材料前面所展示的功能[earlier in this part of the course material](/en/part5/props_children_and_proptypes#displaying-the-login-form-only-when-appropriate)。 如果您希望这样做，可以使用第5章节中定义的<i>Togglable</i> 组件。
+<!-- Change the form for creating blog posts so that it is only displayed when appropriate. Use functionality similar to what was shown [earlier in this part of the course material](/zh/part5/props_children_and_proptypes#displaying-the-login-form-only-when-appropriate). If you wish to do so, you can use the <i>Togglable</i> component defined in part 5. -->
+更改用于创建博客文章的表单，使其只在适当的时候显示。 使用类似于课程材料前面所展示的功能[earlier in this part of the course material](/zh/part5/props_children_and_proptypes#displaying-the-login-form-only-when-appropriate)。 如果您希望这样做，可以使用第5章节中定义的<i>Togglable</i> 组件。
 
 <!-- By default the form is not visible -->
 默认情况下，窗体不可见
@@ -643,8 +643,8 @@ const Togglable = () => ...
 <!-- The application shown in the picture has a bit of additional CSS to improve its appearance. -->
 图中显示的应用使用了一些附加的 CSS 来改善其外观。
 
-<!-- It is easy to add styles to the application as shown in part 2 using [inline](/en/part2/adding_styles_to_react_app#inline-styles) styles: -->
-使用[ [inline](/en/part2/adding_styles_to_react_app#inline-styles)样式向应用添加样式很容易，如第2章节所示:
+<!-- It is easy to add styles to the application as shown in part 2 using [inline](/zh/part2/adding_styles_to_react_app#inline-styles) styles: -->
+使用[ [inline](/zh/part2/adding_styles_to_react_app#inline-styles)样式向应用添加样式很容易，如第2章节所示:
 
 ```js
 const Blog = ({ blog }) => {
@@ -814,8 +814,8 @@ LoginForm.propTypes = {
 
 ### ESlint
 
-<!-- In part 3 we configured the [ESlint](/en/part3/validation_and_es_lint#lint) code style tool to the backend. Let's take ESlint to use in the frontend as well. -->
-在第三部分中我们配置了[ESlint](/en/part3/validation_and_es_lint#lint) ，为后台代码控制了代码样式。让我们同样加到前台代码中。
+<!-- In part 3 we configured the [ESlint](/zh/part3/validation_and_es_lint#lint) code style tool to the backend. Let's take ESlint to use in the frontend as well. -->
+在第三部分中我们配置了[ESlint](/zh/part3/validation_and_es_lint#lint) ，为后台代码控制了代码样式。让我们同样加到前台代码中。
 
 <!-- Create-react-app has installed ESlint to the project by default, so all that's left for us to do is to define our desired configuration in the <i>.eslintrc.js</i> file. -->
 Create-react-app 已经默认为项目安装好了 ESlint， 所以我们需要做的就是定义自己的<i>.eslintrc.js</i> 文件 

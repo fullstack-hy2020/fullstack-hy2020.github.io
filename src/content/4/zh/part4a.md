@@ -8,8 +8,8 @@ lang: zh
 <div class="content">
 
 
-<!-- Let's continue our work on the backend of the notes application we started in [part 3](/en/part3).  -->
-让我们继续我们在[part 3](/en/part3)中开始做的便笺应用后端的工作。
+<!-- Let's continue our work on the backend of the notes application we started in [part 3](/zh/part3).  -->
+让我们继续我们在[part 3](/zh/part3)中开始做的便笺应用后端的工作。
 
 
 ### Project structure
@@ -791,8 +791,8 @@ describe('total likes', () => {
 <!-- If defining your own test input list of blogs is too much work, you can use the ready-made list [here](https://github.com/fullstack-hy2020/misc/blob/master/blogs_for_test.md). -->
 如果定义您自己的博客测试输入列表工作量太大，您可以使用现成的列表,[here](https://github.com/fullstack-hy2020/misc/blob/master/blogs_for_test.md)。
 
-<!-- You are bound to run into problems while writing tests. Remember the things that we learned about [debugging](/en/part3/saving_data_to_mongo_db#debugging-node-applications) in part 3. You can print things to the console with _console.log_ even during test execution. It is even possible to use the debugger while running tests, you can find instructions for that [here](https://jestjs.io/docs/en/troubleshooting). -->
-在编写测试时，您肯定会遇到问题。 还记得我们在第3章节中学到的关于[debugging](/en/part3/saving_data_to_mongo_db#debugging-node-applications)的知识吗。 即使在测试执行期间，也可以使用 console.log 将内容打印到控制台。 你甚至可以在运行测试的时候使用调试器，你可以在这里找到相关的指示 [here](https://jestjs.io/docs/en/troubleshooting)。
+<!-- You are bound to run into problems while writing tests. Remember the things that we learned about [debugging](/zh/part3/saving_data_to_mongo_db#debugging-node-applications) in part 3. You can print things to the console with _console.log_ even during test execution. It is even possible to use the debugger while running tests, you can find instructions for that [here](https://jestjs.io/docs/en/troubleshooting). -->
+在编写测试时，您肯定会遇到问题。 还记得我们在第3章节中学到的关于[debugging](/zh/part3/saving_data_to_mongo_db#debugging-node-applications)的知识吗。 即使在测试执行期间，也可以使用 console.log 将内容打印到控制台。 你甚至可以在运行测试的时候使用调试器，你可以在这里找到相关的指示 [here](https://jestjs.io/docs/en/troubleshooting)。
 
 <!-- **NB:** if some test is failing, then it is recommended to only run that test while you are fixing the issue. You can run a single test with the [only](https://facebook.github.io/jest/docs/en/api.html#testonlyname-fn-timeout) method. -->
 注意: 如果某个测试失败，那么建议在修复问题时只运行该测试。 您可以使用[ only ]( https://facebook.github.io/jest/docs/en/api.html#testonlyname-fn-timeout )方法运行单个测试。

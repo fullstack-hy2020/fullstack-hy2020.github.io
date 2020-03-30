@@ -37,7 +37,7 @@ React 提供了10种不同的内置Hook，其中最受欢迎的是我们已经�
 <!-- [React-router's](https://reacttraining.com/react-router/web/guides) api we introduced in the [previous part](/osa7/react_router/) is also partially [hook](https://reacttraining.com/react-router/web/api/Hooks) based. Its hooks can be used to access url parameters and the history object, which allows for manipulating the browser url programmatically. -->
 我们在[上一章节](/ osa7 / react router /)中介绍的[ React-router 的]( https://reacttraining.com/React-router/web/guides ) api 也部分基于[ hook ]( https://reacttraining.com/React-router/web/api/hooks )。 它的Hook可以用来访问 url 参数和历史对象，这允许以编程方式操作浏览器的 url。
 
-<!-- As mentioned in [part 1](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks), hooks are not normal functions, and when using those we have to adhere to certain [rules or limitations](https://reactjs.org/docs/hooks-rules.html). Let's recap the rules of using hooks, copied verbatim from the official React documentation: -->
+<!-- As mentioned in [part 1](/zh/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks), hooks are not normal functions, and when using those we have to adhere to certain [rules or limitations](https://reactjs.org/docs/hooks-rules.html). Let's recap the rules of using hooks, copied verbatim from the official React documentation: -->
 正如在[ 第一章 ](/ en / part1 / a 更复杂的状态调试React应用 # rules-of-hooks)中提到的，Hook不是正常的函数，在使用这些函数时，我们必须遵守某些[规则或限制]( https://reactjs.org/docs/hooks-rules.html )。 让我们回顾一下使用Hook的规则，一字不差地从官方的 React 文档中复制下来:
 
 <!-- **Don’t call Hooks inside loops, conditions, or nested functions.** Instead, always use Hooks at the top level of your React function.  -->
@@ -68,10 +68,10 @@ React 提供了创建我们自己的[自定义]( https://reactjs.org/docs/hooks-
 > <!--<i>Building your own Hooks lets you extract component logic into reusable functions.</i>-->
 构建自己的 hook 可以让您将组件逻辑提取到可重用的函数中
 
-<!-- Custom hooks are regular JavaScript functions that can use any other hooks, as long as they adhere to the [rules of hooks](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks). Additionally, the name of custom hooks must start with the word _use_. -->
+<!-- Custom hooks are regular JavaScript functions that can use any other hooks, as long as they adhere to the [rules of hooks](/zh/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks). Additionally, the name of custom hooks must start with the word _use_. -->
 自定义Hook是常规的 JavaScript 函数，可以使用任何其他Hook，只要它们遵循[ hook 的规则](/ en / part1 / a 更复杂的状态调试React应用 # rules-of-hooks)。 此外，自定义Hook的名称必须以单词 use 开头。
 
-<!-- We implemented a counter application in [part 1](/en/part1/component_state_event_handlers#event-handling), that can have its value incremented, decremented, or reset. The code of the application is as follows: -->
+<!-- We implemented a counter application in [part 1](/zh/part1/component_state_event_handlers#event-handling), that can have its value incremented, decremented, or reset. The code of the application is as follows: -->
 我们在[ 第一章](/ en / part1 / component state handlers # event-handling)中实现了一个计数器应用，它的值可以递增、递减或重置。 应用代码如下:
 
 ```js  
@@ -349,7 +349,7 @@ const App = () => {
 ### Exercises 7.4.-7.8.
 练习7.4-7.8。
 
-<!-- We'll continue with the app from [exercises](/osa7/custom_hookit#tehtavat-7-4-7-6) of the chapter [react router](/en/part7/react_router).  -->
+<!-- We'll continue with the app from [exercises](/osa7/custom_hookit#tehtavat-7-4-7-6) of the chapter [react router](/zh/part7/react_router).  -->
 我们将继续使用[ react router ](/ en / part7 / react router)章节中[ exercises ](/ osa7 / custom hookit # tehtawat-7-4-7-6)的应用。
 
 #### 7.4: anecdotes and hooks 步骤1

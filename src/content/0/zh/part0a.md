@@ -78,9 +78,9 @@ lang: zh
 
 学分的数量和最终成绩是由提交练习的数量决定的，也就是说没有星号的练习也会计入你的最终成绩。
 
-<!-- If you want university credits there is also a course exam, which must be passed. The exam does not count towards your grade. To [register](/en/part0/general_info/#sign-up-for-the-exam) for university credits that are provided by [Open university](https://courses.helsinki.fi/en/aytkt21009en/131840261), you must have a Finnish social security number. -->
+<!-- If you want university credits there is also a course exam, which must be passed. The exam does not count towards your grade. To [register](/zh/part0/general_info/#sign-up-for-the-exam) for university credits that are provided by [Open university](https://courses.helsinki.fi/en/aytkt21009en/131840261), you must have a Finnish social security number. -->
 
-如果你想获得大学学分，还有一个必须通过的课程考试。 这次考试不会计入你的成绩。 学分是[开放大学](https://courses.helsinki.fi/en/aytkt21009en/131840261)所提供的，如果要 [申请](/en/part0/general_info/#sign-up-for-the-exam)大学学分，你必须有一个芬兰的社保号码。
+如果你想获得大学学分，还有一个必须通过的课程考试。 这次考试不会计入你的成绩。 学分是[开放大学](https://courses.helsinki.fi/en/aytkt21009en/131840261)所提供的，如果要 [申请](/zh/part0/general_info/#sign-up-for-the-exam)大学学分，你必须有一个芬兰的社保号码。
 
 <!-- You can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) once you have completed enough exercises for a passing grade. For getting the course certificate, a Finnish social security number is not needed. -->
 
@@ -93,9 +93,9 @@ lang: zh
 
 想要获得三个学分，你必须提交 0-3 章节的所有必修(不带星号)练习。
 
-<!-- For university credits the 3 credit course also requires passing the course exam. The exam is done on Moodle. You can access Moodle through [the course page of the open university](https://courses.helsinki.fi/en/aytkt21009en/131840261) once you have [signed up](/en/part0/general_info/#sign-up-for-the-exam). -->
+<!-- For university credits the 3 credit course also requires passing the course exam. The exam is done on Moodle. You can access Moodle through [the course page of the open university](https://courses.helsinki.fi/en/aytkt21009en/131840261) once you have [signed up](/zh/part0/general_info/#sign-up-for-the-exam). -->
 
-想要获得大学学分的话，3 个学分的课程也要求通过课程考试。 考试是在 Moodle 上完成的。 一旦已经[注册](/en/part0/general_info/#sign-up-for-the-exam)，就可以通过[开放大学的课程页面](https://courses.helsinki.fi/en/aytkt21009en/131840261)访问 Moodle 系统。
+想要获得大学学分的话，3 个学分的课程也要求通过课程考试。 考试是在 Moodle 上完成的。 一旦已经[注册](/zh/part0/general_info/#sign-up-for-the-exam)，就可以通过[开放大学的课程页面](https://courses.helsinki.fi/en/aytkt21009en/131840261)访问 Moodle 系统。
 
 <!-- The last possible date for taking the exam is 10th January 2021. <b>Note that you must sign up for the exam on 9th January 2021 at the latest.</b> -->
 
@@ -138,9 +138,9 @@ lang: zh
 | 83               |       5        |     2      |
 | 72               |       5        |     1      |
 
-<!-- For university credits the 5-9 credit course also requires passing the course exam. The exam is done on Moodle. You can access Moodle through [the course page of the open university](https://courses.helsinki.fi/en/aytkt21009en/131840261) once you have [signed up](/en/part0/general_info/#sign-up-for-the-exam) for the exam. -->
+<!-- For university credits the 5-9 credit course also requires passing the course exam. The exam is done on Moodle. You can access Moodle through [the course page of the open university](https://courses.helsinki.fi/en/aytkt21009en/131840261) once you have [signed up](/zh/part0/general_info/#sign-up-for-the-exam) for the exam. -->
 
-如果想要获得大学学分，5-9 学分课程也要求通过课程考试。 考试是在 Moodle 上完成的。 一旦[注册](/en/part0/general_info/#sign-up-for-the-exam)，就可以通过[开放大学的课程页面](https://courses.helsinki.fi/en/aytkt21009en/131840261)访问 Moodle 系统。
+如果想要获得大学学分，5-9 学分课程也要求通过课程考试。 考试是在 Moodle 上完成的。 一旦[注册](/zh/part0/general_info/#sign-up-for-the-exam)，就可以通过[开放大学的课程页面](https://courses.helsinki.fi/en/aytkt21009en/131840261)访问 Moodle 系统。
 
 <!-- The last possible date for taking the exam is 10th January 2021. <b>Note that you must sign up for the exam on 9th January 2021 at the latest.</b> -->
 

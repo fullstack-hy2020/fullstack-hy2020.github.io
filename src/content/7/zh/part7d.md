@@ -19,8 +19,8 @@ lang: zh
 <!-- We have implemented our applications by dividing our code into separate modules that have been <i>imported</i> to places that require them. Even though ES6 modules are defined in the ECMAScript standard, no browser actually knows how to handle code that is divided into modules. -->
 我们已经实现了我们的应用，将我们的代码分割成单独的模块，这些模块已经被导入到需要它们的地方。 尽管 ES6模块是在 ECMAScript 标准中定义的，但没有浏览器真正知道如何处理划分为模块的代码。
 
-<!-- For this reason, code that is divided into modules must be <i>bundled</i> for browsers, meaning that all of the source code files are transformed into a single file that contains all of the application code. When we deployed our React frontend to production in [part 3](/en/part3/deploying_app_to_internet), we performed the bundling of our application with the _npm run build_ command. Under the hood, the npm script bundles the source code using webpack which produces the following collection of files in the <i>build</i> directory: -->
-由于这个原因，被划分为模块的代码对于浏览器必须是<i>绑定的</i>，这意味着所有的源代码文件都被转换成一个包含所有应用代码的文件。 在 [part 3](/en/part3/deploying_app_to_internet)中部署 React frontend to production 时，我们执行了将应用与 npm run build 命令绑定在一起的操作。 在引擎盖下，npm 脚本使用 webpack 捆绑源代码，在<i>build</i> 目录下生成如下文件集合:
+<!-- For this reason, code that is divided into modules must be <i>bundled</i> for browsers, meaning that all of the source code files are transformed into a single file that contains all of the application code. When we deployed our React frontend to production in [part 3](/zh/part3/deploying_app_to_internet), we performed the bundling of our application with the _npm run build_ command. Under the hood, the npm script bundles the source code using webpack which produces the following collection of files in the <i>build</i> directory: -->
+由于这个原因，被划分为模块的代码对于浏览器必须是<i>绑定的</i>，这意味着所有的源代码文件都被转换成一个包含所有应用代码的文件。 在 [part 3](/zh/part3/deploying_app_to_internet)中部署 React frontend to production 时，我们执行了将应用与 npm run build 命令绑定在一起的操作。 在引擎盖下，npm 脚本使用 webpack 捆绑源代码，在<i>build</i> 目录下生成如下文件集合:
 
 <pre>
 ├── asset-manifest.json
@@ -815,7 +815,7 @@ function h(){if(!d){var e=u(p);d=!0;for(var t=c.length;t;){for(s=c,c=[];++f<t;)s
 <!-- The bundled file will then be configured to use the backend available at the <https://blooming-atoll-75500.herokuapp.com/api/notes> url. -->
 然后将绑定的文件配置为使用 https://blooming-atoll-75500.herokuapp.com/api/notes 地址中可用的后端。
 
-<!-- We will install <i>axios</i>, start the json-server, and then make the necessary changes to the application. For the sake of changing things up, we will fetch the notes from the backend with our [custom hook](/en/part5/custom_hooks) called _useNotes_: -->
+<!-- We will install <i>axios</i>, start the json-server, and then make the necessary changes to the application. For the sake of changing things up, we will fetch the notes from the backend with our [custom hook](/zh/part5/custom_hooks) called _useNotes_: -->
 我们将安装<i>axios</i>，启动 json-server，然后对应用进行必要的更改。 为了更改内容，我们将使用名为 useNotes 的[ custom hook ](/ en / part5 / custom hooks)从后端获取便笺:
 
 ```js
@@ -1038,8 +1038,8 @@ Create-react-app 工具在幕后使用 webpack。 如果缺省配置不够，可
 练习
 
 
-<!-- One exercise related to the topics presented here, can be found at the end of this course material section in the exercise set [for extending the blog list application](/en/part7/exercises_extending_the_bloglist). -->
-一个与这里提到的主题相关的练习，可以在本课程材料部分的练习集[for extending the blog list application](/en/part7/exercises_extending_the_bloglist)的最后找到。
+<!-- One exercise related to the topics presented here, can be found at the end of this course material section in the exercise set [for extending the blog list application](/zh/part7/exercises_extending_the_bloglist). -->
+一个与这里提到的主题相关的练习，可以在本课程材料部分的练习集[for extending the blog list application](/zh/part7/exercises_extending_the_bloglist)的最后找到。
 
 
 </div>

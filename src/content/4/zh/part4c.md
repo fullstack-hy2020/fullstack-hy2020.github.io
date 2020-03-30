@@ -249,9 +249,9 @@ const noteSchema = new mongoose.Schema({
 npm install bcrypt --save
 ```
 
-<!-- Creating new users happens in compliance with the RESTful conventions discussed in [part 3](/en/part3/node_js_and_express#rest), by making an HTTP POST request to the <i>users</i> path. -->
+<!-- Creating new users happens in compliance with the RESTful conventions discussed in [part 3](/zh/part3/node_js_and_express#rest), by making an HTTP POST request to the <i>users</i> path. -->
 
-通过 HTTP 向<i>users</i>发送 POST 请求，按照[第三章](/en/part3/node_js_and_express#rest)讨论的 RESTful 约定创建用户。
+通过 HTTP 向<i>users</i>发送 POST 请求，按照[第三章](/zh/part3/node_js_and_express#rest)讨论的 RESTful 约定创建用户。
 
 <!-- Let's define a separate <i>router</i> for dealing with users in a new <i>controllers/users.js</i> file. Let's take the router into use in our application in the <i>app.js</i> file, so that it handles requests made to the <i>/api/users</i> url: -->
 
@@ -409,9 +409,9 @@ describe('when there is initially one user at db', () => {
 
 测试用例显然不会在这一点上通过。我们实际上是在实践[测试驱动开发 TDD](https://en.wikipedia.org/wiki/Test-driven_development),也就是在函数实现之前先写测试用例。
 
-<!-- Let's validate the uniqueness of the username with the help of Mongoose validators. As we mentioned in exercise [3.19](/en/part3/validation_and_es_lint#exercises), Mongoose does not have a built-in validator for checking the uniqueness of a field. We can find a ready-made solution for this from the [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) npm package. Let's install it: -->
+<!-- Let's validate the uniqueness of the username with the help of Mongoose validators. As we mentioned in exercise [3.19](/zh/part3/validation_and_es_lint#exercises), Mongoose does not have a built-in validator for checking the uniqueness of a field. We can find a ready-made solution for this from the [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) npm package. Let's install it: -->
 
-让我们在 Mongoose validator 的帮助下验证用户名的唯一性。正如我们在练习 [3.19](/en/part3/validation_and_es_lint#exercises)中提到的，Mongoose 并没有内置的 validator 来检查某个字段的唯一性。我们可以使用一个现成的解决方案[mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) 这个 npm 包，先安装一下：
+让我们在 Mongoose validator 的帮助下验证用户名的唯一性。正如我们在练习 [3.19](/zh/part3/validation_and_es_lint#exercises)中提到的，Mongoose 并没有内置的 validator 来检查某个字段的唯一性。我们可以使用一个现成的解决方案[mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) 这个 npm 包，先安装一下：
 
 ```bash
 npm install --save mongoose-unique-validator
