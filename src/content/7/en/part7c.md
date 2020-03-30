@@ -27,13 +27,13 @@ Let's start by taking a look at Bootstrap with the help of the [react-bootstrap]
 
 Let's install the package with the command:
 
-```js
+```bash
 npm install --save react-bootstrap
 ```
 
 Then let's add a link for loading the CSS stylesheet for Bootstrap inside of the <i>head</i> tag in the <i>public/index.html</i> file of the application:
 
-```js
+```jsx
 <head>
   <link
     rel="stylesheet"
@@ -50,7 +50,7 @@ When we reload the application, we notice that it already looks a bit more styli
 
 In Bootstrap, all of the contents of the application are typically rendered inside of a [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers). In practice this is accomplished by giving the root _div_ element of the application the  _container_ class attribute:
 
-```js
+```jsx
 const App = () => {
   // ...
 
@@ -70,7 +70,7 @@ We notice that this already has an effect on the appearance of the application. 
 
 Next, let's make some changes to the <i>Notes</i> component, so that it renders the list of notes as a [table](https://getbootstrap.com/docs/4.1/content/tables/). React Bootstrap provides a built-in [Table](https://react-bootstrap.github.io/components/table/) component for this purpose, so there is no need to define CSS classes separately.
 
-```js
+```jsx
 const Notes = (props) => (
   <div>
     <h2>Notes</h2>
@@ -110,7 +110,7 @@ Let's improve the form in the <i>Login</i> view with the help of Bootstrap [form
 
 React Bootstrap provides built-in [components](https://react-bootstrap.github.io/components/forms/) for creating forms (although the documentation for them is slightly lacking):
 
-```js
+```jsx
 let Login = (props) => {
   // ...
   return (
@@ -154,7 +154,7 @@ Now that the login form is in better shape, let's take a look at improving our a
 
 Let's add a message for the notification when a user logs in to the application. We will store it in the _message_ variable in the <i>App</i> component's state:
 
-```js
+```jsx
 const App = () => {
   const [notes, setNotes] = useState([
     // ...
@@ -179,7 +179,7 @@ const App = () => {
 
 We will render the message as a Bootstrap [Alert](https://getbootstrap.com/docs/4.1/components/alerts/) component. Once again, the React Bootstrap library provides us with a matching [React component](https://react-bootstrap.github.io/components/alerts/): 
 
-```js
+```jsx
 <div className="container">
 // highlight-start
   {(message &&
@@ -196,7 +196,7 @@ We will render the message as a Bootstrap [Alert](https://getbootstrap.com/docs/
 
 Lastly, let's alter the application's navigation menu to use Bootstrap's [Navbar](https://getbootstrap.com/docs/4.1/components/navbar/) component. The React Bootstrap library provides us with [matching built-in components](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly). Through trial and error, we end up with a working solution in spite of the cryptic documentation:
 
-```js
+```jsx
 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
@@ -247,14 +247,14 @@ As our second example we will look into the [MaterialUI](https://material-ui.com
 <!-- Asennetaan kirjasto suorittamalla komento -->
 Install the library with the command
 
-```js
+```bash
 npm install --save @material-ui/core
 ```
 
 <!-- Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään bootstrapin css-määrittelyt lataava rivi: -->
 Then add the following line to the <i>head</i> tag in the <i>public/index.html</i> file. The line loads bootstrap's css-definitions.
 
-```js
+```jsx
 <head>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
   // ...
@@ -267,7 +267,7 @@ Now let's use MaterialUI to do the same modifications to the code we did earlier
 <!-- Renderöidään koko sovelluksen sisältö komponentin [Container](https://material-ui.com/components/container/) sisälle: -->
 Render the contents of the whole application within a [Container](https://material-ui.com/components/container/):
 
-```js
+```jsx
 import Container from '@material-ui/core/Container'
 
 const App = () => {
@@ -283,7 +283,7 @@ const App = () => {
 <!-- Aloitetaan komponentista <i>Notes</i> ja renderöidään muistiinpanojen lista [taulukkona](https://material-ui.com/components/tables/#simple-table): -->
 Let's start with the <i>Notes</i> component. We'll render the list of notes as a [table](https://material-ui.com/components/tables/#simple-table):
 
-```js
+```jsx
 const Notes = ({notes}) => (
   <div>
     <h2>Notes</h2>
@@ -333,7 +333,7 @@ import {
 <!-- Parannellaan seuraavaksi näkymän <i>Login</i> kirjautumislomaketta käyttäen komponentteja [TextField](https://material-ui.com/components/text-fields/) ja [Button](https://material-ui.com/api/button/): -->
 Next let's make the login form in the <i>Login</i> view better using the [TextField](https://material-ui.com/components/text-fields/) and [Button](https://material-ui.com/api/button/) components:
 
-```js 
+```jsx
 const Login = (props) => {
   const history = useHistory()
 
@@ -380,7 +380,7 @@ Remember to import all the components used in the form.
 <!-- Kirjautumisen jälkeisen notifikaation näyttämiseen sopii komponenetti Alert](https://material-ui.com/components/alert/), joka on lähes samanlainen kuin bootstrapin vastaava komponentti:  -->
 The notification displayed on log in can be done using the [Alert](https://material-ui.com/components/alert/) component, which is quite similiar to bootstrap's equivalent component:
 
-```js
+```jsx
 <div>
 // highlight-start
   {(message &&
@@ -395,14 +395,14 @@ The notification displayed on log in can be done using the [Alert](https://mater
 <!-- Alert-komponentti ei ole vielä mukana MaterialUI:n core-pakkauksessa, ja komponentin sisältävä pakkaus [lab](https://material-ui.com/components/about-the-lab/) tulee asentaa sovellukseen: -->
 The Alert component is not yet included in the MaterialUI core package, so we have to install the [lab](https://material-ui.com/components/about-the-lab/) package to use it:
 
-```js 
+```bash
 npm install --save @material-ui/lab
 ```
 
 <!-- Komponentti importataan seuraavasti -->
 Then we can import the component like so
 
-```js 
+```jsx
 import { Alert } from '@material-ui/lab'
 ```
 
@@ -419,7 +419,7 @@ We can implement navigation using the [AppBar](https://material-ui.com/component
 <!-- Jos sovelletaan suoraan dokumentaation esimerkkiä   -->
 If we use the example code from the documentation
 
-```js
+```jsx
 <AppBar position="static">
   <Toolbar>
     <IconButton edge="start" color="inherit" aria-label="menu">
@@ -454,7 +454,7 @@ We can find a better way from the [documentation](https://material-ui.com/guides
 <!-- Määrittelemällä -->
 By defining
 
-```js
+```jsx
 <Button color="inherit" component={Link} to="/">
   home
 </Button>
@@ -466,7 +466,7 @@ the _Button_ component is rendered so, that its root component is react-redux _L
 <!-- Navigaatiopalkin koodi kokonaisuudessaan on seuraava -->
 The code for the navigation bar is the following
 
-```js
+```jsx
 <AppBar position="static">
   <Toolbar>
     <Button color="inherit" component={Link} to="/">
@@ -509,7 +509,7 @@ In the two previous examples, we used the UI frameworks with the help of React-i
 
 Instead of using the [React Bootstrap](https://react-bootstrap.github.io/) library, we could have just as well used Bootstrap directly by defining CSS classes to our application's HTML elements. Instead of defining the table with the <i>Table</i> component:
 
-```js
+```jsx
 <Table striped>
   // ...
 </Table>
@@ -517,7 +517,7 @@ Instead of using the [React Bootstrap](https://react-bootstrap.github.io/) libra
 
 We could have used a regular HTML <i>table</i> and added the required CSS class:
 
-```js
+```jsx
 <table className="table striped">
   // ...
 </table>
@@ -553,7 +553,7 @@ The [styled components](https://www.styled-components.com/) library offers an in
 
 Let's make a few changes to the styles of our application with the help of styled components. First, let's define two components with styles:
 
-```js
+```jsx
 import styled from 'styled-components'
 
 const Button = styled.button`
@@ -577,7 +577,7 @@ The syntax for defining the styles is quite interesting, as the CSS rules are de
 
 The styled components that we defined work exactly like regular <i>button</i> and <i>input</i> elements, and they can be used the same way:
 
-```js
+```jsx
 const Login = (props) => {
   // ...
   return (
@@ -601,7 +601,7 @@ const Login = (props) => {
 
 Let's create a few more components for styling that application, that are styled versions of <i>div</i> elements:
 
-```js
+```jsx
 const Page = styled.div`
   padding: 1em;
   background: papayawhip;
@@ -621,7 +621,7 @@ const Footer = styled.div`
 
 Let's use the components in our application:
 
-```js
+```jsx
 const App = () => {
   // ...
 

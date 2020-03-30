@@ -33,7 +33,7 @@ The navigation bar and an application containing multiple views is very easy to 
 
 Here is one way:
 
-```js
+```jsx
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
@@ -102,13 +102,13 @@ Luckily, React has the [React router](https://github.com/ReactTraining/react-rou
 
 Let's change the above application to use React router. First, we install React router with the command
 
-```js
+```bash
 npm install --save react-router-dom
 ```
 
 The routing provided by React Router is enabled by changing the application as follows:
 
-```js
+```jsx
 import {
   BrowserRouter as Router,
   Switch, Route, Link
@@ -175,7 +175,7 @@ creates a link in the application with the text <i>notes</i>, which when clicked
 
 Components rendered based on the URL of the browser are defined with the help of the component [Route](https://reacttraining.com/react-router/web/api/Route). For example, 
 
-```js
+```jsx
 <Route path="/notes">
   <Notes />
 </Route>
@@ -187,7 +187,7 @@ defines, that if the browser address is <i>/notes</i>, we render the <i>Notes</i
 <!-- Urliin perustuen renderöitävät komponentit on sijoitettu [Swithch](https://reacttraining.com/react-router/web/api/Switch)-komponentin lapsiksi -->
 We wrap the components to be rendered based on the url with a [Switch](https://reacttraining.com/react-router/web/api/Switch)-component
 
-```js 
+```jsx
 <Switch>
   <Route path="/notes">
     <Notes />
@@ -206,7 +206,7 @@ The switch works by rendering the first component whose <i>path</i> matches the 
 
 Note that the order of the components is important. If we would put the <i>Home</i>-component, whose path is <i> path="/"</i>, first, nothing else would ever get rendered because the "nonexistent" path "/" is the start of every path:
 
-```js 
+```jsx
 <Switch>
   <Route path="/"> // highlight-line
     <Home /> // highlight-line
@@ -231,7 +231,7 @@ The application now contains five different views whose display is controlled by
 
 The ability to click a name is implemented with the component <i>Link</i>, and clicking the name of a note whose id is 3 would trigger an event that changes the address of the browser into <i>notes/3</i>:
 
-```js
+```jsx
 const Notes = ({notes}) => (
   <div>
     <h2>Notes</h2>
@@ -249,7 +249,7 @@ const Notes = ({notes}) => (
 <!-- Parametrisoitu url määritellään komponentissa <i>App</i> olevaan reititykseen seuraavasti: -->
 We define parametrized urls in the routing in <i>App</i>-component as follows:
 
-```js
+```jsx
 <Router>
   <div>
     <div>
@@ -277,14 +277,14 @@ We define parametrized urls in the routing in <i>App</i>-component as follows:
 
 We define the route rendering a specific note "express style" by marking the parameter with a colon <i>:id</i>
 
-```js
+```jsx
 <Route path="/notes/:id">
 ```
 
 <!-- Kun selain siirtyy muistiinpanon yksilöivään osoitteeseen, esim. <i>/notes/3</i>, renderöidään komponentti <i>Note</i>: -->
 When a browser navigates to the url for a specific note, for example <i>/notes/3</i>, we render the <i>Note</i> component:
 
-```js
+```jsx
 import {
   // ...
   useParams  // highlight-line
@@ -312,7 +312,7 @@ We have also implemented a simple log in function in our application. If a user 
 
 The option to navigate to the <i>Login</i>-view is rendered conditionally in the menu.
 
-```js
+```jsx
 <Router>
   <div>
     <Link style={padding} to="/">home</Link>
@@ -336,7 +336,7 @@ So if the user is already logged in, instead of displaying the link <i>Login</i>
 
 The code of the component handling the login functionality is as follows:
 
-```js
+```jsx
 import {
   // ...
   useHistory // highlight-line
@@ -382,7 +382,7 @@ Both [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams)
 
 There is one more interesting detail about the <i>Users</i> route: 
 
-```js
+```jsx
 <Route path="/users" render={() =>
   user ? <Users /> : <Redirect to="/login" />
 } />
@@ -390,7 +390,7 @@ There is one more interesting detail about the <i>Users</i> route:
 
 If a user isn't logged in, the <i>Users</i> component is not rendered. Instead, the user is <i>redirected</i> using the <i>Redirect</i>-component to the login view
 
-```js
+```jsx
 <Redirect to="/login" />
 ```
 
@@ -398,7 +398,7 @@ In reality, it would perhaps be better to not even show links in the navigation 
 
 Here is the <i>App</i> component in its entirety:
 
-```js
+```jsx
 const App = () => {
   const [notes, setNotes] = useState([
     // ...
@@ -459,7 +459,7 @@ We define an element common for modern web apps called <i>footer</i>, which defi
 Our application has a flaw. The _Note_ component receives all of the notes, even though it only displays the one whose id matches the url parameter:
 
 
-```js
+```jsx
 const Note = ({ notes }) => { 
   const id = useParams().id
   const note = notes.find(n => n.id === Number(id))
@@ -470,7 +470,7 @@ const Note = ({ notes }) => {
 <!-- Olisiko mahdollista muuttaa sovellusta siten, että _Note_ saisi propsina ainoastaan näytettävän komponentin: -->
 Would it be possible to modify the application so that _Note_ receives only the component it should display?
 
-```js
+```jsx
 const Note = ({ note }) => {
   return (
     <div>
@@ -486,7 +486,7 @@ One way to do this would be to use react-router's [useRouteMatch](https://reactt
 
 It is not possible to use <i>useRouteMatch</i>-hook in the component which defines the routed part of the application. Let's move the use of the _Router_ components from _App_:
 
-```js
+```jsx
 ReactDOM.render(
   <Router> // highlight-line
     <App />
@@ -498,7 +498,7 @@ ReactDOM.render(
 <!-- Komponentti _App_ muuttuu seuraavasti: -->
 The _App_component becomes:
 
-```js
+```jsx
 import {
   // ...
   useRouteMatch  // highlight-line
@@ -542,13 +542,13 @@ const App = () => {
 <!-- Joka kerta kun komponentti renderöidään, eli käytännössä myös aina kun sovelluksen osoiterivillä oleva url, vaihtuu suoritetaan komento -->
 Every time the component is rendered, so practically every time the browser's url changes, the following command is executed:
 
-```js
+```jsx
 const match = useRouteMatch('/notes/:id')
 ```
 
 If the url matches _/notes/:id_, the match variable will contain an object from which we can access the parametrized part of the path, the id of the note to be displayed, and we can then fetch the correct note to display.
 
-```js
+```jsx
 const note = match 
   ? notes.find(note => note.id === Number(match.params.id))
   : null

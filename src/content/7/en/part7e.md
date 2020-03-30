@@ -18,7 +18,7 @@ Let's get to know the main features of Class Components by producing yet another
 
 The initial version of the Class Component look like this
 
-```js
+```jsx
 import React from 'react'
 
 class App extends React.Component {
@@ -46,7 +46,7 @@ The component now has a [constructor](https://reactjs.org/docs/react-component.h
 
 Let's define a state for the list of anecdotes and the currently visible anecdote. In contrast to when using the [useState](https://reactjs.org/docs/hooks-state.html)-hook Class Components only contain one state. So if the state is made up of multiple "parts" they should be stored as properties of the state. The state is initialized in the constructor:
 
-```js
+```jsx
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -89,7 +89,7 @@ In Functional components the right place for fetching data from a server is insi
 
 The [lifecycle-methods](https://reactjs.org/docs/state-and-lifecycle.html#adding-lifecycle-methods-to-a-class) of Class Components offer corresponding functionality. The correct place to trigger the fetching of data from a server is inside the lifecycle-method [componentDidMount](https://reactjs.org/docs/react-component.html#componentdidmount), which is executed once right after the first time a component renders:
 
-```js
+```jsx
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -124,7 +124,7 @@ Calling the method setState always trigger the rerender of the Class Component, 
 
 We'll finish off the component with the ability to change the shown anecdote. The following is the code for the entire component with the addition highlighted:
 
-```js
+```jsx
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -170,7 +170,7 @@ class App extends React.Component {
 
 For comparison here is the same application as a Functional component:
 
-```js
+```jsx
 const App = () => {
   const [anecdotes, setAnecdotes] = useState([])
   const [current, setCurrent] = useState(0)
@@ -246,7 +246,7 @@ The concept of the Virtual DOM often comes up when discussing React. What is it 
 
 When a software developer uses React they rarely or never directly manipulate the DOM. The function defining the React component returns a set of [React-elements](https://reactjs.org/docs/glossary.html#elements). Although some of the elements look like normal HTML-elements
 
-```js
+```jsx
 const element = <h1>Hello, world</h1>
 ```
 
@@ -256,7 +256,7 @@ The React-elements defining the appearance of the components of the application 
 
 With the help of the [ReactDOM](https://reactjs.org/docs/react-dom.html)-library the virtual DOM defined by the components is rendered to a real DOM that can be shown by the browser using the DOM API:
 
-```js
+```jsx
 ReactDOM.render(
   <App />,
   document.getElementById('root')
@@ -291,7 +291,7 @@ At the top of the list we find <i>injection</i>, which means that e.g. text sent
 
 For example, if the following SQL-query would be executed in a vulnerable application:
 
-```js
+```jsx
 let query = "SELECT * FROM Users WHERE name = '" + userName + "';"
 ```
 
@@ -355,7 +355,7 @@ The npm [audit](https://docs.npmjs.com/cli/audit) command can be used to check t
 Running _npm audit_ on an exercise from part 4 of last year's course print a long list of complaints and suggested fixes. 
 Below is a part of the raport:
 
-```js
+```jsx
 $ bloglist-backend npm audit
 
                        === npm audit security report ===
@@ -416,7 +416,7 @@ found 416 vulnerabilities (65 low, 2 moderate, 348 high, 1 critical) in 20047 sc
 After only one year the code is full of small security threats. Luckily there is only 1 critical threat. 
 Let's run _npm audit fix_ as the raport suggests:
 
-```js
+```
 $ bloglist-backend npm audit fix
 
 + mongoose@5.9.1
@@ -431,14 +431,14 @@ fixed 354 of 416 vulnerabilities in 20047 scanned packages
 Updating these debendencies could lead to the whole application breaking down. The remaining threats are caused by the testing debendency jest. Our application has the version 23.6.0 when the secure version is 25.0.1. 
 As jest is a development debendency the threat is actually nonexistent, but let's update it just to be safe:
 
-```js
+```bash
 npm install --save-dev jest@25.1.0 
 ```
 
 <!-- Päivityksen jälkeen tilanne näyttää hyvältä -->
 After the update the situation looks good
 
-```js
+```bash
  $ blogs-backend npm audit
 
                        === npm audit security report ===

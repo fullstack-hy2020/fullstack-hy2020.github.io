@@ -88,13 +88,13 @@ Tiedoston <i>package.json</i> sisältö voi olla esim. seuraava:
 
 Asennetaan webpack komennolla
 
-```js
+```bash
 npm install --save-dev webpack webpack-cli
 ```
 
 Webpackin toiminta konfiguroidaan tiedostoon <i>webpack.config.js</i>, laitetaan sen alustavaksi sisällöksi seuraava
 
-```js
+```jsx
 const path = require('path')
 
 const config = {
@@ -110,7 +110,7 @@ module.exports = config
 
 Määritellään sitten npm-skripti <i>build</i> jonka avulla bundlaus suoritetaan
 
-```js
+```json
 // ...
 "scripts": {
   "build": "webpack --mode=development"
@@ -120,7 +120,7 @@ Määritellään sitten npm-skripti <i>build</i> jonka avulla bundlaus suoriteta
 
 Lisätään hieman koodia tiedostoon <i>src/index.js</i>:
 
-```js
+```jsx
 const hello = name => {
   console.log(`hello ${name}`)
 }
@@ -136,7 +136,7 @@ Tiedostossa on paljon erikoisen näköistä tavaraa. Lopussa on mukana myös kir
 
 Lisätään hakemistoon <i>src</i> tiedosto <i>App.js</i> ja sille sisältö
 
-```js
+```jsx
 const App = () => {
   return null
 }
@@ -146,7 +146,7 @@ export default App
 
 Importataan ja käytetään modulia <i>App</i> tiedostossa <i>index.js</i>
 
-```js
+```jsx
 import App from './App';
 
 const hello = name => {
@@ -216,13 +216,13 @@ Kenttä [output](https://webpack.js.org/concepts/#output) taas kertoo minne muod
 
 Muutetaan sitten sovellus minimalistiseksi React-sovellukseksi. Asennetaan tarvittavat kirjastot
 
-```js
+```bash
 npm install --save react react-dom
 ```
 
 Liitetään tavanomaiset loitsut tiedostoon <i>index.js</i>
 
-```js
+```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
@@ -232,7 +232,7 @@ ReactDOM.render(<App />, document.getElementById('root'))
 
 ja muutetaan <i>App.js</i> muotoon
 
-```js
+```jsx
 import React from 'react'
 
 const App = () => (
@@ -266,7 +266,7 @@ Kun bundlaamme sovelluksen, törmäämme kuitenkin ongelmaan
 
 Webpack mainitsee että saatamme tarvita <i>loaderin</i> tiedoston <i>App.js</i> käsittelyyn. Webpack ymmärtää itse vain Javascriptia ja vaikka se saattaa meiltä matkan varrella olla unohtunutkin, käytämme Reactia ohjelmoidessamme [JSX](https://facebook.github.io/jsx/):ää näkymien renderöintiin, eli esim. seuraava
 
-```js
+```jsx
 const App = () => {
   return <div>hello webpack</div>
 }
@@ -319,7 +319,7 @@ Kenttä <i>test</i> määrittelee että käsitellään <i>.js</i>-päätteisiä 
 
 Asennetaan loader ja sen tarvitsemat kirjastot <i>kehitysaikaiseksi riippuvuudeksi</i>:
 
-```js
+```bash
 npm install @babel/core babel-loader @babel/preset-react --save-dev
 ```
 
@@ -327,7 +327,7 @@ Nyt bundlaus onnistuu.
 
 Jos katsomme bundlattua koodia ja editoimme hieman koodin ulkoasua, huomaamme, että komponentti <i>App</i> on muuttunut muotoon
 
-```js
+```jsx
 const App = () =>
   react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
     'div',
@@ -344,7 +344,7 @@ Sovellusta voi nyt kokeilla avaamalla tiedoston <i>build/index.html</i>  selaime
 
 On kuitenkin huomionarvoista, että jos sovelluksemme sisältää <i>async/await</i> -toiminnallisuutta, selaimeen ei joillain selaimilla renderöidy mitään. [Konsoliin tulostuneen virheviestin googlaaminen](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) valaisee asiaa. Asian korjaamiseksi on asennettava vielä yksi puuttuva riippuvuus, [@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill).
 
-```
+```bash
 npm install --save-dev @babel/polyfill
 ```
 
@@ -392,13 +392,13 @@ Otetaan käyttöön preset [@babel/preset-env](https://babeljs.io/docs/plugins/p
 
 Preset asennetaan komennolla
 
-```js
+```bash
 npm install @babel/preset-env --save-dev
 ```
 
 Kun nyt transpiloimme koodin, muuttuu se vanhan koulukunnan Javascriptiksi. Komponentin <i>App</i> määrittely näyttää seuraavalta:
 
-```js
+```jsx
 var App = function App() {
   return _react2.default.createElement('div', null, 'hello webpack')
 };
@@ -419,7 +419,7 @@ Lisätään sovellukseemme hieman CSS:ää. Tehdään tiedosto <i>src/index.css<
 
 Määritellään tyyli käytettäväksi komponentissa <i>App</i>
 
-```js
+```jsx
 const App = () => {
   return (
     <div className="container">
@@ -431,7 +431,7 @@ const App = () => {
 
 ja importataan se tiedostossa <i>index.js</i>
 
-```js
+```jsx
 import './index.css'
 ```
 
@@ -441,7 +441,7 @@ Transpilointi hajoaa
 
 CSS:ää varten onkin otettava käyttöön [css](https://webpack.js.org/loaders/css-loader/)- ja [style](https://webpack.js.org/loaders/style-loader/)-loaderit:
 
-```js
+```jsx
 {
   rules: [
     {
@@ -469,7 +469,7 @@ CSS voidaan tarpeen vaatiessa myös generoida omaan tiedostoonsa esim. [mini-css
 
 Kun loaderit asennetaan
 
-```js
+```bash
 npm install style-loader css-loader --save-dev
 ```
 
@@ -481,13 +481,13 @@ Sovelluskehitys onnistuu jo, mutta development workflow on suorastaan hirveä (a
 
 Ratkaisun tarjoaa [webpack-dev-server](https://webpack.js.org/guides/development/#using-webpack-dev-server). Asennetaan se komennolla
 
-```js
+```bash
 npm install --save-dev webpack-dev-server
 ```
 
 Määritellään dev-serverin käynnistävä npm-skripti:
 
-```js
+```json
 {
   // ...
   "scripts": {
@@ -524,7 +524,7 @@ Päivitysprosessi on nopea, dev-serveriä käytettäessä webpack ei bundlaa koo
 
 Laajennetaan koodia muuttamalla komponentin <i>App</i> määrittelyä seuraavasti:
 
-```js
+```jsx
 import React, {useState} from 'react'
 
 const App = () => {
@@ -553,7 +553,7 @@ Sovellus toimii hyvin ja kehitys on melko sujuvaa.
 
 Erotetaan napin klikkauksenkäsittelijä omaksi funktioksi ja talletetaan tilaan <i>values</i> aiemmat laskurin arvot:
 
-```js
+```jsx
 const App = () => {
   const [counter, setCounter] = useState(0)
   const [values, setValues] = useState() // highlight-line
@@ -625,7 +625,7 @@ Source mapin käyttö mahdollistaa myös chromen debuggerin luontevan käytön
 
 Korjataan bugi alustamalla tila <i>values</i> tyhjäksi taulukoksi:
 
-```js
+```jsx
 const App = () => {
   const [counter, setCounter] = useState(0)
   const [values, setValues] = useState([])
@@ -664,7 +664,7 @@ Webpackin versiosta 4 alkaen pluginia ei ole tarvinnut konfiguroida erikseen, ri
 
 Kun sovellus bundlataan uudelleen, pienenee tuloksena oleva <i>main.js</i> mukavasti
 
-```js
+```
 $ ls -l build/main.js
 -rw-r--r--  1 mluukkai  984178727  132299 Feb 16 11:33 build/main.js
 ```
@@ -704,7 +704,7 @@ Bundlattu tiedosto laitetaan sitten käyttämään todellista, osoitteessa <http
 
 Asennetaan <i>axios</i>, käynnistetään json-server ja tehdään tarvittavat lisäykset sovellukseen. Vaihtelun vuoksi muistiinpanojen hakeminen palvelimelta on toteutettu [custom hookin](/osa5/custom_hookit) _useNotes_ avulla:
 
-```js
+```jsx
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
@@ -749,7 +749,7 @@ Koodissa on nyt kovakoodattuna sovelluskehityksessä käytettävän palvelimen o
 
 Muutetaan <i>webpack.config.js</i> oliosta [funktioksi](https://webpack.js.org/configuration/configuration-types/#exporting-a-function):
 
-```js
+```jsx
 const path = require('path');
 
 const config = (env, argv) => {
@@ -821,7 +821,7 @@ module.exports = config
 
 Määriteltyä vakiota käytetään koodissa seuraavasti:
 
-```js
+```jsx
 const App = () => {
   const [counter, setCounter] = useState(0)
   const [values, setValues] = useState([])
@@ -842,7 +842,7 @@ Jos kehitys- ja tuotantokonfiguraatio eriytyvät paljon, saattaa olla hyvä idea
 
 Tuotantoversiota eli bundlattua sovellusta on mahdollista kokeilla lokaalisti suorittamalla komento
 
-```js
+```bash
 npx static-server
 ```
 

@@ -100,7 +100,7 @@ The contents of the <i>package.json</i> file can e.g. be the following:
 
 Let's install webpack with the command:
 
-```js
+```bash
 npm install --save-dev webpack webpack-cli
 ```
 
@@ -123,7 +123,7 @@ module.exports = config
 
 We will then define a new npm script called <i>build</i> that will execute the bundling with webpack:
 
-```js
+```json
 // ...
 "scripts": {
   "build": "webpack --mode=development"
@@ -134,7 +134,7 @@ We will then define a new npm script called <i>build</i> that will execute the b
 
 Let's add some more code to the <i>src/index.js</i> file:
 
-```js
+```jsx
 const hello = name => {
   console.log(`hello ${name}`)
 }
@@ -235,13 +235,13 @@ The [output](https://webpack.js.org/concepts/#output) property defines the locat
 
 Next, let's transform our application into a minimal React application. Let's install the required libraries:
 
-```js
+```bash
 npm install --save react react-dom
 ```
 
 And let's turn our application into a React application by adding the familiar definitions in the <i>index.js</i> file:
 
-```js
+```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
@@ -251,7 +251,7 @@ ReactDOM.render(<App />, document.getElementById('root'))
 
 We will also make the following changes to the <i>App.js</i> file:
 
-```js
+```jsx
 import React from 'react'
 
 const App = () => (
@@ -286,7 +286,7 @@ When we bundle our application, we run into the following problem:
 
 The error message from webpack states that we may need an appropriate <i>loader</i> to bundle the <i>App.js</i> file correctly. By default, webpack only knows how to deal with plain JavaScript. Although we may have become unaware of it, we are actually using [JSX](https://facebook.github.io/jsx/) for rendering our views in React. To illustrate this, the following code is not regular JavaScript:
 
-```js
+```jsx
 const App = () => {
   return <div>hello webpack</div>
 }
@@ -344,7 +344,7 @@ The <i>test</i> property specifies that the loader is for files that have names 
 
 Let's install the loader and its required packages as a <i>development dependency</i>:
 
-```js
+```bash
 npm install @babel/core babel-loader @babel/preset-react --save-dev
 ```
 
@@ -352,7 +352,7 @@ Bundling the application will now succeed.
 
 If we make some changes to the <i>App</i> component and take a look at the bundled code, we notice that the bundled version of the component looks like this:
 
-```js
+```jsx
 const App = () =>
   react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(
     'div',
@@ -371,7 +371,7 @@ You can test the bundled application by opening the <i>build/index.html</i> file
 
 It's worth noting that if the bundled application's source code uses <i>async/await</i>, the browser will not render anything on some browsers. [Googling the error message in the console](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) will shed some light on the issue. We have to install one more missing dependency, that is [@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill):
 
-```
+```bash
 npm install --save @babel/polyfill
 ```
 
@@ -426,14 +426,14 @@ Let's add the [@babel/preset-env](https://babeljs.io/docs/plugins/preset-env/) p
 
 Let's install the preset with the command:
 
-```js
+```bash
 npm install @babel/preset-env --save-dev
 ```
 
 
 When we transpile the code it gets transformed into old-school JavaScript. The definition of the transformed <i>App</i> component looks like this:
 
-```js
+```jsx
 var App = function App() {
   return _react2.default.createElement('div', null, 'hello webpack')
 };
@@ -455,7 +455,7 @@ Let's add some CSS to our application. Let's create a new <i>src/index.css</i> f
 
 Then let's use the style in the <i>App</i> component:
 
-```js
+```jsx
 const App = () => {
   return (
     <div className="container">
@@ -507,7 +507,7 @@ If needed, the application's CSS can also be generated into its own separate fil
 
 When we install the loaders:
 
-```js
+```bash
 npm install style-loader css-loader --save-dev
 ```
 
@@ -519,13 +519,13 @@ The current configuration makes it possible to develop our application but the w
 
 The [webpack-dev-server](https://webpack.js.org/guides/development/#using-webpack-dev-server) offers a solution to our problems. Let's install it with the command:
 
-```js
+```bash
 npm install --save-dev webpack-dev-server
 ```
 
 Let's define an npm script for starting the dev-server:
 
-```js
+```json
 {
   // ...
   "scripts": {
@@ -564,7 +564,7 @@ The process for updating the code is fast. When we use the dev-server, the code 
 
 Let's extend the code by changing the definition of the <i>App</i> component as shown below:
 
-```js
+```jsx
 import React, {useState} from 'react'
 
 const App = () => {
@@ -597,7 +597,7 @@ The application works nicely and the development workflow is quite smooth.
 
 Let's extract the click handler into its own function and store the previous value of the counter into its own <i>values</i> state:
 
-```js
+```jsx
 const App = () => {
   const [counter, setCounter] = useState(0)
   const [values, setValues] = useState() // highlight-line
@@ -712,7 +712,7 @@ Starting from version 4 of webpack, the minification plugin does not require add
 
 When we bundle the application again, the size of the resulting <i>main.js</i> decreases substantially:
 
-```js
+```
 $ ls -l build/main.js
 -rw-r--r--  1 mluukkai  984178727  132299 Feb 16 11:33 build/main.js
 ```
@@ -755,7 +755,7 @@ The bundled file will then be configured to use the backend available at the <ht
 
 We will install <i>axios</i>, start the json-server, and then make the necessary changes to the application. For the sake of changing things up, we will fetch the notes from the backend with our [custom hook](/en/part5/custom_hooks) called _useNotes_:
 
-```js
+```jsx
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
@@ -877,7 +877,7 @@ module.exports = config
 
 The global constant is used in the following way in the code:
 
-```js
+```jsx
 const App = () => {
   const [counter, setCounter] = useState(0)
   const [values, setValues] = useState([])
@@ -900,7 +900,7 @@ If the configuration for development and production differs a lot, it may be a g
 
 We can inspect the bundled production version of the application locally by executing the following command in the <i>build</i> directory:
 
-```js
+```bash
 npx static-server
 ```
 

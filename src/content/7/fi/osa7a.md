@@ -31,7 +31,7 @@ Navigaatiopalkki ja useita näkymiä sisältävä sovellus on erittäin helppo t
 
 Seuraavassa on eräs tapa:
 
-```js
+```jsx
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
@@ -99,13 +99,13 @@ Reactissa on onneksi olemassa kirjasto [React router](https://github.com/ReactTr
 
 Muutetaan ylläoleva sovellus käyttämään React routeria. Asennetaan React router komennolla
 
-```js
+```bash
 npm install --save react-router-dom
 ```
 
 React routerin tarjoama reititys saadaan käyttöön muuttamalla sovellusta seuraavasti:
 
-```js
+```jsx
 import {
   BrowserRouter as Router,
   Switch, Route, Link
@@ -149,7 +149,7 @@ Reititys, eli komponenttien ehdollinen, selaimen <i>urliin perustuva</i> render�
 
 Huomaa, että vaikka komponenttiin viitataan nimellä <i>Router</i> kyseessä on [BrowserRouter](https://reacttraining.com/react-router/web/api/BrowserRouter), sillä importtaus tapahtuu siten, että importattava olio uudelleennimetään:
 
-```js
+```jsx
 import {
   BrowserRouter as Router, // highlight-line
   Switch, Route, Link
@@ -164,7 +164,7 @@ Normaalisti selain lataa uuden sivun osoiterivillä olevan urlin muuttuessa. [HT
 
 Routerin sisälle määritellään selaimen osoiteriviä muokkaavia <i>linkkejä</i> komponentin [Link](https://reacttraining.com/react-router/web/api/Link) avulla. Esim.
 
-```js
+```jsx
 <Link to="/notes">notes</Link>
 ```
 
@@ -172,7 +172,7 @@ luo sovellukseen linkin, jonka teksti on <i>notes</i> ja jonka klikkaaminen vaih
 
 Selaimen urliin perustuen renderöitävät komponentit määritellään komponentin [Route](https://reacttraining.com/react-router/web/api/Route) avulla. Esim.
 
-```js
+```jsx
 <Route path="/notes">
   <Notes />
 </Route>
@@ -182,7 +182,7 @@ määrittelee, että jos selaimen osoiteena on <i>/notes</i>, renderöidään ko
 
 Urliin perustuen renderöitävät komponentit on sijoitettu [Switch](https://reacttraining.com/react-router/web/api/Switch)-komponentin lapsiksi
 
-```js 
+```jsx
 <Switch>
   <Route path="/notes">
     <Notes />
@@ -200,7 +200,7 @@ Switch saa aikaan sen, että renderöitävä komponentti on ensimmäinen, jonka 
 
 Huomaa, että komponenttien järjestys on tärkeä. Jos laittaisimme ensimmäiseksi komponentin <i>Home</i>, jonka polku on <i> path="/"</i>, ei mitään muuta komponenttia koskaan renderöitäisi, sillä "olematon" polku on minkä tahansa polun alkuosa:
 
-```js 
+```jsx
 <Switch>
   <Route path="/"> // highlight-line
     <Home /> // highlight-line
@@ -225,7 +225,7 @@ Sovellus sisältää nyt viisi eri näkymää, joiden näkyvyyttä kontrolloidaa
 
 Nimen klikattavuus on toteutettu komponentilla <i>Link</i> ja esim. muistiinpanon, jonka id on 3 nimen klikkaaminen aiheuttaa selaimen osoitteen arvon päivittymisen muotoon <i>notes/3</i>:
 
-```js
+```jsx
 const Notes = ({notes}) => (
   <div>
     <h2>Notes</h2>
@@ -242,7 +242,7 @@ const Notes = ({notes}) => (
 
 Parametrisoitu url määritellään komponentissa <i>App</i> olevaan reititykseen seuraavasti:
 
-```js
+```jsx
 <Router>
   <div>
     <div>
@@ -270,13 +270,13 @@ Parametrisoitu url määritellään komponentissa <i>App</i> olevaan reitityksee
 
 Yksittäisen muistiinpanon näkymän renderöivä route siis määritellään "expressin tyyliin" merkkaamalla reitin parametrina oleva osa merkinnällä <i>:id</i>
 
-```js
+```jsx
 <Route path="/notes/:id">
 ```
 
 Kun selain siirtyy muistiinpanon yksilöivään osoitteeseen, esim. <i>/notes/3</i>, renderöidään komponentti <i>Note</i>:
 
-```js
+```jsx
 import {
   // ...
   useParams  // highlight-line
@@ -303,7 +303,7 @@ Sovellukseen on myös toteutettu erittäin yksinkertainen kirjautumistoiminto. J
 
 Mahdollisuus <i>Login</i>-näkymään navigointiin renderöidään menuun ehdollisesti
 
-```js
+```jsx
 <Router>
   <div>
     <Link style={padding} to="/">home</Link>
@@ -327,7 +327,7 @@ eli jos käyttäjä on kirjautunut, renderöidäänkin linkin <i>login</i> sijaa
 
 Kirjautumisesta huolehtivan komponentin koodi seuraavassa
 
-```js
+```jsx
 import {
   // ...
   useHistory // highlight-line
@@ -369,7 +369,7 @@ Käyttämämme react-router-kirjaston funktiot [useParams](https://reacttraining
 
 Näkymän <i>Users</i> routeen liittyy vielä eräs mielenkiintoinen detalji:
 
-```js
+```jsx
 <Route path="/users">
   {user ? <Users /> : <Redirect to="/login" />}
 </Route>
@@ -377,7 +377,7 @@ Näkymän <i>Users</i> routeen liittyy vielä eräs mielenkiintoinen detalji:
 
 Jos käyttäjä ei ole kirjautuneena, ei renderöidäkään näkymää <i>Users</i> vaan sen sijaan <i>uudelleenohjataan</i> käyttäjä <i>Redirect</i>-komponentin avulla kirjautumisnäkymään
 
-```js
+```jsx
 <Redirect to="/login" />
 ```
 
@@ -385,7 +385,7 @@ Todellisessa sovelluksessa olisi kenties parempi olla kokonaan näyttämättä n
 
 Seuraavassa vielä komponentin <i>App</i> koodi kokonaisuudessaan:
 
-```js
+```jsx
 const App = () => {
   const [notes, setNotes] = useState([
     // ...
@@ -446,7 +446,7 @@ Komponentti renderöi myös kokonaan <i>Router</i>:in ulkopuolella olevan web-so
 Sovelluksessa on eräs hieman ikävä seikka. Komponentti _Note_ saa propseina <i>kaikki muistiinpanot</i>, vaikka se näyttää niistä ainoastaan sen, jonka id vastaa urlin parametroitua osaa:
 
 
-```js
+```jsx
 const Note = ({ notes }) => { 
   const id = useParams().id
   const note = notes.find(n => n.id === Number(id))
@@ -456,7 +456,7 @@ const Note = ({ notes }) => {
 
 Olisiko mahdollista muuttaa sovellusta siten, että _Note_ saisi propsina ainoastaan näytettävän komponentin:
 
-```js
+```jsx
 const Note = ({ note }) => {
   return (
     <div>
@@ -472,7 +472,7 @@ Eräs tapa muuttaa sovellusta olisi selvittää näytettävän muistiinpanon _id
 
 <i>useRouteMatch</i>-hookin käyttö [ei ole](https://github.com/ReactTraining/react-router/issues/7015) mahdollista samassa komponentissa, joka määrittelee sovelluksen reititettävän osan. Siirretäänkin _Router_-komponenttien käyttö komponentin _App_ ulkopuolelle:
 
-```js
+```jsx
 ReactDOM.render(
   <Router> // highlight-line
     <App />
@@ -483,7 +483,7 @@ ReactDOM.render(
 
 Komponentti _App_ muuttuu seuraavasti:
 
-```js
+```jsx
 import {
   // ...
   useRouteMatch  // highlight-line
@@ -526,13 +526,13 @@ const App = () => {
 
 Joka kerta kun komponentti renderöidään, eli käytännössä myös aina kun sovelluksen osoiterivillä oleva url vaihtuu, suoritetaan komento
 
-```js
+```jsx
 const match = useRouteMatch('/notes/:id')
 ```
 
 Jos url on muotoa _/notes/:id_ eli vastaa yksittäisen muistiinpanon urlia, saa muuttuja _match_ arvokseen olion, jonka polun parametroitu osa, eli muistiinpanon id voidaan selvittää, ja näin saadaan haettua renderöitävä muistiinpano
 
-```js
+```jsx
 const note = match 
   ? notes.find(note => note.id === Number(match.params.id))
   : null

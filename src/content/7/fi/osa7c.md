@@ -27,13 +27,13 @@ Aloitetaan bootstrapista, käytetään kirjastoa [react-bootstrap](https://react
 
 Asennetaan kirjasto suorittamalla komento
 
-```js
+```bash
 npm install --save react-bootstrap
 ```
 
 Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään bootstrapin css-määrittelyt lataava rivi:
 
-```js
+```jsx
 <head>
   <link
     rel="stylesheet"
@@ -51,7 +51,7 @@ Kun sovellus ladataan uudelleen, näyttää se jo aavistuksen tyylikkäämmält�
 
 Bootstrapissa koko sivun sisältö renderöidään yleensä [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers):ina, eli käytännössä koko sovelluksen ympäröivä _div_-elementti merkitään luokalla _container_:
 
-```js
+```jsx
 const App = () => {
   // ...
 
@@ -69,7 +69,7 @@ Sovelluksen ulkoasu muuttuu siten, että sisältö ei ole enää yhtä kiinni se
 
 Muutetaan seuraavaksi komponenttia <i>Notes</i> siten, että se renderöi muistiinpanojen listan [taulukkona](https://getbootstrap.com/docs/4.1/content/tables/). React bootstrap tarjoaa valmiin komponentin [Table](https://react-bootstrap.github.io/components/table/), joten CSS-luokan käyttöön ei ole tarvetta.
 
-```js
+```jsx
 const Notes = (props) => (
   <div>
     <h2>Notes</h2>
@@ -99,7 +99,7 @@ Ulkoasu on varsin tyylikäs:
 
 Huomaa, että koodissa käytettävät React bootstrapin komponentit täytyy importata, eli koodiin on lisättävä:
 
-```js
+```jsx
 import { Table } from 'react-bootstrap'
 ```
 
@@ -109,7 +109,7 @@ Parannellaan seuraavaksi näkymän <i>Login</i> kirjautumislomaketta Bootstrapin
 
 React bootstrap tarjoaa valmiit [komponentit](https://react-bootstrap.github.io/components/forms/) myös lomakkeiden muodostamiseen (dokumentaatio tosin ei ole paras mahdollinen):
 
-```js
+```jsx
 let Login = (props) => {
   // ...
   return (
@@ -137,7 +137,7 @@ let Login = (props) => {
 
 Importoitavien komponenttien määrä kasvaa:
 
-```js
+```jsx
 import { Table, Form, Button } from 'react-bootstrap'
 ```
 
@@ -153,7 +153,7 @@ Toteutetaan sovellukseen kirjautumisen jälkeinen <i>notifikaatio</i>:
 
 Asetetaan notifikaatio kirjautumisen yhteydessä komponentin <i>App</i> tilan muuttujaan _message_:
 
-```js
+```jsx
 const App = () => {
   const [notes, setNotes] = useState([
     // ...
@@ -177,7 +177,7 @@ const App = () => {
 
 ja renderöidään viesti Bootstrapin [Alert](https://getbootstrap.com/docs/4.1/components/alerts/)-komponentin avulla. React bootstrap tarjoaa tähän jälleen valmiin [React-komponentin](https://react-bootstrap.github.io/components/alerts/):
 
-```js
+```jsx
 <div className="container">
 // highlight-start
   {(message &&
@@ -194,7 +194,7 @@ ja renderöidään viesti Bootstrapin [Alert](https://getbootstrap.com/docs/4.1/
 
 Muutetaan vielä lopuksi sovelluksen navigaatiomenu käyttämään Bootstrapin [Navbaria](https://getbootstrap.com/docs/4.1/components/navbar/). Tähänkin React bootstrap tarjoaa [valmiit komponentit](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly), dokumentaatio on hieman kryptistä, mutta trial and error johtaa lopulta toimivaan ratkaisuun:
 
-```js
+```jsx
 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
@@ -241,13 +241,13 @@ Tarkastellaan toisena esimerkkinä Googlen kehittämän "muotokielen" [Material 
 
 Asennetaan kirjasto suorittamalla komento
 
-```js
+```bash
 npm install --save @material-ui/core
 ```
 
 Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään MaterialUI:n css-määrittelyt lataava rivi:
 
-```js
+```jsx
 <head>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
   // ...
@@ -258,7 +258,7 @@ Tehdään nyt MaterialUI:n avulla koodiin suunnilleen samat muutokset, mitä tei
 
 Renderöidään koko sovelluksen sisältö komponentin [Container](https://material-ui.com/components/container/) sisälle:
 
-```js
+```jsx
 import Container from '@material-ui/core/Container'
 
 const App = () => {
@@ -273,7 +273,7 @@ const App = () => {
 
 Aloitetaan komponentista <i>Notes</i> ja renderöidään muistiinpanojen lista [taulukkona](https://material-ui.com/components/tables/#simple-table):
 
-```js
+```jsx
 const Notes = ({notes}) => (
   <div>
     <h2>Notes</h2>
@@ -304,7 +304,7 @@ Taulukko näyttää seuraavalta:
 
 Hienoinen ikävä piirre Material UI:ssa on se, että jokainen komponentti on importattava erikseen, muistiinpanojen sivun import-lista on aika pitkä:
 
-```js
+```jsx
 import {
   Container,
   Table,
@@ -320,7 +320,7 @@ import {
 
 Parannellaan seuraavaksi näkymän <i>Login</i> kirjautumislomaketta käyttäen komponentteja [TextField](https://material-ui.com/components/text-fields/) ja [Button](https://material-ui.com/api/button/):
 
-```js 
+```jsx
 const Login = (props) => {
   const history = useHistory()
 
@@ -363,7 +363,7 @@ Lomakkeen käyttämät komponentit on luonnollisesti importattava koodissa.
 
 Kirjautumisen jälkeisen notifikaation näyttämiseen sopii komponenetti [Alert](https://material-ui.com/components/alert/), joka on lähes samanlainen kuin bootstrapin vastaava komponentti: 
 
-```js
+```jsx
 <div>
 // highlight-start
   {(message &&
@@ -377,13 +377,13 @@ Kirjautumisen jälkeisen notifikaation näyttämiseen sopii komponenetti [Alert]
 
 Alert-komponentti ei ole vielä mukana MaterialUI:n core-pakkauksessa, ja komponentin sisältävä pakkaus [lab](https://material-ui.com/components/about-the-lab/) tulee asentaa sovellukseen:
 
-```js 
+```bash
 npm install --save @material-ui/lab
 ```
 
 Komponentti importataan seuraavasti
 
-```js 
+```jsx
 import { Alert } from '@material-ui/lab'
 ```
 
@@ -397,7 +397,7 @@ Navigaatiorakenne toteutetaan komponentin [AppBar](https://material-ui.com/compo
 
 Jos sovelletaan suoraan dokumentaation esimerkkiä  
 
-```js
+```jsx
 <AppBar position="static">
   <Toolbar>
     <IconButton edge="start" color="inherit" aria-label="menu">
@@ -429,7 +429,7 @@ Lueskelemalla [dokumentaatiota](https://material-ui.com/guides/composition/#rout
 
 Määrittelemällä
 
-```js
+```jsx
 <Button color="inherit" component={Link} to="/">
   home
 </Button>
@@ -439,7 +439,7 @@ renderöidään komponentti _Button_, siten että sen juurikomponenttina onkin r
 
 Navigaatiopalkin koodi kokonaisuudessaan on seuraava
 
-```js
+```jsx
 <AppBar position="static">
   <Toolbar>
     <Button color="inherit" component={Link} to="/">
@@ -477,7 +477,7 @@ Esimerkeissä käytettiin UI-frameworkeja niiden React-integraatiot tarjoavien k
 
 Sen sijaan että käytämme kirjastoa [react bootstrap](https://react-bootstrap.github.io/), olisimme voineet aivan yhtä hyvin käyttää [Bootstrapia](https://getbootstrap.com/) suoraan, liittämällä HTML-elementteihin CSS-luokkia. Eli sen sijaan että määrittelimme esim. taulukon komponentin <i>Table</i> avulla
 
-```js
+```jsx
 <Table striped>
   // ...
 </Table>
@@ -485,7 +485,7 @@ Sen sijaan että käytämme kirjastoa [react bootstrap](https://react-bootstrap.
 
 olisimme voineet käyttää normaalia HTML:n taulukkoa <i>table</i> ja Bootstrapin [määrittelemää](https://getbootstrap.com/docs/4.4/content/tables/) CSS-luokkaa
 
-```js
+```jsx
 <table className="table striped">
   // ...
 </table>
@@ -517,7 +517,7 @@ Mielenkiintoisen näkökulman tyylien määrittelyyn tarjoaa ES6:n [tagged templ
 
 Asennetaan styled-components ja tehdään sen avulla esimerkkisovellukseemme muutama tyylillinen muutos. Tehdään ensin kaksi tyylimäärittelyitä käytettävää komponenttia:
 
-```js
+```jsx
 import styled from 'styled-components'
 
 const Button = styled.button`
@@ -540,7 +540,7 @@ Tyylien määrittelyn syntaksi on varsin mielenkiintoinen, css-määrittelyt ase
 
 Määritellyt komponentit toimivat kuten normaali <i>button</i> ja <i>input</i> ja sovelluksessa käytetään niitä  normaaliin tapaan:
 
-```js
+```jsx
 const Login = (props) => {
   // ...
   return (
@@ -564,7 +564,7 @@ const Login = (props) => {
 
 Määritellään vielä seuraavat tyylien lisäämiseen tarkoitetut komponentit, jotka ovat kaikki rikastettuja versioita <i>div</i>-elementistä:
 
-```js
+```jsx
 const Page = styled.div`
   padding: 1em;
   background: papayawhip;
@@ -584,7 +584,7 @@ const Footer = styled.div`
 
 Otetaan uudet komponentit käyttöön sovelluksessa:
 
-```js
+```jsx
 const App = () => {
   // ...
 

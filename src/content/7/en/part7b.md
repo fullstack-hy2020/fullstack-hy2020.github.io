@@ -51,7 +51,7 @@ Custom hooks are regular JavaScript functions that can use any other hooks, as l
 
 We implemented a counter application in [part 1](/en/part1/component_state_event_handlers#event-handling), that can have its value incremented, decremented, or reset. The code of the application is as follows:
 
-```js  
+```jsx
 import React, { useState } from 'react'
 const App = (props) => {
   const [counter, setCounter] = useState(0)
@@ -105,7 +105,7 @@ Our custom hook uses the _useState_ hook internally to create its own state. The
 
 React components can use the hook as shown below:
 
-```js
+```jsx
 const App = (props) => {
   const counter = useCounter()
 
@@ -132,7 +132,7 @@ By doing this we can extract the state of the _App_ component and its manipulati
 
 The same hook could be <i>reused</i> in the application that was keeping track of the amount of clicks made to the left and right buttons:
 
-```js
+```jsx
 
 const App = () => {
   const left = useCounter()
@@ -159,7 +159,7 @@ The application creates <i>two</i> completely separate counters. The first one i
 
 Dealing with forms in React is somewhat tricky. The following application presents the user with a form that requests the user to input their name, birthday, and height:
 
-```js
+```jsx
 const App = () => {
   const [name, setName] = useState('')
   const [born, setBorn] = useState('')
@@ -225,7 +225,7 @@ The hook function receives the type of the input field as a parameter. The funct
 
 The hook can be used in the following way:
 
-```js
+```jsx
 const App = () => {
   const name = useField('text')
   // ...
@@ -251,14 +251,14 @@ const App = () => {
 
 We could simplify things a bit further. Since the _name_ object has exactly all of the attributes that the <i>input</i> element expects to receive as props, we can pass the props to the element using the [spread syntax](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) in the following way:
 
-```js
+```jsx
 <input {...name} /> 
 ```
 
 
 As the [example](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) in the React documentation states, the following two ways of passing props to a component achieve the exact same result:
 
-```js
+```jsx
 <Greeting firstName='Arto' lastName='Hellas' />
 
 const person = {
@@ -272,7 +272,7 @@ const person = {
 
 The application gets simplified into the following format:
 
-```js
+```jsx
 const App = () => {
   const name = useField('text')
   const born = useField('date')
@@ -389,14 +389,14 @@ If you see the warning in the console, make the necessary changes to get rid of 
 
 The reason for this warning is that after making the changes to your application, the following expression:
 
-```js
+```jsx
 <input {...content}/>
 ```
 
 
 Essentially, is the same as this:
 
-```js
+```jsx
 <input
   value={content.value} 
   type={content.type}
@@ -411,7 +411,7 @@ The <i>input</i> element should not be given a <i>reset</i> attribute.
 
 One simple fix would be to not use the spread syntax and write all of the forms like this:
 
-```js
+```jsx
 <input
   value={username.value} 
   type={username.type}
@@ -452,7 +452,7 @@ Note, that in this exercise it is essential to use useEffect's [second parameter
 
 The code of the application responsible for communicating with the backend of the note application of the previous parts looks like this:
 
-```js
+```jsx
 import axios from 'axios'
 const baseUrl = '/api/notes'
 
@@ -490,7 +490,7 @@ Extract the code for communicating with the backend into its own _useResource_ h
 
 You can do the exercise for the project found in the https://github.com/fullstack-hy2020/ultimate-hooks repository. The <i>App</i> component for the project is the following:
 
-```js
+```jsx
 const App = () => {
   const content = useField('text')
   const name = useField('text')

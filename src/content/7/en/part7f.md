@@ -69,7 +69,7 @@ The error message will occur if you refresh the page for an individual user.
 
 The cause of the issue is that when we navigate directly to the page of an individual user, the React application has not yet received the data from the backend. One solution for fixing the problem is to use conditional rendering:
 
-```js
+```jsx
 const User = () => {
   const user = ...
   // highlight-start

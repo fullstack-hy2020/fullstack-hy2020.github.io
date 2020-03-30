@@ -67,7 +67,7 @@ vika ilmenee jos uudelleenlataat sivun ollessasi yksittäisen käyttäjän sivul
 
 Vian syynä on se, että jos mennään suoraan jonkin käyttäjän sivulle, eivät käyttäjien tiedot ole vielä ehtineet palvelimelta React-sovellukseen. Ongelman voi kiertää ehdollisella renderöinnillä:
 
-```js
+```jsx
 const User = () => {
   const user = ...
   // highlight-start

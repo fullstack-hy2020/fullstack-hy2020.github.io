@@ -17,7 +17,7 @@ Tutustutaan nyt luokkakomponenttien tärkeimpiin ominaisuuksiin toteuttamalla j�
 
 Luokkakomponentin ensimmäinen versio näyttää seuraavalta
 
-```js
+```jsx
 import React from 'react'
 
 class App extends React.Component {
@@ -41,7 +41,7 @@ Komponentilla on nyt [konstruktori](https://reactjs.org/docs/react-component.htm
 
 Määritellään komponenttiin tila anekdoottien listalle sekä näkyvissä olevalle anekdootille. Toisin kuin [useState](https://reactjs.org/docs/hooks-state.html)-hookia käytettäessä, luokkakomponenteilla on ainoastaan yksi tila. Eli jos tila koostuu useista "osista", tulee osat tallettaa tilan kenttiin.  Tila alustetaan konstruktorissa:
 
-```js
+```jsx
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -78,7 +78,7 @@ Funktionaalisten komponenteille oikea paikka hakea palvelimella olevaa dataa ova
 
 Luokkakomponenttien [elinkaarimetodit](https://reactjs.org/docs/state-and-lifecycle.html#adding-lifecycle-methods-to-a-class) tarjoavat vastaavan toiminnallisuuden. Oikea paikka käynnistää tietojen haku palvelimelta on  elinkaarimetodi [componentDidMount](https://reactjs.org/docs/react-component.html#componentdidmount), joka suoritetaan kertaalleen heti komponentin ensimmäisen renderöitymisen jälkeen:
 
-```js
+```jsx
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -107,7 +107,7 @@ Metodin setState kutsuminen aiheuttaa aina luokkakomponentin uudelleenrenderöin
 
 Viimeistellään vielä komponentti siten, että näytettävä anekdootti on mahdollista vaihtaa. Seuraavassa koko komponentin koodi, lisäys korostettuna:
 
-```js
+```jsx
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -151,7 +151,7 @@ class App extends React.Component {
 
 Vertailun vuoksi sama sovellus funktionaalisena komponenttina:
 
-```js
+```jsx
 const App = () => {
   const [anecdotes, setAnecdotes] = useState([])
   const [current, setCurrent] = useState(0)
@@ -225,7 +225,7 @@ Reactin yhteydessä mainitaan usein käsite Virtual DOM. Mistä oikein on kyse? 
 
 Reactia käyttäessä ohjelmoija ei koskaan (tai parempi sanoa yleensä) manipuloi DOM:ia suoraan. React-komponenttin määrittelevä funktio palauttaa joukon [React-elementtejä](https://reactjs.org/docs/glossary.html#elements). Vaikka osa elementeistä näyttää normaaleilta HTML-elementeiltä
 
-```js
+```jsx
 const element = <h1>Hello, world</h1>
 ```
 
@@ -235,7 +235,7 @@ Sovelluksen komponenttien ulkoasun määrittelevät React-elementit muodostavat 
 
 [ReactDOM](https://reactjs.org/docs/react-dom.html)-kirjaston avulla komponenttien määrittelevä virtuaalinen DOM renderöidään oikeaksi DOM:iksi eli DOM API:n avulla selaimen näytettäväksi:
 
-```js
+```jsx
 ReactDOM.render(
   <App />,
   document.getElementById('root')
@@ -268,7 +268,7 @@ Listaykkösenä on <i>injection</i>, joka tarkoittaa sitä, että sovellukseen e
 
 Esim. jos ei-turvallisessa koodissa tehtäisiin seuraavasti muotoiltu SQL-kysely:
 
-```js
+```jsx
 let query = "SELECT * FROM Users WHERE name = '" + userName + "';"
 ```
 
@@ -321,7 +321,7 @@ Riippuvuuksien turvallisuus voidaan tarkistaa npm:n [audit](https://docs.npmjs.c
 Komennon _npm audit_ suorittaminen viime vuoden osan 4 mallivastaukselle antaa pitkän listan valituksia ja korjausehdotuksia. Seuraavassa osa raportista:
 
 
-```js
+```
 $ bloglist-backend npm audit
 
                        === npm audit security report ===
@@ -380,7 +380,7 @@ found 416 vulnerabilities (65 low, 2 moderate, 348 high, 1 critical) in 20047 sc
 
 Reilun vuoden ikäinen koodi on siis täynnä pieniä tietoturvauhkia, kriittisiä uhkia on onneksi ainoastaan 1. Suoritetaan raportin suosittelema operaatio _npm audit fix_:
 
-```js
+```
 $ bloglist-backend npm audit fix
 
 + mongoose@5.9.1
@@ -392,20 +392,20 @@ fixed 354 of 416 vulnerabilities in 20047 scanned packages
 
 Haavoittuvuuksia jää vielä 62, sillä _audit fix_ ei tee oletusarvoisesti versiopäivitystä kirjastolle, jonka <i>major</i>-versionumero on kasvanut. Tälläisen riippuvuuden päivitys saattaa aiheuttaa sovelluksen hajoamisen. Ongelmat aiheuttaa testauskirjasto jestin versio, joka on sovelluksessa 23.6.0 kun taas turvallinen versio olisi 25.1.0. Koska jest on ainoastaan kehitysaikainen riippuvuus, ei vaaraa oikeastaan ole, mutta päivitetään myös se:
 
-```js
+```bash
 npm install --save-dev jest@25.1.0 
 ```
 
 Päivityksen jälkeen tilanne näyttää hyvältä
 
-```js
+```
  $ blogs-backend npm audit
 
                        === npm audit security report ===
 
 found 0 vulnerabilities
  in 1204443 scanned packages
-```                                                                    
+```
 
 Eräs OWASP:in listan mainitsemista uhista on <i>Broken Authentication</i> ja siihen liittyvä <i>Broken Access Control</i>. Käyttämämme token-perustainen autentikointi on kohtuullisen robusti, jos sovellusta käytetään tietoliikenteen salaavalla HTTPS-protokollalla. Access Controlin eli pääsynhallinnan toteuttamisessa on aina syytä muistaa tehdä esim. käyttäjän identiteetin tarkastus selaimen lisäksi myös palvelimella. Huonoa tietoturvaa olisi estää jotkut toimenpiteet ainoastaan piilottamalla niiden suoritusmahdollisuus selaimessa olevasta koodista.
 

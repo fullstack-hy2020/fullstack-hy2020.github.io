@@ -46,7 +46,7 @@ Custom-hookit ovat tavallisia Javascript-funktioita, jotka voivat kutsua mitä t
 
 Teimme [osassa 1](/osa1/komponentin_tila_ja_tapahtumankasittely#tapahtumankasittely) laskurin, jonka arvoa voi kasvattaa, vähentää ja nollata. Sovelluksen koodi on seuraava
 
-```js  
+```jsx
 import React, { useState } from 'react'
 const App = (props) => {
   const [counter, setCounter] = useState(0)
@@ -70,7 +70,7 @@ const App = (props) => {
 
 Eriytetään laskurilogiikka custom-hookiksi. Hookin koodi on seuraavassa
 
-```js
+```jsx
 const useCounter = () => {
   const [value, setValue] = useState(0)
 
@@ -99,7 +99,7 @@ Hook siis käyttää sisäisesti _useState_-hookia luomaan itselleen tilan. Hook
 
 React-komponentti käyttää hookia seuraavaan tapaan:
 
-```js
+```jsx
 const App = (props) => {
   const counter = useCounter()
 
@@ -124,8 +124,7 @@ Näin komponentin _App_ tila ja sen manipulointi on siirretty kokonaisuudessaan 
 
 Samaa hookia voitaisiin <i>uusiokäyttää</i> sovelluksessa joka laski vasemman ja oikean napin painalluksia:
 
-```js
-
+```jsx
 const App = () => {
   const left = useCounter()
   const right = useCounter()
@@ -149,7 +148,7 @@ Nyt sovellus luo <i>kaksi</i> erillistä laskuria, toisen käsittelyfunktioineen
 
 Lomakkeiden käsittely on Reactissa jokseenkin vaivalloista. Seuraavassa sovellus, joka pyytää lomakkeella käyttäjän nimen, syntymäajan ja pituuden:
 
-```js
+```jsx
 const App = () => {
   const [name, setName] = useState('')
   const [born, setBorn] = useState('')
@@ -191,7 +190,7 @@ Jokaista lomakkeen kenttää varten on oma tilansa. Jotta tila pysyy synkrooniss
 
 Määritellään custom-hook _useField_, joka yksinkertaistaa lomakkeen tilan hallintaa:
 
-```js
+```jsx
 const useField = (type) => {
   const [value, setValue] = useState('')
 
@@ -211,7 +210,7 @@ Hook-funktio saa parametrina kentän tyypin. Funktio palauttaa kaikki <i>input</
 
 Hookia voidaan käyttää seuraavalla tavalla:
 
-```js
+```jsx
 const App = () => {
   const name = useField('text')
   // ...
@@ -235,14 +234,14 @@ const App = () => {
 
 Pääsemme itseasiassa helpommalla. Koska oliolla _name_ on nyt täsmälleen ne kentät, mitä <i>input</i>-komponentti odottaa saavansa propsina, voimme välittää propsit hyödyntäen [spread-syntaksia](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes), seuraavasti:
 
-```js
+```jsx
 <input {...name} /> 
 ```
 
 Eli kuten Reactin dokumentaation [esimerkki](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) sanoo, seuraavat kaksi tapaa välittää propseja komponentille tuottavat saman lopputuloksen:
 
 
-```js
+```jsx
 <Greeting firstName='Arto' lastName='Hellas' />
 
 const person = {
@@ -255,7 +254,7 @@ const person = {
 
 Sovellus pelkistyy muotoon
 
-```js
+```jsx
 const App = () => {
   const name = useField('text')
   const born = useField('date')
@@ -309,7 +308,7 @@ Talleta hook tiedostoon <i>/src/hooks/index.js</i>.
 
 Jos käytät normaalisti käyttämämme default exportin sijaan [nimettyä exportia](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description)
 
-```js
+```jsx
 import { useState } from 'react'
 
 export const useField = (type) => { // highlight-line
@@ -334,7 +333,7 @@ export const useAnotherHook = () => { // highlight-line
 
 [importtaus](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) tapahtuu seuraavasti
 
-```js
+```jsx
 import  { useField } from './hooks'
 
 const App = () => {
@@ -366,13 +365,13 @@ Muussa tapauksessa tee sovellukseen korjaus, joka poistaa varoituksen `Invalid v
 
 Warningin syynä on siis se, että edellisen tehtävän laajennuksen jälkeen seuraava
 
-```js
+```jsx
 <input {...content}/>
 ```
 
 tarkoittaa samaa kuin
 
-```js
+```jsx
 <input
   value={content.value} 
   type={content.type}
@@ -385,7 +384,7 @@ Elementille <i>input</i> ei kuitenkaan kuuluisi antaa propsia <i>reset</i>
 
 Yksinkertainen korjaus olisi tietysti olla käyttämättä spread-syntaksia ja kirjoittaa kaikki lomakkeet seuraavasti
 
-```js
+```jsx
 <input
   value={username.value} 
   type={username.type}
@@ -419,7 +418,7 @@ Huomaa, että tässä tehtävässä on oleellista hyödyntää useEffectin [tois
 
 Aiempien osien materiaalissa kehitetyn muistiinpanosovelluksen palvelimen kanssa keskusteleva koodi näyttää seuraavalta:
 
-```js
+```jsx
 import axios from 'axios'
 const baseUrl = '/api/notes'
 
@@ -457,7 +456,7 @@ Eristä kommunikoiva koodi hookiksi _useResource_. Riittää, että kaikkien oli
 
 Voit tehdä tehtävän repositoriosta https://github.com/fullstack-hy2020/ultimate-hooks löytyvään projektiin. Projektin komponentti <i>App</i> on seuraavassa:
 
-```js
+```jsx
 const App = () => {
   const content = useField('text')
   const name = useField('text')
