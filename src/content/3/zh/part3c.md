@@ -11,7 +11,8 @@ lang: zh
 <!-- Before we move into the main topic of persisting data in a database, we will take a look at a few different ways of debugging Node applications. -->
 在讨论在数据库中保存数据的主题之前，我们将看一下调试 Node 应用的几种不同方法。
 
-### 调试Node应用（Debugging Node applications ）
+### Debugging Node applications 
+【调试Node应用】
 <!-- Debugging Node applications is slightly more difficult than debugging JavaScript running in your browser. Printing to the console is a tried and true method, and it's always worth doing. There are people who think that more sophisticated methods should be used instead, but I disagree. Even the world's elite open source developers [use](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) this [method](https://swizec.com/blog/javascript-debugging-slightly-beyond-console-log/swizec/6633). -->
 调试 Node 应用比调试在浏览器中运行的 JavaScript 稍微困难一些。 将数据打印到控制台是一种可靠的方法，而且总是值得一试。 有些人认为应该用更复杂的方法来代替，但我不同意。 即使是世界上最顶尖的开源开发者也会使用 [use](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) 这种方法[method](https://swizec.com/blog/javascript-debugging-slightly-beyond-console-log/swizec/6633)。
 
@@ -40,7 +41,8 @@ lang: zh
 <!-- For some reason, I don't use the Visual Studio Code debugger a whole lot. -->
 出于某种原因，我并不经常使用 Visual Studio Code 调试器。
 
-#### Chrome dev tools Chrome开发工具
+#### Chrome dev tools
+【Chrome开发工具】
 <!-- Debugging is also possible with the Chrome developer console by starting your application with the command: -->
 利用 Chrome 开发者控制台，通过如下命令启动应用，也可以进行调试:
 
@@ -64,7 +66,8 @@ node --inspect index.js
 ![](../../images/3/39ea.png)
 
 
-####  质疑一切（Question everything）
+### Question everything
+【质疑一切】
 <!-- Debugging Full Stack applications may seem tricky at first. Soon our application will also have a database in addition to the frontend and backend, and there will be many potential areas for bugs in the application. -->
 调试全栈应用起初可能看起来很棘手。 不久，我们的应用除了前端和后端之外，还将有一个数据库，并且应用中将有许多潜在的 bug。
 
@@ -274,7 +277,8 @@ const Note = mongoose.model('Note', noteSchema)
 <!-- The idea behind Mongoose is that the data stored in the database is given a <i>schema at the level of the application</i> that defines the shape of the documents stored in any given collection. -->
 Mongoose 背后的思想是，存储在数据库中的数据在<i>application</i>  级别上被赋予一个<i>schema </i>，该模式定义了存储在任何给定集合中的文档的形状。 
 
-### Creating and saving objects 创建和保存对象
+### Creating and saving objects
+【创建和保存对象】
 <!-- Next, the application creates a new note object with the help of the <i>Note</i> [model](http://mongoosejs.com/docs/models.html): -->
 接下来，应用在<i>Note</i> [ model ]( http://mongoosejs.com/docs/models.html )的帮助下创建一个新的 Note 对象:
 
@@ -311,7 +315,9 @@ note.save().then(result => {
 <!-- **NB** unfortunately the Mongoose documentation uses callbacks in its examples, so it is not recommended to copy paste code directly from there. Mixing promises with old-school callbacks in the same code is not recommended.  -->
 遗憾的是 Mongoose 文档在其示例中使用了回调函数，因此不建议直接从那里复制粘贴代码。 不建议在同一代码中将承诺与老式的回调混合使用。
 
-### Fetching objects from the database 从数据库中获取对象
+### Fetching objects from the database
+【从数据库中获取对象】
+
 <!-- Let's comment out the code for generating new notes and replace it with the following: -->
 让我们注释掉生成新便笺的代码，并用如下代码替换它:
 
@@ -440,7 +446,8 @@ Person
 <div class="content">
 
 
-###  后端连接到数据库（Backend connected to a database）
+### Backend connected to a database
+【后端连接到数据库】
 <!-- Now we have enough knowledge to start using Mongo in our application. -->
 现在我们有足够的知识，可以在我们的应用中使用 Mongo了。
 
@@ -514,7 +521,8 @@ app.get('/api/notes', (request, response) => {
 <!-- Now the _notes_ variable is assigned to an array of objects returned by Mongo. When we call <em>notes.map(note => note.toJSON())</em> the result is a new array, where every item from the old one is mapped to a new object with the _toJSON_ method. -->
 现在，notes 变量被分配给 Mongo 返回的对象数组。 当我们调用<em>notes.map(note => note.toJSON())</em> 时，结果是一个新数组，其中旧数组中的每个项都用 toJSON 方法映射到一个新对象。
 
-###  数据库逻辑配置到单独的模块（Database configuration into its own module）
+### Database configuration into its own module
+【数据库逻辑配置到单独的模块】
 <!-- Before we refactor the rest of the backend to use the database, let's extract the Mongoose specific code into its own module. -->
 在我们重构后端的其余部分来使用数据库之前，让我们将 Mongoose 特定的代码提取到它自己的模块中。
 
@@ -649,7 +657,8 @@ app.listen(PORT, () => {
 <!-- It's important that <i>dotenv</i> gets imported before the <i>note</i> model is imported. This ensures that the environment variables from the <i>.env</i> file are available globally before the code from the other modules are imported. -->
 在导入<i>note</i> 模型之前导入<i>dotenv</i> 非常重要。 这样可以确保在导入其他模块的代码之前，  <i>.env</i> 文件是全局可用的。
 
-### 在路由处理程序中使用数据库（Using database in route handlers）
+### Using database in route handlers
+【在路由处理程序中使用数据库】
 <!-- Next, let's change the rest of the backend functionality to use the database. -->
 接下来，让我们更改后端功能的其余部分来使用数据库。
 
@@ -697,7 +706,8 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-### 验证前端和后端的集成（Verifying frontend and backend integration ）
+### Verifying frontend and backend integration 
+【验证前端和后端的集成】
 <!-- When the backend gets expanded, it's a good idea to test the backend first with **the browser, Postman or the VS Code REST client**. Next, let's try creating a new note after taking the database into use: -->
 当后端扩展时，最好先用 **浏览器，Postman 或者 VS Code REST 客户端 **来测试后端。 接下来，让我们尝试在使用数据库之后创建一个新的便笺:
 
@@ -748,7 +758,8 @@ app.get('/api/notes/:id', (request, response) => {
 <div class="content">
 
 
-### Error handling 错误处理
+### Error handling
+【错误处理】
 <!-- If we try to visit the URL of a note with an id that does not actually exist e.g. <http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431> where <i>5a3b80015b6ec6f1bdf68d</i> is not an id stored in the database, then the browser will simply get "stuck" since the server never responds to the request. -->
 如果我们试图向数据库访问一个实际上并不存在的 id 的便笺的 URL，比如 http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431，其中<i>5a3b80015b6ec6f1bdf68d</i> 不是一个存储在数据库中的 id，那么浏览器将简单地“卡住” ，因为服务器无法响应请求。
 
@@ -866,7 +877,8 @@ app.get('/api/notes/:id', (request, response) => {
 ![](../../images/3/15b.png)
 
 
-### 将错误处理移入中间件（Moving error handling into middleware ）
+### Moving error handling into middleware 
+【将错误处理移入中间件】
 <!-- We have written the code for the error handler among the rest of our code. This can be a reasonable solution at times, but there are cases where it is better to implement all error handling in a single place. This can be particularly useful if we later on want to report data related to errors to an external error tracking system like [Sentry](https://sentry.io/welcome/). -->
 我们在代码的其余部分中编写了错误处理程序的代码。 有时这可能是一个合理的解决方案，但在某些情况下，最好在单个位置实现所有错误处理。 如果我们以后想要将与错误相关的数据报告给外部的错误跟踪系统，比如[  [Sentry](https://sentry.io/welcome/)，那么这么做就特别有用。
 
@@ -910,7 +922,8 @@ app.use(errorHandler)
 <!-- The error handler checks if the error is a <i>CastError</i> exception, in which case we know that the error was caused by an invalid object id for Mongo. In this situation the error handler will send a response to the browser with the response object passed as a parameter. In all other error situations, the middleware passes the error forward to the default Express error handler.  -->
 错误处理程序检查错误是否是<i>CastError</i> 异常，在这种情况下，我们知道错误是由 Mongo 的无效对象 id 引起的。 在这种情况下，错误处理程序将向浏览器发送响应，并将response对象作为参数传递。 在所有其他错误情况下，中间件将错误转发给缺省的 Express 错误处理程序。
 
-### 中间件加载顺序（The order of middleware loading ）
+### The order of middleware loading 
+【中间件加载顺序】
 <!-- The execution order of middleware is the same as the order that they are loaded into express with the _app.use_ function. For this reason it is important to be careful when defining middleware. -->
 中间件的执行顺序与通过 app.use 函数加载到 express 中的顺序相同。 出于这个原因，在定义中间件时一定要小心。
 
@@ -982,7 +995,9 @@ app.get('/api/notes', (request, response) => {
 <!-- Now the handling of unknown endpoints is ordered <i>before the HTTP request handler</i>. Since the unknown endpoint handler responds to all requests with <i>404 unknown endpoint</i>, no routes or middleware will be called after the response has been sent by unknown endpoint middleware. The only exception to this is the error handler which needs to come at the very end, after the unknown endpoints handler. -->
 现在，对未知端点的处理先于 HTTP 请求处理程序。 由于未知端点处理程序使用<i>404未知端点</i> 响应所有请求，在未知端点中间件发送响应之后，将不会调用任何路由或中间件。 唯一的例外是错误处理程序，它需要出现在未知的端点处理程序之后的最后一个端点。
 
-### Other operations 其他操作
+### Other operations
+【其他操作】
+
 <!-- Let's add some missing functionality to our application, including deleting and updating an individual note. -->
 让我们为我们的应用添加一些缺失的功能，包括删除和更新单个便笺。
 

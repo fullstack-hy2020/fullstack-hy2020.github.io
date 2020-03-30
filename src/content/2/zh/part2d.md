@@ -33,7 +33,8 @@ Json-server 与 REST API 的教科书[定义]( https://en.wikipedia.org/wiki/rep
 <!-- json-server requires all data to be sent in JSON format. What this means in practice is that the data must be a correctly formatted string, and that the request must contain the <i>Content-Type</i> request header with the value <i>application/json</i>. -->
 Json-server 要求以 JSON 格式发送所有数据。 实际上，这意味着数据必须是格式正确的字符串，并且请求必须包含值为<i>application/json</i> 的<i>Content-Type</i> 请求头。 
 
-### 发送数据到服务器（Sending Data to the Server ）
+### Sending Data to the Server 
+【发送数据到服务器】
 <!-- Let's make the following changes to the event handler responsible for creating a new note: -->
 让我们对负责创建新便笺的事件处理进行如下更改:
 
@@ -133,7 +134,9 @@ addNote = event => {
 我们应用当前状态的代码可以在[github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-5)上的<i>part2-5</i> 分支中找到。
 
 
-### Changing the importance of notes 改变便笺的重要性
+### Changing the importance of notes
+【改变便笺的重要性】
+
 <!-- Let's add a button to every note that can be used for toggling its importance. -->
 让我们为每个便笺添加一个按钮，用于切换它的重要性。
 
@@ -309,8 +312,9 @@ Map 方法通过将旧数组中的每个项映射到新数组中的一个项来�
 <!-- This <em>map</em> trick may seem a bit strange at first, but it's worth spending some time wrapping your head around it. We will be using this method many times throughout the course. -->
 这个<em>map</em> 技巧起初可能看起来有点奇怪，但是它值得你花一些时间去理解它。 在整个课程中，我们将多次使用这种方法。
 
+### Extracting communication with the backend into a separate module
+【将与后端的通信提取到单独的模块中】
 
-### 将与后端的通信提取到单独的模块中
 <!-- The <i>App</i> component has become somewhat bloated after adding the code for communicating with the backend server. In the spirit of the [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), we deem it wise to extract this communication into its own [module](/en/part2/rendering_a_collection_modules#refactoring-modules). -->
 在添加了用于与后端服务器通信的代码之后，<i>App</i> 组件变得有些臃肿。 本着[单一职责原则]( https://en.wikipedia.org/wiki/single_responsibility_principle )的精神，我们认为将这种通信提取到它自己的[模块](/en/part2/rendering_a_collection_modules#refactoring-modules)是明智的。
 
@@ -555,7 +559,8 @@ const App = () => {
 承诺Promise是现代 JavaScript 开发的核心，强烈建议投入合理的时间来理解它们。
 
 
-### 用于定义对象字面量的更清晰的语法（Cleaner syntax for defining object literals ）
+### Cleaner syntax for defining object literals 
+【用于定义对象字面量的更清晰的语法】
 
 <!-- The module defining note related services currently exports an object with the properties <i>getAll</i>, <i>create</i> and <i>update</i> that are assigned to functions for handling notes. -->
 定义便笺相关服务的模块目前导出一个具有属性<i>getAll</i>、<i>create</i> 和<i>update</i> 的对象，这些属性分配给处理便笺的函数。
@@ -677,7 +682,8 @@ const person = { name, age }
 两个表达式的结果是相同的。 它们都创建了一个值为<i>Leevi</i> 的<i>name</i> 属性和值为<i>0</i> 的<i>age</i> 属性的对象。
 
 
-### 承诺和错误（Promises and errors ）
+### Promises and errors 
+【承诺和错误】
 
 <!-- If our application allowed users to delete notes, we could end up in a situation where a user tries to change the importance of a note that has already been deleted from the system. -->
 如果我们的应用允许用户删除便笺，那么我们可能会出现这样的情况: 用户试图更改已经从系统中删除的便笺的重要性。

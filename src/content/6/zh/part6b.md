@@ -38,7 +38,8 @@ export default noteReducer
 ```
 
 
-### 复杂状态的储存（Store with complex state ）
+### Store with complex state 
+【复杂状态的储存】
 <!-- Let's implement filtering for the notes that are displayed to the user. The user interface for the filters will be implemented with [radio buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio): -->
 让我们实现对显示给用户的便笺的过滤。 用户界面的过滤器将实现[单选按钮]( https://developer.mozilla.org/en-us/docs/web/html/element/input/radio ) :
 
@@ -102,7 +103,8 @@ const App = () => {
 <!-- Only the array of notes is stored in the state of the current implementation of our application. In the new implementation the state object has two properties, <i>notes</i> that contains the array of notes and <i>filter</i> that contains a string indicating which notes should be displayed to the user. -->
 只有便笺数组存储在应用的当前实现的状态中。 在新的实现中，state 对象有两个属性，, <i>notes</i> <i>包含 notes 数组， <i>filter</i> 包含一个字符串，说明应该向用户显示哪些便笺。
 
-### 复合reducer（Combined reducers ）
+### Combined reducers 
+【复合reducer】
 <!-- We could modify our current reducer to deal with the new shape of the state. However, a better solution in this situation is to define a new separate reducer for the state of the filter: -->
 我们可以修改现有的reducer来适应新的状态。 不过，在这种情况下，一个更好的解决方案是为过滤器的状态定义一个新的单独的 reducer:
 
@@ -250,7 +252,8 @@ const filterReducer = (state = 'ALL', action) => {
 我们的代码中有错误吗？ 没有。 组合reducer的工作方式使得每个<i>动作</i> 在组合reducer的每个 部分都得到处理。 通常只有一个reducer对任何给定的动作感兴趣，但是在有些情况下，多个reducer根据相同的动作改变它们各自的状态部分。
 
 
-###  完成过滤器（Finishing the filters）
+### Finishing the filters
+【完成过滤器】
 <!-- Let's finish the application so that it uses the combined reducer. We start by changing the rendering of the application and hooking up the store to the application in the <i>index.js</i> file: -->
 让我们完成应用，使用组合reducer。 我们首先修改应用的渲染方式，并将存储区挂接到<i>index.js</i> 文件中的应用:
 

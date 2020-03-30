@@ -10,7 +10,8 @@ lang: zh
 <!-- We are approaching the end of the course. Let's finish by having a look at a few more details of GraphQL.  -->
 我们正在接近课程的终点。 让我们看一下 GraphQL 的更多细节，以此作为结束。
 
-### fragments 碎片
+### fragments
+【碎片】
 <!-- It is pretty common in GraphQL that multiple queries return similar results. For example the query for the details of a person -->
 在 GraphQL 中，多个查询返回相似的结果是很常见的。 例如，查询某人的详细信息
 
@@ -133,7 +134,9 @@ const ALL_PERSONS = gql`
 `
 ```
 
-### Subscriptions 订阅
+### Subscriptions
+【订阅】
+
 <!-- Along with query- and mutation types, GraphQL offers a third operation type: [subscriptions](https://www.apollographql.com/docs/react/data/subscriptions/). With subscriptions clients can <i>subscribe to</i> updates about changes in the server.  -->
 除了查询和变异类型之外，GraphQL 还提供了第三种操作类型: [订阅](订阅 https://www.apollographql.com/docs/react/data/subscriptions/ )。 通过订阅客户端，我可以订阅 / 更新服务器中的更改。
 
@@ -149,7 +152,8 @@ const ALL_PERSONS = gql`
 <!-- Technically speaking the HTTP-protocol is not well suited for communication from the server to the browser, so under the hood Apollo uses [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) for server subscriber communication.  -->
 严格来说，http 协议并不适合于从服务器到浏览器的通信，因此 Apollo 在内部使用[ websocket ]( https://developer.mozilla.org/en-us/docs/web/api/websockets_api )进行服务器订户通信。
 
-### Subscriptions on the server 服务器上的订阅
+### Subscriptions on the server
+【服务器上的订阅】
 <!-- Let's implement subscriptions for subscribing for notifications about new persons added. -->
 让我们实现订阅，以订阅关于添加的新用户的通知。
 
@@ -252,7 +256,7 @@ Subscriptions ready at ws://localhost:4000/graphql
 后端代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-6) ，branch<i>part8-6</i> 上找到。
 
 ### Subscriptions on the client
-客户端的订阅
+【客户端的订阅】
 
 <!-- In order to use subscriptions in our React application, we have to do some changes, especially on its [configuration]((https://www.apollographql.com/docs/react/v3.0-beta/data/subscriptions/). -->
 为了在我们的 React 应用中使用订阅，我们必须做一些更改，特别是在它的[配置](( https://www.apollographql.com/docs/React/v3.0-beta/data/subscriptions/ )上。
@@ -444,7 +448,8 @@ const PersonForm = ({ setError, updateCacheWith }) => { // highlight-line
 <!-- The final code of the client can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-9), branch <i>part8-9</i>. -->
 客户端的最终代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-9) ，branch<i>part8-9</i> 上找到。
 
-### n+1-problem n + 1-问题
+### n+1-problem
+【n + 1-问题】
 <!-- Let's add some things to the backend. Let's modify the schema so that a <i>Person</i> type has a _friendOf_ field, which tells whose friends list the person is on.  -->
 让我们在后端添加一些东西。 让我们修改模式，使<i>Person</i> 类型有一个 friendOf 字段，该字段告诉该人所在的好友列表。
 
@@ -638,7 +643,7 @@ Facebook's[ DataLoader ]( https://github.com/Facebook/DataLoader )库为 n + 1�
 更多关于使用 DataLoader 和 Apollo 服务器的信息[这里]( https://www.robinwieruch.de/graphql-Apollo-server-tutorial/#graphql-server-data-loader-caching-batching )和[这里]( http://www.petecorey.com/blog/2017/08/14/batching-graphql-queries-with-DataLoader/ )。
 
 ### Epilogue
-后记
+【后记】
 
 
 

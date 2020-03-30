@@ -297,7 +297,9 @@ setNewNote('')
 <!-- You can find the code for our current application in its entirety in the <i>part2-2</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part2-2). -->
 您可以在[Github 仓库](https://github.com/fullstack-hy2020/part2-notes/tree/part2-2)的<i>part2-2</i> 分支中找到我们当前应用的全部代码。
 
-### Filtering Displayed Elements 过滤显示的元素
+### Filtering Displayed Elements
+【过滤显示的元素】
+
 <!-- Let's add some new functionality to our application that allows us to only view the important notes. -->
 让我们为我们的应用添加一些新的功能，允许我们只查看重要的便笺。
 

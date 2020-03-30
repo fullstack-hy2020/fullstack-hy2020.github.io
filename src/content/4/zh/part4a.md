@@ -12,7 +12,8 @@ lang: zh
 让我们继续我们在[part 3](/en/part3)中开始做的便笺应用后端的工作。
 
 
-### Project structure 项目结构
+### Project structure
+【项目结构】
 <!-- Before we move into the topic of testing, we will modify the structure of our project to adhere to Node.js best practices. -->
 在我们进入测试主题之前，我们将修改我们项目的结构，以遵循 Node.js 的最佳实践。
 
@@ -453,7 +454,8 @@ app.listen(PORT, () => {
 
 
 
-### 测试 Node 应用（Testing Node applications ）
+### Testing Node applications 
+【测试 Node 应用】
 <!-- We have completely neglected one essential area of software development, and that is automated testing. -->
 我们完全忽略了软件开发的一个基本领域，那就是自动化测试。
 

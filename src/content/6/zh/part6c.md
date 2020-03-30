@@ -355,7 +355,8 @@ export const createNote = (data) => {
 <div class="content">
 
 
-###  异步操作和 redux thunk（Asynchronous actions and redux thunk）
+### Asynchronous actions and redux thunk
+【异步操作和 redux thunk】
 <!-- Our approach is OK, but it is not great that the communication with the server happens inside the functions of the components. It would be better if the communication could be abstracted away from the components, such that they don't have to do anything else but call the appropriate <i>action creator</i>. As an example, <i>App</i> would initialize the state of the application as follows: -->
 我们的方法是可行的，但是与服务器的通信发生在组件的功能内部并不是很好。 如果能够将通信从组件中抽象出来就更好了，这样它们就不必做任何其他事情，只需调用适当的<i>action creator</i>。 例如，<i>App</i> 将应用的状态初始化如下:
 

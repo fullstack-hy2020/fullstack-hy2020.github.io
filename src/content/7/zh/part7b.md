@@ -60,7 +60,8 @@ Create-react-app 已经配置好了规则[ eslint-plugin-react-hooks ]( https://
 ![](../../images/7/60ea.png)
 
 
-### 定制Hook（Custom hooks ）
+### Custom hooks 
+【定制Hook】
 <!-- React offers the option to create our own [custom](https://reactjs.org/docs/hooks-custom.html) hooks. According to React, the primary purpose of custom hooks is to facilitate the reuse of the logic used in components. -->
 React 提供了创建我们自己的[自定义]( https://reactjs.org/docs/hooks-custom.html )Hook的选项。 根据 React，自定义Hook的主要目的是促进组件中使用的逻辑的重用。 
 
@@ -271,7 +272,8 @@ const App = () => {
 ```
 
 
-### 展开属性（Spread attributes ）
+### Spread attributes 
+【展开属性】
 <!-- We could simplify things a bit further. Since the _name_ object has exactly all of the attributes that the <i>input</i> element expects to receive as props, we can pass the props to the element using the [spread syntax](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) in the following way: -->
 我们可以进一步简化事情。 因为 name 对象具有<i>input</i> 元素期望作为props接收的所有属性，所以我们可以使用[ spread syntax ]( https://reactjs.org/docs/jsx-in-depth.html#spread-attributes )如下面的方式将props传递给元素:
 
@@ -328,7 +330,8 @@ const App = () => {
 <!-- Custom hooks are clearly not only a tool for reuse, they also provide a better way for dividing our code into smaller modular parts. -->
 自定义Hook显然不仅是一种可重用的工具，它们还为将代码划分为更小的模块化部分提供了一种更好的方式。
 
-### More about hooks 关于Hook更多知识
+### More about hooks
+【关于Hook更多知识】
 <!-- The internet is starting to fill up with more and more helpful material related to hooks. The following sources are worth checking out: -->
 互联网上开始充斥着越来越多关于Hook的有用资料。 如下是值得一查的资料来源:
 

@@ -220,7 +220,8 @@ describe('Note app', function() {
 <!-- Let's remove the failing code from the test.  -->
 让我们从测试中删除失败的代码。
 
-### Writing to a form 写入表单
+### Writing to a form
+【写入表单】
 
 <!-- Let's extend our tests so, that the test tries to log in to our application.  -->
 让我们扩展测试，以便测试尝试登录到我们的应用。
@@ -372,7 +373,8 @@ describe('Note app',  function() {
 <!-- Note that the CSS [id-selector](https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors) is #, so if we want to search for an element with the id <i>username</i> the CSS selector is <i>#username</i>. -->
 注意 CSS [ id-selector ]( https://developer.mozilla.org/en-us/docs/web/CSS/id_selectors )是 # ，所以如果我们想搜索 id 是 <i>username</i> 的元素，CSS 选择器是<i># username</i>。
 
-###  有些事情需要注意（Some things to note）
+### Some things to note
+【有些事情需要注意】
 <!-- The test first clicks the button opening the login form like so -->
 测试首先单击打开登录表单的按钮，如下所示
 
@@ -446,7 +448,8 @@ module.exports = {
 }
 ```
 
-### 测试新建便笺表单（Testing new note form ）
+### Testing new note form 
+【测试新建便笺表单】
 <!-- Let's next add tests which test the new note functionality:  -->
 下面让我们添加测试来测试新便笺的功能:
 
@@ -546,7 +549,8 @@ Cypress 按照测试在代码中的顺序运行测试。 所以它首先运行<i
 <!-- All changes to the browser's state are reversed after each test. -->
 在每次测试后，对浏览器状态的所有更改都会被反转。
 
-### 控制数据库状态（Controlling the state of the database ）
+### Controlling the state of the database 
+【控制数据库状态】
 
 <!-- If the tests need to be able to modify the server's database, the situation immediately becomes more complicated. Ideally, the server's database should be the same each time we run the tests, so our tests can be reliably and easily repeatable.  -->
 如果测试需要能够修改服务器的数据库，那么情况会立即变得更加复杂。 理想情况下，每次运行测试时，服务器的数据库应该是相同的，这样我们的测试就可以可靠且容易地重复。
@@ -725,7 +729,8 @@ describe('Note app', function() {
 <!-- The tests and the current frontend code can be found from [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9) branch <i>part5-9</i>. -->
 测试和当前的前端代码可以从[ github ]( https://github.com/fullstack-hy2020/part2-notes/tree/part5-9)分支<i>part5-9</i> 中找到。
 
-### Failed login test 登录测试失败
+### Failed login test
+【登录测试失败】
 <!-- Let's make a test to ensure that a login attempt fails if the password is wrong.  -->
 让我们做一个测试，以确保登录尝试失败，如果密码是错误的。
 
@@ -889,7 +894,8 @@ it.only('login fails with wrong password', function() {
 <!-- We used <i>cy.get('html')</i> to access the whole visible content of the application.  -->
 我们使用<i>cy.get (‘ html’)</i> 访问应用的所有可见内容。
 
-### Bypassing the UI 绕过用户界面
+### Bypassing the UI
+【绕过用户界面】
 <!-- Currently we have the following tests: -->
 目前我们有如下测试:
 
@@ -1120,7 +1126,8 @@ describe('Note app', function() {
 <!-- The tests and the frontend code can be found from [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-10) branch <i>part5-10</i>. -->
 测试和前端代码可以从[ github ]( https://github.com/fullstack-hy2020/part2-notes/tree/part5-10)分支<i>part5-10</i> 中找到。
 
-###  改变便笺的重要性（Changing the importance of a note）
+### Changing the importance of a note
+【改变便笺的重要性】
 <!-- Lastly let's take a look at the test we did for changing the importance of a note.  -->
 最后，让我们看一下我们为改变便笺的重要性所做的测试。
 <!-- First we'll change the formatting block so that it creates three notes instead of one: -->
@@ -1271,7 +1278,8 @@ it.only('other of those can be made important', function () {
 <!-- Now the first line finds the right button, and uses <i>as</i> to save it as <i>theButton</i>. The followings lines can use the named element with <i>cy.get('@theButton')</i>. -->
 现在第一行找到右边的按钮，并使用<i>作为</i> 保存为<i>theButton</i>。 下面的代码行可以使用命名元素和 <i>cy.get('@theButton')</i>。
 
-### 运行和调试测试（Running and debugging the tests ）
+### Running and debugging the tests 
+【运行和调试测试】
 
 <!-- Finally, some notes on how Cypress works and debugging your tests. -->
 最后，还有一些关于 Cypress 如何工作和调试测试的便笺。

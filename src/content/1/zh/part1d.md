@@ -7,7 +7,8 @@ lang: zh
 
 <div class="content">
 
-### 复杂状态（Complex state）
+### Complex state
+【复杂状态】
 <!-- In our previous example the application state was simple as it was comprised of a single integer. What if our application requires a more complex state? -->
 
 在之前的示例中，应用状态很简单，因为它仅由单个整数组成。 如果我们的应用需要一个更复杂的状态怎么办？
@@ -191,7 +192,8 @@ const handleLeftClick = () => {
 
 在某些情况下，将一段应用状态存储在更复杂的数据结构中是有益的。 官方的React[文档](https://reactjs.org/docs/hooks-faq.html#should-i-use-one-or-many-state-variables)包含了一些关于这个话题的有用的指导。
 
-### 处理数组（Handling arrays）
+### Handling arrays
+【处理数组】
 <!-- Let's add a piece of state to our application containing an array _allClicks_ that remembers every click that has occurred in the application. -->
 让我们向应用添加一个状态，该状态包含一个数组 _allClicks_ ，该数组记录应用中发生的每次单击记录。
 
@@ -288,7 +290,8 @@ const App = (props) => {
 <!-- We call the [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) method for the _allClicks_ array that joins all the items into a single string, separated by the string passed as the function parameter, which in our case is an empty space. -->
 我们为 allClicks 数组调用[ join ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/join )方法，该数组将所有项目连接到一个字符串中，由作为函数参数传递的字符串分隔，在我们的例子中，该字符串是一个空格。
 
-### 条件渲染（Conditional rendering）
+### Conditional rendering
+【条件渲染】
 <!-- Let's modify our application so that the rendering of the clicking history is handled by a new <i>History</i> component: -->
 让我们修改我们的应用，使得单击历史的渲染由一个新的 <i>History</i>  组件处理:
 
@@ -408,7 +411,9 @@ const App = (props) => {
 }
 ```
 
-### 老版本的React
+### Old React
+【老版本的React】
+
 <!-- In this course we use the [state hook](https://reactjs.org/docs/hooks-state.html) to add state to our React components, which is part of the newer versions of React and is available from version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) onwards. Before the addition of hooks, there was no way to add state to React functional components. Components that required state had to be defined as React [class](https://reactjs.org/docs/react-component.html) components using the JavaScript class syntax. -->
 
 在这个过程中，我们使用了状态Hook [state hook](https://reactjs.org/docs/hooks-state.html) 来添加状态到我们的 React 组件，这是 React 的新版本的一部分，可以从版本[16.8.0]( https://www.npmjs.com/package/React/v/16.8.0)开始使用。 在添加Hook之前，没有办法将状态添加到 React 函数组件。 需要状态的组件必须使用 JavaScript 类语法定义为 React 的 [class](https://reactjs.org/docs/react-component.html) 组件。
@@ -420,7 +425,8 @@ const App = (props) => {
 <!-- We will learn more about React class components later on in the course. -->
 我们将在稍后的课程中学习更多关于 React 类组件的知识。
 
-###  调试React应用（Debugging React applications）
+### Debugging React applications
+【调试React应用】
 <!-- A large part of a typical developer's time is spent on debugging and reading existing code. Every now and then we do get to write a line or two of new code, but a large part of our time is spent on trying to figure out why something is broken or how something works. Good practices and tools for debugging are extremely important for this reason. -->
 
 典型的开发人员的大部分时间都花在调试和读取现有代码上。 我们时不时地会写一两行新代码，但是我们的大部分时间都花在试图弄明白为什么有些东西坏了，或者某些东西是如何工作的上面。 出于这个原因，良好的调试实践和工具非常重要。
@@ -563,8 +569,8 @@ const [allClicks, setAll] = useState([])
 
 ![](../../images/1/11be.png)
 
-
-### Hook的规则
+### Rules of Hooks
+【Hook的规则】
 <!-- There are a few limitations and rules we have to follow to ensure that our application uses hooks-based state functions correctly. -->
 为了确保应用正确地使用基于Hook的状态函数，我们必须遵循一些限制和规则。
 
@@ -601,7 +607,8 @@ const App = (props) => {
 }
 ```
 
-### 复习事件处理
+### Event Handling Revisited
+【复习事件处理】
 <!-- Event handling has proven to be a difficult topic in previous iterations of this course. -->
 事件处理已被证明是本课程前面的迭代中比较难的一块。
 
@@ -779,7 +786,8 @@ const App = (props) => {
 }
 ```
 
-### Function that returns a function 返回函数的函数
+### Function that returns a function
+【返回函数的函数】
 <!-- Another way to define a event handler is to use <i>function that returns a function</i>. -->
 定义事件处理程序的另一种方法是使用返回函数的函数。
 
@@ -1069,7 +1077,8 @@ const App = (props) => {
 <!-- Choosing between the two presented ways of defining your event handlers is mostly a matter of taste. -->
 可以在这两种定义事件处理程序的方式中进行选择，这主要取决于个人喜好。
 
-### 将事件处理传递给子组件
+### Passing Event Handlers to Child Components
+【将事件处理传递给子组件】
 <!-- Let's extract the button into its own component: -->
 让我们将按钮提取到它自己的组件中:
 
@@ -1089,8 +1098,9 @@ const Button = (props) => (
 
 ![](../../images/1/12e.png)
 
+### Do Not Define Components Within Components
+【不要在组件中定义组件】
 
-### 不要在组件中定义组件
 <!-- Let's start displaying the value of the application into its own <i>Display</i> component. -->
 让我们开始将应用的值显示到它自己的<i>Display</i> 组件中。
 
@@ -1156,8 +1166,8 @@ const App = props => {
   )
 }
 ```
-
-### 有用的阅读材料
+### Useful Reading
+【有用的阅读材料】
 <!-- The internet is full of React-related material. However, we use such a new style of React that a large majority of the material found online is outdated for our purposes. -->
 互联网上充满了React相关的材料。 然而，我们使用了这样一种新的React方式，以至于网上发现的绝大多数材料对我们的目的来说都已经过时了。
 

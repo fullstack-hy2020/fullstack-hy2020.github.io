@@ -37,7 +37,8 @@ const App = () => {
 }
 ```
 
-### 组件辅助函数（Component helper functions）
+### Component helper functions
+【组件辅助函数】
 <!-- Let's expand our <i>Hello</i> component so that it guesses the year of birth of the person being greeted: -->
 让我们扩展一下<i>Hello</i> 组件，让它能猜到被问候(greeted)者的出生年份:
 
@@ -73,7 +74,8 @@ const Hello = (props) => {
 
 如果仔细观察当前代码，我们会注意到这种辅助函数实际上是在另一个函数中定义的，而这个函数是我们用来定义组件行为的。 在 java 中，在一个方法中定义另一个方法是不可能的，但在 JavaScript 中，在函数中定义函数是一种常规操作。
 
-### 解构（Destructuring ）
+### Destructuring 
+【解构】
 <!-- Before we move forward, we will take a look at a small but useful feature of the JavaScript language that was added in the ES6 specification, that allows us to [destructure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) values from objects and arrays upon assignment. -->
 
 在我们继续之前，我们将看一看 JavaScript 在 ES6规范中添加的的一个很小、但是有用的特性，它允许我们在赋值时从对象和数组中[解构](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)出值。
@@ -196,7 +198,8 @@ const Hello = (props) => {
 const Hello = ({ name, age }) => {
 ```
 
-### 页面重渲染（Page re-rendering ）
+### Page re-rendering 
+【页面重渲染】
 <!-- So far all of our applications have been such that their appearance remains the same after the initial rendering. What if we wanted to create a counter where the value increased as a function of time or at the click of a button? -->
 到目前为止，我们的所有应用都是这样的，即在最初的渲染之后，它们的外观一直是相同的。 如果我们想要创建一个计数器，在这个计数器中的值随着时间的变化而增加，或者点通过击一个按钮而增加，会是什么样呢？
 
@@ -270,7 +273,8 @@ setInterval(() => {
 <!-- Making repeated calls to the _ReactDOM.render_-method is not the recommended way to re-render components. Next, we'll introduce a better way of accomplishing this effect. -->
 重复调用 _ReactDOM.render_-方法并不是重新渲染组件的推荐方法。 接下来，我们将介绍一种更好的，实现相同效果的方法。
 
-### 有状态组件（Stateful component）
+### Stateful component
+【有状态组件】
 <!-- All of our components up till now have been simple in the sense that they have not contained any state that could change during the lifecycle of the component. -->
 到目前为止，我们的所有组件都很简单，因为它们没有包含任何组件（生命周期中可能变化）的状态。
 
@@ -399,7 +403,8 @@ const App = (props) => {
 ![](../../images/1/4e.png)
 
 
-### 事件处理（Event handling）
+### Event handling
+【事件处理】
 <!-- We have already mentioned <i>event handlers</i> a few times in [part 0](/en/part0), that are registered to be called when specific events occur. E.g. a user's interaction with the different elements of a web page can cause a collection of various different kinds of events to be triggered. -->
 我们已经在[第0章](/zh/part0)中多次提到<i>事件处理程序</i>，它们（被注册为）在特定事件发生时进行调用。 例如，用户与一个网页的不同元素的交互可能会触发一系列不同类型的事件。
 
@@ -501,7 +506,8 @@ const App = (props) => {
 
 
 
-### 事件处理是一个函数（Event handler is a function）
+### Event handler is a function
+【事件处理是一个函数】
 <!-- We define the event handlers for our buttons where we declare their <i>onClick</i> attributes: -->
 我们为按钮定义事件处理程序，声明它们的 <i>onClick</i> 属性:
 
@@ -605,7 +611,8 @@ const App = (props) => {
 </button>
 ```
 
-### Passing state to child components 将状态传递给子组件
+### Passing state to child components
+【将状态传递给子组件】
 <!-- It's recommended to write React components that are small and reusable across the application and even across projects. Let's refactor our application so that it's composed of three smaller components, one component for displaying the counter and two components for buttons. -->
 十分建议编写跨应用甚至跨项目的、小型且可重用的 React 组件。 让我们重构我们的应用，使它由三个较小的组件组成，一个组件用于显示计数器，两个组件用于显示按钮。
 
@@ -721,7 +728,8 @@ const App = (props) => {
 <!-- The event handler is passed to the <i>Button</i> component through the _onClick_ prop. The name of the prop itself is not that significant, but our naming choice wasn't completely random, e.g. React's own official [tutorial](https://reactjs.org/tutorial/tutorial.html) suggests this convention. -->
 事件处理程序通过_onClick_ 属性传递给<i>Button</i> 组件。 props的名字本身并不重要，但是我们的命名选择并不是完全随机的，例如 React 自己的[官方教程]( https://reactjs.org/tutorial/tutorial.html)就建议了这些约定。
 
-### 状态的改变导致重新渲染
+### Changes in state cause rerendering
+【状态的改变导致重新渲染】
 
 <!-- Let's go over the main principles of how an application works once more. -->
 让我们再次回顾一下应用如何工作的主要内容。
@@ -752,7 +760,8 @@ const App = (props) => {
 <!-- _Display_ receives the new value of the counter, 1, as props. The _Button_ components receive event handlers which can be used to change the state of the counter. -->
 _Display_ 接收计数器的新值，1，作为props。 Button 组件接收可用于更改计数器状态的事件处理程序，来改变counter的状态。
 
-### 重构组件
+### Refactoring the components
+【重构组件】
 <!-- The component displaying the value of the counter is as follows: -->
 显示计数器值的组件如下:
 

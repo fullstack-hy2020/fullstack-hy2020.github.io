@@ -14,7 +14,8 @@ lang: zh
 <!-- In addition to language features we will also have a strong emphasis in tooling. -->
 除了语言特性之外，我们还将特别强调工具的使用。
 
-### Setting things up 准备工作
+### Setting things up
+【准备工作】
 <!-- Install TypeScript support to your editor of choice. For [Visual Studio Code](https://code.visualstudio.com/) you need the [typescript hero](https://marketplace.visualstudio.com/items?itemName=rbbit.typescript-hero) extension.  -->
 在你选择的编辑器中安装对 TypeScript 支持，对于[Visual Studio Code](https://code.visualstudio.com/)来说，你需要安装[typescript hero](https://marketplace.visualstudio.com/items?itemName=rbbit.typescript-hero)扩展。
 
@@ -89,7 +90,8 @@ npm run ts-node -- file.ts
 <!-- **NB:** The playground might contain different tsconfig rules (which will be introduced later) than your local environment, which is why you might see different warnings there compared to your local environment. The playground's tsconfig is modifiable through the config dropdown menu. -->
 **注意: **playground可能包含不同的 tsconfig 规则(稍后将介绍) ，这就是为什么你可能会看到与您的当地环境不同的警告。 playground的 tsconfig 是可以通过配置下拉菜单进行修改的。
 
-#### A note about the coding style 关于编码风格的提示
+#### A note about the coding style
+【关于编码风格的提示】
 <!-- JavaScript on itself is quite relaxed language, and things can often be done in multiple different ways. For example we have named vs anonymous functions, using const and let or var and the use of <i>semicolons</i>. This part of the course differs from the rest by using semicolons. It is not a TypeScript specific pattern but a general coding style decision when creating any kind of JavaScript. Whether to use them or not is usually in the hands of the programmer, but since it is expected to adapt ones coding habits to the existing codebase, in the exercises of this part it is expected to use semicolons and to adjust to the coding style of the part. This part has some other coding style differences compared to the rest of the course as well, e.g. in the directory naming. -->
 Javascript 本身是一种相当轻松的语言，业务通常可以用多种不同的方式来完成。 例如，可以用命名 vs. 匿名函数、可以使用 const 和 let 或 var 、以及可选地使用<i>分号</i> 。 本课程的这一章节与其他部分不同，使用了分号。 它并不是一个特定于TypeScript的模式，而是创建任何类型的 JavaScript 时一个通用的编码风格决策。 是否使用它们通常掌握在程序员的手中，但是由于常被期望调整编码习惯，以适应现有的代码库，在这一章节的练习中我们期望使用分号，并调整以适应本章的编码风格。 与课程的其他部分相比，这一章节还有一些其他编码风格的差异，例如在目录命名方面。 
 
@@ -173,7 +175,8 @@ VSCode 插件非常高效，当你试图使用一个不正确的类型时，它�
 
 
 
-### Creating your first own types 创建你自己的第一个类型
+### Creating your first own types
+【创建你自己的第一个类型】
 
 <!-- Let's expand our multiplicator into a bit more versatile calculator that also supports addition and division. The calculator should accept three arguments: two numbers and the operation, either <i>multiply</i>, <i>add</i> or <i>divide</i>, which tells it what to do with the numbers  -->
 让我们扩展我们的乘法运算，扩展到一个更多用途的计算器中，计算器同时也支持加法和除法。 计算器应该接受三个参数: 两个数字和运算符，<i>乘</i>、 <i>加</i>  或者 <i>除</i>，它告诉计算器如何处理这些数字
@@ -379,7 +382,8 @@ npm install --save-dev @types/node
 <!-- After installing the types, our compiler does not complain about the variable <i>process</i> anymore. Note that there is no need to require the types to the code, the intallation of the package is enough! -->
 在安装类型之后，我们的编译器不再对变量<i>process</i>产生警告。 注意，没有必要对代码要求类型，安装软件包就足够了！
 
-### Improving the project 改进这个项目
+### Improving the project
+【改进这个项目】
 <!-- Next let's add npm scripts to run our two programs <i>multiplier</i> and <i>calculator</i>: -->
 接下来让我们添加 npm 脚本来运行两个程序<i>multiplier</i> 和<i>calculator</i>:
 
@@ -661,7 +665,8 @@ $ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
 <div class="content">
 
 
-### More about tsconfig 深入研究 tsconfig
+### More about tsconfig
+【深入研究 tsconfig】
 
 
 <!-- In the exercises we used only one tsconfig rule [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny). It's a good place to start, but now it's time to look into the config file a little deeper. -->
@@ -703,7 +708,9 @@ $ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
 <!-- You can find explanations for each of the configurations from the TypeScript documentation, or the really handy although beta-stage [tsconfig page](https://www.typescriptlang.org/v2/en/tsconfig), or from the tsconfig [schema definition](http://json.schemastore.org/tsconfig), which unfortunately is formatted a little worse than the first two options.  -->
 你可以从 TypeScript 文档中找到每种配置的解释，或者从 beta-stage [ tsconfig page ]( https://www.typescriptlang.org/v2/en/tsconfig ) ，或者从 tsconfig [ schema definition ]( http://json.schemastore.org/tsconfig 文档)中找到解释，不幸的是，它的格式比前两个选项要差一些。
 
-### Adding express to the mix 混入express
+### Adding express to the mix
+【混入express】
+
 <!-- Right now we are at a pretty good place. Our project is set up and we have two executable calculators in it.  -->
 现在我们处在一个非常好的位置。 我们的项目已经建立，我们有两个可执行的计算器。
 <!-- However, since our aim is to learn FullStack development, it is time to start working with some HTTP-requests. -->
@@ -977,7 +984,8 @@ Web 应用应该在生产模式下以通过命令<i>npm start</i> 启动，而np
 <div class="content">
 
 
-### The horrors of <i>any</i> 关于any的恐惧
+### The horrors of <i>any</i>
+【关于any的恐惧】
 
 
 <!-- Now that we have our first endpoints completed, you might notice we have used barely any TypeScript in these small examples.  -->

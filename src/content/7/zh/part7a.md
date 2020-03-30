@@ -14,7 +14,8 @@ lang: zh
 <!-- In addition to the exercises in this and the chapter, there is a series of exercises which revise what we've learned during the whole course by expanding the Bloglist application which we worked on during parts 4 and 5. -->
 除了本章和本章的练习外，还有一系列的练习，通过扩展我们在第4和第5章节中使用的 Bloglist 应用来修改我们在整个课程中学到的知识。
 
-### 应用的导航结构（Application navigation structure ）
+### Application navigation structure 
+【应用的导航结构】
 <!-- Following part 6, we return to React without Redux. -->
 在第6章节之后，我们回到没有 Redux 的 React。
 
@@ -251,7 +252,8 @@ BrowserRouter 是一个 i Router，它使用 HTML5历史 API (pushState、 repla
 </Switch>
 ```
 
-###  参数化路由（Parameterized route）
+### Parameterized route
+【参数化路由】
 <!-- Let's examine the slightly modified version from the previous example. The complete code for the example can be found [here](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v1.js). -->
 让我们检查一下前一个例子中稍微修改过的版本，这个例子的完整代码可以在这里找到 [here](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v1.js)。
 
@@ -434,7 +436,8 @@ const Login = (props) => {
 <!-- Both [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) and [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) are hook-functions, just like useState and useEffect we have used many times now.  As you remember from part 1, there are some [rules](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot) to using hook-functions. Create-react-app has been configured to warn you, if you break these rules e.g by calling a hook-function from a conditional statement. -->
 [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams)和 [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory)  都是Hook函数，就像我们已经多次使用的 useState 和 useEffect 一样。 正如您在第1章节中记得的，使用钩函数有一些[rules](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot) 。 Create-react-app 已经配置为警告，如果你打破这些规则，例如从一个 If判断语句中调用一个Hook函数。
 
-### 重新定向（redirect）
+### redirect
+【重新定向】
 <!-- There is one more interesting detail about the <i>Users</i> route:  -->
 关于<i>Users</i> 路由还有一个有趣的细节:
 
@@ -514,7 +517,8 @@ const App = () => {
 我们定义了一个现代 web 应用通用的元素<i>footer</i>，它定义了屏幕底部<i>Router</i> 之外的部分，因此不管应用路由部分显示的是哪个组件，它都会显示出来。
 
 
-### Parameterized route revisited 复习参数化路由
+### Parameterized route revisited
+【复习参数化路由】
 
 
 <!-- Our application has a flaw. The _Note_ component receives all of the notes, even though it only displays the one which's id matches the url parameter: -->

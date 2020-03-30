@@ -51,7 +51,8 @@ props value is [Object object]
 <!-- If necessary, read more about debugging React-applications [here](/en/part1/a_more_complex_state_debugging_react_apps#debugging-react-applications). -->
 如果有必要，请阅读更多关于React 应用调试的内容[here](/en/part1/a_more_complex_state_debugging_react_apps#debugging-react-applications)。
 
-### 高级技巧: Visual Studio Code 的代码片段（Protip: Visual Studio Code snippets ）
+### Protip: Visual Studio Code snippets 
+【高级技巧: Visual Studio Code 的代码片段】
 <!-- With Visual studio code it's easy to create 'snippets', i.e. shortcuts for quickly generating commonly re-used portions of code, much like how 'sout' works in Netbeans.  -->
 
 使用 Visual studio code能够很容易创建“代码片段（snippets）” ，即快速生成常用代码块的快捷方式，很像 Netbeans 中的“ sout”。
@@ -77,7 +78,8 @@ props value is [Object object]
 }
 ```
 
-### JavaScript 数组（JavaScript Arrays ）
+### JavaScript Arrays 
+【JavaScript 数组】
 <!-- From here on out, we will be using the functional programming methods of the JavaScript [array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array), such as  _find_, _filter_, and _map_ - all of the time. They operate on the same general principles as streams do in Java 8, which have been used during the last few years in both the 'Ohjelmoinnin perusteet' and 'Ohjelmoinnin jatkokurssi' courses at the university's department of Computer Science, and also in the programming MOOC.  -->
 
 从现在开始，我们将一直使用 JavaScript [数组](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)的函数式编程方法，比如 _find_, _filter_, 和 _map_。 它们和 Java 8中的streams 一样遵循一般原则，这些原则在过去几年里被用在大学计算机科学系的 Ohjelmoinnin perusteet 和 Ohjelmoinnin jatkokurssi 课程，以及 MOOC 编程中。
@@ -92,7 +94,8 @@ props value is [Object object]
 
   
 
-### 事件处理复习（Event handlers revisited）
+### Event handlers revisited
+【事件处理复习】
 <!-- Based on last year's course, event handling has proven to be difficult.  -->
 基于去年的课程，事件处理证明是一个难点内容。
 <!-- It's worth reading the revision chapter at the end of the previous part [event handlers revisited](/en/part1/a_more_complex_state_debugging_react_apps#event-handling-revisited), if it feels like your own knowledge on the topic needs some brushing up.  -->
@@ -102,7 +105,8 @@ props value is [Object object]
 <!-- Passing event handlers to the child components of the <i>App</i> component has raised some questions. A small revision on the topic can be found [here](/en/part1/a_more_complex_state_debugging_react_apps#passing-event-handlers-to-child-components). -->
 将事件处理传递给<i>App</i> 组件的子组件引发了一些问题。 关于这个主题的一个小复习[在这里](/en/part1/a_more_complex_state_debugging_react_apps#passing-event-handlers-to-child-components)。
 
-###  渲染集合（Rendering collections）
+### Rendering collections
+【渲染集合】
 <!-- We will now do the 'frontend', or the browser-side application logic, in React for an application that's similar to the example application from [part 0](/en/part0) -->
 
 现在，我们将在 React 中为类似于 [第0章](/en/part0)中的示例应用，编写“前端”或叫浏览器端的应用逻辑。
@@ -240,7 +244,8 @@ const App = (props) => {
 }
 ```
 
-### Key-属性（Key-attribute）
+### Key-attribute
+【Key-属性】
 <!-- Even though the application seems to be working, there is a nasty warning on the console:  -->
 尽管该应用似乎运行良好，但在控制台上有一个烦人的警告:
 
@@ -380,7 +385,8 @@ is used to create view elements, the value of the variable must be rendered insi
 <!-- The use of curly braces will cause some headache in the beginning, but you will get used to them soon enough. The visual feedback from React is immediate. -->
 一开始使用花括号会让你头疼，但是你很快就会习惯的。 因为来自 React 的图形反馈是即时的。
 
-### 反模式: 将数组的索引作为键（Anti-pattern: array indexes as keys ）
+### Anti-pattern: array indexes as keys 
+【反模式: 将数组的索引作为键】
 <!-- We could have made the error message on our console disappear by using the array indexes as keys. The indexes can be retrieved by passing a second parameter to the callback function of the map-method:  -->
 通过使用数组的索引作为键，我们可以使控制台上的错误消息消失。可以通过向 map-方法 的回调函数传递的第二个参数来获取索引:
 
@@ -409,7 +415,8 @@ notes.map((note, i) => ...)
 <!-- Read more [from here](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318). -->
 更多内容请点击 [这里](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318)。
 
-### 重构模块（Refactoring modules ）
+### Refactoring modules 
+【重构模块】
 <!-- Let's tidy the code up a bit. We are only interested in the field _notes_ of the props, so let's retrieve that directly using [destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment):  -->
 让我们把代码整理一下。 我们只对props的字段 _notes_ 属性感兴趣，所以让我们直接使用[解构](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)：
 
@@ -599,7 +606,8 @@ ReactDOM.render(
 <!-- If you clone the project, run the command _npm install_ before starting the application with _npm start_. -->
 如果您克隆了项目，请在启动应用之前运行命令_npm install_ 。
 
-### 当应用挂掉了（When the application breaks ）
+### When the application breaks 
+【当应用挂掉了】
 <!-- Early in your programming career (and even after 30 years of coding like yours truly), what often happens is that the application just completely breaks down. This is even more the case with dynamically typed languages, such as JavaScript, where the compiler does not check the data type of, for instance, function variables or return values.  -->
 
 在您编程的早期生涯(甚至说实话，在您编写了30年代码之后) ，应用挂掉是经常发生的情况。 动态类型语言更是如此，例如 JavaScript，其编译器不检查数据类型，例如函数变量或返回值。

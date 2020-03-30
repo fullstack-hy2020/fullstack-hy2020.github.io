@@ -40,7 +40,8 @@ lang: zh
 
 如果我们需要一个类似 join queries 的功能，我们会在应用中利用 multiple queries 来实现这个需求。在特定的场景下，Mongoose 可以处理 join 和聚合数据，使它看起来像 join 查询 一样。但是 Mongoose 在这种情况下也是在数据库后台使用了 multiple query。
 
-### References across collections 跨 collection 引用
+### References across collections
+【跨 collection 引用】
 
 <!-- If we were using a relational database the note would contain a <i>reference key</i> to the user who created it. In document databases we can do the same thing. -->
 
@@ -158,7 +159,7 @@ lang: zh
 
 矛盾的是，于关系型数据库相比，像 Mongo 这种弱 Schema 类型的数据库要求开发者做更多的这种关于数据组织的设计决定，而且是在项目的开始阶段。一般来说，关系型数据库为应用提供的是一种或多或少合适可用的组织数据的方式。
 
-### Mongoose schema for users User 的 Mongoose Schema
+### Mongoose schema for users
 
 <!-- In this case, we make the decision to store the ids of the notes created by the user in the user document. Let's define the model for representing a user in the <i>models/user.js</i> file: -->
 
@@ -234,7 +235,8 @@ const noteSchema = new mongoose.Schema({
 
 与关系型数据库形成鲜明对比，引用被同时存储在了两个 document 中。 Note 引用了创建它的 User， User 引用了它所创建的 Note 的数组。
 
-### Creating users 创建 User
+### Creating users
+【创建 User】
 
 <!-- Let's implement a route for creating new users. Users have a unique <i>username</i>, a <i>name</i> and something called a <i>passwordHash</i>. The password hash is the output of a [one-way hash function](https://en.wikipedia.org/wiki/Cryptographic_hash_function) applied to the user's password. It is never wise to store unencrypted plaintext passwords in the database! -->
 
@@ -465,7 +467,8 @@ usersRouter.get('/', async (request, response) => {
 <!-- You can find the code for our current application in its entirety in the <i>part4-7</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-7). -->
 你也可以在[Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-7)的 <i>part4-7</i> 分支中找到当前应用的代码。
 
-### 创建一个新 Note（Creating a new note ）
+### Creating a new note 
+【创建一个新 Note】
 
 <!-- The code for creating a new note has to be updated so that the note is assigned to the user who created it. -->
 

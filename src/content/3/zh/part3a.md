@@ -114,7 +114,8 @@ echo "Error: no test specified" && exit 1
 ```
 
 
-### 简单的 web 服务器（Simple web server ）
+### Simple web server 
+【简单的 web 服务器】
 
 <!-- Let's change the application into a web server: -->
 让我们把这个应用改成一个 web 服务器:
@@ -336,7 +337,8 @@ npm install
 <!-- If the <i>major</i> number of a dependency does not change, then the newer versions should be [backwards compatible](https://en.wikipedia.org/wiki/Backward_compatibility). This means that if our application happened to use version 4.99.175 of express in the future, then all the code implemented in this part would still have to work without making changes to the code. In contrast, the future 5.0.0. version of express [may contain](https://expressjs.com/en/guide/migrating-5.html) changes, that would cause our application to no longer work. -->
 如果依赖项的<i>major</i>值没有改变，那么新版本应该是[向后兼容backwards compatible](https://en.wikipedia.org/wiki/Backward_compatibility)。 这意味着，如果我们的应用在将来碰巧使用了 express 的版本4.99.175，那么在这个部分中实现的所有代码仍然必须在不对代码进行更改的情况下正常工作。 相比之下，未来的5.0.0。 Express版本 [可能包含may contain](https://expressjs.com/en/guide/migrating-5.html)更改，将导致我们的应用不能正常工作。
 
-### Web 与 Express
+### Web and express
+
 <!-- Let's get back to our application and make the following changes: -->
 让我们回到我们的应用，并进行如下更改:
 
@@ -566,7 +568,8 @@ Representational State Transfer，又名REST， 是在2000年 Roy Fielding 的[�
 在某些地方(例如[ Richardson，Ruby: RESTful Web Services ]( http://shop.oreilly.com/product/9780596529260.do )) ，你会看到我们为一个简单的[ CRUD ]( https://en.wikipedia.org/wiki/create,_read,_update_and_delete ) API 建立的模型，这被称为[面向资源架构resource oriented architecture]( https://en.wikipedia.org/wiki/resource-oriented_architecture )的例子，而不是 REST。 我们将避免陷入语义学的争论，而是回到应用的工作中。
 
 
-###  获取一个单一资源（Fetching a single resource）
+### Fetching a single resource
+【获取一个单一资源】
 <!-- Let's expand our application so that it offers a REST interface for operating on individual notes. First let's create a [route](http://expressjs.com/en/guide/routing.html) for fetching a single resource. -->
 让我们扩展我们的应用，以便它提供一个 REST 接口，用于操作单个便笺。 首先，让我们创建一个[ 路由 ]( http://expressjs.com/en/guide/routing.html )来获取单个资源。
 
@@ -718,7 +721,8 @@ If-condition 基于了这样一个事实，即所有的 JavaScript 对象都是[
 我们的应用正常工作，如果没有找到便笺，则发送错误状态代码。 然而，应用不会返回任何东西显示给用户，就像我们 在web 应用访问一个不存在的页面时所做的那样。 我们实际上不需要在浏览器中显示任何内容，因为 REST API 是用于编程使用的接口，只需要错误状态代码就行了。
 
 
-### Deleting resources 删除资源
+### Deleting resources
+【删除资源】
 
 <!-- Next let's implement a route for deleting resources. Deletion happens by making an HTTP DELETE request to the url of the resource: -->
 接下来，让我们实现一个删除资源的路由。 通过向资源的 url 发出 HTTP DELETE 请求来删除:
@@ -782,7 +786,8 @@ app.delete('/api/notes/:id', (request, response) => {
 ![](../../images/3/13ea.png)
 
 
-### Receiving data 接受数据
+### Receiving data
+【接受数据】
 <!-- Next, let's make it possible to add new notes to the server. Adding a note happens by making an HTTP POST request to the address http://localhost:3001/api/notes, and by sending all the information for the new note in the request [body](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) in the JSON format. -->
 接下来，让我们使向服务器添加新便笺。 通过向地址 HTTP://localhost:3001/api/notes 发送一个 HTTP POST 请求，并以 JSON 格式在请求[body]( https://www.w3.org/protocols/rfc2616/rfc2616-sec7.html#sec7)中发送新便笺的所有信息，就可以添加一个便笺。
 
@@ -1119,7 +1124,9 @@ Math.max(...notes.map(n => n.id))
 
 
 
-### About HTTP request types 关于 HTTP 请求类型
+### About HTTP request types 
+【关于 HTTP 请求类型】
+
 <!-- [The HTTP standard](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) talks about two properties related to request types, **safety** and **idempotence**. -->
 [ HTTP 标准]( https://www.w3.org/protocols/rfc2616/rfc2616-sec9.html )讨论了与请求类型相关的两个属性，**安全**  和 **幂等性** 。
 
@@ -1160,7 +1167,8 @@ Http 标准还定义了应该是安全的请求类型[ HEAD ]( https://www.w3.or
 Post 是唯一既不是<i>安全性</i> 也不是<i>幂等</i> 的 HTTP 请求类型。 如果我们向 <i>/api/notes</i> 发送5个不同的 HTTP POST 请求，其中包含 <em>{content: "many same", important: true}</em>，那么服务器上得到的5个便笺将具有相同的内容。 
 
 
-### Middleware 中间件
+### Middleware
+【中间件】
 <!-- The express [json-parser](https://expressjs.com/en/api.html) we took into use earlier is a so-called [middleware](http://expressjs.com/en/guide/using-middleware.html). -->
 我们之前使用的 express [ json-parser ]( https://expressjs.com/en/api.html )是所谓的[中间件]( http://expressjs.com/en/guide/using-middleware.html )。
 
@@ -1227,7 +1235,7 @@ app.use(unknownEndpoint)
 <div class="tasks">
 
 
-### 练习 3.7.-3.8.
+### Exercises 3.7.-3.8.
 #### 3.7: Phonebook backend 步骤7
 <!-- Add the [morgan](https://github.com/expressjs/morgan) middleware to your application for logging. Configure it to log messages to your console based on the <i>tiny</i> configuration. -->
 在你的日志应用中添加[ morgan ]( https://github.com/expressjs/morgan) 中间件。 将其配置为基于<i>tiny</i> 配置，将消息记录到控制台。

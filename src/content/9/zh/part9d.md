@@ -26,7 +26,8 @@ lang: zh
 <!-- But let that be enough of reasoning for now, and let's start getting our hands dirty! -->
 但是现在就让这些理由到此为止吧，让我们开始弄脏双手吧！
 
-### Create React App with TypeScript 用TypeScript创建React应用
+### Create React App with TypeScript
+【用TypeScript创建React应用】
 <!-- [create-react-app](https://create-react-app.dev) supports a way to create an app using TypeScript by adding an additional <i>template</i> argument to the initialisation script. So, in order to create a Create React App using TypeScript, run the following command: -->
 [ create-react-app ]( https://create-react-app.dev )通过在初始化脚本中添加一个额外的<i>template</i> 参数，支持使用 TypeScript 创建应用的方法。 因此，为了使用 TypeScript 创建一个 Create React App，运行如下命令:
 
@@ -103,7 +104,8 @@ npx create-react-app my-app --template typescript
 <!-- If we now run <i>npm run lint</i>, we shouldn't get any errors. Actually the error does not matter, since we do not need the file <i>serviceWorker.ts</i> anyway, it is better to delete it altogether. -->
 如果我们现在运行 <i>npm run lint</i>，我们不应该得到任何错误。 实际上，错误并不重要，因为我们不需要文件<i>servicedworker.ts</i>，所以最好将其删除。
 
-### React components with TypeScript 用TypeScript 编写 React组件
+### React components with TypeScript
+【用TypeScript 编写 React组件】
 <!-- Let us consider the following JavaScript React example: -->
 让我们考虑下面的 JavaScript React 示例:
 
@@ -304,7 +306,8 @@ const App = () => {
 <div class="content">
 
 
-### Deeper type usage 更深入的类型使用
+### Deeper type usage
+【更深入的类型使用】
 <!-- In the previous exercise we had three parts of a course, where all parts had the same attributes <i>name</i> and <i>exerciseCount</i>. But what if we had the need for additional attributes for the parts and each part would have the need for different additional attributes, how would this look like codewise? Let's consider the following example: -->
 在前面的练习中，我们有一个课程的三个章节，其中所有章节都具有相同的属性<i>name</i> 和<i>exerciseCount</i>。 但是，如果我们需要为每个章节添加额外的属性，而每个章节又需要不同的额外属性，那么这还看起来像是代码吗？ 让我们考虑下面的例子:
 
@@ -519,7 +522,8 @@ const courseParts: CoursePart[] = [
 <div class="content">
 
 
-### A note about defining object types 关于定义对象类型的注意事项
+### A note about defining object types
+【关于定义对象类型的注意事项】
 <!-- We have used [interfaces](http://www.typescriptlang.org/docs/handbook/interfaces.html) to define object types, eg. diary entries in previous section -->
 我们已经使用[接口]( http://www.typescriptlang.org/docs/handbook/interfaces.html )来定义对象类型，例如前面部分的日记条目
 
@@ -562,7 +566,9 @@ type DiaryEntry = {
 <!-- TypeScript documentation [recommends to use interfaces](http://www.typescriptlang.org/docs/handbook/advanced-types.html#interfaces-vs-type-aliases) in most cases. -->
 TypeScript文档[建议在大多数情况下使用接口]( http://www.typescriptlang.org/docs/handbook/advanced-types.html#interfaces-vs-type-aliases )。 
 
-### Working with an existing codebase 与现有的代码库一起工作
+### Working with an existing codebase
+【与现有的代码库一起工作】
+
 <!-- When diving into the codebase for the first time it is good to get an overall view of the conventions and structure of the project. You can start your research from the <i>README.md</i> in the root of the repository. Usually it contains a brief description of the application and requirements needed to use it and also how to start it for development. If this is not present or somebody has saved time and left it as a stub you can take a peek in the <i>package.json</i>. It is always a good idea to start the application and click around it at the same time verifying that you have a functional development environment. -->
 当第一次深入到代码库中时，最好能够对项目的约定和结构有一个全面的了解。 您可以从存储库根目录中的<i>README.md</i> 开始进行研究。 通常，它包含应用和使用它所需要的需求的简要描述，以及如何启动它进行开发。 如果这个没有出现，或者有人节省了时间，把它留作存根，你可以在<i>package.json</i> 中看一眼。 启动应用并围绕它进行一番点击总是一个好主意，同时验证您拥有一个功能性开发环境。
 
@@ -578,7 +584,8 @@ TypeScript 提供的类型可以告诉你需要什么样的数据结构、函数
 <!-- Remember that reading code is a skill itself and relax if you don't understand the code on your first readthrough. Code may have a lot of corner cases and added logic throughout its development cycle. It is hard to imagine what kind of troubles the previous developer has been wrestling with. Think of it all like [growth rings in trees](https://en.wikipedia.org/wiki/Dendrochronology#Growth_rings). Understanding all of it requires digging deep into the code and business domain requirements. The more code you read the better you're going to be at it. You will read more code than you're going to produce. -->
 记住，阅读代码本身就是一项技能，如果你在第一次阅读时不理解代码，那么就放松一下。 在整个开发周期中，代码可能有很多边际情况和添加的逻辑。 很难想象之前的开发者一直在与什么样的麻烦作斗争。 把它想象成[树木的年轮]( https://en.wikipedia.org/wiki/dendrochronology#growth_rings )。 理解所有这些内容需要深入研究代码和业务领域的需求。 你阅读的代码越多，你就会越熟悉它。 与生产相比，您将阅读更多的代码。
 
-### Patientor frontend 病人项目的前端
+### Patientor frontend
+【病人项目的前端】
 <!-- It's time to get our hands dirty finalizing the frontend for the backend we built in [exercises 9.8.-9.13.](/en/part9/typing_the_express_app). -->
 是时候把我们的手弄脏了，最后为我们在[exercises 9.8.-9.13.](/en/part9/typing_the_express_app)所开发的后端，完成前端功能。
 
@@ -602,7 +609,8 @@ TypeScript 提供的类型可以告诉你需要什么样的数据结构、函数
 <!-- So there are currently, as you would expect, two main components: <i>AddPatientModal</i> and <i>PatientListPage</i>. The <i>state/</i> folder contains state handling for the frontend. The main functionality it provides is keeping our data in one place, offering simple actions to alter the state of our app. -->
 因此，正如您所料，目前有两个主要组件:<i>AddPatientModal</i> 和 <i>PatientListPage</i>。<i>state /</i> 文件夹包含前端的状态处理。 它提供的主要功能是将我们的数据保存在一个地方，提供简单的操作来改变我们应用的状态。
 
-### State handling 状态处理
+### State handling
+【状态处理】
 <!-- Let's study the state handling a bit closer as a lot of stuff seems to be happening under the hood and it differs a bit from the methods used in the course so far.  -->
 让我们更仔细地研究一下状态处理，因为很多事情似乎都发生在底层，而且它与本课程到目前为止使用的方法有点不同。
 
@@ -763,7 +771,8 @@ const PatientListPage: React.FC = () => {
 <!-- It is actually quite typical that when you start working with an existing application, at the beginning you do not understand 100% of what happens under the hood. If the app has been properly structured you can trust that if you are making careful modifications, the app still works despite of the fact that you did not understand all the internals. Over the time you can then get a grasp of the more unfamiliar parts, but it does not happen overnight when working with a large codebase. -->
 实际上，当您开始使用一个现有的应用时，在开始的时候您并不完全了解背后发生的事情，这是非常常见的。 如果应用结构合理，你可以相信，如果你正在仔细修改，应用仍然工作，尽管事实上你不了解所有的内部。 随着时间的推移，您可以掌握更多不熟悉的部分，但这不会发生在一夜之间，当与大型代码库工作时。
 
-### Patient listing page 病人名单页面
+### Patient listing page
+【病人名单页面】
 <!-- Let's go through the <i>PatientListPage/index.ts</i> as you can take inspiration from there to help you fetch data from the backend and update the application's state. <i>PatientListPage</i> uses our custom hook for injecting state and dispatcher for updating the state.  As we are listing patients we only need to destructure <i>patients</i> property from the state: -->
 让我们来看一下<i>PatientListPage/index.ts</i>，因为您可以从中获得灵感，帮助您从后端获取数据并更新应用的状态。 <i>PatientListPage</i>使用我们的自定义Hook来注入 state 和 dispatcher 来更新状态。 当我们列出患者名单时，我们只需要从状态那里解构 <i>患者</i> 属性:
 
@@ -941,7 +950,8 @@ dispatch(setPatientList(patientListFromApi));
 <div class="content">
 
 
-### Full entries 全部记录
+### Full entries
+【全部记录】
 <!-- In the [exercise 9.12.](/en/part9/typing_the_express_app#exercises-9-12-9-13) we implemented an endpoint for fetching the diagnoses but we still are not using that endpoint at all. Since we now have a page for viewing details of a single patient it would be a great idea to expand our data by a bit; let's add possible <i>Entry</i> data to our patient data so that each patient can have medical entries that include possible diagnoses. -->
 在 [exercise 9.12.](/en/part9/typing_the_express_app#exercises-9-12-9-13)我们实现了一个用于获取诊断的端点，但是我们根本没有使用该端点。 既然我们现在有一个页面可以查看单个病人的详细信息，那么最好将我们的数据扩展一点; 让我们向病人数据中添加可能的<i>Entry</i> 数据，这样每个病人都可以有包含可能诊断的医疗条目。
 
@@ -1121,7 +1131,9 @@ export type Entry =
 <div class="content">
 
 
-### Add patient form 添加病人的表单
+### Add patient form
+【添加病人的表单】
+
 <!-- Form handling can sometimes be quite a nuisance in React. That's why we have decided to utilize the the [Formik](https://jaredpalmer.com/formik/docs/overview) package for our add patient form in our app. Here's a small intro from to Formiks's documentation: -->
 在 React 中，表单处理有时会非常麻烦。 这就是为什么我们决定在我们的应用中使用[ Formik ]( https://jaredpalmer.com/Formik/docs/overview  /)包。 如下是对 Formiks 的文档的一个小介绍:
 

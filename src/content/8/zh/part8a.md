@@ -99,7 +99,8 @@ query FetchBlogsQuery {
 <!-- The application logic stays simple, and the code on the browser gets exactly the data it needs with a single query.  -->
 应用逻辑保持简单，浏览器上的代码通过一个查询就可以获得它所需要的数据。
 
-### Schema和查询（Schemas and queries ）
+### Schemas and queries 
+【Schema和查询】
 <!-- We will get to know the basics of GraphQL by implementing a GraphQL version of the phonebook application from parts 2 and 3.  -->
 通过从第2章节和第3章节实现电话簿应用的 GraphQL 版本，我们将了解 GraphQL 的基础知识。
 
@@ -281,7 +282,7 @@ Graphql 查询只描述在服务器和客户端之间移动的数据。 在服�
 一个 GraphQL API 使用的数据可以保存到一个关系数据库数据库，文档数据库，或者其他服务器，GraphQL 服务器可以通过例如 REST 访问。
 
 ### Apollo server
-阿波罗服务器
+【阿波罗服务器】
 
 <!-- Let's implement a GraphQL-server with today's leading library [Apollo -server](https://www.apollographql.com/docs/apollo-server/). -->
 让我们用当今领先的库[Apollo-server ]( https://www.apollographql.com/docs/Apollo-server)实现一个 graphql 服务器。
@@ -470,7 +471,8 @@ query {
 ![](../../images/8/4e.png)
 
 
-### Parameters of a resolver 解析器的参数
+### Parameters of a resolver
+【解析器的参数】
 
 <!-- The query fetching a single person -->
 获取单个人的查询
@@ -504,7 +506,8 @@ query {
  <!--In fact all resolver functions are given [four parameters](https://www.apollographql.com/docs/graphql-tools/resolvers.html#Resolver-function-signature). With JavaScript the parameters don't have to be defined, if they are not needed. We will be using the first and the third parameter of a resolver later in this part.--> 
 事实上，所有的解析器函数都是给定的[4个参数]( https://www.apollographql.com/docs/graphql-tools/resolvers.html#resolver-function-signature )。 使用 JavaScript 时，如果不需要参数，那么就不必定义它们。 我们将在本章节后面使用解析器的第一个和第三个参数。
 
-### The default resolver 默认解析器
+### The default resolver
+【默认解析器】
 
 <!-- When we do a query, for example -->
 例如，当我们进行查询时
@@ -570,7 +573,8 @@ Person: {
 }
 ```
 
-### Object within an object 对象中的对象
+### Object within an object
+【对象中的对象】
 
 <!-- Let's modify the scheme a bit -->
 让我们稍微修改一下这个方案
@@ -792,7 +796,8 @@ mutation {
 <!-- So the resolver of the <i>address</i> field of the <i>Person</i> type formats the response object to the right form.  -->
 因此，Person 类型的 <i>address</i> 字段的解析器将response对象格式化为正确的形式。
 
-### Error handling 错误处理
+### Error handling
+【错误处理】
 <!-- If we try to create a new person, but the parameters do not correspond with the schema description, the server gives an error message:  -->
 如果我们尝试创建一个新人，但是参数不符合模式描述，服务器会给出一个错误消息:
 
@@ -846,7 +851,8 @@ const resolvers = {
 <!-- The current code of the application can be found on [ Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-2), branch <i>part8-2</i>. -->
 当前应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-2) ，branch<i>part8-2</i> 上找到。
 
-### Enum 枚举
+### Enum
+【枚举】
 <!-- Let's add a possibility to filter the query returning all persons with the parameter <i>phone</i> so, that it returns only persons with a phone number -->
 让我们添加一种可能性来筛选返回所有带有参数<i>phone</i> 的人的查询，以便它只返回带有电话号码的人
 
@@ -915,7 +921,9 @@ Query: {
 },
 ```
 
-### Changing a phone number 换个电话号码
+### Changing a phone number
+【换个电话号码】
+
 <!-- Let's add a mutation for changing the phone number of a person. The schema of this mutation looks as follows: -->
 让我们添加一个变异来改变一个人的电话号码。这个变异的模式如下:
 
@@ -962,7 +970,8 @@ Mutation: {
 <!-- The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>. -->
 当前应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3) ，branch<i>part8-3</i> 上找到。
 
-### More on queries 更多关于查询的信息
+### More on queries
+【更多关于查询的信息】
 <!-- With GraphQL it is possible to combine multiple fields of type <i>Query</i>, or "separate queries" into one query. For example the following query returns both the amount of persons in the phonebook and their names:  -->
 使用 GraphQL，可以将<i>Query</i> 类型的多个字段或“单独查询”组合到一个查询中。 例如，下面的查询返回电话簿中的人数和他们的姓名:
 

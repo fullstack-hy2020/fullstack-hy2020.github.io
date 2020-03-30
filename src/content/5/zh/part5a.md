@@ -346,7 +346,8 @@ return (
 <!-- Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-2), branch <i>part5-2</i>. -->
 当前的应用代码可以在[ Github ]( https://Github.com/fullstack-hy2020/part2-notes/tree/part5-2) ，branch<i>part5-2</i> 上找到。
 
-### 创建新的 Note（Creating new notes）
+### Creating new notes
+【创建新的 Note】
 
 <!-- The token returned with a successful login is saved to the application state <i>user</i> field <i>token</i>: -->
 成功登录后，token 被返回并存储到了 <i>user</i> 的 <i>token</i> 状态中
@@ -439,7 +440,8 @@ const handleLogin = async (event) => {
 <!-- And now adding new notes works again! -->
 现在添加新的 Note 又可以正常工作了
 
-### 将 token 保存到浏览器的本地存储中（Saving the token to browsers local storage）
+### Saving the token to browsers local storage
+【将 token 保存到浏览器的本地存储中】
 
 
 

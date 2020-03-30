@@ -11,7 +11,8 @@ lang: zh
 <!-- In part 2 we examined two different ways of adding styles to our application: the old-school [single CSS](/en/part2/adding_styles_to_react_app) file and [inline-styles](/en/part2/adding_styles_to_react_app#inline-styles). In this part we will take a look at a few other ways.  -->
 在第2章节中，我们研究了向应用添加样式的两种不同方式: 老式的[ single CSS ](/ en / part2 / add styles to react app)文件和[ inline-styles ](/ en / part2 / add styles to react app # inline-styles)。 在这一章节，我们将看看其他一些方法。
 
-### 现成的 UI 库（Ready-made UI libraries ）
+### Ready-made UI libraries 
+【现成的 UI 库】
 <!-- One approach to defining styles for an application is to use a ready-made "UI framework". -->
 为应用定义样式的一种方法是使用现成的“ UI 框架”。
 
@@ -120,7 +121,8 @@ const Notes = (props) => (
 import { Table } from 'react-bootstrap'
 ```
 
-#### Forms表单
+#### Forms
+【表单】
 <!-- Let's improve the form in the <i>Login</i> view with the help of Bootstrap [forms](https://getbootstrap.com/docs/4.1/components/forms/). -->
 让我们在 Bootstrap [ forms ]( https://getbootstrap.com/docs/4.1/components/forms/ )的帮助下改进<i>Login</i> 视图中的表单。
 
@@ -213,7 +215,8 @@ const App = () => {
 </div>
 ```
 
-#### 导航结构（Navigation structure）
+#### Navigation structure
+【导航结构】
 <!-- Lastly, let's alter the application's navigation menu to use Bootstrap's [Navbar](https://getbootstrap.com/docs/4.1/components/navbar/) component. The React Bootstrap library provides us with [matching built-in components](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly). Through trial and error, we end up with a working solution in spite of the cryptic documentation: -->
 最后，让我们改变应用的导航菜单，使用 Bootstrap 的[导航栏]( https://getbootstrap.com/docs/4.1/components/Navbar/  / 导航栏)组件。 React Bootstrap 库为我们提供了[匹配内置组件]( https://React-Bootstrap.github.io/components/navbar/#navbars-mobile-friendly )。 通过反复试验，我们最终得到了一个可行的解决方案，尽管文档晦涩难懂:
 
@@ -268,7 +271,6 @@ const App = () => {
 你可以在这里找到应用的完整代码[点击这里]( https://github.com/fullstack-hy2020/misc/blob/master/notes-bootstrap.js )。
 
 ### Material UI
-# # Material UI
 
 
 
@@ -466,7 +468,8 @@ import { Alert } from '@material-ui/lab'
 ![](../../images/7/65ea.png)
 
 
-#### Navigaation structure 导航结构
+#### Navigaation structure
+【导航结构】
 
 
 <!-- We can implement navigation using the [AppBar](https://material-ui.com/components/app-bar/) component. -->
@@ -565,7 +568,8 @@ Button 组件渲染为这样，它的根组件是 react-redux Link，它接收�
 <!-- The code of the application can be found from [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js). -->
 这个应用的代码可以在这里[here](https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js)找到。
 
-### 封闭的思想（Closing thoughts）
+### Closing thoughts
+【封闭的思想】
 
 <!-- The difference between react-bootstrap and MaterialUI is not big. It's up to you which one you find better looking.  -->
 React-bootstrap 和 MaterialUI 之间的区别并不大，这取决于你觉得哪个更好看。 
@@ -610,7 +614,8 @@ React-bootstrap 和 MaterialUI 之间的区别并不大，这取决于你觉得�
 还有一个问题是，首先是否应该使用 UI 框架库。 这取决于每个人形成自己的意见，但对于缺乏 CSS 和网页设计知识的人来说，他们是非常有用的工具。
 
 
-### Other UI frameworks 其他 UI 框架
+### Other UI frameworks
+【其他 UI 框架】
 <!-- Here are some other UI frameworks for your consideration. If you do not see your favorite UI framework in the list, please make a pull request to the course material. -->
 这里有一些其他的 UI 框架供您考虑。 如果您没有在列表中看到您最喜欢的 UI 框架，请对课程材料提出拉取请求。
 
@@ -620,7 +625,8 @@ React-bootstrap 和 MaterialUI 之间的区别并不大，这取决于你觉得�
 - <https://chakra-ui.com/>
 - <https://tailwindcss.com/>
 
-### 样式组件（Styled components ）
+### Styled components 
+【样式组件】
 <!-- There are also [other ways](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b) of styling React applications that we have not yet taken a look at. -->
 还有一些我们还没有看过的应用的样式[other ways](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b)。
 

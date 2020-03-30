@@ -7,7 +7,8 @@ lang: zh
 
 <div class="content">
 
-### 在合适的时候展示登录表单（Displaying the login form only when appropriate）
+### Displaying the login form only when appropriate
+【在合适的时候展示登录表单】
 
 <!-- Let's modify the application so that the login form is not displayed by default: -->
 让我们修改应用，让登录表单在默认情况下不显示
@@ -176,8 +177,7 @@ display: 'none';
 如果 _loginVisible_ 是 <i>false</i>， <i>display</i> 不会接受任何与组件可见性相关的值。
 
 ### The components children, aka. props.children
-
-组件的 children，又叫 props.children
+【组件的 children，又叫 props.children】
 
 <!-- The code related to managing the visibility of the login form could be considered to be its own logical entity, and for this reason it would be good to extract it from the <i>App</i> component into its own separate component. -->
 
@@ -314,7 +314,7 @@ const NoteForm = ({ onSubmit, handleChange, value}) => {
 
 
 ### State of the forms
-表格的状态
+【表单的状态】
 
 <!-- The state of the application currently is in the _App_ component. -->
 应用的状态当前位于 App 组件中。
@@ -421,7 +421,8 @@ const App = () => {
 <!-- branch <i>part5-5</i>. -->
 分支<i>第5-5</i> 部分。
 
-### 引用具有 ref 的组件（References to components with ref）
+### References to components with ref
+【引用具有 ref 的组件】
 
 
 
@@ -537,7 +538,8 @@ const App = () => {
 <!-- You can find the code for our current application in its entirety in the <i>part5-6</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-6). -->
 您可以在[ this github repository ]的<i>part5-6</i> 分支中找到我们当前应用的全部代码，该分支是 https://github.com/fullstack-hy2020/part2-notes/tree/part5-6文件库。
 
-### 关于组件的一个点（One point about components）
+### One point about components
+【关于组件的一个点】
 
 
 

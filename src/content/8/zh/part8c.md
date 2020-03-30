@@ -208,7 +208,9 @@ Mutation: {
 后端的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4) ，branch<i>part8-4</i> 上找到。
 
 
-### User and log in 用户登录
+### User and log in
+【用户登录】
+
 <!-- Let's add user management to our application. For simplicity's sake, let's assume that all users have the same password which is hardcoded to the system. It would be straightforward to save individual passwords for all users following the principles from [part 4](/en/part4/user_administration), but because our focus is on GraphQL, we will leave out all that extra hassle this time.  -->
 让我们在应用中添加用户管理。 为了简单起见，让我们假设所有用户都有硬编码到系统的相同密码。 遵循[ part 4](/ en / part4 / user administration)的原则，为所有用户保存个人密码将非常简单，但由于我们的重点是 GraphQL，这次将省去所有额外的麻烦。
 

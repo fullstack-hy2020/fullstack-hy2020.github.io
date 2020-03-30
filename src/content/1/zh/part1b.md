@@ -39,7 +39,8 @@ Javascript 在过去的几年里发展非常迅速，在本课程中，我们将
 
 在某些圈儿里，也很流行在 Javascript 中“模拟” Java 的特性和设计模式。但我们不建议这样做。
 
-### 变量（Variables ）
+### Variables 
+【变量】
 <!-- In Javascript there are a few ways to go about defining variables: -->
 
 在 Javascript 中有以下几种定义变量的方法:
@@ -71,7 +72,8 @@ x = 4               // causes an error
 <!-- You can find more on this topic on e.g. YouTube - [var, let and const - ES6 JavaScript Features](https://youtu.be/sjyJBL5fkp8) -->
 你可以在 YouTube中找到更多关于这个 [var, let and const - ES6 JavaScript Features](https://youtu.be/sjyJBL5fkp8)主题的讨论
 
-### Arrays 数组
+### Arrays
+【数组】
 <!-- An [array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) and a couple of examples of its use: -->
 以下是[数组]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array )和它的几个使用示例:
 
@@ -171,7 +173,8 @@ console.log(rest)          // [3, 4 ,5] is printed
 
 由于这种解构赋值方式，变量 _first_ 和 _second_ 将接收数组的前两个整数作为它们的值。 剩余的整数被“收集”到另一个数组中，然后分配给变量 rest。
 
-### Objects 对象
+### Objects
+【对象】
 <!-- There are a few different ways of defining objects in Javascript. One very common method is using [object literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Object_literals), which happens by listing its properties within braces: -->
 
 在 Javascript 中，定义对象有几种不同的方式。 一个非常常见的方法是使用[对象字面量]( https://developer.mozilla.org/en-us/docs/web/javascript/guide/grammar_and_types#object_literals ) ，就是通过在大括号中列出它的属性来实现的:
@@ -231,7 +234,8 @@ object1['secret number'] = 12341
 
 对象也可以使用所谓的构造函数来定义，这产生了一种类似其他编程语言的机制，例如 Java 中的类。 尽管有相似之处，Javascript 并没有对标面向对象程序设计语言中类的概念。 但是，从 ES6版本开始，增加了<i>类语法</i>，这在某些情况下有助于构造面向对象的类。
 
-### 函数（Functions ）
+### Functions 
+【函数】
 <!-- We have already become familiar with defining arrow functions. The complete process, without cutting corners, to defining an arrow function is as follows: -->
 
 我们已经了解了箭头函数的定义。 定义箭头函数的完整过程如下:
@@ -457,7 +461,8 @@ const App = () => {
 <div class="content">
 
 
-### 对象方法以及“ this”关键字
+### Object methods and "this"
+【对象方法以及“ this”关键字】
 <!-- Due to the fact that during this course we are using a version of React containing React hooks we have no need for defining objects with methods. **The contents of this chapter are not relevant to the course** but are certainly in many ways good to know. In particular when using older versions of React one must understand the topics of this chapter. -->
 
 由于在本课程中我们使用的React版本里包含 React hook ，所以我们不需要定义带有函数的对象。 因此**本章的内容与本课程无关** ，但在许多方面确实值得了解。 特别是在使用旧版本的 React 时，必须理解本章的主题。
@@ -592,7 +597,8 @@ setTimeout(arto.greet.bind(arto), 1000)
 <!-- If you want to gain a better understanding of how _this_ works in Javascript, the internet is full of material about the topic, e.g. the screen cast series [Understand JavaScript's this Keyword in Depth](https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth) by [egghead.io](https://egghead.io) is highly recommended! -->
 如果你想更好地理解 Javascript 的工作原理，互联网上充满了关于这个主题的材料，例如 [egghead.io](https://egghead.io)的一系列[Understand JavaScript's this Keyword in Depth](https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth)短视频，强烈推荐！
 
-### 类（Classes）
+### Classes
+【类】
 <!-- As mentioned previously, there is no class mechanism like the ones in object-oriented programming languages. There are, however, features in Javascript which make "simulating" object-oriented [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) possible. -->
 正如前面提到的，Javascript 中并没有像面向对象程序语言中的类机制。 然而，Javascript 中的一些新特性使得它能够“模拟”面向对象中的[类]( https://developer.mozilla.org/en-us/docs/web/Javascript/reference/classes )。
 
@@ -630,7 +636,8 @@ janja.greet()
 <!-- The ES6 class syntax is used a lot in "old" React and also in Node.js hence an understanding of it is beneficial even in this course. But since we are using the new [hook](https://reactjs.org/docs/hooks-intro.html) feature of React throughout this course we have no concrete use for Javascript's class syntax. -->
 ES6的类语法在“老的” React 和 Node.js 中被广泛使用，因此即使在本课程中，对它有所了解也是有益的。 但是因为我们在整个课程中都使用了 React 的新的[ hook ]( https://reactjs.org/docs/hooks-intro.html )特性，所以我们没有具体使用 Javascript 的类语法。 
 
-### Javascript 教材
+### Javascript materials
+【Javascript 教材】
 <!-- There exists both good and poor guides for Javascript on the internet. Most of the links on this page relating to Javascript features reference [Mozilla's Javascript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript). -->
 互联网上的 Javascript 指南既有好的，也有不好的。 这个页面上大多数与 Javascript 特性相关的链接都参考了 Mozilla 的 Javascript 指南[Mozilla's Javascript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript)。
 

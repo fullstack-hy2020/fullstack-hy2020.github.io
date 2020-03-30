@@ -133,7 +133,8 @@ const Note = ({ note, toggleImportance }) => {
 如果您现在向应用添加其他<i>li</i> 元素，它们将不会受到上述样式规则的影响。
 
 
-### 改进错误信息（Improved error message ）
+### Improved error message 
+【改进错误信息】
 <!-- We previously implemented the error message that was displayed when the user tried to toggle the importance of a deleted note with the <em>alert</em> method. Let's implement the error message as its own React component. -->
 我们先前实现了当用户试图通过<em>alert</em>方法切换删除便笺的重要性时，显示错误消息。 让我们将错误消息实现为它自己的 React 组件。
 
@@ -242,7 +243,8 @@ const App = () => {
 我们应用当前状态的代码可以在[ github ]( https://github.com/fullstack-hy2020/part2-notes/tree/part2-7)上的<i>part2-7</i> 分支中找到。
 
 
-### Inline styles 内嵌样式
+### Inline styles
+【内嵌样式】
 
 <!-- React also makes it possible to write styles directly in the code as so-called [inline styles](https://react-cn.github.io/react/tips/inline-styles.html). -->
 React也使得直接在代码中编写样式成为可能，即所谓的[内联样式](https://react-cn.github.io/react/tips/inline-styles.html)。 

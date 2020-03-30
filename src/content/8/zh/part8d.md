@@ -11,7 +11,8 @@ lang: zh
 <!-- The frontend of our application shows the phone directory just fine with the updated server. However if we want to add new persons, we have to add login functionality to the frontend.  -->
 应用的前端显示的电话目录与更新后的服务器一致。 然而，如果我们想添加新的人员，我们必须添加登录功能的前端。
 
-### User log in 用户登录
+### User log in
+【用户登录】
 
 
 <!-- Let's add variable _token_ to the application's state. It will contain user's token when a is logged in. If _token_ is undefined, we render the <i>LoginForm</i>-component responsible for user login. The component receives an error handler and the _setToken_-function as parameters: -->
@@ -165,7 +166,8 @@ const App = () => {
 <!-- The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6), branch <i>part8-6</i>. -->
 当前应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6) ，branch<i>part8-6</i> 上找到。
 
-### Adding a token to a header 在头部添加一个标记
+### Adding a token to a header
+【在头部添加一个标记】
 <!-- After the backend changes, creating new persons requires that a valid user token is sent with the request. In order to send the token, we have to change the way we define the _ApolloClient_-object in <i>index.js</i> a little.  -->
 在后端更改之后，创建新的人员需要随请求一起发送一个有效的用户令牌。 为了发送令牌，我们必须稍微改变在<i>index.js</i> 中定义 ApolloClient-object 的方式。
 
@@ -238,7 +240,9 @@ const PersonForm = ({ setError }) => {
 <!-- Current application code can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-7), branch <i>part8-7</i>. -->
 当前的应用代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-7) ，branch<i>part8-7</i> 上找到。
 
-### Updating cache, revisited 更新缓存，复习
+### Updating cache, revisited
+【更新缓存，复习】
+
 <!-- We have to [update](/osa8/react_ja_graph_ql#valimuistin-paivitys) the cache of the Apollo client on creating new persons. We can update it using the mutation's _refetchQueries_ option to define that the  -->
 我们必须[更新](/ osa8 / react ja graph ql # valimuistin-paivitys) Apollo 客户端的缓存，以创建新的人员。 我们可以使用变异的 refetchQueries 选项更新它来定义
 <em>ALL\_PERSONS</em> query is done again. 

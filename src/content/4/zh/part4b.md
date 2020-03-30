@@ -17,7 +17,8 @@ lang: zh
 <!-- Since our application's backend is still relatively simple, we will make the decision to test the entire application through its REST API, so that the database is also included. This kind of testing where multiple components of the system are being tested as a group, is called [integration testing](https://en.wikipedia.org/wiki/Integration_testing). -->
 由于我们的后端应用相对简单，我们将会通过它的 REST API 来测试整个应用，当然数据库也包含在内。这种将系统的多个组件联合进行测试的方法称为集成测试。
 
-### 测试环境（Test environment ）
+### Test environment 
+【测试环境】
 <!-- In one of the previous chapters of the course material, we mentioned that when your backend server is running in Heroku, it is in <i>production</i> mode. -->
 在课程教材的前几章中，我们提到当你的后端服务器在 Heroku 运行时，它处于 <i>production</i> 模式。
 
@@ -287,7 +288,8 @@ module.exports = {
 }
 ```
 
-### Initializing the database before tests 在测试前初始化数据库
+### Initializing the database before tests
+【在测试前初始化数据库】
 <!-- Testing appears to be easy and our tests are currently passing. However, our tests are bad as they are dependent on the state of the database (that happens to be correct in my test database). In order to make our tests more robust, we have to reset the database and generate the needed test data in a controlled manner before we run the tests. -->
 测试看起来很简单，我们的测试目前正在通过。 但是，我们的测试很糟糕，因为它们依赖于数据库的状态(这在我的测试数据库中恰好是正确的)。 为了使我们的测试更加健壮，在运行测试之前，我们必须重置数据库并以可控的方式生成所需的测试数据。
 
@@ -355,7 +357,8 @@ test('a specific note is within the returned notes', async () => {
 <!-- Pay special attention to the expect in the latter test. The <code>response.body.map(r => r.content)</code> command is used to create an array containing the content of every note returned by the API. The [toContain](https://facebook.github.io/jest/docs/en/expect.html#tocontainitem) method is used for checking that the note given to it as a parameter is in the list of notes returned by the API. -->
 在后一个测试中要特别注意expect。 代码<code>response.body.map(r => r.content)</code> 命令用于创建一个数组，该数组包含 API 返回的每个便笺的内容。 方法用于检查作为参数给它的便笺是否在 API 返回的便笺列表中。
 
-### Running tests one by one 一个接一个的测试
+### Running tests one by one
+【一个接一个的测试】
 <!-- The _npm test_ command executes all of the tests of the application. When we are writing tests, it is usually wise to only execute one or two tests. Jest offers a few different ways of accomplishing this, one of which is the [only](https://jestjs.io/docs/en/api#testonlyname-fn-timeout) method. If tests are written across many files, this method is not great. -->
 _npm test_ 命令执行应用的所有测试。 在编写测试时，通常明智的做法是只执行一个或两个测试。 Jest 提供了几种不同的方法来实现这一点，其中一种就是  [only](https://jestjs.io/docs/en/api#testonlyname-fn-timeout) 方法。 如果测试是跨多个文件编写的，那么这种方法不是很好。
 
@@ -482,7 +485,8 @@ main() // highlight-line
 <!-- The code declares that the function assigned to _main_ is asynchronous. After this the code calls the function with <code>main()</code>. -->
 代码声明了 _main_ 是一个异步函数，然后才进行 <code>main()</code>的调用。
 
-### 后端中的 async/await 
+### async/await in the backend
+【后端中的 async/await】
 
 <!-- Let's change the backend to async and await. As all of the asynchronous operations are currently done inside of a function, it is enough to change the route handler functions into async functions. -->
 下面我们来将后端代码改为 async 和 await 的方式。 由于当前所有的异步操作都是在函数那完成的，因此只需要将 route handler 函数更改声明为异步的即可。
@@ -503,7 +507,8 @@ notesRouter.get('/', async (request, response) => {
 <!-- You can find the code for our current application in its entirety in the <i>part4-3</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-3). -->
 您可以在[this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-3)的<i>part4-3</i> 分支中找到我们当前应用的全部代码
 
-### 更多的测试和后端重构（More tests and refactoring the backend ）
+### More tests and refactoring the backend 
+【更多的测试和后端重构】
 <!-- When code gets refactored, there is always the risk of [regression](https://en.wikipedia.org/wiki/Regression_testing), meaning that existing functionality may break. Let's refactor the remaining operations by first writing a test for each route of the API. -->
 当代码被重构时，总是有[regression](https://en.wikipedia.org/wiki/Regression_testing)的风险，这意味着现有的功能可能会中断。 让我们通过为 API 的每个路由编写测试来重构剩余的操作。
 
@@ -713,7 +718,8 @@ notesRouter.post('/', async (request, response, next) => {
 <!-- There's a slight problem with our code: we don't handle error situations. How should we deal with them? -->
 我们的代码有一个小问题: 我们没有处理错误情况。我们应该如何处理它们呢？
 
-### 错误处理与async/await（Error handling and async/await  ）
+### Error handling and async/await  
+【错误处理与async/await】
 <!-- If there's an exception while handling the POST request we end up in a familiar situation: -->
 如果在处理 POST 请求时出现了异常，我们就会陷入熟悉的情况:
 
@@ -825,7 +831,8 @@ notesRouter.delete('/:id', async (request, response, next) => {
 <!-- You can find the code for our current application in its entirety in the <i>part4-4</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4). -->
 您可以在[this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4)的<i>part4-4</i> 分支中找到我们当前应用的全部代码。
 
-### Eliminating the try-catch 消除try-catch
+### Eliminating the try-catch
+【消除try-catch】
 
 <!-- Async/await unclutters the code a bit, but the 'price' is the <i>try/catch</i> structure required for catching exceptions.  -->
 Async/await  稍微整理了一下代码，但是‘ 代价’是捕获异常所需的<i>try / catch</i> 结构。 
@@ -952,7 +959,8 @@ notesRouter.get('/:id', async (request, response) => {
 <!-- The code for our application can be found from [github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), branch <i>part4-5</i>. -->
 我们应用的代码可以在[ github ]( https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5) ，branch<i>part4-5</i> 中找到。
 
-### Optimizing the beforeEach function 优化 beforeEach 函数
+### Optimizing the beforeEach function
+【优化 beforeEach 函数】
 <!-- Let's return to writing our tests and take a closer look at the _beforeEach_ function that sets up the tests: -->
 让我们回到编写测试的问题上来，仔细研究一下设置测试的 beforeEach 函数:
 
@@ -1146,7 +1154,8 @@ module.exports = {
 
 
 
-### 重构测试（Refactoring tests）
+### Refactoring tests
+【重构测试】
 <!-- Our test coverage is currently lacking. Some requests like <i>GET /api/notes/:id</i> and <i>DELETE /api/notes/:id</i> aren't tested when the request is sent with an invalid id. The grouping and organization of tests could also use some improvement, as all tests exist on the same "top level" in the test file. The readability of the test would improve if we group related tests with <i>describe</i> blocks. -->
 我们的测试覆盖率目前还不够。 有些请求，比如<i>GET /api/notes/:id</i> 和<i>DELETE /api/notes/:id</i>，在使用无效 id 发送请求时没有进行测试。 测试的分组和组织也可以使用一些改进，因为所有测试都存在于测试文件的同一“顶层”上。 如果我们将相关的测试与<i>describe</i> 块分组，测试的可读性将得到提高。
 

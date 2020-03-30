@@ -15,8 +15,8 @@ lang: zh
 
 本课程还包含一些其他的议题，包括如何调试你的应用、如何配置、如何管理运行时环境以及如何使用 NoSQL 数据库。
 
-<!-- ### Prerequisites -->
-### 所需基础
+### Prerequisites
+【所需基础】
 
 <!-- Participants are expected to have good programming skills, basic knowledge of web programming and databases, and mastery of basic use of the Git version management system. You are also expected to have perseverance and a capacity for solving problems and seeking information independently. -->
 
@@ -26,8 +26,8 @@ lang: zh
 
 除此之外，不需要有 JavaScript 或其他课程的相关知识。
 
-<!-- ### Course material -->
-### 课程材料
+### Course material 
+【课程材料】
 
 <!-- The course material is meant to be read one part at a time, reading each part all the way through before moving on to the next one. -->
 课程是这么设计的，你应该一次只学习一章节，并在继续学习下一章节之前，把之前的章节都学透彻。
@@ -44,8 +44,8 @@ lang: zh
 
 课程是将一个示例应用从小做大的过程，也就是逐章节地对代码进行改进。 因此可能最好的学习方法是紧跟代码的修改进度，并独立地对代码进行小修改。 每一章节、每个步骤的示例代码都可以在 GitHub 上找到。
 
-<!-- ### Taking the course -->
-### 参加课程
+### Taking the course 
+【参加课程】
 
 <!-- The course contains ten parts, the first of which is numbered 0 for historical reasons. A part loosely corresponds to one week (averaging 15-20 hours) of studying but the speed of completing the course is flexible. -->
 
@@ -67,8 +67,8 @@ lang: zh
 
 我们对各章节已提交的练习所用时间做了统计，可以在[提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中找到。
 
-<!-- ### Grading -->
-### 课程成绩
+### Grading 
+【课程成绩】
 
 <!-- The course can be taken as a shorter course worth 3 credits, or as the full course worth 5-9 credits depending on the number of submitted exercises. -->
 
@@ -86,8 +86,8 @@ lang: zh
 
 一旦你完成了足够的练习后，满足成绩通过的条件，你可以从 [提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)下载课程证书。 获得课程证书，不需要芬兰社保号码。
 
-<!-- #### 3 credits  -->
-#### 如何获得3学分
+#### 3 credits 
+【如何获得3学分】
 
 <!-- For three credits, you must submit all compulsory exercises (without stars) for parts 0-3. -->
 
@@ -117,8 +117,8 @@ lang: zh
 
 这 3 学分课程以后可以拓展到 5-9 学分的版本。 如果你从一开始就是朝着 5-9 学分努力的，那就没有必要参加 3 学分的课程考试。
 
-<!-- #### 5-7 credits -->
-#### 如何获得5-7学分
+#### 5-7 credits
+【如何获得5-7学分】
 
 <!-- For 5-7 credits the number of credits and the grade are based on the total number of submitted exercises for <b>parts 0-7</b> (this includes the starred exercises). -->
 
@@ -158,8 +158,8 @@ lang: zh
 
 如果只想获得课程证书，你不需要参加课程考试或注册公开大学课程。
 
-<!-- #### 8 and 9 credits -->
-#### 如何获得8-9个学分
+#### 8 and 9 credits
+【如何获得8-9个学分】
 
 <!-- By submitting at least 22/26 of the exercises for part 8 of the course, GraphQL, you can get one additional credit. Part 8 can be done any time after part 5, because its contents are independent from parts 6 and 7. -->
 
@@ -173,8 +173,8 @@ lang: zh
 
 第 8 和章节第 9 章节的练习不计入 5-7 学分课程的成绩。
 
-<!-- ### How to get your credits -->
-### 如何获得学分
+### How to get your credits 
+【如何获得学分】
 
 <!-- If you want to receive credits, save your **University of Helsinki** student number to [the exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)in the _my submissions_ view. If you are not a student at the University of Helsinki, you can get a student number by registering for the course through the [Open university](https://fullstackopen.com/osa0/yleista/#kokeeseen-ilmoittautuminen). -->
 
@@ -189,29 +189,29 @@ lang: zh
 <!-- You can view your grade in Weboodi approximately four weeks after notifying us. -->
 提醒我们后，你在大约四周的时间就能在网页上看到你的成绩了。
 
-<!-- ### Course certificate -->
-### 结业证书
+### Course certificate 
+【结业证书】
 
 <!-- Even if you do not register to Open university for the exam, you can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) once you have completed enough exercises for a passing grade. <i>For getting the certificate, a Finnish social security number is not needed.</i> -->
 
 即使你没有因为考试而注册公开大学，只要你完成了结业所需的足够的练习数量，你就可以从 [提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) 中下载课程的结业证书。如果只想要获得结业证书，你不需要提供芬兰社保账号。
 
-<!-- ### Expanding a previously completed course -->
-### 拓展之前完成的课程
+### Expanding a previously completed course 
+【拓展之前完成的课程】
 
 <!-- If you have already taken the course either as a MOOC or as a University Course, you can now expand your course. -->
 
 如果你已经参与过这门课程，无论是在大学课程还是公开课，你都可以基于之前的课来进行拓展。
 
-<!-- #### Expanding Full stack open 2019  -->
-#### 拓展全栈公开课 2019
+#### Expanding Full stack open 2019 
+【拓展全栈公开课 2019】
 
 <!-- You can just pick up where you left! If you wish to resubmit a whole part, please contact the course personel. -->
 
 你可以续接你上次学习的进度！ 如果您希望重新提交整个章节的内容，请与课程负责人联系。
 
-<!-- #### Expanding other course instance -->
-#### 拓展其他课程
+#### Expanding other course instance
+【拓展其他课程】
 
 <!-- You can substitute <i>parts</i> of this course with parts you have previously submitted. For example, if you have previously completed the 3-credit course, you can substitute parts 0-3 of this course with the parts you have previously completed. You can only substitute parts in sequence, so you cannot for example substitute parts 0 and 2 but now complete part 1. -->
 
@@ -229,8 +229,8 @@ lang: zh
 
 如果你已经通过了课程考试(不包括 3 学分的课程考试) ，并且正在拓展你的课程，你就不需要再做考一次试了。
 
-<!-- ### Submitting exercises -->
-### 练习提交
+### Submitting exercises 
+【练习提交】
 
 <!-- The exercises are submitted through GitHub and marking the exercises as done on the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
 
@@ -252,8 +252,8 @@ lang: zh
 
 许多练习都是一点一点地构建一个较大的应用。 在这种情况下，只提交完整的应用就行了。 你可以在每次练习之后都 commit 一下，但这并不是强制性的。
 
-<!-- ### Sign up for the exam -->
-### 报名考试
+### Sign up for the exam 
+【报名考试】
 
 <!-- For official university credits you need to pass the course exam that is done in Open university Moodle. -->
 <!-- Note that it is possible to register for exam only if you have a Finnish social security number! -->
@@ -290,8 +290,8 @@ lang: zh
 
 请注意，您还必须将您的学生 ID 号保存到 [提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中的“我的提交”视图中。
 
-<!-- ### Full stack project  -->
-### 全栈项目
+### Full stack project  
+【全栈项目】
 
 <!-- A Full stack project worth 1-10 credits will be available through the Open University. -->
 
@@ -313,8 +313,8 @@ lang: zh
 
 有关更多信息，请参见 [开放大学](https://courses.helsinki.fi/fi/aytkt21010en/133171897)的网页。
 
-<!-- ### Interview promise  -->
-### 面试保证
+### Interview promise  
+【面试保证】
 
 <!-- Our collaborators Houston Inc, Terveystalo, Elisa, Konecranes and Smartly.io have given a <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (9 + 10). -->
 
@@ -328,8 +328,8 @@ lang: zh
 
 但你必须是芬兰居民才能参加面试。
 
-<!-- ### Before you start -->
-### 旅途开始之前
+### Before you start 
+【旅途开始之前】
 
 <!-- Using the [Chrome browser](https://www.google.com/chrome/) is recommended for this course, because it provides the best tools for web development. Another alternative is the [Developer Edition of Firefox](https://www.mozilla.org/en-US/firefox/developer/), which provides the same range of features. -->
 
@@ -355,8 +355,8 @@ lang: zh
 
 Node package manager [npm](https://www.npmjs.com/get-npm)  也会随 Node 安装好了。我们会在课程中频繁地使用npm。Node 同样带来的[npx](https://www.npmjs.com/package/npx), 我们也会使用到几次。
 
-<!-- ### Typos in the material  -->
-### 教材中的拼写错误
+### Typos in the material  
+【教材中的拼写错误】
 
 <!-- If you find a typo in the material, or something has been expressed unclearly, or is simply bad grammar, do a <i>pull request</i> to the course material in repository <https://github.com/fullstack-hy2020/fullstack-hy2020.github.io>. For example, the markdown source code of this page can be found in the repository at <https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/edit/source/src/content/0/en/part0a.md> -->
 

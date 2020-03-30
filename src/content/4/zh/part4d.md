@@ -187,7 +187,8 @@ _jwt.sign(userForToken, process.env.SECRET)_ 方法失败了。因为我们忘�
 
 ![](../../images/4/19e.png)
 
-### 为登录用户限制创建 Note（Limiting creating new notes to logged in users）
+### Limiting creating new notes to logged in users
+【为登录用户限制创建 Note】
 
 
 
@@ -292,7 +293,8 @@ if (!token || !decodedToken.id) {
 
 ![](../../images/4/21e.png)
 
-### 错误处理（Error handling）
+### Error handling
+【错误处理】
 
 
 
@@ -343,7 +345,8 @@ const errorHandler = (error, request, response, next) => {
 
 如果应用有很多接口都需要认证，JWT 认证应当被分拆到它们自己的中间件中。一些现成的类库，如[express-jwt](https://www.npmjs.com/package/express-jwt)可以使用。
 
-### 结束吧（End notes）
+### End notes
+【结束吧】
 
 
 

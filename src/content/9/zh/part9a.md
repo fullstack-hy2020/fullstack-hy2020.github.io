@@ -9,7 +9,8 @@ lang: zh
 <!-- TypeScript is a programming language designed for large-scale JavaScript development created by Microsoft. For example Microsoft's _Azure Management Portal_ (1,2 million lines of code) and the _Visual Studio Code_ (300 000 lines of code) have both been written in TypeScript. To support building large-scale JavaScript applications, TypeScript offers e.g. better development-time tooling, static code analysis, compile-time type checking and code level documentation. -->
 Typescript 是微软为大规模 JavaScript 开发而设计的一种编程语言。 例如，微软的 Azure 管理门户(120万行代码)和 Visual Studio 代码(30万行代码)都是用TypeScript编写的。 为了支持构建大规模的 JavaScript 应用，TypeScript 提供了更好的开发时工具、开发静态程序分析、编译时类型检查和代码级的文档。
 
-### Main principle 主要原则
+### Main principle
+【主要原则】
 
 <!-- TypeScript is a typed superset of JavaScript, and eventually it's compiled into plain JavaScript code. Programmer is even able to decide the version of the generated code, as long as it's ECMAScript 3 or newer. Typescript being a superset of JavaScript means that it includes all the features of JavaScript and its own additional features as well. In fact, all existing JavaScript code is actually valid TypeScript. -->
 TypeScript 是一个类型化的 JavaScript 超集，它最终会被编译成纯的 JavaScript 代码。 程序员甚至可以决定它生成的Javascript代码的版本，只要是 ECMAScript 3以后的版本。 Typescript 是 JavaScript 的超集，这意味着它包含了  JavaScript 的所有特性并同时增加了自己的一些特性。事实上，所有现有的 JavaScript 代码实际上都是合法的TypeScript。 
@@ -45,13 +46,15 @@ TypeScript是由三个独立但相互满足的部分组成:
 <i>语言服务</i> 是指从源代码中收集类型信息。 开发工具可以使用类型信息来提供智能感知、类型提示和可能的重构替代方案。
 
 
-### TypeScript key language features TypeScript的主要语言特性
+### TypeScript key language features
+【TypeScript的主要语言特性】
 
 
 <!-- In this section we will describe some of the key features of the TypeScript language. The intent is to provide you with basic understanding of TypeScripts' key features to help you understand more of what is to come during this course. -->
 在本节中，我们将描述TypeScript语言的一些关键特性。 目的是让你对TypeScript的关键特性有基本的了解，以帮助您了解本课程的更多内容。
 
-#### Type annotations 类型注解
+#### Type annotations
+【类型注解】
 
 <!-- Type annotations in TypeScript are a lightweight way to record the intended <i>contract</i> of a function or a variable.  -->
 Typescript 中的类型注解是一种用于记录函数或变量的预期 <i>约定</i> 的轻量级的方法。 
@@ -74,11 +77,13 @@ const age = 22;
 console.log(birthdayGreeter(birthdayHero, 22));
 ```
 
-#### Structural typing 结构化类型
+#### Structural typing
+【结构化类型】
 <!-- TypeScript is a structurally typed language. In structural typing two elements are considered to be compatible with one another if for each feature within the type of the first element a corresponding and identical feature exists within the type of the second element. Two types are considered to be identical if they are compatible with each other. -->
 TypeScript 是一种结构化类型语言。 在结构化类型中，如果第一个元素的类型中的每个特征在第二个元素的类型中存在对应的、相同的特征，则认为两个元素相互兼容。 如果两种类型彼此兼容，则认为它们是相同的。 
 
-#### Type inference 类型推断
+#### Type inference
+【类型推断】
 <!-- The TypeScript compiler can attempt to infer the type information if no type has been specified. Variable's type can be inferred based on its assigned value and its usage. The type inference take place when initializing variables and members, setting parameter default values, and determining function return types. -->
 如果没有指定类型，TypeScript 编译器可以尝试推断类型信息。 变量的类型可以根据它的赋值和用法来推断。 类型推断发生在初始化变量和成员、设置参数默认值以及确定函数返回类型时。
 
@@ -145,7 +150,9 @@ Callsfunction 是带有一个参数<i>callback</i> 的函数类型。 参数<i>c
 <!-- Despite the types of the parameter function not being defined, we can infer from the calling context that the argument <i>result</i> is of the type string. -->
 尽管没有定义参数函数的类型，但是我们可以从上下文调用中推断出参数<i>result</i> 的类型是 string。
 
-#### Type erasure 类型擦除
+#### Type erasure
+【类型擦除】
+
 <!-- TypeScript removes all type system constructs during compilation. -->
 在编译期间，TypeScript会 删除所有类型的系统构造。
 
@@ -171,7 +178,9 @@ let x;
 <!-- The lack of runtime type information can be surprising for programmers who are used to extensively using reflection or other metadata systems. -->
 对于习惯于广泛使用反射或其他元数据系统的程序员来说，执行期类型信息的缺失可能会让他们感到惊讶。
 
-### Why should one use TypeScript? 为什么要用TypeScript？
+### Why should one use TypeScript?
+【为什么要用TypeScript？】
+
 <!-- On different forums you may stumble upon a lot of different arguments either for or against TypeScript. The truth is probably as vague as: it depends on your needs and use of the functions that TypeScript offers. Anyway, here are explained some of our reasoning behind why we think that the use of TypeScript may have some advantages.  -->
 在不同的论坛上，你可能会遇到很多支持或反对TypeScript的争论。 事实很可能是模糊的: 这取决于你的需求和对TypeScript所提供函数的使用。 但无论如何，这里解释了我们为什么认为使用TypeScript有一些优势，以及这背后的一些原因。
 
@@ -204,7 +213,9 @@ TypeScript的第三个优点是，当 IDE 确切知道您正在处理的数据�
 <!-- With the help of TypeScript it is also very easy to start using the newest JavaScript language features at an early stage just by altering its configuration. -->
 在 TypeScript 的帮助下，在早期阶段仅仅通过改变配置就可以很容易地开始使用最新的 JavaScript 语言特性。
 
-### What does TypeScript not fix? TypeScript不能解决什么问题？
+### What does TypeScript not fix?
+【TypeScript不能解决什么问题？】
+
 <!-- As mentioned above, TypeScript type annotations and type checking exist only at compile time and no longer at runtime. Even if the compiler does not throw any errors, runtime errors are still possible. -->
 如上所述，TypeScript 类型注解和类型检查仅在编译时存在，在运行时不再存在。 即使编译器没有抛出任何错误，运行时仍然是有可能抛出错误的。
 <!-- These runtime errors are especially common when handling external input, such as data received from a network request. -->
@@ -213,7 +224,8 @@ TypeScript的第三个优点是，当 IDE 确切知道您正在处理的数据�
 <!-- Lastly, below we list some issues many have with TypeScript, which might be good to be aware of: -->
 最后，下面我们列举了一些TypeScript中存在的问题，这些问题值得注意:
 
-#### Incomplete, invalid or missing types in external libraries 外部库中不完整、无效或缺少的类型
+#### Incomplete, invalid or missing types in external libraries
+【外部库中不完整、无效或缺少的类型】
 <!-- When using external libraries you may find that some libraries have either missing or in some way invalid type declarations. Most often this is due to the library not being written in TypeScript, and the person adding the type declarations manually not doing such a good job with it. In these cases you might need to define the type declarations yourself.  -->
 在使用外部库时，您可能会发现某些库缺少或以某种方式存在无效的类型声明。 大多数情况下，这是因为库不是用TypeScript编写的，而且手动添加类型声明的人并没有很好地处理它。 在这些情况下，您可能需要自己定义类型声明。
 
@@ -223,7 +235,9 @@ TypeScript的第三个优点是，当 IDE 确切知道您正在处理的数据�
 <!-- Otherwise you might want to start off by getting acquainted with TypeScript's own [documentation](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html) regarding type declarations. -->
 否则，你可能需要从熟悉 TypeScript 自己关于类型声明的[文档]( https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html 文档)开始。
 
-#### Sometimes type inference needs assistance 有时候类型推断需要帮助
+#### Sometimes type inference needs assistance
+【有时候类型推断需要帮助】
+
 <!-- The type inference in TypeScript is pretty good but not quite perfect. -->
 TypeScript中的类型推断非常好，但还不够完美。 
 
@@ -238,7 +252,8 @@ TypeScript中的类型推断非常好，但还不够完美。
 
 
 
-#### Mysterious type errors 神秘的类型错误
+#### Mysterious type errors
+【神秘的类型错误】
 
 <!-- The errors given by the type system may sometimes be quite hard to understand, especially if you use complex types. -->
 类型系统给出的错误有时可能很难理解，特别是当您使用复杂类型时。

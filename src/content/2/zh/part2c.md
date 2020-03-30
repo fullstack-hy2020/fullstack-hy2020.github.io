@@ -80,7 +80,8 @@ Json-server 将所有数据存储在服务器上的<i>db.json</i> 文件中。 �
 <!-- We will get familiar with the principles of implementing server-side functionality in more detail in [part 3](/en/part3) of this course. -->
 在本课程的[第3章节](/zh/part3)中，我们将更详细地了解如何实现服务器端的功能。
 
-### 浏览器作为一个运行时环境（The browser as a runtime environment ）
+### The browser as a runtime environment 
+【浏览器作为一个运行时环境】
 <!-- Our first task is fetching the already existing notes to our React application from the address <http://localhost:3001/notes>. -->
 我们的第一个任务是从地址 http://localhost:3001/notes 获取已经存在的便笺到 React 应用。
 
@@ -317,7 +318,7 @@ npm install json-server --save-dev
 <!-- There is a fine difference in the parameters. <i>axios</i> is installed as a runtime dependency (_--save_) of the application, because the execution of the program requires the existence of the library. On the other hand, <i>json-server</i> was installed as a development dependency (_--save-dev_), since the program itself doesn't require it. It is used for assistance during software development. There will be more on different dependencies in the next part of the course. -->
 参数之间有细微的差别。<i>axios</i> 被安装为应用的运行时依赖项(-- save) ，因为程序的执行需要库的存在。 而另一个， <i>json-server</i> 是作为开发依赖项(-- save-dev)安装的，因为程序本身并不需要它。 它用于在软件开发过程中提供帮助。 在课程的下一章节将会有更多关于不同依赖的内容。
 
-### Axios 与 promises
+### Axios and promises
 <!-- Now we are ready to use axios. Going forward, json-server is assumed to be running on port 3001. -->
 现在我们可以使用 axios 了。在开始之前，我已经假定你的json-server跑在3001端口了。
 
@@ -631,7 +632,8 @@ useEffect(() => {
 <!-- The code so far for the application can be found in full on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-4) in the branch <i>part2-4</i>. -->
 到目前为止，应用的代码可以在分支<i>part2-4</i> 中的[github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-4)上找到。
 
-### 开发的运行时环境（The development runtime environment  ）
+### The development runtime environment  
+【开发的运行时环境】
 <!-- The configuration for the whole of our application has steadily grown more complex. Let's review what happens and where. The following image describes the makeup of the application -->
 
 我们整个应用的配置已经逐渐变得更加复杂。 让我们回顾一下发生了什么，在哪里发生的。 下图描述了应用的组成

@@ -100,7 +100,8 @@ const errorHandler = (error, request, response, next) => {
 ![](../../images/3/50.png)
 
 
-### 承诺链（Promise chaining ）
+### Promise chaining 
+【承诺链】
 <!-- Many of the route handlers changed the response data into the right format by calling the _toJSON_ method. When we created a new note, the _toJSON_ method was called for the object passed as a parameter to _then_: -->
 许多路由处理程序通过调用 toJSON 方法将响应数据更改为正确的格式。 当我们创建一个新的便笺时，toJSON 方法被调用，作为参数传递给下面的对象:
 
@@ -160,7 +161,8 @@ app.post('/api/notes', (request, response, next) => {
 <!-- In this example, Promise chaining does not provide much of a benefit. The situation would change if there were many asynchronous operations that had to be done in sequence. We will not delve further into the topic. In the next part of the course we will learn about the <i>async/await</i> syntax in JavaScript, that will make writing subsequent asynchronous operations a lot easier. -->
 在这个例子中，承诺链没有提供多少好处。 但要是有许多必须按顺序进行的异步操作，情况就会发生变化。 我们不会进一步深入探讨这个主题。 在本课程的下一章节中，我们将学习 JavaScript 中的<i>async/await</i>语法，这将使编写后续的异步操作变得容易得多。
 
-### 将数据库后端部署到生产环境（Deploying the database backend to production ）
+### Deploying the database backend to production 
+【将数据库后端部署到生产环境】
 <!-- The application should work almost as-is in Heroku. We do have to generate a new production build of the frontend due to the changes that we have made to our frontend.  -->
 该应用在 Heroku 的运行情况应该基本一样。 由于我们对前端进行了更改，我们必须生成一个新的前端生产版本。
 
@@ -251,7 +253,8 @@ personService
 
 
 
-#### 3.21 将数据库后端部署到生产环境（Deploying the database backend to production）
+#### 3.21  Deploying the database backend to production
+【将数据库后端部署到生产环境】
 <!-- Generate a new "full stack" version of the application by creating a new production build of the frontend, and copy it to the backend repository. Verify that everything works locally by using the entire application from the address <https://localhost:3001>. -->
 通过创建前端的新生产版本，生成应用的新“完整栈”版本，并将其复制到后端存储库。 通过使用地址 https://localhost:3001的整个应用来验证所有的东西都能在本地工作。
 

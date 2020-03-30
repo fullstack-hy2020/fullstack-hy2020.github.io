@@ -8,7 +8,8 @@ lang: zh
 <div class="content">
 
 
-### Class Components 类组件
+### Class Components
+【类组件】
 <!-- During the course we have only used React components having been defined as Javascript functions. This was not possible without the [hook](https://reactjs.org/docs/hooks-intro.html)-functionality that came with version 16.8 of React. Before, when defining a component that uses state one had to define it using Javascript's [Class](https://reactjs.org/docs/state-and-lifecycle.html#converting-a-function-to-a-class)-syntax. -->
 在本课程中，我们只使用了被定义为 Javascript 函数的 React 组件。 如果没有 React 16.8版本的 [hook](https://reactjs.org/docs/hooks-intro.html) 功能，这是不可能的。 以前，在定义一个使用状态的组件时，必须使用 Javascript 的[ Class ]( https://reactjs.org/docs/state-and-lifecycle.html#converting-a-function-to-a-Class )语法来定义它。
 
@@ -226,12 +227,14 @@ const App = () => {
 <!-- When writing fresh code [there is no rational reason to use Class Components](https://reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both) if the project is using React with a version number 16.8 or greater. On the other hand, [there is currently no need to rewrite all old React code](https://reactjs.org/docs/hooks-faq.html#do-i-need-to-rewrite-all-my-class-components) as Functional components. -->
 在编写新代码时，如果项目使用的是 React with a version number 16.8或更多，那么没有理由使用 Class Components [there is no rational reason to use Class Components](https://reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both)。 另一方面，[目前没有必要重写所有旧的React代码]( https://reactjs.org/docs/hooks-faq.html#do-i-need-to-rewrite-all-my-class-components )作为功能组件。
 
-### Organization of code in React application 在 React application 中代码的组织
+### Organization of code in React application
+【在 React application 中代码的组织】
 <!-- In most applications we followed the principle, by which components were placed in the directory <i>components</i>, reducers were placed in the directory <i>reducers</i>, and the code responsible for communicating with the server was placed in the directory <i>services</i>. This way of organizing fits a smaller application just fine, but as the amount of components increase, better solutions are needed. There is no one correct way to organize a project. The article [The 100% correct way to structure a React app (or why there’s no such thing)](https://hackernoon.com/the-100-correct-way-to-structure-a-react-app-or-why-theres-no-such-thing-3ede534ef1ed) provides some perspective on the issue. -->
 在大多数应用中，我们遵循的原则是，将组件放在目录<i>components</i> 中，reducer程序放在目录<i>reducers</i> 中，负责与服务器通信的代码放在目录<i>services</i> 中。 这种组织方式适合于较小的应用，但是随着组件数量的增加，需要更好的解决方案。 组织一个项目没有一种正确的方法。 这篇文章[100% 正确的方式构建一个 React 应用(或为什么没有这样的东西)]( https://hackernoon.com/The-100-correct-way-to-structure-a-React-app-or-why-theres-no-such-thing-3ede534ef1ed )提供了一些关于这个问题的观点。
 
 
-### Frontend and backend in the same repository 前端和后端在同一个仓库
+### Frontend and backend in the same repository
+【前端和后端在同一个仓库】
 <!-- During the course we have created the frontend and backend into separate repositories. This is a very typical approach. However, we did the deployment by [copying](/en/part3/deploying_app_to_internet#serving-static-files-from-the-backend) the bundled frontend code into the backend repository. A possibly better approach would have been to deploy the frontend code separately. Especially with applications created using create-react-app it is very straightforward thanks to the included [buildpack](https://github.com/mars/create-react-app-buildpack). -->
 在这个过程中，我们已经将前端和后端创建到单独的存储库中。 这是一个非常典型的方法。 然而，我们通过[复制](/ en / part3 / 将 app 部署到 internet # serving-static-files-from-the-backend)将绑定的前端代码复制到后端存储库中来完成部署。 一个可能更好的方法是单独部署前端代码。 特别是使用 create-react-app 创建的应用，它非常简单，这要归功于内置的[ buildpack ]( https://github.com/mars/create-react-app-buildpack 应用)。
 
@@ -241,7 +244,9 @@ const App = () => {
 <!-- [This repository]((https://github.com/fullstack-hy2020/create-app)) provides one possible starting point for the organization of "single-repository-code". -->
 [此存储库](( https://github.com/fullstack-hy2020/create-app ))为“单一存储库代码”的组织提供了一个可能的起点。
 
-### Changes on the server 服务器上的更改
+### Changes on the server
+【服务器上的更改】
+
 <!-- If there are changes in the state on the server, e.g. when new blogs are added by other users to the bloglist service, the React-frontend we implemented during this course will not notice these changes until the page reloads. A similar situation arises when the frontend triggers a time-consuming computation in the backend. How do we reflect the results of the computation to the frontend? -->
 如果服务器上的状态发生了变化，例如当其他用户将新博客添加到博客列表服务时，我们在本课程中实现的 React-frontend 将不会注意到这些变化，直到页面重新加载。 当前端触发后端中耗时的计算时，也会出现类似的情况。 如何将计算结果反映到前端？
 
@@ -264,7 +269,9 @@ WebSockets 是由浏览器提供的 API，目前还不是所有的浏览器都�
 <!-- In [part 8](/em/part8) our topic is GraphQL that provices a nice mechanism for notifying clients when there are changes in the backend data. -->
 在[ part 8](/ em / part8)中，我们的主题是 GraphQL，它为后端数据发生更改时通知客户端提供了一个很好的机制。
 
-### Virtual DOM 虚拟 DOM
+### Virtual DOM
+【虚拟 DOM】
+
 <!-- The concept of the Virtual DOM often comes up when discussing React. What is it all about? As mentioned in [part 0](/en/part0/fundamentals_of_web_apps#document-object-model-or-dom) browsers provide a [DOM API](https://developer.mozilla.org/fi/docs/DOM), using which the JavaScript running in the browser can modify the elements defining the appearance of the page. -->
 在讨论 React 时，经常会提到虚拟 DOM 的概念。 这到底是怎么回事？ 正如在[ part 0](/ en / part0 / web apps 基础 # document-object-model-or-DOM)中提到的那样，浏览器提供了一个[DOM API](https://developer.mozilla.org/fi/docs/DOM) ，浏览器中运行的 JavaScript 可以修改定义页面外观的元素。
 
@@ -294,7 +301,8 @@ ReactDOM.render(
 <!-- When the state of the application changes a <i>new virtual DOM</i> gets defined by the components. React has the previous version of the virtual DOM in memory and instead of directly rendering the new virtual DOM using the DOM API React computes the optimal way to update the DOM (remove, add or modify elements in the DOM) such that the DOM reflects the new virtual DOM. -->
 当应用的状态发生更改时，组件将定义一个新的虚拟 DOM i。 React 在内存中使用以前版本的虚拟 DOM，而不是使用 DOM API 直接渲染新的虚拟 DOM React 计算更新 DOM 的最佳方式(删除、添加或修改 DOM 中的元素) ，使 DOM 反映新的虚拟 DOM。
 
-### On the role of React in applications React在应用中的作用
+### On the role of React in applications
+【React在应用中的作用】
 <!-- In the material we may not have put enough emphasis on the fact that React is primarily a library for managing the creation of views for an application. If we look at the traditional [Model View Controller](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) -pattern, then the domain of React would be <i>View</i>. React has a more narrow area of application than e.g. [Angular](https://angular.io/), which is an all-encompassing Frontend MVC-framework. Therefore React is not being called a <i>framework</i>, but a <i>library</i>. -->
 在这些材料中，我们可能没有充分强调 React 主要是一个管理应用视图创建的库。 如果我们看看传统的[模型视图控制器]( https://en.wikipedia.org/wiki/Model%e2%80%93view%e2%80%93controller )-模式，那么 React 的领域将是<i>View</i>. React 的应用范围比较狭窄，例如[ Angular ]( https://Angular.io/ ) ，它是一个包含所有 Fronten 的应用 因此 React 不被称为<i>framework</i>，而是一个库
 
@@ -537,7 +545,8 @@ Express 的文档包括一个关于安全性的部分: [生产最佳实践: 安�
 <!-- Lately there has been a notable uplift in the interest in [static type checking](https://en.wikipedia.org/wiki/Type_system#Static_type_checking). At the moment the most popular typed version of Javascript is the [Typescript](https://www.typescriptlang.org/) which has been developed by Microsof. Topic of the [part 9](/en/part9) that shall be released at the end of April will be Typesceript. -->
 最近，人们对静态类型检查 [static type checking](https://en.wikipedia.org/wiki/Type_system#Static_type_checking)的兴趣有了明显的提升，这种兴趣可以追溯到20世纪90年代。 目前最流行的 Javascript 类型版本是由 Microsof 开发的[ Typescript ]( https://www.typescriptlang.org/ )。 将于4月底发布的[第9章节](/zh/part9)的主题将是 Typesceript。
 
-#### Server side rendering, isomorphic applications and universal code 服务器端渲染，同构应用和通用代码
+#### Server side rendering, isomorphic applications and universal code
+【服务器端渲染，同构应用和通用代码】
 <!-- The browser is not the only domain where components defined using React can be rendered. The rendering can also be done on the [server](https://reactjs.org/docs/react-dom-server.html). This kind of approach is increasingly being used, such that when accessing the application for the first time the server serves a pre-rendered page made with React. From here onwards the operation of the application continues as usual, meaning the browser executes React, which manipulates the DOM shown by the browser. The rendering that is done on the server goes by the name: <i>server side rendering</i>. -->
 浏览器并不是唯一可以渲染使用 React 定义的组件的域。 渲染也可以在[服务器]上完成( https://reactjs.org/docs/react-dom-server.html )。 这种方法正在越来越多地被使用，例如，当服务器第一次访问应用时，服务器服务于使用 React 生成的预渲染页面。 从这里开始，应用的操作继续像往常一样进行，这意味着浏览器执行 React，它操纵浏览器显示的 DOM。 在服务器上完成的渲染命名为:<i>server side rendering</i>。
 
@@ -556,7 +565,9 @@ React 和 Node 为将同构应用实现为通用代码提供了一个理想的�
 <!-- Writing universal code directly using React is currently still pretty cumbersome. Lately a library called [Next.js](https://github.com/zeit/next.js/), which is implemented on top of React, has garnered much attention and is a good option for making universal applications. -->
 直接使用 React 编写通用代码目前仍然相当繁琐。 最近在 React 上实现了一个名为[ Next.js ]( https://github.com/zeit/Next.js/ )的库，这个库吸引了很多关注，是开发通用应用的一个很好的选择。
 
-#### Progressive web apps 渐进式网络应用
+#### Progressive web apps
+【渐进式网络应用】
+
 <!-- Lately people have started using the term [progressive web app](https://developers.google.com/web/progressive-web-apps/) (PWA) launched by Google. -->
 最近人们开始使用 Google 推出的术语[渐进式网络应用]( https://developers.Google.com/web/progressive-web-apps/ 应用)(PWA)。
 
@@ -567,7 +578,7 @@ React 和 Node 为将同构应用实现为通用代码提供了一个理想的�
 使用 create-react-app 创建的应用在默认情况下是[渐进的]( https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/readme.md#making-a-progressive-web-app )。 如果应用使用来自服务器的数据，则使其逐步进行需要工作。 离线功能通常是在[service workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API)的帮助下实现的。
 
 #### Microservice architecture
-微服务架构
+【微服务架构】
 
 <!-- During this course we have only scratched the surface of the server end of things. In our applications we had a <i>monolithic</i> backend, meaning one application making up a whole and running on a single server, serving only a few API-endpoints. -->
 在本课程中，我们仅仅触及了服务器端的皮毛。 在我们的应用中，我们有一个<i>monolithic</i> 后端，这意味着一个应用组成一个整体并在单个服务器上运行，只服务于几个 api 端点。
@@ -636,7 +647,9 @@ Lambda 的主要特点是，它支持在云中执行单个函数，如今 Google
 <!-- Serverless is not about there not being a server in applications, but about how the server is defined. Software developer can shift their programming efforts to a higher level of abstraction as there is no longer a need to programmatically define the routing of HTTP-requests, database relations, etc., since the cloud infrastructure provides all of this. Cloud functions also lend themselves to creating well scaling system, e.g. Amazon's Lambda can execute a massive amount of cloud functions per second. All of this happens automatically through the infrastructure and there is no need to initiate new servers, etc. -->
 无服务器并不是说应用中没有服务器，而是说服务器是如何定义的。 软件开发人员可以将他们的编程工作转移到更高的抽象级别，因为不再需要通过编程方式定义 http 请求的路由、数据库关系等，因为云基础设施提供了所有这些。 云函数也有助于创建良好的扩展系统，例如亚马逊的 Lambda 每秒可以执行大量的云函数。 所有这些都是通过基础设施自动完成的，不需要启动新的服务器等等。
 
-### Useful libraries and interesting links 有用的库和有趣的链接
+### Useful libraries and interesting links
+【有用的库和有趣的链接】
+
 <!-- The JavaScript developer community has produced a large variety of useful libraries. If you are developing anything more substancial, it is worth it to check if existing solutions are already available.  -->
 开发者社区已经产生了大量有用的库。 如果你正在开发更实质性的东西，那么检查一下现有的解决方案是否已经可用是值得的。
 <!-- One good place to find libraries is https://applibslist.xyz/. -->

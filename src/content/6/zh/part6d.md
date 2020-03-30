@@ -23,7 +23,8 @@ lang: zh
 <!-- In new applications you should absolutely use the hook-api, but knowing how to use connect is useful when maintaining older projects using redux. -->
 在新的应用中，您绝对应该使用 hook-api，但是在使用 redux 维护老项目时，了解如何使用 connect 非常有用。
 
-### 使用 connect-function 将 redux 存储共享给组件（Using the connect-function to share the redux store to components） 
+### Using the connect-function to share the redux store to components
+【使用 connect-function 将 redux 存储共享给组件】 
 
 
 <!-- Let's modify the <i>Notes</i> component so that instead of using the hook-api (the _useDispatch_ and  _useSelector_ functions ) it uses the _connect_-function.  -->
@@ -462,7 +463,8 @@ const NewNote = (props) => {
 <!-- Connect is an incredibly useful tool although it may seem difficult at first due to its level of abstraction. -->
 连接是一个非常有用的工具，尽管由于它的抽象级别，乍看起来可能很困难。
 
-### 使用 mapDispatchToProps 的另一种方式（Alternative way of using mapDispatchToProps ）
+### Alternative way of using mapDispatchToProps 
+【使用 mapDispatchToProps 的另一种方式】
 <!-- We defined the function for dispatching actions from the connected <i>NewNote</i> component in the following way: -->
 我们如下面的方式定义了从连接的<i>NewNote</i> 组件发送操作的函数:
 
@@ -567,7 +569,9 @@ const NewNote = (props) => {
 <!-- The creator of Redux Dan Abramov has created a wonderful tutorial called [Getting started with Redux](https://egghead.io/courses/getting-started-with-redux) that you can find on Egghead.io. I highly recommend the tutorial to everyone. The last four videos discuss the _connect_ method, particularly the more "complicated" way of using it. -->
 Redux的创建者 Dan Abramov 创建了一个非常棒的教程，叫做 [Getting started with Redux](https://egghead.io/courses/getting-started-with-redux)  ，你可以在 [Egghead.io](https://Egghead.io/courses/Getting-started-with-Redux)上找到这个 。 我向每个人强烈推荐这个教程。 最后四个视频讨论了连接方法，特别是使用它的更“复杂”的方式。 
 
-### Presentational/Container revisited 复习表现层/容器
+### Presentational/Container revisited
+【复习表现层/容器】
+
 <!-- The refactored <i>Notes</i> component is almost entirely focused on rendering notes and is quite close to being a so-called [presentational component](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0). According to the [description](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) provided by Dan Abramov, presentation components: -->
 重构的<i>Notes</i> 组件几乎完全集中在渲染便笺上，并且非常接近于所谓的[表示组件]( https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0组件)。 根据 Dan Abramov 提供的 [description](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)，演示组件:
 
@@ -660,7 +664,8 @@ Hoc 实际上是[高阶函数]( https://en.wikipedia.org/wiki/higher-order_funct
 <!-- After the React hook-api was published, HOCs have become less and less popular. Almost all libraries which used to be based on HOCs have now been modified to use hooks. Most of the time hook based apis are a lot simpler than HOC based ones, as is the case with redux as well.  -->
 React hook-api 发布之后，HOCs 变得越来越不受欢迎。 几乎所有过去基于 hoc 的库现在都被修改为使用Hook。 大多数基于Hook的 api 比基于 HOC 的 api 简单得多，redux 的情况也是如此。 
 
-### Redux 和组件状态（Redux and the component state）
+### Redux and the component state
+【Redux 和组件状态】
 <!-- We have come a long way in this course and, finally, we have come to the point at which we are using React "the right way", meaning React only focuses on generating the views, and the application state is separated completely from the React components and passed on to Redux, its actions, and its reducers. -->
 我们在这个过程中已经走了很长的路，最后，我们已经到了我们使用 React“ the right way”的地步，意思是 React 只关注于生成视图，应用状态完全独立于 Redux 组件，并传递到 Redux、 Redux 的动作和 Redux 的还原器。
 

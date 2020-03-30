@@ -60,7 +60,8 @@ ReactDOM.render(<App />, document.getElementById('root'))
 <!-- The files <i>App.js</i>, <i>App.css</i>, <i>App.test.js</i>, <i>logo.svg</i> and <i>serviceWorker.js</i> may be deleted as they are not needed in our application right now. -->
 文件<i>App.js</i>、<i>App.css</i>、<i>App.test.js</i>、<i>logo.svg</i> 和<i>serviceWorker.js</i> 可以删除，因为它们目前在我们的应用中不并需要。
 
-### 组件（Component ）
+### Component
+【组件】
 <!-- The file <i>index.js</i> now defines a React-[component](https://reactjs.org/docs/components-and-props.html) with the name <i>App</i> and the command on the final line -->
 文件<i>index.js</i> 定义了一个 React-[ 组件component ]( https://reactjs.org/docs/components-and-props.html) ，命名为<i>App</i>，最后一行代码为：
 
@@ -226,8 +227,8 @@ JSX 是一种“类[ XML ]( https://developer.mozilla.org/en-us/docs/web/XML/xml
 ```html
 <br />
 ```
-
-### 多组件（Multiple components）
+### Multiple components
+【多组件】
 <!-- Let's modify the application as follows (NB: imports at the top of the file are left out in these <i>examples</i>, now and in the future. They are still needed for the code to work): -->
 
 让我们按照如下方式修改应用(注意: 文件顶部的imports在这些示例中被省略了，以后也会这么处理。 但它们是代码正常运行必需的) :
@@ -282,9 +283,8 @@ const App = () => {
 
 还有一个约定，就是应用的组件树顶部都要有一个<i>root 组件</i> 叫做<i>App</i>。 然而，正如我们将在[第6章](/zh/ part6)将要讲到的，在某些情况下，组件的根并不一定是<i>App</i> ，而是包装在了一些工具组件中。
 
-<!-- ### props: passing data to components--> 
-
-### props：向组件传递数据
+### props: passing data to components 
+【props：向组件传递数据】
 
 
 
@@ -358,7 +358,8 @@ const App = () => {
 <!-- The props sent by the component <i>App</i> are the values of the variables, the result of the evaluation of the sum expression and a regular string. -->
 上面<i>App</i> 组件传递的props有变量的值、求和表达式的计算结果和一个常规字符串。
 
-### Some notes 一些注意事项
+### Some note
+【一些注意事项】
 <!-- React has been configured to generate quite clear error messages. Despite this, you should, at least in the beginning, advance in **very small steps** and make sure that every change works as desired. -->
 
  尽管React 可以生成非常清晰的错误消息，你也应该，至少在一开始的时候，每次前进一小步，并确保每一个修改都能按照预期的方式工作。

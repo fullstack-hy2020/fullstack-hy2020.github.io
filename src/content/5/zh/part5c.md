@@ -47,7 +47,8 @@ const Note = ({ note, toggleImportance }) => {
 <!-- Notice that the <i>li</i> element has the [CSS](https://reactjs.org/docs/dom-elements.html#classname) classname <i>note</i>, that is used to access the component in our tests. -->
 注意，li 元素具有 [CSS](https://reactjs.org/docs/dom-elements.html#classname) classname <i>note</i> ，用于访问我们测试中的组件。
 
-### Rendering the component for tests 为测试渲染组件
+### Rendering the component for tests
+【为测试渲染组件】
 
 <!-- We will write our test in the <i>src/components/Note.test.js</i> file, which is in the same directory as the component itself. -->
 我们将在 <i>src/components/Note.test.js</i> 中编写测试，它与组件本身在同一个目录中。
@@ -101,7 +102,8 @@ expect(component.container).toHaveTextContent(
 )
 ```
 
-### 运行测试（Running tests）
+### Running tests
+【运行测试】
 
 <!-- Create-react-app configures tests to be run in watch mode by default, which means that the _npm test_ command will not exit once the tests have finished, and will instead wait for changes to be made to the code. Once new changes to the code are saved, the tests are executed automatically after which Jest goes back to waiting for new changes to be made. -->
 Create-react-app 默认情况下将测试配置为在 watch 模式下运行，这意味着 _npm test_ 命令在测试结束后不会退出，而是等待对代码进行更改。 一旦保存了对代码的新的更改，测试就会自动执行，然后 Jest 等待新的更改。 
@@ -133,7 +135,8 @@ CI=true npm test
 <!-- Personally, I do not like this way of storing tests and application code in the same directory. The reason we choose to follow this convention is that it is configured by default in applications created by create-react-app. -->
 就我个人而言，我不喜欢这种将测试和应用程序代码存储在同一个目录中的方式。 我们之所以选择遵循这个约定，是因为它是在 create-react-app 创建的应用程序中默认配置的。
 
-### 在组件中搜寻内容 Searching for content in a component
+### Searching for content in a component
+【在组件中搜寻内容】
 
 <!-- The react-testing-library package offers many different ways of investigating the content of the component being tested. Let's slightly expand our test: -->
 react-testing-library 包提供了许多不同的方法来研究被测试组件的内容。 让我们稍微扩展一下我们的测试: 
@@ -185,7 +188,9 @@ test('renders content', () => {
 <!-- There are numerous similiar query methods [available](https://testing-library.com/docs/dom-testing-library/api-queries). -->
 有许多类似的查询方法[可用]( https://testing-library.com/docs/dom-testing-library/api-queries )。
 
-### Debugging tests 调试测试
+### Debugging tests
+【调试测试】
+
 <!-- We typically run into many different kinds of problems when writing our tests. -->
 在编写测试时，我们通常会遇到许多不同类型的问题。
 
@@ -268,7 +273,8 @@ console.log src/components/Note.test.js:21
   </li>
 ```
 
-### 在测试中点击按钮 Clicking buttons in tests
+### Clicking buttons in tests
+【在测试中点击按钮】
 
 <!-- In addition to displaying content, the <i>Note</i> component also makes sure that when the button associated with the note is pressed, the _toggleImportance_ event handler function gets called. -->
 
@@ -336,7 +342,8 @@ expect(mockHandler.mock.calls.length).toBe(1)
 <!-- In our example, the mock function is a perfect choice since it can be easily used for verifying that the method gets called exactly once. -->
 在我们的示例中，mock 函数是一个完美的选择，因为它可以很容易地用于验证方法是否只被调用一次。
 
-### 测试可切换组件（Tests for the <i>Togglable</i> component）
+### Tests for the Togglable component
+【测试可切换组件】
 
 <!-- Let's write a few tests for the <i>Togglable</i> component. Let's add the <i>togglableContent</i> CSS classname to the div that returns the child components. -->
 让我们为 Togglable 组件编写一些测试。 让我们将 <i>togglableContent</i> CSS classname 添加到返回子组件的 div。
@@ -464,7 +471,8 @@ test('toggled content can be closed', () => {
 
 
 
-### 测试表单（Testing the forms ）
+### Testing the forms 
+【测试表单】
 
 
 <!-- We already used the [fireEvent](https://testing-library.com/docs/api-events#fireevent) function in our previous tests to click buttons. -->
@@ -575,7 +583,8 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
 <!-- The second expectation checks, that the event handler is called with the right parameters - that a note with the correct content is created when the form is filled.  -->
 第二个期望检查，使用正确的参数调用事件处理程序——即在填写表单时创建具有正确内容的通知。
 
-###  测试覆盖范围（Test coverage）
+### Test coverage
+【测试覆盖范围】
 
 
 <!-- We can easily find out the [coverage](https://github.com/facebookincubator/create-react-app/blob/ed5c48c81b2139b4414810e1efe917e04c96ee8d/packages/react-scripts/template/README.md#coverage-reporting) of our tests by running them with the command -->
@@ -655,7 +664,9 @@ const author = component.container.querySelector('#author')
 <div class="content">
 
 
-### Frontend integration tests 前端集成测试
+### Frontend integration tests
+【前端集成测试】
+
 <!-- In the previous part of the course material, we wrote integration tests for the backend that tested its logic and connected database through the API provided by the backend. When writing these tests, we made the conscious decision not to write unit tests, as the code for that backend is fairly simple, and it is likely that bugs in our application occur in more complicated scenarios that integration tests are well suited for. -->
 在课程教材的前面章节，我们为后端编写了集成测试，测试其逻辑并通过后端提供的 API 连接数据库。 在编写这些测试时，我们有意识地决定不编写单元测试，因为后端的代码相当简单，而且我们应用中的错误可能发生在更复杂的场景中，而集成测试非常适合这些场景。
 
@@ -664,7 +675,9 @@ const author = component.container.querySelector('#author')
 
 
 
-### Snapshot testing 快照测试
+### Snapshot testing
+【快照测试】
+
 <!-- Jest offers a completely different alternative to "traditional" testing called [snapshot](https://facebook.github.io/jest/docs/en/snapshot-testing.html) testing. The interesting feature of snapshot testing is that developers do not need to define any tests themselves, it is simply enough to adopt snapshot testing.  -->
 Jest 提供了一种与“传统”测试完全不同的替代方法，称为[ snapshot ]( https://facebook.github.io/Jest/docs/en/snapshot-testing.html 测试)。 快照测试的有趣特性是开发人员不需要自己定义任何测试，只需要采用快照测试即可。 
 

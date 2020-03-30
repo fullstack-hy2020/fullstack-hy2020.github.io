@@ -28,7 +28,8 @@ lang: zh
 <!-- At the moment there are two good options: [Relay](https://facebook.github.io/relay/) by Facebook and [Apollo Client](https://www.apollographql.com/docs/react/). From these two Apollo is absolutely more popular, and we will also be using it.  -->
 目前有两个不错的选择: Facebook 的 https://Facebook.github.io/Relay/ 和 Apollo Client 的 https://www.apollographql.com/docs/react/ 。 从这两个阿波罗是绝对更受欢迎，我们也将使用它。
 
-### Apollo client 阿波罗客户端
+### Apollo client
+【阿波罗客户端】
 
 
 <!-- In this course we will use the version [3.0-beta](https://www.apollographql.com/docs/react/v3.0-beta/) of Apollo Client.  -->
@@ -130,7 +131,9 @@ ReactDOM.render(
 )
 ```
 
-### Making queries 查询
+### Making queries
+【查询】
+
 <!-- We are ready to implement the main view of the application, which shows a list of phone numbers.  -->
 我们已经准备好实现应用的主视图，它显示了一个电话号码列表。
 
@@ -246,7 +249,9 @@ const App = () => {
 }
 ```
 
-### Named queries and variables 命名查询和变量
+### Named queries and variables
+【命名查询和变量】
+
 <!-- Let's implement functionality for viewing the address details of a person. The <i>findPerson</i> query is well suited for this.  -->
 让我们实现查看个人地址详细信息的功能。
 
@@ -595,7 +600,8 @@ createPerson({  variables: { name, phone, street, city } })
 我们可以通过重新加载页面来更新屏幕，因为页面重新加载时缓存空了。 然而，必须有一个更好的方法来做到这一点。
 
 
-### Updating the cache 更新缓存
+### Updating the cache
+【更新缓存】
 <!-- There are few different solutions for this. One way is to make the query for all persons [poll]((https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#polling) the server, or make the query repeatedly.  -->
 对此几乎没有不同的解决方案。 一种方法是对所有人进行查询[ poll ]( https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#polling )服务器，或者重复进行查询。
 
@@ -705,7 +711,8 @@ const App = () => {
 <!-- The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-2) branch <i>part8-2</i>. -->
 当前应用的代码可以在[ Github ](https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-2)分支<i>part8-2</i> 上找到。
 
-#### Handling mutation errors处理突变错误
+#### Handling mutation errors
+【处理突变错误】
 <!-- Trying to create a person with invalid data causes an error, and the whole application breaks -->
 尝试用无效数据创建人员会导致错误，整个应用将中断
 
@@ -794,7 +801,9 @@ const Notify = ({errorMessage}) => {
 <!-- The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-3) branch <i>part8-3</i>. -->
 当前应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-3)分支<i>part8-3</i> 上找到。
 
-### Updating a phone number 更新电话号码
+### Updating a phone number
+【更新电话号码】
+
 <!-- Let's add the possibility to change the phone numbers of persons to our application. The solutions is almost identical to the one we used for adding new persons.  -->
 让我们在应用中增加更改人员电话号码的可能性。 这些解决方案与我们用来增加新人员的方案几乎完全相同。
 

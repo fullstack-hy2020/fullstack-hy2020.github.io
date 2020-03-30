@@ -11,7 +11,8 @@ lang: zh
 
 到目前为止，我们已经遵循了 React 推荐的状态管理约定。 我们已经将状态和处理它的方法放置到应用程序的根组件[the root component](https://reactjs.org/docs/lifting-state-up.html) 中。 然后，状态及其处理程序方法通过属性传递给其他组件。 这在一定程度上是可行的，但是当应用程序变得更大时，状态管理就变得更具挑战性。
 
-### Flux-架构
+### Flux-architecture
+【Flux-架构】
 
 <!-- Facebook developed the [Flux](https://facebook.github.io/flux/docs/in-depth-overview/)- architecture to make state management easier. In Flux, the state is separated completely from the React-components into its own <i>stores</i>. -->
 <!-- State in the store is not changed directly, but with different <i>actions</i>. -->
@@ -340,7 +341,8 @@ const App = () => {
 }
 ```
 
-### 纯函数、不可变（Pure functions, immutable）
+### Pure functions, immutable
+【纯函数、不可变】
 
 <!-- The initial version of reducer is very simple: -->
 reducer 的初始版本非常简单: 
@@ -842,7 +844,8 @@ toggleImportance = (id) => {
 }
 ```
 
-### Action 创造器（Action creators）
+### Action creators
+【Action 创造器】
 
 <!-- We begin to notice that, even in applications as simple as ours, using Redux can simplify the frontend code. However, we can do a lot better. -->
 我们开始注意到，即使在像我们这样简单的应用程序中，使用 Redux 也可以简化前端代码。 然而，我们可以做得更好。
@@ -896,7 +899,9 @@ const App = () => {
 ```
 
 
-### Redux（Redux-storen välittäminen eri komponenteille）
+### Forwarding Redux-Store to various components
+【Redux-Store 到多种组件】
+
 <!-- Aside from the reducer, our application is in one file. This is of course not sensible, and we should separate <i>App</i> into its own module.  -->
 除了reducer，我们的应用是在一个文件。 这当然是不明智的，我们应该将<i>App</i> 分离到它自己的模块中。
 

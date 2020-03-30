@@ -47,7 +47,9 @@ export default { getAll, create, update }
 <!-- What's going on here? We can access the backend from a browser and from postman without any problems. -->
 这是怎么回事? 我们可以从浏览器和Postman访问后端，没有任何问题。
 
-### Same origin policy and CORS 同源政策和 CORS
+### Same origin policy and CORS
+【同源政策和 CORS】
+
 <!-- The issue lies with a thing called CORS, or Cross-Origin Resource Sharing.  -->
 问题出在一个叫 CORS 的东西上，或者叫跨来源资源共享。
 
@@ -90,7 +92,8 @@ app.use(cors())
 <!-- You can read more about CORS from [Mozillas page](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS). -->
 你可以 从[ Mozillas 页面]( https://developer.mozilla.org/en-us/docs/web/http/CORS )阅读更多关于 CORS的内容。
 
-### Application to the Internet 将应用部署到网上
+### Application to the Internet
+【将应用部署到网上】
 <!-- Now that the whole stack is ready, let's move our application to the internet. We'll use good old [Heroku](https://www.heroku.com) for this. -->
 现在整个栈已经准备就绪，让我们将应用迁移到互联网上。 我们将使用古老的 Heroku  https://www.Heroku.com。
 
@@ -146,7 +149,9 @@ node_modules
 <!-- The next question is, how do we deploy the frontend to the Internet? We have multiple options. Let's go through one of them next.  -->
 下一个问题是，我们如何将前端部署到互联网？ 我们有多种选择。 接下来我们来看看其中的一个。
 
-### Frontend production build 前端生产构建
+### Frontend production build
+【前端生产构建】
+
 <!-- So far we have been running React code in <i>development mode</i>. In development mode the application is configured to give clear error messages, immediately render code changes to the browser, and so on.  -->
 到目前为止，我们一直在<i>开发模式</i> 中运行 React code。 在开发模式下，应用被配置为提供清晰的错误消息，立即向浏览器渲染代码更改，等等。
 
@@ -169,7 +174,8 @@ node_modules
 !function(e){function r(r){for(var n,f,i=r[0],l=r[1],a=r[2],c=0,s=[];c<i.length;c++)f=i[c],o[f]&&s.push(o[f][0]),o[f]=0;for(n in l)Object.prototype.hasOwnProperty.call(l,n)&&(e[n]=l[n]);for(p&&p(r);s.length;)s.shift()();return u.push.apply(u,a||[]),t()}function t(){for(var e,r=0;r<u.length;r++){for(var t=u[r],n=!0,i=1;i<t.length;i++){var l=t[i];0!==o[l]&&(n=!1)}n&&(u.splice(r--,1),e=f(f.s=t[0]))}return e}var n={},o={2:0},u=[];function f(r){if(n[r])return n[r].exports;var t=n[r]={i:r,l:!1,exports:{}};return e[r].call(t.exports,t,t.exports,f),t.l=!0,t.exports}f.m=e,f.c=n,f.d=function(e,r,t){f.o(e,r)||Object.defineProperty(e,r,{enumerable:!0,get:t})},f.r=function(e){"undefined"!==typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"})
 ```
 
-### 从后端服务部署静态文件（Serving static files from the backend ）
+### Serving static files from the backend 
+【从后端服务部署静态文件】
 <!-- One option for deploying the frontend is to copy the production build (the <i>build</i> directory) to the root of the backend repository and configure the backend to show the frontend's <i>main page</i> (the file <i>build/index.html</i>) as its main page.  -->
 部署前端的一个选择是将生产构建( <i>build</i> 目录)复制到后端仓库的根目录，并配置后端以显示前端的 <i>main page</i> (文件 <i>build/index.html</i>)作为其主页。
 
@@ -266,7 +272,8 @@ React代码从服务器地址 http://localhost:3001/notes 获取便笺，并将�
 <!-- The application needs a database. Before we introduce one, let's go through a few things.  -->
 应用需要一个数据库。在我们引入数据库之前，让我们先了解几个知识点。
 
-###  Streamlining deploying of the frontend  流程化前端部署
+###  Streamlining deploying of the frontend
+【流程化前端部署】
 <!-- To create a new production build of the frontend without extra manual work, let's add some npm-scripts to the <i>package.json</i> of the backend repository:  -->
 为了在没有额外手工工作的情况下创建前端的新的生产构建，我们在后端存储库的<i>package.json</i>  中添加一些 npm-scripts:
 
@@ -296,7 +303,8 @@ _npm run deploy:full_ 会将这两者结合起来，并包含更新后端存储�
 >**NB**  <i>build:ui</i> does not work on Windows, go to [Solution](https://github.com/fullstackopen-2019/fullstackopen-2019.github.io/issues/420)  
 注意 <i>build: ui</i> 不能在 Windows 上工作，请转到[ 解决方案 ]( https://github.com/fullstackopen-2019/fullstackopen-2019.github.io/issues/420)
 
-### Proxy 代理
+### Proxy
+【代理】
 <!-- Changes on the frontend have caused it to no longer work in development mode (when started with command _npm start_), as the connection to the backend does not work.  -->
 前端上的更改导致它不能再在开发模式下工作(当使用命令 npm start 启动时) ，因为到后端的连接无法工作。
 
@@ -352,7 +360,6 @@ const baseUrl = '/api/notes'
 
 
 ### Exercises 3.9.-3.11.
-练习3.9-3.11。
 
 <!-- The following exercises don't require many lines of code. They can however be challenging, because you must understand exactly what is happening and where, and the configurations must be just right.  -->
 下面的练习不需要很多行代码。 但是，它们可能是具有挑战性的，因为您必须准确地理解正在发生什么、在哪里发生，而且配置必须恰到好处。
