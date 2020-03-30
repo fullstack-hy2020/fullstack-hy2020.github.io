@@ -41,14 +41,14 @@ Let's  make some end to end tests for our note application.
 <!-- Aloitetaan asentamalla Cypress <i>frontendin</i> kehitysaikaiseksi riippuvuudeksi -->
 We begin by installing Cypress to <i>the frontend</i> as development dependency
 
-```js
+```bash
 npm install --save-dev cypress
 ```
 
 <!-- ja määritellään npm-skripti käynnistämistä varten. -->
 and by adding an npm-script to run it:
 
-```js
+```json
 {
   // ...
   "scripts": {
@@ -72,7 +72,7 @@ The tests require the tested system to be running. Unlike our backend integratio
 <!-- Tehdään <i>backendille</i> npm-skripti, jonka avulla se saadaan käynnistettyä testausmoodissa, eli siten, että <i>NODE\_ENV</i> saa arvon <i>test</i>. -->
 Let's add an npm-script to <i>the backend</i> which starts it in test mode, or so that <i>NODE\_ENV</i> is <i>test</i>.
 
-```js
+```json
 {
   // ...
   "scripts": {
@@ -93,7 +93,7 @@ Let's add an npm-script to <i>the backend</i> which starts it in test mode, or s
 <!-- Kun backend ja frontend ovat käynnissä, voidaan käynnistää Cypress komennolla -->
 When both backend and frontend are running, we can start Cypress with the command
 
-```js
+```bash
 npm run cypress:open
 ```
 
@@ -241,7 +241,7 @@ The test works. The problem is if we later add more input fields, the test will 
 It would be better to give our inputs unique <i>ids</i> and find them by them. 
 We change our login form like so
 
-```js
+```jsx
 const LoginForm = ({ ... }) => {
   return (
     <div>
@@ -332,7 +332,7 @@ Now we notice, that the variable _cy_ our tests use gives us a nasty Eslint erro
 <!-- Siitä päästään eroon asentamalla [eslint-plugin-cypress](https://github.com/cypress-io/eslint-plugin-cypress) kehitysaikaiseksi riippuvuudeksi -->
 We can get rid of it by installing [eslint-plugin-cypress](https://github.com/cypress-io/eslint-plugin-cypress) as a development dependency
 
-```js
+```bash
 npm install eslint-plugin-cypress --save-dev
 ```
 
@@ -643,7 +643,7 @@ The test uses [cy.contains](https://docs.cypress.io/api/commands/contains.html#S
 <!-- Sovellus renderöi virheilmoituksen CSS-luokan <i>error</i> sisältävään elementtiin: -->
 The application renders the error message to a component with the CSS class <i>error</i>:
 
-```js
+```jsx
 const Notification = ({ message }) => {
   if (message === null) {
     return null
@@ -747,7 +747,7 @@ We used <i>cy.get('html')</i> to access the whole visible content of the applica
 <!-- Sovelluksemme testit näyttävät tällä hetkellä seuraavalta: -->
 Currently we have the following tests:
 
-```js 
+```js
 describe('Note app', function() {
   it('user can login', function() {
     cy.contains('login').click()
@@ -794,7 +794,7 @@ Our situation is a bit more complicated than in the example in the Cypress docum
 However Cypress can handle that as well. 
 The code is the following
 
-```js 
+```js
 describe('when logged in', function() {
   beforeEach(function() {
     // highlight-start
@@ -828,7 +828,7 @@ We should make it a [custom command](https://docs.cypress.io/api/cypress-api/cus
 Custom commands are declared in <i>cypress/support/commands.js</i>.
 The code for logging in is as follows:
 
-```js 
+```js
 Cypress.Commands.add('login', ({ username, password }) => {
   cy.request('POST', 'http://localhost:3001/api/login', {
     username, password
@@ -842,7 +842,7 @@ Cypress.Commands.add('login', ({ username, password }) => {
 <!-- Komennon käyttö on helppoa, testi yksinkertaisuu ja selkeytyy: -->
 Using our custom command is easy, and our test becomes cleaner:
 
-```js 
+```js
 describe('when logged in', function() {
   beforeEach(function() {
     // highlight-start
@@ -1110,7 +1110,7 @@ You can see the HTTP requests done by the tests on the Network tab, and the cons
 So far we have run our Cypress tests using the graphical test runner.
 It is also possible to run them [from the command line](https://docs.cypress.io/guides/guides/command-line.html). We just have to add an npm script for it:
 
-```js
+```json
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -1156,7 +1156,7 @@ Configure Cypress to your project. Make a test for checking that the application
 <!-- Testin rungon tulee olla seuraavanlainen -->
 The structure of the test must be as follows
 
-```js 
+```js
 describe('Blog app', function() {
   beforeEach(function() {
     cy.request('POST', 'http://localhost:3001/api/testing/reset')
@@ -1183,7 +1183,7 @@ Make a new user in the <i>beforeEach</i> block for the tests.
 <!-- Testien runko laajenee seuraavasti -->
 The test structure extends like so
 
-```js 
+```js
 describe('Blog app', function() {
   beforeEach(function() {
     cy.request('POST', 'http://localhost:3001/api/testing/reset')
@@ -1216,7 +1216,7 @@ describe('Blog app', function() {
 Make a test which checks, that a logged in user can create a new blog. 
 The structure of the test could be as follows
 
-```js 
+```js
 describe('Blog app', function() {
   // ...
 

@@ -17,13 +17,13 @@ Tähän tarkoitukseen ehdottomasti paras vaihtoehto on [react-testing-library](h
 
 Asennetaan kirjastot komennolla:
 
-```js
+```bash
 npm install --save-dev @testing-library/react @testing-library/jest-dom
 ```
 
 Testataan aluksi muistiinpanon renderöivää komponenttia:
 
-```js
+```jsx
 const Note = ({ note, toggleImportance }) => {
   const label = note.important
     ? 'make not important'
@@ -47,7 +47,7 @@ Tehdään testi tiedostoon <i>src/components/Note.test.js</i>, eli samaan hakemi
 
 Ensimmäinen testi varmistaa, että komponentti renderöi muistiinpanon sisällön:
 
-```js
+```jsx
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render } from '@testing-library/react'
@@ -71,7 +71,7 @@ test('renders content', () => {
 
 Alun konfiguroinnin jälkeen testi renderöi komponentin metodin react-testing-library-kirjaston tarjoaman [render](https://testing-library.com/docs/react-testing-library/api#render) avulla:
 
-```js
+```jsx
 const component = render(
   <Note note={note} />
 )
@@ -95,7 +95,7 @@ Create-react-app:issa on konfiguroitu testit oletusarvoisesti suoritettavaksi ns
 
 Jos haluat ajaa testit "normaalisti", se onnistuu komennolla
 
-```js
+```bash
 CI=true npm test
 ```
 
@@ -116,7 +116,7 @@ Itse en pidä siitä, että testit ja normaali koodi ovat samassa hakemistossa. 
 
 react-testing-library-kirjasto tarjoaa runsaasti tapoja, miten voimme tutkia testattavan komponentin sisältöä. Laajennetaan testiämme hiukan:
 
-```js
+```jsx
 test('renders content', () => {
   const note = {
     content: 'Component testing is done with react-testing-library',
@@ -160,7 +160,7 @@ Testejä tehdessä törmäämme tyypillisesti erittäin moniin ongelmiin.
 
 Renderin palauttaman olion metodilla [debug](https://testing-library.com/docs/react-testing-library/api#debug) voimme tulostaa komponentin tuottaman HTML:n konsoliin, eli kun muutamme testiä seuraavasti:
 
-```js
+```jsx
 test('renders content', () => {
   const note = {
     content: 'Component testing is done with react-testing-library',
@@ -179,7 +179,7 @@ test('renders content', () => {
 
 konsoliin tulostuu komponentin generoima HTML:
 
-```js
+```
 console.log node_modules/@testing-library/react/dist/index.js:90
   <body>
     <div>
@@ -197,7 +197,7 @@ console.log node_modules/@testing-library/react/dist/index.js:90
 
 On myös mahdollista etsiä komponentista pienempi osa, ja tulostaa sen HTML-koodi, tällöin tarvitsemme metodia _prettyDOM_, joka löytyy react-testing-library:n mukana tulevasta kirjastosta <i>@testing-library/dom</i>:
 
-```js
+```jsx
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render } from '@testing-library/react'
@@ -221,7 +221,7 @@ test('renders content', () => {
 
 Eli haimme selektorin avulla komponentin sisältä <i>li</i>-elementin ja tulostimme sen HTML:n konsoliin:
 
-```js
+```
 console.log src/components/Note.test.js:21
   <li
     class="note"
@@ -239,7 +239,7 @@ Sisällön näyttämisen lisäksi toinen <i>Note</i>-komponenttien vastuulla ole
 
 Testaus onnistuu seuraavasti:
 
-```js
+```jsx
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react' // highlight-line
 import { prettyDOM } from '@testing-library/dom' 
@@ -295,7 +295,7 @@ Esimerkissämme mock-funktio sopi tarkoitukseen erinomaisesti, sillä sen avulla
 
 Tehdään komponentille <i>Togglable</i> muutama testi. Lisätään komponentin lapset renderöivään div-elementtiin CSS-luokka <i>togglableContent</i>:
 
-```js
+```jsx
 const Togglable = React.forwardRef((props, ref) => {
   // ...
 
@@ -317,7 +317,7 @@ const Togglable = React.forwardRef((props, ref) => {
 
 Testit ovat seuraavassa
 
-```js
+```jsx
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
 import { render, fireEvent } from '@testing-library/react'
@@ -418,7 +418,7 @@ Käytännössä siis loimme <i>fireEventin</i> avulla tapahtuman <i>click</i> na
 
 Tehdään testi komponentille <i>NoteForm</i>. Lomakkeen koodi näyttää seuraavalta
 
-```js
+```jsx
 import React, { useState } from 'react'
 
 const NoteForm = ({ createNote }) => {
@@ -460,7 +460,7 @@ Lomakkeen toimintaperiaatteena on kutsua sille propsina välitettyä funktiota _
 
 Testi on seuraavassa:
 
-```js
+```jsx
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
@@ -496,7 +496,7 @@ Testin ensimmäinen ekspektaatio varmistaa, että lomakkeen lähetys on aikaansa
 
 [Testauskattavuus](https://github.com/facebookincubator/create-react-app/blob/ed5c48c81b2139b4414810e1efe917e04c96ee8d/packages/react-scripts/template/README.md#coverage-reporting) saadaan helposti selville suorittamalla testit komennolla
 
-```js
+```bash
 CI=true npm test -- --coverage
 ```
 
@@ -534,7 +534,7 @@ Lisää komponenttiin tarvittaessa testausta helpottavia CSS-luokkia tai id:itä
 
 Jos esim. määrittelet <i>input</i>-elementille id:n 'author':
 
-```js
+```jsx
 <input
   id='author'
   value={author}

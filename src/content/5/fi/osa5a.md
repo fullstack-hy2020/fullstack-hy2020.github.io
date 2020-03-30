@@ -19,7 +19,7 @@ Sovelluksen yläosaan on nyt lisätty kirjautumislomake, myös uuden muistiinpan
 
 Komponentin <i>App</i> koodi näyttää seuraavalta:
 
-```js
+```jsx
 const App = () => {
   const [notes, setNotes] = useState([]) 
   const [newNote, setNewNote] = useState('')
@@ -156,7 +156,7 @@ Onnistunut kirjautuminen ei nyt näy sovelluksen käyttäjälle mitenkään. Muo
 
 Määritellään ensin komponenttiin <i>App</i> apufunktiot lomakkeiden generointia varten:
 
-```js
+```jsx
 const App = () => {
   // ...
 
@@ -202,7 +202,7 @@ const App = () => {
 
 ja renderöidään ne ehdollisesti komponenttiin <i>App</i> :
 
-```js
+```jsx
 const App = () => {
   // ...
 
@@ -246,7 +246,7 @@ const App = () => {
 
 Lomakkeiden ehdolliseen renderöintiin käytetään hyväksi aluksi hieman erikoiselta näyttävää, mutta Reactin yhteydessä [yleisesti käytettyä kikkaa](https://reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator):
 
-```js
+```jsx
 {
   user === null && loginForm()
 }
@@ -256,7 +256,7 @@ Jos ensimmäinen osa evaluoituu epätodeksi eli on [falsy](https://developer.moz
 
 Voimme suoraviivaistaa edellistä vielä hieman käyttämällä [kysymysmerkkioperaattoria](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator):
 
-```js
+```jsx
 return (
   <div>
     <h1>Notes</h1>
@@ -280,7 +280,7 @@ Eli jos _user === null_ on [truthy](https://developer.mozilla.org/en-US/docs/Glo
 
 Tehdään vielä sellainen muutos, että jos käyttäjä on kirjautunut, renderöidään kirjautuneen käyttäjän nimi:
 
-```js
+```jsx
 return (
   <div>
     <h1>Notes</h1>
@@ -315,7 +315,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 Frontend on siis tallettanut onnistuneen kirjautumisen yhteydessä backendilta saamansa tokenin sovelluksen tilan <i>user</i> kenttään <i>token</i>:
 
-```js
+```jsx
 const handleLogin = async (event) => {
   event.preventDefault()
   try {
@@ -336,7 +336,7 @@ Korjataan uusien muistiinpanojen luominen siihen muotoon, mitä backend edellytt
 
 <i>noteService</i>-moduuli muuttuu seuraavasti:
 
-```js
+```jsx
 import axios from 'axios'
 const baseUrl = '/api/notes'
 
@@ -460,7 +460,7 @@ Oikea paikka asian hoitamiselle on [effect hook](https://reactjs.org/docs/hooks-
 
 Effect hookeja voi olla useita, joten tehdään oma hoitamaan kirjautuneen käyttäjän ensimmäinen sivun lataus:
 
-```js
+```jsx
 const App = () => {
   const [notes, setNotes] = useState([]) 
   const [newNote, setNewNote] = useState('')
@@ -566,7 +566,7 @@ Tässä vaiheessa kirjautuneiden käyttäjien tietoja ei vielä tarvitse muistaa
 
 **HUOM** Voit tehdä kirjautumislomakkeen ehdollisen renderöinnin esim. seuraavasti:
 
-```js
+```jsx
   if (user === null) {
     return (
       <div>

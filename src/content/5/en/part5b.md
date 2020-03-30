@@ -26,7 +26,7 @@ The user can close the login form by clicking the <i>cancel</i> button.
 
 Let's start by extracting the login form into its own component:
 
-```js
+```jsx
 import React from 'react'
 
 const LoginForm = ({
@@ -71,7 +71,7 @@ The state and all the functions related to it are defined outside of the compone
 
 Notice that the props are assigned to variables through <i>destructuring</i>, which means that instead of writing:
 
-```js
+```jsx
 const LoginForm = (props) => {
   return (
     <div>
@@ -99,7 +99,7 @@ where the properties of the _props_ object are accessed through e.g. _props.hand
 
 One fast way of implementing the functionality is to change the _loginForm_ function of the <i>App</i> component like so:
 
-```js
+```jsx
 const App = () => {
   const [loginVisible, setLoginVisible] = useState(false) // highlight-line
 
@@ -138,7 +138,7 @@ The <i>App</i> components state now contains the boolean <i>loginVisible</i>, th
 
 The value of loginVisible is toggled with two buttons. Both buttons have their event handlers defined directly in the component:
 
-```js
+```jsx
 <button onClick={() => setLoginVisible(true)}>log in</button>
 
 <button onClick={() => setLoginVisible(false)}>cancel</button>
@@ -147,7 +147,7 @@ The value of loginVisible is toggled with two buttons. Both buttons have their e
 
 The visibility of the component is defined by giving the component an [inline](/en/part2/adding_styles_to_react_app#inline-styles) style rule, where the value of the [display](https://developer.mozilla.org/en-US/docs/Web/CSS/display) property is <i>none</i> if we do not want the component to be displayed:
 
-```js
+```jsx
 const hideWhenVisible = { display: loginVisible ? 'none' : '' }
 const showWhenVisible = { display: loginVisible ? '' : 'none' }
 
@@ -179,7 +179,7 @@ The code related to managing the visibility of the login form could be considere
 
 Our goal is to implement a new <i>Togglable</i> component that can be used in the following way:
 
-```js
+```jsx
 <Togglable buttonLabel='login'>
   <LoginForm
     username={username}
@@ -197,7 +197,7 @@ The way that the component is used is slightly different from our previous compo
 
 We can add any React elements we want between the opening and closing tags of <i>Togglable</i>, like this for example:
 
-```js
+```jsx
 <Togglable buttonLabel="reveal">
   <p>this line is at start hidden</p>
   <p>also this is hidden</p>
@@ -207,7 +207,7 @@ We can add any React elements we want between the opening and closing tags of <i
 
 The code for the <i>Togglable</i> component is shown below:
 
-```js
+```jsx
 import React, { useState } from 'react'
 
 const Togglable = (props) => {
@@ -242,7 +242,7 @@ The new and interesting part of the code is [props.children](https://reactjs.org
 
 This time the children are rendered in the code that is used for rendering the component itself:
 
-```js
+```jsx
 <div style={showWhenVisible}>
   {props.children}
   <button onClick={toggleVisibility}>cancel</button>
@@ -252,7 +252,7 @@ This time the children are rendered in the code that is used for rendering the c
 
 Unlike the "normal" props we've seen before, <i>children</i> is automatically added by React and always exists. If a component is defined with an automatically closing _/>_ tag, like this:
 
-```js
+```jsx
 <Note
   key={note.id}
   note={note}
@@ -269,7 +269,7 @@ The <i>Togglable</i> component is reusable and we can use it to add similar visi
 
 Before we do that, let's extract the form for creating notes into its own component:
 
-```js
+```jsx
 const NoteForm = ({ onSubmit, handleChange, value}) => {
   return (
     <div>
@@ -288,7 +288,7 @@ const NoteForm = ({ onSubmit, handleChange, value}) => {
 ```
 Next let's define the form component inside of a <i>Togglable</i> component:
 
-```js
+```jsx
 <Togglable buttonLabel="new note">
   <NoteForm
     onSubmit={addNote}
@@ -319,7 +319,7 @@ We could just as well move the state of the forms to the corresponding component
 <!-- Muistiinpanosta huolehtiva komponentti muuttuu seuraavasti: -->
 The component for a note changes like so: 
 
-```js
+```jsx
 import React, {useState} from 'react' 
 
 const NoteForm = ({ createNote }) => {
@@ -365,7 +365,7 @@ There is only one prop left, the _createNote_ function, which the form calls whe
 The _App_ component becomes simpler now that we have got rid of the <i>newNote</i> state and its event handler. 
 The _addNote_ function for creating new notes receives a new note as a parameter, and the function is the only prop we send to the form: 
 
-```js
+```jsx
 const App = () => {
   // ...
   const addNote = (noteObject) => {
@@ -403,7 +403,7 @@ There are many ways to implement closing the form from the parent component, but
 
 Let's make the following changes to the <i>App</i> component:
 
-```js
+```jsx
 const App = () => {
   // ...
   const noteFormRef = React.createRef() // highlight-line
@@ -424,7 +424,7 @@ The [createRef](https://reactjs.org/docs/react-api.html#reactcreateref) method i
 
 We also make the following changes to the <i>Togglable</i> component:
 
-```js
+```jsx
 import React, { useState, useImperativeHandle } from 'react' // highlight-line
 
 const Togglable = React.forwardRef((props, ref) => { // highlight-line
@@ -468,7 +468,7 @@ The component uses the [useImperativeHandle](https://reactjs.org/docs/hooks-refe
 
 We can now hide the form by calling <i>noteFormRef.current.toggleVisibility()</i> after a new note has been created:
 
-```js
+```jsx
 const App = () => {
   // ...
   const addNote = (noteObject) => {
@@ -496,7 +496,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 When we define a component in React:
 
-```js
+```jsx
 const Togglable = () => ...
   // ...
 }
@@ -505,7 +505,7 @@ const Togglable = () => ...
 
 And use it like this:
 
-```js
+```jsx
 <div>
   <Togglable buttonLabel="1" ref={togglable1}>
     first
@@ -578,7 +578,7 @@ The application shown in the picture has a bit of additional CSS to improve its 
 
 It is easy to add styles to the application as shown in part 2 using [inline](/en/part2/adding_styles_to_react_app#inline-styles) styles:
 
-```js
+```jsx
 const Blog = ({ blog }) => {
   const blogStyle = {
     paddingTop: 10,
@@ -662,7 +662,7 @@ Show the button for deleting a blog post only if the blog post was added by the 
 
 The <i>Togglable</i> component assumes that it is given the text for the button via the <i>buttonLabel</i> prop. If we forget to define it to the component:
 
-```js
+```jsx
 <Togglable> buttonLabel forgotten... </Togglable>
 ```
 
@@ -672,7 +672,7 @@ We would like to enforce that when the <i>Togglable</i> component is used, the b
 
 The expected and required props of a component can be defined with the [prop-types](https://github.com/facebook/prop-types) package. Let's install the package:
 
-```js
+```bash
 npm install --save prop-types
 ```
 
@@ -699,7 +699,7 @@ The application still works and nothing forces us to define props despite the Pr
 
 Let's also define PropTypes to the <i>LoginForm</i> component:
 
-```js
+```jsx
 import PropTypes from 'prop-types'
 
 const LoginForm = ({
@@ -735,7 +735,7 @@ Create-react-app has installed ESlint to the project by default, so all that's l
 
 Next, we will start testing the frontend and in order to avoid undesired and irrelevant linter errors we will install the [eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest) package:
 
-```js
+```bash
 npm add --save-dev eslint-plugin-jest
 ```
 
@@ -795,7 +795,7 @@ module.exports = {
 
 Let's create [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) file with the following contents to the repository root
 
-```bash
+```
 node_modules
 build
 ```
@@ -804,7 +804,7 @@ Now the directories <em>build</em> and <em>node_modules</em> will be skipped whe
 
 Let us also create a npm script to run the lint:
 
-```js
+```json
 {
   // ...
   {
@@ -830,7 +830,7 @@ The react-devtools also reveals that the component does not have name:
 
 Fortunately this is easy to fix
 
-```js
+```jsx
 import React, { useState, useImperativeHandle } from 'react'
 import PropTypes from 'prop-types'
 

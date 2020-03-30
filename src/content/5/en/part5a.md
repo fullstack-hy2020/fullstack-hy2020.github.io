@@ -24,7 +24,7 @@ A login form has now been added to the top of the page. The form for adding new 
 
 The code of the <i>App</i> component now looks as follows: 
 
-```js
+```jsx
 const App = () => {
   const [notes, setNotes] = useState([]) 
   const [newNote, setNewNote] = useState('')
@@ -171,7 +171,7 @@ User is not notified about a successful login in any way. Let's modify the appli
 
 Let's add two helper functions to the <i>App</i> component for generating the forms: 
 
-```js
+```jsx
 const App = () => {
   // ...
 
@@ -218,7 +218,7 @@ const App = () => {
 
 and conditionally render them:
 
-```js
+```jsx
 const App = () => {
   // ...
 
@@ -262,7 +262,7 @@ const App = () => {
 
 A slightly odd looking, but commonly used [React trick](https://reactjs.org/docs/conditional-rendering.html#inline-if-with-logical--operator) is used to render the forms conditionally: 
 
-```js
+```jsx
 {
   user === null && loginForm()
 }
@@ -273,7 +273,7 @@ If the first statement evaluates false, or is [falsy](https://developer.mozilla.
 
 We can make this even more straightforward by using the [conditional operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator):
 
-```js
+```jsx
 return (
   <div>
     <h1>Notes</h1>
@@ -299,7 +299,7 @@ If _user === null_ is [truthy](https://developer.mozilla.org/en-US/docs/Glossary
 
 Let's do one more modification. If user is logged in, their name is shown on the screen: 
 
-```js
+```jsx
 return (
   <div>
     <h1>Notes</h1>
@@ -435,7 +435,6 @@ It is very easy to use. A <i>value</i> corresponding to a certain <i>key</i> is 
 window.localStorage.setItem('name', 'juha tauriainen')
 ```
 
-
 saves the string given as the second parameter as the value of key <i>name</i>. 
 
 
@@ -444,7 +443,6 @@ The value of a key can be found with method [getItem](https://developer.mozilla.
 ```js
 window.localStorage.getItem('name')
 ```
-
 
 and [removeItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/removeItem) removes a key. 
 
@@ -482,7 +480,6 @@ Changes to the login method are as follows:
     }
   }
 ```
-
 
 The details of a logged in user are now saved to the local storage, and they can be viewed on the console: 
 
@@ -542,12 +539,12 @@ You can log out with the command:
 ```js
 window.localStorage.removeItem('loggedNoteappUser')
 ```
+
 or with the command which empties localstorage completely: 
 
-```js
+```jsx
 window.localStorage.clear()
 ```
-
 
 Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-3), branch <i>part5-3</i>.
 
@@ -584,7 +581,7 @@ git clone https://github.com/fullstack-hy2020/bloglist-frontend
 <i>remove the git configuration of the cloned application</i>
 
 ```bash
-cd bloglist-frontend   // go to cloned repository
+cd bloglist-frontend  # go to cloned repository
 rm -rf .git
 ```
 
@@ -615,7 +612,7 @@ User details of the logged in user do not have to be saved to the local storage 
 
 **NB** You can implement the conditional rendering of the login form like this for example: 
 
-```js
+```jsx
   if (user === null) {
     return (
       <div>

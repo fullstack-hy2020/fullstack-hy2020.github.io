@@ -21,7 +21,7 @@ Napilla <i>cancel</i> käyttäjä saa tarvittaessa suljettua lomakkeen.
 
 Aloitetaan eristämällä kirjautumislomake omaksi komponentikseen:
 
-```js
+```jsx
 import React from 'react'
 
 const LoginForm = ({
@@ -64,7 +64,7 @@ Tila ja tilaa käsittelevät funktiot on kaikki määritelty komponentin ulkopuo
 
 Huomaa, että propsit otetaan vastaan <i>destrukturoimalla</i>, eli sen sijaan että määriteltäisiin
 
-```js
+```jsx
 const LoginForm = (props) => {
   return (
     <div>
@@ -90,7 +90,7 @@ jolloin muuttujan _props_ kenttiin on viitattava muuttujan kautta esim. _props.h
 
 Nopea tapa toiminnallisuuden toteuttamiseen on muuttaa komponentin <i>App</i> käyttämä funktio _loginForm_ seuraavaan muotoon:
 
-```js
+```jsx
 const App = () => {
   const [loginVisible, setLoginVisible] = useState(false) // highlight-line
 
@@ -127,7 +127,7 @@ Komponentin <i>App</i> tilaan on nyt lisätty totuusarvo <i>loginVisible</i> jok
 
 Näkyvyyttä säätelevää tilaa vaihdellaan kahden napin avulla, molempiin on kirjoitettu tapahtumankäsittelijän koodi suoraan:
 
-```js
+```jsx
 <button onClick={() => setLoginVisible(true)}>log in</button>
 
 <button onClick={() => setLoginVisible(false)}>cancel</button>
@@ -135,7 +135,7 @@ Näkyvyyttä säätelevää tilaa vaihdellaan kahden napin avulla, molempiin on 
 
 Komponenttien näkyvyys on määritelty asettamalla komponentille [inline](/osa2/tyylien_lisaaminen_react_sovellukseen#inline-tyylit)-tyyleinä CSS-määrittely, jossa [display](https://developer.mozilla.org/en-US/docs/Web/CSS/display)-propertyn arvoksi asetetaan <i>none</i> jos komponentin ei haluta näkyvän:
 
-```js
+```jsx
 const hideWhenVisible = { display: loginVisible ? 'none' : '' }
 const showWhenVisible = { display: loginVisible ? '' : 'none' }
 
@@ -162,7 +162,7 @@ Kirjautumislomakkeen näkyvyyttä ympäröivän koodin voi ajatella olevan oma l
 
 Tavoitteena on luoda komponentti <i>Togglable</i>, jota käytetään seuraavalla tavalla:
 
-```js
+```jsx
 <Togglable buttonLabel='login'>
   <LoginForm
     username={username}
@@ -178,7 +178,7 @@ Komponentin käyttö poikkeaa aiemmin näkemistämme siinä, että käytössä o
 
 <i>Togglablen</i> avaavan ja sulkevan tagin sisälle voi sijoittaa lapsiksi mitä tahansa React-elementtejä, esim.:
 
-```js
+```jsx
 <Togglable buttonLabel="paljasta">
   <p>tämä on aluksi piilossa</p>
   <p>toinen salainen rivi</p>
@@ -187,7 +187,7 @@ Komponentin käyttö poikkeaa aiemmin näkemistämme siinä, että käytössä o
 
 Komponentin koodi on seuraavassa:
 
-```js
+```jsx
 import React, { useState } from 'react'
 
 const Togglable = (props) => {
@@ -220,7 +220,7 @@ Mielenkiintoista ja meille uutta on [props.children](https://reactjs.org/docs/gl
 
 Tällä kertaa lapset ainoastaan renderöidään komponentin oman renderöivän koodin seassa:
 
-```js
+```jsx
 <div style={showWhenVisible}>
   {props.children}
   <button onClick={toggleVisibility}>cancel</button>
@@ -229,7 +229,7 @@ Tällä kertaa lapset ainoastaan renderöidään komponentin oman renderöivän 
 
 Toisin kuin "normaalit" propsit, <i>children</i> on Reactin automaattisesti määrittelemä, aina olemassa oleva propsi. Jos komponentti määritellään automaattisesti suljettavalla eli _/>_ loppuvalla tagilla, esim.
 
-```js
+```jsx
 <Note
   key={note.id}
   note={note}
@@ -243,7 +243,7 @@ Komponentti <i>Togglable</i> on uusiokäytettävä ja voimme käyttää sitä te
 
 Eristetään ensin muistiinpanojen luominen omaksi komponentiksi
 
-```js
+```jsx
 const NoteForm = ({ onSubmit, handleChange, value}) => {
   return (
     <div>
@@ -263,7 +263,7 @@ const NoteForm = ({ onSubmit, handleChange, value}) => {
 
 ja määritellään lomakkeen näyttävä koodi komponentin <i>Togglable</i> sisällä
 
-```js
+```jsx
 <Togglable buttonLabel="new note">
   <NoteForm
     onSubmit={addNote}
@@ -287,7 +287,7 @@ Jos mietitään lomakkeiden tilaa, eli esimerkiksi uuden muistiinpanon sisältö
 
 Muistiinpanosta huolehtiva komponentti muuttuu seuraavasti:
 
-```js
+```jsx
 import React, {useState} from 'react' 
 
 const NoteForm = ({ createNote }) => {
@@ -329,7 +329,7 @@ Propseja on enää yksi, funktio _createNote_, jota lomake kutsuu kun uusi muist
 
 Komponentti _App_ yksintertaistuu, tilasta <i>newNote</i> ja sen käsittelijäfunktiosta on päästy eroon. Uuden muistiinpanon luomisesta huolehtiva funktio _addNote_ saa suoraan parametriksi uuden muistiinpanon ja funktio on ainoa props, joka välitetään lomakkeelle:
 
-```js
+```jsx
 const App = () => {
   // ...
   const addNote = (noteObject) => {
@@ -365,7 +365,7 @@ Reactin [ref](https://reactjs.org/docs/refs-and-the-dom.html)-mekanismia, joka t
 
 Tehdään komponenttiin <i>App</i> seuraavat muutokset
 
-```js
+```jsx
 const App = () => {
   // ...
   const noteFormRef = React.createRef() // highlight-line
@@ -383,7 +383,7 @@ Metodilla [createRef](https://reactjs.org/docs/react-api.html#reactcreateref) lu
 
 Komponenttia <i>Togglable</i> laajennetaan seuraavasti
 
-```js
+```jsx
 import React, { useState, useImperativeHandle } from 'react' // highlight-line
 
 const Togglable = React.forwardRef((props, ref) => { // highlight-line
@@ -427,7 +427,7 @@ Komponentti tarjoaa [useImperativeHandle
 
 Voimme nyt piilottaa lomakkeen kutsumalla <i>noteFormRef.current.toggleVisibility()</i> samalla kun uuden muistiinpanon luominen tapahtuu:
 
-```js
+```jsx
 const App = () => {
   // ...
   const addNote = (noteObject) => {
@@ -455,7 +455,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 Kun Reactissa määritellään komponentti
 
-```js
+```jsx
 const Togglable = () => ...
   // ...
 }
@@ -463,7 +463,7 @@ const Togglable = () => ...
 
 ja otetaan se käyttöön seuraavasti,
 
-```js
+```jsx
 <div>
   <Togglable buttonLabel="1" ref={togglable1}>
     ensimmäinen
@@ -527,7 +527,7 @@ Kuvassa on myös käytetty hieman CSS:ää parantamaan sovelluksen ulkoasua.
 
 Tyylejä voidaan määritellä osan 2 tapaan helposti [inline](/osa2/tyylien_lisaaminen_react_sovellukseen#inline-tyylit)-tyyleinä seuraavasti:
 
-```js
+```jsx
 const Blog = ({ blog }) => {
   const blogStyle = {
     paddingTop: 10,
@@ -557,7 +557,7 @@ Toteuta like-painikkeen toiminnallisuus. Like lisätään backendiin blogin yksi
 
 Koska backendin operaatio korvaa aina koko blogin, joudut lähettämään operaation mukana blogin kaikki kentät, eli jos seuraavaa blogia liketetään,
 
-```js
+```jsx
 {
   _id: "5a43fde2cbd20b12a2c34e91",
   user: {
@@ -574,7 +574,7 @@ Koska backendin operaatio korvaa aina koko blogin, joudut lähettämään operaa
 
 tulee palvelimelle tehdä PUT-pyyntö osoitteeseen <i>/api/blogs/5a43fde2cbd20b12a2c34e91</i> ja sisällyttää pyynnön mukaan seuraava data:
 
-```js
+```jsx
 {
   user: "5a43e6b6c37f3d065eaaa581",
   likes: 1,
@@ -611,7 +611,7 @@ Näytä poistonappi ainoastaan jos kyseessä on kirjautuneen käyttäjän lisä�
 
 Komponentti <i>Togglable</i> olettaa, että sille määritellään propsina <i>buttonLabel</i> napin teksti. Jos määrittely unohtuu,
 
-```js
+```jsx
 <Togglable> buttonLabel unohtui... </Togglable>
 ```
 
@@ -621,13 +621,13 @@ Haluaisimmekin varmistaa että jos <i>Togglable</i>-komponenttia käytetään, o
 
 Komponentin olettamat ja edellyttämät propsit ja niiden tyypit voidaan määritellä kirjaston [prop-types](https://github.com/facebook/prop-types) avulla. Asennetaan kirjasto
 
-```js
+```bash
 npm install --save prop-types
 ```
 
 <i>buttonLabel</i> voidaan määritellä <i>pakolliseksi</i> string-tyyppiseksi propsiksi seuraavasti:
 
-```js
+```jsx
 import PropTypes from 'prop-types'
 
 const Togglable = React.forwardRef((props, ref) => {
@@ -647,7 +647,7 @@ Koodi kuitenkin toimii edelleen, eli mikään ei pakota määrittelemään props
 
 Määritellään Proptypet myös <i>LoginForm</i>-komponentille:
 
-```js
+```jsx
 import PropTypes from 'prop-types'
 
 const LoginForm = ({
@@ -683,7 +683,7 @@ Create-react-app on asentanut projektille eslintin valmiiksi, joten ei tarvita m
 
 Aloitamme seuraavaksi testaamisen, ja jotta pääsemme eroon testeissä olevista turhista huomautuksista asennetaan plugin [eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest)
 
-```js
+```bash
 npm install --save-dev eslint-plugin-jest
 ```
 
@@ -743,7 +743,7 @@ module.exports = {
 
 Tehdään projektin juureen tiedosto [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) ja sille seuraava sisältö
 
-```bash
+```
 node_modules
 build
 ```
@@ -752,7 +752,7 @@ Näin ainoastaan sovelluksessa oleva itse kirjoitettu koodi huomioidaan linttauk
 
 Tehdään lintausta varten npm-skripti:
 
-```js
+```json
 {
   // ...
   {
@@ -778,7 +778,7 @@ Komponentin "nimettöämyys" käy ilmi myös react-devtoolsilla:
 
 Korjaus on onneksi hyvin helppo tehdä
 
-```js
+```jsx
 import React, { useState, useImperativeHandle } from 'react'
 import PropTypes from 'prop-types'
 
