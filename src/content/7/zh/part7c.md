@@ -11,7 +11,7 @@ lang: zh
 <!-- In part 2 we examined two different ways of adding styles to our application: the old-school [single CSS](/en/part2/adding_styles_to_react_app) file and [inline-styles](/en/part2/adding_styles_to_react_app#inline-styles). In this part we will take a look at a few other ways.  -->
 在第2章节中，我们研究了向应用添加样式的两种不同方式: 老式的[ single CSS ](/ en / part2 / add styles to react app)文件和[ inline-styles ](/ en / part2 / add styles to react app # inline-styles)。 在这一章节，我们将看看其他一些方法。
 
-### Ready-made UI libraries 现成的 UI 库
+### 现成的 UI 库（Ready-made UI libraries ）
 <!-- One approach to defining styles for an application is to use a ready-made "UI framework". -->
 为应用定义样式的一种方法是使用现成的“ UI 框架”。
 
@@ -213,7 +213,7 @@ const App = () => {
 </div>
 ```
 
-#### Navigation structure 导航结构
+#### 导航结构（Navigation structure）
 <!-- Lastly, let's alter the application's navigation menu to use Bootstrap's [Navbar](https://getbootstrap.com/docs/4.1/components/navbar/) component. The React Bootstrap library provides us with [matching built-in components](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly). Through trial and error, we end up with a working solution in spite of the cryptic documentation: -->
 最后，让我们改变应用的导航菜单，使用 Bootstrap 的[导航栏]( https://getbootstrap.com/docs/4.1/components/Navbar/  / 导航栏)组件。 React Bootstrap 库为我们提供了[匹配内置组件]( https://React-Bootstrap.github.io/components/navbar/#navbars-mobile-friendly )。 通过反复试验，我们最终得到了一个可行的解决方案，尽管文档晦涩难懂:
 
@@ -372,7 +372,7 @@ import {
 
 #### Form 表单
 
-!-parannellaan seuraavaksi n kym n<i>Login</i> kirjetumislomaketta k ytt en komponentteja [ TextField ]( https://material-ui.com/components/text-fields/ ) ja [ Button ]( https://material-ui.com/api/Button/ ) : -
+
 <!-- Next let's make the login form in the <i>Login</i> view better using the [TextField](https://material-ui.com/components/text-fields/) and [Button](https://material-ui.com/api/button/) components: -->
 接下来让我们在<i>Login</i> 视图中更好地使用[ TextField ]( https://material-ui.com/components/text-fields/ )和[ Button ]( https://material-ui.com/api/Button/ )组件来创建登录表单:
 
@@ -565,9 +565,7 @@ Button 组件渲染为这样，它的根组件是 react-redux Link，它接收�
 <!-- The code of the application can be found from [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js). -->
 这个应用的代码可以在这里[here](https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js)找到。
 
-### Closing thoughts
-封闭的思想
-
+### 封闭的思想（Closing thoughts）
 
 <!-- The difference between react-bootstrap and MaterialUI is not big. It's up to you which one you find better looking.  -->
 React-bootstrap 和 MaterialUI 之间的区别并不大，这取决于你觉得哪个更好看。 
@@ -622,7 +620,7 @@ React-bootstrap 和 MaterialUI 之间的区别并不大，这取决于你觉得�
 - <https://chakra-ui.com/>
 - <https://tailwindcss.com/>
 
-### Styled components 风格化的组件
+### 样式组件（Styled components ）
 <!-- There are also [other ways](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b) of styling React applications that we have not yet taken a look at. -->
 还有一些我们还没有看过的应用的样式[other ways](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b)。
 

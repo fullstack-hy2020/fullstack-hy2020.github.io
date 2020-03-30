@@ -41,7 +41,7 @@ lang: zh
 <!-- So far we have been using <i>console.log</i> and <i>console.error</i> to print different information from the code.  -->
 到目前为止，我们一直在使用<i>console.log</i> 和<i>console.error</i> 来打印代码中的不同信息。
 <!-- However, this is not a very good way to do things.  -->
-然而，这并不是一个很好的事件方式。
+然而，这并不是一个很好的实践方式。
 <!-- Let's separate all printing to the console to it's own module <i>utils/logger.js</i>: -->
 让我们将所有到控制台的打印分离到它自己的模块 <i>utils/logger.js</i>
 
@@ -232,7 +232,7 @@ app.use('/api/notes', notesRouter)
 ```
 
 <!-- The router we defined earlier is used <i>if</i> the URL of the request starts with <i>/api/notes</i>. For this reason, the notesRouter object must only define the relative parts of the routes, i.e. the empty path <i>/</i> or just the parameter <i>/:id</i>. -->
-如果请求的 URL 以 <i>/api/notes</i>开头，则使用前面定义的路由。 由于这个原因，notesRouter 对象必须只定义路由的相对部分，即空路径<i>/</i> 或仅仅定义参数<i>/:id</i>。
+如果请求的 URL 以 <i>/api/notes</i>开头，则使用前面定义的路由。 由于这个原因，notesRouter 对象必须只定义路由的相对部分，即空路径<i>/</i>或仅仅定义参数<i>/:id</i>。
 
 
 <!-- After making these changes, our <i>app.js</i> file looks like this: -->
@@ -362,7 +362,7 @@ module.exports = mongoose.model('Note', noteSchema)
 对于较小的应用，结构并不重要。 一旦应用开始增大，您就必须建立某种结构，并将应用的不同职责分离到单独的模块中。 这将使开发应用更加容易。
 
 <!-- There is no strict directory structure or file naming convention that is required for Express applications. To contrast this, Ruby on Rails does require a specific structure. Our current structure simply follows some of the best practices you can come across on the internet. -->
-对于 Express 应用，没有严格的目录结构或文件命名原则。 为了对比这一点，Ruby on Rails 确实需要一个特定的结构。 我们目前的结构只是遵循一些你可以在互联网上遇到的最佳实践。
+对于 Express 应用，没有严格的目录结构或文件命名原则。 为了对比这一点，Ruby on Rails 需要一个特定的结构。 我们目前的结构只是遵循一些你可以在互联网上遇到的最佳实践。
 
 <!-- You can find the code for our current application in its entirety in the <i>part4-1</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-1). -->
 您可以在 [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-1)的<i>part4-1</i> 分支中找到我们当前应用的全部代码。
@@ -453,7 +453,7 @@ app.listen(PORT, () => {
 
 
 
-### Testing Node applications 测试 Node 应用
+### 测试 Node 应用（Testing Node applications ）
 <!-- We have completely neglected one essential area of software development, and that is automated testing. -->
 我们完全忽略了软件开发的一个基本领域，那就是自动化测试。
 

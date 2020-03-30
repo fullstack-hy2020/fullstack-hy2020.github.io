@@ -8,12 +8,8 @@ lang: zh
 <div class="content">
 
 
-
-
 <!-- Next let's connect the frontend we made in [part 2](/part2) to our own backend. -->
 接下来，让我们将[第2章节](/zh/part2)中制作的前端连接到我们自己的后端。
-
-
 
 <!-- In the previous part, the frontend could ask for the list of notes from the json-server we had as a backend at from the address http://localhost:3001/notes. -->
 在前面的部分中，前端可以从作为后端的 json 服务器向地址 http://localhost:3001/notes 索取便笺列表。
@@ -22,7 +18,7 @@ lang: zh
 我们的后端有一个稍微不同的 url 结构，便笺可以从 http//localhost:3001/api/notes 中获取到。
 
 <!-- Let's change the attribute __baseUrl__ in the <i>src/services/notes.js</i> like so: -->
-让我们像下面这样修改 <i>src/services/notes.js</i> 中的baseUrl属性 :
+让我们像下面这样修改 <i>src/services/notes.js</i> 中的__baseUrl__属性 :
 
 ```js
 import axios from 'axios'
@@ -59,10 +55,10 @@ export default { getAll, create, update }
 根据[维基百科]( https://en.Wikipedia.org/wiki/cross-origin_resource_sharing ) :
 
 > <i>Cross-origin resource sharing (CORS) is a mechanism that allows restricted resources (e.g. fonts) on a web page to be requested from another domain outside the domain from which the first resource was served. A web page may freely embed cross-origin images, stylesheets, scripts, iframes, and videos. Certain "cross-domain" requests, notably Ajax requests, are forbidden by default by the same-origin security policy.</i>
-Cross-origin resource sharing (CORS)是一种机制，它允许一个网页上受限制的资源(例如字体)从提供第一个资源的域名以外的另一个域名请求跨来源资源共享。 一个网页可以自由地嵌入跨来源的图片、样式表、脚本、 iframe 和视频。 默认情况下，同源安全策略禁止某些“跨域”请求，特别是 Ajax 请求。 
+Cross-origin resource sharing (CORS)是一种机制，它允许一个网页上受限制的资源(例如字体)，从提供一手资源的域名以外的另一个域名请求跨来源资源共享。 一个网页可以自由地嵌入跨来源的图片、样式表、脚本、 iframe 和视频。 默认情况下，同源安全策略禁止某些“跨域”请求，特别是 Ajax 请求。 
 
 <!-- In our context the problem is that, by default, the JavaScript code of an application that runs in a browser can only communicate with a server in the same [origin](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy).  -->
-在我们的上下文中，问题在于，默认情况下，运行在浏览器中的应用的 JavaScript 代码只能与相同 [源](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy)的服务器通信。
+在我们的上下文中，问题出在了，默认情况下，运行在浏览器应用的 JavaScript 代码只能与相同 [源](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy)的服务器通信。
 <!-- Because our server is in localhost port 3001, and our frontend in localhost port 3000, they do not have the same origin. -->
 因为我们的服务器位于本地主机端口3001，而我们的前端位于本地主机端口3000，所以它们不具有相同的源。
 
@@ -98,7 +94,7 @@ app.use(cors())
 <!-- Now that the whole stack is ready, let's move our application to the internet. We'll use good old [Heroku](https://www.heroku.com) for this. -->
 现在整个栈已经准备就绪，让我们将应用迁移到互联网上。 我们将使用古老的 Heroku  https://www.Heroku.com。
 
->If you have never used Heroku before, you can find instructions from [Heroku documentation](https://devcenter.heroku.com/articles/getting-started-with-nodejs) or by Googling.
+><!--If you have never used Heroku before, you can find instructions from [Heroku documentation](https://devcenter.heroku.com/articles/getting-started-with-nodejs) or by Googling.-->
 如果您以前从未使用过 Heroku，您可以从[ Heroku 文档](Heroku  https://devcenter.Heroku.com/articles/getting-started-with-nodejs 文档)或通过谷歌搜索找到指令。
 
 <!-- Add a file called  <i>Procfile</i> to the project's root to tell Heroku how to start the application.  -->
@@ -109,7 +105,7 @@ web: node index.js
 ```
 
 <!-- Change the definition of the port our application uses at the bottom of the <i>index.js</i> file like so:  -->
-更改应用在<i>index.js</i> 文件底部使用的端口的定义，如下所示:
+更改应用在<i>index.js</i> 文件底部使用的端口定义，如下所示:
 
 ```js
 const PORT = process.env.PORT || 3001  // highlight-line
@@ -119,7 +115,7 @@ app.listen(PORT, () => {
 ```
 
 <!-- Now we are using the port defined in [environment variable](https://en.wikipedia.org/wiki/Environment_variable) _PORT_ or port 3001 if the environment variable _PORT_ is undefined.  -->
-现在我们使用的端口定义在[环境变量]( https://en.wikipedia.org/wiki/environment_variable )端口，如果环境变量端口是未定义的，则使用端口3001。
+现在我们使用定义在[环境变量]( https://en.wikipedia.org/wiki/environment_variable )的端口，如果环境变量 _PORT_ 是未定义的，则使用端口3001。
 <!-- Heroku configures application port based on the environment variable.  -->
 Heroku 会在环境变量的基础上配置应用端口。 
 
@@ -139,13 +135,13 @@ node_modules
 ![](../../images/3/25ea.png)
 
 <!-- If not, the issue can be found by reading heroku logs with command <i>heroku logs</i>. -->
-如果没有，可以通过使用命令<i>heroku logs</i> 读取 heroku logs 来发现问题。
+如果没有运行成功，可以通过使用命令<i>heroku logs</i> 读取 heroku logs 来发现问题。
 
 >**NB** At least in the beginning it's good to keep an eye on the heroku logs at all times. The best way to do this is with command <i>heroku logs -t</i> which prints the logs to console whenever something happens on the server. 
 注意：至少在开始的时候，随时关注 heroku 日志是有好处的。 实现这一点的最佳方法是使用命令 <i>heroku logs -t</i> ，该命令会让服务器上发生任何事情时将日志打印到控制台。
 
 <!-- The frontend also works with the backend on Heroku. You can check this by changing the backend's address on the frontend to be the backend's address in Heroku instead of <i>http://localhost:3001</i>. -->
-前端也与 Heroku 的后端一起工作。 你可以通过更改前端的后端地址为后端在 Heroku 的地址来替代<i>http://localhost:3001</i>。
+前端也与 Heroku 的后端一起工作。 你可以通过更改前端的后端地址，更改为后端在 Heroku 的地址http://localhost:3001</i>。
 
 <!-- The next question is, how do we deploy the frontend to the Internet? We have multiple options. Let's go through one of them next.  -->
 下一个问题是，我们如何将前端部署到互联网？ 我们有多种选择。 接下来我们来看看其中的一个。
@@ -173,7 +169,7 @@ node_modules
 !function(e){function r(r){for(var n,f,i=r[0],l=r[1],a=r[2],c=0,s=[];c<i.length;c++)f=i[c],o[f]&&s.push(o[f][0]),o[f]=0;for(n in l)Object.prototype.hasOwnProperty.call(l,n)&&(e[n]=l[n]);for(p&&p(r);s.length;)s.shift()();return u.push.apply(u,a||[]),t()}function t(){for(var e,r=0;r<u.length;r++){for(var t=u[r],n=!0,i=1;i<t.length;i++){var l=t[i];0!==o[l]&&(n=!1)}n&&(u.splice(r--,1),e=f(f.s=t[0]))}return e}var n={},o={2:0},u=[];function f(r){if(n[r])return n[r].exports;var t=n[r]={i:r,l:!1,exports:{}};return e[r].call(t.exports,t,t.exports,f),t.l=!0,t.exports}f.m=e,f.c=n,f.d=function(e,r,t){f.o(e,r)||Object.defineProperty(e,r,{enumerable:!0,get:t})},f.r=function(e){"undefined"!==typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"})
 ```
 
-### Serving static files from the backend 从后端服务部署静态文件
+### 从后端服务部署静态文件（Serving static files from the backend ）
 <!-- One option for deploying the frontend is to copy the production build (the <i>build</i> directory) to the root of the backend repository and configure the backend to show the frontend's <i>main page</i> (the file <i>build/index.html</i>) as its main page.  -->
 部署前端的一个选择是将生产构建( <i>build</i> 目录)复制到后端仓库的根目录，并配置后端以显示前端的 <i>main page</i> (文件 <i>build/index.html</i>)作为其主页。
 
@@ -292,7 +288,7 @@ React代码从服务器地址 http://localhost:3001/notes 获取便笺，并将�
 _npm run deploy:full_ 会将这两者结合起来，并包含更新后端存储库所需的<i>git</i> 命令。
 
 <!-- There is also a script _npm run logs:prod_ to show the heroku logs. -->
-还有一个脚本 t _npm run logs:prod用于显示 heroku 日志。
+还有一个脚本 _npm run logs:prod_ 用于显示 heroku 日志。
 
 <!-- Note that the directory paths in the script <i>build:ui</i> depend on the location of repositories in the file system. -->
 注意，我构建的脚本中的目录路径 <i>build:ui</i> 依赖于文件系统中存储库的位置。
@@ -302,7 +298,7 @@ _npm run deploy:full_ 会将这两者结合起来，并包含更新后端存储�
 
 ### Proxy 代理
 <!-- Changes on the frontend have caused it to no longer work in development mode (when started with command _npm start_), as the connection to the backend does not work.  -->
-前端上的更改导致它不能再在开发模式下工作(当使用命令 npm start 启动时) ，因为到后端的连接不工作。
+前端上的更改导致它不能再在开发模式下工作(当使用命令 npm start 启动时) ，因为到后端的连接无法工作。
 
 ![](../../images/3/32ea.png)
 
@@ -338,7 +334,7 @@ const baseUrl = '/api/notes'
 现在前端也工作良好，可以在开发和生产模式下与服务器一起工作。
 
 <!-- A negative aspect of our approach is how complicated it is to deploy the frontend. Deploying a new version requires generating new production build of the frontend and copying it to the backend repository. This makes creating an automated [deployment pipeline](https://martinfowler.com/bliki/DeploymentPipeline.html) more difficult. Deployment pipeline means an automated and controlled way to move the code from the computer of the developer through different tests and quality checks to the production environment.  -->
-我们方法的一个劣势是前端部署的复杂程度。 部署新版本需要生成新的前端生产构建并将其复制到后端存储库。 这使得创建一个自动化的[部署管道]( https://martinfowler.com/bliki/deploymentpipeline.html)变得更加困难。 部署管道是指通过不同的测试和质量检查将代码从开发人员的计算机转移到生产环境的自动化和受控的方法。
+我们方法的一个劣势，是前端部署的复杂程度。 部署新版本需要生成新的前端生产构建并将其复制到后端存储库。 这使得创建一个自动化的[部署管道]( https://martinfowler.com/bliki/deploymentpipeline.html)变得更加困难。 部署管道是指通过不同的测试和质量检查将代码从开发人员的计算机转移到生产环境的自动化控制的方法。
 
 <!-- There are multiple ways to achieve this (for example placing both backend and frontend code [to the same repository](https://github.com/mars/heroku-cra-node) ) but we will not go into those now.  -->
 有多种方法可以实现这一点(例如将后端和前端代码[放到同一仓库中]( https://github.com/mars/heroku-cra-node )) ，但我们现在不讨论这些。
@@ -366,16 +362,14 @@ const baseUrl = '/api/notes'
 使后端工作与上一章的前端部分联调起来。 不要实现更改电话号码的功能，这将在练习3.17中实现。
 
 <!-- You will probably have to do some small changes to the frontend, at least to the URLs for the backend. Remember to keep the developer console open in your browser. If some HTTP requests fail, you should check from the <i>Network</i>-tab what is going on. Keep an eye on the backend's console as well. If you did not do the previous exercise, it is worth it to print the request data or <i>request.body</i> to the console in the event handler responsible for POST requests.  -->
-您可能需要对前端做一些小的更改，至少对后端的 url 做一些更改。 记住，在浏览器中保持开发者控制台的打开状态。 如果一些 HTTP 请求失败，您应该从<i>Network</i>-标签检查发生了什么。 同时也要注意后端的控制台。 如果您没有执行前面的练习，那么将请求数据或<i>request.body</i> 打印到控制台是值得的，这个控制台是指负责 POST 请求的事件处理程序。
+您可能需要对前端做一些小的更改，至少对后端的 url 做一些更改。 记住，在浏览器中保持开发者控制台的打开状态。 如果一些 HTTP 请求失败，您应该从<i>Network</i>-标签检查发生了什么。 同时也要注意后端的控制台。 如果您没有执行前面的练习，那么将请求数据或<i>request.body</i> 打印到控制台是提倡的，这个控制台是指负责 POST 请求的事件处理程序。
 
 #### 3.10 phonebook backend 步骤10
-3.10电话簿后台10
-
 <!-- Deploy the backend to the internet, for example to Heroku.  -->
 将后端部署到互联网，例如 Heroku。
 
 <!-- **NB** the command _heroku_ works on the department's computers and the freshman laptops. If for some reason you cannot [install](https://devcenter.heroku.com/articles/heroku-cli) Heroku to your computer, you can use the command [npx heroku-cli](https://www.npmjs.com/package/heroku-cli). -->
-注意：命令 heroku 在部门的电脑和新生的笔记本电脑上可以工作。 如果由于某种原因不能[安装]( https://devcenter.Heroku.com/articles/Heroku-cli ) Heroku 到你的计算机，你可以使用命令[ npx Heroku-cli ]( https://www.npmjs.com/package/Heroku-cli )。
+注意：命令 heroku 在部门的电脑和新生的笔记本电脑上可以工作。 如果由于某种原因不能[安装]( https://devcenter.Heroku.com/articles/Heroku-cli ) Heroku 到你的计算机，你可以使用命令[npx heroku-cli](https://www.npmjs.com/package/heroku-cli)。
 
 <!-- Test the deployed backend with a browser and Postman or VS Code REST client to ensure it works.  -->
 使用浏览器和Postman或 VS Code REST 客户端测试已部署的后端，以确保其工作正常。
@@ -384,7 +378,7 @@ const baseUrl = '/api/notes'
 专业提示: 当你将应用部署到 Heroku 时，至少在开始的时候使用命令<em>heroku logs -t</em> 关注 Heroku 应用的日志是值得的。
 
 <!-- The following is a log about one typical problem. Heroku cannot find application dependency <i>express</i>: -->
-下面是一个典型出问题的日志。 Heroku 找不到<i>express</i> 表示的应用依赖项:
+下面是一个典型出问题的日志。 Heroku 找不到<i>express</i> 所表示的依赖项:
 
 ![](../../images/3/33.png)
 

@@ -21,37 +21,37 @@ lang: zh
 
 ![](../../images/4/16e.png)
 
-- User starts by logging in using a login form implemented with React
+<!--User starts by logging in using a login form implemented with React-->
 
 - 用户首先在 React 中通过登录表单实现登录
 
-  - We will add the login form to the frontend in [part 5](/en/part5) 
+  - <!--We will add the login form to the frontend in [part 5](/en/part5)--> 
   - 我们将在[第5章](/en/part5) 在前台增加登录表单
 
-- This causes the React code to send the username and the password to the server address <i>/api/login</i> as a HTTP POST request.
+- <!--This causes the React code to send the username and the password to the server address <i>/api/login</i> as a HTTP POST request.-->
 
 - 这会使得 React 代码将用户名和密码通过<i>/api/login</i> 作为一个 HTTP POST 请求发送给服务器。
-- If the username and the password are correct, the server generates a <i>token</i> which somehow identifies the logged in user.
+- <!--If the username and the password are correct, the server generates a <i>token</i> which somehow identifies the logged in user.-->
 
 - 如果用户名和密码是正确的，服务器会生成一个 <i>token</i>，用来标识登录的用户。
 
-  - The token is signed digitally, making it impossible to falsify (with cryptographic means)
+<!--The token is signed digitally, making it impossible to falsify (with cryptographic means)-->
 
   - 这个 Token 是数字化签名的，也就是它不可能被伪造（使用加密手段）。
 
-- The backend responds with a status code indicating the operation was successful, and returns the token with the response.
+<!--The backend responds with a status code indicating the operation was successful, and returns the token with the response.-->
 
 - 后台通过状态码返回一个 response， 表示操作成功，同时返回的还有这个 token。
 
-- The browser saves the token, for example to the state of a React application.
+<!--The browser saves the token, for example to the state of a React application.-->
 
 - 浏览器将这个 token 保存到 React 应用的状态中
 
-- When the user creates a new note (or does some other operation requiring identification), the React code sends the token to the server with the request.
+<!--When the user creates a new note (or does some other operation requiring identification), the React code sends the token to the server with the request.-->
 
 - 当用户请求创建一个新的 Note（或者做一些需要认证的操作）， React 会通过 requset 发送这个 token 给 server
 
-- The server uses the token to identify the user
+<!--The server uses the token to identify the user-->
 
 - server 便可以通过这个 token 来验证用户
 
@@ -187,9 +187,9 @@ _jwt.sign(userForToken, process.env.SECRET)_ 方法失败了。因为我们忘�
 
 ![](../../images/4/19e.png)
 
-### Limiting creating new notes to logged in users
+### 为登录用户限制创建 Note（Limiting creating new notes to logged in users）
 
-为登录用户限制创建 Note
+
 
 <!-- Let's change creating new notes so that it is only possible if the post request has a valid token attached. -->
 <!-- The note is then saved to the notes list of the user identified by the token. -->
@@ -292,9 +292,9 @@ if (!token || !decodedToken.id) {
 
 ![](../../images/4/21e.png)
 
-### Error handling
+### 错误处理（Error handling）
 
-错误处理
+
 
 <!-- Token verification can also cause a <i>JsonWebTokenError</i>. If we for example remove a few characters from the token and try creating a new note, this happens: -->
 Token 认证也可能引起<i>JsonWebTokenError</i>， 例如如果我们从 token 中删除了几个字符并提交创建 Note， 就会有如下报错： 
@@ -343,9 +343,9 @@ const errorHandler = (error, request, response, next) => {
 
 如果应用有很多接口都需要认证，JWT 认证应当被分拆到它们自己的中间件中。一些现成的类库，如[express-jwt](https://www.npmjs.com/package/express-jwt)可以使用。
 
-### End notes
+### 结束吧（End notes）
 
-结束吧
+
 
 <!-- There have been many changes to the code which have caused a typical problem for a fast-paced software project: most of the tests have broken. Because this part of the course is already jammed with new information, we will leave fixing the tests to a non compulsory exercise. -->
 对于一个快节奏的项目来说，代码有很多变化，这就导致了一个典型的问题：大多数的测试都失败了，由于这部分的课程包含了许多新的内容，我们把改造测试的任务放到非强制性的练习中。

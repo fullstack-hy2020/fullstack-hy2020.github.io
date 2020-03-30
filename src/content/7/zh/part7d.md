@@ -69,7 +69,7 @@ lang: zh
 由于部分导入的文件是 React、 Redux 和 Axios 之类的包，所以绑定的 JavaScript 文件也将包含这些库的内容。
 
 
-> The old way of dividing the application's code into multiple files was based on the fact that the <i>index.html</i> file loaded all of the separate JavaScript files of the application with the help of script tags. This resulted in  decreased performance, since the loading of each separate file results in some overhead. For this reason, these days the preferred method is to bundle the code into a single file.
+> <!--The old way of dividing the application's code into multiple files was based on the fact that the <i>index.html</i> file loaded all of the separate JavaScript files of the application with the help of script tags. This resulted in  decreased performance, since the loading of each separate file results in some overhead. For this reason, these days the preferred method is to bundle the code into a single file.-->
 将应用的代码划分为多个文件的老方法是基于这样一个事实，即<i>index. html</i> 文件在脚本标记的帮助下加载了应用的所有单独的 JavaScript 文件。 这导致性能下降，因为每个单独文件的加载都会导致一些开销。 出于这个原因，现在的首选方法是将代码捆绑到单个文件中。
 
 <!-- Next, we will create a suitable webpack configuration for a React application by hand from scratch. -->

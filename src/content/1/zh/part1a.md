@@ -6,13 +6,12 @@ lang: zh
 ---
 
 <div class="content">
-
 <!-- We will now start getting familiar with probably the most important topic of this course, namely the [React](https://reactjs.org/)-library. Let's start off with making a simple React application as well as getting to know the core concepts of React. -->
-我们即将开始学习本门课程中可能最重要的主题——[React](https://reactjs.org/)。 让我们从制作一个简单的 React 应用开始，同时了解一下 React 的核心概念。
+我们即将开始学习大概是本门课程中最重要的主题——[React](https://reactjs.org/)。 让我们从制作一个简单的 React 应用开始，同时了解一下 React 的核心概念。
 
 <!-- The easiest way to get started by far is using a tool called [create-react-app](https://github.com/facebookincubator/create-react-app). It is possible (but not necessary) to install <i>create-react-app</i> on your machine if the <i>npm</i> tool that was installed along with Node has a version number of at least <i>5.3</i>. -->
 
-目前来说，创建一个React应用最简单的方式是使用一个叫做[ create-react-app ]( https://github.com/facebookincubator/create-react-app) 的工具。 如果你随着node安装的npm工具版本号不小于5.3，你就可以在机器上安装 <i>create-react-app</i> 了（也不是必须的）。
+目前来说，创建一个React应用最简单的方式是使用一个叫做[ create-react-app ]( https://github.com/facebookincubator/create-react-app) 的工具。 如果你随着node安装的npm工具版本号不小于5.3，你就可以（也不是必须的）在机器上安装 <i>create-react-app</i> 了。
 
 <!-- Let's create an application called <i>part1</i> and navigate to its directory. -->
 让我们创建一个名为 <i>part1</i> 的应用，并进入到它的目录。
@@ -23,7 +22,7 @@ $ cd part1
 ```
 
 <!-- Every command, here and in the future, starting with the character <em>$</em> is typed into a terminal prompt, aka the command-line. The character <em>$</em> is not to be typed out because it represents the prompt. -->
-在现在开始，以<em>$</em> 开头的命令都表示是输入到终端的，也就是命令行。 但不要把 <em>$</em> 本身敲到终端，它只是一个输入终端的提示符。
+从现在开始，所有以<em>$</em> 开头的命令都表示是输入到终端的，也就是命令行。 但不要把 <em>$</em> 本身敲到终端，它只是一个输入终端的提示符。
 
 <!-- The application is run as follows -->
 用如下命令就可以让应用运行起来了
@@ -37,7 +36,7 @@ $ npm start
 
 <!-- Chrome should launch automatically. Open the browser console **immediately**. Also open a text editor so that you can view the code as well as the web-page at the same time on the screen: -->
 
-Chrome应该会自动启动。 别忘了，立即打开浏览器控制台。 还可以打开一个文本编辑器，这样你就可以同时在屏幕上查看代码和网页了： 
+Chrome这时应该会自动启动。 别忘了，**立即**打开浏览器控制台。 还可以打开一个文本编辑器，这样你就可以同时在屏幕上查看代码和网页了： 
 
 ![](../../images/1/1e.png)
 
@@ -61,16 +60,16 @@ ReactDOM.render(<App />, document.getElementById('root'))
 <!-- The files <i>App.js</i>, <i>App.css</i>, <i>App.test.js</i>, <i>logo.svg</i> and <i>serviceWorker.js</i> may be deleted as they are not needed in our application right now. -->
 文件<i>App.js</i>、<i>App.css</i>、<i>App.test.js</i>、<i>logo.svg</i> 和<i>serviceWorker.js</i> 可以删除，因为它们目前在我们的应用中不并需要。
 
-### Component 组件
+### 组件（Component ）
 <!-- The file <i>index.js</i> now defines a React-[component](https://reactjs.org/docs/components-and-props.html) with the name <i>App</i> and the command on the final line -->
-文件<i>index.js</i> 定义了一个 React-[ component ]( https://reactjs.org/docs/components-and-props.html 文件) ，其名称为<i>App</i>，最后一行代码为：
+文件<i>index.js</i> 定义了一个 React-[ 组件component ]( https://reactjs.org/docs/components-and-props.html) ，命名为<i>App</i>，最后一行代码为：
 
 ```js
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
 <!-- renders its contents into the <i>div</i>-element, defined in the file <i>public/index.html</i>, having the <i>id</i> value 'root'. -->
-这是将其内容渲染到<i>div</i> 元素中，其 <i>id</i> 值为‘ root’，该元素在文件<i>public/index.html</i>中定义。
+这是将其内容渲染到<i>div</i> 元素中，其 <i>id</i> 值为 'root'，该元素在文件<i>public/index.html</i>中定义。
 
 <!-- By default, the file <i>public/index.html</i> is empty. You can try adding some HTML into the file. However, when using React, all content that needs to be rendered is usually defined as React components. -->
 默认情况下，文件 <i>public/index.html</i> 为空。 您可以尝试在文件中添加一些 HTML。 但是，在用 React 开发时，需要渲染的内容通常需要定义为 React 组件。
@@ -87,7 +86,7 @@ const App = () => (
 ```
 
 <!-- As you probably guessed, the component will be rendered as a <i>div</i>-tag, which wraps a <i>p</i>-tag containing the text <i>Hello world</i>. -->
-您可能已经猜到，该组件将被渲染为<i>div</i>-tag，该标签包含一个<i>p</i>-tag，p标签包含的文本为<i>Hello world</i> 。
+您可能已经猜到，该组件将被渲染为<i>div</i>-标签，div中又包含一个<i>p</i>-标签，p标签包含的文本为<i>Hello world</i> 。
 
 <!-- Technically the component is defined as a JavaScript function. The following is a function (which does not receive any parameters): -->
 严格来说，这个组件被定义成了一个 JavaScript 函数。如下所示，这是一个不接收任何参数的函数 :
@@ -101,7 +100,7 @@ const App = () => (
 ```
 
 <!-- The function is then assigned to a constant variable <i>App</i>: -->
-然后该函数被赋给一个 const 变量 <i>App</i>:
+然后该函数被赋给一个 const 修饰的变量 <i>App</i>:
 
 ```js
 const App = ...
@@ -128,7 +127,7 @@ const App = () => {
 换句话说，这个函数返回了表达式的值。
 
 <!-- The function defining the component may contain any kind of JavaScript code. Modify your component to be as follows and observe what happens in the console: -->
-定义组件的函数中可以包含任何类型的 JavaScript 代码。如下 修改你的组件，观察控制台中的内容:
+定义组件的函数中可以包含任何类型的 JavaScript 代码。按如下修改你的组件，观察控制台中的内容:
 
 ```js
 const App = () => {
@@ -142,10 +141,11 @@ const App = () => {
 ```
 
 <!-- It is also possible to render dynamic content inside of a component. -->
+
 你还可以在组件内部渲染动态内容。
 
 <!-- Modify the component as follows: -->
-对组件进行如下修改:
+对组件修改如下：
 
 ```js
 const App = () => {
@@ -166,12 +166,12 @@ const App = () => {
 
 <!-- Any JavaScript code within the curly braces is evaluated and the result of this evaluation is embedded into the defined place in the HTML produced by the component. -->
 
-大括号中的任何 JavaScript 代码都会被计算，并且计算的结果将嵌入到HTML中，嵌入的位置就是 HTML 中定义的位置。
+大括号中的任何代码都会被计算，并且计算的结果将嵌入到HTML中，嵌入的位置就是 HTML 中定义的位置。
 
 ### JSX
 <!-- It seems like React components are returning HTML markup. However, this is not the case. The layout of React components is mostly written using [JSX](https://reactjs.org/docs/introducing-jsx.html). Although JSX looks like HTML, we are actually dealing with a way to write JavaScript. Under the hood, JSX returned by React components is compiled into JavaScript. -->
 
-看起来 React 组件返回的是 HTML 标签，但并不是这样。 React 组件的布局大部分是使用[ JSX ]( https://reactjs.org/docs/introducing-JSX.html )编写的。 尽管 JSX 看起来像 HTML，但我们实际上是在用一种特殊的方法写 JavaScript 。 实际上在底层，React 组件返回的 JSX 会被编译成 JavaScript。
+看起来 React 组件返回的是 HTML 标签，但实际并不是这样。 React 组件的布局大部分是使用[ JSX ]( https://reactjs.org/docs/introducing-JSX.html )编写的。 尽管 JSX 看起来像 HTML，但我们其实是在用一种特殊的方法写 JavaScript 。 在底层，React 组件实际上返回的 JSX 会被编译成 JavaScript。
 
 <!-- After compiling, our application looks like this: -->
 编译后，我们的应用如下所示:
@@ -210,7 +210,7 @@ ReactDOM.render(
 
 <!-- In practice, JSX is much like HTML with the distinction that with JSX you can easily embed dynamic content by writing appropriate JavaScript within curly braces. The idea of JSX is quite similar to many templating languages, such as Thymeleaf used along Java Spring, which are used on servers. -->
 
-实际上，JSX 与 HTML 非常相似，其区别在于，通过在大括号中编写一些 JavaScript，可以轻松地嵌入一些动态内容。 JSX 的思想与许多模板语言非常相似，就如在 Java Spring 中使用的 Thymeleaf，是一种服务器模板。
+实际上，JSX 与 HTML 非常相似，其区别在于，通过在大括号中编写一些 JavaScript，可以轻松地嵌入一些动态内容。 JSX 的思想与许多模板语言非常相似，就如在 Java Spring 中使用的 Thymeleaf（是一种服务器模板语言）。
 
 <!-- JSX is "[XML](https://developer.mozilla.org/en-US/docs/Web/XML/XML_introduction)-like", which means that every tag needs to be closed. For example, a newline is an empty element, which in HTML can be written as follows: -->
 JSX 是一种“类[ XML ]( https://developer.mozilla.org/en-us/docs/web/XML/xml_introduction )”语言，这意味着每个标签都需要关闭。 例如，换行符是一个空元素，在 HTML 中可以这样写: 
@@ -227,10 +227,10 @@ JSX 是一种“类[ XML ]( https://developer.mozilla.org/en-us/docs/web/XML/xml
 <br />
 ```
 
-### Multiple components 多组件
+### 多组件（Multiple components）
 <!-- Let's modify the application as follows (NB: imports at the top of the file are left out in these <i>examples</i>, now and in the future. They are still needed for the code to work): -->
 
-让我们按照如下方式修改应用(注意: 文件顶部的imports在这些<i>examples</i> 中被省略了，以后也会这么处理。 但它们是代码正常运行需要的) :
+让我们按照如下方式修改应用(注意: 文件顶部的imports在这些示例中被省略了，以后也会这么处理。 但它们是代码正常运行必需的) :
 
 ```js
 // highlight-start
@@ -257,7 +257,7 @@ ReactDOM.render(<App />, document.getElementById('root'))
 
 <!-- We have defined a new component <i>Hello</i> and used it inside the component <i>App</i>. Naturally, a component can be used multiple times: -->
 
-这里我们定义了一个新的组件<i>Hello</i>，并在组件<i>App</i> 中引用了它。 当然，一个组件可以多次使用:
+这里我们定义了一个新的组件<i>Hello</i>，并在组件<i>App</i> 中引用了它。 当然，一个组件可以重用:
 
 ```js
 const App = () => {
@@ -280,16 +280,16 @@ const App = () => {
 
 <!-- Another strong convention is the idea of a <i>root component</i> called <i>App</i> at the top of the component tree of the application. Nevertheless, as we will learn in [part 6](/en/part6), there are situations where the component <i>App</i> is not exactly the root, but is wrapped within an appropriate utility component. -->
 
-还有一个约定，是在应用的组件树顶部有一个<i>root 组件</i> 叫做<i>App</i>。 然而，正如我们将在[第6章](/zh/ part6)将要讲到的，在某些情况下，组件<i>App</i> 并不一定是根，而是包装在了一些工具组件中。
+还有一个约定，就是应用的组件树顶部都要有一个<i>root 组件</i> 叫做<i>App</i>。 然而，正如我们将在[第6章](/zh/ part6)将要讲到的，在某些情况下，组件的根并不一定是<i>App</i> ，而是包装在了一些工具组件中。
 
-### props: passing data to components 
+<!-- ### props: passing data to components--> 
 
 ### props：向组件传递数据
 
 
 
 <!-- It is possible to pass data to components using so called [props](https://reactjs.org/docs/components-and-props.html). -->
-使用所谓的[props]( https://reactjs.org/docs/components-and-props.html )，使数据传递给组件变为可能。
+使用所谓的[props]( https://reactjs.org/docs/components-and-props.html )，可以将数据传递给组件。
 
 <!-- Let's modify the component <i>Hello</i> as follows -->
 让我们按照如下方式修改组件<i>Hello</i>
@@ -306,10 +306,10 @@ const Hello = (props) => { // highlight-line
 
 <!-- Now the function defining the component has a parameter <i>props</i>. As an argument, the parameter receives an object, which has fields corresponding to all the "props" the user of the component defines. -->
 
-现在定义组件的函数有一个参数<i>props</i>。 作为参数，它接收了一个对象，该对象具有组件中所定义的、用于定义user所有“属性”所对应的字段。
+现在定义组件的函数有一个参数<i>props</i>。 作为参数，它接收了一个对象，该对象具有组件中所定义的、用于定义user的所有“属性”所对应的字段。
 
 <!-- The props are defined as follows: -->
-props按如下定义: 
+props 按如下定义: 
 
 ```js
 const App = () => {
@@ -325,7 +325,7 @@ const App = () => {
 
 <!-- There can be an arbitrary number of props and their values can be "hard coded" strings or results of JavaScript expressions. If the value of the prop is achieved using JavaScript it must be wrapped with curly braces. -->
 
-可以有任意数量的props，它们的值可以是“硬编码的”字符串，也可以是 JavaScript 表达式的结果。 如果props的值是通过 JavaScript 实现的，那么它必须用花括号括起来。
+可以有任意数量的props ，它们的值可以是“硬编码的”字符串，也可以是 JavaScript 表达式的结果。 如果props的值是通过 JavaScript 表达式实现的，那么它必须用花括号括起来。
 
 <!-- Let's modify the code so that the component <i>Hello</i> uses two props: -->
 让我们修改一下代码，使组件<i>Hello</i> 使用两个props:
@@ -365,12 +365,12 @@ const App = () => {
 
 <!-- **The console should always be open**. If the browser reports errors, it is not advisable to continue writing more code, hoping for miracles. You should instead try to understand the cause of the error and, for example, go back to the previous working state: -->
 
-控制台应该始终开着 。 如果浏览器报错，那么本着期待奇迹出现，继续往下编写代码就很不明智了。 相反，你应该试着理解错误的原因，例如，回到之前的工作状态:
+控制台应该始终开着 。 如果浏览器报错，那么本着大力出奇迹，继续往下编写代码就很不明智了。 相反，你应该试着理解错误的原因，例如，回退到之前的工作状态:
 
 ![](../../images/1/2a.png)
 
 <!-- It is good to remember that in React it is possible and worthwhile to write <em>console.log()</em> commands (which print to the console) within your code. -->
-最好记住，在 React 的代码中编写 <em>console.log()</em>  命令(打印到控制台)是可以的，而且是提倡的。
+最好记住，在 React 的代码中编写 <em>console.log()</em>  命令(打印到控制台)是可行的，而且是提倡的。
 
 <!-- Also keep in mind that **React component names must be capitalized**. If you try defining a component as follows -->
 还要记住 **React 组件名称必须大写**。 如果你像如下这么定义：
@@ -403,7 +403,7 @@ const App = () => {
 
 <!-- the page is not going to display the content defined within the Footer component, and instead React only creates an empty <i>footer</i> element. If you change the first letter of the component name to a capital letter, then React creates a <i>div</i>-element defined in the Footer component, which is rendered on the page. -->
 
-页面是不会显示 Footer 组件中定义的内容，React 只会创建一个空的<i>Footer</i> 元素。 只有您将组件名称的第一个字母更改为大写字母， React 才会创建在 Footer 组件中定义的<i>div</i>-元素，该元素将渲染在页面上。
+页面是不会显示 Footer 组件中定义的内容，React 只会创建一个空的<i>Footer</i> 元素。 只有您将组件名称的第一个字母更改为大写字母， React 才会创建在 Footer 组件中定义的<i>div</i>-元素，并将该元素渲染在页面上。
 
 <!-- Note that the content of a React component (usually) needs to contain **one root element**. If we, for example, try to define the component <i>App</i> without the outermost <i>div</i>-element: -->
 注意 React 组件的内容(通常)需要包含 **一个根元素** 。 例如，如果我们尝试定义<i>App</i>组件而不使用最外面的<i>div</i>-元素:
@@ -440,7 +440,7 @@ const App = () => {
 但是，在定义应用的根组件时，数组这种方案并不明智，而且会使代码看起来有点难看。
 
 <!-- Because the root element is stipulated, we have "extra" div-elements in the DOM-tree. This can be avoided by using [fragments](https://reactjs.org/docs/fragments.html#short-syntax), i.e. by wrapping the elements to be returned by the component with an empty element: -->
-由于根元素是规定的，所以在 Dom 树中会有“额外的” div 元素。 这可以通过使用[ fragments ]( https://reactjs.org/docs/fragments.html#short-syntax )来避免，即用一个空元素来包装组件的返回内容:
+由于根元素是必须的，所以在 Dom 树中会有“额外的” div 元素。 这可以通过使用[ fragments ]( https://reactjs.org/docs/fragments.html#short-syntax )来避免，即用一个空元素来包装组件的返回内容:
 
 ```js
 const App = () => {
@@ -463,10 +463,9 @@ const App = () => {
 
 </div>
 
-
 <div class="tasks">
-  <h3>Exercises 1.1.-1.2.</h3>
-H3练习1.1- 1.2. / h3 
+<h3>练习 1.1.-1.2.</h3>
+
 <!-- Exercises are submitted through GitHub and by marking completed exercises in the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
 练习通过 GitHub 提交，并在[提交应用](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) 中标记练习为已完成。
 
@@ -491,7 +490,7 @@ part2
 为课程的每一章节都创建一个目录，它进一步分支成一系列练习的目录，如第1章节的“ unicafe”。
 
 <!-- For each web application for a series of exercises, it is recommended to submit all files relating to that application, except for the directory <i>node\_modules</i>. -->
-针对一个 web 应用的一系列练习，建议提交与该应用相关的所有文件，但不要提交node  modules</i> 目录。
+针对一个 web 应用的一系列练习，建议提交与该应用相关的所有文件，但不要提交<i>node\_modules</i> 目录。
 
 <!-- The exercises are submitted **one part at a time**. When you have submitted the exercises for a part of the course you can no longer submit undone exercises for the same part. -->
 提交一章节练习只有一次机会。 当你已经提交了某个章节课程的练习，你就不能再提交该章节的其他未完成的练习了。
@@ -502,9 +501,9 @@ part2
 
   <h4>1.1: 课程信息 步骤1</h4>
 
-<i>The application that we will start working on in this exercise will be further developed in a few of the following exercises. In this and other upcoming exercise sets in this course, it is enough to only submit the final state of the application. If desired, you may also create a commit for each exercise of the series, but this is entirely optional.</i>
+<!--<i>The application that we will start working on in this exercise will be further developed in a few of the following exercises. In this and other upcoming exercise sets in this course, it is enough to only submit the final state of the application. If desired, you may also create a commit for each exercise of the series, but this is entirely optional.</i>-->
 
-我们将在接下来的几个练习中，进一步开发基于这次练习开发的应用。 在本课程的这个练习和其他即将进行的练习中，只需提交应用的最终状态即可。 如果需要，还可以为该系列的每个练习创建一个commit，但这是完全可选的。 
+我们将在接下来的几个练习中，进一步开发基于这次练习的应用。 在本课程的这个练习和其他即将进行的练习中，只需提交应用的最终状态即可。 如果需要，还可以为该系列的每个练习创建一个commit，但这是完全是可选项。 
 
 <!-- Use create-react-app to initialize a new application. Modify <i>index.js</i> to match the following -->
 使用 create-react-app 来初始化一个新的应用，将<i>index.js</i> 的内容修改如下：

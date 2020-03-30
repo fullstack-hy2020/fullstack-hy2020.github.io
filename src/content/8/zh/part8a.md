@@ -99,7 +99,7 @@ query FetchBlogsQuery {
 <!-- The application logic stays simple, and the code on the browser gets exactly the data it needs with a single query.  -->
 应用逻辑保持简单，浏览器上的代码通过一个查询就可以获得它所需要的数据。
 
-### Schemas and queries Schema和查询
+### Schema和查询（Schemas and queries ）
 <!-- We will get to know the basics of GraphQL by implementing a GraphQL version of the phonebook application from parts 2 and 3.  -->
 通过从第2章节和第3章节实现电话簿应用的 GraphQL 版本，我们将了解 GraphQL 的基础知识。
 
@@ -501,7 +501,7 @@ query {
 
 
 
- In fact all resolver functions are given [four parameters](https://www.apollographql.com/docs/graphql-tools/resolvers.html#Resolver-function-signature). With JavaScript the parameters don't have to be defined, if they are not needed. We will be using the first and the third parameter of a resolver later in this part. 
+ <!--In fact all resolver functions are given [four parameters](https://www.apollographql.com/docs/graphql-tools/resolvers.html#Resolver-function-signature). With JavaScript the parameters don't have to be defined, if they are not needed. We will be using the first and the third parameter of a resolver later in this part.--> 
 事实上，所有的解析器函数都是给定的[4个参数]( https://www.apollographql.com/docs/graphql-tools/resolvers.html#resolver-function-signature )。 使用 JavaScript 时，如果不需要参数，那么就不必定义它们。 我们将在本章节后面使用解析器的第一个和第三个参数。
 
 ### The default resolver 默认解析器

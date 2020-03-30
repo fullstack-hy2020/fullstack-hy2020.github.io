@@ -7,9 +7,7 @@ lang: zh
 
 <div class="content">
 
-### Displaying the login form only when appropriate
-
-在合适的时候展示登录表单
+### 在合适的时候展示登录表单（Displaying the login form only when appropriate）
 
 <!-- Let's modify the application so that the login form is not displayed by default: -->
 让我们修改应用，让登录表单在默认情况下不显示
@@ -311,28 +309,21 @@ const NoteForm = ({ onSubmit, handleChange, value}) => {
 </Togglable>
 ```
 
-
 <!-- You can find the code for our current application in its entirety in the <i>part5-4</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-4). -->
-您可以在[ this github repository ]的<i>/ part5-4</i> 分支中找到我们当前应用的全部代码，该分支位于 https://github.com/fullstack-hy2020/part2-notes/tree/part5-4。
+您可以在 [这个仓库](https://github.com/fullstack-hy2020/part2-notes/tree/part5-4)5-4分支中找到我们当前应用的全部代码。
 
 
 ### State of the forms
 表格的状态
 
-
-
 <!-- The state of the application currently is in the _App_ component. -->
 应用的状态当前位于 App 组件中。
 
-
-
 <!-- React documentation says the [following](https://reactjs.org/docs/lifting-state-up.html) about where to place the state: -->
-React文档说[如下]( https://reactjs.org/docs/lifting-state-up.html )关于在哪里放置国家: 
+React[文档]( https://reactjs.org/docs/lifting-state-up.html )阐述了关于在哪里放置状态: 
 
 > <i>Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.</i>
-通常，几个组件需要反映相同的变化数据。 我们建议将共享状态提升到它们最接近的共同祖先。 我
-
-
+通常，几个组件需要反映相同的变化数据。 我们建议将共享状态提升到它们最接近的共同祖先。 
 
 <!-- If we think about the state of the forms, so for example the contents of a new note before it has been created, the _App_ component does not actually need it for anything.  -->
 如果我们考虑一下表单的状态，例如一个新便笺的内容在创建之前，App 组件实际上并不需要它做任何事情。
@@ -430,9 +421,9 @@ const App = () => {
 <!-- branch <i>part5-5</i>. -->
 分支<i>第5-5</i> 部分。
 
-### References to components with ref
+### 引用具有 ref 的组件（References to components with ref）
 
-引用具有 ref 的组件
+
 
 <!-- Our current implementation is quite good, it has one aspect that could be improved. -->
 
@@ -546,9 +537,9 @@ const App = () => {
 <!-- You can find the code for our current application in its entirety in the <i>part5-6</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-6). -->
 您可以在[ this github repository ]的<i>part5-6</i> 分支中找到我们当前应用的全部代码，该分支是 https://github.com/fullstack-hy2020/part2-notes/tree/part5-6文件库。
 
-### One point about components
+### 关于组件的一个点（One point about components）
 
-关于组件的一个点
+
 
 <!-- When we define a component in React: -->
 当我们在 React 定义一个组件：
@@ -827,7 +818,7 @@ LoginForm.propTypes = {
 <!-- Create-react-app has installed ESlint to the project by default, so all that's left for us to do is to define our desired configuration in the <i>.eslintrc.js</i> file. -->
 Create-react-app 已经默认为项目安装好了 ESlint， 所以我们需要做的就是定义自己的<i>.eslintrc.js</i> 文件 
 
-*NB:* do not run the _eslint --init_ command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
+<!--*NB:* do not run the _eslint --init_ command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!-->
 注意: 不要运行 eslint-- init 命令。 它将安装与 create-react-app 创建的配置文件不兼容的最新版本的 ESlint！
 
 <!-- Next, we will start testing the frontend and in order to avoid undesired and irrelevant linter errors we will install the [eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest) package: -->
@@ -923,7 +914,7 @@ build
 ```
 
 <!-- Compomnent _Togglable_ causesa a nasty looking warning <i>Component definition is missing display name</i>:  -->
-组件定义缺少显示名 / i:
+组件 _Togglable_  导致了一些烦人的警告：组件定义缺少显示名:
 
 ![](../../images/5/25ea.png)
 
@@ -970,7 +961,7 @@ export default Togglable
 <!-- Create-react-app has installed ESlint to the project by default, so all that's left for you to do is to define your desired configuration in the <i>.eslintrc.js</i> file.  -->
 Create-react-app 默认已经在项目中安装了 ESlint，所以剩下要做的就是在<i>中定义你想要的 <i>.eslintrc.js</i> 文件。 
 
-*NB:* do not run the _eslint --init_ command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
+<!--*NB:* do not run the _eslint --init_ command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!-->
 注意: 不要运行 eslint-- init 命令。 它将安装与 create-react-app 创建的配置文件不兼容的最新版本的 ESlint！
 
 </div>

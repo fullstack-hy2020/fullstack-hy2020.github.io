@@ -500,10 +500,10 @@ type Book {
 
 以下事情现在还不需要做
 
- - _allBooks_ query with parameters
- -  <i>bookCount</i> field of an author object
- -  _author_ field of a book
- - _editAuthor_ mutation
+<!--_allBooks_ query with parameters-->
+<!--<i>bookCount</i> field of an author object-->
+<!--_author_ field of a book-->
+<!--_editAuthor_ mutation-->
  - 使用参数进行allBooks查询
 - 作者对象的bookCount字段
 - 一本书的作者领域

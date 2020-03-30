@@ -11,7 +11,7 @@ lang: zh
 
 到目前为止，我们已经遵循了 React 推荐的状态管理约定。 我们已经将状态和处理它的方法放置到应用程序的根组件[the root component](https://reactjs.org/docs/lifting-state-up.html) 中。 然后，状态及其处理程序方法通过属性传递给其他组件。 这在一定程度上是可行的，但是当应用程序变得更大时，状态管理就变得更具挑战性。
 
-### Flux-architecture
+### Flux-架构
 
 <!-- Facebook developed the [Flux](https://facebook.github.io/flux/docs/in-depth-overview/)- architecture to make state management easier. In Flux, the state is separated completely from the React-components into its own <i>stores</i>. -->
 <!-- State in the store is not changed directly, but with different <i>actions</i>. -->
@@ -264,7 +264,7 @@ store.subscribe(renderApp)
 ```
 
 <!-- There are a few notable things in the code. -->
-<i>App</i> renders the value of the counter by asking it from the store with the method _store.getState()_. The actionhandlers of the buttons <i>dispatch</i> the right actions to the store.
+<!--<i>App</i> renders the value of the counter by asking it from the store with the method _store.getState()_. The actionhandlers of the buttons <i>dispatch</i> the right actions to the store.-->
 代码中有一些值得注意的东西。 App 使用 _store.getState()_ 方法从 store 中请求计数器，从而渲染计数器的值。 按钮的动作处理程序将正确的 action 分发到 sotre。
 
 <!-- When the state in the store is changed, React is not able to automatically rerender the application. Thus we have registered a function _renderApp_, which renders the whole app, to listen for changes in the store with the _store.subscribe_ method. Note that we have to immediately call the _renderApp_ method. Without the call the first rendering of the app would never happen. -->
@@ -340,7 +340,7 @@ const App = () => {
 }
 ```
 
-### Pure functions, immutable
+### 纯函数、不可变（Pure functions, immutable）
 
 <!-- The initial version of reducer is very simple: -->
 reducer 的初始版本非常简单: 
@@ -576,7 +576,7 @@ Spread-syntax 工作原理如下
 const numbers = [1, 2, 3]
 ```
 
-<code>...numbers</code> breaks the array up into individual elements, which can place i.e to another array.
+<!--<code>...numbers</code> breaks the array up into individual elements, which can place i.e to another array.-->
 <code>...numbers</code> 将数组分解成单独的元素，这样就可以将它，比如放到另一个数组中。
 
 ```js
@@ -622,7 +622,7 @@ console.log(rest)     // prints [3, 4, 5, 6]
 <!-- You can take the project from this repository https://github.com/fullstack-hy2020/unicafe-redux for the base of your project.  -->
 你可以把这个项目从这个仓库中的 https://github.com/fullstack-hy2020/unicafe-redux 作为你的项目的基础。
 
-<i>Start by removing the git-configuration of the cloned repository, and by installing dependencies</i>
+<!--<i>Start by removing the git-configuration of the cloned repository, and by installing dependencies</i>-->
 先删除git 配置，然后安装 dependencies 
 
 ```bash
@@ -842,7 +842,7 @@ toggleImportance = (id) => {
 }
 ```
 
-### Action creators
+### Action 创造器（Action creators）
 
 <!-- We begin to notice that, even in applications as simple as ours, using Redux can simplify the frontend code. However, we can do a lot better. -->
 我们开始注意到，即使在像我们这样简单的应用程序中，使用 Redux 也可以简化前端代码。 然而，我们可以做得更好。
@@ -896,7 +896,7 @@ const App = () => {
 ```
 
 
-### Redux-storen välittäminen eri komponenteille
+### Redux（Redux-storen välittäminen eri komponenteille）
 <!-- Aside from the reducer, our application is in one file. This is of course not sensible, and we should separate <i>App</i> into its own module.  -->
 除了reducer，我们的应用是在一个文件。 这当然是不明智的，我们应该将<i>App</i> 分离到它自己的模块中。
 
@@ -1125,7 +1125,7 @@ const App = () => {
 
 
 
-<i>useSelector</i> receives a function as a paramter. The function either either searches for or selectes data from the redux-store. 
+<!--<i>useSelector</i> receives a function as a paramter. The function either either searches for or selectes data from the redux-store.--> 
 <i>useSelector</i>  接收一个函数作为参数，该函数可以搜索或选择来自 redux-store 的数据。
 <!-- Here we need all of the notes, so our selector function returns the whole state: -->
 这里我们需要所有的便笺，所以我们的 selector 函数返回整个状态:
@@ -1246,11 +1246,11 @@ const App = () => {
 }
 ```
 
-<i>Note</i>, responsible for rendering a single note, is very simple, and is not aware that the event handler it gets as props dispatches an action. These kind of components are called [presentational](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) in React terminology.
+<i><!--Note</i>, responsible for rendering a single note, is very simple, and is not aware that the event handler it gets as props dispatches an action. These kind of components are called [presentational](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) in React terminology.-->
 
 <i>Note</i>，负责渲染单个 note 非常简单，并且不知道它获得的事件处理程序作为属性分派 action。 在 React 术语中，这种类型的组件被称为表象[presentational](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) 。
 
-<i>Notes</i>, on the other hand, is a [container](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) component, as it contains some application logic: it defines what the event handlers of the <i>Note</i> components do and coordinates the configuration of <i>presentational</i> components, that is, the <i>Note</i>s.
+<!--<i>Notes</i>, on the other hand, is a [container](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) component, as it contains some application logic: it defines what the event handlers of the <i>Note</i> components do and coordinates the configuration of <i>presentational</i> components, that is, the <i>Note</i>s.-->
 另一方面，Notes 是一个容器[container](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) 组件，因为它包含一些应用程序逻辑: 它定义 Note 组件的事件处理程序做什么，并协调表示组件的配置，即 Notes。
 
 <!-- We will return to the presentational/container division later in this part. -->

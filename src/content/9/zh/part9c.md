@@ -53,10 +53,10 @@ TypeScript的原生<i>tsc</i> 编译器可以帮助我们使用命令<i>tsc -- i
 
  
 
- Often the bare <i>tsc</i> command is added to the scripts for other scripts to use, so it is common to see the <i>tsc</i> command set up within the project like this.
+ <!--Often the bare <i>tsc</i> command is added to the scripts for other scripts to use, so it is common to see the <i>tsc</i> command set up within the project like this.-->
 通常，只有<i>tsc</i> 命令被添加到脚本中供其他脚本使用，因此在项目中设置<i>tsc</i> 命令是很常见的。
 
- Now we can initialise our tsconfig.json settings by running:
+ <!--Now we can initialise our tsconfig.json settings by running:-->
 现在我们可以通过运行如下命令来初始化 tsconfig.json 设置:
 
 
@@ -64,7 +64,7 @@ TypeScript的原生<i>tsc</i> 编译器可以帮助我们使用命令<i>tsc -- i
  npm run tsc -- --init
 ```
 
- **Notice** the extra -- before the actual argument! Arguments before the -- are interpreted for the command <i>npm</i> and ones after are for the command that is run throught the script. 
+ <!--**Notice** the extra -- before the actual argument! Arguments before the -- are interpreted for the command <i>npm</i> and ones after are for the command that is run throught the script.--> 
 注意多余的部分---- 在实际的参数之前！ -- 之前的参数解释为命令<i>npm</i>，之后的参数解释为通过脚本运行的命令。
 
 
@@ -105,19 +105,19 @@ TypeScript的原生<i>tsc</i> 编译器可以帮助我们使用命令<i>tsc -- i
 <!-- The <i>target</i> configuration tells the compiler which ECMAScript version to use for the generated JavaScript. ES6 is supported by most browsers, and it is a good, pretty safe option. -->
 <i>target</i> 配置告诉编译器为生成的 JavaScript 使用哪个 ECMAScript 版本。 大多数浏览器都支持 ES6，这是一个很好的、相当安全的选择。
 
-<i>outDir</i> tells where the compiled code should be placed.
+<!--<i>outDir</i> tells where the compiled code should be placed.-->
 <i>outDir</i> 告诉编译后的代码应该放在哪里。
 
 
 
-<i>module</i> tells the compiler we want to use <i>commonjs</i> modules in the compiled code. This means we can use _require_ instead of _import_, which is not supported in older Node.js versions such as the version 10. 
+<!--<i>module</i> tells the compiler we want to use <i>commonjs</i> modules in the compiled code. This means we can use _require_ instead of _import_, which is not supported in older Node.js versions such as the version 10.--> 
 <i>module</i>告诉编译器我们要在编译的代码中使用 <i>commonjs</i>模块。 这意味着我们可以使用 require 而不是 import，这在旧的 Node.js 版本中是不被支持的，比如10版本。
 
-<i>strict</i> is actually a shorthand for multiple separate options: 
+<!--<i>strict</i> is actually a shorthand for multiple separate options:--> 
 <i>strict</i> 实际上是多个独立选项的简写:
 
-<i>noImplicitAny, noImplicitThis, alwaysStrict, strictBindCallApply, strictNullChecks, strictFunctionTypes and strictPropertyInitialization</i>.
-<i>noImplicitAny，noImplicitThis，alwaysStrict，strictBindCallApply，strictNullChecks，strictFunctionTypes and strictPropertyInitialization</i>.
+<!--<i>noImplicitAny, noImplicitThis, alwaysStrict, strictBindCallApply, strictNullChecks, strictFunctionTypes and strictPropertyInitialization</i>.-->
+<i>noImplicitAny，noImplicitThis，alwaysStrict，strictBindCallApply，strictNullChecks，strictFunctionTypes 以及 strictPropertyInitialization</i>.
 <!-- These guide our coding style to use the TypeScript features more strictly.  -->
 这些指导我们的编码风格更严格地使用TypeScript的特性。
 <!-- For us perhaps the most important is the already familiar [noImplicitAny](https://www.typescriptlang.org/en/tsconfig#noImplicitAny). It prevents implicitly setting type <i>any</i>, which can happen if you don't type the parameters of a function for example.  -->
@@ -129,13 +129,13 @@ TypeScript的原生<i>tsc</i> 编译器可以帮助我们使用命令<i>tsc -- i
 
 
 
-<i>noUnusedLocals</i> prevents having unused local variables, and <i>noUnusedParameters</i> throws an error if a function has unused parameters.
+<!--<i>noUnusedLocals</i> prevents having unused local variables, and <i>noUnusedParameters</i> throws an error if a function has unused parameters.-->
 使用<i>noUnusedLocals</i> 避免有未使用的局部变量，如果函数有未使用的参数，<i>noUnusedParameters</i> 将抛出错误。
 
-<i>noFallthroughCasesInSwitch</i> ensures that in a _switch case_ each case ends with a  _return_ or a _break_ statement.
+<!--<i>noFallthroughCasesInSwitch</i> ensures that in a _switch case_ each case ends with a  _return_ or a _break_ statement.-->
 <i>noFallthroughCasesInSwitch</i> 确保在_switch情况下，每个case都以一个 return 或 break 语句结束。
 
-<i>esModuleInterop</i> allows interoperability between commonJS and ES Modules, see more [in documentation](https://www.typescriptlang.org/en/tsconfig#esModuleInterop).
+<!--<i>esModuleInterop</i> allows interoperability between commonJS and ES Modules, see more [in documentation](https://www.typescriptlang.org/en/tsconfig#esModuleInterop).-->
 <i>esModuleInterop</i> 允许 commonJS 和 ES 模块之间的互操作性，详见文档中 [这部分](https://www.typescriptlang.org/en/tsconfig#esModuleInterop)。
 
 <!-- Now that we have our preferred configuration set, let's continue by installing <i>express</i> and of course also <i>@types/express</i>. Since this is a real project, which is intended to be grown over time, we will use eslint from the very  beginning: -->
@@ -560,7 +560,7 @@ export default {
 
 
 
-> **NB**: For some reason VSCode tends to complain it cannot find the file <i>../../data/diaries.json</i> from the service despite the file existing. That is a bug in the editor, and goes away when the editor is restarted.
+> <!--**NB**: For some reason VSCode tends to complain it cannot find the file <i>../../data/diaries.json</i> from the service despite the file existing. That is a bug in the editor, and goes away when the editor is restarted.-->
 出于某种原因，VSCode 倾向于产生警告它无法找到文件 <i>../../data/diaries.json</i>。 尽管文件已经存在， 这是编辑器中的一个 bug，并且在重新启动编辑器时消失。
 
 
@@ -827,7 +827,7 @@ const getNonSensitiveEntries = (): Omit<DiaryEntry, 'comment'>[] => {
   // ...
 }
 ```
- Another way would be to declare a completely new type for the <i>NonSensitiveDiaryEntry</i>: 
+ <!--Another way would be to declare a completely new type for the <i>NonSensitiveDiaryEntry</i>: -->
 另一种方法是为<i>NonSensitiveDiaryEntry</i>声明一个全新的类型:
 
 ```js

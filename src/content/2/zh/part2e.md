@@ -34,7 +34,7 @@ h1 {
 ```
 
 <!-- CSS rules comprise of <i>selectors</i> and <i>declarations</i>. The selector defines which elements the rule should be applied to. The selector above is <i>h1</i>, which will match all of the <i>h1</i> header tags in our application. -->
-Css 规则由<i>选择器</i> 和<i>声明</i> 组成。 选择器定义规则应该应用于哪些元素。 上面的选择器是<i>h1</i>，它将匹配我们应用中的所有<i>h1</i> 头标记。 
+CSS  规则由<i>选择器</i> 和<i>声明</i> 组成。 选择器定义规则应该应用于哪些元素。 上面的选择器是<i>h1</i>，它将匹配我们应用中的所有<i>h1</i> 头标记。 
 
 
 <!-- The declaration sets the _color_ property to the value <i>green</i>. -->
@@ -133,7 +133,7 @@ const Note = ({ note, toggleImportance }) => {
 如果您现在向应用添加其他<i>li</i> 元素，它们将不会受到上述样式规则的影响。
 
 
-### Improved error message 改进错误信息
+### 改进错误信息（Improved error message ）
 <!-- We previously implemented the error message that was displayed when the user tried to toggle the importance of a deleted note with the <em>alert</em> method. Let's implement the error message as its own React component. -->
 我们先前实现了当用户试图通过<em>alert</em>方法切换删除便笺的重要性时，显示错误消息。 让我们将错误消息实现为它自己的 React 组件。
 
@@ -250,9 +250,8 @@ React也使得直接在代码中编写样式成为可能，即所谓的[内联�
 <!-- The idea behind defining inline styles is extremely simple. Any React component or element can be provided with a set of CSS properties as a JavaScript object through the [style](https://reactjs.org/docs/dom-elements.html#style) attribute. -->
 定义内联样式背后的思想非常简单。 任何 React 组件或元素都可以通过[ style ]( https://reactjs.org/docs/dom-elements.html#style )属性作为 JavaScript 对象提供一组 CSS 属性。
 
-
 <!-- CSS rules are defined slightly differently in JavaScript than in normal CSS files. Let's say that we wanted to give some element the color green and italic font that's 16 pixels in size. In CSS, it would look like this: -->
-Css 规则在 JavaScript 中的定义与普通 CSS 文件中的定义稍有不同。 假设我们想给一些元素绿色和斜体字体，大小为16像素。 在 CSS 中，它看起来像这样: 
+CSS 规则在 JavaScript 中的定义与普通 CSS 文件中的定义稍有不同。 假设我们想给一些元素绿色和斜体字体，大小为16像素。 在 CSS 中，它看起来像这样: 
 
 ```css
 {
@@ -262,9 +261,8 @@ Css 规则在 JavaScript 中的定义与普通 CSS 文件中的定义稍有不�
 }
 ```
 
-
 <!-- But as a React inline style object it would look like this: -->
-但是作为一个 React inline style 对象，它看起来是这样的:
+但是作为一个 React inline style 内置样式对象，它看起来是这样的:
 
 ```js
  {

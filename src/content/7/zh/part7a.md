@@ -14,7 +14,7 @@ lang: zh
 <!-- In addition to the exercises in this and the chapter, there is a series of exercises which revise what we've learned during the whole course by expanding the Bloglist application which we worked on during parts 4 and 5. -->
 除了本章和本章的练习外，还有一系列的练习，通过扩展我们在第4和第5章节中使用的 Bloglist 应用来修改我们在整个课程中学到的知识。
 
-### Application navigation structure 应用的导航结构
+### 应用的导航结构（Application navigation structure ）
 <!-- Following part 6, we return to React without Redux. -->
 在第6章节之后，我们回到没有 Redux 的 React。
 
@@ -180,7 +180,7 @@ import {
 <!-- According to the [manuaal](https://reacttraining.com/react-router/web/api/BrowserRouter)  -->
 根据[ manuaal ]( https://reacttraining.com/react-router/web/api/browserrouter )
 
-> <i>BrowserRouter</i> is a <i>Router</i> that uses the HTML5 history API (pushState, replaceState and the popState event) to keep your UI in sync with the URL.
+> <!--<i>BrowserRouter</i> is a <i>Router</i> that uses the HTML5 history API (pushState, replaceState and the popState event) to keep your UI in sync with the URL.-->
 BrowserRouter 是一个 i Router，它使用 HTML5历史 API (pushState、 replaceState 和 popState 事件)保持 UI 与 URL 同步。 
 
 <!-- Normally the browser loads a new page when the URL in the address bar changes. However, with the help of the [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/) <i>BrowserRouter</i> enables us to use the URL in the address bar of the browser for internal "routing" in a React-application. So, even if the URL in the address bar changes, the content of the page is only manipulated using Javascript, and the browser will not load new content form the server. Using the back and forward actions, as well as making bookmarks, is still logical like on a traditional web page. -->
@@ -251,14 +251,14 @@ BrowserRouter 是一个 i Router，它使用 HTML5历史 API (pushState、 repla
 </Switch>
 ```
 
-### Parameterized route 参数化路由
+###  参数化路由（Parameterized route）
 <!-- Let's examine the slightly modified version from the previous example. The complete code for the example can be found [here](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v1.js). -->
 让我们检查一下前一个例子中稍微修改过的版本，这个例子的完整代码可以在这里找到 [here](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v1.js)。
 
 <!-- The application now contains five different views, the display of which is controlled by the router. In addition to the components from the previous example (<i>Home</i>, <i>Notes</i> and <i>Users</i>), we have <i>Login</i> representing the login view and <i>Note</i> representing the view of a single note. -->
 应用现在包含五个不同的视图，其显示由路由控制。 除了前面示例中的组件(<i>Home</i>、<i>Notes</i> 和<i>Users</i>)外，我们还有<i>Login</i> 表示登录视图，<i>Note</i> 表示单个便笺的视图。
 
-<i>Home</i> and <i>Users</i> are unchanged from the previous exercise.  <i>Notes</i> is a bit more complicated. It renders the list of notes passed to it as props in such a way that the name of each note is clickable.
+<!--<i>Home</i> and <i>Users</i> are unchanged from the previous exercise.  <i>Notes</i> is a bit more complicated. It renders the list of notes passed to it as props in such a way that the name of each note is clickable.-->
 Home 和 Users  与上次练习相同。<i>Notes</i> 有点复杂。 它以这样一种方式渲染作为props传递给它的便笺列表，即每个便笺的名称都是可点击的。 
 
 ![](../../images/7/3ea.png)
@@ -434,9 +434,7 @@ const Login = (props) => {
 <!-- Both [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) and [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) are hook-functions, just like useState and useEffect we have used many times now.  As you remember from part 1, there are some [rules](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot) to using hook-functions. Create-react-app has been configured to warn you, if you break these rules e.g by calling a hook-function from a conditional statement. -->
 [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams)和 [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory)  都是Hook函数，就像我们已经多次使用的 useState 和 useEffect 一样。 正如您在第1章节中记得的，使用钩函数有一些[rules](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot) 。 Create-react-app 已经配置为警告，如果你打破这些规则，例如从一个 If判断语句中调用一个Hook函数。
 
-### redirect
-重新定向
-
+### 重新定向（redirect）
 <!-- There is one more interesting detail about the <i>Users</i> route:  -->
 关于<i>Users</i> 路由还有一个有趣的细节:
 
@@ -512,7 +510,7 @@ const App = () => {
   )
 }
 ```
-We define an element common for modern web apps called <i>footer</i>, which defines the part at the bottom of the screen, outside of the <i>Router</i>, so that it is shown regardless of the component shown in the routed part of the application.
+<!--We define an element common for modern web apps called <i>footer</i>, which defines the part at the bottom of the screen, outside of the <i>Router</i>, so that it is shown regardless of the component shown in the routed part of the application.-->
 我们定义了一个现代 web 应用通用的元素<i>footer</i>，它定义了屏幕底部<i>Router</i> 之外的部分，因此不管应用路由部分显示的是哪个组件，它都会显示出来。
 
 

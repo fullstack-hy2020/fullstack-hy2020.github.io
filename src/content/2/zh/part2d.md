@@ -15,7 +15,7 @@ lang: zh
 在不到30秒(严肃地)的情况下得到一个完整的模拟 REST API，0编码
 
 <!-- The json-server does not exactly match the description provided by the textbook [definition](https://en.wikipedia.org/wiki/Representational_state_transfer) of a REST API, but neither do most other APIs claiming to be RESTful. -->
-Json-server 与 REST API 的教科书[定义]( https://en.wikipedia.org/wiki/representational_state_transfer )提供的描述不完全匹配，但是声称是 RESTful 的大多数都不完全匹配。 
+Json-server 与 REST API 的教科书[定义]( https://en.wikipedia.org/wiki/representational_state_transfer )提供的描述不完全匹配，但是自称是 RESTful 的大多数服务都不完全匹配。 
 
 <!-- We will take a closer look at REST in the [next part](/en/part3) of the course, but it's important to familiarize ourselves at this point with some of the [conventions](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) used by json-server and REST APIs in general. In particular, we will be taking a look at the conventional use of [routes](https://github.com/typicode/json-server#routes), aka URLs and HTTP request types, in REST. -->
 我们将在本课程的[下一章节](/en/part3)中进一步了解 REST，但是熟悉 json-server 和 REST api 经常使用的一些[约定]( https://en.wikipedia.org/wiki/representational_state_transfer#applied_to_web_services )是很重要的。 特别是，我们将会看到在 REST 中常规使用[路由]( https://github.com/typicode/json-server#routes ) ，即 url 和 HTTP 请求类型。
@@ -25,15 +25,15 @@ Json-server 与 REST API 的教科书[定义]( https://en.wikipedia.org/wiki/rep
 在 REST 术语中，我们将单个数据对象(如应用中的便笺)称为<i>resources</i>。 每个资源都有一个唯一的地址——它的 URL。 根据 json-server 使用的一般约定，我们将能够在资源  URL， 即<i>notes/3</i>上定位某个便笺，其中3是资源的 id。 另一方面， <i>notes</i> url 指向包含所有便笺的资源集合。
 
 <!-- Resources are fetched from the server with HTTP GET requests. For instance, an HTTP GET request to the URL <i>notes/3</i> will return the note that has the id number 3. An HTTP GET request to the <i>notes</i> URL would return a list of all notes. -->
-通过 HTTP GET 请求从服务器获取资源。 例如，对 URL <i>notes / 3</i> 的 HTTP GET 请求将返回 id 为3的便笺。 对<i>notes</i> URL 的 HTTP GET 请求将返回所有便笺的列表。
+通过 HTTP GET 请求从服务器获取资源。 例如，对 URL<i>notes/3</i> 的 HTTP GET 请求将返回 id 为3的便笺。 对<i>notes</i> URL 的 HTTP GET 请求将返回所有便笺的列表。
 
 <!-- Creating a new resource for storing a note is done by making an HTTP POST request to the <i>notes</i> URL according to the REST convention that the json-server adheres to. The data for the new note resource is sent in the <i>body</i> of the request. -->
 根据 json 服务器遵守的 REST 约定，通过向<i>notes</i> URL 发出 HTTP POST 请求来创建、存储新的便笺。 新便笺资源的数据在请求的<i>body</i> 中发送。
 
 <!-- json-server requires all data to be sent in JSON format. What this means in practice is that the data must be a correctly formatted string, and that the request must contain the <i>Content-Type</i> request header with the value <i>application/json</i>. -->
-Json-server 要求以 JSON 格式发送所有数据。 实际上，这意味着数据必须是格式正确的字符串，并且请求必须包含值为<i>application / json</i> 的<i>Content-Type</i> 请求头。 
+Json-server 要求以 JSON 格式发送所有数据。 实际上，这意味着数据必须是格式正确的字符串，并且请求必须包含值为<i>application/json</i> 的<i>Content-Type</i> 请求头。 
 
-### Sending Data to the Server 发送数据到服务器
+### 发送数据到服务器（Sending Data to the Server ）
 <!-- Let's make the following changes to the event handler responsible for creating a new note: -->
 让我们对负责创建新便笺的事件处理进行如下更改:
 
@@ -61,7 +61,7 @@ addNote = event => {
 我们为便笺创建了一个新对象，但忽略了<i>id</i> 属性，因为最好让服务器为我们的资源生成 id！
 
 <!-- The object is sent to the server using the axios <em>post</em> method. The registered event handler logs the response that is sent back from the server to the console. -->
-使用 axios <em>post</em> 方法将对象发送到服务器。 已注册的事件处理从服务器发送回控制台的响应记录。
+使用 axios <em>post</em> 方法将对象发送到服务器。 已注册的事件处理函数从服务器发送回控制台的响应记录。
 
 <!-- When we try to create a new note, the following output pops up in console: -->
 当我们尝试创建一个新的便笺时，控制台会弹出如下输出:
@@ -72,7 +72,7 @@ addNote = event => {
 新创建的便笺资源存储在response对象的<i>data</i> 属性值中。
 
 <!-- Sometimes it can be useful to inspect HTTP requests in the <i>Network</i> tab of Chrome developer tools, which was used heavily at the beginning of [part 0](/en/part0/fundamentals_of_web_apps#http-get): -->
-有时在 Chrome 开发工具的<i>Network</i> 选项卡中检查 HTTP 请求是很有用的，这个选项卡在[part 0](/en/part0/fundamentals_of_web_apps#http-get) 开始时被大量使用:
+有时在 Chrome 开发工具的<i>Network</i> 选项卡中检查 HTTP 请求是很有用的，这个选项卡在[第 0 章](/en/part0/fundamentals_of_web_apps#http-get) 开始时被大量使用:
 
 ![](../../images/2/21e.png)
 
@@ -82,7 +82,7 @@ addNote = event => {
 我们可以使用检查器来检查 POST 请求中发送的头文件是否符合我们的预期，以及它们的值是否正确。
 
 <!-- Since the data we sent in the POST request was a JavaScript object, axios automatically knew to set the appropriate <i>application/json</i> value for the <i>Content-Type</i> header. -->
-由于我们在 POST 请求中发送的数据是一个 JavaScript 对象，axios 自动懂得为<i>Content-Type</i> 头设置适当的<i>application / json</i> 值。
+由于我们在 POST 请求中发送的数据是一个 JavaScript 对象，axios 自动懂得为<i>Content-Type</i> 头设置适当的<i>application/json</i> 值。
 
 <!-- The new note is not rendered to the screen yet. This is because we did not update the state of the <i>App</i> component when we created the new note. Let's fix this: -->
 新的便笺还没有渲染到屏幕上。 这是因为我们在创建新便笺时没有更新<i>App</i> 组件的状态。 让我们来解决这个问题:
@@ -108,7 +108,7 @@ addNote = event => {
 ```
 
 <!-- The new note returned by the backend server is added to the list of notes in our application's state in the customary way of using the <em>setNotes</em> function and then resetting the note creation form. An [important detail](/en/part1/a_more_complex_state_debugging_react_apps#handling-arrays) to remember is that the <em>concat</em> method does not change the component's original state, but instead creates a new copy of the list. -->
-后端服务器返回的新便笺将按照使用 <em>setNotes</em> 函数然后重置便笺创建表单的惯例方式添加到应用状态的便笺列表中。 需要记住的一个 [important detail](/en/part1/a_more_complex_state_debugging_react_apps#handling-arrays) 是 <em>concat</em> 方法不会改变组件的原始状态，而是创建列表的新副本。
+后端服务器返回的新便笺将按照使用 <em>setNotes</em> 函数然后重置便笺创建表单的惯例方式添加到应用状态的便笺列表中。 需要记住的一个 [重要细节important detail](/en/part1/a_more_complex_state_debugging_react_apps#handling-arrays) 是 <em>concat</em> 方法不会改变组件的原始状态，而是创建列表的新副本。
 
 <!-- Once the data returned by the server starts to have an effect on the behavior of our web applications, we are immediately faced with a whole new set of challenges arising from, for instance, the asynchronicity of communication. This necessitates new debugging strategies, console logging and other means of debugging become increasingly more important, and we must also develop a sufficient understanding of the principles of both the JavaScript runtime and React components. Guessing won't be enough. -->
 一旦服务器返回的数据开始影响我们 web 应用的行为，我们就会立即面临一系列全新的挑战，例如，通信的异步性。 这就需要新的调试策略，控制台日志和其他调试手段变得越来越重要，我们还必须对 JavaScript 运行时和 React 组件的原理有充分的理解。 光靠猜是不够的。
@@ -126,8 +126,8 @@ addNote = event => {
 <!-- In the next part of the course we will learn to implement our own logic in the backend. We will then take a closer look at tools like [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop) that help us to debug our server applications. However, inspecting the state of the json-server through the browser is sufficient for our current needs. -->
 在本课程的下一章节中，我们将学习如何在后端实现我们自己的逻辑。 然后，我们将进一步研究一些工具，如[postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop) ，这些工具可以帮助我们调试服务器应用。 但是，通过浏览器检查 json-server 的状态就足以满足我们当前的需求。
 
-> **NB:** In the current version of our application the browser adds the creation date property to the note. Since the clock of the machine running the browser can be wrongly configured, it's much wiser to let the backend server generate this timestamp for us. This is in fact what we will do in the next part of the course.
-注意: 在当前版本的应用中，浏览器在便笺中添加了创建日期属性。 由于运行浏览器的机器的时钟可能被错误地配置，所以让后端服务器为我们生成这个时间戳要明智得多。 这实际上就是我们在下一章节课程中要做的。
+> <!--**NB:** In the current version of our application the browser adds the creation date property to the note. Since the clock of the machine running the browser can be wrongly configured, it's much wiser to let the backend server generate this timestamp for us. This is in fact what we will do in the next part of the course.-->
+注意: 在当前版本的应用中，浏览器在便笺中添加了创建日期属性。 由于运行浏览器的机器的时钟可能错误地配置，所以让后端服务器为我们生成这个时间戳要明智得多。 这实际上就是我们在下一章节课程中要做的。
 
 <!-- The code for the current state of our application can be found in the  <i>part2-5</i> branch on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-5). -->
 我们应用当前状态的代码可以在[github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-5)上的<i>part2-5</i> 分支中找到。
@@ -224,7 +224,7 @@ console.log(`importance of ${id} needs to be toggled`)
 ```
 
 <!-- We can now use the "dollar-bracket"-syntax to add parts to the string that will evaluate JavaScript expressions, e.g. the value of a variable. Note that the quotation marks used in template strings differ from the quotation marks used in regular JavaScript strings. -->
-我们现在可以使用“ dollar-bracket”语法向字符串中添加部分来计算 JavaScript 表达式，例如变量的值。 注意，模板字符串中使用的反引号与常规 JavaScript 字符串中使用的引号不同。
+我们现在可以使用“ dollar-bracket”语法向字符串中添加内容来计算 JavaScript 表达式，例如变量的值。 注意，模板字符串中使用的反引号与常规 JavaScript 字符串中使用的引号不同。
 
 <!-- Individual notes stored in the json-server backend can be modified in two different ways by making HTTP requests to the note's unique URL. We can either <i>replace</i> the entire note with an HTTP PUT request, or only change some of the note's properties with an HTTP PATCH request. -->
 存储在 json-server 后端中的各个便笺可以通过对便笺的唯一 URL 发出 HTTP 请求，以两种不同的方式进行修改。 我们可以用 HTTP PUT 请求<i>替换</i> 整个便笺，或者只用 HTTP PATCH 请求更改便笺的一些属性。
@@ -255,7 +255,7 @@ const toggleImportanceOf = id => {
 在此之后，我们创建一个<i>新对象</i>，除了重要性属性，它完全是旧便笺的副本。
 
 <!-- The code for creating the new object that uses the [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax  -->
-使用[object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)语法创建新对象的代码
+使用[对象展开object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)语法创建新对象的代码
 <!-- may seem a bit strange: -->
 可能看起来有点奇怪:
 
@@ -304,18 +304,18 @@ notes.map(note => note.id !== id ? note : response.data)
 ```
 
 <!-- The map method creates a new array by mapping every item from the old array into an item in the new array. In our example, the new array is created conditionally so that if <em>note.id !== id</em> is true, we simply copy the item from the old array into the new array. If the condition is false, then the note object returned by the server is added to the array instead. -->
-Map 方法通过将旧数组中的每个项映射到新数组中的一个项来创建一个新数组。 在我们的示例中，新数组被有条件地创建，以便如果<em>note.id !== id</em>为true，我们只需将项从旧数组复制到新数组中。 如果条件为 false，则将服务器返回的 note 对象添加到数组中。 
+Map 方法通过将旧数组中的每个项映射到新数组中的一个项来创建一个新数组。 在我们的示例中，新数组被有条件地创建，即如果<em>note.id !== id</em>为true，我们只需将项从旧数组复制到新数组中。 如果条件为 false，则将服务器返回的 note 对象添加到数组中。 
 
 <!-- This <em>map</em> trick may seem a bit strange at first, but it's worth spending some time wrapping your head around it. We will be using this method many times throughout the course. -->
 这个<em>map</em> 技巧起初可能看起来有点奇怪，但是它值得你花一些时间去理解它。 在整个课程中，我们将多次使用这种方法。
 
 
-### Extracting communication with the backend into a separate module 将与后端的通信提取到单独的模块中
+### 将与后端的通信提取到单独的模块中
 <!-- The <i>App</i> component has become somewhat bloated after adding the code for communicating with the backend server. In the spirit of the [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), we deem it wise to extract this communication into its own [module](/en/part2/rendering_a_collection_modules#refactoring-modules). -->
 在添加了用于与后端服务器通信的代码之后，<i>App</i> 组件变得有些臃肿。 本着[单一职责原则]( https://en.wikipedia.org/wiki/single_responsibility_principle )的精神，我们认为将这种通信提取到它自己的[模块](/en/part2/rendering_a_collection_modules#refactoring-modules)是明智的。
 
 <!-- Let's create a <i>src/services</i> directory and add a file there called <i>notes.js</i>: -->
-让我们创建一个<i>src / services</i> 目录，并添加一个名为<i>notes.js</i> 的文件:
+让我们创建一个<i>src/services</i>目录，并添加一个名为<i>notes.js</i> 的文件:
 
 ```js
 import axios from 'axios'
@@ -341,7 +341,7 @@ export default {
 ```
 
 <!-- The module returns an object that has three functions (<i>getAll</i>, <i>create</i>, and <i>update</i>) as its properties that deal with notes. The functions directly return the promises returned by the axios methods. -->
-该模块返回一个具有三个函数（<i>getAll</i>, <i>create</i>, and <i>update</i>）的对象，作为其处理便笺的属性。 函数直接返回 axios 方法返回的允诺。
+该模块返回一个具有三个函数（<i>getAll</i>, <i>create</i>, and <i>update</i>）的对象，作为其处理便笺的属性。 函数直接返回 axios 方法返回的允诺Promise。
 
 <!-- The <i>App</i> component uses <em>import</em> to get access to the module: -->
 <i>App</i> 组件使用 <em>import</em>访问模块:
@@ -549,13 +549,13 @@ const App = () => {
 这一切都相当复杂，试图解释它可能只会让它更难理解。 互联网上充满了讨论这个话题的材料，比如这个[this](https://javascript.info/promise-chaining)。
 
 <!-- The "Async and performance" book from the [You do not know JS](https://github.com/getify/You-Dont-Know-JS/tree/1st-ed) book series explains the topic [well](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch3.md), but the explanation is many pages long. -->
-在[You do not know JS](https://github.com/getify/You-Dont-Know-JS/tree/1st-ed) 一书中，对这个主题进行了很好的解释](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch3.md) ，但是解释有很多页
+在[You do not know JS](https://github.com/getify/You-Dont-Know-JS/tree/1st-ed) 一书中，对这个主题进行了很好的解释[well](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch3.md)，但是解释有很多页
 
 <!-- Promises are central to modern JavaScript development and it is highly recommended to invest a reasonable amount of time into understanding them. -->
-承诺是现代 JavaScript 开发的核心，强烈建议投入合理的时间来理解它们。
+承诺Promise是现代 JavaScript 开发的核心，强烈建议投入合理的时间来理解它们。
 
 
-### Cleaner syntax for defining object literals 用于定义对象字面量的更清晰的语法
+### 用于定义对象字面量的更清晰的语法（Cleaner syntax for defining object literals ）
 
 <!-- The module defining note related services currently exports an object with the properties <i>getAll</i>, <i>create</i> and <i>update</i> that are assigned to functions for handling notes. -->
 定义便笺相关服务的模块目前导出一个具有属性<i>getAll</i>、<i>create</i> 和<i>update</i> 的对象，这些属性分配给处理便笺的函数。
@@ -677,7 +677,7 @@ const person = { name, age }
 两个表达式的结果是相同的。 它们都创建了一个值为<i>Leevi</i> 的<i>name</i> 属性和值为<i>0</i> 的<i>age</i> 属性的对象。
 
 
-### Promises and errors 承诺和错误
+### 承诺和错误（Promises and errors ）
 
 <!-- If our application allowed users to delete notes, we could end up in a situation where a user tries to change the importance of a note that has already been deleted from the system. -->
 如果我们的应用允许用户删除便笺，那么我们可能会出现这样的情况: 用户试图更改已经从系统中删除的便笺的重要性。

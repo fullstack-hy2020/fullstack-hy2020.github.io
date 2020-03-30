@@ -100,7 +100,7 @@ const errorHandler = (error, request, response, next) => {
 ![](../../images/3/50.png)
 
 
-### Promise chaining 承诺链
+### 承诺链（Promise chaining ）
 <!-- Many of the route handlers changed the response data into the right format by calling the _toJSON_ method. When we created a new note, the _toJSON_ method was called for the object passed as a parameter to _then_: -->
 许多路由处理程序通过调用 toJSON 方法将响应数据更改为正确的格式。 当我们创建一个新的便笺时，toJSON 方法被调用，作为参数传递给下面的对象:
 
@@ -138,7 +138,7 @@ app.post('/api/notes', (request, response, next) => {
 ```
 
 <!-- In the first _then_ we receive _savedNote_ object returned by Mongoose and format it. The result of the operation is returned. Then as [we discussed earlier](/en/part2/altering_data_in_server#extracting-communication-with-the-backend-into-a-separate-module), the _then_ method of a promise also returns a promise. This means that when we return _savedNote.toJSON()_ from the callback function, we are actually creating a promise that receives the formatted note as its value. We can access the formatted note by registering a new callback function with the _then_ method. -->
-在第一个 _then_ ，我们收到 savedNote 对象返回的 Mongoose 和格式化它。 返回操作的结果。 然后，正如[we discussed earlier](/en/part2/altering_data_in_server#extracting-communication-with-the-backend-into-a-separate-module) ，then 的方法也返回了一个承诺。 这意味着，当我们从回调函数返回 savedNote.toJSON ()时，我们实际上是在创建一个承诺，该承诺将接收格式化的便笺作为其值。 我们可以通过使用 then 方法注册一个新的回调函数来访问带格式的便笺。
+在第一个 _then_ ，我们收到 savedNote 对象返回的 Mongoose 和格式化它。 返回操作的结果。 然后，正如[我们之前讨论的](/en/part2/altering_data_in_server#extracting-communication-with-the-backend-into-a-separate-module) ，then 的方法也返回了一个承诺。 这意味着，当我们从回调函数返回_savedNote.toJSON()_ 时，我们实际上是在创建一个承诺，该承诺将接收格式化的便笺作为其值。 我们可以通过使用 then 方法注册一个新的回调函数来访问带格式的便笺。
 
 <!-- We can clean up our code even more by using the more compact syntax for arrow functions: -->
 我们可以使用箭头函数的紧凑语法来清理我们的代码:
@@ -158,9 +158,9 @@ app.post('/api/notes', (request, response, next) => {
 ```
 
 <!-- In this example, Promise chaining does not provide much of a benefit. The situation would change if there were many asynchronous operations that had to be done in sequence. We will not delve further into the topic. In the next part of the course we will learn about the <i>async/await</i> syntax in JavaScript, that will make writing subsequent asynchronous operations a lot easier. -->
-在这个例子中，承诺链没有提供多少好处。 如果有许多必须按顺序进行的异步操作，情况就会发生变化。 我们不会进一步深入探讨这个主题。 在本课程的下一章节中，我们将学习 JavaScript 中的<i>async / await</i> 语法，这将使编写后续的异步操作变得容易得多。
+在这个例子中，承诺链没有提供多少好处。 但要是有许多必须按顺序进行的异步操作，情况就会发生变化。 我们不会进一步深入探讨这个主题。 在本课程的下一章节中，我们将学习 JavaScript 中的<i>async/await</i>语法，这将使编写后续的异步操作变得容易得多。
 
-### Deploying the database backend to production 将数据库后端部署到生产环境
+### 将数据库后端部署到生产环境（Deploying the database backend to production ）
 <!-- The application should work almost as-is in Heroku. We do have to generate a new production build of the frontend due to the changes that we have made to our frontend.  -->
 该应用在 Heroku 的运行情况应该基本一样。 由于我们对前端进行了更改，我们必须生成一个新的前端生产版本。
 
@@ -181,7 +181,7 @@ heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluste
 ```
 
 <!-- The application should now work. Sometimes things don't go according to plan. If there are problems, <i>heroku logs</i> will be there to help. My own application did not work after making the changes. The logs showed the following: -->
-应用现在应该可以工作了。 有时事情不会按计划进行。 如果有什么问题，<i>heroku log</i>会尽力帮忙的。 我自己的应用在进行更改后不工作。 这些日志显示了如下情况:
+应用现在应该可以工作了。 有时事情不会按计划进行。 如果有什么问题，<i>heroku log</i>会尽力帮忙的。 我自己的应用在进行更改后不工作。 日志显示了如下情况:
 
 ![](../../images/3/51a.png)
 
@@ -191,7 +191,6 @@ heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluste
 <!-- You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this github repository](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-5). -->
 您可以在[this github repository](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-5)的<i>part3-5</i> 分支中找到我们当前应用的全部代码。
 </div>
-
 
 </div>
 
@@ -209,13 +208,13 @@ heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluste
 为您的应用添加验证，这将确保您只能在电话簿中为某人添加一个号码。 我们当前的前端不允许用户尝试创建副本，但我们可以尝试直接使用Postman或 VS Code REST 客户端创建副本。
 
 <!-- Mongoose does not offer a built-in validator for this purpose. Install the [mongoose-unique-validator](https://github.com/blakehaswell/mongoose-unique-validator#readme) package with npm and use it instead. -->
-Mongoose 没有为此提供内置的验证器，可以使用 npm 安装[ [mongoose-unique-validato ](Mongoose-unique-validator) 并使用它。 
+Mongoose 没有为此提供内置的验证器，可以使用 npm 安装[mongoose-unique-validator](https://github.com/blakehaswell/mongoose-unique-validator#readme) 并使用它。 
 
 <!-- If an HTTP POST request tries to add a name that is already in the phonebook, the server must respond with an appropriate status code and error message. -->
 如果 HTTP POST 请求试图添加电话簿中已有的名称，服务器必须用适当的状态码和错误消息作出响应。
 
 <!-- **Huom:** unique-validator causes a warning to be printed to the console -->
-**Huom: **unique-validator 会将警告打印到控制台 
+**注意: **unique-validator 会将警告打印到控制台 
 
 ```
 (node:49251) DeprecationWarning: collection.ensureIndex is deprecated. Use createIndexes instead.
@@ -252,9 +251,7 @@ personService
 
 
 
-#### 3.21 Deploying the database backend to production
-3.21将数据库后端部署到生产环境
-
+#### 3.21 将数据库后端部署到生产环境（Deploying the database backend to production）
 <!-- Generate a new "full stack" version of the application by creating a new production build of the frontend, and copy it to the backend repository. Verify that everything works locally by using the entire application from the address <https://localhost:3001>. -->
 通过创建前端的新生产版本，生成应用的新“完整栈”版本，并将其复制到后端存储库。 通过使用地址 https://localhost:3001的整个应用来验证所有的东西都能在本地工作。
 
@@ -377,7 +374,7 @@ node_modules/.bin/eslint index.js
 ```
 
 <!-- Now the _npm run lint_ command will check every file in the project. -->
-现在 npm 运行 lint 命令将检查项目中的每个文件。
+现在 _npm run lint_  命令将检查项目中的每个文件。
 
 <!-- Also the files in the <em>build</em> directory get checked when the command is run. We do not want this to happen, and we can accomplish this by creating an [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) file in the project's root with the following contents: -->
 当命令运行时， <em>build</em> 目录中的文件也会被检查。 我们不希望这种情况发生，我们可以通过创建一个 [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories)文件，内容如下:
@@ -414,7 +411,7 @@ Lint 对我们的代码有很多要说的:
 Eslint 有大量的[规则]( https://ESlint.org/docs/rules/ ) ，可以通过编辑 <i>.eslintrc.js</i>  文件轻松使用。 
 
 <!-- Let's add the [eqeqeq](https://eslint.org/docs/rules/eqeqeq) rule that warns us, if equality is checked with anything but the triple equals operator. The rule is added under the <i>rules</i> field in the configuration file. -->
-让我们添加一个[ eqeqeq ]( https://eslint.org/docs/rules/eqeqeq )规则，它警告我们，如果除了三元组等于运算符之外，相等是被检查的。 该规则是在配置文件的<i>rules</i> 字段下添加的。
+让我们添加一个[ eqeqeq ]( https://eslint.org/docs/rules/eqeqeq )规则，它警告我们，如果除了三个等于运算符之外，相等是被检查的。 该规则是在配置文件的<i>rules</i> 字段下添加的。
 
 ```js
 {
@@ -427,10 +424,10 @@ Eslint 有大量的[规则]( https://ESlint.org/docs/rules/ ) ，可以通过编
 ```
 
 <!-- While we're at it, let's make a few other changes to the rules. -->
-既然这样，让我们对规则做一些其他的改变。
+既然学到这里，让我们对规则做一些其他的改变。
 
 <!-- Let's prevent unnecessary [trailing spaces](https://eslint.org/docs/rules/no-trailing-spaces) at the ends of lines, let's require that [there is always a space before and after curly braces](https://eslint.org/docs/rules/object-curly-spacing), and let's also demand a consistent use of whitespaces in the function parameters of arrow functions. -->
-让我们避免不必要的[拖尾空格]( https://eslint.org/docs/rules/no-trailing-spaces )在行的末尾，让我们要求[在大括号之前和之后总有一个空格]( https://eslint.org/docs/rules/object-curly-spacing ) ，让我们也要求在箭头函数的函数参数中一致使用空格。
+让我们在行的末尾避免不必要的[拖尾空格]( https://eslint.org/docs/rules/no-trailing-spaces )，让我们要求[在大括号之前和之后总有一个空格]( https://eslint.org/docs/rules/object-curly-spacing ) ，让我们也要求在箭头函数的函数参数中一致使用空格。
 
 ```js
 {
@@ -486,7 +483,7 @@ Eslint 有大量的[规则]( https://ESlint.org/docs/rules/ ) ，可以通过编
 
 
 <!-- If there is something wrong in your configuration file, the lint plugin can behave quite erratically. -->
-如果您的配置文件出现错误，lint 插件的行为可能相当不规则。
+如果您的配置文件出现错误，lint 插件的行为可能相当错乱。
 
 <!-- Many companies define coding standards that are enforced throughout the organization through the ESlint configuration file. It is not recommended to keep reinventing the wheel over and over again, and it can be a good idea to adopt a ready-made configuration from someone else's project into yours. Recently many projects have adopted the Airbnb [Javascript style guide](https://github.com/airbnb/javascript) by taking Airbnb's [ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) configuration into use. -->
 许多公司定义了通过 ESlint 配置文件在整个组织中执行的编码标准。 建议不要一遍又一遍地使用重造轮子，从别人的项目中采用现成的配置到自己的项目中可能是一个好主意。 最近，很多项目都采用了 Airbnb 的 Javascript 风格指南，使用了 Airbnb 的 [ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) 。

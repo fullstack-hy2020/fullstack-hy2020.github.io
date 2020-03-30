@@ -9,22 +9,22 @@ lang: zh
 
 
 <!-- Before starting a new topic, let's recap some of the topics that proved difficult last year. -->
-在开始新的话题之前，让我们回顾一下去年的课程中被证明是有些困难的一些话题。
+在新的话题开始之前，让我们回顾一下去年的课程中认为是难点的一些话题。
 
 ### console.log
 ***What's the difference between an experienced JavaScript programmer and a rookie? The experienced one uses console.log 10-100 times more.***
 
-一个有经验的 JavaScript 程序员和一个菜鸟有什么区别? 有经验的人使用 console.log 10-100次以上
+一个JavaScript 老鸟和菜鸟有什么区别? 老鸟使用 console.log的次数是菜鸟的数十倍甚至数百倍。
 
 <!-- Paradoxically, this seems to be true even though a rookie programmer would need console.log (or any debugging method) more than an experienced one. -->
 
-矛盾的是，这似乎是正确的，即使一个新手程序员比一个有经验的程序员更需要 console.log (或任何其他调试方法)。
+矛盾的是，实际上，菜鸟比老鸟更需要 console.log (或任何其他调试方法)。
 
 <!-- When something does not work, don't just guess what's wrong. Instead, log or use some other way of debugging.  -->
 当某些事情不能正常工作时，不要只是猜测错误，而应记录或使用其他调试方法。
 
 <!-- **NB** when you use the command _console.log_ for debugging, don't concatenate things 'the Java way' with a plus. Instead of writing: -->
-当你使用 console.log 命令进行调试时，不要用Java的方式将所有东西用‘ + ’连在一起。不要这么写:
+注意：当你使用_console.log_命令进行调试时，不要用Java的方式，将所有东西用'+'连在一起。即不要这么写:
 
 ```js
 console.log('props value is' + props)
@@ -46,21 +46,21 @@ props value is [Object object]
 
 <!-- On the contrary, when you pass objects as distinct arguments separated by commas to _console.log_, like in our second example above, the content of the object is printed to the developer console as strings that are insightful. -->
 
-相反，当您将对象用逗号分隔，将不同参数传递给 console.log 时，就像在上面的第二个例子中一样，对象的内容作为有意义的字符串打印到开发控制台。
+而当您将对象用逗号分隔，将不同参数传递给 console.log 时，就像在上面的第二个例子中一样，对象的内容将作为有意义的字符串打印到开发者控制台中。
 
 <!-- If necessary, read more about debugging React-applications [here](/en/part1/a_more_complex_state_debugging_react_apps#debugging-react-applications). -->
 如果有必要，请阅读更多关于React 应用调试的内容[here](/en/part1/a_more_complex_state_debugging_react_apps#debugging-react-applications)。
 
-### Protip: Visual Studio Code snippets 高级技巧: Visual Studio Code 的代码片段
+### 高级技巧: Visual Studio Code 的代码片段（Protip: Visual Studio Code snippets ）
 <!-- With Visual studio code it's easy to create 'snippets', i.e. shortcuts for quickly generating commonly re-used portions of code, much like how 'sout' works in Netbeans.  -->
 
-使用 Visual studio code很容易创建“代码片段（snippets）” ，即快速生成常用重用代码部分的快捷方式，很像 Netbeans 中的“ sout”。
+使用 Visual studio code能够很容易创建“代码片段（snippets）” ，即快速生成常用代码块的快捷方式，很像 Netbeans 中的“ sout”。
 
 <!-- Instructions for creating snippets can be found [here](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets). -->
 创建代码片段的说明可以在这里找到 [here](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets).。
 
 <!-- Useful, ready-made snippets can also be found as VS Code plugins, for example [here](https://marketplace.visualstudio.com/items?itemName=xabikos.ReactSnippets). -->
-有用的、现成的代码片段也可以在 VS 代码插件找到，例如[这里](https://marketplace.visualstudio.com/items?itemName=xabikos.ReactSnippets).
+有用的、现成的代码片段也可以在 VS 代码插件中找到，例如[这里](https://marketplace.visualstudio.com/items?itemName=xabikos.ReactSnippets).
 
 <!-- The most important snippet is the one for the <em>console.log()</em> command, for example <em>clog</em>. This can be created like so:  -->
 最重要的片段是用于 <em>console.log()</em>  命令的片段，例如<em>clog</em>:
@@ -77,10 +77,10 @@ props value is [Object object]
 }
 ```
 
-### JavaScript Arrays JavaScript 数组
+### JavaScript 数组（JavaScript Arrays ）
 <!-- From here on out, we will be using the functional programming methods of the JavaScript [array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array), such as  _find_, _filter_, and _map_ - all of the time. They operate on the same general principles as streams do in Java 8, which have been used during the last few years in both the 'Ohjelmoinnin perusteet' and 'Ohjelmoinnin jatkokurssi' courses at the university's department of Computer Science, and also in the programming MOOC.  -->
 
-从现在开始，我们将一直使用 JavaScript [array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)的函数式编程方法，比如 _find_, _filter_, 和 _map_。 它们和 Java 8中的streams 一样遵循一般原则，这些原则在过去几年里被用在该大学计算机科学系的 Ohjelmoinnin perusteet 和 Ohjelmoinnin jatkokurssi 课程，以及 MOOC 编程中。
+从现在开始，我们将一直使用 JavaScript [数组](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)的函数式编程方法，比如 _find_, _filter_, 和 _map_。 它们和 Java 8中的streams 一样遵循一般原则，这些原则在过去几年里被用在大学计算机科学系的 Ohjelmoinnin perusteet 和 Ohjelmoinnin jatkokurssi 课程，以及 MOOC 编程中。
 
 <!-- If functional programming with arrays feels foreign to you, it is worth watching at least the first three parts of the YouTube video series [Functional Programming in JavaScript](https://www.youtube.com/playlist?list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84): -->
 
@@ -92,20 +92,24 @@ props value is [Object object]
 
   
 
-### Event handlers revisited 事件处理复习
+### 事件处理复习（Event handlers revisited）
 <!-- Based on last year's course, event handling has proven to be difficult.  -->
-基于去年的课程，事件处理证明是比较难的内容。
+基于去年的课程，事件处理证明是一个难点内容。
 <!-- It's worth reading the revision chapter at the end of the previous part [event handlers revisited](/en/part1/a_more_complex_state_debugging_react_apps#event-handling-revisited), if it feels like your own knowledge on the topic needs some brushing up.  -->
 
 如果你觉得自己关于这个主题的知识需要复习一下，那么应该阅读上一章节结尾的复习章节 [事件处理复习](/en/part1/a_more_complex_state_debugging_react_apps#event-handling-revisited)。
 
 <!-- Passing event handlers to the child components of the <i>App</i> component has raised some questions. A small revision on the topic can be found [here](/en/part1/a_more_complex_state_debugging_react_apps#passing-event-handlers-to-child-components). -->
-将事件处理程序传递给<i>App</i> 组件的子组件引发了一些问题。 关于这个主题的一个小复习[在这里](/en/part1/a_more_complex_state_debugging_react_apps#passing-event-handlers-to-child-components)。
+将事件处理传递给<i>App</i> 组件的子组件引发了一些问题。 关于这个主题的一个小复习[在这里](/en/part1/a_more_complex_state_debugging_react_apps#passing-event-handlers-to-child-components)。
 
-### Rendering collections 渲染集合
+###  渲染集合（Rendering collections）
 <!-- We will now do the 'frontend', or the browser-side application logic, in React for an application that's similar to the example application from [part 0](/en/part0) -->
 
-现在，我们将在 React 中为类似于 [第0章](/en/part0)中的示例应用，编写“前端”或叫浏览器端的应用逻辑
+现在，我们将在 React 中为类似于 [第0章](/en/part0)中的示例应用，编写“前端”或叫浏览器端的应用逻辑。
+
+注意：为了统一翻译上下文，从现在开始，我将按照如下约定翻译。
+
+- Note 应用实际上是在创建一个和提醒、便笺相关的应用，因此以下的Note均翻译为便笺。
 
 <!-- Let's start with the following: -->
 让我们从如下代码开始:
@@ -159,27 +163,27 @@ ReactDOM.render(
 
 
 <!-- Every note contains its textual content and a timestamp as well as a _boolean_ value for marking whether the note has been categorized as important or not, and also a unique <i>id</i>. -->
-每个便笺都包含其文本内容、时间戳以及一个布尔值，用于标记该便笺是否为重要，还包含一个惟一的<i>id</i>。
+每个便笺都包含其文本内容、时间戳以及一个布尔值，用于标记该便笺是否重要，便笺还包含一个惟一的<i>id</i>。
 
 <!-- The code functions due to the fact that there are exactly three notes in the array.  -->
-由于数组中正好有三个便笺，因此代码可以运行。
+由于数组中仅有三个便笺，因此代码可以运行。
 
 <!-- A single note is rendered by accessing the objects in the array by referring to a hard-coded index number: -->
-通过引用一个硬编码的索引号访问数组中的对象来渲染单个便笺:
+也就是可以通过引用一个硬编码的索引号来访问数组中的对象来渲染单个便笺:
 
 ```js
 <li>{note[1].content}</li>
 ```
 
 <!-- This is, of course, not practical. The solution can be made general by generating React-elements from the array objects using the [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) function. -->
-这当然是不通用的。 通过使用 [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) 函数从数组对象生成 React-元素，可以使解决方案变得更通用。
+数组下标这种方式当然是无法通用的。 可以使用 [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) 函数从数组对象生成 React-元素，使解决方案变得更通用。
 
 ```js
 notes.map(note => <li>{note.content}</li>)
 ```
 
 <!-- The result is an array of <i>li</i> elements. -->
-结果是一个 <i>li</i> 元素的数组。
+其结果是一个 <i>li</i> 元素的数组。
 
 ```js
 [
@@ -189,9 +193,8 @@ notes.map(note => <li>{note.content}</li>)
 ]
 ```
 
-
 <!-- Which can then be put inside <i>ul</i> tags: -->
-然后可以把它放在<i>ul</i> 标签中:
+然后可以把这些li元素放在<i>ul</i> 标签中:
 
 ```js
 const App = (props) => {
@@ -211,10 +214,10 @@ const App = (props) => {
 ```
 
 <!-- Because the code generating the <i>li</i> tags is JavaScript, it must be wrapped in curly braces in a JSX template just like all other JavaScript code.  -->
-因为生成<i>li</i> 标签的代码是 JavaScript，所以必须像所有其他 JavaScript 代码一样，在 JSX 模板中使用花括号来包装它。
+由于生成<i>li</i> 标签的代码是 JavaScript，所以就要像所有其他 JavaScript 代码一样，在 JSX 模板中使用花括号来包装它。
 
 <!-- We will also make the code more readable by separating the arrow function's declaration across multiple lines: -->
-我们还将利用多行分隔箭头函数的定义来提高代码的可读性:
+我们还会利用多行分隔箭头函数的定义，来提高代码的可读性:
 
 ```js
 const App = (props) => {
@@ -237,18 +240,18 @@ const App = (props) => {
 }
 ```
 
-### Key-attribute Key-属性
+### Key-属性（Key-attribute）
 <!-- Even though the application seems to be working, there is a nasty warning on the console:  -->
-尽管该应用似乎运行良好，但在控制台上有一个恼人的的警告:
+尽管该应用似乎运行良好，但在控制台上有一个烦人的警告:
 
 ![](../../images/2/1a.png)
 
 <!-- As the linked [page](https://reactjs.org/docs/lists-and-keys.html#keys) in the error message instructs, the list items, i.e. the elements generated by the _map_ method, must each have a unique key value:  an attribute called <i>key</i>. -->
 
-正如错误消息中的链接 [page](https://reactjs.org/docs/lists-and-keys.html#keys) 所说明的，列表项，即 map 方法生成的每个元素，必须都有一个唯一的键值: 一个名为<i>key</i> 的属性。
+正如错误消息中的链接 [page](https://reactjs.org/docs/lists-and-keys.html#keys) 所说明的，列表项，即 map 方法生成的每个元素，都必须有一个唯一的键值: 一个名为<i>key</i> 的属性。
 
 <!-- Let's add the keys: -->
-让我们再添加上key:
+让我们添加上key:
 
 ```js
 const App = (props) => {
@@ -275,11 +278,11 @@ const App = (props) => {
 错误就消失了。
 
 <!-- React uses the key attributes of objects in an array to determine how to update the view generated by a component when the component is re-rendered. More about this [here](https://reactjs.org/docs/reconciliation.html#recursing-on-children). -->
-React 使用数组中对象的键属性来确定在重新渲染组件时，如何更新组件生成的视图。 更多的说明在[这里]( https://reactjs.org/docs/reconciliation.html#recursing-on-children )。 
+React 使用数组中对象的key属性来确定组件在重新渲染时，如何更新组件生成的视图。 更多的说明在[这里]( https://reactjs.org/docs/reconciliation.html#recursing-on-children )。 
 
 ### Map
 <!-- Understanding how the array method [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) works is crucial for the rest of the course.  -->
-理解数组[map]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/map )方法的工作原理对于本课程的后面的部分是至关重要的。
+理解数组中[map]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/map )方法的工作原理对于本课程的后面的部分是至关重要的。
 
 <!-- The application contains an array called _notes_ -->
 应用包含一个称为 notes 的数组
@@ -308,7 +311,7 @@ const notes = [
 ```
 
 <!-- Let's pause for a moment and examine how _map_ works. -->
-让我们停一下，看看 map 是如何工作的。
+让我们停一下，看看  _map_ 是如何工作的。
 
 <!-- If the following code is added to, let's say, the end of the file: -->
 如果下面的代码被添加到，比如说，文件的结尾:
@@ -319,10 +322,10 @@ console.log(result)
 ```
 
 <i>[1, 2, 3]</i>  will be printed to the console.
-<i>[1, 2, 3]</i> 会被打印到控制台。
+控制台会打印出<i>[1, 2, 3]</i>。
 
  _Map_ always creates a new array, the elements of which have been created from the elements of the original array by <i>mapping</i>, using the function given as a parameter to the map method. 
-Map 总是会创建一个新数组，其元素是从原始数组的元素通过<i>映射</i>创建的，映射的逻辑使用的是作为 Map 方法传递进去的函数。 
+Map 总是会创建一个新数组，其元素是从原始数组的元素通过<i>mapping映射</i>创建的，映射的逻辑是使用作为 Map 方法传递进去的函数。 
 
 <!-- The function is -->
 这个函数是
@@ -344,7 +347,7 @@ note => note.id
 该函数获取一个 note 对象作为参数，然后<i>返回</i> 其<i>id</i> 字段的值。
 
 <!-- Changing the command to: -->
-将命令改为:
+如果将命令改为:
 
 ```js
 const result = notes.map(note => note.content)
@@ -366,27 +369,27 @@ notes.map(note =>
 它生成一个<i>li</i> 标签，其中包含每个便笺对象的便笺内容。
 
 <!-- Because the function parameter of the _map_ method -->
-因为函数参数的 _map_ 方法
+由于函数参数的 _map_ 方法
 
 ```js
 note => <li key={note.id}>{note.content}</li>
 ```
 is used to create view elements, the value of the variable must be rendered inside of curly braces. Try to see what happens if the braces are removed. 
-用于创建视图元素，因此变量的值必须在花括号内渲染。 尝试看看如果去掉花括号会发生什么。
+用于创建视图元素，因此变量的值必须在花括号内渲染。 可以尝试如果去掉花括号会发生什么。
 
 <!-- The use of curly braces will cause some headache in the beginning, but you will get used to them soon enough. The visual feedback from React is immediate. -->
-一开始使用花括号会让你头疼，但是你很快就会习惯的。 来自 React 的图形反馈是即时的。
+一开始使用花括号会让你头疼，但是你很快就会习惯的。 因为来自 React 的图形反馈是即时的。
 
-### Anti-pattern: array indexes as keys 反模式: 将数组的索引作为键
+### 反模式: 将数组的索引作为键（Anti-pattern: array indexes as keys ）
 <!-- We could have made the error message on our console disappear by using the array indexes as keys. The indexes can be retrieved by passing a second parameter to the callback function of the map-method:  -->
-通过使用数组索引作为键，我们可以使控制台上的错误消息消失。可以通过向 map-方法 的回调函数传递第二个参数来获取索引:
+通过使用数组的索引作为键，我们可以使控制台上的错误消息消失。可以通过向 map-方法 的回调函数传递的第二个参数来获取索引:
 
 ```js
 notes.map((note, i) => ...)
 ```
 
 <!-- When called like this, _i_ is assigned the value of the index of the position in the array where the <i>Note</i> resides. -->
-当这样调用时，_i_ 根据<i>Note</i> 所在的数组中的位置，被分配到了索引值。
+当这样调用时，_i_ 根据便笺所在数组中的位置，分配到了索引值。
 
 <!-- As such, one way to define the row generation without getting errors is: -->
 因此，用于定义行生成而不产生错误的一种方法是:
@@ -406,7 +409,7 @@ notes.map((note, i) => ...)
 <!-- Read more [from here](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318). -->
 更多内容请点击 [这里](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318)。
 
-### Refactoring modules 重构模块
+### 重构模块（Refactoring modules ）
 <!-- Let's tidy the code up a bit. We are only interested in the field _notes_ of the props, so let's retrieve that directly using [destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment):  -->
 让我们把代码整理一下。 我们只对props的字段 _notes_ 属性感兴趣，所以让我们直接使用[解构](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)：
 
@@ -428,7 +431,7 @@ const App = ({ notes }) => { //highlight-line
 ```
 
 <!-- If you have forgotten what destructuring means and how it works, review [this](/en/part1/component_state_event_handlers#destructuring). -->
-如果您忘记了解构的含义以及它是如何工作的，请复习 [this](/en/part1/component_state_event_handlers#destructuring)
+如果您忘记了解构的含义以及它是如何工作的，请复习 [这里](/en/part1/component_state_event_handlers#destructuring)
 
 <!-- We'll separate displaying a single note into its own component <i>Note</i>:  -->
 我们将单独显示一个便笺到它自己的<i>Note</i>组件:
@@ -473,8 +476,7 @@ import ReactDOM from 'react-dom'
 ```
 
 <!-- [imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) two modules, enabling them to be used in the code. The <i>react</i> module is placed into a variable called _React_ and <i>react-dom</i> to variable _ReactDOM_. -->
-就[imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 了两个模块，使它们能够在代码中使用。 <i>react</i> 模块被放入一个名为 React 的变量中， <i>react-dom</i> 模块放到了 ReactDOM 变量中。
-
+为了让它们能够在代码中使用，就[imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 了两个模块： <i>react</i> 模块被放入一个名为 React 的变量中， <i>react-dom</i> 模块放到了 ReactDOM 变量中。
 
 <!-- Let's move our <i>Note</i> component into its own module.  -->
 让我们将我们的<i>Note</i> 组件移动到它自己的模块中。
@@ -532,8 +534,8 @@ const App = ({ notes }) => {
 <!-- The period in the beginning refers to the current directory, so the module's location is a file called <i>Note.js</i> in a sub-directory of the current <i>components</i>. directory. The filename extension can be omitted. -->
 开头的句点指的是当前工作目录，因此模块的位置是当前<i>components</i> 的子目录中的一个名为<i>Note.js</i> 的文件。 文件扩展名可以省略。
 
-<i>App</i> is a component as well, so let's declare it in its own module as well. Since it is the root component of the application, we'll place it in the <i>src</i> directory. The contents of the file are as follows: 
-<i>App</i><i>也是一个组件，所以让我们在它自己的模块中声明它。 因为它是应用的根组件，所以我们将它放在  <i>src</i> 目录中。 文件内容如下:
+<!--<i>App</i> is a component as well, so let's declare it in its own module as well. Since it is the root component of the application, we'll place it in the <i>src</i> directory. The contents of the file are as follows:--> 
+<i>App</i>也是一个组件，所以让我们在它自己的模块中声明它。 因为它是应用的根组件，所以我们将它放在  <i>src</i> 目录中。 文件内容如下:
 
 ```js
 import React from 'react'
@@ -597,10 +599,10 @@ ReactDOM.render(
 <!-- If you clone the project, run the command _npm install_ before starting the application with _npm start_. -->
 如果您克隆了项目，请在启动应用之前运行命令_npm install_ 。
 
-### When the application breaks 当应用崩了
+### 当应用挂掉了（When the application breaks ）
 <!-- Early in your programming career (and even after 30 years of coding like yours truly), what often happens is that the application just completely breaks down. This is even more the case with dynamically typed languages, such as JavaScript, where the compiler does not check the data type of, for instance, function variables or return values.  -->
 
-在您编程的早期生涯(甚至说实话，在您编写了30年代码之后) ，经常发生的情况就是应用崩了。 动态类型语言更是如此，例如 JavaScript，其编译器不检查数据类型，例如函数变量或返回值。
+在您编程的早期生涯(甚至说实话，在您编写了30年代码之后) ，应用挂掉是经常发生的情况。 动态类型语言更是如此，例如 JavaScript，其编译器不检查数据类型，例如函数变量或返回值。
 
 <!-- A "React explosion" can for example look like this: -->
 例如，“React 崩掉” 可以是这种姿势:
@@ -694,7 +696,7 @@ const Course = ({ course }) => {
 
 
 <!-- Quite often the root of the problem is that the props are expected to be of a different type, or called with a different name than they actually are, and destructuring fails as a result. The problem often begins to solve itself when destructuring is removed and we see what the <em>props</em> actually contains.  -->
-通常，问题的根源在于，props的类型不同，或者使用了与实际名称不同的名称调用，导致结果解构失败。 解决问题的开始通常是去掉解构的方式，让我们看看 <em>props</em> 到底包含什么。
+通常，问题的根源在于，props的类型不同，或者使用了与实际名称不同的名称调用，导致结果解构失败。 解决问题的开始通常是去掉解构的方式，来看看 <em>props</em> 中到底包含什么。
 
 ```js
 const Course = (props) => { // highlight-line
@@ -731,7 +733,7 @@ const Course = (props) => { // highlight-line
 
 <!-- The exercises are submitted via GitHub, and by marking the exercises as done in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
 
-这些练习是通过 GitHub 提交的，并在[submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)那样将练习标记为 done。
+这些练习是通过 GitHub 提交的，并在[提交系统submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)那样将练习标记为 done。
 
 <!-- You can submit all of the exercises into the same repository, or use multiple different repositories. If you submit exercises from different parts into the same repository, name your directories well. -->
 您可以将本课程的所有练习提交到同一个仓库，或者使用多个不同的仓库。 如果您将来自不同章节的练习提交到同一个仓库中，请使用一个合理的目录命名方案。 
@@ -745,12 +747,12 @@ const Course = (props) => { // highlight-line
 
 <!-- **WARNING** create-react-app makes the project automatically into a git-repository, if the project is not created inside of an already existing repository. You probably **do not** want the project to become a repository, so run the command  _rm -rf .git_ from its root.  -->
 
-***\*警告\****： create-react-app 会自动使项目成为一个 git 仓库，除非应用是在已有仓库中创建的。 而您很可能不希望项目成为一个存储库，因此可以在项目的根目录中运行命令  *_rm -rf .git_* 。 
+**警告**： create-react-app 会自动使项目成为一个 git 仓库，除非应用是在已有仓库中创建的。 而您很可能不希望项目成为一个存储库，因此可以在项目的根目录中运行命令  *_rm -rf .git_* 。 
 
 <h4>2.1: course contents 步骤6</h4>
 
 <!-- Let's finish the code for rendering course contents from exercises 1.1 - 1.5. You can start with the code from the model answers.  -->
-让我们完成练习 1.1 - 1.5中的课程内容渲染代码。 您可以从模型答案的代码开始。
+让我们完成练习 1.1 - 1.5中，用于渲染课程内容的代码。 您可以从模型答案的代码开始。
 
 <!-- **Note that if you copy a project from one place to another, you might have to destroy the <i>node\_modules</i> directory and install the dependencies again with the command _npm install_ before you can start the application.** -->
 
@@ -826,14 +828,14 @@ App
 你还不需要显示这些练习的总和。
 
 <!-- The application must work <i>regardless of the number of parts a course has</i>, so make sure the application works if you add or remove parts of a course.  -->
-<i>无论课程有多少部分</i>，应用都必须正常工作，因此，如果您添加或删除课程的章节，请确保应用工作正常。
+<i>无论课程有多少章节</i>，应用都必须正常工作，因此，如果您添加或删除课程的章节，请确保应用工作正常。
 
 <!-- Ensure that the console shows no errors! -->
 确保控制台没有显示任何错误！
 
 <h4>2.2: Course contents 步骤7</h4>
 <!-- Show also the sum of the exercises of the course.  -->
-这时显示课程练习的总和。
+此时显示课程练习的总和。
 
 ![](../../images/teht/9e.png)
 

@@ -6,8 +6,12 @@ lang: zh
 ---
 
 <div class="content">
+
+
+
 <!-- The exercises in this part are a bit different than the exercises in the previous parts. The exercises in the previous part and the exercises in this part [are about the theory presented in this part](/osa7/custom_hookit#tehtavat-7-4-7-6). -->
 这一章节的练习与前几章节有点不同。 前一章节的练习和这一章节的练习都是关于这一章节提出的理论[are about the theory presented in this part](/osa7/custom_hookit#tehtavat-7-4-7-6)。
+
 
 
 
@@ -17,10 +21,9 @@ lang: zh
 ### Hooks
 
 
+
 <!-- React offers 10 different [built-in hooks](https://reactjs.org/docs/hooks-reference.html), of which the most popular ones are the [useState](https://reactjs.org/docs/hooks-reference.html#usestate) and [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect) hooks, that we have already been using extensively. -->
 React 提供了10种不同的内置Hook，其中最受欢迎的是我们已经广泛使用的[ useState ]( https://reactjs.org/docs/hooks-reference.html  https://reactjs.org/docs/hooks-reference.html#useState )和[ useEffect ]( https://reactjs.org/docs/hooks-reference.html#useEffect )Hook。 
-
-
 
 <!-- In [part 5](/osa5/props_children_ja_proptypet#ref-eli-viite-komponenttiin) we used the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle)-hook which allows for components to provide their functions to other components. -->
 在[ 第5章](/ osa5 / proptypet children ja # ref-eli-viite-komponenttiin)中，我们使用了[ useImperativeHandle ]( https://reactjs.org/docs/hooks-reference.html#useImperativeHandle )-hook，它允许组件为其他组件提供其功能。
@@ -43,9 +46,9 @@ React 提供了10种不同的内置Hook，其中最受欢迎的是我们已经�
 <!-- **Don’t call Hooks from regular JavaScript functions.** Instead, you can: -->
 不要从常规的 JavaScript 函数中调用 Hooks:
 
-- Call Hooks from React function components.
+<!--Call Hooks from React function components.-->
 - 从 React 函数组件调用Hook。
-- Call Hooks from custom Hooks
+<!--Call Hooks from custom Hooks-->
 - 从定制Hook调用Hook
 
 <!-- There's an existing [ESlint](https://www.npmjs.com/package/eslint-plugin-react-hooks) rule that can be used to verify that the application uses hooks correctly.  -->
@@ -57,11 +60,11 @@ Create-react-app 已经配置好了规则[ eslint-plugin-react-hooks ]( https://
 ![](../../images/7/60ea.png)
 
 
-### Custom hooks 定制Hook
+### 定制Hook（Custom hooks ）
 <!-- React offers the option to create our own [custom](https://reactjs.org/docs/hooks-custom.html) hooks. According to React, the primary purpose of custom hooks is to facilitate the reuse of the logic used in components. -->
 React 提供了创建我们自己的[自定义]( https://reactjs.org/docs/hooks-custom.html )Hook的选项。 根据 React，自定义Hook的主要目的是促进组件中使用的逻辑的重用。 
 
-> <i>Building your own Hooks lets you extract component logic into reusable functions.</i>
+> <!--<i>Building your own Hooks lets you extract component logic into reusable functions.</i>-->
 构建自己的 hook 可以让您将组件逻辑提取到可重用的函数中
 
 <!-- Custom hooks are regular JavaScript functions that can use any other hooks, as long as they adhere to the [rules of hooks](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks). Additionally, the name of custom hooks must start with the word _use_. -->
@@ -268,7 +271,7 @@ const App = () => {
 ```
 
 
-### Spread attributes 展开属性
+### 展开属性（Spread attributes ）
 <!-- We could simplify things a bit further. Since the _name_ object has exactly all of the attributes that the <i>input</i> element expects to receive as props, we can pass the props to the element using the [spread syntax](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) in the following way: -->
 我们可以进一步简化事情。 因为 name 对象具有<i>input</i> 元素期望作为props接收的所有属性，所以我们可以使用[ spread syntax ]( https://reactjs.org/docs/jsx-in-depth.html#spread-attributes )如下面的方式将props传递给元素:
 
@@ -329,12 +332,9 @@ const App = () => {
 <!-- The internet is starting to fill up with more and more helpful material related to hooks. The following sources are worth checking out: -->
 互联网上开始充斥着越来越多关于Hook的有用资料。 如下是值得一查的资料来源:
 
-* [Awesome React Hooks Resouces](https://github.com/rehooks/awesome-react-hooks)
 * [ Awesome React Hooks Resouces ]( https://github.com/rehooks/Awesome-React-Hooks )
 * [Easy to understand React Hook recipes by Gabe Ragland](https://usehooks.com/)
-* [易于理解的React钩食谱由 Gabe Ragland 提供]( https://usehooks.com/ )
 * [Why Do React Hooks Rely on Call Order?](https://overreacted.io/why-do-hooks-rely-on-call-order/)
-* [为什么React钩依赖于调用顺序? ]( https://overreacted.io/Why-Do-Hooks-Rely-on-Call-Order/ )
 
 </div>
 

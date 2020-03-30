@@ -627,7 +627,7 @@ query {
 <!-- [In the words of Donald Knuth](https://en.wikiquote.org/wiki/Donald_Knuth): -->
 [用 Donald Knuth 的话来说]( https://en.wikiquote.org/wiki/donald_knuth ) :
 
-> <i>Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered. We should forget about small efficiencies, say about 97% of the time: <strong>premature optimization is the root of all evil.</strong></i>
+> <!--<i>Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered. We should forget about small efficiencies, say about 97% of the time: <strong>premature optimization is the root of all evil.</strong></i>-->
 程序员浪费大量的时间去思考或者担心程序中非关键部分的速度，而这些提高效率的尝试在调试和维护被考虑的时候实际上产生了很大的负面影响。 我们应该忘记小效率，大约97% 的时间说: 强的过早优化是一切罪恶的根源。
 
 

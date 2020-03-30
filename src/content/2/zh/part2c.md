@@ -14,7 +14,7 @@ lang: zh
 
 
 <!-- Let's use a tool meant to be used during software development called [JSON Server](https://github.com/typicode/json-server) to act as our server. -->
-让我们使用一个在软件开发过程中使用的工具，称为[ JSON 服务器]( https://github.com/typicode/JSON-Server 服务器) ，作为我们的服务器。
+让我们使用一个在开发过程中使用的工具，称为[ JSON 服务器]( https://github.com/typicode/JSON-Server 服务器) ，作为我们的服务器。
 
 <!-- Create a file named <i>db.json</i> in the root directory of the project with the following content: -->
 在项目的根目录中创建一个名为<i>db.json</i> 的文件，其内容如下:
@@ -47,7 +47,7 @@ lang: zh
 
 
 <!-- You can [install](https://github.com/typicode/json-server#install) JSON server globally on your machine using the command _npm install -g json-server_. A global installation requires administrative privileges, which means that it is not possible on the faculty computers or freshman laptops. -->
-您可以使用命令 _npm install -g json-server_在您的机器上[安装]( https://github.com/typicode/JSON-server#install ) JSON 服务器。 gloabal 安装需要管理员权限，这意味着它不可能在教学电脑或新生的便笺本电脑上安装。
+您可以使用命令 _npm install -g json-server_在您的机器上[安装]( https://github.com/typicode/JSON-server#install ) JSON 服务器。 global 安装需要管理员权限，这意味着它不可能在教学电脑或新生的笔记本电脑上安装。
 
 <!-- However, a global installation is not necessary, since we can run the <i>json-server</i> using the command _npx_: -->
 但是，全局安装不是必须的，因为我们可以使用 npx 命令运行<i>json-server</i>:
@@ -80,7 +80,7 @@ Json-server 将所有数据存储在服务器上的<i>db.json</i> 文件中。 �
 <!-- We will get familiar with the principles of implementing server-side functionality in more detail in [part 3](/en/part3) of this course. -->
 在本课程的[第3章节](/zh/part3)中，我们将更详细地了解如何实现服务器端的功能。
 
-### The browser as a runtime environment 浏览器就是一个运行时环境
+### 浏览器作为一个运行时环境（The browser as a runtime environment ）
 <!-- Our first task is fetching the already existing notes to our React application from the address <http://localhost:3001/notes>. -->
 我们的第一个任务是从地址 http://localhost:3001/notes 获取已经存在的便笺到 React 应用。
 
@@ -178,7 +178,7 @@ setTimeout(() => {
 我们可以使用前面提到的基于承诺promise的[fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch)函数从服务器中获取数据。 fetch是一个很好的工具。 它是标准化的，所有现代浏览器(不包括 IE，因为它不是)都支持它。
 
 <!-- That being said, we will be using the [axios](https://github.com/axios/axios) library instead for communication between the browser and server. It functions like fetch, but is somewhat more pleasant to use. Another good reason to use axios is our getting familiar with adding external libraries, so-called <i>npm packages</i>, to React projects. -->
-也就是说，我们将使用[axios](https://github.com/axios/axios)库来代替浏览器和服务器之间的通信。 它的功能类似于fetch，但是使用起来更愉快。 使用 axios 的另一个很好的理由是，我们已经熟悉了为 React 项目添加外部库，即使用所谓的<i>npm 包</i>。
+也就是说，我们将使用[axios](https://github.com/axios/axios)库来代替浏览器和服务器之间的通信。 它的功能类似于fetch，但是使用起来更友好。 使用 axios 的另一个很好的理由是，我们已经熟悉了为 React 项目添加外部库，即使用所谓的<i>npm 包</i>。
 
 <!-- Nowadays, practically all JavaScript projects are defined using the node package manager, aka [npm](https://docs.npmjs.com/getting-started/what-is-npm). The projects created using create-react-app also follow the npm format. A clear indicator that a project uses npm is the <i>package.json</i> file located at the root of the project: -->
 现在，几乎所有的 JavaScript 项目都是使用node包管理器定义的，也就是[ npm ]( https://docs.npmjs.com/getting-started/what-is-npm )。 使用 create-react-app 创建的项目也遵循 npm 格式。 项目使用 npm 的一个明确的说明是位于项目根目录的<i>package.json</i> 文件:
@@ -221,7 +221,7 @@ setTimeout(() => {
 ```
 
 <!-- At this point the <i>dependencies</i> part is of most interest to us as it defines what <i>dependencies</i>, or external libraries, the project has. -->
-此时，我们对<i>dependencies</i> 部分最感兴趣，因为它定义了项目具有的<i>dependencies</i> 或外部库。
+此时，我们对<i>dependencies</i> 部分最感兴趣，因为它定义了项目具有的<i>依赖dependencies</i> 或外部库。
 
 <!-- We now want to use axios. Theoretically, we could define the library directly in the <i>package.json</i> file, but it is better to install it from the command line. -->
 我们现在要使用 axios。 理论上，我们可以在<i>package.json</i> 文件中直接定义它，但最好是从命令行安装它。
@@ -233,7 +233,7 @@ npm install axios --save
 
 <!-- **NB _npm_-commands should always be run in the project root directory**, which is where the <i>package.json</i> file can be found. -->
 
-NB npm-commands 应该始终在项目根目录中运行，在这个目录中可以找到<i>package.json</i> 文件。 
+注意： npm-commands 应该始终在项目根目录中运行，在这个目录中可以找到<i>package.json</i> 文件。 
 
 <!-- Axios is now included among the other dependencies: -->
 Axios 现在被包含在依赖中了: 
@@ -254,7 +254,7 @@ Axios 现在被包含在依赖中了:
 ```
 
 <!-- In addition to adding axios to the dependencies, the <em>npm install</em> command also <i>downloaded</i> the library code. As with other dependencies, the code can be found in the <i>node\_modules</i> directory located in the root. As one might have noticed, <i>node\_modules</i> contains a fair amount of interesting stuff. -->
-除了将 axios 添加到依赖项之外，em npm install / em 命令还下载了 /<i>库代码。 与其他依赖项一样，代码可以在根目录中的  node  modules</i> 目录中找到。 人们可能已经注意到，<i>node  modules</i> 包含了大量有趣的内容。
+除了将 axios 添加到依赖项之外，<em>npm install</em> 命令还下载了库代码。 与其他依赖项一样，代码可以在根目录中的<i>node\_modules</i> 目录中找到。 人们可能已经注意到，<i>node\_modules</i> 包含了大量有趣的内容。
 
 <!-- Let's make another addition. Install <i>json-server</i> as a development dependency (only used during development) by executing the command: -->
 让我们做另一个补充，通过执行如下命令将<i>json-server</i> 安装为开发依赖项(仅在开发过程中使用) :
@@ -291,7 +291,7 @@ npm run server
 
 <!-- **NB** The previously started json-server must be terminated before starting a new one, otherwise there will be trouble: -->
 
-注意：以前启动的 json-server 在启动新服务器之前必须终止，否则会出现问题:
+注意： 在启动新服务器之前，以前启动的 json-server必须终止，否则会出现问题:
 
 ![](../../images/2/15b.png)
 
@@ -317,14 +317,12 @@ npm install json-server --save-dev
 <!-- There is a fine difference in the parameters. <i>axios</i> is installed as a runtime dependency (_--save_) of the application, because the execution of the program requires the existence of the library. On the other hand, <i>json-server</i> was installed as a development dependency (_--save-dev_), since the program itself doesn't require it. It is used for assistance during software development. There will be more on different dependencies in the next part of the course. -->
 参数之间有细微的差别。<i>axios</i> 被安装为应用的运行时依赖项(-- save) ，因为程序的执行需要库的存在。 而另一个， <i>json-server</i> 是作为开发依赖项(-- save-dev)安装的，因为程序本身并不需要它。 它用于在软件开发过程中提供帮助。 在课程的下一章节将会有更多关于不同依赖的内容。
 
-### Axios and promises Axios 与 promises
+### Axios 与 promises
 <!-- Now we are ready to use axios. Going forward, json-server is assumed to be running on port 3001. -->
 现在我们可以使用 axios 了。在开始之前，我已经假定你的json-server跑在3001端口了。
 
 <!-- The library can be brought into use the same way other libraries, e.g. React, are, i.e. by using an appropriate <em>import</em> statement. -->
-可以像其他库一样使用这个库，就像 React那样，即使用  <em>import</em> 语句。
-
-
+可以像其他库一样使用这个库，就像 React那样，即使用 <em>import</em> 语句。
 
 <!-- Add the following to the file <i>index.js</i>: -->
 将如下内容添加到文件<i>index.js</i> 中:
@@ -339,15 +337,13 @@ const promise2 = axios.get('http://localhost:3001/foobar')
 console.log(promise2)
 ```
 
-
-
 <!-- This should be printed to the console -->
 此时如下信息会打印到控制台
 
 ![](../../images/2/16b.png)
 
 <!-- Axios' method _get_ returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises). -->
-Axios 的get方法会返回一个[promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)。 
+Axios 的 _get_ 方法会返回一个[promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)。 
 
 <!-- The documentation on Mozilla's site states the following about promises: -->
 Mozilla's 网站上的文档对promises 做了如下解释: 
@@ -358,12 +354,12 @@ Promise承诺是一个对象，用来表示异步操作的最终完成或失败
 <!-- In other words, a promise is an object that represents an asynchronous operation. A promise can have three distinct states: -->
 换句话说，promise 是一个表示异步操作的对象，它可以有三种不同的状态:
 
-1. The promise is <i>pending</i>: It means that the final value (one of the following two) is not available yet.
+1. <!--The promise is <i>pending</i>: It means that the final value (one of the following two) is not available yet.-->
 
    The promise is <i>pending提交中</i>: 这意味着最终值(下面两个中的一个)还不可用。
-2. The promise is <i>fulfilled</i>: It means that the operation has completed and the final value is available, which generally is a successful operation. This state is sometimes also called <i>resolved</i>.
+2. <!--The promise is <i>fulfilled</i>: It means that the operation has completed and the final value is available, which generally is a successful operation. This state is sometimes also called <i>resolved</i>.-->
 The promise is <i>fulfilled兑现</i>: 这意味着操作已经完成，最终的值是可用的，这通常是一个成功的操作。 这种状态有时也被称为<i>resolve</i>。 
-3. The promise is <i>rejected</i>: It means that an error prevented the final value from being determined, which generally represents a failed operation.
+3. <!--The promise is <i>rejected</i>: It means that an error prevented the final value from being determined, which generally represents a failed operation.-->
 The promise is <i>rejected拒绝</i>:它意味着一个错误阻止了最终值，这通常表示一个失败操作。 
 
 <!-- The first promise in our example is <i>fulfilled</i>, representing a successful <em>axios.get('http://localhost:3001/notes')</em> request. The second one, however, is <i>rejected</i>, and the console tells us the reason. It looks like we were trying to make an HTTP GET request to a non-existent address. -->
@@ -419,7 +415,7 @@ axios
 ```
 
 <!-- The data returned by the server is plain text, basically just one long string. The axios library is still able to parse the data into a Javascript array, since the server has specified that the data format is <i>application/json; charset=utf-8</i> (see previous image) using the <i>content-type</i> header. -->
-服务器返回的数据是纯文本，基本上只有一个长字符串。 Axios 库仍然能够将数据解析为一个 Javascript 数组，因为服务器使用<i>content-type</i> 头指定数据格式为<i>application / json; charset utf-8</i> (参见前面的图片)。
+服务器返回的数据是纯文本，基本上只有一个长字符串。 Axios 库仍然能够将数据解析为一个 Javascript 数组，因为服务器使用<i>content-type</i> 头指定数据格式为<i>application/json; charset=utf-8</i> (参见前面的图片)。
 
 <!-- We can finally begin using the data fetched from the server. -->
 我们现在终于可以开始使用从服务器获取的数据了。
@@ -580,7 +576,7 @@ useEffect(hook, [])
 ```
 
 <!-- Now we can see more clearly that the function [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect) actually takes <i>two parameters</i>. The first is a function, the <i>effect</i> itself. According to the documentation: -->
-现在我们可以更清楚地看到函数 [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect) 实际上需要<i>/两个参数</i> 。第一个是函数本身。 根据文档描述:
+现在我们可以更清楚地看到函数 [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect) 实际上需要<i>两个参数</i> 。第一个是函数本身。 根据文档描述:
 
 > <i>By default, effects run after every completed render, but you can choose to fire it only when certain values have changed.</i>
 默认情况下，effects 在每次渲染完成后运行，但是你可以选择只在某些值发生变化时才调用。 
@@ -592,7 +588,7 @@ useEffect(hook, [])
 <em>useEffect</em>的第二个参数用于[指定effect运行的频率]( https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect )。 如果第二个参数是一个空数组 <em>[]</em>，那么这个effect只在组件的第一次渲染时运行。
 
 <!-- There are many possible use cases for effect hook other than fetching data from the server. This suffices us for now. -->
-除了从服务器获取数据之外，效果Hook还有许多用例。 目前我们只了解到这。
+除了从服务器获取数据之外，Effect-Hook还有许多用例。 目前我们只了解到这。
 
 <!-- Think back to the sequence of events we just discussed. Which parts of the code are run? In what order? How often? Understanding the order of events is critical! -->
 回想一下我们刚才讨论的事件顺序。 代码的哪些部分是运行的？ 按什么顺序？ 多久一次？ 理解事件的顺序是至关重要的！
@@ -635,7 +631,7 @@ useEffect(() => {
 <!-- The code so far for the application can be found in full on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-4) in the branch <i>part2-4</i>. -->
 到目前为止，应用的代码可以在分支<i>part2-4</i> 中的[github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-4)上找到。
 
-### The development runtime environment  开发的运行时环境
+### 开发的运行时环境（The development runtime environment  ）
 <!-- The configuration for the whole of our application has steadily grown more complex. Let's review what happens and where. The following image describes the makeup of the application -->
 
 我们整个应用的配置已经逐渐变得更加复杂。 让我们回顾一下发生了什么，在哪里发生的。 下图描述了应用的组成
@@ -647,7 +643,7 @@ useEffect(() => {
 构成我们的 React 应用的 JavaScript 代码在浏览器中运行。 浏览器从<i>React dev server</i> 获取 Javascript，这是运行  <em>npm start</em> 命令后运行的应用。 dev-server 将 JavaScript 转换成浏览器可以理解的格式。 除此之外，它还将来自不同文件的 Javascript 整合到一个文件中。 我们将在本课程的第7章节中更详细地讨论开发服务器。
 
 <!-- The React application running in the browser fetches the JSON formatted data from <i>json-server</i> running on port 3001 on the machine. json-server gets its data from the file <i>db.json</i>. -->
-在浏览器中运行的 React 应用从计算机端口3001上运行的<i>JSON-server</i> 获取 JSON 格式的数据。 Json-server 从<i>db.json</i> 文件中获取数据。
+在浏览器中运行的 React 应用从计算机3001端口上运行的<i>JSON-server</i> 获取 JSON 格式的数据。 Json-server 从<i>db.json</i> 文件中获取数据。
 
 <!-- At this point in development, all the parts of the application happen to reside on the software developer's machine, otherwise known as localhost. The situation changes when the application is deployed to the internet. We will do this in part 3. -->
 在开发的这个阶段，应用的所有部分都放在软件开发人员的机器上，也就是本地主机。 当应用被部署到互联网上时，情况发生了变化。 我们将在第三章节讨论这个。
@@ -693,7 +689,7 @@ useEffect(() => {
 ```
 
 <!-- Start json-server on port 3001 and make sure that the server returns the list of people by going to the address <http://localhost:3001/persons> in the browser. -->
-在端口3001上启动 json-server，并确保服务器通过访问浏览器中的地址http://localhost:3001/persons 能够返回人员列表。
+在3001端口上启动 json-server，并确保服务器通过访问浏览器中的地址http://localhost:3001/persons 能够返回人员列表。
 
 <!-- If you receive the following error message: -->
 如果您收到如下错误消息:
@@ -747,7 +743,7 @@ Api [https://restcountries.eu](https://restcountries.eu) 以机器可读的格�
 
 <!-- **NB**: it is enough that your application works for most of the countries. Some countries, like <i>Sudan</i>, can cause trouble, since the name of the country is part of the name of another country, <i>South Sudan</i>. You need not worry about these edge cases. -->
 
-注意: 你的应用在大多数国家能好用就可以了。 有些国家，如苏丹，可能会有些麻烦，因为国名是另一个国家名称的一章节，即南苏丹。 你不必担心这些边缘情况edge cases。
+注意: 你的应用在大多数国家能好用就可以了。 有些国家，如苏丹，可能会有些麻烦，因为国名是另一个国家名称的一部分，即南苏丹。 你不必担心这些边缘情况edge cases。
 
 <!-- **WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application. -->
 

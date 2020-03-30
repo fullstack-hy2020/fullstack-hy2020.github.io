@@ -382,13 +382,13 @@ const PersonForm = ({ setError }) => {
 <!-- Some tips -->
 一些建议
 
-- Instead of using <i>useQuery</i> it is propably better to do the queries with the <i>useLazyQuery</i>-hook
+- <!--Instead of using <i>useQuery</i> it is propably better to do the queries with the <i>useLazyQuery</i>-hook-->
 - 与使用<i>useQuery</i> 相比，使用<i>useLazyQuery</i>-hook 执行查询可能更好
-- It is sometimes useful to save the results of a GraphQL query to the state of a component. 
+- <!--It is sometimes useful to save the results of a GraphQL query to the state of a component.--> 
 - 将 GraphQL 查询的结果保存到组件的状态有时很有用。
-- Note, that you can do GraphQL queries in a <i>useEffect</i>-hook.
+- <!--Note, that you can do GraphQL queries in a <i>useEffect</i>-hook.-->
 - 注意，您可以在<i>/ useEffect</i>-hook 中执行 GraphQL 查询。
-- The [second parameter](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) of a <i>useEffect</i> - hook can become handy depending on your approach. 
+- <!--The [second parameter](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) of a <i>useEffect</i> - hook can become handy depending on your approach. -->
 根据您的方法，<i>useEffect</i>  的[第二个参数]( https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect )可以变得很方便。
 
 #### 8.22 Up to date cache and book recommendations
@@ -397,7 +397,7 @@ const PersonForm = ({ setError }) => {
 <!-- If you fetch the book recommendations with GraphQL, ensure somehow that the books view is kept up to date. So when a new book is added, the books view is updated **at least** when a genre selection button is pressed.  -->
 如果您使用 GraphQL 获取图书推荐，请以某种方式确保 books 视图是最新的。 因此，当添加一本新书时，至少当按下类型选择按钮时，图书视图会更新。
 
-<i>When new genre selection is not done, the view does not have to be updated. </i>
+<!--<i>When new genre selection is not done, the view does not have to be updated. </i>-->
 当新的类型选择没有完成时，视图不需要更新
 
 </div>

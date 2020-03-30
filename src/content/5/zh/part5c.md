@@ -6,6 +6,9 @@ lang: zh
 ---
 
 <div class="content">
+
+
+
 <!-- There are many different ways of testing React applications. Let's take a look at them next. -->
 测试 React 应用程序有许多不同的方法。 接下来让我们看看它们。
 
@@ -98,9 +101,7 @@ expect(component.container).toHaveTextContent(
 )
 ```
 
-### Running tests
-
-运行测试
+### 运行测试（Running tests）
 
 <!-- Create-react-app configures tests to be run in watch mode by default, which means that the _npm test_ command will not exit once the tests have finished, and will instead wait for changes to be made to the code. Once new changes to the code are saved, the tests are executed automatically after which Jest goes back to waiting for new changes to be made. -->
 Create-react-app 默认情况下将测试配置为在 watch 模式下运行，这意味着 _npm test_ 命令在测试结束后不会退出，而是等待对代码进行更改。 一旦保存了对代码的新的更改，测试就会自动执行，然后 Jest 等待新的更改。 
@@ -132,7 +133,7 @@ CI=true npm test
 <!-- Personally, I do not like this way of storing tests and application code in the same directory. The reason we choose to follow this convention is that it is configured by default in applications created by create-react-app. -->
 就我个人而言，我不喜欢这种将测试和应用程序代码存储在同一个目录中的方式。 我们之所以选择遵循这个约定，是因为它是在 create-react-app 创建的应用程序中默认配置的。
 
-### Searching for content in a component
+### 在组件中搜寻内容 Searching for content in a component
 
 <!-- The react-testing-library package offers many different ways of investigating the content of the component being tested. Let's slightly expand our test: -->
 react-testing-library 包提供了许多不同的方法来研究被测试组件的内容。 让我们稍微扩展一下我们的测试: 
@@ -170,7 +171,7 @@ test('renders content', () => {
 <!-- The first way uses method <i>toHaveTextContent</i> to search for a matching text from the entire HTML code rendered by the component.    -->
 第一种方法使用方法<i>toHaveTextContent</i> 从组件渲染的整个 HTML 代码中搜索匹配的文本。
 
-<i>toHaveTextContent</i> is one of many "matcher"-methods that are provided by the  [jest-dom](https://github.com/testing-library/jest-dom#tohavetextcontent) library.
+<!--<i>toHaveTextContent</i> is one of many "matcher"-methods that are provided by the  [jest-dom](https://github.com/testing-library/jest-dom#tohavetextcontent) library.-->
 <i>toHaveTextContent</i>  是许多“ matcher”方法之一，这些方法是由[ jest-dom ]( https://github.com/testing-library/jest-dom#toHaveTextContent )库提供的。
 
 <!-- The second way uses the [getByText](https://testing-library.com/docs/dom-testing-library/api-queries#bytext) method of the object returned by the render method. The method returns the element that contains the given text. An exception occurs if no such element exists. For this reason, we would technically not need to specify any additional expectation. -->
@@ -267,7 +268,7 @@ console.log src/components/Note.test.js:21
   </li>
 ```
 
-### Clicking buttons in tests
+### 在测试中点击按钮 Clicking buttons in tests
 
 <!-- In addition to displaying content, the <i>Note</i> component also makes sure that when the button associated with the note is pressed, the _toggleImportance_ event handler function gets called. -->
 
@@ -335,7 +336,7 @@ expect(mockHandler.mock.calls.length).toBe(1)
 <!-- In our example, the mock function is a perfect choice since it can be easily used for verifying that the method gets called exactly once. -->
 在我们的示例中，mock 函数是一个完美的选择，因为它可以很容易地用于验证方法是否只被调用一次。
 
-### Tests for the <i>Togglable</i> component
+### 测试可切换组件（Tests for the <i>Togglable</i> component）
 
 <!-- Let's write a few tests for the <i>Togglable</i> component. Let's add the <i>togglableContent</i> CSS classname to the div that returns the child components. -->
 让我们为 Togglable 组件编写一些测试。 让我们将 <i>togglableContent</i> CSS classname 添加到返回子组件的 div。
@@ -463,7 +464,7 @@ test('toggled content can be closed', () => {
 
 
 
-### Testing the forms 测试表单
+### 测试表单（Testing the forms ）
 
 
 <!-- We already used the [fireEvent](https://testing-library.com/docs/api-events#fireevent) function in our previous tests to click buttons. -->
@@ -565,8 +566,6 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
 <!-- We can simulate writing to <i>input</i> fields by creating an <i>change</i> event to them, and defining an object, which contains the text 'written' to the field. -->
 我们可以通过为<i>input</i> 字段创建一个<i>change</i> 事件，并定义一个包含写入字段的文本的对象来模拟对<i>input</i> 字段的写入。
 
-
-
 <!-- The form is sent by simulating the <i>submit</i> event to the form. -->
 表单通过模拟<i>submit</i> 事件发送到表单。
 
@@ -576,7 +575,7 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
 <!-- The second expectation checks, that the event handler is called with the right parameters - that a note with the correct content is created when the form is filled.  -->
 第二个期望检查，使用正确的参数调用事件处理程序——即在填写表单时创建具有正确内容的通知。
 
-### Test coverage 测试覆盖范围
+###  测试覆盖范围（Test coverage）
 
 
 <!-- We can easily find out the [coverage](https://github.com/facebookincubator/create-react-app/blob/ed5c48c81b2139b4414810e1efe917e04c96ee8d/packages/react-scripts/template/README.md#coverage-reporting) of our tests by running them with the command -->

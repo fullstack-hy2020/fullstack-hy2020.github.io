@@ -37,7 +37,7 @@ const App = () => {
 }
 ```
 
-### Component helper functions 组件辅助函数
+### 组件辅助函数（Component helper functions）
 <!-- Let's expand our <i>Hello</i> component so that it guesses the year of birth of the person being greeted: -->
 让我们扩展一下<i>Hello</i> 组件，让它能猜到被问候(greeted)者的出生年份:
 
@@ -73,7 +73,7 @@ const Hello = (props) => {
 
 如果仔细观察当前代码，我们会注意到这种辅助函数实际上是在另一个函数中定义的，而这个函数是我们用来定义组件行为的。 在 java 中，在一个方法中定义另一个方法是不可能的，但在 JavaScript 中，在函数中定义函数是一种常规操作。
 
-### Destructuring 解构
+### 解构（Destructuring ）
 <!-- Before we move forward, we will take a look at a small but useful feature of the JavaScript language that was added in the ES6 specification, that allows us to [destructure](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) values from objects and arrays upon assignment. -->
 
 在我们继续之前，我们将看一看 JavaScript 在 ES6规范中添加的的一个很小、但是有用的特性，它允许我们在赋值时从对象和数组中[解构](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)出值。
@@ -127,7 +127,7 @@ const bornYear = () => {
 ```
 
 <!-- Destructuring makes the assignment of variables even easier, since we can use it to extract and gather the values of an object's properties into separate variables: -->
-解构使变量的赋值变得更加容易，因为我们可以使用它来提取和收集对象属性的值，提取到单独的变量中:
+解构使变量的赋值变得更加容易，因为我们可以使用它来提取和收集对象属性的值，将其提取到单独的变量中:
 
 ```js
 const Hello = (props) => {
@@ -158,7 +158,7 @@ props = {
 ```
 
 <!-- the expression <em>const { name, age } = props</em> assigns the values 'Arto Hellas' to _name_ and 35 to _age_. -->
-表达式 <em>const { name, age } = props</em> 将值 'Arto Hellas' 赋值给 name，35赋值给 age。
+表达式 <em>const { name, age } = props</em> 会将值 'Arto Hellas' 赋值给 name，35赋值给 age。
 
 <!-- We can take destructuring a step further: -->
 我们可以进一步解构:
@@ -196,7 +196,7 @@ const Hello = (props) => {
 const Hello = ({ name, age }) => {
 ```
 
-### Page re-rendering 页面重渲染
+### 页面重渲染（Page re-rendering ）
 <!-- So far all of our applications have been such that their appearance remains the same after the initial rendering. What if we wanted to create a counter where the value increased as a function of time or at the click of a button? -->
 到目前为止，我们的所有应用都是这样的，即在最初的渲染之后，它们的外观一直是相同的。 如果我们想要创建一个计数器，在这个计数器中的值随着时间的变化而增加，或者点通过击一个按钮而增加，会是什么样呢？
 
@@ -270,12 +270,12 @@ setInterval(() => {
 <!-- Making repeated calls to the _ReactDOM.render_-method is not the recommended way to re-render components. Next, we'll introduce a better way of accomplishing this effect. -->
 重复调用 _ReactDOM.render_-方法并不是重新渲染组件的推荐方法。 接下来，我们将介绍一种更好的，实现相同效果的方法。
 
-### Stateful component 有状态组件
+### 有状态组件（Stateful component）
 <!-- All of our components up till now have been simple in the sense that they have not contained any state that could change during the lifecycle of the component. -->
-到目前为止，我们的所有组件都很简单，因为它们没有包含任何在组件生命周期中可能变化的状态。
+到目前为止，我们的所有组件都很简单，因为它们没有包含任何组件（生命周期中可能变化）的状态。
 
 <!-- Next, let's add state to our application's <i>App</i> component with the help of React's [state hook](https://reactjs.org/docs/hooks-state.html). -->
-接下来，让我们通过 React's [state hook](https://reactjs.org/docs/hooks-state.html)向应用的<i>App</i> 组件中添加状态。
+接下来，让我们通过 React 的  [state hook](https://reactjs.org/docs/hooks-state.html) 向应用的<i>App</i> 组件中添加状态。
 
 <!-- We will change the application to the following: -->
 我们会把应用做如下修改:
@@ -336,14 +336,14 @@ setTimeout(
 ```
 
 <!-- The function passed as the first parameter to the _setTimeout_ function is invoked one second after calling the _setTimeout_ function -->
-函数作为第一个参数传递给 setTimeout ，会在调用 setTimeout 函数一秒钟后被调用
+函数作为第一个参数传递给 setTimeout ，并会在调用 setTimeout 函数一秒钟后被调用
 
 ```js
 () => setCounter(counter + 1)
 ```
 
 <!-- When the state modifying function _setCounter_ is called, <i>React re-renders the component</i> which means that the function body of the component function gets re-executed: -->
-当状态修改函数 setCounter 被调用时， <i>React 重新渲染了这个组件</i> ，这意味着组件函数的函数体被重新执行:
+当状态修改函数—— setCounter 被调用时， <i>React 重新渲染了这个组件</i> ，这意味着组件函数的函数体被重新执行:
 
 ```js
 (props) => {
@@ -362,19 +362,19 @@ setTimeout(
 
 <!-- The second time the component function is executed it calls the _useState_ function and returns the new value of the state: 1. Executing the function body again also makes a new function call to _setTimeout_, which executes the one second timeout and increments the _counter_ state again. Because the value of the _counter_ variable is 1, incrementing the value by 1 is essentially the same as a command setting the state _counter_ value to 2. -->
 
-第二次执行组件函数时，它调用了 useState 函数返回的新状态值: 1。 再次执行函数体还会对 setTimeout 进行一次新的函数调用，它会执行一秒钟的超时并再次递增计数器状态。 由于counter变量的值现在是1，所以将该值增加1本质上等同于将状态计数器的值设置为2的命令。
+第二次执行组件函数时，它调用了 useState 函数返回的新状态值: 1。 再次执行函数体还会对 setTimeout 进行一次新的函数调用，它会执行一秒钟的超时并再次递增计数器状态。 由于counter变量的值现在是1，所以将该值增加1本质上等同于将计数器的状态值设置为2。
 
 ```js
 () => setCounter(2)
 ```
 Meanwhile, the old value of _counter_,  "1", is rendered to the screen.
-与此同时，计数器的旧值“1”渲染到了屏幕上。
+与此同时，计数器的旧值“1”被渲染到了屏幕上。
 
 <!-- Every time the _setCounter_  modifies the state it causes the component to re-render. The value of the state will be incremented again after one second, and this will continue to repeat for as long as the application is running. -->
 每次 setCounter 修改状态时，它都会导致组件重新渲染。 状态的值将在一秒钟后再次递增，并且在应用运行期间循环往复。
 
 <!-- If the component doesn't render when you think it should, or if it renders at the "wrong time", you can debug the application by logging the values of the component's variables to the console. If we make the following additions to our code: -->
-如果组件在该渲染时没有渲染，或者在“错误的时间”进行了渲染，您可以通过将组件变量的值打印到控制台来调试应用。 如果我们在代码中添加如下内容:
+如果组件在该渲染时没有渲染，或者在“错误的时间”进行了渲染，您可以通过将组件变量的值打印到控制台来调试应用。 如果我们在代码中添加了如下内容:
 
 ```js
 const App = (props) => {
@@ -394,12 +394,12 @@ const App = (props) => {
 ```
 
 <!-- It's easy to follow and track the calls made to the _render_ function: -->
-很容易跟踪并捕获render函数的调用:
+就很容易跟踪并捕获render函数的调用:
 
 ![](../../images/1/4e.png)
 
 
-### Event handling 事件处理
+### 事件处理（Event handling）
 <!-- We have already mentioned <i>event handlers</i> a few times in [part 0](/en/part0), that are registered to be called when specific events occur. E.g. a user's interaction with the different elements of a web page can cause a collection of various different kinds of events to be triggered. -->
 我们已经在[第0章](/zh/part0)中多次提到<i>事件处理程序</i>，它们（被注册为）在特定事件发生时进行调用。 例如，用户与一个网页的不同元素的交互可能会触发一系列不同类型的事件。
 
@@ -407,7 +407,7 @@ const App = (props) => {
 让我们修改一下应用，这样当用户单击一个按钮时，计数器就会增加，这可以通过[ button ]( https://developer.mozilla.org/en-us/docs/web/html/element/button )-元素实现的。
 
 <!-- Button-elements support so-called [mouse events](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent), of which [click](https://developer.mozilla.org/en-US/docs/Web/Events/click) is the most common event. -->
-按钮元素支持所谓的[鼠标事件]( https://developer.mozilla.org/en-us/docs/web/api/mouseevent 事件) ，其中[点击]( https://developer.mozilla.org/en-us/docs/web/events/click 事件)是最常见的事件。
+button-元素支持所谓的[鼠标事件]( https://developer.mozilla.org/en-us/docs/web/api/mouseevent 事件) ，其中[点击]( https://developer.mozilla.org/en-us/docs/web/events/click 事件)是最常见的事件。
 
 <!-- In React, registering an event handler function to the <i>click</i> event [happens](https://reactjs.org/docs/handling-events.html) like this: -->
 在 React 中，将一个事件处理函数注册到<i>click</i> 事件 [发生](https://reactjs.org/docs/handling-events.html) 时，如下：
@@ -501,7 +501,7 @@ const App = (props) => {
 
 
 
-### Event handler is a function 事件处理是一个函数
+### 事件处理是一个函数（Event handler is a function）
 <!-- We define the event handlers for our buttons where we declare their <i>onClick</i> attributes: -->
 我们为按钮定义事件处理程序，声明它们的 <i>onClick</i> 属性:
 
@@ -529,9 +529,8 @@ const App = (props) => {
 
 
 
-
 <!-- What's going on? An event handler is supposed to be either a <i>function</i> or a <i>function reference</i>, and when we write -->
-怎么回事？ 事件处理程序应该是一个<i>函数</i> 或一个<i>函数引用</i>，当我们编写时
+怎么回事？事件处理程序应该是一个<i>函数</i> 或一个<i>函数引用</i>，当我们编写时
 
 ```js
 <button onClick={setCounter(counter + 1)}>
@@ -540,7 +539,7 @@ const App = (props) => {
 
 <!-- the event handler is actually a <i>function call</i>. In many situations this is ok, but not in this particular situation. In the beginning the value of the <i>counter</i> variable is 0. When React renders the method for the first time, it exectues the function call <em>setCounter(0+1)</em>, and changes the value of the component's state to 1.  -->
 
-事件处理器实际上被定义了一个<i>函数调用</i>。 在很多情况下这是可行的，但在这种特殊情况下就不行了。 一开始<i>counter</i> 变量的值是0。 当 React 第一次渲染时，它执行函数调用<em>setCounter(0+1)</em>，并将组件状态的值更改为1。
+事件处理器实际上被定义成了一个<i>函数调用</i>。 在很多情况下这是可行的，但在这种特殊情况下就不行了。 一开始<i>counter</i> 变量的值是0。 当 React 第一次渲染时，它执行函数调用<em>setCounter(0+1)</em>，并将组件状态的值更改为1。
 
 <!-- This will cause the component to be rerendered, react will execute the setCounter function call again, and the state will change leading to another rerender... -->
 这将导致组件重新渲染，react 将再次执行 setCounter 函数调用，并且状态将发生变化，从而导致另一个重新运行...
@@ -598,7 +597,7 @@ const App = (props) => {
 
 
 <!-- Here the event handlers have been defined correctly. The value of the <i>onClick</i> attribute is a variable containing a reference to a function: -->
-这里就正确定义了事件处理程序。<i>onClick</i> 属性的值是一个包含函数引用的变量:
+这里就正确定义了事件处理。<i>onClick</i> 属性的值是一个包含函数引用的变量:
 
 ```js
 <button onClick={increaseByOne}> 
@@ -608,7 +607,7 @@ const App = (props) => {
 
 ### Passing state to child components 将状态传递给子组件
 <!-- It's recommended to write React components that are small and reusable across the application and even across projects. Let's refactor our application so that it's composed of three smaller components, one component for displaying the counter and two components for buttons. -->
-十分建议编写跨应用甚至跨项目的、小型且可重用的 React 组件。 让我们重构我们的应用，使它由三个较小的组件组成，一个组件用于显示计数器，两个组件用于按钮。
+十分建议编写跨应用甚至跨项目的、小型且可重用的 React 组件。 让我们重构我们的应用，使它由三个较小的组件组成，一个组件用于显示计数器，两个组件用于显示按钮。
 
 <!-- Let's first implement a <i>Display</i> component that's responsible for displaying the value of the counter. -->
 让我们首先实现一个<i>Display</i> 组件，它负责显示计数器的值。
@@ -722,13 +721,10 @@ const App = (props) => {
 <!-- The event handler is passed to the <i>Button</i> component through the _onClick_ prop. The name of the prop itself is not that significant, but our naming choice wasn't completely random, e.g. React's own official [tutorial](https://reactjs.org/tutorial/tutorial.html) suggests this convention. -->
 事件处理程序通过_onClick_ 属性传递给<i>Button</i> 组件。 props的名字本身并不重要，但是我们的命名选择并不是完全随机的，例如 React 自己的[官方教程]( https://reactjs.org/tutorial/tutorial.html)就建议了这些约定。
 
-### Changes in state cause rerendering 状态的改变导致重新渲染
-
+### 状态的改变导致重新渲染
 
 <!-- Let's go over the main principles of how an application works once more. -->
 让我们再次回顾一下应用如何工作的主要内容。
-
-
 
 <!-- When the application starts, the code in _App_ is executed. This code uses an [useState](https://reactjs.org/docs/hooks-reference.html#usestate) - hook to create the application state - value of the counter _counter_. -->
 
@@ -756,7 +752,7 @@ const App = (props) => {
 <!-- _Display_ receives the new value of the counter, 1, as props. The _Button_ components receive event handlers which can be used to change the state of the counter. -->
 _Display_ 接收计数器的新值，1，作为props。 Button 组件接收可用于更改计数器状态的事件处理程序，来改变counter的状态。
 
-### Refactoring the components 重构组件
+### 重构组件
 <!-- The component displaying the value of the counter is as follows: -->
 显示计数器值的组件如下:
 
@@ -811,7 +807,7 @@ const Button = (props) => {
 
 
 <!-- We can use destructuring to get only the required fields from <i>props</i>, and use the more compact form of arrow functions: -->
-我们可以使用解构只从<i>props</i> 获取所需的字段，并使用更紧凑的箭头函数:
+我们可以使用解构，只从<i>props</i> 获取所需的字段，并使用更紧凑的箭头函数:
 
 ```js
 const Button = ({ handleClick, text }) => (

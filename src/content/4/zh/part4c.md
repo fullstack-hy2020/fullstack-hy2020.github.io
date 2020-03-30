@@ -465,7 +465,7 @@ usersRouter.get('/', async (request, response) => {
 <!-- You can find the code for our current application in its entirety in the <i>part4-7</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-7). -->
 你也可以在[Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-7)的 <i>part4-7</i> 分支中找到当前应用的代码。
 
-### Creating a new note 创建一个新 Note
+### 创建一个新 Note（Creating a new note ）
 
 <!-- The code for creating a new note has to be updated so that the note is assigned to the user who created it. -->
 

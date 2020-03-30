@@ -8,8 +8,6 @@ lang: zh
 <div class="content">
 
 
-
-
 <!-- So far we have used our redux-store with the help of the[hook](https://react-redux.js.org/api/hooks)-api from react-redux. -->
 到目前为止，我们已经使用了 redux-store，借助于 redux 中的 [hook ]( https://react-redux.js.org/api/hooks )-api。
 <!-- Practically this has meant using the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) functions. -->
@@ -25,7 +23,7 @@ lang: zh
 <!-- In new applications you should absolutely use the hook-api, but knowing how to use connect is useful when maintaining older projects using redux. -->
 在新的应用中，您绝对应该使用 hook-api，但是在使用 redux 维护老项目时，了解如何使用 connect 非常有用。
 
-### Using the connect-function to share the redux store to components 使用 connect-function 将 redux 存储共享给组件
+### 使用 connect-function 将 redux 存储共享给组件（Using the connect-function to share the redux store to components） 
 
 
 <!-- Let's modify the <i>Notes</i> component so that instead of using the hook-api (the _useDispatch_ and  _useSelector_ functions ) it uses the _connect_-function.  -->
@@ -430,7 +428,8 @@ export default connect(
 ```js
 import { createNote } from './../reducers/noteReducer'
 ```
-The action creator can also be referenced directly by calling _createNote_. You should not do this, since this is the unmodified version of the action creator that does not contain the added automatic dispatch.
+<!--The action creator can also be referenced directly by calling _createNote_. You should not do this, since this is the unmodified version of the action creator that does not contain the added automatic dispatch.-->
+
 还可以通过调用 createNote 直接引用操作创建者。 您不应该这样做，因为这是操作创建者的未修改版本，不包含添加的自动分派。
 
 <!-- If we print the functions to the console from the code (we have not yet looked at this useful debugging trick):  -->
@@ -463,7 +462,7 @@ const NewNote = (props) => {
 <!-- Connect is an incredibly useful tool although it may seem difficult at first due to its level of abstraction. -->
 连接是一个非常有用的工具，尽管由于它的抽象级别，乍看起来可能很困难。
 
-### Alternative way of using mapDispatchToProps 使用 mapDispatchToProps 的另一种方式
+### 使用 mapDispatchToProps 的另一种方式（Alternative way of using mapDispatchToProps ）
 <!-- We defined the function for dispatching actions from the connected <i>NewNote</i> component in the following way: -->
 我们如下面的方式定义了从连接的<i>NewNote</i> 组件发送操作的函数:
 
@@ -572,22 +571,22 @@ Redux的创建者 Dan Abramov 创建了一个非常棒的教程，叫做 [Gettin
 <!-- The refactored <i>Notes</i> component is almost entirely focused on rendering notes and is quite close to being a so-called [presentational component](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0). According to the [description](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) provided by Dan Abramov, presentation components: -->
 重构的<i>Notes</i> 组件几乎完全集中在渲染便笺上，并且非常接近于所谓的[表示组件]( https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0组件)。 根据 Dan Abramov 提供的 [description](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)，演示组件:
 
-- Are concerned with how things look.
+<!--Are concerned with how things look.-->
 关心事物的外观。
-- May contain both presentational and container components inside, and usually have some DOM markup and styles of their own.
+<!--May contain both presentational and container components inside, and usually have some DOM markup and styles of their own.-->
 - 可能包含表示和容器组件，并且通常有一些 DOM 标签和它们自己的样式。
-- Often allow containment via props.children.
+<!--Often allow containment via props.children.-->
 - 经常允许通过建筑物进行隔离。
-- Have no dependencies on the rest of the app, such as Redux actions or stores.
+<!--Have no dependencies on the rest of the app, such as Redux actions or stores.-->
 - 不依赖于应用的其他部分，如 Redux 操作或store。
-- Don’t specify how the data is loaded or mutated.
+<!--Don’t specify how the data is loaded or mutated.-->
 - 不要说明数据是如何加载或变异的。
-- Receive data and callbacks exclusively via props.
+<!--Receive data and callbacks exclusively via props.-->
 - 只通过props接收数据和回调。
-- Rarely have their own state (when they do, it’s UI state rather than data).
+<!--Rarely have their own state (when they do, it’s UI state rather than data).-->
 - 很少有自己的状态(当他们这样做时，是 UI 状态而不是数据)。
-- Are written as functional components unless they need state, lifecycle hooks, or performance optimizations.
-除非需要状态、生命周期Hook或性能优化，否则被编写为功能组件。
+<!--Are written as functional components unless they need state, lifecycle hooks, or performance optimizations.-->
+- 除非需要状态、生命周期Hook或性能优化，否则被编写为功能组件。
 
 <!-- The _connected component_ that is created with the _connect_ function: -->
 使用 connect 函数创建的连接组件 :
@@ -621,17 +620,17 @@ export default connect(
 <!-- Fits the description of a <i>container</i> component. According to the [description](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) provided by Dan Abramov, container components: -->
 符合<i>容器</i> 组件的描述，根据 Dan Abramov 提供的[description](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)，容器组件:
 
-- Are concerned with how things work.
+<!--Are concerned with how things work.-->
 - 关心事物的运作方式。
-- May contain both presentational and container components inside but usually don’t have any DOM markup of their own except for some wrapping divs, and never have any styles.
+<!--May contain both presentational and container components inside but usually don’t have any DOM markup of their own except for some wrapping divs, and never have any styles.-->
 - 内部可能包含表示和容器组件，但通常没有它们自己的 DOM 标签，除了一些包装的 div，并且从来没有任何样式。
-- Provide the data and behavior to presentational or other container components.
+<!--Provide the data and behavior to presentational or other container components.-->
 - 为表示或其他容器组件提供数据和行为。
-- Call Redux actions and provide these as callbacks to the presentational components.
+<!--Call Redux actions and provide these as callbacks to the presentational components.-->
 - 调用 Redux 操作，并将其作为表示组件的回调提供。
-- Are often stateful, as they tend to serve as data sources.
+<!--Are often stateful, as they tend to serve as data sources.-->
 通常是有状态的，因为它们倾向于作为数据源。
-- Are usually generated using higher order components such as connect from React Redux, rather than written by hand.
+<!--Are usually generated using higher order components such as connect from React Redux, rather than written by hand.-->
 - 通常使用高阶组件(如 React Redux 中的 connect)生成，而不是手写。
 
 <!-- Dividing the application into presentational and container components is one way of structuring React applications that has been deemed beneficial. The division may be a good design choice or it may not, it depends on the context. -->
@@ -640,11 +639,11 @@ export default connect(
 <!-- Abramov attributes the following [benefits](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) to the division: -->
 Abramov将如下[benefits](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)归功于这个部分: 
 
-- Better separation of concerns. You understand your app and your UI better by writing components this way.
+<!--Better separation of concerns. You understand your app and your UI better by writing components this way.-->
 - 更好的关注点分离。通过这种方式编写组件，你可以更好地理解你的应用和你的用户界面。
-- Better reusability. You can use the same presentational component with completely different state sources, and turn those into separate container components that can be further reused.
+<!--Better reusability. You can use the same presentational component with completely different state sources, and turn those into separate container components that can be further reused.-->
 - 更好的可重用性。 您可以使用具有完全不同状态源的相同表示组件，并将其转换为可以进一步重用的单独容器组件。
-- Presentational components are essentially your app’s “palette”. You can put them on a single page and let the designer tweak all their variations without touching the app’s logic. You can run screenshot regression tests on that page.
+<!--Presentational components are essentially your app’s “palette”. You can put them on a single page and let the designer tweak all their variations without touching the app’s logic. You can run screenshot regression tests on that page.-->
 - 表现组件本质上是你的应用的“调色板”。 你可以把它们放在一个页面上，让设计师在不触及应用逻辑的情况下调整它们的所有变化。 您可以在该页面上运行屏幕截图回归测试。
 
 <!-- Abramov mentions the term [high order component](https://reactjs.org/docs/higher-order-components.html). The <i>Notes</i> component is an example of a regular component, whereas the <i>connect</i> method provided by React-Redux is an example of a <i>high order component</i>. Essentially, a high order component is a function that accept a "regular" component as its parameter, that then returns a new "regular" component as its return value. -->
@@ -661,7 +660,7 @@ Hoc 实际上是[高阶函数]( https://en.wikipedia.org/wiki/higher-order_funct
 <!-- After the React hook-api was published, HOCs have become less and less popular. Almost all libraries which used to be based on HOCs have now been modified to use hooks. Most of the time hook based apis are a lot simpler than HOC based ones, as is the case with redux as well.  -->
 React hook-api 发布之后，HOCs 变得越来越不受欢迎。 几乎所有过去基于 hoc 的库现在都被修改为使用Hook。 大多数基于Hook的 api 比基于 HOC 的 api 简单得多，redux 的情况也是如此。 
 
-### Redux and the component stateRedux 和组件状态
+### Redux 和组件状态（Redux and the component state）
 <!-- We have come a long way in this course and, finally, we have come to the point at which we are using React "the right way", meaning React only focuses on generating the views, and the application state is separated completely from the React components and passed on to Redux, its actions, and its reducers. -->
 我们在这个过程中已经走了很长的路，最后，我们已经到了我们使用 React“ the right way”的地步，意思是 React 只关注于生成视图，应用状态完全独立于 Redux 组件，并传递到 Redux、 Redux 的动作和 Redux 的还原器。
 
@@ -690,8 +689,6 @@ React hook-api 发布之后，HOCs 变得越来越不受欢迎。 几乎所有�
 
 ### Exercises 6.19.-6.21.
 #### 6.19 anecdotes and connect, 步骤1
-6.19轶事和联系，第一步
-
 <!-- The <i>redux store</i> is currently passed to all of the components through props. -->
 <i>redux store</i> 目前通过props传递给所有组件。
 

@@ -372,7 +372,7 @@ describe('Note app',  function() {
 <!-- Note that the CSS [id-selector](https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors) is #, so if we want to search for an element with the id <i>username</i> the CSS selector is <i>#username</i>. -->
 注意 CSS [ id-selector ]( https://developer.mozilla.org/en-us/docs/web/CSS/id_selectors )是 # ，所以如果我们想搜索 id 是 <i>username</i> 的元素，CSS 选择器是<i># username</i>。
 
-### Some things to note 有些事情需要注意
+###  有些事情需要注意（Some things to note）
 <!-- The test first clicks the button opening the login form like so -->
 测试首先单击打开登录表单的按钮，如下所示
 
@@ -446,7 +446,7 @@ module.exports = {
 }
 ```
 
-### Testing new note form 测试新的便笺表单
+### 测试新建便笺表单（Testing new note form ）
 <!-- Let's next add tests which test the new note functionality:  -->
 下面让我们添加测试来测试新便笺的功能:
 
@@ -546,13 +546,10 @@ Cypress 按照测试在代码中的顺序运行测试。 所以它首先运行<i
 <!-- All changes to the browser's state are reversed after each test. -->
 在每次测试后，对浏览器状态的所有更改都会被反转。
 
-### Controlling the state of the database 控制数据库状态
-
+### 控制数据库状态（Controlling the state of the database ）
 
 <!-- If the tests need to be able to modify the server's database, the situation immediately becomes more complicated. Ideally, the server's database should be the same each time we run the tests, so our tests can be reliably and easily repeatable.  -->
 如果测试需要能够修改服务器的数据库，那么情况会立即变得更加复杂。 理想情况下，每次运行测试时，服务器的数据库应该是相同的，这样我们的测试就可以可靠且容易地重复。
-
-
 
 <!-- As with unit- and integration tests, with E2E tests it is the best to empty the database and possibly format it before the tests are run. The challenge with E2E test is, that they do not have access to the database.  -->
 与单元测试和集成测试一样，E2E 测试最好是在测试运行之前清空数据库并尽可能格式化数据库。 E2e 测试的挑战在于，他们无法访问数据库。
@@ -608,7 +605,7 @@ module.exports = app
 <!-- after the changes a HTTP POST request to the <i>/api/testing/reset</i> endpoint empties the database. -->
 更改之后，对<i>/api/testing/reset</i> 端点的 HTTP POST 请求将清空数据库。
 
-!-backendin testej varten muokattu koodi on kokonaisuudessaan github https: / / fullstack-hy2020 / part3-notes-backend / tree / part5-1，branchiss<i>part5-1</i>. -
+
 <!-- The modified backend code can be found from [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1) branch <i>part5-1</i>. -->
 修改后的后端代码可以在[ github ]( https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1)分支<i>part5-1</i> 中找到。
 
@@ -1123,7 +1120,7 @@ describe('Note app', function() {
 <!-- The tests and the frontend code can be found from [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-10) branch <i>part5-10</i>. -->
 测试和前端代码可以从[ github ]( https://github.com/fullstack-hy2020/part2-notes/tree/part5-10)分支<i>part5-10</i> 中找到。
 
-### Changing the importance of a note 改变便笺的重要性
+###  改变便笺的重要性（Changing the importance of a note）
 <!-- Lastly let's take a look at the test we did for changing the importance of a note.  -->
 最后，让我们看一下我们为改变便笺的重要性所做的测试。
 <!-- First we'll change the formatting block so that it creates three notes instead of one: -->
@@ -1274,13 +1271,10 @@ it.only('other of those can be made important', function () {
 <!-- Now the first line finds the right button, and uses <i>as</i> to save it as <i>theButton</i>. The followings lines can use the named element with <i>cy.get('@theButton')</i>. -->
 现在第一行找到右边的按钮，并使用<i>作为</i> 保存为<i>theButton</i>。 下面的代码行可以使用命名元素和 <i>cy.get('@theButton')</i>。
 
-### Running and debugging the tests 运行和调试测试
-
+### 运行和调试测试（Running and debugging the tests ）
 
 <!-- Finally, some notes on how Cypress works and debugging your tests. -->
 最后，还有一些关于 Cypress 如何工作和调试测试的便笺。
-
-
 
 <!-- The form of the Cypress tests gives the impression, that the tests are normal JavaScript code, and we could for example try this: -->
 Cypress 测试的形式给人的印象是，测试是正常的 JavaScript 代码，我们可以试试这个: 
@@ -1377,7 +1371,6 @@ it('then example', function() {
 
 ### Exercises 5.17.-5.22.
 
-
 <!-- In the last exercises of this part we will do some E2E tests for our blog application.  -->
 在这一章节的最后练习中，我们将为我们的博客应用做一些 E2E 测试。
 <!-- The material of this part should be enough to complete the exercises.  -->
@@ -1385,12 +1378,11 @@ it('then example', function() {
 <!-- You should absolutely also check out the Cypress [documentation](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell). It is propably the best documentation I have ever seen for an open source project.  -->
 你绝对应该看看 Cypress [ 文档 ]( https://docs.Cypress.io/guides/overview/why-Cypress.html#in-a-nutshell 文档)。 这可能是我见过的最好的开源项目文档。
 
-
 <!-- I especially recommend reading [Introduction to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes), which states -->
-我特别推荐阅读《柏树简介》 [Introduction to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes)，其中说到
+我特别推荐阅读《Cypress 简介》 [Introduction to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes)，其中说到
 
 > <i>This is the single most important guide for understanding how to test with Cypress. Read it. Understand it.</i>
-这是了解如何使用Cypress进行测试的最重要的指南。读一读，理解一下
+这是了解如何使用Cypress进行测试的最重要的指南。读一读，了解一下
 
 #### 5.17: bloglist end to end testing, 步骤1
 
@@ -1454,8 +1446,7 @@ describe('Blog app', function() {
 })
 ```
 
-
-<i>Optional bonus exercise</i>: Check that the notification shown with unsuccessful login is displayed red. 
+<!--<i>Optional bonus exercise</i>: Check that the notification shown with unsuccessful login is displayed red. -->
 <i>可选奖励练习Optional bonus exercise</i>:  检查显示未成功登入的通知是否显示为红色。
 
 #### 5.19: bloglist end to end testing, 步骤3
@@ -1499,10 +1490,10 @@ describe('Blog app', function() {
 
 
 
-<i>Optional bonus exercise:</i> also check that other users cannot delete the blog. 
+<!--<i>Optional bonus exercise:</i> also check that other users cannot delete the blog. -->
 <i>可选奖励练习Optional bonus exercise</i>:  还检查其他用户不能删除的博客。
 
-#### 5.22: bloglist end end testing, step 6
+#### 5.22: bloglist end end testing, 步骤 6
 <!-- Make a test which checks, that the blogs are ordered according to likes with the blog with the most likes being first.  -->
 先做一个检查，看看博客是否按照喜好排序，最喜欢的博客放最前面。
 

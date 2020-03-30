@@ -7,7 +7,7 @@ lang: zh
 
 <div class="content">
 
-### Complex state 复杂状态
+### 复杂状态（Complex state）
 <!-- In our previous example the application state was simple as it was comprised of a single integer. What if our application requires a more complex state? -->
 
 在之前的示例中，应用状态很简单，因为它仅由单个整数组成。 如果我们的应用需要一个更复杂的状态怎么办？
@@ -47,7 +47,7 @@ const App = (props) => {
 
 <!-- The component's state or a piece of its state can be of any type. We could implement the same functionality by saving the click count of both the <i>left</i> and <i>right</i> buttons into a single object: -->
 
-组件的状态或其状态的一章节可以是任何类型。 我们可以通过将<i>left</i> 和<i>right</i> 按钮的单击次数保存到一个对象中来实现相同的功能:
+组件的状态或其状态的一部分可以是任何类型。 我们可以通过将<i>left</i> 和<i>right</i> 按钮的单击次数保存到一个对象中来实现相同的功能:
 
 ```js
 {
@@ -127,7 +127,7 @@ const handleLeftClick = () => {
 <!-- We can define the new state object a bit more neatly by using the [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) -->
 我们可以通过使用对象的[展开语法]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/operators/spread_syntax )更加整洁地定义新的状态对象
 <!-- syntax that was added to the language specification in the summer of 2018: -->
-该语法2018年夏天添加到了语言规范中的:
+该语法在2018年夏天添加到了语言规范中的:
 
 ```js
 const handleLeftClick = () => {
@@ -148,7 +148,7 @@ const handleRightClick = () => {
 ```
 
 <!-- The syntax may seem a bit strange at first. In practice <em>{ ...clicks }</em> creates a new object that has copies of all of the properties of the _clicks_ object. When we add new properties to the object, e.g. <em>{ ...clicks, right: 1 }</em>, the value of the _right_ property in the new object will be 1. -->
-语法一开始可能看起来有点奇怪。 实际上， <em>{ ...clicks }</em>  创建了一个新对象，该对象是具有 _clicks_ 对象的所有属性的副本。 当我们向对象添加新属性时，例如 <em>{ ...clicks, right: 1 }</em>,，新对象中right属性的值将为1。
+语法一开始可能看起来有点奇怪。 实际上， <em>{ ...clicks }</em>  创建了一个新对象，该对象是具有 _clicks_ 对象的所有属性的副本。 当我们向对象添加新属性时，例如 <em>{ ...clicks, right: 1 }</em>，新对象中right属性的值将为1。
 
 <!-- In the example above, this: -->
 在上面的例子中，下面代码:
@@ -160,10 +160,8 @@ const handleRightClick = () => {
 <!-- creates a copy of the _clicks_ object where the value of the _right_ property is increased by one. -->
 创建了 _clicks_ 对象的副本，其中 _right_ 属性的值增加了1。
 
-
-
 <!-- Assigning the object to a variable in the event handlers is not necessary and we can simplify the functions to the following form: -->
-将对象分配给事件处理程序中的变量是没有必要的，我们可以将函数简化为如下形式:
+将对象分配给事件处理中的变量是没有必要的，我们可以将函数简化为如下形式:
 
 ```js
 const handleLeftClick = () =>
@@ -193,9 +191,9 @@ const handleLeftClick = () => {
 
 在某些情况下，将一段应用状态存储在更复杂的数据结构中是有益的。 官方的React[文档](https://reactjs.org/docs/hooks-faq.html#should-i-use-one-or-many-state-variables)包含了一些关于这个话题的有用的指导。
 
-### Handling arrays 处理数组
+### 处理数组（Handling arrays）
 <!-- Let's add a piece of state to our application containing an array _allClicks_ that remembers every click that has occurred in the application. -->
-让我们向应用添加一个状态，该状态包含一个数组 _allClicks_ ，该数组记录应用中发生的每次单击。
+让我们向应用添加一个状态，该状态包含一个数组 _allClicks_ ，该数组记录应用中发生的每次单击记录。
 
 ```js
 const App = (props) => {
@@ -264,7 +262,7 @@ const handleLeftClick = () => {
 ```
 
 <!-- However, __don't__ do this. As mentioned previously, the state of React components like _allClicks_ must not be mutated directly. Even if mutating state appears to work in some cases, it can lead to problems that are very hard to notice. -->
-但是，不要这样做。 如前所述，React 组件(如 _allClicks_ )的状态不能直接更改。 即使改变状态在某些情况下可以公证，也可能导致很难注意到的问题。
+但是，不要这样做。 如前所述，React 组件(如 _allClicks_ )的状态不能直接更改。 即使改变状态在某些情况下可以工作，也可能导致很难注意到的问题。
 
 <!-- Let's take a closer look at how the clicking history is rendered to the page: -->
 让我们仔细看看点击历史是如何渲染在页面上的:
@@ -290,7 +288,7 @@ const App = (props) => {
 <!-- We call the [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) method for the _allClicks_ array that joins all the items into a single string, separated by the string passed as the function parameter, which in our case is an empty space. -->
 我们为 allClicks 数组调用[ join ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/join )方法，该数组将所有项目连接到一个字符串中，由作为函数参数传递的字符串分隔，在我们的例子中，该字符串是一个空格。
 
-### Conditional rendering 条件渲染
+### 条件渲染（Conditional rendering）
 <!-- Let's modify our application so that the rendering of the clicking history is handled by a new <i>History</i> component: -->
 让我们修改我们的应用，使得单击历史的渲染由一个新的 <i>History</i>  组件处理:
 
@@ -410,10 +408,10 @@ const App = (props) => {
 }
 ```
 
-### Old React 老版本的React
+### 老版本的React
 <!-- In this course we use the [state hook](https://reactjs.org/docs/hooks-state.html) to add state to our React components, which is part of the newer versions of React and is available from version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) onwards. Before the addition of hooks, there was no way to add state to React functional components. Components that required state had to be defined as React [class](https://reactjs.org/docs/react-component.html) components using the JavaScript class syntax. -->
 
-在这个过程中，我们使用了状态Hook [state hook](https://reactjs.org/docs/hooks-state.html) 来添加状态到我们的 React 组件，这是 React 的新版本的一章节，可以从版本[16.8.0]( https://www.npmjs.com/package/React/v/16.8.0)开始使用。 在添加Hook之前，没有办法将状态添加到 React 函数组件。 需要状态的组件必须使用 JavaScript 类语法定义为 React [class](https://reactjs.org/docs/react-component.html) 组件。
+在这个过程中，我们使用了状态Hook [state hook](https://reactjs.org/docs/hooks-state.html) 来添加状态到我们的 React 组件，这是 React 的新版本的一部分，可以从版本[16.8.0]( https://www.npmjs.com/package/React/v/16.8.0)开始使用。 在添加Hook之前，没有办法将状态添加到 React 函数组件。 需要状态的组件必须使用 JavaScript 类语法定义为 React 的 [class](https://reactjs.org/docs/react-component.html) 组件。
 
 <!-- In this course we have made the slightly radical decision to use hooks exclusively from day one, to ensure that we are learning the future style of React. Even though functional components are the future of React, it is still important to learn the class syntax, as there are billions of lines of old React code that you might end up maintaining some day. The same applies to documentation and examples of React that you may stumble across on the internet. -->
 
@@ -422,13 +420,13 @@ const App = (props) => {
 <!-- We will learn more about React class components later on in the course. -->
 我们将在稍后的课程中学习更多关于 React 类组件的知识。
 
-### Debugging React applications 调试React应用
+###  调试React应用（Debugging React applications）
 <!-- A large part of a typical developer's time is spent on debugging and reading existing code. Every now and then we do get to write a line or two of new code, but a large part of our time is spent on trying to figure out why something is broken or how something works. Good practices and tools for debugging are extremely important for this reason. -->
 
 典型的开发人员的大部分时间都花在调试和读取现有代码上。 我们时不时地会写一两行新代码，但是我们的大部分时间都花在试图弄明白为什么有些东西坏了，或者某些东西是如何工作的上面。 出于这个原因，良好的调试实践和工具非常重要。
 
 <!-- Lucky for us, React is an extremely developer friendly library when it comes to debugging. -->
-幸运的是，对调试来说，React 对开发者是非常友好的。
+幸运的是，在调试方面来说，React 对开发者是非常友好的。
 
 <!-- Before we move on, let us remind ourselves of one of the most important rules of web development. -->
 在我们继续之前，让我们重新提醒自己 web 开发最重要的规则之一。
@@ -453,7 +451,7 @@ const App = (props) => {
 
 <!-- don't write more code but rather find and fix the problem **immediately**. There has yet to be a moment in the history of coding where code that fails to compile would miraculously start working after writing large amounts of additional code. I highly doubt that such an event will transpire during this course either. -->
 
-不要编写更多的代码，而是立即找到并修复问题。 在编码的历史上，还没有哪一次编译失败的代码在编写了大量额外的代码之后奇迹般地开始工作。这样的事件在这个课程中也不会发生。
+不要继续编写更多的代码，而是立即找到并修复问题。 在编码的历史上，还没有哪一次编译失败的代码在编写了大量额外的代码之后奇迹般地开始工作。这样的事情在这个课程中也不会发生。
 
 <!-- Old school, print based debugging is always a good idea. If the component -->
 老派的，基于打印的调试总是一个好主意。如果组件如下所示
@@ -487,7 +485,7 @@ const Button = (props) => {
 
 <!-- **NB** when you use _console.log_ for debugging, don't combine objects in a Java-like fashion by  using a plus. Instead of writing: -->
 
-**注意**当您使用 console.log 进行调试时，不要使用“加号”，像类似于 java 的方式组合对象。 即不要写:
+**注意**：当您使用 console.log 进行调试时，不要使用“加号”，像类似于 java 的方式组合对象。 即不要写:
 
 ```js
 console.log('props value is' + props)
@@ -566,7 +564,7 @@ const [allClicks, setAll] = useState([])
 ![](../../images/1/11be.png)
 
 
-### Rules of Hooks Hook的规则
+### Hook的规则
 <!-- There are a few limitations and rules we have to follow to ensure that our application uses hooks-based state functions correctly. -->
 为了确保应用正确地使用基于Hook的状态函数，我们必须遵循一些限制和规则。
 
@@ -603,7 +601,7 @@ const App = (props) => {
 }
 ```
 
-### Event Handling Revisited 复习事件处理
+### 复习事件处理
 <!-- Event handling has proven to be a difficult topic in previous iterations of this course. -->
 事件处理已被证明是本课程前面的迭代中比较难的一块。
 
@@ -693,7 +691,7 @@ index.js:2178 Warning: Expected `onClick` listener to be a function, instead got
 消息被打印到控制台一次，但是当我们第二次单击按钮时什么也没有发生。 为什么即使我们的事件处理程序包含一个函数 console.log 也不能工作？
 
 <!-- The issue here is that our event handler is defined as a <i>function call</i> which means that the event handler is actually assigned the returned value from the function, which in the case of _console.log_ is <i>undefined</i>. -->
-这里的问题是，我们的事件处理程序被定义为<i>function call</i>，这意味着事件处理程序实际上被分配了函数返回的值，而 console.log 的返回值是<i>undefined</i>。
+这里的问题是，我们的事件处理被定义为<i>function call</i>，这意味着事件处理程序实际上被分配了函数返回的值，而 console.log 的返回值是<i>undefined</i>。
 
 <!-- The _console.log_ function call gets executed when the component is rendered and for this reason it gets printed once to the console. -->
  _console.log_ 函数调用在渲染组件时执行，因此它只在控制台中打印一次。
@@ -759,7 +757,7 @@ const App = (props) => {
 ```
 
 <!-- Naturally, our event handler function can be composed of multiple commands. In these cases we use the longer curly brace syntax for arrow functions: -->
-当然，我们的事件处理函数可以由多个命令组成。 在这种情况下，我们对箭头函数，使用较长的大括号语法:
+当然，我们的事件处理可以由多个命令组成。 在这种情况下，我们对箭头函数，使用较长的大括号语法:
 
 ```js
 const App = (props) => {
@@ -930,7 +928,7 @@ const App = (props) => {
 两个按钮都有自己的单独事件处理程序。
 
 <!-- Functions returning functions can be utilized in defining generic functionality that can be customized with parameters. The _hello_ function that creates the event handlers can be thought of as a factory that produces customized event handlers meant for greeting users. -->
-返回函数的函数可用于定义可以使用参数自定义的通用函数。 可以将创建事件处理程序的 hello 函数视为一个生成迎接用户的定制事件处理的工厂。
+返回函数的函数可用于定义可以使用参数自定义的通用函数。 可以将创建事件处理程序的 hello 函数视为一个生成用户的定制事件处理的工厂。
 
 <!-- Our current definition is slightly verbose: -->
 我们目前的定义有点冗长:
@@ -976,7 +974,7 @@ const hello = (who) => () => {
 ```
 
 <!-- We can use the same trick to define event handlers that set the state of the component to a given value. Let's make the following changes to our code: -->
-我们可以使用相同的技巧来定义将组件状态设置为给定值的事件处理程序。 让我们对我们的代码进行如下修改:
+我们可以使用相同的技巧来定义将组件状态，设置为给定值的事件处理程序。 让我们对我们的代码进行如下修改:
 
 ```js
 const App = (props) => {
@@ -1071,7 +1069,7 @@ const App = (props) => {
 <!-- Choosing between the two presented ways of defining your event handlers is mostly a matter of taste. -->
 可以在这两种定义事件处理程序的方式中进行选择，这主要取决于个人喜好。
 
-### Passing Event Handlers to Child Components 将事件处理程序传递给子组件
+### 将事件处理传递给子组件
 <!-- Let's extract the button into its own component: -->
 让我们将按钮提取到它自己的组件中:
 
@@ -1092,7 +1090,7 @@ const Button = (props) => (
 ![](../../images/1/12e.png)
 
 
-### Do Not Define Components Within Components 不要在组件中定义组件
+### 不要在组件中定义组件
 <!-- Let's start displaying the value of the application into its own <i>Display</i> component. -->
 让我们开始将应用的值显示到它自己的<i>Display</i> 组件中。
 
@@ -1159,18 +1157,19 @@ const App = props => {
 }
 ```
 
-### Useful Reading 有用的阅读
+### 有用的阅读材料
 <!-- The internet is full of React-related material. However, we use such a new style of React that a large majority of the material found online is outdated for our purposes. -->
 互联网上充满了React相关的材料。 然而，我们使用了这样一种新的React方式，以至于网上发现的绝大多数材料对我们的目的来说都已经过时了。
 
 <!-- You may find the following links useful: -->
 你可在如下链接中找到有用的资料:
 
-- The React [official documentation](https://reactjs.org/docs/hello-world.html) is worth checking out at some point, although most of it will become relevant only later on in the course. Also, everything related to Class-components is irrelevant to us.
+<!-- - The React [official documentation](https://reactjs.org/docs/hello-world.html) is worth checking out at some point, although most of it will become relevant only later on in the course. Also, everything related to Class-components is irrelevant to us.-->
+
 - React[官方文档]( https://reactjs.org/docs/hello-world.html )在某种程度上值得一读，尽管其中大部分只有在课程后期才会变得有意义。 此外，所有与类组件相关的内容都与我们无关。
-- Beware the official React [tutorial](https://reactjs.org/tutorial/tutorial.html), it's not very good.
+<!-- - Beware the official React [tutorial](https://reactjs.org/tutorial/tutorial.html), it's not very good.-->
 - 注意官方的React[教程]( https://reactjs.org/tutorial/tutorial.html ) ，它不是很好。
-- Some courses on [Egghead.io](https://egghead.io) like [Start learning React](https://egghead.io/courses/start-learning-react) are of high quality, and the slightly newer [The Beginner's guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) is also relatively good; both courses introduce concepts that will also be introduced later on in this course. However, both courses use Class components instead of the new functional ones used in this course.
+<!-- - Some courses on [Egghead.io](https://egghead.io) like [Start learning React](https://egghead.io/courses/start-learning-react) are of high quality, and the slightly newer [The Beginner's guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) is also relatively good; both courses introduce concepts that will also be introduced later on in this course. However, both courses use Class components instead of the new functional ones used in this course.-->
 - 一些关于[ Egghead.io ]( https://Egghead.io )的课程，如[开始学习React]( https://Egghead.io/courses/Start-learning-React ) ，质量很高，稍新一点的[初学者React指南]( https://Egghead.io/courses/The-Beginner-s-guide-to-reactjs )也相对不错; 这两门课程都介绍了一些概念，这些概念也将在本课程后面介绍。 然而，这两门课程都使用了 Class 组件，而不是本课程中使用的新的函数式组件。
 
 </div>
@@ -1293,13 +1292,11 @@ const App = () => {
 <!-- Let's continue refactoring the application. Extract the following two components: -->
 让我们继续重构这个应用，提取如下两个组件:
 
-- <i>Button</i> for defining the buttons used for submitting feedback
-<i>按钮</i> 用于定义用于提交反馈的按钮
-- <i>Statistic</i> for displaying a single statistic, e.g. the average score.
-<i>显示单一统计数字的 statistics</i>，例如平均分数。
+- <!--<i>Button</i> for defining the buttons used for submitting feedback--><i>按钮</i> 用于定义用于提交反馈的按钮
+- <!--<i>Statistic</i> for displaying a single statistic, e.g. the average score.--><i>显示单一统计数字的 statistics</i>，例如平均分数。
 
 <!-- To be clear: the <i>Statistic</i> component always displays a single statistic, meaning that the application uses multiple components for rendering all of the statistics: -->
-需要明确的是:<i>statistics</i> 组件总是显示一个统计信息，这意味着应用使用需要使用多个组件来渲染所有的统计信息:
+需要明确的是:<i>statistics</i> 组件总是显示一个统计信息，这意味着应用需要使用多个组件来渲染所有的统计信息:
 
 ```js
 const Statistics = (props) => {
@@ -1335,7 +1332,7 @@ const Statistics = (props) => {
 <!-- Then perform the necessary actions to make the warning disappear. Try Googling the error message if you get stuck. -->
 执行必要的操作使警告消失。如果卡住了，尝试用谷歌搜索错误消息。
 
-<i>Typical source of an error `Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.` is Chrome extension. Try going to `chrome://extensions/` and try disabling them one by one and refreshing React app page; the error should eventually disappear.</i>
+<!--<i>Typical source of an error `Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.` is Chrome extension. Try going to `chrome://extensions/` and try disabling them one by one and refreshing React app page; the error should eventually disappear.</i>-->
 典型的错误来用来源: `Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.`  是 Chrome 扩展导致的。 尝试在 `chrome://extensions/`中  ，逐个禁用它们并刷新 React app 页面; 错误最终应该会消失。 
 
 <!-- **Make sure that from now on you don't see any warnings in your console!** -->
@@ -1345,11 +1342,11 @@ const Statistics = (props) => {
 <h4>1.12*: anecdotes 步骤1</h4>
 
 <!-- The world of software engineering is filled with [anecdotes](http://www.comp.nus.edu.sg/~damithch/pages/SE-quotes.htm) that distill timeless truths from our field into short one-liners. -->
-在软件工程的世界里，充满了从我们这个领域提炼出永恒真理 [anecdotes](http://www.comp.nus.edu.sg/~damithch/pages/SE-quotes.htm) 。
+在软件工程的世界里，充满了从我们这个领域提炼出永恒真理 [箴言anecdotes](http://www.comp.nus.edu.sg/~damithch/pages/SE-quotes.htm) 。
 
 <!-- Expand the following application by adding a button that can be clicked to display a <i>random</i> anecdote from the field of software engineering:  -->
 
-通过添加一个点击按钮来显示软件工程领域的随机警句，扩展如下应用:
+通过添加一个点击按钮来显示软件工程领域的随机箴言，扩展如下应用:
 
 ```js
 import React, { useState } from 'react'
@@ -1395,14 +1392,14 @@ ReactDOM.render(
 
 <h4>1.13*: anecdotes 步骤2</h4>
 <!-- Expand your application so that you can vote for the displayed anecdote. -->
-扩展您的应用，以便您可以为显示警句的投票。
+扩展您的应用，以便您可以为显示箴言的投票。
 
 ![](../../images/1/19a.png)
 
 
 <!-- **NB** store the votes of each anecdote into an array or object in the component's state. Remember that the correct way of updating state stored in complex data structures like objects and arrays is to make a copy of the state. -->
 
-注意， 将每个轶事的投票存储到组件状态的数组或对象中。 记住，更新存储在对象和数组等复杂数据结构中的状态的正确方法是复制状态。
+注意， 将对每个箴言的投票存储到组件状态的数组或对象中。 记住，更新存储在对象和数组等复杂数据结构中的状态，正确方法是复制状态。
 
 <!-- You can create a copy of an object like this: -->
 你可以像这样创建一个对象的副本:
@@ -1439,7 +1436,7 @@ copy[2] += 1
 ![](../../images/1/20a.png)
 
 <!-- If multiple anecdotes are tied for first place it is sufficient to just show one of them. -->
-如果有多个警句并列第一，那么只要展示其中一个就足够了。
+如果有多个箴言并列第一，那么只要展示其中一个就足够了。
 
 <!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
 这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统]( https://studies.cs.helsinki.fi/stats/courses/fullstackopen )。

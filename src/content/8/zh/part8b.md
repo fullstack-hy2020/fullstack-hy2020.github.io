@@ -473,7 +473,7 @@ Apollo 客户端将查询的响应保存到[缓存]( https://www.apollographql.c
 <!-- Let's implement functionality for adding new persons.  -->
 让我们实现添加新人的功能。
 
- In the previous chapter we hardcoded the parameters for mutations. Now we need a version of the addPerson mutation which uses [variables](https://graphql.org/learn/queries/#variables):
+ <!--In the previous chapter we hardcoded the parameters for mutations. Now we need a version of the addPerson mutation which uses [variables](https://graphql.org/learn/queries/#variables):-->
 在前一章中，我们硬编码了突变的参数。 现在我们需要一个 addPerson 变异的版本，它使用[ variables ]( https://graphql.org/learn/queries/#variables 变量) :
 
 ```js
@@ -786,7 +786,7 @@ const Notify = ({errorMessage}) => {
 }
 // highlight-end
 ```
-Now the user is informed about an error with a simple notification. 
+<!--Now the user is informed about an error with a simple notification. -->
 现在，用户通过一个简单的通知获知一个错误。
 
 ![](../../images/8/15.png)

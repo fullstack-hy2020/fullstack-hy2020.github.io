@@ -11,11 +11,11 @@ lang: zh
 <!-- Before we start delving into how you can use TypeScript together with React, we could first have a look at what we want to achieve. When everything works as it should, TypeScript will help us catch the following errors: -->
 在我们开始深入研究如何与 React 一起使用TypeScript之前，我们可以先看看我们想要实现什么。 当一切正常运行时，TypeScript 将帮助我们捕获如下错误:
 
-- Trying to pass an extra/unwanted prop to a component
+<!--Trying to pass an extra/unwanted prop to a component-->
 - 试图传递一个额外的/不需要的props给一个组件
-- Forgetting to pass a required prop to a component
+<!--Forgetting to pass a required prop to a component-->
 - 忘记把必需的props递给组件
-- Passing a prop of a wrong type to a component
+<!--Passing a prop of a wrong type to a component-->
 - 将错误类型的属性传递给组件
 
 
@@ -129,7 +129,7 @@ ReactDOM.render(element, document.getElementById("root"));
 <!-- With the help of TypeScript we don't need the <i>prop-types</i> package anymore to define prop types, because we can define the types with the help of TypeScript itself by using the _FunctionComponent_ type or it's shorter alias _FC_. -->
 在 TypeScript 的帮助下，我们不再需要<i>prop-types</i> 包来定义 prop 类型，因为我们可以通过使用 _FunctionComponent_ 类型或者更短的别名 FC，在 TypeScript 本身的帮助下定义类型。
 
- When using TypeScript with React components, the type annotations look a bit different than with other TypeScript code. We basically add a type for the component variable, instead of the function and it's props. _React.FunctionComponent_ is a so called [generic](https://www.typescriptlang.org/docs/handbook/generics.html) type, to which you can pass a type as a sort of argument, that it then uses in the final type.
+ <!--When using TypeScript with React components, the type annotations look a bit different than with other TypeScript code. We basically add a type for the component variable, instead of the function and it's props. _React.FunctionComponent_ is a so called [generic](https://www.typescriptlang.org/docs/handbook/generics.html) type, to which you can pass a type as a sort of argument, that it then uses in the final type.-->
 当使用 TypeScript 编写 React 组件时，类型注解看起来与其他 TypeScript 代码有点不同。 我们基本上为组件变量添加一个类型，而不是函数和它的props。 _React.FunctionComponent_ 是一种所谓的[泛型](https://www.typescriptlang.org/docs/handbook/generics.html)类型，您可以将类型作为参数传递给它，然后它在最后的类型中使用这个 。
 
 <!-- The type declaration for _React.FC_ and _React.FunctionComponent_ look like the following: -->
@@ -823,7 +823,7 @@ React.useEffect(() => {
 }, [dispatch]);
 ````
 
- **A word of warning!** Passing the type parameter for axios will not validate any data and is quite dangerous especially if you are using external APIs. You can create custom validation functions taking in the whole payload and returning the correct type or you can use type guard. Both are valid. There are also many libraries that provide validation through different kind of schemas eg. [io-ts](https://github.com/gcanti/io-ts). For simplicity we will continue trusting our own work and trust that we will get data of the correct form from the backend.
+ <!--**A word of warning!** Passing the type parameter for axios will not validate any data and is quite dangerous especially if you are using external APIs. You can create custom validation functions taking in the whole payload and returning the correct type or you can use type guard. Both are valid. There are also many libraries that provide validation through different kind of schemas eg. [io-ts](https://github.com/gcanti/io-ts). For simplicity we will continue trusting our own work and trust that we will get data of the correct form from the backend.-->
 **警告一句！ **为 axios 传递类型参数不会验证任何数据，并且非常危险，尤其是在使用外部 api 时。 您可以创建自定义验证函数，包含整个有效负载并返回正确的类型，或者您可以使用类型保护。 两者都是有效的。 还有许多库通过不同的模式提供验证，例如， [io-ts](https://github.com/gcanti/io-ts)，为了简单起见，我们将继续相信我们自己的工作，并相信我们将从后端获得正确形式的数据。
 
 <!-- As our app is quite small we will update the state by simply calling the <i>dispatch</i> function provided to us by <i>useStateValue</i> hook. The compiler helps to make sure that we dispatch actions according to our <i>Action</i> type with predefined type string and payload: -->

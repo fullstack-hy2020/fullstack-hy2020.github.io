@@ -346,9 +346,7 @@ return (
 <!-- Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-2), branch <i>part5-2</i>. -->
 当前的应用代码可以在[ Github ]( https://Github.com/fullstack-hy2020/part2-notes/tree/part5-2) ，branch<i>part5-2</i> 上找到。
 
-### Creating new notes
-
-创建新的 Note
+### 创建新的 Note（Creating new notes）
 
 <!-- The token returned with a successful login is saved to the application state <i>user</i> field <i>token</i>: -->
 成功登录后，token 被返回并存储到了 <i>user</i> 的 <i>token</i> 状态中
@@ -441,9 +439,9 @@ const handleLogin = async (event) => {
 <!-- And now adding new notes works again! -->
 现在添加新的 Note 又可以正常工作了
 
-### Saving the token to browsers local storage
+### 将 token 保存到浏览器的本地存储中（Saving the token to browsers local storage）
 
-将 token 保存到浏览器的本地存储中
+
 
 <!-- Our application has a flaw: When the page is rerendered, information of the user's login dissappears. This also slows down development. For example when we test creating new notes, we have to login again every single time. -->
 
@@ -521,11 +519,11 @@ _JSON.stringify_ 方法转换成 JSON。相应的，当从本地存储读取 JSO
 ![](../../images/5/3e.png)
 
 <!-- We still have to modify our application so that when we enter the page, the application checks if user details of a logged in user can already be found from the local storage. If they can, the details are saved to the state of the application and to <i>noteService</i>. -->
-我们仍然需要修改我们的应用，以便当我们进入页面时，应用会检查是否能在本地存储中找到登录用户的详细信息，如果可以九江信息保存到应用的状态中，以及<i>noteService</i>中
+我们仍然需要修改我们的应用，以便当我们进入页面时，应用会检查是否能在本地存储中找到登录用户的详细信息，如果可以将信息保存到应用的状态中，以及<i>noteService</i>中
 
 <!-- The right way to do this is with an [effect hook](https://reactjs.org/docs/hooks-effect.html): A mechanism we first encountered in [part 2](/en/part2/getting_data_from_server#effect-hooks), and used to fetch notes from the server to the frontend. -->
 
-正确的方式是用一个事件Hook[effect hook](https://reactjs.org/docs/hooks-effect.html)： 这种机制我们在第2章节 [part 2](/en/part2/getting_data_from_server#effect-hooks)分中见到过，当时是用来从服务器中获取所有 Note。
+正确的方式是用一个事件Hook [effect hook](https://reactjs.org/docs/hooks-effect.html)： 这种机制我们在第2章节 [part 2](/en/part2/getting_data_from_server#effect-hooks)分中见到过，当时是用来从服务器中获取所有 Note。
 
 <!-- We can have multiple effect hooks, so let's create a second one to handle the first loading of the page: -->
 我们可以有多个事件Hook，所以我们来创建一个来处理首次登录页面：

@@ -580,19 +580,19 @@ Normal (healthy weight)
 <!-- Write a function <i>calculateExercises</i> that calculates the average time of <i>daily exercise hours</i> and compares it to the <i>target amount</i> of daily hours and returns an object that includes the following values: -->
 编写一个函数<i>calculateExercises</i>，计算<i>每天运动 的平均小时</i>时间，并将其与每天运动小时的<i>目标数量</i> 进行比较，然后返回一个包含如下值的对象:
 
-  - the number of days
+<!--the number of days-->
 - 天数
-- the number of training days
+<!--the number of training days-->
 - 训练日数
-- the original target value
+<!--the original target value-->
 - 原始目标值
-- the calculated average time
+<!--the calculated average time-->
 - 计算出的平均时间
-- boolean value describing if the target was reached
+<!--boolean value describing if the target was reached-->
 - 布尔值，描述是否达到目标
-- a rating between the numbers 1-3 that tells how well the hours are met. You can decide on the metric on your own.
+<!--a rating between the numbers 1-3 that tells how well the hours are met. You can decide on the metric on your own.-->
 - 一个数字1-3之间的等级，区分满足小时数的程度。 你可以自己决定度量标准。
-- a text value explaining the rating
+<!--a text value explaining the rating-->
 - 解释评级的文字值
 
 <!-- The daily exercise hours are given to the function as an [array](https://www.typescriptlang.org/docs/handbook/basic-types.html#array) that contains the number of exercise hours for each day in the training period. Eg. a week with 3 hours of training at Monday, none at Tuesday, 2 hours at Wednesday, 4.5 hours at Thursday and so on would be represented by the following array: -->
@@ -867,7 +867,7 @@ npm install --save-dev @types/express
 <!-- Let's rename the <i>req</i> variable to <i>_req</i>. -->
 让我们将<i>req</i> 变量重命名为<i>\_req</i>。
 
- Finally we are ready to start the application. It seems to work fine:
+ <!--Finally we are ready to start the application. It seems to work fine:-->
 最后，我们准备启动应用。它似乎工作得很好:
 
 ![](../../images/9/11a.png)

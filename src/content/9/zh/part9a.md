@@ -26,12 +26,12 @@ TypeScript是由三个独立但相互满足的部分组成:
 
 ![](../../images/9/1.png)
 
-<i>The language</i> concists of syntax, keywords and type annotations. The syntax is similar to but not the same as JavaScript syntax. From the three parts of TypeScript programmers have the most direct contact with the language. 
+<!--<i>The language</i> concists of syntax, keywords and type annotations. The syntax is similar to but not the same as JavaScript syntax. From the three parts of TypeScript programmers have the most direct contact with the language.--> 
 语言包括<i>语法、关键字和类型注解</i>。 语法类似于 JavaScript 语法，但不太一样。 从TypeScript的三个部分来看，程序员与这门语言有着最直接的接触。
 
 
 
-<i>The compiler</i> is responsible for type information erasure (i.e. removing the typing information) and the code transformations. The code transformations enable TypeScript code to be transpiled into executable JavaScript. Everything related to the types is removed at compile-time, so TypeScript isn't actually genuine statically typed code. 
+<!--<i>The compiler</i> is responsible for type information erasure (i.e. removing the typing information) and the code transformations. The code transformations enable TypeScript code to be transpiled into executable JavaScript. Everything related to the types is removed at compile-time, so TypeScript isn't actually genuine statically typed code.--> 
 <i>编译器</i> 负责类型信息擦除(即删除类型信息)和代码转换。 代码转换使得 TypeScript 代码可以转换成可执行的 JavaScript。 所有与类型相关的代码都在编译时被删除，所以 TypeScript 实际上不是真正意义上的静态类型代码。
 
 <!-- Traditionally  <i>compiling</i>  means that code is transformed from a human readable format to a machine readable format. In TypeScript human readable source code is transformed into another human readable source code, so the correct term would actually be <i>transpiling</i>. However compiling has been the most commonly used term in this context, so we will continue to use it.  -->
@@ -41,7 +41,7 @@ TypeScript是由三个独立但相互满足的部分组成:
 编译器也会执行一个静态程序分析。 如果它找到了对应的理由，它可以发出警告或错误，并且可以将它设置为执行一些附加任务，例如将生成的代码合并到单个文件中。
 
 
-<i>The language service</i> collects type information from the source code. Development tools can use the type information for providing intellisense, type hints and possible refactoring alternatives.
+<!--<i>The language service</i> collects type information from the source code. Development tools can use the type information for providing intellisense, type hints and possible refactoring alternatives.-->
 <i>语言服务</i> 是指从源代码中收集类型信息。 开发工具可以使用类型信息来提供智能感知、类型提示和可能的重构替代方案。
 
 

@@ -38,7 +38,7 @@ export default App
 ```
 
 <!-- The component uses the <em>useState</em> function to initialize the piece of state stored in <em>notes</em> with the array of notes passed in the props: -->
-该组件使用 <em>useState</em> 函数来初始化状态，该状态保存用props传进来的note 数组，保存到notes中。
+该组件使用 <em>useState</em> 函数来初始化状态，该状态用props传进来的note 数组作为初始状态，保存到notes中。
 
 ```js
 const App = (props) => { 
@@ -97,7 +97,7 @@ const App = (props) => {
 ```
 
 <!-- We have added the _addNote_ function as an event handler to the form element that will be called when the form is submitted by clicking the submit button. -->
-我们已经将 _addNote _函数作为事件处理程序添加到表单元素中，该元素将在单击 submit 按钮提交表单时被调用。
+我们已经将 _addNote_ 函数作为事件处理函数添加到表单元素中，该元素将在单击 submit 按钮提交表单时被调用。
 
 <!-- We use the method discussed in [part 1](/en/part1/component_state_event_handlers#event-handling) for defining our event handler: -->
 我们使用 [第1章](/en/part1/component_state_event_handlers#event-handling) 中讨论的方法来定义事件处理 :
@@ -166,12 +166,12 @@ const App = (props) => {
 ```
 
 <!-- The placeholder text stored as the initial value of the <em>newNote</em> state appears in the <i>input</i> element, but the input text can't be edited. The console displays a warning that gives us a clue as to what might be wrong: -->
-现在，占位符存储了<em>newNote</em> 状态初始值，展示在input元素中，但input 不能编辑输入文本。 而且控制台出现了一个警告，告诉我们哪里可能出错了:
+现在，占位符存储了<em>newNote</em> 状态初始值，展示在input元素中，但input 不能编辑输入文本。 而且控制台出现了一个警告，告诉我们可能哪里出错了:
 
 ![](../../images/2/7e.png)
 
 <!-- Since we assigned a piece of the <i>App</i> component's state as the <i>value</i> attribute of the input element, the <i>App</i> component now [controls](https://reactjs.org/docs/forms.html#controlled-components) the behavior of the input element. -->
-由于我们将<i>App</i> 组件状态的一章节指定为 input 元素的<i>value</i> 属性，因此<i>App</i> 组件现在[控制]( https://reactjs.org/docs/forms.html#controlled-components ) 了input 元素的行为。
+由于我们将<i>App</i> 组件的一部分状态指定为 input 元素的<i>value</i> 属性，因此<i>App</i> 组件现在[控制]( https://reactjs.org/docs/forms.html#controlled-components ) 了input 元素的行为。
 
 <!-- In order to enable editing of the input element, we have to register an <i>event handler</i> that synchronizes the changes made to the input with the component's state: -->
 为了能够编辑 input 元素，我们必须注册一个<i>事件处理</i> 来同步对 input 所做的更改和组件的状态:
@@ -215,7 +215,7 @@ const App = (props) => {
 
 
 <!-- We have now registered an event handler to the <i>onChange</i> attribute of the form's <i>input</i> element: -->
-我们现在已经为表单的<i>input</i> 元素的<i>onChange</i> 属性注册了一个事件处理程序:
+我们现在已经为表单的<i>input</i> 元素的<i>onChange</i> 属性注册了一个事件处理函数:
 
 ```js
 <input
@@ -227,7 +227,7 @@ const App = (props) => {
 
 
 <!-- The event handler is called every time <i>a change occurs in the input element</i>. The event handler function receives the event object as its <em>event</em> parameter: -->
-每当 <i>输入元素发生变化时</i>，都会调用事件处理程序。 事件处理函数接收事件对象作为其  <em>event</em> 参数:
+每当 <i>输入元素发生变化时</i>，都会调用事件处理函数。 事件处理函数接收事件对象作为其  <em>event</em> 参数:
 
 ```js
 const handleNoteChange = (event) => {
@@ -240,18 +240,17 @@ const handleNoteChange = (event) => {
 事件对象的<em>target</em>  属性现在对应于受控的<i>input</i>元素， <em>event.target.value</em>引用该元素的输入值。
 
 <!-- Note that we did not need to call the _event.preventDefault()_ method like we did in the <i>onSubmit</i> event handler. This is because there is no default action that occurs on an input change, unlike on a form submission. -->
-注意，我们不需要像在<i>onSubmit</i> 事件处理程序中那样调用 event.preventDefault ()方法。 这是因为与表单提交不同，输入更改上没有什么默认操作。
+注意，我们不需要像在<i>onSubmit</i> 事件处理中那样调用 _event.preventDefault()_方法。 这是因为与表单提交不同，输入更改上没有什么默认操作。
 
 <!-- You can follow along in the console to see how the event handler is called: -->
-您可以在控制台中查看如何调用事件处理程序:
+您可以在控制台中查看是如何调用事件处理函数的:
 
 ![](../../images/2/8e.png)
 
 <!-- You did remember to install [React devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi), right? Good. You can directly view how the state changes from the React Devtools tab: -->
-你记得我们安装过[ React devtools ]( https://chrome.google.com/webstore/detail/React-developer-tools/fmkadmapgofadopljbjfkapdkoienihi ) ，对吧？ 很好。 你可以直接从 React Devtools 选项卡查看状态的变化:
+你记得我们安装过[ React devtools ]( https://chrome.google.com/webstore/detail/React-developer-tools/fmkadmapgofadopljbjfkapdkoienihi ) 吧？ 很好。 你可以直接从 React Devtools 选项卡查看状态的变化:
 
 ![](../../images/2/9ea.png)
-
 
 <!-- Now the <i>App</i> component's <em>newNote</em> state reflects the current value of the input, which means that we can complete the <em>addNote</em> function for creating new notes: -->
 现在<i>App</i> 组件的 <em>newNote</em>  状态反映了输入的当前值，这意味着我们可以完成 <em>addNote</em>  函数来创建新的便笺:
@@ -303,7 +302,7 @@ setNewNote('')
 让我们为我们的应用添加一些新的功能，允许我们只查看重要的便笺。
 
 <!-- Let's add a piece of state to the <i>App</i> component that keeps track of which notes should be displayed: -->
-让我们在<i>App</i> 组件中添加一个状态，用于跟踪应该显示哪些便笺:
+让我们在<i>App</i> 组件中添加一个状态，用于同步应该显示哪些便笺:
 
 ```js
 const App = (props) => {
@@ -374,21 +373,21 @@ const result = condition ? val1 : val2
 如果 <em>condition</em> 为真，则 <em>result</em>变量将设置为<em>val1</em>值。 如果 <em>condition</em>为 false，则<em>result</em> 变量将设置为 <em>val2</em>。
 
 <!-- If the value of <em>showAll</em> is false, the <em>notesToShow</em> variable will be assigned to a list that only contain notes that have the <em>important</em> property set to true. Filtering is done with the help of the array [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method: -->
-如果 <em>showAll</em> 的值为 false，那么将把 <em>notesToShow</em> 变量分配给一个只包含<em>important</em>属性设置为 true 的便笺的列表。 过滤是通过数组[ filter ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/filter )方法完成的:
+如果 <em>showAll</em> 的值为 false，那么将把 <em>notesToShow</em> 变量分配给一个只包含<em>important</em>属性为 true 的便笺的列表。 过滤是通过数组[ filter ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/filter )方法完成的:
 
 ```js
 notes.filter(note => note.important === true)
 ```
 
 <!-- The comparison operator is in fact redundant, since the value of <em>note.important</em> is either <i>true</i> or <i>false</i> which means that we can simply write: -->
-比较运算符实际上是多余的，因为 <em>note.important</em> 的值要么是<i>true</i>，要么是<i>false</i>，这意味着我们可以简单地写:
+比较运算符实际上是多余的，因为 <em>note.important</em> 的值要么是<i>true</i>，要么是<i>false</i>，这意味着我们可以简单地写为:
 
 ```js
 notes.filter(note => note.important)
 ```
 
 <!-- The reason we showed the comparison operator first was to emphasize an important detail: in JavaScript <em>val1 == val2</em> does not work as expected in all situations and it's safer to use <em>val1 === val2</em> exclusively in comparisons. You can read more about the topic [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness). -->
-我们首先展示比较操作符的原因是为了强调一个重要的细节: 在 JavaScript 中，<em>val1 == val2</em> 并不能在所有情况下都像预期的那样工作，在比较中专门使用<em>val1 === val2</em>更安全。 你可以在这里阅读更多关于这个主题的描述 [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness)。
+我们首先展示比较操作符的原因是为了强调一个重要的细节: 在 JavaScript 中，<em>val1 == val2</em> 并不能在所有情况下都像预期的那样工作，在比较中使用专门的<em>val1 === val2</em>更安全。 你可以在这里[here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness)阅读更多关于这个主题的描述 。
 
 <!-- You can test out the filtering functionality by changing the initial value of the <em>showAll</em> state. -->
 您可以通过更改<em>showAll</em>状态的初始值来测试过滤功能。
@@ -436,7 +435,7 @@ const App = (props) => {
 ```
 
 <!-- The displayed notes (all versus important) is controlled with a button. The event handler for the button is so simple that it has been defined directly in the attribute of the button element. The event handler switches the value of _showAll_ from true to false and vice versa: -->
-显示便笺的方式(显示所有 还是 显示重要)由一个按钮控制。 按钮的事件处理程序非常简单，已经在按钮元素的属性中直接定义了它。 事件处理程序将 showAll 的值从 true 转换为 false，反之亦然:
+显示便笺的方式(显示所有 还是 显示重要)由一个按钮控制。 按钮的事件处理程序非常简单，在按钮元素的属性中已经直接定义了。 事件处理程序将 showAll 的值从 true 转换为 false，反之亦然:
 
 ```js
 () => setShowAll(!showAll)
@@ -535,9 +534,9 @@ export default App
 注意:
 
 
-- you can use the person's name as value of the <i>key</i> property
+<!-- - you can use the person's name as value of the <i>key</i> property -->
 - 您可以使用该人的姓名作为<i>key</i> 属性的值
-- remember to prevent the default action of submitting HTML forms!
+<!-- - remember to prevent the default action of submitting HTML forms! -->
 - 切记阻止提交 HTML 表单的默认操作！
 
 <h4>2.7: The Phonebook 步骤2</h4>
@@ -579,7 +578,7 @@ newName + ' is already added to phonebook'
 
 <h4>2.8: The Phonebook 步骤3</h4>
 <!-- Expand your application by allowing users to add phone numbers to the phone book. You will need to add a second <i>input</i> element to the form (along with its own event handler): -->
-来扩展您的应用，允许用户将电话号码添加到电话簿。 您需要在表单中添加第二个<i>input</i> 元素(以及它自己的事件处理程序) :
+扩展您的应用，允许用户将电话号码添加到电话簿。 您需要在表单中添加第二个<i>input</i> 元素(以及它自己的事件处理程序) :
 
 ```js
 <form>

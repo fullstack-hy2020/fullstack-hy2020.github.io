@@ -11,7 +11,7 @@ lang: zh
 <!-- Before we move into the main topic of persisting data in a database, we will take a look at a few different ways of debugging Node applications. -->
 在讨论在数据库中保存数据的主题之前，我们将看一下调试 Node 应用的几种不同方法。
 
-### Debugging Node applications 调试Node应用
+### 调试Node应用（Debugging Node applications ）
 <!-- Debugging Node applications is slightly more difficult than debugging JavaScript running in your browser. Printing to the console is a tried and true method, and it's always worth doing. There are people who think that more sophisticated methods should be used instead, but I disagree. Even the world's elite open source developers [use](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) this [method](https://swizec.com/blog/javascript-debugging-slightly-beyond-console-log/swizec/6633). -->
 调试 Node 应用比调试在浏览器中运行的 JavaScript 稍微困难一些。 将数据打印到控制台是一种可靠的方法，而且总是值得一试。 有些人认为应该用更复杂的方法来代替，但我不同意。 即使是世界上最顶尖的开源开发者也会使用 [use](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) 这种方法[method](https://swizec.com/blog/javascript-debugging-slightly-beyond-console-log/swizec/6633)。
 
@@ -42,7 +42,7 @@ lang: zh
 
 #### Chrome dev tools Chrome开发工具
 <!-- Debugging is also possible with the Chrome developer console by starting your application with the command: -->
-通过 Chrome 开发者控制台，通过如下命令启动应用，也可以进行调试:
+利用 Chrome 开发者控制台，通过如下命令启动应用，也可以进行调试:
 
 ```bash
 node --inspect index.js
@@ -64,7 +64,7 @@ node --inspect index.js
 ![](../../images/3/39ea.png)
 
 
-#### Question everything 质疑一切
+####  质疑一切（Question everything）
 <!-- Debugging Full Stack applications may seem tricky at first. Soon our application will also have a database in addition to the frontend and backend, and there will be many potential areas for bugs in the application. -->
 调试全栈应用起初可能看起来很棘手。 不久，我们的应用除了前端和后端之外，还将有一个数据库，并且应用中将有许多潜在的 bug。
 
@@ -246,7 +246,7 @@ mongodb+srv://fullstack:<PASSWORD>@cluster0-ostce.mongodb.net/note-app?retryWrit
 ![](../../images/3/68.png)
 
 <!-- The data is now stored in the right database. The view also offers the <i>create database</i> functionality, that can be used to create new databases from the website. Creating the database like this is not necessary, since MongoDB Atlas automatically creates a new database when an application tries to connect to a database that does not exist yet. -->
-数据现在存储在正确的数据库中。 该视图还提供了<i>create database</i> 功能，可用于从网站创建新的数据库。 这样创建数据库是不必要的，因为当应用试图连接到一个尚不存在的数据库时，MongoDB Atlas 会自动创建一个新的数据库。
+数据现在存储在正确的数据库中。 该视图还提供了<i>create database</i> 功能，可用于从网站创建新的数据库。 这样创建数据库是没有必要的，因为当应用试图连接到一个尚不存在的数据库时，MongoDB Atlas 会自动创建一个新的数据库。
 
 ### Schema
 <!-- After establishing the connection to the database, we define the [schema](http://mongoosejs.com/docs/guide.html) for a note and the matching [model](http://mongoosejs.com/docs/models.html): -->
@@ -266,7 +266,7 @@ const Note = mongoose.model('Note', noteSchema)
 首先，我们定义了存储在 noteSchema 变量中的便笺的[模式]( http://mongoosejs.com/docs/guide.html )。 模式告诉 Mongoose 如何将 note 对象存储在数据库中。
 
 <!-- In the _Note_ model definition, the first <i>"Note"</i> parameter is the singular name of the model. The name of the collection will be the lowercased plural <i>notes</i>, because the [Mongoose convention](http://mongoosejs.com/docs/models.html) is to automatically name collections as the plural (e.g. <i>notes</i>) when the schema refers to them in the singular (e.g. <i>Note</i>). -->
-在 Note 模型定义中，第一个 <i>"Note"</i> <i>参数是模型的单数名。 集合的名称将是小写的复数  <i>notes</i>，因为[ Mongoose 约定]( http://mongoosejs.com/docs/models.html )是当模式以单数(例如<i>Note</i>)引用集合时自动将其命名为复数(例如<i>notes</i>)。
+在 Note 模型定义中，第一个 <i>"Note"</i>参数是模型的单数名。 集合的名称将是小写的复数  <i>notes</i>，因为[ Mongoose 约定]( http://mongoosejs.com/docs/models.html )是当模式以单数(例如<i>Note</i>)引用集合时自动将其命名为复数(例如<i>notes</i>)。
 
 <!-- Document databases like Mongo are <i>schemaless</i>, meaning that the database itself does not care about the structure of the data that is stored in the database. It is possible to store documents with completely different fields in the same collection. -->
 像 Mongo 这样的文档数据库是<i>schemaaless</i>，这意味着数据库本身并不关心存储在数据库中的数据的结构。 可以在同一集合中存储具有完全不同字段的文档。
@@ -287,7 +287,7 @@ const note = new Note({
 ```
 
 <!-- Models are so-called <i>constructor functions</i> that create new JavaScript objects based on the provided parameters. Since the objects are created with the model's constructor function, they have all the properties of the model, which include methods for saving the object to the database. -->
-模型是所谓的<i>constructor function</i>，它根据提供的参数创建新的 JavaScript 对象。 由于对象是使用模型的构造函数创建的，因此它们具有模型的所有属性，其中包括将对象保存到数据库的方法。
+模型是所谓的<i>构造函数constructor function</i>，它根据提供的参数创建新的 JavaScript 对象。 由于对象是使用模型的构造函数创建的，因此它们具有模型的所有属性，其中包括将对象保存到数据库的方法。
 
 <!-- Saving the object to the database happens with the appropriately named _save_ method, that can be provided with an event handler with the _then_ method: -->
 将对象保存到数据库是通过恰当命名的 save 方法实现的，可以通过 then 方法提供一个事件处理程序:
@@ -336,7 +336,7 @@ Note.find({}).then(result => {
 搜索条件遵循 Mongo 搜索查询[语法]( https://docs.mongodb.com/manual/reference/operator/ )。
 
 <!-- We could restrict our search to only include important notes like this: -->
-我们可以限制我们的搜索只包括下面这些重要的注意事项:
+我们可以限制我们的搜索，只包括重要的便笺，如下所示:
 
 ```js
 Note.find({ important: true }).then(result => {
@@ -417,7 +417,7 @@ mongoose.connection.close()
 ```
 
 <!-- In the code above the <i>mongoose.connection.close()</i> command will get executed immediately after the <i>Person.find</i> operation is started. This means that the database connection will be closed immediately, and the execution will never get to the point where <i>Person.find</i> operation finishes and the <i>callback</i> function gets called. -->
-在上面的代码中，<i>mongoose.connection.close()</i> <i>命令将在  <i>Person.find</i> 操作启动后立即执行。 这意味着数据库连接将立即关闭，执行将永远不会到达<i>Person.find</i> 操作结束并调用<i>回调</i> 函数的地方。
+在上面的代码中，<i>mongoose.connection.close()</i> 命令将在  <i>Person.find</i> 操作启动后立即执行。 这意味着数据库连接将立即关闭，执行将永远不会到达<i>Person.find</i> 操作结束并调用<i>回调</i> 函数的地方。
 
 <!-- The correct place for closing the database connection is at the end of the callback function: -->
 关闭数据库连接的正确位置是在回调函数的末尾:
@@ -432,7 +432,7 @@ Person
 ```
 
 <!-- **NB2** if you define a model with the name <i>Person</i>, mongoose will automatically name the associated collection as <i>people</i>. -->
-** 注意 ** 如果定义一个名为<i>Person</i> 的模型，mongoose 将自动将相关的集合命名为<i>people</i>。
+**注意** 如果定义一个名为<i>Person</i> 的模型，mongoose 将自动将相关的集合命名为<i>people</i>。
 
 </div>
 
@@ -440,7 +440,7 @@ Person
 <div class="content">
 
 
-### Backend connected to a database 后端连接到数据库
+###  后端连接到数据库（Backend connected to a database）
 <!-- Now we have enough knowledge to start using Mongo in our application. -->
 现在我们有足够的知识，可以在我们的应用中使用 Mongo了。
 
@@ -514,7 +514,7 @@ app.get('/api/notes', (request, response) => {
 <!-- Now the _notes_ variable is assigned to an array of objects returned by Mongo. When we call <em>notes.map(note => note.toJSON())</em> the result is a new array, where every item from the old one is mapped to a new object with the _toJSON_ method. -->
 现在，notes 变量被分配给 Mongo 返回的对象数组。 当我们调用<em>notes.map(note => note.toJSON())</em> 时，结果是一个新数组，其中旧数组中的每个项都用 toJSON 方法映射到一个新对象。
 
-### Database configuration into its own module 数据库配置到自己的模块
+###  数据库逻辑配置到单独的模块（Database configuration into its own module）
 <!-- Before we refactor the rest of the backend to use the database, let's extract the Mongoose specific code into its own module. -->
 在我们重构后端的其余部分来使用数据库之前，让我们将 Mongoose 特定的代码提取到它自己的模块中。
 
@@ -649,9 +649,9 @@ app.listen(PORT, () => {
 <!-- It's important that <i>dotenv</i> gets imported before the <i>note</i> model is imported. This ensures that the environment variables from the <i>.env</i> file are available globally before the code from the other modules are imported. -->
 在导入<i>note</i> 模型之前导入<i>dotenv</i> 非常重要。 这样可以确保在导入其他模块的代码之前，  <i>.env</i> 文件是全局可用的。
 
-### Using database in route handlers 在路由处理程序中使用数据库
+### 在路由处理程序中使用数据库（Using database in route handlers）
 <!-- Next, let's change the rest of the backend functionality to use the database. -->
-接下来，让我们更改后端功能的其余部分以使用数据库。
+接下来，让我们更改后端功能的其余部分来使用数据库。
 
 <!-- Creating a new note is accomplished like this: -->
 创建一个新的便笺是这样完成的:
@@ -697,7 +697,7 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-### Verifying frontend and backend integration 验证前端和后端集成
+### 验证前端和后端的集成（Verifying frontend and backend integration ）
 <!-- When the backend gets expanded, it's a good idea to test the backend first with **the browser, Postman or the VS Code REST client**. Next, let's try creating a new note after taking the database into use: -->
 当后端扩展时，最好先用 **浏览器，Postman 或者 VS Code REST 客户端 **来测试后端。 接下来，让我们尝试在使用数据库之后创建一个新的便笺:
 
@@ -724,10 +724,8 @@ app.get('/api/notes/:id', (request, response) => {
 下面的练习非常简单，但是如果前端与后端脱节了，那么查找和修复 bug 将会非常有趣。
 
 #### 3.13: Phonebook database, 步骤1
-3.13: 电话簿数据库，第一步
-
 <!-- Change the fetching of all phonebook entries so that the data is <i>fetched from the database</i>. -->
-更改所有电话簿条目的获取，以便从数据库 <i>fetched</i>数据。
+更改所有电话簿条目的获取，以便从数据库获取数据。
 
 <!-- Verify that the frontend works after the changes have been made. -->
 验证前端是否在更改之后仍能正常工作。
@@ -868,7 +866,7 @@ app.get('/api/notes/:id', (request, response) => {
 ![](../../images/3/15b.png)
 
 
-### Moving error handling into middleware 将错误处理移入中间件
+### 将错误处理移入中间件（Moving error handling into middleware ）
 <!-- We have written the code for the error handler among the rest of our code. This can be a reasonable solution at times, but there are cases where it is better to implement all error handling in a single place. This can be particularly useful if we later on want to report data related to errors to an external error tracking system like [Sentry](https://sentry.io/welcome/). -->
 我们在代码的其余部分中编写了错误处理程序的代码。 有时这可能是一个合理的解决方案，但在某些情况下，最好在单个位置实现所有错误处理。 如果我们以后想要将与错误相关的数据报告给外部的错误跟踪系统，比如[  [Sentry](https://sentry.io/welcome/)，那么这么做就特别有用。
 
@@ -912,7 +910,7 @@ app.use(errorHandler)
 <!-- The error handler checks if the error is a <i>CastError</i> exception, in which case we know that the error was caused by an invalid object id for Mongo. In this situation the error handler will send a response to the browser with the response object passed as a parameter. In all other error situations, the middleware passes the error forward to the default Express error handler.  -->
 错误处理程序检查错误是否是<i>CastError</i> 异常，在这种情况下，我们知道错误是由 Mongo 的无效对象 id 引起的。 在这种情况下，错误处理程序将向浏览器发送响应，并将response对象作为参数传递。 在所有其他错误情况下，中间件将错误转发给缺省的 Express 错误处理程序。
 
-### The order of middleware loading 中间件加载顺序
+### 中间件加载顺序（The order of middleware loading ）
 <!-- The execution order of middleware is the same as the order that they are loaded into express with the _app.use_ function. For this reason it is important to be careful when defining middleware. -->
 中间件的执行顺序与通过 app.use 函数加载到 express 中的顺序相同。 出于这个原因，在定义中间件时一定要小心。
 

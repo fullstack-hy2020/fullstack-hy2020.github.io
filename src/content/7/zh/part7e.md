@@ -409,7 +409,7 @@ Npm [ audit ]( https://docs.npmjs.com/cli/audit )命令可用于检查债务的�
 <!-- Running _npm audit_ on an exercise from part 4 of last year's course print a long list of complaints and suggested fixes.  -->
 对去年课程第四章节的练习进行 npm 审计时，打印一个长长的产生警告和建议修正列表。
 <!-- Below is a part of the report: -->
-下面是报告的一章节:
+下面是报告的一部分:
 
 ```js
 $ bloglist-backend npm audit
@@ -487,7 +487,7 @@ fixed 354 of 416 vulnerabilities in 20047 scanned packages
 
 
 
-62 threats remain because by default _audit fix_  does not update debendencies if their <i>major</i> version number has increased. 
+<!--62 threats remain because by default _audit fix_  does not update debendencies if their <i>major</i> version number has increased.--> 
 62个威胁仍然存在，因为缺省情况下，如果它们的<i>主</i> 版本号增加，审计修复程序不会更新借记。
 <!-- Updating these debendencies could lead to the whole application breaking down. The remaining threats are caused by the testing debendency jest. Our application has the version 23.6.0 when the secure version is 25.0.1.  -->
 更新这些延迟可能导致整个应用崩溃。 剩下的威胁是由试探性的jest造成的。 当安全版本为25.0.1时，我们的应用有23.6.0版本。
