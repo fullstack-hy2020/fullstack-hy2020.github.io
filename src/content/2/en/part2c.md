@@ -42,7 +42,7 @@ You can [install](https://github.com/typicode/json-server#install) JSON server g
 
 However, a global installation is not necessary, since we can run the <i>json-server</i> using the command _npx_:
 
-```js
+```bash
 npx json-server --port 3001 --watch db.json
 ```
 
@@ -182,7 +182,7 @@ At this point the <i>dependencies</i> part is of most interest to us as it defin
 
 We now want to use axios. Theoretically, we could define the library directly in the <i>package.json</i> file, but it is better to install it from the command line.
 
-```js
+```bash
 npm install axios --save
 ```
 
@@ -210,7 +210,7 @@ In addition to adding axios to the dependencies, the <em>npm install</em> comman
 
 Let's make another addition. Install <i>json-server</i> as a development dependency (only used during development) by executing the command:
 
-```js
+```bash
 npm install json-server --save-dev
 ```
 
@@ -231,7 +231,7 @@ and making a small addition to the <i>scripts</i> part of the <i>package.json</i
 
 We can now conveniently, without parameter definitions, start the json-server from the project root directory with the command:
 
-```js
+```bash
 npm run server
 ```
 
@@ -249,7 +249,7 @@ As we can see, the application is not able to bind itself to the [port](https://
 
 We used the command _npm install_ twice, but with slight differences:
 
-```js
+```bash
 npm install axios --save
 npm install json-server --save-dev
 ```
@@ -341,7 +341,7 @@ We can finally begin using the data fetched from the server.
 
 Let's do it "poorly" first by putting the <i>App</i> component representing the application inside the callback function. This is done by changing <i>index.js</i> to the following form:
 
-```js
+```jsx
 import ReactDOM from 'react-dom'
 import React from 'react'
 import App from './App'
@@ -373,13 +373,13 @@ As such, effect hooks are precisely the right tool to use when fetching data fro
 
 Let's remove the fetching of data from <i>index.js</i>. There is no longer a need to pass data as props to the <i>App</i> component. So <i>index.js</i> simplifies to:
 
-```js
+```jsx
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
 The <i>App</i> component changes as follows:
 
-```js
+```jsx
 import React, { useState, useEffect } from 'react' // highlight-line
 import axios from 'axios' // highlight-line
 import Note from './components/Note'
@@ -579,7 +579,7 @@ Start json-server on port 3001 and make sure that the server returns the list of
 
 If you receive the following error message:
 
-```js
+```
 events.js:182
       throw er; // Unhandled 'error' event
       ^

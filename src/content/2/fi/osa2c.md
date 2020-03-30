@@ -42,7 +42,7 @@ JSON server on mahdollista [asentaa](https://github.com/typicode/json-server#ins
 
 Globaali asennus ei kuitenkaan ole tarpeen, voimme käynnistää <i>json-serverin</i> komennon _npx_ avulla:
 
-```js
+```bash
 npx json-server --port=3001 --watch db.json
 ```
 
@@ -182,7 +182,7 @@ Tässä vaiheessa meitä kiinnostaa osa <i>dependencies</i>, joka määrittelee 
 
 Haluamme nyt käyttöömme axioksen. Voisimme määritellä kirjaston suoraan tiedostoon <i>package.json</i>, mutta on parempi asentaa se komentoriviltä
 
-```js
+```bash
 npm install axios --save
 ```
 
@@ -209,7 +209,7 @@ Sen lisäksi, että komento <em>npm install</em> lisäsi axiosin riippuvuuksien 
 
 Tehdään toinenkin pieni lisäys. Asennetaan myös <i>json-server</i> projektin <i>sovelluskehityksen aikaiseksi</i> riippuvuudeksi komennolla
 
-```js
+```bash
 npm install json-server --save-dev
 ```
 
@@ -230,7 +230,7 @@ ja tehdään tiedoston <i>package.json</i> osaan <i>scripts</i> pieni lisäys
 
 Nyt voimme käynnistää  json-serverin projektin hakemistosta mukavasti ilman tarvetta parametrien määrittelylle komennolla
 
-```js
+```bash
 npm run server
 ```
 
@@ -248,7 +248,7 @@ eli sovellus ei onnistu käynnistyessään kytkemään itseään [porttiin](http
 
 Käytimme komentoa _npm install_ kahteen kertaan hieman eri tavalla
 
-```js
+```bash
 npm install axios --save
 npm install json-server --save-dev
 ```
@@ -259,7 +259,9 @@ Parametrissa oli siis hienoinen ero. <i>axios</i> tallennettiin sovelluksen ajon
 
 Olemme nyt valmiina käyttämään axiosia. Jatkossa oletetaan että <i>json-server</i> on käynnissä portissa 3001. Lisäksi varsinainen React-sovellus tulee käynnistää erikseen, erilliseen komentorivi-ikkunaan komennolla:
 
-```npm start```
+```bash
+npm start
+```
 
 Kirjaston voi ottaa käyttöön samaan tapaan kuin esim. React otetaan käyttöön, eli sopivalla <em>import</em>-lauseella.
 
@@ -338,7 +340,7 @@ Voimme vihdoin siirtyä käyttämään sovelluksessamme palvelimelta haettavaa d
 
 Tehdään se aluksi "huonosti", eli lisätään sovellusta vastaavan komponentin <i>App</i> renderöinti takaisinkutsufunktion sisälle muuttamalla <i>index.js</i> seuraavaan muotoon:
 
-```js
+```jsx
 import ReactDOM from 'react-dom'
 import React from 'react'
 import App from './App'
@@ -370,12 +372,12 @@ Eli effect hookit ovat juuri oikea tapa hakea dataa palvelimelta.
 
 Poistetaan nyt datan hakeminen tiedostosta <i>index.js</i>. Komponentille <i>App</i> ei ole enää tarvetta välittää dataa propseina. Eli  <i>index.js</i> pelkistyy seuraavaan muotoon
 
-```js
+```jsx
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 Komponentti <i>App</i> muuttuu seuraavasti:
 
-```js
+```jsx
 import React, { useState, useEffect } from 'react' // highlight-line
 import axios from 'axios' // highlight-line
 import Note from './components/Note'
@@ -572,7 +574,7 @@ Käynnistä json-server porttiin 3001 ja varmista selaimella osoitteesta <http:/
 
 Jos saat virheilmoituksen:
 
-```js
+```
 events.js:182
       throw er; // Unhandled 'error' event
       ^

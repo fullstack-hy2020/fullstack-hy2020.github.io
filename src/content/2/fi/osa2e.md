@@ -42,7 +42,7 @@ Erilaisia selektoreja eli tapoja valita tyylien kohde on [lukuisia](https://deve
 
 Jos haluamme kohdistaa tyylejä esim. jokaiseen muistiinpanoon, voisimme nyt käyttää selektoria <i>li</i>, sillä muistiinpanot ovat <i>li</i>-tagien sisällä:
 
-```js
+```jsx
 const Note = ({ note, toggleImportance }) => {
   const label = note.important 
     ? 'make not important' 
@@ -79,7 +79,7 @@ Normaalissa HTML:ssä luokat määritellään elementtien attribuutin  <i>class<
 
 Reactissa tulee kuitenkin classin sijaan käyttää attribuuttia [className](https://reactjs.org/docs/dom-elements.html#classname), eli muutetaan komponenttia <i>Note</i> seuraavasti:
 
-```js
+```jsx
 const Note = ({ note, toggleImportance }) => {
   const label = note.important 
     ? 'make not important' 
@@ -112,7 +112,7 @@ Toteutimme äsken olemassaolemattoman muistiinpanon tärkeyden muutokseen liitty
 
 Komponentti on yksinkertainen:
 
-```js
+```jsx
 const Notification = ({ message }) => {
   if (message === null) {
     return null
@@ -130,7 +130,7 @@ Jos propsin <em>message</em> arvo on <em>null</em> ei renderöidä mitään, muu
 
 Lisätään komponentin <i>App</i> tilaan kenttä <i>error</i> virheviestiä varten, laitetaan kentälle heti jotain sisältöä, jotta pääsemme heti testaamaan komponenttia:
 
-```js
+```jsx
 const App = () => {
   const [notes, setNotes] = useState([]) 
   const [newNote, setNewNote] = useState('')
@@ -170,7 +170,7 @@ Lisätään sitten virheviestille sopiva tyyli:
 
 Nyt olemme valmiina lisäämään virheviestin logiikan. Muutetaan metodia <em>toggleImportanceOf</em> seuraavasti:
 
-```js
+```jsx
   const toggleImportanceOf = id => {
     const note = notes.find(n => n.id === id)
     const changedNote = { ...note, important: !note.important }
@@ -231,7 +231,7 @@ Jokainen CSS-sääntö on olion kenttä, joten ne erotetaan Javascript-syntaksin
 
 Voisimme nyt lisätä sovelluksemme "alapalkin", muodostavan komponentin <i>Footer</i>, ja määritellä sille inline-tyylit seuraavasti:
 
-```js
+```jsx
 const Footer = () => {
   const footerStyle = {
     color: 'green',

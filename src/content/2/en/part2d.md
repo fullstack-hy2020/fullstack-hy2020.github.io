@@ -117,7 +117,7 @@ Let's add a button to every note that can be used for toggling its importance.
 
 We make the following changes to the <i>Note</i> component:
 
-```js
+```jsx
 const Note = ({ note, toggleImportance }) => {
   const label = note.important
     ? 'make not important' : 'make important'
@@ -136,7 +136,7 @@ We add a button to the component and assign its event handler as the <em>toggleI
 
 The <i>App</i> component defines an initial version of the <em>toggleImportanceOf</em> event handler function and passes it to every <i>Note</i> component:
 
-```js
+```jsx
 const App = () => {
   const [notes, setNotes] = useState([]) 
   const [newNote, setNewNote] = useState('')

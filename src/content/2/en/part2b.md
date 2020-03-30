@@ -11,7 +11,7 @@ Let's continue expanding our application by allowing users to add new notes.
 
 In order to get our page to update when new notes are added it's best to store the notes in the <i>App</i> component's state. Let's import the [useState](https://reactjs.org/docs/hooks-state.html) function and use it to define a piece of state that gets initialized with the initial notes array passed in the props. 
 
-```js
+```jsx
 import React, { useState } from 'react' // highlight-line
 import Note from './components/Note'
 
@@ -60,7 +60,7 @@ Let's stick with the initial value passed in the props for the time being.
 
 Next, let's add an HTML [form](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms) to the component that will be used for adding new notes.
 
-```js
+```jsx
 const App = (props) => {
   const [notes, setNotes] = useState(props.notes)
 
@@ -121,7 +121,7 @@ There are many ways to accomplish this; the first method we will take a look at 
 
 Let's add a new piece of state called <em>newNote</em> for storing the user submitted input **and** let's set it as the <i>input</i> element's  <i>value</i> attribute:
 
-```js
+```jsx
 const App = (props) => {
   const [notes, setNotes] = useState(props.notes)
   // highlight-start
@@ -160,7 +160,7 @@ Since we assigned a piece of the <i>App</i> component's state as the <i>value</i
 
 In order to enable editing of the input element, we have to register an <i>event handler</i> that synchronizes the changes made to the input with the component's state:
 
-```js
+```jsx
 const App = (props) => {
   const [notes, setNotes] = useState(props.notes)
   const [newNote, setNewNote] = useState(
@@ -198,7 +198,7 @@ const App = (props) => {
 
 We have now registered an event handler to the <i>onChange</i> attribute of the form's <i>input</i> element:
 
-```js
+```jsx
 <input
   value={newNote}
   onChange={handleNoteChange}
@@ -279,7 +279,7 @@ const App = (props) => {
 
 Let's change the component so that it stores a list of all the notes to be displayed in the <em>notesToShow</em> variable. The items of the list depend on the state of the component:
 
-```js
+```jsx
 import React, { useState } from 'react'
 import Note from './components/Note'
 
@@ -348,7 +348,7 @@ Next let's add functionality that enables users to toggle the <em>showAll</em> s
 
 The relevant changes are shown below:
 
-```js
+```jsx
 import React, { useState } from 'react' 
 import Note from './components/Note'
 
@@ -412,7 +412,7 @@ Let us start with implementing the addition of a person to phonebook.
 
 You can use the code below as a starting point for the <i>App</i> component of your application:
 
-```js
+```jsx
 import React, { useState } from 'react'
 
 const App = () => {
@@ -495,7 +495,7 @@ Using template strings is the more idiomatic option and the sign of a true JavaS
 
 Expand your application by allowing users to add phone numbers to the phone book. You will need to add a second <i>input</i> element to the form (along with its own event handler):
 
-```js
+```jsx
 <form>
   <div>name: <input /></div>
   <div>number: <input /></div>
@@ -542,7 +542,7 @@ It is sufficient to extract <i>**three**</i> components from the application. Go
 
 The application's root component could look similar to this after the refactoring. The refactored root component below only renders titles and lets the extracted components take care of the rest.
 
-```js
+```jsx
 const App = () => {
   // ...
 

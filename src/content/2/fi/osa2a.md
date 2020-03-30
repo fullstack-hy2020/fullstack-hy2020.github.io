@@ -31,7 +31,7 @@ console.log('props value is', props)
 
 Jos yhdistät merkkijonoon olion, tuloksena on suhteellisen hyödytön tulostusmuoto
 
-```js
+```
 props value is [Object object]
 ```
 
@@ -56,7 +56,7 @@ VS Code -plugineina löytyy myös hyödyllisiä valmiiksi määriteltyjä snippe
 
 Tärkein kaikista snippeteistä on komennon <em>console.log()</em> nopeasti ruudulle tekevä snippet, esim. <em>clog</em>, jonka voi määritellä seuraavasti:
 
-```js
+```json
 {
   "console.log": {
     "prefix": "clog",
@@ -84,7 +84,7 @@ Tehdään nyt Reactilla [osan 0](/osa0) alussa käytettyä esimerkkisovelluksen 
 
 Aloitetaan seuraavasta:
 
-```js
+```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
 
@@ -134,19 +134,19 @@ Jokaiseen muistiinpanoon on merkitty tekstuaalisen sisällön ja aikaleiman lis�
 
 Koodin toiminta perustuu siihen, että taulukossa on tasan kolme muistiinpanoa, yksittäiset muistiinpanot renderöidään 'kovakoodatusti' viittaamalla suoraan taulukossa oleviin olioihin:
 
-```js
+```jsx
 <li>{note[1].content}</li>
 ```
 
 Tämä ei tietenkään ole järkevää. Ratkaisu voidaan yleistää generoimalla taulukon perusteella joukko React-elementtejä käyttäen [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)-funktiota:
 
-```js
+```jsx
 notes.map(note => <li>{note.content}</li>)
 ```
 
 nyt tuloksena on taulukko, jonka sisältö on joukko <i>li</i>-elementtejä
 
-```js
+```json
 [
   '<li>HTML is easy</li>',
   '<li>Browser can execute only Javascript</li>',
@@ -156,7 +156,7 @@ nyt tuloksena on taulukko, jonka sisältö on joukko <i>li</i>-elementtejä
 
 jotka voidaan sijoittaa <i>ul</i>-tagien sisälle:
 
-```js
+```jsx
 const App = (props) => {
   const { notes } = props
 
@@ -177,7 +177,7 @@ Koska <i>li</i>-tagit generoiva koodi on Javascriptia, tulee se sijoittaa JSX-te
 
 Parannetaan koodin luetteloa vielä jakamalla nuolifunktion määrittely useammalle riville:
 
-```js
+```jsx
 const App = (props) => {
   const { notes } = props
 
@@ -208,7 +208,7 @@ Kuten virheilmoituksen linkittämä [sivu](https://reactjs.org/docs/lists-and-ke
 
 Lisätään avaimet:
 
-```js
+```jsx
 const App = (props) => {
   const { notes } = props
 
@@ -299,7 +299,7 @@ tuloksena on taulukko, joka koostuu muistiinpanojen sisällöistä.
 
 Tämä on jo lähellä käyttämäämme React-koodia:
 
-```js
+```jsx
 notes.map(note =>
   <li key={note.id}>
     {note.content}
@@ -311,7 +311,7 @@ joka muodostaa jokaista muistiinpano-olioa vastaavan <i>li</i>-tagin, jonka sis�
 
 Koska metodin _map_ parametrina olevan funktion
 
-```js
+```jsx
 note => <li key={note.id}>{note.content}</li>
 ```
 
@@ -335,7 +335,7 @@ näin kutsuttaessa _i_ saa arvokseen sen paikan indeksin taulukossa, missä <i>N
 
 Eli eräs konsoliin tulostuvaa virheilmoitusta aiheuttamaton tapa määritellä rivien generointi olisi
 
-```js
+```jsx
 <ul>
   {notes.map((note, i) => 
     <li key={i}>
@@ -351,7 +351,7 @@ Tämä **ei kuitenkaan ole suositeltavaa** ja voi näennäisestä toimimisestaan
 
 Siistitään koodia hiukan. Koska olemme kiinnostuneita ainoastaan propsien kentästä _notes_, otetaan se vastaan suoraan [destrukturointia](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) hyödyntäen:
 
-```js
+```jsx
 const App = ({ notes }) => { //highlight-line
   return (
     <div>
@@ -372,7 +372,7 @@ Jos unohdit mitä destrukturointi tarkottaa ja miten se toimii, kertaa [täält�
 
 Erotetaan yksittäisen muistiinpanon esittäminen oman komponenttinsa <i>Note</i> vastuulle:
 
-```js
+```jsx
 // highlight-start
 const Note = ({ note }) => {
   return (
@@ -416,7 +416,7 @@ Pienissä sovelluksissa komponentit sijoitetaan yleensä <i>src</i>-hakemiston a
 
 Tehdään nyt sovellukseen hakemisto <i>components</i> ja sinne tiedosto <i>Note.js</i> jonka sisältö on seuraava:
 
-```js
+```jsx
 import React from 'react'
 
 const Note = ({ note }) => {
@@ -456,7 +456,7 @@ Piste alussa viittaa nykyiseen hakemistoon, eli kyseessä on nykyisen hakemiston
 
 Koska myös <i>App</i> on komponentti, eristetään sekin omaan moduuliinsa. Koska kyseessä on sovelluksen juurikomponentti, sijoitetaan se suoraan hakemistoon <i>src</i>. Tiedoston sisältö on seuraava:
 
-```js
+```jsx
 import React from 'react'
 import Note from './components/Note'
 
@@ -478,7 +478,7 @@ export default App // highlight-line
 
 Tiedoston <i>index.js</i> sisällöksi jää:
 
-```js
+```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'  // highlight-line
@@ -513,7 +513,7 @@ Reactissa räjähdys näyttää esim. seuraavalta
 
 Tilanteista pelastaa yleensä parhaiten <em>console.log</em>. Pala räjähdyksen aiheuttavaa koodia seuraavassa
 
-```js
+```jsx
 const Course = ({ course }) => (
   <div>
    <Header course={course} />
@@ -555,7 +555,7 @@ Konsoliin tulevan tulostuksen nähdäkseen on skrollattava pitkän punaisen virh
 
 Kun joku asia havaitaan toimivaksi, on aika logata syvemmältä. Jos komponentti on määritelty yksilausekkeista, eli returnittomana funktiota, on konsoliin tulostus haastavampaa:
 
-```js
+```jsx
 const Course = ({ course }) => (
   <div>
    <Header course={course} />
@@ -565,7 +565,7 @@ const Course = ({ course }) => (
 
 komponentti on syytä muuttaa pidemmän kaavan mukaan määritellyksi jotta tulostus päästään lisäämään:
 
-```js
+```jsx
 const Course = ({ course }) => { 
   console.log(course) // highlight-line
   return (
@@ -578,7 +578,7 @@ const Course = ({ course }) => {
 
 Erittäin usein ongelma on siitä että propsien odotetaan olevan eri muodossa tai eri nimisiä, kuin ne todellisuudessa ovat ja destrukturointi epäonnistuu. Ongelma alkaa useimmiten ratketa kun poistetaan destrukturointi ja katsotaan mitä <em>props</em> oikeasti pitää sisällään:
 
-```js
+```jsx
 const Course = (props) => { // highlight-line
   console.log(props)  // highlight-line
   const { course } = props
@@ -618,7 +618,7 @@ Viimeistellään nyt tehtävien 1.1-1.5 kurssin sisältöjä renderöivän ohjel
 
 Muutetaan komponenttia <i>App</i> seuraavasti:
 
-```js
+```jsx
 const App = () => {
   const course = {
     name: 'Half Stack application development',
@@ -717,7 +717,7 @@ const total =
 
 Laajennetaan sovellusta siten, että kursseja voi olla <i>mielivaltainen määrä</i>:
 
-```js
+```jsx
 const App = () => {
   const courses = [
     {

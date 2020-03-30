@@ -68,7 +68,7 @@ Koska POST-pyynnössä lähettämämme data oli Javascript-olio, osasi axios aut
 
 Uusi muistiinpano ei vielä renderöidy ruudulle, sillä emme aseta komponentille <i>App</i> uutta tilaa muistiinpanon luomisen yhteydessä. Viimeistellään sovellus vielä tältä osin:
 
-```js
+```jsx
 addNote = event => {
   event.preventDefault()
   const noteObject = {
@@ -110,7 +110,7 @@ Lisätään muistiinpanojen yhteyteen painike, millä niiden tärkeyttä voi muu
 
 Muistiinpanon määrittelevän komponentin muutos on seuraavat:
 
-```js
+```jsx
 const Note = ({ note, toggleImportance }) => {
   const label = note.important
     ? 'make not important' : 'make important'
@@ -128,7 +128,7 @@ Komponentissa on nappi, jolle on rekisteröity klikkaustapahtuman käsittelijäk
 
 Komponentti <i>App</i> määrittelee alustavan version tapahtumankäsittelijästä <em>toggleImportanceOf</em> ja välittää sen jokaiselle <i>Note</i>-komponentille:
 
-```js
+```jsx
 const App = () => {
   const [notes, setNotes] = useState([]) 
   const [newNote, setNewNote] = useState('')

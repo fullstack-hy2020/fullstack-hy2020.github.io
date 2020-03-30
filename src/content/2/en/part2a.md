@@ -31,7 +31,7 @@ console.log('props value is', props)
 
 If you concatenate an object with a string and log it to the console (like in our first example), the result will be pretty useless: 
 
-```js
+```
 props value is [Object object]
 ```
 
@@ -46,7 +46,7 @@ Instructions for creating snippets can be found [here](https://code.visualstudio
 Useful, ready-made snippets can also be found as VS Code plugins, for example [here](https://marketplace.visualstudio.com/items?itemName=xabikos.ReactSnippets).
 
 The most important snippet is the one for the <em>console.log()</em> command, for example <em>clog</em>. This can be created like so: 
-```js
+```json
 {
   "console.log": {
     "prefix": "clog",
@@ -81,7 +81,7 @@ We will now do the 'frontend', or the browser-side application logic, in React f
 
 Let's start with the following:
 
-```js
+```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
 
@@ -133,19 +133,19 @@ Every note contains its textual content and a timestamp as well as a _boolean_ v
 The code functions due to the fact that there are exactly three notes in the array. 
 A single note is rendered by accessing the objects in the array by referring to a hard-coded index number:
 
-```js
+```jsx
 <li>{note[1].content}</li>
 ```
 
 This is, of course, not practical. The solution can be made general by generating React-elements from the array objects using the [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) function.
 
-```js
+```jsx
 notes.map(note => <li>{note.content}</li>)
 ```
 
 The result is an array of <i>li</i> elements.
 
-```js
+```json
 [
   '<li>HTML is easy</li>',
   '<li>Browser can execute only Javascript</li>',
@@ -156,7 +156,7 @@ The result is an array of <i>li</i> elements.
 
 Which can then be put inside <i>ul</i> tags:
 
-```js
+```jsx
 const App = (props) => {
   const { notes } = props
 
@@ -178,7 +178,7 @@ Because the code generating the <i>li</i> tags is JavaScript, it must be wrapped
 <!-- Parannetaan koodin luetteloa vielä jakamalla nuolifunktion määrittely useammalle riville: -->
 We will also make the code more readable by separating the arrow function's declaration across multiple lines:
 
-```js
+```jsx
 const App = (props) => {
   const { notes } = props
 
@@ -209,7 +209,7 @@ As the linked [page](https://reactjs.org/docs/lists-and-keys.html#keys) in the e
 
 Let's add the keys:
 
-```js
+```jsx
 const App = (props) => {
   const { notes } = props
 
@@ -303,7 +303,7 @@ results in an array containing the contents of the notes.
 
 This is already pretty close to the React code we used:
 
-```js
+```jsx
 notes.map(note =>
   <li key={note.id}>{note.content}</li>
 )
@@ -313,7 +313,7 @@ which generates a <i>li</i> tag containing the contents of the note from each no
 
 Because the function parameter of the _map_ method
 
-```js
+```jsx
 note => <li key={note.id}>{note.content}</li>
 ```
 is used to create view elements, the value of the variable must be rendered inside of curly braces. Try to see what happens if the braces are removed. 
@@ -332,7 +332,7 @@ When called like this, _i_ is assigned the value of the index of the position in
 
 As such, one way to define the row generation without getting errors is:
 
-```js
+```jsx
 <ul>
   {notes.map((note, i) => 
     <li key={i}>
@@ -349,7 +349,7 @@ Read more [from here](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti
 
 Let's tidy the code up a bit. We are only interested in the field _notes_ of the props, so let's retrieve that directly using [destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment): 
 
-```js
+```jsx
 const App = ({ notes }) => { //highlight-line
   return (
     <div>
@@ -371,7 +371,7 @@ If you have forgotten what destructuring means and how it works, review [this](/
 
 We'll separate displaying a single note into its own component <i>Note</i>: 
 
-```js
+```jsx
 // highlight-start
 const Note = ({ note }) => {
   return (
@@ -417,7 +417,7 @@ In smaller applications, components are usually placed in a directory called <i>
 Now we'll create a directory called <i>components</i> for our application and place a file named <i>Note.js</i> inside. 
 The contents of the Note.js file are as follows: 
 
-```js
+```jsx
 import React from 'react'
 
 const Note = ({ note }) => {
@@ -457,7 +457,7 @@ The period in the beginning refers to the current directory, so the module's loc
 
 <i>App</i> is a component as well, so let's declare it in its own module as well. Since it is the root component of the application, we'll place it in the <i>src</i> directory. The contents of the file are as follows: 
 
-```js
+```jsx
 import React from 'react'
 import Note from './components/Note'
 
@@ -479,7 +479,7 @@ export default App // highlight-line
 
 What's left in the <i>index.js</i> file is: 
 
-```js
+```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'  // highlight-line
@@ -519,7 +519,7 @@ A "React explosion" can for example look like this:
 In these situations your best way out is the <em>console.log</em>.
 The piece of code causing the explosion is this: 
 
-```js
+```jsx
 const Course = ({ course }) => (
   <div>
    <Header course={course} />
@@ -542,7 +542,7 @@ const App = () => {
 
 We'll hone in on the reason for the breakdown by adding <em>console.log</em> commands to the code. Because the first thing to be rendered is the <i>App</i> component, it's worth putting the first console.log there: 
 
-```js
+```jsx
 const App = () => {
   const course = {
     // ...
@@ -562,7 +562,7 @@ To see the printing on the console, we must scroll up over the long red wall of 
 
 When one thing is found to be working, it's time to log deeper. If the component has been declared as a single statement, or a function without a return, it makes printing to the console harder. 
 
-```js
+```jsx
 const Course = ({ course }) => (
   <div>
    <Header course={course} />
@@ -572,7 +572,7 @@ const Course = ({ course }) => (
 
 The component should be changed to its longer form, in order for us to add the printing: 
 
-```js
+```jsx
 const Course = ({ course }) => { 
   console.log(course) // highlight-line
   return (
@@ -585,7 +585,7 @@ const Course = ({ course }) => {
 
 Quite often the root of the problem is that the props are expected to be of a different type, or called with a different name than they actually are, and destructuring fails as a result. The problem often begins to solve itself when destructuring is removed and we see what the <em>props</em> actually contains. 
 
-```js
+```jsx
 const Course = (props) => { // highlight-line
   console.log(props)  // highlight-line
   const { course } = props
@@ -630,7 +630,7 @@ It might not be good to copy a project or to put the  <i>node\_modules</i> direc
 
 Let's change the <i>App</i> component like so: 
 
-```js
+```jsx
 const App = () => {
   const course = {
     id: 1,
@@ -724,7 +724,7 @@ const total = parts.reduce( (s, p) => {
 
 Let's extend our application to allow for an <i>arbitrary number</i> of courses:
 
-```js
+```jsx
 const App = () => {
   const courses = [
     {

@@ -11,7 +11,7 @@ Jatketaan sovelluksen laajentamista siten, että se mahdollistaa uusien muistiin
 
 Jotta saisimme sivun päivittymään uusien muistiinpanojen lisäyksen yhteydessä, on parasta sijoittaa muistiinpanot komponentin <i>App</i> tilaan. Eli importataan funktio [useState](https://reactjs.org/docs/hooks-state.html) ja määritellään sen avulla komponentille tila, joka saa aluksi arvokseen propsina välitettävän muistiinpanot alustavan taulukon: 
 
-```js
+```jsx
 import React, { useState } from 'react' // highlight-line
 import Note from './components/Note'
 
@@ -57,7 +57,7 @@ Jätetään kuitenkin toistaiseksi tilalle alkuarvon asettava määrittely voima
 
 Lisätään seuraavaksi komponenttiin lomake eli HTML [form](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms) uuden muistiinpanon lisäämistä varten:
 
-```js
+```jsx
 const App = (props) => {
   const [notes, setNotes] = useState(props.notes)
 
@@ -114,7 +114,7 @@ Tapoja on useampia, tutustumme ensin ns. [kontrolloituina komponentteina](https:
 
 Lisätään komponentille <i>App</i> tila <em>newNote</em> lomakkeen syötettä varten **ja** määritellään se <i>input</i>-komponentin attribuutin <i>value</i> arvoksi:
 
-```js
+```jsx
 const App = (props) => {
   const [notes, setNotes] = useState(props.notes)
   // highlight-start
@@ -153,7 +153,7 @@ Koska määrittelimme syötekomponentille <i>value</i>-attribuutiksi komponentin
 
 Jotta kontrolloidun syötekomponentin editoiminen olisi mahdollista, täytyy sille rekisteröidä <i>tapahtumankäsittelijä</i>, joka synkronoi syötekenttään tehdyt muutokset komponentin <i>App</i> tilaan:
 
-```js
+```jsx
 const App = (props) => {
   const [notes, setNotes] = useState(props.notes)
   const [newNote, setNewNote] = useState(
@@ -191,7 +191,7 @@ const App = (props) => {
 
 Lomakkeen <i>input</i>-komponentille on nyt rekisteröity tapahtumankäsittelijä tilanteeseen <i>onChange</i>:
 
-```js
+```jsx
 <input
   value={newNote}
   onChange={handleNoteChange}
@@ -272,7 +272,7 @@ const App = (props) => {
 
 Muutetaan komponenttia siten, että se tallettaa muuttujaan <em>notesToShow</em> näytettävien muistiinpanojen listan riippuen siitä tuleeko näyttää kaikki vai vain tärkeät:
 
-```js
+```jsx
 import React, { useState } from 'react'
 import Note from './components/Note'
 
@@ -341,7 +341,7 @@ Lisätään sitten toiminnallisuus, joka mahdollistaa <em>showAll</em>:in tilan 
 
 Oleelliset muutokset ovat seuraavassa:
 
-```js
+```jsx
 import React, { useState } from 'react' 
 import Note from './components/Note'
 
@@ -409,7 +409,7 @@ Toteutetaan tässä tehtävässä henkilön lisäys puhelinluetteloon.
 
 Voit ottaa sovelluksesi komponentin <i>App</i> pohjaksi seuraavan:
 
-```js
+```jsx
 import React, { useState } from 'react'
 
 const App = () => {
@@ -492,7 +492,7 @@ Template stringin käyttö antaa kuitenkin ammattimaisemman vaikutelman.
 
 Lisää sovellukseen mahdollisuus antaa henkilöille puhelinnumero. Tarvitset siis lomakkeeseen myös toisen <i>input</i>-elementin (ja sille oman muutoksenkäsittelijän):
 
-```js
+```jsx
 <form>
   <div>name: <input /></div>
   <div>number: <input /></div>
@@ -514,7 +514,7 @@ Rajausehdon syöttämisen voi hoitaa omana lomakkeeseen kuulumattomana <i>input<
 
 **Huom:** Kun toteutat jotain uutta toiminnallisuutta, on usein hyötyä 'kovakoodata' sovellukseen jotain sisältöä, esim.
 
-```js
+```jsx
 const App = () => {
   const [persons, setPersons] = useState([
     { name: 'Arto Hellas', number: '040-123456' },
@@ -537,7 +537,7 @@ Riittää että erotat sovelluksesta <i>**kolme**</i> komponenttia. Hyviä kandi
 
 Sovelluksen juurikomponentti voi näyttää refaktoroinnin jälkeen suunnilleen seuraavalta, eli se ei itse renderöi suoraan oikeastaan mitään muita kuin otsikkoja:
 
-```js
+```jsx
 const App = () => {
   // ...
 

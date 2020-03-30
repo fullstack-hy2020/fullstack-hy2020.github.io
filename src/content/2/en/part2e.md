@@ -52,7 +52,7 @@ There are many ways of matching elements by using [different types of CSS select
 
 If we wanted to target, let's say, each one of the notes with our styles, we could use the selector <i>li</i>, as all of the notes are wrapped inside <i>li</i> tags:
 
-```js
+```jsx
 const Note = ({ note, toggleImportance }) => {
   const label = note.important 
     ? 'make not important' 
@@ -94,7 +94,7 @@ In regular HTML, classes are defined as the value of the <i>class</i> attribute:
 
 In React we have to use the [className](https://reactjs.org/docs/dom-elements.html#classname) attribute instead of the class attribute. With this in mind, let's make the following changes to our <i>Note</i> component:
 
-```js
+```jsx
 const Note = ({ note, toggleImportance }) => {
   const label = note.important 
     ? 'make not important' 
@@ -132,7 +132,7 @@ We previously implemented the error message that was displayed when the user tri
 
 The component is quite simple:
 
-```js
+```jsx
 const Notification = ({ message }) => {
   if (message === null) {
     return null
@@ -153,7 +153,7 @@ If the value of the <em>message</em> prop is <em>null</em>, then nothing is rend
 
 Let's add a new piece of state called <i>errorMessage</i> to the <i>App</i> component. Let's initialize it with some error message so that we can immediately test our component:
 
-```js
+```jsx
 const App = () => {
   const [notes, setNotes] = useState([]) 
   const [newNote, setNewNote] = useState('')
@@ -194,7 +194,7 @@ Then let's add a style rule that suits an error message:
 
 Now we are ready to add the logic for displaying the error message. Let's change the <em>toggleImportanceOf</em> function in the following way:
 
-```js
+```jsx
   const toggleImportanceOf = id => {
     const note = notes.find(n => n.id === id)
     const changedNote = { ...note, important: !note.important }
@@ -265,7 +265,7 @@ Every CSS property is defined as a separate property of the JavaScript object. N
 
 Next, we could add a "bottom block" to our application by creating a <i>Footer</i> component and define the following inline styles for it:
 
-```js
+```jsx
 const Footer = () => {
   const footerStyle = {
     color: 'green',
