@@ -46,7 +46,7 @@ Let's implement filtering for the notes that are displayed to the user. The user
 
 Let's start with a very simple and straightforward implementation:
 
-```js
+```jsx
 import React from 'react'
 import NewNote from './components/NewNote'
 import Notes from './components/Notes'
@@ -149,7 +149,7 @@ We can create the actual reducer for our application by combining the two existi
 
 Let's define the combined reducer in the <i>index.js</i> file:
 
-```js
+```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, combineReducers } from 'redux' // highlight-line
@@ -245,7 +245,7 @@ Is there a bug in our code? No. The combined reducer works in such a way that ev
 
 Let's finish the application so that it uses the combined reducer. We start by changing the rendering of the application and hooking up the store to the application in the <i>index.js</i> file:
 
-```js
+```jsx
 ReactDOM.render(
   <Provider store={store}>
     <App />
@@ -262,7 +262,7 @@ Next, let's fix a bug that is caused by the code expecting the application store
 <!-- Korjaus on helppo. Koska muistiinpanot ovat nyt storen kentässä <i>notes</i>, riittää pieni muutos selektorifunktioon: -->
 It's an easy fix. Because the notes are in the store's field <i>notes</i>, we only have to make a little change to the selector function:
 
-```js
+```jsx
 const Notes = () => {
   const dispatch = useDispatch()
   const notes = useSelector(state => state.notes) // highlight-line
@@ -300,7 +300,7 @@ const notes = useSelector(state => state.notes)
 
 Let's extract the visibility filter into its own <i>src/components/VisibilityFilter.js</i> component:
 
-```js
+```jsx
 import React from 'react'
 import { filterChange } from '../reducers/filterReducer'
 import { useDispatch } from 'react-redux'
@@ -337,7 +337,7 @@ export default VisibilityFilter
 
 With the new component <i>App</i> can be simplified as follows:
 
-```js
+```jsx
 import React from 'react'
 import Notes from './components/Notes'
 import NewNote from './components/NewNote'
@@ -360,7 +360,7 @@ The implementation is rather straightforward. Clicking the different radio butto
 
 Let's change the <i>Notes</i> component to incorporate the filter:
 
-```js
+```jsx
 const Notes = () => {
   const dispatch = useDispatch()
   // highlight-start
@@ -418,13 +418,13 @@ There is an extension [Redux DevTools](https://chrome.google.com/webstore/detail
 
 When debugging, in addition to the browser extension we also have the software library [redux-devtools-extension](https://www.npmjs.com/package/redux-devtools-extension). Let's install it using the command:
 
-```js
+```bash
 npm install --save redux-devtools-extension
 ```
 
 We'll have to slightly change the definition of the store to get the library up and running:
 
-```js
+```jsx
 // ...
 import { createStore, combineReducers } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension' // highlight-line
@@ -481,7 +481,7 @@ Start using React dev tools. Move defining the Redux-store into its own file <i>
 
 The application has a ready-made body for the <i>Notification</i> component:
 
-```js
+```jsx
 import React from 'react'
 
 const Notification = () => {
@@ -503,7 +503,7 @@ export default Notification
 
 Extend the component so that it renders the message stored in the redux store, making the component to take the form:
 
-```js
+```jsx
 import React from 'react'
 import { useSelector } from 'react-redux' // highlight-line
 
@@ -549,7 +549,7 @@ Store the state of the filter in the redux store. It is recommended to create a 
 
 Create a new <i>Filter</i> component for displaying the filter. You can use the following code as a template for the component:
 
-```js
+```jsx
 import React from 'react'
 
 const Filter = () => {

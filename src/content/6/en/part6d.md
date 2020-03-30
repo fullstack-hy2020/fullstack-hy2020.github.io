@@ -21,7 +21,7 @@ In new applications you should absolutely use the hook-api, but knowing how to u
 Let's modify the <i>Notes</i> component so that instead of using the hook-api (the _useDispatch_ and  _useSelector_ functions ) it uses the _connect_-function. 
 We have to modify the following parts of the component:
 
-````js
+````jsx
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux' // highlight-line
 import { toggleImportanceOf } from '../reducers/noteReducer'
@@ -81,7 +81,7 @@ The component needs the list of notes and the value of the filter from the Redux
 If we define:
 
 
-```js
+```jsx
 const Notes = (props) => { // highlight-line
   const dispatch = useDispatch()
 
@@ -137,7 +137,7 @@ The <i>Notes</i> component has "direct access" via <i>props.notes</i> and <i>pro
 The _NoteList_ component actually does not need the information about which filter is selected, so we can move the filtering logic elsewhere.
 We just have to give it correctly filtered notes in the _notes_ prop:
 
-```js
+```jsx
 const Notes = (props) => { // highlight-line
   const dispatch = useDispatch()
 
@@ -181,7 +181,7 @@ export default ConnectedNotes
 
 Now we have gotten rid of _useSelector_, but <i>Notes</i> still uses the _useDispatch_ hook and the _dispatch_ function returning it:
 
-```js
+```jsx
 const Notes = (props) => {
   const dispatch = useDispatch() // highlight-line
 
@@ -228,7 +228,7 @@ export default ConnectedNotes
 
 Now the component can directly dispatch the action defined by the _toggleImportanceOf_ action creator by calling the function through its props:
 
-```js
+```jsx
 const Notes = (props) => {
   return(
     <ul>
@@ -268,7 +268,7 @@ In addition to accessing the store's state via <i>props.notes</i> and <i>props.f
 
 The code for the newly refactored <i>Notes</i> component looks like this:
 
-```js
+```jsx
 import React from 'react'
 import { connect } from 'react-redux' 
 import { toggleImportanceOf } from '../reducers/noteReducer'
@@ -315,7 +315,7 @@ export default connect(
 
 Let's also use _connect_ to create new notes:
 
-```js
+```jsx
 import React from 'react'
 import { connect } from 'react-redux' 
 import { createNote } from '../reducers/noteReducer'
@@ -354,7 +354,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 Let's direct our attention to one interesting detail in the <i>NewNote</i> component:
 
-```js
+```jsx
 import React from 'react'
 import { connect } from 'react-redux' 
 import { createNote } from '../reducers/noteReducer'  // highlight-line
@@ -393,6 +393,7 @@ Due to the way that the action creator is imported:
 ```js
 import { createNote } from './../reducers/noteReducer'
 ```
+
 The action creator can also be referenced directly by calling _createNote_. You should not do this, since this is the unmodified version of the action creator that does not contain the added automatic dispatch.
 
 If we print the functions to the console from the code (we have not yet looked at this useful debugging trick): 

@@ -34,7 +34,7 @@ The initial state of the database is stored into the file <i>db.json</i>, which 
 
 We'll install json-server for the project...
 
-```js
+```bash
 npm install json-server --save
 ```
 
@@ -42,7 +42,7 @@ npm install json-server --save
 
 and add the following line to the <i>scripts</i> part of the file <i>package.json</i>
 
-```js
+```json
 "scripts": {
   "server": "json-server -p3001 --watch db.json",
   // ...
@@ -68,7 +68,7 @@ export default { getAll }
 
 We'll add axios to the project
 
-```js
+```bash
 npm install axios --save
 ```
 
@@ -150,7 +150,7 @@ noteService.getAll().then(notes =>
 
 We do, however, decide to move the initialization of the notes into the <i>App</i> component, and, as usual when fetching data from a server, we'll use the <i>effect hook</i>. 
 
-```js
+```jsx
 import React, {useEffect} from 'react' // highlight-line
 import NewNote from './components/NowNote'
 import Notes from './components/Notes'
@@ -254,7 +254,7 @@ export default {
 
 The method _addNote_ of the component <i>NoteForm</i> changes slightly:
 
-```js
+```jsx
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { createNote } from '../reducers/noteReducer'
@@ -354,13 +354,13 @@ Both components would only use the function provided to them as a prop without c
 
 Now let's install the [redux-thunk](https://github.com/gaearon/redux-thunk)-library, which enables us to create <i>asynchronous actions</i>. Installation is done with the command:
 
-```js
+```bash
 npm install --save redux-thunk
 ```
 
 The redux-thunk-library is a so-called <i>redux-middleware</i>, which must be initialized along with the initialization of the store. While we're here, let's extract the definition of the store into its own file <i>src/store.js</i>:
 
-```js
+```jsx
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
@@ -385,7 +385,7 @@ export default store
 
 After the changes the file <i>src/index.js</i> looks like this
 
-```js
+```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux' 
@@ -406,7 +406,7 @@ Thanks to redux-thunk, it is possible to define <i>action creators</i> so that t
 
 Now we can define the action creator, <i>initializeNotes</i>, that initializes the state of the notes as follows:
 
-```js
+```jsx
 export const initializeNotes = () => {
   return async dispatch => {
     const notes = await noteService.getAll()
@@ -422,7 +422,7 @@ In the inner function, meaning the <i>asynchronous action</i>, the operation fir
 
 The component <i>App</i> can now be defined as follows:
 
-```js
+```jsx
 const App = () => {
   const dispatch = useDispatch()
 
@@ -446,7 +446,7 @@ The solution is elegant. The initialization logic for the notes has been complet
 
 The action creator _createNew_, which adds a new note looks like this
 
-```js
+```jsx
 export const createNote = content => {
   return async dispatch => {
     const newNote = await noteService.createNew(content)
@@ -462,7 +462,7 @@ The principle here is the same: first an asynchronous operation is executed, aft
 
 The component <i>NewNote</i> changes as follows:
 
-```js
+```jsx
 const NewNote = () => {
   const dispatch = useDispatch()
   

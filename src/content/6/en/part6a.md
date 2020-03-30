@@ -203,7 +203,7 @@ would cause the following to be printed
 
 The code of our counter application is the following. All of the code has been written in the same file, so <i>store</i> is straight available for the React-code. We will get to know better ways to structure React/Redux-code later.
 
-```js
+```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore } from 'redux'
@@ -271,7 +271,7 @@ Our aim is to modify our note application to use Redux for state management. How
 
 The first version of our application is the following
 
-```js
+```jsx
 const noteReducer = (state = [], action) => {
   if (action.type === 'NEW_NOTE') {
     state.push(action.data)
@@ -393,7 +393,7 @@ Let's start by creating a test for handling the action <i>NEW\_NOTE</i>.
 To make testing easier, we'll first move the reducer's code to its own module to file <i>src/reducers/noteReducer.js</i>. We'll also add the library [deep-freeze](https://github.com/substack/deep-freeze), which can be used to ensure that the reducer has been correctly defined as a immutable function. 
 Let's install the library as a development dependency
 
-```js
+```bash
 npm install --save-dev deep-freeze
 ```
 
@@ -732,7 +732,7 @@ Now implement the actual functionality of the application.
 
 Let's add the functionality for adding new notes and changing their importance: 
 
-```js
+```jsx
 const generateId = () =>
   Number((Math.random() * 1000000).toFixed(0))
 
@@ -866,7 +866,6 @@ const App = () => {
     const content = event.target.note.value
     event.target.note.value = ''
     store.dispatch(createNote(content)) // highlight-line
-    
   }
   
   const toggleImportance = (id) => {
@@ -891,7 +890,7 @@ There are multiple ways to share the redux-store with components. First we will 
 <!-- Asennetaan react-redux -->
 First we install react-redux
 
-```js
+```bash
 npm install --save react-redux
 ```
 
@@ -901,7 +900,7 @@ Next we move the _App_ component into its own file _App.js_. Let's see how this 
 <!-- Tiedosto _index.js_ näyttää seuraavalta -->
 _Index.js_ becomes:
 
-```js
+```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore } from 'redux'
@@ -987,7 +986,7 @@ import { createNote } from './../reducers/noteReducer'
 <!-- Komponentin <i>App</i> koodi  -->
 Code for the <i>App</i> component
 
-```js
+```jsx
 import React from 'react'
 import { 
   createNote, toggleImportanceOf
@@ -1110,7 +1109,7 @@ const importantNotes = useSelector(state => state.filter(note => note.important)
 <!-- Eriytetään uuden muistiinpanon luominen omaksi komponentiksi.  -->
 Let's separate creating a new note into its own component.
 
-```js
+```jsx
 import React from 'react'
 import { useDispatch } from 'react-redux' // highlight-line
 import { createNote } from '../reducers/noteReducer' // highlight-line
@@ -1141,7 +1140,7 @@ Unlike in the React code we did without Redux, the event handler for changing th
 <!-- Eriytetään vielä muistiinpanojen lista ja yksittäisen muistiinpanon esittäminen omiksi komponenteikseen (jotka molemmat sijoitetaan tiedostoon <i>Notes.js</i>): -->
 We'll also separate the list of notes and displaying a single note into their own components (which will both be placed in the <i>Notes.js</i> file ):
 
-```js
+```jsx
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux' // highlight-line
 import { toggleImportanceOf } from '../reducers/noteReducer' // highlight-line
@@ -1182,7 +1181,7 @@ The logic for changing the importance of a note is now in the component managing
 
 There is not much code left in <i>App</i>:
 
-```js
+```jsx
 const App = () => {
 
   return (
@@ -1270,7 +1269,7 @@ Separate the rendering of the anecdote list into its own component called <i>Ane
 
 Now the <i>App</i> component should look like this: 
 
-```js
+```jsx
 import React from 'react'
 import AnecdoteForm from './components/AnecdoteForm'
 import AnecdoteList from './components/AnecdoteList'

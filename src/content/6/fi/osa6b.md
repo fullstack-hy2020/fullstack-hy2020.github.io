@@ -41,7 +41,7 @@ Toteutetaan sovellukseen näytettävien muistiinpanojen filtteröinti, jonka avu
 
 Aloitetaan todella suoraviivaisella toteutuksella:
 
-```js
+```jsx
 import React from 'react'
 import NewNote from './components/NewNote'
 import Notes from './components/Notes'
@@ -135,7 +135,7 @@ Saamme nyt muodostettua varsinaisen reducerin yhdistämällä kaksi olemassaolev
 
 Määritellään yhdistetty reduceri tiedostossa <i>index.js</i>:
 
-```js
+```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore, combineReducers } from 'redux' // highlight-line
@@ -218,7 +218,7 @@ Onko koodissa bugi? Ei. Yhdistetty reducer toimii siten, että jokainen <i>actio
 
 Viimeistellään nyt sovellus käyttämään yhdistettyä reduceria, eli palautetaan tiedostossa <i>index.js</i> suoritettava renderöinti muotoon
 
-```js
+```jsx
 ReactDOM.render(
   <Provider store={store}>
     <App />
@@ -233,7 +233,7 @@ Korjataan sitten bugi, joka johtuu siitä, että koodi olettaa storen tilan olev
 
 Korjaus on helppo. Koska muistiinpanot ovat nyt storen kentässä <i>notes</i>, riittää pieni muutos selektorifunktioon:
 
-```js
+```jsx
 const Notes = () => {
   const dispatch = useDispatch()
   const notes = useSelector(state => state.notes) // highlight-line
@@ -268,7 +268,7 @@ const notes = useSelector(state => state.notes)
 
 Eriytetään näkyvyyden säätelyfiltteri omaksi, tiedostoon sijoitettavaksi <i>src/components/VisibilityFilter.js</i> komponentiksi:
 
-```js
+```jsx
 import React from 'react'
 import { filterChange } from '../reducers/filterReducer'
 import { useDispatch } from 'react-redux'
@@ -307,7 +307,7 @@ Toteutus on suoraviivainen, radiobuttonin klikkaaminen muuttaa storen kentän <i
 
 Komponentti <i>App</i> yksinkertaisuu nyt seuraavasti:
 
-```js
+```jsx
 import React from 'react'
 import Notes from './components/Notes'
 import NewNote from './components/NewNote'
@@ -328,7 +328,7 @@ export default App
 
 Muutetaan vielä komponentin <i>Notes</i> ottamaan huomioon filtteri
 
-```js
+```jsx
 const Notes = () => {
   const dispatch = useDispatch()
   // highlight-start
@@ -384,13 +384,13 @@ Chromeen on asennettavissa [Redux DevTools](https://chrome.google.com/webstore/d
 
 Selaimen lisäosan lisäksi debugatessa tarvitaan kirjastoa [redux-devtools-extension](https://www.npmjs.com/package/redux-devtools-extension). Asennetaan se komennolla
 
-```js
+```bash
 npm install --save-dev redux-devtools-extension
 ```
 
 Storen luomistapaa täytyy hieman muuttaa, että kirjasto saadaan käyttöön:
 
-```js
+```jsx
 // ...
 import { createStore, combineReducers } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension' // highlight-line
@@ -444,7 +444,7 @@ Ota sovelluksessasi käyttöön React dev tools. Siirrä Redux-storen määritte
 
 Sovelluksessa on valmiina komponentin <i>Notification</i> runko:
 
-```js
+```jsx
 import React from 'react'
 
 const Notification = () => {
@@ -465,7 +465,7 @@ export default Notification
 
 Laajenna komponenttia siten, että se renderöi redux-storeen talletetun viestin, eli renderöitävä komponentti muuttuu muotoon:
 
-```js
+```jsx
 import React from 'react'
 import { useSelector } from 'react-redux' // highlight-line
 
@@ -506,7 +506,7 @@ Säilytä filtterin tila redux storessa, eli käytännössä kannattaa jälleen 
 
 Tee filtterin ruudulla näyttämistä varten komponentti <i>Filter</i>. Voit ottaa sen pohjaksi seuraavan
 
-```js
+```jsx
 import React from 'react'
 
 const Filter = () => {

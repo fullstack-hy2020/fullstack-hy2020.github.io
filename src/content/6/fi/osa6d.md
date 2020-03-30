@@ -17,7 +17,7 @@ Uusissa sovelluksissa kannattaa ehdottomasti käyttää hook-apia, mutta connect
 
 Muutetaan sovelluksen komponenttia <i>Notes</i>, siten että korvataan hook-apin eli funktioiden _useDispatch_ ja _useSelector_ käyttö funktioilla _connect_. Komponentin seuraavat osat tulee siis muuttaa:
 
-````js
+````jsx
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux' // highlight-line
 import { toggleImportanceOf } from '../reducers/noteReducer'
@@ -76,7 +76,7 @@ Komponentti tarvitsee storesta sekä muistiinpanojen listan, että filtterin arv
 
 Jos määritellään:
 
-```js
+```jsx
 const Notes = (props) => { // highlight-line
   const dispatch = useDispatch()
 
@@ -129,7 +129,7 @@ eli komponentin <i>Notes</i> sisältä on propsien <i>props.notes</i> ja <i>prop
 
 Komponentti _NoteList_ ei oikeastaan tarvitse mihinkään tietoa siitä mikä filtteri on valittuna, eli filtteröintilogiikka voidaan siirtää kokonaan sen ulkopuolelle, ja palauttaa propsina _notes_ suoraan sopivalla tavalla filtteröidyt muistiinpanot:
 
-```js
+```jsx
 const Notes = (props) => { // highlight-line
   const dispatch = useDispatch()
 
@@ -173,7 +173,7 @@ export default ConnectedNotes
 
 Olemme nyt päässeet eroon hookista _useSelector_, mutta <i>Notes</i> käyttää edelleen hookia _useDispatch_ ja sen palauttavaa funktiota _dispatch_:
 
-```js
+```jsx
 const Notes = (props) => {
   const dispatch = useDispatch() // highlight-line
 
@@ -195,7 +195,7 @@ const Notes = (props) => {
 
 Connect-funktion toisena parametrina voidaan määritellä [mapDispatchToProps](https://github.com/reactjs/react-redux/blob/master/docs/api.md#arguments) eli joukko <i>action creator</i> -funktioita, jotka välitetään yhdistetylle komponentille propseina. Laajennetaan connectausta seuraavasti
 
-```js
+```jsx
 const mapStateToProps = (state) => {
   return {
     notes: state.notes,
@@ -219,7 +219,7 @@ export default ConnectedNotes
 
 Nyt komponentti voi dispatchata suoraan action creatorin _toggleImportanceOf_ määrittelemän actionin kutsumalla propsien kautta saamaansa funktiota koodissa:
 
-```js
+```jsx
 const Notes = (props) => {
   return(
     <ul>
@@ -259,7 +259,7 @@ eli sen lisäksi että <i>Notes</i> pääsee storen tilaan propsin <i>props.note
 
 Connectia käyttämään refaktoroitu komponentti <i>Notes</i> on kokonaisuudessaan seuraava:
 
-```js
+```jsx
 import React from 'react'
 import { connect } from 'react-redux' 
 import { toggleImportanceOf } from '../reducers/noteReducer'
@@ -306,7 +306,7 @@ export default connect(
 
 Otetaan _connect_ käyttöön myös uuden muistiinpanon luomisessa:
 
-```js
+```jsx
 import React from 'react'
 import { connect } from 'react-redux' 
 import { createNote } from '../reducers/noteReducer'
@@ -344,7 +344,7 @@ Sovelluksen koodi on [githubissa](https://github.com/fullstackopen-2019/redux-no
 
 Tarkastellaan vielä erästä mielenkiintoista seikkaa komponentista <i>NewNote</i>:
 
-```js
+```jsx
 import React from 'react'
 import { connect } from 'react-redux' 
 import { createNote } from '../reducers/noteReducer'  // highlight-line
@@ -482,7 +482,7 @@ eli action creatorilla luodun actionin dispatchaus.
 
 Komponentti siis viittaa funktioon propsin <i>props.createNote</i> kautta:
 
-```js
+```jsx
 const NewNote = (props) => {
 
   const addNote = async (event) => {

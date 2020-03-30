@@ -30,13 +30,13 @@ Tallennetaan projektin juuren tiedostoon <i>db.json</i> tietokannan alkutila:
 
 Asennetaan projektiin json-server
 
-```js
+```bash
 npm install json-server --save
 ```
 
 ja lisätään tiedoston <i>package.json</i> osaan <i>scripts</i> rivi
 
-```js
+```json
 "scripts": {
   "server": "json-server -p3001 --watch db.json",
   // ...
@@ -62,7 +62,7 @@ export default { getAll }
 
 Asennetaan myös axios projektiin
 
-```js
+```bash
 npm install axios --save
 ```
 
@@ -94,7 +94,6 @@ noteService.getAll().then(notes =>
   })
 )
 // highlight-end
-
 // ...
 ```
 
@@ -140,7 +139,7 @@ noteService.getAll().then(notes =>
 
 Päätetään kuitenkin siirtää muistiinpanojen alustus <i>App</i>-komponentiin, eli kuten yleensä dataa palvelimelta haettaessa, käytetään <i>effect hookia</i>:
 
-```js
+```jsx
 import React, {useEffect} from 'react' // highlight-line
 import NewNote from './components/NowNote'
 import Notes from './components/Notes'
@@ -237,7 +236,7 @@ export default {
 
 Komponentin <i>NewNote</i> metodi _addNote_ muuttuu hiukan:
 
-```js
+```jsx
 import React from 'react'
 import { useDispatch } from 'react-redux'
 import { createNote } from '../reducers/noteReducer'
@@ -337,13 +336,13 @@ Molemmat komponentit dispatchaisivat ainoastaan actionin, välittämättä siit�
 
 Asennetaan nyt [redux-thunk](https://github.com/gaearon/redux-thunk)-kirjasto, joka mahdollistaa <i>asynkronisten actionien</i> luomisen. Asennus tapahtuu komennolla:
 
-```js
+```bash
 npm install --save redux-thunk
 ```
 
 redux-thunk-kirjasto on ns. <i>redux-middleware</i> joka täytyy ottaa käyttöön storen alustuksen yhteydessä. Eriytetään samalla storen määrittely omaan tiedostoon <i>src/store.js</i>:
 
-```js
+```jsx
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
@@ -368,7 +367,7 @@ export default store
 
 Tiedosto <i>src/index.js</i> on muutoksen jälkeen seuraava
 
-```js
+```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux' 
@@ -403,7 +402,7 @@ Sisemmässä funktiossaan, eli <i>asynkronisessa actionissa</i> operaatio hakee 
 
 Komponentti <i>App</i> voidaan nyt määritellä seuraavasti:
 
-```js
+```jsx
 const App = () => {
   const dispatch = useDispatch()
 
@@ -443,7 +442,7 @@ Periaate on jälleen sama, ensin suoritetaan asynkroninen operaatio, ja sen valm
 
 Komponentti <i>NewNote</i> muuttuu seuraavasti:
 
-```js
+```jsx
 const NewNote = () => {
   const dispatch = useDispatch()
   

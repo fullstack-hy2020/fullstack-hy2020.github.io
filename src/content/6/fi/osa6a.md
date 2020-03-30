@@ -348,7 +348,7 @@ Koska meillä ei ole vielä koodia joka käyttää ominaisuutta, laajennetaan re
 
 Jotta testaus olisi helpompaa, siirretään reducerin koodi ensin omaan moduuliinsa tiedostoon <i>src/reducers/noteReducer.js</i>. Otetaan käyttöön myös kirjasto [deep-freeze](https://github.com/substack/deep-freeze), jonka avulla voimme varmistaa, että reducer on määritelty oikeaoppisesti puhtaana funktiona. Asennetaan kirjasto kehitysaikaiseksi riippuvuudeksi
 
-```js
+```bash
 npm install --save-dev deep-freeze
 ```
 
@@ -728,7 +728,7 @@ addNote = (event) => {
 
 Uuden muistiinpanon sisältö saadaan suoraan lomakkeen syötekentästä, johon kentän nimeämisen ansiosta päästään käsiksi tapahtumaolion kautta <i>event.target.note.value</i>. Kannattaa huomata, että syötekentällä on oltava nimi, jotta sen arvoon on mahdollista päästä käsiksi:
 
-```js
+```jsx
 <form onSubmit={addNote}>
   <input name="note" /> // highlight-line
   <button type="submit">add</button>
@@ -803,7 +803,7 @@ Tapoja välittää redux-store sovelluksen komponenteille on useita, tutustutaan
 
 Asennetaan react-redux
 
-```js
+```bash
 npm install --save react-redux
 ```
 
@@ -811,7 +811,7 @@ Eriytetään komponentti _App_ omaan tiedostoon _App.js_. Tarkastellaan ensin mi
 
 Tiedosto _index.js_ näyttää seuraavalta
 
-```js
+```jsx
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore } from 'redux'
@@ -890,7 +890,7 @@ import { noteCreation } from './../reducers/noteReducer'
 
 Komponentin <i>App</i> koodi 
 
-```js
+```jsx
 import React from 'react'
 import { 
   createNote, toggleImportanceOf
@@ -1002,7 +1002,7 @@ const importantNotes = useSelector(state => state.filter(note => note.important)
 
 Eriytetään uuden muistiinpanon luominen omaksi komponentiksi. 
 
-```js
+```jsx
 import React from 'react'
 import { useDispatch } from 'react-redux' // highlight-line
 import { createNote } from '../reducers/noteReducer' // highlight-line
@@ -1032,7 +1032,7 @@ Toisin kuin aiemmin ilman Reduxia tekemässämme React-koodissa, sovelluksen til
 
 Eriytetään vielä muistiinpanojen lista ja yksittäisen muistiinpanon esittäminen omiksi komponenteikseen (jotka molemmat sijoitetaan tiedostoon <i>Notes.js</i>):
 
-```js
+```jsx
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux' // highlight-line
 import { toggleImportanceOf } from '../reducers/noteReducer' // highlight-line
@@ -1072,7 +1072,7 @@ Muistiinpanon tärkeyttä muuttava logiikka on nyt muistiinpanojen listaa hallin
 
 Komponenttiin <i>App</i> ei jää enää paljoa koodia:
 
-```js
+```jsx
 const App = () => {
 
   return (
@@ -1146,7 +1146,7 @@ Eriytä anekdoottilistan näyttäminen omaksi komponentikseen nimeltään <i>Ane
 
 Tämän tehtävän jälkeen komponentin <i>App</i> pitäisi näyttää seuraavalta:
 
-```js
+```jsx
 import React from 'react'
 import AnecdoteForm from './components/AnecdoteForm'
 import AnecdoteList from './components/AnecdoteList'
