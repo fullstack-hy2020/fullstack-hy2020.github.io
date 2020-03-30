@@ -158,7 +158,7 @@ would print the following to the console
 because at first the state of the store is 0. After three <i>INCREMENT</i>-actions the state is 3. In the end, after <i>ZERO</i> and <i>DECREMENT</i> actions, the state is -1.
 
 
-The third important method the store has is [subscribe](https://redux.js.org/api/store#subscribelistener), which is used to create recall functions the store calls when its state is changed. 
+The third important method the store has is [subscribe](https://redux.js.org/api/store#subscribelistener), which is used to create callback functions the store calls when its state is changed.
 
 
 If, for example, we would add the following function to subscribe, <i>every change in the store</i> would be printed to the console.
@@ -419,7 +419,7 @@ describe('noteReducer', () => {
     deepFreeze(state)
     const newState = noteReducer(state, action)
 
-    expect(newState.length).toBe(1)
+    expect(newState).toHaveLength(1)
     expect(newState).toContainEqual(action.data)
   })
 })
@@ -457,7 +457,7 @@ test('returns new state with action TOGGLE_IMPORTANCE', () => {
   deepFreeze(state)
   const newState = noteReducer(state, action)
 
-  expect(newState.length).toBe(2)
+  expect(newState).toHaveLength(2)
 
   expect(newState).toContainEqual(state[0])
 
@@ -878,7 +878,7 @@ const App = () => {
 ```
 
 
-### Redux-storen välittäminen eri komponenteille
+### Forwarding Redux-Store to various components
 
 Aside from the reducer, our application is in one file. This is of course not sensible, and we should separate <i>App</i> into its own module. 
 
@@ -920,7 +920,7 @@ ReactDOM.render(
 ```
 
 <!-- Uutta tässä on se, että sovellus on määritelty react redux -kirjaston tarjoaman [Provider](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store)-komponentin lapsena ja että sovelluksen käyttämä store on annettu Provider-komponentin attribuutiksi <i>store</i>.  -->
-Note, that the application is now defined as a child of a [Provider](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store) -component provided by the react redux library.
+Note, that the application is now defined as a child of a [Provider](https://react-redux.js.org/api/provider) -component provided by the react redux library.
 The application's store is given to the Provider as its attribute <i> 
 store</i>.
 
@@ -1081,7 +1081,7 @@ const App = () => {
 ```
 
 <!-- <i>useSelector</i> saa parametrikseen funktion, joka hakee tai valitsee (engl. select) tarvittavan datan redux-storesta. Tarvitsemme nyt kaikki muistiinpanot, eli selektorifunktiomme palauttaa koko staten, eli on muotoa  -->
-<i>useSelector</i> receives a function as a paramter. The function either either searches for or selectes data from the redux-store. 
+<i>useSelector</i> receives a function as a paramter. The function either searches for or selects data from the redux-store. 
 Here we need all of the notes, so our selector function returns the whole state:
 
 
@@ -1098,7 +1098,6 @@ which is a shorthand for
 }
 ```
 
-<!-- Yleensä selektorifunktiot ovat mielenkiinoisempia, ja valitsevat vain osan redux-storen sisällöstä. Voisimme esimerkiksi hakea storesta ainoastaan tärkeät muistiinpanot seuraavasti -->
 Usually selector functions are a bit more interesting, and return only selected parts of the contents of the redux-store. 
 We could for example return only notes marked as important:
 
@@ -1231,7 +1230,7 @@ npm start
 ```
 
 
-After completing these exercises, your application should look like this
+After completing these exercises, your application should look like this:
 
 ![](../../images/6/3.png)
 

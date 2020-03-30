@@ -722,7 +722,6 @@ export const EDIT_NUMBER = gql`
 `
 ```
 
-<!-- Muutoksen suorittava komponentti <i>PhoneForm</i> on suoraviivainen, se kysyy lomakkeen avulla henkilön nimeä ja uutta puhelinnumeroa, ja kutsuu _useMutation_-hookilla luotua mutaation suorittavaa funktiota _changeNumber_. Mielenkiintoiset osat koodia korostettuna: -->
 The <i>PhoneForm</i> component responsible for the change is straightforward. The form has fields for the person's name and new phone number, and calls the _changeNumber_ function. The function is done using the _useMutation_-hook. 
 Interesting lines on the code have been hihglighed.
 

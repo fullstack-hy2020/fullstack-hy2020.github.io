@@ -286,7 +286,7 @@ describe('when there is initially one user at db', () => {
       .expect('Content-Type', /application\/json/)
 
     const usersAtEnd = await helper.usersInDb()
-    expect(usersAtEnd.length).toBe(usersAtStart.length + 1)
+    expect(usersAtEnd).toHaveLength(usersAtStart.length + 1)
 
     const usernames = usersAtEnd.map(u => u.username)
     expect(usernames).toContain(newUser.username)
@@ -338,7 +338,7 @@ describe('when there is initially one user at db', () => {
     expect(result.body.error).toContain('`username` to be unique')
 
     const usersAtEnd = await helper.usersInDb()
-    expect(usersAtEnd.length).toBe(usersAtStart.length)
+    expect(usersAtEnd).toHaveLength(usersAtStart.length)
   })
 })
 ```

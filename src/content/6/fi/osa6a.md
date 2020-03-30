@@ -373,7 +373,7 @@ describe('noteReducer', () => {
     deepFreeze(state)
     const newState = noteReducer(state, action)
 
-    expect(newState.length).toBe(1)
+    expect(newState).toHaveLength(1)
     expect(newState).toContainEqual(action.data)
   })
 })
@@ -411,7 +411,7 @@ test('returns new state with action TOGGLE_IMPORTANCE', () => {
   deepFreeze(state)
   const newState = noteReducer(state, action)
 
-  expect(newState.length).toBe(2)
+  expect(newState).toHaveLength(2)
 
   expect(newState).toContainEqual(state[0])
 

@@ -218,6 +218,7 @@ To create a new production build of the frontend without extra manual work, let'
 ```json
 {
   "scripts": {
+    //...
     "build:ui": "rm -rf build && cd ../../osa2/materiaali/notes-new && npm run build --prod && cp -r build ../../../osa3/notes-backend/",
     "deploy": "git push heroku master",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",    

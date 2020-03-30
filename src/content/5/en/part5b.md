@@ -557,8 +557,7 @@ The form closes when a new blog is created.
 Separate the form for creating a new blog into its own component (if you have not already done so), and 
 move all the states required for creating a new blog to this component. 
 
-<!-- Komponentin tulee siis toimia samaan tapaan kuin tämän osan [materiaalin](http://localhost:8000/osa5/props_children_ja_proptypet#lomakkeiden-tila) komponentin <i>NewNote</i>. -->
-The component must work like the <i>NewNote</i> component from the [material](/osa5/props_children_ja_proptypet#lomakkeiden-tila) of this part.
+The component must work like the <i>NewNote</i> component from the [material](/en/part5/props_children_and_proptypes) of this part.
 
 #### 5.7* Blog list frontend, step7
 
@@ -821,7 +820,7 @@ Let us also create a npm script to run the lint:
 }
 ```
 
-Compomnent _Togglable_ causesa a nasty looking warning <i>Component definition is missing display name</i>: 
+Component _Togglable_ causes a nasty looking warning <i>Component definition is missing display name</i>: 
 
 ![](../../images/5/25ea.png)
 

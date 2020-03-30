@@ -25,7 +25,6 @@ E2E tests are potentially the most useful category of tests, because they test t
 They do some drawbacks too. Configuring E2E tests is more challenging than unit- or integration tests. They also tend to be quite slow, and with a large system their execution time can be minutes, even hours. This is bad for development, because during coding it is beneficial to be able to run tests as often as possible in case of code [regressions](https://en.wikipedia.org/wiki/Regression_testing).
 
 
-<!-- Ongelmana on  usein myös se, että käyttöliittymän kautta tehtävät testit saattavat olla epäluotettavia eli englanniksi [flaky](https://hackernoon.com/flaky-tests-a-war-that-never-ends-9aa32fdef359), osa testeistä menee välillä läpi ja välillä ei, vaikka koodissa ei muuttuisi mikään. -->
 E2E tests can also be [flaky](https://hackernoon.com/flaky-tests-a-war-that-never-ends-9aa32fdef359). 
 Some tests might pass one time and fail another, even if the code does not change at all. 
 
@@ -37,8 +36,6 @@ E2E library [Cypress](https://www.cypress.io/) has become popular within the las
 It's operating princible is radically different than most E2E testing libraries, because Cypress test are run completely within the browser.
 Other libraries run the tests in a Node-process, which is connected to the broswer trough an API. 
 
-
-<!-- Tehdään tämän osan lopuksi muutamia end to end -testejä muistiinpanosovellukselle.  -->
 Let's  make some end to end tests for our note application.
 
 <!-- Aloitetaan asentamalla Cypress <i>frontendin</i> kehitysaikaiseksi riippuvuudeksi -->
@@ -123,7 +120,6 @@ Running the test opens your browser and shows how the application behaves as the
 
 ![](../../images/5/32ae.png)
 
-<!-- Testi näyttää rakenteeltaan melko tutulta. <i>describe</i>-lohkoja käytetään samaan tapaan kuin Jestissä ryhmittelemään yksittäisiä testitapauksia, jotka on määritelty <i>it</i>-metodin avulla. Nämä osat Cypress on lainannut sisäisesti käyttämältään [Mocha](https://mochajs.org/)-testikirjastolta.   -->
 The structure of the test should look faimiliar. They use <i>describe</i> blocks to group different test cases like Jest does. The test cases have been defined with the <i>it</i> method. 
 Cypress borrowed these parts from [Mocha](https://mochajs.org/) testing library it uses under the hood. 
 
@@ -199,7 +195,6 @@ describe('Note app',  function() {
 <!-- Testi hakee ensin napin sen tekstin perusteella ja klikkaa nappia komennolla [cy.click](https://docs.cypress.io/api/commands/click.html#Syntax). -->
 The test first searches for the login button by its text, and clicks the button with the command [cy.click](https://docs.cypress.io/api/commands/click.html#Syntax).
 
-<!-- Koska molemmat testit aloittavat samalla tavalla, eli avaamalla sivun <i>http://localhost:3000</i>, kannattaa yhteinen osa eristää ennen jokaista testiä suoritettavaan <i>beforeEach</i>-lohkoon: -->
 Both of our tests begin the same way, by opening the page <i>http://localhost:3000</i>, so we should 
 separate the shared part into a <i>beforeEach</i> block run before each test:
 
@@ -1070,7 +1065,6 @@ Now the first line finds the right button, and uses <i>as</i> to save it as <i>t
 
 ### Running and debugging the tests
 
-<!-- Vielä osan lopuksi muutamia huomioita Cypressin toimintaperiaatteesta sekä testien debuggaamisesta. -->
 Finally, some notes on how Cypress works and debugging your tests.
 
 <!-- Cypressissä testien kirjoitusasu antaa vaikutelman, että testit ovat normaalia javascript-koodia, ja että voisimme esim. yrittää seuraavaa: -->
@@ -1145,7 +1139,6 @@ The frontend- and the test code can be found from [github](https://github.com/fu
 
 ### Exercises 5.17.-5.22.
 
-<!-- Tehdään osan lopuksi muutamia E2E-testejä blogisovellukseen. Ylläolevan materiaalin pitäisi riittää ainakin suurimmaksi osaksi tehtävien tekemiseen. Cypressin [dokumentaatiota](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell) kannattaa ehdottomasti myös lueskella, kyseessä on ehkä paras dokumentaatio, mitä olen koskaan open source -projektissa nähnyt.  -->
 In the last exercises of this part we will do some E2E tests for our blog application. 
 The material of this part should be enough to complete the exercises. 
 You should absolutely also check out the Cypress [documentation](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell). It is propably the best documentation I have ever seen for an open source project. 
@@ -1177,7 +1170,7 @@ describe('Blog app', function() {
 ```
 
 <!-- Testin <i>beforeEach</i>-alustuslohkon tulee nollata tietokannan tilanne esim.  -->
-The <i>beforeEach</i> formatting blog must empty the database using for example the method we used in the [material](/osa5/end_to_end_testaus#tietokannan-tilan-kontrollointi).
+The <i>beforeEach</i> formatting blog must empty the database using for example the method we used in the [material](/en/part5/end_to_end_testing#controlling-the-state-of-the-database).
 
 
 #### 5.18: bloglist end to end testing, step2
