@@ -381,7 +381,7 @@ const PersonForm = ({ setError }) => {
 过滤可以用 React 来完成。 如果您在练习8.5中使用 GraphQL 查询过滤图书到服务器，那么您可以将这个练习标记为已完成。
 
 <!-- This and the next exercises are quite **challenging** like it should be this late in the course. You might want to complete first the easier ones in [next part](/zh/part8/fragments_and_subscriptions). -->
-这个和接下来的练习是相当具有挑战性的。 您可能希望首先完成[下一章节](/ en / part8 / fragments and subscription)中较容易的部分。
+这个和接下来的练习是相当具有挑战性的。 您可能希望首先完成[下一章节](/zh/part8/fragments_and_subscriptions)中较容易的部分。
 
 <!-- Some tips -->
 一些建议

@@ -452,7 +452,7 @@ const Note = ({ note }) => {
 }
 // highlight-end
 
-const App = ({ notes }) => 
+const App = ({ notes }) => {
   return (
     <div>
       <h1>Notes</h1>
@@ -561,10 +561,6 @@ const App = ({ notes }) => {
   )
 }
 
-ReactDOM.render(
-  <App notes={notes} />,
-  document.getElementById('root')
-)
 
 export default App // highlight-line
 ```

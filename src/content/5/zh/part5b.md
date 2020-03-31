@@ -618,7 +618,7 @@ const Togglable = () => ...
 
 
 <!-- The component must work like the <i>NewNote</i> component from the [material](/osa5/props_children_ja_proptypet#lomakkeiden-tila) of this part. -->
-这个组件必须像这个部件的[ material ](/ osa5 / proptypet children ja # lomakkeiden-tila)中的<i>NewNote</i> 组件那样工作。
+这个组件必须像这个部件的[material](/zh/part5/props_children_and_proptypes)中的<i>NewNote</i> 组件那样工作。
 
 #### 5.7* Blog list frontend, 步骤7
 

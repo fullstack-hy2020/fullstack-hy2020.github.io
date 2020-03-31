@@ -550,7 +550,7 @@ referenceToAddition(10, 15)   // 25 is printed
 arto.greet()       // hello, my name is Arto Hellas gets printed
 
 const referenceToGreet = arto.greet
-referenceToGreet() // hello, my name is undefined gets printed
+referenceToGreet() // prints only hello, my name is
 ```
 
 

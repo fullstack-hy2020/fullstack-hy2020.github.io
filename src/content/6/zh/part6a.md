@@ -430,7 +430,7 @@ describe('noteReducer', () => {
     deepFreeze(state)
     const newState = noteReducer(state, action)
 
-    expect(newState.length).toBe(1)
+    expect(newState).toHaveLength(1)
     expect(newState).toContainEqual(action.data)
   })
 })
@@ -470,7 +470,7 @@ test('returns new state with action TOGGLE_IMPORTANCE', () => {
   deepFreeze(state)
   const newState = noteReducer(state, action)
 
-  expect(newState.length).toBe(2)
+  expect(newState).toHaveLength(2)
 
   expect(newState).toContainEqual(state[0])
 
@@ -954,7 +954,7 @@ ReactDOM.render(
 
 
 <!-- Note, that the application is now defined as a child of a [Provider](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store) -component provided by the react redux library. -->
-请注意，应用现在被定义为由 redux 库提供的[ Provider ]( https://github.com/reactjs/react-redux/blob/master/docs/api.md#Provider-store 组件)的子组件。
+请注意，应用现在被定义为由 redux 库提供的[Provider](https://react-redux.js.org/api/provider)的子组件。
 <!-- The application's store is given to the Provider as its attribute store. -->
 应用的存储作为其属性提供给提供程序存储
 
@@ -1289,8 +1289,8 @@ npm install
 npm start
 ```
 
-<!-- After completing these exercises, your application should look like this -->
-完成这些练习后，您的应用应该是这样的
+<!-- After completing these exercises, your application should look like this: -->
+完成这些练习后，您的应用应该是这样的:
 
 ![](../../images/6/3.png)
 

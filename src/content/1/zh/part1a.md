@@ -487,6 +487,9 @@ part2
   countries
 ```
 
+<!-- See [this](https://github.com/fullstack-hy2020/example-submission-repository)! -->
+参考 [这里](https://github.com/fullstack-hy2020/example-submission-repository)!
+
 <!-- For each part of the course there is a directory, which further branches into directories containing a series of exercises, like "unicafe" for part 1. -->
 为课程的每一章节都创建一个目录，它进一步分支成一系列练习的目录，如第1章节的“ unicafe”。
 

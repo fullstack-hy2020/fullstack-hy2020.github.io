@@ -564,7 +564,7 @@ module.exports = mongoose.model('Note', noteSchema) // highlight-line
 ```
 
 <!-- Defining Node [modules](https://nodejs.org/docs/latest-v8.x/api/modules.html) differs slightly from the way of defining [ES6 modules](/zh/part2/rendering_a_collection_modules#refactoring-modules) in part 2. -->
-定义 Node [ modules ]( https://nodejs.org/docs/latest-v8.x/api/modules.html)与第2章节中定义[ ES6模块](/ en / part2 / rendering a collection modules # refactoring-modules)的方式稍有不同。
+定义 Node [ modules ]( https://nodejs.org/docs/latest-v8.x/api/modules.html)与第2章节中定义[ES6模块](/zh/part2/rendering_a_collection_modules#refactoring-modules)的方式稍有不同。
 
 <!-- The public interface of the module is defined by setting a value to the _module.exports_ variable. We will set the value to be the <i>Note</i> model. The other things defined inside of the module, like the variables _mongoose_ and _url_ will not be accessible or visible to users of the module. -->
 模块的公共接口是通过将值设置为 module.exports 变量来定义的。 我们将该值设置为<i>Note</i> 模型。 模块内部定义的其他东西，比如变量 mongoose 和 url 对于模块的用户来说是不可访问的或者不可见的。

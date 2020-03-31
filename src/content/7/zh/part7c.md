@@ -9,7 +9,7 @@ lang: zh
 
 
 <!-- In part 2 we examined two different ways of adding styles to our application: the old-school [single CSS](/zh/part2/adding_styles_to_react_app) file and [inline-styles](/zh/part2/adding_styles_to_react_app#inline-styles). In this part we will take a look at a few other ways.  -->
-在第2章节中，我们研究了向应用添加样式的两种不同方式: 老式的[ single CSS ](/ en / part2 / add styles to react app)文件和[ inline-styles ](/ en / part2 / add styles to react app # inline-styles)。 在这一章节，我们将看看其他一些方法。
+在第2章节中，我们研究了向应用添加样式的两种不同方式: 老式的[ single CSS ](/zh/part2/adding_styles_to_react_app)文件和[ inline-styles ](/zh/part2/adding_styles_to_react_app#inline-styles)。 在这一章节，我们将看看其他一些方法。
 
 ### Ready-made UI libraries 
 【现成的 UI 库】
@@ -26,7 +26,7 @@ lang: zh
 有许多 UI 框架具有响应友好版本，其中框架的“组件”已经转换为 React 组件。 有几个不同的 http://reactstrap.github.io/ 版本，像[ reactstrap ](reactstrap)和[ React-Bootstrap ](reactstrap  https://React-Bootstrap.github.io/ )。
 
 <!-- Next we will take a closer look at two UI frameworks, Bootstrap and [MaterialUI](https://material-ui.com/). We will use both frameworks to add similar styles to the application we made in the [React-router](/zh/part7/react_router) section of the course material. -->
-接下来我们将仔细研究两个 UI 框架，Bootstrap 和[ MaterialUI ]( https://material-UI.com/ )。 我们将使用这两个框架来为我们在课程教材的[ React-router ](/ en / part7 / react router)部分中创建的应用添加类似的样式。
+接下来我们将仔细研究两个 UI 框架，Bootstrap 和[ MaterialUI ]( https://material-UI.com/ )。 我们将使用这两个框架来为我们在课程教材的[ React-router ](/zh/part7/react_router) 部分中创建的应用添加类似的样式。
 
 ### React Bootstrap
 
@@ -770,6 +770,6 @@ const App = () => {
 
 
 <!-- The exercises related to the topics presented here, can be found at the end of this course material section in the exercise set [for extending the blog list application](/zh/part7/exercises_extending_the_bloglist). -->
-与这里提到的主题相关的练习，可以在本课程材料部分的练习集[用于扩展博客列表应用](/ en / part7 / 练习扩展博客列表)的最后找到。
+与这里提到的主题相关的练习，可以在本课程材料部分的练习集[用于扩展博客列表应用](/zh/part7/exercises_extending_the_bloglist)的最后找到。
 
 </div>

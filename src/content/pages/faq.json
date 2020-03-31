@@ -196,12 +196,24 @@
         "对于课程结业证书来说，不需要芬兰社保号码。 完成课程后，您可以从练习提交系统下载证书。"
       ]
     },
-      {
+    {
       "title": "为了获得课程的结业证书，我需要注册公开大学吗？",
       "text": [
         "对于课程结业证书来说，不需要注册公开大学。 完成课程后，您可以从练习提交系统下载证书。"
       ]
     },
+    {
+      "title": "这门课与去年的内容有什么不同？",
+      "text": [
+        "对于0~4章节，只有一些很小的改动。第5d章节，<i>端到端测试</i> 利用了Cypress.io 这个库，这几乎是全新的内容。使用自定义钩子（custom hook）的内容已经从第5章节转移到了第7章节，并添加了一些新的内容。 <br><br> 第6章是讲Redux的，主要介绍了新的基于hook的redux API。第7章的react-router 也更新为使用hook-api。由于Semantic UI React 缺乏维护，其内容已经被替换为了 MaterialUI library 的内容。<br><br> 第8章 GraphQL有了较大版本的升级，尤其引入了Apollo Client，它终于有了稳定的基于hook的api。第9章是全新的内容。<br><br> 去年的课程内容可以通过<a href='https://fullstackopen-2019.github.io/'>https://fullstackopen-2019.github.io/</a>进行访问。"
+      ]
+    },
+    {
+      "title": "我是从去年的课程开始学习的，我应该怎么续接今年的课程呢？",
+      "text": [
+        "阅读更多 <a href='/zh/part0/general_info#expanding-a-previously-completed-course'>这一章节</a>的内容。"
+      ]
+    }, 
     {
       "title": "我听说完成这门课程后我可以得到一份工作面试？",
       "text": [

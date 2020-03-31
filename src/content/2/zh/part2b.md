@@ -422,15 +422,11 @@ const App = (props) => {
       </div>
 // highlight-end            
       <ul>
-        {rows()}
+        {notesToShow.map((note, i) => // highlight-line
+          <Note key={i} note={note} />
+        )}
       </ul>
-      <form onSubmit={addNote}>
-        <input
-          value={newNote}
-          onChange={handleNoteChange}
-        />
-        <button type="submit">save</button>
-      </form>      
+      // ...        
     </div>
   )
 }

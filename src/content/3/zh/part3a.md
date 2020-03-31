@@ -29,7 +29,7 @@ lang: zh
 
 
 <!-- We had already mentioned [npm](/zh/part2/getting_data_from_server#npm) back in part 2, which is a tool used for managing JavaScript packages. In fact, npm originates from the Node ecosystem. -->
-在第2章节中，我们已经提到了[ npm ](/ en / part2 / getting data from server # npm) ，这是一个用于管理 JavaScript 包的工具。 事实上，npm 来源于 Node 生态系统。
+在第2章节中，我们已经提到了[ npm ](/zh/part2/getting_data_from_server#npm) ，这是一个用于管理 JavaScript 包的工具。 事实上，npm 来源于 Node 生态系统。
 
 <!-- Let's navigate to an appropriate directory, and create a new template for our application with the _npm init_ command. We will answer the questions presented by the utility, and the result will be an automatically generated <i>package.json</i> file at the root of the project, that contains information about the project. -->
 让我们进入到一个合适的目录，并使用_npm init_命令为应用创建一个新模板。 我们将回答该工具提出的问题，结果会在项目根目录下自动生成的<i>package.json</i> 文件，其中包含有关项目的信息。
@@ -549,14 +549,15 @@ Representational State Transfer，又名REST， 是在2000年 Roy Fielding 的[�
 <!-- We can execute different operations on resources. The operation to be executed is defined by the HTTP <i>verb</i>: -->
 我们可以对资源执行不同的操作。要执行的操作由 HTTP<i>动词verb</i> 定义:
 
-| URL                   | verb               | functionality                                                  |
-| --------------------- | ------------------- | ---------------------------------------------------------------- |
-| notes/10 &nbsp;&nbsp; | GET                 | fetches a single resource                                      |
-| notes                 | GET                 | fetches all resources in the collection                                 |
-| notes                 | POST                | creates a new resource based on the request data              |
-| notes/10              | DELETE &nbsp;&nbsp; | removes the identified resource                                     |
-| notes/10   | PUT | replaces the entire identified resource with the request data |
-| notes/10      | PATCH | replaces a part of the identified resource with the request data |
+| URL                   | verb                | functionality                                                    |
+| --------------------- | ------------------- | -----------------------------------------------------------------|
+| notes/10 &nbsp;&nbsp; | GET                 | fetches a single resource                                        |
+| notes                 | GET                 | fetches all resources in the collection                          |
+| notes                 | POST                | creates a new resource based on the request data                 |
+| notes/10              | DELETE &nbsp;&nbsp; | removes the identified resource                                  |
+| notes/10              | PUT                 | replaces the entire identified resource with the request data    |
+| notes/10              | PATCH               | replaces a part of the identified resource with the request data |
+|                       |                     |                                                                  |
 
 <!-- This is how we manage to roughly define what REST refers to as a [uniform interface](https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints), which means a consistent way of defining interfaces that makes it possible for systems to co-operate. -->
 这就是我们如何粗略地定义 REST 所指的 [统一接口 uniform interface](https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints) ，这意味着一种一致的定义接口的方式，使系统能够进行合作。

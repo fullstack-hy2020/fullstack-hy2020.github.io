@@ -1239,7 +1239,7 @@ Response 是如下格式的 json
 ```
 
 <!-- Note that you need to have a correct setup in order to get hold to the request body, see [part 3](/zh/part3/node_js_and_express#receiving-data). -->
-请注意，您需要有一个正确的设置，以获得请求主体，请参见[ part 3](/ en / part3 / node js 和 express # receiving-data)。
+请注意，您需要有一个正确的设置，以获得请求主体，请参见[part 3](/zh/part3/node_js_and_express#receiving-data)。
 
 </div>
 

@@ -816,7 +816,7 @@ function h(){if(!d){var e=u(p);d=!0;for(var t=c.length;t;){for(s=c,c=[];++f<t;)s
 然后将绑定的文件配置为使用 https://blooming-atoll-75500.herokuapp.com/api/notes 地址中可用的后端。
 
 <!-- We will install <i>axios</i>, start the json-server, and then make the necessary changes to the application. For the sake of changing things up, we will fetch the notes from the backend with our [custom hook](/zh/part5/custom_hooks) called _useNotes_: -->
-我们将安装<i>axios</i>，启动 json-server，然后对应用进行必要的更改。 为了更改内容，我们将使用名为 useNotes 的[ custom hook ](/ en / part5 / custom hooks)从后端获取便笺:
+我们将安装<i>axios</i>，启动 json-server，然后对应用进行必要的更改。 为了更改内容，我们将使用名为 useNotes 的[custom hook](/zh/part5/custom_hooks)从后端获取便笺:
 
 ```js
 import React, { useState, useEffect } from 'react'

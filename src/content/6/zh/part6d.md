@@ -288,7 +288,7 @@ props.toggleImportanceOf(note.id)
 不需要单独调用 dispatch 函数，因为 connect 已经将 toggleimportance of action creator 修改为包含 dispatch 的窗体。
 
 <!-- It can take some to time to wrap your head around how _mapDispatchToProps_ works, especially once we take a look at an [alternative way of using it](/zh/part6/connect#alternative-way-of-using-map-dispatch-to-props). -->
-了解 mapDispatchToProps 的工作原理可能需要一些时间，特别是当我们了解了[使用它的替代方法](/ en / part6 / connect # alternative-way-of-using-map-dispatch-to-props)之后。
+了解 mapDispatchToProps 的工作原理可能需要一些时间，特别是当我们了解了[使用它的替代方法](/zh/part6/connect#alternative-way-of-using-map-dispatch-to-props)之后。
 
 <!-- The resulting situation from using _connect_ can be visualized like this: -->
 使用连接产生的结果可以这样想象:
@@ -724,7 +724,7 @@ const mapStateToProps = (state) => {
 对<i>Filter</i> 和<i>embarriteform</i> 组件执行同样的操作。
 
 #### 6.21 anecdotes, the grand finale
-<!-- You (propably) have one nasty bug in your application. If the user clicks the vote button multiple times in a row, the notification is displayed funnily. For example if a user votes twice in three seconds,  -->
+<!-- You (probably) have one nasty bug in your application. If the user clicks the vote button multiple times in a row, the notification is displayed funnily. For example if a user votes twice in three seconds,  -->
 您(可能)在应用中有一个讨厌的 bug。 如果用户连续多次单击投票按钮，通知就会显示得非常有趣。 例如，如果一个用户在三秒内投票两次,
 <!-- the last notification is only displayed for two seconds (assuming the notification is normally shown for 5 seconds). This happens because removing the first notification accidentally removes the second notification.  -->
 最后一个通知只显示两秒钟(假设通知通常显示5秒钟)。 这是因为删除第一个通知时意外地删除了第二个通知。

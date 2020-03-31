@@ -441,10 +441,10 @@ npm uninstall bcrypt --save
 
 #### 4.20*: bloglist expansion, 步骤9
 <!-- [This example](/zh/part4/token_authentication) from part 4 shows taking the token from the header with the _getTokenFrom_ helper function. -->
-第4章节的[示例](/ en / part4 / token authentication)显示了使用 getTokenFrom helper 函数从头部获取令牌。
+第4章节的[示例](/zh/part4/token_authentication)显示了使用 getTokenFrom helper 函数从头部获取令牌。
 
 <!-- If you used the same solution, refactor taking the token to a [middleware](/zh/part3/node_js_and_express#middleware). The middleware should take the token from the <i>Authorization</i> header and place it to the <i>token</i> field of the <i>request</i> object.  -->
-如果您使用相同的解决方案，重构将令牌移到[中间件](/ en / part3 / node js 和 express # 中间件)。 中间件应该从<i>Authorization</i> 标头获取令牌，并将其放置到<i>request</i> 对象的<i>token</i> 字段。
+如果您使用相同的解决方案，重构将令牌移到[中间件](/zh/part3/node_js_and_express#middleware)。 中间件应该从<i>Authorization</i> 标头获取令牌，并将其放置到<i>request</i> 对象的<i>token</i> 字段。
 
 <!-- In other words, if you register this middleware in the <i>app.js</i> file before all routes -->
 换句话说，如果在所有路由之前在<i>app.js</i> 文件中注册这个中间件
@@ -465,7 +465,7 @@ blogsRouter.post('/', async (request, response) => {
 ```
 
 <!-- Remember that a normal [middleware](/zh/part3/node_js_and_express#middleware) is a function with three parameters, that at the end calls the last parameter <i>next</i> in order to move the control to next middleware: -->
-请记住，普通的[中间件](/ en / part3 / node js 和 express # 中间件)是一个带有三个参数的函数，它在最后调用最后一个参数<i>next</i>，以便将控制移动到下一个中间件:
+请记住，普通的[中间件](/zh/part3/node_js_and_express#middleware)是一个带有三个参数的函数，它在最后调用最后一个参数<i>next</i>，以便将控制移动到下一个中间件:
 
 ```js
 const tokenExtractor = (request, response, next) => {

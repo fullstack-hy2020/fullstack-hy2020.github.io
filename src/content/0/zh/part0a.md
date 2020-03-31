@@ -176,15 +176,18 @@ lang: zh
 ### How to get your credits 
 【如何获得学分】
 
+<!-- Note that for getting university credits you need a Finnish social security number. -->
+注意，为了获得大学学分，你需要一个芬兰社保号码。
+
 <!-- If you want to receive credits, save your **University of Helsinki** student number to [the exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)in the _my submissions_ view. If you are not a student at the University of Helsinki, you can get a student number by registering for the course through the [Open university](https://fullstackopen.com/osa0/yleista/#kokeeseen-ilmoittautuminen). -->
 
-如果你想要获得学分，在 [考试提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中*我的提交*页面保存好你的赫尔辛基大学的学号。如果你不是赫尔辛基大学的学生，你可以通过[公开大学](https://fullstackopen.com/osa0/yleista/#kokeeseen-ilmoittautuminen)注册这门课程来获得一个学号。
+如果你想要获得学分，在 [考试提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中*我的提交*页面保存好你的赫尔辛基大学的学号。如果你不是赫尔辛基大学的学生，你可以通过[公开大学](/zh/part0/general_info#sign-up-for-the-exam)注册这门课程来获得一个学号。
 
 <!-- You will receive your credits after you have submitted enough exercise for a passing grade, passed the exam and let us know through the exercise submission system that you have completed the course: -->
 
 当你提交了足够的练习、成绩合格、通过考试并经由练习提交系统让我们知晓你已完成课程后，你就会获得学分:
 
-![](../../images/0/28.png)
+![](../../images/0/28a.png)
 
 <!-- You can view your grade in Weboodi approximately four weeks after notifying us. -->
 提醒我们后，你在大约四周的时间就能在网页上看到你的成绩了。
@@ -229,6 +232,17 @@ lang: zh
 
 如果你已经通过了课程考试(不包括 3 学分的课程考试) ，并且正在拓展你的课程，你就不需要再做考一次试了。
 
+### Changed since the last year
+【与去年相比课程的改变】
+<!-- There is only minor changes to parts 0-4. Part 5d, <i>end to end -testing</i> using the Cypress.io- library is almost completely new material.  Using custom hooks has been moved from part 5 to part 7 with some new content. -->
+对于0~4章节，只有一些很小的改动。第5d章节，<i>端到端测试</i> 利用了Cypress.io 这个库，这几乎是全新的内容。使用自定义钩子（custom hook）的内容已经从第5章节转移到了第7章节，并添加了一些新的内容。
+
+<!-- Part 6, which is about Redux, concentrates on the new, hook-based, redux api. The material on react-router in part 7 has also been updated to use the hook-api. Semantic UI React has been replaced with the MaterialUI library due to lack of maintenance. <br><br> Part 8 on GraphQL has major updates especially on Apollo Client, which finally has stable hook based apis. Part 9 on TypeScript is completely new. -->
+第6章是讲Redux的，主要介绍了新的基于hook的redux API。第7章的react-router 也更新为使用hook-api。由于Semantic UI React 缺乏维护，其内容已经被替换为了 MaterialUI library 的内容。<br><br> 第8章 GraphQL有了较大版本的升级，尤其引入了Apollo Client，它终于有了稳定的基于hook的api。第9章是全新的内容。
+
+<!-- Last year's course material can be found from https://fullstackopen-2019.github.io/ -->
+去年的课程内容可以通过<a href='https://fullstackopen-2019.github.io/'>https://fullstackopen-2019.github.io/</a>进行访问。
+
 ### Submitting exercises 
 【练习提交】
 
@@ -272,11 +286,14 @@ lang: zh
 <!-- - Sign in on the Open universitu [course page](https://courses.helsinki.fi/fi/aytkt21009en/131840261), where you will find the enrolment key for the Moodle space -->
 - 登录到公开大学的[课程导航页面](https://courses.helsinki.fi/fi/aytkt21009en/131840261)，你就可以找到 Moodle 系统的注册密钥
 <!-- - Sign into the [Moodle space](https://moodle.helsinki.fi/login/index.php) with your University of Helsinki user ID and the enrolment key. -->
-
 - 用你的赫尔辛基大学用户名和注册密钥登录到 [Moodle 系统](https://moodle.helsinki.fi/login/index.php)
 
 <!-- Please note! -->
 请注意！
+
+<!-- - **Did you wait 24 hours** as the above instructions say? -->
+- 是否如上面指示的，**等待了24小时** 呢 ?
+
 
 <!-- - You need the Moodle access just for the exam, for the course certificate access is not needed! -->
 - 您只需要登录 Moodle 系统来参加考试，获取课程证书是不需要登录的。

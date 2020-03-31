@@ -306,7 +306,7 @@ test('clicking the button calls event handler once', () => {
   const button = component.getByText('make not important')
   fireEvent.click(button)
 
-  expect(mockHandler.mock.calls.length).toBe(1)
+  expect(mockHandler.mock.calls).toHaveLength(1)
 })
 ```
 
@@ -332,7 +332,7 @@ fireEvent.click(button)
 测试的期望验证 <i>mock function</i> 是否只被调用了一次。
 
 ```js
-expect(mockHandler.mock.calls.length).toBe(1)
+expect(mockHandler.mock.calls).toHaveLength(1)
 ```
 
 <!-- [Mock objects and functions](https://en.wikipedia.org/wiki/Mock_object) are commonly used stub components in testing that are used for replacing dependencies of the components being tested. Mocks make it possible to return hardcoded responses, and to verify the number of times the mock functions are called and with what parameters. -->
@@ -564,7 +564,7 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
   })
   fireEvent.submit(form)
 
-  expect(createNote.mock.calls.length).toBe(1)
+  expect(createNote.mock.calls).toHaveLength(1)
   expect(createNote.mock.calls[0][0].content).toBe('testing of forms could be easier' )
 })
 ```

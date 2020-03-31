@@ -28,10 +28,10 @@ lang: zh
 
 在浏览器上打开这个[示例应用]()。应用加载通常需要等一会儿。
 
-<!-- **The 1st rule of web development**: Always keep the developer console open on your browser. On macOS, open the console by pressing `F12` or `alt-cmd-i` simultaneously. -->
+<!-- **The 1st rule of web development**: Always keep the developer console open on your browser. On macOS, open the console by pressing `F12` or `option-cmd-i` simultaneously. -->
 <!-- On Windows, open the console by pressing `F12` or `ctrl-shift-i` simultaneously. -->
 
-Web 开发第一规则: 始终在浏览器上打开你的开发者控制台。 在 macOS 上，按 `F12` 或者 `alt-cmd-i` 打开控制台。 在 Windows 上，按 `F12` 或 `ctrl-shift-i`打开控制台。
+Web 开发第一规则: 始终在浏览器上打开你的开发者控制台。 在 macOS 上，按 `F12` 或者 `option-cmd-i` 打开控制台。 在 Windows 上，按 `F12` 或 `ctrl-shift-i`打开控制台。
 
 <!-- Before continuing, find out how to open the developer console on your computer (google if necessary) and remember to <i>always</i> keep it open when developing web applications. -->
 

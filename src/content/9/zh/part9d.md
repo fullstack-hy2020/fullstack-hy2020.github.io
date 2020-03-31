@@ -126,7 +126,7 @@ ReactDOM.render(element, document.getElementById("root"));
 ```
 
 <!-- In the example we have a component called <i>Welcome</i>, to which we want to pass a <i>name</i> prop, that is then rendered. We know that the  <i>name</i> prop should be a string and we use the [prop-types](https://www.npmjs.com/package/prop-types) package introduced in [part 5](/zh/part5/props_children_and_proptypes#prop-types) to be able to receive hints about component's desired prop types and warnings for invalid prop types. -->
-在这个示例中，我们有一个名为<i>Welcome</i> 的组件，我们希望向它传递一个<i>name</i> prop，然后将其渲染。 我们知道<i>name</i> prop 应该是一个字符串，我们使用在[第五章](/ en / part5 / props children and proptypes # prop-types)中介绍的[ prop-types ](https://www.npmjs.com/package/prop-types)包，可以接收关于部件所需props类型的提示，以及无效props类型的警告。
+在这个示例中，我们有一个名为<i>Welcome</i> 的组件，我们希望向它传递一个<i>name</i> prop，然后将其渲染。 我们知道<i>name</i> prop 应该是一个字符串，我们使用在[第五章](/zh/part5/props_children_and_proptypes#prop-types) 中介绍的[ prop-types ](https://www.npmjs.com/package/prop-types)包，可以接收关于部件所需props类型的提示，以及无效props类型的警告。
 
 <!-- With the help of TypeScript we don't need the <i>prop-types</i> package anymore to define prop types, because we can define the types with the help of TypeScript itself by using the _FunctionComponent_ type or it's shorter alias _FC_. -->
 在 TypeScript 的帮助下，我们不再需要<i>prop-types</i> 包来定义 prop 类型，因为我们可以通过使用 _FunctionComponent_ 类型或者更短的别名 FC，在 TypeScript 本身的帮助下定义类型。
@@ -624,7 +624,7 @@ TypeScript 提供的类型可以告诉你需要什么样的数据结构、函数
 <i>... is 被设计用于为 React 组件树共享可被视为“全局”的数据，例如当前经过身份验证的用户、主题或首选语言。 </i>
 
 <!-- In our case the "global" shared data is the application state <i>and</i> the dispatch function that is used to make changes to data. In a way the approach works quite much like redux based state management that we used in [part 6](/zh/part6) but is a more light weight since it does not require the use of any external libraries. This part assumes that you are at least familiar with the way redux works, e.g. you should have covered at least [the first section](/zh/part6/flux_architecture_and_redux) of part 6. -->
-在我们的示例中，“全局”共享数据是应用状态，分派函数是用于更改数据。 在某种程度上，这种方法的工作原理很像我们在[ part 6](/ en / part6)中使用的基于 redux 的状态管理，但是它很轻量，因为它不需要使用任何外部库。 这一章节假设您至少熟悉 redux 的工作方式，例如，您至少应该包括第6章节的[第一部分](/ en / part6 / flux 架构和 redux)。
+在我们的示例中，“全局”共享数据是应用状态，分派函数是用于更改数据。 在某种程度上，这种方法的工作原理很像我们在[part 6](/zh/part6)中使用的基于 redux 的状态管理，但是它很轻量，因为它不需要使用任何外部库。 这一章节假设您至少熟悉 redux 的工作方式，例如，您至少应该包括第6章节的[第一部分](/zh/part6/flux_architecture_and_redux)。
 
 <!-- The [context](https://reactjs.org/docs/context.html) of the application has a tuple of the app state and dispatcher for changing the state of our app. The application state is typed as follows: -->
 应用的[上下文]( https://reactjs.org/docs/context.html )有一个用于更改应用状态的状态和调度程序的元组。 应用状态的类型如下:
@@ -680,7 +680,7 @@ export type Action =
 ```
 
 <!-- Reducer looks quite much like the ones we wrote in [part 6](/zh/part6), it changes the state for each type of action:  -->
-Reducer 看起来很像我们在[ part 6](/ en / part6)中写的那些，它改变了每种动作的状态: 
+Reducer 看起来很像我们在[part 6](/zh/part6)中写的那些，它改变了每种动作的状态: 
 
 ```js
 export const reducer = (state: State, action: Action): State => {
@@ -711,7 +711,7 @@ export const reducer = (state: State, action: Action): State => {
 ```
 
 <!-- The main difference is now that the state is a dictionary (or object) instead of array that we used in [part 6](/zh/part6). -->
-主要的区别是，现在状态是一个字典(或对象) ，而不是我们在[ part 6](/ en / part6)中使用的数组。
+主要的区别是，现在状态是一个字典(或对象) ，而不是我们在 [part 6](/zh/part6)中使用的数组。
 
 <!-- There are lot of things happening in the file <i>state.ts</i> that is taking care of setting up the context. The main ingredient is that it uses the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook to create the state and dispatch-function and passes those to the [context provider](https://reactjs.org/docs/context.html#contextprovider): -->
 在<i>state.ts</i> 文件中发生了许多事情，它们负责设置 context。 它的主要组成部分是使用[ useReducer ]( https://reactjs.org/docs/hooks-reference.html#useReducer )Hook来创建 状态 和 分发函数，并将它们传递给[ context provider ]( https://reactjs.org/docs/context.html#contextprovider ) :
@@ -930,7 +930,7 @@ dispatch({
 ```
 
 <!-- Refactor the code to use [action creator](/zh/part6/flux_architecture_and_redux#action-creators) functions that are all defined in the file <i>reducer.tsx</i>.  -->
-重构代码以使用文件<i>reducer.tsx</i> 中定义的[ action creator ](/ en / part6 / flux 架构和 redux # action-creators)函数。
+重构代码以使用文件<i>reducer.tsx</i> 中定义的[action creator](/zh/part6/flux_architecture_and_redux#action-creators)函数。
 
 <!-- For example the <i>App</i> changes like this -->
 例如，<i>App</i> 的变化如下
