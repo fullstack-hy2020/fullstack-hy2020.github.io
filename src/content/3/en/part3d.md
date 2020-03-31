@@ -259,16 +259,16 @@ Before we move onto the next part, we will take a look at an important tool call
 In compiled statically typed languages like Java, IDEs like NetBeans can point out errors in the code, even ones that are more than just compile errors. Additional tools for performing [static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) like [checkstyle](http://checkstyle.sourceforge.net/), can be used for expanding the capabilities of the IDE to also point out problems related to style, like indentation.
 
 
-In the JavaScript universe, the current leading tool for static analysis aka. "linting" is [ESlint](https://eslint.org/).
+In the JavaScript universe, the current leading tool for static analysis aka. "linting" is [ESLint](https://eslint.org/).
 
-Let's install ESlint as a development dependency to the backend project with the command:
+Let's install ESLint as a development dependency to the backend project with the command:
 
 ```bash
 npm install eslint --save-dev
 ```
 
 
-After this we can initialize a default ESlint configuration with the command:
+After this we can initialize a default ESLint configuration with the command:
 
 ```bash
 node_modules/.bin/eslint --init
@@ -360,7 +360,7 @@ Also the files in the <em>build</em> directory get checked when the command is r
 build
 ```
 
-This causes the entire <em>build</em> directory to not be checked by ESlint.
+This causes the entire <em>build</em> directory to not be checked by ESLint.
 
 Lint has quite a lot to say about our code:
 
@@ -371,7 +371,7 @@ Let's not fix these issues just yet.
 A better alternative to executing the linter from the command line is to configure a  <i>eslint-plugin</i> to the editor, that runs the linter continuously. By using the plugin you will see errors in your code immediately. You can find more information about the Visual Studio ESLint plugin [here](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
 
 
-The VS Code ESlint plugin will underline style violations with a red line:
+The VS Code ESLint plugin will underline style violations with a red line:
 
 ![](../../images/3/54a.png)
 
@@ -379,7 +379,7 @@ The VS Code ESlint plugin will underline style violations with a red line:
 This makes errors easy to spot and fix right away.
 
 
-ESlint has a vast array of [rules](https://eslint.org/docs/rules/) that are easy to take into use by editing the <i>.eslintrc.js</i> file.
+ESLint has a vast array of [rules](https://eslint.org/docs/rules/) that are easy to take into use by editing the <i>.eslintrc.js</i> file.
 
 
 Let's add the [eqeqeq](https://eslint.org/docs/rules/eqeqeq) rule that warns us, if equality is checked with anything but the triple equals operator. The rule is added under the <i>rules</i> field in the configuration file.
@@ -452,7 +452,7 @@ This includes a rule that warns about _console.log_ commands. [Disabling](https:
 If there is something wrong in your configuration file, the lint plugin can behave quite erratically.
 
 
-Many companies define coding standards that are enforced throughout the organization through the ESlint configuration file. It is not recommended to keep reinventing the wheel over and over again, and it can be a good idea to adopt a ready-made configuration from someone else's project into yours. Recently many projects have adopted the Airbnb [Javascript style guide](https://github.com/airbnb/javascript) by taking Airbnb's [ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) configuration into use.
+Many companies define coding standards that are enforced throughout the organization through the ESLint configuration file. It is not recommended to keep reinventing the wheel over and over again, and it can be a good idea to adopt a ready-made configuration from someone else's project into yours. Recently many projects have adopted the Airbnb [Javascript style guide](https://github.com/airbnb/javascript) by taking Airbnb's [ESLint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) configuration into use.
 
 
 You can find the code for our current application in its entirety in the <i>part3-6</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-6).
@@ -467,7 +467,7 @@ You can find the code for our current application in its entirety in the <i>part
 #### 3.22: Lint configuration
 
 
-Add ESlint to your application and fix all the warnings.
+Add ESLint to your application and fix all the warnings.
 
 This was the last exercise of this part of the course. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 

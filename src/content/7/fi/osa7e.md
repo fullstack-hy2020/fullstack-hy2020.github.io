@@ -415,7 +415,7 @@ Mozillan MDN:n erittäin hyvä [Website security -guide](https://developer.mozil
 
 Expressin dokumentaatio sisältää tietoturvaa käsittelevän osan [Production Best Practices: Security](https://expressjs.com/en/advanced/best-practice-security.html) joka kannattaa lukea läpi. Erittäin suositeltavaa on ottaa backendissa käyttöön [Helmet](https://helmetjs.github.io/)-kirjasto, joka sisältää joukon Express-sovelluksista tunnettuja turvallisuusriskejä eliminoivia middlewareja.
 
-Myös ESlintin [security-pluginin](https://github.com/nodesecurity/eslint-plugin-security) käyttöönotto kannattaa.
+Myös ESLintin [security-pluginin](https://github.com/nodesecurity/eslint-plugin-security) käyttöönotto kannattaa.
 
 ### Tämän päivän trendejä
 

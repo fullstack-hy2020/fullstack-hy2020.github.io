@@ -673,9 +673,9 @@ Jos propsin tyyppi on väärä, esim. yritetään määritellä propsiksi <i>han
 
 ![](../../images/5/16.png)
 
-### ESlint
+### ESLint
 
-Konfiguroimme osassa 3 koodin tyylistä huolehtivan [ESlintin](/osa3/validointi_ja_es_lint) backendiin. Otetaan nyt ESlint käyttöön myös frontendissa.
+Konfiguroimme osassa 3 koodin tyylistä huolehtivan [ESLintin](/osa3/validointi_ja_es_lint) backendiin. Otetaan nyt ESLint käyttöön myös frontendissa.
 
 Create-react-app on asentanut projektille eslintin valmiiksi, joten ei tarvita muuta kuin sopiva konfiguraatio tiedostoon <i>.eslintrc.js</i>.
 
@@ -805,7 +805,7 @@ Määrittele joillekin sovelluksesi komponenteille PropTypet.
 
 #### 5.12: blogilistan frontend, step12
 
-Ota projektiin käyttöön ESlint. Määrittele haluamasi kaltainen konfiguraatio. Korjaa kaikki lint-virheet.
+Ota projektiin käyttöön ESLint. Määrittele haluamasi kaltainen konfiguraatio. Korjaa kaikki lint-virheet.
 
 Create-react-app on asentanut projektille eslintin valmiiksi, joten ei tarvita muuta kun sopiva konfiguraatio tiedostoon <i>.eslintrc.js</i>.
 

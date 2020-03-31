@@ -725,13 +725,13 @@ If the type of a passed prop is wrong, e.g. if we try to define the <i>handleSub
 
 ![](../../images/5/16.png)
 
-### ESlint
+### ESLint
 
-In part 3 we configured the [ESlint](/en/part3/validation_and_es_lint#lint) code style tool to the backend. Let's take ESlint to use in the frontend as well.
+In part 3 we configured the [ESLint](/en/part3/validation_and_es_lint#lint) code style tool to the backend. Let's take ESLint to use in the frontend as well.
 
-Create-react-app has installed ESlint to the project by default, so all that's left for us to do is to define our desired configuration in the <i>.eslintrc.js</i> file. 
+Create-react-app has installed ESLint to the project by default, so all that's left for us to do is to define our desired configuration in the <i>.eslintrc.js</i> file. 
 
-*NB:* do not run the _eslint --init_ command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
+*NB:* do not run the _eslint --init_ command. It will install the latest version of ESLint that is not compatible with the configuration file created by create-react-app!
 
 Next, we will start testing the frontend and in order to avoid undesired and irrelevant linter errors we will install the [eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest) package:
 
@@ -857,10 +857,10 @@ Define PropTypes for one of the components of your application.
 
 #### 5.12: Blog list frontend, step12
 
-Add ESlint to the project. Define the configuration according to your liking. Fix all of the linter errors.
+Add ESLint to the project. Define the configuration according to your liking. Fix all of the linter errors.
 
-Create-react-app has installed ESlint to the project by default, so all that's left for you to do is to define your desired configuration in the <i>.eslintrc.js</i> file. 
+Create-react-app has installed ESLint to the project by default, so all that's left for you to do is to define your desired configuration in the <i>.eslintrc.js</i> file. 
 
-*NB:* do not run the _eslint --init_ command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
+*NB:* do not run the _eslint --init_ command. It will install the latest version of ESLint that is not compatible with the configuration file created by create-react-app!
 
 </div>

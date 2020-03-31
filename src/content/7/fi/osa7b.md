@@ -32,7 +32,7 @@ Kuten [osassa 1](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot)  
 - Call Hooks from React function components.
 - Call Hooks from custom Hooks
 
-On olemassa [ESlint](https://www.npmjs.com/package/eslint-plugin-react-hooks)-sääntö, jonka avulla voidaa varmistaa, että sovellus käyttää hookeja oikein. Create-react-appiin valmiiksi asennettu säätö [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks) varoittaa heti jos yrität käyttää hookia väärin:
+On olemassa [ESLint](https://www.npmjs.com/package/eslint-plugin-react-hooks)-sääntö, jonka avulla voidaa varmistaa, että sovellus käyttää hookeja oikein. Create-react-appiin valmiiksi asennettu säätö [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks) varoittaa heti jos yrität käyttää hookia väärin:
 
 ![](../../images/7/60ea.png)
 

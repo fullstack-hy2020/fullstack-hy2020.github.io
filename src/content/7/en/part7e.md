@@ -455,7 +455,7 @@ On Mozilla's MDN there is a very good [Website security -guide](https://develope
 
 The documentation for Express includes a section on security: [Production Best Practices: Security](https://expressjs.com/en/advanced/best-practice-security.html), which is worth a read through. It is also recommended to add a library called [Helmet](https://helmetjs.github.io/) to the backend. It includes a set of middlewares that eliminate some security vulnerabilities in Express applications.
 
-Using the ESlint [security-plugin](https://github.com/nodesecurity/eslint-plugin-security) is also worth doing.
+Using the ESLint [security-plugin](https://github.com/nodesecurity/eslint-plugin-security) is also worth doing.
 
 ### Current trends
 

@@ -324,7 +324,7 @@ If we search for a button by its text, [cy.contains](https://docs.cypress.io/api
 This will happen even if the button is not visible. 
 Because of this we gave the submit button id <i>login-button</i> we can use to access it.
 
-<!-- Huomaamme, että testeissä käytetty muuttuja _cy_ aiheuttaa ikävän ESlint-virheen -->
+<!-- Huomaamme, että testeissä käytetty muuttuja _cy_ aiheuttaa ikävän ESLint-virheen -->
 Now we notice, that the variable _cy_ our tests use gives us a nasty Eslint error
 
 ![](../../images/5/30ea.png)

@@ -33,7 +33,7 @@ As mentioned in [part 1](/en/part1/a_more_complex_state_debugging_react_apps#rul
 - Call Hooks from React function components.
 - Call Hooks from custom Hooks
 
-There's an existing [ESlint](https://www.npmjs.com/package/eslint-plugin-react-hooks) rule that can be used to verify that the application uses hooks correctly. 
+There's an existing [ESLint](https://www.npmjs.com/package/eslint-plugin-react-hooks) rule that can be used to verify that the application uses hooks correctly. 
 
 Create-react-app has readily configured rule [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks) that complains if hooks are used in an illegal manner:
 

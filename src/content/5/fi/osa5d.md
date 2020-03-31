@@ -273,7 +273,7 @@ Molemmissa napeissa on sama teksti <i>login</i>, mutta kyseessä on kaksi erilli
 
 Jos haemme nappia tekstin perusteella, palauttaa komento [cy.contains](https://docs.cypress.io/api/commands/contains.html#Syntax) aina napeista ensimmäisen, eli lomakkeen avaavan napin. Näin tapahtuu siis vaikka nappi ei olisikaan näkyvillä. Tämän takia lomakkeen lähettävään nappiin on lisätty id <i>login-button</i>, jonka perusteella testi pääsee nappiin käsiksi.
 
-Huomaamme, että testeissä käytetty muuttuja _cy_ aiheuttaa ikävän ESlint-virheen
+Huomaamme, että testeissä käytetty muuttuja _cy_ aiheuttaa ikävän ESLint-virheen
 
 ![](../../images/5/30ea.png)
 
