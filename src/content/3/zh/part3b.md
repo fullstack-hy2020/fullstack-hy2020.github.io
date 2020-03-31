@@ -230,8 +230,8 @@ const getAll = () => {
 
 ![](../../images/3/28e.png)
 
-<!-- Our application now works exactly like the [single-page app](/zh/part0/fundamentals_of_web_apps#single-page-app) example application we studied in part 0.  -->
-我们的应用现在的工作方式与我们在第0章节中研究的[单页应用](/zh/part0/fundamentals_of_web_apps#single-page-app) 示例应用完全一样。
+<!-- Our application now works exactly like the [single-page app](/zh/part0/web_应用的基础设施#single-page-app) example application we studied in part 0.  -->
+我们的应用现在的工作方式与我们在第0章节中研究的[单页应用](/zh/part0/web_应用的基础设施#single-page-app) 示例应用完全一样。
 
 <!-- When we use a browser to go to the address <http://localhost:3001>, the server returns the <i>index.html</i> file from the <i>build</i> repository. Summarized contents of the file are as follows:  -->
 当我们使用浏览器访问地址 http://localhost:3001时，服务器从<i>build</i> 仓库返回<i>index. html</i> 文件。 档案的摘要内容如下:

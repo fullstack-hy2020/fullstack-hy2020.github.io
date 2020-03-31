@@ -1417,7 +1417,7 @@ describe('Blog app', function() {
 
 
 <!-- The <i>beforeEach</i> formatting blog must empty the database using for example the method we used in the [material](/osa5/end_to_end_testaus#tietokannan-tilan-kontrollointi). -->
-格式化博客的<i>beforeEach</i> 必须清空数据库，例如使用 [教材](/zh/part5/end_to_end_testing#controlling-the-state-of-the-database)中使用的方法。
+格式化博客的<i>beforeEach</i> 必须清空数据库，例如使用 [教材](/zh/part5/端到端测试#controlling-the-state-of-the-database)中使用的方法。
 
 
 #### 5.18: bloglist end to end testing, 步骤2

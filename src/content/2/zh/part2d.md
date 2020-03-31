@@ -72,8 +72,8 @@ addNote = event => {
 <!-- The newly created note resource is stored in the value of the <i>data</i> property of the _response_ object. -->
 新创建的便笺资源存储在response对象的<i>data</i> 属性值中。
 
-<!-- Sometimes it can be useful to inspect HTTP requests in the <i>Network</i> tab of Chrome developer tools, which was used heavily at the beginning of [part 0](/zh/part0/fundamentals_of_web_apps#http-get): -->
-有时在 Chrome 开发工具的<i>Network</i> 选项卡中检查 HTTP 请求是很有用的，这个选项卡在[第 0 章](/zh/part0/fundamentals_of_web_apps#http-get) 开始时被大量使用:
+<!-- Sometimes it can be useful to inspect HTTP requests in the <i>Network</i> tab of Chrome developer tools, which was used heavily at the beginning of [part 0](/zh/part0/web_应用的基础设施#http-get): -->
+有时在 Chrome 开发工具的<i>Network</i> 选项卡中检查 HTTP 请求是很有用的，这个选项卡在[第 0 章](/zh/part0/web_应用的基础设施#http-get) 开始时被大量使用:
 
 ![](../../images/2/21e.png)
 
@@ -108,8 +108,8 @@ addNote = event => {
 }
 ```
 
-<!-- The new note returned by the backend server is added to the list of notes in our application's state in the customary way of using the <em>setNotes</em> function and then resetting the note creation form. An [important detail](/zh/part1/a_more_complex_state_debugging_react_apps#handling-arrays) to remember is that the <em>concat</em> method does not change the component's original state, but instead creates a new copy of the list. -->
-后端服务器返回的新便笺将按照使用 <em>setNotes</em> 函数然后重置便笺创建表单的惯例方式添加到应用状态的便笺列表中。 需要记住的一个 [重要细节important detail](/zh/part1/a_more_complex_state_debugging_react_apps#handling-arrays) 是 <em>concat</em> 方法不会改变组件的原始状态，而是创建列表的新副本。
+<!-- The new note returned by the backend server is added to the list of notes in our application's state in the customary way of using the <em>setNotes</em> function and then resetting the note creation form. An [important detail](/zh/part1/深入_react_应用调试#handling-arrays) to remember is that the <em>concat</em> method does not change the component's original state, but instead creates a new copy of the list. -->
+后端服务器返回的新便笺将按照使用 <em>setNotes</em> 函数然后重置便笺创建表单的惯例方式添加到应用状态的便笺列表中。 需要记住的一个 [重要细节important detail](/zh/part1/深入_react_应用调试#handling-arrays) 是 <em>concat</em> 方法不会改变组件的原始状态，而是创建列表的新副本。
 
 <!-- Once the data returned by the server starts to have an effect on the behavior of our web applications, we are immediately faced with a whole new set of challenges arising from, for instance, the asynchronicity of communication. This necessitates new debugging strategies, console logging and other means of debugging become increasingly more important, and we must also develop a sufficient understanding of the principles of both the JavaScript runtime and React components. Guessing won't be enough. -->
 一旦服务器返回的数据开始影响我们 web 应用的行为，我们就会立即面临一系列全新的挑战，例如，通信的异步性。 这就需要新的调试策略，控制台日志和其他调试手段变得越来越重要，我们还必须对 JavaScript 运行时和 React 组件的原理有充分的理解。 光靠猜是不够的。
@@ -315,8 +315,8 @@ Map 方法通过将旧数组中的每个项映射到新数组中的一个项来�
 ### Extracting communication with the backend into a separate module
 【将与后端的通信提取到单独的模块中】
 
-<!-- The <i>App</i> component has become somewhat bloated after adding the code for communicating with the backend server. In the spirit of the [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), we deem it wise to extract this communication into its own [module](/zh/part2/rendering_a_collection_modules#refactoring-modules). -->
-在添加了用于与后端服务器通信的代码之后，<i>App</i> 组件变得有些臃肿。 本着[单一职责原则](https://en.wikipedia.org/wiki/single_responsibility_principle)的精神，我们认为将这种通信提取到它自己的[模块](/zh/part2/rendering_a_collection_modules#refactoring-modules)是明智的。
+<!-- The <i>App</i> component has become somewhat bloated after adding the code for communicating with the backend server. In the spirit of the [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), we deem it wise to extract this communication into its own [module](/zh/part2/从渲染集合到模块学习#refactoring-modules). -->
+在添加了用于与后端服务器通信的代码之后，<i>App</i> 组件变得有些臃肿。 本着[单一职责原则](https://en.wikipedia.org/wiki/single_responsibility_principle)的精神，我们认为将这种通信提取到它自己的[模块](/zh/part2/从渲染集合到模块学习#refactoring-modules)是明智的。
 
 <!-- Let's create a <i>src/services</i> directory and add a file there called <i>notes.js</i>: -->
 让我们创建一个<i>src/services</i>目录，并添加一个名为<i>notes.js</i> 的文件:
@@ -712,8 +712,8 @@ const getAll = () => {
 <!-- The application should be able to handle these types of error situations gracefully. Users won't be able to tell that an error has actually occurred unless they happen to have their console open. The only way the error can be seen  in the application is that clicking the button has no effect on the importance of the note. -->
 应用应该能够很好地处理这些类型的错误情况。 除非用户碰巧打开了自己的控制台，否则他们无法判断错误确实发生了。 在应用中可以看到错误的唯一方式是单击按钮看看对便笺的重要性没有影响。
 
-<!-- We had [previously](/zh/part2/getting_data_from_server#axios-and-promises) mentioned that a promise can be in one of three different states. When an HTTP request fails, the associated promise is <i>rejected</i>. Our current code does not handle this rejection in any way. -->
-我们 [之前](/zh/part2/getting_data_from_server#axios-and-promises) 提到，一个承诺可以处于三种不同的状态之一。 当 HTTP 请求失败时，相关的承诺是<i>rejected</i>。 我们当前的代码没有以任何方式处理这种拒绝。
+<!-- We had [previously](/zh/part2/从服务器获取数据#axios-and-promises) mentioned that a promise can be in one of three different states. When an HTTP request fails, the associated promise is <i>rejected</i>. Our current code does not handle this rejection in any way. -->
+我们 [之前](/zh/part2/从服务器获取数据#axios-and-promises) 提到，一个承诺可以处于三种不同的状态之一。 当 HTTP 请求失败时，相关的承诺是<i>rejected</i>。 我们当前的代码没有以任何方式处理这种拒绝。
 
 <!-- The rejection of a promise is [handled](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) by providing the <em>then</em> method with a second callback function, which is called in the situation where the promise is rejected. -->
 拒绝承诺是通过给<em>then</em> 方法提供第二个回调函数来处理的，这个[handled](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) 在承诺被拒绝的情况下被调用。

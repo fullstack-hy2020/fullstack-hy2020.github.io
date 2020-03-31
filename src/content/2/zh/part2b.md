@@ -99,8 +99,8 @@ const App = (props) => {
 <!-- We have added the _addNote_ function as an event handler to the form element that will be called when the form is submitted by clicking the submit button. -->
 我们已经将 _addNote_ 函数作为事件处理函数添加到表单元素中，该元素将在单击 submit 按钮提交表单时被调用。
 
-<!-- We use the method discussed in [part 1](/zh/part1/component_state_event_handlers#event-handling) for defining our event handler: -->
-我们使用 [第1章](/zh/part1/component_state_event_handlers#event-handling) 中讨论的方法来定义事件处理 :
+<!-- We use the method discussed in [part 1](/zh/part1/组件状态，事件处理#event-handling) for defining our event handler: -->
+我们使用 [第1章](/zh/part1/组件状态，事件处理#event-handling) 中讨论的方法来定义事件处理 :
 
 ```js
 const addNote = (event) => {
@@ -515,9 +515,9 @@ export default App
 <div>debug: {newName}</div>
 ```
 
-<!-- It's also important to put what we learned in the [debugging React applications](/zh/part1/a_more_complex_state_debugging_react_apps) chapter of part one into good use. The [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension especially, is incredibly useful for tracking changes that occur in the application's state. -->
+<!-- It's also important to put what we learned in the [debugging React applications](/zh/part1/深入_react_应用调试) chapter of part one into good use. The [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension especially, is incredibly useful for tracking changes that occur in the application's state. -->
 
-把我们在第一章节 [调试 React 应用](/zh/part1/a_more_complex_state_debugging_react_apps) 一章中学到的东西好好利用也很重要。 特别是[React developer tools](https://chrome.google.com/webstore/detail/React-developer-tools/fmkadmapgofadopljbjfkapdkoienihi 开发工具)扩展，对于跟踪应用状态中发生的变化非常有用。
+把我们在第一章节 [调试 React 应用](/zh/part1/深入_react_应用调试) 一章中学到的东西好好利用也很重要。 特别是[React developer tools](https://chrome.google.com/webstore/detail/React-developer-tools/fmkadmapgofadopljbjfkapdkoienihi 开发工具)扩展，对于跟踪应用状态中发生的变化非常有用。
 
 <!-- After finishing this exercise your application should look something like this: -->
 在完成这个练习之后，你的应用应该是这样的:
@@ -662,7 +662,7 @@ const App = () => {
 
 <!-- **NB**: You might run into problems in this exercise if you define your components "in the wrong place". Now would be a good time to rehearse the chapter [do not define a component in another component](/osa1/monimutkaisempi_tila_reactin_debuggaus#ala-maarittele-komponenttia-komponentin-sisalla) from last part. -->
 
-注意 : 如果将组件定义在“错误的位置” ，则可能在本练习中遇到问题。 现在是复习本章[不要在其他组件中定义组件](/ osa1 / monimutkaisempi tila reactin debuggaus # ala-maarittele-komponenttia-komponentin-sisalla)的好时机，从最后一段开始。
+注意 : 如果将组件定义在“错误的位置” ，则可能在本练习中遇到问题。 现在是复习本章[不要在其他组件中定义组件](/zh/part1/深入_react_应用调试#do-not-define-components-within-components)的好时机，从最后一段开始。
 
 </div>
 

@@ -365,8 +365,8 @@ const errorHandler = (error, request, response, next) => {
 
 
 ### Exercises 4.15.-4.22.
-<!-- In the next exercises, basics of user management will be implemented for the Bloglist application. The safest way is to follow the story from part 4 chapter [User administration](/zh/part4/user_administration) to the chapter [Token-based authentication](/zh/part4/token_authentication). You can of course also use your creativity.  -->
-在接下来的练习中，我们将为 Bloglist 应用实现基本的用户管理。 最安全的方法是遵循第4章 [User administration](/zh/part4/user_administration)到[Token-based authentication](/zh/part4/token_authentication)这一章的内容。 当然，你也可以运用你的创造力。
+<!-- In the next exercises, basics of user management will be implemented for the Bloglist application. The safest way is to follow the story from part 4 chapter [User administration](/zh/part4/用户管理) to the chapter [Token-based authentication](/zh/part4/密钥认证). You can of course also use your creativity.  -->
+在接下来的练习中，我们将为 Bloglist 应用实现基本的用户管理。 最安全的方法是遵循第4章 [User administration](/zh/part4/用户管理)到[Token-based authentication](/zh/part4/密钥认证)这一章的内容。 当然，你也可以运用你的创造力。
 
 <!-- **One more warning:** If you notice you are mixing async/await and _then_ calls, it is 99% certain you are doing something wrong. Use either or, never both.  -->
 **还有一个警告: **如果你注意到你混用了 async/await 和 _then_ 调用，99% 肯定你做错了什么。 使用其中一种，不要两者都使用。
@@ -376,8 +376,8 @@ const errorHandler = (error, request, response, next) => {
  password and name</i>.
 通过执行 HTTP POST-request 来访问 <i>api/users</i>，实现创建新用户的方法用户需要包含用户名、密码及名字。
 
-<!-- Do not save passwords to the database as clear text, but use the <i>bcrypt</i> library like we did in part 4 chapter [Creating new users](/zh/part4/user_administration#creating-users). -->
-不要将数据库的密码保存为明文，而是使用<i>bcrypt</i> 库，就像我们在第4章[Creating new users](/zh/part4/user_administration#creating-users)中所做的那样。
+<!-- Do not save passwords to the database as clear text, but use the <i>bcrypt</i> library like we did in part 4 chapter [Creating new users](/zh/part4/用户管理#creating-users). -->
+不要将数据库的密码保存为明文，而是使用<i>bcrypt</i> 库，就像我们在第4章[Creating new users](/zh/part4/用户管理#creating-users)中所做的那样。
 
 <!-- **NB** Some Windows users have had problems with <i>bcrypt</i>. If you run into problems, remove the library with command  -->
 注意：有些 Windows 用户在<i>bcrypt</i> 方面有问题。如果遇到问题，请使用命令删除该库
@@ -405,8 +405,8 @@ npm uninstall bcrypt --save
 <!-- The operation must respond with a suitable status code and some kind of an error message if invalid user is created.  -->
 如果创建了无效用户，操作必须使用适当的状态代码和某种错误消息进行响应。
 
-<!-- **NB** Do not test password restrictions with Mongoose validations. It is not a good idea because the password received by the backend and the password hash saved to the database are not the same thing. The password length should be validated in the controller like we did in [part 3](/zh/part3/validation_and_es_lint) before using Mongoose validation.  -->
-**注意 **不要用 Mongoose 验证测试密码限制。 这不是一个好主意，因为后端接收到的密码和保存到数据库的密码散列不是一回事。 在使用 Mongoose 验证之前，应该像在 [part 3](/zh/part3/validation_and_es_lint)中那样在控制器中验证密码长度。
+<!-- **NB** Do not test password restrictions with Mongoose validations. It is not a good idea because the password received by the backend and the password hash saved to the database are not the same thing. The password length should be validated in the controller like we did in [part 3](/zh/part3/es_lint与代码检查) before using Mongoose validation.  -->
+**注意 **不要用 Mongoose 验证测试密码限制。 这不是一个好主意，因为后端接收到的密码和保存到数据库的密码散列不是一回事。 在使用 Mongoose 验证之前，应该像在 [part 3](/zh/part3/es_lint与代码检查)中那样在控制器中验证密码长度。
 
 <!-- Also, implement tests which check that invalid users are not created and invalid add user operation returns a suitable status code and error message.  -->
 此外，实现一些测试，测试可以检查未被创建的无效用户，以及无效的添加用户操作，并返回合适的状态码和错误消息。
@@ -415,8 +415,8 @@ npm uninstall bcrypt --save
 <!-- Expand blogs so that each blog contains information on the creator of the blog.  -->
 扩展博客，使每个博客包含关于博客创建者的信息。
 
-<!-- Modify adding new blogs so that when a new blog is created,  <i>any</i> user from the database is designated as its creator (for example the one found first). Implement this according to part 4 chapter [populate](/zh/part4/user_administration#populate). -->
-修改添加新博客，以便在创建新博客时，将数据库中的任何 用户指定为其创建者(例如首先找到的那个)。 根据第4章 [populate](/zh/part4/user_administration#populate).实现这一点。
+<!-- Modify adding new blogs so that when a new blog is created,  <i>any</i> user from the database is designated as its creator (for example the one found first). Implement this according to part 4 chapter [populate](/zh/part4/用户管理#populate). -->
+修改添加新博客，以便在创建新博客时，将数据库中的任何 用户指定为其创建者(例如首先找到的那个)。 根据第4章 [populate](/zh/part4/用户管理#populate).实现这一点。
 <!-- Which user is designated as the creator does not matter just yet. The functionality is finished in exercise 4.19.  -->
 哪个用户被指定为创建者还不重要。这个功能在练习4.19中完成。
 
@@ -432,19 +432,19 @@ npm uninstall bcrypt --save
 
 
 #### 4.18: bloglist expansion, 步骤7
-<!-- Implement token-based authentication according to part 4 chapter [Token authentication](/zh/part4/token_authentication). -->
-根据第4章节[Token authentication](/zh/part4/token_authentication)实现基于令牌的认证。
+<!-- Implement token-based authentication according to part 4 chapter [Token authentication](/zh/part4/密钥认证). -->
+根据第4章节[Token authentication](/zh/part4/密钥认证)实现基于令牌的认证。
 
 #### 4.19: bloglist expansion, 步骤8
 <!-- Modify adding new blogs so that it is only possible if a valid token is sent with the HTTP POST request. The user identified by the token is designated as the creator of the blog.  -->
 修改添加新博客的内容，以便只有在使用 HTTP POST 请求发送有效令牌的情况下才可以添加新博客。 该令牌标识的用户被指定为博客的创建者。
 
 #### 4.20*: bloglist expansion, 步骤9
-<!-- [This example](/zh/part4/token_authentication) from part 4 shows taking the token from the header with the _getTokenFrom_ helper function. -->
-第4章节的[示例](/zh/part4/token_authentication)显示了使用 getTokenFrom helper 函数从头部获取令牌。
+<!-- [This example](/zh/part4/密钥认证) from part 4 shows taking the token from the header with the _getTokenFrom_ helper function. -->
+第4章节的[示例](/zh/part4/密钥认证)显示了使用 getTokenFrom helper 函数从头部获取令牌。
 
-<!-- If you used the same solution, refactor taking the token to a [middleware](/zh/part3/node_js_and_express#middleware). The middleware should take the token from the <i>Authorization</i> header and place it to the <i>token</i> field of the <i>request</i> object.  -->
-如果您使用相同的解决方案，重构将令牌移到[中间件](/zh/part3/node_js_and_express#middleware)。 中间件应该从<i>Authorization</i> 标头获取令牌，并将其放置到<i>request</i> 对象的<i>token</i> 字段。
+<!-- If you used the same solution, refactor taking the token to a [middleware](/zh/part3/node_js_与_express#middleware). The middleware should take the token from the <i>Authorization</i> header and place it to the <i>token</i> field of the <i>request</i> object.  -->
+如果您使用相同的解决方案，重构将令牌移到[中间件](/zh/part3/node_js_与_express#middleware)。 中间件应该从<i>Authorization</i> 标头获取令牌，并将其放置到<i>request</i> 对象的<i>token</i> 字段。
 
 <!-- In other words, if you register this middleware in the <i>app.js</i> file before all routes -->
 换句话说，如果在所有路由之前在<i>app.js</i> 文件中注册这个中间件
@@ -464,8 +464,8 @@ blogsRouter.post('/', async (request, response) => {
 })
 ```
 
-<!-- Remember that a normal [middleware](/zh/part3/node_js_and_express#middleware) is a function with three parameters, that at the end calls the last parameter <i>next</i> in order to move the control to next middleware: -->
-请记住，普通的[中间件](/zh/part3/node_js_and_express#middleware)是一个带有三个参数的函数，它在最后调用最后一个参数<i>next</i>，以便将控制移动到下一个中间件:
+<!-- Remember that a normal [middleware](/zh/part3/node_js_与_express#middleware) is a function with three parameters, that at the end calls the last parameter <i>next</i> in order to move the control to next middleware: -->
+请记住，普通的[中间件](/zh/part3/node_js_与_express#middleware)是一个带有三个参数的函数，它在最后调用最后一个参数<i>next</i>，以便将控制移动到下一个中间件:
 
 ```js
 const tokenExtractor = (request, response, next) => {

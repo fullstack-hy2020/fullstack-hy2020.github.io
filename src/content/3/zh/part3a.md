@@ -28,8 +28,8 @@ lang: zh
 注意：本章中的应用和练习并不都是 React 应用，我们不会使用<i>create-react-app</i>工具程序为此应用初始化项目。
 
 
-<!-- We had already mentioned [npm](/zh/part2/getting_data_from_server#npm) back in part 2, which is a tool used for managing JavaScript packages. In fact, npm originates from the Node ecosystem. -->
-在第2章节中，我们已经提到了[npm](/zh/part2/getting_data_from_server#npm) ，这是一个用于管理 JavaScript 包的工具。 事实上，npm 来源于 Node 生态系统。
+<!-- We had already mentioned [npm](/zh/part2/从服务器获取数据#npm) back in part 2, which is a tool used for managing JavaScript packages. In fact, npm originates from the Node ecosystem. -->
+在第2章节中，我们已经提到了[npm](/zh/part2/从服务器获取数据#npm) ，这是一个用于管理 JavaScript 包的工具。 事实上，npm 来源于 Node 生态系统。
 
 <!-- Let's navigate to an appropriate directory, and create a new template for our application with the _npm init_ command. We will answer the questions presented by the utility, and the result will be an automatically generated <i>package.json</i> file at the root of the project, that contains information about the project. -->
 让我们进入到一个合适的目录，并使用_npm init_命令为应用创建一个新模板。 我们将回答该工具提出的问题，结果会在项目根目录下自动生成的<i>package.json</i> 文件，其中包含有关项目的信息。
@@ -264,8 +264,8 @@ console.log(`Server running on port ${port}`)
 <!-- The <i>application/json</i> value in the <i>Content-Type</i> header informs the receiver that the data is in the JSON format. The _notes_ array gets transformed into JSON with the <em>JSON.stringify(notes)</em> method. -->
  <i>Content-Type</i> 头中的 <i>application/json</i> 值通知接收方数据为 JSON 格式。 使用  <em>JSON.stringify(notes)</em>  方法将 _notes_ 数组转换为 JSON。
 
-<!-- When we open the browser, the displayed format is exactly the same as in [part 2](/zh/part2/getting_data_from_server/) where we used [json-server](https://github.com/typicode/json-server) to serve the list of notes: -->
-当我们打开浏览器的时候，显示的格式和第2章节 [part 2](/zh/part2/getting_data_from_server/) 完全一样，在那里我们使用 [json-server](https://github.com/typicode/json-server) 来提供便笺列表:
+<!-- When we open the browser, the displayed format is exactly the same as in [part 2](/zh/part2/从服务器获取数据/) where we used [json-server](https://github.com/typicode/json-server) to serve the list of notes: -->
+当我们打开浏览器的时候，显示的格式和第2章节 [part 2](/zh/part2/从服务器获取数据/) 完全一样，在那里我们使用 [json-server](https://github.com/typicode/json-server) 来提供便笺列表:
 
 ![](../../images/3/2e.png)
 
@@ -531,8 +531,8 @@ Representational State Transfer，又名REST， 是在2000年 Roy Fielding 的[�
 <!-- We are not going to dig into Fielding's definition of REST or spend time pondering about what is and isn't RESTful. Instead, we take a more [narrow view](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) by only concerning ourselves with how RESTful API's are typically understood in web applications. The original definition of REST is in fact not even limited to web applications. -->
 我们不会深入探究 Fielding 对 REST 的定义，也不会花时间思考什么是 RESTful，什么不是 RESTful。 相反，我们只关注web应用对 RESTful API 的典型理解，从而采取了一种更为狭隘的视角 [narrow view](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services)。 Rest 的最初定义实际上并不局限于 web 应用。
 
-<!-- We mentioned in the [previous part](/zh/part2/altering_data_in_server#rest) that singular things, like notes in the case of our application, are called <i>resources</i> in RESTful thinking. Every resource has an associated URL which is the resource's unique address. -->
-我们在 [上一章节](/zh/part2/altering_data_in_server#rest) 中提到过，在我们的应用中，像便笺这样的单数实体，在 RESTful thinking 中称为<i>resource</i>。 每个resource都有一个相关联的 URL，这个 URL 是资源的唯一地址。
+<!-- We mentioned in the [previous part](/zh/part2/在服务端将数据_alert出来#rest) that singular things, like notes in the case of our application, are called <i>resources</i> in RESTful thinking. Every resource has an associated URL which is the resource's unique address. -->
+我们在 [上一章节](/zh/part2/在服务端将数据_alert出来#rest) 中提到过，在我们的应用中，像便笺这样的单数实体，在 RESTful thinking 中称为<i>resource</i>。 每个resource都有一个相关联的 URL，这个 URL 是资源的唯一地址。
 
 <!-- One convention is to create the unique address for resources by combining the name of the resource type with the resource's unique identifier. -->
 一个约定是结合resource 类型名称和resource的唯一标识符来创建resource唯一的地址。

@@ -287,8 +287,8 @@ props.toggleImportanceOf(note.id)
 <!-- There is no need to call the _dispatch_ function separately since _connect_ has already modified the _toggleImportanceOf_ action creator into a form that contains the dispatch. -->
 不需要单独调用 dispatch 函数，因为 connect 已经将 toggleimportance of action creator 修改为包含 dispatch 的窗体。
 
-<!-- It can take some to time to wrap your head around how _mapDispatchToProps_ works, especially once we take a look at an [alternative way of using it](/zh/part6/connect#alternative-way-of-using-map-dispatch-to-props). -->
-了解 mapDispatchToProps 的工作原理可能需要一些时间，特别是当我们了解了[使用它的替代方法](/zh/part6/connect#alternative-way-of-using-map-dispatch-to-props)之后。
+<!-- It can take some to time to wrap your head around how _mapDispatchToProps_ works, especially once we take a look at an [alternative way of using it](/zh/part6/connect方法#alternative-way-of-using-map-dispatch-to-props). -->
+了解 mapDispatchToProps 的工作原理可能需要一些时间，特别是当我们了解了[使用它的替代方法](/zh/part6/connect方法#alternative-way-of-using-map-dispatch-to-props)之后。
 
 <!-- The resulting situation from using _connect_ can be visualized like this: -->
 使用连接产生的结果可以这样想象:

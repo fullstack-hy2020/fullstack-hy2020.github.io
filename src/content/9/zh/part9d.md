@@ -128,8 +128,8 @@ const element = <Welcome name="Sara" />;
 ReactDOM.render(element, document.getElementById("root"));
 ```
 
-<!-- In the example we have a component called <i>Welcome</i>, to which we want to pass a <i>name</i> prop, that is then rendered. We know that the  <i>name</i> prop should be a string and we use the [prop-types](https://www.npmjs.com/package/prop-types) package introduced in [part 5](/zh/part5/props_children_and_proptypes#prop-types) to be able to receive hints about component's desired prop types and warnings for invalid prop types. -->
-在这个示例中，我们有一个名为<i>Welcome</i> 的组件，我们希望向它传递一个<i>name</i> prop，然后将其渲染。 我们知道<i>name</i> prop 应该是一个字符串，我们使用在[第五章](/zh/part5/props_children_and_proptypes#prop-types) 中介绍的[prop-types](https://www.npmjs.com/package/prop-types)包，可以接收关于部件所需props类型的提示，以及无效props类型的警告。
+<!-- In the example we have a component called <i>Welcome</i>, to which we want to pass a <i>name</i> prop, that is then rendered. We know that the  <i>name</i> prop should be a string and we use the [prop-types](https://www.npmjs.com/package/prop-types) package introduced in [part 5](/zh/part5/props_children_与_proptypes#prop-types) to be able to receive hints about component's desired prop types and warnings for invalid prop types. -->
+在这个示例中，我们有一个名为<i>Welcome</i> 的组件，我们希望向它传递一个<i>name</i> prop，然后将其渲染。 我们知道<i>name</i> prop 应该是一个字符串，我们使用在[第五章](/zh/part5/props_children_与_proptypes#prop-types) 中介绍的[prop-types](https://www.npmjs.com/package/prop-types)包，可以接收关于部件所需props类型的提示，以及无效props类型的警告。
 
 <!-- With the help of TypeScript we don't need the <i>prop-types</i> package anymore to define prop types, because we can define the types with the help of TypeScript itself by using the _FunctionComponent_ type or it's shorter alias _FC_. -->
 在 TypeScript 的帮助下，我们不再需要<i>prop-types</i> 包来定义 prop 类型，因为我们可以通过使用 _FunctionComponent_ 类型或者更短的别名 FC，在 TypeScript 本身的帮助下定义类型。
@@ -590,7 +590,7 @@ TypeScript 提供的类型可以告诉你需要什么样的数据结构、函数
 ### Patientor frontend
 【病人项目的前端】
 <!-- It's time to get our hands dirty finalizing the frontend for the backend we built in [exercises 9.8.-9.13.](/zh/part9/typing_the_express_app). -->
-是时候把我们的手弄脏了，最后为我们在[exercises 9.8.-9.13.](/zh/part9/typing_the_express_app)所开发的后端，完成前端功能。
+是时候把我们的手弄脏了，最后为我们在[exercises 9.8.-9.13.](/zh/part9/typescript版的express应用)所开发的后端，完成前端功能。
 
 <!-- Before diving into the code, let us start both the frontend and the backend. -->
 在深入研究代码之前，让我们从前端和后端同时开始。
@@ -626,8 +626,8 @@ TypeScript 提供的类型可以告诉你需要什么样的数据结构、函数
 > <i>... is designed to share data that can be considered "global" for a tree of React components, such as the current authenticated user, theme, or preferred language.</i> 
 <i>... is 被设计用于为 React 组件树共享可被视为“全局”的数据，例如当前经过身份验证的用户、主题或首选语言。 </i>
 
-<!-- In our case the "global" shared data is the application state <i>and</i> the dispatch function that is used to make changes to data. In a way the approach works quite much like redux based state management that we used in [part 6](/zh/part6) but is a more light weight since it does not require the use of any external libraries. This part assumes that you are at least familiar with the way redux works, e.g. you should have covered at least [the first section](/zh/part6/flux_architecture_and_redux) of part 6. -->
-在我们的示例中，“全局”共享数据是应用状态，分派函数是用于更改数据。 在某种程度上，这种方法的工作原理很像我们在[part 6](/zh/part6)中使用的基于 redux 的状态管理，但是它很轻量，因为它不需要使用任何外部库。 这一章节假设您至少熟悉 redux 的工作方式，例如，您至少应该包括第6章节的[第一部分](/zh/part6/flux_architecture_and_redux)。
+<!-- In our case the "global" shared data is the application state <i>and</i> the dispatch function that is used to make changes to data. In a way the approach works quite much like redux based state management that we used in [part 6](/zh/part6) but is a more light weight since it does not require the use of any external libraries. This part assumes that you are at least familiar with the way redux works, e.g. you should have covered at least [the first section](/zh/part6/flux架构与_redux) of part 6. -->
+在我们的示例中，“全局”共享数据是应用状态，分派函数是用于更改数据。 在某种程度上，这种方法的工作原理很像我们在[part 6](/zh/part6)中使用的基于 redux 的状态管理，但是它很轻量，因为它不需要使用任何外部库。 这一章节假设您至少熟悉 redux 的工作方式，例如，您至少应该包括第6章节的[第一部分](/zh/part6/flux架构与_redux)。
 
 <!-- The [context](https://reactjs.org/docs/context.html) of the application has a tuple of the app state and dispatcher for changing the state of our app. The application state is typed as follows: -->
 应用的[上下文](https://reactjs.org/docs/context.html)有一个用于更改应用状态的状态和调度程序的元组。 应用状态的类型如下:
@@ -899,8 +899,8 @@ export type PublicPatient = Omit<Patient, 'ssn' | 'entries' >  // highlight-line
 <!-- Since we now have the state in the context, you'll need to define a new action type for updating an individual patient's data. -->
 因为我们现在有了上下文中的状态，所以需要定义一个新的操作类型来更新单个患者的数据。
 
-<!-- The Application uses [Semantic UI React](https://react.semantic-ui.com/) for styling, which is quite similar to [React Bootstrap](https://react-bootstrap.github.io/) and [MaterialUI](https://material-ui.com/) that we covered in [part 7](/zh/part7/more_about_styles). You may also use it for the new components but that is up to you since the main focus is now in Typescript. -->
-应用使用[Semantic UI React](https://React.Semantic-UI.com/)来进行样式化，这与[React Bootstrap](https://React-Bootstrap.github.io/)和[MaterialUI](https://material-UI.com/)非常相似，我们在 [part 7](/zh/part7/more_about_styles)中已经介绍过了。 你也可以在新的组件上使用它，但这取决于你，因为我们主要的关注点现在是TypeScript。
+<!-- The Application uses [Semantic UI React](https://react.semantic-ui.com/) for styling, which is quite similar to [React Bootstrap](https://react-bootstrap.github.io/) and [MaterialUI](https://material-ui.com/) that we covered in [part 7](/zh/part7/样式进阶). You may also use it for the new components but that is up to you since the main focus is now in Typescript. -->
+应用使用[Semantic UI React](https://React.Semantic-UI.com/)来进行样式化，这与[React Bootstrap](https://React-Bootstrap.github.io/)和[MaterialUI](https://material-UI.com/)非常相似，我们在 [part 7](/zh/part7/样式进阶)中已经介绍过了。 你也可以在新的组件上使用它，但这取决于你，因为我们主要的关注点现在是TypeScript。
 
 <!-- The Application also uses [react router](https://reacttraining.com/react-router/web/guides/quick-start)  -->
 应用还使用了[React路由](https://reacttraining.com/react-router/web/guides/quick-start)
@@ -932,8 +932,8 @@ dispatch({
 });
 ```
 
-<!-- Refactor the code to use [action creator](/zh/part6/flux_architecture_and_redux#action-creators) functions that are all defined in the file <i>reducer.tsx</i>.  -->
-重构代码以使用文件<i>reducer.tsx</i> 中定义的[action creator](/zh/part6/flux_architecture_and_redux#action-creators)函数。
+<!-- Refactor the code to use [action creator](/zh/part6/flux架构与_redux#action-creators) functions that are all defined in the file <i>reducer.tsx</i>.  -->
+重构代码以使用文件<i>reducer.tsx</i> 中定义的[action creator](/zh/part6/flux架构与_redux#action-creators)函数。
 
 <!-- For example the <i>App</i> changes like this -->
 例如，<i>App</i> 的变化如下
@@ -956,7 +956,7 @@ dispatch(setPatientList(patientListFromApi));
 ### Full entries
 【全部记录】
 <!-- In the [exercise 9.12.](/zh/part9/typing_the_express_app#exercises-9-12-9-13) we implemented an endpoint for fetching the diagnoses but we still are not using that endpoint at all. Since we now have a page for viewing details of a single patient it would be a great idea to expand our data by a bit; let's add possible <i>Entry</i> data to our patient data so that each patient can have medical entries that include possible diagnoses. -->
-在 [exercise 9.12.](/zh/part9/typing_the_express_app#exercises-9-12-9-13)我们实现了一个用于获取诊断的端点，但是我们根本没有使用该端点。 既然我们现在有一个页面可以查看单个病人的详细信息，那么最好将我们的数据扩展一点; 让我们向病人数据中添加可能的<i>Entry</i> 数据，这样每个病人都可以有包含可能诊断的医疗条目。
+在 [exercise 9.12.](/zh/part9/typescript版的express应用#exercises-9-12-9-13)我们实现了一个用于获取诊断的端点，但是我们根本没有使用该端点。 既然我们现在有一个页面可以查看单个病人的详细信息，那么最好将我们的数据扩展一点; 让我们向病人数据中添加可能的<i>Entry</i> 数据，这样每个病人都可以有包含可能诊断的医疗条目。
 
 <!-- Let's ditch our old patient seed data from backend and start using [this expanded format](https://github.com/fullstack-hy2020/misc/blob/master/patients.ts). -->
 让我们从后端丢弃旧病人的种子数据，开始使用[这种扩展格式](https://github.com/fullstack-hy2020/misc/blob/master/patients.ts)。

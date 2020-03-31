@@ -435,8 +435,8 @@ Fork和clone项目[patientor](https://github.com/fullstack-hy2020/patientor)。 
 
 
 
-<!-- We will place all [routers](/zh/part4/structure_of_backend_application_introduction_to_testing), modules which are responsible for handling a set of specific resources such as <i>diaries</i>, under the directory <i>src/routes</i>.  -->
-我们将把所有的路由 [routers](/zh/part4/structure_of_backend_application_introduction_to_testing) ，这些模块负责处理一组特定的资源，如<i>diaries</i>，放在<i>src/routes</i>目录下。
+<!-- We will place all [routers](/zh/part4/从后端架构到测试入门), modules which are responsible for handling a set of specific resources such as <i>diaries</i>, under the directory <i>src/routes</i>.  -->
+我们将把所有的路由 [routers](/zh/part4/从后端架构到测试入门) ，这些模块负责处理一组特定的资源，如<i>diaries</i>，放在<i>src/routes</i>目录下。
 <!-- This is a bit different than what we did  in [part 4](/zh/part4), where we used directory <i>src/controllers</i>. -->
 这与我们在 [part 4](/zh/part4),中使用的目录<i>src / controllers</i> 有些不同。
 
@@ -990,7 +990,7 @@ export default router;
 
 
 <!-- Create data type <i>Patient</i> and set up a GET-endpoint <i>/api/patients</i> that returns all patients to the frontend excluding field <i>ssn</i>. Use a [utility type](https://www.typescriptlang.org/docs/handbook/utility-types.html) to make sure you are selecting and returning only the wanted fields. -->
-创建数据类型<i>Patient</i>，并设置一个 GET-端点 <i>/ api / patients</i>，将所有患者返回到排除字段<i>ssn</i> 的前端。 使用[工具类型](https://www.typescriptlang.org/docs/handbook/utility-types.html)来确保只选择和返回想要的字段。
+创建数据类型<i>Patient</i>，并设置一个 GET-端点 <i>/api/patients</i>，将所有患者返回到排除字段<i>ssn</i> 的前端。 使用[工具类型](https://www.typescriptlang.org/docs/handbook/utility-types.html)来确保只选择和返回想要的字段。
 
 <!-- In this exercise you may assume that field <i>gender</i> has type <i>string</i>. -->
 在这个练习中，您可以假设字段<i>gender</i> 具有类型<i>string</i>。

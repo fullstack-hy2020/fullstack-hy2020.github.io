@@ -520,9 +520,9 @@ const noteReducer = (state = [], action) => {
 }
 ```
 
-<!-- We create a copy of the note which importance has changed with the syntax [familiar from part 2](/zh/part2/altering_data_in_server#changing-the-importance-of-notes), and replace the state with a new state containing all the notes which have not changed and the copy of the changed note <i>changedNote</i>. -->
+<!-- We create a copy of the note which importance has changed with the syntax [familiar from part 2](/zh/part2/在服务端将数据_alert出来#changing-the-importance-of-notes), and replace the state with a new state containing all the notes which have not changed and the copy of the changed note <i>changedNote</i>. -->
 
-我们用第 2 部分中熟悉的语法[familiar from part 2](/zh/part2/altering_data_in_server#changing-the-importance-of-notes)创建一个 impotance 已经改变的 Note 的副本，并用一个新的状态替换该状态，该状态包含所有未改变的 Note 以及<i>changedNote</i>的 Note 的副本。
+我们用第 2 部分中熟悉的语法[familiar from part 2](/zh/part2/在服务端将数据_alert出来#changing-the-importance-of-notes)创建一个 impotance 已经改变的 Note 的副本，并用一个新的状态替换该状态，该状态包含所有未改变的 Note 以及<i>changedNote</i>的 Note 的副本。
 
 <!-- Let's recap what goes on in the code. First, we search for a specific note object, the importance of which we want to change: -->
 让我们回顾一下代码中发生了什么。 首先，我们搜索一个特定的 note 对象，我们想要改变它的重要性:
@@ -729,9 +729,9 @@ describe('unicafe reducer', () => {
 <!-- Start by expanding the reducer so that both tests pass. Then add the rest of the tests, and finally the functionality which they are testing.  -->
 从扩展reducer开始，这样两个测试都能通过。 然后添加其余的测试，最后是它们正在测试的功能。
 
-<!-- A good model for the reducer is the [redux-notes](/zh/part6/flux_architecture_and_redux#pure-functions-immutable) example above.  -->
+<!-- A good model for the reducer is the [redux-notes](/zh/part6/flux架构与_redux#pure-functions-immutable) example above.  -->
 
-这个reducer 一个很好的模型就是上述这个 [redux-notes](/zh/part6/flux_architecture_and_redux#pure-functions-immutable) 例子。
+这个reducer 一个很好的模型就是上述这个 [redux-notes](/zh/part6/flux架构与_redux#pure-functions-immutable) 例子。
 
 #### 6.2: unicafe revisited, 步骤2
 <!-- Now implement the actual functionality of the application.  -->
@@ -1304,15 +1304,15 @@ npm start
 <!-- Implement the functionality for adding new anecdotes.  -->
 实现添加新奇事的功能。
 
-<!-- You can keep the form uncontrolled, like we did [earlier](/zh/part6/flux_architecture_and_redux#uncontrolled-form). -->
-您可以保持表单不受控制，就像我们 [earlier](/zh/part6/flux_architecture_and_redux#uncontrolled-form)所做的。
+<!-- You can keep the form uncontrolled, like we did [earlier](/zh/part6/flux架构与_redux#uncontrolled-form). -->
+您可以保持表单不受控制，就像我们 [earlier](/zh/part6/flux架构与_redux#uncontrolled-form)所做的。
 
 #### 6.5*: anecdotes, 步骤3
 <!-- Make sure that the anecdotes are ordered by the number of votes.  -->
 确保这些轶事是按票数排序的。
 
 #### 6.6: anecdotes, 步骤4
-<!-- If you haven't done so already, separate the creation of action-objects to [action creator](https://redux.js.org/basics/actions#action-creators)-functions and place them in the <i>src/reducers/anecdoteReducer.js</i> file, so do like we have been doing since the chapter [action creators](/zh/part6/flux_architecture_and_redux#action-creators). -->
+<!-- If you haven't done so already, separate the creation of action-objects to [action creator](https://redux.js.org/basics/actions#action-creators)-functions and place them in the <i>src/reducers/anecdoteReducer.js</i> file, so do like we have been doing since the chapter [action creators](/zh/part6/flux架构与_redux#action-creators). -->
 如果你还没有这样做，将动作对象的创建分离到[动作创建器](https://redux.js.org/basics/actions#action-creators)-函数中，并将它们放在 <i>src/reducers/anecdoteReducer.js</i> 文件，就像我们在[动作创建器](https://redux.js.org/basics/actions#action-creators)中所做的那样。
 
 #### 6.7: anecdotes, 步骤5

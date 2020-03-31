@@ -48,8 +48,8 @@ props value is [Object object]
 
 而当您将对象用逗号分隔，将不同参数传递给 console.log 时，就像在上面的第二个例子中一样，对象的内容将作为有意义的字符串打印到开发者控制台中。
 
-<!-- If necessary, read more about debugging React-applications [here](/zh/part1/a_more_complex_state_debugging_react_apps#debugging-react-applications). -->
-如果有必要，请阅读更多关于React 应用调试的内容[here](/zh/part1/a_more_complex_state_debugging_react_apps#debugging-react-applications)。
+<!-- If necessary, read more about debugging React-applications [here](/zh/part1/深入_react_应用调试#debugging-react-applications). -->
+如果有必要，请阅读更多关于React 应用调试的内容[here](/zh/part1/深入_react_应用调试#debugging-react-applications)。
 
 ### Protip: Visual Studio Code snippets 
 【高级技巧: Visual Studio Code 的代码片段】
@@ -98,12 +98,12 @@ props value is [Object object]
 【事件处理复习】
 <!-- Based on last year's course, event handling has proven to be difficult.  -->
 基于去年的课程，事件处理证明是一个难点内容。
-<!-- It's worth reading the revision chapter at the end of the previous part [event handlers revisited](/zh/part1/a_more_complex_state_debugging_react_apps#event-handling-revisited), if it feels like your own knowledge on the topic needs some brushing up.  -->
+<!-- It's worth reading the revision chapter at the end of the previous part [event handlers revisited](/zh/part1/深入_react_应用调试#event-handling-revisited), if it feels like your own knowledge on the topic needs some brushing up.  -->
 
-如果你觉得自己关于这个主题的知识需要复习一下，那么应该阅读上一章节结尾的复习章节 [事件处理复习](/zh/part1/a_more_complex_state_debugging_react_apps#event-handling-revisited)。
+如果你觉得自己关于这个主题的知识需要复习一下，那么应该阅读上一章节结尾的复习章节 [事件处理复习](/zh/part1/深入_react_应用调试#event-handling-revisited)。
 
-<!-- Passing event handlers to the child components of the <i>App</i> component has raised some questions. A small revision on the topic can be found [here](/zh/part1/a_more_complex_state_debugging_react_apps#passing-event-handlers-to-child-components). -->
-将事件处理传递给<i>App</i> 组件的子组件引发了一些问题。 关于这个主题的一个小复习[在这里](/zh/part1/a_more_complex_state_debugging_react_apps#passing-event-handlers-to-child-components)。
+<!-- Passing event handlers to the child components of the <i>App</i> component has raised some questions. A small revision on the topic can be found [here](/zh/part1/深入_react_应用调试#passing-event-handlers-to-child-components). -->
+将事件处理传递给<i>App</i> 组件的子组件引发了一些问题。 关于这个主题的一个小复习[在这里](/zh/part1/深入_react_应用调试#passing-event-handlers-to-child-components)。
 
 ### Rendering collections
 【渲染集合】
@@ -437,8 +437,8 @@ const App = ({ notes }) => { //highlight-line
 }
 ```
 
-<!-- If you have forgotten what destructuring means and how it works, review [this](/zh/part1/component_state_event_handlers#destructuring). -->
-如果您忘记了解构的含义以及它是如何工作的，请复习 [这里](/zh/part1/component_state_event_handlers#destructuring)
+<!-- If you have forgotten what destructuring means and how it works, review [this](/zh/part1/组件状态，事件处理#destructuring). -->
+如果您忘记了解构的含义以及它是如何工作的，请复习 [这里](/zh/part1/组件状态，事件处理#destructuring)
 
 <!-- We'll separate displaying a single note into its own component <i>Note</i>:  -->
 我们将单独显示一个便笺到它自己的<i>Note</i>组件:

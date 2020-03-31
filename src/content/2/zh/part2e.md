@@ -8,9 +8,9 @@ lang: zh
 <div class="content">
 
 
-<!-- The appearance of our current application is quite modest. In [exercise 0.2](/zh/part0/fundamentals_of_web_apps#exercises-0-1-0-6), the assignment was to go through Mozilla's [CSS tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics). -->
+<!-- The appearance of our current application is quite modest. In [exercise 0.2](/zh/part0/web_应用的基础设施#exercises-0-1-0-6), the assignment was to go through Mozilla's [CSS tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics). -->
 
-我们当前应用的外观是相当克制的。 在 [exercise 0.2](/zh/part0/fundamentals_of_web_apps#exercises-0-1-0-6)中，作业是浏览 Mozilla 的[CSS 教程](https://developer.Mozilla.org/en-us/docs/learn/getting_started_with_the_web/css_basics)。
+我们当前应用的外观是相当克制的。 在 [exercise 0.2](/zh/part0/web_应用的基础设施#exercises-0-1-0-6)中，作业是浏览 Mozilla 的[CSS 教程](https://developer.Mozilla.org/en-us/docs/learn/getting_started_with_the_web/css_basics)。
 
 <!-- Before we move onto the next part, let's take a look at how we can add styles to a React application. There are several different ways of doing this and we will take a look at the other methods later on. At first, we will add CSS to our application the old-school way; in a single file without using a [CSS preprocessor](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) (although this is not entirely true as we will learn later on).  -->
 在进入下一章节之前，让我们先看看如何向 React 应用添加样式。 有几种不同的方法可以做到这一点，我们将在稍后介绍其他的方法。 首先，我们将以传统的方式将 CSS 放在一个单独的文件中来添加到我们的应用中; 先不使用[CSS preprocessor](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) 尽管这并不完全正确，我们将在后面来学习)。
@@ -341,8 +341,8 @@ React的哲学，事实上，是这个极端的对立面。 由于将 CSS、 HTM
 <h4>2.19: Phonebook 步骤11</h4>
 <!-- H42.19: 电话簿步骤11 / h4 -->
 
-<!-- Use the [improved error message](/zh/part2/adding_styles_to_react_app#improved-error-message) example from part 2 as a guide to show a notification that lasts for a few seconds after a successful operation is executed (a person is added or a number is changed):  -->
-使用第二章节中的[improved error message](/zh/part2/adding_styles_to_react_app#improved-error-message)示例作为指导，显示一个在成功操作执行后持续几秒钟的通知(添加一个人或更改一个数字) :
+<!-- Use the [improved error message](/zh/part2/给_react应用加点样式#improved-error-message) example from part 2 as a guide to show a notification that lasts for a few seconds after a successful operation is executed (a person is added or a number is changed):  -->
+使用第二章节中的[improved error message](/zh/part2/给_react应用加点样式#improved-error-message)示例作为指导，显示一个在成功操作执行后持续几秒钟的通知(添加一个人或更改一个数字) :
 
 ![](../../images/2/27e.png)
 
@@ -355,8 +355,8 @@ React的哲学，事实上，是这个极端的对立面。 由于将 CSS、 HTM
 
 ![](../../images/2/29b.png)
 
-<!-- Fix the issue according to the example shown in [promise and errors](/zh/part2/altering_data_in_server#promises-and-errors) in part 2. Modify the example so that the user is shown a message when the operation does not succeed. The messages shown for successful and unsuccessful events should look different: -->
-根据第2章节中显示的[promise and errors](/zh/part2/altering_data_in_server#promises-and-errors) 中的示例修复该问题。 修改此示例，以便在操作不成功时向用户显示消息。 成功和不成功的事件所显示的信息应该看起来不同:
+<!-- Fix the issue according to the example shown in [promise and errors](/zh/part2/在服务端将数据_alert出来#promises-and-errors) in part 2. Modify the example so that the user is shown a message when the operation does not succeed. The messages shown for successful and unsuccessful events should look different: -->
+根据第2章节中显示的[promise and errors](/zh/part2/在服务端将数据_alert出来#promises-and-errors) 中的示例修复该问题。 修改此示例，以便在操作不成功时向用户显示消息。 成功和不成功的事件所显示的信息应该看起来不同:
 
 ![](../../images/2/28e.png)
 
