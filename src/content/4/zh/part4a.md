@@ -9,13 +9,13 @@ lang: zh
 
 
 <!-- Let's continue our work on the backend of the notes application we started in [第3章](/zh/part3).  -->
-让我们继续我们在[第3章](/zh/part3)中开始做的便笺应用后端的工作。
+继续我们在[第3章](/zh/part3)中关于便笺应用的后端编码。
 
 
 ### Project structure
 【项目结构】
 <!-- Before we move into the topic of testing, we will modify the structure of our project to adhere to Node.js best practices. -->
-在我们进入测试议题之前，我们将修改我们项目的结构，以遵循 Node.js 的最佳实践。
+在我们进入测试议题之前，我们将修改我们项目的结构，来遵循 Node.js 的最佳实践。
 
 <!-- After making the changes to the directory structure of our project, we end up with the following structure: -->
 在对我们项目的目录结构进行了更改之后，我们得到了如下结构:
