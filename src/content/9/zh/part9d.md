@@ -8,8 +8,8 @@ lang: zh
 <div class="content">
 
 
-<!-- Before we start delving into how you can use TypeScript together with React, we could first have a look at what we want to achieve. When everything works as it should, TypeScript will help us catch the following errors: -->
-在我们开始深入研究如何与 React 一起使用TypeScript之前，我们可以先看看我们想要实现什么。 当一切正常运行时，TypeScript 将帮助我们捕获如下错误:
+<!-- Before we start delving into how you can use TypeScript with React, we should first have a look at what we want to achieve. When everything works as it should, TypeScript will help us catch the following errors: -->
+在我们开始深入研究如何与 React 一起使用TypeScript之前，我们应该先看看我们想要实现什么。 当一切正常运行时，TypeScript 将帮助我们捕获如下错误:
 
 <!--Trying to pass an extra/unwanted prop to a component-->
 - 试图传递一个额外的/不需要的props给一个组件
@@ -29,7 +29,10 @@ lang: zh
 ### Create React App with TypeScript
 【用TypeScript创建React应用】
 <!-- [create-react-app](https://create-react-app.dev) supports a way to create an app using TypeScript by adding an additional <i>template</i> argument to the initialisation script. So, in order to create a Create React App using TypeScript, run the following command: -->
-[ create-react-app ]( https://create-react-app.dev )通过在初始化脚本中添加一个额外的<i>template</i> 参数，支持使用 TypeScript 创建应用的方法。 因此，为了使用 TypeScript 创建一个 Create React App，运行如下命令:
+<!-- We can use [create-react-app](https://create-react-app.dev) to create a TypeScript app by adding an 
+<i>template</i> argument to the initialisation script. So in order to create a TypeScript Create React App, run the following command: -->
+
+我们可以使用[create-react-app](https://create-react-app.dev)，通过在初始化脚本中添加一个额外的<i>template</i> 参数，支持使用 TypeScript 创建应用的方法。 因此，为了使用 TypeScript 创建一个 Create React App，运行如下命令:
 
 ```sh
 npx create-react-app my-app --template typescript

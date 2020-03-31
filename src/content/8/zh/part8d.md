@@ -244,7 +244,7 @@ const PersonForm = ({ setError }) => {
 【更新缓存，复习】
 
 <!-- We have to [update](/osa8/react_ja_graph_ql#valimuistin-paivitys) the cache of the Apollo client on creating new persons. We can update it using the mutation's _refetchQueries_ option to define that the  -->
-我们必须[更新](/ osa8 / react ja graph ql # valimuistin-paivitys) Apollo 客户端的缓存，以创建新的人员。 我们可以使用变异的 refetchQueries 选项更新它来定义
+我们必须[更新](/zh/part8/react_and_graph_ql#updating-the-cache) Apollo 客户端的缓存，以创建新的人员。 我们可以使用变异的 refetchQueries 选项更新它来定义
 <em>ALL\_PERSONS</em> query is done again. 
  ALL  PERSONS 查询再次执行。
 

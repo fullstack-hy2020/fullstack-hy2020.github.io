@@ -318,7 +318,7 @@ ReactDOM.render(
 
 
 <!-- As I mentioned at the end of [part 6](/osa6/connect#redux-ja-komponenttien-tila), the React [Context-api](https://reactjs.org/docs/context.html) offers one alternative solution for centralized state menagement without the need for third party libraries such as redux. You can read more about this i.e [here](https://www.simplethread.com/cant-replace-redux-with-hooks/) and [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). -->
-正如我在[ part 6](/ osa6 / connect # redux-ja-komponenttien-tila)的结尾所提到的，React [ Context-api ]( https://reactjs.org/docs/context.html )为集中式国家管理提供了一种替代方案，无需 redux 之类的第三方库。 你可以阅读更多关于这个网站的 [here](https://www.simplethread.com/cant-replace-redux-with-hooks/)  和 [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/)/ 。
+正如我在[ part 6](/zh/part6/connect#redux-and-the-component-state)的结尾所提到的，React [ Context-api ]( https://reactjs.org/docs/context.html )为集中式国家管理提供了一种替代方案，无需 redux 之类的第三方库。 你可以阅读更多关于这个网站的 [here](https://www.simplethread.com/cant-replace-redux-with-hooks/)  和 [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/)/ 。
 
 ### React/node-application security
 <!-- So far during the course we have not touched on information security at all. We do not have much time for now either, but fortunately the department has a MOOC-course [Securing Software](https://cybersecuritybase.github.io/securing/) for this important topic. -->
@@ -660,7 +660,7 @@ Lambda 的主要特点是，它支持在云中执行单个函数，如今 Google
 
 
 <!-- If your application has to handle complicated data [lodash](https://www.npmjs.com/package/lodash), which we recommended in [part 4](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet#tehtavat-4-3-4-7), is a good library to use. If you prefer functional programming style, you might consider using [ramda](https://ramdajs.com/). -->
-如果您的应用必须处理复杂的数据[ lodash ]( https://www.npmjs.com/package/lodash ) ，这是我们在[ part 4](/ osa4 / sovelluksen rakenne ja testauksen alkeet # tehtawatat-4-3-4-7)中推荐使用的一个很好的库。 如果您更喜欢函数式编程风格，您可以考虑使用[ ramda ]( https://ramdajs.com/ )。
+如果您的应用必须处理复杂的数据[ lodash ]( https://www.npmjs.com/package/lodash ) ，这是我们在[part 4](/en/part4/structure_of_backend_application_introduction_to_testing#exercises-4-3-4-7)中推荐使用的一个很好的库。 如果您更喜欢函数式编程风格，您可以考虑使用[ ramda ]( https://ramdajs.com/ )。
 
 
 

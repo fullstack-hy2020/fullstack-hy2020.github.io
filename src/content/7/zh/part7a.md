@@ -12,7 +12,7 @@ lang: zh
 本课程第七章节的练习与以前的有一点不同。 在本章和下一章中，像往常一样有[与本章理论相关的练习](/zh/part7/react_router#exercises-7-1-7-3)。
 
 <!-- In addition to the exercises in this and the chapter, there is a series of exercises which revise what we've learned during the whole course by expanding the Bloglist application which we worked on during parts 4 and 5. -->
-除了本章和本章的练习外，还有一系列的练习，通过扩展我们在第4和第5章节中使用的 Bloglist 应用来修改我们在整个课程中学到的知识。
+除了本章和本章的练习外，还有一系列的练习，通过扩展我们在第4和第5章节中使用的 Bloglist 应用来复习我们在整个课程中学到的知识。
 
 ### Application navigation structure 
 【应用的导航结构】
@@ -214,7 +214,7 @@ BrowserRouter 是一个 i Router，它使用 HTML5历史 API (pushState、 repla
 
 
 <!-- We wrap the components to be rendered based on the url with a [Swithch](https://reacttraining.com/react-router/web/api/Switch)-component -->
-我们用一个[ Swithch ]( https://reacttraining.com/react-router/web/api/switch )-组件包装要基于 url 渲染的组件
+我们用一个[Switch](https://reacttraining.com/react-router/web/api/Switch)-组件包装要基于 url 渲染的组件
 
 ```js 
 <Switch>
@@ -434,7 +434,7 @@ const Login = (props) => {
 
 
 <!-- Both [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) and [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) are hook-functions, just like useState and useEffect we have used many times now.  As you remember from part 1, there are some [rules](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot) to using hook-functions. Create-react-app has been configured to warn you, if you break these rules e.g by calling a hook-function from a conditional statement. -->
-[useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams)和 [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory)  都是Hook函数，就像我们已经多次使用的 useState 和 useEffect 一样。 正如您在第1章节中记得的，使用钩函数有一些[rules](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot) 。 Create-react-app 已经配置为警告，如果你打破这些规则，例如从一个 If判断语句中调用一个Hook函数。
+[useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams)和 [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory)  都是Hook函数，就像我们已经多次使用的 useState 和 useEffect 一样。 正如您在第1章节中记得的，使用钩函数有一些[rules](/zh/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks) 。 Create-react-app 已经配置为警告，如果你打破这些规则，例如从一个 If判断语句中调用一个Hook函数。
 
 ### redirect
 【重新定向】

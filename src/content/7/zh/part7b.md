@@ -10,13 +10,13 @@ lang: zh
 
 
 <!-- The exercises in this part are a bit different than the exercises in the previous parts. The exercises in the previous part and the exercises in this part [are about the theory presented in this part](/osa7/custom_hookit#tehtavat-7-4-7-6). -->
-这一章节的练习与前几章节有点不同。 前一章节的练习和这一章节的练习都是关于这一章节提出的理论[are about the theory presented in this part](/osa7/custom_hookit#tehtavat-7-4-7-6)。
+这一章节的练习与前几章节有点不同。 前一章节的练习和这一章节的练习都是关于这一章节提出的理论[are about the theory presented in this part](/zh/part7/custom_hooks#exercises-7-4-7-8).。
 
 
 
 
 <!-- This part also contains a [series of exercises](/osa7/tehtavia_blogilistan_laajennus) in which we modify the Bloglist application from parts 4 and 5 to rehearse and apply the skills we have learned. -->
-本章节还包含一系列练习[series of exercises](/osa7/tehtavia_blogilistan_laajennus)  ，其中我们从第4章节和第5章节修改 Bloglist 应用，以演练和应用我们所学到的技能。
+本章节还包含一系列练习[series of exercises](/zh/part7/exercises_extending_the_bloglist)  ，其中我们从第4章节和第5章节修改 Bloglist 应用，以演练和应用我们所学到的技能。
 
 ### Hooks
 
@@ -26,16 +26,16 @@ lang: zh
 React 提供了10种不同的内置Hook，其中最受欢迎的是我们已经广泛使用的[ useState ]( https://reactjs.org/docs/hooks-reference.html  https://reactjs.org/docs/hooks-reference.html#useState )和[ useEffect ]( https://reactjs.org/docs/hooks-reference.html#useEffect )Hook。 
 
 <!-- In [part 5](/osa5/props_children_ja_proptypet#ref-eli-viite-komponenttiin) we used the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle)-hook which allows for components to provide their functions to other components. -->
-在[ 第5章](/ osa5 / proptypet children ja # ref-eli-viite-komponenttiin)中，我们使用了[ useImperativeHandle ]( https://reactjs.org/docs/hooks-reference.html#useImperativeHandle )-hook，它允许组件为其他组件提供其功能。
+在[ 第5章](/zh/part5/props_children_and_proptypes#references-to-components-with-ref)中，我们使用了[ useImperativeHandle ]( https://reactjs.org/docs/hooks-reference.html#useImperativeHandle )-hook，它允许组件为其他组件提供其功能。
 
 <!-- Within the last year many React libraries have begun to offer hook based apis. [In part 6](/osa6/flux_arkkitehtuuri_ja_redux#redux-storen-valittaminen-eri-komponenteille) -->
-在过去的一年里，许多 React 库已经开始提供基于 hook 的 api
+在过去的一年里，许多 React 库已经开始提供基于 hook 的 api。正如[第6章](/en/part6/flux_architecture_and_redux)所讲的。
 
 <!-- we used the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) hooks from the react-redux library to share our redux-store and dispatch function to our components. Redux's hook based api is a lot easier to use than its older, still available, [connect](/osa6/connect)-api. -->
-我们使用 react-redux 库中的[ useSelector ]( https://react-redux.js.org/api/hooks#useSelector )和[ useDispatch ]( https://react-redux.js.org/api/hooks#useDispatch )Hook来共享我们对组件的 redux-store 和 dispatch 函数。 Redux 的基于Hook的 api 比旧的、仍然可用的[ connect ](/ osa6 / connect)-api 更易于使用。
+我们使用 react-redux 库中的[ useSelector ]( https://react-redux.js.org/api/hooks#useSelector )和[ useDispatch ]( https://react-redux.js.org/api/hooks#useDispatch )Hook来共享我们对组件的 redux-store 和 dispatch 函数。 Redux 的基于Hook的 api 比旧的、仍然可用的[ connect ](/en/part6/connect)-api 更易于使用。
 
 <!-- [React-router's](https://reacttraining.com/react-router/web/guides) api we introduced in the [previous part](/osa7/react_router/) is also partially [hook](https://reacttraining.com/react-router/web/api/Hooks) based. Its hooks can be used to access url parameters and the history object, which allows for manipulating the browser url programmatically. -->
-我们在[上一章节](/ osa7 / react router /)中介绍的[ React-router 的]( https://reacttraining.com/React-router/web/guides ) api 也部分基于[ hook ]( https://reacttraining.com/React-router/web/api/hooks )。 它的Hook可以用来访问 url 参数和历史对象，这允许以编程方式操作浏览器的 url。
+我们在[上一章节](/en/part7/react_router)中介绍的[ React-router 的]( https://reacttraining.com/React-router/web/guides ) api 也部分基于[ hook ]( https://reacttraining.com/React-router/web/api/hooks )。 它的Hook可以用来访问 url 参数和历史对象，这允许以编程方式操作浏览器的 url。
 
 <!-- As mentioned in [part 1](/zh/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks), hooks are not normal functions, and when using those we have to adhere to certain [rules or limitations](https://reactjs.org/docs/hooks-rules.html). Let's recap the rules of using hooks, copied verbatim from the official React documentation: -->
 正如在[第一章 ](/zh/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks)中提到的，Hook不是正常的函数，在使用这些函数时，我们必须遵守某些[规则或限制]( https://reactjs.org/docs/hooks-rules.html )。 让我们回顾一下使用Hook的规则，一字不差地从官方的 React 文档中复制下来:
@@ -350,7 +350,7 @@ const App = () => {
 练习7.4-7.8。
 
 <!-- We'll continue with the app from [exercises](/osa7/custom_hookit#tehtavat-7-4-7-6) of the chapter [react router](/zh/part7/react_router).  -->
-我们将继续使用[react router](/zh/part7/react_router)章节中[exercises](/zh/part7/custom_hookit#tehtavat-7-4-7-6)的应用。
+我们将继续使用[react router](/zh/part7/react_router)章节中[exercises](/zh/part7/custom_hooks#exercises-7-4-7-8) 的应用。
 
 #### 7.4: anecdotes and hooks 步骤1
 <!-- Simplify the anecdote creation form of your application with the _useField_ custom hook we defined earlier. -->
@@ -461,7 +461,7 @@ input元素不应该被赋予 reset 属性。
 
 #### 7.7: country hook
 <!-- Let's return to the exercises [2.12-14](/osa2/palvelimella_olevan_datan_hakeminen#tehtavat-2-11-2-14). -->
-让我们回到练习[2.12-14](/ osa2 / palvelimella olevan datan hakeminen # tehtawatat-2-11-2-14)。
+让我们回到练习[2.12-14](/zh/part2/getting_data_from_server#exercises-2-11-2-14)。
 
 
 

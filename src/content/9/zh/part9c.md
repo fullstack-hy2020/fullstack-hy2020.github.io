@@ -122,9 +122,9 @@ TypeScript的原生<i>tsc</i> 编译器可以帮助我们使用命令<i>tsc -- i
 <!-- These guide our coding style to use the TypeScript features more strictly.  -->
 这些指导我们的编码风格更严格地使用TypeScript的特性。
 <!-- For us perhaps the most important is the already familiar [noImplicitAny](https://www.typescriptlang.org/en/tsconfig#noImplicitAny). It prevents implicitly setting type <i>any</i>, which can happen if you don't type the parameters of a function for example.  -->
-对我们来说，最重要的可能是已经熟悉的[ noImplicitAny ]( https://www.typescriptlang.org/en/tsconfig#noImplicitAny )。 它可以防止隐式设置类型<i>any</i>，例如，如果您不键入函数的参数，就可能发生警告。
+对我们来说，最重要的可能是已经熟悉的[noImplicitAny](https://www.typescriptlang.org/en/tsconfig#noImplicitAny)。 它可以防止隐式设置类型<i>any</i>，例如，如果您不键入函数的参数，就可能发生警告。
 <!-- Details of the rest of the configurations can be found from the [tsconfig documentation](https://www.typescriptlang.org/en/tsconfig#strict).  -->
-其余配置的详细信息可以从[ tsconfig 文档]( https://www.typescriptlang.org/en/tsconfig#strict )中找到。
+其余配置的详细信息可以从[ tsconfig 文档](https://www.typescriptlang.org/en/tsconfig#strict)中找到。
 <!-- Using <i>strict</i> is suggested by the official documentation. -->
 官方文件建议使用<i>strict</i>。
 
@@ -362,7 +362,7 @@ Fork和clone项目[patientor](https://github.com/fullstack-hy2020/patientor)。 
 ![](../../images/9/16a.png)
 
 <!-- You might also want to have a look at the tab <i>console</i>. If something fails [part 3](/part3) of the course shows how the problem can be solved. -->
-您可能还需要查看<i>console</i> 的选项卡。 如果有什么东西失败了，[课程的第三章节](/ 第三章节) 说明了如何解决这个问题。
+您可能还需要查看<i>console</i> 的选项卡。 如果有什么东西失败了，[课程的第三章节](/zh/part3)  说明了如何解决这个问题。
 
 </div>
 
