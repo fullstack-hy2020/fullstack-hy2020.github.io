@@ -7,21 +7,26 @@ lang: en
 
 <div class="content">
 
-
 There are many different ways of testing React applications. Let's take a look at them next.
 
+Tests will be implemented with the same [Jest](http://jestjs.io/) testing framework developed by Facebook that was used in the previous part. Jest is actually configured by default to applications created with create-react-app.
 
-Tests will be implemented with the same [Jest](http://jestjs.io/) testing library developed by Facebook that was used in the previous part. Jest is actually configured by default to applications created with create-react-app.
+In addition to Jest, we also need a library that allows us to test React components. The React documentation [recommends](https://reactjs.org/docs/testing.html#tools) [*@testing-library/react*](https://github.com/testing-library/react-testing-library) which has seen rapid growth in popularity in recent times.
+The [motivation](https://testing-library.com/docs/react-testing-library/intro) behind *@testing-library/react* is to write maintainable and reliable tests for React components:
 
-In addition to Jest, we also need another testing library that will help us render components for testing purposes. The current best option for this is[react-testing-library](https://github.com/testing-library/react-testing-library) which has seen rapid growth in popularity in recent times.
+> [...] As a part of this goal, you want your tests to avoid including implementation details of your components and rather focus on making your tests give you the confidence for which they are intended. As part of this, you want your testbase to be maintainable in the long run so refactors of your components (changes to implementation but not functionality) don't break your tests and slow you and your team down.
+>
+> The React Testing Library is a very light-weight solution for testing React components. It provides light utility functions on top of *react-dom* and *react-dom/test-utils*, in a way that encourages better testing practices. Its primary guiding principle is:
+>
+> > The more your tests resemble the way your software is used, the more confidence they can give you.
+> >
+> > Kent C. Dodds (Source: [Twitter](https://twitter.com/kentcdodds/status/977018512689455106))
+>
+> So rather than dealing with instances of rendered React components, your tests will work with actual DOM nodes. The utilities this library provides facilitate querying the DOM in the same way the user would. Finding form elements by their label text (just like a user would), finding links and buttons from their text (like a user would). It also exposes a recommended way to find elements by a data-testid as an "escape hatch" for elements where the text content and label do not make sense or is not practical.
+>
+> This library encourages your applications to be more accessible and allows you to get your tests closer to using your components the way a user will, which allows your tests to give you more confidence that your application will work when a real user uses it.
 
-
-Let's install the library with the command:
-
-```js
-npm install --save-dev @testing-library/react @testing-library/jest-dom
-```
-
+In *create-react-app* [version 3.3.0 or later](https://github.com/facebook/create-react-app/blob/7641a3c1c6d02cd707ac11e7b8b8907acf3df7c0/CHANGELOG.md#330-2019-12-04) the *@testing-library/react* comes preinstalled with new applications, so no further configuration is neccessary.
 
 Let's first write tests for the component that is responsible for rendering a note:
 
