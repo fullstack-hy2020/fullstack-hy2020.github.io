@@ -449,14 +449,10 @@ show {showAll ? 'important' : 'all'}
 <!-- You can find the code for our current application in its entirety in the <i>part2-3</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part2-3). -->
 您可以在[this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part2-3)的<i>part2-3</i> 分支中找到我们当前应用的全部代码。
 
+</div>
 
 <div class="tasks">
-
-
-<h3>练习 2.6.-2.10.</h3>
-
-
-
+<h3>Exercises 2.6.-2.10.</h3>
 <!-- In the first exercise, we will start working on an application that will be further developed in the later exercises. In related sets of exercises it is sufficient to return the final version of your application. You may also make a separate commit after you have finished each part of the exercise set, but doing so is not required. -->
 在第一个练习中，我们将开始一个在后面的练习中进一步开发的应用。 在相关的练习集中，返回应用的最终版本就可以了。 还可以在完成练习集的每个部分之后进行单独的提交，但不强制。
 

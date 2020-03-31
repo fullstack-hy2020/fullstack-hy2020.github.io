@@ -656,7 +656,7 @@ useEffect(() => {
 <div class="tasks">
 
 
-<h3>练习 2.11.-2.14.</h3>
+<h3>Exercises 2.11.-2.14.</h3>
 
 
 <h4>2.11: The Phonebook 步骤6</h4>

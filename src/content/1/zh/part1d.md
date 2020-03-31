@@ -1185,7 +1185,7 @@ const App = props => {
 </div>
 
 <div class="tasks">
-  <h3>练习  1.6.-1.14.</h3>
+  <h3>Exercises  1.6.-1.14.</h3>
 
 
 

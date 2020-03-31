@@ -733,7 +733,6 @@ const Course = (props) => { // highlight-line
 
 
 <h3>Exercises 2.1.-2.5.</h3>
-练习2.1- 2.5. / h3
 
 <!-- The exercises are submitted via GitHub, and by marking the exercises as done in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
 

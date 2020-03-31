@@ -181,7 +181,11 @@ lang: zh
 
 <!-- If you want to receive credits, save your **University of Helsinki** student number to [the exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)in the _my submissions_ view. If you are not a student at the University of Helsinki, you can get a student number by registering for the course through the [Open university](https://fullstackopen.com/osa0/yleista/#kokeeseen-ilmoittautuminen). -->
 
-如果你想要获得学分，在 [考试提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中*我的提交*页面保存好你的赫尔辛基大学的学号。如果你不是赫尔辛基大学的学生，你可以通过[公开大学](/zh/part0/基础知识#sign-up-for-the-exam)注册这门课程来获得一个学号。
+如果你想要获得学分，在 [考试提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中*我的提交*页面保存好你的赫尔辛基大学的学号。
+
+![](../../images/0/28b.png)
+
+如果你不是赫尔辛基大学的学生，你可以通过[公开大学](/zh/part0/基础知识#sign-up-for-the-exam)注册这门课程来获得一个学号。
 
 <!-- You will receive your credits after you have submitted enough exercise for a passing grade, passed the exam and let us know through the exercise submission system that you have completed the course: -->
 

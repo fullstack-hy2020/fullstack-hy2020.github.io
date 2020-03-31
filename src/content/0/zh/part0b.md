@@ -915,7 +915,7 @@ JavaScript 的世界发展得很快，也带来了一系列的挑战。 工具�
 </div>
 
 <div class="tasks"> 
-  <h3>Exercises 0.1.-0.6.练习0.1-0.6</h3>
+  <h3>Exercises 0.1.-0.6.</h3>
 
 <!-- The exercises are submitted via GitHub, and by marking the exercises as done in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
 

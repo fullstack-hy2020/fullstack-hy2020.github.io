@@ -465,7 +465,7 @@ const App = () => {
 </div>
 
 <div class="tasks">
-<h3>练习 1.1.-1.2.</h3>
+<h3>Exercises 1.1.-1.2.</h3>
 
 <!-- Exercises are submitted through GitHub and by marking completed exercises in the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
 练习通过 GitHub 提交，并在[提交应用](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) 中标记练习为已完成。

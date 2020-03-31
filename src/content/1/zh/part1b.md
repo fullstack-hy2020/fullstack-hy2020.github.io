@@ -325,7 +325,7 @@ const result = average(2, 5)
 </div>
 
 <div class="tasks">
-  <h3>练习1.3-1.5</h3>
+  <h3>Exercises1.3-1.5</h3>
 
 <i>We continue building the application that we started working on in the previous exercises. You can write the code into the same project, since we are only interested in the final state of the submitted application.</i>
 我们继续构建我们在前面的练习中开始的应用。 您可以将代码编写到同一个项目中，因为我们只关心提交的应用的最终状态。 
