@@ -99,7 +99,7 @@ const App = (props) => {
 <!-- We have added the _addNote_ function as an event handler to the form element that will be called when the form is submitted by clicking the submit button. -->
 我们已经将 _addNote_ 函数作为事件处理函数添加到表单元素中，该元素将在单击 submit 按钮提交表单时被调用。
 
-<!-- We use the method discussed in [part 1](/zh/part1/组件状态，事件处理#event-handling) for defining our event handler: -->
+<!-- We use the method discussed in [第1章](/zh/part1/组件状态，事件处理#event-handling) for defining our event handler: -->
 我们使用 [第1章](/zh/part1/组件状态，事件处理#event-handling) 中讨论的方法来定义事件处理 :
 
 ```js
@@ -275,8 +275,8 @@ const addNote = (event) => {
 <!-- First we create a new object for the note called <em>noteObject</em> that will receive its content from the component's <em>newNote</em> state. The unique identifier <i>id</i> is generated based on the total number of notes. This method works for our application since notes are never deleted. With the help of the <em>Math.random()</em> command, our note has a 50% chance of being marked as important. -->
 首先，我们为名为<em>noteObject</em> 的便笺创建一个新对象，该对象将从组件的<em>newNote</em>状态接收其内容。 唯一标识符  <i>id</i> 是根据便笺的总数生成的。 此方法适用于我们的应用，因为便笺永远不会被删除。 在 <em>Math.random()</em> 命令的帮助下，我们的便笺有50% 的可能被标记为重要。
 
-<!-- The new note is added to the list of notes using the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) array method introduced in [part 1](/zh/part1/javascript#arrays): -->
-使用数组的 [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) 方法添加新便笺到便笺列表中，如 [第一章](/zh/part1/javascript#arrays) 讲的那样:
+<!-- The new note is added to the list of notes using the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) array method introduced in [第1章](/zh/part1/javascript#arrays): -->
+使用数组的 [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) 方法添加新便笺到便笺列表中，如 [第1章](/zh/part1/javascript#arrays) 讲的那样:
 
 ```js
 setNotes(notes.concat(noteObject))
@@ -389,7 +389,7 @@ notes.filter(note => note.important)
 ```
 
 <!-- The reason we showed the comparison operator first was to emphasize an important detail: in JavaScript <em>val1 == val2</em> does not work as expected in all situations and it's safer to use <em>val1 === val2</em> exclusively in comparisons. You can read more about the topic [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness). -->
-我们首先展示比较操作符的原因是为了强调一个重要的细节: 在 JavaScript 中，<em>val1 == val2</em> 并不能在所有情况下都像预期的那样工作，在比较中使用专门的<em>val1 === val2</em>更安全。 你可以在这里[here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness)阅读更多关于这个主题的描述 。
+我们首先展示比较操作符的原因是为了强调一个重要的细节: 在 JavaScript 中，<em>val1 == val2</em> 并不能在所有情况下都像预期的那样工作，在比较中使用专门的<em>val1 === val2</em>更安全。 你可以在这里[here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness)阅读更多关于这个议题的描述 。
 
 <!-- You can test out the filtering functionality by changing the initial value of the <em>showAll</em> state. -->
 您可以通过更改<em>showAll</em>状态的初始值来测试过滤功能。

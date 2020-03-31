@@ -128,8 +128,8 @@ const element = <Welcome name="Sara" />;
 ReactDOM.render(element, document.getElementById("root"));
 ```
 
-<!-- In the example we have a component called <i>Welcome</i>, to which we want to pass a <i>name</i> prop, that is then rendered. We know that the  <i>name</i> prop should be a string and we use the [prop-types](https://www.npmjs.com/package/prop-types) package introduced in [part 5](/zh/part5/props_children_与_proptypes#prop-types) to be able to receive hints about component's desired prop types and warnings for invalid prop types. -->
-在这个示例中，我们有一个名为<i>Welcome</i> 的组件，我们希望向它传递一个<i>name</i> prop，然后将其渲染。 我们知道<i>name</i> prop 应该是一个字符串，我们使用在[第五章](/zh/part5/props_children_与_proptypes#prop-types) 中介绍的[prop-types](https://www.npmjs.com/package/prop-types)包，可以接收关于部件所需props类型的提示，以及无效props类型的警告。
+<!-- In the example we have a component called <i>Welcome</i>, to which we want to pass a <i>name</i> prop, that is then rendered. We know that the  <i>name</i> prop should be a string and we use the [prop-types](https://www.npmjs.com/package/prop-types) package introduced in [第5章](/zh/part5/props_children_与_proptypes#prop-types) to be able to receive hints about component's desired prop types and warnings for invalid prop types. -->
+在这个示例中，我们有一个名为<i>Welcome</i> 的组件，我们希望向它传递一个<i>name</i> prop，然后将其渲染。 我们知道<i>name</i> prop 应该是一个字符串，我们使用在[第5章](/zh/part5/props_children_与_proptypes#prop-types) 中介绍的[prop-types](https://www.npmjs.com/package/prop-types)包，可以接收关于部件所需props类型的提示，以及无效props类型的警告。
 
 <!-- With the help of TypeScript we don't need the <i>prop-types</i> package anymore to define prop types, because we can define the types with the help of TypeScript itself by using the _FunctionComponent_ type or it's shorter alias _FC_. -->
 在 TypeScript 的帮助下，我们不再需要<i>prop-types</i> 包来定义 prop 类型，因为我们可以通过使用 _FunctionComponent_ 类型或者更短的别名 FC，在 TypeScript 本身的帮助下定义类型。
@@ -231,7 +231,7 @@ const Welcome: React.FC<{ name: string }> = ({ name }) => (
 <!-- Create a new Create React App with TypeScript, setup eslint for the project similarly that we just did. -->
 使用 TypeScript 创建一个新的 Create React App，像我们刚才做的那样为项目设置 eslint。
 
-<!-- This exercise is similar to the one you have already done in [Part 1](/zh/part1/javascript#exercises-1-3-1-5) of the course, but with TypeScript added and some tweaks. Start off by modifying the contents of <i>index.tsx</i> to the following: -->
+<!-- This exercise is similar to the one you have already done in [第1章](/zh/part1/javascript#exercises-1-3-1-5) of the course, but with TypeScript added and some tweaks. Start off by modifying the contents of <i>index.tsx</i> to the following: -->
 这个练习你在[第1章节](/zh/part1)中已经做过的类似，只是添加了TypeScript和一些调整。 首先将<i>index.tsx</i> 的内容修改为:
 
 ```jsx
@@ -624,10 +624,10 @@ TypeScript 提供的类型可以告诉你需要什么样的数据结构、函数
 在这个应用中采取的方法使用了 React [context](https://reactjs.org/docs/context.html) ，根据文档
 
 > <i>... is designed to share data that can be considered "global" for a tree of React components, such as the current authenticated user, theme, or preferred language.</i> 
-<i>... is 被设计用于为 React 组件树共享可被视为“全局”的数据，例如当前经过身份验证的用户、主题或首选语言。 </i>
+<i>... is 被设计用于为 React 组件树共享可被视为“全局”的数据，例如当前经过身份验证的用户、议题或首选语言。 </i>
 
-<!-- In our case the "global" shared data is the application state <i>and</i> the dispatch function that is used to make changes to data. In a way the approach works quite much like redux based state management that we used in [part 6](/zh/part6) but is a more light weight since it does not require the use of any external libraries. This part assumes that you are at least familiar with the way redux works, e.g. you should have covered at least [the first section](/zh/part6/flux架构与_redux) of part 6. -->
-在我们的示例中，“全局”共享数据是应用状态，分派函数是用于更改数据。 在某种程度上，这种方法的工作原理很像我们在[part 6](/zh/part6)中使用的基于 redux 的状态管理，但是它很轻量，因为它不需要使用任何外部库。 这一章节假设您至少熟悉 redux 的工作方式，例如，您至少应该包括第6章节的[第一部分](/zh/part6/flux架构与_redux)。
+<!-- In our case the "global" shared data is the application state <i>and</i> the dispatch function that is used to make changes to data. In a way the approach works quite much like redux based state management that we used in [第6章](/zh/part6) but is a more light weight since it does not require the use of any external libraries. This part assumes that you are at least familiar with the way redux works, e.g. you should have covered at least [the first section](/zh/part6/flux架构与_redux) of part 6. -->
+在我们的示例中，“全局”共享数据是应用状态，分派函数是用于更改数据。 在某种程度上，这种方法的工作原理很像我们在[第6章](/zh/part6)中使用的基于 redux 的状态管理，但是它很轻量，因为它不需要使用任何外部库。 这一章节假设您至少熟悉 redux 的工作方式，例如，您至少应该包括第6章节的[第一部分](/zh/part6/flux架构与_redux)。
 
 <!-- The [context](https://reactjs.org/docs/context.html) of the application has a tuple of the app state and dispatcher for changing the state of our app. The application state is typed as follows: -->
 应用的[上下文](https://reactjs.org/docs/context.html)有一个用于更改应用状态的状态和调度程序的元组。 应用状态的类型如下:
@@ -682,8 +682,8 @@ export type Action =
     };
 ```
 
-<!-- Reducer looks quite much like the ones we wrote in [part 6](/zh/part6), it changes the state for each type of action:  -->
-Reducer 看起来很像我们在[part 6](/zh/part6)中写的那些，它改变了每种动作的状态: 
+<!-- Reducer looks quite much like the ones we wrote in [第6章](/zh/part6), it changes the state for each type of action:  -->
+Reducer 看起来很像我们在[第6章](/zh/part6)中写的那些，它改变了每种动作的状态: 
 
 ```js
 export const reducer = (state: State, action: Action): State => {
@@ -713,8 +713,8 @@ export const reducer = (state: State, action: Action): State => {
 };
 ```
 
-<!-- The main difference is now that the state is a dictionary (or object) instead of array that we used in [part 6](/zh/part6). -->
-主要的区别是，现在状态是一个字典(或对象) ，而不是我们在 [part 6](/zh/part6)中使用的数组。
+<!-- The main difference is now that the state is a dictionary (or object) instead of array that we used in [第6章](/zh/part6). -->
+主要的区别是，现在状态是一个字典(或对象) ，而不是我们在 [第6章](/zh/part6)中使用的数组。
 
 <!-- There are lot of things happening in the file <i>state.ts</i> that is taking care of setting up the context. The main ingredient is that it uses the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook to create the state and dispatch-function and passes those to the [context provider](https://reactjs.org/docs/context.html#contextprovider): -->
 在<i>state.ts</i> 文件中发生了许多事情，它们负责设置 context。 它的主要组成部分是使用[useReducer](https://reactjs.org/docs/hooks-reference.html#useReducer)Hook来创建 状态 和 分发函数，并将它们传递给[context provider](https://reactjs.org/docs/context.html#contextprovider) :
@@ -899,13 +899,13 @@ export type PublicPatient = Omit<Patient, 'ssn' | 'entries' >  // highlight-line
 <!-- Since we now have the state in the context, you'll need to define a new action type for updating an individual patient's data. -->
 因为我们现在有了上下文中的状态，所以需要定义一个新的操作类型来更新单个患者的数据。
 
-<!-- The Application uses [Semantic UI React](https://react.semantic-ui.com/) for styling, which is quite similar to [React Bootstrap](https://react-bootstrap.github.io/) and [MaterialUI](https://material-ui.com/) that we covered in [part 7](/zh/part7/样式进阶). You may also use it for the new components but that is up to you since the main focus is now in Typescript. -->
-应用使用[Semantic UI React](https://React.Semantic-UI.com/)来进行样式化，这与[React Bootstrap](https://React-Bootstrap.github.io/)和[MaterialUI](https://material-UI.com/)非常相似，我们在 [part 7](/zh/part7/样式进阶)中已经介绍过了。 你也可以在新的组件上使用它，但这取决于你，因为我们主要的关注点现在是TypeScript。
+<!-- The Application uses [Semantic UI React](https://react.semantic-ui.com/) for styling, which is quite similar to [React Bootstrap](https://react-bootstrap.github.io/) and [MaterialUI](https://material-ui.com/) that we covered in [第7章](/zh/part7/样式进阶). You may also use it for the new components but that is up to you since the main focus is now in Typescript. -->
+应用使用[Semantic UI React](https://React.Semantic-UI.com/)来进行样式化，这与[React Bootstrap](https://React-Bootstrap.github.io/)和[MaterialUI](https://material-UI.com/)非常相似，我们在 [第7章](/zh/part7/样式进阶)中已经介绍过了。 你也可以在新的组件上使用它，但这取决于你，因为我们主要的关注点现在是TypeScript。
 
 <!-- The Application also uses [react router](https://reacttraining.com/react-router/web/guides/quick-start)  -->
 应用还使用了[React路由](https://reacttraining.com/react-router/web/guides/quick-start)
-<!-- to control what view is visible in the frontend. You might want to have a look on [part 7](/zh/part7/react_router) if you don't yet have a grasp on how the router works. -->
-控制前端可见的视图。 如果你还没有掌握路由的工作原理，你可能需要查看一下[part 7](/zh/part7/react_router)。
+<!-- to control what view is visible in the frontend. You might want to have a look on [第7章](/zh/part7/react_router) if you don't yet have a grasp on how the router works. -->
+控制前端可见的视图。 如果你还没有掌握路由的工作原理，你可能需要查看一下[第7章](/zh/part7/react_router)。
 
 <!-- The result could look like the following: -->
 结果可能如下:

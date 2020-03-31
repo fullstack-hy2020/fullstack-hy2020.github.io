@@ -159,7 +159,7 @@ app.post('/api/notes', (request, response, next) => {
 ```
 
 <!-- In this example, Promise chaining does not provide much of a benefit. The situation would change if there were many asynchronous operations that had to be done in sequence. We will not delve further into the topic. In the next part of the course we will learn about the <i>async/await</i> syntax in JavaScript, that will make writing subsequent asynchronous operations a lot easier. -->
-在这个例子中，承诺链没有提供多少好处。 但要是有许多必须按顺序进行的异步操作，情况就会发生变化。 我们不会进一步深入探讨这个主题。 在本课程的下一章节中，我们将学习 JavaScript 中的<i>async/await</i>语法，这将使编写后续的异步操作变得容易得多。
+在这个例子中，承诺链没有提供多少好处。 但要是有许多必须按顺序进行的异步操作，情况就会发生变化。 我们不会进一步深入探讨这个议题。 在本课程的下一章节中，我们将学习 JavaScript 中的<i>async/await</i>语法，这将使编写后续的异步操作变得容易得多。
 
 ### Deploying the database backend to production 
 【将数据库后端部署到生产环境】

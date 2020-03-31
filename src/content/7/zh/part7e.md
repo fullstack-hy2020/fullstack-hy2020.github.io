@@ -266,14 +266,14 @@ WebSockets 是由浏览器提供的 API，目前还不是所有的浏览器都�
 <!-- Instead of directly using the WebSocket API it is advisable to use the [Socket.io](https://socket.io/)-library, which provides various <i>fallback</i>-options in case the browser does not have the full support for WebSockets.  -->
 与直接使用 WebSocket API 不同，建议使用[Socket.io](https://Socket.io/)-library，该库提供各种<i>fallback</i>-options，以防浏览器不完全支持 WebSocket。
 
-<!-- In [part 8](/em/part8) our topic is GraphQL that provices a nice mechanism for notifying clients when there are changes in the backend data. -->
-在[part8](/en/part8)中，我们的主题是 GraphQL，它为后端数据发生更改时通知客户端提供了一个很好的机制。
+<!-- In [第8章](/em/part8) our topic is GraphQL that provices a nice mechanism for notifying clients when there are changes in the backend data. -->
+在[第8章](/zh/part8)中，我们的议题是 GraphQL，它为后端数据发生更改时通知客户端提供了一个很好的机制。
 
 ### Virtual DOM
 【虚拟 DOM】
 
-<!-- The concept of the Virtual DOM often comes up when discussing React. What is it all about? As mentioned in [part 0](/zh/part0/web_应用的基础设施#document-object-model-or-dom) browsers provide a [DOM API](https://developer.mozilla.org/fi/docs/DOM), using which the JavaScript running in the browser can modify the elements defining the appearance of the page. -->
-在讨论 React 时，经常会提到虚拟 DOM 的概念。 这到底是怎么回事？ 正如在[part 0](/zh/part0/web_应用的基础设施#document-object-model-or-dom)中提到的那样，浏览器提供了一个[DOM API](https://developer.mozilla.org/fi/docs/DOM) ，浏览器中运行的 JavaScript 可以修改定义页面外观的元素。
+<!-- The concept of the Virtual DOM often comes up when discussing React. What is it all about? As mentioned in [第0章](/zh/part0/web_应用的基础设施#document-object-model-or-dom) browsers provide a [DOM API](https://developer.mozilla.org/fi/docs/DOM), using which the JavaScript running in the browser can modify the elements defining the appearance of the page. -->
+在讨论 React 时，经常会提到虚拟 DOM 的概念。 这到底是怎么回事？ 正如在[第0章](/zh/part0/web_应用的基础设施#document-object-model-or-dom)中提到的那样，浏览器提供了一个[DOM API](https://developer.mozilla.org/fi/docs/DOM) ，浏览器中运行的 JavaScript 可以修改定义页面外观的元素。
 
 <!-- When a software developer uses React they rarely or never directly manipulate the DOM. The function defining the React component returns a set of [React-elements](https://reactjs.org/docs/glossary.html#elements). Although some of the elements look like normal HTML-elements -->
 当软件开发人员使用 React 时，他们很少或从未直接操作 DOM。 定义 React 组件的函数返回一组[React-elements](https://reactjs.org/docs/glossary.html#elements)。 虽然有些元素看起来像普通的 html 元素。
@@ -317,8 +317,8 @@ ReactDOM.render(
 
 
 
-<!-- As I mentioned at the end of [part 6](/osa6/connect#redux-ja-komponenttien-tila), the React [Context-api](https://reactjs.org/docs/context.html) offers one alternative solution for centralized state menagement without the need for third party libraries such as redux. You can read more about this i.e [here](https://www.simplethread.com/cant-replace-redux-with-hooks/) and [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). -->
-正如我在[part 6](/zh/part6/connect方法#redux-and-the-component-state)的结尾所提到的，React [Context-api](https://reactjs.org/docs/context.html)为集中式国家管理提供了一种替代方案，无需 redux 之类的第三方库。 你可以阅读更多关于这个网站的 [here](https://www.simplethread.com/cant-replace-redux-with-hooks/)  和 [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/)/ 。
+<!-- As I mentioned at the end of [第6章](/osa6/connect#redux-ja-komponenttien-tila), the React [Context-api](https://reactjs.org/docs/context.html) offers one alternative solution for centralized state menagement without the need for third party libraries such as redux. You can read more about this i.e [here](https://www.simplethread.com/cant-replace-redux-with-hooks/) and [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). -->
+正如我在[第6章](/zh/part6/connect方法#redux-and-the-component-state)的结尾所提到的，React [Context-api](https://reactjs.org/docs/context.html)为集中式国家管理提供了一种替代方案，无需 redux 之类的第三方库。 你可以阅读更多关于这个网站的 [here](https://www.simplethread.com/cant-replace-redux-with-hooks/)  和 [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/)/ 。
 
 ### React/node-application security
 <!-- So far during the course we have not touched on information security at all. We do not have much time for now either, but fortunately the department has a MOOC-course [Securing Software](https://cybersecuritybase.github.io/securing/) for this important topic. -->
@@ -542,8 +542,8 @@ Express 的文档包括一个关于安全性的部分: [生产最佳实践: 安�
 <!-- Sometimes the [dynamic typing](https://developer.mozilla.org/en-US/docs/Glossary/Dynamic_typing) of JavaScript variables creates annoying bugs. In part 5 we talked briefly about [PropTypes](/zh/part5/props_children_与_proptypes#prop-types): a mechanism which enables one to enforce type checking for props passed to React-components. -->
 有时候 JavaScript 变量的[动态类型](https://developer.mozilla.org/en-us/docs/glossary/dynamic_typing)会产生令人讨厌的 bug。 在第5章节中，我们简要地讨论了[PropTypes](/zh/part5/props_children_与_proptypes#prop-types) : 这是一种机制，可以对传递给 React-components 的props进行类型检查。
 
-<!-- Lately there has been a notable uplift in the interest in [static type checking](https://en.wikipedia.org/wiki/Type_system#Static_type_checking). At the moment the most popular typed version of Javascript is the [Typescript](https://www.typescriptlang.org/) which has been developed by Microsof. Topic of the [part 9](/zh/part9) that shall be released at the end of April will be Typesceript. -->
-最近，人们对静态类型检查 [static type checking](https://en.wikipedia.org/wiki/Type_system#Static_type_checking)的兴趣有了明显的提升，这种兴趣可以追溯到20世纪90年代。 目前最流行的 Javascript 类型版本是由 Microsof 开发的[Typescript](https://www.typescriptlang.org/)。 将于4月底发布的[第9章节](/zh/part9)的主题将是 Typesceript。
+<!-- Lately there has been a notable uplift in the interest in [static type checking](https://en.wikipedia.org/wiki/Type_system#Static_type_checking). At the moment the most popular typed version of Javascript is the [Typescript](https://www.typescriptlang.org/) which has been developed by Microsof. Topic of the [第9章](/zh/part9) that shall be released at the end of April will be Typesceript. -->
+最近，人们对静态类型检查 [static type checking](https://en.wikipedia.org/wiki/Type_system#Static_type_checking)的兴趣有了明显的提升，这种兴趣可以追溯到20世纪90年代。 目前最流行的 Javascript 类型版本是由 Microsof 开发的[Typescript](https://www.typescriptlang.org/)。 将于4月底发布的[第9章节](/zh/part9)的议题将是 Typesceript。
 
 #### Server side rendering, isomorphic applications and universal code
 【服务器端渲染，同构应用和通用代码】
@@ -632,7 +632,7 @@ React 和 Node 为将同构应用实现为通用代码提供了一个理想的�
 微型服务的使用已经被大肆宣传成为当今的一种[silver bullet](https://en.wikipedia.org/wiki/No_Silver_Bullet)   ，它被用来解决几乎所有的问题。 然而，在应用微服务体系结构时会遇到很多挑战，而且通过最初创建一个传统的包含所有内容的后端，首先使用[monolith first](https://martinfowler.com/bliki/MonolithFirst.html)可能是有意义的。 或者也许不是[not](https://martinfowler.com/articles/dont-start-monolith.html)。 关于这个问题有很多不同的意见。 这两个链接都指向马丁 · 福勒的网站; 正如我们所看到的，即使是聪明人也不能完全确定哪一种正确的方式更正确。
 
 <!-- Unfortunately, we cannot dive deeper into this important topic during this course. Even a cursory look at the topic would require at least 5 more weeks. -->
-不幸的是，我们不能在本课程中更深入地探讨这个重要的主题。 即使只是粗略地看一下这个问题，也需要至少5个星期的时间。
+不幸的是，我们不能在本课程中更深入地探讨这个重要的议题。 即使只是粗略地看一下这个问题，也需要至少5个星期的时间。
 
 #### Serverless
 <!-- After the release of Amazon's [lambda](https://aws.amazon.com/lambda/)-service at the end of 2014 a new trend started to emerge in web-application development: [serverless](https://serverless.com/). -->
@@ -659,8 +659,8 @@ Lambda 的主要特点是，它支持在云中执行单个函数，如今 Google
 
 
 
-<!-- If your application has to handle complicated data [lodash](https://www.npmjs.com/package/lodash), which we recommended in [part 4](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet#tehtavat-4-3-4-7), is a good library to use. If you prefer functional programming style, you might consider using [ramda](https://ramdajs.com/). -->
-如果您的应用必须处理复杂的数据[lodash](https://www.npmjs.com/package/lodash) ，这是我们在[part 4](/en/part4/从后端架构到测试入门#exercises-4-3-4-7)中推荐使用的一个很好的库。 如果您更喜欢函数式编程风格，您可以考虑使用[ramda](https://ramdajs.com/)。
+<!-- If your application has to handle complicated data [lodash](https://www.npmjs.com/package/lodash), which we recommended in [第4章](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet#tehtavat-4-3-4-7), is a good library to use. If you prefer functional programming style, you might consider using [ramda](https://ramdajs.com/). -->
+如果您的应用必须处理复杂的数据[lodash](https://www.npmjs.com/package/lodash) ，这是我们在[第4章](/zh/part4/从后端结构到测试入门#exercises-4-3-4-7)中推荐使用的一个很好的库。 如果您更喜欢函数式编程风格，您可以考虑使用[ramda](https://ramdajs.com/)。
 
 
 

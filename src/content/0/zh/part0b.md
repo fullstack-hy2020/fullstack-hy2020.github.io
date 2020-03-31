@@ -16,9 +16,9 @@ lang: zh
 
 这些应用只是为了演示本课程需要讲到的一些基本概念，绝不是 web 应用的开发标杆。 相反，它展示了一些陈旧的 web 开发技术，而这些技术在今天甚至可以被视作糟糕的实践。
 
-<!-- Coding in the recommended style begins in [part 1](/zh/part1). -->
+<!-- Coding in the recommended style begins in [第1章](/zh/part1). -->
 
-我们将在[第一章](/zh/part1)正式讲推荐的编码风格。
+我们将在[第1章](/zh/part1)正式讲推荐的编码风格。
 
 <!-- Use the Chrome browser <i>now and for the rest of the course</i>. -->
 
@@ -246,9 +246,9 @@ xhttp.open('GET', '/data.json', true);
 xhttp.send();
 ```
 
-<!-- The details of the code are not important right now, but some code has been included to spice up the images and the text. We will properly start coding in [part 1](/zh/part1). The sample code in this part is actually not relevant at all to the coding techniques of this course. -->
+<!-- The details of the code are not important right now, but some code has been included to spice up the images and the text. We will properly start coding in [第1章](/zh/part1). The sample code in this part is actually not relevant at all to the coding techniques of this course. -->
 
-代码的细节现在并不重要，穿插一些代码，是为了增加图像与文本的趣味性。我们将在[第 1 章](/zh/part1)正式地开始编码。 本章节的示例代码实际上与本课程所要讲的编码技术毫无关系。
+代码的细节现在并不重要，穿插一些代码，是为了增加图像与文本的趣味性。我们将在[第1章](/zh/part1)正式地开始编码。 本章节的示例代码实际上与本课程所要讲的编码技术毫无关系。
 
 <!-- > Some might wonder why xhttp-object is used instead of the modern fetch. This is due to not wanting to go into promises at all yet, and the code having a secondary role in this part. We will return to modern ways to make requests to the server in part 2. -->
 > 有些人可能想问为什么要使用 xhttp 对象而不是使用现代的 fetch 方法。 这是因为我们不想引入 promise 的概念，而且代码在这一章节只是二等公民。 在第 2 章节中，我们将回过头来用更加现代的方式来向服务器发送请求。
@@ -712,7 +712,7 @@ Note 对象包含两个字段: 包含 Note 实际内容的 content，以及包�
 Notes 页面使用了 AJAX 获取 Notes 数据。 提交表单仍然使用传统的 web 表单提交机制。
 
 <!-- The application URLs reflect the old, carefree times. JSON data is fetched from the url <https://fullstack-exampleapp.herokuapp.com/data.json> and new notes are sent to the url <https://fullstack-exampleapp.herokuapp.com/new_note>.   -->
-<!-- Nowadays urls like these would not be considered acceptable, as they don't follow the generally acknowledged conventions of [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) APIs, which we'll look into more in [part 3](/zh/part3) -->
+<!-- Nowadays urls like these would not be considered acceptable, as they don't follow the generally acknowledged conventions of [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) APIs, which we'll look into more in [第3章](/zh/part3) -->
 
 应用的 url 反映了过去无忧无虑的时光。 数据从 url https://fullstack-exampleapp.herokuapp.com/data.JSON 中获取，新的 Note 被发送到 url https://fullstack-exampleapp.herokuapp.com/new_note。 如今，这样的 url 被认为是不可接受的，因为它们没有遵循公认的 RESTful api 约定，我们将在第三章中进一步研究
 

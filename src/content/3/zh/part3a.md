@@ -17,10 +17,10 @@ lang: zh
 <!-- This course material was written with the version <i>v10.18.0</i> of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running _node -v_ in the command line). -->
 本课程材料是使用 Node.js 的<i>v10.18.0</i> 版本编写的。 请确保您的 Node 版本不低于材料中使用的版本(您可以通过在命令行中运行 _node -v_ 来检查版本)。
 
-<!-- As mentioned in [part 1](/zh/part1/javascript), browsers don't yet support the newest features of JavaScript, and that is why the code running in the browser must be <i>transpiled</i> with e.g. [babel](https://babeljs.io/). The situation with JavaScript running in the backend is different. The newest version of Node supports a large majority of the latest features of JavaScript, so we can use the latest features without having to transpile our code. -->
-正如在 [第一章](/zh/part1/javascript)中提到的，浏览器还不支持 JavaScript 的最新特性，这就是为什么在浏览器中运行的代码必须是[babel](https://babeljs.io/)转译过的。而在后端运行 JavaScript 的情况是不同的。 最新版本的 Node 支持大部分最新的 JavaScript 特性，因此我们可以使用最新的特性而不必转译我们的代码。
+<!-- As mentioned in [第1章](/zh/part1/javascript), browsers don't yet support the newest features of JavaScript, and that is why the code running in the browser must be <i>transpiled</i> with e.g. [babel](https://babeljs.io/). The situation with JavaScript running in the backend is different. The newest version of Node supports a large majority of the latest features of JavaScript, so we can use the latest features without having to transpile our code. -->
+正如在 [第1章](/zh/part1/javascript)中提到的，浏览器还不支持 JavaScript 的最新特性，这就是为什么在浏览器中运行的代码必须是[babel](https://babeljs.io/)转译过的。而在后端运行 JavaScript 的情况是不同的。 最新版本的 Node 支持大部分最新的 JavaScript 特性，因此我们可以使用最新的特性而不必转译我们的代码。
 
-<!-- Our goal is to implement a backend that will work with the notes application from [part 2](/zh/part2/). However, let's start with the basics by implementing a classic "hello world" application. -->
+<!-- Our goal is to implement a backend that will work with the notes application from [第2章](/zh/part2/). However, let's start with the basics by implementing a classic "hello world" application. -->
 我们的目标是实现一个后端，它将与 [第2章](/zh/part2/)中的 notes 应用一起工作。 但还是让我们从实现经典的“ hello world”应用的基础开始。
 
 <!-- **Notice** that the applications and exercises in this part are not all React applications, and we will not use the <i>create-react-app</i> utility for initializing the project for this application. -->
@@ -264,8 +264,8 @@ console.log(`Server running on port ${port}`)
 <!-- The <i>application/json</i> value in the <i>Content-Type</i> header informs the receiver that the data is in the JSON format. The _notes_ array gets transformed into JSON with the <em>JSON.stringify(notes)</em> method. -->
  <i>Content-Type</i> 头中的 <i>application/json</i> 值通知接收方数据为 JSON 格式。 使用  <em>JSON.stringify(notes)</em>  方法将 _notes_ 数组转换为 JSON。
 
-<!-- When we open the browser, the displayed format is exactly the same as in [part 2](/zh/part2/从服务器获取数据/) where we used [json-server](https://github.com/typicode/json-server) to serve the list of notes: -->
-当我们打开浏览器的时候，显示的格式和第2章节 [part 2](/zh/part2/从服务器获取数据/) 完全一样，在那里我们使用 [json-server](https://github.com/typicode/json-server) 来提供便笺列表:
+<!-- When we open the browser, the displayed format is exactly the same as in [第2章](/zh/part2/从服务器获取数据/) where we used [json-server](https://github.com/typicode/json-server) to serve the list of notes: -->
+当我们打开浏览器的时候，显示的格式和第2章节 [第2章](/zh/part2/从服务器获取数据/) 完全一样，在那里我们使用 [json-server](https://github.com/typicode/json-server) 来提供便笺列表:
 
 ![](../../images/3/2e.png)
 

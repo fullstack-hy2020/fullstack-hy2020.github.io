@@ -16,7 +16,7 @@ Javascript 在过去的几年里发展非常迅速，在本课程中，我们将
 
 浏览器还不能支持所有 Javascript 的最新特性。 基于这个事实，许多在浏览器中运行的代码需要从一个新版本的 Javascript 转译到了一个更旧、更兼容的版本。
 
-<!-- Today, the most popular way to do the transpiling is using [Babel](https://babeljs.io/). Transpilation is automatically configured in React applications created with create-react-app. We will take a closer look at the configuration of the transpilation in [part 7](/part7) of this course. -->
+<!-- Today, the most popular way to do the transpiling is using [Babel](https://babeljs.io/). Transpilation is automatically configured in React applications created with create-react-app. We will take a closer look at the configuration of the transpilation in [第7章](/part7) of this course. -->
 
 如今，最流行的转译方法是使用 [Babel](https://babeljs.io/)。 在使用 create-React-app 创建的 React 应用中转译是自动配置好的。 我们将在本课程的[第7章节](/zh/part7)中仔细研究转译的配置。
 
@@ -70,7 +70,7 @@ x = 4               // causes an error
 也可以使用关键字[var](https://developer.mozilla.org/en-us/docs/web/Javascript/reference/statements/var)在 Javascript 中定义变量。 在很长一段时间里，var 是定义变量的唯一方法。 const 和 let 是最近才在 ES6版本中添加的。 在一些特定情况，var 的工作方式与大多数语言中的变量定义相比是[十分不同的](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f)。 在本课程中明确不建议使用var，你应该坚持使用 const 和 let！
 
 <!-- You can find more on this topic on e.g. YouTube - [var, let and const - ES6 JavaScript Features](https://youtu.be/sjyJBL5fkp8) -->
-你可以在 YouTube中找到更多关于这个 [var, let and const - ES6 JavaScript Features](https://youtu.be/sjyJBL5fkp8)主题的讨论
+你可以在 YouTube中找到更多关于这个 [var, let and const - ES6 JavaScript Features](https://youtu.be/sjyJBL5fkp8)议题的讨论
 
 ### Arrays
 【数组】
@@ -152,9 +152,9 @@ console.log(m2)
 // [ '<li>1</li>', '<li>2</li>', '<li>3</li>' ] is printed
 ```
 
-<!-- Here an array filled with integer values is transformed into an array containing strings of HTML using the map method. In [part2](/zh/part2) of this course, we will see that map is used quite frequently in React. -->
+<!-- Here an array filled with integer values is transformed into an array containing strings of HTML using the map method. In [第2章](/zh/part2) of this course, we will see that map is used quite frequently in React. -->
 
-这个例子使用 map 方法将整数值的数组转换为了包含 HTML 字符串的数组。 在本课程的[第二章](/zh/ part2)中，我们将看到 map 在 React 中使用得相当频繁。
+这个例子使用 map 方法将整数值的数组转换为了包含 HTML 字符串的数组。 在本课程的[第2章](/zh/part2)中，我们将看到 map 在 React 中使用得相当频繁。
 
 <!-- Individual items of an array are easy to assign to variables with the help of the [destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment). -->
 
@@ -402,7 +402,7 @@ const App = () => {
 ```
 
 <!-- **NB** at this point <i>you can assume that there are always three items</i>, so there is no need to go through the arrays using loops. We will come back to the topic of rendering components based on items in arrays with a more thorough exploration in the [next part of the course](../part2). -->
-**注意** 在这里，我假定它总是有三个元素，所以没有必要使用循环遍历数组。 我们将在[课程的下一章节](/zh/part2)，即“基于数组中的元素渲染组件”这一主题中进行更深入的讨论。
+**注意** 在这里，我假定它总是有三个元素，所以没有必要使用循环遍历数组。 我们将在[课程的下一章节](/zh/part2)，即“基于数组中的元素渲染组件”这一议题中进行更深入的讨论。
 
 <!-- However, do not pass different objects as separate props from the <i>App</i> component to the components <i>Content</i> and <i>Total</i>. Instead, pass them directly as an array: -->
 
@@ -465,7 +465,7 @@ const App = () => {
 【对象方法以及“ this”关键字】
 <!-- Due to the fact that during this course we are using a version of React containing React hooks we have no need for defining objects with methods. **The contents of this chapter are not relevant to the course** but are certainly in many ways good to know. In particular when using older versions of React one must understand the topics of this chapter. -->
 
-由于在本课程中我们使用的React版本里包含 React hook ，所以我们不需要定义带有函数的对象。 因此**本章的内容与本课程无关** ，但在许多方面确实值得了解。 特别是在使用旧版本的 React 时，必须理解本章的主题。
+由于在本课程中我们使用的React版本里包含 React hook ，所以我们不需要定义带有函数的对象。 因此**本章的内容与本课程无关** ，但在许多方面确实值得了解。 特别是在使用旧版本的 React 时，必须理解本章的议题。
 
 <!-- Arrow functions and functions defined using the _function_ keyword vary substantially when it comes to how they behave with respect to the keyword [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) which refers to the object itself. -->
 
@@ -595,7 +595,7 @@ setTimeout(arto.greet.bind(arto), 1000)
 使用[箭头函数](https://developer.mozilla.org/en-us/docs/web/javascript/reference/functions/arrow_functions)可以解决与 _this_相关的一系列问题。 但是，它不能当做对象的方法来使用，因为那样的话this就不起作用了。 稍后我们将回到_this_与箭头函数的关系。
 
 <!-- If you want to gain a better understanding of how _this_ works in Javascript, the internet is full of material about the topic, e.g. the screen cast series [Understand JavaScript's this Keyword in Depth](https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth) by [egghead.io](https://egghead.io) is highly recommended! -->
-如果你想更好地理解 Javascript 的工作原理，互联网上充满了关于这个主题的材料，例如 [egghead.io](https://egghead.io)的一系列[Understand JavaScript's this Keyword in Depth](https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth)短视频，强烈推荐！
+如果你想更好地理解 Javascript 的工作原理，互联网上充满了关于这个议题的材料，例如 [egghead.io](https://egghead.io)的一系列[Understand JavaScript's this Keyword in Depth](https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth)短视频，强烈推荐！
 
 ### Classes
 【类】
@@ -648,7 +648,7 @@ ES6的类语法在“老的” React 和 Node.js 中被广泛使用，因此即�
 如果你想深入了解 Javascript，互联网上有一个很棒的免费书系列叫做[You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS)。
 
 <!-- [egghead.io](https://egghead.io) has plenty of quality screencasts on Javascript, React, and other interesting topics. Unfortunately, some of the material is behind a paywall. -->
-[egghead.io](https://egghead.io) 上有大量关于 Javascript、 React 及其他有趣主题的高质量短视频。不幸的是，有些材料是付费后才能看的。
+[egghead.io](https://egghead.io) 上有大量关于 Javascript、 React 及其他有趣议题的高质量短视频。不幸的是，有些材料是付费后才能看的。
 
 </div>
 

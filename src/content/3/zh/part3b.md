@@ -8,7 +8,7 @@ lang: zh
 <div class="content">
 
 
-<!-- Next let's connect the frontend we made in [part 2](/part2) to our own backend. -->
+<!-- Next let's connect the frontend we made in [第2章](/part2) to our own backend. -->
 接下来，让我们将[第2章节](/zh/part2)中制作的前端连接到我们自己的后端。
 
 <!-- In the previous part, the frontend could ask for the list of notes from the json-server we had as a backend at from the address http://localhost:3001/notes. -->

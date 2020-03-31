@@ -684,7 +684,7 @@ React hook-api 发布之后，HOCs 变得越来越不受欢迎。 几乎所有�
 <!-- Nowadays it is possible to implement redux-like state management without redux by using the React [context](https://reactjs.org/docs/context.html)-api and the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer)-hook.  -->
 现在，通过使用 React [context](https://reactjs.org/docs/context.html)-api 和[useReducer](https://reactjs.org/docs/hooks-reference.html#useReducer)-hook，不需要 redux 就可以实现类似 redux 的状态管理。
 <!-- More about this [here](https://www.simplethread.com/cant-replace-redux-with-hooks/) and [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). We will also practice this in  -->
-更多关于这个[这里](https://www.simplethread.com/cant-replace-redux-with-hooks/)和[这里](https://hswolff.com/blog/how-to-usecontext-with-usereducer/)的内容，我们也会在[part 9](/zh/part9)中提及
+更多关于这个[这里](https://www.simplethread.com/cant-replace-redux-with-hooks/)和[这里](https://hswolff.com/blog/how-to-usecontext-with-usereducer/)的内容，我们也会在[第9章](/zh/part9)中提及
 
 </div>
 

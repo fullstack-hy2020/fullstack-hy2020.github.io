@@ -361,7 +361,7 @@ Fork和clone项目[patientor](https://github.com/fullstack-hy2020/patientor)。 
 
 ![](../../images/9/16a.png)
 
-<!-- You might also want to have a look at the tab <i>console</i>. If something fails [part 3](/part3) of the course shows how the problem can be solved. -->
+<!-- You might also want to have a look at the tab <i>console</i>. If something fails [第3章](/part3) of the course shows how the problem can be solved. -->
 您可能还需要查看<i>console</i> 的选项卡。 如果有什么东西失败了，[课程的第三章节](/zh/part3)  说明了如何解决这个问题。
 
 </div>
@@ -435,10 +435,10 @@ Fork和clone项目[patientor](https://github.com/fullstack-hy2020/patientor)。 
 
 
 
-<!-- We will place all [routers](/zh/part4/从后端架构到测试入门), modules which are responsible for handling a set of specific resources such as <i>diaries</i>, under the directory <i>src/routes</i>.  -->
-我们将把所有的路由 [routers](/zh/part4/从后端架构到测试入门) ，这些模块负责处理一组特定的资源，如<i>diaries</i>，放在<i>src/routes</i>目录下。
-<!-- This is a bit different than what we did  in [part 4](/zh/part4), where we used directory <i>src/controllers</i>. -->
-这与我们在 [part 4](/zh/part4),中使用的目录<i>src / controllers</i> 有些不同。
+<!-- We will place all [routers](/zh/part4/从后端结构到测试入门), modules which are responsible for handling a set of specific resources such as <i>diaries</i>, under the directory <i>src/routes</i>.  -->
+我们将把所有的路由 [routers](/zh/part4/从后端结构到测试入门) ，这些模块负责处理一组特定的资源，如<i>diaries</i>，放在<i>src/routes</i>目录下。
+<!-- This is a bit different than what we did  in [第4章](/zh/part4), where we used directory <i>src/controllers</i>. -->
+这与我们在 [第4章](/zh/part4),中使用的目录<i>src / controllers</i> 有些不同。
 
 
 

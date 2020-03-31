@@ -19,8 +19,8 @@ lang: zh
 npm install mongoose mongoose-unique-validator --save
 ```
 
-<!-- We will imitate what we did in parts [3](/zh/part3/将数据存入_mongo_db) and [4](/zh/part4/从后端架构到测试入门). -->
-我们将模仿我们 parts [3](/zh/part3/将数据存入_mongo_db) and [4](/zh/part4/从后端架构到测试入门)中所做的。
+<!-- We will imitate what we did in parts [3](/zh/part3/将数据存入_mongo_db) and [4](/zh/part4/从后端结构到测试入门). -->
+我们将模仿我们 parts [3](/zh/part3/将数据存入_mongo_db) and [4](/zh/part4/从后端结构到测试入门)中所做的。
 
 <!-- The person schema has been defined as follows: -->
 person模式被定义如下: 
@@ -211,8 +211,8 @@ Mutation: {
 ### User and log in
 【用户登录】
 
-<!-- Let's add user management to our application. For simplicity's sake, let's assume that all users have the same password which is hardcoded to the system. It would be straightforward to save individual passwords for all users following the principles from [part 4](/zh/part4/用户管理), but because our focus is on GraphQL, we will leave out all that extra hassle this time.  -->
-让我们在应用中添加用户管理。 为了简单起见，让我们假设所有用户都有硬编码到系统的相同密码。 遵循 [part 4](/zh/part4/用户管理)的原则，为所有用户保存个人密码将非常简单，但由于我们的重点是 GraphQL，这次将省去所有额外的麻烦。
+<!-- Let's add user management to our application. For simplicity's sake, let's assume that all users have the same password which is hardcoded to the system. It would be straightforward to save individual passwords for all users following the principles from [第4章](/zh/part4/用户管理), but because our focus is on GraphQL, we will leave out all that extra hassle this time.  -->
+让我们在应用中添加用户管理。 为了简单起见，让我们假设所有用户都有硬编码到系统的相同密码。 遵循 [第4章](/zh/part4/用户管理)的原则，为所有用户保存个人密码将非常简单，但由于我们的重点是 GraphQL，这次将省去所有额外的麻烦。
 
 <!-- The user schema is as follows:  -->
 用户模式如下:
@@ -241,8 +241,8 @@ module.exports = mongoose.model('User', schema)
 <!-- Every user is connected to a bunch of other persons in the system through the _friends_ field. The idea is that when a user, i.e <i>mluukkai</i>, adds a person, i.e <i>Arto Hellas</i>, to the list, the person is added to their _friends_ list. This way logged in users can have their own, personalized, view in the application.  -->
 每个用户都通过好友字段连接到系统中的一群其他人。 这个想法是，当一个用户(即<i>mluukkai</i>)将一个人(即<i>Arto Hellas</i>)添加到列表中时，这个人将被添加到他们的好友列表中。 通过这种方式登录的用户可以在应用中拥有自己的、个性化的视图。
 
-<!-- Logging in and identifying the user are handled the same way we used in [part 4](/zh/part4/密钥认证) when we used REST, by using tokens.  -->
-登录和识别用户的处理方式与我们使用 REST 时在[part 4](/zh/part4/密钥认证) 中使用的处理方式相同，即使用标记。
+<!-- Logging in and identifying the user are handled the same way we used in [第4章](/zh/part4/密钥认证) when we used REST, by using tokens.  -->
+登录和识别用户的处理方式与我们使用 REST 时在[第4章](/zh/part4/密钥认证) 中使用的处理方式相同，即使用标记。
 
 <!-- Let's extend the schema like so:  -->
 让我们像这样扩展模式:
@@ -316,8 +316,8 @@ Mutation: {
 },
 ```
 
-<!-- The new user mutation is straightforward. The log in mutation checks if the username/password pair is valid. And if it is indeed valid, it returns a jwt-token familiar from [part 4](/zh/part4/密钥认证). -->
-新的用户突变很简单。 登录变异检查用户名 / 密码对是否有效。 如果它确实有效，它将返回一个类似于[part 4](/zh/part4/密钥认证)的 jwt-token。
+<!-- The new user mutation is straightforward. The log in mutation checks if the username/password pair is valid. And if it is indeed valid, it returns a jwt-token familiar from [第4章](/zh/part4/密钥认证). -->
+新的用户突变很简单。 登录变异检查用户名 / 密码对是否有效。 如果它确实有效，它将返回一个类似于[第4章](/zh/part4/密钥认证)的 jwt-token。
 
 <!-- Just like in the previous case with REST, the idea now is that a logged in user adds a token they receive upon log in to all of their requests. And just like with REST, the token is added to GraphQL queries using the <i>Authorization</i> header. -->
 就像以前 REST 的情况一样，现在的想法是登录用户将他们在登录时收到的令牌添加到所有请求中。 就像使用 REST 一样，令牌使用<i>Authorization</i> 头被添加到 GraphQL 查询中。

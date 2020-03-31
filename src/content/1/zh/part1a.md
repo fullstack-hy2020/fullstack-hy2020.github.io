@@ -7,7 +7,7 @@ lang: zh
 
 <div class="content">
 <!-- We will now start getting familiar with probably the most important topic of this course, namely the [React](https://reactjs.org/)-library. Let's start off with making a simple React application as well as getting to know the core concepts of React. -->
-我们即将开始学习大概是本门课程中最重要的主题——[React](https://reactjs.org/)。 让我们从制作一个简单的 React 应用开始，同时了解一下 React 的核心概念。
+我们即将开始学习大概是本门课程中最重要的议题——[React](https://reactjs.org/)。 让我们从制作一个简单的 React 应用开始，同时了解一下 React 的核心概念。
 
 <!-- The easiest way to get started by far is using a tool called [create-react-app](https://github.com/facebookincubator/create-react-app). It is possible (but not necessary) to install <i>create-react-app</i> on your machine if the <i>npm</i> tool that was installed along with Node has a version number of at least <i>5.3</i>. -->
 
@@ -203,7 +203,7 @@ ReactDOM.render(
 )
 ```
 
-<!-- The compiling is handled by [Babel](https://babeljs.io/repl/). Projects created with *create-react-app* are configured to compile automatically. We will learn more about this topic in [part 7](/zh/part7) of this course. -->
+<!-- The compiling is handled by [Babel](https://babeljs.io/repl/). Projects created with *create-react-app* are configured to compile automatically. We will learn more about this topic in [第7章](/zh/part7) of this course. -->
 编译是由[Babel](https://babeljs.io/repl/)处理的。 使用 *create-react-app* 创建的项目会配置为自动编译。 我们将在本课程的[第7章节](/zh/part7)中学习更多关于这个议题的知识。
 
 <!-- It is also possible to write React as "pure JavaScript" without using JSX. Although, nobody with a sound mind would actually do so. -->
@@ -279,7 +279,7 @@ const App = () => {
 
 使用 React 编写组件很容易，通过组合组件，甚至可以使相当复杂的应用保持很好的可维护性。 实际上，React 的核心理念，就是将许多定制化的、可重用的组件组合成应用。
 
-<!-- Another strong convention is the idea of a <i>root component</i> called <i>App</i> at the top of the component tree of the application. Nevertheless, as we will learn in [part 6](/zh/part6), there are situations where the component <i>App</i> is not exactly the root, but is wrapped within an appropriate utility component. -->
+<!-- Another strong convention is the idea of a <i>root component</i> called <i>App</i> at the top of the component tree of the application. Nevertheless, as we will learn in [第6章](/zh/part6), there are situations where the component <i>App</i> is not exactly the root, but is wrapped within an appropriate utility component. -->
 
 还有一个约定，就是应用的组件树顶部都要有一个<i>root 组件</i> 叫做<i>App</i>。 然而，正如我们将在[第6章](/zh/ part6)将要讲到的，在某些情况下，组件的根并不一定是<i>App</i> ，而是包装在了一些工具组件中。
 

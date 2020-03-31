@@ -72,7 +72,7 @@ addNote = event => {
 <!-- The newly created note resource is stored in the value of the <i>data</i> property of the _response_ object. -->
 新创建的便笺资源存储在response对象的<i>data</i> 属性值中。
 
-<!-- Sometimes it can be useful to inspect HTTP requests in the <i>Network</i> tab of Chrome developer tools, which was used heavily at the beginning of [part 0](/zh/part0/web_应用的基础设施#http-get): -->
+<!-- Sometimes it can be useful to inspect HTTP requests in the <i>Network</i> tab of Chrome developer tools, which was used heavily at the beginning of [第0章](/zh/part0/web_应用的基础设施#http-get): -->
 有时在 Chrome 开发工具的<i>Network</i> 选项卡中检查 HTTP 请求是很有用的，这个选项卡在[第 0 章](/zh/part0/web_应用的基础设施#http-get) 开始时被大量使用:
 
 ![](../../images/2/21e.png)
@@ -553,7 +553,7 @@ const App = () => {
 这一切都相当复杂，试图解释它可能只会让它更难理解。 互联网上充满了讨论这个话题的材料，比如这个[this](https://javascript.info/promise-chaining)。
 
 <!-- The "Async and performance" book from the [You do not know JS](https://github.com/getify/You-Dont-Know-JS/tree/1st-ed) book series explains the topic [well](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch3.md), but the explanation is many pages long. -->
-在[You do not know JS](https://github.com/getify/You-Dont-Know-JS/tree/1st-ed) 一书中，对这个主题进行了很好的解释[well](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch3.md)，但是解释有很多页
+在[You do not know JS](https://github.com/getify/You-Dont-Know-JS/tree/1st-ed) 一书中，对这个议题进行了很好的解释[well](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch3.md)，但是解释有很多页
 
 <!-- Promises are central to modern JavaScript development and it is highly recommended to invest a reasonable amount of time into understanding them. -->
 承诺Promise是现代 JavaScript 开发的核心，强烈建议投入合理的时间来理解它们。

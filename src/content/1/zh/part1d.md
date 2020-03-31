@@ -349,7 +349,7 @@ const App = (props) => {
 <!-- The <i>History</i> component renders completely different React-elements depending on the state of the application. This is called <i>conditional rendering</i>. -->
  <i>History</i> 组件根据应用的状态渲染完全不同的 React-元素。
 
-<!-- React also offers many other ways of doing [conditional rendering](https://reactjs.org/docs/conditional-rendering.html). We will take a closer look at this in [part 2](/zh/part2). -->
+<!-- React also offers many other ways of doing [conditional rendering](https://reactjs.org/docs/conditional-rendering.html). We will take a closer look at this in [第2章](/zh/part2). -->
 React 还提供了许多其他的方法来实现[条件渲染](https://reactjs.org/docs/conditional-rendering.html)。 我们将在[第2章节](/zh/part2)中进一步研究这个问题。 
 
 <!-- Let's make one last modification to our application by refactoring it to use the _Button_ component that we defined earlier on: -->
@@ -792,7 +792,7 @@ const App = (props) => {
 定义事件处理程序的另一种方法是使用返回函数的函数。
 
 <!-- You probably won't need to use functions that return functions in any of the exercises in this course.  If the topic seems particularly confusing, you may skip over this section for now and return to it later. -->
-在本课程的任何练习中，您可能不需要使用返回函数的函数。 如果这个主题看起来特别令人困惑，您可以跳过这一章节，稍后再回过头看它。
+在本课程的任何练习中，您可能不需要使用返回函数的函数。 如果这个议题看起来特别令人困惑，您可以跳过这一章节，稍后再回过头看它。
 
 <!-- Let's make the following changes to our code: -->
 让我们对我们的代码进行如下修改:

@@ -9,7 +9,7 @@ lang: zh
 
 
 <!-- Before we move into the main topic of persisting data in a database, we will take a look at a few different ways of debugging Node applications. -->
-在讨论在数据库中保存数据的主题之前，我们将看一下调试 Node 应用的几种不同方法。
+在讨论在数据库中保存数据的议题之前，我们将看一下调试 Node 应用的几种不同方法。
 
 ### Debugging Node applications 
 【调试Node应用】

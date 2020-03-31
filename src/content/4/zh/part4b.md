@@ -196,8 +196,8 @@ module.exports = {
 }
 ```
 
-<!-- One tiny but important detail: at the [beginning](/zh/part4/从后端架构到测试入门#project-structure) of this part we extracted the Express application into the <i>app.js</i> file, and the role of the <i>index.js</i> file was changed to launch the application at the specified port with Node's built-in <i>http</i> object: -->
-一个很小但很重要的细节是: 在这一章节的 [beginning](/zh/part4/从后端架构到测试入门#project-structure) 中，我们将 Express 应用提取到<i>app.js</i> 文件中，并且改变了<i>index.js</i> 文件的角色，使用 Node 的内置<i>http</i> 对象在指定端口启动应用:
+<!-- One tiny but important detail: at the [beginning](/zh/part4/从后端结构到测试入门#project-structure) of this part we extracted the Express application into the <i>app.js</i> file, and the role of the <i>index.js</i> file was changed to launch the application at the specified port with Node's built-in <i>http</i> object: -->
+一个很小但很重要的细节是: 在这一章节的 [beginning](/zh/part4/从后端结构到测试入门#project-structure) 中，我们将 Express 应用提取到<i>app.js</i> 文件中，并且改变了<i>index.js</i> 文件的角色，使用 Node 的内置<i>http</i> 对象在指定端口启动应用:
 
 ```js
 const app = require('./app') // the actual Express app
@@ -1347,8 +1347,8 @@ afterAll(() => {
 <!-- Use async/await. -->
 使用 async / await。
 
-<!-- The application mostly needs to update the amount of <i>likes</i> for a blog post. You can implement this functionality the same way that we implemented updating notes in [part 3](/zh/part3/将数据存入_mongo_db#other-operations). -->
-应用大多数情况下需要更新博客文章的<i>like</i> 数量。 您可以像在[part 3](/zh/part3/将数据存入_mongo_db#other-operations)中实现更新说明那样实现这个功能。
+<!-- The application mostly needs to update the amount of <i>likes</i> for a blog post. You can implement this functionality the same way that we implemented updating notes in [第3章](/zh/part3/将数据存入_mongo_db#other-operations). -->
+应用大多数情况下需要更新博客文章的<i>like</i> 数量。 您可以像在[第3章](/zh/part3/将数据存入_mongo_db#other-operations)中实现更新说明那样实现这个功能。
 
 
 <!-- Feel free to implement tests for the functionality if you want to. Otherwise verify that the functionality works with Postman or some other tool. -->

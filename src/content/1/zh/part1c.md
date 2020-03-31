@@ -405,7 +405,7 @@ const App = (props) => {
 
 ### Event handling
 【事件处理】
-<!-- We have already mentioned <i>event handlers</i> a few times in [part 0](/zh/part0), that are registered to be called when specific events occur. E.g. a user's interaction with the different elements of a web page can cause a collection of various different kinds of events to be triggered. -->
+<!-- We have already mentioned <i>event handlers</i> a few times in [第0章](/zh/part0), that are registered to be called when specific events occur. E.g. a user's interaction with the different elements of a web page can cause a collection of various different kinds of events to be triggered. -->
 我们已经在[第0章](/zh/part0)中多次提到<i>事件处理程序</i>，它们（被注册为）在特定事件发生时进行调用。 例如，用户与一个网页的不同元素的交互可能会触发一系列不同类型的事件。
 
 <!-- Let's change the application so that increasing the counter happens when a user clicks a button, which is implemented with the [button](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button)-element. -->

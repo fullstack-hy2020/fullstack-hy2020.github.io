@@ -53,8 +53,8 @@ lang: zh
 <!-- We will also take this approach.  -->
 我们也将采用这种方法。
 
-<!-- As we remember from [part 3](/zh/part3) an npm project is set by running running command <i>npm init</i> in an empty directory. Then we can install the dependencies by running  -->
-正如我们在[part 3](/zh/part3) 中所做的，通过在空目录中运行命令<i>npm init</i> 来设置 npm 项目。 我们可以通过运行如下命令安装依赖：
+<!-- As we remember from [第3章](/zh/part3) an npm project is set by running running command <i>npm init</i> in an empty directory. Then we can install the dependencies by running  -->
+正如我们在[第3章](/zh/part3) 中所做的，通过在空目录中运行命令<i>npm init</i> 来设置 npm 项目。 我们可以通过运行如下命令安装依赖：
 
 ```
 npm install --save-dev ts-node typescript
@@ -1238,8 +1238,8 @@ Response 是如下格式的 json
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ```
 
-<!-- Note that you need to have a correct setup in order to get hold to the request body, see [part 3](/zh/part3/node_js_与_express#receiving-data). -->
-请注意，您需要有一个正确的设置，以获得请求主体，请参见[part 3](/zh/part3/node_js_与_express#receiving-data)。
+<!-- Note that you need to have a correct setup in order to get hold to the request body, see [第3章](/zh/part3/node_js_与_express#receiving-data). -->
+请注意，您需要有一个正确的设置，以获得请求主体，请参见[第3章](/zh/part3/node_js_与_express#receiving-data)。
 
 </div>
 

@@ -20,7 +20,7 @@ lang: zh
 一个广泛流行的 UI 框架是由 Twitter 创建的[Bootstrap](https://getbootstrap.com/ 工具包) ，它可能仍然是最流行的框架。 最近，进入这个领域的新 UI 框架数量激增。 事实上，选择的范围是如此之广，以至于几乎没有希望创建一个详尽的选项清单。
 
 <!-- Many UI frameworks provide developers of web applications with ready-made themes and "components" like buttons, menus, and tables. We write components in quotes, because in this context we are not talking about React components. Usually UI frameworks are used by including the CSS stylesheets and JavaScript code of the framework in the application. -->
-许多 UI 框架为 web 应用开发人员提供现成的主题和“组件” ，如按钮、菜单和表格。 我们将组件写在引号中，因为在这里我们不讨论 React 组件。 通常，UI 框架是通过在应用中包含 CSS 样式表和框架的 JavaScript 代码来使用的。
+许多 UI 框架为 web 应用开发人员提供现成的议题和“组件” ，如按钮、菜单和表格。 我们将组件写在引号中，因为在这里我们不讨论 React 组件。 通常，UI 框架是通过在应用中包含 CSS 样式表和框架的 JavaScript 代码来使用的。
 
 <!-- There are many UI frameworks that have React-friendly versions, where the framework's "components" have been transformed into React components. There are a few different React versions of Bootstrap like [reactstrap](http://reactstrap.github.io/) and [react-bootstrap](https://react-bootstrap.github.io/). -->
 有许多 UI 框架具有响应友好版本，其中框架的“组件”已经转换为 React 组件。 有几个不同的 http://reactstrap.github.io/ 版本，像[reactstrap](reactstrap)和[React-Bootstrap](reactstrap  https://React-Bootstrap.github.io/)。
@@ -770,6 +770,6 @@ const App = () => {
 
 
 <!-- The exercises related to the topics presented here, can be found at the end of this course material section in the exercise set [for extending the blog list application](/zh/part7/练习：扩展你的博客列表). -->
-与这里提到的主题相关的练习，可以在本课程材料部分的练习集[用于扩展博客列表应用](/zh/part7/练习：扩展你的博客列表)的最后找到。
+与这里提到的议题相关的练习，可以在本课程材料部分的练习集[用于扩展博客列表应用](/zh/part7/练习：扩展你的博客列表)的最后找到。
 
 </div>

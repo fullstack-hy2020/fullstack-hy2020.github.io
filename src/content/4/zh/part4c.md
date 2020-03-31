@@ -249,9 +249,9 @@ const noteSchema = new mongoose.Schema({
 npm install bcrypt --save
 ```
 
-<!-- Creating new users happens in compliance with the RESTful conventions discussed in [part 3](/zh/part3/node_js_与_express#rest), by making an HTTP POST request to the <i>users</i> path. -->
+<!-- Creating new users happens in compliance with the RESTful conventions discussed in [第3章](/zh/part3/node_js_与_express#rest), by making an HTTP POST request to the <i>users</i> path. -->
 
-通过 HTTP 向<i>users</i>发送 POST 请求，按照[第三章](/zh/part3/node_js_与_express#rest)讨论的 RESTful 约定创建用户。
+通过 HTTP 向<i>users</i>发送 POST 请求，按照[第3章](/zh/part3/node_js_与_express#rest)讨论的 RESTful 约定创建用户。
 
 <!-- Let's define a separate <i>router</i> for dealing with users in a new <i>controllers/users.js</i> file. Let's take the router into use in our application in the <i>app.js</i> file, so that it handles requests made to the <i>/api/users</i> url: -->
 

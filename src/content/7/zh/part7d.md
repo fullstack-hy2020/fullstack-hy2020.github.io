@@ -19,8 +19,8 @@ lang: zh
 <!-- We have implemented our applications by dividing our code into separate modules that have been <i>imported</i> to places that require them. Even though ES6 modules are defined in the ECMAScript standard, no browser actually knows how to handle code that is divided into modules. -->
 我们已经实现了我们的应用，将我们的代码分割成单独的模块，这些模块已经被导入到需要它们的地方。 尽管 ES6模块是在 ECMAScript 标准中定义的，但没有浏览器真正知道如何处理划分为模块的代码。
 
-<!-- For this reason, code that is divided into modules must be <i>bundled</i> for browsers, meaning that all of the source code files are transformed into a single file that contains all of the application code. When we deployed our React frontend to production in [part 3](/zh/part3/把应用部署到网上), we performed the bundling of our application with the _npm run build_ command. Under the hood, the npm script bundles the source code using webpack which produces the following collection of files in the <i>build</i> directory: -->
-由于这个原因，被划分为模块的代码对于浏览器必须是<i>绑定的</i>，这意味着所有的源代码文件都被转换成一个包含所有应用代码的文件。 在 [part 3](/zh/part3/把应用部署到网上)中部署 React frontend to production 时，我们执行了将应用与 npm run build 命令绑定在一起的操作。 在引擎盖下，npm 脚本使用 webpack 捆绑源代码，在<i>build</i> 目录下生成如下文件集合:
+<!-- For this reason, code that is divided into modules must be <i>bundled</i> for browsers, meaning that all of the source code files are transformed into a single file that contains all of the application code. When we deployed our React frontend to production in [第3章](/zh/part3/把应用部署到网上), we performed the bundling of our application with the _npm run build_ command. Under the hood, the npm script bundles the source code using webpack which produces the following collection of files in the <i>build</i> directory: -->
+由于这个原因，被划分为模块的代码对于浏览器必须是<i>绑定的</i>，这意味着所有的源代码文件都被转换成一个包含所有应用代码的文件。 在 [第3章](/zh/part3/把应用部署到网上)中部署 React frontend to production 时，我们执行了将应用与 npm run build 命令绑定在一起的操作。 在引擎盖下，npm 脚本使用 webpack 捆绑源代码，在<i>build</i> 目录下生成如下文件集合:
 
 <pre>
 ├── asset-manifest.json
@@ -1039,7 +1039,7 @@ Create-react-app 工具在幕后使用 webpack。 如果缺省配置不够，可
 
 
 <!-- One exercise related to the topics presented here, can be found at the end of this course material section in the exercise set [for extending the blog list application](/zh/part7/练习：扩展你的博客列表). -->
-一个与这里提到的主题相关的练习，可以在本课程材料部分的练习集[for extending the blog list application](/zh/part7/练习：扩展你的博客列表)的最后找到。
+一个与这里提到的议题相关的练习，可以在本课程材料部分的练习集[for extending the blog list application](/zh/part7/练习：扩展你的博客列表)的最后找到。
 
 
 </div>

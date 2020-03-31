@@ -77,7 +77,7 @@ npx json-server --port 3001 --watch db.json
 <!-- json-server stores all the data in the <i>db.json</i> file, which resides on the server. In the real world, data would be stored in some kind of database. However, json-server is a handy tool that enables the use of server-side functionality in the development phase without the need to program any of it. -->
 Json-server 将所有数据存储在服务器上的<i>db.json</i> 文件中。 在现实世界中，数据会存储在某种数据库中。 然而，json-server 是一个方便的工具，可以在开发阶段使用服务器端功能，而不需要编写任何程序。 
 
-<!-- We will get familiar with the principles of implementing server-side functionality in more detail in [part 3](/zh/part3) of this course. -->
+<!-- We will get familiar with the principles of implementing server-side functionality in more detail in [第3章](/zh/part3) of this course. -->
 在本课程的[第3章节](/zh/part3)中，我们将更详细地了解如何实现服务器端的功能。
 
 ### The browser as a runtime environment 
@@ -166,14 +166,14 @@ setTimeout(() => {
 为了让浏览器保持<i>responsive响应性</i>，即能够以足够的速度连续地对用户操作作出反应，代码逻辑需要让任何单一的计算都不会花费太长的时间。
 
 <!-- There is a host of additional material on the subject to be found on the internet. One particularly clear presentation of the topic is the keynote by Philip Roberts called [What the heck is the event loop anyway?](https://www.youtube.com/watch?v=8aGhZQkoFbQ) -->
-在互联网上可以找到大量关于这个主题的补充材料。 关于这个话题，一个特别清晰的演讲是 Philip Roberts 的主题演讲[What the heck is the event loop anyway?](https://www.youtube.com/watch?v=8aGhZQkoFbQ)
+在互联网上可以找到大量关于这个议题的补充材料。 关于这个话题，一个特别清晰的演讲是 Philip Roberts 的议题演讲[What the heck is the event loop anyway?](https://www.youtube.com/watch?v=8aGhZQkoFbQ)
 
 <!-- In today's browsers, it is possible to run parallelized code with the help of so-called [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers). The event loop of an individual browser window is, however, still only handled by a [single thread](https://medium.com/techtrument/multithreading-javascript-46156179cf9a). -->
 在当今的浏览器中，可以在所谓的 [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) 的帮助下运行并行化的代码。 然而，单个浏览器窗口的事件循环仍然是由一个[单线程](https://medium.com/techtrument/multithreading-javascript-46156179cf9a)处理。
 
 ### npm
 <!-- Let's get back to the topic of fetching data from the server. -->
-让我们回到从服务器获取数据的主题。
+让我们回到从服务器获取数据的议题。
 
 <!-- We could use the previously mentioned promise based function [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) to pull the data from the server. Fetch is a great tool. It is standardized and supported by all modern browsers (excluding IE). -->
 我们可以使用前面提到的基于承诺promise的[fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch)函数从服务器中获取数据。 fetch是一个很好的工具。 它是标准化的，所有现代浏览器(不包括 IE，因为它不是)都支持它。

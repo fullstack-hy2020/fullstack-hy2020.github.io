@@ -53,7 +53,7 @@ lang: zh
 
 <!-- Proceeding from part <i>n</i> to part <i>n+1</i> is not sensible before good enough know-how of the topics of part <i>n</i> has been achieved. In pedagogic terms, the course uses [mastery learning](https://en.wikipedia.org/wiki/Mastery_learning), and the intent is for you to proceed to the next part only after doing enough of the exercises of the previous part. -->
 
-从第 <i>n</i> 章跳转到第 <i>n + 1</i> 章之前，最好对第 n 章的主题有足够的了解。 在教学方法论上，本课程使用了 [掌握学习法（mastery learning）](https://en.wikipedia.org/wiki/Mastery_learning)，其精髓就是让你在完成上一章节足够的练习之后再进入下一章节。
+从第 <i>n</i> 章跳转到第 <i>n + 1</i> 章之前，最好对第 n 章的议题有足够的了解。 在教学方法论上，本课程使用了 [掌握学习法（mastery learning）](https://en.wikipedia.org/wiki/Mastery_learning)，其精髓就是让你在完成上一章节足够的练习之后再进入下一章节。
 
 <!-- You are expected to do <i>at least</i> all of the exercises that are not marked with a star(\*). Exercises marked with a star count towards your final grade, but skipping them does not prevent you from doing the compulsory exercises in the next part. -->
 
@@ -379,9 +379,9 @@ Node package manager [npm](https://www.npmjs.com/get-npm)  也会随 Node 安装
 ### Typos in the material  
 【教材中的拼写错误】
 
-<!-- If you find a typo in the material, or something has been expressed unclearly, or is simply bad grammar, do a <i>pull request</i> to the course material in repository <https://github.com/fullstack-hy2020/fullstack-hy2020.github.io>. For example, the markdown source code of this page can be found in the repository at <https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/edit/source/src/content/0/en/part0a.md> -->
+<!-- If you find a typo in the material, or something has been expressed unclearly, or is simply bad grammar, do a <i>pull request</i> to the course material in repository <https://github.com/fullstack-hy2020/fullstack-hy2020.github.io>. For example, the markdown source code of this page can be found in the repository at <https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/edit/source/src/content/0/zh/part0a.md> -->
 
-如果你发现材料中有一个拼写错误，或者有些东西表达不清楚，又或者只是简单的语法错误，请在 https://github.com/fullstack-hy2020/fullstack-hy2020.github.io 向仓库中的教材内容提出 pull request。 例如，这个页面的 markdown 代码可以在仓库中的 https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/edit/source/src/content/0/en/part0a.md 找到
+如果你发现材料中有一个拼写错误，或者有些东西表达不清楚，又或者只是简单的语法错误，请在 https://github.com/fullstack-hy2020/fullstack-hy2020.github.io 向仓库中的教材内容提出 pull request。 例如，这个页面的 markdown 代码可以在仓库中的 https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/edit/source/src/content/0/zh/part0a.md 找到
 
 <!-- At the bottom of each part of the material is a link <em>Propose changes to material</em>. By clicking the link you can edit the source code of the page. -->
 
