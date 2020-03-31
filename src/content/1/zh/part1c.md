@@ -330,7 +330,7 @@ const [ counter, setCounter ] = useState(0)
  _counter_ 变量被赋予的初始值<i>state</i> 为零。 变量 setCounter 被分配给一个函数，该函数将用于<i>修改 state</i>。
 
 <!-- The application calls the [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) function and passes it two parameters: a function to increment the counter state and a timeout of one second: -->
-这个应用调用[ setTimeout ]( https://developer.mozilla.org/en-us/docs/web/api/windoworworkerglobalscope/setTimeout )函数，并传递给它两个参数: 第一个是增加计数器状态的函数，第二个是1秒钟的超时设置:
+这个应用调用[setTimeout](https://developer.mozilla.org/en-us/docs/web/api/windoworworkerglobalscope/setTimeout)函数，并传递给它两个参数: 第一个是增加计数器状态的函数，第二个是1秒钟的超时设置:
 
 ```js
 setTimeout(
@@ -409,10 +409,10 @@ const App = (props) => {
 我们已经在[第0章](/zh/part0)中多次提到<i>事件处理程序</i>，它们（被注册为）在特定事件发生时进行调用。 例如，用户与一个网页的不同元素的交互可能会触发一系列不同类型的事件。
 
 <!-- Let's change the application so that increasing the counter happens when a user clicks a button, which is implemented with the [button](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button)-element. -->
-让我们修改一下应用，这样当用户单击一个按钮时，计数器就会增加，这可以通过[ button ]( https://developer.mozilla.org/en-us/docs/web/html/element/button )-元素实现的。
+让我们修改一下应用，这样当用户单击一个按钮时，计数器就会增加，这可以通过[button](https://developer.mozilla.org/en-us/docs/web/html/element/button)-元素实现的。
 
 <!-- Button-elements support so-called [mouse events](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent), of which [click](https://developer.mozilla.org/en-US/docs/Web/Events/click) is the most common event. -->
-button-元素支持所谓的[鼠标事件]( https://developer.mozilla.org/en-us/docs/web/api/mouseevent 事件) ，其中[点击]( https://developer.mozilla.org/en-us/docs/web/events/click 事件)是最常见的事件。
+button-元素支持所谓的[鼠标事件](https://developer.mozilla.org/en-us/docs/web/api/mouseevent 事件) ，其中[点击](https://developer.mozilla.org/en-us/docs/web/events/click 事件)是最常见的事件。
 
 <!-- In React, registering an event handler function to the <i>click</i> event [happens](https://reactjs.org/docs/handling-events.html) like this: -->
 在 React 中，将一个事件处理函数注册到<i>click</i> 事件 [发生](https://reactjs.org/docs/handling-events.html) 时，如下：
@@ -637,7 +637,7 @@ const Display = (props) => {
 ```
 
 <!-- We can also utilize [destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) directly in the component function's parameters. Since we're interested in the _counter_ property of the props object, it's possible to simplify the component into the following form: -->
-我们也可以在组件函数的参数中直接使用[ 解构 ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/operators/destructuring_assignment )。 因为我们只对 props 对象的counter属性感兴趣，所以可以将组件简化为如下形式:
+我们也可以在组件函数的参数中直接使用[解构](https://developer.mozilla.org/en-us/docs/web/javascript/reference/operators/destructuring_assignment)。 因为我们只对 props 对象的counter属性感兴趣，所以可以将组件简化为如下形式:
 
 ```js
 const Display = ({ counter }) => {
@@ -726,7 +726,7 @@ const App = (props) => {
 由于我们现在有一个易于重用的<i>Button</i> 组件，我们还可以通过添加一个可用于减法的计数器按钮，为应用实现一个新功能。
 
 <!-- The event handler is passed to the <i>Button</i> component through the _onClick_ prop. The name of the prop itself is not that significant, but our naming choice wasn't completely random, e.g. React's own official [tutorial](https://reactjs.org/tutorial/tutorial.html) suggests this convention. -->
-事件处理程序通过_onClick_ 属性传递给<i>Button</i> 组件。 props的名字本身并不重要，但是我们的命名选择并不是完全随机的，例如 React 自己的[官方教程]( https://reactjs.org/tutorial/tutorial.html)就建议了这些约定。
+事件处理程序通过_onClick_ 属性传递给<i>Button</i> 组件。 props的名字本身并不重要，但是我们的命名选择并不是完全随机的，例如 React 自己的[官方教程](https://reactjs.org/tutorial/tutorial.html)就建议了这些约定。
 
 ### Changes in state cause rerendering
 【状态的改变导致重新渲染】
@@ -736,7 +736,7 @@ const App = (props) => {
 
 <!-- When the application starts, the code in _App_ is executed. This code uses an [useState](https://reactjs.org/docs/hooks-reference.html#usestate) - hook to create the application state - value of the counter _counter_. -->
 
-当应用启动时，执行 App 中的代码。 此代码使用[ useState ]( https://reactjs.org/docs/hooks-reference.html#useState )-hook 创建了计数器的应用状态值 _counter_。
+当应用启动时，执行 App 中的代码。 此代码使用[useState](https://reactjs.org/docs/hooks-reference.html#useState)-hook 创建了计数器的应用状态值 _counter_。
 
 <!-- The component renders the _Display_ component. It displays the counter's value (0), and three _Button_ components. The buttons have event handlers, which are used to change the state of the counter. -->
 该组件渲染了 Display 组件。 它显示计数器的值(0)和三个 Button 组件。 这些按钮具有用于更改计数器状态的事件处理程序。
@@ -778,7 +778,7 @@ const Display = (props) => {
 <!-- The component only uses the _counter_ field of its <i>props</i>.  -->
 该组件只使用其<i>props</i> 的 _counter_ 字段。
 <!-- This means we can simplify the component by using [destructuring](/zh/part1/component_state_event_handlers#destructuring) like so: -->
-这意味着我们可以使用[ 解构 ](/zh/part1/)简化组件，如下所示:
+这意味着我们可以使用[解构](/zh/part1/)简化组件，如下所示:
 
 ```js
 const Display = ({ counter }) => {

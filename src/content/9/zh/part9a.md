@@ -125,9 +125,9 @@ func((result) => {
 
 
 <!-- First we have a declaration of a [type alias](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases) called <i>CallsFunction</i>. -->
-首先，我们有一个名为<i>CallsFunction</i> 的[ type 别名 ]( https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases )声明。
+首先，我们有一个名为<i>CallsFunction</i> 的[type 别名](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases)声明。
 <!-- CallsFunction is a function type with one parameter <i>callback</i>. The parameter <i>callback</i> is of type function which takes a string parameters and returns [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) value.  As we will learn later in this part <i>any</i> is a kind of "wildcard" type that can represent any type. -->
-Callsfunction 是带有一个参数<i>callback</i> 的函数类型。 参数<i>callback</i> 是一个类型为 function 的函数，它接受一个字符串参数并返回[ any ]( http://www.typescriptlang.org/docs/handbook/basic-types.html#any )值。 正如我们将在本章节后面了解到的，<i>any</i> 是一种可以表示任何类型的“通配符”类型。 
+Callsfunction 是带有一个参数<i>callback</i> 的函数类型。 参数<i>callback</i> 是一个类型为 function 的函数，它接受一个字符串参数并返回[any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any)值。 正如我们将在本章节后面了解到的，<i>any</i> 是一种可以表示任何类型的“通配符”类型。 
 
 
 
@@ -202,7 +202,7 @@ TypeScript的第二个优点是代码中的类型注解可以作为<i>代码级�
 通过函数签名可以很容易地检查函数可以使用哪种类型的参数，以及它将返回哪种类型的数据。 这种类型的类型注解绑定文档将始终是最新的，并且它使新的程序员更容易开始处理现有的项目。 当返回到一个旧的项目时，这也是有帮助的。
 
 <!-- Types can be reused all around the code base, and a change to a type definition will automatically reflect everywhere the type is used. One might argue that you can achieve similar code level documentation with e.g. [JSDoc](https://jsdoc.app/about-getting-started.html), but it is not connected to the code as tightly as TypeScript's types, and may thus get out of sync more easily and is also more verbose. -->
-类型可以在整个代码库中重用，对类型定义的更改将自动反映所有使用该类型的地方。 有人可能会说，你可以用[ JSDoc ]( https://JSDoc.app/about-getting-started.html 文档)实现类似的代码级文档，但是它与代码的连接不像 TypeScript 的类型那样紧密，因此更有可能不同步，而且也更加冗长。
+类型可以在整个代码库中重用，对类型定义的更改将自动反映所有使用该类型的地方。 有人可能会说，你可以用[JSDoc](https://JSDoc.app/about-getting-started.html 文档)实现类似的代码级文档，但是它与代码的连接不像 TypeScript 的类型那样紧密，因此更有可能不同步，而且也更加冗长。
 
 <!-- The third advantage of TypeScript is, that IDEs can provide more <i>specific and smarter intellisense</i> when they know exactly what types of data you are processing. -->
 TypeScript的第三个优点是，当 IDE 确切知道您正在处理的数据类型时，它们可以提供更具体、更智能的智能感知。 
@@ -230,10 +230,10 @@ TypeScript的第三个优点是，当 IDE 确切知道您正在处理的数据�
 在使用外部库时，您可能会发现某些库缺少或以某种方式存在无效的类型声明。 大多数情况下，这是因为库不是用TypeScript编写的，而且手动添加类型声明的人并没有很好地处理它。 在这些情况下，您可能需要自己定义类型声明。
 
 <!-- However, there is a good chance someone has already added typings for the package you are using. Always check [DefinitelyTyped](https://definitelytyped.org/) or [their GitHub pages](https://github.com/DefinitelyTyped/DefinitelyTyped) first. They are probably the most popular sources for type declaration files.  -->
-但是，很有可能已经有人为您正在使用的包添加了类型。 因此总是先检查[ DefinitelyTyped ]( https://DefinitelyTyped.org/)或[他们的 GitHub 页面]( https://GitHub.com/DefinitelyTyped/DefinitelyTyped )。 它们可能是最常用的类型声明文件源。
+但是，很有可能已经有人为您正在使用的包添加了类型。 因此总是先检查[DefinitelyTyped](https://DefinitelyTyped.org/)或[他们的 GitHub 页面](https://GitHub.com/DefinitelyTyped/DefinitelyTyped)。 它们可能是最常用的类型声明文件源。
 
 <!-- Otherwise you might want to start off by getting acquainted with TypeScript's own [documentation](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html) regarding type declarations. -->
-否则，你可能需要从熟悉 TypeScript 自己关于类型声明的[文档]( https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html 文档)开始。
+否则，你可能需要从熟悉 TypeScript 自己关于类型声明的[文档](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html 文档)开始。
 
 #### Sometimes type inference needs assistance
 【有时候类型推断需要帮助】
@@ -248,7 +248,7 @@ TypeScript中的类型推断非常好，但还不够完美。
 使用类型强制转换或类型保护，基本上就是向编译器说明值确实是您声明的类型。
 
 <!-- You might want to check out TypeScript's documentation regarding [Type Assertions](https://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) and [Type Guards](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-guards-and-differentiating-types). -->
-你可能想看看 TypeScript 关于[ Type Assertions ]( https://www.typescriptlang.org/docs/handbook/basic-types.html#Type-Assertions )和[ Type Guards ]( https://www.typescriptlang.org/docs/handbook/advanced-types.html#Type-Guards-and-differentiating-types )的文档。
+你可能想看看 TypeScript 关于[Type Assertions](https://www.typescriptlang.org/docs/handbook/basic-types.html#Type-Assertions)和[Type Guards](https://www.typescriptlang.org/docs/handbook/advanced-types.html#Type-Guards-and-differentiating-types)的文档。
 
 
 

@@ -113,7 +113,7 @@ ReactDOM.render(<App />, document.getElementById('root'))
 
 
 <!-- Luckily React has the [React router](https://github.com/ReactTraining/react-router)-library, which provides an excellent solution for managing navigation in a React-application. -->
-幸运的是 React 有[ React router ]( https://github.com/reacttraining/React-router )-library，它为管理 React-application 中的导航提供了一个很好的解决方案。
+幸运的是 React 有[React router](https://github.com/reacttraining/React-router)-library，它为管理 React-application 中的导航提供了一个很好的解决方案。
 
 <!-- Let's change the above application to use React router. First, we install React router with the command -->
 让我们将上面的应用改为使用 React 路由
@@ -169,7 +169,7 @@ const App = () => {
 路由，或基于浏览器中的 <i>url</i><i>的组件的条件渲染，通过将组件放置为Router</i> 组件的子组件来使用，也就是在<i>Router</i>-tags 内部。
 
 <!-- Notice that, even though the component is referred to by the name <i>Router</i>, we are in fact talking about [BrowserRouter](https://reacttraining.com/react-router/web/api/BrowserRouter), because here the import happens by renaming the imported object: -->
-注意，即使组件名为<i>Router</i>，我们实际上讨论的是[ BrowserRouter ]( https://reacttraining.com/react-Router/web/api/BrowserRouter ) ，因为这里的导入是通过重命名导入的对象实现的:
+注意，即使组件名为<i>Router</i>，我们实际上讨论的是[BrowserRouter](https://reacttraining.com/react-Router/web/api/BrowserRouter) ，因为这里的导入是通过重命名导入的对象实现的:
 
 ```js
 import {
@@ -179,16 +179,16 @@ import {
 ```
 
 <!-- According to the [manuaal](https://reacttraining.com/react-router/web/api/BrowserRouter)  -->
-根据[ manuaal ]( https://reacttraining.com/react-router/web/api/browserrouter )
+根据[manuaal](https://reacttraining.com/react-router/web/api/browserrouter)
 
 > <!--<i>BrowserRouter</i> is a <i>Router</i> that uses the HTML5 history API (pushState, replaceState and the popState event) to keep your UI in sync with the URL.-->
 BrowserRouter 是一个 i Router，它使用 HTML5历史 API (pushState、 replaceState 和 popState 事件)保持 UI 与 URL 同步。 
 
 <!-- Normally the browser loads a new page when the URL in the address bar changes. However, with the help of the [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/) <i>BrowserRouter</i> enables us to use the URL in the address bar of the browser for internal "routing" in a React-application. So, even if the URL in the address bar changes, the content of the page is only manipulated using Javascript, and the browser will not load new content form the server. Using the back and forward actions, as well as making bookmarks, is still logical like on a traditional web page. -->
-通常，当地址栏中的 URL 发生更改时，浏览器会加载一个新页面。 然而，借助于[ HTML5历史 API ]( https://css-tricks.com/using-the-HTML5-history-API/ )<i>BrowserRouter</i>，我们可以使用浏览器地址栏中的 URL 在 React-application 中进行内部“路由”。 因此，即使地址栏中的 URL 发生了变化，页面的内容也只能通过 Javascript 来操作，浏览器也不会从服务器加载新的内容。 使用后退和前进操作，以及制作书签，仍然像在传统网页上一样合乎逻辑。
+通常，当地址栏中的 URL 发生更改时，浏览器会加载一个新页面。 然而，借助于[HTML5历史 API](https://css-tricks.com/using-the-HTML5-history-API/)<i>BrowserRouter</i>，我们可以使用浏览器地址栏中的 URL 在 React-application 中进行内部“路由”。 因此，即使地址栏中的 URL 发生了变化，页面的内容也只能通过 Javascript 来操作，浏览器也不会从服务器加载新的内容。 使用后退和前进操作，以及制作书签，仍然像在传统网页上一样合乎逻辑。
 
 <!-- Inside the router we define <i>links</i> that modify the address bar with the help of the [Link](https://reacttraining.com/react-router/web/api/Link) component. For example, -->
-在路由内部，我们定义了<i>links</i>，这个<i>links</i> 借助于[ Link ]( https://reacttraining.com/react-router/web/api/Link )组件来修改地址栏,
+在路由内部，我们定义了<i>links</i>，这个<i>links</i> 借助于[Link](https://reacttraining.com/react-router/web/api/Link)组件来修改地址栏,
 
 ```js
 <Link to="/notes">notes</Link>
@@ -198,7 +198,7 @@ BrowserRouter 是一个 i Router，它使用 HTML5历史 API (pushState、 repla
 在应用中创建一个带有文本<i>notes</i> 的链接，当单击该文本时，会将地址栏中的 URL 更改为<i>/ notes</i>。
 
 <!-- Components rendered based on the URL of the browser are defined with the help of the component [Route](https://reacttraining.com/react-router/web/api/Route). For example,  -->
-基于浏览器的 URL 渲染的组件是在组件[ Route ]( https://reacttraining.com/react-router/web/api/Route )的帮助下定义的,
+基于浏览器的 URL 渲染的组件是在组件[Route](https://reacttraining.com/react-router/web/api/Route)的帮助下定义的,
 
 ```js
 <Route path="/notes">
@@ -349,7 +349,7 @@ const Note = ({ notes }) => {
 
 
 <!-- The _Note_ component receives all of the notes as props <i>notes</i>, and it can access the url parameter (the id of the note to be displayed) with the [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) function of the react-router. -->
-Note 组件接收所有的便笺作为 props <i>notes</i>，它可以通过 react-router 的[ useParams ]( https://reacttraining.com/react-router/web/api/hooks/useParams )函数访问 url 参数(要显示的便笺的 id)。 
+Note 组件接收所有的便笺作为 props <i>notes</i>，它可以通过 react-router 的[useParams](https://reacttraining.com/react-router/web/api/hooks/useParams)函数访问 url 参数(要显示的便笺的 id)。 
 
 ### useHistory
 
@@ -421,7 +421,7 @@ const Login = (props) => {
 
 
 <!-- What is interesting about this component is the use of the [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) function of the react-router. -->
-这个组件的有趣之处在于它使用了React路由的[ useHistory ]( https://reacttraining.com/react-router/web/api/hooks/useHistory 路由)功能。
+这个组件的有趣之处在于它使用了React路由的[useHistory](https://reacttraining.com/react-router/web/api/hooks/useHistory 路由)功能。
 
 <!-- With this function the component can access a [history](https://reacttraining.com/react-router/web/api/history) object. The history object can be used to i.a modify the browser url programmatically. -->
 有了这个函数，组件就可以访问一个 [history](https://reacttraining.com/react-router/web/api/history)对象。 历史记录对象可以用于编程修改浏览器的 url。
@@ -553,7 +553,7 @@ const Note = ({ note }) => {
 
 
 <!-- One way to do this would be to use react-router's [useRouteMatch](https://reacttraining.com/react-router/web/api/Hooks/useroutematch) hook to figure out the id of the note to be displayed in the _App_ component. -->
-一种方法是使用 react-router 的[ useRouteMatch ]( https://reacttraining.com/react-router/web/api/hooks/useRouteMatch )Hook来计算出应用组件中显示的便笺的 id。
+一种方法是使用 react-router 的[useRouteMatch](https://reacttraining.com/react-router/web/api/hooks/useRouteMatch)Hook来计算出应用组件中显示的便笺的 id。
 
 
 

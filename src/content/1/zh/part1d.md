@@ -126,7 +126,7 @@ const handleLeftClick = () => {
  <i>left</i> 属性的新值现在与前一状态的<i>left + 1</i> 的值相同，而<i>right</i> 属性的值与前一状态的<i>right</i> 属性的值相同。
 
 <!-- We can define the new state object a bit more neatly by using the [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) -->
-我们可以通过使用对象的[展开语法]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/operators/spread_syntax )更加整洁地定义新的状态对象
+我们可以通过使用对象的[展开语法](https://developer.mozilla.org/en-us/docs/web/javascript/reference/operators/spread_syntax)更加整洁地定义新的状态对象
 <!-- syntax that was added to the language specification in the summer of 2018: -->
 该语法在2018年夏天添加到了语言规范中的:
 
@@ -250,10 +250,10 @@ const handleLeftClick = () => {
 
 <!-- The piece of state stored in _allClicks_ is now set to be an array that contains all of the items of the previous state array plus the letter <i>L</i>. Adding the new item to the array is accomplished with the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) method, that does not mutate the existing array but rather returns a <i>new copy of the array</i> with the item added to it. -->
 
-存储在 allClicks 中的状态块现在被设置为一个数组，该数组包含前一个状态数组的所有项以及字母 <i>L</i>。 向数组中添加新元素是通过[ concat ](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat)方法完成的，该方法不改变现有数组，而是返回数组 <i>新副本</i>，并将元素添加到该数组中。
+存储在 allClicks 中的状态块现在被设置为一个数组，该数组包含前一个状态数组的所有项以及字母 <i>L</i>。 向数组中添加新元素是通过[concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat)方法完成的，该方法不改变现有数组，而是返回数组 <i>新副本</i>，并将元素添加到该数组中。
 
 <!-- As mentioned previously, it's also possible in JavaScript to add items to an array with the [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) method. If we add the item by pushing it to the _allClicks_ array and then updating the state, the application would still appear to work: -->
-正如前面提到的，在 JavaScript 中也可以使用[ push ]( https://developer.mozilla.org/en-us/docs/web/JavaScript/reference/global_objects/array/push )方法将元素添加到数组中。 如果我们通过将元素push到 allClicks 数组，然后更新状态这种方法来添加元素，应用看起来仍然可以工作:
+正如前面提到的，在 JavaScript 中也可以使用[push](https://developer.mozilla.org/en-us/docs/web/JavaScript/reference/global_objects/array/push)方法将元素添加到数组中。 如果我们通过将元素push到 allClicks 数组，然后更新状态这种方法来添加元素，应用看起来仍然可以工作:
 
 ```js
 const handleLeftClick = () => {
@@ -288,7 +288,7 @@ const App = (props) => {
 ```
 
 <!-- We call the [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) method for the _allClicks_ array that joins all the items into a single string, separated by the string passed as the function parameter, which in our case is an empty space. -->
-我们为 allClicks 数组调用[ join ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/join )方法，该数组将所有项目连接到一个字符串中，由作为函数参数传递的字符串分隔，在我们的例子中，该字符串是一个空格。
+我们为 allClicks 数组调用[join](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/join)方法，该数组将所有项目连接到一个字符串中，由作为函数参数传递的字符串分隔，在我们的例子中，该字符串是一个空格。
 
 ### Conditional rendering
 【条件渲染】
@@ -350,7 +350,7 @@ const App = (props) => {
  <i>History</i> 组件根据应用的状态渲染完全不同的 React-元素。
 
 <!-- React also offers many other ways of doing [conditional rendering](https://reactjs.org/docs/conditional-rendering.html). We will take a closer look at this in [part 2](/zh/part2). -->
-React 还提供了许多其他的方法来实现[条件渲染]( https://reactjs.org/docs/conditional-rendering.html )。 我们将在[第2章节](/zh/part2)中进一步研究这个问题。 
+React 还提供了许多其他的方法来实现[条件渲染](https://reactjs.org/docs/conditional-rendering.html)。 我们将在[第2章节](/zh/part2)中进一步研究这个问题。 
 
 <!-- Let's make one last modification to our application by refactoring it to use the _Button_ component that we defined earlier on: -->
 让我们对我们的应用进行最后一次修改，重构它，用上我们前面定义的 Button 组件:
@@ -416,7 +416,7 @@ const App = (props) => {
 
 <!-- In this course we use the [state hook](https://reactjs.org/docs/hooks-state.html) to add state to our React components, which is part of the newer versions of React and is available from version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) onwards. Before the addition of hooks, there was no way to add state to React functional components. Components that required state had to be defined as React [class](https://reactjs.org/docs/react-component.html) components using the JavaScript class syntax. -->
 
-在这个过程中，我们使用了状态Hook [state hook](https://reactjs.org/docs/hooks-state.html) 来添加状态到我们的 React 组件，这是 React 的新版本的一部分，可以从版本[16.8.0]( https://www.npmjs.com/package/React/v/16.8.0)开始使用。 在添加Hook之前，没有办法将状态添加到 React 函数组件。 需要状态的组件必须使用 JavaScript 类语法定义为 React 的 [class](https://reactjs.org/docs/react-component.html) 组件。
+在这个过程中，我们使用了状态Hook [state hook](https://reactjs.org/docs/hooks-state.html) 来添加状态到我们的 React 组件，这是 React 的新版本的一部分，可以从版本[16.8.0](https://www.npmjs.com/package/React/v/16.8.0)开始使用。 在添加Hook之前，没有办法将状态添加到 React 函数组件。 需要状态的组件必须使用 JavaScript 类语法定义为 React 的 [class](https://reactjs.org/docs/react-component.html) 组件。
 
 <!-- In this course we have made the slightly radical decision to use hooks exclusively from day one, to ensure that we are learning the future style of React. Even though functional components are the future of React, it is still important to learn the class syntax, as there are billions of lines of old React code that you might end up maintaining some day. The same applies to documentation and examples of React that you may stumble across on the internet. -->
 
@@ -516,7 +516,7 @@ props value is [Object object]
 
 <!-- Logging to the console is by no means the only way of debugging our applications. You can pause the execution of your application code in the Chrome developer console's <i>debugger</i>, by writing the command [debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger) anywhere in your code. -->
 
-将日志记录到控制台绝不是调试应用的唯一方法。 你可以在 Chrome 开发者控制台的<i>debugger</i> 中暂停应用代码的执行，只需在代码中的任何地方写入命令[ debugger ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/statements/debugger )即可。
+将日志记录到控制台绝不是调试应用的唯一方法。 你可以在 Chrome 开发者控制台的<i>debugger</i> 中暂停应用代码的执行，只需在代码中的任何地方写入命令[debugger](https://developer.mozilla.org/en-us/docs/web/javascript/reference/statements/debugger)即可。
 
 <!-- The execution will pause once it arrives at a point where the _debugger_ command gets executed: -->
 一旦到达调试器命令执行的地方，执行就会暂停:
@@ -1176,11 +1176,11 @@ const App = props => {
 
 <!-- - The React [official documentation](https://reactjs.org/docs/hello-world.html) is worth checking out at some point, although most of it will become relevant only later on in the course. Also, everything related to Class-components is irrelevant to us.-->
 
-- React[官方文档]( https://reactjs.org/docs/hello-world.html )在某种程度上值得一读，尽管其中大部分只有在课程后期才会变得有意义。 此外，所有与类组件相关的内容都与我们无关。
+- React[官方文档](https://reactjs.org/docs/hello-world.html)在某种程度上值得一读，尽管其中大部分只有在课程后期才会变得有意义。 此外，所有与类组件相关的内容都与我们无关。
 <!-- - Beware the official React [tutorial](https://reactjs.org/tutorial/tutorial.html), it's not very good.-->
-- 注意官方的React[教程]( https://reactjs.org/tutorial/tutorial.html ) ，它不是很好。
+- 注意官方的React[教程](https://reactjs.org/tutorial/tutorial.html) ，它不是很好。
 <!-- - Some courses on [Egghead.io](https://egghead.io) like [Start learning React](https://egghead.io/courses/start-learning-react) are of high quality, and the slightly newer [The Beginner's guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) is also relatively good; both courses introduce concepts that will also be introduced later on in this course. However, both courses use Class components instead of the new functional ones used in this course.-->
-- 一些关于[ Egghead.io ]( https://Egghead.io )的课程，如[开始学习React]( https://Egghead.io/courses/Start-learning-React ) ，质量很高，稍新一点的[初学者React指南]( https://Egghead.io/courses/The-Beginner-s-guide-to-reactjs )也相对不错; 这两门课程都介绍了一些概念，这些概念也将在本课程后面介绍。 然而，这两门课程都使用了 Class 组件，而不是本课程中使用的新的函数式组件。
+- 一些关于[Egghead.io](https://Egghead.io)的课程，如[开始学习React](https://Egghead.io/courses/Start-learning-React) ，质量很高，稍新一点的[初学者React指南](https://Egghead.io/courses/The-Beginner-s-guide-to-reactjs)也相对不错; 这两门课程都介绍了一些概念，这些概念也将在本课程后面介绍。 然而，这两门课程都使用了 Class 组件，而不是本课程中使用的新的函数式组件。
 
 </div>
 
@@ -1190,7 +1190,7 @@ const App = props => {
 
 
 <!-- Submit your solutions to the exercises by first pushing your code to GitHub and then marking the completed exercises into the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
-提交你的解决方案，首先把你的代码推送到 GitHub，然后把[练习提交系统]( https://studies.cs.helsinki.fi/stats/courses/fullstackopen )完成的练习标记为已完成。
+提交你的解决方案，首先把你的代码推送到 GitHub，然后把[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)完成的练习标记为已完成。
 
 <!-- Remember, submit **all** the exercises of one part **in a single submission**. Once you have submitted your solutions for one part, **you cannot submit more exercises to that part any more**. -->
 记住，在一次提交中提交一章节的所有练习。 一旦你提交了一章节的解决方案，你就不能再向这个章节提交更多的练习了。
@@ -1449,7 +1449,7 @@ copy[2] += 1
 如果有多个箴言并列第一，那么只要展示其中一个就足够了。
 
 <!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
-这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统]( https://studies.cs.helsinki.fi/stats/courses/fullstackopen )。
+这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)。
 
 </div>
 

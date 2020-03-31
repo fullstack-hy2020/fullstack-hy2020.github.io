@@ -138,7 +138,7 @@ store.dispatch({type: 'INCREMENT'})
 
 
 <!-- You can find out the state of the store using the method [getState](https://redux.js.org/api/store#getstate). -->
-您可以使用方法[ getState ]( https://redux.js.org/api/store#getState )查找存储的状态。
+您可以使用方法[getState](https://redux.js.org/api/store#getState)查找存储的状态。
 
 
 <!-- For example the following code: -->
@@ -168,7 +168,7 @@ console.log(store.getState())
 因为一开始 store 的状态是 0。 在三个 INCREMENT-actions 之后，状态是 3。 最后，在 ZERO 和 DECREMENT 操作之后，状态是 -1。
 
 <!-- The third important method the store has is [subscribe](https://redux.js.org/api/store#subscribelistener), which is used to create recall functions the store calls when its state is changed.  -->
-store拥有的第三个重要方法是[订阅]( https://redux.js.org/api/store#subscribelistener ) ，它用于在store状态改变时创建调用的回调函数。 
+store拥有的第三个重要方法是[订阅](https://redux.js.org/api/store#subscribelistener) ，它用于在store状态改变时创建调用的回调函数。 
 
 <!-- If, for example, we would add the following function to subscribe, <i>every change in the store</i> would be printed to the console. -->
 例如，如果我们要添加以下函数来订阅，那么存储中的每次更改都将被打印到控制台。
@@ -911,7 +911,7 @@ const App = () => {
 
 
 <!-- There are multiple ways to share the redux-store with components. First we will look into the newest, and possibly the easiest way using the [hooks](https://react-redux.js.org/api/hooks)-api of the [react-redux](https://react-redux.js.org/) library. -->
-有多种方法可以与组件共享 redux-store。 首先，我们将研究使用 [react-redux](https://react-redux.js.org/) ](redux)库的[ hooks ]( https://react-redux.js.org/api/hooks )-api 的最新方法，也许是最简单的方法 。
+有多种方法可以与组件共享 redux-store。 首先，我们将研究使用 [react-redux](https://react-redux.js.org/)](redux)库的[hooks](https://react-redux.js.org/api/hooks)-api 的最新方法，也许是最简单的方法 。
 
 
 
@@ -1089,7 +1089,7 @@ store.dispatch({
 
 
 <!-- Now it does it with the <i>dispatch</i>-function from the [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) -hook. -->
-现在它使用[ useDispatch ]( https://react-redux.js.org/api/hooks#useDispatch )-hook 中的<i>dispatch</i>-函数来完成。
+现在它使用[useDispatch](https://react-redux.js.org/api/hooks#useDispatch)-hook 中的<i>dispatch</i>-函数来完成。
 
 ```js
 import { useSelector, useDispatch } from 'react-redux'  // highlight-line
@@ -1262,7 +1262,7 @@ const App = () => {
 我们将在本章节后面回到表现层 / 容器部分。
 
 <!-- The code of the Redux application can be found on [Github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-1), branch <i>part6-1</i>. -->
-Redux 应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/Redux-notes/tree/part6-1) ，branch<i>part6-1</i> 上找到。 
+Redux 应用的代码可以在[Github](https://Github.com/fullstack-hy2020/Redux-notes/tree/part6-1) ，branch<i>part6-1</i> 上找到。 
 
 </div>
 
@@ -1313,7 +1313,7 @@ npm start
 
 #### 6.6: anecdotes, 步骤4
 <!-- If you haven't done so already, separate the creation of action-objects to [action creator](https://redux.js.org/basics/actions#action-creators)-functions and place them in the <i>src/reducers/anecdoteReducer.js</i> file, so do like we have been doing since the chapter [action creators](/zh/part6/flux_architecture_and_redux#action-creators). -->
-如果你还没有这样做，将动作对象的创建分离到[动作创建器]( https://redux.js.org/basics/actions#action-creators )-函数中，并将它们放在 <i>src/reducers/anecdoteReducer.js</i> 文件，就像我们在[动作创建器]( https://redux.js.org/basics/actions#action-creators )中所做的那样。
+如果你还没有这样做，将动作对象的创建分离到[动作创建器](https://redux.js.org/basics/actions#action-creators)-函数中，并将它们放在 <i>src/reducers/anecdoteReducer.js</i> 文件，就像我们在[动作创建器](https://redux.js.org/basics/actions#action-creators)中所做的那样。
 
 #### 6.7: anecdotes, 步骤5
 <!-- Separate the creation of new anecdotes into its own component called <i>AnecdoteForm</i>. Move all logic for creating a new anecdote into this new component.  -->

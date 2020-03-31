@@ -54,7 +54,7 @@ export default { getAll, create, update }
 问题出在一个叫 CORS 的东西上，或者叫跨来源资源共享。
 
 <!-- According to [Wikipedia](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing): -->
-根据[维基百科]( https://en.Wikipedia.org/wiki/cross-origin_resource_sharing ) :
+根据[维基百科](https://en.Wikipedia.org/wiki/cross-origin_resource_sharing) :
 
 > <i>Cross-origin resource sharing (CORS) is a mechanism that allows restricted resources (e.g. fonts) on a web page to be requested from another domain outside the domain from which the first resource was served. A web page may freely embed cross-origin images, stylesheets, scripts, iframes, and videos. Certain "cross-domain" requests, notably Ajax requests, are forbidden by default by the same-origin security policy.</i>
 Cross-origin resource sharing (CORS)是一种机制，它允许一个网页上受限制的资源(例如字体)，从提供一手资源的域名以外的另一个域名请求跨来源资源共享。 一个网页可以自由地嵌入跨来源的图片、样式表、脚本、 iframe 和视频。 默认情况下，同源安全策略禁止某些“跨域”请求，特别是 Ajax 请求。 
@@ -65,7 +65,7 @@ Cross-origin resource sharing (CORS)是一种机制，它允许一个网页上�
 因为我们的服务器位于本地主机端口3001，而我们的前端位于本地主机端口3000，所以它们不具有相同的源。
 
 <!-- Keep in mind, that [same origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) and CORS are not specific to React or Node. They are in fact universal principles of the operation of web applications.  -->
-请记住，[同源策略]( https://developer.mozilla.org/en-us/docs/web/security/same-origin_policy )和 CORS 并不是特定于 React 或 Node 的。 它们实际上是 web 应用操作的通用原则。
+请记住，[同源策略](https://developer.mozilla.org/en-us/docs/web/security/same-origin_policy)和 CORS 并不是特定于 React 或 Node 的。 它们实际上是 web 应用操作的通用原则。
 
 <!-- We can allow requests from other <i>origins</i> by using Node's [cors](https://github.com/expressjs/cors) middleware. -->
 我们可以通过使用 Node 的[cors](https://github.com/expressjs/cors) 中间件来允许来自其他源的请求。
@@ -90,7 +90,7 @@ app.use(cors())
 前端工作正常了！但是，在后端还没有实现更改便笺重要性的功能。
 
 <!-- You can read more about CORS from [Mozillas page](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS). -->
-你可以 从[ Mozillas 页面]( https://developer.mozilla.org/en-us/docs/web/http/CORS )阅读更多关于 CORS的内容。
+你可以 从[Mozillas 页面](https://developer.mozilla.org/en-us/docs/web/http/CORS)阅读更多关于 CORS的内容。
 
 ### Application to the Internet
 【将应用部署到网上】
@@ -98,7 +98,7 @@ app.use(cors())
 现在整个栈已经准备就绪，让我们将应用迁移到互联网上。 我们将使用古老的 Heroku  https://www.Heroku.com。
 
 ><!--If you have never used Heroku before, you can find instructions from [Heroku documentation](https://devcenter.heroku.com/articles/getting-started-with-nodejs) or by Googling.-->
-如果您以前从未使用过 Heroku，您可以从[ Heroku 文档](Heroku  https://devcenter.Heroku.com/articles/getting-started-with-nodejs 文档)或通过谷歌搜索找到指令。
+如果您以前从未使用过 Heroku，您可以从[Heroku 文档](Heroku  https://devcenter.Heroku.com/articles/getting-started-with-nodejs 文档)或通过谷歌搜索找到指令。
 
 <!-- Add a file called  <i>Procfile</i> to the project's root to tell Heroku how to start the application.  -->
 向项目的根目录添加一个名为  <i>Procfile</i>的文件，告诉 Heroku 如何启动应用。
@@ -118,7 +118,7 @@ app.listen(PORT, () => {
 ```
 
 <!-- Now we are using the port defined in [environment variable](https://en.wikipedia.org/wiki/Environment_variable) _PORT_ or port 3001 if the environment variable _PORT_ is undefined.  -->
-现在我们使用定义在[环境变量]( https://en.wikipedia.org/wiki/environment_variable )的端口，如果环境变量 _PORT_ 是未定义的，则使用端口3001。
+现在我们使用定义在[环境变量](https://en.wikipedia.org/wiki/environment_variable)的端口，如果环境变量 _PORT_ 是未定义的，则使用端口3001。
 <!-- Heroku configures application port based on the environment variable.  -->
 Heroku 会在环境变量的基础上配置应用端口。 
 
@@ -156,16 +156,16 @@ node_modules
 到目前为止，我们一直在<i>开发模式</i> 中运行 React code。 在开发模式下，应用被配置为提供清晰的错误消息，立即向浏览器渲染代码更改，等等。
 
 <!-- When the application is deployed, we must create a [production build](https://reactjs.org/docs/optimizing-performance.html#use-the-production-build) or a version of the application which is optimized for production.  -->
-当应用被部署时，我们必须创建一个[生产构建]( https://reactjs.org/docs/optimizing-performance.html#use-the-production-build )或一个为生产而优化的应用版本。
+当应用被部署时，我们必须创建一个[生产构建](https://reactjs.org/docs/optimizing-performance.html#use-the-production-build)或一个为生产而优化的应用版本。
 
 <!-- A production build of applications created with <i>create-react-app</i> can be created with command [npm run build](https://github.com/facebookincubator/create-react-app#npm-run-build-or-yarn-build). -->
-使用<i>create-react-app</i> 创建的应用的生产构建可以使用命令[ npm run build ]( https://github.com/facebookincubator/create-react-app#npm-run-build-or-yarn-build )创建。
+使用<i>create-react-app</i> 创建的应用的生产构建可以使用命令[npm run build](https://github.com/facebookincubator/create-react-app#npm-run-build-or-yarn-build)创建。
 
 <!-- Let's run this command from the <i>root of the frontend project</i>. -->
 让我们从前端项目的根目录运行这个命令。
 
 <!-- This creates a directory called <i>build</i> (which contains the only HTML file of our application, <i>index.html</i> ) which contains the directory <i>static</i>. [Minified](<https://en.wikipedia.org/wiki/Minification_(programming)>) version of our application's JavaScript code will be generated to the <i>static</i>  directory. Even though the application code is in multiple files, all of the JavaScript will be minified into one file. Actually all of the code from all of the application's dependencies will also be minified into this single file.  -->
-这将创建一个名为<i>build</i> 的目录(其中包含应用中唯一的 HTML 文件<i>index. HTML</i>) ，其中包含目录<i>static</i>。 我们应用的 JavaScript 代码的[ Minified ]( https://en.wikipedia.org/wiki/minification_(programming))版本将生成到<i>static</i> 目录。 即使应用代码位于多个文件中，所有的 JavaScript 都将被缩小到一个文件中。 实际上，来自所有应用依赖项的所有代码也将缩小到这个单一文件中。
+这将创建一个名为<i>build</i> 的目录(其中包含应用中唯一的 HTML 文件<i>index. HTML</i>) ，其中包含目录<i>static</i>。 我们应用的 JavaScript 代码的[Minified](https://en.wikipedia.org/wiki/minification_(programming))版本将生成到<i>static</i> 目录。 即使应用代码位于多个文件中，所有的 JavaScript 都将被缩小到一个文件中。 实际上，来自所有应用依赖项的所有代码也将缩小到这个单一文件中。
 
 <!-- The minified code is not very readable. The beginning of the code looks like this:  -->
 缩小后的代码可读性不是很好，代码的开头是这样的:
@@ -192,7 +192,7 @@ cp -r build ../../../osa3/notes-backend
 ![](../../images/3/27ea.png)
 
 <!-- To make express show <i>static content</i>, the page <i>index.html</i> and the JavaScript etc. it fetches, we need a built-in middleware from express called [static](http://expressjs.com/en/starter/static-files.html). -->
-为了让 express 显示 <i> static content</i>、 页面 <i>index.html</i> 和它用来fetch的 JavaScript 等等，我们需要一个来自 express 的内置中间件，称为[ static ]( http://expressjs.com/en/starter/static-files.html )。
+为了让 express 显示 <i> static content</i>、 页面 <i>index.html</i> 和它用来fetch的 JavaScript 等等，我们需要一个来自 express 的内置中间件，称为[static](http://expressjs.com/en/starter/static-files.html)。
 
 <!-- When we add the following amidst the declarations of middlewares -->
 当我们在中间件声明中添加如下内容时
@@ -208,7 +208,7 @@ app.use(express.static('build'))
 现在 HTTP GET 向地址<i>www.serversaddress.com/index.html</i>或<i> www.serversaddress.com </i> 的GET请求，将显示 React 前端。 Get 请求到地址 www.serversaddress.com/notes 将由后端代码处理。
 
 <!-- Because on our situation, both the frontend and the backend are at the same address, we can declare _baseUrl_ as a [relative](https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2) URL. This means we can leave out the part declaring the server.  -->
-因为在我们的情况下，前端和后端都在同一个地址，所以我们可以声明 baseUrl 为[ relative ]( https://www.w3.org/tr/wd-html40-970917/htmlweb.html#h-5.1.2) URL。 这意味着我们可以省略声明服务器的部分。
+因为在我们的情况下，前端和后端都在同一个地址，所以我们可以声明 baseUrl 为[relative](https://www.w3.org/tr/wd-html40-970917/htmlweb.html#h-5.1.2) URL。 这意味着我们可以省略声明服务器的部分。
 
 ```js
 import axios from 'axios'
@@ -262,7 +262,7 @@ React代码从服务器地址 http://localhost:3001/notes 获取便笺，并将�
 确保应用的生产版本在本地正常工作之后，将前端的生产构建提交到后端存储库，并将代码再次推送到 Heroku。
 
 <!-- [The application](https://vast-oasis-81447.herokuapp.com/) works perfectly, except we haven't added the functionality for changing the importance of a note to the backend yet.  -->
-除了我们还没有添加改变后端便笺重要性的功能之外，[应用]( https://vast-oasis-81447.herokuapp.com/ )运行得非常好。
+除了我们还没有添加改变后端便笺重要性的功能之外，[应用](https://vast-oasis-81447.herokuapp.com/)运行得非常好。
 
 ![](../../images/3/30ea.png)
 
@@ -302,7 +302,7 @@ _npm run deploy:full_ 会将这两者结合起来，并包含更新后端存储�
 注意，我构建的脚本中的目录路径 <i>build:ui</i> 依赖于文件系统中存储库的位置。
 
 >**NB**  <i>build:ui</i> does not work on Windows, go to [Solution](https://github.com/fullstackopen-2019/fullstackopen-2019.github.io/issues/420)  
-注意 <i>build: ui</i> 不能在 Windows 上工作，请转到[ 解决方案 ]( https://github.com/fullstackopen-2019/fullstackopen-2019.github.io/issues/420)
+注意 <i>build: ui</i> 不能在 Windows 上工作，请转到[解决方案](https://github.com/fullstackopen-2019/fullstackopen-2019.github.io/issues/420)
 
 ### Proxy
 【代理】
@@ -337,22 +337,22 @@ const baseUrl = '/api/notes'
 ```
 
 <!-- After a restart, the React development environment will work as a [proxy](https://create-react-app.dev/docs/proxying-api-requests-in-development/). If the React code does an HTTP request to a server address at <i>http://localhost:3000</i> not managed by the React application itself (i.e when requests are not about fetching the CSS or JavaScript of the application), the request will be redirected to the server at <i>http://localhost:3001</i>.  -->
-在重新启动之后，React 开发环境将作为一个[代理]( https://create-React-app.dev/docs/proxying-api-requests-in-development/ )工作。 如果 React 代码对服务器地址<i>http://localhost:3000</i>发出了一个 HTTP 请求，而不是 React 应用本身管理的地址(即当请求不是为了获取应用的 CSS 或 JavaScript) ，那么该请求将被重定向到<i> HTTP://localhost:3001</i> 的服务器。
+在重新启动之后，React 开发环境将作为一个[代理](https://create-React-app.dev/docs/proxying-api-requests-in-development/)工作。 如果 React 代码对服务器地址<i>http://localhost:3000</i>发出了一个 HTTP 请求，而不是 React 应用本身管理的地址(即当请求不是为了获取应用的 CSS 或 JavaScript) ，那么该请求将被重定向到<i> HTTP://localhost:3001</i> 的服务器。
 
 <!-- Now the frontend is also fine, working with the server both in development- and production mode.  -->
 现在前端也工作良好，可以在开发和生产模式下与服务器一起工作。
 
 <!-- A negative aspect of our approach is how complicated it is to deploy the frontend. Deploying a new version requires generating new production build of the frontend and copying it to the backend repository. This makes creating an automated [deployment pipeline](https://martinfowler.com/bliki/DeploymentPipeline.html) more difficult. Deployment pipeline means an automated and controlled way to move the code from the computer of the developer through different tests and quality checks to the production environment.  -->
-我们方法的一个劣势，是前端部署的复杂程度。 部署新版本需要生成新的前端生产构建并将其复制到后端存储库。 这使得创建一个自动化的[部署管道]( https://martinfowler.com/bliki/deploymentpipeline.html)变得更加困难。 部署管道是指通过不同的测试和质量检查将代码从开发人员的计算机转移到生产环境的自动化控制的方法。
+我们方法的一个劣势，是前端部署的复杂程度。 部署新版本需要生成新的前端生产构建并将其复制到后端存储库。 这使得创建一个自动化的[部署管道](https://martinfowler.com/bliki/deploymentpipeline.html)变得更加困难。 部署管道是指通过不同的测试和质量检查将代码从开发人员的计算机转移到生产环境的自动化控制的方法。
 
-<!-- There are multiple ways to achieve this (for example placing both backend and frontend code [to the same repository](https://github.com/mars/heroku-cra-node) ) but we will not go into those now.  -->
-有多种方法可以实现这一点(例如将后端和前端代码[放到同一仓库中]( https://github.com/mars/heroku-cra-node )) ，但我们现在不讨论这些。
+<!-- There are multiple ways to achieve this (for example placing both backend and frontend code [to the same repository](https://github.com/mars/heroku-cra-node)) but we will not go into those now.  -->
+有多种方法可以实现这一点(例如将后端和前端代码[放到同一仓库中](https://github.com/mars/heroku-cra-node)) ，但我们现在不讨论这些。
 
 <!-- In some situations it may be sensible to deploy the frontend code as it's own application. With apps created with create-react-app it is [straightforward](https://github.com/mars/create-react-app-buildpack). -->
-在某些情况下，将前端代码部署为它自己的应用可能是合理的。 通过create-react-app 创建的应用是[简单的]( https://github.com/mars/create-react-app-buildpack )。
+在某些情况下，将前端代码部署为它自己的应用可能是合理的。 通过create-react-app 创建的应用是[简单的](https://github.com/mars/create-react-app-buildpack)。
 
 <!-- Current code of the backend can be found on [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3), in the branch <i>part3-3</i>. The changes in frontend code are in <i>part3-1</i> branch of the [frontend repository](https://github.com/fullstack-hy2020/part2-notes/tree/part3-1). -->
-后端的当前代码可以在分支<i>part3-3</i> 中的[ Github ]( https://Github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3)上找到。 前端代码的更改位于 [前端仓库frontend repository](https://github.com/fullstack-hy2020/part2-notes/tree/part3-1)的<i>part3-1</i> 分支。
+后端的当前代码可以在分支<i>part3-3</i> 中的[Github](https://Github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3)上找到。 前端代码的更改位于 [前端仓库frontend repository](https://github.com/fullstack-hy2020/part2-notes/tree/part3-1)的<i>part3-1</i> 分支。
 
 </div>
 
@@ -377,7 +377,7 @@ const baseUrl = '/api/notes'
 将后端部署到互联网，例如 Heroku。
 
 <!-- **NB** the command _heroku_ works on the department's computers and the freshman laptops. If for some reason you cannot [install](https://devcenter.heroku.com/articles/heroku-cli) Heroku to your computer, you can use the command [npx heroku-cli](https://www.npmjs.com/package/heroku-cli). -->
-注意：命令 heroku 在部门的电脑和新生的笔记本电脑上可以工作。 如果由于某种原因不能[安装]( https://devcenter.Heroku.com/articles/Heroku-cli ) Heroku 到你的计算机，你可以使用命令[npx heroku-cli](https://www.npmjs.com/package/heroku-cli)。
+注意：命令 heroku 在部门的电脑和新生的笔记本电脑上可以工作。 如果由于某种原因不能[安装](https://devcenter.Heroku.com/articles/Heroku-cli) Heroku 到你的计算机，你可以使用命令[npx heroku-cli](https://www.npmjs.com/package/heroku-cli)。
 
 <!-- Test the deployed backend with a browser and Postman or VS Code REST client to ensure it works.  -->
 使用浏览器和Postman或 VS Code REST 客户端测试已部署的后端，以确保其工作正常。

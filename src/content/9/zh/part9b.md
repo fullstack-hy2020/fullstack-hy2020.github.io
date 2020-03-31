@@ -35,7 +35,7 @@ lang: zh
 
 
 <!-- Let's start writing our first TypeScript-app. To keep things simple, let's start by using the npm package [ts-node](https://github.com/TypeStrong/ts-node). -->
-让我们开始编写我们的第一个TypeScript应用，为了保持简单，让我们通过使用[ ts-node ]( https://github.com/typestrong/ts-node )这个 npm 包开始。
+让我们开始编写我们的第一个TypeScript应用，为了保持简单，让我们通过使用[ts-node](https://github.com/typestrong/ts-node)这个 npm 包开始。
 
 <!-- It compiles and executes the specified TypeScript file immediately, so that there is no need for a separate compilation step. -->
 它能立即编译并执行指定的 TypeScript 文件，因此不需要单独的编译步骤。
@@ -143,10 +143,10 @@ multiplicator('how about a string?', 4, 'Multiplied a string and 4, the result i
 这就是我们看到TypeScript的第一个好处的地方。 让我们向参数添加类型，看看它将把我们带到哪里。
 
 <!-- TypeScript natively supports multiple types including <i>number</i>, <i>string</i> and  <i>Array</i>. See the comprehensive list [here](https://www.typescriptlang.org/docs/handbook/basic-types.html). More complex custom types can also be created. -->
-Typescript 本机支持多种类型，包括<i>number</i>、<i>string</i> 和<i>Array</i>。 参见更全面的列表，[点击这里]( https://www.typescriptlang.org/docs/handbook/basic-types.html )。 还可以创建更复杂的自定义类型。 
+Typescript 本机支持多种类型，包括<i>number</i>、<i>string</i> 和<i>Array</i>。 参见更全面的列表，[点击这里](https://www.typescriptlang.org/docs/handbook/basic-types.html)。 还可以创建更复杂的自定义类型。 
 
 <!-- The first two parameters of our function are of the type [number](http://www.typescriptlang.org/docs/handbook/basic-types.html#number) and the last is a [string](http://www.typescriptlang.org/docs/handbook/basic-types.html#string): -->
-我们函数的前两个参数类型是[ number ]( http://www.typescriptlang.org/docs/handbook/basic-types.html#number ) ，最后一个是[ string ]( http://www.typescriptlang.org/docs/handbook/basic-types.html#string ) :
+我们函数的前两个参数类型是[number](http://www.typescriptlang.org/docs/handbook/basic-types.html#number) ，最后一个是[string](http://www.typescriptlang.org/docs/handbook/basic-types.html#string) :
 
 ```js
 const multiplicator = (a: number, b: number, printText: string) => {
@@ -199,14 +199,14 @@ type Operation = 'multiply' | 'add' | 'divide';
 现在<i>Operation</i> 类型只接受三种类型的输入; 正好是我们想要的三个字符串。
 
 <!-- Using the OR operator _|_ we can define a variable to accept multiple values by creating a [union type](https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types). -->
-使用 OR 运算符 |， 我们可以创建一个[联合类型]( https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types )来定义一个变量来接受多个值。
+使用 OR 运算符 |， 我们可以创建一个[联合类型](https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types)来定义一个变量来接受多个值。
 
 <!-- In this case we used exact strings (that in technical terms are called [string literal types](http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types)) but with unions you could also make the compiler to accept for example both string and number: _string | number_. -->
-在这种情况下，我们使用了精确的字符串(在技术术语中称为[ 字符串语义类型string literal types ]( http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types )) ，但是对于联合，你也可以让编译器同时接受字符串和数字类型: string | number。
+在这种情况下，我们使用了精确的字符串(在技术术语中称为[字符串语义类型string literal types](http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types)) ，但是对于联合，你也可以让编译器同时接受字符串和数字类型: string | number。
 
 
 <!-- The <i>type</i> keyword defines a new name for a type, [a type alias](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases). Since the defined type is a union of three possible values, it is handy to give it an alias that has a representative name. -->
-<i>type</i> 关键字为类型定义了一个新名称，[ 一个类型别名 a type alias ]( https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases )。 由于定义的类型是由三个可能的值组成的联合，因此给它一个具有代表性名称的别名非常方便。
+<i>type</i> 关键字为类型定义了一个新名称，[一个类型别名 a type alias](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases)。 由于定义的类型是由三个可能的值组成的联合，因此给它一个具有代表性名称的别名非常方便。
 
 <!-- Let's look at our calculator now: -->
 现在让我们看看我们的计算器:
@@ -303,7 +303,7 @@ const calculator = (a: number, b: number, op: Operation): Result =>  {
 因此，例如，如果<i>operation</i>-参数 的值来自外部接口，就不能确切保证它是允许的值之一。 因此，最好还是包含错误处理，为意外发生做好准备。
 
 <!-- In this case, when there are multiple possible accepted values and all unexcpeted ones should result in an error, the [switch...case](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement suits better than if...else in our code. -->
-在这种情况下，当存在多个可接受的值并且所有不可接受的值都会导致错误时，[ switch... case ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/statements/switch )语句比我们代码中的 if... else 语句更适合。
+在这种情况下，当存在多个可接受的值并且所有不可接受的值都会导致错误时，[switch... case](https://developer.mozilla.org/en-us/docs/web/javascript/reference/statements/switch)语句比我们代码中的 if... else 语句更适合。
 
 <!-- The code of our calculator should actually look something like this: -->
 我们计算器的代码应该是这样的:
@@ -364,7 +364,7 @@ try {
 
 
 <!-- Usually types for existing packages can be found from the <i>@types</i>-organization within npm, and you can add the relevant types to your project by installing an npm package with the name of your package with @types/ - prefix. For example: <i>npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose</i> and so on and so on. The <i>@types/*</i> are maintained by [Definitely typed](http://definitelytyped.org/), a community project with the goal to mainting types of everything in one place. -->
-通常，现有包的类型可以在 npm 中的 <i>@types</i>-organization 中找到，您可以通过安装一个名为@types /-prefix 的 npm 包将相关类型添加到项目中。 例如: <i>npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose</i>  等等。 <i>@types/\*</i>   由[ Definitely typed ]( http://definitelytyped.org/ )维护，这是一个社区项目，其目标是将所有的类型维护在一个地方。
+通常，现有包的类型可以在 npm 中的 <i>@types</i>-organization 中找到，您可以通过安装一个名为@types /-prefix 的 npm 包将相关类型添加到项目中。 例如: <i>npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose</i>  等等。 <i>@types/\*</i>   由[Definitely typed](http://definitelytyped.org/)维护，这是一个社区项目，其目标是将所有的类型维护在一个地方。
 
 <!-- Sometimes an npm package can also include its types within the code and in that case installing the corresponding <i>@types/*</i> is not necessary. -->
 有时 npm 包也可能在代码中包含它的类型，在这种情况下，不需要安装相应的<i>@types/\*</i>。
@@ -512,7 +512,7 @@ const parseArguments = (args: Array<string>): MultiplyValues => {
 ```
 
 <!-- Firstly,  the parameter <i>args</i> is an [array](http://www.typescriptlang.org/docs/handbook/basic-types.html#array) of strings. The return value has the type <i>MultiplyValues</i>, which is defined as follows: -->
-首先，参数<i>args</i> 是字符串的[数组]( http://www.typescriptlang.org/docs/handbook/basic-types.html#array )。 返回值的类型为<i>MultiplyValues</i>，定义如下:
+首先，参数<i>args</i> 是字符串的[数组](http://www.typescriptlang.org/docs/handbook/basic-types.html#array)。 返回值的类型为<i>MultiplyValues</i>，定义如下:
 
 ```js
 interface MultiplyValues {
@@ -524,7 +524,7 @@ interface MultiplyValues {
 
 
 <!-- The definition utilizes TypeScript's [Interface](http://www.typescriptlang.org/docs/handbook/interfaces.html) keyword, which is one way to define the "shape" an object should have.  -->
-这个定义使用了 TypeScript 的[ Interface ]( http://www.typescriptlang.org/docs/handbook/interfaces.html )关键字，这是定义对象应该具有的“形状”的一种方法。
+这个定义使用了 TypeScript 的[Interface](http://www.typescriptlang.org/docs/handbook/interfaces.html)关键字，这是定义对象应该具有的“形状”的一种方法。
 
 <!-- In our case it is quite obvious that the return value should be an object with two properties <i>value1</i> and <i>value2</i>, which should both be of type number.  -->
 在我们的示例中，很明显，返回值应该是一个具有两个属性<i>value1</i> 和<i>value2</i> 的对象，这两个属性都应该是 number 类型。
@@ -549,7 +549,7 @@ interface MultiplyValues {
 ```
 
 <!-- The <i>tsconfig.json</i> file is used to define how the TypeScript compiler should interpret the code, how strictly the compiler should work, which files to watch or ignore, and and [much much more](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html). -->
-这个 <i>tsconfig.json</i> 文件用于定义TypeScript编译器应该如何解释代码，编译器应该如何严格地工作，哪些文件应该监视或忽略，以及[更多配置]( https://www.typescriptlang.org/docs/handbook/tsconfig-json.html )。
+这个 <i>tsconfig.json</i> 文件用于定义TypeScript编译器应该如何解释代码，编译器应该如何严格地工作，哪些文件应该监视或忽略，以及[更多配置](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)。
 <!-- For now we will only use the compiler option [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny), that makes it mandatory to have types for all variables used. -->
 现在我们只使用编译器选项[noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny)，这会使得所有使用的变量都必须有类型。
 
@@ -558,7 +558,7 @@ interface MultiplyValues {
 创建这个练习的代码，以<i>bmiCalculator.ts</i>文件保存
 
 <!-- Write a function <i>calculateBmi</i> that counts [BMI](https://en.wikipedia.org/wiki/Body_mass_index) based on given weight (in kilograms) and height (in centimeters) and then returns a message that suits the results.  -->
-编写一个函数<i>calculateBmi</i>，它根据给定的体重(以千克为单位)和身高(以厘米为单位)计算[ BMI ]( https://en.wikipedia.org/wiki/body_mass_index ) ，然后返回一条适合结果的消息。
+编写一个函数<i>calculateBmi</i>，它根据给定的体重(以千克为单位)和身高(以厘米为单位)计算[BMI](https://en.wikipedia.org/wiki/body_mass_index) ，然后返回一条适合结果的消息。
 
 <!-- Call the function in the same file with hard-coded parameters and print out the result. The code -->
 使用硬编码参数调用同一文件中的函数并输出结果。代码为：
@@ -600,14 +600,14 @@ Normal (healthy weight)
 - 解释评级的文字值
 
 <!-- The daily exercise hours are given to the function as an [array](https://www.typescriptlang.org/docs/handbook/basic-types.html#array) that contains the number of exercise hours for each day in the training period. Eg. a week with 3 hours of training at Monday, none at Tuesday, 2 hours at Wednesday, 4.5 hours at Thursday and so on would be represented by the following array: -->
-每天的锻炼时间被赋予一个函数作为一个[数组]( https://www.typescriptlang.org/docs/handbook/basic-types.html#array ) ，其中包含训练期间每天锻炼时间的数量。 例如。 星期一训练3小时，星期二无训练，星期三2小时，星期四4.5小时，以此类推，将用如下数组表示:
+每天的锻炼时间被赋予一个函数作为一个[数组](https://www.typescriptlang.org/docs/handbook/basic-types.html#array) ，其中包含训练期间每天锻炼时间的数量。 例如。 星期一训练3小时，星期二无训练，星期三2小时，星期四4.5小时，以此类推，将用如下数组表示:
 
 ```js
 [3, 0, 2, 4.5, 0, 3, 1]
 ```
 
 <!-- For the Result object you should to create an [interface](https://www.typescriptlang.org/docs/handbook/interfaces.html). -->
-对于 Result 对象，你应该创建一个[接口]( https://www.typescriptlang.org/docs/handbook/interfaces.html )。
+对于 Result 对象，你应该创建一个[接口](https://www.typescriptlang.org/docs/handbook/interfaces.html)。
 
 <!-- If you would call the function with parameters <i>[3, 0, 2, 4.5, 0, 3, 1]</i> and <i>2</i> it could return -->
 如果你调用参数为<i>[3,0,2,4.5,0,3,1]</i> 和<i>2</i> 的函数，它可以返回
@@ -670,12 +670,12 @@ $ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
 
 
 <!-- In the exercises we used only one tsconfig rule [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny). It's a good place to start, but now it's time to look into the config file a little deeper. -->
-在练习中我们只使用了一个 tsconfig 规则[ noImplicitAny ]( https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny )。 这是一个很好的起点，但现在是时候更深入地研究配置文件了。
+在练习中我们只使用了一个 tsconfig 规则[noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny)。 这是一个很好的起点，但现在是时候更深入地研究配置文件了。
 
 
 
 <!-- The [tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) file contains all your core configurations on how you want TypeScript to work in your project.  -->
-文件[ tsconfig.json ]( https://www.typescriptlang.org/docs/handbook/tsconfig-json.html 文件)包含您希望 TypeScript 如何在项目中工作的所有核心配置。
+文件[tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html 文件)包含您希望 TypeScript 如何在项目中工作的所有核心配置。
 <!-- You can define how strictly you want the code to be inspected, what files to include and exclude (<i>node_modules</i> is excluded by default), and where compiled files should be placed (more on this later). -->
 您可以定义检查代码的严格程度，包括哪些文件和排除哪些文件(默认情况下排除<i>node_modules</i> ) ，以及应该将已编译的文件放在哪里(稍后将详细介绍)。
 
@@ -706,7 +706,7 @@ $ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
 
 
 <!-- You can find explanations for each of the configurations from the TypeScript documentation, or the really handy although beta-stage [tsconfig page](https://www.typescriptlang.org/v2/en/tsconfig), or from the tsconfig [schema definition](http://json.schemastore.org/tsconfig), which unfortunately is formatted a little worse than the first two options.  -->
-你可以从 TypeScript 文档中找到每种配置的解释，或者从 beta-stage [ tsconfig page ]( https://www.typescriptlang.org/v2/en/tsconfig ) ，或者从 tsconfig [ schema definition ]( http://json.schemastore.org/tsconfig 文档)中找到解释，不幸的是，它的格式比前两个选项要差一些。
+你可以从 TypeScript 文档中找到每种配置的解释，或者从 beta-stage [tsconfig page](https://www.typescriptlang.org/v2/en/tsconfig) ，或者从 tsconfig [schema definition](http://json.schemastore.org/tsconfig 文档)中找到解释，不幸的是，它的格式比前两个选项要差一些。
 
 ### Adding express to the mix
 【混入express】
@@ -964,7 +964,7 @@ Web 应用应该在生产模式下以通过命令<i>npm start</i> 启动，而np
 ```
 
 <!-- See the [express documentation](http://expressjs.com/en/5x/api.html#req.query) for info how to access the query parameters. -->
-有关如何访问查询参数的信息，请参阅[ express documentation ]( http://expressjs.com/en/5x/api.html#req.query 文档)。
+有关如何访问查询参数的信息，请参阅[express documentation](http://expressjs.com/en/5x/api.html#req.query 文档)。
 
 <!-- If the query parameters of the request are of the wrong type or missing, response with proper status code and error message are given -->
 如果请求的查询参数类型错误或缺少，则给出具有适当状态码的响应和错误消息
@@ -976,7 +976,7 @@ Web 应用应该在生产模式下以通过命令<i>npm start</i> 启动，而np
 ```
 
 <!-- Do not copy the calculator code to file <i>index.ts</i>, make it a [typescript module](https://www.typescriptlang.org/docs/handbook/modules.html) that can be imported in <i>index.ts</i>. -->
-不要将计算器代码复制到<i>index.ts</i> 文件中，将其设置为一个[TypeScript模块]( https://www.typescriptlang.org/docs/handbook/modules.html ) ，可以在<i>index.ts</i>导入。
+不要将计算器代码复制到<i>index.ts</i> 文件中，将其设置为一个[TypeScript模块](https://www.typescriptlang.org/docs/handbook/modules.html) ，可以在<i>index.ts</i>导入。
 
 </div>
 
@@ -1034,7 +1034,7 @@ app.get('/calculate', (req, res) => {
 
 
 <!-- In TypeScript every untyped variable which's type cannot be inferred, becomes implicitly [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) type. Any is a kind of a "wild card" type which literally stands for <i>whatever type</i>.  -->
-在TypeScript中，每个不能被推断的未被定义类型的变量都变成隐式的[any]( http://www.typescriptlang.org/docs/handbook/basic-types.html#any )类型。 Any 是一种“通配符”类型，字面上代表<i>whatever type</i>。
+在TypeScript中，每个不能被推断的未被定义类型的变量都变成隐式的[any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any)类型。 Any 是一种“通配符”类型，字面上代表<i>whatever type</i>。
 <!-- Things become implicitly any type quite often when one forgets to type functions.  -->
 当忘记定义函数类型时，任何类型都会变得隐式化。
 
@@ -1054,7 +1054,7 @@ app.get('/calculate', (req, res) => {
 
 
 <!-- This is why the configuration rule [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny) exists on compiler level, and it is highly recommended to keep it on at all times.  -->
-这就是为什么配置规则[ noImplicitAny ]( https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny )，让其存在于编译器级别，并且强烈建议在任何时候都保持开启状态。
+这就是为什么配置规则[noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny)，让其存在于编译器级别，并且强烈建议在任何时候都保持开启状态。
 <!-- In the rare occasions you seriously cannot know what the type of a variable is, you should explicitly state that in the code -->
 在极少数情况下，您真的不知道变量的类型是什么，您应该在代码中明确声明这一点
 
@@ -1067,7 +1067,7 @@ const a : any = /* no clue what the type will be! */.
 <!-- We already have <i>noImplicitAny</i> condifured in our example, so why does the compiler not complain about the implicit <i>any</i> types? -->
 在我们的示例中，我们已经有了<i>noImplicitAny</i> 配置，那么为什么编译器不产生警告隐含<i>any</i> 类型呢？
 <!-- The reason is, that the <i>query</i> field of an express [Request](https://expressjs.com/en/5x/api.html#req) object is explicitly typed <i>any</i>.  Same is true for the <i>request.body</i> field we use to post data to an app.  -->
-原因是，express [ Request ]( https://expressjs.com/en/5x/api.html#req )对象的<i>query</i> 字段是显式给定<i>any</i>类型的。 我们用于将数据发布到应用的<i>request.body</i> 字段也是如此。
+原因是，express [Request](https://expressjs.com/en/5x/api.html#req)对象的<i>query</i> 字段是显式给定<i>any</i>类型的。 我们用于将数据发布到应用的<i>request.body</i> 字段也是如此。
 
 
 
@@ -1083,8 +1083,8 @@ npm install --save-dev eslint @typescript-eslint/eslint-plugin @typescript-eslin
 
 
 
-<!-- We will configure eslint to [disallow explicit any]( https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md). Write the following rules to <i>.eslintrc</i>: -->
-我们将 eslint 配置为 [disallow explicit any]( https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md)， 将如下规则写入 <i>.eslintrc</i>:
+<!-- We will configure eslint to [disallow explicit any](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md). Write the following rules to <i>.eslintrc</i>: -->
+我们将 eslint 配置为 [disallow explicit any](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-explicit-any.md)， 将如下规则写入 <i>.eslintrc</i>:
 
 ```json
 {
@@ -1126,7 +1126,7 @@ npm install --save-dev eslint @typescript-eslint/eslint-plugin @typescript-eslin
 
 
 <!-- The [@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) has a lot of TypeScript specific eslint rules, but you can also use all basic eslint rules in TypeScript projects.  -->
-[@typscript-eslint ]( https://github.com/TypeScript-eslint/TypeScript-eslint )有很多特定于TypeScript的 eslint 规则，但是您也可以在TypeScript项目中使用所有基本的 eslint 规则。
+[@typscript-eslint](https://github.com/TypeScript-eslint/TypeScript-eslint)有很多特定于TypeScript的 eslint 规则，但是您也可以在TypeScript项目中使用所有基本的 eslint 规则。
 
 <!-- For now we should propably go with the recommended settings and modify the rules as we go along whenever we find something we want to behave differently.  -->
 现在，我们应该按照推荐的设置进行操作，当我们发现一些需要改变的地方时，我们可以随时修改这些规则。

@@ -9,14 +9,14 @@ lang: zh
 
 
 <!-- So far we have used our redux-store with the help of the[hook](https://react-redux.js.org/api/hooks)-api from react-redux. -->
-到目前为止，我们已经使用了 redux-store，借助于 redux 中的 [hook ]( https://react-redux.js.org/api/hooks )-api。
+到目前为止，我们已经使用了 redux-store，借助于 redux 中的 [hook](https://react-redux.js.org/api/hooks)-api。
 <!-- Practically this has meant using the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) functions. -->
-实际上，这意味着使用了[ useSelector ]( https://react-redux.js.org/api/hooks#useSelector )和[ useDispatch ]( https://react-redux.js.org/api/hooks#useDispatch )函数。
+实际上，这意味着使用了[useSelector](https://react-redux.js.org/api/hooks#useSelector)和[useDispatch](https://react-redux.js.org/api/hooks#useDispatch)函数。
 
 
 
 <!-- To finish this part we will look into another older and  more complicated way to use redux, the [connect](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)-function provided by react-redux. -->
-为了完成这一章节，我们将研究使用 redux 的另一种更古老、更复杂的方法，redux 提供的[ connect ]( https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options )-函数。
+为了完成这一章节，我们将研究使用 redux 的另一种更古老、更复杂的方法，redux 提供的[connect](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)-函数。
 
 
 
@@ -92,7 +92,7 @@ export default ConnectedNotes           // highlight-line
 该模块导出的<i>连接组件</i> 与之前的常规组件工作方式完全相同。
 
 <!-- The component needs the list of notes and the value of the filter from the Redux store. The _connect_ function accepts a so-called [mapStateToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapstatetoprops-state-ownprops--object) function as its first parameter. The function can be used for defining the props of the <i>connected component</i> that are based on the state of the Redux store. -->
-组件需要 Redux 存储中的便笺列表和筛选器的值。 Connect 函数接受所谓的[ mapStateToProps ]( https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapStateToProps-state-ownprops--object )函数作为它的第一个参数。 这个函数可以用来定义基于 Redux 存储状态的<i>/ 连接组件</i> 的props。
+组件需要 Redux 存储中的便笺列表和筛选器的值。 Connect 函数接受所谓的[mapStateToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapStateToProps-state-ownprops--object)函数作为它的第一个参数。 这个函数可以用来定义基于 Redux 存储状态的<i>/ 连接组件</i> 的props。
 
 <!-- If we define: -->
 如果我们定义:
@@ -226,7 +226,7 @@ const Notes = (props) => {
 ```
 
 <!-- The second parameter of the _connect_ function can be used for defining [mapDispatchToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapdispatchtoprops-object--dispatch-ownprops--object) which is a group of <i>action creator</i> functions passed to the connected component as props. Let's make the following changes to our existing connect operation: -->
-Connect 函数的第二个参数可用于定义[ mapDispatchToProps ]( https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapDispatchToProps-object--dispatch-ownprops--object ) ，它是一组作为props传递给连接组件的<i> action creator</i> 函数。 让我们对现有的连接操作进行如下更改: 
+Connect 函数的第二个参数可用于定义[mapDispatchToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapDispatchToProps-object--dispatch-ownprops--object) ，它是一组作为props传递给连接组件的<i> action creator</i> 函数。 让我们对现有的连接操作进行如下更改: 
 
 
 ```js
@@ -564,7 +564,7 @@ const NewNote = (props) => {
 ```
 
 <!-- The concept is quite complex and describing it through text is challenging. In most cases it is sufficient to use the simpler form of <i>mapDispatchToProps</i>. However, there are situations where the more complicated definition is necessary, like if the <i>dispatched actions</i> need to reference [the props of the component](https://github.com/gaearon/redux-devtools/issues/250#issuecomment-186429931). -->
-这个概念相当复杂，通过文本来描述它是具有挑战性的。 在大多数情况下，使用更简单的<i>mapDispatchToProps</i> 就足够了。 然而，在有些情况下，需要更复杂的定义，比如<i>分派的操作</i> 需要引用[组件的支持]( https://github.com/gaearon/redux-devtools/issues/250#issuecomment-186429931)。
+这个概念相当复杂，通过文本来描述它是具有挑战性的。 在大多数情况下，使用更简单的<i>mapDispatchToProps</i> 就足够了。 然而，在有些情况下，需要更复杂的定义，比如<i>分派的操作</i> 需要引用[组件的支持](https://github.com/gaearon/redux-devtools/issues/250#issuecomment-186429931)。
 
 <!-- The creator of Redux Dan Abramov has created a wonderful tutorial called [Getting started with Redux](https://egghead.io/courses/getting-started-with-redux) that you can find on Egghead.io. I highly recommend the tutorial to everyone. The last four videos discuss the _connect_ method, particularly the more "complicated" way of using it. -->
 Redux的创建者 Dan Abramov 创建了一个非常棒的教程，叫做 [Getting started with Redux](https://egghead.io/courses/getting-started-with-redux)  ，你可以在 [Egghead.io](https://Egghead.io/courses/Getting-started-with-Redux)上找到这个 。 我向每个人强烈推荐这个教程。 最后四个视频讨论了连接方法，特别是使用它的更“复杂”的方式。 
@@ -573,7 +573,7 @@ Redux的创建者 Dan Abramov 创建了一个非常棒的教程，叫做 [Gettin
 【复习表现层/容器】
 
 <!-- The refactored <i>Notes</i> component is almost entirely focused on rendering notes and is quite close to being a so-called [presentational component](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0). According to the [description](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) provided by Dan Abramov, presentation components: -->
-重构的<i>Notes</i> 组件几乎完全集中在渲染便笺上，并且非常接近于所谓的[表示组件]( https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0组件)。 根据 Dan Abramov 提供的 [description](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)，演示组件:
+重构的<i>Notes</i> 组件几乎完全集中在渲染便笺上，并且非常接近于所谓的[表示组件](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0组件)。 根据 Dan Abramov 提供的 [description](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)，演示组件:
 
 <!--Are concerned with how things look.-->
 关心事物的外观。
@@ -651,13 +651,13 @@ Abramov将如下[benefits](https://medium.com/@dan_abramov/smart-and-dumb-compon
 - 表现组件本质上是你的应用的“调色板”。 你可以把它们放在一个页面上，让设计师在不触及应用逻辑的情况下调整它们的所有变化。 您可以在该页面上运行屏幕截图回归测试。
 
 <!-- Abramov mentions the term [high order component](https://reactjs.org/docs/higher-order-components.html). The <i>Notes</i> component is an example of a regular component, whereas the <i>connect</i> method provided by React-Redux is an example of a <i>high order component</i>. Essentially, a high order component is a function that accept a "regular" component as its parameter, that then returns a new "regular" component as its return value. -->
-阿布拉莫夫提到了术语[高阶组件]( https://reactjs.org/docs/higher-order-components.html )。<i>Notes</i> 组件是常规组件的一个例子，而 React-Redux 提供的<i>connect</i> 方法是<i>高阶组件</i> 的一个例子。 从本质上讲，高阶组件是接受“ regular”组件作为参数的函数，然后返回一个新的“ regular”组件作为其返回值。
+阿布拉莫夫提到了术语[高阶组件](https://reactjs.org/docs/higher-order-components.html)。<i>Notes</i> 组件是常规组件的一个例子，而 React-Redux 提供的<i>connect</i> 方法是<i>高阶组件</i> 的一个例子。 从本质上讲，高阶组件是接受“ regular”组件作为参数的函数，然后返回一个新的“ regular”组件作为其返回值。
 
 <!-- High order components, or HOCs, are a way of defining generic functionality that can be applied to components. This is a concept from functional programming that very slightly resembles inheritance in object oriented programming. -->
 高阶组件(High order components，简称 hoc)是定义可应用于组件的通用功能的一种方法。 这是一个来自函数式编程的概念，非常类似于面向对象编程中的继承。
 
 <!-- HOCs are in fact a generalization of the [High Order Function](https://en.wikipedia.org/wiki/Higher-order_function) (HOF) concept. HOFs are functions that either accept functions as parameters or return functions. We have actually been using HOFs throughout the course, e.g. all of the methods used for dealing with arrays like _map, filter and find_ are HOFs.  -->
-Hoc 实际上是[高阶函数]( https://en.wikipedia.org/wiki/higher-order_function )(HOF)概念的推广。 Hofs 是接受函数作为参数或返回函数的函数。 实际上我们在整个课程中一直在使用 HOFs，例如，所有用于处理数组如 map、 filter 和 find 的方法都是 HOFs。 
+Hoc 实际上是[高阶函数](https://en.wikipedia.org/wiki/higher-order_function)(HOF)概念的推广。 Hofs 是接受函数作为参数或返回函数的函数。 实际上我们在整个课程中一直在使用 HOFs，例如，所有用于处理数组如 map、 filter 和 find 的方法都是 HOFs。 
 
 
 
@@ -682,9 +682,9 @@ React hook-api 发布之后，HOCs 变得越来越不受欢迎。 几乎所有�
 
 
 <!-- Nowadays it is possible to implement redux-like state management without redux by using the React [context](https://reactjs.org/docs/context.html)-api and the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer)-hook.  -->
-现在，通过使用 React [ context ]( https://reactjs.org/docs/context.html )-api 和[ useReducer ]( https://reactjs.org/docs/hooks-reference.html#useReducer )-hook，不需要 redux 就可以实现类似 redux 的状态管理。
+现在，通过使用 React [context](https://reactjs.org/docs/context.html)-api 和[useReducer](https://reactjs.org/docs/hooks-reference.html#useReducer)-hook，不需要 redux 就可以实现类似 redux 的状态管理。
 <!-- More about this [here](https://www.simplethread.com/cant-replace-redux-with-hooks/) and [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). We will also practice this in  -->
-更多关于这个[这里]( https://www.simplethread.com/cant-replace-redux-with-hooks/ )和[这里]( https://hswolff.com/blog/how-to-usecontext-with-usereducer/ )的内容，我们也会在[part 9](/zh/part9)中提及
+更多关于这个[这里](https://www.simplethread.com/cant-replace-redux-with-hooks/)和[这里](https://hswolff.com/blog/how-to-usecontext-with-usereducer/)的内容，我们也会在[part 9](/zh/part9)中提及
 
 </div>
 
@@ -698,7 +698,7 @@ React hook-api 发布之后，HOCs 变得越来越不受欢迎。 几乎所有�
 <i>redux store</i> 目前通过props传递给所有组件。
 
 <!-- Add the [react-redux](https://github.com/reactjs/react-redux) package to your application, and modify the <i>AnecdoteList</i> so that it accesses the store's state with the help of the _connect_ function. -->
-添加[ react-redux ](google  https://github.com/reactjs/react-redux )包到您的应用中，并修改<i>/ 轶事列表</i>，以便它借助 connect 函数访问存储的状态。
+添加[react-redux](google  https://github.com/reactjs/react-redux)包到您的应用中，并修改<i>/ 轶事列表</i>，以便它借助 connect 函数访问存储的状态。
 
 <!-- Voting for and creating new anecdotes **does not need to work** after this exercise. -->
 在这个练习之后，投票选举和创造新的奇闻轶事就不需要工作了。
@@ -736,13 +736,13 @@ const mapStateToProps = (state) => {
 <!-- This can be done by cancelling the removal of the previous notification when a new notification is displayed whenever necessary.  -->
 这可以通过在必要时显示新通知时取消删除以前的通知来实现。
 <!-- The [documentation](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) for the setTimeout function might also be useful for this. -->
-Settimeout 函数的[ documentation ]( https://developer.mozilla.org/en-us/docs/web/api/windoworworkerglobalscope/setTimeout 文档)对此也很有用。 
+Settimeout 函数的[documentation](https://developer.mozilla.org/en-us/docs/web/api/windoworworkerglobalscope/setTimeout 文档)对此也很有用。 
 
 </div>
 
 
 <div class="tasks">
 <!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
-这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统]( https://studies.cs.helsinki.fi/stats/courses/fullstackopen )。
+这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)。
 
 </div>

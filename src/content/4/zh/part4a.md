@@ -442,7 +442,7 @@ app.listen(PORT, () => {
 将应用重构为单独的模块，如本课程教材前面所示。
 
 <!-- **NB** refactor your application in baby steps and verify that the application works after every change you make. If you try to take a "shortcut" by refactoring many things at once, then [Murphy's law](https://en.wikipedia.org/wiki/Murphy%27s_law) will kick in and it is almost certain that something will break in your application. The "shortcut" will end up taking more time than moving forward slowly and systematically. -->
-**注意 **以初级步骤重构您的应用，并在每次更改后验证该应用是否正常工作。 如果你试图通过同时重构许多东西来走“捷径” ，那么[墨菲定律]( https://en.wikipedia.org/wiki/Murphy%27s_law )就会生效，而且几乎可以肯定，某些东西会在你的应用中中断 。**“捷径”最终将花费更多的时间，而不是缓慢而系统地向前推进**
+**注意 **以初级步骤重构您的应用，并在每次更改后验证该应用是否正常工作。 如果你试图通过同时重构许多东西来走“捷径” ，那么[墨菲定律](https://en.wikipedia.org/wiki/Murphy%27s_law)就会生效，而且几乎可以肯定，某些东西会在你的应用中中断 。**“捷径”最终将花费更多的时间，而不是缓慢而系统地向前推进**
 
 <!-- One best practice is to commit your code every time it is in a stable state. This makes it easy to rollback to a situation where the application still works. -->
 一个最佳实践是每次代码处于稳定状态时再提交它。 这样可以很容易地回滚到应用仍然可以工作的情况。
@@ -485,10 +485,10 @@ module.exports = {
 ```
 
 > The _average_ function uses the array [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) method. If the method is not familiar to you yet, then now is a good time to watch the first three videos from the [Functional Javascript](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) series on Youtube.
-平均函数使用 array的 [ reduce ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/reduce )方法。 如果你对这个方法还不熟悉，现在是在 Youtube 上观看前3个视频的好时机，这3个视频来自[ Functional Javascript ]( https://www.Youtube.com/watch?v=bmuifmzr7vk&list=pl0zvegevsaeed9hlmcxrk5yuyquag-n84)系列。
+平均函数使用 array的 [reduce](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/reduce)方法。 如果你对这个方法还不熟悉，现在是在 Youtube 上观看前3个视频的好时机，这3个视频来自[Functional Javascript](https://www.Youtube.com/watch?v=bmuifmzr7vk&list=pl0zvegevsaeed9hlmcxrk5yuyquag-n84)系列。
 
 <!-- There are many different testing libraries or <i>test runners</i> available for JavaScript. In this course we will be using a testing library developed and used internally by Facebook called [jest](https://jestjs.io/), that resembles the previous king of JavaScript testing libraries [Mocha](https://mochajs.org/). Other alternatives do exist, like [ava](https://github.com/avajs/ava) that has gained popularity in some circles. -->
-有许多不同的测试库或者<i>test runner</i> 可用于 JavaScript。 在本课程中，我们将使用一个由 Facebook 内部开发和使用的测试库，这个测试库名为[ jest ]( https://jestjs.io/ ) ，类似于之前 JavaScript 测试库之王[ Mocha ]( https://mochajs.org/ )。 其他替代品也确实存在，比如在某些圈子里受到欢迎的[ ava ]( https://github.com/avajs/ava )。
+有许多不同的测试库或者<i>test runner</i> 可用于 JavaScript。 在本课程中，我们将使用一个由 Facebook 内部开发和使用的测试库，这个测试库名为[jest](https://jestjs.io/) ，类似于之前 JavaScript 测试库之王[Mocha](https://mochajs.org/)。 其他替代品也确实存在，比如在某些圈子里受到欢迎的[ava](https://github.com/avajs/ava)。
 
 <!-- Jest is a natural choice for this course, as it works well for testing backends, and it shines when it comes to testing React applications.  -->
 对于本课程来说，Jest 是一个自然的选择，因为它可以很好地测试后端，并且在测试 React 应用时表现出色。
@@ -607,7 +607,7 @@ const palindrome = require('../utils/for_testing').palindrome
 ```
 
 <!-- First we execute the code to be tested, meaning that we generate a palindrome for the string <i>react</i>. Next we verify the results with the [expect](https://facebook.github.io/jest/docs/en/expect.html#content) function. Expect wraps the resulting value into an object that offers a collection of <i>matcher</i> functions, that can be used for verifying the correctness of the result. Since in this test case we are comparing two strings, we can use the [toBe](https://facebook.github.io/jest/docs/en/expect.html#tobevalue) matcher. -->
-首先执行要测试的代码，这意味着为字符串<i>react</i> 生成一个回文。 接下来，我们用[ expect ]( https://facebook.github.io/jest/docs/en/expect.html#content )函数验证结果。 Expect 将结果值封装到一个对象中，该对象提供一组<i>matcher</i> 函数，可用于验证结果的正确性。 因为在这个测试用例中，我们要比较两个字符串，所以我们可以使用[ toBe ]( https://facebook.github.io/jest/docs/en/expect.html#tobevalue )匹配器。
+首先执行要测试的代码，这意味着为字符串<i>react</i> 生成一个回文。 接下来，我们用[expect](https://facebook.github.io/jest/docs/en/expect.html#content)函数验证结果。 Expect 将结果值封装到一个对象中，该对象提供一组<i>matcher</i> 函数，可用于验证结果的正确性。 因为在这个测试用例中，我们要比较两个字符串，所以我们可以使用[toBe](https://facebook.github.io/jest/docs/en/expect.html#tobevalue)匹配器。
 
 <!-- As expected, all of the tests pass: -->
 正如所料，所有的测试都通过了:
@@ -795,10 +795,10 @@ describe('total likes', () => {
 在编写测试时，您肯定会遇到问题。 还记得我们在第3章节中学到的关于[debugging](/zh/part3/saving_data_to_mongo_db#debugging-node-applications)的知识吗。 即使在测试执行期间，也可以使用 console.log 将内容打印到控制台。 你甚至可以在运行测试的时候使用调试器，你可以在这里找到相关的指示 [here](https://jestjs.io/docs/en/troubleshooting)。
 
 <!-- **NB:** if some test is failing, then it is recommended to only run that test while you are fixing the issue. You can run a single test with the [only](https://facebook.github.io/jest/docs/en/api.html#testonlyname-fn-timeout) method. -->
-注意: 如果某个测试失败，那么建议在修复问题时只运行该测试。 您可以使用[ only ]( https://facebook.github.io/jest/docs/en/api.html#testonlyname-fn-timeout )方法运行单个测试。
+注意: 如果某个测试失败，那么建议在修复问题时只运行该测试。 您可以使用[only](https://facebook.github.io/jest/docs/en/api.html#testonlyname-fn-timeout)方法运行单个测试。
 
 <!-- Another way of running a single test (or describe block) is to specify the name of the test to be run with the [-t](https://jestjs.io/docs/en/cli.html) flag: -->
-运行单个测试(或描述块)的另一种方法是指定使用[-t ]( https://jestjs.io/docs/en/cli.html )标志运行的测试的名称:
+运行单个测试(或描述块)的另一种方法是指定使用[-t](https://jestjs.io/docs/en/cli.html)标志运行的测试的名称:
 
 ```js
 npm test -- -t 'when list has only one blog, equals the likes of that'
@@ -820,7 +820,7 @@ npm test -- -t 'when list has only one blog, equals the likes of that'
 ```
 
 <!-- **NB** when you are comparing objects, the [toEqual](https://jestjs.io/docs/en/expect#toequalvalue) method is probably what you want to use, since the [toBe](https://jestjs.io/docs/en/expect#tobevalue) tries to verify that the two values are the same value, and not just that they contain the same properties. -->
-**注意** 当您比较对象时，[ toEqual ]( https://jestjs.io/docs/en/expect#toequalvalue )方法可能是您想要使用的，因为[ toBe ]( https://jestjs.io/docs/en/expect#tobevalue )试图验证这两个值是否是相同的值，而不仅仅是它们是否包含相同的属性。
+**注意** 当您比较对象时，[toEqual](https://jestjs.io/docs/en/expect#toequalvalue)方法可能是您想要使用的，因为[toBe](https://jestjs.io/docs/en/expect#tobevalue)试图验证这两个值是否是相同的值，而不仅仅是它们是否包含相同的属性。
 
 <!-- Write the tests for this exercise inside of a new <i>describe</i> block. Do the same for the remaining exercises as well. -->
 在一个新的<i>describe</i> 块中编写这个练习的测试。 对剩下的练习也做同样的操作。

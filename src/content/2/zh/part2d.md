@@ -9,16 +9,16 @@ lang: zh
 
 
 <!-- When creating notes in our application, we would naturally want to store them in some backend server. The [json-server](https://github.com/typicode/json-server) package claims to be a so-called REST or RESTful API in its documentation: -->
-在应用中创建便笺时，我们自然希望将它们存储在某个后端服务器中。 在文档中，[ json-server ]( https://github.com/typicode/json-server 服务器)包提到了所谓的 REST 或 RESTful API:
+在应用中创建便笺时，我们自然希望将它们存储在某个后端服务器中。 在文档中，[json-server](https://github.com/typicode/json-server 服务器)包提到了所谓的 REST 或 RESTful API:
 
 > <i>Get a full fake REST API with zero coding in less than 30 seconds (seriously)</i>
 在不到30秒(严肃地)的情况下得到一个完整的模拟 REST API，0编码
 
 <!-- The json-server does not exactly match the description provided by the textbook [definition](https://en.wikipedia.org/wiki/Representational_state_transfer) of a REST API, but neither do most other APIs claiming to be RESTful. -->
-Json-server 与 REST API 的教科书[定义]( https://en.wikipedia.org/wiki/representational_state_transfer )提供的描述不完全匹配，但是自称是 RESTful 的大多数服务都不完全匹配。 
+Json-server 与 REST API 的教科书[定义](https://en.wikipedia.org/wiki/representational_state_transfer)提供的描述不完全匹配，但是自称是 RESTful 的大多数服务都不完全匹配。 
 
 <!-- We will take a closer look at REST in the [next part](/zh/part3) of the course, but it's important to familiarize ourselves at this point with some of the [conventions](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) used by json-server and REST APIs in general. In particular, we will be taking a look at the conventional use of [routes](https://github.com/typicode/json-server#routes), aka URLs and HTTP request types, in REST. -->
-我们将在本课程的[下一章节](/zh/part3)中进一步了解 REST，但是熟悉 json-server 和 REST api 经常使用的一些[约定]( https://en.wikipedia.org/wiki/representational_state_transfer#applied_to_web_services )是很重要的。 特别是，我们将会看到在 REST 中常规使用[路由]( https://github.com/typicode/json-server#routes ) ，即 url 和 HTTP 请求类型。
+我们将在本课程的[下一章节](/zh/part3)中进一步了解 REST，但是熟悉 json-server 和 REST api 经常使用的一些[约定](https://en.wikipedia.org/wiki/representational_state_transfer#applied_to_web_services)是很重要的。 特别是，我们将会看到在 REST 中常规使用[路由](https://github.com/typicode/json-server#routes) ，即 url 和 HTTP 请求类型。
 
 ### REST
 <!-- In REST terminology, we refer to individual data objects, such as the notes in our application, as <i>resources</i>. Every resource has a unique address associated with it - its URL. According to a general convention used by json-server, we would be able to locate an individual note at the resource URL <i>notes/3</i>, where 3 is the id of the resource. The <i>notes</i> url, on the other hand, would point to a resource collection containing all the notes. -->
@@ -252,7 +252,7 @@ const toggleImportanceOf = id => {
 函数体中几乎每一行代码都包含重要的细节。 第一行根据每个便笺资源的 id 定义其唯一的 url。
 
 <!-- The array [find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) method is used to find the note we want to modify, and we then assign it to the _note_ variable. -->
-数组的 [ find ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/find )方法用于查找要修改的便笺，然后将其分配给note变量。
+数组的 [find](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/find)方法用于查找要修改的便笺，然后将其分配给note变量。
 
 <!-- After this we create a <i>new object</i> that is an exact copy of the old note, apart from the important property.  -->
 在此之后，我们创建一个<i>新对象</i>，除了重要性属性，它完全是旧便笺的副本。
@@ -285,7 +285,7 @@ axios.put(url, note).then(response => {
 不建议这样做，因为变量 <em>note</em> 是对处于组件状态 <em>notes</em> 数组中某个项的引用，而且我们记得在 React 中绝不能直接修改状态。
 
 <!-- It's also worth noting that the new object _changedNote_ is only a so-called [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy), meaning that the values of the new object are the same as the values of the old object. If the values of the old object were objects themselves, then the copied values in new object would reference the same objects that were in the old object. -->
-值得注意的是，新对象 changedNote 只是一个所谓的[浅拷贝]( https://en.wikipedia.org/wiki/object_copying#shallow_copy ) ，这意味着新对象的值与旧对象的值相同。 如果旧对象的值本身就是对象，那么**新对象中复制的值将引用旧对象中的相同对象**。
+值得注意的是，新对象 changedNote 只是一个所谓的[浅拷贝](https://en.wikipedia.org/wiki/object_copying#shallow_copy) ，这意味着新对象的值与旧对象的值相同。 如果旧对象的值本身就是对象，那么**新对象中复制的值将引用旧对象中的相同对象**。
 
 <!-- The new note is then sent with a PUT request to the backend where it will replace the old object. -->
 然后这个新便笺与一个 PUT 请求一起发送到后端，它将在后端替换旧对象。
@@ -316,7 +316,7 @@ Map 方法通过将旧数组中的每个项映射到新数组中的一个项来�
 【将与后端的通信提取到单独的模块中】
 
 <!-- The <i>App</i> component has become somewhat bloated after adding the code for communicating with the backend server. In the spirit of the [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), we deem it wise to extract this communication into its own [module](/zh/part2/rendering_a_collection_modules#refactoring-modules). -->
-在添加了用于与后端服务器通信的代码之后，<i>App</i> 组件变得有些臃肿。 本着[单一职责原则]( https://en.wikipedia.org/wiki/single_responsibility_principle )的精神，我们认为将这种通信提取到它自己的[模块](/zh/part2/rendering_a_collection_modules#refactoring-modules)是明智的。
+在添加了用于与后端服务器通信的代码之后，<i>App</i> 组件变得有些臃肿。 本着[单一职责原则](https://en.wikipedia.org/wiki/single_responsibility_principle)的精神，我们认为将这种通信提取到它自己的[模块](/zh/part2/rendering_a_collection_modules#refactoring-modules)是明智的。
 
 <!-- Let's create a <i>src/services</i> directory and add a file there called <i>notes.js</i>: -->
 让我们创建一个<i>src/services</i>目录，并添加一个名为<i>notes.js</i> 的文件:
@@ -492,7 +492,7 @@ const getAll = () => {
 ```
 
 <!-- The modified <em>getAll</em> function still returns a promise, as the <em>then</em> method of a promise also [returns a promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then).  -->
-修改后的<em>getAll</em> 函数仍然返回一个 promise，因为 promise 的 <em>then</em>  方法也[ 返回一个 promise ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/promise/then )。
+修改后的<em>getAll</em> 函数仍然返回一个 promise，因为 promise 的 <em>then</em>  方法也[返回一个 promise](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/promise/then)。
 
 <!-- After defining the parameter of the <em>then</em> method to directly return <i>response.data</i>, we have gotten the <em>getAll</em> function to work like we wanted it to. When the HTTP request is successful, the promise returns the data sent back in the response from the backend. -->
 在定义了<em>then</em> 方法的参数直接返回<i>response.data</i> 之后，我们已经让 <em>getAll</em> 函数按照我们希望的方式工作。 当 HTTP 请求成功时，承诺将返回从后端响应中发送回来的数据。
@@ -719,7 +719,7 @@ const getAll = () => {
 拒绝承诺是通过给<em>then</em> 方法提供第二个回调函数来处理的，这个[handled](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) 在承诺被拒绝的情况下被调用。
 
 <!-- The more common way of adding a handler for rejected promises is to use the [catch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch) method.  -->
-为被拒绝的承诺添加处理程序的更常见的方法是使用[ catch ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/promise/catch )方法。
+为被拒绝的承诺添加处理程序的更常见的方法是使用[catch](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/promise/catch)方法。
 
 
 <!-- In practice, the error handler for rejected promises is defined like this: -->
@@ -798,7 +798,7 @@ const toggleImportanceOf = id => {
 错误消息会通过弹出可靠的老式[alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert)对话框显示给用户，并且已删除的便笺会从状态中过滤掉。
 
 <!-- Removing an already deleted note from the application's state is done with the array [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method, which returns a new array comprising only of the items from the list for which the function that was passed as a parameter returns true for: -->
-从应用的状态中删除已经删除的便笺是通过数组的 [ filter ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/filter )方法完成的，该方法返回一个新的数组，其中只包含列表中的项目，作为参数传递的函数返回 true :
+从应用的状态中删除已经删除的便笺是通过数组的 [filter](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/filter)方法完成的，该方法返回一个新的数组，其中只包含列表中的项目，作为参数传递的函数返回 true :
 
 ```js
 notes.filter(n => n.id !== id)
@@ -830,7 +830,7 @@ notes.filter(n => n.id !== id)
 
 <h4>2.17: Phonebook 步骤9</h4>
 <!-- Make it possible for users to delete entries from the phonebook. The deletion can be done through a dedicated button for each person in the phonebook list. You can confirm the action from the user by using the [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) method: -->
-使用户可以从电话簿中删除条目。 删除可以通过电话簿列表中每个人的专用按钮来完成。 你可以通过使用[ window.confirm ]( https://developer.mozilla.org/en-us/docs/web/api/window/confirm )方法来确认用户的操作:
+使用户可以从电话簿中删除条目。 删除可以通过电话簿列表中每个人的专用按钮来完成。 你可以通过使用[window.confirm](https://developer.mozilla.org/en-us/docs/web/api/window/confirm)方法来确认用户的操作:
 
 ![](../../images/2/24e.png)
 
@@ -838,7 +838,7 @@ notes.filter(n => n.id !== id)
 通过对资源的 URL 发出 HTTP DELETE 请求，可以删除后端中人员的关联资源。 例如，如果我们要删除一个拥有<i>id</i> 为2的人，我们必须向 <i>localhost:3001/persons/2</i>. 发出 HTTP DELETE 请求。 请求没有发送任何数据。
 
 <!-- You can make an HTTP DELETE request with the [axios](https://github.com/axios/axios) library in the same way that we make all of the other requests. -->
-您可以使用[ axios ]( https://github.com/axios/axios )库发出 HTTP DELETE 请求，就像我们发出所有其他请求一样。
+您可以使用[axios](https://github.com/axios/axios)库发出 HTTP DELETE 请求，就像我们发出所有其他请求一样。
 
 <!-- **NB:** You can't use the name <em>delete</em> for a variable because it's a reserved word in JavaScript. E.g. the following is not possible: -->
 

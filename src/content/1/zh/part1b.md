@@ -10,7 +10,7 @@ lang: zh
 在本课程中，除了网页开发，我们还有一个目标和需求，就是学习足量的 Javascript 知识。
 <!-- Javascript has advanced rapidly the last few years and in this course we use features from the newer versions. The official name of the Javascript standard is [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). At this moment, the latest version is the one released in June of 2019 with the name [ECMAScript® 2019](http://www.ecma-international.org/ecma-262/10.0/index.html), otherwise known as ES10. -->
 
-Javascript 在过去的几年里发展非常迅速，在本课程中，我们将使用新版本的特性。 Javascript 标准的正式名称是[ ECMAScript ]( https://en.wikipedia.org/wiki/ECMAScript )。 目前（2020年3月，译者注），最新的版本是2019年6月发布的，名为[ ECMAScript 2019]( http://www.ecma-international.org/ecma-262/10.0/index.html ) ，即ES10。 
+Javascript 在过去的几年里发展非常迅速，在本课程中，我们将使用新版本的特性。 Javascript 标准的正式名称是[ECMAScript](https://en.wikipedia.org/wiki/ECMAScript)。 目前（2020年3月，译者注），最新的版本是2019年6月发布的，名为[ECMAScript 2019](http://www.ecma-international.org/ecma-262/10.0/index.html) ，即ES10。 
 
 <!-- Browsers do not yet support all of Javascript's newest features. Due to this fact, a lot of code run in browsers has been <i>transpiled</i> from a newer version of Javascript to an older, more compatible version. -->
 
@@ -59,7 +59,7 @@ x = 4               // causes an error
 
 <!-- [const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) does not actually define a variable but a <i>constant</i> for which the value can no longer be changed. On the other hand [let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let) defines a normal variable. -->
 
-[ const ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/statements/const )实际上并没有定义一个变量，而是定义了一个<i>常量</i>，也就是其值不能再更改了。 相对应的，[ let ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/statements/let )定义了一个普通变量。
+[const](https://developer.mozilla.org/en-us/docs/web/javascript/reference/statements/const)实际上并没有定义一个变量，而是定义了一个<i>常量</i>，也就是其值不能再更改了。 相对应的，[let](https://developer.mozilla.org/en-us/docs/web/javascript/reference/statements/let)定义了一个普通变量。
 
 <!-- In the example, we also see that the type of the data assigned to the variable can change during execution. At the start _y_ stores an integer and at the end a string. -->
 
@@ -67,7 +67,7 @@ x = 4               // causes an error
 
 <!-- It is also possible to define variables in Javascript using the keyword [var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var). Var was for a long time the only way to define variables. Const and let were only recently added in version ES6. In specific situations, var works in a [different](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f) [way](http://www.jstips.co/en/javascript/keyword-var-vs-let/) compared to variable definitions in most languages. During this course the use of var is ill-advised and you should stick with using const and let! -->
 
-也可以使用关键字[ var ]( https://developer.mozilla.org/en-us/docs/web/Javascript/reference/statements/var )在 Javascript 中定义变量。 在很长一段时间里，var 是定义变量的唯一方法。 const 和 let 是最近才在 ES6版本中添加的。 在一些特定情况，var 的工作方式与大多数语言中的变量定义相比是[十分不同的]( https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f )。 在本课程中明确不建议使用var，你应该坚持使用 const 和 let！
+也可以使用关键字[var](https://developer.mozilla.org/en-us/docs/web/Javascript/reference/statements/var)在 Javascript 中定义变量。 在很长一段时间里，var 是定义变量的唯一方法。 const 和 let 是最近才在 ES6版本中添加的。 在一些特定情况，var 的工作方式与大多数语言中的变量定义相比是[十分不同的](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f)。 在本课程中明确不建议使用var，你应该坚持使用 const 和 let！
 
 <!-- You can find more on this topic on e.g. YouTube - [var, let and const - ES6 JavaScript Features](https://youtu.be/sjyJBL5fkp8) -->
 你可以在 YouTube中找到更多关于这个 [var, let and const - ES6 JavaScript Features](https://youtu.be/sjyJBL5fkp8)主题的讨论
@@ -75,7 +75,7 @@ x = 4               // causes an error
 ### Arrays
 【数组】
 <!-- An [array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) and a couple of examples of its use: -->
-以下是[数组]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array )和它的几个使用示例:
+以下是[数组](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array)和它的几个使用示例:
 
 ```js
 const t = [1, -1, 3]
@@ -106,11 +106,11 @@ value => {
 
 <!-- forEach calls the function <i>for each of the items in the array</i>, always passing the individual item as a parameter. The function as the parameter of forEach may also receive [other parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach). -->
 
-forEach 为数组中的每个元素调用了这个函数，并总是将这单个项作为参数传递。 作为 forEach 的入参函数，也可以接收[一些其他参数]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/forEach )。 
+forEach 为数组中的每个元素调用了这个函数，并总是将这单个项作为参数传递。 作为 forEach 的入参函数，也可以接收[一些其他参数](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/forEach)。 
 
 <!-- In the previous example, a new item was added to the array using the method [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push). When using React, techniques from functional programming are often used. One characteristic of the functional programming paradigm is the use of [immutable](https://en.wikipedia.org/wiki/Immutable_object) data structures. In React code, it is preferable to use the method [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), which does not add the item to the array, but creates a new array in which the content of the old array and the new item are both included. -->
 
-在前面的示例中，使用了[ push ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/push )方法将一个新元素添加到数组中。 在使用 React 时，经常使用函数式编程的技巧。 函数编程范型的一个特点，就是使用[不可变的]( https://en.wikipedia.org/wiki/immutable_object )数据结构。 在React代码中，最好使用[ concat ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/concat )方法 ，因为它不向数组中添加元素，而是创建一个新数组，新数组中包含了旧数组和新的元素。
+在前面的示例中，使用了[push](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/push)方法将一个新元素添加到数组中。 在使用 React 时，经常使用函数式编程的技巧。 函数编程范型的一个特点，就是使用[不可变的](https://en.wikipedia.org/wiki/immutable_object)数据结构。 在React代码中，最好使用[concat](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/concat)方法 ，因为它不向数组中添加元素，而是创建一个新数组，新数组中包含了旧数组和新的元素。
 
 ```js
 const t = [1, -1, 3]
@@ -128,7 +128,7 @@ console.log(t2) // [1, -1, 3, 5] is printed
  _t.concat(5)_ 这种方法调用不会向旧数组添加新的元素，而是直接返回一个新数组，该数组除了包含旧数组的元素外，还包含新的元素。
 
 <!-- There are plenty of useful methods defined for arrays. Let's look at a short example of using the [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) method. -->
-数组中定义了许多有用的方法，让我们来看一个使用[ map ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/map )方法的简短示例。
+数组中定义了许多有用的方法，让我们来看一个使用[map](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/map)方法的简短示例。
 
 ```js
 const t = [1, 2, 3]
@@ -154,7 +154,7 @@ console.log(m2)
 
 <!-- Here an array filled with integer values is transformed into an array containing strings of HTML using the map method. In [part2](/zh/part2) of this course, we will see that map is used quite frequently in React. -->
 
-这个例子使用 map 方法将整数值的数组转换为了包含 HTML 字符串的数组。 在本课程的[ 第二章](/zh/ part2)中，我们将看到 map 在 React 中使用得相当频繁。
+这个例子使用 map 方法将整数值的数组转换为了包含 HTML 字符串的数组。 在本课程的[第二章](/zh/ part2)中，我们将看到 map 在 React 中使用得相当频繁。
 
 <!-- Individual items of an array are easy to assign to variables with the help of the [destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment). -->
 
@@ -177,7 +177,7 @@ console.log(rest)          // [3, 4 ,5] is printed
 【对象】
 <!-- There are a few different ways of defining objects in Javascript. One very common method is using [object literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Object_literals), which happens by listing its properties within braces: -->
 
-在 Javascript 中，定义对象有几种不同的方式。 一个非常常见的方法是使用[对象字面量]( https://developer.mozilla.org/en-us/docs/web/javascript/guide/grammar_and_types#object_literals ) ，就是通过在大括号中列出它的属性来实现的:
+在 Javascript 中，定义对象有几种不同的方式。 一个非常常见的方法是使用[对象字面量](https://developer.mozilla.org/en-us/docs/web/javascript/guide/grammar_and_types#object_literals) ，就是通过在大括号中列出它的属性来实现的:
 
 ```js
 const object1 = {
@@ -293,7 +293,7 @@ const tSquared = t.map(p => p * p)
 这个箭头函数是几年前随 [ES6](http://es6-features.org/) 一起添加到 Javascript 中。 在此之前，定义函数的唯一方法是使用关键字 _function_。
 
 <!-- There are two ways by which the function can be referenced; one is giving a name in a [function declaration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function). -->
-有两种方法可定义函数function; 一种是在[函数声明]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/statements/function )中给一个名字。
+有两种方法可定义函数function; 一种是在[函数声明](https://developer.mozilla.org/en-us/docs/web/javascript/reference/statements/function)中给一个名字。
 
 ```js
 function product(a, b) {
@@ -306,7 +306,7 @@ const result = product(2, 6)
 
 <!--The other way to define the function is using a [function expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function). In this case there is no need to give the function a name and the definition may reside among the rest of the code:-->
 
-另一种定义函数的方法是使用[函数表达式]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/operators/function )。 在这种情况下，没有必要为函数命名，定义可以放在代码的其它位置: 
+另一种定义函数的方法是使用[函数表达式](https://developer.mozilla.org/en-us/docs/web/javascript/reference/operators/function)。 在这种情况下，没有必要为函数命名，定义可以放在代码的其它位置: 
 
 ```js
 const average = function(a, b) {
@@ -557,7 +557,7 @@ referenceToGreet() // prints only hello, my name is
 
 <!-- When calling the method through a reference the method has lost knowledge of what was the original _this_. Contrary to other languages, in Javascript the value of [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) is defined based on <i>how the method is called</i>. When calling the method through a reference the value of _this_ becomes the so-called [global object](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) and the end result is often not what the software developer had originally intended. -->
 
-当通过引用调用referenceToGreet() 方法时，该方法已经不认识原始的this是什么了。 与其他语言相反，在 Javascript 中，[ this ]( https://developer.mozilla.org/en-us/docs/web/Javascript/reference/operators/this )的值是根据 <i>方法如何调用</i>  来定义的。 当通过引用调用该方法时， _this_ 的值就变成了所谓的[全局对象]( https://developer.mozilla.org/en-us/docs/glossary/global_object ) ，而最终结果往往不是软件开发人员设想的那样。
+当通过引用调用referenceToGreet() 方法时，该方法已经不认识原始的this是什么了。 与其他语言相反，在 Javascript 中，[this](https://developer.mozilla.org/en-us/docs/web/Javascript/reference/operators/this)的值是根据 <i>方法如何调用</i>  来定义的。 当通过引用调用该方法时， _this_ 的值就变成了所谓的[全局对象](https://developer.mozilla.org/en-us/docs/glossary/global_object) ，而最终结果往往不是软件开发人员设想的那样。
 
 <!-- Losing track of _this_ when writing Javascript code brings forth a few potential issues. Situations often arise where React or Node (or more specifically the Javascript engine of the web browser) needs to call some method in an object that the developer has defined. However, in this course we avoid issues by using the "this-less" Javascript. -->
 
@@ -565,7 +565,7 @@ referenceToGreet() // prints only hello, my name is
 
 <!-- One situation leading to the disappearance of _this_ arises when, e.g. we ask Arto to greet in one second using the [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) method. -->
 
-一种消除“this”所引起的问题的一种方法就是，利用[ setTimeout ]( https://developer.mozilla.org/en-us/docs/web/api/windoworworkerglobalscope/setTimeout )方法，让arto对象1秒钟后调用greet。
+一种消除“this”所引起的问题的一种方法就是，利用[setTimeout](https://developer.mozilla.org/en-us/docs/web/api/windoworworkerglobalscope/setTimeout)方法，让arto对象1秒钟后调用greet。
 
 ```js
 const arto = {
@@ -582,7 +582,7 @@ setTimeout(arto.greet, 1000)  // highlight-line
 在 Javascript 中，this 的值是根据方法的调用方式来定义的。 当 setTimeout 使用该方法时，是Javascript引擎在调用该方法，此时的this是指向的Timeout 对象。
 
 <!-- There are several mechanisms by which the original _this_ can be preserved. One of these is using a method called [bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind): -->
-有几种机制可以保留这种原始的 this 。 其中一个是使用[ bind ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/function/bind )方法:
+有几种机制可以保留这种原始的 this 。 其中一个是使用[bind](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/function/bind)方法:
 
 ```js
 setTimeout(arto.greet.bind(arto), 1000)
@@ -592,7 +592,7 @@ setTimeout(arto.greet.bind(arto), 1000)
 命令 <em>arto.greet.bind(arto)</em> 创建了一个新函数，它将 this 绑定指向到了 Arto，这与方法的调用位置和方式无关。
 
 <!-- Using [arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) it is possible to solve some of the problems related to _this_. They should not, however, be used as methods for objects because then _this_ does not work at all. We will come back later to the behavior of _this_ in relation to arrow functions. -->
-使用[箭头函数]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/functions/arrow_functions )可以解决与 _this_相关的一系列问题。 但是，它不能当做对象的方法来使用，因为那样的话this就不起作用了。 稍后我们将回到_this_与箭头函数的关系。
+使用[箭头函数](https://developer.mozilla.org/en-us/docs/web/javascript/reference/functions/arrow_functions)可以解决与 _this_相关的一系列问题。 但是，它不能当做对象的方法来使用，因为那样的话this就不起作用了。 稍后我们将回到_this_与箭头函数的关系。
 
 <!-- If you want to gain a better understanding of how _this_ works in Javascript, the internet is full of material about the topic, e.g. the screen cast series [Understand JavaScript's this Keyword in Depth](https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth) by [egghead.io](https://egghead.io) is highly recommended! -->
 如果你想更好地理解 Javascript 的工作原理，互联网上充满了关于这个主题的材料，例如 [egghead.io](https://egghead.io)的一系列[Understand JavaScript's this Keyword in Depth](https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth)短视频，强烈推荐！
@@ -600,7 +600,7 @@ setTimeout(arto.greet.bind(arto), 1000)
 ### Classes
 【类】
 <!-- As mentioned previously, there is no class mechanism like the ones in object-oriented programming languages. There are, however, features in Javascript which make "simulating" object-oriented [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) possible. -->
-正如前面提到的，Javascript 中并没有像面向对象程序语言中的类机制。 然而，Javascript 中的一些新特性使得它能够“模拟”面向对象中的[类]( https://developer.mozilla.org/en-us/docs/web/Javascript/reference/classes )。
+正如前面提到的，Javascript 中并没有像面向对象程序语言中的类机制。 然而，Javascript 中的一些新特性使得它能够“模拟”面向对象中的[类](https://developer.mozilla.org/en-us/docs/web/Javascript/reference/classes)。
 
 <!-- Let's take a quick look at the <i>class syntax</i> that was introduced into Javascript along with ES6, which substantially simplifies the definition of classes (or class-like things) in Javascript. -->
 让我们快速看一下与 ES6一起引入到 Javascript 中的<i>类语法</i>，它在很大程度上简化了 Javascript 中的类(或者说像是类)的定义。
@@ -628,13 +628,13 @@ janja.greet()
 
 <!-- When it comes to syntax the classes and the objects created from them are very reminiscent of Java classes and objects. Their behavior is also quite similar to Java objects. At the core they are still objects based on Javascript's [prototype inheritance](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance). The type of both objects is actually _Object_, since Javascript essentially only defines the types [Boolean, Null, Undefined, Number, String, Symbol, and Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures). -->
 
-在语法方面，类以及由它们创建的对象非常类似于 Java 的类和对象。 它们的行为也非常类似于 Java 对象。 但在本质上，它们仍然是基于 Javascript 的[原型继承]( https://developer.mozilla.org/en-us/docs/learn/Javascript/objects/inheritance  / 代理)的对象。 这两个对象的类型实际上都是 Object，因为 Javascript 实质上只定义了[ Boolean，Null，Undefined，Number，String，Symbol，以及 Object ]( https://developer.mozilla.org/en-us/docs/web/Javascript/data_structures )几种类型。
+在语法方面，类以及由它们创建的对象非常类似于 Java 的类和对象。 它们的行为也非常类似于 Java 对象。 但在本质上，它们仍然是基于 Javascript 的[原型继承](https://developer.mozilla.org/en-us/docs/learn/Javascript/objects/inheritance  / 代理)的对象。 这两个对象的类型实际上都是 Object，因为 Javascript 实质上只定义了[Boolean，Null，Undefined，Number，String，Symbol，以及 Object](https://developer.mozilla.org/en-us/docs/web/Javascript/data_structures)几种类型。
 
 <!-- Introduction of the class syntax is a controversial addition, e.g. check out [Not Awesome: ES6 Classes](https://github.com/petsel/not-awesome-es6-classes) or [Is “Class” In ES6 The New “Bad” Part?](https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65) -->
 类语法的引入是一个有争议的新特性，例如[Not Awesome: ES6 Classes](https://github.com/petsel/not-awesome-es6-classes) 或者[Is “Class” In ES6 The New “Bad” Part?](https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65)这两篇文章所讨论的。
 
 <!-- The ES6 class syntax is used a lot in "old" React and also in Node.js hence an understanding of it is beneficial even in this course. But since we are using the new [hook](https://reactjs.org/docs/hooks-intro.html) feature of React throughout this course we have no concrete use for Javascript's class syntax. -->
-ES6的类语法在“老的” React 和 Node.js 中被广泛使用，因此即使在本课程中，对它有所了解也是有益的。 但是因为我们在整个课程中都使用了 React 的新的[ hook ]( https://reactjs.org/docs/hooks-intro.html )特性，所以我们没有具体使用 Javascript 的类语法。 
+ES6的类语法在“老的” React 和 Node.js 中被广泛使用，因此即使在本课程中，对它有所了解也是有益的。 但是因为我们在整个课程中都使用了 React 的新的[hook](https://reactjs.org/docs/hooks-intro.html)特性，所以我们没有具体使用 Javascript 的类语法。 
 
 ### Javascript materials
 【Javascript 教材】
@@ -642,10 +642,10 @@ ES6的类语法在“老的” React 和 Node.js 中被广泛使用，因此即�
 互联网上的 Javascript 指南既有好的，也有不好的。 这个页面上大多数与 Javascript 特性相关的链接都参考了 Mozilla 的 Javascript 指南[Mozilla's Javascript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript)。
 
 <!-- It is highly recommended to immediately read [A re-introduction to JavaScript (JS tutorial)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript) on Mozillas website. -->
-强烈建议你立即在 Mozillas 网站上阅读[ 重新认识JavaScript(JS 教程)]( https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript)。
+强烈建议你立即在 Mozillas 网站上阅读[重新认识JavaScript(JS 教程)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript)。
 
 <!-- If you wish to get to know Javascript deeply there is a great free book series on the internet called [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS). -->
-如果你想深入了解 Javascript，互联网上有一个很棒的免费书系列叫做[ You-Dont-Know-JS ]( https://github.com/getify/You-Dont-Know-JS )。
+如果你想深入了解 Javascript，互联网上有一个很棒的免费书系列叫做[You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS)。
 
 <!-- [egghead.io](https://egghead.io) has plenty of quality screencasts on Javascript, React, and other interesting topics. Unfortunately, some of the material is behind a paywall. -->
 [egghead.io](https://egghead.io) 上有大量关于 Javascript、 React 及其他有趣主题的高质量短视频。不幸的是，有些材料是付费后才能看的。

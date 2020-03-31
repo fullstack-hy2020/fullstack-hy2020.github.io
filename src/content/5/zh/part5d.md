@@ -12,12 +12,12 @@ lang: zh
 
 
 <!-- Next we will look into one way to test the [system as a whole](https://en.wikipedia.org/wiki/System_testing) using <i>End to End</i> (E2E) tests. -->
-接下来，我们将研究一种使用端到端<i>End to End</i> (E2E)测试[系统作为一个整体]( https://en.wikipedia.org/wiki/system_testing )的方法。
+接下来，我们将研究一种使用端到端<i>End to End</i> (E2E)测试[系统作为一个整体](https://en.wikipedia.org/wiki/system_testing)的方法。
 
 
 
 <!-- We can do E2E testing of an web application using a browser and a testing library. There are multiple libraries available, for example [Selenium](http://www.seleniumhq.org/) which can be used with almost any browser.  -->
-我们可以使用浏览器和测试库对 web 应用进行 E2E 测试。 有多个库可用，例如[ Selenium ]( http://www.seleniumhq.org/ ) ，几乎可以用于任何浏览器。
+我们可以使用浏览器和测试库对 web 应用进行 E2E 测试。 有多个库可用，例如[Selenium](http://www.seleniumhq.org/) ，几乎可以用于任何浏览器。
 
 <!-- Another browser option are so called [headless browsers](https://en.wikipedia.org/wiki/Headless_browser), which are browsers with no graphical user interface.  -->
 另一个浏览器选项是所谓的[headless browsers](https://en.wikipedia.org/wiki/Headless_browser) ，这是一种没有图形用户界面的浏览器。
@@ -33,10 +33,10 @@ E2e 测试可能是最有用的一类测试，因为它们测试系统的界面�
 
 
 <!-- They do some drawbacks too. Configuring E2E tests is more challenging than unit- or integration tests. They also tend to be quite slow, and with a large system their execution time can be minutes, even hours. This is bad for development, because during coding it is beneficial to be able to run tests as often as possible in case of code [regressions](https://en.wikipedia.org/wiki/Regression_testing). -->
-它们也有一些缺点。 配置 E2E 测试比单元测试或集成测试更具挑战性。 它们也往往非常慢，对于一个大型系统，它们的执行时间可能是几分钟，甚至几小时。 这对开发是不利的，因为在编码期间，如果遇到代码[回归]( https://en.wikipedia.org/wiki/regression_testing ) ，能够尽可能多地运行测试是有益的。
+它们也有一些缺点。 配置 E2E 测试比单元测试或集成测试更具挑战性。 它们也往往非常慢，对于一个大型系统，它们的执行时间可能是几分钟，甚至几小时。 这对开发是不利的，因为在编码期间，如果遇到代码[回归](https://en.wikipedia.org/wiki/regression_testing) ，能够尽可能多地运行测试是有益的。
 
 <!-- E2E tests can also be [flaky](https://hackernoon.com/flaky-tests-a-war-that-never-ends-9aa32fdef359).  -->
-E2e 测试也可能是[片状的]( https://hackernoon.com/flaky-tests-a-war-that-never-ends-9aa32fdef359)。 
+E2e 测试也可能是[片状的](https://hackernoon.com/flaky-tests-a-war-that-never-ends-9aa32fdef359)。 
 <!-- Some tests might pass one time and fail another, even if the code does not change at all.  -->
 有些测试可能一次通过，另一次失败，即使代码根本没有改变。
 
@@ -161,9 +161,9 @@ Cypress从[Mocha](https://mochajs.org/)测试库中借用了这些部件，并�
 
 
 <!-- [cy.visit](https://docs.cypress.io/api/commands/visit.html) and [cy.contains](https://docs.cypress.io/api/commands/contains.html) are Cypress commands, and their purpose is quite obvious. -->
-[ cy.visit ]( https://docs.Cypress.io/api/commands/visit.html )和[ cy.contains ]( https://docs.Cypress.io/api/commands/contains.html )是 Cypress 命令，它们的用途非常明显。
+[cy.visit](https://docs.Cypress.io/api/commands/visit.html)和[cy.contains](https://docs.Cypress.io/api/commands/contains.html)是 Cypress 命令，它们的用途非常明显。
 <!-- [cy.visit](https://docs.cypress.io/api/commands/visit.html) opens the web address given to it as a parameter on the browser used by the test. [cy.contains](https://docs.cypress.io/api/commands/contains.html) searches for the string it received as a parameter from the page.  -->
-[ cy.visit ]( https://docs.cypress.io/api/commands/visit.html )在测试使用的浏览器上打开给它的网址作为参数。 [ cy.contains ]( https://docs.cypress.io/api/commands/contains.html )搜索作为页面参数接收的字符串。
+[cy.visit](https://docs.cypress.io/api/commands/visit.html)在测试使用的浏览器上打开给它的网址作为参数。 [cy.contains](https://docs.cypress.io/api/commands/contains.html)搜索作为页面参数接收的字符串。
 
 
 
@@ -183,7 +183,7 @@ describe('Note app', () => { // highlight-line
 
 
 <!-- However, Mocha [recommends](https://mochajs.org/#arrow-functions) that arrow functions are not used, because they might cause some issues in certain situations.  -->
-然而，Mocha [建议]( https://mochajs.org/#arrow-functions )不要使用箭头函数，因为它们在某些情况下可能会导致一些问题。
+然而，Mocha [建议](https://mochajs.org/#arrow-functions)不要使用箭头函数，因为它们在某些情况下可能会导致一些问题。
 
 
 <!-- If <i>cy.contains</i> does not find the text is it searching for, the test does not pass.  -->
@@ -246,7 +246,7 @@ describe('Note app',  function() {
 
 
 <!-- The test first searches for the login button by its text, and clicks the button with the command [cy.click](https://docs.cypress.io/api/commands/click.html#Syntax). -->
-测试首先通过文本搜索登录按钮，然后用命令[ cy.click ]( https://docs.cypress.io/api/commands/click.html#syntax )单击该按钮。
+测试首先通过文本搜索登录按钮，然后用命令[cy.click](https://docs.cypress.io/api/commands/click.html#syntax)单击该按钮。
 
 
 
@@ -287,7 +287,7 @@ describe('Note app', function() {
 
 
 <!-- We can access the first and the last input field on the page, and write to them with the command [cy.type](https://docs.cypress.io/api/commands/type.html#Syntax) like so:  -->
-我们可以访问页面上的第一个和最后一个输入字段，并使用命令[ cy.type ]( https://docs.cypress.io/api/commands/type.html#syntax 文件夹)向它们写入内容，如下所示:
+我们可以访问页面上的第一个和最后一个输入字段，并使用命令[cy.type](https://docs.cypress.io/api/commands/type.html#syntax 文件夹)向它们写入内容，如下所示:
 
 ```js
 it('user can login', function () {
@@ -371,7 +371,7 @@ describe('Note app',  function() {
 
 
 <!-- Note that the CSS [id-selector](https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors) is #, so if we want to search for an element with the id <i>username</i> the CSS selector is <i>#username</i>. -->
-注意 CSS [ id-selector ]( https://developer.mozilla.org/en-us/docs/web/CSS/id_selectors )是 # ，所以如果我们想搜索 id 是 <i>username</i> 的元素，CSS 选择器是<i># username</i>。
+注意 CSS [id-selector](https://developer.mozilla.org/en-us/docs/web/CSS/id_selectors)是 # ，所以如果我们想搜索 id 是 <i>username</i> 的元素，CSS 选择器是<i># username</i>。
 
 ### Some things to note
 【有些事情需要注意】
@@ -399,7 +399,7 @@ cy.get('#login-button').click()
 
 
 <!-- If we search for a button by its text, [cy.contains](https://docs.cypress.io/api/commands/contains.html#Syntax) will return the first of them, or the one opening the login form.  -->
-如果我们通过文本搜索按钮，[ cy.contains ]( https://docs.cypress.io/api/commands/contains.html#syntax )将返回第一个按钮，或者打开登录表单的按钮。
+如果我们通过文本搜索按钮，[cy.contains](https://docs.cypress.io/api/commands/contains.html#syntax)将返回第一个按钮，或者打开登录表单的按钮。
 <!-- This will happen even if the button is not visible.  -->
 即使按钮不可见，也会发生这种情况。
 <!-- Because of this we gave the submit button id <i>login-button</i> we can use to access it. -->
@@ -611,7 +611,7 @@ module.exports = app
 
 
 <!-- The modified backend code can be found from [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1) branch <i>part5-1</i>. -->
-修改后的后端代码可以在[ github ]( https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1)分支<i>part5-1</i> 中找到。
+修改后的后端代码可以在[github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1)分支<i>part5-1</i> 中找到。
 
 
 
@@ -655,7 +655,7 @@ describe('Note app', function() {
 
 
 <!-- During the formatting the test does HTTP requests to the backend with [cy.request](https://docs.cypress.io/api/commands/request.html). -->
-在对测试进行格式化时，使用[ cy.request ]( https://docs.cypress.io/api/commands/request.html )对后端进行 HTTP 请求。
+在对测试进行格式化时，使用[cy.request](https://docs.cypress.io/api/commands/request.html)对后端进行 HTTP 请求。
 
 
 
@@ -727,7 +727,7 @@ describe('Note app', function() {
 
 
 <!-- The tests and the current frontend code can be found from [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9) branch <i>part5-9</i>. -->
-测试和当前的前端代码可以从[ github ]( https://github.com/fullstack-hy2020/part2-notes/tree/part5-9)分支<i>part5-9</i> 中找到。
+测试和当前的前端代码可以从[github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9)分支<i>part5-9</i> 中找到。
 
 ### Failed login test
 【登录测试失败】
@@ -765,7 +765,7 @@ describe('Note app', function() {
 
 
 <!-- The test uses [cy.contains](https://docs.cypress.io/api/commands/contains.html#Syntax) to ensure that the application prints an error message.  -->
-该测试使用[ cy.contains ]( https://docs.cypress.io/api/commands/contains.html#syntax )来确保应用输出错误消息。
+该测试使用[cy.contains](https://docs.cypress.io/api/commands/contains.html#syntax)来确保应用输出错误消息。
 
 
 
@@ -803,9 +803,9 @@ it('login fails with wrong password', function() {
 
 
 <!-- First we use [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) to search for a component with the CSS class <i>error</i>. Then we check that the error message can be found from this component.  -->
-首先，我们使用[ cy.get ]( https://docs.cypress.io/api/commands/get.html#syntax )来搜索带有 CSS 类<i>error</i> 的组件。 然后我们检查是否可以从这个组件中找到错误消息。
+首先，我们使用[cy.get](https://docs.cypress.io/api/commands/get.html#syntax)来搜索带有 CSS 类<i>error</i> 的组件。 然后我们检查是否可以从这个组件中找到错误消息。
 <!-- Note that the [CSS class selector](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors) starts with a full stop, so the selector for the class <i>error</i> is <i>.error</i>. -->
-注意，[ CSS 类选择器]( https://developer.mozilla.org/en-us/docs/web/CSS/class_selectors )以句号开始，所以类<i>error</i> 的选择器是  <i>.error</i>。
+注意，[CSS 类选择器](https://developer.mozilla.org/en-us/docs/web/CSS/class_selectors)以句号开始，所以类<i>error</i> 的选择器是  <i>.error</i>。
 
 
 
@@ -848,12 +848,12 @@ it('login fails with wrong password', function() {
 
 
 <!-- Cypress requires the colors to be given as [rgb](https://rgbcolorcode.com/color/red). -->
-Cypress 需要将颜色设置为[ rgb ]( https://rgbcolorcode.com/color/red )。 
+Cypress 需要将颜色设置为[rgb](https://rgbcolorcode.com/color/red)。 
 
 
 
 <!-- Because all tests are for the same component we accessed using [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax), we can chain them using [and](https://docs.cypress.io/api/commands/and.html). -->
-因为所有测试都是针对我们使用[ cy.get ]( https://docs.cypress.io/api/commands/get.html#syntax )访问的同一个组件，所以我们可以使用[and]( https://docs.cypress.io/api/commands/and.html )链接它们。
+因为所有测试都是针对我们使用[cy.get](https://docs.cypress.io/api/commands/get.html#syntax)访问的同一个组件，所以我们可以使用[and](https://docs.cypress.io/api/commands/and.html)链接它们。
 
 ```js
 it('login fails with wrong password', function() {
@@ -942,9 +942,9 @@ describe('Note app', function() {
 
 
 <!-- The Cypress documentation gives us the following advice: [Fully test the login flow – but only once!](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Logging-in).  -->
-Cypress 文档给了我们如下建议: [完全测试登录流程——但只有一次! ]( https://docs.Cypress.io/guides/getting-started/testing-your-app.html#logging-in )。 
+Cypress 文档给了我们如下建议: [完全测试登录流程——但只有一次!](https://docs.Cypress.io/guides/getting-started/testing-your-app.html#logging-in)。 
 <!-- So instead of logging in a user using the form in the <i>beforeEach</i> block, Cypress recommends that we [bypass the UI](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI) and do a HTTP request to the backend to log in. The reason for this is, that logging in with a HTTP request is much faster than filling a form.  -->
-因此，Cypress 建议我们不要使用<i>beforeEach</i> 块中的表单登录用户，而是[绕过 UI ]( https://docs.Cypress.io/guides/getting-started/testing-your-app.html#bypassing-your-UI ) ，对后端执行 HTTP 请求以登录。 原因是，使用 HTTP 请求登录要比填写表单快得多。
+因此，Cypress 建议我们不要使用<i>beforeEach</i> 块中的表单登录用户，而是[绕过 UI](https://docs.Cypress.io/guides/getting-started/testing-your-app.html#bypassing-your-UI) ，对后端执行 HTTP 请求以登录。 原因是，使用 HTTP 请求登录要比填写表单快得多。
 
 
 
@@ -979,7 +979,7 @@ describe('when logged in', function() {
 
 
 <!-- We can access the response to a [cy.request](https://docs.cypress.io/api/commands/request.html) with the _then_ method.  Under the hood <i>cy.request</i>, like all Cypress commands, are [promises](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Commands-Are-Promises). -->
-我们可以使用 then 方法访问对[ cy.request ]( https://docs.cypress.io/api/commands/request.html )的响应。 在底层，<i>cy.request</i>和所有 Cypress 命令一样，都是[ promises ]( https://docs.Cypress.io/guides/core-concepts/introduction-to-Cypress.html#commands-are-promises )。
+我们可以使用 then 方法访问对[cy.request](https://docs.cypress.io/api/commands/request.html)的响应。 在底层，<i>cy.request</i>和所有 Cypress 命令一样，都是[promises](https://docs.Cypress.io/guides/core-concepts/introduction-to-Cypress.html#commands-are-promises)。
 <!-- The callback function saves the details of a logged in user to localStorage, and reloads the page.  -->
 回调函数将登录用户的详细信息保存到 localStorage，然后重新加载页面。
 <!-- Now there is no difference to user logging in with the login form.  -->
@@ -990,7 +990,7 @@ describe('when logged in', function() {
 <!-- If and when we write new tests to our application, we have to use the login code in multiple places. -->
 如果在应用中编写新的测试，我们必须在多个地方使用登录代码。
 <!-- We should make it a [custom command](https://docs.cypress.io/api/cypress-api/custom-commands.html). -->
-我们应该使它成为一个[自定义命令]( https://docs.cypress.io/api/cypress-api/custom-commands.html)。
+我们应该使它成为一个[自定义命令](https://docs.cypress.io/api/cypress-api/custom-commands.html)。
 
 
 
@@ -1124,7 +1124,7 @@ describe('Note app', function() {
 
 
 <!-- The tests and the frontend code can be found from [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-10) branch <i>part5-10</i>. -->
-测试和前端代码可以从[ github ]( https://github.com/fullstack-hy2020/part2-notes/tree/part5-10)分支<i>part5-10</i> 中找到。
+测试和前端代码可以从[github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-10)分支<i>part5-10</i> 中找到。
 
 ### Changing the importance of a note
 【改变便笺的重要性】
@@ -1249,13 +1249,13 @@ it('other of those can be made important', function () {
 
 
 <!-- In the first line, we use the [parent](https://docs.cypress.io/api/commands/parent.htm) command to access the parent element of the element containing <i>second note</i> and find the button from within it.  -->
-在第一行中，我们使用[ parent ]( https://docs.cypress.io/api/commands/parent.htm )命令来访问包含<i>second note</i> 的元素的父元素，并在其中找到按钮。
+在第一行中，我们使用[parent](https://docs.cypress.io/api/commands/parent.htm)命令来访问包含<i>second note</i> 的元素的父元素，并在其中找到按钮。
 
 <!-- Then we click the button, and check that the text on it changes.  -->
 然后我们点击按钮，检查上面的文本是否改变。
 
 <!-- Note that we use the command [find](https://docs.cypress.io/api/commands/find.html#Syntax) to search for the button. We cannot use [cy.get](https://docs.cypress.io/api/commands/get.html) here, because it always searches from the <i>whole</i> page and would return all 5 buttons on the page.  -->
-注意，我们使用命令[ find ]( https://docs.cypress.io/api/commands/find.html#syntax )来搜索按钮。 我们不能在这里使用[ cy.get ]( https://docs.cypress.io/api/commands/get.html ) ，因为它总是从 整个页面进行搜索，并返回页面上的所有5个按钮。
+注意，我们使用命令[find](https://docs.cypress.io/api/commands/find.html#syntax)来搜索按钮。 我们不能在这里使用[cy.get](https://docs.cypress.io/api/commands/get.html) ，因为它总是从 整个页面进行搜索，并返回页面上的所有5个按钮。
 
 
 
@@ -1264,7 +1264,7 @@ it('other of those can be made important', function () {
 
 
 <!-- In these kinds of situations, it is possible to use the [as](https://docs.cypress.io/api/commands/as.html) command: -->
-在这种情况下，可以使用[ as ]( https://docs.cypress.io/api/commands/as.html )命令:
+在这种情况下，可以使用[as](https://docs.cypress.io/api/commands/as.html)命令:
 
 ```js
 it.only('other of those can be made important', function () {
@@ -1308,7 +1308,7 @@ Cypress 命令总是返回未定义的值，因此上面代码中的_button.clic
 
 
 <!-- Cypress commands are <i>like promises</i>, so if we want to access their return values, we have to do it using the [then](https://docs.cypress.io/api/commands/then.html) command.  -->
-Cypress 命令是<i>类似 promises</i>，所以如果我们想访问它们的返回值，我们必须使用[ then ]( https://docs.Cypress.io/api/commands/then.html )命令。 
+Cypress 命令是<i>类似 promises</i>，所以如果我们想访问它们的返回值，我们必须使用[then](https://docs.Cypress.io/api/commands/then.html)命令。 
 <!-- For example, the following test would print the number of buttons in the application, and click the first button:  -->
 例如，下面的测试将打印应用中的按钮数，然后单击第一个按钮:
 
@@ -1324,7 +1324,7 @@ it('then example', function() {
 
 
 <!-- Stopping the test execution with the debugger is [possible](https://docs.cypress.io/api/commands/debug.html). The debugger starts only if Cypress test runner's developer console is open.  -->
-使用调试器停止测试执行是[可能的]( https://docs.cypress.io/api/commands/debug.html )。 只有当 Cypress 测试运行程序的开发人员控制台打开时，调试器才会启动。
+使用调试器停止测试执行是[可能的](https://docs.cypress.io/api/commands/debug.html)。 只有当 Cypress 测试运行程序的开发人员控制台打开时，调试器才会启动。
 
 
 
@@ -1340,7 +1340,7 @@ it('then example', function() {
 <!-- So far we have run our Cypress tests using the graphical test runner. -->
 到目前为止，我们已经使用图形化的测试运行了 Cypress 测试。
 <!-- It is also possible to run them [from the command line](https://docs.cypress.io/guides/guides/command-line.html). We just have to add an npm script for it: -->
-也可以[从命令行]( https://docs.cypress.io/guides/guides/command-line.html )运行它们。 我们只需要为它添加一个 npm 脚本:
+也可以[从命令行](https://docs.cypress.io/guides/guides/command-line.html)运行它们。 我们只需要为它添加一个 npm 脚本:
 
 ```js
   "scripts": {
@@ -1369,7 +1369,7 @@ it('then example', function() {
 
 
 <!-- The frontend- and the test code can be found from [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11) branch <i>part5-11</i>. -->
-前端和测试代码可以在[ github ]( https://github.com/fullstack-hy2020/part2-notes/tree/part5-11)分支<i>part5-11</i> 中找到。
+前端和测试代码可以在[github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11)分支<i>part5-11</i> 中找到。
 
 </div>
 
@@ -1384,7 +1384,7 @@ it('then example', function() {
 <!-- The material of this part should be enough to complete the exercises.  -->
 这部分的材料应该足以完成这些练习。
 <!-- You should absolutely also check out the Cypress [documentation](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell). It is propably the best documentation I have ever seen for an open source project.  -->
-你绝对应该看看 Cypress [ 文档 ]( https://docs.Cypress.io/guides/overview/why-Cypress.html#in-a-nutshell 文档)。 这可能是我见过的最好的开源项目文档。
+你绝对应该看看 Cypress [文档](https://docs.Cypress.io/guides/overview/why-Cypress.html#in-a-nutshell 文档)。 这可能是我见过的最好的开源项目文档。
 
 <!-- I especially recommend reading [Introduction to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes), which states -->
 我特别推荐阅读《Cypress 简介》 [Introduction to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes)，其中说到
@@ -1506,7 +1506,7 @@ describe('Blog app', function() {
 先做一个检查，看看博客是否按照喜好排序，最喜欢的博客放最前面。
 
 <!-- This exercise might be a bit trickier. One solution is to find all of the blogs and then compare them in the callback function of a [then](https://docs.cypress.io/api/commands/then.html#DOM-element) command.  -->
-这项工作可能有点棘手。 一个解决方案是找到所有的博客，然后在[ then ]( https://docs.cypress.io/api/commands/then.html#dom-element )命令的回调函数中对它们进行比较。
+这项工作可能有点棘手。 一个解决方案是找到所有的博客，然后在[then](https://docs.cypress.io/api/commands/then.html#dom-element)命令的回调函数中对它们进行比较。
 
 <!-- This was the last exercise of this part, and its time to push your code to github and mark the exercises you completed in the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
 这是本章节的最后一个练习，是时候将您的代码推送到 github，并标记您在[exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中完成的练习。

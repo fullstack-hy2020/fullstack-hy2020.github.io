@@ -246,7 +246,7 @@ const App = () => {
 
 
 <!-- Generally disabling eslint when it throws a warning is not a good idea. Even though the eslint rule in question has caused some [arguments](https://github.com/facebook/create-react-app/issues/6880), we will use the first solution. -->
-通常在 eslint 抛出警告时禁用它不是一个好主意。 尽管所讨论的 eslint 规则引起了一些[争论]( https://github.com/facebook/create-react-app/issues/6880) ，我们将使用第一个解决方案。
+通常在 eslint 抛出警告时禁用它不是一个好主意。 尽管所讨论的 eslint 规则引起了一些[争论](https://github.com/facebook/create-react-app/issues/6880) ，我们将使用第一个解决方案。
 
 
 
@@ -343,7 +343,7 @@ export const createNote = (data) => {
 当应用启动时，从使用 json-server 实现的后端获取轶事。
 
 <!-- As the initial backend data, you can use, e.g. [this](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json). -->
-作为初始的后端数据，你可以使用，例如[ this ]( https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json )。
+作为初始的后端数据，你可以使用，例如[this](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json)。
 
 #### 6.14 Anecdotes and the backend, 步骤2
 <!-- Modify the creation of new anecdotes, such that the anecdotes are stored in the backend. -->
@@ -394,7 +394,7 @@ const NewNote = () => {
 这两个组件将只使用提供给它们的功能作为一个props，而不考虑与服务器的后台通信。
 
 <!-- Now let's install the [redux-thunk](https://github.com/gaearon/redux-thunk)-library, which enables us to create <i>asynchronous actions</i>. Installation is done with the command: -->
-现在让我们安装[ redux-thunk ]( https://github.com/gaearon/redux-thunk )-library，它允许我们创建<i>asynchronous actions</i>:
+现在让我们安装[redux-thunk](https://github.com/gaearon/redux-thunk)-library，它允许我们创建<i>asynchronous actions</i>:
 
 ```js
 npm install --save redux-thunk
@@ -535,7 +535,7 @@ const NewNote = () => {
 ```
 
 <!-- The current state of the code for the application can be found on [github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-4) in the branch <i>part6-4</i>. -->
-应用代码的当前状态可以在分支<i>part6-4</i> 中的[ github ]( https://github.com/fullstack-hy2020/redux-notes/tree/part6-4)上找到。
+应用代码的当前状态可以在分支<i>part6-4</i> 中的[github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-4)上找到。
 
 </div>
 

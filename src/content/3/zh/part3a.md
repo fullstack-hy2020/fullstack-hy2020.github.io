@@ -29,7 +29,7 @@ lang: zh
 
 
 <!-- We had already mentioned [npm](/zh/part2/getting_data_from_server#npm) back in part 2, which is a tool used for managing JavaScript packages. In fact, npm originates from the Node ecosystem. -->
-在第2章节中，我们已经提到了[ npm ](/zh/part2/getting_data_from_server#npm) ，这是一个用于管理 JavaScript 包的工具。 事实上，npm 来源于 Node 生态系统。
+在第2章节中，我们已经提到了[npm](/zh/part2/getting_data_from_server#npm) ，这是一个用于管理 JavaScript 包的工具。 事实上，npm 来源于 Node 生态系统。
 
 <!-- Let's navigate to an appropriate directory, and create a new template for our application with the _npm init_ command. We will answer the questions presented by the utility, and the result will be an automatically generated <i>package.json</i> file at the root of the project, that contains information about the project. -->
 让我们进入到一个合适的目录，并使用_npm init_命令为应用创建一个新模板。 我们将回答该工具提出的问题，结果会在项目根目录下自动生成的<i>package.json</i> 文件，其中包含有关项目的信息。
@@ -427,7 +427,7 @@ response.end(JSON.stringify(notes))
 对于 express，不再需要这样做，因为这种转换是自动的。
 
 <!-- It's worth noting, that [JSON](https://en.wikipedia.org/wiki/JSON) is a string, and not a JavaScript object like the value assigned to _notes_. -->
-值得注意的是，[ JSON ]( https://en.wikipedia.org/wiki/JSON )是一个字符串，而不是像分配给 notes 的值那样的 JavaScript 对象。
+值得注意的是，[JSON](https://en.wikipedia.org/wiki/JSON)是一个字符串，而不是像分配给 notes 的值那样的 JavaScript 对象。
 
 <!-- The experiment shown below illustrates this point: -->
 下面的实验可以说明这一点:
@@ -444,7 +444,7 @@ response.end(JSON.stringify(notes))
 如果我们对应用的代码进行更改，我们必须重新启动应用以查看更改。 我们通过键入 _⌃+C_ 首先关闭应用，然后重新启动应用。 与 React 中方便的工作流程相比，Node就有点麻烦，在 React 中，浏览器会在进行更改后自动重新加载。
 
 <!-- The solution to this problem is [nodemon](https://github.com/remy/nodemon):  -->
-解决这个问题的方法是使用[ nodemon ]( https://github.com/remy/nodemon ) :
+解决这个问题的方法是使用[nodemon](https://github.com/remy/nodemon) :
 
 > <!--<i>nodemon will watch the files in the directory in which nodemon was started, and if any files change, nodemon will automatically restart your node application.</i>-->
 nodemon 将监视启动 nodemon 的目录中的文件，如果任何文件发生更改，nodemon 将自动重启节点应用。  
@@ -523,10 +523,10 @@ npm run dev
 
 ### REST
 <!-- Let's expand our application so that it provides the RESTful HTTP API as [json-server](https://github.com/typicode/json-server#routes). -->
-让我们扩展我们的应用，使它提供像[ json-server ]( https://github.com/typicode/json-server#routes 服务器)那样的 RESTful HTTP API 。
+让我们扩展我们的应用，使它提供像[json-server](https://github.com/typicode/json-server#routes 服务器)那样的 RESTful HTTP API 。
 
 <!-- Representational State Transfer, aka. REST was introduced in 2000 in Roy Fielding's [dissertation](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm). REST is an architectural style meant for building scalable web applications. -->
-Representational State Transfer，又名REST， 是在2000年 Roy Fielding 的[论文]( https://www.ics.uci.edu/~Fielding/pubs/dissertation/rest_arch_style.htm )中引入的。 Rest 是一种架构风格，用于构建可伸缩的 web 应用。 
+Representational State Transfer，又名REST， 是在2000年 Roy Fielding 的[论文](https://www.ics.uci.edu/~Fielding/pubs/dissertation/rest_arch_style.htm)中引入的。 Rest 是一种架构风格，用于构建可伸缩的 web 应用。 
 
 <!-- We are not going to dig into Fielding's definition of REST or spend time pondering about what is and isn't RESTful. Instead, we take a more [narrow view](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) by only concerning ourselves with how RESTful API's are typically understood in web applications. The original definition of REST is in fact not even limited to web applications. -->
 我们不会深入探究 Fielding 对 REST 的定义，也不会花时间思考什么是 RESTful，什么不是 RESTful。 相反，我们只关注web应用对 RESTful API 的典型理解，从而采取了一种更为狭隘的视角 [narrow view](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services)。 Rest 的最初定义实际上并不局限于 web 应用。
@@ -563,22 +563,22 @@ Representational State Transfer，又名REST， 是在2000年 Roy Fielding 的[�
 这就是我们如何粗略地定义 REST 所指的 [统一接口 uniform interface](https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints) ，这意味着一种一致的定义接口的方式，使系统能够进行合作。
 
 <!-- This way of interpreting REST falls under the [second level of RESTful maturity](https://martinfowler.com/articles/richardsonMaturityModel.html) in the Richardson Maturity Model. According to the definition provided by Roy Fielding, we have not actually defined a [REST API](http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven). In fact, a large majority of the world's purported "REST" API's do not meet Fielding's original criteria outlined in his dissertation. -->
-这种解释 REST 的方式在 Richardson Maturity Model 属于[ RESTful 成熟度的第二个层次]( https://martinfowler.com/articles/richardsonmaturitymodel.html )。 根据 Roy Fielding 提供的定义，我们实际上并没有定义一个[ REST API ]( http://Roy.gbiv.com/untangled/2008/REST-apis-must-be-hypertext-driven )。 事实上，世界上大多数所谓的“REST” API都不符合 Fielding 在其论文中概述的原始标准。
+这种解释 REST 的方式在 Richardson Maturity Model 属于[RESTful 成熟度的第二个层次](https://martinfowler.com/articles/richardsonmaturitymodel.html)。 根据 Roy Fielding 提供的定义，我们实际上并没有定义一个[REST API](http://Roy.gbiv.com/untangled/2008/REST-apis-must-be-hypertext-driven)。 事实上，世界上大多数所谓的“REST” API都不符合 Fielding 在其论文中概述的原始标准。
 
 <!-- In some places (see e.g. [Richardson, Ruby: RESTful Web Services](http://shop.oreilly.com/product/9780596529260.do)) you will see our model for a straightforward [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) API, being referred to as an example of [resource oriented architecture](https://en.wikipedia.org/wiki/Resource-oriented_architecture) instead of REST. We will avoid getting stuck arguing semantics and instead return to working on our application. -->
-在某些地方(例如[ Richardson，Ruby: RESTful Web Services ]( http://shop.oreilly.com/product/9780596529260.do )) ，你会看到我们为一个简单的[ CRUD ]( https://en.wikipedia.org/wiki/create,_read,_update_and_delete ) API 建立的模型，这被称为[面向资源架构resource oriented architecture]( https://en.wikipedia.org/wiki/resource-oriented_architecture )的例子，而不是 REST。 我们将避免陷入语义学的争论，而是回到应用的工作中。
+在某些地方(例如[Richardson，Ruby: RESTful Web Services](http://shop.oreilly.com/product/9780596529260.do)) ，你会看到我们为一个简单的[CRUD](https://en.wikipedia.org/wiki/create,_read,_update_and_delete) API 建立的模型，这被称为[面向资源架构resource oriented architecture](https://en.wikipedia.org/wiki/resource-oriented_architecture)的例子，而不是 REST。 我们将避免陷入语义学的争论，而是回到应用的工作中。
 
 
 ### Fetching a single resource
 【获取一个单一资源】
 <!-- Let's expand our application so that it offers a REST interface for operating on individual notes. First let's create a [route](http://expressjs.com/en/guide/routing.html) for fetching a single resource. -->
-让我们扩展我们的应用，以便它提供一个 REST 接口，用于操作单个便笺。 首先，让我们创建一个[ 路由 ]( http://expressjs.com/en/guide/routing.html )来获取单个资源。
+让我们扩展我们的应用，以便它提供一个 REST 接口，用于操作单个便笺。 首先，让我们创建一个[路由](http://expressjs.com/en/guide/routing.html)来获取单个资源。
 
 <!-- The unique address we will use for an individual note is of the form <i>notes/10</i>, where the number at the end refers to the note's unique id number. -->
 我们将为单个便笺使用的唯一地址是 <i>notes/10</i>，其中末尾的数字指的是便笺的唯一 id 号。
 
 <!-- We can define [parameters](http://expressjs.com/en/guide/routing.html#route-parameters) for routes in express by using the colon syntax: -->
-我们可以使用冒号语法为express路由定义[ 参数 ]( http://expressjs.com/en/guide/routing.html#route-parameters ) :
+我们可以使用冒号语法为express路由定义[参数](http://expressjs.com/en/guide/routing.html#route-parameters) :
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -593,7 +593,7 @@ app.get('/api/notes/:id', (request, response) => {
 现在， <code>app.get('/api/notes/:id', ...)</code>将处理所有的 HTTP GET 请求，这些请求的格式是<i>/api/notes/SOMETHING</i>，其中<i>SOMETHING</i> 是任意的字符串。
 
 <!-- The <i>id</i> parameter in the route of a request, can be accessed through the [request](http://expressjs.com/en/api.html#req) object: -->
-请求路由中的<i>id</i> 参数可以通过[ request ]( http://expressjs.com/en/api.html#req )对象访问:
+请求路由中的<i>id</i> 参数可以通过[request](http://expressjs.com/en/api.html#req)对象访问:
 
 ```js
 const id = request.params.id
@@ -659,7 +659,7 @@ app.get('/api/notes/:id', (request, response) => {
 
 
 <!-- Let's fix the issue by changing the id parameter from a string into a [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number): -->
-让我们通过将 id 参数从一个字符串更改为一个[ number ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/number )来解决这个问题:
+让我们通过将 id 参数从一个字符串更改为一个[number](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/number)来解决这个问题:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -691,7 +691,7 @@ app.get('/api/notes/:id', (request, response) => {
 返回的 HTTP状态码还是200，这意味着响应成功了。 <i>content-length</i> 标头的值为0，因为没有将数据与响应一起发送回来，可以从浏览器验证这一点。
 
 <!-- The reason for this behavior is that the _note_ variable is set to _undefined_ if no matching note is found. The situation needs to be handled on the server in a better way. If no note is found, the server should respond with the status code [404 not found](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5) instead of 200. -->
-出现此行为的原因是，如果没有找到匹配的便笺，则将note变量设置为了_undefined_。 需要在服务器上以更好的方式处理这种情况。 如果没有发现任何提示，服务器应该用状态码[404 not found ]( https://www.w3.org/protocols/rfc2616/rfc2616-sec10.html#sec10.4.5)响应，而不是200。
+出现此行为的原因是，如果没有找到匹配的便笺，则将note变量设置为了_undefined_。 需要在服务器上以更好的方式处理这种情况。 如果没有发现任何提示，服务器应该用状态码[404 not found](https://www.w3.org/protocols/rfc2616/rfc2616-sec10.html#sec10.4.5)响应，而不是200。
 
 
 <!-- Let's make the following change to our code: -->
@@ -713,10 +713,10 @@ app.get('/api/notes/:id', (request, response) => {
 ```
 
 <!-- Since no data is attached to the response, we use the [status](http://expressjs.com/en/4x/api.html#res.status) method for setting the status, and the [end](http://expressjs.com/en/4x/api.html#res.end) method for responding to the request without sending any data. -->
-由于响应没有附加任何数据，我们使用[ status ]( http://expressjs.com/en/4x/api.html#res.status )方法来设置状态，并使用[ end ]( http://expressjs.com/en/4x/api.html#res.end )方法来响应request而不发送任何数据。
+由于响应没有附加任何数据，我们使用[status](http://expressjs.com/en/4x/api.html#res.status)方法来设置状态，并使用[end](http://expressjs.com/en/4x/api.html#res.end)方法来响应request而不发送任何数据。
 
 <!-- The if-condition leverages the fact that all JavaScript objects are [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), meaning that they evaluate to true in a comparison operation. However, _undefined_ is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) meaning that it will evaluate to false. -->
-If-condition 基于了这样一个事实，即所有的 JavaScript 对象都是[ truthy ]( https://developer.mozilla.org/en-us/docs/glossary/truthy ) ，这意味着它们在比较操作中被当作 true。 然而，undefined 是 [ falsy ]( https://developer.mozilla.org/en-us/docs/glossary/falsy )，意思是它将评估为 false。 
+If-condition 基于了这样一个事实，即所有的 JavaScript 对象都是[truthy](https://developer.mozilla.org/en-us/docs/glossary/truthy) ，这意味着它们在比较操作中被当作 true。 然而，undefined 是 [falsy](https://developer.mozilla.org/en-us/docs/glossary/falsy)，意思是它将评估为 false。 
 
 <!-- Our application works and sends the error status code if no note is found. However, the application doesn't return anything to show to the user, like web applications normally do when we visit a page that does not exist. We do not actually need to display anything in the browser because REST API's are interfaces that are intended for programmatic use, and the error status code is all that is needed. -->
 我们的应用正常工作，如果没有找到便笺，则发送错误状态代码。 然而，应用不会返回任何东西显示给用户，就像我们 在web 应用访问一个不存在的页面时所做的那样。 我们实际上不需要在浏览器中显示任何内容，因为 REST API 是用于编程使用的接口，只需要错误状态代码就行了。
@@ -738,7 +738,7 @@ app.delete('/api/notes/:id', (request, response) => {
 ```
 
 <!-- If deleting the resource is successful, meaning that the note exists and it is removed, we respond to the request with the status code [204 no content](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.5) and return no data with the response. -->
-如果删除资源成功，这意味着便笺存在并被删除，我们用状态码[204 no content ]( https://www.w3.org/protocols/rfc2616/rfc2616-sec10.html#sec10.2.5)响应请求，并返回没有数据的响应。
+如果删除资源成功，这意味着便笺存在并被删除，我们用状态码[204 no content](https://www.w3.org/protocols/rfc2616/rfc2616-sec10.html#sec10.2.5)响应请求，并返回没有数据的响应。
 
 <!-- There's no consensus on what status code should be returned to a DELETE request if the resource does not exist. Really, the only two options are 204 and 404. For the sake of simplicity our application will respond with 204 in both cases. -->
 如果资源不存在，对于应该向 DELETE 请求返回什么状态代码并没有共识。 实际上，只有204和404两个可选项。 为了简单起见，我们的应用在这两种情况下都将响应204。
@@ -790,10 +790,10 @@ app.delete('/api/notes/:id', (request, response) => {
 ### Receiving data
 【接受数据】
 <!-- Next, let's make it possible to add new notes to the server. Adding a note happens by making an HTTP POST request to the address http://localhost:3001/api/notes, and by sending all the information for the new note in the request [body](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) in the JSON format. -->
-接下来，让我们使向服务器添加新便笺。 通过向地址 HTTP://localhost:3001/api/notes 发送一个 HTTP POST 请求，并以 JSON 格式在请求[body]( https://www.w3.org/protocols/rfc2616/rfc2616-sec7.html#sec7)中发送新便笺的所有信息，就可以添加一个便笺。
+接下来，让我们使向服务器添加新便笺。 通过向地址 HTTP://localhost:3001/api/notes 发送一个 HTTP POST 请求，并以 JSON 格式在请求[body](https://www.w3.org/protocols/rfc2616/rfc2616-sec7.html#sec7)中发送新便笺的所有信息，就可以添加一个便笺。
 
 <!-- In order to access the data easily, we need the help of the express [json-parser](https://expressjs.com/en/api.html), that is taken to use with command _app.use(express.json())_. -->
-为了方便地访问数据，我们需要 express [ json-parser ]( https://expressjs.com/en/api.html )的帮助，它与命令_app.use(express.json())_一起使用。
+为了方便地访问数据，我们需要 express [json-parser](https://expressjs.com/en/api.html)的帮助，它与命令_app.use(express.json())_一起使用。
 
 <!-- Let's activate the json-parser and implement an initial handler for dealing with the HTTP POST requests: -->
 让我们激活 json-parser 并实现一个处理 HTTP POST 请求的初始处理程序:
@@ -881,7 +881,7 @@ app.post('/api/notes', (request, response) => {
 
 
 <!-- We created a new <i>create\_note.rest</i> file for the request. The request is formatted according to the [instructions in the documentation](https://github.com/Huachao/vscode-restclient/blob/master/README.md#usage). -->
-我们为这个请求创建了一个新的<i>create\_note.rest</i>文件，这个请求是根据[文档中的说明]( https://github.com/huachao/vscode-restclient/blob/master/readme.md#usage )格式化的。
+我们为这个请求创建了一个新的<i>create\_note.rest</i>文件，这个请求是根据[文档中的说明](https://github.com/huachao/vscode-restclient/blob/master/readme.md#usage)格式化的。
 
 <!-- One benefit that the REST client has over Postman is that the requests are handily available at the root of the project repository, and they can be distributed to everyone in the development team. Postman also allows users to save requests, but the situation can get quite chaotic especially when you're working on multiple unrelated projects. -->
 Rest 客户端相对于 Postman 的一个好处是，请求可以在项目仓库的根部轻松获得，并且可以分发给开发团队中的每个人。 Postman也允许用户保存请求，但是当你在处理多个不相关的项目时，情况会变得非常混乱。 
@@ -890,7 +890,7 @@ Rest 客户端相对于 Postman 的一个好处是，请求可以在项目仓库
 重要旁注
 >
 ><!--Sometimes when you're debugging, you may want to find out what headers have been set in the HTTP request. One way of accomplishing this is through the [get](http://expressjs.com/en/4x/api.html#req.get) method of the _request_ object, that can be used for getting the value of a single header. The _request_ object also has the <i>headers</i> property, that contains all of the headers of a specific request.-->
-> 有时在进行调试时，您可能希望了解 HTTP 请求中设置了哪些头。 实现这一点的一种方法是通过请求对象的[ get ]( http://expressjs.com/en/4x/api.html#req.get )方法，该方法可用于获取单个头的值。 Request 对象还具有<i>headers</i> 属性，该属性包含特定请求的所有头信息。
+> 有时在进行调试时，您可能希望了解 HTTP 请求中设置了哪些头。 实现这一点的一种方法是通过请求对象的[get](http://expressjs.com/en/4x/api.html#req.get)方法，该方法可用于获取单个头的值。 Request 对象还具有<i>headers</i> 属性，该属性包含特定请求的所有头信息。
 
 > <!--Problems can occur with the VS REST client if you accidentally add an empty line between the top row and the row specifying the HTTP headers. In this situation, the REST client interprets this to mean that all headers are left empty, which leads to the backend server not knowing that the data it has received is in the JSON format.-->
 如果您不小心在指定 HTTP 头的顶行和行之间添加了一个空行，那么 VS REST 客户端可能会出现问题。 在这种情况下，REST 客户端将其解释为所有头都是空的，这导致后端服务器不知道它接收的数据是 JSON 格式的。
@@ -957,7 +957,7 @@ app.post('/api/notes', (request, response) => {
 
 
 <!-- If the received data is missing a value for the <i>content</i> property, the server will respond to the request with the status code [400 bad request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1): -->
-如果接收到的数据缺少<i>content</i> 属性的值，服务器将使用状态码[400 bad request ]( https://www.w3.org/protocols/rfc2616/rfc2616-sec10.html#sec10.4.1)响应请求:
+如果接收到的数据缺少<i>content</i> 属性的值，服务器将使用状态码[400 bad request](https://www.w3.org/protocols/rfc2616/rfc2616-sec10.html#sec10.4.1)响应请求:
 
 ```js
 if (!body.content) {
@@ -992,7 +992,7 @@ important: body.important || false,
 您可以在[this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1)的<i>part3-1</i> 分支中找到我们当前应用的全部代码。
 
 <!-- Notice that the master branch of the repository contains the code from a later version of the application. The code for the current state of the application is specifically in branch [part3-1](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1). -->
-注意，仓库的主分支包含应用的后一个版本的代码。 应用当前状态的代码单独在 branch [ part3-1]( https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1)中。
+注意，仓库的主分支包含应用的后一个版本的代码。 应用当前状态的代码单独在 branch [part3-1](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1)中。
 
 ![](../../images/3/21.png)
 
@@ -1022,7 +1022,7 @@ Math.max(...notes.map(n => n.id))
 ```
 
 <!-- What exactly is happening in that line of code? <em>notes.map(n => n.id)</em> creates a new array that contains all the id's of the notes. [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) returns the maximum value of the numbers that are passed to it. However, <em>notes.map(n => n.id)</em> is an <i>array</i> so it can't directly be given as a parameter to _Math.max_. The array can be transformed into individual numbers by using the "three dot" [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax <em>...</em>. -->
-这行代码中到底发生了什么？  <em>notes.map(n => n.id)</em> 创建一个包含所有便笺 id 的新数组。 [ Math.max ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/Math.max )返回传递给它的数的最大值。 然而，<em>notes.map(n => n.id)</em>  是一个<i>数组</i>，因此它不能直接作为 Math.max 的参数。 数组可以通过使用“ 三个点<em>...</em>”[ 展开]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/operators/spread_syntax )语法 转换为单独的数字。
+这行代码中到底发生了什么？  <em>notes.map(n => n.id)</em> 创建一个包含所有便笺 id 的新数组。 [Math.max](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/Math.max)返回传递给它的数的最大值。 然而，<em>notes.map(n => n.id)</em>  是一个<i>数组</i>，因此它不能直接作为 Math.max 的参数。 数组可以通过使用“ 三个点<em>...</em>”[展开](https://developer.mozilla.org/en-us/docs/web/javascript/reference/operators/spread_syntax)语法 转换为单独的数字。
 
 </div>
 
@@ -1098,7 +1098,7 @@ Math.max(...notes.map(n => n.id))
 扩展后端，以便通过向地址<http://localhost:3001/api/persons> 发送 HTTP POST 请求来添加新的电话簿条目。
 
 <!-- Generate a new id for the phonebook entry with the [Math.random](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random) function. Use a big enough range for your random values so that the likelihood of creating duplicate id's is small. -->
-使用[ Math.random ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/Math.random )函数为电话簿条目生成一个新 id。 使用一个足够大的范围作为您的随机值，以便创建重复 id 的可能性是很小的。
+使用[Math.random](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/Math.random)函数为电话簿条目生成一个新 id。 使用一个足够大的范围作为您的随机值，以便创建重复 id 的可能性是很小的。
 
 
 #### 3.6: Phonebook backend 步骤6
@@ -1129,7 +1129,7 @@ Math.max(...notes.map(n => n.id))
 【关于 HTTP 请求类型】
 
 <!-- [The HTTP standard](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) talks about two properties related to request types, **safety** and **idempotence**. -->
-[ HTTP 标准]( https://www.w3.org/protocols/rfc2616/rfc2616-sec9.html )讨论了与请求类型相关的两个属性，**安全**  和 **幂等性** 。
+[HTTP 标准](https://www.w3.org/protocols/rfc2616/rfc2616-sec9.html)讨论了与请求类型相关的两个属性，**安全**  和 **幂等性** 。
 
 <!-- The HTTP GET request should be <i>safe</i>: -->
 Http GET 请求应该是<i>满足安全性的</i>: 
@@ -1145,7 +1145,7 @@ Http GET 请求应该是<i>满足安全性的</i>:
 
 
 <!-- The HTTP standard also defines the request type [HEAD](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.4), that ought to be safe. In practice HEAD should work exactly like GET but it does not return anything but the status code and response headers. The response body will not be returned when you make a HEAD request. -->
-Http 标准还定义了应该是安全的请求类型[ HEAD ]( https://www.w3.org/protocols/rfc2616/rfc2616-sec9.html#sec9.4)。 实际上，HEAD 应该像 GET 一样工作，但是它只返回状态码和响应头。 当您发出 HEAD 请求时，不会返回响应主体。 
+Http 标准还定义了应该是安全的请求类型[HEAD](https://www.w3.org/protocols/rfc2616/rfc2616-sec9.html#sec9.4)。 实际上，HEAD 应该像 GET 一样工作，但是它只返回状态码和响应头。 当您发出 HEAD 请求时，不会返回响应主体。 
 
 
 <!-- All HTTP requests except POST should be <i>idempotent</i>: -->
@@ -1171,7 +1171,7 @@ Post 是唯一既不是<i>安全性</i> 也不是<i>幂等</i> 的 HTTP 请求�
 ### Middleware
 【中间件】
 <!-- The express [json-parser](https://expressjs.com/en/api.html) we took into use earlier is a so-called [middleware](http://expressjs.com/en/guide/using-middleware.html). -->
-我们之前使用的 express [ json-parser ]( https://expressjs.com/en/api.html )是所谓的[中间件]( http://expressjs.com/en/guide/using-middleware.html )。
+我们之前使用的 express [json-parser](https://expressjs.com/en/api.html)是所谓的[中间件](http://expressjs.com/en/guide/using-middleware.html)。
 
 <!-- Middleware are functions that can be used for handling _request_ and _response_ objects. -->
 中间件是可用于处理请求和响应对象的函数。
@@ -1239,7 +1239,7 @@ app.use(unknownEndpoint)
 ### Exercises 3.7.-3.8.
 #### 3.7: Phonebook backend 步骤7
 <!-- Add the [morgan](https://github.com/expressjs/morgan) middleware to your application for logging. Configure it to log messages to your console based on the <i>tiny</i> configuration. -->
-在你的日志应用中添加[ morgan ]( https://github.com/expressjs/morgan) 中间件。 将其配置为基于<i>tiny</i> 配置，将消息记录到控制台。
+在你的日志应用中添加[morgan](https://github.com/expressjs/morgan) 中间件。 将其配置为基于<i>tiny</i> 配置，将消息记录到控制台。
 
 <!-- The documentation for Morgan is not the best, and you may have to spend some time figuring out how to configure it correctly. However, most documentation in the world falls under the same category, so it's good to learn to decipher and interpret cryptic documentation in any case. -->
 Morgan 的文档不是最好的，您可能需要花费一些时间来弄清楚如何正确地配置它。 然而，世界上大多数文档都属于同一级别，因此无论如何，学习解释和解释神秘的文档都是有益的。 
@@ -1263,8 +1263,8 @@ Morgan 的安装方式与使用 _npm install_ 命令的所有其他库一样。 
 <!-- This exercise can be completed in a few different ways. One of the possible solutions utilizes these two techniques: -->
 这个练习可以通过几种不同的方式来完成。其中一种可能的解决方案利用了如下两种技巧:
 
-- [创建新的令牌]( https://github.com/expressjs/morgan#creating-new-tokens )
-- [ JSON.stringify ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/JSON.stringify )
+- [创建新的令牌](https://github.com/expressjs/morgan#creating-new-tokens)
+- [JSON.stringify](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/JSON.stringify)
 
 </div>
 

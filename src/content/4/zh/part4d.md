@@ -387,7 +387,7 @@ npm uninstall bcrypt --save
 ```
 
 <!-- and install [bcryptjs](https://www.npmjs.com/package/bcryptjs) instead.  -->
-并安装[ bcryptjs ]( https://www.npmjs.com/package/bcryptjs )来作为替代。
+并安装[bcryptjs](https://www.npmjs.com/package/bcryptjs)来作为替代。
 
 <!-- Implement a way to see the details of all users by doing a suitable HTTP request.  -->
 通过执行合适的 HTTP 请求，实现查看所有用户详细信息的方法。
@@ -504,7 +504,7 @@ if ( blog.user.toString() === userid.toString() ) ...
 在进行修复时，[这个](https://github.com/visionmedia/supertest/issues/398)很可能是最有用的。
 
 <!-- This is the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
-这是本课程这一章节的最后一个练习，是时候将你的代码推送到 GitHub，并将所有已完成的练习标记到[练习提交系统]( https://studies.cs.helsinki.fi/stats/courses/fullstackopen )。
+这是本课程这一章节的最后一个练习，是时候将你的代码推送到 GitHub，并将所有已完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)。
 
 <!---
 <!-- note left of user -->

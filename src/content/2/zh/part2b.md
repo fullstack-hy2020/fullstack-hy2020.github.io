@@ -13,7 +13,7 @@ lang: zh
 
 <!-- In order to get our page to update when new notes are added it's best to store the notes in the <i>App</i> component's state. Let's import the [useState](https://reactjs.org/docs/hooks-state.html) function and use it to define a piece of state that gets initialized with the initial notes array passed in the props.  -->
 
-为了让我们的页面在添加新便笺时更新，最好将便笺存储在<i>App</i> 组件的状态中。 让我们导入[ useState ]( https://reactjs.org/docs/hooks-state.html )函数，并使用它定义一个状态，这个状态用props传进来的初始便签数组作为状态初始化。
+为了让我们的页面在添加新便笺时更新，最好将便笺存储在<i>App</i> 组件的状态中。 让我们导入[useState](https://reactjs.org/docs/hooks-state.html)函数，并使用它定义一个状态，这个状态用props传进来的初始便签数组作为状态初始化。
 
 ```js
 import React, { useState } from 'react' // highlight-line
@@ -64,7 +64,7 @@ const App = () => {
 这里让我们暂时坚持使用传递进来的props 作为初始值。
 
 <!-- Next, let's add an HTML [form](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms) to the component that will be used for adding new notes. -->
-接下来，让我们在组件中添加一个 HTML [ 表单 ]( https://developer.mozilla.org/en-us/docs/learn/HTML/forms) ，用于添加新的便笺。
+接下来，让我们在组件中添加一个 HTML [表单](https://developer.mozilla.org/en-us/docs/learn/HTML/forms) ，用于添加新的便笺。
 
 ```js
 const App = (props) => {
@@ -110,7 +110,7 @@ const addNote = (event) => {
 ```
 
 <!-- The <em>event</em> parameter is the [event](https://reactjs.org/docs/handling-events.html) that triggers the call to the event handler function:  -->
- <em>event</em> 参数是触发对事件处理函数需要调用的[ event ]( https://reactjs.org/docs/handling-events.html ) :
+ <em>event</em> 参数是触发对事件处理函数需要调用的[event](https://reactjs.org/docs/handling-events.html) :
 
 <!-- The event handler immediately calls the <em>event.preventDefault()</em> method, which prevents the default action of submitting a form. The default action would, among other things, cause the page to reload. -->
 事件处理立即调用 <em>event.preventDefault()</em>  方法，它会阻止提交表单的默认操作。 因为默认操作会导致页面重新加载。
@@ -129,7 +129,7 @@ const addNote = (event) => {
 但我们如何访问表单中<i>input</i> 元素中包含的数据呢？
 
 <!-- There are many ways to accomplish this; the first method we will take a look at is the use of so-called [controlled components](https://reactjs.org/docs/forms.html#controlled-components). -->
-有许多方法可以实现这一点; 我们将介绍的第一种方法是使用所谓的[受控组件]( https://reactjs.org/docs/forms.html#controlled-components )。
+有许多方法可以实现这一点; 我们将介绍的第一种方法是使用所谓的[受控组件](https://reactjs.org/docs/forms.html#controlled-components)。
 
 <!-- Let's add a new piece of state called <em>newNote</em> for storing the user submitted input **and** let's set it as the <i>input</i> element's  <i>value</i> attribute: -->
 让我们添加一个名为 <em>newNote</em> 的新状态，用于存储用户提交的输入，让我们将它设置为<i>input</i> 元素的<i>value</i> 属性:
@@ -171,7 +171,7 @@ const App = (props) => {
 ![](../../images/2/7e.png)
 
 <!-- Since we assigned a piece of the <i>App</i> component's state as the <i>value</i> attribute of the input element, the <i>App</i> component now [controls](https://reactjs.org/docs/forms.html#controlled-components) the behavior of the input element. -->
-由于我们将<i>App</i> 组件的一部分状态指定为 input 元素的<i>value</i> 属性，因此<i>App</i> 组件现在[控制]( https://reactjs.org/docs/forms.html#controlled-components ) 了input 元素的行为。
+由于我们将<i>App</i> 组件的一部分状态指定为 input 元素的<i>value</i> 属性，因此<i>App</i> 组件现在[控制](https://reactjs.org/docs/forms.html#controlled-components) 了input 元素的行为。
 
 <!-- In order to enable editing of the input element, we have to register an <i>event handler</i> that synchronizes the changes made to the input with the component's state: -->
 为了能够编辑 input 元素，我们必须注册一个<i>事件处理</i> 来同步对 input 所做的更改和组件的状态:
@@ -248,7 +248,7 @@ const handleNoteChange = (event) => {
 ![](../../images/2/8e.png)
 
 <!-- You did remember to install [React devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi), right? Good. You can directly view how the state changes from the React Devtools tab: -->
-你记得我们安装过[ React devtools ]( https://chrome.google.com/webstore/detail/React-developer-tools/fmkadmapgofadopljbjfkapdkoienihi ) 吧？ 很好。 你可以直接从 React Devtools 选项卡查看状态的变化:
+你记得我们安装过[React devtools](https://chrome.google.com/webstore/detail/React-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) 吧？ 很好。 你可以直接从 React Devtools 选项卡查看状态的变化:
 
 ![](../../images/2/9ea.png)
 
@@ -285,7 +285,7 @@ setNotes(notes.concat(noteObject))
 
 
 <!-- The method does not mutate the original <em>notes</em> state array, but rather creates <i>a new copy of the array with the new item added to the end</i>. This is important since we must never [mutate state directly](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly) in React! -->
-该方法不会改变原始的 <em>notes</em> 状态数组，而是会创建数组的一个新副本，并将新项添加到尾部。 这很重要，因为我们绝不能在React中[直接改变状态]( https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly ) ！
+该方法不会改变原始的 <em>notes</em> 状态数组，而是会创建数组的一个新副本，并将新项添加到尾部。 这很重要，因为我们绝不能在React中[直接改变状态](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly) ！
 
 <!-- The event handler also resets the value of the controlled input element by calling the <em>setNewNote</em> function of the <em>newNote</em> state: -->
 事件处理还通过调用 <em>newNote</em>  状态的 <em>setNewNote</em>  函数重置受控input元素的值:
@@ -362,7 +362,7 @@ const notesToShow = showAll
 ```
 
 <!-- The definition uses the [conditional](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) operator also found in many other programming languages. -->
-该定义使用了[条件]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/operators/conditional_operator )运算符（三目运算符），这种运算符在许多其他编程语言中也存在。
+该定义使用了[条件](https://developer.mozilla.org/en-us/docs/web/javascript/reference/operators/conditional_operator)运算符（三目运算符），这种运算符在许多其他编程语言中也存在。
 
 <!-- The operator functions as follows. If we have: -->
 操作符的功能如下:
@@ -375,7 +375,7 @@ const result = condition ? val1 : val2
 如果 <em>condition</em> 为真，则 <em>result</em>变量将设置为<em>val1</em>值。 如果 <em>condition</em>为 false，则<em>result</em> 变量将设置为 <em>val2</em>。
 
 <!-- If the value of <em>showAll</em> is false, the <em>notesToShow</em> variable will be assigned to a list that only contain notes that have the <em>important</em> property set to true. Filtering is done with the help of the array [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method: -->
-如果 <em>showAll</em> 的值为 false，那么将把 <em>notesToShow</em> 变量分配给一个只包含<em>important</em>属性为 true 的便笺的列表。 过滤是通过数组[ filter ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/filter )方法完成的:
+如果 <em>showAll</em> 的值为 false，那么将把 <em>notesToShow</em> 变量分配给一个只包含<em>important</em>属性为 true 的便笺的列表。 过滤是通过数组[filter](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/filter)方法完成的:
 
 ```js
 notes.filter(note => note.important === true)
@@ -517,7 +517,7 @@ export default App
 
 <!-- It's also important to put what we learned in the [debugging React applications](/zh/part1/a_more_complex_state_debugging_react_apps) chapter of part one into good use. The [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension especially, is incredibly useful for tracking changes that occur in the application's state. -->
 
-把我们在第一章节 [调试 React 应用](/zh/part1/a_more_complex_state_debugging_react_apps) 一章中学到的东西好好利用也很重要。 特别是[ React developer tools ]( https://chrome.google.com/webstore/detail/React-developer-tools/fmkadmapgofadopljbjfkapdkoienihi 开发工具)扩展，对于跟踪应用状态中发生的变化非常有用。
+把我们在第一章节 [调试 React 应用](/zh/part1/a_more_complex_state_debugging_react_apps) 一章中学到的东西好好利用也很重要。 特别是[React developer tools](https://chrome.google.com/webstore/detail/React-developer-tools/fmkadmapgofadopljbjfkapdkoienihi 开发工具)扩展，对于跟踪应用状态中发生的变化非常有用。
 
 <!-- After finishing this exercise your application should look something like this: -->
 在完成这个练习之后，你的应用应该是这样的:
@@ -542,16 +542,16 @@ export default App
 
 
 <!-- Prevent the user from being able to add names that already exist in the phonebook. JavaScript arrays have numerous suitable [methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) for accomplishing this task. -->
-防止用户添加已经存在于电话簿中的名称。 Javascript 数组有许多合适的[方法]( https://developer.mozilla.org/en-us/docs/web/JavaScript/reference/global_objects/array )来完成这个任务。
+防止用户添加已经存在于电话簿中的名称。 Javascript 数组有许多合适的[方法](https://developer.mozilla.org/en-us/docs/web/JavaScript/reference/global_objects/array)来完成这个任务。
 
 <!-- Issue a warning with the [alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) command when such an action is attempted: -->
-尝试添加同名电话时，使用[ alert ]( https://developer.mozilla.org/en-us/docs/web/api/window/alert )命令发出警告:
+尝试添加同名电话时，使用[alert](https://developer.mozilla.org/en-us/docs/web/api/window/alert)命令发出警告:
 
 ![](../../images/2/11e.png)
 
 <!-- **Brief reminder from the previous part:** when you are forming strings that contain values from variables, it is recommended to use a [template string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals): -->
 
-**上一章节的简短提示** 当您构建包含变量值的字符串时，建议使用[模板字符串]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/template_literals ) :
+**上一章节的简短提示** 当您构建包含变量值的字符串时，建议使用[模板字符串](https://developer.mozilla.org/en-us/docs/web/javascript/reference/template_literals) :
 
 ```js
 `${newName} is already added to phonebook`

@@ -28,7 +28,7 @@ app.post('/api/notes', (request, response) => {
 如果便笺没有<i>content</i> 属性，我们将使用状态码<i>400 bad request</i> 响应该请求。
 
 <!-- One smarter way of validating the format of the data before it is stored in the database, is to use the [validation](https://mongoosejs.com/docs/validation.html) functionality available in Mongoose. -->
-在数据存储到数据库之前验证数据格式的一个更聪明的方法是使用 Mongoose 提供的[ validation ]( https://mongoosejs.com/docs/validation.html )功能。
+在数据存储到数据库之前验证数据格式的一个更聪明的方法是使用 Mongoose 提供的[validation](https://mongoosejs.com/docs/validation.html)功能。
 
 <!-- We can define specific validation rules for each field in the schema: -->
 我们可以为模式中的每个字段定义特定的验证规则:
@@ -54,7 +54,7 @@ const noteSchema = new mongoose.Schema({
 现在要求<i>content</i> 字段至少有五个字符长。<i>date</i> 字段被设置为必需的，这意味着它不能丢失。 同样的约束也隐式地应用于<i>content</i> 字段，因为缺省情况下最小长度约束要求字段不丢失。 我们没有向<i>important</i> 字段添加任何约束，因此模式中的定义没有更改。
 
 <!-- The <i>minlength</i> and <i>required</i> validators are [built-in](https://mongoosejs.com/docs/validation.html#built-in-validators) and provided by Mongoose. The Mongoose [custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) functionality allows us to create new validators, if none of the built-in ones cover our needs. -->
- <i>minlength</i> 和 <i> required</i> 验证器是[内置的]( https://mongoosejs.com/docs/validation.html#built-in-validators ) ，由 Mongoose 提供。 Mongoose允许我们创建新的验证器[自定义验证器](https://mongoosejs.com/docs/validation.html#custom-validators)，如果没有一个内置的验证器满足我们的需求的话。
+ <i>minlength</i> 和 <i> required</i> 验证器是[内置的](https://mongoosejs.com/docs/validation.html#built-in-validators) ，由 Mongoose 提供。 Mongoose允许我们创建新的验证器[自定义验证器](https://mongoosejs.com/docs/validation.html#custom-validators)，如果没有一个内置的验证器满足我们的需求的话。
 
 <!-- If we try to store an object in the database that breaks one of the constraints, the operation will throw an exception. Let's change our handler for creating a new note so that it passes any potential exceptions to the error handler middleware: -->
 如果我们尝试在数据库中存储一个打破其中一个约束的对象，操作将引发异常。 让我们改变我们的处理程序来创建一个新的便笺，这样它就可以将任何潜在的异常传递给错误处理中间件:
@@ -118,7 +118,7 @@ app.post('/api/notes', (request, response, next) => {
 ```
 
 <!-- We can accomplish the same functionality in a much cleaner way with [promise chaining](https://javascript.info/promise-chaining): -->
-我们可以用一种更简洁的方式来实现同样的功能，比如[承诺链]( https://javascript.info/promise-chaining ) :
+我们可以用一种更简洁的方式来实现同样的功能，比如[承诺链](https://javascript.info/promise-chaining) :
 
 ```js
 app.post('/api/notes', (request, response, next) => {
@@ -224,7 +224,7 @@ connected to MongoDB
 ```
 
 <!-- Read the mongoose [documentation](https://mongoosejs.com/docs/deprecations.html) to find out how to get rid of the warning. -->
-阅读mongoose [文档]( https://mongoosejs.com/docs/deprecations.html 文档) ，找出如何摆脱警告。
+阅读mongoose [文档](https://mongoosejs.com/docs/deprecations.html 文档) ，找出如何摆脱警告。
 
 #### 3.20*: Phonebook database, 步骤8
 <!-- Expand the validation so that the name stored in the database has to be at least three characters long, and the phone number must have at least 8 digits. -->
@@ -272,16 +272,16 @@ personService
 
 
 <!-- Before we move onto the next part, we will take a look at an important tool called [lint](<https://en.wikipedia.org/wiki/Lint_(software)>). Wikipedia says the following about lint: -->
-在我们进入下一章节之前，我们将看看一个重要的工具，叫做[ lint ]( https://en.wikipedia.org/wiki/lint_(software))。 关于 lint，维基百科是这么说的:
+在我们进入下一章节之前，我们将看看一个重要的工具，叫做[lint](https://en.wikipedia.org/wiki/lint_(software))。 关于 lint，维基百科是这么说的:
 
 > <i>Generically, lint or a linter is any tool that detects and flags errors in programming languages, including stylistic errors. The term lint-like behavior is sometimes applied to the process of flagging suspicious language usage. Lint-like tools generally perform static analysis of source code.</i>
 通常，lint 或 linter 是检测和标记编程语言中的错误，包括文本错误的一种工具。 lint-like 这个术语有时用于标记可疑的语言使用情况。 类似 lint 的工具通常对源代码执行静态分析。 
 
 <!-- In compiled statically typed languages like Java, IDEs like NetBeans can point out errors in the code, even ones that are more than just compile errors. Additional tools for performing [static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) like [checkstyle](http://checkstyle.sourceforge.net/), can be used for expanding the capabilities of the IDE to also point out problems related to style, like indentation. -->
-在像 Java 这样的编译静态类型语言中，像 NetBeans 这样的 ide 可以指出代码中的错误，甚至那些不仅仅是编译错误的错误。 执行[静态分析](https://en.wikipedia.org/wiki/Static_program_analysis)的额外工具，如[检查样式]( http://checkstyle.sourceforge.net/ ) ，可以用来扩展 IDE 的功能，也指出与样式有关的问题，如缩进。
+在像 Java 这样的编译静态类型语言中，像 NetBeans 这样的 ide 可以指出代码中的错误，甚至那些不仅仅是编译错误的错误。 执行[静态分析](https://en.wikipedia.org/wiki/Static_program_analysis)的额外工具，如[检查样式](http://checkstyle.sourceforge.net/) ，可以用来扩展 IDE 的功能，也指出与样式有关的问题，如缩进。
 
 <!-- In the JavaScript universe, the current leading tool for static analysis aka. "linting" is [ESlint](https://eslint.org/). -->
-在 JavaScript 的世界里，目前主要的静态分析工具又名“ linting”是[ ESlint ]( https://ESlint.org/ )。
+在 JavaScript 的世界里，目前主要的静态分析工具又名“ linting”是[ESlint](https://ESlint.org/)。
 
 <!-- Let's install ESlint as a development dependency to the backend project with the command: -->
 让我们使用下面的命令安装 ESlint 作为后端项目的开发依赖项:
@@ -398,7 +398,7 @@ Lint 对我们的代码有很多要说的:
 让我们先不要解决这些问题。
 
 <!-- A better alternative to executing the linter from the command line is to configure a  <i>eslint-plugin</i> to the editor, that runs the linter continuously. By using the plugin you will see errors in your code immediately. You can find more information about the Visual Studio ESLint plugin [here](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint). -->
-从命令行执行连接程序的一个更好的替代方法是为编辑器配置一个<i>eslint-plugin</i>，它可以连续运行lint程序。 通过使用该插件，您将立即看到代码中的错误。 你可以找到更多关于 Visual Studio ESLint 插件的信息[点击这里](google  https://marketplace.visualstudio.com/items?itemname=dbaeumer.vscode-ESLint )。
+从命令行执行连接程序的一个更好的替代方法是为编辑器配置一个<i>eslint-plugin</i>，它可以连续运行lint程序。 通过使用该插件，您将立即看到代码中的错误。 你可以找到更多关于 Visual Studio ESLint 插件的信息[点击这里](google  https://marketplace.visualstudio.com/items?itemname=dbaeumer.vscode-ESLint)。
 
 <!-- The VS Code ESlint plugin will underline style violations with a red line: -->
 代码 ESlint 插件会用红线来强调风格的违反:
@@ -411,10 +411,10 @@ Lint 对我们的代码有很多要说的:
 这使得错误很容易发现和立即修复。
 
 <!-- ESlint has a vast array of [rules](https://eslint.org/docs/rules/) that are easy to take into use by editing the <i>.eslintrc.js</i> file. -->
-Eslint 有大量的[规则]( https://ESlint.org/docs/rules/ ) ，可以通过编辑 <i>.eslintrc.js</i>  文件轻松使用。 
+Eslint 有大量的[规则](https://ESlint.org/docs/rules/) ，可以通过编辑 <i>.eslintrc.js</i>  文件轻松使用。 
 
 <!-- Let's add the [eqeqeq](https://eslint.org/docs/rules/eqeqeq) rule that warns us, if equality is checked with anything but the triple equals operator. The rule is added under the <i>rules</i> field in the configuration file. -->
-让我们添加一个[ eqeqeq ]( https://eslint.org/docs/rules/eqeqeq )规则，它警告我们，如果除了三个等于运算符之外，相等是被检查的。 该规则是在配置文件的<i>rules</i> 字段下添加的。
+让我们添加一个[eqeqeq](https://eslint.org/docs/rules/eqeqeq)规则，它警告我们，如果除了三个等于运算符之外，相等是被检查的。 该规则是在配置文件的<i>rules</i> 字段下添加的。
 
 ```js
 {
@@ -430,7 +430,7 @@ Eslint 有大量的[规则]( https://ESlint.org/docs/rules/ ) ，可以通过编
 既然学到这里，让我们对规则做一些其他的改变。
 
 <!-- Let's prevent unnecessary [trailing spaces](https://eslint.org/docs/rules/no-trailing-spaces) at the ends of lines, let's require that [there is always a space before and after curly braces](https://eslint.org/docs/rules/object-curly-spacing), and let's also demand a consistent use of whitespaces in the function parameters of arrow functions. -->
-让我们在行的末尾避免不必要的[拖尾空格]( https://eslint.org/docs/rules/no-trailing-spaces )，让我们要求[在大括号之前和之后总有一个空格]( https://eslint.org/docs/rules/object-curly-spacing ) ，让我们也要求在箭头函数的函数参数中一致使用空格。
+让我们在行的末尾避免不必要的[拖尾空格](https://eslint.org/docs/rules/no-trailing-spaces)，让我们要求[在大括号之前和之后总有一个空格](https://eslint.org/docs/rules/object-curly-spacing) ，让我们也要求在箭头函数的函数参数中一致使用空格。
 
 ```js
 {
@@ -457,7 +457,7 @@ Eslint 有大量的[规则]( https://ESlint.org/docs/rules/ ) ，可以通过编
 ```
 
 <!-- This includes a rule that warns about _console.log_ commands. [Disabling](https://eslint.org/docs/user-guide/configuring#configuring-rules) a rule can be accomplished by defining its "value" as 0 in the configuration file. Let's do this for the <i>no-console</i> rule in the meantime. -->
-这包括一个警告 console.log 命令的规则。 [禁用]( https://eslint.org/docs/user-guide/configuring#configuring-rules )规则可以通过在配置文件中将其“ value”定义为0来实现。 在此期间让我们这样做把<i>no-console</i>检查关掉 。
+这包括一个警告 console.log 命令的规则。 [禁用](https://eslint.org/docs/user-guide/configuring#configuring-rules)规则可以通过在配置文件中将其“ value”定义为0来实现。 在此期间让我们这样做把<i>no-console</i>检查关掉 。
 
 ```js
 {
@@ -511,5 +511,5 @@ Eslint 有大量的[规则]( https://ESlint.org/docs/rules/ ) ，可以通过编
 向应用中添加 ESlint 并修复所有警告。
 
 <!-- This was the last exercise of this part of the course. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
-这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统]( https://studies.cs.helsinki.fi/stats/courses/fullstackopen )。
+这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)。
 </div>

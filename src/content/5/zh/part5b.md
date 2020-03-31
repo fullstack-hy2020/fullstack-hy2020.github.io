@@ -320,7 +320,7 @@ const NoteForm = ({ onSubmit, handleChange, value}) => {
 应用的状态当前位于 App 组件中。
 
 <!-- React documentation says the [following](https://reactjs.org/docs/lifting-state-up.html) about where to place the state: -->
-React[文档]( https://reactjs.org/docs/lifting-state-up.html )阐述了关于在哪里放置状态: 
+React[文档](https://reactjs.org/docs/lifting-state-up.html)阐述了关于在哪里放置状态: 
 
 > <i>Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.</i>
 通常，几个组件需要反映相同的变化数据。 我们建议将共享状态提升到它们最接近的共同祖先。 
@@ -417,7 +417,7 @@ const App = () => {
 
 
 <!-- The application code can be found from [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5), -->
-应用代码可以从[ github ]( https://github.com/fullstack-hy2020/part2-notes/tree/part5-5)中找到,
+应用代码可以从[github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5)中找到,
 <!-- branch <i>part5-5</i>. -->
 分支<i>第5-5</i> 部分。
 
@@ -527,13 +527,13 @@ const App = () => {
 ```
 
 <!-- To recap, the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) function is a React hook, that is used for defining functions in a component which can be invoked from outside of the component. -->
-总结一下，[ useImperativeHandle ]( https://reactjs.org/docs/hooks-reference.html#useImperativeHandle )函数是一个 React hook，用于定义组件中的函数，该组件可以从组件外部调用。
+总结一下，[useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useImperativeHandle)函数是一个 React hook，用于定义组件中的函数，该组件可以从组件外部调用。
 
 <!-- This trick works for changing the state of a component, but it looks a bit unpleasant. We could have accomplished the same functionality with slightly cleaner code using "old React" class-based components. We will take a look at these class components at the part 7 of the course material. So far this is the only situation where using React hooks leads to code that is not cleaner than with class components. -->
 这个技巧适用于改变组件的状态，但是看起来有点不舒服。 我们可以使用基于“旧的 React”类的组件，用稍微简洁的代码实现相同的功能。 我们将在课程材料的第7章节看看这些类组成部分。 到目前为止，只有在这种情况下，使用 React hooks 导致的代码并不比使用类组件更干净。
 
 <!-- There are also [other use cases](https://reactjs.org/docs/refs-and-the-dom.html) for refs than accessing React components. -->
-还有[其他用例]( https://reactjs.org/docs/refs-and-the-dom.html )用于 refs 而不是访问 React 组件。
+还有[其他用例](https://reactjs.org/docs/refs-and-the-dom.html)用于 refs 而不是访问 React 组件。
 
 <!-- You can find the code for our current application in its entirety in the <i>part5-6</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-6). -->
 您可以在[ this github repository ]的<i>part5-6</i> 分支中找到我们当前应用的全部代码，该分支是 https://github.com/fullstack-hy2020/part2-notes/tree/part5-6文件库。
@@ -644,7 +644,7 @@ const Togglable = () => ...
 图中显示的应用使用了一些附加的 CSS 来改善其外观。
 
 <!-- It is easy to add styles to the application as shown in part 2 using [inline](/zh/part2/adding_styles_to_react_app#inline-styles) styles: -->
-使用[ [inline](/zh/part2/adding_styles_to_react_app#inline-styles)样式向应用添加样式很容易，如第2章节所示:
+使用[[inline](/zh/part2/adding_styles_to_react_app#inline-styles)样式向应用添加样式很容易，如第2章节所示:
 
 ```js
 const Blog = ({ blog }) => {
@@ -714,7 +714,7 @@ const Blog = ({ blog }) => {
 
 #### 5.9*: Blog list frontend, 步骤8
 <!-- Modify the application to list the blog posts by the number of <i>likes</i>. Sorting the blog posts can be done with the array [sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) method. -->
-根据<i>like</i> 的数量修改应用以列出博客文章。 对博客文章进行排序可以使用数组[ sort ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/sort )方法。
+根据<i>like</i> 的数量修改应用以列出博客文章。 对博客文章进行排序可以使用数组[sort](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/sort)方法。
 
 #### 5.10*: Blog list frontend, 步骤9
 <!-- Add a new button for deleting blog posts. Also implement the logic for deleting blog posts in the backend. -->
@@ -726,7 +726,7 @@ const Blog = ({ blog }) => {
 ![](../../images/5/14ea.png)
 
 <!-- The confirmation dialog for deleting a blog post is easy to implement with the [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) function. -->
-用于删除博客文章的确认对话框很容易通过[ window.confirm ]( https://developer.mozilla.org/en-us/docs/web/api/window/confirm )函数实现。
+用于删除博客文章的确认对话框很容易通过[window.confirm](https://developer.mozilla.org/en-us/docs/web/api/window/confirm)函数实现。
 
 <!-- Show the button for deleting a blog post only if the blog post was added by the user. -->
 只有当用户添加了博客文章时，才显示删除博客文章的按钮。

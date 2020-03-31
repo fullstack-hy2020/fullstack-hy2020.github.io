@@ -118,7 +118,7 @@ const resolvers = {
 这些改变是非常直接的。 然而，还是有一些值得注意的事情。 正如我们所记得的，在 Mongo 中，对象的标识字段称为<i>id</i>，我们以前必须将字段名解析为<i>id</i> ourselves。 现在，GraphQL 可以自动完成此操作。
 
 <!-- Another noteworthy thing is that the resolver functions now return a <i>promise</i>, when they previously returned normal objects. When a resolver returns a promise, Apollo server [sends back](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-results) the value which the promise resolves to.  -->
-另一个值得注意的事情是，解析器函数现在返回<i>promise</i>，当它们以前返回普通对象时。 当解析器返回一个承诺时，Apollo 服务器[发送回]( https://www.apollographql.com/docs/Apollo-server/data/data/#resolver-results  / 值)该承诺解析为的值。
+另一个值得注意的事情是，解析器函数现在返回<i>promise</i>，当它们以前返回普通对象时。 当解析器返回一个承诺时，Apollo 服务器[发送回](https://www.apollographql.com/docs/Apollo-server/data/data/#resolver-results  / 值)该承诺解析为的值。
 
 
 
@@ -205,7 +205,7 @@ Mutation: {
 ```
 
 <!-- The code of the backend can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4), branch <i>part8-4</i>. -->
-后端的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4) ，branch<i>part8-4</i> 上找到。
+后端的代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4) ，branch<i>part8-4</i> 上找到。
 
 
 ### User and log in
@@ -330,7 +330,7 @@ Mutation: {
 
 
 <!-- Let's now expand the definition of the _server_ object by adding a third parameter [context](https://www.apollographql.com/docs/apollo-server/data/data/#context-argument) to the constructor call: -->
-现在，让我们扩展服务器对象的定义，在构造函数调用中添加第三个参数[ context ]( https://www.apollographql.com/docs/apollo-server/data/data/#context-argument ) :
+现在，让我们扩展服务器对象的定义，在构造函数调用中添加第三个参数[context](https://www.apollographql.com/docs/apollo-server/data/data/#context-argument) :
 
 ```js
 const server = new ApolloServer({
@@ -353,7 +353,7 @@ const server = new ApolloServer({
 ```
 
 <!-- The object returned by context is given to all resolvers as their <i>third parameter</i>. Context is the right place to do things which are shared by multiple resolvers, like [user identification](https://blog.apollographql.com/authorization-in-graphql-452b1c402a9?_ga=2.45656161.474875091.1550613879-1581139173.1549828167). -->
-上下文返回的对象作为第三个参数给所有解析器。 上下文是处理多个解析器共享的事情的正确地方，比如[用户识别]( https://blog.apollographql.com/authorization-in-graphql-452b1c402a9?_ga=2.45656161.474875091.1550613879-1581139173.1549828167)。
+上下文返回的对象作为第三个参数给所有解析器。 上下文是处理多个解析器共享的事情的正确地方，比如[用户识别](https://blog.apollographql.com/authorization-in-graphql-452b1c402a9?_ga=2.45656161.474875091.1550613879-1581139173.1549828167)。
 
 <!-- So our code sets the object corresponding to the user who made the request to the _currentUser_ field of the context. If there is no user connected to the request, the value of the field is undefined.  -->
 因此，我们的代码设置对应于向上下文的 currentUser 字段发出请求的用户的对象。 如果没有用户连接到请求，则该字段的值是未定义的。
@@ -463,7 +463,7 @@ addAsFriend: async (root, args, { currentUser }) => {
 ```
 
 <!-- The code of the backend can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-5) branch <i>part8-5</i>. -->
-后端的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-5)分支<i>part8-5</i> 上找到。
+后端的代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-5)分支<i>part8-5</i> 上找到。
 
 
 </div>

@@ -102,7 +102,7 @@ npx create-react-app my-app --template typescript
 ![](../../images/9/31a.png)
 
 <!-- Why is that? As we can see from the error, the file  <i>serviceWorker.ts</i> doesn't seem to be compliant with our linting configurations at the moment. This is because the <i>register</i> function uses other functions that are declared later in the same file and the rule [@typescript-eslint/no-use-before-define](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-use-before-define.md) doesn't like that. To fix the error we need to move the  <i>register</i> function as the last function in the file. -->
-为什么？ 正如我们从错误中看到的，文件<i>serviceWorker.ts</i> 目前似乎与我们的链接配置不兼容。 这是因为<i>register</i> 函数使用了稍后在同一文件中声明的其他函数，而规则[@typescript-eslint / no-use-before-define ]( https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-use-before-define.md )不喜欢这样。 为了修复这个错误，我们需要将<i>register</i> 函数移动到作为文件中的最后一个函数。
+为什么？ 正如我们从错误中看到的，文件<i>serviceWorker.ts</i> 目前似乎与我们的链接配置不兼容。 这是因为<i>register</i> 函数使用了稍后在同一文件中声明的其他函数，而规则[@typescript-eslint / no-use-before-define](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-use-before-define.md)不喜欢这样。 为了修复这个错误，我们需要将<i>register</i> 函数移动到作为文件中的最后一个函数。
 
 <!-- If we now run <i>npm run lint</i>, we shouldn't get any errors. Actually the error does not matter, since we do not need the file <i>serviceWorker.ts</i> anyway, it is better to delete it altogether. -->
 如果我们现在运行 <i>npm run lint</i>，我们不应该得到任何错误。 实际上，错误并不重要，因为我们不需要文件<i>servicedworker.ts</i>，所以最好将其删除。
@@ -129,7 +129,7 @@ ReactDOM.render(element, document.getElementById("root"));
 ```
 
 <!-- In the example we have a component called <i>Welcome</i>, to which we want to pass a <i>name</i> prop, that is then rendered. We know that the  <i>name</i> prop should be a string and we use the [prop-types](https://www.npmjs.com/package/prop-types) package introduced in [part 5](/zh/part5/props_children_and_proptypes#prop-types) to be able to receive hints about component's desired prop types and warnings for invalid prop types. -->
-在这个示例中，我们有一个名为<i>Welcome</i> 的组件，我们希望向它传递一个<i>name</i> prop，然后将其渲染。 我们知道<i>name</i> prop 应该是一个字符串，我们使用在[第五章](/zh/part5/props_children_and_proptypes#prop-types) 中介绍的[ prop-types ](https://www.npmjs.com/package/prop-types)包，可以接收关于部件所需props类型的提示，以及无效props类型的警告。
+在这个示例中，我们有一个名为<i>Welcome</i> 的组件，我们希望向它传递一个<i>name</i> prop，然后将其渲染。 我们知道<i>name</i> prop 应该是一个字符串，我们使用在[第五章](/zh/part5/props_children_and_proptypes#prop-types) 中介绍的[prop-types](https://www.npmjs.com/package/prop-types)包，可以接收关于部件所需props类型的提示，以及无效props类型的警告。
 
 <!-- With the help of TypeScript we don't need the <i>prop-types</i> package anymore to define prop types, because we can define the types with the help of TypeScript itself by using the _FunctionComponent_ type or it's shorter alias _FC_. -->
 在 TypeScript 的帮助下，我们不再需要<i>prop-types</i> 包来定义 prop 类型，因为我们可以通过使用 _FunctionComponent_ 类型或者更短的别名 FC，在 TypeScript 本身的帮助下定义类型。
@@ -366,17 +366,17 @@ interface CoursePartThree {
 ```
 
 <!-- Next we will create a type [union](http://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types) of all these types, which we can use to define a type for our array, that should accept any of these course part types: -->
-接下来，我们将创建一个所有这些类型的[ union ]( http://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types )类型 ，我们可以用它来为数组定义一个类型，它应该接受如下任何一个课程部分类型:
+接下来，我们将创建一个所有这些类型的[union](http://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types)类型 ，我们可以用它来为数组定义一个类型，它应该接受如下任何一个课程部分类型:
 
 ```js
 type CoursePart = CoursePartOne | CoursePartTwo | CoursePartThree;
 ```
 
 <!-- Now we can set the type for our <i>courseParts</i> variable and after that our editor will automatically give an error if we use a wrong type for an attribute, use an extra attribute, or forget to set an expected attribute. You can test this by commenting out any attribute for any course part. Thanks to the <i>name</i> [string literal](http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types) TypeScript can identify which course part requires which additional attributes, even if the variable is defined to use the type union. -->
-现在我们可以为<i>courseParts</i> 变量设置类型，之后，如果我们对属性使用了错误的类型，或者使用了额外的属性，或者忘记设置预期的属性，我们的编辑器将自动给出一个错误。 您可以通过注释掉任何课程部分的任何属性来测试这一点。 多亏了<i>name</i> [ string literal字符串字面量 ]( http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types ) TypeScript 可以识别哪个课程部分需要哪些附加属性，即使变量被定义为使用类型联合。
+现在我们可以为<i>courseParts</i> 变量设置类型，之后，如果我们对属性使用了错误的类型，或者使用了额外的属性，或者忘记设置预期的属性，我们的编辑器将自动给出一个错误。 您可以通过注释掉任何课程部分的任何属性来测试这一点。 多亏了<i>name</i> [string literal字符串字面量](http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types) TypeScript 可以识别哪个课程部分需要哪些附加属性，即使变量被定义为使用类型联合。
 
 <!-- But we're not satisfied yet! There is still a lot of duplication in the types that we have created, and that is something we want to avoid. We start off by identifying the attributes in common for all course parts and define a base type containing them, and then we will [extend](http://www.typescriptlang.org/docs/handbook/interfaces.html#extending-interfaces) that base type to create our part specific types: -->
-但是我们还不满意！ 在我们创建的类型中仍然存在大量的重复，这是我们希望避免的。 我们首先确定所有课程部分的公共属性，并定义包含它们的基类型，然后我们将[扩展]( http://www.typescriptlang.org/docs/handbook/interfaces.html#extending-interfaces )这个基类型来创建我们的部分特定类型:
+但是我们还不满意！ 在我们创建的类型中仍然存在大量的重复，这是我们希望避免的。 我们首先确定所有课程部分的公共属性，并定义包含它们的基类型，然后我们将[扩展](http://www.typescriptlang.org/docs/handbook/interfaces.html#extending-interfaces)这个基类型来创建我们的部分特定类型:
 
 ```js
 interface CoursePartBase {
@@ -418,7 +418,7 @@ interface CoursePartThree extends CoursePartBase {
 那么新的类型呢？ 如果我们要添加一个新的课程章节，如果我们还没有在代码中实现这种类型的处理，那会怎样？ 对于上面的示例，新类型将转到<i>default</i> 块，并且不会为新类型打印任何内容。 有时这当然是完全可以接受的，例如，如果您只想处理类型联合的特定(并非全部)情况，但在大多数情况下，建议分别处理所有变体。
 
 <!-- With TypeScript we can use a method that is called <i>exhaustive type checking</i>. Its basic principle is that if we encounter an unexpected value, we call a function that accepts a value with the type [never](https://www.typescriptlang.org/docs/handbook/basic-types.html#never) and also has the return type <i>never</i>. -->
-对于TypeScript，我们可以使用一个名为<i>穷举类型检查</i> 的方法。 它的基本原理是，如果遇到意外值，我们调用一个函数，该函数接受类型为[ never ]( https://www.typescriptlang.org/docs/handbook/basic-types.html#never )的值，并且返回类型为<i>never</i>。
+对于TypeScript，我们可以使用一个名为<i>穷举类型检查</i> 的方法。 它的基本原理是，如果遇到意外值，我们调用一个函数，该函数接受类型为[never](https://www.typescriptlang.org/docs/handbook/basic-types.html#never)的值，并且返回类型为<i>never</i>。
 
 <!-- A straight forward version of the function could look like this: -->
 这个函数的一个简单版本可以是这样的:
@@ -528,7 +528,7 @@ const courseParts: CoursePart[] = [
 ### A note about defining object types
 【关于定义对象类型的注意事项】
 <!-- We have used [interfaces](http://www.typescriptlang.org/docs/handbook/interfaces.html) to define object types, eg. diary entries in previous section -->
-我们已经使用[接口]( http://www.typescriptlang.org/docs/handbook/interfaces.html )来定义对象类型，例如前面部分的日记条目
+我们已经使用[接口](http://www.typescriptlang.org/docs/handbook/interfaces.html)来定义对象类型，例如前面部分的日记条目
 
 ```js
 interface DiaryEntry {
@@ -551,7 +551,7 @@ interface CoursePartBase {
 ```
 
 <!-- We actually could have had the same effect by using a [type alias](http://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases) -->
-我们实际上可以通过使用[ type alias ]( http://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases )来达到同样的效果
+我们实际上可以通过使用[type alias](http://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases)来达到同样的效果
 
 ```js
 type DiaryEntry = {
@@ -567,7 +567,7 @@ type DiaryEntry = {
 在大多数情况下，您可以使用<i>type</i> 或<i>interface</i>，无论您喜欢的哪种语法，但仍有一些事情需要记住。 例如，如果您使用相同的名称定义多个接口，它们将导致一个合并的接口，而如果您尝试使用相同的名称创建多个类型，它将导致一个错误声明，即一个相同的名称已经声明过了。
 
 <!-- TypeScript documentation [recommends to use interfaces](http://www.typescriptlang.org/docs/handbook/advanced-types.html#interfaces-vs-type-aliases) in most cases. -->
-TypeScript文档[建议在大多数情况下使用接口]( http://www.typescriptlang.org/docs/handbook/advanced-types.html#interfaces-vs-type-aliases )。 
+TypeScript文档[建议在大多数情况下使用接口](http://www.typescriptlang.org/docs/handbook/advanced-types.html#interfaces-vs-type-aliases)。 
 
 ### Working with an existing codebase
 【与现有的代码库一起工作】
@@ -576,7 +576,7 @@ TypeScript文档[建议在大多数情况下使用接口]( http://www.typescript
 当第一次深入到代码库中时，最好能够对项目的约定和结构有一个全面的了解。 您可以从存储库根目录中的<i>README.md</i> 开始进行研究。 通常，它包含应用和使用它所需要的需求的简要描述，以及如何启动它进行开发。 如果这个没有出现，或者有人节省了时间，把它留作存根，你可以在<i>package.json</i> 中看一眼。 启动应用并围绕它进行一番点击总是一个好主意，同时验证您拥有一个功能性开发环境。
 
 <!-- You can also browse the folder structure to get insights about application functionality and/or the architecture used. This is not always clear and developers may have chosen a way to organize code that might not be familliar to you. The [sample project](https://github.com/fullstack-hy2020/patientor) used in the rest of this part is organized featurewise. You can see what different pages the application has and some general components eg. modals and state. Keep in mind that the features represented may have different scopes eg. modals are visible UI level components whereas the state is comparable to business logic and keeps the data organized under the hood for the rest of the app to use. -->
-您还可以浏览文件夹结构，以了解应用的功能和/或所使用的体系结构。 这一点并不总是很清楚，开发人员可能已经选择了一种组织代码的方法，而这种方法对您来说可能并不熟悉。 在本章节的其余部分中使用的[样例项目]( https://github.com/fullstack-hy2020/patientor )是有组织特点的。 你可以看到应用有哪些不同的页面和一些通用组件，例如。 模型和状态。 请记住，所代表的特性可能有不同的范围，例如。 modals是可见的 UI 级组件，而状态可以与业务逻辑相媲美，并保持数据组织在底层供应给其余部分使用。
+您还可以浏览文件夹结构，以了解应用的功能和/或所使用的体系结构。 这一点并不总是很清楚，开发人员可能已经选择了一种组织代码的方法，而这种方法对您来说可能并不熟悉。 在本章节的其余部分中使用的[样例项目](https://github.com/fullstack-hy2020/patientor)是有组织特点的。 你可以看到应用有哪些不同的页面和一些通用组件，例如。 模型和状态。 请记住，所代表的特性可能有不同的范围，例如。 modals是可见的 UI 级组件，而状态可以与业务逻辑相媲美，并保持数据组织在底层供应给其余部分使用。
 
 <!-- TypeScript provides you types which tell you what kind of data structures, functions, components and state to expect. You can try to look for <i>types.ts</i> or something similar to get you started. VSCode is a big help and just highlighting variables and parameters can give you quite much of insight. This all naturally depends on how types are used in the project. -->
 TypeScript 提供的类型可以告诉你需要什么样的数据结构、函数、组件和状态。 您可以尝试寻找 <i>types.ts</i> 或类似的东西来开始。 VSCode 是一个很大的帮助，仅仅突出显示变量和参数就可以提供很参考。 这自然取决于在项目中如何使用类型。 
@@ -585,7 +585,7 @@ TypeScript 提供的类型可以告诉你需要什么样的数据结构、函数
 如果项目有单元测试、集成测试或端到端测试，那么阅读这些测试很可能是有益的。 在重构或为应用创建新特性时，测试用例是最重要的工具。 您需要确保在处理代码时不会破坏任何现有的特性。 在对代码进行更改时，TypeScript 还可以为您提供参数和返回类型的指导。
 
 <!-- Remember that reading code is a skill itself and relax if you don't understand the code on your first readthrough. Code may have a lot of corner cases and added logic throughout its development cycle. It is hard to imagine what kind of troubles the previous developer has been wrestling with. Think of it all like [growth rings in trees](https://en.wikipedia.org/wiki/Dendrochronology#Growth_rings). Understanding all of it requires digging deep into the code and business domain requirements. The more code you read the better you're going to be at it. You will read more code than you're going to produce. -->
-记住，阅读代码本身就是一项技能，如果你在第一次阅读时不理解代码，那么就放松一下。 在整个开发周期中，代码可能有很多边际情况和添加的逻辑。 很难想象之前的开发者一直在与什么样的麻烦作斗争。 把它想象成[树木的年轮]( https://en.wikipedia.org/wiki/dendrochronology#growth_rings )。 理解所有这些内容需要深入研究代码和业务领域的需求。 你阅读的代码越多，你就会越熟悉它。 与生产相比，您将阅读更多的代码。
+记住，阅读代码本身就是一项技能，如果你在第一次阅读时不理解代码，那么就放松一下。 在整个开发周期中，代码可能有很多边际情况和添加的逻辑。 很难想象之前的开发者一直在与什么样的麻烦作斗争。 把它想象成[树木的年轮](https://en.wikipedia.org/wiki/dendrochronology#growth_rings)。 理解所有这些内容需要深入研究代码和业务领域的需求。 你阅读的代码越多，你就会越熟悉它。 与生产相比，您将阅读更多的代码。
 
 ### Patientor frontend
 【病人项目的前端】
@@ -618,10 +618,10 @@ TypeScript 提供的类型可以告诉你需要什么样的数据结构、函数
 让我们更仔细地研究一下状态处理，因为很多事情似乎都发生在底层，而且它与本课程到目前为止使用的方法有点不同。
 
 <!-- The state management is built using React Hooks [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) and [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer). This is one quite viable option of creating a stateful app when we know that the app we will be rather small and we do not want to use <i>redux</i> or other libraries for the state management.  There are a lot of good material eg. [this article](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe) describing the approach.  -->
-状态管理是使用 React Hooks [ useContext ]( https://reactjs.org/docs/Hooks-reference.html#useContext )和[ useReducer ]( https://reactjs.org/docs/Hooks-reference.html#useReducer )构建的。 这是一个创建有状态应用的非常可行的选择，当我们知道我们的应用会相当小，我们不想使用<i>redux</i> 或其他库来进行状态管理时。 有很多好的素材。 [本文]( https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe )描述了这种方法。
+状态管理是使用 React Hooks [useContext](https://reactjs.org/docs/Hooks-reference.html#useContext)和[useReducer](https://reactjs.org/docs/Hooks-reference.html#useReducer)构建的。 这是一个创建有状态应用的非常可行的选择，当我们知道我们的应用会相当小，我们不想使用<i>redux</i> 或其他库来进行状态管理时。 有很多好的素材。 [本文](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe)描述了这种方法。
 
 <!-- The approach taken in this app uses the React [context](https://reactjs.org/docs/context.html), that according to documentation -->
-在这个应用中采取的方法使用了 React [ context ]( https://reactjs.org/docs/context.html ) ，根据文档
+在这个应用中采取的方法使用了 React [context](https://reactjs.org/docs/context.html) ，根据文档
 
 > <i>... is designed to share data that can be considered "global" for a tree of React components, such as the current authenticated user, theme, or preferred language.</i> 
 <i>... is 被设计用于为 React 组件树共享可被视为“全局”的数据，例如当前经过身份验证的用户、主题或首选语言。 </i>
@@ -630,7 +630,7 @@ TypeScript 提供的类型可以告诉你需要什么样的数据结构、函数
 在我们的示例中，“全局”共享数据是应用状态，分派函数是用于更改数据。 在某种程度上，这种方法的工作原理很像我们在[part 6](/zh/part6)中使用的基于 redux 的状态管理，但是它很轻量，因为它不需要使用任何外部库。 这一章节假设您至少熟悉 redux 的工作方式，例如，您至少应该包括第6章节的[第一部分](/zh/part6/flux_architecture_and_redux)。
 
 <!-- The [context](https://reactjs.org/docs/context.html) of the application has a tuple of the app state and dispatcher for changing the state of our app. The application state is typed as follows: -->
-应用的[上下文]( https://reactjs.org/docs/context.html )有一个用于更改应用状态的状态和调度程序的元组。 应用状态的类型如下:
+应用的[上下文](https://reactjs.org/docs/context.html)有一个用于更改应用状态的状态和调度程序的元组。 应用状态的类型如下:
 
 ```js
 export type State = {
@@ -639,7 +639,7 @@ export type State = {
 ```
 
 <!-- The state is an object with one key <i>patients</i>, which has a [dictionary](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types-and-index-signatures) or simply put an object with string keys and with a <i>Patient</i> object as value. Index can only be <i>string</i> or <i>number</i> as you can access the object values using those. This enforces that the state conforms in the way we want, and prevents developers from misusing the state.  -->
-状态是一个具有一个 key <i>patients</i> 的对象，该对象具有一个[ 字典 ]( https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types-and-index-signatures ) ，或者简单地将一个具有字符串键的对象和一个<i>Patient</i> 对象作为值。 索引只能是<i>string</i> 或<i>number</i>，因为您可以使用它们访问对象值。 这强制状态以我们想要的方式呈现，并防止开发人员滥用状态。
+状态是一个具有一个 key <i>patients</i> 的对象，该对象具有一个[字典](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types-and-index-signatures) ，或者简单地将一个具有字符串键的对象和一个<i>Patient</i> 对象作为值。 索引只能是<i>string</i> 或<i>number</i>，因为您可以使用它们访问对象值。 这强制状态以我们想要的方式呈现，并防止开发人员滥用状态。
 
 
 <!-- You can also think of a scenario where we may have state as a union. Eg. using states type as an indicator whether user has logged in: -->
@@ -660,7 +660,7 @@ export type State =
 这是使用 TypeScript 帮助控制应用状态的一种方法。 我们知道，如果状态是<i>type: “ Authenticated”</i>，我们将有一个<i>currentUser</i> 字段。
 
 <!-- This matches the arguments that are received from [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer). hook. Dispatch function takes as parameter objects with of <i>Action</i> which is defined in <i>reducer.ts</i> alongside the actual reducer function defining what the action does to the state returning a new state.  -->
-这与从[ useReducer.hook ]( https://reactjs.org/docs/hooks-reference.html#useReducer )接收的参数相匹配。Dispatch 函数使用<i>Action</i> 作为参数对象，在<i>reducer.ts</i> 中定义，与定义动作对返回新状态的状态的实际 reducer 函数一起使用。
+这与从[useReducer.hook](https://reactjs.org/docs/hooks-reference.html#useReducer)接收的参数相匹配。Dispatch 函数使用<i>Action</i> 作为参数对象，在<i>reducer.ts</i> 中定义，与定义动作对返回新状态的状态的实际 reducer 函数一起使用。
 
 <!-- The main principle in our state management approach is to pass the state to our components through the context and to modify the state using reducers.  -->
 我们的状态管理方法的主要原则是通过上下文将状态传递给组件，并使用reducers修改状态。
@@ -717,7 +717,7 @@ export const reducer = (state: State, action: Action): State => {
 主要的区别是，现在状态是一个字典(或对象) ，而不是我们在 [part 6](/zh/part6)中使用的数组。
 
 <!-- There are lot of things happening in the file <i>state.ts</i> that is taking care of setting up the context. The main ingredient is that it uses the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook to create the state and dispatch-function and passes those to the [context provider](https://reactjs.org/docs/context.html#contextprovider): -->
-在<i>state.ts</i> 文件中发生了许多事情，它们负责设置 context。 它的主要组成部分是使用[ useReducer ]( https://reactjs.org/docs/hooks-reference.html#useReducer )Hook来创建 状态 和 分发函数，并将它们传递给[ context provider ]( https://reactjs.org/docs/context.html#contextprovider ) :
+在<i>state.ts</i> 文件中发生了许多事情，它们负责设置 context。 它的主要组成部分是使用[useReducer](https://reactjs.org/docs/hooks-reference.html#useReducer)Hook来创建 状态 和 分发函数，并将它们传递给[context provider](https://reactjs.org/docs/context.html#contextprovider) :
 
 ```js
 export const StateProvider: React.FC<StateProviderProps> = ({
@@ -769,7 +769,7 @@ const PatientListPage: React.FC = () => {
 ```
 
 <!-- Do not worry if this seems confusing, it surely is until you have studied the [context documentation](https://reactjs.org/docs/context.html) and its use in [state management](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe). You do not need to understand all this completely for doing the exercises!  -->
-不要担心，如果这看起来令人困惑，它肯定是直到你研究了[上下文文档]( https://reactjs.org/docs/context.html 文档)和它在[状态管理]( https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe 文档)中的使用。 做这些练习，你不需要完全了解这一切！
+不要担心，如果这看起来令人困惑，它肯定是直到你研究了[上下文文档](https://reactjs.org/docs/context.html 文档)和它在[状态管理](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe 文档)中的使用。 做这些练习，你不需要完全了解这一切！
 
 <!-- It is actually quite typical that when you start working with an existing application, at the beginning you do not understand 100% of what happens under the hood. If the app has been properly structured you can trust that if you are making careful modifications, the app still works despite of the fact that you did not understand all the internals. Over the time you can then get a grasp of the more unfamiliar parts, but it does not happen overnight when working with a large codebase. -->
 实际上，当您开始使用一个现有的应用时，在开始的时候您并不完全了解背后发生的事情，这是非常常见的。 如果应用结构合理，你可以相信，如果你正在仔细修改，应用仍然工作，尽管事实上你不了解所有的内部。 随着时间的推移，您可以掌握更多不熟悉的部分，但这不会发生在一夜之间，当与大型代码库工作时。
@@ -815,7 +815,7 @@ const closeModal = (): void => {
 Frontend 的类型基于你在开发前面的后端时所创建的类型。 
 
 <!-- When the component <i>App</i> mounts, it is fetching patients from the backend using [axios](https://github.com/axios/axios). Note how we are giving <i>axios.get</i> function a type parameter to describe what is the type for the response data: -->
-当组件<i>App</i> 挂载时，它使用[ axios ]( https://github.com/axios/axios )从后端获取病人。 注意我们如何给<i>axios.get</i> 函数一个类型参数来描述响应数据的类型:
+当组件<i>App</i> 挂载时，它使用[axios](https://github.com/axios/axios)从后端获取病人。 注意我们如何给<i>axios.get</i> 函数一个类型参数来描述响应数据的类型:
 
 ````js
 React.useEffect(() => {
@@ -900,10 +900,10 @@ export type PublicPatient = Omit<Patient, 'ssn' | 'entries' >  // highlight-line
 因为我们现在有了上下文中的状态，所以需要定义一个新的操作类型来更新单个患者的数据。
 
 <!-- The Application uses [Semantic UI React](https://react.semantic-ui.com/) for styling, which is quite similar to [React Bootstrap](https://react-bootstrap.github.io/) and [MaterialUI](https://material-ui.com/) that we covered in [part 7](/zh/part7/more_about_styles). You may also use it for the new components but that is up to you since the main focus is now in Typescript. -->
-应用使用[ Semantic UI React ]( https://React.Semantic-UI.com/ )来进行样式化，这与[ React Bootstrap ]( https://React-Bootstrap.github.io/ )和[ MaterialUI ]( https://material-UI.com/ )非常相似，我们在 [part 7](/zh/part7/more_about_styles)中已经介绍过了。 你也可以在新的组件上使用它，但这取决于你，因为我们主要的关注点现在是TypeScript。
+应用使用[Semantic UI React](https://React.Semantic-UI.com/)来进行样式化，这与[React Bootstrap](https://React-Bootstrap.github.io/)和[MaterialUI](https://material-UI.com/)非常相似，我们在 [part 7](/zh/part7/more_about_styles)中已经介绍过了。 你也可以在新的组件上使用它，但这取决于你，因为我们主要的关注点现在是TypeScript。
 
 <!-- The Application also uses [react router](https://reacttraining.com/react-router/web/guides/quick-start)  -->
-应用还使用了[React路由]( https://reacttraining.com/react-router/web/guides/quick-start )
+应用还使用了[React路由](https://reacttraining.com/react-router/web/guides/quick-start)
 <!-- to control what view is visible in the frontend. You might want to have a look on [part 7](/zh/part7/react_router) if you don't yet have a grasp on how the router works. -->
 控制前端可见的视图。 如果你还没有掌握路由的工作原理，你可能需要查看一下[part 7](/zh/part7/react_router)。
 
@@ -913,10 +913,10 @@ export type PublicPatient = Omit<Patient, 'ssn' | 'entries' >  // highlight-line
 ![](../../images/9/39a.png)
 
 <!-- The gender is shown with react-semantic-ui component [Icon](https://react.semantic-ui.com/elements/icon/#gendersicons-can-represent-genders-or-types-of-sexuality)  -->
-性别以react-semantic-ui 组件[图标]( https://react.semantic-ui.com/elements/Icon/#gendersicons-can-represent-genders-or-types-of-sexuality )显示
+性别以react-semantic-ui 组件[图标](https://react.semantic-ui.com/elements/Icon/#gendersicons-can-represent-genders-or-types-of-sexuality)显示
 
 <!-- **Note** that in order to access the id in the url, you need to give [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) a proper type argument: -->
-**注意 **为了访问 url 中的 id，需要给[ useParams ]( https://reacttraining.com/react-router/web/api/hooks/useParams )一个正确的类型参数:
+**注意 **为了访问 url 中的 id，需要给[useParams](https://reacttraining.com/react-router/web/api/hooks/useParams)一个正确的类型参数:
 
 ```js
 const { id } = useParams<{ id: string }>();
@@ -959,7 +959,7 @@ dispatch(setPatientList(patientListFromApi));
 在 [exercise 9.12.](/zh/part9/typing_the_express_app#exercises-9-12-9-13)我们实现了一个用于获取诊断的端点，但是我们根本没有使用该端点。 既然我们现在有一个页面可以查看单个病人的详细信息，那么最好将我们的数据扩展一点; 让我们向病人数据中添加可能的<i>Entry</i> 数据，这样每个病人都可以有包含可能诊断的医疗条目。
 
 <!-- Let's ditch our old patient seed data from backend and start using [this expanded format](https://github.com/fullstack-hy2020/misc/blob/master/patients.ts). -->
-让我们从后端丢弃旧病人的种子数据，开始使用[这种扩展格式]( https://github.com/fullstack-hy2020/misc/blob/master/patients.ts )。
+让我们从后端丢弃旧病人的种子数据，开始使用[这种扩展格式](https://github.com/fullstack-hy2020/misc/blob/master/patients.ts)。
 
 <!-- **Notice:** This time the data is not in .json but instead in the .ts-format. You should already have the complete <i>Gender</i> and <i>Patient</i> types implemented so only correct the paths where they are imported from if needed. -->
 **注意: **这次数据不在 .json而是在 .ts-format。 您应该已经实现了完整的<i>Gender</i> 和<i>Patient</i> 类型，以便只在需要时纠正导入它们的路径。
@@ -1112,7 +1112,7 @@ export type Entry =
 扩展患者页面中的条目列表，以包含条目的详细信息，并使用一个新组件显示患者条目的其余信息，以区分不同的类型。
 
 <!-- You could use eg. [Icon](https://react.semantic-ui.com/elements/icon/) or some other [SemanticUI](https://react.semantic-ui.com/) components the get appropriate visuals for your listing. -->
-你可以使用例如. [图标](图标 https://react.semantic-ui.com/elements/Icon/ )或者其他的[ SemanticUI ]( https://react.semantic-ui.com/ )组件为你的清单提供合适的视觉效果。
+你可以使用例如. [图标](图标 https://react.semantic-ui.com/elements/Icon/)或者其他的[SemanticUI](https://react.semantic-ui.com/)组件为你的清单提供合适的视觉效果。
 
 <!-- You should use a _switch case_ based rendering and <i>exhaustive type checking</i> so that no cases can be forgotten.  -->
 您应该使用基于_switch case_的渲染和<i>详尽的类型检查</i>，这样就不会忘记任何大小写。
@@ -1138,7 +1138,7 @@ export type Entry =
 【添加病人的表单】
 
 <!-- Form handling can sometimes be quite a nuisance in React. That's why we have decided to utilize the the [Formik](https://jaredpalmer.com/formik/docs/overview) package for our add patient form in our app. Here's a small intro from to Formiks's documentation: -->
-在 React 中，表单处理有时会非常麻烦。 这就是为什么我们决定在我们的应用中使用[ Formik ]( https://jaredpalmer.com/Formik/docs/overview  /)包。 如下是对 Formiks 的文档的一个小介绍:
+在 React 中，表单处理有时会非常麻烦。 这就是为什么我们决定在我们的应用中使用[Formik](https://jaredpalmer.com/Formik/docs/overview  /)包。 如下是对 Formiks 的文档的一个小介绍:
 
 > Formik is a small library that helps you with the 3 most annoying parts:
 是一个小型的程序库，可以帮助你处理3个最烦人的部分:
@@ -1245,7 +1245,7 @@ export const SelectField: React.FC<SelectFieldProps> = ({
 <!-- Now let's move on to the <i>TextField</i> component.  -->
 现在让我们继续讨论<i>TextField</i> 组件。
 <!-- The component renders a SemanticUI [Form.Field](https://react.semantic-ui.com/collections/form/) with the given label and a Formik [Field](https://jaredpalmer.com/formik/docs/api/field), to which <i>name</i> and <i>placeholder</i> are given as props.  -->
-该组件渲染一个 SemanticUI [Form.Field](https://react.semantic-ui.com/collections/form/)和一个 Formik [字段]( https://jaredpalmer.com/Formik/docs/api/Field ) ， <i>name</i><i>和 <i>placeholder</i> 作为props。
+该组件渲染一个 SemanticUI [Form.Field](https://react.semantic-ui.com/collections/form/)和一个 Formik [字段](https://jaredpalmer.com/Formik/docs/api/Field) ， <i>name</i><i>和 <i>placeholder</i> 作为props。
 
 ```jsx
 interface TextProps extends FieldProps {
@@ -1265,7 +1265,7 @@ export const TextField: React.FC<TextProps> = ({ field, label, placeholder }) =>
 ```
 
 <!-- Note that the possible error message for the input is rendered with the Fromik component [ErrorMessage](https://jaredpalmer.com/formik/docs/api/errormessage) that does everything under the hood without a need to specify what it should do. -->
-注意，输入的可能错误消息是通过 Fromik 组件[ ErrorMessage ]( https://jaredpalmer.com/formik/docs/api/ErrorMessage )渲染的，它可以处理所有事情，而不需要指定它应该做什么。
+注意，输入的可能错误消息是通过 Fromik 组件[ErrorMessage](https://jaredpalmer.com/formik/docs/api/ErrorMessage)渲染的，它可以处理所有事情，而不需要指定它应该做什么。
 
 <!-- It would also be possible to get hold of the error messages withinn the component by using the prop <i>form</i>:  -->
 也可以通过使用 prop<i>form</i> 来获得组件内部的错误信息:
@@ -1278,7 +1278,7 @@ export const TextField: React.FC<TextProps> = ({ field, label, placeholder, form
 ```
 
 <!-- Now back to the actual form component in <i>AddPatientForm.tsx</i>. The function component <i>AddPatientForm</i> renders a [Formik component](https://jaredpalmer.com/formik/docs/api/formik), which is a wrapper that requires two props, which are quite self explanatory: <i>initialValues</i> and <i>onSubmit</i>. The Formik wrapper keeps track of your form's state and then exposes it plus a few reusable methods and event handlers to your form via props. -->
-现在回到<i>AddPatientForm.tsx</i> 中的实际表单组件。 函数组件<i>AddPatientForm</i> 渲染一个[ Formik 组件]( https://jaredpalmer.com/Formik/docs/api/Formik ) ，它是一个包装器，需要两个props，这是不言自明的:<i>initialValues</i> 和<i>onSubmit</i>。 Formik 包装器跟踪窗体的状态，然后将其加上一些可重用的方法和事件处理程序通过 props 公开给表单。
+现在回到<i>AddPatientForm.tsx</i> 中的实际表单组件。 函数组件<i>AddPatientForm</i> 渲染一个[Formik 组件](https://jaredpalmer.com/Formik/docs/api/Formik) ，它是一个包装器，需要两个props，这是不言自明的:<i>initialValues</i> 和<i>onSubmit</i>。 Formik 包装器跟踪窗体的状态，然后将其加上一些可重用的方法和事件处理程序通过 props 公开给表单。
 
 <!-- We are also using an optional <i>validate</i> prop, that expects a validation function and returns an object containing possible errors. Here we only check that our text fields are not falsy, but it could easily contain e.g. some validation for the social security number format etc. The error messages defined by this function are the ones that are then displayed along the corresponding field component's. -->
 我们还使用了一个可选的<i>validate</i> prop，它需要一个验证函数并返回一个包含可能错误的对象。 在这里，我们只检查我们的文本字段是不是虚假的，但它可以容易地包含例如一些验证的社会安全号码格式等。 此函数定义的错误消息随后将沿相应字段组件的。
@@ -1381,7 +1381,7 @@ export default AddPatientForm;
 ```
 
 <!-- As a child for our Formik wrapper, we create a <i>function</i> that returns the form content as we want them. We use Formik's [Form](https://jaredpalmer.com/formik/docs/api/form) to render the actual form element and inside that we use our <i>TextField</i> and <i>SelectField</i> components, that we created in <i>FormField.tsx</i>. -->
-作为 Formik 包装器的子包装器，我们创建了一个<i>function</i>，它可以根据需要返回表单内容。 我们使用 Formik 的[ Form ]( https://jaredpalmer.com/Formik/docs/api/Form )来渲染实际的表单元素，在这个表单中我们使用了在<i>FormField.tsx</i> 中创建的<i>TextField</i> 和<i>SelectField</i> 组件。
+作为 Formik 包装器的子包装器，我们创建了一个<i>function</i>，它可以根据需要返回表单内容。 我们使用 Formik 的[Form](https://jaredpalmer.com/Formik/docs/api/Form)来渲染实际的表单元素，在这个表单中我们使用了在<i>FormField.tsx</i> 中创建的<i>TextField</i> 和<i>SelectField</i> 组件。
 
 <!-- Lastly on the form, we create two buttons, one for cancelling the form submission, and one for submitting the form. The cancel button calls the <i>onCancel</i> callback straight away, while the submit button triggers Formik's onSubmit event, which in turn uses the <i>onSubmit</i> callback from the component's props. Submit button is enabled only of the form is <i>valid</i> and <i>dirty</i>, which means that user has edited some of the fields. -->
 最后在表单上，我们创建了两个按钮，一个用于取消表单提交，另一个用于提交表单。 取消按钮直接调用  <i>onCancel</i> 回调，而提交按钮触发 Formik 的 <i>onSubmit</i> 事件，该事件又使用组件props中的<i>onSubmit</i> 回调。 只有表单 is<i>valid</i> 和<i>dirty</i> 启用了 Submit 按钮，这意味着用户已经编辑了一些字段。
@@ -1390,7 +1390,7 @@ export default AddPatientForm;
 提交是通过 Formik 处理的，因为这样我们可以让它在执行实际提交之前调用验证函数。 如果验证函数返回任何错误，则取消提交。
 
 <!-- The buttons are set inside a SemanticUI [Grid](https://react.semantic-ui.com/collections/grid/), to get them next to each other easily. -->
-这些按钮设置在 SemanticUI [ Grid ]( https://react.semantic-ui.com/collections/Grid/ )中，使它们能够轻松地挨在一起。
+这些按钮设置在 SemanticUI [Grid](https://react.semantic-ui.com/collections/Grid/)中，使它们能够轻松地挨在一起。
 
 ```jsx
 <Grid>
@@ -1465,7 +1465,7 @@ const submitNewPatient = async (values: FormValues) => {
 如果您愿意，可以为这个练习重用<i>Add patient</i> 表单中的一些代码，但这不是强制的。
 
 <!-- Note that the file [FormField.tsx](https://github.com/fullstack-hy2020/patientor/blob/master/src/AddPatientModal/FormField.tsx#L58) has a readily made component _DiagnosisSelection_ that can be to for setting the field <i>diagnoses</i>: -->
-注意，文件[ FormField.tsx ]( https://github.com/fullstack-hy2020/patientor/blob/master/src/addpatientmodal/FormField.tsx#l58)有一个现成的组件_DiagnosisSelection_，可以用于设置字段<i>diagnosis</i>:
+注意，文件[FormField.tsx](https://github.com/fullstack-hy2020/patientor/blob/master/src/addpatientmodal/FormField.tsx#l58)有一个现成的组件_DiagnosisSelection_，可以用于设置字段<i>diagnosis</i>:
 
 <!-- It can be used as follows: -->
 它可以用于如下方面:

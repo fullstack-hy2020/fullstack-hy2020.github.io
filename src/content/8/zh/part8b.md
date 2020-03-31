@@ -12,7 +12,7 @@ lang: zh
 接下来我们将实现一个 React-app，它使用我们创建的 GraphQL 服务器。
 
 <!-- The current code of the server can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>. -->
-服务器的当前代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3) ，branch<i>part8-3</i> 上找到。
+服务器的当前代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3) ，branch<i>part8-3</i> 上找到。
 
 <!-- In theory, we could use GraphQL with HTTP POST -requests. The following shows an example of this with Postman.  -->
 理论上，我们可以对 HTTP POST 请求使用 GraphQL。
@@ -33,7 +33,7 @@ lang: zh
 
 
 <!-- In this course we will use the version [3.0-beta](https://www.apollographql.com/docs/react/v3.0-beta/) of Apollo Client.  -->
-在本课程中，我们将使用 Apollo Client 的版本[3.0-beta ]( https://www.apollographql.com/docs/react/v3.0-beta/ )。
+在本课程中，我们将使用 Apollo Client 的版本[3.0-beta](https://www.apollographql.com/docs/react/v3.0-beta/)。
 <!-- At the moment (20.2.2020) 2.6 is the latest officially released version, so when you are reading the documentation remember to select the documentation of 3.0 beta: -->
 目前(20.2.2020)2.6是官方发布的最新版本，所以当你阅读文档时记得选择3.0 beta 版的文档:
 
@@ -43,7 +43,7 @@ lang: zh
 创建一个新的 React-app 并安装 Apollo 客户端所需的依赖 [Apollo client](https://www.apollographql.com/docs/react/v3.0-beta/get-started/#installation)。
 
 <!-- We'll create a new React application and install the debendencies required by [Apollo client](https://www.apollographql.com/docs/react/get-started/#installation). -->
-我们将创建一个新的 React 应用，并安装[ Apollo 客户端]( https://www.apollographql.com/docs/React/get-started/#installation 应用)所要求的文档。
+我们将创建一个新的 React 应用，并安装[Apollo 客户端](https://www.apollographql.com/docs/React/get-started/#installation 应用)所要求的文档。
 
 ```js
 npm install --save @apollo/client graphql
@@ -89,7 +89,7 @@ ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
 <!-- The beginning of the code creates a new [client](https://www.apollographql.com/docs/react/v3.0-beta/get-started/#create-a-client) - object, which is then used to send a query to the server:  -->
-代码的开头创建一个新的[客户端]( https://www.apollographql.com/docs/react/v3.0-beta/get-started/#create-a-client )-对象，然后用它向服务器发送一个查询:
+代码的开头创建一个新的[客户端](https://www.apollographql.com/docs/react/v3.0-beta/get-started/#create-a-client)-对象，然后用它向服务器发送一个查询:
 
 
 ```js
@@ -141,9 +141,9 @@ ReactDOM.render(
 
 
 <!-- Apollo Client offers a few alternatives for making [queries](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/).  -->
-阿波罗客户端提供了一些替代方案来进行[查询]( https://www.apollographql.com/docs/react/v3.0-beta/data/queries/ )。
+阿波罗客户端提供了一些替代方案来进行[查询](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/)。
 <!-- Currently the use of the hook-function [useQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#usequery) is the dominant practice. -->
-目前，Hook函数[ useQuery ]( https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#useQuery )的使用是主要的实践。
+目前，Hook函数[useQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#useQuery)的使用是主要的实践。
 
 
 <!-- The query is made by the <i>App</i> component, which's code is as follows: -->
@@ -187,7 +187,7 @@ export default App
 <!-- When called, _useQuery_ makes the query it receives as a parameter. -->
 调用时，useQuery 将查询作为参数接收。
 <!-- It returns an object with multiple [fields](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#result). -->
-它返回一个具有多个[字段]( https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#result )的对象。
+它返回一个具有多个[字段](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#result)的对象。
 <!-- The field <i>loading</i> is true if the query has not received a response yet.  -->
 如果查询尚未收到响应，则字段<i>loading</i> 为 true。
 <!-- Then the following code gets rendered: -->
@@ -273,7 +273,7 @@ query {
 当我们以编程方式进行查询时，我们必须能够动态地给它们提供参数。
 
 <!-- GraphQL [variables](https://graphql.org/learn/queries/#variables) are well suited for this. To be able to use variables, we must also name our queries.  -->
-Graphql [ variables ]( https://GraphQL.org/learn/queries/#variables )非常适合这一点，为了能够使用变量，我们还必须命名我们的查询。 
+Graphql [variables](https://GraphQL.org/learn/queries/#variables)非常适合这一点，为了能够使用变量，我们还必须命名我们的查询。 
 
 
 
@@ -305,12 +305,12 @@ query findPersonByName($nameToSearch: String!) {
 Usequery Hook非常适合在渲染组件时进行查询的情况。 
 
 <!-- However now we want to make the query only when a user wants to see the details of a specific person, so the query is done only [as required](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#executing-queries-manually). -->
-然而，现在我们只希望在用户想要查看特定人员的详细信息时才进行查询，因此查询只能[根据需要]( https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#executing-queries-manually )完成。
+然而，现在我们只希望在用户想要查看特定人员的详细信息时才进行查询，因此查询只能[根据需要](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#executing-queries-manually)完成。
 
 
 
 <!-- For this this situation the hook-function [useLazyQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#uselazyquery) is a good choice.  -->
-在这种情况下，Hook函数[ useLazyQuery ]( https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#useLazyQuery )是一个不错的选择。
+在这种情况下，Hook函数[useLazyQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#useLazyQuery)是一个不错的选择。
 <!-- The <i>Persons</i> component becomes: -->
 <i>Persons</i> 组件变为:
 
@@ -448,7 +448,7 @@ Hook的第二个参数是 result.data，因此每次查询获取不同<i> person
 这个解决方案并不是最好的，但是对我们来说已经足够好了。
 
 <!-- The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-1) branch <i>part8-1</i>. -->
-当前应用的代码可以在[ Github ](https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-1)分支<i>part8-1</i> 上找到。
+当前应用的代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-1)分支<i>part8-1</i> 上找到。
 
 ### Cache
 
@@ -459,7 +459,7 @@ Hook的第二个参数是 result.data，因此每次查询获取不同<i> person
 ![](../../images/8/12.png)
 
 <!-- Apollo client saves the responses of queries to [cache](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-configuration/). To optimize performance if the response to a query is already in the cache, the query is not sent to the server at all.  -->
-Apollo 客户端将查询的响应保存到[缓存]( https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-configuration/  / 目录)。 若要在查询的响应已经在缓存中的情况下优化性能，则根本不将查询发送到服务器。 
+Apollo 客户端将查询的响应保存到[缓存](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-configuration/  / 目录)。 若要在查询的响应已经在缓存中的情况下优化性能，则根本不将查询发送到服务器。 
 
 <!-- It is possible to install [Apollo Client devtools](https://chrome.google.com/webstore/detail/apollo-client-developer-t/jdkknkkbebbapilgoeccciglkfbmbnfm/related) to Chrome to view the state of the cache.  -->
 你可以在 Chrome 中安装[ Apollo Client devtools ] https://Chrome.google.com/webstore/detail/Apollo-Client-developer-t/jdkknkkbebbapilgoeccciglkfbmbnfm/related 来查看缓存的状态。
@@ -479,7 +479,7 @@ Apollo 客户端将查询的响应保存到[缓存]( https://www.apollographql.c
 让我们实现添加新人的功能。
 
  <!--In the previous chapter we hardcoded the parameters for mutations. Now we need a version of the addPerson mutation which uses [variables](https://graphql.org/learn/queries/#variables):-->
-在前一章中，我们硬编码了突变的参数。 现在我们需要一个 addPerson 变异的版本，它使用[ variables ]( https://graphql.org/learn/queries/#variables 变量) :
+在前一章中，我们硬编码了突变的参数。 现在我们需要一个 addPerson 变异的版本，它使用[variables](https://graphql.org/learn/queries/#variables 变量) :
 
 ```js
 const CREATE_PERSON = gql`
@@ -505,7 +505,7 @@ mutation createPerson($name: String!, $street: String!, $city: String!, $phone: 
 
 
 <!-- The hook-function [useMutation](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#usemutation) provides the functionality for making mutations.  -->
-Hook函数[ useMutation ]( https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#useMutation )提供了进行变异的功能。 
+Hook函数[useMutation](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#useMutation)提供了进行变异的功能。 
 
 
 
@@ -603,7 +603,7 @@ createPerson({  variables: { name, phone, street, city } })
 ### Updating the cache
 【更新缓存】
 <!-- There are few different solutions for this. One way is to make the query for all persons [poll]((https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#polling) the server, or make the query repeatedly.  -->
-对此几乎没有不同的解决方案。 一种方法是对所有人进行查询[ poll ]( https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#polling )服务器，或者重复进行查询。
+对此几乎没有不同的解决方案。 一种方法是对所有人进行查询[poll](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#polling)服务器，或者重复进行查询。
 
 
 <!-- The change is small. Let's set the query to poll every two seconds:  -->
@@ -639,7 +639,7 @@ export default App
 
 
 <!-- Another easy way to keep the cache in sync is to use the _useMutation_-hook's [refetchQueries](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2) parameter to define, that the query fetching all persons is done again whenever a new person is created.  -->
-另一种保持缓存同步的简单方法是使用 useMutation-hook 的[ refetchQueries ](refetchQueries)参数来定义，即每当创建一个新的人员时，就会再次执行获取所有人员的查询 https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2。
+另一种保持缓存同步的简单方法是使用 useMutation-hook 的[refetchQueries](refetchQueries)参数来定义，即每当创建一个新的人员时，就会再次执行获取所有人员的查询 https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2。
 
 ```js
 const ALL_PERSONS = gql`
@@ -709,7 +709,7 @@ const App = () => {
 ```
 
 <!-- The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-2) branch <i>part8-2</i>. -->
-当前应用的代码可以在[ Github ](https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-2)分支<i>part8-2</i> 上找到。
+当前应用的代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-2)分支<i>part8-2</i> 上找到。
 
 #### Handling mutation errors
 【处理突变错误】
@@ -721,7 +721,7 @@ const App = () => {
 
 
 <!-- We should handle the exception. We can register an error handler function to the mutation using _useMutation_-hook's _onError_ [option](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2). -->
-我们应该处理这个异常，我们可以使用 useMutation-hook 的 onError [ option ]( https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2)将一个错误处理函数注册到变异中。
+我们应该处理这个异常，我们可以使用 useMutation-hook 的 onError [option](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2)将一个错误处理函数注册到变异中。
 
 <!-- Let's register the mutation an error handler, which uses the _setError_ -->
 让我们为变异注册一个错误处理程序，它使用 setError
@@ -799,7 +799,7 @@ const Notify = ({errorMessage}) => {
 ![](../../images/8/15.png)
 
 <!-- The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-3) branch <i>part8-3</i>. -->
-当前应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-3)分支<i>part8-3</i> 上找到。
+当前应用的代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-3)分支<i>part8-3</i> 上找到。
 
 ### Updating a phone number
 【更新电话号码】
@@ -899,7 +899,7 @@ export default PhoneForm
 这是因为每个人都有一个<i>ID</i> 类型的标识字段，所以当这个人的详细信息随着变异而更改时，会自动保存到缓存更新中。
 
 <!-- The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4) branch <i>part8-4</i> -->
-当前应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4)分支<i>part8-4</i> 上找到
+当前应用的代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4)分支<i>part8-4</i> 上找到
 
 
 
@@ -994,10 +994,10 @@ useEffect(() => {
 
 
 <!-- However this solution does not work is the _notify_-function is not wrapped to a [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-function.  If its not, this results to an endless loop. When the _App_ component is rerendered after a notification is removed, a <i>new version</i> of _notify_ gets created which causes the effect function to be executed which causes a new notification and so on an so on... -->
-但是这个解决方案不起作用，因为 notify-function 没有封装到[ useCallback ]( https://reactjs.org/docs/hooks-reference.html#useCallback )-function 中。 如果不是，这将导致一个无限循环。 当 App 组件在通知被删除后重新运行时，会创建一个<i>new version</i> of notify，这会导致 effect 函数被执行，从而导致一个新的通知等等..。
+但是这个解决方案不起作用，因为 notify-function 没有封装到[useCallback](https://reactjs.org/docs/hooks-reference.html#useCallback)-function 中。 如果不是，这将导致一个无限循环。 当 App 组件在通知被删除后重新运行时，会创建一个<i>new version</i> of notify，这会导致 effect 函数被执行，从而导致一个新的通知等等..。
 
 <!-- The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5) branch <i>part8-5</i> -->
-当前应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5)分支<i>part8-5</i> 上找到
+当前应用的代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5)分支<i>part8-5</i> 上找到
 
 ### Apollo Client and the applications state
 
@@ -1008,7 +1008,7 @@ useEffect(() => {
 我们的示例只使用 React 组件的状态来管理表单的状态并显示错误通知。 当使用 GraphQL 时，根本没有理由将应用状态的管理转移到 Redux。
 
 <!-- When necessary Apollo enables saving the applications local state to [Apollo cache](https://www.apollographql.com/docs/react/v3.0-beta/data/local-state/). -->
-必要时，Apollo 允许将应用保存到本地状态[ Apollo cache ]( https://www.apollographql.com/docs/react/v3.0-beta/data/local-state/ 缓存)。
+必要时，Apollo 允许将应用保存到本地状态[Apollo cache](https://www.apollographql.com/docs/react/v3.0-beta/data/local-state/ 缓存)。
 
 
 <div class="tasks">
@@ -1021,7 +1021,7 @@ useEffect(() => {
 通过这些练习，我们将实现 graphql 库的前端。
 
 <!-- Take [this project](https://github.com/fullstack-hy2020/library-frontend) for a start of your application.  -->
-以[这个项目]( https://github.com/fullstack-hy2020/library-frontend )作为你应用的开始。
+以[这个项目](https://github.com/fullstack-hy2020/library-frontend)作为你应用的开始。
 
 <!-- You can implement your application either using the render prop -components <i>Query</i> and <i>Mutation</i> of the Apollo Client, or using the hooks provided by Apollo client 3.0 beta version.  -->
 您可以使用 Apollo Client 的 render prop-components<i>Query</i> 和<i>Mutation</i> 来实现应用，或者使用 Apollo Client 3.0 beta 版本提供的Hook。
@@ -1069,7 +1069,7 @@ useEffect(() => {
 
 #### 8.12: Authors birth year advanced
 <!-- Change the birth year form so that a birth year can be set only for an existing author. Use [select-tag](https://reactjs.org/docs/forms.html#the-select-tag), [react-select](https://github.com/JedWatson/react-select) library or some other mechanism.  -->
-更改出生年份形式，以便只能为现有作者设置出生年份。 使用[ select-tag ]( https://reactjs.org/docs/forms.html#the-select-tag ) ，[ react-select ]( https://github.com/jedwatson/react-select )库或其他机制。
+更改出生年份形式，以便只能为现有作者设置出生年份。 使用[select-tag](https://reactjs.org/docs/forms.html#the-select-tag) ，[react-select](https://github.com/jedwatson/react-select)库或其他机制。
 
 <!-- A solution using the react-select -library looks as follows:  -->
 使用 react-select-library 的解决方案如下:

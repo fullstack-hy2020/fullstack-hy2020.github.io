@@ -96,7 +96,7 @@ export default App
 ```
 
 <!-- Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-1), branch <i>part5-1</i>. -->
-当前的应用代码可以在[ Github ]( https://Github.com/fullstack-hy2020/part2-notes/tree/part5-1) ，branch<i>part5-1</i> 上找到。
+当前的应用代码可以在[Github](https://Github.com/fullstack-hy2020/part2-notes/tree/part5-1) ，branch<i>part5-1</i> 上找到。
 
 
 <!-- The login form is handled the same way we handled forms in -->
@@ -280,7 +280,7 @@ const App = () => {
 }
 ```
 
-<!-- If the first statement evaluates false, or is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy), the second statement ( generating the form ) is not executed at all. -->
+<!-- If the first statement evaluates false, or is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy), the second statement ( generating the form) is not executed at all. -->
 如果第一个表达式计算为 false 或[falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy)， 则不会执行第二个语句（生成表单）
 
 <!-- We can make this even more straightforward by using the [conditional operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator): -->
@@ -344,7 +344,7 @@ return (
 
 
 <!-- Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-2), branch <i>part5-2</i>. -->
-当前的应用代码可以在[ Github ]( https://Github.com/fullstack-hy2020/part2-notes/tree/part5-2) ，branch<i>part5-2</i> 上找到。
+当前的应用代码可以在[Github](https://Github.com/fullstack-hy2020/part2-notes/tree/part5-2) ，branch<i>part5-2</i> 上找到。
 
 ### Creating new notes
 【创建新的 Note】
@@ -588,7 +588,7 @@ window.localStorage.clear()
 
 
 <!-- Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-3), branch <i>part5-3</i>. -->
-当前的应用代码可以在[ Github ]( https://Github.com/fullstack-hy2020/part2-notes/tree/part5-3) ，branch<i>part5-3</i> 上找到。
+当前的应用代码可以在[Github](https://Github.com/fullstack-hy2020/part2-notes/tree/part5-3) ，branch<i>part5-3</i> 上找到。
 
 </div>
 
@@ -597,7 +597,7 @@ window.localStorage.clear()
 
 ### Exercises 5.1.-5.4.
 <!-- We will now create a frontend for the bloglist backend we created in the last part. You can use [this application](https://github.com/fullstack-hy2020/bloglist-frontend) from GitHub as the base of your solution. The application expects your backend to be running on port 3001.  -->
-现在我们将为上一章节创建的博客列表后端创建一个前端。 你可以使用 GitHub 上的[ this application ]( https://GitHub.com/fullstack-hy2020/bloglist-frontend )作为你的解决方案的基础。 应用期望您的后端在端口3001上运行。
+现在我们将为上一章节创建的博客列表后端创建一个前端。 你可以使用 GitHub 上的[this application](https://GitHub.com/fullstack-hy2020/bloglist-frontend)作为你的解决方案的基础。 应用期望您的后端在端口3001上运行。
 
 <!-- It is enough to submit your finished solution. You can do a commit after each exercise, but that is not necessary.  -->
 只要提交完成的解决方案就足够了。 您可以在每次练习之后进行一次提交，但这不是必须的。
@@ -616,7 +616,7 @@ window.localStorage.clear()
 
 #### 5.1: bloglist frontend, 步骤1
 <!-- Clone the application from [Github](https://github.com/fullstack-hy2020/bloglist-frontend) with the command:  -->
-使用如下命令从[ Github ]( https://Github.com/fullstack-hy2020/bloglist-frontend )克隆应用:
+使用如下命令从[Github](https://Github.com/fullstack-hy2020/bloglist-frontend)克隆应用:
 
 ```bash
 git clone https://github.com/fullstack-hy2020/bloglist-frontend

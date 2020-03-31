@@ -14,7 +14,7 @@ lang: zh
 
 
 <!-- Let's use a tool meant to be used during software development called [JSON Server](https://github.com/typicode/json-server) to act as our server. -->
-让我们使用一个在开发过程中使用的工具，称为[ JSON 服务器]( https://github.com/typicode/JSON-Server 服务器) ，作为我们的服务器。
+让我们使用一个在开发过程中使用的工具，称为[JSON 服务器](https://github.com/typicode/JSON-Server 服务器) ，作为我们的服务器。
 
 <!-- Create a file named <i>db.json</i> in the root directory of the project with the following content: -->
 在项目的根目录中创建一个名为<i>db.json</i> 的文件，其内容如下:
@@ -47,7 +47,7 @@ lang: zh
 
 
 <!-- You can [install](https://github.com/typicode/json-server#install) JSON server globally on your machine using the command _npm install -g json-server_. A global installation requires administrative privileges, which means that it is not possible on the faculty computers or freshman laptops. -->
-您可以使用命令 _npm install -g json-server_在您的机器上[安装]( https://github.com/typicode/JSON-server#install ) JSON 服务器。 global 安装需要管理员权限，这意味着它不可能在教学电脑或新生的笔记本电脑上安装。
+您可以使用命令 _npm install -g json-server_在您的机器上[安装](https://github.com/typicode/JSON-server#install) JSON 服务器。 global 安装需要管理员权限，这意味着它不可能在教学电脑或新生的笔记本电脑上安装。
 
 <!-- However, a global installation is not necessary, since we can run the <i>json-server</i> using the command _npx_: -->
 但是，全局安装不是必须的，因为我们可以使用 npx 命令运行<i>json-server</i>:
@@ -86,7 +86,7 @@ Json-server 将所有数据存储在服务器上的<i>db.json</i> 文件中。 �
 我们的第一个任务是从地址 http://localhost:3001/notes 获取已经存在的便笺到 React 应用。
 
 <!-- In the part0 [example project](/zh/part0/fundamentals_of_web_apps#running-application-logic-on-the-browser) we already learned a way to fetch data from a server using JavaScript. The code in the example was fetching the data using [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), otherwise known as an HTTP request made using an XHR object. This is a technique introduced in 1999, which every browser has supported for a good while now. -->
-在 part0[示例 project](/zh/part0/fundamentals_of_web_apps#running-application-logic-on-the-browser)中，我们已经学到了一种使用 JavaScript 从服务器获取数据的方法。 示例中的代码使用[ XMLHttpRequest ]( https://developer.mozilla.org/en-us/docs/web/api/XMLHttpRequest )获取数据，也称为使用 XHR 对象发出的 HTTP 请求。 这是1999年引入的一项技术，现在每个浏览器都已经支持很长时间了。
+在 part0[示例 project](/zh/part0/fundamentals_of_web_apps#running-application-logic-on-the-browser)中，我们已经学到了一种使用 JavaScript 从服务器获取数据的方法。 示例中的代码使用[XMLHttpRequest](https://developer.mozilla.org/en-us/docs/web/api/XMLHttpRequest)获取数据，也称为使用 XHR 对象发出的 HTTP 请求。 这是1999年引入的一项技术，现在每个浏览器都已经支持很长时间了。
 
 <!-- The use of XHR is no longer recommended, and browsers already widely support the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) method, which is based on so-called [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), instead of the event-driven model used by XHR. -->
 使用 XHR已经不再推荐了，而且浏览器已经广泛支持基于所谓的[promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)的[fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch)方法，而不是 XHR 使用的事件驱动模型。
@@ -137,7 +137,7 @@ notes.forEach(m => {
 在 Java 中，代码逐行执行并停止等待 HTTP 请求，这意味着等待_request.get(...)_ 命令完成。 命令返回的数据，在本例中是notes，然后存储在一个变量中，我们开始以所需的方式操作数据。
 
 <!-- On the other hand, JavaScript engines, or runtime environments, follow the [asynchronous model](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop). In principle, this requires all [IO-operations](https://en.wikipedia.org/wiki/Input/output) (with some exceptions) to be executed as non-blocking. This means that the code execution continues immediately after calling an IO function, without waiting for it to return. -->
-另一方面，JavaScript 引擎，或者运行时环境，遵循[异步模型asynchronous model](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop).。 原则上，这要求所有的[ IO-操作 ]( https://en.wikipedia.org/wiki/input/output )(除了一些例外)都以非阻塞方式执行。 这意味着代码执行在调用 IO 函数之后立即继续，而不需要等待它返回。
+另一方面，JavaScript 引擎，或者运行时环境，遵循[异步模型asynchronous model](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop).。 原则上，这要求所有的[IO-操作](https://en.wikipedia.org/wiki/input/output)(除了一些例外)都以非阻塞方式执行。 这意味着代码执行在调用 IO 函数之后立即继续，而不需要等待它返回。
 
 <!-- When an asynchronous operation is completed, or more specifically, at some point after its completion, the JavaScript engine calls the event handlers registered to the operation. -->
 当一个异步操作完成时，或者更确切地说，在它完成之后的某个时刻，JavaScript 引擎才调用注册到该操作的事件处理。
@@ -169,7 +169,7 @@ setTimeout(() => {
 在互联网上可以找到大量关于这个主题的补充材料。 关于这个话题，一个特别清晰的演讲是 Philip Roberts 的主题演讲[What the heck is the event loop anyway?](https://www.youtube.com/watch?v=8aGhZQkoFbQ)
 
 <!-- In today's browsers, it is possible to run parallelized code with the help of so-called [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers). The event loop of an individual browser window is, however, still only handled by a [single thread](https://medium.com/techtrument/multithreading-javascript-46156179cf9a). -->
-在当今的浏览器中，可以在所谓的 [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) 的帮助下运行并行化的代码。 然而，单个浏览器窗口的事件循环仍然是由一个[单线程]( https://medium.com/techtrument/multithreading-javascript-46156179cf9a )处理。
+在当今的浏览器中，可以在所谓的 [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers) 的帮助下运行并行化的代码。 然而，单个浏览器窗口的事件循环仍然是由一个[单线程](https://medium.com/techtrument/multithreading-javascript-46156179cf9a)处理。
 
 ### npm
 <!-- Let's get back to the topic of fetching data from the server. -->
@@ -182,7 +182,7 @@ setTimeout(() => {
 也就是说，我们将使用[axios](https://github.com/axios/axios)库来代替浏览器和服务器之间的通信。 它的功能类似于fetch，但是使用起来更友好。 使用 axios 的另一个很好的理由是，我们已经熟悉了为 React 项目添加外部库，即使用所谓的<i>npm 包</i>。
 
 <!-- Nowadays, practically all JavaScript projects are defined using the node package manager, aka [npm](https://docs.npmjs.com/getting-started/what-is-npm). The projects created using create-react-app also follow the npm format. A clear indicator that a project uses npm is the <i>package.json</i> file located at the root of the project: -->
-现在，几乎所有的 JavaScript 项目都是使用node包管理器定义的，也就是[ npm ]( https://docs.npmjs.com/getting-started/what-is-npm )。 使用 create-react-app 创建的项目也遵循 npm 格式。 项目使用 npm 的一个明确的说明是位于项目根目录的<i>package.json</i> 文件:
+现在，几乎所有的 JavaScript 项目都是使用node包管理器定义的，也就是[npm](https://docs.npmjs.com/getting-started/what-is-npm)。 使用 create-react-app 创建的项目也遵循 npm 格式。 项目使用 npm 的一个明确的说明是位于项目根目录的<i>package.json</i> 文件:
 
 ```json
 {
@@ -303,7 +303,7 @@ npm run server
 不能绑定到3001端口。 请通过 -- port 参数或通过 json-server.json 配置文件指定另一个端口号。
 
 <!-- As we can see, the application is not able to bind itself to the [port](https://en.wikipedia.org/wiki/Port_(computer_networking)). The reason being that port 3001 is already occupied by the previously started json-server. -->
-正如我们所看到的，应用不能将自己绑定到[端口]( https://en.wikipedia.org/wiki/port_(computer_networking))。 原因是端口3001已经被先前启动的 json-server 占用了。
+正如我们所看到的，应用不能将自己绑定到[端口](https://en.wikipedia.org/wiki/port_(computer_networking))。 原因是端口3001已经被先前启动的 json-server 占用了。
 
 <!-- We used the command _npm install_ twice, but with slight differences: -->
 我们使用了两次 npm 安装命令，但是有一点不同:
@@ -586,7 +586,7 @@ useEffect(hook, [])
 因此，默认情况下，effect是<i>总是</i> 在组件渲染之后才运行。 然而，在我们的例子中，我们只想在第一次渲染的时候执行这个效果。
 
 <!-- The second parameter of <em>useEffect</em> is used to [specify how often the effect is run](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect). If the second parameter is an empty array <em>[]</em>, then the effect is only run along with the first render of the component. -->
-<em>useEffect</em>的第二个参数用于[指定effect运行的频率]( https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect )。 如果第二个参数是一个空数组 <em>[]</em>，那么这个effect只在组件的第一次渲染时运行。
+<em>useEffect</em>的第二个参数用于[指定effect运行的频率](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect)。 如果第二个参数是一个空数组 <em>[]</em>，那么这个effect只在组件的第一次渲染时运行。
 
 <!-- There are many possible use cases for effect hook other than fetching data from the server. This suffices us for now. -->
 除了从服务器获取数据之外，Effect-Hook还有许多用例。 目前我们只了解到这。
@@ -712,7 +712,7 @@ Error: listen EADDRINUSE 0.0.0.0:3001
 这意味着端口3001已经被另一个应用使用，例如已经运行的 json-server 正在使用。 关闭其他应用，或者更改端口，以防出现不正常的情况。
 
 <!-- Modify the application such that the initial state of the data is fetched from the server using the <i>axios</i>-library. Complete the fetching with an [Effect hook](https://reactjs.org/docs/hooks-effect.html). -->
-修改应用，使用<i>axios</i>-库从服务器获取数据的初始状态。 使用[ Effect hook ]( https://reactjs.org/docs/hooks-Effect.html )完成获取操作。
+修改应用，使用<i>axios</i>-库从服务器获取数据的初始状态。 使用[Effect hook](https://reactjs.org/docs/hooks-Effect.html)完成获取操作。
 
 <h4>2.12* Data for countries, 步骤1</h4>
 <!-- H42.12 * 国家数据，步骤1 / h4 -->
@@ -774,14 +774,14 @@ Api [https://restcountries.eu](https://restcountries.eu) 以机器可读的格�
 
 
 <!-- Add to the view showing the data of a single country the weather report for the capital of that country. There are dozens of providers for weather data. I used [https://weatherstack.com/](https://weatherstack.com/). -->
-在显示单个国家数据的视图中添加该国首都的天气报告。 有几十个天气数据提供商。 我用了[ https://weatherstack.com/ ]( https://weatherstack.com/ )。
+在显示单个国家数据的视图中添加该国首都的天气报告。 有几十个天气数据提供商。 我用了[https://weatherstack.com/](https://weatherstack.com/)。
 
 ![](../../images/2/19ba.png)
 
 
 
 <!-- **NB:** You need an api-key to use almost every weather service. Do not save the api-key to source control! Nor hardcode the api-key to your source code. Instead use an [environment variable](https://create-react-app.dev/docs/adding-custom-environment-variables/) to save the key. -->
-注意: 几乎所有气象服务都需要 api-key。 不要将 api-key 保存到源代码管理Git中！ 也不能将 api-key 硬编码到源代码中。 取而代之的是使用[环境变量]( https://create-react-app.dev/docs/adding-custom-environment-variables/ )来保存密钥。
+注意: 几乎所有气象服务都需要 api-key。 不要将 api-key 保存到源代码管理Git中！ 也不能将 api-key 硬编码到源代码中。 取而代之的是使用[环境变量](https://create-react-app.dev/docs/adding-custom-environment-variables/)来保存密钥。
 
 <!-- Assuming the api-key is <i>t0p53cr3t4p1k3yv4lu3</i>, when the application is started like so: -->
 假设 api-key 是<i>t0p53cr3t4p1k3yv4lu3</i>，当应用像下面这样启动时:

@@ -82,19 +82,19 @@ node --inspect index.js
 
 ### MongoDB
 <!-- In order to store our saved notes indefinitely, we need a database. Most of the courses taught at the University of Helsinki use relational databases. In this course we will use [MongoDB](https://www.mongodb.com/) which is a so-called [document database](https://en.wikipedia.org/wiki/Document-oriented_database). -->
-为了永久地存储我们保存的便笺，我们需要一个数据库。 赫尔辛基大学教授的大多数课程都使用关系数据库。 在本课程中，我们将使用[ MongoDB ]( https://www.MongoDB.com/ 数据库) ，这是一个所谓的[文档数据库]( https://en.wikipedia.org/wiki/document-oriented_database)。
+为了永久地存储我们保存的便笺，我们需要一个数据库。 赫尔辛基大学教授的大多数课程都使用关系数据库。 在本课程中，我们将使用[MongoDB](https://www.MongoDB.com/ 数据库) ，这是一个所谓的[文档数据库](https://en.wikipedia.org/wiki/document-oriented_database)。
 
 <!-- Document databases differ from relational databases in how they organize data as well as the query languages they support. Document databases are usually categorized under the [NoSQL](https://en.wikipedia.org/wiki/NoSQL) umbrella term. -->
-文档数据库在组织数据的方式以及它们所支持的查询语言方面不同于关系数据库。 文档数据库通常被归类为[ NoSQL ]( https://en.wikipedia.org/wiki/NoSQL )的术语集。
+文档数据库在组织数据的方式以及它们所支持的查询语言方面不同于关系数据库。 文档数据库通常被归类为[NoSQL](https://en.wikipedia.org/wiki/NoSQL)的术语集。
 
 <!-- You can read more about document databases and NoSQL from the course material for [week 7](https://tikape-s18.mooc.fi/part7/) of the Introduction to Databases course. Unfortunately the material is currently only available in Finnish.  -->
-你可以阅读更多关于文档数据库和 NoSQL 的资料，这些资料来自数据库导论课程的[第7周]( https://tikape-s18.mooc.fi/part7/ )课程。 不幸的是，这些材料目前只有芬兰语版。
+你可以阅读更多关于文档数据库和 NoSQL 的资料，这些资料来自数据库导论课程的[第7周](https://tikape-s18.mooc.fi/part7/)课程。 不幸的是，这些材料目前只有芬兰语版。
 
 <!-- Read now the chapters on [collections](https://docs.mongodb.com/manual/core/databases-and-collections/) and [documents](https://docs.mongodb.com/manual/core/document/) from the MongoDB manual to get a basic idea on how a document database stores the data. -->
-现在阅读 MongoDB 手册中关于[集合]( https://docs.MongoDB.com/manual/core/databases-and-collections/ )和[文档]( https://docs.MongoDB.com/manual/core/document/ )的章节，了解文档数据库如何存储数据的基本概念。
+现在阅读 MongoDB 手册中关于[集合](https://docs.MongoDB.com/manual/core/databases-and-collections/)和[文档](https://docs.MongoDB.com/manual/core/document/)的章节，了解文档数据库如何存储数据的基本概念。
 
 <!-- Naturally, you can install and run MongoDB on your own computer. However, the internet is also full of Mongo database services that you can use. Our preferred MongoDB provider in this course will be [MongoDB Atlas](https://www.mongodb.com/cloud/atlas). -->
-当然，您可以在自己的计算机上安装和运行 MongoDB。 然而，互联网上也充满了你可以使用的 Mongo 数据库服务。 在本课程中，我们首选的 MongoDB 提供者将是[ MongoDB Atlas ]( https://www.MongoDB.com/cloud/Atlas )。
+当然，您可以在自己的计算机上安装和运行 MongoDB。 然而，互联网上也充满了你可以使用的 Mongo 数据库服务。 在本课程中，我们首选的 MongoDB 提供者将是[MongoDB Atlas](https://www.MongoDB.com/cloud/Atlas)。
 
 <!-- Once you've created and logged into your account, Atlas will recommend creating a cluster: -->
 一旦你创建并登录到你的账户，Atlas 会建议你创建一个集群:
@@ -159,7 +159,7 @@ mongodb+srv://fullstack:<PASSWORD>@cluster0-ostce.mongodb.net/test?retryWrites=t
 我们现在可以使用数据库了。
 
 <!-- We could use the database directly from our JavaScript code with the [official MongoDb Node.js driver](https://mongodb.github.io/node-mongodb-native/) library, but it is quite cumbersome to use. We will instead use the [Mongoose](http://mongoosejs.com/index.html) library that offers a higher level API. -->
-我们可以通过官方的 MongoDb Node.js 驱动程序库直接从 JavaScript 代码中使用这个数据库，但是使用起来相当麻烦。 相反，我们将使用提供更高级别 API 的[ Mongoose ]( http://mongoosejs.com/index.html )库。
+我们可以通过官方的 MongoDb Node.js 驱动程序库直接从 JavaScript 代码中使用这个数据库，但是使用起来相当麻烦。 相反，我们将使用提供更高级别 API 的[Mongoose](http://mongoosejs.com/index.html)库。
 
 <!-- Mongoose could be described as an <i>object document mapper</i> (ODM), and saving JavaScript objects as Mongo documents is straightforward with the library. -->
 Mongoose 可以被描述为<i>object document mapper</i> (ODM) ，并且将 JavaScript 对象保存为 Mongo 文档对于Mongoose库来说很简单。 
@@ -253,7 +253,7 @@ mongodb+srv://fullstack:<PASSWORD>@cluster0-ostce.mongodb.net/note-app?retryWrit
 
 ### Schema
 <!-- After establishing the connection to the database, we define the [schema](http://mongoosejs.com/docs/guide.html) for a note and the matching [model](http://mongoosejs.com/docs/models.html): -->
-在建立到数据库的连接之后，我们为一个便笺定义[模式schema]( http://mongoosejs.com/docs/guide.html )和匹配的[模型]( http://mongoosejs.com/docs/models.html ) :
+在建立到数据库的连接之后，我们为一个便笺定义[模式schema](http://mongoosejs.com/docs/guide.html)和匹配的[模型](http://mongoosejs.com/docs/models.html) :
 
 ```js
 const noteSchema = new mongoose.Schema({
@@ -266,10 +266,10 @@ const Note = mongoose.model('Note', noteSchema)
 ```
 
 <!-- First we define the [schema](http://mongoosejs.com/docs/guide.html) of a note that is stored in the _noteSchema_ variable. The schema tells Mongoose how the note objects are to be stored in the database. -->
-首先，我们定义了存储在 noteSchema 变量中的便笺的[模式]( http://mongoosejs.com/docs/guide.html )。 模式告诉 Mongoose 如何将 note 对象存储在数据库中。
+首先，我们定义了存储在 noteSchema 变量中的便笺的[模式](http://mongoosejs.com/docs/guide.html)。 模式告诉 Mongoose 如何将 note 对象存储在数据库中。
 
 <!-- In the _Note_ model definition, the first <i>"Note"</i> parameter is the singular name of the model. The name of the collection will be the lowercased plural <i>notes</i>, because the [Mongoose convention](http://mongoosejs.com/docs/models.html) is to automatically name collections as the plural (e.g. <i>notes</i>) when the schema refers to them in the singular (e.g. <i>Note</i>). -->
-在 Note 模型定义中，第一个 <i>"Note"</i>参数是模型的单数名。 集合的名称将是小写的复数  <i>notes</i>，因为[ Mongoose 约定]( http://mongoosejs.com/docs/models.html )是当模式以单数(例如<i>Note</i>)引用集合时自动将其命名为复数(例如<i>notes</i>)。
+在 Note 模型定义中，第一个 <i>"Note"</i>参数是模型的单数名。 集合的名称将是小写的复数  <i>notes</i>，因为[Mongoose 约定](http://mongoosejs.com/docs/models.html)是当模式以单数(例如<i>Note</i>)引用集合时自动将其命名为复数(例如<i>notes</i>)。
 
 <!-- Document databases like Mongo are <i>schemaless</i>, meaning that the database itself does not care about the structure of the data that is stored in the database. It is possible to store documents with completely different fields in the same collection. -->
 像 Mongo 这样的文档数据库是<i>schemaaless</i>，这意味着数据库本身并不关心存储在数据库中的数据的结构。 可以在同一集合中存储具有完全不同字段的文档。
@@ -280,7 +280,7 @@ Mongoose 背后的思想是，存储在数据库中的数据在<i>application</i
 ### Creating and saving objects
 【创建和保存对象】
 <!-- Next, the application creates a new note object with the help of the <i>Note</i> [model](http://mongoosejs.com/docs/models.html): -->
-接下来，应用在<i>Note</i> [ model ]( http://mongoosejs.com/docs/models.html )的帮助下创建一个新的 Note 对象:
+接下来，应用在<i>Note</i> [model](http://mongoosejs.com/docs/models.html)的帮助下创建一个新的 Note 对象:
 
 ```js
 const note = new Note({
@@ -336,10 +336,10 @@ Note.find({}).then(result => {
 ![](../../images/3/70ea.png)
 
 <!-- The objects are retrieved from the database with the [find](https://mongoosejs.com/docs/api.html#model_Model.find) method of the _Note_ model. The parameter of the method is an object expressing search conditions. Since the parameter is an empty object<code>{}</code>, we get all of the notes stored in the  _notes_ collection. -->
-这些对象是通过 Note 模型的[ find ]( https://mongoosejs.com/docs/api.html#model_model.find )方法从数据库中检索的。 该方法的参数是表示搜索条件的对象。 因为参数是一个空的对象<code>{}</code>，所以我们得到了存储在 notes 集合中的所有便笺。
+这些对象是通过 Note 模型的[find](https://mongoosejs.com/docs/api.html#model_model.find)方法从数据库中检索的。 该方法的参数是表示搜索条件的对象。 因为参数是一个空的对象<code>{}</code>，所以我们得到了存储在 notes 集合中的所有便笺。
 
 <!-- The search conditions adhere to the Mongo search query [syntax](https://docs.mongodb.com/manual/reference/operator/). -->
-搜索条件遵循 Mongo 搜索查询[语法]( https://docs.mongodb.com/manual/reference/operator/ )。
+搜索条件遵循 Mongo 搜索查询[语法](https://docs.mongodb.com/manual/reference/operator/)。
 
 <!-- We could restrict our search to only include important notes like this: -->
 我们可以限制我们的搜索，只包括重要的便笺，如下所示:
@@ -407,7 +407,7 @@ Ada Lovelace 040-1231236
 
 
 <!-- You can get the command-line parameters from the [process.argv](https://nodejs.org/docs/latest-v8.x/api/process.html#process_process_argv) variable. -->
-您可以从[ process.argv ]( https://nodejs.org/docs/latest-v8.x/api/process.html#process_process_argv )变量中获得命令行参数。
+您可以从[process.argv](https://nodejs.org/docs/latest-v8.x/api/process.html#process_process_argv)变量中获得命令行参数。
 
 <!-- **NB: do not close the connection in the wrong place**. E.g. the following code will not work: -->
 **注意: 不要在错误的地方关闭连接 **，例如，如下的代码就无法工作:
@@ -492,7 +492,7 @@ app.get('/api/notes', (request, response) => {
 这个应用运行得几乎完美。 前端假设每个对象在<i>id</i> 字段中都有唯一的 id。 我们也不想将 mongo 版本控制字段 <i>\_\_v</i>  返回到前端。
 
 <!-- One way to format the objects returned by Mongoose is to [modify](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id) the _toJSON_ method of the objects. Modifying the method happens like this: -->
-格式化 Mongoose 返回的对象的一种方法是[修改]( https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id )对象的 toJSON 方法。 修改方法的过程如下:
+格式化 Mongoose 返回的对象的一种方法是[修改](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id)对象的 toJSON 方法。 修改方法的过程如下:
 
 ```js
 noteSchema.set('toJSON', {
@@ -564,7 +564,7 @@ module.exports = mongoose.model('Note', noteSchema) // highlight-line
 ```
 
 <!-- Defining Node [modules](https://nodejs.org/docs/latest-v8.x/api/modules.html) differs slightly from the way of defining [ES6 modules](/zh/part2/rendering_a_collection_modules#refactoring-modules) in part 2. -->
-定义 Node [ modules ]( https://nodejs.org/docs/latest-v8.x/api/modules.html)与第2章节中定义[ES6模块](/zh/part2/rendering_a_collection_modules#refactoring-modules)的方式稍有不同。
+定义 Node [modules](https://nodejs.org/docs/latest-v8.x/api/modules.html)与第2章节中定义[ES6模块](/zh/part2/rendering_a_collection_modules#refactoring-modules)的方式稍有不同。
 
 <!-- The public interface of the module is defined by setting a value to the _module.exports_ variable. We will set the value to be the <i>Note</i> model. The other things defined inside of the module, like the variables _mongoose_ and _url_ will not be accessible or visible to users of the module. -->
 模块的公共接口是通过将值设置为 module.exports 变量来定义的。 我们将该值设置为<i>Note</i> 模型。 模块内部定义的其他东西，比如变量 mongoose 和 url 对于模块的用户来说是不可访问的或者不可见的。
@@ -612,7 +612,7 @@ MONGODB_URI=address_here npm run watch
 ```
 
 <!-- A more sophisticated way is to use the [dotenv](https://github.com/motdotla/dotenv#readme) library. You can install the library with the command: -->
-一个更复杂的方法是使用[ dotenv ]( https://github.com/motdotla/dotenv#readme) ，你可以使用如下命令安装库:
+一个更复杂的方法是使用[dotenv](https://github.com/motdotla/dotenv#readme) ，你可以使用如下命令安装库:
 
 ```bash
 npm install dotenv --save
@@ -880,7 +880,7 @@ app.get('/api/notes/:id', (request, response) => {
 ### Moving error handling into middleware 
 【将错误处理移入中间件】
 <!-- We have written the code for the error handler among the rest of our code. This can be a reasonable solution at times, but there are cases where it is better to implement all error handling in a single place. This can be particularly useful if we later on want to report data related to errors to an external error tracking system like [Sentry](https://sentry.io/welcome/). -->
-我们在代码的其余部分中编写了错误处理程序的代码。 有时这可能是一个合理的解决方案，但在某些情况下，最好在单个位置实现所有错误处理。 如果我们以后想要将与错误相关的数据报告给外部的错误跟踪系统，比如[  [Sentry](https://sentry.io/welcome/)，那么这么做就特别有用。
+我们在代码的其余部分中编写了错误处理程序的代码。 有时这可能是一个合理的解决方案，但在某些情况下，最好在单个位置实现所有错误处理。 如果我们以后想要将与错误相关的数据报告给外部的错误跟踪系统，比如[[Sentry](https://sentry.io/welcome/)，那么这么做就特别有用。
 
 <!-- Let's change the handler for the <i>/api/notes/:id</i> route, so that it passes the error forward with the <em>next</em> function. The next function is passed to the handler as the third parameter: -->
 让我们更改 <i>/api/notes/:id</i> 路由的处理程序，以便它使用<em>next</em> 函数向下传递错误。 下一个函数作为第三个参数传递给处理程序:
@@ -1002,7 +1002,7 @@ app.get('/api/notes', (request, response) => {
 让我们为我们的应用添加一些缺失的功能，包括删除和更新单个便笺。
 
 <!-- The easiest way to delete a note from the database is with the [findByIdAndRemove](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove) method: -->
-从数据库中删除便笺最简单的方法是使用[ findByIdAndRemove ]( https://mongoosejs.com/docs/api.html#model_model.findByIdAndRemove )方法:
+从数据库中删除便笺最简单的方法是使用[findByIdAndRemove](https://mongoosejs.com/docs/api.html#model_model.findByIdAndRemove)方法:
 
 ```js
 app.delete('/api/notes/:id', (request, response, next) => {
@@ -1018,7 +1018,7 @@ app.delete('/api/notes/:id', (request, response, next) => {
 在删除资源的两个“成功”案例中，后端都使用状态码 <i>204 no content</i>.进行响应。 两种不同的情况是删除已存在的便笺，以及删除数据库中不存在的便笺。 结果回调参数可用于检查资源是否实际被删除，如果认为有必要，我们可以使用该信息为两种情况返回不同的状态代码。 发生的任何异常都会传递到错误处理程序上。
 
 <!-- The toggling of the importance of a note can be easily accomplished with the [findByIdAndUpdate](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate) method. -->
-通过[ findbyidanddupdate ]( https://mongoosejs.com/docs/api.html#model_model.findByIdAndUpdate )方法可以轻松地切换便笺的重要性。
+通过[findbyidanddupdate](https://mongoosejs.com/docs/api.html#model_model.findByIdAndUpdate)方法可以轻松地切换便笺的重要性。
 
 ```js
 app.put('/api/notes/:id', (request, response, next) => {
@@ -1044,7 +1044,7 @@ app.put('/api/notes/:id', (request, response, next) => {
 注意，<em>findByIdAndUpdate</em> 方法接收一个常规的 JavaScript 对象作为参数，而不是用  <em>Note</em>  构造函数创建的新便笺对象。
 
 <!-- There is one important detail regarding the use of the <em>findByIdAndUpdate</em> method. By default, the <em>updatedNote</em> parameter of the event handler receives the original document [without the modifications](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate). We added the optional <code>{ new: true }</code> parameter, which will cause our event handler to be called with the new modified document instead of the original. -->
-关于 <em>findByIdAndUpdate</em>方法的使用有一个重要的细节。 默认情况下，事件处理程序的 <em>updatedNote</em>  参数接收原始文档[无需修改]( https://mongoosejs.com/docs/api.html#model_model.findbyidandupdate )。 我们添加了可选的代码<code>{ new: true }</code>  参数，这将导致使用新修改的文档而不是原始文档调用事件处理程序。
+关于 <em>findByIdAndUpdate</em>方法的使用有一个重要的细节。 默认情况下，事件处理程序的 <em>updatedNote</em>  参数接收原始文档[无需修改](https://mongoosejs.com/docs/api.html#model_model.findbyidandupdate)。 我们添加了可选的代码<code>{ new: true }</code>  参数，这将导致使用新修改的文档而不是原始文档调用事件处理程序。
 
 <!-- After testing the backend directly with Postman and the VS Code REST client, we can verify that it seems to work. The frontend also appears to work with the backend using the database.  -->
 在使用 Postman 和 VS Code REST 客户端直接测试后端之后，我们可以验证它似乎可以工作。 前端似乎也与使用数据库的后端一起工作。

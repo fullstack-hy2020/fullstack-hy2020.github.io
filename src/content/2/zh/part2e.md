@@ -10,7 +10,7 @@ lang: zh
 
 <!-- The appearance of our current application is quite modest. In [exercise 0.2](/zh/part0/fundamentals_of_web_apps#exercises-0-1-0-6), the assignment was to go through Mozilla's [CSS tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics). -->
 
-我们当前应用的外观是相当克制的。 在 [exercise 0.2](/zh/part0/fundamentals_of_web_apps#exercises-0-1-0-6)中，作业是浏览 Mozilla 的[ CSS 教程]( https://developer.Mozilla.org/en-us/docs/learn/getting_started_with_the_web/css_basics )。
+我们当前应用的外观是相当克制的。 在 [exercise 0.2](/zh/part0/fundamentals_of_web_apps#exercises-0-1-0-6)中，作业是浏览 Mozilla 的[CSS 教程](https://developer.Mozilla.org/en-us/docs/learn/getting_started_with_the_web/css_basics)。
 
 <!-- Before we move onto the next part, let's take a look at how we can add styles to a React application. There are several different ways of doing this and we will take a look at the other methods later on. At first, we will add CSS to our application the old-school way; in a single file without using a [CSS preprocessor](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) (although this is not entirely true as we will learn later on).  -->
 在进入下一章节之前，让我们先看看如何向 React 应用添加样式。 有几种不同的方法可以做到这一点，我们将在稍后介绍其他的方法。 首先，我们将以传统的方式将 CSS 放在一个单独的文件中来添加到我们的应用中; 先不使用[CSS preprocessor](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) 尽管这并不完全正确，我们将在后面来学习)。
@@ -88,7 +88,7 @@ li {
 
 
 <!-- If we want to apply our style specifically to notes, then it is better to use [class selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors). -->
-如果我们想把我们的风格特别地应用到便笺上，那么最好使用[类选择器]( https://developer.mozilla.org/en-us/docs/web/css/class_selectors )。
+如果我们想把我们的风格特别地应用到便笺上，那么最好使用[类选择器](https://developer.mozilla.org/en-us/docs/web/css/class_selectors)。
 
 
 <!-- In regular HTML, classes are defined as the value of the <i>class</i> attribute: -->
@@ -99,7 +99,7 @@ li {
 ```
 
 <!-- In React we have to use the [className](https://reactjs.org/docs/dom-elements.html#classname) attribute instead of the class attribute. With this in mind, let's make the following changes to our <i>Note</i> component: -->
-在React中，我们必须使用[ className ]( https://reactjs.org/docs/dom-elements.html#className )属性而不是 class 属性。 考虑到这一点，让我们对<i>Note</i> 组件进行如下更改:
+在React中，我们必须使用[className](https://reactjs.org/docs/dom-elements.html#className)属性而不是 class 属性。 考虑到这一点，让我们对<i>Note</i> 组件进行如下更改:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -240,7 +240,7 @@ const App = () => {
 
 
 <!-- The code for the current state of our application can be found in the  <i>part2-7</i> branch on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-7). -->
-我们应用当前状态的代码可以在[ github ]( https://github.com/fullstack-hy2020/part2-notes/tree/part2-7)上的<i>part2-7</i> 分支中找到。
+我们应用当前状态的代码可以在[github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-7)上的<i>part2-7</i> 分支中找到。
 
 
 ### Inline styles
@@ -250,7 +250,7 @@ const App = () => {
 React也使得直接在代码中编写样式成为可能，即所谓的[内联样式](https://react-cn.github.io/react/tips/inline-styles.html)。 
 
 <!-- The idea behind defining inline styles is extremely simple. Any React component or element can be provided with a set of CSS properties as a JavaScript object through the [style](https://reactjs.org/docs/dom-elements.html#style) attribute. -->
-定义内联样式背后的思想非常简单。 任何 React 组件或元素都可以通过[ style ]( https://reactjs.org/docs/dom-elements.html#style )属性作为 JavaScript 对象提供一组 CSS 属性。
+定义内联样式背后的思想非常简单。 任何 React 组件或元素都可以通过[style](https://reactjs.org/docs/dom-elements.html#style)属性作为 JavaScript 对象提供一组 CSS 属性。
 
 <!-- CSS rules are defined slightly differently in JavaScript than in normal CSS files. Let's say that we wanted to give some element the color green and italic font that's 16 pixels in size. In CSS, it would look like this: -->
 CSS 规则在 JavaScript 中的定义与普通 CSS 文件中的定义稍有不同。 假设我们想给一些元素绿色和斜体字体，大小为16像素。 在 CSS 中，它看起来像这样: 
@@ -329,7 +329,7 @@ React的哲学，事实上，是这个极端的对立面。 由于将 CSS、 HTM
 构成应用功能实体的结构单元是 React 组件。 React 组件定义了组织内容的 HTML，确定功能的 JavaScript 函数，以及组件的样式; 所有这些都放在一个地方。 这是为了创建尽可能独立和可重用的单个组件。
 
 <!-- The code of the final version of our application can be found in the  <i>part2-8</i> branch on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-8). -->
-我们应用最终版本的代码可以在[ github ]( https://github.com/fullstack-hy2020/part2-notes/tree/part2-8)上的<i>part2-8</i> 分支中找到。
+我们应用最终版本的代码可以在[github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-8)上的<i>part2-8</i> 分支中找到。
 
 </div>
 
@@ -366,7 +366,7 @@ React的哲学，事实上，是这个极端的对立面。 由于将 CSS、 HTM
 注意 ：即使您捕获并处理异常，错误消息也会打印到控制台。
 
 <!-- This was the last exercise of this part of the course. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
-这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统]( https://studies.cs.helsinki.fi/stats/courses/fullstackopen )。
+这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)。
 
 </div>
 

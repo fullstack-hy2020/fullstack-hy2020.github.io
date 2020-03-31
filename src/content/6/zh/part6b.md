@@ -41,7 +41,7 @@ export default noteReducer
 ### Store with complex state 
 【复杂状态的储存】
 <!-- Let's implement filtering for the notes that are displayed to the user. The user interface for the filters will be implemented with [radio buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio): -->
-让我们实现对显示给用户的便笺的过滤。 用户界面的过滤器将实现[单选按钮]( https://developer.mozilla.org/en-us/docs/web/html/element/input/radio ) :
+让我们实现对显示给用户的便笺的过滤。 用户界面的过滤器将实现[单选按钮](https://developer.mozilla.org/en-us/docs/web/html/element/input/radio) :
 
 ![](../../images/6/01e.png)
 
@@ -148,7 +148,7 @@ export default filterReducer
 ```
 
 <!-- We can create the actual reducer for our application by combining the two existing reducers with the [combineReducers](https://redux.js.org/api/combinereducers) function. -->
-我们可以为我们的应用创建实际的reducer，通过结合现有的两个reducer和[ combineReducers ]( https://redux.js.org/api/combineReducers )函数。
+我们可以为我们的应用创建实际的reducer，通过结合现有的两个reducer和[combineReducers](https://redux.js.org/api/combineReducers)函数。
 
 <!-- Let's define the combined reducer in the <i>index.js</i> file: -->
 让我们在<i>index.js</i> 文件中定义组合的 reducer:
@@ -439,10 +439,10 @@ const notes = useSelector(({ filter, notes }) => {
 
 ### Redux DevTools 
 <!-- There is an extension [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) that can be installed on Chrome, in which the state of the Redux-store and the action that changes it can be monitored from the console of the browser. -->
-有一个扩展[ Redux DevTools ]( https://Chrome.google.com/webstore/detail/Redux-DevTools/lmhkpmbekcpmknklioeibfkpmmfibljd )可以安装在 Chrome 上，其中 Redux-store 的状态和改变它的动作可以在浏览器的控制台上监视。
+有一个扩展[Redux DevTools](https://Chrome.google.com/webstore/detail/Redux-DevTools/lmhkpmbekcpmknklioeibfkpmmfibljd)可以安装在 Chrome 上，其中 Redux-store 的状态和改变它的动作可以在浏览器的控制台上监视。
 
 <!-- When debugging, in addition to the browser extension we also have the software library [redux-devtools-extension](https://www.npmjs.com/package/redux-devtools-extension). Let's install it using the command: -->
-在调试时，除了浏览器扩展外，我们还有软件库[ redux-devtools-extension ]( https://www.npmjs.com/package/redux-devtools-extension 扩展)。 让我们使用如下命令来安装它:
+在调试时，除了浏览器扩展外，我们还有软件库[redux-devtools-extension](https://www.npmjs.com/package/redux-devtools-extension 扩展)。 让我们使用如下命令来安装它:
 
 ```js
 npm install --save redux-devtools-extension

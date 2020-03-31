@@ -130,16 +130,16 @@ export default LoginForm
 使用效果Hook是必要的，以避免无休止的渲染循环。
 
 <!-- Let's also add a button which enables logged in user to log out. The buttons onClick handler sets the _token_ state to null, removes the token from local storage and resets the cache of the Apollo client. The last is [important](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout), because some queries might have fetched data to cache, which only logged in users should have access to.  -->
-我们还要添加一个按钮，使登录用户能够注销。 Onclick 处理程序的按钮将令牌状态设置为 null，从本地存储中删除令牌并重置 Apollo 客户端的缓存。 最后一个是[重要的]( https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout ) ，因为有些查询可能已经将数据提取到缓存，只有登录的用户才能访问。
+我们还要添加一个按钮，使登录用户能够注销。 Onclick 处理程序的按钮将令牌状态设置为 null，从本地存储中删除令牌并重置 Apollo 客户端的缓存。 最后一个是[重要的](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout) ，因为有些查询可能已经将数据提取到缓存，只有登录的用户才能访问。
 
 
 
 
 
 <!-- We can reset the cache using the [resetStore](https://www.apollographql.com/docs/react/v3.0-beta/api/core/ApolloClient/#ApolloClient.resetStore) method of an Apollo _client_ object.  -->
-我们可以使用 Apollo 客户端对象的[ resetStore ]( https://www.apollographql.com/docs/react/v3.0-beta/api/core/apolloclient/#apolloclient.resetStore )方法重置缓存。
+我们可以使用 Apollo 客户端对象的[resetStore](https://www.apollographql.com/docs/react/v3.0-beta/api/core/apolloclient/#apolloclient.resetStore)方法重置缓存。
 <!-- The client can be accessed with the [useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useapolloclient) hook: -->
-客户端可以通过[ useApolloClient ]( https://www.apollographql.com/docs/react/api/react-hooks/#useApolloClient )Hook访问:
+客户端可以通过[useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useApolloClient)Hook访问:
 
 ```js
 const App = () => {
@@ -164,7 +164,7 @@ const App = () => {
 ```
 
 <!-- The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6), branch <i>part8-6</i>. -->
-当前应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6) ，branch<i>part8-6</i> 上找到。
+当前应用的代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6) ，branch<i>part8-6</i> 上找到。
 
 ### Adding a token to a header
 【在头部添加一个标记】
@@ -196,7 +196,7 @@ const client = new ApolloClient({
 
 
 <!-- The link parameter given to the _client_-object defines how apollo connects to the server. Here the normal [httpLink](https://www.apollographql.com/docs/link/links/http.htm) connection is modified so that the request's <i>authorization</i> [header](https://www.apollographql.com/docs/react/networking/authentication/#header) contains the token if one has been saved to the localStorage.  -->
-给定客户端对象的 link 参数定义了 apollo 如何连接到服务器。 在这里，正常的[ httpLink ]( https://www.apollographql.com/docs/link/links/http.htm )连接被修改，以便请求的<i>authorization</i> [ header ]( https://www.apollographql.com/docs/react/networking/authentication/#header )包含令牌(如果已经保存到 localStorage 的话)。
+给定客户端对象的 link 参数定义了 apollo 如何连接到服务器。 在这里，正常的[httpLink](https://www.apollographql.com/docs/link/links/http.htm)连接被修改，以便请求的<i>authorization</i> [header](https://www.apollographql.com/docs/react/networking/authentication/#header)包含令牌(如果已经保存到 localStorage 的话)。
 
 
 
@@ -238,7 +238,7 @@ const PersonForm = ({ setError }) => {
 ```
 
 <!-- Current application code can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-7), branch <i>part8-7</i>. -->
-当前的应用代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-7) ，branch<i>part8-7</i> 上找到。
+当前的应用代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-7) ，branch<i>part8-7</i> 上找到。
 
 ### Updating cache, revisited
 【更新缓存，复习】
@@ -264,7 +264,7 @@ const PersonForm = ({ setError }) => {
 这种方法非常好，缺点是查询总是随着任何更新而重新运行。
 
 <!-- It is possible to optimize the solution by handling updating the cache ourselves. This is done by defining a suitable [update](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#options-)-callback for the mutation, which Apollo runs after the mutation: -->
-通过处理自己更新缓存来优化解决方案是可行的。 这是通过为变异定义一个合适的[更新]( https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#options- )-回调来完成的，Apollo 在变异之后运行:
+通过处理自己更新缓存来优化解决方案是可行的。 这是通过为变异定义一个合适的[更新](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#options-)-回调来完成的，Apollo 在变异之后运行:
 
 ```js 
 const PersonForm = ({ setError }) => {
@@ -294,7 +294,7 @@ const PersonForm = ({ setError }) => {
 回调函数被给予一个对缓存的引用，以及作为参数由变异返回的数据。 例如，在我们的例子中，这将是被创建的人。
 
 <!-- The code reads the cached state of <em>ALL\_PERSONS</em> query using [readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readquery) function and updates the cache with [writeQuery]https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writequery-and-writefragment) function adding the new person to the cached data.  -->
-该代码使用[ readQuery ]( https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readQuery )函数读取 em ALL  PERSONS / em 查询的缓存状态，并使用[ writeQuery ] https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writeQuery-and-writefragment 函数更新缓存，将新人添加到缓存数据中。
+该代码使用[readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readQuery)函数读取 em ALL  PERSONS / em 查询的缓存状态，并使用[ writeQuery ] https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writeQuery-and-writefragment 函数更新缓存，将新人添加到缓存数据中。
 
 <!-- There are actually some situations where the only good way to keep the cache up to date is using _update_ -callbacks.  -->
 实际上，在某些情况下，使缓存保持最新的唯一好方法是使用 update-callback。
@@ -305,16 +305,16 @@ const PersonForm = ({ setError }) => {
 在某些情况下，使缓存保持最新的唯一合理方法是使用 update-callback。
 
 <!-- When necessary it is possible to disable cache for the whole application or single queries by setting the field managing the use of cache, [fetchPolicy](https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy) as <em>no-cache</em>. -->
-必要时，可以通过将管理 cache 使用的字段设置为 <em>no-cache</em> 来禁用整个应用或单个查询的缓存，[ fetchPolicy ]( https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy )。
+必要时，可以通过将管理 cache 使用的字段设置为 <em>no-cache</em> 来禁用整个应用或单个查询的缓存，[fetchPolicy](https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy)。
 
 <!-- Be diligent with the cache. Old data in cache can cause hard to find bugs. As we know, keeping the cache up to date is very challenging. According to a coder proverb: -->
 勤于使用缓存。 缓存中的旧数据可能导致难以发现 bug。 众所周知，保持缓存最新是非常具有挑战性的。 根据一个编码器谚语:
 
 > <i>There are only two hard things in Computer Science: cache invalidation and naming things.</i> Read more [here](https://www.google.com/search?q=two+hard+things+in+Computer+Science&oq=two+hard+things+in+Computer+Science).
-在计算机科学中只有两个难题: 缓存失效和命名。Read more [ here ]( https://www.google.com/search?q=two+hard+things+in+Computer+Science&oq=two+hard+things+in+Computer+Science )。
+在计算机科学中只有两个难题: 缓存失效和命名。Read more [here](https://www.google.com/search?q=two+hard+things+in+Computer+Science&oq=two+hard+things+in+Computer+Science)。
 
 <!-- The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-8), branch <i>part8-8</i>. -->
-当前应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-8) ，branch<i>part8-8</i> 上找到。
+当前应用的代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-8) ，branch<i>part8-8</i> 上找到。
 
 </div>
 
@@ -393,7 +393,7 @@ const PersonForm = ({ setError }) => {
 - <!--Note, that you can do GraphQL queries in a <i>useEffect</i>-hook.-->
 - 注意，您可以在<i>/ useEffect</i>-hook 中执行 GraphQL 查询。
 - <!--The [second parameter](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) of a <i>useEffect</i> - hook can become handy depending on your approach. -->
-根据您的方法，<i>useEffect</i>  的[第二个参数]( https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect )可以变得很方便。
+根据您的方法，<i>useEffect</i>  的[第二个参数](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect)可以变得很方便。
 
 #### 8.22 Up to date cache and book recommendations
 8.22更新缓存和预订推荐

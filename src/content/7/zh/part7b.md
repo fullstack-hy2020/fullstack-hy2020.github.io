@@ -23,22 +23,22 @@ lang: zh
 
 
 <!-- React offers 10 different [built-in hooks](https://reactjs.org/docs/hooks-reference.html), of which the most popular ones are the [useState](https://reactjs.org/docs/hooks-reference.html#usestate) and [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect) hooks, that we have already been using extensively. -->
-React 提供了10种不同的内置Hook，其中最受欢迎的是我们已经广泛使用的[ useState ]( https://reactjs.org/docs/hooks-reference.html  https://reactjs.org/docs/hooks-reference.html#useState )和[ useEffect ]( https://reactjs.org/docs/hooks-reference.html#useEffect )Hook。 
+React 提供了10种不同的内置Hook，其中最受欢迎的是我们已经广泛使用的[useState](https://reactjs.org/docs/hooks-reference.html  https://reactjs.org/docs/hooks-reference.html#useState)和[useEffect](https://reactjs.org/docs/hooks-reference.html#useEffect)Hook。 
 
 <!-- In [part 5](/osa5/props_children_ja_proptypet#ref-eli-viite-komponenttiin) we used the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle)-hook which allows for components to provide their functions to other components. -->
-在[ 第5章](/zh/part5/props_children_and_proptypes#references-to-components-with-ref)中，我们使用了[ useImperativeHandle ]( https://reactjs.org/docs/hooks-reference.html#useImperativeHandle )-hook，它允许组件为其他组件提供其功能。
+在[第5章](/zh/part5/props_children_and_proptypes#references-to-components-with-ref)中，我们使用了[useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useImperativeHandle)-hook，它允许组件为其他组件提供其功能。
 
 <!-- Within the last year many React libraries have begun to offer hook based apis. [In part 6](/osa6/flux_arkkitehtuuri_ja_redux#redux-storen-valittaminen-eri-komponenteille) -->
 在过去的一年里，许多 React 库已经开始提供基于 hook 的 api。正如[第6章](/en/part6/flux_architecture_and_redux)所讲的。
 
 <!-- we used the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) hooks from the react-redux library to share our redux-store and dispatch function to our components. Redux's hook based api is a lot easier to use than its older, still available, [connect](/osa6/connect)-api. -->
-我们使用 react-redux 库中的[ useSelector ]( https://react-redux.js.org/api/hooks#useSelector )和[ useDispatch ]( https://react-redux.js.org/api/hooks#useDispatch )Hook来共享我们对组件的 redux-store 和 dispatch 函数。 Redux 的基于Hook的 api 比旧的、仍然可用的[ connect ](/en/part6/connect)-api 更易于使用。
+我们使用 react-redux 库中的[useSelector](https://react-redux.js.org/api/hooks#useSelector)和[useDispatch](https://react-redux.js.org/api/hooks#useDispatch)Hook来共享我们对组件的 redux-store 和 dispatch 函数。 Redux 的基于Hook的 api 比旧的、仍然可用的[connect](/en/part6/connect)-api 更易于使用。
 
 <!-- [React-router's](https://reacttraining.com/react-router/web/guides) api we introduced in the [previous part](/osa7/react_router/) is also partially [hook](https://reacttraining.com/react-router/web/api/Hooks) based. Its hooks can be used to access url parameters and the history object, which allows for manipulating the browser url programmatically. -->
-我们在[上一章节](/en/part7/react_router)中介绍的[ React-router 的]( https://reacttraining.com/React-router/web/guides ) api 也部分基于[ hook ]( https://reacttraining.com/React-router/web/api/hooks )。 它的Hook可以用来访问 url 参数和历史对象，这允许以编程方式操作浏览器的 url。
+我们在[上一章节](/en/part7/react_router)中介绍的[React-router 的](https://reacttraining.com/React-router/web/guides) api 也部分基于[hook](https://reacttraining.com/React-router/web/api/hooks)。 它的Hook可以用来访问 url 参数和历史对象，这允许以编程方式操作浏览器的 url。
 
 <!-- As mentioned in [part 1](/zh/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks), hooks are not normal functions, and when using those we have to adhere to certain [rules or limitations](https://reactjs.org/docs/hooks-rules.html). Let's recap the rules of using hooks, copied verbatim from the official React documentation: -->
-正如在[第一章 ](/zh/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks)中提到的，Hook不是正常的函数，在使用这些函数时，我们必须遵守某些[规则或限制]( https://reactjs.org/docs/hooks-rules.html )。 让我们回顾一下使用Hook的规则，一字不差地从官方的 React 文档中复制下来:
+正如在[第一章](/zh/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks)中提到的，Hook不是正常的函数，在使用这些函数时，我们必须遵守某些[规则或限制](https://reactjs.org/docs/hooks-rules.html)。 让我们回顾一下使用Hook的规则，一字不差地从官方的 React 文档中复制下来:
 
 <!-- **Don’t call Hooks inside loops, conditions, or nested functions.** Instead, always use Hooks at the top level of your React function.  -->
 **不要在循环、条件或嵌套函数中调用 Hooks。 **取而代之的是，始终在 React 函数的顶层使用 Hooks。
@@ -52,10 +52,10 @@ React 提供了10种不同的内置Hook，其中最受欢迎的是我们已经�
 - 从定制Hook调用Hook
 
 <!-- There's an existing [ESlint](https://www.npmjs.com/package/eslint-plugin-react-hooks) rule that can be used to verify that the application uses hooks correctly.  -->
-有一个现有的[ ESlint ]( https://www.npmjs.com/package/ESlint-plugin-react-hooks )规则可以用来验证应用是否正确地使用Hook。
+有一个现有的[ESlint](https://www.npmjs.com/package/ESlint-plugin-react-hooks)规则可以用来验证应用是否正确地使用Hook。
 
 <!-- Create-react-app has readily configured rule [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks) that complains if hooks are used in an illegal manner: -->
-Create-react-app 已经配置好了规则[ eslint-plugin-react-hooks ]( https://www.npmjs.com/package/eslint-plugin-react-hooks ) ，如果Hook被非法使用就会产生警告: 
+Create-react-app 已经配置好了规则[eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks) ，如果Hook被非法使用就会产生警告: 
 
 ![](../../images/7/60ea.png)
 
@@ -63,7 +63,7 @@ Create-react-app 已经配置好了规则[ eslint-plugin-react-hooks ]( https://
 ### Custom hooks 
 【定制Hook】
 <!-- React offers the option to create our own [custom](https://reactjs.org/docs/hooks-custom.html) hooks. According to React, the primary purpose of custom hooks is to facilitate the reuse of the logic used in components. -->
-React 提供了创建我们自己的[自定义]( https://reactjs.org/docs/hooks-custom.html )Hook的选项。 根据 React，自定义Hook的主要目的是促进组件中使用的逻辑的重用。 
+React 提供了创建我们自己的[自定义](https://reactjs.org/docs/hooks-custom.html)Hook的选项。 根据 React，自定义Hook的主要目的是促进组件中使用的逻辑的重用。 
 
 > <!--<i>Building your own Hooks lets you extract component logic into reusable functions.</i>-->
 构建自己的 hook 可以让您将组件逻辑提取到可重用的函数中
@@ -275,14 +275,14 @@ const App = () => {
 ### Spread attributes 
 【展开属性】
 <!-- We could simplify things a bit further. Since the _name_ object has exactly all of the attributes that the <i>input</i> element expects to receive as props, we can pass the props to the element using the [spread syntax](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) in the following way: -->
-我们可以进一步简化事情。 因为 name 对象具有<i>input</i> 元素期望作为props接收的所有属性，所以我们可以使用[ spread syntax ]( https://reactjs.org/docs/jsx-in-depth.html#spread-attributes )如下面的方式将props传递给元素:
+我们可以进一步简化事情。 因为 name 对象具有<i>input</i> 元素期望作为props接收的所有属性，所以我们可以使用[spread syntax](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes)如下面的方式将props传递给元素:
 
 ```js
 <input {...name} /> 
 ```
 
 <!-- As the [example](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) in the React documentation states, the following two ways of passing props to a component achieve the exact same result: -->
-正如 React 文档中的[示例]( https://reactjs.org/docs/jsx-in-depth.html#spread-attributes )所述，如下两种方法为组件传递props可以得到完全相同的结果:
+正如 React 文档中的[示例](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes)所述，如下两种方法为组件传递props可以得到完全相同的结果:
 
 ```js
 <Greeting firstName='Arto' lastName='Hellas' />
@@ -335,7 +335,7 @@ const App = () => {
 <!-- The internet is starting to fill up with more and more helpful material related to hooks. The following sources are worth checking out: -->
 互联网上开始充斥着越来越多关于Hook的有用资料。 如下是值得一查的资料来源:
 
-* [ Awesome React Hooks Resouces ]( https://github.com/rehooks/Awesome-React-Hooks )
+* [Awesome React Hooks Resouces](https://github.com/rehooks/Awesome-React-Hooks)
 * [Easy to understand React Hook recipes by Gabe Ragland](https://usehooks.com/)
 * [Why Do React Hooks Rely on Call Order?](https://overreacted.io/why-do-hooks-rely-on-call-order/)
 
@@ -360,7 +360,7 @@ const App = () => {
 保存应用的自定义Hook的一个自然位置是 <i>/src/hooks/index.js</i>文件。
 
 <!-- If you use the [named export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description) instead of the default export: -->
-如果你使用[命名导出]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/statements/export#description )代替默认导出:
+如果你使用[命名导出](https://developer.mozilla.org/en-us/docs/web/javascript/reference/statements/export#description)代替默认导出:
 
 ```js
 import { useState } from 'react'
@@ -386,7 +386,7 @@ export const useAnotherHook = () => { // highlight-line
 ```
 
 <!-- Then [importing](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) happens in the following way: -->
-然后[导入]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/statements/import )如下面的方式发生:
+然后[导入](https://developer.mozilla.org/en-us/docs/web/javascript/reference/statements/import)如下面的方式发生:
 
 ```js
 import  { useField } from './hooks'
@@ -488,12 +488,12 @@ input元素不应该被赋予 reset 属性。
 除此之外，应用是完整的，但是在这个练习中，您必须实现一个自定义的 hook useCountry，它可以用来搜索作为参数提供给 hook 的国家的详细信息。
 
 <!-- Use the api endpoint [full name](https://restcountries.eu/#api-endpoints-full-name) to fetch country details in a _useEffect_-hook within your custom hook. -->
-使用 api 端点[全名]( https://restcountries.eu/#api-endpoints-full-name )在自定义Hook内的 useEffect-hook 中获取国家详细信息。
+使用 api 端点[全名](https://restcountries.eu/#api-endpoints-full-name)在自定义Hook内的 useEffect-hook 中获取国家详细信息。
 
 
 
 <!-- Note, that in this exercise it is essential to use useEffect's [second parameter](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) array to control when the effect function is executed. -->
-注意，在这个练习中，必须使用 useEffect 的[第二个参数]( https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect )数组来控制执行 effect 函数的时间。
+注意，在这个练习中，必须使用 useEffect 的[第二个参数](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect)数组来控制执行 effect 函数的时间。
 
 #### 7.8: ultimate hooks 终极Hook
 <!-- The code of the application responsible for communicating with the backend of the note application of the previous parts looks like this: -->

@@ -11,7 +11,7 @@ lang: zh
 
 <!-- The easiest way to get started by far is using a tool called [create-react-app](https://github.com/facebookincubator/create-react-app). It is possible (but not necessary) to install <i>create-react-app</i> on your machine if the <i>npm</i> tool that was installed along with Node has a version number of at least <i>5.3</i>. -->
 
-目前来说，创建一个React应用最简单的方式是使用一个叫做[ create-react-app ]( https://github.com/facebookincubator/create-react-app) 的工具。 如果你随着node安装的npm工具版本号不小于5.3，你就可以（也不是必须的）在机器上安装 <i>create-react-app</i> 了。
+目前来说，创建一个React应用最简单的方式是使用一个叫做[create-react-app](https://github.com/facebookincubator/create-react-app) 的工具。 如果你随着node安装的npm工具版本号不小于5.3，你就可以（也不是必须的）在机器上安装 <i>create-react-app</i> 了。
 
 <!-- Let's create an application called <i>part1</i> and navigate to its directory. -->
 让我们创建一个名为 <i>part1</i> 的应用，并进入到它的目录。
@@ -63,7 +63,7 @@ ReactDOM.render(<App />, document.getElementById('root'))
 ### Component
 【组件】
 <!-- The file <i>index.js</i> now defines a React-[component](https://reactjs.org/docs/components-and-props.html) with the name <i>App</i> and the command on the final line -->
-文件<i>index.js</i> 定义了一个 React-[ 组件component ]( https://reactjs.org/docs/components-and-props.html) ，命名为<i>App</i>，最后一行代码为：
+文件<i>index.js</i> 定义了一个 React-[组件component](https://reactjs.org/docs/components-and-props.html) ，命名为<i>App</i>，最后一行代码为：
 
 ```js
 ReactDOM.render(<App />, document.getElementById('root'))
@@ -109,7 +109,7 @@ const App = ...
 
 <!-- There are a few ways to define functions in JavaScript. Here we will use [arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions), which are described in a newer version of JavaScript known as [ECMAScript 6](http://es6-features.org/#Constants), also called ES6. -->
 
-在 JavaScript 中定义函数有几种方法。 在这里，我们会一直使用[箭头函数]( https://developer.mozilla.org/en-us/docs/web/JavaScript/reference/functions/arrow_functions ) ，箭头函数定义在新版本的 JavaScript 标准中，即[ECMAScript 6]( http://ES6-features.org/#constants ) ，也叫做 ES6。
+在 JavaScript 中定义函数有几种方法。 在这里，我们会一直使用[箭头函数](https://developer.mozilla.org/en-us/docs/web/JavaScript/reference/functions/arrow_functions) ，箭头函数定义在新版本的 JavaScript 标准中，即[ECMAScript 6](http://ES6-features.org/#constants) ，也叫做 ES6。
 
 <!-- Because the function consists of only a single expression we have used a shorthand, which represents this piece of code: -->
 由于这个函数只包含一个表达式，所以我们使用了简写，不简写的话是如下这段代码:
@@ -172,7 +172,7 @@ const App = () => {
 ### JSX
 <!-- It seems like React components are returning HTML markup. However, this is not the case. The layout of React components is mostly written using [JSX](https://reactjs.org/docs/introducing-jsx.html). Although JSX looks like HTML, we are actually dealing with a way to write JavaScript. Under the hood, JSX returned by React components is compiled into JavaScript. -->
 
-看起来 React 组件返回的是 HTML 标签，但实际并不是这样。 React 组件的布局大部分是使用[ JSX ]( https://reactjs.org/docs/introducing-JSX.html )编写的。 尽管 JSX 看起来像 HTML，但我们其实是在用一种特殊的方法写 JavaScript 。 在底层，React 组件实际上返回的 JSX 会被编译成 JavaScript。
+看起来 React 组件返回的是 HTML 标签，但实际并不是这样。 React 组件的布局大部分是使用[JSX](https://reactjs.org/docs/introducing-JSX.html)编写的。 尽管 JSX 看起来像 HTML，但我们其实是在用一种特殊的方法写 JavaScript 。 在底层，React 组件实际上返回的 JSX 会被编译成 JavaScript。
 
 <!-- After compiling, our application looks like this: -->
 编译后，我们的应用如下所示:
@@ -204,7 +204,7 @@ ReactDOM.render(
 ```
 
 <!-- The compiling is handled by [Babel](https://babeljs.io/repl/). Projects created with *create-react-app* are configured to compile automatically. We will learn more about this topic in [part 7](/zh/part7) of this course. -->
-编译是由[ Babel ]( https://babeljs.io/repl/ )处理的。 使用 *create-react-app* 创建的项目会配置为自动编译。 我们将在本课程的[第7章节](/zh/part7)中学习更多关于这个议题的知识。
+编译是由[Babel](https://babeljs.io/repl/)处理的。 使用 *create-react-app* 创建的项目会配置为自动编译。 我们将在本课程的[第7章节](/zh/part7)中学习更多关于这个议题的知识。
 
 <!-- It is also possible to write React as "pure JavaScript" without using JSX. Although, nobody with a sound mind would actually do so. -->
 也可以将 React 写成“纯 JavaScript”，而不用 JSX。 但没有一个精神正常的人会这样做的。
@@ -214,7 +214,7 @@ ReactDOM.render(
 实际上，JSX 与 HTML 非常相似，其区别在于，通过在大括号中编写一些 JavaScript，可以轻松地嵌入一些动态内容。 JSX 的思想与许多模板语言非常相似，就如在 Java Spring 中使用的 Thymeleaf（是一种服务器模板语言）。
 
 <!-- JSX is "[XML](https://developer.mozilla.org/en-US/docs/Web/XML/XML_introduction)-like", which means that every tag needs to be closed. For example, a newline is an empty element, which in HTML can be written as follows: -->
-JSX 是一种“类[ XML ]( https://developer.mozilla.org/en-us/docs/web/XML/xml_introduction )”语言，这意味着每个标签都需要关闭。 例如，换行符是一个空元素，在 HTML 中可以这样写: 
+JSX 是一种“类[XML](https://developer.mozilla.org/en-us/docs/web/XML/xml_introduction)”语言，这意味着每个标签都需要关闭。 例如，换行符是一个空元素，在 HTML 中可以这样写: 
 
 ```html
 <br>
@@ -289,7 +289,7 @@ const App = () => {
 
 
 <!-- It is possible to pass data to components using so called [props](https://reactjs.org/docs/components-and-props.html). -->
-使用所谓的[props]( https://reactjs.org/docs/components-and-props.html )，可以将数据传递给组件。
+使用所谓的[props](https://reactjs.org/docs/components-and-props.html)，可以将数据传递给组件。
 
 <!-- Let's modify the component <i>Hello</i> as follows -->
 让我们按照如下方式修改组件<i>Hello</i>
@@ -441,7 +441,7 @@ const App = () => {
 但是，在定义应用的根组件时，数组这种方案并不明智，而且会使代码看起来有点难看。
 
 <!-- Because the root element is stipulated, we have "extra" div-elements in the DOM-tree. This can be avoided by using [fragments](https://reactjs.org/docs/fragments.html#short-syntax), i.e. by wrapping the elements to be returned by the component with an empty element: -->
-由于根元素是必须的，所以在 Dom 树中会有“额外的” div 元素。 这可以通过使用[ fragments ]( https://reactjs.org/docs/fragments.html#short-syntax )来避免，即用一个空元素来包装组件的返回内容:
+由于根元素是必须的，所以在 Dom 树中会有“额外的” div 元素。 这可以通过使用[fragments](https://reactjs.org/docs/fragments.html#short-syntax)来避免，即用一个空元素来包装组件的返回内容:
 
 ```js
 const App = () => {

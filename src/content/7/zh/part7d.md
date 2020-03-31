@@ -11,7 +11,7 @@ lang: zh
  React 开发因为需要很难配置的工具而臭名昭著。 这些天，由于[create-react-app](https://github.com/facebookincubator/create-react-app) 的存在 ，开始使用 React 开发几乎是没有痛苦的。 对于浏览器端的 JavaScript 开发，可能从来没有过更好的开发工作流。
 
 <!-- We can not rely on the black magic of create-react-app forever and it's time for us to take a look under the hood. One of the key players in making React applications functional is a tool called [webpack](https://webpack.js.org/). -->
-我们不能永远依赖f create-react-app的黑魔法，现在是时候让我们看看底层下面。 使 React 应用功能化的一个关键参与者是一个叫做[ webpack ]( https://webpack.js.org/ )的工具。
+我们不能永远依赖f create-react-app的黑魔法，现在是时候让我们看看底层下面。 使 React 应用功能化的一个关键参与者是一个叫做[webpack](https://webpack.js.org/)的工具。
 
 
 ### Bundling
@@ -238,10 +238,10 @@ module.exports = config
 配置文件使用 JavaScript 编写，配置对象使用 Node 的模块语法导出。
 
 <!-- Our minimal configuration definition almost explains itself. The [entry](https://webpack.js.org/concepts/#entry) property of the configuration object specifies the file that will serve as the entry point for bundling the application. -->
-我们的最小配置定义几乎解释了它自己。 配置对象的[ entry ]( https://webpack.js.org/concepts/#entry )属性指定将作为绑定应用的入口点的文件。
+我们的最小配置定义几乎解释了它自己。 配置对象的[entry](https://webpack.js.org/concepts/#entry)属性指定将作为绑定应用的入口点的文件。
 
 <!-- The [output](https://webpack.js.org/concepts/#output) property defines the location where the bundled code will be stored. The target directory must be defined as an <i>absolute path</i> which is easy to create with the [path.resolve](https://nodejs.org/docs/latest-v8.x/api/path.html#path_path_resolve_paths) method. We also use [\_\_dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) which is a global variable in Node that stores the path to the current directory. -->
-属性定义了将要存储绑定代码的位置 [output](https://webpack.js.org/concepts/#output)。 目标目录必须被定义为<i>绝对路径</i>，这很容易用[ path.resolve ]( https://nodejs.org/docs/latest-v8.x/api/path.html#path_path_resolve_paths )方法创建。 我们还使用了[\_\_dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) ，它是 Node 中的一个全局变量，用于存储到工作目录的路径。
+属性定义了将要存储绑定代码的位置 [output](https://webpack.js.org/concepts/#output)。 目标目录必须被定义为<i>绝对路径</i>，这很容易用[path.resolve](https://nodejs.org/docs/latest-v8.x/api/path.html#path_path_resolve_paths)方法创建。 我们还使用了[\_\_dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) ，它是 Node 中的一个全局变量，用于存储到工作目录的路径。
 
 ### Bundling React
 【捆绑React】
@@ -302,7 +302,7 @@ export default App
 ### Loaders
 【装载机】
 <!-- The error message from webpack states that we may need an appropriate <i>loader</i> to bundle the <i>App.js</i> file correctly. By default, webpack only knows how to deal with plain JavaScript. Although we may have become unaware of it, we are actually using [JSX](https://facebook.github.io/jsx/) for rendering our views in React. To illustrate this, the following code is not regular JavaScript: -->
-来自 webpack 的错误消息指出，我们可能需要一个适当的<i>loader</i> 来正确捆绑<i>App.js</i> 文件。 默认情况下，webpack 只知道如何处理普通的 JavaScript。 尽管我们可能没有意识到这一点，但我们实际上正在使用[ JSX ]( https://facebook.github.io/JSX/ )在 React 中渲染我们的视图。 为了说明这一点，下面的代码不是普通的 JavaScript:
+来自 webpack 的错误消息指出，我们可能需要一个适当的<i>loader</i> 来正确捆绑<i>App.js</i> 文件。 默认情况下，webpack 只知道如何处理普通的 JavaScript。 尽管我们可能没有意识到这一点，但我们实际上正在使用[JSX](https://facebook.github.io/JSX/)在 React 中渲染我们的视图。 为了说明这一点，下面的代码不是普通的 JavaScript:
 
 ```js
 const App = () => {
@@ -314,7 +314,7 @@ const App = () => {
 上面使用的语法来自 JSX，它为我们提供了为 html<i>div</i> 标签定义 React 元素的替代方法。
 
 <!-- We can use [loaders](https://webpack.js.org/concepts/loaders/) to inform webpack of the files that need to be processed before they are bundled. -->
-我们可以使用[装载器]( https://webpack.js.org/concepts/loaders/ )来告知 webpack 需要在捆绑之前处理的文件。
+我们可以使用[装载器](https://webpack.js.org/concepts/loaders/)来告知 webpack 需要在捆绑之前处理的文件。
 
 <!-- Let's configure a loader to our application that transforms the JSX code into regular JavaScript: -->
 让我们为应用配置一个加载器，将 JSX 代码转换为常规的 JavaScript:
@@ -359,7 +359,7 @@ const config = {
 ```
 
 <!-- The <i>test</i> property specifies that the loader is for files that have names ending with <i>.js</i>. The <i>loader</i> property specifies that the processing for those files will be done with [babel-loader](https://github.com/babel/babel-loader). The <i>query</i> property is used for specifying parameters for the loader, that configure its functionality. -->
- <i>test</i> <i>属性指定加载程序用于名称以 i 结尾的文件。 <i>.js</i>属性指定对这些文件的处理将通过[ babel-loader ]( https://github.com/babel/babel-loader )来完成。<i>query</i> 属性用于为加载程序指定参数，用于配置其功能。
+ <i>test</i> <i>属性指定加载程序用于名称以 i 结尾的文件。 <i>.js</i>属性指定对这些文件的处理将通过[babel-loader](https://github.com/babel/babel-loader)来完成。<i>query</i> 属性用于为加载程序指定参数，用于配置其功能。
 
 <!-- Let's install the loader and its required packages as a <i>development dependency</i>: -->
 让我们将加载器及其所需的包作为<i>开发依赖项</i> 安装:
@@ -384,7 +384,7 @@ const App = () =>
 ```
 
 <!-- As we can see from the example above, the React elements that were written in JSX are now created with regular JavaScript by using React's [createElement](https://reactjs.org/docs/react-without-jsx.html) function. -->
-正如我们从上面的例子中看到的，在 JSX 中编写的 React 元素现在通过 React 的[ createElement ]( https://reactjs.org/docs/React-without-JSX.html )函数使用常规的 JavaScript 创建。
+正如我们从上面的例子中看到的，在 JSX 中编写的 React 元素现在通过 React 的[createElement](https://reactjs.org/docs/React-without-JSX.html)函数使用常规的 JavaScript 创建。
 
 <!-- You can test the bundled application by opening the <i>build/index.html</i> file with the <i>open file</i> functionality of your browser: -->
 你可以通过浏览器的<i>open file</i> 功能打开 <i>build/index.html</i>文件来测试捆绑的应用:
@@ -394,7 +394,7 @@ const App = () =>
 
 
 <!-- It's worth noting that if the bundled application's source code uses <i>async/await</i>, the browser will not render anything on some browsers. [Googling the error message in the console](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) will shed some light on the issue. We have to install one more missing dependency, that is [@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill): -->
-值得注意的是，如果捆绑的应用的源代码使用<i>async / await</i>，浏览器将不会在某些浏览器上渲染任何内容。 [谷歌在控制台中搜索错误信息]( https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined )将会在这个问题上给出一些答案。 我们必须再安装一个缺失的依赖项，即[@babel / polyfill ]( https://babeljs.io/docs/en/babel-polyfill ) :
+值得注意的是，如果捆绑的应用的源代码使用<i>async / await</i>，浏览器将不会在某些浏览器上渲染任何内容。 [谷歌在控制台中搜索错误信息](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined)将会在这个问题上给出一些答案。 我们必须再安装一个缺失的依赖项，即[@babel / polyfill](https://babeljs.io/docs/en/babel-polyfill) :
 
 ```
 npm install --save @babel/polyfill
@@ -414,19 +414,19 @@ npm install --save @babel/polyfill
 【转译工具】
 
 <!-- The process of transforming code from one form of JavaScript to another is called [transpiling](https://en.wiktionary.org/wiki/transpile). The general definition of the term is to compile source code by transforming it from one language to another. -->
-将代码从一种 JavaScript 形式转换为另一种 JavaScript 形式的过程称为[ transpiling ]( https://en.wiktionary.org/wiki/transpile )。 该术语的一般定义是通过将源代码从一种语言转换为另一种语言来编译源代码。
+将代码从一种 JavaScript 形式转换为另一种 JavaScript 形式的过程称为[transpiling](https://en.wiktionary.org/wiki/transpile)。 该术语的一般定义是通过将源代码从一种语言转换为另一种语言来编译源代码。
 
 <!-- By using the configuration from the previous section we are <i>transpiling</i> the code containing JSX into regular JavaScript with the help of [babel](https://babeljs.io/), which is currently the most popular tool for the job. -->
-通过使用上一节中的配置，我们在[ babel ]( https://babeljs.io/ 语言)的帮助下将包含 JSX 的代码转换为常规 JavaScript，这是目前最流行的工具。
+通过使用上一节中的配置，我们在[babel](https://babeljs.io/ 语言)的帮助下将包含 JSX 的代码转换为常规 JavaScript，这是目前最流行的工具。
 
 <!-- As mentioned in part 1, most browsers do not support the latest features that were introduced in ES6 and ES7, and for this reason the code is usually transpiled to a version of JavaScript that implements the ES5 standard. -->
 正如第一章节中提到的，大多数浏览器不支持 ES6和 ES7中引入的最新特性，因此代码通常会转移到实现 ES5标准的 JavaScript 版本中。
 
 <!-- The transpilation process that is executed by Babel is defined with <i>plugins</i>. In practice, most developers use ready-made [presets](https://babeljs.io/docs/plugins/) that are groups of pre-configured plugins. -->
-通过<i>plugins</i> 定义了 Babel 执行的转译过程。 实际上，大多数开发人员使用的是现成的[预设]( https://babeljs.io/docs/plugins/ )插件，这些插件是一组预先配置的插件。
+通过<i>plugins</i> 定义了 Babel 执行的转译过程。 实际上，大多数开发人员使用的是现成的[预设](https://babeljs.io/docs/plugins/)插件，这些插件是一组预先配置的插件。
 
 <!-- Currently we are using the [@babel/preset-react](https://babeljs.io/docs/plugins/preset-react/) preset for transpiling the source code of our application: -->
-目前，我们正在使用[@babel / preset-react ]( https://babeljs.io/docs/plugins/preset-react/ )预设来转译我们应用的源代码:
+目前，我们正在使用[@babel / preset-react](https://babeljs.io/docs/plugins/preset-react/)预设来转译我们应用的源代码:
 
 ```js
 {
@@ -440,7 +440,7 @@ npm install --save @babel/polyfill
 
 
 <!-- Let's add the [@babel/preset-env](https://babeljs.io/docs/plugins/preset-env/) plugin that contains everything needed to take code using all of the latest features and transpile it to code that is compatible with the ES5 standard: -->
-让我们添加一个[@babel / pressing-env ]( https://babeljs.io/docs/plugins/preset-env/ )插件，它包含使用所有最新特性编写代码并将其转化为兼容 ES5标准的代码所需的所有内容:
+让我们添加一个[@babel / pressing-env](https://babeljs.io/docs/plugins/preset-env/)插件，它包含使用所有最新特性编写代码并将其转化为兼容 ES5标准的代码所需的所有内容:
 
 ```js
 {
@@ -512,7 +512,7 @@ import './index.css'
 
 
 <!-- When using CSS, we have to use [css](https://webpack.js.org/loaders/css-loader/) and [style](https://webpack.js.org/loaders/style-loader/) loaders: -->
-当使用 CSS 时，我们必须使用[ CSS ](CSS  https://webpack.js.org/loaders/CSS-loader/ )和[ style ]( https://webpack.js.org/loaders/style-loader/ )装载器:
+当使用 CSS 时，我们必须使用[CSS](CSS  https://webpack.js.org/loaders/CSS-loader/)和[style](https://webpack.js.org/loaders/style-loader/)装载器:
 
 ```js
 {
@@ -541,7 +541,7 @@ import './index.css'
 使用这种配置，CSS 定义包含在应用的<i>main.js</i> 文件中。 出于这个原因，不需要单独导入应用的主要<i>index. html</i> 文件中的<i>CSS</i> 样式。
 
 <!-- If needed, the application's CSS can also be generated into its own separate file by using the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin). -->
-如果需要，应用的 CSS 也可以通过使用[ mini-CSS-extract-plugin ]( https://github.com/webpack-contrib/mini-CSS-extract-plugin 文件)生成到它自己的独立文件中。
+如果需要，应用的 CSS 也可以通过使用[mini-CSS-extract-plugin](https://github.com/webpack-contrib/mini-CSS-extract-plugin 文件)生成到它自己的独立文件中。
 
 <!-- When we install the loaders: -->
 当我们安装装载器时:
@@ -688,7 +688,7 @@ App.js:27 Uncaught TypeError: Cannot read property 'concat' of undefined
 当然，我们希望在错误消息中看到实际的源代码。
 
 <!-- Luckily fixing the error message in this respect is quite easy. We will ask webpack to generate a so-called [source map](https://webpack.js.org/configuration/devtool/) for the bundle, that makes it possible to <i>map errors</i> that occur during the execution of the bundle to the corresponding part in the original source code. -->
-幸运的是，在这方面修复错误消息非常容易。 我们将要求 webpack 为捆绑包生成一个所谓的[源映射]( https://webpack.js.org/configuration/devtool/ ) ，这样就可以将捆绑包执行期间发生的错误映射到原始源代码中的相应部分。
+幸运的是，在这方面修复错误消息非常容易。 我们将要求 webpack 为捆绑包生成一个所谓的[源映射](https://webpack.js.org/configuration/devtool/) ，这样就可以将捆绑包执行期间发生的错误映射到原始源代码中的相应部分。
 
 <!-- The source map can be generated by adding a new <i>devtool</i> property to the configuration object with the value 'source-map': -->
 可以通过向配置对象添加一个新的<i>devtool</i> 属性来生成源映射，其值为‘ source-map’ :
@@ -745,7 +745,7 @@ const App = () => {
 如果我们检查 bundle 文件的内容，我们注意到通过删除所有便笺，可以在文件大小方面大大优化它。 手动优化这些文件是没有意义的，因为有许多现有的工具可以完成这项工作。
 
 <!-- The optimization process for JavaScript files is called <i>minification</i>. One of the leading tools intended for this purpose is [UglifyJS](http://lisperator.net/uglifyjs/). -->
-Javascript 文件的优化过程被称为<i>minification</i>，用于此目的的主要工具之一是[ UglifyJS ]( http://lisperator.net/UglifyJS/ )。 
+Javascript 文件的优化过程被称为<i>minification</i>，用于此目的的主要工具之一是[UglifyJS](http://lisperator.net/UglifyJS/)。 
 
 <!-- Starting from version 4 of webpack, the minification plugin does not require additional configuration to be used. It is enough to modify the npm script in the <i>package.json</i> file to specify that webpack will execute the bundling of the code in <i>production</i> mode: -->
 从版本4的webpack，缩小插件不需要额外的配置使用。 修改<i>package.json</i> 文件中的 npm 脚本就足以指定 webpack 将在<i>production</i>模式下执行代码的捆绑:
@@ -894,7 +894,7 @@ module.exports = config
 定义几乎保持不变，除了配置对象现在由函数返回这一事实。 函数接收两个参数， <i>env</i> and <i>argv</i>，第二个参数可用于访问在 npm 脚本中定义的<i>mode</i>。
 
 <!-- We can also use webpack's [DefinePlugin](https://webpack.js.org/plugins/define-plugin/) for defining <i>global default constants</i> that can be used in the bundled code. Let's define a new global constant <i>BACKEND\_URL</i>, that gets a different value depending on the environment that the code is being bundled for: -->
-我们也可以使用 webpack 的[ DefinePlugin ]( https://webpack.js.org/plugins/define-plugin/ )来定义<i>全局默认常量</i>，这些常量可以用在捆绑的代码中。 让我们定义一个新的全局常量<i>BACKEND  URL</i>，它的值取决于打包代码的环境:
+我们也可以使用 webpack 的[DefinePlugin](https://webpack.js.org/plugins/define-plugin/)来定义<i>全局默认常量</i>，这些常量可以用在捆绑的代码中。 让我们定义一个新的全局常量<i>BACKEND  URL</i>，它的值取决于打包代码的环境:
 
 ```js
 const path = require('path')
@@ -975,14 +975,14 @@ npx static-server
 
 
 <!-- Our application is finished and works with all relatively recent versions of modern browsers, with the exception of Internet Explorer. The reason for this is that because of _axios_ our code uses [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), and no existing version of IE supports them: -->
-我们的应用已经完成，并且可以与所有相对较新的现代版本的浏览器一起工作，除了 Internet Explorer 浏览器。 这是因为我们的代码使用了 axios [ Promises ]( https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/promise ) ，并且现有的 IE 版本都不支持它们:
+我们的应用已经完成，并且可以与所有相对较新的现代版本的浏览器一起工作，除了 Internet Explorer 浏览器。 这是因为我们的代码使用了 axios [Promises](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/promise) ，并且现有的 IE 版本都不支持它们:
 
 ![](../../images/7/29.png)
 
 
 
 <!-- There are many other things in the standard that IE does not support. Something as harmless as the [find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) method of JavaScript arrays exceeds the capabilities of IE: -->
-在标准中还有很多 IE 不支持的东西。 一些像 JavaScript 数组的[ find ]( https://developer.mozilla.org/en-us/docs/web/JavaScript/reference/global_objects/array/find )方法一样无害的东西超过了 IE 的能力:
+在标准中还有很多 IE 不支持的东西。 一些像 JavaScript 数组的[find](https://developer.mozilla.org/en-us/docs/web/JavaScript/reference/global_objects/array/find)方法一样无害的东西超过了 IE 的能力:
 
 ![](../../images/7/30.png)
 
@@ -992,13 +992,13 @@ npx static-server
 在这些情况下，仅仅透露代码是不够的，因为透露只是将代码从一个新版本的 JavaScript 转换到一个有更广泛的浏览器支持的旧版本。 在语法上理解 Promises，但是还没有实现他们的功能。 Ie 中数组的 find 属性只是<i>undefined</i>。
 
 <!-- If we want the application to be IE-compatible we need to add a [polyfill](https://remysharp.com/2010/10/08/what-is-a-polyfill), which is code that adds the missing functionality to older browsers. -->
-如果我们希望应用兼容 ie，我们需要添加一个[ polyfill ]( https://remysharp.com/2010/10/08/what-is-a-polyfill 夹) ，这是代码添加缺少的功能到旧的浏览器。
+如果我们希望应用兼容 ie，我们需要添加一个[polyfill](https://remysharp.com/2010/10/08/what-is-a-polyfill 夹) ，这是代码添加缺少的功能到旧的浏览器。
 
 <!-- Polyfills can be added with the help of [webpack and Babel](https://babeljs.io/docs/usage/polyfill/) or by installing one of many existing polyfill libraries. -->
 Polyfills 可以在[webpack and Babel](https://babeljs.io/docs/usage/polyfill/)的帮助下添加，也可以安装现有的多填充库中的一个。 
 
 <!-- The polyfill provided by the [promise-polyfill](https://www.npmjs.com/package/promise-polyfill) library is easy to use, we simply have to add the following to our existing application code: -->
-由[ promise-polyfill ]( https://www.npmjs.com/package/promise-polyfill )库提供的聚合填充很容易使用，我们只需在现有的应用代码中添加如下内容:
+由[promise-polyfill](https://www.npmjs.com/package/promise-polyfill)库提供的聚合填充很容易使用，我们只需在现有的应用代码中添加如下内容:
 
 ```js
 import PromisePolyfill from 'promise-polyfill'
@@ -1015,11 +1015,11 @@ if (!window.Promise) {
 一个现有聚合填料的详尽列表可以在这里 [here](https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills)找到。
 
 <!-- The browser compatibility of different API's can be checked by visiting [https://caniuse.com](https://caniuse.com) or [Mozilla's website](https://developer.mozilla.org/en-US/). -->
-不同 API 的浏览器兼容性可以通过访问[https://caniuse.com](https://caniuse.com) 或者[ Mozilla 网站]( https://developer.Mozilla.org/en-us/ )来检查。
+不同 API 的浏览器兼容性可以通过访问[https://caniuse.com](https://caniuse.com) 或者[Mozilla 网站](https://developer.Mozilla.org/en-us/)来检查。
 
 ### Eject
 <!-- The create-react-app tool uses webpack behind the scenes. If the default configuration is not enough, it is possible to [eject](https://create-react-app.dev/docs/available-scripts/#npm-run-eject) the project which will get rid of all of the black magic, and the default configuration files will be stored in the <i>config</i> directory and in a modified <i>package.json</i> file. -->
-Create-react-app 工具在幕后使用 webpack。 如果缺省配置不够，可以[弹出]( https://create-react-app.dev/docs/available-scripts/#npm-run-eject )这个项目，它将摆脱所有的黑魔法，并且缺省配置文件将存储在<i>config</i> 目录和一个修改过的<i>package.json</i> 文件中。 
+Create-react-app 工具在幕后使用 webpack。 如果缺省配置不够，可以[弹出](https://create-react-app.dev/docs/available-scripts/#npm-run-eject)这个项目，它将摆脱所有的黑魔法，并且缺省配置文件将存储在<i>config</i> 目录和一个修改过的<i>package.json</i> 文件中。 
 
 <!-- If you eject an application created with create-react-app, there is no return and all of the configuration will have to be maintained manually. The default configuration is not trivial, and instead of ejecting from a create-react-app application, a better alternative may be to write your own webpack configuration from the get-go. -->
 如果您弹出一个用 create-react-app 创建的应用，就不会返回，所有的配置都必须手动维护。 默认配置并不简单，与其从 create-react-app中弹出，不如从一开始就编写自己的 webpack 配置。

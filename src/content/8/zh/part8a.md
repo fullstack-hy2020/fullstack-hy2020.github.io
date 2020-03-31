@@ -12,7 +12,7 @@ lang: zh
 我们在课程的前几部分已经熟悉了 REST，它一直是实现服务器为浏览器提供的接口的最普遍的方式，并且通常是 web 上不同应用之间的集成。
 
 <!-- In the recent years [GraphQL](http://graphql.org/), developed by Facebook, has become popular for communication between web applications and servers.  -->
-最近几年，Facebook 开发的[ GraphQL ]( http://GraphQL.org/ )已经成为 web 应用和服务器之间通信的流行工具。
+最近几年，Facebook 开发的[GraphQL](http://GraphQL.org/)已经成为 web 应用和服务器之间通信的流行工具。
 
 <!-- The GraphQL philosophy is very different from REST. REST is <i>resource based</i>. Every resource, for example a <i>user</i> has its own address which identifies it, for example <i>/users/10</i>. All operations done to the resource are done with HTTP requests to its URL. The action depends on the used HTTP-method.  -->
 Graphql 哲学与 REST 非常不同。 Rest 是基于资源的。 每个资源(例如<i>user</i>)都有自己的地址来标识它，例如<i>/ users/10</i>。 对资源所做的所有操作都是通过对其 URL 的 HTTP 请求来完成的。 该操作取决于所使用的 http 方法。 
@@ -105,7 +105,7 @@ query FetchBlogsQuery {
 通过从第2章节和第3章节实现电话簿应用的 GraphQL 版本，我们将了解 GraphQL 的基础知识。
 
 <!-- In the heart of all GraphQL applications is a [schema](https://graphql.org/learn/schema/), which describes the data sent between the client and the server. The initial schema for our phonebook is as follows:  -->
-所有 GraphQL 应用的核心是一个[ schema ]( https://GraphQL.org/learn/schema/ ) ，它描述了客户端和服务器之间发送的数据。 我们电话簿的初始模式如下:
+所有 GraphQL 应用的核心是一个[schema](https://GraphQL.org/learn/schema/) ，它描述了客户端和服务器之间发送的数据。 我们电话簿的初始模式如下:
 
 ```js
 type Person {
@@ -124,14 +124,14 @@ type Query {
 ```
 
 <!-- The schema describes two [types](https://graphql.org/learn/schema/#type-system). The first type, <i>Person</i>, determines that persons have five fields. Four of the fields are type  <i>String</i>, which is one of the [scalar types](https://graphql.org/learn/schema/#scalar-types) of GraphQL.  -->
-该模式描述了两种类型[types](https://graphql.org/learn/schema/#type-system)。 第一种类型<i>Person</i> 确定 Person 有五个字段。 其中4个字段是类型<i>String</i>，它是 GraphQL 的[标量类型]( https://GraphQL.org/learn/schema/#scalar-types )之一。
+该模式描述了两种类型[types](https://graphql.org/learn/schema/#type-system)。 第一种类型<i>Person</i> 确定 Person 有五个字段。 其中4个字段是类型<i>String</i>，它是 GraphQL 的[标量类型](https://GraphQL.org/learn/schema/#scalar-types)之一。
 <!-- All of the String fields, except <i>phone</i>, must be given a value. This is marked by the exclamation mark on the schema. The type of the field <i>id</i> is <i>ID</i>. <i>ID</i> fields are strings, but GraphQL ensures they are unique.   -->
 除了<i>phone</i> 之外，所有 String 字段都必须给定一个值。 这是由模式上的叹号标记的。<i>ID</i> 的字段类型是<i>ID</i>。<i>ID</i> 字段是字符串，但 GraphQL 确保它们是唯一的。
 
 
 
 <!-- The second type is a [Query](https://graphql.org/learn/schema/#the-query-and-mutation-types). Practically every GraphQL schema describes a Query, which tells what kind of queries can be made to the API.  -->
-第二种类型是[查询]( https://graphql.org/learn/schema/#The-Query-and-mutation-types )。 实际上，每个 GraphQL 模式都描述一个 Query，它告诉我们可以向 API 发出什么样的查询。
+第二种类型是[查询](https://graphql.org/learn/schema/#The-Query-and-mutation-types)。 实际上，每个 GraphQL 模式都描述一个 Query，它告诉我们可以向 API 发出什么样的查询。
 
 <!-- The phonebook describes three different queries. _personCount_ returns an integer, _allPersons_ returns a list of <i>Person</i> objects and <i>findPerson</i> is given a string parameter and it returns a <i>Person</i> object.  -->
 电话簿描述了三种不同的查询。 Personcount 返回一个整数，allPersons 返回一个<i>Person</i> 对象列表，给我一个字符串参数并返回一个<i>Person</i> 对象。
@@ -285,7 +285,7 @@ Graphql 查询只描述在服务器和客户端之间移动的数据。 在服�
 【阿波罗服务器】
 
 <!-- Let's implement a GraphQL-server with today's leading library [Apollo -server](https://www.apollographql.com/docs/apollo-server/). -->
-让我们用当今领先的库[Apollo-server ]( https://www.apollographql.com/docs/Apollo-server)实现一个 graphql 服务器。
+让我们用当今领先的库[Apollo-server](https://www.apollographql.com/docs/Apollo-server)实现一个 graphql 服务器。
 
 <!-- Create a new npm-project with _npm init_ and install the required dependencies. -->
 使用 npm init 创建一个新的 npm-project，并安装所需的依赖项。
@@ -372,7 +372,7 @@ const server = new ApolloServer({
 第一个参数 typeDefs 包含 GraphQL 模式。
 
 <!-- The second parameter is an object, which contains the [resolvers](https://www.apollographql.com/docs/apollo-server/essentials/data.html#resolver-map) of the server. These are the code, which defines <i>how</i> GraphQL queries are responded to.  -->
-第二个参数是一个对象，它包含服务器的[解析器]( https://www.apollographql.com/docs/apollo-server/essentials/data.html#resolver-map )。 这些代码定义了 GraphQL 查询的响应方式。
+第二个参数是一个对象，它包含服务器的[解析器](https://www.apollographql.com/docs/apollo-server/essentials/data.html#resolver-map)。 这些代码定义了 GraphQL 查询的响应方式。
 
 <!-- The code of the resolvers is the following:  -->
 解析器的代码如下:
@@ -441,7 +441,7 @@ query {
 
 ### GraphQL-playground
 <!-- When Apollo-server is run on development mode (_node filename.js_), it starts a [GraphQL-playground](https://www.apollographql.com/docs/apollo-server/testing/graphql-playground/) to address [http://localhost:4000/graphql](http://localhost:4000/graphql). This is very useful for a developer, and can be used to make queries to the server.  -->
-当 Apollo-server 在开发模式(node filename.js)下运行时，它会启动一个[ GraphQL-playground ]( https://www.apollographql.com/docs/Apollo-server/testing/GraphQL-playground/ 文件)来寻址[ http://localhost:4000/graphql ]( http://localhost:4000/graphql )。 这对于开发人员非常有用，可用于对服务器进行查询。
+当 Apollo-server 在开发模式(node filename.js)下运行时，它会启动一个[GraphQL-playground](https://www.apollographql.com/docs/Apollo-server/testing/GraphQL-playground/ 文件)来寻址[http://localhost:4000/graphql](http://localhost:4000/graphql)。 这对于开发人员非常有用，可用于对服务器进行查询。
 
 <!-- Let's try it out -->
 让我们试试看
@@ -504,7 +504,7 @@ query {
 
 
  <!--In fact all resolver functions are given [four parameters](https://www.apollographql.com/docs/graphql-tools/resolvers.html#Resolver-function-signature). With JavaScript the parameters don't have to be defined, if they are not needed. We will be using the first and the third parameter of a resolver later in this part.--> 
-事实上，所有的解析器函数都是给定的[4个参数]( https://www.apollographql.com/docs/graphql-tools/resolvers.html#resolver-function-signature )。 使用 JavaScript 时，如果不需要参数，那么就不必定义它们。 我们将在本章节后面使用解析器的第一个和第三个参数。
+事实上，所有的解析器函数都是给定的[4个参数](https://www.apollographql.com/docs/graphql-tools/resolvers.html#resolver-function-signature)。 使用 JavaScript 时，如果不需要参数，那么就不必定义它们。 我们将在本章节后面使用解析器的第一个和第三个参数。
 
 ### The default resolver
 【默认解析器】
@@ -531,7 +531,7 @@ Graphql-server 必须为架构中每种类型的<i>each</i> 字段定义解析�
 到目前为止，我们只为类型为<i>Query</i> 的字段定义了解析器，因此应用的每个查询都是这样。
 
 <!-- Because we did not define resolvers for the fields of the type <i>Person</i>, Apollo has defined [default resolvers](https://www.apollographql.com/docs/graphql-tools/resolvers.html#Default-resolver) for them.  -->
-因为我们没有为<i>Person</i> 类型的字段定义解析器，Apollo 已经为它们定义了[默认解析器]( https://www.apollographql.com/docs/graphql-tools/resolvers.html#default-resolver )。
+因为我们没有为<i>Person</i> 类型的字段定义解析器，Apollo 已经为它们定义了[默认解析器](https://www.apollographql.com/docs/graphql-tools/resolvers.html#default-resolver)。
 <!-- They work like the one shown below:  -->
 它们的工作原理如下图所示:
 
@@ -688,12 +688,12 @@ const resolvers = {
 <!-- So every time a <i>Person</i> object is returned, the fields <i>name</i>, <i>phone</i> and <i>id</i> are returned using their default resolvers, but the field <i>address</i> is formed by using a self defined resolver. The parameter _root_ of the resolver function is the person-object, so the street and the city of the address can be taken from its fields.  -->
 因此，每次返回<i>Person</i> 对象时，都会使用默认解析器返回<i>name</i>、<i>phone</i> 和<i>id</i> 字段，但是<i>address</i> 字段是使用自定义解析器形成的。 解析器函数的参数根是人-对象，因此可以从字段中获取地址的街道和城市。
 
-<!-- The current code of the application can be found on [ Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-1), branch <i>part8-1</i>. -->
-当前应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-1) ，branch<i>part8-1</i> 上找到。
+<!-- The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-1), branch <i>part8-1</i>. -->
+当前应用的代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-1) ，branch<i>part8-1</i> 上找到。
 
 ### Mutations
 <!-- Let's add a functionality for adding new persons to the phonebook. In GraphQL, all operations which cause a change are done with [mutations](https://graphql.org/learn/queries/#mutations). Mutations are described in the schema as the keys of type <i>Mutation</i>. -->
-让我们在电话簿中添加一个添加新用户的功能。 在 GraphQL 中，所有引起变更的操作都是通过[变异]( https://GraphQL.org/learn/queries/#mutations )来完成的。 突变在模式中被描述为<i>突变类型</i> 的关键。
+让我们在电话簿中添加一个添加新用户的功能。 在 GraphQL 中，所有引起变更的操作都是通过[变异](https://GraphQL.org/learn/queries/#mutations)来完成的。 突变在模式中被描述为<i>突变类型</i> 的关键。
 
 
 <!-- The schema for a mutation for adding a new person looks as follows:  -->
@@ -737,7 +737,7 @@ const resolvers = {
 变异将作为参数提供给它的对象添加到数组人员中，并返回它添加到数组中的对象。
 
 <!-- The <i>id</i> field is given a unique value using the [uuid](https://github.com/kelektiv/node-uuid#readme) library.  -->
-使用[ uuid ]( https://github.com/kelektiv/node-uuid#readme )库为<i>id</i> 字段赋予一个唯一值。
+使用[uuid](https://github.com/kelektiv/node-uuid#readme)库为<i>id</i> 字段赋予一个唯一值。
 
 <!-- A new person can be added with the following mutation -->
 一个新的人可以通过下面的变异来添加
@@ -806,12 +806,12 @@ mutation {
 
 
 <!-- So some of the error handling can be automatically done with GraphQL [validation](https://graphql.org/learn/validation/). -->
-因此，一些错误处理可以通过 GraphQL [ validation ]( https://GraphQL.org/learn/validation/ )自动完成。
+因此，一些错误处理可以通过 GraphQL [validation](https://GraphQL.org/learn/validation/)自动完成。
 
 <!-- However GraphQL cannot handle everything automatically. For example stricter rules for data sent to a Mutation have to be added manually. -->
 但是，GraphQL 不能自动处理所有事情。 例如，对于发送到 Mutation 的数据，必须手动添加更严格的规则。
 <!-- The errors from those rules are handled by [the error handling mechanism of GraphQL](https://www.apollographql.com/docs/apollo-server/features/errors.html). -->
-来自这些规则的错误由[ GraphQL 的错误处理机制]( https://www.apollographql.com/docs/apollo-server/features/errors.html )处理。
+来自这些规则的错误由[GraphQL 的错误处理机制](https://www.apollographql.com/docs/apollo-server/features/errors.html)处理。
 
 <!-- Let's block adding the same name to the phonebook multiple times:  -->
 让我们多次阻止将同一个名字添加到电话簿中:
@@ -848,8 +848,8 @@ const resolvers = {
 
 
 
-<!-- The current code of the application can be found on [ Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-2), branch <i>part8-2</i>. -->
-当前应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-2) ，branch<i>part8-2</i> 上找到。
+<!-- The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-2), branch <i>part8-2</i>. -->
+当前应用的代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-2) ，branch<i>part8-2</i> 上找到。
 
 ### Enum
 【枚举】
@@ -895,7 +895,7 @@ type Query {
 ```
 
 <!-- The type <i>YesNo</i> is GraphQL [enum](https://graphql.org/learn/schema/#enumeration-types), or an enumerable, with two possible values <i>YES</i> or <i>NO</i>. In the query _allPersons_ the parameter _phone_  has the type <i>YesNo</i>, but is nullable.  -->
-类型<i>YesNo</i> 是 GraphQL [ enum ]( https://GraphQL.org/learn/schema/#enumeration-types ) ，或者可枚举，有两个可能的值<i>YES</i> 或<i>NO</i>。 在查询 allPersons 中，参数 phone 的类型为<i>YesNo</i>，但可为空。
+类型<i>YesNo</i> 是 GraphQL [enum](https://GraphQL.org/learn/schema/#enumeration-types) ，或者可枚举，有两个可能的值<i>YES</i> 或<i>NO</i>。 在查询 allPersons 中，参数 phone 的类型为<i>YesNo</i>，但可为空。
 
 
 <!-- The resolver changes like so: -->
@@ -968,7 +968,7 @@ Mutation: {
 这个突变通过字段<i>name</i> 找到这个人。
 
 <!-- The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>. -->
-当前应用的代码可以在[ Github ]( https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3) ，branch<i>part8-3</i> 上找到。
+当前应用的代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3) ，branch<i>part8-3</i> 上找到。
 
 ### More on queries
 【更多关于查询的信息】
@@ -1044,7 +1044,7 @@ query {
 ```
 
 <!-- In some cases it might be beneficial to name the queries. This is the case especially when the queries or mutations have [parameters](https://graphql.org/learn/queries/#variables). We will get into parameters soon.  -->
-在某些情况下，命名查询可能是有益的。 这种情况尤其是当查询或变异具有[参数]( https://graphql.org/learn/queries/#variables )时。 我们很快就会进入参数。
+在某些情况下，命名查询可能是有益的。 这种情况尤其是当查询或变异具有[参数](https://graphql.org/learn/queries/#variables)时。 我们很快就会进入参数。
 
 <!-- If there are multiple queries, Playground asks you to choose which of them to run: -->
 如果有多个查询，Playground 会让你选择运行哪个查询:
@@ -1062,7 +1062,7 @@ query {
 <!-- Through the exercises, we will implement a GraphQL backend for a small library.  -->
 通过这些练习，我们将实现一个小型库的 GraphQL 后端。
 <!-- Start with [this file](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js). Remember to _npm init_ and to install dependencies! -->
-从[这个文件]( https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js )开始，记住 npm init 并安装依赖项！
+从[这个文件](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js)开始，记住 npm init 并安装依赖项！
 
 <!-- Note that the code does not initially work since the schema definition is not complete. -->
 请注意，由于架构定义不完整，代码最初不工作。

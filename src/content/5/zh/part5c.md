@@ -91,7 +91,7 @@ const component = render(
 通常将 React 组件渲染给<i>DOM</i>。 我们使用的 render 方法以适合于测试的格式渲染组件，而不需要将它们渲染给 DOM。
 
 <!-- _render_ returns an object that has several [properties](https://testing-library.com/docs/react-testing-library/api#render-result). One of the properties is called <i>container</i>, and it contains all of the HTML rendered by the component. -->
-Render 返回一个具有多个[属性]( https://testing-library.com/docs/react-testing-library/api#render-result )的对象。 其中一个属性称为<i>container</i>，它包含由组件渲染的所有 HTML。 
+Render 返回一个具有多个[属性](https://testing-library.com/docs/react-testing-library/api#render-result)的对象。 其中一个属性称为<i>container</i>，它包含由组件渲染的所有 HTML。 
 
 <!-- In the expectation, we verify that the component renders the correct text, which in this case is the content of the note: -->
 在期望中，我们验证组件是否渲染出正确的文本，在这种情况下，该文本就是 Note 的内容:
@@ -175,18 +175,18 @@ test('renders content', () => {
 第一种方法使用方法<i>toHaveTextContent</i> 从组件渲染的整个 HTML 代码中搜索匹配的文本。
 
 <!--<i>toHaveTextContent</i> is one of many "matcher"-methods that are provided by the  [jest-dom](https://github.com/testing-library/jest-dom#tohavetextcontent) library.-->
-<i>toHaveTextContent</i>  是许多“ matcher”方法之一，这些方法是由[ jest-dom ]( https://github.com/testing-library/jest-dom#toHaveTextContent )库提供的。
+<i>toHaveTextContent</i>  是许多“ matcher”方法之一，这些方法是由[jest-dom](https://github.com/testing-library/jest-dom#toHaveTextContent)库提供的。
 
 <!-- The second way uses the [getByText](https://testing-library.com/docs/dom-testing-library/api-queries#bytext) method of the object returned by the render method. The method returns the element that contains the given text. An exception occurs if no such element exists. For this reason, we would technically not need to specify any additional expectation. -->
 第二种方法使用 render 方法返回的对象的[getByText](https://testing-library.com/docs/dom-testing-library/api-queries#bytext) 。 该方法返回包含给定文本的元素。如果不存在此类元素，则发生异常。 出于这个原因，我们在技术上不需要指定任何额外的期望。
 
 <!-- The third way is to search for a specific element that is rendered by the component with the [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) method that receives a [CSS selector](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) as its parameter. -->
-第三种方法是搜索由组件渲染的特定元素，该组件使用[ querySelector ]( https://developer.mozilla.org/en-us/docs/web/api/document/querySelector )方法，该方法接收[ CSS 选择器]( https://developer.mozilla.org/en-us/docs/web/CSS/css_selectors )作为其参数。
+第三种方法是搜索由组件渲染的特定元素，该组件使用[querySelector](https://developer.mozilla.org/en-us/docs/web/api/document/querySelector)方法，该方法接收[CSS 选择器](https://developer.mozilla.org/en-us/docs/web/CSS/css_selectors)作为其参数。
 
 <!-- The last two methods use the methods <i>getByText</i> and <i>querySelector</i> to find an element matching some condition from the rendered component.  -->
 最后两个方法使用<i>getByText</i> 和<i>querySelector</i> 方法从渲染的组件中查找匹配某些条件的元素。
 <!-- There are numerous similiar query methods [available](https://testing-library.com/docs/dom-testing-library/api-queries). -->
-有许多类似的查询方法[可用]( https://testing-library.com/docs/dom-testing-library/api-queries )。
+有许多类似的查询方法[可用](https://testing-library.com/docs/dom-testing-library/api-queries)。
 
 ### Debugging tests
 【调试测试】
@@ -466,7 +466,7 @@ test('toggled content can be closed', () => {
 ```
 
 <!-- The _getByText_ method that we used is just one of the many [queries](https://testing-library.com/docs/api-queries#queries) <i>react-testing-library</i> offers. -->
-我们使用的 getByText 方法只是我提供的众多[查询]( https://testing-library.com/docs/api-queries#queries )中的一个。
+我们使用的 getByText 方法只是我提供的众多[查询](https://testing-library.com/docs/api-queries#queries)中的一个。
 
 
 
@@ -476,7 +476,7 @@ test('toggled content can be closed', () => {
 
 
 <!-- We already used the [fireEvent](https://testing-library.com/docs/api-events#fireevent) function in our previous tests to click buttons. -->
-在前面的测试中，我们已经使用了[ fireEvent ]( https://testing-library.com/docs/api-events#fireEvent )函数来单击按钮。
+在前面的测试中，我们已经使用了[fireEvent](https://testing-library.com/docs/api-events#fireEvent)函数来单击按钮。
 
 ```js
 const button = component.getByText('show...')
@@ -679,7 +679,7 @@ const author = component.container.querySelector('#author')
 【快照测试】
 
 <!-- Jest offers a completely different alternative to "traditional" testing called [snapshot](https://facebook.github.io/jest/docs/en/snapshot-testing.html) testing. The interesting feature of snapshot testing is that developers do not need to define any tests themselves, it is simply enough to adopt snapshot testing.  -->
-Jest 提供了一种与“传统”测试完全不同的替代方法，称为[ snapshot ]( https://facebook.github.io/Jest/docs/en/snapshot-testing.html 测试)。 快照测试的有趣特性是开发人员不需要自己定义任何测试，只需要采用快照测试即可。 
+Jest 提供了一种与“传统”测试完全不同的替代方法，称为[snapshot](https://facebook.github.io/Jest/docs/en/snapshot-testing.html 测试)。 快照测试的有趣特性是开发人员不需要自己定义任何测试，只需要采用快照测试即可。 
 
 <!-- The fundamental principle is to compare the HTML code defined by the component after it has changed to the HTML code that existed before it was changed. -->
 基本原则是比较组件在更改后定义的 HTML 代码和更改前存在的 HTML 代码。
