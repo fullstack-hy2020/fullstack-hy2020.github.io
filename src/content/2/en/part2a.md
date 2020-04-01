@@ -691,7 +691,46 @@ Ensure that the console shows no errors!
 <h4>2.2: Course contents step7</h4>
 
 
-Show also the sum of the exercises of the course. 
+Add the "Redux" part to the course:
+
+```js
+const App = () => {
+  const course = {
+    id: 1,
+    name: 'Half Stack application development',
+    parts: [
+      {
+        name: 'Fundamentals of React',
+        exercises: 10,
+        id: 1
+      },
+      {
+        name: 'Using props to pass data',
+        exercises: 7,
+        id: 2
+      },
+      {
+        name: 'State of a component',
+        exercises: 14,
+        id: 3
+      },
+      {
+        name: 'Redux',
+        exercises: 11,
+        id: 4
+      }
+    ]
+  }
+
+  return (
+    <div>
+      <Course course={course} />
+    </div>
+  )
+}
+```
+
+After this, refactor the <i>Total</i> component to handle rendering the total number of exercises for a variable length collection of course parts.  Update the <i>Course</i> component to utilize the revised <i>Total</i> component, producing an output similar to the following:
 
 ![](../../images/teht/9e.png)
 
