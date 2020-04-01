@@ -20,10 +20,10 @@ lang: zh
 一个广泛流行的 UI 框架是由 Twitter 创建的[Bootstrap](https://getbootstrap.com/ 工具包) ，它可能仍然是最流行的框架。 最近，进入这个领域的新 UI 框架数量激增。 事实上，选择的范围是如此之广，以至于几乎没有希望创建一个详尽的选项清单。
 
 <!-- Many UI frameworks provide developers of web applications with ready-made themes and "components" like buttons, menus, and tables. We write components in quotes, because in this context we are not talking about React components. Usually UI frameworks are used by including the CSS stylesheets and JavaScript code of the framework in the application. -->
-许多 UI 框架为 web 应用开发人员提供现成的议题和“组件” ，如按钮、菜单和表格。 我们将组件写在引号中，因为在这里我们不讨论 React 组件。 通常，UI 框架是通过在应用中包含 CSS 样式表和框架的 JavaScript 代码来使用的。
+许多 UI 框架为 web 应用开发人员提供现成的主题和“组件” ，如按钮、菜单和表格。 我们将组件写在引号中，因为在这里我们不讨论 React 组件。 通常，UI 框架是通过在应用中包含 CSS 样式表和框架的 JavaScript 代码来使用的。
 
 <!-- There are many UI frameworks that have React-friendly versions, where the framework's "components" have been transformed into React components. There are a few different React versions of Bootstrap like [reactstrap](http://reactstrap.github.io/) and [react-bootstrap](https://react-bootstrap.github.io/). -->
-有许多 UI 框架具有响应友好版本，其中框架的“组件”已经转换为 React 组件。 有几个不同的 http://reactstrap.github.io/ 版本，像[reactstrap](reactstrap)和[React-Bootstrap](reactstrap  https://React-Bootstrap.github.io/)。
+有许多 UI 框架具有响应友好版本，其中框架的“组件”已经转换为 React 组件。 有几个不同的React Bootstrap版本，像[reactstrap](reactstrap)和[React-Bootstrap](reactstrap  https://React-Bootstrap.github.io/)。
 
 <!-- Next we will take a closer look at two UI frameworks, Bootstrap and [MaterialUI](https://material-ui.com/). We will use both frameworks to add similar styles to the application we made in the [React-router](/zh/part7/react_router) section of the course material. -->
 接下来我们将仔细研究两个 UI 框架，Bootstrap 和[MaterialUI](https://material-UI.com/)。 我们将使用这两个框架来为我们在课程教材的[React-router](/zh/part7/react_router) 部分中创建的应用添加类似的样式。
@@ -55,7 +55,7 @@ npm install --save react-bootstrap
   // ...
 </head>
 ```
-When we reload the application, we notice that it already looks a bit more stylish:
+<!-- When we reload the application, we notice that it already looks a bit more stylish: -->
 当我们重新加载应用时，我们注意到它已经看起来有点时髦了:
 
 ![](../../images/7/5ea.png)
@@ -83,7 +83,7 @@ const App = () => {
 
 
 <!-- Next, let's make some changes to the <i>Notes</i> component, so that it renders the list of notes as a [table](https://getbootstrap.com/docs/4.1/content/tables/). React Bootstrap provides a built-in [Table](https://react-bootstrap.github.io/components/table/) component for this purpose, so there is no need to define CSS classes separately. -->
-接下来，让我们对<i>Notes</i> 组件进行一些更改，以便它将便笺列表渲染为[table](https://getbootstrap.com/docs/4.1/content/tables/)。 React Bootstrap 为此提供了一个内置的[Table](https://React-Bootstrap.github.io/components/Table/ 组件)组件，因此不需要单独定义 CSS 类。
+接下来，让我们对<i>Notes</i> 组件进行一些更改，以便它将便笺列表渲染为[table](https://getbootstrap.com/docs/4.1/content/tables/)。 React Bootstrap 为此提供了一个内置的[Table](https://React-Bootstrap.github.io/components/Table/)组件，因此不需要单独定义 CSS 类。
 
 ```js
 const Notes = (props) => (
@@ -428,7 +428,7 @@ const Login = (props) => {
 
 #### Notification
 <!-- The notification displayed on log in can be done using the [Alert](https://material-ui.com/components/alert/) component, which is quite similiar to bootstrap's equivalent component: -->
-在登录中显示的通知可以通过使用[Alert](https://material-ui.com/components/Alert/ 组件)来完成，这个组件与 bootstrap 的等价组件非常相似:
+在登录中显示的通知可以通过使用[Alert](https://material-ui.com/components/Alert/)来完成，这个组件与 bootstrap 的等价组件非常相似:
 
 ```js
 <div>
@@ -527,7 +527,7 @@ import { Alert } from '@material-ui/lab'
 
 
 <!-- the _Button_ component is rendered so, that its root component is react-redux _Link_ which receives its path as prop field _to_. -->
-Button 组件渲染为这样，它的根组件是 react-redux Link，它接收它的路径作为 prop 字段到。 
+_Button_ 组件渲染为这样，它的根组件是 react-redux _Link_ ，它接收它的路径作为 prop 字段 _to_。 
 
 
 
@@ -576,7 +576,7 @@ React-bootstrap 和 MaterialUI 之间的区别并不大，这取决于你觉得�
 <!-- I myself have not used MaterialUI a lot, but my first impressions are positive. Its documentation is a bit better than react-bootstrap's.  -->
 我自己并没有使用很多MaterialUI，但我的第一印象是积极的。 它的文档比起React引导程序要好一点。
 <!-- According to https://www.npmtrends.com/ which tracks the popularity of different npm-libraries MaterialUI passed react-bootstrap in popularity at the end of 2018: -->
-根据追踪不同 npm 流行程度的 https://www.npmtrends.com/ 数据库 MaterialUI 在2018年底通过了 react-bootstrap:
+根据追踪不同 npm 流行程度的 https://www.npmtrends.com/ 数据库, MaterialUI 在2018年底超过了 react-bootstrap:
 
 ![](../../images/7/68ea.png)
 
@@ -617,7 +617,7 @@ React-bootstrap 和 MaterialUI 之间的区别并不大，这取决于你觉得�
 ### Other UI frameworks
 【其他 UI 框架】
 <!-- Here are some other UI frameworks for your consideration. If you do not see your favorite UI framework in the list, please make a pull request to the course material. -->
-这里有一些其他的 UI 框架供您考虑。 如果您没有在列表中看到您最喜欢的 UI 框架，请对课程材料提出拉取请求。
+这里有一些其他的 UI 框架供您考虑。 如果您没有在列表中看到您最喜欢的 UI 框架，请对课程材料提出PR。
 
 - <https://bulma.io/>
 - <https://ant.design/>
@@ -628,7 +628,7 @@ React-bootstrap 和 MaterialUI 之间的区别并不大，这取决于你觉得�
 ### Styled components 
 【样式组件】
 <!-- There are also [other ways](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b) of styling React applications that we have not yet taken a look at. -->
-还有一些我们还没有看过的应用的样式[other ways](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b)。
+还有一些我们还[没有看过](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b)的React 应用的样式。
 
 <!-- The [styled components](https://www.styled-components.com/) library offers an interesting approach for defining styles through [tagged template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) that were introduced in ES6. -->
 [样式化组件](https://www.styled-components.com/)库提供了一种有趣的方法，可以通过在 ES6中引入的[带标记的模板文字](https://developer.mozilla.org/en-us/docs/web/javascript/reference/template_literals)定义样式。
@@ -756,7 +756,7 @@ const App = () => {
 ![](../../images/7/18ea.png)
 
 <!-- Styled components have seen a consistent growth in popularity in recent times, and quite a lot of people consider it to be the best way of defining styles to React applications. -->
-风格化的组件在最近一段时间内一直受到欢迎，很多人认为这是定义样式到 React 应用的最佳方式。
+样式化组件在最近一段时间内一直受到欢迎，很多人认为这是定义样式到 React 应用的最佳方式。
 
 </div>
 

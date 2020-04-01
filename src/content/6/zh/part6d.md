@@ -701,7 +701,7 @@ React hook-api 发布之后，HOCs 变得越来越不受欢迎。 几乎所有�
 添加[react-redux](google  https://github.com/reactjs/react-redux)包到您的应用中，并修改<i>/ 八卦列表</i>，以便它借助 connect 函数访问存储的状态。
 
 <!-- Voting for and creating new anecdotes **does not need to work** after this exercise. -->
-在这个练习之后，投票选举和创造新的八卦八卦就不需要工作了。
+在这个练习之后，投票选举和创造新的八卦就不需要工作了。
 
 <!-- The <i>mapStateToProps</i> function you will need in this exercise is approximately the following: -->
 在这个练习中，您需要的<i>mapStateToProps</i> 函数大致如下:

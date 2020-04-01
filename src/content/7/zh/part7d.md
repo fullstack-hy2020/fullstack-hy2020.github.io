@@ -20,7 +20,7 @@ lang: zh
 我们已经实现了我们的应用，将我们的代码分割成单独的模块，这些模块已经被导入到需要它们的地方。 尽管 ES6模块是在 ECMAScript 标准中定义的，但没有浏览器真正知道如何处理划分为模块的代码。
 
 <!-- For this reason, code that is divided into modules must be <i>bundled</i> for browsers, meaning that all of the source code files are transformed into a single file that contains all of the application code. When we deployed our React frontend to production in [第3章](/zh/part3/把应用部署到网上), we performed the bundling of our application with the _npm run build_ command. Under the hood, the npm script bundles the source code using webpack which produces the following collection of files in the <i>build</i> directory: -->
-由于这个原因，被划分为模块的代码对于浏览器必须是<i>绑定的</i>，这意味着所有的源代码文件都被转换成一个包含所有应用代码的文件。 在 [第3章](/zh/part3/把应用部署到网上)中部署 React frontend to production 时，我们执行了将应用与 npm run build 命令绑定在一起的操作。 在引擎盖下，npm 脚本使用 webpack 捆绑源代码，在<i>build</i> 目录下生成如下文件集合:
+由于这个原因，被划分为模块的代码对于浏览器必须是<i>绑定的</i>，这意味着所有的源代码文件都被转换成一个包含所有应用代码的文件。 在 [第3章](/zh/part3/把应用部署到网上)中部署 React 前端生产应用时，我们执行了将应用与 npm run build 命令绑定在一起的操作。 在底层，npm 脚本使用 webpack 捆绑源代码，在<i>build</i> 目录下生成如下文件集合:
 
 <pre>
 ├── asset-manifest.json
@@ -64,7 +64,7 @@ lang: zh
 我们可以从使用 create-react-app 创建的示例应用中看到，构建脚本还将应用的 CSS 文件捆绑到单个<i>/static/css/main.f9a47af2.chunk.css</i>
 
 <!-- In practice, bundling is done so that we define an entry point for the application, which typically is the <i>index.js</i> file. When webpack bundles the code, it includes all of the code that the entry point imports, and the code that its imports import, and so on. -->
-实际上，进行绑定是为了为应用定义一个入口点，通常是<i>index.js</i> 文件。 当 webpack 打包代码时，它包含入口点导入的所有代码，以及导入的代码，等等。
+实际上，进行绑定是为了为应用定义一个入口点，通常是<i>index.js</i> 文件。 当 webpack 打包代码时，它包含入口点导入的所有代码，以及导入代码的导入，等等。
 
 <!-- Since part of the imported files are packages like React, Redux, and Axios, the bundled JavaScript file will also contain the contents of each of these libraries. -->
 由于部分导入的文件是 React、 Redux 和 Axios 之类的包，所以绑定的 JavaScript 文件也将包含这些库的内容。
@@ -300,7 +300,7 @@ export default App
 
 
 ### Loaders
-【装载机】
+【装载器】
 <!-- The error message from webpack states that we may need an appropriate <i>loader</i> to bundle the <i>App.js</i> file correctly. By default, webpack only knows how to deal with plain JavaScript. Although we may have become unaware of it, we are actually using [JSX](https://facebook.github.io/jsx/) for rendering our views in React. To illustrate this, the following code is not regular JavaScript: -->
 来自 webpack 的错误消息指出，我们可能需要一个适当的<i>loader</i> 来正确捆绑<i>App.js</i> 文件。 默认情况下，webpack 只知道如何处理普通的 JavaScript。 尽管我们可能没有意识到这一点，但我们实际上正在使用[JSX](https://facebook.github.io/JSX/)在 React 中渲染我们的视图。 为了说明这一点，下面的代码不是普通的 JavaScript:
 
@@ -311,13 +311,13 @@ const App = () => {
 ```
 
 <!-- The syntax used above comes from JSX and it provides us with an alternative way of defining a React element for an html <i>div</i> tag. -->
-上面使用的语法来自 JSX，它为我们提供了为 html<i>div</i> 标签定义 React 元素的替代方法。
+上面使用的语法来自 JSX，它为我们提供了为 html <i>div</i> 标签定义 React 元素的替代方法。
 
 <!-- We can use [loaders](https://webpack.js.org/concepts/loaders/) to inform webpack of the files that need to be processed before they are bundled. -->
 我们可以使用[装载器](https://webpack.js.org/concepts/loaders/)来告知 webpack 需要在捆绑之前处理的文件。
 
 <!-- Let's configure a loader to our application that transforms the JSX code into regular JavaScript: -->
-让我们为应用配置一个加载器，将 JSX 代码转换为常规的 JavaScript:
+让我们为应用配置一个装载器，将 JSX 代码转换为常规的 JavaScript:
 
 ```js
 const config = {
@@ -343,10 +343,10 @@ const config = {
 ```
 
 <!-- Loaders are defined under the <i>module</i> property in the <i>rules</i> array. -->
-加载器是在<i>rules</i> 数组中的<i>module</i> 属性下定义的。
+装载器是在<i>rules</i> 数组中的<i>module</i> 属性下定义的。
 
 <!-- The definition for a single loader consists of three parts: -->
-单一装载机的定义包括三个部分:
+单一装载器的定义包括三个部分:
 
 ```js
 {
@@ -359,10 +359,10 @@ const config = {
 ```
 
 <!-- The <i>test</i> property specifies that the loader is for files that have names ending with <i>.js</i>. The <i>loader</i> property specifies that the processing for those files will be done with [babel-loader](https://github.com/babel/babel-loader). The <i>query</i> property is used for specifying parameters for the loader, that configure its functionality. -->
- <i>test</i> <i>属性指定加载程序用于名称以 i 结尾的文件。 <i>.js</i>属性指定对这些文件的处理将通过[babel-loader](https://github.com/babel/babel-loader)来完成。<i>query</i> 属性用于为加载程序指定参数，用于配置其功能。
+ <i>test</i> 属性指定加载程序用于名称以<i>.js</i> 结尾的文件。 属性指定对这些文件的处理将通过[babel-loader](https://github.com/babel/babel-loader)来完成。<i>query</i> 属性用于为加载程序指定参数，用于配置其功能。
 
 <!-- Let's install the loader and its required packages as a <i>development dependency</i>: -->
-让我们将加载器及其所需的包作为<i>开发依赖项</i> 安装:
+让我们将装载器及其所需的包作为<i>开发依赖项</i> 安装:
 
 ```js
 npm install @babel/core babel-loader @babel/preset-react --save-dev
@@ -602,7 +602,7 @@ const config = {
 ```
 
 <!-- The _npm start_ command will now start the dev-server at the port 3000, meaning that our application will be available by visiting <http://localhost:3000> in the browser. When we make changes to the code, the browser will automatically refresh the page. -->
-Npm start 命令现在将在端口3000启动 dev-server，这意味着我们的应用将可以通过浏览器中的 http://localhost:3000文件访问。 当我们修改代码时，浏览器会自动刷新页面。 
+Npm start 命令现在将在端口3000启动 dev-server，这意味着我们的应用将可以通过浏览器中的 <http://localhost:3000> 访问。 当我们修改代码时，浏览器会自动刷新页面。 
 
 <!-- The process for updating the code is fast. When we use the dev-server, the code is not bundled the usual way into the <i>main.js</i> file. The result of the bundling exists only in memory. -->
 更新代码的过程很快。 当我们使用 dev-server 时，代码不会以通常的方式捆绑到<i>main.js</i> 文件中。 捆绑的结果只存在于内存中。
@@ -813,7 +813,7 @@ function h(){if(!d){var e=u(p);d=!0;for(var t=c.length;t;){for(s=c,c=[];++f<t;)s
 我们的目标是以这样一种方式配置应用，即当在本地使用时，应用使用端口3001中可用的 json-server 作为其后端。
 
 <!-- The bundled file will then be configured to use the backend available at the <https://blooming-atoll-75500.herokuapp.com/api/notes> url. -->
-然后将绑定的文件配置为使用 https://blooming-atoll-75500.herokuapp.com/api/notes 地址中可用的后端。
+然后将绑定的文件配置为使用 <https://blooming-atoll-75500.herokuapp.com/api/notes> 地址中可用的后端。
 
 <!-- We will install <i>axios</i>, start the json-server, and then make the necessary changes to the application. For the sake of changing things up, we will fetch the notes from the backend with our [custom hook](/zh/part5/custom_hooks) called _useNotes_: -->
 我们将安装<i>axios</i>，启动 json-server，然后对应用进行必要的更改。 为了更改内容，我们将使用名为 useNotes 的[custom hook](/zh/part5/custom_hooks)从后端获取便笺:
@@ -891,10 +891,10 @@ module.exports = config
 ```
 
 <!-- The definition remains almost exactly the same, except for the fact that the configuration object is now returned by the function. The function receives the two parameters, <i>env</i> and <i>argv</i>, the second of which can be used for accessing the <i>mode</i> that is defined in the npm script.  -->
-定义几乎保持不变，除了配置对象现在由函数返回这一事实。 函数接收两个参数， <i>env</i> and <i>argv</i>，第二个参数可用于访问在 npm 脚本中定义的<i>mode</i>。
+定义几乎保持不变，除了配置对象现在由函数返回这一事实。 函数接收两个参数， <i>env</i> 和 <i>argv</i>，第二个参数可用于访问在 npm 脚本中定义的<i>mode</i>。
 
 <!-- We can also use webpack's [DefinePlugin](https://webpack.js.org/plugins/define-plugin/) for defining <i>global default constants</i> that can be used in the bundled code. Let's define a new global constant <i>BACKEND\_URL</i>, that gets a different value depending on the environment that the code is being bundled for: -->
-我们也可以使用 webpack 的[DefinePlugin](https://webpack.js.org/plugins/define-plugin/)来定义<i>全局默认常量</i>，这些常量可以用在捆绑的代码中。 让我们定义一个新的全局常量<i>BACKEND  URL</i>，它的值取决于打包代码的环境:
+我们也可以使用 webpack 的[DefinePlugin](https://webpack.js.org/plugins/define-plugin/)来定义<i>全局默认常量</i>，这些常量可以用在捆绑的代码中。 让我们定义一个新的全局常量<i>BACKEND\_URL</i>，它的值取决于打包代码的环境:
 
 ```js
 const path = require('path')
@@ -959,7 +959,7 @@ const App = () => {
 ```
 
 <!-- If the configuration for development and production differs a lot, it may be a good idea to [separate the configuration](https://webpack.js.org/guides/production/) of the two into their own files. -->
-如果开发和生产的配置有很大的不同，那么将两者的配置分离到各自的文件[separate the configuration](https://webpack.js.org/guides/production/) 中可能是一个不错的
+如果开发和生产的配置有很大的不同，那么将两者的配置分离到[各自的配置文件](https://webpack.js.org/guides/production/) 中可能是一个不错的主意
 
 <!-- We can inspect the bundled production version of the application locally by executing the following command in the <i>build</i> directory: -->
 通过在<i>build</i> 目录中执行如下命令，我们可以在本地检查应用的捆绑生产版本:
@@ -969,7 +969,7 @@ npx static-server
 ```
 
 <!-- By default the bundled application will be available at <http://localhost:9080>. -->
-默认情况下，捆绑的应用将在 http://localhost:9080提供。
+默认情况下，捆绑的应用将在  <http://localhost:9080> 提供。
 
 ### Polyfill
 
@@ -998,7 +998,7 @@ npx static-server
 Polyfills 可以在[webpack and Babel](https://babeljs.io/docs/usage/polyfill/)的帮助下添加，也可以安装现有的多填充库中的一个。 
 
 <!-- The polyfill provided by the [promise-polyfill](https://www.npmjs.com/package/promise-polyfill) library is easy to use, we simply have to add the following to our existing application code: -->
-由[promise-polyfill](https://www.npmjs.com/package/promise-polyfill)库提供的聚合填充很容易使用，我们只需在现有的应用代码中添加如下内容:
+由[promise-polyfill](https://www.npmjs.com/package/promise-polyfill)库提供的polyfills很容易使用，我们只需在现有的应用代码中添加如下内容:
 
 ```js
 import PromisePolyfill from 'promise-polyfill'
@@ -1012,20 +1012,20 @@ if (!window.Promise) {
 如果全局 Promise 对象不存在，这意味着浏览器不支持 Promises，则 polyfilled Promise 存储在全局变量中。 如果 polyfilled Promise 实现得足够好，那么剩下的代码应该可以正常工作。
 
 <!-- One exhaustive list of existing polyfills can be found [here](https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills). -->
-一个现有聚合填料的详尽列表可以在这里 [here](https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills)找到。
+一个现有polyfills的详尽列表可以在这里 [here](https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills)找到。
 
 <!-- The browser compatibility of different API's can be checked by visiting [https://caniuse.com](https://caniuse.com) or [Mozilla's website](https://developer.mozilla.org/en-US/). -->
 不同 API 的浏览器兼容性可以通过访问[https://caniuse.com](https://caniuse.com) 或者[Mozilla 网站](https://developer.Mozilla.org/en-us/)来检查。
 
 ### Eject
 <!-- The create-react-app tool uses webpack behind the scenes. If the default configuration is not enough, it is possible to [eject](https://create-react-app.dev/docs/available-scripts/#npm-run-eject) the project which will get rid of all of the black magic, and the default configuration files will be stored in the <i>config</i> directory and in a modified <i>package.json</i> file. -->
-Create-react-app 工具在幕后使用 webpack。 如果缺省配置不够，可以[弹出](https://create-react-app.dev/docs/available-scripts/#npm-run-eject)这个项目，它将摆脱所有的黑魔法，并且缺省配置文件将存储在<i>config</i> 目录和一个修改过的<i>package.json</i> 文件中。 
+Create-react-app 工具在幕后使用 webpack。 如果缺省配置不够，可以[eject](https://create-react-app.dev/docs/available-scripts/#npm-run-eject)这个项目，它将摆脱所有的黑魔法，并且缺省配置文件将存储在<i>config</i> 目录和一个修改过的<i>package.json</i> 文件中。 
 
 <!-- If you eject an application created with create-react-app, there is no return and all of the configuration will have to be maintained manually. The default configuration is not trivial, and instead of ejecting from a create-react-app application, a better alternative may be to write your own webpack configuration from the get-go. -->
-如果您弹出一个用 create-react-app 创建的应用，就不会返回，所有的配置都必须手动维护。 默认配置并不简单，与其从 create-react-app中弹出，不如从一开始就编写自己的 webpack 配置。
+如果您eject一个用 create-react-app 创建的应用，就不会返回，所有的配置都必须手动维护。 默认配置并不简单，与其从 create-react-app中eject，不如从一开始就编写自己的 webpack 配置。
 
 <!-- Going through and reading the configuration files of an ejected application is still recommended and extremely educational. -->
-检查和读取弹出应用的配置文件仍然是推荐的，而且非常有教育意义。
+检查和读取eject应用的配置文件仍然是推荐的，而且非常有教育意义。
 
 </div>
 

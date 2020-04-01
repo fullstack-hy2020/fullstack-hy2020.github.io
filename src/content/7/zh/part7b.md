@@ -10,20 +10,20 @@ lang: zh
 
 
 <!-- The exercises in this part are a bit different than the exercises in the previous parts. The exercises in the previous part and the exercises in this part [are about the theory presented in this part](/osa7/custom_hookit#tehtavat-7-4-7-6). -->
-这一章节的练习与前几章节有点不同。 前一章节的练习和这一章节的练习都是关于这一章节提出的理论[are about the theory presented in this part](/zh/part7/自定义_hooks#exercises-7-4-7-8).。
+这一章节的练习与前几章节有点不同。 前一章节的练习和这一章节的练习都是[关于这一章节提出的理论](/zh/part7/自定义_hooks#exercises-7-4-7-8).。
 
 
 
 
 <!-- This part also contains a [series of exercises](/osa7/tehtavia_blogilistan_laajennus) in which we modify the Bloglist application from parts 4 and 5 to rehearse and apply the skills we have learned. -->
-本章节还包含一系列练习[series of exercises](/zh/part7/练习：扩展你的博客列表)  ，其中我们从第4章节和第5章节修改 Bloglist 应用，以演练和应用我们所学到的技能。
+本章节还包含[一系列练习](/zh/part7/练习：扩展你的博客列表)，其中我们从第4章节和第5章节修改 Bloglist 应用，以演练和应用我们所学到的技能。
 
 ### Hooks
 
 
 
 <!-- React offers 10 different [built-in hooks](https://reactjs.org/docs/hooks-reference.html), of which the most popular ones are the [useState](https://reactjs.org/docs/hooks-reference.html#usestate) and [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect) hooks, that we have already been using extensively. -->
-React 提供了10种不同的内置Hook，其中最受欢迎的是我们已经广泛使用的[useState](https://reactjs.org/docs/hooks-reference.html  https://reactjs.org/docs/hooks-reference.html#useState)和[useEffect](https://reactjs.org/docs/hooks-reference.html#useEffect)Hook。 
+React 提供了10种不同的内置Hook，其中最受欢迎的是我们已经广泛使用的[useState](https://reactjs.org/docs/hooks-reference.html  https://reactjs.org/docs/hooks-reference.html#useState)和[useEffect](https://reactjs.org/docs/hooks-reference.html#useEffect) Hook。 
 
 <!-- In [第5章](/osa5/props_children_ja_proptypet#ref-eli-viite-komponenttiin) we used the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle)-hook which allows for components to provide their functions to other components. -->
 在[第5章](/zh/part5/props_children_与_proptypes#references-to-components-with-ref)中，我们使用了[useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useImperativeHandle)-hook，它允许组件为其他组件提供其功能。
@@ -35,21 +35,23 @@ React 提供了10种不同的内置Hook，其中最受欢迎的是我们已经�
 我们使用 react-redux 库中的[useSelector](https://react-redux.js.org/api/hooks#useSelector)和[useDispatch](https://react-redux.js.org/api/hooks#useDispatch)Hook来共享我们对组件的 redux-store 和 dispatch 函数。 Redux 的基于Hook的 api 比旧的、仍然可用的[connect](/zh/part6/connect方法)-api 更易于使用。
 
 <!-- [React-router's](https://reacttraining.com/react-router/web/guides) api we introduced in the [previous part](/osa7/react_router/) is also partially [hook](https://reacttraining.com/react-router/web/api/Hooks) based. Its hooks can be used to access url parameters and the history object, which allows for manipulating the browser url programmatically. -->
-我们在[上一章节](/zh/part7/react_router)中介绍的[React-router 的](https://reacttraining.com/React-router/web/guides) api 也部分基于[hook](https://reacttraining.com/React-router/web/api/hooks)。 它的Hook可以用来访问 url 参数和历史对象，这允许以编程方式操作浏览器的 url。
+我们在[上一章节](/zh/part7/react_router)中介绍的[React-router](https://reacttraining.com/React-router/web/guides)的 api 也部分基于[hook](https://reacttraining.com/React-router/web/api/hooks)。 它的Hook可以用来访问 url 参数和历史对象，这允许以编程方式操作浏览器的 url。
 
 <!-- As mentioned in [第1章](/zh/part1/深入_react_应用调试#rules-of-hooks), hooks are not normal functions, and when using those we have to adhere to certain [rules or limitations](https://reactjs.org/docs/hooks-rules.html). Let's recap the rules of using hooks, copied verbatim from the official React documentation: -->
 正如在[第1章](/zh/part1/深入_react_应用调试#rules-of-hooks)中提到的，Hook不是正常的函数，在使用这些函数时，我们必须遵守某些[规则或限制](https://reactjs.org/docs/hooks-rules.html)。 让我们回顾一下使用Hook的规则，一字不差地从官方的 React 文档中复制下来:
 
-<!-- **Don’t call Hooks inside loops, conditions, or nested functions.** Instead, always use Hooks at the top level of your React function.  -->
-**不要在循环、条件或嵌套函数中调用 Hooks。 **取而代之的是，始终在 React 函数的顶层使用 Hooks。
+**Don’t call Hooks inside loops, conditions, or nested functions.** Instead, always use Hooks at the top level of your React function. 
 
-<!-- **Don’t call Hooks from regular JavaScript functions.** Instead, you can: -->
-不要从常规的 JavaScript 函数中调用 Hooks:
+**不要在循环、条件或嵌套函数中调用 Hooks。**取而代之的是，始终在 React 函数的顶层使用 Hooks。
 
-<!--Call Hooks from React function components.-->
+**Don’t call Hooks from regular JavaScript functions.** Instead, you can:
+
+**不要从常规的 JavaScript 函数中调用 Hooks**，取而代之的是，你可以:
+
+- Call Hooks from React function components.
 - 从 React 函数组件调用Hook。
-<!--Call Hooks from custom Hooks-->
-- 从定制Hook调用Hook
+- Call Hooks from custom Hooks
+- 从自定义Hook调用Hook
 
 <!-- There's an existing [ESlint](https://www.npmjs.com/package/eslint-plugin-react-hooks) rule that can be used to verify that the application uses hooks correctly.  -->
 有一个现有的[ESlint](https://www.npmjs.com/package/ESlint-plugin-react-hooks)规则可以用来验证应用是否正确地使用Hook。
@@ -61,7 +63,7 @@ Create-react-app 已经配置好了规则[eslint-plugin-react-hooks](https://www
 
 
 ### Custom hooks 
-【定制Hook】
+【自定义Hook】
 <!-- React offers the option to create our own [custom](https://reactjs.org/docs/hooks-custom.html) hooks. According to React, the primary purpose of custom hooks is to facilitate the reuse of the logic used in components. -->
 React 提供了创建我们自己的[自定义](https://reactjs.org/docs/hooks-custom.html)Hook的选项。 根据 React，自定义Hook的主要目的是促进组件中使用的逻辑的重用。 
 
@@ -245,7 +247,7 @@ const useField = (type) => {
 ```
 
 <!-- The hook function receives the type of the input field as a parameter. The function returns all of the attributes required by the <i>input</i>: its type, value and the onChange handler. -->
-Hook函数接收输入字段的类型作为参数。 函数返回<i>input</i> 所需的所有属性: 它的类型、值和 onChange 处理程序。 
+Hook函数接收input字段的类型作为参数。 函数返回<i>input</i> 所需的所有属性: 它的类型、值和 onChange 处理程序。 
 
 
 <!-- The hook can be used in the following way: -->
@@ -275,7 +277,7 @@ const App = () => {
 ### Spread attributes 
 【展开属性】
 <!-- We could simplify things a bit further. Since the _name_ object has exactly all of the attributes that the <i>input</i> element expects to receive as props, we can pass the props to the element using the [spread syntax](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) in the following way: -->
-我们可以进一步简化事情。 因为 name 对象具有<i>input</i> 元素期望作为props接收的所有属性，所以我们可以使用[spread syntax](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes)如下面的方式将props传递给元素:
+我们可以进一步简化事情。 因为 name 对象具有<i>input</i> 元素期望作为props接收的所有属性，所以我们可以使用[展开语法](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes)如下面的方式将props传递给元素:
 
 ```js
 <input {...name} /> 
@@ -354,7 +356,7 @@ const App = () => {
 
 #### 7.4: anecdotes and hooks 步骤1
 <!-- Simplify the anecdote creation form of your application with the _useField_ custom hook we defined earlier. -->
-使用我们前面定义的 usefeld 自定义Hook简化应用的八卦创建形式。
+使用我们前面定义的 _useField_  自定义Hook简化应用的八卦创建形式。
 
 <!-- One natural place to save the custom hooks of your application is in the <i>/src/hooks/index.js</i> file. -->
 保存应用的自定义Hook的一个自然位置是 <i>/src/hooks/index.js</i>文件。
@@ -386,7 +388,7 @@ export const useAnotherHook = () => { // highlight-line
 ```
 
 <!-- Then [importing](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) happens in the following way: -->
-然后[导入](https://developer.mozilla.org/en-us/docs/web/javascript/reference/statements/import)如下面的方式发生:
+然后如下面的方式[导入](https://developer.mozilla.org/en-us/docs/web/javascript/reference/statements/import):
 
 ```js
 import  { useField } from './hooks'
@@ -421,7 +423,7 @@ const App = () => {
 如果您的解决方案没有导致警告出现在控制台中，那么您已经完成了这个练习。
 
 <!-- If you see the warning in the console, make the necessary changes to get rid of the `Invalid value for prop reset' on <input> tag` console warning.  -->
-如果你在控制台中看到警告，做出必要的修改，去掉输入标签控制台警告上的 `Invalid value for prop reset' on <input> tag` c。
+如果你在控制台中看到警告，做出必要的修改，去掉输入标签控制台警告上的 `Invalid value for prop reset' on <input> tag`。
 
 <!-- The reason for this warning is that after making the changes to your application, the following expression: -->
 发出此警告的原因是，在对应用进行更改之后，下面的表达式:
@@ -457,7 +459,7 @@ input元素不应该被赋予 reset 属性。
 ```
 
 <!-- If we were to do this we would lose much of the benefit provided by the <i>useField</i> hook. Instead, come up with a solution that fixes the issue, but is still easy to use with spread syntax. -->
-如果我们这样做，我们将失去很多由<i>useField</i> Hook提供的好处。 相反，要想出一个解决方案来修复这个问题，但仍然易于使用展开语法。
+如果我们这样做，我们将失去很多由<i>useField</i> Hook提供的好处。 相反，要想出一个解决方案来修复这个问题，但仍然使用展开语法。
 
 #### 7.7: country hook
 <!-- Let's return to the exercises [2.12-14](/osa2/palvelimella_olevan_datan_hakeminen#tehtavat-2-11-2-14). -->
@@ -488,7 +490,7 @@ input元素不应该被赋予 reset 属性。
 除此之外，应用是完整的，但是在这个练习中，您必须实现一个自定义的 hook useCountry，它可以用来搜索作为参数提供给 hook 的国家的详细信息。
 
 <!-- Use the api endpoint [full name](https://restcountries.eu/#api-endpoints-full-name) to fetch country details in a _useEffect_-hook within your custom hook. -->
-使用 api 端点[全名](https://restcountries.eu/#api-endpoints-full-name)在自定义Hook内的 useEffect-hook 中获取国家详细信息。
+使用 api 接口[full name](https://restrestcountries.eu/#api-endpoints-full-name)在自定义Hook内的 useEffect-hook 中获取国家详细信息。
 
 
 
@@ -497,7 +499,7 @@ input元素不应该被赋予 reset 属性。
 
 #### 7.8: ultimate hooks 终极Hook
 <!-- The code of the application responsible for communicating with the backend of the note application of the previous parts looks like this: -->
-负责与前面部分的便笺应用后端通信的应用代码如下:
+前面章节，负责与便笺应用后端通信的应用代码如下:
 
 ```js
 import axios from 'axios'
@@ -532,7 +534,7 @@ export default { getAll, create, update, setToken }
 ```
 
 <!-- We notice that the code is in no way specific to the fact that our application deals with notes. Excluding the value of the _baseUrl_ variable, the same code could be reused in the blog post application for dealing with the communication with the backend. -->
-我们注意到，代码并不是特定于我们的应用处理便笺的事实。 排除 baseUrl 变量的值，可以在 blog post 应用中重用相同的代码来处理与后端的通信。
+我们注意到，代码并不是特定于我们的应用处理便笺。 排除  _baseUrl_ 变量的值，可以在 blog post 应用中重用相同的代码来处理与后端的通信。
 
 <!-- Extract the code for communicating with the backend into its own _useResource_ hook. It is sufficient to implement fetching all resources and creating a new resource. -->
 将用于与后端通信的代码提取到它自己的 useResource Hook中。 只要实现获取所有资源并创建新资源就足够了。
@@ -581,7 +583,7 @@ const App = () => {
 ```
 
 <!-- The _useResource_ custom hook returns an array of two items just like the state hooks. The first item of the array contains all of the individual resources and the second item of the array is an object that can be used for manipulating the resource collection, like creating new ones. -->
-Useresource 自定义Hook返回一个包含两个项的数组，就像状态Hook一样。 数组的第一项包含所有单独的资源，数组的第二项是一个可用于操作资源集合(如创建新资源)的对象。 
+_useResource_  自定义Hook返回一个包含两个项的数组，就像state hook一样。 数组的第一项包含所有单独的资源，数组的第二项是一个可用于操作资源集合(如创建新资源)的对象。 
 
 <!-- If you implement the hook correctly, it can be used for both notes and phone numbers (start the server with the _npm run server_ command at the port 3005). -->
 如果正确地实现了Hook，它可以同时用于便笺和电话号码(在端口3005使用 npm run server 命令启动服务器)。
