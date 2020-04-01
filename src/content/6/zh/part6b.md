@@ -499,7 +499,7 @@ export default store
 
 
 <!-- Let's continue working on the anecdote application using redux that we started in exercise 6.3.  -->
-让我们继续使用我们在练习6.3中开始的 redux 来处理轶事应用。
+让我们继续使用我们在
 
 
 #### 6.9 Better anecdotes, 步骤7

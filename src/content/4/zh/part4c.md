@@ -38,7 +38,7 @@ lang: zh
 
 <!-- If we need a functionality similar to join queries, we will implement it in our application code by making multiple queries. In certain situations Mongoose can take care of joining and aggregating data, which gives the appearance of a join query. However, even in these situations Mongoose makes multiple queries to the database in the background. -->
 
-如果我们需要一个类似 join queries 的功能，我们会在应用中利用 multiple queries 来实现这个需求。在特定的场景下，Mongoose 可以处理 join 和聚合数据，使它看起来像 join 查询 一样。但是 Mongoose 在这种情况下也是在数据库后台使用了 multiple query。
+如果我们需要一个类似 join queries 的功能，我们会在应用中利用 multiple queries 来实现这个需求。在特定的场景下，Mongoose 可以处理 join 和聚合数据，使它看起来像 join 查询 一样。但是 Mongoose 其实也是在后台数据库使用了 multiple query。
 
 ### References across collections
 【跨 collection 引用】
@@ -65,7 +65,7 @@ lang: zh
 
 <!-- The <i>notes</i> collection contains three notes that all have a <i>user</i> field that references a user in the <i>users</i> collection: -->
 
-<i>notes</i> collection 包含三个 Note， 每个 Note 都有一个<i>user</i> field 来指向<i>users</i> collection 中的一个 user。
+<i>notes</i> collection 包含三个 Note， 每个 Note 都有一个<i>user</i> 字段 来指向<i>users</i> collection 中的一个 user。
 
 ```js
 [
@@ -92,7 +92,7 @@ lang: zh
 
 <!-- Document databases do not demand the foreign key to be stored in the note resources, it could <i>also</i> be stored in the users collection, or even both: -->
 
-文档型数据库并不要求外键存储在 Note 资源中，它<i>同样</i>可以存储在 User Collection 中，甚至可以在 Note 和 User 中都存。
+文档型数据库并不要求外键存储在 Note 资源中，它<i>同样</i>可以存储在 User Collection 中，甚至可以在 Note 和 User 中都存一份。
 
 ```js
 [
@@ -111,11 +111,11 @@ lang: zh
 
 <!-- Since users can have many notes, the related ids are stored in an array in the <i>notes</i> field. -->
 
-既然 User 可以包含许多个 Note， 那么存储 Note id 的 field 就应该是一个数组。
+既然 User 可以包含许多个 Note， 那么存储 Note id 的 字段 就应该是一个数组。
 
 <!-- Document databases also offer a radically different way of organizing the data: In some situations it might be beneficial to nest the entire notes array as a part of the documents in the users collection: -->
 
-文档型数据库还提供了一个完全不同的方式组织数据：在某些情况下，这可能收益更大，那就是将所有的 note 以数组的形式作为每个文档的一章节嵌套在 user collection 中。
+文档型数据库还提供了一个完全不同的方式组织数据：在某些情况下，这可能收益更大，那就是将所有的 note 以数组的形式作为每个文档的一部分嵌套在 user collection 中。
 
 ```js
 [
@@ -157,7 +157,7 @@ lang: zh
 
 <!-- Paradoxically, schema-less databases like Mongo require developers to make far more radical design decisions about data organization at the beginning of the project than relational databases with schemas. On average, relational databases offer a more-or-less suitable way of organizing data for many applications. -->
 
-矛盾的是，于关系型数据库相比，像 Mongo 这种弱 Schema 类型的数据库要求开发者做更多的这种关于数据组织的设计决定，而且是在项目的开始阶段。一般来说，关系型数据库为应用提供的是一种或多或少合适可用的组织数据的方式。
+矛盾的是，与关系型数据库相比，像 Mongo 这种弱 Schema 类型的数据库要求开发者做更多的这种关于数据组织的设计决定，而且是在项目的开始阶段。一般来说，关系型数据库为应用提供的是一种或多或少合适可用的组织数据的方式。
 
 ### Mongoose schema for users
 
@@ -206,12 +206,12 @@ Note 的 ID 以数组的形式存储在了 User 当中，定义如下：
 ```
 
 <!-- The type of the field is <i>ObjectId</i> that references <i>note</i>-style documents. Mongo does not inherently know that this is a field that references notes, the syntax is purely related to and defined by Mongoose. -->
-type filed 是<i>ObjectId</i>，引用了 <i>note</i> 的文档类型。Mongo 
-本质上并不知道这是一个引用 Note 的 field，这种语法完全是与 Mongoose 的定义有关。
+type 字段 是<i>ObjectId</i>，引用了 <i>note</i> 的文档类型。Mongo 
+本质上并不知道这是一个引用 Note 的字段，这种语法完全是与 Mongoose 的定义有关。
 
 <!-- Let's expand the schema of the note defined in the <i>model/note.js</i> file so that the note contains information about the user who created it: -->
 
-让我们展开 <i>model/note.js</i> 文件中的 note 的 schema，让 note 包含其创建者的信息。
+让我们展开 <i>model/note.js</i> 文件中 note 的 schema，让 note 包含其创建者的信息。
 
 ```js
 const noteSchema = new mongoose.Schema({
@@ -302,10 +302,10 @@ request 当中的密码并没有存储在数据库中。我们存储的是 _bcry
 [存储密码](https://codahale.com/how-to-safely-store-a-password/) 的基本原理超出了本课程的范围。我们也不会讨论赋值给[saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds) 的魔法值 10 代表什么，但你可以在相关文章中找到它。
 
 <!-- Our current code does not contain any error handling or input validation for verifying that the username and password are in the desired format. -->
-我们的当前代码不包含任何用于验证用户名和密码的功能，如用户名和密码是否为所需格式的错误处理或输入校验。
+我们的当前代码不包含任何用于验证用户名和密码的功能，如用户名和密码是否为所需格式等错误处理或输入校验。
 
 <!-- The new feature can and should initially be tested manually with a tool like Postman. However testing things manually will quickly become too cumbersome, especially once we implement functionality that enforces usernames to be unique. -->
-新特性可以并且应该首先使用 Postman 这样的工具进行手动测试。 然而，手动测试将很快变得过于繁琐，特别是一旦我们实现了强制用户名保持唯一的功能。
+新特性可以并且应该首先使用 Postman 这样的工具进行手动测试。 然而，手动测试将很快变得过于繁琐，特别是一旦我们实现了强制用户名保持唯一等功能。
 
 <!-- It takes much less effort to write automated tests, and it will make the development of our application much easier. -->
 编写自动化测试所需的工作量要少得多，而且它将使应用的开发更加容易。
@@ -355,7 +355,7 @@ describe('when there is initially one user at db', () => {
 
 <!-- The tests use the <i>usersInDb()</i> helper function that we implemented in the <i>tests/test_helper.js</i> file. The function is used to help us verify the state of the database after a user is created: -->
 
-测试使用了我们实现于<i>tests/test_helper.js</i> 文件中的<i>usersInDb()</i> helper 函数。这个函数用来帮助我们验证创建完一个用户后的数据库的状态。
+测试使用了我们实现于<i>tests/test_helper.js</i> 文件中的 <i>usersInDb()</i> 这个辅助函数。这个函数用来帮助我们验证创建完一个用户后的数据库的状态。
 
 ```js
 const User = require('../models/user')
@@ -540,7 +540,7 @@ await user.save()
 
 <!-- As previously mentioned, document databases do not properly support join queries between collections, but the Mongoose library can do some of these joins for us. Mongoose accomplishes the join by doing multiple queries, which is different from join queries in relational databases which are <i>transactional</i>, meaning that the state of the database does not change during the time that the query is made. With join queries in Mongoose, nothing can guarantee that the state between the collections being joined is consistent, meaning that if we make a query that joins the user and notes collections, the state of the collections may change during the query. -->
 
-如前所述，文档型数据库不能很好地支持 collection 之间的 join queries，但是 Mongoose 库可以做一些类似 join 的工作。Mongoose 是通过 multiple queries 来实现这种类 join 查询的，这于关系型数据库中的事务性 join 查询不同，也就是数据库的状态在查询执行期间并不改变。而使用 Mongoose 的 join 查询，并不能保证 collection 在 join 时的状态是一致的，也就是如果我们在进行 Note 和 User 的 join 查询后，在查询期间 collection 的状态可能发生变化。
+如前所述，文档型数据库不能很好地支持 collection 之间的 join queries，但是 Mongoose 库可以做一些类似 join 的工作。Mongoose 是通过 multiple queries 来实现这种类 join 查询的，这与关系型数据库中的事务性 join 查询不同，也就是数据库的状态在查询执行期间并不改变。而使用 Mongoose 的 join 查询，并不能保证 collection 在 join 时的状态是一致的，也就是如果我们在进行 Note 和 User 的 join 查询后，在查询期间 collection 的状态可能发生变化。
 
 <!-- The Mongoose join is done with the [populate](http://mongoosejs.com/docs/populate.html) method. Let's update the route that returns all users first: -->
 
@@ -601,7 +601,7 @@ notesRouter.get('/', async (request, response) => {
 数据库实际上并不知道 Note 中<i>user</i> field 中的 id 实际指向了 User collection 中的 User， 了解这一点十分重要。
 
 <!-- The functionality of the <i>populate</i> method of Mongoose is based on the fact that we have defined "types" to the references in the Mongoose schema with the <i>ref</i> option: -->
-Mongoose 中<i>populate</i> 方法的功能是基于这样一个事实，即我们已经用 ref option 为 Mongoose Schema 中的引用定义了类型： 
+Mongoose 中<i>populate</i> 方法的功能是基于这样一个事实，即我们已经用 ref 选项为 Mongoose Schema 中的引用定义了类型： 
 
 ```js
 const noteSchema = new mongoose.Schema({

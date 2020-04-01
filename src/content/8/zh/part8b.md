@@ -1015,7 +1015,7 @@ useEffect(() => {
 
 
 ### Exercises 8.8.-8.12.
-练习8.8-8.12。
+
 
 <!-- Through these exercises we'll implement a frontend for the GraphQL-library.  -->
 通过这些练习，我们将实现 graphql 库的前端。

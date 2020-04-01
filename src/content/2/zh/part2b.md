@@ -13,7 +13,7 @@ lang: zh
 
 <!-- In order to get our page to update when new notes are added it's best to store the notes in the <i>App</i> component's state. Let's import the [useState](https://reactjs.org/docs/hooks-state.html) function and use it to define a piece of state that gets initialized with the initial notes array passed in the props.  -->
 
-为了让我们的页面在添加新便笺时更新，最好将便笺存储在<i>App</i> 组件的状态中。 让我们导入[useState](https://reactjs.org/docs/hooks-state.html)函数，并使用它定义一个状态，这个状态用props传进来的初始便签数组作为状态初始化。
+为了让我们的页面在添加新便笺时更新，最好将便笺存储在<i>App</i> 组件的状态中。 让我们导入[useState](https://reactjs.org/docs/hooks-state.html)函数，并使用它定义一个状态，这个状态用props传进来的初始便笺数组作为状态初始化。
 
 ```js
 import React, { useState } from 'react' // highlight-line

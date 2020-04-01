@@ -409,7 +409,7 @@ Mutation: {
 ```
 
 <!-- If a logged in user cannot be found from the context, an _AuthenticationError_ is thrown. Creating new persons is now done with _async/await_ syntax, because if the operation is successful, the created person is added to the friends list of the user.  -->
-如果在上下文中找不到登录用户，将引发 AuthenticationError。 现在使用 async / await 语法创建新的 person，因为如果操作成功，创建的 person 将被添加到用户的好友列表中。
+如果在上下文中找不到登录用户，将引发 AuthenticationError。 现在使用 async/await 语法创建新的 person，因为如果操作成功，创建的 person 将被添加到用户的好友列表中。
 
 <!-- Let's also add functionality for adding an existing user to your friends list. The mutation is as follows:  -->
 我们还可以添加一个功能，将现有用户添加到好友列表中:

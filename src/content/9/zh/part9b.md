@@ -538,7 +538,8 @@ interface MultiplyValues {
 ### Exercises 9.1.-9.3.
 #### setup 安装
 <!-- Exercises 9.1.-9.7. will be all made to the same node project. Create the project in an empty directory with <i>npm init</i> and install the ts-node and typescript packages. Create also the file <i>tsconfig.json</i> to the directory with the following content: -->
-练习9.1-9.7。 都会开发到同一个node 项目。 使用<i>npm init</i> 在一个空目录中创建项目，并安装 ts-node 和 typescript 包。 将 <i>tsconfig.json</i> 文件创建到目录，内容如下:
+
+都会开发到同一个node 项目。 使用<i>npm init</i> 在一个空目录中创建项目，并安装 ts-node 和 typescript 包。 将 <i>tsconfig.json</i> 文件创建到目录，内容如下:
 
 ```json
 {

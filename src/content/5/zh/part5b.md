@@ -246,10 +246,10 @@ export default Togglable
 
 <!-- The new and interesting part of the code is [props.children](https://reactjs.org/docs/glossary.html#propschildren), that is used for referencing the child components of the component. The child components are the React elements that we define between the opening and closing tags of a component. -->
 
-这个新的且比较有趣的代码就是 [props.children](https://reactjs.org/docs/glossary.html#propschildren)， 它用来引用组件的自组件。自组件就是我们想要控制开启和关闭的 React 组件。
+这个新的且比较有趣的代码就是 [props.children](https://reactjs.org/docs/glossary.html#propschildren)， 它用来引用组件的子组件。子组件就是我们想要控制开启和关闭的 React 组件。
 
 <!-- This time the children are rendered in the code that is used for rendering the component itself: -->
-这一次，子元素被渲染到了用于渲染组件本身的代码中：
+这一次，子组件被渲染到了用于渲染组件本身的代码中：
 
 ```js
 <div style={showWhenVisible}>
@@ -273,7 +273,7 @@ export default Togglable
 这时 <i>props.children</i> 是一个空的数组。
 
 <!-- The <i>Togglable</i> component is reusable and we can use it to add similar visibility toggling functionality to the form that is used for creating new notes. -->
-<i>Togglable</i> 组件可被重用，我们可以用它创建新的的 Note 的表单添加类似的切换功能。
+<i>Togglable</i> 组件可被重用，我们可以用它创建新的切换可见性的功能，如对添加 Note 的表单添加类似的功能。
 
 <!-- Before we do that, let's extract the form for creating notes into its own component: -->
 在这之前，我们把创建 Note 的表单解耦到自己的组件中。
@@ -322,7 +322,7 @@ const NoteForm = ({ onSubmit, handleChange, value}) => {
 <!-- React documentation says the [following](https://reactjs.org/docs/lifting-state-up.html) about where to place the state: -->
 React[文档](https://reactjs.org/docs/lifting-state-up.html)阐述了关于在哪里放置状态: 
 
-> <i>Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.</i>
+> <i>Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.</i><br>
 通常，几个组件需要反映相同的变化数据。 我们建议将共享状态提升到它们最接近的共同祖先。 
 
 <!-- If we think about the state of the forms, so for example the contents of a new note before it has been created, the _App_ component does not actually need it for anything.  -->
@@ -417,14 +417,12 @@ const App = () => {
 
 
 <!-- The application code can be found from [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5), -->
-应用代码可以从[github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5)中找到,
 <!-- branch <i>part5-5</i>. -->
-分支<i>第5-5</i> 部分。
+应用代码可以从[github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5)中找到,分支<i>5-5</i> 。
+
 
 ### References to components with ref
 【引用具有 ref 的组件】
-
-
 
 <!-- Our current implementation is quite good, it has one aspect that could be improved. -->
 
@@ -530,13 +528,13 @@ const App = () => {
 总结一下，[useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useImperativeHandle)函数是一个 React hook，用于定义组件中的函数，该组件可以从组件外部调用。
 
 <!-- This trick works for changing the state of a component, but it looks a bit unpleasant. We could have accomplished the same functionality with slightly cleaner code using "old React" class-based components. We will take a look at these class components at the part 7 of the course material. So far this is the only situation where using React hooks leads to code that is not cleaner than with class components. -->
-这个技巧适用于改变组件的状态，但是看起来有点不舒服。 我们可以使用基于“旧的 React”类的组件，用稍微简洁的代码实现相同的功能。 我们将在课程材料的第7章节看看这些类组成部分。 到目前为止，只有在这种情况下，使用 React hooks 导致的代码并不比使用类组件更干净。
+这个技巧适用于改变组件的状态，但是看起来有点不舒服。 我们可以使用基于“旧的 React”类组件，用稍微简洁的代码实现相同的功能。 我们将在课程材料的第7章节看看这些类组件。 到目前为止，只有在这种情况下，使用 React hooks 导致的代码不比使用类组件更干净。
 
 <!-- There are also [other use cases](https://reactjs.org/docs/refs-and-the-dom.html) for refs than accessing React components. -->
 还有[其他用例](https://reactjs.org/docs/refs-and-the-dom.html)用于 refs 而不是访问 React 组件。
 
 <!-- You can find the code for our current application in its entirety in the <i>part5-6</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-6). -->
-您可以在[ this github repository ]的<i>part5-6</i> 分支中找到我们当前应用的全部代码，该分支是 https://github.com/fullstack-hy2020/part2-notes/tree/part5-6文件库。
+您可以在[这个仓库](https://github.com/fullstack-hy2020/part2-notes/tree/part5-6)的<i>part5-6</i> 分支中找到我们当前应用的全部代码。
 
 ### One point about components
 【关于组件的一个点】
@@ -589,7 +587,7 @@ const Togglable = () => ...
 
 #### 5.5 Blog list frontend, 步骤5
 <!-- Change the form for creating blog posts so that it is only displayed when appropriate. Use functionality similar to what was shown [earlier in this part of the course material](/zh/part5/props_children_与_proptypes#displaying-the-login-form-only-when-appropriate). If you wish to do so, you can use the <i>Togglable</i> component defined in part 5. -->
-更改用于创建博客文章的表单，使其只在适当的时候显示。 使用类似于课程材料前面所展示的功能[earlier in this part of the course material](/zh/part5/props_children_与_proptypes#displaying-the-login-form-only-when-appropriate)。 如果您希望这样做，可以使用第5章节中定义的<i>Togglable</i> 组件。
+更改用于创建博客文章的表单，使其只在适当的时候显示。 使用类似于[课程材料前面所展示的功能](/zh/part5/props_children_与_proptypes#displaying-the-login-form-only-when-appropriate)。 如果您希望这样做，可以使用第5章节中定义的<i>Togglable</i> 组件。
 
 <!-- By default the form is not visible -->
 默认情况下，窗体不可见
@@ -606,26 +604,18 @@ const Togglable = () => ...
 当创建新博客时，表单将关闭。
 
 #### 5.6 Blog list frontend, 步骤6
-5.6 Blog list frontend，步骤6
-
-
 
 <!-- Separate the form for creating a new blog into its own component (if you have not already done so), and  -->
-将创建新 blog 的表单分离到它自己的组件中(如果您还没有这样做) ，并
 <!-- move all the states required for creating a new blog to this component.  -->
-将创建新博客所需的所有州移动到此组件。
-
-
+将创建新 blog 的表单分离到它自己的组件中(如果您还没有这样做) ，并将创建新博客所需的所有状态移动到此组件。
 
 <!-- The component must work like the <i>NewNote</i> component from the [material](/osa5/props_children_ja_proptypet#lomakkeiden-tila) of this part. -->
-这个组件必须像这个部件的[material](/zh/part5/props_children_与_proptypes)中的<i>NewNote</i> 组件那样工作。
+这个组件必须像[这里](/zh/part5/props_children_与_proptypes)的<i>NewNote</i> 组件那样工作。
 
 #### 5.7* Blog list frontend, 步骤7
 
 <!-- Let's add each blog a button, which controls if all of the details about the blog are shown or not. -->
 让我们为每个博客添加一个按钮，用于控制是否显示博客的所有细节。
-
-
 
 <!-- Full details of the blog open when the button is clicked. -->
 点击按钮时打开博客的详细信息。
@@ -644,7 +634,7 @@ const Togglable = () => ...
 图中显示的应用使用了一些附加的 CSS 来改善其外观。
 
 <!-- It is easy to add styles to the application as shown in part 2 using [inline](/zh/part2/给_react应用加点样式#inline-styles) styles: -->
-使用[[inline](/zh/part2/给_react应用加点样式#inline-styles)样式向应用添加样式很容易，如第2章节所示:
+使用[inline](/zh/part2/给_react应用加点样式#inline-styles)样式向应用添加样式很容易，如第2章节所示:
 
 ```js
 const Blog = ({ blog }) => {
@@ -667,16 +657,15 @@ const Blog = ({ blog }) => {
 ```
 
 <!-- **NB1:** you can make the name of a blog post click-able as shown in the part of the code that is highlighted. -->
-注意1： 您可以使博客文章的名称可以点击，如代码中突出显示的部分所示。
+**注意1：** 您可以使博客文章的名称可以点击，如代码中突出显示的部分所示。
 
 <!-- **NB2:** even though the functionality implemented in this part is almost identical to the functionality provided by the <i>Togglable</i> component, the component can not be used directly to achieve the desired behavior. The easiest solution will be to add state to the blog post that controls the displayed form of the blog post. -->
-注意2： 尽管该部分实现的功能与<i>Togglable</i> 组件提供的功能几乎完全相同，但该组件不能直接用于实现所需的行为。 最简单的解决方案是将状态添加到控制博客文章显示形式的博客文章中。
+**注意2：** 尽管该部分实现的功能与<i>Togglable</i> 组件提供的功能几乎完全相同，但该组件不能直接用于实现所需的行为。 最简单的解决方案是将状态添加到控制博客文章显示形式的博客文章中。
 
 #### 5.8*: Blog list frontend, 步骤7
-5.8 * : Blog list frontend，步骤7
 
 <!-- Implement the functionality for the like button. Likes are increased by making an HTTP _PUT_ request to the unique address of the blog post in the backend. -->
-实现 like 按钮的功能。 通过向后端中的博客文章的唯一地址发出 HTTP PUT 请求，可以增加喜欢。
+实现 like 按钮的功能。 通过向后端中的博客文章的唯一地址发出 HTTP PUT 请求，可以增加like。
 
 <!-- Since the backend operation replaces the entire blog post, you will have to send all of its fields  in the request body. If you wanted to add a like to the following blog post: -->
 由于后端操作将替换整个 blog 文章，因此必须在请求主体中发送其所有字段。 如果你想在下面的博客文章中添加赞:
@@ -710,7 +699,7 @@ const Blog = ({ blog }) => {
 ```
 
 <!-- **One last warning:** if you notice that you are using async/await and the _then_-method in the same code, it is almost certain that you are doing something wrong. Stick to using one or the other, and never use both at the same time "just in case".  -->
-最后一个警告: 如果您注意到在同一段代码中使用了 async / await 和 then-方法，那么几乎可以肯定您做错了什么。 坚持使用一种或另一种，永远不要同时使用两种，“以防万一”。
+**最后一个警告:** 如果您注意到在同一段代码中混用了 async/await 和 then 方法，那么几乎可以肯定您做错了什么。 坚持使用一种或另一种，永远不要同时使用两种，“以防万一”。
 
 #### 5.9*: Blog list frontend, 步骤8
 <!-- Modify the application to list the blog posts by the number of <i>likes</i>. Sorting the blog posts can be done with the array [sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) method. -->
@@ -815,7 +804,7 @@ LoginForm.propTypes = {
 ### ESlint
 
 <!-- In part 3 we configured the [ESlint](/zh/part3/es_lint与代码检查#lint) code style tool to the backend. Let's take ESlint to use in the frontend as well. -->
-在第三部分中我们配置了[ESlint](/zh/part3/es_lint与代码检查#lint) ，为后台代码控制了代码样式。让我们同样加到前台代码中。
+在第三章节中我们配置了[ESlint](/zh/part3/es_lint与代码检查#lint) ，为后台代码控制了代码样式。让我们同样加到前台代码中。
 
 <!-- Create-react-app has installed ESlint to the project by default, so all that's left for us to do is to define our desired configuration in the <i>.eslintrc.js</i> file. -->
 Create-react-app 已经默认为项目安装好了 ESlint， 所以我们需要做的就是定义自己的<i>.eslintrc.js</i> 文件 
@@ -824,7 +813,7 @@ Create-react-app 已经默认为项目安装好了 ESlint， 所以我们需要�
 注意: 不要运行 eslint-- init 命令。 它将安装与 create-react-app 创建的配置文件不兼容的最新版本的 ESlint！
 
 <!-- Next, we will start testing the frontend and in order to avoid undesired and irrelevant linter errors we will install the [eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest) package: -->
-下面，我们将开始测试前端，以避免不想要和不相关的 lint 错误，我们先安装[eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest) 库：
+下面，我们将开始测试前端，为避免不想要和不相关的 lint 错误，我们先安装[eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest) 库：
 
 ```js
 npm add --save-dev eslint-plugin-jest

@@ -800,7 +800,7 @@ const [error, setError] = React.useState<string | undefined>();
 我们给出了应用于实际状态的<i>useState</i> hook 类型参数。 所以<i>modalOpen</i> 是一个<i>boolean</i>，而<i>error</i> 的类型分别是<i>string | undefined</i>。 这两个由<i>useState</i> Hook返回的 set 函数都是根据给定的类型参数只接受参数的函数，例如 <i>setModalOpen</i>函数的确切类型<i>React.Dispatch<React.SetStateAction&lt;boolean&gt;></i>。
 
 <!-- We also have <i>openModal</i> and <i>closeModal</i> helper functions for better readability and convenience: -->
-为了更好的可读性和方便性，我们还有<i>openModal</i> 和<i>closeModal</i> helper 函数:
+为了更好的可读性和方便性，我们还有<i>openModal</i> 和<i>closeModal</i> 辅助函数:
 
 ```js
 const openModal = (): void => setModalOpen(true);

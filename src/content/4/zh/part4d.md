@@ -13,7 +13,7 @@ lang: zh
 
 <!-- We will now implement support for [token based authentication](https://scotch.io/tutorials/the-ins-and-outs-of-token-based-authentication#toc-how-token-based-works) to the backend. -->
 
-我们现在将让后端支持[基于令牌认证](https://scotch.io/tutorials/the-ins-and-outs-of-token-based-authentication#toc-how-token-based-works)
+我们现在将让后端支持[基于令牌的认证](https://scotch.io/tutorials/the-ins-and-outs-of-token-based-authentication#toc-how-token-based-works)
 
 <!-- The principles of token based authentication are depicted in the following sequence diagram: -->
 
@@ -25,13 +25,13 @@ lang: zh
 
 - 用户首先在 React 中通过登录表单实现登录
 
-  - <!--We will add the login form to the frontend in [第5章](/zh/part5)--> 
+   <!--We will add the login form to the frontend in [第5章](/zh/part5)--> 
   - 我们将在[第5章](/zh/part5) 在前台增加登录表单
 
-- <!--This causes the React code to send the username and the password to the server address <i>/api/login</i> as a HTTP POST request.-->
+ <!--This causes the React code to send the username and the password to the server address <i>/api/login</i> as a HTTP POST request.-->
 
 - 这会使得 React 代码将用户名和密码通过<i>/api/login</i> 作为一个 HTTP POST 请求发送给服务器。
-- <!--If the username and the password are correct, the server generates a <i>token</i> which somehow identifies the logged in user.-->
+ <!--If the username and the password are correct, the server generates a <i>token</i> which somehow identifies the logged in user.-->
 
 - 如果用户名和密码是正确的，服务器会生成一个 <i>token</i>，用来标识登录的用户。
 
@@ -198,13 +198,13 @@ _jwt.sign(userForToken, process.env.SECRET)_ 方法失败了。因为我们忘�
 
 <!-- There are several ways of sending the token from the browser to the server. We will use the [Authorization](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization) header. The header also tells which [authentication schema](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#Authentication_schemes) is used. This can be necessary if the server offers multiple ways to authenticate. -->
 <!-- Identifying the schema tells the server how the attached credentials should be interpreted. -->
-有集中方法可以将令牌从浏览器发送到服务器中。我们将使用[Authorization](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization) 头信息。头信息还包含了使用哪一种[authentication schema](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#Authentication_schemes) 。如果服务器提供多种认证方式，那么认证 Schema 就十分必要。这种 Schema 用来告诉服务器应当如何解析发来的认证信息。
+有几种方法可以将令牌从浏览器发送到服务器中。我们将使用[Authorization](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization) 头信息。头信息还包含了使用哪一种[authentication schema](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#Authentication_schemes) 。如果服务器提供多种认证方式，那么认证 Schema 就十分必要。这种 Schema 用来告诉服务器应当如何解析发来的认证信息。
 
 <!-- The <i>Bearer</i> schema is suitable to our needs. -->
 <i>Bearer</i> schema 正是我们需要的。
 
 <!-- In practice, this means that if the token is for example, the string <i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i>, the Authorization header will have the value: -->
-实际上，这意味着加入我们有一个 token 字符串<i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i>, 认证头信息的值为：
+实际上，这意味着假设我们有一个 token 字符串<i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i>, 认证头信息的值则为：
 
 <pre>
 Bearer eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW
@@ -256,7 +256,7 @@ notesRouter.post('/', async (request, response) => {
 
 <!-- The helper function _getTokenFrom_ isolates the token from the <i>authorization</i> header. The validity of the token is checked with _jwt.verify_. The method also decodes the token, or returns the Object which the token was based on: -->
 
-_getTokenFrom_ 这个 helper 函数将 token 与认证头信息相分离。token 的有效性通过 _jwt.verify_ 进行检查。这个方法同样解码了 token， 或者返回了一个 token 所基于的对象
+_getTokenFrom_ 这个 辅助函数将 token 与认证头信息相分离。token 的有效性通过 _jwt.verify_ 进行检查。这个方法同样解码了 token， 或者返回了一个 token 所基于的对象
 
 ```js
 const decodedToken = jwt.verify(token, process.env.SECRET)
@@ -369,12 +369,12 @@ const errorHandler = (error, request, response, next) => {
 在接下来的练习中，我们将为 Bloglist 应用实现基本的用户管理。 最安全的方法是遵循第4章 [User administration](/zh/part4/用户管理)到[Token-based authentication](/zh/part4/密钥认证)这一章的内容。 当然，你也可以运用你的创造力。
 
 <!-- **One more warning:** If you notice you are mixing async/await and _then_ calls, it is 99% certain you are doing something wrong. Use either or, never both.  -->
-**还有一个警告: **如果你注意到你混用了 async/await 和 _then_ 调用，99% 肯定你做错了什么。 使用其中一种，不要两者都使用。
+**再提醒一下:** 如果你注意到你混用了 async/await 和 _then_ 调用，你99% 做错了什么。 使用其中一种，不要两者都使用。
 
 #### 4.15: bloglist expansion, 步骤4
 <!-- Implement a way to create new users by doing a HTTP POST-request to address <i>api/users</i>. Users have <i>username -->
- password and name</i>.
-通过执行 HTTP POST-request 来访问 <i>api/users</i>，实现创建新用户的方法用户需要包含用户名、密码及名字。
+ <!-- password and name</i>. -->
+通过执行 HTTP POST-请求来访问 <i>api/users</i>，实现创建新用户的方法，需要包含用户名、密码及名字。
 
 <!-- Do not save passwords to the database as clear text, but use the <i>bcrypt</i> library like we did in part 4 chapter [Creating new users](/zh/part4/用户管理#creating-users). -->
 不要将数据库的密码保存为明文，而是使用<i>bcrypt</i> 库，就像我们在第4章[Creating new users](/zh/part4/用户管理#creating-users)中所做的那样。
@@ -406,7 +406,7 @@ npm uninstall bcrypt --save
 如果创建了无效用户，操作必须使用适当的状态代码和某种错误消息进行响应。
 
 <!-- **NB** Do not test password restrictions with Mongoose validations. It is not a good idea because the password received by the backend and the password hash saved to the database are not the same thing. The password length should be validated in the controller like we did in [第3章](/zh/part3/es_lint与代码检查) before using Mongoose validation.  -->
-**注意 **不要用 Mongoose 验证测试密码限制。 这不是一个好主意，因为后端接收到的密码和保存到数据库的密码散列不是一回事。 在使用 Mongoose 验证之前，应该像在 [第3章](/zh/part3/es_lint与代码检查)中那样在控制器中验证密码长度。
+**注意**不要用 Mongoose 验证测试密码限制。 这不是一个好主意，因为后端接收到的密码和保存到数据库的密码散列不是一回事。 在使用 Mongoose 验证之前，应该像在 [第3章](/zh/part3/es_lint与代码检查)中那样在控制器中验证密码长度。
 
 <!-- Also, implement tests which check that invalid users are not created and invalid add user operation returns a suitable status code and error message.  -->
 此外，实现一些测试，测试可以检查未被创建的无效用户，以及无效的添加用户操作，并返回合适的状态码和错误消息。
@@ -416,9 +416,9 @@ npm uninstall bcrypt --save
 扩展博客，使每个博客包含关于博客创建者的信息。
 
 <!-- Modify adding new blogs so that when a new blog is created,  <i>any</i> user from the database is designated as its creator (for example the one found first). Implement this according to part 4 chapter [populate](/zh/part4/用户管理#populate). -->
-修改添加新博客，以便在创建新博客时，将数据库中的任何 用户指定为其创建者(例如首先找到的那个)。 根据第4章 [populate](/zh/part4/用户管理#populate).实现这一点。
+修改添加新博客，以便在创建新博客时，将数据库中的任何 用户指定为其创建者(例如首先找到的那个)。 根据第4章 [populate](/zh/part4/用户管理#populate)实现这一点。
 <!-- Which user is designated as the creator does not matter just yet. The functionality is finished in exercise 4.19.  -->
-哪个用户被指定为创建者还不重要。这个功能在练习4.19中完成。
+哪个用户被指定为创建者还不重要。这个功能在
 
 <!-- Modify listing all blogs so that the creator's user information is displayed with the blog:  -->
 修改所有博客列表，以便创建者的用户信息与博客一起显示:
@@ -441,10 +441,10 @@ npm uninstall bcrypt --save
 
 #### 4.20*: bloglist expansion, 步骤9
 <!-- [This example](/zh/part4/密钥认证) from part 4 shows taking the token from the header with the _getTokenFrom_ helper function. -->
-第4章节的[示例](/zh/part4/密钥认证)显示了使用 getTokenFrom helper 函数从头部获取令牌。
+第4章节的[示例](/zh/part4/密钥认证)显示了使用 getTokenFrom 辅助函数从头部获取令牌。
 
 <!-- If you used the same solution, refactor taking the token to a [middleware](/zh/part3/node_js_与_express#middleware). The middleware should take the token from the <i>Authorization</i> header and place it to the <i>token</i> field of the <i>request</i> object.  -->
-如果您使用相同的解决方案，重构将令牌移到[中间件](/zh/part3/node_js_与_express#middleware)。 中间件应该从<i>Authorization</i> 标头获取令牌，并将其放置到<i>request</i> 对象的<i>token</i> 字段。
+如果您使用相同的解决方案，重构一下，将令牌移到[中间件](/zh/part3/node_js_与_express#middleware)。 中间件应该从<i>Authorization</i> 标头获取令牌，并将其放置到<i>request</i> 对象的<i>token</i> 字段。
 
 <!-- In other words, if you register this middleware in the <i>app.js</i> file before all routes -->
 换句话说，如果在所有路由之前在<i>app.js</i> 文件中注册这个中间件
@@ -506,34 +506,33 @@ if ( blog.user.toString() === userid.toString() ) ...
 <!-- This is the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
 这是本课程这一章节的最后一个练习，是时候将你的代码推送到 GitHub，并将所有已完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)。
 
-<!---
+<!-- -
 <!-- note left of user -->
-  user fills in login form with
-  username and password
+  <!-- user fills in login form with -->
+  <!-- username and password -->
 <!-- end note -->
 <!-- user -> browser: login button pressed -->
 
 <!-- browser -> backend: HTTP POST /api/login { username, password } -->
 <!-- note left of backend -->
-  backend generates TOKEN that identifies user 
+  <!-- backend generates TOKEN that identifies user  -->
 <!-- end note -->
 <!-- backend -> browser: TOKEN returned as message body  -->
 <!-- note left of browser -->
-  browser saves TOKEN
+  <!-- browser saves TOKEN -->
 <!-- end note -->
 <!-- note left of user -->
-  user creates a note
+  <!-- user creates a note -->
 <!-- end note -->
 <!-- user -> browser: create note button pressed -->
 <!-- browser -> backend: HTTP POST /api/notes { content } TOKEN in header -->
 <!-- note left of backend -->
-  backend identifies userfrom the TOKEN
+  <!-- backend identifies userfrom the TOKEN -->
 <!-- end note -->
 
 <!-- backend -> browser: 201 created -->
 
 <!-- user -> user: -->
--->
 
 </div>
 

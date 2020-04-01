@@ -9,15 +9,15 @@ lang: zh
 
 
 <!-- In the last two parts, we have mainly concentrated on the backend, and the frontend does not yet support the user management we implemented to the backend in part 4. -->
-在上两部分中，我们主要关注于后端，但前端还不支持我们在第四部分中实现的后端用户管理。
+在上两章节中，我们主要关注于后端，但前端目前还不支持我们在第四章节中实现的后端用户管理。
 
 <!-- At the moment the frontend shows existing notes, and lets users change the state of a note from important to not important and vice versa. New notes cannot be added anymore because of the changes made to the backend in part 4: the backend now expects that a token verifying a user's identity is sent with the new note. -->
 
-目前前端能够展示已经存在的 Note，并且允许用户切换 Note 的重要程度。由于我们在第四部分的修改，新的 Note 不能再添加了：因为在新建 Note 前，后端现在需要 token 来验证用户。
+目前前端能够展示已经存在的 Note，并且允许用户切换 Note 的重要程度。由于我们在第四章节的修改，新的 Note 不能再添加了：因为在新建 Note 前，后端现在需要 token 来验证用户。
 
 <!-- We'll now implement a part of the required user management functionality to the frontend. Let's begin with user login. Throughout this part we will assume that new users will not be added from the frontend. -->
 
-我们现在将实现前台的用户管理功能的一章节。首先从用户登录开始，在这一章节中，我们假设还不会从前端来添加用户。
+我们现在将实现前台的用户管理功能的一部分。首先从用户登录开始，在这一章节中，我们假设还不会从前端来添加用户。
 
 <!-- A login form has now been added to the top of the page. The form for adding new notes has also been moved to the top of the list of notes. -->
 
@@ -102,7 +102,7 @@ export default App
 <!-- The login form is handled the same way we handled forms in -->
 <!-- [第2章](/zh/part2/表单). The app state has fields for <i>username</i> and <i>password</i> to store the data from the form. The form fields have event handlers, which synchronizes changes in the field to the state of the <i>App</i> component. The event handlers are simple: An object is given to them as a parameter, and they destructure the field <i>target</i> from the object and save its value to the state. -->
 
-登录表单的处理方式与我们第二章所讲的处理方式相同。当前应用状态有<i>username</i> 和 <i>password</i> 都存储在表单中。表单有事件处理逻辑，与<i>App</i>组件的状态保持同步。事件处理逻辑也很简单：一个对象作为参数传递给它们，它们将<i>target</i> field 从对象里解构出来，将它的值保存为状态
+登录表单的处理方式与我们第二章所讲的处理方式相同。当前应用状态有<i>username</i> 和 <i>password</i> 都存储在表单中。表单有事件处理逻辑，与<i>App</i>组件的状态保持同步。事件处理逻辑也很简单：将一个对象作为参数传递给它们，它们将<i>target</i> 字段从对象里解构出来，将它的值保存为状态
 
 ```js
 ({ target }) => setUsername(target.value)
@@ -170,17 +170,17 @@ const App = () => {
 <!-- If the login is successful, the form fields are emptied <i>and</i> the server response (including a <i>token</i> and the user details) is saved to the <i>user</i> field of the application's state. -->
 
 如果登录成功，表单 字段 被清空，并且服务器响应（包括 token 和用户信息）被存储到
-应用状态的<i>user</i> field 。
+应用状态的<i>user</i> 字段 。
 
 <!-- If the login fails, or running the function _loginService.login_ results in an error, the user is notified. -->
 如果登录失败，或者执行 _loginService.login_ 产生了错误，则会通知用户。
 
 <!-- User is not notified about a successful login in any way. Let's modify the application to show the login form only <i>if the user is not logged in</i> so _user === null_. The form for adding new notes is shown only if <i>user is logged in</i>, so <i>user</i> contains the user details. -->
 
-总之用户登录成功是不会通知用户的。让我们将应用修改为，只有当用户没有登录时才显示登录表单，即 _user === null_ 只有当用户登录成功后才会显示添加新的 Note，这样 <i>user</i> 状态才会包含信息
+总之用户登录成功是不会通知用户的。让我们将应用修改为，只有当用户没有登录时才显示登录表单，即 _user === null_ 。只有当用户登录成功后才会显示添加新的 Note，这样 <i>user</i> 状态才会包含信息
 
 <!-- Let's add two helper functions to the <i>App</i> component for generating the forms: -->
-让我们增加两个 helper 函数给 <i>App</i> 组件来生成表单。
+让我们增加两个 辅助函数给 <i>App</i> 组件来生成表单。
 
 ```js
 const App = () => {
@@ -284,7 +284,7 @@ const App = () => {
 如果第一个表达式计算为 false 或[falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy)， 则不会执行第二个语句（生成表单）
 
 <!-- We can make this even more straightforward by using the [conditional operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator): -->
-我们可以使用条件运算[conditional operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator)来让这个逻辑表达:得更直白一些：
+我们可以使用条件运算[conditional operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator)来让这个逻辑表达得更直白一些：
 
 ```js
 return (
@@ -340,11 +340,11 @@ return (
 这种解决方案看起来有点丑，但我们先这么放在这。
 
 <!-- Our main component <i>App</i> is at the moment way too large. The changes we did now are a clear sign that the forms should be refactored into their own components. However, we will leave that for an optional excercise. -->
-我们的主组件 <i>App</i> 现在看起来十分臃肿。我们现在做的修改暗示着，表单应该重构到它自己的组件中。但我们把这个作为可选的练习放到课后。
+我们的主组件 <i>App</i> 现在看起来十分臃肿。我们现在做的修改意味着，表单应该重构到它自己的组件中。但我们把这个作为可选的练习放到课后。
 
 
 <!-- Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-2), branch <i>part5-2</i>. -->
-当前的应用代码可以在[Github](https://Github.com/fullstack-hy2020/part2-notes/tree/part5-2) ，branch<i>part5-2</i> 上找到。
+当前的应用代码可以在[Github](https://Github.com/fullstack-hy2020/part2-notes/tree/part5-2) <i>part5-2</i> 分支上找到。
 
 ### Creating new notes
 【创建新的 Note】
@@ -370,7 +370,7 @@ const handleLogin = async (event) => {
 ```
 
 <!-- Let's fix creating new notes to work with the backend. This means adding the token of the logged in user to the Authorization header of the HTTP request. -->
-让我们修复创建新 Note 的代码来和后台对接好。也就是说把登录成功用户的 token 放到 HTTP 请求的认证头中。
+让我们修复创建新 Note 的代码，来和后台对接好。也就是说把登录成功用户的 token 放到 HTTP 请求的认证头中。
 
 <!-- The <i>noteService</i> module changes like so: -->
 <i>noteService</i> 模块修改如下：
@@ -413,7 +413,7 @@ export default { getAll, create, update, setToken } // highlight-line
 
 <!-- The noteService module contains a private variable _token_. Its value can be changed with a function _setToken_, which is exported by the module. _create_, now with async/await syntax, sets the token to the <i>Authorization</i> header. The header is given to axios as the third parameter of the <i>post</i> method. -->
 
-noteService 模块包含一个私有变量 _token_。它的值可以通过 _setToken_ 函数来改变，这个函数通过模块对外开放。 _create_ 方法现在利用 async/await 语法，在 token 塞到了认证头中。头信息作为第三个入参数放到了 axios 的 <i>post</i> 方法中。 
+noteService 模块包含一个私有变量 _token_。它的值可以通过 _setToken_ 函数来改变，这个函数通过模块对外开放。 _create_ 方法现在利用 async/await 语法，将 token 塞到了认证头中。头信息作为第三个入参数放到了 axios 的 <i>post</i> 方法中。 
 
 <!-- The event handler responsible for log in must be changed to call the method <code>noteService.setToken(user.token)</code> with a successful log in: -->
 
@@ -478,7 +478,7 @@ window.localStorage.getItem('name')
 
 <!-- Values in the storage stay even when the page is rerendered. The storage is [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin)-specific so each web application has its own storage. -->
 
-即使页面刷新，存储中的值也会保留。这个存储是原生指定[origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin)的，所以每个 web 应用都有自己的存储空间。
+即使页面刷新，存储中的值也会保留。这个存储是[原生](https://developer.mozilla.org/en-US/docs/Glossary/Origin)-指定的，所以每个 web 应用都有自己的存储空间。
 
 <!-- Let's extend our application so that it saves the details of a logged in user to the local storage. -->
 
@@ -521,14 +521,14 @@ _JSON.stringify_ 方法转换成 JSON。相应的，当从本地存储读取 JSO
 ![](../../images/5/3e.png)
 
 <!-- We still have to modify our application so that when we enter the page, the application checks if user details of a logged in user can already be found from the local storage. If they can, the details are saved to the state of the application and to <i>noteService</i>. -->
-我们仍然需要修改我们的应用，以便当我们进入页面时，应用会检查是否能在本地存储中找到登录用户的详细信息，如果可以将信息保存到应用的状态中，以及<i>noteService</i>中
+我们仍然需要修改我们的应用，以便当我们进入页面时，应用会检查是否能在本地存储中找到登录用户的详细信息，如果可以，将信息保存到应用的状态中，以及<i>noteService</i>中
 
 <!-- The right way to do this is with an [effect hook](https://reactjs.org/docs/hooks-effect.html): A mechanism we first encountered in [第2章](/zh/part2/从服务器获取数据#effect-hooks), and used to fetch notes from the server to the frontend. -->
 
-正确的方式是用一个事件Hook [effect hook](https://reactjs.org/docs/hooks-effect.html)： 这种机制我们在第2章节 [第2章](/zh/part2/从服务器获取数据#effect-hooks)分中见到过，当时是用来从服务器中获取所有 Note。
+正确的方式是用一个[effect hook](https://reactjs.org/docs/hooks-effect.html)： 这种机制我们在第2章节 [第2章](/zh/part2/从服务器获取数据#effect-hooks)分中见到过，当时是用来从服务器中获取所有 Note。
 
 <!-- We can have multiple effect hooks, so let's create a second one to handle the first loading of the page: -->
-我们可以有多个事件Hook，所以我们来创建一个来处理首次登录页面：
+我们可以有多个effect hook，所以我们来创建一个hook 来处理首次登录页面：
 
 ```js
 const App = () => {
@@ -564,7 +564,7 @@ const App = () => {
 
 <!-- The empty array as the parameter of the effect ensures that the effect is executed only when the component is rendered [for the first time](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect). -->
 
-这个作为事件参数的空数组确保在第组件渲染完成后被执行。
+这个作为事件参数的空数组确保在[第一次](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect)组件渲染完成后被执行。
 
 <!-- Now a user stays logged in to the application forever. We should probably add a <i>logout</i> functionality which removes the login details from the local storage. We will however leave it for an exercise. -->
 
@@ -588,7 +588,7 @@ window.localStorage.clear()
 
 
 <!-- Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-3), branch <i>part5-3</i>. -->
-当前的应用代码可以在[Github](https://Github.com/fullstack-hy2020/part2-notes/tree/part5-3) ，branch<i>part5-3</i> 上找到。
+当前的应用代码可以在[Github](https://Github.com/fullstack-hy2020/part2-notes/tree/part5-3) <i>part5-3</i> 分支上找到。
 
 </div>
 
@@ -597,22 +597,22 @@ window.localStorage.clear()
 
 ### Exercises 5.1.-5.4.
 <!-- We will now create a frontend for the bloglist backend we created in the last part. You can use [this application](https://github.com/fullstack-hy2020/bloglist-frontend) from GitHub as the base of your solution. The application expects your backend to be running on port 3001.  -->
-现在我们将为上一章节创建的博客列表后端创建一个前端。 你可以使用 GitHub 上的[this application](https://GitHub.com/fullstack-hy2020/bloglist-frontend)作为你的解决方案的基础。 应用期望您的后端在端口3001上运行。
+现在我们将为上一章节创建的博客列表后端创建一个前端。 你可以使用 GitHub 上的[这个应用](https://GitHub.com/fullstack-hy2020/bloglist-frontend)作为你的解决方案的基础。 应用期望您的后端在3001端口上运行。
 
 <!-- It is enough to submit your finished solution. You can do a commit after each exercise, but that is not necessary.  -->
-只要提交完成的解决方案就足够了。 您可以在每次练习之后进行一次提交，但这不是必须的。
+只要提交完成的解决方案就足够了。 您可以在每次练习之后进行一次提交，但这并不强制。
 
 <!-- The first few exercises revise everything we have learned about React so far. They can be challenging, especially if your backend is incomplete.  -->
-开始的几次练习修改了我们已经学到的关于React的所有知识。 他们可能是有挑战性的，特别是如果你的后端是不完整的。
+开始的几次练习修改了我们已经学到的关于React的所有知识。 他们可能是有挑战性的，特别是如果你的后端内容没有完成。
 
 <!-- It might be best to use the backend from model answers of part 4.  -->
-最好使用第4章节 model answers 作为后端。
+最好使用第4章节的 model answers 作为后端。
 
 <!-- While doing the exercises, remember all of the debugging methods we have talked about, especially keeping an eye on the console.  -->
 在做这些练习时，请记住我们讨论过的所有调试方法，尤其要密切关注控制台。
 
 <!-- **Warning:** If you notice you are mixing async/await and _then_ commands, its 99.9%  certain you are doing something wrong. Use either or, never both.  -->
-**警告: **如果你注意到你正在混合 async / await 和_then_ 命令，99.9% 肯定你正在做错误的事情。 要么使用其中之一，不要两者都使用。
+**警告:**如果你注意到你正在混合 async/await 和_then_ 命令，你99.9% 正在做错误的事情。 要么使用其中之一，不要两者都使用。
 
 #### 5.1: bloglist frontend, 步骤1
 <!-- Clone the application from [Github](https://github.com/fullstack-hy2020/bloglist-frontend) with the command:  -->
@@ -622,8 +622,8 @@ window.localStorage.clear()
 git clone https://github.com/fullstack-hy2020/bloglist-frontend
 ```
 
-<i>remove the git configuration of the cloned application</i>
-删除了克隆应的 git 配置
+<!-- <i>remove the git configuration of the cloned application</i> -->
+删除了克隆应用的 git 配置
 
 ```bash
 cd bloglist-frontend   // go to cloned repository
@@ -639,7 +639,7 @@ npm start
 ```
 
 <!-- Implement login functionality to the frontend. The token returned with a successful login is saved to the application's state <i>user</i>. -->
-在前端实现登录功能。成功登录后返回的令牌保存到应用的状态<i>user</i>。
+在前端实现登录功能。成功登录后返回的令牌保存到应用的<i>user</i>状态。
 
 <!-- If a user is not logged in, <i>only</i> the login form is visible.  -->
 如果一个用户没有登录，那么登录表单就是可见的。
@@ -703,7 +703,7 @@ npm start
 
 #### 5.4*: bloglist frontend, 步骤4
 <!-- Implement notifications which inform the user about successful and unsuccessful operations at the top of the page. For example, when a new blog is added, the following notification can be shown:  -->
-在页面顶部实现通知，告知用户成功和不成功的操作。 例如，当添加一个新博客时，可以显示如下通知:
+在页面顶部实现通知，告知用户成功和不成功的操作结果。 例如，当添加一个新博客时，可以显示如下通知:
 
 ![](../../images/5/8e.png)
 

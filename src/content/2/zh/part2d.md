@@ -315,8 +315,8 @@ Map 方法通过将旧数组中的每个项映射到新数组中的一个项来�
 ### Extracting communication with the backend into a separate module
 【将与后端的通信提取到单独的模块中】
 
-<!-- The <i>App</i> component has become somewhat bloated after adding the code for communicating with the backend server. In the spirit of the [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), we deem it wise to extract this communication into its own [module](/zh/part2/从渲染集合到模块学习#refactoring-modules). -->
-在添加了用于与后端服务器通信的代码之后，<i>App</i> 组件变得有些臃肿。 本着[单一职责原则](https://en.wikipedia.org/wiki/single_responsibility_principle)的精神，我们认为将这种通信提取到它自己的[模块](/zh/part2/从渲染集合到模块学习#refactoring-modules)是明智的。
+<!-- The <i>App</i> component has become somewhat bloated after adding the code for communicating with the backend server. In the spirit of the [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), we deem it wise to extract this communication into its own [module](/zh/part2/从渲染集合到模块学习#refactoring- 模块s). -->
+在添加了用于与后端服务器通信的代码之后，<i>App</i> 组件变得有些臃肿。 本着[单一职责原则](https://en.wikipedia.org/wiki/single_responsibility_principle)的精神，我们认为将这种通信提取到它自己的[模块](/zh/part2/从渲染集合到模块学习#refactoring- 模块s)是明智的。
 
 <!-- Let's create a <i>src/services</i> directory and add a file there called <i>notes.js</i>: -->
 让我们创建一个<i>src/services</i>目录，并添加一个名为<i>notes.js</i> 的文件:

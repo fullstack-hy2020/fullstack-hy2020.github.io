@@ -347,7 +347,7 @@ const App = () => {
 
 
 ### Exercises 7.4.-7.8.
-练习7.4-7.8。
+
 
 <!-- We'll continue with the app from [exercises](/osa7/custom_hookit#tehtavat-7-4-7-6) of the chapter [react router](/zh/part7/react_router).  -->
 我们将继续使用[react router](/zh/part7/react_router)章节中[exercises](/zh/part7/自定义_hooks#exercises-7-4-7-8) 的应用。

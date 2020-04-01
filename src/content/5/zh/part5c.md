@@ -17,7 +17,7 @@ lang: zh
 
 <!-- In addition to Jest, we also need another testing library that will help us render components for testing purposes. The current best option for this is[react-testing-library](https://github.com/testing-library/react-testing-library) which has seen rapid growth in popularity in recent times. -->
 
-除了 Jest 之外，我们还需要另一个测试库，它将帮助我们为测试目的渲染组件。 目前最好的选择是[react-testing-library](https://github.com/testing-library/react-testing-library) ，这个在最近几年迅速流行起来。
+除了 Jest 之外，我们还需要另一个测试库，它将帮助我们以测试目的渲染组件。 目前最好的选择是[react-testing-library](https://github.com/testing-library/react-testing-library) ，这个库在最近几年迅速流行起来。
 
 <!-- Let's install the library with the command: -->
 让我们用以下命令来安装这个库:
@@ -88,13 +88,13 @@ const component = render(
 ```
 
 <!-- Normally React components are rendered to the <i>DOM</i>. The render method we used renders the components in a format that is suitable for tests without rendering them to the DOM. -->
-通常将 React 组件渲染给<i>DOM</i>。 我们使用的 render 方法以适合于测试的格式渲染组件，而不需要将它们渲染给 DOM。
+通常 React 会将组件渲染给<i>DOM</i>。 我们使用的 render 方法以适合于测试的格式渲染组件，而不需要将它们渲染给 DOM。
 
 <!-- _render_ returns an object that has several [properties](https://testing-library.com/docs/react-testing-library/api#render-result). One of the properties is called <i>container</i>, and it contains all of the HTML rendered by the component. -->
 Render 返回一个具有多个[属性](https://testing-library.com/docs/react-testing-library/api#render-result)的对象。 其中一个属性称为<i>container</i>，它包含由组件渲染的所有 HTML。 
 
 <!-- In the expectation, we verify that the component renders the correct text, which in this case is the content of the note: -->
-在期望中，我们验证组件是否渲染出正确的文本，在这种情况下，该文本就是 Note 的内容:
+在except中，我们验证组件是否渲染出正确的文本，在本例中，该文本就是 Note 的内容:
 
 ```js
 expect(component.container).toHaveTextContent(
@@ -127,10 +127,10 @@ CI=true npm test
 
 <!-- In React there are (at least) [two different conventions](https://medium.com/@JeffLombardJr/organizing-tests-in-jest-17fc431ff850) for the test file's location. We created our test files according to the current standard by placing them in the same directory as the component being tested. -->
 
-在 React 中，关于测试文件的位置(至少)有两个不同的约定[two different conventions](https://medium.com/@JeffLombardJr/organizing-tests-in-jest-17fc431ff850) 。 我们根据当前标准创建了测试文件，将它们放在与被测试组件相同的目录中。
+在 React 中，关于测试文件的位置(至少)有[两个不同的约定](https://medium.com/@JeffLombardJr/organizing-tests-in-jest-17fc431ff850) 。 我们当前的标准是创建测试文件，将它们放在与被测试组件相同的目录中。
 
 <!-- The other convention is to store the test files "normally" in their own separate directory. Whichever convention we choose, it is almost guaranteed to be wrong according to someone's opinion. -->
-另一个约定是将测试文件“正常”存储在它们自己的单独目录中。 无论我们选择哪种惯例，根据其他人的观点，几乎肯定是错误的。
+另一个约定是将测试文件“正常”存储在它们自己的单独目录中。 无论我们选择哪种惯例，都会觉得另一种是完全错误的。
 
 <!-- Personally, I do not like this way of storing tests and application code in the same directory. The reason we choose to follow this convention is that it is configured by default in applications created by create-react-app. -->
 就我个人而言，我不喜欢这种将测试和应用程序代码存储在同一个目录中的方式。 我们之所以选择遵循这个约定，是因为它是在 create-react-app 创建的应用程序中默认配置的。
@@ -172,13 +172,13 @@ test('renders content', () => {
 ```
 
 <!-- The first way uses method <i>toHaveTextContent</i> to search for a matching text from the entire HTML code rendered by the component.    -->
-第一种方法使用方法<i>toHaveTextContent</i> 从组件渲染的整个 HTML 代码中搜索匹配的文本。
+第一种方法是使用<i>toHaveTextContent</i>方法从组件渲染的整个 HTML 代码中搜索匹配的文本。
 
 <!--<i>toHaveTextContent</i> is one of many "matcher"-methods that are provided by the  [jest-dom](https://github.com/testing-library/jest-dom#tohavetextcontent) library.-->
-<i>toHaveTextContent</i>  是许多“ matcher”方法之一，这些方法是由[jest-dom](https://github.com/testing-library/jest-dom#toHaveTextContent)库提供的。
+<i>toHaveTextContent</i>  是许多“匹配器”方法之一，这些方法是由[jest-dom](https://github.com/testing-library/jest-dom#toHaveTextContent)库提供的。
 
 <!-- The second way uses the [getByText](https://testing-library.com/docs/dom-testing-library/api-queries#bytext) method of the object returned by the render method. The method returns the element that contains the given text. An exception occurs if no such element exists. For this reason, we would technically not need to specify any additional expectation. -->
-第二种方法使用 render 方法返回的对象的[getByText](https://testing-library.com/docs/dom-testing-library/api-queries#bytext) 。 该方法返回包含给定文本的元素。如果不存在此类元素，则发生异常。 出于这个原因，我们在技术上不需要指定任何额外的期望。
+第二种方法是使用 render 方法返回对象的[getByText](https://testing-library.com/docs/dom-testing-library/api-queries#bytext) 。 该方法返回包含给定文本的元素。如果不存在此类元素，则发生异常。 出于这个原因，我们在技术上不需要指定任何额外的except。
 
 <!-- The third way is to search for a specific element that is rendered by the component with the [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) method that receives a [CSS selector](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) as its parameter. -->
 第三种方法是搜索由组件渲染的特定元素，该组件使用[querySelector](https://developer.mozilla.org/en-us/docs/web/api/document/querySelector)方法，该方法接收[CSS 选择器](https://developer.mozilla.org/en-us/docs/web/CSS/css_selectors)作为其参数。
@@ -337,7 +337,7 @@ expect(mockHandler.mock.calls).toHaveLength(1)
 
 <!-- [Mock objects and functions](https://en.wikipedia.org/wiki/Mock_object) are commonly used stub components in testing that are used for replacing dependencies of the components being tested. Mocks make it possible to return hardcoded responses, and to verify the number of times the mock functions are called and with what parameters. -->
 
-模拟对象和函数[Mock objects and functions](https://en.wikipedia.org/wiki/Mock_object) 是测试中常用的根组件，用于替换被测试组件的依赖项。 通过 mock 可以返回硬编码的响应，并验证调用 mock 函数的次数和参数。
+[模拟对象和函数](https://en.wikipedia.org/wiki/Mock_object) 是测试中常用的根组件，用于替换被测试组件的依赖项。 通过 mock 可以返回硬编码的响应，并验证调用 mock 函数的次数和参数。【TODO】
 
 <!-- In our example, the mock function is a perfect choice since it can be easily used for verifying that the method gets called exactly once. -->
 在我们的示例中，mock 函数是一个完美的选择，因为它可以很容易地用于验证方法是否只被调用一次。
@@ -412,7 +412,7 @@ describe('<Togglable />', () => {
 ```
 
 <!-- The _beforeEach_ function gets called before each test, which then renders the <i>Togglable</i> component into the _component_ variable -->
-_beforeEach_ 函数在每个测试之前调用，然后将 Togglable 组件渲染到 _component_ 变量中
+_beforeEach_ 函数在每个测试之前会被调用，然后将 Togglable 组件渲染到 _component_ 变量中
 
 <!-- The first test verifies that the <i>Togglable</i> component renders its child component `<div className="testDiv" />`. -->
 
@@ -486,9 +486,9 @@ fireEvent.click(button)
 
 
 <!-- In practice we used the <i>fireEvent</i> to create a <i>click</i> event for the button component.  -->
-实际上，我们使用<i>fireEvent</i> 为按钮组件创建<i>click</i> 事件。
+实际上，我们不仅可以使用<i>fireEvent</i> 为按钮组件创建<i>click</i> 事件。
 <!-- We cal also simulate text input with <i>fireEvent</i>. -->
-我们还使用<i>fireEvent</i> 来模拟文本输入。
+我们还可以使用<i>fireEvent</i> 来模拟文本输入。
 
 
 
@@ -638,10 +638,10 @@ CI=true npm test -- --coverage
 
 #### 5.16*: Blog list tests, 步骤3
 <!-- Make a test for the new blog form. The test should check, that the form calls the event handler it received as props with the right details when a new blog is called.  -->
-为新的博客表单做一个测试。 测试应该检查，当调用新博客时，表单是否使用正确的细节调用它作为props接收的事件处理程序。
+为新的博客表单做一个测试。 测试应该检查，当调用新建博客时，表单是否使用正确的细节调用它作为props接收的事件处理程序。
 
 <!-- If, for example, you give an <i>input</i> element id 'author': -->
-例如，如果你给出一个<i>input</i> 元素 id‘ author’ :
+例如，如果你给出一个<i>input</i> 元素 id'author' :
 
 ```js
 <input
@@ -668,10 +668,10 @@ const author = component.container.querySelector('#author')
 【前端集成测试】
 
 <!-- In the previous part of the course material, we wrote integration tests for the backend that tested its logic and connected database through the API provided by the backend. When writing these tests, we made the conscious decision not to write unit tests, as the code for that backend is fairly simple, and it is likely that bugs in our application occur in more complicated scenarios that integration tests are well suited for. -->
-在课程教材的前面章节，我们为后端编写了集成测试，测试其逻辑并通过后端提供的 API 连接数据库。 在编写这些测试时，我们有意识地决定不编写单元测试，因为后端的代码相当简单，而且我们应用中的错误可能发生在更复杂的场景中，而集成测试非常适合这些场景。
+在课程教材的前面章节，我们为后端编写了集成测试，测试其逻辑并通过后端提供的 API 连接数据库。 在编写这些测试时，我们有意识地不编写单元测试，因为后端的代码相当简单，但是我们应用中的错误可能发生在更复杂的场景中，而集成测试非常适合这些场景。
 
 <!-- So far all of our tests for the frontend have been unit tests that have validated the correct functioning of individual components. Unit testing is useful at times, but even a comprehensive suite of unit tests is not enough to validate that the application works as a whole. -->
-到目前为止，我们对前端的所有测试都是单元测试，这些测试验证了单个组件的正确功能。 单元测试有时很有用，但即使是一套完整的单元测试套件也不足以验证应用作为一个整体是否工作。
+到目前为止，我们对前端的所有测试都是单元测试，这些测试验证了单个组件的正确功能。单元测试有时很有用，但即使是一套完整的单元测试套件也不足以验证应用作为一个整体是否工作。
 
 
 
@@ -679,13 +679,13 @@ const author = component.container.querySelector('#author')
 【快照测试】
 
 <!-- Jest offers a completely different alternative to "traditional" testing called [snapshot](https://facebook.github.io/jest/docs/en/snapshot-testing.html) testing. The interesting feature of snapshot testing is that developers do not need to define any tests themselves, it is simply enough to adopt snapshot testing.  -->
-Jest 提供了一种与“传统”测试完全不同的替代方法，称为[snapshot](https://facebook.github.io/Jest/docs/en/snapshot-testing.html 测试)。 快照测试的有趣特性是开发人员不需要自己定义任何测试，只需要采用快照测试即可。 
+Jest 提供了一种与“传统”测试完全不同的替代方法，称为[snapshot](https://facebook.github.io/Jest/docs/en/snapshot-testing.html)。 快照测试的有趣特性是开发人员不需要自己定义任何测试，只需要采用快照测试即可。 
 
 <!-- The fundamental principle is to compare the HTML code defined by the component after it has changed to the HTML code that existed before it was changed. -->
-基本原则是比较组件在更改后定义的 HTML 代码和更改前存在的 HTML 代码。
+基本原则是比较组件更改后定义的 HTML 代码和更改前存在的 HTML 代码。
 
 <!-- If the snapshot notices some change in the HTML defined by the component, then either it is new functionality or a "bug" caused by the accident. Snapshot tests notify the developer if the HTML code of the component changes. The developer has to tell Jest if the change was desired or undesired. If the change to the HTML code is unexpected it strongly implicates a bug, and developer can become aware of these potential issues easily thanks to snapshot testing. -->
-如果快照注意到组件定义的 HTML 中发生了一些变化，那么它要么是新功能，要么是由于意外造成的“ bug”。 如果组件的 HTML 代码发生更改，快照测试会通知开发人员。 开发人员必须告诉 Jest 是否需要更改。 如果 HTML 代码的更改是意想不到的，那么它会强烈地隐含一个 bug，并且由于快照测试，开发人员可以很容易地意识到这些潜在的问题。
+如果快照注意到组件定义的 HTML 中发生了一些变化，那么它要么是新功能，要么是由于意外造成的“ bug”。 如果组件的 HTML 代码发生更改，快照测试会通知开发人员。 开发人员必须告诉 Jest 是否需要更改。 如果 HTML 代码的更改是意想不到的，那么它一定会隐含一个 bug，而由于快照测试，开发人员可以很容易地意识到这些潜在的问题。
 
 </div>
 

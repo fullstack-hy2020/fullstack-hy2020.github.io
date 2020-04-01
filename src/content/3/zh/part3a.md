@@ -1032,10 +1032,10 @@ Math.max(...notes.map(n => n.id))
 
 
 ### Exercises 3.1.-3.6.
-练习3.1- 3.6。
+
 
 <!-- **NB:** It's recommended to do all of the exercises from this part into a new dedicated git repository, and place your source code right at the root of the repository. Otherwise you will run into problems in exercise 3.10. -->
-注意: 建议将本章节的所有练习放到一个新的专用 git 仓库中，并将源代码放在仓库的根部。 否则你会在练习3.10中遇到问题。
+注意: 建议将本章节的所有练习放到一个新的专用 git 仓库中，并将源代码放在仓库的根部。 否则你会在
 
 <!-- **NB:** Because this is not a frontend project and we are not working with React, the application <strong>is not created</strong> with create-react-app. You initialize this project with the <em>npm init</em> command that was demonstrated earlier in this part of the material. -->
 

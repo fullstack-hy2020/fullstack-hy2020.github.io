@@ -563,8 +563,8 @@ noteSchema.set('toJSON', {
 module.exports = mongoose.model('Note', noteSchema) // highlight-line
 ```
 
-<!-- Defining Node [modules](https://nodejs.org/docs/latest-v8.x/api/modules.html) differs slightly from the way of defining [ES6 modules](/zh/part2/从渲染集合到模块学习#refactoring-modules) in part 2. -->
-定义 Node [modules](https://nodejs.org/docs/latest-v8.x/api/modules.html)与第2章节中定义[ES6模块](/zh/part2/从渲染集合到模块学习#refactoring-modules)的方式稍有不同。
+<!-- Defining Node [modules](https://nodejs.org/docs/latest-v8.x/api/modules.html) differs slightly from the way of defining [ES6 modules](/zh/part2/从渲染集合到模块学习#refactoring- 模块s) in part 2. -->
+定义 Node [modules](https://nodejs.org/docs/latest-v8.x/api/modules.html)与第2章节中定义[ES6模块](/zh/part2/从渲染集合到模块学习#refactoring- 模块s)的方式稍有不同。
 
 <!-- The public interface of the module is defined by setting a value to the _module.exports_ variable. We will set the value to be the <i>Note</i> model. The other things defined inside of the module, like the variables _mongoose_ and _url_ will not be accessible or visible to users of the module. -->
 模块的公共接口是通过将值设置为 module.exports 变量来定义的。 我们将该值设置为<i>Note</i> 模型。 模块内部定义的其他东西，比如变量 mongoose 和 url 对于模块的用户来说是不可访问的或者不可见的。
@@ -740,8 +740,8 @@ app.get('/api/notes/:id', (request, response) => {
 <!-- Verify that the frontend works after the changes have been made. -->
 验证前端是否在更改之后仍能正常工作。
 
-<!-- In the following exercises, write all Mongoose-specific code into its own module, just like we did in the chapter [Database configuration into its own module](/zh/part3/将数据存入_mongo_db#database-configuration-into-its-own-module). -->
-在下面的练习中，将所有特定于 mongoose 的代码写入它自己的模块，就像我们在[Database configuration into its own module](/zh/part3/将数据存入_mongo_db#database-configuration-into-its-own-module)一章中所做的那样.
+<!-- In the following exercises, write all Mongoose-specific code into its own module, just like we did in the chapter [Database configuration into its own module](/zh/part3/将数据存入_mongo_db#database-configuration-into-its-own- 模块). -->
+在下面的练习中，将所有特定于 mongoose 的代码写入它自己的模块，就像我们在[Database configuration into its own module](/zh/part3/将数据存入_mongo_db#database-configuration-into-its-own- 模块)一章中所做的那样.
 
 #### 3.14: Phonebook database, 步骤2
 3.14: 电话簿数据库，第二步
@@ -880,7 +880,7 @@ app.get('/api/notes/:id', (request, response) => {
 ### Moving error handling into middleware 
 【将错误处理移入中间件】
 <!-- We have written the code for the error handler among the rest of our code. This can be a reasonable solution at times, but there are cases where it is better to implement all error handling in a single place. This can be particularly useful if we later on want to report data related to errors to an external error tracking system like [Sentry](https://sentry.io/welcome/). -->
-我们在代码的其余部分中编写了错误处理程序的代码。 有时这可能是一个合理的解决方案，但在某些情况下，最好在单个位置实现所有错误处理。 如果我们以后想要将与错误相关的数据报告给外部的错误跟踪系统，比如[[Sentry](https://sentry.io/welcome/)，那么这么做就特别有用。
+我们在代码的其余部分中编写了错误处理程序的代码。 有时这可能是一个合理的解决方案，但在某些情况下，最好在单个位置实现所有错误处理。 如果我们以后想要将与错误相关的数据报告给外部的错误跟踪系统，比如[Sentry](https://sentry.io/welcome/)，那么这么做就特别有用。
 
 <!-- Let's change the handler for the <i>/api/notes/:id</i> route, so that it passes the error forward with the <em>next</em> function. The next function is passed to the handler as the third parameter: -->
 让我们更改 <i>/api/notes/:id</i> 路由的处理程序，以便它使用<em>next</em> 函数向下传递错误。 下一个函数作为第三个参数传递给处理程序:

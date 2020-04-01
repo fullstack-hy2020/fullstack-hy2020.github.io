@@ -334,7 +334,7 @@ export const createNote = (data) => {
 
 
 ### Exercises 6.13.-6.14.
-练习6.13-6.14。
+
 
 #### 6.13 Anecdotes and the backend, 步骤1
 

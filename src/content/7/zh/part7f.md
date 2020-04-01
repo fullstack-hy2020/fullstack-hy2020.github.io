@@ -119,7 +119,7 @@ const User = () => {
 
 
 <!-- After you're done with this exercise, the functionality that was implemented in exercise 5.6 is no longer necessary. Clicking a blog post no longer needs to expand the item in the list and display the details of the blog post. -->
-完成这个练习之后，就不再需要练习5.6中实现的功能了。 单击博客文章不再需要展开列表中的项目并显示博客文章的详细信息。
+完成这个练习之后，就不再需要
 
 #### 7.16: Navigation
 <!-- Implement a navigation menu for the application: -->

@@ -471,7 +471,7 @@ const App = ({ notes }) => {
 <!-- Note, that the <i>key</i> attribute must now be defined for the <i>Note</i> components, and not for the <i>li</i> tags like before.  -->
 注意，现在必须为<i>Note</i> 组件定义<i>key</i> 属性，而不是像前面那样为<i>li</i> 标签定义<i>key</i> 属性。
 
-<!-- A whole React application can be written in a single file. Although that is, of course, not very practical. Common practice is to declare each component in their own file as an <i>ES6-module</i>. -->
+<!-- A whole React application can be written in a single file. Although that is, of course, not very practical. Common practice is to declare each component in their own file as an <i>ES6- 模块</i>. -->
 可以在单个文件中编写整个 React 应用。 虽然实践中很少这么用。 通常的做法是将每个组件在其自己的文件中，声明为一个<i>ES6-模块</i>。
 
 <!-- We have been using modules the whole time. The first few lines of the file: -->
