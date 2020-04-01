@@ -647,7 +647,7 @@ const note = match
 
 ### Exercises 7.1.7.3.
 <!-- Let's return to working with anecdotes. Use the redux-free anecdote app found in the repository <https://github.com/fullstack-hy2020/routed-anecdotes> as the starting point for the exercises. -->
-让我们继续研究奇闻轶事。 使用存储库 https://github.com/fullstack-hy2020/routed-anecdotes 中的 redux-free 轶事应用作为练习的起点。
+让我们继续研究八卦八卦。 使用存储库 https://github.com/fullstack-hy2020/routed-anecdotes 中的 redux-free 八卦应用作为练习的起点。
 
 <!-- If you clone the project into an existing git repository remember to <i>delete the git configuration of the cloned application:</i> -->
 如果您将该项目克隆到现有的 git 存储库中，请记住我删除克隆应用的 git 配置
@@ -670,7 +670,7 @@ npm start
 向应用添加 React Router，以便通过单击<i>Menu</i>-component 中的链接可以更改视图。
 
 <!-- At the root of the application, meaning the path _/_, show the list of anecdotes: -->
-在应用的根部，即路径 / ，显示奇闻异事列表:
+在应用的根部，即路径 / ，显示八卦列表:
 
 ![](../../assets/teht/40.png)
 
@@ -678,7 +678,7 @@ npm start
 <i>Footer</i>-component 应该始终在底部可见。
 
 <!-- The creation of a new anecdote should happen e.g. in the path <i>create</i>: -->
-一个新奇闻的创作应该发生在例如我创建的路径上:
+一个新八卦的创作应该发生在例如我创建的路径上:
 
 ![](../../assets/teht/41.png)
 
@@ -690,17 +690,17 @@ npm start
 ![](../../assets/teht/42.png)
 
 <!-- Navigating to the page showing the single anecdote is done by clicking the name of that anecdote -->
-导航到显示单个轶事的页面是通过单击该轶事的名称来完成的
+导航到显示单个八卦的页面是通过单击该八卦的名称来完成的
 
 ![](../../assets/teht/43.png)
 
 
 #### 7.3: routed anecdotes, 步骤3
 <!-- The default functionality of the creation form is quite confusing, because nothing seems to be happening after creating a new anecdote using the form. -->
-创建表单的默认功能相当混乱，因为在使用该表单创建一个新奇闻之后，似乎什么都没有发生。
+创建表单的默认功能相当混乱，因为在使用该表单创建一个新八卦之后，似乎什么都没有发生。
 
 <!-- Improve the functionality such that after creating a new anecdote the application transitions automatically to showing the view for all anecdotes <i>and</i> the user is shown a notification informing them of this successful creation for the next 10 seconds: -->
-改进功能，比如在创建一个新的轶事后，应用会自动转换为显示所有轶事<i>和</i> 的视图，用户会看到一个通知，告诉他们在接下来的10秒内成功创建了这个视图:
+改进功能，比如在创建一个新的八卦后，应用会自动转换为显示所有八卦<i>和</i> 的视图，用户会看到一个通知，告诉他们在接下来的10秒内成功创建了这个视图:
 
 ![](../../assets/teht/44.png)
 

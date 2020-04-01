@@ -9,7 +9,7 @@ lang: zh
 
 <!-- So far, we have followed the state management conventions recommended by React. We have placed the state and the methods for handling it to [the root component](https://reactjs.org/docs/lifting-state-up.html) of the application. The state and its handler methods have then been passed to other components with props. This works up to a certain point, but when applications grow larger, state management becomes challenging. -->
 
-到目前为止，我们已经遵循了 React 推荐的状态管理约定。 我们已经将状态和处理它的方法放置到应用程序的根组件[the root component](https://reactjs.org/docs/lifting-state-up.html) 中。 然后，状态及其处理程序方法通过属性传递给其他组件。 这在一定程度上是可行的，但是当应用程序变得更大时，状态管理就变得更具挑战性。
+到目前为止，我们已经遵循了 React 推荐的状态管理约定。 我们已经将状态和处理它的方法放置到应用程序的[根组件](https://reactjs.org/docs/lifting-state-up.html) 中。 然后，状态及其处理程序方法通过属性传递给其他组件。 这在一定程度上是可行的，但是当应用程序变得更大时，状态管理就变得极具挑战性。
 
 ### Flux-architecture
 【Flux-架构】
@@ -26,7 +26,7 @@ Facebook 开发了 [Flux](https://facebook.github.io/flux/docs/in-depth-overview
 
 <!-- If some action on the application, for example pushing a button, causes the need to change the state, the change is made with an action. -->
 <!-- This causes rerendering the view again: -->
-如果应用程序上的某个 Action(例如按下按钮)导致需要更改状态，则通过一个 action 进行更改。 这将导致再次重新渲染视图:
+如果应用程序上的某个 Action(例如按下按钮)导致状态更改，则会通过一个 action 进行更改。 这将导致再次重新渲染视图:
 
 ![](https://facebook.github.io/flux/img/overview/flux-simple-f8-diagram-with-client-action-1300w.png)
 
@@ -36,7 +36,7 @@ Flux 提供了一种标准的方式来保存应用程序的状态以及如何修
 ### Redux
 
 <!-- Facebook has an implementation for Flux, but we will be using the [Redux](https://redux.js.org) - library. It works with the same principle, but is a bit simpler. Facebook also uses Redux now instead of their original Flux. -->
-Facebook 有一个 Flux 的实现，但是我们将使用 Redux 库。 它使用相同的原理，但是更简单一些。 Facebook 现在也使用 Redux 而不是原来的 Flux。 
+Facebook 有一个 Flux 的实现，但是我们会使用 Redux 库。 它使用相同的原理，但是更简单一些。 Facebook 现在也使用 Redux 而不是原来的 Flux。 
 
 <!-- We will get to know Redux by implementing a counter application yet again: -->
 我们将通过再次实现一个计数器应用程序来了解 Redux:
@@ -44,7 +44,7 @@ Facebook 有一个 Flux 的实现，但是我们将使用 Redux 库。 它使用
 ![](../../images/6/1.png)
 
 <!-- Create a new create-react-app-application and install </i>redux</i> with the command -->
-创建一个新的 create-react-app-application 并使用以下命令安装 redux
+创建一个新的 create-react-app 应用 使用以下命令安装 redux
 
 ```bash
 npm install redux --save
@@ -55,7 +55,7 @@ npm install redux --save
 
 <!-- The whole state of the application is stored into <i>one</i> JavaScript-object in the store. Because our application only needs the value of the counter, we will save it straight to the store. If the state was more complicated, different things in the state would be saved as separate fields of the object. -->
 
-应用程序的整个状态存储在 store 中的一个 javascript 对象中。 因为我们的应用程序只需要计数器的值，所以我们将它直接保存到存储中。 如果状态更复杂，那么状态中的不同内容将被保存为对象的不同 field
+应用程序的整个状态存储在 store 中的一个 javascript 对象中。 因为我们的应用程序只需要计数器的值，所以我们将它直接保存到存储中。 如果状态更复杂，那么状态中的不同内容将被保存为对象的不同字段
 
 <!-- The state of the store is changed with [actions](https://redux.js.org/basics/actions). Actions are objects, which have at least a field determining the <i>type</i> of the action. -->
 <!-- Our application needs for example the following action: -->
@@ -99,7 +99,7 @@ const counterReducer = (state, action) => {
 让我们稍微修改一下代码。 在 reducer 中通常使用 [switch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch)命令而不是 ifs。
 
 <!-- Let's also define a [default value](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters) of 0 for the parameter <i>state</i>. Now the reducer works even if the store -state has not been primed yet. -->
-我们还可以为参数状态定义一个默认值[default value](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters) 0。 现在 reducer 工作，即使储存状态尚未载入。
+我们还可以为参数状态定义一个默认值[default value](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters) 0。 现在 reducer 可以工作了，即使store-state尚未被载入。
 
 ```js
 const counterReducer = (state = 0, action) => {
@@ -117,7 +117,7 @@ const counterReducer = (state = 0, action) => {
 ```
 
 <!-- Reducer is never supposed to be called directly from the applications code. Reducer is only given as a parameter to the _createStore_-function which creates the store: -->
-Reducer 不应该直接从应用程序代码中调用。 Reducer 只作为创建存储的 _createStore_ 的一个参数给出: 
+Reducer 不应该直接从应用程序中调用。 Reducer 只作为创建store，即 _createStore_ 的一个参数给出: 
 
 ```js
 import { createStore } from 'redux'
@@ -130,7 +130,7 @@ const store = createStore(counterReducer)
 ```
 
 <!-- The store now uses the reducer to handle <i>actions</i>, which are <i>dispatched</i> or 'sent' to the store with its [dispatch](https://redux.js.org/api-reference/store#dispatch-action)-method. -->
-store 现在使用 reducer 来处理动作，这些动作通过 [dispatch](https://redux.js.org/api-reference/store#dispatch-action)-method 被分派或“发送”到 store 中。 
+store 现在使用 reducer 来处理<i>actions</i>，这些action通过 [dispatch](https://redux.js.org/api-reference/store#dispatch-action)-方法 被分派或“发送”到 store 中。 
 
 ```js
 store.dispatch({type: 'INCREMENT'})
@@ -209,7 +209,7 @@ store.dispatch({ type: 'DECREMENT' })
 -1
 </pre>
 <!-- The code of our counter application is the following. All of the code has been written in the same file, so <i>store</i> is straight available for the React-code. We will get to know better ways to structure React/Redux-code later. -->
-我们的计数器应用程序代码如下。 所有代码都是在同一个文件中编写的，因此 React-code 的 store 是直接可用的。 稍后我们将了解构造 redux 代码的更好方法。
+我们的计数器应用代码如下。 所有代码都是在同一个文件中编写的，因此 React-代码的 store 是直接可用的。 稍后我们将了解构造 redux 代码的更好方法。
 
 ```js
 import React from 'react'
@@ -266,7 +266,7 @@ store.subscribe(renderApp)
 
 <!-- There are a few notable things in the code. -->
 <!--<i>App</i> renders the value of the counter by asking it from the store with the method _store.getState()_. The actionhandlers of the buttons <i>dispatch</i> the right actions to the store.-->
-代码中有一些值得注意的东西。 App 使用 _store.getState()_ 方法从 store 中请求计数器，从而渲染计数器的值。 按钮的动作处理程序将正确的 action 分发到 sotre。
+代码中有一些值得注意的东西。 App 使用 _store.getState()_ 方法从 store 中请求计数器，从而渲染计数器的值。 按钮的action处理程序将正确的 action 分发到 sotre。
 
 <!-- When the state in the store is changed, React is not able to automatically rerender the application. Thus we have registered a function _renderApp_, which renders the whole app, to listen for changes in the store with the _store.subscribe_ method. Note that we have to immediately call the _renderApp_ method. Without the call the first rendering of the app would never happen. -->
 当 store 中的状态发生更改时，React 无法自动重新运行应用程序。 因此，我们注册了一个函数 _renderApp_，它呈现整个应用程序，用 store.subscribe 方法监听 store 中的更改。 注意，我们必须立即调用 _renderApp_ 方法。 没有这个调用，应用程序的第一次渲染将永远不会发生。
@@ -359,15 +359,15 @@ const noteReducer = (state = [], action) => {
 ```
 
 <!-- The state is now an Array. <i>NEW_NOTE</i>- type actions cause a new note to be added to the state with the [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) method. -->
-该状态现在是一个数组。 <i>NEW_NOTE</i> 类型的 action 将使用 [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) 方法向状态添加一个新的 Note。
+该状态现在是一个数组。 <i>NEW\_NOTE</i> 类型的 action 将使用 [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) 方法向状态添加一个新的 Note。
 
 <!-- The application seems to be working, but the reducer we have declared is bad. It breaks the [basic assumption](https://github.com/reactjs/redux/blob/master/docs/basics/Reducers.md#handling-actions) of Redux reducer that reducers must be [pure functions](https://en.wikipedia.org/wiki/Pure_function). -->
-用程序似乎正在工作，但我们已经声明的 reducer 并不优雅的。 它打破了 Redux 的 reducer 必须是纯函数[pure functions](https://en.wikipedia.org/wiki/Pure_function)的基本假设[basic assumption](https://github.com/reactjs/redux/blob/master/docs/basics/Reducers.md#handling-actions)
+应用程序似乎正常工作，但我们声明的 reducer 并不优雅。 它打破了 Redux 的 reducer 必须是[纯函数](https://en.wikipedia.org/wiki/Pure_function)的[基本假设](https://github.com/reactjs/redux/blob/master/docs/basics/Reducers.md#handling-actions)
 <!-- Pure functions are such, that they <i>do not cause any side effects</i> and they must always return the same response when called with the same parameters. -->
-纯函数是这样的，它们不会引起任何副作用，当使用相同的参数调用时，它们必须始终返回相同的响应。
+纯函数是这样的，它们不会引起任何副作用，当使用相同的参数调用时，它们必须始终返回相同的结果。
 
 <!-- We added a new note to the state with the method _state.push(action.data)_ which <i>changes</i> the state of the state-object. This is not allowed. The problem is easily solved by using the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) method, which creates a <i>new array</i>, which contains all the elements of the old array and the new element: -->
-我们使用方法 _state.push(action.data)_ 向状态添加了一个新 note，该方法更改 state-object 的状态。 这是不允许的。 使用 concat 方法可以很容易地解决这个问题，它创建一个新数组，其中包含旧数组和新元素的所有元素:
+我们使用方法 _state.push(action.data)_ 向状态添加了一个新 note，该方法更改 state-对象的状态。 这是不允许的。 使用 concat 方法可以很容易地解决这个问题，它创建一个新数组，其中包含旧数组和新元素的所有元素:
 
 ```js
 const noteReducer = (state = [], action) => {
@@ -396,7 +396,7 @@ Reducer 状态必须由不可变 [immutable](https://en.wikipedia.org/wiki/Immut
 
 <!-- Since we do not have any code which uses this functionality yet, we are expanding the reducer in the 'test driven' way. -->
 <!-- Let's start by creating a test for handling the action <i>NEW_NOTE</i>. -->
-因为我们还没有任何代码使用这个功能，我们正在以测试驱动的方式扩展这个 reducer。 让我们首先创建一个用于处理动作 <i>NEW_NOTE</i>的测试。
+因为我们还没有任何代码使用这个功能，我们正在以测试驱动的方式扩展这个 reducer。 让我们首先创建一个用于处理 <i>NEW_NOTE</i> action的测试。
 
 <!-- To make testing easier, we'll first move the reducer's code to its own module to file <i>src/reducers/noteReducer.js</i>. We'll also add the library [deep-freeze](https://github.com/substack/deep-freeze), which can be used to ensure that the reducer has been correctly defined as a immutable function. -->
 为了使测试更容易，我们首先将 reducer 的代码移动到它自己的模块中，以便将 <i>src/reducers/noteReducer.js</i> 文件存储起来。 我们还将添加[deep-freeze](https://github.com/substack/deep-freeze)库 ，它可以用来确保 reducer 被正确定义为不可变函数。
@@ -444,7 +444,7 @@ describe('noteReducer', () => {
 
 
 <!-- Now we'll create a test for the <i>TOGGLE\_IMPORTANCE</i> action: -->
-现在我们为<i>TOGGLE  IMPORTANCE</i> 操作创建一个测试:
+现在我们为<i>TOGGLE\_IMPORTANCE</i>操作创建一个测试:
 
 ```js
 test('returns new state with action TOGGLE_IMPORTANCE', () => {
@@ -494,7 +494,7 @@ test('returns new state with action TOGGLE_IMPORTANCE', () => {
 ```
 
 <!-- has to change the importance of the note with the id 2. -->
-必须把 Note 的重要性改成 id 2。
+必须更改id为2的 Note 的重要性。
 
 <!-- The reducer is expanded as follows -->
 reducer 展开如下 
@@ -522,7 +522,7 @@ const noteReducer = (state = [], action) => {
 
 <!-- We create a copy of the note which importance has changed with the syntax [familiar from part 2](/zh/part2/在服务端将数据_alert出来#changing-the-importance-of-notes), and replace the state with a new state containing all the notes which have not changed and the copy of the changed note <i>changedNote</i>. -->
 
-我们用第 2 部分中熟悉的语法[familiar from part 2](/zh/part2/在服务端将数据_alert出来#changing-the-importance-of-notes)创建一个 impotance 已经改变的 Note 的副本，并用一个新的状态替换该状态，该状态包含所有未改变的 Note 以及<i>changedNote</i>的 Note 的副本。
+我们用[第 2 章节中熟悉的语法](/zh/part2/在服务端将数据_alert出来#changing-the-importance-of-notes)创建一个 impotance 已经改变的 Note 的副本，并用一个新的状态替换该状态，该状态包含所有未改变的 Note 以及<i>changedNote</i>的 Note 的副本。
 
 <!-- Let's recap what goes on in the code. First, we search for a specific note object, the importance of which we want to change: -->
 让我们回顾一下代码中发生了什么。 首先，我们搜索一个特定的 note 对象，我们想要改变它的重要性:
@@ -551,12 +551,13 @@ state.map(note =>
 ```
 
 ### Array spread syntax
+【数组的展开语法】
 
 <!-- Because we now have quite good tests for the reducer, we can refactor the code safely. -->
 因为我们现在对这个 reducer 进行了很好的测试，所以我们可以安全地重构代码。
 
 <!-- Adding a new note creates the state it returns with Arrays _concat_-function. Let's take a look at how we can achieve the same by using the JavaScript [array spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) -syntax: -->
-添加新 Note 将创建它使用 数组的 _concat_ function 返回的状态。 让我们来看看如何通过使用 JavaScript 数组 spread-syntax [array spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) 来达到同样的效果:
+使用 数组的 _concat_ 函数创建一个新 Note， 并返回包含这个Note的状态。 让我们来看看如何通过使用 JavaScript 数组 spread-语法 [array spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) 来达到同样的效果:
 
 ```js
 const noteReducer = (state = [], action) => {
@@ -572,14 +573,14 @@ const noteReducer = (state = [], action) => {
 ```
 
 <!-- The spread -syntax works as follows. If we declare -->
-Spread-syntax 工作原理如下 
+Spread-语法的工作原理如下 
 
 ```js
 const numbers = [1, 2, 3]
 ```
 
 <!--<code>...numbers</code> breaks the array up into individual elements, which can place i.e to another array.-->
-<code>...numbers</code> 将数组分解成单独的元素，这样就可以将它，比如放到另一个数组中。
+<code>...numbers</code> 将数组分解成单独的元素，这样就可以将它，放到另一个数组中。
 
 ```js
 [...numbers, 4, 5]
@@ -590,7 +591,7 @@ const numbers = [1, 2, 3]
 
 <!-- If we would have placed the array to another array without the spread -->
 
-如果我们已经将数组放置到另一个数组而没有 spread
+如果我们已经将数组放置到另一个数组而没有展开，即
 
 ```js
 [numbers, 4, 5]
@@ -600,7 +601,7 @@ const numbers = [1, 2, 3]
 结果是 `[ [1, 2, 3], 4, 5]`。
 
 <!-- When we take elements from an array by [destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment), a similar looking syntax is used to <i>gather</i> the rest of the elements: -->
-当我们通过解构[destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment),的方式从数组中获取元素时，会使用类似的语法来收集其余的元素:
+当我们通过解构[destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)的方式从数组中获取元素时，会使用类似的语法来收集其余的元素:
 
 ```js
 const numbers = [1, 2, 3, 4, 5, 6]
@@ -619,10 +620,10 @@ console.log(rest)     // prints [3, 4, 5, 6]
 
 ### Exercises 6.1.-6.2.
 <!-- Let's make a simplified version of the unicafe-exercise from part 1. Let's handle the state management with Redux.  -->
-让我们从第1章节创建一个 uniafe-exercise 的简化版本。
+让我们创建一个（第1章节） uniafe-exercise 的简化版本。
 
 <!-- You can take the project from this repository https://github.com/fullstack-hy2020/unicafe-redux for the base of your project.  -->
-你可以把这个项目从这个仓库中的 https://github.com/fullstack-hy2020/unicafe-redux 作为你的项目的基础。
+你可以把这个项目从这个仓库中的 https://github.com/fullstack-hy2020/unicafe-redux 作为你的项目基础。
 
 <!--<i>Start by removing the git-configuration of the cloned repository, and by installing dependencies</i>-->
 先删除git 配置，然后安装 dependencies 
@@ -731,7 +732,7 @@ describe('unicafe reducer', () => {
 
 <!-- A good model for the reducer is the [redux-notes](/zh/part6/flux架构与_redux#pure-functions-immutable) example above.  -->
 
-这个reducer 一个很好的模型就是上述这个 [redux-notes](/zh/part6/flux架构与_redux#pure-functions-immutable) 例子。
+这个reducer 一个很好的参考就是上述这个 [redux-notes](/zh/part6/flux架构与_redux#pure-functions-immutable) 例子。
 
 #### 6.2: unicafe revisited, 步骤2
 <!-- Now implement the actual functionality of the application.  -->
@@ -743,6 +744,7 @@ describe('unicafe reducer', () => {
 <div class="content">
 
 ### Uncontrolled form
+【非受控表单】
 
 <!-- Let's add the functionality for adding new notes and changing their importance: -->
 让我们添加新增 Note 和改变其重要性的功能:
@@ -795,16 +797,16 @@ const App = () => {
 ```
 
 <!-- The implementation of both functionalities is straightforward. It is noteworthy that we <i>have not</i> bound the state of the form fields to the state of the <i>App</i> component like we have previously done. React calls this kind of form [uncontrolled](https://reactjs.org/docs/uncontrolled-components.html). -->
-这两个功能的实现都很简单。 值得注意的是，我们没有像前面那样将表单字段的状态绑定到 App 组件的状态。 React 称这种形式不受控的[uncontrolled](https://reactjs.org/docs/uncontrolled-components.html)。
+这两个功能的实现都很简单。 值得注意的是，我们没有像前面那样将表单字段的状态绑定到 App 组件的状态。 React 称这种形式为不受控的[uncontrolled](https://reactjs.org/docs/uncontrolled-components.html)。
 
-> Uncontrolled forms have certain limitations (for example, dynamic error messages or disabling the submit button based on input are not possible). However they are suitable for our current needs.
-> 未受控制的表单有某些限制(例如，不可能发送动态错误消息或根据输入禁用提交按钮)。 然而，他们是适合我们目前的需要。
+> Uncontrolled forms have certain limitations (for example, dynamic error messages or disabling the submit button based on input are not possible). However they are suitable for our current needs.<br>
+> 非受控的表单有某些限制(例如，不能发送动态错误消息或根据输入禁用提交按钮)。 然而，他们是适合我们目前需求的。
 
 <!-- You can read more about uncontrolled forms [here](https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/). -->
-你可以在这里[here](https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/)阅读更多关于不受控制的表单。
+你可以在[这里](https://goshakkk.name/controlled-vs-uncontrolled-inputs-react/)阅读更多关于非受控表单的内容。
 
 <!-- The method handling adding new notes is simple, it just dispatches the action for adding notes: -->
-添加新 Note 的方法很简单，它只是分派添加笔记的 action:
+添加新 Note 的方法很简单，它只是分派添加便笺的 action:
 
 ```js
 addNote = (event) => {
@@ -823,7 +825,7 @@ addNote = (event) => {
 ```
 
 <!-- We can get the content of the new note straight from the form field. Because the field has a name, we can access the content via the event object <i>event.target.note.value</i>. -->
-我们可以直接从表单栏获取新 Note 的内容。 因为字段有名称，我们可以通过事件对象<i>event.target.note.value</i>访问内容。
+我们可以直接从表单栏获取新 Note 的内容。 因为字段有name，我们可以通过事件对象<i>event.target.note.value</i>访问内容。
 
 ```js
 <form onSubmit={addNote}>
@@ -875,10 +877,10 @@ const toggleImportanceOf = (id) => {
 ```
 
 <!-- Functions that create actions are called [action creators](https://redux.js.org/advanced/async-actions#synchronous-action-creators). -->
-创建动作的函数称为动作创建器[action creators](https://redux.js.org/advanced/async-actions#synchronous-action-creators)。
+创建action的函数称为action创建器[action creators](https://redux.js.org/advanced/async-actions#synchronous-action-creators)。
 
 <!-- The <i>App</i> component does not have to know anything about the inner representation of the actions anymore, it just gets the right action by calling the creator-function: -->
-App 组件不再需要知道任何关于 action 的内部表示，它只需要调用 creator-function 就可以获得正确的操作: 
+App 组件不再需要知道任何关于 action 的内部表示，它只需要调用 creator-函数就可以获得正确的操作: 
 
 ```js
 const App = () => {
@@ -906,12 +908,12 @@ const App = () => {
 除了reducer，我们的应用是在一个文件。 这当然是不明智的，我们应该将<i>App</i> 分离到它自己的模块中。
 
 <!-- Now the question is, how can the <i>App</i> access the store after the move? And more broadly, when a component is composed of many smaller components, there must be a way for all of the components to access the store.  -->
-现在的问题是，移动后<i>App</i> 如何访问store？ 更广泛地说，当一个组件由许多较小的组件组成时，必须有一种方法让所有组件访问存储。
+现在的问题是，移动后<i>App</i> 如何访问store？ 更广泛地说，当一个组件由许多较小的组件组成时，必须有一种方法让所有组件访问store。
 
 
 
 <!-- There are multiple ways to share the redux-store with components. First we will look into the newest, and possibly the easiest way using the [hooks](https://react-redux.js.org/api/hooks)-api of the [react-redux](https://react-redux.js.org/) library. -->
-有多种方法可以与组件共享 redux-store。 首先，我们将研究使用 [react-redux](https://react-redux.js.org/)](redux)库的[hooks](https://react-redux.js.org/api/hooks)-api 的最新方法，也许是最简单的方法 。
+有多种方法可以与组件共享 redux-store。 首先，我们将研究使用最新的，也是最简单的方法，即 [react-redux](https://react-redux.js.org/) 的[hooks](https://react-redux.js.org/api/hooks)-api  。
 
 
 
@@ -956,10 +958,10 @@ ReactDOM.render(
 <!-- Note, that the application is now defined as a child of a [Provider](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store) -component provided by the react redux library. -->
 请注意，应用现在被定义为由 redux 库提供的[Provider](https://react-redux.js.org/api/provider)的子组件。
 <!-- The application's store is given to the Provider as its attribute store. -->
-应用的存储作为其属性提供给提供程序存储
+应用的存储作为store属性提供给Provider
 
 <!-- Defining the action creators has been moved to the reducer file -->
-动作创建器的定义已经移到了 reducer 文件中
+action创建器的定义已经移到了 reducer 文件中
 
 ```js
 const noteReducer = (state = [], action) => {
@@ -991,10 +993,10 @@ export default noteReducer
 ```
 
 <!-- If the application has many components which need the store, the <i>App</i>-component must pass <i>store</i> as props to all of those components. -->
-如果应用程序有许多需要存储的组件，那么应用程序组件必须将存储作为所有这些组件的属性。
+如果应用程序有许多需要存储的组件，那么<i>App</i>-组件必须将store作为所有这些组件的属性。
 
 <!-- The module now has multiple [export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) commands. -->
-该模块现在有多个导出 [export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)命令。
+该模块现在有多个 [导出](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)命令。
 
 <!-- The reducer function is still returned with the <i>export default</i> command, so the reducer can be imported the usual way: -->
 函数仍然使用 <i>export default</i> 命令返回，因此可以使用通常的方式导入 reducer:
@@ -1108,14 +1110,14 @@ const App = () => {
 
 
 <!-- The <i>useDispatch</i>-hook provides any React component access to the dispatch-function of the redux-store defined in <i>index.js</i>. -->
- <i>useDispatch</i>-hook 提供了对<i>index.js</i> 中定义的 redux-store 的 dispatch-function 的所有 React 组件访问。
+ <i>useDispatch</i>-hook 提供了所有 React 组件对dispatch-函数的访问，这个 redux-store 的 dispatch-函数是在<i>index.js</i> 中定义的 。
 <!-- This allows all components to make changes to the state of the redux-store. -->
-这允许所有组件对 redux-store 的状态进行更改。
+这就允许所有组件对 redux-store 的状态进行更改。
 
 
 
 <!-- The component can access the notes stored in the store with the [useSelector](https://react-redux.js.org/api/hooks#useselector)-hook of the react-redux library. -->
-该组件可以通过 react-redux 库的[ useSelector hook访问存储在store中的便笺。
+该组件可以通过 react-redux 库的[useSelector](https://react-redux.js.org/api/hooks#useselector)-hook访问存储在store中的便笺。
 
 
 ```js
@@ -1163,7 +1165,7 @@ const importantNotes = useSelector(state => state.filter(note => note.important)
 ```
 
 <!-- Let's separate creating new notes into its own component. -->
-让我们将创建新的 Note 分离到它自己的组件中。
+让我们将新建 Note 分离到它自己的组件中。
 
 ```js
 import React from 'react'
@@ -1253,13 +1255,13 @@ const App = () => {
 
 <i><!--Note</i>, responsible for rendering a single note, is very simple, and is not aware that the event handler it gets as props dispatches an action. These kind of components are called [presentational](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) in React terminology.-->
 
-<i>Note</i>，负责渲染单个 note 非常简单，并且不知道它获得的事件处理程序作为属性分派 action。 在 React 术语中，这种类型的组件被称为表象[presentational](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) 。
+<i>Note</i>，负责渲染单个note非常简单，并且不知道它获得的事件处理作为属性分派到 action。 在 React 术语中，这种类型的组件被称为[展示层presentational](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) 。
 
 <!--<i>Notes</i>, on the other hand, is a [container](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) component, as it contains some application logic: it defines what the event handlers of the <i>Note</i> components do and coordinates the configuration of <i>presentational</i> components, that is, the <i>Note</i>s.-->
-另一方面，Notes 是一个容器[container](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) 组件，因为它包含一些应用程序逻辑: 它定义 Note 组件的事件处理程序做什么，并协调表示组件的配置，即 Notes。
+<i>Note</i>，从另一方面来说， 是一个[容器container](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) 组件，因为它包含一些应用逻辑: 它定义 Note 组件的事件处理程序做什么，并协调表示 <i>presentational</i>组件的配置，即<i>Note</i>s。【TODO】
 
 <!-- We will return to the presentational/container division later in this part. -->
-我们将在本章节后面回到表现层 / 容器部分。
+我们将在本章节后面回顾表现层/容器部分。
 
 <!-- The code of the Redux application can be found on [Github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-1), branch <i>part6-1</i>. -->
 Redux 应用的代码可以在[Github](https://Github.com/fullstack-hy2020/Redux-notes/tree/part6-1) ，branch<i>part6-1</i> 上找到。 
@@ -1271,10 +1273,10 @@ Redux 应用的代码可以在[Github](https://Github.com/fullstack-hy2020/Redux
 
 ### Exercises 6.3.-6.8.
 <!-- Let's make a new version of the anecdote voting application from part 1. Take the project from this repository https://github.com/fullstack-hy2020/redux-anecdotes to base your solution on.   -->
-让我们从第1章节创建一个新版本的轶事投票应用。 把这个项目从这个资源库中 https://github.com/fullstack-hy2020/redux-anecdotes 拉取，你的解决方案基于这个库。
+让我们从第1章节创建一个新版本的八卦投票应用。 把这个项目从这个资源库中 https://github.com/fullstack-hy2020/redux-anecdotes 拉取，你的解决方案基于这个库。
 
 <!-- If you clone the project into an existing git-repository, <i>remove the git-configuration of the cloned application:</i>  -->
-如果您将该项目克隆到现有的 git-repository 中，记得删除克隆应用的git 配置
+如果您将该项目克隆到现有的 git-repository 中，记得删除应用的git 配置
 
 ```bash
 cd redux-anecdotes  // go to the cloned repository
@@ -1297,31 +1299,31 @@ npm start
 
 #### 6.3: anecdotes, 步骤1
 <!-- Implement the functionality for voting anecdotes. The amount of votes must be saved to a Redux-store. -->
-实现投票趣闻的功能。投票数量必须保存到 redux 存储中。
+实现投票八卦的功能。投票数量必须保存到 redux 存储中。
 
 #### 6.4: anecdotes, 步骤2
 
 <!-- Implement the functionality for adding new anecdotes.  -->
-实现添加新奇事的功能。
+实现添加八卦的功能。
 
 <!-- You can keep the form uncontrolled, like we did [earlier](/zh/part6/flux架构与_redux#uncontrolled-form). -->
-您可以保持表单不受控制，就像我们 [earlier](/zh/part6/flux架构与_redux#uncontrolled-form)所做的。
+您可以保持表单不受控制，就像我们 [之前](/zh/part6/flux架构与_redux#uncontrolled-form)所做的。
 
 #### 6.5*: anecdotes, 步骤3
 <!-- Make sure that the anecdotes are ordered by the number of votes.  -->
-确保这些轶事是按票数排序的。
+确保这些八卦是按票数排序的。
 
 #### 6.6: anecdotes, 步骤4
 <!-- If you haven't done so already, separate the creation of action-objects to [action creator](https://redux.js.org/basics/actions#action-creators)-functions and place them in the <i>src/reducers/anecdoteReducer.js</i> file, so do like we have been doing since the chapter [action creators](/zh/part6/flux架构与_redux#action-creators). -->
-如果你还没有这样做，将动作对象的创建分离到[动作创建器](https://redux.js.org/basics/actions#action-creators)-函数中，并将它们放在 <i>src/reducers/anecdoteReducer.js</i> 文件，就像我们在[动作创建器](https://redux.js.org/basics/actions#action-creators)中所做的那样。
+如果你还没有这样做，将action对象的创建分离到[action创建器](https://redux.js.org/basics/actions#action-creators)-函数中，并将它们放在 <i>src/reducers/anecdoteReducer.js</i> 文件，就像我们在[action创建器](https://redux.js.org/basics/actions#action-creators)中所做的那样。
 
 #### 6.7: anecdotes, 步骤5
 <!-- Separate the creation of new anecdotes into its own component called <i>AnecdoteForm</i>. Move all logic for creating a new anecdote into this new component.  -->
-将新奇闻的创建分离到它自己的名为 <i>AnecdoteForm</i>的组件中。 将创建一个新轶事的所有逻辑移动到这个新组件中。
+将新八卦的创建分离到它自己的名为 <i>AnecdoteForm</i>的组件中。 将创建一个新八卦的所有逻辑移动到这个新组件中。
 
 #### 6.8: anecdotes, 步骤6
 <!-- Separate the rendering of the anecdote list into its own component called <i>AnecdoteList</i>. Move all logic related to voting for an anecdote to this new component.  -->
-将这个轶事列表的渲染分离到它自己的<i>AnecdoteList</i>中。 将所有与投票选举轶事相关的逻辑移动到这个新组件中。
+将这个八卦列表的渲染分离到它自己的<i>AnecdoteList</i>中。 将所有与投票选举八卦相关的逻辑移动到这个新组件中。
 
 
 <!-- Now the <i>App</i> component should look like this:  -->

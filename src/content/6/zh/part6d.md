@@ -7,7 +7,7 @@ lang: zh
 
 <div class="content">
 
-
+【TODO】
 <!-- So far we have used our redux-store with the help of the[hook](https://react-redux.js.org/api/hooks)-api from react-redux. -->
 到目前为止，我们已经使用了 redux-store，借助于 redux 中的 [hook](https://react-redux.js.org/api/hooks)-api。
 <!-- Practically this has meant using the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) functions. -->
@@ -92,7 +92,7 @@ export default ConnectedNotes           // highlight-line
 该模块导出的<i>连接组件</i> 与之前的常规组件工作方式完全相同。
 
 <!-- The component needs the list of notes and the value of the filter from the Redux store. The _connect_ function accepts a so-called [mapStateToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapstatetoprops-state-ownprops--object) function as its first parameter. The function can be used for defining the props of the <i>connected component</i> that are based on the state of the Redux store. -->
-组件需要 Redux 存储中的便笺列表和筛选器的值。 Connect 函数接受所谓的[mapStateToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapStateToProps-state-ownprops--object)函数作为它的第一个参数。 这个函数可以用来定义基于 Redux 存储状态的<i>/ 连接组件</i> 的props。
+组件需要 Redux 存储中的便笺列表和筛选器的值。 Connect 函数接受所谓的[mapStateToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapStateToProps-state-ownprops--object)函数作为它的第一个参数。 这个函数可以用来定义基于 Redux 存储状态的<i>连接组件</i> 的props。
 
 <!-- If we define: -->
 如果我们定义:
@@ -252,7 +252,7 @@ export default ConnectedNotes
 ```
 
 <!-- Now the component can directly dispatch the action defined by the _toggleImportanceOf_ action creator by calling the function through its props: -->
-现在这个组件可以通过它的props调用函数直接调用_toggleImportanceOf_ action creator 定义的动作:
+现在这个组件可以通过它的props调用函数直接调用_toggleImportanceOf_ action creator 定义的action:
 
 ```js
 const Notes = (props) => {
@@ -271,7 +271,7 @@ const Notes = (props) => {
 ```
 
 <!-- This means that instead of dispatching the action like this: -->
-这意味着不要像这样分派动作:
+这意味着不要像这样分派action:
 
 ```js
 dispatch(toggleImportanceOf(note.id))
@@ -285,7 +285,7 @@ props.toggleImportanceOf(note.id)
 ```
 
 <!-- There is no need to call the _dispatch_ function separately since _connect_ has already modified the _toggleImportanceOf_ action creator into a form that contains the dispatch. -->
-不需要单独调用 dispatch 函数，因为 connect 已经将 toggleimportance of action creator 修改为包含 dispatch 的窗体。
+不需要单独调用 dispatch 函数，因为 connect 已经将 _toggleImportanceOf_  action creator 修改为包含 dispatch 的形式。
 
 <!-- It can take some to time to wrap your head around how _mapDispatchToProps_ works, especially once we take a look at an [alternative way of using it](/zh/part6/connect方法#alternative-way-of-using-map-dispatch-to-props). -->
 了解 mapDispatchToProps 的工作原理可能需要一些时间，特别是当我们了解了[使用它的替代方法](/zh/part6/connect方法#alternative-way-of-using-map-dispatch-to-props)之后。
@@ -296,7 +296,7 @@ props.toggleImportanceOf(note.id)
 ![](../../images/6/25b.png)
 
 <!-- In addition to accessing the store's state via <i>props.notes</i> and <i>props.filter</i>, the component also references a function that can be used for dispatching <i>TOGGLE\_IMPORTANCE</i>-type actions via its <i>toggleImportanceOf</i> prop. -->
-除了通过<i>props.notes</i> 和<i>props.filter</i> 访问存储的状态外，该组件还引用了一个函数，该函数可以通过其<i>toggleimportof</i> prop 用于分派<i>TOGGLE  IMPORTANCE</i>-type 操作。
+除了通过<i>props.notes</i> 和<i>props.filter</i> 访问存储的状态外，该组件还引用了一个函数，该函数可以通过其<i>toggleimportof</i>  prop 用于分派<i>TOGGLE  IMPORTANCE</i>-类型操作。
 
 <!-- The code for the newly refactored <i>Notes</i> component looks like this: -->
 新重构的<i>Notes</i> 组件的代码如下:
@@ -418,20 +418,20 @@ export default connect(
 ```
 
 <!-- Developers who are new to connect may find it puzzling that there are two versions of the <i>createNote</i> action creator in the component. -->
-刚开始connect的开发人员可能会感到困惑，因为组件中有两个版本的<i>creatote</i> 动作创建器。
+刚开始connect的开发人员可能会感到困惑，因为组件中有两个版本的 <i>createNote</i>action创建器。
 
 <!-- The function must be referenced as <i>props.createNote</i> through the component's props, as this is the version that <i>contains the automatic dispatch</i> added by _connect_. -->
-必须通过组件的 props.createNote <i>引用该函数，因为这是 包含由 connect 添加的自动分派</i> 的版本。
+必须通过组件的 <i>props.createNote</i> 引用该函数，因为这是 包含由 connect 添加的<i>自动分派</i> 的版本。
 
 <!-- Due to the way that the action creator is imported: -->
-根据导入动作创建器的方式:
+根据导入action创建器的方式:
 
 ```js
 import { createNote } from './../reducers/noteReducer'
 ```
 <!--The action creator can also be referenced directly by calling _createNote_. You should not do this, since this is the unmodified version of the action creator that does not contain the added automatic dispatch.-->
 
-还可以通过调用 createNote 直接引用操作创建者。 您不应该这样做，因为这是操作创建者的未修改版本，不包含添加的自动分派。
+还可以通过调用 createNote 直接引用action创建者。 您不应该这样做，因为这是action创建者的未修改版本，不包含添加的自动分派。
 
 <!-- If we print the functions to the console from the code (we have not yet looked at this useful debugging trick):  -->
 如果我们从代码打印函数到控制台(我们还没有看到这个有用的调试技巧) :
@@ -486,7 +486,7 @@ export default connect(
 在<i>mapDispatchToProps</i> 中传递的函数必须是<i>action creators</i>，即返回 Redux 操作的函数。
 
 <!-- It is worth noting that the <i>mapDispatchToProps</i> parameter is a <i>JavaScript object</i>, as the definition: -->
-值得注意的是，i mapDispatchToProps <i>参数是一个 <i>JavaScript object</i>，作为定义:
+值得注意的是， <i>mapDispatchToProps</i>  参数是一个 <i>JavaScript object</i>，作为定义:
 
 ```js
 {
@@ -495,7 +495,7 @@ export default connect(
 ```
 
 <!-- Is just shorthand for defining the object literal: -->
-只是定义 object literal 的简写形式:
+只是定义 object 语义的简写形式:
 
 ```js
 {
@@ -540,7 +540,7 @@ value => {
 ```
 
 <!-- Which simply dispatches the action created with the <i>createNote</i> action creator. -->
-它只是分发使用<i>createNote</i> 动作创建器创建的动作。
+它只是分发使用<i>createNote</i> action创建器创建的action。
 
 <!-- The component then references the function through its props by calling <i>props.createNote</i>: -->
 然后，该组件通过其 props.createNote  引用该函数:
@@ -667,7 +667,7 @@ React hook-api 发布之后，HOCs 变得越来越不受欢迎。 几乎所有�
 ### Redux and the component state
 【Redux 和组件状态】
 <!-- We have come a long way in this course and, finally, we have come to the point at which we are using React "the right way", meaning React only focuses on generating the views, and the application state is separated completely from the React components and passed on to Redux, its actions, and its reducers. -->
-我们在这个过程中已经走了很长的路，最后，我们已经到了我们使用 React“ the right way”的地步，意思是 React 只关注于生成视图，应用状态完全独立于 Redux 组件，并传递到 Redux、 Redux 的动作和 Redux 的还原器。
+我们在这个过程中已经走了很长的路，最后，我们已经到了我们使用 React“ the right way”的地步，意思是 React 只关注于生成视图，应用状态完全独立于 Redux 组件，并传递到 Redux、 Redux 的action和 Redux 的还原器。
 
 <!-- What about the _useState_-hook, which provides components with their own state? Does it have any role if an application is using Redux or some other external state management solution? If the application has more complicated forms, it may be beneficial to implement their local state using the state provided by the _useState_ function. One can, of course, have Redux manage the state of the forms, however, if the state of the form is only relevant when filling the form (e.g. for validation) it may be wise to leave the management of state to the component responsible for the form. -->
 那么 useState-hook 呢? 它为组件提供它们自己的状态？ 如果应用正在使用 Redux 或其他外部状态管理解决方案，它是否有任何作用？ 如果应用具有更复杂的形式，那么使用 useState 函数提供的状态实现它们的本地状态可能有益。 当然，可以让 Redux 管理表单的状态，但是，如果表单的状态只在填写表单时有关(例如用于验证) ，那么将状态的管理留给负责表单的组件可能是明智的。
@@ -698,10 +698,10 @@ React hook-api 发布之后，HOCs 变得越来越不受欢迎。 几乎所有�
 <i>redux store</i> 目前通过props传递给所有组件。
 
 <!-- Add the [react-redux](https://github.com/reactjs/react-redux) package to your application, and modify the <i>AnecdoteList</i> so that it accesses the store's state with the help of the _connect_ function. -->
-添加[react-redux](google  https://github.com/reactjs/react-redux)包到您的应用中，并修改<i>/ 轶事列表</i>，以便它借助 connect 函数访问存储的状态。
+添加[react-redux](google  https://github.com/reactjs/react-redux)包到您的应用中，并修改<i>/ 八卦列表</i>，以便它借助 connect 函数访问存储的状态。
 
 <!-- Voting for and creating new anecdotes **does not need to work** after this exercise. -->
-在这个练习之后，投票选举和创造新的奇闻轶事就不需要工作了。
+在这个练习之后，投票选举和创造新的八卦八卦就不需要工作了。
 
 <!-- The <i>mapStateToProps</i> function you will need in this exercise is approximately the following: -->
 在这个练习中，您需要的<i>mapStateToProps</i> 函数大致如下:
@@ -737,11 +737,6 @@ const mapStateToProps = (state) => {
 这可以通过在必要时显示新通知时取消删除以前的通知来实现。
 <!-- The [documentation](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) for the setTimeout function might also be useful for this. -->
 Settimeout 函数的[documentation](https://developer.mozilla.org/en-us/docs/web/api/windoworworkerglobalscope/setTimeout 文档)对此也很有用。 
-
-</div>
-
-
-<div class="tasks">
 <!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
 这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)。
 

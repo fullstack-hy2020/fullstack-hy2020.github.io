@@ -354,7 +354,7 @@ const App = () => {
 
 #### 7.4: anecdotes and hooks 步骤1
 <!-- Simplify the anecdote creation form of your application with the _useField_ custom hook we defined earlier. -->
-使用我们前面定义的 usefeld 自定义Hook简化应用的轶事创建形式。
+使用我们前面定义的 usefeld 自定义Hook简化应用的八卦创建形式。
 
 <!-- One natural place to save the custom hooks of your application is in the <i>/src/hooks/index.js</i> file. -->
 保存应用的自定义Hook的一个自然位置是 <i>/src/hooks/index.js</i>文件。

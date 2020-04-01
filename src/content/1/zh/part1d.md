@@ -1438,7 +1438,7 @@ copy[2] += 1
 
 <h4>1.14*: anecdotes 步骤3</h4>
 
-<!-- H41.14 * : 轶事 / 步骤3 / h4 -->
+<!-- H41.14 * : 八卦 / 步骤3 / h4 -->
 
 <!-- Now implement the final version of the application that displays the anecdote with the largest number of votes: -->
 现在实现这个应用的最终版本，显示得票最多的警句:

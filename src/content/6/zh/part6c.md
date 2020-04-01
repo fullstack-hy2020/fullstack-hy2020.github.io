@@ -34,7 +34,7 @@ lang: zh
 
 
 <!-- We'll install json-server for the project... -->
-我们将为这个项目安装 json-server..。
+我们将为这个项目安装 json-server...
 
 ```js
 npm install json-server --save
@@ -43,7 +43,7 @@ npm install json-server --save
 
 
 <!-- and add the following line to the <i>scripts</i> part of the file <i>package.json</i> -->
-并将如下行添加到我 package.json /<i>文件的  scripts</i> 部分
+并将如下行添加到我 package.json <i>文件的  scripts</i> 部分
 
 ```js
 "scripts": {
@@ -88,7 +88,7 @@ const noteReducer = (state = [], action) => {
 ```
 
 <!-- A quick way to initialize the state based on the data on the server is to fetch the notes in the file <i>index.js</i> and dispatch the action <i>NEW\_NOTE</i> for each of them: -->
-根据服务器上的数据初始化状态的一种快速方法是从文件<i>index.js</i> 中获取便笺，并为每个便笺分派操作<i>NEW  NOTE</i>:
+根据服务器上的数据初始化状态的一种便捷方法是从文件<i>index.js</i> 中获取便笺，并为每个便笺分派action <i>NEW\_NOTE</i>:
 
 ```js
 // ...
@@ -115,7 +115,7 @@ noteService.getAll().then(notes =>
 
 
 <!-- Let's add support in the reducer for the action <i>INIT\_NOTES</i>, using which the initialization can be done by dispatching a single action. Let's also create an action creator function _initializeNotes_. -->
-让我们在 reducer 中为操作<i>INIT\_NOTES</i> 添加支持，通过调度单个操作可以使用它来完成初始化。 我们还要创建一个动作创建器函数 initializeNotes。
+让我们在 reducer 中为action <i>INIT\_NOTES</i> 添加支持，通过调度单个action可以使用它来完成初始化。 我们还要创建一个action创建器函数 _initializeNotes_。
 
 ```js
 // ...
@@ -140,7 +140,7 @@ export const initializeNotes = (notes) => {
 // ...
 ```
 
-<i>index.js</i> simplifies:
+<!-- <i>index.js</i> simplifies: -->
 <i>index.js</i> 简化为:
 
 ```js
@@ -153,11 +153,11 @@ noteService.getAll().then(notes =>
 ```
 
 
-> **NB:** why didn't we use await in place of promises and event handlers (registered to _then_-methods)?
-** 注意 ** 为什么我们没有使用 await 来代替 promises 和事件处理程序(注册到 then-methods) ？
+<!-- > **NB:** why didn't we use await in place of promises and event handlers (registered to _then_-methods)? -->
+>**注意** 为什么我们没有使用 await 来代替 promises 和事件处理程序(注册到 then-methods) ？
 >
->Await only works inside <i>async</i> functions, and the code in <i>index.js</i> is not inside a function, so due to the simple nature of the operation, we'll abstain from using <i>async</i> this time.
-> Await 只在<i>async</i> 函数中工作，而<i>index.js</i> 中的代码不在函数中，因此由于操作的简单性质，这次我们不使用<i>async</i>。
+<!-- >Await only works inside <i>async</i> functions, and the code in <i>index.js</i> is not inside a function, so due to the simple nature of the operation, we'll abstain from using <i>async</i> this time. -->
+> Await 只在<i>async</i> 函数中工作，而<i>index.js</i> 中的代码不在函数中，因此由于action的简单性质，这次我们不使用<i>async</i>。
 
 <!-- We do, however, decide to move the initialization of the notes into the <i>App</i> component, and, as usual when fetching data from a server, we'll use the <i>effect hook</i>.  -->
 但是，我们确实决定将便笺的初始化移动到<i>App</i> 组件中，并且，像往常一样，在从服务器获取数据时，我们将使用<i>effect hook</i>。
@@ -216,11 +216,10 @@ const App = () => {
 }
 ```
 
-——————————————————————————————————————————————
 <!-- Now the variable <i>dispatch</i> we define in the _App_ component, which practically is the dispatch function of the redux-store, has been added to the array useEffect receives as a parameter. -->
 现在，我们在 App 组件中定义的变量<i>dispatch</i> (实际上是 redux-store 的 dispatch 函数)已经被添加到作为参数接收的数组 useEffect 中。
 <!-- **If** the value of the dispatch-variable would change during runtime,  -->
-如果 dispatch-variable 的值在运行期间发生变化,
+如果 dispatch-变量的值在运行期间发生变化,
 <!-- the effect would be executed again. This however cannot happen in our application, so the warning is unnecessary. -->
 该效果将再次执行。但是，这不能在我们的应用中发生，所以警告是不必要的。
 
@@ -251,10 +250,10 @@ const App = () => {
 
 
 <!-- More about the need to define the hooks dependencies in [the react documentation](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies). -->
-更多关于需要在[the react documentation](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies)中定义Hook依赖关系。
+更多关于需要定义Hook依赖关系，可以参考[react documentation](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies)。
 
 <!-- We can do the same thing when it comes to creating a new note. Let's expand the code communicating with the server as follows: -->
-我们可以做同样的事情，当涉及到创建一个新的便笺。 让我们将与服务器通信的代码展开如下:
+当涉及到创建一个新的便笺，我们可以做同样的事情。 让我们将与服务器通信的代码展开如下:
 
 ```js
 const baseUrl = 'http://localhost:3001/notes'
@@ -310,7 +309,7 @@ export default NewNote
 ```
 
 <!-- Because the backend generates ids for the notes, we'll change the action creator _createNote_ -->
-因为后端为便笺生成 id，所以我们将更改动作创建者 createNote
+因为后端为便笺生成 id，所以我们将更改action 创建器  _createNote_ 
 
 ```js
 export const createNote = (data) => {
@@ -322,7 +321,7 @@ export const createNote = (data) => {
 ```
 
 <!-- Changing the importance of notes could be implemented using the same principle, meaning making an asynchronous method call to the server and then dispatching an appropriate action. -->
-更改便笺的重要性可以使用相同的原则实现，这意味着对服务器进行异步方法调用，然后调度适当的操作。
+更改便笺的重要性可以使用相同的原则实现，这意味着对服务器进行异步方法调用，然后调度适当的action。
 
 <!-- The current state of the code for the application can be found on [github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3) in the branch <i>part6-3</i>. -->
 应用代码的当前状态可以在分支<i>part6-3</i> 中的 [github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3)上找到。
@@ -340,14 +339,14 @@ export const createNote = (data) => {
 
 
 <!-- When the application launches, fetch the anecdotes from the backend implemented using json-server. -->
-当应用启动时，从使用 json-server 实现的后端获取轶事。
+当应用启动时，从使用 json-server 实现的后端获取八卦。
 
 <!-- As the initial backend data, you can use, e.g. [this](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json). -->
 作为初始的后端数据，你可以使用，例如[this](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json)。
 
 #### 6.14 Anecdotes and the backend, 步骤2
 <!-- Modify the creation of new anecdotes, such that the anecdotes are stored in the backend. -->
-修改新轶事的创建，以便将轶事存储在后端。
+修改新八卦的创建，以便将八卦存储在后端。
 
 </div>
 
@@ -356,7 +355,7 @@ export const createNote = (data) => {
 
 
 ### Asynchronous actions and redux thunk
-【异步操作和 redux thunk】
+【异步action和 redux thunk】
 <!-- Our approach is OK, but it is not great that the communication with the server happens inside the functions of the components. It would be better if the communication could be abstracted away from the components, such that they don't have to do anything else but call the appropriate <i>action creator</i>. As an example, <i>App</i> would initialize the state of the application as follows: -->
 我们的方法是可行的，但是与服务器的通信发生在组件的功能内部并不是很好。 如果能够将通信从组件中抽象出来就更好了，这样它们就不必做任何其他事情，只需调用适当的<i>action creator</i>。 例如，<i>App</i> 将应用的状态初始化如下:
 
@@ -373,7 +372,7 @@ const App = () => {
 ```
 
 <!-- and <i>NoteForm</i> would create a new note as follows: -->
-我注意到 form / i 将创建一个新的便笺如下:
+<i>NoteForm</i> 将创建一个新的便笺如下:
 
 ```js
 const NewNote = () => {
@@ -394,14 +393,14 @@ const NewNote = () => {
 这两个组件将只使用提供给它们的功能作为一个props，而不考虑与服务器的后台通信。
 
 <!-- Now let's install the [redux-thunk](https://github.com/gaearon/redux-thunk)-library, which enables us to create <i>asynchronous actions</i>. Installation is done with the command: -->
-现在让我们安装[redux-thunk](https://github.com/gaearon/redux-thunk)-library，它允许我们创建<i>asynchronous actions</i>:
+现在让我们安装[redux-thunk](https://github.com/gaearon/redux-thunk)-库，它允许我们创建<i>asynchronous actions</i>:
 
 ```js
 npm install --save redux-thunk
 ```
 
 <!-- The redux-thunk-library is a so-called <i>redux-middleware</i>, which must be initialized along with the initialization of the store. While we're here, let's extract the definition of the store into its own file <i>src/store.js</i>: -->
-Redux-thunk-library 是所谓的<i>redux-middleware</i>，它必须在存储的初始化过程中初始化。 在这里，让我们将存储的定义提取到它自己的文件 <i>src/store.js</i> 中。: 
+Redux-thunk-库 是所谓的<i>redux-中间件</i>，它必须在store的初始化过程中初始化。 在这里，让我们将store的定义提取到它自己的文件 <i>src/store.js</i> 中。: 
 
 ```js
 import { createStore, combineReducers, applyMiddleware } from 'redux'
@@ -445,12 +444,12 @@ ReactDOM.render(
 ```
 
 <!-- Thanks to redux-thunk, it is possible to define <i>action creators</i> so that they return a function having the <i>dispatch</i>-method of redux-store as its parameter. As a result of this, one can make asynchronous action creators, which first wait for some operation to finish, after which they then dispatch the real action. -->
-感谢 redux-thunk，可以定义<i>action creators</i>，这样它们就可以返回一个函数，其参数是 redux-store 的<i>dispatch</i>-method。 因此，可以创建异步操作创建器，它们首先等待某个操作完成，然后分派真正的操作。
+感谢 redux-thunk，可以定义<i>action creators</i>，这样它们就可以返回一个函数，其参数是 redux-store 的<i>dispatch</i>-method。 因此，可以创建异步action创建器，它们首先等待某个action完成，然后分派真正的action。
 
 
 
 <!-- Now we can define the action creator, <i>initializeNotes</i>, that initializes the state of the notes as follows: -->
-现在，我们可以定义操作创建器<i>initializeNotes</i>，它初始化便笺的状态如下:
+现在，我们可以定义action创建器<i>initializeNotes</i>，它初始化便笺的状态如下:
 
 ```js
 export const initializeNotes = () => {
@@ -465,7 +464,7 @@ export const initializeNotes = () => {
 ```
 
 <!-- In the inner function, meaning the <i>asynchronous action</i>, the operation first fetches all the notes from the server and then <i>dispatches</i> the notes to the action, which adds them to the store. -->
-在内部函数(即<i>异步 action</i>)中，操作首先从服务器获取所有便笺，然后<i>将</i> 便笺分发到操作中，从而将它们添加到存储中。
+在内部函数(即<i>异步 action</i>)中，操作首先从服务器获取所有便笺，然后<i>将</i> 便笺分发到action中，从而将它们添加到store中。
 
 <!-- The component <i>App</i> can now be defined as follows: -->
 组件<i>App</i> 现在可以定义如下:
@@ -494,7 +493,7 @@ const App = () => {
 这个解决方案非常优雅。便笺的初始化逻辑已经完全分离到 React 组件之外。
 
 <!-- The action creator _createNew_, which adds a new note looks like this -->
-动作创作者 createNew 添加了一个新的便笺，看起来像这样
+action创作者 createNew 添加了一个新的便笺，看起来像这样
 
 ```js
 export const createNote = content => {
@@ -509,7 +508,7 @@ export const createNote = content => {
 ```
 
 <!-- The principle here is the same: first an asynchronous operation is executed, after which the action changing the state of the store is <i>dispatched</i>. -->
-这里的原理是相同的: 首先执行一个异步操作，然后调度改变存储区状态的操作。
+这里的原理是相同的: 首先执行一个异步操作，然后调度改变store态的action。
 
 <!-- The component <i>NewNote</i> changes as follows: -->
 <i>NewNote</i>组件更改如下:
@@ -551,11 +550,11 @@ const NewNote = () => {
 
 
 <!-- Modify the initialization of redux-store to happen using asynchronous action creators, which are made possible by the <i>redux-thunk</i>-library. -->
-使用异步操作创建器修改 redux-store 的初始化， redux-thunk-library 使异步操作创建器成为可能。
+使用异步action创建器修改 redux-store 的初始化， redux-thunk-库 使异步action创建器成为可能。
 
 #### 6.16 Anecdotes and the backend, 步骤4
 <!-- Also modify the creation of a new anecdote to happen using asynchronous action creators, made possible by the <i>redux-thunk</i>-library. -->
-还可以使用异步动作创建器(由<i>redux-thunk</i>-library 提供)修改新轶事的创建。
+还可以使用异步action创建器(由<i>redux-thunk</i>-library 提供)修改新八卦的创建。
 
 
 #### 6.17 Anecdotes and the backend, 步骤5
@@ -564,7 +563,7 @@ const NewNote = () => {
 
 #### 6.18 Anecdotes and the backend, 步骤6
 <!-- The creation of notifications is still a bit tedious, since one has to do two actions and use the _setTimeout_ function: -->
-创建通知仍然有点繁琐，因为必须执行两个操作并使用 setTimeout 函数:
+创建通知仍然有点繁琐，因为必须执行两个action并使用 setTimeout 函数:
 
 ```js
 dispatch(setNotification(`new anecdote '${content}'`))
@@ -574,7 +573,7 @@ setTimeout(() => {
 ```
 
 <!-- Make an asynchronous action creator, which enables one to provide the notification as follows: -->
-创建一个异步操作创建器，它可以提供如下通知:
+创建一个异步action创建器，它可以提供如下通知:
 
 ```js
 dispatch(setNotification(`you voted '${anecdote.content}'`, 10))

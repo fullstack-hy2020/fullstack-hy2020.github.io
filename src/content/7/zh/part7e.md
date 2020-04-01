@@ -17,7 +17,7 @@ lang: zh
 至少在一定程度上熟悉类组件是有益的，因为这个世界包含了很多旧的 React 代码，这些代码可能永远不会使用更新的语法完全重写。
 
 <!-- Let's get to know the main features of Class Components by producing yet another very familiar anecdote application. We store the anecdotes in the file <i>db.json</i> using <i>json-server</i>. The contents of the file are lifted from [here](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json). -->
-让我们通过生成另一个非常熟悉的轶事应用来了解类组件的主要特性。 我们使用<i>json-server</i> 将轶事存储在文件<i>db.json</i> 中。 文件的内容是从[这里](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json)提取的。
+让我们通过生成另一个非常熟悉的八卦应用来了解类组件的主要特性。 我们使用<i>json-server</i> 将八卦存储在文件<i>db.json</i> 中。 文件的内容是从[这里](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json)提取的。
 
 <!-- The initial version of the Class Component look like this -->
 类组件的初始版本如下所示
@@ -50,7 +50,7 @@ export default App
 
 
 <!-- Let's define a state for the list of anecdotes and the currently visible anecdote. In contrast to when using the [useState](https://reactjs.org/docs/hooks-state.html)-hook Class Components only contain one state. So if the state is made up of multiple "parts" they should be stored as properties of the state. The state is initialized in the constructor: -->
-让我们为奇闻轶事列表和当前可见的轶事定义一个状态。 与使用[useState](https://reactjs.org/docs/hooks-state.html)-hook 类组件只包含一个状态相反。 因此，如果状态是由多个“部分”组成的，那么它们应该作为状态的属性存储。 在构造函数中初始化状态:
+让我们为八卦八卦列表和当前可见的八卦定义一个状态。 与使用[useState](https://reactjs.org/docs/hooks-state.html)-hook 类组件只包含一个状态相反。 因此，如果状态是由多个“部分”组成的，那么它们应该作为状态的属性存储。 在构造函数中初始化状态:
 
 ```js
 class App extends React.Component {
@@ -86,7 +86,7 @@ class App extends React.Component {
 
 
 <!-- The component state is in the instance variable _this.state_. The state is an object having two properties. <i>this.state.anecdotes</i> is the list of anecdotes and <i>this.state.current</i> is the index of the currently shown anecdote. -->
-组件状态位于实例变量的 this.state 中。 状态是具有两个属性的对象。<i>this.state.anecdotes</i>  是轶事列表，<i>this.state.current</i> 是当前显示轶事的索引。
+组件状态位于实例变量的 this.state 中。 状态是具有两个属性的对象。<i>this.state.anecdotes</i>  是八卦列表，<i>this.state.current</i> 是当前显示八卦的索引。
 
 
 
@@ -134,7 +134,7 @@ Http 请求的回调函数使用方法[setState](https://reactjs.org/docs/react-
 
 
 <!-- We'll finish off the component with the ability to change the shown anecdote. The following is the code for the entire component with the addition highlighted: -->
-我们将以更改所显示的轶事的能力来结束组件。 下面是整个组件的代码，并突出显示了添加部分:
+我们将以更改所显示的八卦的能力来结束组件。 下面是整个组件的代码，并突出显示了添加部分:
 
 ```js
 class App extends React.Component {
