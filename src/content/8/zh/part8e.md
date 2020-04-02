@@ -121,7 +121,7 @@ const PERSON_DETAILS = gql`
 ```
 
 <!-- Declared like this, the fragment can be placed to any query or mutation using a [dollar sign and curly braces](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals): -->
-这样声明，片段可以被放置到任何查询或变异使用[美元符号和大括号] [dollar sign and curly braces](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)  :
+这样声明，片段可以被放置到任何查询或Mutation使用[$符号和大括号](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals)  :
 
 ```js
 const ALL_PERSONS = gql`
@@ -138,10 +138,10 @@ const ALL_PERSONS = gql`
 【订阅】
 
 <!-- Along with query- and mutation types, GraphQL offers a third operation type: [subscriptions](https://www.apollographql.com/docs/react/data/subscriptions/). With subscriptions clients can <i>subscribe to</i> updates about changes in the server.  -->
-除了查询和变异类型之外，GraphQL 还提供了第三种操作类型: [订阅](订阅 https://www.apollographql.com/docs/react/data/subscriptions/)。 通过订阅客户端，我可以订阅 / 更新服务器中的更改。
+除了查询和Mutation类型之外，GraphQL 还提供了第三种操作类型: [订阅](https://www.apollographql.com/docs/react/data/subscriptions/)。 通过订阅客户端，我可以订阅/更新服务器中的更改。
 
 <!-- Subscriptions are radically different from anything we have seen in this course so far. Until now all interaction between browser and the server has been React application in the browser making HTTP-requests to the server. GraphQL queries and mutations have also been done this way.  -->
-到目前为止，订阅与我们在本课程中看到的任何内容都是截然不同的。 到目前为止，浏览器和服务器之间的所有交互都是在浏览器中的 React 应用向服务器发出 http 请求。 Graphql 查询和变异也以这种方式完成。
+到目前为止，订阅与我们在本课程中看到的任何内容都是截然不同的。 到目前为止，浏览器和服务器之间的所有交互都是在浏览器中的 React 应用向服务器发出 http 请求。 Graphql 查询和Mutation也以这种方式完成。
 <!-- With subscriptions the situation is the opposite. After an application has made a subscription, it starts to listen to the server.  -->
 订阅的情况恰恰相反。 在应用订阅之后，它开始侦听服务器。
 <!-- When changes occur on the server, it sends a notification to all of its <i>subscribers</i>. -->
@@ -213,7 +213,7 @@ const pubsub = new PubSub() // highlight-line
 ```
 
 <!-- With subscriptions, the communication happens using the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) principle utilizing an object using a [PubSub](https://www.apollographql.com/docs/graphql-subscriptions/setup/#setup) interface. Adding a new person <i>publishes</i> a notification about the operation to all subscribers with PubSub's method _publish_. -->
-对于订阅，通信是使用[发布-订阅](https://en.wikipedia.org/wiki/publish%e2%80%93subscribe_pattern)原则进行的，使用的对象是[PubSub](https://www.apollographql.com/docs/graphql-subscriptions/setup/#setup) 添加一个新用户<i>通过 PubSub 的方法向所有订阅者发布</i> 关于操作的通知
+对于订阅，通信是使用[发布-订阅](https://en.wikipedia.org/wiki/publish%e2%80%93subscribe_pattern)原理进行的，该原理使用通过[PubSub](https://www.apollographql.com/docs/graphql-subscriptions/setup/#setup) 接口的对象。添加一个新用户后，通过 PubSub 的方法向所有订阅者<i>发布</i>关于操作的通知
 
 <!-- _personAdded_ subscriptions resolver registers all of the subscribers by returning them a suitable [iterator object](https://www.apollographql.com/docs/graphql-subscriptions/subscriptions-to-schema/). -->
 Personadded 订阅解析器通过返回一个合适的[迭代器对象](https://www.apollographql.com/docs/graphql-subscriptions/subscriptions-to-schema/)来注册所有订阅  。 
@@ -259,7 +259,7 @@ Subscriptions ready at ws://localhost:4000/graphql
 【客户端的订阅】
 
 <!-- In order to use subscriptions in our React application, we have to do some changes, especially on its [configuration]((https://www.apollographql.com/docs/react/v3.0-beta/data/subscriptions/). -->
-为了在我们的 React 应用中使用订阅，我们必须做一些更改，特别是在它的[配置](( https://www.apollographql.com/docs/React/v3.0-beta/data/subscriptions/)上。
+为了在我们的 React 应用中使用订阅，我们必须做一些更改，特别是在它的[配置](https://www.apollographql.com/docs/React/v3.0-beta/data/subscriptions/)上。
 <!-- The configuration in <i>index.js</i> has to be modified like so:  -->
 <i>index.js</i> 中的配置必须修改如下:
 
@@ -477,7 +477,7 @@ query {
 ```
 
 <!-- Because _friendOf_ is not a field of <i>Person</i>-objects on the database, we have to create a resolver for it, which can solve this issue. Let's first create a resolver that returns an empty list:  -->
-因为 friendOf 不是数据库中的<i>Person</i>-objects 字段，所以我们必须为它创建一个解决程序，它可以解决这个问题。 让我们首先创建一个返回空列表的解析器:
+因为 friendOf 不是数据库中的<i>Person</i>-objects 字段，所以我们必须为它创建一个解析器，它可以解决这个问题。 让我们首先创建一个返回空列表的解析器:
 
 ```js
 Person: {
@@ -498,7 +498,7 @@ Person: {
 ```
 
 <!-- The parameter _root_ is the person object which friends list is being created, so we search from all _User_ objects the ones which have root._id in their friends list:  -->
-参数 root 是创建好友列表的人对象，因此我们从所有 User 对象中搜索具有 root 的对象。 好友列表中的 id:
+参数 _root_ 是创建好友列表的人对象，因此我们从所有 _User_ 对象中搜索在好友列表中具有 root._id :
 
 ```js
   Person: {
@@ -627,33 +627,30 @@ query {
 ```
 
 <!-- If we modify _allPersons_ to do a join query because it sometimes causes n+1 problem, it becomes heavier when we don't need the information on related persons. By using the [fourth parameter](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-type-signature) of resolver functions we could optimize the query even further. The fourth parameter can be used to inspect the query itself, so we could do the join query only in cases with predicted threat for n+1 problem. However, we should not jump into this level of optimization before we are sure it's worth it.  -->
-如果我们修改 allPersons 来执行连接查询，因为它有时会导致 n + 1问题，当我们不需要相关人员的信息时，它会变得更重。 通过使用解析器函数的[第四个参数](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-type-signature) ，我们可以进一步优化查询。 第四个参数可以用来检查查询本身，所以我们可以做的连接查询只在情况下预测威胁的 n + 1问题。 然而，在我们确信这是值得的之前，我们不应该进入这个优化级别。
+如果我们修改 allPersons 来执行连接查询，因为它有时会导致 n + 1问题，当我们不需要相关人员的信息时，它会变得更重。 通过使用解析器函数的[第四个参数](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-type-signature) ，我们可以进一步优化查询。 第四个参数可以用来检查查询本身，所以我们在预计会出现n+1问题时可以做join查询。 然而，在我们评估这是否值得，否则不应该进入这个优化级别。
 
 <!-- [In the words of Donald Knuth](https://en.wikiquote.org/wiki/Donald_Knuth): -->
 [用 Donald Knuth 的话来说](https://en.wikiquote.org/wiki/donald_knuth) :
 
-> <!--<i>Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered. We should forget about small efficiencies, say about 97% of the time: <strong>premature optimization is the root of all evil.</strong></i>-->
-程序员浪费大量的时间去思考或者担心程序中非关键部分的速度，而这些提高效率的尝试在调试和维护被考虑的时候实际上产生了很大的负面影响。 我们应该忘记小效率，大约97% 的时间说: 强的过早优化是一切罪恶的根源。
+> <i>Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered. We should forget about small efficiencies, say about 97% of the time: <strong>premature optimization is the root of all evil.</strong></i><br>
+程序员浪费大量的时间去思考或者担心程序中非关键部分的速度，而这些提高效率的尝试，在考虑调试和维护的时候实际上产生了很大的负面影响。 我们大约97% 的时间应该忘记这些小的效率提升，总结一下，过早优化是一切罪恶的根源。
 
 
 
 <!-- Facebook's [DataLoader](https://github.com/facebook/dataloader) library offers a good solution for the n+1 problem among other issues. -->
 Facebook's[DataLoader](https://github.com/Facebook/DataLoader)库为 n + 1问题以及其他问题提供了一个很好的解决方案。 
 <!-- More about using DataLoader with Apollo server [here](https://www.robinwieruch.de/graphql-apollo-server-tutorial/#graphql-server-data-loader-caching-batching) and [here](http://www.petecorey.com/blog/2017/08/14/batching-graphql-queries-with-dataloader/). -->
-更多关于使用 DataLoader 和 Apollo 服务器的信息[这里](https://www.robinwieruch.de/graphql-Apollo-server-tutorial/#graphql-server-data-loader-caching-batching)和[这里](http://www.petecorey.com/blog/2017/08/14/batching-graphql-queries-with-DataLoader/)。
+更多关于使用 DataLoader 和 Apollo 服务器的信息参考[这里](https://www.robinwieruch.de/graphql-Apollo-server-tutorial/#graphql-server-data-loader-caching-batching)和[这里](http://www.petecorey.com/blog/2017/08/14/batching-graphql-queries-with-DataLoader/)。
 
 ### Epilogue
 【后记】
 
-
-
 <!-- The application we created in this part is not optimally structured: the schema, queries and the mutations should at least be moved outside of the application code. Examples for better structuring of GraphQL applications can be found on the internet. For example, for the server -->
-我们在这一章节中创建的应用没有优化结构: 模式、查询和变异至少应该移到应用代码之外。 更好地构造 GraphQL 应用的示例可以在互联网上找到。 例如，对于服务器
 <!-- [here](https://blog.apollographql.com/modularizing-your-graphql-schema-code-d7f71d5ed5f2) and the client [here](https://medium.com/@peterpme/thoughts-on-structuring-your-apollo-queries-mutations-939ba4746cd8). -->
-[这里](https://blog.apollographql.com/modularizing-your-graphql-schema-code-d7f71d5ed5f2)和客户[这里](https://medium.com/@peterpme/thoughts-on-structuring-your-apollo-queries-mutations-939ba4746cd8)。
+我们在这一章节中创建的应用没有优化结构: 模式、查询和Mutation，至少应该移到应用代码之外。 更好地构造 GraphQL 应用的示例可以在互联网上找到。 例如，对于服务器[参考这里](https://blog.apollographql.com/modularizing-your-graphql-schema-code-d7f71d5ed5f2)和客户端[参考这里](https://medium.com/@peterpme/thoughts-on-structuring-your-apollo-queries-mutations-939ba4746cd8)。
 
 <!-- GraphQL is already a pretty old technology, having been used by Facebook since 2012, so we can see it as "battle tested" already. Since Facebook published GraphQL in 2015, it has slowly gotten more and more attention, and might in the near future threaten the dominance of REST. The death of REST has also already been [predicted](https://www.stridenyc.com/podcasts/52-is-2018-the-year-graphql-kills-rest). Even though that will not happen quite yet, GraphQL is absolutely worth [learning](https://blog.graphqleditor.com/javascript-predictions-for-2019-by-npm/). -->
-Graphql 已经是一项相当古老的技术了，自2012年以来 Facebook 一直在使用它，所以我们可以把它看作是“经过战斗考验的”。 自从 Facebook 在2015年发布了 GraphQL 之后，它慢慢地得到了越来越多的关注，并且可能在不久的将来威胁到 REST 的统治地位。 Rest 的死亡也已经被[预测](https://www.stridenyc.com/podcasts/52-is-2018-The-year-graphql-kills-REST)。 尽管这种情况还没有完全发生，但是 GraphQL 绝对值得[学习](https://blog.graphqleditor.com/javascript-predictions-for-2019-by-npm/)。 
+Graphql 已经是一项相当古老的技术了，自2012年以来 Facebook 一直在使用它，所以我们可以把它看作是“经受过战斗考验的”。 自从 Facebook 在2015年发布了 GraphQL 之后，它慢慢地得到了越来越多的关注，并且可能在不久的将来威胁到 REST 的统治地位。 Rest 的死亡也已经被[预测](https://www.stridenyc.com/podcasts/52-is-2018-The-year-graphql-kills-REST)。 尽管这种情况还没有完全发生，但是 GraphQL 绝对值得[学习](https://blog.graphqleditor.com/javascript-predictions-for-2019-by-npm/)的。 
 
 </div>
 
@@ -667,11 +664,11 @@ Graphql 已经是一项相当古老的技术了，自2012年以来 Facebook 一�
 #### 8.23: Subscriptions - server
 
 <!-- Do a backend implementation for subscription _bookAdded_, which returns the details of all new books to its subscribers.  -->
-为订阅 bookadd 做一个后端实现，它将所有新书的详细信息返回给订阅者。
+为订阅 _bookAdded_ 做一个后端实现，它将所有新书的详细信息返回给订阅者。
 
 #### 8.24: Subscriptions - client, part 1
 <!-- Start using subscriptions in the client, and subscribe to _bookAdded_. When new books are added, notify the user. Any method works. For example, you can use the [window.alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) function.  -->
-开始在客户端使用订阅，并订阅 bookAdded。 添加新书时，通知用户。 任何方法都有效。 例如，您可以使用[window.alert](https://developer.mozilla.org/en-us/docs/web/api/window/alert)函数。
+开始在客户端使用订阅，并订阅 _bookAdded_ 添加新书时，通知用户。 任何方法都有效。 例如，您可以使用[window.alert](https://developer.mozilla.org/en-us/docs/web/api/window/alert)函数。
 
 #### 8.25: Subscriptions - client, part 2
 <!-- Keep the application's view updated when the server notifies about new books.  -->

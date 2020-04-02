@@ -9,7 +9,7 @@ lang: zh
 
 
 <!-- In addition to the eight exercises in the [React router](/zh/part7/react_router) and [custom hooks]() sections of this seventh part of the course material, there are 13 exercises that continue our work on the Bloglist application that we worked on in parts four and five of the course material. Some of the following exercises are "features" that are independent of one another, meaning that there is no need to finish the exercises in any particular order. You are free to skip over a part of the exercises if you wish to do so. -->
-除了课程材料第七章节[React router](/zh/part7/react_router) 和[custom hooks]()的八个练习之外，还有13个练习继续我们在课程材料第四章节和第五章节所做的 Bloglist 应用的工作。 下面的一些练习是相互独立的“特征” ，这意味着没有必要按照任何特定的顺序完成练习。 如果你愿意，你可以跳过这些练习的一章节。
+除了课程材料第七章节[React router](/zh/part7/react_router) 和[custom hooks]()的八个练习之外，还有13个练习继续我们在课程材料第四章节和第五章节所做的 Bloglist 应用的工作。 下面的一些练习是相互独立的“特征” ，这意味着没有必要按照任何特定的顺序完成练习。 如果你愿意，你可以跳过这些练习的一部分。
 
 <!-- If you do not want to use your own Bloglist application, you are free to use the code from the model solution as a starting point for these exercises. -->
 如果您不想使用您自己的 Bloglist 应用，您可以自由地使用模型解决方案中的代码作为这些练习的起点。
@@ -18,7 +18,7 @@ lang: zh
 课程教材这一章节的许多练习将需要重构现有的代码。 这是扩展现有应用的一个普遍现实，这意味着重构是一项重要且必要的技能，即使有时可能会感到困难和不愉快。
 
 <!-- One good piece of advice for both refactoring and writing new code is to take <i> baby steps</i>. Losing your sanity is almost guaranteed if you leave the application in a completely broken state for long periods of time while refactoring. -->
-对于重构和编写新代码，一个很好的建议是采取初级步骤。 如果在重构过程中让应用长时间处于完全崩溃的状态，那么几乎肯定会失去理智。
+对于重构和编写新代码，一个很好的建议是采取小步迭代。 如果在重构过程中让应用长时间处于完全崩溃的状态，那么几乎肯定会失去控制。
 
 </div>
 

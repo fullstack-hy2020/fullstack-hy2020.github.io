@@ -9,25 +9,25 @@ lang: zh
 
 
 <!-- REST, familiar to us from the previous parts of the course, has long been the most prevalent way to implement the interfaces servers offer for browsers, and in general the integration between different applications on the web.  -->
-我们在课程的前几部分已经熟悉了 REST，它一直是实现服务器为浏览器提供的接口的最普遍的方式，并且通常是 web 上不同应用之间的集成。
+我们在课程的前几部分已经熟悉了 REST，它一直是服务器为浏览器提供接口最普遍的的方式，并且通常是 web 上不同应用之间的集成方式。
 
 <!-- In the recent years [GraphQL](http://graphql.org/), developed by Facebook, has become popular for communication between web applications and servers.  -->
 最近几年，Facebook 开发的[GraphQL](http://GraphQL.org/)已经成为 web 应用和服务器之间通信的流行工具。
 
 <!-- The GraphQL philosophy is very different from REST. REST is <i>resource based</i>. Every resource, for example a <i>user</i> has its own address which identifies it, for example <i>/users/10</i>. All operations done to the resource are done with HTTP requests to its URL. The action depends on the used HTTP-method.  -->
-Graphql 哲学与 REST 非常不同。 Rest 是基于资源的。 每个资源(例如<i>user</i>)都有自己的地址来标识它，例如<i>/ users/10</i>。 对资源所做的所有操作都是通过对其 URL 的 HTTP 请求来完成的。 该操作取决于所使用的 http 方法。 
+Graphql 哲学与 REST 非常不同。 Rest 是基于资源的。 每个资源(例如<i>user</i>)都有自己的地址来标识它，例如<i>/users/10</i>。 对资源所做的所有操作都是通过对其 URL 的 HTTP 请求来完成的。 操作取决于所使用的 http 方法。 
 
 <!-- The resource basedness of REST works well in most situations. However, it can be a bit awkward sometimes.  -->
-Rest 的资源j基本上在大多数情况下都能很好地工作，但有些时候也有些尴尬。 
+Rest 的资源基本上在大多数情况下都能很好地工作，但有些时候也有些尴尬。 
 
 <!-- Let's assume our bloglist application contains social media like functionality, and we would i.e want to show a list of all the blogs the users who have commented on the blogs we follow have added.  -->
-让我们假设我们的博客列表应用包含类似社会媒体的功能，并且我们想显示一个所有博客的列表，这些博客的用户已经在我们关注的博客上添加了评论。
+让我们假设我们的博客列表应用包含类似社交媒体的功能，并且我们想显示一个所有博客的列表，这些博客的用户已经在我们关注的博客上添加了评论。
 
 <!-- If the server implemented a REST API, we would probably have to do multiple HTTP-requests from the browser before we had all the data we wanted. The requests would also return a lot of unnecessary data, and the code on the browser would probably be quite complicated.  -->
 如果服务器实现了 REST API，那么在获得所需的所有数据之前，我们可能必须从浏览器执行多个 http 请求。 这些请求还会返回大量不必要的数据，而且浏览器上的代码可能会相当复杂。
 
 <!-- If this was an often used functionality, there could be a REST-endpoint for it. If there were a lot of these kinds of scenarios however, it would become very laborious to implement REST-endpoints for all of them.  -->
-如果这是一个经常使用的功能，那么它可能有一个 rest 端点。 但是，如果存在大量这类场景，那么为所有场景实现 rest 端点将变得非常困难。
+如果这是一个经常使用的功能，那么它可能有一个 rest 接口。 但是，如果存在大量这类场景，那么为所有场景实现 rest 接口将变得非常困难。
 
 <!-- A GraphQL server is well suited for these kinds of situations.  -->
 Graphql 服务器非常适合这种情况。 
@@ -134,10 +134,10 @@ type Query {
 第二种类型是[查询](https://graphql.org/learn/schema/#The-Query-and-mutation-types)。 实际上，每个 GraphQL 模式都描述一个 Query，它告诉我们可以向 API 发出什么样的查询。
 
 <!-- The phonebook describes three different queries. _personCount_ returns an integer, _allPersons_ returns a list of <i>Person</i> objects and <i>findPerson</i> is given a string parameter and it returns a <i>Person</i> object.  -->
-电话簿描述了三种不同的查询。 Personcount 返回一个整数，allPersons 返回一个<i>Person</i> 对象列表，给我一个字符串参数并返回一个<i>Person</i> 对象。
+电话簿描述了三种不同的查询。 Personcount 返回一个整数，allPersons 返回一个<i>Person</i> 对象列表，<i>findPerson</i> 通过一个字符串参数并返回一个<i>Person</i> 对象。
 
 <!-- Again exclamation marks are used to mark which return values and parameters are <i>Non-Null</i>. _personCount_ will, for sure, return an integer. The query _findPerson_ must be given a string as a parameter. The query returns a <i>Person</i>-object or <i>null</i>. _allPersons_ returns a list of <i>Person</i> objects, and the list does not contain any <i>null</i>-values.  -->
-同样，感叹号用于标记返回值和参数为<i>非空</i> 的值。 Person count 肯定会返回一个整数。 必须为查询 findPerson 提供一个字符串作为参数。 查询返回一个<i>Person</i>-object 或<i>null</i>。 All persons 返回一个<i>Person</i> 对象列表，该列表不包含任何<i>null</i>-value。
+同样，感叹号用于标记返回值和参数为<i>非空</i> 的值。 _personCount_ 肯定会返回一个整数。 必须为查询 _findPerson_ 提供一个字符串作为参数。 查询返回一个<i>Person</i>-对象 或<i>null</i>。 _allPersons_ 返回一个<i>Person</i> 对象列表，该列表不包含任何<i>null</i>-值。
 
 <!-- So the schema describes what queries the client can send to the server, what kind of parameters the queries can have, and what kind of data the queries return.  -->
 因此模式描述了客户端可以向服务器发送什么样的查询，查询可以有什么样的参数，以及查询返回什么样的数据。
@@ -163,9 +163,9 @@ query {
 ```
 
 <!-- The query fetching the information of all of the people, _allPersons_, is a bit more complicated. Because the query returns a list of <i>Person</i>-objects, the query must describe  -->
-获取所有人(all Persons)的信息的查询稍微复杂一些。 因为查询返回一个<i>Person</i>-objects 列表，所以查询必须描述
-<i>which fields</i> of the objects the query [returns](https://graphql.org/learn/queries/#fields):
-<i>查询返回的对象的哪个字段</i> ( https://graphql.org/learn/queries/#fields ) :
+获取所有人(_allPersons_)的信息的查询稍微复杂一些。 因为查询返回一个<i>Person</i>-对象列表，所以查询必须描述查询[返回](https://graphql.org/learn/queries/#fields)<i>对象的哪个字段</i>:
+<!-- <i>which fields</i> of the objects the query [returns](https://graphql.org/learn/queries/#fields): -->
+
 
 ```js
 query {
@@ -177,7 +177,7 @@ query {
 ```
 
 <!-- The response could look like this:  -->
-答案可能是这样的:
+响应可能是这样的:
 
 ```js
 {
@@ -231,7 +231,7 @@ query {
 因此，首先在圆括号中描述参数，然后在花括号中列出返回值对象的字段。
 
 <!-- The response is like this:  -->
-答案是这样的:
+响应是这样的:
 
 ```js
 {
@@ -247,7 +247,7 @@ query {
 ```
 
 <!-- The return value was marked as nullable, so if we search for the details of an unknown -->
-返回值被标记为可空，因此如果我们搜索未知数的详细信息
+返回值被标记为可空，因此如果我们搜索未知人的详细信息
 
 ```js
 query {
@@ -419,7 +419,7 @@ query {
 ```
 
 <!-- So the response to the query is the length of the array _persons_. -->
-因此，查询的响应是数组人员的长度。
+因此，查询的响应是数组 _persons_ 的长度。
 
 <!-- The query which fetches all persons -->
 获取所有人的查询
@@ -433,7 +433,7 @@ query {
 ```
 
 <!-- has a resolver which returns <i>all</i> objects from the _persons_ array.  -->
-有一个解析器，它从 persons 数组中返回 i / i 对象。
+有一个解析器，它从 _persons_ 数组中返回 <i>all</i>对象。
 
 ```js
 () => persons
@@ -441,7 +441,7 @@ query {
 
 ### GraphQL-playground
 <!-- When Apollo-server is run on development mode (_node filename.js_), it starts a [GraphQL-playground](https://www.apollographql.com/docs/apollo-server/testing/graphql-playground/) to address [http://localhost:4000/graphql](http://localhost:4000/graphql). This is very useful for a developer, and can be used to make queries to the server.  -->
-当 Apollo-server 在开发模式(node filename.js)下运行时，它会启动一个[GraphQL-playground](https://www.apollographql.com/docs/Apollo-server/testing/GraphQL-playground/ 文件)来寻址[http://localhost:4000/graphql](http://localhost:4000/graphql)。 这对于开发人员非常有用，可用于对服务器进行查询。
+当 Apollo-server 在开发模式(_node filename.js_)下运行时，它会启动一个[GraphQL-playground](https://www.apollographql.com/docs/Apollo-server/testing/GraphQL-playground/)来寻址 <http://localhost:4000/graphql>。 这对于开发人员非常有用，可用于对服务器进行查询。
 
 <!-- Let's try it out -->
 让我们试试看
@@ -450,7 +450,7 @@ query {
 
 
 <!-- Sometimes the Playground requires you to be quite pedantic. If the syntax of a query is wrong, the error message is quite unnoticeable and nothing happens when you press go.  -->
-有时playground要求你相当迂腐。 如果查询的语法是错误的，那么错误消息是非常不明显的，当您按 go 时什么也不会发生。
+有时playground要求你相当刻板。 如果查询的语法是错误的，那么错误消息是非常不明显的，当您按 go 时什么也不会发生。
 
 ![](../../images/8/2.png)
 
@@ -458,7 +458,7 @@ query {
 即使当前查询是错误的，前一个查询的结果仍然在playground的右侧可见。
 
 <!-- By pointing at the right place on the line with the errors, you can see the error message -->
-通过指向带有错误的行上的正确位置，您可以看到错误消息
+通过指向带有错误的行上的右侧位置，您可以看到错误消息
 
 ![](../../images/8/3.png)
 
@@ -499,7 +499,7 @@ query {
 <!-- The resolver then returns from the array _persons_ the person whose name is the same as the value of <i>args.name</i>.  -->
 然后，解析器从数组人员返回名称与<i>args.name</i> 值相同的人。
 <!-- The resolver does not need the first parameter _root_. -->
-冲突解决程序不需要第一个参数根。
+解析器不需要第一个参数_root_。
 
 
 
@@ -526,7 +526,7 @@ query {
 服务器知道发送回查询所需的字段，这是如何发生的？
 
 <!-- A GraphQL-server must define resolvers for <i>each</i> field of each  type in the schema.  -->
-Graphql-server 必须为架构中每种类型的<i>each</i> 字段定义解析器。 
+Graphql-server 必须为模式中每种类型的<i>每种</i>字段定义解析器。 
 <!-- We have so far only defined resolvers for fields of the type <i>Query</i>, so for each query of the application.  -->
 到目前为止，我们只为类型为<i>Query</i> 的字段定义了解析器，因此应用的每个查询都是这样。
 
@@ -556,7 +556,7 @@ const resolvers = {
 ```
 
 <!-- The default resolver returns the value of the corresponding field of the object. The object itself can be accessed through the first parameter of the resolver, _root_. -->
-默认冲突解决程序返回对象相应字段的值。 对象本身可以通过冲突解决程序的第一个参数 root 访问。
+默认解析器返回对象相应字段的值。 对象本身可以通过解析器的第一个参数 root 访问。
 
 <!-- If the functionality of the default resolver is enough, you don't need to define your own. It is also possible to define resolvers for only some fields of a type, and let the default resolvers handle the rest.  -->
 如果默认解析器的功能已经足够，那么您不需要定义自己的解析器。 也可以只为某个类型的某些字段定义解析器，并让默认解析器处理其余字段。
@@ -654,13 +654,13 @@ let persons = [
 ```
 
 <!-- So the person-objects saved in the server are not exactly the same as GraphQL type <i>Person</i> objects described in the schema.  -->
-因此，保存在服务器中的 Person-objects 与架构中描述的 GraphQL type<i>Person</i> 对象并不完全相同。
+因此，保存在服务器中的 Person-objects 与模式中描述的 GraphQL type<i>Person</i> 对象并不完全相同。
 
 <!-- Contrary to the type <i>Person</i>, the <i>Address</i> type does not have an <i>id</i> field, because they are not saved into their own data structure in the server.  -->
 与<i>Person</i> 类型相反， <i>Address</i> 类型没有 <i>id</i> 字段，因为它们没有保存到服务器中自己的数据结构中。
 
 <!-- Because the objects saved in the array do not have a field <i>address</i>, the default resolver is not sufficient enough.  -->
-因为数组中保存的对象没有字段<i>address</i>，所以缺省解析程序是不够的。
+因为数组中保存的对象没有字段<i>address</i>，所以默认解析程序是不够的。
 <!-- Let's add a resolver for the field <i>address</i> of type <i>Person</i>:  -->
 让我们为类型<i>Person</i> 的字段<i>address</i> 添加一个解析器:
 
@@ -686,18 +686,18 @@ const resolvers = {
 ```
 
 <!-- So every time a <i>Person</i> object is returned, the fields <i>name</i>, <i>phone</i> and <i>id</i> are returned using their default resolvers, but the field <i>address</i> is formed by using a self defined resolver. The parameter _root_ of the resolver function is the person-object, so the street and the city of the address can be taken from its fields.  -->
-因此，每次返回<i>Person</i> 对象时，都会使用默认解析器返回<i>name</i>、<i>phone</i> 和<i>id</i> 字段，但是<i>address</i> 字段是使用自定义解析器形成的。 解析器函数的参数根是人-对象，因此可以从字段中获取地址的街道和城市。
+因此，每次返回<i>Person</i> 对象时，都会使用默认解析器返回<i>name</i>、<i>phone</i> 和<i>id</i> 字段，但是<i>address</i> 字段是使用自定义解析器形成的。 解析器函数的参数根是person-object，因此可以从字段中获取地址的街道和城市。
 
 <!-- The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-1), branch <i>part8-1</i>. -->
 当前应用的代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-1) ，branch<i>part8-1</i> 上找到。
 
 ### Mutations
 <!-- Let's add a functionality for adding new persons to the phonebook. In GraphQL, all operations which cause a change are done with [mutations](https://graphql.org/learn/queries/#mutations). Mutations are described in the schema as the keys of type <i>Mutation</i>. -->
-让我们在电话簿中添加一个添加新用户的功能。 在 GraphQL 中，所有引起变更的操作都是通过[变异](https://GraphQL.org/learn/queries/#mutations)来完成的。 突变在模式中被描述为<i>突变类型</i> 的关键。
+让我们在电话簿中添加一个添加新用户的功能。 在 GraphQL 中，所有引起变更的操作都是通过[Mutation](https://GraphQL.org/learn/queries/#mutations)来完成的。 Mutation在模式中被描述为<i>Mutation类型</i> 的键。
 
 
 <!-- The schema for a mutation for adding a new person looks as follows:  -->
-增加一个新人的变异模式如下:
+增加一个新人的Mutation模式如下:
 
 ```js
 type Mutation {
@@ -711,10 +711,10 @@ type Mutation {
 ```
 
 <!-- The Mutation is given the details of the person as parameters. The parameter <i>phone</i> is the only one which is nullable. The Mutation also has a return value. The return value is type <i>Person</i>, the idea being that the details of the added person are returned if the operation is successful and if not, null. Value for the field <i>id</i> is not given as a parameter. Generating an id is better left for the server.  -->
-变异是以人的详细信息作为参数。 参数<i>phone</i> 是唯一可以为空的。 Mutation 还有一个返回值。 返回值是<i>Person</i> 类型，其思想是，如果操作成功，则返回所添加人员的详细信息，如果不成功，则返回 null。 字段<i>id</i> 的值不作为参数给出。 生成一个 id 最好留给服务器。
+Mutation是以人的详细信息作为参数。 参数<i>phone</i> 是唯一可以为空的。 Mutation 还有一个返回值。 返回值是<i>Person</i> 类型，其思想是，如果操作成功，则返回所添加人员的详细信息，如果不成功，则返回 null。 字段<i>id</i> 的值不作为参数给出。 生成 id 的工作最好留给服务器。
 
 <!-- Mutations also require a resolver:  -->
-突变也需要一个解决方案:
+Mutation也需要一个解析器:
 
 ```js
 const uuid = require('uuid/v1')
@@ -734,13 +734,13 @@ const resolvers = {
 ```
 
 <!-- The mutation adds the object given to it as a parameter _args_ to the array _persons_, and returns the object it added to the array.  -->
-变异将作为参数提供给它的对象添加到数组人员中，并返回它添加到数组中的对象。
+Mutation将作为参数提供给它的对象添加到数组人员中，并返回它添加到数组中的对象。
 
 <!-- The <i>id</i> field is given a unique value using the [uuid](https://github.com/kelektiv/node-uuid#readme) library.  -->
 使用[uuid](https://github.com/kelektiv/node-uuid#readme)库为<i>id</i> 字段赋予一个唯一值。
 
 <!-- A new person can be added with the following mutation -->
-一个新的人可以通过下面的变异来添加
+一个新的人可以通过下面的Mutation来添加
 
 ```js
 mutation {
@@ -775,7 +775,7 @@ mutation {
 ```
 
 <!-- But the response to the mutation is  -->
-但是对这种突变的React是
+但是对这种Mutation的响应是
 
 ```js
 {
@@ -895,7 +895,7 @@ type Query {
 ```
 
 <!-- The type <i>YesNo</i> is GraphQL [enum](https://graphql.org/learn/schema/#enumeration-types), or an enumerable, with two possible values <i>YES</i> or <i>NO</i>. In the query _allPersons_ the parameter _phone_  has the type <i>YesNo</i>, but is nullable.  -->
-类型<i>YesNo</i> 是 GraphQL [enum](https://GraphQL.org/learn/schema/#enumeration-types) ，或者可枚举，有两个可能的值<i>YES</i> 或<i>NO</i>。 在查询 allPersons 中，参数 phone 的类型为<i>YesNo</i>，但可为空。
+类型<i>YesNo</i> 是 GraphQL [enum](https://GraphQL.org/learn/schema/#enumeration-types) ，或者说可枚举类型，有两个可能的值<i>YES</i> 或<i>NO</i>。 在查询 allPersons 中，参数 phone 的类型为<i>YesNo</i>，但可为空。
 
 
 <!-- The resolver changes like so: -->
@@ -925,7 +925,7 @@ Query: {
 【换个电话号码】
 
 <!-- Let's add a mutation for changing the phone number of a person. The schema of this mutation looks as follows: -->
-让我们添加一个变异来改变一个人的电话号码。这个变异的模式如下:
+让我们添加一个Mutation来改变一个人的电话号码。这个Mutation的模式如下:
 
 ```js
 type Mutation {
@@ -945,7 +945,7 @@ type Mutation {
 ```
 
 <!-- and is done by a resolver: -->
-而且是由一个解决者完成的:
+而且是由一个解析器完成的:
 
 ```js
 Mutation: {
@@ -965,7 +965,7 @@ Mutation: {
 
 
 <!-- The mutation finds the person to be by the field <i>name</i>. -->
-这个突变通过字段<i>name</i> 找到这个人。
+这个Mutation通过字段<i>name</i> 找到这个人。
 
 <!-- The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>. -->
 当前应用的代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3) ，branch<i>part8-3</i> 上找到。
@@ -985,7 +985,7 @@ query {
 ```
 
 <!-- The response looks as follows -->
-答案如下
+响应如下
 
 ```js
 {
@@ -1021,7 +1021,7 @@ query {
 ```
 
 <!-- The response looks like -->
-这种React看起来像是
+这种响应看起来像是
 
 ```js
 {
@@ -1044,7 +1044,7 @@ query {
 ```
 
 <!-- In some cases it might be beneficial to name the queries. This is the case especially when the queries or mutations have [parameters](https://graphql.org/learn/queries/#variables). We will get into parameters soon.  -->
-在某些情况下，命名查询可能是有益的。 这种情况尤其是当查询或变异具有[参数](https://graphql.org/learn/queries/#variables)时。 我们很快就会进入参数。
+在某些情况下，命名查询可能是有益的。 这种情况尤其是当查询或Mutation具有[参数](https://graphql.org/learn/queries/#variables)时。 我们很快就会学习参数。
 
 <!-- If there are multiple queries, Playground asks you to choose which of them to run: -->
 如果有多个查询，Playground 会让你选择运行哪个查询:
@@ -1065,7 +1065,7 @@ query {
 从[这个文件](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js)开始，记住 npm init 并安装依赖项！
 
 <!-- Note that the code does not initially work since the schema definition is not complete. -->
-请注意，由于架构定义不完整，代码最初不工作。
+请注意，由于模式定义不完整，代码最初不工作。
 
 #### 8.1: The number of books and authors
 <!-- Implement queries _bookCount_ and _authorCount_ which return the number of books and the number of authors.  -->
@@ -1255,7 +1255,7 @@ query {
 
 #### 8.6: Adding a book
 <!-- Implement mutation _addBook_, which can be used like this: -->
-实现变异 addBook，可以这样使用:
+实现Mutation addBook，可以这样使用:
 
 ```js
 mutation {
@@ -1272,7 +1272,7 @@ mutation {
 ```
 
 <!-- The mutation works even if the author is not already saved to the server: -->
-即使作者还没有保存到服务器上，变异仍然有效:
+即使作者还没有保存到服务器上，Mutation仍然有效:
 
 ```js
 mutation {
@@ -1322,7 +1322,7 @@ query {
 #### 8.7: Updating the birth year of an author
 
 <!-- Implement mutation _editAuthor_, which can be used to set a birth year for an author. The mutation is used like so -->
-实现 mutation editAuthor，它可用于设置作者的出生年份。 变异就是这样使用的
+实现 mutation editAuthor，它可用于设置作者的出生年份。 Mutation就是这样使用的
 
 ```js
 mutation {

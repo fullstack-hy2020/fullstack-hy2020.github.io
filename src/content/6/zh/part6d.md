@@ -584,7 +584,7 @@ Redux的创建者 Dan Abramov 创建了一个非常棒的教程，叫做 [Gettin
 <!--Have no dependencies on the rest of the app, such as Redux actions or stores.-->
 - 不依赖于应用的其他部分，如 Redux 操作或store。
 <!--Don’t specify how the data is loaded or mutated.-->
-- 不要说明数据是如何加载或变异的。
+- 不要说明数据是如何加载或Mutation的。
 <!--Receive data and callbacks exclusively via props.-->
 - 只通过props接收数据和回调。
 <!--Rarely have their own state (when they do, it’s UI state rather than data).-->

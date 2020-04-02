@@ -693,7 +693,7 @@ export default {
 除非没有其他方法，否则我们永远不应该使用类型断言，因为我们总是有可能断言对象的类型不合适，从而导致严重的运行时错误。
 
 <!-- While the compiler trusts you to know what you are doing when using <i>as</i>, doing this we are not using the full power of TypeScript but relying on the coder to secure the code.  -->
-虽然编译器相信您知道在使用<i>as</i> 时要做什么，但是这样做并不是使用TypeScript的全部功能，而是依赖于编码器来保护代码。
+虽然编译器相信您知道在使用<i>as</i> 时要做什么，但是这样做并不是使用TypeScript的全部功能，而是依赖于程序员来保护代码。
 
 
 

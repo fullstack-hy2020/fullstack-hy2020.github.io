@@ -28,7 +28,7 @@ TypeScript是由三个独立但相互满足的部分组成:
 ![](../../images/9/1.png)
 
 <!--<i>The language</i> concists of syntax, keywords and type annotations. The syntax is similar to but not the same as JavaScript syntax. From the three parts of TypeScript programmers have the most direct contact with the language.--> 
-语言包括<i>语法、关键字和类型注解</i>。 语法类似于 JavaScript 语法，但不太一样。 从TypeScript的三个部分来看，程序员与这门语言有着最直接的接触。
+语言包括<i>语法、关键字和类型注解</i>。 语法类似于 JavaScript 语法，但不太一样。 从TypeScript的三个部分来看，程序员与语言有着最直接的接触。
 
 
 

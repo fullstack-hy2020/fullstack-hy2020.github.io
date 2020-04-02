@@ -9,14 +9,14 @@ lang: zh
 
 
 <!-- The frontend of our application shows the phone directory just fine with the updated server. However if we want to add new persons, we have to add login functionality to the frontend.  -->
-应用的前端显示的电话目录与更新后的服务器一致。 然而，如果我们想添加新的人员，我们必须添加登录功能的前端。
+应用的前端显示的电话目录与更新后的服务器一致。 然而，如果我们想添加新的人员，我们必须添加前端的登录功能。
 
 ### User log in
 【用户登录】
 
 
 <!-- Let's add variable _token_ to the application's state. It will contain user's token when a is logged in. If _token_ is undefined, we render the <i>LoginForm</i>-component responsible for user login. The component receives an error handler and the _setToken_-function as parameters: -->
-让我们将变量 token 添加到应用的状态。 当用户登录时，它将包含用户标记。 如果令牌未定义，我们将使<i>LoginForm</i>-component 负责用户登录。 组件接收一个错误处理程序和 setToken-function 作为参数:
+让我们将变量 token 添加到应用的状态。 当用户登录时，它将包含用户token。 如果_token_未定义，我们将使<i>LoginForm</i>-component 负责用户登录。 组件接收一个错误处理程序和 setToken-function 作为参数:
 
 ```js
 const App = () => {
@@ -46,7 +46,7 @@ const App = () => {
 
 
 <!-- Next we define a mutation for logging in -->
-接下来我们为登录定义一个变异
+接下来我们为登录定义一个Mutation
 
 ```js
 expoty const LOGIN = gql`
@@ -61,7 +61,7 @@ expoty const LOGIN = gql`
 
 
 <!-- The _LoginForm_-component works pretty much just like all other components doing mutations we have previously created.  -->
-Loginform 组件的工作原理与我们之前创建的所有其他进行突变的组件非常相似。 
+Loginform 组件的工作原理与我们之前创建的所有其他进行Mutation的组件非常相似。 
 
 <!-- Interesting lines in the code have been highlighted: -->
 代码中有趣的行被高亮显示:
@@ -125,12 +125,12 @@ export default LoginForm
 
 
 <!-- We are using an effect hook again. Here it's used to save the token's value to the state of the _App_ component the local storage after the server has responded to the mutation.  -->
-我们再次使用效果Hook。 在这里，它用于在服务器响应变异之后，将令牌的值保存到本地存储的 App 组件的状态。
+我们再次使用effect hook 。 在这里，它用于在服务器响应Mutation之后，将令牌的值保存到本地存储的 _App_ 组件的状态。
 <!-- Use of the effect hook is necessary to avoind an endless rendering loop. -->
-使用效果Hook是必要的，以避免无休止的渲染循环。
+使用 effect hook 是必要的，以避免无休止的渲染循环。
 
 <!-- Let's also add a button which enables logged in user to log out. The buttons onClick handler sets the _token_ state to null, removes the token from local storage and resets the cache of the Apollo client. The last is [important](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout), because some queries might have fetched data to cache, which only logged in users should have access to.  -->
-我们还要添加一个按钮，使登录用户能够注销。 Onclick 处理程序的按钮将令牌状态设置为 null，从本地存储中删除令牌并重置 Apollo 客户端的缓存。 最后一个是[重要的](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout) ，因为有些查询可能已经将数据提取到缓存，只有登录的用户才能访问。
+我们还要添加一个按钮，使登录用户能够注销。 onClick 处理程序的按钮将令牌状态设置为 null，从本地存储中删除令牌并重置 Apollo 客户端的缓存。 最后一个是[重要的](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout) ，因为有些查询可能已经将数据提取到缓存，只有登录的用户才能访问。
 
 
 
@@ -167,7 +167,7 @@ const App = () => {
 当前应用的代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6) ，branch<i>part8-6</i> 上找到。
 
 ### Adding a token to a header
-【在头部添加一个标记】
+【在头部添加一个token】
 <!-- After the backend changes, creating new persons requires that a valid user token is sent with the request. In order to send the token, we have to change the way we define the _ApolloClient_-object in <i>index.js</i> a little.  -->
 在后端更改之后，创建新的人员需要随请求一起发送一个有效的用户令牌。 为了发送令牌，我们必须稍微改变在<i>index.js</i> 中定义 ApolloClient-object 的方式。
 
@@ -201,14 +201,14 @@ const client = new ApolloClient({
 
 
 <!-- We also need to install the library required by this modification -->
-我们还需要安装此修改所需的库
+我们还需要安装修改所需的库
 
 ```js
 npm install --save apollo-link-context
 ```
 
 <!-- Creating new persons and changing numbers works again. There is however one remaining problem. If we try to add a person without a phone number, it is not possible.  -->
-创造新的人员和改变数字再次起作用。 然而，还有一个问题。 如果我们试图添加一个没有电话号码的人，这是不可能的。
+创造新的人员和更改数字再次起作用。 然而，还有一个问题。 如果我们试图添加一个没有电话号码的人，这是不可能的。
 
 ![](../../images/8/25e.png)
 
@@ -244,9 +244,8 @@ const PersonForm = ({ setError }) => {
 【更新缓存，复习】
 
 <!-- We have to [update](/osa8/react_ja_graph_ql#valimuistin-paivitys) the cache of the Apollo client on creating new persons. We can update it using the mutation's _refetchQueries_ option to define that the  -->
-我们必须[更新](/zh/part7/练习：扩展你的博客列表act_and_graph_ql#updating-the-cache) Apollo 客户端的缓存，以创建新的人员。 我们可以使用变异的 refetchQueries 选项更新它来定义
-<em>ALL\_PERSONS</em> query is done again. 
- ALL  PERSONS 查询再次执行。
+我们必须[更新](/zh/part7/练习：扩展你的博客列表act_and_graph_ql#updating-the-cache) Apollo 客户端的缓存，以创建新的人员。 我们可以使用Mutation的 refetchQueries 选项更新它来定义。<em>ALL\_PERSONS</em> 查询再次执行了
+<!-- <em>ALL\_PERSONS</em> query is done again.  -->
 
 ```js 
 const PersonForm = ({ setError }) => {
@@ -264,7 +263,7 @@ const PersonForm = ({ setError }) => {
 这种方法非常好，缺点是查询总是随着任何更新而重新运行。
 
 <!-- It is possible to optimize the solution by handling updating the cache ourselves. This is done by defining a suitable [update](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#options-)-callback for the mutation, which Apollo runs after the mutation: -->
-通过处理自己更新缓存来优化解决方案是可行的。 这是通过为变异定义一个合适的[更新](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#options-)-回调来完成的，Apollo 在变异之后运行:
+通过处理自己更新缓存来优化解决方案是可行的。 这是通过为Mutation定义一个合适的[更新](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#options-)-回调来完成的，Apollo 在Mutation之后运行:
 
 ```js 
 const PersonForm = ({ setError }) => {
@@ -291,15 +290,13 @@ const PersonForm = ({ setError }) => {
 ```
 
 <!-- The callback function is given a reference to the cache and the data returned by the mutation as parameters. For example, in our case this would be the created person.  -->
-回调函数被给予一个对缓存的引用，以及作为参数由变异返回的数据。 例如，在我们的例子中，这将是被创建的人。
+回调函数被给予一个对缓存的引用，以及作为参数由Mutation返回的数据。 例如，在我们的例子中，这将是被创建的人。
 
 <!-- The code reads the cached state of <em>ALL\_PERSONS</em> query using [readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readquery) function and updates the cache with [writeQuery]https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writequery-and-writefragment) function adding the new person to the cached data.  -->
-该代码使用[readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readQuery)函数读取 em ALL  PERSONS / em 查询的缓存状态，并使用[ writeQuery ] https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writeQuery-and-writefragment 函数更新缓存，将新人添加到缓存数据中。
+该代码使用[readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readQuery)函数读取 em ALL  PERSONS / em 查询的缓存状态，并使用[writeQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writeQuery-and-writefragment) 函数更新缓存，将新人添加到缓存数据中。
 
 <!-- There are actually some situations where the only good way to keep the cache up to date is using _update_ -callbacks.  -->
 实际上，在某些情况下，使缓存保持最新的唯一好方法是使用 update-callback。
-
-
 
 <!-- In some situations the only sensible way to keep the cache up to date is using the _update_-callback. -->
 在某些情况下，使缓存保持最新的唯一合理方法是使用 update-callback。
@@ -308,9 +305,9 @@ const PersonForm = ({ setError }) => {
 必要时，可以通过将管理 cache 使用的字段设置为 <em>no-cache</em> 来禁用整个应用或单个查询的缓存，[fetchPolicy](https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy)。
 
 <!-- Be diligent with the cache. Old data in cache can cause hard to find bugs. As we know, keeping the cache up to date is very challenging. According to a coder proverb: -->
-勤于使用缓存。 缓存中的旧数据可能导致难以发现 bug。 众所周知，保持缓存最新是非常具有挑战性的。 根据一个编码器谚语:
+勤于使用缓存。 缓存中的旧数据可能导致难以发现 bug。 众所周知，保持缓存最新是非常具有挑战性的。 根据一个程序员谚语:
 
-> <i>There are only two hard things in Computer Science: cache invalidation and naming things.</i> Read more [here](https://www.google.com/search?q=two+hard+things+in+Computer+Science&oq=two+hard+things+in+Computer+Science).
+> <i>There are only two hard things in Computer Science: cache invalidation and naming things.</i> Read more [here](https://www.google.com/search?q=two+hard+things+in+Computer+Science&oq=two+hard+things+in+Computer+Science).<br>
 在计算机科学中只有两个难题: 缓存失效和命名。Read more [here](https://www.google.com/search?q=two+hard+things+in+Computer+Science&oq=two+hard+things+in+Computer+Science)。
 
 <!-- The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-8), branch <i>part8-8</i>. -->
@@ -333,7 +330,7 @@ const PersonForm = ({ setError }) => {
 添加新书和更改作者的出生年份都不起作用，因为它们要求用户登录。
 
 <!-- Implement login functionality and fix the mutations.  -->
-实现登录功能并修复变异。
+实现登录功能并修复Mutation。
 
 <!-- It is not necessary yet to handle validation errors.  -->
 还没有必要处理验证错误。
@@ -358,8 +355,7 @@ const PersonForm = ({ setError }) => {
 ![](../../images/8/28.png)
 
 
-#### 8.19 Books by genre, part 1
-8.19图书类型，第一章节
+#### 8.19 Books by genre, 步骤 1
 
 <!-- Complete your application to filter the book list by genre. Your solution might look something like this: -->
 完成你的应用，按类型过滤书籍列表。你的解决方案可能是这样的:
@@ -369,7 +365,7 @@ const PersonForm = ({ setError }) => {
 <!-- In this exercise the filtering can be done using just React. -->
 在这个练习中，过滤可以只使用 React 来完成。
 
-#### 8.20 Books by genre, part 2
+#### 8.20 Books by genre, 步骤 2
 <!-- Implement a view which shows all the books based on the logged in user's favourite genre. -->
 实现一个视图，根据登录用户最喜欢的类型显示所有的书籍。
 
@@ -378,7 +374,7 @@ const PersonForm = ({ setError }) => {
 
 #### 8.21 books by genre with GraphQL
 <!-- The filtering can be done using just React. You can mark this exercise as completed if you filter the books using a GraphQL query to the server in exercise 8.5.  -->
-过滤可以用 React 来完成。 如果您在
+过滤可以用 React 来完成。 如果使用练习8.5中的服务器的GraphQL查询过滤书籍，则可以将此练习标记为已完成。
 
 <!-- This and the next exercises are quite **challenging** like it should be this late in the course. You might want to complete first the easier ones in [next part](/zh/part8/fragments_and_subscriptions). -->
 这个和接下来的练习是相当具有挑战性的。 您可能希望首先完成[下一章节](/zh/part8/fragments_与_subscriptions)中较容易的部分。
@@ -396,7 +392,6 @@ const PersonForm = ({ setError }) => {
 根据您的方法，<i>useEffect</i>  的[第二个参数](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect)可以变得很方便。
 
 #### 8.22 Up to date cache and book recommendations
-8.22更新缓存和预订推荐
 
 <!-- If you fetch the book recommendations with GraphQL, ensure somehow that the books view is kept up to date. So when a new book is added, the books view is updated **at least** when a genre selection button is pressed.  -->
 如果您使用 GraphQL 获取图书推荐，请以某种方式确保 books 视图是最新的。 因此，当添加一本新书时，至少当按下类型选择按钮时，图书视图会更新。
