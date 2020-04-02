@@ -833,7 +833,7 @@ notesRouter.delete('/:id', async (request, response, next) => {
 【消除try-catch】
 
 <!-- Async/await unclutters the code a bit, but the 'price' is the <i>try/catch</i> structure required for catching exceptions.  -->
-Async/await  稍微整理了一下代码，但是‘ 代价’是捕获异常所需的<i>try / catch</i> 结构。 
+Async/await  稍微整理了一下代码，但是‘ 代价’是捕获异常所需的<i>try/catch</i> 结构。 
 <!-- All of the route handlers follow the same structure -->
 所有的路由处理程序遵循相同的结构
 

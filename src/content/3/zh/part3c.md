@@ -110,7 +110,7 @@ node --inspect index.js
 让我们等待集群准备好可以使用。这大约需要10分钟。
 
 <!-- **NB** do not continue before the cluster is ready. -->
-**注意 **在集群准备好之前不要继续。
+**注意**在集群准备好之前不要继续。
 
 <!-- Let's use the <i>database access</i> tab for creating user credentials for the database. Please note that these are not the same credentials you use for logging into MongoDB Atlas. -->
 让我们使用<i>database access</i> 选项卡为数据库创建用户凭据。 请注意，这些不是您登录到 MongoDB Atlas 所使用的相同凭据。
@@ -123,7 +123,7 @@ node --inspect index.js
 ![](../../images/3/60.png)
 
 <!-- **NB** for some people the new user credentials have not worked immediately after creation. In some cases it has taken minutes before the credentials have worked. -->
-**注意 ** 对于某些人来说，新的用户证书在创建后没有立即生效。 在某些情况下，这些凭证需要几分钟的时间才能生效。
+**注意** 对于某些人来说，新的用户证书在创建后没有立即生效。 在某些情况下，这些凭证需要几分钟的时间才能生效。
 
 <!-- Next we have to define the IP addresses that are allowed access to the database. -->
 接下来，我们必须定义允许访问数据库的 IP 地址。

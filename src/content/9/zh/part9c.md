@@ -384,13 +384,13 @@ Fork和clone项目[patientor](https://github.com/fullstack-hy2020/patientor)。 
 <!-- He wants to be able to save </i>diary entries</i> which contain: -->
 他希望能够保存 <i>日记条目</i>，其中包含:
 
-- The date of the entry
+<!-- - The date of the entry -->
 - 日期
-- Weather conditions (good, windy, rainy or stormy)
+<!-- - Weather conditions (good, windy, rainy or stormy) -->
 - 天气状况(良好、多风、多雨或暴风雨)
-- Visibility (good, ok or poor)
+<!-- - Visibility (good, ok or poor) -->
 - 能见度(良好、正常或欠佳)
-- Free text detailing the experience
+<!-- - Free text detailing the experience -->
 - 自由的文本记录的详细介绍经验
 
 
@@ -438,12 +438,12 @@ Fork和clone项目[patientor](https://github.com/fullstack-hy2020/patientor)。 
 <!-- We will place all [routers](/zh/part4/从后端结构到测试入门), modules which are responsible for handling a set of specific resources such as <i>diaries</i>, under the directory <i>src/routes</i>.  -->
 我们将把所有的路由 [routers](/zh/part4/从后端结构到测试入门) ，这些模块负责处理一组特定的资源，如<i>diaries</i>，放在<i>src/routes</i>目录下。
 <!-- This is a bit different than what we did  in [第4章](/zh/part4), where we used directory <i>src/controllers</i>. -->
-这与我们在 [第4章](/zh/part4),中使用的目录<i>src / controllers</i> 有些不同。
+这与我们在 [第4章](/zh/part4),中使用的目录<i>src/controllers</i> 有些不同。
 
 
 
 <!-- The router taking care of all diary endpoints is in <i>src/routes/diaries.ts</i> and looks like this: -->
-处理所有日志端点的路由位于<i>src/routes/diaries.ts</i> 中，如下所示:
+处理所有日志接口的路由位于<i>src/routes/diaries.ts</i> 中，如下所示:
 
 ```js
 import express from 'express';

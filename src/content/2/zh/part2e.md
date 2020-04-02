@@ -348,7 +348,6 @@ React的哲学，事实上，是这个极端的对立面。 由于将 CSS、 HTM
 
 
 <h4>2.20*: Phonebook 步骤12</h4>
-42.20 * : Phonebook 步骤12 / h4
 
 <!-- Open your application in two browsers. **If you delete a person in browser 1** a short while before attempting to <i>change the person's phone number</i> in browser 2, you will get the following error message: -->
 在两个浏览器中打开应用。 **如果你在浏览器1中删除一个人** ，尝试在浏览器2中更改该人的电话号码，你会得到如下错误消息:

@@ -172,7 +172,7 @@ Person.find({ phone: { $exists: false }})
 
 ### Validation
 <!-- As well as in GraphQL, the input is now validated using the validations defined in the mongoose-schema. For handling possible validation errors in the schema, we must add an error handling _try/catch_-block to the _save_-method. When we end up in the catch, we throw a suitable exception:  -->
-与在 GraphQL 中一样，现在使用 mongoose 模式中定义的验证来验证输入。 为了处理模式中可能出现的验证错误，我们必须向 save-method 添加错误处理 try / catch-block。 当我们在 catch 中结束时，我们抛出一个合适的异常:
+与在 GraphQL 中一样，现在使用 mongoose 模式中定义的验证来验证输入。 为了处理模式中可能出现的验证错误，我们必须向 save-method 添加错误处理 try/catch-block。 当我们在 catch 中结束时，我们抛出一个合适的异常:
 
 ```js
 Mutation: {

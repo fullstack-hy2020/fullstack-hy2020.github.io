@@ -8,8 +8,8 @@ lang: zh
 <div class="content">
 <!-- After the brief introduction to the main princibles of TypeScript, we are now ready to start our journey towards becoming FullStack TypeScript developers.  -->
 在简单介绍了TypeScript的主要原理之后，我们现在准备开始我们的旅程，成为全栈 TypeScript的开发者。
-
 <!-- Rather than giving you a thorough introduction to all aspects of TypeScript, in this part we will focus on the most common issues that arise when developing express backends or React frontends with TypeScript.  -->
+
 在这一章，我们将重点讨论在使用TypeScript 开发 Express 后端或使用React前端时出现的常见问题，而不是对TypeScript的所有方面进行全方位的介绍。
 <!-- In addition to language features we will also have a strong emphasis in tooling. -->
 除了语言特性之外，我们还将特别强调工具的使用。
@@ -75,7 +75,7 @@ npm install --save-dev ts-node typescript
 
 
 
-<!-- Now within this directory you can use <i>ts-node</i>by running <i>npm run ts-node</i>. Note that if you are using ts-node through package.json, all  command line arguments for the script need to be prefixed with <i>--</i>. So if you want to run file.ts with <i>ts-node</i>, the whole command is: --> -->
+<!-- Now within this directory you can use <i>ts-node</i>by running <i>npm run ts-node</i>. Note that if you are using ts-node through package.json, all  command line arguments for the script need to be prefixed with <i>--</i>. So if you want to run file.ts with <i>ts-node</i>, the whole command is: -->
 现在，在这个目录中，我们可以通过运行<i>npm run ts-node</i> 来使用<i>ts-node</i>。 注意，如果通过 package.json 使用 ts-node，脚本的所有命令行参数都需要以<i>--</i> 作为前缀。 因此，如果希望用<i>ts-node</i> 运行 file.ts，整个运行命令是:
 
 ```sh
@@ -88,7 +88,7 @@ npm run ts-node -- file.ts
 值得一提的是，TypeScript 还提供了一个在线playground，在这里你可以快速尝试 TypeScript 代码，并立即看到结果的 JavaScript 和可能的编译错误。 你可以在[这里](https://www.typescriptlang.org/play/index.html)访问TypeScript的官方playground 。
 
 <!-- **NB:** The playground might contain different tsconfig rules (which will be introduced later) than your local environment, which is why you might see different warnings there compared to your local environment. The playground's tsconfig is modifiable through the config dropdown menu. -->
-**注意: **playground可能包含不同的 tsconfig 规则(稍后将介绍) ，这就是为什么你可能会看到与您的当地环境不同的警告。 playground的 tsconfig 是可以通过配置下拉菜单进行修改的。
+**注意:**playground可能包含不同的 tsconfig 规则(稍后将介绍) ，这就是为什么你可能会看到与您的当地环境不同的警告。 playground的 tsconfig 是可以通过配置下拉菜单进行修改的。
 
 #### A note about the coding style
 【关于编码风格的提示】
@@ -132,7 +132,7 @@ multiplicator('how about a string?', 4, 'Multiplied a string and 4, the result i
 
 
 <!-- Now when we run the code, the output is: <i>Multiplied a string and 4, the result is: NaN</i>. -->
-现在，当我们运行代码时，输出是:: <i>Multiplied a string and 4, the result is: NaN</i>。
+现在，当我们运行代码时，输出是: <i>Multiplied a string and 4, the result is: NaN</i>。
 
 
 
@@ -369,7 +369,7 @@ try {
 <!-- Sometimes an npm package can also include its types within the code and in that case installing the corresponding <i>@types/*</i> is not necessary. -->
 有时 npm 包也可能在代码中包含它的类型，在这种情况下，不需要安装相应的<i>@types/\*</i>。
 
-> **NB:** Since the typings are only used before compilation, the typings are not needed in the production build and they should <i>always</i> be in the devDependencies of the package.json.
+<!-- > **NB:** Since the typings are only used before compilation, the typings are not needed in the production build and they should <i>always</i> be in the devDependencies of the package.json. -->
 **注意** 由于类型只在编译之前使用，因此在生产构建中不需要类型，并且它们应该<i>始终</i> 在 package.json 的 devDependencies 中。
 
 <!-- Since the global variable <i>process</i> is defined by Node itself, we get its typings by intalling the package <i>@types/node</i>: -->
@@ -539,7 +539,7 @@ interface MultiplyValues {
 #### setup 安装
 <!-- Exercises 9.1.-9.7. will be all made to the same node project. Create the project in an empty directory with <i>npm init</i> and install the ts-node and typescript packages. Create also the file <i>tsconfig.json</i> to the directory with the following content: -->
 
-都会开发到同一个node 项目。 使用<i>npm init</i> 在一个空目录中创建项目，并安装 ts-node 和 typescript 包。 将 <i>tsconfig.json</i> 文件创建到目录，内容如下:
+Exercises 9.1.-9.7. 都会开发到同一个node 项目。 使用<i>npm init</i> 在一个空目录中创建项目，并安装 ts-node 和 typescript 包。 将 <i>tsconfig.json</i> 文件创建到目录，内容如下:
 
 ```json
 {
@@ -777,9 +777,9 @@ import express from 'express';
 
 
 <!-- **NB**: VSCode offers you a possibility to fix the issues automatically by clicking the <i>Quick fix...</i> button. -->
-**注意 **: VSCode 为您提供了一种修复的可能方案，通过单击<i>Quick fix...</i> 按钮自动修复问题。
+**注意**: VSCode 为您提供了一种修复的可能方案，通过单击<i>Quick fix...</i> 按钮自动修复问题。
 <!-- Keep your eyes open for these helpers/quick fixes; listening to your editor usually makes your code better and easier to read.  -->
-请密切注意这些帮助程序 / 快速修复程序; 倾听编辑器通常会使代码更好、更容易阅读。
+请密切注意这些帮助程序/快速修复程序; 倾听编辑器通常会使代码更好、更容易阅读。
 <!-- The automatic fixes for issues can be a major time saver as well.  -->
 自动修复同样非常节省时间。
 

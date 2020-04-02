@@ -142,7 +142,7 @@ const User = () => {
 在这个练习中，前端只显示应用从后端接收到的便笺就足够了。
 
 <!-- An appropriate mechanism for adding comments to a blog post would be an HTTP POST request to the <i>api/blogs/:id/comments</i> endpoint. -->
-向博客文章添加评论的适当机制是向<i>applayground blogs / : id / comments</i> 端点发送 HTTP POST 请求。
+向博客文章添加评论的适当机制是向<i>api/blogs/:id/comments</i>  接口发送 HTTP POST 请求。
 
 #### 7.18: comments, 步骤2
 <!-- Extend your application so that users can add comments to blog posts from the frontend: -->

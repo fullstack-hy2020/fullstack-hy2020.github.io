@@ -394,7 +394,7 @@ const App = () =>
 
 
 <!-- It's worth noting that if the bundled application's source code uses <i>async/await</i>, the browser will not render anything on some browsers. [Googling the error message in the console](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) will shed some light on the issue. We have to install one more missing dependency, that is [@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill): -->
-值得注意的是，如果捆绑的应用的源代码使用<i>async/await</i>，浏览器将不会在某些浏览器上渲染任何内容。 [谷歌在控制台中搜索错误信息](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined)将会在这个问题上给出一些答案。 我们必须再安装一个缺失的依赖项，即[@babel / polyfill](https://babeljs.io/docs/en/babel-polyfill) :
+值得注意的是，如果捆绑的应用的源代码使用<i>async/await</i>，浏览器将不会在某些浏览器上渲染任何内容。 [谷歌在控制台中搜索错误信息](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined)将会在这个问题上给出一些答案。 我们必须再安装一个缺失的依赖项，即[@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill) :
 
 ```
 npm install --save @babel/polyfill
@@ -426,7 +426,7 @@ npm install --save @babel/polyfill
 通过<i>plugins</i> 定义了 Babel 执行的转译过程。 实际上，大多数开发人员使用的是现成的[预设](https://babeljs.io/docs/plugins/)插件，这些插件是一组预先配置的插件。
 
 <!-- Currently we are using the [@babel/preset-react](https://babeljs.io/docs/plugins/preset-react/) preset for transpiling the source code of our application: -->
-目前，我们正在使用[@babel / preset-react](https://babeljs.io/docs/plugins/preset-react/)预设来转译我们应用的源代码:
+目前，我们正在使用[@babel/preset-react](https://babeljs.io/docs/plugins/preset-react/)预设来转译我们应用的源代码:
 
 ```js
 {
@@ -440,7 +440,7 @@ npm install --save @babel/polyfill
 
 
 <!-- Let's add the [@babel/preset-env](https://babeljs.io/docs/plugins/preset-env/) plugin that contains everything needed to take code using all of the latest features and transpile it to code that is compatible with the ES5 standard: -->
-让我们添加一个[@babel / pressing-env](https://babeljs.io/docs/plugins/preset-env/)插件，它包含使用所有最新特性编写代码并将其转化为兼容 ES5标准的代码所需的所有内容:
+让我们添加一个[@babel/pressing-env](https://babeljs.io/docs/plugins/preset-env/)插件，它包含使用所有最新特性编写代码并将其转化为兼容 ES5标准的代码所需的所有内容:
 
 ```js
 {

@@ -108,7 +108,7 @@ Response 标签页展示了响应数据，这是一个常规的 html 页面。 <
 
 <!-- The request was made to the address <https://fullstack-exampleapp.herokuapp.com/kuva.png> and its type is HTTP GET. The response headers tell us that the response size is 89350 bytes, and its [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) is <i>image/png</i>, so it is a png image. The browser uses this information to render the image correctly to the screen. -->
 
-这个请求是给地址 https://fullstack-exampleapp.herokuapp.com/kuva.png 发送的，它的类型是 HTTP GET。 响应头告诉我们，响应大小为 89350 字节，其[Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type)为 image / png，因此它是一个 png 图像。 浏览器使用这些信息将图像正确地渲染到屏幕上。
+这个请求是给地址 https://fullstack-exampleapp.herokuapp.com/kuva.png 发送的，它的类型是 HTTP GET。 响应头告诉我们，响应大小为 89350 字节，其[Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type)为 image/png，因此它是一个 png 图像。 浏览器使用这些信息将图像正确地渲染到屏幕上。
 
 <!-- The chain of events caused by opening the page https://fullstack-exampleapp.herokuapp.com/ on a browser form the following [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/): -->
 

@@ -107,7 +107,7 @@ lang: zh
 
 <!-- The three credit course is graded pass/fail. -->
 
-3学分的课程只有及格 / 不及格两种状态。
+3学分的课程只有及格/不及格两种状态。
 
 <!-- <i>For the course certificate, you do not need to attend the course exam or register to the open university course.</i> -->
 

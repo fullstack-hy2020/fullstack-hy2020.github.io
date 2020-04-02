@@ -406,7 +406,7 @@ const baseUrl = '/api/notes'
 生成前端的生产构建，并使用本章节介绍的方法将其添加到 internet 应用中。
 
 <!-- **NB** Make sure the directory <i>build</i> is not gitignored -->
-**注意 **确保我构建的 <i>build</i> 目录没有放到gitignored文件中。
+**注意**确保我构建的 <i>build</i> 目录没有放到gitignored文件中。
 
 <!-- Also make sure that the frontend still works locally.  -->
 还要确保前端仍然可以在本地工作。

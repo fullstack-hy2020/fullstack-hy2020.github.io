@@ -202,7 +202,7 @@ TypeScript的第二个优点是代码中的类型注解可以作为<i>代码级�
 通过函数签名可以很容易地检查函数可以使用哪种类型的参数，以及它将返回哪种类型的数据。 这种类型的类型注解绑定文档将始终是最新的，并且它使新的程序员更容易开始处理现有的项目。 当返回到一个旧的项目时，这也是有帮助的。
 
 <!-- Types can be reused all around the code base, and a change to a type definition will automatically reflect everywhere the type is used. One might argue that you can achieve similar code level documentation with e.g. [JSDoc](https://jsdoc.app/about-getting-started.html), but it is not connected to the code as tightly as TypeScript's types, and may thus get out of sync more easily and is also more verbose. -->
-类型可以在整个代码库中重用，对类型定义的更改将自动反映所有使用该类型的地方。 有人可能会说，你可以用[JSDoc](https://JSDoc.app/about-getting-started.html 文档)实现类似的代码级文档，但是它与代码的连接不像 TypeScript 的类型那样紧密，因此更有可能不同步，而且也更加冗长。
+类型可以在整个代码库中重用，对类型定义的更改将自动反映所有使用该类型的地方。 有人可能会说，你可以用[JSDoc](https://JSDoc.app/about-getting-started.html)实现类似的代码级文档，但是它与代码的连接不像 TypeScript 的类型那样紧密，因此更有可能不同步，而且也更加冗长。
 
 <!-- The third advantage of TypeScript is, that IDEs can provide more <i>specific and smarter intellisense</i> when they know exactly what types of data you are processing. -->
 TypeScript的第三个优点是，当 IDE 确切知道您正在处理的数据类型时，它们可以提供更具体、更智能的智能感知。 

@@ -102,7 +102,7 @@ npx create-react-app my-app --template typescript
 ![](../../images/9/31a.png)
 
 <!-- Why is that? As we can see from the error, the file  <i>serviceWorker.ts</i> doesn't seem to be compliant with our linting configurations at the moment. This is because the <i>register</i> function uses other functions that are declared later in the same file and the rule [@typescript-eslint/no-use-before-define](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-use-before-define.md) doesn't like that. To fix the error we need to move the  <i>register</i> function as the last function in the file. -->
-为什么？ 正如我们从错误中看到的，文件<i>serviceWorker.ts</i> 目前似乎与我们的链接配置不兼容。 这是因为<i>register</i> 函数使用了稍后在同一文件中声明的其他函数，而规则[@typescript-eslint / no-use-before-define](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-use-before-define.md)不喜欢这样。 为了修复这个错误，我们需要将<i>register</i> 函数移动到作为文件中的最后一个函数。
+为什么？ 正如我们从错误中看到的，文件<i>serviceWorker.ts</i> 目前似乎与我们的链接配置不兼容。 这是因为<i>register</i> 函数使用了稍后在同一文件中声明的其他函数，而规则[@typescript-eslint/no-use-before-define](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-use-before-define.md)不喜欢这样。 为了修复这个错误，我们需要将<i>register</i> 函数移动到作为文件中的最后一个函数。
 
 <!-- If we now run <i>npm run lint</i>, we shouldn't get any errors. Actually the error does not matter, since we do not need the file <i>serviceWorker.ts</i> anyway, it is better to delete it altogether. -->
 如果我们现在运行 <i>npm run lint</i>，我们不应该得到任何错误。 实际上，错误并不重要，因为我们不需要文件<i>servicedworker.ts</i>，所以最好将其删除。
@@ -916,7 +916,7 @@ export type PublicPatient = Omit<Patient, 'ssn' | 'entries' >  // highlight-line
 性别以react-semantic-ui 组件[图标](https://react.semantic-ui.com/elements/Icon/#gendersicons-can-represent-genders-or-types-of-sexuality)显示
 
 <!-- **Note** that in order to access the id in the url, you need to give [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) a proper type argument: -->
-**注意 **为了访问 url 中的 id，需要给[useParams](https://reacttraining.com/react-router/web/api/hooks/useParams)一个正确的类型参数:
+**注意**为了访问 url 中的 id，需要给[useParams](https://reacttraining.com/react-router/web/api/hooks/useParams)一个正确的类型参数:
 
 ```js
 const { id } = useParams<{ id: string }>();
@@ -1092,7 +1092,7 @@ export type Entry =
 扩展前端的患者页面，列出患者条目的<i>date</i>、<i>description</i> 和<i>诊断代码</i>。
 
 <!-- You can use the same type definiton for <i>Entry</i> in the frontend. For these exercises it is enough just to copy/paste the definitions from backend to frontend. -->
-你可以在前端对<i>Entry</i> 使用相同的类型定义。 对于这些练习，只需将定义从后端复制 / 粘贴到前端即可。
+你可以在前端对<i>Entry</i> 使用相同的类型定义。 对于这些练习，只需将定义从后端复制/粘贴到前端即可。
 
 <!-- Your solution could look like this: -->
 你的解决方案可以是这样的:

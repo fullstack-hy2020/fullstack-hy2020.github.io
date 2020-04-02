@@ -293,7 +293,7 @@ const PersonForm = ({ setError }) => {
 回调函数被给予一个对缓存的引用，以及作为参数由Mutation返回的数据。 例如，在我们的例子中，这将是被创建的人。
 
 <!-- The code reads the cached state of <em>ALL\_PERSONS</em> query using [readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readquery) function and updates the cache with [writeQuery]https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writequery-and-writefragment) function adding the new person to the cached data.  -->
-该代码使用[readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readQuery)函数读取 em ALL  PERSONS / em 查询的缓存状态，并使用[writeQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writeQuery-and-writefragment) 函数更新缓存，将新人添加到缓存数据中。
+该代码使用[readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readQuery)函数读取<em>ALL\_PERSONS</em> 查询的缓存状态，并使用[writeQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writeQuery-and-writefragment) 函数更新缓存，将新人添加到缓存数据中。
 
 <!-- There are actually some situations where the only good way to keep the cache up to date is using _update_ -callbacks.  -->
 实际上，在某些情况下，使缓存保持最新的唯一好方法是使用 update-callback。

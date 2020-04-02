@@ -429,7 +429,7 @@ const Login = (props) => {
 
 
 <!-- With user log in we call the push method of the history object. The  _history.push('/')_ call causes the browser url to change to _/_ and the application renders the corresponding component <i>Home</i>. -->
-对于用户登录，我们调用历史对象的 push 方法。 _history.push('/')_ 调用导致浏览器的 url 更改为 / ，应用渲染相应的组件<i>Home</i>。
+对于用户登录，我们调用历史对象的 push 方法。 _history.push('/')_ 调用导致浏览器的 url 更改为/，应用渲染相应的组件<i>Home</i>。
 
 
 

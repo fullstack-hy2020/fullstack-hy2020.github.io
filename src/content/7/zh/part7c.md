@@ -218,7 +218,7 @@ const App = () => {
 #### Navigation structure
 【导航结构】
 <!-- Lastly, let's alter the application's navigation menu to use Bootstrap's [Navbar](https://getbootstrap.com/docs/4.1/components/navbar/) component. The React Bootstrap library provides us with [matching built-in components](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly). Through trial and error, we end up with a working solution in spite of the cryptic documentation: -->
-最后，让我们改变应用的导航菜单，使用 Bootstrap 的[导航栏](https://getbootstrap.com/docs/4.1/components/Navbar/  / 导航栏)组件。 React Bootstrap 库为我们提供了[匹配内置组件](https://React-Bootstrap.github.io/components/navbar/#navbars-mobile-friendly)。 通过反复试验，我们最终得到了一个可行的解决方案，尽管文档晦涩难懂:
+最后，让我们改变应用的导航菜单，使用 Bootstrap 的[导航栏](https://getbootstrap.com/docs/4.1/components/Navbar/)组件。 React Bootstrap 库为我们提供了[匹配内置组件](https://React-Bootstrap.github.io/components/navbar/#navbars-mobile-friendly)。 通过反复试验，我们最终得到了一个可行的解决方案，尽管文档晦涩难懂:
 
 ```js
 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
