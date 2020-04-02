@@ -9,7 +9,7 @@ lang: fi
 
 Yhdistetään seuraavaksi [osassa 2](/osa2) tekemämme frontend omaan backendiimme. 
 
-Edellisessä osassa backendinä toiminut json-server tarjosi muistiinpanojen listan osoitteessa http://localhost:3001/notes fronendin käyttöön. Backendimme urlien rakenne on hieman erilainen, muistiinpanot löytyvät osoitteesta http://localhost:3001/api/notes, eli muutetaan frontendin tiedostossa <i>src/services/notes.js</i> määriteltyä muuttujaa _baseUrl_ seuraavasti:
+Edellisessä osassa backendinä toiminut json-server tarjosi muistiinpanojen listan osoitteessa http://localhost:3001/notes frontendin käyttöön. Backendimme urlien rakenne on hieman erilainen, muistiinpanot löytyvät osoitteesta http://localhost:3001/api/notes, eli muutetaan frontendin tiedostossa <i>src/services/notes.js</i> määriteltyä muuttujaa _baseUrl_ seuraavasti:
 
 ```js
 import axios from 'axios'
