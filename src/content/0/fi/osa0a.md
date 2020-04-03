@@ -104,7 +104,7 @@ Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suorituk
 
 ![](../../images/0/28a.png)
 
-Arvosana siirtyy Weboodiin neljän viikon sisällä suoritusmerkintäpyynnön jälkeen.
+Arvosana siirtyy Weboodiin neljän viikon sisällä suoritusmerkintäpyynnön jälkeen. Heinäkuu saatta aihuettaa viiveen suorituksen kirjaamiseen.
 
 ### Kurssitodistus
 
