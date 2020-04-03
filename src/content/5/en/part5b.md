@@ -820,7 +820,7 @@ Let us also create a npm script to run the lint:
 }
 ```
 
-Compomnent _Togglable_ causesa a nasty looking warning <i>Component definition is missing display name</i>: 
+Component _Togglable_ causes a nasty looking warning <i>Component definition is missing display name</i>: 
 
 ![](../../images/5/25ea.png)
 
