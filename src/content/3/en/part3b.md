@@ -8,7 +8,7 @@ lang: en
 <div class="content">
 
 <!-- Yhdistetään seuraavaksi [osassa 2](/osa2) tekemämme frontend omaan backendiimme.  -->
-Next let's connect the frontend we made in [part 2](/part2) to our own backend.
+Next let's connect the frontend we made in [part 2](/en/part2) to our own backend.
 
 <!-- Edellisessä osassa backendinä toiminut json-server tarjosi muistiinpanojen listan osoitteessa http://localhost:3001/notes fronendin käyttöön. Backendimme urlien rakenne on hieman erilainen, muistiinpanot löytyvät osoitteesta http://localhost:3001/api/notes, eli muutetaan frontendin tiedostossa <i>src/services/notes.js</i> määriteltyä muuttujaa _baseUrl_ seuraavasti: -->
 In the previous part, the frontend could ask for the list of notes from the json-server we had as a backend at from the address http://localhost:3001/notes.
