@@ -47,7 +47,7 @@ Jos haluat kurssiata virallisen suoritusmerkinnän, kuuluu kurssiin myös koe. H
 
 Kolmen opintopisteen suorituksen edellytyksenä on osien 0-3 kaikkien tähdellä merkitsemättömien tehtävien tekeminen sekä hyväksytty suoritus 3 opintopisteen laajuuden kokeesta.
 
-Koe suoritetaan [Avoimen yliopiston](https://courses.helsinki.fi/fi/aytkt21009/129171256) Moodle-järjestelmässä, ohje kokeeseen ilmoittautumiseen [täällä](/osa0/yleista/#kokeeseen-ilmoittautuminen). Kokeen voi suorittaa 1.4. alkaen.
+Koe suoritetaan [Avoimen yliopiston](https://courses.helsinki.fi/fi/aytkt21009/129171256) Moodle-järjestelmässä, ohje kokeeseen ilmoittautumiseen [täällä](/osa0/yleista/#kokeeseen-ilmoittautuminen). Kokeen voi suorittaa 1.5. alkaen.
 
 Kokeen viimeinen suorituspäivä on 10.1.2021. Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt kaikki kolmen opintopisteen suorituksen edellyttämät tehtävät. <b>Huomaa, että viimeinen päivä kurssille ilmoittautumiselle on 9.1.2021.</b>
 
@@ -77,9 +77,9 @@ Suoritukseen edellytetään tehtävien lisäksi hyväksytysti suoritettu koe.
 
 Myös 5-7 op:n suorituksen edellytyksenä on hyväksytysti suoritettu koe. 
 
-Koe suoritetaan [Avoimen yliopiston](https://courses.helsinki.fi/fi/aytkt21009/129171256) Moodle-järjestelmässä, ohje kokeeseen ilmoittautumiseen [täällä](/osa0/yleista/#kokeeseen-ilmoittautuminen). Kokeen voi suorittaa 1.4. alkaen.
+Koe suoritetaan [Avoimen yliopiston](https://courses.helsinki.fi/fi/aytkt21009/129171256) Moodle-järjestelmässä, ohje kokeeseen ilmoittautumiseen [täällä](/osa0/yleista/#kokeeseen-ilmoittautuminen). Kokeen voi suorittaa 1.5. alkaen.
 
-Kokeen voi suorittaa 1.4. alkaen. Kokeen viimeinen suorituspäivä on 10.1.2021.  <b>Huomaa, että viimeinen päivä kokeeseen ilmoittautumiselle on 9.1.2021.</b>
+Kokeen voi suorittaa 1.5. alkaen. Kokeen viimeinen suorituspäivä on 10.1.2021.  <b>Huomaa, että viimeinen päivä kokeeseen ilmoittautumiselle on 9.1.2021.</b>
 
 Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt riittävästi tehtäviä 5 opintopisteen suoritukseen. Käytännössä kokeeseen ei kuitenkaan kannata osallistua heti kun riittävä tehtäväpistemäärä on suoritettu. Koe on sisällöltään sama riippumatta onko suorituksesi laajuus 5-7 opintopistettä. Koe ei vaikuta kurssilta saamaasi arvosanaan.
 
