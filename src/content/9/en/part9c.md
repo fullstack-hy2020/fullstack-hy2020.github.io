@@ -193,7 +193,7 @@ Take the time to create a good setting for yourself and your team so in the long
 ### Let there be code
 
 <!-- Now we can finally start coding! As always, we will at start create a ping-endpoint, just to make sure everything is working. -->
-Now we can finally start coding! As always, we start by creating a a ping-endpoint, just to make sure everything is working. 
+Now we can finally start coding! As always, we start by creating a ping-endpoint, just to make sure everything is working. 
 
 The contents of the <i>index.ts</i> file:
 
