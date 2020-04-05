@@ -568,7 +568,7 @@ type DiaryEntry = {
 In most cases you can use either <i>type</i> or <i>interface</i>, whichever syntax you prefer. However there are a few things to keep in mind. 
 For example if you define multiple interfaces with the same name, they will result in a merged interface, whereas if you try to define multiple types with the same name, it will result in an error stating that a type with the same name is already declared. 
 
-TypeScript documentation [recommends useing interfaces](http://www.typescriptlang.org/docs/handbook/advanced-types.html#interfaces-vs-type-aliases) in most cases.
+TypeScript documentation [recommends using interfaces](http://www.typescriptlang.org/docs/handbook/advanced-types.html#interfaces-vs-type-aliases) in most cases.
 
 ### Working with an existing codebase
 
