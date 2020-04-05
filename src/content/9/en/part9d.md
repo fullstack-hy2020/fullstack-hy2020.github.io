@@ -42,7 +42,7 @@ one using pure JavaScript. The only differences are, that the <i>.js</i> and <i>
 <!-- Now, let's take a look at the <i>tsconfig.json</i> file that has been created for us. Everything should be more or less fine within the file, except for that at the moment the configuration also allows JavaScript files to be compiled, because <i>allowJs</i> is set to <i>true</i>. That would be fine if you need to mix TypeScript and JavaScript (e.g. if you are in the middle of transforming a JavaScript project into TypeScript or some other reason), but we want our app to be purely TypeScript, so let's change that setting to <i>false</i>. -->
 Now, let's take a look at the <i>tsconfig.json</i> file that has been created for us.
 Everything in it should be more or less fine, except at the moment the configuration allows compiling JavaScript files, because <i>allowJs</i> is set to <i>true</i>.
-That would be fine if you need to mic TypeScript and JavaScript (e.g if you are in the process of transforming a JavaScript project into TypeScript or something like that), but we want to create a pure TypeScript app, so let's change that configuration to  <i>false</i>.
+That would be fine if you need to mix TypeScript and JavaScript (e.g if you are in the process of transforming a JavaScript project into TypeScript or something like that), but we want to create a pure TypeScript app, so let's change that configuration to  <i>false</i>.
 
 <!-- Earlier we added eslint to help us enforce coding style in backend, so let's do the same with this app. We do not need to install any dependencies since create-react-app has taken care of that already. -->
 In our previous project we used eslint to help us enforce coding style, and we'll do the same with this app. We do not need to install any dependencies, since create-react-app has taken care of that already.
@@ -198,7 +198,7 @@ ReactDOM.render(element, document.getElementById("root"));
 ```
 
 <!-- We defined a new type _WelcomeProps_ and passed it to the added typing for the <i>Welcome</i> component: -->
-We defined a new type _WelcomeProps_ and paased to the <i>Welcome</i> component in its type declaration: 
+We defined a new type _WelcomeProps_ and passed to the <i>Welcome</i> component in its type declaration: 
 
 ```js
 const Welcome: React.FC<WelcomeProps>;
@@ -414,7 +414,7 @@ interface CoursePartThree extends CoursePartBase {
 How should we now use these types in our components?
 
 <!-- One handy way to use these kind of types in TypeScript is by using _switch case_ expressions. Once you have either explicitly declared, or TypeScript has inferred that a variable holds a type union, and each type in the type union contains an attribute, that can be used as a type identifier, you can build your switch case around that attribute and TypeScript will then know which attributes are available within each case block. -->
-One handy way to use these kind of types in TypeScript is by using _switch case_ expressions. Once ou have either explicitly declared or TypeScript has inferred that a variable is of type union and each type in the type union contains a certain attribute, 
+One handy way to use these kind of types in TypeScript is by using _switch case_ expressions. Once you have either explicitly declared or TypeScript has inferred that a variable is of type union and each type in the type union contains a certain attribute, 
 we can use that as a type identifier. 
 We can then build a switch case around that attribute and TypeScript will know which attributes are available within each case block.
 
@@ -521,7 +521,7 @@ Now we know that both interfaces <i>CoursePartOne</i> and <i>CoursePartThree</i>
 
 Your first task is to to declare a new interface, that includes the <i>description</i> attribute and extends the <i>CoursePartBase</i> interface. Then modify the code so that you can remove the <i>description</i> attribute from both <i>CoursePartOne</i> and <i>CoursePartThree</i> without getting any errors.
 
-The create a component <i>Part</i> that renders all attributes of each type of course part. Use a switch case -based exhaustive type checking! Use the new component in component <i>Content</i>.
+Then create a component <i>Part</i> that renders all attributes of each type of course part. Use a switch case -based exhaustive type checking! Use the new component in component <i>Content</i>.
 
 Lastly, add your own course part interface with at least the following attributes: <i>name</i>, <i>exerciseCount</i> and <i>description</i>. Then add that interface to the type union <i>CoursePart</i> and add corresponding data to the <i>courseParts</i> variable. Now if you have modified your <i>Content</i> component correctly, you should get an error, because you have not yet added support for the fourth course part type. Do the necessary changes to <i>Content</i>, so that all attributes for the new course part also get rendered and that the compiler doesn't produce any errors.
 
