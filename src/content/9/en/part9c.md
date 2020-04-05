@@ -603,6 +603,57 @@ export interface DiaryEntry {
 } 
 ```
 
+### Node and JSON modules
+
+It is important to take note of a problem that may arise when using the tsconfig [resolveJsonModule](https://www.typescriptlang.org/en/tsconfig#resolveJsonModule) option:
+
+```json
+{
+  "compilerOptions": {
+    // ...
+    "resolveJsonModule": true // highlight-line
+  }
+}
+```
+
+According to the node documentation for [file modules](https://nodejs.org/api/modules.html#modules_file_modules),
+node will try to resolve modules in order of extensions:
+
+```sh
+ ["js", "json", "node"]
+```
+
+In addition to that, by default, <i>ts-node</i> and <i>ts-node-dev</i> extend the list of possible node module extensions to:
+
+```sh
+ ["js", "json", "node", "ts", "tsx"]
+```
+
+> **NB**: The validity of <i>.js</i>, <i>.json</i> and <i>.node</i> files as modules in Typescript depend on environment configuration, including <i>tsconfig</i> options such as <i>allowJs</i> and <i>resolveJsonModule</i>.
+
+Consider a flat folder structure containing files:
+
+```sh
+  ├── myModule.json
+  └── myModule.ts
+```
+
+In typescript, with the <i>resolveJsonModule</i> option set to true, the file <i>myModule.json</i> becomes a valid node module. Now, imagine a scenario where we wish to take the file <i>myModule.ts</i> into use:
+
+```js
+import myModule from "./myModule";
+```
+
+Looking closely at the order of node module extensions:
+
+```sh
+ ["js", "json", "node", "ts", "tsx"]
+```
+
+We notice that the <i>.json</i> file extension takes precedence over <i>.ts</i> and so <i>myModule.json</i> will be imported and not <i>myModule.ts</i>.
+
+In order to avoid time eating bugs, it is recommended that within a flat directory, each file with a valid node module extension has a unique filename.
+
 ### Utility Types
 
 <!-- Sometimes we end up in a situation where we want to use a specific modification of a type. For example consider using a general listing page for data that has some non-sensitive and some  sensitive data. In a common listing page we might want to be sure that no sensitive data is being used or shown so we might only <i>pick</i> the fields of a type we allow to be used in that situation. For that we use the utility type [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk). -->
