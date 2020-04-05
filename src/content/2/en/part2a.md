@@ -147,9 +147,9 @@ The result is an array of <i>li</i> elements.
 
 ```js
 [
-  '<li>HTML is easy</li>',
-  '<li>Browser can execute only Javascript</li>',
-  '<li>GET and POST are the most important methods of HTTP protocol</li>',
+  <li>HTML is easy</li>,
+  <li>Browser can execute only Javascript</li>,
+  <li>GET and POST are the most important methods of HTTP protocol</li>,
 ]
 ```
 
