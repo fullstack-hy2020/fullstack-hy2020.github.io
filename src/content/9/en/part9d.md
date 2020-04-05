@@ -42,7 +42,7 @@ one using pure JavaScript. The only differences are, that the <i>.js</i> and <i>
 <!-- Now, let's take a look at the <i>tsconfig.json</i> file that has been created for us. Everything should be more or less fine within the file, except for that at the moment the configuration also allows JavaScript files to be compiled, because <i>allowJs</i> is set to <i>true</i>. That would be fine if you need to mix TypeScript and JavaScript (e.g. if you are in the middle of transforming a JavaScript project into TypeScript or some other reason), but we want our app to be purely TypeScript, so let's change that setting to <i>false</i>. -->
 Now, let's take a look at the <i>tsconfig.json</i> file that has been created for us.
 Everything in it should be more or less fine, except at the moment the configuration allows compiling JavaScript files, because <i>allowJs</i> is set to <i>true</i>.
-That would be fine if you need to mix TypeScript and JavaScript (e.g if you are in the process of transforming a JavaScript project into TypeScript or something like that), but we want to create a pure TypeScript app, so let's change that configuration to  <i>false</i>.
+That would be fine if you need to mic TypeScript and JavaScript (e.g if you are in the process of transforming a JavaScript project into TypeScript or something like that), but we want to create a pure TypeScript app, so let's change that configuration to  <i>false</i>.
 
 <!-- Earlier we added eslint to help us enforce coding style in backend, so let's do the same with this app. We do not need to install any dependencies since create-react-app has taken care of that already. -->
 In our previous project we used eslint to help us enforce coding style, and we'll do the same with this app. We do not need to install any dependencies, since create-react-app has taken care of that already.
@@ -198,7 +198,7 @@ ReactDOM.render(element, document.getElementById("root"));
 ```
 
 <!-- We defined a new type _WelcomeProps_ and passed it to the added typing for the <i>Welcome</i> component: -->
-We defined a new type _WelcomeProps_ and passed to the <i>Welcome</i> component in its type declaration: 
+We defined a new type _WelcomeProps_ and paased to the <i>Welcome</i> component in its type declaration: 
 
 ```js
 const Welcome: React.FC<WelcomeProps>;
@@ -414,7 +414,7 @@ interface CoursePartThree extends CoursePartBase {
 How should we now use these types in our components?
 
 <!-- One handy way to use these kind of types in TypeScript is by using _switch case_ expressions. Once you have either explicitly declared, or TypeScript has inferred that a variable holds a type union, and each type in the type union contains an attribute, that can be used as a type identifier, you can build your switch case around that attribute and TypeScript will then know which attributes are available within each case block. -->
-One handy way to use these kind of types in TypeScript is by using _switch case_ expressions. Once you have either explicitly declared or TypeScript has inferred that a variable is of type union and each type in the type union contains a certain attribute, 
+One handy way to use these kind of types in TypeScript is by using _switch case_ expressions. Once ou have either explicitly declared or TypeScript has inferred that a variable is of type union and each type in the type union contains a certain attribute, 
 we can use that as a type identifier. 
 We can then build a switch case around that attribute and TypeScript will know which attributes are available within each case block.
 
@@ -521,7 +521,7 @@ Now we know that both interfaces <i>CoursePartOne</i> and <i>CoursePartThree</i>
 
 Your first task is to to declare a new interface, that includes the <i>description</i> attribute and extends the <i>CoursePartBase</i> interface. Then modify the code so that you can remove the <i>description</i> attribute from both <i>CoursePartOne</i> and <i>CoursePartThree</i> without getting any errors.
 
-Then create a component <i>Part</i> that renders all attributes of each type of course part. Use a switch case -based exhaustive type checking! Use the new component in component <i>Content</i>.
+The create a component <i>Part</i> that renders all attributes of each type of course part. Use a switch case -based exhaustive type checking! Use the new component in component <i>Content</i>.
 
 Lastly, add your own course part interface with at least the following attributes: <i>name</i>, <i>exerciseCount</i> and <i>description</i>. Then add that interface to the type union <i>CoursePart</i> and add corresponding data to the <i>courseParts</i> variable. Now if you have modified your <i>Content</i> component correctly, you should get an error, because you have not yet added support for the fourth course part type. Do the necessary changes to <i>Content</i>, so that all attributes for the new course part also get rendered and that the compiler doesn't produce any errors.
 
@@ -627,7 +627,7 @@ For your convenience there is also a ready <i>types.ts</i> file for basic types 
 In principle we could use the same types for both backend and frontend, but usually the frontend has different data structures and use cases for the data, which causes the types to be different. 
 For example the frontend has a state, and may want to keep data in objects or maps whereas the backend
 uses an array. 
-The frontend might also not need all the fields of an data object saved in the backend, and it may need to add some new fields to use for rendering.
+The frontend might also not need all the fields of a data object saved in the backend, and it may need to add some new fields to use for rendering.
 
 The folder structure looks as follows:
 
@@ -667,7 +667,7 @@ export type State = {
 The state is an object with one key <i>patients</i>, which has a [dictionary](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types-and-index-signatures) or simply put an object with string keys and with a <i>Patient</i> objects as values.The index can only be  a <i>string</i> or a <i>number</i> as you can access the object values using those. This enforces that the state conforms to the form we want, and prevents developers from misusing the state.
 
 <!-- But be aware! when the type for <i>patients</i> is declared in the way that we have, TypeScript does not actually have any way of knowing if the key you are trying to access actually exists or not. So, if we were to try to access a patient by a non-existing id, the compiler would still think that the returned value is of type <i>Patient</i> and no error would arise when trying to access it's properties: -->
-But be aware of one thing! When a type is delared like the type for <i>patients</i>, TypeScript does not actually have any way of knowing if the key you are trying to access actually ecists or not.
+But be aware of one thing! When a type is declared like the type for <i>patients</i>, TypeScript does not actually have any way of knowing if the key you are trying to access actually exists or not.
 So if we were to try to access a patient by a non-existing id, the compiler would think that the returned value is of type <i>Patient</i> and no error would be thrown when trying to access its properties:
 
 ```js
@@ -953,7 +953,7 @@ Create a page for showing a patient's full information in the frontend.
 <!-- Patient information should be accessible when clicking e.g. the patients name. -->
 User should be able to access a patient's information e.g by clicking the patient's name.
 
-Fetch the data from the enpoint created in the provious exercise. After fetching the patient information from the backend, add the fetched information to the application's state. Do not fetch the information if it already is in the app state, i.e. if the user is visiting the same patient's information many times. 
+Fetch the data from the enpoint created in the previous exercise. After fetching the patient information from the backend, add the fetched information to the application's state. Do not fetch the information if it already is in the app state, i.e. if the user is visiting the same patient's information many times. 
 
 Since we now have the state in the context, you'll need to define a new action type for updating an individual patient's data.
 
