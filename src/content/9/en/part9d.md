@@ -24,7 +24,7 @@ That's enough reasoning for now, let's start getting our hands dirty!
 ### Create React App with TypeScript
 
 <!-- [create-react-app](https://create-react-app.dev) supports a way to create an app using TypeScript by adding an additional <i>template</i> argument to the initialisation script. So, in order to create a Create React App using TypeScript, run the following command: -->
-We can use [create-react-app](https://create-react-app.dev) to create a TypeScript app by adding an 
+We can use [create-react-app](https://create-react-app.dev) to create a TypeScript app by adding a 
 <i>template</i> argument to the initialisation script. So in order to create a TypeScript Create React App, run the following command:
 
 ```sh
@@ -237,7 +237,7 @@ To fix the error, we need to add a new linting rule to <i>.eslintrc</i>:
 
 #### 9.14.
 
-Create a new Create React App with TypeScript, and set up esint for the project similarly to how we just did.
+Create a new Create React App with TypeScript, and set up eslint for the project similarly to how we just did.
 
 This exercise is similar to the one you have already done in [Part 1](/en/part1/javascript#exercises-1-3-1-5) of the course, but with TypeScript and some extra tweaks. Start off by modifying the contents of <i>index.tsx</i> to the following:
 
