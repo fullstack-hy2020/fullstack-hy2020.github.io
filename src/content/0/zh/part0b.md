@@ -58,10 +58,9 @@ Web 开发第一规则: 始终在浏览器上打开你的开发者控制台。 �
 <!-- When you reload the page (press the F5 key or the &#8634; symbol on your browser), the console shows that two events have happened: -->
 
 当你重新加载页面(在浏览器中按 F5 键或者 &#8634; 按钮) ，控制台会显示两个事件:
-
 <!-- - The browser fetches the contents of the page <i>fullstack-exampleapp.herokuapp.com/</i> from the server -->
-- 浏览器会从的服务器中获取<i>fullstack-exampleapp.herokuapp.com/</i> 页面的内容
 <!-- - And downloads the image <i>kuva.png</i> -->
+- 浏览器会从服务器中获取<i>fullstack-exampleapp.herokuapp.com/</i> 页面的内容
 - 然后下载图像 <i>kuva.png</i>
 
 ![](../../images/0/2e.png)
@@ -214,7 +213,7 @@ Html 页面的内容被保存为 template 模板字符串，或者说是一个�
 <!-- When we compare the page shown on the browser and the HTML code returned by the server, we notice that the code does not contain the list of notes. -->
 <!-- The [head](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head)-section of the HTML contains a [script](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script)-tag, which causes the browser to fetch a JavaScript file called <i>main.js</i>. -->
 
-当我们比较浏览器上显示的页面和服务器返回的 HTML 代码时，我们注意到这些代码并不包含 Note 列表的数据。 Html 的 [head](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head)部分 包含一个 [script](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script) 标签，它会让浏览器去 fetch 一个名为 main.js 的 JavaScript 文件。
+当我们比较浏览器上显示的页面和服务器返回的 HTML 代码时，我们注意到这些代码并不包含 Note 列表的数据。 Html 的 [head](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head)部分 包含一个 [script](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script) 标签，它会让浏览器去 获取一个名为 main.js 的 JavaScript 文件。
 
 <!-- The JavaScript code looks as follows: -->
 
@@ -251,7 +250,7 @@ xhttp.send();
 代码的细节现在并不重要，穿插一些代码，是为了增加图像与文本的趣味性。我们将在[第1章](/zh/part1)正式地开始编码。 本章节的示例代码实际上与本课程所要讲的编码技术毫无关系。
 
 <!-- > Some might wonder why xhttp-object is used instead of the modern fetch. This is due to not wanting to go into promises at all yet, and the code having a secondary role in this part. We will return to modern ways to make requests to the server in part 2. -->
-> 有些人可能想问为什么要使用 xhttp 对象而不是使用现代的 fetch 方法。 这是因为我们不想引入 promise 的概念，而且代码在这一章节只是二等公民。 在第 2 章节中，我们将回过头来用更加现代的方式来向服务器发送请求。
+> 有些人可能想问为什么要使用 xhttp 对象而不是使用现代的获取方法。 这是因为我们不想引入 promise 的概念，而且代码在这一章节只是二等公民。 在第 2 章节中，我们将回过头来用更加现代的方式来向服务器发送请求。
 
 <!-- Immediately after fetching the <i>script</i> tag, the browser begins to execute the code. -->
 
@@ -319,7 +318,7 @@ ul.setAttribute('class', 'notes');
 
 <!-- ...and then adds one [li](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li)-tag for each note. Only the <i>content</i> field of each note becomes the contents of the li-tag. The timestamps found in the raw data are not used for anything here. -->
 
-然后再为每个 Note 加上一个 li-标签。只将每个 Note 的 content 字段变成了 li-标签 的内容，而原始数据的 timestamps 时间戳在这里并没派上用场。
+然后再为每个 Note 加上一个 li-标签。仅将每个 Note 的 content 字段变成了 li-标签 的内容，而原始数据的 timestamps 时间戳在这里并没派上用场。
 
 ```js
 data.forEach(function(note) {
@@ -635,7 +634,7 @@ Notes 页面包含一个 [form 元素](https://developer.mozilla.org/en-US/docs/
 
 <!-- It is an [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request to the server address <i>new_note</i>. The server responds with HTTP status code 302. This is a [URL redirect](https://en.wikipedia.org/wiki/URL_redirection), with which the server asks the browser to do a new HTTP GET request to the address defined in the header's <i>Location</i> - the address <i>notes</i>. -->
 
-它是对服务器 <i>/new_note</i>地址发送的 [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST)请求。 服务器用 HTTP 状态码 302 进行响应。 这是一个[URL 重定向](https://en.wikipedia.org/wiki/URL_redirection)，服务器通过这个 URL 重定向，请求浏览器执行一个新的 HTTP GET 请求，该请求定义在 Header 的 Location (即 /notes 地址)中。
+它是对服务器 <i>/new\_note</i>地址发送的 [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST)请求。 服务器用 HTTP 状态码 302 进行响应。 这是一个[URL 重定向](https://en.wikipedia.org/wiki/URL_redirection)，服务器通过这个 URL 重定向，请求浏览器执行一个新的 HTTP GET 请求，该请求定义在 Header 的 Location (即 /notes 地址)中。
 
 <!-- So, the browser reloads the Notes page. The reload causes three more HTTP requests: fetching the style sheet (main.css), the JavaScript code (main.js), and the raw data of the notes (data.json). -->
 
@@ -670,7 +669,7 @@ app.post('/new_note', (req, res) => {
 
 <!-- Data is sent as the [body](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) of the POST-request. -->
 
-数据作为 POST-request 的[body](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST)发送到服务器。
+数据作为 POST-请求的[body](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST)发送到服务器。
 
 <!-- The server can access the data by accessing the <em>req.body</em> field of the request object <em>req</em>. -->
 
@@ -759,7 +758,7 @@ Notes 页面为浏览器提供了一些职责，为现有的 Note 生成 HTML �
 
 <!-- The POST request to the address <i>new_note_spa</i> contains the new note as JSON-data containing both the content of the note (<i>content</i>) and the timestamp (<i>date</i>): -->
 
-Post 请求到地址<i>new_note_spa</i>，包含新 Note 的 JSON 数据，其中既包含 Note 的内容(content) ，也包含时间戳(date) :
+Post 请求到地址<i>new\_note\_spa</i>，包含新 Note 的 JSON 数据，其中既包含 Note 的内容(content) ，也包含时间戳(date) :
 
 ```js
 {
@@ -835,7 +834,7 @@ var sendToServer = function(note) {
 <!-- The application code is available at <https://github.com/mluukkai/example_app>. -->
 <!-- It's worth remembering that the application is only meant to demonstrate the concepts of the course. The code follows a poor style of development in some measure, and should not be used as an example when creating your own applications. The same is true for the URLs used. The URL <i>new_note_spa</i>, which new notes are sent to, does not adhere to current best practices. -->
 
-应用代码可以在 https://github.com/mluukkai/example_app 上找到。 值得注意的是，这个应用只是用来演示课程的概念。 该代码在某种程度上遵循了糟糕的开发风格，不应该在创建自己的应用时作为示例使用。 使用的 url 也是如此。 发送新Note 的 URL 新建Note 的<i>new_note_spa</i>并不遵循当前的最佳实践。
+应用代码可以在 https://github.com/mluukkai/example_app 上找到。 值得注意的是，这个应用只是用来演示课程的概念。 该代码在某种程度上遵循了糟糕的开发风格，不应该在创建自己的应用时作为示例使用。 使用的 url 也是如此。 发送新Note 的 URL，即新建Note 的<i>new\_note\_spa</i>并不遵循当前的最佳实践。
 
 ### Javascript-libraries
 【Javascript 库】
@@ -846,11 +845,11 @@ var sendToServer = function(note) {
 
 <!-- Instead of using JavaScript and the DOM-API only, different libraries containing tools that are easier to work with compared to the DOM-API are often used to manipulate pages. One of these libraries is the ever-so-popular [JQuery](https://jquery.com/). -->
 
-与仅使用 JavaScript 和 DOM-API 不同，通常会使用比直接操作 DOM-API 更容易的工具库来操作页面。 其中一个非常流行的库就是 JQuery 。
+与仅使用 JavaScript 和 DOM-API 不同，通常会使用比直接操作 DOM-API 更容易的工具库来操作页面。 其中一个非常流行的库就是 [JQuery](https://jquery.com/) 。
 
 <!-- JQuery was developed back when web-pages mainly followed the traditional style of the server generating HTML pages, the functionality of which was enhanced on the browser side using JavaScript written with JQuery. One of the reasons for the success of JQuery was its so-called cross-browser compatibility. The library worked regardless of the browser or the company that made it, so there was no need for browser-specific solutions. Nowadays using JQuery is not as justified given the advancement of VanillaJS, and the most popular browsers generally support basic functionalities well. -->
 
-当时，在 web 页面主要遵循服务器生成 HTML 页面的传统风格，JQuery 当时是在这种情况下发展起来的。这种风格的功能在浏览器端通过使用 JavaScript 搭配使用 JQuery 来增强。 JQuery 成功的原因之一是它所谓的跨浏览器兼容性。 不管是哪家公司的哪个浏览器，这个库都能正常工作，所以不需要特定于浏览器的解决方案。 如今，由于 VanillaJS 的进步，使用 JQuery 已经不那么合理了，而且最流行的浏览器通常都能很好地支持基本功能。
+当时，在 web 页面主要遵循服务器生成 HTML 页面的传统风格，JQuery 当时是在这种情况下发展起来的。这种风格的功能通过在浏览器端使用 JavaScript 搭配使用 JQuery 来增强。 JQuery 成功的原因之一是它所谓的跨浏览器兼容性。 不管是哪家公司的哪个浏览器，这个库都能正常工作，所以不需要特定于浏览器的解决方案。 如今，由于 VanillaJS 的进步，使用 JQuery 已经不那么合理了，而且最流行的浏览器通常都能很好地支持基本功能。
 
 <!-- The rise of the single page app brought several more "modern" ways of web development than JQuery. The favorite of the first wave of developers was [BackboneJS](http://backbonejs.org/). After its [launch](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) in 2012, Google's [AngularJS](https://angularjs.org/) quickly became almost the de facto standard of modern web development. -->
 
