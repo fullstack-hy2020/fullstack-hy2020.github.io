@@ -598,10 +598,7 @@ const Blog = ({ blog }) => {
 )}
 ```
 
-**NB1:** you can make the name of a blog post click-able as shown in the part of the code that is highlighted.
-
-
-**NB2:** even though the functionality implemented in this part is almost identical to the functionality provided by the <i>Togglable</i> component, the component can not be used directly to achieve the desired behavior. The easiest solution will be to add state to the blog post that controls the displayed form of the blog post.
+**NB:** even though the functionality implemented in this part is almost identical to the functionality provided by the <i>Togglable</i> component, the component can not be used directly to achieve the desired behavior. The easiest solution will be to add state to the blog post that controls the displayed form of the blog post.
 
 #### 5.8*: Blog list frontend, step7
 
