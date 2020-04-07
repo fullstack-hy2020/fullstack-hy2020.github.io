@@ -370,7 +370,7 @@ const App = (props) => {
       </div>
 // highlight-end            
       <ul>
-        {notesToShow.map((note, i) => // highlight-line
+        {notesToShow.map((note, i) =>
           <Note key={i} note={note} />
         )}
       </ul>
