@@ -22,8 +22,8 @@ const App = (props) => { // highlight-line
     <div>
       <h1>Notes</h1>
       <ul>
-        {notes.map((note, i) => 
-          <Note key={i} note={note} />
+        {notes.map(note => 
+          <Note key={note.id} note={note} />
         )}
       </ul>
     </div>
@@ -75,8 +75,8 @@ const App = (props) => {
     <div>
       <h1>Notes</h1>
       <ul>
-        {notes.map((note, i) => 
-          <Note key={i} note={note} />
+        {notes.map(note => 
+          <Note key={note.id} note={note} />
         )}
       </ul>
       // highlight-start 
@@ -139,8 +139,8 @@ const App = (props) => {
     <div>
       <h1>Notes</h1>
       <ul>
-        {notes.map((note, i) => 
-          <Note key={i} note={note} />
+        {notes.map(note => 
+          <Note key={note.id} note={note} />
         )}
       </ul>
       <form onSubmit={addNote}>
@@ -180,8 +180,8 @@ const App = (props) => {
     <div>
       <h1>Notes</h1>
       <ul>
-        {notes.map((note, i) => 
-          <Note key={i} note={note} />
+        {notes.map(note => 
+          <Note key={note.id} note={note} />
         )}
       </ul>
       <form onSubmit={addNote}>
@@ -300,8 +300,8 @@ const App = (props) => {
     <div>
       <h1>Notes</h1>
       <ul>
-        {notesToShow.map((note, i) => // highlight-line
-          <Note key={i} note={note} />
+        {notesToShow.map(note => // highlight-line
+          <Note key={note.id} note={note} />
         )}
       </ul>
       // ...
@@ -370,8 +370,8 @@ const App = (props) => {
       </div>
 // highlight-end            
       <ul>
-        {notesToShow.map((note, i) =>
-          <Note key={i} note={note} />
+        {notesToShow.map(note =>
+          <Note key={note.id} note={note} />
         )}
       </ul>
       // ...    
