@@ -1136,7 +1136,7 @@ Use types properly in the backend! For now there is no need to do a proper valid
 
 Extend a patient's page in the frontend to list the <i>date</i>, <i>description</i> and <i>diagnose codes</i> of the patient's entries. 
 
-You can use the same type definiton for an <i>Entry</i> in the frontend. For these exercises it is enough just to copy/paste the definitions from the backend to the frontend.
+You can use the same type definition for an <i>Entry</i> in the frontend. For these exercises it is enough just to copy/paste the definitions from the backend to the frontend.
 
 Your solution could look like this:
 
@@ -1492,7 +1492,7 @@ Upon a successful submit the new entry should be added to the correct patient an
 
 If you like, you can re-use some of the code from the <i>Add patient</i> form for this exercise, but this is not a requirement.
 
-Note that the file [FormField.tsx](https://github.com/fullstack-hy2020/patientor/blob/master/src/AddPatientModal/FormField.tsx#L58) has a redy made component _DiagnosisSelection_ that can be used for setting the field <i>diagnoses</i>.
+Note that the file [FormField.tsx](https://github.com/fullstack-hy2020/patientor/blob/master/src/AddPatientModal/FormField.tsx#L58) has a ready made component _DiagnosisSelection_ that can be used for setting the field <i>diagnoses</i>.
 
 It can be used as follows:
 
