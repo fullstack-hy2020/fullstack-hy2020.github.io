@@ -234,7 +234,7 @@ const addNote = (event) => {
   const noteObject = {
     content: newNote,
     date: new Date().toISOString(),
-    important: Math.random() > 0.5,
+    important: Math.random() < 0.5,
     id: notes.length + 1,
   }
 
