@@ -1,5 +1,4 @@
 module.exports = {
-  pathPrefix: '/fullstack',
   siteMetadata: {
     title: 'Full Stack open 2020',
     description: '',

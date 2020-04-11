@@ -98,10 +98,10 @@ npm run cypress:open
 ```
 
 <!-- Ensimmäisen käynnistyksen yhteydessä sovellukselle syntyy hakemisto <i>cypress</i>, jonka alihakemistoon <i>integrations</i> on tarkoitus sijoittaa testit. Cypress luo valmiiksi joukon esimerkkitestejä, poistetaan ne ja luodaan ensimmäinen oma testi tiedostoon <i>note\_app.spec.js</i>: -->
-When we first run Cypress, it creates a <i>cypress</i> directory. It contains a <i>integrations</i> subdirectory, where we will place our tests. Cypress creates a bunch of example tests for us, but we will delete all those and make our own test in file <i>note\_app.speck.js</i>:
+When we first run Cypress, it creates a <i>cypress</i> directory. It contains a <i>integrations</i> subdirectory, where we will place our tests. Cypress creates a bunch of example tests for us, but we will delete all those and make our own test in file <i>note\_app.spec.js</i>:
 
 ```js
-describe('Note ', function() {
+describe('Note app', function() {
   it('front page can be opened', function() {
     cy.visit('http://localhost:3000')
     cy.contains('Notes')

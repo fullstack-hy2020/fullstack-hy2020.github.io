@@ -690,7 +690,7 @@ If necessary, show operations on the browser or on the server as comments on the
 
 The diagram does not have to be a sequence diagram. Any sensible way of presenting the events is fine. 
 
-All necessary information for doing this, and the next three exercises, can be found from the text of [this part](/en/part0/fundamentals_of_web_apps#forms-and-http-post).
+All necessary information for doing this, and the next two exercises, can be found from the text of [this part](/en/part0/fundamentals_of_web_apps#forms-and-http-post).
 The idea of these exercises is to read the text through once more, and to think through what is going on where. Reading the application [code](https://github.com/mluukkai/example_app) is not necessary, but it is of course possible. 
 
   <h4>0.5: Single page app</h4>
@@ -699,7 +699,7 @@ Create a diagram depicting the situation where the user goes to the [single page
 
   <h4>0.6: New note</h4>
 
-Create a diagram depicting the situation, where user creates a new note using the single page version of the app. 
+Create a diagram depicting the situation where user creates a new note using the single page version of the app. 
 
 This was the last exercise, and it's time to push your answers to GitHub and mark the exercises as done in the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
