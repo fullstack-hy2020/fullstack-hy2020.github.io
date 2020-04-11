@@ -7,7 +7,8 @@ lang: zh
 
 <div class="content">
 <!-- We will now start getting familiar with probably the most important topic of this course, namely the [React](https://reactjs.org/)-library. Let's start off with making a simple React application as well as getting to know the core concepts of React. -->
-我们即将开始学习大概是本门课程中最重要的议题——[React](https://reactjs.org/)。 让我们从制作一个简单的 React 应用开始，同时了解一下 React 的核心概念。
+
+我们即将开始学习大概是本门课程中最重要的议题—— [React](https://reactjs.org/)。 让我们从制作一个简单的 React 应用开始，同时了解一下 React 的核心概念。
 
 <!-- The easiest way to get started by far is using a tool called [create-react-app](https://github.com/facebookincubator/create-react-app). It is possible (but not necessary) to install <i>create-react-app</i> on your machine if the <i>npm</i> tool that was installed along with Node has a version number of at least <i>5.3</i>. -->
 
