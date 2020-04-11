@@ -673,7 +673,11 @@ const author = component.container.querySelector('#author')
 <!-- So far all of our tests for the frontend have been unit tests that have validated the correct functioning of individual components. Unit testing is useful at times, but even a comprehensive suite of unit tests is not enough to validate that the application works as a whole. -->
 到目前为止，我们对前端的所有测试都是单元测试，这些测试验证了单个组件的正确功能。单元测试有时很有用，但即使是一套完整的单元测试套件也不足以验证应用作为一个整体是否工作。
 
+<!-- We could also make integration tests for the frontend. Integration testing tests the collaboration of multiple components. It is considerably more difficult than unit testing, as we would have to for example mock data from the server.  -->
+我们也可以对前端进行集成测试。集成测试可测试多组件的协作。这比单元测试要困难得多，因为我们必须（例如）从服务器模拟数据。
 
+<!-- We chose to concentrate making end to end tests to test the whole application, which we will work on in the last chapter of this part. -->
+我们决定集中采用端到端的测试以测试整个应用程序，我们将在本章的最后一节中进行研究。
 
 ### Snapshot testing
 【快照测试】

@@ -543,7 +543,7 @@ Express 的文档包括一个关于安全性的部分: [生产最佳实践: 安�
 有时候 JavaScript 变量的[动态类型](https://developer.mozilla.org/en-us/docs/glossary/dynamic_typing)会产生令人讨厌的 bug。 在第5章节中，我们简要地讨论了[PropTypes](/zh/part5/props_children_与_proptypes#prop-types) : 这是一种机制，可以对传递给 React-components 的props进行类型检查。
 
 <!-- Lately there has been a notable uplift in the interest in [static type checking](https://en.wikipedia.org/wiki/Type_system#Static_type_checking). At the moment the most popular typed version of Javascript is the [Typescript](https://www.typescriptlang.org/) which has been developed by Microsof. Topic of the [第9章](/zh/part9) that shall be released at the end of April will be Typesceript. -->
-最近，人们对静态类型检查 [static type checking](https://en.wikipedia.org/wiki/Type_system#Static_type_checking)的兴趣有了明显的提升，这种兴趣可以追溯到20世纪90年代。 目前最流行的 Javascript 类型版本是由 Microsof 开发的[Typescript](https://www.typescriptlang.org/)。 将于4月底发布的[第9章节](/zh/part9)的议题将是 Typesceript。
+最近，人们对静态类型检查 [static type checking](https://en.wikipedia.org/wiki/Type_system#Static_type_checking)的兴趣有了明显的提升，这种兴趣可以追溯到20世纪90年代。 目前最流行的 Javascript 类型版本是由 Microsof 开发的[Typescript](https://www.typescriptlang.org/)。 将于4月底发布的[第9章节](/zh/part9)的议题将是 Typescript。
 
 #### Server side rendering, isomorphic applications and universal code
 【服务器端渲染，同构应用和通用代码】

@@ -1024,7 +1024,7 @@ end note
 <!-- All necessary information for doing this, and the next three exercises, can be found from the text of [this part](/zh/part0/web_应用的基础设施#forms-and-http-post). -->
 <!-- The idea of these exercises is to read the text through once more, and to think through what is going on where. Reading the application [code](https://github.com/mluukkai/example_app) is not necessary, but it is of course possible. -->
 
-为了做出这张图，以及完成接下来的三个练习，所有必要的信息，可以从[这一章节](/zh/part0/web_应用的基础设施#forms-and-http-post)的文本中找到。 这些练习的目的是再次阅读课文，并思考在哪里发生了什么。 阅读应用代码不是强制的，但是当然是可行的。
+为了做出这张图，以及完成接下来的两个练习，所有必要的信息，可以从[这一章节](/zh/part0/web_应用的基础设施#forms-and-http-post)的文本中找到。 这些练习的目的是再次阅读课文，并思考在哪里发生了什么。 阅读应用代码不是强制的，但是当然是可行的。
 
   <h4>0.5: Single page app</h4>
 

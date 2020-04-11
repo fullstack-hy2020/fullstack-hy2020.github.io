@@ -118,10 +118,10 @@ npm run cypress:open
 
 
 <!-- When we first run Cypress, it creates a <i>cypress</i> directory. It contains a <i>integrations</i> subdirectory, where we will place our tests. Cypress creates a bunch of example tests for us, but we will delete all those and make our own test in file <i>note\_app.speck.js</i>: -->
-当我们第一次运行 Cypress 时，它会创建一个<i>Cypress</i> 目录。 它包含一个<i>集成</i> 子目录，我们将在其中放置测试。 Cypress 为我们创建了一系列测试示例，但是我们将删除所有这些并在文件note\_app.speck.js 中创建我们自己的测试:
+当我们第一次运行 Cypress 时，它会创建一个<i>Cypress</i> 目录。 它包含一个<i>集成</i> 子目录，我们将在其中放置测试。 Cypress 为我们创建了一系列测试示例，但是我们将删除所有这些并在文件<i>note\_app.spec.js</i> 中创建我们自己的测试:
 
 ```js
-describe('Note ', function() {
+describe('Note app', function() {
   it('front page can be opened', function() {
     cy.visit('http://localhost:3000')
     cy.contains('Notes')

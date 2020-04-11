@@ -759,6 +759,71 @@ export interface DiaryEntry {
 } 
 ```
 
+### Node and JSON modules
+
+<!-- It is important to take note of a problem that may arise when using the tsconfig [resolveJsonModule](https://www.typescriptlang.org/en/tsconfig#resolveJsonModule) option: -->
+
+在使用 tsconfig 时， 值得注意的一个地方是， 使用 [resolveJsonModule](https://www.typescriptlang.org/en/tsconfig#resolveJsonModule) 这个选项，它可能产生一些问题。
+
+```json
+{
+  "compilerOptions": {
+    // ...
+    "resolveJsonModule": true // highlight-line
+  }
+}
+```
+
+<!-- According to the node documentation for [file modules](https://nodejs.org/api/modules.html#modules_file_modules),
+node will try to resolve modules in order of extensions: -->
+
+根据node 文档中对 [file modules](https://nodejs.org/api/modules.html#modules_file_modules) 的描述，node 会按扩展项的顺序进行解析：
+
+```sh
+ ["js", "json", "node"]
+```
+
+<!-- In addition to that, by default, <i>ts-node</i> and <i>ts-node-dev</i> extend the list of possible node module extensions to: -->
+另外，默认情况下<i>ts-node</i> 和 <i>ts-node-dev</i> 增加了可能的 node 模块扩展：
+
+```sh
+ ["js", "json", "node", "ts", "tsx"]
+```
+
+<!-- > **NB**: The validity of <i>.js</i>, <i>.json</i> and <i>.node</i> files as modules in Typescript depend on environment configuration, including <i>tsconfig</i> options such as <i>allowJs</i> and <i>resolveJsonModule</i>. -->
+
+> **注意**：Typescript中对 <i>.js</i>, <i>.json</i> and <i>.node</i> 文件作为模块的验证，取决于环境配置，包括<i>tsconfig</i> 选项例如 <i>allowJs</i> 和 <i>resolveJsonModule</i>
+
+<!-- Consider a flat folder structure containing files: -->
+假设一个文件夹结构如下：
+
+```sh
+  ├── myModule.json
+  └── myModule.ts
+```
+
+<!-- In typescript, with the <i>resolveJsonModule</i> option set to true, the file <i>myModule.json</i> becomes a valid node module. Now, imagine a scenario where we wish to take the file <i>myModule.ts</i> into use: -->
+
+在typescript 中， 由于<i>resolveJsonModule</i>  选项设为true， 文件<i>myModule.json</i> 成为了一个合法的node 模块，现在假设一个场景，比如我们希望将<i>myModule.ts</i>文件引入使用。
+
+```js
+import myModule from "./myModule";
+```
+
+<!-- Looking closely at the order of node module extensions: -->
+仔细看一下node 模块的扩展顺序
+
+```sh
+ ["js", "json", "node", "ts", "tsx"]
+```
+
+<!-- We notice that the <i>.json</i> file extension takes precedence over <i>.ts</i> and so <i>myModule.json</i> will be imported and not <i>myModule.ts</i>. -->
+
+我们注意到 <i>.json</i> 文件的扩展优先于<i>.ts</i>， 所以 <i>myModule.json</i>  会被引入，而不是我们希望的 <i>myModule.ts</i>。
+
+<!-- In order to avoid time eating bugs, it is recommended that within a flat directory, each file with a valid node module extension has a unique filename. -->
+为了避免这种潜在的bug， 建议在一个文件夹中，每个文件，如果想作为一个合法的node模块扩展，都给一个唯一的文件名。
+
 ### Utility Types
 【工具类型】
 <!-- Sometimes we might want to use a specific modification of a type.  -->
