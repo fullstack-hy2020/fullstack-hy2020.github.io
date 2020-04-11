@@ -224,7 +224,7 @@ When you are deciding to return values you weren't originally expecting, the war
 <!-- One more thing to consider is that even though we have in our code defined what types of parameters to accept, the generated JavaScript that is used runtime doesn't anymore have these type checks. So, if for example the <i>operation</i>-parameter's value comes from an external interface, there is no definite guarantee that it will be one of the allowed values. Therefore it's still better to include error handling to be prepared for the unexpected to happen. In this case, when there are multiple possible accepted values and all unexcpeted ones should result in an error, the [switch...case](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement suits better than if...else in our code.  -->
 One more thing to consider is, that even though we have defined types for our parameters, the generated JavaScript used at runtime does not contain the type checks.
 So if for example the <i>operation</i>-parameter's value comes from an external interface, there is no definite guarantee that it will be one of the allowed values. Therefore it's still better to include error handling and be prepared for the unexpected to happen. 
-In this case, when there are multiple possible accepted values and all unexcpeted ones should result in an error, the [switch...case](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement suits better than if...else in our code.
+In this case, when there are multiple possible accepted values and all unexpected ones should result in an error, the [switch...case](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement suits better than if...else in our code.
 
 The code of our calculator should actually look something like this:
 
@@ -700,7 +700,7 @@ Let's install <i>ts-node-dev</i> to our development dependencies
 npm install --save-dev ts-node-dev
 ```
 
-add add a script to <i>package.json</i>
+add a script to <i>package.json</i>
 
 ```json
 {
@@ -836,7 +836,7 @@ const a : any = /* no clue what the type will be! */.
 ```
 
 <!-- We have already <i>noImplicitAny</i> defined in our example code, so why does not the compiler compalain about <i>any</i> types? The reason is that the field <i>query</i> of the express [Request](https://expressjs.com/en/5x/api.html#req) object is actually explicitly typed as <i>any</i>. Same is true if we post data to app, the <i>request.body</i> is explicitly typed as <i>any</i> by express. -->
-We already have <i>noImplicitAny</i> condifured in our example, so why does the compiler not complain about the implicit <i>any</i> types?
+We already have <i>noImplicitAny</i> configured in our example, so why does the compiler not complain about the implicit <i>any</i> types?
 The reason is, that the <i>query</i> field of an express [Request](https://expressjs.com/en/5x/api.html#req) object is explicitly typed <i>any</i>.  Same is true for the <i>request.body</i> field we use to post data to an app. 
 
 <!-- What if we would like to prevent the developers of using <i>any</i> type in the code? Fortunately <i>tsconfig.json</i> is not the only place to enforce coding style and what we should do is to take <i>eslint</i> into use to help us to manage our code. Let's install eslint and the typescript extensions: -->
