@@ -345,7 +345,7 @@ const server = new ApolloServer({
 
 The first parameter, _typeDefs_, contains the GraphQL schema. 
 
-The second parameter is an object, which contains the [resolvers](https://www.apollographql.com/docs/apollo-server/essentials/data.html#resolver-map) of the server. These are the code, which defines <i>how</i> GraphQL queries are responded to. 
+The second parameter is an object, which contains the [resolvers](https://www.apollographql.com/docs/tutorial/resolvers/) of the server. These are the code, which defines <i>how</i> GraphQL queries are responded to. 
 
 The code of the resolvers is the following: 
 
