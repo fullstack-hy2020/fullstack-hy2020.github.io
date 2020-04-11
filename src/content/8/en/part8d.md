@@ -17,7 +17,7 @@ Let's add variable _token_ to the application's state. It will contain user's to
 
 ```js
 const App = () => {
-  const [token, setToken] = useState(null) // hightlight-line
+  const [token, setToken] = useState(null) // highlight-line
 
   // ...
 
