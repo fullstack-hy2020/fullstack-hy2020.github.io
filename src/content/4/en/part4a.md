@@ -62,7 +62,7 @@ Extracting logging into its own module is a good idea in more ways than one. If 
 The contents of the <i>index.js</i> file used for starting the application gets simplified as follows:
 
 ```js
-const app = require('./app') // varsinainen Express-sovellus
+const app = require('./app') // the actual Express application
 const http = require('http')
 const config = require('./utils/config')
 const logger = require('./utils/logger')

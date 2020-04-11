@@ -24,7 +24,7 @@ That's enough reasoning for now, let's start getting our hands dirty!
 ### Create React App with TypeScript
 
 <!-- [create-react-app](https://create-react-app.dev) supports a way to create an app using TypeScript by adding an additional <i>template</i> argument to the initialisation script. So, in order to create a Create React App using TypeScript, run the following command: -->
-We can use [create-react-app](https://create-react-app.dev) to create a TypeScript app by adding an 
+We can use [create-react-app](https://create-react-app.dev) to create a TypeScript app by adding a 
 <i>template</i> argument to the initialisation script. So in order to create a TypeScript Create React App, run the following command:
 
 ```sh
@@ -237,7 +237,7 @@ To fix the error, we need to add a new linting rule to <i>.eslintrc</i>:
 
 #### 9.14.
 
-Create a new Create React App with TypeScript, and set up esint for the project similarly to how we just did.
+Create a new Create React App with TypeScript, and set up eslint for the project similarly to how we just did.
 
 This exercise is similar to the one you have already done in [Part 1](/en/part1/javascript#exercises-1-3-1-5) of the course, but with TypeScript and some extra tweaks. Start off by modifying the contents of <i>index.tsx</i> to the following:
 
@@ -568,7 +568,7 @@ type DiaryEntry = {
 In most cases you can use either <i>type</i> or <i>interface</i>, whichever syntax you prefer. However there are a few things to keep in mind. 
 For example if you define multiple interfaces with the same name, they will result in a merged interface, whereas if you try to define multiple types with the same name, it will result in an error stating that a type with the same name is already declared. 
 
-TypeScript documentation [recommends useing interfaces](http://www.typescriptlang.org/docs/handbook/advanced-types.html#interfaces-vs-type-aliases) in most cases.
+TypeScript documentation [recommends using interfaces](http://www.typescriptlang.org/docs/handbook/advanced-types.html#interfaces-vs-type-aliases) in most cases.
 
 ### Working with an existing codebase
 
@@ -627,7 +627,7 @@ For your convenience there is also a ready <i>types.ts</i> file for basic types 
 In principle we could use the same types for both backend and frontend, but usually the frontend has different data structures and use cases for the data, which causes the types to be different. 
 For example the frontend has a state, and may want to keep data in objects or maps whereas the backend
 uses an array. 
-The frontend might also not need all the fields of an data object saved in the backend, and it may need to add some new fields to use for rendering.
+The frontend might also not need all the fields of a data object saved in the backend, and it may need to add some new fields to use for rendering.
 
 The folder structure looks as follows:
 
@@ -667,7 +667,7 @@ export type State = {
 The state is an object with one key <i>patients</i>, which has a [dictionary](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types-and-index-signatures) or simply put an object with string keys and with a <i>Patient</i> objects as values.The index can only be  a <i>string</i> or a <i>number</i> as you can access the object values using those. This enforces that the state conforms to the form we want, and prevents developers from misusing the state.
 
 <!-- But be aware! when the type for <i>patients</i> is declared in the way that we have, TypeScript does not actually have any way of knowing if the key you are trying to access actually exists or not. So, if we were to try to access a patient by a non-existing id, the compiler would still think that the returned value is of type <i>Patient</i> and no error would arise when trying to access it's properties: -->
-But be aware of one thing! When a type is delared like the type for <i>patients</i>, TypeScript does not actually have any way of knowing if the key you are trying to access actually ecists or not.
+But be aware of one thing! When a type is declared like the type for <i>patients</i>, TypeScript does not actually have any way of knowing if the key you are trying to access actually exists or not.
 So if we were to try to access a patient by a non-existing id, the compiler would think that the returned value is of type <i>Patient</i> and no error would be thrown when trying to access its properties:
 
 ```js
@@ -953,7 +953,7 @@ Create a page for showing a patient's full information in the frontend.
 <!-- Patient information should be accessible when clicking e.g. the patients name. -->
 User should be able to access a patient's information e.g by clicking the patient's name.
 
-Fetch the data from the enpoint created in the provious exercise. After fetching the patient information from the backend, add the fetched information to the application's state. Do not fetch the information if it already is in the app state, i.e. if the user is visiting the same patient's information many times. 
+Fetch the data from the enpoint created in the previous exercise. After fetching the patient information from the backend, add the fetched information to the application's state. Do not fetch the information if it already is in the app state, i.e. if the user is visiting the same patient's information many times. 
 
 Since we now have the state in the context, you'll need to define a new action type for updating an individual patient's data.
 
@@ -1136,7 +1136,7 @@ Use types properly in the backend! For now there is no need to do a proper valid
 
 Extend a patient's page in the frontend to list the <i>date</i>, <i>description</i> and <i>diagnose codes</i> of the patient's entries. 
 
-You can use the same type definiton for an <i>Entry</i> in the frontend. For these exercises it is enough just to copy/paste the definitions from the backend to the frontend.
+You can use the same type definition for an <i>Entry</i> in the frontend. For these exercises it is enough just to copy/paste the definitions from the backend to the frontend.
 
 Your solution could look like this:
 
@@ -1492,7 +1492,7 @@ Upon a successful submit the new entry should be added to the correct patient an
 
 If you like, you can re-use some of the code from the <i>Add patient</i> form for this exercise, but this is not a requirement.
 
-Note that the file [FormField.tsx](https://github.com/fullstack-hy2020/patientor/blob/master/src/AddPatientModal/FormField.tsx#L58) has a redy made component _DiagnosisSelection_ that can be used for setting the field <i>diagnoses</i>.
+Note that the file [FormField.tsx](https://github.com/fullstack-hy2020/patientor/blob/master/src/AddPatientModal/FormField.tsx#L58) has a ready made component _DiagnosisSelection_ that can be used for setting the field <i>diagnoses</i>.
 
 It can be used as follows:
 

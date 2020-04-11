@@ -193,7 +193,7 @@ Take the time to create a good setting for yourself and your team so in the long
 ### Let there be code
 
 <!-- Now we can finally start coding! As always, we will at start create a ping-endpoint, just to make sure everything is working. -->
-Now we can finally start coding! As always, we start by creating a a ping-endpoint, just to make sure everything is working. 
+Now we can finally start coding! As always, we start by creating a ping-endpoint, just to make sure everything is working. 
 
 The contents of the <i>index.ts</i> file:
 
@@ -389,7 +389,7 @@ app.listen(PORT, () => {
 And now if we make a HTTP GET request to http://localhost:3000/api/diaries we should see the message <i>Fetching all diaries!</i>.
 
 <!-- The next thing is to start serving the seed data (found [here](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json)) from the app. We shall fetch the data and save it to file <i>data/diaries.json</i> -->
-Next wee need to start serving the seed data (found [here](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json)) from the app. We will fetch the data and save it to <i>data/diaries.json</i>.
+Next we need to start serving the seed data (found [here](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json)) from the app. We will fetch the data and save it to <i>data/diaries.json</i>.
 
 <!-- We will not write the code that does the actual data manipulation to the router, but instead create a <i>service</i> that takes care of the data manipulation. It is quite a common pattern to separate the "business logic" from router code to own modules that are quite often called <i>services</i>. The name service originates from [Domain driven design](https://en.wikipedia.org/wiki/Domain-driven_design) and was made popular by the [Spring](https://spring.io/) framework. -->
 We won't be writing the code for the actual data manipulations on the router. We will create a <i>service</i> which takes care of the data manipulation instead. 
@@ -602,6 +602,57 @@ export interface DiaryEntry {
   comment?: string;
 } 
 ```
+
+### Node and JSON modules
+
+It is important to take note of a problem that may arise when using the tsconfig [resolveJsonModule](https://www.typescriptlang.org/en/tsconfig#resolveJsonModule) option:
+
+```json
+{
+  "compilerOptions": {
+    // ...
+    "resolveJsonModule": true // highlight-line
+  }
+}
+```
+
+According to the node documentation for [file modules](https://nodejs.org/api/modules.html#modules_file_modules),
+node will try to resolve modules in order of extensions:
+
+```sh
+ ["js", "json", "node"]
+```
+
+In addition to that, by default, <i>ts-node</i> and <i>ts-node-dev</i> extend the list of possible node module extensions to:
+
+```sh
+ ["js", "json", "node", "ts", "tsx"]
+```
+
+> **NB**: The validity of <i>.js</i>, <i>.json</i> and <i>.node</i> files as modules in Typescript depend on environment configuration, including <i>tsconfig</i> options such as <i>allowJs</i> and <i>resolveJsonModule</i>.
+
+Consider a flat folder structure containing files:
+
+```sh
+  ├── myModule.json
+  └── myModule.ts
+```
+
+In typescript, with the <i>resolveJsonModule</i> option set to true, the file <i>myModule.json</i> becomes a valid node module. Now, imagine a scenario where we wish to take the file <i>myModule.ts</i> into use:
+
+```js
+import myModule from "./myModule";
+```
+
+Looking closely at the order of node module extensions:
+
+```sh
+ ["js", "json", "node", "ts", "tsx"]
+```
+
+We notice that the <i>.json</i> file extension takes precedence over <i>.ts</i> and so <i>myModule.json</i> will be imported and not <i>myModule.ts</i>.
+
+In order to avoid time eating bugs, it is recommended that within a flat directory, each file with a valid node module extension has a unique filename.
 
 ### Utility Types
 
@@ -1168,7 +1219,7 @@ const parseDate = (date: any): string => {
 
 <!-- Nothing really special here, only thing is that we can't use a type guard since a date is in this case considered only to be a <i>string</i>. Notice that even though the <i>date</i> variable is accepted as <i>any</i> by the <i>parseDate</i> function, after checking the type with <i>isString</i> the type is already a string which is why we are able to give the variable to the function <i>isDate</i> with the type <i>string</i> without any errors. -->
 The code is really nothing special. The only thing is, that we can't use a type guard here since a date in this case is only considered to be a <i>string</i>.
-Note, that even though the <i>parseDate</i> function accepts the <i>date</i> variable as any, after we check the type with <i>isString</i> its type is set as string, which is why we can give the variable to the <i>isDate</i> function requiring a sting without any problems.
+Note, that even though the <i>parseDate</i> function accepts the <i>date</i> variable as any, after we check the type with <i>isString</i> its type is set as string, which is why we can give the variable to the <i>isDate</i> function requiring a string without any problems.
 
 Finally we are ready to move on to the last two types, Weather and Visibility.
 

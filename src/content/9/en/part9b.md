@@ -269,20 +269,20 @@ Let's return to the basic idea of TypeScript. TypeScript expects all globally us
 As with npm, the TypeScript world also celebrates open source code. The community is active and continuously reacting to updates and changes in commonly used npm-packages.  
 You can almost always find the typings for npm-packages, so you don't have to create types for all of your thousands of dependencies alone.
 
-<!-- Usually types for existing packages can be found by under the <i>@types</i>-organization within npm, so that you can add the relevant types to your project by installing an npm package with the name of your package with a @types/ - prefix, for example:<i>npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose</i> and the list goes on and on. The <i>@types/*</i> are maintained by [Definitely typed](http://definitelytyped.org/), a community project with the goal to mainting types of everything in one place. -->
-Usually types for existing packages can be found from the <i>@types</i>-organization within npm, and you can add the relevant types to your project by installing an npm package with the name of your package with @types/ - prefix. For example: <i>npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose</i> and so on and so on. The <i>@types/*</i> are maintained by [Definitely typed](http://definitelytyped.org/), a community project with the goal to mainting types of everything in one place.
+<!-- Usually types for existing packages can be found by under the <i>@types</i>-organization within npm, so that you can add the relevant types to your project by installing an npm package with the name of your package with a @types/ - prefix, for example:<i>npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose</i> and the list goes on and on. The <i>@types/*</i> are maintained by [Definitely typed](http://definitelytyped.org/), a community project with the goal to maintaining types of everything in one place. -->
+Usually types for existing packages can be found from the <i>@types</i>-organization within npm, and you can add the relevant types to your project by installing an npm package with the name of your package with @types/ - prefix. For example: <i>npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose</i> and so on and so on. The <i>@types/*</i> are maintained by [Definitely typed](http://definitelytyped.org/), a community project with the goal to maintaining types of everything in one place.
 
 Sometimes an npm package can also include its types within the code and in that case installing the corresponding <i>@types/*</i> is not necessary.
 
 > **NB:** Since the typings are only used before compilation, the typings are not needed in the production build and they should <i>always</i> be in the devDependencies of the package.json.
 
-Since the global variable <i>process</i> is defined by Node itself, we get its typings by intalling the package <i>@types/node</i>:
+Since the global variable <i>process</i> is defined by Node itself, we get its typings by installing the package <i>@types/node</i>:
 
 ```sh
 npm install --save-dev @types/node
 ```
 
-After installing the types, our compiler does not complain about the variable <i>process</i> anymore. Note that there is no need to require the types to the code, the intallation of the package is enough!
+After installing the types, our compiler does not complain about the variable <i>process</i> anymore. Note that there is no need to require the types to the code, the installation of the package is enough!
 
 ### Improving the project
 
@@ -475,7 +475,7 @@ The daily exercise hours are given to the function as an [array](https://www.typ
 [3, 0, 2, 4.5, 0, 3, 1]
 ```
 
-For the Result object you should to create an [interface](https://www.typescriptlang.org/docs/handbook/interfaces.html).
+For the Result object you should create an [interface](https://www.typescriptlang.org/docs/handbook/interfaces.html).
 
 If you would call the function with parameters <i>[3, 0, 2, 4.5, 0, 3, 1]</i> and <i>2</i> it could return
 

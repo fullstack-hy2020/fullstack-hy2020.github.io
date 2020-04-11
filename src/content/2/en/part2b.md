@@ -22,8 +22,8 @@ const App = (props) => { // highlight-line
     <div>
       <h1>Notes</h1>
       <ul>
-        {notes.map((note, i) => 
-          <Note key={i} note={note} />
+        {notes.map(note => 
+          <Note key={note.id} note={note} />
         )}
       </ul>
     </div>
@@ -75,8 +75,8 @@ const App = (props) => {
     <div>
       <h1>Notes</h1>
       <ul>
-        {notes.map((note, i) => 
-          <Note key={i} note={note} />
+        {notes.map(note => 
+          <Note key={note.id} note={note} />
         )}
       </ul>
       // highlight-start 
@@ -139,8 +139,8 @@ const App = (props) => {
     <div>
       <h1>Notes</h1>
       <ul>
-        {notes.map((note, i) => 
-          <Note key={i} note={note} />
+        {notes.map(note => 
+          <Note key={note.id} note={note} />
         )}
       </ul>
       <form onSubmit={addNote}>
@@ -180,8 +180,8 @@ const App = (props) => {
     <div>
       <h1>Notes</h1>
       <ul>
-        {notes.map((note, i) => 
-          <Note key={i} note={note} />
+        {notes.map(note => 
+          <Note key={note.id} note={note} />
         )}
       </ul>
       <form onSubmit={addNote}>
@@ -234,7 +234,7 @@ const addNote = (event) => {
   const noteObject = {
     content: newNote,
     date: new Date().toISOString(),
-    important: Math.random() > 0.5,
+    important: Math.random() < 0.5,
     id: notes.length + 1,
   }
 
@@ -251,7 +251,7 @@ The new note is added to the list of notes using the [concat](https://developer.
 setNotes(notes.concat(noteObject))
 ```
 
-The method does not mutate the original <em>notes</em> state array, but rather creates <i>a new copy of the array with the new item added to the end</i>. This is important since we must never [mutate state directly](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly) in React!
+The method does not mutate the original <em>notes</em> state array, but rather creates <i>a new copy of the array with the new item added to the end</i>. This is important since we must [never mutate state directly](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly) in React!
 
 The event handler also resets the value of the controlled input element by calling the <em>setNewNote</em> function of the <em>newNote</em> state:
 
@@ -300,8 +300,8 @@ const App = (props) => {
     <div>
       <h1>Notes</h1>
       <ul>
-        {notesToShow.map((note, i) => // highlight-line
-          <Note key={i} note={note} />
+        {notesToShow.map(note => // highlight-line
+          <Note key={note.id} note={note} />
         )}
       </ul>
       // ...
@@ -370,8 +370,8 @@ const App = (props) => {
       </div>
 // highlight-end            
       <ul>
-        {notesToShow.map((note, i) => // highlight-line
-          <Note key={i} note={note} />
+        {notesToShow.map(note =>
+          <Note key={note.id} note={note} />
         )}
       </ul>
       // ...    
