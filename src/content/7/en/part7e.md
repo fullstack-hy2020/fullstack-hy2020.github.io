@@ -220,7 +220,7 @@ During the course we have created the frontend and backend into separate reposit
 
 Sometimes there may be a situation where the entire application is to be put into a single repository. In this case a common approach is to put the <i>package.json</i> and <i>webpack.config.js</i> in the root directory, as well as place the frontend and backend code into their own directories, e.g. <i>client</i> and <i>server</i>.
 
-[This repository]((https://github.com/fullstack-hy2020/create-app)) provides one possible starting point for the organization of "single-repository-code".
+[This repository](https://github.com/fullstack-hy2020/create-app) provides one possible starting point for the organization of "single-repository-code".
 
 ### Changes on the server
 
