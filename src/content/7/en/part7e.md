@@ -350,10 +350,10 @@ Last year's model answer for the exercises in part 4 already have quite a few ou
 The dependencies can be brought up to date by updating the file <i>package.json</i> and running the command _npm install_. However, old versions of the dependencies are not necessarily a security risk. 
 
 <!-- Riippuvuuksien turvallisuus voidaan tarkistaa npm:n [audit](https://docs.npmjs.com/cli/audit)-komennolla, joka vertaa käytettyjen riippuvuuksien versioita keskitetyssä virhetietokannassa listattuihin tietoturvauhan sisältäviin riippuvuuksien versioihin. -->
-The npm [audit](https://docs.npmjs.com/cli/audit) command can be used to check the security of debendencies. It compares the version numbers of the debendencies in your application to a list of the version numbers of debendencies containing known security threats in a centralized error database. 
+The npm [audit](https://docs.npmjs.com/cli/audit) command can be used to check the security of dependencies. It compares the version numbers of the dependencies in your application to a list of the version numbers of dependencies containing known security threats in a centralized error database. 
 
 Running _npm audit_ on an exercise from part 4 of last year's course print a long list of complaints and suggested fixes. 
-Below is a part of the raport:
+Below is a part of the report:
 
 ```js
 $ bloglist-backend npm audit
@@ -414,7 +414,7 @@ found 416 vulnerabilities (65 low, 2 moderate, 348 high, 1 critical) in 20047 sc
 
 <!-- Reuilun vuoden ikäinen koodi on siis täynnä pieniä tietoturvauhkia, kriittisiä uhkia on onneksi ainoastaan 1. Suoritetaan raportin suosittelema operaatio _npm audit fix_: -->
 After only one year the code is full of small security threats. Luckily there is only 1 critical threat. 
-Let's run _npm audit fix_ as the raport suggests:
+Let's run _npm audit fix_ as the report suggests:
 
 ```js
 $ bloglist-backend npm audit fix
@@ -427,9 +427,9 @@ fixed 354 of 416 vulnerabilities in 20047 scanned packages
 ```
 
 <!-- Haavoittuvuuksia jää vielä 62, sillä _audit fix_ ei tee oletusarvoisesti versiopäivitystä kirjastolle, jonka <i>major</i>-versionumero on kasvanut. Tälläisen riippuvuuden päivitys saattaa aiheuttaa sovelluksen hajoamisen. Ongelmat aiheuttaa testauskirjasto jestin versio, joka on sovelluksessa 23.6.0 kun taas turvallinen versio olisi 25.1.0. Koska jest on ainoastaan kehitysaikainen riippuvuus, ei vaaraa oikeastaan ole, mutta päivitetään myös se: -->
-62 threats remain because by default _audit fix_  does not update debendencies if their <i>major</i> version number has increased. 
-Updating these debendencies could lead to the whole application breaking down. The remaining threats are caused by the testing debendency jest. Our application has the version 23.6.0 when the secure version is 25.0.1. 
-As jest is a development debendency the threat is actually nonexistent, but let's update it just to be safe:
+62 threats remain because by default _audit fix_  does not update dependencies if their <i>major</i> version number has increased. 
+Updating these dependencies could lead to the whole application breaking down. The remaining threats are caused by the testing dependency jest. Our application has the version 23.6.0 when the secure version is 25.0.1. 
+As jest is a development dependency the threat is actually nonexistent, but let's update it just to be safe:
 
 ```js
 npm install --save-dev jest@25.1.0 
@@ -540,7 +540,7 @@ Serverless is not about there not being a server in applications, but about how 
 ### Useful libraries and interesting links
 
 <!-- Javasciptin kehittäjäyhteisö on tuottanut valtavan määrän erilaisia hyödyllisiä kirjastoja ja jos olet koodaamassa jotain vähänkin isompaa, kannattaa etsiä mitä valmista kalustoa on jo tarjolla. Eräs hyvä paikka kirjastojen etsimiseen on https://applibslist.xyz/. Seuraavassa listataan muutamia luotettavien tahojen hyväksi havaitsemia kirjastoja. -->
-The JavaScript developer community has produced a large variety of useful libraries. If you are developing anything more substancial, it is worth it to check if existing solutions are already available. 
+The JavaScript developer community has produced a large variety of useful libraries. If you are developing anything more substantial, it is worth it to check if existing solutions are already available. 
 One good place to find libraries is https://applibslist.xyz/.
 Below is listed some libraries recommended by trustworthy parties.
 
@@ -570,7 +570,7 @@ When it comes to the tools used for the management and bundling of JavaScript pr
 - 2015- [Webpack](https://www.npmjs.com/package/webpack)
 
 <!-- Hipsterien suurin into työkalukehitykseen näytti pysähtyneen webpackin vallattua markkinat. Pari vuotta sitten markkinoille ilmestyi uusi tulokas [Parcel](https://parceljs.org), joka markkinoi olevansa yksinkertainen, sitähän Webpack ei missään nimessä ole, ja paljon nopeampi kuin Webpack. Lupaavan alun jälkeen Parcel ei kuitenkaan ole jatkanut nostettaan, ja vaikuttaa että siitä ei kuitenkaan ole Webpackin tappajaksi. -->
-Hipsters seem to have lost their interest in tool development after webpack started to dominate the markets. Few years ago [Parcel](https://parceljs.org) started to make the rounds marketing itself as simpe (which Webpack absolutely is not) and faster than Webpack. However after a promising start Parcel has not gathered any steam, and it's beginning to look like it will not be the end of Webpack. 
+Hipsters seem to have lost their interest in tool development after webpack started to dominate the markets. Few years ago [Parcel](https://parceljs.org) started to make the rounds marketing itself as simple (which Webpack absolutely is not) and faster than Webpack. However after a promising start Parcel has not gathered any steam, and it's beginning to look like it will not be the end of Webpack. 
 
 The site <https://reactpatterns.com/> provides a concise list of best practices for React, some of which are already familiar from this course. Another similar list is [react bits](https://vasanthk.gitbooks.io/react-bits/).
 
