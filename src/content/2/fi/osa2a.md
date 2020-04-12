@@ -358,7 +358,7 @@ const App = ({ notes }) => { //highlight-line
       <h1>Notes</h1>
       <ul>
         {notes.map((note, i) => 
-          <li key={i}>
+          <li key={note.id}>
             {note.content}
           </li>
         )}
@@ -388,7 +388,7 @@ const App = ({ notes }) => {
       <ul>
         // highlight-start
         {notes.map((note, i) => 
-          <Note key={i} note={note} />
+          <Note key={note.id} note={note} />
         )}
          // highlight-end
       </ul>
@@ -466,7 +466,7 @@ const App = ({ notes }) => {
       <h1>Notes</h1>
       <ul>
         {notes.map((note, i) => 
-          <Note key={i} note={note} />
+          <Note key={note.id} note={note} />
         )}
       </ul>
     </div>
