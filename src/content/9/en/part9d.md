@@ -42,7 +42,7 @@ one using pure JavaScript. The only differences are, that the <i>.js</i> and <i>
 <!-- Now, let's take a look at the <i>tsconfig.json</i> file that has been created for us. Everything should be more or less fine within the file, except for that at the moment the configuration also allows JavaScript files to be compiled, because <i>allowJs</i> is set to <i>true</i>. That would be fine if you need to mix TypeScript and JavaScript (e.g. if you are in the middle of transforming a JavaScript project into TypeScript or some other reason), but we want our app to be purely TypeScript, so let's change that setting to <i>false</i>. -->
 Now, let's take a look at the <i>tsconfig.json</i> file that has been created for us.
 Everything in it should be more or less fine, except at the moment the configuration allows compiling JavaScript files, because <i>allowJs</i> is set to <i>true</i>.
-That would be fine if you need to mic TypeScript and JavaScript (e.g if you are in the process of transforming a JavaScript project into TypeScript or something like that), but we want to create a pure TypeScript app, so let's change that configuration to  <i>false</i>.
+That would be fine if you need to mix TypeScript and JavaScript (e.g if you are in the process of transforming a JavaScript project into TypeScript or something like that), but we want to create a pure TypeScript app, so let's change that configuration to  <i>false</i>.
 
 <!-- Earlier we added eslint to help us enforce coding style in backend, so let's do the same with this app. We do not need to install any dependencies since create-react-app has taken care of that already. -->
 In our previous project we used eslint to help us enforce coding style, and we'll do the same with this app. We do not need to install any dependencies, since create-react-app has taken care of that already.
@@ -414,7 +414,7 @@ interface CoursePartThree extends CoursePartBase {
 How should we now use these types in our components?
 
 <!-- One handy way to use these kind of types in TypeScript is by using _switch case_ expressions. Once you have either explicitly declared, or TypeScript has inferred that a variable holds a type union, and each type in the type union contains an attribute, that can be used as a type identifier, you can build your switch case around that attribute and TypeScript will then know which attributes are available within each case block. -->
-One handy way to use these kind of types in TypeScript is by using _switch case_ expressions. Once ou have either explicitly declared or TypeScript has inferred that a variable is of type union and each type in the type union contains a certain attribute, 
+One handy way to use these kind of types in TypeScript is by using _switch case_ expressions. Once you have either explicitly declared or TypeScript has inferred that a variable is of type union and each type in the type union contains a certain attribute, 
 we can use that as a type identifier. 
 We can then build a switch case around that attribute and TypeScript will know which attributes are available within each case block.
 
@@ -614,7 +614,7 @@ Before diving into the code, let us start both the frontend and the backend.
 
 <!-- If all goes well you should see a patient listing page, which fetches a patient list from our backend and renders the list in a simple table, and a button for creating new patients to the backend. As we are not using a database, but mock data, the data will not persist, i.e. closing the backend forgets all the added data. UI has not clearly been the strong point of the creators of this app, so let's disregard the UI for now. -->
 If all goes well you should see a patient listing page. It fetches a list of patients from our backend, and renders it to the screen as a simple table. There is also a button for creating new patients to the backend.
-As we are using mock data instead of a database, the data will not presist - closing the backend will 
+As we are using mock data instead of a database, the data will not persist - closing the backend will 
 delete all the data we have added. 
 UI design has clearly not been a strong point of the creators, so let's disregard the UI for now.
 
@@ -829,10 +829,10 @@ const PatientListPage: React.FC = () => {
 ```
 
 <!-- Do not worry if this seems confusing, it surely is until you have studied the [context documentation](https://reactjs.org/docs/context.html) and its use in [state management](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe). You do not need to understand all this completely for doing the exercises!  -->
-Don't worry if this seems confusing, is surely is that until you have studied the [context's documentation](https://reactjs.org/docs/context.html) and  its use in [state management](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe).  You do not need to understand all this completely for doing the exercises!
+Don't worry if this seems confusing, it surely is that until you have studied the [context's documentation](https://reactjs.org/docs/context.html) and  its use in [state management](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe).  You do not need to understand all this completely for doing the exercises!
 
 <!-- It is actually quite typical that when you start working with an existing application, at the beginning you do not understand 100% of what happens under the hood. If the app has been properly structured you can trust that if you are making careful modifications, the app still works despite of the fact that you did not understand all the internals. Over the time you can then get a grasp of the more unfamiliar parts, but it does not happen overnight when working with a large codebase. -->
-Is is actually quite common that when you start working on an existing application, you do not understand 100% of what happens under the hood in the beginning. 
+It is actually quite common that when you start working on an existing application, you do not understand 100% of what happens under the hood in the beginning. 
 If the app has been properly structured, you can trust that if you make careful modifications, the app still works despite the fact that you did not understand  all the internal mechanisms. 
 Over the time you will get a grasp on the more unfamiliar parts, but it does not happen overnight when working with a large codebase.
 
@@ -1476,7 +1476,7 @@ With this material you should be able to complete the rest of this part's exerci
 #### 9.23: patientor, step8
 
 <!-- So far we have established that the patients can have different types of entries, but we don't yet have any way of adding entries for our patients in our app, so it would at the moment be a pretty useless electronic medical record.  -->
-We have established that patients can have different kinds of entries. We don't yet have any way of adding entries to patients in our app, so at the moment it is a pretty useless as an electronic medical record.
+We have established that patients can have different kinds of entries. We don't yet have any way of adding entries to patients in our app, so at the moment it is pretty useless as an electronic medical record.
 
 Your next task is to add an endpoint <i>/api/patients/:id/entries</i> to your backend, through which you can POST an entry for a patient. 
 
