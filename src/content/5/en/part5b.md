@@ -790,6 +790,8 @@ module.exports = {
 }
 ```
 
+NOTE: If you are using Visual Studio Code together with ESLint plugin, you might need to add additional workspace setting for it to work. If you are seeing ```Failed to load plugin react: Cannot find module 'eslint-plugin-react' ``` additional configuration is needed. Adding line ```"eslint.workingDirectories": [{ "mode": "auto" }] ``` to settings.json in the workspace seems to work. See [here](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807) for more information. 
+
 Let's create [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) file with the following contents to the repository root
 
 ```bash
