@@ -652,4 +652,12 @@ you can access the value of the key from the _process.env_ object:
 const api_key = process.env.REACT_APP_API_KEY
 // variable api_key has now the value set in startup
 ```
+
+Note that if you created the application using `npx create-react-app ...` and you want to use a different name for your environment variable then the environment variable name must still begin with `REACT_APP_`. You can also use a `.env` file rather than defining it on the command line each time by creating a file entitled '.env' in the root of the project and adding the following. 
+
+```
+# .env
+
+REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3
+```
 </div>
