@@ -481,7 +481,7 @@ The code for the navigation bar is the following
     {user
       ? <em>{user} logged in</em>
       : <Button color="inherit" component={Link} to="/login">
-          LINK
+          login
         </Button>
     }                              
   </Toolbar>
