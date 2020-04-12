@@ -520,7 +520,9 @@ There exists both good and poor guides for Javascript on the internet. Most of t
 
 It is highly recommended to immediately read [A re-introduction to JavaScript (JS tutorial)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript) on Mozillas website.
 
-If you wish to get to know Javascript deeply there is a great free book series on the internet called [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS).
+If you wish to get to know Javascript deeply there is a great free book series on the internet called [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS). 
+
+Another great resource for learning Javascript is [javascript.info](https://javascript.info).
 
 [egghead.io](https://egghead.io) has plenty of quality screencasts on Javascript, React, and other interesting topics. Unfortunately, some of the material is behind a paywall.
 
