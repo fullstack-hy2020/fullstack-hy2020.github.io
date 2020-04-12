@@ -454,7 +454,7 @@ Navigaatiopalkin koodi kokonaisuudessaan on seuraava
     {user
       ? <em>{user} logged in</em>
       : <Button color="inherit" component={Link} to="/login">
-          LINK
+          login
         </Button>
     }                              
   </Toolbar>
