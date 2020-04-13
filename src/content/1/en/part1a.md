@@ -47,7 +47,7 @@ const App = () => (
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-The files <i>App.js</i>, <i>App.css</i>, <i>App.test.js</i>, <i>logo.svg</i> and <i>serviceWorker.js</i> may be deleted as they are not needed in our application right now.
+The files <i>App.js</i>, <i>App.css</i>, <i>App.test.js</i>, <i>logo.svg</i>, _setupTests.js_ and <i>serviceWorker.js</i> may be deleted as they are not needed in our application right now.
 
 ### Component
 
@@ -462,7 +462,7 @@ const App = () => {
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-and remove extra files (App.js, App.css, App.test.js, logo.svg, serviceWorker.js).
+and remove extra files (App.js, App.css, App.test.js, logo.svg, setupTests.js, serviceWorker.js).
 
 Unfortunately, the entire application is in the same component. Refactor the code so that it consists of three new components: <i>Header</i>, <i>Content</i>, and <i>Total</i>. All data still resides in the <i>App</i> component, which passes the necessary data to each component using <i>props</i>. <i>Header</i> takes care of rendering the name of the course, <i>Content</i> renders the parts and their number of exercises and <i>Total</i> renders the total number of exercises.
 
