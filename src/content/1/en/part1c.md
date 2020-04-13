@@ -551,16 +551,6 @@ const Display = (props) => {
 }
 ```
 
-We can also utilize [destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) directly in the component function's parameters. Since we're interested in the _counter_ property of the props object, it's possible to simplify the component into the following form:
-
-```js
-const Display = ({ counter }) => {
-  return (
-    <div>{counter}</div>
-  )
-}
-```
-
 Using the component is straightforward, as we only need to pass the state of the _counter_ to component:
 
 ```js
