@@ -318,8 +318,7 @@ Also keep in mind that **React component names must be capitalized**. If you try
 const footer = () => {
   return (
     <div>
-      greeting app created by 
-      <a href="https://github.com/mluukkai">mluukkai</a>
+      greeting app created by <a href="https://github.com/mluukkai">mluukkai</a>
     </div>
   )
 }
