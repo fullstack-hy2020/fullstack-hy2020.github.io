@@ -749,7 +749,7 @@ app.post('/api/notes', (request, response) => {
 The event handler function can access the data from the <i>body</i> property of the _request_ object.
 
 
-Without a the json-parser, the <i>body</i> property would be undefined. The json-parser functions so that it takes the JSON data of a request, transforms it into a JavaScript object and then attaches it to the <i>body</i> property of the _request_ object before the route handler is called.
+Without the json-parser, the <i>body</i> property would be undefined. The json-parser functions so that it takes the JSON data of a request, transforms it into a JavaScript object and then attaches it to the <i>body</i> property of the _request_ object before the route handler is called.
 
 
 For the time being, the application does not do anything with the received data besides printing it to the console and sending it back in the response.
