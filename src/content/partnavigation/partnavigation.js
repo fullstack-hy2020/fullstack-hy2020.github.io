@@ -66,7 +66,7 @@ module.exports = {
     },
     '1': {
       a: 'Introduction to React',
-      b: 'Javascript',
+      b: 'JavaScript',
       c: 'Component state, event handlers',
       d: 'A more complex state, debugging React apps',
     },
