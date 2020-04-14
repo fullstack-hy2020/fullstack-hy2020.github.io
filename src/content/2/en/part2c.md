@@ -40,7 +40,7 @@ Create a file named <i>db.json</i> in the root directory of the project with the
 
 You can [install](https://github.com/typicode/json-server#getting-started) JSON server globally on your machine using the command _npm install -g json-server_. A global installation requires administrative privileges, which means that it is not possible on the faculty computers or freshman laptops.
 
-However, a global installation is not necessary, since we can run the <i>json-server</i> using the command _npx_:
+However, a global installation is not necessary.  From the root directory of your app, we can run the <i>json-server</i> using the command _npx_:
 
 ```js
 npx json-server --port 3001 --watch db.json
