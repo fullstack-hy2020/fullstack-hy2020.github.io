@@ -569,7 +569,7 @@ const ALL_PERSONS = gql`
 const PersonForm = (props) => {
   // ...
 
-  const [ createPersom ] = useMutation(CREATE_PERSON, {
+  const [ createPerson ] = useMutation(CREATE_PERSON, {
     refetchQueries: [ { query: ALL_PERSONS } ] // highlight-line
   })
 ```
@@ -635,7 +635,7 @@ function it receives as a parameter to set an error message:
 const PersonForm = ({ setError }) => {
   // ... 
 
-  const [ createPersom ] = useMutation(CREATE_PERSON, {
+  const [ createPerson ] = useMutation(CREATE_PERSON, {
     refetchQueries: [  {query: ALL_PERSONS } ],
     // highlight-start
     onError: (error) => {
