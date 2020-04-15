@@ -83,7 +83,7 @@ Let's expand the error handler to deal with these validation errors:
 const errorHandler = (error, request, response, next) => {
   console.error(error.message)
 
-  if (error.name === 'CastError' && error.kind == 'ObjectId') {
+  if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
   } else if (error.name === 'ValidationError') { // highlight-line
     return response.status(400).json({ error: error.message }) // highlight-line
