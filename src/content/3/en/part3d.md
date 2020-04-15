@@ -430,16 +430,15 @@ This includes a rule that warns about _console.log_ commands. [Disabling](https:
 {
   // ...
   'rules': {
-      // ...
-      'eqeqeq': 'error',
-      'no-trailing-spaces': 'error',
-      'object-curly-spacing': [
-          'error', 'always'
-      ],
-      'arrow-spacing': [
-          'error', { 'before': true, 'after': true }
-      ]
-    },
+    // ...
+    'eqeqeq': 'error',
+    'no-trailing-spaces': 'error',
+    'object-curly-spacing': [
+        'error', 'always'
+    ],
+    'arrow-spacing': [
+        'error', { 'before': true, 'after': true }
+    ],
     'no-console': 0 // highlight-line
   },
 }
