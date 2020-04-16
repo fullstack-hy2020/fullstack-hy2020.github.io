@@ -634,7 +634,7 @@ At this point, you can choose to simply allow users to create all phonebook entr
 
 ### Error handling
 
-If we try to visit the URL of a note with an id that does not actually exist e.g. <http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431> where <i>5a3b80015b6ec6f1bdf68d</i> is not an id stored in the database, then the browser will simply get "stuck" since the server never responds to the request.
+If we try to visit the URL of a note with an id that does not actually exist e.g. <http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431> where <i>5c41c90e84d891c15dfa3431</i> is not an id stored in the database, then the browser will simply get "stuck" since the server never responds to the request.
 
 We can see the following error message appear in the logs for the backend:
 
@@ -915,11 +915,11 @@ Change the backend so that deleting phonebook entries is reflected in the databa
 
 Verify that the frontend still works after making the changes.
 
-#### 3.16: Phonebook database, step3
+#### 3.16: Phonebook database, step4
 
 Move the error handling of the application to a new error handler middleware. 
 
-#### 3.17*: Phonebook database, step4
+#### 3.17*: Phonebook database, step5
 
 If the user tries to create a new phonebook entry for a person whose name is already in the phonebook, the frontend will try to update the phone number of the existing entry by making an HTTP PUT request to the entry's unique URL.
 
@@ -927,7 +927,7 @@ Modify the backend to support this request.
 
 Verify that the frontend works after making your changes.
 
-#### 3.18*: Phonebook database step5
+#### 3.18*: Phonebook database step6
 
 Also update the handling of the <i>api/persons/:id</i> and <i>info</i> routes to use the database, and verify that they work directly with the browser, Postman, or VS Code REST client.
 
