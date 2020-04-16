@@ -201,7 +201,7 @@ const App = (props) => {
 
 ### Key-attribute
 
-Even though the application seems to be working, there is a nasty warning on the console: 
+Even though the application seems to be working, there is a nasty warning in the console: 
 
 ![](../../images/2/1a.png)
 
@@ -274,7 +274,7 @@ console.log(result)
 ```
 
 <i>[1, 2, 3]</i>  will be printed to the console.
- _Map_ always creates a new array, the elements of which have been created from the elements of the original array by <i>mapping</i>, using the function given as a parameter to the map method. 
+ _map_ always creates a new array, the elements of which have been created from the elements of the original array by <i>mapping</i>, using the function given as a parameter to the _map_ method. 
 
 
 The function is
@@ -447,13 +447,13 @@ const App = ({ notes }) => {
 
 The component exported by the module is now available for use in the variable <i>Note</i>, just as it was earlier. 
 
-Note, that when importing our own components their location must be given <i>in relation to the importing file</i>:
+Note that when importing our own components, their location must be given <i>in relation to the importing file</i>:
 
 ```js
 './components/Note'
 ```
 
-The period in the beginning refers to the current directory, so the module's location is a file called <i>Note.js</i> in a sub-directory of the current <i>components</i>. directory. The filename extension can be omitted.
+The period in the beginning refers to the current directory, so the module's location is a file called <i>Note.js</i> in a sub-directory of the current <i>components</i> directory. The filename extension (_.js_) can be omitted.
 
 <i>App</i> is a component as well, so let's declare it in its own module as well. Since it is the root component of the application, we'll place it in the <i>src</i> directory. The contents of the file are as follows: 
 
@@ -500,7 +500,7 @@ Modules have plenty of other uses other than enabling component declarations to 
 The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1).
 
 
-Note that the master branch of the repository contains the code for a later version of the application. The current code is in the branch [part2-1](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1):
+Note that the <i>master</i> branch of the repository contains the code for a later version of the application. The current code is in the branch [part2-1](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1):
 
 ![](../../images/2/2e.png)
 
@@ -540,7 +540,7 @@ const App = () => {
 ```
 
 
-We'll hone in on the reason for the breakdown by adding <em>console.log</em> commands to the code. Because the first thing to be rendered is the <i>App</i> component, it's worth putting the first console.log there: 
+We'll hone in on the reason for the breakdown by adding <em>console.log</em> commands to the code. Because the first thing to be rendered is the <i>App</i> component, it's worth putting the first <em>console.log</em> there: 
 
 ```js
 const App = () => {
@@ -548,7 +548,7 @@ const App = () => {
     // ...
   }
 
-  console.log('App toimii...') // highlight-line
+  console.log('App works...') // highlight-line
 
   return (
     // ..
@@ -570,7 +570,7 @@ const Course = ({ course }) => (
 )
 ```
 
-The component should be changed to its longer form, in order for us to add the printing: 
+The component should be changed to its longer form in order for us to add the printing: 
 
 ```js
 const Course = ({ course }) => { 
@@ -599,7 +599,7 @@ const Course = (props) => { // highlight-line
 
 If the problem has still not been resolved, there really isn't much to do apart from continuing to bug-hunt by sprinkling more _console.log_ statements around your code. 
 
-I added this chapter to the material after the model answer for the next question exploded completely (due to props being of the wrong type), and I had to debug it using console.log.
+I added this chapter to the material after the model answer for the next question exploded completely (due to props being of the wrong type), and I had to debug it using <em>console.log</em>.
 
 
 </div>
