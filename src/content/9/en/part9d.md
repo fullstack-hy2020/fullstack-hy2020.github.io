@@ -53,7 +53,8 @@ We configure eslint in <i>.eslintrc</i> with following settings:
 {
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "jest": true
   },
   "extends": [
     "eslint:recommended",
@@ -67,7 +68,9 @@ We configure eslint in <i>.eslintrc</i> with following settings:
       "version": "detect"
     }
   },
-  "rules": {}
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": 0
+  }
 }
 ```
 
