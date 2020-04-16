@@ -290,13 +290,18 @@ The responsibility of establishing the connection to the database has been given
 ```js
 const mongoose = require('mongoose')
 
+mongoose.set('useFindAndModify', false)
+
 const noteSchema = new mongoose.Schema({
   content: {
     type: String,
     required: true,
     minlength: 5
   },
-  date: Date,
+  date: {
+    type: Date,
+    required: true,
+  },
   important: Boolean,
 })
 
