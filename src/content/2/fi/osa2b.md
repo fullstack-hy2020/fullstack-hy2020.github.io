@@ -335,7 +335,7 @@ notes.filter(note => note.important)
 
 Tässä käytettiin kuitenkin ensin vertailuoperaattoria, mm. korostamaan erästä tärkeää seikkaa: Javascriptissa <em>arvo1 == arvo2</em> ei toimi kaikissa tilanteissa loogisesti ja onkin varmempi käyttää aina vertailuissa muotoa <em>arvo1 === arvo2</em>. Enemmän aiheesta [täällä](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness).
 
-Filtteröinnin toimivuutta voi jo nyt kokeilla vaihtelemalla sitä, miten tilan kentän <em>showAll</em> alkuarvo määritelään konstruktorissa.
+Filtteröinnin toimivuutta voi jo nyt kokeilla vaihtelemalla sitä, miten tilan kentän <em>showAll</em> alkuarvo määritellään konstruktorissa.
 
 Lisätään sitten toiminnallisuus, joka mahdollistaa <em>showAll</em>:in tilan muuttamisen sovelluksesta.
 
