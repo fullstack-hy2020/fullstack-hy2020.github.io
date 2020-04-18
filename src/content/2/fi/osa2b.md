@@ -527,7 +527,7 @@ const App = () => {
 }
 ```
 
-Näin vältytään turhalta manuaaliselta työltä, missä testaaminen edellyttäisi myös testiaineiston syöttämistä käsin soveluksen lomakkeen kautta.
+Näin vältytään turhalta manuaaliselta työltä, missä testaaminen edellyttäisi myös testiaineiston syöttämistä käsin sovelluksen lomakkeen kautta.
 
 <h4>2.10: puhelinluettelo step5</h4>
 
