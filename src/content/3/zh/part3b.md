@@ -254,7 +254,7 @@ const getAll = () => {
 该文件包含一些指令，用于获取定义应用样式的 CSS 样式表，以及两个<i>script</i> 标签，这些标记说明浏览器获取应用的 JavaScript 代码——即实际的 React 应用。
 
 <!-- The React code fetches notes from the server address <http://localhost:3001/notes> and renders them to the screen. The communications between the server and the browser can be seen in the <i>Network</i> tab of the developer console: -->
-React代码从服务器地址 http://localhost:3001/notes 获取便笺，并将它们渲染到屏幕上。 服务器和浏览器之间的通信可以在开发控制台的<i>Network</i> 选项卡中看到: 
+React代码从服务器地址 <http://localhost:3001/api/notes>  获取便笺，并将它们渲染到屏幕上。 服务器和浏览器之间的通信可以在开发控制台的<i>Network</i> 选项卡中看到: 
 
 ![](../../images/3/29ea.png)
 

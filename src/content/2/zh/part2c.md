@@ -47,10 +47,10 @@ lang: zh
 
 
 <!-- You can [install](https://github.com/typicode/json-server#install) JSON server globally on your machine using the command _npm install -g json-server_. A global installation requires administrative privileges, which means that it is not possible on the faculty computers or freshman laptops. -->
-您可以使用命令 _npm install -g json-server_在您的机器上[安装](https://github.com/typicode/JSON-server#install) JSON 服务器。 global 安装需要管理员权限，这意味着它不可能在教学电脑或新生的笔记本电脑上安装。
+您可以使用命令 _npm install -g json-server_在您的机器上[安装](https://github.com/typicode/json-server#getting-started) JSON 服务器。 global 安装需要管理员权限，这意味着它不可能在教学电脑或新生的笔记本电脑上安装。
 
 <!-- However, a global installation is not necessary, since we can run the <i>json-server</i> using the command _npx_: -->
-但是，全局安装不是必须的，因为我们可以使用 npx 命令运行<i>json-server</i>:
+但是，全局安装不是必须的。因为我们可以在应用的根目录使用 npx 命令运行<i>json-server</i>:
 
 ```js
 npx json-server --port 3001 --watch db.json
@@ -797,6 +797,15 @@ REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start
 ```js
 const api_key = process.env.REACT_APP_API_KEY
 // variable api_key has now the value set in startup
+```
+<!-- Note that if you created the application using `npx create-react-app ...` and you want to use a different name for your environment variable then the environment variable name must still begin with `REACT_APP_`. You can also use a `.env` file rather than defining it on the command line each time by creating a file entitled '.env' in the root of the project and adding the following.  -->
+
+注意，如果你使用`npx create-react-app ...` 创建了应用，并且想要为环境变量使用其他名称，则环境变量必须以`REACT_APP_`开头。你还可以通过在项目中创建一个名为`.env`的文件并添加以下内容来使用'.env' 文件，而不是每次都在命令行中定义。
+
+```
+# .env
+
+REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3
 ```
 </div>
 

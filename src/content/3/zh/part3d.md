@@ -84,7 +84,7 @@ app.post('/api/notes', (request, response, next) => { // highlight-line
 const errorHandler = (error, request, response, next) => {
   console.error(error.message)
 
-  if (error.name === 'CastError' && error.kind == 'ObjectId') {
+  if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
   } else if (error.name === 'ValidationError') { // highlight-line
     return response.status(400).json({ error: error.message }) // highlight-line
@@ -171,12 +171,12 @@ dotenv 中定义的环境变量仅在后端时使用,不处于<i>生产模式</i
 
 <!-- We defined the environment variables for development in file <i>.env</i>, but the environment variable that defines the database URL in production should be set to Heroku with the _heroku config:set_ command. -->
 我们在文件 <i>.env</i>中定义了用于开发的环境变量。 但是在生产环境中定义数据库 URL 的环境变量应该使用  _heroku config:set_ 命令来设置 Heroku。
-```
+```bash
 heroku config:set MONGODB_URI=mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true
 ```
-HUOM: if the command causes an error, give the value of MONGODB_URI in apostrophes:
+<!-- HUOM: if the command causes an error, give the value of MONGODB_URI in apostrophes: -->
 
-如果命令行产生了一个错误，在撇号中给 MONGODB_URI 设置一个值
+**注意**：如果命令行产生了一个错误，在撇号中给 MONGODB_URI 设置一个值
 
 ```bash
 heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true'

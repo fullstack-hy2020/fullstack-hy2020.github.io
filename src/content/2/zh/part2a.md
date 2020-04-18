@@ -326,11 +326,11 @@ const result = notes.map(note => note.id)
 console.log(result)
 ```
 
-<i>[1, 2, 3]</i>  will be printed to the console.
+<!-- <i>[1, 2, 3]</i>  will be printed to the console. -->
 控制台会打印出<i>[1, 2, 3]</i>。
 
- _Map_ always creates a new array, the elements of which have been created from the elements of the original array by <i>mapping</i>, using the function given as a parameter to the map method. 
-Map 总是会创建一个新数组，其元素是从原始数组的元素通过<i>mapping映射</i>创建的，映射的逻辑是使用作为 Map 方法传递进去的函数。 
+ <!-- _map_ always creates a new array, the elements of which have been created from the elements of the original array by <i>mapping</i>, using the function given as a parameter to the map method.  -->
+ _map_ 总是会创建一个新数组，其元素是从原始数组的元素通过<i>mapping映射</i>创建的，映射的逻辑是使用作为 _map_ 方法传递进去的函数。 
 
 <!-- The function is -->
 这个函数是
@@ -539,7 +539,7 @@ const App = ({ notes }) => {
 ```
 
 <!-- The period in the beginning refers to the current directory, so the module's location is a file called <i>Note.js</i> in a sub-directory of the current <i>components</i>. directory. The filename extension can be omitted. -->
-开头的句点指的是当前工作目录，因此模块的位置是当前<i>components</i> 的子目录中的一个名为<i>Note.js</i> 的文件。 文件扩展名可以省略。
+开头的句点指的是当前工作目录，因此模块的位置是当前<i>components</i> 的子目录中的一个名为<i>Note.js</i> 的文件。 文件扩展名(_.js_)可以省略。
 
 <!--<i>App</i> is a component as well, so let's declare it in its own module as well. Since it is the root component of the application, we'll place it in the <i>src</i> directory. The contents of the file are as follows:--> 
 <i>App</i>也是一个组件，所以让我们在它自己的模块中声明它。 因为它是应用的根组件，所以我们将它放在  <i>src</i> 目录中。 文件内容如下:
@@ -593,7 +593,7 @@ ReactDOM.render(
 应用的当前代码可以在 [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1)上找到。
 
 <!-- Note that the master branch of the repository contains the code for a later version of the application. The current code is in the branch [part2-1](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1): -->
-注意，仓库的主分支包含应用的后续版本的代码。 当前的代码在分支 [part2-1](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1)中:
+注意，仓库的<i>主分支</i>包含应用的后续版本的代码。 当前的代码在分支 [part2-1](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1)中:
 
 ![](../../images/2/2e.png)
 
@@ -653,7 +653,7 @@ const App = () => {
     // ...
   }
 
-  console.log('App toimii...') // highlight-line
+  console.log('App works...') // highlight-line
 
   return (
     // ..
@@ -755,7 +755,8 @@ const Course = (props) => { // highlight-line
 <h4>2.1: course contents 步骤6</h4>
 
 <!-- Let's finish the code for rendering course contents from exercises 1.1 - 1.5. You can start with the code from the model answers.  -->
-让我们完成练习 1.1 - 1.5中，用于渲染课程内容的代码。 您可以从模型答案的代码开始。
+<!-- The model answers for part 1 can be found by going to the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen), click on <i>my submissions</i> at the top, and in the row corresponding to part 1 under the <i>solutions</i> column click on <i>show</i>. To see the solution to the <i>course info<i/> exercise, click on _index.js_ under <i>kurssitiedot</i> ("kurssitiedot" means "course info"). -->
+让我们完成练习 1.1 - 1.5中，用于渲染课程内容的代码。 您可以从模型答案的代码开始。第一章中的模型答案可以到 [提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)来找到，单击顶部的<i>my submissions</i>，在对应第一章中下面<i>solutions</i>列，点击<i>show</i>。 如果要查看<i>course info</i> 练习，点击 <i>kurssitiedot</i> 下的_index.js_ ("kurssitiedot" 表示课程信息)
 
 <!-- **Note that if you copy a project from one place to another, you might have to destroy the <i>node\_modules</i> directory and install the dependencies again with the command _npm install_ before you can start the application.** -->
 

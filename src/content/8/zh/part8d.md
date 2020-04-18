@@ -20,7 +20,7 @@ lang: zh
 
 ```js
 const App = () => {
-  const [token, setToken] = useState(null) // hightlight-line
+  const [token, setToken] = useState(null) // highlight-line
 
   // ...
 

@@ -874,6 +874,9 @@ module.exports = {
 }
 ```
 
+<!-- NOTE: If you are using Visual Studio Code together with ESLint plugin, you might need to add additional workspace setting for it to work. If you are seeing ```Failed to load plugin react: Cannot find module 'eslint-plugin-react' ``` additional configuration is needed. Adding line ```"eslint.workingDirectories": [{ "mode": "auto" }] ``` to settings.json in the workspace seems to work. See [here](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807) for more information.  -->
+注意： 如果你将 Visual Studio Code 与 ESLint 插件一起使用，你可能需要增加额外的workspace级别的设置才能使其正常工作。如果看到```Failed to load plugin react: Cannot find module 'eslint-plugin-react' ``` 说明需要一些额外的配置，增加```"eslint.workingDirectories": [{ "mode": "auto" }] ``` 到 workspace 的settings.json文件中就运行正常了，具体详见[这里](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807)
+
 <!-- Let's create [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) file with the following contents to the repository root -->
 让我们创建一个 [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) 添加如下内容：
 

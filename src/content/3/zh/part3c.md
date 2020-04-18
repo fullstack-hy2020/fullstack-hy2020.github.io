@@ -761,7 +761,7 @@ app.get('/api/notes/:id', (request, response) => {
 ### Error handling
 【错误处理】
 <!-- If we try to visit the URL of a note with an id that does not actually exist e.g. <http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431> where <i>5a3b80015b6ec6f1bdf68d</i> is not an id stored in the database, then the browser will simply get "stuck" since the server never responds to the request. -->
-如果我们试图向数据库访问一个实际上并不存在的 id 的便笺的 URL，比如 http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431，其中<i>5a3b80015b6ec6f1bdf68d</i> 不是一个存储在数据库中的 id，那么浏览器将简单地“卡住” ，因为服务器无法响应请求。
+如果我们试图向数据库访问一个实际上并不存在的 id 的便笺的 URL，比如 http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431，其中<i>5c41c90e84d891c15dfa3431</i> 不是一个存储在数据库中的 id，那么浏览器将简单地“卡住” ，因为服务器无法响应请求。
 
 <!-- We can see the following error message appear in the logs for the backend: -->
 我们可以在后端的日志中看到如下错误消息:
@@ -1084,11 +1084,11 @@ module.exports = mongoose.model('Note', noteSchema)
 <!-- Verify that the frontend still works after making the changes. -->
 验证前端在进行更改后是否仍然可用。
 
-#### 3.16: Phonebook database, 步骤3
+#### 3.16: Phonebook database, 步骤4
 <!-- Move the error handling of the application to a new error handler middleware.  -->
 将应用的错误处理移动到新的错误处理程序中间件。
 
-#### 3.17*: Phonebook database, 步骤4
+#### 3.17*: Phonebook database, 步骤5
 <!-- If the user tries to create a new phonebook entry for a person whose name is already in the phonebook, the frontend will try to update the phone number of the existing entry by making an HTTP PUT request to the entry's unique URL. -->
 如果用户试图为名字已经在电话簿中的人创建一个新的电话簿条目，前端将通过向条目的唯一 URL 发出 HTTP PUT 请求来更新现有条目的电话号码。
 
@@ -1098,7 +1098,7 @@ module.exports = mongoose.model('Note', noteSchema)
 <!-- Verify that the frontend works after making your changes. -->
 在进行更改后，验证前端是否工作正常。
 
-#### 3.18*: Phonebook database 步骤5
+#### 3.18*: Phonebook database 步骤6
 <!-- Also update the handling of the <i>api/persons/:id</i> and <i>info</i> routes to use the database, and verify that they work directly with the browser, Postman, or VS Code REST client. -->
 还要更新使用数据库的 <i>api/persons/:id</i> 和<i>info</i> 路由的处理，并验证它们是否直接与浏览器、Postman或 VS Code REST 客户端一起工作。
 

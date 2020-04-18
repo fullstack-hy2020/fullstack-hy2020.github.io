@@ -554,10 +554,10 @@ export default App
 ```
 
 <!-- If the <em>newName</em> variable holds the value <i>arto</i>, the template string expression returns the string -->
-如果<em>newName</em> 变量包含值<i>arto</i>，则模板字符串表达式返回字符串
+如果<em>newName</em> 变量包含值<i>Arto Hellas</i>，则模板字符串表达式返回字符串
 
 ```js
-`arto is already added to phonebook`
+`Arto Hellas is already added to phonebook`
 ```
 
 <!-- The same could be done in a more Java-like fashion by using the plus operator: -->

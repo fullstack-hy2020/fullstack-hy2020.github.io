@@ -12,7 +12,7 @@ lang: zh
 
 <!-- The easiest way to get started by far is using a tool called [create-react-app](https://github.com/facebookincubator/create-react-app). It is possible (but not necessary) to install <i>create-react-app</i> on your machine if the <i>npm</i> tool that was installed along with Node has a version number of at least <i>5.3</i>. -->
 
-目前来说，创建一个React应用最简单的方式是使用一个叫做[create-react-app](https://github.com/facebookincubator/create-react-app) 的工具。 如果你随着node安装的npm工具版本号不小于5.3，你就可以（也不是必须的）在机器上安装 <i>create-react-app</i> 了。
+目前来说，创建一个React应用最简单的方式是使用一个叫做[create-react-app](https://github.com/facebook/create-react-app) 的工具。 如果你随着node安装的npm工具版本号不小于5.3，你就可以（也不是必须的）在机器上安装 <i>create-react-app</i> 了。
 
 <!-- Let's create an application called <i>part1</i> and navigate to its directory. -->
 让我们创建一个名为 <i>part1</i> 的应用，并进入到它的目录。
@@ -59,7 +59,7 @@ ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
 <!-- The files <i>App.js</i>, <i>App.css</i>, <i>App.test.js</i>, <i>logo.svg</i> and <i>serviceWorker.js</i> may be deleted as they are not needed in our application right now. -->
-文件<i>App.js</i>、<i>App.css</i>、<i>App.test.js</i>、<i>logo.svg</i> 和<i>serviceWorker.js</i> 可以删除，因为它们目前在我们的应用中不并需要。
+文件<i>App.js</i>、<i>App.css</i>、<i>App.test.js</i>、<i>logo.svg</i>、, <i>setupTests.js</i>  和<i>serviceWorker.js</i> 可以删除，因为它们目前在我们的应用中不并需要。
 
 ### Component
 【组件】
@@ -381,8 +381,8 @@ const App = () => {
 const footer = () => {
   return (
     <div>
-      greeting app created by 
       <a href="https://github.com/mluukkai">mluukkai</a>
+      greeting app created by <a href="https://github.com/mluukkai">mluukkai</a>
     </div>
   )
 }
@@ -547,7 +547,7 @@ ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
 <!-- and remove extra files (App.js, App.css, App.test.js, logo.svg, serviceWorker.js). -->
-并删除额外的文件(App.js、 App.css、 App.test.js、 logo.svg、 serviceWorker.js)。
+并删除额外的文件(App.js、 App.css、 App.test.js、logo.svg、setupTests.js、serviceWorker.js)。
 
 <!-- Unfortunately, the entire application is in the same component. Refactor the code so that it consists of three new components: <i>Header</i>, <i>Content</i>, and <i>Total</i>. All data still resides in the <i>App</i> component, which passes the necessary data to each component using <i>props</i>. <i>Header</i> takes care of rendering the name of the course, <i>Content</i> renders the parts and their number of exercises and <i>Total</i> renders the total number of exercises. -->
 
