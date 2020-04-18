@@ -474,10 +474,10 @@ Anna tilanteessa virheilmoitus komennolla [alert](https://developer.mozilla.org/
 `${newName} is already added to phonebook`
 ```
 
-Jos muuttujalla <em>newName</em> on arvona <i>arto</i>, on tuloksena merkkijono
+Jos muuttujalla <em>newName</em> on arvona <i>Arto Hellas</i>, on tuloksena merkkijono
 
 ```js
-`arto is already added to phonebook`
+`Arto Hellas is already added to phonebook`
 ```
 
 Sama toki hoituisi javamaisesti merkkijonojen plus-metodilla
