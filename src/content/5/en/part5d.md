@@ -504,7 +504,7 @@ module.exports = app
 after the changes a HTTP POST request to the <i>/api/testing/reset</i> endpoint empties the database.
 
 <!-- Backendin testejä varten muokattu koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1), branchissä <i>part5-1</i>. -->
-The modified backend code can be found from [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1) branch <i>part5-1</i>.
+The modified backend code can be found from [github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1) branch <i>part5-1</i>.
 
 <!-- Muutetaan nyt testien <i>beforeEach</i>-alustuslohkoa siten, että se nollaa palvelimen tietokannan aina ennen testien suorittamista. -->
 Next we will change the <i>beforeEach</i> block so, that it empties the server's database before tests are run. 
@@ -605,7 +605,7 @@ The first command searches for a component containing the text <i>another note c
 The second command checks that the text on the button has changed to <i>make not important</i>.
 
 <!-- Testit ja frontendin tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9), branchissa <i>part5-9</i>. -->
-The tests and the current frontend code can be found from [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9) branch <i>part5-9</i>.
+The tests and the current frontend code can be found from [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9) branch <i>part5-9</i>.
 
 ### Failed login test
 
@@ -941,7 +941,7 @@ describe('Note app', function() {
 ```
 
 <!-- Testit ja frontendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-10), branchissa <i>part5-10</i>. -->
-The tests and the frontend code can be found from [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-10) branch <i>part5-10</i>.
+The tests and the frontend code can be found from [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-10) branch <i>part5-10</i>.
 
 ### Changing the importance of a note
 

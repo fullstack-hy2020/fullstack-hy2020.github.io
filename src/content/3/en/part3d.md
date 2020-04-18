@@ -83,7 +83,7 @@ Let's expand the error handler to deal with these validation errors:
 const errorHandler = (error, request, response, next) => {
   console.error(error.message)
 
-  if (error.name === 'CastError' && error.kind == 'ObjectId') {
+  if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
   } else if (error.name === 'ValidationError') { // highlight-line
     return response.status(400).json({ error: error.message }) // highlight-line
@@ -163,10 +163,11 @@ The environment variables defined in dotenv will only be used when the backend i
 
 We defined the environment variables for development in file <i>.env</i>, but the environment variable that defines the database URL in production should be set to Heroku with the _heroku config:set_ command.
 
+```bash
 heroku config:set MONGODB_URI=mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true
 ```
 
-HUOM: if the command causes an error, give the value of MONGODB_URI in apostrophes:
+**NB:** if the command causes an error, give the value of MONGODB_URI in apostrophes:
 
 ```bash
 heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
@@ -200,7 +201,7 @@ Mongoose does not offer a built-in validator for this purpose. Install the [mong
 If an HTTP POST request tries to add a name that is already in the phonebook, the server must respond with an appropriate status code and error message.
 
 
-**Huom:** unique-validator causes a warning to be printed to the console
+**NB:** unique-validator causes a warning to be printed to the console
 
 ```
 (node:49251) DeprecationWarning: collection.ensureIndex is deprecated. Use createIndexes instead.
@@ -429,16 +430,15 @@ This includes a rule that warns about _console.log_ commands. [Disabling](https:
 {
   // ...
   'rules': {
-      // ...
-      'eqeqeq': 'error',
-      'no-trailing-spaces': 'error',
-      'object-curly-spacing': [
-          'error', 'always'
-      ],
-      'arrow-spacing': [
-          'error', { 'before': true, 'after': true }
-      ]
-    },
+    // ...
+    'eqeqeq': 'error',
+    'no-trailing-spaces': 'error',
+    'object-curly-spacing': [
+        'error', 'always'
+    ],
+    'arrow-spacing': [
+        'error', { 'before': true, 'after': true }
+    ],
     'no-console': 0 // highlight-line
   },
 }

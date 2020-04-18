@@ -9,7 +9,7 @@ lang: en
 
 We will now start getting familiar with probably the most important topic of this course, namely the [React](https://reactjs.org/)-library. Let's start off with making a simple React application as well as getting to know the core concepts of React.
 
-The easiest way to get started by far is using a tool called [create-react-app](https://github.com/facebookincubator/create-react-app). It is possible (but not necessary) to install <i>create-react-app</i> on your machine if the <i>npm</i> tool that was installed along with Node has a version number of at least <i>5.3</i>.
+The easiest way to get started by far is using a tool called [create-react-app](https://github.com/facebook/create-react-app). It is possible (but not necessary) to install <i>create-react-app</i> on your machine if the <i>npm</i> tool that was installed along with Node has a version number of at least <i>5.3</i>.
 
 Let's create an application called <i>part1</i> and navigate to its directory.
 
@@ -47,7 +47,7 @@ const App = () => (
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-The files <i>App.js</i>, <i>App.css</i>, <i>App.test.js</i>, <i>logo.svg</i> and <i>serviceWorker.js</i> may be deleted as they are not needed in our application right now.
+The files <i>App.js</i>, <i>App.css</i>, <i>App.test.js</i>, <i>logo.svg</i>, _setupTests.js_ and <i>serviceWorker.js</i> may be deleted as they are not needed in our application right now.
 
 ### Component
 
@@ -318,8 +318,7 @@ Also keep in mind that **React component names must be capitalized**. If you try
 const footer = () => {
   return (
     <div>
-      greeting app created by 
-      <a href="https://github.com/mluukkai">mluukkai</a>
+      greeting app created by <a href="https://github.com/mluukkai">mluukkai</a>
     </div>
   )
 }
@@ -462,7 +461,7 @@ const App = () => {
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-and remove extra files (App.js, App.css, App.test.js, logo.svg, serviceWorker.js).
+and remove extra files (App.js, App.css, App.test.js, logo.svg, setupTests.js, serviceWorker.js).
 
 Unfortunately, the entire application is in the same component. Refactor the code so that it consists of three new components: <i>Header</i>, <i>Content</i>, and <i>Total</i>. All data still resides in the <i>App</i> component, which passes the necessary data to each component using <i>props</i>. <i>Header</i> takes care of rendering the name of the course, <i>Content</i> renders the parts and their number of exercises and <i>Total</i> renders the total number of exercises.
 
