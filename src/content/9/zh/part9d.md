@@ -57,7 +57,8 @@ npx create-react-app my-app --template typescript
 {
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "jest": true
   },
   "extends": [
     "eslint:recommended",
@@ -71,7 +72,9 @@ npx create-react-app my-app --template typescript
       "version": "detect"
     }
   },
-  "rules": {}
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": 0
+  }
 }
 ```
 
@@ -163,7 +166,14 @@ interface FunctionComponent<P = {}> {
 ```
 
 <!-- There you can see that <i>props</i> is of type <i>PropsWithChildren</i>, which is also a generic type, to which <i>P</i> is passed. The type <i>PropsWithChildren</i> in turn is a [intersection](http://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types) of <i>P</i> and the type <i>{ children?: ReactNode }</i>. -->
-在这里您可以看到<i>props</i> 是<i>PropsWithChildren</i> 类型，这也是一个泛型类型，<i>P</i>被传递给它。 类型<i>PropsWithChildren</i> 是<i>P</i> 和类型 <i>{ children?: ReactNode }</i>的一个[intersection](http://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types) .
+<!-- 
+这里你可以看到<i>props</i> 的类型是 <i>PropsWithChildren</i>， 也是 <i>P</i> 传递给他的泛型。 类型<i>PropsWithChildren</i> 是<i>P</i> 和类型 <i>{ children?: ReactNode }</i>的一个[intersection](https://www.typescriptlang.org/docs/handbook/advanced-types.html#intersection-types) . -->
+
+<!-- Here you can see that <i>props</i> is of type <i>PropsWithChildren</i>, which is also a generic type to which <i>P</i> is passed. -->
+这里你可以看到<i>props</i> 的类型是 <i>PropsWithChildren</i>， 也是 <i>P</i> 传递给他的泛型。
+<!-- The type <i>PropsWithChildren</i> in turn is a [intersection](https://www.typescriptlang.org/docs/handbook/advanced-types.html#intersection-types) of <i>P</i> and the type <i>{ children?: ReactNode }</i>. -->
+<i>PropsWithChildren</i> 类型反过来又是  <i>P</i>  和 <i>{ children?: ReactNode }</i> 的[交集](https://www.typescriptlang.org/docs/handbook/advanced-types.html#intersection-types)。
+
 
 ```js
 type PropsWithChildren<P> = P | { children?: ReactNode };
@@ -514,7 +524,7 @@ const courseParts: CoursePart[] = [
 您的第一个任务是声明一个新接口，其中包括<i>description</i> 属性并扩展<i>CoursePartBase</i>接口。 然后修改代码，以便可以从<i>CoursePartOne</i> 和<i>CoursePartThree</i> 中删除<i>description</i> 属性，而不会出现任何错误。
 
 <!-- The create a component <i>Part</i> that renders all attributes of each type of course part. Use switch case -based exhaustive type checking! Use the new component in component <i>Content</i>. -->
-创建一个组件<i>Part</i>，它渲染每种类型的课程章节的所有属性。 使用基于switch case的详尽类型检查！ 在组件<i>Content</i> 中使用新组件。
+然后创建一个组件<i>Part</i>，它渲染每种类型的课程章节的所有属性。 使用基于switch case的详尽类型检查！ 在组件<i>Content</i> 中使用新组件。
 
 <!-- Lastly, add your own course part interface with at least the following attributes: <i>name</i>, <i>exerciseCount</i> and <i>description</i>. Then add that interface to the type union <i>CoursePart</i> and add corresponding data to the <i>courseParts</i> variable. Now if you have modified your <i>Content</i> component correctly, you should get an error, because you have not yet added support for the fourth course part type. Do the necessary changes to <i>Content</i>, so that all attributes for the new course part also get rendered and that the compiler doesn't produce any errors. -->
 最后，添加您自己的课程章节接口，至少包含如下属性:<i>name</i>、<i>exerisecount</i> 和<i>description</i>。 然后将该接口添加到类型 union<i>CoursePart</i>，并将相应的数据添加到<i>courseets</i> 变量。 现在，如果您已经正确地修改了您的<i>Content</i> 组件，您应该会得到一个错误，因为您还没有添加对第四个课程部分类型的支持。 对<i>Content</i> 进行必要的更改，这样新课程部分的所有属性都会得到渲染，编译器也不会产生任何错误。

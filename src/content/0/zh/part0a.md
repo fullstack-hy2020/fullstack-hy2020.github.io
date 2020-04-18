@@ -239,10 +239,14 @@ lang: zh
 ### Changed since the last year
 【与去年相比课程的改变】
 <!-- There is only minor changes to parts 0-4. Part 5d, <i>end to end -testing</i> using the Cypress.io- library is almost completely new material.  Using custom hooks has been moved from part 5 to part 7 with some new content. -->
-对于0~4章节，只有一些很小的改动。第5d章节，<i>端到端测试</i> 利用了Cypress.io 这个库，这几乎是全新的内容。使用自定义钩子（custom hook）的内容已经从第5章节转移到了第7章节，并添加了一些新的内容。
+* 对于0~4章节，只有一些很小的改动。
+* 第5d章节，<i>端到端测试</i> 利用了Cypress.io 这个库，这几乎是全新的内容。使用自定义钩子（custom hook）的内容已经从第5章节转移到了第7章节，并添加了一些新的内容。
 
 <!-- Part 6, which is about Redux, concentrates on the new, hook-based, redux api. The material on react-router in part 7 has also been updated to use the hook-api. Semantic UI React has been replaced with the MaterialUI library due to lack of maintenance. <br><br> Part 8 on GraphQL has major updates especially on Apollo Client, which finally has stable hook based apis. Part 9 on TypeScript is completely new. -->
-第6章是讲Redux的，主要介绍了新的基于hook的redux API。第7章的react-router 也更新为使用hook-api。由于Semantic UI React 缺乏维护，其内容已经被替换为了 MaterialUI library 的内容。<br><br> 第8章 GraphQL有了较大版本的升级，尤其引入了Apollo Client，它终于有了稳定的基于hook的api。第9章是全新的内容。
+* 第6章是讲Redux的，主要介绍了新的基于hook的redux API。
+* 第7章的react-router 也更新为使用hook-api。由于Semantic UI React 缺乏维护，其内容已经被替换为了 MaterialUI library 的内容。
+* 第8章 GraphQL有了较大版本的升级，尤其引入了Apollo Client，它终于有了稳定的基于hook的api。
+* 第9章是全新的内容。
 
 <!-- Last year's course material can be found from https://fullstackopen-2019.github.io/ -->
 去年的课程内容可以通过<a href='https://fullstackopen-2019.github.io/'>https://fullstackopen-2019.github.io/</a>进行访问。
@@ -339,7 +343,7 @@ lang: zh
 
 <!-- Our collaborators Houston Inc, Terveystalo, Elisa, Konecranes and Smartly.io have given a <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (9 + 10). -->
 
-我们的合作伙伴包括 Houston Inc、 Terveystalo、 Elisa、 Konecranes 和 Smartly.io 它们承诺每个完成课程和项目作业，并获得最高学分(9 + 10)的人都可以获得工作面试。
+我们的合作伙伴包括[Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/), [Elisa](https://elisa.fi/), [Konecranes](https://www.konecranes.com/) 和  [Smartly.io](https://www.smartly.io/) 它们承诺每个完成课程和项目作业，并获得最高学分(9 + 10)的人都可以获得工作面试。
 
 <!-- This means that the student can, if they so choose, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits. -->
 

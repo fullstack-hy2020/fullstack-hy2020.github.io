@@ -504,7 +504,7 @@ const noteReducer = (state = [], action) => {
   switch(action.type) {
     case 'NEW_NOTE':
       return state.concat(action.data)
-    case 'TOGGLE_IMPORTANCE':
+    case 'TOGGLE_IMPORTANCE':{
       const id = action.data.id
       const noteToChange = state.find(n => n.id === id)
       const changedNote = { 
@@ -514,6 +514,7 @@ const noteReducer = (state = [], action) => {
       return state.map(note =>
         note.id !== id ? note : changedNote 
       )
+    }
     default:
       return state
   }
@@ -787,7 +788,8 @@ const App = () => {
             key={note.id} 
             onClick={() => toggleImportance(note.id)}
           >
-            {note.content} <strong>{note.important ? 'important' : ''}</strong>
+            {note.content} 
+            <strong>{note.important ? 'important' : ''}</strong>
           </li>
         )}
       </ul>

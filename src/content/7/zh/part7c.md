@@ -549,7 +549,7 @@ _Button_ 组件渲染为这样，它的根组件是 react-redux _Link_ ，它接
     {user
       ? <em>{user} logged in</em>
       : <Button color="inherit" component={Link} to="/login">
-          LINK
+          login
         </Button>
     }                              
   </Toolbar>

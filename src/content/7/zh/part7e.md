@@ -322,7 +322,7 @@ ReactDOM.render(
 
 ### React/node-application security
 <!-- So far during the course we have not touched on information security at all. We do not have much time for now either, but fortunately the department has a MOOC-course [Securing Software](https://cybersecuritybase.github.io/securing/) for this important topic. -->
-到目前为止，我们还没有触及安全。 我们现在也没有太多的时间，但是幸运的是系里有一个 MOOC-course [Securing Software](https://cybersecuritybase.github.io/Securing/)来处理这个重要的话题。
+到目前为止，我们还没有触及安全。 我们现在也没有太多的时间，但是幸运的是系里有一个 MOOC-course [Securing Software](https://cybersecuritybase.mooc.fi/module-2.1)来处理这个重要的话题。
 
 <!-- We will, however, take a look at some things specific to this course. -->
 不过，我们还是要看一下这门课程的一些具体内容。
@@ -551,7 +551,7 @@ Express 的文档包括一个关于安全性的部分: [生产最佳实践: 安�
 浏览器并不是唯一可以渲染使用 React 定义的组件的域。 渲染也可以在[服务器](https://reactjs.org/docs/react-dom-server.html)上完成。 这种方法正在越来越多地被使用，例如，当服务器第一次访问应用时，服务器使用 React 生成的预渲染页面。 从这里开始，应用的操作继续像往常一样进行，这意味着浏览器执行 React，它操纵浏览器显示的 DOM。 在服务器上完成的渲染命名为:<i>server side rendering</i>。
 
 <!-- One motivation for server side rendering is Search Engine Optimization (SEO). Search engines have traditionally been very bad at recognizing JavaScript rendered content, however, the tide might be turning, e.g. take a look at [this](https://www.andrewhfarmer.com/react-seo/) and [this](https://medium.freecodecamp.org/seo-vs-react-is-it-neccessary-to-render-react-pages-in-the-backend-74ce5015c0c9). -->
-服务器端渲染的一个动机是搜索引擎优化。 搜索引擎一直以来都不擅长识别 JavaScript 渲染的内容，然而，这种趋势可能正在发生转变，例如，看看[这个](https://www.andrewhfarmer.com/react-seo/)和[这个](https://medium.freecodecamp.org/seo-vs-react-is-it-neccessary-to-render-react-pages-in-the-backend-74ce5015c0c9)。
+服务器端渲染的一个动机是搜索引擎优化。 搜索引擎一直以来都不擅长识别 JavaScript 渲染的内容，然而，这种趋势可能正在发生转变，例如，看看[这个](https://www.javascriptstuff.com/react-seo/)和[这个](https://medium.freecodecamp.org/seo-vs-react-is-it-neccessary-to-render-react-pages-in-the-backend-74ce5015c0c9)。
 
 <!-- Of course, server side rendering is not anything specific to React or even JavaScript. Using the same programming language throughout the stack in theory simplifies the execution of the concept, because the same code can be run on both the front- and backend. -->
 当然，服务器端渲染并不是 React 或者甚至是 JavaScript 所特有的。 理论上，在整个堆栈中使用相同的编程语言可以简化概念的执行，因为可以在前端和后端运行相同的代码。

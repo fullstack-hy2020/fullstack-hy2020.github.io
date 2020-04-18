@@ -636,16 +636,6 @@ const Display = (props) => {
 }
 ```
 
-<!-- We can also utilize [destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) directly in the component function's parameters. Since we're interested in the _counter_ property of the props object, it's possible to simplify the component into the following form: -->
-我们也可以在组件函数的参数中直接使用[解构](https://developer.mozilla.org/en-us/docs/web/javascript/reference/operators/destructuring_assignment)。 因为我们只对 props 对象的counter属性感兴趣，所以可以将组件简化为如下形式:
-
-```js
-const Display = ({ counter }) => {
-  return (
-    <div>{counter}</div>
-  )
-}
-```
 
 <!-- Using the component is straightforward, as we only need to pass the state of the _counter_ to component: -->
 使用组件很简单，因为我们只需要将计数器的状态传递给组件即可:

@@ -372,7 +372,7 @@ const server = new ApolloServer({
 第一个参数 typeDefs 包含 GraphQL 模式。
 
 <!-- The second parameter is an object, which contains the [resolvers](https://www.apollographql.com/docs/apollo-server/essentials/data.html#resolver-map) of the server. These are the code, which defines <i>how</i> GraphQL queries are responded to.  -->
-第二个参数是一个对象，它包含服务器的[解析器](https://www.apollographql.com/docs/apollo-server/essentials/data.html#resolver-map)。 这些代码定义了 GraphQL 查询的响应方式。
+第二个参数是一个对象，它包含服务器的[解析器](https://www.apollographql.com/docs/tutorial/resolvers/)。 这些代码定义了 GraphQL 查询的响应方式。
 
 <!-- The code of the resolvers is the following:  -->
 解析器的代码如下:

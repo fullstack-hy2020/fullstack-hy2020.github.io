@@ -296,7 +296,7 @@ const unknownEndpoint = (request, response) => {
 const errorHandler = (error, request, response, next) => {
   logger.error(error.message)
 
-  if (error.name === 'CastError' && error.kind === 'ObjectId') {
+  if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
   } else if (error.name === 'ValidationError') {
     return response.status(400).json({ error: error.message })
@@ -318,13 +318,18 @@ module.exports = {
 ```js
 const mongoose = require('mongoose')
 
+mongoose.set('useFindAndModify', false)
+
 const noteSchema = new mongoose.Schema({
   content: {
     type: String,
     required: true,
     minlength: 5
   },
-  date: Date,
+  date: {
+    type: Date,
+    required: true,
+  },
   important: Boolean,
 })
 

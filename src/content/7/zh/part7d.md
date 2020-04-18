@@ -182,7 +182,7 @@ App()
 <!-- When we bundle the application again with the _npm run build_ command, we notice that webpack has acknowledged both files: -->
 当我们再次将应用与 npm run build 命令捆绑在一起时，我们注意到 webpack 已经确认了这两个文件:
 
-![](../../images/7/2ea.png)
+![](../../images/7/20ea.png)
 
 <!-- Our application code can be found at the end of the bundle file in a rather obscure format: -->
 我们的应用代码可以在 bundle 文件的末尾找到，格式相当模糊:

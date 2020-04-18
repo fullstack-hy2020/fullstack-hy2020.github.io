@@ -129,7 +129,7 @@ module.exports = {
     },
     '1': {
       a: 'React 简介',
-      b: 'Javascript',
+      b: 'JavaScript',
       c: '组件状态，事件处理',
       d: '深入React 应用调试',
     },
