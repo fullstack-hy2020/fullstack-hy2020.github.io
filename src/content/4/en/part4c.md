@@ -471,7 +471,7 @@ notesRouter.post('/', async (request, response, next) => {
 It's worth noting that the <i>user</i> object also changes. The <i>id</i> of the note is stored in the <i>notes</i> field:
 
 ```js
-const user = User.findById(userId)
+const user = await User.findById(body.userId)
 
 // ...
 
