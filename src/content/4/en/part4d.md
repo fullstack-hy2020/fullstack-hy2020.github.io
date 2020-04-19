@@ -386,7 +386,7 @@ if ( blog.user.toString() === userid.toString() ) ...
 
 #### 4.22*:  bloglist expansion, step10
 
-After adding token based authentication the tests for adding a new blog broke down. Fix now the tests. Write also a new test that ensures that adding a blog fails with proper status code <i>401 Unauthorized</i> it token is not provided.
+After adding token based authentication the tests for adding a new blog broke down. Fix now the tests. Write also a new test that ensures that adding a blog fails with proper status code <i>401 Unauthorized</i> if token is not provided.
 
 [This](https://github.com/visionmedia/supertest/issues/398) is most likely useful when doing the fix.
 
