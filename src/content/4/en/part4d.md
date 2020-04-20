@@ -163,9 +163,9 @@ const getTokenFrom = request => {
 
 notesRouter.post('/', async (request, response) => {
   const body = request.body
+//highlight-start
   const token = getTokenFrom(request)
 
-//highlight-start
   const decodedToken = jwt.verify(token, process.env.SECRET)
   if (!token || !decodedToken.id) {
     return response.status(401).json({ error: 'token missing or invalid' })
@@ -281,7 +281,7 @@ In the next exercises, basics of user management will be implemented for the Blo
 
 **One more warning:** If you notice you are mixing async/await and _then_ calls, it is 99% certain you are doing something wrong. Use either or, never both. 
 
-#### 4.15: bloglist expansion, step4
+#### 4.15: bloglist expansion, step3
 
 Implement a way to create new users by doing a HTTP POST-request to address <i>api/users</i>. Users have <i>username
 , password and name</i>.
@@ -302,7 +302,7 @@ List of users can for example, look as follows:
 
 ![](../../images/4/22.png)
 
-#### 4.16*: bloglist expansion, step5
+#### 4.16*: bloglist expansion, step4
 
 Add a feature which adds the following restrictions to creating new users: Both username and password must be given. Both username and password must be at least 3 characters long. The username must be unique. 
 
@@ -312,7 +312,7 @@ The operation must respond with a suitable status code and some kind of an error
 
 Also, implement tests which check that invalid users are not created and invalid add user operation returns a suitable status code and error message. 
 
-#### 4.17: bloglist expansion, step6
+#### 4.17: bloglist expansion, step5
 
 Expand blogs so that each blog contains information on the creator of the blog. 
 
@@ -327,15 +327,15 @@ and listing all users also displays the blogs created by each user:
 
 ![](../../images/4/24e.png)
 
-#### 4.18: bloglist expansion, step7
+#### 4.18: bloglist expansion, step6
 
 Implement token-based authentication according to part 4 chapter [Token authentication](/en/part4/token_authentication).
 
-#### 4.19: bloglist expansion, step8
+#### 4.19: bloglist expansion, step7
 
 Modify adding new blogs so that it is only possible if a valid token is sent with the HTTP POST request. The user identified by the token is designated as the creator of the blog. 
 
-#### 4.20*: bloglist expansion, step9
+#### 4.20*: bloglist expansion, step8
 
 [This example](/en/part4/token_authentication) from part 4 shows taking the token from the header with the _getTokenFrom_ helper function.
 
@@ -366,7 +366,7 @@ const tokenExtractor = (request, response, next) => {
 }
 ```
 
-#### 4.21*: bloglist expansion, step10
+#### 4.21*: bloglist expansion, step9
 
 Change the delete blog operation so that a blog can be deleted only by the user who added the blog. Therefore, deleting a blog is possible only if the token sent with the request is the same as that of the blog's creator. 
 
@@ -384,9 +384,9 @@ the field <i>blog.user</i> does not contain a string, but an Object. So if you w
 if ( blog.user.toString() === userid.toString() ) ...
 ```
 
-#### 4.22*:  bloglist expansion, step11
+#### 4.22*:  bloglist expansion, step10
 
-After adding token based authentication the tests for adding a new blog broke. down Fix now the tests. Write also a new test that ensures that adding a blog fails with proper status code <i>401 Unauthorized</i> it token is not provided.
+After adding token based authentication the tests for adding a new blog broke down. Fix now the tests. Write also a new test that ensures that adding a blog fails with proper status code <i>401 Unauthorized</i> if token is not provided.
 
 [This](https://github.com/visionmedia/supertest/issues/398) is most likely useful when doing the fix.
 
