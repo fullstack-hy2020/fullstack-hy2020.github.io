@@ -385,7 +385,8 @@ Node package manager [npm](https://www.npmjs.com/get-npm)  也会随 Node 安装
 
 <!-- If you find a typo in the material, or something has been expressed unclearly, or is simply bad grammar, do a <i>pull request</i> to the course material in repository <https://github.com/fullstack-hy2020/fullstack-hy2020.github.io>. For example, the markdown source code of this page can be found in the repository at <https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/edit/source/src/content/0/zh/part0a.md> -->
 
-如果你发现材料中有一个拼写错误，或者有些东西表达不清楚，又或者只是简单的语法错误，请在 https://github.com/fullstack-hy2020/fullstack-hy2020.github.io 向仓库中的教材内容提出 pull request。 例如，这个页面的 markdown 代码可以在仓库中的 https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/edit/source/src/content/0/zh/part0a.md 找到
+如果你发现材料中有一个拼写错误，或者有些东西表达不清楚，又或者只是简单的语法错误，请在 https://github.com/RichardStark/fullstack-hy2020.github.io
+向仓库中的教材内容提出 pull request。 例如，这个页面的 markdown 代码可以在仓库中的 https://github.com/RichardStark/fullstack-hy2020.github.io/edit/source/src/content/0/zh/part0a.md 找到
 
 <!-- At the bottom of each part of the material is a link <em>Propose changes to material</em>. By clicking the link you can edit the source code of the page. -->
 
