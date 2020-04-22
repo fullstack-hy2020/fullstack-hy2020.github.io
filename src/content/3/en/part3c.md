@@ -423,8 +423,8 @@ Let's respond to the HTTP request with a list of objects formatted with the _toJ
 app.get('/api/notes', (request, response) => {
   Note.find({}).then(notes => {
     response.json(notes.map(note => note.toJSON()))
-  });
-});
+  })
+})
 ```
 
 Now the _notes_ variable is assigned to an array of objects returned by Mongo. When we call <em>notes.map(note => note.toJSON())</em> the result is a new array, where every item from the old one is mapped to a new object with the _toJSON_ method.
@@ -651,7 +651,7 @@ app.get('/api/notes/:id', (request, response) => {
       response.json(note.toJSON())
     })
     .catch(error => {
-      console.log(error);
+      console.log(error)
       response.status(404).end()
     })
 })
