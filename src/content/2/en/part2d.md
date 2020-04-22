@@ -563,7 +563,7 @@ The module exports the following, rather peculiar looking, object:
 ```
 
 
-The labels to the left of the semi-colon in the object definition are the <i>keys</i> of the object, whereas the ones to the right of it are <i>variables</i> that are defined inside of the module.
+The labels to the left of the colon in the object definition are the <i>keys</i> of the object, whereas the ones to the right of it are <i>variables</i> that are defined inside of the module.
 
 
 Since the names of the keys and the assigned variables are the same, we can write the object definition with more compact syntax:

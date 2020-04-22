@@ -83,7 +83,7 @@ Let's expand the error handler to deal with these validation errors:
 const errorHandler = (error, request, response, next) => {
   console.error(error.message)
 
-  if (error.name === 'CastError' && error.kind == 'ObjectId') {
+  if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
   } else if (error.name === 'ValidationError') { // highlight-line
     return response.status(400).json({ error: error.message }) // highlight-line
@@ -430,16 +430,15 @@ This includes a rule that warns about _console.log_ commands. [Disabling](https:
 {
   // ...
   'rules': {
-      // ...
-      'eqeqeq': 'error',
-      'no-trailing-spaces': 'error',
-      'object-curly-spacing': [
-          'error', 'always'
-      ],
-      'arrow-spacing': [
-          'error', { 'before': true, 'after': true }
-      ]
-    },
+    // ...
+    'eqeqeq': 'error',
+    'no-trailing-spaces': 'error',
+    'object-curly-spacing': [
+        'error', 'always'
+    ],
+    'arrow-spacing': [
+        'error', { 'before': true, 'after': true }
+    ],
     'no-console': 0 // highlight-line
   },
 }

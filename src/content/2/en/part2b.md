@@ -416,7 +416,7 @@ You can use the code below as a starting point for the <i>App</i> component of y
 import React, { useState } from 'react'
 
 const App = () => {
-  const [ persons, setPersons] = useState([
+  const [ persons, setPersons ] = useState([
     { name: 'Arto Hellas' }
   ]) 
   const [ newName, setNewName ] = useState('')
@@ -471,16 +471,16 @@ Issue a warning with the [alert](https://developer.mozilla.org/en-US/docs/Web/AP
 
 ![](../../images/2/11e.png)
 
-**Brief reminder from the previous part:** when you are forming strings that contain values from variables, it is recommended to use a [template string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals):
+**Hint:** when you are forming strings that contain values from variables, it is recommended to use a [template string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals):
 
 ```js
 `${newName} is already added to phonebook`
 ```
 
-If the <em>newName</em> variable holds the value <i>arto</i>, the template string expression returns the string
+If the <em>newName</em> variable holds the value <i>Arto Hellas</i>, the template string expression returns the string
 
 ```js
-`arto is already added to phonebook`
+`Arto Hellas is already added to phonebook`
 ```
 
 The same could be done in a more Java-like fashion by using the plus operator:
@@ -568,7 +568,7 @@ const App = () => {
 
 <!-- **HUOM**: saatat törmätä ongelmiin tässä tehtävässä, jos määrittelet komponentteja "väärässä paikassa", nyt kannattaakin ehdottomasti kerrata edellisen osan luku [älä määrittele komponenttia komponentin sisällä](/osa1/monimutkaisempi_tila_reactin_debuggaus#ala-maarittele-komponenttia-komponentin-sisalla). -->
 **NB**: You might run into problems in this exercise if you define your components "in the wrong place". Now would be a good time to rehearse 
-the chapter [do not define a component in another component](/part1/a_more_complex_state_debugging_react_apps#do-not-define-components-within-components)
+the chapter [do not define a component in another component](/en/part1/a_more_complex_state_debugging_react_apps#do-not-define-components-within-components)
 from last part.
 
 </div>

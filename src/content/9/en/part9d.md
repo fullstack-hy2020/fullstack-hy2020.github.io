@@ -53,7 +53,8 @@ We configure eslint in <i>.eslintrc</i> with following settings:
 {
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "jest": true
   },
   "extends": [
     "eslint:recommended",
@@ -67,7 +68,9 @@ We configure eslint in <i>.eslintrc</i> with following settings:
       "version": "detect"
     }
   },
-  "rules": {}
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": 0
+  }
 }
 ```
 
@@ -169,9 +172,9 @@ Now let's take a look at the first line inside _FunctionComponent_:
 (props: PropsWithChildren<P>, context?: any): ReactElement | null;
 ```
 
-<!-- There you can see that <i>props</i> is of type <i>PropsWithChildren</i>, which is also a generic type, to which <i>P</i> is passed. The type <i>PropsWithChildren</i> in turn is a [intersection](http://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types) of <i>P</i> and the type <i>{ children?: ReactNode }</i>. -->
+<!-- There you can see that <i>props</i> is of type <i>PropsWithChildren</i>, which is also a generic type, to which <i>P</i> is passed. The type <i>PropsWithChildren</i> in turn is a [intersection](https://www.typescriptlang.org/docs/handbook/advanced-types.html#intersection-types) of <i>P</i> and the type <i>{ children?: ReactNode }</i>. -->
 Here you can see that <i>props</i> is of type <i>PropsWithChildren</i>, which is also a generic type to which <i>P</i> is passed.
-The type <i>PropsWithChildren</i> in turn is a [intersection](http://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types) of <i>P</i> and the type <i>{ children?: ReactNode }</i>.
+The type <i>PropsWithChildren</i> in turn is a [intersection](https://www.typescriptlang.org/docs/handbook/advanced-types.html#intersection-types) of <i>P</i> and the type <i>{ children?: ReactNode }</i>.
 
 ```js
 type PropsWithChildren<P> = P | { children?: ReactNode };
@@ -198,7 +201,7 @@ ReactDOM.render(element, document.getElementById("root"));
 ```
 
 <!-- We defined a new type _WelcomeProps_ and passed it to the added typing for the <i>Welcome</i> component: -->
-We defined a new type _WelcomeProps_ and paased to the <i>Welcome</i> component in its type declaration: 
+We defined a new type _WelcomeProps_ and passed to the <i>Welcome</i> component in its type declaration: 
 
 ```js
 const Welcome: React.FC<WelcomeProps>;
@@ -521,7 +524,7 @@ Now we know that both interfaces <i>CoursePartOne</i> and <i>CoursePartThree</i>
 
 Your first task is to to declare a new interface, that includes the <i>description</i> attribute and extends the <i>CoursePartBase</i> interface. Then modify the code so that you can remove the <i>description</i> attribute from both <i>CoursePartOne</i> and <i>CoursePartThree</i> without getting any errors.
 
-The create a component <i>Part</i> that renders all attributes of each type of course part. Use a switch case -based exhaustive type checking! Use the new component in component <i>Content</i>.
+Then create a component <i>Part</i> that renders all attributes of each type of course part. Use a switch case -based exhaustive type checking! Use the new component in component <i>Content</i>.
 
 Lastly, add your own course part interface with at least the following attributes: <i>name</i>, <i>exerciseCount</i> and <i>description</i>. Then add that interface to the type union <i>CoursePart</i> and add corresponding data to the <i>courseParts</i> variable. Now if you have modified your <i>Content</i> component correctly, you should get an error, because you have not yet added support for the fourth course part type. Do the necessary changes to <i>Content</i>, so that all attributes for the new course part also get rendered and that the compiler doesn't produce any errors.
 
