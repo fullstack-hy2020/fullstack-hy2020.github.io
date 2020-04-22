@@ -296,7 +296,7 @@ const User = require('../models/user')
 
 //...
 
-describe('when there is initially one user at db', () => {
+describe('when there is initially one user in db', () => {
   beforeEach(async () => {
     await User.deleteMany({})
 
@@ -355,7 +355,7 @@ module.exports = {
 The <i>beforeEach</i> block adds a user with the username <i>root</i> to the database. We can write a new test that verifies that a new user with the same username can not be created:
 
 ```js
-describe('when there is initially one user at db', () => {
+describe('when there is initially one user in db', () => {
   // ...
 
   test('creation fails with proper statuscode and message if username already taken', async () => {
