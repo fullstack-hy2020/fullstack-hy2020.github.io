@@ -599,7 +599,7 @@ test('a valid note can be added ', async () => {
   await api
     .post('/api/notes')
     .send(newNote)
-    .expect(201)
+    .expect(200)
     .expect('Content-Type', /application\/json/)
 
   const notesAtEnd = await helper.notesInDb() // highlight-line
@@ -1135,7 +1135,7 @@ describe('addition of a new note', () => {
     await api
       .post('/api/notes')
       .send(newNote)
-      .expect(201)
+      .expect(200)
       .expect('Content-Type', /application\/json/)
 
 
