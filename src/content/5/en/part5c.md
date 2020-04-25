@@ -458,7 +458,7 @@ fireEvent.click(button)
 
 <!-- Käytännössä siis loimme <i>fireEventin</i> avulla tapahtuman <i>click</i> nappia vastaavalle komponentille. Voimme myös simuloida lomakkeisiin kirjoittamista <i>fireEventin</i> avulla. -->
 In practice we used the <i>fireEvent</i> to create a <i>click</i> event for the button component. 
-We cal also simulate text input with <i>fireEvent</i>.
+We can also simulate text input with <i>fireEvent</i>.
 
 <!-- Tehdään testi komponentille <i>NoteForm</i>. Lomakkeen koodi näyttää seuraavalta -->
 Let's make a test for the <i>NoteForm</i> component. The code of the component is as follows
@@ -557,7 +557,7 @@ CI=true npm test -- --coverage
 ![](../../images/5/18ea.png)
 
 <!-- Melko primitiivinen HTML-muotoinen raportti generoituu hakemistoon <i>coverage/lcov-report</i>. HTML-muotoinen raportti kertoo mm. yksittäisen komponenttien testaamattomat koodirivit: -->
-Quite primitive HTML raport will be generated to the <i>coverage/lcov-report</i> directory. 
+A quite primitive HTML report will be generated to the <i>coverage/lcov-report</i> directory. 
 The report will tell us i.e the lines of untested code in each component:
 
 ![](../../images/5/19ea.png)
@@ -618,7 +618,7 @@ const author = component.container.querySelector('#author')
 
 ### Frontend integration tests
 
-In the previous part of the course material, we wrote integration tests for the backend that tested its logic and connected database through the API provided by the backend. When writing these tests, we made the conscious decision not to write unit tests, as the code for that backend is fairly simple, and it is likely that bugs in our application occur in more complicated scenarios that integration tests are well suited for.
+In the previous part of the course material, we wrote integration tests for the backend that tested its logic and connected the database through the API provided by the backend. When writing these tests, we made the conscious decision not to write unit tests, as the code for that backend is fairly simple, and it is likely that bugs in our application occur in more complicated scenarios than integration tests are well suited for.
 
 So far all of our tests for the frontend have been unit tests that have validated the correct functioning of individual components. Unit testing is useful at times, but even a comprehensive suite of unit tests is not enough to validate that the application works as a whole.
 
@@ -633,6 +633,6 @@ Jest offers a completely different alternative to "traditional" testing called [
 
 The fundamental principle is to compare the HTML code defined by the component after it has changed to the HTML code that existed before it was changed.
 
-If the snapshot notices some change in the HTML defined by the component, then either it is new functionality or a "bug" caused by the accident. Snapshot tests notify the developer if the HTML code of the component changes. The developer has to tell Jest if the change was desired or undesired. If the change to the HTML code is unexpected it strongly implicates a bug, and developer can become aware of these potential issues easily thanks to snapshot testing.
+If the snapshot notices some change in the HTML defined by the component, then either it is new functionality or a "bug" caused by accident. Snapshot tests notify the developer if the HTML code of the component changes. The developer has to tell Jest if the change was desired or undesired. If the change to the HTML code is unexpected it strongly implicates a bug, and the developer can become aware of these potential issues easily thanks to snapshot testing.
 
 </div>
