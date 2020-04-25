@@ -184,7 +184,7 @@ Lisää tietoa harjoitustyöstä avoimen yliopiston [sivulla](https://courses.he
 
 ### Haastattelulupaus
 
-Kurssin yhteistyökumppaneista Houston Inc, Terveystalo, Elisa, Konecranes ja Smartly.io ovat antaneet <i>haastattelulupauksen</i> kaikille projektin täydessä laajuudessa (9+10 op) suorittaville.
+Kurssin yhteistyökumppaneista Houston Inc, Terveystalo, Elisa ja Smartly.io ovat antaneet <i>haastattelulupauksen</i> kaikille projektin täydessä laajuudessa (9+10 op) suorittaville.
 
 Haastattelulupaus tarkoittaa, että opiskelija voi niin halutessaan ilmoittautua työhaastatteluun haastattelulupauksen antaneelle yritykselle. Kurssin vastuuhenkilö toimittaa ohjeet opiskelijalle henkilökohtaisesti kurssisuorituksen jälkeen.
 

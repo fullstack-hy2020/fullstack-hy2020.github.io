@@ -484,7 +484,7 @@ const NoteForm = ({ createNote }) => {
   }
 
   return (
-    <div className="formDiv">
+    <div className="formDiv"> // highlight-line
       <h2>Create a new note</h2>
 
       <form onSubmit={addNote}>
@@ -579,17 +579,17 @@ Make a test, which checks that the component displaying a blog renders the blog'
 <!-- Lisää komponenttiin tarvittaessa testausta helpottavia CSS-luokkia. -->
 Add CSS-classes to the component to help the testing as necessary. 
 
-#### 5.14: Blog list tests, step1
+#### 5.14: Blog list tests, step2
 
 <!-- Tee testi, joka varmistaa että myös url ja likejen määrä näytetään kun blogin kaikki tiedot näyttävää nappia on painettu. -->
 Make a test, which checks that blog's url and number of likes are shown when the button controlling the shown details has been clicked. 
 
-#### 5.15: Blog list tests, step2
+#### 5.15: Blog list tests, step3
 
 <!-- Tee testi, joka varmistaa, että jos komponentin <i>like</i>-nappia painetaan kahdesti, komponentin propsina saamaa tapahtumankäsittelijäfunktiota kutsutaan kaksi kertaa. -->
 Make a test which ensures that if the <i>like</i> button is clicked twice, the event handler the component received as props is called twice. 
 
-#### 5.16*: Blog list tests, step3
+#### 5.16*: Blog list tests, step4
 
 <!-- Tee uuden blogin luomisesta huolehtivalle lomakkelle testi, joka varmistaa, että lomake kutsuu propseina saamaansa takaisinkutsufunktiota oikeilla tiedoilla siinä vaiheessa kun blogi luodaan. -->
 Make a test for the new blog form. The test should check, that the form calls the event handler it received as props with the right details when a new blog is called. 
