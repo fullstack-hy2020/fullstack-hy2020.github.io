@@ -516,7 +516,7 @@ const NoteForm = ({ createNote }) => {
   }
 
   return (
-    <div className="formDiv">
+    <div className="formDiv"> // highlight-line
       <h2>Create a new note</h2>
 
       <form onSubmit={addNote}>
@@ -619,7 +619,7 @@ CI=true npm test -- --coverage
 ### Exercises 5.13.-5.16.
 
 
-#### 5.13: Blog list tests, 步骤1
+#### 5.13: Blog list tests, 步骤2
 
 <!-- Make a test, which checks that the component displaying a blog renders the blog's title and author, but does not render its url or number of likes by default -->
 做一个测试，检查显示博客的组件是否渲染了博客的标题和作者，但默认情况下不渲染其 url 或赞数
@@ -627,7 +627,7 @@ CI=true npm test -- --coverage
 <!-- Add CSS-classes to the component to help the testing as necessary.  -->
 向组件中添加 css 类以帮助进行必要的测试。
 
-#### 5.14: Blog list tests, 步骤1
+#### 5.14: Blog list tests, 步骤3
 
 <!-- Make a test, which checks that blog's url and number of likes are shown when the button controlling the shown details has been clicked.  -->
 做一个测试，当点击控制显示的详细信息的按钮时，检查博客的网址和赞的数量。
@@ -636,7 +636,7 @@ CI=true npm test -- --coverage
 <!-- Make a test which ensures that if the <i>like</i> button is clicked twice, the event handler the component received as props is called twice.  -->
 进行一个测试，确保如果单击<i>like</i> 按钮两次，那么作为props接收的组件的事件处理程序将被调用两次。
 
-#### 5.16*: Blog list tests, 步骤3
+#### 5.16*: Blog list tests, 步骤4
 <!-- Make a test for the new blog form. The test should check, that the form calls the event handler it received as props with the right details when a new blog is called.  -->
 为新的博客表单做一个测试。 测试应该检查，当调用新建博客时，表单是否使用正确的细节调用它作为props接收的事件处理程序。
 

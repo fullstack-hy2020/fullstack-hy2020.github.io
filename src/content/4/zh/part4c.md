@@ -319,7 +319,7 @@ const User = require('../models/user')
 
 //...
 
-describe('when there is initially one user at db', () => {
+describe('when there is initially one user in db', () => {
   beforeEach(async () => {
     await User.deleteMany({})
 
@@ -379,7 +379,7 @@ module.exports = {
 <i>beforeEach</i> 代码块向数据库增加了一个用户名为<i>root</i> 的 User。我们可以写一个新的测试用来验证拥有相同用户名的用户不能被创建出来。
 
 ```js
-describe('when there is initially one user at db', () => {
+describe('when there is initially one user in db', () => {
   // ...
 
   test('creation fails with proper statuscode and message if username already taken', async () => {
@@ -432,12 +432,14 @@ const userSchema = new mongoose.Schema({
   },
   name: String,
   passwordHash: String,
+  // highlight-start
   notes: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Note'
     }
   ],
+  // highlight-end
 })
 
 userSchema.plugin(uniqueValidator) // highlight-line

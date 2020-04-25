@@ -343,7 +343,7 @@ lang: zh
 
 <!-- Our collaborators Houston Inc, Terveystalo, Elisa, Konecranes and Smartly.io have given a <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (9 + 10). -->
 
-我们的合作伙伴包括[Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/), [Elisa](https://elisa.fi/), [Konecranes](https://www.konecranes.com/) 和  [Smartly.io](https://www.smartly.io/) 它们承诺每个完成课程和项目作业，并获得最高学分(9 + 10)的人都可以获得工作面试。
+我们的合作伙伴包括[Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/), [Elisa](https://elisa.fi/)和  [Smartly.io](https://www.smartly.io/) 它们承诺每个完成课程和项目作业，并获得最高学分(9 + 10)的人都可以获得工作面试。
 
 <!-- This means that the student can, if they so choose, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits. -->
 

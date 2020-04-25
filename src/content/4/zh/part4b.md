@@ -49,7 +49,7 @@ Node 中的约定是用 <i>NODE\_ENV</i> 环境变量定义应用的执行模式
 ```
 
 <!-- We also added the [runInBand](https://jestjs.io/docs/en/cli.html#runinband) option to the npm script that executes the tests. This option will prevent Jest from running tests in parallel; we will discuss its significance once our tests start using the database. -->
-我们还在执行测试的 npm 脚本中添加了[runInBand](https://jestjs.io/docs/en/cli.html#runInBand)选项。 这个选项将防止 Jest 并行运行测试; 一旦我们的测试开始使用数据库，我们将讨论它的重要性。
+我们还在执行测试的 npm 脚本中添加了[runInBand](https://jestjs.io/docs/en/cli.html#--runinband)选项。 这个选项将防止 Jest 并行运行测试; 一旦我们的测试开始使用数据库，我们将讨论它的重要性。
 
 <!-- We specified the mode of the application to be <i>development</i> in the _npm run dev_ script that uses nodemon. We also specified that the default _npm start_ command will define the mode as <i>production</i>. -->
 我们在使用 nodemon 的  _npm run dev_ 脚本中指定了应用的模式为 <i>development</i> 。 我们还指定了默认的 npm start 命令将模式定义为<i>production</i>。
@@ -429,7 +429,7 @@ Note.find({})
 ```
 
 <!-- The then-chain is alright, but we can do better. The [generator functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) introduced in ES6 provided a [clever way](https://github.com/getify/You-Dont-Know-JS/blob/2nd-ed/async-performance/ch4.md#iterating-generators-asynchronously) of writing asynchronous code in a way that "looks synchronous". The syntax is a bit clunky and not widely used. -->
-这种链式的 then 的确不错，但我们可以做得更好。ES6 引入的[生成器函数](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) 提供了一种更[聪明的方式](https://github.com/getify/You-Dont-Know-JS/blob/2nd-ed/async-performance/ch4.md#iterating-generators-asynchronously) 来写异步代码，使这种代码看起来像同步的。这种语法有点笨拙，因此并没有被广泛使用。
+这种链式的 then 的确不错，但我们可以做得更好。ES6 引入的[生成器函数](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) 提供了一种更[聪明的方式](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch4.md#iterating-generators-asynchronously) 来写异步代码，使这种代码看起来像同步的。这种语法有点笨拙，因此并没有被广泛使用。
 
 <!-- The _async_ and _await_ keywords introduced in ES7 bring the same functionality as the generators, but in an understandable and syntactically cleaner way to the hands of all citizens of the JavaScript world. -->
 ES7 引入的 _async_ 和 _await_ 关键字带来了和生成器相同的功能，但是以一种更容易理解以及看起来更像同步的方式来展现的，使得所有的 Javascript 使用者都更容易理解。 
@@ -514,7 +514,7 @@ notesRouter.get('/', async (request, response) => {
 让我们从添加新便笺的操作开始。 让我们编写一个测试，添加一个新的便笺，并验证 API 返回的便笺数量是否增加，以及新添加的便笺是否在列表中。
 
 ```js
-test('a valid note can be added ', async () => {
+test('a valid note can be added', async () => {
   const newNote = {
     content: 'async/await simplifies making async calls',
     important: true,
@@ -660,7 +660,7 @@ test('a valid note can be added ', async () => {
   await api
     .post('/api/notes')
     .send(newNote)
-    .expect(201)
+    .expect(200)
     .expect('Content-Type', /application\/json/)
 
   const notesAtEnd = await helper.notesInDb() // highlight-line
@@ -1198,98 +1198,98 @@ describe('when there is initially some notes saved', () => {
       'Browser can execute only Javascript'
     )
   })
+})
 
-  describe('viewing a specific note', () => {
-    test('succeeds with a valid id', async () => {
-      const notesAtStart = await helper.notesInDb()
+describe('viewing a specific note', () => {
+  test('succeeds with a valid id', async () => {
+    const notesAtStart = await helper.notesInDb()
 
-      const noteToView = notesAtStart[0]
+    const noteToView = notesAtStart[0]
 
-      const resultNote = await api
-        .get(`/api/notes/${noteToView.id}`)
-        .expect(200)
-        .expect('Content-Type', /application\/json/)
+    const resultNote = await api
+      .get(`/api/notes/${noteToView.id}`)
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
 
-      expect(resultNote.body).toEqual(noteToView)
-    })
-
-    test('fails with statuscode 404 if note does not exist', async () => {
-      const validNonexistingId = await helper.nonExistingId()
-
-      console.log(validNonexistingId)
-
-      await api
-        .get(`/api/notes/${validNonexistingId}`)
-        .expect(404)
-    })
-
-    test('fails with statuscode 400 id is invalid', async () => {
-      const invalidId = '5a3d5da59070081a82a3445'
-
-      await api
-        .get(`/api/notes/${invalidId}`)
-        .expect(400)
-    })
+    expect(resultNote.body).toEqual(noteToView)
   })
 
-  describe('addition of a new note', () => {
-    test('succeeds with valid data', async () => {
-      const newNote = {
-        content: 'async/await simplifies making async calls',
-        important: true,
-      }
+  test('fails with statuscode 404 if note does not exist', async () => {
+    const validNonexistingId = await helper.nonExistingId()
 
-      await api
-        .post('/api/notes')
-        .send(newNote)
-        .expect(201)
-        .expect('Content-Type', /application\/json/)
+    console.log(validNonexistingId)
 
-
-      const notesAtEnd = await helper.notesInDb()
-      expect(notesAtEnd).toHaveLength(helper.initialNotes.length + 1)
-
-      const contents = notesAtEnd.map(n => n.content)
-      expect(contents).toContain(
-        'async/await simplifies making async calls'
-      )
-    })
-
-    test('fails with status code 400 if data invaild', async () => {
-      const newNote = {
-        important: true
-      }
-
-      await api
-        .post('/api/notes')
-        .send(newNote)
-        .expect(400)
-
-      const notesAtEnd = await helper.notesInDb()
-
-      expect(notesAtEnd).toHaveLength(helper.initialNotes.length)
-    })
+    await api
+      .get(`/api/notes/${validNonexistingId}`)
+      .expect(404)
   })
 
-  describe('deletion of a note', () => {
-    test('succeeds with status code 204 if id is valid', async () => {
-      const notesAtStart = await helper.notesInDb()
-      const noteToDelete = notesAtStart[0]
+  test('fails with statuscode 400 id is invalid', async () => {
+    const invalidId = '5a3d5da59070081a82a3445'
 
-      await api
-        .delete(`/api/notes/${noteToDelete.id}`)
-        .expect(204)
+    await api
+      .get(`/api/notes/${invalidId}`)
+      .expect(400)
+  })
+})
 
-      const notesAtEnd = await helper.notesInDb()
+describe('addition of a new note', () => {
+  test('succeeds with valid data', async () => {
+    const newNote = {
+      content: 'async/await simplifies making async calls',
+      important: true,
+    }
 
-      expect(notesAtEnd).toHaveLength(
-        helper.initialNotes.length - 1
-      )
+    await api
+      .post('/api/notes')
+      .send(newNote)
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
 
-      const contents = notesAtEnd.map(r => r.content)
 
-      expect(contents).not.toContain(noteToDelete.content)
-    })
+    const notesAtEnd = await helper.notesInDb()
+    expect(notesAtEnd).toHaveLength(helper.initialNotes.length + 1)
+
+    const contents = notesAtEnd.map(n => n.content)
+    expect(contents).toContain(
+      'async/await simplifies making async calls'
+    )
+  })
+
+  test('fails with status code 400 if data invaild', async () => {
+    const newNote = {
+      important: true
+    }
+
+    await api
+      .post('/api/notes')
+      .send(newNote)
+      .expect(400)
+
+    const notesAtEnd = await helper.notesInDb()
+
+    expect(notesAtEnd).toHaveLength(helper.initialNotes.length)
+  })
+})
+
+describe('deletion of a note', () => {
+  test('succeeds with status code 204 if id is valid', async () => {
+    const notesAtStart = await helper.notesInDb()
+    const noteToDelete = notesAtStart[0]
+
+    await api
+      .delete(`/api/notes/${noteToDelete.id}`)
+      .expect(204)
+
+    const notesAtEnd = await helper.notesInDb()
+
+    expect(notesAtEnd).toHaveLength(
+      helper.initialNotes.length - 1
+    )
+
+    const contents = notesAtEnd.map(r => r.content)
+
+    expect(contents).not.toContain(noteToDelete.content)
   })
 })
 

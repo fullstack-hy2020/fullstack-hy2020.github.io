@@ -228,9 +228,10 @@ const getTokenFrom = request => {
 
 notesRouter.post('/', async (request, response) => {
   const body = request.body
+  //highlight-start
   const token = getTokenFrom(request)
 
-//highlight-start
+
   const decodedToken = jwt.verify(token, process.env.SECRET)
   if (!token || !decodedToken.id) {
     return response.status(401).json({ error: 'token missing or invalid' })
@@ -371,7 +372,7 @@ const errorHandler = (error, request, response, next) => {
 <!-- **One more warning:** If you notice you are mixing async/await and _then_ calls, it is 99% certain you are doing something wrong. Use either or, never both.  -->
 **再提醒一下:** 如果你注意到你混用了 async/await 和 _then_ 调用，你99% 做错了什么。 使用其中一种，不要两者都使用。
 
-#### 4.15: bloglist expansion, 步骤4
+#### 4.15: bloglist expansion, 步骤3
 <!-- Implement a way to create new users by doing a HTTP POST-request to address <i>api/users</i>. Users have <i>username -->
  <!-- password and name</i>. -->
 通过执行 HTTP POST-请求来访问 <i>api/users</i>，实现创建新用户的方法，需要包含用户名、密码及名字。
@@ -398,7 +399,7 @@ npm uninstall bcrypt --save
 ![](../../images/4/22.png)
 
 
-#### 4.16*: bloglist expansion, 步骤5
+#### 4.16*: bloglist expansion, 步骤4
 <!-- Add a feature which adds the following restrictions to creating new users: Both username and password must be given. Both username and password must be at least 3 characters long. The username must be unique.  -->
 添加一个创建新用户的特性，并添加如下限制: 必须同时给出用户名和密码。 用户名和密码必须至少3个字符长。 用户名必须是唯一的。
 
@@ -411,7 +412,7 @@ npm uninstall bcrypt --save
 <!-- Also, implement tests which check that invalid users are not created and invalid add user operation returns a suitable status code and error message.  -->
 此外，实现一些测试，测试可以检查未被创建的无效用户，以及无效的添加用户操作，并返回合适的状态码和错误消息。
 
-#### 4.17: bloglist expansion, 步骤6
+#### 4.17: bloglist expansion, 步骤5
 <!-- Expand blogs so that each blog contains information on the creator of the blog.  -->
 扩展博客，使每个博客包含关于博客创建者的信息。
 
@@ -431,15 +432,15 @@ npm uninstall bcrypt --save
 ![](../../images/4/24e.png)
 
 
-#### 4.18: bloglist expansion, 步骤7
+#### 4.18: bloglist expansion, 步骤6
 <!-- Implement token-based authentication according to part 4 chapter [Token authentication](/zh/part4/密钥认证). -->
 根据第4章节[Token authentication](/zh/part4/密钥认证)实现基于令牌的认证。
 
-#### 4.19: bloglist expansion, 步骤8
+#### 4.19: bloglist expansion, 步骤7
 <!-- Modify adding new blogs so that it is only possible if a valid token is sent with the HTTP POST request. The user identified by the token is designated as the creator of the blog.  -->
 修改添加新博客的内容，以便只有在使用 HTTP POST 请求发送有效令牌的情况下才可以添加新博客。 该令牌标识的用户被指定为博客的创建者。
 
-#### 4.20*: bloglist expansion, 步骤9
+#### 4.20*: bloglist expansion, 步骤8
 <!-- [This example](/zh/part4/密钥认证) from part 4 shows taking the token from the header with the _getTokenFrom_ helper function. -->
 第4章节的[示例](/zh/part4/密钥认证)显示了使用 getTokenFrom 辅助函数从头部获取令牌。
 
@@ -475,7 +476,7 @@ const tokenExtractor = (request, response, next) => {
 }
 ```
 
-#### 4.21*: bloglist expansion, 步骤10
+#### 4.21*: bloglist expansion, 步骤9
 <!-- Change the delete blog operation so that a blog can be deleted only by the user who added the blog. Therefore, deleting a blog is possible only if the token sent with the request is the same as that of the blog's creator.  -->
 更改删除博客操作，以便只有添加博客的用户才能删除博客。 因此，只有在请求中发送的令牌与博客创建者的令牌相同时，才可以删除博客。
 
@@ -496,7 +497,7 @@ const blog = await Blog.findById(...)
 if ( blog.user.toString() === userid.toString() ) ...
 ```
 
-#### 4.22*:  bloglist expansion, 步骤11
+#### 4.22*:  bloglist expansion, 步骤10
 <!-- After adding token based authentication the tests for adding a new blog broke. down Fix now the tests. Write also a new test that ensures that adding a blog fails with proper status code <i>401 Unauthorized</i> it token is not provided. -->
 在添加了基于令牌的身份验证之后，添加新博客的测试中断了。 现在修复测试。 还要编写一个新的测试，以确保添加一个博客失败与适当的状态代码<i>401 Unauthorized</i> it 令牌没有提供。
 

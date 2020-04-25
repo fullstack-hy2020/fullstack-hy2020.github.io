@@ -475,7 +475,7 @@ show {showAll ? 'important' : 'all'}
 import React, { useState } from 'react'
 
 const App = () => {
-  const [ persons, setPersons] = useState([
+  const [ persons, setPersons ] = useState([
     { name: 'Arto Hellas' }
   ]) 
   const [ newName, setNewName ] = useState('')
@@ -547,7 +547,7 @@ export default App
 
 <!-- **Brief reminder from the previous part:** when you are forming strings that contain values from variables, it is recommended to use a [template string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals): -->
 
-**上一章节的简短提示** 当您构建包含变量值的字符串时，建议使用[模板字符串](https://developer.mozilla.org/en-us/docs/web/javascript/reference/template_literals) :
+**注意** 当您构建包含变量值的字符串时，建议使用[模板字符串](https://developer.mozilla.org/en-us/docs/web/javascript/reference/template_literals) :
 
 ```js
 `${newName} is already added to phonebook`

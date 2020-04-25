@@ -608,7 +608,7 @@ export default {
 
 
 <!-- The labels to the left of the semi-colon in the object definition are the <i>keys</i> of the object, whereas the ones to the right of it are <i>variables</i> that are defined inside of the module. -->
-在对象定义中，分号左侧的标签是对象的<i>键</i>，而它右侧的标签是在模块内部定义的<i>variables</i>。
+在对象定义中，冒号左侧的标签是对象的<i>键</i>，而它右侧的标签是在模块内部定义的<i>variables</i>。
 
 
 <!-- Since the names of the keys and the assigned variables are the same, we can write the object definition with more compact syntax: -->

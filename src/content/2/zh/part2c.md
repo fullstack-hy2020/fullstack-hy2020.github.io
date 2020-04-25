@@ -612,7 +612,7 @@ useEffect(() => {
 ```
 
 <!-- A reference to an event handler function is assigned to the variable <em>eventHandler</em>. The promise returned by the <em>get</em> method of Axios is stored in the variable <em>promise</em>. The registration of the callback happens by giving the <em>eventHandler</em> variable, referring to the event-handler function, as a parameter to the then method of the promise. It isn't usually necessary to assign functions and promises to variables, and a more compact way of representing things, as seen further above, is sufficient. -->
-对事件处理函数的引用被分配给变量<em>eventHandler</em>。 Axios 的<em>get</em>方法返回的promise存储在变量 <em>promise</em> 中。 回调的注册是通过将 <em>eventHandler</em>变量作为参数 (事件处理函数的引用)传递给promise 的 then 方法的来实现的。 通常没有必要为函数和承诺分配变量，而是用更紧凑的表示方式，就像上面那样，就足够了。
+对事件处理函数的引用被分配给变量<em>eventHandler</em>。 Axios 的<em>get</em>方法返回的promise存储在变量 <em>promise</em> 中。 回调的注册是通过将 <em>eventHandler</em>变量作为参数 (事件处理函数的引用)传递给promise 的  <em>then</em> 方法的来实现的。 通常没有必要为函数和承诺分配变量，而是用更紧凑的表示方式，就像上面那样，就足够了。
 
 ```js
 useEffect(() => {

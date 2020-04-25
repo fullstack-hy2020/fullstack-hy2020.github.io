@@ -662,7 +662,7 @@ const Blog = ({ blog }) => {
 <!-- **NB2:** even though the functionality implemented in this part is almost identical to the functionality provided by the <i>Togglable</i> component, the component can not be used directly to achieve the desired behavior. The easiest solution will be to add state to the blog post that controls the displayed form of the blog post. -->
 **注意：** 尽管该部分实现的功能与<i>Togglable</i> 组件提供的功能几乎完全相同，但该组件不能直接用于实现所需的行为。 最简单的解决方案是将状态添加到控制博客文章显示形式的博客文章中。
 
-#### 5.8*: Blog list frontend, 步骤7
+#### 5.8*: Blog list frontend, 步骤8
 
 <!-- Implement the functionality for the like button. Likes are increased by making an HTTP _PUT_ request to the unique address of the blog post in the backend. -->
 实现 like 按钮的功能。 通过向后端中的博客文章的唯一地址发出 HTTP PUT 请求，可以增加like。
@@ -701,11 +701,11 @@ const Blog = ({ blog }) => {
 <!-- **One last warning:** if you notice that you are using async/await and the _then_-method in the same code, it is almost certain that you are doing something wrong. Stick to using one or the other, and never use both at the same time "just in case".  -->
 **最后一个警告:** 如果您注意到在同一段代码中混用了 async/await 和 then 方法，那么几乎可以肯定您做错了什么。 坚持使用一种或另一种，永远不要同时使用两种，“以防万一”。
 
-#### 5.9*: Blog list frontend, 步骤8
+#### 5.9*: Blog list frontend, 步骤9
 <!-- Modify the application to list the blog posts by the number of <i>likes</i>. Sorting the blog posts can be done with the array [sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) method. -->
 根据<i>like</i> 的数量修改应用以列出博客文章。 对博客文章进行排序可以使用数组[sort](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/sort)方法。
 
-#### 5.10*: Blog list frontend, 步骤9
+#### 5.10*: Blog list frontend, 步骤10
 <!-- Add a new button for deleting blog posts. Also implement the logic for deleting blog posts in the backend. -->
 添加一个新的按钮用于删除博客文章。还可以在后端实现删除博客文章的逻辑。
 
