@@ -522,7 +522,7 @@ We could update the screen by reloading the page, as the cache is emptied when t
 
 ### Updating the cache
 
-There are few different solutions for this. One way is to make the query for all persons [poll]((https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#polling) the server, or make the query repeatedly. 
+There are few different solutions for this. One way is to make the query for all persons [poll](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#polling) the server, or make the query repeatedly. 
 
 
 The change is small. Let's set the query to poll every two seconds: 
