@@ -90,7 +90,7 @@ The servers response is printed to the console:
 
 ![](../../images/8/9a.png)
 
-The application can communicate with a GraphQL server using the _client_ object. The client can be made accessible for all components of the application by wrapping the <i>App</i> component with [ApolloProvider]https://www.apollographql.com/docs/react/v3.0-beta/get-started/#connect-your-client-to-react).
+The application can communicate with a GraphQL server using the _client_ object. The client can be made accessible for all components of the application by wrapping the <i>App</i> component with [ApolloProvider](https://www.apollographql.com/docs/react/v3.0-beta/get-started/#connect-your-client-to-react).
 
 ```js
 import React from 'react'
