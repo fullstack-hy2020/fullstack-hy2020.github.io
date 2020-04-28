@@ -8,7 +8,7 @@ lang: en
 <div class="content">
 
 <!-- Olemme käyttäneet redux-storea react-redux-kirjaston [hook](https://react-redux.js.org/api/hooks)-apin, eli funktioiden [useSelector](https://react-redux.js.org/api/hooks#useselector) ja [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) avulla. -->
-So far we have used our redux-store with the help of the hook](https://react-redux.js.org/api/hooks)-api from react-redux.
+So far we have used our redux-store with the help of the [hook](https://react-redux.js.org/api/hooks)-api from react-redux.
 Practically this has meant using the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) functions.
 
 To finish this part we will look into another older and  more complicated way to use redux, the [connect](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)-function provided by react-redux.
@@ -306,7 +306,6 @@ const mapDispatchToProps = {
   toggleImportanceOf
 }
 
-// eksportoidaan suoraan connectin palauttama komponentti
 export default connect(
   mapStateToProps,
   mapDispatchToProps
@@ -593,7 +592,7 @@ We have come a long way in this course and, finally, we have come to the point a
 What about the _useState_-hook, which provides components with their own state? Does it have any role if an application is using Redux or some other external state management solution? If the application has more complicated forms, it may be beneficial to implement their local state using the state provided by the _useState_ function. One can, of course, have Redux manage the state of the forms, however, if the state of the form is only relevant when filling the form (e.g. for validation) it may be wise to leave the management of state to the component responsible for the form.
 
 <!-- Kannattaako reduxia käyttää aina? Tuskinpa. Reduxin kehittäjä Dan Abramov pohdiskelee asiaa artikkelissaan [You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367) -->
-Should we always use redux? Propably not. Dan Abramov, the developer of redux, discusses this in his article [You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367).
+Should we always use redux? Probably not. Dan Abramov, the developer of redux, discusses this in his article [You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367).
 
 Nowadays it is possible to implement redux-like state management without redux by using the React [context](https://reactjs.org/docs/context.html)-api and the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer)-hook. 
 More about this [here](https://www.simplethread.com/cant-replace-redux-with-hooks/) and [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). We will also practice this in 
