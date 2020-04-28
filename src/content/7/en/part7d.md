@@ -776,7 +776,7 @@ const useNotes = (url) => {
 const App = () => {
   const [counter, setCounter] = useState(0)
   const [values, setValues] = useState([])
-  const url = 
+  const url = 'https://blooming-atoll-75500.herokuapp.com/api/notes'
   const notes = useNotes(url) // highlight-line
 
   const handleClick = () => {
@@ -843,7 +843,7 @@ const config = (env, argv) => {
   // highlight-start
   const backend_url = argv.mode === 'production'
     ? 'https://blooming-atoll-75500.herokuapp.com/api/notes'
-    : 'http://localhost:3001/notes'
+    : 'http://localhost:3001/api/notes'
   // highlight-end
 
   return {
