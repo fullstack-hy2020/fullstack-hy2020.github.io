@@ -40,6 +40,8 @@ exports.createPages = ({ actions, graphql }) => {
           path:
             lang === 'en'
               ? `/en/part${part.toString()}`
+              : lang === 'zh'
+              ? `/zh/part${part.toString()}`
               : `/osa${part.toString()}`,
           component: partIntroTemplate,
           context: {
@@ -52,6 +54,10 @@ exports.createPages = ({ actions, graphql }) => {
           path:
             lang === 'en'
               ? `/en/part${part}/${snakeCase(
+                  navigation[lang][part][frontmatter.letter]
+                )}`
+              : lang === 'zh'
+              ? `/zh/part${part}/${snakeCase(
                   navigation[lang][part][frontmatter.letter]
                 )}`
               : `/osa${part}/${snakeCase(

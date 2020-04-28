@@ -19,7 +19,7 @@ const Element = ({
   noWrap,
   centeredInDesktop,
   relative,
-  ...props,
+  ...props
 }) => {
   const classes = [];
 

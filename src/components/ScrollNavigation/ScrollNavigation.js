@@ -57,7 +57,7 @@ class ScrollNavigation extends Component {
             key={key}
             className="left-navigation-link"
             style={{ borderColor: colorCode }}
-            to={`/${lang === 'en' ? 'en/part' : 'osa'}${part}/${snakeCase(partsNode[key])}`}
+            to={`/${lang === 'en' ? 'en/part' : lang === 'zh' ? 'zh/part' :'osa'}${part}/${snakeCase(partsNode[key])}`}
           >{`${key} ${partsNode[key]}`}</Link>
         );
       } else {

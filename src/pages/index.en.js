@@ -19,6 +19,7 @@ import mainSEOdescription from '../content/seo/mainSEOdescription';
 import mainSEOtags from '../content/seo/mainSEOtags';
 import news from '../images/noun_news_1248039.svg';
 import yliopistoLogo from '../images/company_logos/uoh_centre.svg';
+import { Link } from 'gatsby';
 
 const IndexPage = () => {
   const {
@@ -59,12 +60,12 @@ const IndexPage = () => {
             headingLevel="h2"
           />
 
-          <a
+          <Link
             className="col-2 centered about__challenge-button spacing--after--mobile"
-            href="/en/about"
+            to="/zh/about"
           >
             Start course
-          </a>
+          </Link>
 
           <div className="spacing--small" />
 
