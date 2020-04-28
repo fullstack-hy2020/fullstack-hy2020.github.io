@@ -252,7 +252,7 @@ npm install --save @material-ui/core
 ```
 
 <!-- Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään bootstrapin css-määrittelyt lataava rivi: -->
-Then add the following line to the <i>head</i> tag in the <i>public/index.html</i> file. The line loads bootstrap's css-definitions.
+Then add the following line to the <i>head</i> tag in the <i>public/index.html</i> file. The line loads Google's font Roboto.
 
 ```js
 <head>
@@ -411,7 +411,7 @@ Alert is quite stylish:
 
 ![](../../images/7/65ea.png)
 
-#### Navigaation structure
+#### Navigation structure
 
 <!-- Navigaatiorakenne toteutetaan komponentin [AppBar](https://material-ui.com/components/app-bar/) avulla -->
 We can implement navigation using the [AppBar](https://material-ui.com/components/app-bar/) component.
@@ -551,7 +551,13 @@ There are also [other ways](https://blog.bitsrc.io/5-ways-to-style-react-compone
 
 The [styled components](https://www.styled-components.com/) library offers an interesting approach for defining styles through [tagged template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) that were introduced in ES6.
 
-Let's make a few changes to the styles of our application with the help of styled components. First, let's define two components with styles:
+Let's make a few changes to the styles of our application with the help of styled components. First, install the package with the command:
+
+```js
+npm install --save styled-components
+```
+
+Then let's define two components with styles:
 
 ```js
 import styled from 'styled-components'
