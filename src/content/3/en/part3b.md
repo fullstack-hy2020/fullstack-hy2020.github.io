@@ -100,7 +100,7 @@ Create a Git repository in the project directory, and add <i>.gitignore</i> with
 node_modules
 ```
 
-Create a Heroku application with the command <i>heroku create</i>, create a Git repository in the application directory, commit the code and move it to Heroku with command <i>git push heroku master</i>.
+Create a Heroku application with the command <i>heroku create</i>, commit your code to the repository and move it to Heroku with command <i>git push heroku master</i>.
 
 If everything went well, the application works:
 
