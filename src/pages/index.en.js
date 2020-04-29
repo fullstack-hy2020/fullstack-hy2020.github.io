@@ -62,7 +62,7 @@ const IndexPage = () => {
 
           <Link
             className="col-2 centered about__challenge-button spacing--after--mobile"
-            to="/zh/about"
+            to="/en/about"
           >
             Start course
           </Link>
