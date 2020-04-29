@@ -25,7 +25,20 @@ export const PartBanner = ({ lang }) => {
                   'State management with Redux',
                   'React router, custom hooks, styling app with CSS and webpack',
                   'GraphQL',
-                  'Typescript'
+                  'Typescript',
+                ]
+              : lang === 'zh'
+              ? [
+                  'Web 应用的基础设施',
+                  'React 入门',
+                  '与服务端通信',
+                  '用NodeJS和Express写服务端程序',
+                  '测试 Express 服务端程序, 以及用户管理',
+                  '测试 React 应用',
+                  '利用Redux进行状态管理',
+                  'React router、自定义 hook，利用CSS和webpack给app添加样式',
+                  'GraphQL',
+                  'Typescript',
                 ]
               : [
                   'Web-sovellusten toiminnan perusteet',
@@ -37,7 +50,7 @@ export const PartBanner = ({ lang }) => {
                   'Sovelluksen tilan hallinta Redux-kirjastolla',
                   'React router, custom-hookit, tyylikirjastot ja webpack',
                   'GraphQL',
-                  'Typescript'
+                  'Typescript',
                 ];
 
           return (
@@ -49,9 +62,17 @@ export const PartBanner = ({ lang }) => {
                 alt: partNames[part],
               }}
               hoverImageSrc={require(`../../images/thumbnails/part-${part}_ovr.svg`)}
-              name={`${lang === 'en' ? 'Part' : 'Osa'} ${part}`}
+              name={`${
+                lang === 'en' ? 'Part' : lang === 'zh' ? 'Part' : 'Osa'
+              } ${part}`}
               summary={partNames[part]}
-              path={lang === 'en' ? `/en/part${part}` : `/osa${part}`}
+              path={
+                lang === 'en'
+                  ? `/en/part${part}`
+                  : lang === 'zh'
+                  ? `/zh/part${part}`
+                  : `/osa${part}`
+              }
             />
           );
         })}

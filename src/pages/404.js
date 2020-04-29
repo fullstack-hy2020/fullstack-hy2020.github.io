@@ -14,7 +14,11 @@ class NotFoundPage extends Component {
 
   componentDidMount() {
     const siteLanguage =
-      window.location.pathname.indexOf('/en') !== -1 ? 'en' : 'fi';
+      window.location.pathname.indexOf('/en') > 0
+        ? 'en'
+        : window.location.pathname.indexOf('/zh') > 0
+        ? 'zh'
+        : 'fi';
 
     this.setState({ siteLanguage });
   }
@@ -23,12 +27,8 @@ class NotFoundPage extends Component {
     const title =
       this.state.siteLanguage === 'en' ? 'Page not found' : 'Sivua ei löytynyt';
 
-    return (
-      <Layout>
-        <SEO
-          title={`${title} | Full stack open`}
-          lang={this.state.siteLanguage}
-        />
+    return <Layout>
+        <SEO title={`${title} | Full stack open`} lang={this.state.siteLanguage} />
 
         <Element className="container spacing--large spacing--after">
           <h1>404 - {title}</h1>
@@ -37,20 +37,11 @@ class NotFoundPage extends Component {
             Uncaught ReferenceError: unknown is not defined
           </p>
 
-          <Arrow
-            className="col-10 arrow__container--with-link"
-            bold
-            thickBorder
-            link={this.state.siteLanguage === 'en' ? '/en' : '/'}
-            content={[
-              { backgroundColor: colors['main'], text: 'Go back home' },
-            ]}
-          />
+          <Arrow className="col-10 arrow__container--with-link" bold thickBorder link={this.state.siteLanguage === 'en' ? '/en' : this.state.siteLanguage === 'zh' ? '/zh' : '/'} content={[{ backgroundColor: colors['main'], text: 'Go back home' }]} />
         </Element>
 
         <Footer lang={this.state.siteLanguage} />
-      </Layout>
-    );
+      </Layout>;
   }
 }
 

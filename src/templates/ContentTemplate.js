@@ -144,7 +144,7 @@ export default class ContentTemplate extends Component {
       <Layout>
         <SEO
           lang={lang}
-          title={`Fullstack ${lang === 'en' ? 'part' : 'osa'}${part} | ${
+          title={`Fullstack ${lang === 'en' ? 'part' :lang === 'zh' ? 'part' :'osa'}${part} | ${
             this.state.h1Title
           }`}
           description={mainSEOdescription[lang]}
@@ -186,12 +186,12 @@ export default class ContentTemplate extends Component {
                   {
                     backgroundColor: colorCode,
                     text: 'Fullstack',
-                    link: `/${lang === 'en' ? 'en/' : ''}#course-contents`,
+                    link: `/${lang === 'en' ? 'en/' :lang === 'zh' ? 'zh/' : ''}#course-contents`,
                   },
                   {
                     backgroundColor: colorCode,
-                    text: `${lang === 'en' ? 'part' : 'osa'} ${part}`,
-                    link: lang === 'en' ? `/en/part${part}` : `/osa${part}`,
+                    text: `${lang === 'en' ? 'part' : lang === 'zh' ? 'part' :'osa'} ${part}`,
+                    link: lang === 'en' ? `/en/part${part}` :lang === 'zh' ? `/zh/part${part}` : `/osa${part}`,
                   },
                   {
                     backgroundColor: colors['black'],
@@ -210,7 +210,7 @@ export default class ContentTemplate extends Component {
                 lang={lang}
                 currentPartTitle={navigation[lang][part][letter]}
                 currentPath={`/${
-                  lang === 'en' ? 'en/part' : 'osa'
+                  lang === 'en' ? 'en/part' : lang === 'zh' ? 'zh/part':'osa'
                 }${part}/${snakeCase(navigation[lang][part][letter])}`}
                 colorCode={colorCode}
                 className="col-2 spacing"
