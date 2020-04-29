@@ -13,9 +13,9 @@ class Layout extends Component {
 
   componentDidMount() {
     const siteLanguage =
-      window.location.pathname.indexOf('/en') > 0
+      window.location.pathname.indexOf('/en') !== -1
         ? 'en'
-        : window.location.pathname.indexOf('/zh') > 0
+        : window.location.pathname.indexOf('/zh') !== -1
         ? 'zh'
         : 'fi';
 
