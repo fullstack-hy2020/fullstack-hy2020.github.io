@@ -20,7 +20,7 @@ The GraphQL philosophy is very different from REST. REST is <i>resource based</i
 The resource basedness of REST works well in most situations. However, it can be a bit awkward sometimes. 
 
 
-Let's assume our bloglist application contains social media like functionality, and we would i.e want to show a list of all the blogs the users who have commented on the blogs we follow have added. 
+Let's assume our bloglist application contains social media like functionality, and we would i.e. want to show a list of all the blogs the users who have commented on the blogs we follow have added. 
 
 
 If the server implemented a REST API, we would probably have to do multiple HTTP-requests from the browser before we had all the data we wanted. The requests would also return a lot of unnecessary data, and the code on the browser would probably be quite complicated. 
@@ -32,10 +32,10 @@ If this was an often used functionality, there could be a REST-endpoint for it. 
 A GraphQL server is well suited for these kinds of situations. 
 
 
-The main principle of GraphQL is, that the code on the browser forms a <i>query</i> describing the data wanted, and sends it to the API with an HTTP POST request. Unlike REST, all GraphQL queries are sent to the same address, and their type is POST. 
+The main principle of GraphQL is, that the code on the browser forms a <i>query</i> describing the data wanted, and sends it to the API with an HTTP POST request. Unlike REST, all GraphQL queries are sent to the same address, and their type is POST.
 
 
-The data described in the above scenario could be fetched with ( roughly ) the following query: 
+The data described in the above scenario could be fetched with (roughly) the following query: 
 
 ```bash
 query FetchBlogsQuery {
@@ -660,7 +660,7 @@ The Mutation is given the details of the person as parameters. The parameter <i>
 Mutations also require a resolver: 
 
 ```js
-const uuid = require('uuid/v1')
+const { v1: uuid } = require('uuid')
 
 // ...
 
