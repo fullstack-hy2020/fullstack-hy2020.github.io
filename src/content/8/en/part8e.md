@@ -240,7 +240,7 @@ The backend code can be found on [Github](https://github.com/fullstack-hy2020/gr
 ### Subscriptions on the client
 
 
-In order to use subscriptions in our React application, we have to do some changes, especially on its [configuration]((https://www.apollographql.com/docs/react/v3.0-beta/data/subscriptions/).
+In order to use subscriptions in our React application, we have to do some changes, especially on its [configuration](https://www.apollographql.com/docs/react/v3.0-beta/data/subscriptions/).
 The configuration in <i>index.js</i> has to be modified like so: 
 
 ```js
