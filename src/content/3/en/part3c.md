@@ -168,13 +168,17 @@ note.save().then(response => {
 })
 ```
 
-The code assumes that it will be passed the password from the credentials we created in MongoDB Atlas as a command line parameter. We can access the command line parameter like this:
+**NB** Depending on which region you selected when building your cluster, the <i>MongoDB URI</i>may be different from the example provided above.  You should verify and use the correct URI that was generated from MongoDB Atlas.
+
+The code also assumes that it will be passed the password from the credentials we created in MongoDB Atlas as a command line parameter. We can access the command line parameter like this:
 
 ```js
 const password = process.argv[2]
 ```
 
 When the code is run with the command <i>node mongo.js password</i>, Mongo will add a new document to the database.
+
+**NB** Please note the password is the password created for the database user created earlier, not your MongoDB Atlas password.  Also, if you created password with special characters, then you'll need to [URL encode password](https://docs.atlas.mongodb.com/troubleshoot-connection/#special-characters-in-connection-string-password).
 
 We can view the current state of the database from the MongoDB Atlas from <i>Collections</i>
 in the Overview tab.
