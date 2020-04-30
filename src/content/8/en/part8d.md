@@ -261,7 +261,7 @@ const PersonForm = ({ setError }) => {
 
 The callback function is given a reference to the cache and the data returned by the mutation as parameters. For example, in our case this would be the created person. 
 
-The code reads the cached state of <em>ALL\_PERSONS</em> query using [readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readquery) function and updates the cache with [writeQuery]https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writequery-and-writefragment) function adding the new person to the cached data. 
+The code reads the cached state of <em>ALL\_PERSONS</em> query using [readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readquery) function and updates the cache with [writeQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writequery-and-writefragment) function adding the new person to the cached data. 
 
 There are actually some situations where the only good way to keep the cache up to date is using _update_ -callbacks. 
 
