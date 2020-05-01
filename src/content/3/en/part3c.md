@@ -107,7 +107,7 @@ Finally we are ready to connect to our database. Start by clicking <i>connect</i
 
 ![](../../images/3/63ea.png)
 
-and the choose <i>Connect your application</i>:
+and choose <i>Connect your application</i>:
 
 ![](../../images/3/64ea.png)
 
