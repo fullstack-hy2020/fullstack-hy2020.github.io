@@ -292,7 +292,7 @@ and remove the unnecessary files.
 
 The whole app is now in one component. That is not what we want, so refactor the code so that it consists of three components: <i>Header</i>,  <i>Content</i> and <i>Total</i>. All data is still kept in the <i>App</i> component, which passes all necessary data to each component as props. Be sure to add type declarations for each component's props! 
 
-The <i>Header</i> component should take care of rendering the name of the course.<i>Content</i> should render the names of the different parts and the amount of exercises in each part, and <i>Total</i> should render the total sum of exercises in all parts.
+The <i>Header</i> component should take care of rendering the name of the course. <i>Content</i> should render the names of the different parts and the amount of exercises in each part, and <i>Total</i> should render the total sum of exercises in all parts.
 
 The <i>App</i> component should look somewhat like this:
 
