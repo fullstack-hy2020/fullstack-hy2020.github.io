@@ -357,7 +357,7 @@ const showPerson = (name) => {
 ```
 
 <!-- Kyselyn muuttujalle _nameToSearch_ määritellään arvo kutsuttaessa. -->
-The query's _nameToSearch_ variable receives a value when the qury is run. 
+The query's _nameToSearch_ variable receives a value when the query is run. 
 
 <!-- Kyselyn vastaus tulee muuttujaan _result_, ja sen arvo sijoitetaan komponentin tilan muutujaan _person_. Sijoitus tehdään _useEffect_-hookissa: -->
 The query response is saved to the variable _result_, and its value is saved to the component's state _person_ in the _useEffect_ hook. 
