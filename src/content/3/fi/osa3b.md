@@ -49,7 +49,7 @@ Asennetaan backendiin <i>cors</i> komennolla
 npm install cors --save
 ```
 
-Otetaan middleware käyttöön ja sallitaan kaikki origineista tulevat pyynnöt:
+Otetaan middleware käyttöön toistaiseksi sellaisella konfiguraatiolla joka sallii kaikista origineista tulevat pyynnöt kaikkiin backendin express routeihin:
 
 ```js
 const cors = require('cors')
