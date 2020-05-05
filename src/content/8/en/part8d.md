@@ -233,7 +233,7 @@ const PersonForm = ({ setError }) => {
 
 This approach is pretty good, the drawback being that the query is always rerun with any updates. 
 
-It is possible to optimize the solution by handling updating the cache ourselves. This is done by defining a suitable [update](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#options-)-callback for the mutation, which Apollo runs after the mutation:
+It is possible to optimize the solution by handling updating the cache ourselves. This is done by defining a suitable [update](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#options)-callback for the mutation, which Apollo runs after the mutation:
 
 ```js 
 const PersonForm = ({ setError }) => {
