@@ -1128,7 +1128,7 @@ Now we can run our tests from the command line with the command <i>npm run test:
 ![](../../images/5/39ea.png)
 
 <!-- Huomaa, että testien suorituksesta tallentuu video hakemistoon <i>cypress/videos/</i>, hakemisto lienee syytä gitignoroida. -->
-Note that video of the test execution will be saved to <i>cypress/videos/</i>, so you should propably git ignore this directory. 
+Note that video of the test execution will be saved to <i>cypress/videos/</i>, so you should probably git ignore this directory. 
 
 <!-- Testien ja frontendin koodin lopullinen versio on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11), branchissa <i>part5-11</i>. -->
 The frontend- and the test code can be found from [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11) branch <i>part5-11</i>.
@@ -1141,7 +1141,7 @@ The frontend- and the test code can be found from [github](https://github.com/fu
 
 In the last exercises of this part we will do some E2E tests for our blog application. 
 The material of this part should be enough to complete the exercises. 
-You should absolutely also check out the Cypress [documentation](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell). It is propably the best documentation I have ever seen for an open source project. 
+You should absolutely also check out the Cypress [documentation](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell). It is probably the best documentation I have ever seen for an open source project. 
 
 <!-- Erityisesti kannattaa lukea luku [Introduction to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes), joka toteaa -->
 I especially recommend reading [Introduction to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes), which states

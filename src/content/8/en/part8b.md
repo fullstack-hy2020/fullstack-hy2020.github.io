@@ -357,7 +357,7 @@ const showPerson = (name) => {
 ```
 
 <!-- Kyselyn muuttujalle _nameToSearch_ määritellään arvo kutsuttaessa. -->
-The query's _nameToSearch_ variable receives a value when the qury is run. 
+The query's _nameToSearch_ variable receives a value when the query is run. 
 
 <!-- Kyselyn vastaus tulee muuttujaan _result_, ja sen arvo sijoitetaan komponentin tilan muutujaan _person_. Sijoitus tehdään _useEffect_-hookissa: -->
 The query response is saved to the variable _result_, and its value is saved to the component's state _person_ in the _useEffect_ hook. 
@@ -641,7 +641,6 @@ const PersonForm = ({ setError }) => {
     onError: (error) => {
       setError(error.graphQLErrors[0].message)
     }
-    onError: props.onError 
     // highlight-end
   })
 
@@ -723,7 +722,7 @@ export const EDIT_NUMBER = gql`
 ```
 
 The <i>PhoneForm</i> component responsible for the change is straightforward. The form has fields for the person's name and new phone number, and calls the _changeNumber_ function. The function is done using the _useMutation_-hook. 
-Interesting lines on the code have been hihglighed.
+Interesting lines on the code have been hihglighted.
 
 ```js
 import React, { useState } from 'react'
@@ -784,10 +783,10 @@ It looks bleak, but it works:
 Surprisingly, when person's number is changed the new number automatically appears on the list of persons rendered by the <i>Persons</i> component. 
 This happens because each person has an identifying field of type <i>ID</i>, so the person's details saved to the cache update automatically when they are changed with the mutation. 
 
-The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4) branch <i>part8-4</i>
+The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4) branch <i>part8-4</i>.
 
 <!-- Sovelluksessa on  vielä pieni ongelma. Jos yritämme vaihtaa olemattomaan nimeen liittyvän puhelinnumeron, ei mitään näytä tapahtuvan. Syynä tälle on se, että jos nimeä vastaavaa henkilöä ei löydy, vastataan kyselyyn <i>null</i>: -->
-Our application still has one small flaw. If we try to change the phonenumber for a name which does not exist, nothing seems to happen. 
+Our application still has one small flaw. If we try to change the phone number for a name which does not exist, nothing seems to happen. 
 This happens because if a person with the given name cannot be found, 
 the mutation response is <i>null</i>:
 
@@ -862,15 +861,16 @@ useEffect(() => {
 <!-- Tämä ratkaisu ei kuitenkaan toimi, ellei _notify_-funktiota ole määritelty [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-funktioon käärittynä. Jos näin ei tehdä, seurauksena on ikuinen luuppi, sillä aina kun komponentti _App_ renderöidään uudelleen notifikaation poistamisen jälkeen, syntyy <i>uusi versio</i> funktiosta _notify_ ja se taas aiheuttaa efektifunktion uudelleensuorituksen ja taas uuden notifikaation... -->
 However this solution does not work is the _notify_-function is not wrapped to a [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-function.  If its not, this results to an endless loop. When the _App_ component is rerendered after a notification is removed, a <i>new version</i> of _notify_ gets created which causes the effect function to be executed which causes a new notification and so on an so on...
 
-The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5) branch <i>part8-5</i>
+The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5) branch <i>part8-5</i>.
 
 ### Apollo Client and the applications state
 
-In our example, management of the applications state has mostly become the responsibility of Apollo Client. This is quite typical solution for GraphQL-applications. 
+In our example, management of the applications state has mostly become the responsibility of Apollo Client. This is quite typical solution for GraphQL applications. 
 Our example uses the state of the React components only to manage the state of a form and to show error notifications. When using GraphQL it can be, that there are no more justifiable reasons to move the management of the applications state to Redux at all. 
 
 When necessary Apollo enables saving the applications local state to [Apollo cache](https://www.apollographql.com/docs/react/v3.0-beta/data/local-state/).
 
+</div>
 
 <div class="tasks">
 

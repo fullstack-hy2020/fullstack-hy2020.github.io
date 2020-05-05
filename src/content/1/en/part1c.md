@@ -251,7 +251,7 @@ We will change the application to the following:
 import React, { useState } from 'react' // highlight-line
 import ReactDOM from 'react-dom'
 
-const App = (props) => {
+const App = () => {
   const [ counter, setCounter ] = useState(0) // highlight-line
 
 // highlight-start
@@ -332,7 +332,7 @@ Every time the _setCounter_  modifies the state it causes the component to re-re
 If the component doesn't render when you think it should, or if it renders at the "wrong time", you can debug the application by logging the values of the component's variables to the console. If we make the following additions to our code:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [ counter, setCounter ] = useState(0)
 
   setTimeout(
@@ -363,7 +363,7 @@ Button-elements support so-called [mouse events](https://developer.mozilla.org/e
 In React, registering an event handler function to the <i>click</i> event [happens](https://reactjs.org/docs/handling-events.html) like this:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [ counter, setCounter ] = useState(0)
 
   // highlight-start
@@ -392,7 +392,7 @@ Now every click of the <i>plus</i> button causes the _handleClick_ function to b
 The event handler function can also be defined directly in the value assignment of the onClick-attribute:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [ counter, setCounter ] = useState(0)
 
   return (
@@ -418,7 +418,7 @@ we achieve the desired behavior, meaning that the value of _counter_ is increase
 Let's also add a button for resetting the counter:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [ counter, setCounter ] = useState(0)
 
   return (
@@ -499,7 +499,7 @@ Here it's ok, because our event handlers are so simple.
 Let's separate the event handlers into separate functions anyway: 
 
 ```js
-const App = (props) => {
+const App = () => {
   const [ counter, setCounter ] = useState(0)
 
 // highlight-start
@@ -554,7 +554,7 @@ const Display = (props) => {
 Using the component is straightforward, as we only need to pass the state of the _counter_ to component:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [ counter, setCounter ] = useState(0)
 
   const increaseByOne = () => setCounter(counter + 1)
@@ -591,7 +591,7 @@ const Button = (props) => {
 Our <i>App</i> component now looks like this:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [ counter, setCounter ] = useState(0)
 
   const increaseByOne = () => setCounter(counter + 1)

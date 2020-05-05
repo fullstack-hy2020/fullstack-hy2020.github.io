@@ -33,7 +33,7 @@ Itse en jostain syystä juurikaan käytä Visual Studio Coden debuggeria.
 
 #### Chromen dev tools
 
-Debuggaus onnisuu myös Chromen developer-konsolilla, käynnistämällä sovellus komennolla:
+Debuggaus onnistuu myös Chromen developer-konsolilla, käynnistämällä sovellus komennolla:
 
 ```bash
 node --inspect index.js
@@ -89,7 +89,7 @@ Luodaan <i>security</i> välilehdeltä tietokantakäyttäjätunnus joka on siis 
 
 ![](../../images/3/59.png)
 
-annetaan käyttäjälle luku- ja kirjoitustoikeus kaikkiin tietokantoihin
+annetaan käyttäjälle luku- ja kirjoitusoikeus kaikkiin tietokantoihin
 
 ![](../../images/3/60.png)
 

@@ -110,7 +110,7 @@ console.log(m2)
 // [ '<li>1</li>', '<li>2</li>', '<li>3</li>' ] is printed
 ```
 
-Here an array filled with integer values is transformed into an array containing strings of HTML using the map method. In [part2](/en/part2) of this course, we will see that map is used quite frequently in React.
+Here an array filled with integer values is transformed into an array containing strings of HTML using the map method. In [part 2](/en/part2) of this course, we will see that map is used quite frequently in React.
 
 Individual items of an array are easy to assign to variables with the help of the [destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment).
 

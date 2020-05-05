@@ -321,6 +321,10 @@ Aaltosulkeiden käyttö tulee varmaan aiheuttamaan alussa pientä päänvaivaa, 
 
 Parempi muotoilu ohjelmamme muistiinpanorivit tuottavalle apufunktiolle saattaakin olla seuraava useille riveille jaoteltu versio:
 
+```
+(koodi tähän)
+```
+
 Kyse on kuitenkin edelleen yhden komennon sisältävästä nuolifunktiosta, komento vain sattuu olemaan hieman monimutkaisempi.
 
 ### Antipattern: taulukon indeksit avaimina

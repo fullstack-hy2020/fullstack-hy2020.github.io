@@ -73,7 +73,7 @@ The chain of events caused by opening the page https://fullstack-exampleapp.hero
 
 ![](../../images/0/7e.png)
 
-First, the browser does a HTTP GET request to the server to fetch the HTML code of the page. The <i>img</i> tag in the HTML prompts the browser to fetch the image <i>kuva.png</i>. The browser renders the HTML page and the image to the screen. 
+First, the browser does an HTTP GET request to the server to fetch the HTML code of the page. The <i>img</i> tag in the HTML prompts the browser to fetch the image <i>kuva.png</i>. The browser renders the HTML page and the image to the screen. 
 
 Even though it is difficult to notice, the HTML page begins to render before the image has been fetched from the server. 
 
@@ -123,7 +123,7 @@ This course will use Node.js and Express to create web servers.
 
 ### Running application logic on the browser
 
-Keep the developer console open. Empty the console by clicking the &empty; symbol. 
+Keep the developer console open. Empty the console by clicking the 🚫 symbol. 
 Now when you go to the [notes](https://fullstack-exampleapp.herokuapp.com/notes) page, the browser does 4 HTTP requests: 
 
 ![](../../images/0/8e.png)
@@ -168,7 +168,7 @@ The details of the code are not important right now, but some code has been incl
 
 Immediately after fetching the <i>script</i> tag, the browser begins to execute the code. 
 
-The last two lines define that the browser does a HTTP GET request to the server's address <i>/data.json</i>:
+The last two lines define that the browser does an HTTP GET request to the server's address <i>/data.json</i>:
 
 ```js
 xhttp.open('GET', '/data.json', true)
@@ -181,7 +181,7 @@ We can try going to the address <https://fullstack-exampleapp.herokuapp.com/data
 ![](../../images/0/10e.png)
 
 There we find the notes in [JSON](https://en.wikipedia.org/wiki/JSON) "raw data". 
-By default, the browser is not too good at displaying JSON-data. Plugins can be used to handle the formatting. Install, for example, [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) to Chrome, and reload the page. The data is now much more nicely formatted: 
+By default, the browser is not too good at displaying JSON-data. Plugins can be used to handle the formatting. Install, for example, [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) on Chrome, and reload the page. The data is now nicely formatted: 
 
 ![](../../images/0/11e.png)
 
@@ -205,7 +205,7 @@ data.forEach(function(note) {
 
 document.getElementById('notes').appendChild(ul)
 ```
-The code first creates an unordered list with an [ul](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul)-tag...
+The code first creates an unordered list with a [ul](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul)-tag...
 
 ```js
 var ul = document.createElement('ul')
@@ -230,7 +230,7 @@ By clicking the little triangle at the beginning of the line, you can expand the
 
 ![](../../images/0/13e.png)
 
-This output on the console is caused by <em>console.log</em> command in the code:
+This output on the console is caused by the <em>console.log</em> command in the code:
 
 ```js
 const data = JSON.parse(this.responseText)
@@ -356,13 +356,13 @@ list.appendChild(newElement)
 
 ![](../../images/0/16e.png)
 
-Even though the page updates on your browser, the changes are not permanent. If the page is reloaded, the new note will disappear, because the changes were not pushed to the server. The JavaScript code the browser fetches will always create the list of notes based on JSON-data from address <https://fullstack-exampleapp.herokuapp.com/data.json>.
+Even though the page updates on your browser, the changes are not permanent. If the page is reloaded, the new note will disappear, because the changes were not pushed to the server. The JavaScript code the browser fetches will always create the list of notes based on JSON-data from the address <https://fullstack-exampleapp.herokuapp.com/data.json>.
 
 ### CSS
 
 The <i>head</i> element of the HTML code of the Notes page contains a [link](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) tag, which determines that the browser must fetch a [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) style sheet from the address [main.css](https://fullstack-exampleapp.herokuapp.com/main.css).
 
-Cascading Style Sheets, or CSS, is a markup language used to determine the appearance of web applications. 
+Cascading Style Sheets, or CSS, is a markup language used to determine the appearance of web pages. 
 
 The fetched CSS-file looks as follows: 
 
@@ -388,9 +388,9 @@ CSS attributes can be examined on the <i>elements</i> tab on the console:
 
 The outermost <i>div</i> element has the class <i>container</i>. The <i>ul</i> element containing the list of notes has the class <i>notes</i>.
 
-The CSS rule defines that elements with the <i>container</i> class will be outlined with a one pixel wide [border](https://developer.mozilla.org/en-US/docs/Web/CSS/border). It also sets 10 pixel [padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding) to the element. This sets some empty space between the element content and the border. 
+The CSS rule defines that elements with the <i>container</i> class will be outlined with a one pixel wide [border](https://developer.mozilla.org/en-US/docs/Web/CSS/border). It also sets 10 pixel [padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding) on the element. This adds some empty space between the element's content and the border. 
 
-The second CSS rule sets the text color of the notes blue. 
+The second CSS rule sets the text color of the notes as blue. 
 
 HTML elements can also have other attributes than classes. The <i>div</i> element containing the notes has an [id](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id) attribute. JavaScript code uses the id to find the element. 
 
@@ -461,7 +461,7 @@ Data is sent as the [body](https://developer.mozilla.org/en-US/docs/Web/HTTP/Met
 
 The server can access the data by accessing the <em>req.body</em> field of the request object <em>req</em>.
 
-The Server creates a new note object, and adds it to an array called <em>notes</em>.
+The server creates a new note object, and adds it to an array called <em>notes</em>.
 
 ```js
 notes.push({
@@ -484,8 +484,8 @@ All of the data shown on the page was fetched with the HTML-code generated by th
 
 The Notes page uses AJAX to fetch the notes data. Submitting the form still uses the traditional mechanism of submitting web-forms. 
 
-The application URLs reflect the old, carefree times. JSON data is fetched from the url <https://fullstack-exampleapp.herokuapp.com/data.json> and new notes are sent to the url <https://fullstack-exampleapp.herokuapp.com/new_note>.  
-Nowadays urls like these would not be considered acceptable, as they don't follow the generally acknowledged conventions of [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) APIs, which we'll look into more in [part 3](/en/part3)
+The application URLs reflect the old, carefree times. JSON data is fetched from the url <https://fullstack-exampleapp.herokuapp.com/data.json> and new notes are sent to the URL <https://fullstack-exampleapp.herokuapp.com/new_note>.  
+Nowadays URLs like these would not be considered acceptable, as they don't follow the generally acknowledged conventions of [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) APIs, which we'll look into more in [part 3](/en/part3)
 
 The thing termed AJAX is now so commonplace that it's taken for granted. The term has faded into oblivion, and the new generation has not even heard of it. 
 
@@ -495,7 +495,7 @@ In our example app, the home page works like a traditional web-page: All of the 
 
 The Notes page gives some of the responsibility, generating the HTML code for existing notes, to the browser. The browser tackles this task by executing the JavaScript code it fetched from the server. The code fetches the notes from the server as JSON-data and adds HTML elements for displaying the notes to the page using the [DOM-API](/en/part0/fundamentals_of_web_apps#document-object-model-or-dom).
 
-In recent years, the [Single-page application](https://en.wikipedia.org/wiki/Single-page_application) (SPA) style of creating web-applications has emerged. SPA style websites don't fetch all of their pages separately from the server like our sample application does, but instead comprises of only one HTML page fetched from the server, the contents of which are manipulated with JavaScript that executes in the browser.
+In recent years, the [Single-page application](https://en.wikipedia.org/wiki/Single-page_application) (SPA) style of creating web-applications has emerged. SPA-style websites don't fetch all of their pages separately from the server like our sample application does, but instead comprise of only one HTML page fetched from the server, the contents of which are manipulated with JavaScript that executes in the browser.
 
 The Notes page of our application bears some resemblance to SPA-style apps, but it's not quite there yet. Even though the logic for rendering the notes is run on the browser, the page still uses the traditional way of adding new notes. The data is sent to the server with form submit, and the server instructs the browser to reload the Notes page with a <i>redirect</i>.
 
@@ -507,7 +507,7 @@ The HTML code is almost identical, but the JavaScript file is different (<i>spa.
 
 The form has no <i>action</i> or <i>method</i> attributes to define how and where to send the input data. 
 
-Open the <i>Network</i>-tab and empty it by clicking the &empty; symbol. When you now create a new note, you'll notice that the browser sends only one request to the server. 
+Open the <i>Network</i>-tab and empty it by clicking the 🚫 symbol. When you now create a new note, you'll notice that the browser sends only one request to the server. 
 
 ![](../../images/0/26e.png)
 
@@ -520,15 +520,15 @@ The POST request to the address <i>new\_note\_spa</i> contains the new note as J
 }
 ```
 
-The <i>Content-Type</i> header of the request tells the server, that the included data is represented in the JSON format. 
+The <i>Content-Type</i> header of the request tells the server that the included data is represented in the JSON format. 
 
 ![](../../images/0/27e.png)
 
 Without this header, the server would not know how to correctly parse the data. 
 
-The server responds with statuscode [201 created](https://httpstatuses.com/201). This time the server does not ask for a redirect, the browser stays on the same page, and it sends no further HTTP-requests. 
+The server responds with status code [201 created](https://httpstatuses.com/201). This time the server does not ask for a redirect, the browser stays on the same page, and it sends no further HTTP requests. 
 
-The SPA version of the app does not send the form data the traditional way, but instead uses the JavaScript code it fetched from the server. 
+The SPA version of the app does not send the form data in the traditional way, but instead uses the JavaScript code it fetched from the server. 
 We'll look into this code a bit, even though understanding all the details of it is not important just yet. 
 
 ```js
@@ -548,7 +548,7 @@ form.onsubmit = function(e) {
 }
 ```
 
-The command <em>document.getElementById('notes\_form')</em> instructs the code to fetch the form-element from the page, and to register an <i>event handler</i> to handle the form submit event. The event handler immediately calls the method <em>e.preventDefault()</em> to prevent the default handling of form submit. The default method would send the data to server and cause a redirect, which we don't want to happen. 
+The command <em>document.getElementById('notes\_form')</em> instructs the code to fetch the form-element from the page, and to register an <i>event handler</i> to handle the form submit event. The event handler immediately calls the method <em>e.preventDefault()</em> to prevent the default handling of form submit. The default method would send the data to the server and cause a new GET request, which we don't want to happen. 
 
 
 Then the event handler creates a new note, adds it to the notes list with the command <em>notes.push(note)</em>, rerenders the note list on the page and sends the new note to the server. 
@@ -575,26 +575,26 @@ It's worth remembering that the application is only meant to demonstrate the con
 
 ### Javascript-libraries
 
-The sample app is done with so called [vanilla Javascript](https://medium.freecodecamp.org/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34) using only the DOM-API and JavaScript to manipulate the structure of the pages. 
+The sample app is done with so called [vanilla Javascript](https://medium.freecodecamp.org/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34), using only the DOM-API and JavaScript to manipulate the structure of the pages. 
 
 Instead of using JavaScript and the DOM-API only, different libraries containing tools that are easier to work with compared to the DOM-API are often used to manipulate pages. One of these libraries is the ever-so-popular [JQuery](https://jquery.com/).
 
-JQuery was developed back when web-pages mainly followed the traditional style of the server generating HTML pages, the functionality of which was enhanced on the browser side using JavaScript written with JQuery. One of the reasons for the success of JQuery was its so-called cross-browser compatibility. The library worked regardless of the browser or the company that made it, so there was no need for browser-specific solutions. Nowadays using JQuery is not as justified given the advancement of VanillaJS, and the most popular browsers generally support basic functionalities well. 
+JQuery was developed back when web applications mainly followed the traditional style of the server generating HTML pages, the functionality of which was enhanced on the browser side using JavaScript written with JQuery. One of the reasons for the success of JQuery was its so-called cross-browser compatibility. The library worked regardless of the browser or the company that made it, so there was no need for browser-specific solutions. Nowadays using JQuery is not as justified given the advancement of VanillaJS, and the most popular browsers generally support basic functionalities well. 
 
 The rise of the single page app brought several more "modern" ways of web development than JQuery. The favorite of the first wave of developers was [BackboneJS](http://backbonejs.org/). After its [launch](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) in 2012, Google's [AngularJS](https://angularjs.org/) quickly became almost the de facto standard of modern web development. 
 
 However, the popularity of Angular plummeted after the Angular team [announced](https://jaxenter.com/angular-2-0-announcement-backfires-112127.html) in October 2014 that support for version 1 will end, and Angular 2 will not be backwards compatible with the first version. Angular 2 and the newer versions have not gotten too warm of a welcome. 
 
-Currently the most popular tool for implementing the browser-side logic of web-applications is Facebook's [React](https://reactjs.org/)-library. 
-During this course, we will get familiar with React and the [Redux](https://github.com/reactjs/redux)-library, which are frequently used together. 
+Currently the most popular tool for implementing the browser-side logic of web-applications is Facebook's [React](https://reactjs.org/) library. 
+During this course, we will get familiar with React and the [Redux](https://github.com/reactjs/redux) library, which are frequently used together. 
 
-The status of React seems strong, but the world of JavaScript is ever changing. For example, recently a newcomer [VueJS](https://vuejs.org/) has been capturing some interest. 
+The status of React seems strong, but the world of JavaScript is ever changing. For example, recently a newcomer - [VueJS](https://vuejs.org/) - has been capturing some interest. 
 
 ### Full stack -web development
 
 What does the name of the course, <i>Full stack web development</i>, mean? Full stack is a buzzword that everyone talks about, while no one really knows what it means. Or at least, there is no agreed-upon definition for the term. 
 
-Practically all web applications have (at least) two "layers": the browser, being closer to the end user, is the top layer, and the server the bottom one. There is often also a database layer below the server. We can therefore think of the <i>architecture</i> of a web application as a kind of a <i>stack</i> of layers. 
+Practically all web applications have (at least) two "layers": the browser, being closer to the end-user, is the top layer, and the server the bottom one. There is often also a database layer below the server. We can therefore think of the <i>architecture</i> of a web application as a kind of a <i>stack</i> of layers. 
 
 Often, we also talk about the [frontend](https://en.wikipedia.org/wiki/Front_and_back_ends) and the [backend](https://en.wikipedia.org/wiki/Front_and_back_ends). The browser is the frontend, and JavaScript run on the browser is frontend code. The server on the other hand is the backend. 
 
@@ -606,7 +606,7 @@ It used to be more common for developers to specialize in one layer of the stack
 
 ### Javascript fatigue
 
-Full stack web development is challenging in many ways. Things are happening in many places at once, and debugging is quite a bit harder than with regular desktop applications. JavaScript does not always work as you'd expect it to (compared to many other languages), and the asynchronous way its runtime environments work causes all sorts of challenges. Communicating in the web requires knowledge of the HTTP-protocol. One must also handle databases and server administration and configuration. It would also be good to know enough CSS to make applications at least somewhat presentable. 
+Full stack web development is challenging in many ways. Things are happening in many places at once, and debugging is quite a bit harder than with regular desktop applications. JavaScript does not always work as you'd expect it to (compared to many other languages), and the asynchronous way its runtime environments work causes all sorts of challenges. Communicating in the web requires knowledge of the HTTP protocol. One must also handle databases and server administration and configuration. It would also be good to know enough CSS to make applications at least somewhat presentable. 
 
 The world of JavaScript develops fast, which brings its own set of challenges. Tools, libraries and the language itself are under constant development. Some are starting to get tired of the constant change, and have coined a term for it: [Javascript](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4) [fatigue](https://auth0.com/blog/how-to-manage-javascript-fatigue/).
 
