@@ -44,7 +44,7 @@ const App = () => {
 Next we define a mutation for logging in
 
 ```js
-expoty const LOGIN = gql`
+export const LOGIN = gql`
   mutation login($username: String!, $password: String!) {
     login(username: $username, password: $password)  {
       value
@@ -114,10 +114,10 @@ export default LoginForm
 ```
 
 <!-- Käytössä on jälleen efektihookki, jonka avulla asetetaan tokenin arvo komponentin _App_ tilaan sekä local storageen siinä vaiheessa kun palvelin on vastannut mutaatioon. Efektihookki on tarpeen, jotta sovellus ei joutuisi ikuiseen renderöintilooppiin. -->
-We are using an effect hook again. Here it's used to save the token's value to the state of the _App_ component the local storage after the server has responded to the mutation. 
-Use of the effect hook is necessary to avoind an endless rendering loop.
+We are using an effect hook again. Here it's used to save the token's value to the state of the _App_ component and the local storage after the server has responded to the mutation. 
+Use of the effect hook is necessary to avoid an endless rendering loop.
 
-Let's also add a button which enables logged in user to log out. The buttons onClick handler sets the _token_ state to null, removes the token from local storage and resets the cache of the Apollo client. The last is [important](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout), because some queries might have fetched data to cache, which only logged in users should have access to. 
+Let's also add a button which enables a logged in user to log out. The button's onClick handler sets the _token_ state to null, removes the token from local storage and resets the cache of the Apollo client. The last step is [important](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout), because some queries might have fetched data to cache, which only logged in users should have access to. 
 
 <!-- Välimuistin nollaaminen tapahtuu Apollon _client_-objektin metodilla [resetStore](https://www.apollographql.com/docs/react/v3.0-beta/api/core/ApolloClient/#ApolloClient.resetStore), clientiin taas päästään käsiksi hookilla -->
 <!-- [useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useapolloclient): -->
@@ -263,9 +263,7 @@ const PersonForm = ({ setError }) => {
 
 The callback function is given a reference to the cache and the data returned by the mutation as parameters. For example, in our case this would be the created person. 
 
-The code reads the cached state of <em>ALL\_PERSONS</em> query using [readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readquery) function and updates the cache with [writeQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writequery-and-writefragment) function adding the new person to the cached data. 
-
-There are actually some situations where the only good way to keep the cache up to date is using _update_ -callbacks. 
+The code reads the cached state of <em>ALL\_PERSONS</em> query using [readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readquery) function and updates the cache with [writeQuery]https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writequery-and-writefragment) function adding the new person to the cached data. 
 
 <!-- On myös olemassa tilanteita, joissa ainoa järkevä tapa saada välimuisti pidettyä ajantasaisena on _update_-callbackillä tehtävä päivitys.  -->
 In some situations the only sensible way to keep the cache up to date is using the _update_-callback.
