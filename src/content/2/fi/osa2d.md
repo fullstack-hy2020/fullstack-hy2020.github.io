@@ -257,7 +257,7 @@ Käytetty <em>map</em>-kikka saattaa olla aluksi hieman hämmentävä. Asiaa kan
 
 ### Palvelimen kanssa tapahtuvan kommunikoinnin eristäminen omaan moduuliin
 
-<i>App</i>-komponentti alkaa kasvaa uhkaavasti kun myös palvelimen kanssa kommunikointi tapahtuu komponentissa. [Single responsibility](https://en.wikipedia.org/wiki/Single_responsibility_principle) -periaatteen hengessä kommunikointi onkin viisainta eristää omaan [moduuliinsa](#refaktorointia---moduulit).
+<i>App</i>-komponentti alkaa kasvaa uhkaavasti kun myös palvelimen kanssa kommunikointi tapahtuu komponentissa. [Single responsibility](https://en.wikipedia.org/wiki/Single_responsibility_principle) -periaatteen hengessä kommunikointi onkin viisainta eristää omaan [moduuliinsa](/osa2/kokoelmien_renderointi_ja_moduulit#refaktorointia-moduulit).
 
 Luodaan hakemisto <i>src/services</i> ja sinne tiedosto <i>notes.js</i>:
 
