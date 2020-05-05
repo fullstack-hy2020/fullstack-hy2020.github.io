@@ -753,7 +753,7 @@ Our goal is to configure the application with webpack in such a way that, when u
 
 The bundled file will then be configured to use the backend available at the <https://blooming-atoll-75500.herokuapp.com/api/notes> url.
 
-We will install <i>axios</i>, start the json-server, and then make the necessary changes to the application. For the sake of changing things up, we will fetch the notes from the backend with our [custom hook](/en/part5/custom_hooks) called _useNotes_:
+We will install <i>axios</i>, start the json-server, and then make the necessary changes to the application. For the sake of changing things up, we will fetch the notes from the backend with our [custom hook](/en/part7/custom_hooks) called _useNotes_:
 
 ```js
 import React, { useState, useEffect } from 'react'
