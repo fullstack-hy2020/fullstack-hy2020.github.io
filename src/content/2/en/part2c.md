@@ -642,7 +642,9 @@ Add to the view showing the data of a single country the weather report for the 
 Assuming the api-key is <i>t0p53cr3t4p1k3yv4lu3</i>, when the application is started like so:
 
 ```bash
-REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start
+REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start // For Linux/macOS Bash
+($env:REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3) -and (npm start) // For Windows PowerShell
+set REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 && npm start // For Windows cmd.exe
 ```
 
 <!-- koodista päästään avaimen arvoon käsiksi olion _process.env_ kautta: -->
