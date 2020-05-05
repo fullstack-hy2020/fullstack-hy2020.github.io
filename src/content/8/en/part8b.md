@@ -871,6 +871,7 @@ Our example uses the state of the React components only to manage the state of a
 
 When necessary Apollo enables saving the applications local state to [Apollo cache](https://www.apollographql.com/docs/react/v3.0-beta/data/local-state/).
 
+</div>
 
 <div class="tasks">
 
