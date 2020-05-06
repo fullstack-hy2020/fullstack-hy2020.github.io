@@ -128,7 +128,7 @@ const handleRightClick = () => {
 }
 ```
 
-The syntax may seem a bit strange at first. In practice <em>{ ...clicks }</em> creates a new object that has copies of all of the properties of the _clicks_ object. When we add new properties to the object, e.g. <em>{ ...clicks, right: 1 }</em>, the value of the _right_ property in the new object will be 1.
+The syntax may seem a bit strange at first. In practice <em>{ ...clicks }</em> creates a new object that has copies of all of the properties of the _clicks_ object. When we specify a particular property - e.g. <i>right</i> in <em>{ ...clicks, right: 1 }</em>, the value of the _right_ property in the new object will be 1.
 
 In the example above, this:
 
@@ -157,7 +157,7 @@ const handleLeftClick = () => {
 }
 ```
 
-The application appears to work. However, <i>it is forbidden in React to mutate state directly</i>, since it can result in unexpected side effects. Changing state has to always be done by setting the state to a new object. If properties from the previous state object want to simply be copied, this has to be done by copying those properties into a new object.
+The application appears to work. However, <i>it is forbidden in React to mutate state directly</i>, since it can result in unexpected side effects. Changing state has to always be done by setting the state to a new object. If properties from the previous state object are not changed, they need to simply be copied, which is done by copying those properties into a new object, and setting that as the new state.
 
 Storing all of the state in a single state object is a bad choice for this particular application; there's no apparent benefit and the resulting application is a lot more complex. In this case storing the click counters into separate pieces of state is a far more suitable choice.
 
@@ -228,7 +228,7 @@ const handleLeftClick = () => {
 }
 ```
 
-However, __don't__ do this. As mentioned previously, the state of React components like _allClicks_ must not be mutated directly. Even if mutating state appears to work in some cases, it can lead to problems that are very hard to notice.
+However, __don't__ do this. As mentioned previously, the state of React components like _allClicks_ must not be mutated directly. Even if mutating state appears to work in some cases, it can lead to problems that are very hard to debug.
 
 Let's take a closer look at how the clicking history is rendered to the page:
 
@@ -250,7 +250,7 @@ const App = (props) => {
 }
 ```
 
-We call the [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) method for the _allClicks_ array that joins all the items into a single string, separated by the string passed as the function parameter, which in our case is an empty space.
+We call the [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) method on the _allClicks_ array that joins all the items into a single string, separated by the string passed as the function parameter, which in our case is an empty space.
 
 ### Conditional rendering
 
@@ -290,7 +290,7 @@ const App = (props) => {
 }
 ```
 
-Now the behavior of the component depends on whether or not any buttons have been clicked. If not, meaning that the <em>allClicks</em> array is empty, the component renders a div component with some instructions:
+Now the behavior of the component depends on whether or not any buttons have been clicked. If not, meaning that the <em>allClicks</em> array is empty, the component renders a div element with some instructions instead:
 
 ```js
 <div>the app is used by pressing the buttons</div>
@@ -304,7 +304,7 @@ And in all other cases, the component renders the clicking history:
 </div>
 ```
 
-The <i>History</i> component renders completely different React-elements depending on the state of the application. This is called <i>conditional rendering</i>.
+The <i>History</i> component renders completely different React elements depending on the state of the application. This is called <i>conditional rendering</i>.
 
 React also offers many other ways of doing [conditional rendering](https://reactjs.org/docs/conditional-rendering.html). We will take a closer look at this in [part 2](/en/part2).
 
@@ -368,7 +368,7 @@ const App = (props) => {
 
 ### Old React
 
-In this course we use the [state hook](https://reactjs.org/docs/hooks-state.html) to add state to our React components, which is part of the newer versions of React and is available from version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) onwards. Before the addition of hooks, there was no way to add state to React functional components. Components that required state had to be defined as React [class](https://reactjs.org/docs/react-component.html) components using the JavaScript class syntax.
+In this course we use the [state hook](https://reactjs.org/docs/hooks-state.html) to add state to our React components, which is part of the newer versions of React and is available from version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) onwards. Before the addition of hooks, there was no way to add state to functional components. Components that required state had to be defined as [class](https://reactjs.org/docs/react-component.html) components, using the JavaScript class syntax.
 
 In this course we have made the slightly radical decision to use hooks exclusively from day one, to ensure that we are learning the future style of React. Even though functional components are the future of React, it is still important to learn the class syntax, as there are billions of lines of old React code that you might end up maintaining some day. The same applies to documentation and examples of React that you may stumble across on the internet.
 
@@ -378,7 +378,7 @@ We will learn more about React class components later on in the course.
 
 A large part of a typical developer's time is spent on debugging and reading existing code. Every now and then we do get to write a line or two of new code, but a large part of our time is spent on trying to figure out why something is broken or how something works. Good practices and tools for debugging are extremely important for this reason.
 
-Lucky for us, React is an extremely developer friendly library when it comes to debugging.
+Lucky for us, React is an extremely developer-friendly library when it comes to debugging.
 
 Before we move on, let us remind ourselves of one of the most important rules of web development.
 
@@ -396,7 +396,7 @@ If and when your code fails to compile and your browser lights up like a Christm
 
 don't write more code but rather find and fix the problem **immediately**. There has yet to be a moment in the history of coding where code that fails to compile would miraculously start working after writing large amounts of additional code. I highly doubt that such an event will transpire during this course either.
 
-Old school, print based debugging is always a good idea. If the component
+Old school, print-based debugging is always a good idea. If the component
 
 ```js
 const Button = ({ onClick, text }) => (
@@ -422,10 +422,10 @@ const Button = (props) => {
 
 This will immediately reveal if, for instance, one of the attributes has been misspelled when using the component.
 
-**NB** when you use _console.log_ for debugging, don't combine objects in a Java-like fashion by  using a plus. Instead of writing:
+**NB** When you use _console.log_ for debugging, don't combine _objects_ in a Java-like fashion by using the plus operator. Instead of writing:
 
 ```js
-console.log('props value is' + props)
+console.log('props value is ' + props)
 ```
 
 Separate the things you want to log to the console with a comma:
@@ -434,7 +434,7 @@ Separate the things you want to log to the console with a comma:
 console.log('props value is', props)
 ```
 
-If you use the Java-like way to combine a string with an object, you will end up with a rather uninformative log message:
+If you use the Java-like way of concatenating a string with an object, you will end up with a rather uninformative log message:
 
 ```js
 props value is [Object object]
@@ -726,7 +726,7 @@ When React renders the line:
 <button onClick={hello()}>button</button>
 ```
 
-It assigns the return value of _hello()_ to the onClick-attribute. Essentially the line gets transformed into:
+It assigns the return value of _hello()_ to the onClick attribute. Essentially the line gets transformed into:
 
 ```js
 <button onClick={() => console.log('hello world')}>
@@ -879,7 +879,7 @@ The event handler is set to the return value of _setToValue(1000)_ which is the 
 }
 ```
 
-The row generated for the increase button is the following:
+The increase button is declared as following:
 
 ```js
 <button onClick={setToValue(value + 1)}>increment</button>
@@ -1016,9 +1016,8 @@ The internet is full of React-related material. However, we use such a new style
 
 You may find the following links useful:
 
-- The React [official documentation](https://reactjs.org/docs/hello-world.html) is worth checking out at some point, although most of it will become relevant only later on in the course. Also, everything related to Class-components is irrelevant to us.
-- Beware the official React [tutorial](https://reactjs.org/tutorial/tutorial.html), it's not very good.
-- Some courses on [Egghead.io](https://egghead.io) like [Start learning React](https://egghead.io/courses/start-learning-react) are of high quality, and recently updated [The Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) is also relatively good; both courses introduce concepts that will also be introduced later on in this course. **NB** The first one uses Class components inside but the latter uses the new functional ones.
+- The React [official documentation](https://reactjs.org/docs/hello-world.html) is worth checking out at some point, although most of it will become relevant only later on in the course. Also, everything related to class-based components is irrelevant to us;
+- Some courses on [Egghead.io](https://egghead.io) like [Start learning React](https://egghead.io/courses/start-learning-react) are of high quality, and recently updated [The Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) is also relatively good; both courses introduce concepts that will also be introduced later on in this course. **NB** The first one uses class components but the latter uses the new functional ones.
 
 </div>
 
