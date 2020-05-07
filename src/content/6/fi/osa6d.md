@@ -82,7 +82,7 @@ const Notes = (props) => { // highlight-line
 
 // highlight-start
   const notesToShow = () => {
-    if ( props.filter === 'ALL ') {
+    if ( props.filter === 'ALL') {
       return props.notes
     }
     
