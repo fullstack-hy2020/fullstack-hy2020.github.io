@@ -238,7 +238,7 @@ it('user can login', function () {
 The test works. The problem is if we later add more input fields, the test will break because it expects the fields it needs to be the first and the last on the page. 
 
 <!-- Parempi ratkaisu on määritellä kentille yksilöivät <i>id</i>-attribuutit ja hakea kentät testeissä niiden perusteella. Eli laajennetaan kirjautumislomaketta seuraavasti -->
-It would be better to give our inputs unique <i>ids</i> and find them by them. 
+It would be better to give our inputs unique <i>ids</i> and use those to find them. 
 We change our login form like so
 
 ```js
