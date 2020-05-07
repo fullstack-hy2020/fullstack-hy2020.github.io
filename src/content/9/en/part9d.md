@@ -96,6 +96,8 @@ We can do that by altering our lint command in <i>.package.json</i> to the follo
 }
 ```
 
+If you are using Windows, you may need to use double quotes for the linting path: `"lint": "eslint \"./src/**/*.{ts,tsx}\""`.
+
 <!-- If we now run <i>npm run lint</i>, we should still receive an error from eslint: -->
 Now if we run <i>npm run lint</i>, we still recieve an error from eslint:
 
