@@ -294,7 +294,7 @@ describe('Note app',  function() {
 ```
 
 <!-- Viimeinen rivi varmistaa, että kirjautuminen on onnistunut.  -->
-The last row ensures, that the login was successful. 
+The last row ensures that the login was successful. 
 
 <!-- Huomaa, että CSS:n [id-selektori](https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors) on risuaita, eli jos koodista etsitään elementtiä, jolla on id <i>username</i> on sitä vastaava CSS-selektori <i>#username</i>. -->
 Note that the CSS [id-selector](https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors) is #, so if we want to search for an element with the id <i>username</i> the CSS selector is <i>#username</i>.
@@ -322,10 +322,10 @@ Actually both buttons are in the application's DOM the whole time, but only one 
 <!-- Jos haemme nappia tekstin perusteella, palauttaa komento [cy.contains](https://docs.cypress.io/api/commands/contains.html#Syntax) aina napeista ensimmäisen, eli lomakkeen avaavan napin. Näin tapahtuu siis vaikka nappi ei olisikaan näkyvillä. Tämän takia lomakkeen lähettävään nappiin on lisätty id <i>login-button</i>, jonka perusteella testi pääsee nappiin käsiksi. -->
 If we search for a button by its text, [cy.contains](https://docs.cypress.io/api/commands/contains.html#Syntax) will return the first of them, or the one opening the login form. 
 This will happen even if the button is not visible. 
-Because of this we gave the submit button id <i>login-button</i> we can use to access it.
+To avoid name conflicts, we gave submit button the id <i>login-button</i> we can use to access it.
 
 <!-- Huomaamme, että testeissä käytetty muuttuja _cy_ aiheuttaa ikävän ESlint-virheen -->
-Now we notice, that the variable _cy_ our tests use gives us a nasty Eslint error
+Now we notice that the variable _cy_ our tests use gives us a nasty Eslint error
 
 ![](../../images/5/30ea.png)
 
@@ -410,7 +410,7 @@ If the page contained more inputs, the test would break
 ![](../../images/5/31ea.png)
 
 <!-- Tämän takia olisi jälleen parempi lisätä lomakkeen kentälle <i>id</i> ja hakea kenttä testissä id:n perusteella. -->
-Due to this it would again be better to give the input an <i>id</i> and search for it by it. 
+Due to this it would again be better to give the input an <i>id</i> and search for the element by its id. 
 
 <!-- Testien rakenne näyttää seuraavalta: -->
 The structure of the tests looks like so:
@@ -445,7 +445,7 @@ describe('Note app', function() {
 
 <!-- Cypress suorittaa testit siinä järjestyksessä, missä ne ovat testikoodissa. Eli ensin suoritetaan testi <i>user can log in</i>, missä käyttäjä kirjautuu sovellukseen, ja tämän jälkeen suoritetaan testi <i>a new note can be created</i>, jonka <i>beforeEach</i>-lohkossa myös suoritetaan kirjautuminen. Miksi näin tehdään, eikö käyttäjä jo ole kirjaantuneena aiemman testin ansiosta? Ei, sillä <i>jokaisen</i> testin suoritus alkaa selaimen kannalta "nollatilanteesta", kaikki edellisten testien selaimen tilaan tekemät muutokset nollaantuvat. -->
 Cypress runs the tests in the order they are in the code. So first it runs <i>user can log in</i>, where the user logs in. Then cypress will run <i>a new note can be created</i> which's <i>beforeEach</i> block logs in as well. 
-Why do this? Is the user not logged in after the first test? 
+Why do this? Isn't the user logged in after the first test? 
 No, because <i>each</i> test starts from zero as far as the browser is concerned. 
 All changes to the browser's state are reversed after each test.
 
