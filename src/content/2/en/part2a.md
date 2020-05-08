@@ -317,7 +317,7 @@ Because the function parameter passed to the _map_ method -
 note => <li key={note.id}>{note.content}</li>
 ```
 
- - is used to create view elements, the value of the variable must be rendered inside of curly braces. Try to see what happens if the braces are removed. 
+&nbsp;- is used to create view elements, the value of the variable must be rendered inside of curly braces. Try to see what happens if the braces are removed. 
 
 The use of curly braces will cause some headache in the beginning, but you will get used to them soon enough. The visual feedback from React is immediate.
 
