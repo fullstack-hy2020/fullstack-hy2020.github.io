@@ -235,6 +235,7 @@ You can display the default error message returned by Mongoose, even though they
 
 ![](../../images/3/56e.png)
 
+**NB:** On update operations, mongoose validators are off by default. [Read the documentation](https://mongoosejs.com/docs/validation.html) to determine how to enable them.
 
 #### 3.21 Deploying the database backend to production
 
