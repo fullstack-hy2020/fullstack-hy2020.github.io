@@ -1163,7 +1163,7 @@ describe('Blog app', function() {
     cy.visit('http://localhost:3000')
   })
 
-  it('Login from is shown', function() {
+  it('Login form is shown', function() {
     // ...
   })
 })
@@ -1191,7 +1191,7 @@ describe('Blog app', function() {
     cy.visit('http://localhost:3000')
   })
 
-  it('Login from is shown', function() {
+  it('Login form is shown', function() {
     // ...
   })
 
