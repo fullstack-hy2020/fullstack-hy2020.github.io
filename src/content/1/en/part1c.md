@@ -476,7 +476,7 @@ What's going on? An event handler is supposed to be either a <i>function</i> or 
 
 <!-- tapahtumankäsittelijäksi tulee määriteltyä <i>funktiokutsu</i>. Sekin on monissa tilanteissa ok, mutta ei nyt. Kun React renderöi metodin ensimmäistä kertaa ja muuttujan <i>counter</i> arvo on 0, se suorittaa kutsun <em>setCounter(0 + 1)</em>, eli muuttaa komponentin tilan arvoksi 1. Tämä taas aiheuttaa komponentin uudelleenrenderöitymisen. Ja sama toistuu uudelleen... -->
 the event handler is actually a <i>function call</i>. In many situations this is ok, but not in this particular situation. In the beginning the value of the <i>counter</i> variable is 0. When React renders the method for the first time, it executes the function call <em>setCounter(0+1)</em>, and changes the value of the component's state to 1. 
-This will cause the component to be rerendered, react will execute the setCounter function call again, and the state will change leading to another rerender...
+This will cause the component to be re-rendered, react will execute the setCounter function call again, and the state will change leading to another rerender...
 
 <!-- Palautetaan siis tapahtumankäsittelijä alkuperäiseen muotoonsa -->
 Let's define the event handlers like we did before
@@ -639,7 +639,7 @@ When one of the buttons is clicked, the event handler is executed. The event han
 
 <!-- Eli jos painetaan nappia <i>plus</i>, muuttaa napin tapahtumankäsittelijä tilan _counter_ arvoksi 1 ja komponentti _App_ renderöidään uudelleen. Komponentin uudelleenrenderöinti aiheuttaa sen "alikomponentteina" olevien _Display_- ja _Button_-komponenttien uudelleenrenderöitymisen. _Display_ saa propsin arvoksi laskurin uuden arvon 1 ja _Button_-komponentit saavat propseina tilaa sopivasti muuttavat tapahtumankäsittelijät. -->
 So, if a user clicks the <i>plus</i> button, the button's event handler changes the value of _counter_ to 1, and the _App_ component is rerendered. 
-This causes its subcomponents _Display_ and _Button_ to also be rerendered. 
+This causes its subcomponents _Display_ and _Button_ to also be re-rendered. 
 _Display_ receives the new value of the counter, 1, as props. The _Button_ components receive event handlers which can be used to change the state of the counter.
 
 ### Refactoring the components
