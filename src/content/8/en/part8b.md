@@ -902,7 +902,7 @@ Implement a possibility to add new books to your application. The functionality 
 
 Make sure that the Authors and Books views are kept up to date after a new book is added. 
 
-In case of problems when making queries or mutations, checkfrom  developer console what the server response is:
+In case of problems when making queries or mutations, check from developer console what the server response is:
 
 ![](../../images/8/42ea.png)
 
