@@ -426,7 +426,7 @@ Let's respond to the HTTP request with a list of objects formatted with the _toJ
 ```js
 app.get('/api/notes', (request, response) => {
   Note.find({}).then(notes => {
-    response.json(notes.map(note => note.toJSON()))
+    response.json(notes)
   })
 })
 ```
