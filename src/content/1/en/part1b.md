@@ -512,7 +512,7 @@ When it comes to syntax, the classes and the objects created from them are very 
 
 The introduction of the class syntax was a controversial addition. Check out [Not Awesome: ES6 Classes](https://github.com/petsel/not-awesome-es6-classes) or [Is “Class” In ES6 The New “Bad” Part?](https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65) for more details.
 
-The ES6 class syntax is used a lot in "old" React and also in Node.js, hence an understanding of it being beneficial even in this course. However, since we are using the new [hooks](https://reactjs.org/docs/hooks-intro.html) feature of React throughout this course, we have no concrete use for JavaScript's class syntax.
+The ES6 class syntax is used a lot in "old" React and also in Node.js, hence an understanding of it being beneficial even in this course. However, since we are using the new [hooks](https://reactjs.org/docs/hooks-intro.html) feature of React throughout this course, we have no concrete use for JavaScripts class syntax.
 
 ### JavaScript materials
 
