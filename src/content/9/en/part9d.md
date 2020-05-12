@@ -919,7 +919,7 @@ dispatch({ type: "SET_PATIENT_LIST", payload: patients });
 
 <div class="tasks">
 
-### Exercises 9.16.-9.17
+### Exercises 9.16.-9.18
 
 We will soon add new type <i>Entry</i> for our app that represents a light weight patient journal entry. It consists of journal text i.e. <i>description</i>, creation date, information regarding the specialist who created it and possible diagnosis codes. Diagnosis codes map to the ICD-10 codes returned from the <i>/api/diagnoses</i> endpoint. Our naive implementation will be that a patient has an array of entries.
 
