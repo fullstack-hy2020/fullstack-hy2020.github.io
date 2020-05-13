@@ -302,7 +302,7 @@ const Persons = ({ persons }) => {
     if (result.data) {
       setPerson(result.data.findPerson)
     }
-  }, [result.data])
+  }, [result])
   // highlight-end
 
 // highlight-start
@@ -367,11 +367,11 @@ useEffect(() => {
   if (result.data) {
     setPerson(result.data.findPerson)
   }
-}, [result.data])
+}, [result])
 ```
 
 <!-- Hookin toisena parametrina on _result.data_, tämä saa aikaan sen, että hookin ensimmäisenä parametrina oleva funktio suoritetaan <i>aina kun kyselyssä haetaan uuden henkilön tiedot</i>. Jos päivitystä ei hoidettaisi kontrolloidusti hookissa, seuraisi ongelmia sen jälkeen kun yksittäisen henkilön näkymästä palataan kaikkien henkilöiden näkymään. -->
-The hook's second parameter is _result.data_, so function given to the hook as its second parameter is executed <i>every time the query fetches the details of a different person</i>. 
+The hook's second parameter is _result_, so function given to the hook as its second parameter is executed <i>every time the query fetches the details of a different person</i>. 
 Would we not handle the update in a controlled way in a hook, returning from a single person view to a list of all persons would cause problems. 
 
 
