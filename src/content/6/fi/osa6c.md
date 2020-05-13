@@ -309,7 +309,7 @@ const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(initializeNotes()))  
+    dispatch(initializeNotes())
   },[dispatch]) 
   
   // ...
