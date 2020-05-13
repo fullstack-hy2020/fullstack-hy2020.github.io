@@ -482,7 +482,7 @@ So by default the effect is <i>always</i> run after the component has been rende
 
 The second parameter of <em>useEffect</em> is used to [specify how often the effect is run](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect). If the second parameter is an empty array <em>[]</em>, then the effect is only run along with the first render of the component.
 
-There are many possible use cases for an effect hook other than fetching data from the server. However, this useis sufficient for us, for now.
+There are many possible use cases for an effect hook other than fetching data from the server. However, this use is sufficient for us, for now.
 
 Think back to the sequence of events we just discussed. Which parts of the code are run? In what order? How often? Understanding the order of events is critical!
 
