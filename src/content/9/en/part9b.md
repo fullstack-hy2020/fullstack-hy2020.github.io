@@ -8,7 +8,7 @@ lang: en
 <div class="content">
 
 <!-- After the brief introduction on the main principles of TypeScript we are ready to start our journey towards a Fullstack TypeScript developer. This part will not give you a thorough introduction to all aspects of TypeScript, the goal is rather to have focus in most common issues that arise when developing express backends and React fronends with TypeScript. In addition to language features we will also have a strong emphasis in tooling. -->
-After the brief introduction to the main princibles of TypeScript, we are now ready to start our journey towards becoming FullStack TypeScript developers. 
+After the brief introduction to the main principles of TypeScript, we are now ready to start our journey towards becoming FullStack TypeScript developers. 
 Rather than giving you a thorough introduction to all aspects of TypeScript, in this part we will focus on the most common issues that arise when developing express backends or React frontends with TypeScript. 
 In addition to language features we will also have a strong emphasis in tooling.
 
@@ -34,7 +34,7 @@ You can install both <i>ts-node</i> and the official <i>typescript</i> package g
 If you can't or don't want to install global packages, you can create an npm project which has the required dependencies and run your scripts in it. 
 We will also take this approach. 
 
-As we remember from [part 3](/en/part3) an npm project is set by running running command <i>npm init</i> in an empty directory. Then we can install the dependencies by running 
+As we remember from [part 3](/en/part3) an npm project is set by running the command <i>npm init</i> in an empty directory. Then we can install the dependencies by running 
 
 ```
 npm install --save-dev ts-node typescript
@@ -52,8 +52,8 @@ and set up <i>scripts</i> within the package.json:
 }
 ```
 
-<!-- Now within this directory you can use <i>ts-node</i>by running <i>npm run ts-node</i>. Notice that if you are using ts-node through package.json, all possible command line arguments for the script need to be prefixed with <i>--</i>. So if you want to run file.ts with <i>ts-node</i>, the whole command is: -->
-Now within this directory you can use <i>ts-node</i>by running <i>npm run ts-node</i>. Note that if you are using ts-node through package.json, all  command line arguments for the script need to be prefixed with <i>--</i>. So if you want to run file.ts with <i>ts-node</i>, the whole command is: -->
+<!-- Now within this directory you can use <i>ts-node</i> by running <i>npm run ts-node</i>. Notice that if you are using ts-node through package.json, all possible command line arguments for the script need to be prefixed with <i>--</i>. So if you want to run file.ts with <i>ts-node</i>, the whole command is: -->
+Now within this directory you can use <i>ts-node</i> by running <i>npm run ts-node</i>. Note that if you are using ts-node through package.json, all  command line arguments for the script need to be prefixed with <i>--</i>. So if you want to run file.ts with <i>ts-node</i>, the whole command is: -->
 
 ```sh
 npm run ts-node -- file.ts
@@ -221,7 +221,7 @@ But now  the question is if it's <i>really</i> okay for the function to return a
 When your code can end up in a situation where something is divided by 0, something has probably gone terribly wrong and an error should be thrown and handled where the function was called.
 When you are deciding to return values you weren't originally expecting, the warnings you see from TypeScript prevent you from making rushed decisions and help you to keep your code working as expected.
 
-<!-- One more thing to consider is that even though we have in our code defined what types of parameters to accept, the generated JavaScript that is used runtime doesn't anymore have these type checks. So, if for example the <i>operation</i>-parameter's value comes from an external interface, there is no definite guarantee that it will be one of the allowed values. Therefore it's still better to include error handling to be prepared for the unexpected to happen. In this case, when there are multiple possible accepted values and all unexcpeted ones should result in an error, the [switch...case](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement suits better than if...else in our code.  -->
+<!-- One more thing to consider is that even though we have in our code defined what types of parameters to accept, the generated JavaScript that is used runtime doesn't anymore have these type checks. So, if for example the <i>operation</i>-parameter's value comes from an external interface, there is no definite guarantee that it will be one of the allowed values. Therefore it's still better to include error handling to be prepared for the unexpected to happen. In this case, when there are multiple possible accepted values and all unexpected ones should result in an error, the [switch...case](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement suits better than if...else in our code.  -->
 One more thing to consider is, that even though we have defined types for our parameters, the generated JavaScript used at runtime does not contain the type checks.
 So if for example the <i>operation</i>-parameter's value comes from an external interface, there is no definite guarantee that it will be one of the allowed values. Therefore it's still better to include error handling and be prepared for the unexpected to happen. 
 In this case, when there are multiple possible accepted values and all unexpected ones should result in an error, the [switch...case](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement suits better than if...else in our code.
@@ -569,7 +569,7 @@ Let us start by installing express:
 npm install express
 ```
 
-add then add the <i>start</i> sript to package.json:
+add then add the <i>start</i> script to package.json:
 
 ```json
 {
