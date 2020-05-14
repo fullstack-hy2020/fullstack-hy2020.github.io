@@ -604,7 +604,7 @@ If there are too many (over 10) countries that match the query, then the user is
 
 ![](../../images/2/19b1.png)
 
-If there are fewer than ten countries, but more than one, then all countries matching the query are shown:
+If there are ten or fewer countries, but more than one, then all countries matching the query are shown:
 
 ![](../../images/2/19b2.png)
 
