@@ -426,12 +426,12 @@ Let's respond to the HTTP request with a list of objects formatted with the _toJ
 ```js
 app.get('/api/notes', (request, response) => {
   Note.find({}).then(notes => {
-    response.json(notes.map(note => note.toJSON()))
+    response.json(notes)
   })
 })
 ```
 
-Now the _notes_ variable is assigned to an array of objects returned by Mongo. When we call <em>notes.map(note => note.toJSON())</em> the result is a new array, where every item from the old one is mapped to a new object with the _toJSON_ method.
+Now the _notes_ variable is assigned to an array of objects returned by Mongo. When the response is sent in the JSON format, the _toJSON_ method of each object in the array is called automatically by the [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method.
 
 ### Database configuration into its own module
 
