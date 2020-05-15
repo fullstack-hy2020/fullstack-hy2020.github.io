@@ -671,7 +671,7 @@ Body:   {}
     ...
 </pre>
 
-Toinen virhetilanne taas vastaa tilannetta, missä haettavan muistiinpanon id on periaatteessa oikeassa formaatissa, mutta tietokannasta ei löydy indeksillä mitään. Tässä tilanteessa `note`:n arvo on `null` ja palvelimelta saadun vastauksen sisältö on tyhjä. Nämä tilanteet on syytä erottaa toisistaan, ja itseasiassa jälkimmäinen poikkeus on oman koodimme aiheuttama.
+Toinen virhetilanne taas vastaa tilannetta, missä haettavan muistiinpanon id on periaatteessa oikeassa formaatissa, mutta tietokannasta ei löydy indeksillä mitään. Tässä tilanteessa _note_:n arvo on _null_ ja palvelimelta saadun vastauksen sisältö on tyhjä. Nämä tilanteet on syytä erottaa toisistaan, ja itseasiassa jälkimmäinen poikkeus on oman koodimme aiheuttama.
 
 Muutetaan koodia seuraavasti:
 
