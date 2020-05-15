@@ -573,7 +573,7 @@ app.post('/api/notes', (request, response) => {
   })
 
   note.save().then(savedNote => {
-    response.json(savedNote.toJSON())
+    response.json(savedNote)
   })
 })
 ```
@@ -583,7 +583,7 @@ The note objects are created with the _Note_ constructor function. The response 
 The _savedNote_ parameter in the callback function is the saved and newly created note. The data sent back in the response is the formatted version created with the _toJSON_ method:
 
 ```js
-response.json(savedNote.toJSON())
+response.json(savedNote)
 ```
 
 Fetching an individual note gets changed into the following:
@@ -591,7 +591,7 @@ Fetching an individual note gets changed into the following:
 ```js
 app.get('/api/notes/:id', (request, response) => {
   Note.findById(request.params.id).then(note => {
-    response.json(note.toJSON())
+    response.json(note)
   })
 })
 ```
@@ -652,7 +652,7 @@ Let's add a simple error handler:
 app.get('/api/notes/:id', (request, response) => {
   Note.findById(request.params.id)
     .then(note => {
-      response.json(note.toJSON())
+      response.json(note)
     })
     .catch(error => {
       console.log(error)
@@ -700,7 +700,7 @@ app.get('/api/notes/:id', (request, response) => {
     .then(note => {
       // highlight-start
       if (note) {
-        response.json(note.toJSON())
+        response.json(note)
       } else {
         response.status(404).end() 
       }
@@ -749,7 +749,7 @@ app.get('/api/notes/:id', (request, response, next) => { // highlight-line
   Note.findById(request.params.id)
     .then(note => {
       if (note) {
-        response.json(note.toJSON())
+        response.json(note)
       } else {
         response.status(404).end()
       }
@@ -875,7 +875,7 @@ app.put('/api/notes/:id', (request, response, next) => {
 
   Note.findByIdAndUpdate(request.params.id, note, { new: true })
     .then(updatedNote => {
-      response.json(updatedNote.toJSON())
+      response.json(updatedNote)
     })
     .catch(error => next(error))
 })
