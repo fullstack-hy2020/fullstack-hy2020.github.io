@@ -677,19 +677,7 @@ Body:   {}
     ...
 </pre>
 
-The other error situation happens when the id is in the correct format, but no note is found in the database for that id.
-
-<pre>
-Method: GET
-Path:   /api/notes/5a3b7c3c31d61cbd9f8a0343
-Body:   {}
----
-TypeError: Cannot read property 'toJSON' of null
-    at Note.findById.then.note (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/index.js:27:24)
-    at process._tickCallback (internal/process/next_tick.js:178:7)
-</pre>
-
-We should distinguish between these two different types of error situations. The latter is in fact an error caused by our own code.
+The other error situation happens when the id is in the correct format, but no note is found in the database for that id. In this case the value of `note` is `null` and the response body will be empty. We should distinguish between these two different types of error situations. The latter is in fact an error caused by our own code.
 
 Let's change the code in the following way:
 
