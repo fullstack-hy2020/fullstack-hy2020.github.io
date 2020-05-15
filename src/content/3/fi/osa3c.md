@@ -423,7 +423,7 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-Nyt siis muuttujassa _notes_ on taulukollinen mongon palauttamia olioita. Kun taulukko lähetetään JSON-muotoisena vastauksena, jokaisen taulukon olion _toJSON_ metodia kutsutaan automaattisesti [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) metodin toimesta.
+Nyt siis muuttujassa _notes_ on taulukollinen mongon palauttamia olioita. Kun taulukko lähetetään JSON-muotoisena vastauksena, jokaisen taulukon olion _toJSON_-metodia kutsutaan automaattisesti [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)-metodin toimesta.
 
 ### Tietokantamäärittelyjen eriyttäminen moduuliksi
 
@@ -565,7 +565,7 @@ app.post('/api/notes', (request, response) => {
   })
 
   note.save().then(savedNote => {
-    response.json(savedNote.toJSON())
+    response.json(savedNote)
   })
 })
 ```
@@ -575,7 +575,7 @@ Muistiinpano-oliot siis luodaan _Note_-konstruktorifunktiolla. Pyyntöön vastat
 Takaisinkutsufunktion parametrina oleva _savedNote_ on talletettu muistiinpano. HTTP-pyyntöön palautetaan kuitenkin siitä metodilla _toJSON_ formatoitu muoto:
 
 ```js
-response.json(savedNote.toJSON())
+response.json(savedNote)
 ```
 
 Yksittäisen muistiinpanon tarkastelu muuttuu muotoon
@@ -583,7 +583,7 @@ Yksittäisen muistiinpanon tarkastelu muuttuu muotoon
 ```js
 app.get('/api/notes/:id', (request, response) => {
   Note.findById(request.params.id).then(note => {
-    response.json(note.toJSON())
+    response.json(note)
   })
 })
 ```
@@ -645,7 +645,7 @@ Lisätään tilanteeseen yksinkertainen virheidenkäsittelijä:
 app.get('/api/notes/:id', (request, response) => {
   Note.findById(request.params.id)
     .then(note => {
-      response.json(note.toJSON())
+      response.json(note)
     })
     .catch(error => {
       console.log(error)
@@ -693,7 +693,7 @@ app.get('/api/notes/:id', (request, response) => {
     .then(note => {
       // highlight-start
       if (note) {
-        response.json(note.toJSON())
+        response.json(note)
       } else {
         response.status(404).end()
       }
@@ -743,7 +743,7 @@ app.get('/api/notes/:id', (request, response, next) => {
   Note.findById(request.params.id)
     .then(note => {
       if (note) {
-        response.json(note.toJSON())
+        response.json(note)
       } else {
         response.status(404).end()
       }
@@ -869,7 +869,7 @@ app.put('/api/notes/:id', (request, response, next) => {
 
   Note.findByIdAndUpdate(request.params.id, note, { new: true })
     .then(updatedNote => {
-      response.json(updatedNote.toJSON())
+      response.json(updatedNote)
     })
     .catch(error => next(error))
 })
