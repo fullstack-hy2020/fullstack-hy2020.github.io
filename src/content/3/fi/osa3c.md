@@ -418,12 +418,12 @@ Palautetaan HTTP-pyynnön vastauksena _toJSON_-metodin avulla muotoiltuja oliota
 ```js
 app.get('/api/notes', (request, response) => {
   Note.find({}).then(notes => {
-    response.json(notes.map(note => note.toJSON()))
+    response.json(notes)
   })
 })
 ```
 
-Nyt siis muuttujassa _notes_ on taulukollinen mongon palauttamia olioita. Kun suoritamme operaation <em>notes.map(note => note.toJSON())</em> seurauksena on uusi taulukko, missä on jokaista alkuperäisen taulukon alkiota vastaava metodin _toJSON_ avulla muodostettu alkio.
+Nyt siis muuttujassa _notes_ on taulukollinen mongon palauttamia olioita. Kun taulukko lähetetään JSON-muotoisena vastauksena, jokaisen taulukon olion _toJSON_ metodia kutsutaan automaattisesti [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) metodin toimesta.
 
 ### Tietokantamäärittelyjen eriyttäminen moduuliksi
 
