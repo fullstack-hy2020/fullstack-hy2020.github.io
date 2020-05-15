@@ -677,7 +677,7 @@ Body:   {}
     ...
 </pre>
 
-The other error situation happens when the id is in the correct format, but no note is found in the database for that id. In this case the value of `note` is `null` and the response body will be empty. We should distinguish between these two different types of error situations. The latter is in fact an error caused by our own code.
+The other error situation happens when the id is in the correct format, but no note is found in the database for that id. In this case the value of _note_ is _null_ and the response body will be empty. We should distinguish between these two different types of error situations. The latter is in fact an error caused by our own code.
 
 Let's change the code in the following way:
 
