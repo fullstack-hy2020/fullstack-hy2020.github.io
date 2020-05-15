@@ -39,7 +39,7 @@ Debugging is also possible with the Chrome developer console by starting your ap
 node --inspect index.js
 ```
 
-You can access the debugger by clicking the green icon that appears in the Chrome developer console:
+You can access the debugger by clicking the green icon - the node logo - that appears in the Chrome developer console:
 
 ![](../../images/3/37.png)
 
@@ -47,7 +47,7 @@ The debugging view works the same way as it did with React applications. The <i>
 
 ![](../../images/3/38eb.png)
 
-All of the application's console.log messages will appear in the <i>Console</i> tab of the debugger. You can also inspect values of variables and execute your own JavaScript code.
+All of the application's <i>console.log</i> messages will appear in the <i>Console</i> tab of the debugger. You can also inspect values of variables and execute your own JavaScript code.
 
 ![](../../images/3/39ea.png)
 
@@ -59,7 +59,7 @@ When the application "does not work", we have to first figure out where the prob
 
 The key is to be systematic. Since the problem can exist anywhere, <i>you must question everything</i>, and eliminate all possibilities one by one. Logging to the console, Postman, debuggers, and experience will help.
 
-When bugs occur, <i>the worst of all possible strategies</i> is to continue writing code. It will guarantee that your code will soon have ten more bugs, and debugging them will be even more difficult. The [stop and fix](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/#.Wjv9axP1WCQ) principle from Toyota Production Systems is very effective in this situation as well.
+When bugs occur, <i>the worst of all possible strategies</i> is to continue writing code. It will guarantee that your code will soon have even more bugs, and debugging them will be even more difficult. The [stop and fix](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/#.Wjv9axP1WCQ) principle from Toyota Production Systems is very effective in this situation as well.
 
 ### MongoDB
 
@@ -69,7 +69,7 @@ Document databases differ from relational databases in how they organize data as
 
 You can read more about document databases and NoSQL from the course material for [week 7](https://tikape-s18.mooc.fi/part7/) of the Introduction to Databases course. Unfortunately the material is currently only available in Finnish. 
 
-Read now the chapters on [collections](https://docs.mongodb.com/manual/core/databases-and-collections/) and [documents](https://docs.mongodb.com/manual/core/document/) from the MongoDB manual to get a basic idea on how a document database stores the data.
+Read now the chapters on [collections](https://docs.mongodb.com/manual/core/databases-and-collections/) and [documents](https://docs.mongodb.com/manual/core/document/) from the MongoDB manual to get a basic idea on how a document database stores data.
 
 Naturally, you can install and run MongoDB on your own computer. However, the internet is also full of Mongo database services that you can use. Our preferred MongoDB provider in this course will be [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 
@@ -77,15 +77,15 @@ Once you've created and logged into your account, Atlas will recommend creating 
 
 ![](../../images/3/57.png)
 
-Let's choose <i>AWS</i> and <i>Frankfurt</i> and create a cluster.
+Let's choose <i>AWS</i> as the provider and <i>Frankfurt</i> as the region, and create a cluster.
 
 ![](../../images/3/58.png)
 
-Let's wait for the cluster to be ready for use. This will take approximately 10 minutes.
+Let's wait for the cluster to be ready for use. This can take approximately 10 minutes.
 
 **NB** do not continue before the cluster is ready.
 
-Let's use the <i>database access</i> tab for creating user credentials for the database. Please note that these are not the same credentials you use for logging into MongoDB Atlas.
+Let's use the <i>database access</i> tab for creating user credentials for the database. Please note that these are not the same credentials you use for logging into MongoDB Atlas. These will be used for your application to connect to the database.
 
 ![](../../images/3/59.png)
 
@@ -93,7 +93,7 @@ Let's grant the user with permissions to read and write to the databases.
 
 ![](../../images/3/60.png)
 
-**NB** for some people the new user credentials have not worked immediately after creation. In some cases it has taken minutes before the credentials have worked.
+**NB:** Some people reported the new user credentials not working immediately after creation. In some cases it has taken minutes before the credentials started working.
 
 Next we have to define the IP addresses that are allowed access to the database.
 
@@ -103,7 +103,7 @@ For the sake of simplicity we will allow access from all IP addresses:
 
 ![](../../images/3/62.png)
 
-Finally we are ready to connect to our database. Start by clicking <i>connect</i>
+Finally we are ready to connect to our database. Start by clicking <i>connect</i>:
 
 ![](../../images/3/63ea.png)
 
@@ -123,7 +123,7 @@ We are now ready to use the database.
 
 We could use the database directly from our JavaScript code with the [official MongoDb Node.js driver](https://mongodb.github.io/node-mongodb-native/) library, but it is quite cumbersome to use. We will instead use the [Mongoose](http://mongoosejs.com/index.html) library that offers a higher level API.
 
-Mongoose could be described as an <i>object document mapper</i> (ODM), and saving JavaScript objects as Mongo documents is straightforward with the library.
+Mongoose could be described as an <i>object document mapper</i> (ODM), and saving JavaScript objects as Mongo documents is straightforward with this library.
 
 Let's install Mongoose:
 
@@ -131,13 +131,13 @@ Let's install Mongoose:
 npm install mongoose --save
 ```
 
-Let's not add any code dealing with Mongo to our backend just yet. Instead, let's make a practice application into the file <i>mongo.js</i>:
+Let's not add any code dealing with Mongo to our backend just yet. Instead, let's make a practice application by creating a new file, <i>mongo.js</i>:
 
 ```js
 const mongoose = require('mongoose')
 
-if ( process.argv.length<3 ) {
-  console.log('give password as argument')
+if (process.argv.length < 3) {
+  console.log('Please provide the password as an argument: node mongo.js <password>')
   process.exit(1)
 }
 
@@ -162,15 +162,15 @@ const note = new Note({
   important: true,
 })
 
-note.save().then(response => {
+note.save().then(result => {
   console.log('note saved!')
   mongoose.connection.close()
 })
 ```
 
-**NB** Depending on which region you selected when building your cluster, the <i>MongoDB URI</i>may be different from the example provided above.  You should verify and use the correct URI that was generated from MongoDB Atlas.
+**NB:** Depending on which region you selected when building your cluster, the <i>MongoDB URI</i> may be different from the example provided above. You should verify and use the correct URI that was generated from MongoDB Atlas.
 
-The code also assumes that it will be passed the password from the credentials we created in MongoDB Atlas as a command line parameter. We can access the command line parameter like this:
+The code also assumes that it will be passed the password from the credentials we created in MongoDB Atlas, as a command line parameter. We can access the command line parameter like this:
 
 ```js
 const password = process.argv[2]
@@ -178,10 +178,9 @@ const password = process.argv[2]
 
 When the code is run with the command <i>node mongo.js password</i>, Mongo will add a new document to the database.
 
-**NB** Please note the password is the password created for the database user, not your MongoDB Atlas password.  Also, if you created password with special characters, then you'll need to [URL encode password](https://docs.atlas.mongodb.com/troubleshoot-connection/#special-characters-in-connection-string-password).
+**NB:** Please note the password is the password created for the database user, not your MongoDB Atlas password.  Also, if you created password with special characters, then you'll need to [URL encode that password](https://docs.atlas.mongodb.com/troubleshoot-connection/#special-characters-in-connection-string-password).
 
-We can view the current state of the database from the MongoDB Atlas from <i>Collections</i>
-in the Overview tab.
+We can view the current state of the database from the MongoDB Atlas from <i>Collections</i>, in the Overview tab.
 
 ![](../../images/3/65.png)
 
@@ -193,7 +192,7 @@ We should give a better name to the database. Like the documentation says, we ca
 
 ![](../../images/3/67.png)
 
-Let's destroy the <i>test</i> database. Let's change the name of database to <i>note-app</i> instead, by modifying the URI:
+Let's destroy the <i>test</i> database. Let's now change the name of database referenced in our connection string to <i>note-app</i> instead, by modifying the URI:
 
 ```bash
 mongodb+srv://fullstack:<PASSWORD>@cluster0-ostce.mongodb.net/note-app?retryWrites=true
@@ -233,7 +232,7 @@ Next, the application creates a new note object with the help of the <i>Note</i>
 
 ```js
 const note = new Note({
-  content: 'Browser can execute only Javascript',
+  content: 'HTML is Easy',
   date: new Date(),
   important: false,
 })
@@ -256,7 +255,7 @@ The result of the save operation is in the _result_ parameter of the event handl
 
 Let's also save a few more notes by modifying the data in the code and by executing the program again.
 
-**NB** unfortunately the Mongoose documentation uses callbacks in its examples, so it is not recommended to copy paste code directly from there. Mixing promises with old-school callbacks in the same code is not recommended. 
+**NB:** Unfortunately the Mongoose documentation is not very consistent, with parts of it using callbacks in its examples and other parts, other styles, so it is not recommended to copy paste code directly from there. Mixing promises with old-school callbacks in the same code is not recommended. 
 
 ### Fetching objects from the database
 
@@ -299,7 +298,7 @@ Create a cloud-based MongoDB database for the phonebook application with MongoDB
 
 Create a <i>mongo.js</i> file in the project directory, that can be used for adding entries to the phonebook, and for listing all of the existing entries in the phonebook.
 
-**NB** Do not include the password in the file that you commit and push to GitHub! 
+**NB:** Do not include the password in the file that you commit and push to GitHub! 
 
 The application should work as follows. You use the program by passing three command-line arguments (the first is the password), e.g.:
 
@@ -361,7 +360,7 @@ Person
   })
 ```
 
-**NB2** if you define a model with the name <i>Person</i>, mongoose will automatically name the associated collection as <i>people</i>.
+**NB:** If you define a model with the name <i>Person</i>, mongoose will automatically name the associated collection as <i>people</i>.
 
 </div>
 
@@ -391,7 +390,7 @@ const noteSchema = new mongoose.Schema({
 const Note = mongoose.model('Note', noteSchema)
 ```
 
-Let's change the handler for fetching all notes into the following form:
+Let's change the handler for fetching all notes to the following form:
 
 ```js
 app.get('/api/notes', (request, response) => {
@@ -407,7 +406,7 @@ We can verify in the browser that the backend works for displaying all of the do
 
 The application works almost perfectly. The frontend assumes that every object has a unique id in the <i>id</i> field. We also don't want to return the mongo versioning field <i>\_\_v</i> to the frontend.
 
-One way to format the objects returned by Mongoose is to [modify](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id) the _toJSON_ method of the objects. Modifying the method happens like this:
+One way to format the objects returned by Mongoose is to [modify](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id) the _toJSON_ method of the schema, which is used on all instances of the models produced with that schcema. Modifying the method works like this:
 
 ```js
 noteSchema.set('toJSON', {
@@ -532,7 +531,7 @@ We also added the hardcoded port of the server into the <em>PORT</em> environmen
 
 ![](../../images/3/45ae.png)
 
-The environment variables defined in the dotenv file can be taken into use with the command <em>require('dotenv').config()</em> and you can reference them in your code just like you would reference normal environment variables, with the familiar <em>process.env.MONGODB_URI</em> syntax.
+The environment variables defined in the <i>.env</i> file can be taken into use with the expression <em>require('dotenv').config()</em> and you can reference them in your code just like you would reference normal environment variables, with the familiar <em>process.env.MONGODB_URI</em> syntax.
 
 Let's change the <i>index.js</i> file in the following way:
 
@@ -550,7 +549,7 @@ app.listen(PORT, () => {
 })
 ```
 
-It's important that <i>dotenv</i> gets imported before the <i>note</i> model is imported. This ensures that the environment variables from the <i>.env</i> file are available globally before the code from the other modules are imported.
+It's important that <i>dotenv</i> gets imported before the <i>note</i> model is imported. This ensures that the environment variables from the <i>.env</i> file are available globally before the code from the other modules is imported.
 
 ### Using database in route handlers
 
@@ -578,7 +577,7 @@ app.post('/api/notes', (request, response) => {
 })
 ```
 
-The note objects are created with the _Note_ constructor function. The response for the request is sent inside of the callback function for the _save_ operation. This ensures that the response is sent only if the operation succeeded. We will discuss error handling a little bit later.
+The note objects are created with the _Note_ constructor function. The response is sent inside of the callback function for the _save_ operation. This ensures that the response is sent only if the operation succeeded. We will discuss error handling a little bit later.
 
 The _savedNote_ parameter in the callback function is the saved and newly created note. The data sent back in the response is the formatted version created with the _toJSON_ method:
 
@@ -669,10 +668,10 @@ If we make the following request, we will get the error message shown below:
 
 <pre>
 Method: GET
-Path:   /api/notes/5a3b7c3c31d61cb9f8a0343
+Path:   /api/notes/someInvalidId
 Body:   {}
 ---
-{ CastError: Cast to ObjectId failed for value "5a3b7c3c31d61cb9f8a0343" at path "_id"
+{ CastError: Cast to ObjectId failed for value "someInvalidId" at path "_id"
     at CastError (/Users/mluukkai/opetus/_fullstack/osa3-muisiinpanot/node_modules/mongoose/lib/error/cast.js:27:11)
     at ObjectId.cast (/Users/mluukkai/opetus/_fullstack/osa3-muisiinpanot/node_modules/mongoose/lib/schema/objectid.js:158:13)
     ...
@@ -715,7 +714,7 @@ app.get('/api/notes/:id', (request, response) => {
 
 If no matching object is found in the database, the value of _note_ will be undefined and the _else_ block is executed. This results in a response with the status code <i>404 not found</i>.
 
-If the format of the id is incorrect, then we will end up in the error handler defined in the _catch_ block. The appropriate status code for the situation is [400 bad request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1), because the situation fits the description perfectly:
+If the format of the id is incorrect, then we will end up in the error handler defined in the _catch_ block. The appropriate status code for the situation is [400 Bad Request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1), because the situation fits the description perfectly:
 
 > <i>The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.</i>
 
@@ -732,7 +731,7 @@ It's never a bad idea to print the object that caused the exception to the conso
 })
 ```
 
-The reason the error handler gets called might be something completely different than what you had anticipated. If you log the error to the console, you may save yourself from long and frustrating debugging sessions.
+The reason the error handler gets called might be something completely different than what you had anticipated. If you log the error to the console, you may save yourself from long and frustrating debugging sessions. Moreover, most modern services to where you deploy your application support some form of logging system that you can use to check these logs. As mentioned, Heroku is one.
 
 Every time you're working on a project with a backend, <i>it is critical to keep an eye on the console output of the backend</i>. If you are working on a small screen, it is enough to just see a tiny slice of the output in the background. Any error messages will catch your attention even when the console is far back in the background:
 
@@ -823,7 +822,7 @@ app.post('/api/notes', (request, response) => {
 app.use(express.json())
 ```
 
-Then the JSON data sent with the HTTP requests would not be available for the logger middleware or the POST route handler, since the _request.body_ would be an empty object.
+Then the JSON data sent with the HTTP requests would not be available for the logger middleware or the POST route handler, since the _request.body_ would be an empty object at that point.
 
 It's also important that the middleware for handling unsupported routes is next to the last middleware that is loaded into Express, just before the error handler.
 
