@@ -671,19 +671,7 @@ Body:   {}
     ...
 </pre>
 
-Toinen virhetilanne taas vastaa tilannetta, missä haettavan muistiinpanon id on periaatteessa oikeassa formaatissa, mutta tietokannasta ei löydy indeksillä mitään:
-
-<pre>
-Method: GET
-Path:   /api/notes/5a3b7c3c31d61cbd9f8a0343
-Body:   {}
----
-TypeError: Cannot read property 'toJSON' of null
-    at Note.findById.then.note (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/index.js:27:24)
-    at process._tickCallback (internal/process/next_tick.js:178:7)
-</pre>
-
-Nämä tilanteet on syytä erottaa toisistaan, ja itseasiassa jälkimmäinen poikkeus on oman koodimme aiheuttama.
+Toinen virhetilanne taas vastaa tilannetta, missä haettavan muistiinpanon id on periaatteessa oikeassa formaatissa, mutta tietokannasta ei löydy indeksillä mitään. Tässä tilanteessa `note`:n arvo on `null` ja palvelimelta saadun vastauksen sisältö on tyhjä. Nämä tilanteet on syytä erottaa toisistaan, ja itseasiassa jälkimmäinen poikkeus on oman koodimme aiheuttama.
 
 Muutetaan koodia seuraavasti:
 
