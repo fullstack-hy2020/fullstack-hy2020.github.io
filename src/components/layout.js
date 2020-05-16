@@ -18,7 +18,6 @@ class Layout extends Component {
         : window.location.pathname.indexOf('/zh') > -1
         ? 'zh'
         : 'fi';
-
     this.setState({
       siteLanguage: siteLanguage,
     });

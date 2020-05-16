@@ -717,7 +717,7 @@ Mutation是以人的详细信息作为参数。 参数<i>phone</i> 是唯一可�
 Mutation也需要一个解析器:
 
 ```js
-const uuid = require('uuid/v1')
+const { v1: uuid } = require('uuid')
 
 // ...
 

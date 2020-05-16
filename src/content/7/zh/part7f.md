@@ -107,8 +107,7 @@ const User = () => {
 #### 7.15: Blog view
 <!-- Implement a separate view for blog posts. You can model the layout of your view after the following example: -->
 为博客文章实现一个单独的视图。你可以在下面的例子之后建模你的视图布局:
-.
-.
+
 ![](../../images/7/45.png)
 
 

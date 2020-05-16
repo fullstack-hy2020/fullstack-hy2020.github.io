@@ -421,12 +421,12 @@ useEffect(() => {
   if (result.data) {
     setPerson(result.data.findPerson)
   }
-}, [result.data])
+}, [result])
 ```
 
 
 <!-- The hook's second parameter is _result.data_, so function given to the hook as its second parameter is executed <i>every time the query fetches the details of a different person</i>.  -->
-Hook的第二个参数是 result.data，因此每次查询获取不同<i> person</i> 的详细信息时，作为Hook的第二个参数给定的函数都会被执行。 
+Hook的第二个参数是 _result_ <i> person</i> 的详细信息时，作为Hook的第二个参数给定的函数都会被执行。 
 <!-- Would we not handle the update in a controlled way in a hook, returning from a single person view to a list of all persons would cause problems.  -->
 我们不会在Hook中以一种受控的方式来处理更新，从单个人视图返回到所有人的列表会导致问题。
 
@@ -737,7 +737,6 @@ const PersonForm = ({ setError }) => {
     onError: (error) => {
       setError(error.graphQLErrors[0].message)
     }
-    onError: props.onError 
     // highlight-end
   })
 
@@ -938,7 +937,7 @@ const PhoneForm = ({ setError }) => {
       setError('person not found')
     }
 
-  }, [result.data])
+  }, [result])
   // highlight-end
 
   // ...
@@ -1009,7 +1008,6 @@ useEffect(() => {
 <!-- When necessary Apollo enables saving the applications local state to [Apollo cache](https://www.apollographql.com/docs/react/v3.0-beta/data/local-state/). -->
 必要时，Apollo 允许将应用保存到本地状态[Apollo cache](https://www.apollographql.com/docs/react/v3.0-beta/data/local-state/ 缓存)。
 
-</div>
 
 <div class="tasks">
 

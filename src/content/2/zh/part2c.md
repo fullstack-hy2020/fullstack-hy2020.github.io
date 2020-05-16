@@ -30,7 +30,7 @@ lang: zh
     },
     {
       "id": 2,
-      "content": "Browser can execute only Javascript",
+      "content": "Browser can execute only JavaScript",
       "date": "2019-05-30T18:39:34.091Z",
       "important": false
     },
@@ -115,7 +115,7 @@ xhttp.send()
 在开始时，我们将一个<i>事件处理程序</i> 注册到表示 HTTP 请求的<em>xhttp</em>对象，当 <em>xhttp</em>对象的状态发生变化时，JavaScript 运行时将调用该对象。 如果状态的变化意味着对请求的响应已经到达，那么数据将得到相应的处理。
 
 <!-- It is worth noting that the code in the event handler is defined before the request is sent to the server. Despite this, the code within the event handler will be executed at a later point in time. Therefore, the code does not execute synchronously "from top to bottom", but does so <i>asynchronously</i>. JavaScript calls the event handler that was registered for the request at some point. -->
-值得注意的是，事件处理中的代码是在请求发送到服务器之前定义的。 尽管如此，事件处理中的代码将在稍后的时间点执行。 因此，代码并不是“从顶部到底部”同步执行，而是异步执行。 Javascript 调用了事件处理，而这个事件处理是在之前某个时刻注册的。
+值得注意的是，事件处理中的代码是在请求发送到服务器之前定义的。 尽管如此，事件处理中的代码将在稍后的时间点执行。 因此，代码并不是“从顶部到底部”同步执行，而是异步执行。 JavaScript 调用了事件处理，而这个事件处理是在之前某个时刻注册的。
 
 <!-- A synchronous way of making requests that's common in Java programming, for instance, would play out as follows (NB this is not actually working Java code): -->
 例如，一种在 Java 编程中常见的同步发出请求的方式，如下(注意，这实际上不是可运行的 Java 代码) :
@@ -145,8 +145,8 @@ notes.forEach(m => {
 <!-- Currently, JavaScript engines are <i>single-threaded</i>, which means that they cannot execute code in parallel. As a result, it is a requirement in practise to use a non-blocking model for executing IO operations. Otherwise, the browser would "freeze" during, for instance, the fetching of data from a server. -->
 目前，JavaScript 引擎是<i>单线程</i>的，这意味着它们不能并行执行代码。 因此，在实践中需要使用非阻塞模型来执行 IO 操作。 否则，浏览器将在从服务器获取数据时“冻结（卡住）”。
 
-<!-- Another consequence of this single threaded nature of Javascript engines is that if some code execution takes up a lot of time, the browser will get stuck for the duration of the execution. If we added the following code at the top of our application: -->
-这种单线程的 Javascript 引擎的另一个后果是，如果某些代码的执行占用了大量的时间，那么浏览器将在执行期间停滞不前。 如果我们在应用顶部添加如下代码:
+<!-- Another consequence of this single threaded nature of JavaScript engines is that if some code execution takes up a lot of time, the browser will get stuck for the duration of the execution. If we added the following code at the top of our application: -->
+这种单线程的 JavaScript 引擎的另一个后果是，如果某些代码的执行占用了大量的时间，那么浏览器将在执行期间停滞不前。 如果我们在应用顶部添加如下代码:
 
 ```js
 setTimeout(() => {
@@ -383,8 +383,8 @@ The following is printed to the console:
 
 
 
-<!-- The Javascript runtime environment calls the callback function registered by the <em>then</em> method providing it with a <em>response</em> object as a parameter. The <em>response</em> object contains all the essential data related to the response of an HTTP GET request, which would include the returned <i>data</i>, <i>status code</i>, and <i>headers</i>. -->
-Javascript 运行时环境调用由 <em>then</em> 方法注册的回调函数，并提供一个<em>response</em> 对象作为参数。<em>response</em> 对象包含与 HTTP GET 请求响应相关的所有基本数据，也包括返回的<i>data</i>、<i>status code</i> 和<i>headers</i>。 
+<!-- The JavaScript runtime environment calls the callback function registered by the <em>then</em> method providing it with a <em>response</em> object as a parameter. The <em>response</em> object contains all the essential data related to the response of an HTTP GET request, which would include the returned <i>data</i>, <i>status code</i>, and <i>headers</i>. -->
+JavaScript 运行时环境调用由 <em>then</em> 方法注册的回调函数，并提供一个<em>response</em> 对象作为参数。<em>response</em> 对象包含与 HTTP GET 请求响应相关的所有基本数据，也包括返回的<i>data</i>、<i>status code</i> 和<i>headers</i>。 
 
 <!-- Storing the promise object in a variable is generally unnecessary, and it's instead common to chain the <em>then</em> method call to the axios method call, so that it follows it directly: -->
 通常没有必要将 promise 对象存储在一个变量中，而将 <em>then</em>方法调用链到 axios 方法调用是很常见的，因此它可以直接跟在 axios 方法调用后面:
@@ -415,21 +415,21 @@ axios
   })
 ```
 
-<!-- The data returned by the server is plain text, basically just one long string. The axios library is still able to parse the data into a Javascript array, since the server has specified that the data format is <i>application/json; charset=utf-8</i> (see previous image) using the <i>content-type</i> header. -->
-服务器返回的数据是纯文本，基本上只有一个长字符串。 Axios 库仍然能够将数据解析为一个 Javascript 数组，因为服务器使用<i>content-type</i> 头指定数据格式为<i>application/json; charset=utf-8</i> (参见前面的图片)。
+<!-- The data returned by the server is plain text, basically just one long string. The axios library is still able to parse the data into a JavaScript array, since the server has specified that the data format is <i>application/json; charset=utf-8</i> (see previous image) using the <i>content-type</i> header. -->
+服务器返回的数据是纯文本，基本上只有一个长字符串。 Axios 库仍然能够将数据解析为一个 JavaScript 数组，因为服务器使用<i>content-type</i> 头指定数据格式为<i>application/json; charset=utf-8</i> (参见前面的图片)。
 
 <!-- We can finally begin using the data fetched from the server. -->
 我们现在终于可以开始使用从服务器获取的数据了。
 
-<!-- Let's do it "poorly" first by putting the <i>App</i> component representing the application inside the callback function. This is done by changing <i>index.js</i> to the following form: -->
-让我们首先“糟糕地”完成这个任务，即通过将表示应用的<i>App</i> 组件放在回调函数里面。 通过将<i>index.js</i> 更改为如下形式来实现的:
+<!-- Let's try and request the notes from our local server and render them, initially as the App component. Please note that this approach has many issues, as we're rendering the entire <i>App</i> component only when we successfuly retrieve a response: -->
+我们尝试从我们本地服务器请求 Notes 并渲染，就像App 组件开始那样。注意这种方法有许多问题，比如我们只有将整个<i>App</i>  渲染完成后才会得到成功的response :
 
 ```js
 import ReactDOM from 'react-dom'
 import React from 'react'
 import App from './App'
 
-import axios from 'axios'
+import axios from 'axios' // highlight-line
 
 axios.get('http://localhost:3001/notes').then(response => {
   const notes = response.data
@@ -448,8 +448,8 @@ axios.get('http://localhost:3001/notes').then(response => {
 
 
 ### Effect-hooks
-<!-- We have already used [state hooks](https://reactjs.org/docs/hooks-state.html) that were introduced along with React version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), which provide state to React components defined as functions. Version 16.8.0 also introduces the [effect hooks](https://reactjs.org/docs/hooks-effect.html) as a new feature. In the words of the docs: -->
-我们已经使用了与 React version  [16.8.0](https://www.npmjs.com/package/react/v/16.8.0)一起引入的 [state hooks](https://reactjs.org/docs/hooks-state.html)，它为 React 组件提供了定义为函数的状态。 16.8.0版本还引入了 [effect hooks](https://reactjs.org/docs/hooks-effect.html) 新特性。 像文档里说的:
+<!-- We have already used [state hooks](https://reactjs.org/docs/hooks-state.html) that were introduced along with React version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), which provide state to React components defined as functions - the so-called <i>functional components</i>. Version 16.8.0 also introduces the [effect hooks](https://reactjs.org/docs/hooks-effect.html) as a new feature. In the words of the docs: -->
+我们已经使用了与 React version  [16.8.0](https://www.npmjs.com/package/react/v/16.8.0)一起引入的 [state hooks](https://reactjs.org/docs/hooks-state.html)，它为 React 组件提供了定义为函数的状态，也就是所谓的 _函数式组件_ 。 16.8.0版本还引入了 [effect hooks](https://reactjs.org/docs/hooks-effect.html) 新特性。 像文档里说的:
 
 > <i>The Effect Hook lets you perform side effects in function components.</i>
  Effect Hook 可以让你在函数组件中执行副作用
@@ -459,8 +459,8 @@ axios.get('http://localhost:3001/notes').then(response => {
 <!-- As such, effect hooks are precisely the right tool to use when fetching data from a server. -->
 因此，effect hooks正是从服务器获取数据时使用的正确工具。
 
-<!-- Let's remove the fetching of data from <i>index.js</i>. There is no longer a need to pass data as props to the <i>App</i> component. So <i>index.js</i> simplifies to: -->
-让我们从<i>index.js</i> 中删除数据的获取逻辑。不再需要将数据作为props传递给<i>App</i> 组件。 所以我将 <i>index.js</i> 简化为:
+<!-- Let's remove the fetching of data from <i>index.js</i>. Since we're gonna be retrieving the notes from the server, there is no longer a need to pass data as props to the <i>App</i> component. So <i>index.js</i> can be simplified to:-->
+让我们从<i>index.js</i> 中删除数据的获取逻辑。由于我们需要从服务端获取notes， 不再需要将数据作为props传递给<i>App</i> 组件。 所以我将 <i>index.js</i> 简化为:
 
 ```js
 ReactDOM.render(<App />, document.getElementById('root'))
@@ -471,11 +471,11 @@ ReactDOM.render(<App />, document.getElementById('root'))
 
 ```js
 import React, { useState, useEffect } from 'react' // highlight-line
-import axios from 'axios' // highlight-line
+import axios from 'axios' 
 import Note from './components/Note'
 
 const App = () => {
-  const [notes, setNotes] = useState([]) // highlight-line
+  const [notes, setNotes] = useState([]) 
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
 
@@ -589,7 +589,7 @@ useEffect(hook, [])
 <em>useEffect</em>的第二个参数用于[指定effect运行的频率](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect)。 如果第二个参数是一个空数组 <em>[]</em>，那么这个effect只在组件的第一次渲染时运行。
 
 <!-- There are many possible use cases for effect hook other than fetching data from the server. This suffices us for now. -->
-除了从服务器获取数据之外，Effect-Hook还有许多用例。 目前我们只了解到这。
+除了从服务器获取数据之外，Effect-Hook还有许多用例。 但是目前已经足够，我们暂时只了解到这。
 
 <!-- Think back to the sequence of events we just discussed. Which parts of the code are run? In what order? How often? Understanding the order of events is critical! -->
 回想一下我们刚才讨论的事件顺序。 代码的哪些部分是运行的？ 按什么顺序？ 多久一次？ 理解事件的顺序是至关重要的！
@@ -640,9 +640,9 @@ useEffect(() => {
 
 ![](../../images/2/18e.png)
 
-<!-- The JavaScript code making up our React application is run in the browser. The browser gets the Javascript from the <i>React dev server</i>, which is the application that runs after running the command <em>npm start</em>. The dev-server transforms the JavaScript into a format understood by the browser. Among other things, it stitches together Javascript from different files into one file. We'll discuss the dev-server in more detail in part 7 of the course. -->
+<!-- The JavaScript code making up our React application is run in the browser. The browser gets the JavaScript from the <i>React dev server</i>, which is the application that runs after running the command <em>npm start</em>. The dev-server transforms the JavaScript into a format understood by the browser. Among other things, it stitches together JavaScript from different files into one file. We'll discuss the dev-server in more detail in part 7 of the course. -->
 
-构成我们的 React 应用的 JavaScript 代码在浏览器中运行。 浏览器从<i>React dev server</i> 获取 Javascript，这是运行  <em>npm start</em> 命令后运行的应用。 dev-server 将 JavaScript 转换成浏览器可以理解的格式。 除此之外，它还将来自不同文件的 Javascript 整合到一个文件中。 我们将在本课程的第7章节中更详细地讨论开发服务器。
+构成我们的 React 应用的 JavaScript 代码在浏览器中运行。 浏览器从<i>React dev server</i> 获取 JavaScript，这是运行  <em>npm start</em> 命令后运行的应用。 dev-server 将 JavaScript 转换成浏览器可以理解的格式。 除此之外，它还将来自不同文件的 JavaScript 整合到一个文件中。 我们将在本课程的第7章节中更详细地讨论开发服务器。
 
 <!-- The React application running in the browser fetches the JSON formatted data from <i>json-server</i> running on port 3001 on the machine. json-server gets its data from the file <i>db.json</i>. -->
 在浏览器中运行的 React 应用从计算机3001端口上运行的<i>JSON-server</i> 获取 JSON 格式的数据。 Json-server 从<i>db.json</i> 文件中获取数据。
@@ -745,7 +745,7 @@ Api [https://restcountries.eu](https://restcountries.eu) 以机器可读的格�
 
 <!-- **NB**: it is enough that your application works for most of the countries. Some countries, like <i>Sudan</i>, can cause trouble, since the name of the country is part of the name of another country, <i>South Sudan</i>. You need not worry about these edge cases. -->
 
-注意: 你的应用在大多数国家能好用就可以了。 有些国家，如苏丹，可能会有些麻烦，因为国名是另一个国家名称的一部分，即南苏丹。 你不必担心这些边缘情况edge cases。
+注意: 你的应用在大多数国家能好用就可以了。 有些国家，如苏丹，可能会很难支持，因为国名是另一个国家名称的一部分，即南苏丹。 你不必担心这些边缘情况edge cases。
 
 <!-- **WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application. -->
 
@@ -787,7 +787,9 @@ Api [https://restcountries.eu](https://restcountries.eu) 以机器可读的格�
 假设 api-key 是<i>t0p53cr3t4p1k3yv4lu3</i>，当应用像下面这样启动时:
 
 ```bash
-REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start
+REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start // For Linux/macOS Bash
+($env:REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3) -and (npm start) // For Windows PowerShell
+set REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 && npm start // For Windows cmd.exe
 ```
 
 

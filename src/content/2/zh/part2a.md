@@ -24,8 +24,7 @@ lang: zh
 当某些事情不能正常工作时，不要只是猜测错误，而应记录或使用其他调试方法。
 
 <!-- **NB** when you use the command _console.log_ for debugging, don't concatenate things 'the Java way' with a plus. Instead of writing: -->
-注意：当你使用_console.log_命令进行调试时，不要用Java的方式，将所有东西用'+'连在一起。即不要这么写:
-
+注意：如前一章所说的，当你使用 _console.log_ 命令进行调试时，不要用Java的方式，将所有东西用'+'连在一起。即不要这么写:
 ```js
 console.log('props value is' + props)
 ```
@@ -379,8 +378,6 @@ notes.map(note =>
 ```js
 note => <li key={note.id}>{note.content}</li>
 ```
-is used to create view elements, the value of the variable must be rendered inside of curly braces. Try to see what happens if the braces are removed. 
-用于创建视图元素，因此变量的值必须在花括号内渲染。 可以尝试如果去掉花括号会发生什么。
 
 <!-- The use of curly braces will cause some headache in the beginning, but you will get used to them soon enough. The visual feedback from React is immediate. -->
 一开始使用花括号会让你头疼，但是你很快就会习惯的。 因为来自 React 的图形反馈是即时的。
@@ -483,7 +480,7 @@ import ReactDOM from 'react-dom'
 ```
 
 <!-- [imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) two modules, enabling them to be used in the code. The <i>react</i> module is placed into a variable called _React_ and <i>react-dom</i> to variable _ReactDOM_. -->
-为了让它们能够在代码中使用，就[imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 了两个模块： <i>react</i> 模块被放入一个名为 React 的变量中， <i>react-dom</i> 模块放到了 ReactDOM 变量中。
+为了让它们能够在代码中使用，就[import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 了两个模块： <i>react</i> 模块被放入一个名为 React 的变量中， <i>react-dom</i> 模块放到了 ReactDOM 变量中。
 
 <!-- Let's move our <i>Note</i> component into its own module.  -->
 让我们将我们的<i>Note</i> 组件移动到它自己的模块中。
@@ -539,7 +536,7 @@ const App = ({ notes }) => {
 ```
 
 <!-- The period in the beginning refers to the current directory, so the module's location is a file called <i>Note.js</i> in a sub-directory of the current <i>components</i>. directory. The filename extension can be omitted. -->
-开头的句点指的是当前工作目录，因此模块的位置是当前<i>components</i> 的子目录中的一个名为<i>Note.js</i> 的文件。 文件扩展名(_.js_)可以省略。
+开头的 _句点_ 指的是当前工作目录，因此模块的位置是当前<i>components</i> 的子目录中的一个名为<i>Note.js</i> 的文件。 文件扩展名(_.js_)可以省略。
 
 <!--<i>App</i> is a component as well, so let's declare it in its own module as well. Since it is the root component of the application, we'll place it in the <i>src</i> directory. The contents of the file are as follows:--> 
 <i>App</i>也是一个组件，所以让我们在它自己的模块中声明它。 因为它是应用的根组件，所以我们将它放在  <i>src</i> 目录中。 文件内容如下:
@@ -758,9 +755,6 @@ const Course = (props) => { // highlight-line
 <!-- The model answers for part 1 can be found by going to the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen), click on <i>my submissions</i> at the top, and in the row corresponding to part 1 under the <i>solutions</i> column click on <i>show</i>. To see the solution to the <i>course info<i/> exercise, click on _index.js_ under <i>kurssitiedot</i> ("kurssitiedot" means "course info"). -->
 让我们完成练习 1.1 - 1.5中，用于渲染课程内容的代码。 您可以从模型答案的代码开始。第一章中的模型答案可以到 [提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)来找到，单击顶部的<i>my submissions</i>，在对应第一章中下面<i>solutions</i>列，点击<i>show</i>。 如果要查看<i>course info</i> 练习，点击 <i>kurssitiedot</i> 下的_index.js_ ("kurssitiedot" 表示课程信息)
 
-<!-- **Note that if you copy a project from one place to another, you might have to destroy the <i>node\_modules</i> directory and install the dependencies again with the command _npm install_ before you can start the application.** -->
-
-请注意，如果您将一个项目从一个地方复制到另一个地方，在启动应用之前，可能必须删除 <i>node\_modules</i>  目录，并使用 npm install 命令重新安装依赖项。
 
 <!-- It might not be good to copy a project or to put the  <i>node\_modules</i> directory into the version control per se.  -->
 另外，将项目副本或将 <i>node\_modules</i>目录放入版本控制系统并不推荐。
@@ -793,11 +787,9 @@ const App = () => {
     ]
   }
 
-  return (
-    <div>
-      <Course course={course} />
-    </div>
-  )
+
+    return <Course course={course} />
+ 
 }
 ```
 
@@ -854,14 +846,14 @@ App
 
 ```js
 const total = 
-  parts.reduce( (s, p) => someMagicHere )
+  parts.reduce((s, p) => someMagicHere)
 ```
 
 <!-- and does not work, it's worth to use console.log, which requires the arrow function to be written in its longer form: -->
-而且不起作用时，推荐使用 console.log ，它要求箭头函数以更长的形式来写（而不能写紧凑模式）:
+而且不起作用时，推荐使用 <i>console.log</i>，它要求箭头函数以更长的形式来写（而不能写紧凑模式）:
 
 ```js
-const total = parts.reduce( (s, p) => {
+const total = parts.reduce((s, p) => {
   console.log('what is happening', s, p)
   return someMagicHere 
 })
