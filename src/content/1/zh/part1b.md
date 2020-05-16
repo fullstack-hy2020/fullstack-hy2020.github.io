@@ -27,9 +27,9 @@ Javascript 在过去的几年里发展非常迅速，在本课程中，我们将
 
 代码文件以 <i>.js</i>结尾，通过 <em>node 文件名.js</em> 命令以运行文件。
 
-<!-- It is also possible to write Javascript code into the Node.js console, which is opened by typing _node_ in the command-line, as well as into the browser's developer tool console. The newest revisions of Chrome handle the newer features of Javascript [pretty well](http://kangax.github.io/compat-table/es2016plus/) without transpiling the code. -->
+<!-- It is also possible to write Javascript code into the Node.js console, which is opened by typing _node_ in the command-line, as well as into the browser's developer tool console. The newest revisions of Chrome handle the newer features of Javascript [pretty well](http://kangax.github.io/compat-table/es2016plus/) without transpiling the code.Alternatively you can use a tool like [JS Bin](https://jsbin.com/?js,console). -->
 
-还可以将 JavaScript 代码编写到 Node.js 控制台(通过在命令行中键入 _node_ 打开)，或者浏览器的开发工具控制台中。 最新版本的 Chrome 能 [很好地](http://kangax.github.io/compat-table/es2016plus/) 处理 JavaScript 的新特性，而且不需要转译代码。
+还可以将 JavaScript 代码编写到 Node.js 控制台(通过在命令行中键入 _node_ 打开)，或者浏览器的开发工具控制台中。 最新版本的 Chrome 能 [很好地](http://kangax.github.io/compat-table/es2016plus/) 处理 JavaScript 的新特性，而且不需要转译代码。作为替代品，你也可以选择 [JS Bin](https://jsbin.com/?js,console)这样的工具。
 
 <!-- Javascript is sort of reminiscent, both in name and syntax, to Java. But when it comes to the core mechanism of the language they could not be more different. Coming from a Java background, the behavior of Javascript can seem a bit alien, especially if one does not make the effort to look up its features. -->
 
@@ -481,12 +481,12 @@ const arto = {
   education: 'PhD',
   // highlight-start
   greet: function() {
-    console.log('hello, my name is', this.name)
+    console.log('hello, my name is ' + this.name)
   },
   // highlight-end
 }
 
-arto.greet()  // hello, my name is Arto Hellas gets printed
+arto.greet()  // "hello, my name is Arto Hellas" gets printed
 ```
 
 <!-- Methods can be assigned to objects even after the creation of the object: -->
@@ -498,7 +498,7 @@ const arto = {
   age: 35,
   education: 'PhD',
   greet: function() {
-    console.log('hello, my name is', this.name)
+    console.log('hello, my name is ' + this.name)
   },
 }
 
@@ -522,7 +522,7 @@ const arto = {
   age: 35,
   education: 'PhD',
   greet: function() {
-    console.log('hello, my name is', this.name)
+    console.log('hello, my name is ' + this.name)
   },
   // highlight-start
   doAddition: function(a, b) {
@@ -547,10 +547,10 @@ referenceToAddition(10, 15)   // 25 is printed
 如果我们用同样的方式调用_greet_函数，我们就会遇到一个问题:
 
 ```js
-arto.greet()       // hello, my name is Arto Hellas gets printed
+arto.greet()       // "hello, my name is Arto Hellas" gets printed
 
 const referenceToGreet = arto.greet
-referenceToGreet() // prints only hello, my name is
+referenceToGreet() // prints "hello, my name is undefined"
 ```
 
 
@@ -565,21 +565,21 @@ referenceToGreet() // prints only hello, my name is
 
 <!-- One situation leading to the disappearance of _this_ arises when, e.g. we ask Arto to greet in one second using the [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) method. -->
 
-一种消除“this”所引起的问题的一种方法就是，利用[setTimeout](https://developer.mozilla.org/en-us/docs/web/api/windoworworkerglobalscope/setTimeout)方法，让arto对象1秒钟后调用greet。
+一种消除这种由“this”所引起的问题的方法就是，利用[setTimeout](https://developer.mozilla.org/en-us/docs/web/api/windoworworkerglobalscope/setTimeout)方法，让arto对象1秒钟后调用greet。
 
 ```js
 const arto = {
   name: 'Arto Hellas',
   greet: function() {
-    console.log('hello, my name is', this.name)
+    console.log('hello, my name is ' + this.name)
   },
 }
 
 setTimeout(arto.greet, 1000)  // highlight-line
 ```
 
-<!-- The value of _this_ in Javascript is defined based on how the method is being called. When setTimeout is using the method, it is the Javascript engine that calls the method and _this_ refers to the Timeout object. -->
-在 JavaScript 中，this 的值是根据方法的调用方式来定义的。 当 setTimeout 使用该方法时，是JavaScript引擎在调用该方法，此时的this是指向的Timeout 对象。
+<!-- As mentioned, the value of _this_ in JavaScript is defined based on how the method is being called. When <em>setTimeout</em> is calling the method, it is the JavaScript engine that actually calls the method and, at that point, _this_ refers to the global object. -->
+如上所述，在 JavaScript 中，this 的值是根据方法的调用方式来定义的。 当 <em>setTimeout</em> 调用该方法时，实际上是JavaScript引擎在调用该方法，此时的this是指向的是全局对象。
 
 <!-- There are several mechanisms by which the original _this_ can be preserved. One of these is using a method called [bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind): -->
 有几种机制可以保留这种原始的 this 。 其中一个是使用[bind](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/function/bind)方法:
@@ -589,7 +589,7 @@ setTimeout(arto.greet.bind(arto), 1000)
 ```
 
 <!-- The command <em>arto.greet.bind(arto)</em> creates a new function where it has bound _this_ to point to Arto independent of where and how the method is being called. -->
-命令 <em>arto.greet.bind(arto)</em> 创建了一个新函数，它将 this 绑定指向到了 Arto，这与方法的调用位置和方式无关。
+调用 <em>arto.greet.bind(arto)</em> 创建了一个新函数，它将 _this_  绑定指向到了 Arto，这与方法的调用位置和方式无关。
 
 <!-- Using [arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) it is possible to solve some of the problems related to _this_. They should not, however, be used as methods for objects because then _this_ does not work at all. We will come back later to the behavior of _this_ in relation to arrow functions. -->
 使用[箭头函数](https://developer.mozilla.org/en-us/docs/web/javascript/reference/functions/arrow_functions)可以解决与 _this_相关的一系列问题。 但是，它不能当做对象的方法来使用，因为那样的话this就不起作用了。 稍后我们将回到_this_与箭头函数的关系。
@@ -615,7 +615,7 @@ class Person {
     this.age = age
   }
   greet() {
-    console.log('hello, my name is', this.name)
+    console.log('hello, my name is ' + this.name)
   }
 }
 
@@ -634,7 +634,7 @@ janja.greet()
 类语法的引入是一个有争议的新特性，例如[Not Awesome: ES6 Classes](https://github.com/petsel/not-awesome-es6-classes) 或者[Is “Class” In ES6 The New “Bad” Part?](https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65)这两篇文章所讨论的。
 
 <!-- The ES6 class syntax is used a lot in "old" React and also in Node.js hence an understanding of it is beneficial even in this course. But since we are using the new [hook](https://reactjs.org/docs/hooks-intro.html) feature of React throughout this course we have no concrete use for Javascript's class syntax. -->
-ES6的类语法在“老的” React 和 Node.js 中被广泛使用，因此即使在本课程中，对它有所了解也是有益的。 但是因为我们在整个课程中都使用了 React 的新的[hook](https://reactjs.org/docs/hooks-intro.html)特性，所以我们没有具体使用 JavaScript 的类语法。 
+ES6的类语法在“老的” React 和 Node.js 中被广泛使用，因此即使在本课程中，对它有所了解也是有益的。 但是因为我们在整个课程中都使用了 React 的新的[hooks](https://reactjs.org/docs/hooks-intro.html)特性，所以我们没有具体使用 JavaScript 的类语法。 
 
 ### Javascript materials
 【Javascript 教材】

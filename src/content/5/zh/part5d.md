@@ -396,7 +396,7 @@ cy.get('#login-button').click()
 <!-- This will happen even if the button is not visible.  -->
 即使按钮不可见，也会发生这种情况。
 <!-- Because of this we gave the submit button id <i>login-button</i> we can use to access it. -->
-正因为如此，我们给出了提交按钮 id <i>login-button</i>，我们可以用它来访问它。
+为了防止名称冲突，我们给出了提交按钮 id <i>login-button</i>，我们可以用它来访问它。
 
 
 
@@ -930,7 +930,7 @@ describe('Note app', function() {
 
 
 <!-- As we said above, each test starts from zero! Tests do not start from the state where the previous states ended.  -->
-正如我们上面所说的，每个测试都是从零开始的！ 测试不是从以前状态结束的状态开始的。
+正如我们上面所说的，每个测试都是从零开始的！ 测试不是从以前测试的结束状态开始的。
 
 
 
@@ -1291,7 +1291,7 @@ cy.contains('logout').click()
 <!-- This won't work however. When Cypress runs a test, it adds each _cy_ command to an execution queue.  -->
 但是这不起作用，当 Cypress 运行测试时，它会将每个 cy 命令添加到一个执行队列中。
 <!-- When the code of the test method has been executed, Cypres will execute each command in the queue one by one.  -->
-当执行测试方法的代码时，Cypres 将逐个执行队列中的每个命令。
+当执行测试方法的代码时，Cypress 将逐个执行队列中的每个命令。
 
 
 
@@ -1402,7 +1402,7 @@ describe('Blog app', function() {
     cy.visit('http://localhost:3000')
   })
 
-  it('Login from is shown', function() {
+  it('Login form is shown', function() {
     // ...
   })
 })
@@ -1432,7 +1432,7 @@ describe('Blog app', function() {
     cy.visit('http://localhost:3000')
   })
 
-  it('Login from is shown', function() {
+  it('Login form is shown', function() {
     // ...
   })
 

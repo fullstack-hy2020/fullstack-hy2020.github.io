@@ -508,7 +508,11 @@ import React from 'react'
 import { useSelector } from 'react-redux' // highlight-line
 
 const Notification = () => {
+<<<<<<< HEAD
   const notification = useSelector(/* something here */) // highlight-line
+=======
+  const notification = useSelector(/*something here */) // highlight-line
+>>>>>>> source-zh
   const style = {
     border: 'solid',
     padding: 10,

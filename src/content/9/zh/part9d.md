@@ -98,6 +98,8 @@ npx create-react-app my-app --template typescript
   // ...
 }
 ```
+<!-- If you are using Windows, you may need to use double quotes for the linting path: `"lint": "eslint \"./src/**/*.{ts,tsx}\""`. -->
+如果你使用Windows，可能需要使用双引号包住lint 路径：`"lint": "eslint \"./src/**/*.{ts,tsx}\""`
 
 <!-- If we now run <i>npm run lint</i>, we should still receive an error from eslint: -->
 如果我们现在运行 <i>npm run lint</i>,，我们仍然会收到一个来自 eslint 的错误:
@@ -861,7 +863,7 @@ dispatch({ type: "SET_PATIENT_LIST", payload: patients });
 <div class="tasks">
 
 
-### Exercises 9.16.-9.17
+### Exercises 9.16.-9.18
 <!-- We will soon add new type <i>Entry</i> for our app that represents a light weight patient journal entry. It consists of journal text ie. <i>description</i>, creation date, information regarding the specialist who created it and possible diagnosis codes. Diagnosis codes map to the ICD-10 codes returned from the <i>/api/diagnoses</i> endpoint. Our naive implementation will be that patient has an array of entries. -->
 我们将很快为我们的应用添加新类型<i>Entry</i>，它代表一个轻量级的病人日志条目。 它由日志正文组成例如<i>描述</i>，创建日期，关于创建它的专家的信息和可能的诊断代码。 诊断代码映射到 <i>/api/diagnoses</i> 端点返回的 ICD-10代码。 我们天真的实现将是病人有一个条目数组。
 

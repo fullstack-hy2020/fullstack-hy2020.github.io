@@ -51,7 +51,7 @@ node --inspect index.js
 ```
 
 <!-- You can access the debugger by clicking the green icon that appears in the Chrome developer console: -->
-你可以通过点击 Chrome 开发者控制台中的绿色图标来进入调试器:
+你可以通过点击 Chrome 开发者控制台中的绿色图标——node的logo，来进入调试器:
 
 ![](../../images/3/37.png)
 
@@ -61,7 +61,7 @@ node --inspect index.js
 ![](../../images/3/38eb.png)
 
 <!-- All of the application's console.log messages will appear in the <i>Console</i> tab of the debugger. You can also inspect values of variables and execute your own JavaScript code. -->
-应用的所有 console.log 消息都将出现在调试器的<i>Console</i> 选项卡中。 您还可以检查变量的值并执行自己的 JavaScript 代码。
+应用的所有 <i>console.log</i> 消息都将出现在调试器的<i>Console</i> 选项卡中。 您还可以检查变量的值并执行自己的 JavaScript 代码。
 
 ![](../../images/3/39ea.png)
 
@@ -78,7 +78,7 @@ node --inspect index.js
 关键是要有系统性。 既然问题可以存在于任何地方，你就必须质疑每一件事，并逐一排除所有的可能性。 登录到控制台、Postman、调试器和经验都将有所帮助。
 
 <!-- When bugs occur, <i>the worst of all possible strategies</i> is to continue writing code. It will guarantee that your code will soon have ten more bugs, and debugging them will be even more difficult. The [stop and fix](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/#.Wjv9axP1WCQ) principle from Toyota Production Systems is very effective in this situation as well. -->
-当出现 bug 时，所有可能的策略中最糟糕的就是继续编写代码。 这将保证你的代码很快会有另外十个 bug，并且调试它们将会更加困难。 在这种情况下，丰田生产系统公司(Toyota Production Systems)的 [stop and fix](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/#.Wjv9axP1WCQ) 原则也非常有效。
+当出现 bug 时，所有可能的策略中最糟糕的就是继续编写代码。 这将保证你的代码很快会有更多的bug，并且调试它们将会更加困难。 在这种情况下，丰田生产系统公司(Toyota Production Systems)的 [stop and fix](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/#.Wjv9axP1WCQ) 原则也非常有效。
 
 ### MongoDB
 <!-- In order to store our saved notes indefinitely, we need a database. Most of the courses taught at the University of Helsinki use relational databases. In this course we will use [MongoDB](https://www.mongodb.com/) which is a so-called [document database](https://en.wikipedia.org/wiki/Document-oriented_database). -->
@@ -102,7 +102,7 @@ node --inspect index.js
 ![](../../images/3/57.png)
 
 <!-- Let's choose <i>AWS</i> and <i>Frankfurt</i> and create a cluster. -->
-让我们选择<i>AWS</i> 和<i>Frankfurt</i> 并创建一个集群。
+让我们选择<i>AWS</i>作为提供商，并用<i>Frankfurt</i>作为地区，创建一个集群。
 
 ![](../../images/3/58.png)
 
@@ -112,8 +112,8 @@ node --inspect index.js
 <!-- **NB** do not continue before the cluster is ready. -->
 **注意**在集群准备好之前不要继续。
 
-<!-- Let's use the <i>database access</i> tab for creating user credentials for the database. Please note that these are not the same credentials you use for logging into MongoDB Atlas. -->
-让我们使用<i>database access</i> 选项卡为数据库创建用户凭据。 请注意，这些不是您登录到 MongoDB Atlas 所使用的相同凭据。
+<!-- Let's use the <i>database access</i> tab for creating user credentials for the database. Please note that these are not the same credentials you use for logging into MongoDB Atlas. These will be used for your application to connect to the database. -->
+让我们使用<i>database access</i> 选项卡为数据库创建用户凭据。 请注意，这些不是您登录到 MongoDB Atlas 所使用的相同凭据。这是用来让你的应用连接到数据库所用到的。
 
 ![](../../images/3/59.png)
 
@@ -136,7 +136,7 @@ node --inspect index.js
 ![](../../images/3/62.png)
 
 <!-- Finally we are ready to connect to our database. Start by clicking <i>connect</i> -->
-最后，我们准备连接到我们的数据库
+最后，我们准备连接到我们的数据库：
 
 ![](../../images/3/63ea.png)
 
@@ -171,14 +171,14 @@ Mongoose 可以被描述为<i>object document mapper</i> (ODM) ，并且将 Java
 npm install mongoose --save
 ```
 
-<!-- Let's not add any code dealing with Mongo to our backend just yet. Instead, let's make a practice application into the file <i>mongo.js</i>: -->
-现在还不要在后端添加任何处理 Mongo 的代码。 相反，让我们在<i>mongo.js</i> 文件中创建一个实践应用:
+<!-- Let's not add any code dealing with Mongo to our backend just yet. Instead, Instead, let's make a practice application by creating a new file, <i>mongo.js</i>： -->
+现在还不要在后端添加任何处理 Mongo 的代码。 相反，让我们创建<i>mongo.js</i> 文件，来创建一个实践应用:
 
 ```js
 const mongoose = require('mongoose')
 
 if ( process.argv.length<3 ) {
-  console.log('give password as argument')
+   console.log('Please provide the password as an argument: node mongo.js <password>')
   process.exit(1)
 }
 
@@ -203,11 +203,14 @@ const note = new Note({
   important: true,
 })
 
-note.save().then(response => {
+note.save().then(result => {
   console.log('note saved!')
   mongoose.connection.close()
 })
 ```
+
+<!-- **NB:** Depending on which region you selected when building your cluster, the <i>MongoDB URI</i> may be different from the example provided above. You should verify and use the correct URI that was generated from MongoDB Atlas. -->
+注意：取决于你选择了什么区域来构建你的集群， <i>MongoDB URI</i> 可能和上例中提供的有些不同。你应当验证并使用 MongoDB Atlas 生成的正确的URI
 
 <!-- The code assumes that it will be passed the password from the credentials we created in MongoDB Atlas as a command line parameter. We can access the command line parameter like this: -->
 该代码假定它将作为命令行参数从我们在 MongoDB Atlas 中创建的凭据中传递密码。 我们可以像这样访问命令行参数:
@@ -218,6 +221,9 @@ const password = process.argv[2]
 
 <!-- When the code is run with the command <i>node mongo.js password</i>, Mongo will add a new document to the database. -->
 当使用命令<i>node mongo.js password</i>运行代码时，Mongo 将向数据库添加一个新文档。
+
+<!-- **NB:** Please note the password is the password created for the database user, not your MongoDB Atlas password.  Also, if you created password with special characters, then you'll need to [URL encode that password](https://docs.atlas.mongodb.com/troubleshoot-connection/#special-characters-in-connection-string-password). -->
+注意：请注意这里的password 是为数据库用户创建的password，也就是说，如果你的密码是特殊字符，你需要[URL encode that password](https://docs.atlas.mongodb.com/troubleshoot-connection/#special-characters-in-connection-string-password)
 
 <!-- We can view the current state of the database from the MongoDB Atlas from <i>Collections</i> -->
 我们可以从<i>Collections</i> 中查看 MongoDB Atlas 中数据库的当前状态
@@ -284,7 +290,7 @@ Mongoose 背后的思想是，存储在数据库中的数据在<i>application</i
 
 ```js
 const note = new Note({
-  content: 'Browser can execute only Javascript',
+  content: 'HTML is Easy',
   date: new Date(),
   important: false,
 })
@@ -312,8 +318,8 @@ note.save().then(result => {
 <!-- Let's also save a few more notes by modifying the data in the code and by executing the program again. -->
 我们还可以通过修改代码中的数据和再次执行程序来保存更多的便笺。
 
-<!-- **NB** unfortunately the Mongoose documentation uses callbacks in its examples, so it is not recommended to copy paste code directly from there. Mixing promises with old-school callbacks in the same code is not recommended.  -->
-遗憾的是 Mongoose 文档在其示例中使用了回调函数，因此不建议直接从那里复制粘贴代码。 不建议在同一代码中将承诺与老式的回调混合使用。
+<!-- **NB:** Unfortunately the Mongoose documentation is not very consistent, with parts of it using callbacks in its examples and other parts, other styles, so it is not recommended to copy paste code directly from there. Mixing promises with old-school callbacks in the same code is not recommended.  -->
+遗憾的是 Mongoose 文档并不是非常一致，在其示例中使用了回调函数，而在其其他章节又使用了不同的方式，因此不建议直接从那里复制粘贴代码。 不建议在同一代码中将承诺与老式的回调混合使用。
 
 ### Fetching objects from the database
 【从数据库中获取对象】
@@ -491,8 +497,8 @@ app.get('/api/notes', (request, response) => {
 <!-- The application works almost perfectly. The frontend assumes that every object has a unique id in the <i>id</i> field. We also don't want to return the mongo versioning field <i>\_\_v</i> to the frontend. -->
 这个应用运行得几乎完美。 前端假设每个对象在<i>id</i> 字段中都有唯一的 id。 我们也不想将 mongo 版本控制字段 <i>\_\_v</i>  返回到前端。
 
-<!-- One way to format the objects returned by Mongoose is to [modify](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id) the _toJSON_ method of the objects. Modifying the method happens like this: -->
-格式化 Mongoose 返回的对象的一种方法是[修改](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id)对象的 toJSON 方法。 修改方法的过程如下:
+<!-- One way to format the objects returned by Mongoose is to [modify](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id) the _toJSON_ method of the schema, which is used on all instances of the models produced with that schcema. Modifying the method works like this:-->
+格式化 Mongoose 返回的对象的一种方法是[修改](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id)Schema 的 toJSON 方法，这个schema是作用在所有models实例上的。 修改方法的过程如下:
 
 ```js
 noteSchema.set('toJSON', {
@@ -513,13 +519,13 @@ noteSchema.set('toJSON', {
 ```js
 app.get('/api/notes', (request, response) => {
   Note.find({}).then(notes => {
-    response.json(notes.map(note => note.toJSON()))
+    response.json(notes)
   })
 })
 ```
 
-<!-- Now the _notes_ variable is assigned to an array of objects returned by Mongo. When we call <em>notes.map(note => note.toJSON())</em> the result is a new array, where every item from the old one is mapped to a new object with the _toJSON_ method. -->
-现在，notes 变量被分配给 Mongo 返回的对象数组。 当我们调用<em>notes.map(note => note.toJSON())</em> 时，结果是一个新数组，其中旧数组中的每个项都用 toJSON 方法映射到一个新对象。
+<!-- Now the _notes_ variable is assigned to an array of objects returned by Mongo. When the response is sent in the JSON format, the _toJSON_ method of each object in the array is called automatically by the [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method. -->
+现在，notes 变量被分配给 Mongo 返回的对象数组。 当response 以JSON 格式返回，数组中每个对象 _toJSON_ 方法会通过[JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)自动调用
 
 ### Database configuration into its own module
 【数据库逻辑配置到单独的模块】
@@ -635,7 +641,7 @@ PORT=3001
 ![](../../images/3/45ae.png)
 
 <!-- The environment variables defined in the dotenv file can be taken into use with the command <em>require('dotenv').config()</em> and you can reference them in your code just like you would reference normal environment variables, with the familiar <em>process.env.MONGODB_URI</em> syntax. -->
-可以使用require('dotenv').config()命令来使用 dotenv 文件中定义的环境变量。您可以在代码中引用它们，就像引用普通环境变量一样，使用熟悉的 <em>process.env.MONGODB_URI</em>语法。
+可以使用require('dotenv').config()命令来使用 <i>.env</i> 文件中定义的环境变量。您可以在代码中引用它们，就像引用普通环境变量一样，使用熟悉的 <em>process.env.MONGODB_URI</em>语法。
 
 <!-- Let's change the <i>index.js</i> file in the following way: -->
 让我们如下面的方式更改<i>index.js</i> 文件:
@@ -680,7 +686,7 @@ app.post('/api/notes', (request, response) => {
   })
 
   note.save().then(savedNote => {
-    response.json(savedNote.toJSON())
+    response.json(savedNote)
   })
 })
 ```
@@ -692,7 +698,7 @@ app.post('/api/notes', (request, response) => {
 回调函数中的 _savedNote_ 参数是保存的和新创建的便笺。 返回的数据是用 toJSON 方法创建的格式化版本:
 
 ```js
-response.json(savedNote.toJSON())
+response.json(savedNote)
 ```
 
 <!-- Fetching an individual note gets changed into the following: -->
@@ -701,7 +707,7 @@ response.json(savedNote.toJSON())
 ```js
 app.get('/api/notes/:id', (request, response) => {
   Note.findById(request.params.id).then(note => {
-    response.json(note.toJSON())
+    response.json(note)
   })
 })
 ```
@@ -778,7 +784,7 @@ app.get('/api/notes/:id', (request, response) => {
 app.get('/api/notes/:id', (request, response) => {
   Note.findById(request.params.id)
     .then(note => {
-      response.json(note.toJSON())
+      response.json(note)
     })
     .catch(error => {
       console.log(error)
@@ -798,26 +804,16 @@ app.get('/api/notes/:id', (request, response) => {
 
 <pre>
 Method: GET
-Path:   /api/notes/5a3b7c3c31d61cb9f8a0343
+Path:   /api/notes/someInvalidId
 Body:   {}
 ---
-{ CastError: Cast to ObjectId failed for value "5a3b7c3c31d61cb9f8a0343" at path "_id"
+{ CastError: Cast to ObjectId failed for value "someInvalidId" at path "_id"
     at CastError (/Users/mluukkai/opetus/_fullstack/osa3-muisiinpanot/node_modules/mongoose/lib/error/cast.js:27:11)
     at ObjectId.cast (/Users/mluukkai/opetus/_fullstack/osa3-muisiinpanot/node_modules/mongoose/lib/schema/objectid.js:158:13)
     ...
 </pre>
 <!-- The other error situation happens when the id is in the correct format, but no note is found in the database for that id. -->
 另一种错误情况发生在 id 格式正确，但在数据库中没有找到该 id 的便笺时。
-
-<pre>
-Method: GET
-Path:   /api/notes/5a3b7c3c31d61cbd9f8a0343
-Body:   {}
----
-TypeError: Cannot read property 'toJSON' of null
-    at Note.findById.then.note (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/index.js:27:24)
-    at process._tickCallback (internal/process/next_tick.js:178:7)
-</pre>
 <!-- We should distinguish between these two different types of error situations. The latter is in fact an error caused by our own code. -->
 我们应该区分这两种不同类型的错误情况。 后者实际上是由我们自己的代码引起的错误。
 
@@ -830,7 +826,7 @@ app.get('/api/notes/:id', (request, response) => {
     .then(note => {
       // highlight-start
       if (note) {
-        response.json(note.toJSON())
+        response.json(note)
       } else {
         response.status(404).end() 
       }
@@ -847,7 +843,7 @@ app.get('/api/notes/:id', (request, response) => {
 如果在数据库中没有找到匹配的对象，将不定义 note 的值，并执行 else 块。 这将导致响应状态代码 <i>404 not found</i>.
 
 <!-- If the format of the id is incorrect, then we will end up in the error handler defined in the _catch_ block. The appropriate status code for the situation is [400 bad request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1), because the situation fits the description perfectly: -->
-如果 id 的格式不正确，那么我们将在 catch 块中定义的错误处理程序中结束。 适合这种情况的状态代码是 [400 bad request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1) ，因为这种情况完全符合描述:
+如果 id 的格式不正确，那么我们将在 catch 块中定义的错误处理程序中结束。 适合这种情况的状态代码是 [400 Bad Request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1) ，因为这种情况完全符合描述:
 
 > <i>The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.</i>
 由于格式不正确的语法，服务器无法理解请求。 客户端不应该在没有修改的情况下重复请求。 
@@ -868,8 +864,8 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-<!-- The reason the error handler gets called might be something completely different than what you had anticipated. If you log the error to the console, you may save yourself from long and frustrating debugging sessions. -->
-调用错误处理程序的原因可能与您预期的完全不同。 如果您将错误记录到控制台，您可以避免冗长和令人沮丧的调试会话。
+<!-- The reason the error handler gets called might be something completely different than what you had anticipated. If you log the error to the console, you may save yourself from long and frustrating debugging sessions. Moreover, most modern services to where you deploy your application support some form of logging system that you can use to check these logs. As mentioned, Heroku is one. -->
+调用错误处理程序的原因可能与您预期的完全不同。 如果您将错误记录到控制台，您可以避免冗长和令人沮丧的调试会话。此外，更加现代的部署应用的服务支持一些日志系统，你可以去查看这些日志。如前面提到的，Heroku就是一种。
 
 <!-- Every time you're working on a project with a backend, <i>it is critical to keep an eye on the console output of the backend</i>. If you are working on a small screen, it is enough to just see a tiny slice of the output in the background. Any error messages will catch your attention even when the console is far back in the background: -->
 每次您使用后端处理项目时，关注后端的控制台输出是至关重要的。 如果你在一个小屏幕上工作，只需要在背景中看到输出的一小部分就足够了。 任何错误消息都会引起你的注意，即使控制台远在后台:
@@ -890,7 +886,7 @@ app.get('/api/notes/:id', (request, response, next) => { // highlight-line
   Note.findById(request.params.id)
     .then(note => {
       if (note) {
-        response.json(note.toJSON())
+        response.json(note)
       } else {
         response.status(404).end()
       }
@@ -971,7 +967,7 @@ app.use(express.json())
 ```
 
 <!-- Then the JSON data sent with the HTTP requests would not be available for the logger middleware or the POST route handler, since the _request.body_ would be an empty object. -->
-那么，由 HTTP 请求发送的 JSON 数据将不能用于日志记录器中间件或 POST 路由处理程序，因为 request.body 将是一个空对象。
+那么，由 HTTP 请求发送的 JSON 数据将不能用于日志记录器中间件或 POST 路由处理程序，因为此时 request.body 将是一个空对象。
 
 <!-- It's also important that the middleware for handling unsupported routes is next to the last middleware that is loaded into Express, just before the error handler. -->
 同样重要的是，用于处理不支持路由的中间件位于加载到 Express 的最后一个中间件的旁边，就在错误处理程序之前。
@@ -1031,7 +1027,7 @@ app.put('/api/notes/:id', (request, response, next) => {
 
   Note.findByIdAndUpdate(request.params.id, note, { new: true })
     .then(updatedNote => {
-      response.json(updatedNote.toJSON())
+      response.json(updatedNote)
     })
     .catch(error => next(error))
 })

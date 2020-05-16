@@ -108,7 +108,7 @@ module.exports = {
 ```js
 const config = require('./utils/config')
 
-console.log(`Server running on port ${config.PORT}`)
+logger.info(`Server running on port ${config.PORT}`)
 ```
 
 <!-- The route handlers have also been moved into a dedicated module. The event handlers of routes are commonly referred to as <i>controllers</i>, and for this reason we have created a new <i>controllers</i> directory. All of the routes related to notes are now in the <i>notes.js</i> module under the <i>controllers</i> directory. -->
