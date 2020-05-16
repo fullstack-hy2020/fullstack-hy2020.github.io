@@ -461,7 +461,7 @@ By defining
 ```
 
 <!-- renderöidään komponentti _Button_, siten että sen juurikomponenttina onkin react-redux-kirjaston komponentti _Link_, jolle siirtyy polun kertova props _to_.   -->
-the _Button_ component is rendered so, that its root component is react-redux _Link_ which receives its path as prop field _to_.
+the _Button_ component is rendered so, that its root component is react-router-dom _Link_ which receives its path as prop field _to_.
 
 <!-- Navigaatiopalkin koodi kokonaisuudessaan on seuraava -->
 The code for the navigation bar is the following
