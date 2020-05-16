@@ -57,8 +57,6 @@ const App = () => {
 
       <Notification message={errorMessage} />
 
-      <h2>Login</h2>
-
       // highlight-start
       <form onSubmit={handleLogin}>
         <div>
