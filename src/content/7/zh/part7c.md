@@ -287,7 +287,7 @@ npm install --save @material-ui/core
 ```
 
 <!-- Then add the following line to the <i>head</i> tag in the <i>public/index.html</i> file. The line loads bootstrap's css-definitions. -->
-然后向 <i>public/index.html</i><i>文件中的 <i>head</i> 标签添加如下行。
+然后向 <i>public/index.html</i><i>文件中的 <i>head</i> 标签添加如下行。如下代码加载了Google的Roboto 字体。
 
 ```js
 <head>
@@ -468,7 +468,7 @@ import { Alert } from '@material-ui/lab'
 ![](../../images/7/65ea.png)
 
 
-#### Navigaation structure
+#### Navigation structure
 【导航结构】
 
 
@@ -634,7 +634,13 @@ React-bootstrap 和 MaterialUI 之间的区别并不大，这取决于你觉得�
 [样式化组件](https://www.styled-components.com/)库提供了一种有趣的方法，可以通过在 ES6中引入的[带标记的模板文字](https://developer.mozilla.org/en-us/docs/web/javascript/reference/template_literals)定义样式。
 
 <!-- Let's make a few changes to the styles of our application with the help of styled components. First, let's define two components with styles: -->
-让我们借助样式化组件对应用的样式进行一些更改。 首先，让我们用样式定义两个组件:
+让我们借助样式化组件对应用的样式进行一些更改。 首先，用如下命令安装包：
+
+```js
+npm install --save styled-components
+```
+
+让我们用样式定义两个组件:
 
 ```js
 import styled from 'styled-components'

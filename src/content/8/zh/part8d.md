@@ -49,7 +49,7 @@ const App = () => {
 接下来我们为登录定义一个Mutation
 
 ```js
-expoty const LOGIN = gql`
+export const LOGIN = gql`
   mutation login($username: String!, $password: String!) {
     login(username: $username, password: $password)  {
       value
@@ -276,10 +276,11 @@ const PersonForm = ({ setError }) => {
     // highlight-start
     update: (store, response) => {
       const dataInStore = store.readQuery({ query: ALL_PERSONS })
-      dataInStore.allPersons.push(response.data.addPerson)
       store.writeQuery({
         query: ALL_PERSONS,
-        data: dataInStore
+        data:  {...dataInStore,
+          allPersons: [ ...dataInStore.allPersons, response.data.addPerson ]
+        }
       })
     }
     // highlight-end
@@ -296,7 +297,7 @@ const PersonForm = ({ setError }) => {
 该代码使用[readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readQuery)函数读取<em>ALL\_PERSONS</em> 查询的缓存状态，并使用[writeQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writeQuery-and-writefragment) 函数更新缓存，将新人添加到缓存数据中。
 
 <!-- There are actually some situations where the only good way to keep the cache up to date is using _update_ -callbacks.  -->
-实际上，在某些情况下，使缓存保持最新的唯一好方法是使用 update-callback。
+<!-- 实际上，在某些情况下，使缓存保持最新的唯一好方法是使用 update-callback。 -->
 
 <!-- In some situations the only sensible way to keep the cache up to date is using the _update_-callback. -->
 在某些情况下，使缓存保持最新的唯一合理方法是使用 update-callback。
@@ -373,8 +374,8 @@ const PersonForm = ({ setError }) => {
 
 
 #### 8.21 books by genre with GraphQL
-<!-- The filtering can be done using just React. You can mark this exercise as completed if you filter the books using a GraphQL query to the server in exercise 8.5.  -->
-过滤可以用 React 来完成。 如果使用练习8.5中的服务器的GraphQL查询过滤书籍，则可以将此练习标记为已完成。
+<!-- In the previous exercise 8.20, the filtering could have been done using just React. To complete this exercise, you should filter the books in the recommendations page using a GraphQL query to the server. The query created in exercise 8.5 could be useful here.  -->
+在之前的8.20 练习中，过滤可以仅用 React 来完成。 为了完成这个练习，你应该使用推荐的GraphQL查询，练习8.5中的服务器的GraphQL查询过滤书籍会有所帮助。
 
 <!-- This and the next exercises are quite **challenging** like it should be this late in the course. You might want to complete first the easier ones in [next part](/zh/part8/fragments_and_subscriptions). -->
 这个和接下来的练习是相当具有挑战性的。 您可能希望首先完成[下一章节](/zh/part8/fragments_与_subscriptions)中较容易的部分。

@@ -337,7 +337,7 @@ const App = () => {
 <!-- The internet is starting to fill up with more and more helpful material related to hooks. The following sources are worth checking out: -->
 互联网上开始充斥着越来越多关于Hook的有用资料。 如下是值得一查的资料来源:
 
-* [Awesome React Hooks Resouces](https://github.com/rehooks/Awesome-React-Hooks)
+* [Awesome React Hooks Resources](https://github.com/rehooks/Awesome-React-Hooks)
 * [Easy to understand React Hook recipes by Gabe Ragland](https://usehooks.com/)
 * [Why Do React Hooks Rely on Call Order?](https://overreacted.io/why-do-hooks-rely-on-call-order/)
 

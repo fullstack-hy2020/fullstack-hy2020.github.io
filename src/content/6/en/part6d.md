@@ -8,7 +8,7 @@ lang: en
 <div class="content">
 
 <!-- Olemme käyttäneet redux-storea react-redux-kirjaston [hook](https://react-redux.js.org/api/hooks)-apin, eli funktioiden [useSelector](https://react-redux.js.org/api/hooks#useselector) ja [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) avulla. -->
-So far we have used our redux-store with the help of the hook](https://react-redux.js.org/api/hooks)-api from react-redux.
+So far we have used our redux-store with the help of the [hook](https://react-redux.js.org/api/hooks)-api from react-redux.
 Practically this has meant using the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) functions.
 
 To finish this part we will look into another older and  more complicated way to use redux, the [connect](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)-function provided by react-redux.
@@ -306,7 +306,6 @@ const mapDispatchToProps = {
   toggleImportanceOf
 }
 
-// eksportoidaan suoraan connectin palauttama komponentti
 export default connect(
   mapStateToProps,
   mapDispatchToProps

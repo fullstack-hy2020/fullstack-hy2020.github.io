@@ -50,8 +50,8 @@ const noteSchema = new mongoose.Schema({
 })
 ```
 
-<!-- The <i>content</i> field is now required to be at least five characters long. The <i>date</i> field is set as required, meaning that it can not be missing. The same constraint is also implicitly applied to the <i>content</i> field, since the minimum length constraint by default requires the field to not be missing. We have not added any constraints to the <i>important</i> field, so its definition in the schema has not changed. -->
-现在要求<i>content</i> 字段至少有五个字符长。<i>date</i> 字段被设置为必需的，这意味着它不能丢失。 同样的约束也隐式地应用于<i>content</i> 字段，因为缺省情况下最小长度约束要求字段不丢失。 我们没有向<i>important</i> 字段添加任何约束，因此模式中的定义没有更改。
+<!-- The <i>content</i> field is now required to be at least five characters long. The <i>date</i> field is set as required, meaning that it can not be missing. The same constraint is also applied to the <i>content</i> field, since the minimum length constraint allows the field to be missing. We have not added any constraints to the <i>important</i> field, so its definition in the schema has not changed. -->
+现在要求<i>content</i> 字段至少有五个字符长。<i>date</i> 字段被设置为必需的，这意味着它不能丢失。 同样的约束也适用于<i>content</i> 字段，因为最小长度限制允许字段为空。 我们没有向<i>important</i> 字段添加任何约束，因此模式中的定义没有更改。
 
 <!-- The <i>minlength</i> and <i>required</i> validators are [built-in](https://mongoosejs.com/docs/validation.html#built-in-validators) and provided by Mongoose. The Mongoose [custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) functionality allows us to create new validators, if none of the built-in ones cover our needs. -->
  <i>minlength</i> 和 <i> required</i> 验证器是[内置的](https://mongoosejs.com/docs/validation.html#built-in-validators) ，由 Mongoose 提供。 Mongoose允许我们创建新的验证器[自定义验证器](https://mongoosejs.com/docs/validation.html#custom-validators)，如果没有一个内置的验证器满足我们的需求的话。
@@ -139,7 +139,7 @@ app.post('/api/notes', (request, response, next) => {
 ```
 
 <!-- In the first _then_ we receive _savedNote_ object returned by Mongoose and format it. The result of the operation is returned. Then as [we discussed earlier](/zh/part2/在服务端将数据_alert出来#extracting-communication-with-the-backend-into-a-separate- 模块), the _then_ method of a promise also returns a promise. This means that when we return _savedNote.toJSON()_ from the callback function, we are actually creating a promise that receives the formatted note as its value. We can access the formatted note by registering a new callback function with the _then_ method. -->
-在第一个 _then_ ，我们收到 savedNote 对象返回的 Mongoose 和格式化它。 返回操作的结果。 然后，正如[我们之前讨论的](/zh/part2/在服务端将数据_alert出来#extracting-communication-with-the-backend-into-a-separate- 模块) ，then 的方法也返回了一个承诺。 这意味着，当我们从回调函数返回_savedNote.toJSON()_ 时，我们实际上是在创建一个承诺，该承诺将接收格式化的便笺作为其值。 我们可以通过使用 then 方法注册一个新的回调函数来访问带格式的便笺。
+在第一个 _then_ ，我们收到 savedNote 对象返回的 Mongoose 和格式化它。 返回操作的结果。 然后，正如[我们之前讨论的](/zh/part2/在服务端将数据_alert出来#extracting-communication-with-the-backend-into-a-separate- 模块) ，then 的方法也返回了一个承诺。 我们可以通过使用 then 方法注册一个新的回调函数来访问带格式的便笺。
 
 <!-- We can clean up our code even more by using the more compact syntax for arrow functions: -->
 我们可以使用箭头函数的紧凑语法来清理我们的代码:
@@ -172,14 +172,14 @@ dotenv 中定义的环境变量仅在后端时使用,不处于<i>生产模式</i
 <!-- We defined the environment variables for development in file <i>.env</i>, but the environment variable that defines the database URL in production should be set to Heroku with the _heroku config:set_ command. -->
 我们在文件 <i>.env</i>中定义了用于开发的环境变量。 但是在生产环境中定义数据库 URL 的环境变量应该使用  _heroku config:set_ 命令来设置 Heroku。
 ```bash
-heroku config:set MONGODB_URI=mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true
+$ heroku config:set MONGODB_URI=mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true
 ```
 <!-- HUOM: if the command causes an error, give the value of MONGODB_URI in apostrophes: -->
 
 **注意**：如果命令行产生了一个错误，在撇号中给 MONGODB_URI 设置一个值
 
 ```bash
-heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
+$ heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
 ```
 
 <!-- The application should now work. Sometimes things don't go according to plan. If there are problems, <i>heroku logs</i> will be there to help. My own application did not work after making the changes. The logs showed the following: -->
@@ -206,8 +206,8 @@ heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluste
 
 
 #### 3.19: Phonebook database, 步骤7
-<!-- Add validation to your application, that will make sure that you can only add one number for a person in the phonebook. Our current frontend won't allow users to try and create duplicates, but we can attempt to create them directly with Postman or the VS Code REST client. -->
-为您的应用添加验证，这将确保您只能在电话簿中为某人添加一个号码。 我们当前的前端不允许用户尝试创建副本，但我们可以尝试直接使用Postman或 VS Code REST 客户端创建副本。
+<!-- Add validation to your phonebook application, that will make sure that a newly added person has a unique name. Our current frontend won't allow users to try and create duplicates, but we can attempt to create them directly with Postman or the VS Code REST client. -->
+为您的电话本应用添加验证，确保您所添加的人名字是唯一的。 我们当前的前端不允许用户尝试创建副本，但我们可以尝试直接使用Postman或 VS Code REST 客户端创建副本。
 
 <!-- Mongoose does not offer a built-in validator for this purpose. Install the [mongoose-unique-validator](https://github.com/blakehaswell/mongoose-unique-validator#readme) package with npm and use it instead. -->
 Mongoose 没有为此提供内置的验证器，可以使用 npm 安装[mongoose-unique-validator](https://github.com/blakehaswell/mongoose-unique-validator#readme) 并使用它。 
@@ -248,6 +248,10 @@ personService
 
 <!-- You can display the default error message returned by Mongoose, even though they are not as readable as they could be: -->
 你可以显示 Mongoose 返回的默认错误消息，即使它们并不具有可读性:
+
+**NB:** On update operations, mongoose validators are off by default. [Read the documentation](https://mongoosejs.com/docs/validation.html) to determine how to enable them.
+
+注意，在更新操作中，mongoose 验证默认是关闭的， [阅读文档](https://mongoosejs.com/docs/validation.html) 来确定如何开启。
 
 ![](../../images/3/56e.png)
 

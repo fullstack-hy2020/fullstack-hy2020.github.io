@@ -70,9 +70,9 @@ const Hello = (props) => {
 <!-- The person's age does not have to be passed as a parameter to the function, since it can directly access all props that are passed to the component. -->
 用户的年龄不必单独作为参数传递给函数，因为它可以直接访问传递给组件的所有props。
 
-<!-- If we examine our current code closely, we'll notice that the helper function is actually defined inside of another function that defines the behavior of our component. In Java-programming, defining a method inside another method is not possible, but in JavaScript, defining functions within functions is a commonly used technique. -->
+<!-- If we examine our current code closely, we'll notice that the helper function is actually defined inside of another function that defines the behavior of our component. In Java programming, defining a function inside another one is complex and cumbersome, so not all that common. In JavaScript, however, defining functions within functions is a commonly-used technique. -->
 
-如果仔细观察当前代码，我们会注意到这种辅助函数实际上是在另一个函数中定义的，而这个函数是我们用来定义组件行为的。 在 java 中，在一个方法中定义另一个方法是不可能的，但在 JavaScript 中，在函数中定义函数是一种常规操作。
+如果仔细观察当前代码，我们会注意到这种辅助函数实际上是在另一个函数中定义的，而这个函数是我们用来定义组件行为的。 在 java 中，在一个函数中定义另一个函数是复杂且笨重的，但在 JavaScript 中，在函数中定义函数是一种常规操作。
 
 ### Destructuring 
 【解构】
@@ -116,7 +116,7 @@ const Hello = (props) => {
 ```
 
 <!-- Note that we've also utilized the more compact syntax for arrow functions when defining the _bornYear_ function. As mentioned earlier, if an arrow function consists of a single command, then the function body does not need to be written inside of curly braces. In this more compact form, the function simply returns the result of the single command. -->
-注意，在定义 bornYear 函数时，我们为箭头函数使用了更紧凑的语法。 如前所述，如果一个箭头函数由单个命令组成，那么函数体就不需要用花括号括起来。 在这种更紧凑的形式中，函数只返回单个命令的结果。
+注意，在定义 bornYear 函数时，我们为箭头函数使用了更紧凑的语法。 如前所述，如果一个箭头函数由单个表达式组成，那么函数体就不需要用花括号括起来。 在这种更紧凑的形式中，函数只返回单个表达式的结果。
 
 <!-- To recap, the two function definitions shown below are equivalent: -->
 也就是说，下面的两个函数定义是等价的:
@@ -223,7 +223,7 @@ ReactDOM.render(
 ```
 
 <!-- The root component is given the value of the counter in the _counter_ prop. The root component renders the value to the screen. But what happens when the value of _counter_ changes? Even if we were to add the command -->
-根组件通过counter属性，接收到counter的值。 根组件随即将值渲染到屏幕上。 但是当计数器的值发生变化时会发生什么呢？ 即，如果我们要添加命令
+App 组件通过counter属性，接收到counter的值。 根组件随即将值渲染到屏幕上。 当计数器的值发生变化时会发生什么呢？ 即，如果我们要添加命令
 
 ```js
 counter += 1
@@ -258,7 +258,7 @@ refresh()
 重新渲染命令被包装在了 _refresh_ 函数中，以减少复制粘贴代码的数量。
 
 <!-- Now the component  <i>renders three times</i>, first with the value 1, then 2, and finally 3. However, the values 1 and 2 are displayed on the screen for such a short amount of time that they can't be witnessed. -->
-现在，组件<i>渲染了三次</i>，值由1、2最终变成了3。 但是，值1和2在屏幕上显示的时间非常短，因此无法看到它们。
+现在，组件<i>渲染了三次</i>，值由1、2最终变成了3。 但是，值1和2在屏幕上显示的时间非常短，因此无法注意到它们。
 
 <!-- We can implement slightly more interesting functionality by re-rendering and incrementing the counter every second by using [setInterval](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval): -->
 我们可以通过使用 [setInterval](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval)，通过每隔一秒来重渲染一次并让计数器+1，来实现这个有趣的功能 :
@@ -288,7 +288,7 @@ setInterval(() => {
 import React, { useState } from 'react' // highlight-line
 import ReactDOM from 'react-dom'
 
-const App = (props) => {
+const App = () => {
   const [ counter, setCounter ] = useState(0) // highlight-line
 
 // highlight-start
@@ -310,7 +310,7 @@ ReactDOM.render(
 ```
 
 <!-- In the first row, the application imports the _useState_-function: -->
-在第一行中，应用导入了 useState-函数:
+在第一行中，应用导入了 useState 函数:
 
 ```js
 import React, { useState } from 'react'
@@ -381,7 +381,7 @@ Meanwhile, the old value of _counter_,  "1", is rendered to the screen.
 如果组件在该渲染时没有渲染，或者在“错误的时间”进行了渲染，您可以通过将组件变量的值打印到控制台来调试应用。 如果我们在代码中添加了如下内容:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [ counter, setCounter ] = useState(0)
 
   setTimeout(
@@ -418,7 +418,7 @@ button-元素支持所谓的[鼠标事件](https://developer.mozilla.org/en-us/d
 在 React 中，将一个事件处理函数注册到<i>click</i> 事件 [发生](https://reactjs.org/docs/handling-events.html) 时，如下：
 
 ```js
-const App = (props) => {
+const App = () => {
   const [ counter, setCounter ] = useState(0)
 
   // highlight-start
@@ -441,16 +441,16 @@ const App = (props) => {
 ```
 
 <!-- We set the value of the button's <i>onClick</i>-attribute to be a reference to the _handleClick_ function defined in the code. -->
-我们将按钮的<i>onClick</i>-属性 的值设置为 handleClick 函数的引用。
+我们将按钮的<i>onClick</i> 属性 的值设置为 handleClick 函数的引用。
 
 <!-- Now every click of the <i>plus</i> button causes the _handleClick_ function to be called, meaning that every click event will log a <i>clicked</i> message to the browser console. -->
 现在，每次单击<i>plus</i> 按钮都会调用 handleClick 函数，这意味着每次单击事件都会将<i>clicked</i> 消息打印到浏览器控制台。
 
 <!-- The event handler function can also be defined directly in the value assignment of the onClick-attribute: -->
-事件处理函数也可以在 onClick-属性的值中直接定义:
+事件处理函数也可以在 onClick 属性的值中直接定义:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [ counter, setCounter ] = useState(0)
 
   return (
@@ -480,7 +480,7 @@ const App = (props) => {
 让我们再添加一个重置计数器的按钮:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [ counter, setCounter ] = useState(0)
 
   return (
@@ -577,7 +577,7 @@ const App = (props) => {
 但无论如何，让我们将事件处理程序分离成单独的函数:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [ counter, setCounter ] = useState(0)
 
 // highlight-start
@@ -641,7 +641,7 @@ const Display = (props) => {
 使用组件很简单，因为我们只需要将计数器的状态传递给组件即可:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [ counter, setCounter ] = useState(0)
 
   const increaseByOne = () => setCounter(counter + 1)
@@ -682,7 +682,7 @@ const Button = (props) => {
 我们的<i>App</i> 组件现在看起来像这样:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [ counter, setCounter ] = useState(0)
 
   const increaseByOne = () => setCounter(counter + 1)
@@ -726,7 +726,7 @@ const App = (props) => {
 
 <!-- When the application starts, the code in _App_ is executed. This code uses an [useState](https://reactjs.org/docs/hooks-reference.html#usestate) - hook to create the application state - value of the counter _counter_. -->
 
-当应用启动时，执行 App 中的代码。 此代码使用[useState](https://reactjs.org/docs/hooks-reference.html#useState)-hook 创建了计数器的应用状态值 _counter_。
+当应用启动时，执行 App 中的代码。 此代码使用[useState](https://reactjs.org/docs/hooks-reference.html#useState) hook 创建了计数器的应用状态初始值 _counter_。
 
 <!-- The component renders the _Display_ component. It displays the counter's value (0), and three _Button_ components. The buttons have event handlers, which are used to change the state of the counter. -->
 该组件渲染了 Display 组件。 它显示计数器的值(0)和三个 Button 组件。 这些按钮具有用于更改计数器状态的事件处理程序。

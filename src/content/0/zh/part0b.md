@@ -196,7 +196,7 @@ Html 页面的内容被保存为 template 模板字符串，或者说是一个�
 
 <!-- Keep the developer console open. Empty the console by clicking the &empty; symbol. -->
 
-保持控制台打开状态。 单击&empty;按钮清空控制台。
+保持控制台打开状态。 单击 🚫按钮清空控制台。
 
 <!-- Now when you go to the [notes](https://fullstack-exampleapp.herokuapp.com/notes) page, the browser does 4 HTTP requests: -->
 
@@ -278,7 +278,7 @@ xhttp.send();
 <!-- There we find the notes in [JSON](https://en.wikipedia.org/wiki/JSON) "raw data". -->
 <!-- By default, the browser is not too good at displaying JSON-data. Plugins can be used to handle the formatting. Install, for example, [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) to Chrome, and reload the page. The data is now much more nicely formatted: -->
 
-在这里我们找到了以 JSON 格式展示的 Note ，这就是Note的 “原始数据”。 默认配置下，浏览器不太擅长显示 json 格式的数据。 可以使用插件来处理 Json 格式。 例如，将 [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) 安装到 Chrome，然后重新加载页面。 数据现在可以被很好地格式化展示出来了:
+在这里我们找到了以 JSON 格式展示的 Note ，这就是Note的 “原始数据”。 默认配置下，浏览器不太擅长显示 json 格式的数据。 可以使用插件来处理 Json 格式。 例如，将 [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) 安装到 Chrome，然后重新加载页面。 数据现在可以被更好地格式化展示出来了:
 
 ![](../../images/0/11e.png)
 
@@ -562,7 +562,7 @@ CSS 属性可以在控制台的 element 标签上查看:
 
 <!-- The CSS rule defines that elements with the <i>container</i> class will be outlined with a one pixel wide [border](https://developer.mozilla.org/en-US/docs/Web/CSS/border). It also sets 10 pixel [padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding) to the element. This sets some empty space between the element content and the border. -->
 
-CSS 规则定义了 container 类的元素，将用一个像素宽的边框 [border](https://developer.mozilla.org/en-US/docs/Web/CSS/border)勾勒出来。 它还为该元素设置了 10 个像素的填充 [padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding)。 这会在元素内容和边框之间留一些空白。
+CSS 规则定义了 container 类的元素，将用一个像素宽的边框 [border](https://developer.mozilla.org/en-US/docs/Web/CSS/border)勾勒出来。 它还为该元素设置了 10 个像素的填充 [padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding)。 这会在元素内容和边框之间增加一些空白。
 
 <!-- The second CSS rule sets the text color of the notes blue. -->
 
@@ -752,7 +752,7 @@ Notes 页面为浏览器提供了一些职责，为现有的 Note 生成 HTML �
 
 <!-- Open the <i>Network</i>-tab and empty it by clicking the &empty; symbol. When you now create a new note, you'll notice that the browser sends only one request to the server. -->
 
-打开 Network-选项卡并通过单击 &empty; 按钮清空它。 当您现在创建一个新的便笺时，您会注意到浏览器只向服务器发送了一个请求。
+打开 Network-选项卡并通过单击 🚫 按钮清空它。 当您现在创建一个新的便笺时，您会注意到浏览器只向服务器发送了一个请求。
 
 ![](../../images/0/26e.png)
 
@@ -806,7 +806,7 @@ form.onsubmit = function(e) {
 
 <!-- The command <em>document.getElementById('notes_form')</em> instructs the code to fetch the form-element from the page, and to register an <i>event handler</i> to handle the form submit event. The event handler immediately calls the method <em>e.preventDefault()</em> to prevent the default handling of form submit. The default method would send the data to server and cause a redirect, which we don't want to happen. -->
 
-命令  <em>document.getElementById('notes_form')</em> 指示代码从页面中提取 form 元素，并注册一个事件处理函数来处理表单提交事件。 事件处理函数将立即调用方法 e.preventDefault () ，以防止对表单 submit 的默认处理。 默认处理会将数据发送到服务器并导致重定向，而这是我们不希望发生的。
+命令  <em>document.getElementById('notes_form')</em> 指示代码从页面中提取 form 元素，并注册一个事件处理函数来处理表单提交事件。 事件处理函数将立即调用方法 e.preventDefault () ，以防止对表单 submit 的默认处理。 默认处理会将数据发送到服务器并导致重定向（一次新的Get请求），这不是我们的初衷。
 
 <!-- Then the event handler creates a new note, adds it to the notes list with the command <em>notes.push(note)</em>, rerenders the note list on the page and sends the new note to the server. -->
 
@@ -849,7 +849,7 @@ var sendToServer = function(note) {
 
 <!-- JQuery was developed back when web-pages mainly followed the traditional style of the server generating HTML pages, the functionality of which was enhanced on the browser side using JavaScript written with JQuery. One of the reasons for the success of JQuery was its so-called cross-browser compatibility. The library worked regardless of the browser or the company that made it, so there was no need for browser-specific solutions. Nowadays using JQuery is not as justified given the advancement of VanillaJS, and the most popular browsers generally support basic functionalities well. -->
 
-当时，在 web 页面主要遵循服务器生成 HTML 页面的传统风格，JQuery 当时是在这种情况下发展起来的。这种风格的功能通过在浏览器端使用 JavaScript 搭配使用 JQuery 来增强。 JQuery 成功的原因之一是它所谓的跨浏览器兼容性。 不管是哪家公司的哪个浏览器，这个库都能正常工作，所以不需要特定于浏览器的解决方案。 如今，由于 VanillaJS 的进步，使用 JQuery 已经不那么合理了，而且最流行的浏览器通常都能很好地支持基本功能。
+当时，在 web 应用主要遵循服务器生成 HTML 页面的传统风格，JQuery 当时是在这种情况下发展起来的。这种风格的功能通过在浏览器端使用 JavaScript 搭配使用 JQuery 来增强。 JQuery 成功的原因之一是它所谓的跨浏览器兼容性。 不管是哪家公司的哪个浏览器，这个库都能正常工作，所以不需要特定于浏览器的解决方案。 如今，由于 VanillaJS 的进步，使用 JQuery 已经不那么合理了，而且最流行的浏览器通常都能很好地支持基本功能。
 
 <!-- The rise of the single page app brought several more "modern" ways of web development than JQuery. The favorite of the first wave of developers was [BackboneJS](http://backbonejs.org/). After its [launch](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) in 2012, Google's [AngularJS](https://angularjs.org/) quickly became almost the de facto standard of modern web development. -->
 

@@ -182,8 +182,8 @@ const handleLeftClick = () => {
 }
 ```
 
-<!-- The application appears to work. However, <i>it is forbidden in React to mutate state directly</i>, since it can result in unexpected side effects. Changing state has to always be done by setting the state to a new object. If properties from the previous state object want to simply be copied, this has to be done by copying those properties into a new object. -->
-这个应用似乎可以工作。 但是，这违反了React 中状态不可直接修改的原则，因为它会导致意想不到的副作用。 必须始终通过将状态设置为新对象来更改状态。 如果来自前一个状态对象的属性只想简单地复制，则必须通过将这些属性复制到新对象中来完成。
+<!-- The application appears to work. However, <i>it is forbidden in React to mutate state directly</i>, since it can result in unexpected side effects. Changing state has to always be done by setting the state to a new object. If properties from the previous state object are not changed, they need to simply be copied, which is done by copying those properties into a new object, and setting that as the new state. -->
+这个应用似乎可以工作。 但是，这违反了React 中状态不可直接修改的原则，因为它会导致意想不到的副作用。 必须始终通过将状态设置为新对象来更改状态。 如果之前的状态没有变化，属性仅仅需要简单地复制，就是通过将这些属性复制到新的对象中，并将其设置为新状态。
 
 <!-- Storing all of the state in a single state object is a bad choice for this particular application; there's no apparent benefit and the resulting application is a lot more complex. In this case storing the click counters into separate pieces of state is a far more suitable choice. -->
 对于这个特定的应用来说，将所有状态存储在单个状态对象中是一个糟糕的选择;  没有明显的好处，还会导致产生的应用要复杂得多。 在这种情况下，将点击计数器存储到单独的状态块中是一个更合适的选择。
@@ -264,7 +264,7 @@ const handleLeftClick = () => {
 ```
 
 <!-- However, __don't__ do this. As mentioned previously, the state of React components like _allClicks_ must not be mutated directly. Even if mutating state appears to work in some cases, it can lead to problems that are very hard to notice. -->
-但是，不要这样做。 如前所述，React 组件(如 _allClicks_ )的状态不能直接更改。 即使改变状态在某些情况下可以工作，也可能导致很难注意到的问题。
+但是，不要这样做。 如前所述，React 组件(如 _allClicks_ )的状态不能直接更改。 即使改变状态在某些情况下可以工作，也可能导致很难调试的问题。
 
 <!-- Let's take a closer look at how the clicking history is rendered to the page: -->
 让我们仔细看看点击历史是如何渲染在页面上的:
@@ -416,7 +416,7 @@ const App = (props) => {
 
 <!-- In this course we use the [state hook](https://reactjs.org/docs/hooks-state.html) to add state to our React components, which is part of the newer versions of React and is available from version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) onwards. Before the addition of hooks, there was no way to add state to React functional components. Components that required state had to be defined as React [class](https://reactjs.org/docs/react-component.html) components using the JavaScript class syntax. -->
 
-在这个过程中，我们使用了状态Hook [state hook](https://reactjs.org/docs/hooks-state.html) 来添加状态到我们的 React 组件，这是 React 的新版本的一部分，可以从版本[16.8.0](https://www.npmjs.com/package/React/v/16.8.0)开始使用。 在添加Hook之前，没有办法将状态添加到 React 函数组件。 需要状态的组件必须使用 JavaScript 类语法定义为 React 的 [class](https://reactjs.org/docs/react-component.html) 组件。
+在这个过程中，我们使用了状态Hook [state hook](https://reactjs.org/docs/hooks-state.html) 来添加状态到我们的 React 组件，这是 React 的新版本的一部分，可以从版本[16.8.0](https://www.npmjs.com/package/React/v/16.8.0)开始使用。 在添加Hook之前，没有办法将状态添加到函数组件。 需要状态的组件必须使用 JavaScript 类语法定义为 [class](https://reactjs.org/docs/react-component.html) 组件。
 
 <!-- In this course we have made the slightly radical decision to use hooks exclusively from day one, to ensure that we are learning the future style of React. Even though functional components are the future of React, it is still important to learn the class syntax, as there are billions of lines of old React code that you might end up maintaining some day. The same applies to documentation and examples of React that you may stumble across on the internet. -->
 
@@ -491,7 +491,7 @@ const Button = (props) => {
 
 <!-- **NB** when you use _console.log_ for debugging, don't combine objects in a Java-like fashion by  using a plus. Instead of writing: -->
 
-**注意**：当您使用 console.log 进行调试时，不要使用“加号”，像类似于 java 的方式组合对象。 即不要写:
+**注意**：当您使用 _console.log_ 进行调试时，不要使用“加号”，像类似于 java 的方式组合对象。 即不要写:
 
 ```js
 console.log('props value is' + props)
@@ -1023,8 +1023,8 @@ const App = (props) => {
 }
 ```
 
-<!-- The row generated for the increase button is the following: -->
-为 increase 按钮生成的代码行如下:
+<!-- The increase button is declared as following: -->
+为 increase 按钮的代码行如下:
 
 ```js
 <button onClick={setToValue(value + 1)}>increment</button>
@@ -1177,8 +1177,7 @@ const App = props => {
 <!-- - The React [official documentation](https://reactjs.org/docs/hello-world.html) is worth checking out at some point, although most of it will become relevant only later on in the course. Also, everything related to Class-components is irrelevant to us.-->
 
 - React[官方文档](https://reactjs.org/docs/hello-world.html)在某种程度上值得一读，尽管其中大部分只有在课程后期才会变得有意义。 此外，所有与类组件相关的内容都与我们无关。
-<!-- - Beware the official React [tutorial](https://reactjs.org/tutorial/tutorial.html), it's not very good.-->
-- 注意官方的React[教程](https://reactjs.org/tutorial/tutorial.html) ，它不是很好。
+
 <!-- - Some courses on [Egghead.io](https://egghead.io) like [Start learning React](https://egghead.io/courses/start-learning-react) are of high quality, and the slightly newer [The Beginner's guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) is also relatively good; both courses introduce concepts that will also be introduced later on in this course. However, both courses use Class components instead of the new functional ones used in this course.-->
 - 一些关于[Egghead.io](https://Egghead.io)的课程，如[开始学习React](https://Egghead.io/courses/Start-learning-React) ，质量很高，稍新一点的[初学者React指南](https://Egghead.io/courses/The-Beginner-s-guide-to-reactjs)也相对不错; 这两门课程都介绍了一些概念，这些概念也将在本课程后面介绍。 然而，这两门课程都使用了 Class 组件，而不是本课程中使用的新的函数式组件。
 
