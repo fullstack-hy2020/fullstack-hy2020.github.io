@@ -82,7 +82,7 @@ const Notes = (props) => { // highlight-line
 
 // highlight-start
   const notesToShow = () => {
-    if ( props.filter === 'ALL ') {
+    if ( props.filter === 'ALL') {
       return props.notes
     }
     
@@ -127,7 +127,7 @@ Connect-komennolla ja <i>mapStateToProps</i>-määrittelyllä aikaan saatua tila
 
 eli komponentin <i>Notes</i> sisältä on propsien <i>props.notes</i> ja <i>props.filter</i> kautta "suora pääsy" tarkastelemaan Redux storen sisällä olevaa tilaa.
 
-Komponentti _NoteList_ ei oikeastaan tarvitse mihinkään tietoa siitä mikä filtteri on valittuna, eli filtteröintilogiikka voidaan siirtää kokonaan sen ulkopuolelle, ja palauttaa propsina _notes_ suoraan sopivalla tavalla filtteröidyt muistiinpanot:
+Komponentti _Notes_ ei oikeastaan tarvitse mihinkään tietoa siitä mikä filtteri on valittuna, eli filtteröintilogiikka voidaan siirtää kokonaan sen ulkopuolelle, ja palauttaa propsina _notes_ suoraan sopivalla tavalla filtteröidyt muistiinpanot:
 
 ```js
 const Notes = (props) => { // highlight-line

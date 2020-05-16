@@ -873,7 +873,7 @@ import noteReducer from './reducers/noteReducer'
 Moduulilla voi olla vain <i>yksi default export</i>, mutta useita "normaaleja" exporteja
 
 ```js
-export const noteCreation = (content) => {
+export const createNote = (content) => {
   // ...
 }
 
@@ -885,7 +885,7 @@ export const toggleImportanceOf = (id) => {
 Normaalisti (eli ei defaultina) exportattujen funktioiden käyttöönotto tapahtuu aaltosulkusyntaksilla:
 
 ```js
-import { noteCreation } from './../reducers/noteReducer'
+import { createNote } from './../reducers/noteReducer'
 ```
 
 Komponentin <i>App</i> koodi 

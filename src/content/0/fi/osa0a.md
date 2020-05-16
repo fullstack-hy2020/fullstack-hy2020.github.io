@@ -100,9 +100,11 @@ Jos haluat kurssilta virallisen suorituksen, tallenna <b>Helsingin yliopiston</b
 
 Jos et ole Helsingin yliopiston opiskelija, saat opiskelijanumeron ilmoittautumalla kurssille [Avoimen yliopiston](/osa0/yleista/#kokeeseen-ilmoittautuminen) kautta.
 
-Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi valmis kurssin suorituksen kanssa:
+Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja *ilmoittanut palautussovelluksessa* olevasi valmis kurssin suorituksen kanssa:
 
 ![](../../images/0/28a.png)
+
+Paina siis sinistä nappia "I have completed the course ..."!
 
 Arvosana siirtyy Weboodiin neljän viikon sisällä suoritusmerkintäpyynnön jälkeen. Heinäkuu saatta aihuettaa viiveen suorituksen kirjaamiseen.
 

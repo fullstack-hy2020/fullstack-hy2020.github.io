@@ -34,7 +34,7 @@ Some tests might pass one time and fail another, even if the code does not chang
 <!-- [Cypress](https://www.cypress.io/)-niminen E2E-testaukseen soveltuva kirjasto on kasvattanut nopeasti suosiotaan viimeisen reilun vuoden aikana. Cypress on poikkeuksellisen helppokäyttöinen, kaikenlaisen säätämisen ja tunkkaamisen määrä esim. Seleniumin käyttöön verrattuna on lähes olematon. Cypressin toimintaperiaate poikkeaa radikaalisti useimmista E2E-testaukseen sopivista kirjastoista, sillä Cypress-testit ajetaan kokonaisuudessaan selaimen sisällä. Muissa lähestymistavoissa testit suoritetaan Node-prosessissa, joka on yhteydessä selaimeen  ohjelmointirajapintojen kautta. -->
 E2E library [Cypress](https://www.cypress.io/) has become popular within the last year. Cypress is exceptionally easy to use, and when compared to Selenium, for example, it requires a lot less hassle and headache. 
 Its operating principle is radically different than most E2E testing libraries, because Cypress tests are run completely within the browser.
-Other libraries run the tests in a Node-process, which is connected to the broswer through an API. 
+Other libraries run the tests in a Node-process, which is connected to the browser through an API. 
 
 Let's  make some end to end tests for our note application.
 
@@ -120,7 +120,7 @@ Running the test opens your browser and shows how the application behaves as the
 
 ![](../../images/5/32ae.png)
 
-The structure of the test should look faimiliar. They use <i>describe</i> blocks to group different test cases like Jest does. The test cases have been defined with the <i>it</i> method. 
+The structure of the test should look familiar. They use <i>describe</i> blocks to group different test cases like Jest does. The test cases have been defined with the <i>it</i> method. 
 Cypress borrowed these parts from [Mocha](https://mochajs.org/) testing library it uses under the hood. 
 
 <!-- [cy.visit](https://docs.cypress.io/api/commands/visit.html) ja [cy.contains](https://docs.cypress.io/api/commands/contains.html) taas ovat Cypressin komentoja, joiden merkitys on aika ilmeinen. [cy.visit](https://docs.cypress.io/api/commands/visit.html) avaa testin käyttämään selaimeen parametrina määritellyn osoitteen ja [cy.contains](https://docs.cypress.io/api/commands/contains.html) etsii sivun sisältä parametrina annetun tekstin.  -->
@@ -221,7 +221,7 @@ describe('Note app', function() {
 The login field contains two <i>input</i> fields, which the test should write into. 
 
 <!-- Komento [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) mahdollistaa elementtien etsimisen CSS-selektorien avulla. -->
-The [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) command allows for searching elemets by CSS selectors. 
+The [cy.get](https://docs.cypress.io/api/commands/get.html#Syntax) command allows for searching elements by CSS selectors. 
 
 <!-- Voimme hakea lomakkeen ensimmäisen ja viimeisen input-kentän ja kirjoittaa niihin komennolla [cy.type](https://docs.cypress.io/api/commands/type.html#Syntax) seuraavasti: -->
 We can access the first and the last input field on the page, and write to them with the command [cy.type](https://docs.cypress.io/api/commands/type.html#Syntax) like so: 
@@ -238,7 +238,7 @@ it('user can login', function () {
 The test works. The problem is if we later add more input fields, the test will break because it expects the fields it needs to be the first and the last on the page. 
 
 <!-- Parempi ratkaisu on määritellä kentille yksilöivät <i>id</i>-attribuutit ja hakea kentät testeissä niiden perusteella. Eli laajennetaan kirjautumislomaketta seuraavasti -->
-It would be better to give our inputs unique <i>ids</i> and find them by them. 
+It would be better to give our inputs unique <i>ids</i> and use those to find them. 
 We change our login form like so
 
 ```js
@@ -294,7 +294,7 @@ describe('Note app',  function() {
 ```
 
 <!-- Viimeinen rivi varmistaa, että kirjautuminen on onnistunut.  -->
-The last row ensures, that the login was successful. 
+The last row ensures that the login was successful. 
 
 <!-- Huomaa, että CSS:n [id-selektori](https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors) on risuaita, eli jos koodista etsitään elementtiä, jolla on id <i>username</i> on sitä vastaava CSS-selektori <i>#username</i>. -->
 Note that the CSS [id-selector](https://developer.mozilla.org/en-US/docs/Web/CSS/ID_selectors) is #, so if we want to search for an element with the id <i>username</i> the CSS selector is <i>#username</i>.
@@ -322,10 +322,10 @@ Actually both buttons are in the application's DOM the whole time, but only one 
 <!-- Jos haemme nappia tekstin perusteella, palauttaa komento [cy.contains](https://docs.cypress.io/api/commands/contains.html#Syntax) aina napeista ensimmäisen, eli lomakkeen avaavan napin. Näin tapahtuu siis vaikka nappi ei olisikaan näkyvillä. Tämän takia lomakkeen lähettävään nappiin on lisätty id <i>login-button</i>, jonka perusteella testi pääsee nappiin käsiksi. -->
 If we search for a button by its text, [cy.contains](https://docs.cypress.io/api/commands/contains.html#Syntax) will return the first of them, or the one opening the login form. 
 This will happen even if the button is not visible. 
-Because of this we gave the submit button id <i>login-button</i> we can use to access it.
+To avoid name conflicts, we gave submit button the id <i>login-button</i> we can use to access it.
 
 <!-- Huomaamme, että testeissä käytetty muuttuja _cy_ aiheuttaa ikävän ESlint-virheen -->
-Now we notice, that the variable _cy_ our tests use gives us a nasty Eslint error
+Now we notice that the variable _cy_ our tests use gives us a nasty Eslint error
 
 ![](../../images/5/30ea.png)
 
@@ -410,7 +410,7 @@ If the page contained more inputs, the test would break
 ![](../../images/5/31ea.png)
 
 <!-- Tämän takia olisi jälleen parempi lisätä lomakkeen kentälle <i>id</i> ja hakea kenttä testissä id:n perusteella. -->
-Due to this it would again be better to give the input an <i>id</i> and search for it by it. 
+Due to this it would again be better to give the input an <i>id</i> and search for the element by its id. 
 
 <!-- Testien rakenne näyttää seuraavalta: -->
 The structure of the tests looks like so:
@@ -445,7 +445,7 @@ describe('Note app', function() {
 
 <!-- Cypress suorittaa testit siinä järjestyksessä, missä ne ovat testikoodissa. Eli ensin suoritetaan testi <i>user can log in</i>, missä käyttäjä kirjautuu sovellukseen, ja tämän jälkeen suoritetaan testi <i>a new note can be created</i>, jonka <i>beforeEach</i>-lohkossa myös suoritetaan kirjautuminen. Miksi näin tehdään, eikö käyttäjä jo ole kirjaantuneena aiemman testin ansiosta? Ei, sillä <i>jokaisen</i> testin suoritus alkaa selaimen kannalta "nollatilanteesta", kaikki edellisten testien selaimen tilaan tekemät muutokset nollaantuvat. -->
 Cypress runs the tests in the order they are in the code. So first it runs <i>user can log in</i>, where the user logs in. Then cypress will run <i>a new note can be created</i> which's <i>beforeEach</i> block logs in as well. 
-Why do this? Is the user not logged in after the first test? 
+Why do this? Isn't the user logged in after the first test? 
 No, because <i>each</i> test starts from zero as far as the browser is concerned. 
 All changes to the browser's state are reversed after each test.
 
@@ -1079,7 +1079,7 @@ cy.contains('logout').click()
 
 <!-- Näin kirjoitettu koodi ei kuitenkaan toimi. Kun Cypress suorittaa testin, se lisää jokaisen _cy_-komennon suoroitusjonoon. Kun testimetodin koodi on suoritettu loppuun, suorittaa Cypress yksi kerrallaan suoritusjonoon lisätyt _cy_-komennot. -->
 This won't work however. When Cypress runs a test, it adds each _cy_ command to an execution queue. 
-When the code of the test method has been executed, Cypres will execute each command in the queue one by one. 
+When the code of the test method has been executed, Cypress will execute each command in the queue one by one. 
 
 <!-- Cypressin komennot palauttavat aina _undefined_, eli yllä olevassa koodissa komento _button.click()_ aiheuttaisi virheen ja yritys käynnistää debuggeri ei pysäyttäisi koodia Cypress-komentojen suorituksen välissä, vaan jo ennen kuin yhtään Cypress-komentoa olisi suoritettu. -->
 Cypress commands always return _undefined_, so _button.click()_ in the above code would cause an error. An attempt to start the debugger would not stop the code between executing the commands, but before any commands have been executed. 
@@ -1128,7 +1128,7 @@ Now we can run our tests from the command line with the command <i>npm run test:
 ![](../../images/5/39ea.png)
 
 <!-- Huomaa, että testien suorituksesta tallentuu video hakemistoon <i>cypress/videos/</i>, hakemisto lienee syytä gitignoroida. -->
-Note that video of the test execution will be saved to <i>cypress/videos/</i>, so you should propably git ignore this directory. 
+Note that video of the test execution will be saved to <i>cypress/videos/</i>, so you should probably git ignore this directory. 
 
 <!-- Testien ja frontendin koodin lopullinen versio on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11), branchissa <i>part5-11</i>. -->
 The frontend- and the test code can be found from [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11) branch <i>part5-11</i>.
@@ -1141,7 +1141,7 @@ The frontend- and the test code can be found from [github](https://github.com/fu
 
 In the last exercises of this part we will do some E2E tests for our blog application. 
 The material of this part should be enough to complete the exercises. 
-You should absolutely also check out the Cypress [documentation](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell). It is propably the best documentation I have ever seen for an open source project. 
+You should absolutely also check out the Cypress [documentation](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell). It is probably the best documentation I have ever seen for an open source project. 
 
 <!-- Erityisesti kannattaa lukea luku [Introduction to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes), joka toteaa -->
 I especially recommend reading [Introduction to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes), which states
@@ -1163,7 +1163,7 @@ describe('Blog app', function() {
     cy.visit('http://localhost:3000')
   })
 
-  it('Login from is shown', function() {
+  it('Login form is shown', function() {
     // ...
   })
 })
@@ -1191,7 +1191,7 @@ describe('Blog app', function() {
     cy.visit('http://localhost:3000')
   })
 
-  it('Login from is shown', function() {
+  it('Login form is shown', function() {
     // ...
   })
 
@@ -1213,7 +1213,7 @@ describe('Blog app', function() {
 #### 5.19: bloglist end to end testing, step3
 
 <!-- Tee testi, joka varmistaa, että kirjaantunut käyttäjä pystyy luomaan blogin. Testin runko voi näyttää seuraavalta -->
-Make a test which checks, that a logged in user can create a new blog. 
+Make a test which checks that a logged in user can create a new blog. 
 The structure of the test could be as follows
 
 ```js 
@@ -1234,7 +1234,7 @@ describe('Blog app', function() {
 ```
 
 <!-- Testin tulee varmistaa, että luotu blogi tulee näkyville blogien listalle. -->
-The test has to ensure, that a new blog is added to the list of all blogs. 
+The test has to ensure that a new blog is added to the list of all blogs. 
 
 #### 5.20: bloglist end to end testing, step4
 
@@ -1244,14 +1244,14 @@ Make a test which checks that user can like a blog.
 #### 5.21: bloglist end to end testing, step5
 
 <!-- Tee testi, joka varmistaa, että blogin lisännyt käyttäjä voi poistaa blogin. -->
-Make a test for ensuring, that the user who created a blog can delete it. 
+Make a test for ensuring that the user who created a blog can delete it. 
 
 <!-- <i>Vapaaehtoinen bonustehtävä:</i> varmista myös että poisto ei onnistu muilta kuin blogin lisänneeltä käyttäjältä. -->
 <i>Optional bonus exercise:</i> also check that other users cannot delete the blog. 
 
 #### 5.22: bloglist end end testing, step 6
 
-Make a test which checks, that the blogs are ordered according to likes with the blog with the most likes being first. 
+Make a test which checks that the blogs are ordered according to likes with the blog with the most likes being first. 
 
 This exercise might be a bit trickier. One solution is to find all of the blogs and then compare them in the callback function of a [then](https://docs.cypress.io/api/commands/then.html#DOM-element) command. 
 

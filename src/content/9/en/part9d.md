@@ -96,6 +96,8 @@ We can do that by altering our lint command in <i>.package.json</i> to the follo
 }
 ```
 
+If you are using Windows, you may need to use double quotes for the linting path: `"lint": "eslint \"./src/**/*.{ts,tsx}\""`.
+
 <!-- If we now run <i>npm run lint</i>, we should still receive an error from eslint: -->
 Now if we run <i>npm run lint</i>, we still recieve an error from eslint:
 
@@ -292,7 +294,7 @@ and remove the unnecessary files.
 
 The whole app is now in one component. That is not what we want, so refactor the code so that it consists of three components: <i>Header</i>,  <i>Content</i> and <i>Total</i>. All data is still kept in the <i>App</i> component, which passes all necessary data to each component as props. Be sure to add type declarations for each component's props! 
 
-The <i>Header</i> component should take care of rendering the name of the course.<i>Content</i> should render the names of the different parts and the amount of exercises in each part, and <i>Total</i> should render the total sum of exercises in all parts.
+The <i>Header</i> component should take care of rendering the name of the course. <i>Content</i> should render the names of the different parts and the amount of exercises in each part, and <i>Total</i> should render the total sum of exercises in all parts.
 
 The <i>App</i> component should look somewhat like this:
 
@@ -917,7 +919,7 @@ dispatch({ type: "SET_PATIENT_LIST", payload: patients });
 
 <div class="tasks">
 
-### Exercises 9.16.-9.17
+### Exercises 9.16.-9.18
 
 We will soon add new type <i>Entry</i> for our app that represents a light weight patient journal entry. It consists of journal text i.e. <i>description</i>, creation date, information regarding the specialist who created it and possible diagnosis codes. Diagnosis codes map to the ICD-10 codes returned from the <i>/api/diagnoses</i> endpoint. Our naive implementation will be that a patient has an array of entries.
 
