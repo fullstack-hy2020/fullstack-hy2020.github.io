@@ -14,19 +14,11 @@ class NotFoundPage extends Component {
 
   componentDidMount() {
     const siteLanguage =
-<<<<<<< HEAD
-      window.location.pathname.indexOf('/en') !== -1
-        ? 'en'
-        : window.location.pathname.indexOf('/zh') !== -1
-          ? 'zh'
-          : 'fi';
-=======
       window.location.pathname.indexOf('/en') > -1
         ? 'en'
         : window.location.pathname.indexOf('/zh') > -1
         ? 'zh'
         : 'fi';
->>>>>>> ea6ef759917210aa48e32eae2f8cc77bdbab1856
 
     this.setState({ siteLanguage });
   }
