@@ -419,7 +419,7 @@ There is an extension [Redux DevTools](https://chrome.google.com/webstore/detail
 When debugging, in addition to the browser extension we also have the software library [redux-devtools-extension](https://www.npmjs.com/package/redux-devtools-extension). Let's install it using the command:
 
 ```js
-npm install --save redux-devtools-extension
+npm install --save-dev redux-devtools-extension
 ```
 
 We'll have to slightly change the definition of the store to get the library up and running:
