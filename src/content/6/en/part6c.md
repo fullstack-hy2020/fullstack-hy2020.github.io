@@ -35,7 +35,7 @@ The initial state of the database is stored into the file <i>db.json</i>, which 
 We'll install json-server for the project...
 
 ```js
-npm install json-server --save
+npm install json-server --save-dev
 ```
 
 
