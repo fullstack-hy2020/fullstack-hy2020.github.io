@@ -138,11 +138,13 @@ The minified code is not very readable. The beginning of the code looks like thi
 
 One option for deploying the frontend is to copy the production build (the <i>build</i> directory) to the root of the backend repository and configure the backend to show the frontend's <i>main page</i> (the file <i>build/index.html</i>) as its main page. 
 
-We begin by copying the production build of the frontend to the root of the backend. With my computer the copying can be done from the frontend directory with the command
+We begin by copying the production build of the frontend to the root of the backend. With a Mac computer, the copying can be done from the frontend directory with the command
 
 ```bash
 cp -r build ../../../osa3/notes-backend
 ```
+
+If you are using a Windows computer, you may use the command [copy](https://www.windows-commandline.com/windows-copy-command-syntax-examples/) or [xcopy](https://www.windows-commandline.com/xcopy-command-syntax-examples/) instead. Otherwise, simply do a copy and paste.
 
 The backend directory should now look as follows:
 
