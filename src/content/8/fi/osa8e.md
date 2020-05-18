@@ -110,7 +110,7 @@ const PERSON_DETAILS = gql`
 `
 ```
 
-Näin määritelty fragmentti voidaan upottaa kaikkiin sitä tarvitseviin kyselyihin ja mutaatioihin "prosenttiaaltosulku"-operaatiolla:
+Näin määritelty fragmentti voidaan upottaa kaikkiin sitä tarvitseviin kyselyihin ja mutaatioihin "dollariaaltosulku"-operaatiolla:
 
 ```js
 export const ALL_PERSONS = gql`
