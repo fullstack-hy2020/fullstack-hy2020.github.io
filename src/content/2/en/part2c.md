@@ -338,7 +338,7 @@ The data returned by the server is plain text, basically just one long string. T
 
 We can finally begin using the data fetched from the server.
 
-Let's try and request the notes from our local server and render them, initially as the App component. Please note that this approach has many issues, as we're rendering the entire <i>App</i> component only when we successfuly retrieve a response:
+Let's try and request the notes from our local server and render them, initially as the App component. Please note that this approach has many issues, as we're rendering the entire <i>App</i> component only when we successfully retrieve a response:
 
 ```js
 import ReactDOM from 'react-dom'
