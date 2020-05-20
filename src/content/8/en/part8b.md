@@ -722,7 +722,7 @@ export const EDIT_NUMBER = gql`
 ```
 
 The <i>PhoneForm</i> component responsible for the change is straightforward. The form has fields for the person's name and new phone number, and calls the _changeNumber_ function. The function is done using the _useMutation_-hook. 
-Interesting lines on the code have been hihglighted.
+Interesting lines on the code have been highlighted.
 
 ```js
 import React, { useState } from 'react'
