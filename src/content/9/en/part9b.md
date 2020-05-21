@@ -659,7 +659,7 @@ There is one more problem with the code
 
 ![](../../images/9/9b.png)
 
-This is because we banned unused parameters in out <i>tsconfig.json</i>
+This is because we banned unused parameters in our <i>tsconfig.json</i>
 
 ```js
 {
