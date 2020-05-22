@@ -534,7 +534,7 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
 ```
 
 <!-- Syötekenttään <i>input</i> kirjoittamista simuloidaan tekemällä syötekenttään tapahtuma <i>change</i> ja määrittelemällä sopiva olio, joka määrittelee syötekenttään 'kirjoitetun' sisällön. -->
-We can simulate writing to <i>input</i> fields by creating an <i>change</i> event to them, and defining an object, which contains the text 'written' to the field.
+We can simulate writing to <i>input</i> fields by creating a <i>change</i> event to them, and defining an object, which contains the text 'written' to the field.
 
 <!-- Lomake lähetetään simuloimalla tapahtuma <i>submit</i> lomakkeelle. -->
 The form is sent by simulating the <i>submit</i> event to the form.
@@ -574,7 +574,7 @@ You can find the code for our current application in its entirety in the <i>part
 #### 5.13: Blog list tests, step1
 
 <!-- Tee testi, joka varmistaa että blogin näyttävä komponentti renderöi blogin titlen, authorin mutta ei renderöi oletusarvoisesti urlia eikä likejen määrää. -->
-Make a test, which checks that the component displaying a blog renders the blog's title and author, but does not render its url or number of likes by default
+Make a test which checks that the component displaying a blog renders the blog's title and author, but does not render its url or number of likes by default
 
 <!-- Lisää komponenttiin tarvittaessa testausta helpottavia CSS-luokkia. -->
 Add CSS-classes to the component to help the testing as necessary. 
@@ -582,7 +582,7 @@ Add CSS-classes to the component to help the testing as necessary.
 #### 5.14: Blog list tests, step2
 
 <!-- Tee testi, joka varmistaa että myös url ja likejen määrä näytetään kun blogin kaikki tiedot näyttävää nappia on painettu. -->
-Make a test, which checks that blog's url and number of likes are shown when the button controlling the shown details has been clicked. 
+Make a test which checks that blog's url and number of likes are shown when the button controlling the shown details has been clicked. 
 
 #### 5.15: Blog list tests, step3
 
