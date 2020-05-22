@@ -69,7 +69,7 @@ console.log(birthdayGreeter(birthdayHero, 22));
 #### Structural typing
 
 <!-- TypeScript is a structurally typed language. In structural typing, an element is considered to be compatible with another if  for each feature within the second element's type, a corresponding and identical feature exists in the first element's type. Two types are considered to be identical if each is compatible with the other. -->
-TypeScript is a structurally typed language. In structural typing two elements are considered to be compatible with oneanother if for each feature within the type of the first element a corresponding and identical feature exists within the type of the second element. Two types are considered to be identical if they are compatible with each other.
+TypeScript is a structurally typed language. In structural typing two elements are considered to be compatible with one another if for each feature within the type of the first element a corresponding and identical feature exists within the type of the second element. Two types are considered to be identical if they are compatible with each other.
 
 #### Type inference
 
