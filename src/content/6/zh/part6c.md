@@ -37,7 +37,7 @@ lang: zh
 我们将为这个项目安装 json-server...
 
 ```js
-npm install json-server --save
+npm install json-server --save-dev
 ```
 
 
