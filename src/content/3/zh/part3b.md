@@ -15,7 +15,7 @@ lang: zh
 在前面的部分中，前端可以从作为后端的 json 服务器向地址 http://localhost:3001/notes 索取便笺列表。
 
 <!-- Our backend has a bit different url structure, and the notes can be found from http//localhost:3001/api/notes.  -->
-我们的后端有一个稍微不同的 url 结构，便笺可以从 http//localhost:3001/api/notes 中获取到。
+我们的后端有一个稍微不同的 url 结构，便笺可以从 http://localhost:3001/api/notes 中获取到。
 
 <!-- Let's change the attribute __baseUrl__ in the <i>src/services/notes.js</i> like so: -->
 让我们像下面这样修改 <i>src/services/notes.js</i> 中的__baseUrl__属性 :

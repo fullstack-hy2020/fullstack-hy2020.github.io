@@ -445,7 +445,7 @@ const notes = useSelector(({ filter, notes }) => {
 在调试时，除了浏览器扩展外，我们还有软件库[redux-devtools-extension](https://www.npmjs.com/package/redux-devtools-extension 扩展)。 让我们使用如下命令来安装它:
 
 ```js
-npm install --save redux-devtools-extension
+npm install --save-dev redux-devtools-extension
 ```
 
 <!-- We'll have to slightly change the definition of the store to get the library up and running: -->
