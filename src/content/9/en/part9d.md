@@ -121,6 +121,7 @@ Let us consider the following JavaScript React example:
 
 ```jsx
 import React from "react";
+import ReactDOM from 'react-dom';
 import PropTypes from "prop-types";
 
 const Welcome = props => {
