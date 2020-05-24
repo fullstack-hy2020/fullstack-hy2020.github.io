@@ -65,7 +65,7 @@ const App = () => {
             type="text"
             value={username}
             name="Username"
-            onChange={({ target }) => setUsername(target.value)}
+            onChange={({ event }) => setUsername(event.target.value)}
           />
         </div>
         <div>
@@ -74,7 +74,7 @@ const App = () => {
             type="password"
             value={password}
             name="Password"
-            onChange={({ target }) => setPassword(target.value)}
+            onChange={({ event }) => setPassword(event.target.value)}
           />
         </div>
         <button type="submit">login</button>
