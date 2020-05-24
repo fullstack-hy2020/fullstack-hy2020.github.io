@@ -197,7 +197,7 @@ Axios is now included among the other dependencies:
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
-    "axios": "^0.19.1", // highlight-line
+    "axios": "^0.19.2", // highlight-line
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.0"
