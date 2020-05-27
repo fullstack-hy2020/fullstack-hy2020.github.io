@@ -1048,7 +1048,7 @@ All HTTP requests except POST should be <i>idempotent</i>:
 This means that if a request has side-effects, then the result should be same regardless of how many times the request is sent.
 
 
-If we make an HTTP PUT request to the url <i>/api/notes/10</i> and with the request we send the data <em>{ content: "no side effects!", important: true }</em>, the result is the same regardless of many times the request is sent.
+If we make an HTTP PUT request to the url <i>/api/notes/10</i> and with the request we send the data <em>{ content: "no side effects!", important: true }</em>, the result is the same regardless of how many times the request is sent.
 
 
 Like <i>safety</i> for the GET request, <i>idempotence</i> is also just a recommendation in the HTTP standard and not something that can be guaranteed simply based on the request type. However, when our API adheres to RESTful principles, then GET, HEAD, PUT, and DELETE requests are used in such a way that they are idempotent.
