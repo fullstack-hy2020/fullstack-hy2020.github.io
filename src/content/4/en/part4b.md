@@ -106,7 +106,7 @@ module.exports = {
 The <i>.env</i> file has <i>separate variables</i> for the database addresses of the development and test databases:
 
 ```bash
-MONGODB_URI=mongodb+srv://fullstack:secred@cluster0-ostce.mongodb.net/note-app?retryWrites=true
+MONGODB_URI=mongodb+srv://fullstack:secret@cluster0-ostce.mongodb.net/note-app?retryWrites=true
 PORT=3001
 
 // highlight-start
