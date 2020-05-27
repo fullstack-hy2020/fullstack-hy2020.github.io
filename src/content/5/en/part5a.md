@@ -14,7 +14,7 @@ In the last two parts, we have mainly concentrated on the backend, and the front
 At the moment the frontend shows existing notes, and lets users change the state of a note from important to not important and vice versa. New notes cannot be added anymore because of the changes made to the backend in part 4: the backend now expects that a token verifying a user's identity is sent with the new note. 
 
 
-We'll now implement a part of the required user management functionality to the frontend. Let's begin with user login. Throughout this part we will assume that new users will not be added from the frontend. 
+We'll now implement a part of the required user management functionality in the frontend. Let's begin with user login. Throughout this part we will assume that new users will not be added from the frontend. 
 
 
 A login form has now been added to the top of the page. The form for adding new notes has also been moved to the top of the list of notes. 
@@ -101,7 +101,7 @@ The login form is handled the same way we handled forms in
 ```
 
 
-The method _handleLogin_, which is  responsible for sending the form, does not yet do anything. 
+The method _handleLogin_, which is  responsible for handling the data in the form, is yet to be implemented. 
 
 
 Logging in is done by sending an HTTP POST request to server address <i>api/login</i>. Let's separate the code responsible for this request to its own module, to file <i>services/login.js</i>.
@@ -164,7 +164,7 @@ If the login is successful, the form fields are emptied <i>and</i> the server re
 If the login fails, or running the function _loginService.login_ results in an error, the user is notified. 
 
 
-User is not notified about a successful login in any way. Let's modify the application to show the login form only <i>if the user is not logged in</i> so _user === null_. The form for adding new notes is shown only if <i>user is logged in</i>, so <i>user</i> contains the user details. 
+The user is not notified about a successful login in any way. Let's modify the application to show the login form only <i>if the user is not logged-in</i> so when _user === null_. The form for adding new notes is shown only if the <i>user is logged-in</i>, so <i>user</i> contains the user details. 
 
 
 Let's add two helper functions to the <i>App</i> component for generating the forms: 
@@ -267,7 +267,7 @@ A slightly odd looking, but commonly used [React trick](https://reactjs.org/docs
 ```
 
 
-If the first statement evaluates false, or is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy), the second statement ( generating the form ) is not executed at all. 
+If the first statement evaluates to false, or is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy), the second statement (generating the form) is not executed at all. 
 
 We can make this even more straightforward by using the [conditional operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator):
 
@@ -292,10 +292,10 @@ return (
 ```
 
 
-If _user === null_ is [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), _loginForm()_ is executed. If not, _noteForm()_.
+If _user === null_ is [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), _loginForm()_ is executed. If not, _noteForm()_ is.
 
 
-Let's do one more modification. If user is logged in, their name is shown on the screen: 
+Let's do one more modification. If the user is logged-in, their name is shown on the screen: 
 
 ```js
 return (
@@ -307,7 +307,7 @@ return (
     {user === null ?
       loginForm() :
       <div>
-        <p>{user.name} logged in</p>
+        <p>{user.name} logged-in</p>
         {noteForm()}
       </div>
     }
@@ -321,7 +321,7 @@ return (
 ```
 
 
-The solution looks a bit ugly, but we'll leave it for now. 
+The solution isn't perfect, but we'll leave it for now. 
 
 
 Our main component <i>App</i> is at the moment way too large. The changes we did now are a clear sign that the forms should be refactored into their own components. However, we will leave that for an optional excercise. 
@@ -331,7 +331,7 @@ Current application code can be found on [Github](https://github.com/fullstack-h
 
 ### Creating new notes
 
-The token returned with a successful login is saved to the application state <i>user</i> field <i>token</i>:
+The token returned with a successful login is saved to the application's state - the <i>user</i>'s field <i>token</i>:
 
 ```js
 const handleLogin = async (event) => {
@@ -350,7 +350,7 @@ const handleLogin = async (event) => {
 }
 ```
 
-Let's fix creating new notes to work with the backend. This means adding the token of the logged in user to the Authorization header of the HTTP request. 
+Let's fix creating new notes so it works with the backend. This means adding the token of the logged-in user to the Authorization header of the HTTP request. 
 
 
 The <i>noteService</i> module changes like so: 
@@ -418,10 +418,10 @@ const handleLogin = async (event) => {
 
 And now adding new notes works again!
 
-### Saving the token to browsers local storage
+### Saving the token to the browser's local storage
 
 
-Our application has a flaw: When the page is rerendered, information of the user's login dissappears. This also slows down development. For example when we test creating new notes, we have to login again every single time. 
+Our application has a flaw: when the page is rerendered, information of the user's login dissappears. This also slows down development. For example when we test creating new notes, we have to login again every single time. 
 
 
 This problem is easily solved by saving the login details to [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage). Local Storage is a [key-value](https://en.wikipedia.org/wiki/Key-value_database) database in the browser. 
@@ -447,13 +447,13 @@ window.localStorage.getItem('name')
 and [removeItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/removeItem) removes a key. 
 
 
-Values in the storage stay even when the page is rerendered. The storage is [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin)-specific so each web application has its own storage. 
+Values in the local storage are persisted even when the page is rerendered. The storage is [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin)-specific so each web application has its own storage. 
 
 
-Let's extend our application so that it saves the details of a logged in user to the local storage. 
+Let's extend our application so that it saves the details of a logged-in user to the local storage. 
 
 
-Values saved to the storage are [DOMstrings](https://developer.mozilla.org/en-US/docs/Web/API/DOMString), so we cannot save a JavaScript object as is. The object has to be first parsed to JSON with the method _JSON.stringify_. Correspondigly, when a JSON object is read from the local storage, it has to be parsed back to JavaScript with _JSON.parse_.
+Values saved to the storage are [DOMstrings](https://developer.mozilla.org/en-US/docs/Web/API/DOMString), so we cannot save a JavaScript object as is. The object has to be parsed to JSON first, with the method _JSON.stringify_. Correspondigly, when a JSON object is read from the local storage, it has to be parsed back to JavaScript with _JSON.parse_.
 
 
 Changes to the login method are as follows: 
@@ -482,15 +482,15 @@ Changes to the login method are as follows:
 ```
 
 
-The details of a logged in user are now saved to the local storage, and they can be viewed on the console: 
+The details of a logged-in user are now saved to the local storage, and they can be viewed on the console: 
 
 ![](../../images/5/3e.png)
 
 
-We still have to modify our application so that when we enter the page, the application checks if user details of a logged in user can already be found from the local storage. If they can, the details are saved to the state of the application and to <i>noteService</i>.
+We still have to modify our application so that when we enter the page, the application checks if user details of a logged-in user can already be found on the local storage. If they can, the details are saved to the state of the application and to <i>noteService</i>.
 
 
-The right way to do this is with an [effect hook](https://reactjs.org/docs/hooks-effect.html): A mechanism we first encountered in [part 2](/en/part2/getting_data_from_server#effect-hooks), and used to fetch notes from the server to the frontend. 
+The right way to do this is with an [effect hook](https://reactjs.org/docs/hooks-effect.html): a mechanism we first encountered in [part 2](/en/part2/getting_data_from_server#effect-hooks), and used to fetch notes from the server. 
 
 
 We can have multiple effect hooks, so let's create a second one to handle the first loading of the page:
@@ -531,7 +531,7 @@ const App = () => {
 The empty array as the parameter of the effect ensures that the effect is executed only when the component is rendered [for the first time](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect).
 
 
-Now a user stays logged in to the application forever. We should probably add a <i>logout</i> functionality which removes the login details from the local storage. We will however leave it for an exercise. 
+Now a user stays logged-in in the application forever. We should probably add a <i>logout</i> functionality which removes the login details from the local storage. We will however leave it for an exercise. 
 
 
 It's possible to log out a user using the console, and that is enough for now. 
@@ -540,7 +540,7 @@ You can log out with the command:
 ```js
 window.localStorage.removeItem('loggedNoteappUser')
 ```
-or with the command which empties localstorage completely: 
+or with the command which empties <i>localstorage</i> completely: 
 
 ```js
 window.localStorage.clear()
@@ -598,17 +598,17 @@ npm start
 Implement login functionality to the frontend. The token returned with a successful login is saved to the application's state <i>user</i>.
 
 
-If a user is not logged in, <i>only</i> the login form is visible. 
+If a user is not logged-in, <i>only</i> the login form is visible. 
 
 ![](../../images/5/4e.png)
 
 
-If user is logged in, the name of the user and a list of blogs is shown. 
+If user is logged-in, the name of the user and a list of blogs is shown. 
 
 ![](../../images/5/5e.png)
 
 
-User details of the logged in user do not have to be saved to the local storage yet. 
+User details of the logged-in user do not have to be saved to the local storage yet. 
 
 
 **NB** You can implement the conditional rendering of the login form like this for example: 
@@ -648,7 +648,7 @@ Ensure the browser does not remember the details of the user after logging out.
 #### 5.3: bloglist frontend, step3
 
 
-Expand your application to allow  a logged in user to add new blogs: 
+Expand your application to allow  a logged-in user to add new blogs: 
 
 ![](../../images/5/7e.png)
 
