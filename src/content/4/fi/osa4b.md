@@ -655,7 +655,7 @@ notesRouter.post('/', async (request, response, next) => {
 })
 ```
 
-Catch-lohkossa siis ainoastaan kutsutaan funktiota _next_ siirretään poikkeuksen käsittely virheidenkäsittelymiddlewarelle.
+Catch-lohkossa siis ainoastaan kutsutaan funktiota _next_, joka siirtää poikkeuksen käsittelyn virheidenkäsittelymiddlewarelle.
 
 Muutoksen jälkeen testit menevät läpi.
 
