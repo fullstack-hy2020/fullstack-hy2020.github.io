@@ -213,7 +213,7 @@ Our application saves the notes to a variable. If the application crashes or is 
 
 The application needs a database. Before we introduce one, let's go through a few things. 
 
-###  Streamlining deploying of the frontend 
+###  Streamline deployment of the frontend 
 
 To create a new production build of the frontend without extra manual work, let's add some npm-scripts to the <i>package.json</i> of the backend repository: 
 
