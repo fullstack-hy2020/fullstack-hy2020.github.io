@@ -245,7 +245,7 @@ Axios 现在被包含在依赖中了:
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
-    "axios": "^0.19.1", // highlight-line
+    "axios": "^0.19.2", // highlight-line
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.0"
@@ -321,6 +321,10 @@ npm install json-server --save-dev
 ### Axios and promises
 <!-- Now we are ready to use axios. Going forward, json-server is assumed to be running on port 3001. -->
 现在我们可以使用 axios 了。在开始之前，我已经假定你的json-server跑在3001端口了。
+
+<!-- NB: To run json-server and your react app simultaneously, you may need to use two terminal windows. One to keep json-sever running and the other to run react-app. -->
+
+注意，为了同时运行 json-server和你的react 应用，你可能需要使用两个terminal 窗口。一个用来保持json-server 的运行，另一个来跑你的react应用。
 
 <!-- The library can be brought into use the same way other libraries, e.g. React, are, i.e. by using an appropriate <em>import</em> statement. -->
 可以像其他库一样使用这个库，就像 React那样，即使用 <em>import</em> 语句。
