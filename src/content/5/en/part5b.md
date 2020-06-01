@@ -192,7 +192,7 @@ Our goal is to implement a new <i>Togglable</i> component that can be used in th
 ```
 
 
-The way that the component is used is slightly different from our previous components. The component has both an opening and a closing tags which surround a <i>LoginForm</i> component. In React terminology <i>LoginForm</i> is a child component of <i>Togglable</i>.
+The way that the component is used is slightly different from our previous components. The component has both opening and closing tags which surround a <i>LoginForm</i> component. In React terminology <i>LoginForm</i> is a child component of <i>Togglable</i>.
 
 
 We can add any React elements we want between the opening and closing tags of <i>Togglable</i>, like this for example:
@@ -485,7 +485,7 @@ const App = () => {
 
 To recap, the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) function is a React hook, that is used for defining functions in a component which can be invoked from outside of the component.
 
-This trick works for changing the state of a component, but it looks a bit unpleasant. We could have accomplished the same functionality with slightly cleaner code using "old React" class-based components. We will take a look at these class components at the part 7 of the course material. So far this is the only situation where using React hooks leads to code that is not cleaner than with class components.
+This trick works for changing the state of a component, but it looks a bit unpleasant. We could have accomplished the same functionality with slightly cleaner code using "old React" class-based components. We will take a look at these class components during part 7 of the course material. So far this is the only situation where using React hooks leads to code that is not cleaner than with class components.
 
 There are also [other use cases](https://reactjs.org/docs/refs-and-the-dom.html) for refs than accessing React components.
 
