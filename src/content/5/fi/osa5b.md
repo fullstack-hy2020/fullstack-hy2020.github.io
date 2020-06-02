@@ -774,7 +774,7 @@ Komponentti _Togglable_ aiheuttaa ikävän näköisen varoituksen <i>Component d
 
 Komponentin "nimettöämyys" käy ilmi myös react-devtoolsilla:
 
-![](../../images/5/25ea.png)
+![](../../images/5/26ea.png)
 
 Korjaus on onneksi hyvin helppo tehdä
 
