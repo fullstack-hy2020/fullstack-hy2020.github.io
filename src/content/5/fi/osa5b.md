@@ -366,9 +366,11 @@ Reactin [ref](https://reactjs.org/docs/refs-and-the-dom.html)-mekanismia, joka t
 Tehdään komponenttiin <i>App</i> seuraavat muutokset
 
 ```js
+import React, { useState, useRef } from 'react' // highlight-line
+
 const App = () => {
   // ...
-  const noteFormRef = React.createRef() // highlight-line
+  const noteFormRef = useRef() // highlight-line
 
   const noteForm = () => (
     <Togglable buttonLabel='new note' ref={noteFormRef}>  // highlight-line
@@ -379,7 +381,7 @@ const App = () => {
 }
 ```
 
-Metodilla [createRef](https://reactjs.org/docs/react-api.html#reactcreateref) luodaan ref <i>noteFormRef</i>, joka kiinnitetään muistiinpanojen luomislomakkeen sisältävälle <i>Togglable</i>-komponentille. Nyt siis muuttuja <i>noteFormRef</i> toimii viitteenä komponenttiin.
+Metodilla [useRef](https://reactjs.org/docs/hooks-reference.html#useref) luodaan ref <i>noteFormRef</i>, joka kiinnitetään muistiinpanojen luomislomakkeen sisältävälle <i>Togglable</i>-komponentille. Nyt siis muuttuja <i>noteFormRef</i> toimii viitteenä komponenttiin.
 
 Komponenttia <i>Togglable</i> laajennetaan seuraavasti
 
