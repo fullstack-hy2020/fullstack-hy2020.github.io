@@ -142,7 +142,7 @@ The <i>Bearer</i> schema is suitable to our needs.
 In practice, this means that if the token is for example, the string <i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i>, the Authorization header will have the value: 
 
 <pre>
-Bearer eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW
+Bearer eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW.<FULL TOKEN REQUIRED HERE>
 </pre>
 
 Creating new notes will change like so: 
