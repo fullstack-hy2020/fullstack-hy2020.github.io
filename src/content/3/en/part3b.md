@@ -116,6 +116,8 @@ The frontend also works with the backend on Heroku. You can check this by changi
 
 The next question is, how do we deploy the frontend to the Internet? We have multiple options. Let's go through one of them next. 
 
+You can learn more about [publishing a website](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/Publishing_your_website) in MDN web docs.
+
 ### Frontend production build
 
 So far we have been running React code in <i>development mode</i>. In development mode the application is configured to give clear error messages, immediately render code changes to the browser, and so on. 
