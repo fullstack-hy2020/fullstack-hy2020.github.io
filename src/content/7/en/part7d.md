@@ -843,7 +843,7 @@ const config = (env, argv) => {
   // highlight-start
   const backend_url = argv.mode === 'production'
     ? 'https://blooming-atoll-75500.herokuapp.com/api/notes'
-    : 'http://localhost:3001/api/notes'
+    : 'http://localhost:3001/notes'
   // highlight-end
 
   return {
