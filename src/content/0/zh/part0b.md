@@ -26,7 +26,7 @@ lang: zh
 
 <!-- Open the [example application](https://fullstack-exampleapp.herokuapp.com/) on your browser. Sometimes this takes a while. -->
 
-在浏览器上打开这个[示例应用]()。应用加载通常需要等一会儿。
+在浏览器上打开这个[示例应用](https://fullstack-exampleapp.herokuapp.com/)。应用加载通常需要等一会儿。
 
 <!-- **The 1st rule of web development**: Always keep the developer console open on your browser. On macOS, open the console by pressing `F12` or `option-cmd-i` simultaneously. -->
 <!-- On Windows, open the console by pressing `F12` or `ctrl-shift-i` simultaneously. -->
