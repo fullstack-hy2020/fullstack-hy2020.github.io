@@ -214,6 +214,7 @@ Read the mongoose [documentation](https://mongoosejs.com/docs/deprecations.html)
 
 Expand the validation so that the name stored in the database has to be at least three characters long, and the phone number must have at least 8 digits.
 
+**Note**: Be aware of that the three-character name validation is only for practising, it is not a good idea to put it into production. Before doing any validation, think about as much as possible your target audience. What if you want to add your friend "Ed" and your app says it is not a valid name, will you ask Ed to rename himself only for your app?
 
 Expand the frontend so that it displays some form of error message when a validation error occurs. Error handling can be implemented by adding a <em>catch</em> block as shown below:
 
