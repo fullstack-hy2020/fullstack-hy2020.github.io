@@ -414,7 +414,7 @@ There is a slight cosmetic flaw in our application. Even though the filter is se
 
 ### Redux DevTools
 
-There is an extension [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) that can be installed on Chrome, in which the state of the Redux-store and the action that changes it can be monitored from the console of the browser.
+There is an extension [Redux DevTools](https://github.com/zalmoxisus/redux-devtools-extension) that can be installed on [Chrome](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) and [Firefox](https://addons.mozilla.org/en-US/firefox/addon/reduxdevtools/), in which the state of the Redux-store and the action that changes it can be monitored from the console of the browser.
 
 When debugging, in addition to the browser extension we also have the software library [redux-devtools-extension](https://www.npmjs.com/package/redux-devtools-extension). Let's install it using the command:
 
