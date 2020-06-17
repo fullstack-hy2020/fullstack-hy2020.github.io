@@ -721,7 +721,7 @@ Cypress.Commands.add('login', ({ username, password }) => {
 })
 ```
 
-Komennon käyttö on helppoa, testi yksinkertaisuu ja selkeytyy:
+Komennon käyttö on helppoa, testi yksinkertaistuu ja selkeytyy:
 
 ```js 
 describe('when logged in', function() {
