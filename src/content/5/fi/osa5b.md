@@ -244,6 +244,8 @@ Komponentti <i>Togglable</i> on uusiokäytettävä ja voimme käyttää sitä te
 Eristetään ensin muistiinpanojen luominen omaksi komponentiksi
 
 ```js
+import React from 'react'
+
 const NoteForm = ({ onSubmit, handleChange, value}) => {
   return (
     <div>
@@ -259,6 +261,8 @@ const NoteForm = ({ onSubmit, handleChange, value}) => {
     </div>
   )
 }
+
+export default NoteForm
 ```
 
 ja määritellään lomakkeen näyttävä koodi komponentin <i>Togglable</i> sisällä
@@ -321,6 +325,8 @@ const NoteForm = ({ createNote }) => {
     </div>
   )
 }
+
+export default NoteForm
 ```
 
 Tilan muuttuja <i>newNote</i> ja sen muutokseta huolehtiva tapahtumankäsittelijä on siirretty komponentista _App_ lomakkeesta huolehtivaan komponenttiin.
