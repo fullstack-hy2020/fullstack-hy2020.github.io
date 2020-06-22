@@ -772,7 +772,7 @@ Komponentti _Togglable_ aiheuttaa ikävän näköisen varoituksen <i>Component d
 
 ![](../../images/5/25ea.png)
 
-Komponentin "nimettöämyys" käy ilmi myös react-devtoolsilla:
+Komponentin "nimettömyys" käy ilmi myös react-devtoolsilla:
 
 ![](../../images/5/25ea.png)
 
