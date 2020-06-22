@@ -990,7 +990,7 @@ Erityisesti kannattaa lukea luku [Introduction to Cypress](https://docs.cypress.
 
 #### 5.17: blogilistan end to end -testit, step1
 
-Konfiguroi Cypress projektiisi. Tee testi, joka varmistaa, että sovellus näyttää oletusarvoisesati kirjautumislomakkeen.
+Konfiguroi Cypress projektiisi. Tee testi, joka varmistaa, että sovellus näyttää oletusarvoisesti kirjautumislomakkeen.
 
 Testin rungon tulee olla seuraavanlainen
 
