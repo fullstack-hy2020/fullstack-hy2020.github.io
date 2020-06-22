@@ -261,6 +261,7 @@ const NoteForm = ({ onSubmit, handleChange, value}) => {
     </div>
   )
 }
+
 export default NoteForm
 ```
 
@@ -324,6 +325,7 @@ const NoteForm = ({ createNote }) => {
     </div>
   )
 }
+
 export default NoteForm
 ```
 
