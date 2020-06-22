@@ -337,7 +337,7 @@ useEffect(() => {
 }, [result])
 ```
 
-Hookin toisena parametrina on _result.data_. Tämä saa aikaan sen, että hookin ensimmäisenä parametrina oleva funktio suoritetaan <i>aina kun kyselyssä haetaan uuden henkilön tiedot</i>. Jos päivitystä ei hoidettaisi kontrolloidusti hookissa, seuraisi ongelmia sen jälkeen kun yksittäisen henkilön näkymästä palataan kaikkien henkilöiden näkymään.
+Hookin toisena parametrina on _result_. Tämä saa aikaan sen, että hookin ensimmäisenä parametrina oleva funktio suoritetaan <i>aina kun kyselyn palauttama olio muuttuu</i>. Lisäksi tarkistamme, että resultin kenttä data ei ole undefined ennen kuin asetamme haetun henkilön tiedot komponentin tilaan. Jos päivitystä ei hoidettaisi kontrolloidusti hookissa, seuraisi ongelmia sen jälkeen kun yksittäisen henkilön näkymästä palataan kaikkien henkilöiden näkymään.
 
 Jos tilan muuttujalla _person_ on arvo, näytetään kaikkien henkilöiden sijaan yhden henkilön tarkemmat tiedot:
 
