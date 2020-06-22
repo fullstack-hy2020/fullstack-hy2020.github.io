@@ -1249,7 +1249,7 @@ Make a test for ensuring that the user who created a blog can delete it.
 <!-- <i>Vapaaehtoinen bonustehtävä:</i> varmista myös että poisto ei onnistu muilta kuin blogin lisänneeltä käyttäjältä. -->
 <i>Optional bonus exercise:</i> also check that other users cannot delete the blog. 
 
-#### 5.22: bloglist end end testing, step 6
+#### 5.22: bloglist end to end testing, step6
 
 Make a test which checks that the blogs are ordered according to likes with the blog with the most likes being first. 
 
