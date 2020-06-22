@@ -751,7 +751,7 @@ So some of the error handling can be automatically done with GraphQL [validation
 
 
 However GraphQL cannot handle everything automatically. For example stricter rules for data sent to a Mutation have to be added manually.
-The errors from those rules are handled by [the error handling mechanism of GraphQL](https://www.apollographql.com/docs/apollo-server/features/errors.html).
+The errors from those rules are handled by [the error handling mechanism of Apollo Server](https://www.apollographql.com/docs/apollo-server/data/errors).
 
 
 Let's block adding the same name to the phonebook multiple times: 
