@@ -238,7 +238,7 @@ WebSockets are an API provided by the browser, which is not yet fully supported 
 
 Instead of directly using the WebSocket API it is advisable to use the [Socket.io](https://socket.io/)-library, which provides various <i>fallback</i>-options in case the browser does not have the full support for WebSockets. 
 
-In [part 8](/em/part8) our topic is GraphQL that provides a nice mechanism for notifying clients when there are changes in the backend data.
+In [part 8](/en/part8) our topic is GraphQL that provides a nice mechanism for notifying clients when there are changes in the backend data.
 
 ### Virtual DOM
 
