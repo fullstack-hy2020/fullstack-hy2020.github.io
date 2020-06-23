@@ -404,9 +404,11 @@ There are many ways to implement closing the form from the parent component, but
 Let's make the following changes to the <i>App</i> component:
 
 ```js
+import React, { useState, useRef } from 'react' // highlight-line
+
 const App = () => {
   // ...
-  const noteFormRef = React.createRef() // highlight-line
+  const noteFormRef = useRef() // highlight-line
 
   const noteForm = () => (
     <Togglable buttonLabel='new note' ref={noteFormRef}>  // highlight-line
@@ -419,7 +421,7 @@ const App = () => {
 ```
 
 
-The [createRef](https://reactjs.org/docs/react-api.html#reactcreateref) method is used to create a <i>noteFormRef</i> ref, that is assigned to the <i>Togglable</i> component containing the creation note form. The <i>noteFormRef</i> variable acts as a reference to the component.
+The [useRef](https://reactjs.org/docs/hooks-reference.html#useref) hook is used to create a <i>noteFormRef</i> ref, that is assigned to the <i>Togglable</i> component containing the creation note form. The <i>noteFormRef</i> variable acts as a reference to the component. This hook ensures the same reference (ref) is kept throughout re-renders of the component.
 
 
 We also make the following changes to the <i>Togglable</i> component:
