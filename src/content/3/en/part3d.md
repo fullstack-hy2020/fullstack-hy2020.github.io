@@ -467,6 +467,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 #### 3.22: Lint configuration
 
+//'no-console' is not part of 'eslint:recommended' rules.
 
 Add ESlint to your application and fix all the warnings.
 
