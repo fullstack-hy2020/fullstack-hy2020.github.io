@@ -918,7 +918,7 @@ build
 <!-- The react-devtools also reveals that the component does not have name: -->
 React-devtools 还显示组件没有名称: 
 
-![](../../images/5/25ea.png)
+![](../../images/5/26ea.png)
 
 
 <!-- Fortunately this is easy to fix -->
