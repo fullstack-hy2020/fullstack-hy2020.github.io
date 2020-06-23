@@ -381,7 +381,7 @@ const App = () => {
 }
 ```
 
-Metodilla [useRef](https://reactjs.org/docs/hooks-reference.html#useref) luodaan ref <i>noteFormRef</i>, joka kiinnitetään muistiinpanojen luomislomakkeen sisältävälle <i>Togglable</i>-komponentille. Nyt siis muuttuja <i>noteFormRef</i> toimii viitteenä komponenttiin.
+[useRef](https://reactjs.org/docs/hooks-reference.html#useref) hookilla luodaan ref <i>noteFormRef</i>, joka kiinnitetään muistiinpanojen luomislomakkeen sisältävälle <i>Togglable</i>-komponentille. Nyt siis muuttuja <i>noteFormRef</i> toimii viitteenä komponenttiin.
 
 Komponenttia <i>Togglable</i> laajennetaan seuraavasti
 
