@@ -560,7 +560,7 @@ The completed code can be found [here](https://github.com/fullstack-hy2020/misc/
 </div>
 <div class="tasks">
 
-### Exercises 7.1.7.3.
+### Exercises 7.1.-7.3.
 
 Let's return to working with anecdotes. Use the redux-free anecdote app found in the repository <https://github.com/fullstack-hy2020/routed-anecdotes> as the starting point for the exercises.
 

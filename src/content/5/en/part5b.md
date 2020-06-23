@@ -192,7 +192,7 @@ Our goal is to implement a new <i>Togglable</i> component that can be used in th
 ```
 
 
-The way that the component is used is slightly different from our previous components. The component has both an opening and a closing tags which surround a <i>LoginForm</i> component. In React terminology <i>LoginForm</i> is a child component of <i>Togglable</i>.
+The way that the component is used is slightly different from our previous components. The component has both opening and closing tags which surround a <i>LoginForm</i> component. In React terminology <i>LoginForm</i> is a child component of <i>Togglable</i>.
 
 
 We can add any React elements we want between the opening and closing tags of <i>Togglable</i>, like this for example:
@@ -404,9 +404,11 @@ There are many ways to implement closing the form from the parent component, but
 Let's make the following changes to the <i>App</i> component:
 
 ```js
+import React, { useState, useRef } from 'react' // highlight-line
+
 const App = () => {
   // ...
-  const noteFormRef = React.createRef() // highlight-line
+  const noteFormRef = useRef() // highlight-line
 
   const noteForm = () => (
     <Togglable buttonLabel='new note' ref={noteFormRef}>  // highlight-line
@@ -419,7 +421,7 @@ const App = () => {
 ```
 
 
-The [createRef](https://reactjs.org/docs/react-api.html#reactcreateref) method is used to create a <i>noteFormRef</i> ref, that is assigned to the <i>Togglable</i> component containing the creation note form. The <i>noteFormRef</i> variable acts as a reference to the component.
+The [useRef](https://reactjs.org/docs/hooks-reference.html#useref) hook is used to create a <i>noteFormRef</i> ref, that is assigned to the <i>Togglable</i> component containing the creation note form. The <i>noteFormRef</i> variable acts as a reference to the component. This hook ensures the same reference (ref) is kept throughout re-renders of the component.
 
 
 We also make the following changes to the <i>Togglable</i> component:
@@ -485,7 +487,7 @@ const App = () => {
 
 To recap, the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) function is a React hook, that is used for defining functions in a component which can be invoked from outside of the component.
 
-This trick works for changing the state of a component, but it looks a bit unpleasant. We could have accomplished the same functionality with slightly cleaner code using "old React" class-based components. We will take a look at these class components at the part 7 of the course material. So far this is the only situation where using React hooks leads to code that is not cleaner than with class components.
+This trick works for changing the state of a component, but it looks a bit unpleasant. We could have accomplished the same functionality with slightly cleaner code using "old React" class-based components. We will take a look at these class components during part 7 of the course material. So far this is the only situation where using React hooks leads to code that is not cleaner than with class components.
 
 There are also [other use cases](https://reactjs.org/docs/refs-and-the-dom.html) for refs than accessing React components.
 
@@ -825,7 +827,7 @@ Component _Togglable_ causes a nasty looking warning <i>Component definition is 
 
 The react-devtools also reveals that the component does not have name:
 
-![](../../images/5/25ea.png)
+![](../../images/5/26ea.png)
 
 Fortunately this is easy to fix
 
