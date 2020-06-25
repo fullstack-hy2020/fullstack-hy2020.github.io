@@ -245,7 +245,7 @@ To fix the error, we need to add a new linting rule to <i>.eslintrc</i>:
 
 Create a new Create React App with TypeScript, and set up eslint for the project similarly to how we just did.
 
-This exercise is similar to the one you have already done in [Part 1](/en/part1/javascript#exercises-1-3-1-5) of the course, but with TypeScript and some extra tweaks. Start off by modifying the contents of <i>index.tsx</i> to the following:
+This exercise is similar to the one you have already done in [Part 1](/en/part1/java_script#exercises-1-3-1-5) of the course, but with TypeScript and some extra tweaks. Start off by modifying the contents of <i>index.tsx</i> to the following:
 
 ```jsx
 import React from "react";
