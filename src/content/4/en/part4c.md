@@ -221,7 +221,7 @@ In stark contrast to the conventions of relational databases, <i>references are 
 ### Creating users
 
 
-Let's implement a route for creating new users. Users have a unique <i>username</i>, a <i>name</i> and something called a <i>passwordHash</i>. The password hash is the output of a [one-way hash function](https://en.wikipedia.org/wiki/Cryptographic_hash_function) applied to the user's password. It is never wise to store unencrypted plaintext passwords in the database!
+Let's implement a route for creating new users. Users have a unique <i>username</i>, a <i>name</i> and something called a <i>passwordHash</i>. The password hash is the output of a [one-way hash function](https://en.wikipedia.org/wiki/Cryptographic_hash_function) applied to the user's password. It is never wise to store unencrypted plain text passwords in the database!
 
 
 Let's install the [bcrypt](https://github.com/kelektiv/node.bcrypt.js) package for generating the password hashes:

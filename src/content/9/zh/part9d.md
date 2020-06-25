@@ -119,6 +119,7 @@ npx create-react-app my-app --template typescript
 
 ```jsx
 import React from "react";
+import ReactDOM from 'react-dom';
 import PropTypes from "prop-types";
 
 const Welcome = props => {

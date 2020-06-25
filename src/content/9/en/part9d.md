@@ -1539,7 +1539,7 @@ const AddEntryForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
 };
 ```
 
-There is also redy made component _NumberField_ for the numeric values with a limited range
+There is also ready-made component _NumberField_ for the numeric values with a limited range
 
 ```js
 <Field

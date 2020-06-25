@@ -244,6 +244,8 @@ Komponentti <i>Togglable</i> on uusiokäytettävä ja voimme käyttää sitä te
 Eristetään ensin muistiinpanojen luominen omaksi komponentiksi
 
 ```js
+import React from 'react'
+
 const NoteForm = ({ onSubmit, handleChange, value}) => {
   return (
     <div>
@@ -259,6 +261,8 @@ const NoteForm = ({ onSubmit, handleChange, value}) => {
     </div>
   )
 }
+
+export default NoteForm
 ```
 
 ja määritellään lomakkeen näyttävä koodi komponentin <i>Togglable</i> sisällä
@@ -283,7 +287,7 @@ Reactin dokumentaatio antaa seuraavan [ohjeen](https://reactjs.org/docs/lifting-
 
 > <i>Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.</i>
 
-Jos mietitään lomakkeiden tilaa, eli esimerkiksi uuden muistiinpanon sisältöä sillä hetkellä kun muistiinpanoa ei vielä ole luotu, ei komponentti _App_ oikeastaan tarvitse niitä mihinkään, ja voisimme aivan hyvin siirtää tilan lomakkeisiin liittyvän tilan niitä vastaaviin komponentteihin.
+Jos mietitään lomakkeiden tilaa, eli esimerkiksi uuden muistiinpanon sisältöä sillä hetkellä kun muistiinpanoa ei vielä ole luotu, ei komponentti _App_ oikeastaan tarvitse niitä mihinkään, ja voisimme aivan hyvin siirtää lomakkeisiin liittyvän tilan niitä vastaaviin komponentteihin.
 
 Muistiinpanosta huolehtiva komponentti muuttuu seuraavasti:
 
@@ -321,9 +325,11 @@ const NoteForm = ({ createNote }) => {
     </div>
   )
 }
+
+export default NoteForm
 ```
 
-Tilan muuttuja <i>newNote</i> ja sen muutokseta huolehtiva tapahtumankäsittelijä on siirretty komponentista _App_ lomakkeesta huolehtivaan komponenttiin.
+Tilan muuttuja <i>newNote</i> ja sen muutoksesta huolehtiva tapahtumankäsittelijä on siirretty komponentista _App_ lomakkeesta huolehtivaan komponenttiin.
 
 Propseja on enää yksi, funktio _createNote_, jota lomake kutsuu kun uusi muistiinpano luodaan.
 
@@ -366,9 +372,11 @@ Reactin [ref](https://reactjs.org/docs/refs-and-the-dom.html)-mekanismia, joka t
 Tehdään komponenttiin <i>App</i> seuraavat muutokset
 
 ```js
+import React, { useState, useRef } from 'react' // highlight-line
+
 const App = () => {
   // ...
-  const noteFormRef = React.createRef() // highlight-line
+  const noteFormRef = useRef() // highlight-line
 
   const noteForm = () => (
     <Togglable buttonLabel='new note' ref={noteFormRef}>  // highlight-line
@@ -379,7 +387,7 @@ const App = () => {
 }
 ```
 
-Metodilla [createRef](https://reactjs.org/docs/react-api.html#reactcreateref) luodaan ref <i>noteFormRef</i>, joka kiinnitetään muistiinpanojen luomislomakkeen sisältävälle <i>Togglable</i>-komponentille. Nyt siis muuttuja <i>noteFormRef</i> toimii viitteenä komponenttiin.
+[useRef](https://reactjs.org/docs/hooks-reference.html#useref) hookilla luodaan ref <i>noteFormRef</i>, joka kiinnitetään muistiinpanojen luomislomakkeen sisältävälle <i>Togglable</i>-komponentille. Nyt siis muuttuja <i>noteFormRef</i> toimii viitteenä komponenttiin.
 
 Komponenttia <i>Togglable</i> laajennetaan seuraavasti
 
@@ -445,7 +453,7 @@ const App = () => {
 Käyttämämme [useImperativeHandle
 ](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) on siis React hook, jonka avulla funktiona määritellylle komponentille voidaan määrittää funktioita, joita on mahdollista kutsua sen ulkopuolelta.
 
-Käyttämämme kikka komponentin tilan muuttamikseksi toimii, mutta se vaikuttaa hieman ikävältä. Saman olisi saanut aavistuksen siistimmin toteutettua "vanhan Reactin" class-perustaisilla komponenteilla, joihin tutustumme osassa 7. Tämä on toistaiseksi ainoa tapaus, jossa Reactin hook-syntaksiin nojaava ratkaisu on aavistuksen likaisemman oloinen kuin class-komponenttien tarjoama ratkaisu.
+Käyttämämme kikka komponentin tilan muuttamiseksi toimii, mutta se vaikuttaa hieman ikävältä. Saman olisi saanut aavistuksen siistimmin toteutettua "vanhan Reactin" class-perustaisilla komponenteilla, joihin tutustumme osassa 7. Tämä on toistaiseksi ainoa tapaus, jossa Reactin hook-syntaksiin nojaava ratkaisu on aavistuksen likaisemman oloinen kuin class-komponenttien tarjoama ratkaisu.
 
 Refeille on myös [muita käyttötarkoituksia](https://reactjs.org/docs/refs-and-the-dom.html) kuin React-komponentteihin käsiksi pääseminen.
 
@@ -772,9 +780,9 @@ Komponentti _Togglable_ aiheuttaa ikävän näköisen varoituksen <i>Component d
 
 ![](../../images/5/25ea.png)
 
-Komponentin "nimettöämyys" käy ilmi myös react-devtoolsilla:
+Komponentin "nimettömyys" käy ilmi myös react-devtoolsilla:
 
-![](../../images/5/25ea.png)
+![](../../images/5/26ea.png)
 
 Korjaus on onneksi hyvin helppo tehdä
 

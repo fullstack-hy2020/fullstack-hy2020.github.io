@@ -15,7 +15,7 @@ Selaimet eivät vielä osaa kaikkia Javascriptin uusimpien versioiden ominaisuuk
 
 Tällä hetkellä johtava tapa tehdä transpilointi on [Babel](https://babeljs.io/). Create-react-app:in avulla luoduissa React-sovelluksissa on valmiiksi konfiguroitu automaattinen transpilaus. Katsomme kurssin [osassa 7](/osa7) tarkemmin miten transpiloinnin konfigurointi tapahtuu.
 
-[Node.js](https://nodejs.org/en/) on melkein missä vaan, mm. palvelimilla toimiva, Googlen [chrome V8](https://developers.google.com/v8/)-javascriptmoottoriin perustuva Javascript-suoritusympäristö. Harjoitellaan hieman Javascriptiä Nodella. Tässä oletetaan, että koneellasi on Node.js:stä vähintään versio <i>10.18.0</i>. Noden tuoreet versiot osaavat suoraan Javascriptin kohtuullisen uusia versioita, joten koodin transpilaus ei ole tarpeen.
+[Node.js](https://nodejs.org/en/) on melkein missä vaan, mm. palvelimilla toimiva, Googlen [chrome V8](https://developers.google.com/v8/)-javascript-moottoriin perustuva Javascript-suoritusympäristö. Harjoitellaan hieman Javascriptiä Nodella. Tässä oletetaan, että koneellasi on Node.js:stä vähintään versio <i>10.18.0</i>. Noden tuoreet versiot osaavat suoraan Javascriptin kohtuullisen uusia versioita, joten koodin transpilaus ei ole tarpeen.
 
 Koodi kirjoitetaan <i>.js</i>-päätteiseen tiedostoon, ja suoritetaan komennolla <em>node tiedosto.js</em>
 
@@ -123,7 +123,7 @@ console.log(first, second)  // tulostuu 1, 2
 console.log(rest)          // tulostuu [3, 4 ,5]
 ```
 
-Eli muuttujiin _first_ ja _second_ tulee sijoituksen ansiosta taulukon kaksi ensimmäistä lukua. Muuttujaan _rest_ "kerätään" sijoituksesta jäljellejääneet luvut omaksi taulukoksi.
+Eli muuttujiin _first_ ja _second_ tulee sijoituksen ansiosta taulukon kaksi ensimmäistä lukua. Muuttujaan _rest_ "kerätään" sijoituksesta jäljelle jääneet luvut omaksi taulukoksi.
 
 ### Oliot
 
