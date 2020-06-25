@@ -1135,6 +1135,7 @@ Configure morgan so that it also shows the data sent in HTTP POST requests:
 
 ![](../../images/3/24.png)
 
+Note that logging data even in the console can be dangerous since it can contain sensitive data and may violate local privacy law (e.g. GDPR in EU) or business-standard. In this exercise, you don't have to worry about privacy issues, but in practice, try not to log any sensitive data.
 
 This exercise can be quite challenging, even though the solution does not require a lot of code.
 
