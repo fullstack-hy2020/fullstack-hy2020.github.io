@@ -510,7 +510,7 @@ The modified backend code can be found from [github](https://github.com/fullstac
 Next we will change the <i>beforeEach</i> block so that it empties the server's database before tests are run. 
 
 <!-- Tällä hetkellä sovelluksen käyttöliittymän kautta ei ole mahdollista luoda käyttäjiä, luodaankin testien alustuksessa testikäyttäjä suoraan backendiin. -->
-Currently it is not possible to add new users trough the frontend's UI, so we add a new user to the backend from the beforeEach block. 
+Currently it is not possible to add new users through the frontend's UI, so we add a new user to the backend from the beforeEach block. 
 
 ```js
 describe('Note app', function() {
