@@ -609,7 +609,7 @@ Mutaatio siis saa parametreina käyttäjän tiedot. Parametreista <i>phone</i> o
 Myös mutaatioita varten on määriteltävä resolveri:
 
 ```js
-const uuid = require('uuid/v1')
+const { v1: uuid } = require('uuid')
 
 // ...
 
