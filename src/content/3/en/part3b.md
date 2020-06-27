@@ -112,6 +112,8 @@ If not, the issue can be found by reading heroku logs with command <i>heroku log
 
 >**NB** If you are deploying from a git repository where your code is not on the master branch (i.e. if you are altering the [notes repo](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2) from the last lesson) you will need to run _git push heroku HEAD:master_. If you have already done a push to heroku, you may need to run _git push heroku HEAD:master --force_.
 
+>**NB** If you are deploying from a subfolder in your git repository (i.e. if ./fullstackopen/ is your git repository for the course, and your backend code is in fullstackopen/part3/phonebook-backend/) you will need to run _git subtree push --prefix part3/phonebook-backend heroku master_ from the ./fullstackopen/ folder.
+
 The frontend also works with the backend on Heroku. You can check this by changing the backend's address on the frontend to be the backend's address in Heroku instead of <i>http://localhost:3001</i>.
 
 The next question is, how do we deploy the frontend to the Internet? We have multiple options. Let's go through one of them next. 
