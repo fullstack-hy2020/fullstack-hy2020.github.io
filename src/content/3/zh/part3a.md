@@ -141,12 +141,12 @@ Server running on port 3001
 ```
 
 <!-- We can open our humble application in the browser by visiting the address <http://localhost:3001>: -->
-我们可以在浏览器中通过访问地址 http://localhost:3001打开我们的应用:
+我们可以在浏览器中通过访问地址 http://localhost:3001 打开我们的应用:
 
 ![](../../images/3/1.png)
 
 <!-- In fact, the server works the same way regardless of the latter part of the URL. Also the address <http://localhost:3001/foo/bar> will display the same content. -->
-事实上，无论 URL 的后半部分是什么，服务器的工作方式都是相同的。 地址http://localhost:3001/foo/bar也会显示相同的内容。
+事实上，无论 URL 的后半部分是什么，服务器的工作方式都是相同的。 地址http://localhost:3001/foo/bar 也会显示相同的内容。
 
 <!-- **NB** if the port 3001 is already in use by some other application, then starting the server will result in the following error message: -->
 
@@ -619,7 +619,7 @@ app.get('/api/notes/:id', (request, response) => {
 ```
 
 <!-- When we visit <http://localhost:3001/api/notes/1> again in the browser, the console which is the terminal in this case, will display the following: -->
-当我们在浏览器中再次访问 http://localhost:3001/api/notes/1时，终端控制台将显示如下内容:
+当我们在浏览器中再次访问 http://localhost:3001/api/notes/1 时，终端控制台将显示如下内容:
 
 ![](../../images/3/8.png)
 
