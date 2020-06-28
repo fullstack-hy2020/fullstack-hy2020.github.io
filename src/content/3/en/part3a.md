@@ -509,7 +509,7 @@ We can execute different operations on resources. The operation to be executed i
 
 | URL                   | verb                | functionality                                                    |
 | --------------------- | ------------------- | -----------------------------------------------------------------|
-| notes/10 &nbsp;&nbsp; | GET                 | fetches a single resource                                        |
+| notes/10              | GET                 | fetches a single resource                                        |
 | notes                 | GET                 | fetches all resources in the collection                          |
 | notes                 | POST                | creates a new resource based on the request data                 |
 | notes/10              | DELETE              | removes the identified resource                                  |
