@@ -260,7 +260,7 @@ personService
 #### 3.21  Deploying the database backend to production
 【将数据库后端部署到生产环境】
 <!-- Generate a new "full stack" version of the application by creating a new production build of the frontend, and copy it to the backend repository. Verify that everything works locally by using the entire application from the address <https://localhost:3001>. -->
-通过创建前端的新生产版本，生成应用的新“完整栈”版本，并将其复制到后端存储库。 通过使用地址 https://localhost:3001的整个应用来验证所有的东西都能在本地工作。
+通过创建前端的新生产版本，生成应用的新“完整栈”版本，并将其复制到后端存储库。 通过使用地址 https://localhost:3001 的整个应用来验证所有的东西都能在本地工作。
 
 <!-- Push the latest version to Heroku and verify that everything works there as well. -->
 将最新版本推送到 Heroku，并验证那里的工作一切正常。
