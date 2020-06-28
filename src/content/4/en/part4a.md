@@ -323,7 +323,7 @@ To recap, the directory structure looks like this after the changes have been ma
 ├── index.js
 ├── app.js
 ├── build
-│   ├── ...
+│   └── ...
 ├── controllers
 │   └── notes.js
 ├── models
