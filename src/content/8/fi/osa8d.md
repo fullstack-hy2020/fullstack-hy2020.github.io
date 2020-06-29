@@ -256,7 +256,7 @@ const PersonForm = ({ setError }) => {
         query: ALL_PERSONS,
         data: {
           ...dataInStore,
-          allPersons: dataInStore.allPersons.concat(response.data.addPerson)
+          allPersons: [ ...dataInStore.allPersons, response.data.addPerson ]
         }
       })
     }
@@ -269,7 +269,7 @@ const PersonForm = ({ setError }) => {
 
 Callback-funktio saa parametriksi viitteen välimuistiin sekä mutaation mukana palautetun datan, eli esimerkkimme tapauksessa lisätyn käyttäjän.
 
-Koodi lukee funktion [readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readquery) avulla kyselyn <em>ALL\_PERSONS</em> välimuistiin talletetun tilan ja päivittää välimuistin funktion [writeQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writequery-and-writefragment) avulla lisäten henkilöiden joukkoon mutaation lisäämän henkilön. Apollon välimuisti on immutable, joten funktiolta readQuery saatua arvoa ei saa muokata ja yrittää kirjoittaa takaisin välimuistiin. Sen sijaan asetamme välimuistiin kokonaan uuden olion.
+Koodi lukee funktion [readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readquery) avulla kyselyn <em>ALL\_PERSONS</em> välimuistiin talletetun tilan ja päivittää välimuistin funktion [writeQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writequery-and-writefragment) avulla lisäten henkilöiden joukkoon mutaation lisäämän henkilön.
 
 On myös olemassa tilanteita, joissa ainoa järkevä tapa saada välimuisti pidettyä ajantasaisena on _update_-callbackillä tehtävä päivitys. 
 
