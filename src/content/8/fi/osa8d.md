@@ -112,29 +112,15 @@ Käytössä on jälleen efektihookki, jonka avulla asetetaan tokenin arvo kompon
 
 Lisätään sovellukselle myös nappi, jonka avulla kirjautunut käyttäjä voi kirjautua ulos. Napin klikkauskäsittelijässä asetetaan  _token_ tilaan null, poistetaan token local storagesta ja resetoidaan Apollo clientin välimuisti. Tämä on [tärkeää](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout), sillä joissain kyselyissä välimuistiin on saatettu hakea dataa, johon vain kirjaantuneella käyttäjällä on oikeus päästä käsiksi.
 
-Lisätään myös kerran suoritettava efektihookki, joka lukee tokenin localStoragesta, jos sellainen siellä on. Näin mahdolinen sisäänkirjautuminen säilyy sivun uudelleenlatautumisen yli.
-
 Välimuistin nollaaminen tapahtuu Apollon _client_-objektin metodilla [resetStore](https://www.apollographql.com/docs/react/v3.0-beta/api/core/ApolloClient/#ApolloClient.resetStore), clientiin taas päästään käsiksi hookilla
 [useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useapolloclient):
 
 ```js
-// ...
-import { useQuery, useApolloClient } from '@apollo/client'
-// ...
 const App = () => {
   const [token, setToken] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
   const result = useQuery(ALL_PERSONS)
   const client = useApolloClient() // highlight-line
-
-  // highlight-start
-  useEffect(() => {
-    const token = localStorage.getItem('phonenumbers-user-token')
-    if ( token ) {
-      setToken(token)
-    }
-  }, [])
-  // highlight-end
   
   if (result.loading)  {
     return <div>loading...</div>
