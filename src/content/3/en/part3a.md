@@ -187,7 +187,7 @@ const app = http.createServer((request, response) => {
 })
 ```
 
-The code uses the _createServer_ method of the [http](https://nodejs.org/docs/latest-v8.x/api/http.html) module to create a new web server. An <i>event handler</i> is registered to the server, that is called <i>every time</i>  an HTTP request is made to the server's address http:/localhost:3001.
+The code uses the _createServer_ method of the [http](https://nodejs.org/docs/latest-v8.x/api/http.html) module to create a new web server. An <i>event handler</i> is registered to the server, that is called <i>every time</i>  an HTTP request is made to the server's address http://localhost:3001.
 
 
 The request is responded to with the status code 200, with the <i>Content-Type</i> header set to <i>text/plain</i>, and the content of the site to be returned set to <i>Hello World</i>.
@@ -509,10 +509,10 @@ We can execute different operations on resources. The operation to be executed i
 
 | URL                   | verb                | functionality                                                    |
 | --------------------- | ------------------- | -----------------------------------------------------------------|
-| notes/10 &nbsp;&nbsp; | GET                 | fetches a single resource                                        |
+| notes/10              | GET                 | fetches a single resource                                        |
 | notes                 | GET                 | fetches all resources in the collection                          |
 | notes                 | POST                | creates a new resource based on the request data                 |
-| notes/10              | DELETE &nbsp;&nbsp; | removes the identified resource                                  |
+| notes/10              | DELETE              | removes the identified resource                                  |
 | notes/10              | PUT                 | replaces the entire identified resource with the request data    |
 | notes/10              | PATCH               | replaces a part of the identified resource with the request data |
 |                       |                     |                                                                  |
