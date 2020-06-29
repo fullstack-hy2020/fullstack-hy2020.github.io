@@ -239,7 +239,11 @@ There is also a script _npm run logs:prod_ to show the heroku logs.
 
 Note that the directory paths in the script <i>build:ui</i> depend on the location of repositories in the file system.
 
->**NB**  <i>build:ui</i> does not work on Windows, go to [Solution](https://github.com/fullstackopen-2019/fullstackopen-2019.github.io/issues/420)  
+>**NB**  On Windows, npm scripts are executed in cmd.exe as the default shell which does not support bash commands. For the above bash commands to work, you can change the default shell to Bash (in the default Git for Windows installation) as follows:
+
+```md
+npm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"
+```
 
 ### Proxy
 
