@@ -121,7 +121,7 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState(null)
   const result = useQuery(ALL_PERSONS)
   const client = useApolloClient() // highlight-line
-
+  
   if (result.loading)  {
     return <div>loading...</div>
   }
@@ -238,10 +238,12 @@ const PersonForm = ({ setError }) => {
     // highlight-start
     update: (store, response) => {
       const dataInStore = store.readQuery({ query: ALL_PERSONS })
-      dataInStore.allPersons.push(response.data.addPerson)
       store.writeQuery({
         query: ALL_PERSONS,
-        data: dataInStore
+        data: {
+          ...dataInStore,
+          allPersons: [ ...dataInStore.allPersons, response.data.addPerson ]
+        }
       })
     }
     // highlight-end
