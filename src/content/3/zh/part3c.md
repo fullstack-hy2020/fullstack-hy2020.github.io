@@ -767,7 +767,7 @@ app.get('/api/notes/:id', (request, response) => {
 ### Error handling
 【错误处理】
 <!-- If we try to visit the URL of a note with an id that does not actually exist e.g. <http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431> where <i>5a3b80015b6ec6f1bdf68d</i> is not an id stored in the database, then the browser will simply get "stuck" since the server never responds to the request. -->
-如果我们试图向数据库访问一个实际上并不存在的 id 的便笺的 URL，比如 http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431，其中<i>5c41c90e84d891c15dfa3431</i> 不是一个存储在数据库中的 id，那么浏览器将简单地“卡住” ，因为服务器无法响应请求。
+如果我们试图向数据库访问一个实际上并不存在的 id 的便笺的 URL，比如 http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431 ，其中<i>5c41c90e84d891c15dfa3431</i> 不是一个存储在数据库中的 id，那么浏览器将简单地“卡住” ，因为服务器无法响应请求。
 
 <!-- We can see the following error message appear in the logs for the backend: -->
 我们可以在后端的日志中看到如下错误消息:

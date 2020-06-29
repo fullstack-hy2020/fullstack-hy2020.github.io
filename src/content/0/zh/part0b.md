@@ -599,7 +599,7 @@ Html 元素也可以有 class 以外的其他属性。 包含 Note 的 div 元�
 <!-- - ...and a JavaScript code file <i>main.js</i> -->
 - 以及 JavaScript 代码文件 main.js
 <!-- - The browser executes the JavaScript code. The code makes an HTTP GET request to the address https://fullstack-exampleapp.herokuapp.com/data.json, which returns the notes as JSON data. -->
-- 浏览器执行 JavaScript 代码，代码向地址https://fullstack-exampleapp.herokuapp.com/data.json发出 HTTP GET 请求，请求返回了包含 note 的 JSON 数据。
+- 浏览器执行 JavaScript 代码，代码向地址https://fullstack-exampleapp.herokuapp.com/data.json 发出 HTTP GET 请求，请求返回了包含 note 的 JSON 数据。
 <!-- - When the data has been fetched, the browser executes an <i>event handler</i>, which renders the notes to the page using the DOM-API. -->
 - 获取数据后，浏览器执行一个*event handler 事件处理程序*, 使用 DOM-API 将 Note 渲染到页面
 
@@ -713,7 +713,7 @@ Notes 页面使用了 AJAX 获取 Notes 数据。 提交表单仍然使用传统
 <!-- The application URLs reflect the old, carefree times. JSON data is fetched from the url <https://fullstack-exampleapp.herokuapp.com/data.json> and new notes are sent to the url <https://fullstack-exampleapp.herokuapp.com/new_note>.   -->
 <!-- Nowadays urls like these would not be considered acceptable, as they don't follow the generally acknowledged conventions of [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) APIs, which we'll look into more in [第3章](/zh/part3) -->
 
-应用的 url 反映了过去无忧无虑的时光。 数据从 url https://fullstack-exampleapp.herokuapp.com/data.JSON 中获取，新的 Note 被发送到 url https://fullstack-exampleapp.herokuapp.com/new_note。 如今，这样的 url 被认为是不可接受的，因为它们没有遵循公认的 RESTful api 约定，我们将在第三章中进一步研究
+应用的 url 反映了过去无忧无虑的时光。 数据从 url https://fullstack-exampleapp.herokuapp.com/data.JSON 中获取，新的 Note 被发送到 url https://fullstack-exampleapp.herokuapp.com/new_note 。 如今，这样的 url 被认为是不可接受的，因为它们没有遵循公认的 RESTful api 约定，我们将在第三章中进一步研究
 
 <!-- The thing termed AJAX is now so commonplace that it's taken for granted. The term has faded into oblivion, and the new generation has not even heard of it. -->
 
