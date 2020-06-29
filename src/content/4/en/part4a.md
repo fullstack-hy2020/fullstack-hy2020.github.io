@@ -22,7 +22,7 @@ After making the changes to the directory structure of our project, we end up wi
 ├── index.js
 ├── app.js
 ├── build
-│   ├── ...
+│   └── ...
 ├── controllers
 │   └── notes.js
 ├── models
@@ -323,7 +323,7 @@ To recap, the directory structure looks like this after the changes have been ma
 ├── index.js
 ├── app.js
 ├── build
-│   ├── ...
+│   └── ...
 ├── controllers
 │   └── notes.js
 ├── models
