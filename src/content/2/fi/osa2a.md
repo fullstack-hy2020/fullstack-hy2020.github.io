@@ -322,7 +322,10 @@ Aaltosulkeiden käyttö tulee varmaan aiheuttamaan alussa pientä päänvaivaa, 
 Parempi muotoilu ohjelmamme muistiinpanorivit tuottavalle apufunktiolle saattaakin olla seuraava useille riveille jaoteltu versio:
 
 ```
-(koodi tähän)
+note =>
+  <li key={note.id}>
+    {note.content}
+  </li>
 ```
 
 Kyse on kuitenkin edelleen yhden komennon sisältävästä nuolifunktiosta, komento vain sattuu olemaan hieman monimutkaisempi.
