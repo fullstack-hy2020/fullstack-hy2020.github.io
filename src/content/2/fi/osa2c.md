@@ -646,4 +646,14 @@ const api_key = process.env.REACT_APP_API_KEY
 // muuttujassa api_key on nyt käynnistyksessä annettu api-avaimen arvo
 ```
 
+Toinen vaihtoehto on määrittää api-avain erillisessä moduulissa esim. lisäämällä projektin juurihakemistoon tiedosto ```config.js``` ja kirjoittamalla tiedostoon seuraava sisältö:
+
+```js
+const weatherAPIKey = "54l41n3n4v41m34rv0";
+
+export default weatherAPIKey;
+```
+
+Voit nyt importata api-avaimen muiden moduulien tapaan. HUOM! Muista lisätä ```config.js``` projektin ```.gitignore```-tiedostoon, niin sitä ei lisätä git-repositorioon.
+
 </div>
