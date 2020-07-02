@@ -874,7 +874,7 @@ app.post('/api/notes', (request, response) => {
 
 
 <!-- If you are using VS Code, then you should install the REST client from the previous chapter <i>now, if you haven't already</i>. The POST request can be sent with the REST client like this: -->
-如果您正在使用 VS 代码，那么您应该安装上一节<i>中提到的 REST 客户端</i>（如果您还没有安装的话）。 Post 请求可以像这样通过 REST 客户端发送:
+如果您正在使用 VS Code，那么您应该安装上一节<i>中提到的 REST 客户端</i>（如果您还没有安装的话）。 Post 请求可以像这样通过 REST 客户端发送:
 
 ![](../../images/3/20eb.png)
 
