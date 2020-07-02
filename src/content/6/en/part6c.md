@@ -362,7 +362,7 @@ The redux-thunk-library is a so-called <i>redux-middleware</i>, which must be in
 
 ```js
 import { createStore, combineReducers, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
+import thunk from 'redux-thunk' // highlight-line
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import noteReducer from './reducers/noteReducer'
@@ -376,7 +376,7 @@ const reducer = combineReducers({
 const store = createStore(
   reducer,
   composeWithDevTools(
-    applyMiddleware(thunk)
+    applyMiddleware(thunk) // highlight-line
   )
 )
 
