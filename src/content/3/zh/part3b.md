@@ -370,7 +370,7 @@ const baseUrl = '/api/notes'
 
 #### 3.9 phonebook backend 步骤9
 <!-- Make the backend work with the frontend from the previous part. Do not implement the functionality for making changes to the phone numbers yet, that will be implemented in exercise 3.17.  -->
-使后端工作与上一章的前端部分联调起来。 不要实现更改电话号码的功能，这将在
+使后端工作与上一章的前端部分联调起来。目前还不用实现更改电话号码的功能，这将在 练习3.17 中完成。
 
 <!-- You will probably have to do some small changes to the frontend, at least to the URLs for the backend. Remember to keep the developer console open in your browser. If some HTTP requests fail, you should check from the <i>Network</i>-tab what is going on. Keep an eye on the backend's console as well. If you did not do the previous exercise, it is worth it to print the request data or <i>request.body</i> to the console in the event handler responsible for POST requests.  -->
 您可能需要对前端做一些小的更改，至少对后端的 url 做一些更改。 记住，在浏览器中保持开发者控制台的打开状态。 如果一些 HTTP 请求失败，您应该从<i>Network</i>-标签检查发生了什么。 同时也要注意后端的控制台。 如果您没有执行前面的练习，那么将请求数据或<i>request.body</i> 打印到控制台是提倡的，这个控制台是指负责 POST 请求的事件处理程序。
