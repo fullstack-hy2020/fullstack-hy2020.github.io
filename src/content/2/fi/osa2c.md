@@ -364,7 +364,7 @@ Olemme jo käyttäneet Reactin version [16.8.0](https://www.npmjs.com/package/re
 [effect hookit](https://reactjs.org/docs/hooks-effect.html), dokumentaation sanoin
 
 > <i>The Effect Hook lets you perform side effects in function components.</i>
-> <i>Data fetching, setting up a subscription, and manually changing the DOM in React components are all examples of side effects. </i>
+> <i><strong>Data fetching</strong>, setting up a subscription, and manually changing the DOM in React components are all examples of side effects. </i>
 
 Eli effect hookit ovat juuri oikea tapa hakea dataa palvelimelta.
 
