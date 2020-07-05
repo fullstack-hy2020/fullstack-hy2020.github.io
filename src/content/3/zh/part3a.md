@@ -205,7 +205,7 @@ const app = http.createServer((request, response) => {
 ```
 
 <!-- The code uses the _createServer_ method of the [http](https://nodejs.org/docs/latest-v8.x/api/http.html) module to create a new web server. An <i>event handler</i> is registered to the server, that is called <i>every time</i>  an HTTP request is made to the server's address . -->
-该代码使用了 [http](https://nodejs.org/docs/latest-v8.x/api/http.html) 模块的 createServer 方法来创建一个新的 web 服务器。 一个<i>事件处理</i> 被注册到服务器，<i>每次</i> 向服务器的地址http:/localhost:3001 发出 HTTP 请求时，它就被调用。
+该代码使用了 [http](https://nodejs.org/docs/latest-v8.x/api/http.html) 模块的 createServer 方法来创建一个新的 web 服务器。 一个<i>事件处理</i> 被注册到服务器，<i>每次</i> 向服务器的地址http://localhost:3001 发出 HTTP 请求时，它就被调用。
 
 <!-- The request is responded to with the status code 200, with the <i>Content-Type</i> header set to <i>text/plain</i>, and the content of the site to be returned set to <i>Hello World</i>. -->
 响应请求的状态代码为200，<i>Content-Type</i> 头文件设置为 <i>text/plain</i>，将返回站点的内容设置为<i>Hello World</i>。
@@ -551,10 +551,10 @@ Representational State Transfer，又名REST， 是在2000年 Roy Fielding 的[�
 
 | URL                   | verb                | functionality                                                    |
 | --------------------- | ------------------- | -----------------------------------------------------------------|
-| notes/10 &nbsp;&nbsp; | GET                 | fetches a single resource                                        |
+| notes/10              | GET                 | fetches a single resource                                        |
 | notes                 | GET                 | fetches all resources in the collection                          |
 | notes                 | POST                | creates a new resource based on the request data                 |
-| notes/10              | DELETE &nbsp;&nbsp; | removes the identified resource                                  |
+| notes/10              | DELETE              | removes the identified resource                                  |
 | notes/10              | PUT                 | replaces the entire identified resource with the request data    |
 | notes/10              | PATCH               | replaces a part of the identified resource with the request data |
 |                       |                     |                                                                  |
@@ -1255,7 +1255,8 @@ Morgan 的安装方式与使用 _npm install_ 命令的所有其他库一样。 
 
 ![](../../images/3/24.png)
 
-
+<!-- Note that logging data even in the console can be dangerous since it can contain sensitive data and may violate local privacy law (e.g. GDPR in EU) or business-standard. In this exercise, you don't have to worry about privacy issues, but in practice, try not to log any sensitive data. -->
+注意，在打印日志的时候，即使是通过console来记录，依然存在一定的风险，因为可能包含敏感数据而且可能违反某地的法律（例如欧洲的GDPR） 或者商业标准。在本练习中，不必担心隐私的问题，但在实际中，不要去记录任何敏感数据。
 
 <!-- This exercise can be quite challenging, even though the solution does not require a lot of code. -->
 尽管解决方案不需要很多代码，但这个练习可能相当具有挑战性。

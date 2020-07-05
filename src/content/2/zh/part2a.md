@@ -175,7 +175,7 @@ ReactDOM.render(
 也就是可以通过引用一个硬编码的索引号来访问数组中的对象来渲染单个便笺:
 
 ```js
-<li>{note[1].content}</li>
+<li>{notes[1].content}</li>
 ```
 
 <!-- This is, of course, not practical. The solution can be made general by generating React-elements from the array objects using the [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) function. -->
@@ -749,7 +749,7 @@ const Course = (props) => { // highlight-line
 
 **警告**： create-react-app 会自动使项目成为一个 git 仓库，除非应用是在已有仓库中创建的。 而您很可能不希望项目成为一个存储库，因此可以在项目的根目录中运行命令  *_rm -rf .git_* 。 
 
-<h4>2.1: course contents 步骤6</h4>
+<h4>2.1: Course information 步骤6</h4>
 
 <!-- Let's finish the code for rendering course contents from exercises 1.1 - 1.5. You can start with the code from the model answers.  -->
 <!-- The model answers for part 1 can be found by going to the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen), click on <i>my submissions</i> at the top, and in the row corresponding to part 1 under the <i>solutions</i> column click on <i>show</i>. To see the solution to the <i>course info<i/> exercise, click on _index.js_ under <i>kurssitiedot</i> ("kurssitiedot" means "course info"). -->
@@ -829,13 +829,13 @@ App
 <!-- Ensure that the console shows no errors! -->
 确保控制台没有显示任何错误！
 
-<h4>2.2: Course contents 步骤7</h4>
+<h4>2.2: Course information 步骤7</h4>
 <!-- Show also the sum of the exercises of the course.  -->
 此时显示课程练习的总和。
 
 ![](../../images/teht/9e.png)
 
-<h4>2.3*: Course contents 步骤8</h4>
+<h4>2.3*: Course information 步骤8</h4>
 
 <!-- If you haven't done so already, calculate the sum of exercises with the array method [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce). -->
 如果你不是用reduce做的，此时用数组的[reduce](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/reduce)方法计算练习的总和。
@@ -865,7 +865,7 @@ const total = parts.reduce((s, p) => {
 
 ![](../../images/2/5b.png)
 
-<h4>2.4: Course contents 步骤9</h4>
+<h4>2.4: Course information 步骤9</h4>
 
 <!-- Let's extend our application to allow for an <i>arbitrary number</i> of courses: -->
 让我们扩展我们的应用，允许<i>任意数量</i> 的课程:

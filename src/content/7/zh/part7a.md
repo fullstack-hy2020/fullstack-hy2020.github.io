@@ -645,7 +645,7 @@ const note = match
 <div class="tasks">
 
 
-### Exercises 7.1.7.3.
+### Exercises 7.1-7.3.
 <!-- Let's return to working with anecdotes. Use the redux-free anecdote app found in the repository <https://github.com/fullstack-hy2020/routed-anecdotes> as the starting point for the exercises. -->
 让我们继续研究八卦应用。 使用仓库 https://github.com/fullstack-hy2020/routed-anecdotes 中的 非redux 八卦应用作为练习的起点。
 

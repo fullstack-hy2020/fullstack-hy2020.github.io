@@ -1521,7 +1521,7 @@ const AddEntryForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
 ```
 
 <!-- There is also readily made component _NumberField_ for the numeric values with a limited range -->
-对于范围有限的数值，还有现成的组件 NumberField
+对于范围有限的数值，还有现成的组件 _NumberField_
 
 ```js
 <Field

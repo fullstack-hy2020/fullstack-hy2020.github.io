@@ -24,7 +24,7 @@ lang: zh
 ├── index.js
 ├── app.js
 ├── build
-│   ├── ...
+│   └── ...
 ├── controllers
 │   └── notes.js
 ├── models
@@ -351,7 +351,7 @@ module.exports = mongoose.model('Note', noteSchema)
 ├── index.js
 ├── app.js
 ├── build
-│   ├── ...
+│   └── ...
 ├── controllers
 │   └── notes.js
 ├── models

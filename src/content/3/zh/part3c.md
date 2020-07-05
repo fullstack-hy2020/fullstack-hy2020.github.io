@@ -391,7 +391,7 @@ added Anna number 040-1234556 to phonebook
 电话簿的新条目将被保存到数据库中。 请注意，如果名称包含空格字符，则必须用引号括起来:
 
 ```bash
-node mongo.js yourpassword "Arto Vihavainen" 040-1234556
+node mongo.js yourpassword "Arto Vihavainen" 045-1234556
 ```
 
 <!-- If the password is the only parameter given to the program, meaning that it is invoked like this: -->

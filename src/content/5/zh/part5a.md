@@ -106,8 +106,8 @@ export default App
 ({ target }) => setUsername(target.value)
 ```
 
-<!-- The method _handleLogin_, which is responsible for sending the form, does not yet do anything. -->
-_handleLogin_ 方法负责发送表单，不做其他逻辑处理。
+<!-- The method _handleLogin_, which is  responsible for handling the data in the form, is yet to be implemented.  -->
+_handleLogin_ 方法负责发送表单，还没有被实现。
 
 <!-- Logging in is done by sending an HTTP POST request to server address <i>api/login</i>. Let's separate the code responsible for this request to its own module, to file <i>services/login.js</i>. -->
 
@@ -173,7 +173,7 @@ const App = () => {
 <!-- If the login fails, or running the function _loginService.login_ results in an error, the user is notified. -->
 如果登录失败，或者执行 _loginService.login_ 产生了错误，则会通知用户。
 
-<!-- User is not notified about a successful login in any way. Let's modify the application to show the login form only <i>if the user is not logged in</i> so _user === null_. The form for adding new notes is shown only if <i>user is logged in</i>, so <i>user</i> contains the user details. -->
+<!-- User is not notified about a successful login in any way. Let's modify the application to show the login form only <i>if the user is not logged-in</i> so _user === null_. The form for adding new notes is shown only if <i>user is logged-in</i>, so <i>user</i> contains the user details. -->
 
 总之用户登录成功是不会通知用户的。让我们将应用修改为，只有当用户没有登录时才显示登录表单，即 _user === null_ 。只有当用户登录成功后才会显示添加新的 Note，这样 <i>user</i> 状态才会包含信息
 
@@ -308,7 +308,7 @@ return (
 
 如果 _user === null_ 是 [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) _loginForm()_ 就会执行。如果不是，就执行 _noteForm()_.
 
-<!-- Let's do one more modification. If user is logged in, their name is shown on the screen: -->
+<!-- Let's do one more modification. If user is logged-in, their name is shown on the screen: -->
 让我们再多做一点修改：如果用户登录，它们的名字就会展示在屏幕上：
 
 ```js
@@ -321,7 +321,7 @@ return (
     {user === null ?
       loginForm() :
       <div>
-        <p>{user.name} logged in</p>
+        <p>{user.name} logged-in</p>
         {noteForm()}
       </div>
     }
@@ -334,8 +334,8 @@ return (
 )
 ```
 
-<!-- The solution looks a bit ugly, but we'll leave it for now. -->
-这种解决方案看起来有点丑，但我们先这么放在这。
+<!-- The solution isn't perfect, but we'll leave it for now.  -->
+这种解决方案看起来并不完美，但我们先这么放在这。
 
 <!-- Our main component <i>App</i> is at the moment way too large. The changes we did now are a clear sign that the forms should be refactored into their own components. However, we will leave that for an optional excercise. -->
 我们的主组件 <i>App</i> 现在看起来十分臃肿。我们现在做的修改意味着，表单应该重构到它自己的组件中。但我们把这个作为可选的练习放到课后。
@@ -367,7 +367,7 @@ const handleLogin = async (event) => {
 }
 ```
 
-<!-- Let's fix creating new notes to work with the backend. This means adding the token of the logged in user to the Authorization header of the HTTP request. -->
+<!-- Let's fix creating new notes to work with the backend. This means adding the token of the logged-in user to the Authorization header of the HTTP request. -->
 让我们修复创建新 Note 的代码，来和后台对接好。也就是说把登录成功用户的 token 放到 HTTP 请求的认证头中。
 
 <!-- The <i>noteService</i> module changes like so: -->
@@ -478,7 +478,7 @@ window.localStorage.getItem('name')
 
 即使页面刷新，存储中的值也会保留。这个存储是[原生](https://developer.mozilla.org/en-US/docs/Glossary/Origin)-指定的，所以每个 web 应用都有自己的存储空间。
 
-<!-- Let's extend our application so that it saves the details of a logged in user to the local storage. -->
+<!-- Let's extend our application so that it saves the details of a logged-in user to the local storage. -->
 
 让我们将我们的应用扩展来将用户的登录信息存储到本地存储中。
 
@@ -513,12 +513,17 @@ _JSON.stringify_ 方法转换成 JSON。相应的，当从本地存储读取 JSO
   }
 ```
 
-<!-- The details of a logged in user are now saved to the local storage, and they can be viewed on the console: -->
+<!-- The details of a logged-in user are now saved to the local storage, and they can be viewed on the console: -->
 现在用户的详细信息被存储到本地存储了，并且能够在控制台看到。
 
 ![](../../images/5/3e.png)
 
-<!-- We still have to modify our application so that when we enter the page, the application checks if user details of a logged in user can already be found from the local storage. If they can, the details are saved to the state of the application and to <i>noteService</i>. -->
+
+<!-- You can also inspect the local storage using the developer tools. On Chrome, go to the <i>Application</i> tab and select <i>Local Storage</i> (more details [here](https://developers.google.com/web/tools/chrome-devtools/storage/localstorage)). On Firefox go to the <i>Storage</i> tab and select <i>Local Storage</i> (details [here](https://developer.mozilla.org/en-US/docs/Tools/Storage_Inspector)). -->
+
+你也可以使用开发者工具来查看本地存储。在Chrome中，到 <i>Application</i> 标签页，选择<i>Local Storage</i> （更多细节可参考[这里](https://developers.google.com/web/tools/chrome-devtools/storage/localstorage)）。在火狐浏览器，到 <i>Storage</i> 标签页并选择<i>Local Storage</i>（细节参考 [这里](https://developer.mozilla.org/en-US/docs/Tools/Storage_Inspector)）
+
+<!-- We still have to modify our application so that when we enter the page, the application checks if user details of a logged-in user can already be found from the local storage. If they can, the details are saved to the state of the application and to <i>noteService</i>. -->
 我们仍然需要修改我们的应用，以便当我们进入页面时，应用会检查是否能在本地存储中找到登录用户的详细信息，如果可以，将信息保存到应用的状态中，以及<i>noteService</i>中
 
 <!-- The right way to do this is with an [effect hook](https://reactjs.org/docs/hooks-effect.html): A mechanism we first encountered in [第2章](/zh/part2/从服务器获取数据#effect-hooks), and used to fetch notes from the server to the frontend. -->
@@ -564,7 +569,7 @@ const App = () => {
 
 这个作为事件参数的空数组确保在[第一次](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect)组件渲染完成后被执行。
 
-<!-- Now a user stays logged in to the application forever. We should probably add a <i>logout</i> functionality which removes the login details from the local storage. We will however leave it for an exercise. -->
+<!-- Now a user stays logged-in to the application forever. We should probably add a <i>logout</i> functionality which removes the login details from the local storage. We will however leave it for an exercise. -->
 
 现在用户可以永久地保持登录状态了，我们应该实现一个登出功能来删除登录信息。同样我们把这个作为一个课后作业。
 
@@ -639,21 +644,21 @@ npm start
 <!-- Implement login functionality to the frontend. The token returned with a successful login is saved to the application's state <i>user</i>. -->
 在前端实现登录功能。成功登录后返回的令牌保存到应用的<i>user</i>状态。
 
-<!-- If a user is not logged in, <i>only</i> the login form is visible.  -->
+<!-- If a user is not logged-in, <i>only</i> the login form is visible.  -->
 如果一个用户没有登录，那么登录表单就是可见的。
 
 ![](../../images/5/4e.png)
 
 
 
-<!-- If user is logged in, the name of the user and a list of blogs is shown.  -->
+<!-- If user is logged-in, the name of the user and a list of blogs is shown.  -->
 如果用户登录，则显示用户名和博客列表。
 
 ![](../../images/5/5e.png)
 
 
 
-<!-- User details of the logged in user do not have to be saved to the local storage yet.  -->
+<!-- User details of the logged-in user do not have to be saved to the local storage yet.  -->
 登录用户的用户详细信息不必保存到本地存储中。
 
 <!-- **NB** You can implement the conditional rendering of the login form like this for example:  -->
@@ -692,7 +697,7 @@ npm start
 确保浏览器在注销后不会记住用户的详细信息。
 
 #### 5.3: bloglist frontend, 步骤3
-<!-- Expand your application to allow  a logged in user to add new blogs:  -->
+<!-- Expand your application to allow  a logged-in user to add new blogs:  -->
 展开你的应用，允许登录用户添加新的博客:
 
 ![](../../images/5/7e.png)

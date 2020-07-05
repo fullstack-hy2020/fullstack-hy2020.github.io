@@ -182,12 +182,18 @@ node_modules
 <!-- One option for deploying the frontend is to copy the production build (the <i>build</i> directory) to the root of the backend repository and configure the backend to show the frontend's <i>main page</i> (the file <i>build/index.html</i>) as its main page.  -->
 部署前端的一个选择是将生产构建( <i>build</i> 目录)复制到后端仓库的根目录，并配置后端以显示前端的 <i>main page</i> (文件 <i>build/index.html</i>)作为其主页。
 
-<!-- We begin by copying the production build of the frontend to the root of the backend. With my computer the copying can be done from the frontend directory with the command -->
-我们从将前端的生产构建复制到后端的根开始。 使用我的计算机，可以通过命令从前端目录进行复制
+<!-- We begin by copying the production build of the frontend to the root of the backend. With a Mac or Linux  the copying can be done from the frontend directory with the command -->
+我们从将前端的生产构建复制到后端的根开始。 使用一台Mac 或 Linux 计算机，可以通过命令从前端目录进行复制
 
 ```bash
 cp -r build ../../../osa3/notes-backend
 ```
+
+
+<!-- If you are using a Windows computer, you may use either [copy](https://www.windows-commandline.com/windows-copy-command-syntax-examples/) or [xcopy](https://www.windows-commandline.com/xcopy-command-syntax-examples/) command instead. Otherwise, simply do a copy and paste. -->
+
+如果你使用的Windows操作系统，你可以使用[copy](https://www.windows-commandline.com/windows-copy-command-syntax-examples/) 或者 [xcopy](https://www.windows-commandline.com/xcopy-command-syntax-examples/) 命令。要么就简单地使用复制粘贴即可。
+
 
 <!-- The backend directory should now look as follows: -->
 后端目录现在应该如下所示:
@@ -304,8 +310,13 @@ _npm run deploy:full_ 会将这两者结合起来，并包含更新后端存储�
 <!-- Note that the directory paths in the script <i>build:ui</i> depend on the location of repositories in the file system. -->
 注意，我构建的脚本中的目录路径 <i>build:ui</i> 依赖于文件系统中存储库的位置。
 
->**NB**  <i>build:ui</i> does not work on Windows, go to [Solution](https://github.com/fullstackopen-2019/fullstackopen-2019.github.io/issues/420)  
-注意 <i>build: ui</i> 不能在 Windows 上工作，请转到[解决方案](https://github.com/fullstackopen-2019/fullstackopen-2019.github.io/issues/420)
+
+<!-- >**NB**  On Windows, npm scripts are executed in cmd.exe as the default shell which does not support bash commands. For the above bash commands to work, you can change the default shell to Bash (in the default Git for Windows installation) as follows: -->
+
+>**注意** 在Windows中，npm 脚本默认是运行在cmd.exe 这个默认的shell中的，而它并不支持bash命令。因此如果希望以上的bash命令运转良好，你可以将默认的shell换成bash（默认Windows安装Git时已经安装了Bash）：
+
+<!-- >**NB**  <i>build:ui</i> does not work on Windows, go to [Solution](https://github.com/fullstackopen-2019/fullstackopen-2019.github.io/issues/420)  
+注意 <i>build: ui</i> 不能在 Windows 上工作，请转到[解决方案](https://github.com/fullstackopen-2019/fullstackopen-2019.github.io/issues/420) -->
 
 ### Proxy
 【代理】

@@ -528,7 +528,7 @@ const PersonForm = () => {
 
   const [ createPerson ] = useMutation(CREATE_PERSON) // highlight-line
 
-  const submit = async (event) => {
+  const submit = (event) => {
     event.preventDefault()
 
     // highlight-start
@@ -846,7 +846,7 @@ const PhoneForm = () => {
   const [ changeNumber ] = useMutation(EDIT_NUMBER)
 // highlight-end
 
-  const submit = async (event) => {
+  const submit = (event) => {
     event.preventDefault()
 
 // highlight-start
@@ -927,7 +927,7 @@ const PhoneForm = ({ setError }) => {
 
   const [ changeNumber, result ] = useMutation(EDIT_NUMBER) // highlight-line
 
-  const submit = async (event) => {
+  const submit = (event) => {
     // ...
   }
 
