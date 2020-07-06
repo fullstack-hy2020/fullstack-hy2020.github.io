@@ -404,7 +404,7 @@ Redux-thunk-库 是所谓的<i>redux-中间件</i>，它必须在store的初始�
 
 ```js
 import { createStore, combineReducers, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
+import thunk from 'redux-thunk' // highlight-line
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import noteReducer from './reducers/noteReducer'
@@ -418,7 +418,7 @@ const reducer = combineReducers({
 const store = createStore(
   reducer,
   composeWithDevTools(
-    applyMiddleware(thunk)
+    applyMiddleware(thunk) // highlight-line
   )
 )
 

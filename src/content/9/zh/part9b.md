@@ -1047,7 +1047,7 @@ app.get('/calculate', (req, res) => {
 
 
 <!-- Programmers however see the code differently when any is explicitly enforced than when it implicitly inferred.  -->
-但是，程序员看待代码的方式不同，也就是当any是被显式强制执行时，还是它被隐式推断时。
+但是，程序员看待代码的方式不同，也就是当<i>any</i> 是被显式强制执行时，还是它被隐式推断时。
 
 <!-- Implicit <i>any</i> typings are usually considered problematic, since it is quite often due to the coder forgetting to assign types (or being too lazy to do it), and it also means that the full power of TypeScript is not properly exploited.  -->
 隐式<i>any</i> 类型通常被认为是有问题的，因为经常是由于编码人员忘记分配类型(或者太懒于分配类型) ，这也意味着没有充分利用TypeScript的全部能力。

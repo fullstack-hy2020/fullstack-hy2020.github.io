@@ -811,7 +811,7 @@ mutation {
 <!-- However GraphQL cannot handle everything automatically. For example stricter rules for data sent to a Mutation have to be added manually. -->
 但是，GraphQL 不能自动处理所有事情。 例如，对于发送到 Mutation 的数据，必须手动添加更严格的规则。
 <!-- The errors from those rules are handled by [the error handling mechanism of GraphQL](https://www.apollographql.com/docs/apollo-server/features/errors.html). -->
-来自这些规则的错误由[GraphQL 的错误处理机制](https://www.apollographql.com/docs/apollo-server/features/errors.html)处理。
+来自这些规则的错误由[Apollo Server 的错误处理机制](https://www.apollographql.com/docs/apollo-server/data/errors)处理。
 
 <!-- Let's block adding the same name to the phonebook multiple times:  -->
 让我们多次阻止将同一个名字添加到电话簿中:
