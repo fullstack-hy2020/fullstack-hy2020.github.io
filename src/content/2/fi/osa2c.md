@@ -186,7 +186,7 @@ Haluamme nyt käyttöömme axioksen. Voisimme määritellä kirjaston suoraan ti
 npm install axios --save
 ```
 
-**Huomaa, että _npm_-komennot tulee antaa aina projektin juurihakemistossa**, eli siinä minkä sisältä tiedosto <i>package.json_</i> löytyy.
+**Huomaa, että _npm_-komennot tulee antaa aina projektin juurihakemistossa**, eli siinä minkä sisältä tiedosto <i>package.json</i> löytyy.
 
 Nyt axios on mukana riippuvuuksien joukossa:
 
