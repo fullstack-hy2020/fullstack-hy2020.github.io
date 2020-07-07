@@ -1082,7 +1082,7 @@ const App = () => {
 ```
 
 <!-- <i>useSelector</i> saa parametrikseen funktion, joka hakee tai valitsee (engl. select) tarvittavan datan redux-storesta. Tarvitsemme nyt kaikki muistiinpanot, eli selektorifunktiomme palauttaa koko staten, eli on muotoa  -->
-<i>useSelector</i> receives a function as a paramter. The function either searches for or selects data from the redux-store. 
+<i>useSelector</i> receives a function as a parameter. The function either searches for or selects data from the redux-store. 
 Here we need all of the notes, so our selector function returns the whole state:
 
 
