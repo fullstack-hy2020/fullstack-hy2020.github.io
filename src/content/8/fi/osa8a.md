@@ -915,7 +915,7 @@ Jos kyselyitä on useita, pyytää Playground valitsemaan mikä niistä suoritet
 
 Tehtävissä toteutetaan yksinkertaisen kirjaston GraphQL:ää tarjoava backend. Ota sovelluksesi lähtökohtaksi [tämä tiedosto](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js). Muista _npm init_ ja riippuvuuksien asentaminen!
 
-Huomaa, että koodin käynnistäminen aihettaa alussa virheen, sillä skeeman määrittely on puutteellinen.
+Huomaa, että koodin käynnistäminen aiheuttaa alussa virheen, sillä skeeman määrittely on puutteellinen.
 
 #### 8.1: kirjojen ja kirjailijoiden määrä
 
