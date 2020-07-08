@@ -1199,7 +1199,7 @@ Most likely the simpler version of the type guard would be just fine.
 <!-- Next let us consider the field <i>date</i>. Parsing and validating the date object is pretty similar, since TypeScript doesn't really know a type for date, we need to treat it as <i>string</i>. We still definitely should use JavaScript level validation to check whether the date format is acceptable.  -->
 Next, let's consider the <i>date</i> field. 
 Parsing and validating the date object is pretty similar to what we did with comments. 
-Since TypeScript doesn't really know a type for a date, we need to treat is as a <i>string</i>.
+Since TypeScript doesn't really know a type for a date, we need to treat it as a <i>string</i>.
 We should however still use JavaScript level validation to check whether the date format is acceptable.
 
 We will add the following functions
