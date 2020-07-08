@@ -428,7 +428,7 @@ Before we move onward, let's add an initial implementation of a route handler th
 ```js
 usersRouter.get('/', async (request, response) => {
   const users = await User.find({})
-  response.json(users.map(u => u.toJSON()))
+  response.json(users)
 })
 ```
 
@@ -466,7 +466,7 @@ notesRouter.post('/', async (request, response, next) => {
   user.notes = user.notes.concat(savedNote._id) //highlight-line
   await user.save()  //highlight-line
   
-  response.json(savedNote.toJSON())
+  response.json(savedNote)
 })
 ```
 
@@ -509,7 +509,7 @@ usersRouter.get('/', async (request, response) => {
   const users = await User  // highlight-line
     .find({}).populate('notes') // highlight-line
 
-  response.json(users.map(u => u.toJSON()))
+  response.json(users)
 })
 ```
 
@@ -527,7 +527,7 @@ usersRouter.get('/', async (request, response) => {
   const users = await User
     .find({}).populate('notes', { content: 1, date: 1 })
 
-  response.json(users.map(u => u.toJSON()))
+  response.json(users)
 });
 ```
 
@@ -542,7 +542,7 @@ notesRouter.get('/', async (request, response) => {
   const notes = await Note
     .find({}).populate('user', { username: 1, name: 1 })
 
-  response.json(notes.map(note => note.toJSON()))
+  response.json(notes)
 });
 ```
 
