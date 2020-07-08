@@ -98,7 +98,7 @@ app.use(cors())
 现在整个栈已经准备就绪，让我们将应用迁移到互联网上。 我们将使用古老的 Heroku  https://www.Heroku.com 。
 
 ><!--If you have never used Heroku before, you can find instructions from [Heroku documentation](https://devcenter.heroku.com/articles/getting-started-with-nodejs) or by Googling.-->
-如果您以前从未使用过 Heroku，您可以从[Heroku 文档](Heroku  https://devcenter.Heroku.com/articles/getting-started-with-nodejs 文档)或通过谷歌搜索找到指令。
+如果您以前从未使用过 Heroku，您可以从[Heroku 文档](https://devcenter.heroku.com/articles/getting-started-with-nodejs)或通过谷歌搜索找到指令。
 
 <!-- Add a file called  <i>Procfile</i> to the project's root to tell Heroku how to start the application.  -->
 向项目的根目录添加一个名为  <i>Procfile</i>的文件，告诉 Heroku 如何启动应用。
@@ -183,7 +183,7 @@ node_modules
 部署前端的一个选择是将生产构建( <i>build</i> 目录)复制到后端仓库的根目录，并配置后端以显示前端的 <i>main page</i> (文件 <i>build/index.html</i>)作为其主页。
 
 <!-- We begin by copying the production build of the frontend to the root of the backend. With a Mac or Linux  the copying can be done from the frontend directory with the command -->
-我们从将前端的生产构建复制到后端的根开始。 使用一台Mac 或 Linux 计算机，可以通过命令从前端目录进行复制
+我们从将前端的生产构建复制到后端的根目录。 使用一台Mac 或 Linux 计算机，可以通过命令从前端目录进行复制
 
 ```bash
 cp -r build ../../../osa3/notes-backend
@@ -357,7 +357,7 @@ const baseUrl = '/api/notes'
 现在前端也工作良好，可以在开发和生产模式下与服务器一起工作。
 
 <!-- A negative aspect of our approach is how complicated it is to deploy the frontend. Deploying a new version requires generating new production build of the frontend and copying it to the backend repository. This makes creating an automated [deployment pipeline](https://martinfowler.com/bliki/DeploymentPipeline.html) more difficult. Deployment pipeline means an automated and controlled way to move the code from the computer of the developer through different tests and quality checks to the production environment.  -->
-我们方法的一个劣势，是前端部署的复杂程度。 部署新版本需要生成新的前端生产构建并将其复制到后端存储库。 这使得创建一个自动化的[部署管道](https://martinfowler.com/bliki/deploymentpipeline.html)变得更加困难。 部署管道是指通过不同的测试和质量检查将代码从开发人员的计算机转移到生产环境的自动化控制的方法。
+我们方法的一个劣势，是前端部署的复杂程度。 部署新版本需要生成新的前端生产构建并将其复制到后端存储库。 这使得创建一个自动化的[部署管道](https://martinfowler.com/bliki/DeploymentPipeline.html)变得更加困难。 部署管道是指通过不同的测试和质量检查将代码从开发人员的计算机转移到生产环境的自动化控制的方法。
 
 <!-- There are multiple ways to achieve this (for example placing both backend and frontend code [to the same repository](https://github.com/mars/heroku-cra-node)) but we will not go into those now.  -->
 有多种方法可以实现这一点(例如将后端和前端代码[放到同一仓库中](https://github.com/mars/heroku-cra-node)) ，但我们现在不讨论这些。
