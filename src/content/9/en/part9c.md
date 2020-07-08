@@ -66,7 +66,7 @@ The settings we want right now are the following:
     "module": "commonjs",
     "strict": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true,       
+    "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true
@@ -433,7 +433,7 @@ The hint says we might want to use <i>resolveJsonModule</i>. Let's add it to our
     "module": "commonjs",  
     "strict": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true,       
+    "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
