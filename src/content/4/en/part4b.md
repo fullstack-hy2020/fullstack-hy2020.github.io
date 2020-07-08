@@ -444,7 +444,7 @@ The route for fetching all notes gets changed to the following:
 ```js
 notesRouter.get('/', async (request, response) => { 
   const notes = await Note.find({})
-  response.json(notes.map(note => note.toJSON()))
+  response.json(notes)
 })
 ```
 
@@ -644,7 +644,7 @@ notesRouter.post('/', async (request, response, next) => {
   })
 
   const savedNote = await note.save()
-  response.json(savedNote.toJSON())
+  response.json(savedNote)
 })
 ```
 
@@ -672,7 +672,7 @@ notesRouter.post('/', async (request, response, next) => {
   // highlight-start
   try { 
     const savedNote = await note.save()
-    response.json(savedNote.toJSON())
+    response.json(savedNote)
   } catch(exception) {
     next(exception)
   }
@@ -733,7 +733,7 @@ notesRouter.get('/:id', async (request, response, next) => {
   try{
     const note = await Note.findById(request.params.id)
     if (note) {
-      response.json(note.toJSON())
+      response.json(note)
     } else {
       response.status(404).end()
     }
@@ -845,13 +845,13 @@ notesRouter.post('/', async (request, response) => {
   })
 
   const savedNote = await note.save()
-  response.json(savedNote.toJSON())
+  response.json(savedNote)
 })
 
 notesRouter.get('/:id', async (request, response) => {
   const note = await Note.findById(request.params.id)
   if (note) {
-    response.json(note.toJSON())
+    response.json(note)
   } else {
     response.status(404).end()
   }
