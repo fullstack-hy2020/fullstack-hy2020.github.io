@@ -32,7 +32,7 @@ export default class ContentTemplate extends Component {
       h1Top: 0,
       h1Title: '',
       otherTitles: '',
-      top: 0,
+      showArrowUp: false,
     };
   }
 
@@ -77,9 +77,15 @@ export default class ContentTemplate extends Component {
   }
 
   handleScroll = () => {
-    this.setState({
-      top: window.scrollY,
-    });
+    if (window.scrollY > 300 && !this.state.showArrowUp) {
+      this.setState({
+        showArrowUp: true
+      });
+    } else if (window.scrollY <= 300 && this.state.showArrowUp) {
+      this.setState({
+        showArrowUp: false
+      });
+    }
   };
 
   render() {
@@ -155,7 +161,7 @@ export default class ContentTemplate extends Component {
           ]}
         />
 
-        {this.state.top > 300 && (
+        {this.state.showArrowUp && (
           <div
             className="arrow-go-up"
             onClick={() =>
