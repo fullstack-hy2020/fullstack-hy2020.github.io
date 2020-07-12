@@ -65,7 +65,7 @@ ja muuttamalla <i>package.json</i> kaikilla käyttöjärjestelmillä toimivaan m
 
 Nyt sovelluksen toimintaa on mahdollista muokata sen suoritusmoodiin perustuen. Eli voimme määritellä, esim. että testejä suoritettaessa ohjelma käyttää erillistä, testejä varten luotua tietokantaa.
 
-Sovelluksen testikanta voidaan luoda tuotantokäytön ja sovelluskehityksen tapaan Mongo DB Atlasiin. Ratkaisu ei ole optimaalinen erityisesti, jos sovellusta on tekemässä yhtä aikaa useita henkilöitä. Testien suoritus nimittäin yleensä edellyttää, että samaa tietokantainstanssia ei ole yhtä aikaa käyttämässä useampia testiajoja.
+Sovelluksen testikanta voidaan luoda tuotantokäytön ja sovelluskehityksen tapaan Mongo DB Atlasiin. Ratkaisu ei ole optimaalinen erityisesti, jos sovellusta on tekemässä yhtä aikaa useita henkilöitä. Testien suoritus nimittäin yleensä edellyttää, että samaa tietokannan tilaa ei ole yhtä aikaa käyttämässä useampia testiajoja.
 
 Testaukseen kannattaisikin käyttää verkossa olevan jaetun tietokannan sijaan mieluummin sovelluskehittäjän paikallisella koneella olevaa tietokantaa. Optimiratkaisu olisi tietysti se, että jokaista testiajoa varten olisi käytettävissä oma tietokanta, sekin periaatteessa onnistuu "suhteellisen helposti" mm. [keskusmuistissa toimivan Mongon](https://docs.mongodb.com/manual/core/inmemory/) ja [docker](https://www.docker.com)-kontainereiden avulla. Etenemme kuitenkin nyt lyhyemmän kaavan mukaan ja käytetään testikantana normaalia Mongoa.
 
