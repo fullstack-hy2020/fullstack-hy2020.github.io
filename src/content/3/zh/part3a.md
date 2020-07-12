@@ -1022,7 +1022,7 @@ Math.max(...notes.map(n => n.id))
 ```
 
 <!-- What exactly is happening in that line of code? <em>notes.map(n => n.id)</em> creates a new array that contains all the id's of the notes. [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) returns the maximum value of the numbers that are passed to it. However, <em>notes.map(n => n.id)</em> is an <i>array</i> so it can't directly be given as a parameter to _Math.max_. The array can be transformed into individual numbers by using the "three dot" [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax <em>...</em>. -->
-这行代码中到底发生了什么？  <em>notes.map(n => n.id)</em> 创建一个包含所有便笺 id 的新数组。 [Math.max](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/Math.max)返回传递给它的数的最大值。 然而，<em>notes.map(n => n.id)</em>  是一个<i>数组</i>，因此它不能直接作为 Math.max 的参数。 数组可以通过使用“ 三个点<em>...</em>”[展开](https://developer.mozilla.org/en-us/docs/web/javascript/reference/operators/spread_syntax)语法 转换为单独的数字。
+这行代码中到底发生了什么？  <em>notes.map(n => n.id)</em> 创建一个包含所有便笺 id 的新数组。 [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max)返回传递给它的数的最大值。 然而，<em>notes.map(n => n.id)</em>  是一个<i>数组</i>，因此它不能直接作为 Math.max 的参数。 数组可以通过使用“ 三个点<em>...</em>”[展开](https://developer.mozilla.org/en-us/docs/web/javascript/reference/operators/spread_syntax)语法 转换为单独的数字。
 
 </div>
 
@@ -1098,7 +1098,7 @@ Math.max(...notes.map(n => n.id))
 扩展后端，以便通过向地址<http://localhost:3001/api/persons> 发送 HTTP POST 请求来添加新的电话簿条目。
 
 <!-- Generate a new id for the phonebook entry with the [Math.random](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random) function. Use a big enough range for your random values so that the likelihood of creating duplicate id's is small. -->
-使用[Math.random](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/Math.random)函数为电话簿条目生成一个新 id。 使用一个足够大的范围作为您的随机值，以便创建重复 id 的可能性是很小的。
+使用[Math.random](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random)函数为电话簿条目生成一个新 id。 使用一个足够大的范围作为您的随机值，以便创建重复 id 的可能性是很小的。
 
 
 #### 3.6: Phonebook backend 步骤6

@@ -285,7 +285,7 @@ Graphql 查询只描述在服务器和客户端之间移动的数据。 在服�
 【阿波罗服务器】
 
 <!-- Let's implement a GraphQL-server with today's leading library [Apollo -server](https://www.apollographql.com/docs/apollo-server/). -->
-让我们用当今领先的库[Apollo-server](https://www.apollographql.com/docs/Apollo-server)实现一个 graphql 服务器。
+让我们用当今领先的库[Apollo-server](https://www.apollographql.com/docs/apollo-server)实现一个 graphql 服务器。
 
 <!-- Create a new npm-project with _npm init_ and install the required dependencies. -->
 使用 npm init 创建一个新的 npm-project，并安装所需的依赖项。

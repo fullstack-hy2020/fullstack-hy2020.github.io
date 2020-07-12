@@ -573,7 +573,7 @@ Redux的创建者 Dan Abramov 创建了一个非常棒的教程，叫做 [Gettin
 【复习表现层/容器】
 
 <!-- The refactored <i>Notes</i> component is almost entirely focused on rendering notes and is quite close to being a so-called [presentational component](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0). According to the [description](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) provided by Dan Abramov, presentation components: -->
-重构的<i>Notes</i> 组件几乎完全集中在渲染便笺上，并且非常接近于所谓的[表示组件](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0组件)。 根据 Dan Abramov 提供的 [description](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)，演示组件:
+重构的<i>Notes</i> 组件几乎完全集中在渲染便笺上，并且非常接近于所谓的[表示组件](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)。 根据 Dan Abramov 提供的 [description](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)，演示组件:
 
 <!--Are concerned with how things look.-->
 关心事物的外观。
