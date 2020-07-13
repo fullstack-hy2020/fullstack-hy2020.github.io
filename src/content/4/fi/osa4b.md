@@ -396,9 +396,7 @@ const main = async () => { // highlight-line
   const notes = await Note.find({})
   console.log('operaatio palautti seuraavat muistiinpanot', notes)
 
-  const notes = await Note.find({}) // tämä rivi toistuu
   const response = await notes[0].remove()
-
   console.log('the first note is removed')
 }
 
