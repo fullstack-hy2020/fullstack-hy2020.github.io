@@ -447,7 +447,7 @@ app.listen(PORT, () => {
 将应用重构为单独的模块，如本课程教材前面所示。
 
 <!-- **NB** refactor your application in baby steps and verify that the application works after every change you make. If you try to take a "shortcut" by refactoring many things at once, then [Murphy's law](https://en.wikipedia.org/wiki/Murphy%27s_law) will kick in and it is almost certain that something will break in your application. The "shortcut" will end up taking more time than moving forward slowly and systematically. -->
-**注意** 重构您的应用时，步子不要迈得太大，并在每次更改后验证该应用是否正常工作。 如果你试图同时重构许多东西来走“捷径” ，那么[墨菲定律](https://en.wikipedia.org/wiki/Murphy%27s_law)就会生效，而且几乎可以肯定，某些东西会使你的应用中中断 。**如果不是缓慢而系统地向前推进，“捷径”最终将花费更多的时间**
+**注意** 重构您的应用时，步子不要迈得太大，并在每次更改后验证该应用是否正常工作。 如果你试图同时重构许多东西来走“捷径” ，那么[墨菲定律](https://en.wikipedia.org/wiki/Murphy%27s_law)就会生效，而且几乎可以肯定，某些东西会使你的应用中断 。**如果不是缓慢而系统地向前推进，“捷径”最终将花费更多的时间**
 
 <!-- One best practice is to commit your code every time it is in a stable state. This makes it easy to rollback to a situation where the application still works. -->
 一个最佳实践就是每次代码处于稳定状态时再提交它。 这样可以很容易地回滚到应用仍然可以工作的情况。
@@ -490,7 +490,7 @@ module.exports = {
 ```
 
 <!-- >The _average_ function uses the array [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) method. If the method is not familiar to you yet, then now is a good time to watch the first three videos from the [Functional Javascript](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) series on Youtube. -->
-> _average_ 函数使用 array的 [reduce](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/reduce)方法。 如果你对这个方法还不熟悉，是时候在 Youtube 上观看3个视频了，这3个视频来自[Functional Javascript](https://www.Youtube.com/watch?v=bmuifmzr7vk&list=pl0zvegevsaeed9hlmcxrk5yuyquag-n84)系列。
+> _average_ 函数使用 array的 [reduce](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/reduce)方法。 如果你对这个方法还不熟悉，是时候在 Youtube 上观看3个视频了，这3个视频来自[Functional Javascript](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84)系列。
 
 <!-- There are many different testing libraries or <i>test runners</i> available for JavaScript. In this course we will be using a testing library developed and used internally by Facebook called [jest](https://jestjs.io/), that resembles the previous king of JavaScript testing libraries [Mocha](https://mochajs.org/). Other alternatives do exist, like [ava](https://github.com/avajs/ava) that has gained popularity in some circles. -->
 有许多不同的测试库或者<i>test runner</i> 可用于 JavaScript。 在本课程中，我们将使用一个由 Facebook 内部开发和使用的测试库，这个测试库名为[jest](https://jestjs.io/) ，类似于之前 JavaScript 测试库之王[Mocha](https://mochajs.org/)。 其他替代品也确实存在，比如在某些圈子里受欢迎的[ava](https://github.com/avajs/ava)。

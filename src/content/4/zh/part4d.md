@@ -419,7 +419,7 @@ npm uninstall bcrypt --save
 <!-- Modify adding new blogs so that when a new blog is created,  <i>any</i> user from the database is designated as its creator (for example the one found first). Implement this according to part 4 chapter [populate](/zh/part4/用户管理#populate). -->
 修改添加新博客，以便在创建新博客时，将数据库中的任何 用户指定为其创建者(例如首先找到的那个)。 根据第4章 [populate](/zh/part4/用户管理#populate)实现这一点。
 <!-- Which user is designated as the creator does not matter just yet. The functionality is finished in exercise 4.19.  -->
-哪个用户被指定为创建者还不重要。这个功能在
+哪个用户被指定为创建者还不重要。这个功能会在 exercise 4.19. 中完成
 
 <!-- Modify listing all blogs so that the creator's user information is displayed with the blog:  -->
 修改所有博客列表，以便创建者的用户信息与博客一起显示:

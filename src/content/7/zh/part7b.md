@@ -490,7 +490,7 @@ input元素不应该被赋予 reset 属性。
 除此之外，应用是完整的，但是在这个练习中，您必须实现一个自定义的 hook useCountry，它可以用来搜索作为参数提供给 hook 的国家的详细信息。
 
 <!-- Use the api endpoint [full name](https://restcountries.eu/#api-endpoints-full-name) to fetch country details in a _useEffect_-hook within your custom hook. -->
-使用 api 接口[full name](https://restrestcountries.eu/#api-endpoints-full-name)在自定义Hook内的 useEffect-hook 中获取国家详细信息。
+使用 api 接口[full name](https://restcountries.eu/#api-endpoints-full-name)在自定义Hook内的 useEffect-hook 中获取国家详细信息。
 
 
 
