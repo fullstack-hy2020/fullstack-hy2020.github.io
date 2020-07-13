@@ -519,7 +519,7 @@ $ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
 
 In the example the <i>first argument</i> is the target value.
 
-Handle exeptions and errors appropriately. The exerciseCalculator should accept inputs of varied lengths. Determine by yourself how you manage to collect all needed input.
+Handle exceptions and errors appropriately. The exerciseCalculator should accept inputs of varied lengths. Determine by yourself how you manage to collect all needed input.
 
 </div>
 
