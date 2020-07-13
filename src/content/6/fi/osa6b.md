@@ -470,7 +470,7 @@ import React from 'react'
 import { useSelector } from 'react-redux' // highlight-line
 
 const Notification = () => {
-  const notification = useSelector(/*s omething here */) // highlight-line
+  const notification = useSelector(/* something here */) // highlight-line
   const style = {
     border: 'solid',
     padding: 10,
