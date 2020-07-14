@@ -327,7 +327,7 @@ Muuta blogien lisäämistä siten, että se on mahdollista vain, jos lisäyksen 
 
 #### 4.20*: blogilistan laajennus, step9
 
-Osan 4 [esimerkissä](/osa4#/token_perustainen_kirjautuminen) token otetaan headereista apufunktion _getTokenFrom_ avulla.
+Osan 4 [esimerkissä](/osa4/token_perustainen_kirjautuminen#muistiinpanojen-luominen-vain-kirjautuneille) token otetaan headereista apufunktion _getTokenFrom_ avulla.
 
 Jos käytit samaa ratkaisua, refaktoroi tokenin erottaminen [middlewareksi](/osa3/node_js_ja_express#middlewaret), joka ottaa tokenin <i>Authorization</i>-headerista ja sijoittaa sen <i>request</i>-olion kenttään <i>token</i>.
 
