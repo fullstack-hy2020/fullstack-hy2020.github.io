@@ -1,16 +1,36 @@
 @import '../common.scss';
 
-.scroll-navigation {
+.scroll-navigation-container {
   display: none;
-
   @include from($desktop) {
+    pointer-events: none;
     display: block;
     font-size: 16px;
-    position: absolute;
-    width: 30%;
+    position: sticky;
+    width: 100%;
+    margin-right: -100%;
+
     left: 0;
-    top: 198px;
+    top: -100px;
+    padding-top: 200px;
   }
+}
+
+.scroll-navigation-container-inner {
+  width: 90%;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.scroll-navigation {
+  pointer-events: auto;
+
+  display: flex;
+  width: 30%;
+  max-width: 30% / 0.9;
+  height: 100%;
+  overflow-y: auto;
+  max-height: calc(100vh - 100px);
 
   padding-right: 1rem;
   z-index: 199;
@@ -18,7 +38,7 @@
   li {
     list-style-type: none;
 
-    &:hover {
+    &:hover, &.selected {
       cursor: pointer;
 
       a {

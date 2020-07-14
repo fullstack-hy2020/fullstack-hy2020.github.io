@@ -15,14 +15,13 @@ class ScrollNavigation extends Component {
     super(props);
 
     this.state = {
-      h1Top: 0,
       headings: [],
+      selectedItem: null
     };
   }
 
   componentDidMount = () => {
     const headingList = Array.from(document.querySelectorAll('h3'));
-    const h1 = document.querySelector('h1');
 
     const headings = headingList.map(i => {
       i.id = kebabCase(i.innerText);
@@ -35,8 +34,37 @@ class ScrollNavigation extends Component {
       };
     });
 
-    this.setState({ headings: headings, h1Top: h1.offsetTop });
+    this.setState({ headings: headings});
+    window.addEventListener('scroll', this.scrollHandler);
   };
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.scrollHandler);
+  }
+
+  scrollHandler = () => {
+    // Below implements 50 ms debounce
+    if (this.scrollTimer) {
+      clearTimeout(this.scrollTimer)
+    }
+
+    this.scrollTimer = setTimeout(() => {
+      const scrollThreshold = window.scrollY
+      let last = this.state.headings[0]
+      for (const heading of this.state.headings) {
+        const elem = document.getElementById(heading.id)
+        if (elem && elem.offsetTop >= scrollThreshold) {
+          break
+        }
+        last = heading
+      }
+      if (this.state.selectedItem !== last.id) {
+        this.setState({
+          selectedItem: last.id
+        })
+      }
+    }, 50)
+  }
 
   loopThroughPartsNode = partsNode => {
     const { headings } = this.state;
@@ -72,8 +100,10 @@ class ScrollNavigation extends Component {
             initiallyOpened
             key={key}
             title={`${letter} ${partsNode[key]}`}
+            selectedItem={this.state.selectedItem}
             list={headings.map(i => {
               return {
+                id: i.id,
                 href: `${currentPath}#${i.id}`,
                 text: i.text,
               };
@@ -89,13 +119,16 @@ class ScrollNavigation extends Component {
     const { part } = this.props;
 
     return (
-      <Element
-        tag="ul"
-        flex
-        dirColumn
-        className={`scroll-navigation ${this.props.className}`}
-      >
-        {this.loopThroughPartsNode(navigation[this.props.lang][part])}
+      <Element className="scroll-navigation-container">
+        <Element className="scroll-navigation-container-inner">
+          <Element
+            tag="ul"
+            dirColumn
+            className={`scroll-navigation ${this.props.className}`}
+          >
+            {this.loopThroughPartsNode(navigation[this.props.lang][part])}
+          </Element>
+        </Element>
       </Element>
     );
   }

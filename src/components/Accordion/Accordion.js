@@ -43,6 +43,7 @@ class Accordion extends Component {
       containerClassName,
       list,
       titleStyle,
+      selectedItem,
     } = this.props;
     const { isOpened } = this.state;
 
@@ -73,7 +74,7 @@ class Accordion extends Component {
           {list && (
             <ul>
               {list.map(l => (
-                <li key={l.text}>
+                <li key={l.text} className={selectedItem === l.id ? 'selected' : undefined}>
                   <Link to={l.href}>{l.text}</Link>
                 </li>
               ))}
@@ -94,6 +95,7 @@ Accordion.propTypes = {
   containerClassName: PropTypes.string,
   initiallyOpened: PropTypes.bool,
   titleStyle: PropTypes.object,
+  selectedItem: PropTypes.string
 };
 
 Accordion.defaultProps = {
