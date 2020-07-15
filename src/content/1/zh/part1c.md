@@ -371,7 +371,8 @@ setTimeout(
 ```js
 () => setCounter(2)
 ```
-Meanwhile, the old value of _counter_,  "1", is rendered to the screen.
+
+<!--  Meanwhile, the old value of _counter_,  "1", is rendered to the screen. -->
 与此同时，计数器的旧值“1”被渲染到了屏幕上。
 
 <!-- Every time the _setCounter_  modifies the state it causes the component to re-render. The value of the state will be incremented again after one second, and this will continue to repeat for as long as the application is running. -->
