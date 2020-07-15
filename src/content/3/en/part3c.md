@@ -637,32 +637,34 @@ At this point, you can choose to simply allow users to create all phonebook entr
 
 ### Error handling
 
-If we try to visit the URL of a note with an id that does not actually exist e.g. <http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431> where <i>5c41c90e84d891c15dfa3431</i> is not an id stored in the database, then the browser will simply get "stuck" since the server never responds to the request.
+If we try to visit the URL of a note with an id that does not actually exist e.g. <http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431> where <i>5c41c90e84d891c15dfa3431</i> is not an id stored in the database, then the response will be _null_.
 
-We can see the following error message appear in the logs for the backend:
-
-![](../../images/3/47.png)
-
-The request has failed and the associated Promise has been <i>rejected</i>. Since we don't handle the rejection of the promise, the request never gets a response. In part 2, we already acquainted ourselves with [handling errors in promises](/en/part2/altering_data_in_server#promises-and-errors).
-
-Let's add a simple error handler:
+Let's change this behavior so that if note with the given id doesn't exist, the server will respond to the request with the HTTP status code 404 not found. In addition let's implement a simple <em>catch</em> block to handle cases where the promise returned by the <em>findById</em> method is _rejected_:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
   Note.findById(request.params.id)
     .then(note => {
-      response.json(note)
+      // highlight-start
+      if (note) {
+        response.json(note)
+      } else {
+        response.status(404).end()
+      }
+      // highlight-end
     })
+    // highlight-start
     .catch(error => {
       console.log(error)
-      response.status(404).end()
+      response.status(500).end()
     })
+    // highlight-end
 })
 ```
 
-Every request that leads to an error will be responded to with the HTTP status code 404 not found. The console displays more detailed information about the error.
+If no matching object is found in the database, the value of _note_ will be _null_ and the _else_ block is executed. This results in a response with the status code <i>404 not found</i>. If promise returned by the <em>findById</em> method is rejected, the response will have the status code <i>500 internal server error</i>. The console displays more detailed information about the error.
 
-There's actually two different types of error situations. In one of those situations, we are trying to fetch a note with a wrong kind of _id_, meaning an _id_ that doesn't match the mongo identifier format.
+On top of the non-existing note, there's one more error situation needed to be handled. In this situation, we are trying to fetch a note with a wrong kind of _id_, meaning an _id_ that doesn't match the mongo identifier format.
 
 If we make the following request, we will get the error message shown below:
 
@@ -677,21 +679,19 @@ Body:   {}
     ...
 </pre>
 
-The other error situation happens when the id is in the correct format, but no note is found in the database for that id. In this case the value of _note_ is _null_ and the response body will be empty. We should distinguish between these two different types of error situations. The latter is in fact an error caused by our own code.
+Given malformed id as an argument, the <em>findById</em> method will throw an error causing the returned promise to be rejected. This will cause the callback function defined in the <em>catch</em> block to be called. 
 
-Let's change the code in the following way:
+Let's make some small adjustments to the response in the <em>catch</em> block:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
   Note.findById(request.params.id)
     .then(note => {
-      // highlight-start
       if (note) {
         response.json(note)
       } else {
         response.status(404).end() 
       }
-      // highlight-end
     })
     .catch(error => {
       console.log(error)
@@ -699,8 +699,6 @@ app.get('/api/notes/:id', (request, response) => {
     })
 })
 ```
-
-If no matching object is found in the database, the value of _note_ will be undefined and the _else_ block is executed. This results in a response with the status code <i>404 not found</i>.
 
 If the format of the id is incorrect, then we will end up in the error handler defined in the _catch_ block. The appropriate status code for the situation is [400 Bad Request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1), because the situation fits the description perfectly:
 
