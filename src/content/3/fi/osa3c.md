@@ -631,32 +631,34 @@ Varmista, että frontend toimii muutosten jälkeen.
 
 ### Virheiden käsittely
 
-Jos yritämme mennä selaimella sellaisen yksittäisen muistiinpanon sivulle, jota ei ole olemassa, eli esim. urliin <http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431> missä <i>5c41c90e84d891c15dfa3431</i> ei ole minkään tietokannassa olevan muistiinpanon tunniste, jää selain "jumiin" sillä palvelin ei vastaa pyyntöön koskaan.
+Jos yritämme mennä selaimella sellaisen yksittäisen muistiinpanon sivulle, jota ei ole olemassa, eli esim. urliin <http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431> missä <i>5c41c90e84d891c15dfa3431</i> ei ole minkään tietokannassa olevan muistiinpanon tunniste, on palvelimelta saatu vastaus <em>null</em>.
 
-Palvelimen konsolissa näkyykin virheilmoitus:
-
-![](../../images/3/47.png)
-
-Kysely on epäonnistunut ja kyselyä vastaava promise mennyt tilaan <i>rejected</i>. Koska emme käsittele promisen epäonnistumista, ei pyyntöön vastata koskaan. Osassa 2 tutustuimme jo [promisejen virhetilanteiden käsittelyyn](/osa2/palvelimella_olevan_datan_muokkaaminen#promise-ja-virheet).
-
-Lisätään tilanteeseen yksinkertainen virheidenkäsittelijä:
+Muutetaan koodia niin, että tapauksessa, jossa muistiinpanoa ei ole olemassa, lähetään vastauksena HTTP-statuskoodi 404 not found. Toteutetaan lisäksi yksinkertainen <em>catch</em>-lohko, jossa käsitellään tapaukset, joissa <em>findById</em>-metodin palauttama promise päätyy <i>rejected</i>-tilaan:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
   Note.findById(request.params.id)
     .then(note => {
-      response.json(note)
+      // highlight-start
+      if (note) {
+        response.json(note)
+      } else {
+        response.status(404).end()
+      }
+      // highlight-end
     })
+    // highlight-start
     .catch(error => {
       console.log(error)
-      response.status(404).end()
+      response.status(500).end()
     })
+    // highlight-end
 })
 ```
 
-Kaikissa virheeseen päättyvissä tilanteissa HTTP-pyyntöön vastataan statuskoodilla 404 not found. Konsoliin tulostetaan tarkempi tieto virheestä.
+Jos kannasta ei löydy haettua olioa, muuttujan _note_ arvo on _null_ ja koodi ajautuu _else_-haaraan. Siellä vastataan kyselyyn statuskoodilla <i>404 not found</i>. Jos <em>findById</em>-metodin palauttama promise päätyy rejected-tilaan, kyselyyn vastataan statuskoodilla <i>500 internal server error</i>. Konsoliin tulostetaan tarkempi tieto virheestä.
 
-Tapauksessamme on itseasiassa olemassa kaksi erityyppistä virhetilannetta. Toinen vastaa sitä, että yritetään hakea muistiinpanoa virheellisen muotoisella _id_:llä, eli sellaisella mikä ei vastaa mongon id:iden muotoa.
+Olemattoman muistiinpanon lisäksi koodista löytyy myös toinen virhetilanne, joka täytyy käsitellä. Tässä virhetilanteessa muistiinpanoa yritetään hakea virheellisen muotoisella _id_:llä, eli sellaisella mikä ei vastaa mongon id:iden muotoa.
 
 Jos teemme näin tulostuu konsoliin:
 
@@ -671,21 +673,19 @@ Body:   {}
     ...
 </pre>
 
-Toinen virhetilanne taas vastaa tilannetta, missä haettavan muistiinpanon id on periaatteessa oikeassa formaatissa, mutta tietokannasta ei löydy indeksillä mitään. Tässä tilanteessa _note_:n arvo on _null_ ja palvelimelta saadun vastauksen sisältö on tyhjä. Nämä tilanteet on syytä erottaa toisistaan, ja itseasiassa jälkimmäinen poikkeus on oman koodimme aiheuttama.
+Kun <em>findById</em>-metodi saa argumentikseen väärässä muodossa olevan id:n, se heittää virheen. Tästä seuraa se, että metodin palauttama promise päätyy rejected-tilaan, jonka seurauksena <em>catch</em>-lohkossa määriteltyä funktiota kutsutaan. 
 
-Muutetaan koodia seuraavasti:
+Tehdään pieniä muutoksia koodin <em>catch</em>-lohkoon:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
   Note.findById(request.params.id)
     .then(note => {
-      // highlight-start
       if (note) {
         response.json(note)
       } else {
         response.status(404).end()
       }
-      // highlight-end
     })
     .catch(error => {
       console.log(error)
@@ -693,8 +693,6 @@ app.get('/api/notes/:id', (request, response) => {
     })
 })
 ```
-
-Jos kannasta ei löydy haettua olioa, muuttujan _note_ arvo on _undefined_ ja koodi ajautuu _else_-haaraan. Siellä vastataan kyselyyn <i>404 not found</i>
 
 Jos id ei ole hyväksyttävässä muodossa, ajaudutaan _catch_:in avulla määriteltyyn virheidenkäsittelijään. Sopiva statuskoodi on [400 bad request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1) koska kyse on juuri siitä:
 
