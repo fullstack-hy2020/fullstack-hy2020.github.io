@@ -626,7 +626,7 @@ Let's finish the code for rendering course contents from exercises 1.1 - 1.5. Yo
 
 
 **Note that if you copy a project from one place to another, you might have to delete the <i>node\_modules</i> directory and install the dependencies again with the command _npm install_ before you can start the application.**
-Generally, it's not recommeneded that you copy a project's whole contents and/or add the <i>node\_modules</i> directory to the version control system. 
+Generally, it's not recommended that you copy a project's whole contents and/or add the <i>node\_modules</i> directory to the version control system. 
 
 Let's change the <i>App</i> component like so: 
 
