@@ -213,8 +213,8 @@ test('renders content', () => {
   const component = render(
     <Note note={note} />
   )
-  const li = component.container.querySelector('li')
   
+  const li = component.container.querySelector('li') // highlight-line
   console.log(prettyDOM(li)) // highlight-line
 })
 ```
