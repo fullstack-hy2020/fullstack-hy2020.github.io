@@ -99,7 +99,7 @@ We can do that by altering our lint command in <i>.package.json</i> to the follo
 If you are using Windows, you may need to use double quotes for the linting path: `"lint": "eslint \"./src/**/*.{ts,tsx}\""`.
 
 <!-- If we now run <i>npm run lint</i>, we should still receive an error from eslint: -->
-Now if we run <i>npm run lint</i>, we still recieve an error from eslint:
+Now if we run <i>npm run lint</i>, we still receive an error from eslint:
 
 ![](../../images/9/31a.png)
 
@@ -177,7 +177,7 @@ Now let's take a look at the first line inside _FunctionComponent_:
 
 <!-- There you can see that <i>props</i> is of type <i>PropsWithChildren</i>, which is also a generic type, to which <i>P</i> is passed. The type <i>PropsWithChildren</i> in turn is a [intersection](https://www.typescriptlang.org/docs/handbook/advanced-types.html#intersection-types) of <i>P</i> and the type <i>{ children?: ReactNode }</i>. -->
 Here you can see that <i>props</i> is of type <i>PropsWithChildren</i>, which is also a generic type to which <i>P</i> is passed.
-The type <i>PropsWithChildren</i> in turn is a [intersection](https://www.typescriptlang.org/docs/handbook/advanced-types.html#intersection-types) of <i>P</i> and the type <i>{ children?: ReactNode }</i>.
+The type <i>PropsWithChildren</i> in turn is an [intersection](https://www.typescriptlang.org/docs/handbook/advanced-types.html#intersection-types) of <i>P</i> and the type <i>{ children?: ReactNode }</i>.
 
 ```js
 type PropsWithChildren<P> = P | { children?: ReactNode };
