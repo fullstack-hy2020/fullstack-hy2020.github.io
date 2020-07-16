@@ -11,7 +11,7 @@ Olemme käyttäneet redux-storea react-redux-kirjaston [hook](https://react-redu
 
 Tarkastellaan tämän osan lopuksi toista, hieman vanhempaa ja jonkin verran monimutkaisempaa tapaa reduxin käyttöön, eli [react-redux](https://github.com/reactjs/react-redux) -kirjaston määrittelemää [connect](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)-funktiota.
 
-Uusissa sovelluksissa kannattaa ehdottomasti käyttää hook-apia, mutta connectin tuntemisesta on hyötyä vanhempia reduxia käyttäviä projekteja ylläpidettävissä.
+Uusissa sovelluksissa kannattaa ehdottomasti käyttää hook-apia, mutta connectin tuntemisesta on hyötyä vanhempia reduxia käyttäviä projekteja ylläpidettäessä.
 
 ### Redux Storen välittäminen komponentille connect-funktiolla
 
@@ -72,7 +72,7 @@ export default ConnectedNotes           // highlight-line
 
 Moduuli eksporttaa nyt alkuperäisen komponentin sijaan <i>yhdistetyn komponentin</i>, joka toimii toistaiseksi täsmälleen alkuperäisen komponentin kaltaisesti.
 
-Komponentti tarvitsee storesta sekä muistiinpanojen listan, että filtterin arvon. Funktion _connect_ ensimmäisenä parametrina voidaan määritellä funktio [mapStateToProps](https://github.com/reactjs/react-redux/blob/master/docs/api.md#arguments), joka liittää joitakin storen tilan perusteella määriteltyjä asioita connectilla muodostetun <i>yhdistetyn komponentin</i> propseiksi.
+Komponentti tarvitsee storesta sekä muistiinpanojen listan, että filtterin arvon. Funktion _connect_ ensimmäisenä parametrina voidaan määritellä funktio [mapStateToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#connect-parameters), joka liittää joitakin storen tilan perusteella määriteltyjä asioita connectilla muodostetun <i>yhdistetyn komponentin</i> propseiksi.
 
 Jos määritellään:
 
@@ -82,7 +82,7 @@ const Notes = (props) => { // highlight-line
 
 // highlight-start
   const notesToShow = () => {
-    if ( props.filter === 'ALL ') {
+    if ( props.filter === 'ALL') {
       return props.notes
     }
     
@@ -127,7 +127,7 @@ Connect-komennolla ja <i>mapStateToProps</i>-määrittelyllä aikaan saatua tila
 
 eli komponentin <i>Notes</i> sisältä on propsien <i>props.notes</i> ja <i>props.filter</i> kautta "suora pääsy" tarkastelemaan Redux storen sisällä olevaa tilaa.
 
-Komponentti _NoteList_ ei oikeastaan tarvitse mihinkään tietoa siitä mikä filtteri on valittuna, eli filtteröintilogiikka voidaan siirtää kokonaan sen ulkopuolelle, ja palauttaa propsina _notes_ suoraan sopivalla tavalla filtteröidyt muistiinpanot:
+Komponentti _Notes_ ei oikeastaan tarvitse mihinkään tietoa siitä mikä filtteri on valittuna, eli filtteröintilogiikka voidaan siirtää kokonaan sen ulkopuolelle, ja palauttaa propsina _notes_ suoraan sopivalla tavalla filtteröidyt muistiinpanot:
 
 ```js
 const Notes = (props) => { // highlight-line
@@ -193,7 +193,7 @@ const Notes = (props) => {
 }
 ```
 
-Connect-funktion toisena parametrina voidaan määritellä [mapDispatchToProps](https://github.com/reactjs/react-redux/blob/master/docs/api.md#arguments) eli joukko <i>action creator</i> -funktioita, jotka välitetään yhdistetylle komponentille propseina. Laajennetaan connectausta seuraavasti
+Connect-funktion toisena parametrina voidaan määritellä [mapDispatchToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#connect-parameters) eli joukko <i>action creator</i> -funktioita, jotka välitetään yhdistetylle komponentille propseina. Laajennetaan connectausta seuraavasti
 
 ```js
 const mapStateToProps = (state) => {
@@ -412,7 +412,7 @@ Connect on erittäin kätevä työkalu, mutta abstraktiuutensa takia se voi aluk
 
 ### mapDispatchToPropsin vaihtoehtoinen käyttötapa
 
-Määrittelimme siis connectin komponentille <i>NewNote</i> antamat actioneja dispatchaavan funktion seuraavasti:
+Määrittelimme siis connectin komponentille <i>NewNote</i> antaman actioneja dispatchaavan funktion seuraavasti:
 
 ```js
 const NewNote = (props) => {
@@ -470,7 +470,7 @@ export default connect(
 )(NewNote)
 ```
 
-Tässä vaihtoehtoisessa tavassa <i>mapDispatchToProps</i> on funktio, jota _connect_ kutsuu antaen sille parametriksi storen _dispatch_-funktion. Funktion paluuarvona on olio, joka määrittelee joukon funktioita, jotka annetaan connectoitavalle komponentille propsiksi. Esimerkkimme määrittelee propsin <i>createNote</i> olevan funktion
+Tässä vaihtoehtoisessa tavassa <i>mapDispatchToProps</i> on funktio, jota _connect_ kutsuu antaen sille parametriksi storen _dispatch_-funktion. Funktion paluuarvona on olio, joka määrittelee joukon funktioita, jotka annetaan connectoitavalle komponentille propsiksi. Esimerkkimme määrittelee propsin <i>createNote</i> olevan funktio
 
 ```js
 (value) => {

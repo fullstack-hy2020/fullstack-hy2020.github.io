@@ -4,6 +4,13 @@
   position: relative;
   width: 100%;
 
+  @include from($desktop) {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
   p {
     font-family: $font-heading;
 
@@ -96,6 +103,10 @@
   }
 }
 
+.course-content-container {
+  width: 100%;
+}
+
 .course-content,
 .tasks {
   a {
@@ -107,7 +118,16 @@
 }
 
 .course-content {
-  max-width: 100%;
+  width: 90%;
+  margin: 0 auto;
+  max-width: 1200px;
+}
+
+.course-content-inner {
+  @include from($desktop) {
+    padding-left: 30%;
+    padding-right: 5%;
+  }
 }
 
 .tasks {

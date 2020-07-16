@@ -44,7 +44,7 @@ export default function PartIntroTemplate({ data }) {
     <Layout>
       <SEO
         lang={lang}
-        title={`Fullstack ${lang === 'en' ? 'part' : 'osa'}${part}`}
+        title={`Fullstack ${lang === 'en' ? 'part' : lang === 'zh' ? 'part' : 'osa'}${part}`}
         description={mainSEOdescription[lang]}
         keywords={[
           ...mainSEOtags,
@@ -67,11 +67,11 @@ export default function PartIntroTemplate({ data }) {
                 {
                   backgroundColor: colors[partColors[part]],
                   text: 'Fullstack',
-                  link: `/${lang === 'en' ? 'en/' : ''}#course-contents`,
+                  link: `/${lang === 'en' ? 'en/' : lang === 'zh' ? 'zh/' :''}#course-contents`,
                 },
                 {
                   backgroundColor: colors['black'],
-                  text: `${lang === 'en' ? 'Part' : 'Osa'} ${part}`,
+                  text: `${lang === 'en' ? 'Part' : lang === 'zh' ? 'Part' : 'Osa'} ${part}`,
                 },
               ]}
             />
@@ -89,7 +89,7 @@ export default function PartIntroTemplate({ data }) {
                     backgroundColor: colors['white'],
                     letter: n,
                     path: `/${
-                      lang === 'en' ? 'en/part' : 'osa'
+                      lang === 'en' ? 'en/part' :lang === 'zh' ? 'zh/part' : 'osa'
                     }${part}/${snakeCase(navigation[lang][part][n])}`,
                     text: `${n} ${navigation[lang][part][n]}`,
                   };

@@ -126,7 +126,7 @@ Virheellisellä käyttäjätunnuksella tai salasanalla kirjautuessa annetaan asi
 
 ### Muistiinpanojen luominen vain kirjautuneille
 
-Muutetaan vielä muistiinpanojen luomista, siten että luominen onnistuu ainoastaan jos luomista vastaavan pyynnön mukana on validi token. Muistiinpano talletetaan tokenin identifioiman käyttäjän tekemien muistiinpanojen listaan.
+Muutetaan vielä muistiinpanojen luomista siten, että luominen onnistuu ainoastaan jos luomista vastaavan pyynnön mukana on validi token. Muistiinpano talletetaan tokenin identifioiman käyttäjän tekemien muistiinpanojen listaan.
 
 Tapoja tokenin välittämiseen selaimesta backendiin on useita. Käytämme ratkaisussamme [Authorization](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization)-headeria. Tokenin lisäksi headerin avulla kerrotaan mistä [autentikointiskeemasta](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#Authentication_schemes) on kyse. Tämä voi olla tarpeen, jos palvelin tarjoaa useita eri tapoja autentikointiin. Skeeman ilmaiseminen kertoo näissä tapauksissa palvelimelle, miten mukana olevat kredentiaalit tulee tulkita.
 Meidän käyttöömme sopii <i>Bearer</i>-skeema.
@@ -155,9 +155,9 @@ const getTokenFrom = request => {
 
 notesRouter.post('/', async (request, response) => {
   const body = request.body
+//highlight-start
   const token = getTokenFrom(request)
 
-//highlight-start
   const decodedToken = jwt.verify(token, process.env.SECRET)
   if (!token || !decodedToken.id) {
     return response.status(401).json({ error: 'token missing or invalid' })
@@ -231,7 +231,7 @@ const unknownEndpoint = (request, response) => {
 }
 
 const errorHandler = (error, request, response, next) => {
-  if (error.name === 'CastError' && error.kind === 'ObjectId') {
+  if (error.name === 'CastError') {
     return response.status(400).send({
       error: 'malformatted id'
     })
@@ -327,7 +327,7 @@ Muuta blogien lisäämistä siten, että se on mahdollista vain, jos lisäyksen 
 
 #### 4.20*: blogilistan laajennus, step9
 
-Osan 4 [esimerkissä](/osa4#/token_perustainen_kirjautuminen) token otetaan headereista apufunktion _getTokenFrom_ avulla.
+Osan 4 [esimerkissä](/osa4/token_perustainen_kirjautuminen#muistiinpanojen-luominen-vain-kirjautuneille) token otetaan headereista apufunktion _getTokenFrom_ avulla.
 
 Jos käytit samaa ratkaisua, refaktoroi tokenin erottaminen [middlewareksi](/osa3/node_js_ja_express#middlewaret), joka ottaa tokenin <i>Authorization</i>-headerista ja sijoittaa sen <i>request</i>-olion kenttään <i>token</i>.
 

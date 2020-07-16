@@ -8,11 +8,11 @@ lang: en
 <div class="content">
 
 <!-- Yhdistetään seuraavaksi [osassa 2](/osa2) tekemämme frontend omaan backendiimme.  -->
-Next let's connect the frontend we made in [part 2](/part2) to our own backend.
+Next let's connect the frontend we made in [part 2](/en/part2) to our own backend.
 
 <!-- Edellisessä osassa backendinä toiminut json-server tarjosi muistiinpanojen listan osoitteessa http://localhost:3001/notes fronendin käyttöön. Backendimme urlien rakenne on hieman erilainen, muistiinpanot löytyvät osoitteesta http://localhost:3001/api/notes, eli muutetaan frontendin tiedostossa <i>src/services/notes.js</i> määriteltyä muuttujaa _baseUrl_ seuraavasti: -->
 In the previous part, the frontend could ask for the list of notes from the json-server we had as a backend at from the address http://localhost:3001/notes.
-Our backend has a bit different url structure, and the notes can be found from http//localhost:3001/api/notes. 
+Our backend has a bit different url structure, and the notes can be found from http://localhost:3001/api/notes. 
 Let's change the attribute __baseUrl__ in the <i>src/services/notes.js</i> like so:
 
 ```js
@@ -100,7 +100,7 @@ Create a Git repository in the project directory, and add <i>.gitignore</i> with
 node_modules
 ```
 
-Create a Heroku application with the command <i>heroku create</i>, create a Git repository in the application directory, commit the code and move it to Heroku with command <i>git push heroku master</i>.
+Create a Heroku application with the command <i>heroku create</i>, commit your code to the repository and move it to Heroku with command <i>git push heroku master</i>.
 
 If everything went well, the application works:
 
@@ -109,6 +109,8 @@ If everything went well, the application works:
 If not, the issue can be found by reading heroku logs with command <i>heroku logs</i>.
 
 >**NB** At least in the beginning it's good to keep an eye on the heroku logs at all times. The best way to do this is with command <i>heroku logs -t</i> which prints the logs to console whenever something happens on the server. 
+
+>**NB** If you are deploying from a git repository where your code is not on the master branch (i.e. if you are altering the [notes repo](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2) from the last lesson) you will need to run _git push heroku HEAD:master_. If you have already done a push to heroku, you may need to run _git push heroku HEAD:master --force_.
 
 The frontend also works with the backend on Heroku. You can check this by changing the backend's address on the frontend to be the backend's address in Heroku instead of <i>http://localhost:3001</i>.
 
@@ -136,11 +138,13 @@ The minified code is not very readable. The beginning of the code looks like thi
 
 One option for deploying the frontend is to copy the production build (the <i>build</i> directory) to the root of the backend repository and configure the backend to show the frontend's <i>main page</i> (the file <i>build/index.html</i>) as its main page. 
 
-We begin by copying the production build of the frontend to the root of the backend. With my computer the copying can be done from the frontend directory with the command
+We begin by copying the production build of the frontend to the root of the backend. With a Mac or Linux computer, the copying can be done from the frontend directory with the command
 
 ```bash
 cp -r build ../../../osa3/notes-backend
 ```
+
+If you are using a Windows computer, you may use either [copy](https://www.windows-commandline.com/windows-copy-command-syntax-examples/) or [xcopy](https://www.windows-commandline.com/xcopy-command-syntax-examples/) command instead. Otherwise, simply do a copy and paste.
 
 The backend directory should now look as follows:
 
@@ -155,9 +159,9 @@ app.use(express.static('build'))
 
 whenever express gets an HTTP GET request it will first check if the <i>build</i> directory contains a file corresponding to the request's address. If a correct file is found, express will return it. 
 
-Now HTTP GET requests to the address <i>www.serversaddress.com/index.html</i> or <i>www.serversaddress.com</i> will show the React frontend. GET requests to the address <i>www.serversaddress.com/notes</i> will be handled by the backend's code.
+Now HTTP GET requests to the address <i>www.serversaddress.com/index.html</i> or <i>www.serversaddress.com</i> will show the React frontend. GET requests to the address <i>www.serversaddress.com/api/notes</i> will be handled by the backend's code.
 
-Because on our situation, both the frontend and the backend are at the same address, we can declare _baseUrl_ as a [relative](https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2) URL. This means we can leave out the part declaring the server. 
+Because of our situation, both the frontend and the backend are at the same address, we can declare _baseUrl_ as a [relative](https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2) URL. This means we can leave out the part declaring the server. 
 
 ```js
 import axios from 'axios'
@@ -197,7 +201,7 @@ When we use a browser to go to the address <http://localhost:3001>, the server r
 
 The file contains instructions to fetch a CSS stylesheet defining the styles of the application, and two <i>script</i> tags which instruct the browser to fetch the JavaScript code of the application - the actual React application. 
 
-The React code fetches notes from the server address <http://localhost:3001/notes> and renders them to the screen. The communications between the server and the browser can be seen in the <i>Network</i> tab of the developer console:
+The React code fetches notes from the server address <http://localhost:3001/api/notes> and renders them to the screen. The communications between the server and the browser can be seen in the <i>Network</i> tab of the developer console:
 
 ![](../../images/3/29ea.png)
 
@@ -218,6 +222,7 @@ To create a new production build of the frontend without extra manual work, let'
 ```json
 {
   "scripts": {
+    //...
     "build:ui": "rm -rf build && cd ../../osa2/materiaali/notes-new && npm run build --prod && cp -r build ../../../osa3/notes-backend/",
     "deploy": "git push heroku master",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",    
@@ -234,7 +239,11 @@ There is also a script _npm run logs:prod_ to show the heroku logs.
 
 Note that the directory paths in the script <i>build:ui</i> depend on the location of repositories in the file system.
 
->**NB**  <i>build:ui</i> does not work on Windows, go to [Solution](https://github.com/fullstackopen-2019/fullstackopen-2019.github.io/issues/420)  
+>**NB**  On Windows, npm scripts are executed in cmd.exe as the default shell which does not support bash commands. For the above bash commands to work, you can change the default shell to Bash (in the default Git for Windows installation) as follows:
+
+```md
+npm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"
+```
 
 ### Proxy
 
@@ -272,7 +281,7 @@ A negative aspect of our approach is how complicated it is to deploy the fronten
 
 There are multiple ways to achieve this (for example placing both backend and frontend code [to the same repository](https://github.com/mars/heroku-cra-node) ) but we will not go into those now. 
 
-In some situations it may be sensible to deploy the frontend code as it's own application. With apps created with create-react-app it is [straightforward](https://github.com/mars/create-react-app-buildpack).
+In some situations it may be sensible to deploy the frontend code as its own application. With apps created with create-react-app it is [straightforward](https://github.com/mars/create-react-app-buildpack).
 
 Current code of the backend can be found on [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3), in the branch <i>part3-3</i>. The changes in frontend code are in <i>part3-1</i> branch of the [frontend repository](https://github.com/fullstack-hy2020/part2-notes/tree/part3-1).
 

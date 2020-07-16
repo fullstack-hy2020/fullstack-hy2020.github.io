@@ -13,7 +13,7 @@ There are many different ways of testing React applications. Let's take a look a
 
 Tests will be implemented with the same [Jest](http://jestjs.io/) testing library developed by Facebook that was used in the previous part. Jest is actually configured by default to applications created with create-react-app.
 
-In addition to Jest, we also need another testing library that will help us render components for testing purposes. The current best option for this is[react-testing-library](https://github.com/testing-library/react-testing-library) which has seen rapid growth in popularity in recent times.
+In addition to Jest, we also need another testing library that will help us render components for testing purposes. The current best option for this is [react-testing-library](https://github.com/testing-library/react-testing-library) which has seen rapid growth in popularity in recent times.
 
 
 Let's install the library with the command:
@@ -287,7 +287,7 @@ test('clicking the button calls event handler once', () => {
   const button = component.getByText('make not important')
   fireEvent.click(button)
 
-  expect(mockHandler.mock.calls.length).toBe(1)
+  expect(mockHandler.mock.calls).toHaveLength(1)
 })
 ```
 
@@ -310,7 +310,7 @@ Clicking happens with the [fireEvent](https://testing-library.com/docs/api-event
 The expectation of the test verifies that the <i>mock function</i> has been called exactly once.
 
 ```js
-expect(mockHandler.mock.calls.length).toBe(1)
+expect(mockHandler.mock.calls).toHaveLength(1)
 ```
 
 
@@ -458,7 +458,7 @@ fireEvent.click(button)
 
 <!-- Käytännössä siis loimme <i>fireEventin</i> avulla tapahtuman <i>click</i> nappia vastaavalle komponentille. Voimme myös simuloida lomakkeisiin kirjoittamista <i>fireEventin</i> avulla. -->
 In practice we used the <i>fireEvent</i> to create a <i>click</i> event for the button component. 
-We cal also simulate text input with <i>fireEvent</i>.
+We can also simulate text input with <i>fireEvent</i>.
 
 <!-- Tehdään testi komponentille <i>NoteForm</i>. Lomakkeen koodi näyttää seuraavalta -->
 Let's make a test for the <i>NoteForm</i> component. The code of the component is as follows
@@ -484,7 +484,7 @@ const NoteForm = ({ createNote }) => {
   }
 
   return (
-    <div className="formDiv">
+    <div className="formDiv"> // highlight-line
       <h2>Create a new note</h2>
 
       <form onSubmit={addNote}>
@@ -528,13 +528,13 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
   })
   fireEvent.submit(form)
 
-  expect(createNote.mock.calls.length).toBe(1)
+  expect(createNote.mock.calls).toHaveLength(1)
   expect(createNote.mock.calls[0][0].content).toBe('testing of forms could be easier' )
 })
 ```
 
 <!-- Syötekenttään <i>input</i> kirjoittamista simuloidaan tekemällä syötekenttään tapahtuma <i>change</i> ja määrittelemällä sopiva olio, joka määrittelee syötekenttään 'kirjoitetun' sisällön. -->
-We can simulate writing to <i>input</i> fields by creating an <i>change</i> event to them, and defining an object, which contains the text 'written' to the field.
+We can simulate writing to <i>input</i> fields by creating a <i>change</i> event to them, and defining an object, which contains the text 'written' to the field.
 
 <!-- Lomake lähetetään simuloimalla tapahtuma <i>submit</i> lomakkeelle. -->
 The form is sent by simulating the <i>submit</i> event to the form.
@@ -557,7 +557,7 @@ CI=true npm test -- --coverage
 ![](../../images/5/18ea.png)
 
 <!-- Melko primitiivinen HTML-muotoinen raportti generoituu hakemistoon <i>coverage/lcov-report</i>. HTML-muotoinen raportti kertoo mm. yksittäisen komponenttien testaamattomat koodirivit: -->
-Quite primitive HTML raport will be generated to the <i>coverage/lcov-report</i> directory. 
+A quite primitive HTML report will be generated to the <i>coverage/lcov-report</i> directory. 
 The report will tell us i.e the lines of untested code in each component:
 
 ![](../../images/5/19ea.png)
@@ -574,22 +574,22 @@ You can find the code for our current application in its entirety in the <i>part
 #### 5.13: Blog list tests, step1
 
 <!-- Tee testi, joka varmistaa että blogin näyttävä komponentti renderöi blogin titlen, authorin mutta ei renderöi oletusarvoisesti urlia eikä likejen määrää. -->
-Make a test, which checks that the component displaying a blog renders the blog's title and author, but does not render its url or number of likes by default
+Make a test which checks that the component displaying a blog renders the blog's title and author, but does not render its url or number of likes by default
 
 <!-- Lisää komponenttiin tarvittaessa testausta helpottavia CSS-luokkia. -->
 Add CSS-classes to the component to help the testing as necessary. 
 
-#### 5.14: Blog list tests, step1
+#### 5.14: Blog list tests, step2
 
 <!-- Tee testi, joka varmistaa että myös url ja likejen määrä näytetään kun blogin kaikki tiedot näyttävää nappia on painettu. -->
-Make a test, which checks that blog's url and number of likes are shown when the button controlling the shown details has been clicked. 
+Make a test which checks that blog's url and number of likes are shown when the button controlling the shown details has been clicked. 
 
-#### 5.15: Blog list tests, step2
+#### 5.15: Blog list tests, step3
 
 <!-- Tee testi, joka varmistaa, että jos komponentin <i>like</i>-nappia painetaan kahdesti, komponentin propsina saamaa tapahtumankäsittelijäfunktiota kutsutaan kaksi kertaa. -->
 Make a test which ensures that if the <i>like</i> button is clicked twice, the event handler the component received as props is called twice. 
 
-#### 5.16*: Blog list tests, step3
+#### 5.16*: Blog list tests, step4
 
 <!-- Tee uuden blogin luomisesta huolehtivalle lomakkelle testi, joka varmistaa, että lomake kutsuu propseina saamaansa takaisinkutsufunktiota oikeilla tiedoilla siinä vaiheessa kun blogi luodaan. -->
 Make a test for the new blog form. The test should check, that the form calls the event handler it received as props with the right details when a new blog is called. 
@@ -618,11 +618,14 @@ const author = component.container.querySelector('#author')
 
 ### Frontend integration tests
 
-In the previous part of the course material, we wrote integration tests for the backend that tested its logic and connected database through the API provided by the backend. When writing these tests, we made the conscious decision not to write unit tests, as the code for that backend is fairly simple, and it is likely that bugs in our application occur in more complicated scenarios that integration tests are well suited for.
+In the previous part of the course material, we wrote integration tests for the backend that tested its logic and connected the database through the API provided by the backend. When writing these tests, we made the conscious decision not to write unit tests, as the code for that backend is fairly simple, and it is likely that bugs in our application occur in more complicated scenarios than integration tests are well suited for.
 
 So far all of our tests for the frontend have been unit tests that have validated the correct functioning of individual components. Unit testing is useful at times, but even a comprehensive suite of unit tests is not enough to validate that the application works as a whole.
 
-Voisimme tehdä myös frontendille useiden komponenttien yhteistoiminnallisuutta testaavia integraatiotestejä, mutta se on oleellisesti yksikkötestausta hankalampaa, sillä itegraatiotesteissä jouduttaisiin ottamaan kantaa mm. palvelimelta haettavan datan mockaamiseen. Päätämmekin keskittyä koko sovellusta testaavien end to end -testien tekemiseen, jonka parissa jatkamme tämän osan viimeisessä jaksossa.
+<!-- Voisimme tehdä myös frontendille useiden komponenttien yhteistoiminnallisuutta testaavia integraatiotestejä, mutta se on oleellisesti yksikkötestausta hankalampaa, sillä itegraatiotesteissä jouduttaisiin ottamaan kantaa mm. palvelimelta haettavan datan mockaamiseen. Päätämmekin keskittyä koko sovellusta testaavien end to end -testien tekemiseen, jonka parissa jatkamme tämän osan viimeisessä jaksossa. -->
+We could also make integration tests for the frontend. Integration testing tests the collaboration of multiple components. It is considerably more difficult than unit testing, as we would have to for example mock data from the server. 
+We chose to concentrate making end to end tests to test the whole application, which we will work on in the last chapter of this part.
+
 
 ### Snapshot testing
 
@@ -630,6 +633,6 @@ Jest offers a completely different alternative to "traditional" testing called [
 
 The fundamental principle is to compare the HTML code defined by the component after it has changed to the HTML code that existed before it was changed.
 
-If the snapshot notices some change in the HTML defined by the component, then either it is new functionality or a "bug" caused by the accident. Snapshot tests notify the developer if the HTML code of the component changes. The developer has to tell Jest if the change was desired or undesired. If the change to the HTML code is unexpected it strongly implicates a bug, and developer can become aware of these potential issues easily thanks to snapshot testing.
+If the snapshot notices some change in the HTML defined by the component, then either it is new functionality or a "bug" caused by accident. Snapshot tests notify the developer if the HTML code of the component changes. The developer has to tell Jest if the change was desired or undesired. If the change to the HTML code is unexpected it strongly implicates a bug, and the developer can become aware of these potential issues easily thanks to snapshot testing.
 
 </div>

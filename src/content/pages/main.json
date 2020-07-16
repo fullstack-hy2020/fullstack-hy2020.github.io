@@ -16,10 +16,7 @@
     ],
     "university": "Helsingin yliopisto on Suomen vanhin ja suurin tiedekorkeakoulu, yhteensä 40 000 henkilön kansainvälinen tiedeyhteisö. Tieteen voimalla yliopisto on rakentanut yhteiskuntaa, sivistystä ja hyvinvointia jo vuodesta 1640.",
     "houston": "Suomalainen Houston Inc. on vuonna 2003 perustettu ketterä softatalo. Suunnittelemme ja toteutamme asiakkaillemme räätälöityjä digitaalisia palveluita liiketoiminnan tarpeisiin.",
-    "contacts": [
-      "Full stack open 2020",
-      "matti.luukkainen@helsinki.fi"
-    ],
+    "contacts": ["Full stack open 2020", "matti.luukkainen@helsinki.fi"],
     "licenced": "Materiaali on lisensoitu Creative Commons BY-NC-SA 3.0 -lisenssillä."
   },
   "en": {
@@ -34,15 +31,32 @@
     "telegram": "Telegram is a whatsapp / messenger-style discussion forum application that can be used with a browser, mobile devices, and Windows / Linux / OSX clients.",
     "notice": "NB: Inappropriate, degrading and discriminatory comments are strictly forbidden on the channel, and anyone who sends these types of messages will be permanently removed from the discussion.",
     "licence": [
-      "Parts 0-8 of the che course material is written by <a href='https://github.com/mluukkai'>Matti Luukkainen</a>, content of the part 9 is written by developers of <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>. Numerous <a href='https://github.com/fullstack-hy2020/misc/blob/master/contributors.md'>people</a> have improved and corrected the material both in content and spelling. You can also make improvements to the course material yourself. The course webpage is designed and created by <a target='_blank' href='https://www.houston-inc.com/'>Houston inc</a>, who have also audited the content of the course material. English translation by Ava Heinonen, Ilkka Kuisma, Harri Mehtälä and Jesper Pettersson",
+      "Parts 0-8 of the course material is written by <a href='https://github.com/mluukkai'>Matti Luukkainen</a>, the content of part 9 is written by developers from <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>. Numerous <a href='https://github.com/fullstack-hy2020/misc/blob/master/contributors.md'>people</a> have improved and corrected the material both in content and spelling. You can also make improvements to the course material yourself. The course webpage is designed and created by <a target='_blank' href='https://www.houston-inc.com/'>Houston inc</a>, who have also audited the content of the course material. Chinese translation by <a target='_blank' href='https://zhangwei.online/blog'>Zhang Wei</a>.",
       "The course material is licensed under <a href='https://creativecommons.org/licenses/by-nc-sa/3.0/'>Creative Commons BY-NC-SA 3.0 license</a>, which means that you are free to use and distribute the material, as long as the names of the original authors are not removed. If you make changes to the material and want to distribute the modified version, it must be licensed under the same license. Using the material for commercial purposes is forbidden without permission."
     ],
     "university": "The University of Helsinki is the oldest and largest science university in Finland, with an international scientific community of 40,000 people.",
     "houston": "The Finnish Houston Inc. is an agile software company founded in 2003. We design and implement customized digital services for our business.",
-    "contacts": [
-      "Full stack open 2020",
-      "matti.luukkainen@helsinki.fi"
-    ],
+    "contacts": ["Full stack open 2020", "matti.luukkainen@helsinki.fi"],
     "licenced": "The material is licensed under the Creative Commons BY-NC-SA 3.0 License."
+  },
+  "zh": {
+    "mainTitle": "深入浅出现代Web编程",
+    "intro": "一站式学习 React, Redux, Node.js, MongoDB, GraphQL 以及 TypeScript！这门课程会向你介绍基于 JavaScript 的现代 Web 编程技术。重点是利用 ReactJS 搭配Node.js开发的REST API，来搭建单页面应用程序（SPA：Single Page Application）",
+    "current": [
+      "2020 年的课程已经开放了，提交的最终截止日期是2021年1月10日。",
+      "今年的新课程加入了一个新的章节——<a href='/part9'>TypeScript</a>。这个章节的内容是由<a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>提供的",
+      "阅读<a href='/zh/part0/基础知识#changed-since-the-last-year'>这里</a>了解相比去年的课程增加了什么新内容！",
+      "你可以加入我们的Telegram 群组<a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>来讨论课程以及相关的内容。快来加入我们吧！"
+    ],
+    "telegram": "Telegram是一个类似 whatsapp / messenger（国内的微信【译者注】） 讨论组应用，是一个多端应用，你可以在浏览器、手机设备以及Windows / Linux / OSX 客户端使用它。",
+    "notice": "NB: Inappropriate, degrading and discriminatory comments are strictly forbidden on the channel, and anyone who sends these types of messages will be permanently removed from the discussion.",
+    "licence": [
+      "课程材料的0-8章节是<a href='https://github.com/mluukkai'>Matti Luukkainen</a> 所写的。第9章节的内容是由开发者<a href='https://github.com/mluukkai'>Matti Luukkainen</a>所著。很多<a href='https://github.com/fullstack-hy2020/misc/blob/master/contributors.md'>开发者</a>为了改进和修订课程材料做出了贡献，无论是课程内容还是拼写问题^_^。你也可以为这门课程的材料做出自己的贡献。这门课程的网站是由<a target='_blank' href='https://www.houston-inc.com/'>Houston inc</a>设计和创建的，它们同样审阅了这门课程的内容。英文版是由Ava Heinonen, Ilkka Kuisma, Harri Mehtälä and Jesper Pettersson 翻译的。中文版是由<a target='_blank' href='https://zhangwei.online/blog'>ZhangWei</a>翻译的。",
+      "这门课程内容的版权在<a href='https://creativecommons.org/licenses/by-nc-sa/3.0/'>Creative Commons BY-NC-SA 3.0 license</a>框架下执行。也就是说你可以自由的使用和分发课程材料，但要保留原作者信息，不能删除他们。如果你想要修改并分发修改后的版本，同样需要遵循这套协议。在没有许可的情况下将这门课程材料用于商业目的，是明令禁止的。"
+    ],
+    "university": "赫尔辛基大学（The University of Helsinki）是芬兰历史最悠久、规模最大的学术型大学，拥有40,000人的国际科学团体。",
+    "houston": "芬兰的Houston Inc. 是一家敏捷型软件公司，成立于2003年。我们为业务的设计和实施提供个性的数字化解决方案。",
+    "contacts": ["Full stack open 2020", "matti.luukkainen@helsinki.fi"],
+    "licenced": "所有内容基于Creative Commons BY-NC-SA 3.0 License.协议框架。"
   }
 }

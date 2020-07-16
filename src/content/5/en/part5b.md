@@ -192,7 +192,7 @@ Our goal is to implement a new <i>Togglable</i> component that can be used in th
 ```
 
 
-The way that the component is used is slightly different from our previous components. The component has both an opening and a closing tags which surround a <i>LoginForm</i> component. In React terminology <i>LoginForm</i> is a child component of <i>Togglable</i>.
+The way that the component is used is slightly different from our previous components. The component has both opening and closing tags which surround a <i>LoginForm</i> component. In React terminology <i>LoginForm</i> is a child component of <i>Togglable</i>.
 
 
 We can add any React elements we want between the opening and closing tags of <i>Togglable</i>, like this for example:
@@ -404,9 +404,11 @@ There are many ways to implement closing the form from the parent component, but
 Let's make the following changes to the <i>App</i> component:
 
 ```js
+import React, { useState, useRef } from 'react' // highlight-line
+
 const App = () => {
   // ...
-  const noteFormRef = React.createRef() // highlight-line
+  const noteFormRef = useRef() // highlight-line
 
   const noteForm = () => (
     <Togglable buttonLabel='new note' ref={noteFormRef}>  // highlight-line
@@ -419,7 +421,7 @@ const App = () => {
 ```
 
 
-The [createRef](https://reactjs.org/docs/react-api.html#reactcreateref) method is used to create a <i>noteFormRef</i> ref, that is assigned to the <i>Togglable</i> component containing the creation note form. The <i>noteFormRef</i> variable acts as a reference to the component.
+The [useRef](https://reactjs.org/docs/hooks-reference.html#useref) hook is used to create a <i>noteFormRef</i> ref, that is assigned to the <i>Togglable</i> component containing the creation note form. The <i>noteFormRef</i> variable acts as a reference to the component. This hook ensures the same reference (ref) is kept throughout re-renders of the component.
 
 
 We also make the following changes to the <i>Togglable</i> component:
@@ -485,7 +487,7 @@ const App = () => {
 
 To recap, the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) function is a React hook, that is used for defining functions in a component which can be invoked from outside of the component.
 
-This trick works for changing the state of a component, but it looks a bit unpleasant. We could have accomplished the same functionality with slightly cleaner code using "old React" class-based components. We will take a look at these class components at the part 7 of the course material. So far this is the only situation where using React hooks leads to code that is not cleaner than with class components.
+This trick works for changing the state of a component, but it looks a bit unpleasant. We could have accomplished the same functionality with slightly cleaner code using "old React" class-based components. We will take a look at these class components during part 7 of the course material. So far this is the only situation where using React hooks leads to code that is not cleaner than with class components.
 
 There are also [other use cases](https://reactjs.org/docs/refs-and-the-dom.html) for refs than accessing React components.
 
@@ -557,8 +559,7 @@ The form closes when a new blog is created.
 Separate the form for creating a new blog into its own component (if you have not already done so), and 
 move all the states required for creating a new blog to this component. 
 
-<!-- Komponentin tulee siis toimia samaan tapaan kuin tämän osan [materiaalin](http://localhost:8000/osa5/props_children_ja_proptypet#lomakkeiden-tila) komponentin <i>NewNote</i>. -->
-The component must work like the <i>NewNote</i> component from the [material](/osa5/props_children_ja_proptypet#lomakkeiden-tila) of this part.
+The component must work like the <i>NewNote</i> component from the [material](/en/part5/props_children_and_proptypes) of this part.
 
 #### 5.7* Blog list frontend, step7
 
@@ -599,12 +600,9 @@ const Blog = ({ blog }) => {
 )}
 ```
 
-**NB1:** you can make the name of a blog post click-able as shown in the part of the code that is highlighted.
+**NB:** even though the functionality implemented in this part is almost identical to the functionality provided by the <i>Togglable</i> component, the component can not be used directly to achieve the desired behavior. The easiest solution will be to add state to the blog post that controls the displayed form of the blog post.
 
-
-**NB2:** even though the functionality implemented in this part is almost identical to the functionality provided by the <i>Togglable</i> component, the component can not be used directly to achieve the desired behavior. The easiest solution will be to add state to the blog post that controls the displayed form of the blog post.
-
-#### 5.8*: Blog list frontend, step7
+#### 5.8*: Blog list frontend, step8
 
 Implement the functionality for the like button. Likes are increased by making an HTTP _PUT_ request to the unique address of the blog post in the backend.
 
@@ -639,11 +637,11 @@ You would have to make an HTTP PUT request to the address <i>/api/blogs/5a43fde2
 
 **One last warning:** if you notice that you are using async/await and the _then_-method in the same code, it is almost certain that you are doing something wrong. Stick to using one or the other, and never use both at the same time "just in case". 
 
-#### 5.9*: Blog list frontend, step8
+#### 5.9*: Blog list frontend, step9
 
 Modify the application to list the blog posts by the number of <i>likes</i>. Sorting the blog posts can be done with the array [sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) method.
 
-#### 5.10*: Blog list frontend, step9
+#### 5.10*: Blog list frontend, step10
 
 Add a new button for deleting blog posts. Also implement the logic for deleting blog posts in the backend.
 
@@ -684,7 +682,7 @@ import PropTypes from 'prop-types'
 
 const Togglable = React.forwardRef((props, ref) => {
   // ..
-}
+})
 
 Togglable.propTypes = {
   buttonLabel: PropTypes.string.isRequired
@@ -794,6 +792,8 @@ module.exports = {
 }
 ```
 
+NOTE: If you are using Visual Studio Code together with ESLint plugin, you might need to add additional workspace setting for it to work. If you are seeing ```Failed to load plugin react: Cannot find module 'eslint-plugin-react' ``` additional configuration is needed. Adding line ```"eslint.workingDirectories": [{ "mode": "auto" }] ``` to settings.json in the workspace seems to work. See [here](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807) for more information. 
+
 Let's create [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) file with the following contents to the repository root
 
 ```bash
@@ -821,13 +821,13 @@ Let us also create a npm script to run the lint:
 }
 ```
 
-Compomnent _Togglable_ causesa a nasty looking warning <i>Component definition is missing display name</i>: 
+Component _Togglable_ causes a nasty looking warning <i>Component definition is missing display name</i>: 
 
 ![](../../images/5/25ea.png)
 
 The react-devtools also reveals that the component does not have name:
 
-![](../../images/5/25ea.png)
+![](../../images/5/26ea.png)
 
 Fortunately this is easy to fix
 

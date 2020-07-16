@@ -158,7 +158,7 @@ would print the following to the console
 because at first the state of the store is 0. After three <i>INCREMENT</i>-actions the state is 3. In the end, after <i>ZERO</i> and <i>DECREMENT</i> actions, the state is -1.
 
 
-The third important method the store has is [subscribe](https://redux.js.org/api/store#subscribelistener), which is used to create recall functions the store calls when its state is changed. 
+The third important method the store has is [subscribe](https://redux.js.org/api/store#subscribelistener), which is used to create callback functions the store calls when its state is changed.
 
 
 If, for example, we would add the following function to subscribe, <i>every change in the store</i> would be printed to the console.
@@ -419,7 +419,7 @@ describe('noteReducer', () => {
     deepFreeze(state)
     const newState = noteReducer(state, action)
 
-    expect(newState.length).toBe(1)
+    expect(newState).toHaveLength(1)
     expect(newState).toContainEqual(action.data)
   })
 })
@@ -457,7 +457,7 @@ test('returns new state with action TOGGLE_IMPORTANCE', () => {
   deepFreeze(state)
   const newState = noteReducer(state, action)
 
-  expect(newState.length).toBe(2)
+  expect(newState).toHaveLength(2)
 
   expect(newState).toContainEqual(state[0])
 
@@ -491,7 +491,7 @@ const noteReducer = (state = [], action) => {
   switch(action.type) {
     case 'NEW_NOTE':
       return state.concat(action.data)
-    case 'TOGGLE_IMPORTANCE':
+    case 'TOGGLE_IMPORTANCE': {
       const id = action.data.id
       const noteToChange = state.find(n => n.id === id)
       const changedNote = { 
@@ -501,6 +501,7 @@ const noteReducer = (state = [], action) => {
       return state.map(note =>
         note.id !== id ? note : changedNote 
       )
+     }
     default:
       return state
   }
@@ -1081,7 +1082,7 @@ const App = () => {
 ```
 
 <!-- <i>useSelector</i> saa parametrikseen funktion, joka hakee tai valitsee (engl. select) tarvittavan datan redux-storesta. Tarvitsemme nyt kaikki muistiinpanot, eli selektorifunktiomme palauttaa koko staten, eli on muotoa  -->
-<i>useSelector</i> receives a function as a paramter. The function either searches for or selects data from the redux-store. 
+<i>useSelector</i> receives a function as a parameter. The function either searches for or selects data from the redux-store. 
 Here we need all of the notes, so our selector function returns the whole state:
 
 
@@ -1098,7 +1099,6 @@ which is a shorthand for
 }
 ```
 
-<!-- Yleensä selektorifunktiot ovat mielenkiinoisempia, ja valitsevat vain osan redux-storen sisällöstä. Voisimme esimerkiksi hakea storesta ainoastaan tärkeät muistiinpanot seuraavasti -->
 Usually selector functions are a bit more interesting, and return only selected parts of the contents of the redux-store. 
 We could for example return only notes marked as important:
 
@@ -1151,7 +1151,7 @@ const Note = ({ note, handleClick }) => {
   return(
     <li onClick={handleClick}>
       {note.content} 
-      <strong>{note.important ? 'important' : ''}</strong>
+      <strong> {note.important ? 'important' : ''}</strong>
     </li>
   )
 }

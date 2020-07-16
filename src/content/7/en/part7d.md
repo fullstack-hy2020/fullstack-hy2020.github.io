@@ -173,7 +173,7 @@ App()
 
 When we bundle the application again with the _npm run build_ command, we notice that webpack has acknowledged both files:
 
-![](../../images/7/2ea.png)
+![](../../images/7/20ea.png)
 
 Our application code can be found at the end of the bundle file in a rather obscure format:
 
@@ -753,7 +753,7 @@ Our goal is to configure the application with webpack in such a way that, when u
 
 The bundled file will then be configured to use the backend available at the <https://blooming-atoll-75500.herokuapp.com/api/notes> url.
 
-We will install <i>axios</i>, start the json-server, and then make the necessary changes to the application. For the sake of changing things up, we will fetch the notes from the backend with our [custom hook](/en/part5/custom_hooks) called _useNotes_:
+We will install <i>axios</i>, start the json-server, and then make the necessary changes to the application. For the sake of changing things up, we will fetch the notes from the backend with our [custom hook](/en/part7/custom_hooks) called _useNotes_:
 
 ```js
 import React, { useState, useEffect } from 'react'
@@ -776,7 +776,7 @@ const useNotes = (url) => {
 const App = () => {
   const [counter, setCounter] = useState(0)
   const [values, setValues] = useState([])
-  const url = 
+  const url = 'https://blooming-atoll-75500.herokuapp.com/api/notes'
   const notes = useNotes(url) // highlight-line
 
   const handleClick = () => {
@@ -843,7 +843,7 @@ const config = (env, argv) => {
   // highlight-start
   const backend_url = argv.mode === 'production'
     ? 'https://blooming-atoll-75500.herokuapp.com/api/notes'
-    : 'http://localhost:3001/notes'
+    : 'http://localhost:3001/api/notes'
   // highlight-end
 
   return {

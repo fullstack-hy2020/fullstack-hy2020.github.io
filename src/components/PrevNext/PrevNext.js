@@ -20,11 +20,11 @@ const hasNext = (letter, part, lang) => {
   );
 };
 
-const labelOsaPart = lang => (lang === 'en' ? 'Part' : 'Osa');
+const labelOsaPart = lang => (lang === 'en' ? 'Part' : lang === 'zh' ? 'Part' :'Osa');
 const prevPartText = lang =>
-  lang === 'en' ? 'Previous part' : 'Edellinen osa';
-const nextPartText = lang => (lang === 'en' ? 'Next part' : 'Seuraava osa');
-const langUrl = lang => `/${lang === 'en' ? 'en/part' : 'osa'}`;
+  lang === 'en' ? 'Previous part' :  lang === 'zh' ? '上一部分' : 'Edellinen osa';
+const nextPartText = lang => (lang === 'en' ? 'Next part' : lang === 'zh' ? '下一部分' :'Seuraava osa');
+const langUrl = lang => `/${lang === 'en' ? 'en/part' : lang === 'zh' ? 'zh/part' : 'osa'}`;
 
 const PrevNext = ({ part, letter, lang }) => {
   const getPrev = () => {

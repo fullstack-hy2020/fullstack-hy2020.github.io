@@ -257,7 +257,7 @@ Käytetty <em>map</em>-kikka saattaa olla aluksi hieman hämmentävä. Asiaa kan
 
 ### Palvelimen kanssa tapahtuvan kommunikoinnin eristäminen omaan moduuliin
 
-<i>App</i>-komponentti alkaa kasvaa uhkaavasti kun myös palvelimen kanssa kommunikointi tapahtuu komponentissa. [Single responsibility](https://en.wikipedia.org/wiki/Single_responsibility_principle) -periaatteen hengessä kommunikointi onkin viisainta eristää omaan [moduuliinsa](#refaktorointia---moduulit).
+<i>App</i>-komponentti alkaa kasvaa uhkaavasti kun myös palvelimen kanssa kommunikointi tapahtuu komponentissa. [Single responsibility](https://en.wikipedia.org/wiki/Single_responsibility_principle) -periaatteen hengessä kommunikointi onkin viisainta eristää omaan [moduuliinsa](/osa2/kokoelmien_renderointi_ja_moduulit#refaktorointia-moduulit).
 
 Luodaan hakemisto <i>src/services</i> ja sinne tiedosto <i>notes.js</i>:
 
@@ -475,7 +475,7 @@ const App = () => {
 
 Tämä kaikki on hieman monimutkaista ja asian selittäminen varmaan vain vaikeuttaa sen ymmärtämistä. Internetistä löytyy paljon vaihtelevatasoista materiaalia aiheesta, esim. [tämä](https://javascript.info/promise-chaining).
 
-[You do not know JS](https://github.com/getify/You-Dont-Know-JS) sarjan kirja "Async and performance" selittää asian [hyvin](https://github.com/getify/You-Dont-Know-JS/blob/master/async%20%26%20performance/ch3.md) mutta tarvitsee selitykseen kohtuullisen määrän sivuja.
+[You do not know JS](https://github.com/getify/You-Dont-Know-JS) sarjan kirja "Async and performance" selittää asian [hyvin](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch3.md) mutta tarvitsee selitykseen kohtuullisen määrän sivuja.
 
 Promisejen ymmärtäminen on erittäin keskeistä modernissa Javascript-sovelluskehityksessä, joten asiaan kannattaa uhrata kohtuullisessa määrin aikaa.
 
@@ -533,7 +533,7 @@ Koska olion kenttien nimet ovat samat kuin niiden arvon määrittelevien muuttuj
 }
 ```
 
-Eli moduulin määrittely yksinkertaisuu seuraavaan muotoon 
+Moduulin määrittely yksinkertaistettuna:
 
 ```js
 import axios from 'axios'
@@ -608,7 +608,7 @@ Kun valemuistiinpanon tärkeyttä yritetään muuttaa, konsoliin tulee virheilmo
 
 Sovelluksen tulisi pystyä käsittelemään tilanne hallitusti. Jos konsoli ei ole auki, ei käyttäjä huomaa mitään muuta kuin sen, että muistiinpanon tärkeys ei vaihdu napin painelusta huolimatta.
 
-Jo [aiemmin](/en/part2/getting_data_from_server#axios-and-promises) mainittiin, että promisella voi olla kolme tilaa. Kun HTTP-pyyntö epäonnistuu, menee pyyntöä vastaava promise tilaan <i>rejected</i>. Emme tällä hetkellä käsittele koodissamme promisen epäonnistumista mitenkään.
+Jo [aiemmin](/osa2/palvelimella_olevan_datan_hakeminen#axios-ja-promiset) mainittiin, että promisella voi olla kolme tilaa. Kun HTTP-pyyntö epäonnistuu, menee pyyntöä vastaava promise tilaan <i>rejected</i>. Emme tällä hetkellä käsittele koodissamme promisen epäonnistumista mitenkään.
 
 Promisen epäonnistuminen [käsitellään](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) antamalla <em>then</em>-metodille parametriksi myös toinen takaisinkutsufunktio, jota kutsutaan siinä tapauksessa jos promise epäonnistuu.
 

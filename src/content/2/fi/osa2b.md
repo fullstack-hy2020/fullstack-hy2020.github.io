@@ -22,8 +22,8 @@ const App = (props) => { // highlight-line
     <div>
       <h1>Notes</h1>
       <ul>
-        {notes.map((note, i) => 
-          <Note key={i} note={note} />
+        {notes.map(note => 
+          <Note key={note.id} note={note} />
         )}
       </ul>
     </div>
@@ -72,8 +72,8 @@ const App = (props) => {
     <div>
       <h1>Notes</h1>
       <ul>
-        {notes.map((note, i) => 
-          <Note key={i} note={note} />
+        {notes.map(note => 
+          <Note key={note.id} note={note} />
         )}
       </ul>
       // highlight-start 
@@ -132,8 +132,8 @@ const App = (props) => {
     <div>
       <h1>Notes</h1>
       <ul>
-        {notes.map((note, i) => 
-          <Note key={i} note={note} />
+        {notes.map(note => 
+          <Note key={note.id} note={note} />
         )}
       </ul>
       <form onSubmit={addNote}>
@@ -173,8 +173,8 @@ const App = (props) => {
     <div>
       <h1>Notes</h1>
       <ul>
-        {notes.map((note, i) => 
-          <Note key={i} note={note} />
+        {notes.map(note => 
+          <Note key={note.id} note={note} />
         )}
       </ul>
       <form onSubmit={addNote}>
@@ -335,7 +335,7 @@ notes.filter(note => note.important)
 
 Tässä käytettiin kuitenkin ensin vertailuoperaattoria, mm. korostamaan erästä tärkeää seikkaa: Javascriptissa <em>arvo1 == arvo2</em> ei toimi kaikissa tilanteissa loogisesti ja onkin varmempi käyttää aina vertailuissa muotoa <em>arvo1 === arvo2</em>. Enemmän aiheesta [täällä](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness).
 
-Filtteröinnin toimivuutta voi jo nyt kokeilla vaihtelemalla sitä, miten tilan kentän <em>showAll</em> alkuarvo määritelään konstruktorissa.
+Filtteröinnin toimivuutta voi jo nyt kokeilla vaihtelemalla sitä, miten tilan kentän <em>showAll</em> alkuarvo määritellään konstruktorissa.
 
 Lisätään sitten toiminnallisuus, joka mahdollistaa <em>showAll</em>:in tilan muuttamisen sovelluksesta.
 
@@ -474,10 +474,10 @@ Anna tilanteessa virheilmoitus komennolla [alert](https://developer.mozilla.org/
 `${newName} is already added to phonebook`
 ```
 
-Jos muuttujalla <em>newName</em> on arvona <i>arto</i>, on tuloksena merkkijono
+Jos muuttujalla <em>newName</em> on arvona <i>Arto Hellas</i>, on tuloksena merkkijono
 
 ```js
-`arto is already added to phonebook`
+`Arto Hellas is already added to phonebook`
 ```
 
 Sama toki hoituisi javamaisesti merkkijonojen plus-metodilla
@@ -527,11 +527,11 @@ const App = () => {
 }
 ```
 
-Näin vältytään turhalta manuaaliselta työltä, missä testaaminen edellyttäisi myös testiaineiston syöttämistä käsin soveluksen lomakkeen kautta.
+Näin vältytään turhalta manuaaliselta työltä, missä testaaminen edellyttäisi myös testiaineiston syöttämistä käsin sovelluksen lomakkeen kautta.
 
 <h4>2.10: puhelinluettelo step5</h4>
 
-Jos koko sovelluksesi on tehty yhteen komponenttiin, refaktoroi sitä eriyttämällä sopivia komponentteja. Pidä kuitenkin edelleen kaikki tila sekä tapahtumankäsittelijäfunktiot juurikomponentissa <i>App</i>.
+Jos koko sovelluksesi on tehty yhteen komponenttiin, refaktoroi sitä eriyttämällä sopivia komponentteja. Pidä kuitenkin edelleen kaikki tila- sekä tapahtumankäsittelijäfunktiot juurikomponentissa <i>App</i>.
 
 Riittää että erotat sovelluksesta <i>**kolme**</i> komponenttia. Hyviä kandidaatteja ovat esim. filtteröintilomake, uuden henkilön lisäävä lomake, kaikki henkilöt renderöivä komponentti sekä yksittäisen henkilön renderöivä komponentti.
 

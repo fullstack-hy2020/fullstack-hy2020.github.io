@@ -55,7 +55,7 @@ export class DeveloperStory extends Component {
               onClick={() => this.setState({ readMore: true })}
               className="col-10 developer-story__read-more"
             >
-              {lang === 'en' ? 'Read more' : 'Lue lisää'}
+              {lang === 'en' ? 'Read more' :lang === 'zh' ? '阅读更多' :  'Lue lisää'}
             </button>
           )}
 

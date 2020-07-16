@@ -24,7 +24,7 @@ Create a file named <i>db.json</i> in the root directory of the project with the
     },
     {
       "id": 2,
-      "content": "Browser can execute only Javascript",
+      "content": "Browser can execute only JavaScript",
       "date": "2019-05-30T18:39:34.091Z",
       "important": false
     },
@@ -38,9 +38,9 @@ Create a file named <i>db.json</i> in the root directory of the project with the
 }
 ```
 
-You can [install](https://github.com/typicode/json-server#install) JSON server globally on your machine using the command _npm install -g json-server_. A global installation requires administrative privileges, which means that it is not possible on the faculty computers or freshman laptops.
+You can [install](https://github.com/typicode/json-server#getting-started) JSON server globally on your machine using the command _npm install -g json-server_. A global installation requires administrative privileges, which means that it is not possible on the faculty computers or freshman laptops.
 
-However, a global installation is not necessary, since we can run the <i>json-server</i> using the command _npx_:
+However, a global installation is not necessary.  From the root directory of your app, we can run the <i>json-server</i> using the command _npx_:
 
 ```js
 npx json-server --port 3001 --watch db.json
@@ -110,7 +110,7 @@ When an asynchronous operation is completed, or more specifically, at some point
 
 Currently, JavaScript engines are <i>single-threaded</i>, which means that they cannot execute code in parallel. As a result, it is a requirement in practise to use a non-blocking model for executing IO operations. Otherwise, the browser would "freeze" during, for instance, the fetching of data from a server.
 
-Another consequence of this single threaded nature of Javascript engines is that if some code execution takes up a lot of time, the browser will get stuck for the duration of the execution. If we added the following code at the top of our application:
+Another consequence of this single threaded nature of JavaScript engines is that if some code execution takes up a lot of time, the browser will get stuck for the duration of the execution. If we added the following code at the top of our application:
 
 ```js
 setTimeout(() => {
@@ -197,7 +197,7 @@ Axios is now included among the other dependencies:
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
-    "axios": "^0.19.1", // highlight-line
+    "axios": "^0.19.2", // highlight-line
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.0"
@@ -260,6 +260,8 @@ There is a fine difference in the parameters. <i>axios</i> is installed as a run
 
 Now we are ready to use axios. Going forward, json-server is assumed to be running on port 3001.
 
+NB: To run json-server and your react app simultaneously, you may need to use two terminal windows. One to keep json-sever running and the other to run react-app.
+
 The library can be brought into use the same way other libraries, e.g. React, are, i.e. by using an appropriate <em>import</em> statement.
 
 
@@ -307,7 +309,7 @@ The following is printed to the console:
 
 ![](../../images/2/17e.png)
 
-The Javascript runtime environment calls the callback function registered by the <em>then</em> method providing it with a <em>response</em> object as a parameter. The <em>response</em> object contains all the essential data related to the response of an HTTP GET request, which would include the returned <i>data</i>, <i>status code</i>, and <i>headers</i>.
+The JavaScript runtime environment calls the callback function registered by the <em>then</em> method providing it with a <em>response</em> object as a parameter. The <em>response</em> object contains all the essential data related to the response of an HTTP GET request, which would include the returned <i>data</i>, <i>status code</i>, and <i>headers</i>.
 
 Storing the promise object in a variable is generally unnecessary, and it's instead common to chain the <em>then</em> method call to the axios method call, so that it follows it directly:
 
@@ -317,7 +319,6 @@ axios.get('http://localhost:3001/notes').then(response => {
   console.log(notes)
 })
 ```
-
 
 
 The callback function now takes the data contained within the response, stores it in a variable and prints the notes to the console.
@@ -335,18 +336,18 @@ axios
   })
 ```
 
-The data returned by the server is plain text, basically just one long string. The axios library is still able to parse the data into a Javascript array, since the server has specified that the data format is <i>application/json; charset=utf-8</i> (see previous image) using the <i>content-type</i> header.
+The data returned by the server is plain text, basically just one long string. The axios library is still able to parse the data into a JavaScript array, since the server has specified that the data format is <i>application/json; charset=utf-8</i> (see previous image) using the <i>content-type</i> header.
 
 We can finally begin using the data fetched from the server.
 
-Let's do it "poorly" first by putting the <i>App</i> component representing the application inside the callback function. This is done by changing <i>index.js</i> to the following form:
+Let's try and request the notes from our local server and render them, initially as the App component. Please note that this approach has many issues, as we're rendering the entire <i>App</i> component only when we successfully retrieve a response:
 
 ```js
 import ReactDOM from 'react-dom'
 import React from 'react'
 import App from './App'
 
-import axios from 'axios'
+import axios from 'axios' // highlight-line
 
 axios.get('http://localhost:3001/notes').then(response => {
   const notes = response.data
@@ -364,14 +365,14 @@ What's not immediately obvious, however, is where the command <em>axios.get</em>
 
 ### Effect-hooks
 
-We have already used [state hooks](https://reactjs.org/docs/hooks-state.html) that were introduced along with React version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), which provide state to React components defined as functions. Version 16.8.0 also introduces the [effect hooks](https://reactjs.org/docs/hooks-effect.html) as a new feature. In the words of the docs:
+We have already used [state hooks](https://reactjs.org/docs/hooks-state.html) that were introduced along with React version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), which provide state to React components defined as functions - the so-called <i>functional components</i>. Version 16.8.0 also introduces the [effect hooks](https://reactjs.org/docs/hooks-effect.html) as a new feature. As per the official docs:
 
 > <i>The Effect Hook lets you perform side effects in function components.</i>
-> <i>Data fetching, setting up a subscription, and manually changing the DOM in React components are all examples of side effects. </i>
+> <i>Data fetching, setting up a subscription, and manually changing the DOM in React components are all examples of side effects.</i>
 
 As such, effect hooks are precisely the right tool to use when fetching data from a server.
 
-Let's remove the fetching of data from <i>index.js</i>. There is no longer a need to pass data as props to the <i>App</i> component. So <i>index.js</i> simplifies to:
+Let's remove the fetching of data from <i>index.js</i>. Since we're gonna be retrieving the notes from the server, there is no longer a need to pass data as props to the <i>App</i> component. So <i>index.js</i> can be simplified to:
 
 ```js
 ReactDOM.render(<App />, document.getElementById('root'))
@@ -381,11 +382,11 @@ The <i>App</i> component changes as follows:
 
 ```js
 import React, { useState, useEffect } from 'react' // highlight-line
-import axios from 'axios' // highlight-line
+import axios from 'axios'
 import Note from './components/Note'
 
 const App = () => {
-  const [notes, setNotes] = useState([]) // highlight-line
+  const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
 
@@ -483,7 +484,7 @@ So by default the effect is <i>always</i> run after the component has been rende
 
 The second parameter of <em>useEffect</em> is used to [specify how often the effect is run](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect). If the second parameter is an empty array <em>[]</em>, then the effect is only run along with the first render of the component.
 
-There are many possible use cases for effect hook other than fetching data from the server. This suffices us for now.
+There are many possible use cases for an effect hook other than fetching data from the server. However, this use is sufficient for us, for now.
 
 Think back to the sequence of events we just discussed. Which parts of the code are run? In what order? How often? Understanding the order of events is critical!
 
@@ -503,7 +504,7 @@ useEffect(() => {
 }, [])
 ```
 
-A reference to an event handler function is assigned to the variable <em>eventHandler</em>. The promise returned by the <em>get</em> method of Axios is stored in the variable <em>promise</em>. The registration of the callback happens by giving the <em>eventHandler</em> variable, referring to the event-handler function, as a parameter to the then method of the promise. It isn't usually necessary to assign functions and promises to variables, and a more compact way of representing things, as seen further above, is sufficient.
+A reference to an event handler function is assigned to the variable <em>eventHandler</em>. The promise returned by the <em>get</em> method of Axios is stored in the variable <em>promise</em>. The registration of the callback happens by giving the <em>eventHandler</em> variable, referring to the event-handler function, as a parameter to the <em>then</em> method of the promise. It isn't usually necessary to assign functions and promises to variables, and a more compact way of representing things, as seen further above, is sufficient.
 
 ```js
 useEffect(() => {
@@ -519,7 +520,7 @@ useEffect(() => {
 
 We still have a problem in our application. When adding new notes, they are not stored on the server.
 
-The code so far for the application can be found in full on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-4) in the branch <i>part2-4</i>.
+The code for the application, as described so far, can be found in full on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-4), on branch <i>part2-4</i>.
 
 ### The development runtime environment 
 
@@ -527,9 +528,9 @@ The configuration for the whole of our application has steadily grown more compl
 
 ![](../../images/2/18e.png)
 
-The JavaScript code making up our React application is run in the browser. The browser gets the Javascript from the <i>React dev server</i>, which is the application that runs after running the command <em>npm start</em>. The dev-server transforms the JavaScript into a format understood by the browser. Among other things, it stitches together Javascript from different files into one file. We'll discuss the dev-server in more detail in part 7 of the course.
+The JavaScript code making up our React application is run in the browser. The browser gets the JavaScript from the <i>React dev server</i>, which is the application that runs after running the command <em>npm start</em>. The dev-server transforms the JavaScript into a format understood by the browser. Among other things, it stitches together JavaScript from different files into one file. We'll discuss the dev-server in more detail in part 7 of the course.
 
-The React application running in the browser fetches the JSON formatted data from <i>json-server</i> running on port 3001 on the machine. json-server gets its data from the file <i>db.json</i>.
+The React application running in the browser fetches the JSON formatted data from <i>json-server</i> running on port 3001 on the machine. The server we query the data from - <i>json-server</i> - gets its data from the file <i>db.json</i>.
 
 At this point in development, all the parts of the application happen to reside on the software developer's machine, otherwise known as localhost. The situation changes when the application is deployed to the internet. We will do this in part 3.
 
@@ -595,7 +596,7 @@ Modify the application such that the initial state of the data is fetched from t
 
 <h4>2.12* Data for countries, step1</h4>
 
-The API [https://restcountries.eu](https://restcountries.eu) provides a lot data for different countries in a machine readable format, a so-called REST API.
+The API [https://restcountries.eu](https://restcountries.eu) provides a data for different countries in a machine readable format, a so-called REST API.
 
 Create an application, in which one can look at data of various countries. The application should probably get the data from the endpoint [all](https://restcountries.eu/#api-endpoints-all).
 
@@ -605,15 +606,15 @@ If there are too many (over 10) countries that match the query, then the user is
 
 ![](../../images/2/19b1.png)
 
-If there are fewer than ten countries, but more than one, then all countries matching the query are shown:
+If there are ten or fewer countries, but more than one, then all countries matching the query are shown:
 
 ![](../../images/2/19b2.png)
 
-When there is only one country matching the query, then the basic data of the country, its flag and the languages spoken in that country are shown:
+When there is only one country matching the query, then the basic data of the country, its flag and the languages spoken there, are shown:
 
 ![](../../images/2/19b3.png)
 
-**NB**: it is enough that your application works for most of the countries. Some countries, like <i>Sudan</i>, can cause trouble, since the name of the country is part of the name of another country, <i>South Sudan</i>. You need not worry about these edge cases.
+**NB**: It is enough that your application works for most of the countries. Some countries, like <i>Sudan</i>, can cause be hard to support, since the name of the country is part of the name of another country, <i>South Sudan</i>. You need not to worry about these edge cases.
 
 **WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application.
 
@@ -625,13 +626,13 @@ Improve on the application in the previous exercise, such that when the names of
 
 ![](../../images/2/19b4.png)
 
-In this exercise it is also enough that your application works for most of the countries. Countries whose name appears in the name of another country, like <i>Sudan</i> can be ignored.
+In this exercise it is also enough that your application works for most of the countries. Countries whose name appears in the name of another country, like <i>Sudan</i>, can be ignored.
 
 <h4>2.14*: Data for countries, step3</h4>
 
 **There is still a lot to do in this part, so don't get stuck on this exercise!**
 
-Add to the view showing the data of a single country the weather report for the capital of that country. There are dozens of providers for weather data. I used [https://weatherstack.com/](https://weatherstack.com/).
+Add to the view showing the data of a single country, the weather report for the capital of that country. There are dozens of providers for weather data. I used [https://weatherstack.com/](https://weatherstack.com/).
 
 ![](../../images/2/19ba.png)
 
@@ -642,7 +643,9 @@ Add to the view showing the data of a single country the weather report for the 
 Assuming the api-key is <i>t0p53cr3t4p1k3yv4lu3</i>, when the application is started like so:
 
 ```bash
-REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start
+REACT_APP_API_KEY='t0p53cr3t4p1k3yv4lu3' npm start // For Linux/macOS Bash
+($env:REACT_APP_API_KEY='t0p53cr3t4p1k3yv4lu3') -and (npm start) // For Windows PowerShell
+set REACT_APP_API_KEY='t0p53cr3t4p1k3yv4lu3' && npm start // For Windows cmd.exe
 ```
 
 <!-- koodista päästään avaimen arvoon käsiksi olion _process.env_ kautta: -->
@@ -651,5 +654,13 @@ you can access the value of the key from the _process.env_ object:
 ```js
 const api_key = process.env.REACT_APP_API_KEY
 // variable api_key has now the value set in startup
+```
+
+Note that if you created the application using `npx create-react-app ...` and you want to use a different name for your environment variable then the environment variable name must still begin with `REACT_APP_`. You can also use a `.env` file rather than defining it on the command line each time by creating a file entitled '.env' in the root of the project and adding the following. 
+
+```
+# .env
+
+REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3
 ```
 </div>

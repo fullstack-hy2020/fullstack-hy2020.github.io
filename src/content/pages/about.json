@@ -98,5 +98,50 @@
         ]
       }
     ]
+  },
+  "zh": {
+    "name": "General",
+    "intro": [
+      "本课程是介绍如何使用JavaScript开发现代Web应用程序。 课程的重点是使用ReactJS构建单页面应用程序（SPA），并使用由Node.js构建REST API。 该课程还包含介绍GraphQL的部分，这是REST API的现代替代方案。",
+      "课程还包括测试、配置和环境管理，以及使用 MongoDB 来存储应用的数据",
+      "今年（2020）的课程还包含了一个新的部分—— <a href='/part9'>TypeScript</a>，这部分课程内容是由<a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>提供的",
+      "本门课程价值3~9个学分，课程内容与赫尔辛基大学<a href='https://www.helsinki.fi/en/computer-science'>计算机科学系</a>的2020春季课程<a href='https://fullstack-hy2020.github.io/'>【全栈课程】</a>相同，这门课附带一个相关的<a href='/osa0/yleista#full-stack-harjoitustyo'>项目作业</a>，价值1~10个学分",
+
+      "本门课的合作伙伴和友情机构包括<a href='https://www.houston-inc.com/'>Houston Inc</a>, <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>, <a href='https://elisa.fi/'>Elisa</a>, <a href='https://www.kesko.fi/'>K-ryhmä</a>, <a href='https://www.instagram.com/unitytechnologies/?hl=en'>Unity Technologies</a> 以及 <a href='https://careers.konecranes.com/Konecranes/'>Konecranes</a>。<a href='https://www.youtube.com/watch?v=BZexOyQZMMc&list=PLumQiZ25uijis31zaRL7rhzLalSwLqUtm'>这里</a>可以观看由我们的合作伙伴和友情机构的多为专家提供的与本门课程主题相关的客座讲座。"
+    ],
+    "info": [
+      {
+        "title": "Course Material",
+        "content": [
+          "The course material is meant to be read \"part by part\" from the beginning to the end. it may also be worthwhile to do the whole part of the tasks only after reading the first part of the piece once and for all.",
+          "The material is based on the gradual extension of some of the sample programs that change part of the material. The material works best if you also type the code yourself and make small modifications to the code."
+        ]
+      },
+      {
+        "title": "Performance",
+        "content": [
+          "The course consists of eight parts, the first of which is zero for historical reasons.",
+          "In the material, from part n to n + 1, advancement is not meaningful until sufficient knowledge of some of n's has been achieved.",
+          "It is assumed that you are doing at least some of the tasks that have not been marked with an asterisk. The tasks marked with an asterisk will also affect the review, but their failure to do so will not cause too many obstacles to doing the next section (unmarked).",
+          "The speed of the course on the course is free, tasks can be returned until 10.12020 until 23:59.",
+          "The time usage statistics for the returns already made in different parts of this course can be found on the task return page."
+        ]
+      },
+      {
+        "title": "Rating Criteria",
+        "content": [
+          "The course can be completed in either 3 or 5-8 credits.",
+          "The scope and grade are determined by all the tasks performed, so the tasks marked with an asterisk will also affect the grade.",
+          "If you want to complete the course, save your student number recovery application to my submissions."
+        ]
+      },
+      {
+        "title": "Types of material",
+        "content": [
+          "There is a lot of material in the course and it has been written very fast about the circumstances. Despite the beta testing and proofreading, the material has spelling mistakes. /fullstackopen-2020.github.iok in course material. ",
+          "Making pull request is easy. For example, if this page has typo, go to the \"source code\" page https://github.com/fullstack-hy2019/fullstack-hy2019.github.io/edit/source/src/content/pages/about.json click on the pen image to the right, make the changes and click a few times \"green\" according to the Danger course. "
+        ]
+      }
+    ]
   }
 }

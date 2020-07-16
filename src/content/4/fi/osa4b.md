@@ -201,7 +201,7 @@ Tehdään pari testiä lisää:
 test('there are two notes', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body.length).toBe(2)
+  expect(response.body).toHaveLength(2)
 })
 
 test('the first note is about HTTP methods', async () => {
@@ -220,7 +220,7 @@ const response = await api.get('/api/notes')
 
 // tänne tullaan vasta kun edellinen komento eli HTTP-pyyntö on suoritettu
 // muuttujassa response on nyt HTTP-pyynnön tulos
-expect(response.body.length).toBe(2)
+expect(response.body).toHaveLength(2)
 ```
 
 HTTP-pyyntöjen tiedot konsoliin kirjoittava middleware häiritsee hiukan testien tulostusta. Muutetaan loggeria siten, että testausmoodissa lokiviestit eivät tulostu konsoliin:
@@ -289,7 +289,7 @@ Muutetaan kahta jälkimmäistä testiä vielä seuraavasti:
 test('all notes are returned', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body.length).toBe(initialNotes.length) // highlight-line
+  expect(response.body).toHaveLength(initialNotes.length) // highlight-line
 })
 
 test('a specific note is within the returned notes', async () => {
@@ -396,9 +396,7 @@ const main = async () => { // highlight-line
   const notes = await Note.find({})
   console.log('operaatio palautti seuraavat muistiinpanot', notes)
 
-  const notes = await Note.find({})
   const response = await notes[0].remove()
-
   console.log('the first note is removed')
 }
 
@@ -447,7 +445,7 @@ test('a valid note can be added ', async () => {
 
   const contents = response.body.map(r => r.content)
 
-  expect(response.body.length).toBe(initialNotes.length + 1)
+  expect(response.body).toHaveLength(initialNotes.length + 1)
   expect(contents).toContain(
     'async/await simplifies making async calls'
   )
@@ -471,7 +469,7 @@ test('note without content is not added', async () => {
 
   const response = await api.get('/api/notes')
 
-  expect(response.body.length).toBe(initialNotes.length)
+  expect(response.body).toHaveLength(initialNotes.length)
 })
 ```
 
@@ -550,7 +548,7 @@ test('notes are returned as json', async () => {
 test('all notes are returned', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body.length).toBe(helper.initialNotes.length) // highlight-line
+  expect(response.body).toHaveLength(helper.initialNotes.length) // highlight-line
 })
 
 test('a specific note is within the returned notes', async () => {
@@ -576,7 +574,7 @@ test('a valid note can be added ', async () => {
 
 
   const notesAtEnd = await helper.notesInDb() // highlight-line
-  expect(notesAtEnd.length).toBe(helper.initialNotes.length + 1) // highlight-line
+  expect(notesAtEnd).toHaveLength(helper.initialNotes.length + 1) // highlight-line
 
   const contents = notesAtEnd.map(n => n.content) // highlight-line
   expect(contents).toContain(
@@ -596,7 +594,7 @@ test('note without content is not added', async () => {
 
   const notesAtEnd = await helper.notesInDb() // highlight-line
 
-  expect(notesAtEnd.length).toBe(helper.initialNotes.length) // highlight-line
+  expect(notesAtEnd).toHaveLength(helper.initialNotes.length) // highlight-line
 })
 
 afterAll(() => {
@@ -655,7 +653,7 @@ notesRouter.post('/', async (request, response, next) => {
 })
 ```
 
-Catch-lohkossa siis ainoastaan kutsutaan funktiota _next_ siirretään poikkeuksen käsittely virheidenkäsittelymiddlewarelle.
+Catch-lohkossa siis ainoastaan kutsutaan funktiota _next_, joka siirtää poikkeuksen käsittelyn virheidenkäsittelymiddlewarelle.
 
 Muutoksen jälkeen testit menevät läpi.
 
@@ -689,7 +687,7 @@ test('a note can be deleted', async () => {
 
   const notesAtEnd = await helper.notesInDb()
 
-  expect(notesAtEnd.length).toBe(
+  expect(notesAtEnd).toHaveLength(
     helper.initialNotes.length - 1
   )
 
@@ -889,7 +887,7 @@ beforeEach(async () => {
 })
 ```
 
-Ratkaisu on varmasti aloittelijalle tiiviydestään huolimatta hieman haastava. Taulukkoon _noteObjects_ talletetaan taulukkossa _helper.initialNotes_ olevia Javascript-oliota vastaavat _Note_-konstruktorifunktiolla generoidut Mongoose-oliot. Seuraavalla rivillä luodaan uusi taulukko, joka <i>muodostuu promiseista</i>, jotka saadaan kun jokaiselle _noteObjects_ taulukon alkiolle kutsutaan metodia _save_, eli ne talletetaan kantaan.
+Ratkaisu on varmasti aloittelijalle tiiviydestään huolimatta hieman haastava. Taulukkoon _noteObjects_ talletetaan taulukossa _helper.initialNotes_ olevia Javascript-olioita vastaavat _Note_-konstruktorifunktiolla generoidut Mongoose-oliot. Seuraavalla rivillä luodaan uusi taulukko, joka <i>muodostuu promiseista</i>, jotka saadaan kun jokaiselle _noteObjects_ taulukon alkiolle kutsutaan metodia _save_, eli ne talletetaan kantaan.
 
 Metodin [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) avulla saadaan koostettua taulukollinen promiseja yhdeksi promiseksi, joka valmistuu, eli menee tilaan <i>fulfilled</i> kun kaikki sen parametrina olevan taulukon promiset ovat valmistuneet.
 Siispä viimeinen rivi, <em>await Promise.all(promiseArray)</em> odottaa, että kaikki tietokantaan talletetusta vastaavat promiset ovat valmiina, eli alkiot on talletettu tietokantaan.
@@ -1015,7 +1013,7 @@ describe('when there is initially some notes saved', () => {
   test('all notes are returned', async () => {
     const response = await api.get('/api/notes')
 
-    expect(response.body.length).toBe(helper.initialNotes.length)
+    expect(response.body).toHaveLength(helper.initialNotes.length)
   })
 
   test('a specific note is within the returned notes', async () => {
@@ -1076,7 +1074,7 @@ describe('when there is initially some notes saved', () => {
 
 
       const notesAtEnd = await helper.notesInDb()
-      expect(notesAtEnd.length).toBe(helper.initialNotes.length + 1)
+      expect(notesAtEnd).toHaveLength(helper.initialNotes.length + 1)
 
       const contents = notesAtEnd.map(n => n.content)
       expect(contents).toContain(
@@ -1096,7 +1094,7 @@ describe('when there is initially some notes saved', () => {
 
       const notesAtEnd = await helper.notesInDb()
 
-      expect(notesAtEnd.length).toBe(helper.initialNotes.length)
+      expect(notesAtEnd).toHaveLength(helper.initialNotes.length)
     })
   })
 
@@ -1111,7 +1109,7 @@ describe('when there is initially some notes saved', () => {
 
       const notesAtEnd = await helper.notesInDb()
 
-      expect(notesAtEnd.length).toBe(
+      expect(notesAtEnd).toHaveLength(
         helper.initialNotes.length - 1
       )
 

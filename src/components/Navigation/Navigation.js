@@ -20,6 +20,13 @@ export const navigation = {
     { text: 'FAQ', path: '/faq' },
     { text: 'Kurssilla mukana', path: '/companies' },
   ],
+  zh: [
+    { text: '关于课程', path: '/zh/about' },
+    { text: '课程内容', path: '/zh#course-contents' },
+    { text: '常见问题', path: '/zh/faq' },
+    { text: '合作伙伴', path: '/zh/companies' },
+    { text: '挑战', path: '/zh/challenge' },
+  ],
 };
 
 const handleCloseMenu = () =>

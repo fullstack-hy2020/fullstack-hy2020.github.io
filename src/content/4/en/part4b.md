@@ -46,7 +46,7 @@ Next, let's change the scripts in our <i>package.json</i> so that when tests are
 }
 ```
 
-We also added the [runInBand](https://jestjs.io/docs/en/cli.html#runinband) option to the npm script that executes the tests. This option will prevent Jest from running tests in parallel; we will discuss its significance once our tests start using the database.
+We also added the [runInBand](https://jestjs.io/docs/en/cli.html#--runinband) option to the npm script that executes the tests. This option will prevent Jest from running tests in parallel; we will discuss its significance once our tests start using the database.
 
 
 We specified the mode of the application to be <i>development</i> in the _npm run dev_ script that uses nodemon. We also specified that the default _npm start_ command will define the mode as <i>production</i>.
@@ -221,7 +221,7 @@ Let's write a few more tests:
 test('there are two notes', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body.length).toBe(2)
+  expect(response.body).toHaveLength(2)
 })
 
 test('the first note is about HTTP methods', async () => {
@@ -241,7 +241,7 @@ const res = await api.get('/api/notes')
 
 // execution gets here only after the HTTP request is complete
 // the result of HTTP request is saved in variable res
-expect(res.body.length).toBe(2)
+expect(res.body).toHaveLength(2)
 ```
 
 <!-- HTTP-pyyntöjen tiedot konsoliin kirjoittava middleware häiritsee hiukan testien tulostusta. Muutetaan loggeria siten, että testausmoodissa lokiviestit eivät tulostu konsoliin: -->
@@ -284,12 +284,10 @@ const Note = require('../models/note')
 const initialNotes = [
   {
     content: 'HTML is easy',
-    date: new Date(),
     important: false,
   },
   {
     content: 'Browser can execute only Javascript',
-    date: new Date(),
     important: true,
   },
 ]
@@ -313,7 +311,7 @@ Let's also make the following changes to the last two tests:
 test('all notes are returned', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body.length).toBe(initialNotes.length) // highlight-line
+  expect(response.body).toHaveLength(initialNotes.length) // highlight-line
 })
 
 test('a specific note is within the returned notes', async () => {
@@ -392,7 +390,7 @@ Note.find({})
   })
 ```
 
-The then-chain is alright, but we can do better. The [generator functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) introduced in ES6 provided a [clever way](https://github.com/getify/You-Dont-Know-JS/blob/2nd-ed/async-performance/ch4.md#iterating-generators-asynchronously) of writing asynchronous code in a way that "looks synchronous". The syntax is a bit clunky and not widely used.
+The then-chain is alright, but we can do better. The [generator functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) introduced in ES6 provided a [clever way](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch4.md#iterating-generators-asynchronously) of writing asynchronous code in a way that "looks synchronous". The syntax is a bit clunky and not widely used.
 
 The _async_ and _await_ keywords introduced in ES7 bring the same functionality as the generators, but in an understandable and syntactically cleaner way to the hands of all citizens of the JavaScript world.
 
@@ -446,7 +444,7 @@ The route for fetching all notes gets changed to the following:
 ```js
 notesRouter.get('/', async (request, response) => { 
   const notes = await Note.find({})
-  response.json(notes.map(note => note.toJSON()))
+  response.json(notes)
 })
 ```
 
@@ -461,7 +459,7 @@ When code gets refactored, there is always the risk of [regression](https://en.w
 Let's start with the operation for adding a new note. Let's write a test that adds a new note and verifies that the amount of notes returned by the API increases, and that the newly added note is in the list.
 
 ```js
-test('a valid note can be added ', async () => {
+test('a valid note can be added', async () => {
   const newNote = {
     content: 'async/await simplifies making async calls',
     important: true,
@@ -477,7 +475,7 @@ test('a valid note can be added ', async () => {
 
   const contents = response.body.map(r => r.content)
 
-  expect(response.body.length).toBe(initialNotes.length + 1)
+  expect(response.body).toHaveLength(initialNotes.length + 1)
   expect(contents).toContain(
     'async/await simplifies making async calls'
   )
@@ -501,7 +499,7 @@ test('note without content is not added', async () => {
 
   const response = await api.get('/api/notes')
 
-  expect(response.body.length).toBe(initialNotes.length)
+  expect(response.body).toHaveLength(initialNotes.length)
 })
 ```
 
@@ -519,12 +517,10 @@ const Note = require('../models/note')
 const initialNotes = [
   {
     content: 'HTML is easy',
-    date: new Date(),
     important: false
   },
   {
     content: 'Browser can execute only Javascript',
-    date: new Date(),
     important: true
   }
 ]
@@ -580,7 +576,7 @@ test('notes are returned as json', async () => {
 test('all notes are returned', async () => {
   const response = await api.get('/api/notes')
 
-  expect(response.body.length).toBe(helper.initialNotes.length) // highlight-line
+  expect(response.body).toHaveLength(helper.initialNotes.length) // highlight-line
 })
 
 test('a specific note is within the returned notes', async () => {
@@ -601,11 +597,11 @@ test('a valid note can be added ', async () => {
   await api
     .post('/api/notes')
     .send(newNote)
-    .expect(201)
+    .expect(200)
     .expect('Content-Type', /application\/json/)
 
   const notesAtEnd = await helper.notesInDb() // highlight-line
-  expect(notesAtEnd.length).toBe(helper.initialNotes.length + 1) // highlight-line
+  expect(notesAtEnd).toHaveLength(helper.initialNotes.length + 1) // highlight-line
 
   const contents = notesAtEnd.map(n => n.content) // highlight-line
   expect(contents).toContain(
@@ -625,7 +621,7 @@ test('note without content is not added', async () => {
 
   const notesAtEnd = await helper.notesInDb() // highlight-line
 
-  expect(notesAtEnd.length).toBe(helper.initialNotes.length) // highlight-line
+  expect(notesAtEnd).toHaveLength(helper.initialNotes.length) // highlight-line
 })
 
 afterAll(() => {
@@ -643,12 +639,12 @@ notesRouter.post('/', async (request, response, next) => {
 
   const note = new Note({
     content: body.content,
-    important: body.important === undefined ? false : body.important,
+    important: body.important || false,
     date: new Date(),
   })
 
   const savedNote = await note.save()
-  response.json(savedNote.toJSON())
+  response.json(savedNote)
 })
 ```
 
@@ -670,13 +666,13 @@ notesRouter.post('/', async (request, response, next) => {
 
   const note = new Note({
     content: body.content,
-    important: body.important === undefined ? false : body.important,
+    important: body.important || false,
     date: new Date(),
   })
   // highlight-start
   try { 
     const savedNote = await note.save()
-    response.json(savedNote.toJSON())
+    response.json(savedNote)
   } catch(exception) {
     next(exception)
   }
@@ -718,7 +714,7 @@ test('a note can be deleted', async () => {
 
   const notesAtEnd = await helper.notesInDb()
 
-  expect(notesAtEnd.length).toBe(
+  expect(notesAtEnd).toHaveLength(
     helper.initialNotes.length - 1
   )
 
@@ -737,7 +733,7 @@ notesRouter.get('/:id', async (request, response, next) => {
   try{
     const note = await Note.findById(request.params.id)
     if (note) {
-      response.json(note.toJSON())
+      response.json(note)
     } else {
       response.status(404).end()
     }
@@ -844,18 +840,18 @@ notesRouter.post('/', async (request, response) => {
 
   const note = new Note({
     content: body.content,
-    important: body.important === undefined ? false : body.important,
+    important: body.important || false,
     date: new Date(),
   })
 
   const savedNote = await note.save()
-  response.json(savedNote.toJSON())
+  response.json(savedNote)
 })
 
 notesRouter.get('/:id', async (request, response) => {
   const note = await Note.findById(request.params.id)
   if (note) {
-    response.json(note.toJSON())
+    response.json(note)
   } else {
     response.status(404).end()
   }
@@ -1081,7 +1077,7 @@ describe('when there is initially some notes saved', () => {
   test('all notes are returned', async () => {
     const response = await api.get('/api/notes')
 
-    expect(response.body.length).toBe(helper.initialNotes.length)
+    expect(response.body).toHaveLength(helper.initialNotes.length)
   })
 
   test('a specific note is within the returned notes', async () => {
@@ -1092,98 +1088,98 @@ describe('when there is initially some notes saved', () => {
       'Browser can execute only Javascript'
     )
   })
+})
 
-  describe('viewing a specific note', () => {
-    test('succeeds with a valid id', async () => {
-      const notesAtStart = await helper.notesInDb()
+describe('viewing a specific note', () => {
+  test('succeeds with a valid id', async () => {
+    const notesAtStart = await helper.notesInDb()
 
-      const noteToView = notesAtStart[0]
+    const noteToView = notesAtStart[0]
 
-      const resultNote = await api
-        .get(`/api/notes/${noteToView.id}`)
-        .expect(200)
-        .expect('Content-Type', /application\/json/)
+    const resultNote = await api
+      .get(`/api/notes/${noteToView.id}`)
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
 
-      expect(resultNote.body).toEqual(noteToView)
-    })
-
-    test('fails with statuscode 404 if note does not exist', async () => {
-      const validNonexistingId = await helper.nonExistingId()
-
-      console.log(validNonexistingId)
-
-      await api
-        .get(`/api/notes/${validNonexistingId}`)
-        .expect(404)
-    })
-
-    test('fails with statuscode 400 id is invalid', async () => {
-      const invalidId = '5a3d5da59070081a82a3445'
-
-      await api
-        .get(`/api/notes/${invalidId}`)
-        .expect(400)
-    })
+    expect(resultNote.body).toEqual(noteToView)
   })
 
-  describe('addition of a new note', () => {
-    test('succeeds with valid data', async () => {
-      const newNote = {
-        content: 'async/await simplifies making async calls',
-        important: true,
-      }
+  test('fails with statuscode 404 if note does not exist', async () => {
+    const validNonexistingId = await helper.nonExistingId()
 
-      await api
-        .post('/api/notes')
-        .send(newNote)
-        .expect(201)
-        .expect('Content-Type', /application\/json/)
+    console.log(validNonexistingId)
 
-
-      const notesAtEnd = await helper.notesInDb()
-      expect(notesAtEnd.length).toBe(helper.initialNotes.length + 1)
-
-      const contents = notesAtEnd.map(n => n.content)
-      expect(contents).toContain(
-        'async/await simplifies making async calls'
-      )
-    })
-
-    test('fails with status code 400 if data invaild', async () => {
-      const newNote = {
-        important: true
-      }
-
-      await api
-        .post('/api/notes')
-        .send(newNote)
-        .expect(400)
-
-      const notesAtEnd = await helper.notesInDb()
-
-      expect(notesAtEnd.length).toBe(helper.initialNotes.length)
-    })
+    await api
+      .get(`/api/notes/${validNonexistingId}`)
+      .expect(404)
   })
 
-  describe('deletion of a note', () => {
-    test('succeeds with status code 204 if id is valid', async () => {
-      const notesAtStart = await helper.notesInDb()
-      const noteToDelete = notesAtStart[0]
+  test('fails with statuscode 400 id is invalid', async () => {
+    const invalidId = '5a3d5da59070081a82a3445'
 
-      await api
-        .delete(`/api/notes/${noteToDelete.id}`)
-        .expect(204)
+    await api
+      .get(`/api/notes/${invalidId}`)
+      .expect(400)
+  })
+})
 
-      const notesAtEnd = await helper.notesInDb()
+describe('addition of a new note', () => {
+  test('succeeds with valid data', async () => {
+    const newNote = {
+      content: 'async/await simplifies making async calls',
+      important: true,
+    }
 
-      expect(notesAtEnd.length).toBe(
-        helper.initialNotes.length - 1
-      )
+    await api
+      .post('/api/notes')
+      .send(newNote)
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
 
-      const contents = notesAtEnd.map(r => r.content)
 
-      expect(contents).not.toContain(noteToDelete.content)
-    })
+    const notesAtEnd = await helper.notesInDb()
+    expect(notesAtEnd).toHaveLength(helper.initialNotes.length + 1)
+
+    const contents = notesAtEnd.map(n => n.content)
+    expect(contents).toContain(
+      'async/await simplifies making async calls'
+    )
+  })
+
+  test('fails with status code 400 if data invaild', async () => {
+    const newNote = {
+      important: true
+    }
+
+    await api
+      .post('/api/notes')
+      .send(newNote)
+      .expect(400)
+
+    const notesAtEnd = await helper.notesInDb()
+
+    expect(notesAtEnd).toHaveLength(helper.initialNotes.length)
+  })
+})
+
+describe('deletion of a note', () => {
+  test('succeeds with status code 204 if id is valid', async () => {
+    const notesAtStart = await helper.notesInDb()
+    const noteToDelete = notesAtStart[0]
+
+    await api
+      .delete(`/api/notes/${noteToDelete.id}`)
+      .expect(204)
+
+    const notesAtEnd = await helper.notesInDb()
+
+    expect(notesAtEnd).toHaveLength(
+      helper.initialNotes.length - 1
+    )
+
+    const contents = notesAtEnd.map(r => r.content)
+
+    expect(contents).not.toContain(noteToDelete.content)
   })
 })
 

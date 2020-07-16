@@ -438,7 +438,7 @@ Jatketaan tehtävässä 6.3 aloitetun reduxia käyttävän anekdoottisovelluksen
 
 #### 6.9 anekdootit, step7
 
-Ota sovelluksessasi käyttöön React dev tools. Siirrä Redux-storen määrittely omaan tiedostoon <i>store.js</i>.
+Ota sovelluksessasi käyttöön Redux DevTools. Siirrä Redux-storen määrittely omaan tiedostoon <i>store.js</i>.
 
 #### 6.10 anekdootit, step8
 
@@ -470,7 +470,7 @@ import React from 'react'
 import { useSelector } from 'react-redux' // highlight-line
 
 const Notification = () => {
-  const notification = useSelector(/*s omething here */) // highlight-line
+  const notification = useSelector(/* something here */) // highlight-line
   const style = {
     border: 'solid',
     padding: 10,

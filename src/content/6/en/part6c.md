@@ -35,7 +35,7 @@ The initial state of the database is stored into the file <i>db.json</i>, which 
 We'll install json-server for the project...
 
 ```js
-npm install json-server --save
+npm install json-server --save-dev
 ```
 
 
@@ -362,7 +362,7 @@ The redux-thunk-library is a so-called <i>redux-middleware</i>, which must be in
 
 ```js
 import { createStore, combineReducers, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
+import thunk from 'redux-thunk' // highlight-line
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import noteReducer from './reducers/noteReducer'
@@ -376,7 +376,7 @@ const reducer = combineReducers({
 const store = createStore(
   reducer,
   composeWithDevTools(
-    applyMiddleware(thunk)
+    applyMiddleware(thunk) // highlight-line
   )
 )
 

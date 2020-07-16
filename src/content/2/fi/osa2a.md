@@ -321,6 +321,13 @@ Aaltosulkeiden käyttö tulee varmaan aiheuttamaan alussa pientä päänvaivaa, 
 
 Parempi muotoilu ohjelmamme muistiinpanorivit tuottavalle apufunktiolle saattaakin olla seuraava useille riveille jaoteltu versio:
 
+```
+note =>
+  <li key={note.id}>
+    {note.content}
+  </li>
+```
+
 Kyse on kuitenkin edelleen yhden komennon sisältävästä nuolifunktiosta, komento vain sattuu olemaan hieman monimutkaisempi.
 
 ### Antipattern: taulukon indeksit avaimina
@@ -357,8 +364,8 @@ const App = ({ notes }) => { //highlight-line
     <div>
       <h1>Notes</h1>
       <ul>
-        {notes.map((note, i) => 
-          <li key={i}>
+        {notes.map(note => 
+          <li key={note.id}>
             {note.content}
           </li>
         )}
@@ -381,14 +388,14 @@ const Note = ({ note }) => {
 }
 // highlight-end
 
-const App = ({ notes }) => 
+const App = ({ notes }) => {
   return (
     <div>
       <h1>Notes</h1>
       <ul>
         // highlight-start
-        {notes.map((note, i) => 
-          <Note key={i} note={note} />
+        {notes.map(note => 
+          <Note key={note.id} note={note} />
         )}
          // highlight-end
       </ul>
@@ -466,7 +473,7 @@ const App = ({ notes }) => {
       <h1>Notes</h1>
       <ul>
         {notes.map((note, i) => 
-          <Note key={i} note={note} />
+          <Note key={note.id} note={note} />
         )}
       </ul>
     </div>

@@ -9,7 +9,11 @@ import path from 'path';
 
 function SEO({ description, lang, meta, image, keywords, title }) {
   const seoImage =
-    image || lang === 'fi' ? defaultImage : englishVersionSeoImage;
+    image || lang === 'en'
+      ? englishVersionSeoImage
+      : lang === 'zh'
+      ? englishVersionSeoImage
+      : defaultImage;
 
   return (
     <StaticQuery

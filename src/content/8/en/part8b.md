@@ -32,7 +32,7 @@ At the moment (20.2.2020) 2.6 is the latest officially released version, so when
 Create a new React-app and install the dependencies required by [Apollo client](https://www.apollographql.com/docs/react/v3.0-beta/get-started/#installation).
 
 <!-- Luodaan uusi React-sovellus ja asennetaan siihen [Apollo clientin](https://www.apollographql.com/docs/react/get-started/#installation) vaatimat riippuvuudet. -->
-We'll create a new React application and install the debendencies required by [Apollo client](https://www.apollographql.com/docs/react/get-started/#installation).
+We'll create a new React application and install the dependencies required by [Apollo client](https://www.apollographql.com/docs/react/get-started/#installation).
 
 ```js
 npm install --save @apollo/client graphql
@@ -90,7 +90,7 @@ The servers response is printed to the console:
 
 ![](../../images/8/9a.png)
 
-The application can communicate with a GraphQL server using the _client_ object. The client can be made accessible for all components of the application by wrapping the <i>App</i> component with [ApolloProvider]https://www.apollographql.com/docs/react/v3.0-beta/get-started/#connect-your-client-to-react).
+The application can communicate with a GraphQL server using the _client_ object. The client can be made accessible for all components of the application by wrapping the <i>App</i> component with [ApolloProvider](https://www.apollographql.com/docs/react/v3.0-beta/get-started/#connect-your-client-to-react).
 
 ```js
 import React from 'react'
@@ -302,7 +302,7 @@ const Persons = ({ persons }) => {
     if (result.data) {
       setPerson(result.data.findPerson)
     }
-  }, [result.data])
+  }, [result])
   // highlight-end
 
 // highlight-start
@@ -357,7 +357,7 @@ const showPerson = (name) => {
 ```
 
 <!-- Kyselyn muuttujalle _nameToSearch_ määritellään arvo kutsuttaessa. -->
-The query's _nameToSearch_ variable receives a value when the qury is run. 
+The query's _nameToSearch_ variable receives a value when the query is run. 
 
 <!-- Kyselyn vastaus tulee muuttujaan _result_, ja sen arvo sijoitetaan komponentin tilan muutujaan _person_. Sijoitus tehdään _useEffect_-hookissa: -->
 The query response is saved to the variable _result_, and its value is saved to the component's state _person_ in the _useEffect_ hook. 
@@ -367,11 +367,11 @@ useEffect(() => {
   if (result.data) {
     setPerson(result.data.findPerson)
   }
-}, [result.data])
+}, [result])
 ```
 
 <!-- Hookin toisena parametrina on _result.data_, tämä saa aikaan sen, että hookin ensimmäisenä parametrina oleva funktio suoritetaan <i>aina kun kyselyssä haetaan uuden henkilön tiedot</i>. Jos päivitystä ei hoidettaisi kontrolloidusti hookissa, seuraisi ongelmia sen jälkeen kun yksittäisen henkilön näkymästä palataan kaikkien henkilöiden näkymään. -->
-The hook's second parameter is _result.data_, so function given to the hook as its second parameter is executed <i>every time the query fetches the details of a different person</i>. 
+The hook's second parameter is _result_, so function given to the hook as its second parameter is executed <i>every time the query fetches the details of a different person</i>. 
 Would we not handle the update in a controlled way in a hook, returning from a single person view to a list of all persons would cause problems. 
 
 
@@ -454,7 +454,7 @@ const PersonForm = () => {
 
   const [ createPerson ] = useMutation(CREATE_PERSON) // highlight-line
 
-  const submit = async (event) => {
+  const submit = (event) => {
     event.preventDefault()
 
     // highlight-start
@@ -522,7 +522,7 @@ We could update the screen by reloading the page, as the cache is emptied when t
 
 ### Updating the cache
 
-There are few different solutions for this. One way is to make the query for all persons [poll]((https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#polling) the server, or make the query repeatedly. 
+There are few different solutions for this. One way is to make the query for all persons [poll](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#polling) the server, or make the query repeatedly. 
 
 
 The change is small. Let's set the query to poll every two seconds: 
@@ -569,7 +569,7 @@ const ALL_PERSONS = gql`
 const PersonForm = (props) => {
   // ...
 
-  const [ createPersom ] = useMutation(CREATE_PERSON, {
+  const [ createPerson ] = useMutation(CREATE_PERSON, {
     refetchQueries: [ { query: ALL_PERSONS } ] // highlight-line
   })
 ```
@@ -635,13 +635,12 @@ function it receives as a parameter to set an error message:
 const PersonForm = ({ setError }) => {
   // ... 
 
-  const [ createPersom ] = useMutation(CREATE_PERSON, {
+  const [ createPerson ] = useMutation(CREATE_PERSON, {
     refetchQueries: [  {query: ALL_PERSONS } ],
     // highlight-start
     onError: (error) => {
       setError(error.graphQLErrors[0].message)
     }
-    onError: props.onError 
     // highlight-end
   })
 
@@ -722,9 +721,8 @@ export const EDIT_NUMBER = gql`
 `
 ```
 
-<!-- Muutoksen suorittava komponentti <i>PhoneForm</i> on suoraviivainen, se kysyy lomakkeen avulla henkilön nimeä ja uutta puhelinnumeroa, ja kutsuu _useMutation_-hookilla luotua mutaation suorittavaa funktiota _changeNumber_. Mielenkiintoiset osat koodia korostettuna: -->
 The <i>PhoneForm</i> component responsible for the change is straightforward. The form has fields for the person's name and new phone number, and calls the _changeNumber_ function. The function is done using the _useMutation_-hook. 
-Interesting lines on the code have been hihglighed.
+Interesting lines on the code have been highlighted.
 
 ```js
 import React, { useState } from 'react'
@@ -740,7 +738,7 @@ const PhoneForm = () => {
   const [ changeNumber ] = useMutation(EDIT_NUMBER)
 // highlight-end
 
-  const submit = async (event) => {
+  const submit = (event) => {
     event.preventDefault()
 
 // highlight-start
@@ -785,10 +783,10 @@ It looks bleak, but it works:
 Surprisingly, when person's number is changed the new number automatically appears on the list of persons rendered by the <i>Persons</i> component. 
 This happens because each person has an identifying field of type <i>ID</i>, so the person's details saved to the cache update automatically when they are changed with the mutation. 
 
-The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4) branch <i>part8-4</i>
+The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4) branch <i>part8-4</i>.
 
 <!-- Sovelluksessa on  vielä pieni ongelma. Jos yritämme vaihtaa olemattomaan nimeen liittyvän puhelinnumeron, ei mitään näytä tapahtuvan. Syynä tälle on se, että jos nimeä vastaavaa henkilöä ei löydy, vastataan kyselyyn <i>null</i>: -->
-Our application still has one small flaw. If we try to change the phonenumber for a name which does not exist, nothing seems to happen. 
+Our application still has one small flaw. If we try to change the phone number for a name which does not exist, nothing seems to happen. 
 This happens because if a person with the given name cannot be found, 
 the mutation response is <i>null</i>:
 
@@ -807,7 +805,7 @@ const PhoneForm = ({ setError }) => {
 
   const [ changeNumber, result ] = useMutation(EDIT_NUMBER) // highlight-line
 
-  const submit = async (event) => {
+  const submit = (event) => {
     // ...
   }
 
@@ -861,17 +859,18 @@ useEffect(() => {
 ```
 
 <!-- Tämä ratkaisu ei kuitenkaan toimi, ellei _notify_-funktiota ole määritelty [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-funktioon käärittynä. Jos näin ei tehdä, seurauksena on ikuinen luuppi, sillä aina kun komponentti _App_ renderöidään uudelleen notifikaation poistamisen jälkeen, syntyy <i>uusi versio</i> funktiosta _notify_ ja se taas aiheuttaa efektifunktion uudelleensuorituksen ja taas uuden notifikaation... -->
-However this solution does not work is the _notify_-function is not wrapped to a [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-function.  If its not, this results to an endless loop. When the _App_ component is rerendered after a notification is removed, a <i>new version</i> of _notify_ gets created which causes the effect function to be executed which causes a new notification and so on an so on...
+However this solution does not work if the _notify_-function is not wrapped to a [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-function.  If its not, this results to an endless loop. When the _App_ component is rerendered after a notification is removed, a <i>new version</i> of _notify_ gets created which causes the effect function to be executed which causes a new notification and so on an so on...
 
-The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5) branch <i>part8-5</i>
+The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5) branch <i>part8-5</i>.
 
 ### Apollo Client and the applications state
 
-In our example, management of the applications state has mostly become the responsibility of Apollo Client. This is quite typical solution for GraphQL-applications. 
+In our example, management of the applications state has mostly become the responsibility of Apollo Client. This is quite typical solution for GraphQL applications. 
 Our example uses the state of the React components only to manage the state of a form and to show error notifications. When using GraphQL it can be, that there are no more justifiable reasons to move the management of the applications state to Redux at all. 
 
 When necessary Apollo enables saving the applications local state to [Apollo cache](https://www.apollographql.com/docs/react/v3.0-beta/data/local-state/).
 
+</div>
 
 <div class="tasks">
 
@@ -903,7 +902,7 @@ Implement a possibility to add new books to your application. The functionality 
 
 Make sure that the Authors and Books views are kept up to date after a new book is added. 
 
-In case of problems when making queries or mutations, checkfrom  developer console what the server response is:
+In case of problems when making queries or mutations, check from developer console what the server response is:
 
 ![](../../images/8/42ea.png)
 

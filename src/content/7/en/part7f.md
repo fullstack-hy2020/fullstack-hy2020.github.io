@@ -31,15 +31,13 @@ Additionally, change the application's notifications to use Redux at this point 
 
 _Note_ that this and the next two exercises are quite laborious but incredibly educational.
 
-Store the information about blog posts in the Redux store. In this exercise it is enought that you can see the blogs in backend and create a new blog.
+Store the information about blog posts in the Redux store. In this exercise it is enough that you can see the blogs in backend and create a new blog.
 
 You are free to manage the state for logging in and creating new blog posts by using the internal state of React components.
 
 #### 7.11: redux, step3
 
 Expand your solution so that it is again possible to like and delete a blog.
-
-Laajenna ratkaisua siten, että blogien liketys ja poisto toimivat.
 
 #### 7.12: redux, step4
 
@@ -89,7 +87,7 @@ const User = () => {
 #### 7.15: Blog view
 
 Implement a separate view for blog posts. You can model the layout of your view after the following example:
-.
+
 ![](../../images/7/45.png)
 
 Users should be able to access the view by clicking the name of the blog post in the view that lists of all of the blog posts.

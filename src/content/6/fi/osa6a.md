@@ -373,13 +373,13 @@ describe('noteReducer', () => {
     deepFreeze(state)
     const newState = noteReducer(state, action)
 
-    expect(newState.length).toBe(1)
+    expect(newState).toHaveLength(1)
     expect(newState).toContainEqual(action.data)
   })
 })
 ```
 
-Testi siis varmistaa, että reducerin palauttama uusi tila taulukko, joka sisältää yhden elementin, joka on sama kun actionin kentän <i>data</i> sisältävä olio.
+Testi siis varmistaa, että reducerin palauttama uusi tila on taulukko, joka sisältää yhden elementin, joka on sama kun actionin kentän <i>data</i> sisältävä olio.
 
 Komento <i>deepFreeze(state)</i> varmistaa, että reducer ei muuta parametrina olevaa storen tilaa. Jos reduceri käyttää state:n manipulointiin komentoa _push_, testi ei mene läpi
 
@@ -411,7 +411,7 @@ test('returns new state with action TOGGLE_IMPORTANCE', () => {
   deepFreeze(state)
   const newState = noteReducer(state, action)
 
-  expect(newState.length).toBe(2)
+  expect(newState).toHaveLength(2)
 
   expect(newState).toContainEqual(state[0])
 
@@ -750,7 +750,7 @@ toggleImportance = (id) => {
 
 Alamme huomata, että jo näinkin yksinkertaisessa sovelluksessa Reduxin käyttö yksinkertaistaa sovelluksen ulkoasusta vastaavaa koodia. Pystymme kuitenkin vielä paljon parempaan. 
 
-React-komponenttien on oikeastaan tarpeetonta tuntea reduxin actionien tyyppejä ja esitysmuotoja. Eristetään actioiden luominen omiksi funktioiksi:
+React-komponenttien on oikeastaan tarpeetonta tuntea reduxin actionien tyyppejä ja esitysmuotoja. Eristetään actioneiden luominen omiin funktioihinsa:
 
 ```js
 const createNote = (content) => {
@@ -873,7 +873,7 @@ import noteReducer from './reducers/noteReducer'
 Moduulilla voi olla vain <i>yksi default export</i>, mutta useita "normaaleja" exporteja
 
 ```js
-export const noteCreation = (content) => {
+export const createNote = (content) => {
   // ...
 }
 
@@ -885,7 +885,7 @@ export const toggleImportanceOf = (id) => {
 Normaalisti (eli ei defaultina) exportattujen funktioiden käyttöönotto tapahtuu aaltosulkusyntaksilla:
 
 ```js
-import { noteCreation } from './../reducers/noteReducer'
+import { createNote } from './../reducers/noteReducer'
 ```
 
 Komponentin <i>App</i> koodi 
@@ -936,7 +936,7 @@ const App = () => {
 export default App
 ```
 
-Komponentin koodissa on muutama mielenkiintoinen seikka. Aiemmin koodi hoiti actioinen dispatchaamisen kutsumalla redux-storen metodia dispatch:
+Komponentin koodissa on muutama mielenkiintoinen seikka. Aiemmin koodi hoiti actionien dispatchaamisen kutsumalla redux-storen metodia dispatch:
 
 ```js
 store.dispatch({
@@ -1041,7 +1041,7 @@ const Note = ({ note, handleClick }) => {
   return(
     <li onClick={handleClick}>
       {note.content} 
-      <strong>{note.important ? 'important' : ''}</strong>
+      <strong> {note.important ? 'important' : ''}</strong>
     </li>
   )
 }
@@ -1100,7 +1100,7 @@ Redux-sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https:
 
 Toteutetaan nyt versio toisesta ensimmäisen osan anekdoottien äänestyssovelluksesta. Ota ratkaisusi pohjaksi repositoriossa https://github.com/fullstack-hy2020/redux-anecdotes oleva projekti.
 
-Jos kloonaat projektin olemassaolevan git-reposition sisälle, <i>poista kloonatun sovelluksen git-konfiguraatio:</i>
+Jos kloonaat projektin olemassaolevan git-repositorion sisälle, <i>poista kloonatun sovelluksen git-konfiguraatio:</i>
 
 ```bash
 cd redux-anecdotes  // mene kloonatun repositorion hakemistoon

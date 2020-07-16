@@ -22,7 +22,7 @@ After making the changes to the directory structure of our project, we end up wi
 ├── index.js
 ├── app.js
 ├── build
-│   ├── ...
+│   └── ...
 ├── controllers
 │   └── notes.js
 ├── models
@@ -62,7 +62,7 @@ Extracting logging into its own module is a good idea in more ways than one. If 
 The contents of the <i>index.js</i> file used for starting the application gets simplified as follows:
 
 ```js
-const app = require('./app') // varsinainen Express-sovellus
+const app = require('./app') // the actual Express application
 const http = require('http')
 const config = require('./utils/config')
 const logger = require('./utils/logger')
@@ -95,7 +95,7 @@ The other parts of the application can access the environment variables by impor
 ```js
 const config = require('./utils/config')
 
-console.log(`Server running on port ${config.PORT}`)
+logger.info(`Server running on port ${config.PORT}`)
 ```
 
 The route handlers have also been moved into a dedicated module. The event handlers of routes are commonly referred to as <i>controllers</i>, and for this reason we have created a new <i>controllers</i> directory. All of the routes related to notes are now in the <i>notes.js</i> module under the <i>controllers</i> directory.
@@ -108,7 +108,7 @@ const Note = require('../models/note')
 
 notesRouter.get('/', (request, response) => {
   Note.find({}).then(notes => {
-    response.json(notes.map(note => note.toJSON()))
+    response.json(notes)
   })
 })
 
@@ -116,7 +116,7 @@ notesRouter.get('/:id', (request, response, next) => {
   Note.findById(request.params.id)
     .then(note => {
       if (note) {
-        response.json(note.toJSON())
+        response.json(note)
       } else {
         response.status(404).end()
       }
@@ -135,7 +135,7 @@ notesRouter.post('/', (request, response, next) => {
 
   note.save()
     .then(savedNote => {
-      response.json(savedNote.toJSON())
+      response.json(savedNote)
     })
     .catch(error => next(error))
 })
@@ -158,7 +158,7 @@ notesRouter.put('/:id', (request, response, next) => {
 
   Note.findByIdAndUpdate(request.params.id, note, { new: true })
     .then(updatedNote => {
-      response.json(updatedNote.toJSON())
+      response.json(updatedNote)
     })
     .catch(error => next(error))
 })
@@ -269,7 +269,7 @@ const unknownEndpoint = (request, response) => {
 const errorHandler = (error, request, response, next) => {
   logger.error(error.message)
 
-  if (error.name === 'CastError' && error.kind === 'ObjectId') {
+  if (error.name === 'CastError') {
     return response.status(400).send({ error: 'malformatted id' })
   } else if (error.name === 'ValidationError') {
     return response.status(400).json({ error: error.message })
@@ -290,13 +290,18 @@ The responsibility of establishing the connection to the database has been given
 ```js
 const mongoose = require('mongoose')
 
+mongoose.set('useFindAndModify', false)
+
 const noteSchema = new mongoose.Schema({
   content: {
     type: String,
     required: true,
     minlength: 5
   },
-  date: Date,
+  date: {
+    type: Date,
+    required: true,
+  },
   important: Boolean,
 })
 
@@ -318,7 +323,7 @@ To recap, the directory structure looks like this after the changes have been ma
 ├── index.js
 ├── app.js
 ├── build
-│   ├── ...
+│   └── ...
 ├── controllers
 │   └── notes.js
 ├── models

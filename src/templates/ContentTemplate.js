@@ -29,10 +29,9 @@ export default class ContentTemplate extends Component {
     super(props);
 
     this.state = {
-      h1Top: 0,
       h1Title: '',
       otherTitles: '',
-      top: 0,
+      showArrowUp: false,
     };
   }
 
@@ -64,7 +63,6 @@ export default class ContentTemplate extends Component {
     });
 
     this.setState({
-      h1Top: h1.offsetTop,
       h1Title: h1.innerText,
       otherTitles: [...h3Arr],
     });
@@ -77,9 +75,15 @@ export default class ContentTemplate extends Component {
   }
 
   handleScroll = () => {
-    this.setState({
-      top: window.scrollY,
-    });
+    if (window.scrollY > 300 && !this.state.showArrowUp) {
+      this.setState({
+        showArrowUp: true
+      });
+    } else if (window.scrollY <= 300 && this.state.showArrowUp) {
+      this.setState({
+        showArrowUp: false
+      });
+    }
   };
 
   render() {
@@ -104,35 +108,35 @@ export default class ContentTemplate extends Component {
           return <pre>{domToReact(children, parserOptions)}</pre>;
         } else if (type === 'tag' && attribs.class === 'content') {
           return (
-            <div className="container">
-              <div className="course-content col-6 push-right-3">
+            <Element className="course-content">
+              <Element className="course-content-inner">
                 {domToReact(children, parserOptions)}
-              </div>
-            </div>
+              </Element>
+            </Element>
           );
         } else if (type === 'tag' && attribs.class === 'tasks') {
           return (
             <Banner
               style={{
-                backgroundColor: colorCode,
+                backgroundColor: colorCode
               }}
-              className="spacing spacing--after tasks"
+              className="spacing tasks content-banner"
             >
-              <div className="container">
-                <div
-                  className="course-content col-6 push-right-3"
-                  style={{
-                    borderColor: colorCode,
-                    backgroundColor: 'transparent',
-                  }}
-                >
+              <Element
+                className="course-content"
+                style={{
+                  borderColor: colorCode,
+                  backgroundColor: 'transparent',
+                }}
+              >
+                <Element className="course-content-inner">
                   {children.name === 'pre' ? (
                     <pre>{domToReact(children, parserOptions)}</pre>
                   ) : (
                     domToReact(children, parserOptions)
                   )}
-                </div>
-              </div>
+                </Element>
+              </Element>
             </Banner>
           );
         }
@@ -144,7 +148,7 @@ export default class ContentTemplate extends Component {
       <Layout>
         <SEO
           lang={lang}
-          title={`Fullstack ${lang === 'en' ? 'part' : 'osa'}${part} | ${
+          title={`Fullstack ${lang === 'en' ? 'part' :lang === 'zh' ? 'part' :'osa'}${part} | ${
             this.state.h1Title
           }`}
           description={mainSEOdescription[lang]}
@@ -155,7 +159,7 @@ export default class ContentTemplate extends Component {
           ]}
         />
 
-        {this.state.top > 300 && (
+        {this.state.showArrowUp && (
           <div
             className="arrow-go-up"
             onClick={() =>
@@ -186,12 +190,12 @@ export default class ContentTemplate extends Component {
                   {
                     backgroundColor: colorCode,
                     text: 'Fullstack',
-                    link: `/${lang === 'en' ? 'en/' : ''}#course-contents`,
+                    link: `/${lang === 'en' ? 'en/' :lang === 'zh' ? 'zh/' : ''}#course-contents`,
                   },
                   {
                     backgroundColor: colorCode,
-                    text: `${lang === 'en' ? 'part' : 'osa'} ${part}`,
-                    link: lang === 'en' ? `/en/part${part}` : `/osa${part}`,
+                    text: `${lang === 'en' ? 'part' : lang === 'zh' ? 'part' :'osa'} ${part}`,
+                    link: lang === 'en' ? `/en/part${part}` :lang === 'zh' ? `/zh/part${part}` : `/osa${part}`,
                   },
                   {
                     backgroundColor: colors['black'],
@@ -203,36 +207,37 @@ export default class ContentTemplate extends Component {
           </Banner>
 
           <Element className="course">
-            <Element flex className="container" relative>
-              <ScrollNavigation
-                part={part}
-                letter={letter}
-                lang={lang}
-                currentPartTitle={navigation[lang][part][letter]}
-                currentPath={`/${
-                  lang === 'en' ? 'en/part' : 'osa'
-                }${part}/${snakeCase(navigation[lang][part][letter])}`}
-                colorCode={colorCode}
-                className="col-2 spacing"
-                style={{ top: this.state.h1Top }}
-              />
+            <ScrollNavigation
+              part={part}
+              letter={letter}
+              lang={lang}
+              currentPartTitle={navigation[lang][part][letter]}
+              currentPath={`/${
+                lang === 'en' ? 'en/part' : lang === 'zh' ? 'zh/part':'osa'
+              }${part}/${snakeCase(navigation[lang][part][letter])}`}
+              colorCode={colorCode}
+            />
 
+            <Element className="course-content-container">
               <Element
-                className="course-content col-6 push-right-3"
+                className="course-content"
                 autoBottomMargin
               >
-                <p className="col-1 letter" style={{ borderColor: colorCode }}>
-                  {letter}
-                </p>
+                <Element className="course-content-inner">
+                  <p className="col-1 letter" style={{ borderColor: colorCode }}>
+                    {letter}
+                  </p>
 
-                <SubHeader
-                  headingLevel="h1"
-                  text={navigation[lang][part][letter]}
-                />
+                  <SubHeader
+                    headingLevel="h1"
+                    text={navigation[lang][part][letter]}
+                  />
+                </Element>
               </Element>
-            </Element>
 
-            {Parser(html, parserOptions)}
+              {Parser(html, parserOptions)}
+
+            </Element>
           </Element>
 
           <EditLink part={part} letter={letter} lang={lang} />

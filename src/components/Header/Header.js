@@ -52,7 +52,13 @@ class Header extends Component {
           style={{ alignItems: 'center', justifyContent: 'flex-start' }}
         >
           <Link
-            to={this.props.lang === 'en' ? '/en' : '/'}
+            to={
+              this.props.lang === 'en'
+                ? '/en'
+                : this.props.lang === 'zh'
+                ? '/zh'
+                : '/'
+            }
             className="header__logo"
           >
             {headerClass === '' ? (

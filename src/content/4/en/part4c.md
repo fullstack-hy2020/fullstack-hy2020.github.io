@@ -221,7 +221,7 @@ In stark contrast to the conventions of relational databases, <i>references are 
 ### Creating users
 
 
-Let's implement a route for creating new users. Users have a unique <i>username</i>, a <i>name</i> and something called a <i>passwordHash</i>. The password hash is the output of a [one-way hash function](https://en.wikipedia.org/wiki/Cryptographic_hash_function) applied to the user's password. It is never wise to store unencrypted plaintext passwords in the database!
+Let's implement a route for creating new users. Users have a unique <i>username</i>, a <i>name</i> and something called a <i>passwordHash</i>. The password hash is the output of a [one-way hash function](https://en.wikipedia.org/wiki/Cryptographic_hash_function) applied to the user's password. It is never wise to store unencrypted plain text passwords in the database!
 
 
 Let's install the [bcrypt](https://github.com/kelektiv/node.bcrypt.js) package for generating the password hashes:
@@ -296,7 +296,7 @@ const User = require('../models/user')
 
 //...
 
-describe('when there is initially one user at db', () => {
+describe('when there is initially one user in db', () => {
   beforeEach(async () => {
     await User.deleteMany({})
 
@@ -322,7 +322,7 @@ describe('when there is initially one user at db', () => {
       .expect('Content-Type', /application\/json/)
 
     const usersAtEnd = await helper.usersInDb()
-    expect(usersAtEnd.length).toBe(usersAtStart.length + 1)
+    expect(usersAtEnd).toHaveLength(usersAtStart.length + 1)
 
     const usernames = usersAtEnd.map(u => u.username)
     expect(usernames).toContain(newUser.username)
@@ -355,7 +355,7 @@ module.exports = {
 The <i>beforeEach</i> block adds a user with the username <i>root</i> to the database. We can write a new test that verifies that a new user with the same username can not be created:
 
 ```js
-describe('when there is initially one user at db', () => {
+describe('when there is initially one user in db', () => {
   // ...
 
   test('creation fails with proper statuscode and message if username already taken', async () => {
@@ -376,7 +376,7 @@ describe('when there is initially one user at db', () => {
     expect(result.body.error).toContain('`username` to be unique')
 
     const usersAtEnd = await helper.usersInDb()
-    expect(usersAtEnd.length).toBe(usersAtStart.length)
+    expect(usersAtEnd).toHaveLength(usersAtStart.length)
   })
 })
 ```
@@ -405,12 +405,14 @@ const userSchema = new mongoose.Schema({
   },
   name: String,
   passwordHash: String,
+  // highlight-start
   notes: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Note'
     }
   ],
+  // highlight-end
 })
 
 userSchema.plugin(uniqueValidator) // highlight-line
@@ -426,7 +428,7 @@ Before we move onward, let's add an initial implementation of a route handler th
 ```js
 usersRouter.get('/', async (request, response) => {
   const users = await User.find({})
-  response.json(users.map(u => u.toJSON()))
+  response.json(users)
 })
 ```
 
@@ -464,7 +466,7 @@ notesRouter.post('/', async (request, response, next) => {
   user.notes = user.notes.concat(savedNote._id) //highlight-line
   await user.save()  //highlight-line
   
-  response.json(savedNote.toJSON())
+  response.json(savedNote)
 })
 ```
 
@@ -507,7 +509,7 @@ usersRouter.get('/', async (request, response) => {
   const users = await User  // highlight-line
     .find({}).populate('notes') // highlight-line
 
-  response.json(users.map(u => u.toJSON()))
+  response.json(users)
 })
 ```
 
@@ -525,7 +527,7 @@ usersRouter.get('/', async (request, response) => {
   const users = await User
     .find({}).populate('notes', { content: 1, date: 1 })
 
-  response.json(users.map(u => u.toJSON()))
+  response.json(users)
 });
 ```
 
@@ -540,7 +542,7 @@ notesRouter.get('/', async (request, response) => {
   const notes = await Note
     .find({}).populate('user', { username: 1, name: 1 })
 
-  response.json(notes.map(note => note.toJSON()))
+  response.json(notes)
 });
 ```
 

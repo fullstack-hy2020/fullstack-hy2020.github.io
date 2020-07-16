@@ -8,7 +8,7 @@ lang: en
 <div class="content">
 
 <!-- After the brief introduction on the main principles of TypeScript we are ready to start our journey towards a Fullstack TypeScript developer. This part will not give you a thorough introduction to all aspects of TypeScript, the goal is rather to have focus in most common issues that arise when developing express backends and React fronends with TypeScript. In addition to language features we will also have a strong emphasis in tooling. -->
-After the brief introduction to the main princibles of TypeScript, we are now ready to start our journey towards becoming FullStack TypeScript developers. 
+After the brief introduction to the main principles of TypeScript, we are now ready to start our journey towards becoming FullStack TypeScript developers. 
 Rather than giving you a thorough introduction to all aspects of TypeScript, in this part we will focus on the most common issues that arise when developing express backends or React frontends with TypeScript. 
 In addition to language features we will also have a strong emphasis in tooling.
 
@@ -34,7 +34,7 @@ You can install both <i>ts-node</i> and the official <i>typescript</i> package g
 If you can't or don't want to install global packages, you can create an npm project which has the required dependencies and run your scripts in it. 
 We will also take this approach. 
 
-As we remember from [part 3](/en/part3) an npm project is set by running running command <i>npm init</i> in an empty directory. Then we can install the dependencies by running 
+As we remember from [part 3](/en/part3) an npm project is set by running the command <i>npm init</i> in an empty directory. Then we can install the dependencies by running 
 
 ```
 npm install --save-dev ts-node typescript
@@ -52,8 +52,8 @@ and set up <i>scripts</i> within the package.json:
 }
 ```
 
-<!-- Now within this directory you can use <i>ts-node</i>by running <i>npm run ts-node</i>. Notice that if you are using ts-node through package.json, all possible command line arguments for the script need to be prefixed with <i>--</i>. So if you want to run file.ts with <i>ts-node</i>, the whole command is: -->
-Now within this directory you can use <i>ts-node</i>by running <i>npm run ts-node</i>. Note that if you are using ts-node through package.json, all  command line arguments for the script need to be prefixed with <i>--</i>. So if you want to run file.ts with <i>ts-node</i>, the whole command is: -->
+<!-- Now within this directory you can use <i>ts-node</i> by running <i>npm run ts-node</i>. Notice that if you are using ts-node through package.json, all possible command line arguments for the script need to be prefixed with <i>--</i>. So if you want to run file.ts with <i>ts-node</i>, the whole command is: -->
+Now within this directory you can use <i>ts-node</i> by running <i>npm run ts-node</i>. Note that if you are using ts-node through package.json, all  command line arguments for the script need to be prefixed with <i>--</i>. So if you want to run file.ts with <i>ts-node</i>, the whole command is: -->
 
 ```sh
 npm run ts-node -- file.ts
@@ -221,10 +221,10 @@ But now  the question is if it's <i>really</i> okay for the function to return a
 When your code can end up in a situation where something is divided by 0, something has probably gone terribly wrong and an error should be thrown and handled where the function was called.
 When you are deciding to return values you weren't originally expecting, the warnings you see from TypeScript prevent you from making rushed decisions and help you to keep your code working as expected.
 
-<!-- One more thing to consider is that even though we have in our code defined what types of parameters to accept, the generated JavaScript that is used runtime doesn't anymore have these type checks. So, if for example the <i>operation</i>-parameter's value comes from an external interface, there is no definite guarantee that it will be one of the allowed values. Therefore it's still better to include error handling to be prepared for the unexpected to happen. In this case, when there are multiple possible accepted values and all unexcpeted ones should result in an error, the [switch...case](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement suits better than if...else in our code.  -->
+<!-- One more thing to consider is that even though we have in our code defined what types of parameters to accept, the generated JavaScript that is used runtime doesn't anymore have these type checks. So, if for example the <i>operation</i>-parameter's value comes from an external interface, there is no definite guarantee that it will be one of the allowed values. Therefore it's still better to include error handling to be prepared for the unexpected to happen. In this case, when there are multiple possible accepted values and all unexpected ones should result in an error, the [switch...case](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement suits better than if...else in our code.  -->
 One more thing to consider is, that even though we have defined types for our parameters, the generated JavaScript used at runtime does not contain the type checks.
 So if for example the <i>operation</i>-parameter's value comes from an external interface, there is no definite guarantee that it will be one of the allowed values. Therefore it's still better to include error handling and be prepared for the unexpected to happen. 
-In this case, when there are multiple possible accepted values and all unexcpeted ones should result in an error, the [switch...case](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement suits better than if...else in our code.
+In this case, when there are multiple possible accepted values and all unexpected ones should result in an error, the [switch...case](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement suits better than if...else in our code.
 
 The code of our calculator should actually look something like this:
 
@@ -269,20 +269,20 @@ Let's return to the basic idea of TypeScript. TypeScript expects all globally us
 As with npm, the TypeScript world also celebrates open source code. The community is active and continuously reacting to updates and changes in commonly used npm-packages.  
 You can almost always find the typings for npm-packages, so you don't have to create types for all of your thousands of dependencies alone.
 
-<!-- Usually types for existing packages can be found by under the <i>@types</i>-organization within npm, so that you can add the relevant types to your project by installing an npm package with the name of your package with a @types/ - prefix, for example:<i>npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose</i> and the list goes on and on. The <i>@types/*</i> are maintained by [Definitely typed](http://definitelytyped.org/), a community project with the goal to mainting types of everything in one place. -->
-Usually types for existing packages can be found from the <i>@types</i>-organization within npm, and you can add the relevant types to your project by installing an npm package with the name of your package with @types/ - prefix. For example: <i>npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose</i> and so on and so on. The <i>@types/*</i> are maintained by [Definitely typed](http://definitelytyped.org/), a community project with the goal to mainting types of everything in one place.
+<!-- Usually types for existing packages can be found by under the <i>@types</i>-organization within npm, so that you can add the relevant types to your project by installing an npm package with the name of your package with a @types/ - prefix, for example:<i>npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose</i> and the list goes on and on. The <i>@types/*</i> are maintained by [Definitely typed](http://definitelytyped.org/), a community project with the goal to maintaining types of everything in one place. -->
+Usually types for existing packages can be found from the <i>@types</i>-organization within npm, and you can add the relevant types to your project by installing an npm package with the name of your package with @types/ - prefix. For example: <i>npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose</i> and so on and so on. The <i>@types/*</i> are maintained by [Definitely typed](http://definitelytyped.org/), a community project with the goal to maintaining types of everything in one place.
 
 Sometimes an npm package can also include its types within the code and in that case installing the corresponding <i>@types/*</i> is not necessary.
 
 > **NB:** Since the typings are only used before compilation, the typings are not needed in the production build and they should <i>always</i> be in the devDependencies of the package.json.
 
-Since the global variable <i>process</i> is defined by Node itself, we get its typings by intalling the package <i>@types/node</i>:
+Since the global variable <i>process</i> is defined by Node itself, we get its typings by installing the package <i>@types/node</i>:
 
 ```sh
 npm install --save-dev @types/node
 ```
 
-After installing the types, our compiler does not complain about the variable <i>process</i> anymore. Note that there is no need to require the types to the code, the intallation of the package is enough!
+After installing the types, our compiler does not complain about the variable <i>process</i> anymore. Note that there is no need to require the types to the code, the installation of the package is enough!
 
 ### Improving the project
 
@@ -475,7 +475,7 @@ The daily exercise hours are given to the function as an [array](https://www.typ
 [3, 0, 2, 4.5, 0, 3, 1]
 ```
 
-For the Result object you should to create an [interface](https://www.typescriptlang.org/docs/handbook/interfaces.html).
+For the Result object you should create an [interface](https://www.typescriptlang.org/docs/handbook/interfaces.html).
 
 If you would call the function with parameters <i>[3, 0, 2, 4.5, 0, 3, 1]</i> and <i>2</i> it could return
 
@@ -519,7 +519,7 @@ $ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
 
 In the example the <i>first argument</i> is the target value.
 
-Handle exeptions and errors appropriately. The exerciseCalculator should accept inputs of varied lengths. Determine by yourself how you manage to collect all needed input.
+Handle exceptions and errors appropriately. The exerciseCalculator should accept inputs of varied lengths. Determine by yourself how you manage to collect all needed input.
 
 </div>
 
@@ -555,7 +555,7 @@ Let's specify the following configurations in our <i>tsconfig.json</i> file:
 Do not worry too much about the <i>compilerOptions</i>, they will be under closer inspection on part 2.
 
 <!-- The explanations for each of the field can be found from TypeScript documentation or the really handy although beta-stage [tsconfig page](https://www.typescriptlang.org/v2/en/tsconfig) or in a little worse format in the tsconfig [schema definition](http://json.schemastore.org/tsconfig). -->
-You can find explanations for each of the configurations from the TypeScript documentation, or the really handy although beta-stage [tsconfig page](https://www.typescriptlang.org/v2/en/tsconfig), or from the tsconfig [schema definition](http://json.schemastore.org/tsconfig), which unfortunately is formatted a little worse than the first two options. 
+You can find explanations for each of the configurations from the TypeScript documentation, or the really handy [tsconfig page](https://www.typescriptlang.org/tsconfig), or from the tsconfig [schema definition](http://json.schemastore.org/tsconfig), which unfortunately is formatted a little worse than the first two options. 
 
 ### Adding express to the mix
 
@@ -569,7 +569,7 @@ Let us start by installing express:
 npm install express
 ```
 
-add then add the <i>start</i> sript to package.json:
+add then add the <i>start</i> script to package.json:
 
 ```json
 {
@@ -659,7 +659,7 @@ There is one more problem with the code
 
 ![](../../images/9/9b.png)
 
-This is because we banned unused parameters in out <i>tsconfig.json</i>
+This is because we banned unused parameters in our <i>tsconfig.json</i>
 
 ```js
 {
@@ -700,7 +700,7 @@ Let's install <i>ts-node-dev</i> to our development dependencies
 npm install --save-dev ts-node-dev
 ```
 
-add add a script to <i>package.json</i>
+add a script to <i>package.json</i>
 
 ```json
 {
@@ -824,7 +824,7 @@ Things become implicitly any type quite often when one forgets to type functions
 We can also explicitly type things <i>any</i>. The only difference between implicit and explicit any type is how the code looks, the compiler does not care about the difference. 
 
 <!-- However, implicit <i>any</i> and explicit enforcing of the <i>any</i> type onto a variable affects how a programmer sees the code. Implicit typings of <i>any</i> are usually considered problematic, since it  is quite often a matter of the coder simply forgotting to assign types (or being too lazy to do that) and because of that not exploiting the full power TypeScript in the code.  -->
-Programmers however see the code differently when any is explicitly enforced than when it implicitly inferred. 
+Programmers however see the code differently when <i>any</i> is explicitly enforced than when it implicitly inferred. 
 Implicit <i>any</i> typings are usually considered problematic, since it is quite often due to the coder forgetting to assign types (or being too lazy to do it), and it also means that the full power of TypeScript is not properly exploited. 
 
 <!-- This is why the rule [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny) exists already on compiler level and it is highly recommended to keep it on at all time. In the rare cases where you seriously cannot know what the type of a variable is, you should explicitly state it in the code  -->
@@ -836,7 +836,7 @@ const a : any = /* no clue what the type will be! */.
 ```
 
 <!-- We have already <i>noImplicitAny</i> defined in our example code, so why does not the compiler compalain about <i>any</i> types? The reason is that the field <i>query</i> of the express [Request](https://expressjs.com/en/5x/api.html#req) object is actually explicitly typed as <i>any</i>. Same is true if we post data to app, the <i>request.body</i> is explicitly typed as <i>any</i> by express. -->
-We already have <i>noImplicitAny</i> condifured in our example, so why does the compiler not complain about the implicit <i>any</i> types?
+We already have <i>noImplicitAny</i> configured in our example, so why does the compiler not complain about the implicit <i>any</i> types?
 The reason is, that the <i>query</i> field of an express [Request](https://expressjs.com/en/5x/api.html#req) object is explicitly typed <i>any</i>.  Same is true for the <i>request.body</i> field we use to post data to an app. 
 
 <!-- What if we would like to prevent the developers of using <i>any</i> type in the code? Fortunately <i>tsconfig.json</i> is not the only place to enforce coding style and what we should do is to take <i>eslint</i> into use to help us to manage our code. Let's install eslint and the typescript extensions: -->

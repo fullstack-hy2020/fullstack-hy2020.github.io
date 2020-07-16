@@ -17,7 +17,8 @@ Paradoxically, this seems to be true even though a rookie programmer would need 
 
 When something does not work, don't just guess what's wrong. Instead, log or use some other way of debugging. 
 
-**NB** when you use the command _console.log_ for debugging, don't concatenate things 'the Java way' with a plus. Instead of writing:
+**NB** As explained in part 1, when you use the command _console.log_ for debugging, don't concatenate things 'the Java way' with a plus. Instead of writing:
+
 ```js
 console.log('props value is' + props)
 ```
@@ -27,7 +28,6 @@ separate the things to be printed with a comma:
 ```js
 console.log('props value is', props)
 ```
-
 
 If you concatenate an object with a string and log it to the console (like in our first example), the result will be pretty useless: 
 
@@ -130,14 +130,14 @@ ReactDOM.render(
 Every note contains its textual content and a timestamp as well as a _boolean_ value for marking whether the note has been categorized as important or not, and also a unique <i>id</i>.
 
 
-The code functions due to the fact that there are exactly three notes in the array. 
+The example above works due to the fact that there are exactly three notes in the array. 
 A single note is rendered by accessing the objects in the array by referring to a hard-coded index number:
 
 ```js
-<li>{note[1].content}</li>
+<li>{notes[1].content}</li>
 ```
 
-This is, of course, not practical. The solution can be made general by generating React-elements from the array objects using the [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) function.
+This is, of course, not practical. We can improve on this by generating React elements from the array objects using the [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) function.
 
 ```js
 notes.map(note => <li>{note.content}</li>)
@@ -147,14 +147,14 @@ The result is an array of <i>li</i> elements.
 
 ```js
 [
-  '<li>HTML is easy</li>',
-  '<li>Browser can execute only Javascript</li>',
-  '<li>GET and POST are the most important methods of HTTP protocol</li>',
+  <li>HTML is easy</li>,
+  <li>Browser can execute only Javascript</li>,
+  <li>GET and POST are the most important methods of HTTP protocol</li>,
 ]
 ```
 
 
-Which can then be put inside <i>ul</i> tags:
+Which can then be placed inside <i>ul</i> tags:
 
 ```js
 const App = (props) => {
@@ -201,7 +201,7 @@ const App = (props) => {
 
 ### Key-attribute
 
-Even though the application seems to be working, there is a nasty warning on the console: 
+Even though the application seems to be working, there is a nasty warning in the console: 
 
 ![](../../images/2/1a.png)
 
@@ -238,7 +238,7 @@ React uses the key attributes of objects in an array to determine how to update 
 
 Understanding how the array method [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) works is crucial for the rest of the course. 
 
-The application contains an array called _notes_
+The application contains an array called _notes_:
 
 ```js
 const notes = [
@@ -274,7 +274,7 @@ console.log(result)
 ```
 
 <i>[1, 2, 3]</i>  will be printed to the console.
- _Map_ always creates a new array, the elements of which have been created from the elements of the original array by <i>mapping</i>, using the function given as a parameter to the map method. 
+ _map_ always creates a new array, the elements of which have been created from the elements of the original array by <i>mapping</i>: using the function given as a parameter to the _map_ method. 
 
 
 The function is
@@ -291,7 +291,7 @@ Which is an arrow function written in compact form. The full form would be:
 }
 ```
 
-The function gets a note object as a parameter, and <i>returns</i> the value of its  <i>id</i> field.
+The function gets a note object as a parameter, and <i>returns</i> the value of its <i>id</i> field.
 
 Changing the command to:
 
@@ -311,12 +311,13 @@ notes.map(note =>
 
 which generates a <i>li</i> tag containing the contents of the note from each note object. 
 
-Because the function parameter of the _map_ method
+Because the function parameter passed to the _map_ method - 
 
 ```js
 note => <li key={note.id}>{note.content}</li>
 ```
-is used to create view elements, the value of the variable must be rendered inside of curly braces. Try to see what happens if the braces are removed. 
+
+&nbsp;- is used to create view elements, the value of the variable must be rendered inside of curly braces. Try to see what happens if the braces are removed. 
 
 The use of curly braces will cause some headache in the beginning, but you will get used to them soon enough. The visual feedback from React is immediate.
 
@@ -343,7 +344,7 @@ As such, one way to define the row generation without getting errors is:
 ```
 
 This is, however, **not recommended** and can cause undesired problems even if it seems to be working just fine. 
-Read more [from here](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318).
+Read more about this [here](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318).
 
 ### Refactoring modules
 
@@ -355,8 +356,8 @@ const App = ({ notes }) => { //highlight-line
     <div>
       <h1>Notes</h1>
       <ul>
-        {notes.map((note, i) => 
-          <li key={i}>
+        {notes.map(note => 
+          <li key={note.id}>
             {note.content}
           </li>
         )}
@@ -380,14 +381,14 @@ const Note = ({ note }) => {
 }
 // highlight-end
 
-const App = ({ notes }) => 
+const App = ({ notes }) => {
   return (
     <div>
       <h1>Notes</h1>
       <ul>
         // highlight-start
-        {notes.map((note, i) => 
-          <Note key={i} note={note} />
+        {notes.map(note => 
+          <Note key={note.id} note={note} />
         )}
          // highlight-end
       </ul>
@@ -396,7 +397,7 @@ const App = ({ notes }) =>
 }
 ```
 
-Note, that the <i>key</i> attribute must now be defined for the <i>Note</i> components, and not for the <i>li</i> tags like before. 
+Note that the <i>key</i> attribute must now be defined for the <i>Note</i> components, and not for the <i>li</i> tags like before. 
 
 A whole React application can be written in a single file. Although that is, of course, not very practical. Common practice is to declare each component in their own file as an <i>ES6-module</i>.
 
@@ -407,7 +408,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 ```
 
-[imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) two modules, enabling them to be used in the code. The <i>react</i> module is placed into a variable called _React_ and <i>react-dom</i> to variable _ReactDOM_.
+[import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) two modules, enabling them to be used in that file. The <i>react</i> module is placed into a variable called _React_ and <i>react-dom</i> to variable _ReactDOM_.
 
 
 Let's move our <i>Note</i> component into its own module. 
@@ -433,7 +434,7 @@ Because this is a React-component, we must import React.
 
 The last line of the module [exports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) the declared module, the variable <i>Note</i>.
 
-Now the file using the component, <i>index.js</i>, can [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) the module: 
+Now the file that is using the component - <i>index.js</i> - can [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) the module: 
 
 ```js
 import React from 'react'
@@ -447,13 +448,13 @@ const App = ({ notes }) => {
 
 The component exported by the module is now available for use in the variable <i>Note</i>, just as it was earlier. 
 
-Note, that when importing our own components their location must be given <i>in relation to the importing file</i>:
+Note that when importing our own components, their location must be given <i>in relation to the importing file</i>:
 
 ```js
 './components/Note'
 ```
 
-The period in the beginning refers to the current directory, so the module's location is a file called <i>Note.js</i> in a sub-directory of the current <i>components</i>. directory. The filename extension can be omitted.
+The period - <i>.</i> - in the beginning refers to the current directory, so the module's location is a file called <i>Note.js</i> in the <i>components</i> sub-directory of the current directory. The filename extension - _.js_ - can be omitted.
 
 <i>App</i> is a component as well, so let's declare it in its own module as well. Since it is the root component of the application, we'll place it in the <i>src</i> directory. The contents of the file are as follows: 
 
@@ -466,8 +467,8 @@ const App = ({ notes }) => {
     <div>
       <h1>Notes</h1>
       <ul>
-        {notes.map((note, i) => 
-          <Note key={i} note={note} />
+        {notes.map((note) => 
+          <Note key={note.id} note={note} />
         )}
       </ul>
     </div>
@@ -494,13 +495,13 @@ ReactDOM.render(
 )
 ```
 
-Modules have plenty of other uses other than enabling component declarations to be separated into their own files. We will get back into them later in this course. 
+Modules have plenty of other uses other than enabling component declarations to be separated into their own files. We will get back to them later in this course. 
 
 
 The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1).
 
 
-Note that the master branch of the repository contains the code for a later version of the application. The current code is in the branch [part2-1](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1):
+Note that the <i>master</i> branch of the repository contains the code for a later version of the application. The current code is in the branch [part2-1](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1):
 
 ![](../../images/2/2e.png)
 
@@ -540,7 +541,7 @@ const App = () => {
 ```
 
 
-We'll hone in on the reason for the breakdown by adding <em>console.log</em> commands to the code. Because the first thing to be rendered is the <i>App</i> component, it's worth putting the first console.log there: 
+We'll hone in on the reason for the breakdown by adding <em>console.log</em> commands to the code. Because the first thing to be rendered is the <i>App</i> component, it's worth putting the first <em>console.log</em> there: 
 
 ```js
 const App = () => {
@@ -548,7 +549,7 @@ const App = () => {
     // ...
   }
 
-  console.log('App toimii...') // highlight-line
+  console.log('App works...') // highlight-line
 
   return (
     // ..
@@ -570,7 +571,7 @@ const Course = ({ course }) => (
 )
 ```
 
-The component should be changed to its longer form, in order for us to add the printing: 
+The component should be changed to its longer form in order for us to add the printing: 
 
 ```js
 const Course = ({ course }) => { 
@@ -599,7 +600,7 @@ const Course = (props) => { // highlight-line
 
 If the problem has still not been resolved, there really isn't much to do apart from continuing to bug-hunt by sprinkling more _console.log_ statements around your code. 
 
-I added this chapter to the material after the model answer for the next question exploded completely (due to props being of the wrong type), and I had to debug it using console.log.
+I added this chapter to the material after the model answer for the next question exploded completely (due to props being of the wrong type), and I had to debug it using <em>console.log</em>.
 
 
 </div>
@@ -618,15 +619,14 @@ Note that this part has more exercises than the ones before, so <i>do not submit
 
 **WARNING** create-react-app makes the project automatically into a git-repository, if the project is not created inside of an already existing repository. You probably **do not** want the project to become a repository, so run the command  _rm -rf .git_ from its root. 
 
-<h4>2.1: course contents step6</h4>
+<h4>2.1: Course information step6</h4>
 
 
-Let's finish the code for rendering course contents from exercises 1.1 - 1.5. You can start with the code from the model answers. 
+Let's finish the code for rendering course contents from exercises 1.1 - 1.5. You can start with the code from the model answers. The model answers for part 1 can be found by going to the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen), click on <i>my submissions</i> at the top, and in the row corresponding to part 1 under the <i>solutions</i> column click on <i>show</i>. To see the solution to the <i>course info</i> exercise, click on _index.js_ under <i>kurssitiedot</i> ("kurssitiedot" means "course info").
 
 
-**Note that if you copy a project from one place to another, you might have to destroy the <i>node\_modules</i> directory and install the dependencies again with the command _npm install_ before you can start the application.**
-It might not be good to copy a project or to put the  <i>node\_modules</i> directory into the version control per se. 
-
+**Note that if you copy a project from one place to another, you might have to delete the <i>node\_modules</i> directory and install the dependencies again with the command _npm install_ before you can start the application.**
+Generally, it's not recommended that you copy a project's whole contents and/or add the <i>node\_modules</i> directory to the version control system. 
 
 Let's change the <i>App</i> component like so: 
 
@@ -654,11 +654,7 @@ const App = () => {
     ]
   }
 
-  return (
-    <div>
-      <Course course={course} />
-    </div>
-  )
+  return <Course course={course} />
 }
 ```
 
@@ -688,14 +684,13 @@ The application must work <i>regardless of the number of parts a course has</i>,
 
 Ensure that the console shows no errors!
 
-<h4>2.2: Course contents step7</h4>
-
+<h4>2.2: Course information step7</h4>
 
 Show also the sum of the exercises of the course. 
 
 ![](../../images/teht/9e.png)
 
-<h4>2.3*: Course contents step8</h4>
+<h4>2.3*: Course information step8</h4>
 
 If you haven't done so already, calculate the sum of exercises with the array method [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce).
 
@@ -703,13 +698,13 @@ If you haven't done so already, calculate the sum of exercises with the array me
 
 ```js
 const total = 
-  parts.reduce( (s, p) => someMagicHere )
+  parts.reduce((s, p) => someMagicHere)
 ```
 
-and does not work, it's worth to use console.log, which requires the arrow function to be written in its longer form:
+and does not work, it's worth to use <i>console.log</i>, which requires the arrow function to be written in its longer form:
 
 ```js
-const total = parts.reduce( (s, p) => {
+const total = parts.reduce((s, p) => {
   console.log('what is happening', s, p)
   return someMagicHere 
 })
@@ -719,7 +714,7 @@ const total = parts.reduce( (s, p) => {
 
 ![](../../images/2/5b.png)
 
-<h4>2.4: Course contents step9</h4>
+<h4>2.4: Course information step9</h4>
 
 
 Let's extend our application to allow for an <i>arbitrary number</i> of courses:

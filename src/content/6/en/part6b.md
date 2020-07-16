@@ -305,7 +305,7 @@ import React from 'react'
 import { filterChange } from '../reducers/filterReducer'
 import { useDispatch } from 'react-redux'
 
-const VisibilityFilter = (props) => {
+const VisibilityFilter = () => {
   const dispatch = useDispatch()
 
   return (
@@ -419,7 +419,7 @@ There is an extension [Redux DevTools](https://chrome.google.com/webstore/detail
 When debugging, in addition to the browser extension we also have the software library [redux-devtools-extension](https://www.npmjs.com/package/redux-devtools-extension). Let's install it using the command:
 
 ```js
-npm install --save redux-devtools-extension
+npm install --save-dev redux-devtools-extension
 ```
 
 We'll have to slightly change the definition of the store to get the library up and running:
@@ -508,7 +508,7 @@ import React from 'react'
 import { useSelector } from 'react-redux' // highlight-line
 
 const Notification = () => {
-  const notification = useSelector(/*s omething here */) // highlight-line
+  const notification = useSelector(/* something here */) // highlight-line
   const style = {
     border: 'solid',
     padding: 10,

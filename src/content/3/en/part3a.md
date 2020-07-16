@@ -17,7 +17,7 @@ We will be building our backend on top of [NodeJS](https://nodejs.org/en/), whic
 This course material was written with the version <i>v10.18.0</i> of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running _node -v_ in the command line).
 
 
-As mentioned in [part 1](/en/part1/javascript), browsers don't yet support the newest features of JavaScript, and that is why the code running in the browser must be <i>transpiled</i> with e.g. [babel](https://babeljs.io/). The situation with JavaScript running in the backend is different. The newest version of Node supports a large majority of the latest features of JavaScript, so we can use the latest features without having to transpile our code.
+As mentioned in [part 1](/en/part1/java_script), browsers don't yet support the newest features of JavaScript, and that is why the code running in the browser must be <i>transpiled</i> with e.g. [babel](https://babeljs.io/). The situation with JavaScript running in the backend is different. The newest version of Node supports a large majority of the latest features of JavaScript, so we can use the latest features without having to transpile our code.
 
 
 Our goal is to implement a backend that will work with the notes application from [part 2](/en/part2/). However, let's start with the basics by implementing a classic "hello world" application.
@@ -187,7 +187,7 @@ const app = http.createServer((request, response) => {
 })
 ```
 
-The code uses the _createServer_ method of the [http](https://nodejs.org/docs/latest-v8.x/api/http.html) module to create a new web server. An <i>event handler</i> is registered to the server, that is called <i>every time</i>  an HTTP request is made to the server's address http:/localhost:3001.
+The code uses the _createServer_ method of the [http](https://nodejs.org/docs/latest-v8.x/api/http.html) module to create a new web server. An <i>event handler</i> is registered to the server, that is called <i>every time</i>  an HTTP request is made to the server's address http://localhost:3001.
 
 
 The request is responded to with the status code 200, with the <i>Content-Type</i> header set to <i>text/plain</i>, and the content of the site to be returned set to <i>Hello World</i>.
@@ -507,14 +507,14 @@ The URL for the entire collection of all note resources is <i>www.example.com/ap
 
 We can execute different operations on resources. The operation to be executed is defined by the HTTP <i>verb</i>:
 
-| URL                   | verb               | functionality                                                  |
-| --------------------- | ------------------- | ---------------------------------------------------------------- |
-| notes/10 &nbsp;&nbsp; | GET                 | fetches a single resource                                      |
-| notes                 | GET                 | fetches all resources in the collection                                 |
-| notes                 | POST                | creates a new resource based on the request data              |
-| notes/10              | DELETE &nbsp;&nbsp; | removes the identified resource                                     |
-| notes/10              | PUT                 | replaces the entire identified resource with the request data
-| notes/10              | PATCH               | replaces a part of the identified resource with the request data
+| URL                   | verb                | functionality                                                    |
+| --------------------- | ------------------- | -----------------------------------------------------------------|
+| notes/10              | GET                 | fetches a single resource                                        |
+| notes                 | GET                 | fetches all resources in the collection                          |
+| notes                 | POST                | creates a new resource based on the request data                 |
+| notes/10              | DELETE              | removes the identified resource                                  |
+| notes/10              | PUT                 | replaces the entire identified resource with the request data    |
+| notes/10              | PATCH               | replaces a part of the identified resource with the request data |
 |                       |                     |                                                                  |
 
 
@@ -701,7 +701,7 @@ Let's install Postman and try it out:
 
 ![](../../images/3/11ea.png)
 
-Using Postman is quite easy in this situation. It's enough to define the url and then select the correct request type.
+Using Postman is quite easy in this situation. It's enough to define the url and then select the correct request type (DELETE).
 
 The backend server appears to respond correctly. By making an HTTP GET request to <http://localhost:3001/api/notes> we see that the note with the id 2 is no longer in the list, which indicates that the deletion was successful. 
 
@@ -749,7 +749,7 @@ app.post('/api/notes', (request, response) => {
 The event handler function can access the data from the <i>body</i> property of the _request_ object.
 
 
-Without a the json-parser, the <i>body</i> property would be undefined. The json-parser functions so that it takes the JSON data of a request, transforms it into a JavaScript object and then attaches it to the <i>body</i> property of the _request_ object before the route handler is called.
+Without the json-parser, the <i>body</i> property would be undefined. The json-parser functions so that it takes the JSON data of a request, transforms it into a JavaScript object and then attaches it to the <i>body</i> property of the _request_ object before the route handler is called.
 
 
 For the time being, the application does not do anything with the received data besides printing it to the console and sending it back in the response.
@@ -1048,7 +1048,7 @@ All HTTP requests except POST should be <i>idempotent</i>:
 This means that if a request has side-effects, then the result should be same regardless of how many times the request is sent.
 
 
-If we make an HTTP PUT request to the url <i>/api/notes/10</i> and with the request we send the data <em>{ content: "no side effects!", important: true }</em>, the result is the same regardless of many times the request is sent.
+If we make an HTTP PUT request to the url <i>/api/notes/10</i> and with the request we send the data <em>{ content: "no side effects!", important: true }</em>, the result is the same regardless of how many times the request is sent.
 
 
 Like <i>safety</i> for the GET request, <i>idempotence</i> is also just a recommendation in the HTTP standard and not something that can be guaranteed simply based on the request type. However, when our API adheres to RESTful principles, then GET, HEAD, PUT, and DELETE requests are used in such a way that they are idempotent.
@@ -1125,7 +1125,7 @@ Add the [morgan](https://github.com/expressjs/morgan) middleware to your applica
 The documentation for Morgan is not the best, and you may have to spend some time figuring out how to configure it correctly. However, most documentation in the world falls under the same category, so it's good to learn to decipher and interpret cryptic documentation in any case.
 
 
-Morgan is installed just like all other libraries with the _npm install_ command. Taking morgan into use happens the same as configuring any other middleware by using the _app.use_ command.
+Morgan is installed just like all other libraries with the _npm install_ command. Taking morgan into use happens the same way as configuring any other middleware by using the _app.use_ command.
 
 
 #### 3.8*: Phonebook backend step8
@@ -1135,6 +1135,7 @@ Configure morgan so that it also shows the data sent in HTTP POST requests:
 
 ![](../../images/3/24.png)
 
+Note that logging data even in the console can be dangerous since it can contain sensitive data and may violate local privacy law (e.g. GDPR in EU) or business-standard. In this exercise, you don't have to worry about privacy issues, but in practice, try not to log any sensitive data.
 
 This exercise can be quite challenging, even though the solution does not require a lot of code.
 

@@ -26,7 +26,7 @@ TypeScript consists of three separate, but mutually fulfilling parts:
 
 ![](../../images/9/1.png)
 
-<i>The language</i> concists of syntax, keywords and type annotations. The syntax is similar to but not the same as JavaScript syntax. From the three parts of TypeScript programmers have the most direct contact with the language. 
+<i>The language</i> consists of syntax, keywords and type annotations. The syntax is similar to but not the same as JavaScript syntax. From the three parts of TypeScript programmers have the most direct contact with the language. 
 
 <!-- **The compiler** is responsible for type information erasure and the code transformations which enable TypeScript code to be transpiled into executable JavaScript-code. In other words, TypeScript isn't actually genuine statically typed code, because everything related to the types is removed at compile-time. -->
 <!-- Traditionally, when speaking of _compiling_, it means that code is transformed from a human readable format to a machine readable format. In TypeScript's case the human readable source code is transformed into another human readable source code, so the correct term to be used should be _transpiling_, but compiling has risen to the most commonly known term in this context, so we will continue using the same term. -->
@@ -69,7 +69,7 @@ console.log(birthdayGreeter(birthdayHero, 22));
 #### Structural typing
 
 <!-- TypeScript is a structurally typed language. In structural typing, an element is considered to be compatible with another if  for each feature within the second element's type, a corresponding and identical feature exists in the first element's type. Two types are considered to be identical if each is compatible with the other. -->
-TypeScript is a structurally typed language. In structural typing two elements are considered to be compatible with oneanother if for each feature within the type of the first element a corresponding and identical feature exists within the type of the second element. Two types are considered to be identical if they are compatible with each other.
+TypeScript is a structurally typed language. In structural typing two elements are considered to be compatible with one another if for each feature within the type of the first element a corresponding and identical feature exists within the type of the second element. Two types are considered to be identical if they are compatible with each other.
 
 #### Type inference
 
@@ -154,7 +154,7 @@ On different forums you may stumble upon a lot of different arguments either for
 
 <!-- First of all, probably the most noticeable feature with TypeScript is that it offers **type checking and static code analysis**. The ability to require values to be of a certain type and to have the compiler warn about wrongful usage can help reduce runtime errors and you might even be able to reduce the amount of required unit tests in a project, at least concerning pure type tests. The static code analysis doesn't only warn about wrongful type usage, but also if you for instance misspell a variable or function name or try to use a value beyond it's scope etc. With the help of a sufficient linter settings, it's hard to even think of runtime errors that you may be able to produce. -->
 First of all, TypeScript offers <i>type checking and static code analysis</i>. We can require values to be of a certain type, and have the compiler warn about using them wrong. This can reduce runtime errors and you might even be able to reduce the amount of required unit tests in a project, at least concerning pure type tests.
-The static code analysis doesn't only warn about wrongful type usage,but also other mistakes such as misspelling a variable or function name or trying to use a variable beyond its scope. 
+The static code analysis doesn't only warn about wrongful type usage, but also other mistakes such as misspelling a variable or function name or trying to use a variable beyond its scope. 
 
 
 <!-- A second advantage with TypeScript is that the type annotations in the code can function as a type of **code level documentation**. It's easy to check from a function signature what kind of arguments the function can receive and what type of data it will return. This type of type annotation bound documentation will always be up to date and it makes it easier for new programmers to start working on an existing project. It is also helpful when returning to an old project. Types may also be re-used all around the code base, so a change to one type automatically reflects as a change to all the locations where the type is used. One might argue that you can achieve similar code level documentation with e.g. [JSDoc](https://jsdoc.app/about-getting-started.html), but it is not connected to the code as tightly as TypeScript's types, and may thus get out of sync more easily and is also more verbose. -->

@@ -9,7 +9,7 @@ lang: fi
 
 Yhdistetään seuraavaksi [osassa 2](/osa2) tekemämme frontend omaan backendiimme. 
 
-Edellisessä osassa backendinä toiminut json-server tarjosi muistiinpanojen listan osoitteessa http://localhost:3001/notes fronendin käyttöön. Backendimme urlien rakenne on hieman erilainen, muistiinpanot löytyvät osoitteesta http://localhost:3001/api/notes, eli muutetaan frontendin tiedostossa <i>src/services/notes.js</i> määriteltyä muuttujaa _baseUrl_ seuraavasti:
+Edellisessä osassa backendinä toiminut json-server tarjosi muistiinpanojen listan osoitteessa http://localhost:3001/notes frontendin käyttöön. Backendimme urlien rakenne on hieman erilainen, muistiinpanot löytyvät osoitteesta http://localhost:3001/api/notes, eli muutetaan frontendin tiedostossa <i>src/services/notes.js</i> määriteltyä muuttujaa _baseUrl_ seuraavasti:
 
 ```js
 import axios from 'axios'
@@ -49,7 +49,7 @@ Asennetaan backendiin <i>cors</i> komennolla
 npm install cors --save
 ```
 
-Otetaan middleware käyttöön ja sallitaan kaikki origineista tulevat pyynnöt:
+Otetaan middleware käyttöön toistaiseksi sellaisella konfiguraatiolla joka sallii kaikista origineista tulevat pyynnöt kaikkiin backendin express routeihin:
 
 ```js
 const cors = require('cors')
@@ -149,7 +149,7 @@ tarkastaa Express GET-tyyppisten HTTP-pyyntöjen yhteydessä ensin löytyykö py
 
 Nyt HTTP GET -pyyntö osoitteeseen <i>www.palvelimenosoite.com/index.html</i> tai <i>www.palvelimenosoite.com</i> näyttää Reactilla tehdyn frontendin. GET-pyynnön esim. osoitteeseen <i>www.palvelimenosoite.com/notes</i> hoitaa backendin koodi.
 
-Koska tässä tapauksessa sekä frontend että backend toimivat samassa osoitteessa, voidaan React-sovelluksessa eli fronendin koodissa oleva palvelimen _baseUrl_ määritellä [suhteellisena](https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2) URL:ina, eli ilman palvelinta yksilöivää osaa:
+Koska tässä tapauksessa sekä frontend että backend toimivat samassa osoitteessa, voidaan React-sovelluksessa eli frontendin koodissa oleva palvelimen _baseUrl_ määritellä [suhteellisena](https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2) URL:ina, eli ilman palvelinta yksilöivää osaa:
 
 ```js
 import axios from 'axios'

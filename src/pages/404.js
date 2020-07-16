@@ -14,7 +14,11 @@ class NotFoundPage extends Component {
 
   componentDidMount() {
     const siteLanguage =
-      window.location.pathname.indexOf('/en') !== -1 ? 'en' : 'fi';
+      window.location.pathname.indexOf('/en') > -1
+        ? 'en'
+        : window.location.pathname.indexOf('/zh') > -1
+        ? 'zh'
+        : 'fi';
 
     this.setState({ siteLanguage });
   }
@@ -41,7 +45,13 @@ class NotFoundPage extends Component {
             className="col-10 arrow__container--with-link"
             bold
             thickBorder
-            link={this.state.siteLanguage === 'en' ? '/en' : '/'}
+            link={
+              this.state.siteLanguage === 'en'
+                ? '/en'
+                : this.state.siteLanguage === 'zh'
+                ? '/zh'
+                : '/'
+            }
             content={[
               { backgroundColor: colors['main'], text: 'Go back home' },
             ]}
