@@ -195,7 +195,7 @@ Mongoosen [dokumentaatio](https://mongoosejs.com/docs/deprecations.html) kertoo,
 
 #### 3.20*: puhelinluettelo ja tietokanta, step8
 
-Laajenna validaatiota siten, että tietokantaan talletettavan nimen on oltava pituudeltaan vähintään 3 merkkiä ja puhelinnumeron vähitään 8 merkkiä. 
+Laajenna validaatiota siten, että tietokantaan talletettavan nimen on oltava pituudeltaan vähintään 3 merkkiä ja puhelinnumeron vähintään 8 merkkiä. 
 
 Laajenna sovelluksen frontendia siten, että se antaa jonkinlaisen virheilmoituksen validoinnin epäonnistuessa. Virheidenkäsittely hoidetaan lisäämällä <em>catch</em>-lohko uuden henkilön lisäämisen yhteyteen:
 
