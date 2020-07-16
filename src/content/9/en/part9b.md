@@ -888,7 +888,7 @@ Now lint will complain if we try to define a variable of type <i>any</i>:
 
 
 The [@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) has a lot of TypeScript specific eslint rules, but you can also use all basic eslint rules in TypeScript projects. 
-For now we should propably go with the recommended settings and modify the rules as we go along whenever we find something we want to behave differently. 
+For now we should probably go with the recommended settings and modify the rules as we go along whenever we find something we want to behave differently. 
 
 <!-- On top of the regular recommended settings, we should already try to get familiar with coding style we are using in this part and <i>set the semicolon at the end of each line of code to required</i>.  -->
 On top of the recommended settings, we should try to get familiar with the coding style required in this part and <i>set the semicolon at the end of each line of code to required</i>.
