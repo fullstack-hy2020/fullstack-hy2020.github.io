@@ -897,7 +897,7 @@ npm install --save react-redux
 ```
 
 <!-- Eriytetään komponentti _App_ omaan tiedostoon _App.js_. Tarkastellaan ensin mitä sovelluksen muiden tiedostojen sisällöksi tulee. -->
-Next we move the _App_ component into its own file _App.js_. Let's see how this effects the rest of the application files.
+Next we move the _App_ component into its own file _App.js_. Let's see how this affects the rest of the application files.
 
 <!-- Tiedosto _index.js_ näyttää seuraavalta -->
 _Index.js_ becomes:
