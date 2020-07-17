@@ -1451,7 +1451,7 @@ const submitNewPatient = async (values: FormValues) => {
 <div class="tasks">
 
 
-### Exercises 9.23.-9.26.
+### Exercises 9.23.-9.27.
 #### 9.23: patientor, 步骤8
 9.23: patientor，步骤8
 
