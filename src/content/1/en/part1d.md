@@ -396,7 +396,7 @@ If and when your code fails to compile and your browser lights up like a Christm
 
 don't write more code but rather find and fix the problem **immediately**. There has yet to be a moment in the history of coding where code that fails to compile would miraculously start working after writing large amounts of additional code. I highly doubt that such an event will transpire during this course either.
 
-Old school, print-based debugging is always a good idea. If the component
+Old school, print-based debugging is always a good idea. 
 
 ```js
 const Button = ({ onClick, text }) => (
@@ -406,7 +406,7 @@ const Button = ({ onClick, text }) => (
 )
 ```
 
-is not working as intended, it's useful to start printing its variables out to the console. In order to do this effectively, we must transform our function into the less compact form and receive the entire props object without destructuring it immediately:
+If the component is not working as intended, it's useful to start printing its variables out to the console. In order to do this effectively, we must transform our function into the less compact form and receive the entire props object without destructuring it immediately:
 
 ```js
 const Button = (props) => { 
