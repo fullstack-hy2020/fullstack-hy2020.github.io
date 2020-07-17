@@ -644,7 +644,7 @@ const Togglable = React.forwardRef((props, ref) => {
 
 Togglable.propTypes = {
   buttonLabel: PropTypes.string.isRequired
-}
+})
 ```
 
 Jos propsia ei määritellä, seurauksena on konsoliin tulostuva virheilmoitus
