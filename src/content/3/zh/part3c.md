@@ -767,37 +767,50 @@ app.get('/api/notes/:id', (request, response) => {
 ### Error handling
 【错误处理】
 <!-- If we try to visit the URL of a note with an id that does not actually exist e.g. <http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431> where <i>5a3b80015b6ec6f1bdf68d</i> is not an id stored in the database, then the browser will simply get "stuck" since the server never responds to the request. -->
-如果我们试图向数据库访问一个实际上并不存在的 id 的便笺的 URL，比如 http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431 ，其中<i>5c41c90e84d891c15dfa3431</i> 不是一个存储在数据库中的 id，那么浏览器将简单地“卡住” ，因为服务器无法响应请求。
+
+<!-- If we try to visit the URL of a note with an id that does not actually exist e.g. <http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431> where <i>5c41c90e84d891c15dfa3431</i> is not an id stored in the database, then the response will be _null_. -->
+
+如果我们试图向数据库访问一个实际上并不存在的 id 的便笺的 URL，比如 http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431 ，其中<i>5c41c90e84d891c15dfa3431</i> 不是一个存储在数据库中的 id，那么返回值将会是 _null_。
 
 <!-- We can see the following error message appear in the logs for the backend: -->
-我们可以在后端的日志中看到如下错误消息:
 
-![](../../images/3/47.png)
+<!-- Let's change this behavior so that if note with the given id doesn't exist, the server will respond to the request with the HTTP status code 404 not found. In addition let's implement a simple <em>catch</em> block to handle cases where the promise returned by the <em>findById</em> method is <i>rejected</i>: -->
 
-<!-- The request has failed and the associated Promise has been <i>rejected</i>. Since we don't handle the rejection of the promise, the request never gets a response. In part 2, we already acquainted ourselves with [handling errors in promises](/zh/part2/在服务端将数据_alert出来#promises-and-errors). -->
-请求失败，相关的承诺已被拒绝。 因为我们不处理承诺的拒绝，所以请求不会得到响应。 在第2章节中，我们已经了解了[handling errors in promises](/zh/part2/在服务端将数据_alert出来#promises-and-errors).
-
-<!-- Let's add a simple error handler: -->
-让我们添加一个简单的错误处理程序:
+我们来改变一下行为，当给定id的note不存在时，服务端会向请求响应404状态。另外我们来实现一个简单的<em>catch</em>代码块，来处理<em>findById</em>方法返回<i>rejected</i>的情况：
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
   Note.findById(request.params.id)
     .then(note => {
+       // highlight-start
+      if (note) {
       response.json(note)
+      } else {
+        response.status(404).end()
+      }
+      // highlight-end
+
     })
+    // highlight-start
     .catch(error => {
       console.log(error)
-      response.status(404).end()
+      response.status(500).end()
     })
+    // highlight-end
 })
 ```
 
-<!-- Every request that leads to an error will be responded to with the HTTP status code 404 not found. The console displays more detailed information about the error. -->
-每一个导致错误的请求都会在 HTTP状态码404没有找到的情况下被响应。 控制台显示有关错误的详细信息。
+<!-- Every request that leads to an error will be responded to with the HTTP status code 404 not found. The console displays more detailed information about the error.
+每一个导致错误的请求都会在 HTTP状态码404没有找到的情况下被响应。 控制台显示有关错误的详细信息。 -->
+
+<!-- If no matching object is found in the database, the value of _note_ will be _null_ and the _else_ block is executed. This results in a response with the status code <i>404 not found</i>. If promise returned by the <em>findById</em> method is rejected, the response will have the status code <i>500 internal server error</i>. The console displays more detailed information about the error. -->
+如果在数据库中没有找到匹配的对象，_note_ 的值会是 _null_， 于是 _else_ 代码块执行。因此返回的状态是<i>404 not found</i>。而如果 <em>findById</em> 方法的promise 状态会是  <i>500 internal server error</i>。 可以在控制台中看到更多的错误打印信息。
 
 <!-- There's actually two different types of error situations. In one of those situations, we are trying to fetch a note with a wrong kind of _id_, meaning an _id_ that doesn't match the mongo identifier format. -->
-实际上有两种不同类型的错误情况。 在其中一种情况下，我们试图获取一个带有错误类型的 id 的便笺，这意味着一个与 mongo 标识符格式不匹配的 id。
+<!-- 实际上有两种不同类型的错误情况。 在其中一种情况下，我们试图获取一个带有错误类型的 id 的便笺，这意味着一个与 mongo 标识符格式不匹配的 id。 -->
+
+On top of the non-existing note, there's one more error situation needed to be handled. In this situation, we are trying to fetch a note with a wrong kind of _id_, meaning an _id_ that doesn't match the mongo identifier format.
+出了note 不存在的错误，还有许多错误是需要处理的。现在，我们尝试获取一个错误的 _id_， 也就是一个与mongo 标识符格式不匹配的 _id_ 。
 
 <!-- If we make the following request, we will get the error message shown below: -->
 如果我们提出如下请求，我们将得到如下所示的错误消息:
@@ -813,7 +826,11 @@ Body:   {}
     ...
 </pre>
 <!-- The other error situation happens when the id is in the correct format, but no note is found in the database for that id. -->
-另一种错误情况发生在 id 格式正确，但在数据库中没有找到该 id 的便笺时。
+<!-- 另一种错误情况发生在 id 格式正确，但在数据库中没有找到该 id 的便笺时。 -->
+<!-- Given malformed id as an argument, the <em>findById</em> method will throw an error causing the returned promise to be rejected. This will cause the callback function defined in the <em>catch</em> block to be called.  -->
+当给出了一个奇怪的id作为参数时，<em>findById</em> 方法会抛出一个错误，进而会导致promise返回了rejected，因此也就会触发<em>catch</em>代码块中的函数。
+
+
 <!-- We should distinguish between these two different types of error situations. The latter is in fact an error caused by our own code. -->
 我们应该区分这两种不同类型的错误情况。 后者实际上是由我们自己的代码引起的错误。
 
@@ -824,13 +841,11 @@ Body:   {}
 app.get('/api/notes/:id', (request, response) => {
   Note.findById(request.params.id)
     .then(note => {
-      // highlight-start
       if (note) {
         response.json(note)
       } else {
         response.status(404).end() 
       }
-      // highlight-end
     })
     .catch(error => {
       console.log(error)
@@ -840,7 +855,7 @@ app.get('/api/notes/:id', (request, response) => {
 ```
 
 <!-- If no matching object is found in the database, the value of _note_ will be undefined and the _else_ block is executed. This results in a response with the status code <i>404 not found</i>. -->
-如果在数据库中没有找到匹配的对象，将不定义 note 的值，并执行 else 块。 这将导致响应状态代码 <i>404 not found</i>.
+<!-- 如果在数据库中没有找到匹配的对象，将不定义 note 的值，并执行 else 块。 这将导致响应状态代码 <i>404 not found</i>. -->
 
 <!-- If the format of the id is incorrect, then we will end up in the error handler defined in the _catch_ block. The appropriate status code for the situation is [400 bad request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1), because the situation fits the description perfectly: -->
 如果 id 的格式不正确，那么我们将在 catch 块中定义的错误处理程序中结束。 适合这种情况的状态代码是 [400 Bad Request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1) ，因为这种情况完全符合描述:

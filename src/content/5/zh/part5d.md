@@ -1242,7 +1242,7 @@ it('other of those can be made important', function () {
 
 
 <!-- In the first line, we use the [parent](https://docs.cypress.io/api/commands/parent.htm) command to access the parent element of the element containing <i>second note</i> and find the button from within it.  -->
-在第一行中，我们使用[parent](https://docs.cypress.io/api/commands/parent.htm)命令来访问包含<i>second note</i> 的元素的父元素，并在其中找到按钮。
+在第一行中，我们使用[parent](https://docs.cypress.io/api/commands/parent.html)命令来访问包含<i>second note</i> 的元素的父元素，并在其中找到按钮。
 
 <!-- Then we click the button, and check that the text on it changes.  -->
 然后我们点击按钮，检查上面的文本是否改变。
