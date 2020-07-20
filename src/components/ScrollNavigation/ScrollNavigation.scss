@@ -39,7 +39,6 @@
     list-style-type: none;
 
     &:hover, &.selected {
-      cursor: pointer;
 
       a {
         background-color: $black;
