@@ -728,7 +728,7 @@ Interesting lines on the code have been highlighted.
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 
-import { EDIT_NUMBER, ALL_PERSONS } from '../queries'
+import { EDIT_NUMBER } from '../queries'
 
 const PhoneForm = () => {
   const [name, setName] = useState('')
