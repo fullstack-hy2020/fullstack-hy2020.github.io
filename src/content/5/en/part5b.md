@@ -665,7 +665,7 @@ The <i>Togglable</i> component assumes that it is given the text for the button 
 <Togglable> buttonLabel forgotten... </Togglable>
 ```
 
-The application works, but the browser renders a button that that has no label text.
+The application works, but the browser renders a button that has no label text.
 
 We would like to enforce that when the <i>Togglable</i> component is used, the button label text prop must be given a value.
 
