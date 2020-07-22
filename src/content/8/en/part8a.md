@@ -156,7 +156,7 @@ Assuming our applications has saved the information of three people, the respons
 ```
 
 The query fetching the information of all of the people, _allPersons_, is a bit more complicated. Because the query returns a list of <i>Person</i>-objects, the query must describe 
-<i>which fields</i> of the objects the query [returns](https://graphql.org/learn/queries/#fields):
+<i>which [fields](https://graphql.org/learn/queries/#fields)</i> of the objects the query returns:
 ```js
 query {
   allPersons {
