@@ -425,7 +425,7 @@ Katsotaan vielä lopuksi muutamaa huomisen tai oikeastaan jo tämän päivän te
 
 Javascriptin muuttujien [dynaaminen tyypitys](https://developer.mozilla.org/en-US/docs/Glossary/Dynamic_typing) aiheuttaa välillä ikäviä bugeja. Osassa 5 käsittelimme lyhyesti [PropTypejä](/osa5/props_children_ja_proptypet#prop-types), eli mekanismia, jonka avulla React-komponenteille välitettävile propseille on mahdollista tehdä tyyppitarkastuksia.
 
-Viime aikoina on ollut havaittavissa nousevaa kiinnostusta [staattiseen tyypitykseen](https://en.wikipedia.org/wiki/Type_system#Static_type_checking). Tämän hetkein suosituin tapa Javascriptin tyypitetty versio on Microsofin kehittämä [Typescript](https://www.typescriptlang.org/). Huhtikuun alussa ilmestyvä [osa 9](/osa9) tulee käsittelemään Typescriptiä!
+Viime aikoina on ollut havaittavissa nousevaa kiinnostusta [staattiseen tyypitykseen](https://en.wikipedia.org/wiki/Type_system#Static_type_checking). Tämän hetkein suosituin Javascriptin tyypitetty versio on Microsoftin kehittämä [Typescript](https://www.typescriptlang.org/). Huhtikuun alussa ilmestyvä [osa 9](/osa9) tulee käsittelemään Typescriptiä!
 
 #### Server side rendering, isomorfiset sovellukset ja universaali koodi
 
