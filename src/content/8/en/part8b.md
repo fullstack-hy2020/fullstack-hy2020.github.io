@@ -838,7 +838,7 @@ The warning is pointless, and the easiest solution is to ignore the ESLint rule 
 ```js
 useEffect(() => {
   if ( result.data && !result.data.editNumber) {
-    notify('name not found')
+    setError('name not found')
   }
 // highlight-start  
 }, [result.data])  // eslint-disable-line 
@@ -851,10 +851,10 @@ We could try to get rid of the warning by adding the _notify_ function to useEff
 ```js
 useEffect(() => {
   if ( result.data && !result.data.editNumber) {
-    notify('name not found')
+    setError('name not found')
   }
 // highlight-start  
-}, [result.data, notify])
+}, [result.data, setError])
 // highlight-end
 ```
 
