@@ -444,7 +444,7 @@ const App = () => {
 
 The solution is elegant. The initialization logic for the notes has been completely separated to outside the React component.
 
-The action creator _createNew_, which adds a new note looks like this
+The action creator _createNote_, which adds a new note looks like this
 
 ```js
 export const createNote = content => {
