@@ -552,7 +552,7 @@ Now the user's information is added to the <i>user</i> field of note objects.
 ![](../../images/4/15ea.png)
 
 
-It's important to understand that the database does not actually know that the ids stored in the <i>user</i> field of notes reference documents in the user collection.
+It's important to understand that the database does not actually know that the ids stored in the <i>user</i> field of notes, reference documents in the user collection.
 
 The functionality of the <i>populate</i> method of Mongoose is based on the fact that we have defined "types" to the references in the Mongoose schema with the <i>ref</i> option:
 
