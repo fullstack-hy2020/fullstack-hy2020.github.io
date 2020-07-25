@@ -482,7 +482,7 @@ Let's define the <i>npm script _test_</i> to execute tests with Jest and to repo
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
     "logs:prod": "heroku logs --tail",
     "lint": "eslint .",
-    "test": "jest --verbose" // highlight-line
+    "test": "jest --verbose || true" // highlight-line
   },
   //...
 }
