@@ -668,7 +668,7 @@ App
     Header
     Content
       Part
-      Part
+      Total
       ...
 </pre>
 
