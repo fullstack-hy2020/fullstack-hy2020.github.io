@@ -837,7 +837,7 @@ The warning is pointless, and the easiest solution is to ignore the ESLint rule 
 
 ```js
 useEffect(() => {
-  if ( result.data && !result.data.editNumber) {
+  if (result.data && !result.data.editNumber) {
     setError('name not found')
   }
 // highlight-start  
@@ -846,11 +846,11 @@ useEffect(() => {
 ```
 
 <!-- Voisimme yrittää päästä varoituksesta eroon lisäämällä funktion _notify_ useEffectin toisena parametrina olevaan taulukkoon: -->
-We could try to get rid of the warning by adding the _notify_ function to useEffect's second parameter array:
+We could try to get rid of the warning by adding the _setError_ function to useEffect's second parameter array:
 
 ```js
 useEffect(() => {
-  if ( result.data && !result.data.editNumber) {
+  if (result.data && !result.data.editNumber) {
     setError('name not found')
   }
 // highlight-start  
