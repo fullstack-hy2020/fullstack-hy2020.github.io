@@ -199,7 +199,7 @@ Lopputulos näyttää seuraavalta
 
 ![](../../images/2/26e.png)
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa]https://github.com/fullstack-hy2020/part2-notes/tree/part2-7), branchissa <i>part2-7</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part2-7), branchissa <i>part2-7</i>.
 
 ### Inline-tyylit
 
@@ -272,7 +272,7 @@ Itseasiassa Reactin filosofia on täysin päinvastainen. Koska CSS:n, HTML:n ja 
 
 Toiminnallisen kokonaisuuden strukturointiyksikkö on React-komponentti, joka määrittelee niin sisällön rakenteen kuvaavan HTML:n, toiminnan määrittelevät Javascript-funktiot kuin komponentin tyylinkin yhdessä paikassa, siten että komponenteista tulee mahdollisimman riippumattomia ja yleiskäyttöisiä.
 
-Sovelluksen lopullinen koodi on kokonaisuudessaan [githubissa]https://github.com/fullstack-hy2020/part2-notes/tree/part2-8), branchissa <i>part2-8</i>.
+Sovelluksen lopullinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part2-8), branchissa <i>part2-8</i>.
 
 </div>
 
