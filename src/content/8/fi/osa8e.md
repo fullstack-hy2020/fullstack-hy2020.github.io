@@ -250,7 +250,7 @@ const httpLink = new HttpLink({
 
 // highlight-start
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:4000/graphql`,
+  uri: 'ws://localhost:4000/graphql',
   options: {
     reconnect: true
   }
@@ -262,7 +262,7 @@ const splitLink = split(
     return (
       definition.kind === 'OperationDefinition' &&
       definition.operation === 'subscription'
-    );
+    )
   },
   wsLink,
   authLink.concat(httpLink),
