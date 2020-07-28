@@ -555,7 +555,7 @@ Let's specify the following configurations in our <i>tsconfig.json</i> file:
 Do not worry too much about the <i>compilerOptions</i>, they will be under closer inspection on part 2.
 
 <!-- The explanations for each of the field can be found from TypeScript documentation or the really handy although beta-stage [tsconfig page](https://www.staging-typescript.org/tsconfig) or in a little worse format in the tsconfig [schema definition](http://json.schemastore.org/tsconfig). -->
-You can find explanations for each of the configurations from the TypeScript documentation, or the really handy [tsconfig page](https://www.typescriptlang.org/tsconfig), or from the tsconfig [schema definition](http://json.schemastore.org/tsconfig), which unfortunately is formatted a little worse than the first two options. 
+You can find explanations for each of the configurations from the TypeScript documentation, or the really handy [tsconfig page](https://www.staging-typescript.org/tsconfig), or from the tsconfig [schema definition](http://json.schemastore.org/tsconfig), which unfortunately is formatted a little worse than the first two options. 
 
 ### Adding express to the mix
 
