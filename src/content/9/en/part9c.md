@@ -88,8 +88,8 @@ The <i>target</i> configuration tells the compiler which ECMAScript version to u
 <!-- <i>noImplicitAny, noImplicitThis, alwaysStrict, strictBindCallApply, strictNullChecks, strictFunctionTypes and strictPropertyInitialization</i>. These all guide our coding style to use TypeScript features more strictly. The most important for us is perhaps the already familiar [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny) that restricts implicitly setting type <i>any</i>, which happens for example if you don't type the expected parameters of a function. The rest of the options can all be studied more closely on the [tsconfig documentation](https://www.typescriptlang.org/v2/en/tsconfig#strict). Using <i>strict</i> is suggested by the official documentation. -->
 <i>noImplicitAny, noImplicitThis, alwaysStrict, strictBindCallApply, strictNullChecks, strictFunctionTypes and strictPropertyInitialization</i>.
 These guide our coding style to use the TypeScript features more strictly.
-For us perhaps the most important is the already familiar [noImplicitAny](https://www.typescriptlang.org/en/tsconfig#noImplicitAny). It prevents implicitly setting type <i>any</i>, which can happen if you don't type the parameters of a function for example.
-Details of the rest of the configurations can be found from the [tsconfig documentation](https://www.typescriptlang.org/en/tsconfig#strict).
+For us perhaps the most important is the already familiar [noImplicitAny](https://www.staging-typescript.org/tsconfig#noImplicitAny). It prevents implicitly setting type <i>any</i>, which can happen if you don't type the parameters of a function for example.
+Details of the rest of the configurations can be found from the [tsconfig documentation](https://www.staging-typescript.org/tsconfig#strict).
 Using <i>strict</i> is suggested by the official documentation.
 
 <!-- <i>noUnusedLocals</i> gives an error if a local variable is unused and <i>noUnusedParameters</i> when a function has unused parameters.  -->
