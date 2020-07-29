@@ -663,4 +663,6 @@ Note that if you created the application using `npx create-react-app ...` and yo
 
 REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3
 ```
+
+Note that you will need to restart the server to apply the changes.
 </div>
