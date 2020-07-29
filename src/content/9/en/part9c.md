@@ -97,7 +97,7 @@ Using <i>strict</i> is suggested by the official documentation.
 
 <i>noFallthroughCasesInSwitch</i> ensures that in a _switch case_ each case ends with a  _return_ or a _break_ statement.
 
-<i>esModuleInterop</i> allows interoperability between commonJS and ES Modules, see more [in documentation](https://www.typescriptlang.org/en/tsconfig#esModuleInterop).
+<i>esModuleInterop</i> allows interoperability between commonJS and ES Modules, see more [in documentation](https://www.staging-typescript.org/tsconfig#esModuleInterop).
 
 Now that we have our preferred configuration set, let's continue by installing <i>express</i> and of course also <i>@types/express</i>. Since this is a real project, which is intended to be grown over time, we will use eslint from the very  beginning:
 
