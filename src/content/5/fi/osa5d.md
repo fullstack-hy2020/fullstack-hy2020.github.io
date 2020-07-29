@@ -80,7 +80,7 @@ Kun backend ja frontend ovat käynnissä, voidaan käynnistää Cypress komennol
 npm run cypress:open
 ```
 
-Ensimmäisen käynnistyksen yhteydessä sovellukselle syntyy hakemisto <i>cypress</i>, jonka alihakemistoon <i>integrations</i> on tarkoitus sijoittaa testit. Cypress luo valmiiksi joukon esimerkkitestejä, poistetaan ne ja luodaan ensimmäinen oma testi tiedostoon <i>note\_app.spec.js</i>:
+Ensimmäisen käynnistyksen yhteydessä sovellukselle syntyy hakemisto <i>cypress</i>, jonka alihakemistoon <i>integration</i> on tarkoitus sijoittaa testit. Cypress luo valmiiksi joukon esimerkkitestejä hakemistoon <i>integration/examples</i>. Poistetaan esimerkit ja luodaan ensimmäinen oma testi tiedostoon <i>note\_app.spec.js</i>:
 
 ```js
 describe('Note ', function() {
