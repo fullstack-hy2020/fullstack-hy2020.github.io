@@ -940,6 +940,8 @@ router.post('/', (req, res) => {
 });
 ```
 
+> **NB**: If you configured TSConfig like instructed above, above used destructuring assignment of request data will cause '<I>Unsafe assigment of an any value.</I>' error. You may ignore it for now. This problem will be tackled in the next section (**Proofing requests**).
+
 corresponding method in <i>diaryService</i> looks like this
 
 ```js
