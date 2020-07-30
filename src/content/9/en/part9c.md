@@ -1372,6 +1372,8 @@ If we now try to create a new diary entry with invalid or missing fields we are 
 
 ![](../../images/9/30b.png)
 
+> **NB**: If you configured ESlint for the project like instructed at the beginning of this part, you may still encounter several warnings from the files of the project. Corrections to these issues will be left as a voluntary exercise.
+
 </div>
 
 <div class="tasks">
