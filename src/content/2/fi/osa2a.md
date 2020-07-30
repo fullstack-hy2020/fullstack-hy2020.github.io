@@ -560,7 +560,7 @@ Konsoliin tulevan tulostuksen nähdäkseen on skrollattava pitkän punaisen virh
 
 ![](../../images/2/4b.png)
 
-Kun joku asia havaitaan toimivaksi, on aika logata syvemmältä. Jos komponentti on määritelty yksilausekkeista, eli returnittomana funktiota, on konsoliin tulostus haastavampaa:
+Kun joku asia havaitaan toimivaksi, on aika logata syvemmältä. Jos komponentti on määritelty yksilausekkeisena eli returnittomana funktiona, on konsoliin tulostus haastavampaa:
 
 ```js
 const Course = ({ course }) => (
@@ -570,7 +570,7 @@ const Course = ({ course }) => (
 )
 ```
 
-komponentti on syytä muuttaa pidemmän kaavan mukaan määritellyksi jotta tulostus päästään lisäämään:
+Komponentti on syytä muuttaa pidemmän kaavan mukaan määritellyksi, jotta tulostus päästään lisäämään:
 
 ```js
 const Course = ({ course }) => { 
@@ -583,7 +583,7 @@ const Course = ({ course }) => {
 }
 ```
 
-Erittäin usein ongelma on siitä että propsien odotetaan olevan eri muodossa tai eri nimisiä, kuin ne todellisuudessa ovat ja destrukturointi epäonnistuu. Ongelma alkaa useimmiten ratketa kun poistetaan destrukturointi ja katsotaan mitä <em>props</em> oikeasti pitää sisällään:
+Erittäin usein ongelma aiheutuu siitä, että propsien odotetaan olevan eri muodossa tai eri nimisiä kuin ne todellisuudessa ovat ja destrukturointi epäonnistuu. Ongelma alkaa useimmiten ratketa, kun poistetaan destrukturointi ja katsotaan, mitä <em>props</em> oikeasti pitää sisällään:
 
 ```js
 const Course = (props) => { // highlight-line
@@ -597,7 +597,7 @@ const Course = (props) => { // highlight-line
 }
 ```
 
-Ja jos ongelma ei vieläkään selviä, ei auta kuin jatkaa vianjäljitystä, eli kirjoittaa lisää console.logeja.
+Ja jos ongelma ei vieläkään selviä, ei auta kuin jatkaa vianjäljitystä eli kirjoittaa lisää console.logeja.
 
 Lisäsin tämän luvun materiaaliin, kun seuraavan tehtävän mallivastauksen koodi räjähti ihan totaalisesti (syynä väärässä muodossa ollut propsi), ja jouduin jälleen kerran debuggaamaan console.logaamalla.
 
