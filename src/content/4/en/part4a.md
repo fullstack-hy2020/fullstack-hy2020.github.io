@@ -413,6 +413,7 @@ Refactor the application into separate modules as shown earlier in this part of 
 
 **NB** refactor your application in baby steps and verify that the application works after every change you make. If you try to take a "shortcut" by refactoring many things at once, then [Murphy's law](https://en.wikipedia.org/wiki/Murphy%27s_law) will kick in and it is almost certain that something will break in your application. The "shortcut" will end up taking more time than moving forward slowly and systematically.
 
+**NB** When refactoring the code use middleware [body-parser](http://expressjs.com/en/resources/middleware/body-parser.html) to parse the incoming json object body from post request in file which contains event handlers of routes in controllers directory. Otherwise body won't parse correctly and will be read as undefined and won't save in database.
 
 One best practice is to commit your code every time it is in a stable state. This makes it easy to rollback to a situation where the application still works.
 
