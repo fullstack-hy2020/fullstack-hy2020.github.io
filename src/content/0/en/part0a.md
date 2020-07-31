@@ -145,7 +145,7 @@ If you have previously passed the course exam (excluding the exam for the three 
 ### Changes since last year
 
 * There are only minor changes to parts 0-4.
-* Part 5d, <i>end-to-end testing</i> using the [Cypress.io](cypress.io) library, is almost completely new material.  Using custom hooks has been moved from part 5 to part 7 with some new content.
+* Part 5d, <i>end-to-end testing</i> using the [Cypress.io](https://www.cypress.io) library, is almost completely new material.  Using custom hooks has been moved from part 5 to part 7 with some new content.
 * Part 6, which is about Redux, concentrates on the new, hook-based, Redux API.
 * The material on react-router in part 7 has also been updated to use Hook API. Semantic UI React has been replaced with the MaterialUI library due to lack of maintenance.
 * Part 8 on GraphQL has major updates, especially on Apollo Client, which finally has stable Hook-based APIs.
