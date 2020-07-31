@@ -708,7 +708,7 @@ const getNonSensitiveEntries = (): Omit<DiaryEntry, 'comment'>[] => {
 export type NonSensitiveDiaryEntry = Omit<DiaryEntry, 'comment'>;
 ```
 
-The code now becames
+The code now becomes
 
 ```js
 import diaries from '../../data/diaries';
