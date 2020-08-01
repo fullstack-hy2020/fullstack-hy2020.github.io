@@ -508,7 +508,7 @@ notesRouter.post('/', async (request, response, next) => {
 值得注意的是<i>user</i>同样变化了。Note 的 <i>id</i> 存储在了 <i>notes</i> field 中。
 
 ```js
-const user = User.findById(userId)
+const user = await User.findById(body.userId)
 
 // ...
 

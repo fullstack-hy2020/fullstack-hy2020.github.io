@@ -836,7 +836,7 @@ export const EDIT_NUMBER = gql`
 import React, { useState } from 'react'
 import { useMutation } from '@apollo/client'
 
-import { EDIT_NUMBER, ALL_PERSONS } from '../queries'
+import { EDIT_NUMBER } from '../queries'
 
 const PhoneForm = () => {
   const [name, setName] = useState('')
@@ -967,8 +967,8 @@ const PhoneForm = ({ setError }) => {
 
 ```js
 useEffect(() => {
-  if ( result.data && !result.data.editNumber) {
-    notify('name not found')
+  if (result.data && !result.data.editNumber) {
+    setError('name not found')
   }
 // highlight-start  
 }, [result.data])  // eslint-disable-line 
@@ -977,15 +977,15 @@ useEffect(() => {
 
 
 <!-- We could try to get rid of the warning by adding the _notify_ function to useEffect's second parameter array: -->
-我们可以通过在 useEffect 的第二个参数数组中添加 notify 函数来消除这个警告:
+我们可以通过在 useEffect 的第二个参数数组中添加 _setError_ 函数来消除这个警告:
 
 ```js
 useEffect(() => {
-  if ( result.data && !result.data.editNumber) {
-    notify('name not found')
+  if (result.data && !result.data.editNumber) {
+    setError('name not found')
   }
 // highlight-start  
-}, [result.data, notify])
+}, [result.data, setError])
 // highlight-end
 ```
 

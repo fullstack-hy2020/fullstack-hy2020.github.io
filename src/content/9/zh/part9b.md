@@ -707,7 +707,7 @@ $ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
 
 
 <!-- You can find explanations for each of the configurations from the TypeScript documentation, or the really handy although beta-stage [tsconfig page](https://www.typescriptlang.org/v2/en/tsconfig), or from the tsconfig [schema definition](http://json.schemastore.org/tsconfig), which unfortunately is formatted a little worse than the first two options.  -->
-你可以从 TypeScript 文档中找到每种配置的解释，或者从 [tsconfig page](https://www.typescriptlang.org/v2/en/tsconfig) ，或者从 tsconfig [schema definition](http://json.schemastore.org/tsconfig 文档)中找到解释，不幸的是，它的格式比前两个选项要差一些。
+你可以从 TypeScript 文档中找到每种配置的解释，或者从 [tsconfig page](https://www.staging-typescript.org/tsconfig) ，或者从 tsconfig [schema definition](http://json.schemastore.org/tsconfig) 文档中找到解释，不幸的是，它的格式比前两个选项要差一些。
 
 ### Adding express to the mix
 【混入express】
