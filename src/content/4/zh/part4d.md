@@ -198,7 +198,7 @@ _jwt.sign(userForToken, process.env.SECRET)_ 方法失败了。因为我们忘�
 
 <!-- There are several ways of sending the token from the browser to the server. We will use the [Authorization](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization) header. The header also tells which [authentication schema](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#Authentication_schemes) is used. This can be necessary if the server offers multiple ways to authenticate. -->
 <!-- Identifying the schema tells the server how the attached credentials should be interpreted. -->
-有几种方法可以将令牌从浏览器发送到服务器中。我们将使用[Authorization](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization) 头信息。头信息还包含了使用哪一种[authentication schema](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#Authentication_schemes) 。如果服务器提供多种认证方式，那么认证 Schema 就十分必要。这种 Schema 用来告诉服务器应当如何解析发来的认证信息。
+有几种方法可以将令牌从浏览器发送到服务器中。我们将使用[Authorization](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization) 头信息。头信息还包含了使用哪一种[authentication scheme](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#Authentication_schemes) 。如果服务器提供多种认证方式，那么认证 Scheme 就十分必要。这种 Scheme 用来告诉服务器应当如何解析发来的认证信息。
 
 <!-- The <i>Bearer</i> schema is suitable to our needs. -->
 <i>Bearer</i> schema 正是我们需要的。

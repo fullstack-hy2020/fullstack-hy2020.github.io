@@ -240,7 +240,7 @@ lang: zh
 【与去年相比课程的改变】
 <!-- There is only minor changes to parts 0-4. Part 5d, <i>end to end -testing</i> using the Cypress.io- library is almost completely new material.  Using custom hooks has been moved from part 5 to part 7 with some new content. -->
 * 对于0~4章节，只有一些很小的改动。
-* 第5d章节，<i>端到端测试</i> 利用了Cypress.io 这个库，这几乎是全新的内容。使用自定义钩子（custom hook）的内容已经从第5章节转移到了第7章节，并添加了一些新的内容。
+* 第5d章节，<i>端到端测试</i> 利用了[Cypress.io](https://www.cypress.io) 这个库，这几乎是全新的内容。使用自定义钩子（custom hook）的内容已经从第5章节转移到了第7章节，并添加了一些新的内容。
 
 <!-- Part 6, which is about Redux, concentrates on the new, hook-based, redux api. The material on react-router in part 7 has also been updated to use the hook-api. Semantic UI React has been replaced with the MaterialUI library due to lack of maintenance. <br><br> Part 8 on GraphQL has major updates especially on Apollo Client, which finally has stable hook based apis. Part 9 on TypeScript is completely new. -->
 * 第6章是讲Redux的，主要介绍了新的基于hook的redux API。

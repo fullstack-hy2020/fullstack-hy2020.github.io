@@ -813,5 +813,8 @@ const api_key = process.env.REACT_APP_API_KEY
 
 REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3
 ```
+
+<!-- Note that you will need to restart the server to apply the changes. -->
+注意你需要重启server来启用这些变化。
 </div>
 

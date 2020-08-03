@@ -493,7 +493,7 @@ const App = () => {
 这个解决方案非常优雅。便笺的初始化逻辑已经完全分离到 React 组件之外。
 
 <!-- The action creator _createNew_, which adds a new note looks like this -->
-action创作者 createNew 添加了一个新的便笺，看起来像这样
+action 构造器 _createNote_ 添加了一个新的便笺，看起来像这样
 
 ```js
 export const createNote = content => {
