@@ -475,7 +475,7 @@ Let's continue working on the anecdote application using redux that we started i
 #### 6.9 Better anecdotes, step7
 
 <!-- Ota sovelluksessasi käyttöön React dev tools. Siirrä Redux-storen määrittely omaan tiedostoon <i>store.js</i>. -->
-Start using React dev tools. Move defining the Redux-store into its own file <i>store.js</i>.
+Start using Redux dev tools. Move defining the Redux-store into its own file <i>store.js</i>.
 
 #### 6.10 Better anecdotes, step8
 
