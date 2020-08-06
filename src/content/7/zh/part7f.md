@@ -36,7 +36,7 @@ lang: zh
 
 #### 7.10: redux, 步骤2
 <!-- _Note_ that this and the next two exercises are quite laborious but incredibly educational. -->
-请注意，这个和接下来的两个练习相当费力，但令人难以置信的教育。
+请注意，这个和接下来的两个练习相当费力，但有令人难以置信的学习价值。
 
 <!-- Store the information about blog posts in the Redux store. In this exercise it is enought that you can see the blogs in backend and create a new blog. -->
 在 Redux store中存储有关博客文章的信息。 在这个练习中，你可以看到后台的博客，并创建一个新的博客。
@@ -118,7 +118,7 @@ const User = () => {
 
 
 <!-- After you're done with this exercise, the functionality that was implemented in exercise 5.6 is no longer necessary. Clicking a blog post no longer needs to expand the item in the list and display the details of the blog post. -->
-完成这个练习之后，就不再需要
+完成这个练习之后，练习5.6中完成的功能就不再需要。点击一个博客不再在列表中展开，而是在博客详情页中展示。
 
 #### 7.16: Navigation
 <!-- Implement a navigation menu for the application: -->
