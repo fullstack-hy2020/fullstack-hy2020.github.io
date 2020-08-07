@@ -266,7 +266,7 @@ store.subscribe(renderApp)
 
 <!-- There are a few notable things in the code. -->
 <!--<i>App</i> renders the value of the counter by asking it from the store with the method _store.getState()_. The actionhandlers of the buttons <i>dispatch</i> the right actions to the store.-->
-代码中有一些值得注意的东西。 App 使用 _store.getState()_ 方法从 store 中请求计数器，从而渲染计数器的值。 按钮的action处理程序将正确的 action 分发到 sotre。
+代码中有一些值得注意的东西。 App 使用 _store.getState()_ 方法从 store 中请求计数器，从而渲染计数器的值。 按钮的action处理程序将正确的 action 分发到 store。
 
 <!-- When the state in the store is changed, React is not able to automatically rerender the application. Thus we have registered a function _renderApp_, which renders the whole app, to listen for changes in the store with the _store.subscribe_ method. Note that we have to immediately call the _renderApp_ method. Without the call the first rendering of the app would never happen. -->
 当 store 中的状态发生更改时，React 无法自动重新运行应用程序。 因此，我们注册了一个函数 _renderApp_，它呈现整个应用程序，用 store.subscribe 方法监听 store 中的更改。 注意，我们必须立即调用 _renderApp_ 方法。 没有这个调用，应用程序的第一次渲染将永远不会发生。
