@@ -477,6 +477,7 @@ So the following action
   type: 'TOGGLE_IMPORTANCE',
   data: {
     id: 2
+  }
 }
 ```
 
