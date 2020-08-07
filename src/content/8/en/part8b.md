@@ -379,8 +379,6 @@ If the state _person_ has a value, instead of showing a list of all persons, onl
 
 ![](../../images/8/11.png)
 
-<!-- Jos tilan muuttujalla _person_ on arvo, näytetään kaikkien henkilöiden sijaan yhden henkilön tarkemmat tiedot: -->
-If the _person_ state has a value, instead of displaying a list of all persons we render the details of the specified person: 
 
 <!-- Yksittäisen henkilön näkymästä palataan kaikkien henkilöiden näkymään sijoittamalla tilan muuttujan _person_ arvoksi _null_. -->
 When a user wants to return to the persons list, the _person_ state is set to _null_.
