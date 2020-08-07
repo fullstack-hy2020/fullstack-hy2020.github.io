@@ -128,9 +128,9 @@ const app = http.createServer((req, res) => {
   res.end('Hello World')
 })
 
-const port = 3001
-app.listen(port)
-console.log(`Server running on port ${port}`)
+const PORT = 3001
+app.listen(PORT)
+console.log(`Server running on port ${PORT}`)
 ```
 
 <!-- Once the application is running, the following message is printed in the console: -->
@@ -253,9 +253,9 @@ const app = http.createServer((request, response) => {
 })
 // highlight-end
 
-const port = 3001
-app.listen(port)
-console.log(`Server running on port ${port}`)
+const PORT = 3001
+app.listen(PORT)
+console.log(`Server running on port ${PORT}`)
 ```
 
 <!-- Let's restart the server (you can shut the server down by pressing _Ctrl+C_ in the console) and let's refresh the browser. -->

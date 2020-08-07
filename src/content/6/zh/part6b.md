@@ -505,7 +505,7 @@ export default store
 
 #### 6.9 Better anecdotes, 步骤7
 <!-- Start using React dev tools. Move defining the Redux-store into its own file <i>store.js</i>. -->
-开始使用 React dev 工具，将 Redux-store 定义到它自己的文件<i>store.js</i> 中。
+开始使用 Redux DevTools 工具，将 Redux-store 定义到它自己的文件<i>store.js</i> 中。
 
 #### 6.10 Better anecdotes, 步骤8
 <!-- The application has a ready-made body for the <i>Notification</i> component: -->

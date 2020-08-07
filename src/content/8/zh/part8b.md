@@ -438,7 +438,7 @@ Hook的第二个参数是 _result_ <i> person</i> 的详细信息时，作为Hoo
 
 
 <!-- If the _person_ state has a value, instead of displaying a list of all persons we render the details of the specified person:  -->
-如果 _person_ 的状态有一个值，我们不显示所有人的列表，而是渲染指定人的详细信息:
+<!-- 如果 _person_ 的状态有一个值，我们不显示所有人的列表，而是渲染指定人的详细信息: -->
 
 
 <!-- When a user wants to return to the persons list, the _person_ state is set to _null_. -->
