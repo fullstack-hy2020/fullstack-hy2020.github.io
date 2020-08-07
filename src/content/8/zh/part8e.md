@@ -671,8 +671,9 @@ Graphql 已经是一项相当古老的技术了，自2012年以来 Facebook 一�
 开始在客户端使用订阅，并订阅 _bookAdded_ 添加新书时，通知用户。 任何方法都有效。 例如，您可以使用[window.alert](https://developer.mozilla.org/en-us/docs/web/api/window/alert)函数。
 
 #### 8.25: Subscriptions - client, part 2
-<!-- Keep the application's view updated when the server notifies about new books.  -->
-当服务器通知有关新书时，保持应用视图更新。
+<!-- Keep the application's view updated when the server notifies about new books.  You can test your implementation by opening the app in two browser tabs and adding a new book in one tab. Adding the new book should update the view in both tabs.
+-->
+当服务器通知有关新书时，保持应用视图更新。你可以通过打开浏览器的两个tab 页面来测试，在其中一个tab页新增一本书，另一个tab 页面应当同时更新了这本书。
 
 #### 8.26: n+1
 <!-- Solve the n+1 problem of the following query using any method you like -->
