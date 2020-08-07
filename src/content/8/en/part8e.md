@@ -628,7 +628,7 @@ Start using subscriptions in the client, and subscribe to _bookAdded_. When new 
 
 #### 8.25: Subscriptions - client, part 2
 
-Keep the application's view updated such that, if you open the app in two tabs, adding a new book from the first tab updates the books view in both tabs. 
+Keep the application's view updated when the server notifies about new books. You can test your implementation by opening the app in two browser tabs and adding a new book in one tab. Adding the new book should update the view in both tabs.
 
 #### 8.26: n+1
 
