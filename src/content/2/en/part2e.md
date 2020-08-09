@@ -266,20 +266,20 @@ Every CSS property is defined as a separate property of the JavaScript object. N
 Next, we could add a "bottom block" to our application by creating a <i>Footer</i> component and define the following inline styles for it:
 
 ```js
-const Footer = () => {
-  const footerStyle = {
-    color: 'green',
-    fontStyle: 'italic',
-    fontSize: 16
-  }
-
-  return (
-    <div style={footerStyle}>
-      <br />
-      <em>Note app, Department of Computer Science, University of Helsinki 2020</em>
-    </div> 
-  )
-}
+const Footer = () => { // highlight-line
+  const footerStyle = { // highlight-line
+    color: 'green', // highlight-line
+    fontStyle: 'italic', // highlight-line
+    fontSize: 16 // highlight-line
+  } // highlight-line
+// highlight-line
+  return ( // highlight-line
+    <div style={footerStyle}> // highlight-line
+      <br /> // highlight-line
+      <em>Note app, Department of Computer Science, University of Helsinki 2020</em> // highlight-line
+    </div>  // highlight-line
+  ) // highlight-line
+} // highlight-line
 
 const App = () => {
   // ...
