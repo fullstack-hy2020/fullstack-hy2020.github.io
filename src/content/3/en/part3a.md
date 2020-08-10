@@ -693,9 +693,9 @@ There's no consensus on what status code should be returned to a DELETE request 
 So how do we test the delete operation? HTTP GET requests are easy to make from the browser. We could write some JavaScript for testing deletion, but writing test code is not always the best solution in every situation.
 
 
-Many tools exist for making the testing of backends easier. One of these is the command line program [curl](https://curl.haxx.se) that was mentioned briefly in the previous part of the material.
+Many tools exist for making the testing of backends easier. One of these is a command line program [curl](https://curl.haxx.se).
 
-Instead of curl, we will take a look at using [Postman](https://www.getpostman.com/) for testing the application.
+However, instead of curl, we will take a look at using [Postman](https://www.getpostman.com/) for testing the application.
 
 Let's install Postman and try it out:
 
