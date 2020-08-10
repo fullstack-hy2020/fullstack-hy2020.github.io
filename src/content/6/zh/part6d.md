@@ -16,7 +16,7 @@ lang: zh
 
 
 <!-- To finish this part we will look into another older and  more complicated way to use redux, the [connect](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)-function provided by react-redux. -->
-为了完成这一章节，我们将研究使用 redux 的另一种更古老、更复杂的方法，redux 提供的[connect](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)-函数。
+为了完成这一章节，我们将研究使用 redux 的另一种更古老、更复杂的方法，redux 提供的[connect](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md)-函数。
 
 
 

@@ -9,7 +9,7 @@ lang: fi
 
 Olemme käyttäneet redux-storea react-redux-kirjaston [hook](https://react-redux.js.org/api/hooks)-apin, eli funktioiden [useSelector](https://react-redux.js.org/api/hooks#useselector) ja [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) avulla.
 
-Tarkastellaan tämän osan lopuksi toista, hieman vanhempaa ja jonkin verran monimutkaisempaa tapaa reduxin käyttöön, eli [react-redux](https://github.com/reactjs/react-redux) -kirjaston määrittelemää [connect](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)-funktiota.
+Tarkastellaan tämän osan lopuksi toista, hieman vanhempaa ja jonkin verran monimutkaisempaa tapaa reduxin käyttöön, eli [react-redux](https://github.com/reactjs/react-redux) -kirjaston määrittelemää [connect](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md)-funktiota.
 
 Uusissa sovelluksissa kannattaa ehdottomasti käyttää hook-apia, mutta connectin tuntemisesta on hyötyä vanhempia reduxia käyttäviä projekteja ylläpidettäessä.
 
