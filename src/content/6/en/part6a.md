@@ -390,7 +390,7 @@ Since we do not have any code which uses this functionality yet, we are expandin
 Let's start by creating a test for handling the action <i>NEW\_NOTE</i>.
 
 
-To make testing easier, we'll first move the reducer's code to its own module to file <i>src/reducers/noteReducer.js</i>. We'll also add the library [deep-freeze](https://github.com/substack/deep-freeze), which can be used to ensure that the reducer has been correctly defined as a immutable function. 
+To make testing easier, we'll first move the reducer's code to its own module to file <i>src/reducers/noteReducer.js</i>. We'll also add the library [deep-freeze](https://github.com/substack/deep-freeze), which can be used to ensure that the reducer has been correctly defined as an immutable function. 
 Let's install the library as a development dependency
 
 ```js
