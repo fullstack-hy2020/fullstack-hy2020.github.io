@@ -391,7 +391,7 @@ const arto = {
 arto.greet()  // tulostuu hello, my name is Arto Hellas
 ```
 
-metodeja voidaan liittää olioille myös niiden luomisen jälkeen:
+Metodeja voidaan liittää olioille myös niiden luomisen jälkeen:
 
 ```js
 const arto = {
@@ -414,7 +414,7 @@ arto.growOlder()
 console.log(arto.age)   // tulostuu 36
 ```
 
-Muutetaan olioa hiukan
+Muutetaan oliota hiukan:
 
 ```js
 const arto = {
