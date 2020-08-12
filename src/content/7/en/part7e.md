@@ -144,7 +144,7 @@ class App extends React.Component {
   // highlight-start
   handleClick = () => {
     const current = Math.floor(
-      Math.random() * (this.state.anecdotes.length - 1)
+      Math.random() * this.state.anecdotes.length
     )
     this.setState({ current })
   }
