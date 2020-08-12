@@ -700,7 +700,7 @@ Jos id ei ole hyväksyttävässä muodossa, ajaudutaan _catch_:in avulla määri
 
 Vastaukseen on lisätty myös hieman dataa kertomaan virheen syystä.
 
-Promisejen yhteydessä kannattaa melkeinpä aina lisätä koodiin myös virhetilainteiden käsittely, muuten seurauksena on usein hämmentäviä vikoja.
+Promisejen yhteydessä kannattaa melkeinpä aina lisätä koodiin myös virhetilanteiden käsittely, muuten seurauksena on usein hämmentäviä vikoja.
 
 Ei ole koskaan huono idea tulostaa poikkeuksen aiheuttanutta olioa konsoliin virheenkäsittelijässä:
 
