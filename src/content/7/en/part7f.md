@@ -25,7 +25,7 @@ One good piece of advice for both refactoring and writing new code is to take <i
 
 Refactor the application from using internal React component state to using Redux for the application's state management.
 
-Additionally, change the application's notifications to use Redux at this point of the exercise set.
+Change the application's notifications to use Redux at this point of the exercise set.
 
 #### 7.10: redux, step2
 
