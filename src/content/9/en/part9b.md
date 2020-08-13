@@ -100,7 +100,7 @@ multiplicator('how about a string?', 4, 'Multiplied a string and 4, the result i
 Now when we run the code, the output is: <i>Multiplied a string and 4, the result is: NaN</i>.
 
 <!-- Wouldn't it be nice if there was a way that the language itself could prevent us from ending up in situations like this? This is where we get the first benefits of TypeScript into use. Let's add types to the parameters and see where it takes us. -->
-Wouldn't it be nice it the language itself could prevent us from ending up in situations like this? 
+Wouldn't it be nice if the language itself could prevent us from ending up in situations like this? 
 This is where we see the first benefits of TypeScript.  Let's add types to the parameters and see where it takes us.
 
 TypeScript natively supports multiple types including <i>number</i>, <i>string</i> and  <i>Array</i>. See the comprehensive list [here](https://www.typescriptlang.org/docs/handbook/basic-types.html). More complex custom types can also be created.
