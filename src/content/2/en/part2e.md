@@ -266,6 +266,7 @@ Every CSS property is defined as a separate property of the JavaScript object. N
 Next, we could add a "bottom block" to our application by creating a <i>Footer</i> component and define the following inline styles for it:
 
 ```js
+// highlight-start
 const Footer = () => {
   const footerStyle = {
     color: 'green',
@@ -277,9 +278,10 @@ const Footer = () => {
     <div style={footerStyle}>
       <br />
       <em>Note app, Department of Computer Science, University of Helsinki 2020</em>
-    </div> 
+    </div>
   )
 }
+// highlight-end
 
 const App = () => {
   // ...
