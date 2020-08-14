@@ -451,7 +451,7 @@ Now when you open the console, the <i>redux</i> tab looks like this:
 
 ![](../../images/6/11ea.png)
 
-The effect of each to the store can be easily observed 
+The effect of each action to the store can be easily observed 
 
 ![](../../images/6/12ea.png)
 
