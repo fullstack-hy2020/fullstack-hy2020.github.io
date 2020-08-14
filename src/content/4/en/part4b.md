@@ -88,7 +88,7 @@ Let's make some changes to the module that defines the application's configurati
 ```js
 require('dotenv').config()
 
-let PORT = process.env.PORT
+const PORT = process.env.PORT
 let MONGODB_URI = process.env.MONGODB_URI
 
 // highlight-start
