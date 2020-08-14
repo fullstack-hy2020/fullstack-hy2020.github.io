@@ -338,7 +338,7 @@ export default connect(
 
 Koska komponentti ei tarvitse storen tilasta mitään, on funktion _connect_ ensimmäinen parametri <i>null</i>.
 
-Sovelluksen koodi on [githubissa](https://github.com/fullstackopen-2019/redux-notes/tree/part6-5) branchissa <i>part6-5</i>.
+Sovelluksen koodi on [githubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5) branchissa <i>part6-5</i>.
 
 ### Huomio propsina välitettyyn action creatoriin viittaamisesta
 
