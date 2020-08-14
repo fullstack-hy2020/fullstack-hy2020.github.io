@@ -399,10 +399,9 @@ Yksittäisen sääntö on helppo kytkeä [pois päältä](https://eslint.org/doc
       ],
       'arrow-spacing': [
           'error', { 'before': true, 'after': true }
-      ]
+      ],
+      'no-console': 0, // highlight-line
     },
-    'no-console': 0 // highlight-line
-  },
 }
 ```
 
