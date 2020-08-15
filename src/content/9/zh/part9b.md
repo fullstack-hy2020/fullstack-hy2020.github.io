@@ -136,7 +136,7 @@ multiplicator('how about a string?', 4, 'Multiplied a string and 4, the result i
 
 
 
-<!-- Wouldn't it be nice it the language itself could prevent us from ending up in situations like this?  -->
+<!-- Wouldn't it be nice if the language itself could prevent us from ending up in situations like this?  -->
 如果语言本身能够防止我们陷入这样的错误，那不是很好吗？
 
 <!-- This is where we see the first benefits of TypeScript.  Let's add types to the parameters and see where it takes us. -->

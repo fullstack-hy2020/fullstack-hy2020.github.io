@@ -668,7 +668,7 @@ const author = component.container.querySelector('#author')
 【前端集成测试】
 
 <!-- In the previous part of the course material, we wrote integration tests for the backend that tested its logic and connected database through the API provided by the backend. When writing these tests, we made the conscious decision not to write unit tests, as the code for that backend is fairly simple, and it is likely that bugs in our application occur in more complicated scenarios that integration tests are well suited for. -->
-在课程教材的前面章节，我们为后端编写了集成测试，测试其逻辑并通过后端提供的 API 连接数据库。 在编写这些测试时，我们有意识地不编写单元测试，因为后端的代码相当简单，但是我们应用中的错误可能发生在更复杂的场景中，而集成测试非常适合这些场景。
+在课程教材的前面章节，我们为后端编写了集成测试，测试其逻辑并通过后端提供的 API 连接数据库。 在编写这些测试时，我们有意识地不编写单元测试，因为后端的代码相当简单，但是我们应用中的错误可能发生在更复杂的场景中，而单元测试非常适合这些场景。
 
 <!-- So far all of our tests for the frontend have been unit tests that have validated the correct functioning of individual components. Unit testing is useful at times, but even a comprehensive suite of unit tests is not enough to validate that the application works as a whole. -->
 到目前为止，我们对前端的所有测试都是单元测试，这些测试验证了单个组件的正确功能。单元测试有时很有用，但即使是一套完整的单元测试套件也不足以验证应用作为一个整体是否工作。
