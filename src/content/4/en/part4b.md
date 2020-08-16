@@ -520,10 +520,12 @@ const Note = require('../models/note')
 const initialNotes = [
   {
     content: 'HTML is easy',
+    date: new Date(),
     important: false
   },
   {
     content: 'Browser can execute only Javascript',
+    date: new Date(),
     important: true
   }
 ]
@@ -594,6 +596,7 @@ test('a specific note is within the returned notes', async () => {
 test('a valid note can be added ', async () => {
   const newNote = {
     content: 'async/await simplifies making async calls',
+    date: new Date(),
     important: true,
   }
 
