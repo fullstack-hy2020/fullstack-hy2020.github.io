@@ -727,6 +727,19 @@ test('a note can be deleted', async () => {
   expect(contents).not.toContain(noteToDelete.content)
 })
 ```
+In the test for 'a specific note can be viewed' we get an error because like the ID in 3b the date is stored as an Object in Mongoose without extra formatting but is compared to a JSON string.
+
+Let's add this to our models/note.js
+
+```js
+noteSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+  returnedObject.id = returnedObject._id.toString()
+  returnedObject.date = returnedObject.date.toString() // highlight-line
+  delete returnedObject._id
+  delete returnedObject.__v
+```
+Now the tests should pass. 
 
 Both tests share a similar structure. In the initialization phase they fetch a note from the database. After this, the tests call the actual operation being tested, which is highlighted in the code block. Lastly, the tests verify that the outcome of the operation is as expected.
 
