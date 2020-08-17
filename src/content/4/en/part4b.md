@@ -730,7 +730,7 @@ test('a note can be deleted', async () => {
 })
 ```
 
-The note object we receive as the response body goes through JSON serialization and parsing. This processing will turn the note object's <em>date</em> property value's type from <em>Date</em> object into a string. Because of this we can't directly compare equality of the <em>resultNote.body</em> and <em>noteToView</em>. Instead, we must perform similar JSON serialization and parsing for the `noteToView` as the server is performing for the note object.
+In the first test, the note object we receive as the response body goes through JSON serialization and parsing. This processing will turn the note object's <em>date</em> property value's type from <em>Date</em> object into a string. Because of this we can't directly compare equality of the <em>resultNote.body</em> and <em>noteToView</em>. Instead, we must first perform similar JSON serialization and parsing for the <em>noteToView<em> as the server is performing for the note object.
 
 Both tests share a similar structure. In the initialization phase they fetch a note from the database. After this, the tests call the actual operation being tested, which is highlighted in the code block. Lastly, the tests verify that the outcome of the operation is as expected.
 
