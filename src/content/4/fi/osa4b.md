@@ -498,7 +498,7 @@ const initialNotes = [
 ]
 
 const nonExistingId = async () => {
-  const note = new Note({ content: 'willremovethissoon' })
+  const note = new Note({ content: 'willremovethissoon', date: new Date() })
   await note.save()
   await note.remove()
 
@@ -672,7 +672,9 @@ test('a specific note can be viewed', async () => {
     .expect('Content-Type', /application\/json/)
 // highlight-end
 
-  expect(resultNote.body).toEqual(noteToView)
+  const processedNoteToView = JSON.parse(JSON.stringify(noteToView))
+
+  expect(resultNote.body).toEqual(processedNoteToView)
 })
 
 test('a note can be deleted', async () => {
@@ -696,6 +698,8 @@ test('a note can be deleted', async () => {
   expect(contents).not.toContain(noteToDelete.content)
 })
 ```
+
+Ensimmäisessä testissä note-objekti, jonka saamme palvelimelta vastauksena, käy läpi JSON-serialisoinnin ja -parsemisen. Tämän prosessoinnin seurauksena note-objektin <em>date</em> kentän arvon tyyppi muuttuu <em>Date</em> objektista merkkijonoksi. Tämän seurauksena emme voi suoraan verrata <em>resultNote.body</em> muuttujaa ja <em>noteToView</em> muuttujaa. Sen sijaan meidän täytyy esin suorittaa samanlainen JSON-serialisointi ja -parseminen <em>noteView</em> muuttujalle, kuin palvelin suorittaa note-objektille.
 
 Molemmat testit ovat rakenteeltaan samankaltaisia. Alustusvaiheessa ne hakevat kannasta yksittäisen muistiinpanon. Tämän jälkeen on itse testattava operaatio, joka on koodissa korostettuna. Lopussa tarkastetaan, että operaation tulos on haluttu. 
 
@@ -1036,8 +1040,10 @@ describe('when there is initially some notes saved', () => {
         .get(`/api/notes/${noteToView.id}`)
         .expect(200)
         .expect('Content-Type', /application\/json/)
+      
+      const processedNoteToView = JSON.parse(JSON.stringify(noteToView))
 
-      expect(resultNote.body).toEqual(noteToView)
+      expect(resultNote.body).toEqual(processedNoteToView)
     })
 
     test('fails with statuscode 404 if note does not exist', async () => {
