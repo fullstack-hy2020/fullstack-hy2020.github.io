@@ -282,6 +282,7 @@ CSS 规则在 JavaScript 中的定义与普通 CSS 文件中的定义稍有不�
 接下来，我们可以通过创建一个<i>Footer</i> 组件向应用添加一个“ bottom block” ，并为它定义如下行内样式:
 
 ```js
+// highlight-start
 const Footer = () => {
   const footerStyle = {
     color: 'green',
@@ -296,6 +297,7 @@ const Footer = () => {
     </div> 
   )
 }
+// highlight-end
 
 const App = () => {
   // ...

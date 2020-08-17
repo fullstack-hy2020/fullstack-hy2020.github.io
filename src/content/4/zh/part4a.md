@@ -93,8 +93,8 @@ server.listen(config.PORT, () => {
 ```js
 require('dotenv').config()
 
-let PORT = process.env.PORT
-let MONGODB_URI = process.env.MONGODB_URI
+const PORT = process.env.PORT
+const MONGODB_URI = process.env.MONGODB_URI
 
 module.exports = {
   MONGODB_URI,
@@ -397,7 +397,7 @@ const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
 
-const blogSchema = mongoose.Schema({
+const blogSchema = new mongoose.Schema({
   title: String,
   author: String,
   url: String,
@@ -785,7 +785,7 @@ describe('total likes', () => {
     }
   ]
 
-  test('when list has only one blog equals the likes of that', () => {
+  test('when list has only one blog, equals the likes of that', () => {
     const result = listHelper.totalLikes(listWithOneBlog)
     expect(result).toBe(5)
   })

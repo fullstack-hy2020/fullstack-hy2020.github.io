@@ -31,8 +31,8 @@ lang: zh
 <!-- Refactor the application from using internal React component state to using Redux for the application's state management. -->
 将应用从使用内部 React 组件状态重构为使用 Redux 进行应用的状态管理。
 
-<!-- Additionally, change the application's notifications to use Redux at this point of the exercise set. -->
-此外，在练习集的这一点上，更改应用的通知以使用 Redux。
+<!-- Change the application's notifications to use Redux at this point of the exercise set. -->
+在练习中，使用 Redux更改应用的通知机制。
 
 #### 7.10: redux, 步骤2
 <!-- _Note_ that this and the next two exercises are quite laborious but incredibly educational. -->

@@ -432,14 +432,12 @@ const userSchema = new mongoose.Schema({
   },
   name: String,
   passwordHash: String,
-  // highlight-start
   notes: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Note'
     }
   ],
-  // highlight-end
 })
 
 userSchema.plugin(uniqueValidator) // highlight-line

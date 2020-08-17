@@ -429,8 +429,8 @@ axios
 我们尝试从我们本地服务器请求 Notes 并渲染，就像App 组件开始那样。注意这种方法有许多问题，比如我们只有将整个<i>App</i>  渲染完成后才会得到成功的response :
 
 ```js
-import ReactDOM from 'react-dom'
 import React from 'react'
+import ReactDOM from 'react-dom'
 import App from './App'
 
 import axios from 'axios' // highlight-line
