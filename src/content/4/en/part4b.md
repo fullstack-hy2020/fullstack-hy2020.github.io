@@ -703,7 +703,9 @@ test('a specific note can be viewed', async () => {
     .expect('Content-Type', /application\/json/)
 // highlight-end
 
-  expect(resultNote.body).toEqual(noteToView)
+  const processedNoteToView = JSON.parse(JSON.stringify(noteToView))
+
+  expect(resultNote.body).toEqual(processedNoteToView)
 })
 
 test('a note can be deleted', async () => {
@@ -727,19 +729,8 @@ test('a note can be deleted', async () => {
   expect(contents).not.toContain(noteToDelete.content)
 })
 ```
-In the test for 'a specific note can be viewed' we get an error because like the ID in 3b the date is stored as an Object in Mongoose without extra formatting but is compared to a JSON string.
 
-Let's add this to our models/note.js
-
-```js
-noteSchema.set('toJSON', {
-  transform: (document, returnedObject) => {
-  returnedObject.id = returnedObject._id.toString()
-  returnedObject.date = returnedObject.date.toString() // highlight-line
-  delete returnedObject._id
-  delete returnedObject.__v
-```
-Now the tests should pass. 
+The note object we receive as the response body goes through JSON serialization and parsing. This processing will turn the note object's <em>date</em> property value's type from <em>Date</em> object into a string. Because of this we can't directly compare equality of the <em>resultNote.body</em> and <em>noteToView</em>. Instead, we must perform similar JSON serialization and parsing for the `noteToView` as the server is performing for the note object.
 
 Both tests share a similar structure. In the initialization phase they fetch a note from the database. After this, the tests call the actual operation being tested, which is highlighted in the code block. Lastly, the tests verify that the outcome of the operation is as expected.
 
@@ -1117,8 +1108,10 @@ describe('viewing a specific note', () => {
       .get(`/api/notes/${noteToView.id}`)
       .expect(200)
       .expect('Content-Type', /application\/json/)
+      
+    const processedNoteToView = JSON.parse(JSON.stringify(noteToView))
 
-    expect(resultNote.body).toEqual(noteToView)
+    expect(resultNote.body).toEqual(processedNoteToView)
   })
 
   test('fails with statuscode 404 if note does not exist', async () => {
