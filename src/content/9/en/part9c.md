@@ -963,7 +963,7 @@ const addEntry = (
 
   diaries.push(newDiaryEntry);
   return newDiaryEntry;
-}
+};
 ```
 
 <!-- As we can see the <i>addDiary</i> function is growing to be pretty hard to read, when having all the fields as separate parameters. It might be better to just send the data as an object to the function: -->
