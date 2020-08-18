@@ -7,13 +7,11 @@ lang: en
 
 <div class="content">
 
-### Getting started with GitHub Actions
-
 Before we start playing with GitHub Actions, let's have a look at what they are and how they work.
 
 GitHub Actions work on a basis of workflows. **A workflow is a series of jobs that are run when a certain triggering event happens.** The jobs that are run then themselves contain instructions for what GitHub Actions should do.
 
-#### Step By Step
+### Step By Step
 
 A typical execution of a workflow looks like this:
 
@@ -21,7 +19,7 @@ A typical execution of a workflow looks like this:
 - The workflow that has that trigger is executed.
 - Cleanup
 
-#### Basic needs
+### Basic needs
 
 In general, in order to have CI operate on a repo, we need a few things:
 
@@ -35,7 +33,7 @@ In general, in order to have CI operate on a repo, we need a few things:
 
 That's the traditional model at least, we'll see in a minute how GitHub Actions short-circuit some of these steps (or rather make it such that you don't have to worry about them) but first, let's have a quick look at what Jenkins would need to meet all of these conditions.
 
-#### Jenkins as a checklist of needs
+### Jenkins as a checklist of needs
 
 Jenkins workflows are defined by a file called `Jenkinsfile` in the root of the repository (very creative I know, but at least it's logical). This file defines what the requirements for running a job are (for example, if the job needs a specific server to run on, this can be defined). It also defines what specific actions need to be carried out under which circumstances and what order they should be carried out in.
 
@@ -43,7 +41,7 @@ In a simple setup, Jenkins would have to be told to pull the repo and look for a
 
 We can see that Jenkins does indeed meet all of the requirements we listed above, so, what about GitHub Actions?
 
-#### How GitHub Actions meet their basic needs
+### How GitHub Actions meet their basic needs
 
 GitHub Actions have a great advantage over Jenkins (or other self hosted solutions), because the repo is hosted with the CI provider. In other words, Github provides both the repo and the CI platform. This means that if we've enabled actions for a repo, GitHub is already aware of the fact that we have workflows defined and what those definitions look like.
 
