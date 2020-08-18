@@ -57,6 +57,7 @@ module.exports = {
       e: 'Fragmentit ja subskriptiot',
     },
     '9': {},
+    '11': {},
   },
   en: {
     '0': {
@@ -121,6 +122,7 @@ module.exports = {
       c: 'Typing the express app',
       d: 'React with types',
     },
+    '11': {},
   },
   zh: {
     '0': {
@@ -185,5 +187,6 @@ module.exports = {
       c: 'Typescript版的express应用',
       d: '利用Typescript编写React应用',
     },
+    '11': {},
   },
 };
