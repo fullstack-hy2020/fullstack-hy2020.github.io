@@ -134,7 +134,7 @@ You can just pick up where you left off! If you wish to resubmit a whole part, p
 
 #### Expanding on other instances of this course
 
-You can substitute <i>parts</i> of this course with parts you have previously submitted.  For example, if you have previously completed the three credit course, you can substitute parts 0-3 of this course with the parts you have previously completed.  You can only substitute parts in sequence, so you cannot substitute, for example, parts 0 and 2 but now complete part 1.
+You can substitute <i>parts</i> of this course with parts you have previously submitted.  For example, if you have previously completed the three credit course, you can substitute parts 0-3 of this course with the parts you have previously completed.  You can only substitute parts in sequence, so you cannot substitute, for example, parts 0 and 2 but not complete part 1.
 
 You can only substitute whole parts. For example, if you have previously submitted 50% of exercises in a part, you cannot substitute those exercises - you would need to start over on that part of the course.
 
