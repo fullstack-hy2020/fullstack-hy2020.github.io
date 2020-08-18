@@ -129,7 +129,13 @@ module.exports = {
       c: 'Communicating with server',
       d: 'Testing and extending our application',
     },
-    '11': {},
+    '11': {
+      a: 'Introduction to CI/CD',
+      b: 'Getting started with GitHub Actions',
+      c: 'Deployment',
+      d: 'Keeping green',
+      e: 'Expanding Further',
+    },
   },
   zh: {
     '0': {
