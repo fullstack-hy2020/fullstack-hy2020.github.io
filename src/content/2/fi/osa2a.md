@@ -783,7 +783,7 @@ Sovelluksen ulkoasu voi olla esim seuraava:
 
 ![](../../images/teht/10e.png)
 
-<h4>2.5: erillinen moduuli</h4>
+<h4>2.5: kurssitiedot step10</h4>
 
 Määrittele komponentti <i>Course</i> omana moduulinaan, jonka komponentti <i>App</i> importtaa. Voit sisällyttää kaikki kurssin alikomponentit samaan moduuliin.
 
