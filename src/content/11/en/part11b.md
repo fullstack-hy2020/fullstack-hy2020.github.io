@@ -45,6 +45,10 @@ We can see that Jenkins does indeed meet all of the requirements we listed above
 
 GitHub Actions have a great advantage over Jenkins (or other self hosted solutions), because the repo is hosted with the CI provider. In other words, Github provides both the repo and the CI platform. This means that if we've enabled actions for a repo, GitHub is already aware of the fact that we have workflows defined and what those definitions look like.
 
+</div>
+
+<div class="tasks">
+
 ### Fork the code
 
 First thing you'll want to do is to fork the example repository under your name. What it essentially does is it creates a copy of the repository under your GitHub user profile for your own use. In this module, all of the exercises will be using [this example project repository](https://github.com/smartlyio/fullstackopen-cicd). To fork the repository, you can click on the Fork button in the top-right area of the repository view next to the Star button.
@@ -56,6 +60,10 @@ Once you've clicked on the Fork button, GitHub will start the creation of a new 
 Once the process has been finished, you should be redirected to your brand new repository!
 
 You might notice that the test project contains some broken tests and linting errors. Just leave them as they are for now. We will get around those later in the exercises.
+
+</div>
+
+<div class="content">
 
 ### Getting started with workflows
 
