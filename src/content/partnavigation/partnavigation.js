@@ -122,7 +122,13 @@ module.exports = {
       c: 'Typing the express app',
       d: 'React with types',
     },
-    '11': {},
+    '11': {
+      a: 'Introduction to CI/CD',
+      b: 'Getting started with GitHub Actions',
+      c: 'Deployment',
+      d: 'Keeping green',
+      e: 'Expanding Further',
+    },
   },
   zh: {
     '0': {
