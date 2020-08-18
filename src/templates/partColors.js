@@ -9,5 +9,6 @@ export const partColors = {
   7: 'light-blue',
   8: 'turquoise',
   9: 'light-green',
-  10: 'green'
+  10: 'green',
+  11: 'smartly-purple',
 };
