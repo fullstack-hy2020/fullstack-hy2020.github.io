@@ -293,8 +293,8 @@ const App = (props) => {
     <div>
       <h1>Notes</h1>
       <ul>
-        {notesToShow.map((note, i) => // highlight-line
-          <Note key={i} note={note} />
+        {notesToShow.map(note => // highlight-line
+          <Note key={note.id} note={note} />
         )}
       </ul>
       // ...
