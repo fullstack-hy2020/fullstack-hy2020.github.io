@@ -27,6 +27,7 @@ export const PartBanner = ({ lang }) => {
                   'GraphQL',
                   'Typescript',
                   'React Native',
+                  'CI/CD',
                 ]
               : lang === 'zh'
               ? [
@@ -41,6 +42,7 @@ export const PartBanner = ({ lang }) => {
                   'GraphQL',
                   'Typescript',
                   'React Native',
+                  'CI/CD',
                 ]
               : [
                   'Web-sovellusten toiminnan perusteet',
@@ -54,6 +56,7 @@ export const PartBanner = ({ lang }) => {
                   'GraphQL',
                   'Typescript',
                   'React Native',
+                  'CI/CD',
                 ];
 
           return (
