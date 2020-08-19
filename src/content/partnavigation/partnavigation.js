@@ -57,6 +57,7 @@ module.exports = {
       e: 'Fragmentit ja subskriptiot',
     },
     '9': {},
+    '11': {},
   },
   en: {
     '0': {
@@ -120,6 +121,13 @@ module.exports = {
       b: 'First steps with Typescript',
       c: 'Typing the express app',
       d: 'React with types',
+    },
+    '11': {
+      a: 'Introduction to CI/CD',
+      b: 'Getting started with GitHub Actions',
+      c: 'Deployment',
+      d: 'Keeping green',
+      e: 'Expanding Further',
     },
   },
   zh: {
@@ -185,5 +193,6 @@ module.exports = {
       c: 'Typescript版的express应用',
       d: '利用Typescript编写React应用',
     },
+    '11': {},
   },
 };
