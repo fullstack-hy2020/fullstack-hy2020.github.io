@@ -639,7 +639,7 @@ const average = array => {
 If the length of the array is 0 then we return 0, and in all other cases we use the _reduce_ method to calculate the average.
 
 
-There's a few things to notice about the tests that we just wrote. We defined a <i>describe</i> block around the tests that was given the name _average_:
+There are a few things to notice about the tests that we just wrote. We defined a <i>describe</i> block around the tests that was given the name _average_:
 
 ```js
 describe('average', () => {
