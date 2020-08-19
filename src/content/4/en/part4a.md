@@ -38,7 +38,7 @@ After making the changes to the directory structure of our project, we end up wi
 <!-- Olemme toistaiseksi tulostelleet koodista erilaista logaustietoa komennoilla  <i>console.log</i> ja <i>console.error</i>, tämä ei ole kovin järkevä käytäntö. Eristetään kaikki konsoliin tulostelu omaan moduliinsa <i>utils/logger.js</i>: -->
 So far we have been using <i>console.log</i> and <i>console.error</i> to print different information from the code. 
 However, this is not a very good way to do things. 
-Let's separate all printing to the console to it's own module <i>utils/logger.js</i>:
+Let's separate all printing to the console to its own module <i>utils/logger.js</i>:
 
 ```js
 const info = (...params) => {
