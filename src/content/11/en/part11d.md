@@ -135,7 +135,7 @@ In the above case, the software we release is tested because the CI system makes
 
 Let's set up a workflow that will automatically increase (bump) the version when a pull request is merged into master and tag the release with the version number. We will use an open-source action developed by a third-party: `anothrNick/github-tag-action`. You can read the documentation for this action in its [README](https://github.com/anothrNick/github-tag-action).
 
-Start by creating the workflow the same way as in previous exercises. Set push to master as the trigger and use the same environment as in other actions. The workflow should have one job with two steps. The first step is obviously `actions/checkout@v2` as we need have the latest code in the build environment. The second step should be the tagging action itself:
+Start by creating the workflow the same way as in previous exercises. Set push to master as the trigger and use the same environment as in other actions. The workflow should have one job with two steps. The first step is the already familiar `actions/checkout@v2` as we need have the latest code in the build environment. The second step should be the tagging action itself:
 
 ```yml
     - name: Bump version and push tag
