@@ -327,7 +327,7 @@ Eli jos tilan arvo <em>showAll</em> on epätosi, muuttuja <em>notesToShow</em> s
 notes.filter(note => note.important === true)
 ```
 
-vertailu-operaatio on oikeastaan turha, koska <em>note.important</em> on arvoltaan joko <i>true</i> tai <i>false</i>, eli riittää kirjoittaa
+Vertailuoperaatio on oikeastaan turha, koska <em>note.important</em> on arvoltaan joko <i>true</i> tai <i>false</i>, eli riittää, kun kirjoittaa:
 
 ```js
 notes.filter(note => note.important)
