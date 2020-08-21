@@ -94,17 +94,7 @@ export default class ContentTemplate extends Component {
 
     const parserOptions = {
       replace: ({ type, name, attribs, children }) => {
-        if (type === 'tag' && name === 'picture') {
-          return (
-            <picture>
-              <img
-                style={{ borderColor: colorCode }}
-                alt="fullstack content"
-                src={children[0].attribs.src}
-              />
-            </picture>
-          );
-        } else if (type === 'tag' && name === 'pre') {
+        if (type === 'tag' && name === 'pre') {
           return <pre>{domToReact(children, parserOptions)}</pre>;
         } else if (type === 'tag' && attribs.class === 'content') {
           return (

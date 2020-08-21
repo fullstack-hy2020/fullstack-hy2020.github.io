@@ -58,11 +58,22 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-transformer-remark',
+      resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
-          'gatsby-remark-unwrap-images',
-          'gatsby-remark-picture',
+          {
+            resolve: `gatsby-remark-unwrap-images`,
+          },
+          {
+            resolve: `gatsby-remark-relative-images`,
+          },
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 800,
+              linkImagesToOriginal: false,
+            },
+          },
           {
             resolve: `gatsby-remark-prismjs`,
             options: {
