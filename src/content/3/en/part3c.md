@@ -509,7 +509,7 @@ The method for establishing the connection is now given functions for dealing wi
 There are many ways to define the value of an environment variable. One way would be to define it when the application is started:
 
 ```bash
-MONGODB_URI=address_here npm run watch
+MONGODB_URI=address_here npm run dev
 ```
 
 A more sophisticated way is to use the [dotenv](https://github.com/motdotla/dotenv#readme) library. You can install the library with the command:
