@@ -37,20 +37,26 @@ export default class ContentTemplate extends Component {
 
   componentDidMount() {
     const links = Array.from(document.querySelectorAll('a'));
+    const images = Array.from(document.querySelectorAll('.gatsby-resp-image-image'));
     const h1 = document.querySelector('h1');
     const h3 = document.querySelectorAll('h3');
     const h3Arr = Array.from(h3).map(t => t.innerText);
 
     const { frontmatter } = this.props.data.markdownRemark;
+    const colorCode = colors[partColors[frontmatter.part]];
+
+    images.map(i => {
+      i.style.borderColor = colorCode;
+    }); 
 
     links.map(i => {
-      i.style = `border-color: ${colors[partColors[frontmatter.part]]}`;
+      i.style.borderColor = colorCode;
       i.classList.contains('language-switcher__language')
         ? (i.target = i.target)
         : (i.target = '_blank');
 
       function over() {
-        i.style.backgroundColor = colors[partColors[frontmatter.part]];
+        i.style.backgroundColor = colorCode;
       }
       function out() {
         i.style.backgroundColor = 'transparent';
