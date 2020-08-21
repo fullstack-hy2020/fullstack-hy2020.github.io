@@ -263,7 +263,7 @@ import noteService from '../services/notes' // highlight-line
 const NewNote = (props) => {
   const dispatch = useDispatch()
   
-  const addNote = async (event) => {
+  const addNote = async (event) => { // highlight-line
     event.preventDefault()
     const content = event.target.note.value
     event.target.note.value = ''
