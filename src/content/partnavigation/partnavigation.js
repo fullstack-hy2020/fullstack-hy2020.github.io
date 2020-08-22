@@ -121,6 +121,9 @@ module.exports = {
       c: 'Typing the express app',
       d: 'React with types',
     },
+    '10': {
+      a: 'Introduction to React Native',
+    },
   },
   zh: {
     '0': {
