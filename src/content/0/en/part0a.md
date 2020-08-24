@@ -37,7 +37,7 @@ You are expected to do <i>at least</i> all of the exercises that are not marked 
 
 The speed of completing the course is quite flexible, and exercises can be submitted until 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) on 10 January 2021.
 
-Statistics on the time used for exercises which have already been submitted on different parts of this course can be found on the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Exercise completion time statistics can be found via the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 ### Grading
 
