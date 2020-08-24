@@ -29,7 +29,7 @@ CSS-säännöt koostuvat valitsimesta, eli <i>selektorista</i> ja määrittelyst
 
 Määrittelyosa asettaa ominaisuuden _color_, eli fontin värin arvoksi vihreän, eli <i>green</i>.
 
-Sääntö voi sisältää mielivaltaisen määrän määrittelyjä. Muutetaan edellistä siten, että tekstistä tulee kursivoitua, eli fontin tyyliksi asetetaan <i>italics</i>:
+Sääntö voi sisältää mielivaltaisen määrän määrittelyjä. Muutetaan edellistä siten, että tekstistä tulee kursivoitua, eli fontin tyyliksi asetetaan <i>italic</i>:
 
 ```css
 h1 {
@@ -128,7 +128,7 @@ const Notification = ({ message }) => {
 
 Jos propsin <em>message</em> arvo on <em>null</em> ei renderöidä mitään, muussa tapauksessa renderöidään viesti div-elementtiin. Elementille on liitetty tyylien lisäämistä varten luokka <i>error</i>.
 
-Lisätään komponentin <i>App</i> tilaan kenttä <i>error</i> virheviestiä varten, laitetaan kentälle heti jotain sisältöä, jotta pääsemme heti testaamaan komponenttia:
+Lisätään komponentin <i>App</i> tilaan kenttä <i>errorMessage</i> virheviestiä varten. Laitetaan kentälle heti jotain sisältöä, jotta pääsemme heti testaamaan komponenttia:
 
 ```js
 const App = () => {
