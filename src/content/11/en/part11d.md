@@ -139,10 +139,18 @@ Start by creating the workflow the same way as in previous exercises. Set push t
 
 ```yml
     - name: Bump version and push tag
-      uses: anothrNick/github-tag-action@1.25.0
+      uses: anothrNick/github-tag-action@9aaabdb
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
+
+For the `github-tag-action` we're using a hash pointing to a specific commit instead of a semantic version for security reasons. The action has a `@1.26.0` tag that points to the 1.26.0 version and the same commit with hash `9aaabdb`. However tags can be moved and we cannot be sure that the code we are executing in our repository is the same we initially specified.
+
+When we use actions provided by GitHub we trust GitHub not to mess with version tags and to thoroughly test their code. It's arguable if they've earned our trust, but since our code is with them already it's kind of a moot point.
+
+In case of third-party the code might end up being buggy or even maliscious. Even when the author of the open-source code does not have the intention of doing something maliscious, they might end up leaving their credentials on a post-it note in a cafe, and then who knows what might happen.
+
+By pointing to the hash of a specific commit we can be sure that the code we pull when running the workflow will not change, because changing the underlying commit and its contents would also change the hash.
 
 We're passing an environmental variable `GITHUB_TOKEN` to the action. As it is third-party action, it needs the token for authenication in your repository. You can read more [here](https://docs.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) about authentication in GitHub Actions.
 
