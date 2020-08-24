@@ -125,6 +125,7 @@ module.exports = {
       a: 'Introduction to React Native',
       b: 'React Native basics',
       c: 'Communicating with server',
+      d: 'Testing and extending our application',
     },
   },
   zh: {
