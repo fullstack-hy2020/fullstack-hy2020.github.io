@@ -153,9 +153,9 @@ const App = () => {
         </button>
       </div>      
       <ul>
-        {notesToShow.map((note, i) => 
+        {notesToShow.map(note => 
           <Note
-            key={i}
+            key={note.id}
             note={note} 
             toggleImportance={() => toggleImportanceOf(note.id)} // highlight-line
           />
