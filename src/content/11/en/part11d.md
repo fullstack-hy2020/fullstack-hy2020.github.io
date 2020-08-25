@@ -139,12 +139,12 @@ Start by creating the workflow the same way as in previous exercises. Set push t
 
 ```yml
     - name: Bump version and push tag
-      uses: anothrNick/github-tag-action@9aaabdb
+      uses: anothrNick/github-tag-action@9aaabdb5e989894e95288328d8b17a6347217ae3
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-For the `github-tag-action` we're using a hash pointing to a specific commit instead of a semantic version for security reasons. The action has a `@1.26.0` tag that points to the 1.26.0 version and the same commit with hash `9aaabdb`. However tags can be moved and we cannot be sure that the code we are executing in our repository is the same we initially specified.
+For the `github-tag-action` we're using a hash pointing to a specific commit instead of a semantic version for security reasons. The action has a `@1.26.0` tag that points to the 1.26.0 version and the same commit with hash `9aaabdb5e989894e95288328d8b17a6347217ae3`. However tags can be moved and we cannot be sure that the code we are executing in our repository is the same we initially specified.
 
 When we use actions provided by GitHub we trust GitHub not to mess with version tags and to thoroughly test their code. It's arguable if they've earned our trust, but since our code is with them already it's kind of a moot point.
 
