@@ -606,11 +606,9 @@ More about this [here](https://www.simplethread.com/cant-replace-redux-with-hook
 
 #### 6.19 anecdotes and connect, step1
 
-The <i>redux store</i> is currently passed to all of the components through props.
+The <i>redux store</i> is currently being accessed by the components through the new hooks (useSelector, useDispatch).
 
-Add the [react-redux](https://github.com/reactjs/react-redux) package to your application, and modify the <i>AnecdoteList</i> so that it accesses the store's state with the help of the _connect_ function.
-
-Voting for and creating new anecdotes **does not need to work** after this exercise.
+Modify the <i>AnecdoteList</i> component so that it uses the old _connect_ function instead of the newer hooks. You may need to write your own <i>mapStateToProps</i> and <i>mapDispatchToProps</i>.
 
 The <i>mapStateToProps</i> function you will need in this exercise is approximately the following:
 
