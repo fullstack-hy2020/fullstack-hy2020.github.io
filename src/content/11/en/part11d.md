@@ -125,6 +125,47 @@ For example: We have a project that uses hash based artifact builds for testing,
 
 In the above case, the software we release is tested because the CI system makes sure that tests are run on the code it is about to tag. It would not be incorrect to say that the project uses semantic versioning and simply ignore that the CI system tests individual developer branches/PRs with a hash based naming system. We do this because the version we care about (the one that is released) is given a semantic version.
 
+</div>
+
+<div class="tasks">
+
+### Exercise 11.5
+
+> TODO: make sure exercise number is correct
+
+Let's set up a workflow that will automatically increase (bump) the version when a pull request is merged into master and tag the release with the version number. We will use an open-source action developed by a third-party: `anothrNick/github-tag-action`. You can read the documentation for this action in its [README](https://github.com/anothrNick/github-tag-action).
+
+Start by creating the workflow the same way as in previous exercises. Set push to master as the trigger and use the same environment as in other actions. The workflow should have one job with two steps. The first step is the already familiar `actions/checkout@v2` as we need have the latest code in the build environment. The second step should be the tagging action itself:
+
+```yml
+    - name: Bump version and push tag
+      uses: anothrNick/github-tag-action@9aaabdb5e989894e95288328d8b17a6347217ae3
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+For the `github-tag-action` we're using a hash pointing to a specific commit instead of a semantic version for security reasons. The action repository has a `@1.26.0` tag that points to the 1.26.0 version and the same commit with hash `9aaabdb5e989894e95288328d8b17a6347217ae3`. However tags can be moved and we cannot be sure that the code we are executing in our repository is the same we initially specified, so we prefer to use the full hash for security reasons.
+
+When we use actions provided by GitHub we trust GitHub not to mess with version tags and to thoroughly test their code. It's arguable if they've earned our trust, but since our code is with them already it's kind of a moot point.
+
+In case of third-party the code might end up being buggy or even maliscious. Even when the author of the open-source code does not have the intention of doing something maliscious, they might end up leaving their credentials on a post-it note in a cafe, and then who knows what might happen.
+
+By pointing to the hash of a specific commit we can be sure that the code we pull when running the workflow will not change, because changing the underlying commit and its contents would also change the hash.
+
+We're passing an environmental variable `GITHUB_TOKEN` to the action. As it is third-party action, it needs the token for authenication in your repository. You can read more [here](https://docs.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) about authentication in GitHub Actions.
+
+The `anothrNick/github-tag-action` action can accept multiple environmental variables (`GITHUB_TOKEN` is the only one that is required, the rest are optional). These variables modify the way the action tags your releases. You can look at these in the [README](https://github.com/anothrNick/github-tag-action) and see what suits your needs. For example, if you add `WITH_V: true` as another environmental variable after `GITHUB_TOKEN`, the release numbers will be prefixed with `v` (e.g. `v0.1.3`).
+
+As you can see from the documentation, unless you alter the default behaviour with a `DEFAULT_BUMP` environmental variable, by default your releases will receive a *minor* bump, meaning that the middle number will be incremented, e.g. 1.2.10 -> 1.3.10. You can override this by adding `#major`, `#minor` or `#patch` to the commit message.
+
+Complete the workflow and try it out! Once the workflow has run successfully, you will see the release on the right hand side in your repository. If you're uncertain of the configuration, you can set `DRY_RUN` to `true`, which will make the action output the next version number without creating or tagging the release.
+
+![Releases](../../images/11/part11d_01.png)
+
+</div>
+
+<div class="content">
+
 ### Keep master protected
 
 GitHub allows you to set up protected branches. It is important to protect your most important branch that should never be broken: master. In repository settings you can choose between several levels of protection. We will not go over all of the protection options, you can learn more about them in GitHub documentation. Requiring pull request approval when merging into master is one of the options we mentioned earlier.
