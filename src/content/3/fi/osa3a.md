@@ -379,7 +379,7 @@ Tiedoston <i>package.json</i> sisältö muuttuu seuraavasti:
 {
   //...
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
@@ -600,9 +600,7 @@ Ei ole täyttä yksimielisyyttä siitä mikä statuskoodi DELETE-pyynnöstä pit
 
 Herää kysymys miten voimme testata poisto-operaatiota? HTTP GET -pyyntöjä on helppo testata selaimessa. Voisimme toki kirjoittaa Javascript-koodin, joka testaa deletointia, mutta jokaiseen mahdolliseen tilanteeseen testikoodinkaan tekeminen ei ole aina paras ratkaisu.
 
-On olemassa useita backendin testaamista helpottavia työkaluja, eräs näistä on edellisessä osassa nopeasti mainittu komentorivityökalu [curl](https://curl.haxx.se).
-
-Käytetään nyt kuitenkin [postman](https://www.getpostman.com/)-nimistä sovellusta.
+On olemassa useita backendin testaamista helpottavia työkaluja, eräs näistä on [Postman](https://www.postman.com/), jota käytämme tällä kurssilla.
 
 Asennetaan postman ja kokeillaan
 
