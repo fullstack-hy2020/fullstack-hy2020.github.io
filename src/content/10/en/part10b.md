@@ -200,7 +200,7 @@ const RepositoryList = () => {
 export default RepositoryList;
 ```
 
-<i>Do not</i> alter the contents of the <em>repositories</em> variable, it should contain everything you need to complete this exercise. Render the `RepositoryList` component in the `Main` component which we previously added to the <i>Main.jsx</i> file. The reviewed repository list should roughly look something like this:
+<i>Do not</i> alter the contents of the <em>repositories</em> variable, it should contain everything you need to complete this exercise. Render the <em>RepositoryList</em> component in the <em>Main</em> component which we previously added to the <i>Main.jsx</i> file. The reviewed repository list should roughly look something like this:
 
 ![Application preview](../../images/10/5.jpg)
 

@@ -27,9 +27,13 @@ We will be developing an application for rating [GitHub](https://github.com/) re
 
 All the exercises in this part have to be submitted into <i>a single GitHub repository</i> which will eventually contain the entire source code of your application. There will be model solutions available for each section of this part which you can use to fill in incomplete submissions. This part is structured based on the idea that you develop your application as you progress in the material. So <i>do not</i> wait until the exercises to start the development. Instead, develop your application in the same pace as the material progresses.
 
-<!-- TODO: palautussovelluksen info & opintopisteet -->
-
 This part will heavily rely on concepts covered in the previous parts. Before starting this part you will need basic knowledge of JavaScript, React and GraphQL. Deep knowledge of server-side development is not required and all the server-side code is provided for you. However, we will be making network requests from your React Native applications, for example, using GraphQL queries. The recommended parts to complete before this part are [part 1](/en/part1), [part 2](/en/part2), [part 5](/en/part5), [part 7](/en/part7) and [part 8](/en/part8).
+
+### Submitting exercises and earning credits
+
+Exercises are submitted via the [submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020) just like in the previous parts. Note that, exercises in this part are submitted <i>to a different course instance</i> than in parts 0-9. The parts 0-3 in the submission system refer to the sections a-d in this part. This means that you will be submitting exercises a single section at a time starting with this section, "Introduction to React Native", which is part 0 in the submission system.
+
+During this part you will earn credits based on the number of exercises you complete. Completing <i>19 exercises</i> in this part will earn you <i>1 credit</i>. Completing <i>all the exercises</i> in this part will earn you <i>2 credits</i>. 
 
 ### Initializing the application
 
