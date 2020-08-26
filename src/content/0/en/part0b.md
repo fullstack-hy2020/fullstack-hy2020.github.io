@@ -590,7 +590,7 @@ During this course, we will get familiar with React and the [Redux](https://gith
 
 The status of React seems strong, but the world of JavaScript is ever changing. For example, recently a newcomer - [VueJS](https://vuejs.org/) - has been capturing some interest. 
 
-### Full stack -web development
+### Full stack web development
 
 What does the name of the course, <i>Full stack web development</i>, mean? Full stack is a buzzword that everyone talks about, while no one really knows what it means. Or at least, there is no agreed-upon definition for the term. 
 
