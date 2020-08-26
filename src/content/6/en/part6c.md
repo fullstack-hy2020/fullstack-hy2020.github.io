@@ -252,7 +252,7 @@ export default {
 }
 ```
 
-The method _addNote_ of the component <i>NoteForm</i> changes slightly:
+The method _addNote_ of the component <i>NewNote</i> changes slightly:
 
 ```js
 import React from 'react'
@@ -333,7 +333,7 @@ const App = () => {
 }
 ```
 
-and <i>NoteForm</i> would create a new note as follows:
+and <i>NewNote</i> would create a new note as follows:
 
 ```js
 const NewNote = () => {
