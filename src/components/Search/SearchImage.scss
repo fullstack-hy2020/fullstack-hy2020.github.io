@@ -1,0 +1,20 @@
+.search-image-container {
+  margin-left: 2em;
+}
+
+.search-image {
+  margin: opx;
+  box-sizing: border-box;
+  height: 40px;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  border: 2px solid white;
+  border-radius: 3px;
+ 
+
+  &:hover {
+    border-color: rgba(0, 0, 0, 0.6);
+  }
+}

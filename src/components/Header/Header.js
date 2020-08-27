@@ -1,10 +1,10 @@
 import './Header.scss';
 
 import React, { Component } from 'react';
-
 import { Link } from 'gatsby';
 import Navigation from '../Navigation/Navigation';
 import { TripleBorder } from '../TripleBorder/TripleBorder';
+import SearchImage from '../Search/SearchImage';
 
 class Header extends Component {
   constructor(props) {
@@ -56,8 +56,8 @@ class Header extends Component {
               this.props.lang === 'en'
                 ? '/en'
                 : this.props.lang === 'zh'
-                ? '/zh'
-                : '/'
+                  ? '/zh'
+                  : '/'
             }
             className="header__logo"
           >
@@ -69,23 +69,28 @@ class Header extends Component {
                 {'{() => fs}'}
               </TripleBorder>
             ) : (
-              <TripleBorder
-                hover
-                className="nav-item-hover"
-                childrenClassName="triple-border__logo"
-              >
-                fs
-              </TripleBorder>
-            )}
+                <TripleBorder
+                  hover
+                  className="nav-item-hover"
+                  childrenClassName="triple-border__logo"
+                >
+                  fs
+                </TripleBorder>
+              )}
           </Link>
-
           {this.state.headerClass !== 'header--small' && (
             <Navigation lang={this.props.lang} />
           )}
+          {this.state.headerClass !== 'header--small' && (
+            <SearchImage />
+          )}        
         </div>
       </div>
     );
   }
-}
+};
 
 export default Header;
+/*
+  <SearchImage />
+*/
