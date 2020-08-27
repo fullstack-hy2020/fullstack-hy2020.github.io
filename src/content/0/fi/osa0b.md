@@ -7,7 +7,7 @@ lang: fi
 
 <div class="content">
 
-Ennen kuin aloitamme ohjelmoinnin, käymme läpi web-sovellusten toimintaperiaatteita tarkastelemalla osoitteessa <https://fullstack-exampleapp.herokuapp.com/> olevaa esimerkkisovellusta. Huomaa että sovelluksen toinen versio löytyy osoitteesta <https://fullstack-example.now.sh> ja voit käyttää kumpaa tahansa. Osoitteessa <i>herokuapp.com</i> olevat sovellukset saattavat lakata toimimasta kuukausien viimeisinä päivinä ilmaisen prosessointiajan loppuessa.
+Ennen kuin aloitamme ohjelmoinnin, käymme läpi web-sovellusten toimintaperiaatteita tarkastelemalla osoitteessa <https://studies.cs.helsinki.fi/exampleapp> olevaa esimerkkisovellusta.
 
 Sovelluksen olemassaolon tarkoitus on ainoastaan havainnollistaa kurssin peruskäsitteistöä. Sovellus ei ole missään tapauksessa esimerkki siitä, <i>miten</i> web-sovelluksia kannattaisi kehittää. Päinvastoin se demonstroi eräitä historiallisia web-sovellusten toteutukseen käytettyjä tapoja ja tekniikoita, joiden katsotaan nykyään olevan jopa <i>huonoja käytänteitä</i>.
 
@@ -15,7 +15,7 @@ Kurssin suosittelemaa tyyliä noudattavan koodin kirjoittaminen alkaa [osasta 1]
 
 Käytä nyt ja <i>koko ajan</i> tämän kurssin aikana Chrome-selainta.
 
-Avataan selaimella [esimerkkisovellus](https://fullstack-exampleapp.herokuapp.com/). Sivun ensimmäinen lataus kestää joskus hetken.
+Avataan selaimella [esimerkkisovellus](https://studies.cs.helsinki.fi/exampleapp/). Sivun ensimmäinen lataus kestää joskus hetken.
 
 **Web-sovelluskehityksen sääntö numero yksi**: pidä selaimen developer-konsoli koko ajan auki. Konsoli avautuu Macilla painamalla yhtä aikaa _alt_ _cmd_ ja _i_. Windowsilla konsolin saa auki painamalla _F12_ tai yhtä aikaa _ctrl_ _shift_ ja _i_.
 
@@ -35,7 +35,7 @@ Selain ja web-palvelin kommunikoivat keskenään [HTTP](https://developer.mozill
 
 Kun päivität sivun (eli painat F5-näppäintä tai selaimessa olevaa symbolia &#8634;), kertoo konsoli, että tapahtuu kaksi asiaa:
 
-- selain hakee web-palvelimelta sivun https://fullstack-exampleapp.herokuapp.com/ sisällön
+- selain hakee web-palvelimelta sivun https://studies.cs.helsinki.fi/exampleapp/ sisällön
 - ja lataa kuvan <i>kuva.png</i>
 
 ![](../../images/0/2e.png)
@@ -46,7 +46,7 @@ Klikkaamalla näistä ensimmäistä, paljastuu tarkempaa tietoa siitä mistä on
 
 ![](../../images/0/3e.png)
 
-Ylimmästä osasta <i>General</i> selviää, että selain teki [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET)-metodilla pyynnön osoitteeseen <i>https://fullstack-exampleapp.herokuapp.com/</i> ja että pyyntö oli onnistunut, sillä pyyntöön saatiin vastaus, jonka [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) on 200.
+Ylimmästä osasta <i>General</i> selviää, että selain teki [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET)-metodilla pyynnön osoitteeseen <i>https://studies.cs.helsinki.fi/exampleapp/</i> ja että pyyntö oli onnistunut, sillä pyyntöön saatiin vastaus, jonka [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) on 200.
 
 Pyyntöön ja palvelimen lähettämään vastaukseen liittyy erinäinen määrä otsakkeita eli [headereita](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields):
 
@@ -64,9 +64,9 @@ img-tagin ansiosta selain tekee toisenkin <i>HTTP-pyynnön</i>, jonka avulla se 
 
 ![](../../images/0/6e.png)
 
-eli pyyntö on tehty osoitteeseen <https://fullstack-exampleapp.herokuapp.com/kuva.png> ja se on tyypiltään HTTP GET. Vastaukseen liittyvät headerit kertovat että vastauksen koko on 89350 tavua ja vastauksen [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) on <i>image/png</i>, eli kyseessä on png-tyyppinen kuva. Tämän tiedon ansiosta selain tietää, miten kuva on piirrettävä HTML-sivulle.
+eli pyyntö on tehty osoitteeseen <https://studies.cs.helsinki.fi/exampleapp/kuva.png> ja se on tyypiltään HTTP GET. Vastaukseen liittyvät headerit kertovat että vastauksen koko on 89350 tavua ja vastauksen [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) on <i>image/png</i>, eli kyseessä on png-tyyppinen kuva. Tämän tiedon ansiosta selain tietää, miten kuva on piirrettävä HTML-sivulle.
 
-Sivun https://fullstack-exampleapp.herokuapp.com/ avaaminen selaimessa saa siis aikaan allaolevan [sekvenssikaavion](https://github.com/mluukkai/ohjelmistotekniikka-kevat2019/blob/master/web/materiaali.md#sekvenssikaaviot) kuvaaman tapahtumasarjan:
+Sivun https://studies.cs.helsinki.fi/exampleapp/ avaaminen selaimessa saa siis aikaan allaolevan [sekvenssikaavion](https://github.com/mluukkai/ohjelmistotekniikka-kevat2019/blob/master/web/materiaali.md#sekvenssikaaviot) kuvaaman tapahtumasarjan:
 
 ![](../../images/0/7b.png)
 
@@ -115,7 +115,7 @@ Perinteisissä websovelluksissa selain on "tyhmä", se ainoastaan pyytää palve
 
 Pidä konsoli edelleen auki. Tyhjennä konsolin näkymä painamalla vasemmalla olevaa &empty;-symbolia.
 
-Kun menet nyt [muistiinpanojen](https://fullstack-exampleapp.herokuapp.com/notes) sivulle eli klikkaat linkkiä <i>notes</i>, selain tekee 4 HTTP-pyyntöä:
+Kun menet nyt [muistiinpanojen](https://studies.cs.helsinki.fi/exampleapp/notes) sivulle eli klikkaat linkkiä <i>notes</i>, selain tekee 4 HTTP-pyyntöä:
 
 ![](../../images/0/8e.png)
 
@@ -171,7 +171,7 @@ xhttp.send()
 
 Kyseessä on alin Network-välilehden näyttämistä selaimen tekemistä pyynnöistä.
 
-Voimme kokeilla mennä osoitteeseen <https://fullstack-exampleapp.herokuapp.com/data.json> suoraan selaimella:
+Voimme kokeilla mennä osoitteeseen <https://studies.cs.helsinki.fi/exampleapp/data.json> suoraan selaimella:
 
 ![](../../images/0/10e.png)
 
@@ -355,11 +355,11 @@ list.appendChild(newElement)
 
 ![](../../images/0/16e.png)
 
-Vaikka selaimen näyttämä sivu päivittyy, ei muutos ole lopullinen. Jos sivu uudelleenladataan, katoaa uusi muistiinpano, sillä muutos ei mennyt palvelimelle asti. Selaimen lataama JavaScript luo muistiinpanojen listan aina palvelimelta osoitteesta <https://fullstack-exampleapp.herokuapp.com/data.json> haettavan JSON-muotoisen raakadatan perusteella.
+Vaikka selaimen näyttämä sivu päivittyy, ei muutos ole lopullinen. Jos sivu uudelleenladataan, katoaa uusi muistiinpano, sillä muutos ei mennyt palvelimelle asti. Selaimen lataama JavaScript luo muistiinpanojen listan aina palvelimelta osoitteesta <https://studies.cs.helsinki.fi/exampleapp/data.json> haettavan JSON-muotoisen raakadatan perusteella.
 
 ### CSS
 
-Muistiinpanojen sivun HTML-koodin <i>head</i>-osio sisältää [link](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link)-tagin, joka määrittelee, että selaimen tulee ladata palvelimelta osoitteesta [main.css](https://fullstack-exampleapp.herokuapp.com/main.css) sivulla käytettävä [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)-tyylitiedosto.
+Muistiinpanojen sivun HTML-koodin <i>head</i>-osio sisältää [link](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link)-tagin, joka määrittelee, että selaimen tulee ladata palvelimelta osoitteesta [main.css](https://studies.cs.helsinki.fi/exampleapp/main.css) sivulla käytettävä [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)-tyylitiedosto.
 
 Cascading Style Sheets eli CSS on kieli, jonka avulla web-sovellusten ulkoasu määritellään.
 
@@ -402,14 +402,14 @@ Tehdyt muutokset eivät luonnollisestikaan jää voimaan kun selaimen sivu uudel
 
 ### JavaScriptia sisältävän sivun lataaminen - kertaus
 
-Kerrataan vielä mitä tapahtuu kun selaimessa avataan sivu https://fullstack-exampleapp.herokuapp.com/notes
+Kerrataan vielä mitä tapahtuu kun selaimessa avataan sivu https://studies.cs.helsinki.fi/exampleapp/notes
 
 ![](../../images/0/19b.png)
 
 - selain hakee palvelimelta sivun sisällön ja rakenteen määrittelevän HTML-koodin HTTP GET -pyynnöllä
 - HTML-koodi saa aikaan sen, että selain hakee sivun tyylit määrittelevän tiedoston <i>`main.css`</i>
 - sekä JavaScript-koodia sisältävän tiedoston <i>`main.js`</i>
-- selain alkaa suorittaa hakemaansa JavaScript-koodia, joka tekee HTTP GET -pyynnön muistiinpanot json-muotoisena raakadatana palauttavaan osoitteeseen https://fullstack-exampleapp.herokuapp.com/data.json
+- selain alkaa suorittaa hakemaansa JavaScript-koodia, joka tekee HTTP GET -pyynnön muistiinpanot json-muotoisena raakadatana palauttavaan osoitteeseen https://studies.cs.helsinki.fi/exampleapp/data.json
 - datan saapuessa selain suorittaa _tapahtumankäsittelijän_, joka renderöi DOM-apia hyväksikäyttäen muistiinpanot ruudulle
 
 ### Lomake ja HTTP POST
@@ -466,7 +466,7 @@ notes.push({
 
 Muistiinpano-olioilla on siis kaksi kenttää, varsinaisen sisällön kuvaava <i>content</i> ja luomishetken kertova <i>date</i>.
 
-Palvelin ei talleta muistiinpanoja tietokantaan, joten uudet muistiinpanot katoavat aina Herokun uudelleenkäynnistäessä palvelun.
+Palvelin ei talleta muistiinpanoja tietokantaan, joten uudet muistiinpanot katoavat aina kun palvelin käynnistetään uudelleen.
 
 ### AJAX
 
@@ -478,7 +478,7 @@ Ennen AJAX:in aikakautta jokainen sivu toimi aiemmassa luvussa olevan [perinteis
 
 Muistiinpanojen sivu siis lataa näytettävän datan AJAX:illa. Lomakkeen lähetys sen sijaan tapahtuu perinteisen web-lomakkeen lähetysmekanismin kautta.
 
-Sovelluksen urlit heijastavat vanhaa huoletonta aikaa. JSON-muotoinen data haetaan urlista <https://fullstack-exampleapp.herokuapp.com/data.json> ja uuden muistiinpanon tiedot lähetetään urliin <https://fullstack-exampleapp.herokuapp.com/new_note>. Nykyään näin valittuja urleja ei pidettäisi ollenkaan hyvinä, ne eivät noudata ns. [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services)-apien yleisesti hyväksyttyjä konventioita. Käsittelemme asiaa tarkemmin [osassa 3](/osa3).
+Sovelluksen urlit heijastavat vanhaa huoletonta aikaa. JSON-muotoinen data haetaan urlista <https://studies.cs.helsinki.fi/exampleapp/data.json> ja uuden muistiinpanon tiedot lähetetään urliin <https://studies.cs.helsinki.fi/exampleapp/new_note>. Nykyään näin valittuja urleja ei pidettäisi ollenkaan hyvinä, ne eivät noudata ns. [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services)-apien yleisesti hyväksyttyjä konventioita. Käsittelemme asiaa tarkemmin [osassa 3](/osa3).
 
 AJAXiksi kutsuttu asia on arkipäiväistynyt, ja muuttunut itsestäänselvyydeksi. Koko termi on hiipunut unholaan ja nuori polvi ei ole sitä edes ikinä kuullut.
 
@@ -492,7 +492,7 @@ Viimeisten vuosien aikana on noussut esiin tyyli tehdä web-sovellukset käyttä
 
 Sovelluksemme muistiinpanosivu muistuttaa jo hiukan SPA-tyylistä sovellusta. Sitä se ei kuitenkaan vielä ole, sillä vaikka muistiinpanojen renderöintilogiikka on toteutettu selaimessa, käyttää sivu vielä perinteistä mekanismia uusien muistiinpanojen luomiseen, eli se lähettää uuden muistiinpanon tiedot lomakkeen avulla ja palvelin pyytää <i>uudelleenohjauksen</i> avulla selainta lataamaan muistiinpanojen sivun uudelleen.
 
-Osoitteesta <https://fullstack-exampleapp.herokuapp.com/spa> löytyy sovelluksen Single Page App -versio.
+Osoitteesta <https://studies.cs.helsinki.fi/exampleapp/spa> löytyy sovelluksen Single Page App -versio.
 
 Sovellus näyttää ensivilkaisulta täsmälleen samalta kuin edellinen versio.
 
@@ -647,16 +647,16 @@ Tutustu HTML:n lomakkeiden perusteisiin lukemalla Mozillan tutoriaali [Your firs
 
   <h4>0.4: uusi muistiinpano</h4>
 
-Luvussa [JavaScriptia sisältävän sivun lataaminen - kertaus](/osa0/web_sovelluksen_toimintaperiaatteita#javascriptia-sisaltavan-sivun-lataaminen-kertaus) kuvataan [sekvenssikaavion](https://github.com/mluukkai/ohjelmistotekniikka-kevat2019/blob/master/web/materiaali.md#sekvenssikaaviot) avulla sivun <https://fullstack-exampleapp.herokuapp.com/notes> avaamisen aikaansaama tapahtumasarja.
+Luvussa [JavaScriptia sisältävän sivun lataaminen - kertaus](/osa0/web_sovelluksen_toimintaperiaatteita#javascriptia-sisaltavan-sivun-lataaminen-kertaus) kuvataan [sekvenssikaavion](https://github.com/mluukkai/ohjelmistotekniikka-kevat2019/blob/master/web/materiaali.md#sekvenssikaaviot) avulla sivun <https://studies.cs.helsinki.fi/exampleapp/notes> avaamisen aikaansaama tapahtumasarja.
 
 Kaavio on luotu [WebSequenceDiagrams](https://www.websequencediagrams.com)-palvelussa, seuraavasti:
 
 ```
-selain->palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/notes
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
 palvelin-->selain: HTML-koodi
-selain->palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.css
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
 palvelin-->selain: main.css
-selain->palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.js
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
 palvelin-->selain: main.js
 
 note over selain:
@@ -664,7 +664,7 @@ selain alkaa suorittaa js-koodia
 joka pyytää JSON-datan palvelimelta
 end note
 
-selain->palvelin: HTTP GET https://fullstack-exampleapp.herokuapp.com/data.json
+selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
 palvelin-->selain: [{ content: "HTML on helppoa", date: "2019-01-01" }, ...]
 
 note over selain:
@@ -673,7 +673,7 @@ joka renderöi muistiinpanot näytölle
 end note
 ```
 
-**Tee vastaavanlainen kaavio**, joka kuvaa mitä tapahtuu tilanteessa, missä käyttäjä luo uuden muistiinpanon ollessaan sivulla <https://fullstack-exampleapp.herokuapp.com/notes>, eli kirjoittaa tekstikenttään jotain ja painaa nappia <i>tallenna</i>.
+**Tee vastaavanlainen kaavio**, joka kuvaa mitä tapahtuu tilanteessa, missä käyttäjä luo uuden muistiinpanon ollessaan sivulla <https://studies.cs.helsinki.fi/exampleapp/notes>, eli kirjoittaa tekstikenttään jotain ja painaa nappia <i>tallenna</i>.
 
 Kirjoita tarvittaessa palvelimella tai selaimessa tapahtuvat operaatiot sopivina kommentteina kaavion sekaan.
 
@@ -683,7 +683,7 @@ Kaikki oleellinen tämän ja seuraavien kahden tehtävän tekemiseen liittyvä i
 
   <h4>0.5: Single Page App</h4>
 
-Tee kaavio tilanteesta, missä käyttäjä menee selaimella osoitteeseen <https://fullstack-exampleapp.herokuapp.com/spa> eli muistiinpanojen [Single Page App](../osa0/#single-page-app)-versioon
+Tee kaavio tilanteesta, missä käyttäjä menee selaimella osoitteeseen <https://studies.cs.helsinki.fi/exampleapp/spa> eli muistiinpanojen [Single Page App](../osa0/#single-page-app)-versioon
 
   <h4>0.6: Uusi muistiinpano</h4>
 
