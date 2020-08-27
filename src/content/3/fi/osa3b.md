@@ -70,7 +70,7 @@ Kun koko "stäkki" on saatu vihdoin kuntoon, siirretään sovellus internettiin.
 Lisätään backendin projektin juureen tiedosto <i>Procfile</i>, joka kertoo Herokulle, miten sovellus käynnistetään
 
 ```bash
-web: node index.js
+web: npm start
 ```
 
 Muutetaan tiedoston <i>index.js</i> lopussa olevaa sovelluksen käyttämän portin määrittelyä seuraavasti:
