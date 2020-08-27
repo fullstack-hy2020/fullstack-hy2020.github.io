@@ -17,7 +17,7 @@ The principles of token based authentication are depicted in the following seque
 
 - User starts by logging in using a login form implemented with React 
     - We will add the login form to the frontend in [part 5](/en/part5) 
-- This causes the React code to send the username and the password to the server address <i>/api/login</i> as a HTTP POST request. 
+- This causes the React code to send the username and the password to the server address <i>/api/login</i> as an HTTP POST request. 
 - If the username and the password are correct, the server generates a <i>token</i> which somehow identifies the logged in user. 
     - The token is signed digitally, making it impossible to falsify (with cryptographic means)
 - The backend responds with a status code indicating the operation was successful, and returns the token with the response.
@@ -283,7 +283,7 @@ In the next exercises, basics of user management will be implemented for the Blo
 
 #### 4.15: bloglist expansion, step3
 
-Implement a way to create new users by doing a HTTP POST-request to address <i>api/users</i>. Users have <i>username
+Implement a way to create new users by doing an HTTP POST-request to address <i>api/users</i>. Users have <i>username
 , password and name</i>.
 
 Do not save passwords to the database as clear text, but use the <i>bcrypt</i> library like we did in part 4 chapter [Creating new users](/en/part4/user_administration#creating-users).
