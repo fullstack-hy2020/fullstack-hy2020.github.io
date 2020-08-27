@@ -152,7 +152,7 @@ We do, however, decide to move the initialization of the notes into the <i>App</
 
 ```js
 import React, {useEffect} from 'react' // highlight-line
-import NewNote from './components/NowNote'
+import NewNote from './components/NewNote'
 import Notes from './components/Notes'
 import VisibilityFilter from './components/VisibilityFilter'
 import noteService from './services/notes'
