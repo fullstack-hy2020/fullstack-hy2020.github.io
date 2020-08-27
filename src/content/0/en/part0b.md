@@ -7,8 +7,7 @@ lang: en
 
 <div class="content">
 
-Before we start programming, we will go through some principles of web development by examining an example application at <https://fullstack-exampleapp.herokuapp.com/>.
-A Finnish language version of the application can be found at <https://fullstack-example.now.sh>. You are free to use either one. 
+Before we start programming, we will go through some principles of web development by examining an example application at <https://studies.cs.helsinki.fi/exampleapp>.
 
 The applications exist only to demonstrate some basic concepts of the course, and are by no means examples of <i>how</i> web applications should be made. 
 On the contrary, they demonstrate some old techniques of web development, which can even be seen as <i>bad practice</i> nowadays.
@@ -17,7 +16,7 @@ Coding in the recommended style begins in [part 1](/en/part1).
 
 Use the Chrome browser <i>now and for the rest of the course</i>.
 
-Open the [example application](https://fullstack-exampleapp.herokuapp.com/) on your browser. Sometimes this takes a while. 
+Open the [example application](https://studies.cs.helsinki.fi/exampleapp) on your browser. Sometimes this takes a while. 
 
 **The 1st rule of web development**: Always keep the developer console open on your browser. On macOS, open the console by pressing `F12` or `option-cmd-i` simultaneously. 
 On Windows, open the console by pressing `F12` or `ctrl-shift-i` simultaneously. 
@@ -25,6 +24,7 @@ On Windows, open the console by pressing `F12` or `ctrl-shift-i` simultaneously.
 Before continuing, find out how to open the developer console on your computer (google if necessary) and remember to <i>always</i> keep it open when developing web applications. 
 
 The console looks like this: 
+
 ![](../../images/0/1e.png)
 
 Make sure that the <i>Network</i> tab is open, and check the <i>Disable cache</i> option as shown. <i>Preserve log</i> can also be useful: it saves the logs printed by the application when the page is reloaded. 
@@ -37,7 +37,7 @@ The server and the web browser communicate with each other using the [HTTP](http
 
 When you reload the page (press the F5 key or the &#8634; symbol on your browser), the console shows that two events have happened:
 
-- The browser fetches the contents of the page <i>fullstack-exampleapp.herokuapp.com/</i> from the server
+- The browser fetches the contents of the page <i>studies.cs.helsinki.fi/exampleapp</i> from the server
 - And downloads the image <i>kuva.png</i>
 
 ![](../../images/0/2e.png)
@@ -48,7 +48,7 @@ Clicking the first event reveals more information on what's happening:
 
 ![](../../images/0/3e.png)
 
-The upper part, <i>General</i>, shows that the browser did a request to the address <i>https://fullstack-exampleapp.herokuapp.com/</i> using the  [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) method, and that the request was successful, because the server response had the [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200. 
+The upper part, <i>General</i>, shows that the browser did a request to the address <i>https://studies.cs.helsinki.fi/exampleapp</i> using the  [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) method, and that the request was successful, because the server response had the [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200. 
 
 The request and the server response have several [headers](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields):
 
@@ -67,9 +67,9 @@ Because of the img tag, the browser does a second <i>HTTP-request</i> to fetch t
 
 ![](../../images/0/6e.png)
 
-The request was made to the address <https://fullstack-exampleapp.herokuapp.com/kuva.png> and its type is HTTP GET. The response headers tell us that the response size is 89350 bytes, and its [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) is <i>image/png</i>, so it is a png image. The browser uses this information to render the image correctly to the screen. 
+The request was made to the address <https://studies.cs.helsinki.fi/exampleapp/kuva.png> and its type is HTTP GET. The response headers tell us that the response size is 89350 bytes, and its [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) is <i>image/png</i>, so it is a png image. The browser uses this information to render the image correctly to the screen. 
 
-The chain of events caused by opening the page https://fullstack-exampleapp.herokuapp.com/ on a browser form the following [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/):
+The chain of events caused by opening the page https://studies.cs.helsinki.fi/exampleapp on a browser form the following [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/):
 
 ![](../../images/0/7e.png)
 
@@ -124,7 +124,7 @@ This course will use Node.js and Express to create web servers.
 ### Running application logic on the browser
 
 Keep the developer console open. Empty the console by clicking the 🚫 symbol. 
-Now when you go to the [notes](https://fullstack-exampleapp.herokuapp.com/notes) page, the browser does 4 HTTP requests: 
+Now when you go to the [notes](https://studies.cs.helsinki.fi/exampleapp/notes) page, the browser does 4 HTTP requests: 
 
 ![](../../images/0/8e.png)
 
@@ -176,7 +176,7 @@ xhttp.send()
 ```
 This is the bottom-most request shown on the Network tab. 
 
-We can try going to the address <https://fullstack-exampleapp.herokuapp.com/data.json> straight from the browser:
+We can try going to the address <https://studies.cs.helsinki.fi/exampleapp/data.json> straight from the browser:
 
 ![](../../images/0/10e.png)
 
@@ -356,11 +356,11 @@ list.appendChild(newElement)
 
 ![](../../images/0/16e.png)
 
-Even though the page updates on your browser, the changes are not permanent. If the page is reloaded, the new note will disappear, because the changes were not pushed to the server. The JavaScript code the browser fetches will always create the list of notes based on JSON-data from the address <https://fullstack-exampleapp.herokuapp.com/data.json>.
+Even though the page updates on your browser, the changes are not permanent. If the page is reloaded, the new note will disappear, because the changes were not pushed to the server. The JavaScript code the browser fetches will always create the list of notes based on JSON-data from the address <https://studies.cs.helsinki.fi/exampleapp/data.json>.
 
 ### CSS
 
-The <i>head</i> element of the HTML code of the Notes page contains a [link](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) tag, which determines that the browser must fetch a [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) style sheet from the address [main.css](https://fullstack-exampleapp.herokuapp.com/main.css).
+The <i>head</i> element of the HTML code of the Notes page contains a [link](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) tag, which determines that the browser must fetch a [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) style sheet from the address [main.css](https://studies.cs.helsinki.fi/exampleapp/main.css).
 
 Cascading Style Sheets, or CSS, is a markup language used to determine the appearance of web pages. 
 
@@ -403,14 +403,14 @@ Changes made on the console will not be permanent. If you want to make lasting c
 
 ### Loading a page containing JavaScript - revised
 
-Let's revise what happens when the page https://fullstack-exampleapp.herokuapp.com/notes is opened on the browser. 
+Let's revise what happens when the page https://studies.cs.helsinki.fi/exampleapp/notes is opened on the browser. 
 
 ![](../../images/0/19e.png)
 
 - The browser fetches the HTML code defining the content and the structure of the page from the server using an HTTP GET request.
 - Links in the HTML code cause the browser to also fetch the CSS style sheet <i>main.css</i>...
 - ...and a JavaScript code file <i>main.js</i>
-- The browser executes the JavaScript code. The code makes an HTTP GET request to the address https://fullstack-exampleapp.herokuapp.com/data.json, which 
+- The browser executes the JavaScript code. The code makes an HTTP GET request to the address https://studies.cs.helsinki.fi/exampleapp/data.json, which 
   returns the notes as JSON  data. 
 - When the data has been fetched, the browser executes an <i>event handler</i>, which renders the notes to the page using the DOM-API. 
 
@@ -443,7 +443,7 @@ The Form tag has attributes <i>action</i> and <i>method</i>, which define that s
 
 ![](../../images/0/24e.png)
 
-The code on the server responsible for the POST request is simple (NB: this code is on the server, and not on the JavaScript code fetched by the browser):
+The code on the server responsible for the POST request is quite simple (NB: this code is on the server, and not on the JavaScript code fetched by the browser):
 
 ```js
 app.post('/new_note', (req, res) => {
@@ -471,7 +471,8 @@ notes.push({
 ```
 
 The Note objects have two fields: <i>content</i> containing the actual content of the note, and <i>date</i> containing the date and time the note was created. 
-The server does not save new notes to a database, so new notes disappear when Heroku restarts the service. 
+
+The server does not save new notes to a database, so new notes disappear when the server is restarted. 
 
 ### AJAX
 
@@ -484,7 +485,7 @@ All of the data shown on the page was fetched with the HTML-code generated by th
 
 The Notes page uses AJAX to fetch the notes data. Submitting the form still uses the traditional mechanism of submitting web-forms. 
 
-The application URLs reflect the old, carefree times. JSON data is fetched from the url <https://fullstack-exampleapp.herokuapp.com/data.json> and new notes are sent to the URL <https://fullstack-exampleapp.herokuapp.com/new_note>.  
+The application URLs reflect the old, carefree times. JSON data is fetched from the url <https://studies.cs.helsinki.fi/exampleapp/data.json> and new notes are sent to the URL <https://studies.cs.helsinki.fi/exampleapp/new_note>.  
 Nowadays URLs like these would not be considered acceptable, as they don't follow the generally acknowledged conventions of [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) APIs, which we'll look into more in [part 3](/en/part3)
 
 The thing termed AJAX is now so commonplace that it's taken for granted. The term has faded into oblivion, and the new generation has not even heard of it. 
@@ -499,7 +500,7 @@ In recent years, the [Single-page application](https://en.wikipedia.org/wiki/Sin
 
 The Notes page of our application bears some resemblance to SPA-style apps, but it's not quite there yet. Even though the logic for rendering the notes is run on the browser, the page still uses the traditional way of adding new notes. The data is sent to the server with form submit, and the server instructs the browser to reload the Notes page with a <i>redirect</i>.
 
-A single page app version of our example application can be found from <https://fullstack-exampleapp.herokuapp.com/spa>.
+A single page app version of our example application can be found from <https://studies.cs.helsinki.fi/exampleapp/spa>.
 At first glance, the application looks exactly the same as the previous one. 
 The HTML code is almost identical, but the JavaScript file is different (<i>spa.js</i>) and there is a small change in how the form-tag is defined: 
 
@@ -658,16 +659,16 @@ Learn about the basics of HTML forms by reading Mozilla's tutorial [Your first f
 
   <h4>0.4: new note</h4>
 
-In chapter [Loading a page containing JavaScript - revised](/en/part0/fundamentals_of_web_apps#loading-a-page-containing-java-script-revised) the chain of events caused by opening the page <https://fullstack-exampleapp.herokuapp.com/notes> is depicted as a [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)
+In chapter [Loading a page containing JavaScript - revised](/en/part0/fundamentals_of_web_apps#loading-a-page-containing-java-script-revised) the chain of events caused by opening the page <https://studies.cs.helsinki.fi/exampleapp/notes> is depicted as a [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)
 
 The diagram was made using [websequencediagrams](https://www.websequencediagrams.com) service as follows: 
 
 ```
-browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/notes
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
 server-->browser: HTML-code
-browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.css
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
 server-->browser: main.css
-browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.js
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
 server-->browser: main.js
 
 note over browser:
@@ -675,7 +676,7 @@ browser starts executing js-code
 that requests JSON data from server 
 end note
 
-browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/data.json
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
 server-->browser: [{ content: "HTML is easy", date: "2019-05-23" }, ...]
 
 note over browser:
@@ -684,7 +685,7 @@ that renders notes to display
 end note
 ```
 
-**Create a similar diagram** depicting the situation where the user creates a new note on page <https://fullstack-exampleapp.herokuapp.com/notes> by writing something into the text field and clicking the <i>submit</i> button. 
+**Create a similar diagram** depicting the situation where the user creates a new note on page <https://studies.cs.helsinki.fi/exampleapp/notes> by writing something into the text field and clicking the <i>submit</i> button. 
 
 If necessary, show operations on the browser or on the server as comments on the diagram.
 
@@ -695,7 +696,7 @@ The idea of these exercises is to read the text through once more, and to think 
 
   <h4>0.5: Single page app</h4>
 
-Create a diagram depicting the situation where the user goes to the [single page app](/en/part0/fundamentals_of_web_apps#single-page-app) version of the notes app at <https://fullstack-exampleapp.herokuapp.com/spa>.
+Create a diagram depicting the situation where the user goes to the [single page app](/en/part0/fundamentals_of_web_apps#single-page-app) version of the notes app at <https://studies.cs.helsinki.fi/exampleapp/spa>.
 
   <h4>0.6: New note</h4>
 
