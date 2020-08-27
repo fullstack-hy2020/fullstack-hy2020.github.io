@@ -1,6 +1,6 @@
-module.exports = {
-  pathPrefix: "/fullstackopen.com/",
-  siteMetadata: {
+module.exports = { 
+  pathPrefix: "/fullstack-hy2020.github.io",
+  siteMetadata: {   
     title: 'Full Stack open 2020',
     description: '',
     author: 'Houston Inc. Consulting oy',
