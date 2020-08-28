@@ -79,7 +79,7 @@ Now that the whole stack is ready, let's move our application to the internet. W
 Add a file called  <i>Procfile</i> to the project's root to tell Heroku how to start the application. 
 
 ```bash
-web: node index.js
+web: npm start
 ```
 
 Change the definition of the port our application uses at the bottom of the <i>index.js</i> file like so: 
