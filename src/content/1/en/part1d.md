@@ -16,7 +16,7 @@ In most cases the easiest and best way to accomplish this is by using the _useSt
 In the following code we create two pieces of state for the application named _left_ and _right_ that both get the initial value of 0:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
 
@@ -50,7 +50,7 @@ The component's state or a piece of its state can be of any type. We could imple
 In this case the application would look like this:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [clicks, setClicks] = useState({
     left: 0, right: 0
   })
@@ -168,7 +168,7 @@ There are situations where it can be beneficial to store a piece of application 
 Let's add a piece of state to our application containing an array _allClicks_ that remembers every click that has occurred in the application.
 
 ```js
-const App = (props) => {
+const App = () => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
   const [allClicks, setAll] = useState([]) // highlight-line
@@ -233,7 +233,7 @@ However, __don't__ do this. As mentioned previously, the state of React componen
 Let's take a closer look at how the clicking history is rendered to the page:
 
 ```js
-const App = (props) => {
+const App = () => {
   // ...
 
   return (
@@ -273,7 +273,7 @@ const History = (props) => {
   )
 }
 
-const App = (props) => {
+const App = () => {
   // ...
 
   return (
@@ -335,7 +335,7 @@ const Button = ({ onClick, text }) => (
 )
 // highlight-end
 
-const App = (props) => {
+const App = () => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
   const [allClicks, setAll] = useState([])
@@ -525,7 +525,7 @@ For this reason we will revisit the topic.
 
 Let's assume that we're developing this simple application:
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   return (
@@ -626,7 +626,7 @@ Defining event handlers directly in the attribute of the button is not necessari
 You will often see event handlers defined in a separate place. In the following version of our application we define a function that then gets assigned to the _handleClick_ variable in the body of the component function:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   const handleClick = () =>
@@ -650,7 +650,7 @@ The _handleClick_ variable is now assigned to a reference to the function. The r
 Naturally, our event handler function can be composed of multiple commands. In these cases we use the longer curly brace syntax for arrow functions:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   // highlight-start
@@ -678,7 +678,7 @@ You probably won't need to use functions that return functions in any of the exe
 Let's make the following changes to our code:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   // highlight-start
@@ -843,7 +843,7 @@ const hello = (who) => () => {
 We can use the same trick to define event handlers that set the state of the component to a given value. Let's make the following changes to our code:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
   
   // highlight-start
@@ -896,7 +896,7 @@ The event handler is created by the function call _setToValue(value + 1)_ which 
 Using functions that return functions is not required to achieve this functionality. Let's return the _setToValue_ function that is responsible for updating state, into a normal function:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   const setToValue = (newValue) => {
@@ -992,7 +992,7 @@ const Button = (props) => (
   </button>
 )
 
-const App = props => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   const setToValue = newValue => {
