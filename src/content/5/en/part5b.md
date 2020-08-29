@@ -353,6 +353,8 @@ const NoteForm = ({ createNote }) => {
     </div>
   )
 }
+
+export default NoteForm
 ```
 
 <!-- Tilan muuttuja <i>newNote</i> ja sen muutokseta huolehtiva tapahtumankäsittelijä on siirretty komponentista _App_ lomakkeesta huolehtivaan komponenttiin. -->
