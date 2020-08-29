@@ -65,7 +65,10 @@ lang: zh
 
 <!-- Statistics on the time used for exercises which have already been submitted on different parts of this course can be found from [the submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
 
-我们对各章节已提交的练习所用时间做了统计，可以在[提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中找到。
+<!-- 我们对各章节已提交的练习所用时间做了统计，可以在[提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中找到。 -->
+
+<!-- Exercise completion time statistics can be found via the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
+练习完成的时间统计可以通过[提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)进行查看。
 
 ### Grading 
 【课程成绩】
