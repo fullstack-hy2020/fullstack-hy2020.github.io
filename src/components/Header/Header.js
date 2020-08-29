@@ -81,8 +81,10 @@ class Header extends Component {
           {this.state.headerClass !== 'header--small' && (
             <Navigation lang={this.props.lang} />
           )}
-          {this.state.headerClass !== 'header--small' && (
-            <SearchImage />
+          {this.state.headerClass !== 'header--small' && 
+          this.props.lang !== 'zh' &&
+          (
+            <SearchImage lang={this.props.lang} />
           )}        
         </div>
       </div>

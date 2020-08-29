@@ -11,7 +11,9 @@ import { BodyText } from '../components/BodyText/BodyText';
 
 const Search = ({ data }) => {
   // console.log('data ', data)
-  const { index, store } = data.localSearchFinnish;
+  const { index, store } = data.localSearchEnglish;
+  // console.log('store english ', store)
+  
   const [query, setQuery] = useState('');
   const [debouncedQuery] = useDebounce(query, 500);
 
@@ -20,14 +22,13 @@ const Search = ({ data }) => {
   }
 
   const results = useFlexSearch(debouncedQuery, index, store);
-  // console.log('results ', results)  
 
   return (
     <Layout>
       <Element className="container spacing spacing--mobile--large">
         <Element className="col-8 push-right-1">
           <BodyText
-            heading={{ level: 'h1', title: 'Etsi hakusanalla materiaalista' }}
+            heading={{ level: 'h1', title: 'Search from the material' }}
             headingFontSize="2.3rem"
           />
         <Element
@@ -37,13 +38,13 @@ const Search = ({ data }) => {
             type='search'
             value={query}
             onChange={handleInpuptChange}
-            placeHolder='Syötä hakusana'
+            placeHolder='Enter query word'
           />
         </Element>
         <SearchResults
           results={filterResults(results)}
           query={query}
-          lang='fi'
+          lang='en'
         />
       </Element>
       </Element>
@@ -55,11 +56,12 @@ export default Search;
 
 export const pageQuery = graphql`
   query {
-    localSearchFinnish {
+    localSearchEnglish {
       store
       index
     }
   }
+
 `
 
 const filterResults = (results) => {

@@ -10,13 +10,48 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-local-search',
       options: {
-        name: 'finnishContent',
+        name: 'finnish',
         engine: 'flexsearch',
         engineOptions: 'speed',
         query:
           `
           {
-            allMarkdownRemark(filter: {frontmatter: {lang: {in: "fi"}}}) {
+            allMarkdownRemark(filter: {frontmatter: {lang: {eq: "fi"}}}) {
+              nodes {
+                frontmatter {
+                  lang
+                  letter
+                  part
+                }
+                id      
+                rawMarkdownBody
+              }
+            }
+          }
+      `,
+        ref: 'id',
+        index: ['body'],
+        store: ['id', 'part', 'letter', 'lang'],
+        normalizer: ({ data }) =>
+          data.allMarkdownRemark.nodes.map(node => ({
+            id: node.id,
+            part: node.frontmatter.part,
+            letter: node.frontmatter.letter,
+            lang: node.frontmatter.lang,
+            body: node.rawMarkdownBody,
+          })),
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-local-search',
+      options: {
+        name: 'english',
+        engine: 'flexsearch',
+        engineOptions: 'speed',
+        query:
+          `
+          {
+            allMarkdownRemark(filter: {frontmatter: {lang: {eq: "en"}}}) {
               nodes {
                 frontmatter {
                   lang

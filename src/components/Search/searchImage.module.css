@@ -1,8 +1,8 @@
-.search-image-container {
+.container {
   margin-left: 2em;
 }
 
-.search-image {
+.image {
   margin: opx;
   box-sizing: border-box;
   height: 40px;
@@ -12,9 +12,9 @@
   transform: translateY(-50%);
   border: 2px solid white;
   border-radius: 3px;
- 
+}
 
-  &:hover {
+ .image:hover {
     border-color: rgba(0, 0, 0, 0.6);
   }
-}
+
