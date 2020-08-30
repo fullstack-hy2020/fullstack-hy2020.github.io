@@ -261,8 +261,7 @@ const BigBlueText = () => {
 };
 ```
 
-We create two named style objects, <em>styles.container</em> and <em>styles.text</em>. Inside the component, we can
-we can access specific style object the same way we would access any key in a plain object.
+We create two named style objects, <em>styles.container</em> and <em>styles.text</em>. Inside the component, we can access specific style object the same way we would access any key in a plain object.
 
 In addition to an object, the <em>style</em> prop also accepts an array of objects. In the case of an array, the objects are merged from left to right so that latter style properties takes presence. This works recursively, so we can have for example an array containing an array of styles and so forth. If an array contains values that evaluate to false, such as <em>null</em> or <em>undefined</em>, these values are ignored. This makes it easy to define <i>conditional styles</i> for example, based on the value of a prop. Here is an example of conditional styles:
 
