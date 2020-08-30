@@ -7,11 +7,16 @@ lang: en
 
 <div class="content">
 
-Now that we have set up our development environment we can get into to React Native basics and get started with the development of our application. In this section, we will learn how to build user interfaces with React Native's core components, how to add style properties to these core components, how to transition between views, and how to manage form's state efficiently.
+<!-- Now that we have set up our development environment we can get into to React Native basics and get started with the development of our application. In this section, we will learn how to build user interfaces with React Native's core components, how to add style properties to these core components, how to transition between views, and how to manage form's state efficiently. -->
+
+既然我们已经成功搭建了我们的开发环境，我们可以深入了解一下React Native 的基础知识，并开始开发我们的应用了。在这一节，我们会学习如何利用React Native的核心组件搭建用户界面，如何向这些核心组件添加样式，如何在不同的视图之间切换，以及如何有效地管理表单的状态。
 
 ### Core components
+核心组件
 
-In the previous parts, we have learned that we can use React to define components as functions which receive props as an argument and returns a tree of React elements. This tree is usually represented with JSX syntax. In the browser environment, we have used the [ReactDOM](https://reactjs.org/docs/react-dom.html) library to turn these components into a DOM tree that can be rendered by a browser. Here is a concrete example of a very simple component:
+<!-- In the previous parts, we have learned that we can use React to define components as functions which receive props as an argument and returns a tree of React elements. This tree is usually represented with JSX syntax. In the browser environment, we have used the [ReactDOM](https://reactjs.org/docs/react-dom.html) library to turn these components into a DOM tree that can be rendered by a browser. Here is a concrete example of a very simple component: -->
+
+在之前的章节中，我们已经学到了我们可以使用React 来定义将组件定义为函数，也就是说可以接收作为参数的属性，并返回一个React 元素树。这棵树通常表现为JSX语法。在浏览器环境中，我们使用过 [ReactDOM](https://reactjs.org/docs/react-dom.html) 库来将这些组件转化为DOM树，这样浏览器就可以渲染它了。我们来用一个简单的组件举一个具体的例子：
 
 ```javascript
 import React from 'react';
@@ -21,17 +26,25 @@ const HelloWorld = props => {
 };
 ```
 
-The <em>HelloWorld</em> component returns a single <i>div</i> element which is created using the JSX syntax. We might remember that this JSX syntax is compiled into <em>React.createElement</em> method calls, such as this:
+<!-- The <em>HelloWorld</em> component returns a single <i>div</i> element which is created using the JSX syntax. We might remember that this JSX syntax is compiled into <em>React.createElement</em> method calls, such as this: -->
+
+这个<em>HelloWorld</em>组件返回了一个 <i>div</i> 元素，它是由JSX语法创建的。我们应该记得，JSX语法会被编译为 <em>React.createElement</em> 方法来调用，类似：
 
 ```javascript
 React.createElement('div', null, 'Hello world!');
 ```
 
-This line of code creates a <i>div</i> element without any props and with a single child element which is a string <i>"Hello world"</i>. When we render this component into a root DOM element using the <em>ReactDOM.render</em> method the <i>div</i> element will be rendered as the corresponding DOM element.
+<!-- This line of code creates a <i>div</i> element without any props and with a single child element which is a string <i>"Hello world"</i>. When we render this component into a root DOM element using the <em>ReactDOM.render</em> method the <i>div</i> element will be rendered as the corresponding DOM element. -->
 
-As we can see, React is not bound to a certain environment, such as the browser environment. Instead, there are libraries such as ReactDOM that can render <i>a set of predefined components</i>, such as DOM elements, in a specific environment. In React Native these predefined components are called <i>core components</i>.
+这行代码创建了一个不带任何属性的 <i>div</i>元素，它只有一个子元素，也就是字符串<i>"Hello world"</i>。当我们使用<em>ReactDOM.render</em>方法将这个组件渲染到一个根DOM元素中， <i>div</i>元素会被渲染到相关联的DOM元素中。
 
-[Core components](https://reactnative.dev/docs/intro-react-native-components) are a set of components provided by React Native which behind the scenes utilize the platform's native components. Let's implement the previous example using React Native:
+<!-- As we can see, React is not bound to a certain environment, such as the browser environment. Instead, there are libraries such as ReactDOM that can render <i>a set of predefined components</i>, such as DOM elements, in a specific environment. In React Native these predefined components are called <i>core components</i>. -->
+
+正如我们看到的，React 并不绑定到某个特定的环境，比如说浏览器环境。而是说，有许多类库，比如ReactDOM可以渲染 <i>一系列预定义的组件</i>，比如DOM元素，将它们渲染到特定的环境中。对React Native 来说，这些预定义的组件就是  <i>core components 核心组件</i>。
+
+<!-- [Core components](https://reactnative.dev/docs/intro-react-native-components) are a set of components provided by React Native which behind the scenes utilize the platform's native components. Let's implement the previous example using React Native: -->
+
+[Core components](https://reactnative.dev/docs/intro-react-native-components)  是一系列由React Native 提供的组件，底层是利用平台的原生组件。让我们利用React Native 将之前的例子实现一遍。
 
 ```javascript
 import React from 'react';
@@ -42,16 +55,27 @@ const HelloWorld = props => {
 };
 ```
 
-So we import the [Text](https://reactnative.dev/docs/text) component from React Native and replace the <i>div</i> element with a <i>Text</i> element. Many familiar DOM elements have their React Native "counterparts". Here are some examples picked from the React Native's [Core Components documentation](https://reactnative.dev/docs/components-and-apis):
+<!-- So we import the [Text](https://reactnative.dev/docs/text) component from React Native and replace the <i>div</i> element with a <i>Text</i> element. Many familiar DOM elements have their React Native "counterparts". Here are some examples picked from the React Native's [Core Components documentation](https://reactnative.dev/docs/components-and-apis): -->
+我们从React Native 中引入了 [Text](https://reactnative.dev/docs/text)组件，并用<i>Text</i> 元素替换了 <i>div</i> 元素。许多我们熟悉的DOM元素都有自己的React Native 对应组件。我们从React Native'的 [核心组件文档 Core Components documentation](https://reactnative.dev/docs/components-and-apis) 中摘选了一些例子:
 
-- [Text](https://reactnative.dev/docs/text) component is <i>the only</i> React Native component that can have textual children. It is similar to for example the <em>&lt;strong&gt;</em> and the <em>&lt;h1&gt;</em> elements.
+<!-- - [Text](https://reactnative.dev/docs/text) component is <i>the only</i> React Native component that can have textual children. It is similar to for example the <em>&lt;strong&gt;</em> and the <em>&lt;h1&gt;</em> elements.
 - [View](https://reactnative.dev/docs/view) component is the basic user interface building block similar to the <em>&lt;div&gt;</em> element.
 - [TextInput](https://reactnative.dev/docs/textinput) component is a text field component similar to the <em>&lt;input&gt;</em> element.
-- [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) component (and other <i>Touchable\*</i> components) component is for capturing different press events. It is similar to for example the <em>&lt;button&gt;</em> element.
+- [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) component (and other <i>Touchable\*</i> components) component is for capturing different press events. It is similar to for example the <em>&lt;button&gt;</em> element. -->
 
-There are a few notable differences between core components and DOM elements. The first difference is that the <em>Text</em> component is <i>the only</i> React Native component that can have textual children. This means that you can't, for example, replace the <em>Text</em> component with the <em>View</em> component in the previous example.
+- [Text](https://reactnative.dev/docs/text) 组件是 <i>唯一</i> 可以有文本子内容的React Native 组件. 类似 <em>&lt;strong&gt;</em> 以及 <em>&lt;h1&gt;</em> 元素.
+- [View](https://reactnative.dev/docs/view) 组件是基础的用户界面的搭建元素，类似 <em>&lt;div&gt;</em>  元素。
+- [TextInput](https://reactnative.dev/docs/textinput) 组件是类似<em>&lt;input&gt;</em> 元素的文本输入区组件.
+- [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) 组件 (以及其他的形如 <i>Touchable\*</i> 组件) 是用来捕捉不同的点击事件。类似于 <em>&lt;button&gt;</em> 组件。
 
-The second notable difference is related to the event handlers. While working with the DOM elements we are used to adding event handlers such as <em>onClick</em> to basically any element such as <em>&lt;div&gt;</em> and <em>&lt;button&gt;</em>. In React Native we have to carefully read the [API documentation](https://reactnative.dev/docs/components-and-apis) to know what event handlers (as well as other props) a component accepts. For example, the family of ["Touchable" components](https://reactnative.dev/docs/handling-touches#touchables) provides the capability to capture tapping gestures and can display feedback when a gesture is recognized. One of these components is the [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) component, which accepts the <em>onPress</em> prop:
+
+<!-- There are a few notable differences between core components and DOM elements. The first difference is that the <em>Text</em> component is <i>the only</i> React Native component that can have textual children. This means that you can't, for example, replace the <em>Text</em> component with the <em>View</em> component in the previous example. -->
+
+核心组件与DOM元素之间有一些显著的不同。第一个不同点就是 <em>Text</em> 组件是 <i>唯一</i> 能够拥有文本子内容的React Native 组件。也就是说，你不能在之前的例子中比如说用 <em>View</em> 元素替换 <em>Text</em> 元素。
+
+<!-- The second notable difference is related to the event handlers. While working with the DOM elements we are used to adding event handlers such as <em>onClick</em> to basically any element such as <em>&lt;div&gt;</em> and <em>&lt;button&gt;</em>. In React Native we have to carefully read the [API documentation](https://reactnative.dev/docs/components-and-apis) to know what event handlers (as well as other props) a component accepts. For example, the family of ["Touchable" components](https://reactnative.dev/docs/handling-touches#touchables) provides the capability to capture tapping gestures and can display feedback when a gesture is recognized. One of these components is the [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) component, which accepts the <em>onPress</em> prop: -->
+
+第二个显著的区别就是相关的事件处理器。在DOM元素中我们会将类似<em>onClick</em> 这种事件处理器，添加到任一元素上，例如 <em>&lt;div&gt;</em> 或是 <em>&lt;button&gt;</em>。在React Native 中我们需要认真阅读 [API documentation](https://reactnative.dev/docs/components-and-apis) 来了解什么组件接收什么事件处理器（就像属性那样）。例如， ["Touchable" components](https://reactnative.dev/docs/handling-touches#touchables) 这一类组件提供了捕捉点击动作的能力，能够在点击动作被识别后做出反馈。这类组件当中有一个[TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback)组件，接收 <em>onPress</em> 属性：
 
 ```javascript
 import React from 'react';
@@ -68,7 +92,8 @@ const TouchableText = props => {
 };
 ```
 
-Now that we have a basic understanding of the core components, let's start to give our project some structure. Create a <i>src</i> directory in the root directory of your project and in the <i>src</i> directory create a <i>components</i> directory. In the <i>components</i> directory create a file <i>Main.jsx</i> with the following content:
+<!-- Now that we have a basic understanding of the core components, let's start to give our project some structure. Create a <i>src</i> directory in the root directory of your project and in the <i>src</i> directory create a <i>components</i> directory. In the <i>components</i> directory create a file <i>Main.jsx</i> with the following content: -->
+现在我们对核心组件有了基本的认识，让我们给我们的项目一些结构约束吧。创建一个 <i>src</i> 目录到项目的根目录，在 <i>src</i> 目录中创建 <i>components</i> 目录。 在 <i>components</i> 目录中创建 <i>Main.jsx</i> 文件，添加如下内容：
 
 ```javascript
 import React from 'react';
@@ -94,7 +119,8 @@ const Main = () => {
 export default Main;
 ```
 
-Next, let's use the <em>Main</em> component in the <em>App</em> component in the <i>App.js</i> file which is located in our project's root directory. Replace the current content of the file with this:
+<!-- Next, let's use the <em>Main</em> component in the <em>App</em> component in the <i>App.js</i> file which is located in our project's root directory. Replace the current content of the file with this: -->
+然后，在 <i>App.js</i>  文件中，让我们使用<em>Main</em> 组件，放到  <em>App</em> 组件中，<i>App.js</i>  文件位于我们项目的根目录。将现有的文件内容替换成如下内容：
 
 ```javascript
 import React from 'react';
@@ -109,12 +135,17 @@ export default App;
 ```
 
 ### Manually reloading the application
+手动重加载应用
 
-As we have seen, Expo will automatically reload the application when we make changes to the code. However, there might be times when automatic reload isn't working and the application has to be reloaded manually. This can be achieved through the in-app developer menu.
+<!-- As we have seen, Expo will automatically reload the application when we make changes to the code. However, there might be times when automatic reload isn't working and the application has to be reloaded manually. This can be achieved through the in-app developer menu. -->
+如我们所见，Expo 在我们对代码做出改变后，会自动重加载应用。但有时候可能重加载并不起作用，我们需要手动加载应用。我们可以使用app 内的开发者目录中找到。
 
-You can access the developer menu by shaking your device or by selecting "Shake Gesture" inside the Hardware menu in the iOS Simulator. You can also use the <em>⌘D</em> keyboard shortcut when your app is running in the iOS Simulator, or <em>⌘M</em> when running in an Android emulator on Mac OS and <em>Ctrl+M</em> on Windows and Linux.
+<!-- You can access the developer menu by shaking your device or by selecting "Shake Gesture" inside the Hardware menu in the iOS Simulator. You can also use the <em>⌘D</em> keyboard shortcut when your app is running in the iOS Simulator, or <em>⌘M</em> when running in an Android emulator on Mac OS and <em>Ctrl+M</em> on Windows and Linux. -->
+
+你可以通过摇一摇你的设备来访问开发者目录，或者选择IOS模拟器中硬件目录的“摇一摇动作”。你也可以在运行中的iOS模拟器中通过键盘快捷键 <em>⌘D</em>，或者运行中的Android 模拟器中使用 <em>⌘M</em> 快捷键，当然这是Mac 系统， Windows 和Linux 系统使用 <em>Ctrl+M</em> 。
 
 Once the developer menu is open, simply press "Reload" to reload the application. After the application has been reloaded, automatic reloads should work without the need for a manual reload.
+当开发者目录打开后，只需要点击"Reload" 来重加载应用即可。在应用重加载后，自动重加载功能应该又开始生效了，而不需要手动重加载了。
 
 </div>
 
@@ -124,9 +155,11 @@ Once the developer menu is open, simply press "Reload" to reload the application
 
 #### Exercise 10.3: the reviewed repositories list
 
-In this exercise, we will implement the first version of the reviewed repositories list. The list should contain the repository's full name, description, language, number of forks, number of stars, rating average and number of reviews. Luckily React Native provides a handy component for displaying a list of data, which is the [FlatList](https://reactnative.dev/docs/flatlist) component.
+<!-- In this exercise, we will implement the first version of the reviewed repositories list. The list should contain the repository's full name, description, language, number of forks, number of stars, rating average and number of reviews. Luckily React Native provides a handy component for displaying a list of data, which is the [FlatList](https://reactnative.dev/docs/flatlist) component. -->
+本练习中，我们会实现仓库查看列表的第一个版本。这个列表应当包含仓库的全名、描述、使用语言、fork数量、star数量、平均投票以及查看的次数。幸运的是React Native提供了现成的组件来展示数据列表，那就是 [FlatList](https://reactnative.dev/docs/flatlist) 组件。
 
-Implement components <em>RepositoryList</em> and <em>RepositoryItem</em> in the <i>components</i> directory's files <i>RepositoryList.jsx</i> and <i>RepositoryItem.jsx</i>. The <em>RepositoryList</em> component should render the <em>FlatList</em> component and <em>RepositoryItem</em> a single item on the list (hint: use the <em>FlatList</em> component's [renderItem](https://reactnative.dev/docs/flatlist#renderitem) prop). Use this as the basis for the <i>RepositoryList.jsx</i> file:
+<!-- Implement components <em>RepositoryList</em> and <em>RepositoryItem</em> in the <i>components</i> directory's files <i>RepositoryList.jsx</i> and <i>RepositoryItem.jsx</i>. The <em>RepositoryList</em> component should render the <em>FlatList</em> component and <em>RepositoryItem</em> a single item on the list (hint: use the <em>FlatList</em> component's [renderItem](https://reactnative.dev/docs/flatlist#renderitem) prop). Use this as the basis for the <i>RepositoryList.jsx</i> file: -->
+在 <i>components</i> 文件夹中实现组件<em>RepositoryList</em> 和 <em>RepositoryItem</em> 并分别创建<i>RepositoryList.jsx</i> 和 <i>RepositoryItem.jsx</i> 文件。<em>RepositoryList</em> 组件应当渲染 <em>FlatList</em> 组件，并为每个列表项渲染一个<em>RepositoryItem</em> 组件。（提示：使用 <em>FlatList</em> 组件的[renderItem](https://reactnative.dev/docs/flatlist#renderitem) 属性）。把这些当作<i>RepositoryList.jsx</i> 文件的初始内容：
 
 ```javascript
 import React from 'react';
@@ -200,7 +233,8 @@ const RepositoryList = () => {
 export default RepositoryList;
 ```
 
-<i>Do not</i> alter the contents of the <em>repositories</em> variable, it should contain everything you need to complete this exercise. Render the <em>RepositoryList</em> component in the <em>Main</em> component which we previously added to the <i>Main.jsx</i> file. The reviewed repository list should roughly look something like this:
+<!-- <i>Do not</i> alter the contents of the <em>repositories</em> variable, it should contain everything you need to complete this exercise. Render the <em>RepositoryList</em> component in the <em>Main</em> component which we previously added to the <i>Main.jsx</i> file. The reviewed repository list should roughly look something like this: -->
+<i>不要</i> 改变 <em>repositories</em> 变量的内容，这些内容足以让你完成本次练习。将 <em>RepositoryList</em> 组件渲染到我们之前建立的<em>Main</em> 组件中（位于<i>Main.jsx</i> ）。仓库查看列表应当大体上看起来像这样：
 
 ![Application preview](../../images/10/5.jpg)
 
@@ -210,9 +244,13 @@ export default RepositoryList;
 
 ### Style
 
-Now that we have a basic understanding of how core components work and we can use them to build a simple user interface it is time to add some style. In [part 2](/en/part2/adding_styles_to_react_app) we learned that in the browser environment we can define React component's style properties using CSS. We had an option to either define these styles inline using the <em>style</em> prop or in a CSS file with a suitable selector.
+<!-- Now that we have a basic understanding of how core components work and we can use them to build a simple user interface it is time to add some style. In [part 2](/en/part2/adding_styles_to_react_app) we learned that in the browser environment we can define React component's style properties using CSS. We had an option to either define these styles inline using the <em>style</em> prop or in a CSS file with a suitable selector. -->
 
-There are many similarities in the way style properties are attached to React Native's core components and the way they are attached to DOM elements. In React Native most of the core components accept a prop called <em>style</em>. The <em>style</em> prop accepts an object with style properties and their values. These style properties are in most cases the same as in CSS, however, property names are in <i>camelCase</i>. This means that CSS properties such as <em>padding-top</em> and <em>font-size</em> are written as <em>paddingTop</em> and <em>fontSize</em>. Here is a simple example of how to use the <em>style</em> prop:
+既然我们已经基本了解了核心组件的使用方法以及如何构建一个简单的用户界面，让我开始为它增加一些样式吧，在 [第二章](/zh/part2/adding_styles_to_react_app)我们学会了在浏览器环境中我们可以利用CSS 定义React组件的style 属性。我们既可以以行内形式使用<em>style</em> 属性，或者在CSS文件中利用合适的选择器。
+
+<!-- There are many similarities in the way style properties are attached to React Native's core components and the way they are attached to DOM elements. In React Native most of the core components accept a prop called <em>style</em>. The <em>style</em> prop accepts an object with style properties and their values. These style properties are in most cases the same as in CSS, however, property names are in <i>camelCase</i>. This means that CSS properties such as <em>padding-top</em> and <em>font-size</em> are written as <em>paddingTop</em> and <em>fontSize</em>. Here is a simple example of how to use the <em>style</em> prop: -->
+
+为React Native 的核心组件添加style 属性以及加到DOM元素上的方式也大体类似。在React Native 中，大部分核心组件都会接受一个叫<em>style</em>的属性。<em>style</em> 接受一个包含style 属性和值的对象。style 属性大多数情况下与在CSS中一致，但是属性名是<i>驼峰式camelCase</i>的。也就是说CSS属性类似<em>padding-top</em> 和<em>font-size</em> 会写成<em>paddingTop</em> 和 <em>fontSize</em>。这有一个使用<em>style</em> 属性的简单样例。
 
 ```javascript
 import React from 'react';
@@ -231,7 +269,11 @@ const BigBlueText = () => {
 
 On top of the property names, you might have noticed another difference in the example. In CSS numerical property values commonly have a unit such as <i>px</i>, <i>%</i>, <i>em</i> or <i>rem</i>. In React Native all dimension related property values such as <em>width</em>, <em>height</em>, <em>padding</em>, and <em>margin</em> as well as font sizes are <i>unitless</i>. These unitless numeric values represent <i>density-independent pixels</i>. In case you are wondering what are the available style properties for certain core component, check the [React Native Styling Cheat Sheet](https://github.com/vhpoet/react-native-styling-cheat-sheet).
 
+除了属性名称，你应该在例子中还发现了另一个不同点。那就是在CSS中， 数值型属性值一般会使用例如 <i>px</i>, <i>%</i>, <i>em</i> or <i>rem</i> 这种单位。而在React Native中，所有的与维度相关的属性类似<em>width</em>, <em>height</em>, <em>padding</em>, and <em>margin</em> 与文字大小一样都是<i>无单位</i>的。这些没有单位的数值表示的是<i>density-independent pixels</i>（密度独立像素，DIP）。如果你对特定核心组件所能使用的样式属性感兴趣，可以查看[React Native Styling Cheat Sheet](https://github.com/vhpoet/react-native-styling-cheat-sheet)。
+
 In general, defining styles directly in the <em>style</em> prop is not considered such a great idea, because it makes components bloated and unclear. Instead, we should define styles outside the component's render function using the [StyleSheet.create](https://reactnative.dev/docs/0.53/stylesheet#create) method. The <em>StyleSheet.create</em> method accepts a single argument which is an object consisting of named style objects and it creates a StyleSheet style reference from the given object. Here is an example of how to refactor the previous example using the <em>StyleSheet.create</em> method:
+
+一般来说，将样式直接定义在<em>style</em> 属性中并不是一个好主意，因为会导致组件膨胀且不易懂。相反，我们可以将样式定义在组件的render 函数之外，利用[StyleSheet.create](https://reactnative.dev/docs/0.53/stylesheet#create) 方法即可。 <em>StyleSheet.create</em>  方法接受一个单一的对象参数， 它包含了命名样式对象并针对该对象创建了样式引用。下面的例子中展示了如何利用<em>StyleSheet.create</em> 方法渲染样式，将之前的例子进行的重构。
 
 ```javascript
 import React from 'react';
@@ -261,10 +303,12 @@ const BigBlueText = () => {
 };
 ```
 
-We create two named style objects, <em>styles.container</em> and <em>styles.text</em>. Inside the component, we can
-we can access specific style object the same way we would access any key in a plain object.
+<!-- We create two named style objects, <em>styles.container</em> and <em>styles.text</em>. Inside the component, we can access specific style object the same way we would access any key in a plain object. -->
+我们创建了两个命名样式对象，<em>styles.container</em> 和 <em>styles.text</em>。在组件内部，我们可以访问特定的样式对象，正如我们访问其他普通对象的键那样。
 
-In addition to an object, the <em>style</em> prop also accepts an array of objects. In the case of an array, the objects are merged from left to right so that latter style properties takes presence. This works recursively, so we can have for example an array containing an array of styles and so forth. If an array contains values that evaluate to false, such as <em>null</em> or <em>undefined</em>, these values are ignored. This makes it easy to define <i>conditional styles</i> for example, based on the value of a prop. Here is an example of conditional styles:
+<!-- In addition to an object, the <em>style</em> prop also accepts an array of objects. In the case of an array, the objects are merged from left to right so that latter style properties takes presence. This works recursively, so we can have for example an array containing an array of styles and so forth. If an array contains values that evaluate to false, such as <em>null</em> or <em>undefined</em>, these values are ignored. This makes it easy to define <i>conditional styles</i> for example, based on the value of a prop. Here is an example of conditional styles: -->
+
+除了一个对象， <em>style</em> 属性也接受一个对象数组。在数组的中，对象是从左到右merge的，因此最右面的样式属性会生效。它是递归生效的，所以我们可以有一个包含着数组样式的数组。如果数组中包含的值中有false语义，例如<em>null</em> 或者 <em>undefined</em>，这些值会被忽略。这样很具属性值，定义 <i>条件样式</i>就很简单了。下面是一个条件样式的例子
 
 ```javascript
 import React from 'react';
@@ -310,13 +354,21 @@ const Main = () => {
 
 In the example we use the <em>&&</em> operator with statement <em>condition && exprIfTrue</em>. This statement yields <em>exprIfTrue</em> if the <em>condition</em> evaluates to true, otherwise it will yield <em>condition</em>, which in that case is a value that evaluates to false. This is an extremely widely used and handy shorthand. Another option would be to use for example the [conditional operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator), <em>condition ? exprIfTrue : exprIfFalse</em>.
 
+在这个例子中，我们使用<em>&&</em> 运算符，构成了语句 <em>condition && exprIfTrue</em>。这个语句如果 <em>条件</em> 结果为true，就调用<em>exprIfTrue</em> ，否则会调用<em>condition</em>, 在本例中结果为false。 这是一个使用广泛的简要写法。另一个选项就是使用类似 [conditional operator条件运算符](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator)<em>condition ? exprIfTrue : exprIfFalse</em>.
+
 ### Consistent user interface with theming
+用户界面主题的一致性
 
-Let's stick with the concept of styling but with a bit wider perspective. Most of us have used a multitude of different applications and might agree that one trait that makes a good user interface is <i>consistency</i>. This means that the appearance of user interface components such as their font size, font family and color follow a consistent pattern. To achieve this we have somehow <i>parametrize</i> the values of different style properties. This method is commonly known as <i>theming</i>.
+<!-- Let's stick with the concept of styling but with a bit wider perspective. Most of us have used a multitude of different applications and might agree that one trait that makes a good user interface is <i>consistency</i>. This means that the appearance of user interface components such as their font size, font family and color follow a consistent pattern. To achieve this we have somehow <i>parametrize</i> the values of different style properties. This method is commonly known as <i>theming</i>. -->
 
-Users of popular user interface libraries such as [Bootstrap](https://getbootstrap.com/docs/4.4/getting-started/theming/) and [Material UI](https://material-ui.com/customization/theming/) might already be quite familiar with theming. Even though the theming implementations differ the main idea is always to use variables such as <em>colors.primary</em> instead of ["magic numbers"](<https://en.wikipedia.org/wiki/Magic_number_(programming)>) such as <em>#0366d6</em> when defining styles. This leads to increased consistency and flexibility.
+让我们继续关注样式的话题，但是把视野拓宽一些。我们使用过很多不同的应用，并且可能会达成一个共识，那就是好的用户界面要保持一致性。也就是说用户界面的展示，比如说字体大小、字体家族以及颜色遵循一致的模式。为了达到这种目的我们需要 <i>参数化</i> 不同的样式属性。这种方法就是我们所说的 <i>主题</i>。
 
-Let's see how theming could work in practice in our application. We will be using a lot of text with different variations, such as different font sizes and colors. Because React Native does not support global styles we should create our own <em>Text</em> component to keep the textual content consistent. Let's get started by adding the following theme configuration object in a <i>theme.js</i> file in the <i>src</i> directory:
+<!-- Users of popular user interface libraries such as [Bootstrap](https://getbootstrap.com/docs/4.4/getting-started/theming/) and [Material UI](https://material-ui.com/customization/theming/) might already be quite familiar with theming. Even though the theming implementations differ the main idea is always to use variables such as <em>colors.primary</em> instead of ["magic numbers"](<https://en.wikipedia.org/wiki/Magic_number_(programming)>) such as <em>#0366d6</em> when defining styles. This leads to increased consistency and flexibility. -->
+
+比较受欢迎的用户界面组件库，例如 [Bootstrap](https://getbootstrap.com/docs/4.4/getting-started/theming/) 和 [Material UI](https://material-ui.com/customization/theming/) 的用户应该对主题很熟悉了。虽然主题的具体实现不同，但大体思想都是用例如 <em>colors.primary</em> 的变量，而不是例如<em>#0366d6</em>的[魔法数字"magic numbers"](<https://en.wikipedia.org/wiki/Magic_number_(programming)>) 来定义样式。
+
+<!-- Let's see how theming could work in practice in our application. We will be using a lot of text with different variations, such as different font sizes and colors. Because React Native does not support global styles we should create our own <em>Text</em> component to keep the textual content consistent. Let's get started by adding the following theme configuration object in a <i>theme.js</i> file in the <i>src</i> directory: -->
+让我们看看主题是如何在我们的应用中实际使用的。我们会使用许多不同的文本变量，例如不同的文字大小和颜色。由于React Native 不支持全局样式，我们应当创建我们自己的<em>Text</em> 组件，来保持文字内容样式的一致性。让我们在 <i>src</i> 文件夹中创建<i>theme.js</i> 文件，并将如下的主题配置对象加到文件中。
 
 ```javascript
 const theme = {
@@ -341,7 +393,8 @@ const theme = {
 export default theme;
 ```
 
-Next, we should create the actual <em>Text</em> component which uses this theme configuration. Create a <i>Text.jsx</i> file in the <i>components</i> directory where we already have our other components. Add the following content to the <i>Text.jsx</i> file:
+<!-- Next, we should create the actual <em>Text</em> component which uses this theme configuration. Create a <i>Text.jsx</i> file in the <i>components</i> directory where we already have our other components. Add the following content to the <i>Text.jsx</i> file: -->
+接下来，我们会创建一个真实的<em>Text</em>组件来利用这个主题配置。创建一个<i>Text.jsx</i>文件到我们之前创建的<i>components</i> 文件夹中。将如下的内容加入到<i>Text.jsx</i> 文件中。
 
 ```javascript
 import React from 'react';
@@ -386,7 +439,8 @@ const Text = ({ color, fontSize, fontWeight, style, ...props }) => {
 export default Text;
 ```
 
-Now we have implemented our own text component with consistent color, font size and font weight variants which we can use anywhere in our application. We can get different text variations using different props like this:
+<!-- Now we have implemented our own text component with consistent color, font size and font weight variants which we can use anywhere in our application. We can get different text variations using different props like this: -->
+现在我们已经实现了我们自己的text 组件，利用了统一的颜色，字体大小和粗体变量，我们可以在应用的任何地方使用。我们可以使用不同的属性获得不同的文本变化，比如：
 
 ```javascript
 import React from 'react';
@@ -409,13 +463,18 @@ const Main = () => {
 export default Main;
 ```
 
-Feel free to extend or modify this component if you feel like it. It might also be a good idea to create reusable text components such as <em>Subheading</em> which use the <em>Text</em> component. Also, keep on extending and modifying the theme configuration as your application progresses.
+<!-- Feel free to extend or modify this component if you feel like it. It might also be a good idea to create reusable text components such as <em>Subheading</em> which use the <em>Text</em> component. Also, keep on extending and modifying the theme configuration as your application progresses. -->
+随你所愿地修改组件达到满意的程度。创建一个类似<em>Subheading</em> 的可复用的 <em>Text</em> 组件是一个不错的主意。同时，随着应用的开发进度，持续扩展和修改主题配置
 
 ### Using flexbox for layout
+使用flexbox来控制布局
 
-The last concept we will cover related to styling is implementing layouts with [flexbox](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox). Those who are more familiar with CSS know that flexbox is not only related to React Native instead it has many use cases in web development as well. In fact, those who know how flexbox works in web development won't probably learn that much from this section. Nevertheless, let's learn or revise the basics of flexbox.
+<!-- The last concept we will cover related to styling is implementing layouts with [flexbox](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox). Those who are more familiar with CSS know that flexbox is not only related to React Native instead it has many use cases in web development as well. In fact, those who know how flexbox works in web development won't probably learn that much from this section. Nevertheless, let's learn or revise the basics of flexbox. -->
 
-Flexbox is a layout entity consisting of two separate components: a <i>flex container</i> and inside it a set of <i>flex items</i>. Flex container has a set of properties that control the flow of its items. To make a component a flex container it must have the style property <em>display</em> set as <em>flex</em> which is the default value for the <em>display</em> property. Here is an example of a flex container:
+关于样式我们需要理清的最后一个概念是利用 [flexbox](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox)实现布局。那些熟悉CSS 的开发者知道 flexbox 不仅是与 React Native 相关，它在Web 开发中也有许多使用场景。实际上，那些了解flexbox 如何在web开发中工作的可能在这一部分不会学到更多。不管怎样，让我们学习或复习一下flexbox的基本知识吧。
+
+<!-- Flexbox is a layout entity consisting of two separate components: a <i>flex container</i> and inside it a set of <i>flex items</i>. Flex container has a set of properties that control the flow of its items. To make a component a flex container it must have the style property <em>display</em> set as <em>flex</em> which is the default value for the <em>display</em> property. Here is an example of a flex container: -->
+Flexbox 是一个布局实体，它包含两个概念：<i>flex container</i> ，在其中包含了一组<i>flex items</i>。 Flex 容器有一组属性，控制着它的items。为了把一个组件创建成一个flex容器，它必须包含样式属性 <em>display</em>，设置成 <em>flex</em>， 它是 <em>display</em> 属性的默认值。下面是flex 容器的例子：
 
 ```javascript
 import React from 'react';
@@ -432,14 +491,22 @@ const FlexboxExample = () => {
 };
 ```
 
-Perhaps the most important properties of a flex container are the following:
+<!-- Perhaps the most important properties of a flex container are the following: -->
+flex容器最重要的属性如下：
 
 - [flexDirection](https://css-tricks.com/almanac/properties/f/flex-direction/) property controls the direction in which the flex items are laid out within the container. Possible values for this property are <em>row</em>, <em>row-reverse</em>, <em>column</em> (default value) and <em>column-reverse</em>. Flex direction <em>row</em> will lay out the flex items from left to right, whereas <em>column</em> from top to bottom. <em>\*-reverse</em> directions will just reverse the order of the flex items.
 
 - [justifyContent](https://css-tricks.com/almanac/properties/j/justify-content/) property controls the alignment of flex items along the main axis (defined by the <em>flexDirection</em> property). Possible values for this property are <em>flex-start</em> (default value), <em>flex-end</em>, <em>center</em>, <em>space-between</em>, <em>space-around</em> and <em>space-evenly</em>.
 - [alignItems](https://css-tricks.com/almanac/properties/a/align-items/) property does the same as <em>justifyContent</em> but for the opposite axis. Possible values for this property are <em>flex-start</em>, <em>flex-end</em>, <em>center</em>, <em>baseline</em> and <em>stretch</em> (default value).
 
+- [flexDirection](https://css-tricks.com/almanac/properties/f/flex-direction/) 属性控制着flex item在容器中的方向。该属性备选的值有 <em>row</em>, <em>row-reverse</em>, <em>column</em> (默认值) 和 <em>column-reverse</em>。Flex 方向  <em>row</em>  会将item 从左到右排列，而<em>column</em> 会从上向下排列。<em>\*-reverse</em> 方向会反向排列flex item。
+
+- [justifyContent](https://css-tricks.com/almanac/properties/j/justify-content/) 会沿着主轴（在<em>flexDirection</em>定义）控制flex item 的对齐方式。该属性的备选值有<em>flex-start</em> (默认值) , <em>flex-end</em>, <em>center</em>, <em>space-between</em>, <em>space-around</em> 和 <em>space-evenly</em>.
+
+- [alignItems](https://css-tricks.com/almanac/properties/a/align-items/) 属性与 <em>justifyContent</em>一样，但是是控制对立轴线，可能的值有 <em>flex-start</em>, <em>flex-end</em>, <em>center</em>, <em>baseline</em> 和 <em>stretch</em>  (默认值)。
+
 Let's move on to flex items. As mentioned, a flex container can contain one or many flex items. Flex items have properties that control how they behave in respect of other flex items in the same flex container. To make a component a flex item all you have to do is to set it as an immediate child of a flex container:
+让我们接着探讨flex item。如上所述，一个flex 容器包含一个或多个flex item。 flex item 的属性用来控制相同flex 容器中， item 相对于其他item 如何表现。在创建组件时，一个flex item 所需要做的就是将它作为一个flex 容器的直接子项。
 
 ```javascript
 import React from 'react';
@@ -473,11 +540,16 @@ const FlexboxExample = () => {
 };
 ```
 
-One of the most commonly used properties of flex item is the [flexGrow](https://css-tricks.com/almanac/properties/f/flex-grow/) property. It accepts a unitless value which defines the ability for a flex item to grow if necessary. If every flex items have a <em>flexGrow</em> of <em>1</em>, they will share all the available space evenly. If a flex item have a <em>flexGrow</em> of <em>0</em> it will only use the space its content requires and leave rest of the space for other flex items.
+<!-- One of the most commonly used properties of flex item is the [flexGrow](https://css-tricks.com/almanac/properties/f/flex-grow/) property. It accepts a unitless value which defines the ability for a flex item to grow if necessary. If every flex items have a <em>flexGrow</em> of <em>1</em>, they will share all the available space evenly. If a flex item have a <em>flexGrow</em> of <em>0</em> it will only use the space its content requires and leave rest of the space for other flex items. -->
 
-Here is a more interactive and concrete example of how to use flexbox to implement a simple card component with header, body and footer: [Flexbox example](https://snack.expo.io/@kalleilv/3d045d).
+flex item 中最常用的属性要数 [flexGrow](https://css-tricks.com/almanac/properties/f/flex-grow/) 了。它接受一个无单位的值来定义在flex item 需要增长的情况下的能力。如果所有的flexitem 的<em>flexGrow</em> 为1， 它们会平均共享所有剩余的空间。如果一个flexitem 的<em>flexGrow</em> 值为 <em>0</em> ，那它只能利用自己内容所需要的空间，并将余下的所有空间留给其他的flex item。
 
-Next, read the article [A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/) which has comprehensive visual examples of flexbox. It is also a good idea to play around with the flexbox properties in the [Flexbox Playground](https://demos.scotch.io/visual-guide-to-css3-flexbox-flexbox-playground/demos/) to see how different flexbox properties affect the layout. Remember that in React Native the property names are the same as the ones in CSS except for the <i>camelCase</i> naming. However, the <i>property values</i> such as <em>flex-start</em> and <em>space-between</em> are exactly the same.
+<!-- Here is a more interactive and concrete example of how to use flexbox to implement a simple card component with header, body and footer: [Flexbox example](https://snack.expo.io/@kalleilv/3d045d). -->
+
+这有一个关于如何使用flexbox更加交互和具体的例子，来实现一个简单的card 组件，具有header、body 和footer： [Flexbox example](https://snack.expo.io/@kalleilv/3d045d).
+
+<!-- Next, read the article [A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/) which has comprehensive visual examples of flexbox. It is also a good idea to play around with the flexbox properties in the [Flexbox Playground](https://demos.scotch.io/visual-guide-to-css3-flexbox-flexbox-playground/demos/) to see how different flexbox properties affect the layout. Remember that in React Native the property names are the same as the ones in CSS except for the <i>camelCase</i> naming. However, the <i>property values</i> such as <em>flex-start</em> and <em>space-between</em> are exactly the same. -->
+下面，阅读文章 [A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/) ，是一个关于flexbox的更复杂的可视化例子。在[Flexbox Playground](https://demos.scotch.io/visual-guide-to-css3-flexbox-flexbox-playground/demos/) 中来尝试flexbox 属性也是一个不错的选择，你可以看到flexbox 属性是如何影响布局的。记住在React Native 中，属性名就是CSS对应属性名的驼峰形式。但是，属性值例如 <em>flex-start</em> 和 <em>space-between</em> 与CSS是完全一样的。
 
 </div>
 
@@ -487,7 +559,8 @@ Next, read the article [A Complete Guide to Flexbox](https://css-tricks.com/snip
 
 #### Exercise 10.4: the app bar
 
-We will soon need to navigate between different views in our application. That is why need an [app bar](https://material.io/components/app-bars-top/) to display tabs for switching between different views. Create a file <i>AppBar.jsx</i> in the <i>components</i> folder with the following content:
+<!-- We will soon need to navigate between different views in our application. That is why need an [app bar](https://material.io/components/app-bars-top/) to display tabs for switching between different views. Create a file <i>AppBar.jsx</i> in the <i>components</i> folder with the following content: -->
+我们很快就需要在我们的应用中，在不同的视图中导航了。这就是我们需要[app bar](https://material.io/components/app-bars-top/) 的原因，用来在不同的视图中切换tab页，在<i>components</i> 文件夹中创建一个<i>AppBar.jsx</i> 文件，内容如下：
 
 ```javascript
 import React from 'react';
@@ -509,20 +582,23 @@ const AppBar = () => {
 export default AppBar;
 ```
 
-Now that the <em>AppBar</em> component will prevent the status bar from overlapping the content, you can remove the <em>marginTop</em> style we added for the <em>Main</em> component earlier in the <i>Main.jsx</i> file. The <em>AppBar</em> component should currently contain a tab with text "Repositories". Make the tab touchable by using the [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) component but you don't have to handle the <em>onPress</em> event in any way. Add the <em>AppBar</em> component to the <em>Main</em> component so that it is the uppermost component in the screen. The <em>AppBar</em> component should look something like this:
+<!-- Now that the <em>AppBar</em> component will prevent the status bar from overlapping the content, you can remove the <em>marginTop</em> style we added for the <em>Main</em> component earlier in the <i>Main.jsx</i> file. The <em>AppBar</em> component should currently contain a tab with text "Repositories". Make the tab touchable by using the [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) component but you don't have to handle the <em>onPress</em> event in any way. Add the <em>AppBar</em> component to the <em>Main</em> component so that it is the uppermost component in the screen. The <em>AppBar</em> component should look something like this: -->
+既然<em>AppBar</em>组件会盖住内容挡住状态栏，你可以删除 <em>marginTop</em> 样式，这是我们之前添加到<i>Main.jsx</i> 文件的 <em>Main</em> 组件中。<em>AppBar</em> 组件应当包含一个叫做"Repositories"的tab 页。通过添加 [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) 组件将tab 变成touchable的，但你还不用处理 <em>onPress</em> 事件。将 <em>AppBar</em> 组件放到<em>Main</em>中，让其成为屏幕最顶部的组件。 <em>AppBar</em> 组件应当看起来像如下所示：
 
 ![Application preview](../../images/10/6.jpg)
 
-The background color of the app bar in the image is <em>#24292e</em> but you can use any other color as well. It might be a good idea to add the app bar's background color into the theme configuration so that it is easy to change it if needed. Another good idea might be to separate the app bar's tab into its own component such as <em>AppBarTab</em> so that it is easy to add new tabs in the future.
+<!-- The background color of the app bar in the image is <em>#24292e</em> but you can use any other color as well. It might be a good idea to add the app bar's background color into the theme configuration so that it is easy to change it if needed. Another good idea might be to separate the app bar's tab into its own component such as <em>AppBarTab</em> so that it is easy to add new tabs in the future. -->
+app bar 的背景色是 <em>#24292e</em> ，但你也可以使用其他的颜色。将app bar 的背景色添加到主题配置中也是不错的，这样就能在需要的时候修改了。另一个最佳实践就是将app bar 分离到单独的组件中了，比如<em>AppBarTab</em> ，这样将来添加新tab 就很方便了。
 
 #### Exercise 10.5: polished reviewed repositories list
 
 The current version of the reviewed repositories list looks quite grim. Modify the <i>RepositoryListItem</i> component so that it also displays repository author's avatar image. You can implement this by using the [Image](https://reactnative.dev/docs/image) component. Counts, such as number of stars and forks, larger than or equal to 1000 should be displayed in thousands with precision of one decimal and with a "k" suffix. This means that for example fork count of 8439 should be displayed as "8.4k". Also polish the overall look of the component so that the reviewed repositories list looks something like this:
+当前版本的仓库查看列表看起来十分死板。修改<i>RepositoryListItem</i> 组件，让它展示仓库的作者头像图片。你可以利用 [Image](https://reactnative.dev/docs/image) 组件来实现。计数功能，例如star 的数量和fork 的数量，大于等于1000应当展示为以千作为计数精读的小数，并以 "k" 结尾。也就是说比如你的fork 总数为8349，那就应该展示为"8.4k"，用同样的方式修饰下组件的总体样式，因此仓库的查看列表应当如下所示：
 
 ![Application preview](../../images/10/7.jpg)
 
-In the image, the <em>Main</em> component's background color is set to <em>#e1e4e8</em> whereas <em>RepositoryListItem</em> component's background color is set to <em>white</em>. The language tag's background color is <em>#0366d6</em> which is the value of the <em>colors.primary</em> variable in the theme configuration. Remember to exploit the <em>Text</em> component we implemented earlier. Also when needed, split the <em>RepositoryListItem</em> component into smaller components.
-
+<!-- In the image, the <em>Main</em> component's background color is set to <em>#e1e4e8</em> whereas <em>RepositoryListItem</em> component's background color is set to <em>white</em>. The language tag's background color is <em>#0366d6</em> which is the value of the <em>colors.primary</em> variable in the theme configuration. Remember to exploit the <em>Text</em> component we implemented earlier. Also when needed, split the <em>RepositoryListItem</em> component into smaller components. -->
+在图片中，<em>Main</em> 组件的背景色设置为 <em>#e1e4e8</em> ，而<em>RepositoryListItem</em> 组件的背景色设置为<em>white</em>。语言标签的背景色为<em>#0366d6</em> ， 也是同主题下<em>colors.primary</em> 变量的值。记住挖掘我们之前实现的<em>Text</em> 组件。如果需要，将<em>RepositoryListItem</em> 分割成更小的组件。
 </div>
 
 <div class="content">
