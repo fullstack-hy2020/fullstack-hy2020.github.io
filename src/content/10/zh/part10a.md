@@ -78,7 +78,7 @@ expo init rate-repository-app
 ```
 
 <!-- After running this command Expo will ask you to choose a template for the project. Within the <i>Managed workflow</i> section, choose the <i>blank</i> option (the one with the description "a minimal app as clean as an empty canvas"). -->
-在运行了这个命令后，Expo 会询问你为该项目选择一个模版。在<i>Managed workflow</i>部分，选择<i>blank</i> 选项（被描述为“一个最小的app，就是个空画布”）
+在运行了这个命令后，Expo 会询问你为该项目选择一个模版。在<i>Managed workflow</i>部分，选择<i>blank</i> 选项（描述为“一个最小的app，就是个空画布”a minimal app as clean as an empty canvas）
 
 <!-- Now that our application has been initialized, open the created <i>rate-repository-app</i> directory with an editor such as [Visual Studio Code](https://code.visualstudio.com/). The structure should be more or less the following: -->
 
@@ -149,12 +149,17 @@ Android 和iOS 设备，比如平板或者手机，可以通过电脑中特定�
 <div class="tasks">
 
 ### Exercise 10.1
+练习10.1
 
 #### Exercise 10.1: initializing the application
+练习10.1 初始化应用
 
 Initialize your application with Expo command-line interface and set up the development environment either using an emulator or Expo's mobile app. It is recommended to try both and find out which development environment is the most suitable for you. The name of the application is not that relevant, you can, for example, go with <i>rate-repository-app</i>.
 
+用Expo命令行初始化你的应用，并构建开发环境，使用模拟器或者Expo的移动应用都可以。建议两种方法都试一下，来看看哪种开发方法最适合你。应用的名称并不重要，你可以起，比如说，<i>rate-repository-app</i>
+
 To submit this exercise and all the future exercises you need to [create a new GitHub repository](https://github.com/new). The name of the repository can be for example the name of the application you initialized with <em>expo init</em>. Now that the repository is created, run <em>git init</em> within your application's root directory to make sure that the directory is initialized as a Git repository. Next, to add the created repository as the remote run <em>git remote add origin git@github.com:<YOUR_GITHUB_USERNAME>/<NAME_OF_YOUR_REPOSITORY>.git</em> (remember to replace the placeholder values in the command). Finally, just commit and push your changes into the repository and you are all done.
+为了提交这个练习以及所有将来的练习，你需要[创建一个新的GitHub 仓库](https://github.com/new)。仓库的名称可以与你利用<em>expo init</em>初始化应用起的名称一致。一旦仓库创建好后，在应用根目录运行<em>git init</em>来确保当前目录被初始化成了一个Git 仓库。 然后，将Github上刚创建的仓库作为远程仓库，运行 <em>git remote add origin git@github.com:<YOUR_GITHUB_USERNAME>/<NAME_OF_YOUR_REPOSITORY>.git</em> （记得将这里的占位符替换成你的真实信息）。最后提交并上传你的修改到仓库中，就完成了。
 
 </div>
 
@@ -162,13 +167,15 @@ To submit this exercise and all the future exercises you need to [create a new G
 
 ### ESLint
 
-Now that we are somewhat familiar with the development environment let's enhance our development experience even further by configuring a linter. We will be using [ESLint](https://eslint.org/) which is already familiar to us from the previous parts. Let's get started by installing the dependencies:
+<!-- Now that we are somewhat familiar with the development environment let's enhance our development experience even further by configuring a linter. We will be using [ESLint](https://eslint.org/) which is already familiar to us from the previous parts. Let's get started by installing the dependencies: -->
+现在我们多少熟悉了开发环境，让我们通过配置代码格式化，来增强一下我们的开发体验。我们会使用[ESLint](https://eslint.org/) 在之前的几个项目中，我们已经对它很熟悉了。让我们用如下方式来安装依赖。
 
 ```shell
 npm install --save-dev eslint babel-eslint eslint-plugin-react
 ```
 
-Next, let's add the ESLint configuration into a <i>.eslintrc</i> file into the <i>rate-repository-app</i> directory with the following content:
+<!-- Next, let's add the ESLint configuration into a <i>.eslintrc</i> file into the <i>rate-repository-app</i> directory with the following content: -->
+然后，我们增加一个ESLint 配置，写入<i>rate-repository-app</i> 文件夹的<i>.eslintrc</i> 文件中，内容如下：
 
 ```javascript
 {
@@ -190,7 +197,8 @@ Next, let's add the ESLint configuration into a <i>.eslintrc</i> file into the <
 }
 ```
 
-And finally, let's add a <em>lint</em> script to the <i>package.json</i> file to check the linting rules in specific files:
+<!-- And finally, let's add a <em>lint</em> script to the <i>package.json</i> file to check the linting rules in specific files: -->
+最后，让我们在 <i>package.json</i> 文件中增加一个<em>lint</em> 脚本，来在指定的文件中检查lint规则：
 
 ```javascript
 {
@@ -207,13 +215,16 @@ And finally, let's add a <em>lint</em> script to the <i>package.json</i> file to
 }
 ```
 
-In contrast to parts 1-8, we are using semicolons to terminate lines now, so we have added the rule [semi](https://eslint.org/docs/rules/semi) to check that.
+<!-- In contrast to parts 1-8, we are using semicolons to terminate lines now, so we have added the rule [semi](https://eslint.org/docs/rules/semi) to check that. -->
+对比1-8 章节，我们现在使用分号来作为行结束符了，我们加入了[semi](https://eslint.org/docs/rules/semi)来检查它。
 
-Now we can check that the linting rules are obeyed in JavaScript files in the <i>src</i> directory and in the <i>App.js</i> file by running <em>npm run lint</em>. We will be adding our future code to the <i>src</i> directory but because we haven't added any files there yet, we need the <eM>no-error-on-unmatched-pattern</em> flag. Also if possible integrate ESLint with your editor. If you are using Visual Studio Code you can do that by, going to the extensions section and checking that the ESLint extension is installed and enabled:
+<!-- Now we can check that the linting rules are obeyed in JavaScript files in the <i>src</i> directory and in the <i>App.js</i> file by running <em>npm run lint</em>. We will be adding our future code to the <i>src</i> directory but because we haven't added any files there yet, we need the <eM>no-error-on-unmatched-pattern</em> flag. Also if possible integrate ESLint with your editor. If you are using Visual Studio Code you can do that by, going to the extensions section and checking that the ESLint extension is installed and enabled: -->
+现在我们可以检查src 目录中的JavaScript 文件以及App.js 文件是否遵循了格式化规则，运行<em>npm run lint</em>。我们会将接下来的代码写到src 目录中，但由于我们还并没有增加任何文件，我们需要<em>no-error-on-unmatched-pattern</em> 配置项。也可以将ESLint 集成到你的编辑器中。如果你正在使用Visual Studio Code 你可以到扩展模块中检查是否安装了ESLint 插件，并已经启用。
 
 ![Visual Studio Code ESLint extensions](../../images/10/3.png)
 
-The provided ESLint configuration contains only the basis for the configuration. Feel free to improve the configuration and add new plugins if you feel like it.
+<!-- The provided ESLint configuration contains only the basis for the configuration. Feel free to improve the configuration and add new plugins if you feel like it. -->
+ESLint 配置仅仅包含了基础配置。如果想要增强配置，或增加新的插件，随你所愿。
 
 </div>
 
@@ -222,21 +233,30 @@ The provided ESLint configuration contains only the basis for the configuration.
 ### Exercise 10.2
 
 #### Exercise 10.2: setting up the ESLint
+搭建ESLint
 
 Set up ESLint in your project so that you can perform linter checks by running <em>npm run lint</em>. To get most of linting it is also recommended to integrate ESLint with your editor.
+在项目中搭建ESLint，你就可以执行<em>npm run lint</em> 来进行格式化检查。为了获得最佳的格式化效果，建议集成ESLint 到编辑器中。
 
 </div>
 
 <div class="content">
 
 ### Viewing logs
+查看日志
 
-Expo development tools can be used to display the log messages of the running application. Error and warning level messages are also visible in the emulator and the mobile app interface. Error messages will pop out as a red overlay whereas warning messages can be expanded by pressing the yellow alert dialog at the bottom of the screen. For debugging purposes, we can use the familiar <em>console.log</em> method to write debugging messages to the log.
+<!-- Expo development tools can be used to display the log messages of the running application. Error and warning level messages are also visible in the emulator and the mobile app interface. Error messages will pop out as a red overlay whereas warning messages can be expanded by pressing the yellow alert dialog at the bottom of the screen. For debugging purposes, we can use the familiar <em>console.log</em> method to write debugging messages to the log. -->
 
-Let's try this in practice. Start the Expo development tools by running <em>npm start</em> and open the application with either emulator or the mobile app. When the application is running you should be able to see your connected devices under the "Metro Bundler" in the top left corner of the developments tools:
+Expo 开发工具可以被用作来展示运行中程序的log信息。错误和警告级别的信息在模拟器中和移动应用界面也能看到。错误信息会作为一个红色的浮层弹出，警告信息可以通过点击屏幕底部黄色的警告对话框来展开。为了Debug，我们可以使用熟悉的 <em>console.log</em> 方法来写debug 信息到日志中。
+
+<!-- Let's try this in practice. Start the Expo development tools by running <em>npm start</em> and open the application with either emulator or the mobile app. When the application is running you should be able to see your connected devices under the "Metro Bundler" in the top left corner of the developments tools: -->
+
+让我们实践一把。运行<em>npm start</em>，启动Expo 开发工具，并打开应用，模拟器或移动应用都可以。当应用运行起来，你应当能在左上角的开发工具栏中的Metro Bundler看到连接的设备信息。
 
 ![Expo development tools](../../images/10/9.png)
 
-Click on the device to open its logs. Next, open the <i>App.js</i> file and add a <em>console.log</em> message to the <em>App</em> component. After saving the file, you should be able to see your message in the logs.
+<!-- Click on the device to open its logs. Next, open the <i>App.js</i> file and add a <em>console.log</em> message to the <em>App</em> component. After saving the file, you should be able to see your message in the logs. -->
+
+点击设备并打开日志，然后打开<i>App.js</i> 文件，增加一个<em>console.log</em> 信息到<em>App</em> 组件中。保存文件，你应该能够在log中看到添加的信息了。
 
 </div>
