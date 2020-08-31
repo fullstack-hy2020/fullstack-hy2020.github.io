@@ -1,5 +1,4 @@
 module.exports = { 
-  pathPrefix: "/fullstack-hy2020.github.io",
   siteMetadata: {   
     title: 'Full Stack open 2020',
     description: '',
