@@ -99,6 +99,9 @@ By submitting at least 24/27 of the exercises for part 9 of the course, TypeScri
 
 Exercises in parts 8 and 9 do not count towards the grade for the 5-7 credit course.
 
+#### React Native part's credits
+
+By submitting exercises for part 10 of the courses, React Native, you can earn either one or two additional credits. Earning one credit requires you to submit at least 19 exercises whereas earning two credits requires you to submit at least 26 exercises. More information about the part's prerequisites, exercise submission and credits can be found in the [part 10](/en/part10/introduction_to_react_native).
 
 ### How to get your credits
 
