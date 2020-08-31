@@ -283,8 +283,7 @@ In the next exercises, basics of user management will be implemented for the Blo
 
 #### 4.15: bloglist expansion, step3
 
-Implement a way to create new users by doing a HTTP POST-request to address <i>api/users</i>. Users have <i>username
-, password and name</i>.
+Implement a way to create new users by doing a HTTP POST-request to address <i>api/users</i>. Users have <i>username, password and name</i>.
 
 Do not save passwords to the database as clear text, but use the <i>bcrypt</i> library like we did in part 4 chapter [Creating new users](/en/part4/user_administration#creating-users).
 
