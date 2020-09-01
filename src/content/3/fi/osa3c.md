@@ -724,8 +724,7 @@ Olemme kirjoittaneet poikkeuksen aiheuttavan virhetilanteen käsittelevän koodi
 Muutetaan routen <i>/api/notes/:id</i> käsittelijää siten, että se <i>siirtää virhetilanteen käsittelyn eteenpäin</i> funktiolla <em>next</em>, jonka se saa <i>kolmantena</i> parametrina:
 
 ```js
-app.get('/api/notes/:id', (request, response, next) => {
-  // highlight-line
+app.get('/api/notes/:id', (request, response, next) => { // highlight-line
   Note.findById(request.params.id)
     .then(note => {
       if (note) {
