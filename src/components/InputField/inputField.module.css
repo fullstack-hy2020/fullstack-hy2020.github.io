@@ -1,6 +1,5 @@
 
 .inputField {
-  -webkit-appearance: none;
   appearance: none;
   width: 50%;
   min-width: 300px;
@@ -11,12 +10,12 @@
   color: #000;
   transition: all .15s ease;
 }
-  .inputField:hover {     
-    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .4);
-  }
- 
-  .inputField:focus {     
-    outline: none;
-    box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .5);      
-  }
 
+.inputField:hover {     
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .4);
+}
+ 
+.inputField:focus {     
+  outline: none;
+  box-shadow: inset 0 -2px 0 rgba(0, 0, 0, .5);      
+}
