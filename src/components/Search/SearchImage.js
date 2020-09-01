@@ -3,7 +3,6 @@ import { Link } from 'gatsby';
 import searchIcon from '../../images/search-icon.svg';
 import imageIconStyles from './searchImage.module.css'
 
-
 const SearchImage = ({ lang }) => {
   return (
     <div className={imageIconStyles.container}>
