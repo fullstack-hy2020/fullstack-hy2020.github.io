@@ -767,7 +767,7 @@ const App = (props) => {
 }
 ```
 
-Nyt meillä on kolme nappia joiden tapahtumankäsittelijät määritellään parametrin saavan funktion _button_ avulla.
+Nyt meillä on kolme nappia joiden tapahtumankäsittelijät määritellään parametrin saavan funktion _hello_ avulla.
 
 Ensimmäinen nappi määritellään seuraavasti
 
