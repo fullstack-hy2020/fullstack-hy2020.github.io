@@ -7,6 +7,7 @@ import SearchResults from '../components/Search/SearchResults';
 import Element from '../components/Element/Element';
 import InputField from '../components/InputField/InputField';
 import { BodyText } from '../components/BodyText/BodyText';
+import Footer from '../components/Footer/Footer';
 
 
 const Search = ({ data }) => {
@@ -42,12 +43,13 @@ const Search = ({ data }) => {
           />
         </Element>
         <SearchResults
-          results={filterResults(results)}
+          results={results.filter(res => res.letter !== null)}
           query={query}
           lang='en'
         />
       </Element>
       </Element>
+      <Footer lang='en' />
     </Layout>
   )
 };
@@ -63,7 +65,3 @@ export const pageQuery = graphql`
   }
 
 `
-
-const filterResults = (results) => {
-  return results.filter(res => res.letter !== null).slice(0, 10);
-}

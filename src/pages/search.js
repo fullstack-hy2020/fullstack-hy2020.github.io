@@ -7,10 +7,9 @@ import SearchResults from '../components/Search/SearchResults';
 import Element from '../components/Element/Element';
 import InputField from '../components/InputField/InputField';
 import { BodyText } from '../components/BodyText/BodyText';
+import Footer from '../components/Footer/Footer';
 
-
-const Search = ({ data }) => {
-  // console.log('data ', data)
+const Search = ({ data }) => { 
   const { index, store } = data.localSearchFinnish;
   const [query, setQuery] = useState('');
   const [debouncedQuery] = useDebounce(query, 500);
@@ -20,8 +19,7 @@ const Search = ({ data }) => {
   }
 
   const results = useFlexSearch(debouncedQuery, index, store);
-  // console.log('results ', results)  
-
+  
   return (
     <Layout>
       <Element className="container spacing spacing--mobile--large">
@@ -41,12 +39,13 @@ const Search = ({ data }) => {
           />
         </Element>
         <SearchResults
-          results={filterResults(results)}
+          results={results.filter(res => res.letter !== null)}
           query={query}
           lang='fi'
         />
       </Element>
       </Element>
+      <Footer lang='fi' />
     </Layout>
   )
 };
@@ -61,7 +60,3 @@ export const pageQuery = graphql`
     }
   }
 `
-
-const filterResults = (results) => {
-  return results.filter(res => res.letter !== null).slice(0, 10);
-}
