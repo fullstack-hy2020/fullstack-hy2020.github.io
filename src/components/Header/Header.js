@@ -56,8 +56,8 @@ class Header extends Component {
               this.props.lang === 'en'
                 ? '/en'
                 : this.props.lang === 'zh'
-                  ? '/zh'
-                  : '/'
+                ? '/zh'
+                : '/'
             }
             className="header__logo"
           >
@@ -69,14 +69,14 @@ class Header extends Component {
                 {'{() => fs}'}
               </TripleBorder>
             ) : (
-                <TripleBorder
-                  hover
-                  className="nav-item-hover"
-                  childrenClassName="triple-border__logo"
-                >
-                  fs
-                </TripleBorder>
-              )}
+              <TripleBorder
+                hover
+                className="nav-item-hover"
+                childrenClassName="triple-border__logo"
+              >
+                fs
+              </TripleBorder>
+            )}
           </Link>
           {this.state.headerClass !== 'header--small' && (
             <Navigation lang={this.props.lang} />
