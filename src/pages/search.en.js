@@ -11,9 +11,7 @@ import Footer from '../components/Footer/Footer';
 
 
 const Search = ({ data }) => {
-  // console.log('data ', data)
   const { index, store } = data.localSearchEnglish;
-  // console.log('store english ', store)
   
   const [query, setQuery] = useState('');
   const [debouncedQuery] = useDebounce(query, 500);
