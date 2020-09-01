@@ -6,10 +6,11 @@ lang: zh
 ---
 
 <div class="content">
-<!-- Before we start programming, we will go through some principles of web development by examining an example application at <https://fullstack-exampleapp.herokuapp.com/>. -->
+<!-- Before we start programming, we will go through some principles of web development by examining an example application at <https://studies.cs.helsinki.fi/exampleapp/>. -->
 <!-- A Finnish language version of the application can be found at <https://fullstack-example.now.sh>. You are free to use either one. -->
 
-在我们正式开始编程之前，我们先简单看一个样例应用<https://fullstack-exampleapp.herokuapp.com/>，了解 一些 web 开发的基本原则。 该应用的芬兰语版本可以在 <https://fullstack-example.now.sh> 网站上找到。 你可以使用任何一种。
+在我们正式开始编程之前，我们先简单看一个样例应用<https://studies.cs.helsinki.fi/exampleapp/>，了解一些web开发的基本原则。 
+<!-- 该应用的芬兰语版本可以在 <https://fullstack-example.now.sh> 网站上找到。 你可以使用任何一种。 -->
 
 <!-- The applications exist only to demonstrate some basic concepts of the course, and are by no means examples of <i>how</i> web applications should be made. -->
 <!-- On the contrary, they demonstrate some old techniques of web development, which can even be seen as <i>bad practice</i> nowadays. -->
@@ -24,9 +25,9 @@ lang: zh
 
 现在以及接下来的课程都使用 Chrome 浏览器。
 
-<!-- Open the [example application](https://fullstack-exampleapp.herokuapp.com/) on your browser. Sometimes this takes a while. -->
+<!-- Open the [example application](https://studies.cs.helsinki.fi/exampleapp/) on your browser. Sometimes this takes a while. -->
 
-在浏览器上打开这个[示例应用](https://fullstack-exampleapp.herokuapp.com/)。应用加载通常需要等一会儿。
+在浏览器上打开这个[示例应用](https://studies.cs.helsinki.fi/exampleapp)。应用加载通常需要等一会儿。
 
 <!-- **The 1st rule of web development**: Always keep the developer console open on your browser. On macOS, open the console by pressing `F12` or `option-cmd-i` simultaneously. -->
 <!-- On Windows, open the console by pressing `F12` or `ctrl-shift-i` simultaneously. -->
@@ -39,6 +40,7 @@ Web 开发第一规则: 始终在浏览器上打开你的开发者控制台。 �
 
 <!-- The console looks like this:  -->
 开发者控制台长这样：
+
 ![](../../images/0/1e.png)
 
 <!-- Make sure that the <i>Network</i> tab is open, and check the <i>Disable cache</i> option as shown. <i>Preserve log</i> can also be useful: it saves the logs printed by the application when the page is reloaded. -->
@@ -58,9 +60,9 @@ Web 开发第一规则: 始终在浏览器上打开你的开发者控制台。 �
 <!-- When you reload the page (press the F5 key or the &#8634; symbol on your browser), the console shows that two events have happened: -->
 
 当你重新加载页面(在浏览器中按 F5 键或者 &#8634; 按钮) ，控制台会显示两个事件:
-<!-- - The browser fetches the contents of the page <i>fullstack-exampleapp.herokuapp.com/</i> from the server -->
+<!-- - The browser fetches the contents of the page <i>studies.cs.helsinki.fi/exampleapp/</i> from the server -->
 <!-- - And downloads the image <i>kuva.png</i> -->
-- 浏览器会从服务器中获取<i>fullstack-exampleapp.herokuapp.com/</i> 页面的内容
+- 浏览器会从服务器中获取<i>studies.cs.helsinki.fi/exampleapp</i> 页面的内容
 - 然后下载图像 <i>kuva.png</i>
 
 ![](../../images/0/2e.png)
@@ -75,9 +77,9 @@ Web 开发第一规则: 始终在浏览器上打开你的开发者控制台。 �
 
 ![](../../images/0/3e.png)
 
-<!-- The upper part, <i>General</i>, shows that the browser did a request to the address <i>https://fullstack-exampleapp.herokuapp.com/</i> using the [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) method, and that the request was successful, because the server response had the [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200. -->
+<!-- The upper part, <i>General</i>, shows that the browser did a request to the address <i>https://studies.cs.helsinki.fi/exampleapp/</i> using the [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) method, and that the request was successful, because the server response had the [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200. -->
 
-上半部分，General 中的内容，说明了浏览器使用 [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) 方法向地址 https://fullstack-exampleapp.herokuapp.com/ 发送了一个请求，并且请求成功，因为服务器响应的状态码为 200。
+上半部分，General 中的内容，说明了浏览器使用 [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) 方法向地址 https://studies.cs.helsinki.fi/exampleapp/ 发送了一个请求，并且请求成功，因为服务器响应的状态码为 200。
 
 <!-- The request and the server response have several [headers](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields): -->
 
@@ -105,13 +107,13 @@ Response 标签页展示了响应数据，这是一个常规的 html 页面。 <
 
 ![](../../images/0/6e.png)
 
-<!-- The request was made to the address <https://fullstack-exampleapp.herokuapp.com/kuva.png> and its type is HTTP GET. The response headers tell us that the response size is 89350 bytes, and its [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) is <i>image/png</i>, so it is a png image. The browser uses this information to render the image correctly to the screen. -->
+<!-- The request was made to the address <https://studies.cs.helsinki.fi/exampleapp/kuva.png> and its type is HTTP GET. The response headers tell us that the response size is 89350 bytes, and its [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) is <i>image/png</i>, so it is a png image. The browser uses this information to render the image correctly to the screen. -->
 
-这个请求是给地址 https://fullstack-exampleapp.herokuapp.com/kuva.png 发送的，它的类型是 HTTP GET。 响应头告诉我们，响应大小为 89350 字节，其[Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type)为 image/png，因此它是一个 png 图像。 浏览器使用这些信息将图像正确地渲染到屏幕上。
+这个请求是给地址 https://studies.cs.helsinki.fi/exampleapp/kuva.png 发送的，它的类型是 HTTP GET。 响应头告诉我们，响应大小为 89350 字节，其[Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type)为 image/png，因此它是一个 png 图像。 浏览器使用这些信息将图像正确地渲染到屏幕上。
 
-<!-- The chain of events caused by opening the page https://fullstack-exampleapp.herokuapp.com/ on a browser form the following [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/): -->
+<!-- The chain of events caused by opening the page https://studies.cs.helsinki.fi/exampleapp/ on a browser form the following [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/): -->
 
-在浏览器上打开页面 https://fullstack-exampleapp.herokuapp.com/ 所产生的整个调用链条如下:
+在浏览器上打开页面 https://studies.cs.helsinki.fi/exampleapp/ 所产生的整个调用链条如下:
 
 ![](../../images/0/7e.png)
 
@@ -198,9 +200,9 @@ Html 页面的内容被保存为 template 模板字符串，或者说是一个�
 
 保持控制台打开状态。 单击 🚫按钮清空控制台。
 
-<!-- Now when you go to the [notes](https://fullstack-exampleapp.herokuapp.com/notes) page, the browser does 4 HTTP requests: -->
+<!-- Now when you go to the [notes](https://studies.cs.helsinki.fi/exampleapp/notes) page, the browser does 4 HTTP requests: -->
 
-现在当你进入 [notes](https://fullstack-exampleapp.herokuapp.com/notes)页面时，浏览器会执行 4 个 HTTP 请求:
+现在当你进入 [notes](https://studies.cs.helsinki.fi/exampleapp/notes)页面时，浏览器会执行 4 个 HTTP 请求:
 
 ![](../../images/0/8e.png)
 
@@ -269,9 +271,9 @@ xhttp.send();
 
 这是“Network”选项卡上显示 request 信息的最低要求。
 
-<!-- We can try going to the address <https://fullstack-exampleapp.herokuapp.com/data.json> straight from the browser: -->
+<!-- We can try going to the address <https://studies.cs.helsinki.fi/exampleapp/data.json> straight from the browser: -->
 
-我们可以试着直接通过浏览器访问 https://fullstack-exampleapp.herokuapp.com/data.json 地址:
+我们可以试着直接通过浏览器访问 https://studies.cs.helsinki.fi/exampleapp/data.json 地址:
 
 ![](../../images/0/10e.png)
 
@@ -509,15 +511,15 @@ list.appendChild(newElement);
 
 ![](../../images/0/16e.png)
 
-<!-- Even though the page updates on your browser, the changes are not permanent. If the page is reloaded, the new note will disappear, because the changes were not pushed to the server. The JavaScript code the browser fetches will always create the list of notes based on JSON-data from address <https://fullstack-exampleapp.herokuapp.com/data.json>. -->
+<!-- Even though the page updates on your browser, the changes are not permanent. If the page is reloaded, the new note will disappear, because the changes were not pushed to the server. The JavaScript code the browser fetches will always create the list of notes based on JSON-data from address <https://studies.cs.helsinki.fi/exampleapp/data.json>. -->
 
-虽然页面在浏览器上被更新了，这些更改不是永久性的。 如果页面重新加载，新的 Note 就消失了，因为更改并没有推送到服务器。 浏览器获取的 JavaScript 代码会总是基于 https://fullstack-exampleapp.herokuapp.com/data.json 的 JSON 数据来创建 Note 列表。
+虽然页面在浏览器上被更新了，这些更改不是永久性的。 如果页面重新加载，新的 Note 就消失了，因为更改并没有推送到服务器。 浏览器获取的 JavaScript 代码会总是基于 https://studies.cs.helsinki.fi/exampleapp/data.json 的 JSON 数据来创建 Note 列表。
 
 ### CSS
 
-<!-- The <i>head</i> element of the HTML code of the Notes page contains a [link](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) tag, which determines that the browser must fetch a [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) style sheet from the address [main.css](https://fullstack-exampleapp.herokuapp.com/main.css). -->
+<!-- The <i>head</i> element of the HTML code of the Notes page contains a [link](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) tag, which determines that the browser must fetch a [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) style sheet from the address [main.css](https://studies.cs.helsinki.fi/exampleapp/main.css). -->
 
-Notes 页面的 HTML 代码中 head 元素包含了一个 [link](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) 标签，该标签确定浏览器必须从地址 [main.css](https://fullstack-exampleapp.herokuapp.com/main.css)中获取 [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) 样式表。
+Notes 页面的 HTML 代码中 head 元素包含了一个 [link](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) 标签，该标签确定浏览器必须从地址 [main.css](https://studies.cs.helsinki.fi/exampleapp/main.css)中获取 [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) 样式表。
 
 <!-- Cascading Style Sheets, or CSS, is a markup language used to determine the appearance of web applications. -->
 
@@ -586,9 +588,9 @@ Html 元素也可以有 class 以外的其他属性。 包含 Note 的 div 元�
 
 【加载一个包含 JavaScript 的页面-复习】
 
-<!-- Let's revise what happens when the page https://fullstack-exampleapp.herokuapp.com/notes is opened on the browser. -->
+<!-- Let's revise what happens when the page https://studies.cs.helsinki.fi/exampleapp/notes is opened on the browser. -->
 
-让我们复习一下在浏览器上打开页面 https://fullstack-exampleapp.herokuapp.com/notes 时会发生什么。
+让我们复习一下在浏览器上打开页面 https://studies.cs.helsinki.fi/exampleapp/notes 时会发生什么。
 
 ![](../../images/0/19e.png)
 
@@ -598,8 +600,8 @@ Html 元素也可以有 class 以外的其他属性。 包含 Note 的 div 元�
 - Html 代码中的 Links 标签会让浏览器获取 CSS 样式表 main.css
 <!-- - ...and a JavaScript code file <i>main.js</i> -->
 - 以及 JavaScript 代码文件 main.js
-<!-- - The browser executes the JavaScript code. The code makes an HTTP GET request to the address https://fullstack-exampleapp.herokuapp.com/data.json, which returns the notes as JSON data. -->
-- 浏览器执行 JavaScript 代码，代码向地址https://fullstack-exampleapp.herokuapp.com/data.json 发出 HTTP GET 请求，请求返回了包含 note 的 JSON 数据。
+<!-- - The browser executes the JavaScript code. The code makes an HTTP GET request to the address https://studies.cs.helsinki.fi/exampleapp/data.json, which returns the notes as JSON data. -->
+- 浏览器执行 JavaScript 代码，代码向地址https://studies.cs.helsinki.fi/exampleapp/data.json 发出 HTTP GET 请求，请求返回了包含 note 的 JSON 数据。
 <!-- - When the data has been fetched, the browser executes an <i>event handler</i>, which renders the notes to the page using the DOM-API. -->
 - 获取数据后，浏览器执行一个*event handler 事件处理程序*, 使用 DOM-API 将 Note 渲染到页面
 
@@ -689,7 +691,9 @@ notes.push({
 <!-- The Note objects have two fields: <i>content</i> containing the actual content of the note, and <i>date</i> containing the date and time the note was created. -->
 <!-- The server does not save new notes to a database, so new notes disappear when Heroku restarts the service. -->
 
-Note 对象包含两个字段: 包含 Note 实际内容的 content，以及包含创建 Note 的日期和时间的 date。 服务器不会将新 Note 保存到数据库中，因此当 Heroku （Heroku是一个服务器，可以看做Tomcat，译者注）重新启动服务时，新的 Note 就会消失。
+Note 对象包含两个字段: 包含 Note 实际内容的 content，以及包含创建 Note 的日期和时间的 date。 
+服务器不会将新 Note 保存到数据库中，因此当服务器重新启动服务时，新的 Note 就会消失。
+<!-- 服务器不会将新 Note 保存到数据库中，因此当 Heroku （Heroku是一个服务器，可以看做Tomcat，译者注）重新启动服务时，新的 Note 就会消失。 -->
 
 ### AJAX
 
@@ -710,10 +714,10 @@ Note 对象包含两个字段: 包含 Note 实际内容的 content，以及包�
 
 Notes 页面使用了 AJAX 获取 Notes 数据。 提交表单仍然使用传统的 web 表单提交机制。
 
-<!-- The application URLs reflect the old, carefree times. JSON data is fetched from the url <https://fullstack-exampleapp.herokuapp.com/data.json> and new notes are sent to the url <https://fullstack-exampleapp.herokuapp.com/new_note>.   -->
+<!-- The application URLs reflect the old, carefree times. JSON data is fetched from the url <https://studies.cs.helsinki.fi/exampleapp/data.json> and new notes are sent to the url <https://studies.cs.helsinki.fi/exampleapp/new_note>.   -->
 <!-- Nowadays urls like these would not be considered acceptable, as they don't follow the generally acknowledged conventions of [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) APIs, which we'll look into more in [第3章](/zh/part3) -->
 
-应用的 url 反映了过去无忧无虑的时光。 数据从 url https://fullstack-exampleapp.herokuapp.com/data.JSON 中获取，新的 Note 被发送到 url https://fullstack-exampleapp.herokuapp.com/new_note 。 如今，这样的 url 被认为是不可接受的，因为它们没有遵循公认的 RESTful api 约定，我们将在第三章中进一步研究
+应用的 url 反映了过去无忧无虑的时光。 数据从 url https://studies.cs.helsinki.fi/exampleapp/data.JSON 中获取，新的 Note 被发送到 url https://studies.cs.helsinki.fi/exampleapp/new_note 。 如今，这样的 url 被认为是不可接受的，因为它们没有遵循公认的 RESTful api 约定，我们将在第三章中进一步研究
 
 <!-- The thing termed AJAX is now so commonplace that it's taken for granted. The term has faded into oblivion, and the new generation has not even heard of it. -->
 
@@ -738,11 +742,11 @@ Notes 页面为浏览器提供了一些职责，为现有的 Note 生成 HTML �
 
 我们的应用的 Notes 页面与 SPA 风格的应用有一些相似之处，但它还没有完全到位。 尽管显示Note 的逻辑是在浏览器上运行的，但页面仍然使用传统的方式添加新Note 。 数据通过表单提交发送到服务器，服务器指示浏览器重新加载带有重定向的 Notes 页面。
 
-<!-- A single page app version of our example application can be found from <https://fullstack-exampleapp.herokuapp.com/spa>. -->
+<!-- A single page app version of our example application can be found from <https://studies.cs.helsinki.fi/exampleapp/spa>. -->
 <!-- At first glance, the application looks exactly the same as the previous one. -->
 <!-- The HTML code is almost identical, but the JavaScript file is different (<i>spa.js</i>) and there is a small change in how the form-tag is defined: -->
 
-我们示例应用的单页应用版本可以在 https://fullstack-exampleapp.herokuapp.com/spa 中找到。 乍一看，这个应用看起来与前一个应用完全相同。 Html 代码几乎完全相同，但 JavaScript 文件不同(spa.js) ，form 标签的定义方式有一个小小的变化:
+我们示例应用的单页应用版本可以在 https://studies.cs.helsinki.fi/exampleapp/spa 中找到。 乍一看，这个应用看起来与前一个应用完全相同。 Html 代码几乎完全相同，但 JavaScript 文件不同(spa.js) ，form 标签的定义方式有一个小小的变化:
 
 ![](../../images/0/25e.png)
 
@@ -869,7 +873,7 @@ var sendToServer = function(note) {
 
 React 的势头看起来很猛，但是 JavaScript 的世界是不断变化的。 例如，最近的一个新秀 [VueJS](https://vuejs.org/) 已经引起了一些兴趣。
 
-### Full stack -web development
+### Full stack web development
 【全栈-web 开发】
 
 <!-- What does the name of the course, <i>Full stack web development</i>, mean? Full stack is a buzzword that everyone talks about, while no one really knows what it means. Or at least, there is no agreed-upon definition for the term. -->
@@ -979,20 +983,20 @@ part2
 
   <h4>0.4: new note</h4>
 
-<!-- In chapter [Loading a page containing JavaScript - revised](/zh/part0/web_应用的基础设施#loading-a-page-containing-java-script-revised) the chain of events caused by opening the page <https://fullstack-exampleapp.herokuapp.com/notes> is depicted as a [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/) -->
+<!-- In chapter [Loading a page containing JavaScript - revised](/zh/part0/web_应用的基础设施#loading-a-page-containing-java-script-revised) the chain of events caused by opening the page <https://studies.cs.helsinki.fi/exampleapp/notes> is depicted as a [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/) -->
 
-在  [加载一个包含 JavaScript 的页面 - 复习](/zh/part0/web_应用的基础设施#loading-a-page-containing-java-script-revised)这一章中，页面打开 https://fullstack-exampleapp.herokuapp.com/notes 时引起的事件链被描述为一个时序图
+在  [加载一个包含 JavaScript 的页面 - 复习](/zh/part0/web_应用的基础设施#loading-a-page-containing-java-script-revised)这一章中，页面打开 https://studies.cs.helsinki.fi/exampleapp/notes 时引起的事件链被描述为一个时序图
 
 <!-- The diagram was made using [websequencediagrams](https://www.websequencediagrams.com) service as follows: -->
 
 该图是使用 [websequencediagrams](https://www.websequencediagrams.com) 服务绘制的，如下所示:
 
 ```
-browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/notes
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
 server-->browser: HTML-code
-browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.css
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
 server-->browser: main.css
-browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.js
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
 server-->browser: main.js
 
 note over browser:
@@ -1000,7 +1004,7 @@ browser starts executing js-code
 that requests JSON data from server
 end note
 
-browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/data.json
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
 server-->browser: [{ content: "HTML is easy", date: "2019-05-23" }, ...]
 
 note over browser:
@@ -1009,9 +1013,9 @@ that renders notes to display
 end note
 ```
 
-<!-- **Create a similar diagram** depicting the situation where the user creates a new note on page <https://fullstack-exampleapp.herokuapp.com/notes> by writing something into the text field and clicking the <i>submit</i> button. -->
+<!-- **Create a similar diagram** depicting the situation where the user creates a new note on page <https://studies.cs.helsinki.fi/exampleapp/notes> by writing something into the text field and clicking the <i>submit</i> button. -->
 
-创建一个类似的图表，描述这种情况: 用户在页面上创建一个新的 Note，在文本区域写一些东西，然后点击提交按钮到 https://fullstack-exampleapp.herokuapp.com/notes。
+创建一个类似的图表，描述这种情况: 用户在页面上创建一个新的 Note，在文本区域写一些东西，然后点击提交按钮到 https://studies.cs.helsinki.fi/exampleapp/notes。
 
 <!-- If necessary, show operations on the browser or on the server as comments on the diagram. -->
 
@@ -1028,9 +1032,9 @@ end note
 
   <h4>0.5: Single page app</h4>
 
-<!-- Create a diagram depicting the situation where the user goes to the [single page app](/zh/part0/web_应用的基础设施#single-page-app) version of the notes app at <https://fullstack-exampleapp.herokuapp.com/spa>. -->
+<!-- Create a diagram depicting the situation where the user goes to the [single page app](/zh/part0/web_应用的基础设施#single-page-app) version of the notes app at <https://studies.cs.helsinki.fi/exampleapp/spa>. -->
 
-创建一个图表，描述用户在进入 https://fullstack-exampleapp.herokuapp.com/spa 这个 Note 应用的单页版本的情况。
+创建一个图表，描述用户在进入 https://studies.cs.helsinki.fi/exampleapp/spa 这个 Note 应用的单页版本的情况。
 
   <h4>0.6: New note</h4>
 

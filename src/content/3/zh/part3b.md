@@ -104,7 +104,7 @@ app.use(cors())
 向项目的根目录添加一个名为  <i>Procfile</i>的文件，告诉 Heroku 如何启动应用。
 
 ```bash
-web: node index.js
+web: npm start
 ```
 
 <!-- Change the definition of the port our application uses at the bottom of the <i>index.js</i> file like so:  -->

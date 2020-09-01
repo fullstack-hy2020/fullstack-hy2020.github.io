@@ -970,10 +970,10 @@ app.use(errorHandler)
 Json-parser 中间件应该是最早加载到 Express 中的中间件之一，如果顺序变成了下面这样: 
 
 ```js
-app.use(logger) // request.body is empty!
+app.use(logger) // request.body is undefined!
 
 app.post('/api/notes', (request, response) => {
-  // request.body is empty!
+  // request.body is undefined!
   const body = request.body
   // ...
 })
@@ -981,8 +981,8 @@ app.post('/api/notes', (request, response) => {
 app.use(express.json())
 ```
 
-<!-- Then the JSON data sent with the HTTP requests would not be available for the logger middleware or the POST route handler, since the _request.body_ would be an empty object. -->
-那么，由 HTTP 请求发送的 JSON 数据将不能用于日志记录器中间件或 POST 路由处理程序，因为此时 request.body 将是一个空对象。
+<!-- Then the JSON data sent with the HTTP requests would not be available for the logger middleware or the POST route handler, since the _request.body_ would be _undefined_ . -->
+那么，由 HTTP 请求发送的 JSON 数据将不能用于日志记录器中间件或 POST 路由处理程序，因为此时 request.body 将是一个_undefined_。
 
 <!-- It's also important that the middleware for handling unsupported routes is next to the last middleware that is loaded into Express, just before the error handler. -->
 同样重要的是，用于处理不支持路由的中间件位于加载到 Express 的最后一个中间件的旁边，就在错误处理程序之前。
