@@ -51,7 +51,7 @@ The npm script for running <i>tsc</i> is set as follows:
  **Notice** the extra -- before the actual argument! Arguments before the -- are interpreted for the command <i>npm</i> and ones after are for the command that is run through the script.
 
 <!-- The created <i>tsconfig.json</i> contains a lengthy list of all of the possible configurations available to use, but  only a few of those are uncommented. Studying the initial <i>tsconfig.json</i> file might be useful for finding some configuration options you might need. It is also completely okay to keep the commented rows in the file just in case you might someday need to expand your configuration settings.  -->
-Running the script creates an <i>tsconfig.json</i> file, which contains a lengthy list of every configuration available to us. However only a few have not been commented out.
+Running the script creates a <i>tsconfig.json</i> file, which contains a lengthy list of every configuration available to us. However only a few have not been commented out.
 Studying the initial <i>tsconfig.json</i> file might be useful for finding some configuration options you might need.
 It is also completely okay to keep the commented rows in the file just in case you might someday need to expand your configuration settings.
 
