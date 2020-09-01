@@ -56,7 +56,7 @@
     "develop": "gatsby develop",
     "start": "npm run develop",
     "format": "prettier --write \"src/**/*.js\"",
-    "deploy": "gatsby build && gh-pages -d public -b master",    
+    "deploy": "gatsby build && gh-pages -d public -b master",
     "publish": "gh-pages -u 'Matti Luukkainen <mluukkai@iki.fi>' -d public -b master"
   },
   "devDependencies": {
