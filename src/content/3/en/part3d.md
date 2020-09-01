@@ -258,7 +258,7 @@ Before we move onto the next part, we will take a look at an important tool call
 > <i>Generically, lint or a linter is any tool that detects and flags errors in programming languages, including stylistic errors. The term lint-like behavior is sometimes applied to the process of flagging suspicious language usage. Lint-like tools generally perform static analysis of source code.</i>
 
 
-In compiled statically typed languages like Java, IDEs like NetBeans can point out errors in the code, even ones that are more than just compile errors. Additional tools for performing [static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) like [checkstyle](http://checkstyle.sourceforge.net/), can be used for expanding the capabilities of the IDE to also point out problems related to style, like indentation.
+In compiled statically typed languages like Java, IDEs like NetBeans can point out errors in the code, even ones that are more than just compile errors. Additional tools for performing [static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) like [checkstyle](https://checkstyle.sourceforge.io), can be used for expanding the capabilities of the IDE to also point out problems related to style, like indentation.
 
 
 In the JavaScript universe, the current leading tool for static analysis aka. "linting" is [ESlint](https://eslint.org/).
