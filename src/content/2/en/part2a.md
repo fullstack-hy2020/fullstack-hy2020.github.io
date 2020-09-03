@@ -557,7 +557,7 @@ const App = () => {
 }
 ```
 
-To see the printing on the console, we must scroll up over the long red wall of errors.
+To see the printing on the console, we must scroll up over the long red wall of errors. (Screenshot shows 'App works' in Finnish, 'App toimii...')
 
 ![](../../images/2/4b.png)
 
