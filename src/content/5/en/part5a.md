@@ -421,7 +421,7 @@ And now adding new notes works again!
 ### Saving the token to the browser's local storage
 
 
-Our application has a flaw: when the page is rerendered, information of the user's login dissappears. This also slows down development. For example when we test creating new notes, we have to login again every single time. 
+Our application has a flaw: when the page is rerendered, information of the user's login disappears. This also slows down development. For example when we test creating new notes, we have to login again every single time. 
 
 
 This problem is easily solved by saving the login details to [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage). Local Storage is a [key-value](https://en.wikipedia.org/wiki/Key-value_database) database in the browser. 
