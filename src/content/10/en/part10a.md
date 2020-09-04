@@ -57,6 +57,8 @@ Next, we can initialize our project in a <i>rate-repository-app</i> directory by
 expo init rate-repository-app
 ```
 
+<b>NOTE</b> that to use the expo command, the npm root directory must be added to the system path. The path can be found by running the command ```npm root -g```
+
 After running this command Expo will ask you to choose a template for the project. Within the <i>Managed workflow</i> section, choose the <i>blank</i> option (the one with the description "a minimal app as clean as an empty canvas").
 
 Now that our application has been initialized, open the created <i>rate-repository-app</i> directory with an editor such as [Visual Studio Code](https://code.visualstudio.com/). The structure should be more or less the following:
