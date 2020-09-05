@@ -265,6 +265,8 @@ The callback function is given a reference to the cache and the data returned by
 
 The code reads the cached state of <em>ALL\_PERSONS</em> query using [readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readquery) function and updates the cache with [writeQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writequery-and-writefragment) function adding the new person to the cached data. 
 
+Note that readQuery will throw an error if your cache does not contain all of the data necessary to fulfill the specified query. This can be solved using a try-catch block.
+
 <!-- On myös olemassa tilanteita, joissa ainoa järkevä tapa saada välimuisti pidettyä ajantasaisena on _update_-callbackillä tehtävä päivitys.  -->
 In some situations the only sensible way to keep the cache up to date is using the _update_-callback.
 

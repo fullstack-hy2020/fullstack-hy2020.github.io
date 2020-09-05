@@ -99,6 +99,9 @@ By submitting at least 24/27 of the exercises for part 9 of the course, TypeScri
 
 Exercises in parts 8 and 9 do not count towards the grade for the 5-7 credit course.
 
+#### React Native part's credits
+
+By submitting exercises for part 10 of the courses, React Native, you can earn either one or two additional credits. Earning one credit requires you to submit at least 19 exercises whereas earning two credits requires you to submit at least 26 exercises. More information about the part's prerequisites, exercise submission and credits can be found in the [part 10](/en/part10/introduction_to_react_native).
 
 ### How to get your credits
 
@@ -173,8 +176,8 @@ Note that it is only possible to register for the exam if you have a Finnish soc
 Follow the instructions below to gain access to the course Moodle space:
 -	Register for the course through [Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=131840261)
 -	**Wait for 24 hours** before activating your University of Helsinki user ID. You will receive instructions regarding the activation process the following day.
--	Sign in on the Open University [course page](https://courses.helsinki.fi/fi/aytkt21009en/131840261), where you will find the enrolment key for the Moodle space.
--	Sign into the [Moodle space](https://moodle.helsinki.fi/login/index.php) with your University of Helsinki user ID and the enrolment key.
+-	Sign in on the Open University [course page](https://courses.helsinki.fi/fi/aytkt21009en/131840261), where you will find the enrollment key for the Moodle space.
+-	Sign into the [Moodle space](https://moodle.helsinki.fi/login/index.php) with your University of Helsinki user ID and the enrollment key.
 
 Please note!
 

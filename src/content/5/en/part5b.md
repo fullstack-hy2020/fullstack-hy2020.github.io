@@ -353,6 +353,8 @@ const NoteForm = ({ createNote }) => {
     </div>
   )
 }
+
+export default NoteForm
 ```
 
 <!-- Tilan muuttuja <i>newNote</i> ja sen muutokseta huolehtiva tapahtumankäsittelijä on siirretty komponentista _App_ lomakkeesta huolehtivaan komponenttiin. -->
@@ -559,7 +561,7 @@ The form closes when a new blog is created.
 Separate the form for creating a new blog into its own component (if you have not already done so), and 
 move all the states required for creating a new blog to this component. 
 
-The component must work like the <i>NewNote</i> component from the [material](/en/part5/props_children_and_proptypes) of this part.
+The component must work like the <i>NoteForm</i> component from the [material](/en/part5/props_children_and_proptypes) of this part.
 
 #### 5.7* Blog list frontend, step7
 

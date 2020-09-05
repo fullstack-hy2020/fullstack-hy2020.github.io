@@ -92,6 +92,10 @@ Suorittamalla vähintään 22/26 tehtävää kurssin kahdeksannesta, GraphQL:ä�
 
 Suorittamalla vähintään 24/27 tehtävää kurssin yhdeksännestä, TypeScriptiä käsittelevästä osasta, voit laajentaa suoritustasi yhdellä opintopisteellä. Osa kannattaa suorittaa vasta sen jälkeen kun olet tehnyt osat 0-7.
 
+#### React Native -osan suoritus
+
+Suorittamalla tehtäviä kurssin kymmenennestä, React Nativea käsittelevästä osasta, voit laajentaa suoritustasi yhdellä tai kahdella opintopisteella. Yhden opintopisteen suoritukseen tulee suorittaa osassa vähintään 19 tehtävää, kun taas kahden opintopisteen suoritukseen vähintään 26 tehtävää. Lisätietoja osan esitietovaatimuksista, tehtävien palauttamisesta ja opintopisteistä löydät [osasta 10](/en/part10/introduction_to_react_native).
+
 ### Suoritusmerkinnän pyytäminen
 
 Jos haluat kurssilta virallisen suorituksen, tallenna <b>Helsingin yliopiston</b> opiskelijanumerosi [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen): 

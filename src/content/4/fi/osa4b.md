@@ -249,7 +249,7 @@ Testaus vaikuttaa helpolta ja testit menevät läpi. Testimme ovat kuitenkin huo
 
 Testimme käyttää jo jestin metodia [afterAll](https://facebook.github.io/jest/docs/en/api.html#afterallfn-timeout) sulkemaan tietokannan testien suoritusten jälkeen. Jest tarjoaa joukon muitakin [funktioita](https://facebook.github.io/jest/docs/en/setup-teardown.html#content), joiden avulla voidaan suorittaa operaatioita ennen yhdenkään testin suorittamista tai ennen jokaisen testin suoritusta.
 
-Päätetään alustaa tietokanta ennen <i>jokaisen testin suoritusta,</i> eli funktiossa [beforeEach](https://jestjs.io/docs/en/api.html#aftereachfn-timeout):
+Päätetään alustaa tietokanta ennen <i>jokaisen testin suoritusta,</i> eli funktiossa [beforeEach](https://jestjs.io/docs/en/api.html#beforeeachfn-timeout):
 
 ```js
 const supertest = require('supertest')
@@ -515,7 +515,7 @@ module.exports = {
 }
 ```
 
-Moduuli määrittelee funktion _notesInDb_, jonka avulla voidaan tarkastaa sovelluksen tietokannassa olevat muistiinpanot. Tietokantaan alustettava sisältö _initialNotes_ on siirretty samaan tiedostoon. Määrittelimme myös tulevan varalta funktion _nonExistingId_, jonka avulla on mahdollista luoda tietokantaid, joka ei kuulu millekään kannassa olevalle oliolle.
+Moduuli määrittelee funktion _notesInDb_, jonka avulla voidaan tarkastaa sovelluksen tietokannassa olevat muistiinpanot. Tietokantaan alustettava sisältö _initialNotes_ on siirretty samaan tiedostoon. Määrittelimme myös tulevan varalta funktion _nonExistingId_, jonka avulla on mahdollista luoda tietokanta-id, joka ei kuulu millekään kannassa olevalle oliolle.
 
 Testit muuttuvat muotoon
 
@@ -699,7 +699,7 @@ test('a note can be deleted', async () => {
 })
 ```
 
-Ensimmäisessä testissä note-objekti, jonka saamme palvelimelta vastauksena, käy läpi JSON-serialisoinnin ja -parsemisen. Tämän prosessoinnin seurauksena note-objektin <em>date</em> kentän arvon tyyppi muuttuu <em>Date</em> objektista merkkijonoksi. Tämän seurauksena emme voi suoraan verrata <em>resultNote.body</em> muuttujaa ja <em>noteToView</em> muuttujaa. Sen sijaan meidän täytyy esin suorittaa samanlainen JSON-serialisointi ja -parseminen <em>noteView</em> muuttujalle, kuin palvelin suorittaa note-objektille.
+Ensimmäisessä testissä note-objekti, jonka saamme palvelimelta vastauksena, käy läpi JSON-serialisoinnin ja -parsemisen. Tämän prosessoinnin seurauksena note-objektin <em>date</em> kentän arvon tyyppi muuttuu <em>Date</em> objektista merkkijonoksi. Tämän seurauksena emme voi suoraan verrata <em>resultNote.body</em> muuttujaa ja <em>noteToView</em> muuttujaa. Sen sijaan meidän täytyy ensin suorittaa samanlainen JSON-serialisointi ja -parseminen <em>noteView</em> muuttujalle, kuin palvelin suorittaa note-objektille.
 
 Molemmat testit ovat rakenteeltaan samankaltaisia. Alustusvaiheessa ne hakevat kannasta yksittäisen muistiinpanon. Tämän jälkeen on itse testattava operaatio, joka on koodissa korostettuna. Lopussa tarkastetaan, että operaation tulos on haluttu. 
 

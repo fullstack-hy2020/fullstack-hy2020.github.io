@@ -611,8 +611,8 @@ const Togglable = () => ...
 <!-- move all the states required for creating a new blog to this component.  -->
 将创建新 blog 的表单分离到它自己的组件中(如果您还没有这样做) ，并将创建新博客所需的所有状态移动到此组件。
 
-<!-- The component must work like the <i>NewNote</i> component from the [material](/osa5/props_children_ja_proptypet#lomakkeiden-tila) of this part. -->
-这个组件必须像[这里](/zh/part5/props_children_与_proptypes)的<i>NewNote</i> 组件那样工作。
+<!-- The component must work like the <i>NoteForm</i> component from the [material](/osa5/props_children_ja_proptypet#lomakkeiden-tila) of this part. -->
+这个组件必须像[这里](/zh/part5/props_children_与_proptypes)的<i>NoteForm</i> 组件那样工作。
 
 #### 5.7* Blog list frontend, 步骤7
 

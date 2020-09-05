@@ -1,5 +1,5 @@
 ---
-mainImage: ../../../images/part-1.svg
+mainImage: ../../../images/part-10.svg
 part: 10
 letter: b
 lang: en
@@ -1015,6 +1015,7 @@ Now, the Android bundle of the application will have the component defined in th
 
 #### Exercise 10.10: a platform specific font
 
-Currently the font family of our application is set to <i>System</i> in the theme configuration located in the <i>theme.js</i> file. Instead of the <i>System</i> font, use a platform specific [Sans-serif](https://en.wikipedia.org/wiki/Sans-serif) font. In the Android platform use the <i>Ubuntu</i> font and in the iOS platform use the <i>Arial</i> font. The default font can be <i>System</i>.
+Currently the font family of our application is set to <i>System</i> in the theme configuration located in the <i>theme.js</i> file. Instead of the <i>System</i> font, use a platform specific [Sans-serif](https://en.wikipedia.org/wiki/Sans-serif) font. In the Android platform use the <i>Roboto</i> font and in the iOS platform use the <i>Arial</i> font. The default font can be <i>System</i>.
 
+This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). Note that exercises in this section should be submitted to the part 2 in the exercise submission system.
 </div>

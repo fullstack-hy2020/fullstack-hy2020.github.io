@@ -529,7 +529,7 @@ const App = () => {
 
 
 <!-- This would completely break our application: -->
-们的应用崩了:
+我们的应用崩了:
 
 ![](../../images/1/5b.png)
 
