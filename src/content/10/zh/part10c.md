@@ -74,7 +74,7 @@ const fetchMovies = async () => {
 
 <!-- Next, let's try the Fetch API in practice. The rate-repository-api server provides an endpoint for returning a paginated list of reviewed repositories. Once the server is running, you should be able to access the endpoint at [http://localhost:5000/api/repositories](http://localhost:5000/api/repositories). The data is paginated in a common [cursor based pagination format](https://graphql.org/learn/pagination/). The actual repository data is behind the <i>node</i> key in the <i>edges</i> array. -->
 
-接下来，让我们尝试实践一下Fetch API。 rate-repository-api 服务端提供了一个接口来返回查看仓库的分页列表。一旦服务端跑起来，你就可以通过[http://localhost:5000/api/repositories](http://localhost:5000/api/repositories) 接口来访问。分页数据是常规的 [cursor based pagination format](https://graphql.org/learn/pagination/)。实际的仓库数据位于<i>edges</i> 数组的<i>node</i>key 中。
+接下来，让我们尝试实践一下Fetch API。 rate-repository-api 服务端提供了一个接口来返回已评论仓库的分页列表。一旦服务端跑起来，你就可以通过[http://localhost:5000/api/repositories](http://localhost:5000/api/repositories) 接口来访问。分页数据是常规的 [cursor based pagination format](https://graphql.org/learn/pagination/)。实际的仓库数据位于<i>edges</i> 数组的<i>node</i>key 中。
 
 <!-- Unfortunately, we can't access the server directly in our application by using the <i>http://localhost:5000/api/repositories</i> URL. To make a request to this endpoint in our application we need to access the server using its IP address in its local network. To find out what it is, open the Expo development tools by running <em>npm start</em>. In the development tools you should be able to see an URL starting with <i>exp://</i> above the QR code: -->
 不幸的事，我们并不能在我们的应用中使用 <i>http://localhost:5000/api/repositories</i> 这个URL直接访问服务端。为了向这个接口创建一个请求，我们需要通过IP来访问服务端。为了找到这个IP，运行<em>npm start</em>打开Expo 开发工具。在二维码上面你应该能够在开发工具中看到一个以 <i>exp://</i> 开头的URL。
@@ -86,7 +86,7 @@ const fetchMovies = async () => {
 
 <!-- Now that we know the end point's URL let's use the actual server-provided data in our reviewed repositories list. We are currently using mock data stored in the <em>repositories</em> variable. Remove the <em>repositories</em> variable and replace the usage of the mock data with this piece of code in the <i>RepositoryList.jsx</i> file in the <i>components</i> directory: -->
 
-现在我们了解了接口的URL，让我们在查看仓库列表中使用真正的服务端数据吧。我们当前使用的模拟数据是存储在<em>repositories</em> 变量中的。移除<em>repositories</em> 变量，并将模拟数据替换成如下代码片段（位于 <i>components</i> 文件夹的<i>RepositoryList.jsx</i> 文件中）：
+现在我们了解了接口的URL，让我们在已评论仓库列表中使用真正的服务端数据吧。我们当前使用的模拟数据是存储在<em>repositories</em> 变量中的。移除<em>repositories</em> 变量，并将模拟数据替换成如下代码片段（位于 <i>components</i> 文件夹的<i>RepositoryList.jsx</i> 文件中）：
 
 ```javascript
 import React, { useState, useEffect } from 'react';
@@ -165,7 +165,7 @@ export default useRepositories;
 ```
 
 <!-- Now that we have a clean abstraction for fetching the reviewed repositories, let's use the <em>useRepositories</em> hook in the <em>RepositoryList</em> component: -->
-现在我们获取查看仓库数据就有了一个干净的抽象，让我们在<em>RepositoryList</em>组件中使用<em>useRepositories</em> 这个hook
+现在我们获取已评论仓库数据就有了一个干净的抽象，让我们在<em>RepositoryList</em>组件中使用<em>useRepositories</em> 这个hook
 
 ```javascript
 import React from 'react';
@@ -815,7 +815,7 @@ const useSignIn = () => {
 存储访问token 步骤2
 
 <!-- Improve the <em>useSignIn</em> hook so that it stores the user's access token retrieved from the <i>authorize</i> mutation. The return value of the hook should not change. The only change you should make to the <em>SignIn</em> component is that you should redirect the user to the reviewed repositories list view after a successful sign in. You can achieve this by using the (useHistory)[https://reacttraining.com/react-router/native/api/Hooks/usehistory] hook and the history's [push](https://reacttraining.com/react-router/native/api/history) method. -->
-改进<em>useSignIn</em> hook ，使之能存储从<i>authorize</i>  变化来的用户的访问token。hook 的返回值不能变化，对 <em>SignIn</em>组件唯一的变化应当是在用户成功登录后将起重定向到用户已查看的仓库列表视图。你可以使用(useHistory)[https://reacttraining.com/react-router/native/api/Hooks/usehistory] hook 和history 的[push](https://reacttraining.com/react-router/native/api/history) 方法 来完成这个功能。
+改进<em>useSignIn</em> hook ，使之能存储从<i>authorize</i>  变化来的用户的访问token。hook 的返回值不能变化，对 <em>SignIn</em>组件唯一的变化应当是在用户成功登录后将起重定向到用户已评论的仓库列表视图。你可以使用(useHistory)[https://reacttraining.com/react-router/native/api/Hooks/usehistory] hook 和history 的[push](https://reacttraining.com/react-router/native/api/history) 方法 来完成这个功能。
 
 <!-- After the <i>authorize</i> mutation has been executed and you have stored the user's access token to the storage, you should reset the Apollo Client's store. This will clear the Apollo Client's cache and re-execute all active queries. You can do this by using the Apollo Client's [resetStore](https://www.apollographql.com/docs/react/v2.5/api/apollo-client/#ApolloClient.resetStore) method. You can access the Apollo Client in the <em>useSignIn</em> hook using the [useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useapolloclient) hook. Note that the order of the execution is crucial and should be the following: -->
 
