@@ -1133,7 +1133,7 @@ const PlatformSpecificButton = () => {
 };
 ```
 
-Now, the Android bundle of the application will have the component defined in the <i>Button.android.jsx</i> whereas the iOS bundle the one defined in the <i>Button.ios.jsx</i> file.
+<!-- Now, the Android bundle of the application will have the component defined in the <i>Button.android.jsx</i> whereas the iOS bundle the one defined in the <i>Button.ios.jsx</i> file. -->
 现在，应用的Android bundle 会有一个名为<i>Button.android.jsx</i> 的组件，而iOS bundle 拥有一个名为 <i>Button.ios.jsx</i> 的文件。
 
 </div>
@@ -1145,8 +1145,12 @@ Now, the Android bundle of the application will have the component defined in th
 #### Exercise 10.10: a platform specific font
 平台特定的字体
 
-Currently the font family of our application is set to <i>System</i> in the theme configuration located in the <i>theme.js</i> file. Instead of the <i>System</i> font, use a platform specific [Sans-serif](https://en.wikipedia.org/wiki/Sans-serif) font. In the Android platform use the <i>Ubuntu</i> font and in the iOS platform use the <i>Arial</i> font. The default font can be <i>System</i>.
+<!-- Currently the font family of our application is set to <i>System</i> in the theme configuration located in the <i>theme.js</i> file. Instead of the <i>System</i> font, use a platform specific [Sans-serif](https://en.wikipedia.org/wiki/Sans-serif) font. In the Android platform use the <i>Ubuntu</i> font and in the iOS platform use the <i>Arial</i> font. The default font can be <i>System</i>. -->
 
-当前我们应用的字体是设置在 <i>theme.js</i> 文件主题配置中，为<i>System</i> 。不要使用 <i>System</i> ， 使用平台特定的[Sans-serif](https://en.wikipedia.org/wiki/Sans-serif) 字体，在Android 平台使用<i>Ubuntu</i> 字体，在iOS平台中使用 <i>Arial</i> 字体，默认字体可以为 <i>System</i>
+当前我们应用的字体是设置在 <i>theme.js</i> 文件主题配置中，为<i>System</i> 。不要使用 <i>System</i> ， 使用平台特定的[Sans-serif](https://en.wikipedia.org/wiki/Sans-serif) 字体，在Android 平台使用<i>Roboto</i> 字体，在iOS平台中使用 <i>Arial</i> 字体，默认字体可以为 <i>System</i>
+
+<!-- This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). Note that exercises in this section should be submitted to the part 2 in the exercise submission system. -->
+
+这是该节的最后一个练习。是时候将自己的代码提交到Github 并在[exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020) 中，将完成的练习标注为已完成。注意本节的练习应当提交到练习提交系统的第二节中。
 
 </div>

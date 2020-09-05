@@ -1123,3 +1123,109 @@ const GET_AUTHORIZED_USER = gql`
 这是本章练习的最后一部分。是时候将你的代码推送到Github 并在[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) 中完成你的练习了。
 
 </div>
+
+<div class="content">
+
+### Additional resources
+更多的资源
+
+<!-- As we are getting closer to the end of this part, let's take a moment to look at some additional React Native related resources. [Awesome React Native](https://github.com/jondot/awesome-react-native) is an extremely encompassing curated list of React Native resources such as libraries, tutorials, and articles. Because the list is exhaustively long, let's have a closer look at few of its highlights -->
+
+我们马上就要结束本章的学习了，让我们花点时间看一些React Native 相关的额外资源。[Awesome React Native](https://github.com/jondot/awesome-react-native) 是一个非常集中的React Native的资源列表，比如类库、教程和文章。但这个列表也太长了，让我们看一些其中的重点内容。
+
+#### React Native Paper
+
+<!-- > Paper is a collection of customizable and production-ready components for React Native, following Google’s Material Design guidelines. -->
+
+> Paper 是一个自定义的生产就绪的React Native组件库， 遵循了Google 的 Material 设计规范。
+
+<!-- [React Native Paper](https://callstack.github.io/react-native-paper/) is for React Native what [Material-UI](https://material-ui.com/) is for React web applications. It offers a wide range of high-quality UI components and support for [custom themes](https://callstack.github.io/react-native-paper/theming.html). [Setting up](https://callstack.github.io/react-native-paper/getting-started.html) React Native Paper for Expo based React Native applications is quite simple, which makes it possible to use it in the upcoming exercises if want to give it a go. -->
+
+[React Native Paper](https://callstack.github.io/react-native-paper/)  是React Native 版本的 [Material-UI](https://material-ui.com/) （Material-UI是React Web应用使用的）。 它提供了一系列高质量的UI组件，支持 。 为基于React Native 的Expo [安装](https://callstack.github.io/react-native-paper/getting-started.html)  React Native Paper 十分简单，如果你想要尝试一下可以在接下来的练习中使用一下。
+
+#### Styled-components
+
+<!-- > Utilising tagged template literals (a recent addition to JavaScript) and the power of CSS, styled-components allows you to write actual CSS code to style your components. It also removes the mapping between components and styles – using components as a low-level styling construct could not be easier! -->
+
+> 利用标签模版（JavaScrtipt 的新特性）以及CSS的力量， styled-components 允许你将真实的CSS代码来样式化你的组件。它同时消除了组件和样式的映射——可以利用组件作为使用底层的样式重构，这再简单不过了。
+
+<!-- [Styled-components](https://styled-components.com/) is a library for styling React components using [CSS-in-JS](https://en.wikipedia.org/wiki/CSS-in-JS) technique. In React Native we are already used to defining component's styles as a JavaScript object, so CSS-in-JS not so uncharted territory. However, the approach of styled-components is quite different from using the <em>StyleSheet.create</em> method and the <em>style</em> prop. -->
+
+[Styled-components](https://styled-components.com/)是一个利用 [CSS-in-JS](https://en.wikipedia.org/wiki/CSS-in-JS)  技术样式化React 组件的技术。在React Native 中我们已经将组件的样式定义为了一个JS对象，CSS-in-JS 并不是无人区，相反，这种  styled-components  方法与在 <em>style</em> 属性中使用 <em>StyleSheet.create</em> 方法十分不同。
+
+<!-- In styled-components component's styles are defined with the component using a feature called [tagged template literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_templates) or a plain JavaScript object. Styled-components makes it possible to define new style properties for component based on its props _at runtime_. This brings many possibilities, such as seamlessly switching between a light and a dark theme. It also has a full [theming support](https://styled-components.com/docs/advanced#theming). Here is an example of creating a <em>Text</em> component with style variations based on props: -->
+
+在 styled-components 中组件的样式定义为使用所谓 [tagged template literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_templates) 技术或者普通的JavaScript 对象。 Styled-components 能够 _在运行时_ 为组件定义新的样式属性。这带来了许多可能性，例如无缝切换明暗主题，它还包含一整套 [theming support](https://styled-components.com/docs/advanced#theming) 。 如下是基于属性，利用样式变量创建一个 <em>Text</em> 组件
+
+```javascript
+import React from 'react';
+import styled from 'styled-components/native';
+import { css } from 'styled-components';
+
+const FancyText = styled.Text`
+  color: grey;
+  font-size: 14px;
+
+  ${({ isBlue }) =>
+    isBlue &&
+    css`
+      color: blue;
+    `}
+
+  ${({ isBig }) =>
+    isBig &&
+    css`
+      font-size: 24px;
+      font-weight: 700;
+    `}
+`;
+
+const Main = () => {
+  return (
+    <>
+      <FancyText>Simple text</FancyText>
+      <FancyText isBlue>Blue text</FancyText>
+      <FancyText isBig>Big text</FancyText>
+      <FancyText isBig isBlue>
+        Big blue text
+      </FancyText>
+    </>
+  );
+};
+```
+
+<!-- Because styled-components processes the style definitions, it is possible to use CSS-like snake case syntax with the property names and units in property values. However, units don't have any effect because property values are internally unitless. For more information on styled-components, head out to the [documentation](https://styled-components.com/docs). -->
+
+由于  styled-components 处理样式定义，可以使用 类似CSS的 snake 样式的语法来在属性值中定义名称和单位。但是单位并不会生效，因为属性值内部是无单位的。更多的关于  styled-components 信息，可以查看它的 [documentation](https://styled-components.com/docs)。
+
+#### React-spring
+
+<!-- > react-spring is a spring-physics based animation library that should cover most of your UI related animation needs. It gives you tools flexible enough to confidently cast your ideas into moving interfaces. -->
+
+> react-spring 是一个基于 spring-physics 的动画库，应该会涵盖大多数UI相关的动画。它是一个工具，能够灵活地将你的创意实现成动画接口。
+
+<!-- [React-spring](https://www.react-spring.io/) is a library that provides a clean [hook API](https://www.react-spring.io/docs/hooks/basics) for animating React Native components. -->
+
+[React-spring](https://www.react-spring.io/) 是一个库，提供了简明的 [hook API](https://www.react-spring.io/docs/hooks/basics) 来实现React Native 组件的动画效果。
+
+#### React Navigation
+
+<!-- > Routing and navigation for your React Native apps -->
+> 路由与定位你的React Native 应用
+
+<!-- [React Navigation](https://reactnavigation.org/) is a routing library for React Native. It shares some similarities with the React Router library we have been using during this and earlier parts. However, unlike React Router, React Navigation offers more native features such as native gestures and animations to transition between views. -->
+
+[React Navigation](https://reactnavigation.org/) 是一个React Native 的路由类库。它与我们之前讲到的React Router 库共享类似的功能，但是，与React Router 不同， React Router提供了更多的原生的功能，比如原生的动作与视图切换动画。
+
+### Closing words
+结束语
+
+<!-- That's it, our application is ready. Good job! We have learned many new concepts during our journey such as setting up our React Native application using Expo, using React Native's core components and adding style to them, communicating with the server, and testing React Native applications. The final piece of the puzzle would be to deploy the application to the Apple iTunes Store and Google Play Store. -->
+
+好啦，我们的应用已经就绪了。干得漂亮！在我们的旅程中我们已经学习了许多新的概念，比如利用Expo 搭建React Native 应用， 使用React Native 的核心组件并向其添加样式，与服务端通信，测试React  Native 应用等。最后一片拼图就是将我们的应用部署到Apple iTunes Store 和 Google Play Store了。
+
+<!-- Deploying the application in entirely <i>optional</i> and it isn't quite trivial, because you also need to fork and deploy the [rate-repository-api](https://github.com/fullstack-hy2020/rate-repository-api). For the React Native application itself, you first need to create either iOS or Android builds by following Expo's [documentation](https://docs.expo.io/distribution/building-standalone-apps/). Then you can upload these builds to either Apple iTunes Store or Google Play Store. Expo has a [documentation](https://docs.expo.io/distribution/uploading-apps/) for this as well. -->
+
+部署应用是完全 <i>可选的</i>， 并不是十分繁琐，因为你需要fork 和部署 [rate-repository-api](https://github.com/fullstack-hy2020/rate-repository-api) 。对React Native 应用本身来说，你首先需要创建一个iOS或者Android 构建，可以参考Expo 的 [documentation](https://docs.expo.io/distribution/building-standalone-apps/) 。然后你可以将这些构建上传到Apple iTunes Store 或者 Google Play Store。 Expo 也有一个 [documentation](https://docs.expo.io/distribution/uploading-apps/) 来介绍。
+
+</div>

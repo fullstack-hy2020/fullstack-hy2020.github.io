@@ -294,6 +294,8 @@ const NoteForm = ({ onSubmit, handleChange, value}) => {
     </div>
   )
 }
+
+export default NoteForm
 ```
 
 <!-- Next let's define the form component inside of a <i>Togglable</i> component: -->

@@ -53,7 +53,17 @@ Traditionally, developing native iOS and Android applications has required the d
 <!-- Exercises are submitted via the [submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020) just like in the previous parts. Note that, exercises in this part are submitted <i>to a different course instance</i> than in parts 0-9. The parts 1-4 in the submission system refer to the sections a-d in this part. This means that you will be submitting exercises a single section at a time starting with this section, "Introduction to React Native", which is part 1 in the submission system. -->
 练习可以像之前章节那样通过[提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020)提交。注意，本章的练习是提交到与0-9章<i>不同的课程单元</i>。提交系统中的1-4部分是指的本章的a-d部分。也就是说你一次提交一个部分，“React Native 介绍”， 是提交系统中的part 1。
 
-<!-- During this part you will earn credits based on the number of exercises you complete. Completing <i>19 exercises</i> in this part will earn you <i>1 credit</i>. Completing <i>all the exercises</i> in this part will earn you <i>2 credits</i>.  -->
+<!-- During this part you will earn credits based on the number of exercises you complete. Completing <i>at least 19 exercises</i> in this part will earn you <i>1 credit</i>. Completing <i>at least 26 exercises</i> in this part will earn you <i>2 credits</i>. -->
+
+通过这个章节的学习，会根据你完成的练习数量获得学分。完成本章的<i>19个练习</i>会获得<i>1学分</i>。完成<i>所有的练习</i>会获得<i>2学分</i>。
+
+<!-- Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course: -->
+
+一旦你完成了对应的练习并希望获得学分，通过练习提交系统让我们知道你已经完成了课程：
+
+<!-- Note that the "exam done in Moodle" note refers to the [Full Stack Open course's exam](https://fullstackopen.com/en/part0/general_info#sign-up-for-the-exam), which <i>has to be completed</i> before you can earn credits from this part. -->
+
+注意“在Moodle中完成考试“ 可以参考  [Full Stack Open course's exam](https://fullstackopen.com/en/part0/general_info#sign-up-for-the-exam) ，在你从本章节获得学分前<i>必须完成</i>
 
 通过这个章节的学习，会根据你完成的练习数量获得学分。完成本章的<i>19个练习</i>会获得<i>1学分</i>。完成<i>所有的练习</i>会获得<i>2学分</i>。
 

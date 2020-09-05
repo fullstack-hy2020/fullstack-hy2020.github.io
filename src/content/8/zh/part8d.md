@@ -296,6 +296,10 @@ const PersonForm = ({ setError }) => {
 <!-- The code reads the cached state of <em>ALL\_PERSONS</em> query using [readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readquery) function and updates the cache with [writeQuery]https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writequery-and-writefragment) function adding the new person to the cached data.  -->
 该代码使用[readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readQuery)函数读取<em>ALL\_PERSONS</em> 查询的缓存状态，并使用[writeQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writeQuery-and-writefragment) 函数更新缓存，将新人添加到缓存数据中。
 
+Note that readQuery will throw an error if your cache does not contain all of the data necessary to fulfill the specified query. This can be solved using a try-catch block.
+
+注意如果你的缓存并没有包含所有的所需数据来满足特定的查询， readQuery 会抛出一个错误。可以通过try-catch代码块来解决这个问题。
+
 <!-- There are actually some situations where the only good way to keep the cache up to date is using _update_ -callbacks.  -->
 <!-- 实际上，在某些情况下，使缓存保持最新的唯一好方法是使用 update-callback。 -->
 
