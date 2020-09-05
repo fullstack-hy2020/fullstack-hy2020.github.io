@@ -22,7 +22,7 @@ lang: zh
 ### HTTP requests
 HTTP 请求
 
-React Native provides [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) for making HTTP requests in our applications. React Native also supports the good old [XMLHttpRequest API](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) which makes it possible to use third-party libraries such as [Axios](https://github.com/axios/axios). These APIs are the same as the ones in the browser environment and they are globally available without the need for an import.
+<!-- React Native provides [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) for making HTTP requests in our applications. React Native also supports the good old [XMLHttpRequest API](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) which makes it possible to use third-party libraries such as [Axios](https://github.com/axios/axios). These APIs are the same as the ones in the browser environment and they are globally available without the need for an import. -->
 
 React Native 提供了[Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)，在我们的应用中来创建HTTP 请求，React Native 同样支持老派的 [XMLHttpRequest API](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) ， 这样就能够使用例如[Axios](https://github.com/axios/axios)的三方库。这些API 与浏览器环境的API相同，并且是全局可用的无需引入。
 
@@ -130,9 +130,9 @@ export default RepositoryList;
 
 <!-- It is usually a good idea to log the server's response to be able to inspect it as we did in the <em>fetchRepositories</em> function. You should be able to see this log message in the Expo development tools if you navigate to your device's logs as we learned in the [Viewing logs](/en/part10/introduction_to_react_native#viewing-logs) section. If you are using the Expo's mobile app for development and the network request is failing, make sure that the computer you are using to run the server and your phone are <i>connected to the same Wi-Fi network</i>. If that's not possible either use an emulator in the same computer as the server is running in or set up a tunnel to the localhost, for example, using [Ngrok](https://ngrok.com/). -->
 
-一般将服务端的response 记录下来是不错的习惯，这样就可以像<em>fetchRepositories</em> 函数那样去检查它。你应当能够在Expo 开发者工具的设备日志中中看到日志信息，正如我们在(/zh/part10/introduction_to_react_native#viewing-logs) 一节中学到的那样。如果你正在使用Expo 移动app 来开发，而网络请求失败，确保你使用的电脑以及手机 <i>处于同一个Wifi 网络下</i>。如果不能在同一台电脑中使用模拟器和服务端程序，可以能搭建一个localhost 管道，使用[Ngrok](https://ngrok.com/) 这个库。
+一般将服务端的response 记录下来是不错的习惯，这样就可以像<em>fetchRepositories</em> 函数那样去检查它。你应当能够在Expo 开发者工具的设备日志中中看到日志信息，正如我们在(/zh/part10/react_native_介绍#viewing-logs) 一节中学到的那样。如果你正在使用Expo 移动app 来开发，而网络请求失败，确保你使用的电脑以及手机 <i>处于同一个Wifi 网络下</i>。如果不能在同一台电脑中使用模拟器和服务端程序，可以能搭建一个localhost 管道，使用[Ngrok](https://ngrok.com/) 这个库。
 
-The current data fetching code in the </em>RepositoryList</em> component could do some refactoring. For instance, the component is aware of the network request's details such as the end point's URL. In addition, the data fetching code has lots of reuse potential. Let's refactor the component's code by extract the data fetching code into its own hook. Create a directory <i>hooks</i> in the <i>src</i> directory and in that <i>hooks</i> directory create a file <i>useRepositories.js</i> with the following content:
+<!-- The current data fetching code in the </em>RepositoryList</em> component could do some refactoring. For instance, the component is aware of the network request's details such as the end point's URL. In addition, the data fetching code has lots of reuse potential. Let's refactor the component's code by extract the data fetching code into its own hook. Create a directory <i>hooks</i> in the <i>src</i> directory and in that <i>hooks</i> directory create a file <i>useRepositories.js</i> with the following content: -->
 
 当前 </em>RepositoryList</em> 组件的数据获取逻辑可以进行一定的重构。比如说，组件能够了解网络请求的详细信息，比如接口的URL。此外，数据的获取代码有许多重用的可能性。让我们提取出数据获取代码，放到一个单独的hook 中，来重构一下我们的组件。在<i>src</i> 目录中创建一个 hooks 目录，创建一个 <i>useRepositories.js</i> 文件，内容如下：
 
@@ -190,7 +190,7 @@ const RepositoryList = () => {
 export default RepositoryList;
 ```
 
-That's it, now the <em>RepositoryList</em> component is no longer aware of the way the repositories are acquired. Maybe in the future, we will acquire them through a GraphQL API instead of a REST API. We will see what happens.
+<!-- That's it, now the <em>RepositoryList</em> component is no longer aware of the way the repositories are acquired. Maybe in the future, we will acquire them through a GraphQL API instead of a REST API. We will see what happens. -->
 就是这样，现在<em>RepositoryList</em> 组件不再知道需要获取仓库的方式了。也许将来，我们会将获取数据的方式从REST API 替换成GraphQL API。现在就来实现它把。
 
 ### GraphQL and Apollo client
@@ -291,7 +291,7 @@ const Component = () => {
 };
 ```
 
-The same goes for organizing mutations. The only difference is that we define them in a different file, <i>mutations.js</i>. It is recommended to use [fragments](https://www.apollographql.com/docs/react/data/fragments/) in queries to avoid retyping the same fields over and over again.
+<!-- The same goes for organizing mutations. The only difference is that we define them in a different file, <i>mutations.js</i>. It is recommended to use [fragments](https://www.apollographql.com/docs/react/data/fragments/) in queries to avoid retyping the same fields over and over again. -->
 可以用同样的方式来组织mutation。 唯一的区别就是把他们定义在不同的文件下，即 <i>mutations.js</i>。 建议在查询中使用 [fragments](https://www.apollographql.com/docs/react/data/fragments/) 来避免重复输入相同的fields。
 
 ### Evolving the structure
@@ -301,7 +301,7 @@ The same goes for organizing mutations. The only difference is that we define th
 
 一旦我们的应用逐渐变大，甚至成倍增长，某些文件会大到难以管理，比如说我们有一个组件 <i>A</i>， 它渲染了组件 <i>B</i>和 <i>C</i>， 而所有这些组件都定义在了 <i>components</i>  目录的 <i>A.jsx</i> 文件中。在没有重构思想的情况下，我们倾向于将<em>B</em> 和 <em>C</em> 分离到各自的<i>B.jsx</i> 和 <i>C.jsx</i>文件中：这就产生了两种选择：
 
-- Create files <i>B.jsx</i> and <i>C.jsx</i> in the <i>components</i> directory. This results in the following structure:
+<!-- - Create files <i>B.jsx</i> and <i>C.jsx</i> in the <i>components</i> directory. This results in the following structure: -->
 - 在  <i>components</i> 文件夹中 创建 <i>B.jsx</i>和 <i>C.jsx</i> 两个文件，也就产生了如下的应用架构：
 
 ```
@@ -312,7 +312,7 @@ components/
   ...
 ```
 
-- Create a directory <i>A</i> in the <i>components</i> directory and create files <i>B.jsx</i> and <i>C.jsx</i> there. To avoid breaking components that import the <i>A.jsx</i> file, move the <i>A.jsx</i> file to the <i>A</i> directory and rename it to <i>index.jsx</i>. This results in the following structure:
+<!-- - Create a directory <i>A</i> in the <i>components</i> directory and create files <i>B.jsx</i> and <i>C.jsx</i> there. To avoid breaking components that import the <i>A.jsx</i> file, move the <i>A.jsx</i> file to the <i>A</i> directory and rename it to <i>index.jsx</i>. This results in the following structure: -->
 - 在 <i>components</i>  文件夹中创建一个  <i>A</i> 文件夹， 并在里面创建<i>B.jsx</i> 和<i>C.jsx</i>  两个文件。为了避免破坏对<i>A.jsx</i> 的引入，将<i>A.jsx</i> 文件移动到 <i>A</i> 文件夹中，并重命名为 <i>index.jsx</i>。也就产生了如下的应用架构：
 
 ```
@@ -324,7 +324,7 @@ components/
   ...
 ```
 
-The first option is fairly decent, however, if components <em>B</em> and <em>C</em> are not reusable outside the component <em>A</em>, it is useless to bloat the <i>components</i> directory by adding them as separate files. The second option is quite modular and doesn't break any imports because importing a path such as <i>./A</i> will match both <i>A.jsx</i> and <i>A/index.jsx</i>.
+<!-- The first option is fairly decent, however, if components <em>B</em> and <em>C</em> are not reusable outside the component <em>A</em>, it is useless to bloat the <i>components</i> directory by adding them as separate files. The second option is quite modular and doesn't break any imports because importing a path such as <i>./A</i> will match both <i>A.jsx</i> and <i>A/index.jsx</i>. -->
 第一个选择比较正统，但是如果组件 <em>B</em>和<em>C</em>  在 <em>A</em> 之外并没什么可复用的，那通过增加单独的文件而产生的对 <i>components</i> 文件夹的膨胀就显得没有必要。 第二个选项是有些模块化的，并不会破坏任何引入，因为像 <i>./A</i> 来引入刚好会同时引入 <i>A.jsx</i> 和<i>A/index.jsx</i>
 </div>
 
@@ -335,7 +335,7 @@ The first option is fairly decent, however, if components <em>B</em> and <em>C</
 #### Exercise 10.11: fetching repositories with Apollo Client
 利用Apollo Client 来获得仓库列表
 
-We want to replace the Fetch API implementation in the <em>useRepositories</em> hook with a GraphQL query. Open the GraphQL Playground at [http://localhost:5000/graphql](http://localhost:5000/graphql) and open to documentation by clicking the <i>docs</i> tab. Look up the <em>repositories</em> query. The query has some arguments, however, all of these are optional so you don't need to specify them. In the GraphQL Playground form a query for fetching the repositories with the fields you are currently displaying in the application. The result will be paginated and it contains the up to first 30 results by default. For now, you can ignore the pagination entirely.
+<!-- We want to replace the Fetch API implementation in the <em>useRepositories</em> hook with a GraphQL query. Open the GraphQL Playground at [http://localhost:5000/graphql](http://localhost:5000/graphql) and open to documentation by clicking the <i>docs</i> tab. Look up the <em>repositories</em> query. The query has some arguments, however, all of these are optional so you don't need to specify them. In the GraphQL Playground form a query for fetching the repositories with the fields you are currently displaying in the application. The result will be paginated and it contains the up to first 30 results by default. For now, you can ignore the pagination entirely. -->
 我们希望利用 GraphQL query 在<em>useRepositories</em> 中替换Fetch API 的实现。 在  [http://localhost:5000/graphql](http://localhost:5000/graphql) 打开GraphQL Playground，并点击<i>docs</i>  tab页面打开文档。 查找<em>repositories</em> 的查询。该查询有一些蚕食，但是所有的参数都是可选的，不需要额外指定它们。在GraphQL Playground 中生成一个应用中用于展示信息的查询，包含仓库列表和其中对应的字段。结果是份好页的，默认包含了前30条记录。目前，你可以完全忽略分页技术。
 
 <!-- Once the query is working in the GraphQL Playground, use it to replace the Fetch API implementation in the <em>useRepositories</em> hook. This can be achieved using the [useQuery](https://www.apollographql.com/docs/react/api/react-hooks/#usequery) hook. The <em>gql</em> template literal tag can be imported from the Apollo Boost as instructed earlier. Consider using the structure recommended earlier for the GraphQL related code. To avoid future caching issues, use the _cache-and-network_ [fetch policy](https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy) in the query. It can be used with the <em>useQuery</em> hook like this: -->
@@ -348,7 +348,7 @@ useQuery(MY_QUERY, {
 });
 ```
 
-The changes in the <em>useRepositories</em> hook should not affect the <em>RepositoryList</em> component in any way.
+<!-- The changes in the <em>useRepositories</em> hook should not affect the <em>RepositoryList</em> component in any way. -->
 无论怎样， 在 <em>useRepositories</em>  hook 中做的修改不应当影响到<em>RepositoryList</em>  组件。
 
 </div>
@@ -362,11 +362,11 @@ The changes in the <em>useRepositories</em> hook should not affect the <em>Repos
 
 每个应用都很可能在不止一个环境中运行。两个最常见的环境便是开发环境和生产环境。除了这两个我们先不管其他的，开发环境是我们当前应用正在使用的。不同的环境中通常会有不同的依赖，比如说我们使用的服务端在本地运行时可能使用的是一个本地数据库而部署在生产环境的会使用生产数据库。为了使代码与环境独立，我们需要参数化这些依赖。目前来说我们使用的一个与环境强相关的一个硬编码就是：服务端的URL。
 
-We have previously learned that we can provide running programs with environment variables. These variables can be defined in the command line or using environment configuration files such as <i>.env</i> files and third-party libraries such as <i>Dotenv</i>. Unfortunately, React Native doesn't have direct support for environment variables. However, we can access the Expo configuration defined in the <i>app.json</i> file at runtime from our JavaScript code. This configuration can be used define and access environment dependant variables.
+<!-- We have previously learned that we can provide running programs with environment variables. These variables can be defined in the command line or using environment configuration files such as <i>.env</i> files and third-party libraries such as <i>Dotenv</i>. Unfortunately, React Native doesn't have direct support for environment variables. However, we can access the Expo configuration defined in the <i>app.json</i> file at runtime from our JavaScript code. This configuration can be used define and access environment dependant variables. -->
 
 如我们之前学到的我们可以为运行的程序提供环境变量。这些变量可以定义在启动命令，或者定义在环境配置文件中，比如说<i>.env</i> 文件或使用三方库 <i>Dotenv</i>。不幸的是， React Native 对环境变量并没有直接的支持。到那时我们可以利用JavaScript 代码在运行时访问Expo 配置，它定义在<i>app.json</i>  中。这个配置可以用来访问特定环境的变量。
 
-The configuration can be accessed by importing the <em>Constants</em> constant from the <i>expo-constants</i> module as be have done a few times before. Once imported, the <em>Constants.manifest</em> property will contain the configuration. Let's try this by logging <em>Constants.manifest</em> in the <em>App</em> component:
+<!-- The configuration can be accessed by importing the <em>Constants</em> constant from the <i>expo-constants</i> module as be have done a few times before. Once imported, the <em>Constants.manifest</em> property will contain the configuration. Let's try this by logging <em>Constants.manifest</em> in the <em>App</em> component: -->
 这些配置可以从 <i>expo-constants</i> 模块通过引入<em>Constants</em> 常量，我们之前已经做过几次了。一旦引入， <em>Constants.manifest</em> 属性就会携带着配置。让我们通过在 <em>App</em> 组件中打印 <em>Constants.manifest</em>日志查看一下：
 
 ```javascript
@@ -395,10 +395,10 @@ const App = () => {
 export default App;
 ```
 
-You should now see the configuration in the logs.
+<!-- You should now see the configuration in the logs. -->
 你现在应该可以看到日志中的配置信息了。
 
-The next step is to use the configuration to define environment dependant variables in our application. Let's get started by renaming the <i>app.json</i> file to <i>app.config.js</i>. Once the file is renamed, we can use JavaScript inside the configuration file. Change the file contents so that the previous object:
+<!-- The next step is to use the configuration to define environment dependant variables in our application. Let's get started by renaming the <i>app.json</i> file to <i>app.config.js</i>. Once the file is renamed, we can use JavaScript inside the configuration file. Change the file contents so that the previous object: -->
 下一步是在我们的应用中使用配置来定义环境独立的变量。我们首先将 <i>app.json</i> 文件重命名为 <i>app.config.js</i> 。 一旦文件重命名了，我们可以在配置文件中使用JavaScript。修改文件内容，之前的对象：
 
 ```javascript
@@ -420,7 +420,7 @@ export default {
 };
 ```
 
-Expo has reserved an [extra](https://docs.expo.io/guides/environment-variables/#using-app-manifest-extra) property in the configuration for any application-specific configuration. To see how this works, let's add a <em>env</em> variable into our application's configuration:
+<!-- Expo has reserved an [extra](https://docs.expo.io/guides/environment-variables/#using-app-manifest-extra) property in the configuration for any application-specific configuration. To see how this works, let's add a <em>env</em> variable into our application's configuration: -->
 Expo 已经在配置中为一些应用相关的配置保留了一个[extra](https://docs.expo.io/guides/environment-variables/#using-app-manifest-extra)属性。我们通过在应用的配置中增加一个 <em>env</em>变量来看看这是怎么运作的。
 
 ```javascript
@@ -435,11 +435,11 @@ export default {
 };
 ```
 
-Restart Expo development tools to apply the changes and you should see that the value of <em>Constants.manifest</em> property has changed and now includes the <em>extra</em> property containing our application-specific configuration. Now the value of the <em>env</em> variable is accessible through the <em>Constants.manifest.extra.env</em> property.
+<!-- Restart Expo development tools to apply the changes and you should see that the value of <em>Constants.manifest</em> property has changed and now includes the <em>extra</em> property containing our application-specific configuration. Now the value of the <em>env</em> variable is accessible through the <em>Constants.manifest.extra.env</em> property. -->
 
 重启 Expo 开发工具来生效这些变化，你会看到 <em>Constants.manifest</em> 属性已经变化了，并包含了 <em>extra</em> 属性，其中携带了我们应用相关的配置。现在 <em>env</em> 变量的值就可以通过 <em>Constants.manifest.extra.env</em> 属性来访问了。
 
-Because using hard coded configuration is a bit silly, let's use an environment variable instead:
+<!-- Because using hard coded configuration is a bit silly, let's use an environment variable instead: -->
 由于硬编码配置有点中二，让我们使用环境变量来替换一下吧：
 
 ```javascript
@@ -604,7 +604,7 @@ doShopping();
 
 如果你知道认证查询是如何运用的，在<i>hooks</i> 文件夹中创建一个  _useSignIn.js_ 文件。 在文件中实现一个 <em>useSignIn</em>  hook ，能够使用 [useMutation](https://www.apollographql.com/docs/react/api/react-hooks/#usemutation)  hook发送 <em>authorize</em>  变化。注意 变化有一个 <i>唯一</i>的参数叫做  <em>credentials</em> ，是一种  <em>AuthorizeInput</em> 类型， 这种  [input type](https://graphql.org/graphql-js/mutations-and-input-types)  类型包含了 两个字段。
 
-The return value of the hook should be a tuple <em>[signIn, result]</em> where <em>result</em> is the mutations result as it is returned by the <em>useMutation</em> hook and <em>signIn</em> a function that runs the mutation with a <em>{ username, password }</em> object argument. Hint: don't pass the mutation function to the return value directly. Instead, return a function that calls the mutation function like this:
+<!-- The return value of the hook should be a tuple <em>[signIn, result]</em> where <em>result</em> is the mutations result as it is returned by the <em>useMutation</em> hook and <em>signIn</em> a function that runs the mutation with a <em>{ username, password }</em> object argument. Hint: don't pass the mutation function to the return value directly. Instead, return a function that calls the mutation function like this: -->
 
 该hook 的返回值应当是一个 <em>[signIn, result]</em> tuple ， <em>result</em> 是变化的结果，也就是  <em>useMutation</em>  hook 的返回， <em>signIn</em> 函数接收一个 对象参数来运行这个变化。提示： 不要直接将变化函数直接传递给返回值。
 
@@ -620,7 +620,7 @@ const useSignIn = () => {
 };
 ```
 
-Once the hook is implemented, use it in the <em>SignIn</em> component's <em>onSubmit</em> callback for example like this:
+<!-- Once the hook is implemented, use it in the <em>SignIn</em> component's <em>onSubmit</em> callback for example like this: -->
 一旦这个hook 实现了，像如下使用 <em>SignIn</em> 组件的 <em>onSubmit</em> 回调函数：
 
 ```javascript
@@ -648,7 +648,7 @@ const SignIn = () => {
 #### Exercise 10.12: storing the acess token step1
 存储访问token 步骤1
 
-Now that we can obtain the access token we need to store it. Create a file <i>authStorage.js</i> in the <i>utils</i> directory with the following content:
+<!-- Now that we can obtain the access token we need to store it. Create a file <i>authStorage.js</i> in the <i>utils</i> directory with the following content: -->
 现在我们可以获取到需要存储的访问token 了。 在<i>utils</i>  文件夹中创建一个<i>authStorage.js</i>  文件，内容如下：
 
 ```javascript
@@ -675,7 +675,7 @@ class AuthStorage {
 export default AuthStorage;
 ```
 
-Next, implement the methods <em>AuthStorage.getAccessToken</em>, <em>AuthStorage.setAccessToken</em> and <em>AuthStorage.removeAccessToken</em>. Use the <em>namespace</em> variable to give your keys a namespace like we did in the previous example.
+<!-- Next, implement the methods <em>AuthStorage.getAccessToken</em>, <em>AuthStorage.setAccessToken</em> and <em>AuthStorage.removeAccessToken</em>. Use the <em>namespace</em> variable to give your keys a namespace like we did in the previous example. -->
 下一步，实现 <em>AuthStorage.getAccessToken</em>, <em>AuthStorage.setAccessToken</em> 和 <em>AuthStorage.removeAccessToken</em> 三个方法，使用 <em>namespace</em> 变量来给你的key 一个命名空间，仿照之前的例子。
 
 </div>
@@ -685,7 +685,7 @@ Next, implement the methods <em>AuthStorage.getAccessToken</em>, <em>AuthStorage
 ### Enhancing Apollo Client's requests
 增强Apollo 客户端的请求
 
-Now that we have implemented storage for storing the user's access token, it is time to start using it. Initialize the storage in the <em>App</em> component:
+<!-- Now that we have implemented storage for storing the user's access token, it is time to start using it. Initialize the storage in the <em>App</em> component: -->
 现在我们已经实现了存储用户访问token 的存储功能，是时候展现真正的技术了。在 <em>App</em> 组件中初始化存储。
 
 ```javascript

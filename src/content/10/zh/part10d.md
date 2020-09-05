@@ -13,14 +13,14 @@ lang: zh
 ### Testing React Native applications
 测试React Native 应用
 
-To start testing code of any kind, the first thing we need is a testing framework, which we can use to run a set of test cases and inspect their results. For testing a JavaScript application, [Jest](https://jestjs.io/) is a popular candidate for such testing framework. For testing an Expo based React Native application with Jest, Expo provides a set of Jest configuration in a form of [jest-expo](https://github.com/expo/expo/tree/master/packages/jest-expo) preset. In order to use ESLint in the Jest's test files, we also need the [eslint-plugin-jest](https://www.npmjs.com/package/eslint-plugin-jest) plugin for ESLint. Let's get started by installing the packages:
+<!-- To start testing code of any kind, the first thing we need is a testing framework, which we can use to run a set of test cases and inspect their results. For testing a JavaScript application, [Jest](https://jestjs.io/) is a popular candidate for such testing framework. For testing an Expo based React Native application with Jest, Expo provides a set of Jest configuration in a form of [jest-expo](https://github.com/expo/expo/tree/master/packages/jest-expo) preset. In order to use ESLint in the Jest's test files, we also need the [eslint-plugin-jest](https://www.npmjs.com/package/eslint-plugin-jest) plugin for ESLint. Let's get started by installing the packages: -->
 在开始着手测试之前，我们要了解的第一个议题就是测试框架，测试框架让我们能够用来跑一系列的测试用例，并检查它们的结果。在测试JavaScript 应用来说，测试框架[Jest](https://jestjs.io/) 是一个广泛使用的备选项。利用Jest 来测试基于React Native 的Expo 应用，Expo 在 [jest-expo](https://github.com/expo/expo/tree/master/packages/jest-expo) 预先设置中提供了一系列Jest 配置，为了在Jest的测试文件中使用ESLint ， 我们还需要[eslint-plugin-jest](https://www.npmjs.com/package/eslint-plugin-jest) 插件来启用ESLint。 让我们开始安装这些包吧：
 
 ```shell
 npm install --save-dev jest jest-expo eslint-plugin-jest
 ```
 
-To use the jest-expo preset in Jest, we need to add the following Jest configuration to the <i>package.json</i> file along with the <i>test</i> script:
+<!-- To use the jest-expo preset in Jest, we need to add the following Jest configuration to the <i>package.json</i> file along with the <i>test</i> script: -->
 为了用Jest 使用 jest-expo  预先配置， 我们需要在  <i>package.json</i> 文件中的Jest 配置里加上如下内容，以及 <i>test</i> 脚本。
 
 ```javascript
@@ -124,7 +124,7 @@ src/
 现在我们已经搭建起了Jest 并跑了一个简单的测试，是时候探究如何测试组件了。我们知道，测试组件需要一种方法来将组件渲染出去并模拟触发不同的事件，例如说按一个按钮。为了这些目的，可以选择一个 [Testing Library](https://testing-library.com/docs/intro)  库集合，提供了测试不同平台组件的一系列测试库。所有的库都采用共享类似的API来测试用户的接口组件，完全是面向用户的。
 
 <!-- In [part 5](/en/part5/testing_react_apps) we got familiar with one of these libraries, the [React Testing Library](https://testing-library.com/docs/react-testing-library/intro). Unfortunately, this library is only suitable for testing React web applications. Luckily, there exists a React Native counterpart for this library, which is the [React Native Testing Library](https://callstack.github.io/react-native-testing-library/). This is the library we will be using while testing our React Native application's components. The good news is, that these libraries share a very similar API, so there aren't too many new concepts to learn. In addition to the React Native Testing Library, we need a set of React Native specific Jest matchers such as <em>toHaveTextContent</em> and <em>toHaveProp</em>. These matchers are provided by the [jest-native](https://github.com/testing-library/jest-native) library. Before getting into the details, let's install these packages: -->
-在[part 5](/zh/part5/testing_react_apps) 中我们熟悉了他们中的一员， [React Testing Library](https://testing-library.com/docs/react-testing-library/intro) 。 不行的是，这个库仅仅对于测试React web应用是合适的。幸运的是，这个库有一个React Native版的兄弟，那就是[React Native Testing Library](https://callstack.github.io/react-native-testing-library/) 。这个库可以用来测试React Native 应用的组件。好消息是，这些库共享类似的API，所以没有很多新的概念需要了解。除了React Native Testing Library ， 我们需要一系列React Native 特定的Jest 适配器，例如<em>toHaveTextContent</em> 和  <em>toHaveProp</em> 。 这些适配器是由[jest-native](https://github.com/testing-library/jest-native) 库提供的。在深入细节以前，让我们来安装这些库吧：
+在[part 5](/zh/part5/测试_react_应用) 中我们熟悉了他们中的一员， [React Testing Library](https://testing-library.com/docs/react-testing-library/intro) 。 不行的是，这个库仅仅对于测试React web应用是合适的。幸运的是，这个库有一个React Native版的兄弟，那就是[React Native Testing Library](https://callstack.github.io/react-native-testing-library/) 。这个库可以用来测试React Native 应用的组件。好消息是，这些库共享类似的API，所以没有很多新的概念需要了解。除了React Native Testing Library ， 我们需要一系列React Native 特定的Jest 适配器，例如<em>toHaveTextContent</em> 和  <em>toHaveProp</em> 。 这些适配器是由[jest-native](https://github.com/testing-library/jest-native) 库提供的。在深入细节以前，让我们来安装这些库吧：
 
 ```shell
 npm install --save-dev @testing-library/react-native @testing-library/jest-native
@@ -440,7 +440,7 @@ await act(async () => {
 ### Extending our application
 扩展我们的应用
 
-It is time to put everything we have learned so far to good use and start extending our application. Our application still lacks a few important features such as reviewing a repository and registering a user. The upcoming exercises will focus on these essential features.
+<!-- It is time to put everything we have learned so far to good use and start extending our application. Our application still lacks a few important features such as reviewing a repository and registering a user. The upcoming exercises will focus on these essential features. -->
 是时候将我们所学的东西放到一起来扩展我们的应用了。我们的应用仍然缺少一些重要的特性，比如说查看某个仓库或者注册一个用户。接下来的练习会聚焦于这些重要的功能。
 
 </div>
@@ -456,7 +456,7 @@ It is time to put everything we have learned so far to good use and start extend
 
 为单一仓库实现一个视图，包含与仓库列表相同的仓库信息，但需要一个按钮来在GitHub中打开。最好能在  <em>RepositoryList</em> 组件中重用 <em>RepositoryItem</em>  组件，并利用一个boolean属性控制 Github 仓库按钮的展现。
 
-The repository's URL is in the <em>url</em> field of the <em>Repository</em> type in the GraphQL schema. You can fetch a single repository from the Apollo server with the <em>repository</em> query. The query has a single argument, which is the id of the repository. Here's a simple example of the <em>repository</em> query:
+<!-- The repository's URL is in the <em>url</em> field of the <em>Repository</em> type in the GraphQL schema. You can fetch a single repository from the Apollo server with the <em>repository</em> query. The query has a single argument, which is the id of the repository. Here's a simple example of the <em>repository</em> query: -->
 仓库的URL位于GraphQL schema中 <em>Repository</em> 类型的  <em>url</em> 字段。你可以利用  <em>repository</em> 查询从Apollo 服务器获取一个仓库。查询包含一个单一的参数，就是仓库的id。以下是一个简单的 <em>repository</em> 查询。
 
 ```javascript
@@ -486,7 +486,7 @@ The repository's URL is in the <em>url</em> field of the <em>Repository</em> typ
 
 #### Exercise 10.20: repository's review list
 
-Now that we have a view for a single repository, let's display repository's reviews there. Repository's reviews are in the <em>reviews</em> field of the <em>Repository</em> type in the GraphQL schema. <em>reviews</em> is a similar paginated list as in the <em>repositories</em> query. Here's an example of getting reviews of a repository:
+<!-- Now that we have a view for a single repository, let's display repository's reviews there. Repository's reviews are in the <em>reviews</em> field of the <em>Repository</em> type in the GraphQL schema. <em>reviews</em> is a similar paginated list as in the <em>repositories</em> query. Here's an example of getting reviews of a repository: -->
 现在我们有了一个单独的仓库，让我们展示仓库的评论吧。仓库的评论位于GraphQL schema的 <em>Repository</em> 类型的 <em>reviews</em> 字段中。 <em>reviews</em> 是个和 <em>repositories</em>  查询类似的分页列表。如下是一个获取仓库评论信息的例子：
 
 ```javascript
@@ -515,7 +515,7 @@ Now that we have a view for a single repository, let's display repository's revi
 <!-- Review's <em>text</em> field contains the textual review, <em>rating</em> field a numeric rating between 0 and 100, and <em>createdAt</em> the date when the review was created. Review's <em>user</em> field contains the reviewer's information, which is of type <em>User</em>. -->
 评论的  <em>text</em>  字段包含着文本评论，数值类型的 <em>rating</em>  字段，位于0-100之间，以及 <em>createdAt</em>  表示评论创建的时间。评论的 <em>user</em> 字段包含评论者的信息，type类型为  <em>User</em>。
 
-We want to display reviews as a scrollable list, which makes [FlatList](https://reactnative.dev/docs/flatlist) a suitable component for the job. To display the previous exercise's repository's information at the top of the list, you can use the <em>FlatList</em> components [ListHeaderComponent](https://reactnative.dev/docs/flatlist#listheadercomponent) prop. You can use the [ItemSeparatorComponent](https://reactnative.dev/docs/flatlist#itemseparatorcomponent) to add some space between the items like in the <em>RepositoryList</em> component. Here's an example of the structure:
+<!-- We want to display reviews as a scrollable list, which makes [FlatList](https://reactnative.dev/docs/flatlist) a suitable component for the job. To display the previous exercise's repository's information at the top of the list, you can use the <em>FlatList</em> components [ListHeaderComponent](https://reactnative.dev/docs/flatlist#listheadercomponent) prop. You can use the [ItemSeparatorComponent](https://reactnative.dev/docs/flatlist#itemseparatorcomponent) to add some space between the items like in the <em>RepositoryList</em> component. Here's an example of the structure: -->
 我们想要将评论展示成可以滚动的列表， [FlatList](https://reactnative.dev/docs/flatlist)  就是一个合适的组件。为了展示之前的练习中的仓库信息在列表的头部，你可以使用 <em>FlatList</em> 组件的 [ListHeaderComponent](https://reactnative.dev/docs/flatlist#listheadercomponent) 属性。你可以使用 [ItemSeparatorComponent](https://reactnative.dev/docs/flatlist#itemseparatorcomponent)  在元素间增加一些空间，例如 <em>RepositoryList</em> 组件。下面是一个该结构的例子：
 
 ```javascript
@@ -544,7 +544,7 @@ const SingleRepository = () => {
 export default SingleRepository;
 ```
 
-The final version of the repository's reviews list should look something like this:
+<!-- The final version of the repository's reviews list should look something like this: -->
 最终版本的仓库评论列表应当如下图所示：
 
 ![Application preview](../../images/10/14.jpg)
@@ -575,7 +575,7 @@ The final version of the repository's reviews list should look something like th
 
 阅览Yup的[documentation](https://github.com/jquense/yup#yup) ，找到合适的验证器。利用显眼的错误信息搭配验证器使用。验证信息可以定义为验证方法的 <em>message</em> 入参。你可以使用 <em>TextInput</em> 组件的 [multiline](https://reactnative.dev/docs/textinput#multiline) 属性来将评论字段扩展成多行。
 
-You can create a review using the <em>createReview</em> mutation. Check this mutation's arguments in the _docs_ tab in the GraphQL playground. You can use the [useMutation](https://www.apollographql.com/docs/react/api/react-hooks/#usemutation) hook to send a mutation to the Apollo Server.
+<!-- You can create a review using the <em>createReview</em> mutation. Check this mutation's arguments in the _docs_ tab in the GraphQL playground. You can use the [useMutation](https://www.apollographql.com/docs/react/api/react-hooks/#usemutation) hook to send a mutation to the Apollo Server. -->
 
 你可以利用  <em>createReview</em>  变化来创建一个评论。在GraphQL playground 的 _docs_  tab页检查变化的入参。你可以使用 [useMutation](https://www.apollographql.com/docs/react/api/react-hooks/#usemutation)  hook来发送变化到Apollo Server。
 
@@ -646,9 +646,9 @@ useQuery(GET_REPOSITORY, {
 <!-- At the moment repositories in the reviewed repositories list are ordered by the date of repository's first review. Implement a feature that allows users to select the principle, which is used to order the repositories. The available ordering principles should be: -->
 当前的已评论仓库列表中的仓库是按照仓库首次评论的日期排序的。实现一个功能来允许用户选择主要的排序字段。可选的排序策略应当是：
 
-- Latest repositories. The repository with the latest first review is on the top of the list. This is the current behavior and should be the default principle.
+<!-- - Latest repositories. The repository with the latest first review is on the top of the list. This is the current behavior and should be the default principle.
 - Highest rated repositories. The repository with the <i>highest</i> average rating is on the top of the list.
-- Lowest rated repositories. The repository with the <i>lowest</i> average rating is on the top of the list.
+- Lowest rated repositories. The repository with the <i>lowest</i> average rating is on the top of the list. -->
 
 - 最新的仓库。拥有最新评论的仓库位于最顶部。这是当前的排序规则，应当为默认策略。
 - 最高票的仓库。拥有 <i>最高</i> 平均投票的仓库位于最顶部。
@@ -743,7 +743,7 @@ export class RepositoryListContainer extends React.Component {
 
 当API从某个集合中返回一个排序列表，通常会返回一个完整集合的子集来减轻带宽的压力，以及减少客户端内存的使用。理想的自集是能够参数化的，比如说在某些索引上获取前20条记录。这通常会涉及  <i>pagination</i> 技术。当获取结果是使用指针从某个特定结果获得的，我们就称之为 <i>基于指针的分页</i>。
 
-So cursor is just a serialized presentation of an item in an ordered list. Let's have a look at the paginated repositories returned by the <em>repositories</em> query using the following query:
+<!-- So cursor is just a serialized presentation of an item in an ordered list. Let's have a look at the paginated repositories returned by the <em>repositories</em> query using the following query: -->
 
 指针就是排序列表中某个结果序列位置的展示。让我们看一下 <em>repositories</em>  查询返回的分页结果：
 
@@ -1071,7 +1071,7 @@ const GET_AUTHORIZED_USER = gql`
 `;
 ```
 
-You can provide the query with an <em>includeReviews</em> argument an use that with the <em>include</em> directive:
+<!-- You can provide the query with an <em>includeReviews</em> argument an use that with the <em>include</em> directive: -->
 你可以在使用 <em>include</em> 指令时提供一个  <em>includeReviews</em> 查询参数，
 
 ```javascript
