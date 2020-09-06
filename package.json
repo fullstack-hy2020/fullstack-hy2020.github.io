@@ -6,6 +6,7 @@
   "dependencies": {
     "anchorate": "^1.2.3",
     "axios": "^0.18.0",
+    "classnames": "^2.2.6",
     "formik": "^2.1.5",
     "gatsby": "^2.0.53",
     "gatsby-image": "^2.0.20",

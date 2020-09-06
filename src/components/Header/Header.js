@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { Link } from 'gatsby';
 import Navigation from '../Navigation/Navigation';
 import { TripleBorder } from '../TripleBorder/TripleBorder';
-import SearchImage from '../Search/SearchImage';
+import SearchImage from './SearchImage';
 
 class Header extends Component {
   constructor(props) {

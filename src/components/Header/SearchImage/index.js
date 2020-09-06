@@ -1,11 +1,11 @@
 import React from 'react'
 import { Link } from 'gatsby';
-import searchIcon from '../../images/search-icon.svg';
-import imageIconStyles from './searchImage.module.css'
+import searchIcon from '../../../images/search-icon.svg';
+import styles from './SearchImage.module.css'
 
 const SearchImage = ({ lang }) => {
   return (
-    <div className={imageIconStyles.container}>
+    <div className={styles.container}>
       <Link
         to={
           lang === 'fi'
@@ -16,7 +16,7 @@ const SearchImage = ({ lang }) => {
         <img
           src={searchIcon}
           alt='search icon'
-          className={imageIconStyles.image}
+          className={styles.image}
         />
       </Link>
     </div>

@@ -5,8 +5,7 @@ const createSearchConfig = (indexName, language) => {
       name: indexName,
       engine: 'flexsearch',
       engineOptions: 'speed',
-      query:
-        `
+      query: `
         {
           allMarkdownRemark(filter: {frontmatter: {lang: {eq: "${language}"}}}) {
             nodes {
@@ -25,16 +24,16 @@ const createSearchConfig = (indexName, language) => {
       index: ['body'],
       store: ['id', 'part', 'letter', 'lang'],
       normalizer: ({ data }) =>
-        data.allMarkdownRemark.nodes.map(node => ({
+        data.allMarkdownRemark.nodes.map((node) => ({
           id: node.id,
           part: node.frontmatter.part,
           letter: node.frontmatter.letter,
           lang: node.frontmatter.lang,
           body: node.rawMarkdownBody,
         })),
-    }
-  }
-}
+    },
+  };
+};
 
 module.exports = {
   siteMetadata: {

@@ -1,8 +1,6 @@
-
 .inputField {
   appearance: none;
-  width: 50%;
-  min-width: 300px;
+  width: 100%;
   border: 0;
   font-family: inherit;
   padding: 16px 12px 16px 12px;   

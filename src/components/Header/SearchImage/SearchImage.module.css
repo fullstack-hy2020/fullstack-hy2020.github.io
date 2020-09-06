@@ -8,13 +8,11 @@
   height: 40px;
   position: absolute;
   top: 50%;
-  -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   border: 2px solid white;
   border-radius: 3px;
 }
 
- .image:hover {
-    border-color: rgba(0, 0, 0, 0.6);
-  }
-
+.image:hover {
+  border-color: rgba(0, 0, 0, 0.6);
+}
