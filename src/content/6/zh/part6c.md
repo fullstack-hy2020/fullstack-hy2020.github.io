@@ -278,7 +278,7 @@ export default {
 ```
 
 <!-- The method _addNote_ of the component <i>NoteForm</i> changes slightly: -->
-组件<i>NoteForm</i> 的方法 addNote 略有变化:
+组件<i>NewNote</i> 的方法 addNote 略有变化:
 
 ```js
 import React from 'react'

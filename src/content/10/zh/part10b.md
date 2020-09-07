@@ -2,7 +2,7 @@
 mainImage: ../../../images/part-1.svg
 part: 10
 letter: b
-lang: en
+lang: zh
 ---
 
 <div class="content">
@@ -246,7 +246,7 @@ export default RepositoryList;
 
 <!-- Now that we have a basic understanding of how core components work and we can use them to build a simple user interface it is time to add some style. In [part 2](/en/part2/adding_styles_to_react_app) we learned that in the browser environment we can define React component's style properties using CSS. We had an option to either define these styles inline using the <em>style</em> prop or in a CSS file with a suitable selector. -->
 
-既然我们已经基本了解了核心组件的使用方法以及如何构建一个简单的用户界面，让我开始为它增加一些样式吧，在 [第二章](/zh/part2/adding_styles_to_react_app)我们学会了在浏览器环境中我们可以利用CSS 定义React组件的style 属性。我们既可以以行内形式使用<em>style</em> 属性，或者在CSS文件中利用合适的选择器。
+既然我们已经基本了解了核心组件的使用方法以及如何构建一个简单的用户界面，让我开始为它增加一些样式吧，在 [第二章](/zh/part2/给_react应用加点样式)我们学会了在浏览器环境中我们可以利用CSS 定义React组件的style 属性。我们既可以以行内形式使用<em>style</em> 属性，或者在CSS文件中利用合适的选择器。
 
 <!-- There are many similarities in the way style properties are attached to React Native's core components and the way they are attached to DOM elements. In React Native most of the core components accept a prop called <em>style</em>. The <em>style</em> prop accepts an object with style properties and their values. These style properties are in most cases the same as in CSS, however, property names are in <i>camelCase</i>. This means that CSS properties such as <em>padding-top</em> and <em>font-size</em> are written as <em>paddingTop</em> and <em>fontSize</em>. Here is a simple example of how to use the <em>style</em> prop: -->
 
@@ -267,11 +267,11 @@ const BigBlueText = () => {
 };
 ```
 
-On top of the property names, you might have noticed another difference in the example. In CSS numerical property values commonly have a unit such as <i>px</i>, <i>%</i>, <i>em</i> or <i>rem</i>. In React Native all dimension related property values such as <em>width</em>, <em>height</em>, <em>padding</em>, and <em>margin</em> as well as font sizes are <i>unitless</i>. These unitless numeric values represent <i>density-independent pixels</i>. In case you are wondering what are the available style properties for certain core component, check the [React Native Styling Cheat Sheet](https://github.com/vhpoet/react-native-styling-cheat-sheet).
+<!-- On top of the property names, you might have noticed another difference in the example. In CSS numerical property values commonly have a unit such as <i>px</i>, <i>%</i>, <i>em</i> or <i>rem</i>. In React Native all dimension related property values such as <em>width</em>, <em>height</em>, <em>padding</em>, and <em>margin</em> as well as font sizes are <i>unitless</i>. These unitless numeric values represent <i>density-independent pixels</i>. In case you are wondering what are the available style properties for certain core component, check the [React Native Styling Cheat Sheet](https://github.com/vhpoet/react-native-styling-cheat-sheet). -->
 
 除了属性名称，你应该在例子中还发现了另一个不同点。那就是在CSS中， 数值型属性值一般会使用例如 <i>px</i>, <i>%</i>, <i>em</i> or <i>rem</i> 这种单位。而在React Native中，所有的与维度相关的属性类似<em>width</em>, <em>height</em>, <em>padding</em>, and <em>margin</em> 与文字大小一样都是<i>无单位</i>的。这些没有单位的数值表示的是<i>density-independent pixels</i>（密度独立像素，DIP）。如果你对特定核心组件所能使用的样式属性感兴趣，可以查看[React Native Styling Cheat Sheet](https://github.com/vhpoet/react-native-styling-cheat-sheet)。
 
-In general, defining styles directly in the <em>style</em> prop is not considered such a great idea, because it makes components bloated and unclear. Instead, we should define styles outside the component's render function using the [StyleSheet.create](https://reactnative.dev/docs/0.53/stylesheet#create) method. The <em>StyleSheet.create</em> method accepts a single argument which is an object consisting of named style objects and it creates a StyleSheet style reference from the given object. Here is an example of how to refactor the previous example using the <em>StyleSheet.create</em> method:
+<!-- In general, defining styles directly in the <em>style</em> prop is not considered such a great idea, because it makes components bloated and unclear. Instead, we should define styles outside the component's render function using the [StyleSheet.create](https://reactnative.dev/docs/0.53/stylesheet#create) method. The <em>StyleSheet.create</em> method accepts a single argument which is an object consisting of named style objects and it creates a StyleSheet style reference from the given object. Here is an example of how to refactor the previous example using the <em>StyleSheet.create</em> method: -->
 
 一般来说，将样式直接定义在<em>style</em> 属性中并不是一个好主意，因为会导致组件膨胀且不易懂。相反，我们可以将样式定义在组件的render 函数之外，利用[StyleSheet.create](https://reactnative.dev/docs/0.53/stylesheet#create) 方法即可。 <em>StyleSheet.create</em>  方法接受一个单一的对象参数， 它包含了命名样式对象并针对该对象创建了样式引用。下面的例子中展示了如何利用<em>StyleSheet.create</em> 方法渲染样式，将之前的例子进行的重构。
 
@@ -352,7 +352,7 @@ const Main = () => {
 };
 ```
 
-In the example we use the <em>&&</em> operator with statement <em>condition && exprIfTrue</em>. This statement yields <em>exprIfTrue</em> if the <em>condition</em> evaluates to true, otherwise it will yield <em>condition</em>, which in that case is a value that evaluates to false. This is an extremely widely used and handy shorthand. Another option would be to use for example the [conditional operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator), <em>condition ? exprIfTrue : exprIfFalse</em>.
+<!-- In the example we use the <em>&&</em> operator with statement <em>condition && exprIfTrue</em>. This statement yields <em>exprIfTrue</em> if the <em>condition</em> evaluates to true, otherwise it will yield <em>condition</em>, which in that case is a value that evaluates to false. This is an extremely widely used and handy shorthand. Another option would be to use for example the [conditional operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator), <em>condition ? exprIfTrue : exprIfFalse</em>. -->
 
 在这个例子中，我们使用<em>&&</em> 运算符，构成了语句 <em>condition && exprIfTrue</em>。这个语句如果 <em>条件</em> 结果为true，就调用<em>exprIfTrue</em> ，否则会调用<em>condition</em>, 在本例中结果为false。 这是一个使用广泛的简要写法。另一个选项就是使用类似 [conditional operator条件运算符](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator)<em>condition ? exprIfTrue : exprIfFalse</em>.
 
@@ -494,10 +494,10 @@ const FlexboxExample = () => {
 <!-- Perhaps the most important properties of a flex container are the following: -->
 flex容器最重要的属性如下：
 
-- [flexDirection](https://css-tricks.com/almanac/properties/f/flex-direction/) property controls the direction in which the flex items are laid out within the container. Possible values for this property are <em>row</em>, <em>row-reverse</em>, <em>column</em> (default value) and <em>column-reverse</em>. Flex direction <em>row</em> will lay out the flex items from left to right, whereas <em>column</em> from top to bottom. <em>\*-reverse</em> directions will just reverse the order of the flex items.
+<!-- - [flexDirection](https://css-tricks.com/almanac/properties/f/flex-direction/) property controls the direction in which the flex items are laid out within the container. Possible values for this property are <em>row</em>, <em>row-reverse</em>, <em>column</em> (default value) and <em>column-reverse</em>. Flex direction <em>row</em> will lay out the flex items from left to right, whereas <em>column</em> from top to bottom. <em>\*-reverse</em> directions will just reverse the order of the flex items. -->
 
-- [justifyContent](https://css-tricks.com/almanac/properties/j/justify-content/) property controls the alignment of flex items along the main axis (defined by the <em>flexDirection</em> property). Possible values for this property are <em>flex-start</em> (default value), <em>flex-end</em>, <em>center</em>, <em>space-between</em>, <em>space-around</em> and <em>space-evenly</em>.
-- [alignItems](https://css-tricks.com/almanac/properties/a/align-items/) property does the same as <em>justifyContent</em> but for the opposite axis. Possible values for this property are <em>flex-start</em>, <em>flex-end</em>, <em>center</em>, <em>baseline</em> and <em>stretch</em> (default value).
+<!-- - [justifyContent](https://css-tricks.com/almanac/properties/j/justify-content/) property controls the alignment of flex items along the main axis (defined by the <em>flexDirection</em> property). Possible values for this property are <em>flex-start</em> (default value), <em>flex-end</em>, <em>center</em>, <em>space-between</em>, <em>space-around</em> and <em>space-evenly</em>. -->
+<!-- - [alignItems](https://css-tricks.com/almanac/properties/a/align-items/) property does the same as <em>justifyContent</em> but for the opposite axis. Possible values for this property are <em>flex-start</em>, <em>flex-end</em>, <em>center</em>, <em>baseline</em> and <em>stretch</em> (default value). -->
 
 - [flexDirection](https://css-tricks.com/almanac/properties/f/flex-direction/) 属性控制着flex item在容器中的方向。该属性备选的值有 <em>row</em>, <em>row-reverse</em>, <em>column</em> (默认值) 和 <em>column-reverse</em>。Flex 方向  <em>row</em>  会将item 从左到右排列，而<em>column</em> 会从上向下排列。<em>\*-reverse</em> 方向会反向排列flex item。
 
@@ -505,7 +505,7 @@ flex容器最重要的属性如下：
 
 - [alignItems](https://css-tricks.com/almanac/properties/a/align-items/) 属性与 <em>justifyContent</em>一样，但是是控制对立轴线，可能的值有 <em>flex-start</em>, <em>flex-end</em>, <em>center</em>, <em>baseline</em> 和 <em>stretch</em>  (默认值)。
 
-Let's move on to flex items. As mentioned, a flex container can contain one or many flex items. Flex items have properties that control how they behave in respect of other flex items in the same flex container. To make a component a flex item all you have to do is to set it as an immediate child of a flex container:
+<!-- Let's move on to flex items. As mentioned, a flex container can contain one or many flex items. Flex items have properties that control how they behave in respect of other flex items in the same flex container. To make a component a flex item all you have to do is to set it as an immediate child of a flex container: -->
 让我们接着探讨flex item。如上所述，一个flex 容器包含一个或多个flex item。 flex item 的属性用来控制相同flex 容器中， item 相对于其他item 如何表现。在创建组件时，一个flex item 所需要做的就是将它作为一个flex 容器的直接子项。
 
 ```javascript
@@ -592,7 +592,7 @@ app bar 的背景色是 <em>#24292e</em> ，但你也可以使用其他的颜色
 
 #### Exercise 10.5: polished reviewed repositories list
 
-The current version of the reviewed repositories list looks quite grim. Modify the <i>RepositoryListItem</i> component so that it also displays repository author's avatar image. You can implement this by using the [Image](https://reactnative.dev/docs/image) component. Counts, such as number of stars and forks, larger than or equal to 1000 should be displayed in thousands with precision of one decimal and with a "k" suffix. This means that for example fork count of 8439 should be displayed as "8.4k". Also polish the overall look of the component so that the reviewed repositories list looks something like this:
+<!-- The current version of the reviewed repositories list looks quite grim. Modify the <i>RepositoryListItem</i> component so that it also displays repository author's avatar image. You can implement this by using the [Image](https://reactnative.dev/docs/image) component. Counts, such as number of stars and forks, larger than or equal to 1000 should be displayed in thousands with precision of one decimal and with a "k" suffix. This means that for example fork count of 8439 should be displayed as "8.4k". Also polish the overall look of the component so that the reviewed repositories list looks something like this: -->
 当前版本的仓库查看列表看起来十分死板。修改<i>RepositoryListItem</i> 组件，让它展示仓库的作者头像图片。你可以利用 [Image](https://reactnative.dev/docs/image) 组件来实现。计数功能，例如star 的数量和fork 的数量，大于等于1000应当展示为以千作为计数精读的小数，并以 "k" 结尾。也就是说比如你的fork 总数为8349，那就应该展示为"8.4k"，用同样的方式修饰下组件的总体样式，因此仓库的查看列表应当如下所示：
 
 ![Application preview](../../images/10/7.jpg)
@@ -605,23 +605,28 @@ The current version of the reviewed repositories list looks quite grim. Modify t
 
 ### Routing
 
-When we start to expand our application we will need a way to transition between different views such as the repositories view and the sign in view. In [part 7](/en/part7/react_router) we got familiar with [React router](https://reacttraining.com/react-router/native/guides/quick-start) library and learned how use it to implement routing in a web application.
+<!-- When we start to expand our application we will need a way to transition between different views such as the repositories view and the sign in view. In [part 7](/en/part7/react_router) we got familiar with [React router](https://reacttraining.com/react-router/native/guides/quick-start) library and learned how use it to implement routing in a web application. -->
+当我们准备扩展我们的应用时，我们需要一种在不同视图间切换的技术，比如说从仓库视图切换到登录视图。在[第七章](/zh/part7/react_router) 中我们了解到了 [React router](https://reacttraining.com/react-router/native/guides/quick-start) 库并学习了如何在Web 应用中使用来实现路由功能。
 
-Routing in a React Native application is a bit different to routing in a web application. The main difference is that we can't reference pages with URLs which we type in to the browser's address bar and can't navigate back and forth through user's history using the browsers [history API](https://developer.mozilla.org/en-US/docs/Web/API/History_API). However, this is just the matter of the router interface we are using.
+<!-- Routing in a React Native application is a bit different to routing in a web application. The main difference is that we can't reference pages with URLs which we type in to the browser's address bar and can't navigate back and forth through user's history using the browsers [history API](https://developer.mozilla.org/en-US/docs/Web/API/History_API). However, this is just the matter of the router interface we are using. -->
+在React Native 应用中路由与在Web 应用中有些不同。主要区别是我们不能像在浏览器中键入URL地址的方式来引用页面，也不能利用浏览器的 [history API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) 来通过用户的浏览历史实现前进后退功能。但是这是我们使用的路由接口中十分重要的。
 
-With React Native we can use the entire React router's core, including the hooks and components. The only difference to the browser environment is that we must replace the <em>BrowserRouter</em> with React Native compatible [NativeRouter](https://reacttraining.com/react-router/native/api/NativeRouter) provided by the [react-router-native](https://reacttraining.com/react-router/native/guides/quick-start) library. Let's get started by installing the <i>react-router-native</i> library:
+<!-- With React Native we can use the entire React router's core, including the hooks and components. The only difference to the browser environment is that we must replace the <em>BrowserRouter</em> with React Native compatible [NativeRouter](https://reacttraining.com/react-router/native/api/NativeRouter) provided by the [react-router-native](https://reacttraining.com/react-router/native/guides/quick-start) library. Let's get started by installing the <i>react-router-native</i> library: -->
+通过React Native 我们可以使用React router 的核心，包括hooks 钩子和components 组件。相比浏览器环境，主要区别是我们要将<em>BrowserRouter</em>替换为React Native 适配的 [NativeRouter](https://reacttraining.com/react-router/native/api/NativeRouter)， 这是由[react-router-native](https://reacttraining.com/react-router/native/guides/quick-start) 这个类库提供的。让我们从安装这个 <i>react-router-native</i> 类库开始吧：
 
 ```shell
 npm install react-router-native
 ```
 
-Using the react-router-native library will break Expo's web browser preview. However, other previews will work just like before. We can fix the issue by extending the Expo's Webpack configuration so that it transpiles the react-router-native library's sources with Babel. To extend the Webpack configuration we need to install the <i>@expo/webpack-config</i> library:
+<!-- Using the react-router-native library will break Expo's web browser preview. However, other previews will work just like before. We can fix the issue by extending the Expo's Webpack configuration so that it transpiles the react-router-native library's sources with Babel. To extend the Webpack configuration we need to install the <i>@expo/webpack-config</i> library: -->
+使用react-router-native 类库会破坏Expo的web 浏览器预览功能。但是其他的预览还是像之前那样工作。我们可以通过扩展Expo的Webpack 配置来修复这个问题，这样就可以使用Babel 来转译react-router-native 类库的源码了。为了扩展Webpack 配置我们需要安装<i>@expo/webpack-config</i> 类库：
 
 ```shell
 npm install @expo/webpack-config --save-dev
 ```
 
-Next, create a <i>webpack.config.js</i> file in the root directory of your project with the following content:
+<!-- Next, create a <i>webpack.config.js</i> file in the root directory of your project with the following content: -->
+接下来，在项目的根目录创建<i>webpack.config.js</i> 文件，并添加如下内容：
 
 ```javascript
 const path = require('path');
@@ -640,9 +645,11 @@ module.exports = async function(env, argv) {
 };
 ```
 
-Finally, restart Expo's development tools so that our new Webpack configuration will be applied.
+<!-- Finally, restart Expo's development tools so that our new Webpack configuration will be applied. -->
+最后，重启Expo 开发工具，这样我们新建的Webpack 配置就生效了。
 
-Now that the Expo's web browser preview is fixed, open the <i>App.js</i> file and add the <em>NativeRouter</em> component to the <em>App</em> component:
+<!-- Now that the Expo's web browser preview is fixed, open the <i>App.js</i> file and add the <em>NativeRouter</em> component to the <em>App</em> component: -->
+既然Expo 的Web 浏览器预览已经修复了，打开 <i>App.js</i> 文件，并添加<em>NativeRouter</em> 组件到<em>App</em> 组件中：
 
 <!-- TODO: highlight -->
 
@@ -665,7 +672,8 @@ const App = () => {
 export default App;
 ```
 
-Once the router is in place, let's add our first route to the <me>Main</em> component in the <i>Main.jsx</i> file:
+<!-- Once the router is in place, let's add our first route to the <me>Main</em> component in the <i>Main.jsx</i> file: -->
+一旦路由就位了，让我们向 <i>Main.jsx</i> 文件的 <me>Main</em>组件添加我们的第一个路由。
 
 ```javascript
 import React from 'react';
@@ -710,8 +718,10 @@ export default Main;
 ### Exercises 10.6. - 10.7.
 
 #### Exercise 10.6: the sign in view
+登录视图
 
-We will soon implement a form, which a user can use to <i>sign in</i> to our application. Before that, we must implement a view that can be accessed from the app bar. Create a file <i>SignIn.jsx</i> in the <i>components</i> directory with the following content:
+<!-- We will soon implement a form, which a user can use to <i>sign in</i> to our application. Before that, we must implement a view that can be accessed from the app bar. Create a file <i>SignIn.jsx</i> in the <i>components</i> directory with the following content: -->
+我们很快会实现一个表单，用户可以来 <i>登录</i> 我们的应用。在这之前，我们必须实现一个视图，让我们能通过app 工具栏访问到。在 <i>components</i>文件夹中创建一个 <i>SignIn.jsx</i>，并添加如下内容：
 
 ```javascript
 import React from 'react';
@@ -725,13 +735,16 @@ const SignIn = () => {
 export default SignIn;
 ```
 
-Set up a route for this <em>SignIn</em> component in the <em>Main</em> component. Also add a tab with text "Sign in" in to the app bar next to the "Repositories" tab. User should be able to navigate between the two views by pressing the tabs (hint: use the [Link](https://reacttraining.com/react-router/native/api/Link) component and its [component](https://reacttraining.com/react-router/native/api/Link/component-func) prop).
+<!-- Set up a route for this <em>SignIn</em> component in the <em>Main</em> component. Also add a tab with text "Sign in" in to the app bar next to the "Repositories" tab. User should be able to navigate between the two views by pressing the tabs (hint: use the [Link](https://reacttraining.com/react-router/native/api/Link) component and its [component](https://reacttraining.com/react-router/native/api/Link/component-func) prop). -->
+为这个<em>SignIn</em>组件在<em>Main</em>组件中创建一个路由。同时在app工具栏的"Repositories" tab 旁增加一个"Sign in" tab。用户能够通过点击导航中的tab在不同的视图中切换（提示：使用[Link](https://reacttraining.com/react-router/native/api/Link) 组件以及它的 [组件属性](https://reacttraining.com/react-router/native/api/Link/component-func) 
 
 #### Exercise 10.7: scrollable app bar
 
-As we are adding more tabs to our app bar, it is a good idea to allow horizontal scrolling once the tabs won't fit the screen. The [ScrollView](https://reactnative.dev/docs/scrollview) component is just the right component for the job.
+<!-- As we are adding more tabs to our app bar, it is a good idea to allow horizontal scrolling once the tabs won't fit the screen. The [ScrollView](https://reactnative.dev/docs/scrollview) component is just the right component for the job. -->
+随着我们添加了越来越多的tab到我们的应用中，当屏幕无法满足tab页的大小时，一个好的做法是允许屏幕的垂直滚动。[ScrollView](https://reactnative.dev/docs/scrollview) 组件正是为这种需求服务的。
 
-Wrap the tabs in the <em>AppBar</em> component's tabs with a <em>ScrollView</em> component:
+<!-- Wrap the tabs in the <em>AppBar</em> component's tabs with a <em>ScrollView</em> component: -->
+将<em>AppBar</em> 组件中的tab 包装到<em>ScrollView</em>组件中：
 
 ```javascript
 const AppBar = () => {
@@ -743,21 +756,27 @@ const AppBar = () => {
 };
 ```
 
-Setting the [horizontal](https://reactnative.dev/docs/scrollview#horizontal) prop <em>true</em> will cause the <em>ScrollView</em> component to scroll horizontally once the content won't fit the screen. Note that, you will need to add suitable style properties to the <em>ScrollView</em> component so that the tabs will be laid in a <i>row</i> inside the flex container. You can make sure that the app bar can be scrolled horizontally by adding tabs until the last tab won't fit the screen. Just remember to remove the extra tabs once the app bar is working as intended.
+<!-- Setting the [horizontal](https://reactnative.dev/docs/scrollview#horizontal) prop <em>true</em> will cause the <em>ScrollView</em> component to scroll horizontally once the content won't fit the screen. Note that, you will need to add suitable style properties to the <em>ScrollView</em> component so that the tabs will be laid in a <i>row</i> inside the flex container. You can make sure that the app bar can be scrolled horizontally by adding tabs until the last tab won't fit the screen. Just remember to remove the extra tabs once the app bar is working as intended. -->
+设置 [horizontal](https://reactnative.dev/docs/scrollview#horizontal) 属性为<em>true</em> 会在屏幕不满足内容时 <em>ScrollView</em> 组件会垂直滚动。注意，你需要添加合适的样式属性到 <em>ScrollView</em> 组件，这样tab会在flex容器中按<i>行</i>排列。你可以确保app工具栏能随着tab的增加垂直滚动，知道最后一个tab页也无法与屏幕匹配。一旦app工具栏按预期工作，记得移除多余的tab页。
 
 </div>
 
 <div class="content">
 
 ### Form state management
+表单状态管理
 
-Now that we have a placeholder for the sign in view the next step would be to implement the sign in form. Before we get to that let's talk about forms in a more wider perspective.
+<!-- Now that we have a placeholder for the sign in view the next step would be to implement the sign in form. Before we get to that let's talk about forms in a more wider perspective. -->
+现在我们已经有了登录视图的占位符，那么下一步就是实现登录表单了。在我们开始之前，让我们以一个更宏观的视角来讨论一下表单。
 
-Implementation of forms relies heavily on the state management. Using the React's <em>useState</em> hook for the state management might get the job done for smaller forms. However, it will quickly make the state management quite tedious with more complex forms. Luckily there are many good libraries in the React ecosystem that eases the state management of forms. One of these libraries is [Formik](https://jaredpalmer.com/formik/).
+<!-- Implementation of forms relies heavily on the state management. Using the React's <em>useState</em> hook for the state management might get the job done for smaller forms. However, it will quickly make the state management quite tedious with more complex forms. Luckily there are many good libraries in the React ecosystem that eases the state management of forms. One of these libraries is [Formik](https://jaredpalmer.com/formik/). -->
+form 表单的实现重度依赖状态管理。使用React 的<em>useState</em> hook 来做状态管理，能够管理一些小一点规模的表单。但是，对于复杂一点的表单就很快让状态管理变得乏味。幸运的是，React 生态中有许多不错的类库可以简化表单的状态管理。其中一个类库便是 [Formik](https://jaredpalmer.com/formik/)。
 
-The main concepts of Formik are the <i>context</i> and a <i>field</i>. The Formik's context is provided by the [Formik](https://jaredpalmer.com/formik/docs/api/formik) component that contains the form's state. The state consists of information of form's fields. This information includes for example the value and validation errors of each field. State's fields can be referenced by their name using the [useField](https://jaredpalmer.com/formik/docs/api/useField) hook or the [Field](https://jaredpalmer.com/formik/docs/api/field) component.
+<!-- The main concepts of Formik are the <i>context</i> and a <i>field</i>. The Formik's context is provided by the [Formik](https://jaredpalmer.com/formik/docs/api/formik) component that contains the form's state. The state consists of information of form's fields. This information includes for example the value and validation errors of each field. State's fields can be referenced by their name using the [useField](https://jaredpalmer.com/formik/docs/api/useField) hook or the [Field](https://jaredpalmer.com/formik/docs/api/field) component. -->
+Formik 的主要概念就是<i>context上下文</i> 和 <i>field字段</i>。Formik的上下文是由 [Formik](https://jaredpalmer.com/formik/docs/api/formik)组件提供的，它包含了表单的状态。状态包含了form 字段的一系列信息。这里的信息包括例如每个字段的值、验证错误信息等。状态的字段可以通过参考他们的名字，使用[useField](https://jaredpalmer.com/formik/docs/api/useField) hook 或者[Field](https://jaredpalmer.com/formik/docs/api/field) 组件。
 
-Let's see how this actually works by creating a form for calculating the [body mass index](https://en.wikipedia.org/wiki/Body_mass_index):
+<!-- Let's see how this actually works by creating a form for calculating the [body mass index](https://en.wikipedia.org/wiki/Body_mass_index): -->
+让我们看看这是如何通过创建表单，运算 [body mass index](https://en.wikipedia.org/wiki/Body_mass_index) 来运转的。
 
 ```javascript
 import React from 'react';
@@ -814,21 +833,28 @@ const BodyMassIndexCalculator = () => {
 };
 ```
 
-This example is not part of our application, so you don't need to actually add this code to the application. You can however try it out for example in [Expo Snack](https://snack.expo.io/). Expo Snack is an online editor for React Native, similar to [JSFiddle](https://jsfiddle.net/) and [CodePen](https://codepen.io/). It is a useful platform for quickly trying out code. You can share Expo Snacks with others using a link or embedding them as a <i>Snack Player</i> in a web site. You might have bumped into Snack Players for example in this material and React Native documentation.
+<!-- This example is not part of our application, so you don't need to actually add this code to the application. You can however try it out for example in [Expo Snack](https://snack.expo.io/). Expo Snack is an online editor for React Native, similar to [JSFiddle](https://jsfiddle.net/) and [CodePen](https://codepen.io/). It is a useful platform for quickly trying out code. You can share Expo Snacks with others using a link or embedding them as a <i>Snack Player</i> in a web site. You might have bumped into Snack Players for example in this material and React Native documentation. -->
+这个例子并不是我们应用的一部分，因此你不必真的将这些代码放到应用中。但你可以在 [Expo Snack](https://snack.expo.io/) 中尝试它。Expo Snack 是一个React Native 的在线编辑器，类似 [JSFiddle](https://jsfiddle.net/) 和 [CodePen](https://codepen.io/)，是一个能快速尝试代码的平台。你可以使用一个链接或内置一个 <i>Snack Player</i>到网页中，与其他人共享你的代码。你可能在这个教材中或者React Native 的文档中碰到过Snack Players了。
 
-In the example, we define the <em>Formik</em> context in the <em>BodyMassIndexCalculator</em> component and provided it with initial values and a submit callback. Initial values are provided through the [initialValues](https://jaredpalmer.com/formik/docs/api/formik#initialvalues-values) prop as an object with field names as keys and the corresponding initial values as values. The submit callback is provided through the [onSubmit](https://jaredpalmer.com/formik/docs/api/formik#onsubmit-values-values-formikbag-formikbag--void--promiseany) prop and it is called when the <em>handleSubmit</em> function is called with the condition that there isn't any validation errors. Children of the <em>Formik</em> component is a function which is called with [props](https://jaredpalmer.com/formik/docs/api/formik#formik-render-methods-and-props) including state related information and actions such as the <em>handleSubmit</em> function.
+<!-- In the example, we define the <em>Formik</em> context in the <em>BodyMassIndexCalculator</em> component and provided it with initial values and a submit callback. Initial values are provided through the [initialValues](https://jaredpalmer.com/formik/docs/api/formik#initialvalues-values) prop as an object with field names as keys and the corresponding initial values as values. The submit callback is provided through the [onSubmit](https://jaredpalmer.com/formik/docs/api/formik#onsubmit-values-values-formikbag-formikbag--void--promiseany) prop and it is called when the <em>handleSubmit</em> function is called with the condition that there isn't any validation errors. Children of the <em>Formik</em> component is a function which is called with [props](https://jaredpalmer.com/formik/docs/api/formik#formik-render-methods-and-props) including state related information and actions such as the <em>handleSubmit</em> function. -->
+在例子中，我们在<em>BodyMassIndexCalculator</em>组件中定义了一个<em>Formik</em>上下文，并给它提供了初始值和提交回调函数。初始值是通过[initialValues](https://jaredpalmer.com/formik/docs/api/formik#initialvalues-values) 属性，给一个包含字段名和初始值的对象设置的。提交的回调函数是通过 [onSubmit](https://jaredpalmer.com/formik/docs/api/formik#onsubmit-values-values-formikbag-formikbag--void--promiseany)属性，当 <em>handleSubmit</em> 函数被调用时，且没有任何验证错误的情况下调用。<em>Formik</em> 组件的子元素是一个通过[props](https://jaredpalmer.com/formik/docs/api/formik#formik-render-methods-and-props)调用的函数，包含状态相关的信息，以及例如 <em>handleSubmit</em> 函数的动作。
 
-The <em>BodyMassIndexForm</em> component contains the state bindings between the context and text inputs. We use the [useField](https://jaredpalmer.com/formik/docs/api/useField) hook to get the value of a field and to change it. _useField_ hooks has one argument which is the name of the field and it returns an array with three values, <em>[field, meta, helpers]</em>. The [field object](https://jaredpalmer.com/formik/docs/api/useField#fieldinputpropsvalue) contains the value of the field, the [meta object](https://jaredpalmer.com/formik/docs/api/useField#fieldmetapropsvalue) contains field meta information such as a possible error message and the [helpers object](https://jaredpalmer.com/formik/docs/api/useField#fieldhelperprops) contains different actions for changing the state of field such as the <em>setValue</em> function. Note that the component that uses the <em>useField</em> hook has to be _within the Formik's context_. This means that the component has to be a descendant of the <em>Formik</em> component.
+<!-- The <em>BodyMassIndexForm</em> component contains the state bindings between the context and text inputs. We use the [useField](https://jaredpalmer.com/formik/docs/api/useField) hook to get the value of a field and to change it. _useField_ hooks has one argument which is the name of the field and it returns an array with three values, <em>[field, meta, helpers]</em>. The [field object](https://jaredpalmer.com/formik/docs/api/useField#fieldinputpropsvalue) contains the value of the field, the [meta object](https://jaredpalmer.com/formik/docs/api/useField#fieldmetapropsvalue) contains field meta information such as a possible error message and the [helpers object](https://jaredpalmer.com/formik/docs/api/useField#fieldhelperprops) contains different actions for changing the state of field such as the <em>setValue</em> function. Note that the component that uses the <em>useField</em> hook has to be _within the Formik's context_. This means that the component has to be a descendant of the <em>Formik</em> component. -->
 
-Here is an interactive version of our previous example: [Formik example](https://snack.expo.io/@kalleilv/9e9e0d).
+<em>BodyMassIndexForm</em> 组件包含了绑定context 和文本输入框的状态。我们使用[useField](https://jaredpalmer.com/formik/docs/api/useField) hook 来获得filed 的值并修改它。 _useField_ hook 带有一个参数，就是field 的名称，并且返回一个包含三个值的数组<em>[field, meta, helpers]</em>。  [field object](https://jaredpalmer.com/formik/docs/api/useField#fieldinputpropsvalue)  包含field 的值，[meta object](https://jaredpalmer.com/formik/docs/api/useField#fieldmetapropsvalue) 包含field 的元信息，比如可能的错误信息，[helpers object](https://jaredpalmer.com/formik/docs/api/useField#fieldhelperprops) 包含改变字段状态的不同操作，比如说<em>setValue</em> 函数。注意使用 <em>useField</em> hook 的组件，需要 _包含在 Formik's context中_ 。 也就是说组件必须是<em>Formik</em> 的后代。
 
-In the previous example using the <em>useField</em> hook with the <em>TextInput</em> component causes repetitive code. Let's extract this repetitive code into a <em>FormikTextInput</em> component and create a custom <em>TextInput</em> component to make text inputs a bit more visually pleasing. First, let's install Formik:
+<!-- Here is an interactive version of our previous example: [Formik example](https://snack.expo.io/@kalleilv/9e9e0d). -->
+这里有一个之前例子的交互版本：[Formik example](https://snack.expo.io/@kalleilv/9e9e0d)
+
+<!-- In the previous example using the <em>useField</em> hook with the <em>TextInput</em> component causes repetitive code. Let's extract this repetitive code into a <em>FormikTextInput</em> component and create a custom <em>TextInput</em> component to make text inputs a bit more visually pleasing. First, let's install Formik: -->
+在之前的例子中，通过<em>TextInput</em> 组件使用<em>useField</em> hook 产生了重复代码。让我们抽取出这些重复代码，形成一个<em>FormikTextInput</em> 组件，并创建一个自定义的<em>TextInput</em> 组件来让文本输入框看起来优雅一些。首先，让我们安装Formik：
 
 ```shell
 npm install formik
 ```
 
-Next, create a file <i>TextInput.jsx</i> in the <i>components</i> directory with the following content:
+<!-- Next, create a file <i>TextInput.jsx</i> in the <i>components</i> directory with the following content: -->
+接下来，在 <i>components</i> 文件夹中创建一个<i>TextInput.jsx</i>文件，并添加如下内容：
 
 ```javascript
 import React from 'react';
@@ -845,7 +871,8 @@ const TextInput = ({ style, error, ...props }) => {
 export default TextInput;
 ```
 
-Let's move on to the <em>FormikTextInput</em> component that adds the Formik's state bindings to the <em>TextInput</em> component. Create a file <i>FormikTextInput.jsx</i> in the <i>components</i> directory with the following content:
+<!-- Let's move on to the <em>FormikTextInput</em> component that adds the Formik's state bindings to the <em>TextInput</em> component. Create a file <i>FormikTextInput.jsx</i> in the <i>components</i> directory with the following content: -->
+让我们继续处理 <em>FormikTextInput</em> 组件，添加Formik 的状态，绑定到<em>TextInput</em> 组件。在<i>components</i> 文件夹中创建一个<i>FormikTextInput.jsx</i> 文件，添加如下内容：
 
 ```javascript
 import React from 'react';
@@ -882,7 +909,8 @@ const FormikTextInput = ({ name, ...props }) => {
 export default FormikTextInput;
 ```
 
-By using the <em>FormikTextInput</em> component we could refactor the <em>BodyMassIndexForm</em> component in the previous example like this:
+<!-- By using the <em>FormikTextInput</em> component we could refactor the <em>BodyMassIndexForm</em> component in the previous example like this: -->
+通过使用<em>FormikTextInput</em> 组件，我们可以重构<em>BodyMassIndexForm</em> 组件，之前的例子就像这样：
 
 ```javascript
 const BodyMassIndexForm = ({ onSubmit }) => {
@@ -898,7 +926,8 @@ const BodyMassIndexForm = ({ onSubmit }) => {
 };
 ```
 
-As we can see, implementing the <em>FormikTextInput</em> component that handles the <em>TextInput</em> component's Formik bindings saves a lot of code. If your Formik forms use other input components, it is a good idea to implement similar abstractions for them as well.
+<!-- As we can see, implementing the <em>FormikTextInput</em> component that handles the <em>TextInput</em> component's Formik bindings saves a lot of code. If your Formik forms use other input components, it is a good idea to implement similar abstractions for them as well. -->
+正如我们看到的，实现<em>FormikTextInput</em> 组件处理了<em>TextInput</em>  组件的Formik 绑定，从而节省了许多代码量。如果你的Formik 表单使用了其他的input 组件，也将它们按照这种类似的抽象实现是个不错的选择。
 
 </div>
 
@@ -908,8 +937,10 @@ As we can see, implementing the <em>FormikTextInput</em> component that handles 
 ### Exercise 10.8.
 
 #### Exercise 10.8: the sign in form
+登录表单
 
-Implement a sign in form to the <em>SignIn</em> component we added earlier in the <i>SignIn.jsx</i> file. The sign in form should include two text fields, one for the username and one for the password. There should also be a button for submitting the form. You don't need to implement a <em>onSubmit</em> callback function, it is enough that the form values are logged using <em>console.log</em> when the form is submitted:
+<!-- Implement a sign in form to the <em>SignIn</em> component we added earlier in the <i>SignIn.jsx</i> file. The sign in form should include two text fields, one for the username and one for the password. There should also be a button for submitting the form. You don't need to implement a <em>onSubmit</em> callback function, it is enough that the form values are logged using <em>console.log</em> when the form is submitted: -->
+在我们之前添加的<i>SignIn.jsx</i> 文件中的<em>SignIn</em> 组件实现一个登录表单。登录表单应当包含两个文本字段，用户名和密码。同时需要一个提交表单的按钮。你不必去实现<em>onSubmit</em> 回调函数，只需要利用 <em>console.log</em> 当表单提交时，将表单的值打印出来即可。
 
 ```javascript
 const onSubmit = (values) => {
@@ -917,9 +948,11 @@ const onSubmit = (values) => {
 };
 ```
 
-Remember to utilize the <em>FormikTextInput</em> component we implemented earlier. You can use the [secureTextEntry](https://reactnative.dev/docs/textinput#securetextentry) prop in the <em>TextInput</em> component to obscure the password input.
+<!-- Remember to utilize the <em>FormikTextInput</em> component we implemented earlier. You can use the [secureTextEntry](https://reactnative.dev/docs/textinput#securetextentry) prop in the <em>TextInput</em> component to obscure the password input. -->
+记得使用我们之前实现的 <em>FormikTextInput</em> 组件。你可以使用在  <em>TextInput</em> 组件中使用[secureTextEntry](https://reactnative.dev/docs/textinput#securetextentry) 属性来遮挡密码的输入。
 
-The sign in form should look something like this:
+<!-- The sign in form should look something like this: -->
+登录框看起来像这样：
 
 ![Application preview](../../images/10/19.jpg)
 
@@ -928,16 +961,20 @@ The sign in form should look something like this:
 <div class="content">
 
 ### Form validation
+表单验证
 
-Formik offers two approaches to the form validation: a validation function or a validation schema. Validation function is a function provided for the <em>Formik</em> component as the value of the [validate](https://jaredpalmer.com/formik/docs/guides/validation#validate) prop. It receives the from's values as an argument and returns an object containing possible field specific error messages.
+<!-- Formik offers two approaches to the form validation: a validation function or a validation schema. Validation function is a function provided for the <em>Formik</em> component as the value of the [validate](https://jaredpalmer.com/formik/docs/guides/validation#validate) prop. It receives the from's values as an argument and returns an object containing possible field specific error messages. -->
+Formik 提供两种方法来进行表单验证：验证函数或者验证schema。验证函数是一个为<em>Formik</em> 组件提供[validate](https://jaredpalmer.com/formik/docs/guides/validation#validate) 属性值的函数。它接收表单的值作为入参，并返回一个包含field 对应错误信息的对象。
 
-The second approach is the validation schema which is provided for the <em>Formik</em> component as the value of the [validationSchema](https://jaredpalmer.com/formik/docs/guides/validation#validationschema) prop. This validation schema can be created with a validation library called [Yup](https://github.com/jquense/yup). Let's get started by installing Yup:
+<!-- The second approach is the validation schema which is provided for the <em>Formik</em> component as the value of the [validationSchema](https://jaredpalmer.com/formik/docs/guides/validation#validationschema) prop. This validation schema can be created with a validation library called [Yup](https://github.com/jquense/yup). Let's get started by installing Yup: -->
+第二种方法是为<em>Formik</em> 组件提供验证schema，作为[validationSchema](https://jaredpalmer.com/formik/docs/guides/validation#validationschema) 属性的值。这个验证schema 可以通过验证类库[Yup](https://github.com/jquense/yup) 进行创建，让我们从安装Yup 开始把：
 
 ```shell
 npm install yup
 ```
 
-Next, as an example, let's create validation schema for the body mass index form we implemented earlier. We want to validate that both <i>mass</i> and <i>height</i> fields are present and they are numeric. Also the value of <i>mass</i> should be greater or equal to 1 and the value of <i>height</i> should be greater or equal to 0.5. Here is how we define the schema:
+<!-- Next, as an example, let's create validation schema for the body mass index form we implemented earlier. We want to validate that both <i>mass</i> and <i>height</i> fields are present and they are numeric. Also the value of <i>mass</i> should be greater or equal to 1 and the value of <i>height</i> should be greater or equal to 0.5. Here is how we define the schema: -->
+然后，作为一个例子，我们为我们之前实现的主页表单创建一个验证schema ，我们希望 <i>mass</i> 和 <i>height</i> 两个字段都存在，且为数值型。 <i>mass</i> 的值应当大于等于1，  <i>height</i> 应当大于等于0.5。我们像如下这样定义schema：
 
 ```javascript
 import React from 'react';
@@ -973,9 +1010,11 @@ const BodyMassIndexCalculator = () => {
 };
 ```
 
-The validation is performed by default every time a field's value changes and when the <em>handleSubmit</em> function is called. If the validation fails, the function provided for the <em>onSubmit</em> prop of the <em>Formik</em> component is not called.
+<!-- The validation is performed by default every time a field's value changes and when the <em>handleSubmit</em> function is called. If the validation fails, the function provided for the <em>onSubmit</em> prop of the <em>Formik</em> component is not called. -->
+验证默认会在表单的内容发生改变或者当 <em>handleSubmit</em> 函数调用时生效。如果验证失败，<em>Formik</em> 的 <em>onSubmit</em>属性定义的函数就不会调用。
 
-The <em>FormikTextInput</em> component we previously implemented displays field's error message if it is present and the field is "touched", meaning that the field has received and lost focus:
+<!-- The <em>FormikTextInput</em> component we previously implemented displays field's error message if it is present and the field is "touched", meaning that the field has received and lost focus: -->
+如果产生错误，并且字段被“触碰”（或者说字段获得后又失去了焦点），我们之前实现的 <em>FormikTextInput</em> 组件会显示字段错误信息。
 
 ```javascript
 const FormikTextInput = ({ name, ...props }) => {
@@ -1007,28 +1046,37 @@ const FormikTextInput = ({ name, ...props }) => {
 ### Exercise 10.9.
 
 #### Exercise 10.9: validating the sign in form
+验证登录表单
 
-Validate the sign in form so that both username and password fields are required. Note that the <em>onSubmit</em> callback implemented in the previous exercise, <i>should not be called</i> if the form validation fails.
+<!-- Validate the sign in form so that both username and password fields are required. Note that the <em>onSubmit</em> callback implemented in the previous exercise, <i>should not be called</i> if the form validation fails. -->
+验证登录表单，让用户名和密码都是必须的。注意在之前练习中的<em>onSubmit</em> 回调，如果表单验证没有通过，就不应该执行。
 
-The current implementation of the <em>FormikTextInput</em> component should display an error message if a touched field has an error. Emphasize this error message by giving it a red color.
+<!-- The current implementation of the <em>FormikTextInput</em> component should display an error message if a touched field has an error. Emphasize this error message by giving it a red color. -->
+当前 <em>FormikTextInput</em> 组件的实现应当在表单touched 之后产生错误信息。将这个错误信息强调一下，设置成红色。
 
-On top of the red error message, give an invalid field a visual indication of an error by giving it a red border color. Remember that if a field has an error, the <em>FormikTextInput</em> component sets the <em>TextInput</em> component's <em>error</em> prop as <em>true</em>. You can use the value of the <em>error</em> prop to attach conditional styles to the <em>TextInput</em> component.
+<!-- On top of the red error message, give an invalid field a visual indication of an error by giving it a red border color. Remember that if a field has an error, the <em>FormikTextInput</em> component sets the <em>TextInput</em> component's <em>error</em> prop as <em>true</em>. You can use the value of the <em>error</em> prop to attach conditional styles to the <em>TextInput</em> component. -->
+除了给出红色的错误信息，对表单验证没通过的输入框给一个视觉上的提示，即一个红色的边框。记住如果发表单字段有一个错误，那么<em>FormikTextInput</em> 组件将 <em>TextInput</em>组件的<em>error</em>属性设置为<em>true</em>。 你可以使用<em>error</em> 属性的值，作为条件样式附着到 <em>TextInput</em> 组件。
 
-Here's what the sign in form should roughly look like with an invalid field:
+<!-- Here's what the sign in form should roughly look like with an invalid field: -->
+以下是表单不合法的情况，登录框大概的样子
 
 ![Application preview](../../images/10/8.jpg)
 
-The red color used in this implementation is <em>#d73a4a</em>.
+<!-- The red color used in this implementation is <em>#d73a4a</em>. -->
+这里的实现红色使用的是<em>#d73a4a</em>
 
 </div>
 
 <div class="content">
 
 ### Platform specific code
+平台特定的代码
 
-A big benefit of React Native is that we don't need to worry about whether the application is run on a Android or iOS device. However, there might be cases where we need to execute <i>platform specific code</i>. Such case could be for example using a different implementation of a component on a different platform.
+<!-- A big benefit of React Native is that we don't need to worry about whether the application is run on a Android or iOS device. However, there might be cases where we need to execute <i>platform specific code</i>. Such case could be for example using a different implementation of a component on a different platform. -->
+React Native 的一大优势是我们不必关心应用跑在了Android 或者iOS 设备上。但是，有些情况下我们需要执行一些 <i>平台特定的代码</i>。 这种情况多见于在不同的平台上使用组件的不同实现方式。
 
-We can access the user's platform through the <em>Platform.OS</em> constant:
+<!-- We can access the user's platform through the <em>Platform.OS</em> constant: -->
+我们可以通过<em>Platform.OS</em> 常量访问用户使用的平台。
 
 ```javascript
 import { React } from 'react';
@@ -1045,7 +1093,8 @@ const WhatIsMyPlatform = () => {
 };
 ```
 
-Possible values for the <em>Platform.OS</em> constant are <em>android</em> and <em>ios</em>. Another useful way to define platform specific code branches is to use the <em>Platform.select</em> method. Given an object where keys are one of <em>ios</em>, <em>android</em>, <em>native</em> and <em>default</em>, the <em>Platform.select</em> method returns the most fitting value for the platform the user is currently running on. We can rewrite the <em>styles</em> variable in the previous example using the <em>Platform.select</em> method like this:
+<!-- Possible values for the <em>Platform.OS</em> constant are <em>android</em> and <em>ios</em>. Another useful way to define platform specific code branches is to use the <em>Platform.select</em> method. Given an object where keys are one of <em>ios</em>, <em>android</em>, <em>native</em> and <em>default</em>, the <em>Platform.select</em> method returns the most fitting value for the platform the user is currently running on. We can rewrite the <em>styles</em> variable in the previous example using the <em>Platform.select</em> method like this: -->
+<em>Platform.OS</em> 可能的值为  <em>android</em> 和 <em>ios</em>。 另一种定义平台特定代码的方式是使用 <em>Platform.select</em> 方法。 传递一个包含key 的对象，key可以为<em>ios</em>, <em>android</em>, <em>native</em> 和 <em>default</em>， <em>Platform.select</em>  方法返回当前用户所使用的平台最合适的值。我们可以重写之前例子中的<em>styles</em>，让它使用 <em>Platform.select</em>， 例如：
 
 ```javascript
 const styles = StyleSheet.create({
@@ -1060,6 +1109,7 @@ const styles = StyleSheet.create({
 ```
 
 We can even use the <em>Platform.select</em> method to require a platform specific component:
+我们甚至可以使用 <em>Platform.select</em>  方法来请求一个平台特定的组件。
 
 ```javascript
 const MyComponent = Platform.select({
@@ -1070,7 +1120,8 @@ const MyComponent = Platform.select({
 <MyComponent />;
 ```
 
-However, a more sophisticated method for implementing and importing platform specific components (or any other piece of code) is to use the <i>.io.jsx</i> and <i>.android.jsx</i> file extensions. Note that the <i>.jsx</i> extension can as well be any extensions recognized by the bundler, such as <i>.js</i>. We can for example have files <i>Button.ios.jsx</i> and <i>Button.android.jsx</i> which we can import like this:
+<!-- However, a more sophisticated method for implementing and importing platform specific components (or any other piece of code) is to use the <i>.io.jsx</i> and <i>.android.jsx</i> file extensions. Note that the <i>.jsx</i> extension can as well be any extensions recognized by the bundler, such as <i>.js</i>. We can for example have files <i>Button.ios.jsx</i> and <i>Button.android.jsx</i> which we can import like this: -->
+然而，一个更具古老的方法是使用并引入平台特定的组件（或其他什么代码片段），使用<i>.io.jsx</i> 和 <i>.android.jsx</i>文件扩展。注意 <i>.jsx</i> 扩展也可以被bundler 识别到。我们可以使用 <i>Button.ios.jsx</i> 和 <i>Button.android.jsx</i> 按如下方式引入：
 
 ```javascript
 import React from 'react';
@@ -1082,7 +1133,8 @@ const PlatformSpecificButton = () => {
 };
 ```
 
-Now, the Android bundle of the application will have the component defined in the <i>Button.android.jsx</i> whereas the iOS bundle the one defined in the <i>Button.ios.jsx</i> file.
+<!-- Now, the Android bundle of the application will have the component defined in the <i>Button.android.jsx</i> whereas the iOS bundle the one defined in the <i>Button.ios.jsx</i> file. -->
+现在，应用的Android bundle 会有一个名为<i>Button.android.jsx</i> 的组件，而iOS bundle 拥有一个名为 <i>Button.ios.jsx</i> 的文件。
 
 </div>
 
@@ -1091,7 +1143,14 @@ Now, the Android bundle of the application will have the component defined in th
 ### Exercise 10.10.
 
 #### Exercise 10.10: a platform specific font
+平台特定的字体
 
-Currently the font family of our application is set to <i>System</i> in the theme configuration located in the <i>theme.js</i> file. Instead of the <i>System</i> font, use a platform specific [Sans-serif](https://en.wikipedia.org/wiki/Sans-serif) font. In the Android platform use the <i>Ubuntu</i> font and in the iOS platform use the <i>Arial</i> font. The default font can be <i>System</i>.
+<!-- Currently the font family of our application is set to <i>System</i> in the theme configuration located in the <i>theme.js</i> file. Instead of the <i>System</i> font, use a platform specific [Sans-serif](https://en.wikipedia.org/wiki/Sans-serif) font. In the Android platform use the <i>Ubuntu</i> font and in the iOS platform use the <i>Arial</i> font. The default font can be <i>System</i>. -->
+
+当前我们应用的字体是设置在 <i>theme.js</i> 文件主题配置中，为<i>System</i> 。不要使用 <i>System</i> ， 使用平台特定的[Sans-serif](https://en.wikipedia.org/wiki/Sans-serif) 字体，在Android 平台使用<i>Roboto</i> 字体，在iOS平台中使用 <i>Arial</i> 字体，默认字体可以为 <i>System</i>
+
+<!-- This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). Note that exercises in this section should be submitted to the part 2 in the exercise submission system. -->
+
+这是该节的最后一个练习。是时候将自己的代码提交到Github 并在[exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020) 中，将完成的练习标注为已完成。注意本节的练习应当提交到练习提交系统的第二节中。
 
 </div>

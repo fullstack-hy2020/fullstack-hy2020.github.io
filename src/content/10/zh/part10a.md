@@ -2,7 +2,7 @@
 mainImage: ../../../images/part-1.svg
 part: 10
 letter: a
-lang: en
+lang: zh
 ---
 
 <div class="content">
@@ -35,7 +35,7 @@ Traditionally, developing native iOS and Android applications has required the d
 
 <!-- We will be developing an application for rating [GitHub](https://github.com/) repositories. Our application will have features such as, sorting and filtering reviewed repositories, registering a user, logging in and creating a review for a repository. The back end for the application will be provided for us so that we can solely focus on the React Native development. The final version of our application will look something like this: -->
 
-我们会创建一个为[GitHub](https://github.com/) 仓库投票的应用。我们的应用会有以下基本功能，例如排序、过滤已经查看的仓库，注册用户，登录以及为仓库创建一条评论。应用的后台会提前提供给我们，这样我们可以专注于React Native 的开发。我们应用的最终版本会像如下这样。
+我们会创建一个为[GitHub](https://github.com/) 仓库投票的应用。我们的应用会有以下基本功能，例如排序、过滤已经评论的仓库，注册用户，登录以及为仓库创建一条评论。应用的后台会提前提供给我们，这样我们可以专注于React Native 的开发。我们应用的最终版本会像如下这样。
 
 ![Application preview](../../images/10/4.png)
 
@@ -53,7 +53,17 @@ Traditionally, developing native iOS and Android applications has required the d
 <!-- Exercises are submitted via the [submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020) just like in the previous parts. Note that, exercises in this part are submitted <i>to a different course instance</i> than in parts 0-9. The parts 1-4 in the submission system refer to the sections a-d in this part. This means that you will be submitting exercises a single section at a time starting with this section, "Introduction to React Native", which is part 1 in the submission system. -->
 练习可以像之前章节那样通过[提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020)提交。注意，本章的练习是提交到与0-9章<i>不同的课程单元</i>。提交系统中的1-4部分是指的本章的a-d部分。也就是说你一次提交一个部分，“React Native 介绍”， 是提交系统中的part 1。
 
-<!-- During this part you will earn credits based on the number of exercises you complete. Completing <i>19 exercises</i> in this part will earn you <i>1 credit</i>. Completing <i>all the exercises</i> in this part will earn you <i>2 credits</i>.  -->
+<!-- During this part you will earn credits based on the number of exercises you complete. Completing <i>at least 19 exercises</i> in this part will earn you <i>1 credit</i>. Completing <i>at least 26 exercises</i> in this part will earn you <i>2 credits</i>. -->
+
+通过这个章节的学习，会根据你完成的练习数量获得学分。完成本章的<i>19个练习</i>会获得<i>1学分</i>。完成<i>所有的练习</i>会获得<i>2学分</i>。
+
+<!-- Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course: -->
+
+一旦你完成了对应的练习并希望获得学分，通过练习提交系统让我们知道你已经完成了课程：
+
+<!-- Note that the "exam done in Moodle" note refers to the [Full Stack Open course's exam](https://fullstackopen.com/en/part0/general_info#sign-up-for-the-exam), which <i>has to be completed</i> before you can earn credits from this part. -->
+
+注意“在Moodle中完成考试“ 可以参考  [Full Stack Open course's exam](https://fullstackopen.com/en/part0/general_info#sign-up-for-the-exam) ，在你从本章节获得学分前<i>必须完成</i>
 
 通过这个章节的学习，会根据你完成的练习数量获得学分。完成本章的<i>19个练习</i>会获得<i>1学分</i>。完成<i>所有的练习</i>会获得<i>2学分</i>。
 
@@ -106,7 +116,7 @@ expo init rate-repository-app
 }
 ```
 
-Running the script <em>npm start</em> starts the [Metro bundler](https://facebook.github.io/metro/) which is a JavaScript bundler for React Native. It can be described as the [Webpack](https://webpack.js.org/) of the React Native ecosystem. In addition to the Metro bundler, <i>Expo development tools</i> should be open in a browser window at [http://localhost:19002](http://localhost:19002). Expo development tools are a useful set of tools for viewing the application logs and starting the application in an emulator or in Expo's mobile application. We will get to emulators and Expo's mobile application soon, but first, let's start our application in a web browser by clicking the <i>Run in web browser</i> link:
+<!-- Running the script <em>npm start</em> starts the [Metro bundler](https://facebook.github.io/metro/) which is a JavaScript bundler for React Native. It can be described as the [Webpack](https://webpack.js.org/) of the React Native ecosystem. In addition to the Metro bundler, <i>Expo development tools</i> should be open in a browser window at [http://localhost:19002](http://localhost:19002). Expo development tools are a useful set of tools for viewing the application logs and starting the application in an emulator or in Expo's mobile application. We will get to emulators and Expo's mobile application soon, but first, let's start our application in a web browser by clicking the <i>Run in web browser</i> link: -->
 
 运行<em>npm start</em>命令启动了[Metro bundler](https://facebook.github.io/metro/)，它是React Native 的一个JavaScript bundler。它可以认为是React Native 生态的[Webpack](https://webpack.js.org/)。除了Metro bundler， <i>Export 开发工具</i>会在浏览器中新打开一个窗口 [http://localhost:19002](http://localhost:19002)。Expo 开发工具是一组有用的工具集，能够观察应用日志并在模拟器或Expo的移动应用中启动应用。我们很快就讲到模拟器和Expo的移动应用了，让我们点击浏览器中的<i>Run in web browser</i> 链接来启动我们的应用吧。
 
@@ -154,11 +164,11 @@ Android 和iOS 设备，比如平板或者手机，可以通过电脑中特定�
 #### Exercise 10.1: initializing the application
 练习10.1 初始化应用
 
-Initialize your application with Expo command-line interface and set up the development environment either using an emulator or Expo's mobile app. It is recommended to try both and find out which development environment is the most suitable for you. The name of the application is not that relevant, you can, for example, go with <i>rate-repository-app</i>.
+<!-- Initialize your application with Expo command-line interface and set up the development environment either using an emulator or Expo's mobile app. It is recommended to try both and find out which development environment is the most suitable for you. The name of the application is not that relevant, you can, for example, go with <i>rate-repository-app</i>. -->
 
 用Expo命令行初始化你的应用，并构建开发环境，使用模拟器或者Expo的移动应用都可以。建议两种方法都试一下，来看看哪种开发方法最适合你。应用的名称并不重要，你可以起，比如说，<i>rate-repository-app</i>
 
-To submit this exercise and all the future exercises you need to [create a new GitHub repository](https://github.com/new). The name of the repository can be for example the name of the application you initialized with <em>expo init</em>. Now that the repository is created, run <em>git init</em> within your application's root directory to make sure that the directory is initialized as a Git repository. Next, to add the created repository as the remote run <em>git remote add origin git@github.com:<YOUR_GITHUB_USERNAME>/<NAME_OF_YOUR_REPOSITORY>.git</em> (remember to replace the placeholder values in the command). Finally, just commit and push your changes into the repository and you are all done.
+<!-- To submit this exercise and all the future exercises you need to [create a new GitHub repository](https://github.com/new). The name of the repository can be for example the name of the application you initialized with <em>expo init</em>. Now that the repository is created, run <em>git init</em> within your application's root directory to make sure that the directory is initialized as a Git repository. Next, to add the created repository as the remote run <em>git remote add origin git@github.com:<YOUR_GITHUB_USERNAME>/<NAME_OF_YOUR_REPOSITORY>.git</em> (remember to replace the placeholder values in the command). Finally, just commit and push your changes into the repository and you are all done. -->
 为了提交这个练习以及所有将来的练习，你需要[创建一个新的GitHub 仓库](https://github.com/new)。仓库的名称可以与你利用<em>expo init</em>初始化应用起的名称一致。一旦仓库创建好后，在应用根目录运行<em>git init</em>来确保当前目录被初始化成了一个Git 仓库。 然后，将Github上刚创建的仓库作为远程仓库，运行 <em>git remote add origin git@github.com:<YOUR_GITHUB_USERNAME>/<NAME_OF_YOUR_REPOSITORY>.git</em> （记得将这里的占位符替换成你的真实信息）。最后提交并上传你的修改到仓库中，就完成了。
 
 </div>
@@ -235,7 +245,7 @@ ESLint 配置仅仅包含了基础配置。如果想要增强配置，或增加�
 #### Exercise 10.2: setting up the ESLint
 搭建ESLint
 
-Set up ESLint in your project so that you can perform linter checks by running <em>npm run lint</em>. To get most of linting it is also recommended to integrate ESLint with your editor.
+<!-- Set up ESLint in your project so that you can perform linter checks by running <em>npm run lint</em>. To get most of linting it is also recommended to integrate ESLint with your editor. -->
 在项目中搭建ESLint，你就可以执行<em>npm run lint</em> 来进行格式化检查。为了获得最佳的格式化效果，建议集成ESLint 到编辑器中。
 
 </div>

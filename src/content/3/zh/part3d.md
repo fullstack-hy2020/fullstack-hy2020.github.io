@@ -282,7 +282,7 @@ personService
 通常，lint 或 linter 是检测和标记编程语言中的错误，包括文本错误的一种工具。 lint-like 这个术语有时用于标记可疑的语言使用情况。 类似 lint 的工具通常对源代码执行静态分析。 
 
 <!-- In compiled statically typed languages like Java, IDEs like NetBeans can point out errors in the code, even ones that are more than just compile errors. Additional tools for performing [static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) like [checkstyle](http://checkstyle.sourceforge.net/), can be used for expanding the capabilities of the IDE to also point out problems related to style, like indentation. -->
-在像 Java 这样的编译静态类型语言中，像 NetBeans 这样的 ide 可以指出代码中的错误，甚至那些不仅仅是编译错误的错误。 执行[静态分析](https://en.wikipedia.org/wiki/Static_program_analysis)的额外工具，如[检查样式](http://checkstyle.sourceforge.net/) ，可以用来扩展 IDE 的功能，也指出与样式有关的问题，如缩进。
+在像 Java 这样的编译静态类型语言中，像 NetBeans 这样的 ide 可以指出代码中的错误，甚至那些不仅仅是编译错误的错误。 执行[静态分析](https://en.wikipedia.org/wiki/Static_program_analysis)的额外工具，如[检查样式](https://checkstyle.sourceforge.io) ，可以用来扩展 IDE 的功能，也指出与样式有关的问题，如缩进。
 
 <!-- In the JavaScript universe, the current leading tool for static analysis aka. "linting" is [ESlint](https://eslint.org/). -->
 在 JavaScript 的世界里，目前主要的静态分析工具又名“ linting”是[ESlint](https://ESlint.org/)。
