@@ -1,0 +1,13 @@
+@import '../../common.scss';
+
+.searchLink {
+  margin-left: 2em;
+  border-radius: 4px;
+  padding: 4px;
+  display: inline-flex;
+
+  &:hover {
+    background-color: $black;
+    color: white;
+  }
+}
