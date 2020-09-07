@@ -569,7 +569,7 @@ It might be best to use the backend from model answers of part 4.
 While doing the exercises, remember all of the debugging methods we have talked about, especially keeping an eye on the console. 
 
 
-**Warning:** If you notice you are mixing async/await and _then_ commands, its 99.9%  certain you are doing something wrong. Use either or, never both. 
+**Warning:** If you notice you are mixing async/await and _then_ commands, it's 99.9%  certain you are doing something wrong. Use either or, never both. 
 
 #### 5.1: bloglist frontend, step1
 
