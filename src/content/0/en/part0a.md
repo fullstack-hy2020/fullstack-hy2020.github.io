@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-This course is an introduction to modern web development with JavaScript. The main focus is on single page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. New for this year's course is a part on TypeScript.
+This course is an introduction to modern web development with JavaScript. The main focus is on single page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. New for this year's course is a parts on TypeScript and React Native.
 
 Other topics include debugging applications, configuration, managing runtime environments and NoSQL databases.
 
@@ -29,7 +29,7 @@ The course material is based on incrementally expanding example applications, wh
 
 ### Taking the course
 
-The course contains ten parts, the first of which is numbered 0 for historical reasons. A part corresponds loosely to one week (averaging 15-20 hours) of studying, but the speed of completing the course is flexible.
+The course contains eleven parts, the first of which is numbered 0 for historical reasons. A part corresponds loosely to one week (averaging 15-20 hours) of studying, but the speed of completing the course is flexible.
 
 Proceeding from part <i>n</i> to part <i>n+1</i> is not sensible before good enough know-how of the topics of part <i>n</i>  has been achieved. In pedagogic terms, the course uses [mastery learning](https://en.wikipedia.org/wiki/Mastery_learning), and you are only intended to proceed to the next part after doing enough of the exercises of the previous part.
 
