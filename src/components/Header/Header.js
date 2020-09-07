@@ -1,10 +1,10 @@
 import './Header.scss';
 
 import React, { Component } from 'react';
-
 import { Link } from 'gatsby';
 import Navigation from '../Navigation/Navigation';
 import { TripleBorder } from '../TripleBorder/TripleBorder';
+import SearchImage from './SearchImage';
 
 class Header extends Component {
   constructor(props) {
@@ -78,14 +78,18 @@ class Header extends Component {
               </TripleBorder>
             )}
           </Link>
-
           {this.state.headerClass !== 'header--small' && (
             <Navigation lang={this.props.lang} />
           )}
+          {this.state.headerClass !== 'header--small' && 
+          this.props.lang !== 'zh' &&
+          (
+            <SearchImage lang={this.props.lang} />
+          )}        
         </div>
       </div>
     );
   }
-}
+};
 
 export default Header;
