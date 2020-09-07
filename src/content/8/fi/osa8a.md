@@ -941,7 +941,7 @@ pitäisi alustavalla datalla tuottaa vastaus
 }
 ```
 
-#### 8.2: kaikki kirjat ja kirjailijat
+#### 8.2: kaikki kirjat
 
 Toteuta kysely _allBooks_, joka palauttaa kaikki kirjat.
 
