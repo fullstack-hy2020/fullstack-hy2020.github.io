@@ -435,7 +435,7 @@ Määrittelemällä
 </Button>
 ```
 
-renderöidään komponentti _Button_, siten että sen juurikomponenttina onkin react-redux-kirjaston komponentti _Link_, jolle siirtyy polun kertova props _to_.  
+renderöidään komponentti _Button_, siten että sen juurikomponenttina onkin react-router-dom-kirjaston komponentti _Link_, jolle siirtyy polun kertova props _to_.  
 
 Navigaatiopalkin koodi kokonaisuudessaan on seuraava
 
