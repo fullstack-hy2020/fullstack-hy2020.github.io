@@ -18,7 +18,7 @@ Today, the most popular way to do the transpiling is using [Babel](https://babel
 [Node.js](https://nodejs.org/en/) is a Javascript runtime environment based on Google's [chrome V8](https://developers.google.com/v8/) Javascript engine and works practically anywhere - from servers to mobile phones. Let's practice writing some Javascript using Node. It is expected that the version of Node.js installed on your machine is at least version <i>10.18.0</i>. The latest versions of Node already understand the latest versions of Javascript, so the code does not need to be transpiled.
 
 
-The code is written into files ending with <i>.js</i> and are run by issuing the command <em>node name\_of\_file.js</em>
+The code is written into files ending with <i>.js</i> that are run by issuing the command <em>node name\_of\_file.js</em>
 
 It is also possible to write JavaScript code into the Node.js console, which is opened by typing _node_ in the command-line, as well as into the browser's developer tool console. The newest revisions of Chrome handle the newer features of JavaScript [pretty well](http://kangax.github.io/compat-table/es2016plus/) without transpiling the code. Alternatively you can use a tool like [JS Bin](https://jsbin.com/?js,console).
 
