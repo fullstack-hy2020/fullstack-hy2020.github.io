@@ -1,10 +1,11 @@
-import './Navigation.scss';
-
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
+import './Navigation.scss';
 
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 import { NavigationItem } from './Item';
-import PropTypes from 'prop-types';
+import SearchLink from './SearchLink';
 
 export const navigation = {
   en: [
@@ -29,6 +30,10 @@ export const navigation = {
   ],
 };
 
+const searchIsEnabledForLang = lang => {
+  return ['fi', 'en'].includes(lang);
+};
+
 const handleCloseMenu = () =>
   document.body.classList.remove('is-open--navigation');
 
@@ -43,8 +48,11 @@ class Navigation extends Component {
       navigationOpen: false,
     };
   }
+
   render() {
-    const { className } = this.props;
+    const { className, lang } = this.props;
+    const showSearchLink = searchIsEnabledForLang(lang);
+
     return (
       <div className={`navigation__wrapper ${className}`}>
         <button
@@ -62,11 +70,12 @@ class Navigation extends Component {
         </button>
         <nav>
           <ul className="navigation">
-            {navigation[this.props.lang].map(i => (
+            {navigation[lang].map(i => (
               <NavigationItem key={i.path} {...i} onClick={handleCloseMenu} />
             ))}
 
-            <LanguageSwitcher lang={this.props.lang} />
+            <LanguageSwitcher lang={lang} />
+            {showSearchLink && <SearchLink lang={lang} />}
           </ul>
         </nav>
       </div>

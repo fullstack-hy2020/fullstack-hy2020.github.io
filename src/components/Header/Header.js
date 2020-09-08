@@ -4,11 +4,6 @@ import React, { Component } from 'react';
 import { Link } from 'gatsby';
 import Navigation from '../Navigation/Navigation';
 import { TripleBorder } from '../TripleBorder/TripleBorder';
-import SearchLink from './SearchLink';
-
-const searchIsEnabledForLang = lang => {
-  return ['fi', 'en'].includes(lang);
-};
 
 class Header extends Component {
   constructor(props) {
@@ -43,7 +38,7 @@ class Header extends Component {
   render() {
     const { headerClass } = this.state;
     const { lang } = this.props;
-    const showSearchLink = searchIsEnabledForLang(lang);
+    
     const isSmallHeader = headerClass === 'header--small';
 
     return (
@@ -80,7 +75,6 @@ class Header extends Component {
             )}
           </Link>
           {!isSmallHeader && <Navigation lang={lang} />}
-          {!isSmallHeader && showSearchLink && <SearchLink lang={lang} />}
         </div>
       </div>
     );
