@@ -462,7 +462,7 @@ notesRouter.post('/', async (request, response, next) => {
 
   const savedNote = await note.save()
   user.notes = user.notes.concat(savedNote._id) //highlight-line
-  await user.save()  //highlight-line
+  await User.findByIdAndUpdate(user._id, user, {new: true})  //highlight-line
   
   response.json(savedNote)
 })
@@ -476,7 +476,7 @@ const user = await User.findById(body.userId)
 // ...
 
 user.notes = user.notes.concat(savedNote._id)
-await user.save()
+await User.findByIdAndUpdate(user._id, user, {new: true})
 ```
 
 Let's try to create a new note
