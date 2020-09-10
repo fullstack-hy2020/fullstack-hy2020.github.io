@@ -913,7 +913,7 @@ Jos kyselyitä on useita, pyytää Playground valitsemaan mikä niistä suoritet
 
 ### Tehtävät 8.1.-8.7.
 
-Tehtävissä toteutetaan yksinkertaisen kirjaston GraphQL:ää tarjoava backend. Ota sovelluksesi lähtökohtaksi [tämä tiedosto](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js). Muista _npm init_ ja riippuvuuksien asentaminen!
+Tehtävissä toteutetaan yksinkertaisen kirjaston GraphQL:ää tarjoava backend. Ota sovelluksesi lähtökohdaksi [tämä tiedosto](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js). Muista _npm init_ ja riippuvuuksien asentaminen!
 
 Huomaa, että koodin käynnistäminen aiheuttaa alussa virheen, sillä skeeman määrittely on puutteellinen.
 
