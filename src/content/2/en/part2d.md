@@ -466,9 +466,9 @@ const App = () => {
     noteService
       .getAll()
       // highlight-start      
-        .then(initialNotes => {
+      .then(initialNotes => {
         setNotes(initialNotes)
-        // highlight-end
+      // highlight-end
       })
   }, [])
 
