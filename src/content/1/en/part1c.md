@@ -306,7 +306,7 @@ The function passed as the first parameter to the _setTimeout_ function is invok
 When the state modifying function _setCounter_ is called, <i>React re-renders the component</i> which means that the function body of the component function gets re-executed:
 
 ```js
-(props) => {
+() => {
   const [ counter, setCounter ] = useState(0)
 
   setTimeout(
