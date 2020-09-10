@@ -130,7 +130,7 @@ Jos käytät tyylien lisäämiseen noin tunnin aikaa, merkkaa myös tämä teht�
 
 #### 7.21: Kurssipalaute
 
-Anna kurssille palautetta weboodissa.
+Anna kurssille palautetta moodlessa.
 
 Tämä oli osan viimeinen tehtävä ja on aika pushata koodi githubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
