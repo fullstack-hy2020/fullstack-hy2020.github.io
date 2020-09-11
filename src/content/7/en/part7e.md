@@ -465,7 +465,7 @@ Finally, let's take a look at some technology of tomorrow (or actually already t
 
 Sometimes the [dynamic typing](https://developer.mozilla.org/en-US/docs/Glossary/Dynamic_typing) of JavaScript variables creates annoying bugs. In part 5 we talked briefly about [PropTypes](/en/part5/props_children_and_proptypes#prop-types): a mechanism which enables one to enforce type checking for props passed to React-components.
 
-Lately there has been a notable uplift in the interest in [static type checking](https://en.wikipedia.org/wiki/Type_system#Static_type_checking). At the moment the most popular typed version of Javascript is the [Typescript](https://www.typescriptlang.org/) which has been developed by Microsoft. Topic of the [part 9](/en/part9) that shall be released at the end of April will be Typescript.
+Lately there has been a notable uplift in the interest in [static type checking](https://en.wikipedia.org/wiki/Type_system#Static_type_checking). At the moment the most popular typed version of Javascript is [Typescript](https://www.typescriptlang.org/) which has been developed by Microsoft. Typescript is covered in [part 9](/en/part9).
 
 #### Server side rendering, isomorphic applications and universal code
 
