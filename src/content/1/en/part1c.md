@@ -668,8 +668,8 @@ const Display = ({ counter }) => {
 ```
 
 <!-- Koska komponentin määrittelevä metodi ei sisällä muuta kuin returnin, voimme määritellä sen hyödyntäen nuolifunktioiden tiiviimpää ilmaisumuotoa -->
-The method defining the component contains only the return statement, so
-we can define the method using the more compact form of arrow functions:
+The function defining the component contains only the return statement, so
+we can define the function using the more compact form of arrow functions:
 
 ```js
 const Display = ({ counter }) => <div>{counter}</div>
