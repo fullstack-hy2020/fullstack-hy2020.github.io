@@ -350,7 +350,7 @@ setTimeout(
 当状态修改函数—— setCounter 被调用时， <i>React 重新渲染了这个组件</i> ，这意味着组件函数的函数体被重新执行:
 
 ```js
-(props) => {
+() => {
   const [ counter, setCounter ] = useState(0)
 
   setTimeout(

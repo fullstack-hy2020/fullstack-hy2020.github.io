@@ -7,9 +7,9 @@ lang: zh
 
 <div class="content">
 
-<!-- This course is an introduction to modern web development with JavaScript. The main focus is on single page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. New for this year's course is a part on TypeScript. -->
+<!-- This course is an introduction to modern web development with JavaScript. The main focus is on single page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. New for this year's course are parts on TypeScript and React Native. -->
 
-本课程的主要内容，是介绍如何使用 Javascript 进行现代 Web 应用的开发 。 主要议题是使用 React 实现单页应用，以及使用 Node.js 实现 RESTful 和 GraphQL web 服务，来支撑 React 应用。 今年还推出了一门全新的的课程——TypeScript。
+本课程的主要内容，是介绍如何使用 Javascript 进行现代 Web 应用的开发 。 主要议题是使用 React 实现单页应用，以及使用 Node.js 实现 RESTful 和 GraphQL web 服务，来支撑 React 应用。 今年还推出了两门全新的的课程——TypeScript和React Native。
 
 <!-- Other topics include debugging applications, configuration, managing runtime environments and NoSQL databases. -->
 
@@ -49,7 +49,7 @@ lang: zh
 
 <!-- The course contains ten parts, the first of which is numbered 0 for historical reasons. A part loosely corresponds to one week (averaging 15-20 hours) of studying but the speed of completing the course is flexible. -->
 
-本课程共分十个章节，由于历史原因，第一章节被编号为 0。 课程每一章节的内容，大概需要一周(平均 15-20 小时)的学习时间，但完成课程的进度是十分灵活的。
+本课程共分十一个章节，由于历史原因，第一章节被编号为 0。 课程每一章节的内容，大概需要一周(平均 15-20 小时)的学习时间，但完成课程的进度是十分灵活的。
 
 <!-- Proceeding from part <i>n</i> to part <i>n+1</i> is not sensible before good enough know-how of the topics of part <i>n</i> has been achieved. In pedagogic terms, the course uses [mastery learning](https://en.wikipedia.org/wiki/Mastery_learning), and the intent is for you to proceed to the next part only after doing enough of the exercises of the previous part. -->
 
