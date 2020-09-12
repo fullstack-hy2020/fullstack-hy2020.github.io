@@ -45,6 +45,7 @@ module.exports = {
   plugins: [
     createSearchConfig('finnish', 'fi'),
     createSearchConfig('english', 'en'),
+    createSearchConfig('chinese', 'zh'),
     {
       resolve: `gatsby-plugin-sitemap`,
     },

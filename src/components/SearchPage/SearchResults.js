@@ -16,6 +16,11 @@ const TRANSLATIONS = {
     resultsTitle: ({ count, query }) =>
       `Found ${count} matches for query "${query}"`,
   },
+  zh: {
+    noMatches: '没有匹配的结果',
+    resultsTitle: ({ count, query }) =>
+      `找到 ${count} 条关于 "${query}" 的结果`,
+  },
 };
 
 const SearchResults = ({ query, results = [], lang = 'en' }) => {
@@ -41,7 +46,7 @@ const SearchResults = ({ query, results = [], lang = 'en' }) => {
           {results.map(({ part, letter }) => (
             <li key={`${part}${letter}`}>
               <Link
-                to={`/${lang === 'en' ? 'en/part' : 'osa'}${part}/${snakeCase(
+                to={`/${lang === 'en' ? 'en/part' : lang === 'zh' ? 'zh/part' : 'osa'}${part}/${snakeCase(
                   navigation[lang][part][letter]
                 )}`}
               >
