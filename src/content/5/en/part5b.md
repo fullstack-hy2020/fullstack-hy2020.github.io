@@ -412,7 +412,7 @@ const App = () => {
   // ...
   const noteFormRef = useRef() // highlight-line
 
-  const noteForm = () => (
+  const NoteFormParent = () => (
     <Togglable buttonLabel='new note' ref={noteFormRef}>  // highlight-line
       <NoteForm createNote={addNote} />
     </Togglable>
