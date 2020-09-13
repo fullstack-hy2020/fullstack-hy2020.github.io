@@ -879,7 +879,7 @@ The event handler is set to the return value of _setToValue(1000)_ which is the 
 }
 ```
 
-The increase button is declared as following:
+The increase button is declared as follows:
 
 ```js
 <button onClick={setToValue(value + 1)}>increment</button>
