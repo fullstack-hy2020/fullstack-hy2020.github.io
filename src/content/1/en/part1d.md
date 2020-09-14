@@ -1195,7 +1195,7 @@ Your finished application could look something like this:
 
 ![](../../images/1/18a.png)
 
-**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your project to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application.
+**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application.
 
 <h4>1.13*: anecdotes step2</h4>
 
