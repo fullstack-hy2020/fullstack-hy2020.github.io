@@ -149,7 +149,7 @@ The backend directory should now look as follows:
 
 ![](../../images/3/27ea.png)
 
-To make express show <i>static content</i>, the page <i>index.html</i> and the JavaScript etc. it fetches, we need a built-in middleware from express called [static](http://expressjs.com/en/starter/static-files.html).
+To make express show <i>static content</i>, the page <i>index.html</i> and the JavaScript, etc., it fetches, we need a built-in middleware from express called [static](http://expressjs.com/en/starter/static-files.html).
 
 When we add the following amidst the declarations of middlewares
 ```js
