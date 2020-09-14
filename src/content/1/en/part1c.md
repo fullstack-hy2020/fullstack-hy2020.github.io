@@ -348,7 +348,7 @@ const App = () => {
 }
 ```
 
-It's easy to follow and track the calls made to the _render_ function:
+It's easy to follow and track the calls made to the <i>App</i> component's render function:
 
 ![](../../images/1/4e.png)
 
