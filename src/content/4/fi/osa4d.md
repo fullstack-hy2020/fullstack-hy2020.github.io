@@ -319,7 +319,7 @@ ja käyttäjien listausta siten että käyttäjien lisäämät blogit ovat näky
 
 #### 4.18: blogilistan laajennus, step7
 
-Toteuta osan 4 luvun [Token-perustainen kirjautuminen](/osa4#/token_perustainen_kirjautuminen) tapaan järjestelmään token-perustainen autentikointi.
+Toteuta osan 4 luvun [Token-perustainen kirjautuminen](/osa4/token_perustainen_kirjautuminen) tapaan järjestelmään token-perustainen autentikointi.
 
 #### 4.19: blogilistan laajennus, step8
 
