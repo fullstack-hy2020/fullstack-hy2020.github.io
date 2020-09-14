@@ -801,7 +801,7 @@ test('a note can be deleted', async () => {
 
 <!-- In the first test, the note object we receive as the response body goes through JSON serialization and parsing. This processing will turn the note object's <em>date</em> property value's type from <em>Date</em> object into a string. Because of this we can't directly compare equality of the <em>resultNote.body</em> and <em>noteToView</em>. Instead, we must first perform similar JSON serialization and parsing for the <em>noteToView<em> as the server is performing for the note object. -->
 
-在第一个测试中， 我们收到的note对象，作为response body，经过JSON的序列化和格式化处理。这种处理会将note 对象的date 属性的值类型从Date 类型转换成string。正是由于此，我们不能直接比较<em>resultNote.body</em> 和 <em>noteToView</em>的相等性能。 相反，我们必须像服务器对note 对象的操作那样，首先利用类似的方法，用JSON来序列化和格式化<em>noteToView<em> 。
+在第一个测试中， 我们收到的note对象，作为response body，经过JSON的序列化和格式化处理。这种处理会将note 对象的date 属性的值类型从Date 类型转换成string。正是由于此，我们不能直接比较<em>resultNote.body</em> 和 <em>noteToView</em>的相等性能。 相反，我们必须像服务器对note 对象的操作那样，首先利用类似的方法，用JSON来序列化和格式化<em>noteToView</em> 。
 
 <!-- Both tests share a similar structure. In the initialization phase they fetch a note from the database. After this, the tests call the actual operation being tested, which is highlighted in the code block. Lastly, the tests verify that the outcome of the operation is as expected. -->
 这两个测试有着相似的结构。 在初始化阶段，它们从数据库中获取一个便笺。 在此之后，测试调用被测试的实际操作，该操作在代码块中突出显示。 最后，测试验证了操作的结果是符合预期的。
