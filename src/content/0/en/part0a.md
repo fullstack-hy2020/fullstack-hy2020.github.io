@@ -37,7 +37,8 @@ You are expected to do <i>at least</i> all of the exercises that are not marked 
 
 The speed of completing the course is quite flexible, and exercises can be submitted until 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) on 10 January 2021.
 
-Exercise completion time statistics can be found via the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Exercise completion time statistics can be found via the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). In 2020 on average the parts took from 8.8 hours (part0) up to 53.2 hours (part9). 
+
 
 ### Grading
 
