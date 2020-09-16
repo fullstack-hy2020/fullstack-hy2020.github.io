@@ -175,7 +175,7 @@ jobs:
 
 Now the environment should be completely ready for the job to run actual important tasks in!
 
-#### Lint, build and test
+#### Lint
 
 After the environment has been set up we can run all the scripts from `package.json` like we would on our own machine. To lint the code all you have to do is add a step to run the `npm run eslint` command.
 
@@ -184,7 +184,15 @@ After the environment has been set up we can run all the scripts from `package.j
   run: npm run eslint
 ```
 
-Similarly add commands for build and test (in this order as running the tests requires the code to be built).
+### Exercise 11.2
+
+Implement the "Lint" workflow and commit it to the repository. Navigate to "Actions" tab and click on your newly created workflow on the left. You should see that the workflow run has failed. There are one or more issues with the Pokedex repository that you will need to fix. Open up the workflow logs and investigate.
+
+Make the necessary changes to the source code so that the lint workflow passes (do not make changes to the lint rules). Once you commit new code the workflow will run again and you will see updated output.
+
+### Build and test
+
+Let's expand on the previous workflow that currently does the linting of the code. Edit the workflow and similarly to the lint command add commands for build and test (in this order as running the tests requires the code to be built).
 
 ```yml
 - name: build
@@ -197,18 +205,14 @@ Similarly add commands for build and test (in this order as running the tests re
 
 <div class="tasks">
 
-### Exercise 11.2
+### Exercise 11.3
 
-Implement the "Lint, build and test" workflow and commit it to the repository. Navigate to "Actions" tab and click on your newly created workflow on the left. You should see that the workflow run has failed. Open up the logs and investigate.
+Rename the "Lint" workflow to "Lint, build and test", add tasks for building and testing the code and commit the workflow to the repository. Look at the workflow run output. This time the linting should cause no problems, but the test run will fail. Investigate which test fails and why and fix the issue in the code (do not change the tests).
+
+Once you have fixed all the issues and the Pokedex is bug-free, the workflow run will succeed and show green!
 
 > TODO: cleanup these screenshots
 
-![Failing workflow un](../../images/11/part11b_07.png)
-
-There are a couple of issues in the Pokedex repository that you will need to fix. Find them based on the workflow run output and commit the changes, which will cause the workflow to run again. Once you have fixed all the issues and the Pokedex is bug-free, the workflow run will succeed and show green!
-
-![Failing workflow un](../../images/11/part11b_08.png)
-
-> TODO: What do we make them submit as the answer? Screenshot of passing checks? Should be consistent for all exercises.
+![Successful workflow run](../../images/11/part11b_07.png)
 
 </div>
