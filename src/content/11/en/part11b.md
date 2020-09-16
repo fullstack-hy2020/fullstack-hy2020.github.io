@@ -132,43 +132,11 @@ Before this exercise, you should have forked the [example repository](https://gi
 
 Create a new Workflow which outputs "Hello World!" to the user.
 
-In this exercise you will set up the very first GitHub Action workflow for your newly forked repository. If you navigate to the "Actions" tab on your repository's navigation you will find the view that contains just suggestions for what to do with GitHub Actions. You want to click on the "Set up a workflow yourself" link.
+To see what your GitHub action workflow has done, you can navigate to the **Actions** tab in GitHub where you should see the workflows in your repository and the steps they implement. The output of your Hello World workflow should look something like this with a properly configured workflow.
 
-> TODO: Clean up the screenshot for public use.
+![A properly configured Hello World workflow](../../images/11/part11b_01.png)
 
-![Empty state of the "Actions" tab](../../images/11/part11b_01.png)
-
-The workflow editor opens up with some example content. Replace the content with code for "Hello world" workflow. Remember to also rename the workflow into something recognisable, like `hello_world.yml`.
-
-> TODO: Clean up the screenshot for public use.
-
-![Workflow editor filled with example content](../../images/11/part11b_02.png)
-
-The next thing to do is to save the workflow. GitHub Actions uses files saved in your repository at `.github/workflows/<your_workflow>.yml` as instructions. Effectively, saving the workflow from the GitHub web UI you are actually committing the workflow as a file in your repository.
-
-> TODO: Clean up the screenshot for public use.
-
-![Committing the workflow](../../images/11/part11b_03.png)
-
-So, you have now created a workflow that should echo "Hello World!" in the console when triggered by a push to the master branch. Let's take a look at how it works by entering the "Actions" tab in your repository again. This time you should see a very different kind of view.
-
-> TODO: Clean up the screenshot for public use.
-
-![Workflow file visible in the repository](../../images/11/part11b_04.png)
-
-You should see your workflow named "Hello World!" on the left side navigation. On the right you should see the commit that triggered your workflow. Now click on the commit to see what happened during the execution of your workflow.
-
-> TODO: Clean up the screenshot for public use.
-
-![Viewing the workflow execution log](../../images/11/part11b_05.png)
-
-You should see the jobs associated to this workflow and their statuses on the left side. With this workflow you only have one job called "hello_world_job". The green checkmark next to the name indicates that the job has been run successfully. Click on the job to see the output.
-
-> TODO: Clean up the screenshot for public use.
-
-![Output of a successfully executed job](../../images/11/part11b_06.png)
-
-You should see the "Hello World!" message echoed in the console. If that's the case then you have successfully gone through all the necessary steps. You have your first GitHub Actions workflow active! 👏
+You should see the "Hello World!" message as an output. If that's the case then you have successfully gone through all the necessary steps. You have your first GitHub Actions workflow active! 👏
 
 </div>
 
@@ -200,7 +168,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: "12.x"
+          node-version: '12.x'
       - name: npm install
         run: npm install
 ```
@@ -212,17 +180,17 @@ Now the environment should be completely ready for the job to run actual importa
 After the environment has been set up we can run all the scripts from `package.json` like we would on our own machine. To lint the code all you have to do is add a step to run the `npm run eslint` command.
 
 ```yml
-    - name: lint
-      run: npm run eslint
+- name: lint
+  run: npm run eslint
 ```
 
 Similarly add commands for build and test (in this order as running the tests requires the code to be built).
 
 ```yml
-    - name: build
-      run: npm run build
-    - name: test
-      run: npm test
+- name: build
+  run: npm run build
+- name: test
+  run: npm test
 ```
 
 </div>
