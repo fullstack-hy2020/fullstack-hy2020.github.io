@@ -1,0 +1,14 @@
+{
+  "common": {
+    "nextPart": "Seuraava osa",
+    "previousPart": "Edellinen osa",
+    "readMore": "Lue lisää"
+  },
+  "searchPage": {
+    "noMatches": "Hakutuloksia ei löytynyt",
+    "matchesTitle": "Löytyi {{count}} hakutulosta hakusanalle \"{{query}}\""
+  },
+  "navigation": {
+    "searchLinkSrLabel": "Hae materiaalista"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "common": {
+    "nextPart": "下一部分",
+    "previousPart": "上一部分",
+    "readMore": "阅读更多"
+  },
+  "searchPage": {
+    "noMatches": "没有匹配的结果",
+    "matchesTitle": "找到 {{count}} 条关于 \"{{query}}\" 的结果"
+  }
+}

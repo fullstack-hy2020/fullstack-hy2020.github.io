@@ -28,6 +28,7 @@
     "gatsby-transformer-remark": "^2.1.19",
     "gatsby-transformer-sharp": "^2.1.8",
     "html-react-parser": "^0.6.0",
+    "i18next": "^19.7.0",
     "lodash": "^4.17.19",
     "node-sass": "^4.11.0",
     "prismjs": "^1.15.0",
@@ -36,6 +37,7 @@
     "react-dom": "^16.6.3",
     "react-ga": "^2.5.7",
     "react-helmet": "^5.2.0",
+    "react-i18next": "^11.7.2",
     "react-use-flexsearch": "^0.1.1",
     "use-debounce": "^3.4.3"
   },

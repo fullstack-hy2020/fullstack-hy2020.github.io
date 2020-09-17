@@ -1,0 +1,14 @@
+{
+  "common": {
+    "nextPart": "Next part",
+    "previousPart": "Previous part",
+    "readMore": "Read more"
+  },
+  "searchPage": {
+    "noMatches": "No matches found",
+    "matchesTitle": "Found {{count}} matches for query \"{{query}}\""
+  },
+  "navigation": {
+    "searchLinkSrLabel": "Search from the material"
+  }
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
+import { useTranslation } from 'react-i18next';
 
 import SearchIcon from '../../SearchIcon';
 import SrOnly from '../../SrOnly';
@@ -9,21 +10,12 @@ const getLinkTo = lang => {
   return lang === 'fi' ? '/search' : `/${lang}/search`;
 };
 
-const TRANSLATIONS = {
-  fi: {
-    label: 'Hae materiaalista',
-  },
-  en: {
-    label: 'Search from the material',
-  },
-};
-
 const SearchLink = ({ lang }) => {
-  const translations = TRANSLATIONS[lang] || TRANSLATIONS.en;
+  const { t } = useTranslation();
 
   return (
     <Link to={getLinkTo(lang)} className={styles.searchLink}>
-      <SrOnly>{translations.label}</SrOnly>
+      <SrOnly>{t('navigation:searchLinkSrLabel')}</SrOnly>
       <SearchIcon />
     </Link>
   );
