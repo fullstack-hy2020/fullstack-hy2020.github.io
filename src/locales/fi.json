@@ -2,7 +2,8 @@
   "common": {
     "nextPart": "Seuraava osa",
     "previousPart": "Edellinen osa",
-    "readMore": "Lue lisää"
+    "readMore": "Lue lisää",
+    "proposeChanges": "Ehdota muutosta materiaalin sisältöön"
   },
   "searchPage": {
     "noMatches": "Hakutuloksia ei löytynyt",
@@ -10,5 +11,18 @@
   },
   "navigation": {
     "searchLinkSrLabel": "Hae materiaalista"
+  },
+  "challengePage": {
+    "registerButtonLabel": "Ilmoita yrityksesi mukaan haasteeseen!",
+    "nameLabel": "Nimi",
+    "namePlaceholder": "Matti Meikäläinen",
+    "titleLabel": "Titteli",
+    "companyLabel": "Yritys",
+    "companyPlaceholder": "Yritys Oy",
+    "phoneLabel": "Puhelinnumero",
+    "emailLabel": "Sähköpostiosoite",
+    "whereDidYouHearLabel": "Mistä kuulit Full Stack -haasteesta?",
+    "submitButtonLabel": "Lähetä",
+    "submitSuccessMessage": "Kiitos! Otamme teihin yhteyttä pian!"
   }
 }

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { PropTypes } from 'prop-types';
 
 import { BodyText } from '../BodyText/BodyText';
 import Element from '../Element/Element';
 import { Image } from '../Image/Image';
-import { PropTypes } from 'prop-types';
 import { TripleBorder } from '../TripleBorder/TripleBorder';
 
 import './DeveloperStory.scss';

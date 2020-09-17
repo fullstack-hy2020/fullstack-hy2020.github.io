@@ -13,7 +13,7 @@ const LanguageWrapper = ({ language, children }) => {
 
   useEffect(
     () => {
-      i18n.changeLanguage(language);
+      language !== i18n.language && i18n.changeLanguage(language);
     },
     [language, i18n]
   );
