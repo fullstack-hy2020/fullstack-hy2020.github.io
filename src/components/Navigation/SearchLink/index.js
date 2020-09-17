@@ -2,8 +2,8 @@ import React from 'react';
 import { Link } from 'gatsby';
 
 import SearchIcon from '../../SearchIcon';
-import styles from './SearchLink.module.scss';
 import SrOnly from '../../SrOnly';
+import styles from './SearchLink.module.scss';
 
 const getLinkTo = lang => {
   return lang === 'fi' ? '/search' : `/${lang}/search`;
