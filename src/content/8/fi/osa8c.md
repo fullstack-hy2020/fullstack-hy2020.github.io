@@ -61,7 +61,7 @@ const Person = require('./models/person')
 
 mongoose.set('useFindAndModify', false)
 
-const MONGODB_URI = 'mongodb+srv://fullstack:sekred@cluster0-ostce.mongodb.net/graphql?retryWrites=true'
+const MONGODB_URI = 'mongodb+srv://fullstack:halfstack@cluster0-ostce.mongodb.net/graphql?retryWrites=true'
 
 console.log('connecting to', MONGODB_URI)
 
