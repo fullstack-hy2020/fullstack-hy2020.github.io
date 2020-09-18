@@ -198,7 +198,7 @@ The URL used to connect to the Apollo Server is otherwise the same as the one yo
 ```javascript
 import React from 'react';
 import { NativeRouter } from 'react-router-native';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from '@apollo/react-hooks'; // highlight-line
 
 import Main from './src/components/Main';
 import createApolloClient from './utils/apolloClient'; // highlight-line
