@@ -9,8 +9,15 @@
     "noMatches": "没有匹配的结果",
     "matchesTitle": "找到 {{count}} 条关于 \"{{query}}\" 的结果"
   },
+  "navigation": {
+    "aboutCourse": "关于课程",
+    "courseContents": "课程内容",
+    "faq": "常见问题",
+    "partners": "合作伙伴",
+    "challenge": "挑战"
+  },
   "challengePage": {
-    "registerButtonLabel": "将您的公司注册到全栈挑战中",
+    "registerButton": "将您的公司注册到全栈挑战中",
     "nameLabel": "姓名",
     "namePlaceholder": "小明",
     "titleLabel": "职位",
@@ -19,7 +26,7 @@
     "phoneLabel": "电话",
     "emailLabel": "电子邮箱",
     "whereDidYouHearLabel": "您从哪里听说的本次挑战",
-    "submitButtonLabel": "提交",
+    "submitButton": "提交",
     "submitSuccessMessage": "谢谢，我们会尽快联系您"
   }
 }

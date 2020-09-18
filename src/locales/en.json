@@ -10,10 +10,15 @@
     "matchesTitle": "Found {{count}} matches for query \"{{query}}\""
   },
   "navigation": {
+    "aboutCourse": "About course",
+    "courseContents": "Course contents",
+    "faq": "FAQ",
+    "partners": "Partners",
+    "challenge": "Challenge",
     "searchLinkSrLabel": "Search from the material"
   },
   "challengePage": {
-    "registerButtonLabel": "Register your company to Full stack challenge",
+    "registerButton": "Register your company to Full stack challenge",
     "nameLabel": "Name",
     "namePlaceholder": "Jane Doe",
     "titleLabel": "Title",
@@ -22,7 +27,7 @@
     "phoneLabel": "Phone",
     "emailLabel": "Email address",
     "whereDidYouHearLabel": "Where did you hear from the challenge",
-    "submitButtonLabel": "Submit",
+    "submitButton": "Submit",
     "submitSuccessMessage": "Thanks! We will contact you soon!"
   }
 }

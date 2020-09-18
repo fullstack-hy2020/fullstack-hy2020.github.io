@@ -178,7 +178,7 @@ class Form extends Component {
                   className="submit spacing spacing--after push-right-4"
                   type="submit"
                 >
-                  {t('challengePage:submitButtonLabel')}
+                  {t('challengePage:submitButton')}
                 </button>
               </form>
             ) : (
@@ -196,7 +196,7 @@ class Form extends Component {
                 className="about__challenge-button about__challenge-button--turquoise"
                 onClick={() => this.setState({ showForm: true })}
               >
-                {t('challengePage:registerButtonLabel')}
+                {t('challengePage:registerButton')}
               </button>
             </Element>
           </>

@@ -10,10 +10,15 @@
     "matchesTitle": "Löytyi {{count}} hakutulosta hakusanalle \"{{query}}\""
   },
   "navigation": {
+    "aboutCourse": "Kurssista",
+    "courseContents": "Kurssin sisältö",
+    "faq": "FAQ",
+    "partners": "Kurssilla mukana",
+    "challenge": "Haaste",
     "searchLinkSrLabel": "Hae materiaalista"
   },
   "challengePage": {
-    "registerButtonLabel": "Ilmoita yrityksesi mukaan haasteeseen!",
+    "registerButton": "Ilmoita yrityksesi mukaan haasteeseen!",
     "nameLabel": "Nimi",
     "namePlaceholder": "Matti Meikäläinen",
     "titleLabel": "Titteli",
@@ -22,7 +27,7 @@
     "phoneLabel": "Puhelinnumero",
     "emailLabel": "Sähköpostiosoite",
     "whereDidYouHearLabel": "Mistä kuulit Full Stack -haasteesta?",
-    "submitButtonLabel": "Lähetä",
+    "submitButton": "Lähetä",
     "submitSuccessMessage": "Kiitos! Otamme teihin yhteyttä pian!"
   }
 }
