@@ -201,7 +201,7 @@ import { NativeRouter } from 'react-router-native';
 import { ApolloProvider } from '@apollo/react-hooks'; // highlight-line
 
 import Main from './src/components/Main';
-import createApolloClient from './utils/apolloClient'; // highlight-line
+import createApolloClient from './src/utils/apolloClient'; // highlight-line
 
 const apolloClient = createApolloClient(); // highlight-line
 
