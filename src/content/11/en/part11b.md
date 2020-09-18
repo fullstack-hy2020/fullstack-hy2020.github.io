@@ -33,17 +33,9 @@ In general, in order to have CI operate on a repo, we need a few things:
 
 That's the traditional model at least, we'll see in a minute how GitHub Actions short-circuit some of these steps (or rather make it such that you don't have to worry about them) but first, let's have a quick look at what Jenkins would need to meet all of these conditions.
 
-### Jenkins as a checklist of needs
-
-Jenkins workflows are defined by a file called `Jenkinsfile` in the root of the repository (very creative I know, but at least it's logical). This file defines what the requirements for running a job are (for example, if the job needs a specific server to run on, this can be defined). It also defines what specific actions need to be carried out under which circumstances and what order they should be carried out in.
-
-In a simple setup, Jenkins would have to be told to pull the repo and look for a Jenkins file. In order for this to work, the Jenkins server needs to have credentials in its credentials store to be able to putt from git. This same credentials store would likely also store any credentials for deployment.
-
-We can see that Jenkins does indeed meet all of the requirements we listed above, so, what about GitHub Actions?
-
 ### How GitHub Actions meet their basic needs
 
-GitHub Actions have a great advantage over Jenkins (or other self hosted solutions), because the repo is hosted with the CI provider. In other words, Github provides both the repo and the CI platform. This means that if we've enabled actions for a repo, GitHub is already aware of the fact that we have workflows defined and what those definitions look like.
+GitHub Actions have a great advantage over self hosted solutions: the repo is hosted with the CI provider. In other words, Github provides both the repo and the CI platform. This means that if we've enabled actions for a repo, GitHub is already aware of the fact that we have workflows defined and what those definitions look like.
 
 </div>
 
