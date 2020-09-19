@@ -163,8 +163,9 @@ query {
 ```
 
 <!-- The query fetching the information of all of the people, _allPersons_, is a bit more complicated. Because the query returns a list of <i>Person</i>-objects, the query must describe  -->
-获取所有人(_allPersons_)的信息的查询稍微复杂一些。 因为查询返回一个<i>Person</i>-对象列表，所以查询必须描述查询[返回](https://graphql.org/learn/queries/#fields)<i>对象的哪个字段</i>:
-<!-- <i>which fields</i> of the objects the query [returns](https://graphql.org/learn/queries/#fields): -->
+获取所有人(_allPersons_)的信息的查询稍微复杂一些。 因为这个查询会返回一个<i>Person</i>对象列表，所以查询必须描述查询会返回
+<!-- <i>which [fields](https://graphql.org/learn/queries/#fields)</i> of the objects the query returns: -->
+对象的哪些<i>[字段](https://graphql.org/learn/queries/#fields)</i> ：
 
 
 ```js

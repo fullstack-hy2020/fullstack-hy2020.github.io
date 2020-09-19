@@ -508,9 +508,9 @@ const App = () => {
     noteService
       .getAll()
       // highlight-start      
-        .then(initialNotes => {
+      .then(initialNotes => {
         setNotes(initialNotes)
-        // highlight-end
+      // highlight-end
       })
   }, [])
 
@@ -521,7 +521,7 @@ const App = () => {
     noteService
       .update(id, changedNote)
       // highlight-start      
-        .then(returnedNote => {
+      .then(returnedNote => {
         setNotes(notes.map(note => note.id !== id ? note : returnedNote))
       // highlight-end
       })
@@ -537,10 +537,10 @@ const App = () => {
 
     noteService
       .create(noteObject)
-    // highlight-start      
-        .then(returnedNote => {
+      // highlight-start      
+      .then(returnedNote => {
         setNotes(notes.concat(returnedNote))
-        // highlight-end
+      // highlight-end
         setNewNote('')
       })
   }
