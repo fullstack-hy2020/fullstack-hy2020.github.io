@@ -181,7 +181,7 @@ Avoimen yliopiston tarjonnassa on 1-10 opintopisteen laajuinen Full Stack -harjo
 
 Harjoitustyössä toteutetaan vapaavalintainen sovellus Reactilla ja/tai Nodella. Myös React Nativella toteutettu mobiilisovellus on mahdollinen.
 
-Harjoitustyön opintopistemäärä määrittyy käytettyjen työtuntien mukaan, yksi opintopiste vastaa 17.5 tuntia. Työ arvostellaan skaalalla hyväksytty/hylätty.
+Harjoitustyön opintopistemäärä määrittyy käytettyjen työtuntien mukaan, yksi opintopiste vastaa 27 tuntia. Työ arvostellaan skaalalla hyväksytty/hylätty.
 
 Harjoitustyö on mahdollista tehdä myös pari- tai ryhmätyönä.
 
