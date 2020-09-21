@@ -587,7 +587,7 @@ The _savedNote_ parameter in the callback function is the saved and newly create
 response.json(savedNote)
 ```
 
-Fetching an individual note gets changed into the following:
+Using Mongoose's [findById](https://mongoosejs.com/docs/api.html#model_Model.findById) method, fetching an individual note gets changed into the following:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
