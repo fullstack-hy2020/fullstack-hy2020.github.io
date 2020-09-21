@@ -58,6 +58,8 @@ The most important snippet is the one for the <em>console.log()</em> command, fo
 }
 ```
 
+Debugging your code using _console.log()_ is so common that Visual studio code has that snippet built in. To use it, type _log_ and hit tab to autocomplete. 
+
 ### JavaScript Arrays
 
 From here on out, we will be using the functional programming methods of the JavaScript [array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array), such as  _find_, _filter_, and _map_ - all of the time. They operate on the same general principles as streams do in Java 8, which have been used during the last few years in both the 'Ohjelmoinnin perusteet' and 'Ohjelmoinnin jatkokurssi' courses at the university's department of Computer Science, and also in the programming MOOC. 
