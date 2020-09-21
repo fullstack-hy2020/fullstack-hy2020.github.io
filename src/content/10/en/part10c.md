@@ -198,10 +198,10 @@ The URL used to connect to the Apollo Server is otherwise the same as the one yo
 ```javascript
 import React from 'react';
 import { NativeRouter } from 'react-router-native';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from '@apollo/react-hooks'; // highlight-line
 
 import Main from './src/components/Main';
-import createApolloClient from './utils/apolloClient'; // highlight-line
+import createApolloClient from './src/utils/apolloClient'; // highlight-line
 
 const apolloClient = createApolloClient(); // highlight-line
 
@@ -309,9 +309,9 @@ The changes in the <em>useRepositories</em> hook should not affect the <em>Repos
 
 Every application will most likely run in more than one environment. Two obvious candidates for these environments are the development environment and the production environment. Out of these two, the development environment is the one we are running the application right now. Different environments usually have different dependencies, for example, the server we are developing locally might use a local database whereas the server that is deployed to the production environment uses the production database. To make the code environment independent we need to parametrize these dependencies. At the moment we are using one very environment dependant hardcoded value in our application: the URL of the server.
 
-We have previously learned that we can provide running programs with environment variables. These variables can be defined in the command line or using environment configuration files such as <i>.env</i> files and third-party libraries such as <i>Dotenv</i>. Unfortunately, React Native doesn't have direct support for environment variables. However, we can access the Expo configuration defined in the <i>app.json</i> file at runtime from our JavaScript code. This configuration can be used define and access environment dependant variables.
+We have previously learned that we can provide running programs with environment variables. These variables can be defined in the command line or using environment configuration files such as <i>.env</i> files and third-party libraries such as <i>Dotenv</i>. Unfortunately, React Native doesn't have direct support for environment variables. However, we can access the Expo configuration defined in the <i>app.json</i> file at runtime from our JavaScript code. This configuration can be used to define and access environment dependant variables.
 
-The configuration can be accessed by importing the <em>Constants</em> constant from the <i>expo-constants</i> module as be have done a few times before. Once imported, the <em>Constants.manifest</em> property will contain the configuration. Let's try this by logging <em>Constants.manifest</em> in the <em>App</em> component:
+The configuration can be accessed by importing the <em>Constants</em> constant from the <i>expo-constants</i> module as we have done a few times before. Once imported, the <em>Constants.manifest</em> property will contain the configuration. Let's try this by logging <em>Constants.manifest</em> in the <em>App</em> component:
 
 ```javascript
 import React from 'react';
@@ -352,7 +352,7 @@ The next step is to use the configuration to define environment dependant variab
 }
 ```
 
-Is turned into and export, which contains the contents of the <em>expo</em> property:
+Is turned into an export, which contains the contents of the <em>expo</em> property:
 
 ```javascript
 export default {
@@ -361,7 +361,7 @@ export default {
 };
 ```
 
-Expo has reserved an [extra](https://docs.expo.io/guides/environment-variables/#using-app-manifest-extra) property in the configuration for any application-specific configuration. To see how this works, let's add a <em>env</em> variable into our application's configuration:
+Expo has reserved an [extra](https://docs.expo.io/guides/environment-variables/#using-app-manifest-extra) property in the configuration for any application-specific configuration. To see how this works, let's add an <em>env</em> variable into our application's configuration:
 
 ```javascript
 export default {
@@ -399,7 +399,7 @@ ENV=test npm start
 
 If you take a look at the logs, you should see that the <em>Constants.manifest.extra.env</em> property has changed.
 
-We can also load environment variables from a <em>.env</em> file as we have learned in the previous parts. First, we need to install the [Dotenv](https://www.npmjs.com/package/dotenv) library:
+We can also load environment variables from an <em>.env</em> file as we have learned in the previous parts. First, we need to install the [Dotenv](https://www.npmjs.com/package/dotenv) library:
 
 ```shell
 npm install dotenv
