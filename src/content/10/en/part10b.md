@@ -577,7 +577,7 @@ import Main from './src/components/Main';
 
 const App = () => {
   return (
-    <NativeRouter>
+    <NativeRouter> // highlight-line
       <Main />
     </NativeRouter> // highlight-line
   );
