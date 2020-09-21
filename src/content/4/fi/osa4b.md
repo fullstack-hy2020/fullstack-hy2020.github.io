@@ -639,7 +639,7 @@ notesRouter.post('/', async (request, response, next) => {
 
   const note = new Note({
     content: body.content,
-    important: body.important === undefined ? false : body.important,
+    important: body.important === body.important || false,
     date: new Date(),
   })
   // highlight-start
