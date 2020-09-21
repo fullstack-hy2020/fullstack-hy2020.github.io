@@ -566,7 +566,7 @@ The component must work like the <i>NoteForm</i> component from the [material](/
 #### 5.7* Blog list frontend, step7
 
 <!-- Lisää yksittäiselle blogille nappi, jonka avulla voi kontrolloida näytetäänkö kaikki blogiin liittyvät tiedot. -->
-Let's add each blog a button, which controls if all of the details about the blog are shown or not.
+Let's add a button to each blog, which controls whether all of the details about the blog are shown or not.
 
 <!-- Klikkaamalla nappia sen täydelliset tiedot aukeavat. -->
 Full details of the blog open when the button is clicked.
