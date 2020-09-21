@@ -852,7 +852,7 @@ The sign in form should look something like this:
 
 ### Form validation
 
-Formik offers two approaches to the form validation: a validation function or a validation schema. Validation function is a function provided for the <em>Formik</em> component as the value of the [validate](https://jaredpalmer.com/formik/docs/guides/validation#validate) prop. It receives the from's values as an argument and returns an object containing possible field specific error messages.
+Formik offers two approaches to the form validation: a validation function or a validation schema. Validation function is a function provided for the <em>Formik</em> component as the value of the [validate](https://jaredpalmer.com/formik/docs/guides/validation#validate) prop. It receives the form's values as an argument and returns an object containing possible field specific error messages.
 
 The second approach is the validation schema which is provided for the <em>Formik</em> component as the value of the [validationSchema](https://jaredpalmer.com/formik/docs/guides/validation#validationschema) prop. This validation schema can be created with a validation library called [Yup](https://github.com/jquense/yup). Let's get started by installing Yup:
 
