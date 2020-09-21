@@ -21,7 +21,7 @@ The Visual Studio Code debugger can be useful in some situations. You can launch
 
 Note that the application shouldn't be running in another console, otherwise the port will already be in use.
 
-__NB__ Newer version of Visual Studio Code may have _run_ instead of _debug_. Furthermore, you may have to configure your _launch.json_ file to start debuggning. This can be done by choosing _Add Configuration..._ on drop down menu, which is located next to green play button and above _VARIABLES_ menu, and select _Run "npm start" in a debug terminal_. 
+__NB__ A newer version of Visual Studio Code may have _Run_ instead of _Debug_. Furthermore, you may have to configure your _launch.json_ file to start debugging. This can be done by choosing _Add Configuration..._ on the drop-down menu, which is located next to the green play button and above _VARIABLES_ menu, and select _Run "npm start" in a debug terminal_. For more detailed setup instructions, visit Visual Studio Code's [Debugging documentation](https://code.visualstudio.com/docs/editor/debugging).
 
 Below you can see a screenshot where the code execution has been paused in the middle of saving a new note:
 
