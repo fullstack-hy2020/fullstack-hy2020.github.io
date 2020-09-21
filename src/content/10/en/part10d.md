@@ -118,7 +118,7 @@ To be able to use these matchers we need to extend the Jest's <em>expect</em> ob
 import '@testing-library/jest-native/extend-expect';
 ```
 
-Next, configure this file as a setup file in the Jest's configuration in the <i>package.json</i> file (note that the <em><rootDir></em> in the path is intentional and there is no need to replace it):
+Next, configure this file as a setup file in the Jest's configuration in the <i>package.json</i> file (note that the <em>\<rootDir></em> in the path is intentional and there is no need to replace it):
 
 ```javascript
 {
