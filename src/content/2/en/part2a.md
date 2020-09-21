@@ -58,7 +58,7 @@ The most important snippet is the one for the <em>console.log()</em> command, fo
 }
 ```
 
-Debugging your code using _console.log()_ is so common that Visual studio code has that snippet built in. To use it, type __log__ and hit tab to autocomplete. 
+Debugging your code using _console.log()_ is so common that Visual studio code has that snippet built in. To use it, type _log_ and hit tab to autocomplete. 
 
 ### JavaScript Arrays
 
