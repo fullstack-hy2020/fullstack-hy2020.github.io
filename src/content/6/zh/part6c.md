@@ -278,7 +278,7 @@ export default {
 ```
 
 <!-- The method _addNote_ of the component <i>NoteForm</i> changes slightly: -->
-组件<i>NewNote</i> 的方法 addNote 略有变化:
+组件<i>NewNote</i> 的方法 _addNote_ 略有变化:
 
 ```js
 import React from 'react'
@@ -289,7 +289,7 @@ import noteService from '../services/notes' // highlight-line
 const NewNote = (props) => {
   const dispatch = useDispatch()
   
-  const addNote = async (event) => {
+  const addNote = async (event) => { // highlight-line
     event.preventDefault()
     const content = event.target.note.value
     event.target.note.value = ''

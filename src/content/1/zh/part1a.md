@@ -73,8 +73,9 @@ ReactDOM.render(<App />, document.getElementById('root'))
 <!-- renders its contents into the <i>div</i>-element, defined in the file <i>public/index.html</i>, having the <i>id</i> value 'root'. -->
 这是将其内容渲染到<i>div</i> 元素中，其 <i>id</i> 值为 'root'，该元素在文件<i>public/index.html</i>中定义。
 
-<!-- By default, the file <i>public/index.html</i> is empty. You can try adding some HTML into the file. However, when using React, all content that needs to be rendered is usually defined as React components. -->
-默认情况下，文件 <i>public/index.html</i> 为空。 您可以尝试在文件中添加一些 HTML。 但是，在用 React 开发时，需要渲染的内容通常需要定义为 React 组件。
+
+<!-- By default, the file <i>public/index.html</i> doesn't contain any HTML markup that is visible to us in the browser. You can try adding some HTML into the file. However, when using React, all content that needs to be rendered is usually defined as React components. -->
+默认情况下，文件 <i>public/index.html</i> 并没有什么能够展示在浏览器的HTML标签内容。 您可以尝试在文件中添加一些 HTML。 但是，在用 React 开发时，需要渲染的内容通常需要定义为 React 组件。
 
 <!-- Let's take a closer look at the code defining the component: -->
 让我们仔细看看定义组件的代码:

@@ -397,8 +397,8 @@ const App = () => {
 }
 ```
 
-<!-- It's easy to follow and track the calls made to the _render_ function: -->
-就很容易跟踪并捕获render函数的调用:
+<!-- It's easy to follow and track the calls made to the  <i>App</i> component's render  function: -->
+很容易就能跟踪和捕获到<i>App</i> 组件 render 函数的调用：
 
 ![](../../images/1/4e.png)
 
