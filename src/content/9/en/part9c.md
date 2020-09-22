@@ -944,9 +944,11 @@ corresponding method in <i>diaryService</i> looks like this
 
 ```js
 import {
-  NonSensitiveDiaryEntry, DiaryEntry,
-  Visibility, Weather // highlight-line
-  } from '../types';
+  NonSensitiveDiaryEntry,
+  DiaryEntry,
+  Visibility, // highlight-line
+  Weather // highlight-line
+} from '../types';
 
 
 const addEntry = (
