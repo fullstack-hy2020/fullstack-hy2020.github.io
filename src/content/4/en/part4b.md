@@ -319,11 +319,13 @@ test('all notes are returned', async () => {
 test('a specific note is within the returned notes', async () => {
   const response = await api.get('/api/notes')
 
-  const contents = response.body.map(r => r.content) // highlight-line
+  // highlight-start
+  const contents = response.body.map(r => r.content)
 
   expect(contents).toContain(
-    'Browser can execute only Javascript' // highlight-line
+    'Browser can execute only Javascript'
   )
+  // highlight-end
 })
 ```
 
@@ -587,6 +589,7 @@ test('a specific note is within the returned notes', async () => {
   const response = await api.get('/api/notes')
 
   const contents = response.body.map(r => r.content)
+
   expect(contents).toContain(
     'Browser can execute only Javascript'
   )
@@ -1092,6 +1095,7 @@ describe('when there is initially some notes saved', () => {
     const response = await api.get('/api/notes')
 
     const contents = response.body.map(r => r.content)
+
     expect(contents).toContain(
       'Browser can execute only Javascript'
     )
