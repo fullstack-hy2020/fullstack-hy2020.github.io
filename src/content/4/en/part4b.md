@@ -52,10 +52,10 @@ We also added the [runInBand](https://jestjs.io/docs/en/cli.html#--runinband) op
 We specified the mode of the application to be <i>development</i> in the _npm run dev_ script that uses nodemon. We also specified that the default _npm start_ command will define the mode as <i>production</i>.
 
 
-There is a slight issue in the way that we have specified the mode of the application in our scripts: it will not work on Windows. We can correct this by installing the [cross-env](https://www.npmjs.com/package/cross-env) package with the command:
+There is a slight issue in the way that we have specified the mode of the application in our scripts: it will not work on Windows. We can correct this by installing the [cross-env](https://www.npmjs.com/package/cross-env) package as a development dependency with the command:
 
 ```bash
-npm install cross-env
+npm install --save-dev cross-env
 ```
 
 We can then achieve cross-platform compatibility by using the cross-env library in our npm scripts defined in <i>package.json</i>:
