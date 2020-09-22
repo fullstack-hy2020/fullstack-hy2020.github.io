@@ -944,9 +944,11 @@ corresponding method in <i>diaryService</i> looks like this
 
 ```js
 import {
-  NonSensitiveDiaryEntry, DiaryEntry,
-  Visibility, Weather // highlight-line
-  } from '../types';
+  NonSensitiveDiaryEntry,
+  DiaryEntry,
+  Visibility, // highlight-line
+  Weather // highlight-line
+} from '../types';
 
 
 const addEntry = (
@@ -963,7 +965,7 @@ const addEntry = (
 
   diaries.push(newDiaryEntry);
   return newDiaryEntry;
-}
+};
 ```
 
 <!-- As we can see the <i>addDiary</i> function is growing to be pretty hard to read, when having all the fields as separate parameters. It might be better to just send the data as an object to the function: -->
