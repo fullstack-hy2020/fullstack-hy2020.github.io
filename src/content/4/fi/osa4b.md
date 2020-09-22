@@ -699,7 +699,7 @@ test('a note can be deleted', async () => {
 })
 ```
 
-Ensimmäisessä testissä note-objekti, jonka saamme palvelimelta vastauksena, käy läpi JSON-serialisoinnin ja -parsemisen. Tämän prosessoinnin seurauksena note-objektin <em>date</em> kentän arvon tyyppi muuttuu <em>Date</em> objektista merkkijonoksi. Tämän seurauksena emme voi suoraan verrata <em>resultNote.body</em> muuttujaa ja <em>noteToView</em> muuttujaa. Sen sijaan meidän täytyy ensin suorittaa samanlainen JSON-serialisointi ja -parseminen <em>noteView</em> muuttujalle, kuin palvelin suorittaa note-objektille.
+Ensimmäisessä testissä note-objekti, jonka saamme palvelimelta vastauksena, käy läpi JSON-serialisoinnin ja -parsemisen. Tämän prosessoinnin seurauksena note-objektin <em>date</em> kentän arvon tyyppi muuttuu <em>Date</em> objektista merkkijonoksi. Tämän seurauksena emme voi suoraan verrata <em>resultNote.body</em> muuttujaa ja <em>noteToView</em> muuttujaa. Sen sijaan meidän täytyy ensin suorittaa samanlainen JSON-serialisointi ja -parseminen <em>noteToView</em> muuttujalle, kuin palvelin suorittaa note-objektille.
 
 Molemmat testit ovat rakenteeltaan samankaltaisia. Alustusvaiheessa ne hakevat kannasta yksittäisen muistiinpanon. Tämän jälkeen on itse testattava operaatio, joka on koodissa korostettuna. Lopussa tarkastetaan, että operaation tulos on haluttu. 
 
