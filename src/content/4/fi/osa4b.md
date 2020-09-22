@@ -45,7 +45,7 @@ Samalla määriteltiin, että suoritettaessa sovellusta komennolla _npm run dev_
 Määrittelyssämme on kuitenkin pieni ongelma: se ei toimi Windowsilla. Tilanne korjautuu asentamalla kirjasto [cross-env](https://www.npmjs.com/package/cross-env) komennolla
 
 ```bash
-npm install cross-env
+npm install --save-dev cross-env
 ```
 
 ja muuttamalla <i>package.json</i> kaikilla käyttöjärjestelmillä toimivaan muotoon
