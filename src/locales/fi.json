@@ -28,6 +28,9 @@
     "emailLabel": "Sähköpostiosoite",
     "whereDidYouHearLabel": "Mistä kuulit Full Stack -haasteesta?",
     "submitButton": "Lähetä",
-    "submitSuccessMessage": "Kiitos! Otamme teihin yhteyttä pian!"
+    "submitSuccessMessage": "Kiitos! Otamme teihin yhteyttä pian!",
+    "participantsTitle": "Nämä yritykset ovat mukana Full Stack -haasteessa",
+    "coOperationTitle": "Yhteistyössä",
+    "infoButton": "Lisätietoa haasteesta"
   }
 }

@@ -28,6 +28,8 @@
     "emailLabel": "电子邮箱",
     "whereDidYouHearLabel": "您从哪里听说的本次挑战",
     "submitButton": "提交",
-    "submitSuccessMessage": "谢谢，我们会尽快联系您"
+    "submitSuccessMessage": "谢谢，我们会尽快联系您",
+    "participantsTitle": "参加全栈挑战",
+    "infoButton": "了解更多挑战信息"
   }
 }
