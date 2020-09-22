@@ -41,7 +41,7 @@ We will get to know Redux by implementing a counter application yet again:
 Create a new create-react-app-application and install </i>redux</i> with the command
 
 ```bash
-npm install redux --save
+npm install redux
 ```
 
 
@@ -893,8 +893,8 @@ There are multiple ways to share the redux-store with components. First we will 
 <!-- Asennetaan react-redux -->
 First we install react-redux
 
-```js
-npm install --save react-redux
+```bash
+npm install react-redux
 ```
 
 <!-- Eriytetään komponentti _App_ omaan tiedostoon _App.js_. Tarkastellaan ensin mitä sovelluksen muiden tiedostojen sisällöksi tulee. -->

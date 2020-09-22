@@ -15,8 +15,8 @@ lang: zh
 <!-- Install mongoose and mongoose-unique-validator: -->
 安装 mongoose 和 mongoose-unique-validator:
 
-```js
-npm install mongoose mongoose-unique-validator --save
+```bash
+npm install mongoose mongoose-unique-validator
 ```
 
 <!-- We will imitate what we did in parts [3](/zh/part3/将数据存入_mongo_db) and [4](/zh/part4/从后端结构到测试入门). -->

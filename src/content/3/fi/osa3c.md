@@ -129,7 +129,7 @@ Mongoosesta voisi käyttää luonnehdintaa <i>object document mapper</i> (ODM), 
 Asennetaan Mongoose:
 
 ```bash
-npm install mongoose --save
+npm install mongoose
 ```
 
 Ei lisätä mongoa käsittelevää koodia heti backendin koodin sekaan, vaan tehdään erillinen kokeilusovellus tiedostoon <i>mongo.js</i>:
@@ -507,7 +507,7 @@ MONGODB_URI=osoite_tahan npm run watch
 Eräs kehittyneempi tapa on käyttää [dotenv](https://github.com/motdotla/dotenv#readme)-kirjastoa. Asennetaan kirjasto komennolla
 
 ```bash
-npm install dotenv --save
+npm install dotenv
 ```
 
 Sovelluksen juurihakemistoon tehdään sitten tiedosto nimeltään <i>.env</i>, minne tarvittavien ympäristömuuttujien arvot määritellään. Tiedosto näyttää seuraavalta

@@ -54,7 +54,7 @@ We can allow requests from other <i>origins</i> by using Node's [cors](https://g
 Install <i>cors</i> with the command
 
 ```bash
-npm install cors --save
+npm install cors
 ```
 
 take the middleware to use and allow for requests from all origins: 
@@ -312,7 +312,7 @@ The following is a log about one typical problem. Heroku cannot find application
 
 ![](../../images/3/33.png)
 
-The reason is that the option <i>--save</i> was forgotten when <i>express</i> was installed, so information about the dependency was not saved to the file <i>package.json</i>.
+The reason is that the <i>express</i> package has not been installed with the <em>npm install express</em> command, so information about the dependency was not saved to the file <i>package.json</i>.
 
 Another typical problem is that the application is not configured to use the port set to environment variable <em>PORT</em>: 
 

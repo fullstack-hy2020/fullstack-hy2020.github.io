@@ -200,7 +200,7 @@ Toteutetaan seuraavaksi route käyttäjien luomista varten. Käyttäjällä on s
 Asennetaan salasanojen hashaamiseen käyttämämme [bcrypt](https://github.com/kelektiv/node.bcrypt.js)-kirjasto:
 
 ```bash
-npm install bcrypt --save
+npm install bcrypt
 ```
 
 Käyttäjien luominen tapahtuu osassa 3 läpikäytyjä [RESTful](/osa3/node_js_ja_express#rest)-periaatteita seuraten tekemällä HTTP POST -pyyntö polkuun <i>users</i>.
@@ -349,7 +349,7 @@ Hoidetaan uniikkiuden tarkastaminen Mongoosen validoinnin avulla. Kuten edellise
 [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator). Suoritetaan asennus
 
 ```bash
-npm install --save mongoose-unique-validator
+npm install mongoose-unique-validator
 ```
 
 Käyttäjän skeemaa tiedostossa <i>models/user.js</i> tulee muuttaa seuraavasti seuraavasti:

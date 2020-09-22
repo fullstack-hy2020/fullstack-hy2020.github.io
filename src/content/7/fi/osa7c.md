@@ -27,8 +27,8 @@ Aloitetaan bootstrapista, käytetään kirjastoa [react-bootstrap](https://react
 
 Asennetaan kirjasto suorittamalla komento
 
-```js
-npm install --save react-bootstrap
+```bash
+npm install react-bootstrap
 ```
 
 Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään bootstrapin css-määrittelyt lataava rivi:
@@ -241,8 +241,8 @@ Tarkastellaan toisena esimerkkinä Googlen kehittämän "muotokielen" [Material 
 
 Asennetaan kirjasto suorittamalla komento
 
-```js
-npm install --save @material-ui/core
+```bash
+npm install @material-ui/core
 ```
 
 Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään MaterialUI:n css-määrittelyt lataava rivi:
@@ -377,8 +377,8 @@ Kirjautumisen jälkeisen notifikaation näyttämiseen sopii komponenetti [Alert]
 
 Alert-komponentti ei ole vielä mukana MaterialUI:n core-pakkauksessa, ja komponentin sisältävä pakkaus [lab](https://material-ui.com/components/about-the-lab/) tulee asentaa sovellukseen:
 
-```js 
-npm install --save @material-ui/lab
+```bash
+npm install @material-ui/lab
 ```
 
 Komponentti importataan seuraavasti

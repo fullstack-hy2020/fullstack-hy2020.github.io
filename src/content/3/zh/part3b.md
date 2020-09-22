@@ -74,7 +74,7 @@ Cross-origin resource sharing (CORS)是一种机制，它允许一个网页上�
 使用命令安装<i>cors</i>
 
 ```bash
-npm install cors --save
+npm install cors
 ```
 
 <!-- take the middleware to use and allow for requests from all origins:  -->

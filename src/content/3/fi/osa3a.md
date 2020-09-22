@@ -232,7 +232,7 @@ Nodella tapahtuvaa web-sovellusten ohjelmointia helpottamaan onkin kehitelty use
 Otetaan express käyttöön määrittelemällä se projektimme riippuvuudeksi komennolla
 
 ```bash
-npm install express --save
+npm install express
 ```
 
 Riippuvuus tulee nyt määritellyksi tiedostoon <i>package.json</i>:

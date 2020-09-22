@@ -284,8 +284,8 @@ ReactDOM.render(
 
 Jotta kaikki toimisi, on asennettava uusia riippuvuuksia:
 
-```js
-npm install --save @apollo/link-ws subscriptions-transport-ws
+```bash
+npm install @apollo/link-ws subscriptions-transport-ws
 ```
 
 Uusi konfiguraatio johtuu siitä, että sovelluksella tulee nyt olla HTTP-yhteyden lisäksi websocket-yhteys GraphQL-palvelimelle:

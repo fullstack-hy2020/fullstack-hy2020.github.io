@@ -629,8 +629,8 @@ Haluaisimmekin varmistaa että jos <i>Togglable</i>-komponenttia käytetään, o
 
 Komponentin olettamat ja edellyttämät propsit ja niiden tyypit voidaan määritellä kirjaston [prop-types](https://github.com/facebook/prop-types) avulla. Asennetaan kirjasto
 
-```js
-npm install --save prop-types
+```bash
+npm install prop-types
 ```
 
 <i>buttonLabel</i> voidaan määritellä <i>pakolliseksi</i> string-tyyppiseksi propsiksi seuraavasti:

@@ -118,8 +118,8 @@ ReactDOM.render(<App />, document.getElementById('root'))
 <!-- Let's change the above application to use React router. First, we install React router with the command -->
 让我们将上面的应用改为使用 React 路由
 
-```js
-npm install --save react-router-dom
+```bash
+npm install react-router-dom
 ```
 
 <!-- The routing provided by React Router is enabled by changing the application as follows: -->

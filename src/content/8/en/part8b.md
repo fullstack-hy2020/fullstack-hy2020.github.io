@@ -34,8 +34,8 @@ Create a new React-app and install the dependencies required by [Apollo client](
 <!-- Luodaan uusi React-sovellus ja asennetaan siihen [Apollo clientin](https://www.apollographql.com/docs/react/get-started/#installation) vaatimat riippuvuudet. -->
 We'll create a new React application and install the dependencies required by [Apollo client](https://www.apollographql.com/docs/react/get-started/#installation).
 
-```js
-npm install --save @apollo/client graphql
+```bash
+npm install @apollo/client graphql
 ```
 
 We'll start with the following code for our application. 

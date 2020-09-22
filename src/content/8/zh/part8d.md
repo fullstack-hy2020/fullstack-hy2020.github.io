@@ -203,8 +203,8 @@ const client = new ApolloClient({
 <!-- We also need to install the library required by this modification -->
 我们还需要安装修改所需的库
 
-```js
-npm install --save apollo-link-context
+```bash
+npm install apollo-link-context
 ```
 
 <!-- Creating new persons and changing numbers works again. There is however one remaining problem. If we try to add a person without a phone number, it is not possible.  -->

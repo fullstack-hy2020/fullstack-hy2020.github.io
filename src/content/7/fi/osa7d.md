@@ -216,8 +216,8 @@ Kenttä [output](https://webpack.js.org/concepts/#output) taas kertoo minne muod
 
 Muutetaan sitten sovellus minimalistiseksi React-sovellukseksi. Asennetaan tarvittavat kirjastot
 
-```js
-npm install --save react react-dom
+```bash
+npm install react react-dom
 ```
 
 Liitetään tavanomaiset loitsut tiedostoon <i>index.js</i>

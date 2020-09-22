@@ -228,7 +228,7 @@ setTimeout(() => {
 我们现在要使用 axios。 理论上，我们可以在<i>package.json</i> 文件中直接定义它，但最好是从命令行安装它。
 
 ```js
-npm install axios --save
+npm install axios
 ```
 
 
@@ -309,14 +309,14 @@ npm run server
 我们使用了两次 npm 安装命令，但是有一点不同:
 
 ```js
-npm install axios --save
+npm install axios
 npm install json-server --save-dev
 ```
 
 
 
-<!-- There is a fine difference in the parameters. <i>axios</i> is installed as a runtime dependency (_--save_) of the application, because the execution of the program requires the existence of the library. On the other hand, <i>json-server</i> was installed as a development dependency (_--save-dev_), since the program itself doesn't require it. It is used for assistance during software development. There will be more on different dependencies in the next part of the course. -->
-参数之间有细微的差别。<i>axios</i> 被安装为应用的运行时依赖项(-- save) ，因为程序的执行需要库的存在。 而另一个， <i>json-server</i> 是作为开发依赖项(-- save-dev)安装的，因为程序本身并不需要它。 它用于在软件开发过程中提供帮助。 在课程的下一章节将会有更多关于不同依赖的内容。
+<!-- There is a fine difference in the parameters. <i>axios</i> is installed as a runtime dependency of the application, because the execution of the program requires the existence of the library. On the other hand, <i>json-server</i> was installed as a development dependency (_--save-dev_), since the program itself doesn't require it. It is used for assistance during software development. There will be more on different dependencies in the next part of the course. -->
+参数之间有细微的差别。<i>axios</i> 被安装为应用的运行时依赖项，因为程序的执行需要库的存在。 而另一个， <i>json-server</i> 是作为开发依赖项(-- save-dev)安装的，因为程序本身并不需要它。 它用于在软件开发过程中提供帮助。 在课程的下一章节将会有更多关于不同依赖的内容。
 
 ### Axios and promises
 <!-- Now we are ready to use axios. Going forward, json-server is assumed to be running on port 3001. -->

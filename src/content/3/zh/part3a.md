@@ -281,7 +281,7 @@ console.log(`Server running on port ${PORT}`)
 让我们通过下面的命令将它定义为一个项目依赖，来开始使用 express:
 
 ```bash
-npm install express --save
+npm install express
 ```
 
 <!-- The dependency is also added to our <i>package.json</i> file: -->

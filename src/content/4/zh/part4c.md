@@ -246,7 +246,7 @@ const noteSchema = new mongoose.Schema({
 让我们来安装[bcrypt](https://github.com/kelektiv/node.bcrypt.js) 用来生成密码的哈希值。
 
 ```bash
-npm install bcrypt --save
+npm install bcrypt
 ```
 
 <!-- Creating new users happens in compliance with the RESTful conventions discussed in [第3章](/zh/part3/node_js_与_express#rest), by making an HTTP POST request to the <i>users</i> path. -->
@@ -414,7 +414,7 @@ describe('when there is initially one user in db', () => {
 让我们在 Mongoose validator 的帮助下验证用户名的唯一性。正如我们在练习 [3.19](/zh/part3/es_lint与代码检查#exercises)中提到的，Mongoose 并没有内置的 validator 来检查某个字段的唯一性。我们可以使用一个现成的解决方案[mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) 这个 npm 包，先安装一下：
 
 ```bash
-npm install --save mongoose-unique-validator
+npm install mongoose-unique-validator
 ```
 
 <!-- We must make the following changes to the schema defined in the <i>models/user.js</i> file: -->

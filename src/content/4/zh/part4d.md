@@ -60,7 +60,7 @@ lang: zh
 让我们先来实现登录的功能。安装[jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) 库， 它会允许我们生成 [Json Web Token](https://jwt.io/)。
 
 ```bash
-npm install jsonwebtoken --save
+npm install jsonwebtoken
 ```
 
 <!-- The code for login functionality goes to the file controllers/login.js. -->
@@ -384,7 +384,7 @@ const errorHandler = (error, request, response, next) => {
 注意：有些 Windows 用户在<i>bcrypt</i> 方面有问题。如果遇到问题，请使用命令删除该库
 
 ```bash
-npm uninstall bcrypt --save 
+npm uninstall bcrypt
 ```
 
 <!-- and install [bcryptjs](https://www.npmjs.com/package/bcryptjs) instead.  -->

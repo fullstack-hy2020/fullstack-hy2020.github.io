@@ -68,8 +68,8 @@ export default { getAll }
 
 We'll add axios to the project
 
-```js
-npm install axios --save
+```bash
+npm install axios
 ```
 
 We'll change the initialization of the state in <i>noteReducer</i>, such that by default there are no notes:
@@ -354,8 +354,8 @@ Both components would only use the function provided to them as a prop without c
 
 Now let's install the [redux-thunk](https://github.com/gaearon/redux-thunk)-library, which enables us to create <i>asynchronous actions</i>. Installation is done with the command:
 
-```js
-npm install --save redux-thunk
+```bash
+npm install redux-thunk
 ```
 
 The redux-thunk-library is a so-called <i>redux-middleware</i>, which must be initialized along with the initialization of the store. While we're here, let's extract the definition of the store into its own file <i>src/store.js</i>:

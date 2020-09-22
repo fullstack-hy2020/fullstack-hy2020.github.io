@@ -45,8 +45,8 @@ lang: zh
 <!-- We'll create a new React application and install the debendencies required by [Apollo client](https://www.apollographql.com/docs/react/get-started/#installation). -->
 我们将创建一个新的 React 应用，并按文档要求的那样安装[Apollo 客户端](https://www.apollographql.com/docs/React/get-started/#installation 应用)。
 
-```js
-npm install --save @apollo/client graphql
+```bash
+npm install @apollo/client graphql
 ```
 
 <!-- We'll start with the following code for our application.  -->

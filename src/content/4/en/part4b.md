@@ -789,7 +789,7 @@ The [express-async-errors](https://github.com/davidbanham/express-async-errors) 
 Let's install the library
 
 ```bash
-npm install express-async-errors --save
+npm install express-async-errors
 ```
 
 <!-- Kirjaston käyttö on <i>todella</i> helppoa.

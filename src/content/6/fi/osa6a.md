@@ -35,7 +35,7 @@ Tutustutaan Reduxiin tekemällä jälleen kerran laskurin toteuttava sovellus:
 Tehdään uusi create-react-app-sovellus ja asennetaan siihen <i></i>redux</i> komennolla
 
 ```bash
-npm install redux --save
+npm install redux
 ```
 
 Fluxin tapaan Reduxissa sovelluksen tila talletetaan [storeen](https://redux.js.org/basics/store).
@@ -803,8 +803,8 @@ Tapoja välittää redux-store sovelluksen komponenteille on useita, tutustutaan
 
 Asennetaan react-redux
 
-```js
-npm install --save react-redux
+```bash
+npm install react-redux
 ```
 
 Eriytetään komponentti _App_ omaan tiedostoon _App.js_. Tarkastellaan ensin mitä sovelluksen muiden tiedostojen sisällöksi tulee.

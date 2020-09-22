@@ -28,7 +28,7 @@ The principles of token based authentication are depicted in the following seque
 Let's first implement the functionality for logging in. Install the [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) library, which allows us to generate [JSON web tokens](https://jwt.io/).
 
 ```bash
-npm install jsonwebtoken --save
+npm install jsonwebtoken
 ```
 
 The code for login functionality goes to the file controllers/login.js.
@@ -290,7 +290,7 @@ Do not save passwords to the database as clear text, but use the <i>bcrypt</i> l
 **NB** Some Windows users have had problems with <i>bcrypt</i>. If you run into problems, remove the library with command 
 
 ```bash
-npm uninstall bcrypt --save 
+npm uninstall bcrypt 
 ```
 
 and install [bcryptjs](https://www.npmjs.com/package/bcryptjs) instead. 

@@ -99,8 +99,8 @@ Reactissa on onneksi olemassa kirjasto [React router](https://github.com/ReactTr
 
 Muutetaan ylläoleva sovellus käyttämään React routeria. Asennetaan React router komennolla
 
-```js
-npm install --save react-router-dom
+```bash
+npm install react-router-dom
 ```
 
 React routerin tarjoama reititys saadaan käyttöön muuttamalla sovellusta seuraavasti:

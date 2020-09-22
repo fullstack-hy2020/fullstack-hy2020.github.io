@@ -46,7 +46,7 @@ Voimme sallia muista <i>origineista</i> tulevat pyynnöt käyttämällä Noden [
 Asennetaan backendiin <i>cors</i> komennolla
 
 ```bash
-npm install cors --save
+npm install cors
 ```
 
 Otetaan middleware käyttöön toistaiseksi sellaisella konfiguraatiolla joka sallii kaikista origineista tulevat pyynnöt kaikkiin backendin express routeihin:
@@ -293,7 +293,7 @@ Seuraavassa loki eräästä tyypillisestä ongelmatilanteesta, jossa Heroku ei l
 
 ![](../../images/3/33.png)
 
-Syynä ongelmalle on se, että <i>expressiä</i> asennettaessa oli unohtunut antaa optio <i>--save</i>, joka tallentaa tiedon riippuvuudesta tiedostoon <i>package.json</i>. 
+Syynä ongelmalle on se, että <i>express</i>-kirjastoa ei ole asennettu <em>npm install express</em> komennolla, joka tallentaa tiedon riippuvuudesta tiedostoon <i>package.json</i>. 
 
 Toinen tyypillinen ongelma on se, että sovellusta ei ole konfiguroitu käyttämään ympäristömuuttujana <em>PORT</em> määriteltyä porttia:
 

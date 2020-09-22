@@ -30,8 +30,8 @@ Tallennetaan projektin juuren tiedostoon <i>db.json</i> tietokannan alkutila:
 
 Asennetaan projektiin json-server
 
-```js
-npm install json-server --save
+```bash
+npm install json-server
 ```
 
 ja lisätään tiedoston <i>package.json</i> osaan <i>scripts</i> rivi
@@ -62,8 +62,8 @@ export default { getAll }
 
 Asennetaan myös axios projektiin
 
-```js
-npm install axios --save
+```bash
+npm install axios
 ```
 
 Muutetaan <i>nodeReducer</i>:issa tapahtuva muistiinpanojen tilan alustusta, siten että oletusarvoisesti muistiinpanoja ei ole:
@@ -337,8 +337,8 @@ Molemmat komponentit dispatchaisivat ainoastaan actionin, välittämättä siit�
 
 Asennetaan nyt [redux-thunk](https://github.com/gaearon/redux-thunk)-kirjasto, joka mahdollistaa <i>asynkronisten actionien</i> luomisen. Asennus tapahtuu komennolla:
 
-```js
-npm install --save redux-thunk
+```bash
+npm install redux-thunk
 ```
 
 redux-thunk-kirjasto on ns. <i>redux-middleware</i> joka täytyy ottaa käyttöön storen alustuksen yhteydessä. Eriytetään samalla storen määrittely omaan tiedostoon <i>src/store.js</i>:

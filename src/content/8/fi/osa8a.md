@@ -244,8 +244,8 @@ Toteutetaan nyt GraphQL-palvelin tämän hetken johtavaa kirjastoa [Apollo-serve
 
 Luodaan uusi npm-projekti komennolla _npm init_ ja asennetaan tarvittavat riippuvuudet
 
-```js
-npm install --save apollo-server graphql
+```bash
+npm install apollo-server graphql
 ```
 
 Alustava toteutus on seuraavassa

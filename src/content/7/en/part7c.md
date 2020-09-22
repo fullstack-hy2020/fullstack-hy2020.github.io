@@ -27,8 +27,8 @@ Let's start by taking a look at Bootstrap with the help of the [react-bootstrap]
 
 Let's install the package with the command:
 
-```js
-npm install --save react-bootstrap
+```bash
+npm install react-bootstrap
 ```
 
 Then let's add a link for loading the CSS stylesheet for Bootstrap inside of the <i>head</i> tag in the <i>public/index.html</i> file of the application:
@@ -247,8 +247,8 @@ As our second example we will look into the [MaterialUI](https://material-ui.com
 <!-- Asennetaan kirjasto suorittamalla komento -->
 Install the library with the command
 
-```js
-npm install --save @material-ui/core
+```bash
+npm install @material-ui/core
 ```
 
 <!-- Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään bootstrapin css-määrittelyt lataava rivi: -->
@@ -395,8 +395,8 @@ The notification displayed on log in can be done using the [Alert](https://mater
 <!-- Alert-komponentti ei ole vielä mukana MaterialUI:n core-pakkauksessa, ja komponentin sisältävä pakkaus [lab](https://material-ui.com/components/about-the-lab/) tulee asentaa sovellukseen: -->
 The Alert component is not yet included in the MaterialUI core package, so we have to install the [lab](https://material-ui.com/components/about-the-lab/) package to use it:
 
-```js 
-npm install --save @material-ui/lab
+```bash
+npm install @material-ui/lab
 ```
 
 <!-- Komponentti importataan seuraavasti -->
@@ -553,8 +553,8 @@ The [styled components](https://www.styled-components.com/) library offers an in
 
 Let's make a few changes to the styles of our application with the help of styled components. First, install the package with the command:
 
-```js
-npm install --save styled-components
+```bash
+npm install styled-components
 ```
 
 Then let's define two components with styles:

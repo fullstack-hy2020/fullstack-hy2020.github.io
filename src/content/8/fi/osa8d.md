@@ -172,8 +172,8 @@ _client_-olion muodostamisen yhteydessä oleva toinen parametri _link_ määritt
 
 Asennetaan vielä muutoksen tarvitsema kirjasto
 
-```js
-npm install --save apollo-link-context
+```bash
+npm install apollo-link-context
 ```
 
 Uusien henkilöiden lisäys ja numeroiden muuttaminen toimii taas. Sovellukseen jää kuitenkin yksi ongelma. Jos yritämme lisätä puhelinnumerotonta henkilöä, se ei onnistu.

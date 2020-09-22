@@ -28,7 +28,7 @@ Token-autentikaation periaatetta kuvaa seuraava sekvenssikaavio:
 Tehdään ensin kirjautumistoiminto. Asennetaan [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)-kirjasto, jonka avulla koodimme pystyy generoimaan [JSON web token](https://jwt.io/) -muotoisia tokeneja.
 
 ```bash
-npm install jsonwebtoken --save
+npm install jsonwebtoken
 ```
 
 Tehdään kirjautumisesta vastaava koodi tiedostoon _controllers/login.js_
@@ -282,7 +282,7 @@ Tee sovellukseen mahdollisuus luoda käyttäjiä tekemällä HTTP POST -pyyntö 
 **HUOM** joillain windows-käyttäjillä on ollut ongelmia <i>bcryptin</i> kanssa. Jos törmäät ongelmiin, poista kirjasto komennolla
 
 ```bash
-npm uninstall bcrypt --save 
+npm uninstall bcrypt
 ```
 
 ja asenna sen sijaan [bcryptjs](https://www.npmjs.com/package/bcryptjs)

@@ -36,7 +36,7 @@ lang: zh
 <!-- We'll install json-server for the project... -->
 我们将为这个项目安装 json-server...
 
-```js
+```bash
 npm install json-server --save-dev
 ```
 
@@ -74,8 +74,8 @@ export default { getAll }
 <!-- We'll add axios to the project -->
 我们将在项目中添加 axios
 
-```js
-npm install axios --save
+```bash
+npm install axios
 ```
 
 <!-- We'll change the initialization of the state in <i>noteReducer</i>, such that by default there are no notes: -->
@@ -395,8 +395,8 @@ const NewNote = () => {
 <!-- Now let's install the [redux-thunk](https://github.com/gaearon/redux-thunk)-library, which enables us to create <i>asynchronous actions</i>. Installation is done with the command: -->
 现在让我们安装[redux-thunk](https://github.com/gaearon/redux-thunk)-库，它允许我们创建<i>asynchronous actions</i>:
 
-```js
-npm install --save redux-thunk
+```bash
+npm install redux-thunk
 ```
 
 <!-- The redux-thunk-library is a so-called <i>redux-middleware</i>, which must be initialized along with the initialization of the store. While we're here, let's extract the definition of the store into its own file <i>src/store.js</i>: -->

@@ -15,8 +15,8 @@ We will now add user management to our application, but let's first start using 
 
 Install mongoose and mongoose-unique-validator:
 
-```js
-npm install mongoose mongoose-unique-validator --save
+```bash
+npm install mongoose mongoose-unique-validator
 ```
 
 

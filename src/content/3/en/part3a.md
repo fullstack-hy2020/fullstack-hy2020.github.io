@@ -257,7 +257,7 @@ Many libraries have been developed to ease server side development with Node, by
 Let's take express into use by defining it as a project dependency with the command:
 
 ```bash
-npm install express --save
+npm install express
 ```
 
 The dependency is also added to our <i>package.json</i> file:

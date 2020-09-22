@@ -750,7 +750,7 @@ Kirjasto [express-async-errors](https://github.com/davidbanham/express-async-err
 Asennetaan kirjasto
 
 ```bash
-npm install express-async-errors --save
+npm install express-async-errors
 ```
 
 Kirjaston käyttö on <i>todella</i> helppoa. Kirjaston koodi otetaan käyttöön tiedostossa <i>src/app.js</i>:

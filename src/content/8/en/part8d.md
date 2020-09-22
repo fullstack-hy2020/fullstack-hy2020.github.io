@@ -181,8 +181,8 @@ The link parameter given to the _client_-object defines how apollo connects to t
 <!-- Asennetaan vielä muutoksen tarvitsema kirjasto -->
 We also need to install the library required by this modification
 
-```js
-npm install --save apollo-link-context
+```bash
+npm install apollo-link-context
 ```
 
 Creating new persons and changing numbers works again. There is however one remaining problem. If we try to add a person without a phone number, it is not possible. 

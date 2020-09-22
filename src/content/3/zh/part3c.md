@@ -168,7 +168,7 @@ Mongoose 可以被描述为<i>object document mapper</i> (ODM) ，并且将 Java
 让我们安装 Mongoose:
 
 ```bash
-npm install mongoose --save
+npm install mongoose
 ```
 
 <!-- Let's not add any code dealing with Mongo to our backend just yet. Instead, Instead, let's make a practice application by creating a new file, <i>mongo.js</i>： -->
@@ -621,7 +621,7 @@ MONGODB_URI=address_here npm run dev
 一个更复杂的方法是使用[dotenv](https://github.com/motdotla/dotenv#readme) ，你可以使用如下命令安装库:
 
 ```bash
-npm install dotenv --save
+npm install dotenv
 ```
 
 <!-- To use the library, we create a <i>.env</i> file at the root of the project. The environment variables are defined inside of the file, and it can look like this: -->

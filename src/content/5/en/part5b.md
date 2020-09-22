@@ -673,8 +673,8 @@ We would like to enforce that when the <i>Togglable</i> component is used, the b
 
 The expected and required props of a component can be defined with the [prop-types](https://github.com/facebook/prop-types) package. Let's install the package:
 
-```js
-npm install --save prop-types
+```shell
+npm install prop-types
 ```
 
 We can define the <i>buttonLabel</i> prop as a mandatory or <i>required</i> string-type prop as shown below:
@@ -736,7 +736,7 @@ Create-react-app has installed ESlint to the project by default, so all that's l
 
 Next, we will start testing the frontend and in order to avoid undesired and irrelevant linter errors we will install the [eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest) package:
 
-```js
+```bash
 npm add --save-dev eslint-plugin-jest
 ```
 

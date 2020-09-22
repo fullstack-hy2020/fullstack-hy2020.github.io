@@ -868,7 +868,7 @@ try {
 我们来安装这个库吧
 
 ```bash
-npm install express-async-errors --save
+npm install express-async-errors
 ```
 
 

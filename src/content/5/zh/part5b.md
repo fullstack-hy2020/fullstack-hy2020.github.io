@@ -748,8 +748,8 @@ const Blog = ({ blog }) => {
 <!-- The expected and required props of a component can be defined with the [prop-types](https://github.com/facebook/prop-types) package. Let's install the package: -->
 这个需求可以通过 [prop-types](https://github.com/facebook/prop-types) 包来定义，我们来安装一下：
 
-```js
-npm install --save prop-types
+```bash
+npm install prop-types
 ```
 
 <!-- We can define the <i>buttonLabel</i> prop as a mandatory or <i>required</i> string-type prop as shown below: -->

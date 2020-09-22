@@ -130,7 +130,7 @@ Mongoose could be described as an <i>object document mapper</i> (ODM), and savin
 Let's install Mongoose:
 
 ```bash
-npm install mongoose --save
+npm install mongoose
 ```
 
 Let's not add any code dealing with Mongo to our backend just yet. Instead, let's make a practice application by creating a new file, <i>mongo.js</i>:
@@ -517,7 +517,7 @@ MONGODB_URI=address_here npm run dev
 A more sophisticated way is to use the [dotenv](https://github.com/motdotla/dotenv#readme) library. You can install the library with the command:
 
 ```bash
-npm install dotenv --save
+npm install dotenv
 ```
 
 To use the library, we create a <i>.env</i> file at the root of the project. The environment variables are defined inside of the file, and it can look like this:
