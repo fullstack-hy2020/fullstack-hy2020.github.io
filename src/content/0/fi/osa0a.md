@@ -163,7 +163,7 @@ Suurin osa tehtävistä on moniosaisia, samaa ohjelmaa pala palalta rakentavia k
 
 Virallinen kurssisuoritus edellyttää että teet hyväksyttävästi kurssikokeen Avoimen yliopiston Moodle-järjestelmässä. Pääset Moodleen seuraavia ohjeita seuraamalla
 
-- Tee Avoimen yliopiston kurssi-ilmoittautuminenn [täällä](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=129171256)
+- Tee Avoimen yliopiston kurssi-ilmoittautuminen [täällä](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=129171256)
 - **Odota 24 tuntia** ja aktivoi Helsingin yliopiston käyttäjätunnus. Saat ohjeet aktivointia varten ilmoittautumista seuraavana päivänä.
 -	Kirjaudu [kurssisivulle](https://courses.helsinki.fi/fi/aytkt21009/129171256)  (**Kirjaudu-painike sivun oikeassa yläkulmassa**), josta saat kurssiavaimen Moodleen kirjautumista varten.
 -	Kirjaudu kurssin [Moodleen](https://moodle.helsinki.fi/course/view.php?id=33946) HY:n käyttäjätunnuksella ja kurssiavaimella.
