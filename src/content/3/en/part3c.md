@@ -148,7 +148,7 @@ const password = process.argv[2]
 const url =
   `mongodb+srv://fullstack:${password}@cluster0-ostce.mongodb.net/test?retryWrites=true`
 
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 
 const noteSchema = new mongoose.Schema({
   content: String,
@@ -875,22 +875,6 @@ Notice that the <em>findByIdAndUpdate</em> method receives a regular JavaScript 
 There is one important detail regarding the use of the <em>findByIdAndUpdate</em> method. By default, the <em>updatedNote</em> parameter of the event handler receives the original document [without the modifications](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate). We added the optional <code>{ new: true }</code> parameter, which will cause our event handler to be called with the new modified document instead of the original.
 
 After testing the backend directly with Postman and the VS Code REST client, we can verify that it seems to work. The frontend also appears to work with the backend using the database. 
-
-When we toggle the importance of a note, we see the following worrisome error message in the console:
-
-![](../../images/3/48.png)
-
-Googling the error message will lead to [instructions](https://stackoverflow.com/questions/52572852/deprecationwarning-collection-findandmodify-is-deprecated-use-findoneandupdate) for fixing the problem. Following [the suggestion in the Mongoose documentation](https://mongoosejs.com/docs/deprecations.html), we add the following line to the <i>note.js</i> file:
-
-```js
-const mongoose = require('mongoose')
-
-mongoose.set('useFindAndModify', false) // highlight-line
-
-// ...
-  
-module.exports = mongoose.model('Note', noteSchema) 
-```
 
 You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).
 
