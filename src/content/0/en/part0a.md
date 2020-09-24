@@ -202,7 +202,7 @@ For more information, see the [Open University page](https://courses.helsinki.fi
 
 ### Interview promise
 
-Our collaborators, [Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/), [Elisa](https://elisa.fi/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (9 + 10).
+Our collaborators, [Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (9 + 10).
 
 This means that the student can, if they so choose, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits.
 
