@@ -389,6 +389,12 @@ After adding token based authentication the tests for adding a new blog broke do
 
 [This](https://github.com/visionmedia/supertest/issues/398) is most likely useful when doing the fix.
 
+#### 4.23*:  bloglist expansion, step11
+
+Run all tests. You will see that the tests from exercises 4.11, 4.12*, 4.13 have failed because they require authentication.Fix them.
+
+You need to set the token to make the tests pass. Same [link](https://github.com/visionmedia/supertest/issues/398) will help.
+
 This is the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 <!---
