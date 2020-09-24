@@ -357,7 +357,7 @@ export const useAnotherHook = () => { // highlight-line
 Then [importing](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) happens in the following way:
 
 ```js
-import  { useField } from './hooks'
+import  { useField } from './hooks/index'
 
 const App = () => {
   // ...
