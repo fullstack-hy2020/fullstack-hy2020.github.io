@@ -161,20 +161,26 @@ Suurin osa tehtävistä on moniosaisia, samaa ohjelmaa pala palalta rakentavia k
 
 ### Kokeeseen ilmoittautuminen
 
-Virallinen kurssisuoritus edellyttää että teet hyväksyttävästi kurssikokeen Avoimen yliopiston Moodle-järjestelmässä. Pääset Moodleen seuraavia ohjeita seuraamalla
+Virallinen kurssisuoritus edellyttää että teet hyväksyttävästi kurssikokeen Avoimen yliopiston Moodle-järjestelmässä. Pääset Moodleen seuraavia ohjeita seuraamalla: 
 
-- Tee Avoimen yliopiston kurssi-ilmoittautuminen [täällä](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=129171256)
-- **Odota 24 tuntia** ja aktivoi Helsingin yliopiston käyttäjätunnus. Saat ohjeet aktivointia varten ilmoittautumista seuraavana päivänä.
--	Kirjaudu [kurssisivulle](https://courses.helsinki.fi/fi/aytkt21009/129171256)  (**Kirjaudu-painike sivun oikeassa yläkulmassa**), josta saat kurssiavaimen Moodleen kirjautumista varten.
--	Kirjaudu kurssin [Moodleen](https://moodle.helsinki.fi/course/view.php?id=33946) HY:n käyttäjätunnuksella ja kurssiavaimella.
+- Tee Avoimen yliopiston kurssi-ilmoittautuminen 09.01.2021 mennessä [täällä](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=129171256) 
+- Linkin ja kurssiavaimen opintojakson Moodleen saat sähköpostitse 24 tunnin sisään kurssi-ilmoittautumisesi jälkeen. 
+- Käyttäjätunnus. Opiskeletko Helsingin yliopistossa tai jossain muussa [HAKA-verkoston](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners) jäseninstituutiossa? 
+  - Kyllä: Käytä omaa käyttäjätunnustasi Moodleen kirjautumiseen. 
+  - En: Aktivoi Helsingin yliopiston käyttäjätunnuksesi ja käytä sitä Moodleen kirjautumiseen. Saat käyttäjätunnusta koskevaa lisätietoa sähköpostiisi ilmoittautumisesi jälkeen. 
+- Käytä Helsingin yliopiston / [HAKA-korkeakoulun](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners) käyttäjätunnusta Moodleen kirjautumiseen.  
+- Kurssi-ilmoittautumisen jälkeen: Tallenna Helsingin yliopiston opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/myinfo) välilehdellä "my submissions". 
+  - Mikäli käytit muun kuin Helsingin yliopiston HAKA-tunnuksia kirjautumiseen, pyydä Helsingin yliopiston opiskelijanumerosi avoin-student@helsinki.fi -osoitteesta.  
+    - Lähetä viesti samasta osoitteesta, jota käytit kurssi-ilmoittautumiseen. 
+    - Ilmoita nimesi, syntymäaikasi, kurssin nimi.  
 
-HUOM!
-- **Odotithan 24 tuntia** kuten ylläoleva ohje kehoittaa?
--	Ilmoittautuminen Avoimeen yliopiston on mahdollista 09.01.2021 saakka.
--	Vain niiden opiskelijoiden opintosuoritukset voidaan kirjata Helsingin yliopiston opintorekisteriin, jotka ovat tehneet kurssi-ilmoittautumisen Avoimeen yliopistoon ja suorittaneet kurssin loppuun ohjeiden mukaisesti.
+HUOM! 
 
-Muista tallettaa opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) välilehdellä "my submissions".
+- Vain niiden opiskelijoiden opintosuoritukset voidaan kirjata Helsingin yliopiston opintorekisteriin, jotka ovat tehneet kurssi-ilmoittautumisen Avoimeen yliopistoon ja suorittaneet kurssin loppuun ohjeiden mukaisesti. 
 
+Kurssi-ilmoittautumisen jälkeen: Muista tallettaa opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/myinfo)  välilehdellä "my submissions". Mikäli käytit HAKA-tunnuksia kirjautumiseen, pyydä Helsingin yliopiston opiskelijanumerosi avoin-student@helsinki.fi -osoitteesta. Ilmoita sähköpostissa nimesi, kurssi-ilmoittautumisessa käyttämäsi sähköpostiosoite, syntymäaikasi sekä kurssin nimi.  
+
+ 
 ### Full stack -harjoitustyö
 
 Avoimen yliopiston tarjonnassa on 1-10 opintopisteen laajuinen Full Stack -harjoitustyö, johon voit halutessasi osallistua suoritettuasi tämän kurssin vähintään 5 opintopisteen laajuisena.
