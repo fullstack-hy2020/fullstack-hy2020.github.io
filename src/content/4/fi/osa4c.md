@@ -200,7 +200,7 @@ Toteutetaan seuraavaksi route käyttäjien luomista varten. Käyttäjällä on s
 Asennetaan salasanojen hashaamiseen käyttämämme [bcrypt](https://github.com/kelektiv/node.bcrypt.js)-kirjasto:
 
 ```bash
-npm install bcrypt
+npm install --save bcrypt
 ```
 
 Käyttäjien luominen tapahtuu osassa 3 läpikäytyjä [RESTful](/osa3/node_js_ja_express#rest)-periaatteita seuraten tekemällä HTTP POST -pyyntö polkuun <i>users</i>.
