@@ -460,17 +460,12 @@ You can also access the debugger without the _debugger_ command by adding breakp
 
 ![](../../images/1/9a.png)
 
-It is highly recommended to add the [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension to Chrome. It adds a new _React_ tab to the developer tools:
+It is highly recommended to add the [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension to Chrome. It adds a new _Components_ tab to the developer tools. The new developer tools tab can be used to inspect the different React elements in the application, along with their state and props:
 
-![](../../images/1/10e.png)
+![](../../images/1/10ea.png)
 
-The new _React_ developer tools tab can be used to inspect the different React elements in the application, along with their state and props.
 
-Unfortunately the current version of React developer tools leaves something to be desired when displaying component state created with hooks:
-
-![](../../images/1/11e.png)
-
-The component state was defined like so:
+The _App_ component's state is defined like so:
 
 ```js
 const [left, setLeft] = useState(0)
@@ -480,7 +475,9 @@ const [allClicks, setAll] = useState([])
 
 Dev tools shows the state of hooks in the order of their definition:
 
-![](../../images/1/11be.png)
+![](../../images/1/11ea.png)
+
+The first <i>State</i> contains the value of the <i>left</i> state, the next contains the value of the <i>right</i> state and the last contains the value of the <i>allClicks</i> state.
 
 ### Rules of Hooks
 
