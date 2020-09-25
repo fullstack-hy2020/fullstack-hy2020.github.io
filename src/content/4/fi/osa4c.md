@@ -349,7 +349,7 @@ Hoidetaan uniikkiuden tarkastaminen Mongoosen validoinnin avulla. Kuten edellise
 [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator). Suoritetaan asennus
 
 ```bash
-npm install mongoose-unique-validator
+npm install --save mongoose-unique-validator
 ```
 
 Käyttäjän skeemaa tiedostossa <i>models/user.js</i> tulee muuttaa seuraavasti seuraavasti:
