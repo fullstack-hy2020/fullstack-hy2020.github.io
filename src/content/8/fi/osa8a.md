@@ -428,7 +428,7 @@ resolveri on funktio, joka poikkeaa kahdesta aiemmasta resolverista siinä että
 Parametreista toinen _args_ sisältää kyselyn parametrit. Resolveri siis palauttaa taulukosta
  _persons_ henkilön, jonka nimi on sama kuin <i>args.name</i> arvo. Ensimmäisenä olevaa parametria _root_ resolveri ei tarvitse.
 
-Itse asiassa kaikki resolverifunktiot saavat [neljä parametria](https://www.apollographql.com/docs/graphql-tools/resolvers.html#Resolver-function-signature). Javascriptissa parametrit voidaan kuitenkin jättää määrittelemättä, jos niitä ei tarvita. Tulemme käyttämään resolverien ensimmäistä ja kolmatta parametria vielä myöhemmin tässä osassa.
+Itse asiassa kaikki resolverifunktiot saavat [neljä parametria](https://www.graphql-tools.com/docs/resolvers#resolver-function-signature). Javascriptissa parametrit voidaan kuitenkin jättää määrittelemättä, jos niitä ei tarvita. Tulemme käyttämään resolverien ensimmäistä ja kolmatta parametria vielä myöhemmin tässä osassa.
 
 ### Oletusarvoinen resolveri
 
@@ -448,7 +448,7 @@ osaa palvelin liittää vastaukseen täsmälleen ne kentät, joita kysely pyytä
 
 GraphQL-palvelimen tulee määritellä resolverit <i>jokaiselle</i> skeemassa määritellyn tyypin kentälle. Olemme nyt määritelleet resolverit ainoastaan tyypin <i>Query</i> kentille, eli kaikille sovelluksen tarjoamille kyselyille. 
 
-Koska skeemassa olevan tyypin <i>Person</i> kentille ei ole määritelty resolvereita, Apollo on määritellyt niille [oletusarvoisen resolverin](https://www.apollographql.com/docs/graphql-tools/resolvers.html#Default-resolver), joka toimii samaan tapaan kuin seuraavassa itse määritelty resolveri:
+Koska skeemassa olevan tyypin <i>Person</i> kentille ei ole määritelty resolvereita, Apollo on määritellyt niille [oletusarvoisen resolverin](https://www.graphql-tools.com/docs/resolvers/#default-resolver), joka toimii samaan tapaan kuin seuraavassa itse määritelty resolveri:
 
 
 ```js

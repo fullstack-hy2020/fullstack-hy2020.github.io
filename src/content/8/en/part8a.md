@@ -457,7 +457,7 @@ The resolver does not need the first parameter _root_.
  
 
  
- In fact all resolver functions are given [four parameters](https://www.apollographql.com/docs/graphql-tools/resolvers.html#Resolver-function-signature). With JavaScript the parameters don't have to be defined, if they are not needed. We will be using the first and the third parameter of a resolver later in this part. 
+ In fact all resolver functions are given [four parameters](https://www.graphql-tools.com/docs/resolvers#resolver-function-signature). With JavaScript the parameters don't have to be defined, if they are not needed. We will be using the first and the third parameter of a resolver later in this part. 
 
 ### The default resolver
 
@@ -479,7 +479,7 @@ the server knows to send back exactly the fields required by the query. How does
 A GraphQL-server must define resolvers for <i>each</i> field of each  type in the schema. 
 We have so far only defined resolvers for fields of the type <i>Query</i>, so for each query of the application. 
 
-Because we did not define resolvers for the fields of the type <i>Person</i>, Apollo has defined [default resolvers](https://www.apollographql.com/docs/graphql-tools/resolvers.html#Default-resolver) for them. 
+Because we did not define resolvers for the fields of the type <i>Person</i>, Apollo has defined [default resolvers](https://www.graphql-tools.com/docs/resolvers/#default-resolver) for them. 
 They work like the one shown below: 
 
 

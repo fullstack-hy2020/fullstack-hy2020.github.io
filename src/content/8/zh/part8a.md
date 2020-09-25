@@ -505,7 +505,7 @@ query {
 
 
  <!--In fact all resolver functions are given [four parameters](https://www.apollographql.com/docs/graphql-tools/resolvers.html#Resolver-function-signature). With JavaScript the parameters don't have to be defined, if they are not needed. We will be using the first and the third parameter of a resolver later in this part.--> 
-事实上，所有的解析器函数都是给定的[4个参数](https://www.apollographql.com/docs/graphql-tools/resolvers.html#resolver-function-signature)。 使用 JavaScript 时，如果不需要参数，那么就不必定义它们。 我们将在本章节后面使用解析器的第一个和第三个参数。
+事实上，所有的解析器函数都是给定的[4个参数](https://www.graphql-tools.com/docs/resolvers#resolver-function-signature)。 使用 JavaScript 时，如果不需要参数，那么就不必定义它们。 我们将在本章节后面使用解析器的第一个和第三个参数。
 
 ### The default resolver
 【默认解析器】
@@ -532,7 +532,7 @@ Graphql-server 必须为模式中每种类型的<i>每种</i>字段定义解析�
 到目前为止，我们只为类型为<i>Query</i> 的字段定义了解析器，因此应用的每个查询都是这样。
 
 <!-- Because we did not define resolvers for the fields of the type <i>Person</i>, Apollo has defined [default resolvers](https://www.apollographql.com/docs/graphql-tools/resolvers.html#Default-resolver) for them.  -->
-因为我们没有为<i>Person</i> 类型的字段定义解析器，Apollo 已经为它们定义了[默认解析器](https://www.apollographql.com/docs/graphql-tools/resolvers.html#default-resolver)。
+因为我们没有为<i>Person</i> 类型的字段定义解析器，Apollo 已经为它们定义了[默认解析器](https://www.graphql-tools.com/docs/resolvers/#default-resolver)。
 <!-- They work like the one shown below:  -->
 它们的工作原理如下图所示:
 
