@@ -54,10 +54,8 @@ npm install --global expo-cli
 Next, we can initialize our project in a <i>rate-repository-app</i> directory by running the following command:
 
 ```shell
-expo init rate-repository-app
+expo init rate-repository-app --template expo-template-blank@sdk-38
 ```
-
-After running this command Expo will ask you to choose a template for the project. Within the <i>Managed workflow</i> section, choose the <i>blank</i> option (the one with the description "a minimal app as clean as an empty canvas").
 
 Now that our application has been initialized, open the created <i>rate-repository-app</i> directory with an editor such as [Visual Studio Code](https://code.visualstudio.com/). The structure should be more or less the following:
 
