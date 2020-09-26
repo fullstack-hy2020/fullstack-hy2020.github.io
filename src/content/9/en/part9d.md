@@ -1358,7 +1358,9 @@ export const AddPatientForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
         return errors;
       }}
     >
-      {({ isValid, dirty }) => {
+      {(props) => {
+        const { isValid, dirty } = props
+        // We'll use props to study behaviour amazing api provided by formik. Tip: Pay attention to  `|--Live-Debug--|` area in the webpage as you play with input fileds.
         return (
           <Form className="form ui">
             <Field
@@ -1407,6 +1409,7 @@ export const AddPatientForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
                 </Button>
               </Grid.Column>
             </Grid>
+            <div><pre><b>|--Live-Debug--|</b>{JSON.stringify(props, null, 2)}</pre></div>
           </Form>
         );
       }}
