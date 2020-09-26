@@ -1362,7 +1362,7 @@ export const AddPatientForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
         const { isValid, dirty } = props
         // We'll use `props` to study behaviour of amazing api provided by formik.
         // Tip1: Pay attention to  `|--Live-Debug--|` area to see how different keys of `props` behave as we interact with each input field in the webpage.
-        // Tip2: You can use all those keys from props, like `props.errors`, `props.dirty` `props.isValid` etc to get required behaviour in the form, just like we have used the `dirty` and `isValid` in the submit Button component below, so that it gets disabled when the form inputs are not valid.
+        // Tip2: You can use all those keys from props, like `props.errors`, `props.dirty`, `props.isValid` etc to get required behaviour in the form, just like we have used the `dirty` and `isValid` in the submit Button component below, so that it gets disabled when the form inputs are not valid.
         return (
           <Form className="form ui">
             <Field
