@@ -84,11 +84,15 @@ npm install --global expo-cli
 下一步，我们在 <i>rate-repository-app</i> 文件夹中运行如下命令，来初始化我们的项目：
 
 ```shell
-expo init rate-repository-app
+expo init rate-repository-app --template expo-template-blank@sdk-38
 ```
 
 <!-- After running this command Expo will ask you to choose a template for the project. Within the <i>Managed workflow</i> section, choose the <i>blank</i> option (the one with the description "a minimal app as clean as an empty canvas"). -->
-在运行了这个命令后，Expo 会询问你为该项目选择一个模版。在<i>Managed workflow</i>部分，选择<i>blank</i> 选项（描述为“一个最小的app，就是个空画布”a minimal app as clean as an empty canvas）
+<!-- 在运行了这个命令后，Expo 会询问你为该项目选择一个模版。在<i>Managed workflow</i>部分，选择<i>blank</i> 选项（描述为“一个最小的app，就是个空画布”a minimal app as clean as an empty canvas） -->
+
+<!-- Note, that the <em>@sdk-38</em> sets the project's <i>Expo SDK version to 38</i>, which supports <i>React Native version 0.62</i>. Using other Expo SDK version might cause you trouble while following this material. -->
+
+注意， <em>@sdk-38</em> 将项目的Expo SDK 的 版本设置为38，它支持 <i>React Native version 0.62</i>。 使用其他的Expo SDK版本在接下来的教程中可能会导致一些错误。
 
 <!-- Now that our application has been initialized, open the created <i>rate-repository-app</i> directory with an editor such as [Visual Studio Code](https://code.visualstudio.com/). The structure should be more or less the following: -->
 
@@ -268,5 +272,25 @@ Expo 开发工具可以被用作来展示运行中程序的log信息。错误和
 <!-- Click on the device to open its logs. Next, open the <i>App.js</i> file and add a <em>console.log</em> message to the <em>App</em> component. After saving the file, you should be able to see your message in the logs. -->
 
 点击设备并打开日志，然后打开<i>App.js</i> 文件，增加一个<em>console.log</em> 信息到<em>App</em> 组件中。保存文件，你应该能够在log中看到添加的信息了。
+
+### Using the debugger
+使用调试器
+
+<!-- Inspecting messages logged from the code with the <em>console.log</em> method can be handy, but sometimes finding bugs or understanding how the application works require us to see the bigger picture. We might, for example, be interested in what is the state and the props of a certain component, or what is the response of a certain network request. In the previous parts, we have used the browser's developer tools for this kind of debugging. [React Native Debugger](https://docs.expo.io/workflow/debugging/#react-native-debugger) is a tool that offers a similar set of debugging features for React Native applications. -->
+使用<em>console.log</em>方法检查一些代码中的信息是十分容易上手的，但有时找bug或理解应用如何运行，需要我们看得更宏观一些。比如说我们可能对某个特定组件的属性和状态感兴趣，或者某一次网络请求的返回。在之前的章节中，我们使用了浏览器的开发者工具来做这种debug。[React Native Debugger](https://docs.expo.io/workflow/debugging/#react-native-debugger) 是一个提供了类似的一系列debug特性的工具集来debug React Native 应用。
+
+<!-- Let's get started by installing React Native Debugger with the help of the [installation instructions](https://github.com/jhen0409/react-native-debugger#installation). Once the installation is complete, start the React Native Debugger, open a new debugger window (shortcuts: <em>Command+T</em> on macOS, <em>Ctrl+T</em> on Linux/Windows) and set the React Native packager port to <em>19001</em>. -->
+让我们参考[installation instructions](https://github.com/jhen0409/react-native-debugger#installation) 来安装React Native Debugger。安装一旦完成，启动React Native Debugger，打开一个新的debug 窗口（快捷键参考：macOS是<em>Command+T</em>，Linux/Windows 是 <em>Ctrl+T</em> ），并将React Native 的packager 端口设置为 <em>19001</em>。
+
+<!-- Next, we need to start our application and connect to the debugger. Start the application by running <em>npm start</em>. Once the application is running, open it with either an emulator or the Expo mobile app. Inside the emulator or the Expo mobile app, open the developer menu by following the [instructions](https://docs.expo.io/workflow/debugging/#developer-menu) in the Expo's documentation. From the developer menu, select <i>Debug remote JS</i> to connect to the debugger. Now, you should be able to see the application's component tree in the debugger: -->
+接下来，我们需要启动我们的应用，并连接到debugger。通过<em>npm start</em>启动应用。一旦应用启动，在模拟器或Expo 移动app中打开它。在模拟器或Expo 移动app中，根据 [instructions](https://docs.expo.io/workflow/debugging/#developer-menu)  文档的指示打开开发者菜单。在开发者菜单中，选择<i>Debug remote JS</i> 来连接到debugger。现在你可以在debugger中看到应用的组件树了：
+
+![React Native Debugger](../../images/10/24.png)
+
+<!-- You can use the debugger to inspect the component's state and props as well as <i>change</i> them. Try finding the <em>Text</em> component rendered by the <em>App</em> component using the debugger. You can either use the search or go through the component tree. Once you have found the <em>Text</em> component in the tree, click it, and change the value of the <em>children</em> prop. The change should be automatically visible in the application's preview. -->
+你可以使用debugger 来检查组件的状态和属性，以及 <i>改变</i>它们也是可以的。尝试使用debugger找到<em>App</em> 组件渲染的<em>Text</em>。你可以使用搜索或者直接从组件树中找到。一旦你在树中找到了<em>Text</em> 组件，点击它，并修改它的 <em>children</em> 属性值。你应当能在应用的预览中看到它的自动变化了。
+
+<!-- For more useful React Native application debugging tools, head out to the Expo's [debugging documentation](https://docs.expo.io/workflow/debugging). -->
+更多有用的React Native 应用的debug 工具，可以访问Expo的 [debugging documentation](https://docs.expo.io/workflow/debugging)。
 
 </div>

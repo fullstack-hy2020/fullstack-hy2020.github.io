@@ -540,23 +540,24 @@ props value is [Object object]
 
 ![](../../images/1/9a.png)
 
-<!-- It is highly recommended to add the [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension to Chrome. It adds a new _React_ tab to the developer tools: -->
-强烈建议在 Chrome 中添加 [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)扩展。 它为开发工具增加了一个新的 React 选项卡:
+<!-- It is highly recommended to add the [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension to Chrome. It adds a new _React_ tab to the developer tools. The new developer tools tab can be used to inspect the different React elements in the application, along with their state and props: -->
+强烈建议在 Chrome 中添加 [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)扩展。 它为开发工具增加了一个新的 _Components_ 选项卡。新的开发者工具页可以用来检查不同的React 元素，以及它的属性和状态：
 
-![](../../images/1/10e.png)
+![](../../images/1/10ea.png)
 
 <!-- The new _React_ developer tools tab can be used to inspect the different React elements in the application, along with their state and props. -->
-新的 React developer tools 选项卡可用于检查应用中的不同 React 元素，以及它们的状态和属性。
+<!-- 新的 React developer tools 选项卡可用于检查应用中的不同 React 元素，以及它们的状态和属性。 -->
 
 <!-- Unfortunately the current version of React developer tools leaves something to be desired when displaying component state created with hooks: -->
-不幸的是，当前版本的 React developer 工具在用 hooks 时显示创建的组件状态，有一些不足之处:
+<!-- 不幸的是，当前版本的 React developer 工具在用 hooks 时显示创建的组件状态，有一些不足之处: -->
 
 ![](../../images/1/11e.png)
-
+<!-- The _App_ component's state is defined like so: -->
+_App_ 组件的状态定义如下：
 
 
 <!-- The component state was defined like so: -->
-组件状态的定义如下:
+<!-- 组件状态的定义如下: -->
 
 ```js
 const [left, setLeft] = useState(0)
@@ -567,7 +568,11 @@ const [allClicks, setAll] = useState([])
 <!-- Dev tools shows the state of hooks in the order of their definition: -->
 开发工具按照定义顺序显示hook的状态:
 
-![](../../images/1/11be.png)
+![](../../images/1/11ea.png)
+
+<!-- The first <i>State</i> contains the value of the <i>left</i> state, the next contains the value of the <i>right</i> state and the last contains the value of the <i>allClicks</i> state. -->
+
+第一个<i>State</i>包含<i>left</i>状态的值，下一个包含<i>right</i> 状态的值，最后一个包含<i>allClicks</i> 状态的值。
 
 ### Rules of Hooks
 【Hook的规则】
@@ -1136,9 +1141,13 @@ const App = props => {
 }
 ```
 
-<!-- The application still appears to work, but **don't implement components like this!** Never define components inside of other components. The method provides no benefits and leads to many unpleasant problems. Let's instead move the <i>Display</i> component function to its correct place, which is outside of the <i>App</i> component function: -->
+<!-- The application still appears to work, but **don't implement components like this!** Never define components inside of other components. The method provides no benefits and leads to many unpleasant problems. The biggest problems are due to the fact that React treats a component defined inside of another component as a new component in every render. This makes it impossible to React to optimize the component. -->
 
-应用看起来仍然可以工作，但是 **不要像这样实现组件！**不要在其他组件内部定义组件。 这种方法没有任何好处，而且会导致许多不愉快的问题。 让我们把<i>Display</i> 组件函数移动到正确的位置，这个位置在<i>App</i> 组件函数之外:
+应用看起来仍然可以工作，但是 **不要像这样实现组件！**不要在其他组件内部定义组件。 这种方法没有任何好处，而且会导致许多不愉快的问题。最大的问题是React 在每次渲染时，会将内部的组件当作一个新的组件。这回导致React 无法去优化组件。
+
+<!-- Let's instead move th e <i>Display</i> component function to its correct place, which is outside of the <i>App</i> component function: -->
+让我们把<i>Display</i> 组件函数移动到正确的位置，这个位置在<i>App</i> 组件函数之外:
+
 
 ```js
 const Display = props => <div>{props.value}</div>

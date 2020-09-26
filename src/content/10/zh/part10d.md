@@ -138,7 +138,7 @@ import '@testing-library/jest-native/extend-expect';
 ```
 
 <!-- Next, configure this file as a setup file in the Jest's configuration in the <i>package.json</i> file (note that the <em><rootDir></em> in the path is intentional and there is no need to replace it): -->
-接下来，在 <i>package.json</i>  文件中作为安装文件在Jest 的配置中配置这个文件（注意，路径中的 <em><rootDir></em>  是内置的，无需替换掉）
+接下来，在 <i>package.json</i>  文件中作为安装文件在Jest 的配置中配置这个文件（注意，路径中的 <em>\<rootDir></em>  是内置的，无需替换掉）
 
 ```javascript
 {
