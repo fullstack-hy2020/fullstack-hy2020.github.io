@@ -618,7 +618,7 @@ const Togglable = () => ...
 
 #### 5.7* Blog list frontend, 步骤7
 
-<!-- Let's add each blog a button, which controls if all of the details about the blog are shown or not. -->
+<!-- Let's add a button to each blog, which controls whether all of the details about the blog are shown or not. -->
 让我们为每个博客添加一个按钮，用于控制是否显示博客的所有细节。
 
 <!-- Full details of the blog open when the button is clicked. -->
@@ -819,7 +819,7 @@ Create-react-app 已经默认为项目安装好了 ESlint， 所以我们需要�
 <!-- Next, we will start testing the frontend and in order to avoid undesired and irrelevant linter errors we will install the [eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest) package: -->
 下面，我们将开始测试前端，为避免不想要和不相关的 lint 错误，我们先安装[eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest) 库：
 
-```js
+```bash
 npm add --save-dev eslint-plugin-jest
 ```
 

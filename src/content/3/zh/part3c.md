@@ -27,6 +27,10 @@ lang: zh
 <!-- Note that the application shouldn't be running in another console, otherwise the port will already be in use. -->
 注意，应用不应该在另一个控制台中运行，否则该端口将会冲突。
 
+<!-- __NB__ A newer version of Visual Studio Code may have _Run_ instead of _Debug_. Furthermore, you may have to configure your _launch.json_ file to start debugging. This can be done by choosing _Add Configuration..._ on the drop-down menu, which is located next to the green play button and above _VARIABLES_ menu, and select _Run "npm start" in a debug terminal_. For more detailed setup instructions, visit Visual Studio Code's [Debugging documentation](https://code.visualstudio.com/docs/editor/debugging). -->
+
+__注意__ 更新版本的Visual Studio Code可能包含 _Run_ 而不是 _Debug_。进一步说，你可以配置你的 _launch.json_ 文件来开始debug。可以通过在下拉菜单中选择 _Add Configuration..._ ，它位于绿色按钮的旁边，以及 _VARIABLES_ 菜单的上部，选择 _Run "npm start" in a debug terminal_。有关更多的安装步骤，访问isual Studio Code的[Debugging documentation](https://code.visualstudio.com/docs/editor/debugging)。
+
 <!-- Below you can see a screenshot where the code execution has been paused in the middle of saving a new note: -->
 下面你可以看到一个屏幕截图，代码执行在保存新便笺的过程中被暂停:
 
@@ -701,8 +705,8 @@ app.post('/api/notes', (request, response) => {
 response.json(savedNote)
 ```
 
-<!-- Fetching an individual note gets changed into the following: -->
-取一个单独的便笺代码改为:
+<!-- Using Mongoose's [findById](https://mongoosejs.com/docs/api.html#model_Model.findById) method, fetching an individual note gets changed into the following: -->
+使用Mongoose的[findById](https://mongoosejs.com/docs/api.html#model_Model.findById) 方法，取一个单独的便笺代码改为:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -1059,24 +1063,6 @@ app.put('/api/notes/:id', (request, response, next) => {
 
 <!-- After testing the backend directly with Postman and the VS Code REST client, we can verify that it seems to work. The frontend also appears to work with the backend using the database.  -->
 在使用 Postman 和 VS Code REST 客户端直接测试后端之后，我们可以验证它似乎可以工作。 前端似乎也与使用数据库的后端一起工作。
-
-<!-- When we toggle the importance of a note, we see the following worrisome error message in the console: -->
-当我们切换注意事项的重要性时，我们会在控制台中看到如下令人担忧的错误消息:
-
-![](../../images/3/48.png)
-
-<!-- Googling the error message will lead to [instructions](https://stackoverflow.com/questions/52572852/deprecationwarning-collection-findandmodify-is-deprecated-use-findoneandupdate) for fixing the problem. Following [the suggestion in the Mongoose documentation](https://mongoosejs.com/docs/deprecations.html), we add the following line to the <i>note.js</i> file: -->
-谷歌错误信息将导向 [instructions](https://stackoverflow.com/questions/52572852/deprecationwarning-collection-findandmodify-is-deprecated-use-findoneandupdate) 解决问题。 根据 Mongoose 文档中的建议，我们在<i>note.js</i> 文件中添加了如下内容  :
-
-```js
-const mongoose = require('mongoose')
-
-mongoose.set('useFindAndModify', false) // highlight-line
-
-// ...
-  
-module.exports = mongoose.model('Note', noteSchema) 
-```
 
 <!-- You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5). -->
 您可以在[this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).的<i>part3-5</i> 分支中找到我们当前应用的全部代码。

@@ -748,11 +748,8 @@ app.delete('/api/notes/:id', (request, response) => {
 <!-- So how do we test the delete operation? HTTP GET requests are easy to make from the browser. We could write some JavaScript for testing deletion, but writing test code is not always the best solution in every situation. -->
 那么我们如何测试删除操作呢？ 通过浏览器进行 HTTP GET 请求很容易。 我们可以编写一些 JavaScript 来测试删除，但是编写测试代码并不总是最好的解决方案。
 
-<!-- Many tools exist for making the testing of backends easier. One of these is the command line program [curl](https://curl.haxx.se) that was mentioned briefly in the previous part of the material. -->
-为了让后端的测试变得更加容易，我们可以使用工具。 其中之一就是命令行程序[curl](https://curl.haxx.se) ，这个命令行程序在本文前面的部分中已经简要地提到过。
-
-<!-- Instead of curl, we will take a look at using [Postman](https://www.getpostman.com/) for testing the application. -->
-替代 curl，我们将使用 [Postman](https://www.getpostman.com/)  来测试应用。
+<!-- Many tools exist for making the testing of backends easier. One of these is a command line program [curl](https://curl.haxx.se). However, instead of curl, we will take a look at using [Postman](https://www.getpostman.com/) for testing the application. -->
+为了让后端的测试变得更加容易，我们可以使用工具。 其中之一就是命令行程序[curl](https://curl.haxx.se) ，这个命令行程序在本文前面的部分中已经简要地提到过。用来替代 curl，我们将使用 [Postman](https://www.getpostman.com/)  来测试应用。
 
 <!-- Let's install Postman and try it out: -->
 让我们安装 Postman 并尝试一下:

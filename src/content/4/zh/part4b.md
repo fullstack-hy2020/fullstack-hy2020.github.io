@@ -55,10 +55,10 @@ Node 中的约定是用 <i>NODE\_ENV</i> 环境变量定义应用的执行模式
 我们在使用 nodemon 的  _npm run dev_ 脚本中指定了应用的模式为 <i>development</i> 。 我们还指定了默认的 npm start 命令将模式定义为<i>production</i>。
 
 <!-- There is a slight issue in the way that we have specified the mode of the application in our scripts: it will not work on Windows. We can correct this by installing the [cross-env](https://www.npmjs.com/package/cross-env) package with the command: -->
-我们在脚本中指定应用模式的方式有一个小问题: 它不能在 Windows 上工作。 我们可以通过如下命令安装[cross-env](https://www.npmjs.com/package/cross-env)包来纠正这个问题:
+我们在脚本中指定应用模式的方式有一个小问题: 它不能在 Windows 上工作。 我们可以通过如下命令安装[cross-env](https://www.npmjs.com/package/cross-env)作为一个开发依赖包，来纠正这个问题:
 
 ```bash
-npm install cross-env
+npm install --save-dev cross-env
 ```
 
 <!-- We can then achieve cross-platform compatibility by using the cross-env library in our npm scripts defined in <i>package.json</i>: -->
@@ -304,6 +304,7 @@ const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
+// highlight-start
 const Note = require('../models/note')
 
 const initialNotes = [
@@ -328,6 +329,8 @@ beforeEach(async () => {
   noteObject = new Note(initialNotes[1])
   await noteObject.save()
 })
+// highlight-end
+// ...
 ```
 
 <!-- The database is cleared out at the beginning, and after that we save the two notes stored in the _initialNotes_ array to the database. Doing this, we ensure that the database is in the same state before every test is run. -->
@@ -346,11 +349,13 @@ test('all notes are returned', async () => {
 test('a specific note is within the returned notes', async () => {
   const response = await api.get('/api/notes')
 
-  const contents = response.body.map(r => r.content) // highlight-line
+// highlight-start
+  const contents = response.body.map(r => r.content) 
 
   expect(contents).toContain(
-    'Browser can execute only Javascript' // highlight-line
+    'Browser can execute only Javascript' 
   )
+// highlight-end
 })
 ```
 
