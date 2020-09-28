@@ -359,7 +359,7 @@ const Login = (props) => {
 }
 ```
 
-Mielenkiinoista komponentissa on react-routerin funktion [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) käyttö. Funktion avulla komponentti pääsee käsiksi [history](https://reacttraining.com/react-router/web/api/history)-olioon, joka taas mahdollistaa mm. selaimen osoiterivin muokkaamisen ohjelmallisesti.
+Mielenkiintoista komponentissa on react-routerin funktion [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) käyttö. Funktion avulla komponentti pääsee käsiksi [history](https://reacttraining.com/react-router/web/api/history)-olioon, joka taas mahdollistaa mm. selaimen osoiterivin muokkaamisen ohjelmallisesti.
 
 Kirjautumisen yhteydessä kutsutaan history-olion metodia push. Komento _history.push('/')_ saa aikaan sen, että selaimen osoiteriville tulee osoitteeksi _/_ ja sovellus renderöi osoitetta vastaavan komponentin <i>Home</i>.
 
