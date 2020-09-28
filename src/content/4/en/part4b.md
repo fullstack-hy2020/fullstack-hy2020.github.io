@@ -241,7 +241,7 @@ const response = await api.get('/api/notes')
 
 // execution gets here only after the HTTP request is complete
 // the result of HTTP request is saved in variable response
-expect(res.body).toHaveLength(2)
+expect(response.body).toHaveLength(2)
 ```
 
 <!-- HTTP-pyyntöjen tiedot konsoliin kirjoittava middleware häiritsee hiukan testien tulostusta. Muutetaan loggeria siten, että testausmoodissa lokiviestit eivät tulostu konsoliin: -->
