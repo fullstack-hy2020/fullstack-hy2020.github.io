@@ -237,11 +237,11 @@ Both tests store the response of the request to the _response_ variable, and unl
 The benefit of using the async/await syntax is starting to become evident. Normally we would have to use callback functions to access the data returned by promises, but with the new syntax things are a lot more comfortable:
 
 ```js
-const res = await api.get('/api/notes')
+const response = await api.get('/api/notes')
 
 // execution gets here only after the HTTP request is complete
-// the result of HTTP request is saved in variable res
-expect(res.body).toHaveLength(2)
+// the result of HTTP request is saved in variable response
+expect(response.body).toHaveLength(2)
 ```
 
 <!-- HTTP-pyyntöjen tiedot konsoliin kirjoittava middleware häiritsee hiukan testien tulostusta. Muutetaan loggeria siten, että testausmoodissa lokiviestit eivät tulostu konsoliin: -->
