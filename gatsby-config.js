@@ -24,7 +24,7 @@ const createSearchConfig = (indexName, language) => {
       index: ['body'],
       store: ['id', 'part', 'letter', 'lang'],
       normalizer: ({ data }) =>
-        data.allMarkdownRemark.nodes.map((node) => ({
+        data.allMarkdownRemark.nodes.map(node => ({
           id: node.id,
           part: node.frontmatter.part,
           letter: node.frontmatter.letter,
