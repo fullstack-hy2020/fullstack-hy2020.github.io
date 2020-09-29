@@ -445,14 +445,20 @@ Instead of the hardcoded Apollo Server's URL, use an environment variable define
 
 ### Storing data in the user's device
 
-There are times when we need to store some persisted pieces of data in the user's device. One such common scenario is storing the user's authentication token so that we can retrieve it even if the user closes and reopens our application. In web development, we have used the browser's <em>localStorage</em> object to achieve such functionality. React Native provides similar persistent storage, the [AsyncStorage](https://docs.expo.io/versions/latest/react-native/asyncstorage/).
+There are times when we need to store some persisted pieces of data in the user's device. One such common scenario is storing the user's authentication token so that we can retrieve it even if the user closes and reopens our application. In web development, we have used the browser's <em>localStorage</em> object to achieve such functionality. React Native provides similar persistent storage, the [AsyncStorage](https://react-native-community.github.io/async-storage/docs/usage).
+
+We can use the <em>expo install</em> command to install the version of the <i>@react-native-community/async-storage</i> package that is suitable for our Expo SDK version:
+
+```shell
+expo install @react-native-community/async-storage
+```
 
 The API of the <em>AsyncStorage</em> is in many ways same as the <em>localStorage</em> API. They are both key-value storages with similar methods. The biggest difference between the two is that, as the name implies, the operations of <em>AsyncStorage</em> are <i>asynchronous</i>.
 
 Because <em>AsyncStorage</em> operates with string keys in a global namespace it is a good idea to create a simple abstraction for its operations. This abstraction can be implemented for example using a [class](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes). As an example, we could implement a shopping cart storage for storing the products user wants to buy:
 
 ```javascript
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class ShoppingCartStorage {
   constructor(namespace = 'shoppingCart') {
@@ -505,7 +511,7 @@ doShopping();
 
 Because <em>AsyncStorage</em> keys are global, it is usually a good idea to add a <i>namespace</i> for the keys. In this context, the namespace is just a prefix we provide for the storage abstraction's keys. Using the namespace prevents the storage's keys from colliding with other <em>AsyncStorage</em> keys. In this example, the namespace is defined as the constructor's argument and we are using the <em>namespace:key</em> format for the keys.
 
-We can add an item to the storage using the [AsyncStorage.setItem](https://github.com/react-native-community/async-storage/blob/master/docs/API.md#setItem) method. The first argument of the method is the item's key and the second argument its value. The value <i>must be a string</i>, so we need to serialize non-string values as we did with the <em>JSON.stringify</em> method. The [AsyncStorage.getItem](https://github.com/react-native-community/async-storage/blob/master/docs/API.md#getitem) method can be used to get an item from the storage. The argument of the method is the item's key, of which value will be resolved. The [AsyncStorage.removeItem](https://github.com/react-native-community/async-storage/blob/master/docs/API.md#removeitem) method can be used to remove the item with the provided key from the storage.
+We can add an item to the storage using the [AsyncStorage.setItem](https://react-native-community.github.io/async-storage/docs/api#setitem) method. The first argument of the method is the item's key and the second argument its value. The value <i>must be a string</i>, so we need to serialize non-string values as we did with the <em>JSON.stringify</em> method. The [AsyncStorage.getItem](https://react-native-community.github.io/async-storage/docs/api#getitem) method can be used to get an item from the storage. The argument of the method is the item's key, of which value will be resolved. The [AsyncStorage.removeItem](https://react-native-community.github.io/async-storage/docs/api#removeitem) method can be used to remove the item with the provided key from the storage.
 
 </div>
 
@@ -561,7 +567,7 @@ This exercise is completed once you can log the user's <i>authorize</i> mutation
 Now that we can obtain the access token we need to store it. Create a file <i>authStorage.js</i> in the <i>utils</i> directory with the following content:
 
 ```javascript
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class AuthStorage {
   constructor(namespace = 'auth') {
