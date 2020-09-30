@@ -24,7 +24,7 @@
     "intro": "Learn React, Redux, Node.js, MongoDB, GraphQL and TypeScript in one go! This course will introduce you to modern JavaScript-based web development. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js.",
     "current": [
       "The 2020 edition is now open! The deadline for submissions is 10.1.2021",
-      "This year's edition of the course contains a new part on <a href='/osa9'>TypeScript</a>. Content of the part is provided by <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>",
+      "This year's edition of the course contains a new part on <a href='/en/part9'>TypeScript</a>. Content of the part is provided by <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>",
       "Read <a href='/en/part0/general_info#changed-since-the-last-year'>here</a> what else has changed since last year!",
       "You can discuss the course and related topics in our dedicated group on Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Please join the conversation!"
     ],
