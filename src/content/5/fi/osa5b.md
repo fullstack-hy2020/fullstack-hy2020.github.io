@@ -139,11 +139,11 @@ Komponenttien näkyvyys on määritelty asettamalla komponentille [inline](/osa2
 const hideWhenVisible = { display: loginVisible ? 'none' : '' }
 const showWhenVisible = { display: loginVisible ? '' : 'none' }
 
-<div style="{hideWhenVisible}">
+<div style={hideWhenVisible}>
   // nappi
 </div>
 
-<div style="{showWhenVisible}">
+<div style={showWhenVisible}>
   // lomake
 </div>
 ```
