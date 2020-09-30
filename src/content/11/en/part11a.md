@@ -15,11 +15,35 @@ If we're both working on changes and we haven't decided on a way to deploy to pr
 
 In this module, we'll cover ways to work together and build and deploy software in a strictly defined way so that it's clear *exactly* what will happen under any given circumstance.
 
+### Some useful terms
+In this module we'll be using some terms you may not be familiar with or you may not have a good understanding of. We'll discuss some of these terms here. Even if you are familiar with the terms, give this section a read so when we use the terms in this module, we're on the same page.
+
+#### Branches
+Git allows multiple copies, streams, or versions of the code to co-exist without overwriting eachother. When you first create a repository, you will be looking at the main branch (usually in git, we call this `master` or `main`, but that does vary in older projects). This is fine if there's only one developer for a project and that developer only works on one feature at a time.
+
+Branches are useful when this environment becomes more complex. In this context each developer can have one or more branches. Each branch is effectively a copy of the main branch with some changes that make it diverge from master. Once the feature or change in the branch is ready it can be merged back into the main branch, effectively making that feature or change part of the main software. In this way each developer can work on their own set of changes and not affect any other developer until the changes are ready. 
+
+But once one developer has merged their changes into the main branch, what happens to the other developers' branches? They are now diverging from an older copy of the main branch. How will the developer on the later branch know if their changes are compatible with the current state of the main branch? That is one of the fundamental questions we will be trying to answer in this module.
+
+#### Build
+The term 'build' has different meanings in different languages. In some languages, there is no need for a build step. 
+
+In general when we talk about building we mean preparing software to run on the platform where it's intended to run. This might mean, for example, that if you've written your application in TypeScript, and you intend to run it on Node, then the build step might be transcoding the TS into JS.
+
+This step is much more complicated (and required) in compiled languages where the code needs to be compiled into an executable.
+
+#### Deploy
+Deployment refers to putting the software where it needs to be for the end user to use it. In the case of libraries, this may simply mean pushing an npm package to a package archive (such as npmjs.com) where other users can find it and include it in their software. 
+
+Deploying a service (such as a web app) can vary in complexity. In this module we'll cover a simple deployment (to a web based hosting service) where users can use the software simply by going to the URL. 
+
+Deployments can be significantly more complex, especially if we add requirements such as "the software must be available at all times during the deployment" (zero downtime deployments) or if we have to take things like database migrations into account. We won't cover complex deployments like those in this module but it's important to know that they exist.
+
 ### What is CI?
 
 The strict definition of CI (Continuous Integration) and the way the term is used in industry are quite different.
 
-Strictly speaking, CI refers to merging developer changes to a main branch (usually in git, we call this master, but that does vary) often, wikipedia even helpfully suggests: "several times a day". This is usually true but when we refer to CI in industry, we're usually talking about what happens after the actual merge happens.
+Strictly speaking, CI refers to <a href='https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment'>merging developer changes to a main branch</a> often, wikipedia even helpfully suggests: "several times a day". This is usually true but when we refer to CI in industry, we're usually talking about what happens after the actual merge happens.
 
 We'd likely want to do some of these steps:
  - Lint: to keep our code clean and maintainable
@@ -32,11 +56,21 @@ We'll discuss each of these steps (and when they're suitable) in more detail lat
 
 Usually strict definitions act as a constraint on creativity/development speed, this, however should usually not be true for CI. This strictness should be set up in such a way as to allow for easier development and working together. Using a good CI system (GitHub Actions is what we'll cover in this module) will allow us to do this all automagically.
 
+### Packaging and Deployment as a part of CI
+
+It may be worthwhile to note that packaging and especially deployment are sometimes considered to not fall under the umbrella of CI. We'll add them in here because in the real world it makes sense to lump it all together. This is partially because they make sense in the context of the flow and pipeline (I want to get my code to users) and partially because these are in fact the most likely point of failure.
+
+Packaging is often an area where issues crop up in CI as this isn't something that's usually tested locally. It makes sense to test the packaging of a project during the CI workflow even if we don't do anything with the resultant package. With some workflows we may even be testing the already built packages. This assures us that we have tested the code in the same form as what will be deployed to production.
+
+What about deployment then? We'll talk about consistency and repeatability at length in the coming sections but we'll mention here that we want a process that always looks the same, whether we're running tests on a development branch or on master. In fact the process may *literally* be the same with only a check at the end to determine if we are on master branch and need to do a deployment. In this context, it makes sense to include deployment in the CI process since we'll be maintaining it at the same time we work on CI.
+
 #### Is this CD thing related?
 
-Continuous Delivery (CD) is often an extension to CI. I won't bore you with the definition (you can use wikipedia just as well as I can) but in general we refer to CD as the practice where the master branch is kept deployable at all times. In general, this is also frequently coupled with automated deployments triggered from merges.
+Continuous Delivery (CD) is often an extension to CI. I won't bore you with the definition (you can use wikipedia just as well as I can) but in general we refer to CD as the practice where the master branch is kept deployable at all times. In general, this is also frequently coupled with automated deployments triggered from merges into the master/base branch.
 
-We'll use the two terms together in this module as some concepts frequently cross the line between the two. For example, if we have tests that must run before any new code can be merged to master, is this CI because we're making frequent merges to master or is it CD because we're making sure that master is always deployable.
+What about the murky area between CI and CD? If, for example, we have tests that must run before any new code can be merged to master, is this CI because we're making frequent merges to master or is it CD because we're making sure that master is always deployable.
+
+So, some concepts frequently cross the line between CI and CD and, as we discussed above, deployment sometimes makes sense to consider as part of CI. This is why you'll often see references to CI/CD to describe the entire process. We'll use the terms "CI" and "CI/CD" interchangably in this module. Do however note that we didn't add the term "CD" as an interchangable term. This is because, in general, deployment pipelines described as "CD" follow a particular pattern (outside the scope of this module) that we won't focus on.
 
 ### Why is it important?
 
@@ -86,7 +120,7 @@ In order for us to be able to identify our software uniquely, we sometimes use h
 
 Ideally, every time we build and package our software, we would get identical files and have identical output (and generate the same hash sum for our software). If it's the same code, why wouldn't that be the case? Well, we use dependencies, and if some code changed in the dependencies then the dependency looks a little bit different and if we include that dependency in our final software, then the hash sum for our software is different. There's also the case with some compiled languages where the timestamp of the build is included in the output, generating a different hash every time you build. We won't discuss that here though.
 
-The importantce of completely reproducible builds varies in importance by application. In a financial institution or somewhere that handles medical records, it may be very important that the exact same build hash is reproducible to prove that the code that was approved is what is in the final output. In many other applications though, this is not extremely important.
+The importance of completely reproducible builds varies in importance by application. In a financial institution or somewhere that handles medical records, it may be very important that the exact same build hash is reproducible to prove that the code that was approved is what is in the final output. In many other applications though, this is not extremely important.
 
 #### Code always kept deployable
 
