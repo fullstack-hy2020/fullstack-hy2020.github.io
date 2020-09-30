@@ -137,6 +137,8 @@ const App = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault()
+    
+    // highlight-start
     try {
       const user = await loginService.login({
         username, password,
@@ -151,6 +153,7 @@ const App = () => {
         setErrorMessage(null)
       }, 5000)
     }
+    // highlight-end
   }
 
   // ...
