@@ -128,6 +128,7 @@ const App = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault()
+    
     // highlight-start
     try {
       const user = await loginService.login({
@@ -143,8 +144,8 @@ const App = () => {
         setErrorMessage(null)
       }, 5000)
     }
+    // highlight-end
   }
-  // highlight-end
 
   // ...
 }
