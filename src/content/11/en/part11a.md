@@ -35,7 +35,7 @@ This step is much more complicated (and required) in compiled languages where th
 #### Deploy
 Deployment refers to putting the software where it needs to be for the end user to use it. In the case of libraries, this may simply mean pushing an npm package to a package archive (such as npmjs.com) where other users can find it and include it in their software. 
 
-Deploying a service (such as a web app) may be a little more complicated. In this module we'll cover a simple deployment to a web based hosting service where users can use the software simply by going to the URL. We won't cover it in this module but it's important to know that deployments can be significantly more complex especially if we add requirements such as "the software must be available at all times during the deployment" (zero downtime deployments) or if we have to take things like database migrations into account.
+Deploying a service (such as a web app) can vary in complexity. In this module we'll cover a simple deployment (to a web based hosting service) where users can use the software simply by going to the URL. We won't cover it in this module but it's important to know that deployments can be significantly more complex especially if we add requirements such as "the software must be available at all times during the deployment" (zero downtime deployments) or if we have to take things like database migrations into account.
 
 ### What is CI?
 
