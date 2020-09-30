@@ -215,17 +215,6 @@ Mongoose 没有为此提供内置的验证器，可以使用 npm 安装[mongoose
 <!-- If an HTTP POST request tries to add a name that is already in the phonebook, the server must respond with an appropriate status code and error message. -->
 如果 HTTP POST 请求试图添加电话簿中已有的名称，服务器必须用适当的状态码和错误消息作出响应。
 
-<!-- **Huom:** unique-validator causes a warning to be printed to the console -->
-**注意: **unique-validator 会将警告打印到控制台 
-
-```
-(node:49251) DeprecationWarning: collection.ensureIndex is deprecated. Use createIndexes instead.
-connected to MongoDB
-```
-
-<!-- Read the mongoose [documentation](https://mongoosejs.com/docs/deprecations.html) to find out how to get rid of the warning. -->
-阅读mongoose [文档](https://mongoosejs.com/docs/deprecations.html 文档) ，找出如何摆脱警告。
-
 #### 3.20*: Phonebook database, 步骤8
 <!-- Expand the validation so that the name stored in the database has to be at least three characters long, and the phone number must have at least 8 digits. -->
 扩展验证，以便存储在数据库中的名称必须至少有三个字符长，电话号码必须至少有8个数字。

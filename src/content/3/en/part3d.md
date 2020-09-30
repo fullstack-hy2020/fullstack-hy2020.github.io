@@ -200,16 +200,6 @@ Mongoose does not offer a built-in validator for this purpose. Install the [mong
 
 If an HTTP POST request tries to add a name that is already in the phonebook, the server must respond with an appropriate status code and error message.
 
-
-**NB:** unique-validator causes a warning to be printed to the console
-
-```
-(node:49251) DeprecationWarning: collection.ensureIndex is deprecated. Use createIndexes instead.
-connected to MongoDB
-```
-
-Read the mongoose [documentation](https://mongoosejs.com/docs/deprecations.html) to find out how to get rid of the warning.
-
 #### 3.20*: Phonebook database, step8
 
 Expand the validation so that the name stored in the database has to be at least three characters long, and the phone number must have at least 8 digits.
