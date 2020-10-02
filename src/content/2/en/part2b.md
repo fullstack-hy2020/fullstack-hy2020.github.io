@@ -238,8 +238,8 @@ const addNote = (event) => {
     id: notes.length + 1,
   }
 
-  setNotes(notes.concat(noteObject))
-  setNewNote('')
+  //setNotes(notes.concat(noteObject))
+  //setNewNote('')
 }
 ```
 
