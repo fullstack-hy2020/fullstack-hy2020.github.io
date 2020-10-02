@@ -67,6 +67,10 @@ Traditionally, developing native iOS and Android applications has required the d
 
 通过这个章节的学习，会根据你完成的练习数量获得学分。完成本章的<i>19个练习</i>会获得<i>1学分</i>。完成<i>所有的练习</i>会获得<i>2学分</i>。
 
+<!-- You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language. Note that you must have completed at least one credit worth of exercises before you can download the certificate. -->
+
+通过完成本章的内容，点击本章的旗按钮，你就可以下载认证证书了。旗标代表了特定的语言。注意你必须至少完成价值1学分的练习才能够下载证书。
+
 ### Initializing the application
 应用的初始化
 

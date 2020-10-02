@@ -634,14 +634,15 @@ CI=true npm test -- --coverage
 
 #### 5.15: Blog list tests, 步骤3
 <!-- Make a test which ensures that if the <i>like</i> button is clicked twice, the event handler the component received as props is called twice.  -->
-进行一个测试，确保如果单击<i>like</i> 按钮两次，那么作为props接收的组件的事件处理程序将被调用两次。
+进行一个测试，确保如果单击<i>like</i> 按钮两次，那么作为props接收的组件的事件处理程序将创建两次。
 
 #### 5.16*: Blog list tests, 步骤4
 <!-- Make a test for the new blog form. The test should check, that the form calls the event handler it received as props with the right details when a new blog is called.  -->
 为新的博客表单做一个测试。 测试应该检查，当调用新建博客时，表单是否使用正确的细节调用它作为props接收的事件处理程序。
 
 <!-- If, for example, you give an <i>input</i> element id 'author': -->
-例如，如果你给出一个<i>input</i> 元素 id'author' :
+<!-- If, for example, you set an <i>input</i> element's id attribute as 'author': -->
+例如，如果你设置<i>input</i> 元素的 id 属性为 'author' :
 
 ```js
 <input

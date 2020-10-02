@@ -423,7 +423,7 @@ const App = () => {
 如果您的解决方案没有导致警告出现在控制台中，那么您已经完成了这个练习。
 
 <!-- If you see the warning in the console, make the necessary changes to get rid of the `Invalid value for prop reset' on <input> tag` console warning.  -->
-如果你在控制台中看到警告，做出必要的修改，去掉输入标签控制台警告上的 `Invalid value for prop reset' on <input> tag`。
+如果你在控制台中看到警告，做出必要的修改，去掉输入标签控制台警告上的 _Invalid value for prop \`reset\` on \<input\> tag_。
 
 <!-- The reason for this warning is that after making the changes to your application, the following expression: -->
 发出此警告的原因是，在对应用进行更改之后，下面的表达式:

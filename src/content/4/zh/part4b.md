@@ -258,11 +258,11 @@ test('the first note is about HTTP methods', async () => {
 使用async/await 语法的好处开始变得明显。 通常情况下，我们必须使用回调函数来访问由 promises 返回的数据，但是使用新的语法会更加方便:
 
 ```js
-const res = await api.get('/api/notes')
+const response = await api.get('/api/notes')
 
 // execution gets here only after the HTTP request is complete
-// the result of HTTP request is saved in variable res
-expect(res.body).toHaveLength(2)
+// the result of HTTP request is saved in variable response
+expect(response.body).toHaveLength(2)
 ```
 
 
