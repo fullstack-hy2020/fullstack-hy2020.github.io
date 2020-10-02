@@ -152,7 +152,7 @@ If you have previously passed the course exam (excluding the exam for the three 
 * Part 6, which is about Redux, concentrates on the new, hook-based, Redux API.
 * The material on react-router in part 7 has also been updated to use Hook API. Semantic UI React has been replaced with the MaterialUI library due to lack of maintenance.
 * Part 8 on GraphQL has major updates, especially on Apollo Client, which finally has stable Hook-based APIs.
-* Part 9 on TypeScript is completely new.
+* Part 9 on TypeScript and part 10 on React Native is completely new.
 
 Last year's course material can be found [here](https://fullstackopen-2019.github.io/).
 
