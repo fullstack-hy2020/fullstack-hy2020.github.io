@@ -124,7 +124,7 @@ Osissa 0-4 on ainoastaan vähäisiä muutoksia. Osa 5d eli Cypress.io-kirjastoll
 
 Reduxia käsittelevä osa 6 keskittyy ensisijaisesti reduxin uuteen hook-perustaiseen apiin. Myös osassa 7 käsiteltävä react-router on uudistunut käyttämään hook-apia. Vähäiselle ylläpidolle jäänyt Semantic UI React -kirjasto on korvattu MaterialUI-kirjastolla. 
 
-GraphQL:ää käsittelevä osa 8 on kokenut paljon päivityksiä erityisesti Apollo Clientin osalta, jonka hook-perustaiset apit ovat vihdoin stabiloituneet. TypeScriptiin keskittyvä osa 9 on kokonaan uusi. 
+GraphQL:ää käsittelevä osa 8 on kokenut paljon päivityksiä erityisesti Apollo Clientin osalta, jonka hook-perustaiset apit ovat vihdoin stabiloituneet. TypeScriptiin keskittyvä osa 9 ja React Nativeen keskittyvä osa 10 ovat kokonaan uusia. 
 
 Viime vuoden kurssimateriaali on nähtävissä osoitteessa https://fullstackopen-2019.github.io/
 
