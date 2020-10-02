@@ -310,10 +310,10 @@ ReactDOM.render(
 在小型应用中，应用处理的数据存储在 React-components 的状态中，因此在这个场景中，组件的状态可以被认为是 mvc 架构的<i>模型</i>。
 
 <!-- However, MVC-architecture is not usually mentioned when talking about React-applications. Furthermore, if we are using Redux, then the applications follow the [Flux](https://facebook.github.io/flux/docs/in-depth-overview.html#content)-architecture and the role of React is even more focused on creating the views. The business logic of the application is handled using the Redux state and action creators. If were using [redux thunk](/zh/part6/在_redux应用中与后端通信#asynchronous-actions-and-redux-thunk) familiar from part 6, then the business logic can be almost completely separated from the React code. -->
-但是，在讨论 React-applications 时通常不会提到 mvc 架构。 此外，如果我们正在使用 Redux，那么应用遵循[Flux](https://facebook.github.io/Flux/docs/in-depth-overview.html#content)-架构，React 的角色更专注于创建视图。 应用的业务逻辑使用 Redux 状态和操作创建者来处理。 如果在 redux 应用中使用第6章熟悉的[redux thunk](/zh/part6/在_redux应用中与后端通信#asynchronous-actions-and-redux-thunk)，那么业务逻辑几乎可以与 React 代码完全分离。
+但是，在讨论 React-applications 时通常不会提到 mvc 架构。 此外，如果我们正在使用 Redux，那么应用遵循[Flux](https://facebook.github.io/Flux/docs/in-depth-overview)-架构，React 的角色更专注于创建视图。 应用的业务逻辑使用 Redux 状态和操作创建者来处理。 如果在 redux 应用中使用第6章熟悉的[redux thunk](/zh/part6/在_redux应用中与后端通信#asynchronous-actions-and-redux-thunk)，那么业务逻辑几乎可以与 React 代码完全分离。
 
 <!-- Because both React and [Flux](https://facebook.github.io/flux/docs/in-depth-overview.html#content) were created at Facebook one could say that using React only as a UI library is the intended use case. Following the Flux-architecture adds some overhead to the application, and if were talking about a small application or prototype it might be a good idea to use React "wrong", since [over-engineering](https://en.wikipedia.org/wiki/Overengineering) rarely yields an optimal result. -->
-因为 React 和[Flux](https://Facebook.github.io/Flux/docs/in-depth-overview.html#content)都是在 Facebook 上创建的，可以说只把 React 用作 UI 库是预期的用例。 遵循 flux 架构会给应用增加一些开销，如果我们讨论的是一个小型应用或原型，那么“错误地”使用 React可能是一个好主意，因为[过度设计](https://en.wikipedia.org/wiki/overengineering)很少会产生最佳结果。
+因为 React 和[Flux](https://Facebook.github.io/Flux/docs/in-depth-overview)都是在 Facebook 上创建的，可以说只把 React 用作 UI 库是预期的用例。 遵循 flux 架构会给应用增加一些开销，如果我们讨论的是一个小型应用或原型，那么“错误地”使用 React可能是一个好主意，因为[过度设计](https://en.wikipedia.org/wiki/overengineering)很少会产生最佳结果。
 
 
 

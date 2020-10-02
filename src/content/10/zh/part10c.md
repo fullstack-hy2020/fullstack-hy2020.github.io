@@ -518,7 +518,16 @@ export default {
 在用户设备中排序
 
 <!-- There are times when we need to store some persisted pieces of data in the user's device. One such common scenario is storing the user's authentication token so that we can retrieve it even if the user closes and reopens our application. In web development, we have used the browser's <em>localStorage</em> object to achieve such functionality. React Native provides similar persistent storage, the [AsyncStorage](https://docs.expo.io/versions/latest/react-native/asyncstorage/). -->
-我们常常会将一些数据持久化到用户的设备中。一个典型的场景时存储用户的认证token ，这样我们在重新开启应用时就可以重复获取它。在Web 开发中，我们已经使用过浏览器的  <em>localStorage</em>  对象来实现相关的功能。React Native 提供了类似的持久化存储， 那就是[AsyncStorage](https://docs.expo.io/versions/latest/react-native/asyncstorage/)。
+我们常常会将一些数据持久化到用户的设备中。一个典型的场景时存储用户的认证token ，这样我们在重新开启应用时就可以重复获取它。在Web 开发中，我们已经使用过浏览器的  <em>localStorage</em>  对象来实现相关的功能。React Native 提供了类似的持久化存储， 那就是[AsyncStorage](https://react-native-community.github.io/async-storage/docs/usage)。
+
+
+<!-- We can use the <em>expo install</em> command to install the version of the <i>@react-native-community/async-storage</i> package that is suitable for our Expo SDK version: -->
+
+我们可以使用<em>expo install</em> 命令来安装适合Expo SDK 版本的 <i>@react-native-community/async-storage</i> 安装包：
+
+```shell
+expo install @react-native-community/async-storage
+```
 
 <!-- The API of the <em>AsyncStorage</em> is in many ways same as the <em>localStorage</em> API. They are both key-value storages with similar methods. The biggest difference between the two is that, as the name implies, the operations of <em>AsyncStorage</em> are <i>asynchronous</i>. -->
 <em>AsyncStorage</em> 的API 从某种意义上来说和  <em>localStorage</em>  的API相同。 他们都是KV存储，拥有类似的方法。最大的不同正如他们的名字所预示的， <em>AsyncStorage</em>  是 <i>异步的</i>。
@@ -528,7 +537,7 @@ export default {
 由于 <em>AsyncStorage</em> 对string key 的操作是全局的命名空间，因此对其操作进行一些简单的抽象是非常好的。这种抽象可以通过例如[class](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) 来完成。举个例子，我们可以实现一个购物车来存储用户希望购买的商品：
 
 ```javascript
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class ShoppingCartStorage {
   constructor(namespace = 'shoppingCart') {
@@ -585,7 +594,7 @@ doShopping();
 
 <!-- We can add an item to the storage using the [AsyncStorage.setItem](https://github.com/react-native-community/async-storage/blob/master/docs/API.md#setItem) method. The first argument of the method is the item's key and the second argument its value. The value <i>must be a string</i>, so we need to serialize non-string values as we did with the <em>JSON.stringify</em> method. The [AsyncStorage.getItem](https://github.com/react-native-community/async-storage/blob/master/docs/API.md#getitem) method can be used to get an item from the storage. The argument of the method is the item's key, of which value will be resolved. The [AsyncStorage.removeItem](https://github.com/react-native-community/async-storage/blob/master/docs/API.md#removeitem) method can be used to remove the item with the provided key from the storage. -->
 
-我们可以使用 [AsyncStorage.setItem](https://github.com/react-native-community/async-storage/blob/master/docs/API.md#setItem) 来向存储添加存储项。方法的第一个参数是该项的key ，第二个参数是值。 值 <i>必须是字符串</i>， 所以我们需要序列化非字符串的值，就像我们使用  <em>JSON.stringify</em>  方法一样。 [AsyncStorage.getItem](https://github.com/react-native-community/async-storage/blob/master/docs/API.md#getitem)  方法可以用来从存储中获得一个项。该方法的第一个参数是项目的key ， 这样它的值就被处理到了。 [AsyncStorage.removeItem](https://github.com/react-native-community/async-storage/blob/master/docs/API.md#removeitem) 方法可以用来从storage 中移除相关的key 。
+我们可以使用 [AsyncStorage.setItem](https://react-native-community.github.io/async-storage/docs/api#setitem) 来向存储添加存储项。方法的第一个参数是该项的key ，第二个参数是值。 值 <i>必须是字符串</i>， 所以我们需要序列化非字符串的值，就像我们使用  <em>JSON.stringify</em>  方法一样。 [AsyncStorage.getItem](https://react-native-community.github.io/async-storage/docs/api#getitem)  方法可以用来从存储中获得一个项。该方法的第一个参数是项目的key ， 这样它的值就被处理到了。 [AsyncStorage.removeItem](https://react-native-community.github.io/async-storage/docs/api#removeitem) 方法可以用来从storage 中移除相关的key 。
 
 </div>
 
@@ -815,7 +824,7 @@ const useSignIn = () => {
 存储访问token 步骤2
 
 <!-- Improve the <em>useSignIn</em> hook so that it stores the user's access token retrieved from the <i>authorize</i> mutation. The return value of the hook should not change. The only change you should make to the <em>SignIn</em> component is that you should redirect the user to the reviewed repositories list view after a successful sign in. You can achieve this by using the (useHistory)[https://reacttraining.com/react-router/native/api/Hooks/usehistory] hook and the history's [push](https://reacttraining.com/react-router/native/api/history) method. -->
-改进<em>useSignIn</em> hook ，使之能存储从<i>authorize</i>  变化来的用户的访问token。hook 的返回值不能变化，对 <em>SignIn</em>组件唯一的变化应当是在用户成功登录后将起重定向到用户已评论的仓库列表视图。你可以使用(useHistory)[https://reacttraining.com/react-router/native/api/Hooks/usehistory] hook 和history 的[push](https://reacttraining.com/react-router/native/api/history) 方法 来完成这个功能。
+改进<em>useSignIn</em> hook ，使之能存储从<i>authorize</i>  变化来的用户的访问token。hook 的返回值不能变化，对 <em>SignIn</em>组件唯一的变化应当是在用户成功登录后将起重定向到用户已评论的仓库列表视图。你可以使用[useHistory](https://reacttraining.com/react-router/native/api/Hooks/usehistory) hook 和history 的[push](https://reacttraining.com/react-router/native/api/history) 方法 来完成这个功能。
 
 <!-- After the <i>authorize</i> mutation has been executed and you have stored the user's access token to the storage, you should reset the Apollo Client's store. This will clear the Apollo Client's cache and re-execute all active queries. You can do this by using the Apollo Client's [resetStore](https://www.apollographql.com/docs/react/v2.5/api/apollo-client/#ApolloClient.resetStore) method. You can access the Apollo Client in the <em>useSignIn</em> hook using the [useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useapolloclient) hook. Note that the order of the execution is crucial and should be the following: -->
 
