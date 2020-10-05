@@ -48,7 +48,7 @@ Clicking the first event reveals more information on what's happening:
 
 ![](../../images/0/3e.png)
 
-The upper part, <i>General</i>, shows that the browser did a request to the address <i>https://studies.cs.helsinki.fi/exampleapp</i> using the  [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) method, and that the request was successful, because the server response had the [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200. 
+The upper part, <i>General</i>, shows that the browser did a request to the address <i>https://studies.cs.helsinki.fi/exampleapp</i> (though the address has changed slightly since this picture was taken) using the  [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) method, and that the request was successful, because the server response had the [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200. 
 
 The request and the server response have several [headers](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields):
 
