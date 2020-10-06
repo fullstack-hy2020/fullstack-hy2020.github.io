@@ -39,8 +39,6 @@ on:
     types: [opened, synchronize]
 ```
 
-> TODO: make sure exercise number is correct
-
 </div>
 
 <div class="tasks">
