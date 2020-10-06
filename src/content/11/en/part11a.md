@@ -174,11 +174,11 @@ For this course we'll use GitHub Actions. We'll do this because there's very lit
 
 <div class="tasks">
 
-### Exercises
+### Exercises 11.1.
 
 For the exercises below, you are not expected to know anything about Python (the programming language at least, you *are* expected to be an expert on the actual snake). The expectation is that you will find a way to achieve the objective (in principle) without having to learn a new language. Python is used here as an illustrative point, not with the aim of learning a new language.
 
-#### A.1:
+#### 11.1 Thinking hypothetically
 In order to distance the concept if CI/CD from the actual code of an application, let's use a hypothetical example in a different language. We'll use Python.
 
 ##### The Situation:
