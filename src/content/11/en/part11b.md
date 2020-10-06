@@ -176,6 +176,10 @@ After the environment has been set up we can run all the scripts from `package.j
   run: npm run eslint
 ```
 
+</div>
+
+<div class="tasks">
+
 ### Exercise 11.2
 
 Implement the "Lint" workflow and commit it to the repository. Navigate to "Actions" tab and click on your newly created workflow on the left. You should see that the workflow run has failed. There are one or more issues with the Pokedex repository that you will need to fix. Open up the workflow logs and investigate.
@@ -192,10 +196,6 @@ Let's expand on the previous workflow that currently does the linting of the cod
 - name: test
   run: npm test
 ```
-
-</div>
-
-<div class="tasks">
 
 ### Exercise 11.3
 
