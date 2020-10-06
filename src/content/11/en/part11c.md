@@ -42,3 +42,13 @@ Let's define some things we *want* in this hypothetical deployment system too:
  - We'd like to have no downtime during the deployment (this is distinct from the requirement we have for handling user requests just before/during the deployment).
 
 </div>
+
+<div class="tasks">
+
+### Exercises 11.5.-11.X.
+
+#### 11.5 TODO
+
+TODO: needs exercise
+
+</div>
