@@ -26,9 +26,14 @@ There are several reasons why using pull request and getting your code reviewed 
 
 You can configure your GitHub repository in such a way that pull requests cannot be merged until they are approved.
 
-// TODO: screenshot of opening a new PR on GitHub
+![Compare & pull request](../../images/11/part11d_00.png)
+
+To open a new pull request, open your branch in GitHub and click on the green "Compare & pull request" at the top. You will be presented with the form where you can fill in pull request description.
+
+![Open a new pull request](../../images/11/part11d_01.png)
 
 GitHub's pull request interface presents a description and the discussion interface. At the bottom it displays all the CI checks (in our case each of our Github Actions) that are configured to run for each PR and the statuses of these checks. A green board is what you aim for! You can click on Details of each check to view details and run logs.
+
 
 All the workflows we looked at so far were triggered by commits to master branch. To make the workflow run for each pull request we would have to update the trigger part of the workflow. We use the "pull_request" trigger for branch "master" and limit the trigger to events "opened" and "synchronize". Basically this means, that the workflow will run when a PR into master is opened or updated.
 
@@ -43,7 +48,7 @@ on:
 
 <div class="tasks">
 
-### Exercise 11.4
+### Exercise 11.4.
 
 We created a "Lint, build and test" workflow in Exercise 11.2. It does a useful task of ensuring good code quality, but since it is run on commits to master, it's catching the  problems too late!
 
@@ -127,9 +132,9 @@ In the above case, the software we release is tested because the CI system makes
 
 <div class="tasks">
 
-### Exercises 11.6.
+### Exercise 11.5.
 
-#### 11.6 Adding versioning
+#### 11.5 Adding versioning
 
 Let's set up a workflow that will automatically increase (bump) the version when a pull request is merged into master and tag the release with the version number. We will use an open-source action developed by a third-party: `anothrNick/github-tag-action`. You can read the documentation for this action in its [README](https://github.com/anothrNick/github-tag-action).
 
@@ -158,7 +163,7 @@ As you can see from the documentation, unless you alter the default behaviour wi
 
 Complete the workflow and try it out! Once the workflow has run successfully, you will see the release on the right hand side in your repository. If you're uncertain of the configuration, you can set `DRY_RUN` to `true`, which will make the action output the next version number without creating or tagging the release.
 
-![Releases](../../images/11/part11d_01.png)
+![Releases](../../images/11/part11d_02.png)
 
 </div>
 
@@ -168,12 +173,20 @@ Complete the workflow and try it out! Once the workflow has run successfully, yo
 
 GitHub allows you to set up protected branches. It is important to protect your most important branch that should never be broken: master. In repository settings you can choose between several levels of protection. We will not go over all of the protection options, you can learn more about them in GitHub documentation. Requiring pull request approval when merging into master is one of the options we mentioned earlier.
 
-From CI point of view the most important protection is requiring status checks to pass before a PR can be merged into master. This means that if you have set up GitHub actions to run e.g. linting and testing tasks, then until all the lint errors are fixed and all the tests pass the PR cannot be merged.
+From CI point of view the most important protection is requiring status checks to pass before a PR can be merged into master. This means that if you have set up GitHub actions to run e.g. linting and testing tasks, then until all the lint errors are fixed and all the tests pass the PR cannot be merged. Because you are the administrator for you repository, you will see an option to override the restriction. However, non-administrators will not have this option.
 
-// TODO: screenshot of an unmergeable PR
+![Unmergeable PR](../../images/11/part11d_03.png)
 
 To set up protection for your master branch, navigate to repository "Settings" from the top menu inside the repository. In the left-side menu select "Branches". Click "Add rule" button next to "Branch protection rules". Type a branch name pattern ("master" will do nicely) and select the protection you would want to set up. At least "Require status checks to pass before merging" is necessary for you to fully utilise the power of GitHub Actions. Under it you should also check "Require branches to be up to date before merging" and select all of the status checks that should pass before a PR can be merged. At least bulding, testing and linting checks are good candidates.
 
-// TODO: screenshot of the branch protection UI
+![Branch protection rule](../../images/11/part11d_04.png)
+
+### Exercise 11.6.
+
+#### 11.6 Adding master protection
+
+Add protection to your master branch. You should protect it to:
+- Require all pull request to be approved before merging
+- Require all status checks (lint and test) to pass before merging
 
 </div>
