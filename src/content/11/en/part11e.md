@@ -21,15 +21,21 @@ When the CI process finishes quickly, it can be convenient to just watch it exec
 
 There are several solutions to this problem ranging from simple notifications to more complicated processes that simply merge passing code if certain conditions are met. We're going to discuss notifications as a simple solution since it's the one that interferes with the team workflow the least.
 
-By default, GitHub Actions sends an email on a build failure. This can be changed to send notifications regardless of build status and can also be configured to alert you on the GitHub web interface. Great. But what if we want more. What if for whatever reason this doesn't work for our use case. 
+By default, GitHub Actions sends an email on a build failure. This can be changed to send notifications regardless of build status and can also be configured to alert you on the GitHub web interface. Great. But what if we want more. What if for whatever reason this doesn't work for our use case.
 
 There are integrations, for example with Slack, to send notifications. These integrations still decide what to send and when to send it based on logic from GitHub.
 
 Let's go one step further. Let's set up our own notification system:
 
-> TODO: Turn this into an excercise.
+</div>
 
-Using the build from the previous section, set up a notification to either: 
+<div class="tasks">
+
+### Exercise 11.7
+
+#### 11.7 Build success/failure notification action
+
+Using the build from the previous section, set up a notification to either:
 1: Tell us that the build succeeded and the project is ready for deployment
 2: There was a problem that needs to be fixed. In this case, make it as easier for the developer to work out what went wrong. Send either the test report with the failing tests or a link to where said report can be found.
 
@@ -38,6 +44,10 @@ You can choose the channel that the notification will be sent to but you will ne
 When doing this excercise, remember the following things.
  - The notifications should *always* be sent, even if the build fails in a much earlier step. Is there any failure that would prevent a notification from being sent?
  - The status of jobs in the build needs to be sent too, how do you get that? How do you present it?
+
+ </div>
+
+ <div class="content">
 
 ### Metrics
 
@@ -59,7 +69,14 @@ Words of advice to consider: If your budget allows it, it's almost always better
 
 What about the tasks that don't have a tool? You can automate these yourself with GitHub Actions too. GitHub Actions provides a scheduled trigger that can be used to execute a task at a particular time.
 
-> TODO: Turn this into another excercise.
+
+</div>
+
+<div class="tasks">
+
+### Exercise 11.8
+
+#### 11.8 Average runtime notification action
 
 Let's combine the the past last 3 sections together: Write an action that will send the average run time for all `build`, `lint`, `test` and `deploy` actions in the repo the workflow is situated in to an email address for archiving. You will likely need to create an action that calls the GitHub API for this.
 
