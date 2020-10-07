@@ -181,6 +181,11 @@ To set up protection for your master branch, navigate to repository "Settings" f
 
 ![Branch protection rule](../../images/11/part11d_04.png)
 
+
+</div>
+
+<div class="content">
+
 ### Exercise 11.6.
 
 #### 11.6 Adding master protection
