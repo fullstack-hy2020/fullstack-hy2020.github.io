@@ -184,7 +184,7 @@ To set up protection for your master branch, navigate to repository "Settings" f
 
 </div>
 
-<div class="content">
+<div class="tasks">
 
 ### Exercise 11.6.
 
