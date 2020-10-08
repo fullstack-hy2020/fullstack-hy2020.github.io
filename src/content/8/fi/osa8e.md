@@ -220,7 +220,7 @@ Backendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-h
 
 ### Tilaukset clientissä
 
-Jotta saamme tilaukset käyttöön React-sovelluksessa, tarvitaan hieman enemmän muutoksia, erityisesti [konfiguraatioiden osalta](https://www.apollographql.com/docs/react/v3.0-beta/data/subscriptions/). Tiedostossa <i>index.js</i> olevat konfiguraatiot on muokattava seuraavaan muotoon:
+Jotta saamme tilaukset käyttöön React-sovelluksessa, tarvitaan hieman enemmän muutoksia, erityisesti [konfiguraatioiden osalta](https://www.apollographql.com/docs/react/data/subscriptions/). Tiedostossa <i>index.js</i> olevat konfiguraatiot on muokattava seuraavaan muotoon:
 
 ```js
 import { 
@@ -231,7 +231,7 @@ import { setContext } from 'apollo-link-context'
 
 // highlight-start
 import { getMainDefinition } from '@apollo/client/utilities'
-import { WebSocketLink } from '@apollo/link-ws'
+import { WebSocketLink } from '@apollo/client/link/ws'
 // highlight-end
 
 const authLink = setContext((_, { headers }) => {
@@ -285,7 +285,7 @@ ReactDOM.render(
 Jotta kaikki toimisi, on asennettava uusia riippuvuuksia:
 
 ```bash
-npm install @apollo/link-ws subscriptions-transport-ws
+npm install @apollo/client subscriptions-transport-ws
 ```
 
 Uusi konfiguraatio johtuu siitä, että sovelluksella tulee nyt olla HTTP-yhteyden lisäksi websocket-yhteys GraphQL-palvelimelle:
