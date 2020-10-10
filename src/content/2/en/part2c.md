@@ -278,7 +278,7 @@ const promise2 = axios.get('http://localhost:3001/foobar')
 console.log(promise2)
 ```
 
-This should be printed to the console
+Go to localhost:3000 (where your React application is hosted) and this should be printed to the console
 
 ![](../../images/2/16b.png)
 
