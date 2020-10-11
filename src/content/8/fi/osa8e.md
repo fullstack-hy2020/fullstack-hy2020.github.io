@@ -292,12 +292,12 @@ Uusi konfiguraatio johtuu siitä, että sovelluksella tulee nyt olla HTTP-yhteyd
 
 ```js
 const wsLink = new WebSocketLink({
-  uri: `ws://localhost:4000`,
+  uri: `ws://localhost:4000/graphql`,
   options: { reconnect: true }
 })
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:4000/graphql',
+  uri: 'http://localhost:4000',
 })
 ```
 
