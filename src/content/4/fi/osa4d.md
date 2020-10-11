@@ -309,7 +309,7 @@ Laajenna blogia siten, että blogiin tulee tieto sen lisänneestä käyttäjäst
 
 Muokkaa blogien lisäystä osan 4 luvun [populate](/osa4/kayttajien_hallinta#populate) tapaan siten, että blogin lisäämisen yhteydessä määritellään blogin lisääjäksi <i>joku</i> järjestelmän tietokannassa olevista käyttäjistä (esim. ensimmäisenä löytyvä). Tässä vaiheessa ei ole väliä kuka käyttäjistä määritellään lisääväksi. Toiminnallisuus viimeistellään tehtävässä 4.19.
 
-Muokaa kaikkien blogien listausta siten, että blogien yhteydessä näytetään lisääjän tiedot:
+Muokkaa kaikkien blogien listausta siten, että blogien yhteydessä näytetään lisääjän tiedot:
 
 ![](../../images/4/23e.png)
 
