@@ -415,7 +415,7 @@ import ReactDOM from 'react-dom'
 
 Let's move our <i>Note</i> component into its own module. 
 
-In smaller applications, components are usually placed in a directory called <i>components</i> , which is in turn placed within the <i>src</i> directory. The convention is to name the file after the component. 
+In smaller applications, components are usually placed in a directory called <i>components</i>, which is in turn placed within the <i>src</i> directory. The convention is to name the file after the component. 
 
 Now we'll create a directory called <i>components</i> for our application and place a file named <i>Note.js</i> inside. 
 The contents of the Note.js file are as follows: 
