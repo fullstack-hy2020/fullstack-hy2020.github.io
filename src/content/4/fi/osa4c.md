@@ -352,7 +352,7 @@ Hoidetaan uniikkiuden tarkastaminen Mongoosen validoinnin avulla. Kuten edellise
 npm install mongoose-unique-validator
 ```
 
-Käyttäjän skeemaa tiedostossa <i>models/user.js</i> tulee muuttaa seuraavasti seuraavasti:
+Käyttäjän skeemaa tiedostossa <i>models/user.js</i> tulee muuttaa seuraavasti:
 
 ```js
 const mongoose = require('mongoose')
