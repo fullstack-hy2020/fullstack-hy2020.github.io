@@ -448,7 +448,7 @@ Operaatio vaikuttaa toimivan. Lisätään vielä yksi muistiinpano ja mennään 
 
 Huomaamme siis, että käyttäjällä on kaksi muistiinpanoa.
 
-Muistiinpanon luoneen käyttäjän id näkyviin muistiinpanon yhteyteen:
+Muistiinpanon luoneen käyttäjän id tulee näkyviin muistiinpanon yhteyteen:
 
 ![](../../images/4/12e.png)
 
