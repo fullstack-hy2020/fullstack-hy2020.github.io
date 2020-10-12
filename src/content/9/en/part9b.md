@@ -28,7 +28,10 @@ Let's start writing our first TypeScript-app. To keep things simple, let's start
 It compiles and executes the specified TypeScript file immediately, so that there is no need for a separate compilation step.
 
 <!-- To use <i>ts-node</i> you could install it globally with the official <i>typescript</i> package by running <i>npm install -g ts-node typescript</i>.  -->
-You can install both <i>ts-node</i> and the official <i>typescript</i> package globally by running <i>npm install -g ts-node typescript</i>.
+You can install both <i>ts-node</i> and the official <i>typescript</i> package globally by running 
+```
+npm install -g ts-node typescript
+```
 
 <!-- If you can't or don't want to install global packages you can create an npm project that has the required dependencies and run your scripts in it. We shall also go with this approach. -->
 If you can't or don't want to install global packages, you can create an npm project which has the required dependencies and run your scripts in it. 
