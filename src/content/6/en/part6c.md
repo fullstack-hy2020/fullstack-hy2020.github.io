@@ -69,7 +69,7 @@ export default { getAll }
 We'll add axios to the project
 
 ```bash
-npm install axios
+npm install axios --save
 ```
 
 We'll change the initialization of the state in <i>noteReducer</i>, such that by default there are no notes:
