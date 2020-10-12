@@ -77,9 +77,9 @@ Web 开发第一规则: 始终在浏览器上打开你的开发者控制台。 �
 
 ![](../../images/0/3e.png)
 
-<!-- The upper part, <i>General</i>, shows that the browser did a request to the address <i>https://studies.cs.helsinki.fi/exampleapp/</i> using the [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) method, and that the request was successful, because the server response had the [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200. -->
+<!-- The upper part, <i>General</i>, shows that the browser did a request to the address <i>https://studies.cs.helsinki.fi/exampleapp/</i> (though the address has changed slightly since this picture was taken) using the [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) method, and that the request was successful, because the server response had the [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200. -->
 
-上半部分，General 中的内容，说明了浏览器使用 [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) 方法向地址 https://studies.cs.helsinki.fi/exampleapp/ 发送了一个请求，并且请求成功，因为服务器响应的状态码为 200。
+上半部分，General 中的内容，说明了浏览器使用 [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) 方法向地址 https://studies.cs.helsinki.fi/exampleapp/ 发送了一个请求（虽然由于图片已经取到了，地址悄悄发生了变化），并且请求成功，因为服务器响应的状态码为 200。
 
 <!-- The request and the server response have several [headers](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields): -->
 

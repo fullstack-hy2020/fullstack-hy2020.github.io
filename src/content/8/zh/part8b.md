@@ -1006,7 +1006,7 @@ useEffect(() => {
 我们的示例只使用 React 组件的状态来管理表单的状态并显示错误通知。 当使用 GraphQL 时，根本没有理由将应用状态的管理转移到 Redux。
 
 <!-- When necessary Apollo enables saving the applications local state to [Apollo cache](https://www.apollographql.com/docs/react/v3.0-beta/data/local-state/). -->
-必要时，Apollo 允许将应用保存到本地状态[Apollo cache](https://www.apollographql.com/docs/react/v3.0-beta/data/local-state/ 缓存)。
+必要时，Apollo 允许将应用保存到本地状态[Apollo cache](https://www.apollographql.com/docs/react/local-state/local-state-management/)。
 
 
 <div class="tasks">

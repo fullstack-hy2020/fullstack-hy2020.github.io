@@ -259,7 +259,7 @@ Subscriptions ready at ws://localhost:4000/graphql
 【客户端的订阅】
 
 <!-- In order to use subscriptions in our React application, we have to do some changes, especially on its [configuration]((https://www.apollographql.com/docs/react/v3.0-beta/data/subscriptions/). -->
-为了在我们的 React 应用中使用订阅，我们必须做一些更改，特别是在它的[配置](https://www.apollographql.com/docs/React/v3.0-beta/data/subscriptions/)上。
+为了在我们的 React 应用中使用订阅，我们必须做一些更改，特别是在它的[配置](https://www.apollographql.com/docs/React/data/subscriptions/)上。
 <!-- The configuration in <i>index.js</i> has to be modified like so:  -->
 <i>index.js</i> 中的配置必须修改如下:
 
@@ -272,7 +272,7 @@ import { setContext } from 'apollo-link-context'
 
 // highlight-start
 import { getMainDefinition } from '@apollo/client/utilities'
-import { WebSocketLink } from '@apollo/link-ws'
+import { WebSocketLink } from '@apollo/client/link/ws'
 // highlight-end
 
 const authLink = setContext((_, { headers }) => {
@@ -327,7 +327,7 @@ ReactDOM.render(
 为了实现这一点，我们必须安装一些依赖项:
 
 ```bash
-npm install @apollo/link-ws subscriptions-transport-ws
+npm install @apollo/client subscriptions-transport-ws
 ```
 
 <!-- The new configuration is due to the fact that the application must have an HTTP connection as well as a WebSocket connection to the GraphQL server. -->

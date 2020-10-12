@@ -307,7 +307,7 @@ Note that readQuery will throw an error if your cache does not contain all of th
 在某些情况下，使缓存保持最新的唯一合理方法是使用 update-callback。
 
 <!-- When necessary it is possible to disable cache for the whole application or single queries by setting the field managing the use of cache, [fetchPolicy](https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy) as <em>no-cache</em>. -->
-必要时，可以通过将管理 cache 使用的字段设置为 <em>no-cache</em> 来禁用整个应用或单个查询的缓存，[fetchPolicy](https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy)。
+必要时，可以通过将管理 cache 使用的字段设置为 <em>no-cache</em> 来禁用整个应用或[单个查询](https://www.apollographql.com/docs/react/api/react/hooks/#options)的缓存，[fetchPolicy](https://www.apollographql.com/docs/react/data/queries/#configuring-fetch-logic)。
 
 <!-- Be diligent with the cache. Old data in cache can cause hard to find bugs. As we know, keeping the cache up to date is very challenging. According to a coder proverb: -->
 勤于使用缓存。 缓存中的旧数据可能导致难以发现 bug。 众所周知，保持缓存最新是非常具有挑战性的。 根据一个程序员谚语:
