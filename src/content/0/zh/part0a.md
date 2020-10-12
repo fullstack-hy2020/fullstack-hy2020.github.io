@@ -252,11 +252,11 @@ React Native 章节的学分
 * 对于0~4章节，只有一些很小的改动。
 * 第5d章节，<i>端到端测试</i> 利用了[Cypress.io](https://www.cypress.io) 这个库，这几乎是全新的内容。使用自定义钩子（custom hook）的内容已经从第5章节转移到了第7章节，并添加了一些新的内容。
 
-<!-- Part 6, which is about Redux, concentrates on the new, hook-based, redux api. The material on react-router in part 7 has also been updated to use the hook-api. Semantic UI React has been replaced with the MaterialUI library due to lack of maintenance. <br><br> Part 8 on GraphQL has major updates especially on Apollo Client, which finally has stable hook based apis. Part 9 on TypeScript is completely new. -->
+<!-- Part 6, which is about Redux, concentrates on the new, hook-based, redux api. The material on react-router in part 7 has also been updated to use the hook-api. Semantic UI React has been replaced with the MaterialUI library due to lack of maintenance. <br><br> Part 8 on GraphQL has major updates especially on Apollo Client, which finally has stable hook based apis. Part 9 on TypeScript and part 10 on React Native is completely new. -->
 * 第6章是讲Redux的，主要介绍了新的基于hook的redux API。
 * 第7章的react-router 也更新为使用hook-api。由于Semantic UI React 缺乏维护，其内容已经被替换为了 MaterialUI library 的内容。
 * 第8章 GraphQL有了较大版本的升级，尤其引入了Apollo Client，它终于有了稳定的基于hook的api。
-* 第9章是全新的内容。
+* 第9章的TypeScript 和第10 章的React Native 是全新的内容。
 
 <!-- Last year's course material can be found from https://fullstackopen-2019.github.io/ -->
 去年的课程内容可以通过<a href='https://fullstackopen-2019.github.io/'>https://fullstackopen-2019.github.io/</a>进行访问。

@@ -1169,7 +1169,7 @@ export default router;
 ```js
 router.post('/', (req, res) => {
   const { date, weather, visibility, comment } = req.body;
-  const newDiaryEntry = diaryService.AddEntry(
+  const newDiaryEntry = diaryService.addEntry(
     date,
     weather,
     visibility,
