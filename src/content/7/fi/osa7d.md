@@ -291,7 +291,7 @@ const config = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        query: {
+        options: {
           presets: ['@babel/preset-react'],
         },
       },
@@ -309,7 +309,7 @@ Yksittäisen loaderin määrittely on kolmiosainen:
 {
   test: /\.js$/,
   loader: 'babel-loader',
-  query: {
+  options: {
     presets: ['@babel/preset-react']
   }
 }
@@ -372,7 +372,7 @@ Tällä hetkellä sovelluksemme transpiloinnissa käytetään presetiä [@babel/
 {
   test: /\.js$/,
   loader: 'babel-loader',
-  query: {
+  options: {
     presets: ['@babel/preset-react'] // highlight-line
   }
 }
