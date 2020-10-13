@@ -164,7 +164,7 @@ Suurin osa tehtävistä on moniosaisia, samaa ohjelmaa pala palalta rakentavia k
 Virallinen kurssisuoritus edellyttää että teet hyväksyttävästi kurssikokeen Avoimen yliopiston Moodle-järjestelmässä. Pääset Moodleen seuraavia ohjeita seuraamalla: 
 
 - Tee Avoimen yliopiston kurssi-ilmoittautuminen 09.01.2021 mennessä [täällä](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=129171256) 
-- Linkin ja kurssiavaimen opintojakson Moodleen saat sähköpostitse 24 tunnin sisään kurssi-ilmoittautumisesi jälkeen. 
+- Linkin ja kurssiavaimen opintojakson Moodleen saat sähköpostitse 24 tunnin sisään kurssi-ilmoittautumisesi jälkeen.
 - Käyttäjätunnus. Opiskeletko Helsingin yliopistossa tai jossain muussa [HAKA-verkoston](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners) jäseninstituutiossa? 
   - Kyllä: Käytä omaa käyttäjätunnustasi Moodleen kirjautumiseen. 
   - En: Aktivoi Helsingin yliopiston käyttäjätunnuksesi ja käytä sitä Moodleen kirjautumiseen. Saat käyttäjätunnusta koskevaa lisätietoa sähköpostiisi ilmoittautumisesi jälkeen. 
