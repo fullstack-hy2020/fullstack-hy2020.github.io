@@ -331,7 +331,7 @@ We could have made the error message on our console disappear by using the array
 notes.map((note, i) => ...)
 ```
 
-When called like this, _i_ is assigned the value of the index of the position in the array where the <i>Note</i> resides.
+When called like this, _i_ is assigned the value of the index of the position in the array where the note resides.
 
 As such, one way to define the row generation without getting errors is:
 
