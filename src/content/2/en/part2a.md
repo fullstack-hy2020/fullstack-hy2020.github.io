@@ -40,7 +40,7 @@ If necessary, read more about debugging React-applications [here](/en/part1/a_mo
 
 ### Protip: Visual Studio Code snippets
 
-With Visual studio code it's easy to create 'snippets', i.e. shortcuts for quickly generating commonly re-used portions of code, much like how 'sout' works in Netbeans. 
+With Visual Studio Code it's easy to create 'snippets', i.e. shortcuts for quickly generating commonly re-used portions of code, much like how 'sout' works in Netbeans. 
 Instructions for creating snippets can be found [here](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets).
 
 Useful, ready-made snippets can also be found as VS Code plugins, for example [here](https://marketplace.visualstudio.com/items?itemName=xabikos.ReactSnippets).
@@ -58,7 +58,7 @@ The most important snippet is the one for the <em>console.log()</em> command, fo
 }
 ```
 
-Debugging your code using _console.log()_ is so common that Visual studio code has that snippet built in. To use it, type _log_ and hit tab to autocomplete. 
+Debugging your code using _console.log()_ is so common that Visual Studio Code has that snippet built in. To use it, type _log_ and hit tab to autocomplete. 
 
 ### JavaScript Arrays
 
