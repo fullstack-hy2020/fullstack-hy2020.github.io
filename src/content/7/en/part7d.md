@@ -492,7 +492,7 @@ When using CSS, we have to use [css](https://webpack.js.org/loaders/css-loader/)
     // highlight-start
     {
       test: /\.css$/,
-      loaders: ['style-loader', 'css-loader'],
+      use: ['style-loader', 'css-loader'],
     },
     // highlight-end
   ];
