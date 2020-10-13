@@ -828,7 +828,7 @@ Mutation: {
 }
 ```
 
-Mutaatio hakee siis hakee kentän <i>name</i> perusteella henkilön, jonka numero päivitetään.
+Mutaatio siis hakee kentän <i>name</i> perusteella henkilön, jonka numero päivitetään.
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branchissa <i>part8-3</i>.
 
