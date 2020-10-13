@@ -408,7 +408,7 @@ In the first exercise, we will start working on an application that will be furt
 
 Let's create a simple phonebook. <i>**In this part we will only be adding names to the phonebook.**</i>
 
-Let us start with implementing the addition of a person to phonebook.
+Let us start by implementing the addition of a person to phonebook.
 
 You can use the code below as a starting point for the <i>App</i> component of your application:
 
