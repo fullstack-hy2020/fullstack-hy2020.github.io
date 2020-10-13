@@ -525,7 +525,7 @@ The piece of code causing the explosion is this:
 ```js
 const Course = ({ course }) => (
   <div>
-   <Header course={course} />
+    <Header course={course} />
   </div>
 )
 
@@ -568,7 +568,7 @@ When one thing is found to be working, it's time to log deeper. If the component
 ```js
 const Course = ({ course }) => (
   <div>
-   <Header course={course} />
+    <Header course={course} />
   </div>
 )
 ```
@@ -580,7 +580,7 @@ const Course = ({ course }) => {
   console.log(course) // highlight-line
   return (
     <div>
-    <Header course={course} />
+      <Header course={course} />
     </div>
   )
 }
@@ -594,7 +594,7 @@ const Course = (props) => { // highlight-line
   const { course } = props
   return (
     <div>
-    <Header course={course} />
+      <Header course={course} />
     </div>
   )
 }
