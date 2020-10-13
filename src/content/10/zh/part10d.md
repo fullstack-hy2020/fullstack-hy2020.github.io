@@ -583,7 +583,7 @@ export default SingleRepository;
 在成功地创建了  <em>createReview</em>  变化之后，重定向用户到仓库视图，我们之前的练习实现过它。可以在使用  [useHistory](https://reacttraining.com/react-router/native/api/Hooks/usehistory)  hook 获得history 对象后，通过 <em>history.push</em> 方法来实现这个功能。创建好的评论有一个 <em>repositoryId</em> 字段，可以用来创建route路径。
 
 <!-- To prevent getting cached data with the <em>repository</em> query in the single repository view, use the _cache-and-network_ [fetch policy](https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy) in the query. It can be used with the <em>useQuery</em> hook like this: -->
-为了防止在单个仓库视图在 查询中获取到了缓存的数据，在查询中使用_cache-and-network_ [获取策略 fetch policy](https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy)  ， 它可以在 <em>useQuery</em> hook中如下使用：
+为了防止在单个仓库视图在 查询中获取到了缓存的数据，在查询中使用_cache-and-network_ [获取策略 fetch policy](https://www.apollographql.com/docs/react/data/queries/#configuring-fetch-logic)  ， 它可以在 <em>useQuery</em> hook中如下使用：
 
 ```javascript
 useQuery(GET_REPOSITORY, {
