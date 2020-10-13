@@ -175,7 +175,8 @@ For official university credits you need to pass the course exam that is done in
 Follow the instructions below to gain access to the course Moodle space:
 
 - Enroll on the course through Open University by 9 Jan 2021 [here](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=131840261)
-- You will receive the Moodle-link and the course key through email within 24 hours after course registration. 3. User ID. Do you study at University of Helsinki or other [HAKA member institution](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners)?
+- You will receive the Moodle-link and the course key through email within 24 hours after course registration.
+- User ID. Do you study at University of Helsinki or other [HAKA member institution](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners)?
     - If yes, use your username and password to log in to Moodle.
     - If no, please activate your University of Helsinki user ID to access Moodle. You will receive more information on the user ID after registration through email.
 - Sign into the Moodle space with your University of Helsinki / HAKA user ID and the enrolment key.
