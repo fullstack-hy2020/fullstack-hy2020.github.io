@@ -439,7 +439,7 @@ For now we will only use the compiler option [noImplicitAny](https://www.typescr
 
 Create the code of this exercise to file <i>bmiCalculator.ts</i>
 
-Write a function <i>calculateBmi</i> that counts [BMI](https://en.wikipedia.org/wiki/Body_mass_index) based on given weight (in kilograms) and height (in centimeters) and then returns a message that suits the results. 
+Write a function <i>calculateBmi</i> that counts [BMI](https://en.wikipedia.org/wiki/Body_mass_index) based on given height (in centimeters) and weight (in kilograms) and then returns a message that suits the results. 
 
 Call the function in the same file with hard-coded parameters and print out the result. The code
 
