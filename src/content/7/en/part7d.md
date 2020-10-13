@@ -314,7 +314,7 @@ const config = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        query: {
+        options: {
           presets: ['@babel/preset-react'],
         },
       },
@@ -334,13 +334,13 @@ The definition for a single loader consists of three parts:
 {
   test: /\.js$/,
   loader: 'babel-loader',
-  query: {
+  options: {
     presets: ['@babel/preset-react']
   }
 }
 ```
 
-The <i>test</i> property specifies that the loader is for files that have names ending with <i>.js</i>. The <i>loader</i> property specifies that the processing for those files will be done with [babel-loader](https://github.com/babel/babel-loader). The <i>query</i> property is used for specifying parameters for the loader, that configure its functionality.
+The <i>test</i> property specifies that the loader is for files that have names ending with <i>.js</i>. The <i>loader</i> property specifies that the processing for those files will be done with [babel-loader](https://github.com/babel/babel-loader). The <i>options</i> property is used for specifying parameters for the loader, that configure its functionality.
 
 Let's install the loader and its required packages as a <i>development dependency</i>:
 
@@ -404,7 +404,7 @@ Currently we are using the [@babel/preset-react](https://babeljs.io/docs/plugins
 {
   test: /\.js$/,
   loader: 'babel-loader',
-  query: {
+  options: {
     presets: ['@babel/preset-react'] // highlight-line
   }
 }
@@ -417,7 +417,7 @@ Let's add the [@babel/preset-env](https://babeljs.io/docs/plugins/preset-env/) p
 {
   test: /\.js$/,
   loader: 'babel-loader',
-  query: {
+  options: {
     presets: ['@babel/preset-env', '@babel/preset-react'] // highlight-line
   }
 }
@@ -485,7 +485,7 @@ When using CSS, we have to use [css](https://webpack.js.org/loaders/css-loader/)
     {
       test: /\.js$/,
       loader: 'babel-loader',
-      query: {
+      options: {
         presets: ['@babel/preset-react', '@babel/preset-env'],
       },
     },
