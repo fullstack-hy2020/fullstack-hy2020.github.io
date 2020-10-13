@@ -264,8 +264,6 @@ NB: To run json-server and your react app simultaneously, you may need to use tw
 
 The library can be brought into use the same way other libraries, e.g. React, are, i.e. by using an appropriate <em>import</em> statement.
 
-
-
 Add the following to the file <i>index.js</i>:
 
 ```js
@@ -278,7 +276,7 @@ const promise2 = axios.get('http://localhost:3001/foobar')
 console.log(promise2)
 ```
 
-Go to localhost:3000 (where your React application is hosted) and this should be printed to the console
+If you open <http://localhost:3000> in the browser, this should be printed to the console
 
 ![](../../images/2/16b.png)
 
