@@ -444,7 +444,7 @@ The code for creating a new note has to be updated so that the note is assigned 
 Let's expand our current implementation so, that the information about the user who created a note is sent in the <i>userId</i> field of the request body:
 
 ```js
-const User = require('../models/user')
+const User = require('../models/user') //highlight-line
 
 //...
 
