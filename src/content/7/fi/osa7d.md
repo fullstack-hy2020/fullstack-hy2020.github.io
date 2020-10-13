@@ -89,7 +89,7 @@ Tiedoston <i>package.json</i> sisältö voi olla esim. seuraava:
 Asennetaan webpack komennolla
 
 ```js
-npm install --save-dev webpack webpack-cli
+npm install --save-dev webpack webpack-cli@3.3.12
 ```
 
 Webpackin toiminta konfiguroidaan tiedostoon <i>webpack.config.js</i>, laitetaan sen alustavaksi sisällöksi seuraava
