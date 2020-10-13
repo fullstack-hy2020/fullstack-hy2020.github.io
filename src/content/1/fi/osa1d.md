@@ -16,7 +16,7 @@ Helpoin ja useimmiten paras tapa on luoda sovellukselle useita erillisiä tiloja
 Seuraavassa sovellukselle luodaan kaksi alkuarvon 0 saavaa tilaa _left_ ja _right_:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
 
@@ -51,7 +51,7 @@ Komponentin tila tai yksittäinen tilan pala voi olla minkä tahansa tyyppinen. 
 sovellus muuttuisi seuraavasti:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [clicks, setClicks] = useState({
     left: 0, right: 0
   })
@@ -170,7 +170,7 @@ On kuitenkin tilanteita, joissa jokin osa tilaa kannattaa pitää monimutkaisemm
 Tehdään sovellukseen vielä laajennus, lisätään sovelluksen tilaan taulukko _allClicks_, joka muistaa kaikki näppäimenpainallukset.
 
 ```js
-const App = (props) => {
+const App = () => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
   const [allClicks, setAll] = useState([]) // highlight-line
@@ -235,7 +235,7 @@ const handleLeftClick = () => {
 Katsotaan vielä tarkemmin, miten kaikkien painallusten historia renderöidään ruudulle:
 
 ```js
-const App = (props) => {
+const App = () => {
   // ...
 
   return (
@@ -275,7 +275,7 @@ const History = (props) => {
   )
 }
 
-const App = (props) => {
+const App = () => {
   // ...
 
   return (
@@ -337,7 +337,7 @@ const Button = ({ onClick, text }) => (
 )
 // highlight-end
 
-const App = (props) => {
+const App = () => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
   const [allClicks, setAll] = useState([])
