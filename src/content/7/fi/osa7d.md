@@ -454,7 +454,7 @@ CSS:ää varten onkin otettava käyttöön [css](https://webpack.js.org/loaders/
     // highlight-start
     {
       test: /\.css$/,
-      loaders: ['style-loader', 'css-loader'],
+      use: ['style-loader', 'css-loader'],
     },
     // highlight-end
   ];
