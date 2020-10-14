@@ -530,7 +530,7 @@ Let's define an npm script for starting the dev-server:
   // ...
   "scripts": {
     "build": "webpack --mode=development",
-    "start": "webpack-dev-server --mode=development" // highlight-line
+    "start": "webpack serve --mode=development" // highlight-line
   },
   // ...
 }
@@ -698,7 +698,7 @@ Starting from version 4 of webpack, the minification plugin does not require add
   "description": "practising webpack",
   "scripts": {
     "build": "webpack --mode=production", // highlight-line
-    "start": "webpack-dev-server --mode=development"
+    "start": "webpack serve --mode=development"
   },
   "license": "MIT",
   "dependencies": {

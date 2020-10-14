@@ -492,7 +492,7 @@ Määritellään dev-serverin käynnistävä npm-skripti:
   // ...
   "scripts": {
     "build": "webpack --mode=development",
-    "start": "webpack-dev-server --mode=development" // highlight-line
+    "start": "webpack serve --mode=development" // highlight-line
   },
   // ...
 }
@@ -650,7 +650,7 @@ Webpackin versiosta 4 alkaen pluginia ei ole tarvinnut konfiguroida erikseen, ri
   "description": "practising webpack",
   "scripts": {
     "build": "webpack --mode=production", // highlight-line
-    "start": "webpack-dev-server --mode=development"
+    "start": "webpack serve --mode=development"
   },
   "license": "MIT",
   "dependencies": {

@@ -574,7 +574,7 @@ npm install --save-dev webpack-dev-server
   // ...
   "scripts": {
     "build": "webpack --mode=development",
-    "start": "webpack-dev-server --mode=development" // highlight-line
+    "start": "webpack serve --mode=development" // highlight-line
   },
   // ...
 }
@@ -757,7 +757,7 @@ Javascript 文件的优化过程被称为<i>minification</i>，用于此目的�
   "description": "practising webpack",
   "scripts": {
     "build": "webpack --mode=production", // highlight-line
-    "start": "webpack-dev-server --mode=development"
+    "start": "webpack serve --mode=development"
   },
   "license": "MIT",
   "dependencies": {
