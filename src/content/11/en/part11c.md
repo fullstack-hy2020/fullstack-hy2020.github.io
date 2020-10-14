@@ -47,8 +47,19 @@ Let's define some things we *want* in this hypothetical deployment system too:
 
 ### Exercises 11.5.-11.X.
 
-#### 11.5 TODO
+Prior to these exercises, you should ensure you have set up an app in your Heroku environment for the use of this exercise alone and [installed the Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install). Here are instructions how to do so if you haven't!
 
-TODO: needs exercise
+1. [Install the Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
+2. Login to Heroku using the CLI with `heroku login`
+3. Create a new app in Heroku. You can use either
+   - Heroku CLI: `heroku apps:create --region eu {your_app_name}`
+   - or at the [Heroku website](https://dashboard.heroku.com/apps) > New
+4. Generate an API token for your Heroku profile using `heroku authorizations:create`. You'll need this for your deployment workflow. See more information at https://devcenter.heroku.com/articles/platform-api-quickstart.
+
+#### 11.5 Deploying your app build to Heroku
+
+Create a new (or include to your existing) workflow with a step to deploy your application to Heroku.
+
+<i>Hint: try using a ready-made heroku deploy action that has been developed by the community. For example https://github.com/AkhileshNS/heroku-deploy.</i>
 
 </div>
