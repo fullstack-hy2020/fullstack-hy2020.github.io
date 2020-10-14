@@ -119,7 +119,7 @@ How do we access the data contained in the form's <i>input</i> element?
 There are many ways to accomplish this; the first method we will take a look at is through the use of so-called [controlled components](https://reactjs.org/docs/forms.html#controlled-components).
 
 
-Let's add a new piece of state called <em>newNote</em> for storing the user submitted input **and** let's set it as the <i>input</i> element's <i>value</i> attribute:
+Let's add a new piece of state called <em>newNote</em> for storing the user-submitted input **and** let's set it as the <i>input</i> element's <i>value</i> attribute:
 
 ```js
 const App = (props) => {
