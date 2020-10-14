@@ -146,9 +146,7 @@ Among the self hosted options, Jenkins is the most popular. It's extremely flexi
 
 Unfortunately, there is a downside. Jenkins is quite complicated to set up and secure. It's very flexible but that means that there's often quite a bit of boilerplate/tempate code involved to get builds working. With jenkins specifically, it also means that CI/CD must be set up with either Jenkins' own domain specific language or a flaour of Groovy. There's also the issue of hardware failure which can be an issue if the setup sees heavy use.
 
-Self hosted options are usually build a blanket fee for renting the server, what you do on the server ususally doesn't have any bearing on the billing. 
-
-{{TODO: Clarify this a little}}
+With self hosted options, the billing is usually based on the hardware. You pay for the server. What you do in the server doesn't change the billing.
 
 #### GitHub Actions and other cloud based solutions
 
