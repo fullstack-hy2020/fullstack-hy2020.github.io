@@ -1241,7 +1241,7 @@ The question is, how can we validate that the string is of a specific form?
 One possible way to write the type guard would be this:
 
 ```js
-const isWeather = (str: any): str is Weather => {
+const isWeather = (str: string): str is Weather => {
   return ['sunny', 'rainy', 'cloudy', 'stormy' ].includes(str);
 };
 ```
