@@ -594,8 +594,6 @@ Reduxin kaltainen tilankäsittely on mahdollista toteuttaa nykyään myös ilman
 
 Muokkaa <i>AnecdoteList</i> komponenttia niin, että se käyttää _connect_ funktiota hookien sijaan. Tätä varten saatat joutua toteuttamaan <i>mapStateToProps</i> ja <i>mapDispatchToProps</i> funktiot.
 
-```
-
 #### 6.20 anekdootit ja connect, step2
 
 Tee sama <i>Filter</i> ja <i>AnecdoteForm</i> komponenteille.
