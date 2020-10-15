@@ -31,9 +31,9 @@ Let's go one step further. Let's set up our own notification system:
 
 <div class="tasks">
 
-### Exercise 11.7
+### Exercise 11.11
 
-#### 11.7 Build success/failure notification action
+#### 11.11 Build success/failure notification action
 
 Using the build from the previous section, set up a notification to either:
 1: Tell us that the build succeeded and the project is ready for deployment
@@ -74,9 +74,9 @@ What about the tasks that don't have a tool? You can automate these yourself wit
 
 <div class="tasks">
 
-### Exercise 11.8
+### Exercise 11.12
 
-#### 11.8 Average runtime notification action
+#### 11.12 Average runtime notification action
 
 Let's combine the the past last 3 sections together: Write an action that will send the average run time for all `build`, `lint`, `test` and `deploy` actions in the repo the workflow is situated in to an email address for archiving. You will likely need to create an action that calls the GitHub API for this.
 
