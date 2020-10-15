@@ -48,7 +48,7 @@ on:
 
 <div class="tasks">
 
-### Exercise 11.4.
+### Exercise 11.8.
 
 We created a "Lint, build and test" workflow in Exercise 11.2. It does a useful task of ensuring good code quality, but since it is run on commits to master, it's catching the  problems too late!
 
@@ -132,9 +132,9 @@ In the above case, the software we release is tested because the CI system makes
 
 <div class="tasks">
 
-### Exercise 11.5.
+### Exercise 11.9.
 
-#### 11.5 Adding versioning
+#### 11.9 Adding versioning
 
 Let's set up a workflow that will automatically increase (bump) the version when a pull request is merged into master and tag the release with the version number. We will use an open-source action developed by a third-party: `anothrNick/github-tag-action`. You can read the documentation for this action in its [README](https://github.com/anothrNick/github-tag-action).
 
@@ -186,9 +186,9 @@ To set up protection for your master branch, navigate to repository "Settings" f
 
 <div class="tasks">
 
-### Exercise 11.6.
+### Exercise 11.10.
 
-#### 11.6 Adding master protection
+#### 11.10 Adding master protection
 
 Add protection to your master branch. You should protect it to:
 - Require all pull request to be approved before merging

@@ -116,9 +116,9 @@ To tie this all together, we have set up an example to the repository you've for
 
 <div class="tasks">
 
-### Exercise 11.2.
+### Exercise 11.4.
 
-#### 11.2 Hello world!
+#### 11.4 Hello world!
 
 Before this exercise, you should have forked the [example repository](https://github.com/smartlyio/full-stack-open-pokedex) for your own use. In this exercise your goal is to create a super simple workflow to get the feel of how to start building workflows with GitHub Actions.
 
@@ -180,9 +180,9 @@ After the environment has been set up we can run all the scripts from `package.j
 
 <div class="tasks">
 
-### Exercises 11.3.-11.4.
+### Exercises 11.5.-11.6.
 
-#### 11.3 Linting workflow
+#### 11.5 Linting workflow
 
 Implement the "Lint" workflow and commit it to the repository. Navigate to "Actions" tab and click on your newly created workflow on the left. You should see that the workflow run has failed. There are one or more issues with the Pokedex repository that you will need to fix. Open up the workflow logs and investigate.
 
@@ -199,7 +199,7 @@ Let's expand on the previous workflow that currently does the linting of the cod
   run: npm test
 ```
 
-#### 11.4 Building and testing
+#### 11.6 Building and testing
 
 Rename the "Lint" workflow to "Lint, build and test", add tasks for building and testing the code and commit the workflow to the repository. Look at the workflow run output. This time the linting should cause no problems, but the test run will fail. Investigate which test fails and why and fix the issue in the code (do not change the tests).
 

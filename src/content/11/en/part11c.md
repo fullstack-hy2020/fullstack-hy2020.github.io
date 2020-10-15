@@ -45,7 +45,7 @@ Let's define some things we *want* in this hypothetical deployment system too:
 
 <div class="tasks">
 
-### Exercises 11.5.-11.X.
+### Exercises 11.7.
 
 Prior to these exercises, you should ensure you have set up an app in your Heroku environment for the use of this exercise alone and [installed the Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install). Here are instructions how to do so if you haven't!
 
@@ -56,7 +56,7 @@ Prior to these exercises, you should ensure you have set up an app in your Herok
    - or at the [Heroku website](https://dashboard.heroku.com/apps) > New
 4. Generate an API token for your Heroku profile using `heroku authorizations:create`. You'll need this for your deployment workflow. See more information at https://devcenter.heroku.com/articles/platform-api-quickstart.
 
-#### 11.5 Deploying your app build to Heroku
+#### 11.7 Deploying your app build to Heroku
 
 Create a new (or include to your existing) workflow with a step to deploy your application to Heroku.
 
