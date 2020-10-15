@@ -172,25 +172,22 @@ For this course we'll use GitHub Actions. We'll do this because there's very lit
 
 <div class="tasks">
 
-### Exercises 11.1.
+### Exercises 11.1.-11.3.
+
+In order to distance the concept if CI/CD from the actual code of an application, let's use a hypothetical example in a different language. We'll use Python.
 
 For the exercises below, you are not expected to know anything about Python (the programming language at least, you *are* expected to be an expert on the actual snake). The expectation is that you will find a way to achieve the objective (in principle) without having to learn a new language. Python is used here as an illustrative point, not with the aim of learning a new language.
 
-#### 11.1 Thinking hypothetically
-In order to distance the concept if CI/CD from the actual code of an application, let's use a hypothetical example in a different language. We'll use Python.
-
-##### The Situation:
+#### The Situation:
 We have an application being worked on by a team of about 6 people. The application is in active development and will be released soon. The application is written in Python. Python is an interpreted language but we'll assume that the intention is to build the code into some form of artifact that will be deployed to a production environment (eventually).
 
-##### Instructions:
-Select tools to use in a CI system for the developers. These tools should help them keep their development experience coherent. Make sure you address the following steps:
- - Linting
- - Testing
- - Building
-You can assume that once the software is built, someone else will handle the deployment.
+#### 11.1 Thinking hypothetically
+Some common steps in a CI setup includes `linting`, `testing`, and `building`. Discuss the importance of these steps in a CI setup for a team of 6 working on a common code base.
 
-For each of the above steps, find a tool that can be used to complete that requirement. Discuss what the usefulness of completing that step is from the developer's point of view. Explain why you selected that tool (over other tools in the same category) and what assumptions you made along the way.
+#### 11.2 Right tools for the right job
+Find suitable tools for those steps and compare the alternatives. What do you want from the tools? How would your chosen pipeline look like and how did you end up choosing those specific tools?
 
+#### 11.3 Getting up and running
 Would this setup be better in a self-hosted or a cloud based environment? Why? What information would you need to make that decision?
 
 There is no 'right' answer to the above though there certainly might be incorrect ones. Make sure you explain your logic.
