@@ -117,8 +117,8 @@ Let's change the application into a web server:
 const http = require('http')
 
 const app = http.createServer((request, response) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' })
-  res.end('Hello World')
+  response.writeHead(200, { 'Content-Type': 'text/plain' })
+  response.end('Hello World')
 })
 
 const PORT = 3001
