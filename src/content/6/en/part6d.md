@@ -610,19 +610,6 @@ The <i>redux store</i> is currently being accessed by the components through the
 
 Modify the <i>AnecdoteList</i> component so that it uses the _connect_ function instead of the hooks. You may need to write your own <i>mapStateToProps</i> and <i>mapDispatchToProps</i>.
 
-The <i>mapStateToProps</i> function you will need in this exercise is approximately the following:
-
-```js
-const mapStateToProps = (state) => {
-  // sometimes it is useful to console log from mapStateToProps
-  console.log(state)
-  return {
-    anecdotes: state.anecdotes,
-    filter: state.filter
-  }
-}
-```
-
 #### 6.20 anecdotes and connect, step2
 
 Do the same for the <i>Filter</i> and <i>AnecdoteForm</i> components.
