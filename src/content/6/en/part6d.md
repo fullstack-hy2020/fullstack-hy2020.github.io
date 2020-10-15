@@ -608,7 +608,7 @@ More about this [here](https://www.simplethread.com/cant-replace-redux-with-hook
 
 The <i>redux store</i> is currently being accessed by the components through the <em>useSelector</em> and <em>useDispatch</em> hooks.
 
-Modify the <i>AnecdoteList</i> component so that it uses the _connect_ function instead of the hooks. You may need to write your own <i>mapStateToProps</i> and <i>mapDispatchToProps</i>.
+Modify the <i>AnecdoteList</i> component so that it uses the _connect_ function instead of the hooks. You may need to implement your own <i>mapStateToProps</i> and <i>mapDispatchToProps</i> functions.
 
 #### 6.20 anecdotes and connect, step2
 
@@ -624,10 +624,6 @@ the last notification is only displayed for two seconds (assuming the notificati
 Fix the bug so that after multiple votes in a row, the notification for the last vote is displayed for five seconds.
 This can be done by cancelling the removal of the previous notification when a new notification is displayed whenever necessary. 
 The [documentation](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) for the setTimeout function might also be useful for this.
-
-</div>
-
-<div class="tasks">
 
 This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your completed exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
