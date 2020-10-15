@@ -548,7 +548,7 @@ Event handlers must always be a function or a reference to a function. The butto
 If we were to define the event handler as a string:
 
 ```js
-<button onClick='crap...'>button</button>
+<button onClick="crap...">button</button>
 ```
 
 React would warn us about this in the console:
