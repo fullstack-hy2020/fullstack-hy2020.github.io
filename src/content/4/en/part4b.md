@@ -798,7 +798,7 @@ npm install express-async-errors
 <!-- Kirjaston käyttö on <i>todella</i> helppoa.
  Kirjaston koodi otetaan käyttöön tiedostossa <i>src/app.js</i>: -->
 Using the library is <i>very</i> easy. 
-You introduce the library in <i>src/app.js</i>:
+You introduce the library in <i>app.js</i>:
 
 ```js
 const config = require('./utils/config')
