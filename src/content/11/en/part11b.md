@@ -205,8 +205,6 @@ Rename the "Lint" workflow to "Lint, build and test", add tasks for building and
 
 Once you have fixed all the issues and the Pokedex is bug-free, the workflow run will succeed and show green!
 
-> TODO: cleanup these screenshots
-
-![Successful workflow run](../../images/11/part11b_07.png)
+![Successful workflow run](../../images/11/part11b_finished_build.png)
 
 </div>
