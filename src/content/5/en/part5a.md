@@ -114,8 +114,8 @@ import axios from 'axios'
 const baseUrl = '/api/login'
 
 const login = async credentials => {
-  const response = await axios.post(baseUrl, credentials)
-  return response.data
+  const request = await axios.post(baseUrl, credentials)
+  return request.data
 }
 
 export default { login }
@@ -382,8 +382,8 @@ const create = async newObject => {
   }
 // highlight-end
 
-  const response = await axios.post(baseUrl, newObject, config) // highlight-line
-  return response.data
+  const request = await axios.post(baseUrl, newObject, config) // highlight-line
+  return request.data
 }
 
 const update = (id, newObject) => {
