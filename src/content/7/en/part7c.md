@@ -370,7 +370,7 @@ The end result is:
 ![](../../images/7/64ea.png)
 
 <!-- Bootstrapiin verrattuna pieni ero on nyt se, että MaterialUI ei tarjoa erillistä komponenttia itse lomakkeelle, lomake tehdään normaaliin tapaan HTML:n [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form)-elementtinä. -->
-Difference to bootstrap is, that MaterialUI does not provide a component for the form itself. The form here an ordinary HTML [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) element.
+MaterialUI, unlike Bootstrap, does not provide a component for the form itself. The form here is an ordinary HTML [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) element.
 
 <!-- Lomakkeen käyttämät komponentit on luonnollisesti importattava koodissa.  -->
 Remember to import all the components used in the form.
