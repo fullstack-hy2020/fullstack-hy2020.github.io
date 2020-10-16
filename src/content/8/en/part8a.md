@@ -900,7 +900,7 @@ Mutation: {
 ```
 
 
-The mutation finds the person to be by the field <i>name</i>.
+The mutation finds the person to be updated by the field <i>name</i>.
 
 The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>.
 
