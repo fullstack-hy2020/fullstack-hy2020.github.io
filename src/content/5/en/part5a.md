@@ -281,10 +281,12 @@ return (
 
     <Notification message={errorMessage}/>
 
+    // highlight-start
     {user === null ?
       loginForm() :
       noteForm()
     }
+    // highlight-end
 
     <h2>Notes</h2>
 
@@ -307,6 +309,7 @@ return (
 
     <Notification message={errorMessage} />
 
+    // highlight-start
     {user === null ?
       loginForm() :
       <div>
@@ -314,6 +317,7 @@ return (
         {noteForm()}
       </div>
     }
+    // highlight-end
 
     <h2>Notes</h2>
 
