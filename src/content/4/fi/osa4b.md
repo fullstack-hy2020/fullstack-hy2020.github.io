@@ -757,7 +757,7 @@ Asennetaan kirjasto
 npm install express-async-errors
 ```
 
-Kirjaston käyttö on <i>todella</i> helppoa. Kirjaston koodi otetaan käyttöön tiedostossa <i>src/app.js</i>:
+Kirjaston käyttö on <i>todella</i> helppoa. Kirjaston koodi otetaan käyttöön tiedostossa <i>app.js</i>:
 
 ```js
 const config = require('./utils/config')
