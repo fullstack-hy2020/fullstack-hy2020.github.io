@@ -197,7 +197,7 @@ We should give a better name to the database. Like the documentation says, we ca
 Let's destroy the <i>test</i> database. Let's now change the name of database referenced in our connection string to <i>note-app</i> instead, by modifying the URI:
 
 ```bash
-mongodb+srv://fullstack:<PASSWORD>@cluster0-ostce.mongodb.net/note-app?retryWrites=true
+mongodb+srv://fullstack:${password}@cluster0-ostce.mongodb.net/note-app?retryWrites=true
 ```
 
 Let's run our code again.
