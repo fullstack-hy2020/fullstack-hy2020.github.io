@@ -499,7 +499,7 @@ One convention is to create the unique address for resources by combining the na
 Let's assume that the root URL of our service is <i>www.example.com/api</i>.
 
 
-If we define the resource type of notes to be <i>note</i>, then the address of a note resource with the identifier 10, has the unique address <i>www.example.com/api/notes/10</i>.
+If we define the resource type of note to be <i>notes</i>, then the address of a note resource with the identifier 10, has the unique address <i>www.example.com/api/notes/10</i>.
 
 
 The URL for the entire collection of all note resources is <i>www.example.com/api/notes</i>.
