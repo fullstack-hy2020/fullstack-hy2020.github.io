@@ -880,7 +880,7 @@ npm install express-async-errors
 <!-- Using the library is <i>very</i> easy.  -->
 使用这个库很容易。
 <!-- You introduce the library in <i>src/app.js</i>: -->
-在<i>src/app.js</i> 中引入库:
+在<i>app.js</i> 中引入库:
 
 ```js
 const config = require('./utils/config')

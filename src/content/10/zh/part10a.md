@@ -94,9 +94,9 @@ expo init rate-repository-app --template expo-template-blank@sdk-38
 <!-- After running this command Expo will ask you to choose a template for the project. Within the <i>Managed workflow</i> section, choose the <i>blank</i> option (the one with the description "a minimal app as clean as an empty canvas"). -->
 <!-- 在运行了这个命令后，Expo 会询问你为该项目选择一个模版。在<i>Managed workflow</i>部分，选择<i>blank</i> 选项（描述为“一个最小的app，就是个空画布”a minimal app as clean as an empty canvas） -->
 
-<!-- Note, that the <em>@sdk-38</em> sets the project's <i>Expo SDK version to 38</i>, which supports <i>React Native version 0.62</i>. Using other Expo SDK version might cause you trouble while following this material. -->
+<!-- Note, that the <em>@sdk-38</em> sets the project's <i>Expo SDK version to 38</i>, which supports <i>React Native version 0.62</i>. Using other Expo SDK version might cause you trouble while following this material. Also, Expo has few limitations when compared to plain React Native CLI, more on them [here](https://docs.expo.io/introduction/why-not-expo/). However, these limitations have no effect on the application implemented in the material.-->
 
-注意， <em>@sdk-38</em> 将项目的Expo SDK 的 版本设置为38，它支持 <i>React Native version 0.62</i>。 使用其他的Expo SDK版本在接下来的教程中可能会导致一些错误。
+注意， <em>@sdk-38</em> 将项目的Expo SDK 的 版本设置为38，它支持 <i>React Native version 0.62</i>。 使用其他的Expo SDK版本在接下来的教程中可能会导致一些错误。此外，与纯净的React Native 命令行相比，Expo有一些限制，可以参考 [这里](https://docs.expo.io/introduction/why-not-expo/)。但是这些限制对教材中应用的实现来说并没有影响。
 
 <!-- Now that our application has been initialized, open the created <i>rate-repository-app</i> directory with an editor such as [Visual Studio Code](https://code.visualstudio.com/). The structure should be more or less the following: -->
 

@@ -324,7 +324,7 @@ npm install json-server --save-dev
 
 <!-- NB: To run json-server and your react app simultaneously, you may need to use two terminal windows. One to keep json-sever running and the other to run react-app. -->
 
-注意，为了同时运行 json-server和你的react 应用，你可能需要使用两个terminal 窗口。一个用来保持json-server 的运行，另一个来跑你的react应用。
+注意，为了同时运行 json-server 和你的react 应用，你可能需要使用两个terminal 窗口。一个用来保持json-server 的运行，另一个来跑你的react应用。
 
 <!-- The library can be brought into use the same way other libraries, e.g. React, are, i.e. by using an appropriate <em>import</em> statement. -->
 可以像其他库一样使用这个库，就像 React那样，即使用 <em>import</em> 语句。
@@ -342,8 +342,8 @@ const promise2 = axios.get('http://localhost:3001/foobar')
 console.log(promise2)
 ```
 
-<!-- This should be printed to the console -->
-此时如下信息会打印到控制台
+<!-- If you open <http://localhost:3000> in the browser,this should be printed to the console -->
+如果你打开浏览器访问<http://localhost:3000>， 此时如下信息会打印到控制台
 
 ![](../../images/2/16b.png)
 

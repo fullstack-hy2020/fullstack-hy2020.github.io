@@ -478,7 +478,7 @@ usersRouter.get('/', async (request, response) => {
 让我们展开当前实现，以便在 request body 的<i>userId</i> 发送关于创建 Note 的信息。
 
 ```js
-const User = require('../models/user')
+const User = require('../models/user') //highlight-line
 
 //...
 

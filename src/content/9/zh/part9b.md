@@ -43,9 +43,11 @@ lang: zh
 
 
 <!-- You can install both <i>ts-node</i> and the official <i>typescript</i> package globally by running <i>npm install -g ts-node typescript</i>. -->
-您可以通过运行<i>npm install -g ts-node typescript</i>在全局范围内同时安装<i>ts-node</i> 和官方<i>TypeScript</i> 包。
+在全局范围内同时安装<i>ts-node</i> 和官方<i>TypeScript</i> 包。
 
-
+```
+npm install -g ts-node typescript
+```
 
 <!-- If you can't or don't want to install global packages, you can create an npm project which has the required dependencies and run your scripts in it.  -->
 如果您不能或不想全局安装，您可以创建一个具有所需依赖项的 npm 项目，并在其中运行您的脚本。
