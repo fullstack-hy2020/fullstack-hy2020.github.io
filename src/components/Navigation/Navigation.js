@@ -80,8 +80,8 @@ class Navigation extends Component {
               <NavigationItem key={i.path} {...i} onClick={handleCloseMenu} />
             ))}
 
-            <LanguageSwitcher lang={lang} />
             {showSearchLink && <SearchLink lang={lang} />}
+            <LanguageSwitcher lang={lang} />
           </ul>
         </nav>
       </div>
