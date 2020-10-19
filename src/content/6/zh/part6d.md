@@ -694,28 +694,11 @@ React hook-api 发布之后，HOCs 变得越来越不受欢迎。 几乎所有�
 
 ### Exercises 6.19.-6.21.
 #### 6.19 anecdotes and connect, 步骤1
-<!-- The <i>redux store</i> is currently passed to all of the components through props. -->
-<i>redux store</i> 目前通过props传递给所有组件。
+<!-- The <i>redux store</i> is currently being accessed by the components through the <em>useSelector</em> and <em>useDispatch</em> hooks. -->
+<i>redux store</i> 目前通过 <em>useSelector</em> 和 <em>useDispatch</em> hooks传递给所有组件。
 
-<!-- Add the [react-redux](https://github.com/reactjs/react-redux) package to your application, and modify the <i>AnecdoteList</i> so that it accesses the store's state with the help of the _connect_ function. -->
-添加[react-redux](google  https://github.com/reactjs/react-redux)包到您的应用中，并修改<i>/ 八卦列表</i>，以便它借助 connect 函数访问存储的状态。
+修改 <i>AnecdoteList</i> 组件，让它使用 _connect_ 函数而不是hooks。你可能需要实现你自己的 <i>mapStateToProps</i> 和 <i>mapDispatchToProps</i> 函数
 
-<!-- Voting for and creating new anecdotes **does not need to work** after this exercise. -->
-在这个练习之后，投票选举和创造新的八卦就不需要工作了。
-
-<!-- The <i>mapStateToProps</i> function you will need in this exercise is approximately the following: -->
-在这个练习中，您需要的<i>mapStateToProps</i> 函数大致如下:
-
-```js
-const mapStateToProps = (state) => {
-  // sometimes it is useful to console log from mapStateToProps
-  console.log(state)
-  return {
-    anecdotes: state.anecdotes,
-    filter: state.filter
-  }
-}
-```
 
 #### 6.20 anecdotes and connect, 步骤2
 

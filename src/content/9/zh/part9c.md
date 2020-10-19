@@ -1557,7 +1557,7 @@ const parseWeather = (weather: any): Weather => {
 编写类型保护的一种可能的方法是:
 
 ```js
-const isWeather = (str: any): str is Weather => {
+const isWeather = (str: string): str is Weather => {
   return ['sunny', 'rainy', 'cloudy', 'stormy' ].includes(str);
 };
 ```

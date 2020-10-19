@@ -332,7 +332,7 @@ const config = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        query: {
+        options: {
           presets: ['@babel/preset-react'],
         },
       },
@@ -352,14 +352,14 @@ const config = {
 {
   test: /\.js$/,
   loader: 'babel-loader',
-  query: {
+  options: {
     presets: ['@babel/preset-react']
   }
 }
 ```
 
 <!-- The <i>test</i> property specifies that the loader is for files that have names ending with <i>.js</i>. The <i>loader</i> property specifies that the processing for those files will be done with [babel-loader](https://github.com/babel/babel-loader). The <i>query</i> property is used for specifying parameters for the loader, that configure its functionality. -->
- <i>test</i> 属性指定加载程序用于名称以<i>.js</i> 结尾的文件。 属性指定对这些文件的处理将通过[babel-loader](https://github.com/babel/babel-loader)来完成。<i>query</i> 属性用于为加载程序指定参数，用于配置其功能。
+ <i>test</i> 属性指定加载程序用于名称以<i>.js</i> 结尾的文件。 属性指定对这些文件的处理将通过[babel-loader](https://github.com/babel/babel-loader)来完成。<i>options</i> 属性用于为加载程序指定参数，用于配置其功能。
 
 <!-- Let's install the loader and its required packages as a <i>development dependency</i>: -->
 让我们将装载器及其所需的包作为<i>开发依赖项</i> 安装:
@@ -432,7 +432,7 @@ npm install @babel/polyfill
 {
   test: /\.js$/,
   loader: 'babel-loader',
-  query: {
+  options: {
     presets: ['@babel/preset-react'] // highlight-line
   }
 }
@@ -446,7 +446,7 @@ npm install @babel/polyfill
 {
   test: /\.js$/,
   loader: 'babel-loader',
-  query: {
+  options: {
     presets: ['@babel/preset-env', '@babel/preset-react'] // highlight-line
   }
 }
@@ -520,14 +520,14 @@ import './index.css'
     {
       test: /\.js$/,
       loader: 'babel-loader',
-      query: {
+      options: {
         presets: ['@babel/preset-react', '@babel/preset-env'],
       },
     },
     // highlight-start
     {
       test: /\.css$/,
-      loaders: ['style-loader', 'css-loader'],
+      use: ['style-loader', 'css-loader'],
     },
     // highlight-end
   ];

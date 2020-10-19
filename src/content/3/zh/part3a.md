@@ -123,9 +123,9 @@ echo "Error: no test specified" && exit 1
 ```js
 const http = require('http')
 
-const app = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' })
-  res.end('Hello World')
+const app = http.createServer((request, response) => {
+  response.writeHead(200, { 'Content-Type': 'text/plain' })
+  response.end('Hello World')
 })
 
 const PORT = 3001
@@ -274,8 +274,8 @@ console.log(`Server running on port ${PORT}`)
 <!-- Implementing our server code directly with Node's built-in [http](https://nodejs.org/docs/latest-v8.x/api/http.html) web server is possible. However, it is cumbersome, especially once the application grows in size. -->
 直接使用 Node 内置的[http](https://nodejs.org/docs/latest-v8.x/api/http.html) web 服务器实现我们的服务器代码是可行的。 但是，它很麻烦，特别是当应用规模“变大变长”时。
 
-<!-- Many libraries have been developed to ease server side development with Node, by offering a more pleasing interface to work with than the built-in http module. By far the most popular library intended for this purpose is [express](http://expressjs.com). -->
-为了提供一个比内置的 http 模块更友好的界面，许多库已经开发出来，以简化使用 Node 作为服务器端开发。 到目前为止，最受欢迎的库是[express](http://expressjs.com)。
+<!-- Many libraries have been developed to ease server side development with Node, by offering a more pleasing interface to work with the built-in http module. These libraries aim to provide a better abstraction for general use cases we usually require to build a backend server. By far the most popular library intended for this purpose is [express](http://expressjs.com). -->
+为了提供一个比内置的 http 模块更友好的界面，许多库已经开发出来，以简化使用 Node 作为服务器端开发。这些库致力于为构建后台服务器的一般的用例提供一个更好的抽象，到目前为止，最受欢迎的库是[express](http://expressjs.com)。
 
 <!-- Let's take express into use by defining it as a project dependency with the command: -->
 让我们通过下面的命令将它定义为一个项目依赖，来开始使用 express:

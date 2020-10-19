@@ -301,7 +301,8 @@ Enroll on the course through Open University by 9 Jan 2021 [here](https://www.av
 <!-- - Wait for 24 hours and activate your University of Helsinki user ID. You will receive instructions on the activation process the following day.  - 等待 24 小时，激活你的赫尔辛基大学用户 ID。 您将在第二天收到关于激活流程的说明
 - You will receive the Moodle-link and the course key through email within 24 hours after course registration. 3. User ID. Do you study at University of Helsinki or other [HAKA member institution](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners)?
     - If yes, use your username and password to log in to Moodle.-->
-- 你会在注册课程后的24小时内通过邮箱收到Moodle的链接以及课程的激活码。3. 用户ID：你是否在赫尔辛基大学或其他的[HAKA 成员学院](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners)学习？
+- 你会在注册课程后的24小时内通过邮箱收到Moodle的链接以及课程的激活码。
+- 用户ID：你是否在赫尔辛基大学或其他的[HAKA 成员学院](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners)学习？
   - 如果答案是yes，使用你的用户名和密码登录Moodle。
  <!-- - If no, please activate your University of Helsinki user ID to access Moodle. You will receive more information on the user ID after registration through email.
 - Sign into the Moodle space with your University of Helsinki / HAKA user ID and the enrolment key. -->
