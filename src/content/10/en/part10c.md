@@ -230,8 +230,10 @@ You can import the [gql](https://www.apollographql.com/docs/apollo-server/api/ap
 import { gql } from 'apollo-boost';
 
 export const GET_REPOSITORIES = gql`
-  query repositories {
-    ${/* ... */}
+  query {
+    repositories {
+      ${/* ... */}
+    }
   }
 `;
 
