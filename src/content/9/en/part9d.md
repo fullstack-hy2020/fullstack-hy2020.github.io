@@ -471,9 +471,9 @@ When we remove the comments from the <i>Deeper type usage</i> case block, you wi
 
 <div class="tasks">
 
-### Exercise 9.15
+### Exercise 9.15.
 
-#### 9.15
+#### 9.15.
 
 First add the type information to <i>index.tsx</i> and replace the variable <i>courseParts</i> with the one from the example below.
 
@@ -920,7 +920,7 @@ dispatch({ type: "SET_PATIENT_LIST", payload: patients });
 
 <div class="tasks">
 
-### Exercises 9.16.-9.18
+### Exercises 9.16.-9.18.
 
 We will soon add new type <i>Entry</i> for our app that represents a light weight patient journal entry. It consists of journal text i.e. <i>description</i>, creation date, information regarding the specialist who created it and possible diagnosis codes. Diagnosis codes map to the ICD-10 codes returned from the <i>/api/diagnoses</i> endpoint. Our naive implementation will be that a patient has an array of entries.
 
