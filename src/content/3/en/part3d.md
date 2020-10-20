@@ -195,8 +195,8 @@ You can find the code for our current application in its entirety in the <i>part
 
 Add validation to your phonebook application, that will make sure that a newly added person has a unique name. Our current frontend won't allow users to try and create duplicates, but we can attempt to create them directly with Postman or the VS Code REST client.
 
-
-Mongoose does not offer a built-in validator for this purpose. Install the [mongoose-unique-validator](https://github.com/blakehaswell/mongoose-unique-validator#readme) package with npm and use it instead.
+<!--- I think mongoose support unique key in validation schema -->
+<!--- Mongoose does not offer a built-in validator for this purpose. Install the [mongoose-unique-validator](https://github.com/blakehaswell/mongoose-unique-validator#readme) package with npm and use it instead.-->
 
 If an HTTP POST request tries to add a name that is already in the phonebook, the server must respond with an appropriate status code and error message.
 
