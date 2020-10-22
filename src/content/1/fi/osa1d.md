@@ -230,7 +230,7 @@ const handleLeftClick = () => {
 }
 ```
 
-Älä kuitenkaan tee näin. Kuten jo mainitsimme, React-komponentin tilaa, eli esimerkiksi muuttujaa _allClicks_ ei saa muuttaa. Vaikka tilan muuttaminen näyttääkin toimivan joissaikin tilanteissa, voi seurauksena olla hankalasti havaittavia ongelmia.
+Älä kuitenkaan tee näin. Kuten jo mainitsimme, React-komponentin tilaa, eli esimerkiksi muuttujaa _allClicks_ ei saa muuttaa. Vaikka tilan muuttaminen näyttääkin toimivan joissakin tilanteissa, voi seurauksena olla hankalasti havaittavia ongelmia.
 
 Katsotaan vielä tarkemmin, miten kaikkien painallusten historia renderöidään ruudulle:
 

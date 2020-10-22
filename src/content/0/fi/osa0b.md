@@ -64,7 +64,7 @@ img-tagin ansiosta selain tekee toisenkin <i>HTTP-pyynnön</i>, jonka avulla se 
 
 ![](../../images/0/6e.png)
 
-eli pyyntö on tehty osoitteeseen <https://studies.cs.helsinki.fi/exampleapp/kuva.png> ja se on tyypiltään HTTP GET. Vastaukseen liittyvät headerit kertovat että vastauksen koko on 89350 tavua ja vastauksen [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) on <i>image/png</i>, eli kyseessä on png-tyyppinen kuva. Tämän tiedon ansiosta selain tietää, miten kuva on piirrettävä HTML-sivulle.
+Eli pyyntö on tehty osoitteeseen <https://studies.cs.helsinki.fi/exampleapp/kuva.png> ja se on tyypiltään HTTP GET. Vastaukseen liittyvät headerit kertovat että vastauksen koko on 89350 tavua ja vastauksen [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) on <i>image/png</i>, eli kyseessä on png-tyyppinen kuva. Tämän tiedon ansiosta selain tietää, miten kuva on piirrettävä HTML-sivulle.
 
 Sivun https://studies.cs.helsinki.fi/exampleapp/ avaaminen selaimessa saa siis aikaan allaolevan [sekvenssikaavion](https://github.com/mluukkai/ohjelmistotekniikka-kevat2019/blob/master/web/materiaali.md#sekvenssikaaviot) kuvaaman tapahtumasarjan:
 
