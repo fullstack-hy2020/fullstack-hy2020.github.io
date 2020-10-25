@@ -595,7 +595,9 @@ const App = () => {
   const [ counter, setCounter ] = useState(0)
 
   const increaseByOne = () => setCounter(counter + 1)
+  //highlight-start
   const decreaseByOne = () => setCounter(counter - 1)
+  //highlight-end
   const setToZero = () => setCounter(0)
 
   return (
