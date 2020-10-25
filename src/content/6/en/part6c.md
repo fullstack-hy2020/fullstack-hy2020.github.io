@@ -248,7 +248,7 @@ const createNew = async (content) => {
 
 export default {
   getAll,
-  createNew,
+  createNew, // highlight-line
 }
 ```
 
