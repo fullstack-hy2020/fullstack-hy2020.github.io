@@ -47,7 +47,7 @@ const App = () => (
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-Tiedostot <i>App.js</i>, <i>App.css</i>, <i>App.test.js</i>, <i>logo.svg</i> ja <i>serviceWorker.js</i> voi poistaa sillä niitä emme sovelluksessamme nyt tarvitse.
+Tiedostot <i>App.js</i>, <i>App.css</i>, <i>App.test.js</i>, <i>logo.svg</i> ja <i>reportWebVitals.js</i> voi poistaa sillä niitä emme sovelluksessamme nyt tarvitse.
 
 ### Komponentti
 
@@ -464,7 +464,7 @@ const App = () => {
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-ja poista ylimääräiset tiedostot (App.js, App.css, App.test.js, logo.svg, serviceWorker.js).
+ja poista ylimääräiset tiedostot (App.js, App.css, App.test.js, logo.svg, reportWebVitals.js).
 
 Koko sovellus on nyt ikävästi yhdessä komponentissa. Refaktoroi sovelluksen koodi siten, että se koostuu kolmesta uudesta komponentista: <i>Header</i>, <i>Content</i> ja <i>Total</i>. Kaikki data pidetään edelleen komponentissa <i>App</i>, joka välittää tarpeelliset tiedot kullekin komponentille <i>props:ien</i> avulla. <i>Header</i> huolehtii kurssin nimen renderöimisestä, <i>Content</i> osista ja niiden tehtävämääristä ja <i>Total</i> tehtävien yhteismäärästä.
 
