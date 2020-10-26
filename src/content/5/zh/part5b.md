@@ -817,7 +817,7 @@ Create-react-app 已经默认为项目安装好了 ESlint， 所以我们需要�
 注意: 不要运行 eslint-- init 命令。 它将安装与 create-react-app 创建的配置文件不兼容的最新版本的 ESlint！
 
 <!-- Next, we will start testing the frontend and in order to avoid undesired and irrelevant linter errors we will install the [eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest) package: -->
-下面，我们将开始测试前端，为避免不想要和不相关的 lint 错误，我们先安装[eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest) 库：
+下面，我们将开始测试前端，为避免不想要和不相关的 lint 错误，我们先安装[eslint-plugin-jest](https://www.npmjs.com/package/eslint-plugin-jest) 库：
 
 ```bash
 npm add --save-dev eslint-plugin-jest

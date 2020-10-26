@@ -269,9 +269,11 @@ export default App;
 import { gql } from 'apollo-boost';
 
 export const GET_REPOSITORIES = gql`
-  query repositories {
+query {
+  repositories {
     ${/* ... */}
   }
+}
 `;
 
 // other queries...
@@ -517,7 +519,7 @@ export default {
 ### Storing data in the user's device
 在用户设备中排序
 
-<!-- There are times when we need to store some persisted pieces of data in the user's device. One such common scenario is storing the user's authentication token so that we can retrieve it even if the user closes and reopens our application. In web development, we have used the browser's <em>localStorage</em> object to achieve such functionality. React Native provides similar persistent storage, the [AsyncStorage](https://docs.expo.io/versions/latest/react-native/asyncstorage/). -->
+<!-- There are times when we need to store some persisted pieces of data in the user's device. One such common scenario is storing the user's authentication token so that we can retrieve it even if the user closes and reopens our application. In web development, we have used the browser's <em>localStorage</em> object to achieve such functionality. React Native provides similar persistent storage, the [AsyncStorage](https://react-native-community.github.io/async-storage/docs/usage). -->
 我们常常会将一些数据持久化到用户的设备中。一个典型的场景时存储用户的认证token ，这样我们在重新开启应用时就可以重复获取它。在Web 开发中，我们已经使用过浏览器的  <em>localStorage</em>  对象来实现相关的功能。React Native 提供了类似的持久化存储， 那就是[AsyncStorage](https://react-native-community.github.io/async-storage/docs/usage)。
 
 

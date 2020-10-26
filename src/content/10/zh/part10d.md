@@ -1222,10 +1222,10 @@ const Main = () => {
 
 <!-- That's it, our application is ready. Good job! We have learned many new concepts during our journey such as setting up our React Native application using Expo, using React Native's core components and adding style to them, communicating with the server, and testing React Native applications. The final piece of the puzzle would be to deploy the application to the Apple iTunes Store and Google Play Store. -->
 
-好啦，我们的应用已经就绪了。干得漂亮！在我们的旅程中我们已经学习了许多新的概念，比如利用Expo 搭建React Native 应用， 使用React Native 的核心组件并向其添加样式，与服务端通信，测试React  Native 应用等。最后一片拼图就是将我们的应用部署到Apple iTunes Store 和 Google Play Store了。
+好啦，我们的应用已经就绪了。干得漂亮！在我们的旅程中我们已经学习了许多新的概念，比如利用Expo 搭建React Native 应用， 使用React Native 的核心组件并向其添加样式，与服务端通信，测试React  Native 应用等。最后一片拼图就是将我们的应用部署到Apple App Store 和 Google Play Store了。
 
 <!-- Deploying the application in entirely <i>optional</i> and it isn't quite trivial, because you also need to fork and deploy the [rate-repository-api](https://github.com/fullstack-hy2020/rate-repository-api). For the React Native application itself, you first need to create either iOS or Android builds by following Expo's [documentation](https://docs.expo.io/distribution/building-standalone-apps/). Then you can upload these builds to either Apple iTunes Store or Google Play Store. Expo has a [documentation](https://docs.expo.io/distribution/uploading-apps/) for this as well. -->
 
-部署应用是完全 <i>可选的</i>， 并不是十分繁琐，因为你需要fork 和部署 [rate-repository-api](https://github.com/fullstack-hy2020/rate-repository-api) 。对React Native 应用本身来说，你首先需要创建一个iOS或者Android 构建，可以参考Expo 的 [documentation](https://docs.expo.io/distribution/building-standalone-apps/) 。然后你可以将这些构建上传到Apple iTunes Store 或者 Google Play Store。 Expo 也有一个 [documentation](https://docs.expo.io/distribution/uploading-apps/) 来介绍。
+部署应用是完全 <i>可选的</i>， 并不是十分繁琐，因为你需要fork 和部署 [rate-repository-api](https://github.com/fullstack-hy2020/rate-repository-api) 。对React Native 应用本身来说，你首先需要创建一个iOS或者Android 构建，可以参考Expo 的 [documentation](https://docs.expo.io/distribution/building-standalone-apps/) 。然后你可以将这些构建上传到Apple App Store 或者 Google Play Store。 Expo 也有一个 [documentation](https://docs.expo.io/distribution/uploading-apps/) 来介绍。
 
 </div>

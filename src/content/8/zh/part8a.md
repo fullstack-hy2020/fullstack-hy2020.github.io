@@ -946,7 +946,7 @@ type Mutation {
 ```
 
 <!-- and is done by a resolver: -->
-而且是由一个解析器完成的:
+而且是由一个resolver完成的:
 
 ```js
 Mutation: {
@@ -965,8 +965,8 @@ Mutation: {
 ```
 
 
-<!-- The mutation finds the person to be by the field <i>name</i>. -->
-这个Mutation通过字段<i>name</i> 找到这个人。
+<!-- The mutation finds the person to be updated by the field <i>name</i>. -->
+mutations 发现person 被 <i>name</i> 字段更新掉了。
 
 <!-- The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>. -->
 当前应用的代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3) ，branch<i>part8-3</i> 上找到。
