@@ -594,7 +594,7 @@ Modify the application such that the initial state of the data is fetched from t
 
 <h4>2.12* Data for countries, step1</h4>
 
-The API [https://restcountries.eu](https://restcountries.eu) provides a data for different countries in a machine-readable format, a so-called REST API.
+The API [https://restcountries.eu](https://restcountries.eu) provides data for different countries in a machine-readable format, a so-called REST API.
 
 Create an application, in which one can look at data of various countries. The application should probably get the data from the endpoint [all](https://restcountries.eu/#api-endpoints-all).
 
