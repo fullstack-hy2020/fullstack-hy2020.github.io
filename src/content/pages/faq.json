@@ -1,6 +1,12 @@
 {
   "fi": [   
     {
+      "title": "Ilmestyykö kurssista uusi versio 2021?",
+      "text": [
+        "Kyllä, uusi versio ilmestyy 15.3.2021.<br><br>Uusi versio ei tule poikkeamaan radikaalisti nykyisestä. <br><br>Vuoden 2020 versiota voi laajentaa 2021 versiossa <a href='/osa0/yleista#aiemmin-suoritetun-kurssin-taydentaminen'>tämän</a> ohjeen mukaisesti."
+      ]
+    },    
+    {
       "title": "Miten kurssille ilmoittaudutaan?",
       "text": [
         "Kurssille ei tarvitse varsinaisesti ilmoittautua ennen kuin haluat tehdä kurssin kokeen. Koe tehdään Avoimen yliopiston Moodle-järjestelmään. Katso lisää <a href='/osa0/yleista#arvosteluperusteet'>täältä</a>."
@@ -62,6 +68,12 @@
     }
   ],
   "en": [
+    {
+      "title": "Will there be a new course 2021?",
+      "text": [
+        "Yes, the new version of the course will start 15.3.2021.<br><br>There won't be major changes in the course content.<br><br> The 2020 version can be expanded in the 2021 version, see more <a href='/part0/general_info#expanding-a-previously-completed-course'>here</a>. "
+      ]
+    },    
     {
       "title": "How do I sign up for the course?",
       "text": [
