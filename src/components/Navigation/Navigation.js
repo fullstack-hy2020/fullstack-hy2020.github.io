@@ -20,7 +20,7 @@ export const getNavigation = (language, t) => {
     },
     {
       text: t('navigation:courseContents'),
-      path: getTranslationPath('#course-contents', language),
+      path: getTranslationPath('/#course-contents', language),
     },
     { text: t('navigation:faq'), path: getTranslationPath('/faq', language) },
     {
