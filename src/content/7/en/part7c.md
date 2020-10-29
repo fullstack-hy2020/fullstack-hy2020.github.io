@@ -212,8 +212,8 @@ Lastly, let's alter the application's navigation menu to use Bootstrap's [Navbar
       </Nav.Link>
       <Nav.Link href="#" as="span">
         {user
-          ? <em>{user} logged in</em>
-          : <Link to="/login">login</Link>
+          ? <em style={padding}>{user} logged in</em>
+          : <Link style={padding} to="/login">login</Link>
         }
     </Nav.Link>
     </Nav>
