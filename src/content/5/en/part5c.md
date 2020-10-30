@@ -579,12 +579,12 @@ Make a test which checks that the component displaying a blog renders the blog's
 <!-- Lisää komponenttiin tarvittaessa testausta helpottavia CSS-luokkia. -->
 Add CSS-classes to the component to help the testing as necessary. 
 
-#### 5.14: Blog list tests, step2
+#### 5.14*: Blog list tests, step2
 
 <!-- Tee testi, joka varmistaa että myös url ja likejen määrä näytetään kun blogin kaikki tiedot näyttävää nappia on painettu. -->
 Make a test which checks that the blog's url and number of likes are shown when the button controlling the shown details has been clicked. 
 
-#### 5.15: Blog list tests, step3
+#### 5.15*: Blog list tests, step3
 
 <!-- Tee testi, joka varmistaa, että jos komponentin <i>like</i>-nappia painetaan kahdesti, komponentin propsina saamaa tapahtumankäsittelijäfunktiota kutsutaan kaksi kertaa. -->
 Make a test which ensures that if the <i>like</i> button is clicked twice, the event handler the component received as props is called twice. 
