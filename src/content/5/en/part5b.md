@@ -737,7 +737,7 @@ Create-react-app has installed ESlint to the project by default, so all that's l
 Next, we will start testing the frontend and in order to avoid undesired and irrelevant linter errors we will install the [eslint-plugin-jest](https://www.npmjs.com/package/eslint-plugin-jest) package:
 
 ```bash
-npm add --save-dev eslint-plugin-jest
+npm install --save-dev eslint-plugin-jest
 ```
 
 Let's create a <i>.eslintrc.js</i> file with the following contents:
