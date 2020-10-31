@@ -664,8 +664,8 @@ Lambda 的主要特点是，它支持在云中执行单个函数，如今 Google
 
 
 
-<!-- If you are handling times and dates, [moment](https://momentjs.com/) and a new(er) release [date-fns](https://github.com/date-fns/date-fns) offer good tools for that. -->
-如果你正在处理时间和日期，[moment](https://momentjs.com/)和一个新版本[date-fns](https://github.com/date-fns/date-fns)提供了很好的工具。
+<!-- If you are handling times and dates, [date-fns](https://github.com/date-fns/date-fns) offers good tools for that. -->
+如果你正在处理时间和日期，[date-fns](https://github.com/date-fns/date-fns) 提供了很好的处理时间和日期的工具。
 
 
 
