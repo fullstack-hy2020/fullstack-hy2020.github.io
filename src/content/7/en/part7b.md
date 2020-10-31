@@ -319,7 +319,7 @@ The internet is starting to fill up with more and more helpful material related 
 
 ### Exercises 7.4.-7.8.
 
-We'll continue with the app from [exercises](/en/part7/custom_hooks#exercises-7-4-7-8) of the chapter [react router](/en/part7/react_router). 
+We'll continue with the app from [exercises](/en/part7/react_router#exercises-7-1-7-3) of the chapter [react router](/en/part7/react_router). 
 
 #### 7.4: anecdotes and hooks step1
 
