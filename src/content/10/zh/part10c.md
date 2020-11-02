@@ -509,8 +509,8 @@ export default {
 
 #### Exercise 10.12: environment variables
 
-<!-- Instead of the hardcoded Apollo Server's URL, use an environment variable defined in the <i>.env</i> file when initializing the Apollo Client. You can name the variable for example <em>APOLLO_URI</em>. -->
-在Apollo Client 创建初始化时，使用 <i>.env</i> 文件中的环境变量，不要硬编码Apollo Server 的URL。你可以将它命名为  <em>APOLLO_URI</em>。
+<!-- Instead of the hardcoded Apollo Server's URL, use an environment variable defined in the <i>.env</i> file when initializing the Apollo Client. You can name the enviroment variable for example <em>APOLLO_URI</em>. -->
+在Apollo Client 创建初始化时，使用 <i>.env</i> 文件中的环境变量，不要硬编码Apollo Server 的URL。你可以将它命名为一个环境变量，比如<em>APOLLO_URI</em>。
 
 </div>
 
