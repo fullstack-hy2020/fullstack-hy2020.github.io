@@ -427,7 +427,7 @@ Let's respond to the HTTP request with a list of objects formatted with the _toJ
 ```js
 app.get('/api/notes', (request, response) => {
   Note.find({}).then(notes => {
-    response.json(notes)
+    response.json(notes.map(note => note.toJSON()))
   })
 })
 ```
@@ -584,7 +584,7 @@ The note objects are created with the _Note_ constructor function. The response 
 The _savedNote_ parameter in the callback function is the saved and newly created note. The data sent back in the response is the formatted version created with the _toJSON_ method:
 
 ```js
-response.json(savedNote)
+response.json(savedNote.toJSON())
 ```
 
 Using Mongoose's [findById](https://mongoosejs.com/docs/api.html#model_Model.findById) method, fetching an individual note gets changed into the following:
@@ -736,7 +736,7 @@ app.get('/api/notes/:id', (request, response, next) => { // highlight-line
   Note.findById(request.params.id)
     .then(note => {
       if (note) {
-        response.json(note)
+        response.json(note.toJSON())
       } else {
         response.status(404).end()
       }
@@ -862,7 +862,7 @@ app.put('/api/notes/:id', (request, response, next) => {
 
   Note.findByIdAndUpdate(request.params.id, note, { new: true })
     .then(updatedNote => {
-      response.json(updatedNote)
+      response.json(updatedNote.toJSON())
     })
     .catch(error => next(error))
 })
