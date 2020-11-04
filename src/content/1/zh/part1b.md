@@ -158,7 +158,7 @@ console.log(m2)
 
 <!-- Individual items of an array are easy to assign to variables with the help of the [destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment). -->
 
-数组中的单个元素可以很容易地通过[解构赋值](destructuring assignment)赋给变量。
+数组中的单个元素可以很容易地通过[解构赋值](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)赋给变量。
 
 ```js
 const t = [1, 2, 3, 4, 5]
