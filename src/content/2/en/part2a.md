@@ -96,7 +96,7 @@ const notes = [
   },
   {
     id: 2,
-    content: 'Browser can execute only Javascript',
+    content: 'Browser can execute only JavaScript',
     date: '2019-05-30T18:39:34.091Z',
     important: false
   },
@@ -150,7 +150,7 @@ The result is an array of <i>li</i> elements.
 ```js
 [
   <li>HTML is easy</li>,
-  <li>Browser can execute only Javascript</li>,
+  <li>Browser can execute only JavaScript</li>,
   <li>GET and POST are the most important methods of HTTP protocol</li>,
 ]
 ```
@@ -252,7 +252,7 @@ const notes = [
   },
   {
     id: 2,
-    content: 'Browser can execute only Javascript',
+    content: 'Browser can execute only JavaScript',
     date: '2019-05-30T18:39:34.091Z',
     important: false
   },
@@ -321,7 +321,7 @@ note => <li key={note.id}>{note.content}</li>
 
 &nbsp;- is used to create view elements, the value of the variable must be rendered inside of curly braces. Try to see what happens if the braces are removed. 
 
-The use of curly braces will cause some headaches in the beginning, but you will get used to them soon enough. The visual feedback from React is immediate.
+The use of curly braces will cause some headache in the beginning, but you will get used to them soon enough. The visual feedback from React is immediate.
 
 ### Anti-pattern: array indexes as keys
 
@@ -410,7 +410,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 ```
 
-[import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) two modules, enabling them to be used in that file. The <i>react</i> module is placed into a variable called _React_ and <i>react-dom</i> to variable _ReactDOM_.
+[import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) two modules, enabling them to be used in that file. The <i>React</i> module is placed into a variable called _React_ and <i>React-DOM</i> to variable _ReactDOM_.
 
 
 Let's move our <i>Note</i> component into its own module. 
