@@ -129,8 +129,8 @@ Heroku 会在环境变量的基础上配置应用端口。
 node_modules
 ```
 
-<!-- Create a Heroku application with the command <i>heroku create</i>, commit your code to the repository and move it to Heroku with command <i>git push heroku master</i>. -->
-使用命令<i>heroku create</i>创建一个 Heroku 应用，将你的代码提交到仓库并将其推送到Heroku，<i>git push Heroku master</i>。
+<!-- Create a Heroku application with the command <i>heroku create</i>, commit your code to the repository and move it to Heroku with command <i>git push heroku main</i>. -->
+使用命令<i>heroku create</i>创建一个 Heroku 应用，将你的代码提交到仓库并将其推送到Heroku，<i>git push Heroku main</i>。
 
 <!-- If everything went well, the application works: -->
 如果一切顺利，应用就能正常工作:
@@ -143,8 +143,8 @@ node_modules
 >**NB** At least in the beginning it's good to keep an eye on the heroku logs at all times. The best way to do this is with command <i>heroku logs -t</i> which prints the logs to console whenever something happens on the server. 
 注意：至少在开始的时候，随时关注 heroku 日志是有好处的。 实现这一点的最佳方法是使用命令 <i>heroku logs -t</i> ，该命令会让服务器上发生任何事情时将日志打印到控制台。
 
->**NB** If you are deploying from a git repository where your code is not on the master branch (i.e. if you are altering the [notes repo](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2) from the last lesson) you will need to run _git push heroku HEAD:master_. If you have already done a push to heroku, you may need to run _git push heroku HEAD:master --force_.
-如果你从Git 仓库中拉取，所部署的代码不是master分支（比如，如果你正在修改上节课的 [notes repo](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2)，你需要运行 _git push heroku HEAD:master_ . 如果你已经推送到了heroku， 你可能需要运行 _git push heroku HEAD:master --force_ ）
+>**NB** If you are deploying from a git repository where your code is not on the main branch (i.e. if you are altering the [notes repo](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2) from the last lesson) you will need to run _git push heroku HEAD:master_. If you have already done a push to heroku, you may need to run _git push heroku HEAD:main --force_.
+如果你从Git 仓库中拉取，所部署的代码不是master分支（比如，如果你正在修改上节课的 [notes repo](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2)，你需要运行 _git push heroku HEAD:master_ . 如果你已经推送到了heroku， 你可能需要运行 _git push heroku HEAD:main --force_ ）
 
 <!-- The frontend also works with the backend on Heroku. You can check this by changing the backend's address on the frontend to be the backend's address in Heroku instead of <i>http://localhost:3001</i>. -->
 前端也与 Heroku 的后端一起工作。 你可以通过更改前端的后端地址，更改为后端在 Heroku 的地址http://localhost:3001</i>。
@@ -291,7 +291,7 @@ React代码从服务器地址 <http://localhost:3001/api/notes>  获取便笺，
   "scripts": {
      //...
     "build:ui": "rm -rf build && cd ../../osa2/materiaali/notes-new && npm run build --prod && cp -r build ../../../osa3/notes-backend/",
-    "deploy": "git push heroku master",
+    "deploy": "git push heroku main",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",    
     "logs:prod": "heroku logs --tail"
   }
