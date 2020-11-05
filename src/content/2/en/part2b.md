@@ -80,7 +80,7 @@ const App = (props) => {
         )}
       </ul>
       // highlight-start 
-      <form onSubmit={addNote}>
+      <form onSubmit={() => addNote}>
         <input />
         <button type="submit">save</button>
       </form>   
