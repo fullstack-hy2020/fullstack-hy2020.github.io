@@ -90,7 +90,7 @@ Tehdään projektihakemistosta git-repositorio ja lisätään <i>.gitignore</i>,
 node_modules
 ```
 
-Luodaan heroku-sovellus komennolla _heroku create_, tehdään sovelluksen hakemistosta git-repositorio, commitoidaan koodi ja siirretään se Herokuun komennolla _git push heroku master_.
+Luodaan heroku-sovellus komennolla _heroku create_, tehdään sovelluksen hakemistosta git-repositorio, commitoidaan koodi ja siirretään se Herokuun komennolla _git push heroku main_.
 
 Jos kaikki meni hyvin, sovellus toimii:
 
@@ -211,7 +211,7 @@ Jotta uuden frontendin version generointi onnistuisi jatkossa ilman turhia manua
   "scripts": {
     // ...
     "build:ui": "rm -rf build && cd ../../osa2/materiaali/notes-new && npm run build --prod && cp -r build ../../../osa3/notes-backend/",
-    "deploy": "git push heroku master",
+    "deploy": "git push heroku main",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",    
     "logs:prod": "heroku logs --tail"
   }
