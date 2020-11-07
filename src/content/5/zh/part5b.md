@@ -820,7 +820,7 @@ Create-react-app 已经默认为项目安装好了 ESlint， 所以我们需要�
 下面，我们将开始测试前端，为避免不想要和不相关的 lint 错误，我们先安装[eslint-plugin-jest](https://www.npmjs.com/package/eslint-plugin-jest) 库：
 
 ```bash
-npm add --save-dev eslint-plugin-jest
+npm install --save-dev eslint-plugin-jest
 ```
 
 <!-- Let's create a <i>.eslintrc.js</i> file with the following contents: -->
