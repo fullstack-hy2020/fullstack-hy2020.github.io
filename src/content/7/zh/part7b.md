@@ -352,7 +352,7 @@ const App = () => {
 
 
 <!-- We'll continue with the app from [exercises](/osa7/custom_hookit#tehtavat-7-4-7-6) of the chapter [react router](/zh/part7/react_router).  -->
-我们将继续使用[react router](/zh/part7/react_router)章节中[exercises](/zh/part7/自定义_hooks#exercises-7-4-7-8) 的应用。
+我们将继续使用[react router](/zh/part7/react_router)章节中[exercises](/zh/part7/react_router#exercises-7-1-7-3) 的应用。
 
 #### 7.4: anecdotes and hooks 步骤1
 <!-- Simplify the anecdote creation form of your application with the _useField_ custom hook we defined earlier. -->
