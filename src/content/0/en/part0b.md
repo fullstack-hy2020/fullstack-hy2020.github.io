@@ -19,7 +19,7 @@ Use the Chrome browser <i>now and for the rest of the course</i>.
 Open the [example application](https://studies.cs.helsinki.fi/exampleapp) on your browser. Sometimes this takes a while. 
 
 **The 1st rule of web development**: Always keep the Developer Console open on your web browser. On macOS, open the console by pressing `F12` or `option-cmd-i` simultaneously. 
-On Windows, open the console by pressing `F12` or `ctrl-shift-i` simultaneously. 
+On Windows or Linux, open the console by pressing `F12` or `ctrl-shift-i` simultaneously. 
 
 Before continuing, find out how to open the Developer Console on your computer (search from Google if necessary) and remember to <i>always</i> keep it open when developing web applications. 
 
