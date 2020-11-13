@@ -799,6 +799,15 @@ const useRepositories = (variables) => {
         };
 
         return nextResult;
+        // TIP: If you like immer, you may produce a new store state in a mutable fashion.
+        // For e.g.,
+        // import immer from "immer";
+        //...
+        // updateQuery: (previousResult, {fetchMoreResult}) =>
+        // immer(fetchMoreResult, (draft) => {
+        //   draft.repositories.edges.unshift(...previousResult.repositories.edges);
+        // }),
+
       },
     });
   };
