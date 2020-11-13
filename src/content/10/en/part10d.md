@@ -804,9 +804,9 @@ const useRepositories = (variables) => {
         // import immer from "immer";
         //...
         // updateQuery: (previousResult, {fetchMoreResult}) =>
-        // immer(fetchMoreResult, (draft) => {
-        //   draft.repositories.edges.unshift(...previousResult.repositories.edges);
-        // }),
+        //   immer(fetchMoreResult, (draft) => {
+        //     draft.repositories.edges.unshift(...previousResult.repositories.edges);
+        //   }),
 
       },
     });
