@@ -543,6 +543,7 @@ Here are some other UI frameworks for your consideration. If you do not see your
 - <https://get.foundation/>
 - <https://chakra-ui.com/>
 - <https://tailwindcss.com/>
+- <https://semantic-ui.com/>
 
 ### Styled components
 
