@@ -383,7 +383,7 @@ import React, { useState, useEffect } from 'react' // highlight-line
 import axios from 'axios'
 import Note from './components/Note'
 
-const App = () => {
+const App = () => { // highlight-line
   const [notes, setNotes] = useState([]) // highlight-line
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
