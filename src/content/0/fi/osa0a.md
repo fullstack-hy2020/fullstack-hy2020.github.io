@@ -137,6 +137,10 @@ Jos olet jo suorittanut kurssin joko MOOC:ina tai Yliopiston kurssina, voit täy
 Voit jatkaa siitä mihin jäit! Jos haluat tehdä kokonaan uudelleen jonkin osan tehtävät, ota yhteyttä 
 email matti.luukkainen@helsinki.fi tai Telegram @mluukkai. Kerro github-tunnuksesi sekä mitkä osat palautuksista haluat poistettavan.
 
+#### Vuoden 2020 kurssin jatkaminen vuoden 2021 versiossa
+
+Vuoden 2020 versio päättyy 10.1.2021. Jos kurssi jää kesken, voit jatkaa sitä taas 15.3.2021 uudem version alkaessa!
+
 #### Kurssin jonkin muun version täydentäminen
 
 Käytännössä täydentäminen tapahtuu siten, että voit korvata tämän kurssin <i>osia</i> aiemmin suorittamasi kurssin aikana palauttamillasi osilla. Eli jos olet suorittanut kurssin esim. avoimen yliopiston kautta kolmen opintopisteen laajuisena, voit korvata vanhan suorituksesi osilla 0-3 tämän kurssin osat 0-3. Ainoastaan peräkkäisten osien korvaaminen onnistuu, eli et voi korvata esim. osia 0 ja 2 mutta tehdä nyt osaa 1.
