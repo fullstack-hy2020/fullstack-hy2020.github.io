@@ -213,21 +213,21 @@ React Native 章节的学分
 
 即使你没有因为考试而注册公开大学，只要你完成了结业所需的足够的练习数量，你就可以从 [提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) 中下载课程的结业证书。如果只想要获得结业证书，你不需要提供芬兰社保账号。
 
-### Expanding a previously completed course 
+### Expanding on a previously completed course 
 【拓展之前完成的课程】
 
 <!-- If you have already taken the course either as a MOOC or as a University Course, you can now expand your course. -->
 
 如果你已经参与过这门课程，无论是在大学课程还是公开课，你都可以基于之前的课来进行拓展。
 
-#### Expanding Full stack open 2019 
+#### Expanding on Full stack open 2019 
 【拓展全栈公开课 2019】
 
 <!-- You can just pick up where you left! If you wish to resubmit a whole part, please contact the course personel. -->
 
 你可以续接你上次学习的进度！ 如果您希望重新提交整个章节的内容，请与课程负责人联系。
 
-#### Expanding other course instance
+#### Expanding on other instances of this course
 【拓展其他课程】
 
 <!-- You can substitute <i>parts</i> of this course with parts you have previously submitted. For example, if you have previously completed the 3-credit course, you can substitute parts 0-3 of this course with the parts you have previously completed. You can only substitute parts in sequence, so you cannot for example substitute parts 0 and 2 but now complete part 1. -->
