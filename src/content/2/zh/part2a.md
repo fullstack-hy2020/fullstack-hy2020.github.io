@@ -133,7 +133,7 @@ const notes = [
   },
   {
     id: 2,
-    content: 'Browser can execute only Javascript',
+    content: 'Browser can execute only JavaScript',
     date: '2019-05-30T18:39:34.091Z',
     important: false
   },
@@ -194,7 +194,7 @@ notes.map(note => <li>{note.content}</li>)
 ```js
 [
   <li>HTML is easy</li>,
-  <li>Browser can execute only Javascript</li>,
+  <li>Browser can execute only JavaScript</li>,
   <li>GET and POST are the most important methods of HTTP protocol</li>,
 ]
 ```
@@ -304,7 +304,7 @@ const notes = [
   },
   {
     id: 2,
-    content: 'Browser can execute only Javascript',
+    content: 'Browser can execute only JavaScript',
     date: '2019-05-30T18:39:34.091Z',
     important: false
   },
@@ -483,7 +483,7 @@ import ReactDOM from 'react-dom'
 ```
 
 <!-- [imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) two modules, enabling them to be used in the code. The <i>react</i> module is placed into a variable called _React_ and <i>react-dom</i> to variable _ReactDOM_. -->
-为了让它们能够在代码中使用，就[import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 了两个模块： <i>react</i> 模块被放入一个名为 React 的变量中， <i>react-dom</i> 模块放到了 ReactDOM 变量中。
+为了让它们能够在代码中使用，就[import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 了两个模块： <i>React</i> 模块被放入一个名为 React 的变量中， <i>React-DOM</i> 模块放到了 ReactDOM 变量中。
 
 <!-- Let's move our <i>Note</i> component into its own module.  -->
 让我们将我们的<i>Note</i> 组件移动到它自己的模块中。

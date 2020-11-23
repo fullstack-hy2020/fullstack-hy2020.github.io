@@ -627,12 +627,12 @@ CI=true npm test -- --coverage
 <!-- Add CSS-classes to the component to help the testing as necessary.  -->
 向组件中添加 css 类以帮助进行必要的测试。
 
-#### 5.14: Blog list tests, 步骤2
+#### 5.14*: Blog list tests, 步骤2
 
 <!-- Make a test, which checks that blog's url and number of likes are shown when the button controlling the shown details has been clicked.  -->
 做一个测试，当点击控制显示的详细信息的按钮时，检查博客的网址和赞的数量。
 
-#### 5.15: Blog list tests, 步骤3
+#### 5.15*: Blog list tests, 步骤3
 <!-- Make a test which ensures that if the <i>like</i> button is clicked twice, the event handler the component received as props is called twice.  -->
 进行一个测试，确保如果单击<i>like</i> 按钮两次，那么作为props接收的组件的事件处理程序将创建两次。
 
