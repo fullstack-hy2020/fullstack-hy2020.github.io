@@ -139,7 +139,7 @@ email matti.luukkainen@helsinki.fi tai Telegram @mluukkai. Kerro github-tunnukse
 
 #### Vuoden 2020 kurssin jatkaminen vuoden 2021 versiossa
 
-Vuoden 2020 versio päättyy 10.1.2021. Jos kurssi jää kesken, voit jatkaa sitä taas 15.3.2021 uudem version alkaessa!
+Vuoden 2020 versio päättyy 10.1.2021. Jos kurssi jää kesken, voit jatkaa sitä taas 15.3.2021 uuden version alkaessa!
 
 #### Kurssin jonkin muun version täydentäminen
 
