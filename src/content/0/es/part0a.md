@@ -115,12 +115,12 @@ Si desea recibir créditos, guarde su número de estudiante de la <b>Universidad
 
 Si no eres un estudiante de la Universidad de Helsinki, puedes obtener un número de estudiante registrándote en el curso a través de [Open University](/en/part0/general_info # sign-up-for-the-exam).
 
-<- Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan Maaran tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi Valmis kurssin suorituksen kanssa: ->
+<!-- Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan Maaran tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi Valmis kurssin suorituksen kanssa: -->
 Usted recibirá sus créditos después de haber presentado suficiente ejercicio para una calificación aprobatoria, pasado el examen y háganos saber a través del sistema de envío de ejercicios que ha completado el curso:
 
 ![](../../images/0/28a.png)
 
-<! - Arvosana siirtyy Weboodiin neljän viikon sisällä suoritusmerkintäpyynnön jälkeen. ->
+<!-- Arvosana siirtyy Weboodiin neljän viikon sisällä suoritusmerkintäpyynnön jälkeen. -->
 Puede ver su calificación en Weboodi aproximadamente cuatro semanas después de notificarnos.
 
 ### Certificado del curso
