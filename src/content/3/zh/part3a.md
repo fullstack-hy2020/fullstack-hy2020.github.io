@@ -447,7 +447,7 @@ response.end(JSON.stringify(notes))
 解决这个问题的方法是使用[nodemon](https://github.com/remy/nodemon) :
 
 > <!--<i>nodemon will watch the files in the directory in which nodemon was started, and if any files change, nodemon will automatically restart your node application.</i>-->
-nodemon 将监视启动 nodemon 的目录中的文件，如果任何文件发生更改，nodemon 将自动重启节点应用。  
+nodemon 将监视启动 nodemon 的目录中的文件，如果任何文件发生更改，nodemon 将自动重启node应用。  
 
 <!-- Let's install nodemon by defining it as a <i>development dependency</i> with the command: -->
 让我们通过下面的命令将 nodemon 定义为<i>开发依赖development dependency</i>:
