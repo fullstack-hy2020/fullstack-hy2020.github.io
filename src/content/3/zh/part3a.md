@@ -1210,7 +1210,7 @@ app.use(requestLogger)
 中间件函数按照与express服务器对象的使用方法一起使用的顺序调用。 请注意，json-parser 是在 requestLogger 中间件之前使用的，否则在执行日志记录器时，不会初始化我们的 <i>request.body</i> ！
 
 <!-- Middleware functions have to be taken into use before routes if we want them to be executed before the route event handlers are called. There are also situations where we want to define middleware functions after routes. In practice, this means that we are defining middleware functions that are only called if no route handles the HTTP request. -->
-如果我们希望在调用路由事件处理程序之前执行路由，则必须在路由之前使用中间件函数。 还有一些情况，我们希望在路由之后定义中间件函数。 实际上，这意味着我们定义的中间件函数只有在没有路由处理 HTTP 请求的情况下才被调用。
+如果我们希望在调用路由事件处理程序之前执行中间件函数，则必须在路由之前使用中间件函数。 还有一些情况，我们希望在路由之后定义中间件函数。 实际上，这意味着我们定义的中间件函数只有在没有路由处理 HTTP 请求的情况下才被调用。
 
 
 <!-- Let's add the following middleware after our routes, that is used for catching requests made to non-existent routes. For these requests, the middleware will return an error message in the JSON format. -->
