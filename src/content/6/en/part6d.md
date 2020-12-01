@@ -33,7 +33,7 @@ const Notes = () => {
     if ( filter === 'ALL' ) {
       return notes
     }
-    return filter  === 'IMPORTANT' 
+    return filter  === 'IMPORTANT'
       ? notes.filter(note => note.important)
       : notes.filter(note => !note.important)
   })
@@ -87,11 +87,11 @@ const Notes = (props) => { // highlight-line
 
 // highlight-start
   const notesToShow = () => {
-    if ( props.filter === 'ALL ') {
+    if ( props.filter === 'ALL' ) {
       return props.notes
     }
     
-    return props.filter  === 'IMPORTANT' 
+    return props.filter  === 'IMPORTANT'
       ? props.notes.filter(note => note.important)
       : props.notes.filter(note => !note.important)
   }
