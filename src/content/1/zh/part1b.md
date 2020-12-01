@@ -565,7 +565,7 @@ referenceToGreet() // prints "hello, my name is undefined"
 
 <!-- One situation leading to the disappearance of _this_ arises when, e.g. we ask Arto to greet in one second using the [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) method. -->
 
-例如，当我们使用[setTimeout](https://developer.mozilla.org/en-us/docs/web/api/windoworworkerglobalscope/setTimeout)方法，让arto对象1秒钟后调用greet时，就会出现这种"this"消失的情况。
+例如，当我们使用[setTimeout](https://developer.mozilla.org/en-us/docs/web/api/windoworworkerglobalscope/setTimeout)方法，让arto对象1秒钟后调用greet。
 
 ```js
 const arto = {
