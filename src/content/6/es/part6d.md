@@ -253,7 +253,7 @@ props.toggleImportanceOf(note.id)
 
 No es necesario llamar a la función _dispatch_ por separado, ya que _connect_ ya ha modificado el creador de la acción _toggleImportanceOf_ en un formulario que contiene el envío.
 
-Puede tomar algo de tiempo entender cómo funciona _mapDispatchToProps_, especialmente una vez que echemos un vistazo a una [forma alternativa de usarlo](/en/part6/connect#alternative-way-of-using-map-dispatch-to-props).
+Puede tomar algo de tiempo entender cómo funciona _mapDispatchToProps_, especialmente una vez que echemos un vistazo a una [forma alternativa de usarlo](/es/part6/connect#alternative-way-of-using-map-dispatch-to-props).
 
 La situación resultante del uso de _connect_ se puede visualizar así:
 
@@ -593,7 +593,7 @@ Hemos recorrido un largo camino en este curso y, finalmente, hemos llegado al pu
 
 ¿Deberíamos usar siempre redux? Probablemente no. Dan Abramov, el desarrollador de redux, analiza esto en su artículo [You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367).
 
-Hoy en día es posible implementar una administración de estado similar a redux sin redux usando la api de [context](https://reactjs.org/docs/context.html) de React y el hook [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer). Más sobre esto [aquí](https://www.simplethread.com/cant-replace-redux-with-hooks/) y [aquí](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). También practicaremos esto en la [parte 9](/en/part9).
+Hoy en día es posible implementar una administración de estado similar a redux sin redux usando la api de [context](https://reactjs.org/docs/context.html) de React y el hook [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer). Más sobre esto [aquí](https://www.simplethread.com/cant-replace-redux-with-hooks/) y [aquí](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). También practicaremos esto en la [parte 9](/es/part9).
 
 </div>
 
