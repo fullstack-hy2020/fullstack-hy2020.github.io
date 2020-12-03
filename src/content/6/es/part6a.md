@@ -1218,7 +1218,7 @@ Implementar la funcionalidad para votar anécdotas. La cantidad de votos debe gu
 Implementar la funcionalidad para agregar nuevas anécdotas.
 
 
-Puede mantener el formulario no controlado, como hicimos [antes](s/part6/flux_architecture_and_redux#uncontrolled-form).
+Puede mantener el formulario no controlado, como hicimos [antes](es/part6/flux_architecture_and_redux#uncontrolled-form).
 
 #### 6.5*: anécdotas, paso 3
 
