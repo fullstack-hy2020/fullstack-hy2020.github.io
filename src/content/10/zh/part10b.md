@@ -271,9 +271,9 @@ const BigBlueText = () => {
 
 除了属性名称，你应该在例子中还发现了另一个不同点。那就是在CSS中， 数值型属性值一般会使用例如 <i>px</i>, <i>%</i>, <i>em</i> or <i>rem</i> 这种单位。而在React Native中，所有的与维度相关的属性类似<em>width</em>, <em>height</em>, <em>padding</em>, and <em>margin</em> 与文字大小一样都是<i>无单位</i>的。这些没有单位的数值表示的是<i>density-independent pixels</i>（密度独立像素，DIP）。如果你对特定核心组件所能使用的样式属性感兴趣，可以查看[React Native Styling Cheat Sheet](https://github.com/vhpoet/react-native-styling-cheat-sheet)。
 
-<!-- In general, defining styles directly in the <em>style</em> prop is not considered such a great idea, because it makes components bloated and unclear. Instead, we should define styles outside the component's render function using the [StyleSheet.create](https://reactnative.dev/docs/0.53/stylesheet#create) method. The <em>StyleSheet.create</em> method accepts a single argument which is an object consisting of named style objects and it creates a StyleSheet style reference from the given object. Here is an example of how to refactor the previous example using the <em>StyleSheet.create</em> method: -->
+<!-- In general, defining styles directly in the <em>style</em> prop is not considered such a great idea, because it makes components bloated and unclear. Instead, we should define styles outside the component's render function using the [StyleSheet.create](https://archive.reactnative.dev/docs/0.53/stylesheet#create) method. The <em>StyleSheet.create</em> method accepts a single argument which is an object consisting of named style objects and it creates a StyleSheet style reference from the given object. Here is an example of how to refactor the previous example using the <em>StyleSheet.create</em> method: -->
 
-一般来说，将样式直接定义在<em>style</em> 属性中并不是一个好主意，因为会导致组件膨胀且不易懂。相反，我们可以将样式定义在组件的render 函数之外，利用[StyleSheet.create](https://reactnative.dev/docs/0.53/stylesheet#create) 方法即可。 <em>StyleSheet.create</em>  方法接受一个单一的对象参数， 它包含了命名样式对象并针对该对象创建了样式引用。下面的例子中展示了如何利用<em>StyleSheet.create</em> 方法渲染样式，将之前的例子进行的重构。
+一般来说，将样式直接定义在<em>style</em> 属性中并不是一个好主意，因为会导致组件膨胀且不易懂。相反，我们可以将样式定义在组件的render 函数之外，利用[StyleSheet.create](https://archive.reactnative.dev/docs/0.53/stylesheet#create) 方法即可。 <em>StyleSheet.create</em>  方法接受一个单一的对象参数， 它包含了命名样式对象并针对该对象创建了样式引用。下面的例子中展示了如何利用<em>StyleSheet.create</em> 方法渲染样式，将之前的例子进行的重构。
 
 ```javascript
 import React from 'react';
