@@ -8,7 +8,7 @@ lang: es
 <div class="content">
 
 
-Continuemos nuestro trabajo con la [versión redux](/en/part6/flux_architecture_and_redux#redux-notes) simplificada de nuestra aplicación de notas.
+Continuemos nuestro trabajo con la [versión redux](/es/part6/flux_architecture_and_redux#redux-notes) simplificada de nuestra aplicación de notas.
 
 
 Para facilitar nuestro desarrollo, cambiemos nuestro reducer para que el store se inicialice con un estado que contenga un par de notas:

@@ -8,7 +8,7 @@ lang: es
 <div class="content">
 
 
-Expandamos la aplicación, de modo que las notas se almacenen en el backend. Usaremos [json-server](/en/part2/getting_data_from_server), de la parte 2.
+Expandamos la aplicación, de modo que las notas se almacenen en el backend. Usaremos [json-server](/es/part2/getting_data_from_server), de la parte 2.
 
 
 El estado inicial de la base de datos se almacena en el archivo <i>db.json</i>, que se coloca en la raíz del proyecto:

@@ -504,7 +504,7 @@ const noteReducer = (state = [], action) => {
 ```
 
 
-Creamos una copia de la nota cuya importancia ha cambiado con la sintaxis [de la parte 2](/en/part2/altering_data_in_server#changing-the-importance-of-notes), y reemplazamos el estado con un nuevo estado que contiene todas las notas que no han cambiado y la copia de la nota cambiada <i>changedNote</i>.
+Creamos una copia de la nota cuya importancia ha cambiado con la sintaxis [de la parte 2](/es/part2/altering_data_in_server#changing-the-importance-of-notes), y reemplazamos el estado con un nuevo estado que contiene todas las notas que no han cambiado y la copia de la nota cambiada <i>changedNote</i>.
 
 
 Recapitulemos lo que sucede en el código. Primero, buscamos un objeto de nota específico, cuya importancia queremos cambiar:
@@ -710,7 +710,7 @@ En las pruebas, asegúrese de que el reducer sea una <i>función inmutable</i> c
 Comience expandiendo el reducer para que pasen ambas pruebas. Luego agregue el resto de las pruebas y finalmente la funcionalidad que están probando.
 
 
-Un buen modelo para el reducer es el ejemplo anterior de [redux-notas](/en/part6/flux_architecture_and_redux#pure-functions-immutable).
+Un buen modelo para el reducer es el ejemplo anterior de [redux-notas](/es/part6/flux_architecture_and_redux#pure-functions-immutable).
 
 
 #### 6.2: unicafe revisitado, paso 2
@@ -877,7 +877,7 @@ Aparte del reducer, nuestra aplicación está en un solo archivo. Esto, por supu
 
 Ahora la pregunta es, ¿cómo puede <i>App</i> acceder al store después de moverlo? Y en términos más generales, cuando un componente está compuesto por muchos componentes más pequeños, debe haber una forma para que todos los componentes accedan al store.
 
-Hay varias formas de compartir el store redux con componentes. Primero veremos la forma más nueva, y posiblemente la más fácil, usando la api de [hooks]https://react-redux.js.org/api/hooks) de la librería [react-redux](https://react-redux.js.org/).
+Hay varias formas de compartir el store redux con componentes. Primero veremos la forma más nueva, y posiblemente la más fácil, usando la api de [hooks](https://react-redux.js.org/api/hooks) de la librería [react-redux](https://react-redux.js.org/).
 
 
 Primero instalamos react-redux
@@ -1218,7 +1218,7 @@ Implementar la funcionalidad para votar anécdotas. La cantidad de votos debe gu
 Implementar la funcionalidad para agregar nuevas anécdotas.
 
 
-Puede mantener el formulario no controlado, como hicimos [antes](/en/part6/flux_architecture_and_redux#uncontrolled-form).
+Puede mantener el formulario no controlado, como hicimos [antes](es/part6/flux_architecture_and_redux#uncontrolled-form).
 
 #### 6.5*: anécdotas, paso 3
 
@@ -1228,7 +1228,7 @@ Asegúrese de que las anécdotas estén ordenadas por número de votos.
 #### 6.6: anécdotas, paso 4
 
 
-Si aún no lo ha hecho, separe la creación de objetos de acción en funciones de [creador de acciones](https://redux.js.org/basics/actions#action-creators) y colóquelos en el archivo <i>src/reducers/anecdoteReducer.js</i>, así que haga lo que hemos estado haciendo desde el capítulo [creadores de acciones](/en/part6/flux_architecture_and_redux#action-creators).
+Si aún no lo ha hecho, separe la creación de objetos de acción en funciones de [creador de acciones](https://redux.js.org/basics/actions#action-creators) y colóquelos en el archivo <i>src/reducers/anecdoteReducer.js</i>, así que haga lo que hemos estado haciendo desde el capítulo [creadores de acciones](/es/part6/flux_architecture_and_redux#action-creators).
 
 #### 6.7: anécdotas, paso 5
 
