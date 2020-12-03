@@ -4,7 +4,8 @@ import React from 'react';
 import navigation from '../../content/partnavigation/partnavigation';
 
 export const PartBanner = ({ lang }) => {
-  const parts = Object.keys(navigation[lang]);
+  // TODO: show part 11 when published
+  const parts = Object.keys(navigation[lang]).filter(k => k !== '11');
 
   return (
     <Banner
