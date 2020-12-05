@@ -321,7 +321,7 @@ const mockHandler = jest.fn()
 测试根据渲染组件的文本找到按钮，然后单击元素:
 
 ```js
-const button = getByText('make not important')
+const button = component.getByText('make not important')
 fireEvent.click(button)
 ```
 
