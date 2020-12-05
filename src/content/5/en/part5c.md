@@ -300,7 +300,7 @@ const mockHandler = jest.fn()
 The test finds the button <i>based on the text</i> from the rendered component and clicks the element:
 
 ```js
-const button = getByText('make not important')
+const button = component.getByText('make not important')
 fireEvent.click(button)
 ```
 
