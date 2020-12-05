@@ -194,4 +194,48 @@ Add protection to your master branch. You should protect it to:
 - Require all pull request to be approved before merging
 - Require all status checks (lint and test) to pass before merging
 
+TODO
+
+#### 11.11 Skiping a commit for tagging and deployment
+
+In general the more often you deploy the master to production, the better. However there might be some valid reasons from time to time skip a particular commit or a merged pull request to becoming tagged and released to production.
+
+Modify your setup so that if a commit message in a pull request contains _#skip_, the merge will not be deployed to production and it is not given a version number.
+
+**Hints:** 
+
+The easiest way to implement this is to add a [if condition](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif) to the relevant steps
+
+See [these examples](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#example-printing-context-information-to-the-log-file) how to access the commit message content when implementing the `if` condition.
+
+You might take this as a starting point:
+
+```yml
+name: Testing stuff
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  a_test_job:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: gihub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT"
+      - name: commits
+        env:
+          COMMITS: ${{ toJson(github.event.commits) }}
+        run: echo "$COMMITS"
+```
+
+You most likely need functions [contains](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#contains) and [join](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#join) for your  if condition.
+
+Developing workflows is not easy, and quite often the only option is trial and error. It might be even advisable to have a separate repository for getting the configuration right, and then when it is done, to copy the right configurations to the actual repository.
+
+It would also be possible to install a tool such as [act](https://github.com/nektos/act) that makes it possible of running your workflows locally. In case you end up to more involved use cases, eg. by creating your [own custom actions](https://docs.github.com/en/free-pro-team@latest/actions/creating-actions) going through the burden of setting up a tool such as act is most likely worth the trouble. 
+
 </div>
