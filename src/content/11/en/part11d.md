@@ -241,6 +241,6 @@ Add protection to your master branch. You should protect it to:
 - Require all pull request to be approved before merging
 - Require all status checks (lint and test) to pass before merging
 
-TODO include admins!
+TODO not yet include admins!
 
 </div>
