@@ -94,4 +94,6 @@ It is perhaps best to create a new repository for this exercise and simply copy 
 
 This is a long and perhaps quite a tought exercise, but this kind of situation where you have a "legacy code" and you need to build it a proper deployment pipeline is quite commoin in real life!
 
+#### 11.15 Protect master and ask for pr
+
 </div>
