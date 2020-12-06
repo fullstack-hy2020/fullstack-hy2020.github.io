@@ -336,4 +336,10 @@ Once you are sure that the pileline works, write another test that ensures one c
 
 **Note** that you should not try <i>bulbasaur</i>, for some reason the page of that particular Pokemon does not work properly...
 
+The end result should be something like this
+
+![e2e tests](../../images/11/9.png)
+
+End to end -tests are nice since they give us confidence that software work from end users perspective. The price we have to pay is the decreased speed. Now executing the whole workflow takes much longer.
+
 </div>
