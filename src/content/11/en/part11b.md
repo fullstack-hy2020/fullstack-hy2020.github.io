@@ -259,7 +259,7 @@ jobs:
 
 <div class="tasks">
 
-### Exercises 11.5.-11.8.
+### Exercises 11.5.-11.9.
 
 #### 11.5 Linting workflow
 
@@ -277,13 +277,13 @@ Couple of hints. One of the errors is best to be fixed by specifying proper <i>e
 
 Make the necessary changes to the source code so that the lint workflow passes (do not make changes to the lint rules). Once you commit new code the workflow will run again and you will see updated output where all is green again:
 
-![Lint errorx fixed](../../images/11/6.png)
+![Lint error fixed](../../images/11/6.png)
 
 #### 11.7 Building and testing
 
 Let's expand on the previous workflow that currently does the linting of the code. Edit the workflow and similarly to the lint command add commands for build and test (in this order as running the tests requires the code to be built). After this step outcome should look like this
 
-![Lint errorx fixed](../../images/11/7.png)
+![tests fail...](../../images/11/7.png)
 
 As you might have guessed, there are some problems in code...
 
@@ -293,6 +293,47 @@ Investigate which test fails and why and fix the issue in the code (do not chang
 
 Once you have fixed all the issues and the Pokedex is bug-free, the workflow run will succeed and show green!
 
-![Successful workflow run](../../images/11/part11b_finished_build.png)
+![tests fixed](../../images/11/8.png)
+
+#### 11.9 Simple end to end -tests
+
+The current set of tests use [jest](https://jestjs.io/) to ensure that the React compomnents work as intended. This is exactly the same thing that is done in [Part 5 section Testing React apps](/en/part5/testing_react_apps) of the course. 
+
+Testing components in isolation is quite useful but that still does not ensure that the system as a whole works as we wish. To have some confidence on this, let us write couple of really simple end to end -tests with the [Cypress](https://www.cypress.io/) library simillarly what we do in [Part 5 section End to end -testing](/en/part5/end_to_end_testing).
+
+Setup cypress and use this test at first:
+
+```js
+describe('Pokedex', function() {
+  it('front page can be opened', function() {
+    cy.visit('http://localhost:5000')
+    cy.contains('ivysaur')
+    cy.contains('Pokémon and Pokémon character names are trademarks of Nintendo.')
+  })
+})
+```
+
+**Note** do not include the word <i>spec</i> in the cypress test file name, that would cause jest to run it, and it might cause problems. 
+
+**Another thing to note** is that despite the page renders the Pokemon names by starting with capital letter, the names are actually written with lower case letters in the source, so it is _ivysaur_ instead of _Ivysaur_!
+
+Ensure that the test passes locally. Remember that the test _assumes_ that the application is up and running when you run the test! If you have forgotten the details (that happened to me too!), please see [part 5](/en/part5/end_to_end_testing) how to get up and running with cypress.
+
+Once the end to end test works in your macine, include it to the GitHub Action workflow. By far the easiest way to do that is to use the ready made action [cypress-io/github-action](https://github.com/cypress-io/github-action). The step that suits to us is the following:
+
+```js
+      - name: e2e tests
+        uses: cypress-io/github-action@v2
+        with:
+          command: npm run test:e2e
+          start: npm run start-prod
+          wait-on: http://localhost:5000
+```
+
+Three opitons are used. [command](https://github.com/cypress-io/github-action#custom-test-command) specifies how to run cypress tests. [start](https://github.com/cypress-io/github-action#start-server) gives npm script that starts the server and [wait-on](https://github.com/cypress-io/github-action#wait-on) says that before the tests are run, the server should have started in url <http://localhost:5000>.
+
+Once you are sure that the pileline works, write another test that ensures one can navgate from the main page to the page of a particular Pokemon, eg. <i>ivysaur</i>. The test does not need to be complex one, just check that when you navigate a link, the page has some right content, such as the string <i>chlorophyll</i> in case of <i>ivysaur</i>.
+
+**Note** that you should not try <i>bulbasaur</i>, for some reason the page of that particular Pokemon does not work properly...
 
 </div>
