@@ -7,9 +7,9 @@ lang: en
 
 <div class="content">
 
-Before we start playing with GitHub Actions, let's have a look at what they are and how they work.
+Before we start playing with GitHub Actions, let's have a look at what they are and how do they work.
 
-GitHub Actions work on a basis of workflows. **A workflow is a series of jobs that are run when a certain triggering event happens.** The jobs that are run then themselves contain instructions for what GitHub Actions should do.
+GitHub Actions work on a basis of [workflows](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/introduction-to-github-actions#workflows). A workflow is a series of [jobs](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/introduction-to-github-actions#jobs) that are run when a certain triggering [event](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/introduction-to-github-actions#events) happens. The jobs that are run then themselves contain instructions for what GitHub Actions should do.
 
 ### Step By Step
 
@@ -23,35 +23,58 @@ A typical execution of a workflow looks like this:
 
 In general, in order to have CI operate on a repo, we need a few things:
 
-- A repo (obviously)
+- A repository (obviously)
 - Some definition of what the CI needs to do:
-  This can be in the form of a specific file inside the repo or it can be defined in the CI system
-- The CI needs to be aware that the repo (and the file within it) exist
+  This can be in the form of a specific file inside the repository or it can be defined in the CI system
+- The CI needs to be aware that the repository (and the file within it) exist
 - The CI needs to be able to access the repo.
 - The CI needs permissions to perform the actions it is supposed to be able to do:
-  For example, if the CI needs to be able to deploy to a production environment, it needs credentials for that environment.
+  For example, if the CI needs to be able to deploy to a production environment, it needs <i>credentials</i> for that environment.
 
-That's the traditional model at least, we'll see in a minute how GitHub Actions short-circuit some of these steps (or rather make it such that you don't have to worry about them) but first, let's have a quick look at what Jenkins would need to meet all of these conditions.
+That's the traditional model at least, we'll see in a minute how GitHub Actions short-circuit some of these steps or rather make it such that you don't have to worry about them!
 
-### How GitHub Actions meet their basic needs
-
-GitHub Actions have a great advantage over self hosted solutions: the repo is hosted with the CI provider. In other words, Github provides both the repo and the CI platform. This means that if we've enabled actions for a repo, GitHub is already aware of the fact that we have workflows defined and what those definitions look like.
+GitHub Actions have a great advantage over self hosted solutions: the repository is hosted with the CI provider. In other words, Github provides both the repository and the CI platform. This means that if we've enabled actions for a repo, GitHub is already aware of the fact that we have workflows defined and what those definitions look like.
 
 </div>
 
 <div class="tasks">
 
-### Fork the code
+### Exercise 11.2.
 
-First thing you'll want to do is to fork the example repository under your name. What it essentially does is it creates a copy of the repository under your GitHub user profile for your own use. In this module, all of the exercises will be using [this example project repository](https://github.com/smartlyio/fullstackopen-cicd). To fork the repository, you can click on the Fork button in the top-right area of the repository view next to the Star button.
+In most exercises in this part we are building a CI/CD pipeline for small project found in [this example project repository](https://github.com/smartlyio/fullstackopen-cicd).
+#### 11.2 the example project
 
-> Insert screenshot of Fork button here
+First thing you'll want to do is to fork the example repository under your name. What it essentially does is it creates a copy of the repository under your GitHub user profile for your own use. 
 
-Once you've clicked on the Fork button, GitHub will start the creation of a new repository called `{github_username}/fullstackopen-cicd`.
+To fork the repository, you can click on the Fork button in the top-right area of the repository view next to the Star button:
 
-Once the process has been finished, you should be redirected to your brand new repository!
+![](../../images/11/1.png)
+
+Once you've clicked on the Fork button, GitHub will start the creation of a new repository called <code>{github_username}/fullstackopen-cicd</code>.
+
+Once the process has been finished, you should be redirected to your brand new repository:
+
+![](../../images/11/2.png)
+
+Clone the project now to your own machine. As always, when starting with a new code, the most obvious place to look first is the file <code>package.json</code> 
+
+Try now the following:
+- start the code in development mode
+- run tests
+- lint the code 
 
 You might notice that the test project contains some broken tests and linting errors. Just leave them as they are for now. We will get around those later in the exercises.
+
+
+As you might rememember from [part 3](/en/part3/deploying_app_to_internet#frontend-production-build), the React code <i>should not</i> be run in development mode once it is deployed in production. Try now the following
+- create a production <i>build</i> of the project
+- run the production version locally
+
+Also for these two tasks there are ready made npm scripts in the project!
+
+Study the structure of the project for a while. As you notice both the frontend and backend code is now [in the same repository](/en/part7/class_components_miscellaneous#frontend-and-backend-in-the-same-repository). In earlier parts of the course we had a separate repository for both, but having those in same repository makes things much simple when setting up a CI enviroinment. 
+
+In contrast to most projects in this course, the frontend <i>does not use</i> create-react-app, but it has relatively simple [webpack](http://localhost:8000/en/part7/webpack) configuration that takes care of bundling the frontend code.
 
 </div>
 
@@ -59,7 +82,7 @@ You might notice that the test project contains some broken tests and linting er
 
 ### Getting started with workflows
 
-The core component of creating CI/CD pipelines with GitHub actions is something called a Workflow. Workflows are process flows that you can set up in your repository to run automated tasks such as building, testing, linting, releasing and deploying to name a few! The hierarchy of a workflow is presented chart X.
+The core component of creating CI/CD pipelines with GitHub actions is something called a Workflow. Workflows are process flows that you can set up in your repository to run automated tasks such as building, testing, linting, releasing and deploying to name a few! The hierarchy of a workflow looks as follows:
 
 Workflow
 
@@ -69,9 +92,11 @@ Workflow
 - Job
   - Step
 
-Each workflow must specify at least one Job, which contains a set of Steps to perform individual tasks. The jobs will be run in parallel and the steps in each job will be executed sequentially. Steps can vary from running a custom command to using pre-defined actions, thus the name GitHub Actions. You can create customised actions or use any actions published by the community, which are plenty, but let's get back to that later!
+Each workflow must specify at least one [Job](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/introduction-to-github-actions#jobs), which contains a set of [Steps](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/introduction-to-github-actions#steps) to perform individual tasks. The jobs will be run in parallel and the steps in each job will be executed sequentially. 
 
-In order for GitHub to recognise your workflows, they must be specifed in `.github/workflows` folder in your repository. Each Workflow is its own separate file which needs to be configured using the `YAML` data-serialization language.
+Steps can vary from running a custom command to using pre-defined actions, thus the name GitHub Actions. You can create [customised actions](https://docs.github.com/en/free-pro-team@latest/actions/creating-actions) or use any actions published by the community, which are plenty, but let's get back to that later!
+
+In order for GitHub to recognise your workflows, they must be specifed in <code>.github/workflows</code> folder in your repository. Each Workflow is its own separate file which needs to be configured using the <code>YAML</code> data-serialization language.
 
 YAML is a recursive acronym for "YAML Ain't Markup Language". As the name might hint it's goal is to be human-readable and it is commonly used for configuration files. You will notice below that it is indeed very easy to understand!
 
@@ -82,6 +107,8 @@ A basic workflow contains three elements in a YAML document. These three element
 - name: Yep, you guessed it, the name of the workflow
 - (on) triggers: The events that trigger the workflow to be executed
 - jobs: The separate jobs that the workflow will execute (a basic workflow might contain only one job).
+
+A simple workflow definition looks like this:
 
 ```yml
 name: Hello World!
@@ -100,108 +127,169 @@ jobs:
           echo "Hello World!"
 ```
 
-In this example the trigger is push to the master branch. There is one job named "hello_world_job", it will be run in a virtual environment with Ubuntu 18.04. The job has just one step named "Say hello", which will run the `echo "Hello World!"` command in the shell.
+In this example the trigger is push to the master branch. There is one job named <i>hello\_world\_job</i>, it will be run in a virtual environment with Ubuntu 18.04. The job has just one step named "Say hello", which will run the <code>echo "Hello World!"</code> command in the shell.
 
 So you may ask, when does GitHub trigger a workflow to be started? There are plenty of options to choose from, but generally speaking you can configure a workflow to start once:
 
-- An event on GitHub occurs such as when someone pushes a commit to a repository or when an issue or pull request is created.
-- A scheduled event begins which you can specify using `cron`.
-- An external event occurs, for example a command is performed in `Slack`.
+- An <i>event on GitHub</i> occurs such as when someone pushes a commit to a repository or when an issue or pull request is created
+- A <i>scheduled event</i> that is specified using the [cron]( https://en.wikipedia.org/wiki/Cron)-syntax happens
+- An <i>external event</i> occurs, for example a command is performed in an external application such as <code>Slack</code> messaging app
 
-To learn more about which events can be used to trigger workflows, please refer to GitHub's documentation.
+To learn more about which events can be used to trigger workflows, please refer to GitHub Action's [documentation](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows).
 
-To tie this all together, we have set up an example to the repository you've forked so have a look to see a fully configured workflow!
 
 </div>
 
 <div class="tasks">
 
-### Exercise 11.4.
+### Exercises 11.3-11.4.
 
-#### 11.4 Hello world!
+To tie this all together, let us now get Github Actions up and running in the example project!
 
-Before this exercise, you should have forked the [example repository](https://github.com/smartlyio/full-stack-open-pokedex) for your own use. In this exercise your goal is to create a super simple workflow to get the feel of how to start building workflows with GitHub Actions.
+#### 11.3 Hello world!
 
-Create a new Workflow which outputs "Hello World!" to the user.
+Create a new Workflow which outputs "Hello World!" to the user. For the setup you should create the directory <code>.github/workflows</code> and a file <code>hello.yml</code> to your repository.
 
 To see what your GitHub action workflow has done, you can navigate to the **Actions** tab in GitHub where you should see the workflows in your repository and the steps they implement. The output of your Hello World workflow should look something like this with a properly configured workflow.
 
-![A properly configured Hello World workflow](../../images/11/part11b_01.png)
+![A properly configured Hello World workflow](../../images/11/3.png)
 
-You should see the "Hello World!" message as an output. If that's the case then you have successfully gone through all the necessary steps. You have your first GitHub Actions workflow active! 👏
+You should see the "Hello World!" message as an output. If that's the case then you have successfully gone through all the necessary steps. You have your first GitHub Actions workflow active! 
+
+Note that GitHub Actions also gives you information what is the exact environment (operating system, and it's [setup](https://github.com/actions/virtual-environments/blob/ubuntu18/20201129.1/images/linux/Ubuntu1804-README.md)) where your workflow is run. This is important, since if something surprising happens, it makes debugging so much easier if you can reproduce all the steps in your own machine!
+
+#### 11.4 date and directory contents
+
+Extend the workflow with steps that print the date and current directory content in long format. 
+
+Both of these are easy steps, and just running commands [date](https://man7.org/linux/man-pages/man1/date.1.html) and [ls](https://man7.org/linux/man-pages/man1/ls.1.html) will do the trick
+
+Your workflow shoud now look like this
+
+![Date and dir content in workflow](../../images/11/4.png)
+
+As the output of command <code>ls -l</code> shows, by default the virtual environment that runs our workwlow <i>does not</i> have any code!
 
 </div>
 
 <div class="content">
 
-### Adding more beef around the workflow: set up lint, build, test.
+### Setting up lint, test and build steps  
 
-After completing the first exercise, you should have a simple but useless workflow set up. To make it useful, a bit more stuffings will be added to make it valuable. Let's make our workflow do something useful.
+After completing the first exercise, you should have a simple but pretty useless workflow set up. Let's make our workflow do something useful.
 
-Let's implement a Github Action that will lint the code, build it and run the tests automatically when you create a pull request. If the checks don't pass, Github Actions will show a red status and will not allow merging the pull request. We will continue working with the same project from the previous exercise, which has linting, building and testing tasks set up (see `package.json` if you're interested to know more).
+Let's implement a Github Action that will lint the code, build it and run the tests automatically when you create a pull request. If the checks don't pass, Github Actions will show a red status and will not allow merging the pull request.
+
 
 Before we can run a command to lint the code, we have to perform a couple of actions to set up the environment of the job.
 
 #### Setting up the environment
 
-Setting up the environment is an important task while configuring a pipeline. We're going to use an `ubuntu-18.04` virtual environment, because this is the version of Ubuntu we're going to be running in production. 18.04 is an LTS (long term support) version. It is important to replicate the same environment in CI as in production as closely as possible, to avoid situations where the same code works differently in CI and production, which would effectively defeat the purpose of using CI.
+Setting up the environment is an important task while configuring a pipeline. We're going to use an <code>ubuntu-18.04</code> virtual environment, because this is the version of Ubuntu we're going to be running in production. 18.04 is an LTS (long term support) version. It is important to replicate the same environment in CI as in production as closely as possible, to avoid situations where the same code works differently in CI and production, which would effectively defeat the purpose of using CI.
 
-Next we list the steps in the "build" job that the CI would need to perform. First it must checkout the code from git. `uses` keyword tells the workflow to run a specific action. An action is a reusable piece of code, like a function. Actions can be defined in your repository in a separate file or you can use the ones available in public repositories. Here we're using a public action `checkout` and we specify a version (`@v2`) to avoid potential breaking changes if a public action gets updated. The `checkout` action does what the name implies: it checkouts the project source code from git.
+Next we list the steps in the "build" job that the CI would need to perform. As we noticed in the last exercise, by default the virtual environment does not have any code in it, so we need to checkout the code from the repository. 
 
-Secondly, as the application is written in Javascript, Node.js must be set up in order to be able to utilise the commands that are specified in `package.json`. To set up Node.js, `actions/setup-node` action can be used. Version `12.x` is selected because it is the version the application is using.
-
-Lastly, the dependencies of the application must be installed. Just like on your own machine we execute `npm install`. The steps in the job should now look something like
+This an easy step:
 
 ```yml
 jobs:
-  super_simple_job:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+```
+
+The [uses](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsuses) keyword tells the workflow to run a specific <i>action</i>. An action is a reusable piece of code, like a function. Actions can be defined in your repository in a separate file or you can use the ones available in public repositories. 
+
+Here we're using a public action [actions/checkout](https://github.com/actions/checkout) and we specify a version (<code>@v2</code>) to avoid potential breaking changes if a public action gets updated. The <code>checkout</code> action does what the name implies: it checkouts the project source code from git.
+
+Secondly, as the application is written in JavasSript, Node.js must be set up in order to be able to utilise the commands that are specified in <code>package.json</code>. To set up Node.js, [actions/setup-node](https://github.com/actions/setup-node) action can be used. Version <code>12.x</code> is selected because it is the version the application is using in production environment.
+
+```js
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1 // highlight-line
+        with: // highlight-line
+          node-version: '12.x' // highlight-line
+```
+
+As we can see, the [with](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepswith) keyword is used to give a "parameter" to a specific action. Here the parameter specifies the version of Node.js we want to use.
+
+
+Lastly, the dependencies of the application must be installed. Just like on your own machine we execute <code>npm install</code>. The steps in the job should now look something like
+
+```js
+jobs:
+  simple_deployment_pipeline:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: '12.x'
-      - name: npm install
-        run: npm install
+      - name: npm install  // highlight-line
+        run: npm install  // highlight-line
 ```
 
 Now the environment should be completely ready for the job to run actual important tasks in!
 
 #### Lint
 
-After the environment has been set up we can run all the scripts from `package.json` like we would on our own machine. To lint the code all you have to do is add a step to run the `npm run eslint` command.
+After the environment has been set up we can run all the scripts from <code>package.json</code> like we would on our own machine. To lint the code all you have to do is add a step to run the  <code>npm run eslint</code> command.
 
-```yml
-- name: lint
-  run: npm run eslint
+```js
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: npm install 
+        run: npm install  
+      - name: lint  // highlight-line
+        run: npm run eslint // highlight-line
 ```
 
 </div>
 
 <div class="tasks">
 
-### Exercises 11.5.-11.6.
+### Exercises 11.5.-11.8.
 
 #### 11.5 Linting workflow
 
-Implement the "Lint" workflow and commit it to the repository. Navigate to "Actions" tab and click on your newly created workflow on the left. You should see that the workflow run has failed. There are one or more issues with the Pokedex repository that you will need to fix. Open up the workflow logs and investigate.
+Implement or <i>copy-paste</i> the "Lint" workflow and commit it to the repository. Use a new <i>yml</i> file for this workflow, you may call it e.g. <i>pipeline.yml</i>
 
-Make the necessary changes to the source code so that the lint workflow passes (do not make changes to the lint rules). Once you commit new code the workflow will run again and you will see updated output.
+Navigate to "Actions" tab and click on your newly created workflow on the left. You should see that the workflow run has failed:
 
-##### Build and test
+![Linting to workflow](../../images/11/5.png)
 
-Let's expand on the previous workflow that currently does the linting of the code. Edit the workflow and similarly to the lint command add commands for build and test (in this order as running the tests requires the code to be built).
+#### 11.6 Fix the code
 
-```yml
-- name: build
-  run: npm run build
-- name: test
-  run: npm test
-```
+There are some issues with the Pokedex repository that you will need to fix. Open up the workflow logs and investigate what is wrong.
 
-#### 11.6 Building and testing
+Couple of hints. One of the errors is best to be fixed by specifying proper <i>env</i> for linting, see how it is done [here](/en/part3/validation_and_es_lint#lint). One of the complaints concerning <code>console.log</code> statement could be taken care of by simple silencing the rule for that spesific line. Ask google how to do it.
 
-Rename the "Lint" workflow to "Lint, build and test", add tasks for building and testing the code and commit the workflow to the repository. Look at the workflow run output. This time the linting should cause no problems, but the test run will fail. Investigate which test fails and why and fix the issue in the code (do not change the tests).
+Make the necessary changes to the source code so that the lint workflow passes (do not make changes to the lint rules). Once you commit new code the workflow will run again and you will see updated output where all is green again:
+
+![Lint errorx fixed](../../images/11/6.png)
+
+#### 11.7 Building and testing
+
+Let's expand on the previous workflow that currently does the linting of the code. Edit the workflow and similarly to the lint command add commands for build and test (in this order as running the tests requires the code to be built). After this step outcome should look like this
+
+![Lint errorx fixed](../../images/11/7.png)
+
+As you might have guessed, there are some problems in code...
+
+#### 11.8 Back to green
+
+Investigate which test fails and why and fix the issue in the code (do not change the tests).
 
 Once you have fixed all the issues and the Pokedex is bug-free, the workflow run will succeed and show green!
 
