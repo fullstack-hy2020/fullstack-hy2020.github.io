@@ -340,6 +340,6 @@ The end result should be something like this
 
 ![e2e tests](../../images/11/9.png)
 
-End to end -tests are nice since they give us confidence that software work from end users perspective. The price we have to pay is the decreased speed. Now executing the whole workflow takes much longer.
+End to end -tests are nice since they give us confidence that software works from end users perspective. The price we have to pay is the decreased speed. Now executing the whole workflow takes much longer.
 
 </div>
