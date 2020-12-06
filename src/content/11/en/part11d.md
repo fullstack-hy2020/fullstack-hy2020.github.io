@@ -9,7 +9,7 @@ lang: en
 
 Your main branch of code should always remain <i>green</i>. Being green means that all the steps of your build pipeline should complete successfully: project should build successfully, test should run without errors, and the linter shouldn't have anything to complain about etc.
 
-Why is this important? You will likely deploy your code to production specifically from your main branch. Any failures in the main branch would mean that new features cannot be deployed to production until the issue is sorted out. Sometimes you will discover a nasty bug in production that was not caught by the CI/CD pipeline. In these cases you want to be able to revert the production environment back to a previous commit in a safe manner.
+Why is this important? You will likely deploy your code to production specifically from your main branch. Any failures in the main branch would mean that new features cannot be deployed to production until the issue is sorted out. Sometimes you will discover a nasty bug in production that was not caught by the CI/CD pipeline. In these cases you want to be able to roll the production environment back to a previous commit in a safe manner.
 
 How do you keep your main branch green then? Avoid committing any changes directly to the main branch. Instead, commit your code on a branch based on the freshest possible version of the main branch. Once you think the branch is ready to be merged into the master you create a GitHub Pull Request (also referred to as <abbr title="Pull Request">PR</abbr>).
 
@@ -37,26 +37,61 @@ GitHub's pull request interface presents a description and the discussion interf
 
 All the workflows we looked at so far were triggered by commits to master branch. To make the workflow run for each pull request we would have to update the trigger part of the workflow. We use the "pull_request" trigger for branch "master" and limit the trigger to events "opened" and "synchronize". Basically this means, that the workflow will run when a PR into master is opened or updated.
 
-```yml
+So let us change events that [trigger](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows) of workflow as follows:
+
+```js
 on:
-  pull_request:
-    branches: [master]
-    types: [opened, synchronize]
+  push:
+    branches:
+      - master
+  pull_request: // highlight-line
+    branches: [master] // highlight-line
+    types: [opened, synchronize] // highlight-line
 ```
+
+We shall soon make it impossible to push the code directly to master but in the meantime let us still run the workflow also for all the possible direct pushes to master.
 
 </div>
 
 <div class="tasks">
 
-### Exercise 11.14.
+### Exercises 11.14-15.
 
-We created a "Lint, build and test" workflow in Exercise 11.2. It does a useful task of ensuring good code quality, but since it is run on commits to master, it's catching the  problems too late!
+Our workflow is doing a nice job of ensuring good code quality, but since it is run on commits to master, it's catching the problems too late!
 
-Create a new branch, update the existing "Lint, build and test" workflow to run on new pull requests to master, commit your changes and open a pull request to master.
+#### 11.14 pull request
 
-In the "Conversation" tab of the pull request you should see your latest commit and the yellow status for checks in progress. Once the checks have run the status should turn to green.
+Update the trigger of the existing workflow as suggested above to run on new pull requests to master.
 
-Make sure all the checks pass.
+Create a new branch, commit your changes and open a pull request to master.
+
+_TODO: link to tutorial that shows how to work with branches_
+
+Note that when you open the pull request, make sure that you select here your own repository as the <i>base repository</i>. By default the selection is the smartly-depository and you do not want to do that:
+
+![](../../images/11/15a.png)
+
+In the "Conversation" tab of the pull request you should see your latest commit and the yellow status for checks in progress:
+
+![](../../images/11/16.png)
+
+Once the checks have run the status should turn to green. Make sure all the checks pass.
+
+#### 11.15 run deployment step only for master branch
+
+All looks good, but there is actually a pretty serious problem with the current workflow. All the steps, including the deployment are run also for pull requests. This is surely something we do not want!
+
+Fortunately there is an easy to problem, we can add a [if](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idif) condition to the deployment step that ensures that the step is executed only when te code is being merged or pushed to master.
+
+The workflow [context](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#contexts) gives various kind of information about the code the workflow is run.
+
+The relevant information is found in [github context](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#github-context), the field <i>event_name</i> tells what is the "name" of the event that triggered the workflow. When a pull request is merged, the name of the event is somehow paradoxically <i>push</i>, the same event that happens when pushing the code to repository. Thus, we get the desired behavior by adding the following condition to the step that deploys the code:
+
+```js
+if: ${{ github.event_name == 'push' }}
+```
+
+Push some more code to your branch, and ensure that the deployment step <i>is not executed</i> anymore. Then merge the branch to master and make sure that the depolyment happens.
 
 </div>
 
@@ -132,11 +167,11 @@ In the above case, the software we release is tested because the CI system makes
 
 <div class="tasks">
 
-### Exercises 11.15.-11.16.
+### Exercises 11.16.-11.17.
 
-#### 11.15 Adding versioning
+Let's extend our workflow so that it will automatically increase (bump) the version when a pull request is merged into master and tag the release with the version number. We will use an open-source action developed by a third-party: `anothrNick/github-tag-action`. You can read the documentation for this action in its [README](https://github.com/anothrNick/github-tag-action).
 
-Let's set up a workflow that will automatically increase (bump) the version when a pull request is merged into master and tag the release with the version number. We will use an open-source action developed by a third-party: `anothrNick/github-tag-action`. You can read the documentation for this action in its [README](https://github.com/anothrNick/github-tag-action).
+#### 11.16 Adding versioning
 
 Start by creating the workflow the same way as in previous exercises. Set push to master as the trigger and use the same environment as in other actions. The workflow should have one job with two steps. The first step is the already familiar `actions/checkout@v2` as we need have the latest code in the build environment. The second step should be the tagging action itself:
 
@@ -169,7 +204,7 @@ TODO pics
 
 ![Releases](../../images/11/part11d_02.png)
 
-#### 11.16 Skiping a commit for tagging and deployment
+#### 11.17 Skiping a commit for tagging and deployment
 
 In general the more often you deploy the master to production, the better. However there might be some valid reasons from time to time skip a particular commit or a merged pull request to becoming tagged and released to production.
 
@@ -233,9 +268,9 @@ To set up protection for your master branch, navigate to repository "Settings" f
 
 <div class="tasks">
 
-### Exercise 11.117
+### Exercise 11.18
 
-#### 11.17 Adding master protection
+#### 11.18 Adding master protection
 
 Add protection to your master branch. You should protect it to:
 - Require all pull request to be approved before merging

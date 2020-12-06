@@ -31,9 +31,9 @@ Let's go one step further. Let's set up our own notification system:
 
 <div class="tasks">
 
-### Exercise 11.12
+### Exercise 11.19
 
-#### 11.12 Build success/failure notification action
+#### 11.19 Build success/failure notification action
 
 Using the build from the previous section, set up a notification to either:
 1: Tell us that the build succeeded and the project is ready for deployment
@@ -74,7 +74,12 @@ What about the tasks that don't have a tool? You can automate these yourself wit
 
 <div class="tasks">
 
-### Exercises 11.13-11.14
+### Exercises 11.20-22
+
+#### 11.20
+
+Periodic ping
+
 #### 11.13 Average runtime notification action
 
 Let's combine the the past last 3 sections together: Write an action that will send the average run time for all `build`, `lint`, `test` and `deploy` actions in the repo the workflow is situated in to an email address for archiving. You will likely need to create an action that calls the GitHub API for this.
@@ -82,7 +87,7 @@ Let's combine the the past last 3 sections together: Write an action that will s
 Hint: Github provides a JS and a TS starter action for you to base your action on. These already import the relevant libraries and have some examples of how to use them.
 
 SKIP or REDFINE
-#### 11.14 Your own pipeline
+#### 11.21 Your own pipeline
 
 Build a simillar CI/CD-pipeline for some of your own products. A good candidate is the phonebook app that was built in parts 2 to 4 of the course, or bloglist built in part 5, or the redux anecdotes built in part 6. You may also use some app of your own here.
 
@@ -94,6 +99,6 @@ It is perhaps best to create a new repository for this exercise and simply copy 
 
 This is a long and perhaps quite a tought exercise, but this kind of situation where you have a "legacy code" and you need to build it a proper deployment pipeline is quite commoin in real life!
 
-#### 11.15 Protect master and ask for pr
+#### 11.22 Protect master and ask for pr
 
 </div>
