@@ -57,10 +57,6 @@ module.exports = {
       e: 'Fragmentit ja subskriptiot',
     },
     '9': {},
-<<<<<<< HEAD
-=======
-    '10': {},
->>>>>>> 2c7a2bae52d77770fa40b2dc37af6393477540c6
     '11': {},
   },
   en: {
@@ -126,15 +122,12 @@ module.exports = {
       c: 'Typing the express app',
       d: 'React with types',
     },
-<<<<<<< HEAD
-=======
     '10': {
       a: 'Introduction to React Native',
       b: 'React Native basics',
       c: 'Communicating with server',
       d: 'Testing and extending our application',
     },
->>>>>>> 2c7a2bae52d77770fa40b2dc37af6393477540c6
     '11': {
       a: 'Introduction to CI/CD',
       b: 'Getting started with GitHub Actions',
@@ -206,15 +199,12 @@ module.exports = {
       c: 'Typescript版的express应用',
       d: '利用Typescript编写React应用',
     },
-<<<<<<< HEAD
-=======
     '10': {
       a: 'React Native 介绍',
       b: 'React Native 入门',
       c: '与服务端通信',
       d: '测试与扩展我们的应用',
     },
->>>>>>> 2c7a2bae52d77770fa40b2dc37af6393477540c6
     '11': {},
   },
 };

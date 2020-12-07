@@ -26,11 +26,7 @@ export const PartBanner = ({ lang }) => {
                   'React router, custom hooks, styling app with CSS and webpack',
                   'GraphQL',
                   'Typescript',
-<<<<<<< HEAD
-                  '',
-=======
                   'React Native',
->>>>>>> 2c7a2bae52d77770fa40b2dc37af6393477540c6
                   'CI/CD',
                 ]
               : lang === 'zh'
@@ -45,11 +41,7 @@ export const PartBanner = ({ lang }) => {
                   'React router、自定义 hook，利用CSS和webpack给app添加样式',
                   'GraphQL',
                   'Typescript',
-<<<<<<< HEAD
-                  '',
-=======
                   'React Native',
->>>>>>> 2c7a2bae52d77770fa40b2dc37af6393477540c6
                   'CI/CD',
                 ]
               : [
@@ -63,11 +55,7 @@ export const PartBanner = ({ lang }) => {
                   'React router, custom-hookit, tyylikirjastot ja webpack',
                   'GraphQL',
                   'Typescript',
-<<<<<<< HEAD
-                  '',
-=======
                   'React Native',
->>>>>>> 2c7a2bae52d77770fa40b2dc37af6393477540c6
                   'CI/CD',
                 ];
 
