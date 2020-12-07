@@ -150,6 +150,7 @@ This is even more useful if we combine this with a history of all releases. If, 
 To meet some of the requirements listed above, we want to dedicate a separate server for running the tasks in continuous integration. Having a separate server for the purpose minimizes the risk that something else interferes with the CI/CD process and causes it to be unpredictable.
  
 There are two options: host our own server or use a cloud service (someone else's computer).
+
 ### Jenkins (and other self-hosted setups)
 
 Among the self-hosted options, [Jenkins](https://www.jenkins.io/) is the most popular. It's extremely flexible and there's a plugin to do almost anything (except that one thing you want to do). This is a great option for many applications, using a self-hosted setup means that the entire environment is under your control, the number of resources can be controlled, secrets (we'll elaborate a little more on security in later sections of this part) are never exposed to anyone else and you can do anything you want on the hardware.
@@ -158,27 +159,27 @@ Unfortunately, there is a downside. Jenkins is quite complicated to set up and s
 
 With self-hosted options, the billing is usually based on the hardware. You pay for the server. What you do on the server doesn't change the billing.
 
-#### GitHub Actions and other cloud based solutions
+#### GitHub Actions and other cloud-based solutions
 
-In a cloud hosted setup, the setup of the environment is not something you need to worry about. It's there, all you need to do is tell it what to do. Doing that usually involves putting a file in your repository and then telling the CI system to read the file (or to check your repository for that particular file). The actual CI config for the cloud based options is often a little simpler if you stay within what is considered "normal" usage. If you want to do something a little bit more special then cloud based options may become more limited or you may find it difficult to do that one specific task that the cloud platform just isn't built for.
+In a cloud-hosted setup, the setup of the environment is not something you need to worry about. It's there, all you need to do is tell it what to do. Doing that usually involves putting a file in your repository and then telling the CI system to read the file (or to check your repository for that particular file). The actual CI config for the cloud-based options is often a little simpler if you stay within what is considered "normal" usage. If you want to do something a little bit more special then cloud-based options may become more limited or you may find it difficult to do that one specific task that the cloud platform just isn't built for.
 
-In this part we'll look at a fairly normal use-case. The more complicated setups might, for example, make use of specific hardware resources, e.g. a GPU.
+In this part, we'll look at a fairly normal use-case. The more complicated setups might, for example, make use of specific hardware resources, e.g. a GPU.
 
-Aside from the configuration issue mentioned above, there are often resource limitations on could based platforms. In a self hosted setup, if a build is slow, you can just get a bigger server and throw more resources at it. In cloud based options, this may not be an option. For example, in [GitHub Actions](https://github.com/features/actions), the nodes your builds will run on have 2 vCPUs and 8GB of RAM.
+Aside from the configuration issue mentioned above, there are often resource limitations on could based platforms. In a self-hosted setup, if a build is slow, you can just get a bigger server and throw more resources at it. In cloud-based options, this may not be an option. For example, in [GitHub Actions](https://github.com/features/actions), the nodes your builds will run on have 2 vCPUs and 8GB of RAM.
 
-Cloud based options are also usually billed by build time which is something to consider.
+Cloud-based options are also usually billed by build time which is something to consider.
 
 #### Why pick one over the other
 
-In general, if you have a small to medium software project that doesn't have any special requirements (e.g. a need of a graphics card to run tests), a cloud based solution is probably best. The configuration is simple and you don't need to go to the hassle or expense of setting up your own system. For smaller projects especially, this should be cheaper.
+In general, if you have a small to medium software project that doesn't have any special requirements (e.g. a need for a graphics card to run tests), a cloud-based solution is probably best. The configuration is simple and you don't need to go to the hassle or expense of setting up your own system. For smaller projects especially, this should be cheaper.
 
-For larger projects where more resources are needed or in larger companies where there are multiple teams and projects to take advantage of it, a self hosted CI setup is probably the way to go.
+For larger projects where more resources are needed or in larger companies where there are multiple teams and projects to take advantage of it, a self-hosted CI setup is probably the way to go.
 
 #### Why use GitHub Actions for this course
 
-For this course we'll use GitHub Actions. It is an abvious choice since we're using GitHub anyway. We can get a CI solution working immediately without any hastle of setting up a server or configuring a third party cloud based service. 
+For this course, we'll use GitHub Actions. It is an obvious choice since we're using GitHub anyway. We can get a CI solution working immediately without any hassle of setting up a server or configuring a third-party cloud-based service. 
 
-Besides it is easy to take in use, GitHub Actions is a good choice from other respects. It might be the best cloud based solution at the moment. It has gained lots of popularity since it's initial release in November 2019. 
+Besides it is easy to take into use, GitHub Actions is a good choice from other respects. It might be the best cloud-based solution at the moment. It has gained lots of popularity since its initial release in November 2019. 
 
 </div>
 
