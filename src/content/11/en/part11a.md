@@ -39,7 +39,7 @@ If you have proposed changes to the material of this course, you have already ma
 
 #### Build
 
-The term 'build' has different meanings in different languages. In some languages, there is no need for a build step. 
+The term "build" has different meanings in different languages. In some languages, there is no need for a build step. 
 
 In general when we talk about building we mean preparing software to run on the platform where it's intended to run. This might mean, for example, that if you've written your application in TypeScript, and you intend to run it on Node, then the build step might be transcoding the TS into JS.
 
@@ -107,13 +107,13 @@ There are other advantages to extending this setup:
 It's important to remember that CI/CD is not the goal. The goal is better, faster software development with fewer preventable bugs and better team cooperation. 
 
 To that end, CI should always be configured to the task at hand and the project itself. The end goal should be kept in mind at all times. You can think of CI as the answer to these questions:
- - How to I make sure that tests run on all code that will be deployed?
+ - How do I make sure that tests run on all code that will be deployed?
  - How do I make sure that my master branch is deployable at all times?
  - How do I ensure that my builds will be consistent and will always work on the platform it'd be deploying to?
  - How do I make sure that the changes don't overwrite each other?
  - How do I make deployments happen at the click of a button or automatically when I merge to master?
 
-There exists actually even scientific evidence on the numerous benefits the usage of CI/CD has. According to a large stydy reported in the book [Accelerate: The Science of Lean Software and DevOps: Building and Scaling High Performing Technology Organizations](https://www.amazon.com/Accelerate-Software-Performing-Technology-Organizations/dp/1942788339), the use of CI/CD correlates heavily on organisatioal success (e.g. improves profitability and product quality, increases marketshare, shortens the time to market) and makes developers happier by the reducing burnout. 
+There exists actually even scientific evidence on the numerous benefits the usage of CI/CD has. According to a large study reported in the book [Accelerate: The Science of Lean Software and DevOps: Building and Scaling High Performing Technology Organizations](https://www.amazon.com/Accelerate-Software-Performing-Technology-Organizations/dp/1942788339), the use of CI/CD correlates heavily with organizational success (e.g. improves profitability and product quality, increases market share, shortens the time to market) and makes developers happier by the reducing burnout.
 
 #### Documented behavior
 
@@ -121,19 +121,19 @@ There's an old joke that a bug is just an "undocumented feature". We'd like to a
 
 It's possible to cover all cases you can think of and still have gaps where the developer will do something "creative" that you didn't think of, so it's important to have the process fail safely in this case. 
 
-For example, if we have the case mentioned above where the label changes mid way through the build. If we didn't think of this beforehand, it might be best to fail the build and alert the user if something we weren't expecting happened. The alternative, where we deploy the wrong type of version anyway, could result in bigger problems, so failing and notifying the developer is the safest way out of this situation.
+For example, if we have the case mentioned above where the label changes midway through the build. If we didn't think of this beforehand, it might be best to fail the build and alert the user if something we weren't expecting happened. The alternative, where we deploy the wrong type of version anyway, could result in bigger problems, so failing and notifying the developer is the safest way out of this situation.
 
 #### Know the same thing happens every time
 
 We might have the best tests imaginable for our software, tests that catch every possible issue. That's great, but they're useless if we don't run them on the code before it's deployed.
 
-We need to guarantee that the tests will run and we need to be sure that they run against the code that will actually be deployed. For example, it's no use if the tests are run against Alice's branch if they would then fail if they're run against master after Alice's changes are merged. We're deploying from master so we need to make sure that the tests are run against a copy of master with Alice's changes merged in.
+We need to guarantee that the tests will run and we need to be sure that they run against the code that will actually be deployed. For example, it's no use if the tests are run against Alice's branch if they would then fail if they're run against master after Alice's changes are merged. We're deploying from the master so we need to make sure that the tests are run against a copy of master with Alice's changes merged in.
 
 This brings us to a critical concept. We need to make sure that the same thing happens every time. Or rather that the required tasks are all performed and in the right order.
 
 #### Code always kept deployable
 
-Having code that's always deployable (and provably so) makes life easier. This is especially so when the master branch contains the code running in the production environment. For example, if a bug is found and it needs to be fixed, you can pull a copy of master (knowing it is the code running in production), fix the bug and make a pull request back to master. This is relatively straight forward. 
+Having code that's always deployable (and provably so) makes life easier. This is especially so when the master branch contains the code running in the production environment. For example, if a bug is found and it needs to be fixed, you can pull a copy of master (knowing it is the code running in production), fix the bug, and make a pull request back to master. This is relatively straight forward. 
 
 If, on the other hand, master and production are very different and master is not deployable, then you would have to find out what code <i>is</i> running in production, pull a copy of that, fix the bug, figure out a way to push it back, then work out how to deploy that specific commit. That's not great and would have to be a completely different workflow from a normal deployment.
 
@@ -147,16 +147,16 @@ This is even more useful if we combine this with a history of all releases. If, 
 
 ### Types of CI setup
 
-To meet some of the requirements listed above, we want to dedicate a separate server for running the tasks in continuous integration. Having a separate server for the purpose minimizes the risk that something else interferes the CI/CD process and causes it to be unpredictable.
+To meet some of the requirements listed above, we want to dedicate a separate server for running the tasks in continuous integration. Having a separate server for the purpose minimizes the risk that something else interferes with the CI/CD process and causes it to be unpredictable.
  
-There are two optins: host our own server or use a cloud service (some one else's computer).
-### Jenkins (and other self hosted setups)
+There are two options: host our own server or use a cloud service (someone else's computer).
+### Jenkins (and other self-hosted setups)
 
-Among the self hosted options, [Jenkins](https://www.jenkins.io/) is the most popular. It's extremely flexible and there's a plugin to do almost anything (except that one thing you want to do). This is a great option for many applications, using a self hosted setup means that the entire environment is under your control, the amount of resources can be controlled, secrets (we'll elaborate a little more on security in later sections of this part) are never exposed to anyone else and you can do anything you want on the hardware.
+Among the self-hosted options, [Jenkins](https://www.jenkins.io/) is the most popular. It's extremely flexible and there's a plugin to do almost anything (except that one thing you want to do). This is a great option for many applications, using a self-hosted setup means that the entire environment is under your control, the number of resources can be controlled, secrets (we'll elaborate a little more on security in later sections of this part) are never exposed to anyone else and you can do anything you want on the hardware.
 
-Unfortunately, there is a downside. Jenkins is quite complicated to set up and secure. It's very flexible but that means that there's often quite a bit of boilerplate/tempate code involved to get builds working. With Jenkins specifically, it also means that CI/CD must be set up with either Jenkins' own domain specific language or a flaour of Groovy. There's also the issue of hardware failure which can be an issue if the setup sees heavy use.
+Unfortunately, there is a downside. Jenkins is quite complicated to set up and secure. It's very flexible but that means that there's often quite a bit of boilerplate/template code involved to get builds working. With Jenkins specifically, it also means that CI/CD must be set up with either Jenkins' own domain-specific language or a flavor of Groovy. There's also the issue of hardware failure which can be an issue if the setup sees heavy use.
 
-With self hosted options, the billing is usually based on the hardware. You pay for the server. What you do in the server doesn't change the billing.
+With self-hosted options, the billing is usually based on the hardware. You pay for the server. What you do on the server doesn't change the billing.
 
 #### GitHub Actions and other cloud based solutions
 
