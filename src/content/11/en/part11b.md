@@ -42,6 +42,8 @@ GitHub Actions have a great advantage over self hosted solutions: the repository
 ### Exercise 11.2.
 
 In most exercises in this part we are building a CI/CD pipeline for small project found in [this example project repository](https://github.com/smartlyio/fullstackopen-cicd).
+
+Note that the code does not work with node version 15. If you happen to have that version, please downgrade to 14 or you are on your own. 
 #### 11.2 the example project
 
 First thing you'll want to do is to fork the example repository under your name. What it essentially does is it creates a copy of the repository under your GitHub user profile for your own use. 
