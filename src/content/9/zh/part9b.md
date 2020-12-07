@@ -43,9 +43,11 @@ lang: zh
 
 
 <!-- You can install both <i>ts-node</i> and the official <i>typescript</i> package globally by running <i>npm install -g ts-node typescript</i>. -->
-您可以通过运行<i>npm install -g ts-node typescript</i>在全局范围内同时安装<i>ts-node</i> 和官方<i>TypeScript</i> 包。
+在全局范围内同时安装<i>ts-node</i> 和官方<i>TypeScript</i> 包。
 
-
+```
+npm install -g ts-node typescript
+```
 
 <!-- If you can't or don't want to install global packages, you can create an npm project which has the required dependencies and run your scripts in it.  -->
 如果您不能或不想全局安装，您可以创建一个具有所需依赖项的 npm 项目，并在其中运行您的脚本。
@@ -552,7 +554,7 @@ Exercises 9.1.-9.7. 都会开发到同一个node 项目。 使用<i>npm init</i>
 <!-- The <i>tsconfig.json</i> file is used to define how the TypeScript compiler should interpret the code, how strictly the compiler should work, which files to watch or ignore, and and [much much more](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html). -->
 这个 <i>tsconfig.json</i> 文件用于定义TypeScript编译器应该如何解释代码，编译器应该如何严格地工作，哪些文件应该监视或忽略，以及[更多配置](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)。
 <!-- For now we will only use the compiler option [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny), that makes it mandatory to have types for all variables used. -->
-现在我们只使用编译器选项[noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny)，这会使得所有使用的变量都必须有类型。
+现在我们只使用编译器选项[noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny)，这会使得所有使用的变量都必须有类型。
 
 #### 9.1 Body mass index
 <!-- Create the code of this exercise to file <i>bmiCalculator.ts</i> -->

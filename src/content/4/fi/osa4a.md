@@ -216,7 +216,7 @@ const mongoose = require('mongoose')
 
 logger.info('connecting to', config.MONGODB_URI)
 
-mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
   .then(() => {
     logger.info('connected to MongoDB')
   })
@@ -358,7 +358,7 @@ const blogSchema = mongoose.Schema({
 const Blog = mongoose.model('Blog', blogSchema)
 
 const mongoUrl = 'mongodb://localhost/bloglist'
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 
 app.use(cors())
 app.use(express.json())
@@ -714,7 +714,7 @@ Paluuarvo voi olla esim. seuraavassa muodossa:
 }
 ```
 
-**Huom**, että kun vertailet olioita, metodi [toEqual](https://jestjs.io/docs/en/expect#toequalvalue) on todennäköisesti se mitä haluat käyttää sillä [toBe](https://jestjs.io/docs/en/expect#tobevalue)-vertailu, joka sopii esim. lukujen ja merkkijonojen vertailuun vaatisi olioiden vertailussa, että oliot ovat samat, pelkkä sama sisältöisyys ei riitä.
+**Huomaa**, että kun vertailet olioita, metodi [toEqual](https://jestjs.io/docs/en/expect#toequalvalue) on todennäköisesti se mitä haluat käyttää sillä [toBe](https://jestjs.io/docs/en/expect#tobevalue)-vertailu, joka sopii esim. lukujen ja merkkijonojen vertailuun vaatisi olioiden vertailussa, että oliot ovat samat, pelkkä sama sisältöisyys ei riitä.
 
 Tee myös tämän ja seuraavien kohtien testit kukin oman <i>describe</i>-lohkon sisälle.
 

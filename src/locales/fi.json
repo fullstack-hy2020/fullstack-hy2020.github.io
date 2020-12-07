@@ -1,0 +1,36 @@
+{
+  "common": {
+    "nextPart": "Seuraava osa",
+    "previousPart": "Edellinen osa",
+    "readMore": "Lue lisää",
+    "proposeChanges": "Ehdota muutosta materiaalin sisältöön"
+  },
+  "searchPage": {
+    "noMatches": "Hakutuloksia ei löytynyt",
+    "matchesTitle": "Löytyi {{count}} hakutulosta hakusanalle \"{{query}}\""
+  },
+  "navigation": {
+    "aboutCourse": "Kurssista",
+    "courseContents": "Kurssin sisältö",
+    "faq": "FAQ",
+    "partners": "Kurssilla mukana",
+    "challenge": "Haaste",
+    "searchLinkSrLabel": "Hae materiaalista"
+  },
+  "challengePage": {
+    "registerButton": "Ilmoita yrityksesi mukaan haasteeseen!",
+    "nameLabel": "Nimi",
+    "namePlaceholder": "Matti Meikäläinen",
+    "titleLabel": "Titteli",
+    "companyLabel": "Yritys",
+    "companyPlaceholder": "Yritys Oy",
+    "phoneLabel": "Puhelinnumero",
+    "emailLabel": "Sähköpostiosoite",
+    "whereDidYouHearLabel": "Mistä kuulit Full Stack -haasteesta?",
+    "submitButton": "Lähetä",
+    "submitSuccessMessage": "Kiitos! Otamme teihin yhteyttä pian!",
+    "participantsTitle": "Nämä yritykset ovat mukana Full Stack -haasteessa",
+    "coOperationTitle": "Yhteistyössä",
+    "infoButton": "Lisätietoa haasteesta"
+  }
+}

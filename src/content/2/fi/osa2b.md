@@ -293,8 +293,8 @@ const App = (props) => {
     <div>
       <h1>Notes</h1>
       <ul>
-        {notesToShow.map((note, i) => // highlight-line
-          <Note key={i} note={note} />
+        {notesToShow.map(note => // highlight-line
+          <Note key={note.id} note={note} />
         )}
       </ul>
       // ...
@@ -327,7 +327,7 @@ Eli jos tilan arvo <em>showAll</em> on epätosi, muuttuja <em>notesToShow</em> s
 notes.filter(note => note.important === true)
 ```
 
-vertailu-operaatio on oikeastaan turha, koska <em>note.important</em> on arvoltaan joko <i>true</i> tai <i>false</i>, eli riittää kirjoittaa
+Vertailuoperaatio on oikeastaan turha, koska <em>note.important</em> on arvoltaan joko <i>true</i> tai <i>false</i>, eli riittää, kun kirjoittaa:
 
 ```js
 notes.filter(note => note.important)
@@ -367,8 +367,8 @@ const App = (props) => {
       </div>      
       // highlight-end  
       <ul>
-        {notesToShow.map((note, i) => // highlight-line
-          <Note key={i} note={note} />
+        {notesToShow.map(note =>
+          <Note key={note.id} note={note} />
         )}
       </ul>
       // ...

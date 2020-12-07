@@ -156,7 +156,7 @@ Assuming our applications has saved the information of three people, the respons
 ```
 
 The query fetching the information of all of the people, _allPersons_, is a bit more complicated. Because the query returns a list of <i>Person</i>-objects, the query must describe 
-<i>which fields</i> of the objects the query [returns](https://graphql.org/learn/queries/#fields):
+<i>which [fields](https://graphql.org/learn/queries/#fields)</i> of the objects the query returns:
 ```js
 query {
   allPersons {
@@ -267,8 +267,8 @@ Let's implement a GraphQL-server with today's leading library [Apollo -server](h
 
 Create a new npm-project with _npm init_ and install the required dependencies.
 
-```js
-npm install --save apollo-server graphql
+```bash
+npm install apollo-server graphql
 ```
 
 The initial code is as follows: 
@@ -457,7 +457,7 @@ The resolver does not need the first parameter _root_.
  
 
  
- In fact all resolver functions are given [four parameters](https://www.apollographql.com/docs/graphql-tools/resolvers.html#Resolver-function-signature). With JavaScript the parameters don't have to be defined, if they are not needed. We will be using the first and the third parameter of a resolver later in this part. 
+ In fact all resolver functions are given [four parameters](https://www.graphql-tools.com/docs/resolvers#resolver-function-signature). With JavaScript the parameters don't have to be defined, if they are not needed. We will be using the first and the third parameter of a resolver later in this part. 
 
 ### The default resolver
 
@@ -479,7 +479,7 @@ the server knows to send back exactly the fields required by the query. How does
 A GraphQL-server must define resolvers for <i>each</i> field of each  type in the schema. 
 We have so far only defined resolvers for fields of the type <i>Query</i>, so for each query of the application. 
 
-Because we did not define resolvers for the fields of the type <i>Person</i>, Apollo has defined [default resolvers](https://www.apollographql.com/docs/graphql-tools/resolvers.html#Default-resolver) for them. 
+Because we did not define resolvers for the fields of the type <i>Person</i>, Apollo has defined [default resolvers](https://www.graphql-tools.com/docs/resolvers/#default-resolver) for them. 
 They work like the one shown below: 
 
 
@@ -900,7 +900,7 @@ Mutation: {
 ```
 
 
-The mutation finds the person to be by the field <i>name</i>.
+The mutation finds the person to be updated by the field <i>name</i>.
 
 The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>.
 

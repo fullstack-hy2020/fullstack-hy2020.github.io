@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-This course is an introduction to modern web development with JavaScript. The main focus is on single page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. New for this year's course is a part on TypeScript.
+This course is an introduction to modern web development with JavaScript. The main focus is on single page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. New for this year's course are parts on TypeScript and React Native.
 
 Other topics include debugging applications, configuration, managing runtime environments and NoSQL databases.
 
@@ -29,7 +29,7 @@ The course material is based on incrementally expanding example applications, wh
 
 ### Taking the course
 
-The course contains ten parts, the first of which is numbered 0 for historical reasons. A part corresponds loosely to one week (averaging 15-20 hours) of studying, but the speed of completing the course is flexible.
+The course contains eleven parts, the first of which is numbered 0 for historical reasons. A part corresponds loosely to one week (averaging 15-20 hours) of studying, but the speed of completing the course is flexible.
 
 Proceeding from part <i>n</i> to part <i>n+1</i> is not sensible before good enough know-how of the topics of part <i>n</i>  has been achieved. In pedagogic terms, the course uses [mastery learning](https://en.wikipedia.org/wiki/Mastery_learning), and you are only intended to proceed to the next part after doing enough of the exercises of the previous part.
 
@@ -37,7 +37,7 @@ You are expected to do <i>at least</i> all of the exercises that are not marked 
 
 The speed of completing the course is quite flexible, and exercises can be submitted until 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) on 10 January 2021.
 
-Statistics on the time used for exercises which have already been submitted on different parts of this course can be found on the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Exercise completion time statistics can be found via the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 ### Grading
 
@@ -99,6 +99,9 @@ By submitting at least 24/27 of the exercises for part 9 of the course, TypeScri
 
 Exercises in parts 8 and 9 do not count towards the grade for the 5-7 credit course.
 
+#### React Native part's credits
+
+By submitting exercises for part 10 of the courses, React Native, you can earn either one or two additional credits. Earning one credit requires you to submit at least 19 exercises whereas earning two credits requires you to submit at least 26 exercises. More information about the part's prerequisites, exercise submission and credits can be found in the [part 10](/en/part10/introduction_to_react_native).
 
 ### How to get your credits
 
@@ -134,7 +137,7 @@ You can just pick up where you left off! If you wish to resubmit a whole part, p
 
 #### Expanding on other instances of this course
 
-You can substitute <i>parts</i> of this course with parts you have previously submitted.  For example, if you have previously completed the three credit course, you can substitute parts 0-3 of this course with the parts you have previously completed.  You can only substitute parts in sequence, so you cannot substitute, for example, parts 0 and 2 but now complete part 1.
+You can substitute <i>parts</i> of this course with parts you have previously submitted.  For example, if you have previously completed the three credit course, you can substitute parts 0-3 of this course with the parts you have previously completed.  You can only substitute parts in sequence, so you cannot substitute, for example, parts 0 and 2 but not complete part 1.
 
 You can only substitute whole parts. For example, if you have previously submitted 50% of exercises in a part, you cannot substitute those exercises - you would need to start over on that part of the course.
 
@@ -149,7 +152,7 @@ If you have previously passed the course exam (excluding the exam for the three 
 * Part 6, which is about Redux, concentrates on the new, hook-based, Redux API.
 * The material on react-router in part 7 has also been updated to use Hook API. Semantic UI React has been replaced with the MaterialUI library due to lack of maintenance.
 * Part 8 on GraphQL has major updates, especially on Apollo Client, which finally has stable Hook-based APIs.
-* Part 9 on TypeScript is completely new.
+* Part 9 on TypeScript and part 10 on React Native is completely new.
 
 Last year's course material can be found [here](https://fullstackopen-2019.github.io/).
 
@@ -167,23 +170,36 @@ Many of the exercises build a larger application bit by bit. In these cases, sub
 
 ### Sign up for the exam
 
-For official university credits you need to pass the course exam that is done in Open University Moodle.
-Note that it is only possible to register for the exam if you have a Finnish social security number!
+For official university credits you need to pass the course exam that is done in Open University Moodle. Note that it is only possible to register for the exam if you have a Finnish social security number or you are able to register for the course in Helsinki in person!
 
 Follow the instructions below to gain access to the course Moodle space:
--	Register for the course through [Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=131840261)
--	**Wait for 24 hours** before activating your University of Helsinki user ID. You will receive instructions regarding the activation process the following day.
--	Sign in on the Open University [course page](https://courses.helsinki.fi/fi/aytkt21009en/131840261), where you will find the enrolment key for the Moodle space.
--	Sign into the [Moodle space](https://moodle.helsinki.fi/login/index.php) with your University of Helsinki user ID and the enrolment key.
+
+- Enroll on the course through Open University by 9 Jan 2021 [here](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=131840261)
+- You will receive the Moodle-link and the course key through email within 24 hours after course registration.
+- User ID. Do you study at University of Helsinki or other [HAKA member institution](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners)?
+    - If yes, use your username and password to log in to Moodle.
+    - If no, please activate your University of Helsinki user ID to access Moodle. You will receive more information on the user ID after registration through email.
+- Sign into the Moodle space with your University of Helsinki / HAKA user ID and the enrolment key.
+- After course enrollment, save your University of Helsinki student ID number to the [my submissions tab](https://studies.cs.helsinki.fi/stats/myinfo) in the submission system.
+- If you used your institution’s HAKA identification to log in to Moodle, please send a message to avoin-student@helsinki.fi and ask for your University of Helsinki student ID.
+  - Send the message from the same email address you used for course enrollment.
+  - Include your full name, date of birth, name of the course in the email.
 
 Please note!
 
-- **Did you wait 24 hours** as the above instructions say?
 - You only need the Moodle access for the exam, not for accessing the course certificate.
--	Registration for the exam through the Open University is possible until 9 January 2021.
 - Credits for the course are only available to students who have successfully registered for the course through the Open University and completed the course according to the instructions.
 
-Note that you also have to save your student ID number to the <i>my submissions</i> tab in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Electronic enrollment is available if you meet one of the following criteria:
+
+You have a Finnish personal identity number (format: xxxxxxxx-xxxx), or an online banking ID, or
+
+- you are a student at the University of Helsinki, or 
+- you are a student at another [HAKA member institution](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners).
+
+After course enrollment: Note that you also have to save your student ID number to the my submissions tab in the [submission system](https://studies.cs.helsinki.fi/stats/myinfo) . If you used your institution’s HAKA identification to log in to Moodle, please send a message to avoin-student@helsinki.fi and ask for your University of Helsinki student ID.
+
+Include your full name, email address used for enrollment, date of birth, and the name of the course in the email.
 
 ### Full stack project
 
@@ -199,7 +215,7 @@ For more information, see the [Open University page](https://courses.helsinki.fi
 
 ### Interview promise
 
-Our collaborators, [Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/), [Elisa](https://elisa.fi/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (9 + 10).
+Our collaborators, [Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (9 + 10).
 
 This means that the student can, if they so choose, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits.
 

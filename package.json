@@ -6,11 +6,13 @@
   "dependencies": {
     "anchorate": "^1.2.3",
     "axios": "^0.18.0",
+    "classnames": "^2.2.6",
     "gatsby": "^2.0.53",
     "gatsby-image": "^2.0.20",
     "gatsby-plugin-canonical-urls": "^2.0.12",
     "gatsby-plugin-google-analytics": "^2.0.16",
     "gatsby-plugin-i18n": "^0.4.2",
+    "gatsby-plugin-local-search": "^2.0.0",
     "gatsby-plugin-manifest": "^2.0.9",
     "gatsby-plugin-offline": "^2.0.16",
     "gatsby-plugin-react-helmet": "^3.0.2",
@@ -26,6 +28,7 @@
     "gatsby-transformer-remark": "^2.1.19",
     "gatsby-transformer-sharp": "^2.1.8",
     "html-react-parser": "^0.6.0",
+    "i18next": "^19.7.0",
     "lodash": "^4.17.19",
     "node-sass": "^4.11.0",
     "prismjs": "^1.15.0",
@@ -33,7 +36,10 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-ga": "^2.5.7",
-    "react-helmet": "^5.2.0"
+    "react-helmet": "^5.2.0",
+    "react-i18next": "^11.7.2",
+    "react-use-flexsearch": "^0.1.1",
+    "use-debounce": "^3.4.3"
   },
   "keywords": [
     "fullstack",

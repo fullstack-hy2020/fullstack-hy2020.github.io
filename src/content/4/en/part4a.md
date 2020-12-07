@@ -38,7 +38,7 @@ After making the changes to the directory structure of our project, we end up wi
 <!-- Olemme toistaiseksi tulostelleet koodista erilaista logaustietoa komennoilla  <i>console.log</i> ja <i>console.error</i>, tämä ei ole kovin järkevä käytäntö. Eristetään kaikki konsoliin tulostelu omaan moduliinsa <i>utils/logger.js</i>: -->
 So far we have been using <i>console.log</i> and <i>console.error</i> to print different information from the code. 
 However, this is not a very good way to do things. 
-Let's separate all printing to the console to it's own module <i>utils/logger.js</i>:
+Let's separate all printing to the console to its own module <i>utils/logger.js</i>:
 
 ```js
 const info = (...params) => {
@@ -226,12 +226,12 @@ const mongoose = require('mongoose')
 
 logger.info('connecting to', config.MONGODB_URI)
 
-mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
   .then(() => {
     logger.info('connected to MongoDB')
   })
   .catch((error) => {
-    logger.error('error connection to MongoDB:', error.message)
+    logger.error('error connecting to MongoDB:', error.message)
   })
 
 app.use(cors())
@@ -289,8 +289,6 @@ The responsibility of establishing the connection to the database has been given
 
 ```js
 const mongoose = require('mongoose')
-
-mongoose.set('useFindAndModify', false)
 
 const noteSchema = new mongoose.Schema({
   content: {
@@ -373,7 +371,7 @@ const blogSchema = new mongoose.Schema({
 const Blog = mongoose.model('Blog', blogSchema)
 
 const mongoUrl = 'mongodb://localhost/bloglist'
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 
 app.use(cors())
 app.use(express.json())
@@ -639,7 +637,7 @@ const average = array => {
 If the length of the array is 0 then we return 0, and in all other cases we use the _reduce_ method to calculate the average.
 
 
-There's a few things to notice about the tests that we just wrote. We defined a <i>describe</i> block around the tests that was given the name _average_:
+There are a few things to notice about the tests that we just wrote. We defined a <i>describe</i> block around the tests that was given the name _average_:
 
 ```js
 describe('average', () => {

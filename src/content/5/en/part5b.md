@@ -353,6 +353,8 @@ const NoteForm = ({ createNote }) => {
     </div>
   )
 }
+
+export default NoteForm
 ```
 
 <!-- Tilan muuttuja <i>newNote</i> ja sen muutokseta huolehtiva tapahtumankäsittelijä on siirretty komponentista _App_ lomakkeesta huolehtivaan komponenttiin. -->
@@ -559,12 +561,12 @@ The form closes when a new blog is created.
 Separate the form for creating a new blog into its own component (if you have not already done so), and 
 move all the states required for creating a new blog to this component. 
 
-The component must work like the <i>NewNote</i> component from the [material](/en/part5/props_children_and_proptypes) of this part.
+The component must work like the <i>NoteForm</i> component from the [material](/en/part5/props_children_and_proptypes) of this part.
 
 #### 5.7* Blog list frontend, step7
 
 <!-- Lisää yksittäiselle blogille nappi, jonka avulla voi kontrolloida näytetäänkö kaikki blogiin liittyvät tiedot. -->
-Let's add each blog a button, which controls if all of the details about the blog are shown or not.
+Let's add a button to each blog, which controls whether all of the details about the blog are shown or not.
 
 <!-- Klikkaamalla nappia sen täydelliset tiedot aukeavat. -->
 Full details of the blog open when the button is clicked.
@@ -671,8 +673,8 @@ We would like to enforce that when the <i>Togglable</i> component is used, the b
 
 The expected and required props of a component can be defined with the [prop-types](https://github.com/facebook/prop-types) package. Let's install the package:
 
-```js
-npm install --save prop-types
+```shell
+npm install prop-types
 ```
 
 We can define the <i>buttonLabel</i> prop as a mandatory or <i>required</i> string-type prop as shown below:
@@ -732,10 +734,10 @@ Create-react-app has installed ESlint to the project by default, so all that's l
 
 *NB:* do not run the _eslint --init_ command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
 
-Next, we will start testing the frontend and in order to avoid undesired and irrelevant linter errors we will install the [eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest) package:
+Next, we will start testing the frontend and in order to avoid undesired and irrelevant linter errors we will install the [eslint-plugin-jest](https://www.npmjs.com/package/eslint-plugin-jest) package:
 
-```js
-npm add --save-dev eslint-plugin-jest
+```bash
+npm install --save-dev eslint-plugin-jest
 ```
 
 Let's create a <i>.eslintrc.js</i> file with the following contents:
@@ -788,11 +790,16 @@ module.exports = {
       ],
       "no-console": 0,
       "react/prop-types": 0
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }
 ```
 
-NOTE: If you are using Visual Studio Code together with ESLint plugin, you might need to add additional workspace setting for it to work. If you are seeing ```Failed to load plugin react: Cannot find module 'eslint-plugin-react' ``` additional configuration is needed. Adding line ```"eslint.workingDirectories": [{ "mode": "auto" }] ``` to settings.json in the workspace seems to work. See [here](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807) for more information. 
+NOTE: If you are using Visual Studio Code together with ESLint plugin, you might need to add additional workspace setting for it to work. If you are seeing ```Failed to load plugin react: Cannot find module 'eslint-plugin-react'``` additional configuration is needed. Adding the line ```"eslint.workingDirectories": [{ "mode": "auto" }]``` to settings.json in the workspace seems to work. See [here](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807) for more information. 
 
 Let's create [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) file with the following contents to the repository root
 

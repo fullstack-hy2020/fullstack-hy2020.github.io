@@ -6,13 +6,13 @@ lang: zh
 ---
 
 <div class="content">
-<!-- During the course, we have a goal and a need to learn a sufficient amount of Javascript in addition to web development. -->
+<!-- During the course, we have a goal and a need to learn a sufficient amount of JavaScript in addition to web development. -->
 在本课程中，除了网页开发，我们还有一个目标和需求，就是学习足量的 JavaScript 知识。
-<!-- Javascript has advanced rapidly the last few years and in this course we use features from the newer versions. The official name of the Javascript standard is [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). At this moment, the latest version is the one released in June of 2019 with the name [ECMAScript® 2019](http://www.ecma-international.org/ecma-262/10.0/index.html), otherwise known as ES10. -->
+<!-- JavaScript has advanced rapidly the last few years and in this course we use features from the newer versions. The official name of the JavaScript standard is [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). At this moment, the latest version is the one released in June of 2019 with the name [ECMAScript® 2019](http://www.ecma-international.org/ecma-262/10.0/index.html), otherwise known as ES10. -->
 
-Javascript 在过去的几年里发展非常迅速，在本课程中，我们将使用新版本的特性。 JavaScript 标准的正式名称是[ECMAScript](https://en.wikipedia.org/wiki/ECMAScript)。 目前（2020年3月，译者注），最新的版本是2019年6月发布的，名为[ECMAScript 2019](http://www.ecma-international.org/ecma-262/10.0/index.html) ，即ES10。 
+JavaScript 在过去的几年里发展非常迅速，在本课程中，我们将使用新版本的特性。 JavaScript 标准的正式名称是[ECMAScript](https://en.wikipedia.org/wiki/ECMAScript)。 目前（2020年3月，译者注），最新的版本是2019年6月发布的，名为[ECMAScript 2019](http://www.ecma-international.org/ecma-262/10.0/index.html) ，即ES10。 
 
-<!-- Browsers do not yet support all of Javascript's newest features. Due to this fact, a lot of code run in browsers has been <i>transpiled</i> from a newer version of Javascript to an older, more compatible version. -->
+<!-- Browsers do not yet support all of JavaScript's newest features. Due to this fact, a lot of code run in browsers has been <i>transpiled</i> from a newer version of JavaScript to an older, more compatible version. -->
 
 浏览器还不能支持所有 JavaScript 的最新特性。 基于这个事实，许多在浏览器中运行的代码需要从一个新版本的 JavaScript 转译到了一个更旧、更兼容的版本。
 
@@ -20,28 +20,28 @@ Javascript 在过去的几年里发展非常迅速，在本课程中，我们将
 
 如今，最流行的转译方法是使用 [Babel](https://babeljs.io/)。 在使用 create-React-app 创建的 React 应用中转译是自动配置好的。 我们将在本课程的[第7章节](/zh/part7)中仔细研究转译的配置。
 
-<!-- [Node.js](https://nodejs.org/en/) is a Javascript runtime environment based on Google's [chrome V8](https://developers.google.com/v8/) Javascript engine and works practically anywhere - from servers to mobile phones. Let's practice writing some Javascript using Node. It is expected that the version of Node.js installed on your machine is at least version <i>10.18.0.</i>. The latest versions of Node already understand the latest versions of Javascript, so the code does not need to be transpiled. -->
+<!-- [Node.js](https://nodejs.org/en/) is a JavaScript runtime environment based on Google's [chrome V8](https://developers.google.com/v8/) JavaScript engine and works practically anywhere - from servers to mobile phones. Let's practice writing some JavaScript using Node. It is expected that the version of Node.js installed on your machine is at least version <i>10.18.0.</i>. The latest versions of Node already understand the latest versions of JavaScript, so the code does not need to be transpiled. -->
 [Node.js](https://nodejs.org/en/)是一个基于谷歌的 [chrome V8](https://developers.google.com/v8/) 引擎的 JavaScript 运行时环境，可以在任何地方工作，从服务端到移动端。 让我们练习使用 Node 编写一些 JavaScript 您机器上安装的 Node.js 版本至少是  v10.18.0 。 最新版本的 Node 能够理解 JavaScript 最新版本的特性，因此代码不需要被转译。
 
 <!-- The code is written into files ending with <i>.js</i> and are run by issuing the command <em>node name\_of\_file.js</em> -->
 
 代码文件以 <i>.js</i>结尾，通过 <em>node 文件名.js</em> 命令以运行文件。
 
-<!-- It is also possible to write Javascript code into the Node.js console, which is opened by typing _node_ in the command-line, as well as into the browser's developer tool console. The newest revisions of Chrome handle the newer features of Javascript [pretty well](http://kangax.github.io/compat-table/es2016plus/) without transpiling the code.Alternatively you can use a tool like [JS Bin](https://jsbin.com/?js,console). -->
+<!-- It is also possible to write JavaScript code into the Node.js console, which is opened by typing _node_ in the command-line, as well as into the browser's developer tool console. The newest revisions of Chrome handle the newer features of JavaScript [pretty well](http://kangax.github.io/compat-table/es2016plus/) without transpiling the code.Alternatively you can use a tool like [JS Bin](https://jsbin.com/?js,console). -->
 
 还可以将 JavaScript 代码编写到 Node.js 控制台(通过在命令行中键入 _node_ 打开)，或者浏览器的开发工具控制台中。 最新版本的 Chrome 能 [很好地](http://kangax.github.io/compat-table/es2016plus/) 处理 JavaScript 的新特性，而且不需要转译代码。作为替代品，你也可以选择 [JS Bin](https://jsbin.com/?js,console)这样的工具。
 
-<!-- Javascript is sort of reminiscent, both in name and syntax, to Java. But when it comes to the core mechanism of the language they could not be more different. Coming from a Java background, the behavior of Javascript can seem a bit alien, especially if one does not make the effort to look up its features. -->
+<!-- JavaScript is sort of reminiscent, both in name and syntax, to Java. But when it comes to the core mechanism of the language they could not be more different. Coming from a Java background, the behavior of JavaScript can seem a bit alien, especially if one does not make the effort to look up its features. -->
 
-JavaScript 都有点像 Java。 但是当涉及到语言的核心机制时，它们就大不相同了。 如果你是 Java 背景，Javascript 的写法可能看起来有点古怪，尤其是如果你不花精力去查阅它的特性的话。
+JavaScript 都有点像 Java。 但是当涉及到语言的核心机制时，它们就大不相同了。 如果你是 Java 背景，JavaScript 的写法可能看起来有点古怪，尤其是如果你不花精力去查阅它的特性的话。
 
-<!-- In certain circles it has also been popular to attempt "simulating" Java features and design patterns in Javascript. We do not recommend doing this. -->
+<!-- In certain circles it has also been popular to attempt "simulating" Java features and design patterns in JavaScript. We do not recommend doing this. -->
 
-在某些圈儿里，也很流行在 Javascript 中“模拟” Java 的特性和设计模式。但我们不建议这样做。
+在某些圈儿里，也很流行在 JavaScript 中“模拟” Java 的特性和设计模式。但我们不建议这样做。
 
 ### Variables 
 【变量】
-<!-- In Javascript there are a few ways to go about defining variables: -->
+<!-- In JavaScript there are a few ways to go about defining variables: -->
 
 在 JavaScript 中有以下几种定义变量的方法:
 
@@ -65,9 +65,9 @@ x = 4               // causes an error
 
 在示例中，我们还可以看到，分配给变量的数据类型，在执行过程中可以发生更改。 例如开头的 y 存储了一个整数，但最后存储一个字符串。
 
-<!-- It is also possible to define variables in Javascript using the keyword [var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var). Var was for a long time the only way to define variables. Const and let were only recently added in version ES6. In specific situations, var works in a [different](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f) [way](http://www.jstips.co/en/javascript/keyword-var-vs-let/) compared to variable definitions in most languages. During this course the use of var is ill-advised and you should stick with using const and let! -->
+<!-- It is also possible to define variables in JavaScript using the keyword [var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var). Var was for a long time the only way to define variables. Const and let were only recently added in version ES6. In specific situations, var works in a [different](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f) [way](http://www.jstips.co/en/javascript/keyword-var-vs-let/) compared to variable definitions in most languages. During this course the use of var is ill-advised and you should stick with using const and let! -->
 
-也可以使用关键字[var](https://developer.mozilla.org/en-us/docs/web/Javascript/reference/statements/var)在 JavaScript 中定义变量。 在很长一段时间里，var 是定义变量的唯一方法。 const 和 let 是最近才在 ES6版本中添加的。 在一些特定情况，var 的工作方式与大多数语言中的变量定义相比是[十分不同的](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f)。 在本课程中明确不建议使用var，你应该坚持使用 const 和 let！
+也可以使用关键字[var](https://developer.mozilla.org/en-us/docs/web/JavaScript/reference/statements/var)在 JavaScript 中定义变量。 在很长一段时间里，var 是定义变量的唯一方法。 const 和 let 是最近才在 ES6版本中添加的。 在一些特定情况，var 的工作方式与大多数语言中的变量定义相比是[十分不同的](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f)。 在本课程中明确不建议使用var，你应该坚持使用 const 和 let！
 
 <!-- You can find more on this topic on e.g. YouTube - [var, let and const - ES6 JavaScript Features](https://youtu.be/sjyJBL5fkp8) -->
 你可以在 YouTube中找到更多关于这个 [var, let and const - ES6 JavaScript Features](https://youtu.be/sjyJBL5fkp8)议题的讨论
@@ -175,7 +175,7 @@ console.log(rest)          // [3, 4 ,5] is printed
 
 ### Objects
 【对象】
-<!-- There are a few different ways of defining objects in Javascript. One very common method is using [object literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Object_literals), which happens by listing its properties within braces: -->
+<!-- There are a few different ways of defining objects in JavaScript. One very common method is using [object literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Object_literals), which happens by listing its properties within braces: -->
 
 在 JavaScript 中，定义对象有几种不同的方式。 一个非常常见的方法是使用[对象字面量](https://developer.mozilla.org/en-us/docs/web/javascript/guide/grammar_and_types#object_literals) ，就是通过在大括号中列出它的属性来实现的:
 
@@ -226,11 +226,11 @@ object1['secret number'] = 12341
 <!-- The latter of the additions has to be done by using brackets, because when using dot notation, <i>secret number</i> is not a valid property name. -->
 后面的那个属性的添加必须通过使用中括号来完成，因为在使用点符号的话，带空格的<i>secret number</i>并不是一个合法的属性名。
 
-<!-- Naturally, objects in Javascript can also have methods. However, during this course we do not need to define any objects with methods of their own. This is why they are only discussed briefly during the course. -->
+<!-- Naturally, objects in JavaScript can also have methods. However, during this course we do not need to define any objects with methods of their own. This is why they are only discussed briefly during the course. -->
 
 当然，JavaScript 中的对象也可以包含方法。 但是，在这个课程中，我们并不需要定义带方法的对象，因此这里只是简单地提及它。
 
-<!-- Objects can also be defined using so-called constructor functions, which results in a mechanism reminiscent of many other programming languages', e.g. Java's classes. Despite this similarity Javascript does not have classes in the same sense as object-oriented programming languages. There has been, however, an addition of the <i>class syntax</i> starting from version ES6, which in some cases helps structure object-oriented classes. -->
+<!-- Objects can also be defined using so-called constructor functions, which results in a mechanism reminiscent of many other programming languages', e.g. Java's classes. Despite this similarity JavaScript does not have classes in the same sense as object-oriented programming languages. There has been, however, an addition of the <i>class syntax</i> starting from version ES6, which in some cases helps structure object-oriented classes. -->
 
 对象也可以使用所谓的构造函数来定义，这产生了一种类似其他编程语言的机制，例如 Java 中的类。 尽管有相似之处，JavaScript 并没有对标面向对象程序设计语言中类的概念。 但是，从 ES6版本开始，增加了<i>类语法</i>，这在某些情况下有助于构造面向对象的类。
 
@@ -288,9 +288,9 @@ const tSquared = t.map(p => p * p)
 
 
 
-<!-- The arrow function was added to Javascript only a couple of years ago along with version [ES6](http://es6-features.org/). Prior to this the only way to define functions was by using the keyword _function_. -->
+<!-- The arrow function was added to JavaScript only a couple of years ago along with version [ES6](http://es6-features.org/). Prior to this the only way to define functions was by using the keyword _function_. -->
 
-这个箭头函数是几年前随 [ES6](http://es6-features.org/) 一起添加到 Javascript 中。 在此之前，定义函数的唯一方法是使用关键字 _function_。
+这个箭头函数是几年前随 [ES6](http://es6-features.org/) 一起添加到 JavaScript 中。 在此之前，定义函数的唯一方法是使用关键字 _function_。
 
 <!-- There are two ways by which the function can be referenced; one is giving a name in a [function declaration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function). -->
 有两种方法可定义函数function; 一种是在[函数声明](https://developer.mozilla.org/en-us/docs/web/javascript/reference/statements/function)中给一个名字。
@@ -424,7 +424,7 @@ const App = () => {
 
   <h4>1.5: 课程信息 步骤5</h4>
 
-<!-- Let's take the changes one step further. Change the course and its parts into a single Javascript object. Fix everything that breaks. -->
+<!-- Let's take the changes one step further. Change the course and its parts into a single JavaScript object. Fix everything that breaks. -->
 让我们进一步做一些改变。 将课程及其章节合成为一个 JavaScript 对象。 修复好之前所有的缺陷。
 
 ```js
@@ -463,7 +463,7 @@ const App = () => {
 
 ### Object methods and "this"
 【对象方法以及“ this”关键字】
-<!-- Due to the fact that during this course we are using a version of React containing React hooks we have no need for defining objects with methods. **The contents of this chapter are not relevant to the course** but are certainly in many ways good to know. In particular when using older versions of React one must understand the topics of this chapter. -->
+<!-- Due to the fact that during this course we are using a version of React containing React Hooks we have no need for defining objects with methods. **The contents of this chapter are not relevant to the course** but are certainly in many ways good to know. In particular when using older versions of React one must understand the topics of this chapter. -->
 
 由于在本课程中我们使用的React版本里包含 React hook ，所以我们不需要定义带有函数的对象。 因此**本章的内容与本课程无关** ，但在许多方面确实值得了解。 特别是在使用旧版本的 React 时，必须理解本章的议题。
 
@@ -555,13 +555,13 @@ referenceToGreet() // prints "hello, my name is undefined"
 
 
 
-<!-- When calling the method through a reference the method has lost knowledge of what was the original _this_. Contrary to other languages, in Javascript the value of [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) is defined based on <i>how the method is called</i>. When calling the method through a reference the value of _this_ becomes the so-called [global object](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) and the end result is often not what the software developer had originally intended. -->
+<!-- When calling the method through a reference the method has lost knowledge of what was the original _this_. Contrary to other languages, in JavaScript the value of [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) is defined based on <i>how the method is called</i>. When calling the method through a reference the value of _this_ becomes the so-called [global object](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) and the end result is often not what the software developer had originally intended. -->
 
-当通过引用调用referenceToGreet() 方法时，该方法已经不认识原始的this是什么了。 与其他语言相反，在 JavaScript 中，[this](https://developer.mozilla.org/en-us/docs/web/Javascript/reference/operators/this)的值是根据 <i>方法如何调用</i>  来定义的。 当通过引用调用该方法时， _this_ 的值就变成了所谓的[全局对象](https://developer.mozilla.org/en-us/docs/glossary/global_object) ，而最终结果往往不是软件开发人员设想的那样。
+当通过引用调用referenceToGreet() 方法时，该方法已经不认识原始的this是什么了。 与其他语言相反，在 JavaScript 中，[this](https://developer.mozilla.org/en-us/docs/web/JavaScript/reference/operators/this)的值是根据 <i>方法如何调用</i>  来定义的。 当通过引用调用该方法时， _this_ 的值就变成了所谓的[全局对象](https://developer.mozilla.org/en-us/docs/glossary/global_object) ，而最终结果往往不是软件开发人员设想的那样。
 
-<!-- Losing track of _this_ when writing Javascript code brings forth a few potential issues. Situations often arise where React or Node (or more specifically the Javascript engine of the web browser) needs to call some method in an object that the developer has defined. However, in this course we avoid issues by using the "this-less" Javascript. -->
+<!-- Losing track of _this_ when writing JavaScript code brings forth a few potential issues. Situations often arise where React or Node (or more specifically the JavaScript engine of the web browser) needs to call some method in an object that the developer has defined. However, in this course we avoid issues by using the "this-less" JavaScript. -->
 
-失去对this 关键字的追踪，在编写 Javascript 代码时会带来一些潜在的问题。 通常情况下，React 或 Node (或者更确切地说是 web 浏览器的 Javascript 引擎) 需要调用开发人员定义的对象中的某个方法。 然而，在本课程中，我们会使用“ 去this” （避免使用this关键字）的JavaScript 来避免这些问题。
+失去对this 关键字的追踪，在编写 JavaScript 代码时会带来一些潜在的问题。 通常情况下，React 或 Node (或者更确切地说是 web 浏览器的 JavaScript 引擎) 需要调用开发人员定义的对象中的某个方法。 然而，在本课程中，我们会使用“ 去this” （避免使用this关键字）的JavaScript 来避免这些问题。
 
 <!-- One situation leading to the disappearance of _this_ arises when, e.g. we ask Arto to greet in one second using the [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) method. -->
 
@@ -594,16 +594,16 @@ setTimeout(arto.greet.bind(arto), 1000)
 <!-- Using [arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) it is possible to solve some of the problems related to _this_. They should not, however, be used as methods for objects because then _this_ does not work at all. We will come back later to the behavior of _this_ in relation to arrow functions. -->
 使用[箭头函数](https://developer.mozilla.org/en-us/docs/web/javascript/reference/functions/arrow_functions)可以解决与 _this_相关的一系列问题。 但是，它不能当做对象的方法来使用，因为那样的话this就不起作用了。 稍后我们将回到_this_与箭头函数的关系。
 
-<!-- If you want to gain a better understanding of how _this_ works in Javascript, the internet is full of material about the topic, e.g. the screen cast series [Understand JavaScript's this Keyword in Depth](https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth) by [egghead.io](https://egghead.io) is highly recommended! -->
+<!-- If you want to gain a better understanding of how _this_ works in JavaScript, the Internet is full of material about the topic, e.g. the screen cast series [Understand JavaScript's this Keyword in Depth](https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth) by [egghead.io](https://egghead.io) is highly recommended! -->
 如果你想更好地理解 JavaScript 的工作原理，互联网上充满了关于这个议题的材料，例如 [egghead.io](https://egghead.io)的一系列[Understand JavaScript's this Keyword in Depth](https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth)短视频，强烈推荐！
 
 ### Classes
 【类】
-<!-- As mentioned previously, there is no class mechanism like the ones in object-oriented programming languages. There are, however, features in Javascript which make "simulating" object-oriented [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) possible. -->
-正如前面提到的，JavaScript 中并没有像面向对象程序语言中的类机制。 然而，JavaScript 中的一些新特性使得它能够“模拟”面向对象中的[类](https://developer.mozilla.org/en-us/docs/web/Javascript/reference/classes)。
+<!-- As mentioned previously, there is no class mechanism like the ones in object-oriented programming languages. There are, however, features in JavaScript which make "simulating" object-oriented [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) possible. -->
+正如前面提到的，JavaScript 中并没有像面向对象程序语言中的类机制。 然而，JavaScript 中的一些新特性使得它能够“模拟”面向对象中的[类](https://developer.mozilla.org/en-us/docs/web/JavaScript/reference/classes)。
 
-<!-- Let's take a quick look at the <i>class syntax</i> that was introduced into Javascript along with ES6, which substantially simplifies the definition of classes (or class-like things) in Javascript. -->
-让我们快速看一下与 ES6一起引入到 JavaScript 中的<i>类语法</i>，它在很大程度上简化了 Javascript 中的类(或者说像是类)的定义。
+<!-- Let's take a quick look at the <i>class syntax</i> that was introduced into JavaScript along with ES6, which substantially simplifies the definition of classes (or class-like things) in JavaScript. -->
+让我们快速看一下与 ES6一起引入到 JavaScript 中的<i>类语法</i>，它在很大程度上简化了 JavaScript 中的类(或者说像是类)的定义。
 
 <!-- In the following we have defined a "class" called Person and two Person objects. -->
 在下面的代码中，我们定义了一个名为 Person 的“类”和两个 Person 对象。
@@ -626,28 +626,28 @@ const janja = new Person('Janja Garnbret', 22)
 janja.greet()
 ```
 
-<!-- When it comes to syntax the classes and the objects created from them are very reminiscent of Java classes and objects. Their behavior is also quite similar to Java objects. At the core they are still objects based on Javascript's [prototype inheritance](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance). The type of both objects is actually _Object_, since Javascript essentially only defines the types [Boolean, Null, Undefined, Number, String, Symbol, and Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures). -->
+<!-- When it comes to syntax the classes and the objects created from them are very reminiscent of Java classes and objects. Their behavior is also quite similar to Java objects. At the core they are still objects based on JavaScript's [prototype inheritance](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance). The type of both objects is actually _Object_, since JavaScript essentially only defines the types [Boolean, Null, Undefined, Number, String, Symbol, and Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures). -->
 
-在语法方面，类以及由它们创建的对象非常类似于 Java 的类和对象。 它们的行为也非常类似于 Java 对象。 但在本质上，它们仍然是基于 JavaScript 的[原型继承](https://developer.mozilla.org/en-us/docs/learn/Javascript/objects/inheritance)的对象。 这两个对象的类型实际上都是 Object，因为 JavaScript 实质上只定义了[Boolean，Null，Undefined，Number，String，Symbol，BigInt，以及 Object](https://developer.mozilla.org/en-us/docs/web/Javascript/data_structures)几种类型。
+在语法方面，类以及由它们创建的对象非常类似于 Java 的类和对象。 它们的行为也非常类似于 Java 对象。 但在本质上，它们仍然是基于 JavaScript 的[原型继承](https://developer.mozilla.org/en-us/docs/learn/JavaScript/objects/inheritance)的对象。 这两个对象的类型实际上都是 Object，因为 JavaScript 实质上只定义了[Boolean，Null，Undefined，Number，String，Symbol，BigInt，以及 Object](https://developer.mozilla.org/en-us/docs/web/JavaScript/data_structures)几种类型。
 
 <!-- Introduction of the class syntax is a controversial addition, e.g. check out [Not Awesome: ES6 Classes](https://github.com/petsel/not-awesome-es6-classes) or [Is “Class” In ES6 The New “Bad” Part?](https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65) -->
 类语法的引入是一个有争议的新特性，例如[Not Awesome: ES6 Classes](https://github.com/petsel/not-awesome-es6-classes) 或者[Is “Class” In ES6 The New “Bad” Part?](https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65)这两篇文章所讨论的。
 
-<!-- The ES6 class syntax is used a lot in "old" React and also in Node.js hence an understanding of it is beneficial even in this course. But since we are using the new [hook](https://reactjs.org/docs/hooks-intro.html) feature of React throughout this course we have no concrete use for Javascript's class syntax. -->
+<!-- The ES6 class syntax is used a lot in "old" React and also in Node.js hence an understanding of it is beneficial even in this course. But since we are using the new [hook](https://reactjs.org/docs/hooks-intro.html) feature of React throughout this course we have no concrete use for JavaScript's class syntax. -->
 ES6的类语法在“老的” React 和 Node.js 中被广泛使用，因此即使在本课程中，对它有所了解也是有益的。 但是因为我们在整个课程中都使用了 React 的新的[hooks](https://reactjs.org/docs/hooks-intro.html)特性，所以我们没有具体使用 JavaScript 的类语法。 
 
-### Javascript materials
-【Javascript 教材】
-<!-- There exists both good and poor guides for Javascript on the internet. Most of the links on this page relating to Javascript features reference [Mozilla's Javascript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript). -->
-互联网上的 JavaScript 指南既有好的，也有不好的。 这个页面上大多数与 JavaScript 特性相关的链接都参考了 Mozilla 的 JavaScript 指南[Mozilla's Javascript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript)。
+### JavaScript materials
+【JavaScript 教材】
+<!-- There exists both good and poor guides for JavaScript on the Internet. Most of the links on this page relating to JavaScript features reference [Mozilla's JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript). -->
+互联网上的 JavaScript 指南既有好的，也有不好的。 这个页面上大多数与 JavaScript 特性相关的链接都参考了 Mozilla 的 JavaScript 指南[Mozilla's JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript)。
 
 <!-- It is highly recommended to immediately read [A re-introduction to JavaScript (JS tutorial)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript) on Mozillas website. -->
 强烈建议你立即在 Mozillas 网站上阅读[重新认识JavaScript(JS 教程)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript)。
 
-<!-- If you wish to get to know Javascript deeply there is a great free book series on the internet called [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS). -->
+<!-- If you wish to get to know JavaScript deeply there is a great free book series on the Internet called [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS). -->
 如果你想深入了解 JavaScript，互联网上有一个很棒的免费书系列叫做[You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS)。
 
-<!-- [egghead.io](https://egghead.io) has plenty of quality screencasts on Javascript, React, and other interesting topics. Unfortunately, some of the material is behind a paywall. -->
+<!-- [egghead.io](https://egghead.io) has plenty of quality screencasts on JavaScript, React, and other interesting topics. Unfortunately, some of the material is behind a paywall. -->
 [egghead.io](https://egghead.io) 上有大量关于 JavaScript、 React 及其他有趣议题的高质量短视频。不幸的是，有些材料是付费后才能看的。
 
 </div>

@@ -52,10 +52,10 @@ We also added the [runInBand](https://jestjs.io/docs/en/cli.html#--runinband) op
 We specified the mode of the application to be <i>development</i> in the _npm run dev_ script that uses nodemon. We also specified that the default _npm start_ command will define the mode as <i>production</i>.
 
 
-There is a slight issue in the way that we have specified the mode of the application in our scripts: it will not work on Windows. We can correct this by installing the [cross-env](https://www.npmjs.com/package/cross-env) package with the command:
+There is a slight issue in the way that we have specified the mode of the application in our scripts: it will not work on Windows. We can correct this by installing the [cross-env](https://www.npmjs.com/package/cross-env) package as a development dependency with the command:
 
 ```bash
-npm install cross-env
+npm install --save-dev cross-env
 ```
 
 We can then achieve cross-platform compatibility by using the cross-env library in our npm scripts defined in <i>package.json</i>:
@@ -88,7 +88,7 @@ Let's make some changes to the module that defines the application's configurati
 ```js
 require('dotenv').config()
 
-let PORT = process.env.PORT
+const PORT = process.env.PORT
 let MONGODB_URI = process.env.MONGODB_URI
 
 // highlight-start
@@ -237,11 +237,11 @@ Both tests store the response of the request to the _response_ variable, and unl
 The benefit of using the async/await syntax is starting to become evident. Normally we would have to use callback functions to access the data returned by promises, but with the new syntax things are a lot more comfortable:
 
 ```js
-const res = await api.get('/api/notes')
+const response = await api.get('/api/notes')
 
 // execution gets here only after the HTTP request is complete
-// the result of HTTP request is saved in variable res
-expect(res.body).toHaveLength(2)
+// the result of HTTP request is saved in variable response
+expect(response.body).toHaveLength(2)
 ```
 
 <!-- HTTP-pyyntöjen tiedot konsoliin kirjoittava middleware häiritsee hiukan testien tulostusta. Muutetaan loggeria siten, että testausmoodissa lokiviestit eivät tulostu konsoliin: -->
@@ -272,22 +272,25 @@ Testing appears to be easy and our tests are currently passing. However, our tes
 
 Our tests are already using the [afterAll](https://facebook.github.io/jest/docs/en/api.html#afterallfn-timeout) function of Jest to close the connection to the database after the tests are finished executing. Jest offers many other [functions](https://facebook.github.io/jest/docs/en/setup-teardown.html#content) that can be used for executing operations once before any test is run, or every time before a test is run.
 
-Let's initialize the database <i>before every test</i> with the [beforeEach](https://jestjs.io/docs/en/api.html#aftereachfn-timeout) function:
+Let's initialize the database <i>before every test</i> with the [beforeEach](https://jestjs.io/docs/en/api.html#beforeeachfn-timeout) function:
 
 ```js
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
+// highlight-start
 const Note = require('../models/note')
 
 const initialNotes = [
   {
     content: 'HTML is easy',
+    date: new Date(),
     important: false,
   },
   {
     content: 'Browser can execute only Javascript',
+    date: new Date(),
     important: true,
   },
 ]
@@ -301,6 +304,8 @@ beforeEach(async () => {
   noteObject = new Note(initialNotes[1])
   await noteObject.save()
 })
+// highlight-end
+// ...
 ```
 
 The database is cleared out at the beginning, and after that we save the two notes stored in the _initialNotes_ array to the database. Doing this, we ensure that the database is in the same state before every test is run.
@@ -317,11 +322,13 @@ test('all notes are returned', async () => {
 test('a specific note is within the returned notes', async () => {
   const response = await api.get('/api/notes')
 
-  const contents = response.body.map(r => r.content) // highlight-line
+  // highlight-start
+  const contents = response.body.map(r => r.content)
 
   expect(contents).toContain(
-    'Browser can execute only Javascript' // highlight-line
+    'Browser can execute only Javascript'
   )
+  // highlight-end
 })
 ```
 
@@ -517,16 +524,18 @@ const Note = require('../models/note')
 const initialNotes = [
   {
     content: 'HTML is easy',
+    date: new Date(),
     important: false
   },
   {
     content: 'Browser can execute only Javascript',
+    date: new Date(),
     important: true
   }
 ]
 
 const nonExistingId = async () => {
-  const note = new Note({ content: 'willremovethissoon' })
+  const note = new Note({ content: 'willremovethissoon', date: new Date() })
   await note.save()
   await note.remove()
 
@@ -583,6 +592,7 @@ test('a specific note is within the returned notes', async () => {
   const response = await api.get('/api/notes')
 
   const contents = response.body.map(r => r.content)
+
   expect(contents).toContain(
     'Browser can execute only Javascript'
   )
@@ -699,7 +709,9 @@ test('a specific note can be viewed', async () => {
     .expect('Content-Type', /application\/json/)
 // highlight-end
 
-  expect(resultNote.body).toEqual(noteToView)
+  const processedNoteToView = JSON.parse(JSON.stringify(noteToView))
+
+  expect(resultNote.body).toEqual(processedNoteToView)
 })
 
 test('a note can be deleted', async () => {
@@ -723,6 +735,8 @@ test('a note can be deleted', async () => {
   expect(contents).not.toContain(noteToDelete.content)
 })
 ```
+
+In the first test, the note object we receive as the response body goes through JSON serialization and parsing. This processing will turn the note object's <em>date</em> property value's type from <em>Date</em> object into a string. Because of this we can't directly compare equality of the <em>resultNote.body</em> and <em>noteToView</em>. Instead, we must first perform similar JSON serialization and parsing for the <em>noteToView</em> as the server is performing for the note object.
 
 Both tests share a similar structure. In the initialization phase they fetch a note from the database. After this, the tests call the actual operation being tested, which is highlighted in the code block. Lastly, the tests verify that the outcome of the operation is as expected.
 
@@ -778,13 +792,13 @@ The [express-async-errors](https://github.com/davidbanham/express-async-errors) 
 Let's install the library
 
 ```bash
-npm install express-async-errors --save
+npm install express-async-errors
 ```
 
 <!-- Kirjaston käyttö on <i>todella</i> helppoa.
  Kirjaston koodi otetaan käyttöön tiedostossa <i>src/app.js</i>: -->
 Using the library is <i>very</i> easy. 
-You introduce the library in <i>src/app.js</i>:
+You introduce the library in <i>app.js</i>:
 
 ```js
 const config = require('./utils/config')
@@ -916,7 +930,6 @@ The problem is that every iteration of the forEach loop generates its own asynch
 
 Since the execution of tests begins immediately after _beforeEach_ has finished executing, the execution of tests begins before the database state is initialized.
 
-
 One way of fixing this is to wait for all of the asynchronous operations to finish executing with the [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) method:
 
 ```js
@@ -930,9 +943,7 @@ beforeEach(async () => {
 })
 ```
 
-
 The solution is quite advanced despite its compact appearance. The _noteObjects_ variable is assigned to an array of Mongoose objects that are created with the _Note_ constructor for each of the notes in the _helper.initialNotes_ array. The next line of code creates a new array that <i>consists of promises</i>, that are created by calling the _save_ method of each item in the _noteObjects_ array. In other words, it is an array of promises for saving each of the items to the database.
-
 
 The [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) method can be used for transforming an array of promises into a single promise, that will be <i>fulfilled</i> once every promise in the array passed to it as a parameter is resolved. The last line of code <em>await Promise.all(promiseArray)</em> waits that every promise for saving a note is finished, meaning that the database has been initialized.
 
@@ -1084,6 +1095,7 @@ describe('when there is initially some notes saved', () => {
     const response = await api.get('/api/notes')
 
     const contents = response.body.map(r => r.content)
+
     expect(contents).toContain(
       'Browser can execute only Javascript'
     )
@@ -1100,8 +1112,10 @@ describe('viewing a specific note', () => {
       .get(`/api/notes/${noteToView.id}`)
       .expect(200)
       .expect('Content-Type', /application\/json/)
+      
+    const processedNoteToView = JSON.parse(JSON.stringify(noteToView))
 
-    expect(resultNote.body).toEqual(noteToView)
+    expect(resultNote.body).toEqual(processedNoteToView)
   })
 
   test('fails with statuscode 404 if note does not exist', async () => {

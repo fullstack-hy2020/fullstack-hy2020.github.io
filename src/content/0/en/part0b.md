@@ -7,8 +7,7 @@ lang: en
 
 <div class="content">
 
-Before we start programming, we will go through some principles of web development by examining an example application at <https://fullstack-exampleapp.herokuapp.com/>.
-A Finnish language version of the application can be found at <https://fullstack-example.now.sh>. You are free to use either one. 
+Before we start programming, we will go through some principles of web development by examining an example application at <https://studies.cs.helsinki.fi/exampleapp>.
 
 The applications exist only to demonstrate some basic concepts of the course, and are by no means examples of <i>how</i> web applications should be made. 
 On the contrary, they demonstrate some old techniques of web development, which can even be seen as <i>bad practice</i> nowadays.
@@ -17,14 +16,15 @@ Coding in the recommended style begins in [part 1](/en/part1).
 
 Use the Chrome browser <i>now and for the rest of the course</i>.
 
-Open the [example application](https://fullstack-exampleapp.herokuapp.com/) on your browser. Sometimes this takes a while. 
+Open the [example application](https://studies.cs.helsinki.fi/exampleapp) on your browser. Sometimes this takes a while. 
 
-**The 1st rule of web development**: Always keep the developer console open on your browser. On macOS, open the console by pressing `F12` or `option-cmd-i` simultaneously. 
-On Windows, open the console by pressing `F12` or `ctrl-shift-i` simultaneously. 
+**The 1st rule of web development**: Always keep the Developer Console open on your web browser. On macOS, open the console by pressing `F12` or `option-cmd-i` simultaneously. 
+On Windows or Linux, open the console by pressing `F12` or `ctrl-shift-i` simultaneously. 
 
-Before continuing, find out how to open the developer console on your computer (google if necessary) and remember to <i>always</i> keep it open when developing web applications. 
+Before continuing, find out how to open the Developer Console on your computer (search from Google if necessary) and remember to <i>always</i> keep it open when developing web applications. 
 
 The console looks like this: 
+
 ![](../../images/0/1e.png)
 
 Make sure that the <i>Network</i> tab is open, and check the <i>Disable cache</i> option as shown. <i>Preserve log</i> can also be useful: it saves the logs printed by the application when the page is reloaded. 
@@ -37,7 +37,7 @@ The server and the web browser communicate with each other using the [HTTP](http
 
 When you reload the page (press the F5 key or the &#8634; symbol on your browser), the console shows that two events have happened:
 
-- The browser fetches the contents of the page <i>fullstack-exampleapp.herokuapp.com/</i> from the server
+- The browser fetches the contents of the page <i>studies.cs.helsinki.fi/exampleapp</i> from the server
 - And downloads the image <i>kuva.png</i>
 
 ![](../../images/0/2e.png)
@@ -48,7 +48,7 @@ Clicking the first event reveals more information on what's happening:
 
 ![](../../images/0/3e.png)
 
-The upper part, <i>General</i>, shows that the browser did a request to the address <i>https://fullstack-exampleapp.herokuapp.com/</i> using the  [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) method, and that the request was successful, because the server response had the [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200. 
+The upper part, <i>General</i>, shows that the browser did a request to the address <i>https://studies.cs.helsinki.fi/exampleapp</i> (though the address has changed slightly since this picture was taken) using the  [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) method, and that the request was successful, because the server response had the [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200. 
 
 The request and the server response have several [headers](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields):
 
@@ -67,9 +67,9 @@ Because of the img tag, the browser does a second <i>HTTP-request</i> to fetch t
 
 ![](../../images/0/6e.png)
 
-The request was made to the address <https://fullstack-exampleapp.herokuapp.com/kuva.png> and its type is HTTP GET. The response headers tell us that the response size is 89350 bytes, and its [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) is <i>image/png</i>, so it is a png image. The browser uses this information to render the image correctly to the screen. 
+The request was made to the address <https://studies.cs.helsinki.fi/exampleapp/kuva.png> and its type is HTTP GET. The response headers tell us that the response size is 89350 bytes, and its [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) is <i>image/png</i>, so it is a png image. The browser uses this information to render the image correctly to the screen. 
 
-The chain of events caused by opening the page https://fullstack-exampleapp.herokuapp.com/ on a browser form the following [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/):
+The chain of events caused by opening the page https://studies.cs.helsinki.fi/exampleapp on a browser form the following [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/):
 
 ![](../../images/0/7e.png)
 
@@ -123,8 +123,8 @@ This course will use Node.js and Express to create web servers.
 
 ### Running application logic on the browser
 
-Keep the developer console open. Empty the console by clicking the 🚫 symbol. 
-Now when you go to the [notes](https://fullstack-exampleapp.herokuapp.com/notes) page, the browser does 4 HTTP requests: 
+Keep the Developer Console open. Empty the console by clicking the 🚫 symbol. 
+Now when you go to the [notes](https://studies.cs.helsinki.fi/exampleapp/notes) page, the browser does 4 HTTP requests: 
 
 ![](../../images/0/8e.png)
 
@@ -176,7 +176,7 @@ xhttp.send()
 ```
 This is the bottom-most request shown on the Network tab. 
 
-We can try going to the address <https://fullstack-exampleapp.herokuapp.com/data.json> straight from the browser:
+We can try going to the address <https://studies.cs.helsinki.fi/exampleapp/data.json> straight from the browser:
 
 ![](../../images/0/10e.png)
 
@@ -221,7 +221,7 @@ data.forEach(function(note) {
   li.appendChild(document.createTextNode(note.content))
 })
 ```
-Now open the <i>Console</i>-tab on your developer console:
+Now open the <i>Console</i>-tab on your Developer Console:
 
 
 ![](../../images/0/12e.png)
@@ -328,7 +328,7 @@ document.getElementById('notes').appendChild(ul)
 
 ### Manipulating the document-object from console
 
-The topmost node of the DOM tree of a HTML document is called the <em>document</em> object. We can perform various operations on a web-page using the DOM-API. You can access the <em>document</em> object by typing <em>document</em> into the Console-tab: 
+The topmost node of the DOM tree of an HTML document is called the <em>document</em> object. We can perform various operations on a web-page using the DOM-API. You can access the <em>document</em> object by typing <em>document</em> into the Console-tab: 
 
 ![](../../images/0/15e.png)
 
@@ -356,11 +356,11 @@ list.appendChild(newElement)
 
 ![](../../images/0/16e.png)
 
-Even though the page updates on your browser, the changes are not permanent. If the page is reloaded, the new note will disappear, because the changes were not pushed to the server. The JavaScript code the browser fetches will always create the list of notes based on JSON-data from the address <https://fullstack-exampleapp.herokuapp.com/data.json>.
+Even though the page updates on your browser, the changes are not permanent. If the page is reloaded, the new note will disappear, because the changes were not pushed to the server. The JavaScript code the browser fetches will always create the list of notes based on JSON-data from the address <https://studies.cs.helsinki.fi/exampleapp/data.json>.
 
 ### CSS
 
-The <i>head</i> element of the HTML code of the Notes page contains a [link](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) tag, which determines that the browser must fetch a [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) style sheet from the address [main.css](https://fullstack-exampleapp.herokuapp.com/main.css).
+The <i>head</i> element of the HTML code of the Notes page contains a [link](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) tag, which determines that the browser must fetch a [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) style sheet from the address [main.css](https://studies.cs.helsinki.fi/exampleapp/main.css).
 
 Cascading Style Sheets, or CSS, is a markup language used to determine the appearance of web pages. 
 
@@ -403,14 +403,14 @@ Changes made on the console will not be permanent. If you want to make lasting c
 
 ### Loading a page containing JavaScript - revised
 
-Let's revise what happens when the page https://fullstack-exampleapp.herokuapp.com/notes is opened on the browser. 
+Let's revise what happens when the page https://studies.cs.helsinki.fi/exampleapp/notes is opened on the browser. 
 
 ![](../../images/0/19e.png)
 
 - The browser fetches the HTML code defining the content and the structure of the page from the server using an HTTP GET request.
 - Links in the HTML code cause the browser to also fetch the CSS style sheet <i>main.css</i>...
 - ...and a JavaScript code file <i>main.js</i>
-- The browser executes the JavaScript code. The code makes an HTTP GET request to the address https://fullstack-exampleapp.herokuapp.com/data.json, which 
+- The browser executes the JavaScript code. The code makes an HTTP GET request to the address https://studies.cs.helsinki.fi/exampleapp/data.json, which 
   returns the notes as JSON  data. 
 - When the data has been fetched, the browser executes an <i>event handler</i>, which renders the notes to the page using the DOM-API. 
 
@@ -443,7 +443,7 @@ The Form tag has attributes <i>action</i> and <i>method</i>, which define that s
 
 ![](../../images/0/24e.png)
 
-The code on the server responsible for the POST request is simple (NB: this code is on the server, and not on the JavaScript code fetched by the browser):
+The code on the server responsible for the POST request is quite simple (NB: this code is on the server, and not on the JavaScript code fetched by the browser):
 
 ```js
 app.post('/new_note', (req, res) => {
@@ -471,20 +471,21 @@ notes.push({
 ```
 
 The Note objects have two fields: <i>content</i> containing the actual content of the note, and <i>date</i> containing the date and time the note was created. 
-The server does not save new notes to a database, so new notes disappear when Heroku restarts the service. 
+
+The server does not save new notes to a database, so new notes disappear when the server is restarted. 
 
 ### AJAX
 
 The Notes page of the application follows an early-noughties style of web development and "uses Ajax". As such, it's on the crest of the wave of early 2000's web technology.
 
-[AJAX](<https://en.wikipedia.org/wiki/Ajax_(programming)>) (Asynchronous Javascript and XML) is a term introduced in February 2005 on the back of advancements in browser technology to describe a new revolutionary approach that enabled the fetching of content to web pages using JavaScript included within the HTML, without the need to rerender the page. 
+[AJAX](<https://en.wikipedia.org/wiki/Ajax_(programming)>) (Asynchronous JavaScript and XML) is a term introduced in February 2005 on the back of advancements in browser technology to describe a new revolutionary approach that enabled the fetching of content to web pages using JavaScript included within the HTML, without the need to rerender the page. 
 
 Prior to the AJAX era, all web pages worked like the [traditional web application](/en/part0/fundamentals_of_web_apps#traditional-web-applications) we saw earlier in this chapter. 
 All of the data shown on the page was fetched with the HTML-code generated by the server. 
 
 The Notes page uses AJAX to fetch the notes data. Submitting the form still uses the traditional mechanism of submitting web-forms. 
 
-The application URLs reflect the old, carefree times. JSON data is fetched from the url <https://fullstack-exampleapp.herokuapp.com/data.json> and new notes are sent to the URL <https://fullstack-exampleapp.herokuapp.com/new_note>.  
+The application URLs reflect the old, carefree times. JSON data is fetched from the url <https://studies.cs.helsinki.fi/exampleapp/data.json> and new notes are sent to the URL <https://studies.cs.helsinki.fi/exampleapp/new_note>.  
 Nowadays URLs like these would not be considered acceptable, as they don't follow the generally acknowledged conventions of [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) APIs, which we'll look into more in [part 3](/en/part3)
 
 The thing termed AJAX is now so commonplace that it's taken for granted. The term has faded into oblivion, and the new generation has not even heard of it. 
@@ -499,7 +500,7 @@ In recent years, the [Single-page application](https://en.wikipedia.org/wiki/Sin
 
 The Notes page of our application bears some resemblance to SPA-style apps, but it's not quite there yet. Even though the logic for rendering the notes is run on the browser, the page still uses the traditional way of adding new notes. The data is sent to the server with form submit, and the server instructs the browser to reload the Notes page with a <i>redirect</i>.
 
-A single page app version of our example application can be found from <https://fullstack-exampleapp.herokuapp.com/spa>.
+A single page app version of our example application can be found from <https://studies.cs.helsinki.fi/exampleapp/spa>.
 At first glance, the application looks exactly the same as the previous one. 
 The HTML code is almost identical, but the JavaScript file is different (<i>spa.js</i>) and there is a small change in how the form-tag is defined: 
 
@@ -573,15 +574,15 @@ The code determines that the data is to be sent with an HTTP POST request and th
 The application code is available at <https://github.com/mluukkai/example_app>. 
 It's worth remembering that the application is only meant to demonstrate the concepts of the course. The code follows a poor style of development in some measure, and should not be used as an example when creating your own applications. The same is true for the URLs used. The URL <i>new\_note\_spa</i>, which new notes are sent to, does not adhere to current best practices. 
 
-### Javascript-libraries
+### JavaScript-libraries
 
-The sample app is done with so called [vanilla Javascript](https://medium.freecodecamp.org/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34), using only the DOM-API and JavaScript to manipulate the structure of the pages. 
+The sample app is done with so called [vanilla JavaScript](https://medium.freecodecamp.org/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34), using only the DOM-API and JavaScript to manipulate the structure of the pages. 
 
-Instead of using JavaScript and the DOM-API only, different libraries containing tools that are easier to work with compared to the DOM-API are often used to manipulate pages. One of these libraries is the ever-so-popular [JQuery](https://jquery.com/).
+Instead of using JavaScript and the DOM-API only, different libraries containing tools that are easier to work with compared to the DOM-API are often used to manipulate pages. One of these libraries is the ever-so-popular [jQuery](https://jquery.com/).
 
-JQuery was developed back when web applications mainly followed the traditional style of the server generating HTML pages, the functionality of which was enhanced on the browser side using JavaScript written with JQuery. One of the reasons for the success of JQuery was its so-called cross-browser compatibility. The library worked regardless of the browser or the company that made it, so there was no need for browser-specific solutions. Nowadays using JQuery is not as justified given the advancement of VanillaJS, and the most popular browsers generally support basic functionalities well. 
+jQuery was developed back when web applications mainly followed the traditional style of the server generating HTML pages, the functionality of which was enhanced on the browser side using JavaScript written with jQuery. One of the reasons for the success of jQuery was its so-called cross-browser compatibility. The library worked regardless of the browser or the company that made it, so there was no need for browser-specific solutions. Nowadays using jQuery is not as justified given the advancement of VanillaJS, and the most popular browsers generally support basic functionalities well. 
 
-The rise of the single page app brought several more "modern" ways of web development than JQuery. The favorite of the first wave of developers was [BackboneJS](http://backbonejs.org/). After its [launch](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) in 2012, Google's [AngularJS](https://angularjs.org/) quickly became almost the de facto standard of modern web development. 
+The rise of the single page app brought several more "modern" ways of web development than jQuery. The favorite of the first wave of developers was [BackboneJS](http://backbonejs.org/). After its [launch](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) in 2012, Google's [AngularJS](https://angularjs.org/) quickly became almost the de facto standard of modern web development. 
 
 However, the popularity of Angular plummeted after the Angular team [announced](https://jaxenter.com/angular-2-0-announcement-backfires-112127.html) in October 2014 that support for version 1 will end, and Angular 2 will not be backwards compatible with the first version. Angular 2 and the newer versions have not gotten too warm of a welcome. 
 
@@ -590,13 +591,13 @@ During this course, we will get familiar with React and the [Redux](https://gith
 
 The status of React seems strong, but the world of JavaScript is ever changing. For example, recently a newcomer - [VueJS](https://vuejs.org/) - has been capturing some interest. 
 
-### Full stack -web development
+### Full stack web development
 
 What does the name of the course, <i>Full stack web development</i>, mean? Full stack is a buzzword that everyone talks about, while no one really knows what it means. Or at least, there is no agreed-upon definition for the term. 
 
-Practically all web applications have (at least) two "layers": the browser, being closer to the end-user, is the top layer, and the server the bottom one. There is often also a database layer below the server. We can therefore think of the <i>architecture</i> of a web application as a kind of a <i>stack</i> of layers. 
+Practically all web applications have (at least) two "layers": the browser, being closer to the end-user, is the top layer, and the server the bottom one. There is often also a database layer below the server. We can therefore think of the <i>architecture</i> of a web application as a kind of <i>stack</i> of layers. 
 
-Often, we also talk about the [frontend](https://en.wikipedia.org/wiki/Front_and_back_ends) and the [backend](https://en.wikipedia.org/wiki/Front_and_back_ends). The browser is the frontend, and JavaScript run on the browser is frontend code. The server on the other hand is the backend. 
+Often, we also talk about the [frontend](https://en.wikipedia.org/wiki/Front_and_back_ends) and the [backend](https://en.wikipedia.org/wiki/Front_and_back_ends). The browser is the frontend, and JavaScript that runs on the browser is frontend code. The server on the other hand is the backend. 
 
 In the context of this course, full stack web development means that we focus on all parts of the application: the frontend, the backend, and the database. Sometimes the software on the server and its operating system are seen as parts of the stack, but we won't go into those. 
 
@@ -604,11 +605,11 @@ We will code the backend with JavaScript, using [Node.js](https://nodejs.org/en/
 
 It used to be more common for developers to specialize in one layer of the stack, for example the backend. Technologies on the backend and the frontend were quite different. With the Full stack trend, it has become common for developers to be proficient on all layers of the application and the database. Oftentimes, full stack developers must also have enough configuration and administration skills to operate their application, for example, in the cloud. 
 
-### Javascript fatigue
+### JavaScript fatigue
 
-Full stack web development is challenging in many ways. Things are happening in many places at once, and debugging is quite a bit harder than with regular desktop applications. JavaScript does not always work as you'd expect it to (compared to many other languages), and the asynchronous way its runtime environments work causes all sorts of challenges. Communicating in the web requires knowledge of the HTTP protocol. One must also handle databases and server administration and configuration. It would also be good to know enough CSS to make applications at least somewhat presentable. 
+Full stack web development is challenging in many ways. Things are happening in many places at once, and debugging is quite a bit harder than with regular desktop applications. JavaScript does not always work as you'd expect it to (compared to many other languages), and the asynchronous way its runtime environments work causes all sorts of challenges. Communicating on the web requires knowledge of the HTTP protocol. One must also handle databases and server administration and configuration. It would also be good to know enough CSS to make applications at least somewhat presentable. 
 
-The world of JavaScript develops fast, which brings its own set of challenges. Tools, libraries and the language itself are under constant development. Some are starting to get tired of the constant change, and have coined a term for it: [Javascript](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4) [fatigue](https://auth0.com/blog/how-to-manage-javascript-fatigue/).
+The world of JavaScript develops fast, which brings its own set of challenges. Tools, libraries and the language itself are under constant development. Some are starting to get tired of the constant change, and have coined a term for it: [JavaScript](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4) [fatigue](https://auth0.com/blog/how-to-manage-javascript-fatigue/).
 
 You will suffer from JavaScript fatigue yourself during this course. Fortunately for us, there are a few ways to smooth the learning curve, and we can start with coding instead of configuration. We can't avoid configuration completely, but we can merrily push ahead in the next few weeks while avoiding the worst of configuration hells. 
 
@@ -658,16 +659,16 @@ Learn about the basics of HTML forms by reading Mozilla's tutorial [Your first f
 
   <h4>0.4: new note</h4>
 
-In chapter [Loading a page containing JavaScript - revised](/en/part0/fundamentals_of_web_apps#loading-a-page-containing-java-script-revised) the chain of events caused by opening the page <https://fullstack-exampleapp.herokuapp.com/notes> is depicted as a [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)
+In chapter [Loading a page containing JavaScript - revised](/en/part0/fundamentals_of_web_apps#loading-a-page-containing-java-script-revised) the chain of events caused by opening the page <https://studies.cs.helsinki.fi/exampleapp/notes> is depicted as a [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)
 
 The diagram was made using [websequencediagrams](https://www.websequencediagrams.com) service as follows: 
 
 ```
-browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/notes
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
 server-->browser: HTML-code
-browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.css
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
 server-->browser: main.css
-browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/main.js
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
 server-->browser: main.js
 
 note over browser:
@@ -675,7 +676,7 @@ browser starts executing js-code
 that requests JSON data from server 
 end note
 
-browser->server: HTTP GET https://fullstack-exampleapp.herokuapp.com/data.json
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
 server-->browser: [{ content: "HTML is easy", date: "2019-05-23" }, ...]
 
 note over browser:
@@ -684,22 +685,22 @@ that renders notes to display
 end note
 ```
 
-**Create a similar diagram** depicting the situation where the user creates a new note on page <https://fullstack-exampleapp.herokuapp.com/notes> by writing something into the text field and clicking the <i>submit</i> button. 
+**Create a similar diagram** depicting the situation where the user creates a new note on page <https://studies.cs.helsinki.fi/exampleapp/notes> by writing something into the text field and clicking the <i>submit</i> button. 
 
 If necessary, show operations on the browser or on the server as comments on the diagram.
 
 The diagram does not have to be a sequence diagram. Any sensible way of presenting the events is fine. 
 
 All necessary information for doing this, and the next two exercises, can be found from the text of [this part](/en/part0/fundamentals_of_web_apps#forms-and-http-post).
-The idea of these exercises is to read the text through once more, and to think through what is going on where. Reading the application [code](https://github.com/mluukkai/example_app) is not necessary, but it is of course possible. 
+The idea of these exercises is to read the text through once more, and to think through what is going on there. Reading the application [code](https://github.com/mluukkai/example_app) is not necessary, but it is of course possible. 
 
   <h4>0.5: Single page app</h4>
 
-Create a diagram depicting the situation where the user goes to the [single page app](/en/part0/fundamentals_of_web_apps#single-page-app) version of the notes app at <https://fullstack-exampleapp.herokuapp.com/spa>.
+Create a diagram depicting the situation where the user goes to the [single page app](/en/part0/fundamentals_of_web_apps#single-page-app) version of the notes app at <https://studies.cs.helsinki.fi/exampleapp/spa>.
 
   <h4>0.6: New note</h4>
 
-Create a diagram depicting the situation where user creates a new note using the single page version of the app. 
+Create a diagram depicting the situation where the user creates a new note using the single page version of the app. 
 
 This was the last exercise, and it's time to push your answers to GitHub and mark the exercises as done in the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 

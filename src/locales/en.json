@@ -1,0 +1,36 @@
+{
+  "common": {
+    "nextPart": "Next part",
+    "previousPart": "Previous part",
+    "readMore": "Read more",
+    "proposeChanges": "Propose changes to material"
+  },
+  "searchPage": {
+    "noMatches": "No matches found",
+    "matchesTitle": "Found {{count}} matches for query \"{{query}}\""
+  },
+  "navigation": {
+    "aboutCourse": "About course",
+    "courseContents": "Course contents",
+    "faq": "FAQ",
+    "partners": "Partners",
+    "challenge": "Challenge",
+    "searchLinkSrLabel": "Search from the material"
+  },
+  "challengePage": {
+    "registerButton": "Register your company to Full Stack challenge",
+    "nameLabel": "Name",
+    "namePlaceholder": "Jane Doe",
+    "titleLabel": "Title",
+    "companyLabel": "Company",
+    "companyPlaceholder": "Company Co",
+    "phoneLabel": "Phone",
+    "emailLabel": "Email address",
+    "whereDidYouHearLabel": "Where did you hear from the challenge",
+    "submitButton": "Submit",
+    "submitSuccessMessage": "Thanks! We will contact you soon!",
+    "participantsTitle": "These companies have joined the Full Stack challenge",
+    "coOperationTitle": "In co-operation with",
+    "infoButton": "More about challenge"
+  }
+}

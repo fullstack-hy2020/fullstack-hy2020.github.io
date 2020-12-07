@@ -590,11 +590,13 @@ Reduxin kaltainen tilankäsittely on mahdollista toteuttaa nykyään myös ilman
 
 #### 6.19 anekdootit ja connect, step1
 
-Muuta notifikaatioiden näyttämisestä huolehtiva komponentti käyttämään _useSelector_-hookin sijaan _connect_-funktiota.
+<i>Redux storea</i> käytetään tällä hetkellä <em>useSelector</em> ja <em>useDispatch</em> hookien avulla.
+
+Muokkaa <i>AnecdoteList</i> komponenttia niin, että se käyttää _connect_ funktiota hookien sijaan. Tätä varten saatat joutua toteuttamaan <i>mapStateToProps</i> ja <i>mapDispatchToProps</i> funktiot.
 
 #### 6.20 anekdootit ja connect, step2
 
-Tee sama komponentille <i>AnecdoteForm</i>.
+Tee sama <i>Filter</i> ja <i>AnecdoteForm</i> komponenteille.
 
 #### 6.21 anekdootit, loppuhuipennus
 

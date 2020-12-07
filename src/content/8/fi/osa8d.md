@@ -172,8 +172,8 @@ _client_-olion muodostamisen yhteydessä oleva toinen parametri _link_ määritt
 
 Asennetaan vielä muutoksen tarvitsema kirjasto
 
-```js
-npm install --save apollo-link-context
+```bash
+npm install apollo-link-context
 ```
 
 Uusien henkilöiden lisäys ja numeroiden muuttaminen toimii taas. Sovellukseen jää kuitenkin yksi ongelma. Jos yritämme lisätä puhelinnumerotonta henkilöä, se ei onnistu.
@@ -259,7 +259,7 @@ Koodi lukee funktion [readQuery](https://www.apollographql.com/docs/react/v3.0-b
 
 On myös olemassa tilanteita, joissa ainoa järkevä tapa saada välimuisti pidettyä ajantasaisena on _update_-callbackillä tehtävä päivitys. 
 
-Tarvittaessa välimuisti on mahdollista kytkeä pois päältä joko koko sovelluksesta tai yksittäisiltä kyselyiltä määrittelemällä välimuistin käyttöä kontrolloivalle [fetchPolicy](https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy):lle arvo <em>no-cache</em>. 
+Tarvittaessa välimuisti on mahdollista kytkeä pois päältä joko koko sovelluksesta tai yksittäisiltä kyselyiltä määrittelemällä välimuistin käyttöä kontrolloivalle [fetchPolicy](https://www.apollographql.com/docs/react/data/queries/#configuring-fetch-logic):lle arvo <em>no-cache</em>. 
 
 Välimuistin kanssa kannattaa olla tarkkana. Välimuistissa oleva epäajantasainen data voi aiheuttaa vaikeasti havaittavia bugeja. Kuten tunnettua, välimuistin ajantasalla pitäminen on erittäin haastavaa. Koodareiden joukossa kulkevan kansanviisauden mukaan 
 

@@ -28,7 +28,7 @@ The principles of token based authentication are depicted in the following seque
 Let's first implement the functionality for logging in. Install the [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) library, which allows us to generate [JSON web tokens](https://jwt.io/).
 
 ```bash
-npm install jsonwebtoken --save
+npm install jsonwebtoken
 ```
 
 The code for login functionality goes to the file controllers/login.js.
@@ -197,7 +197,7 @@ const decodedToken = jwt.verify(token, process.env.SECRET)
 
 The object decoded from the token contains the <i>username</i> and <i>id</i> fields, which tells the server who made the request. 
 
-If there is no token, or the object decoded from the token does not contain the users identity (_decodedToken.id_ is undefined), error status code [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) is returned and the reason for the failure is explained in the response body. 
+If there is no token, or the object decoded from the token does not contain the user's identity (_decodedToken.id_ is undefined), error status code [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) is returned and the reason for the failure is explained in the response body. 
 
 ```js
 if (!token || !decodedToken.id) {
@@ -267,7 +267,7 @@ If the application has multiple interfaces requiring identification, JWT's valid
 
 There have been many changes to the code which have caused a typical problem for a fast-paced software project: most of the tests have broken. Because this part of the course is already jammed with new information, we will leave fixing the tests to a non compulsory exercise. 
 
-Usernames, passwords and applications using token authentication must always be used over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). We could use a Node [HTTPS](https://nodejs.org/api/https.html) server in our application instead of the [HTTP](https://nodejs.org/docs/latest-v8.x/api/http.html) server (it requires more configuration). On the other hand, the production version of our application is in Heroku, so our applications stays secure: Heroku routes all traffic between a browser and the Heroku server over HTTPS. 
+Usernames, passwords and applications using token authentication must always be used over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). We could use a Node [HTTPS](https://nodejs.org/api/https.html) server in our application instead of the [HTTP](https://nodejs.org/docs/latest-v8.x/api/http.html) server (it requires more configuration). On the other hand, the production version of our application is in Heroku, so our application stays secure: Heroku routes all traffic between a browser and the Heroku server over HTTPS. 
 
 We will implement login to the frontend in the [next part](/en/part5).
 
@@ -283,15 +283,14 @@ In the next exercises, basics of user management will be implemented for the Blo
 
 #### 4.15: bloglist expansion, step3
 
-Implement a way to create new users by doing a HTTP POST-request to address <i>api/users</i>. Users have <i>username
-, password and name</i>.
+Implement a way to create new users by doing a HTTP POST-request to address <i>api/users</i>. Users have <i>username, password and name</i>.
 
 Do not save passwords to the database as clear text, but use the <i>bcrypt</i> library like we did in part 4 chapter [Creating new users](/en/part4/user_administration#creating-users).
 
 **NB** Some Windows users have had problems with <i>bcrypt</i>. If you run into problems, remove the library with command 
 
 ```bash
-npm uninstall bcrypt --save 
+npm uninstall bcrypt 
 ```
 
 and install [bcryptjs](https://www.npmjs.com/package/bcryptjs) instead. 
@@ -386,7 +385,7 @@ if ( blog.user.toString() === userid.toString() ) ...
 
 #### 4.22*:  bloglist expansion, step10
 
-After adding token based authentication the tests for adding a new blog broke down. Fix now the tests. Write also a new test that ensures that adding a blog fails with proper status code <i>401 Unauthorized</i> if token is not provided.
+After adding token based authentication the tests for adding a new blog broke down. Fix the tests. Also write a new test to ensure adding a blog fails with the proper status code <i>401 Unauthorized</i> if a token is not provided.
 
 [This](https://github.com/visionmedia/supertest/issues/398) is most likely useful when doing the fix.
 

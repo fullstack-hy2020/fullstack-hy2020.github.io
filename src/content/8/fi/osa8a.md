@@ -244,8 +244,8 @@ Toteutetaan nyt GraphQL-palvelin tämän hetken johtavaa kirjastoa [Apollo-serve
 
 Luodaan uusi npm-projekti komennolla _npm init_ ja asennetaan tarvittavat riippuvuudet
 
-```js
-npm install --save apollo-server graphql
+```bash
+npm install apollo-server graphql
 ```
 
 Alustava toteutus on seuraavassa
@@ -428,7 +428,7 @@ resolveri on funktio, joka poikkeaa kahdesta aiemmasta resolverista siinä että
 Parametreista toinen _args_ sisältää kyselyn parametrit. Resolveri siis palauttaa taulukosta
  _persons_ henkilön, jonka nimi on sama kuin <i>args.name</i> arvo. Ensimmäisenä olevaa parametria _root_ resolveri ei tarvitse.
 
-Itse asiassa kaikki resolverifunktiot saavat [neljä parametria](https://www.apollographql.com/docs/graphql-tools/resolvers.html#Resolver-function-signature). Javascriptissa parametrit voidaan kuitenkin jättää määrittelemättä, jos niitä ei tarvita. Tulemme käyttämään resolverien ensimmäistä ja kolmatta parametria vielä myöhemmin tässä osassa.
+Itse asiassa kaikki resolverifunktiot saavat [neljä parametria](https://www.graphql-tools.com/docs/resolvers#resolver-function-signature). Javascriptissa parametrit voidaan kuitenkin jättää määrittelemättä, jos niitä ei tarvita. Tulemme käyttämään resolverien ensimmäistä ja kolmatta parametria vielä myöhemmin tässä osassa.
 
 ### Oletusarvoinen resolveri
 
@@ -448,7 +448,7 @@ osaa palvelin liittää vastaukseen täsmälleen ne kentät, joita kysely pyytä
 
 GraphQL-palvelimen tulee määritellä resolverit <i>jokaiselle</i> skeemassa määritellyn tyypin kentälle. Olemme nyt määritelleet resolverit ainoastaan tyypin <i>Query</i> kentille, eli kaikille sovelluksen tarjoamille kyselyille. 
 
-Koska skeemassa olevan tyypin <i>Person</i> kentille ei ole määritelty resolvereita, Apollo on määritellyt niille [oletusarvoisen resolverin](https://www.apollographql.com/docs/graphql-tools/resolvers.html#Default-resolver), joka toimii samaan tapaan kuin seuraavassa itse määritelty resolveri:
+Koska skeemassa olevan tyypin <i>Person</i> kentille ei ole määritelty resolvereita, Apollo on määritellyt niille [oletusarvoisen resolverin](https://www.graphql-tools.com/docs/resolvers/#default-resolver), joka toimii samaan tapaan kuin seuraavassa itse määritelty resolveri:
 
 
 ```js
@@ -828,7 +828,7 @@ Mutation: {
 }
 ```
 
-Mutaatio hakee siis hakee kentän <i>name</i> perusteella henkilön, jonka numero päivitetään.
+Mutaatio siis hakee kentän <i>name</i> perusteella henkilön, jonka numero päivitetään.
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branchissa <i>part8-3</i>.
 
@@ -913,7 +913,7 @@ Jos kyselyitä on useita, pyytää Playground valitsemaan mikä niistä suoritet
 
 ### Tehtävät 8.1.-8.7.
 
-Tehtävissä toteutetaan yksinkertaisen kirjaston GraphQL:ää tarjoava backend. Ota sovelluksesi lähtökohtaksi [tämä tiedosto](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js). Muista _npm init_ ja riippuvuuksien asentaminen!
+Tehtävissä toteutetaan yksinkertaisen kirjaston GraphQL:ää tarjoava backend. Ota sovelluksesi lähtökohdaksi [tämä tiedosto](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js). Muista _npm init_ ja riippuvuuksien asentaminen!
 
 Huomaa, että koodin käynnistäminen aiheuttaa alussa virheen, sillä skeeman määrittely on puutteellinen.
 

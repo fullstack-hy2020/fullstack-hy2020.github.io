@@ -7,7 +7,7 @@ lang: fi
 
 <div class="content">
 
-Kurssilla tutustutaan JavaScriptilla tapahtuvaan moderniin websovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST ja GraphQL-rajapinnoissa. Kurssin uudessa osassa tutustutaan tällä hetkellä kovassa nosteessa oleva JavaScriptin tyypitettyyn versioon TypeScriptiin.
+Kurssilla tutustutaan JavaScriptilla tapahtuvaan moderniin websovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST ja GraphQL-rajapinnoissa. Tämän vuoden kurssin uusissa osissa tutustutaan TypeScriptiin ja React Nativeen.
 
 Kurssilla käsitellään myös sovellusten testaamista, konfigurointia ja suoritusympäristöjen hallintaa sekä NoSQL-tietokantoja.
 
@@ -25,7 +25,7 @@ Materiaali perustuu muutamien osasta osaan vaihtuvien esimerkkiohjelmien asteitt
 
 ### Suoritustapa
 
-Kurssi koostuu yhdeksästä osasta, joista ensimmäinen on historiallisista syistä numero nolla. Osat voi tulkita löyhästi ajatellen viikoiksi. Osia kuitenkin ilmestyy nopeampaa tahtia, ja suoritusnopeuskin on melko vapaa.
+Kurssi koostuu yhdestätoista osasta, joista ensimmäinen on historiallisista syistä numero nolla. Osat voi tulkita löyhästi ajatellen viikoiksi. Osia kuitenkin ilmestyy nopeampaa tahtia, ja suoritusnopeuskin on melko vapaa.
 
 Materiaalissa osasta <i>n</i> osaan <i>n+1</i> eteneminen ei ole mielekästä ennen kuin riittävä osaaminen osan <i>n</i> asioista on saavutettu. Kurssilla sovelletaankin pedagogisin termein <i>tavoiteoppimista</i>, [engl. mastery learning](https://en.wikipedia.org/wiki/Mastery_learning) ja on tarkoitus, että etenet seuraavaan osaan vasta, kun riittävä määrä edellisen osan tehtävistä on tehty.
 
@@ -92,6 +92,10 @@ Suorittamalla vähintään 22/26 tehtävää kurssin kahdeksannesta, GraphQL:ä�
 
 Suorittamalla vähintään 24/27 tehtävää kurssin yhdeksännestä, TypeScriptiä käsittelevästä osasta, voit laajentaa suoritustasi yhdellä opintopisteellä. Osa kannattaa suorittaa vasta sen jälkeen kun olet tehnyt osat 0-7.
 
+#### React Native -osan suoritus
+
+Suorittamalla tehtäviä kurssin kymmenennestä, React Nativea käsittelevästä osasta, voit laajentaa suoritustasi yhdellä tai kahdella opintopisteella. Yhden opintopisteen suoritukseen tulee suorittaa osassa vähintään 19 tehtävää, kun taas kahden opintopisteen suoritukseen vähintään 26 tehtävää. Lisätietoja osan esitietovaatimuksista, tehtävien palauttamisesta ja opintopisteistä löydät [osasta 10](/en/part10/introduction_to_react_native).
+
 ### Suoritusmerkinnän pyytäminen
 
 Jos haluat kurssilta virallisen suorituksen, tallenna <b>Helsingin yliopiston</b> opiskelijanumerosi [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen): 
@@ -120,7 +124,7 @@ Osissa 0-4 on ainoastaan vähäisiä muutoksia. Osa 5d eli Cypress.io-kirjastoll
 
 Reduxia käsittelevä osa 6 keskittyy ensisijaisesti reduxin uuteen hook-perustaiseen apiin. Myös osassa 7 käsiteltävä react-router on uudistunut käyttämään hook-apia. Vähäiselle ylläpidolle jäänyt Semantic UI React -kirjasto on korvattu MaterialUI-kirjastolla. 
 
-GraphQL:ää käsittelevä osa 8 on kokenut paljon päivityksiä erityisesti Apollo Clientin osalta, jonka hook-perustaiset apit ovat vihdoin stabiloituneet. TypeScriptiin keskittyvä osa 9 on kokonaan uusi. 
+GraphQL:ää käsittelevä osa 8 on kokenut paljon päivityksiä erityisesti Apollo Clientin osalta, jonka hook-perustaiset apit ovat vihdoin stabiloituneet. TypeScriptiin keskittyvä osa 9 ja React Nativeen keskittyvä osa 10 ovat kokonaan uusia. 
 
 Viime vuoden kurssimateriaali on nähtävissä osoitteessa https://fullstackopen-2019.github.io/
 
@@ -132,6 +136,10 @@ Jos olet jo suorittanut kurssin joko MOOC:ina tai Yliopiston kurssina, voit täy
 
 Voit jatkaa siitä mihin jäit! Jos haluat tehdä kokonaan uudelleen jonkin osan tehtävät, ota yhteyttä 
 email matti.luukkainen@helsinki.fi tai Telegram @mluukkai. Kerro github-tunnuksesi sekä mitkä osat palautuksista haluat poistettavan.
+
+#### Vuoden 2020 kurssin jatkaminen vuoden 2021 versiossa
+
+Vuoden 2020 versio päättyy 10.1.2021. Jos kurssi jää kesken, voit jatkaa sitä taas 15.3.2021 uuden version alkaessa!
 
 #### Kurssin jonkin muun version täydentäminen
 
@@ -157,20 +165,26 @@ Suurin osa tehtävistä on moniosaisia, samaa ohjelmaa pala palalta rakentavia k
 
 ### Kokeeseen ilmoittautuminen
 
-Virallinen kurssisuoritus edellyttää että teet hyväksyttävästi kurssikokeen Avoimen yliopiston Moodle-järjestelmässä. Pääset Moodleen seuraavia ohjeita seuraamalla
+Virallinen kurssisuoritus edellyttää että teet hyväksyttävästi kurssikokeen Avoimen yliopiston Moodle-järjestelmässä. Pääset Moodleen seuraavia ohjeita seuraamalla: 
 
-- Tee Avoimen yliopiston kurssi-ilmoittautuminenn [täällä](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=129171256)
-- **Odota 24 tuntia** ja aktivoi Helsingin yliopiston käyttäjätunnus. Saat ohjeet aktivointia varten ilmoittautumista seuraavana päivänä.
--	Kirjaudu [kurssisivulle](https://courses.helsinki.fi/fi/aytkt21009/129171256)  (**Kirjaudu-painike sivun oikeassa yläkulmassa**), josta saat kurssiavaimen Moodleen kirjautumista varten.
--	Kirjaudu kurssin [Moodleen](https://moodle.helsinki.fi/course/view.php?id=33946) HY:n käyttäjätunnuksella ja kurssiavaimella.
+- Tee Avoimen yliopiston kurssi-ilmoittautuminen 09.01.2021 mennessä [täällä](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=129171256) 
+- Linkin ja kurssiavaimen opintojakson Moodleen saat sähköpostitse 24 tunnin sisään kurssi-ilmoittautumisesi jälkeen.
+- Käyttäjätunnus. Opiskeletko Helsingin yliopistossa tai jossain muussa [HAKA-verkoston](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners) jäseninstituutiossa? 
+  - Kyllä: Käytä omaa käyttäjätunnustasi Moodleen kirjautumiseen. 
+  - En: Aktivoi Helsingin yliopiston käyttäjätunnuksesi ja käytä sitä Moodleen kirjautumiseen. Saat käyttäjätunnusta koskevaa lisätietoa sähköpostiisi ilmoittautumisesi jälkeen. 
+- Käytä Helsingin yliopiston / [HAKA-korkeakoulun](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners) käyttäjätunnusta Moodleen kirjautumiseen.  
+- Kurssi-ilmoittautumisen jälkeen: Tallenna Helsingin yliopiston opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/myinfo) välilehdellä "my submissions". 
+  - Mikäli käytit muun kuin Helsingin yliopiston HAKA-tunnuksia kirjautumiseen, pyydä Helsingin yliopiston opiskelijanumerosi avoin-student@helsinki.fi -osoitteesta.  
+    - Lähetä viesti samasta osoitteesta, jota käytit kurssi-ilmoittautumiseen. 
+    - Ilmoita nimesi, syntymäaikasi, kurssin nimi.  
 
-HUOM!
-- **Odotithan 24 tuntia** kuten ylläoleva ohje kehoittaa?
--	Ilmoittautuminen Avoimeen yliopiston on mahdollista 09.01.2021 saakka.
--	Vain niiden opiskelijoiden opintosuoritukset voidaan kirjata Helsingin yliopiston opintorekisteriin, jotka ovat tehneet kurssi-ilmoittautumisen Avoimeen yliopistoon ja suorittaneet kurssin loppuun ohjeiden mukaisesti.
+HUOM! 
 
-Muista tallettaa opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) välilehdellä "my submissions".
+- Vain niiden opiskelijoiden opintosuoritukset voidaan kirjata Helsingin yliopiston opintorekisteriin, jotka ovat tehneet kurssi-ilmoittautumisen Avoimeen yliopistoon ja suorittaneet kurssin loppuun ohjeiden mukaisesti. 
 
+Kurssi-ilmoittautumisen jälkeen: Muista tallettaa opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/myinfo)  välilehdellä "my submissions". Mikäli käytit HAKA-tunnuksia kirjautumiseen, pyydä Helsingin yliopiston opiskelijanumerosi avoin-student@helsinki.fi -osoitteesta. Ilmoita sähköpostissa nimesi, kurssi-ilmoittautumisessa käyttämäsi sähköpostiosoite, syntymäaikasi sekä kurssin nimi.  
+
+ 
 ### Full stack -harjoitustyö
 
 Avoimen yliopiston tarjonnassa on 1-10 opintopisteen laajuinen Full Stack -harjoitustyö, johon voit halutessasi osallistua suoritettuasi tämän kurssin vähintään 5 opintopisteen laajuisena.
@@ -186,7 +200,7 @@ Lisää tietoa harjoitustyöstä avoimen yliopiston [sivulla](https://courses.he
 
 ### Haastattelulupaus
 
-Kurssin yhteistyökumppaneista Houston Inc, Terveystalo, Elisa ja Smartly.io ovat antaneet <i>haastattelulupauksen</i> kaikille projektin täydessä laajuudessa (9+10 op) suorittaville.
+Kurssin yhteistyökumppaneista[Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/) ovat antaneet <i>haastattelulupauksen</i> kaikille projektin täydessä laajuudessa (9+10 op) suorittaville.
 
 Haastattelulupaus tarkoittaa, että opiskelija voi niin halutessaan ilmoittautua työhaastatteluun haastattelulupauksen antaneelle yritykselle. Kurssin vastuuhenkilö toimittaa ohjeet opiskelijalle henkilökohtaisesti kurssisuorituksen jälkeen.
 

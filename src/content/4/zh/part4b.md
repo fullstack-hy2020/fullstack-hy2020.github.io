@@ -55,10 +55,10 @@ Node 中的约定是用 <i>NODE\_ENV</i> 环境变量定义应用的执行模式
 我们在使用 nodemon 的  _npm run dev_ 脚本中指定了应用的模式为 <i>development</i> 。 我们还指定了默认的 npm start 命令将模式定义为<i>production</i>。
 
 <!-- There is a slight issue in the way that we have specified the mode of the application in our scripts: it will not work on Windows. We can correct this by installing the [cross-env](https://www.npmjs.com/package/cross-env) package with the command: -->
-我们在脚本中指定应用模式的方式有一个小问题: 它不能在 Windows 上工作。 我们可以通过如下命令安装[cross-env](https://www.npmjs.com/package/cross-env)包来纠正这个问题:
+我们在脚本中指定应用模式的方式有一个小问题: 它不能在 Windows 上工作。 我们可以通过如下命令安装[cross-env](https://www.npmjs.com/package/cross-env)作为一个开发依赖包，来纠正这个问题:
 
 ```bash
-npm install cross-env
+npm install --save-dev cross-env
 ```
 
 <!-- We can then achieve cross-platform compatibility by using the cross-env library in our npm scripts defined in <i>package.json</i>: -->
@@ -258,11 +258,11 @@ test('the first note is about HTTP methods', async () => {
 使用async/await 语法的好处开始变得明显。 通常情况下，我们必须使用回调函数来访问由 promises 返回的数据，但是使用新的语法会更加方便:
 
 ```js
-const res = await api.get('/api/notes')
+const response = await api.get('/api/notes')
 
 // execution gets here only after the HTTP request is complete
-// the result of HTTP request is saved in variable res
-expect(res.body).toHaveLength(2)
+// the result of HTTP request is saved in variable response
+expect(response.body).toHaveLength(2)
 ```
 
 
@@ -296,23 +296,26 @@ module.exports = {
 <!-- Our tests are already using the [afterAll](https://facebook.github.io/jest/docs/en/api.html#afterallfn-timeout) function of Jest to close the connection to the database after the tests are finished executing. Jest offers many other [functions](https://facebook.github.io/jest/docs/en/setup-teardown.html#content) that can be used for executing operations once before any test is run, or every time before a test is run. -->
 我们的测试已经使用 Jest 的[afterAll](https://facebook.github.io/Jest/docs/en/api.html#afterallfn-timeout)函数在测试执行完成后关闭到数据库的连接。 Jest 提供了许多其他的[函数](https://facebook.github.io/Jest/docs/en/setup-teardown.html#content) ，可以在运行任何测试之前或每次运行测试之前执行一次操作。
 
-<!-- Let's initialize the database <i>before every test</i> with the [beforeEach](https://jestjs.io/docs/en/api.html#aftereachfn-timeout) function: -->
-让我们在<i>每个  test</i> 之前使用[beforeEach](https://jestjs.io/docs/en/api.html#aftereachfn-timeout)函数初始化数据库 i:
+<!-- Let's initialize the database <i>before every test</i> with the [beforeEach](https://jestjs.io/docs/en/api.html#beforeeachfn-timeout) function: -->
+让我们在<i>每个  test</i> 之前使用[beforeEach](https://jestjs.io/docs/en/api.html#beforeeachfn-timeout)函数初始化数据库 i:
 
 ```js
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
+// highlight-start
 const Note = require('../models/note')
 
 const initialNotes = [
   {
     content: 'HTML is easy',
+    date: new Date(),
     important: false,
   },
   {
     content: 'Browser can execute only Javascript',
+    date: new Date(),
     important: true,
   },
 ]
@@ -326,6 +329,8 @@ beforeEach(async () => {
   noteObject = new Note(initialNotes[1])
   await noteObject.save()
 })
+// highlight-end
+// ...
 ```
 
 <!-- The database is cleared out at the beginning, and after that we save the two notes stored in the _initialNotes_ array to the database. Doing this, we ensure that the database is in the same state before every test is run. -->
@@ -344,11 +349,13 @@ test('all notes are returned', async () => {
 test('a specific note is within the returned notes', async () => {
   const response = await api.get('/api/notes')
 
-  const contents = response.body.map(r => r.content) // highlight-line
+// highlight-start
+  const contents = response.body.map(r => r.content) 
 
   expect(contents).toContain(
-    'Browser can execute only Javascript' // highlight-line
+    'Browser can execute only Javascript' 
   )
+// highlight-end
 })
 ```
 
@@ -576,16 +583,18 @@ const Note = require('../models/note')
 const initialNotes = [
   {
     content: 'HTML is easy',
+    date: new Date(),
     important: false
   },
   {
     content: 'Browser can execute only Javascript',
+    date: new Date(),
     important: true
   }
 ]
 
 const nonExistingId = async () => {
-  const note = new Note({ content: 'willremovethissoon' })
+  const note = new Note({ content: 'willremovethissoon',date: new Date() })
   await note.save()
   await note.remove()
 
@@ -769,7 +778,8 @@ test('a specific note can be viewed', async () => {
     .expect('Content-Type', /application\/json/)
 // highlight-end
 
-  expect(resultNote.body).toEqual(noteToView)
+  const processedNoteToView = JSON.parse(JSON.stringify(noteToView))
+  expect(resultNote.body).toEqual(processedNoteToView)
 })
 
 test('a note can be deleted', async () => {
@@ -793,6 +803,10 @@ test('a note can be deleted', async () => {
   expect(contents).not.toContain(noteToDelete.content)
 })
 ```
+
+<!-- In the first test, the note object we receive as the response body goes through JSON serialization and parsing. This processing will turn the note object's <em>date</em> property value's type from <em>Date</em> object into a string. Because of this we can't directly compare equality of the <em>resultNote.body</em> and <em>noteToView</em>. Instead, we must first perform similar JSON serialization and parsing for the <em>noteToView<em> as the server is performing for the note object. -->
+
+在第一个测试中， 我们收到的note对象，作为response body，经过JSON的序列化和格式化处理。这种处理会将note 对象的date 属性的值类型从Date 类型转换成string。正是由于此，我们不能直接比较<em>resultNote.body</em> 和 <em>noteToView</em>的相等性能。 相反，我们必须像服务器对note 对象的操作那样，首先利用类似的方法，用JSON来序列化和格式化<em>noteToView</em> 。
 
 <!-- Both tests share a similar structure. In the initialization phase they fetch a note from the database. After this, the tests call the actual operation being tested, which is highlighted in the code block. Lastly, the tests verify that the outcome of the operation is as expected. -->
 这两个测试有着相似的结构。 在初始化阶段，它们从数据库中获取一个便笺。 在此之后，测试调用被测试的实际操作，该操作在代码块中突出显示。 最后，测试验证了操作的结果是符合预期的。
@@ -859,14 +873,14 @@ try {
 我们来安装这个库吧
 
 ```bash
-npm install express-async-errors --save
+npm install express-async-errors
 ```
 
 
 <!-- Using the library is <i>very</i> easy.  -->
 使用这个库很容易。
 <!-- You introduce the library in <i>src/app.js</i>: -->
-在<i>src/app.js</i> 中引入库:
+在<i>app.js</i> 中引入库:
 
 ```js
 const config = require('./utils/config')
@@ -1209,7 +1223,8 @@ describe('viewing a specific note', () => {
       .expect(200)
       .expect('Content-Type', /application\/json/)
 
-    expect(resultNote.body).toEqual(noteToView)
+    const processedNoteToView = JSON.parse(JSON.stringify(noteToView))
+    expect(resultNote.body).toEqual(processedNoteToView)
   })
 
   test('fails with statuscode 404 if note does not exist', async () => {

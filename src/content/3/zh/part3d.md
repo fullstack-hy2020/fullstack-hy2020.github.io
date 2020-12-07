@@ -215,17 +215,6 @@ Mongoose 没有为此提供内置的验证器，可以使用 npm 安装[mongoose
 <!-- If an HTTP POST request tries to add a name that is already in the phonebook, the server must respond with an appropriate status code and error message. -->
 如果 HTTP POST 请求试图添加电话簿中已有的名称，服务器必须用适当的状态码和错误消息作出响应。
 
-<!-- **Huom:** unique-validator causes a warning to be printed to the console -->
-**注意: **unique-validator 会将警告打印到控制台 
-
-```
-(node:49251) DeprecationWarning: collection.ensureIndex is deprecated. Use createIndexes instead.
-connected to MongoDB
-```
-
-<!-- Read the mongoose [documentation](https://mongoosejs.com/docs/deprecations.html) to find out how to get rid of the warning. -->
-阅读mongoose [文档](https://mongoosejs.com/docs/deprecations.html 文档) ，找出如何摆脱警告。
-
 #### 3.20*: Phonebook database, 步骤8
 <!-- Expand the validation so that the name stored in the database has to be at least three characters long, and the phone number must have at least 8 digits. -->
 扩展验证，以便存储在数据库中的名称必须至少有三个字符长，电话号码必须至少有8个数字。
@@ -282,7 +271,7 @@ personService
 通常，lint 或 linter 是检测和标记编程语言中的错误，包括文本错误的一种工具。 lint-like 这个术语有时用于标记可疑的语言使用情况。 类似 lint 的工具通常对源代码执行静态分析。 
 
 <!-- In compiled statically typed languages like Java, IDEs like NetBeans can point out errors in the code, even ones that are more than just compile errors. Additional tools for performing [static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) like [checkstyle](http://checkstyle.sourceforge.net/), can be used for expanding the capabilities of the IDE to also point out problems related to style, like indentation. -->
-在像 Java 这样的编译静态类型语言中，像 NetBeans 这样的 ide 可以指出代码中的错误，甚至那些不仅仅是编译错误的错误。 执行[静态分析](https://en.wikipedia.org/wiki/Static_program_analysis)的额外工具，如[检查样式](http://checkstyle.sourceforge.net/) ，可以用来扩展 IDE 的功能，也指出与样式有关的问题，如缩进。
+在像 Java 这样的编译静态类型语言中，像 NetBeans 这样的 ide 可以指出代码中的错误，甚至那些不仅仅是编译错误的错误。 执行[静态分析](https://en.wikipedia.org/wiki/Static_program_analysis)的额外工具，如[检查样式](https://checkstyle.sourceforge.io) ，可以用来扩展 IDE 的功能，也指出与样式有关的问题，如缩进。
 
 <!-- In the JavaScript universe, the current leading tool for static analysis aka. "linting" is [ESlint](https://eslint.org/). -->
 在 JavaScript 的世界里，目前主要的静态分析工具又名“ linting”是[ESlint](https://ESlint.org/)。
@@ -496,7 +485,7 @@ Eslint 有大量的[规则](https://ESlint.org/docs/rules/) ，可以通过编�
 许多公司定义了通过 ESlint 配置文件在整个组织中执行的编码标准。 建议不要一遍又一遍地使用重造轮子，从别人的项目中采用现成的配置到自己的项目中可能是一个好主意。 最近，很多项目都采用了 Airbnb 的 Javascript 风格指南，使用了 Airbnb 的 [ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) 。
 
 <!-- You can find the code for our current application in its entirety in the <i>part3-6</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-6). -->
-您可以在 [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-6)的<i>part3-6</i> 分支中找到我们当前应用的全部代码。
+您可以在 [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-7)的<i>part3-7</i> 分支中找到我们当前应用的全部代码。
 </div>
 
 

@@ -21,6 +21,8 @@ The Visual Studio Code debugger can be useful in some situations. You can launch
 
 Note that the application shouldn't be running in another console, otherwise the port will already be in use.
 
+__NB__ A newer version of Visual Studio Code may have _Run_ instead of _Debug_. Furthermore, you may have to configure your _launch.json_ file to start debugging. This can be done by choosing _Add Configuration..._ on the drop-down menu, which is located next to the green play button and above _VARIABLES_ menu, and select _Run "npm start" in a debug terminal_. For more detailed setup instructions, visit Visual Studio Code's [Debugging documentation](https://code.visualstudio.com/docs/editor/debugging).
+
 Below you can see a screenshot where the code execution has been paused in the middle of saving a new note:
 
 ![](../../images/3/36e.png)
@@ -128,7 +130,7 @@ Mongoose could be described as an <i>object document mapper</i> (ODM), and savin
 Let's install Mongoose:
 
 ```bash
-npm install mongoose --save
+npm install mongoose
 ```
 
 Let's not add any code dealing with Mongo to our backend just yet. Instead, let's make a practice application by creating a new file, <i>mongo.js</i>:
@@ -146,7 +148,7 @@ const password = process.argv[2]
 const url =
   `mongodb+srv://fullstack:${password}@cluster0-ostce.mongodb.net/test?retryWrites=true`
 
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 
 const noteSchema = new mongoose.Schema({
   content: String,
@@ -379,7 +381,7 @@ const mongoose = require('mongoose')
 const url =
   'mongodb+srv://fullstack:sekred@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
 
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 
 const noteSchema = new mongoose.Schema({
   content: String,
@@ -445,7 +447,7 @@ const url = process.env.MONGODB_URI // highlight-line
 
 console.log('connecting to', url) // highlight-line
 
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 // highlight-start
   .then(result => {
     console.log('connected to MongoDB')
@@ -491,7 +493,7 @@ const url = process.env.MONGODB_URI
 
 console.log('connecting to', url)
 
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
   .then(result => {
     console.log('connected to MongoDB')
   })
@@ -509,13 +511,13 @@ The method for establishing the connection is now given functions for dealing wi
 There are many ways to define the value of an environment variable. One way would be to define it when the application is started:
 
 ```bash
-MONGODB_URI=address_here npm run watch
+MONGODB_URI=address_here npm run dev
 ```
 
 A more sophisticated way is to use the [dotenv](https://github.com/motdotla/dotenv#readme) library. You can install the library with the command:
 
 ```bash
-npm install dotenv --save
+npm install dotenv
 ```
 
 To use the library, we create a <i>.env</i> file at the root of the project. The environment variables are defined inside of the file, and it can look like this:
@@ -585,7 +587,7 @@ The _savedNote_ parameter in the callback function is the saved and newly create
 response.json(savedNote)
 ```
 
-Fetching an individual note gets changed into the following:
+Using Mongoose's [findById](https://mongoosejs.com/docs/api.html#model_Model.findById) method, fetching an individual note gets changed into the following:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -797,10 +799,10 @@ app.use(errorHandler)
 The json-parser middleware should be among the very first middleware loaded into Express. If the order was the following:
 
 ```js
-app.use(logger) // request.body is empty!
+app.use(logger) // request.body is undefined!
 
 app.post('/api/notes', (request, response) => {
-  // request.body is empty!
+  // request.body is undefined!
   const body = request.body
   // ...
 })
@@ -808,7 +810,7 @@ app.post('/api/notes', (request, response) => {
 app.use(express.json())
 ```
 
-Then the JSON data sent with the HTTP requests would not be available for the logger middleware or the POST route handler, since the _request.body_ would be an empty object at that point.
+Then the JSON data sent with the HTTP requests would not be available for the logger middleware or the POST route handler, since the _request.body_ would be _undefined_ at that point.
 
 It's also important that the middleware for handling unsupported routes is next to the last middleware that is loaded into Express, just before the error handler.
 
@@ -873,22 +875,6 @@ Notice that the <em>findByIdAndUpdate</em> method receives a regular JavaScript 
 There is one important detail regarding the use of the <em>findByIdAndUpdate</em> method. By default, the <em>updatedNote</em> parameter of the event handler receives the original document [without the modifications](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate). We added the optional <code>{ new: true }</code> parameter, which will cause our event handler to be called with the new modified document instead of the original.
 
 After testing the backend directly with Postman and the VS Code REST client, we can verify that it seems to work. The frontend also appears to work with the backend using the database. 
-
-When we toggle the importance of a note, we see the following worrisome error message in the console:
-
-![](../../images/3/48.png)
-
-Googling the error message will lead to [instructions](https://stackoverflow.com/questions/52572852/deprecationwarning-collection-findandmodify-is-deprecated-use-findoneandupdate) for fixing the problem. Following [the suggestion in the Mongoose documentation](https://mongoosejs.com/docs/deprecations.html), we add the following line to the <i>note.js</i> file:
-
-```js
-const mongoose = require('mongoose')
-
-mongoose.set('useFindAndModify', false) // highlight-line
-
-// ...
-  
-module.exports = mongoose.model('Note', noteSchema) 
-```
 
 You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).
 

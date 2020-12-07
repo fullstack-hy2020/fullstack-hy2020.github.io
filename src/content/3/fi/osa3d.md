@@ -184,15 +184,6 @@ Mongoose ei tarjoa tilanteeseen sopivaa valmista validaattoria. Käytä npm:llä
 
 Jos HTTP POST -pyyntö yrittää lisätä nimeä, joka on jo puhelinluettelossa, tulee vastata sopivalla statuskoodilla ja lisätä vastaukseen asianmukainen virheilmoitus.
 
-**Huom:** unique-validatorin käyttö aiheuttaa konsoliin tulostuvan varoituksen
-
-```
-(node:49251) DeprecationWarning: collection.ensureIndex is deprecated. Use createIndexes instead.
-connected to MongoDB
-```
-
-Mongoosen [dokumentaatio](https://mongoosejs.com/docs/deprecations.html) kertoo, miten saat virheilmoituksen poistettua.
-
 #### 3.20*: puhelinluettelo ja tietokanta, step8
 
 Laajenna validaatiota siten, että tietokantaan talletettavan nimen on oltava pituudeltaan vähintään 3 merkkiä ja puhelinnumeron vähintään 8 merkkiä. 
@@ -399,10 +390,9 @@ Yksittäisen sääntö on helppo kytkeä [pois päältä](https://eslint.org/doc
       ],
       'arrow-spacing': [
           'error', { 'before': true, 'after': true }
-      ]
+      ],
+      'no-console': 0, // highlight-line
     },
-    'no-console': 0 // highlight-line
-  },
 }
 ```
 

@@ -15,8 +15,8 @@ We will now add user management to our application, but let's first start using 
 
 Install mongoose and mongoose-unique-validator:
 
-```js
-npm install mongoose mongoose-unique-validator --save
+```bash
+npm install mongoose mongoose-unique-validator
 ```
 
 
@@ -65,13 +65,11 @@ const { ApolloServer, UserInputError, gql } = require('apollo-server')
 const mongoose = require('mongoose')
 const Person = require('./models/person')
 
-mongoose.set('useFindAndModify', false)
-
-const MONGODB_URI = 'mongodb+srv://fullstack:sekred@cluster0-ostce.mongodb.net/graphql?retryWrites=true'
+const MONGODB_URI = 'mongodb+srv://fullstack:halfstack@cluster0-ostce.mongodb.net/graphql?retryWrites=true'
 
 console.log('connecting to', MONGODB_URI)
 
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true })
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
   .then(() => {
     console.log('connected to MongoDB')
   })

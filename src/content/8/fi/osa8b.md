@@ -26,8 +26,8 @@ Käytetään kurssilla Apollo Clientin versiota [3.0-beta](https://www.apollogra
 
 Luodaan uusi React-sovellus ja asennetaan siihen [Apollo clientin](https://www.apollographql.com/docs/react/v3.0-beta/get-started/#installation) vaatimat riippuvuudet.
 
-```js
-npm install --save @apollo/client graphql
+```bash
+npm install @apollo/client graphql
 ```
 
 Aloitetaan seuraavalla ohjelmarungolla.
@@ -798,7 +798,9 @@ Apollo mahdollistaa tarvittaessa myös sovelluksen paikallisen tilan tallettamis
 
 <div class="tasks">
 
-### Tehtävät 8.8.-8.12.Tehtävissä toteutetaan edellisen osan tehtävissä tehdylle backendille frontend.
+### Tehtävät 8.8.-8.12.
+
+Tehtävissä toteutetaan edellisen osan tehtävissä tehdylle backendille frontend.
 
 Ota sovelluksesi lähtökohdaksi [tämä projekti](https://github.com/fullstack-hy2020/library-frontend).
 

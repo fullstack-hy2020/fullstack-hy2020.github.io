@@ -9,7 +9,7 @@ lang: en
 
 The exercises in this seventh part of the course differ a bit from the ones before. In this and the next chapter, as usual, there are [exercises related to the theory in the chapter](/en/part7/react_router#exercises-7-1-7-3).
 
-In addition to the exercises in this and the next chapter, there are a series of exercises which will be revising what we've learned during the whole course by expanding the Bloglist application, which we worked on during parts 4 and 5.
+In addition to the exercises in this and the next chapter, there are a series of exercises which we'll be revising what we've learned during the whole course by expanding the Bloglist application, which we worked on during parts 4 and 5.
 
 ### Application navigation structure
 
@@ -102,8 +102,8 @@ Luckily, React has the [React router](https://github.com/ReactTraining/react-rou
 
 Let's change the above application to use React router. First, we install React router with the command
 
-```js
-npm install --save react-router-dom
+```bash
+npm install react-router-dom
 ```
 
 The routing provided by React Router is enabled by changing the application as follows:

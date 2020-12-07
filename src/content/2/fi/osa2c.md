@@ -183,7 +183,7 @@ Tässä vaiheessa meitä kiinnostaa osa <i>dependencies</i>, joka määrittelee 
 Haluamme nyt käyttöömme axioksen. Voisimme määritellä kirjaston suoraan tiedostoon <i>package.json</i>, mutta on parempi asentaa se komentoriviltä
 
 ```js
-npm install axios --save
+npm install axios
 ```
 
 **Huomaa, että _npm_-komennot tulee antaa aina projektin juurihakemistossa**, eli siinä minkä sisältä tiedosto <i>package.json</i> löytyy.
@@ -249,11 +249,11 @@ eli sovellus ei onnistu käynnistyessään kytkemään itseään [porttiin](http
 Käytimme komentoa _npm install_ kahteen kertaan hieman eri tavalla
 
 ```js
-npm install axios --save
+npm install axios
 npm install json-server --save-dev
 ```
 
-Parametrissa oli siis hienoinen ero. <i>axios</i> tallennettiin sovelluksen ajonaikaiseksi riippuvuudeksi (_--save_), sillä ohjelman suoritus edellyttää kirjaston olemassaoloa. <i>json-server</i> taas asennettiin sovelluskehityksen aikaiseksi riippuvuudeksi (_--save-dev_), sillä ohjelma itse ei varsinaisesti kirjastoa tarvitse, se on ainoastaan apuna sovelluksehityksen aikana. Erilaisista riippuvuuksista lisää kurssin seuraavassa osassa.
+Parametrissa oli siis hienoinen ero. <i>axios</i> tallennettiin sovelluksen ajonaikaiseksi riippuvuudeksi, sillä ohjelman suoritus edellyttää kirjaston olemassaoloa. <i>json-server</i> taas asennettiin sovelluskehityksen aikaiseksi riippuvuudeksi (_--save-dev_), sillä ohjelma itse ei varsinaisesti kirjastoa tarvitse, se on ainoastaan apuna sovelluksehityksen aikana. Erilaisista riippuvuuksista lisää kurssin seuraavassa osassa.
 
 ### Axios ja promiset
 
@@ -381,7 +381,7 @@ import axios from 'axios' // highlight-line
 import Note from './components/Note'
 
 const App = () => {
-  const [notes, setNotes] = useState([]) 
+  const [notes, setNotes] = useState([]) // highlight-line
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
 

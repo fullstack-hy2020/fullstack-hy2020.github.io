@@ -51,10 +51,10 @@ const App = () => {
       <h1>Notes</h1>
 
       <Notification message={errorMessage} />
-
+      
+      // highlight-start
       <h2>Login</h2>
 
-      // highlight-start
       <form onSubmit={handleLogin}>
         <div>
           username
@@ -128,6 +128,8 @@ const App = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault()
+    
+    // highlight-start
     try {
       const user = await loginService.login({
         username, password,
@@ -142,6 +144,7 @@ const App = () => {
         setErrorMessage(null)
       }, 5000)
     }
+    // highlight-end
   }
 
   // ...

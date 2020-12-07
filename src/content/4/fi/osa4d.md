@@ -28,7 +28,7 @@ Token-autentikaation periaatetta kuvaa seuraava sekvenssikaavio:
 Tehdään ensin kirjautumistoiminto. Asennetaan [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken)-kirjasto, jonka avulla koodimme pystyy generoimaan [JSON web token](https://jwt.io/) -muotoisia tokeneja.
 
 ```bash
-npm install jsonwebtoken --save
+npm install jsonwebtoken
 ```
 
 Tehdään kirjautumisesta vastaava koodi tiedostoon _controllers/login.js_
@@ -253,7 +253,7 @@ const errorHandler = (error, request, response, next) => {
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9), branchissä <i>part4-9</i>.
 
-Jos sovelluksessa on useampia rajapintoja jotka vaativat kirjautumisen, kannattaa JWT:n validointi eriyttää omaksi middlewarekseen, tai käyttää jotain jo olemassa olevaa kirjastoa kuten [express-jwt](https://www.npmjs.com/package/express-jwt).
+Jos sovelluksessa on useampia rajapintoja jotka vaativat kirjautumisen, kannattaa JWT:n validointi eriyttää omaksi middlewarekseen, tai käyttää jotain jo olemassa olevaa kirjastoa kuten [express-jwt](https://github.com/auth0/express-jwt).
 
 ### Loppuhuomioita
 
@@ -273,7 +273,7 @@ Seuraavien tehtävien myötä Blogilistalle luodaan käyttäjienhallinnan perust
 
 **Varoitus vielä kerran:** jos huomaat kirjoittavasi sekaisin async/awaitia ja _then_-kutsuja, on 99% varmaa, että teet jotain väärin. Käytä siis jompaa kumpaa tapaa, älä missään tapauksessa "varalta" molempia.
 
-#### 4.15: blogilistan laajennus, step4
+#### 4.15: blogilistan laajennus, step3
 
 Tee sovellukseen mahdollisuus luoda käyttäjiä tekemällä HTTP POST -pyyntö osoitteeseen <i>api/users</i>. Käyttäjillä on <i>käyttäjätunnus, salasana ja nimi</i>.
 
@@ -282,7 +282,7 @@ Tee sovellukseen mahdollisuus luoda käyttäjiä tekemällä HTTP POST -pyyntö 
 **HUOM** joillain windows-käyttäjillä on ollut ongelmia <i>bcryptin</i> kanssa. Jos törmäät ongelmiin, poista kirjasto komennolla
 
 ```bash
-npm uninstall bcrypt --save 
+npm uninstall bcrypt
 ```
 
 ja asenna sen sijaan [bcryptjs](https://www.npmjs.com/package/bcryptjs)
@@ -293,7 +293,7 @@ Käyttäjien lista voi näyttää esim. seuraavalta:
 
 ![](../../images/4/22.png)
 
-#### 4.16*: blogilistan laajennus, step5
+#### 4.16*: blogilistan laajennus, step4
 
 Laajenna käyttäjätunnusten luomista siten, että käyttäjätunnuksen sekä salasanan tulee olla olemassa ja vähintään 3 merkkiä pitkiä. Käyttäjätunnuksen on oltava järjestelmässä uniikki.
 
@@ -303,13 +303,13 @@ Luomisoperaation tulee palauttaa sopiva statuskoodi ja jonkinlainen virheilmoitu
 
 Tee myös testit, jotka varmistavat, että virheellisiä käyttäjiä ei luoda, ja että virheellisen käyttäjän luomisoperaatioon vastaus on järkevä statuskoodin ja virheilmoituksen osalta.
 
-#### 4.17: blogilistan laajennus, step6
+#### 4.17: blogilistan laajennus, step5
 
 Laajenna blogia siten, että blogiin tulee tieto sen lisänneestä käyttäjästä.
 
 Muokkaa blogien lisäystä osan 4 luvun [populate](/osa4/kayttajien_hallinta#populate) tapaan siten, että blogin lisäämisen yhteydessä määritellään blogin lisääjäksi <i>joku</i> järjestelmän tietokannassa olevista käyttäjistä (esim. ensimmäisenä löytyvä). Tässä vaiheessa ei ole väliä kuka käyttäjistä määritellään lisääväksi. Toiminnallisuus viimeistellään tehtävässä 4.19.
 
-Muokaa kaikkien blogien listausta siten, että blogien yhteydessä näytetään lisääjän tiedot:
+Muokkaa kaikkien blogien listausta siten, että blogien yhteydessä näytetään lisääjän tiedot:
 
 ![](../../images/4/23e.png)
 
@@ -317,15 +317,15 @@ ja käyttäjien listausta siten että käyttäjien lisäämät blogit ovat näky
 
 ![](../../images/4/24e.png)
 
-#### 4.18: blogilistan laajennus, step7
+#### 4.18: blogilistan laajennus, step6
 
-Toteuta osan 4 luvun [Token-perustainen kirjautuminen](/osa4#/token_perustainen_kirjautuminen) tapaan järjestelmään token-perustainen autentikointi.
+Toteuta osan 4 luvun [Token-perustainen kirjautuminen](/osa4/token_perustainen_kirjautuminen) tapaan järjestelmään token-perustainen autentikointi.
 
-#### 4.19: blogilistan laajennus, step8
+#### 4.19: blogilistan laajennus, step7
 
 Muuta blogien lisäämistä siten, että se on mahdollista vain, jos lisäyksen tekevässä HTTP POST -pyynnössä on mukana validi token. Tokenin haltija määritellään blogin lisääjäksi.
 
-#### 4.20*: blogilistan laajennus, step9
+#### 4.20*: blogilistan laajennus, step8
 
 Osan 4 [esimerkissä](/osa4/token_perustainen_kirjautuminen#muistiinpanojen-luominen-vain-kirjautuneille) token otetaan headereista apufunktion _getTokenFrom_ avulla.
 
@@ -357,7 +357,7 @@ const tokenExtractor = (request, response, next) => {
 }
 ```
 
-#### 4.21*: blogilistan laajennus, step10
+#### 4.21*: blogilistan laajennus, step9
 
 Muuta blogin poistavaa operaatiota siten, että poisto onnistuu ainoastaan jos poisto-operaation tekijä (eli se kenen token on pyynnön mukana) on sama kuin blogin lisääjä.
 
@@ -404,7 +404,7 @@ backend -> selain: 201 created
 kayttaja -> kayttaja:
 -->
 
-#### 4.22*: blogilistan laajennus, step11
+#### 4.22*: blogilistan laajennus, step10
 
 Token-kirjautumisen lisääminen valitettavasti hajotti blogien lisäämiseen liittyvät testit. Korjaa testit. Tee myös testi, joka varmistaa että uuden blogin lisäys ei onnistu, ja pyyntö palauttaa oikean statuskoodin <i>401 Unauthorized</i> jos pyynnön mukana ei ole tokenia.
 

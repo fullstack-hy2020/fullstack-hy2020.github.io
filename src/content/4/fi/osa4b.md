@@ -42,10 +42,10 @@ Lisäsimme testit suorittavaan npm-skriptiin myös määreen [runInBand](https:/
 
 Samalla määriteltiin, että suoritettaessa sovellusta komennolla _npm run dev_ eli nodemonin avulla, on sovelluksen moodi <i>development</i>. Jos sovellusta suoritetaan normaalisti Nodella, on moodiksi määritelty <i>production</i>.
 
-Määrittelyssämme on kuitenkin pieni ongelma: se ei toimi Windowsilla. Tilanne korjautuu asentamalla kirjasto [cross-env](https://www.npmjs.com/package/cross-env) komennolla
+Määrittelyssämme on kuitenkin pieni ongelma: se ei toimi Windowsilla. Tilanne korjautuu asentamalla kirjasto [cross-env](https://www.npmjs.com/package/cross-env) kehitysaikaiseksi riippuvuudeksi komennolla
 
 ```bash
-npm install cross-env
+npm install --save-dev cross-env
 ```
 
 ja muuttamalla <i>package.json</i> kaikilla käyttöjärjestelmillä toimivaan muotoon
@@ -249,12 +249,14 @@ Testaus vaikuttaa helpolta ja testit menevät läpi. Testimme ovat kuitenkin huo
 
 Testimme käyttää jo jestin metodia [afterAll](https://facebook.github.io/jest/docs/en/api.html#afterallfn-timeout) sulkemaan tietokannan testien suoritusten jälkeen. Jest tarjoaa joukon muitakin [funktioita](https://facebook.github.io/jest/docs/en/setup-teardown.html#content), joiden avulla voidaan suorittaa operaatioita ennen yhdenkään testin suorittamista tai ennen jokaisen testin suoritusta.
 
-Päätetään alustaa tietokanta ennen <i>jokaisen testin suoritusta,</i> eli funktiossa [beforeEach](https://jestjs.io/docs/en/api.html#aftereachfn-timeout):
+Päätetään alustaa tietokanta ennen <i>jokaisen testin suoritusta,</i> eli funktiossa [beforeEach](https://jestjs.io/docs/en/api.html#beforeeachfn-timeout):
 
 ```js
+const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
+// highlight-start
 const Note = require('../models/note')
 
 const initialNotes = [
@@ -279,6 +281,8 @@ beforeEach(async () => {
   noteObject = new Note(initialNotes[1])
   await noteObject.save()
 })
+// highlight-end
+// ...
 ```
 
 Tietokanta siis tyhjennetään aluksi ja sen jälkeen kantaan lisätään kaksi taulukkoon _initialNotes_ talletettua muistiinpanoa. Näin testien suoritus aloitetaan aina hallitusti samasta tilasta.
@@ -309,7 +313,7 @@ Huomaa jälkimmäisen testin ekspektaatio. Komennolla <code>response.body.map(r 
 
 Komento _npm test_ suorittaa projektin kaikki testit. Kun olemme vasta tekemässä testejä, on useimmiten järkevämpää suorittaa kerrallaan ainoastaan yhtä tai muutamaa testiä. Jest tarjoaa tähän muutamia vaihtoehtoja. Eräs näistä on komennon [only](https://jestjs.io/docs/en/api#testonlyname-fn-timeout) käyttö. Jos testit on kirjoitettu useaan tiedostoon, ei menetelmä ole kovin hyvä.
 
-Parempi vaihtoehto on määritellä komennon <i>npm test</i> yhteydessä minkä tiedoston testit halutaan suoritta. Seuraava komento suorittaa ainoastaan tiedostossa <i>tests/note_api.test.js</i> olevat testit
+Parempi vaihtoehto on määritellä komennon <i>npm test</i> yhteydessä minkä tiedoston testit halutaan suorittaa. Seuraava komento suorittaa ainoastaan tiedostossa <i>tests/note_api.test.js</i> olevat testit
 
 ```js
 npm test -- tests/note_api.test.js
@@ -498,7 +502,7 @@ const initialNotes = [
 ]
 
 const nonExistingId = async () => {
-  const note = new Note({ content: 'willremovethissoon' })
+  const note = new Note({ content: 'willremovethissoon', date: new Date() })
   await note.save()
   await note.remove()
 
@@ -515,7 +519,7 @@ module.exports = {
 }
 ```
 
-Moduuli määrittelee funktion _notesInDb_, jonka avulla voidaan tarkastaa sovelluksen tietokannassa olevat muistiinpanot. Tietokantaan alustettava sisältö _initialNotes_ on siirretty samaan tiedostoon. Määrittelimme myös tulevan varalta funktion _nonExistingId_, jonka avulla on mahdollista luoda tietokantaid, joka ei kuulu millekään kannassa olevalle oliolle.
+Moduuli määrittelee funktion _notesInDb_, jonka avulla voidaan tarkastaa sovelluksen tietokannassa olevat muistiinpanot. Tietokantaan alustettava sisältö _initialNotes_ on siirretty samaan tiedostoon. Määrittelimme myös tulevan varalta funktion _nonExistingId_, jonka avulla on mahdollista luoda tietokanta-id, joka ei kuulu millekään kannassa olevalle oliolle.
 
 Testit muuttuvat muotoon
 
@@ -639,7 +643,7 @@ notesRouter.post('/', async (request, response, next) => {
 
   const note = new Note({
     content: body.content,
-    important: body.important === undefined ? false : body.important,
+    important: body.important === body.important || false,
     date: new Date(),
   })
   // highlight-start
@@ -672,7 +676,9 @@ test('a specific note can be viewed', async () => {
     .expect('Content-Type', /application\/json/)
 // highlight-end
 
-  expect(resultNote.body).toEqual(noteToView)
+  const processedNoteToView = JSON.parse(JSON.stringify(noteToView))
+
+  expect(resultNote.body).toEqual(processedNoteToView)
 })
 
 test('a note can be deleted', async () => {
@@ -696,6 +702,8 @@ test('a note can be deleted', async () => {
   expect(contents).not.toContain(noteToDelete.content)
 })
 ```
+
+Ensimmäisessä testissä note-objekti, jonka saamme palvelimelta vastauksena, käy läpi JSON-serialisoinnin ja -parsemisen. Tämän prosessoinnin seurauksena note-objektin <em>date</em> kentän arvon tyyppi muuttuu <em>Date</em> objektista merkkijonoksi. Tämän seurauksena emme voi suoraan verrata <em>resultNote.body</em> muuttujaa ja <em>noteToView</em> muuttujaa. Sen sijaan meidän täytyy ensin suorittaa samanlainen JSON-serialisointi ja -parseminen <em>noteToView</em> muuttujalle, kuin palvelin suorittaa note-objektille.
 
 Molemmat testit ovat rakenteeltaan samankaltaisia. Alustusvaiheessa ne hakevat kannasta yksittäisen muistiinpanon. Tämän jälkeen on itse testattava operaatio, joka on koodissa korostettuna. Lopussa tarkastetaan, että operaation tulos on haluttu. 
 
@@ -746,10 +754,10 @@ Kirjasto [express-async-errors](https://github.com/davidbanham/express-async-err
 Asennetaan kirjasto
 
 ```bash
-npm install express-async-errors --save
+npm install express-async-errors
 ```
 
-Kirjaston käyttö on <i>todella</i> helppoa. Kirjaston koodi otetaan käyttöön tiedostossa <i>src/app.js</i>:
+Kirjaston käyttö on <i>todella</i> helppoa. Kirjaston koodi otetaan käyttöön tiedostossa <i>app.js</i>:
 
 ```js
 const config = require('./utils/config')
@@ -1036,8 +1044,10 @@ describe('when there is initially some notes saved', () => {
         .get(`/api/notes/${noteToView.id}`)
         .expect(200)
         .expect('Content-Type', /application\/json/)
+      
+      const processedNoteToView = JSON.parse(JSON.stringify(noteToView))
 
-      expect(resultNote.body).toEqual(noteToView)
+      expect(resultNote.body).toEqual(processedNoteToView)
     })
 
     test('fails with statuscode 404 if note does not exist', async () => {

@@ -1,3 +1,40 @@
+const createSearchConfig = (indexName, language) => {
+  return {
+    resolve: 'gatsby-plugin-local-search',
+    options: {
+      name: indexName,
+      engine: 'flexsearch',
+      engineOptions: 'speed',
+      query: `
+        {
+          allMarkdownRemark(filter: {frontmatter: {lang: {eq: "${language}"}}}) {
+            nodes {
+              frontmatter {
+                lang
+                letter
+                part
+              }
+              id      
+              rawMarkdownBody
+            }
+          }
+        }
+    `,
+      ref: 'id',
+      index: ['body'],
+      store: ['id', 'part', 'letter', 'lang'],
+      normalizer: ({ data }) =>
+        data.allMarkdownRemark.nodes.map(node => ({
+          id: node.id,
+          part: node.frontmatter.part,
+          letter: node.frontmatter.letter,
+          lang: node.frontmatter.lang,
+          body: node.rawMarkdownBody,
+        })),
+    },
+  };
+};
+
 module.exports = {
   siteMetadata: {
     title: 'Full Stack open 2020',
@@ -6,6 +43,9 @@ module.exports = {
     siteUrl: 'https://fullstack-hy2020.github.io/',
   },
   plugins: [
+    createSearchConfig('finnish', 'fi'),
+    createSearchConfig('english', 'en'),
+    createSearchConfig('chinese', 'zh'),
     {
       resolve: `gatsby-plugin-sitemap`,
     },

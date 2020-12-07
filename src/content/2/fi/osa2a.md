@@ -135,7 +135,7 @@ Jokaiseen muistiinpanoon on merkitty tekstuaalisen sisällön ja aikaleiman lis�
 Koodin toiminta perustuu siihen, että taulukossa on tasan kolme muistiinpanoa, yksittäiset muistiinpanot renderöidään 'kovakoodatusti' viittaamalla suoraan taulukossa oleviin olioihin:
 
 ```js
-<li>{note[1].content}</li>
+<li>{notes[1].content}</li>
 ```
 
 Tämä ei tietenkään ole järkevää. Ratkaisu voidaan yleistää generoimalla taulukon perusteella joukko React-elementtejä käyttäen [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)-funktiota:

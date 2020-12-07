@@ -47,7 +47,7 @@ Facebook 有一个 Flux 的实现，但是我们会使用 Redux 库。 它使用
 创建一个新的 create-react-app 应用 使用以下命令安装 redux
 
 ```bash
-npm install redux --save
+npm install redux
 ```
 
 <!-- As in Flux, in Redux the state is also stored in a [store](https://redux.js.org/basics/store). -->
@@ -924,7 +924,7 @@ const App = () => {
 首先我们安装 react-redux
 
 ```js
-npm install --save react-redux
+npm install react-redux
 ```
 
 

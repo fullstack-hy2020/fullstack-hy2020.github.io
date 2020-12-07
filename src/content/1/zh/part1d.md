@@ -22,22 +22,20 @@ lang: zh
 在下面的代码中，我们为应用创建了两个名为 left 和 right 的初始值为0的状态:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
 
   return (
     <div>
-      <div>
-        {left}
-        <button onClick={() => setLeft(left + 1)}>
-          left
-        </button>
-        <button onClick={() => setRight(right + 1)}>
-          right
-        </button>
-        {right}
-      </div>
+      {left}
+      <button onClick={() => setLeft(left + 1)}>
+        left
+      </button>
+      <button onClick={() => setRight(right + 1)}>
+        right
+      </button>
+      {right}
     </div>
   )
 }
@@ -61,7 +59,7 @@ const App = (props) => {
 在这种情况下，应用应该是这样的:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [clicks, setClicks] = useState({
     left: 0, right: 0
   })
@@ -84,12 +82,10 @@ const App = (props) => {
 
   return (
     <div>
-      <div>
-        {clicks.left}
-        <button onClick={handleLeftClick}>left</button>
-        <button onClick={handleRightClick}>right</button>
-        {clicks.right}
-      </div>
+      {clicks.left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {clicks.right}
     </div>
   )
 }
@@ -198,7 +194,7 @@ const handleLeftClick = () => {
 让我们向应用添加一个状态，该状态包含一个数组 _allClicks_ ，该数组记录应用中发生的每次单击记录。
 
 ```js
-const App = (props) => {
+const App = () => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
   const [allClicks, setAll] = useState([]) // highlight-line
@@ -219,13 +215,11 @@ const App = (props) => {
 
   return (
     <div>
-      <div>
-        {left}
-        <button onClick={handleLeftClick}>left</button>
-        <button onClick={handleRightClick}>right</button>
-        {right}
-        <p>{allClicks.join(' ')}</p> // highlight-line
-      </div>
+      {left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {right}
+      <p>{allClicks.join(' ')}</p> // highlight-line
     </div>
   )
 }
@@ -270,18 +264,16 @@ const handleLeftClick = () => {
 让我们仔细看看点击历史是如何渲染在页面上的:
 
 ```js
-const App = (props) => {
+const App = () => {
   // ...
 
   return (
     <div>
-      <div>
-        {left}
-        <button onClick={handleLeftClick}>left</button>
-        <button onClick={handleRightClick}>right</button>
-        {right}
-        <p>{allClicks.join(' ')}</p> // highlight-line
-      </div>
+      {left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {right}
+      <p>{allClicks.join(' ')}</p> // highlight-line
     </div>
   )
 }
@@ -312,18 +304,16 @@ const History = (props) => {
   )
 }
 
-const App = (props) => {
+const App = () => {
   // ...
 
   return (
     <div>
-      <div>
-        {left}
-        <button onClick={handleLeftClick}>left</button>
-        <button onClick={handleRightClick}>right</button>
-        {right}
-        <History allClicks={allClicks} /> // highlight-line
-      </div>
+      {left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {right}
+      <History allClicks={allClicks} /> // highlight-line
     </div>
   )
 }
@@ -380,7 +370,7 @@ const Button = ({ onClick, text }) => (
 )
 // highlight-end
 
-const App = (props) => {
+const App = () => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
   const [allClicks, setAll] = useState([])
@@ -397,15 +387,13 @@ const App = (props) => {
 
   return (
     <div>
-      <div>
-        {left}
-        // highlight-start
-        <Button onClick={handleLeftClick} text='left' />
-        <Button onClick={handleRightClick} text='right' />
-        // highlight-end
-        {right}
-        <History allClicks={allClicks} />
-      </div>
+      {left}
+      // highlight-start
+      <Button onClick={handleLeftClick} text='left' />
+      <Button onClick={handleRightClick} text='right' />
+      // highlight-end
+      {right}
+      <History allClicks={allClicks} />
     </div>
   )
 }
@@ -540,23 +528,24 @@ props value is [Object object]
 
 ![](../../images/1/9a.png)
 
-<!-- It is highly recommended to add the [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension to Chrome. It adds a new _React_ tab to the developer tools: -->
-强烈建议在 Chrome 中添加 [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)扩展。 它为开发工具增加了一个新的 React 选项卡:
+<!-- It is highly recommended to add the [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension to Chrome. It adds a new _React_ tab to the developer tools. The new developer tools tab can be used to inspect the different React elements in the application, along with their state and props: -->
+强烈建议在 Chrome 中添加 [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)扩展。 它为开发工具增加了一个新的 _Components_ 选项卡。新的开发者工具页可以用来检查不同的React 元素，以及它的属性和状态：
 
-![](../../images/1/10e.png)
+![](../../images/1/10ea.png)
 
 <!-- The new _React_ developer tools tab can be used to inspect the different React elements in the application, along with their state and props. -->
-新的 React developer tools 选项卡可用于检查应用中的不同 React 元素，以及它们的状态和属性。
+<!-- 新的 React developer tools 选项卡可用于检查应用中的不同 React 元素，以及它们的状态和属性。 -->
 
 <!-- Unfortunately the current version of React developer tools leaves something to be desired when displaying component state created with hooks: -->
-不幸的是，当前版本的 React developer 工具在用 hooks 时显示创建的组件状态，有一些不足之处:
+<!-- 不幸的是，当前版本的 React developer 工具在用 hooks 时显示创建的组件状态，有一些不足之处: -->
 
 ![](../../images/1/11e.png)
-
+<!-- The _App_ component's state is defined like so: -->
+_App_ 组件的状态定义如下：
 
 
 <!-- The component state was defined like so: -->
-组件状态的定义如下:
+<!-- 组件状态的定义如下: -->
 
 ```js
 const [left, setLeft] = useState(0)
@@ -567,7 +556,11 @@ const [allClicks, setAll] = useState([])
 <!-- Dev tools shows the state of hooks in the order of their definition: -->
 开发工具按照定义顺序显示hook的状态:
 
-![](../../images/1/11be.png)
+![](../../images/1/11ea.png)
+
+<!-- The first <i>State</i> contains the value of the <i>left</i> state, the next contains the value of the <i>right</i> state and the last contains the value of the <i>allClicks</i> state. -->
+
+第一个<i>State</i>包含<i>left</i>状态的值，下一个包含<i>right</i> 状态的值，最后一个包含<i>allClicks</i> 状态的值。
 
 ### Rules of Hooks
 【Hook的规则】
@@ -581,7 +574,7 @@ const [allClicks, setAll] = useState([])
 回顾一下，hook 只能从定义 React component 的函数体内部调用:
 
 ```js
-const App = (props) => {
+const App = () => {
   // these are ok
   const [age, setAge] = useState(0)
   const [name, setName] = useState('Juha Tauriainen')
@@ -618,7 +611,7 @@ const App = (props) => {
 <!-- Let's assume that we're developing this simple application: -->
 假设我们正在开发这个简单的应用:
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   return (
@@ -648,7 +641,7 @@ ReactDOM.render(
 如果我们将事件处理程序定义为一个字符串:
 
 ```js
-<button onClick={'crap...'}>button</button>
+<button onClick="crap...">button</button>
 ```
 
 <!-- React would warn us about this in the console: -->
@@ -694,8 +687,8 @@ index.js:2178 Warning: Expected `onClick` listener to be a function, instead got
 </button>
 ```
 
-<!-- The message gets printed to the console once but nothing happens when we click the button a second time. Why does this not work even when our event handler contains a function _console.log_? -->
-消息被打印到控制台一次，但是当我们第二次单击按钮时什么也没有发生。 为什么即使我们的事件处理程序包含一个函数 console.log 也不能工作？
+<!-- The message gets printed to the console once when the component is rendered but nothing happens when we click the button. Why does this not work even when our event handler contains a function _console.log_? -->
+当组件渲染出来时，消息会被打印到控制台一次，但是当我们点击按钮时什么也没有发生。 为什么即使我们的事件处理程序包含 console.log 函数依然不能工作呢？
 
 <!-- The issue here is that our event handler is defined as a <i>function call</i> which means that the event handler is actually assigned the returned value from the function, which in the case of _console.log_ is <i>undefined</i>. -->
 这里的问题是，我们的事件处理被定义为<i>function call</i>，这意味着事件处理程序实际上被分配了函数返回的值，而 console.log 的返回值是<i>undefined</i>。
@@ -741,7 +734,7 @@ index.js:2178 Warning: Expected `onClick` listener to be a function, instead got
 您经常会看到事件处理程序定义在一个单独的位置。 在下面的应用中，我们定义了一个函数，然后将其赋值给组件函数体中的 _handleClick_ 变量:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   const handleClick = () =>
@@ -767,7 +760,7 @@ const App = (props) => {
 当然，我们的事件处理可以由多个命令组成。 在这种情况下，我们对箭头函数，使用较长的大括号语法:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   // highlight-start
@@ -798,7 +791,7 @@ const App = (props) => {
 让我们对我们的代码进行如下修改:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   // highlight-start
@@ -871,7 +864,7 @@ const hello = () => {
 让我们稍微修改一下代码:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   // highlight-start
@@ -985,7 +978,7 @@ const hello = (who) => () => {
 我们可以使用相同的技巧来定义将组件状态，设置为给定值的事件处理程序。 让我们对我们的代码进行如下修改:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
   
   // highlight-start
@@ -1043,7 +1036,7 @@ const App = (props) => {
 使用返回函数的函数不是实现此功能所必需的。 让我们将负责更新状态的 _setToValue_ 函数返回到一个普通函数:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   const setToValue = (newValue) => {
@@ -1115,7 +1108,7 @@ const Button = (props) => (
   </button>
 )
 
-const App = props => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   const setToValue = newValue => {
@@ -1136,9 +1129,13 @@ const App = props => {
 }
 ```
 
-<!-- The application still appears to work, but **don't implement components like this!** Never define components inside of other components. The method provides no benefits and leads to many unpleasant problems. Let's instead move the <i>Display</i> component function to its correct place, which is outside of the <i>App</i> component function: -->
+<!-- The application still appears to work, but **don't implement components like this!** Never define components inside of other components. The method provides no benefits and leads to many unpleasant problems. The biggest problems are due to the fact that React treats a component defined inside of another component as a new component in every render. This makes it impossible to React to optimize the component. -->
 
-应用看起来仍然可以工作，但是 **不要像这样实现组件！**不要在其他组件内部定义组件。 这种方法没有任何好处，而且会导致许多不愉快的问题。 让我们把<i>Display</i> 组件函数移动到正确的位置，这个位置在<i>App</i> 组件函数之外:
+应用看起来仍然可以工作，但是 **不要像这样实现组件！**不要在其他组件内部定义组件。 这种方法没有任何好处，而且会导致许多不愉快的问题。最大的问题是React 在每次渲染时，会将内部的组件当作一个新的组件。这回导致React 无法去优化组件。
+
+<!-- Let's instead move th e <i>Display</i> component function to its correct place, which is outside of the <i>App</i> component function: -->
+让我们把<i>Display</i> 组件函数移动到正确的位置，这个位置在<i>App</i> 组件函数之外:
+
 
 ```js
 const Display = props => <div>{props.value}</div>
@@ -1149,7 +1146,7 @@ const Button = (props) => (
   </button>
 )
 
-const App = props => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   const setToValue = newValue => {

@@ -7,9 +7,9 @@ lang: zh
 
 <div class="content">
 
-<!-- This course is an introduction to modern web development with JavaScript. The main focus is on single page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. New for this year's course is a part on TypeScript. -->
+<!-- This course is an introduction to modern web development with JavaScript. The main focus is on single page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. New for this year's course are parts on TypeScript and React Native. -->
 
-本课程的主要内容，是介绍如何使用 Javascript 进行现代 Web 应用的开发 。 主要议题是使用 React 实现单页应用，以及使用 Node.js 实现 RESTful 和 GraphQL web 服务，来支撑 React 应用。 今年还推出了一门全新的的课程——TypeScript。
+本课程的主要内容，是介绍如何使用 Javascript 进行现代 Web 应用的开发 。 主要议题是使用 React 实现单页应用，以及使用 Node.js 实现 RESTful 和 GraphQL web 服务，来支撑 React 应用。 今年还推出了两门全新的的课程——TypeScript和React Native。
 
 <!-- Other topics include debugging applications, configuration, managing runtime environments and NoSQL databases. -->
 
@@ -49,7 +49,7 @@ lang: zh
 
 <!-- The course contains ten parts, the first of which is numbered 0 for historical reasons. A part loosely corresponds to one week (averaging 15-20 hours) of studying but the speed of completing the course is flexible. -->
 
-本课程共分十个章节，由于历史原因，第一章节被编号为 0。 课程每一章节的内容，大概需要一周(平均 15-20 小时)的学习时间，但完成课程的进度是十分灵活的。
+本课程共分十一个章节，由于历史原因，第一章节被编号为 0。 课程每一章节的内容，大概需要一周(平均 15-20 小时)的学习时间，但完成课程的进度是十分灵活的。
 
 <!-- Proceeding from part <i>n</i> to part <i>n+1</i> is not sensible before good enough know-how of the topics of part <i>n</i> has been achieved. In pedagogic terms, the course uses [mastery learning](https://en.wikipedia.org/wiki/Mastery_learning), and the intent is for you to proceed to the next part only after doing enough of the exercises of the previous part. -->
 
@@ -65,7 +65,10 @@ lang: zh
 
 <!-- Statistics on the time used for exercises which have already been submitted on different parts of this course can be found from [the submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
 
-我们对各章节已提交的练习所用时间做了统计，可以在[提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中找到。
+<!-- 我们对各章节已提交的练习所用时间做了统计，可以在[提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中找到。 -->
+
+<!-- Exercise completion time statistics can be found via the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
+练习完成的时间统计可以通过[提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)进行查看。
 
 ### Grading 
 【课程成绩】
@@ -173,6 +176,13 @@ lang: zh
 
 第 8 和章节第 9 章节的练习不计入 5-7 学分课程的成绩。
 
+#### React Native part's credits
+React Native 章节的学分
+
+<!-- By submitting exercises for part 10 of the courses, React Native, you can earn either one or two additional credits. Earning one credit requires you to submit at least 19 exercises whereas earning two credits requires you to submit at least 26 exercises. More information about the part's prerequisites, exercise submission and credits can be found in the [part 10](/en/part10/introduction_to_react_native). -->
+
+通过提交第10章的练习，React Native， 你可以获得1-2学分。获得1学分需要你提交至少19个练习，获得2学分需要你提交至少26个练习。关于该章节更多的前置要求，练习提交和学分获取规则可以参考 [part 10](/zh/part10/introduction_to_react_native)。
+
 ### How to get your credits 
 【如何获得学分】
 
@@ -203,21 +213,21 @@ lang: zh
 
 即使你没有因为考试而注册公开大学，只要你完成了结业所需的足够的练习数量，你就可以从 [提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) 中下载课程的结业证书。如果只想要获得结业证书，你不需要提供芬兰社保账号。
 
-### Expanding a previously completed course 
+### Expanding on a previously completed course 
 【拓展之前完成的课程】
 
 <!-- If you have already taken the course either as a MOOC or as a University Course, you can now expand your course. -->
 
 如果你已经参与过这门课程，无论是在大学课程还是公开课，你都可以基于之前的课来进行拓展。
 
-#### Expanding Full stack open 2019 
+#### Expanding on Full stack open 2019 
 【拓展全栈公开课 2019】
 
 <!-- You can just pick up where you left! If you wish to resubmit a whole part, please contact the course personel. -->
 
 你可以续接你上次学习的进度！ 如果您希望重新提交整个章节的内容，请与课程负责人联系。
 
-#### Expanding other course instance
+#### Expanding on other instances of this course
 【拓展其他课程】
 
 <!-- You can substitute <i>parts</i> of this course with parts you have previously submitted. For example, if you have previously completed the 3-credit course, you can substitute parts 0-3 of this course with the parts you have previously completed. You can only substitute parts in sequence, so you cannot for example substitute parts 0 and 2 but now complete part 1. -->
@@ -242,11 +252,11 @@ lang: zh
 * 对于0~4章节，只有一些很小的改动。
 * 第5d章节，<i>端到端测试</i> 利用了[Cypress.io](https://www.cypress.io) 这个库，这几乎是全新的内容。使用自定义钩子（custom hook）的内容已经从第5章节转移到了第7章节，并添加了一些新的内容。
 
-<!-- Part 6, which is about Redux, concentrates on the new, hook-based, redux api. The material on react-router in part 7 has also been updated to use the hook-api. Semantic UI React has been replaced with the MaterialUI library due to lack of maintenance. <br><br> Part 8 on GraphQL has major updates especially on Apollo Client, which finally has stable hook based apis. Part 9 on TypeScript is completely new. -->
+<!-- Part 6, which is about Redux, concentrates on the new, hook-based, redux api. The material on react-router in part 7 has also been updated to use the hook-api. Semantic UI React has been replaced with the MaterialUI library due to lack of maintenance. <br><br> Part 8 on GraphQL has major updates especially on Apollo Client, which finally has stable hook based apis. Part 9 on TypeScript and part 10 on React Native is completely new. -->
 * 第6章是讲Redux的，主要介绍了新的基于hook的redux API。
 * 第7章的react-router 也更新为使用hook-api。由于Semantic UI React 缺乏维护，其内容已经被替换为了 MaterialUI library 的内容。
 * 第8章 GraphQL有了较大版本的升级，尤其引入了Apollo Client，它终于有了稳定的基于hook的api。
-* 第9章是全新的内容。
+* 第9章的TypeScript 和第10 章的React Native 是全新的内容。
 
 <!-- Last year's course material can be found from https://fullstackopen-2019.github.io/ -->
 去年的课程内容可以通过<a href='https://fullstackopen-2019.github.io/'>https://fullstackopen-2019.github.io/</a>进行访问。
@@ -277,43 +287,64 @@ lang: zh
 ### Sign up for the exam 
 【报名考试】
 
-<!-- For official university credits you need to pass the course exam that is done in Open university Moodle. -->
-<!-- Note that it is possible to register for exam only if you have a Finnish social security number! -->
+<!-- For official university credits you need to pass the course exam that is done in Open university Moodle. Note that it is only possible to register for the exam if you have a Finnish social security number or you are able to register for the course in Helsinki in person!-->
 
-要获得官方大学的学分，你需要通过开放大学 Moodle 系统的课程考试。 
-请注意，只有当你有芬兰社保号码才能报名考试！
+要获得官方大学的学分，你需要通过开放大学 Moodle 系统的课程考试。 请注意，只有当你有芬兰社保号码或者能够在赫尔辛基以个人名义注册这门课程，才能报名考试！
 
 <!-- Follow the instructions below to gain access to the course’s Moodle space: -->
 
 按照下面的指引进入本课程的 Moodle 系统:
 
-<!-- - Register for the course through the [Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=131840261) -->
-- 注册[开放大学](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=131840261)
-<!-- - Wait for 24 hours and activate your University of Helsinki user ID. You will receive instructions on the activation process the following day. -->
-- 等待 24 小时，激活你的赫尔辛基大学用户 ID。 您将在第二天收到关于激活流程的说明
-<!-- - Sign in on the Open universitu [course page](https://courses.helsinki.fi/fi/aytkt21009en/131840261), where you will find the enrolment key for the Moodle space -->
-- 登录到公开大学的[课程导航页面](https://courses.helsinki.fi/fi/aytkt21009en/131840261)，你就可以找到 Moodle 系统的注册密钥
-<!-- - Sign into the [Moodle space](https://moodle.helsinki.fi/login/index.php) with your University of Helsinki user ID and the enrolment key. -->
-- 用你的赫尔辛基大学用户名和注册密钥登录到 [Moodle 系统](https://moodle.helsinki.fi/login/index.php)
+<!-- - Register for the course through the [Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=131840261) 
+Enroll on the course through Open University by 9 Jan 2021 [here](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=131840261)-->
+- 在2021年1月9日之前通过注册[开放大学](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=131840261)来加入这门课程。
+<!-- - Wait for 24 hours and activate your University of Helsinki user ID. You will receive instructions on the activation process the following day.  - 等待 24 小时，激活你的赫尔辛基大学用户 ID。 您将在第二天收到关于激活流程的说明
+- You will receive the Moodle-link and the course key through email within 24 hours after course registration. 3. User ID. Do you study at University of Helsinki or other [HAKA member institution](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners)?
+    - If yes, use your username and password to log in to Moodle.-->
+- 你会在注册课程后的24小时内通过邮箱收到Moodle的链接以及课程的激活码。
+- 用户ID：你是否在赫尔辛基大学或其他的[HAKA 成员学院](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners)学习？
+  - 如果答案是yes，使用你的用户名和密码登录Moodle。
+ <!-- - If no, please activate your University of Helsinki user ID to access Moodle. You will receive more information on the user ID after registration through email.
+- Sign into the Moodle space with your University of Helsinki / HAKA user ID and the enrolment key. -->
+  - 如果答案是no，请激活你的赫尔辛基大学用户ID来访问Moodle。你会在邮箱注册后收到更多关于用户ID的信息。
+- 通过你的赫尔辛基大学/HAKA用户名ID与密码登录Moodle 空间。
+<!-- - After course enrollment, save your University of Helsinki student ID number to the [my submissions tab](https://studies.cs.helsinki.fi/stats/myinfo) in the submission system. -->
+- 登录课程后，将你赫尔辛基大学的学生ID保存到提交系统的[我的提交标签页](https://studies.cs.helsinki.fi/stats/myinfo) 。
+<!-- - If you used your institution’s HAKA identification to log in to Moodle, please send a message to avoin-student@helsinki.fi and ask for your University of Helsinki student ID. -->
+- 如果你使用的是你的学院的HAKA认证来登录Moodle，请发送一个信息到 avoin-student@helsinki.fi 询问你的赫尔辛基大学的学生ID。
+  <!-- - Send the message from the same email address you used for course enrollment. -->
+  <!-- - Include your full name, date of birth, name of the course in the email. -->
+  - 发送信息的邮箱使用注册用户的邮箱
+  - 邮件信息应包含你的全名、出生日期、课程名称
 
 <!-- Please note! -->
 请注意！
 
-<!-- - **Did you wait 24 hours** as the above instructions say? -->
-- 是否如上面指示的，**等待了24小时** 呢 ?
-
 
 <!-- - You need the Moodle access just for the exam, for the course certificate access is not needed! -->
 - 您只需要登录 Moodle 系统来参加考试，获取课程证书是不需要登录的。
-<!-- - Registration for the exam through the Open University is possible until Jan 9, 2021. -->
-
-- 在 2021 年 1 月 9 日之前，都可以通过开放大学注册参加考试
 <!-- - Credits for the course are only available to those students who have successfully registered for the course registration through the Open University and have completed the course according to the instructions. -->
 - 只有成功注册开放大学课程，并按照说明完成课程的学生才能获得该课程的学分
 
+<!-- Electronic enrollment is available if you meet one of the following criteria: -->
+如果你满足以下某一条件，同样可以注册课程：
+
+<!-- You have a Finnish personal identity number (format: xxxxxxxx-xxxx), or an online banking ID, or -->
+你拥有芬兰的身份证ID（格式如：xxxxxxxx-xxxx），或者在线银行的ID，或者
+<!-- - you are a student at the University of Helsinki, or  -->
+- 你是赫尔辛基大学的学生，或者
+<!-- - you are a student at another [HAKA member institution](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners). -->
+- 你是一个在另一个[HAKA 成员学院](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners)的学生。
+
+<!-- After course enrollment: Note that you also have to save your student ID number to the my submissions tab in the [submission system](https://studies.cs.helsinki.fi/stats/myinfo) . If you used your institution’s HAKA identification to log in to Moodle, please send a message to avoin-student@helsinki.fi and ask for your University of Helsinki student ID. -->
+注册完课程后：注意你还需要将你的学生ID保存到[提交系统的](https://studies.cs.helsinki.fi/stats/myinfo)我的提交标签页面。如果你使用你的学院的HAKA认证来登录Moodle，请发送信息到 avoin-student@helsinki.fi 来询问你的赫尔辛基大学的学生ID。
+
 <!-- Note that you also have to save your student ID number to the "my submissions" view in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
 
-请注意，您还必须将您的学生 ID 号保存到 [提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中的“我的提交”视图中。
+<!-- 请注意，您还必须将您的学生 ID 号保存到 [提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中的“我的提交”视图中。 -->
+
+<!-- Include your full name, email address used for enrollment, date of birth, and the name of the course in the email. -->
+在邮件中包括你的全名，用来注册的email地址，出生日期，以及课程名称。
 
 ### Full stack project  
 【全栈项目】
@@ -343,7 +374,7 @@ lang: zh
 
 <!-- Our collaborators Houston Inc, Terveystalo, Elisa, Konecranes and Smartly.io have given a <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (9 + 10). -->
 
-我们的合作伙伴包括[Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/), [Elisa](https://elisa.fi/)和  [Smartly.io](https://www.smartly.io/) 它们承诺每个完成课程和项目作业，并获得最高学分(9 + 10)的人都可以获得工作面试。
+我们的合作伙伴包括[Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) 和  [Smartly.io](https://www.smartly.io/) 它们承诺每个完成课程和项目作业，并获得最高学分(9 + 10)的人都可以获得工作面试。
 
 <!-- This means that the student can, if they so choose, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits. -->
 

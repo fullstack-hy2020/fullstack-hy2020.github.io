@@ -9,7 +9,7 @@ lang: en
 
 We will now start getting familiar with probably the most important topic of this course, namely the [React](https://reactjs.org/)-library. Let's start off with making a simple React application as well as getting to know the core concepts of React.
 
-The easiest way to get started by far is using a tool called [create-react-app](https://github.com/facebook/create-react-app). It is possible (but not necessary) to install <i>create-react-app</i> on your machine if the <i>npm</i> tool that was installed along with Node has a version number of at least <i>5.3</i>.
+The easiest way to get started by far is by using a tool called [create-react-app](https://github.com/facebook/create-react-app). It is possible (but not necessary) to install <i>create-react-app</i> on your machine if the <i>npm</i> tool that was installed along with Node has a version number of at least <i>5.3</i>.
 
 Let's create an application called <i>part1</i> and navigate to its directory.
 
@@ -47,7 +47,7 @@ const App = () => (
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-The files <i>App.js</i>, <i>App.css</i>, <i>App.test.js</i>, <i>logo.svg</i>, _setupTests.js_ and <i>serviceWorker.js</i> may be deleted as they are not needed in our application right now.
+The files <i>App.js</i>, <i>App.css</i>, <i>App.test.js</i>, <i>logo.svg</i>, <i>setupTests.js</i> and <i>reportWebVitals.js</i> may be deleted as they are not needed in our application right now.
 
 ### Component
 
@@ -59,7 +59,7 @@ ReactDOM.render(<App />, document.getElementById('root'))
 
 renders its contents into the <i>div</i>-element, defined in the file <i>public/index.html</i>, having the <i>id</i> value 'root'.
 
-By default, the file <i>public/index.html</i> is empty. You can try adding some HTML into the file. However, when using React, all content that needs to be rendered is usually defined as React components.
+By default, the file <i>public/index.html</i> doesn't contain any HTML markup that is visible to us in the browser. You can try adding some HTML into the file. However, when using React, all content that needs to be rendered is usually defined as React components.
 
 Let's take a closer look at the code defining the component:
 
@@ -177,7 +177,7 @@ The compiling is handled by [Babel](https://babeljs.io/repl/). Projects created 
 
 It is also possible to write React as "pure JavaScript" without using JSX. Although, nobody with a sound mind would actually do so.
 
-In practice, JSX is much like HTML with the distinction that with JSX you can easily embed dynamic content by writing appropriate JavaScript within curly braces. The idea of JSX is quite similar to many templating languages, such as Thymeleaf used along Java Spring, which are used on servers.
+In practice, JSX is much like HTML with the distinction that with JSX you can easily embed dynamic content by writing appropriate JavaScript within curly braces. The idea of JSX is quite similar to many templating languages, such as Thymeleaf used along with Java Spring, which are used on servers.
 
 JSX is "[XML](https://developer.mozilla.org/en-US/docs/Web/XML/XML_introduction)-like", which means that every tag needs to be closed. For example, a newline is an empty element, which in HTML can be written as follows:
 
@@ -461,7 +461,7 @@ const App = () => {
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-and remove extra files (App.js, App.css, App.test.js, logo.svg, setupTests.js, serviceWorker.js).
+and remove extra files (App.js, App.css, App.test.js, logo.svg, setupTests.js, reportWebVitals.js).
 
 Unfortunately, the entire application is in the same component. Refactor the code so that it consists of three new components: <i>Header</i>, <i>Content</i>, and <i>Total</i>. All data still resides in the <i>App</i> component, which passes the necessary data to each component using <i>props</i>. <i>Header</i> takes care of rendering the name of the course, <i>Content</i> renders the parts and their number of exercises and <i>Total</i> renders the total number of exercises.
 
@@ -481,7 +481,7 @@ const App = () => {
 }
 ```
 
-**WARNING** create-react-app automatically makes the project a git repository unless the application is created within an already existing repository. Most likely you **do not want** the project becoming a repository, so run the command _rm -rf .git_ in the root of the project.
+**WARNING** create-react-app automatically makes the project a git repository unless the application is created within an already existing repository. Most likely you **do not want** the project to become a repository, so run the command _rm -rf .git_ in the root of the project.
 
 <h4>1.2: course information, step2</h4>
 

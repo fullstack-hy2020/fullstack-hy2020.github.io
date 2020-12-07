@@ -36,7 +36,7 @@ lang: zh
 <!-- We'll install json-server for the project... -->
 我们将为这个项目安装 json-server...
 
-```js
+```bash
 npm install json-server --save-dev
 ```
 
@@ -74,8 +74,8 @@ export default { getAll }
 <!-- We'll add axios to the project -->
 我们将在项目中添加 axios
 
-```js
-npm install axios --save
+```bash
+npm install axios
 ```
 
 <!-- We'll change the initialization of the state in <i>noteReducer</i>, such that by default there are no notes: -->
@@ -164,7 +164,7 @@ noteService.getAll().then(notes =>
 
 ```js
 import React, {useEffect} from 'react' // highlight-line
-import NewNote from './components/NowNote'
+import NewNote from './components/NewNote'
 import Notes from './components/Notes'
 import VisibilityFilter from './components/VisibilityFilter'
 import noteService from './services/notes'
@@ -278,7 +278,7 @@ export default {
 ```
 
 <!-- The method _addNote_ of the component <i>NoteForm</i> changes slightly: -->
-组件<i>NoteForm</i> 的方法 addNote 略有变化:
+组件<i>NewNote</i> 的方法 _addNote_ 略有变化:
 
 ```js
 import React from 'react'
@@ -289,7 +289,7 @@ import noteService from '../services/notes' // highlight-line
 const NewNote = (props) => {
   const dispatch = useDispatch()
   
-  const addNote = async (event) => {
+  const addNote = async (event) => { // highlight-line
     event.preventDefault()
     const content = event.target.note.value
     event.target.note.value = ''
@@ -395,8 +395,8 @@ const NewNote = () => {
 <!-- Now let's install the [redux-thunk](https://github.com/gaearon/redux-thunk)-library, which enables us to create <i>asynchronous actions</i>. Installation is done with the command: -->
 现在让我们安装[redux-thunk](https://github.com/gaearon/redux-thunk)-库，它允许我们创建<i>asynchronous actions</i>:
 
-```js
-npm install --save redux-thunk
+```bash
+npm install redux-thunk
 ```
 
 <!-- The redux-thunk-library is a so-called <i>redux-middleware</i>, which must be initialized along with the initialization of the store. While we're here, let's extract the definition of the store into its own file <i>src/store.js</i>: -->

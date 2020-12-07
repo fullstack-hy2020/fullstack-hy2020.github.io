@@ -16,22 +16,20 @@ In most cases the easiest and best way to accomplish this is by using the _useSt
 In the following code we create two pieces of state for the application named _left_ and _right_ that both get the initial value of 0:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
 
   return (
     <div>
-      <div>
-        {left}
-        <button onClick={() => setLeft(left + 1)}>
-          left
-        </button>
-        <button onClick={() => setRight(right + 1)}>
-          right
-        </button>
-        {right}
-      </div>
+      {left}
+      <button onClick={() => setLeft(left + 1)}>
+        left
+      </button>
+      <button onClick={() => setRight(right + 1)}>
+        right
+      </button>
+      {right}
     </div>
   )
 }
@@ -50,7 +48,7 @@ The component's state or a piece of its state can be of any type. We could imple
 In this case the application would look like this:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [clicks, setClicks] = useState({
     left: 0, right: 0
   })
@@ -73,12 +71,10 @@ const App = (props) => {
 
   return (
     <div>
-      <div>
-        {clicks.left}
-        <button onClick={handleLeftClick}>left</button>
-        <button onClick={handleRightClick}>right</button>
-        {clicks.right}
-      </div>
+      {clicks.left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {clicks.right}
     </div>
   )
 }
@@ -161,14 +157,14 @@ The application appears to work. However, <i>it is forbidden in React to mutate 
 
 Storing all of the state in a single state object is a bad choice for this particular application; there's no apparent benefit and the resulting application is a lot more complex. In this case storing the click counters into separate pieces of state is a far more suitable choice.
 
-There are situations where it can be beneficial to store a piece of application state in a more complex data structure.[The official React documentation](https://reactjs.org/docs/hooks-faq.html#should-i-use-one-or-many-state-variables) contains some helpful guidance on the topic.
+There are situations where it can be beneficial to store a piece of application state in a more complex data structure. [The official React documentation](https://reactjs.org/docs/hooks-faq.html#should-i-use-one-or-many-state-variables) contains some helpful guidance on the topic.
 
 ### Handling arrays
 
 Let's add a piece of state to our application containing an array _allClicks_ that remembers every click that has occurred in the application.
 
 ```js
-const App = (props) => {
+const App = () => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
   const [allClicks, setAll] = useState([]) // highlight-line
@@ -189,13 +185,11 @@ const App = (props) => {
 
   return (
     <div>
-      <div>
-        {left}
-        <button onClick={handleLeftClick}>left</button>
-        <button onClick={handleRightClick}>right</button>
-        {right}
-        <p>{allClicks.join(' ')}</p> // highlight-line
-      </div>
+      {left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {right}
+      <p>{allClicks.join(' ')}</p> // highlight-line
     </div>
   )
 }
@@ -233,18 +227,16 @@ However, __don't__ do this. As mentioned previously, the state of React componen
 Let's take a closer look at how the clicking history is rendered to the page:
 
 ```js
-const App = (props) => {
+const App = () => {
   // ...
 
   return (
     <div>
-      <div>
-        {left}
-        <button onClick={handleLeftClick}>left</button>
-        <button onClick={handleRightClick}>right</button>
-        {right}
-        <p>{allClicks.join(' ')}</p> // highlight-line
-      </div>
+      {left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {right}
+      <p>{allClicks.join(' ')}</p> // highlight-line
     </div>
   )
 }
@@ -273,18 +265,16 @@ const History = (props) => {
   )
 }
 
-const App = (props) => {
+const App = () => {
   // ...
 
   return (
     <div>
-      <div>
-        {left}
-        <button onClick={handleLeftClick}>left</button>
-        <button onClick={handleRightClick}>right</button>
-        {right}
-        <History allClicks={allClicks} /> // highlight-line
-      </div>
+      {left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {right}
+      <History allClicks={allClicks} /> // highlight-line
     </div>
   )
 }
@@ -335,7 +325,7 @@ const Button = ({ onClick, text }) => (
 )
 // highlight-end
 
-const App = (props) => {
+const App = () => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
   const [allClicks, setAll] = useState([])
@@ -352,15 +342,13 @@ const App = (props) => {
 
   return (
     <div>
-      <div>
-        {left}
-        // highlight-start
-        <Button onClick={handleLeftClick} text='left' />
-        <Button onClick={handleRightClick} text='right' />
-        // highlight-end
-        {right}
-        <History allClicks={allClicks} />
-      </div>
+      {left}
+      // highlight-start
+      <Button onClick={handleLeftClick} text='left' />
+      <Button onClick={handleRightClick} text='right' />
+      // highlight-end
+      {right}
+      <History allClicks={allClicks} />
     </div>
   )
 }
@@ -370,7 +358,7 @@ const App = (props) => {
 
 In this course we use the [state hook](https://reactjs.org/docs/hooks-state.html) to add state to our React components, which is part of the newer versions of React and is available from version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) onwards. Before the addition of hooks, there was no way to add state to functional components. Components that required state had to be defined as [class](https://reactjs.org/docs/react-component.html) components, using the JavaScript class syntax.
 
-In this course we have made the slightly radical decision to use hooks exclusively from day one, to ensure that we are learning the future style of React. Even though functional components are the future of React, it is still important to learn the class syntax, as there are billions of lines of old React code that you might end up maintaining some day. The same applies to documentation and examples of React that you may stumble across on the internet.
+In this course we have made the slightly radical decision to use hooks exclusively from day one, to ensure that we are learning the future style of React. Even though functional components are the future of React, it is still important to learn the class syntax, as there are billions of lines of old React code that you might end up maintaining someday. The same applies to documentation and examples of React that you may stumble across on the internet.
 
 We will learn more about React class components later on in the course.
 
@@ -454,23 +442,18 @@ By going to the <i>Console</i> tab, it is easy to inspect the current state of v
 
 Once the cause of the bug is discovered you can remove the _debugger_ command and refresh the page.
 
-The debugger also enables us to execute our code line by line with the controls found in the right-hand side of the <i>Source</i> tab.
+The debugger also enables us to execute our code line by line with the controls found on the right-hand side of the <i>Source</i> tab.
 
-You can also access the debugger without the _debugger_ command by adding break points in the <i>Sources</i> tab. Inspecting the values of the component's variables can be done in the _Scope_-section:
+You can also access the debugger without the _debugger_ command by adding breakpoints in the <i>Sources</i> tab. Inspecting the values of the component's variables can be done in the _Scope_-section:
 
 ![](../../images/1/9a.png)
 
-It is highly recommended to add the [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension to Chrome. It adds a new _React_ tab to the developer tools:
+It is highly recommended to add the [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension to Chrome. It adds a new _Components_ tab to the developer tools. The new developer tools tab can be used to inspect the different React elements in the application, along with their state and props:
 
-![](../../images/1/10e.png)
+![](../../images/1/10ea.png)
 
-The new _React_ developer tools tab can be used to inspect the different React elements in the application, along with their state and props.
 
-Unfortunately the current version of React developer tools leaves something to be desired when displaying component state created with hooks:
-
-![](../../images/1/11e.png)
-
-The component state was defined like so:
+The _App_ component's state is defined like so:
 
 ```js
 const [left, setLeft] = useState(0)
@@ -480,7 +463,9 @@ const [allClicks, setAll] = useState([])
 
 Dev tools shows the state of hooks in the order of their definition:
 
-![](../../images/1/11be.png)
+![](../../images/1/11ea.png)
+
+The first <i>State</i> contains the value of the <i>left</i> state, the next contains the value of the <i>right</i> state and the last contains the value of the <i>allClicks</i> state.
 
 ### Rules of Hooks
 
@@ -491,7 +476,7 @@ The _useState_ function (as well as the _useEffect_ function introduced later on
 To recap, hooks may only be called from the inside of a function body that defines a React component:
 
 ```js
-const App = (props) => {
+const App = () => {
   // these are ok
   const [age, setAge] = useState(0)
   const [name, setName] = useState('Juha Tauriainen')
@@ -525,7 +510,7 @@ For this reason we will revisit the topic.
 
 Let's assume that we're developing this simple application:
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   return (
@@ -551,7 +536,7 @@ Event handlers must always be a function or a reference to a function. The butto
 If we were to define the event handler as a string:
 
 ```js
-<button onClick={'crap...'}>button</button>
+<button onClick="crap...">button</button>
 ```
 
 React would warn us about this in the console:
@@ -590,7 +575,7 @@ What about the following:
 </button>
 ```
 
-The message gets printed to the console once but nothing happens when we click the button a second time. Why does this not work even when our event handler contains a function _console.log_?
+The message gets printed to the console once when the component is rendered but nothing happens when we click the button. Why does this not work even when our event handler contains a function _console.log_?
 
 The issue here is that our event handler is defined as a <i>function call</i> which means that the event handler is actually assigned the returned value from the function, which in the case of _console.log_ is <i>undefined</i>.
 
@@ -626,7 +611,7 @@ Defining event handlers directly in the attribute of the button is not necessari
 You will often see event handlers defined in a separate place. In the following version of our application we define a function that then gets assigned to the _handleClick_ variable in the body of the component function:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   const handleClick = () =>
@@ -650,7 +635,7 @@ The _handleClick_ variable is now assigned to a reference to the function. The r
 Naturally, our event handler function can be composed of multiple commands. In these cases we use the longer curly brace syntax for arrow functions:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   // highlight-start
@@ -671,14 +656,14 @@ const App = (props) => {
 
 ### Function that returns a function
 
-Another way to define a event handler is to use <i>function that returns a function</i>.
+Another way to define an event handler is to use <i>function that returns a function</i>.
 
 You probably won't need to use functions that return functions in any of the exercises in this course.  If the topic seems particularly confusing, you may skip over this section for now and return to it later.
 
 Let's make the following changes to our code:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   // highlight-start
@@ -741,7 +726,7 @@ What's the point of this concept?
 Let's change the code a tiny bit:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   // highlight-start
@@ -843,7 +828,7 @@ const hello = (who) => () => {
 We can use the same trick to define event handlers that set the state of the component to a given value. Let's make the following changes to our code:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
   
   // highlight-start
@@ -879,7 +864,7 @@ The event handler is set to the return value of _setToValue(1000)_ which is the 
 }
 ```
 
-The increase button is declared as following:
+The increase button is declared as follows:
 
 ```js
 <button onClick={setToValue(value + 1)}>increment</button>
@@ -896,7 +881,7 @@ The event handler is created by the function call _setToValue(value + 1)_ which 
 Using functions that return functions is not required to achieve this functionality. Let's return the _setToValue_ function that is responsible for updating state, into a normal function:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   const setToValue = (newValue) => {
@@ -960,7 +945,7 @@ const Button = (props) => (
   </button>
 )
 
-const App = props => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   const setToValue = newValue => {
@@ -981,7 +966,9 @@ const App = props => {
 }
 ```
 
-The application still appears to work, but **don't implement components like this!** Never define components inside of other components. The method provides no benefits and leads to many unpleasant problems. Let's instead move the <i>Display</i> component function to its correct place, which is outside of the <i>App</i> component function:
+The application still appears to work, but **don't implement components like this!** Never define components inside of other components. The method provides no benefits and leads to many unpleasant problems. The biggest problems are due to the fact that React treats a component defined inside of another component as a new component in every render. This makes it impossible for React to optimize the component.
+
+Let's instead move the <i>Display</i> component function to its correct place, which is outside of the <i>App</i> component function:
 
 ```js
 const Display = props => <div>{props.value}</div>
@@ -992,7 +979,7 @@ const Button = (props) => (
   </button>
 )
 
-const App = props => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   const setToValue = newValue => {
@@ -1055,7 +1042,7 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 const App = () => {
-  // save clicks of each button to own state
+  // save clicks of each button to its own state
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
@@ -1195,7 +1182,7 @@ Your finished application could look something like this:
 
 ![](../../images/1/18a.png)
 
-**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your project to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application.
+**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application.
 
 <h4>1.13*: anecdotes step2</h4>
 

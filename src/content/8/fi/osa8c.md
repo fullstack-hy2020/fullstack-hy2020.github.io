@@ -13,8 +13,8 @@ Laajennetaan sovellusta käyttäjänhallinnalla. Siirrytään kuitenkin ensin k�
 
 Otetaan käyttöön mongoose ja mongoose-unique-validator:
 
-```js
-npm install mongoose mongoose-unique-validator --save
+```bash
+npm install mongoose mongoose-unique-validator
 ```
 
 Tehdään osien [3](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan) ja [4](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet) tapaa imitoiden.
@@ -59,13 +59,11 @@ const { ApolloServer, UserInputError, gql } = require('apollo-server')
 const mongoose = require('mongoose')
 const Person = require('./models/person')
 
-mongoose.set('useFindAndModify', false)
-
-const MONGODB_URI = 'mongodb+srv://fullstack:sekred@cluster0-ostce.mongodb.net/graphql?retryWrites=true'
+const MONGODB_URI = 'mongodb+srv://fullstack:halfstack@cluster0-ostce.mongodb.net/graphql?retryWrites=true'
 
 console.log('connecting to', MONGODB_URI)
 
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
   .then(() => {
     console.log('connected to MongoDB')
   })
@@ -259,8 +257,9 @@ type Mutation {
 Kysely _me_ palauttaa kirjautuneena olevan käyttäjän. Käyttäjät luodaan mutaatiolla _createUser_ ja kirjautuminen tapahtuu mutaatiolla _login_.
 
 Asennetaan jsonwebtoken-kirjasto:
-```js
-npm install jsonwebtoken --save
+
+```bash
+npm install jsonwebtoken
 ```
 
 Mutaatioiden resolverit seuraavassa:

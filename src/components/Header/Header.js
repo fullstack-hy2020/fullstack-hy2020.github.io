@@ -1,7 +1,6 @@
 import './Header.scss';
 
 import React, { Component } from 'react';
-
 import { Link } from 'gatsby';
 import Navigation from '../Navigation/Navigation';
 import { TripleBorder } from '../TripleBorder/TripleBorder';
@@ -38,6 +37,9 @@ class Header extends Component {
 
   render() {
     const { headerClass } = this.state;
+    const { lang } = this.props;
+    
+    const isSmallHeader = headerClass === 'header--small';
 
     return (
       <div
@@ -52,13 +54,7 @@ class Header extends Component {
           style={{ alignItems: 'center', justifyContent: 'flex-start' }}
         >
           <Link
-            to={
-              this.props.lang === 'en'
-                ? '/en'
-                : this.props.lang === 'zh'
-                ? '/zh'
-                : '/'
-            }
+            to={lang === 'en' ? '/en' : lang === 'zh' ? '/zh' : '/'}
             className="header__logo"
           >
             {headerClass === '' ? (
@@ -78,10 +74,7 @@ class Header extends Component {
               </TripleBorder>
             )}
           </Link>
-
-          {this.state.headerClass !== 'header--small' && (
-            <Navigation lang={this.props.lang} />
-          )}
+          {!isSmallHeader && <Navigation lang={lang} />}
         </div>
       </div>
     );

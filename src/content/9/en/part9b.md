@@ -28,7 +28,10 @@ Let's start writing our first TypeScript-app. To keep things simple, let's start
 It compiles and executes the specified TypeScript file immediately, so that there is no need for a separate compilation step.
 
 <!-- To use <i>ts-node</i> you could install it globally with the official <i>typescript</i> package by running <i>npm install -g ts-node typescript</i>.  -->
-You can install both <i>ts-node</i> and the official <i>typescript</i> package globally by running <i>npm install -g ts-node typescript</i>.
+You can install both <i>ts-node</i> and the official <i>typescript</i> package globally by running 
+```
+npm install -g ts-node typescript
+```
 
 <!-- If you can't or don't want to install global packages you can create an npm project that has the required dependencies and run your scripts in it. We shall also go with this approach. -->
 If you can't or don't want to install global packages, you can create an npm project which has the required dependencies and run your scripts in it. 
@@ -433,13 +436,13 @@ Exercises 9.1.-9.7. will be all made to the same node project. Create the projec
 ```
 
 The <i>tsconfig.json</i> file is used to define how the TypeScript compiler should interpret the code, how strictly the compiler should work, which files to watch or ignore, and and [much much more](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html).
-For now we will only use the compiler option [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny), that makes it mandatory to have types for all variables used.
+For now we will only use the compiler option [noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny), that makes it mandatory to have types for all variables used.
 
 #### 9.1 Body mass index
 
 Create the code of this exercise to file <i>bmiCalculator.ts</i>
 
-Write a function <i>calculateBmi</i> that counts [BMI](https://en.wikipedia.org/wiki/Body_mass_index) based on given weight (in kilograms) and height (in centimeters) and then returns a message that suits the results. 
+Write a function <i>calculateBmi</i> that counts [BMI](https://en.wikipedia.org/wiki/Body_mass_index) based on given height (in centimeters) and weight (in kilograms) and then returns a message that suits the results. 
 
 Call the function in the same file with hard-coded parameters and print out the result. The code
 

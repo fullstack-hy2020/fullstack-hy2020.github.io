@@ -46,7 +46,7 @@ Voimme sallia muista <i>origineista</i> tulevat pyynnöt käyttämällä Noden [
 Asennetaan backendiin <i>cors</i> komennolla
 
 ```bash
-npm install cors --save
+npm install cors
 ```
 
 Otetaan middleware käyttöön toistaiseksi sellaisella konfiguraatiolla joka sallii kaikista origineista tulevat pyynnöt kaikkiin backendin express routeihin:
@@ -70,7 +70,7 @@ Kun koko "stäkki" on saatu vihdoin kuntoon, siirretään sovellus internettiin.
 Lisätään backendin projektin juureen tiedosto <i>Procfile</i>, joka kertoo Herokulle, miten sovellus käynnistetään
 
 ```bash
-web: node index.js
+web: npm start
 ```
 
 Muutetaan tiedoston <i>index.js</i> lopussa olevaa sovelluksen käyttämän portin määrittelyä seuraavasti:
@@ -90,7 +90,7 @@ Tehdään projektihakemistosta git-repositorio ja lisätään <i>.gitignore</i>,
 node_modules
 ```
 
-Luodaan heroku-sovellus komennolla _heroku create_, tehdään sovelluksen hakemistosta git-repositorio, commitoidaan koodi ja siirretään se Herokuun komennolla _git push heroku master_.
+Luodaan heroku-sovellus komennolla _heroku create_, tehdään sovelluksen hakemistosta git-repositorio, commitoidaan koodi ja siirretään se Herokuun komennolla _git push heroku main_.
 
 Jos kaikki meni hyvin, sovellus toimii:
 
@@ -211,7 +211,7 @@ Jotta uuden frontendin version generointi onnistuisi jatkossa ilman turhia manua
   "scripts": {
     // ...
     "build:ui": "rm -rf build && cd ../../osa2/materiaali/notes-new && npm run build --prod && cp -r build ../../../osa3/notes-backend/",
-    "deploy": "git push heroku master",
+    "deploy": "git push heroku main",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",    
     "logs:prod": "heroku logs --tail"
   }
@@ -293,7 +293,7 @@ Seuraavassa loki eräästä tyypillisestä ongelmatilanteesta, jossa Heroku ei l
 
 ![](../../images/3/33.png)
 
-Syynä ongelmalle on se, että <i>expressiä</i> asennettaessa oli unohtunut antaa optio <i>--save</i>, joka tallentaa tiedon riippuvuudesta tiedostoon <i>package.json</i>. 
+Syynä ongelmalle on se, että <i>express</i>-kirjastoa ei ole asennettu <em>npm install express</em> komennolla, joka tallentaa tiedon riippuvuudesta tiedostoon <i>package.json</i>. 
 
 Toinen tyypillinen ongelma on se, että sovellusta ei ole konfiguroitu käyttämään ympäristömuuttujana <em>PORT</em> määriteltyä porttia:
 

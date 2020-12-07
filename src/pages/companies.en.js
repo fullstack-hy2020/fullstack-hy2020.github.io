@@ -1,8 +1,8 @@
+import Layout from '../components/layout';
 import { BodyText } from '../components/BodyText/BodyText';
 import { DeveloperStory } from '../components/DeveloperStory/DeveloperStory';
 import Element from '../components/Element/Element';
 import Footer from '../components/Footer/Footer';
-import Layout from '../components/layout';
 import React from 'react';
 import SEO from '../components/seo';
 import mainSEOtags from '../content/seo/mainSEOtags';

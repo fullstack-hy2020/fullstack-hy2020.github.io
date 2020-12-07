@@ -319,7 +319,7 @@ The internet is starting to fill up with more and more helpful material related 
 
 ### Exercises 7.4.-7.8.
 
-We'll continue with the app from [exercises](/en/part7/custom_hooks#exercises-7-4-7-8) of the chapter [react router](/en/part7/react_router). 
+We'll continue with the app from [exercises](/en/part7/react_router#exercises-7-1-7-3) of the chapter [react router](/en/part7/react_router). 
 
 #### 7.4: anecdotes and hooks step1
 
@@ -385,7 +385,7 @@ We will return to this warning in the next exercise.
 
 If your solution did not cause a warning to appear in the console you have already finished this exercise.
 
-If you see the warning in the console, make the necessary changes to get rid of the `Invalid value for prop reset' on <input> tag` console warning. 
+If you see the warning in the console, make the necessary changes to get rid of the _Invalid value for prop \`reset\` on \<input\> tag_ console warning. 
 
 The reason for this warning is that after making the changes to your application, the following expression:
 

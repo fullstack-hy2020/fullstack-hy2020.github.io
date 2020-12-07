@@ -51,7 +51,7 @@ The npm script for running <i>tsc</i> is set as follows:
  **Notice** the extra -- before the actual argument! Arguments before the -- are interpreted for the command <i>npm</i> and ones after are for the command that is run through the script.
 
 <!-- The created <i>tsconfig.json</i> contains a lengthy list of all of the possible configurations available to use, but  only a few of those are uncommented. Studying the initial <i>tsconfig.json</i> file might be useful for finding some configuration options you might need. It is also completely okay to keep the commented rows in the file just in case you might someday need to expand your configuration settings.  -->
-Running the script creates an <i>tsconfig.json</i> file, which contains a lengthy list of every configuration available to us. However only a few have not been commented out.
+Running the script creates a <i>tsconfig.json</i> file, which contains a lengthy list of every configuration available to us. However only a few have not been commented out.
 Studying the initial <i>tsconfig.json</i> file might be useful for finding some configuration options you might need.
 It is also completely okay to keep the commented rows in the file just in case you might someday need to expand your configuration settings.
 
@@ -930,7 +930,7 @@ The code handling of the response looks as follows
 ```js
 router.post('/', (req, res) => {
   const { date, weather, visibility, comment } = req.body;
-  const newDiaryEntry = diaryService.AddEntry(
+  const newDiaryEntry = diaryService.addEntry(
     date,
     weather,
     visibility,
@@ -944,9 +944,11 @@ corresponding method in <i>diaryService</i> looks like this
 
 ```js
 import {
-  NonSensitiveDiaryEntry, DiaryEntry,
-  Visibility, Weather // highlight-line
-  } from '../types';
+  NonSensitiveDiaryEntry,
+  DiaryEntry,
+  Visibility, // highlight-line
+  Weather // highlight-line
+} from '../types';
 
 
 const addEntry = (
@@ -963,7 +965,7 @@ const addEntry = (
 
   diaries.push(newDiaryEntry);
   return newDiaryEntry;
-}
+};
 ```
 
 <!-- As we can see the <i>addDiary</i> function is growing to be pretty hard to read, when having all the fields as separate parameters. It might be better to just send the data as an object to the function: -->
@@ -1239,7 +1241,7 @@ The question is, how can we validate that the string is of a specific form?
 One possible way to write the type guard would be this:
 
 ```js
-const isWeather = (str: any): str is Weather => {
+const isWeather = (str: string): str is Weather => {
   return ['sunny', 'rainy', 'cloudy', 'stormy' ].includes(str);
 };
 ```

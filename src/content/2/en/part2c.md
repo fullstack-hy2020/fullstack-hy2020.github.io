@@ -108,9 +108,9 @@ On the other hand, JavaScript engines, or runtime environments, follow the [asyn
 
 When an asynchronous operation is completed, or more specifically, at some point after its completion, the JavaScript engine calls the event handlers registered to the operation.
 
-Currently, JavaScript engines are <i>single-threaded</i>, which means that they cannot execute code in parallel. As a result, it is a requirement in practise to use a non-blocking model for executing IO operations. Otherwise, the browser would "freeze" during, for instance, the fetching of data from a server.
+Currently, JavaScript engines are <i>single-threaded</i>, which means that they cannot execute code in parallel. As a result, it is a requirement in practice to use a non-blocking model for executing IO operations. Otherwise, the browser would "freeze" during, for instance, the fetching of data from a server.
 
-Another consequence of this single threaded nature of JavaScript engines is that if some code execution takes up a lot of time, the browser will get stuck for the duration of the execution. If we added the following code at the top of our application:
+Another consequence of this single-threaded nature of JavaScript engines is that if some code execution takes up a lot of time, the browser will get stuck for the duration of the execution. If we added the following code at the top of our application:
 
 ```js
 setTimeout(() => {
@@ -183,7 +183,7 @@ At this point the <i>dependencies</i> part is of most interest to us as it defin
 We now want to use axios. Theoretically, we could define the library directly in the <i>package.json</i> file, but it is better to install it from the command line.
 
 ```js
-npm install axios --save
+npm install axios
 ```
 
 
@@ -250,21 +250,19 @@ As we can see, the application is not able to bind itself to the [port](https://
 We used the command _npm install_ twice, but with slight differences:
 
 ```js
-npm install axios --save
+npm install axios
 npm install json-server --save-dev
 ```
 
-There is a fine difference in the parameters. <i>axios</i> is installed as a runtime dependency (_--save_) of the application, because the execution of the program requires the existence of the library. On the other hand, <i>json-server</i> was installed as a development dependency (_--save-dev_), since the program itself doesn't require it. It is used for assistance during software development. There will be more on different dependencies in the next part of the course.
+There is a fine difference in the parameters. <i>axios</i> is installed as a runtime dependency of the application, because the execution of the program requires the existence of the library. On the other hand, <i>json-server</i> was installed as a development dependency (_--save-dev_), since the program itself doesn't require it. It is used for assistance during software development. There will be more on different dependencies in the next part of the course.
 
 ### Axios and promises
 
 Now we are ready to use axios. Going forward, json-server is assumed to be running on port 3001.
 
-NB: To run json-server and your react app simultaneously, you may need to use two terminal windows. One to keep json-sever running and the other to run react-app.
+NB: To run json-server and your react app simultaneously, you may need to use two terminal windows. One to keep json-server running and the other to run react-app.
 
 The library can be brought into use the same way other libraries, e.g. React, are, i.e. by using an appropriate <em>import</em> statement.
-
-
 
 Add the following to the file <i>index.js</i>:
 
@@ -278,7 +276,7 @@ const promise2 = axios.get('http://localhost:3001/foobar')
 console.log(promise2)
 ```
 
-This should be printed to the console
+If you open <http://localhost:3000> in the browser, this should be printed to the console
 
 ![](../../images/2/16b.png)
 
@@ -385,8 +383,8 @@ import React, { useState, useEffect } from 'react' // highlight-line
 import axios from 'axios'
 import Note from './components/Note'
 
-const App = () => {
-  const [notes, setNotes] = useState([])
+const App = () => { // highlight-line
+  const [notes, setNotes] = useState([]) // highlight-line
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
 
@@ -596,7 +594,7 @@ Modify the application such that the initial state of the data is fetched from t
 
 <h4>2.12* Data for countries, step1</h4>
 
-The API [https://restcountries.eu](https://restcountries.eu) provides a data for different countries in a machine readable format, a so-called REST API.
+The API [https://restcountries.eu](https://restcountries.eu) provides data for different countries in a machine-readable format, a so-called REST API.
 
 Create an application, in which one can look at data of various countries. The application should probably get the data from the endpoint [all](https://restcountries.eu/#api-endpoints-all).
 

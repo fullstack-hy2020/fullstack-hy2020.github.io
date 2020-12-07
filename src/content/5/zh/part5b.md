@@ -294,6 +294,8 @@ const NoteForm = ({ onSubmit, handleChange, value}) => {
     </div>
   )
 }
+
+export default NoteForm
 ```
 
 <!-- Next let's define the form component inside of a <i>Togglable</i> component: -->
@@ -611,12 +613,12 @@ const Togglable = () => ...
 <!-- move all the states required for creating a new blog to this component.  -->
 将创建新 blog 的表单分离到它自己的组件中(如果您还没有这样做) ，并将创建新博客所需的所有状态移动到此组件。
 
-<!-- The component must work like the <i>NewNote</i> component from the [material](/osa5/props_children_ja_proptypet#lomakkeiden-tila) of this part. -->
-这个组件必须像[这里](/zh/part5/props_children_与_proptypes)的<i>NewNote</i> 组件那样工作。
+<!-- The component must work like the <i>NoteForm</i> component from the [material](/osa5/props_children_ja_proptypet#lomakkeiden-tila) of this part. -->
+这个组件必须像[这里](/zh/part5/props_children_与_proptypes)的<i>NoteForm</i> 组件那样工作。
 
 #### 5.7* Blog list frontend, 步骤7
 
-<!-- Let's add each blog a button, which controls if all of the details about the blog are shown or not. -->
+<!-- Let's add a button to each blog, which controls whether all of the details about the blog are shown or not. -->
 让我们为每个博客添加一个按钮，用于控制是否显示博客的所有细节。
 
 <!-- Full details of the blog open when the button is clicked. -->
@@ -746,8 +748,8 @@ const Blog = ({ blog }) => {
 <!-- The expected and required props of a component can be defined with the [prop-types](https://github.com/facebook/prop-types) package. Let's install the package: -->
 这个需求可以通过 [prop-types](https://github.com/facebook/prop-types) 包来定义，我们来安装一下：
 
-```js
-npm install --save prop-types
+```bash
+npm install prop-types
 ```
 
 <!-- We can define the <i>buttonLabel</i> prop as a mandatory or <i>required</i> string-type prop as shown below: -->
@@ -815,10 +817,10 @@ Create-react-app 已经默认为项目安装好了 ESlint， 所以我们需要�
 注意: 不要运行 eslint-- init 命令。 它将安装与 create-react-app 创建的配置文件不兼容的最新版本的 ESlint！
 
 <!-- Next, we will start testing the frontend and in order to avoid undesired and irrelevant linter errors we will install the [eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest) package: -->
-下面，我们将开始测试前端，为避免不想要和不相关的 lint 错误，我们先安装[eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest) 库：
+下面，我们将开始测试前端，为避免不想要和不相关的 lint 错误，我们先安装[eslint-plugin-jest](https://www.npmjs.com/package/eslint-plugin-jest) 库：
 
-```js
-npm add --save-dev eslint-plugin-jest
+```bash
+npm install --save-dev eslint-plugin-jest
 ```
 
 <!-- Let's create a <i>.eslintrc.js</i> file with the following contents: -->
@@ -872,6 +874,11 @@ module.exports = {
       ],
       "no-console": 0,
       "react/prop-types": 0
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }
 ```

@@ -37,8 +37,8 @@ lang: zh
 <!-- Let's install the package with the command: -->
 让我们用如下命令来安装这个包:
 
-```js
-npm install --save react-bootstrap
+```bash
+npm install react-bootstrap
 ```
 
 <!-- Then let's add a link for loading the CSS stylesheet for Bootstrap inside of the <i>head</i> tag in the <i>public/index.html</i> file of the application: -->
@@ -282,8 +282,8 @@ const App = () => {
 <!-- Install the library with the command -->
 使用如下命令安装库
 
-```js
-npm install --save @material-ui/core
+```bash
+npm install @material-ui/core
 ```
 
 <!-- Then add the following line to the <i>head</i> tag in the <i>public/index.html</i> file. The line loads bootstrap's css-definitions. -->
@@ -418,7 +418,7 @@ const Login = (props) => {
 
 
 
-<!-- Difference to bootstrap is, that MaterialUI does not provide a component for the form itself. The form here an ordinary HTML [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) element. -->
+<!-- MaterialUI, unlike Bootstrap, does not provide a component for the form itself. The form here is an ordinary HTML [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) element. -->
 与 bootstrap 不同的是，MaterialUI 并不为表单本身提供组件。 这里的表单是一个普通的 HTML [form](https://developer.mozilla.org/en-us/docs/web/HTML/element/form)元素。
 
 
@@ -447,8 +447,8 @@ const Login = (props) => {
 <!-- The Alert component is not yet included in the MaterialUI core package, so we have to install the [lab](https://material-ui.com/components/about-the-lab/) package to use it: -->
 Alert 组件尚未包含在 MaterialUI 核心包中，因此我们必须安装[lab](https://material-ui.com/components/about-The-lab/)包才能使用它: 
 
-```js 
-npm install --save @material-ui/lab
+```bash
+npm install @material-ui/lab
 ```
 
 
@@ -624,6 +624,7 @@ React-bootstrap 和 MaterialUI 之间的区别并不大，这取决于你觉得�
 - <https://get.foundation/>
 - <https://chakra-ui.com/>
 - <https://tailwindcss.com/>
+- <https://semantic-ui.com/>
 
 ### Styled components 
 【样式组件】
@@ -636,8 +637,8 @@ React-bootstrap 和 MaterialUI 之间的区别并不大，这取决于你觉得�
 <!-- Let's make a few changes to the styles of our application with the help of styled components. First, let's define two components with styles: -->
 让我们借助样式化组件对应用的样式进行一些更改。 首先，用如下命令安装包：
 
-```js
-npm install --save styled-components
+```bash
+npm install styled-components
 ```
 
 让我们用样式定义两个组件:

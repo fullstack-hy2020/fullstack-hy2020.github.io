@@ -216,8 +216,8 @@ Kenttä [output](https://webpack.js.org/concepts/#output) taas kertoo minne muod
 
 Muutetaan sitten sovellus minimalistiseksi React-sovellukseksi. Asennetaan tarvittavat kirjastot
 
-```js
-npm install --save react react-dom
+```bash
+npm install react react-dom
 ```
 
 Liitetään tavanomaiset loitsut tiedostoon <i>index.js</i>
@@ -291,7 +291,7 @@ const config = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        query: {
+        options: {
           presets: ['@babel/preset-react'],
         },
       },
@@ -309,13 +309,13 @@ Yksittäisen loaderin määrittely on kolmiosainen:
 {
   test: /\.js$/,
   loader: 'babel-loader',
-  query: {
+  options: {
     presets: ['@babel/preset-react']
   }
 }
 ```
 
-Kenttä <i>test</i> määrittelee että käsitellään <i>.js</i>-päätteisiä tiedostoja, <i>loader</i> kertoo että käsittely tapahtuu [babel-loader](https://github.com/babel/babel-loader):illa. Kenttä <i>query</i> taas antaa loaderille sen toimintaa ohjaavia parametreja.
+Kenttä <i>test</i> määrittelee että käsitellään <i>.js</i>-päätteisiä tiedostoja, <i>loader</i> kertoo että käsittely tapahtuu [babel-loader](https://github.com/babel/babel-loader):illa. Kenttä <i>options</i> taas antaa loaderille sen toimintaa ohjaavia parametreja.
 
 Asennetaan loader ja sen tarvitsemat kirjastot <i>kehitysaikaiseksi riippuvuudeksi</i>:
 
@@ -372,7 +372,7 @@ Tällä hetkellä sovelluksemme transpiloinnissa käytetään presetiä [@babel/
 {
   test: /\.js$/,
   loader: 'babel-loader',
-  query: {
+  options: {
     presets: ['@babel/preset-react'] // highlight-line
   }
 }
@@ -384,7 +384,7 @@ Otetaan käyttöön preset [@babel/preset-env](https://babeljs.io/docs/plugins/p
 {
   test: /\.js$/,
   loader: 'babel-loader',
-  query: {
+  options: {
     presets: ['@babel/preset-env', '@babel/preset-react'] // highlight-line
   }
 }
@@ -447,14 +447,14 @@ CSS:ää varten onkin otettava käyttöön [css](https://webpack.js.org/loaders/
     {
       test: /\.js$/,
       loader: 'babel-loader',
-      query: {
+      options: {
         presets: ['@babel/preset-react', '@babel/preset-env'],
       },
     },
     // highlight-start
     {
       test: /\.css$/,
-      loaders: ['style-loader', 'css-loader'],
+      use: ['style-loader', 'css-loader'],
     },
     // highlight-end
   ];
@@ -492,7 +492,7 @@ Määritellään dev-serverin käynnistävä npm-skripti:
   // ...
   "scripts": {
     "build": "webpack --mode=development",
-    "start": "webpack-dev-server --mode=development" // highlight-line
+    "start": "webpack serve --mode=development" // highlight-line
   },
   // ...
 }
@@ -650,7 +650,7 @@ Webpackin versiosta 4 alkaen pluginia ei ole tarvinnut konfiguroida erikseen, ri
   "description": "practising webpack",
   "scripts": {
     "build": "webpack --mode=production", // highlight-line
-    "start": "webpack-dev-server --mode=development"
+    "start": "webpack serve --mode=development"
   },
   "license": "MIT",
   "dependencies": {

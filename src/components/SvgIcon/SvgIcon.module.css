@@ -1,0 +1,9 @@
+.svgIcon {
+  user-select: none;
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  fill: currentColor;
+  flex-shrink: 0;
+  font-size: 1.5rem;
+}

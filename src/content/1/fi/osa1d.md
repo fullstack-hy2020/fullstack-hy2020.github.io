@@ -16,7 +16,7 @@ Helpoin ja useimmiten paras tapa on luoda sovellukselle useita erillisiä tiloja
 Seuraavassa sovellukselle luodaan kaksi alkuarvon 0 saavaa tilaa _left_ ja _right_:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
 
@@ -51,7 +51,7 @@ Komponentin tila tai yksittäinen tilan pala voi olla minkä tahansa tyyppinen. 
 sovellus muuttuisi seuraavasti:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [clicks, setClicks] = useState({
     left: 0, right: 0
   })
@@ -170,7 +170,7 @@ On kuitenkin tilanteita, joissa jokin osa tilaa kannattaa pitää monimutkaisemm
 Tehdään sovellukseen vielä laajennus, lisätään sovelluksen tilaan taulukko _allClicks_, joka muistaa kaikki näppäimenpainallukset.
 
 ```js
-const App = (props) => {
+const App = () => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
   const [allClicks, setAll] = useState([]) // highlight-line
@@ -218,9 +218,9 @@ const handleLeftClick = () => {
 }
 ```
 
-Tilaa _allClicks_ saa nyt arvokseen taulukon, missä on entisen taulukon alkiot ja <i>L</i>. Uuden alkion liittäminen on tehty metodilla [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka toimii siten, että se ei muuta olemassaolevaa taulukkoa vaan luo <i>uuden taulukon</i>, mihin uusi alkio on lisätty.
+Tila _allClicks_ saa nyt arvokseen taulukon, missä on entisen taulukon alkiot ja <i>L</i>. Uuden alkion liittäminen on tehty metodilla [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka toimii siten, että se ei muuta olemassaolevaa taulukkoa vaan luo <i>uuden taulukon</i>, mihin uusi alkio on lisätty.
 
-Kuten jo aiemmin mainittiin, Javascriptissa on myös mahdollista lisätä taulukkoon metodilla [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) ja sovellus näyttäisi tässä tilanteessa toimivan myös jos lisäys hoidettaisiin siten että _allClicks_-tilaa muuteaan pushaamalla siihen alkio ja sitten päivitetään tila:
+Kuten jo aiemmin mainittiin, Javascriptissa on myös mahdollista lisätä taulukkoon metodilla [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) ja sovellus näyttäisi tässä tilanteessa toimivan myös jos lisäys hoidettaisiin siten että _allClicks_-tilaa muutetaan pushaamalla siihen alkio ja sitten päivitetään tila:
 
 ```js
 const handleLeftClick = () => {
@@ -230,12 +230,12 @@ const handleLeftClick = () => {
 }
 ```
 
-Älä kuitenkaan tee näin. Kuten jo mainitsimme, React-komponentin tilaa, eli esimerkiksi muuttujaa _allClicks_ ei saa muuttaa. Vaikka tilan muuttaminen näyttääkin toimivan joissaikin tilanteissa, voi seurauksena olla hankalasti havaittavia ongelmia.
+Älä kuitenkaan tee näin. Kuten jo mainitsimme, React-komponentin tilaa, eli esimerkiksi muuttujaa _allClicks_ ei saa muuttaa. Vaikka tilan muuttaminen näyttääkin toimivan joissakin tilanteissa, voi seurauksena olla hankalasti havaittavia ongelmia.
 
 Katsotaan vielä tarkemmin, miten kaikkien painallusten historia renderöidään ruudulle:
 
 ```js
-const App = (props) => {
+const App = () => {
   // ...
 
   return (
@@ -275,7 +275,7 @@ const History = (props) => {
   )
 }
 
-const App = (props) => {
+const App = () => {
   // ...
 
   return (
@@ -337,7 +337,7 @@ const Button = ({ onClick, text }) => (
 )
 // highlight-end
 
-const App = (props) => {
+const App = () => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
   const [allClicks, setAll] = useState([])
@@ -767,7 +767,7 @@ const App = (props) => {
 }
 ```
 
-Nyt meillä on kolme nappia joiden tapahtumankäsittelijät määritellään parametrin saavan funktion _button_ avulla.
+Nyt meillä on kolme nappia joiden tapahtumankäsittelijät määritellään parametrin saavan funktion _hello_ avulla.
 
 Ensimmäinen nappi määritellään seuraavasti
 
@@ -977,7 +977,9 @@ const App = props => {
 }
 ```
 
-Kaikki näyttää toimivan. Mutta **älä tee koskaan näin**, eli määrittele komponenttia toisen komponentin sisällä. Tapa on hyödytön ja johtaa useissa tilanteissa ikäviin ongelmiin. Siirretäänkin komponentin <i>Display</i> määrittely oikeaan paikkaan, eli komponentin <i>App</i> määrittelevän funktion ulkopuolelle:
+Kaikki näyttää toimivan. Mutta **älä tee koskaan näin**, eli määrittele komponenttia toisen komponentin sisällä. Tapa on hyödytön ja johtaa useissa tilanteissa ikäviin ongelmiin. Suurimmat ongelmat johtuvat siitä, että toisen komponentin sisällä määritelty komponentti on Reactin näkökulmasta jokaisen renderöinnin yhteydeyssä aina uusi komponentti. Tämä tekee komponentin optimoinnista Reactille mahdotonta.
+
+Siirretäänkin komponentin <i>Display</i> määrittely oikeaan paikkaan, eli komponentin <i>App</i> määrittelevän funktion ulkopuolelle:
 
 ```js
 const Display = props => <div>{props.value}</div>

@@ -310,10 +310,10 @@ ReactDOM.render(
 在小型应用中，应用处理的数据存储在 React-components 的状态中，因此在这个场景中，组件的状态可以被认为是 mvc 架构的<i>模型</i>。
 
 <!-- However, MVC-architecture is not usually mentioned when talking about React-applications. Furthermore, if we are using Redux, then the applications follow the [Flux](https://facebook.github.io/flux/docs/in-depth-overview.html#content)-architecture and the role of React is even more focused on creating the views. The business logic of the application is handled using the Redux state and action creators. If were using [redux thunk](/zh/part6/在_redux应用中与后端通信#asynchronous-actions-and-redux-thunk) familiar from part 6, then the business logic can be almost completely separated from the React code. -->
-但是，在讨论 React-applications 时通常不会提到 mvc 架构。 此外，如果我们正在使用 Redux，那么应用遵循[Flux](https://facebook.github.io/Flux/docs/in-depth-overview.html#content)-架构，React 的角色更专注于创建视图。 应用的业务逻辑使用 Redux 状态和操作创建者来处理。 如果在 redux 应用中使用第6章熟悉的[redux thunk](/zh/part6/在_redux应用中与后端通信#asynchronous-actions-and-redux-thunk)，那么业务逻辑几乎可以与 React 代码完全分离。
+但是，在讨论 React-applications 时通常不会提到 mvc 架构。 此外，如果我们正在使用 Redux，那么应用遵循[Flux](https://facebook.github.io/Flux/docs/in-depth-overview)-架构，React 的角色更专注于创建视图。 应用的业务逻辑使用 Redux 状态和操作创建者来处理。 如果在 redux 应用中使用第6章熟悉的[redux thunk](/zh/part6/在_redux应用中与后端通信#asynchronous-actions-and-redux-thunk)，那么业务逻辑几乎可以与 React 代码完全分离。
 
 <!-- Because both React and [Flux](https://facebook.github.io/flux/docs/in-depth-overview.html#content) were created at Facebook one could say that using React only as a UI library is the intended use case. Following the Flux-architecture adds some overhead to the application, and if were talking about a small application or prototype it might be a good idea to use React "wrong", since [over-engineering](https://en.wikipedia.org/wiki/Overengineering) rarely yields an optimal result. -->
-因为 React 和[Flux](https://Facebook.github.io/Flux/docs/in-depth-overview.html#content)都是在 Facebook 上创建的，可以说只把 React 用作 UI 库是预期的用例。 遵循 flux 架构会给应用增加一些开销，如果我们讨论的是一个小型应用或原型，那么“错误地”使用 React可能是一个好主意，因为[过度设计](https://en.wikipedia.org/wiki/overengineering)很少会产生最佳结果。
+因为 React 和[Flux](https://Facebook.github.io/Flux/docs/in-depth-overview)都是在 Facebook 上创建的，可以说只把 React 用作 UI 库是预期的用例。 遵循 flux 架构会给应用增加一些开销，如果我们讨论的是一个小型应用或原型，那么“错误地”使用 React可能是一个好主意，因为[过度设计](https://en.wikipedia.org/wiki/overengineering)很少会产生最佳结果。
 
 
 
@@ -542,8 +542,8 @@ Express 的文档包括一个关于安全性的部分: [生产最佳实践: 安�
 <!-- Sometimes the [dynamic typing](https://developer.mozilla.org/en-US/docs/Glossary/Dynamic_typing) of JavaScript variables creates annoying bugs. In part 5 we talked briefly about [PropTypes](/zh/part5/props_children_与_proptypes#prop-types): a mechanism which enables one to enforce type checking for props passed to React-components. -->
 有时候 JavaScript 变量的[动态类型](https://developer.mozilla.org/en-us/docs/glossary/dynamic_typing)会产生令人讨厌的 bug。 在第5章节中，我们简要地讨论了[PropTypes](/zh/part5/props_children_与_proptypes#prop-types) : 这是一种机制，可以对传递给 React-components 的props进行类型检查。
 
-<!-- Lately there has been a notable uplift in the interest in [static type checking](https://en.wikipedia.org/wiki/Type_system#Static_type_checking). At the moment the most popular typed version of Javascript is the [Typescript](https://www.typescriptlang.org/) which has been developed by Microsof. Topic of the [第9章](/zh/part9) that shall be released at the end of April will be Typesceript. -->
-最近，人们对静态类型检查 [static type checking](https://en.wikipedia.org/wiki/Type_system#Static_type_checking)的兴趣有了明显的提升，这种兴趣可以追溯到20世纪90年代。 目前最流行的 Javascript 类型版本是由 Microsoft 开发的[Typescript](https://www.typescriptlang.org/)。 将于4月底发布的[第9章节](/zh/part9)的议题将是 Typescript。
+<!-- Lately there has been a notable uplift in the interest in [static type checking](https://en.wikipedia.org/wiki/Type_system#Static_type_checking). At the moment the most popular typed version of Javascript is [Typescript](https://www.typescriptlang.org/) which has been developed by Microsoft. Typescript is covered in [part 9](/en/part9). -->
+最近，人们对静态类型检查 [static type checking](https://en.wikipedia.org/wiki/Type_system#Static_type_checking)的兴趣有了明显的提升，这种兴趣可以追溯到20世纪90年代。 目前最流行的 Javascript 类型版本是由 Microsoft 开发的[Typescript](https://www.typescriptlang.org/)。Typesscript 的内容将在[第9章节](/zh/part9)讨论。
 
 #### Server side rendering, isomorphic applications and universal code
 【服务器端渲染，同构应用和通用代码】
@@ -664,8 +664,8 @@ Lambda 的主要特点是，它支持在云中执行单个函数，如今 Google
 
 
 
-<!-- If you are handling times and dates, [moment](https://momentjs.com/) and a new(er) release [date-fns](https://github.com/date-fns/date-fns) offer good tools for that. -->
-如果你正在处理时间和日期，[moment](https://momentjs.com/)和一个新版本[date-fns](https://github.com/date-fns/date-fns)提供了很好的工具。
+<!-- If you are handling times and dates, [date-fns](https://github.com/date-fns/date-fns) offers good tools for that. -->
+如果你正在处理时间和日期，[date-fns](https://github.com/date-fns/date-fns) 提供了很好的处理时间和日期的工具。
 
 
 

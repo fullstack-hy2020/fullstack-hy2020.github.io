@@ -119,7 +119,7 @@ How do we access the data contained in the form's <i>input</i> element?
 There are many ways to accomplish this; the first method we will take a look at is through the use of so-called [controlled components](https://reactjs.org/docs/forms.html#controlled-components).
 
 
-Let's add a new piece of state called <em>newNote</em> for storing the user submitted input **and** let's set it as the <i>input</i> element's <i>value</i> attribute:
+Let's add a new piece of state called <em>newNote</em> for storing the user-submitted input **and** let's set it as the <i>input</i> element's <i>value</i> attribute:
 
 ```js
 const App = (props) => {
@@ -259,7 +259,7 @@ The event handler also resets the value of the controlled input element by calli
 setNewNote('')
 ```
 
-You can find the code for our current application in its entirety in the <i>part2-2</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part2-2).
+You can find the code for our current application in its entirety in the <i>part2-2</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part2-2).
 
 ### Filtering Displayed Elements
 
@@ -328,7 +328,7 @@ const result = condition ? val1 : val2
 
 the <em>result</em> variable will be set to the value of <em>val1</em> if <em>condition</em> is true. If <em>condition</em> is false, the <em>result</em> variable will be set to the value of<em>val2</em>.
 
-If the value of <em>showAll</em> is false, the <em>notesToShow</em> variable will be assigned to a list that only contain notes that have the <em>important</em> property set to true. Filtering is done with the help of the array [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method:
+If the value of <em>showAll</em> is false, the <em>notesToShow</em> variable will be assigned to a list that only contains notes that have the <em>important</em> property set to true. Filtering is done with the help of the array [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method:
 
 ```js
 notes.filter(note => note.important === true)
@@ -381,7 +381,7 @@ const App = (props) => {
 ```
 
 
-The displayed notes (all versus important) is controlled with a button. The event handler for the button is so simple that it has been defined directly in the attribute of the button element. The event handler switches the value of _showAll_ from true to false and vice versa:
+The displayed notes (all versus important) are controlled with a button. The event handler for the button is so simple that it has been defined directly in the attribute of the button element. The event handler switches the value of _showAll_ from true to false and vice versa:
 
 ```js
 () => setShowAll(!showAll)
@@ -393,7 +393,7 @@ The text of the button depends on the value of the <em>showAll</em> state:
 show {showAll ? 'important' : 'all'}
 ```
 
-You can find the code for our current application in its entirety in the <i>part2-3</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part2-3).
+You can find the code for our current application in its entirety in the <i>part2-3</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part2-3).
 </div>
 
 <div class="tasks">
@@ -408,7 +408,7 @@ In the first exercise, we will start working on an application that will be furt
 
 Let's create a simple phonebook. <i>**In this part we will only be adding names to the phonebook.**</i>
 
-Let us start with implementing the addition of a person to phonebook.
+Let us start by implementing the addition of a person to phonebook.
 
 You can use the code below as a starting point for the <i>App</i> component of your application:
 

@@ -11,9 +11,9 @@ Osassa 2 on jo katsottu kahta tapaa tyylien lisäämiseen eli vanhan koulukunnan
 
 ### Valmiit käyttöliittymätyylikirjastot
 
-Eräs lähestymistapa sovelluksen tyylien määrittelyyn on valmiin "UI frameworkin", eli suomeksi ehkä käyttöliittymätyylikirjaston käyttö.
+Eräs lähestymistapa sovelluksen tyylien määrittelyyn on valmiin "UI-frameworkin", eli suomeksi ehkä käyttöliittymätyylikirjaston käyttö.
 
-Ensimmäinen laajaa kuuluisuutta saanut UI framework oli Twitterin kehittämä [Bootstrap](https://getbootstrap.com/), joka lienee edelleen UI frameworkeista eniten käytetty. Viime aikoina UI frameworkeja on noussut kuin sieniä sateella. Valikoima on niin iso, ettei tässä kannata edes yrittää tehdä tyhjentävää listaa.
+Ensimmäinen laajaa kuuluisuutta saanut UI-framework oli Twitterin kehittämä [Bootstrap](https://getbootstrap.com/), joka lienee edelleen UI-frameworkeista eniten käytetty. Viime aikoina UI-frameworkeja on noussut kuin sieniä sateella. Valikoima on niin iso, ettei tässä kannata edes yrittää tehdä tyhjentävää listaa.
 
 Monet UI-frameworkit sisältävät web-sovellusten käyttöön valmiiksi määriteltyjä teemoja sekä "komponentteja", kuten painikkeita, menuja, taulukkoja. Termi komponentti on edellä kirjotettu hipsuissa sillä kyse ei ole samasta asiasta kuin React-komponentti. Useimmiten UI-frameworkeja käytetään sisällyttämällä sovellukseen frameworkin määrittelemät CSS-tyylitiedostot sekä Javascript-koodi.
 
@@ -27,8 +27,8 @@ Aloitetaan bootstrapista, käytetään kirjastoa [react-bootstrap](https://react
 
 Asennetaan kirjasto suorittamalla komento
 
-```js
-npm install --save react-bootstrap
+```bash
+npm install react-bootstrap
 ```
 
 Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään bootstrapin css-määrittelyt lataava rivi:
@@ -241,8 +241,8 @@ Tarkastellaan toisena esimerkkinä Googlen kehittämän "muotokielen" [Material 
 
 Asennetaan kirjasto suorittamalla komento
 
-```js
-npm install --save @material-ui/core
+```bash
+npm install @material-ui/core
 ```
 
 Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään MaterialUI:n css-määrittelyt lataava rivi:
@@ -361,7 +361,7 @@ Lomakkeen käyttämät komponentit on luonnollisesti importattava koodissa.
 
 #### Notifikaatio
 
-Kirjautumisen jälkeisen notifikaation näyttämiseen sopii komponenetti [Alert](https://material-ui.com/components/alert/), joka on lähes samanlainen kuin bootstrapin vastaava komponentti: 
+Kirjautumisen jälkeisen notifikaation näyttämiseen sopii komponentti [Alert](https://material-ui.com/components/alert/), joka on lähes samanlainen kuin bootstrapin vastaava komponentti: 
 
 ```js
 <div>
@@ -377,8 +377,8 @@ Kirjautumisen jälkeisen notifikaation näyttämiseen sopii komponenetti [Alert]
 
 Alert-komponentti ei ole vielä mukana MaterialUI:n core-pakkauksessa, ja komponentin sisältävä pakkaus [lab](https://material-ui.com/components/about-the-lab/) tulee asentaa sovellukseen:
 
-```js 
-npm install --save @material-ui/lab
+```bash
+npm install @material-ui/lab
 ```
 
 Komponentti importataan seuraavasti
@@ -435,7 +435,7 @@ Määrittelemällä
 </Button>
 ```
 
-renderöidään komponentti _Button_, siten että sen juurikomponenttina onkin react-redux-kirjaston komponentti _Link_, jolle siirtyy polun kertova props _to_.  
+renderöidään komponentti _Button_, siten että sen juurikomponenttina onkin react-router-dom-kirjaston komponentti _Link_, jolle siirtyy polun kertova props _to_.  
 
 Navigaatiopalkin koodi kokonaisuudessaan on seuraava
 
@@ -469,7 +469,7 @@ Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/ful
 
 ### Loppuhuomioita
 
-Ero react-bootstrapin ja MaterialUI:n välillä ei ole suuri. On makuasia kummalla tuotettu ulkoasu on tyylikkäämpi. En ole itse käyttänut MaterialUI:ta kovin paljoa, mutta ensikosketus on positiivinen. Dokumentaatio vaikuttaa aavistuksen react-bootstrapin dokumentaatiota selkeämmältä. Eri npm-kirjastojen lautausmääriä vertailevan sivuston https://www.npmtrends.com/ mukaan MaterialUI ohitti react-boostrapin suosiossa vuoden 2018 loppupuolella:
+Ero react-bootstrapin ja MaterialUI:n välillä ei ole suuri. On makuasia kummalla tuotettu ulkoasu on tyylikkäämpi. En ole itse käyttänyt MaterialUI:ta kovin paljoa, mutta ensikosketus on positiivinen. Dokumentaatio vaikuttaa aavistuksen react-bootstrapin dokumentaatiota selkeämmältä. Eri npm-kirjastojen lautausmääriä vertailevan sivuston https://www.npmtrends.com/ mukaan MaterialUI ohitti react-boostrapin suosiossa vuoden 2018 loppupuolella:
 
 ![](../../images/7/68ea.png)
 
@@ -497,7 +497,7 @@ Tiiviimmän ja ehkä paremmin luettavissa olevan kirjoitusasun lisäksi toinen e
 
 React-kirjastoina tarjottavien UI-frameworkkien ikävä puoli verrattuna frameworkin "suoraan käyttöön" on React-kirjastojen API:n mahdollinen epästabiilius ja osittain huono dokumentaatio. 
 
-Kokonaan toinen kysymys on se kannattaako UI-frameworkkeja ylipäätän käyttää. Kukin muodostakoon oman mielipiteensä, mutta CSS:ää taitamattomalle ja puutteellisilla design-taidoilla varustetulle ne ovat varsin käyttökelpoisia työkaluja.
+Kokonaan toinen kysymys on se kannattaako UI-frameworkkeja ylipäätään käyttää. Kukin muodostakoon oman mielipiteensä, mutta CSS:ää taitamattomalle ja puutteellisilla design-taidoilla varustetulle ne ovat varsin käyttökelpoisia työkaluja.
 
 ### Muita UI-frameworkeja
 
@@ -508,6 +508,7 @@ Luetellaan tässä kaikesta huolimatta muitakin UI-frameworkeja. Jos oma suosikk
 - <https://get.foundation/>
 - <https://chakra-ui.com/>
 - <https://tailwindcss.com/>
+- <https://semantic-ui.com/>
 
 ### Styled components
 

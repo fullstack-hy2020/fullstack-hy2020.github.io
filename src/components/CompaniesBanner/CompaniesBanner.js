@@ -9,6 +9,7 @@ import { Link } from 'gatsby';
 import { PropTypes } from 'prop-types';
 import React from 'react';
 import snakeCase from 'lodash/fp/snakeCase';
+import { useTranslation } from 'react-i18next';
 
 const partners = [
   {
@@ -101,88 +102,84 @@ const inChallenge = [
   'Bubblin',
 ];
 
-export const CompaniesBanner = ({ isFrontPage, lang }) => (
-  <Banner
-    backgroundColor={isFrontPage && 'white'}
-    className="spacing--after"
-    id="challenge"
-  >
-    <Element className="container" flex>
-      <BodyText
-        centered
-        className="col-4 push-right-3 challenge-title"
-        text="In co-operation with"
-      />
-      <Element
-        flex
-        spaceBetween
-        className="col-6 push-right-2 flex-fix-aligning space-between--mobile"
-      >
-        {partners.map((company, i) => (
-          <ContentLiftup
-            key={company.url}
-            small
-            companyPath={company.url}
-            image={{
-              src: require(`../../images/company_logos/${company.image.name}`),
-              alt: company.image.alt,
-            }}
-            className={`col-3 col-5--mobile col-5--tablet`}
-          />
-        ))}
-      </Element>
+export const CompaniesBanner = ({ isFrontPage, lang }) => {
+  const { t } = useTranslation();
 
-      {!isFrontPage && (
-        <>
-          <BodyText
-            centered
-            className="col-4 spacing push-right-3 challenge-title"
-            text={
-              lang === 'en'
-                ? 'Taking part to Full stack challenge'
-                : (lang = 'zh'
-                    ? '参加全栈挑战'
-                    : 'Full stack -haasteessa mukana')
-            }
-          />
-          <Element
-            flex
-            className="col-9 flex-fix-aligning space-between--mobile"
-          >
-            {inChallenge.map(company => (
-              <Image
-                key={company}
-                contain
-                src={require(`../../images/company_logos/${snakeCase(
-                  company
-                )}.svg`)}
-                alt={company}
-                className={`company__logo push-right-1 col-3--mobile col-3--tablet`}
-              />
-            ))}
-          </Element>
-        </>
-      )}
-
-      {isFrontPage && (
-        <Element flex spaceAround className="col-10 spacing">
-          <Link
-            className="about__challenge-button"
-            to={`${
-              lang === 'en' ? '/en' : lang === 'zh' ? '/zh' : ''
-            }/challenge`}
-          >
-            {lang === 'en'
-              ? 'More about challenge'
-              : lang === 'zh'
-              ? '了解更多挑战信息'
-              : 'Lisätietoja haasteesta'}
-          </Link>
+  return (
+    <Banner
+      backgroundColor={isFrontPage && 'white'}
+      className="spacing--after"
+      id="challenge"
+    >
+      <Element className="container" flex>
+        <BodyText
+          centered
+          className="col-4 push-right-3 challenge-title"
+          text={t('challengePage:coOperationTitle')}
+        />
+        <Element
+          flex
+          spaceBetween
+          className="col-6 push-right-2 flex-fix-aligning space-between--mobile"
+        >
+          {partners.map((company, i) => (
+            <ContentLiftup
+              key={company.url}
+              small
+              companyPath={company.url}
+              image={{
+                src: require(`../../images/company_logos/${
+                  company.image.name
+                }`),
+                alt: company.image.alt,
+              }}
+              className={`col-3 col-5--mobile col-5--tablet`}
+            />
+          ))}
         </Element>
-      )}
-    </Element>
-  </Banner>
-);
+
+        {!isFrontPage && (
+          <>
+            <BodyText
+              centered
+              className="col-4 spacing push-right-3 challenge-title"
+              text={t('challengePage:participantsTitle')}
+            />
+            <Element
+              flex
+              className="col-9 flex-fix-aligning space-between--mobile"
+            >
+              {inChallenge.map(company => (
+                <Image
+                  key={company}
+                  contain
+                  src={require(`../../images/company_logos/${snakeCase(
+                    company
+                  )}.svg`)}
+                  alt={company}
+                  className={`company__logo push-right-1 col-3--mobile col-3--tablet`}
+                />
+              ))}
+            </Element>
+          </>
+        )}
+
+        {isFrontPage && (
+          <Element flex spaceAround className="col-10 spacing">
+            <Link
+              className="about__challenge-button"
+              to={`${
+                lang === 'en' ? '/en' : lang === 'zh' ? '/zh' : ''
+              }/challenge`}
+            >
+              {t('challengePage:infoButton')}
+            </Link>
+          </Element>
+        )}
+      </Element>
+    </Banner>
+  );
+};
 
 CompaniesBanner.defaultProps = {
   isFrontPage: false,

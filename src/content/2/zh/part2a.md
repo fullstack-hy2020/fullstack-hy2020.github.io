@@ -8,8 +8,8 @@ lang: zh
 <div class="content">
 
 
-<!-- Before starting a new topic, let's recap some of the topics that proved difficult last year. -->
-在新的话题开始之前，让我们回顾一下去年的课程中认为是难点的一些话题。
+<!-- Before starting a new part, let's recap some of the topics that proved difficult last year. -->
+在新的章节开始之前，让我们回顾一下去年的课程中认为是难点的一些话题。
 
 ### console.log
 ***What's the difference between an experienced JavaScript programmer and a rookie? The experienced one uses console.log 10-100 times more.***
@@ -52,9 +52,9 @@ props value is [Object object]
 
 ### Protip: Visual Studio Code snippets 
 【高级技巧: Visual Studio Code 的代码片段】
-<!-- With Visual studio code it's easy to create 'snippets', i.e. shortcuts for quickly generating commonly re-used portions of code, much like how 'sout' works in Netbeans.  -->
+<!-- With  Visual Studio Code it's easy to create 'snippets', i.e. shortcuts for quickly generating commonly re-used portions of code, much like how 'sout' works in Netbeans.  -->
 
-使用 Visual studio code能够很容易创建“代码片段（snippets）” ，即快速生成常用代码块的快捷方式，很像 Netbeans 中的“ sout”。
+使用 Visual Studio Code能够很容易创建“代码片段（snippets）” ，即快速生成常用代码块的快捷方式，很像 Netbeans 中的“ sout”。
 
 <!-- Instructions for creating snippets can be found [here](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets). -->
 创建代码片段的说明可以在这里找到 [here](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets).。
@@ -76,6 +76,9 @@ props value is [Object object]
   }
 }
 ```
+<!-- Debugging your code using _console.log()_ is so common that  Visual Studio Code has that snippet built in. To use it, type _log_ and hit tab to autocomplete.  -->
+
+使用  _console.log()_  来debug 你的代码十分常见， Visual Studio Code 有内置的snippet。可以使用  _log_  和tab键来自动补全
 
 ### JavaScript Arrays 
 【JavaScript 数组】
@@ -130,7 +133,7 @@ const notes = [
   },
   {
     id: 2,
-    content: 'Browser can execute only Javascript',
+    content: 'Browser can execute only JavaScript',
     date: '2019-05-30T18:39:34.091Z',
     important: false
   },
@@ -191,7 +194,7 @@ notes.map(note => <li>{note.content}</li>)
 ```js
 [
   <li>HTML is easy</li>,
-  <li>Browser can execute only Javascript</li>,
+  <li>Browser can execute only JavaScript</li>,
   <li>GET and POST are the most important methods of HTTP protocol</li>,
 ]
 ```
@@ -301,7 +304,7 @@ const notes = [
   },
   {
     id: 2,
-    content: 'Browser can execute only Javascript',
+    content: 'Browser can execute only JavaScript',
     date: '2019-05-30T18:39:34.091Z',
     important: false
   },
@@ -379,7 +382,7 @@ notes.map(note =>
 note => <li key={note.id}>{note.content}</li>
 ```
 
-<!-- The use of curly braces will cause some headache in the beginning, but you will get used to them soon enough. The visual feedback from React is immediate. -->
+<!-- The use of curly braces will cause some headaches in the beginning, but you will get used to them soon enough. The visual feedback from React is immediate. -->
 一开始使用花括号会让你头疼，但是你很快就会习惯的。 因为来自 React 的图形反馈是即时的。
 
 ### Anti-pattern: array indexes as keys 
@@ -480,7 +483,7 @@ import ReactDOM from 'react-dom'
 ```
 
 <!-- [imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) two modules, enabling them to be used in the code. The <i>react</i> module is placed into a variable called _React_ and <i>react-dom</i> to variable _ReactDOM_. -->
-为了让它们能够在代码中使用，就[import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 了两个模块： <i>react</i> 模块被放入一个名为 React 的变量中， <i>react-dom</i> 模块放到了 ReactDOM 变量中。
+为了让它们能够在代码中使用，就[import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 了两个模块： <i>React</i> 模块被放入一个名为 React 的变量中， <i>React-DOM</i> 模块放到了 ReactDOM 变量中。
 
 <!-- Let's move our <i>Note</i> component into its own module.  -->
 让我们将我们的<i>Note</i> 组件移动到它自己的模块中。
@@ -621,7 +624,7 @@ ReactDOM.render(
 ```js
 const Course = ({ course }) => (
   <div>
-   <Header course={course} />
+    <Header course={course} />
   </div>
 )
 
@@ -673,7 +676,7 @@ const App = () => {
 ```js
 const Course = ({ course }) => (
   <div>
-   <Header course={course} />
+    <Header course={course} />
   </div>
 )
 ```
@@ -688,7 +691,7 @@ const Course = ({ course }) => {
   console.log(course) // highlight-line
   return (
     <div>
-    <Header course={course} />
+      <Header course={course} />
     </div>
   )
 }
@@ -705,7 +708,7 @@ const Course = (props) => { // highlight-line
   const { course } = props
   return (
     <div>
-    <Header course={course} />
+      <Header course={course} />
     </div>
   )
 }

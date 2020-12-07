@@ -235,8 +235,8 @@ The [output](https://webpack.js.org/concepts/#output) property defines the locat
 
 Next, let's transform our application into a minimal React application. Let's install the required libraries:
 
-```js
-npm install --save react react-dom
+```bash
+npm install react react-dom
 ```
 
 And let's turn our application into a React application by adding the familiar definitions in the <i>index.js</i> file:
@@ -314,7 +314,7 @@ const config = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        query: {
+        options: {
           presets: ['@babel/preset-react'],
         },
       },
@@ -334,13 +334,13 @@ The definition for a single loader consists of three parts:
 {
   test: /\.js$/,
   loader: 'babel-loader',
-  query: {
+  options: {
     presets: ['@babel/preset-react']
   }
 }
 ```
 
-The <i>test</i> property specifies that the loader is for files that have names ending with <i>.js</i>. The <i>loader</i> property specifies that the processing for those files will be done with [babel-loader](https://github.com/babel/babel-loader). The <i>query</i> property is used for specifying parameters for the loader, that configure its functionality.
+The <i>test</i> property specifies that the loader is for files that have names ending with <i>.js</i>. The <i>loader</i> property specifies that the processing for those files will be done with [babel-loader](https://github.com/babel/babel-loader). The <i>options</i> property is used for specifying parameters for the loader, that configure its functionality.
 
 Let's install the loader and its required packages as a <i>development dependency</i>:
 
@@ -371,8 +371,8 @@ You can test the bundled application by opening the <i>build/index.html</i> file
 
 It's worth noting that if the bundled application's source code uses <i>async/await</i>, the browser will not render anything on some browsers. [Googling the error message in the console](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) will shed some light on the issue. We have to install one more missing dependency, that is [@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill):
 
-```
-npm install --save @babel/polyfill
+```bash
+npm install @babel/polyfill
 ```
 
 
@@ -404,7 +404,7 @@ Currently we are using the [@babel/preset-react](https://babeljs.io/docs/plugins
 {
   test: /\.js$/,
   loader: 'babel-loader',
-  query: {
+  options: {
     presets: ['@babel/preset-react'] // highlight-line
   }
 }
@@ -417,7 +417,7 @@ Let's add the [@babel/preset-env](https://babeljs.io/docs/plugins/preset-env/) p
 {
   test: /\.js$/,
   loader: 'babel-loader',
-  query: {
+  options: {
     presets: ['@babel/preset-env', '@babel/preset-react'] // highlight-line
   }
 }
@@ -485,14 +485,14 @@ When using CSS, we have to use [css](https://webpack.js.org/loaders/css-loader/)
     {
       test: /\.js$/,
       loader: 'babel-loader',
-      query: {
+      options: {
         presets: ['@babel/preset-react', '@babel/preset-env'],
       },
     },
     // highlight-start
     {
       test: /\.css$/,
-      loaders: ['style-loader', 'css-loader'],
+      use: ['style-loader', 'css-loader'],
     },
     // highlight-end
   ];
@@ -530,7 +530,7 @@ Let's define an npm script for starting the dev-server:
   // ...
   "scripts": {
     "build": "webpack --mode=development",
-    "start": "webpack-dev-server --mode=development" // highlight-line
+    "start": "webpack serve --mode=development" // highlight-line
   },
   // ...
 }
@@ -698,7 +698,7 @@ Starting from version 4 of webpack, the minification plugin does not require add
   "description": "practising webpack",
   "scripts": {
     "build": "webpack --mode=production", // highlight-line
-    "start": "webpack-dev-server --mode=development"
+    "start": "webpack serve --mode=development"
   },
   "license": "MIT",
   "dependencies": {

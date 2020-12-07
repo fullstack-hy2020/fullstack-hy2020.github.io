@@ -1,10 +1,11 @@
 import './Form.scss';
 
 import React, { Component } from 'react';
+import axios from 'axios';
+import { withTranslation } from 'react-i18next';
 
 import { BodyText } from '../BodyText/BodyText';
 import Element from '../Element/Element';
-import axios from 'axios';
 
 const GOOGLE_FORM_ACTION_URL =
   'https://docs.google.com/forms/d/e/1FAIpQLSeO9jt4-iUsiFaLT5Rpwt47sNceu25te2UO7WGQ2wcUNTbBiQ/formResponse';
@@ -85,59 +86,124 @@ class Form extends Component {
       question,
     } = this.state;
 
-    const { lang } = this.props;
+    const { t } = this.props;
 
-    return <>
-        {showForm ? <>
-            {!formIsSent ? <form onSubmit={this.handleSubmit} className="form col-10">
+    return (
+      <>
+        {showForm ? (
+          <>
+            {!formIsSent ? (
+              <form onSubmit={this.handleSubmit} className="form col-10">
                 <p className="spacing--small">
-                  {lang === 'fi' ? 'Nimi' : lang === 'zh' ? '姓名' : 'Name'}
+                  {t('challengePage:nameLabel')}
                   <span aria-hidden="true">*</span>
                 </p>
-                <input required autoComplete="off" className="col-10" placeholder={lang === 'fi' ? 'Matti Meikäläinen' : lang === 'zh' ? '小明' : 'Jane Doe'} type="text" name="name" value={name} onChange={this.handleChange} />
+                <input
+                  required
+                  autoComplete="off"
+                  className="col-10"
+                  placeholder={t('challengePage:namePlaceholder')}
+                  type="text"
+                  name="name"
+                  value={name}
+                  onChange={this.handleChange}
+                />
                 <p className="spacing--small">
-                  {lang === 'fi' ? 'Titteli' :lang === 'zh' ? '职位' : 'Title'}
+                  {t('challengePage:titleLabel')}
                   <span aria-hidden="true">*</span>
                 </p>
-                <input required autoComplete="off" className="col-10" placeholder="CEO" type="text" name="title" value={title} onChange={this.handleChange} />
+                <input
+                  required
+                  autoComplete="off"
+                  className="col-10"
+                  placeholder="CEO"
+                  type="text"
+                  name="title"
+                  value={title}
+                  onChange={this.handleChange}
+                />
                 <p className="spacing--small">
-                  {lang === 'fi' ? 'Yritys' :lang === 'zh' ? '公司名称' : 'Company'}
+                  {t('challengePage:companyLabel')}
                   <span aria-hidden="true">*</span>
                 </p>
-                <input required autoComplete="off" className="col-10" placeholder={lang === 'fi' ? 'Yritys Oy' : lang === 'fi' ? 'Yritys Oy' : '股份有限公司'} type="text" name="organization" value={organization} onChange={this.handleChange} />
+                <input
+                  required
+                  autoComplete="off"
+                  className="col-10"
+                  placeholder={t('challengePage:companyPlaceholder')}
+                  type="text"
+                  name="organization"
+                  value={organization}
+                  onChange={this.handleChange}
+                />
                 <p className="spacing--small">
-                  {lang === 'fi' ? 'Puhelinnumero' : lang === 'zh' ? '电话' : 'Phone'}
+                  {t('challengePage:phoneLabel')}
                   <span aria-hidden="true">*</span>
                 </p>
-                <input autoComplete="off" className="col-10" placeholder="+358 40 234 5678" type="text" name="phone" value={phone} onChange={this.handleChange} />
+                <input
+                  autoComplete="off"
+                  className="col-10"
+                  placeholder="+358 40 234 5678"
+                  type="text"
+                  name="phone"
+                  value={phone}
+                  onChange={this.handleChange}
+                />
                 <p className="spacing--small">
-                  {lang === 'fi' ? 'Sähköpostiosoite' :lang === 'zh' ? '电子邮箱' : 'email address'}
+                  {t('challengePage:emailLabel')}
                   <span aria-hidden="true">*</span>
                 </p>
-                <input required autoComplete="off" className="col-10" placeholder="email@domain.com" type="email" name="email" value={email} onChange={this.handleChange} />
+                <input
+                  required
+                  autoComplete="off"
+                  className="col-10"
+                  placeholder="email@domain.com"
+                  type="email"
+                  name="email"
+                  value={email}
+                  onChange={this.handleChange}
+                />
                 <p className="spacing--small">
-                  {lang === 'fi'
-                    ? 'Mistä kuulit Full Stack -haasteesta?'
-                    :lang === 'zh'
-                    ? '您从哪里听说的本次挑战'
-                    : 'Where did you hear from the challenge'}
+                  {t('challengePage:whereDidYouHearLabel')}
                 </p>
-                <input autoComplete="off" className="col-10" type="text" name="question" value={question} onChange={this.handleChange} />
-                <button className="submit spacing spacing--after push-right-4" type="submit">
-                  {lang === 'fi' ? 'Lähetä' :lang === 'zh' ? '提交' : 'Submit'}
+                <input
+                  autoComplete="off"
+                  className="col-10"
+                  type="text"
+                  name="question"
+                  value={question}
+                  onChange={this.handleChange}
+                />
+                <button
+                  className="submit spacing spacing--after push-right-4"
+                  type="submit"
+                >
+                  {t('challengePage:submitButton')}
                 </button>
-              </form> : <BodyText className="spacing" headingFont text={[lang === 'fi' ? 'Kiitos! Otamme sinuun yhteyttä!' : lang === 'zh' ? '谢谢，我们会尽快联系您' :'Thanks! We will contact you soon!']} />}
-          </> : <>
+              </form>
+            ) : (
+              <BodyText
+                className="spacing"
+                headingFont
+                text={t('challengePage:submitSuccessMessage')}
+              />
+            )}
+          </>
+        ) : (
+          <>
             <Element flex spaceAround className="col-10 spacing">
-              <button className="about__challenge-button about__challenge-button--turquoise" onClick={() => this.setState(
-                    { showForm: true }
-                  )}>
-                {lang === 'fi' ? 'Ilmoita yrityksesi mukaan haasteeseen!' : lang === 'zh' ? '将您的公司注册到全栈挑战中' : 'Register your company to Full stack challenge'}
+              <button
+                className="about__challenge-button about__challenge-button--turquoise"
+                onClick={() => this.setState({ showForm: true })}
+              >
+                {t('challengePage:registerButton')}
               </button>
             </Element>
-          </>}
-      </>;
+          </>
+        )}
+      </>
+    );
   }
 }
 
-export default Form;
+export default withTranslation()(Form);

@@ -60,7 +60,7 @@ lang: zh
 让我们先来实现登录的功能。安装[jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) 库， 它会允许我们生成 [Json Web Token](https://jwt.io/)。
 
 ```bash
-npm install jsonwebtoken --save
+npm install jsonwebtoken
 ```
 
 <!-- The code for login functionality goes to the file controllers/login.js. -->
@@ -384,7 +384,7 @@ const errorHandler = (error, request, response, next) => {
 注意：有些 Windows 用户在<i>bcrypt</i> 方面有问题。如果遇到问题，请使用命令删除该库
 
 ```bash
-npm uninstall bcrypt --save 
+npm uninstall bcrypt
 ```
 
 <!-- and install [bcryptjs](https://www.npmjs.com/package/bcryptjs) instead.  -->
@@ -499,7 +499,8 @@ if ( blog.user.toString() === userid.toString() ) ...
 
 #### 4.22*:  bloglist expansion, 步骤10
 <!-- After adding token based authentication the tests for adding a new blog broke. down Fix now the tests. Write also a new test that ensures that adding a blog fails with proper status code <i>401 Unauthorized</i> it token is not provided. -->
-在添加了基于令牌的身份验证之后，添加新博客的测试中断了。 现在修复测试。 还要编写一个新的测试，以确保添加一个博客失败与适当的状态代码<i>401 Unauthorized</i> it 令牌没有提供。
+<!-- After adding token based authentication the tests for adding a new blog broke down. Fix the tests. Also write a new test to ensure adding a blog fails with the proper status code <i>401 Unauthorized</i> if a token is not provided. -->
+在添加了基于令牌的身份验证之后，添加新博客的测试中断了。 修复测试，并编写一个新的测试，以确保如果添加一个博客失败，且是因为令牌不存在导致的，会伴随恰当的状态返回码<i>401 Unauthorized</i>。
 
 <!-- [This](https://github.com/visionmedia/supertest/issues/398) is most likely useful when doing the fix. -->
 在进行修复时，[这个](https://github.com/visionmedia/supertest/issues/398)很可能是最有用的。

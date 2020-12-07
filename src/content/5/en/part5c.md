@@ -108,7 +108,7 @@ CI=true npm test
 ```
 
 
-**NB:** the console may issue a warning if you have not installed Watchman. Watchman is an application developed by Facebook that watches for changes that are made to files. The program speeds up the execution of tests and at least starting from macOS Sierra, running tests in watch mode issues some warnings to the console, that can be gotten rid of by installing Watchman.
+**NB:** the console may issue a warning if you have not installed Watchman. Watchman is an application developed by Facebook that watches for changes that are made to files. The program speeds up the execution of tests and at least starting from macOS Sierra, running tests in watch mode issues some warnings to the console, that can be removed by installing Watchman.
 
 
 Instructions for installing Watchman on different operating systems can be found on the official Watchman website: https://facebook.github.io/watchman/
@@ -300,7 +300,7 @@ const mockHandler = jest.fn()
 The test finds the button <i>based on the text</i> from the rendered component and clicks the element:
 
 ```js
-const button = getByText('make not important')
+const button = component.getByText('make not important')
 fireEvent.click(button)
 ```
 
@@ -579,12 +579,12 @@ Make a test which checks that the component displaying a blog renders the blog's
 <!-- Lisää komponenttiin tarvittaessa testausta helpottavia CSS-luokkia. -->
 Add CSS-classes to the component to help the testing as necessary. 
 
-#### 5.14: Blog list tests, step2
+#### 5.14*: Blog list tests, step2
 
 <!-- Tee testi, joka varmistaa että myös url ja likejen määrä näytetään kun blogin kaikki tiedot näyttävää nappia on painettu. -->
-Make a test which checks that blog's url and number of likes are shown when the button controlling the shown details has been clicked. 
+Make a test which checks that the blog's url and number of likes are shown when the button controlling the shown details has been clicked. 
 
-#### 5.15: Blog list tests, step3
+#### 5.15*: Blog list tests, step3
 
 <!-- Tee testi, joka varmistaa, että jos komponentin <i>like</i>-nappia painetaan kahdesti, komponentin propsina saamaa tapahtumankäsittelijäfunktiota kutsutaan kaksi kertaa. -->
 Make a test which ensures that if the <i>like</i> button is clicked twice, the event handler the component received as props is called twice. 
@@ -592,10 +592,10 @@ Make a test which ensures that if the <i>like</i> button is clicked twice, the e
 #### 5.16*: Blog list tests, step4
 
 <!-- Tee uuden blogin luomisesta huolehtivalle lomakkelle testi, joka varmistaa, että lomake kutsuu propseina saamaansa takaisinkutsufunktiota oikeilla tiedoilla siinä vaiheessa kun blogi luodaan. -->
-Make a test for the new blog form. The test should check, that the form calls the event handler it received as props with the right details when a new blog is called. 
+Make a test for the new blog form. The test should check, that the form calls the event handler it received as props with the right details when a new blog is created. 
 
 <!-- Jos esim. määrittelet <i>input</i>-elementille id:n 'author': -->
-If, for example, you give an <i>input</i> element id 'author':
+If, for example, you set an <i>input</i> element's id attribute as 'author':
 
 ```js
 <input

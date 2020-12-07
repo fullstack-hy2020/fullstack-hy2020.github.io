@@ -203,8 +203,8 @@ const client = new ApolloClient({
 <!-- We also need to install the library required by this modification -->
 我们还需要安装修改所需的库
 
-```js
-npm install --save apollo-link-context
+```bash
+npm install apollo-link-context
 ```
 
 <!-- Creating new persons and changing numbers works again. There is however one remaining problem. If we try to add a person without a phone number, it is not possible.  -->
@@ -296,6 +296,10 @@ const PersonForm = ({ setError }) => {
 <!-- The code reads the cached state of <em>ALL\_PERSONS</em> query using [readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readquery) function and updates the cache with [writeQuery]https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writequery-and-writefragment) function adding the new person to the cached data.  -->
 该代码使用[readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readQuery)函数读取<em>ALL\_PERSONS</em> 查询的缓存状态，并使用[writeQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writeQuery-and-writefragment) 函数更新缓存，将新人添加到缓存数据中。
 
+Note that readQuery will throw an error if your cache does not contain all of the data necessary to fulfill the specified query. This can be solved using a try-catch block.
+
+注意如果你的缓存并没有包含所有的所需数据来满足特定的查询， readQuery 会抛出一个错误。可以通过try-catch代码块来解决这个问题。
+
 <!-- There are actually some situations where the only good way to keep the cache up to date is using _update_ -callbacks.  -->
 <!-- 实际上，在某些情况下，使缓存保持最新的唯一好方法是使用 update-callback。 -->
 
@@ -303,7 +307,7 @@ const PersonForm = ({ setError }) => {
 在某些情况下，使缓存保持最新的唯一合理方法是使用 update-callback。
 
 <!-- When necessary it is possible to disable cache for the whole application or single queries by setting the field managing the use of cache, [fetchPolicy](https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy) as <em>no-cache</em>. -->
-必要时，可以通过将管理 cache 使用的字段设置为 <em>no-cache</em> 来禁用整个应用或单个查询的缓存，[fetchPolicy](https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy)。
+必要时，可以通过将管理 cache 使用的字段设置为 <em>no-cache</em> 来禁用整个应用或[单个查询](https://www.apollographql.com/docs/react/api/react/hooks/#options)的缓存，[fetchPolicy](https://www.apollographql.com/docs/react/data/queries/#configuring-fetch-logic)。
 
 <!-- Be diligent with the cache. Old data in cache can cause hard to find bugs. As we know, keeping the cache up to date is very challenging. According to a coder proverb: -->
 勤于使用缓存。 缓存中的旧数据可能导致难以发现 bug。 众所周知，保持缓存最新是非常具有挑战性的。 根据一个程序员谚语:

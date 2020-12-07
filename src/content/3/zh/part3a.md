@@ -123,9 +123,9 @@ echo "Error: no test specified" && exit 1
 ```js
 const http = require('http')
 
-const app = http.createServer((req, res) => {
-  res.writeHead(200, { 'Content-Type': 'text/plain' })
-  res.end('Hello World')
+const app = http.createServer((request, response) => {
+  response.writeHead(200, { 'Content-Type': 'text/plain' })
+  response.end('Hello World')
 })
 
 const PORT = 3001
@@ -274,14 +274,14 @@ console.log(`Server running on port ${PORT}`)
 <!-- Implementing our server code directly with Node's built-in [http](https://nodejs.org/docs/latest-v8.x/api/http.html) web server is possible. However, it is cumbersome, especially once the application grows in size. -->
 直接使用 Node 内置的[http](https://nodejs.org/docs/latest-v8.x/api/http.html) web 服务器实现我们的服务器代码是可行的。 但是，它很麻烦，特别是当应用规模“变大变长”时。
 
-<!-- Many libraries have been developed to ease server side development with Node, by offering a more pleasing interface to work with than the built-in http module. By far the most popular library intended for this purpose is [express](http://expressjs.com). -->
-为了提供一个比内置的 http 模块更友好的界面，许多库已经开发出来，以简化使用 Node 作为服务器端开发。 到目前为止，最受欢迎的库是[express](http://expressjs.com)。
+<!-- Many libraries have been developed to ease server side development with Node, by offering a more pleasing interface to work with the built-in http module. These libraries aim to provide a better abstraction for general use cases we usually require to build a backend server. By far the most popular library intended for this purpose is [express](http://expressjs.com). -->
+为了提供一个比内置的 http 模块更友好的界面，许多库已经开发出来，以简化使用 Node 作为服务器端开发。这些库致力于为构建后台服务器的一般的用例提供一个更好的抽象，到目前为止，最受欢迎的库是[express](http://expressjs.com)。
 
 <!-- Let's take express into use by defining it as a project dependency with the command: -->
 让我们通过下面的命令将它定义为一个项目依赖，来开始使用 express:
 
 ```bash
-npm install express --save
+npm install express
 ```
 
 <!-- The dependency is also added to our <i>package.json</i> file: -->
@@ -529,7 +529,7 @@ npm run dev
 Representational State Transfer，又名REST， 是在2000年 Roy Fielding 的[论文](https://www.ics.uci.edu/~Fielding/pubs/dissertation/rest_arch_style.htm)中引入的。 Rest 是一种架构风格，用于构建可伸缩的 web 应用。 
 
 <!-- We are not going to dig into Fielding's definition of REST or spend time pondering about what is and isn't RESTful. Instead, we take a more [narrow view](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) by only concerning ourselves with how RESTful API's are typically understood in web applications. The original definition of REST is in fact not even limited to web applications. -->
-我们不会深入探究 Fielding 对 REST 的定义，也不会花时间思考什么是 RESTful，什么不是 RESTful。 相反，我们只关注web应用对 RESTful API 的典型理解，从而采取了一种更为狭隘的视角 [narrow view](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services)。 Rest 的最初定义实际上并不局限于 web 应用。
+我们不会深入探究 Fielding 对 REST 的定义，也不会花时间思考什么是 RESTful，什么不是 RESTful。 相反，我们只关注web应用对 RESTful API 的典型理解，从而采取了一种更为狭隘的视角 [narrow view](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services)。 Rest 的最初定义实际上并不局限于 web 应用。
 
 <!-- We mentioned in the [previous part](/zh/part2/在服务端将数据_alert出来#rest) that singular things, like notes in the case of our application, are called <i>resources</i> in RESTful thinking. Every resource has an associated URL which is the resource's unique address. -->
 我们在 [上一章节](/zh/part2/在服务端将数据_alert出来#rest) 中提到过，在我们的应用中，像便笺这样的单数实体，在 RESTful thinking 中称为<i>resource</i>。 每个resource都有一个相关联的 URL，这个 URL 是资源的唯一地址。
@@ -748,11 +748,8 @@ app.delete('/api/notes/:id', (request, response) => {
 <!-- So how do we test the delete operation? HTTP GET requests are easy to make from the browser. We could write some JavaScript for testing deletion, but writing test code is not always the best solution in every situation. -->
 那么我们如何测试删除操作呢？ 通过浏览器进行 HTTP GET 请求很容易。 我们可以编写一些 JavaScript 来测试删除，但是编写测试代码并不总是最好的解决方案。
 
-<!-- Many tools exist for making the testing of backends easier. One of these is the command line program [curl](https://curl.haxx.se) that was mentioned briefly in the previous part of the material. -->
-为了让后端的测试变得更加容易，我们可以使用工具。 其中之一就是命令行程序[curl](https://curl.haxx.se) ，这个命令行程序在本文前面的部分中已经简要地提到过。
-
-<!-- Instead of curl, we will take a look at using [Postman](https://www.getpostman.com/) for testing the application. -->
-替代 curl，我们将使用 [Postman](https://www.getpostman.com/)  来测试应用。
+<!-- Many tools exist for making the testing of backends easier. One of these is a command line program [curl](https://curl.haxx.se). However, instead of curl, we will take a look at using [Postman](https://www.getpostman.com/) for testing the application. -->
+为了让后端的测试变得更加容易，我们可以使用工具。 其中之一就是命令行程序[curl](https://curl.haxx.se) ，这个命令行程序在本文前面的部分中已经简要地提到过。用来替代 curl，我们将使用 [Postman](https://www.getpostman.com/)  来测试应用。
 
 <!-- Let's install Postman and try it out: -->
 让我们安装 Postman 并尝试一下:

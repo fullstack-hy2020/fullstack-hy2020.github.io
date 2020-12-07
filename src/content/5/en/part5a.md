@@ -137,6 +137,8 @@ const App = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault()
+    
+    // highlight-start
     try {
       const user = await loginService.login({
         username, password,
@@ -151,6 +153,7 @@ const App = () => {
         setErrorMessage(null)
       }, 5000)
     }
+    // highlight-end
   }
 
   // ...
@@ -324,7 +327,7 @@ return (
 The solution isn't perfect, but we'll leave it for now. 
 
 
-Our main component <i>App</i> is at the moment way too large. The changes we did now are a clear sign that the forms should be refactored into their own components. However, we will leave that for an optional excercise. 
+Our main component <i>App</i> is at the moment way too large. The changes we did now are a clear sign that the forms should be refactored into their own components. However, we will leave that for an optional exercise. 
 
 
 Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-2), branch <i>part5-2</i>.
@@ -395,7 +398,7 @@ export default { getAll, create, update, setToken } // highlight-line
 The noteService module contains a private variable _token_. Its value can be changed with a function _setToken_, which is exported by the module. _create_, now with async/await syntax, sets the token to the <i>Authorization</i> header. The header is given to axios as the third parameter of the <i>post</i> method. 
 
 
-The event handler responsible for log in must be changed to call the method <code>noteService.setToken(user.token)</code> with a successful log in: 
+The event handler responsible for login must be changed to call the method <code>noteService.setToken(user.token)</code> with a successful login: 
 
 ```js
 const handleLogin = async (event) => {
@@ -421,7 +424,7 @@ And now adding new notes works again!
 ### Saving the token to the browser's local storage
 
 
-Our application has a flaw: when the page is rerendered, information of the user's login dissappears. This also slows down development. For example when we test creating new notes, we have to login again every single time. 
+Our application has a flaw: when the page is rerendered, information of the user's login disappears. This also slows down development. For example when we test creating new notes, we have to login again every single time. 
 
 
 This problem is easily solved by saving the login details to [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Storage). Local Storage is a [key-value](https://en.wikipedia.org/wiki/Key-value_database) database in the browser. 
@@ -569,7 +572,7 @@ It might be best to use the backend from model answers of part 4.
 While doing the exercises, remember all of the debugging methods we have talked about, especially keeping an eye on the console. 
 
 
-**Warning:** If you notice you are mixing async/await and _then_ commands, its 99.9%  certain you are doing something wrong. Use either or, never both. 
+**Warning:** If you notice you are mixing async/await and _then_ commands, it's 99.9%  certain you are doing something wrong. Use either or, never both. 
 
 #### 5.1: bloglist frontend, step1
 

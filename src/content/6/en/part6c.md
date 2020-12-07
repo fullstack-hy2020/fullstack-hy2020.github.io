@@ -68,8 +68,8 @@ export default { getAll }
 
 We'll add axios to the project
 
-```js
-npm install axios --save
+```bash
+npm install axios
 ```
 
 We'll change the initialization of the state in <i>noteReducer</i>, such that by default there are no notes:
@@ -152,7 +152,7 @@ We do, however, decide to move the initialization of the notes into the <i>App</
 
 ```js
 import React, {useEffect} from 'react' // highlight-line
-import NewNote from './components/NowNote'
+import NewNote from './components/NewNote'
 import Notes from './components/Notes'
 import VisibilityFilter from './components/VisibilityFilter'
 import noteService from './services/notes'
@@ -252,7 +252,7 @@ export default {
 }
 ```
 
-The method _addNote_ of the component <i>NoteForm</i> changes slightly:
+The method _addNote_ of the component <i>NewNote</i> changes slightly:
 
 ```js
 import React from 'react'
@@ -263,7 +263,7 @@ import noteService from '../services/notes' // highlight-line
 const NewNote = (props) => {
   const dispatch = useDispatch()
   
-  const addNote = async (event) => {
+  const addNote = async (event) => { // highlight-line
     event.preventDefault()
     const content = event.target.note.value
     event.target.note.value = ''
@@ -333,7 +333,7 @@ const App = () => {
 }
 ```
 
-and <i>NoteForm</i> would create a new note as follows:
+and <i>NewNote</i> would create a new note as follows:
 
 ```js
 const NewNote = () => {
@@ -354,8 +354,8 @@ Both components would only use the function provided to them as a prop without c
 
 Now let's install the [redux-thunk](https://github.com/gaearon/redux-thunk)-library, which enables us to create <i>asynchronous actions</i>. Installation is done with the command:
 
-```js
-npm install --save redux-thunk
+```bash
+npm install redux-thunk
 ```
 
 The redux-thunk-library is a so-called <i>redux-middleware</i>, which must be initialized along with the initialization of the store. While we're here, let's extract the definition of the store into its own file <i>src/store.js</i>:

@@ -352,7 +352,7 @@ const App = () => {
 
 
 <!-- We'll continue with the app from [exercises](/osa7/custom_hookit#tehtavat-7-4-7-6) of the chapter [react router](/zh/part7/react_router).  -->
-我们将继续使用[react router](/zh/part7/react_router)章节中[exercises](/zh/part7/自定义_hooks#exercises-7-4-7-8) 的应用。
+我们将继续使用[react router](/zh/part7/react_router)章节中[exercises](/zh/part7/react_router#exercises-7-1-7-3) 的应用。
 
 #### 7.4: anecdotes and hooks 步骤1
 <!-- Simplify the anecdote creation form of your application with the _useField_ custom hook we defined earlier. -->
@@ -423,7 +423,7 @@ const App = () => {
 如果您的解决方案没有导致警告出现在控制台中，那么您已经完成了这个练习。
 
 <!-- If you see the warning in the console, make the necessary changes to get rid of the `Invalid value for prop reset' on <input> tag` console warning.  -->
-如果你在控制台中看到警告，做出必要的修改，去掉输入标签控制台警告上的 `Invalid value for prop reset' on <input> tag`。
+如果你在控制台中看到警告，做出必要的修改，去掉输入标签控制台警告上的 _Invalid value for prop \`reset\` on \<input\> tag_。
 
 <!-- The reason for this warning is that after making the changes to your application, the following expression: -->
 发出此警告的原因是，在对应用进行更改之后，下面的表达式:

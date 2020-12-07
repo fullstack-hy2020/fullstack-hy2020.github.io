@@ -33,7 +33,7 @@ const Notes = () => {
     if ( filter === 'ALL' ) {
       return notes
     }
-    return filter  === 'IMPORTANT' 
+    return filter  === 'IMPORTANT'
       ? notes.filter(note => note.important)
       : notes.filter(note => !note.important)
   })
@@ -87,11 +87,11 @@ const Notes = (props) => { // highlight-line
 
 // highlight-start
   const notesToShow = () => {
-    if ( props.filter === 'ALL ') {
+    if ( props.filter === 'ALL' ) {
       return props.notes
     }
     
-    return props.filter  === 'IMPORTANT' 
+    return props.filter  === 'IMPORTANT'
       ? props.notes.filter(note => note.important)
       : props.notes.filter(note => !note.important)
   }
@@ -606,24 +606,9 @@ More about this [here](https://www.simplethread.com/cant-replace-redux-with-hook
 
 #### 6.19 anecdotes and connect, step1
 
-The <i>redux store</i> is currently passed to all of the components through props.
+The <i>redux store</i> is currently being accessed by the components through the <em>useSelector</em> and <em>useDispatch</em> hooks.
 
-Add the [react-redux](https://github.com/reactjs/react-redux) package to your application, and modify the <i>AnecdoteList</i> so that it accesses the store's state with the help of the _connect_ function.
-
-Voting for and creating new anecdotes **does not need to work** after this exercise.
-
-The <i>mapStateToProps</i> function you will need in this exercise is approximately the following:
-
-```js
-const mapStateToProps = (state) => {
-  // sometimes it is useful to console log from mapStateToProps
-  console.log(state)
-  return {
-    anecdotes: state.anecdotes,
-    filter: state.filter
-  }
-}
-```
+Modify the <i>AnecdoteList</i> component so that it uses the _connect_ function instead of the hooks. You may need to implement your own <i>mapStateToProps</i> and <i>mapDispatchToProps</i> functions.
 
 #### 6.20 anecdotes and connect, step2
 
@@ -639,10 +624,6 @@ the last notification is only displayed for two seconds (assuming the notificati
 Fix the bug so that after multiple votes in a row, the notification for the last vote is displayed for five seconds.
 This can be done by cancelling the removal of the previous notification when a new notification is displayed whenever necessary. 
 The [documentation](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) for the setTimeout function might also be useful for this.
-
-</div>
-
-<div class="tasks">
 
 This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your completed exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 

@@ -45,8 +45,8 @@ lang: zh
 <!-- We'll create a new React application and install the debendencies required by [Apollo client](https://www.apollographql.com/docs/react/get-started/#installation). -->
 我们将创建一个新的 React 应用，并按文档要求的那样安装[Apollo 客户端](https://www.apollographql.com/docs/React/get-started/#installation 应用)。
 
-```js
-npm install --save @apollo/client graphql
+```bash
+npm install @apollo/client graphql
 ```
 
 <!-- We'll start with the following code for our application.  -->
@@ -1006,7 +1006,7 @@ useEffect(() => {
 我们的示例只使用 React 组件的状态来管理表单的状态并显示错误通知。 当使用 GraphQL 时，根本没有理由将应用状态的管理转移到 Redux。
 
 <!-- When necessary Apollo enables saving the applications local state to [Apollo cache](https://www.apollographql.com/docs/react/v3.0-beta/data/local-state/). -->
-必要时，Apollo 允许将应用保存到本地状态[Apollo cache](https://www.apollographql.com/docs/react/v3.0-beta/data/local-state/ 缓存)。
+必要时，Apollo 允许将应用保存到本地状态[Apollo cache](https://www.apollographql.com/docs/react/local-state/local-state-management/)。
 
 
 <div class="tasks">

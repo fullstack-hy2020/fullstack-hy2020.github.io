@@ -240,7 +240,7 @@ The backend code can be found on [Github](https://github.com/fullstack-hy2020/gr
 ### Subscriptions on the client
 
 
-In order to use subscriptions in our React application, we have to do some changes, especially on its [configuration](https://www.apollographql.com/docs/react/v3.0-beta/data/subscriptions/).
+In order to use subscriptions in our React application, we have to do some changes, especially on its [configuration](https://www.apollographql.com/docs/react/data/subscriptions/).
 The configuration in <i>index.js</i> has to be modified like so: 
 
 ```js
@@ -252,7 +252,7 @@ import { setContext } from 'apollo-link-context'
 
 // highlight-start
 import { getMainDefinition } from '@apollo/client/utilities'
-import { WebSocketLink } from '@apollo/link-ws'
+import { WebSocketLink } from '@apollo/client/link/ws'
 // highlight-end
 
 const authLink = setContext((_, { headers }) => {
@@ -305,8 +305,8 @@ ReactDOM.render(
 
 For this to work, we have to install some dependencies:
 
-```js
-npm install --save @apollo/link-ws subscriptions-transport-ws
+```bash
+npm install @apollo/client subscriptions-transport-ws
 ```
 
 The new configuration is due to the fact that the application must have an HTTP connection as well as a WebSocket connection to the GraphQL server.
@@ -322,7 +322,7 @@ const httpLink = createHttpLink({
 })
 ```
 
-The subscriptions are done using the [useSubscription](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#usesubscription) hook function.
+The subscriptions are done using the [useSubscription](https://www.apollographql.com/docs/react/api/react/hooks/#usesubscription) hook function.
 
 Let's modify the code like so:
 
