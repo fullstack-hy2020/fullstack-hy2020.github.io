@@ -1,0 +1,36 @@
+{
+  "common": {
+    "nextPart": "Siguiente parte",
+    "previousPart": "Parte anterior",
+    "readMore": "Leer más",
+    "proposeChanges": "Proponer cambios al material"
+  },
+  "searchPage": {
+    "noMatches": "No se encontraron coincidencias",
+    "matchesTitle": "Se encontraron {{count}} coincidencias para la consulta \"{{query}}\""
+  },
+  "navigation": {
+    "aboutCourse": "Acerca del curso",
+    "courseContents": "Contenido del curso",
+    "faq": "Preguntas frecuentes",
+    "partners": "Partners",
+    "challenge": "Challenge",
+    "searchLinkSrLabel": "Buscar en el material"
+  },
+  "challengePage": {
+    "registerButton": "Registre su empresa en el desafío Full Stack",
+    "nameLabel": "Nombre",
+    "namePlaceholder": "Jane Doe",
+    "titleLabel": "Título",
+    "companyLabel": "Empresa",
+    "companyPlaceholder": "Compañía Co",
+    "phoneLabel": "Teléfono",
+    "emailLabel": "Dirección de correo electrónico",
+    "whereDidYouHearLabel": "¿Dónde se enteró del desafío?",
+    "submitButton": "Enviar",
+    "submitSuccessMessage": "¡Gracias! ¡Nos comunicaremos contigo pronto!",
+    "participantsTitle": "Estas empresas se han unido al desafío Full Stack",
+    "coOperationTitle": "En cooperación con",
+    "infoButton": "Más sobre el desafío"
+  }
+}
