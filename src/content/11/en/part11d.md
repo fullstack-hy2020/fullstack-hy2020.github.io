@@ -99,29 +99,26 @@ Push some more code to your branch, and ensure that the deployment step <i>is no
 
 ### Versioning
 
-How we version our application/software is important. On the face of it, that's not a very bold statement. Obviously versioning our application is important! But why? And what do version numbers mean? 1.2.3 is a newer version that 1.2.2, that obvious, but what's the difference between bumping versions from 1.2.2 to 1.2.3 and bumping the same 1.2.2 to 1.3.0 or even 2.0.0?
-
-Let's first talk about the importance of versioning. At its core, the single most important purpose of versioning is to uniquely identify the software we're running and the code associated with it. That also sounds simple, so, let's break it down a little more. In order to achieve the objective of having that unique identifier of code, it needs two things:
+The most important purpose of versioning is to uniquely identify the software we're running and the code associated with it. That also sounds simple, so, let's break it down a little more. In order to achieve the objective of having that unique identifier of code, it needs two things:
  - To be unique
  - To identify code
 
-Sounds super simple, we'll look at two ways to implement this in a minute, but first, let's talk about another important objective that versioning should have. We should be able to tell what order versions are in. For example, if the current release has broken critical functionality and we need to roll back to the previous version, we need to know how to identify that version.
+The ordering of versions is also an important information. For example, if the current release has broken critical functionality and we need to identify the <i>previous version</i> of the software so that we can roll back the release back to a stabile state.
 
-##### What exactly is a version?
-
-*Leaving aside the infrastructure that fits around versioning (CI, git, history, deployments etc.), versioning is a way to name a specific point (commit) in a repo. Versioning is saying: "This commit represents version 12.4.1."*
-
-##### Semantic Versioning and Hash Versioning
+#### Semantic Versioning and Hash Versioning
 
 How an application is versioned is sometimes called a versioning strategy. We'll look at and compare two such strategies.
 
-The first one has already been hinted at. A full description of what Semantic Versioning is can be found here (https://semver.org/). A full read of the specification is worth it but here we'll simplify it since we're interested in the immediate practical application. Semantic versioning has versions in the form `{major}.{minor}.{patch}`, for example, the `1.2.3` we mentioned above where `1` is the major version, `2` is the minor version and `3` is the patch version. In general, changes that fix functionality without changing how the application works from the outside are `patch` changes, changes that make small changes to functionality (as viewed from the outside) are `minor` changes and changes that completely change the application (or major functionality chagnes) are `major` changes. The definitions of each of these terms can vary from project to project. Again, I'll highly recommend reading through the Semantic Versioning specification (https://semver.org/).
+The first one is [Semantic Versioning](https://semver.org/), where a version is in the form <code>{major}.{minor}.{patch}</code>. For example, the `1.2.3` we mentioned above where `1` is the major version, `2` is the minor version and `3` is the patch version.
+
+ In general, changes that fix functionality without changing how the application works from the outside are `patch` changes, changes that make small changes to functionality (as viewed from the outside) are `minor` changes and changes that completely change the application (or major functionality chagnes) are `major` changes. The definitions of each of these terms can vary from project to project. 
+
 
 Hash versioning (also sometimes known as SHA versioning) is quite different. The version "number" in hash versioning is instead a hash derived from the contents of the repository and the changes introduced in this commit. In git, this is already done for you as the commit hash. This should be unique for any change set.
 
 Hash versioning is almost always used in conjunction with automation. It's a pain (and error prone) to copy 32 character long version numbers around to make sure that everything is correctly deployed.
 
-##### But what does the version point to?
+#### But what does the version point to?
 
 Determining what code is in a given version is important and the way this is achieved is again quite different between semantic and hash versioning. In hash versioning (at least in git) it's as simple as looking up the commit based on the hash. This will let us know exactly what code is deployed with which version.
 
@@ -133,13 +130,13 @@ For the two repo based approaches, the approach with something in the code usual
 
 What about having the version number in a file? This presents a problem, if we commit the version number `4.2.7` into a file, then we make a few more commits with changes, then we increment the version number to `4.2.8`, what code is in version `4.2.7`? Is it the first commit in which the version number appears or is it the last commit before the version number changes? While there are conventions and workflows based around using only a version number in a file, this is perhaps not ideal. Instead, what we can do is use a combination of the methods. There's nothing preventing us from incrementing the version number in a file and also tagging the commit at which the release happens. This gives us the advantage of having a unique commit referred to (tag) and easy access to the current version number in the code.
 
-##### Version order
+#### Version order
 
 In semantic versioning, even if we have version bumps of different types (major, minor or patch) it's still quite easy to put the releases in order: 1.3.7 comes before 2.0.0 which itself comes before 2.1.5 which comes before 2.2.0. A list of releases (conveniently provided by a package manager or GitHub) is still needed to know what the last version is but it's easier to look at that list and discuss it: It's easier to say "We need to roll back to 3.2.4" than to try communicate a hash in person.
 
 That's not to say that hashes are inconvenient. Aside from giving an easier path to working out the code deployed in a specific version, if you know which commit caused the particular problem, it's easy enough to look back through a git history and get the hash of the previous commit.
 
-##### Comparing the Two
+#### Comparing the Two
 
 We've already touched on some of the advantages and disadvantages of the two versioning methods discussed above but it's perhaps useful to address where they'd each likely be used.
 
@@ -151,7 +148,7 @@ Having an error happen when something goes wrong is almost always preferable to 
 
 Hash based versioning is also quite useful in situations where multiple developers are working on the same project and using the same CI environment. While not covered by this course, running tests in docker is a prime example of this. The docker environment would be shared between all developers and if all of their artifacts have the same name, only one of them could run tests at a time. By including the hash in the artifact name, the naming conflict could be avoided.
 
-##### Best of Both Worlds
+#### Best of Both Worlds
 
 From the above comparison, it would seem that the semantic versioning makes sense for releasing software while hash based versioning (or artifact naming) makes more sense during development. This doesn't neccessarily cause a conflict.
 
