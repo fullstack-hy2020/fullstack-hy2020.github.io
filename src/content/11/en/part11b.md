@@ -74,7 +74,7 @@ Also for these two tasks there are ready made npm scripts in the project!
 
 Study the structure of the project for a while. As you notice both the frontend and backend code is now [in the same repository](/en/part7/class_components_miscellaneous#frontend-and-backend-in-the-same-repository). In earlier parts of the course we had a separate repository for both, but having those in same repository makes things much simple when setting up a CI enviroinment. 
 
-In contrast to most projects in this course, the frontend <i>does not use</i> create-react-app, but it has relatively simple [webpack](http://localhost:8000/en/part7/webpack) configuration that takes care of bundling the frontend code.
+In contrast to most projects in this course, the frontend <i>does not use</i> create-react-app, but it has relatively simple [webpack](/en/part7/webpack) configuration that takes care of bundling the frontend code.
 
 </div>
 
