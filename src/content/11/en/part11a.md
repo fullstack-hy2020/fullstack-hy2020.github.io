@@ -7,11 +7,11 @@ lang: en
 
 <div class="content">
 
-Writing software is all well and good but nothing exists in a vacuum. Eventually, we'll need to deploy the software to production, i.e. give it to the real users. Then we need maintain it, release new versions and work with other people to expand that software.
+Writing software is all well and good but nothing exists in a vacuum. Eventually, we'll need to deploy the software to production, i.e. give it to the real users. Then we need to maintain it, release new versions, and work with other people to expand that software.
 
-We've already used github to keep our source code, but what happens when we work within a team with more developers? 
+We've already used GitHub to store our source code, but what happens when we work within a team with more developers? 
 
-Many problems may arise when more developers are involved. The software might work just fine in <i>my computer</i>, but maybe some of the other developers are using a different operating system, maybe different library versions. It is not uncommon that a code works just fine in one developer's machine but another developer can not even get it started. This is often called the "works on my machine" problem.
+Many problems may arise when more developers are involved. The software might work just fine in <i>my computer</i>, but maybe some of the other developers are using a different operating system or different library versions. It is not uncommon that a code works just fine in one developer's machine but another developer can not even get it started. This is often called the "works on my machine" problem.
 
 There are also more involved problems. If two developers are both working on changes and they haven't decided on a way to deploy to production, who's changes get deployed? How would it possible to prevent one developer's changes from overwriting another's? 
 
@@ -23,9 +23,9 @@ In this part we'll be using some terms you may not be familiar with or you may n
 
 #### Branches
 
-Git allows multiple copies, streams, or versions of the code to co-exist without overwriting eachother. When you first create a repository, you will be looking at the main branch (usually in git, we call this <code>master</code> or <code>main</code>, but that does vary in older projects). This is fine if there's only one developer for a project and that developer only works on one feature at a time.
+Git allows multiple copies, streams, or versions of the code to co-exist without overwriting each other. When you first create a repository, you will be looking at the main branch (usually in git, we call this <code>master</code> or <code>main</code>, but that does vary in older projects). This is fine if there's only one developer for a project and that developer only works on one feature at a time.
 
-Branches are useful when this environment becomes more complex. In this context each developer can have one or more branches. Each branch is effectively a copy of the main branch with some changes that make it diverge from master. Once the feature or change in the branch is ready it can be <i>merged</i> back into the main branch, effectively making that feature or change part of the main software. In this way each developer can work on their own set of changes and not affect any other developer until the changes are ready. 
+Branches are useful when this environment becomes more complex. In this context, each developer can have one or more branches. Each branch is effectively a copy of the main branch with some changes that make it diverge from the master. Once the feature or change in the branch is ready it can be <i>merged</i> back into the main branch, effectively making that feature or change part of the main software. In this way, each developer can work on their own set of changes and not affect any other developer until the changes are ready. 
 
 But once one developer has merged their changes into the main branch, what happens to the other developers' branches? They are now diverging from an older copy of the main branch. How will the developer on the later branch know if their changes are compatible with the current state of the main branch? That is one of the fundamental questions we will be trying to answer in this part.
 
@@ -35,7 +35,7 @@ If you wish read more about branches [here](https://www.atlassian.com/git/tutori
 
 In GitHub merging a branch back to the main branch of software is quite often happening using a mechanism called <i>pull request</i>, where the developer who has done some changes is requesting the changes to be merged to the mainline. Once the pull request, or PR as we often write, is made or <i>opened</i>, another developer checks that all is ok and <i>merges</i> the PR.
 
-If you have proposed changes to the material material of this course, you have already made a pull request!
+If you have proposed changes to the material of this course, you have already made a pull request!
 
 #### Build
 
@@ -45,22 +45,22 @@ In general when we talk about building we mean preparing software to run on the 
 
 This step is much more complicated (and required) in compiled languages where the code needs to be compiled into an executable.
 
-In [part 7](/en/part7/webpack) we had a look on [webpack](https://webpack.js.org/) that is the current defacto tool for building a product version of a React or any other frontend JavaScript or TypeScript codebase.
+In [part 7](/en/part7/webpack) we had a look at [webpack](https://webpack.js.org/) that is the current defacto tool for building a production version of a React or any other frontend JavaScript or TypeScript codebase.
 
 #### Deploy
 
-Deployment refers to putting the software where it needs to be for the end user to use it. In the case of libraries, this may simply mean pushing an npm package to a package archive (such as npmjs.com) where other users can find it and include it in their software. 
+Deployment refers to putting the software where it needs to be for the end-user to use it. In the case of libraries, this may simply mean pushing an npm package to a package archive (such as npmjs.com) where other users can find it and include it in their software. 
 
 Deploying a service (such as a web app) can vary in complexity. In [part 3](/en/part3/deploying_app_to_internet) our deployment workflow involved running some scripts manually.
-In this part we'll cover a simple automated deployment to the web based hosting service Heroku.
+In this part, we'll cover a simple automated deployment to the web-based hosting service Heroku.
 
 Deployments can be significantly more complex, especially if we add requirements such as "the software must be available at all times during the deployment" (zero downtime deployments) or if we have to take things like database migrations into account. We won't cover complex deployments like those in this part but it's important to know that they exist.
 
 ### What is CI?
 
-The strict definition of CI (Continuous Integration) and the way the term is used in industry are quite different.
+The strict definition of CI (Continuous Integration) and the way the term is used in the industry are quite different.
 
-Strictly speaking, CI refers to <a href='https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment'>merging developer changes to a main branch</a> often, wikipedia even helpfully suggests: "several times a day". This is usually true but when we refer to CI in industry, we're usually talking about what happens after the actual merge happens.
+Strictly speaking, CI refers to <a href='https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment'>merging developer changes to the main branch</a> often, Wikipedia even helpfully suggests: "several times a day". This is usually true but when we refer to CI in industry, we're usually talking about what happens after the actual merge happens.
 
 We'd likely want to do some of these steps:
  - Lint: to keep our code clean and maintainable
@@ -71,15 +71,15 @@ We'd likely want to do some of these steps:
 
 We'll discuss each of these steps (and when they're suitable) in more detail later. What is important to remember is that this process should be strictly defined. 
 
-Usually strict definitions act as a constraint on creativity/development speed, this, however should usually not be true for CI. This strictness should be set up in such a way as to allow for easier development and working together. Using a good CI system (GitHub Actions is what we'll cover in this part) will allow us to do this all automagically.
+Usually, strict definitions act as a constraint on creativity/development speed, this, however, should usually not be true for CI. This strictness should be set up in such a way as to allow for easier development and working together. Using a good CI system (GitHub Actions is what we'll cover in this part) will allow us to do this all automagically.
 
 ### Packaging and Deployment as a part of CI
 
-It may be worthwhile to note that packaging and especially deployment are sometimes considered to not fall under the umbrella of CI. We'll add them in here because in the real world it makes sense to lump it all together. This is partially because they make sense in the context of the flow and pipeline (I want to get my code to users) and partially because these are in fact the most likely point of failure.
+It may be worthwhile to note that packaging and especially deployment are sometimes considered to not fall under the umbrella of CI. We'll add them in here because in the real world it makes sense to lump it all together. This is partly because they make sense in the context of the flow and pipeline (I want to get my code to users) and partially because these are in fact the most likely point of failure.
 
-Packaging is often an area where issues crop up in CI as this isn't something that's usually tested locally. It makes sense to test the packaging of a project during the CI workflow even if we don't do anything with the resultant package. With some workflows we may even be testing the already built packages. This assures us that we have tested the code in the same form as what will be deployed to production.
+The packaging is often an area where issues crop up in CI as this isn't something that's usually tested locally. It makes sense to test the packaging of a project during the CI workflow even if we don't do anything with the resultant package. With some workflows, we may even be testing the already built packages. This assures us that we have tested the code in the same form as what will be deployed to production.
 
-What about deployment then? We'll talk about consistency and repeatability at length in the coming sections but we'll mention here that we want a process that always looks the same, whether we're running tests on a development branch or on master. In fact the process may <i>literally</i> be the same with only a check at the end to determine if we are on master branch and need to do a deployment. In this context, it makes sense to include deployment in the CI process since we'll be maintaining it at the same time we work on CI.
+What about deployment then? We'll talk about consistency and repeatability at length in the coming sections but we'll mention here that we want a process that always looks the same, whether we're running tests on a development branch or the master. In fact, the process may <i>literally</i> be the same with only a check at the end to determine if we are on the master branch and need to do a deployment. In this context, it makes sense to include deployment in the CI process since we'll be maintaining it at the same time we work on CI.
 
 #### Is this CD thing related?
 
