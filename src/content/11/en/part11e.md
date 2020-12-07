@@ -85,15 +85,17 @@ What about the tasks that don't have a tool? You can automate these yourself wit
 
 ### Exercises 11.20-22
 
-#### 11.20 Periodic healthchect
+#### 11.20 Periodic health check
 
-We are pretty confident now that our pipeline prevents bad code of being deployed. However there are many sources of errors. If our application would eg. depend on a database, if that would for some reason become unavailable, our application would most likely crash. That's why it would be good idea to set up <i>a periodic</i> health check that would regurarly do a request to our server. We quite often refer this kind of requests as a <i>ping</i>.
+We are pretty confident now that our pipeline prevents bad code of being deployed. However there are many sources of errors. If our application would eg. depend on a database that would for some reason become unavailable, our application would most likely crash. That's why it would be good idea to set up <i>a periodic health check</i> that would regurarly do a HTTP GET request to our server. We quite often refer this kind of request as a <i>ping</i>.
 
 It is possible to [schedule](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#scheduled-events) GitHub actions to happend regurarly. 
 
-Use now action [url-health-check](https://github.com/marketplace/actions/url-health-check) or any other alternatively and schedule a periodic healt check to your deployed software. Try to simulate a situation where your application breaks down and ensure that the periodic health check detects the problem.
+Use now action [url-health-check](https://github.com/marketplace/actions/url-health-check) or any other alternatively and schedule a periodic health check ping to your deployed software. Try to simulate a situation where your application breaks down and ensure that the check detects the problem. Write this rule to an own file.
 
-**Note** that once you are get this working, it is best to drop the ping frequency since otherways your health check may consume [all your](https://devcenter.heroku.com/articles/free-dyno-hours) monthly free hours.
+**Note** that unfortunately it takes quite long until GitHub Actions starts to schedule actions. For me it took nearly one hour. So it might be a good idea to get the the check working firstly by triggering the workflow with git push and when the check is properly working, then switch to a scheduled trigger.
+
+**Note also** that once you are get this working, it is best to drop the ping frequency (to max once in 24 hours) or disable the rule altogether since otherways your health check may consume [all your](https://devcenter.heroku.com/articles/free-dyno-hours) monthly free hours.
 
 #### 11.21 Your own pipeline
 
@@ -107,8 +109,14 @@ It is perhaps best to create a new repository for this exercise and simply copy 
 
 This is a long and perhaps quite a tought exercise, but this kind of situation where you have a "legacy code" and you need to build it a proper deployment pipeline is quite commoin in real life!
 
+Obviously this exercise is not done in same repository as the previous exercises. Since you can return only one repository to submission systen, put a link of the <i>other</i> repository to the one you fill in to the submission form.
+
 #### 11.22 Protect master and ask for pull request
 
-speksaa paremmin
+Protect the master branch of the repository where you did the previous exercise. This time prevent also administrator of merging the code without a review.
+
+Do a pull request and ask any of GitHub users [mluukkai](https://github.com/mluukkai), [kaltsoon](https://github.com/kaltsoon) or [jakousa](https://github.com/jakousa) to review your code. Once the review is done, merge your code to master. 
+
+The you are done!
 
 </div>
