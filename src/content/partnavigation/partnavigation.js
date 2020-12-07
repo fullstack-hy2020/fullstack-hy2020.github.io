@@ -57,7 +57,7 @@ module.exports = {
       e: 'Fragmentit ja subskriptiot',
     },
     '9': {},
-    '10': {},
+    '11': {},
   },
   en: {
     '0': {
@@ -127,6 +127,13 @@ module.exports = {
       b: 'React Native basics',
       c: 'Communicating with server',
       d: 'Testing and extending our application',
+    },
+    '11': {
+      a: 'Introduction to CI/CD',
+      b: 'Getting started with GitHub Actions',
+      c: 'Deployment',
+      d: 'Keeping green',
+      e: 'Expanding Further',
     },
   },
   zh: {
@@ -198,5 +205,6 @@ module.exports = {
       c: '与服务端通信',
       d: '测试与扩展我们的应用',
     },
+    '11': {},
   },
 };

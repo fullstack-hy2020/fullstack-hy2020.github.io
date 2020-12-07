@@ -857,7 +857,7 @@ useEffect(() => {
 ```
 
 <!-- Tämä ratkaisu ei kuitenkaan toimi, ellei _notify_-funktiota ole määritelty [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-funktioon käärittynä. Jos näin ei tehdä, seurauksena on ikuinen luuppi, sillä aina kun komponentti _App_ renderöidään uudelleen notifikaation poistamisen jälkeen, syntyy <i>uusi versio</i> funktiosta _notify_ ja se taas aiheuttaa efektifunktion uudelleensuorituksen ja taas uuden notifikaation... -->
-However this solution does not work if the _notify_-function is not wrapped to a [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-function.  If its not, this results to an endless loop. When the _App_ component is rerendered after a notification is removed, a <i>new version</i> of _notify_ gets created which causes the effect function to be executed which causes a new notification and so on an so on...
+However this solution does not work if the _notify_-function is not wrapped to a [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-function.  If it's not, this results to an endless loop. When the _App_ component is rerendered after a notification is removed, a <i>new version</i> of _notify_ gets created which causes the effect function to be executed which causes a new notification and so on an so on...
 
 The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5) branch <i>part8-5</i>.
 
