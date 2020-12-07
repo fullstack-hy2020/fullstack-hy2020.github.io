@@ -187,6 +187,8 @@ Besides it is easy to take into use, GitHub Actions is a good choice from other 
 
 ### Exercise 11.1
 
+THIS IS STILL TO BE FIXED
+
 In order to distance the concept if CI/CD from the actual code of an application, let's use a hypothetical example in a different language, say Python or Java. You might also pick any other language (except JavaScript).
 
 For the exercises below, you are not expected to know anything about Python (or the language you picked). The expectation is that you will find a way to achieve the objective (in principle) without having to learn a new language. 
