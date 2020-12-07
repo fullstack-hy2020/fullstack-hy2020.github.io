@@ -959,7 +959,7 @@ Create a page for showing a patient's full information in the frontend.
 <!-- Patient information should be accessible when clicking e.g. the patients name. -->
 User should be able to access a patient's information e.g. by clicking the patient's name.
 
-Fetch the data from the enpoint created in the previous exercise. After fetching the patient information from the backend, add the fetched information to the application's state. Do not fetch the information if it already is in the app state, i.e. if the user is visiting the same patient's information many times. 
+Fetch the data from the endpoint created in the previous exercise. After fetching the patient information from the backend, add the fetched information to the application's state. Do not fetch the information if it already is in the app state, i.e. if the user is visiting the same patient's information many times. 
 
 Since we now have the state in the context, you'll need to define a new action type for updating an individual patient's data.
 
