@@ -7,25 +7,25 @@ lang: en
 
 <div class="content">
 
-This module has focused on building a simple, effective and robust CI system that helps developers to work together, maintain code quality and deploy safely. What more could one possibly want? In the real world, there are more fingers in the pie than just developers and users. Even if that weren't true, even for developers, there's a lot more value to be gained from CI systems than just the above things.
+This part has focused on building a simple, effective and robust CI system that helps developers to work together, maintain code quality and deploy safely. What more could one possibly want? In the real world, there are more fingers in the pie than just developers and users. Even if that weren't true, even for developers, there's a lot more value to be gained from CI systems than just the above things.
 
 ### Visibility and Understanding
 
-In all but the smallest companies, decisions on what to develop are not made exclusively by developers. The term 'stakeholder' is often used to refer to people (both inside and outside the development team) who may have some interest in keeping an eye on the progress of development. To this end, there are often integrations between git and whatever project management/bug tracking software the team is using.
+In all but the smallest companies, decisions on what to develop are not made exclusively by developers. The term 'stakeholder' is often used to refer to people, both inside and outside the development team, who may have some interest in keeping an eye on the progress of development. To this end, there are often integrations between git and whatever project management/bug tracking software the team is using.
 
-A common use of this is to have some reference to the tracking system in git PRs or commits. This way, for example, when you're working on issue number 123, you might name your PR `BUG-123: Fix user copy issue` and the bug tracking system would notice the first part of the PR name and automatically move the issue to `Done` when the PR is merged.
+A common use of this is to have some reference to the tracking system in git pull requests or commits. This way, for example, when you're working on issue number 123, you might name your pull request <code>BUG-123: Fix user copy issue</code> and the bug tracking system would notice the first part of the PR name and automatically move the issue to <code>Done</code> when the PR is merged.
 
 ### Notifications
 
-When the CI process finishes quickly, it can be convenient to just watch it execute and wait for the result. As projects become more complex, so too does the process of building and testing the code. This can quickly lead to a situation where it takes long enough to generate the build result that a developer may want to begin working on another task. This in turn leads to forgotten build. This is especially problematic if we're talking about merging PRs that may affect another developer's work, either causing problems or delays for them. This can also lead to a situation where you think you've deployed something but haven't actually finished a deployment, this can lead to mis-communication with team mates and customers (e.g. "Go ahead and try that again, the bug should be fixed").
+When the CI process finishes quickly, it can be convenient to just watch it execute and wait for the result. As projects become more complex, so too does the process of building and testing the code. This can quickly lead to a situation where it takes long enough to generate the build result that a developer may want to begin working on another task. This in turn leads to forgotten build. 
+
+This is especially problematic if we're talking about merging PRs that may affect another developer's work, either causing problems or delays for them. This can also lead to a situation where you think you've deployed something but haven't actually finished a deployment, this can lead to mis-communication with team mates and customers (e.g. "Go ahead and try that again, the bug should be fixed").
 
 There are several solutions to this problem ranging from simple notifications to more complicated processes that simply merge passing code if certain conditions are met. We're going to discuss notifications as a simple solution since it's the one that interferes with the team workflow the least.
 
 By default, GitHub Actions sends an email on a build failure. This can be changed to send notifications regardless of build status and can also be configured to alert you on the GitHub web interface. Great. But what if we want more. What if for whatever reason this doesn't work for our use case.
 
-There are integrations, for example with Slack, to send notifications. These integrations still decide what to send and when to send it based on logic from GitHub.
-
-Let's go one step further. Let's set up our own notification system:
+There are integrations, for example to various messaging applications such as [Slack[](https://slack.com/intl/en-fi/), to send notifications. These integrations still decide what to send and when to send it based on logic from GitHub.
 
 </div>
 
@@ -33,21 +33,31 @@ Let's go one step further. Let's set up our own notification system:
 
 ### Exercise 11.19
 
+We have set up a Slack channel <fullstackopengroup.slack.com> for testing amessaging integration. Join the channel by clicking [here](https://join.slack.com/t/fullstackopengroup/shared_invite/zt-jy0669dd-41WHtYNO6WwBujp4djgJTA). Unfortunately you need an email address for registration. If are not willing to use your own address, you can very well use a temporal email for the purposes. There are lots of options such as <https://tempmail.ninja/>.
+
+Note that you need the Slack webhook URL for doing this exercise. If you do not have it yet, ask it by email matti.luukkainen@helsinki.fi of in course telegram, ping @mluukkai
+
+You can also use some other Slack channel in this exercise but then you are on your own with the setup.
+
 #### 11.19 Build success/failure notification action
 
-Using the build from the previous section, set up a notification to either:
-1: Tell us that the build succeeded and the project is ready for deployment
-2: There was a problem that needs to be fixed. In this case, make it as easier for the developer to work out what went wrong. Send either the test report with the failing tests or a link to where said report can be found.
+You can find dozens of third party actions from [GitHub Action Marketplace]https://github.com/marketplace?type=actions) by using a searcj the word [slack](https://github.com/marketplace?type=actions&query=slack). Pick one for this exercise. My choice was [action-slack](https://github.com/marketplace/actions/action-slack) since it has quite many starts and a decent documentation.
 
-You can choose the channel that the notification will be sent to but you will need to explain why you chose the channel that you chose.
+Setup the action so that it gives two types of notifications.
+- A success indication if a new version gets deployed
+- An error indication if abuild fails
 
-When doing this excercise, remember the following things.
- - The notifications should *always* be sent, even if the build fails in a much earlier step. Is there any failure that would prevent a notification from being sent?
- - The status of jobs in the build needs to be sent too, how do you get that? How do you present it?
+In the case of an error, the notification should be a bit more verbose to help developers finding quickly what was the error and what is the commit that caused it.
 
- </div>
+See [here](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#job-status-check-functions) how to check the job status!
 
- <div class="content">
+Your notifications may look like the following:
+
+![Releases](../../images/11/20a.png)
+
+</div>
+
+<div class="content">
 
 ### Metrics
 
@@ -57,18 +67,17 @@ While there are things that can be done about this increase in build times, it's
 
 Metrics can either be self-reported (also called 'push' metrics, where each build reports how long it took) or the data can be fetched from the API afterwards (sometimes called 'pull' metrics). The risk with self reporting is that the self reporting itself takes time and may have a significant impact on "total time taken for all builds".
 
-This data can be sent to a time series database or to an archive of another type.
+This data can be sent to a time series database or to an archive of another type. There are plenty of cloud services where you can easily aggregate the metrics, one good option is [Datadog](https://www.datadoghq.com/).
 
 ### Periodic tasks
 
 There are often periodic tasks that need to be done in a software development team. Some of these can be automated with commonly available tools and some you will need to automate yourself.
 
-The former category includes things like checking packages for security vulnerabilities. There are several tools that can already do this for you. Some of these tools would even be free for certain types (e.g. open source) projects. Github provides one such tool, Dependabot.
+The former category includes things like checking packages for security vulnerabilities. There are several tools that can already do this for you. Some of these tools would even be free for certain types (e.g. open source) projects. Github provides one such tool, [Dependabot](https://dependabot.com/).
 
 Words of advice to consider: If your budget allows it, it's almost always better to use a tool that already does the job than to roll your own solution. If security isn't the industry you're aiming for, for example, use Dependabot to check for security vulnerabilities instead of making your own tool.
 
 What about the tasks that don't have a tool? You can automate these yourself with GitHub Actions too. GitHub Actions provides a scheduled trigger that can be used to execute a task at a particular time.
-
 
 </div>
 
@@ -76,17 +85,16 @@ What about the tasks that don't have a tool? You can automate these yourself wit
 
 ### Exercises 11.20-22
 
-#### 11.20
+#### 11.20 Periodic healthchect
 
-Periodic ping
+We are pretty confident now that our pipeline prevents bad code of being deployed. However there are many sources of errors. If our application would eg. depend on a database, if that would for some reason become unavailable, our application would most likely crash. That's why it would be good idea to set up <i>a periodic</i> health check that would regurarly do a request to our server. We quite often refer this kind of requests as a <i>ping</i>.
 
-#### 11.13 Average runtime notification action
+It is possible to [schedule](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#scheduled-events) GitHub actions to happend regurarly. 
 
-Let's combine the the past last 3 sections together: Write an action that will send the average run time for all `build`, `lint`, `test` and `deploy` actions in the repo the workflow is situated in to an email address for archiving. You will likely need to create an action that calls the GitHub API for this.
+Use now action [url-health-check](https://github.com/marketplace/actions/url-health-check) or any other alternatively and schedule a periodic healt check to your deployed software. Try to simulate a situation where your application breaks down and ensure that the periodic health check detects the problem.
 
-Hint: Github provides a JS and a TS starter action for you to base your action on. These already import the relevant libraries and have some examples of how to use them.
+**Note** that once you are get this working, it is best to drop the ping frequency since otherways your health check may consume [all your](https://devcenter.heroku.com/articles/free-dyno-hours) monthly free hours.
 
-SKIP or REDFINE
 #### 11.21 Your own pipeline
 
 Build a simillar CI/CD-pipeline for some of your own products. A good candidate is the phonebook app that was built in parts 2 to 4 of the course, or bloglist built in part 5, or the redux anecdotes built in part 6. You may also use some app of your own here.
@@ -99,6 +107,8 @@ It is perhaps best to create a new repository for this exercise and simply copy 
 
 This is a long and perhaps quite a tought exercise, but this kind of situation where you have a "legacy code" and you need to build it a proper deployment pipeline is quite commoin in real life!
 
-#### 11.22 Protect master and ask for pr
+#### 11.22 Protect master and ask for pull request
+
+speksaa paremmin
 
 </div>

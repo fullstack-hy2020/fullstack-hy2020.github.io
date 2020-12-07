@@ -102,6 +102,14 @@ app.get('/health', (req, res) => {
 })
 ```
 
+It might also be good idea to have a dummy endpoint in the app that makes it possible to do code changes and to ensure that the deployed version has really changed:
+
+```js
+app.get('/version', (req, res) => {
+  res.send('1') // change this string to ensure a new version deployed
+})
+```
+
 Look now from the [documentation](https://github.com/marketplace/actions/deploy-to-heroku) how to include the health check to the deployment step. Use the created endpoint for the healtcheck url, you most likely need also the <i>checkstring</i> option to get the check working.
 
 Ensure that Actions notices if a deployment breaks yor applicaton. You may simulate this by writing a wrong startup command to Procfile:
