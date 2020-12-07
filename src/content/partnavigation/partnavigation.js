@@ -57,6 +57,7 @@ module.exports = {
       e: 'Fragmentit ja subskriptiot',
     },
     '9': {},
+    '10': {},
     '11': {},
   },
   en: {
