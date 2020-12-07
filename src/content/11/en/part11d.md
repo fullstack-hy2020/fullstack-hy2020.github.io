@@ -184,12 +184,16 @@ The [anothrNick/github-tag-action](https://github.com/anothrNick/github-tag-acti
 
 As you can see from the documentation, unless you alter the default behaviour with a <code>DEFAULT_BUMP</code> environmental variable, by default your releases will receive a *minor* bump, meaning that the middle number will be incremented.
 
-Modify the above configuration so that each new version os by default a _batch_ bump in version number, so that by default the last number is increased.
+Modify the above configuration so that each new version os by default a _batch_ bump in version number, so that by default the last number is increased. 
 
-Complete the workflow and try it out! Once the workflow has run successfully, you will see the release on the right hand side in your repository. If you're uncertain of the configuration, you can set  <code>DRY_RUN</code> to <code>true</code>, which will make the action output the next version number without creating or tagging the release.
+Remember that we want only to bump version when the change happens to master branch! So add a simillar <code>if</code> condition to prevent version bumps on pull request as was done in [Exercise 11.15](/en/part11/keeping_green#exercises-11-14-15)
+ to prevent deployment on pull request releated events.
+
+Complete the workflow and try it out! Once the workflow has run successfully, you will see the release on the right hand side in your repository:
 
 ![Releases](../../images/11/part11d_02.png)
 
+If you're uncertain of the configuration, you can set  <code>DRY_RUN</code> to <code>true</code>, which will make the action output the next version number without creating or tagging the release!
 #### 11.17 Skiping a commit for tagging and deployment
 
 In general the more often you deploy the master to production, the better. However there might be some valid reasons from time to time skip a particular commit or a merged pull request to becoming tagged and released to production.
@@ -237,9 +241,11 @@ It would also be possible to install a tool such as [act](https://github.com/nek
 
 <div class="content">
 
-### Note on using third party actions
+### A note about using third party actions
 
-When using a third party action such that <i>github-tag-action</i> it might be a good idea to specify the used version with hash instead of using a version number. The reason for this is that the version number, that is implemented with a git tag can in principle be <i>moved</i>. So that is today version 1.33.0 may be different code that is at next week the version 1.33.0! The code in commit with a particular has does not change, so if we want to be 100% sure about the code we use, it is safest to use the hash. 
+When using a third party action such that <i>github-tag-action</i> it might be a good idea to specify the used version with hash instead of using a version number. The reason for this is that the version number, that is implemented with a git tag can in principle be <i>moved</i>. So today's version 1.33.0 might be different code that is at the next week the version 1.33.0! 
+
+However, the code in commit with a particular has does not change in any circumstances, so if we want to be 100% sure about the code we use, it is safest to use the hash. 
 
 The version [1.33.0](https://github.com/anothrNick/github-tag-action/releases) of the action corresponds to commit with hash <code>9eca2b69f9e2c24be7decccd0f15fdb1ea5906598</code>, so we might want to change our configuration as follows:
 
@@ -251,11 +257,11 @@ The version [1.33.0](https://github.com/anothrNick/github-tag-action/releases) o
 ```
 
 
-When we use actions provided by GitHub we trust GitHub not to mess with version tags and to thoroughly test their code. It's arguable if they've earned our trust, but since our code is with them already it's kind of a moot point.
+When we use actions provided by GitHub we trust them not to mess with version tags and to thoroughly test their code.
 
-In case of third-party the code might end up being buggy or even maliscious. Even when the author of the open-source code does not have the intention of doing something maliscious, they might end up leaving their credentials on a post-it note in a cafe, and then who knows what might happen.
+In case of third-party actions, the code might end up being buggy or even maliscious. Even when the author of the open-source code does not have the intention of doing something bad, they might end up leaving their credentials on a post-it note in a cafe, and then who knows what might happen.
 
-By pointing to the hash of a specific commit we can be sure that the code we pull when running the workflow will not change, because changing the underlying commit and its contents would also change the hash.
+By pointing to the hash of a specific commit we can be sure that the code we use when running the workflow will not change, because changing the underlying commit and its contents would also change the hash.
 
 ### Keep master protected
 
