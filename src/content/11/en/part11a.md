@@ -7,7 +7,17 @@ lang: en
 
 <div class="content">
 
-Writing software is all well and good but nothing exists in a vacuum. Eventually, we'll need to deploy the software to production, i.e. give it to the real users. Then we need to maintain it, release new versions, and work with other people to expand that software.
+During this part you will build a robust deployment pipeline to a ready made [example project](https://github.com/smartlyio/full-stack-open-pokedex) starting in [exercise 11.2](/en/part11/getting_started_with_git_hub_actions#exercise-11-2). You will [fork](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo) the example project and that will create you a personal copy of the repository. In the [last two](/en/part11/expanding_further#exercises-11-20-22) exercises, you will build another deployment pipeline for some of <i>your own</i> previously created app!
+
+There are 22 exercises in this part, and you need to complete <i>each</i> exercise for completing the course. Exercises are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-cicd-2020) just like in the previous parts, but unike parts 0 to 9, the submission goes to different "course instance". 
+
+This part will rely on many concepts covered in the previous parts of the course. It is recommended that you finnish at least parts 0 to 5 before starting this part.
+
+Unlike the other parts of this course, you do not write many lines of code in this part, it is much more about configuration. Debugging code might be hard but debugging configugations is way more harder, so in this part you need lots of patience and discipline!
+
+### Getting software to production
+
+Writing software is all well and good but nothing exists in a vacuum. Eventually, we'll need to deploy the software to production, i.e. give it to the real users. After that we need to maintain it, release new versions, and work with other people to expand that software.
 
 We've already used GitHub to store our source code, but what happens when we work within a team with more developers? 
 
