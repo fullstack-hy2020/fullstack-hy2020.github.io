@@ -54,7 +54,7 @@ Let's define some things we **want** in this hypothetical deployment system too:
 
 <div class="tasks">
 
-### Exercises 11.10-12.
+### Exercises 11.10-11.12.
 
 Before going to the below exercises, you should setup your application in Heroku environment simillarly that we did in [part 3](/en/part3/deploying_app_to_internet#application-to-the-internet).
 
