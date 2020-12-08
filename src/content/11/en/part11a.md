@@ -165,12 +165,12 @@ To meet some of the requirements listed above, we want to dedicate a separate se
  
 There are two options: host our own server or use a cloud service.
 
-### Jenkins (and other self-hosted setups)
+#### Jenkins (and other self-hosted setups)
 
 Among the self-hosted options, [Jenkins](https://www.jenkins.io/) is the most popular. It's extremely flexible and 
 there are plugins for almost anything (except that one thing you want to do). This is a great option for many applications, using a self-hosted setup means that the entire environment is under your control, the number of resources can be controlled, secrets (we'll elaborate a little more on security in later sections of this part) are never exposed to anyone else and you can do anything you want on the hardware.
 
-Unfortunately, there is a downside. Jenkins is quite complicated to set up. It's very flexible but that means that there's often quite a bit of boilerplate/template code involved to get builds working. With Jenkins specifically, it also means that CI/CD must be set up with Jenkins' own domain-specific language. There are also the risks of hardwares failure which can be an issue if the setup sees heavy use.
+Unfortunately, there is a downside. Jenkins is quite complicated to set up. It's very flexible but that means that there's often quite a bit of boilerplate/template code involved to get builds working. With Jenkins specifically, it also means that CI/CD must be set up with Jenkins' own domain-specific language. There are also the risks of hardware failures which can be an issue if the setup sees heavy use.
 
 With self-hosted options, the billing is usually based on the hardware. You pay for the server. What you do on the server doesn't change the billing.
 
