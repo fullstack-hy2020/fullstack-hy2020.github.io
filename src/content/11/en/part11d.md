@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-Your main branch of code should always remain <i>green</i>. Being green means that all the steps of your build pipeline should complete successfully: project should build successfully, test should run without errors, and the linter shouldn't have anything to complain about etc.
+Your main branch of the code should always remain <i>green</i>. Being green means that all the steps of your build pipeline should complete successfully: project should build successfully, test should run without errors, and the linter shouldn't have anything to complain about etc.
 
 Why is this important? You will likely deploy your code to production specifically from your main branch. Any failures in the main branch would mean that new features cannot be deployed to production until the issue is sorted out. Sometimes you will discover a nasty bug in production that was not caught by the CI/CD pipeline. In these cases you want to be able to roll the production environment back to a previous commit in a safe manner.
 
@@ -15,14 +15,13 @@ How do you keep your main branch green then? Avoid committing any changes direct
 
 ### Working with Pull Requests
 
-Pull requests are a core part of collaboration process when working on any software project with at least two contributors. When making changes to a project you checkout a new branch locally, make and commit your changes, push the branch to remote repository (in our case to GitHub) and create a pull request for someone to review your changes before they can be merged into the master branch.
+Pull requests are a core part of collaboration process when working on any software project with at least two contributors. When making changes to a project you checkout a new branch locally, make and commit your changes, push the branch to remote repository (in our case to GitHub) and create a pull request for someone to review your changes before those can be merged into the master branch.
 
-There are several reasons why using pull request and getting your code reviewed by at least one other person is always a good idea.
-
-1. Even a seasoned developer can often overlook some issues in their code: we all know of the tunnel vision effect.
-1. A reviewer can have a different perspective and offer a different point of view.
-1. After reading through your changes at least one other developer will be familiar with the changes you've made.
-1. Using PRs allows you to automatically run all tasks in your CI pipeline before the code is pushed to the master branch. GitHub Actions provides a trigger for pull requests.
+There are several reasons why using pull requests and getting your code reviewed by at least one other person is always a good idea.
+- Even a seasoned developer can often overlook some issues in their code: we all know of the tunnel vision effect.
+- A reviewer can have a different perspective and offer a different point of view.
+- After reading through your changes, at least one other developer will be familiar with the changes you've made.
+- Using PRs allows you to automatically run all tasks in your CI pipeline before the code gets to the master branch. GitHub Actions provides a trigger for pull requests.
 
 You can configure your GitHub repository in such a way that pull requests cannot be merged until they are approved.
 
@@ -49,7 +48,7 @@ on:
     types: [opened, synchronize] // highlight-line
 ```
 
-We shall soon make it impossible to push the code directly to master but in the meantime let us still run the workflow also for all the possible direct pushes to master.
+We shall soon make it impossible to push the code directly to master, but in the meantime, let us still run the workflow also for all the possible direct pushes to master.
 
 </div>
 
@@ -67,21 +66,21 @@ Create a new branch, commit your changes and open a pull request to master.
 
 _TODO: link to tutorial that shows how to work with branches_
 
-Note that when you open the pull request, make sure that you select here your own repository as the <i>base repository</i>. By default the selection is the smartly-depository and you do not want to do that:
+Note that when you open the pull request, make sure that you select here your own repository as the destination <i>base repository</i>. By default the selection is the original repository by smartly and you **do not want** to do that:
 
 ![](../../images/11/15a.png)
 
-In the "Conversation" tab of the pull request you should see your latest commit and the yellow status for checks in progress:
+In the "Conversation" tab of the pull request you should see your latest commit(s) and the yellow status for checks in progress:
 
 ![](../../images/11/16.png)
 
-Once the checks have run the status should turn to green. Make sure all the checks pass.
+Once the checks have been run, the status should turn to green. Make sure all the checks pass.
 
 #### 11.15 run deployment step only for master branch
 
 All looks good, but there is actually a pretty serious problem with the current workflow. All the steps, including the deployment are run also for pull requests. This is surely something we do not want!
 
-Fortunately there is an easy to problem, we can add a [if](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idif) condition to the deployment step that ensures that the step is executed only when te code is being merged or pushed to master.
+Fortunately there is an easy for to the problem! We can add a [if](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idif) condition to the deployment step, which ensures that the step is executed only when te code is being merged or pushed to master.
 
 The workflow [context](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#contexts) gives various kind of information about the code the workflow is run.
 
