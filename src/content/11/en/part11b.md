@@ -84,7 +84,7 @@ In contrast to most projects in this course, the frontend code <i>does not use</
 
 ### Getting started with workflows
 
-The core component of creating CI/CD pipelines with GitHub actions is something called a Workflow. Workflows are process flows that you can set up in your repository to run automated tasks such as building, testing, linting, releasing and deploying to name a few! The hierarchy of a workflow looks as follows:
+The core component of creating CI/CD pipelines with GitHub actions is something called a [Workflow](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/introduction-to-github-actions#workflows). Workflows are process flows that you can set up in your repository to run automated tasks such as building, testing, linting, releasing and deploying to name a few! The hierarchy of a workflow looks as follows:
 
 Workflow
 
@@ -131,11 +131,11 @@ jobs:
 
 In this example the trigger is push to the master branch. There is one job named <i>hello\_world\_job</i>, it will be run in a virtual environment with Ubuntu 18.04. The job has just one step named "Say hello", which will run the <code>echo "Hello World!"</code> command in the shell.
 
-So you may ask, when does GitHub trigger a workflow to be started? There are plenty of options to choose from, but generally speaking you can configure a workflow to start once:
+So you may ask, when does GitHub trigger a workflow to be started? There are plenty of [options](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows) to choose from, but generally speaking you can configure a workflow to start once:
 
 - An <i>event on GitHub</i> occurs such as when someone pushes a commit to a repository or when an issue or pull request is created
-- A <i>scheduled event</i> that is specified using the [cron]( https://en.wikipedia.org/wiki/Cron)-syntax happens
-- An <i>external event</i> occurs, for example a command is performed in an external application such as <code>Slack</code> messaging app
+- A <i>scheduled event</i>, that is specified using the [cron]( https://en.wikipedia.org/wiki/Cron)-syntax, happens
+- An <i>external event</i> occurs, for example a command is performed in an external application such as [Slack](https://slack.com/) messaging app
 
 To learn more about which events can be used to trigger workflows, please refer to GitHub Action's [documentation](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows).
 
@@ -170,7 +170,7 @@ Your workflow shoud now look like this
 
 ![Date and dir content in workflow](../../images/11/4.png)
 
-As the output of command <code>ls -l</code> shows, by default the virtual environment that runs our workwlow <i>does not</i> have any code!
+As the output of command <code>ls -l</code> shows, by default the virtual environment that runs our workflow <i>does not</i> have any code!
 
 </div>
 
@@ -178,36 +178,59 @@ As the output of command <code>ls -l</code> shows, by default the virtual enviro
 
 ### Setting up lint, test and build steps  
 
-After completing the first exercise, you should have a simple but pretty useless workflow set up. Let's make our workflow do something useful.
+After completing the first exercises, you should have a simple but pretty useless workflow set up. Let's make our workflow do something useful.
 
-Let's implement a Github Action that will lint the code, build it and run the tests automatically when you create a pull request. If the checks don't pass, Github Actions will show a red status and will not allow merging the pull request.
+Let's implement a Github Action that will lint the code. If the checks don't pass, Github Actions will show a red status. 
 
+At start the workflow that we will save to file <code>pipeline.yml</code> looks like this:
+
+```js
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+```
 
 Before we can run a command to lint the code, we have to perform a couple of actions to set up the environment of the job.
 
 #### Setting up the environment
 
-Setting up the environment is an important task while configuring a pipeline. We're going to use an <code>ubuntu-18.04</code> virtual environment, because this is the version of Ubuntu we're going to be running in production. 18.04 is an LTS (long term support) version. It is important to replicate the same environment in CI as in production as closely as possible, to avoid situations where the same code works differently in CI and production, which would effectively defeat the purpose of using CI.
+Setting up the environment is an important task while configuring a pipeline. We're going to use an <code>ubuntu-18.04</code> virtual environment, because this is the version of Ubuntu we're going to be running in production. 
 
-Next we list the steps in the "build" job that the CI would need to perform. As we noticed in the last exercise, by default the virtual environment does not have any code in it, so we need to checkout the code from the repository. 
+It is important to replicate the same environment in CI as in production as closely as possible, to avoid situations where the same code works differently in CI and production, which would effectively defeat the purpose of using CI.
+
+Next we list the steps in the "build" job that the CI would need to perform. As we noticed in the last exercise, by default the virtual environment does not have any code in it, so we need to <i>checkout the code</i> from the repository. 
 
 This an easy step:
 
-```yml
+```js
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+
 jobs:
-  simple_deployment_pipeline:
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
+  simple_deployment_pipeline: // highlight-line
+    runs-on: ubuntu-18.04 // highlight-line
+    steps: // highlight-line
+      - uses: actions/checkout@v2  // highlight-line
 ```
 
 The [uses](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsuses) keyword tells the workflow to run a specific <i>action</i>. An action is a reusable piece of code, like a function. Actions can be defined in your repository in a separate file or you can use the ones available in public repositories. 
 
-Here we're using a public action [actions/checkout](https://github.com/actions/checkout) and we specify a version (<code>@v2</code>) to avoid potential breaking changes if a public action gets updated. The <code>checkout</code> action does what the name implies: it checkouts the project source code from git.
+Here we're using a public action [actions/checkout](https://github.com/actions/checkout) and we specify a version (<code>@v2</code>) to avoid potential breaking changes if the action gets updated. The <code>checkout</code> action does what the name implies: it checkouts the project source code from git.
 
 Secondly, as the application is written in JavasSript, Node.js must be set up in order to be able to utilise the commands that are specified in <code>package.json</code>. To set up Node.js, [actions/setup-node](https://github.com/actions/setup-node) action can be used. Version <code>12.x</code> is selected because it is the version the application is using in production environment.
 
 ```js
+# name and trigger not shown anymore...
+
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-18.04
@@ -218,7 +241,7 @@ jobs:
           node-version: '12.x' // highlight-line
 ```
 
-As we can see, the [with](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepswith) keyword is used to give a "parameter" to a specific action. Here the parameter specifies the version of Node.js we want to use.
+As we can see, the [with](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepswith) keyword is used to give a "parameter" to the action. Here the parameter specifies the version of Node.js we want to use.
 
 
 Lastly, the dependencies of the application must be installed. Just like on your own machine we execute <code>npm install</code>. The steps in the job should now look something like
@@ -265,25 +288,25 @@ jobs:
 
 #### 11.5 Linting workflow
 
-Implement or <i>copy-paste</i> the "Lint" workflow and commit it to the repository. Use a new <i>yml</i> file for this workflow, you may call it e.g. <i>pipeline.yml</i>
+Implement or <i>copy-paste</i> the "Lint" workflow and commit it to the repository. Use a new <i>yml</i> file for this workflow, you may call it e.g. <i>pipeline.yml</i>.
 
-Navigate to "Actions" tab and click on your newly created workflow on the left. You should see that the workflow run has failed:
+Push your code and navigate to "Actions" tab and click on your newly created workflow on the left. You should see that the workflow run has failed:
 
 ![Linting to workflow](../../images/11/5.png)
 
 #### 11.6 Fix the code
 
-There are some issues with the Pokedex repository that you will need to fix. Open up the workflow logs and investigate what is wrong.
+There are some issues with the code that you will need to fix. Open up the workflow logs and investigate what is wrong.
 
-Couple of hints. One of the errors is best to be fixed by specifying proper <i>env</i> for linting, see how it is done [here](/en/part3/validation_and_es_lint#lint). One of the complaints concerning <code>console.log</code> statement could be taken care of by simple silencing the rule for that spesific line. Ask google how to do it.
+Couple of hints. One of the errors is best to be fixed by specifying proper <i>env</i> for linting, see [here](/en/part3/validation_and_es_lint#lint) how it can be done . One of the complaints concerning <code>console.log</code> statement could be taken care of by simple silencing the rule for that specific line. Ask google how to do it.
 
-Make the necessary changes to the source code so that the lint workflow passes (do not make changes to the lint rules). Once you commit new code the workflow will run again and you will see updated output where all is green again:
+Make the necessary changes to the source code so that the lint workflow passes. Once you commit new code the workflow will run again and you will see updated output where all is green again:
 
 ![Lint error fixed](../../images/11/6.png)
 
 #### 11.7 Building and testing
 
-Let's expand on the previous workflow that currently does the linting of the code. Edit the workflow and similarly to the lint command add commands for build and test (in this order as running the tests requires the code to be built). After this step outcome should look like this
+Let's expand on the previous workflow that currently does the linting of the code. Edit the workflow and similarly to the lint command add commands for build and test. After this step outcome should look like this
 
 ![tests fail...](../../images/11/7.png)
 
@@ -291,7 +314,7 @@ As you might have guessed, there are some problems in code...
 
 #### 11.8 Back to green
 
-Investigate which test fails and why and fix the issue in the code (do not change the tests).
+Investigate which test fails and fix the issue in the code (do not change the tests).
 
 Once you have fixed all the issues and the Pokedex is bug-free, the workflow run will succeed and show green!
 
