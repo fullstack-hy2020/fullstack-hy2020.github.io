@@ -54,7 +54,7 @@ We shall soon make it impossible to push the code directly to master, but in the
 
 <div class="tasks">
 
-### Exercises 11.14-15.
+### Exercises 11.14-11.15.
 
 Our workflow is doing a nice job of ensuring good code quality, but since it is run on commits to master, it's catching the problems too late!
 
