@@ -204,25 +204,17 @@ Besides it is easy to take into use, GitHub Actions is a good choice from other 
 
 ### Exercise 11.1
 
-THIS IS STILL TO BE FIXED
+Before getting ourd hands dirty with setting up the CI/CD pipeline let us reflect a bit what we have read. Think about a hypothetical situation where we have an application being worked on by a team of about 6 people. The application is in active development and will be released soon.
 
-In order to distance the concept if CI/CD from the actual code of an application, let's use a hypothetical example in a different language, say Python or Java. You might also pick any other language (except JavaScript).
+Let us assume that the application is coded with some other language than JavaScript/TypeScript, e.g. in  Python, Java or Ruby. You can freely pick the language. This might even be language you do not know much your self.
 
-For the exercises below, you are not expected to know anything about Python (or the language you picked). The expectation is that you will find a way to achieve the objective (in principle) without having to learn a new language. 
+Write a small text (say 200-300 words, check length with https://wordcounter.net/) where you answer or discuss some of the below points. Save your answer to file named <i>exercise1.md</i> in the root of the repository that you shall create in [exercise 11.2](/en/part11/getting_started_with_git_hub_actions#exercise-11-2).
 
-#### The Situation:
+The points to discuss:
+- Some common steps in a CI setup include <i>linting</i>, <i>testing</i>, and <i>building</i>. What are the specific tools for taking care of these steps in the ecosystem of the language you picked? You can search the answer by google.
+- What alteratives there are to set up the CI besides Jenkins and GitHub Actions that we mentioned in this section?
+- Would this setup be better in a self-hosted or a cloud based environment? Why? What information would you need to make that decision?
 
-We have an application being worked on by a team of about 6 people. The application is in active development and will be released soon. The application is written in Python. Python is an interpreted language but we'll assume that the intention is to build the code into some form of artifact that will be deployed to a production environment (eventually).
-
-#### hinking hypothetically
-Some common steps in a CI setup includes <i>linting</i>, <i>testing</i>, and <i>building</i>. Discuss the importance of these steps in a CI setup for a team of 6 working on a common code base.
-
-#### Right tools for the right job
-Find suitable tools for those steps and compare the alternatives. What do you want from the tools? How would your chosen pipeline look like and how did you end up choosing those specific tools?
-
-#### Getting up and running
-Would this setup be better in a self-hosted or a cloud based environment? Why? What information would you need to make that decision?
-
-There is no 'right' answer to the above though there certainly might be incorrect ones. Make sure you explain your logic.
+Remember that there are no 'right' answers to the above! 
 
 </div>
