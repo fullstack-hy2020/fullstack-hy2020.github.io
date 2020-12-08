@@ -206,17 +206,17 @@ Besides it is easy to take into use, GitHub Actions is a good choice from other 
 
 Before getting our hands dirty with setting up the CI/CD pipeline let us reflect a bit what we have read. Think about a hypothetical situation where we have an application being worked on by a team of about 6 people. The application is in active development and will be released soon.
 
-Let us assume that the application is coded with some other language than JavaScript/TypeScript, e.g. in  Python, Java or Ruby. You can freely pick the language. This might even be language you do not know much your self.
+Let us assume that the application is coded with some other language than JavaScript/TypeScript, e.g. in  Python, Java or Ruby. You can freely pick the language. This might even be language you do not know much yourself.
 
-Write a small text (say 200-300 words, check length with https://wordcounter.net/) where you answer or discuss some of the below points. Save your answer to file named <i>exercise1.md</i> in the root of the repository that you shall create in [exercise 11.2](/en/part11/getting_started_with_git_hub_actions#exercise-11-2).
+Write a short text, say 200-300 words, where you answer or discuss some of the points below. You can check the length with https://wordcounter.net/. Save your answer to file named <i>exercise1.md</i> in the root of the repository that you shall create in [exercise 11.2](/en/part11/getting_started_with_git_hub_actions#exercise-11-2).
 
 The points to discuss:
 - Some common steps in a CI setup include <i>linting</i>, <i>testing</i>, and <i>building</i>. What are the specific tools for taking care of these steps in the ecosystem of the language you picked? You can search the answer by google.
-- What alternatives there are to set up the CI besides Jenkins and GitHub Actions that we mentioned in this section?
+- What alternatives are there to set up the CI besides Jenkins and GitHub Actions that we mentioned in this section?
 - Would this setup be better in a self-hosted or a cloud based environment? Why? What information would you need to make that decision?
 
 Remember that there are no 'right' answers to the above! 
 
-**One more thing:** n exercise [11-19](/en/part11/expanding_further#exercise-11-19) you will need a <i>Slack webhook URL</i>.  It is better to ask it right away by email matti.luukkainen@helsinki.fi or in course [Telegram](https://t.me/fullstackcourse), ping @mluukkai
+**One more thing:** in exercise [11-19](/en/part11/expanding_further#exercise-11-19) you will need a <i>Slack webhook URL</i>.  It is better to ask it right away by email matti.luukkainen@helsinki.fi or in course [Telegram](https://t.me/fullstackcourse), ping @mluukkai
 
 </div>
