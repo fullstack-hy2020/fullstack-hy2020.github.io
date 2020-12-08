@@ -65,7 +65,7 @@ Update the trigger of the existing workflow as suggested above to run on new pul
 Create a new branch, commit your changes and open a pull request to master.
 
 
-If you are not familiar of working with braches, check [e.g. this tutorial](https://www.atlassian.com/git/tutorials/using-branches) to get stared.
+If you are not familiar with the concept of working with branches, check [e.g. this tutorial](https://www.atlassian.com/git/tutorials/using-branches) to get stared.
 
 Note that when you open the pull request, make sure that you select here your own repository as the destination <i>base repository</i>. By default the selection is the original repository by smartly and you **do not want** to do that:
 
@@ -81,7 +81,7 @@ Once the checks have been run, the status should turn to green. Make sure all th
 
 All looks good, but there is actually a pretty serious problem with the current workflow. All the steps, including the deployment are run also for pull requests. This is surely something we do not want!
 
-Fortunately there is an easy for to the problem! We can add a [if](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idif) condition to the deployment step, which ensures that the step is executed only when te code is being merged or pushed to master.
+Fortunately there is an easy for to the problem! We can add a [if](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idif) condition to the deployment step, which ensures that the step is executed only when the code is being merged or pushed to master.
 
 The workflow [context](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#contexts) gives various kind of information about the code the workflow is run.
 
