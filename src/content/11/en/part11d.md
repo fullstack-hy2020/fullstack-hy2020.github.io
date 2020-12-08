@@ -64,7 +64,8 @@ Update the trigger of the existing workflow as suggested above to run on new pul
 
 Create a new branch, commit your changes and open a pull request to master.
 
-_TODO: link to tutorial that shows how to work with branches_
+
+If you are not familiar of working with braches, check [e.g. this tutorial](https://www.atlassian.com/git/tutorials/using-branches) to get stared.
 
 Note that when you open the pull request, make sure that you select here your own repository as the destination <i>base repository</i>. By default the selection is the original repository by smartly and you **do not want** to do that:
 
