@@ -33,29 +33,29 @@ In this part we'll be using some terms you may not be familiar with or you may n
 
 #### Branches
 
-Git allows multiple copies, streams, or versions of the code to co-exist without overwriting each other. When you first create a repository, you will be looking at the main branch (usually in git, we call this <code>master</code> or <code>main</code>, but that does vary in older projects). This is fine if there's only one developer for a project and that developer only works on one feature at a time.
+Git allows multiple copies, streams, or versions of the code to co-exist without overwriting each other. When you first create a repository, you will be looking at the main branch (usually in git, we call this <i>master</i> or <i>main</i>, but that does vary in older projects). This is fine if there's only one developer for a project and that developer only works on one feature at a time.
 
 Branches are useful when this environment becomes more complex. In this context, each developer can have one or more branches. Each branch is effectively a copy of the main branch with some changes that make it diverge from the master. Once the feature or change in the branch is ready it can be <i>merged</i> back into the main branch, effectively making that feature or change part of the main software. In this way, each developer can work on their own set of changes and not affect any other developer until the changes are ready. 
 
 But once one developer has merged their changes into the main branch, what happens to the other developers' branches? They are now diverging from an older copy of the main branch. How will the developer on the later branch know if their changes are compatible with the current state of the main branch? That is one of the fundamental questions we will be trying to answer in this part.
 
-If you wish read more about branches [here](https://www.atlassian.com/git/tutorials/using-branches).
+You can read more about branches eg. from [here](https://www.atlassian.com/git/tutorials/using-branches).
 
 #### Pull request
 
-In GitHub merging a branch back to the main branch of software is quite often happening using a mechanism called <i>pull request</i>, where the developer who has done some changes is requesting the changes to be merged to the mainline. Once the pull request, or PR as we often write, is made or <i>opened</i>, another developer checks that all is ok and <i>merges</i> the PR.
+In GitHub merging a branch back to the main branch of software is quite often happening using a mechanism called [pull request](https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/about-pull-requests), where the developer who has done some changes is requesting the changes to be merged to the main branch. Once the pull request, or PR as it's often called, is made or <i>opened</i>, another developer checks that all is ok and <i>merges</i> the PR.
 
 If you have proposed changes to the material of this course, you have already made a pull request!
 
 #### Build
 
-The term "build" has different meanings in different languages. In some languages, there is no need for a build step. 
+The term "build" has different meanings in different languages. In some interpreted languages such as Python or Ruby , there is actually no need for a build step at all. 
 
-In general when we talk about building we mean preparing software to run on the platform where it's intended to run. This might mean, for example, that if you've written your application in TypeScript, and you intend to run it on Node, then the build step might be transcoding the TS into JS.
+In general when we talk about building we mean preparing software to run on the platform where it's intended to run. This might mean, for example, that if you've written your application in TypeScript, and you intend to run it on Node, then the build step might be transpiling the TypeScript into JavaScript. 
 
-This step is much more complicated (and required) in compiled languages where the code needs to be compiled into an executable.
+This step is much more complicated (and required) in compiled languages such as C and Rust where the code needs to be compiled into an executable.
 
-In [part 7](/en/part7/webpack) we had a look at [webpack](https://webpack.js.org/) that is the current defacto tool for building a production version of a React or any other frontend JavaScript or TypeScript codebase.
+In [part 7](/en/part7/webpack) we had a look at [webpack](https://webpack.js.org/) that is the current de facto tool for building a production version of a React or any other frontend JavaScript or TypeScript codebase.
 
 #### Deploy
 
