@@ -11,8 +11,6 @@ Before we start playing with GitHub Actions, let's have a look at what they are 
 
 GitHub Actions work on a basis of [workflows](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/introduction-to-github-actions#workflows). A workflow is a series of [jobs](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/introduction-to-github-actions#jobs) that are run when a certain triggering [event](https://docs.github.com/en/free-pro-team@latest/actions/learn-github-actions/introduction-to-github-actions#events) happens. The jobs that are run then themselves contain instructions for what GitHub Actions should do.
 
-### Step By Step
-
 A typical execution of a workflow looks like this:
 
 - Triggering event happens (for example, there is a push to master branch).
@@ -21,19 +19,19 @@ A typical execution of a workflow looks like this:
 
 ### Basic needs
 
-In general, in order to have CI operate on a repo, we need a few things:
+In general, in order to have CI operate on a repository, we need a few things:
 
 - A repository (obviously)
 - Some definition of what the CI needs to do:
   This can be in the form of a specific file inside the repository or it can be defined in the CI system
 - The CI needs to be aware that the repository (and the file within it) exist
-- The CI needs to be able to access the repo.
+- The CI needs to be able to access the repository
 - The CI needs permissions to perform the actions it is supposed to be able to do:
   For example, if the CI needs to be able to deploy to a production environment, it needs <i>credentials</i> for that environment.
 
 That's the traditional model at least, we'll see in a minute how GitHub Actions short-circuit some of these steps or rather make it such that you don't have to worry about them!
 
-GitHub Actions have a great advantage over self hosted solutions: the repository is hosted with the CI provider. In other words, Github provides both the repository and the CI platform. This means that if we've enabled actions for a repo, GitHub is already aware of the fact that we have workflows defined and what those definitions look like.
+GitHub Actions have a great advantage over self hosted solutions: the repository is hosted with the CI provider. In other words, Github provides both the repository and the CI platform. This means that if we've enabled actions for a repository, GitHub is already aware of the fact that we have workflows defined and what those definitions look like.
 
 </div>
 
@@ -41,7 +39,7 @@ GitHub Actions have a great advantage over self hosted solutions: the repository
 
 ### Exercise 11.2.
 
-In most exercises in this part we are building a CI/CD pipeline for small project found in [this example project repository](https://github.com/smartlyio/fullstackopen-cicd).
+In most exercises of this part we are building a CI/CD pipeline for small project found in [this example project repository](https://github.com/smartlyio/fullstackopen-cicd).
 
 Note that the code does not work with node version 15. If you happen to have that version, please downgrade to 14 or you are on your own. 
 #### 11.2 the example project
@@ -52,7 +50,7 @@ To fork the repository, you can click on the Fork button in the top-right area o
 
 ![](../../images/11/1.png)
 
-Once you've clicked on the Fork button, GitHub will start the creation of a new repository called <code>{github_username}/fullstackopen-cicd</code>.
+Once you've clicked on the Fork button, GitHub will start the creation of a new repository called <code>{github_username}/ full-stack-open-pokedex</code>.
 
 Once the process has been finished, you should be redirected to your brand new repository:
 
@@ -61,22 +59,24 @@ Once the process has been finished, you should be redirected to your brand new r
 Clone the project now to your own machine. As always, when starting with a new code, the most obvious place to look first is the file <code>package.json</code> 
 
 Try now the following:
+- install dependencies (by running <code>npm install</code>)
 - start the code in development mode
 - run tests
 - lint the code 
 
-You might notice that the test project contains some broken tests and linting errors. Just leave them as they are for now. We will get around those later in the exercises.
+You might notice that project contains some broken tests and linting errors. **Just leave them as they are for now.** We will get around those later in the exercises.
 
-
-As you might rememember from [part 3](/en/part3/deploying_app_to_internet#frontend-production-build), the React code <i>should not</i> be run in development mode once it is deployed in production. Try now the following
+As you might remember from [part 3](/en/part3/deploying_app_to_internet#frontend-production-build), the React code <i>should not</i> be run in development mode once it is deployed in production. Try now the following
 - create a production <i>build</i> of the project
 - run the production version locally
 
 Also for these two tasks there are ready made npm scripts in the project!
 
-Study the structure of the project for a while. As you notice both the frontend and backend code is now [in the same repository](/en/part7/class_components_miscellaneous#frontend-and-backend-in-the-same-repository). In earlier parts of the course we had a separate repository for both, but having those in same repository makes things much simple when setting up a CI enviroinment. 
+Study the structure of the project for a while. As you notice both the frontend and the backend code is now [in the same repository](/en/part7/class_components_miscellaneous#frontend-and-backend-in-the-same-repository). In earlier parts of the course we had a separate repository for both, but having those in same repository makes things much simple when setting up a CI environment. 
 
-In contrast to most projects in this course, the frontend <i>does not use</i> create-react-app, but it has relatively simple [webpack](/en/part7/webpack) configuration that takes care of bundling the frontend code.
+In contrast to most projects in this course, the frontend code <i>does not use</i> create-react-app, but it has relatively simple [webpack](/en/part7/webpack) configuration that takes care of creating the development environment and creating production bundle.
+
+**One more thing:** n exercise [11-19](/en/part11/expanding_further#exercise-11-19) you will need a <i>Slack webhook URL</i>.  If you do not have it already it is better to ask it right away by email matti.luukkainen@helsinki.fi or in course [Telegram](https://t.me/fullstackcourse), ping @mluukkai
 
 </div>
 
