@@ -42,7 +42,7 @@ one using pure JavaScript. The only differences are, that the <i>.js</i> and <i>
 <!-- Now, let's take a look at the <i>tsconfig.json</i> file that has been created for us. Everything should be more or less fine within the file, except for that at the moment the configuration also allows JavaScript files to be compiled, because <i>allowJs</i> is set to <i>true</i>. That would be fine if you need to mix TypeScript and JavaScript (e.g. if you are in the middle of transforming a JavaScript project into TypeScript or some other reason), but we want our app to be purely TypeScript, so let's change that setting to <i>false</i>. -->
 Now, let's take a look at the <i>tsconfig.json</i> file that has been created for us.
 Everything in it should be more or less fine, except at the moment the configuration allows compiling JavaScript files, because <i>allowJs</i> is set to <i>true</i>.
-That would be fine if you need to mix TypeScript and JavaScript (e.g if you are in the process of transforming a JavaScript project into TypeScript or something like that), but we want to create a pure TypeScript app, so let's change that configuration to  <i>false</i>.
+That would be fine if you need to mix TypeScript and JavaScript (e.g. if you are in the process of transforming a JavaScript project into TypeScript or something like that), but we want to create a pure TypeScript app, so let's change that configuration to  <i>false</i>.
 
 <!-- Earlier we added eslint to help us enforce coding style in backend, so let's do the same with this app. We do not need to install any dependencies since create-react-app has taken care of that already. -->
 In our previous project we used eslint to help us enforce coding style, and we'll do the same with this app. We do not need to install any dependencies, since create-react-app has taken care of that already.
@@ -587,7 +587,7 @@ It is always a good idea to start the application and click around to verify you
 You can also browse the folder structure to get insight into the application's functionality and/or the architecture used.
 These are not always clear, and the developers might have chosen a way to organize code that is not familiar to you.
 The [sample project](https://github.com/fullstack-hy2020/patientor) used in the rest of this part is organized featurewise.
-You can see what pages the application has, and some general components e.g modals and state.
+You can see what pages the application has, and some general components, e.g. modals and state.
 Keep in mind that the features may have
 different scopes. For example modals are visible UI level components whereas the state is comparable to business logic
 and keeps the data organized under the hood for the rest of the app to use. 
@@ -957,9 +957,9 @@ Response should look as follows:
 Create a page for showing a patient's full information in the frontend. 
 
 <!-- Patient information should be accessible when clicking e.g. the patients name. -->
-User should be able to access a patient's information e.g by clicking the patient's name.
+User should be able to access a patient's information e.g. by clicking the patient's name.
 
-Fetch the data from the enpoint created in the previous exercise. After fetching the patient information from the backend, add the fetched information to the application's state. Do not fetch the information if it already is in the app state, i.e. if the user is visiting the same patient's information many times. 
+Fetch the data from the endpoint created in the previous exercise. After fetching the patient information from the backend, add the fetched information to the application's state. Do not fetch the information if it already is in the app state, i.e. if the user is visiting the same patient's information many times. 
 
 Since we now have the state in the context, you'll need to define a new action type for updating an individual patient's data.
 
